@@ -68,23 +68,23 @@ public:
 	struct observingListItem
 	{
 	public:
-		QString name;
-		QString nameI18n;
-		QString type;         // type oriented on Stellarium's object class: Star, Planet (also for sun and moons!), Nebula, ...
-		QString objtype;      // More physical type description: star (also Sun!), planet, moon, open cluster, galaxy, region in the sky, ...
+		QString designation;   //!< Relates to designation in the JSON file
+		QString nameI18n;      //!< Relates to name in the JSON file.
+		QString type;          //!< type oriented on Stellarium's object class: Star, Planet (also for sun and moons!), Nebula, ...
+		QString objtype;       //!< More physical type description: star (also Sun!), planet, moon, open cluster, galaxy, region in the sky, ...
 		QString ra;
 		QString dec;
 		QString magnitude;
-		QString constellation;
-		double jd;
-		QString location; // a full location encoded with StelLocation::serializeToLine()
-		QString landscapeID; // landscapeID of landscape at moment of item creation.
-		double fov;
-		bool isVisibleMarker;
+		QString constellation; //!< NOT a redundant bit of information! In case of moving objects, it spares computing positions on loading.
+		double jd;             //!< optional: stores date of observation
+		QString location;      //!< optional: should be a full location encoded with StelLocation::serializeToLine()
+		QString landscapeID;   //!< optional: landscapeID of landscape at moment of item creation.
+		double fov;            //!< optional: Field of view
+		bool isVisibleMarker;  //!<
 
 		//! constructor
 		observingListItem():
-		name(""),
+		designation(""),
 		nameI18n(""),
 		type(""),
 		objtype(""),
@@ -101,7 +101,7 @@ public:
 		//! Convert to QVariantMap
 		QVariantMap toVariantMap(){
 			return {
-				{QString(KEY_DESIGNATION)      , name},
+				{QString(KEY_DESIGNATION)      , designation},
 				{QString(KEY_NAME_I18N)        , nameI18n},
 				{QString(KEY_TYPE)             , type},
 				{QString(KEY_OBJECTS_TYPE)     , objtype},
@@ -303,53 +303,53 @@ private slots:
 	void defaultClicked(bool b);
 
 private:
-	static constexpr char const *JSON_FILE_NAME = "observingList.json";
-	static constexpr char const *JSON_FILE_BASENAME = "observingList";
-	static constexpr char const *FILE_VERSION = "2.0";
+	static const QString JSON_FILE_NAME;
+	static const QString JSON_FILE_BASENAME;
+	static const QString FILE_VERSION;
 
-	static constexpr char const *JSON_BOOKMARKS_FILE_NAME = "bookmarks.json";
-	static constexpr char const *BOOKMARKS_LIST_NAME = "bookmarks list";
-	static constexpr char const *BOOKMARKS_LIST_DESCRIPTION = "Bookmarks of previous Stellarium version.";
-	static constexpr char const *SHORT_NAME_VALUE = "Observing list for Stellarium";
+	static const QString JSON_BOOKMARKS_FILE_NAME;
+	static const QString BOOKMARKS_LIST_NAME;
+	static const QString BOOKMARKS_LIST_DESCRIPTION;
+	static const QString SHORT_NAME_VALUE;
 
-	static constexpr char const *KEY_DEFAULT_LIST_OLUD = "defaultListOlud";
-	static constexpr char const *KEY_OBSERVING_LISTS = "observingLists";
-	static constexpr char const *KEY_CREATION_DATE = "creation date";
-	static constexpr char const *KEY_BOOKMARKS = "bookmarks";
-	static constexpr char const *KEY_NAME = "name";
-	static constexpr char const *KEY_NAME_I18N = "nameI18n";
-	static constexpr char const *KEY_JD = "jd";
-	static constexpr char const *KEY_RA = "ra";
-	static constexpr char const *KEY_DEC = "dec";
-	static constexpr char const *KEY_FOV = "fov";
-	static constexpr char const *KEY_DESCRIPTION = "description";
-	static constexpr char const *KEY_LANDSCAPE_ID = "landscapeID";
-	static constexpr char const *KEY_OBJECTS = "objects";
-	static constexpr char const *KEY_OBJECTS_TYPE = "objtype";
-	static constexpr char const *KEY_TYPE = "type";
-	static constexpr char const *KEY_DESIGNATION = "designation";
-	static constexpr char const *KEY_SORTING = "sorting";
-	static constexpr char const *KEY_LOCATION = "location";
-	static constexpr char const *KEY_MAGNITUDE = "magnitude";
-	static constexpr char const *KEY_CONSTELLATION = "constellation";
-	static constexpr char const *KEY_VERSION = "version";
-	static constexpr char const *KEY_SHORT_NAME = "shortName";
-	static constexpr char const *KEY_IS_VISIBLE_MARKER = "isVisibleMarker";
+	static const QString KEY_DEFAULT_LIST_OLUD;
+	static const QString KEY_OBSERVING_LISTS;
+	static const QString KEY_CREATION_DATE;
+	static const QString KEY_BOOKMARKS;
+	static const QString KEY_NAME;
+	static const QString KEY_NAME_I18N;
+	static const QString KEY_JD;
+	static const QString KEY_RA;
+	static const QString KEY_DEC;
+	static const QString KEY_FOV;
+	static const QString KEY_DESCRIPTION;
+	static const QString KEY_LANDSCAPE_ID;
+	static const QString KEY_OBJECTS;
+	static const QString KEY_OBJECTS_TYPE;
+	static const QString KEY_TYPE;
+	static const QString KEY_DESIGNATION;
+	static const QString KEY_SORTING;
+	static const QString KEY_LOCATION;
+	static const QString KEY_MAGNITUDE;
+	static const QString KEY_CONSTELLATION;
+	static const QString KEY_VERSION;
+	static const QString KEY_SHORT_NAME;
+	static const QString KEY_IS_VISIBLE_MARKER;
 
-	static constexpr char const *SORTING_BY_NAME = "name";
-	static constexpr char const *SORTING_BY_NAMEI18N = "nameI18n";
-	static constexpr char const *SORTING_BY_TYPE = "type";
-	static constexpr char const *SORTING_BY_RA = "right ascension";
-	static constexpr char const *SORTING_BY_DEC = "declination";
-	static constexpr char const *SORTING_BY_MAGNITUDE = "magnitude";
-	static constexpr char const *SORTING_BY_CONSTELLATION = "constellation";
-	static constexpr char const *SORTING_BY_DATE = "date";
-	static constexpr char const *SORTING_BY_LOCATION = "location";
-	static constexpr char const *SORTING_BY_LANDSCAPE_ID = "landscapeID";
+	static const QString SORTING_BY_NAME;
+	static const QString SORTING_BY_NAMEI18N;
+	static const QString SORTING_BY_TYPE;
+	static const QString SORTING_BY_RA;
+	static const QString SORTING_BY_DEC;
+	static const QString SORTING_BY_MAGNITUDE;
+	static const QString SORTING_BY_CONSTELLATION;
+	static const QString SORTING_BY_DATE;
+	static const QString SORTING_BY_LOCATION;
+	static const QString SORTING_BY_LANDSCAPE_ID;
 
-	static constexpr char const *CUSTOM_OBJECT = "CustomObject";
+	static const QString CUSTOM_OBJECT;
 
-	constexpr static const QChar dash = QChar(0x2014);
+	static const QString DASH;
 };
 
 #endif // OBSLISTDIALOG_H
