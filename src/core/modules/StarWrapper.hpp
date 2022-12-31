@@ -107,7 +107,7 @@ protected:
 		return 0.001f*a->mag_min + s->getMag()*(0.001f*a->mag_range)/a->mag_steps;
 	}
 	virtual float getBV(void) const  Q_DECL_OVERRIDE {return s->getBV();}
-	virtual QString getEnglishName(void) const Q_DECL_OVERRIDE {return QString();}
+	//virtual QString getEnglishName(void) const Q_DECL_OVERRIDE {return QString();}
 	virtual QString getNameI18n(void) const Q_DECL_OVERRIDE {return s->getNameI18n();}
 protected:
 	const SpecialZoneArray<Star> *const a;
