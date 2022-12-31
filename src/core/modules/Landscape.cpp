@@ -750,18 +750,122 @@ void LandscapeOldStyle::draw(StelCore* core, bool onlyPolygon)
 			R"(
 ATTRIBUTE highp vec3 vertex;
 VARYING highp vec3 ndcPos;
+uniform float depthValue;
 void main()
 {
-	gl_Position = vec4(vertex, 1.);
+	gl_Position = vec4(vertex.xy, depthValue, 1.);
 	ndcPos = vertex;
 }
 )";
-		bool ok = renderProgram->addShaderFromSourceCode(QOpenGLShader::Vertex, vert);
-		if(!renderProgram->log().isEmpty())
-			qWarning().noquote() << "LandscapeSpherical: Warnings while compiling vertex shader:\n" << renderProgram->log();
+		QOpenGLShader vertexShader(QOpenGLShader::Vertex);
+		bool ok = vertexShader.compileSourceCode(vert);
+		if(!vertexShader.log().isEmpty())
+			qWarning().noquote() << "LandscapeSpherical: Warnings while compiling vertex shader:\n" << vertexShader.log();
 		if(!ok) return;
+		renderProgram->addShader(&vertexShader);
 
-		const auto frag =
+		// We use fragment depth as a kind of stencil: to differentiate between
+		// different sides that we are rendering, to avoid shading the
+		// fragments that we're going to discard due to them not belonging to
+		// current side, and at the same time to have mip mapping work
+		// correctly, i.e. with derivatives of texture coordinates computed
+		// without issues at the borders of the sides. Depth buffer is used
+		// instead of stencil buffer because the former allows direct writing
+		// of arbitrary values from a single fragment shader.
+		const auto stencilFrag =
+			StelOpenGL::globalShaderPrefix(StelOpenGL::FRAGMENT_SHADER) +
+			prj->getUnProjectShader() +
+			R"(
+VARYING highp vec3 ndcPos;
+uniform int numberOfSides;
+uniform mat4 projectionMatrixInverse;
+uniform float vshift; // tan (or sin) of {ground,fog}_angle_shift
+uniform float decorAngleShift;
+uniform float sideAngularHeight;
+uniform bool calibrated;
+uniform bool tanMode;
+uniform bool drawGroundFirst;
+void main(void)
+{
+	const float PI = 3.14159265;
+	vec4 winPos = projectionMatrixInverse * vec4(ndcPos, 1);
+	bool unprojectSuccess = false;
+	vec3 modelPos = unProject(winPos.x, winPos.y, unprojectSuccess).xyz;
+
+	if(!unprojectSuccess) discard;
+
+	vec3 viewDir = normalize(modelPos);
+
+	const float DEPTH_MAX = 65535.;
+
+	if(!drawGroundFirst)
+	{
+		vec2 centeredTexCoords = viewDir.z!=0. ? vshift / viewDir.z * viewDir.xy
+											 : vec2(0);
+		if(!(viewDir.z > 0. || length(centeredTexCoords) > 1.))
+		{
+			gl_FragDepth = 1./DEPTH_MAX;
+			return;
+		}
+	}
+
+	float texCoordTInUnitRange;
+	if(calibrated)
+	{
+		if(tanMode)
+		{
+			float tanShift = tan(decorAngleShift);
+			float tanElev = viewDir.z/sqrt(1.-viewDir.z*viewDir.z);
+			texCoordTInUnitRange = (tanElev-tanShift)/(tan(decorAngleShift+sideAngularHeight)-tanShift);
+		}
+		else
+		{
+			float elevation = asin(viewDir.z);
+			texCoordTInUnitRange = (elevation-decorAngleShift)/sideAngularHeight;
+		}
+	}
+	else
+	{
+		if(tanMode)
+		{
+			float tanElev = viewDir.z/sqrt(1.-viewDir.z*viewDir.z);
+			texCoordTInUnitRange = (tanElev-tan(decorAngleShift))/tan(sideAngularHeight);
+		}
+		else
+		{
+			float tanElev = viewDir.z/sqrt(1.-viewDir.z*viewDir.z);
+			texCoordTInUnitRange = (tanElev-sin(decorAngleShift))/sin(sideAngularHeight);
+		}
+	}
+
+	float azimuth = atan(viewDir.x, viewDir.y);
+	if(azimuth<0.) azimuth += 2.*PI;
+	float sideAngularWidth = 2.*PI/float(numberOfSides);
+	float sideToRender = floor(azimuth/sideAngularWidth);
+	float leftBorderAzimuth = float(sideToRender)*sideAngularWidth;
+	float rightBorderAzimuth = leftBorderAzimuth+sideAngularWidth;
+
+	if(texCoordTInUnitRange >= 0 && texCoordTInUnitRange <= 1)
+	{
+		gl_FragDepth = (2.+sideToRender)/DEPTH_MAX;
+		return;
+	}
+
+	if(drawGroundFirst)
+	{
+		vec2 centeredTexCoords = viewDir.z!=0. ? vshift / viewDir.z * viewDir.xy
+											 : vec2(0);
+		if(!(viewDir.z > 0. || length(centeredTexCoords) > 1.))
+		{
+			gl_FragDepth = 1./DEPTH_MAX;
+			return;
+		}
+	}
+
+	discard;
+}
+)";
+		const auto renderFrag =
 			StelOpenGL::globalShaderPrefix(StelOpenGL::FRAGMENT_SHADER) +
 			prj->getUnProjectShader() +
 			makeDitheringShader()+
@@ -772,7 +876,7 @@ uniform int numberOfSides;
 uniform vec4 sideTexCoords;
 uniform sampler2D mapTex;
 uniform mat4 projectionMatrixInverse;
-uniform float vshift; // tan (or sin) of {ground,decor,fog}_angle_shift
+uniform float vshift; // tan (or sin) of {ground,fog}_angle_shift
 uniform float decorAngleShift;
 uniform float sideAngularHeight;
 uniform float fogCylinderHeight;
@@ -796,39 +900,7 @@ void main(void)
 		vec2 centeredTexCoords = viewDir.z!=0. ? vshift / viewDir.z * viewDir.xy
 											 : vec2(0);
 		vec2 texc = (centeredTexCoords + 1.) / 2.;
-#ifdef textureGrad_SUPPORTED
-		vec2 texDx = dFdx(texc);
-		vec2 texDy = dFdy(texc);
-
-		// Now that all dFdx/dFdy are computed, we can early return if needed.
-		if(!unprojectSuccess)
-		{
-			FRAG_COLOR = vec4(0);
-			return;
-		}
-		if(viewDir.z > 0. || length(centeredTexCoords) > 1.)
-		{
-			FRAG_COLOR = vec4(0);
-			return;
-		}
-
-		color = textureGrad(mapTex, texc, texDx, texDy);
-#else
 		color = texture2D(mapTex, texc);
-
-		// This check must be done *after* derivatives of texture
-		// coordinates are computed above (indirectly by texture2D()).
-		if(!unprojectSuccess)
-		{
-			FRAG_COLOR = vec4(0);
-			return;
-		}
-		if(viewDir.z > 0. || length(centeredTexCoords) > 1.)
-		{
-			FRAG_COLOR = vec4(0);
-			return;
-		}
-#endif
 	}
 	else if(sideToRender == -2) // fog
 	{
@@ -850,6 +922,7 @@ void main(void)
 			FRAG_COLOR = vec4(0);
 			return;
 		}
+		// TODO: use stencil for fog too
 		if(t<0. || t>1.)
 		{
 			FRAG_COLOR = vec4(0);
@@ -882,7 +955,6 @@ void main(void)
 		float deltaS = texCoordRight - texCoordLeft;
 		float s = texCoordLeft + (azimuth-leftBorderAzimuth)/sideAngularWidth * deltaS;
 
-		float elevation = asin(viewDir.z);
 		float texCoordBottom  = sideTexCoords[1];
 		float texCoordTop     = sideTexCoords[3];
 		float deltaT = texCoordTop - texCoordBottom;
@@ -892,10 +964,12 @@ void main(void)
 			if(tanMode)
 			{
 				float tanShift = tan(decorAngleShift);
-				texCoordInUnitRange = (tan(elevation)-tanShift)/(tan(decorAngleShift+sideAngularHeight)-tanShift);
+				float tanElev = viewDir.z/sqrt(1.-viewDir.z*viewDir.z);
+				texCoordInUnitRange = (tanElev-tanShift)/(tan(decorAngleShift+sideAngularHeight)-tanShift);
 			}
 			else
 			{
+				float elevation = asin(viewDir.z);
 				texCoordInUnitRange = (elevation-decorAngleShift)/sideAngularHeight;
 			}
 		}
@@ -903,11 +977,13 @@ void main(void)
 		{
 			if(tanMode)
 			{
-				texCoordInUnitRange = (tan(elevation)-tan(decorAngleShift))/tan(sideAngularHeight);
+				float tanElev = viewDir.z/sqrt(1.-viewDir.z*viewDir.z);
+				texCoordInUnitRange = (tanElev-tan(decorAngleShift))/tan(sideAngularHeight);
 			}
 			else
 			{
-				texCoordInUnitRange = (tan(elevation)-sin(decorAngleShift))/sin(sideAngularHeight);
+				float tanElev = viewDir.z/sqrt(1.-viewDir.z*viewDir.z);
+				texCoordInUnitRange = (tanElev-sin(decorAngleShift))/sin(sideAngularHeight);
 			}
 		}
 		float t = texCoordBottom + texCoordInUnitRange * deltaT;
@@ -924,18 +1000,6 @@ void main(void)
 		float texTdx = dFdx(t);
 		float texTdy = dFdy(t);
 
-		// Now that all dFdx/dFdy are computed, we can early return if needed.
-		if(s<texCoordLeft || s>texCoordRight || t<texCoordBottom || t>texCoordTop)
-		{
-			FRAG_COLOR = vec4(0);
-			return;
-		}
-		if(!unprojectSuccess)
-		{
-			FRAG_COLOR = vec4(0);
-			return;
-		}
-
 		vec2 gradAzimuth   = vec2(modelPos.y*gradModelPosX.s-modelPos.x*gradModelPosY.s,
 								  modelPos.y*gradModelPosX.t-modelPos.x*gradModelPosY.t)
 															/
@@ -944,17 +1008,6 @@ void main(void)
 		vec2 texDy = vec2(gradAzimuth.t/sideAngularWidth*deltaS, texTdy);
 		color = textureGrad(mapTex, vec2(s,t), texDx, texDy);
 #else
-		// Here we can do an early return because we don't use mip mapping.
-		if(s<texCoordLeft || s>texCoordRight || t<texCoordBottom || t>texCoordTop)
-		{
-			FRAG_COLOR = vec4(0);
-			return;
-		}
-		if(!unprojectSuccess)
-		{
-			FRAG_COLOR = vec4(0);
-			return;
-		}
 		color = texture2D(mapTex, vec2(s,t));
 #endif
 	}
@@ -962,9 +1015,9 @@ void main(void)
 	FRAG_COLOR = dither(color * brightness);
 }
 )";
-		ok = renderProgram->addShaderFromSourceCode(QOpenGLShader::Fragment, frag);
+		ok = renderProgram->addShaderFromSourceCode(QOpenGLShader::Fragment, renderFrag);
 		if(!renderProgram->log().isEmpty())
-			qWarning().noquote() << "LandscapeSpherical: Warnings while compiling fragment shader:\n" << renderProgram->log();
+			qWarning().noquote() << "LandscapeSpherical: Warnings while compiling rendering fragment shader:\n" << renderProgram->log();
 
 		if(!ok) return;
 
@@ -974,41 +1027,74 @@ void main(void)
 			return;
 
 		renderProgram->bind();
-		shaderVars.mapTex                  = renderProgram->uniformLocation("mapTex");
-		shaderVars.vshift                  = renderProgram->uniformLocation("vshift");
-		shaderVars.tanMode                 = renderProgram->uniformLocation("tanMode");
-		shaderVars.calibrated              = renderProgram->uniformLocation("calibrated");
-		shaderVars.brightness              = renderProgram->uniformLocation("brightness");
-		shaderVars.rgbMaxValue             = renderProgram->uniformLocation("rgbMaxValue");
-		shaderVars.sideToRender            = renderProgram->uniformLocation("sideToRender");
-		shaderVars.numberOfSides           = renderProgram->uniformLocation("numberOfSides");
-		shaderVars.sideTexCoords           = renderProgram->uniformLocation("sideTexCoords");
-		shaderVars.ditherPattern           = renderProgram->uniformLocation("ditherPattern");
-		shaderVars.decorAngleShift         = renderProgram->uniformLocation("decorAngleShift");
-		shaderVars.sideAngularHeight       = renderProgram->uniformLocation("sideAngularHeight");
-		shaderVars.fogCylinderHeight       = renderProgram->uniformLocation("fogCylinderHeight");
-		shaderVars.projectionMatrixInverse = renderProgram->uniformLocation("projectionMatrixInverse");
+		renderShaderVars.mapTex                  = renderProgram->uniformLocation("mapTex");
+		renderShaderVars.vshift                  = renderProgram->uniformLocation("vshift");
+		renderShaderVars.tanMode                 = renderProgram->uniformLocation("tanMode");
+		renderShaderVars.calibrated              = renderProgram->uniformLocation("calibrated");
+		renderShaderVars.depthValue              = renderProgram->uniformLocation("depthValue");
+		renderShaderVars.brightness              = renderProgram->uniformLocation("brightness");
+		renderShaderVars.rgbMaxValue             = renderProgram->uniformLocation("rgbMaxValue");
+		renderShaderVars.sideToRender            = renderProgram->uniformLocation("sideToRender");
+		renderShaderVars.numberOfSides           = renderProgram->uniformLocation("numberOfSides");
+		renderShaderVars.sideTexCoords           = renderProgram->uniformLocation("sideTexCoords");
+		renderShaderVars.ditherPattern           = renderProgram->uniformLocation("ditherPattern");
+		renderShaderVars.decorAngleShift         = renderProgram->uniformLocation("decorAngleShift");
+		renderShaderVars.sideAngularHeight       = renderProgram->uniformLocation("sideAngularHeight");
+		renderShaderVars.fogCylinderHeight       = renderProgram->uniformLocation("fogCylinderHeight");
+		renderShaderVars.projectionMatrixInverse = renderProgram->uniformLocation("projectionMatrixInverse");
 		renderProgram->release();
+
+		stencilProgram.reset(new QOpenGLShaderProgram);
+		stencilProgram->addShader(&vertexShader);
+		ok = stencilProgram->addShaderFromSourceCode(QOpenGLShader::Fragment, stencilFrag);
+		if(!stencilProgram->log().isEmpty())
+			qWarning().noquote() << "LandscapeSpherical: Warnings while compiling stencil-generating fragment shader:\n" << stencilProgram->log();
+		if(!ok) return;
+
+		stencilProgram->bindAttributeLocation("vertex", SKY_VERTEX_ATTRIB_INDEX);
+
+		if(!StelPainter::linkProg(stencilProgram.get(), "Spherical landscape stencil-generating program"))
+			return;
+
+		stencilProgram->bind();
+		stencilShaderVars.vshift                  = stencilProgram->uniformLocation("vshift");
+		stencilShaderVars.tanMode                 = stencilProgram->uniformLocation("tanMode");
+		stencilShaderVars.calibrated              = stencilProgram->uniformLocation("calibrated");
+		stencilShaderVars.depthValue              = stencilProgram->uniformLocation("depthValue");
+		stencilShaderVars.numberOfSides           = stencilProgram->uniformLocation("numberOfSides");
+		stencilShaderVars.decorAngleShift         = stencilProgram->uniformLocation("decorAngleShift");
+		stencilShaderVars.drawGroundFirst         = stencilProgram->uniformLocation("drawGroundFirst");
+		stencilShaderVars.sideAngularHeight       = stencilProgram->uniformLocation("sideAngularHeight");
+		stencilShaderVars.projectionMatrixInverse = stencilProgram->uniformLocation("projectionMatrixInverse");
+		stencilProgram->release();
+
 	}
-	if(!renderProgram || !renderProgram->isLinked())
+	if(!renderProgram || !renderProgram->isLinked() || !stencilProgram || !stencilProgram->isLinked())
 		return;
 
 	auto& gl = *QOpenGLContext::currentContext()->functions();
 
 	if (!onlyPolygon || !horizonPolygon) // Make sure to draw the regular pano when there is no polygon
 	{
+		bindVAO();
+
+		gl.glEnable(GL_DEPTH_TEST);
+		gl.glDepthFunc(GL_ALWAYS);
+		gl.glDepthMask(true); // OpenGL default is true, but StelPainter disables it by default, so we need to enable
+		drawGroundAndDecorStencil(core);
+
 		renderProgram->bind();
 		const int ditherTexSampler = 0;
 		ditherPatternTex->bind(ditherTexSampler);
-		renderProgram->setUniformValue(shaderVars.ditherPattern, ditherTexSampler);
+		renderProgram->setUniformValue(renderShaderVars.ditherPattern, ditherTexSampler);
 		const int firstFreeTexSampler = ditherTexSampler+1;
 
-		renderProgram->setUniformValue(shaderVars.rgbMaxValue,
+		renderProgram->setUniformValue(renderShaderVars.rgbMaxValue,
 									   calcRGBMaxValue(core->getDitheringMode()).toQVector());
 
-		bindVAO();
-
 		gl.glEnable(GL_BLEND);
+		gl.glDepthMask(false);
+		gl.glDepthFunc(GL_EQUAL);
 		gl.glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		if(drawGroundFirst)
 			drawGround(core, firstFreeTexSampler);
@@ -1016,14 +1102,17 @@ void main(void)
 		if(!drawGroundFirst)
 			drawGround(core, firstFreeTexSampler);
 
-		drawFog(core, firstFreeTexSampler);
-
 		// Self-luminous layer (Light pollution etc). This looks striking!
-		if (lightScapeBrightness>0.0f && (illumFader.getInterstate()>0.f))
+		if (lightScapeBrightness>0.0f && illumFader.getInterstate()>0.f)
 		{
 			gl.glBlendFunc(GL_SRC_ALPHA, GL_ONE);
 			drawDecor(core, firstFreeTexSampler, true);
 		}
+		gl.glDisable(GL_DEPTH_TEST);
+
+		drawFog(core, firstFreeTexSampler);
+		gl.glDepthFunc(GL_LESS);
+		// OpenGL default for glDepthMask() is true, but StelPainter disables it by default, so leave it disabled
 
 		releaseVAO();
 		gl.glDisable(GL_BLEND);
@@ -1077,17 +1166,17 @@ void LandscapeOldStyle::drawFog(StelCore*const core, const int firstFreeTexSampl
 									: tanMode ? std::tan(fogAltAngle*M_PI_180f)
 											  : std::sin(fogAltAngle*M_PI_180f);
 
-	renderProgram->setUniformValue(shaderVars.sideToRender, -2);
-	renderProgram->setUniformValue(shaderVars.fogCylinderHeight, height);
-	renderProgram->setUniformValue(shaderVars.vshift, vpos);
+	renderProgram->setUniformValue(renderShaderVars.sideToRender, -2);
+	renderProgram->setUniformValue(renderShaderVars.fogCylinderHeight, height);
+	renderProgram->setUniformValue(renderShaderVars.vshift, vpos);
 
 	const float brightness = landFader.getInterstate()*fogFader.getInterstate()*(0.1f+0.1f*landscapeBrightness);
-	renderProgram->setUniformValue(shaderVars.brightness, brightness, brightness, brightness, landFader.getInterstate());
-	renderProgram->setUniformValue(shaderVars.projectionMatrixInverse, prj->getProjectionMatrix().toQMatrix().inverted());
+	renderProgram->setUniformValue(renderShaderVars.brightness, brightness, brightness, brightness, landFader.getInterstate());
+	renderProgram->setUniformValue(renderShaderVars.projectionMatrixInverse, prj->getProjectionMatrix().toQMatrix().inverted());
 	prj->setUnProjectUniforms(*renderProgram);
 
 	fogTex->bind(firstFreeTexSampler);
-	renderProgram->setUniformValue(shaderVars.mapTex, firstFreeTexSampler);
+	renderProgram->setUniformValue(renderShaderVars.mapTex, firstFreeTexSampler);
 	gl.glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 }
 
@@ -1104,22 +1193,22 @@ void LandscapeOldStyle::drawDecor(StelCore*const core, const int firstFreeTexSam
 	if (drawLight)
 	{
 		const auto brightness = illumFader.getInterstate()*lightScapeBrightness;
-		renderProgram->setUniformValue(shaderVars.brightness, brightness, brightness, brightness,
+		renderProgram->setUniformValue(renderShaderVars.brightness, brightness, brightness, brightness,
 									   landFader.getInterstate());
 	}
 	else
 	{
-		renderProgram->setUniformValue(shaderVars.brightness,
+		renderProgram->setUniformValue(renderShaderVars.brightness,
 									   landscapeBrightness, landscapeBrightness, landscapeBrightness,
 									   landFader.getInterstate());
 	}
 
-	renderProgram->setUniformValue(shaderVars.tanMode, tanMode);
-	renderProgram->setUniformValue(shaderVars.calibrated, calibrated);
-	renderProgram->setUniformValue(shaderVars.projectionMatrixInverse, prj->getProjectionMatrix().toQMatrix().inverted());
-	renderProgram->setUniformValue(shaderVars.numberOfSides, static_cast<GLint>(nbSide));
-	renderProgram->setUniformValue(shaderVars.decorAngleShift, decorAngleShift*M_PI_180f);
-	renderProgram->setUniformValue(shaderVars.sideAngularHeight, decorAltAngle*M_PI_180f);
+	renderProgram->setUniformValue(renderShaderVars.tanMode, tanMode);
+	renderProgram->setUniformValue(renderShaderVars.calibrated, calibrated);
+	renderProgram->setUniformValue(renderShaderVars.projectionMatrixInverse, prj->getProjectionMatrix().toQMatrix().inverted());
+	renderProgram->setUniformValue(renderShaderVars.numberOfSides, static_cast<GLint>(nbSide));
+	renderProgram->setUniformValue(renderShaderVars.decorAngleShift, decorAngleShift*M_PI_180f);
+	renderProgram->setUniformValue(renderShaderVars.sideAngularHeight, decorAltAngle*M_PI_180f);
 	prj->setUnProjectUniforms(*renderProgram);
 
 	auto& gl = *QOpenGLContext::currentContext()->functions();
@@ -1140,14 +1229,48 @@ void LandscapeOldStyle::drawDecor(StelCore*const core, const int firstFreeTexSam
 			{
 				side.tex->bind(texSampler);
 			}
-			renderProgram->setUniformValue(shaderVars.mapTex, texSampler);
+			renderProgram->setUniformValue(renderShaderVars.mapTex, texSampler);
 
-			renderProgram->setUniformValue(shaderVars.sideTexCoords,
+			renderProgram->setUniformValue(renderShaderVars.sideTexCoords,
 										   side.texCoords[0], side.texCoords[1], side.texCoords[2], side.texCoords[3]);
-			renderProgram->setUniformValue(shaderVars.sideToRender, globalSideNumber);
+			renderProgram->setUniformValue(renderShaderVars.sideToRender, globalSideNumber);
+			renderProgram->setUniformValue(renderShaderVars.depthValue, (2+globalSideNumber)/65535.f * 2 - 1);
 			gl.glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 		}
 	}
+}
+
+void LandscapeOldStyle::drawGroundAndDecorStencil(StelCore*const core) const
+{
+	if (landFader.getInterstate()==0.f)
+		return;
+
+	stencilProgram->bind();
+
+	const float vshift = tanMode || calibrated ? std::tan(groundAngleShift) : std::sin(groundAngleShift);
+	stencilProgram->setUniformValue(stencilShaderVars.vshift, vshift);
+	stencilProgram->setUniformValue(stencilShaderVars.tanMode, tanMode);
+	stencilProgram->setUniformValue(stencilShaderVars.calibrated, calibrated);
+	stencilProgram->setUniformValue(stencilShaderVars.depthValue, 0.f); // unimportant, overridden by fragment shader, just make it definite
+	stencilProgram->setUniformValue(stencilShaderVars.numberOfSides, static_cast<GLint>(nbSide));
+	stencilProgram->setUniformValue(stencilShaderVars.decorAngleShift, decorAngleShift*M_PI_180f);
+	stencilProgram->setUniformValue(stencilShaderVars.drawGroundFirst, drawGroundFirst);
+	stencilProgram->setUniformValue(stencilShaderVars.sideAngularHeight, decorAltAngle*M_PI_180f);
+
+	StelProjector::ModelViewTranformP transfo = core->getAltAzModelViewTransform(StelCore::RefractionOff);
+	// Use angleRotateZ and ignore groundAngleRotateZ, because the ground is cylindrically symmetric
+	transfo->combine(Mat4d::zrotation(-static_cast<double>(angleRotateZ+angleRotateZOffset)));
+	const StelProjectorP prj = core->getProjection(transfo);
+
+	stencilProgram->setUniformValue(stencilShaderVars.projectionMatrixInverse,
+									prj->getProjectionMatrix().toQMatrix().inverted());
+
+	auto& gl = *QOpenGLContext::currentContext()->functions();
+
+	prj->setUnProjectUniforms(*renderProgram);
+	gl.glColorMask(false,false,false,false);
+	gl.glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+	gl.glColorMask(true,true,true,true);
 }
 
 // Draw the ground, assuming full-screen-quad VAO is bound and the common uniforms are configured
@@ -1162,20 +1285,21 @@ void LandscapeOldStyle::drawGround(StelCore*const core, const int firstFreeTexSa
 		return;
 	}
 
-	const float vshift = (tanMode || calibrated) ? std::tan(groundAngleShift) : std::sin(groundAngleShift);
+	const float vshift = tanMode || calibrated ? std::tan(groundAngleShift) : std::sin(groundAngleShift);
 	StelProjector::ModelViewTranformP transfo = core->getAltAzModelViewTransform(StelCore::RefractionOff);
 	transfo->combine(Mat4d::zrotation(groundAngleRotateZ-static_cast<double>(angleRotateZOffset)));
 	const StelProjectorP prj = core->getProjection(transfo);
 
 	auto& gl = *QOpenGLContext::currentContext()->functions();
 
-	renderProgram->setUniformValue(shaderVars.sideToRender, -1);
+	renderProgram->setUniformValue(renderShaderVars.depthValue, 1/65535.f * 2 - 1);
+	renderProgram->setUniformValue(renderShaderVars.sideToRender, -1);
 	const int texSampler = firstFreeTexSampler;
 	groundTex->bind(texSampler);
-	renderProgram->setUniformValue(shaderVars.mapTex, texSampler);
-	renderProgram->setUniformValue(shaderVars.vshift, vshift);
-	renderProgram->setUniformValue(shaderVars.projectionMatrixInverse, prj->getProjectionMatrix().toQMatrix().inverted());
-	renderProgram->setUniformValue(shaderVars.brightness,
+	renderProgram->setUniformValue(renderShaderVars.mapTex, texSampler);
+	renderProgram->setUniformValue(renderShaderVars.vshift, vshift);
+	renderProgram->setUniformValue(renderShaderVars.projectionMatrixInverse, prj->getProjectionMatrix().toQMatrix().inverted());
+	renderProgram->setUniformValue(renderShaderVars.brightness,
 								   landscapeBrightness, landscapeBrightness, landscapeBrightness,
 								   landFader.getInterstate());
 	prj->setUnProjectUniforms(*renderProgram);

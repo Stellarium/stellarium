@@ -308,8 +308,11 @@ private:
 	// drawLight==true for illumination layer, it then selects only the self-illuminating panels.
 	void drawDecor(StelCore* core, int firstFreeTexSampler, bool drawLight = false) const;
 	void drawGround(StelCore* core, int firstFreeTexSampler) const;
+	void drawGroundAndDecorStencil(StelCore* core) const;
+
 	QVector<Vec3d> groundVertexArr;
 	QVector<Vec2f> groundTexCoordArr;
+	std::unique_ptr<QOpenGLShaderProgram> stencilProgram;
 	StelTextureSP* sideTexs;
 	unsigned short int nbSideTexs;
 	unsigned short int nbSide;
@@ -342,6 +345,7 @@ private:
 		int vshift;
 		int tanMode;
 		int calibrated;
+		int depthValue;
 		int brightness;
 		int rgbMaxValue;
 		int sideToRender;
@@ -352,7 +356,19 @@ private:
 		int sideAngularHeight;
 		int fogCylinderHeight;
 		int projectionMatrixInverse;
-	} shaderVars;
+	} renderShaderVars;
+	struct
+	{
+		int vshift;
+		int tanMode;
+		int calibrated;
+		int depthValue;
+		int numberOfSides;
+		int decorAngleShift;
+		int drawGroundFirst;
+		int sideAngularHeight;
+		int projectionMatrixInverse;
+	} stencilShaderVars;
 };
 
 /////////////////////////////////////////////////////////
