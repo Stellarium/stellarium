@@ -26,6 +26,7 @@
 #include <QSettings>
 #include <QWidget>
 #include "StelApp.hpp"
+#include "StelTranslator.hpp"
 
 class QAbstractButton;
 class QGroupBox;
