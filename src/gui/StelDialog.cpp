@@ -331,9 +331,9 @@ void StelDialog::connectBoolProperty(QGroupBox *checkBox, const QString &propNam
 	new QGroupBoxStelPropertyConnectionHelper(prop,checkBox);
 }
 
-bool StelDialog::askConfirmation()
+bool StelDialog::askConfirmation(QString message)
 {
-	return (QMessageBox::warning(&StelMainView::getInstance(), q_("Attention!"), q_("Are you sure? This will delete your customized data."), QMessageBox::Yes | QMessageBox::No, QMessageBox::No) == QMessageBox::Yes);
+	return (QMessageBox::warning(&StelMainView::getInstance(), q_("Attention!"), message, QMessageBox::Yes | QMessageBox::No, QMessageBox::No) == QMessageBox::Yes);
 }
 
 void StelDialog::messageBox(QString title, QString message)
