@@ -959,18 +959,27 @@ void ObsListDialog::importListButtonPressed()
 				}
 				else
 				{
-					// TODO: Maybe add a check here to avoid overwriting of existing lists?
-#if QT_VERSION >= QT_VERSION_CHECK(5,15,0)
-					observingLists.insert(observingListMapToImport);
-#else
 					QVariantMap::const_iterator it;
 					for (it = observingListMapToImport.begin(); it != observingListMapToImport.end(); it++) {
 						if (it.value().canConvert<QVariantMap>())
 						{
-							observingLists.insert(it.key(), it.value());
+							// check here to avoid overwriting of existing lists
+							bool overwrite=true;
+							if (observingLists.contains(it.key()))
+							{
+								QVariantMap importedMap=it.value().toMap();
+								QString importedName=importedMap.value(QString(KEY_NAME)).toString();
+								QString importedDate=importedMap.value(QString(KEY_CREATION_DATE)).toString();
+								QVariantMap existingMap=observingLists.value(it.key()).toMap();
+								QString existingName=existingMap.value(QString(KEY_NAME)).toString();
+								QString existingDate=existingMap.value(QString(KEY_CREATION_DATE)).toString();
+								QString message=QString(q_("A list named '%1' and dated %2 would overwrite your existing list '%3', dated %4. Accept?")).arg(importedName, importedDate, existingName, existingDate);
+								overwrite=askConfirmation(message);
+							}
+							if (overwrite)
+								observingLists.insert(it.key(), it.value());
 						}
 					}
-#endif
 				}
 			}
 			else if (map.contains(KEY_BOOKMARKS))
@@ -1365,7 +1374,7 @@ QVariantMap ObsListDialog::prepareCurrentList(QHash<QString, observingListItem> 
 	const QString listCreationDate = StelUtils::julianDayToISO8601String(JD + core->getUTCOffset(JD) / 24.).replace("T", " ");
 	QVariantMap currentList = {
 		// Name, description, current date for the list, current sorting
-		{QString(KEY_NAME), ui->listNameLineEdit->text()},
+		{QString(KEY_NAME), currentListName},
 		{QString(KEY_DESCRIPTION), ui->descriptionLineEdit->text()},
 		{QString(KEY_SORTING), sorting},
 		{QString(KEY_CREATION_DATE), listCreationDate }	};
@@ -1439,7 +1448,7 @@ void ObsListDialog::defaultClicked(bool b)
 		defaultOlud="";
 	}
 	jsonMap.insert(KEY_DEFAULT_LIST_OLUD, defaultOlud);
-	tainted=true;
+	tainted=true; // Not a crucial change, so only mark for store-on-exit.
 
 /*
  * 	// We consider this an important change that needs to be stored.

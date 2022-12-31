@@ -214,7 +214,7 @@ protected:
 	QList<QWidget *> kineticScrollingList;
 
 protected slots:
-	bool askConfirmation();
+	bool askConfirmation(QString message = q_("Are you sure? This will delete your customized data."));
 	void messageBox(QString title, QString message);
 
 	//! To be called by a connected QToolButton with a color background.
