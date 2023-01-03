@@ -451,15 +451,19 @@ void ObsListDialog::loadSelectedList()
 
 				// Caveat - Please make the code more readable!
 				// We assign KEY_TYPE to item.objtype and KEY_OBJECTS_TYPE to item.type.
+				// Compare this to the same passage when importing bookmarks.
 				item.objtype    = objectMap.value(KEY_TYPE).toString();
 				//item.type = objectMap.value(KEY_OBJECTS_TYPE).toString();
 
 				item.ra  = objectMap.value(KEY_RA).toString();
 				item.dec = objectMap.value(KEY_DEC).toString();
 
-				// CAVEAT! It seems searching for objtype is too strong. "Star"s are not found!
+				// CAVEAT! The implementation in the 1.* series has a bug here, maybe caused by just too much confusion about type, objtype and trying to be smart.
+				// It seems searching for objtype is too strong. Compare this to the same passage when importing bookmarks.
+				// "Star"s are not found! Likewise, "cubewanos" cannot be found like that! They are "Planet"s, according to SolarSystem::getStelObjectType() called by findAndSelect(.,.)
 				if (objectMgr->findAndSelect(item.designation, item.objtype) && !objectMgr->getSelectedObject().isEmpty())
 				{
+					qDebug() << "Horray, we have found objType" << item.objtype << "for" << item.designation;
 					const QList<StelObjectP> &selectedObject = objectMgr->getSelectedObject();
 					double ra, dec;
 					StelUtils::rectToSphe(&ra, &dec, selectedObject[0]->getJ2000EquatorialPos(core));
@@ -470,7 +474,7 @@ void ObsListDialog::loadSelectedList()
 						item.dec = StelUtils::radToDmsStr(dec, false).trimmed();
 					item.type = selectedObject[0]->getObjectTypeI18n();
 				}
-				else // repeat the same with findAndSelect with any type.
+				else // THEREFORE: repeat the same code with findAndSelect with any type.
 					if (objectMgr->findAndSelect(item.designation) && !objectMgr->getSelectedObject().isEmpty())
 				{
 					const QList<StelObjectP> &selectedObject = objectMgr->getSelectedObject();
@@ -482,6 +486,8 @@ void ObsListDialog::loadSelectedList()
 					if (item.dec.isEmpty())
 						item.dec = StelUtils::radToDmsStr(dec, false).trimmed();
 					item.type = selectedObject[0]->getObjectTypeI18n();
+					qDebug() << "item.objType " << item.objtype << "changed to " << selectedObject[0]->getObjectType();
+					item.objtype = selectedObject[0]->getObjectType();
 				}
 				else
 				{
@@ -597,8 +603,8 @@ QHash<QString, ObsListDialog::observingListItem> ObsListDialog::loadBookmarksFil
 				if (objectMgr->findAndSelect(item.designation) && !objectMgr->getSelectedObject().isEmpty()) {
 					const QList<StelObjectP> &selectedObject = objectMgr->getSelectedObject();
 
-					item.type = selectedObject[0]->getType();
-					item.objtype = selectedObject[0]->getObjectType();
+					item.type = selectedObject[0]->getType(); // Assign class name
+					item.objtype = selectedObject[0]->getObjectType(); // Assign a detailed object type description
 					item.jd = bookmarkMap.value(KEY_JD).toDouble();
 					if (item.jd!=0.)
 					{

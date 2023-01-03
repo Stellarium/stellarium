@@ -42,11 +42,74 @@
 //! On retrieval, the same optional elements can again be selected, so you can retrieve an object without stored time or location, if that is meaningful.
 //! If location or landscape IDs cannot be found, they are not changed.
 //!
+//! An observingList.json looks like this:
+//! {
+//! "defaultListOlud": "{6d297068-a644-4d1b-9d2d-9c2dd64eef53}",
+//! "observingLists": {
+//!     "{84744f7b-c353-45b0-8394-69af2a1e0917}": {
+//! 	"creation date": "2022-09-29 20:05:07",
+//! 	"description": "Bookmarks of previous Stellarium version.",
+//! 	"name": "bookmarks list",
+//! 	"objects": [
+//! 	    {
+//! 		"constellation": "Leo",
+//! 		"dec": "+14°34'15\"",
+//! 		"designation": "HIP 57632",
+//! 		"fov": 0,
+//! 		"isVisibleMarker": false,
+//! 		"jd": 0,
+//! 		"landscapeID": "",
+//! 		"location": "",
+//! 		"magnitude": "2.10",
+//! 		"nameI18n": "Denebola",
+//! 		"ra": "11h49m05.0s",
+//! 		"type": "Star"
+//! 	    },
+//!         ... <other objects>
+//! 	],
+//! 	"sorting": ""
+//!     },
+//!     "{bd40274c-a321-40c1-a6f3-bc8f11026326}": {
+//! 	"creation date": "2022-12-21 11:12:39",
+//! 	"description": "test of unification",
+//! 	"name": "mine_edited",
+//! 	"objects": [
+//! 	    {
+//! 		"constellation": "Cyg",
+//! 		"dec": "+45°16'59\"",
+//! 		"designation": "HIP 102098",
+//! 		"fov": 0,
+//! 		"isVisibleMarker": true,
+//! 		"jd": 0,
+//! 		"landscapeID": "",
+//! 		"location": "",
+//! 		"magnitude": "1.25",
+//! 		"nameI18n": "Deneb",
+//! 		"ra": "20h41m24.4s",
+//! 		"type": "double star, pulsating variable star"
+//! 	    },
+//!         ...  <other objects>
+//! 	],
+//! 	"sorting": ""
+//!     },
+//!     ... <other observingLists>
+//! },
+//! "shortName": "Observing list for Stellarium",
+//! "version": "2.0"
+//! }
+//!
+//!
 //! Updated for 23.1: Integrated functions of extra edit dialog, deep refactoring.
 //! You cannot delete the default list. Choose another list as default before deleting the displayed one.
 //! You cannot delete the last list.
 //! Importing a JSON file with observingLists will import all lists and unconditionally overwrite existing lists with the same OLUD.
 //! Exporting writes an observingList file with only the currently displayed list.
+//!
+//! Attempt to fix a confusion introduced in the 1.* series:
+//! The ObsList has entries
+//! - "designation": The catalog number (DSO), HIP number (star), or canonical name (planet)
+//! - "nameI18n": translated name for display. Actually this is bad in case of exchange.
+//! - "type": As given by ObjectP->
 
 
 class Ui_obsListDialogForm;
