@@ -725,6 +725,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		//totalPlanets++;
 		const QString secname = orderedSections.at(i);
 		const QString englishName = pd.value(secname+"/name").toString().simplified();
+		const double bV = pd.value(secname+"/color_index_bv", 99.).toDouble();
 		const QString strParent = pd.value(secname+"/parent", "Sun").toString(); // Obvious default, keep file entries simple.
 		PlanetP parent;
 		if (strParent!="none")
@@ -976,7 +977,6 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			minorBodies << englishName;
 
 			Vec3f color = Vec3f(1.f, 1.f, 1.f);
-			const double bV = pd.value(secname+"/color_index_bv", 99.).toDouble();
 			if (bV<99.)
 				color = skyDrawer->indexToColor(BvToColorIndex(bV))*0.75f; // see ZoneArray.cpp:L490
 			else
@@ -1092,6 +1092,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			{
 				newP->setIAUMoonNumber(moonDesignation);
 			}
+			newP->setColorIndexBV(static_cast<float>(bV));
 		}
 
 		if (!parent.isNull())

@@ -260,6 +260,7 @@ Planet::Planet(const QString& englishName,
 	  multisamplingEnabled_(StelApp::getInstance().getSettings()->value("video/multisampling", 0).toUInt() != 0),
 	  gl(Q_NULLPTR),
 	  iauMoonNumber(""),
+	  b_v(99.f),
 	  orbitPositionsCache(ORBIT_SEGMENTS * 2)
 {
 	// Initialize pType with the key found in pTypeMap, or mark planet type as undefined.
@@ -356,6 +357,11 @@ Planet::~Planet()
 		if(surveyVBO)
 			gl->glDeleteBuffers(1, &surveyVBO);
 	}
+}
+
+void Planet::setColorIndexBV(float bv)
+{
+	b_v = bv;
 }
 
 void Planet::resetTextures()
@@ -774,8 +780,11 @@ QString Planet::getInfoStringSize(const StelCore *core, const InfoStringGroup& f
 
 QString Planet::getInfoStringExtraMag(const StelCore *core, const InfoStringGroup& flags) const
 {
-	Q_UNUSED(core) Q_UNUSED(flags)
-	return "";
+	Q_UNUSED(core)
+	if (flags&Extra && b_v<99.f)
+		return QString("%1: <b>%2</b><br/>").arg(q_("Color Index (B-V)"), QString::number(b_v, 'f', 2));
+	else
+		return "";
 }
 
 QString Planet::getInfoStringEloPhase(const StelCore *core, const InfoStringGroup& flags, const bool withIllum) const
