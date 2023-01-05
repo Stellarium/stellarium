@@ -3345,7 +3345,7 @@ bool Planet::initFBO()
 		GL(gl->glActiveTexture(GL_TEXTURE1));
 		GL(gl->glBindTexture(GL_TEXTURE_2D, shadowTex));
 
-#ifndef QT_OPENGL_ES_2
+#if !QT_CONFIG(opengles2)
 		if(!isGLESv2)
 		{
 			GL(gl->glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_BASE_LEVEL, 0));
@@ -3376,7 +3376,7 @@ bool Planet::initFBO()
 		//see GL_EXT_framebuffer_object and GL_ARB_framebuffer_object
 		//on ES 2, this seems to be allowed (there are no glDrawBuffers/glReadBuffer functions there), see GLES spec section 4.4.4
 		//probably same on ES 3: though it has glDrawBuffers/glReadBuffer but no mention of it in section 4.4.4 and no FRAMEBUFFER_INCOMPLETE_DRAW_BUFFER is defined
-#ifndef QT_OPENGL_ES_2
+#if !QT_CONFIG(opengles2)
 		if(!ctx->isOpenGLES())
 		{
 #if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))

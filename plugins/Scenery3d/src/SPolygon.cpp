@@ -118,7 +118,7 @@ void SPolygon::addUniqueVert(const Vec3f &v)
 
 void SPolygon::render()
 {
-#if !defined(QT_OPENGL_ES_2)
+#if !QT_CONFIG(opengles2)
 	//render each polygon
 	glExtFuncs->glColor3f(0.4f,0.4f,0.4f);
 
