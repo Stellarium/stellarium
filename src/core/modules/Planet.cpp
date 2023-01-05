@@ -3754,13 +3754,12 @@ void sRing(Ring3DModel* model, const float rMin, const float rMax, unsigned shor
 	float r = rMin;
 	for (unsigned short int i=0; i<=stacks; ++i)
 	{
-		const float tex_r0 = (r-rMin)/(rMax-rMin);
 		unsigned short int j;
 		for (j=0,cos_sin_theta_p=cos_sin_theta; j<=slices; ++j,cos_sin_theta_p+=2)
 		{
 			x = r*cos_sin_theta_p[0];
 			y = r*cos_sin_theta_p[1];
-			model->texCoordArr << tex_r0 << 0.5f;
+			model->texCoordArr << x << y;
 			model->vertexArr << x << y << 0.f;
 		}
 		r+=dr;
@@ -4125,6 +4124,8 @@ void Planet::drawSphere(StelPainter* painter, float screenRd, bool drawOnlyRing)
 		GL(ringPlanetShaderProgram->setUniformValue(ringPlanetShaderVars.isRing, true));
 		GL(ringPlanetShaderProgram->setUniformValue(ringPlanetShaderVars.tex, 2));
 		GL(ringPlanetShaderProgram->setUniformValue(ringPlanetShaderVars.ringS, 1));
+		GL(ringPlanetShaderProgram->setUniformValue(ringPlanetShaderVars.outerRadius, rings->radiusMax));
+		GL(ringPlanetShaderProgram->setUniformValue(ringPlanetShaderVars.innerRadius, rings->radiusMin));
 		
 		QMatrix4x4 shadowCandidatesData;
 		const Vec4d position = rData.mTarget * rData.modelMatrix.getColumn(3);

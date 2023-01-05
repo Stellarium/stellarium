@@ -349,7 +349,24 @@ void main()
     //apply texture-colored rimlight
     //litColor.xyz = clamp( litColor.xyz + vec3(outgas), 0.0, 1.0);
 
-    lowp vec4 texColor = texture2D(tex, texc);
+    lowp vec4 texColor;
+#ifdef RINGS_SUPPORT
+    if(isRing)
+    {
+        float radius = length(texc);
+        float s = (radius - innerRadius) / (outerRadius - innerRadius);
+        vec2 texCoord = vec2(s, 0.5);
+        texColor = texture2D(tex, texCoord);
+        // Guard against poor quality mipmap filtering (e.g. Mesa with NPOT textures).
+        if(radius > outerRadius)
+            texColor = vec4(0);
+    }
+    else
+#endif
+    {
+        texColor = texture2D(tex, texc);
+    }
+
 #ifdef IS_MOON
     // Undo the extraneous gamma encoded in the texture.
     // FIXME: ideally, we want all the calculations to be done in linear scale,
