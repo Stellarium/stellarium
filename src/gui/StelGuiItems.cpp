@@ -88,10 +88,24 @@ void StelButton::initCtor(const QPixmap& apixOn,
 	pixHover = apixHover;
 	pixNoChange = apixNoChange;
 
-	pixOn.setDevicePixelRatio(GUI_PIXMAPS_SCALE);
-	pixOff.setDevicePixelRatio(GUI_PIXMAPS_SCALE);
-	pixHover.setDevicePixelRatio(GUI_PIXMAPS_SCALE);
-	pixNoChange.setDevicePixelRatio(GUI_PIXMAPS_SCALE);
+	if(!pixmapsScale)
+	{
+		pixmapsScale = StelApp::getInstance().getSettings()->value("gui/pixmaps_scale", GUI_INPUT_PIXMAPS_SCALE).toDouble();
+	}
+	if(pixmapsScale != GUI_INPUT_PIXMAPS_SCALE)
+	{
+		const auto scale = pixmapsScale/GUI_INPUT_PIXMAPS_SCALE;
+		pixOn = pixOn.scaled(pixOn.size()*scale, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+		pixOff = pixOff.scaled(pixOff.size()*scale, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+		if(!pixHover.isNull())
+			pixHover = pixHover.scaled(pixHover.size()*scale, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+		if(!pixNoChange.isNull())
+			pixNoChange = pixNoChange.scaled(pixNoChange.size()*scale, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+	}
+	pixOn.setDevicePixelRatio(pixmapsScale);
+	pixOff.setDevicePixelRatio(pixmapsScale);
+	pixHover.setDevicePixelRatio(pixmapsScale);
+	pixNoChange.setDevicePixelRatio(pixmapsScale);
 
 	noBckground = noBackground;
 	isTristate_ = isTristate;
@@ -273,7 +287,7 @@ void StelButton::updateIcon()
 	if (opacity < 0.)
 		opacity = 0;
 	QPixmap pix(pixOn.size());
-	pix.setDevicePixelRatio(GUI_PIXMAPS_SCALE);
+	pix.setDevicePixelRatio(pixmapsScale);
 	pix.fill(QColor(0,0,0,0));
 	QPainter painter(&pix);
 	painter.setOpacity(opacity);
@@ -335,7 +349,7 @@ void StelButton::paint(QPainter* painter, const QStyleOptionGraphicsItem*, QWidg
 	const double ratio = painter->device()->devicePixelRatioF();
 	if(scaledCurrentPixmap.isNull() || ratio != scaledCurrentPixmap.devicePixelRatioF())
 	{
-		const auto scale = ratio / GUI_PIXMAPS_SCALE;
+		const auto scale = ratio / pixmapsScale;
 		scaledCurrentPixmap = pixmap().scaled(pixOn.size()*scale, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
 		scaledCurrentPixmap.setDevicePixelRatio(ratio);
 	}
