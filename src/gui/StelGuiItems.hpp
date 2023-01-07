@@ -116,8 +116,8 @@ public:
 
 	//! Get the width of the button image.
 	//! The width is based on pixOn.
-	int getButtonPixmapWidth() const {return pixOn.width() / GUI_PIXMAPS_SCALE;}
-	int getButtonPixmapHeight() const {return pixOn.height() / GUI_PIXMAPS_SCALE;}
+	int getButtonPixmapWidth() const {return pixOn.width() / pixmapsScale;}
+	int getButtonPixmapHeight() const {return pixOn.height() / pixmapsScale;}
 
 	//! Set the button opacity
 	void setOpacity(double v) {opacity=v; updateIcon();}
@@ -136,7 +136,7 @@ public:
 
 	QRectF boundingRect() const override;
 
-	static double getPixmapsDevicePixelRatio() { return GUI_PIXMAPS_SCALE; }
+	static double getInputPixmapsDevicePixelRatio() { return GUI_INPUT_PIXMAPS_SCALE; }
 
 signals:
 	//! Triggered when the button state changes
@@ -191,8 +191,11 @@ private:
 	double opacity;
 	double hoverOpacity;
 	bool triggerOnRelease = false;
-	// All pixmaps are supposed to be 500% scaled compared to their appearance on the screen when high-DPI scale factor is 100%
-	static constexpr double GUI_PIXMAPS_SCALE = 5;
+	// All input pixmaps are supposed to be 500% scaled compared to their
+	// appearance on the screen when high-DPI scale factor is 100%
+	static constexpr double GUI_INPUT_PIXMAPS_SCALE = 5;
+	// This is the actual scale to which the input pixmaps will be resized after loading
+	inline static double pixmapsScale = 0;
 };
 
 // The button bar on the left containing windows toggle buttons
