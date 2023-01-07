@@ -75,13 +75,13 @@ QPixmap getTextPixmap(const QString& str, QFont font)
 }
 
 void StelButton::initCtor(const QPixmap& apixOn,
-                          const QPixmap& apixOff,
-                          const QPixmap& apixNoChange,
-                          const QPixmap& apixHover,
-			  StelAction* anAction,
-			  StelAction* otherAction,
-			  bool noBackground,
-                          bool isTristate)
+						  const QPixmap& apixOff,
+						  const QPixmap& apixNoChange,
+						  const QPixmap& apixHover,
+						  StelAction* anAction,
+						  StelAction* otherAction,
+						  bool noBackground,
+						  bool isTristate)
 {
 	pixOn = apixOn;
 	pixOff = apixOff;
@@ -143,39 +143,39 @@ void StelButton::initCtor(const QPixmap& apixOn,
 }
 
 StelButton::StelButton(QGraphicsItem* parent,
-		       const QPixmap& pixOn,
-		       const QPixmap& pixOff,
-		       const QPixmap& pixHover,
-		       StelAction *action,
-		       bool noBackground,
-		       StelAction *otherAction) :
-	QGraphicsPixmapItem(pixOff, parent)
+					   const QPixmap& pixOn,
+					   const QPixmap& pixOff,
+					   const QPixmap& pixHover,
+					   StelAction *action,
+					   bool noBackground,
+					   StelAction *otherAction)
+	: QGraphicsPixmapItem(pixOff, parent)
 {
 	initCtor(pixOn, pixOff, QPixmap(), pixHover, action, otherAction, noBackground, false);
 }
 
 StelButton::StelButton(QGraphicsItem* parent,
-		       const QPixmap& pixOn,
-		       const QPixmap& pixOff,
-		       const QPixmap& pixNoChange,
-		       const QPixmap& pixHover,
-		       const QString& actionId,
-		       bool noBackground,
-		       bool isTristate) :
-	QGraphicsPixmapItem(pixOff, parent)
+					   const QPixmap& pixOn,
+					   const QPixmap& pixOff,
+					   const QPixmap& pixNoChange,
+					   const QPixmap& pixHover,
+					   const QString& actionId,
+					   bool noBackground,
+					   bool isTristate)
+	: QGraphicsPixmapItem(pixOff, parent)
 {
 	StelAction *action = StelApp::getInstance().getStelActionManager()->findAction(actionId);
 	initCtor(pixOn, pixOff, pixNoChange, pixHover, action, Q_NULLPTR, noBackground, isTristate);
 }
 
 StelButton::StelButton(QGraphicsItem* parent,
-		       const QPixmap& pixOn,
-		       const QPixmap& pixOff,
-		       const QPixmap& pixHover,
-		       const QString& actionId,
-		       bool noBackground,
-		       const QString &otherActionId)
-	:QGraphicsPixmapItem(pixOff, parent)
+					   const QPixmap& pixOn,
+					   const QPixmap& pixOff,
+					   const QPixmap& pixHover,
+					   const QString& actionId,
+					   bool noBackground,
+					   const QString &otherActionId)
+	: QGraphicsPixmapItem(pixOff, parent)
 {
 	StelAction *action = StelApp::getInstance().getStelActionManager()->findAction(actionId);
 	StelAction *otherAction=Q_NULLPTR;
