@@ -3765,12 +3765,13 @@ void sRing(Ring3DModel* model, const float rMin, const float rMax, unsigned shor
 		}
 		r+=dr;
 	}
+	const unsigned stride = slices+1;
 	for (unsigned short int i=0; i<stacks; ++i)
 	{
 		for (unsigned short int j=0; j<slices; ++j)
 		{
-			model->indiceArr << i*slices+j << (i+1)*slices+j << i*slices+j+1u;
-			model->indiceArr << i*slices+j+1u << (i+1u)*slices+j << (i+1u)*slices+j+1u;
+			model->indiceArr << i*stride+j   << (i+1)*stride+j <<  i*stride+j+1;
+			model->indiceArr << i*stride+j+1 << (i+1)*stride+j << (i+1)*stride+j+1;
 		}
 	}
 }
