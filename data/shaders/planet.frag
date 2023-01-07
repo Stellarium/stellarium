@@ -175,6 +175,22 @@ lowp float outgasFactor(in mediump vec3 normal, in highp vec3 lightDir, in mediu
     return opac;
 }
 
+vec3 srgbToLinear(vec3 srgb)
+{
+	vec3 s = step(vec3(0.04045), srgb);
+	vec3 d = vec3(1) - s;
+	return s * pow((srgb+0.055)/1.055, vec3(2.4)) +
+		   d * srgb/12.92;
+}
+
+vec3 linearToSRGB(vec3 lin)
+{
+	vec3 s = step(vec3(0.0031308), lin);
+	vec3 d = vec3(1) - s;
+	return s * (1.055*pow(lin, vec3(1./2.4))-0.055) +
+		   d *  12.92*lin;
+}
+
 void main()
 {
     mediump float final_illumination = 1.0;
@@ -201,6 +217,10 @@ void main()
                 mediump float ring_radius = length(P + u * ray);
                 mediump float s = (ring_radius - innerRadius) / (outerRadius - innerRadius);
                 lowp float ringAlpha = texture2D(ringS, vec2(s, 0.5)).w;
+
+				// FIXME: this compensates for too much transparency in the texture (see e.g. Saturn)
+				ringAlpha = pow(ringAlpha, 1./2.2);
+
                 if(ring_radius > innerRadius && ring_radius < outerRadius)
                     final_illumination = 1.0 - ringAlpha;
             }
@@ -343,8 +363,10 @@ void main()
     lum*=shadow;
 #endif
 
+	mediump vec3 ambientLightToUse = srgbToLinear(ambientLight); // FIXME: this should be supplied as linear
+	mediump vec3 diffuseLightToUse = srgbToLinear(diffuseLight); // FIXME: this should be supplied as linear
     //final lighting color
-    mediump vec4 litColor = vec4(lum * final_illumination * diffuseLight + ambientLight, 1.0);
+    mediump vec4 litColor = vec4(lum * final_illumination * diffuseLightToUse + ambientLightToUse, 1.0);
 
     //apply texture-colored rimlight
     //litColor.xyz = clamp( litColor.xyz + vec3(outgas), 0.0, 1.0);
@@ -377,7 +399,9 @@ void main()
 	// We undo the intensity range and gamma transformations here, but leave the
 	// maximum at 1.0 instead of 0.4.
 	texColor.rgb = vec3(0.4) + 0.6 * texColor.rgb;
-    texColor.rgb = pow(texColor.rgb, vec3(2.8/2.2));
+    texColor.rgb = pow(texColor.rgb, vec3(2.8));
+#else
+    texColor.rgb = srgbToLinear(texColor.rgb);
 #endif
 
     mediump vec4 finalColor = texColor;
@@ -400,6 +424,7 @@ void main()
     if(final_illumination < 0.9999)
     {
         lowp vec4 shadowColor = texture2D(earthShadow, vec2(final_illumination, 0.5));
+		shadowColor.rgb = srgbToLinear(shadowColor.rgb);
         finalColor =
 		eclipsePush*(1.0-0.75*shadowColor.a)*
 		mix(finalColor * litColor, shadowColor, clamp(shadowColor.a, 0.0, 0.7)); // clamp alpha to allow some maria detail.
@@ -413,7 +438,7 @@ void main()
     //apply white rimlight
     finalColor.xyz = clamp( finalColor.xyz + vec3(outgas), 0.0, 1.0);
 
-    FRAG_COLOR = finalColor;
+    FRAG_COLOR = vec4(linearToSRGB(finalColor.rgb), finalColor.a);
     //to debug texture issues, uncomment and reload shader
     //FRAG_COLOR = texColor;
 }
