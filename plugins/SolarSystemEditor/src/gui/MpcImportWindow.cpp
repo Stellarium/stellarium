@@ -1032,6 +1032,15 @@ void MpcImportWindow::loadBookmarks()
 	else
 		qDebug() << "Bookmarks file can't be read. Hard-coded bookmarks will be used.";
 
+	// Remove outdated bookmarks for minor planets
+	QHashIterator<QString, QString> it(bookmarks[MpcMinorPlanets]);
+	while (it.hasNext())
+	{
+		it.next();
+		if (it.value().contains("dss.stellarium.org") || it.value().contains("2018/Soft00Bright.txt"))
+			bookmarks[MpcMinorPlanets].remove(it.key());
+	}
+
 	//Initialize with hard-coded values
 	// NOTE: this list is reordered anyway when loaded
 
@@ -1050,20 +1059,17 @@ void MpcImportWindow::loadBookmarks()
 	bookmarks[MpcMinorPlanets].insert("MPCAT: Distant minor planets (Centaurs and transneptunians)", 	"https://www.minorplanetcenter.net/iau/ECS/MPCAT/distant.txt");
 
 	const int start = 0;
-	const int finish = 52;
+	const int finish = 61;
+	const int nsize = 6;
 	const QChar dash = QChar(0x2014);
 
-	QString limits, idx;
+	QString limits, idx, leftLimit, rightLimit;
 
 	for (int i=start; i<=finish; i++)
 	{
-		if (i==start)
-			limits = QString("%1%2%3").arg(QString::number(1).rightJustified(6), dash, QString::number(9999).rightJustified(6));
-		else if (i==finish)
-			limits = QString("%1...").arg(QString::number(i*10000).rightJustified(6));
-		else
-			limits = QString("%1%2%3").arg(QString::number(i*10000).rightJustified(6), dash, QString::number(i*10000 + 9999).rightJustified(6));
-
+		leftLimit = (i==start) ? QString::number(1).rightJustified(nsize) : QString::number(i*10000).rightJustified(nsize);
+		rightLimit = (i==finish) ? "..." : QString::number(i*10000 + 9999).rightJustified(nsize);
+		limits = QString("%1%2%3").arg(leftLimit, dash, rightLimit);
 		idx = QString::number(i+1).rightJustified(2, '0');
 		bookmarks[MpcMinorPlanets].insert(
 			QString("MPCAT: Numbered objects (%1)").arg(limits), 

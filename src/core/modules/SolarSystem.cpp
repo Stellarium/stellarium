@@ -1585,10 +1585,12 @@ void SolarSystem::fillEphemerisDates()
 					info.clear();
 
 				StelUtils::getTimeFromJulianDay(JD+shift, &h, &m, &s);
+				QString hours = QString::number(h).rightJustified(2, '0');
+				QString minutes = QString::number(m).rightJustified(2, '0');
 				if (!info.isEmpty())
-					info.append(QString(" %1:%2").arg(h).arg(m));
+					info.append(QString(" %1:%2").arg(hours, minutes));
 				else
-					info = QString("%1:%2").arg(h).arg(m);
+					info = QString("%1:%2").arg(hours, minutes);
 			}
 
 			AstroCalcDialog::EphemerisList[i].objDateStr = info;
