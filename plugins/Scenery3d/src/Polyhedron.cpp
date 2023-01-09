@@ -254,7 +254,7 @@ const QVector<Vec3f> &Polyhedron::getVerts() const
 
 void Polyhedron::render() const
 {
-#if !defined(QT_OPENGL_ES_2)
+#if !QT_CONFIG(opengles2)
 
 	//render each polygon
 	glExtFuncs->glColor3f(0.4f,0.4f,0.4f);

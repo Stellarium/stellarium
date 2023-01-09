@@ -52,7 +52,7 @@ Q_LOGGING_CATEGORY(s3drenderer, "stel.plugin.scenery3d.renderer")
 static const float LUNAR_BRIGHTNESS_FACTOR=0.2f;
 static const float VENUS_BRIGHTNESS_FACTOR=0.005f;
 
-#ifndef QT_OPENGL_ES_2
+#if !QT_CONFIG(opengles2)
 //this is the place where this is initialized
 GLExtFuncs* glExtFuncs;
 #endif
@@ -120,7 +120,7 @@ S3DRenderer::~S3DRenderer()
 	deleteShadowmapping();
 	deleteCubemapping();
 
-#ifndef QT_OPENGL_ES_2
+#if !QT_CONFIG(opengles2)
 	//delete extension functions
 	delete glExtFuncs;
 #endif
@@ -1403,7 +1403,7 @@ void S3DRenderer::drawCoordinatesText()
 void S3DRenderer::drawDebug()
 {
 	//frustum/box debug rendering only on desktop GL
-#ifndef QT_OPENGL_ES_2
+#if !QT_CONFIG(opengles2)
 	if(!shaderParameters.openglES)
 	{
 		QOpenGLShaderProgram* debugShader = shaderManager.getDebugShader();
@@ -1654,7 +1654,7 @@ void S3DRenderer::init()
 	QOpenGLContext* ctx = QOpenGLContext::currentContext();
 	Q_ASSERT(ctx);
 
-#ifndef QT_OPENGL_ES_2
+#if !QT_CONFIG(opengles2)
 	//initialize additional functions needed and not provided through StelOpenGL
 	glExtFuncs = new GLExtFuncs();
 	glExtFuncs->init(ctx);
@@ -1787,7 +1787,7 @@ bool S3DRenderer::initCubemapping()
 	}
 
 
-#ifndef QT_OPENGL_ES_2
+#if !QT_CONFIG(opengles2)
 	//if we are on an ES context, it may not be possible to specify texture bitdepth
 	bool isEs = QOpenGLContext::currentContext()->isOpenGLES();
 	GLint colorFormat = isEs ? GL_RGBA : GL_RGBA8;
@@ -1916,7 +1916,7 @@ bool S3DRenderer::initCubemapping()
 
 		GET_GLERROR()
 
-#ifndef QT_OPENGL_ES_2
+#if !QT_CONFIG(opengles2)
 		//attach cube tex + cube depth
 		//note that this function will be a NULL pointer if GS is not supported, so it is important to check support before using
 		glExtFuncs->glFramebufferTexture(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0,cubeMapCubeTex,0);
@@ -2219,7 +2219,7 @@ bool S3DRenderer::initShadowmapping()
 			//Bind the depth map and setup parameters
 			glBindTexture(GL_TEXTURE_2D, shadowMapsArray.at(i));
 
-#ifndef QT_OPENGL_ES_2
+#if !QT_CONFIG(opengles2)
 			bool isEs = QOpenGLContext::currentContext()->isOpenGLES();
 			GLenum depthPcss = isEs ? GL_DEPTH_COMPONENT : GL_DEPTH_COMPONENT32F;
 			GLenum depthNormal = isEs ? GL_DEPTH_COMPONENT : GL_DEPTH_COMPONENT16;
@@ -2238,7 +2238,7 @@ bool S3DRenderer::initShadowmapping()
 			//NOTE: can't use depth compare mode on ES2
 			if(!pcssEnabled)
 			{
-#ifndef QT_OPENGL_ES_2
+#if !QT_CONFIG(opengles2)
 				if(!isEs)
 				{
 					glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE, GL_COMPARE_R_TO_TEXTURE);
@@ -2254,7 +2254,7 @@ bool S3DRenderer::initShadowmapping()
 					|| shaderParameters.shadowFilterQuality == S3DEnum::SFQ_HIGH_HARDWARE) ? GL_LINEAR : GL_NEAREST;
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, filter);
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, filter);
-#ifndef QT_OPENGL_ES_2
+#if !QT_CONFIG(opengles2)
 			if(!isEs)
 			{
 				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_BASE_LEVEL,0);
@@ -2273,7 +2273,7 @@ bool S3DRenderer::initShadowmapping()
 			//but the respective functions are not available on GLES2?
 			//On ANGLE, it seems to work without this settings (framebuffer is complete, etc.)
 			//but I don't know if it will work on other ES platforms?
-#ifndef QT_OPENGL_ES_2
+#if !QT_CONFIG(opengles2)
 			if(!isEs)
 			{
 				glExtFuncs->glDrawBuffer(GL_NONE); // essential for depth-only FBOs!!!

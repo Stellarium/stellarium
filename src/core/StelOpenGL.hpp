@@ -60,7 +60,7 @@ namespace StelOpenGL
 
 // This is still needed for the ARM platform (armhf)
 
-#if defined(QT_OPENGL_ES_2)
+#if QT_CONFIG(opengles2)
 #ifndef GL_DOUBLE
 #define GL_DOUBLE GL_FLOAT
 #endif
