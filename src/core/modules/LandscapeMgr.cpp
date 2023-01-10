@@ -755,6 +755,8 @@ void LandscapeMgr::init()
 	setFlagLabels(conf->value("landscape/flag_enable_labels", true).toBool());
 	setFlagPolyLineDisplayed(conf->value("landscape/flag_polyline_only", false).toBool());
 	setPolyLineThickness(conf->value("landscape/polyline_thickness", 1).toInt());
+	setLabelFontSize(conf->value("landscape/label_font_size", 18).toInt());
+	setLabelColor(Vec3f(conf->value("landscape/label_color", "0.2,0.8,0.2").toString()));
 
 	cardinalPoints = new Cardinals();
 	cardinalPoints->setFlagShow4WCRLabels(conf->value("viewing/flag_cardinal_points", true).toBool());
@@ -843,6 +845,8 @@ bool LandscapeMgr::setCurrentLandscapeID(const QString& id, const double changeL
 		newLandscape->setFlagShowFog(landscape->getFlagShowFog());
 		newLandscape->setFlagShowIllumination(landscape->getFlagShowIllumination());
 		newLandscape->setFlagShowLabels(landscape->getFlagShowLabels());
+		newLandscape->setLabelFontSize(landscape->getLabelFontSize());
+		newLandscape->setLabelColor(landscape->getLabelColor());
 
 		// If we have an oldLandscape that is not just swapped back, put that into cache.
 		if (oldLandscape && oldLandscape!=newLandscape)
@@ -1134,6 +1138,28 @@ void LandscapeMgr::setFlagLabels(const bool displayed)
 bool LandscapeMgr::getFlagLabels() const
 {
 	return landscape->getFlagShowLabels();
+}
+
+void LandscapeMgr::setLabelFontSize(const int size)
+{
+	landscape->setLabelFontSize(size);
+	emit labelFontSizeChanged(size);
+}
+
+int LandscapeMgr::getLabelFontSize() const
+{
+	return landscape->getLabelFontSize();
+}
+
+void LandscapeMgr::setLabelColor(const Vec3f& c)
+{
+	landscape->setLabelColor(c);
+	emit labelColorChanged(c);
+}
+
+Vec3f LandscapeMgr::getLabelColor() const
+{
+	return landscape->getLabelColor();
 }
 
 void LandscapeMgr::setFlagLandscapeAutoSelection(bool enableAutoSelect)
@@ -1440,14 +1466,14 @@ bool LandscapeMgr::getFlagAtmosphere() const
 //! Set flag for displaying Atmosphere
 void LandscapeMgr::setFlagAtmosphereNoScatter(const bool noScatter)
 {
-    atmosphereNoScatter=noScatter;
+	atmosphereNoScatter=noScatter;
 	emit atmosphereNoScatterChanged(noScatter);
 }
 
 //! Get flag for displaying Atmosphere
 bool LandscapeMgr::getFlagAtmosphereNoScatter() const
 {
-    return atmosphereNoScatter;
+	return atmosphereNoScatter;
 }
 
 QString LandscapeMgr::getAtmosphereModel() const
@@ -1584,8 +1610,6 @@ Landscape* LandscapeMgr::createFromFile(const QString& landscapeFile, const QStr
 	}
 
 	landscape->load(landscapeIni, landscapeId);
-	QSettings *conf=StelApp::getInstance().getSettings();
-	landscape->setLabelFontSize(conf->value("landscape/label_font_size", 15).toInt());
 	return landscape;
 }
 

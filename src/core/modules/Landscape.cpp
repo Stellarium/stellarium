@@ -228,10 +228,6 @@ void Landscape::loadCommon(const QSettings& landscapeIni, const QString& landsca
 		// This line can then be drawn in all classes with the color specified here. If not specified, don't draw it! (flagged by negative red)
 		horizonPolygonLineColor=Vec3f(landscapeIni.value("landscape/horizon_line_color", "-1,0,0" ).toString());
 	}
-	// we must get label color, this is global. (No sense to make that per-landscape!)
-	QSettings *config = StelApp::getInstance().getSettings();
-	labelColor=Vec3f(config->value("landscape/label_color", "0.2,0.8,0.2").toString());
-	fontSize=config->value("landscape/label_font_size", 18).toInt();
 	loadLabels(landscapeId);
 }
 

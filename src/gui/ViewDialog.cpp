@@ -327,6 +327,8 @@ void ViewDialog::createDialogContent()
 	connectCheckBox(ui->landscapeLabelsCheckBox, "actionShow_LandscapeLabels");
 
 	connectBoolProperty(ui->landscapePositionCheckBox, "LandscapeMgr.flagLandscapeSetsLocation");
+	connectColorButton(ui->labelsColorButton, "LandscapeMgr.labelColor", "landscape/label_color");
+	connectIntProperty(ui->labelsFontSizeSpinBox, "LandscapeMgr.labelFontSize");
 
 	connectBoolProperty(ui->landscapeBrightnessCheckBox,"LandscapeMgr.flagLandscapeUseMinimalBrightness");
 	connect(lmgr,SIGNAL(flagLandscapeUseMinimalBrightnessChanged(bool)),ui->localLandscapeBrightnessCheckBox,SLOT(setEnabled(bool)));

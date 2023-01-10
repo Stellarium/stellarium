@@ -129,8 +129,14 @@ public:
 	void setFlagShowLabels(const bool b) {labelFader=b;}
 	//! Get whether labels are displayed
 	bool getFlagShowLabels() const {return static_cast<bool>(labelFader);}
-	//! change font and fontsize for landscape labels
-	void setLabelFontSize(const int size){fontSize=size;}
+	//! Change font and fontsize for landscape labels
+	void setLabelFontSize(const int size){ fontSize=size; }
+	//! Get fontsize for landscape labels
+	int getLabelFontSize() { return fontSize; }
+	//! Get color for landscape labels
+	Vec3f getLabelColor() const { return labelColor; }
+	//! Set color for landscape labels
+	void setLabelColor(const Vec3f& c) { labelColor=c; };
 
 	//! Get landscape name
 	QString getName() const {return name;}
@@ -267,7 +273,7 @@ protected:
 	int fontSize;     //! Used for landscape labels (optionally indicating landscape features)
 	Vec3f labelColor; //! Color for the landscape labels.
 	unsigned int memorySize;   //!< holds an approximate value of memory consumption (for cache cost estimate)
-    bool multisamplingEnabled_;
+	bool multisamplingEnabled_;
 	bool initialized = false;
 };
 

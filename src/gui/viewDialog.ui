@@ -4764,6 +4764,27 @@
              <property name="bottomMargin">
               <number>0</number>
              </property>
+             <item row="2" column="0">
+              <widget class="QCheckBox" name="showGroundCheckBox">
+               <property name="text">
+                <string>Show ground</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QCheckBox" name="landscapeLabelsCheckBox">
+               <property name="text">
+                <string>Show landscape labels</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="0">
+              <widget class="QCheckBox" name="showFogCheckBox">
+               <property name="text">
+                <string>Show fog</string>
+               </property>
+              </widget>
+             </item>
              <item row="5" column="1">
               <layout class="QHBoxLayout" name="landscapePolylineHorizontalLayout">
                <item>
@@ -4810,50 +4831,16 @@
                </property>
               </widget>
              </item>
-             <item row="2" column="1">
-              <widget class="QCheckBox" name="landscapeLabelsCheckBox">
-               <property name="text">
-                <string>Show landscape labels</string>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="1">
-              <widget class="QCheckBox" name="landscapeIlluminationCheckBox">
-               <property name="toolTip">
-                <string>Show illumination layer (bright windows, light pollution, etc.)</string>
-               </property>
-               <property name="text">
-                <string>Show illumination </string>
-               </property>
-               <property name="checked">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-             <item row="5" column="0">
-              <layout class="QHBoxLayout" name="horizontalLayout_25">
-               <property name="leftMargin">
-                <number>22</number>
-               </property>
-               <item>
-                <widget class="QCheckBox" name="localLandscapeBrightnessCheckBox">
-                 <property name="enabled">
-                  <bool>false</bool>
-                 </property>
-                 <property name="toolTip">
-                  <string>Use minimal brightness as may be specified in landscape.ini</string>
-                 </property>
-                 <property name="text">
-                  <string>from landscape, if given</string>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
              <item row="4" column="0">
               <layout class="QHBoxLayout" name="horizontalLayout_11">
                <item>
                 <widget class="QCheckBox" name="landscapeBrightnessCheckBox">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
                  <property name="toolTip">
                   <string>Use minimal brightness to leave landscape visible also in darkness</string>
                  </property>
@@ -4889,26 +4876,94 @@
                </item>
               </layout>
              </item>
-             <item row="3" column="0">
-              <widget class="QCheckBox" name="showFogCheckBox">
+             <item row="3" column="1">
+              <widget class="QCheckBox" name="landscapeIlluminationCheckBox">
+               <property name="toolTip">
+                <string>Show illumination layer (bright windows, light pollution, etc.)</string>
+               </property>
                <property name="text">
-                <string>Show fog</string>
+                <string>Show illumination </string>
+               </property>
+               <property name="checked">
+                <bool>true</bool>
                </property>
               </widget>
              </item>
-             <item row="2" column="0">
-              <widget class="QCheckBox" name="showGroundCheckBox">
-               <property name="text">
-                <string>Show ground</string>
+             <item row="5" column="0">
+              <layout class="QHBoxLayout" name="horizontalLayout_25">
+               <property name="leftMargin">
+                <number>22</number>
                </property>
-              </widget>
+               <item>
+                <widget class="QCheckBox" name="localLandscapeBrightnessCheckBox">
+                 <property name="enabled">
+                  <bool>false</bool>
+                 </property>
+                 <property name="toolTip">
+                  <string>Use minimal brightness as may be specified in landscape.ini</string>
+                 </property>
+                 <property name="text">
+                  <string>from landscape, if given</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
              </item>
-             <item row="1" column="0" colspan="2">
+             <item row="1" column="0">
               <widget class="QCheckBox" name="useAsDefaultLandscapeCheckBox">
                <property name="text">
                 <string>Use this landscape as default</string>
                </property>
               </widget>
+             </item>
+             <item row="1" column="1">
+              <layout class="QHBoxLayout" name="horizontalLayout_3">
+               <item>
+                <widget class="QToolButton" name="labelsColorButton">
+                 <property name="toolTip">
+                  <string>Color of the landscape labels</string>
+                 </property>
+                 <property name="text">
+                  <string notr="true"/>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="labelsFontSizeLabel">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="text">
+                  <string>Labels font size</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QSpinBox" name="labelsFontSizeSpinBox">
+                 <property name="minimumSize">
+                  <size>
+                   <width>50</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                 <property name="minimum">
+                  <number>5</number>
+                 </property>
+                 <property name="maximum">
+                  <number>48</number>
+                 </property>
+                 <property name="value">
+                  <number>18</number>
+                 </property>
+                </widget>
+               </item>
+              </layout>
              </item>
             </layout>
            </widget>
@@ -5518,12 +5573,12 @@
  </resources>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroupDisplayedDSOTypes">
+  <buttongroup name="buttonGroupDisplayedDSOCatalogs">
    <property name="exclusive">
     <bool>false</bool>
    </property>
   </buttongroup>
-  <buttongroup name="buttonGroupDisplayedDSOCatalogs">
+  <buttongroup name="buttonGroupDisplayedDSOTypes">
    <property name="exclusive">
     <bool>false</bool>
    </property>

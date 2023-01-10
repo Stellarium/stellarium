@@ -239,6 +239,14 @@ class LandscapeMgr : public StelModule
 		   READ getDefaultLandscapeID
 		   WRITE setDefaultLandscapeID
 		   NOTIFY defaultLandscapeChanged)
+	Q_PROPERTY(int labelFontSize
+		   READ getLabelFontSize
+		   WRITE setLabelFontSize
+		   NOTIFY labelFontSizeChanged)
+	Q_PROPERTY(Vec3f labelColor
+		   READ getLabelColor
+		   WRITE setLabelColor
+		   NOTIFY labelColorChanged)
 
 public:
 	LandscapeMgr();
@@ -412,6 +420,14 @@ public slots:
 	bool getFlagLabels() const;
 	//! Set flag for displaying landscape labels
 	void setFlagLabels(const bool on);
+	//! Get the fontsize for landscape labels
+	int getLabelFontSize() const;
+	//! Set the fontsize for landscape labels
+	void setLabelFontSize(const int size);
+	//! Get color for landscape labels
+	Vec3f getLabelColor() const;
+	//! Set color for landscape labels
+	void setLabelColor(const Vec3f& c);
 
 	//! Retrieve flag for rendering polygonal line (if one is defined)
 	bool getFlagPolyLineDisplayed() const {return flagPolyLineDisplayedOnly;}
@@ -642,6 +658,8 @@ signals:
 	void landscapeDisplayedChanged(const bool displayed);
 	void illuminationDisplayedChanged(const bool displayed);
 	void labelsDisplayedChanged(const bool displayed);
+	void labelFontSizeChanged(const int size);
+	void labelColorChanged(const Vec3f &c);
 	void flagPolyLineDisplayedChanged(const bool enabled);
 	void polyLineThicknessChanged(const int thickness);
 	void flagUseLightPollutionFromDatabaseChanged(const bool usage);
@@ -726,7 +744,7 @@ private:
 	Landscape* oldLandscape;		// Used only during transitions to newly loaded landscape.
 
 	// Used to display error messages: e.g. when atmosphere model fails
-    LinearFader messageFader;
+	LinearFader messageFader;
 	QString messageToShow;
 	QTimer* messageTimer = nullptr;
 
