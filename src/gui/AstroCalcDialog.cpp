@@ -305,6 +305,12 @@ void AstroCalcDialog::createDialogContent()
 
 	ui->hecSelectedMinorPlanetsCheckBox->setChecked(conf->value("astrocalc/flag_hec_minor_planets", false).toBool());
 	connect(ui->hecSelectedMinorPlanetsCheckBox, SIGNAL(toggled(bool)), this, SLOT(saveHECFlagMinorPlanets(bool)));
+	bool brightCometsState = conf->value("astrocalc/flag_hec_bright_comets", false).toBool();
+	ui->hecBrightCometsCheckBox->setChecked(brightCometsState);
+	connect(ui->hecBrightCometsCheckBox, SIGNAL(toggled(bool)), this, SLOT(saveHECFlagBrightComets(bool)));
+	ui->hecMagnitudeLimitSpinBox->setValue(conf->value("astrocalc/hec_magnitude_limit", 9.0).toDouble());
+	ui->hecMagnitudeLimitSpinBox->setEnabled(brightCometsState);
+	connect(ui->hecMagnitudeLimitSpinBox, SIGNAL(valueChanged(double)), this,  SLOT(saveHECBrightCometMagnitudeLimit(double)));
 	connect(ui->hecPositionsTreeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentHECPosition(QModelIndex)));
 	connect(ui->hecPositionsTreeWidget, SIGNAL(clicked(QModelIndex)), this, SLOT(markCurrentHECPosition(QModelIndex)));
 	connect(ui->hecPositionsUpdateButton, SIGNAL(clicked()), this, SLOT(currentHECPositions()));
@@ -602,6 +608,7 @@ void AstroCalcDialog::populateToolTips()
 	ui->eclipseFromYearSpinBox->setToolTip(QString("%1 %2..%3").arg(q_("Valid range years:"), QString::number(ui->eclipseFromYearSpinBox->minimum()), QString::number(ui->eclipseFromYearSpinBox->maximum())));
 	ui->allowedSeparationSpinBox->setToolTip(QString("%1: %2..%3").arg(q_("Valid range"), StelUtils::decDegToDmsStr(ui->allowedSeparationSpinBox->getMinimum(true)), StelUtils::decDegToDmsStr(ui->allowedSeparationSpinBox->getMaximum(true))));
 	ui->allowedSeparationLabel->setToolTip(QString("<p>%1</p>").arg(q_("This is a tolerance for the angular distance for conjunctions and oppositions from 0 and 180 degrees respectively.")));
+	ui->hecMagnitudeLimitSpinBox->setToolTip(QString("%1 %2..%3").arg(q_("Valid range magnitues:"), QString::number(ui->hecMagnitudeLimitSpinBox->minimum(), 'f', 2), QString::number(ui->hecMagnitudeLimitSpinBox->maximum(), 'f', 2)));
 }
 
 void AstroCalcDialog::saveGraph(QChartView *graph)
@@ -1466,6 +1473,19 @@ void AstroCalcDialog::saveHECFlagMinorPlanets(bool b)
 	currentHECPositions();
 }
 
+void AstroCalcDialog::saveHECFlagBrightComets(bool b)
+{
+	conf->setValue("astrocalc/flag_hec_bright_comets", b);
+	ui->hecMagnitudeLimitSpinBox->setEnabled(b);
+	currentHECPositions();
+}
+
+void AstroCalcDialog::saveHECBrightCometMagnitudeLimit(double mag)
+{
+	conf->setValue("astrocalc/hec_magnitude_limit", QString::number(mag, 'f', 2));
+	currentHECPositions();
+}
+
 void AstroCalcDialog::currentHECPositions()
 {
 	QPair<QString, QString> coordStrings;
@@ -1473,8 +1493,10 @@ void AstroCalcDialog::currentHECPositions()
 	initListHECPositions();
 	const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
 	const bool minorPlanets = ui->hecSelectedMinorPlanetsCheckBox->isChecked();
+	const bool brightComets = ui->hecBrightCometsCheckBox->isChecked();
+	const double magLimit = ui->hecMagnitudeLimitSpinBox->value();
 
-	static const QMap<QString, QChar> symbol = {
+	QMap<QString, QChar> symbol = {
 		{ "Mercury", QChar(0x263F) }, { "Venus",   QChar(0x2640) }, { "Earth",   QChar(0x2641) },
 		{ "Mars",    QChar(0x2642) }, { "Jupiter", QChar(0x2643) }, { "Saturn",  QChar(0x2644) },
 		{ "Uranus",  QChar(0x2645) }, { "Neptune", QChar(0x2646) }, { "Pluto",   QChar(0x2647) }
@@ -1491,6 +1513,11 @@ void AstroCalcDialog::currentHECPositions()
 	{
 		if (planet->getPlanetType() == Planet::isPlanet)
 			planets.append(planet);
+		if (brightComets && planet->getPlanetType() == Planet::isComet && planet->getVMagnitude(core)<=magLimit)
+		{
+			planets.append(planet);
+			symbol.insert(planet->getEnglishName(), QChar(0x2604));
+		}
 	}
 	if (minorPlanets)
 		planets.append(getSelectedMinorPlanets());
