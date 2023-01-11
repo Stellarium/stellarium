@@ -124,14 +124,14 @@ public:
 	//! @enum OptStatus operational statuses
 	enum OptStatus
 	{
-		StatusOperational			= 1,
-		StatusNonoperational		= 2,
-		StatusPartiallyOperational	= 3,
-		StatusStandby			= 4,
-		StatusSpare				= 5,
-		StatusExtendedMission		= 6,
-		StatusDecayed			= 7,
-		StatusUnknown			= 0
+		StatusOperational          = 1,
+		StatusNonoperational       = 2,
+		StatusPartiallyOperational = 3,
+		StatusStandby              = 4,
+		StatusSpare                = 5,
+		StatusExtendedMission      = 6,
+		StatusDecayed              = 7,
+		StatusUnknown              = 0
 	};
 	Q_ENUM(OptStatus)
 
@@ -139,32 +139,32 @@ public:
 	//! \param data a QMap which contains the details of the satellite
 	//! (TLE set, description etc.)
 	Satellite(const QString& identifier, const QVariantMap& data);
-	~Satellite() Q_DECL_OVERRIDE;
+	~Satellite() override;
 
 	//! Get a QVariantMap which describes the satellite.  Could be used to
 	//! create a duplicate.
 	QVariantMap getMap(void);
 
-	virtual QString getType(void) const Q_DECL_OVERRIDE
+	QString getType(void) const override
 	{
 		return SATELLITE_TYPE;
 	}
 
-	virtual QString getObjectType(void) const Q_DECL_OVERRIDE
+	QString getObjectType(void) const override
 	{
 		return N_("artificial satellite");
 	}
-	virtual QString getObjectTypeI18n(void) const Q_DECL_OVERRIDE
+	QString getObjectTypeI18n(void) const override
 	{
 		return q_(getObjectType());
 	}
 
-	virtual QString getID(void) const Q_DECL_OVERRIDE
+	QString getID(void) const override
 	{
 		return id;
 	}
 
-	virtual float getSelectPriority(const StelCore* core) const Q_DECL_OVERRIDE;
+	float getSelectPriority(const StelCore* core) const override;
 
 	//! Get an HTML string to describe the object
 	//! @param core A pointer to the core
@@ -173,7 +173,7 @@ public:
 	//! - Name: designation in large type with the description underneath
 	//! - RaDecJ2000, RaDecOfDate, HourAngle, AltAzi
 	//! - Extra: range, range rate and altitude of satellite above the Earth, comms frequencies, modulation types and so on.
-	virtual QString getInfoString(const StelCore *core, const InfoStringGroup& flags) const Q_DECL_OVERRIDE;
+	QString getInfoString(const StelCore *core, const InfoStringGroup& flags) const override;
 	//! Return a map like StelObject::getInfoMap(), but with a few extra tags also available in getInfoString().
 	//! - description
 	//! - catalog
@@ -198,14 +198,14 @@ public:
 	//! - operational-status
 	//! - visibility (descriptive string)
 	//! - comm (Radio information, optional, if available. There may be several comm entries!)
-	virtual QVariantMap getInfoMap(const StelCore *core) const Q_DECL_OVERRIDE;
-	virtual Vec3f getInfoColor(void) const Q_DECL_OVERRIDE;
-	virtual Vec3d getJ2000EquatorialPos(const StelCore*) const Q_DECL_OVERRIDE;
-	virtual float getVMagnitude(const StelCore* core) const Q_DECL_OVERRIDE;
+	QVariantMap getInfoMap(const StelCore *core) const override;
+	Vec3f getInfoColor(void) const override;
+	Vec3d getJ2000EquatorialPos(const StelCore*) const override;
+	float getVMagnitude(const StelCore* core) const override;
 	//! Get angular half-size, degrees
-	virtual double getAngularRadius(const StelCore*) const Q_DECL_OVERRIDE;
-	virtual QString getNameI18n(void) const Q_DECL_OVERRIDE;
-	virtual QString getEnglishName(void) const Q_DECL_OVERRIDE
+	double getAngularRadius(const StelCore*) const override;
+	QString getNameI18n(void) const override;
+	QString getEnglishName(void) const override
 	{
 		return name;
 	}
@@ -244,6 +244,10 @@ public:
 
 	//! Calculation of illuminated fraction of the satellite.
 	float calculateIlluminatedFraction() const;
+
+	//! Get radii and geocentric distances of shadow circles in km
+	//! Vec4d(umbraDistance, umbraRadius, penumbraDistance, penumbraRadius);
+	Vec4d getUmbraData();
 
 	//! Get operational status of satellite
 	QString getOperationalStatus() const;
@@ -383,6 +387,10 @@ private:
 
 	gSatWrapper::Visibility	visibility;
 	double	phaseAngle; // phase angle for the satellite
+	double umbraDistance;    //! geocentric distance (km) of the umbra circle equivalent to the satellite distance when it would enter/exit umbra
+	double umbraRadius;      //! radius (km) of the umbra circle at satellite distance when it would enter/exit umbra
+	double penumbraDistance; //! geocentric distance (km) of the penumbra circle equivalent to the satellite distance when it would enter/exit penumbra
+	double penumbraRadius;   //! radius (km) of the penumbra circle at satellite distance when it would enter/exit penumbra
 #if(SATELLITES_PLUGIN_IRIDIUM == 1)
 	static double sunReflAngle; // for Iridium satellites
 	//static double timeShift; // for Iridium satellites UNUSED

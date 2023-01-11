@@ -170,7 +170,7 @@ void Frustum::drawFrustum() const
 {
 // Minimum to avoid trouble when building on pure OpenGL ES systems
 // Not sure about ANGLE!
-#if !defined(QT_OPENGL_ES_2)
+#if !QT_CONFIG(opengles2)
 
 	Vec3f ntl = drawCorners[NTL];
 	Vec3f ntr = drawCorners[NTR];

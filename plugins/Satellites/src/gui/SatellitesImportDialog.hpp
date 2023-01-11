@@ -37,14 +37,14 @@ class SatellitesImportDialog : public StelDialog
 	
 public:
 	SatellitesImportDialog();
-	~SatellitesImportDialog() Q_DECL_OVERRIDE;
+	~SatellitesImportDialog() override;
 	
 signals:
 	void satellitesAccepted(const TleDataList& newSatellites);
 	
 public slots:
-	void retranslate() Q_DECL_OVERRIDE;
-	void setVisible(bool visible = true) Q_DECL_OVERRIDE;
+	void retranslate() override;
+	void setVisible(bool visible = true) override;
 	
 private slots:
 	void getData();
@@ -56,7 +56,7 @@ private slots:
 	void markNone();
 	
 private:
-	void createDialogContent() Q_DECL_OVERRIDE;
+	void createDialogContent() override;
 	Ui_satellitesImportDialog* ui;
 	
 	void reset();

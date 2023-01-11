@@ -31,10 +31,13 @@
 #ifndef MATHUTILS_HPP
 #define MATHUTILS_HPP
 
+/*
+#include <cmath>
 
 //! Four-quadrant arctan function
 //! @ingroup satellites
-double AcTan(double sinx, double cosx);
+inline double AcTan(double sinx, double cosx){return atan2(sinx, cosx);}
+*/
 
 //! Returns square of a double
 //! @ingroup satellites

@@ -312,6 +312,9 @@ public:
 	//! set the IAU moon number (designation of the moon), if any.
 	void setIAUMoonNumber(QString designation);
 
+	//! set value for color index B-V
+	void setColorIndexBV(float bv=99.f);
+
 	//! Return the absolute magnitude (read from file ssystem.ini)
 	float getAbsoluteMagnitude() const {return absoluteMagnitude;}
 	//! Return the mean opposition magnitude, defined as V(1,0)+5log10(a(a-1))
@@ -790,6 +793,7 @@ protected:
 private:
 	class StelPropertyMgr* propMgr;
 	QString iauMoonNumber;
+	float b_v;
 	// File path for texture and normal map; both variables used for saving original names of files
 	QString texMapFileOrig;
 	QString normalMapFileOrig;

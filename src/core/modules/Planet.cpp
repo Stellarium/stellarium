@@ -260,6 +260,7 @@ Planet::Planet(const QString& englishName,
 	  multisamplingEnabled_(StelApp::getInstance().getSettings()->value("video/multisampling", 0).toUInt() != 0),
 	  gl(Q_NULLPTR),
 	  iauMoonNumber(""),
+	  b_v(99.f),
 	  orbitPositionsCache(ORBIT_SEGMENTS * 2)
 {
 	// Initialize pType with the key found in pTypeMap, or mark planet type as undefined.
@@ -356,6 +357,11 @@ Planet::~Planet()
 		if(surveyVBO)
 			gl->glDeleteBuffers(1, &surveyVBO);
 	}
+}
+
+void Planet::setColorIndexBV(float bv)
+{
+	b_v = bv;
 }
 
 void Planet::resetTextures()
@@ -774,8 +780,11 @@ QString Planet::getInfoStringSize(const StelCore *core, const InfoStringGroup& f
 
 QString Planet::getInfoStringExtraMag(const StelCore *core, const InfoStringGroup& flags) const
 {
-	Q_UNUSED(core) Q_UNUSED(flags)
-	return "";
+	Q_UNUSED(core)
+	if (flags&Extra && b_v<99.f)
+		return QString("%1: <b>%2</b><br/>").arg(q_("Color Index (B-V)"), QString::number(b_v, 'f', 2));
+	else
+		return "";
 }
 
 QString Planet::getInfoStringEloPhase(const StelCore *core, const InfoStringGroup& flags, const bool withIllum) const
@@ -3336,7 +3345,7 @@ bool Planet::initFBO()
 		GL(gl->glActiveTexture(GL_TEXTURE1));
 		GL(gl->glBindTexture(GL_TEXTURE_2D, shadowTex));
 
-#ifndef QT_OPENGL_ES_2
+#if !QT_CONFIG(opengles2)
 		if(!isGLESv2)
 		{
 			GL(gl->glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_BASE_LEVEL, 0));
@@ -3367,7 +3376,7 @@ bool Planet::initFBO()
 		//see GL_EXT_framebuffer_object and GL_ARB_framebuffer_object
 		//on ES 2, this seems to be allowed (there are no glDrawBuffers/glReadBuffer functions there), see GLES spec section 4.4.4
 		//probably same on ES 3: though it has glDrawBuffers/glReadBuffer but no mention of it in section 4.4.4 and no FRAMEBUFFER_INCOMPLETE_DRAW_BUFFER is defined
-#ifndef QT_OPENGL_ES_2
+#if !QT_CONFIG(opengles2)
 		if(!ctx->isOpenGLES())
 		{
 #if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
@@ -3745,23 +3754,23 @@ void sRing(Ring3DModel* model, const float rMin, const float rMax, unsigned shor
 	float r = rMin;
 	for (unsigned short int i=0; i<=stacks; ++i)
 	{
-		const float tex_r0 = (r-rMin)/(rMax-rMin);
 		unsigned short int j;
 		for (j=0,cos_sin_theta_p=cos_sin_theta; j<=slices; ++j,cos_sin_theta_p+=2)
 		{
 			x = r*cos_sin_theta_p[0];
 			y = r*cos_sin_theta_p[1];
-			model->texCoordArr << tex_r0 << 0.5f;
+			model->texCoordArr << x << y;
 			model->vertexArr << x << y << 0.f;
 		}
 		r+=dr;
 	}
+	const unsigned stride = slices+1;
 	for (unsigned short int i=0; i<stacks; ++i)
 	{
 		for (unsigned short int j=0; j<slices; ++j)
 		{
-			model->indiceArr << i*slices+j << (i+1)*slices+j << i*slices+j+1u;
-			model->indiceArr << i*slices+j+1u << (i+1u)*slices+j << (i+1u)*slices+j+1u;
+			model->indiceArr << i*stride+j   << (i+1)*stride+j <<  i*stride+j+1;
+			model->indiceArr << i*stride+j+1 << (i+1)*stride+j << (i+1)*stride+j+1;
 		}
 	}
 }
@@ -4115,6 +4124,8 @@ void Planet::drawSphere(StelPainter* painter, float screenRd, bool drawOnlyRing)
 		GL(ringPlanetShaderProgram->setUniformValue(ringPlanetShaderVars.isRing, true));
 		GL(ringPlanetShaderProgram->setUniformValue(ringPlanetShaderVars.tex, 2));
 		GL(ringPlanetShaderProgram->setUniformValue(ringPlanetShaderVars.ringS, 1));
+		GL(ringPlanetShaderProgram->setUniformValue(ringPlanetShaderVars.outerRadius, rings->radiusMax));
+		GL(ringPlanetShaderProgram->setUniformValue(ringPlanetShaderVars.innerRadius, rings->radiusMin));
 		
 		QMatrix4x4 shadowCandidatesData;
 		const Vec4d position = rData.mTarget * rData.modelMatrix.getColumn(3);
@@ -4701,7 +4712,9 @@ void Planet::drawHints(const StelCore* core, const QFont& planetNameFont)
 Ring::Ring(float radiusMin, float radiusMax, const QString &texname)
 	:radiusMin(radiusMin),radiusMax(radiusMax)
 {
-	tex = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/"+texname);
+	auto& texMan = StelApp::getInstance().getTextureManager();
+	tex = texMan.createTexture(StelFileMgr::getInstallationDir()+"/textures/"+texname,
+							   StelTexture::StelTextureParams(true, GL_LINEAR, GL_CLAMP_TO_EDGE, true));
 }
 
 Vec3f Planet::getCurrentOrbitColor() const

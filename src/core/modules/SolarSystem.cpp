@@ -725,6 +725,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		//totalPlanets++;
 		const QString secname = orderedSections.at(i);
 		const QString englishName = pd.value(secname+"/name").toString().simplified();
+		const double bV = pd.value(secname+"/color_index_bv", 99.).toDouble();
 		const QString strParent = pd.value(secname+"/parent", "Sun").toString(); // Obvious default, keep file entries simple.
 		PlanetP parent;
 		if (strParent!="none")
@@ -976,7 +977,6 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			minorBodies << englishName;
 
 			Vec3f color = Vec3f(1.f, 1.f, 1.f);
-			const double bV = pd.value(secname+"/color_index_bv", 99.).toDouble();
 			if (bV<99.)
 				color = skyDrawer->indexToColor(BvToColorIndex(bV))*0.75f; // see ZoneArray.cpp:L490
 			else
@@ -1092,6 +1092,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			{
 				newP->setIAUMoonNumber(moonDesignation);
 			}
+			newP->setColorIndexBV(static_cast<float>(bV));
 		}
 
 		if (!parent.isNull())
@@ -1414,12 +1415,15 @@ void SolarSystem::drawEphemerisMarkers(const StelCore *core)
 	QString info = "";
 	Vec3d win;
 	Vec3f markerColor;
+	bool skipFlag = false;
 
 	if (getFlagEphemerisLine() && getFlagEphemerisScaleMarkers())
 		baseSize = 3.f; // The line lies through center of marker
 
 	for (int i =0; i < fsize; i++)
 	{
+		skipFlag = (((i + 1)%dataStep)!=1 && dataStep!=1);
+
 		// Check visibility of pointer
 		if (!(sPainter.getProjector()->projectCheck(AstroCalcDialog::EphemerisList[i].coord, win)))
 			continue;
@@ -1437,18 +1441,17 @@ void SolarSystem::drawEphemerisMarkers(const StelCore *core)
 			size = baseSize;
 		}
 		if (isComet) size += 16.f;
-		size += sizeCoeff; //
+		size += sizeCoeff;
 		sPainter.setColor(markerColor);
 		sPainter.setBlending(true, GL_ONE, GL_ONE);
 		if (isComet)
 			texEphemerisCometMarker->bind();
 		else
 			texEphemerisMarker->bind();
-		if (skipMarkers)
-		{
-			if ((showDates || showMagnitudes) && showSkippedData && ((i + 1)%dataStep)!=1 && dataStep!=1)
-				continue;
-		}
+
+		if (skipMarkers && skipFlag)
+			continue;
+
 		Vec3f win;
 		float solarAngle=0.f; // Angle to possibly rotate the texture. Degrees.
 		if (prj->project(AstroCalcDialog::EphemerisList[i].coord, win))
@@ -1470,7 +1473,7 @@ void SolarSystem::drawEphemerisMarkers(const StelCore *core)
 
 		if (showDates || showMagnitudes)
 		{
-			if (showSkippedData && ((i + 1)%dataStep)!=1 && dataStep!=1)
+			if (showSkippedData && skipFlag)
 				continue;
 
 			shift = 3.f + size/1.6f;
@@ -1582,10 +1585,12 @@ void SolarSystem::fillEphemerisDates()
 					info.clear();
 
 				StelUtils::getTimeFromJulianDay(JD+shift, &h, &m, &s);
+				QString hours = QString::number(h).rightJustified(2, '0');
+				QString minutes = QString::number(m).rightJustified(2, '0');
 				if (!info.isEmpty())
-					info.append(QString(" %1:%2").arg(h).arg(m));
+					info.append(QString(" %1:%2").arg(hours, minutes));
 				else
-					info = QString("%1:%2").arg(h).arg(m);
+					info = QString("%1:%2").arg(hours, minutes);
 			}
 
 			AstroCalcDialog::EphemerisList[i].objDateStr = info;

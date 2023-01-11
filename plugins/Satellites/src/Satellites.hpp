@@ -222,16 +222,16 @@ public:
 	};
 
 	Satellites();
-	virtual ~Satellites() Q_DECL_OVERRIDE;
+	~Satellites() override;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
-	virtual void init() Q_DECL_OVERRIDE;
-	virtual void deinit() Q_DECL_OVERRIDE;
-	virtual void update(double deltaTime) Q_DECL_OVERRIDE;
-	virtual void draw(StelCore* core) Q_DECL_OVERRIDE;
-	virtual void drawPointer(StelCore* core, StelPainter& painter);
-	virtual double getCallOrder(StelModuleActionName actionName) const Q_DECL_OVERRIDE;
+	void init() override;
+	void deinit() override;
+	void update(double deltaTime) override;
+	void draw(StelCore* core) override;
+	void drawPointer(StelCore* core, StelPainter& painter);
+	double getCallOrder(StelModuleActionName actionName) const override;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in StelObjectModule class
@@ -240,19 +240,19 @@ public:
 	//! @param limitFov the field of view around the position v in which to search for satellites.
 	//! @param core the StelCore to use for computations.
 	//! @return a list containing the satellites located inside the limitFov circle around position v.
-	virtual QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const Q_DECL_OVERRIDE;
+	QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const override;
 
-	//! Return the matching satellite object's pointer if exists or Q_NULLPTR.
+	//! Return the matching satellite object's pointer if exists or nullptr.
 	//! @param nameI18n The case in-sensitive satellite name
-	virtual StelObjectP searchByNameI18n(const QString& nameI18n) const Q_DECL_OVERRIDE;
+	StelObjectP searchByNameI18n(const QString& nameI18n) const override;
 
-	//! Return the matching satellite if exists or Q_NULLPTR.
+	//! Return the matching satellite if exists or nullptr.
 	//! @param name The case in-sensitive standard program name
-	virtual StelObjectP searchByName(const QString& name) const Q_DECL_OVERRIDE;
+	StelObjectP searchByName(const QString& name) const override;
 
-	//! Return the matching satellite if exists or Q_NULLPTR.
+	//! Return the matching satellite if exists or nullptr.
 	//! @param id The satellite id (NORAD)
-	virtual StelObjectP searchByID(const QString &id) const Q_DECL_OVERRIDE;
+	StelObjectP searchByID(const QString &id) const override;
 	
 	//! Return the satellite with the given catalog number.
 	//! Used as a helper function by searchByName() and
@@ -273,16 +273,16 @@ public:
 	//! @param maxNbItem the maximum number of returned object names
 	//! @param useStartOfWords the autofill mode for returned objects names
 	//! @return a list of matching object name by order of relevance, or an empty list if nothing match
-	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const Q_DECL_OVERRIDE;
+	QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const override;
 
-	virtual QStringList listAllObjects(bool inEnglish) const Q_DECL_OVERRIDE;
+	QStringList listAllObjects(bool inEnglish) const override;
 
-	virtual QString getName() const Q_DECL_OVERRIDE { return "Satellites"; }
-	virtual QString getStelObjectType() const Q_DECL_OVERRIDE { return Satellite::SATELLITE_TYPE; }
+	QString getName() const override { return "Satellites"; }
+	QString getStelObjectType() const override { return Satellite::SATELLITE_TYPE; }
 
 	//! Implement this to tell the main Stellarium GUI that there is a GUI element to configure this
 	//! plugin. 
-	virtual bool configureGui(bool show=true) Q_DECL_OVERRIDE;
+	bool configureGui(bool show=true) override;
 
 	//! Set up the plugin with default values.  This means clearing out the Satellites section in the
 	//! main config.ini (if one already exists), and populating it with default values.  It also 
@@ -624,7 +624,7 @@ public slots:
 
 	//! Get the fixed distance for center of visualized Earth's umbra
 	//! @return distance, km
-	double getUmbraDistance() { return umbraDistance; }
+	double getUmbraDistance() { return fixedUmbraDistance; }
 	//! Set the fixed distance for center of visualized Earth's umbra
 	void setUmbraDistance(double d);
 
@@ -919,7 +919,7 @@ private:
 	bool flagUmbraAtFixedDistance;
 	Vec3f umbraColor;
 	//! The distance for center of visualized Earth's umbra in kilometers
-	double umbraDistance;
+	double fixedUmbraDistance;
 	//! Flag enabling visualization the Earth's penumbra.
 	bool flagPenumbraVisible;
 	Vec3f penumbraColor;
@@ -974,9 +974,9 @@ class SatellitesStelPluginInterface : public QObject, public StelPluginInterface
 	Q_PLUGIN_METADATA(IID StelPluginInterface_iid)
 	Q_INTERFACES(StelPluginInterface)
 public:
-	virtual StelModule* getStelModule() const Q_DECL_OVERRIDE;
-	virtual StelPluginInfo getPluginInfo() const Q_DECL_OVERRIDE;
-	virtual QObjectList getExtensionList() const Q_DECL_OVERRIDE { return QObjectList(); }
+	StelModule* getStelModule() const override;
+	StelPluginInfo getPluginInfo() const override;
+	QObjectList getExtensionList() const override { return QObjectList(); }
 };
 
 #endif /* SATELLITES_HPP */

@@ -41,9 +41,9 @@ SatellitesImportDialog::SatellitesImportDialog()
 	: StelDialog("SatellitesImport")
 	, isGettingData(false)
 	, numberDownloadsComplete(0)
-	, downloadMgr(Q_NULLPTR)
-	, progressBar(Q_NULLPTR)
-	, filterProxyModel(Q_NULLPTR)
+	, downloadMgr(nullptr)
+	, progressBar(nullptr)
+	, filterProxyModel(nullptr)
 {
 	ui = new Ui_satellitesImportDialog;
 	newSatellitesModel = new QStandardItemModel(this);
@@ -57,14 +57,14 @@ SatellitesImportDialog::~SatellitesImportDialog()
 	if (progressBar)
 	{
 		StelApp::getInstance().removeProgressBar(progressBar);
-		progressBar = Q_NULLPTR;
+		progressBar = nullptr;
 	}
 	
 	if (newSatellitesModel)
 	{
 		newSatellitesModel->clear();
 		delete newSatellitesModel;
-		newSatellitesModel = Q_NULLPTR;
+		newSatellitesModel = nullptr;
 	}
 }
 
@@ -172,7 +172,7 @@ void SatellitesImportDialog::getData()
 		// XXX: we should check that there is at least one home location.
 		QString homeDirPath = QStandardPaths::standardLocations(QStandardPaths::HomeLocation).constFirst();
 		sourceFilePaths = QFileDialog::getOpenFileNames(
-				      Q_NULLPTR,
+				      nullptr,
 		                      q_("Select TLE source file(s)..."),
 		                      homeDirPath, "*.*");
 		if (sourceFilePaths.isEmpty())
@@ -237,7 +237,7 @@ void SatellitesImportDialog::receiveDownload(QNetworkReply* networkReply)
 		if (progressBar)
 		{
 			StelApp::getInstance().removeProgressBar(progressBar);
-			progressBar = Q_NULLPTR;
+			progressBar = nullptr;
 		}
 		
 		if (sourceFiles.isEmpty())
@@ -327,7 +327,7 @@ void SatellitesImportDialog::reset()
 	if (progressBar)
 	{
 		StelApp::getInstance().removeProgressBar(progressBar);
-		progressBar = Q_NULLPTR;
+		progressBar = nullptr;
 	}
 }
 

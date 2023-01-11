@@ -42,11 +42,11 @@ public:
 	};
 
 	SatellitesCommDialog();
-	~SatellitesCommDialog() Q_DECL_OVERRIDE;
+	~SatellitesCommDialog() override;
 	
 public slots:
-	void retranslate() Q_DECL_OVERRIDE;
-	void setVisible(bool visible = true) Q_DECL_OVERRIDE;
+	void retranslate() override;
+	void setVisible(bool visible = true) override;
 
 private slots:
 	void updateSatID(QString satID);
@@ -57,7 +57,7 @@ private slots:
 
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots.
-	virtual void createDialogContent() Q_DECL_OVERRIDE;
+	void createDialogContent() override;
 	Ui_satellitesCommDialog* ui;
 
 private:
@@ -89,7 +89,7 @@ public:
 	}
 
 private:
-	bool operator < (const QTreeWidgetItem &other) const Q_DECL_OVERRIDE
+	bool operator < (const QTreeWidgetItem &other) const override
 	{
 		int column = treeWidget()->sortColumn();
 		if (column == SatellitesCommDialog::CommsDescription)

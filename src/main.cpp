@@ -189,6 +189,7 @@ int main(int argc, char **argv)
 	// This must be run before QGuiApplication, otherwise it'll have no effect.
 	CLIProcessor::parseCLIArgsPreQApp(argList);
 
+	QCoreApplication::setAttribute(Qt::AA_CompressHighFrequencyEvents);
 #ifndef USE_QUICKVIEW
 	QApplication::setStyle(QStyleFactory::create("Fusion"));
 	// The QApplication MUST be created before the StelFileMgr is initialized.

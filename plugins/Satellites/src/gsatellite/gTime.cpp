@@ -78,13 +78,6 @@ gTime gTime::getCurrentTime()
 	return gTime(timeinfo);
 }
 
-
-
-gTime::gTime(int year, double day)
-{
-	setTime(year, day);
-}
-
 gTime::gTime(double ai_jDays)
 {
 	m_time= ai_jDays;
@@ -93,9 +86,9 @@ gTime::gTime(double ai_jDays)
 gTime::gTime(int nYear, int nMonth, int nDay, int nHour, int nMin, double nSec)
 {
 	// Calculate N, the day of the year (1..366)
-	int N;
 	int F1 = static_cast<int>((275.0 * nMonth) / 9.0);
 	int F2 = static_cast<int>((nMonth + 9.0) / 12.0);
+	int N;
 
 	if(isLeapYear(nYear))
 	{
@@ -201,31 +194,25 @@ void gTime::toCalendarDate(int *pYear, int *pMonth , double *pDom) const
 	assert(pMonth != nullptr);
 	assert(pDom != nullptr);
 
-	double jdAdj, F, alpha, A, B, DOM;
-	int Z, C, D, E, month, year;
+	double jdAdj = m_time + 0.5;
+	int Z        = static_cast<int>(jdAdj);  // integer part
+	double F     = jdAdj - Z;   // fractional part
+	double A=Z;
 
-	jdAdj = m_time + 0.5;
-	Z     = static_cast<int>(jdAdj);  // integer part
-	F     = jdAdj - Z;   // fractional part
-
-	if(Z < 2299161)
+	if(Z >= 2299161)
 	{
-		A = Z;
-	}
-	else
-	{
-		alpha = static_cast<int>((Z - 1867216.25) / 36524.25);
-		A     = Z + 1 + alpha - static_cast<int>(alpha / 4.0);
+		double alpha = static_cast<int>((Z - 1867216.25) / 36524.25);
+		A += 1 + alpha - static_cast<int>(alpha / 4.0);
 	}
 
-	B     = A + 1524.0;
-	C     = static_cast<int>((B - 122.1) / 365.25);
-	D     = static_cast<int>(C * 365.25);
-	E     = static_cast<int>((B - D) / 30.6001);
+	double B  = A + 1524.0;
+	int C     = static_cast<int>((B - 122.1) / 365.25);
+	int D     = static_cast<int>(C * 365.25);
+	int E     = static_cast<int>((B - D) / 30.6001);
 
-	DOM   = B - D - static_cast<int>(E * 30.6001) + F;
-	month = (E < 13.5) ? (E - 1) : (E - 13);
-	year  = (month > 2.5) ? (C - 4716) : (C - 4715);
+	double DOM = B - D - static_cast<int>(E * 30.6001) + F;
+	int month  = (E < 13.5) ? (E - 1) : (E - 13);
+	int year   = (month > 2.5) ? (C - 4716) : (C - 4715);
 
 	*pYear = year;
 	*pMonth = month;
@@ -237,9 +224,7 @@ double gTime::toJCenturies() const
 	double jd;
 	double UT = fmod((m_time + 0.5), 1.0);
 	jd = m_time - UT;
-	double TU = (jd- JDAY_JAN1_12H_2000) / 36525.0;
-
-	return TU;
+	return (jd- JDAY_JAN1_12H_2000) / 36525.0;
 }
 
 // @method  toThetaGMST();
@@ -305,48 +290,30 @@ const gTime& gTime::operator-=(gTimeSpan ai_timeSpan)
 
 bool gTime::operator==(gTime ai_time) const
 {
-	if(m_time == ai_time.m_time)
-		return true;
-
-	return false;
+	return (m_time == ai_time.m_time);
 }
 
 bool gTime::operator!=(gTime ai_time) const
 {
-	if(m_time != ai_time.m_time)
-		return true;
-
-	return false;
+	return (m_time != ai_time.m_time);
 }
 
 bool gTime::operator<(gTime ai_time) const
 {
-	if(m_time < ai_time.m_time)
-		return true;
-
-	return false;
+	return (m_time < ai_time.m_time);
 }
 
 bool gTime::operator>(gTime ai_time) const
 {
-	if(m_time > ai_time.m_time)
-		return true;
-
-	return false;
+	return (m_time > ai_time.m_time);
 }
 
 bool gTime::operator<=(gTime ai_time) const
 {
-	if(m_time <= ai_time.m_time)
-		return true;
-
-	return false;
+	return (m_time <= ai_time.m_time);
 }
 
 bool gTime::operator>=(gTime ai_time) const
 {
-	if(m_time >= ai_time.m_time)
-		return true;
-
-	return false;
+	return (m_time >= ai_time.m_time);
 }

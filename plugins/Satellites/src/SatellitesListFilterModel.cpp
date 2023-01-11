@@ -27,12 +27,14 @@ SatellitesListFilterModel::SatellitesListFilterModel(QObject *parent) :
 void SatellitesListFilterModel::setFilterFlag(const SatFlag& flag)
 {
 	filterFlag = flag;
+	emit filterFlagChanged(filterFlag);
 	invalidateFilter();
 }
 
 void SatellitesListFilterModel::setFilterGroup(const QString& groupId)
 {
 	filterGroup = groupId;
+	emit filterGroupChanged(filterGroup);
 	invalidateFilter();
 }
 

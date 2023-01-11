@@ -68,6 +68,7 @@ Vec3f calcRGBMaxValue(DitheringMode mode)
 QString makeDitheringShader()
 {
 	return 1+R"(
+#line 1 101
 uniform mediump vec3 rgbMaxValue;
 uniform sampler2D ditherPattern;
 mediump vec3 dither(mediump vec3 c)
@@ -97,5 +98,6 @@ mediump vec3 dither(mediump vec3 c)
 	return c+noise/rgbMaxValue;
 }
 mediump vec4 dither(mediump vec4 c) { return vec4(dither(c.xyz),c.w); }
+#line 1 0
 )";
 }
