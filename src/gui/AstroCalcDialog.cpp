@@ -305,7 +305,8 @@ void AstroCalcDialog::createDialogContent()
 
 	ui->hecSelectedMinorPlanetsCheckBox->setChecked(conf->value("astrocalc/flag_hec_minor_planets", false).toBool());
 	connect(ui->hecSelectedMinorPlanetsCheckBox, SIGNAL(toggled(bool)), this, SLOT(saveHECFlagMinorPlanets(bool)));
-	bool brightCometsState = conf->value("astrocalc/flag_hec_bright_comets", false).toBool();
+
+	const bool brightCometsState = conf->value("astrocalc/flag_hec_bright_comets", false).toBool();
 	ui->hecBrightCometsCheckBox->setChecked(brightCometsState);
 	connect(ui->hecBrightCometsCheckBox, SIGNAL(toggled(bool)), this, SLOT(saveHECFlagBrightComets(bool)));
 	ui->hecMagnitudeLimitSpinBox->setValue(conf->value("astrocalc/hec_magnitude_limit", 9.0).toDouble());
