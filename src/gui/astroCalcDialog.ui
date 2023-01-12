@@ -550,6 +550,52 @@
                   </property>
                  </widget>
                 </item>
+                <item>
+                 <layout class="QHBoxLayout" name="horizontalLayout_18">
+                  <item>
+                   <widget class="QCheckBox" name="hecBrightCometsCheckBox">
+                    <property name="toolTip">
+                     <string>Show comets brighter than magnitude</string>
+                    </property>
+                    <property name="text">
+                     <string>Include bright comets up to mag.:</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QDoubleSpinBox" name="hecMagnitudeLimitSpinBox">
+                    <property name="maximumSize">
+                     <size>
+                      <width>70</width>
+                      <height>16777215</height>
+                     </size>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                    </property>
+                    <property name="maximum">
+                     <double>15.000000000000000</double>
+                    </property>
+                    <property name="value">
+                     <double>9.000000000000000</double>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <spacer name="horizontalSpacer_17">
+                    <property name="orientation">
+                     <enum>Qt::Horizontal</enum>
+                    </property>
+                    <property name="sizeHint" stdset="0">
+                     <size>
+                      <width>40</width>
+                      <height>20</height>
+                     </size>
+                    </property>
+                   </spacer>
+                  </item>
+                 </layout>
+                </item>
                </layout>
               </item>
               <item row="1" column="1">
@@ -2599,11 +2645,11 @@
                 </item>
                 <item>
                  <widget class="QPushButton" name="solareclipsesKMLSaveButton">
-                  <property name="text">
-                   <string>Export KML...</string>
-                  </property>
                   <property name="toolTip">
                    <string>Export KML for visibility map of selected eclipse</string>
+                  </property>
+                  <property name="text">
+                   <string>Export KML...</string>
                   </property>
                  </widget>
                 </item>

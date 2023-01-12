@@ -291,6 +291,8 @@ private slots:
 	void selectCurrentHECPosition(const QModelIndex &modelIndex);
 	void markCurrentHECPosition(const QModelIndex &modelIndex);
 	void saveHECFlagMinorPlanets(bool b);
+	void saveHECFlagBrightComets(bool b);
+	void saveHECBrightCometMagnitudeLimit(double mag);
 
 	void saveCelestialPositionsMagnitudeLimit(double mag);
 	void saveCelestialPositionsHorizontalCoordinatesFlag(bool b);

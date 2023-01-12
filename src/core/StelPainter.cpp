@@ -114,7 +114,7 @@ bool StelPainter::linkProg(QOpenGLShaderProgram* prog, const QString& name)
 	bool ret = prog->link();
 	QString log = prog->log();
 	if (!ret || (!log.isEmpty() && !log.contains("Link was successful") && !(log=="No errors."))) //"No errors." returned on some Intel drivers
-		qWarning() << QString("StelPainter: Warnings while linking %1 shader program:\n%2").arg(name, prog->log());
+		qWarning().noquote() << QString("StelPainter: Warnings while linking %1 shader program:\n%2").arg(name, prog->log());
 	return ret;
 }
 
@@ -2052,7 +2052,8 @@ void StelPainter::initGLShaders()
 		"    gl_Position = projectionMatrix*vec4(vertex, 1.);\n"
 		"}\n";
 	vshader3.compileSourceCode(vsrc3);
-	if (!vshader3.log().isEmpty()) { qWarning() << "StelPainter: Warnings while compiling vshader3: " << vshader3.log(); }
+	if (!vshader3.log().isEmpty())
+		qWarning().noquote() << "StelPainter: Warnings while compiling vshader3: " << vshader3.log();
 	QOpenGLShader fshader3(QOpenGLShader::Fragment);
 	const auto fsrc3 =
 		StelOpenGL::globalShaderPrefix(StelOpenGL::FRAGMENT_SHADER) +
@@ -2062,7 +2063,8 @@ void StelPainter::initGLShaders()
 		"    FRAG_COLOR = color;\n"
 		"}\n";
 	fshader3.compileSourceCode(fsrc3);
-	if (!fshader3.log().isEmpty()) { qWarning() << "StelPainter: Warnings while compiling fshader3: " << fshader3.log(); }
+	if (!fshader3.log().isEmpty())
+		qWarning().noquote() << "StelPainter: Warnings while compiling fshader3: " << fshader3.log();
 	basicShaderProgram = new QOpenGLShaderProgram(QOpenGLContext::currentContext());
 	basicShaderProgram->addShader(&vshader3);
 	basicShaderProgram->addShader(&fshader3);
@@ -2087,7 +2089,7 @@ void StelPainter::initGLShaders()
 		"}\n";
 	vshaderInterpolatedColor.compileSourceCode(vshaderInterpolatedColorSrc);
 	if (!vshaderInterpolatedColor.log().isEmpty()) {
-	  qWarning() << "StelPainter: Warnings while compiling vshaderInterpolatedColor: " << vshaderInterpolatedColor.log();
+	  qWarning().noquote() << "StelPainter: Warnings while compiling vshaderInterpolatedColor: " << vshaderInterpolatedColor.log();
 	}
 	QOpenGLShader fshaderInterpolatedColor(QOpenGLShader::Fragment);
 	const auto fshaderInterpolatedColorSrc =
@@ -2099,7 +2101,7 @@ void StelPainter::initGLShaders()
 		"}\n";
 	fshaderInterpolatedColor.compileSourceCode(fshaderInterpolatedColorSrc);
 	if (!fshaderInterpolatedColor.log().isEmpty()) {
-	  qWarning() << "StelPainter: Warnings while compiling fshaderInterpolatedColor: " << fshaderInterpolatedColor.log();
+	  qWarning().noquote() << "StelPainter: Warnings while compiling fshaderInterpolatedColor: " << fshaderInterpolatedColor.log();
 	}
 	colorShaderProgram = new QOpenGLShaderProgram(QOpenGLContext::currentContext());
 	colorShaderProgram->addShader(&vshaderInterpolatedColor);
@@ -2123,7 +2125,8 @@ void StelPainter::initGLShaders()
 		"    texc = texCoord;\n"
 		"}\n";
 	vshader2.compileSourceCode(vsrc2);
-	if (!vshader2.log().isEmpty()) { qWarning() << "StelPainter: Warnings while compiling vshader2: " << vshader2.log(); }
+	if (!vshader2.log().isEmpty())
+		qWarning().noquote() << "StelPainter: Warnings while compiling vshader2: " << vshader2.log();
 
 	QOpenGLShader fshader2(QOpenGLShader::Fragment);
 	const auto fsrc2 =
@@ -2137,7 +2140,8 @@ void StelPainter::initGLShaders()
 		"    FRAG_COLOR = dither(texture2D(tex, texc)*texColor);\n"
 		"}\n";
 	fshader2.compileSourceCode(fsrc2);
-	if (!fshader2.log().isEmpty()) { qWarning() << "StelPainter: Warnings while compiling fshader2: " << fshader2.log(); }
+	if (!fshader2.log().isEmpty())
+		qWarning().noquote() << "StelPainter: Warnings while compiling fshader2: " << fshader2.log();
 
 	texturesShaderProgram = new QOpenGLShaderProgram(QOpenGLContext::currentContext());
 	texturesShaderProgram->addShader(&vshader2);
@@ -2168,7 +2172,8 @@ void StelPainter::initGLShaders()
 		"    outColor = color;\n"
 		"}\n";
 	vshader4.compileSourceCode(vsrc4);
-	if (!vshader4.log().isEmpty()) { qWarning() << "StelPainter: Warnings while compiling vshader4: " << vshader4.log(); }
+	if (!vshader4.log().isEmpty())
+		qWarning().noquote() << "StelPainter: Warnings while compiling vshader4: " << vshader4.log();
 
 	QOpenGLShader fshader4(QOpenGLShader::Fragment);
 	const auto fsrc4 =
@@ -2186,7 +2191,8 @@ void StelPainter::initGLShaders()
 		"        FRAG_COLOR.rgb = saturate(FRAG_COLOR.rgb, saturation);\n"
 		"}\n";
 	fshader4.compileSourceCode(fsrc4);
-	if (!fshader4.log().isEmpty()) { qWarning() << "StelPainter: Warnings while compiling fshader4: " << fshader4.log(); }
+	if (!fshader4.log().isEmpty())
+		qWarning().noquote() << "StelPainter: Warnings while compiling fshader4: " << fshader4.log();
 
 	texturesColorShaderProgram = new QOpenGLShaderProgram(QOpenGLContext::currentContext());
 	texturesColorShaderProgram->addShader(&vshader4);
@@ -2271,12 +2277,12 @@ void main()
 }
 )");
 		if (!wideLineVertShader.log().isEmpty())
-			qWarning() << "StelPainter: Warnings while compiling wide line vertex shader: " << wideLineVertShader.log();
+			qWarning().noquote() << "StelPainter: Warnings while compiling wide line vertex shader: " << wideLineVertShader.log();
 
 		QOpenGLShader wideLineGeomShader(QOpenGLShader::Geometry);
 		wideLineGeomShader.compileSourceCode(QByteArray(geomSrc).replace("@VARYING_COLOR@","0"));
 		if (!wideLineGeomShader.log().isEmpty())
-			qWarning() << "StelPainter: Warnings while compiling wide line geometry shader: " << wideLineGeomShader.log();
+			qWarning().noquote() << "StelPainter: Warnings while compiling wide line geometry shader: " << wideLineGeomShader.log();
 
 		QOpenGLShader wideLineFragShader(QOpenGLShader::Fragment);
 		wideLineFragShader.compileSourceCode(1+R"(
@@ -2289,7 +2295,7 @@ void main()
 }
 )");
 		if (!wideLineFragShader.log().isEmpty())
-			qWarning() << "StelPainter: Warnings while compiling wide line fragment shader: " << wideLineFragShader.log();
+			qWarning().noquote() << "StelPainter: Warnings while compiling wide line fragment shader: " << wideLineFragShader.log();
 		wideLineShaderProgram = new QOpenGLShaderProgram(QOpenGLContext::currentContext());
 		wideLineShaderProgram->addShader(&wideLineVertShader);
 		wideLineShaderProgram->addShader(&wideLineGeomShader);
@@ -2316,12 +2322,12 @@ void main()
 }
 )");
 		if (!colorfulWideLineVertShader.log().isEmpty())
-			qWarning() << "StelPainter: Warnings while compiling colorful wide line vertex shader: " << colorfulWideLineVertShader.log();
+			qWarning().noquote() << "StelPainter: Warnings while compiling colorful wide line vertex shader: " << colorfulWideLineVertShader.log();
 
 		QOpenGLShader colorfulWideLineGeomShader(QOpenGLShader::Geometry);
 		colorfulWideLineGeomShader.compileSourceCode(QByteArray(geomSrc).replace("@VARYING_COLOR@","1"));
 		if (!colorfulWideLineGeomShader.log().isEmpty())
-			qWarning() << "StelPainter: Warnings while compiling colorful wide line geometry shader: " << colorfulWideLineGeomShader.log();
+			qWarning().noquote() << "StelPainter: Warnings while compiling colorful wide line geometry shader: " << colorfulWideLineGeomShader.log();
 
 		QOpenGLShader colorfulWideLineFragShader(QOpenGLShader::Fragment);
 		colorfulWideLineFragShader.compileSourceCode(1+R"(
@@ -2334,7 +2340,7 @@ void main()
 }
 )");
 		if (!colorfulWideLineFragShader.log().isEmpty())
-			qWarning() << "StelPainter: Warnings while compiling colorful wide line fragment shader: " << colorfulWideLineFragShader.log();
+			qWarning().noquote() << "StelPainter: Warnings while compiling colorful wide line fragment shader: " << colorfulWideLineFragShader.log();
 		colorfulWideLineShaderProgram = new QOpenGLShaderProgram(QOpenGLContext::currentContext());
 		colorfulWideLineShaderProgram->addShader(&colorfulWideLineVertShader);
 		colorfulWideLineShaderProgram->addShader(&colorfulWideLineGeomShader);
