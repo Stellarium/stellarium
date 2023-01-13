@@ -121,9 +121,7 @@ StelTexture::GLData StelTexture::imageToGLData(const QImage &image)
 	GLData ret = GLData();
 	if (image.isNull())
 		return ret;
-	ret.width = image.width();
-	ret.height = image.height();
-	ret.data = convertToGLFormat(image, ret.format, ret.type);
+	ret.data = convertToGLFormat(image, ret.format, ret.type, ret.width, ret.height);
 	return ret;
 }
 
@@ -281,12 +279,22 @@ bool StelTexture::getDimensions(int &awidth, int &aheight)
 	return true;
 }
 
-QByteArray StelTexture::convertToGLFormat(const QImage& image, GLint& format, GLint& type)
+QByteArray StelTexture::convertToGLFormat(QImage image, GLint& format, GLint& type, int& width, int& height)
 {
 	QByteArray ret;
-	const int width = image.width();
-	const int height = image.height();
-	if (StelMainView::getInstance().getGLInformation().supportsLuminanceTextures && image.isGrayscale())
+	const auto glInfo = StelMainView::getInstance().getGLInformation();
+	width = std::min(image.width(), glInfo.maxTextureSize);
+	height = std::min(image.height(), glInfo.maxTextureSize);
+	if(width != image.width() || height != image.height())
+	{
+		qWarning().nospace() << "Got a texture with too large dimensions: "
+							 << image.width() << "x" << image.height()
+							 << ", while maximum size is " << glInfo.maxTextureSize
+							 << ". Shrinking to fit in the limit.";
+		image = image.scaled(width, height, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+	}
+
+	if (glInfo.supportsLuminanceTextures && image.isGrayscale())
 	{
 		format = image.hasAlphaChannel() ? GL_LUMINANCE_ALPHA : GL_LUMINANCE;
 	}

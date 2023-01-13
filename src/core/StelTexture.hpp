@@ -141,7 +141,7 @@ private:
 	void wrapGLTexture(GLuint texId);
 
 	//! Convert a QImage into opengl compatible format.
-	static QByteArray convertToGLFormat(const QImage& image, GLint& format, GLint& type);
+	static QByteArray convertToGLFormat(QImage image, GLint& format, GLint& type, int& width, int& height);
 
 	//! This method should be called if the texture loading failed for any reasons
 	//! @param errorMessage the human friendly error message
