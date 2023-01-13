@@ -123,7 +123,7 @@ StelTexture::GLData StelTexture::imageToGLData(const QImage &image)
 		return ret;
 	ret.width = image.width();
 	ret.height = image.height();
-	ret.data = convertToGLFormat(image, &ret.format, &ret.type);
+	ret.data = convertToGLFormat(image, ret.format, ret.type);
 	return ret;
 }
 
@@ -281,25 +281,25 @@ bool StelTexture::getDimensions(int &awidth, int &aheight)
 	return true;
 }
 
-QByteArray StelTexture::convertToGLFormat(const QImage& image, GLint *format, GLint *type)
+QByteArray StelTexture::convertToGLFormat(const QImage& image, GLint& format, GLint& type)
 {
 	QByteArray ret;
 	const int width = image.width();
 	const int height = image.height();
 	if (StelMainView::getInstance().getGLInformation().supportsLuminanceTextures && image.isGrayscale())
 	{
-		*format = image.hasAlphaChannel() ? GL_LUMINANCE_ALPHA : GL_LUMINANCE;
+		format = image.hasAlphaChannel() ? GL_LUMINANCE_ALPHA : GL_LUMINANCE;
 	}
 	else if (image.hasAlphaChannel())
 	{
-		*format = GL_RGBA;
+		format = GL_RGBA;
 	}
 	else
-		*format = GL_RGB;
-	*type = GL_UNSIGNED_BYTE;
-	int bpp = *format == GL_LUMINANCE_ALPHA ? 2 :
-						  *format == GL_LUMINANCE ? 1 :
-									    *format == GL_RGBA ? 4 :
+		format = GL_RGB;
+	type = GL_UNSIGNED_BYTE;
+	int bpp = format == GL_LUMINANCE_ALPHA ? 2 :
+						  format == GL_LUMINANCE ? 1 :
+									    format == GL_RGBA ? 4 :
 												 3;
 
 	ret.reserve(width * height * bpp);
@@ -315,7 +315,7 @@ QByteArray StelTexture::convertToGLFormat(const QImage& image, GLint *format, GL
 		{
 			uint c = qToBigEndian(p[x]);
 			const char* ptr = reinterpret_cast<const char*>(&c);
-			switch (*format)
+			switch (format)
 			{
 				case GL_RGBA:
 					ret.append(ptr + 1, 3);
