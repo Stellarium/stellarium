@@ -9,7 +9,7 @@
 [LangOptions]
 LanguageName=한국어
 LanguageID=$0412
-LanguageCodePage=949
+LanguageCodePage=65001
 
 [CustomMessages]
 ForAllUsers=모든 사용자에게 추가
