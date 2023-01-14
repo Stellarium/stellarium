@@ -27,7 +27,7 @@ msgstr ""
 
 #: plugins/RemoteControl/webroot/js/api/actions.js:60
 msgid "Could not retrieve action list"
-msgstr "동작 목록을 불러오지 못했습니다."
+msgstr "동작 목록을 불러오지 못했습니다"
 
 #: plugins/RemoteControl/webroot/js/api/actions.js:88
 msgid "Action '%1' not accepted by server: "
@@ -35,7 +35,7 @@ msgstr "동작 '%1'은 서버에서 허용되지 않았습니다:"
 
 #: plugins/RemoteControl/webroot/js/api/actions.js:95
 msgid "Error sending action '%1' to server: "
-msgstr "동작 '%1' 을 서버에 전송하는 데 오류가 발생했습니다. "
+msgstr "동작 '%1' 을 서버에 전송하는 데 오류가 발생했습니다:"
 
 #: plugins/RemoteControl/webroot/js/api/location.js:33
 #: plugins/RemoteControl/webroot/js/api/location.js:61
@@ -45,32 +45,32 @@ msgstr "탐색 실행 에러 발생"
 
 #: plugins/RemoteControl/webroot/js/api/location.js:125
 msgid "Could not retrieve country list"
-msgstr "위치 목록을 불러오지 못했습니다."
+msgstr "위치 목록을 불러오지 못했습니다"
 
 #: plugins/RemoteControl/webroot/js/api/location.js:138
 msgid "Could not retrieve planet list"
-msgstr "행성 목록을 불러오지 못했습니다."
+msgstr "행성 목록을 불러오지 못했습니다"
 
 #: plugins/RemoteControl/webroot/js/api/properties.js:28
 msgid "Could not retrieve property list"
-msgstr "특성 목록을 불러오지 못했습니다."
+msgstr "특성 목록을 불러오지 못했습니다"
 
 #: plugins/RemoteControl/webroot/js/api/properties.js:89
 #: plugins/RemoteControl/webroot/js/api/properties.js:110
 msgid "Property '%1' not accepted by server: "
-msgstr "특성 '%1' 은 서버에 허용되지 않습니다. "
+msgstr "특성 '%1' 은 서버에 허용되지 않습니다.:"
 
 #: plugins/RemoteControl/webroot/js/api/properties.js:96
 msgid "Error sending property '%1' to server: "
-msgstr "특성 '%1'를 서버에 보내는데 실패하였습니다. "
+msgstr "특성 '%1'를 서버에 보내는데 실패하였습니다:"
 
 #: plugins/RemoteControl/webroot/js/api/remotecontrol.js:197
 msgid "Error sending command to server: "
-msgstr "명령을 서버에 보내는데 실패하였습니다. "
+msgstr "명령을 서버에 보내는데 실패하였습니다:"
 
 #: plugins/RemoteControl/webroot/js/api/scripts.js:27
 msgid "Could not retrieve script list"
-msgstr "스크립트 목록을 불러오지 못했습니다."
+msgstr "스크립트 목록을 불러오지 못했습니다"
 
 #: plugins/RemoteControl/webroot/js/api/search.js:35
 msgid "querying"
@@ -91,11 +91,11 @@ msgstr "유휴 상태"
 
 #: plugins/RemoteControl/webroot/js/api/search.js:105
 msgid "Error loading object types"
-msgstr "천체 종류를 불러오는 데 실패하였습니다."
+msgstr "천체 종류를 불러오는 데 실패하였습니다"
 
 #: plugins/RemoteControl/webroot/js/api/search.js:138
 msgid "Error getting object list"
-msgstr "천체 목록을 가져오는 데 실패하였습니다."
+msgstr "천체 목록을 가져오는 데 실패하였습니다"
 
 #: plugins/RemoteControl/webroot/js/api/search.js:200
 msgid "waiting"
@@ -103,12 +103,12 @@ msgstr "기다리는 중"
 
 #: plugins/RemoteControl/webroot/js/api/viewoptions.js:38
 msgid "Could not retrieve projection list"
-msgstr "프로젝션 목록을 불러오는 데 실패하였습니다."
+msgstr "투영 목록을 불러오는 데 실패하였습니다"
 
 #: plugins/RemoteControl/webroot/js/api/viewoptions.js:51
 #: plugins/RemoteControl/webroot/js/api/viewoptions.js:64
 msgid "Could not retrieve landscape list"
-msgstr "풍경 목록을 불러오는 데 실패하였습니다."
+msgstr "풍경 목록을 불러오는 데 실패하였습니다"
 
 #: plugins/RemoteControl/webroot/js/plugins/scenery3d.js:22
 #: plugins/RemoteControl/webroot/js/ui/scripts.js:76 index.html:679
@@ -122,7 +122,7 @@ msgstr "(불러오는 중: %1)"
 
 #: plugins/RemoteControl/webroot/js/plugins/scenery3d.js:71
 msgid "Could not retrieve Scenery3d list"
-msgstr "Scenery3d 목록을 불러오지 못했습니다."
+msgstr "Scenery3d 목록을 불러오지 못했습니다"
 
 #: plugins/RemoteControl/webroot/js/ui/actions.js:44
 #: plugins/RemoteControl/webroot/js/ui/actions.js:77
@@ -136,15 +136,15 @@ msgstr "꺼짐"
 
 #: plugins/RemoteControl/webroot/js/ui/combobox.js:58
 msgid "Show All Items"
-msgstr "모든 아이템 보기"
+msgstr "모든 항목 보기"
 
 #: plugins/RemoteControl/webroot/js/ui/combobox.js:124
 msgid "Input did not match any item"
-msgstr "아무 아이템이나 입력해주세요"
+msgstr "어떠한 항목과도 일치하지 않습니다"
 
 #: plugins/RemoteControl/webroot/js/ui/search.js:285
 msgid "No current selection"
-msgstr "선택된 것이 없습니다."
+msgstr "선택된 것이 없습니다"
 
 #: index.html:5 tablet7in.html:5
 msgid "Stellarium remote control plugin"
@@ -232,19 +232,19 @@ msgstr "근점세기"
 
 #: index.html:105 tablet7in.html:204
 msgid "Mean tropical month"
-msgstr "평균 태양월"
+msgstr "평균 회귀월"
 
 #: index.html:106 tablet7in.html:205
 msgid "Mean tropical year"
-msgstr "평균 태양년"
+msgstr "평균 회귀년"
 
 #: index.html:107 tablet7in.html:206
 msgid "Mean tropical century"
-msgstr "평균 태양세기"
+msgstr "평균 회귀세기"
 
 #: index.html:109 tablet7in.html:208
 msgid "Tropical year"
-msgstr "연"
+msgstr "회귀년"
 
 #: index.html:110 tablet7in.html:209
 msgid "Julian year"
@@ -394,7 +394,7 @@ msgstr "최소 월구정변기"
 
 #: index.html:426 tablet7in.html:489
 msgid "Current Planet:"
-msgstr "현재행성:"
+msgstr "현재 행성:"
 
 #: index.html:464 tablet7in.html:529
 msgid "Catalogue of Reflection Nebulae (Van den Bergh, 1966)"
@@ -403,7 +403,7 @@ msgstr "반사성운 목록 (Van den Bergh, 1966)"
 #: index.html:511 tablet7in.html:547
 msgid ""
 "Catalogue of southern stars embedded in nebulosity (van den Bergh+, 1975)"
-msgstr "성운 상태에 따라 정렬된 남방 항성 목록(반덴베르그+, 1975)"
+msgstr "성운 상태에 따라 정렬된 남방 항성 목록 (van den Bergh+, 1975)"
 
 #: index.html:549
 msgid "Objects without identifier"
@@ -435,7 +435,7 @@ msgstr "은하단"
 
 #: index.html:587 tablet7in.html:632
 msgid "Labels and markers"
-msgstr "라벨과 마커"
+msgstr "이름표와 표지"
 
 #: index.html:612 tablet7in.html:657
 msgid "Use associated planet and position"
@@ -539,7 +539,7 @@ msgstr "서버로부터 응답이 없습니다."
 
 #: index.html:797 tablet7in.html:855
 msgid "No response from server for %1 seconds. Is Stellarium still running?"
-msgstr "서버로부터 %1 간 응답이 없습니다. 아직도 스텔라리움이 작동 중인가요?"
+msgstr "서버로부터 %1초 간 응답이 없습니다. 아직도 스텔라리움이 작동 중인가요?"
 
 #: tablet7in.html:32
 msgid "Time Jump"
