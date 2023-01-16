@@ -54,10 +54,10 @@ uniform highp sampler2D shadowTex;
 VARYING highp vec4 shadowCoord;
 #endif
 
+//light direction in model space, pre-normalized
+uniform highp vec3 lightDirection;
 #if defined(IS_OBJ) || defined(IS_MOON)
     #define OREN_NAYAR 1
-    //light direction in model space, pre-normalized
-    uniform highp vec3 lightDirection;  
     //x = A, y = B, z = scaling factor (rho/pi * E0), w roughness
     uniform mediump vec4 orenNayarParameters;
 #endif
@@ -71,7 +71,6 @@ VARYING highp vec4 shadowCoord;
     VARYING highp vec3 normalY;
     VARYING highp vec3 normalZ;
 #else
-    VARYING mediump float lambertIllum;
     VARYING mediump vec3 normalVS; //pre-calculated normals or spherical normals in model space
 #endif
 
@@ -197,7 +196,9 @@ void main()
 #ifdef OREN_NAYAR
     mediump float lum = 1.;
 #else
-    mediump float lum = lambertIllum;
+	//simple Lambert illumination
+	mediump float c = dot(lightDirection, normalize(normalVS));
+    mediump float lum = clamp(c, 0.0, 1.0);
 #endif
 #ifdef RINGS_SUPPORT
     if(isRing)
