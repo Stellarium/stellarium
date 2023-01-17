@@ -821,6 +821,7 @@ private:
 
 		// Common uniforms
 		int projectionMatrix;
+		int hasAtmosphere;
 		int tex;
 		int lightDirection;
 		int eyeDirection;
