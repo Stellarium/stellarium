@@ -754,7 +754,7 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 	}
 	else
 	{
-		QOpenGLPaintDevice device;
+		static QOpenGLPaintDevice device;
 		device.setSize(QSize(prj->getViewportWidth(), prj->getViewportHeight()));
 		// This doesn't seem to work correctly, so implement the hack below instead.
 		// Maybe check again later, or check on mac with retina..
