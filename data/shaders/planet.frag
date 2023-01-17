@@ -32,6 +32,7 @@ uniform mediump vec3 ambientLight;
 uniform mediump vec3 diffuseLight;
 uniform highp vec4 sunInfo;
 uniform mediump float skyBrightness;
+uniform bool hasAtmosphere;
 
 uniform int shadowCount;
 uniform highp mat4 shadowData;
@@ -364,6 +365,13 @@ void main()
     lum*=shadow;
 #endif
 
+	if(hasAtmosphere)
+	{
+		// Planets with atmosphere don't have such a sharp terminator as we get with
+		// Oren-Nayar model. The following is a hack to make the terminator smoother.
+		// TODO: replace it with the correct BRDF (possibly different for different planets).
+		lum *= lum;
+	}
 	mediump vec3 ambientLightToUse = srgbToLinear(ambientLight); // FIXME: this should be supplied as linear
 	mediump vec3 diffuseLightToUse = srgbToLinear(diffuseLight); // FIXME: this should be supplied as linear
     //final lighting color
