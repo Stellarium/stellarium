@@ -3461,8 +3461,11 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 	const float magFactorGreen=powf(0.85f, 0.6f*extinctedMag);
 	const float magFactorBlue=powf(0.6f, 0.5f*extinctedMag);
 
+	const bool isSun  = this==ssm->getSun();
+	const bool isMoon = this==ssm->getMoon();
+
 	// Draw the halo if it enabled in the ssystem.ini file (+ special case for backward compatible for the Sun)
-	if (this==ssm->getSun() && drawSunHalo && core->getSkyDrawer()->getFlagEarlySunHalo())
+	if (isSun && drawSunHalo && core->getSkyDrawer()->getFlagEarlySunHalo())
 	{
 		// Prepare openGL lighting parameters according to luminance
 		float surfArcMin2 = static_cast<float>(getSpheroidAngularRadius(core))*60.f;
@@ -3476,7 +3479,7 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 		Vec3f haloColorToDraw(haloColor[0], powf(0.75f, extinctedMag) * haloColor[1], powf(0.42f, 0.9f*extinctedMag) * haloColor[2]);
 
 		float haloMag=qMin(-18.f, getVMagnitudeWithExtinction(core)); // for sun on horizon, mag can go quite low, shrinking the halo too much.
-		core->getSkyDrawer()->postDrawSky3dModel(&sPainter, tmp, surfArcMin2, haloMag, haloColorToDraw, (englishName=="Sun"));
+		core->getSkyDrawer()->postDrawSky3dModel(&sPainter, tmp, surfArcMin2, haloMag, haloColorToDraw, isSun);
 
 		if (core->getCurrentLocation().planetName == "Earth")
 		{
@@ -3549,7 +3552,7 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 		light.diffuse.set(1.f,  magFactorGreen*1.f,  magFactorBlue*1.f);
 		light.ambient.set(0.02f,magFactorGreen*0.02f,magFactorBlue*0.02f);
 
-		if (this==ssm->getMoon())
+		if (isMoon)
 		{
 			// ambient for the moon can provide the Ashen light!
 			// during daylight, this still should not make moon visible. We grab sky brightness and dim the moon.
@@ -3578,7 +3581,7 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 		}
 
 		// possibly tint sun's color from extinction. This should deliberately cause stronger reddening than for the other objects.
-		if (this==ssm->getSun())
+		if (isSun)
 		{
 			// when we zoom in, reduce the overbrightness. (LP:#1421173)
 			const float fov=core->getProjection(transfo)->getFov();
@@ -3620,8 +3623,8 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 		#endif
 	}
 
-	bool allowDrawHalo = (this!=ssm->getSun() || !core->getSkyDrawer()->getFlagEarlySunHalo()); // We had drawn the sun already before the sphere.
-	if ((this!=ssm->getSun()) && ((this !=ssm->getMoon() && core->getCurrentLocation().planetName=="Earth" )))
+	bool allowDrawHalo = !isSun || !core->getSkyDrawer()->getFlagEarlySunHalo(); // We had drawn the sun already before the sphere.
+	if (!isSun && !isMoon && core->getCurrentLocation().planetName=="Earth" )
 	{
 		// Let's hide halo when inner planet between Sun and observer (or moon between planet and observer).
 		// Do not hide Earth's moon's halo below ~-45degrees when observing from earth.
@@ -3633,14 +3636,14 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 			allowDrawHalo = false;
 	}
 
-	if (this==ssm->getMoon() && !drawMoonHalo)
+	if (isMoon && !drawMoonHalo)
 		allowDrawHalo = false;
 
 	// Draw the halo if enabled in the ssystem_*.ini files (+ special case for backward compatible for the Sun)
-	if ((hasHalo() || this==ssm->getSun()) && allowDrawHalo)
+	if ((hasHalo() || isSun) && allowDrawHalo)
 	{
 		// Prepare OpenGL lighting parameters according to luminance. For scaled-up planets, reduce brightness of the halo.
-		float surfArcMin2 = static_cast<float>(getSpheroidAngularRadius(core)*qMax(1.0, (englishName=="Moon" ? 1.0 : 0.025)*sphereScale))*60.f;
+		float surfArcMin2 = static_cast<float>(getSpheroidAngularRadius(core)*qMax(1.0, (isMoon ? 1.0 : 0.025)*sphereScale))*60.f;
 		surfArcMin2 = surfArcMin2*surfArcMin2*M_PIf; // the total illuminated area in arcmin^2
 
 		StelPainter sPainter(core->getProjection(StelCore::FrameJ2000));
@@ -3649,23 +3652,23 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 		// Find new extincted color for halo. The method is again rather ad-hoc, but does not look too bad.
 		// For the sun, we have again to use the stronger extinction to avoid color mismatch.
 		Vec3f haloColorToDraw;
-		if (this==ssm->getSun())
+		if (isSun)
 			haloColorToDraw.set(haloColor[0], powf(0.75f, extinctedMag) * haloColor[1], powf(0.42f, 0.9f*extinctedMag) * haloColor[2]);
 		else
 			haloColorToDraw.set(haloColor[0], magFactorGreen * haloColor[1], magFactorBlue * haloColor[2]);
-		if (this==ssm->getMoon())
+		if (isMoon)
 			haloColorToDraw*=0.6f; // make lunar halo less glaring, so that phase is discernible even if zoomed out.
 
-		if (this!=ssm->getSun() || drawSunHalo)
+		if (!isSun || drawSunHalo)
 		{
 			float haloMag=getVMagnitudeWithExtinction(core);
 			// EXPERIMENTAL: for sun on horizon, mag can go quite low, shrinking the halo too much.
-			if (englishName=="Sun")
+			if (isSun)
 				haloMag=qMin(haloMag, -18.f);
-			core->getSkyDrawer()->postDrawSky3dModel(&sPainter, tmp, surfArcMin2, haloMag, haloColorToDraw, this==ssm->getSun());
+			core->getSkyDrawer()->postDrawSky3dModel(&sPainter, tmp, surfArcMin2, haloMag, haloColorToDraw, isSun);
 		}
 
-		if ((this==ssm->getSun()) && (core->getCurrentLocation().planetName == "Earth"))
+		if (isSun && core->getCurrentLocation().planetName == "Earth")
 		{
 			LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
 			const float eclipseFactor = static_cast<float>(ssm->getSolarEclipseFactor(core).first);
