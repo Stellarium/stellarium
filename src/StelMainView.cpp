@@ -872,12 +872,13 @@ void StelMainView::init()
 	glInfo.isGLES = format.renderableType()==QSurfaceFormat::OpenGLES;
 	qDebug().nospace() << "Luminance textures are " << (glInfo.supportsLuminanceTextures ? "" : "not ") << "supported";
 	glInfo.isCoreProfile = format.profile() == QSurfaceFormat::CoreProfile;
+
+	auto& gl = *QOpenGLContext::currentContext()->functions();
 	if(format.majorVersion() * 1000 + format.minorVersion() >= 4006 ||
 	   glInfo.mainContext->hasExtension("GL_EXT_texture_filter_anisotropic") ||
 	   glInfo.mainContext->hasExtension("GL_ARB_texture_filter_anisotropic"))
 	{
 		StelOpenGL::clearGLErrors();
-		auto& gl = *QOpenGLContext::currentContext()->functions();
 		gl.glGetIntegerv(GL_MAX_TEXTURE_MAX_ANISOTROPY, &glInfo.maxAnisotropy);
 		const auto error = gl.glGetError();
 		if(error != GL_NO_ERROR)
@@ -906,6 +907,8 @@ void StelMainView::init()
 			addr = glInfo.mainContext->getProcAddress("glMinSampleShadingARB");
 		glInfo.glMinSampleShading = reinterpret_cast<PFNGLMINSAMPLESHADINGPROC>(addr);
 	}
+	gl.glGetIntegerv(GL_MAX_TEXTURE_SIZE, &glInfo.maxTextureSize);
+	qDebug() << "Maximum 2D texture size:" << glInfo.maxTextureSize;
 
 	gui = new StelGui();
 
