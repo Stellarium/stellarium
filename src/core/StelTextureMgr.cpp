@@ -17,12 +17,12 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#include "StelApp.hpp"
+//#include "StelApp.hpp"
 #include "Dithering.hpp"
 #include "StelTextureMgr.hpp"
-#include "StelFileMgr.hpp"
-#include "StelUtils.hpp"
-#include "StelPainter.hpp"
+//#include "StelFileMgr.hpp"
+//#include "StelUtils.hpp"
+//#include "StelPainter.hpp"
 
 #include <QFileInfo>
 #include <QFile>
@@ -38,8 +38,8 @@ StelTextureMgr::StelTextureMgr(QObject *parent)
 	: QObject(parent), glMemoryUsage(0), loaderThreadPool(new QThreadPool(this))
 {
 #ifdef Q_PROCESSOR_X86_64
-	//allow up to 4 textures to be loaded in parallel on 64 bit
-	loaderThreadPool->setMaxThreadCount(std::min(4,QThread::idealThreadCount()));
+	//allow up to 16 textures to be loaded in parallel on 64 bit
+	loaderThreadPool->setMaxThreadCount(std::min(16,QThread::idealThreadCount()));
 #else
 	//on other archs, for now ensure that just 1 texture is at once in background
 	//otherwise, for large textures loaded in parallel (some scenery3d scenes), the risk of an out-of-memory error is greater on 32bit systems

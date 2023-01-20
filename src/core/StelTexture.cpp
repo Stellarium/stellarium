@@ -19,11 +19,14 @@
 
 #include "StelTexture.hpp"
 #include "StelTextureMgr.hpp"
-#include "StelFileMgr.hpp"
+//#include "StelFileMgr.hpp"
 #include "StelApp.hpp"
 #include "StelUtils.hpp"
-#include "StelPainter.hpp"
+//#include "StelPainter.hpp"
 #include "StelMainView.hpp"
+//#include "StelTextureTypes.hpp"
+#include "StelOpenGL.hpp"
+
 
 #include <QImageReader>
 #include <QSize>
@@ -116,23 +119,23 @@ void StelTexture::reportError(const QString& aerrorMessage)
 	emit loadingProcessFinished(true);
 }
 
-StelTexture::GLData StelTexture::imageToGLData(const QImage &image)
+StelTexture::GLData StelTexture::imageToGLData(const QImage &image, const int decimateBy)
 {
 	GLData ret = GLData();
 	if (image.isNull())
 		return ret;
-	ret.data = convertToGLFormat(image, ret.format, ret.type, ret.width, ret.height);
+	ret.data = convertToGLFormat(image, ret.format, ret.type, decimateBy, ret.width, ret.height);
 	return ret;
 }
 
 /*************************************************************************
  Defined to be passed to QtConcurrent::run
  *************************************************************************/
-StelTexture::GLData StelTexture::loadFromPath(const QString &path)
+StelTexture::GLData StelTexture::loadFromPath(const QString &path, const int decimateBy)
 {
 	try
 	{
-		return imageToGLData(QImage(path));
+		return imageToGLData(QImage(path), decimateBy);
 	}
 	catch(std::exception& ex) //this catches out-of-memory errors from file conversion
 	{
@@ -143,11 +146,11 @@ StelTexture::GLData StelTexture::loadFromPath(const QString &path)
 	}
 }
 
-StelTexture::GLData StelTexture::loadFromData(const QByteArray& data)
+StelTexture::GLData StelTexture::loadFromData(const QByteArray& data, const int decimateBy)
 {
 	try
 	{
-		return imageToGLData(QImage::fromData(data));
+		return imageToGLData(QImage::fromData(data), decimateBy);
 	}
 	catch(std::exception& ex)  //this catches out-of-memory errors from file conversion
 	{
@@ -204,13 +207,14 @@ void StelTexture::waitForLoaded()
 		loader->waitForFinished();
 }
 
-template <typename T, typename Param, typename Arg>
-void StelTexture::startAsyncLoader(T (*functionPointer)(Param), const Arg &arg)
-{
-	Q_ASSERT(loader==Q_NULLPTR);
-	//own thread pool only supported with Qt 5.4+
-	loader = new QFuture<GLData>(QtConcurrent::run(textureMgr->loaderThreadPool, functionPointer, arg));
-}
+// GZ Sorry I just cannot get the right template formulation... We need it only 2x, so made explicit.
+//template <typename T, typename Param1, typename Arg1, typename Arg2>
+//void StelTexture::startAsyncLoader(T (*functionPointer)(Param1), const Arg1 &arg, const Arg2 arg2)
+//{
+//	Q_ASSERT(loader==Q_NULLPTR);
+//	//own thread pool only supported with Qt 5.4+
+//	loader = new QFuture<GLData>(QtConcurrent::run(textureMgr->loaderThreadPool, functionPointer, arg, arg2));
+//}
 
 bool StelTexture::load()
 {
@@ -232,7 +236,8 @@ bool StelTexture::load()
 	// Not a remote file, start a loader from local file.
 	if (loader == Q_NULLPTR)
 	{
-		startAsyncLoader(loadFromPath,fullPath);
+		//startAsyncLoader(static_cast<GLData(*)(const QString&, const int)>(loadFromPath), fullPath, decimation);
+		loader = new QFuture<GLData>(QtConcurrent::run(textureMgr->loaderThreadPool, loadFromPath, fullPath, loadParams.decimation));
 		return false;
 	}
 	// Wait until the loader finish.
@@ -248,7 +253,9 @@ void StelTexture::onNetworkReply()
 		if(data.isEmpty()) //prevent starting the loader when there is nothing to load
 			reportError(QString("Empty result received for URL: %1").arg(networkReply->url().toString()));
 		else
-			startAsyncLoader(loadFromData, data);
+			//startAsyncLoader(static_cast<GLData(*)(const QByteArray&, const int)>(loadFromData), data, decimation);
+			loader = new QFuture<GLData>(QtConcurrent::run(textureMgr->loaderThreadPool, loadFromData, data, loadParams.decimation));
+
 	}
 	else
 		reportError(networkReply->errorString());
@@ -279,15 +286,21 @@ bool StelTexture::getDimensions(int &awidth, int &aheight)
 	return true;
 }
 
-QByteArray StelTexture::convertToGLFormat(QImage image, GLint& format, GLint& type, int& width, int& height)
+QByteArray StelTexture::convertToGLFormat(QImage image, GLint& format, GLint& type, int decimate, int& width, int& height)
 {
 	QByteArray ret;
 	const auto glInfo = StelMainView::getInstance().getGLInformation();
-	width = std::min(image.width(), glInfo.maxTextureSize);
-	height = std::min(image.height(), glInfo.maxTextureSize);
+	width = std::min(image.width()/decimate, glInfo.maxTextureSize);
+	height = std::min(image.height()/decimate, glInfo.maxTextureSize);
+
+#ifndef NDEBUG
+	if (decimate>1)
+		qDebug() << "decimated texture width: " << image.width() << "/" << decimate << "->" << width;
+#endif
 	if(width != image.width() || height != image.height())
 	{
-		qWarning().nospace() << "Got a texture with too large dimensions: "
+		if (decimate==1)
+			qWarning().nospace() << "Got a texture with too large dimensions: "
 							 << image.width() << "x" << image.height()
 							 << ", while maximum size is " << glInfo.maxTextureSize
 							 << ". Shrinking to fit in the limit.";
@@ -458,5 +471,5 @@ bool StelTexture::glLoad(const GLData& data)
 // Actually load the texture to openGL memory
 bool StelTexture::glLoad(const QImage& image)
 {
-	return glLoad(imageToGLData(image));
+	return glLoad(imageToGLData(image, loadParams.decimation));
 }

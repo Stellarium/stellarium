@@ -72,9 +72,9 @@ public:
 	StelSkyImageTile();
 
 	//! Constructor
-	StelSkyImageTile(const QString& url, StelSkyImageTile* parent=Q_NULLPTR);
+	StelSkyImageTile(const QString& url, StelSkyImageTile* parent=Q_NULLPTR, int decimateBy=1);
 	//! Constructor
-	StelSkyImageTile(const QVariantMap& map, StelSkyImageTile* parent);
+	StelSkyImageTile(const QVariantMap& map, StelSkyImageTile* parent, int decimateBy=1);
 
 	//! Destructor
 	~StelSkyImageTile() Q_DECL_OVERRIDE;
@@ -161,6 +161,8 @@ private:
 	QTimeLine* texFader;
 
 	QString htmlDescription;
+
+	int decimation; //!> Allow texture size reduction for very weak hardware. Default 1, useful 2..8.
 };
 
 #endif // STELSKYIMAGETILE_HPP
