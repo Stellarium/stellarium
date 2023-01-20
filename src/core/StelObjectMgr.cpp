@@ -620,16 +620,16 @@ QStringList StelObjectMgr::listAllModuleObjects(const QString &moduleId, bool in
 {
 	// search for module
 	StelObjectModule* module = Q_NULLPTR;
-	QStringList result, list;
+	QStringList result;
 	QString objModule, objType;
 	bool subSet = false;
 	if (moduleId.contains(":"))
 	{
 		subSet = true;
 		#if (QT_VERSION>=QT_VERSION_CHECK(5, 14, 0))
-		list = moduleId.split(":", Qt::SkipEmptyParts);
+		QStringList list = moduleId.split(":", Qt::SkipEmptyParts);
 		#else
-		list = moduleId.split(":", QString::SkipEmptyParts);
+		QStringList list = moduleId.split(":", QString::SkipEmptyParts);
 		#endif
 		objModule = list.at(0);
 		objType = list.at(1);
