@@ -231,7 +231,7 @@ void SearchDialog::retranslate()
 
 void SearchDialog::setCurrentCoordinateSystemKey(QString key)
 {
-	const QMetaEnum& en = metaObject()->enumerator(metaObject()->indexOfEnumerator("CoordinateSystem"));
+	const QMetaEnum& en = SearchDialog::metaObject()->enumerator(SearchDialog::metaObject()->indexOfEnumerator("CoordinateSystem"));
 	CoordinateSystem coordSystem = static_cast<CoordinateSystem>(en.keyToValue(key.toLatin1().data()));
 	if (coordSystem<0)
 	{
@@ -1256,13 +1256,12 @@ void SearchDialog::gotoObject(const QModelIndex &modelIndex)
 void SearchDialog::gotoObjectWithType(const QModelIndex &modelIndex)
 {
 	QString objType, objClass = ui->objectTypeComboBox->currentData(Qt::UserRole).toString();
-	QStringList list;
 	if (objClass.contains(":"))
 	{
 		#if (QT_VERSION>=QT_VERSION_CHECK(5, 14, 0))
-		list = objClass.split(":", Qt::SkipEmptyParts);
+		QStringList list = objClass.split(":", Qt::SkipEmptyParts);
 		#else
-		list = objClass.split(":", QString::SkipEmptyParts);
+		QStringList list = objClass.split(":", QString::SkipEmptyParts);
 		#endif
 		objType = list.at(0);
 	}

@@ -19,7 +19,6 @@
 
 #include "StelTranslator.hpp"
 #include "StelFileMgr.hpp"
-#include "StelUtils.hpp"
 
 #include <QFile>
 #include <QDebug>
@@ -158,8 +157,9 @@ QStringList StelTranslator::getAvailableIso639_1Codes(const QString& localeDir)
 		return QStringList();
 	}
 
+	const QStringList entries=dir.entryList(QDir::Files, QDir::Name);
 	QStringList result;
-	for (auto path : dir.entryList(QDir::Files, QDir::Name))
+	for (auto path : entries)
 	{
 		if (!path.endsWith(".qm"))
 			continue;
