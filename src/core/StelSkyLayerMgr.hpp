@@ -59,9 +59,8 @@ public:
 	//! @param l the layer to insert.
 	//! @param keyHint a hint on which key to use for later referencing the image.
 	//! @param show defined whether the layer should be shown by default
-	//! @param decimateBy reduce texture image size by this factor, >1 for very limited hardware. (Useful 1...8).
 	//! @return the reference key to use when accessing this layer later on.
-	QString insertSkyLayer(StelSkyLayerP l, const QString& keyHint=QString(), bool show=true, int decimateBy=1);
+	QString insertSkyLayer(StelSkyLayerP l, const QString& keyHint=QString(), bool show=true);
 
 	//! Remove a layer.
 	void removeSkyLayer(StelSkyLayerP l);
@@ -166,12 +165,11 @@ private:
 	class SkyLayerElem
 	{
 	public:
-		SkyLayerElem(StelSkyLayerP t, bool show=true, int decimateBy=1);
+		SkyLayerElem(StelSkyLayerP t, bool show=true);
 		~SkyLayerElem();
 		StelSkyLayerP layer;
 		class StelProgressController* progressBar;
 		bool show;
-		int decimation;
 	};
 
 	SkyLayerElem* skyLayerElemForLayer(const StelSkyLayer*);

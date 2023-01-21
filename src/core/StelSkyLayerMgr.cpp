@@ -21,13 +21,13 @@
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelFileMgr.hpp"
-#include "StelProjector.hpp"
+//#include "StelProjector.hpp"
 #include "StelSkyImageTile.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelPainter.hpp"
 #include "MilkyWay.hpp"
-#include "StelGuiBase.hpp"
-#include "StelSkyDrawer.hpp"
+//#include "StelGuiBase.hpp"
+//#include "StelSkyDrawer.hpp"
 #include "StelTranslator.hpp"
 #include "StelProgressController.hpp"
 
@@ -99,10 +99,9 @@ void StelSkyLayerMgr::loadCollection(int decimateBy)
 		insertSkyImage(path, QString(), true, decimateBy);
 }
 
-// FIXME: Possibly SkyLayerElem does not need decimation knowledge...
-QString StelSkyLayerMgr::insertSkyLayer(StelSkyLayerP tile, const QString& keyHint, bool ashow, int decimateBy)
+QString StelSkyLayerMgr::insertSkyLayer(StelSkyLayerP tile, const QString& keyHint, bool ashow)
 {
-	SkyLayerElem* bEl = new SkyLayerElem(tile, ashow, decimateBy);
+	SkyLayerElem* bEl = new SkyLayerElem(tile, ashow);
 	QString key = tile->getKeyHint();
 	if (key.isEmpty() || key=="no name")
 	{
@@ -135,7 +134,7 @@ QString StelSkyLayerMgr::insertSkyLayer(StelSkyLayerP tile, const QString& keyHi
 // Add a new image from its URI (URL or local file name)
 QString StelSkyLayerMgr::insertSkyImage(const QString& uri, const QString& keyHint, bool ashow, int decimateBy)
 {
-	return insertSkyLayer(StelSkyLayerP(new StelSkyImageTile(uri, Q_NULLPTR, decimateBy)), keyHint, ashow, decimateBy);
+	return insertSkyLayer(StelSkyLayerP(new StelSkyImageTile(uri, Q_NULLPTR, decimateBy)), keyHint, ashow);
 }
 
 // Remove a sky image tile from the list of background images
@@ -245,7 +244,7 @@ QString StelSkyLayerMgr::keyForLayer(const StelSkyLayer* t)
 	return allSkyLayers.key(skyLayerElemForLayer(t));
 }
 
-StelSkyLayerMgr::SkyLayerElem::SkyLayerElem(StelSkyLayerP t, bool ashow, int decimateBy) : layer(t), progressBar(Q_NULLPTR), show(ashow), decimation(decimateBy)
+StelSkyLayerMgr::SkyLayerElem::SkyLayerElem(StelSkyLayerP t, bool ashow) : layer(t), progressBar(Q_NULLPTR), show(ashow)
 {}
 
 StelSkyLayerMgr::SkyLayerElem::~SkyLayerElem()
