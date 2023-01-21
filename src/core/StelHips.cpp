@@ -81,12 +81,14 @@ HipsSurvey::HipsSurvey(const QString& url_, double releaseDate_):
 	QNetworkReply* networkReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
 	connect(networkReply, &QNetworkReply::finished, this, [&, networkReply] {
 		QByteArray data = networkReply->readAll();
-		for (const QString &line : data.split('\n'))
+		for (const QByteArray &line : data.split('\n'))
 		{
 			if (line.startsWith("#")) continue;
-			QString key = line.section("=", 0, 0).trimmed();
+			QStringList list=QString(line).split("=");
+			if (list.length()!=2) continue;
+			QString key = list.at(0).trimmed();
 			if (key.isEmpty()) continue;
-			QString value = line.section("=", 1, -1).trimmed();
+			QString value = list.at(1).trimmed();
 			properties[key] = value;
 		}
 		if (properties.contains("hips_release_date"))
