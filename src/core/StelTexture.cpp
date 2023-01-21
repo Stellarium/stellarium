@@ -255,7 +255,6 @@ void StelTexture::onNetworkReply()
 		else
 			//startAsyncLoader(static_cast<GLData(*)(const QByteArray&, const int)>(loadFromData), data, decimation);
 			loader = new QFuture<GLData>(QtConcurrent::run(textureMgr->loaderThreadPool, loadFromData, data, loadParams.decimation));
-
 	}
 	else
 		reportError(networkReply->errorString());
