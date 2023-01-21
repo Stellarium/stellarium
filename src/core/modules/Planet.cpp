@@ -3570,7 +3570,7 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 			// scale brightness to reduce if fov smaller than 5 degrees. Min brightness (to avoid glare) if fov=2deg.
 			if (fov/sphereScale<5.0f)
 			{
-				fovFactor -= 0.1f*(5.0f-qMax(2.0f, fov/sphereScale));
+				fovFactor -= 0.1f*(5.0f-qMax(2.0f, float(fov/sphereScale)));
 			}
 			// Special case for the Moon. Was 1.6, but this often is too bright.
 			light.diffuse.set(fovFactor,magFactorGreen*fovFactor,magFactorBlue*fovFactor);
