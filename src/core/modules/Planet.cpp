@@ -3566,7 +3566,7 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 				light.ambient = Vec4f(ashenFactor, magFactorGreen*ashenFactor, magFactorBlue*ashenFactor);
 			}
 			const float fov=core->getProjection(transfo)->getFov();
-			float fovFactor=1.6f;
+			float fovFactor=1.3f;
 			// scale brightness to reduce if fov smaller than 5 degrees. Min brightness (to avoid glare) if fov=2deg.
 			if (fov<5.0f)
 			{
