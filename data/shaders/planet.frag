@@ -368,12 +368,16 @@ void main()
     }
 
 #ifdef IS_MOON
-    // Undo the extraneous gamma encoded in the texture.
-    // FIXME: ideally, we want all the calculations to be done in linear scale,
-    // and then *in the end* apply the exact sRGB transfer function. Currently
-    // though, we don't do actual physically-correct simulation here, so we
-    // just apply the approximate sRGB gamma.
-    texColor = pow(texColor, vec4(2.8/2.2));
+	// In the original NASA CGI Moon Kit the following description is given
+	// about the color texture:
+	//  * A gamma of 2.8 was applied (the LROC data is linear), and the channels
+	//    were multiplied by (0.935, 1.005, 1.04) to balance the color.
+	//  * The intensity range (0.16, 0.4) was mapped into the full
+	//    (0, 255) 8-bit range per channel.
+	// We undo the intensity range and gamma transformations here, but leave the
+	// maximum at 1.0 instead of 0.4.
+	texColor.rgb = vec3(0.4) + 0.6 * texColor.rgb;
+    texColor.rgb = pow(texColor.rgb, vec3(2.8/2.2));
 #endif
 
     mediump vec4 finalColor = texColor;
