@@ -730,8 +730,8 @@ void LandscapeOldStyle::draw(StelCore* core, bool onlyPolygon)
 
 	if (!onlyPolygon || !horizonPolygon) // Make sure to draw the regular pano when there is no polygon
 	{
-		const auto gl = painter.glFuncs();
 #ifdef GL_MULTISAMPLE
+		const auto gl = painter.glFuncs();
 		if (multisamplingEnabled_)
 			gl->glEnable(GL_MULTISAMPLE);
 #endif
@@ -991,18 +991,17 @@ void LandscapePolygonal::draw(StelCore* core, bool onlyPolygon)
 	if (!onlyPolygon) // The only useful application of the onlyPolygon is a demo which does not fill the polygon
 	{
 		sPainter.setColor(landscapeBrightness*groundColor, landFader.getInterstate());
-
-    const auto gl = sPainter.glFuncs();
 #ifdef GL_MULTISAMPLE
-	if (multisamplingEnabled_)
-		gl->glEnable(GL_MULTISAMPLE);
+		const auto gl = sPainter.glFuncs();
+		if (multisamplingEnabled_)
+			gl->glEnable(GL_MULTISAMPLE);
 #endif
 
 		sPainter.drawSphericalRegion(horizonPolygon.data(), StelPainter::SphericalPolygonDrawModeFill);
 
 #ifdef GL_MULTISAMPLE
-	if (multisamplingEnabled_)
-		gl->glDisable(GL_MULTISAMPLE);
+		if (multisamplingEnabled_)
+			gl->glDisable(GL_MULTISAMPLE);
 #endif
 	}
 
