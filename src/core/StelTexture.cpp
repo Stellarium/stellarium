@@ -299,7 +299,7 @@ QByteArray StelTexture::convertToGLFormat(QImage image, GLint& format, GLint& ty
 #endif
 	if(width != image.width() || height != image.height())
 	{
-		if (decimate==1)
+		if ((decimate==1) || (image.width()/decimate>glInfo.maxTextureSize) || (image.height()/decimate>glInfo.maxTextureSize))
 			qWarning().nospace() << "Got a texture with too large dimensions: "
 							 << image.width() << "x" << image.height()
 							 << ", while maximum size is " << glInfo.maxTextureSize
