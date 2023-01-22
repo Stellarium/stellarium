@@ -340,7 +340,7 @@ void SkyGui::updateBarsPos()
 		updatePath = true;
 	}
 
-	double rangeY = buttonBar->boundingRectNoHelpLabel().height()+0.5-7.-buttonBarPath->getRoundSize();
+	double rangeY = buttonBar->boundingRectNoHelpLabel().height()+0.5-6.-buttonBarPath->getRoundSize();
 	const qreal newButtonBarX = winBar->boundingRectNoHelpLabel().right()+buttonBarPath->getRoundSize();
 	const qreal newButtonBarY = hh-buttonBar->boundingRectNoHelpLabel().height()-buttonBarPath->getRoundSize()+0.5+(1.-animBottomBarTimeLine->currentValue())*rangeY;
 	if (!qFuzzyCompare(buttonBar->pos().x(), newButtonBarX) || !qFuzzyCompare(buttonBar->pos().y(), newButtonBarY))
