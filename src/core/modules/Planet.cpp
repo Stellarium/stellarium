@@ -3463,6 +3463,7 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 
 	const bool isSun  = this==ssm->getSun();
 	const bool isMoon = this==ssm->getMoon();
+	const bool currentLocationIsEarth = core->getCurrentLocation().planetName == "Earth";
 
 	// Draw the halo if it enabled in the ssystem.ini file (+ special case for backward compatible for the Sun)
 	if (isSun && drawSunHalo && core->getSkyDrawer()->getFlagEarlySunHalo())
@@ -3481,7 +3482,7 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 		float haloMag=qMin(-18.f, getVMagnitudeWithExtinction(core)); // for sun on horizon, mag can go quite low, shrinking the halo too much.
 		core->getSkyDrawer()->postDrawSky3dModel(&sPainter, tmp, surfArcMin2, haloMag, haloColorToDraw, isSun);
 
-		if (core->getCurrentLocation().planetName == "Earth")
+		if (currentLocationIsEarth)
 		{
 			LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
 			const float eclipseFactor = static_cast<float>(ssm->getSolarEclipseFactor(core).first);
@@ -3624,7 +3625,7 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 	}
 
 	bool allowDrawHalo = !isSun || !core->getSkyDrawer()->getFlagEarlySunHalo(); // We had drawn the sun already before the sphere.
-	if (!isSun && !isMoon && core->getCurrentLocation().planetName=="Earth" )
+	if (!isSun && !isMoon && currentLocationIsEarth)
 	{
 		// Let's hide halo when inner planet between Sun and observer (or moon between planet and observer).
 		// Do not hide Earth's moon's halo below ~-45degrees when observing from earth.
@@ -3668,7 +3669,7 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 			core->getSkyDrawer()->postDrawSky3dModel(&sPainter, tmp, surfArcMin2, haloMag, haloColorToDraw, isSun);
 		}
 
-		if (isSun && core->getCurrentLocation().planetName == "Earth")
+		if (isSun && currentLocationIsEarth)
 		{
 			LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
 			const float eclipseFactor = static_cast<float>(ssm->getSolarEclipseFactor(core).first);
