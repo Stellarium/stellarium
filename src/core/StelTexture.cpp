@@ -19,12 +19,9 @@
 
 #include "StelTexture.hpp"
 #include "StelTextureMgr.hpp"
-//#include "StelFileMgr.hpp"
 #include "StelApp.hpp"
 #include "StelUtils.hpp"
-//#include "StelPainter.hpp"
 #include "StelMainView.hpp"
-//#include "StelTextureTypes.hpp"
 #include "StelOpenGL.hpp"
 
 

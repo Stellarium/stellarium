@@ -21,13 +21,10 @@
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelFileMgr.hpp"
-//#include "StelProjector.hpp"
 #include "StelSkyImageTile.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelPainter.hpp"
 #include "MilkyWay.hpp"
-//#include "StelGuiBase.hpp"
-//#include "StelSkyDrawer.hpp"
 #include "StelTranslator.hpp"
 #include "StelProgressController.hpp"
 

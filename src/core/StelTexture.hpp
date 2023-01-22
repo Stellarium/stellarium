@@ -20,9 +20,6 @@
 #ifndef STELTEXTURE_HPP
 #define STELTEXTURE_HPP
 
-//#include "StelTextureTypes.hpp"
-//#include "StelOpenGL.hpp"
-
 #include <QOpenGLFunctions>
 #include <QObject>
 #include <QImage>
