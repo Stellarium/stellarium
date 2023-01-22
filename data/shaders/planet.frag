@@ -136,7 +136,7 @@ mediump float orenNayar(in mediump vec3 normal, in highp vec3 lightDir, in highp
 {
     mediump float cosAngleLightNormal = dot(normal, lightDir);  //cos theta_i
     mediump float cosAngleEyeNormal = dot(normal, viewDir); //cos theta_r
-	if(cosAngleEyeNormal < 0. || cosAngleLightNormal < 0.) return 0.;
+	if(cosAngleLightNormal < 0.) return 0.;
     //acos can be quite expensive, can we avoid it?
     mediump float angleLightNormal = acos(cosAngleLightNormal); //theta_i
     mediump float angleEyeNormal = acos(cosAngleEyeNormal); //theta_r
