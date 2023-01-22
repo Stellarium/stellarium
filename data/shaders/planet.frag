@@ -154,15 +154,6 @@ mediump float orenNayar(in mediump vec3 normal, in highp vec3 lightDir, in highp
     mediump float betaterm = 2.0*beta/M_PI;
     mediump float ONir = max(0.0, cosAngleLightNormal) * ((1.0-gamma*betaterm*betaterm)*0.17*scale*roughSq/(roughSq+0.13));
     ON += ONir;
-    // This clamp gives an ugly pseudo edge visible in rapid animation.
-    //return clamp(ON, 0.0, 1.0);
-    // Better use GLSL's smoothstep. However, this is N/A in GLSL1.20/GLES. Workaround from https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/smoothstep.xhtml
-    if (ON>0.8)
-    {
-        mediump float t = clamp((ON - 0.8) / (1.0 - 0.8), 0.0, 1.0);
-        return 0.8 + 0.2*(t * t * (3.0 - 2.0 * t));
-    }
-    else
     return ON;
 }
 #endif
