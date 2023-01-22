@@ -21,13 +21,10 @@
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelFileMgr.hpp"
-#include "StelProjector.hpp"
 #include "StelSkyImageTile.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelPainter.hpp"
 #include "MilkyWay.hpp"
-#include "StelGuiBase.hpp"
-#include "StelSkyDrawer.hpp"
 #include "StelTranslator.hpp"
 #include "StelProgressController.hpp"
 
@@ -64,9 +61,10 @@ double StelSkyLayerMgr::getCallOrder(StelModuleActionName actionName) const
 // read from stream
 void StelSkyLayerMgr::init()
 {
-	loadCollection();
-
 	QSettings* conf = StelApp::getInstance().getSettings();
+	const int decimation=conf->value("astro/nebula_texture_decimation", 1).toInt();
+	loadCollection(decimation);
+
 	conf->beginGroup("skylayers");
 	for (const auto& key : conf->childKeys())
 	{
@@ -86,7 +84,7 @@ void StelSkyLayerMgr::init()
 	addAction("actionShow_DSO_Textures_Reload", N_("Display Options"), N_("Reload the deep-sky objects background images"), "loadCollection()", "Ctrl+I");
 }
 
-void StelSkyLayerMgr::loadCollection()
+void StelSkyLayerMgr::loadCollection(int decimateBy)
 {
 	if (!allSkyLayers.isEmpty())
 		allSkyLayers.clear();
@@ -95,7 +93,7 @@ void StelSkyLayerMgr::loadCollection()
 	if (path.isEmpty())
 		qWarning() << "ERROR while loading nebula texture set default";
 	else
-		insertSkyImage(path);
+		insertSkyImage(path, QString(), true, decimateBy);
 }
 
 QString StelSkyLayerMgr::insertSkyLayer(StelSkyLayerP tile, const QString& keyHint, bool ashow)
@@ -131,9 +129,9 @@ QString StelSkyLayerMgr::insertSkyLayer(StelSkyLayerP tile, const QString& keyHi
 }
 
 // Add a new image from its URI (URL or local file name)
-QString StelSkyLayerMgr::insertSkyImage(const QString& uri, const QString& keyHint, bool ashow)
+QString StelSkyLayerMgr::insertSkyImage(const QString& uri, const QString& keyHint, bool ashow, int decimateBy)
 {
-	return insertSkyLayer(StelSkyLayerP(new StelSkyImageTile(uri)), keyHint, ashow);
+	return insertSkyLayer(StelSkyLayerP(new StelSkyImageTile(uri, Q_NULLPTR, decimateBy)), keyHint, ashow);
 }
 
 // Remove a sky image tile from the list of background images
@@ -258,7 +256,7 @@ bool StelSkyLayerMgr::loadSkyImage(const QString& id, const QString& filename,
 								   double long1, double lat1,
 								   double long2, double lat2,
 								   double long3, double lat3,
-								   double minRes, double maxBright, bool visible, StelCore::FrameType frameType, bool withAberration)
+								   double minRes, double maxBright, bool visible, StelCore::FrameType frameType, bool withAberration, int decimateBy)
 {
 	if (allSkyLayers.contains(id))
 	{
