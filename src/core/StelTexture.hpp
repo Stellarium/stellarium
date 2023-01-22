@@ -135,10 +135,10 @@ private:
 		GLint type;
 	};
 	//! Those static methods can be called by QtConcurrent::run
-	//! decimate: On some platforms we must be able to reduce texture sizes. Divide texture size in both dimensions by this factor.
-	static GLData imageToGLData(const QImage &image, const int decimateBy);
-	static GLData loadFromPath(const QString &path, const int decimateBy);
-	static GLData loadFromData(const QByteArray& data, const int decimateBy);
+	//! @param decimateBy: On limited platforms we must be able to reduce texture sizes. Divide texture size in both dimensions by this number.
+	static GLData imageToGLData(const QImage    &image, const int decimateBy);
+	static GLData loadFromPath( const QString    &path, const int decimateBy);
+	static GLData loadFromData( const QByteArray &data, const int decimateBy);
 
 	//! Private constructor
 	StelTexture(StelTextureMgr* mgr);
@@ -166,8 +166,8 @@ private:
 	//! Returns true if the data was loaded, false if not yet ready.
 	bool load();
 
-//	template <typename T, typename Param1, typename Arg1, typename Arg2>
-//	void startAsyncLoader(T (*functionPointer)(Param1), const Arg1 &arg1, const Arg2 arg2);
+	template <typename T, typename...Params, typename...Args>
+	void startAsyncLoader(T (*functionPointer)(Params...), Args&&...args);
 
 	//! The parent texture manager
 	StelTextureMgr* textureMgr;

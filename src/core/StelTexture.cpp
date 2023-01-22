@@ -207,14 +207,13 @@ void StelTexture::waitForLoaded()
 		loader->waitForFinished();
 }
 
-// GZ Sorry I just cannot get the right template formulation... We need it only 2x, so made explicit.
-//template <typename T, typename Param1, typename Arg1, typename Arg2>
-//void StelTexture::startAsyncLoader(T (*functionPointer)(Param1), const Arg1 &arg, const Arg2 arg2)
-//{
-//	Q_ASSERT(loader==Q_NULLPTR);
-//	//own thread pool only supported with Qt 5.4+
-//	loader = new QFuture<GLData>(QtConcurrent::run(textureMgr->loaderThreadPool, functionPointer, arg, arg2));
-//}
+template <typename T, typename...Params, typename...Args>
+void StelTexture::startAsyncLoader(T (*functionPointer)(Params...), Args&&...args)
+{
+    Q_ASSERT(loader==Q_NULLPTR);
+    //own thread pool supported with Qt 5.4+
+    loader = new QFuture<GLData>(QtConcurrent::run(textureMgr->loaderThreadPool, functionPointer, std::forward<Args>(args)...));
+}
 
 bool StelTexture::load()
 {
@@ -236,8 +235,7 @@ bool StelTexture::load()
 	// Not a remote file, start a loader from local file.
 	if (loader == Q_NULLPTR)
 	{
-		//startAsyncLoader(static_cast<GLData(*)(const QString&, const int)>(loadFromPath), fullPath, decimation);
-		loader = new QFuture<GLData>(QtConcurrent::run(textureMgr->loaderThreadPool, loadFromPath, fullPath, loadParams.decimation));
+		startAsyncLoader(static_cast<GLData(*)(const QString&, const int)>(loadFromPath), fullPath, loadParams.decimation);
 		return false;
 	}
 	// Wait until the loader finish.
@@ -253,8 +251,7 @@ void StelTexture::onNetworkReply()
 		if(data.isEmpty()) //prevent starting the loader when there is nothing to load
 			reportError(QString("Empty result received for URL: %1").arg(networkReply->url().toString()));
 		else
-			//startAsyncLoader(static_cast<GLData(*)(const QByteArray&, const int)>(loadFromData), data, decimation);
-			loader = new QFuture<GLData>(QtConcurrent::run(textureMgr->loaderThreadPool, loadFromData, data, loadParams.decimation));
+			startAsyncLoader(static_cast<GLData(*)(const QByteArray&, const int)>(loadFromData), data, loadParams.decimation);
 	}
 	else
 		reportError(networkReply->errorString());
