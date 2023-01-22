@@ -17,12 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#include "StelApp.hpp"
 #include "Dithering.hpp"
 #include "StelTextureMgr.hpp"
-#include "StelFileMgr.hpp"
-#include "StelUtils.hpp"
-#include "StelPainter.hpp"
 
 #include <QFileInfo>
 #include <QFile>

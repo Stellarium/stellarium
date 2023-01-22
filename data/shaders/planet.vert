@@ -47,7 +47,6 @@ VARYING highp vec3 P; //original unprojected position (in AU)
     //normal objects use gouraud shading
     //good enough for our spheres
     uniform highp vec3 lightDirection;
-    VARYING mediump float lambertIllum;
 #endif
 
 void main()
@@ -84,9 +83,6 @@ void main()
         normalZ = normal;
     #else
         normalVS = normal;
-        //simple Lambert illumination
-        mediump float c = dot(lightDirection, normal);
-        lambertIllum = clamp(c, 0.0, 1.0);
     #endif
 #endif
 }

@@ -20,9 +20,7 @@
 #ifndef STELTEXTURE_HPP
 #define STELTEXTURE_HPP
 
-#include "StelTextureTypes.hpp"
-#include "StelOpenGL.hpp"
-
+#include <QOpenGLFunctions>
 #include <QObject>
 #include <QImage>
 
@@ -46,11 +44,12 @@ public:
 	//! Contains the parameters defining how a texture is created.
 	struct StelTextureParams
 	{
-		StelTextureParams(bool qgenerateMipmaps=false, GLint afiltering=GL_LINEAR, GLint awrapMode=GL_CLAMP_TO_EDGE, bool qfilterMipmaps=false) :
+		StelTextureParams(bool qgenerateMipmaps=false, GLint afiltering=GL_LINEAR, GLint awrapMode=GL_CLAMP_TO_EDGE, bool qfilterMipmaps=false, int decimateBy=1) :
 				generateMipmaps(qgenerateMipmaps),
 				filterMipmaps(qfilterMipmaps),
 				filtering(afiltering),
-				wrapMode(awrapMode){;}
+				wrapMode(awrapMode),
+				decimation(decimateBy){;}
 		//! Define if mipmaps must be created.
 		bool generateMipmaps;
 		//! If true, mipmapped textures are filtered with GL_LINEAR_MIPMAP_LINEAR instead of GL_LINEAR_MIPMAP_NEAREST (i.e. enabling "trilinear" filtering)
@@ -59,6 +58,9 @@ public:
 		GLint filtering;
 		//! Define the wrapping mode to use. Must be one of GL_CLAMP_TO_EDGE, or GL_REPEAT.
 		GLint wrapMode;
+		//! Allow a reduction of the size of the texture image (useful for very limited hardware)
+		//! The image size will be divided by this factor (e.g. 2, 3, 4, ...)
+		int decimation;
 	};
 
 	//! Destructor
@@ -130,9 +132,10 @@ private:
 		GLint type;
 	};
 	//! Those static methods can be called by QtConcurrent::run
-	static GLData imageToGLData(const QImage &image);
-	static GLData loadFromPath(const QString &path);
-	static GLData loadFromData(const QByteArray& data);
+	//! @param decimateBy: On limited platforms we must be able to reduce texture sizes. Divide texture size in both dimensions by this number.
+	static GLData imageToGLData(const QImage    &image, const int decimateBy);
+	static GLData loadFromPath( const QString    &path, const int decimateBy);
+	static GLData loadFromData( const QByteArray &data, const int decimateBy);
 
 	//! Private constructor
 	StelTexture(StelTextureMgr* mgr);
@@ -140,8 +143,10 @@ private:
 	//! Wrap an existing GL texture with this object
 	void wrapGLTexture(GLuint texId);
 
-	//! Convert a QImage into opengl compatible format.
-	static QByteArray convertToGLFormat(QImage image, GLint& format, GLint& type, int& width, int& height);
+	//! Convert a QImage into OpenGL compatible format.
+	//! The texture will be at most as large as GL_MAX_TEXTURE_SIZE
+	//! @param decimate divide image size by this factor: reduce texture sizes to conserve texture memory (required on e.g. Raspberry Pi 3).
+	static QByteArray convertToGLFormat(QImage image, GLint& format, GLint& type, int decimate, int& width, int& height);
 
 	//! This method should be called if the texture loading failed for any reasons
 	//! @param errorMessage the human friendly error message
@@ -158,8 +163,8 @@ private:
 	//! Returns true if the data was loaded, false if not yet ready.
 	bool load();
 
-	template <typename T, typename Param1, typename Arg1>
-	void startAsyncLoader(T (*functionPointer)(Param1), const Arg1 &arg1);
+	template <typename T, typename...Params, typename...Args>
+	void startAsyncLoader(T (*functionPointer)(Params...), Args&&...args);
 
 	//! The parent texture manager
 	StelTextureMgr* textureMgr;

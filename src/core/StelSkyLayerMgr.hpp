@@ -98,6 +98,7 @@ public slots:
 	//! @param visible initial visibility setting
 	//! @param frameType Coordinate frame type
 	//! @param withAberration the image shall undergo aberration effects. Else it is really fixed to the frame. This flag is only used for images linked to FrameJ2000.
+	//! @param decimateBy allow texture reduction on loading, useful on very limited hardware.
 	//! @note frameType has been added 2017-03. Use loadSkyImage(... , StelCore::FrameJ2000) for the previous behaviour!
 	//! @note For frameType=AzAlt, azimuth currently is counted from South towards East.
 	//! @bug Some image are not visible close to screen center, only when in the corners.
@@ -106,7 +107,7 @@ public slots:
 					  double long1, double lat1,
 					  double long2, double lat2,
 					  double long3, double lat3,
-					  double minRes, double maxBright, bool visible, StelCore::FrameType frameType=StelCore::FrameJ2000, bool withAberration=true);
+					  double minRes, double maxBright, bool visible, StelCore::FrameType frameType=StelCore::FrameJ2000, bool withAberration=true, int decimateBy=1);
 
 	//! Decide to show or not to show a layer by its ID.
 	//! @param id the id of the layer whose status is to be changed.
@@ -129,8 +130,9 @@ public slots:
 	//! @param uri the local file or the URL where the JSON image description is located.
 	//! @param keyHint a hint on which key to use for later referencing the image.
 	//! @param show defined whether the image should be shown by default.
+	//! @param decimateBy Allow image size reduction (e.g., 2...8) on very limited hardware
 	//! @return the reference key to use when accessing this image later on.
-	QString insertSkyImage(const QString& uri, const QString& keyHint=QString(), bool show=true);
+	QString insertSkyImage(const QString& uri, const QString& keyHint=QString(), bool show=true, int decimateBy=1);
 
 	//! Remove a sky layer from the list.
 	//! Note: this is not thread safe, and so should not be used directly
@@ -154,7 +156,9 @@ private slots:
 	//! @param percentage the percentage of loaded data
 	void percentLoadedChanged(int percentage);
 
-	void loadCollection();
+	//! Load the textures from the default nebula collection
+	//! @param decimateBy allow texture size decimation (division) by this factor (for very weak hardware)
+	void loadCollection(int decimateBy=1);
 
 private:
 	//! Store the information needed for a graphical element layer.

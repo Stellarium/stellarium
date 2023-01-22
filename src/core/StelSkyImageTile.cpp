@@ -47,13 +47,15 @@ void StelSkyImageTile::initCtor()
 	texFader = Q_NULLPTR;
 	birthJD = -1e10;
 	withAberration = true;
+	decimation = 1;
 }
 
 // Constructor
-StelSkyImageTile::StelSkyImageTile(const QString& url, StelSkyImageTile* parent) : MultiLevelJsonBase(parent)
+StelSkyImageTile::StelSkyImageTile(const QString& url, StelSkyImageTile* parent, int decimateBy) : MultiLevelJsonBase(parent)
 {
 	initCtor();
-	if (parent!=Q_NULLPTR)
+	decimation=decimateBy;
+	if (parent)
 	{
 		luminance = parent->luminance;
 		alphaBlend = parent->alphaBlend;
@@ -62,10 +64,11 @@ StelSkyImageTile::StelSkyImageTile(const QString& url, StelSkyImageTile* parent)
 }
 
 // Constructor from a map used for JSON files with more than 1 level
-StelSkyImageTile::StelSkyImageTile(const QVariantMap& map, StelSkyImageTile* parent) : MultiLevelJsonBase(parent)
+StelSkyImageTile::StelSkyImageTile(const QVariantMap& map, StelSkyImageTile* parent, int decimateBy) : MultiLevelJsonBase(parent)
 {
 	initCtor();
-	if (parent!=Q_NULLPTR)
+	decimation=decimateBy;
+	if (parent)
 	{
 		luminance = parent->luminance;
 		alphaBlend = parent->alphaBlend;
@@ -209,7 +212,7 @@ void StelSkyImageTile::getTilesToDraw(QMultiMap<double, StelSkyImageTile*>& resu
 		{
 			// The tile has an associated texture, but it is not yet loaded: load it now
 			StelTextureMgr& texMgr=StelApp::getInstance().getTextureManager();
-			tex = texMgr.createTextureThread(absoluteImageURI, StelTexture::StelTextureParams(true));
+			tex = texMgr.createTextureThread(absoluteImageURI, StelTexture::StelTextureParams(true, GL_LINEAR, GL_CLAMP_TO_EDGE, false, decimation));
 			if (!tex)
 			{
 				qWarning() << "WARNING : Can't create tile: " << absoluteImageURI;
@@ -237,7 +240,7 @@ void StelSkyImageTile::getTilesToDraw(QMultiMap<double, StelSkyImageTile*>& resu
 #else
 				if (s.type()==QVariant::Map)
 #endif
-					nt = new StelSkyImageTile(s.toMap(), this);
+					nt = new StelSkyImageTile(s.toMap(), this, decimation);
 				else
 				{
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
@@ -245,7 +248,7 @@ void StelSkyImageTile::getTilesToDraw(QMultiMap<double, StelSkyImageTile*>& resu
 #else
 					Q_ASSERT(s.type()==QVariant::String);
 #endif
-					nt = new StelSkyImageTile(s.toString(), this);
+					nt = new StelSkyImageTile(s.toString(), this, decimation);
 				}
 				subTiles.append(nt);
 			}
@@ -469,7 +472,8 @@ void StelSkyImageTile::loadFromQVariantMap(const QVariantMap& map)
 	{
 		const QVariant& polyRaDec = polyList.at(i);
 		QVector<Vec3d> vertices;
-		for (const auto& vRaDec : polyRaDec.toList())
+		const QList<QVariant> polyRaDecList=polyRaDec.toList();
+		for (const auto& vRaDec : polyRaDecList)
 		{
 			const QVariantList vl = vRaDec.toList();
 			Vec3d v;
@@ -484,7 +488,8 @@ void StelSkyImageTile::loadFromQVariantMap(const QVariantMap& map)
 		{
 			const QVariant& polyXY = texCoordList.at(i);
 			QVector<Vec2f> texCoords;
-			for (const auto& vXY : polyXY.toList())
+			const QList<QVariant> polyXYlist=polyXY.toList();
+			for (const auto& vXY : polyXYlist)
 			{
 				const QVariantList vl = vXY.toList();
 				texCoords.append(Vec2f(vl.at(0).toFloat(&ok), vl.at(1).toFloat(&ok)));

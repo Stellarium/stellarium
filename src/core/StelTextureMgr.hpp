@@ -21,6 +21,7 @@
 #define STELTEXTUREMGR_HPP
 
 #include "StelTexture.hpp"
+#include "StelTextureTypes.hpp"
 #include <QObject>
 #include <QMap>
 #include <QWeakPointer>

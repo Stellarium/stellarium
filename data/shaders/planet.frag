@@ -32,6 +32,7 @@ uniform mediump vec3 ambientLight;
 uniform mediump vec3 diffuseLight;
 uniform highp vec4 sunInfo;
 uniform mediump float skyBrightness;
+uniform bool hasAtmosphere;
 
 uniform int shadowCount;
 uniform highp mat4 shadowData;
@@ -54,10 +55,10 @@ uniform highp sampler2D shadowTex;
 VARYING highp vec4 shadowCoord;
 #endif
 
+//light direction in model space, pre-normalized
+uniform highp vec3 lightDirection;
 #if defined(IS_OBJ) || defined(IS_MOON)
     #define OREN_NAYAR 1
-    //light direction in model space, pre-normalized
-    uniform highp vec3 lightDirection;  
     //x = A, y = B, z = scaling factor (rho/pi * E0), w roughness
     uniform mediump vec4 orenNayarParameters;
 #endif
@@ -71,7 +72,6 @@ VARYING highp vec4 shadowCoord;
     VARYING highp vec3 normalY;
     VARYING highp vec3 normalZ;
 #else
-    VARYING mediump float lambertIllum;
     VARYING mediump vec3 normalVS; //pre-calculated normals or spherical normals in model space
 #endif
 
@@ -136,6 +136,7 @@ mediump float orenNayar(in mediump vec3 normal, in highp vec3 lightDir, in highp
 {
     mediump float cosAngleLightNormal = dot(normal, lightDir);  //cos theta_i
     mediump float cosAngleEyeNormal = dot(normal, viewDir); //cos theta_r
+	if(cosAngleLightNormal < 0.) return 0.;
     //acos can be quite expensive, can we avoid it?
     mediump float angleLightNormal = acos(cosAngleLightNormal); //theta_i
     mediump float angleEyeNormal = acos(cosAngleEyeNormal); //theta_r
@@ -143,26 +144,17 @@ mediump float orenNayar(in mediump vec3 normal, in highp vec3 lightDir, in highp
     mediump float beta = min(angleEyeNormal, angleLightNormal); //beta = min(theta_i, theta_r)
     mediump float gamma = dot(viewDir - normal * cosAngleEyeNormal, lightDir - normal * cosAngleLightNormal); // cos(phi_r-phi_i)
     mediump float C = sin(alpha) * tan(beta);
-	mediump float ON = max(0.0, cosAngleLightNormal) * ((A + B * max(0.0, gamma) * C) * scale); // Qualitative model done.
+	mediump float ON = A + B * max(0.0, gamma) * C; // Qualitative model done.
     // Now add third term:
     mediump float C3_2 = (4.0*alpha*beta)/(M_PI*M_PI);
     mediump float C3=0.125*roughSq/(roughSq+0.09)*C3_2*C3_2;
-    mediump float third=(1.0-abs(gamma))*C3*tan(0.5*(alpha+beta))*max(0.0, cosAngleLightNormal)*scale;
+    mediump float third=(1.0-abs(gamma))*C3*tan(0.5*(alpha+beta));
     ON += third;
     // Add the intereflection term:
     mediump float betaterm = 2.0*beta/M_PI;
-    mediump float ONir = max(0.0, cosAngleLightNormal) * ((1.0-gamma*betaterm*betaterm)*0.17*scale*roughSq/(roughSq+0.13));
+    mediump float ONir = (1.0-gamma*betaterm*betaterm)*0.17*roughSq/(roughSq+0.13);
     ON += ONir;
-    // This clamp gives an ugly pseudo edge visible in rapid animation.
-    //return clamp(ON, 0.0, 1.0);
-    // Better use GLSL's smoothstep. However, this is N/A in GLSL1.20/GLES. Workaround from https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/smoothstep.xhtml
-    if (ON>0.8)
-    {
-        mediump float t = clamp((ON - 0.8) / (1.0 - 0.8), 0.0, 1.0);
-        return 0.8 + 0.2*(t * t * (3.0 - 2.0 * t));
-    }
-    else
-    return clamp(ON, 0.0, 1.0);
+    return ON * cosAngleLightNormal * scale;
 }
 #endif
 
@@ -175,13 +167,31 @@ lowp float outgasFactor(in mediump vec3 normal, in highp vec3 lightDir, in mediu
     return opac;
 }
 
+vec3 srgbToLinear(vec3 srgb)
+{
+	vec3 s = step(vec3(0.04045), srgb);
+	vec3 d = vec3(1) - s;
+	return s * pow((srgb+0.055)/1.055, vec3(2.4)) +
+		   d * srgb/12.92;
+}
+
+vec3 linearToSRGB(vec3 lin)
+{
+	vec3 s = step(vec3(0.0031308), lin);
+	vec3 d = vec3(1) - s;
+	return s * (1.055*pow(lin, vec3(1./2.4))-0.055) +
+		   d *  12.92*lin;
+}
+
 void main()
 {
     mediump float final_illumination = 1.0;
 #ifdef OREN_NAYAR
     mediump float lum = 1.;
 #else
-    mediump float lum = lambertIllum;
+	//simple Lambert illumination
+	mediump float c = dot(lightDirection, normalize(normalVS));
+    mediump float lum = clamp(c, 0.0, 1.0);
 #endif
 #ifdef RINGS_SUPPORT
     if(isRing)
@@ -201,6 +211,10 @@ void main()
                 mediump float ring_radius = length(P + u * ray);
                 mediump float s = (ring_radius - innerRadius) / (outerRadius - innerRadius);
                 lowp float ringAlpha = texture2D(ringS, vec2(s, 0.5)).w;
+
+				// FIXME: this compensates for too much transparency in the texture (see e.g. Saturn)
+				ringAlpha = pow(ringAlpha, 1./2.2);
+
                 if(ring_radius > innerRadius && ring_radius < outerRadius)
                     final_illumination = 1.0 - ringAlpha;
             }
@@ -343,8 +357,17 @@ void main()
     lum*=shadow;
 #endif
 
+	if(hasAtmosphere)
+	{
+		// Planets with atmosphere don't have such a sharp terminator as we get with
+		// Oren-Nayar model. The following is a hack to make the terminator smoother.
+		// TODO: replace it with the correct BRDF (possibly different for different planets).
+		lum *= lum;
+	}
+	mediump vec3 ambientLightToUse = srgbToLinear(ambientLight); // FIXME: this should be supplied as linear
+	mediump vec3 diffuseLightToUse = srgbToLinear(diffuseLight); // FIXME: this should be supplied as linear
     //final lighting color
-    mediump vec4 litColor = vec4(lum * final_illumination * diffuseLight + ambientLight, 1.0);
+    mediump vec4 litColor = vec4(lum * final_illumination * diffuseLightToUse + ambientLightToUse, 1.0);
 
     //apply texture-colored rimlight
     //litColor.xyz = clamp( litColor.xyz + vec3(outgas), 0.0, 1.0);
@@ -377,7 +400,9 @@ void main()
 	// We undo the intensity range and gamma transformations here, but leave the
 	// maximum at 1.0 instead of 0.4.
 	texColor.rgb = vec3(0.4) + 0.6 * texColor.rgb;
-    texColor.rgb = pow(texColor.rgb, vec3(2.8/2.2));
+    texColor.rgb = pow(texColor.rgb, vec3(2.8));
+#else
+    texColor.rgb = srgbToLinear(texColor.rgb);
 #endif
 
     mediump vec4 finalColor = texColor;
@@ -400,6 +425,7 @@ void main()
     if(final_illumination < 0.9999)
     {
         lowp vec4 shadowColor = texture2D(earthShadow, vec2(final_illumination, 0.5));
+		shadowColor.rgb = srgbToLinear(shadowColor.rgb);
         finalColor =
 		eclipsePush*(1.0-0.75*shadowColor.a)*
 		mix(finalColor * litColor, shadowColor, clamp(shadowColor.a, 0.0, 0.7)); // clamp alpha to allow some maria detail.
@@ -413,7 +439,7 @@ void main()
     //apply white rimlight
     finalColor.xyz = clamp( finalColor.xyz + vec3(outgas), 0.0, 1.0);
 
-    FRAG_COLOR = finalColor;
+    FRAG_COLOR = vec4(linearToSRGB(finalColor.rgb), finalColor.a);
     //to debug texture issues, uncomment and reload shader
     //FRAG_COLOR = texColor;
 }

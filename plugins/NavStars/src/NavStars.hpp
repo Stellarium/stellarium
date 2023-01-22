@@ -23,7 +23,7 @@
 #include "StelFader.hpp"
 #include "StelModule.hpp"
 #include "StelObject.hpp" // For StelObjectP
-#include "StelTexture.hpp"
+#include "StelTextureTypes.hpp"
 
 #include <QSettings>
 
