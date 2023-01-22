@@ -3465,6 +3465,35 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 	const bool isMoon = this==ssm->getMoon();
 	const bool currentLocationIsEarth = core->getCurrentLocation().planetName == "Earth";
 
+	if (isSun && currentLocationIsEarth)
+	{
+		LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
+		const float eclipseFactor = static_cast<float>(ssm->getSolarEclipseFactor(core).first);
+		// This alpha ensures 0 for complete sun, 1 for eclipse better 1e-10, with a strong increase towards full eclipse. We still need to square it.
+		// But without atmosphere we should indeed draw a visible corona by default!
+		const float alpha= ( !lmgr->getFlagAtmosphere() && ssm->getFlagPermanentSolarCorona() ? 0.7f : -0.1f*qMax(-10.0f, log10f(eclipseFactor)));
+		StelMovementMgr* mmgr = GETSTELMODULE(StelMovementMgr);
+		float rotationAngle=(mmgr->getEquatorialMount() ? 0.0f : getParallacticAngle(core) * M_180_PIf);
+
+		// Add ecliptic/equator angle. Meeus, Astr. Alg. 2nd, p100.
+		const double jde=core->getJDE();
+		const double eclJDE = GETSTELMODULE(SolarSystem)->getEarth()->getRotObliquity(jde);
+		double ra_equ, dec_equ, lambdaJDE, betaJDE;
+		StelUtils::rectToSphe(&ra_equ,&dec_equ,getEquinoxEquatorialPos(core));
+		StelUtils::equToEcl(ra_equ, dec_equ, eclJDE, &lambdaJDE, &betaJDE);
+		// We can safely assume beta=0 and ignore nutation.
+		const float q0=static_cast<float>(atan(-cos(lambdaJDE)*tan(eclJDE)));
+		rotationAngle -= q0*static_cast<float>(180.0/M_PI);
+
+		StelPainter sPainter(core->getProjection(StelCore::FrameJ2000));
+		const auto pos = getJ2000EquatorialPos(core).toVec3f();
+
+		// Find new extincted color for halo. The method is again rather ad-hoc, but does not look too bad.
+		// For the sun, we have again to use the stronger extinction to avoid color mismatch.
+		Vec3f color(haloColor[0], powf(0.75f, extinctedMag) * haloColor[1], powf(0.42f, 0.9f*extinctedMag) * haloColor[2]);
+		core->getSkyDrawer()->drawSunCorona(&sPainter, pos, 512.f/192.f*screenRd, color, alpha*alpha, rotationAngle);
+	}
+
 	// Draw the halo if it enabled in the ssystem.ini file (+ special case for backward compatible for the Sun)
 	if (isSun && drawSunHalo && core->getSkyDrawer()->getFlagEarlySunHalo())
 	{
@@ -3481,27 +3510,6 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 
 		float haloMag=qMin(-18.f, getVMagnitudeWithExtinction(core)); // for sun on horizon, mag can go quite low, shrinking the halo too much.
 		core->getSkyDrawer()->postDrawSky3dModel(&sPainter, tmp, surfArcMin2, haloMag, haloColorToDraw, isSun);
-
-		if (currentLocationIsEarth)
-		{
-			LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
-			const float eclipseFactor = static_cast<float>(ssm->getSolarEclipseFactor(core).first);
-			// This alpha ensures 0 for complete sun, 1 for eclipse better 1e-10, with a strong increase towards full eclipse. We still need to square it.
-			const float alpha= ( !lmgr->getFlagAtmosphere() && ssm->getFlagPermanentSolarCorona() ? 0.7f : -0.1f*qMax(-10.0f, log10f(eclipseFactor)));
-			StelMovementMgr* mmgr = GETSTELMODULE(StelMovementMgr);
-			float rotationAngle=(mmgr->getEquatorialMount() ? 0.0f : getParallacticAngle(core) * M_180_PIf);
-
-			// Add ecliptic/equator angle. Meeus, Astr. Alg. 2nd, p100.
-			const double jde=core->getJDE();
-			const double eclJDE = GETSTELMODULE(SolarSystem)->getEarth()->getRotObliquity(jde);
-			double ra_equ, dec_equ, lambdaJDE, betaJDE;
-			StelUtils::rectToSphe(&ra_equ,&dec_equ,getEquinoxEquatorialPos(core));
-			StelUtils::equToEcl(ra_equ, dec_equ, eclJDE, &lambdaJDE, &betaJDE);
-			// We can safely assume beta=0 and ignore nutation.
-			const float q0=static_cast<float>(atan(-cos(lambdaJDE)*tan(eclJDE)));
-			rotationAngle -= q0*static_cast<float>(180.0/M_PI);
-			core->getSkyDrawer()->drawSunCorona(&sPainter, tmp.toVec3f(), 512.f/192.f*screenRd, haloColorToDraw, alpha*alpha, rotationAngle);
-		}
 	}
 
 	// Draw the real 3D object.
@@ -3667,29 +3675,6 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 			if (isSun)
 				haloMag=qMin(haloMag, -18.f);
 			core->getSkyDrawer()->postDrawSky3dModel(&sPainter, tmp, surfArcMin2, haloMag, haloColorToDraw, isSun);
-		}
-
-		if (isSun && currentLocationIsEarth)
-		{
-			LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
-			const float eclipseFactor = static_cast<float>(ssm->getSolarEclipseFactor(core).first);
-			// This alpha ensures 0 for complete sun, 1 for eclipse better 1e-10, with a strong increase towards full eclipse. We still need to square it.
-			// But without atmosphere we should indeed draw a visible corona by default!
-			const float alpha= ( !lmgr->getFlagAtmosphere() && ssm->getFlagPermanentSolarCorona() ? 0.7f : -0.1f*qMax(-10.0f, log10f(eclipseFactor)));
-			StelMovementMgr* mmgr = GETSTELMODULE(StelMovementMgr);
-			float rotationAngle=(mmgr->getEquatorialMount() ? 0.0f : getParallacticAngle(core) * M_180_PIf);
-
-			// Add ecliptic/equator angle. Meeus, Astr. Alg. 2nd, p100.
-			const double jde=core->getJDE();
-			const double eclJDE = GETSTELMODULE(SolarSystem)->getEarth()->getRotObliquity(jde);
-			double ra_equ, dec_equ, lambdaJDE, betaJDE;
-			StelUtils::rectToSphe(&ra_equ,&dec_equ,getEquinoxEquatorialPos(core));
-			StelUtils::equToEcl(ra_equ, dec_equ, eclJDE, &lambdaJDE, &betaJDE);
-			// We can safely assume beta=0 and ignore nutation.
-			const float q0=static_cast<float>(atan(-cos(lambdaJDE)*tan(eclJDE)));
-			rotationAngle -= q0*static_cast<float>(180.0/M_PI);
-
-			core->getSkyDrawer()->drawSunCorona(&sPainter, tmp.toVec3f(), 512.f/192.f*screenRd, haloColorToDraw, alpha*alpha, rotationAngle);
 		}
 	}
 }
