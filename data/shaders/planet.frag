@@ -185,6 +185,30 @@ vec3 linearToSRGB(vec3 lin)
 
 void main()
 {
+#ifndef IS_MOON
+	if(sunInfo.w==0.)
+	{
+		// We are drawing the Sun
+		vec4 texColor = texture2D(tex, texc);
+		texColor.rgb = srgbToLinear(texColor.rgb * sunInfo.rgb);
+		// Reference: chapter 14.7 "Limb Darkening" in "Allen’s Astrophysical Quantities",
+		//            A.N.Cox (ed.), 4th edition, New York: Springer-Verlag, 2002.
+		//            DOI 10.1007/978-1-4612-1186-0
+		// The values for u2 and v2 for wavelengths 400nm-800nm were taken, linearly
+		// interpolated, and integrated against CIE 1931 color matching functions.
+		// The results were transformed from XYZ to linear sRGB color space.
+		// We call the results for u2 "a1", and for v2 "a2".
+		const vec3 a2 = vec3(-0.226988526315793, -0.232934589453355, -0.153026433664999);
+		const vec3 a1 = vec3(0.848380336865573, 0.937696820066542, 0.981762186155682);
+		const vec3 a0 = vec3(1) - a1 - a2;
+		float cosTheta = dot(eyeDirection, normalize(normalVS));
+		float cosTheta2 = cosTheta*cosTheta;
+		vec3 limbDarkeningCoef = a0 + a1*cosTheta + a2*cosTheta2;
+		vec3 color = texColor.rgb * limbDarkeningCoef;
+		FRAG_COLOR = vec4(linearToSRGB(color), texColor.a);
+		return;
+	}
+#endif
     mediump float final_illumination = 1.0;
 #ifdef OREN_NAYAR
     mediump float lum = 1.;

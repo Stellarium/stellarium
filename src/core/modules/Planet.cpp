@@ -3882,10 +3882,13 @@ Planet::RenderData Planet::setCommonShaderUniforms(const StelPainter& painter, Q
 	GL(shader->setUniformValue(shaderVars.tex, 0));
 	GL(shader->setUniformValue(shaderVars.shadowCount, static_cast<GLint>(data.shadowCandidates.size())));
 	GL(shader->setUniformValue(shaderVars.shadowData, data.shadowCandidatesData));
-	GL(shader->setUniformValue(shaderVars.sunInfo, static_cast<GLfloat>(data.mTarget[12]),
-												   static_cast<GLfloat>(data.mTarget[13]),
-												   static_cast<GLfloat>(data.mTarget[14]),
-												   static_cast<GLfloat>(sun->getEquatorialRadius())));
+	if(this!=sun)
+	{
+		GL(shader->setUniformValue(shaderVars.sunInfo, static_cast<GLfloat>(data.mTarget[12]),
+													   static_cast<GLfloat>(data.mTarget[13]),
+													   static_cast<GLfloat>(data.mTarget[14]),
+													   static_cast<GLfloat>(sun->getEquatorialRadius())));
+	}
 	GL(shader->setUniformValue(shaderVars.skyBrightness, lmgr->getAtmosphereAverageLuminance()));
 	GL(shader->setUniformValue(shaderVars.poleLat, 1.1f, -0.1f)); // Avoid white objects. poleLat is only used for Mars.
 
@@ -3956,15 +3959,6 @@ void Planet::drawSphere(StelPainter* painter, float screenRd, bool drawOnlyRing)
 	
 	const SolarSystem* ssm = GETSTELMODULE(SolarSystem);
 
-	if (this==ssm->getSun())
-	{
-		texMap->bind();
-		//painter->setColor(2, 2, 0.2); // This is now in draw3dModel() to apply extinction
-		painter->setArrays(reinterpret_cast<const Vec3f*>(projectedVertexArr.constData()), reinterpret_cast<const Vec2f*>(model.texCoordArr.constData()));
-		painter->drawFromArray(StelPainter::Triangles, model.indiceArr.size(), 0, false, model.indiceArr.constData());
-		return;
-	}
-
 	//cancel out if shaders are invalid
 	if(shaderError)
 		return;
@@ -4006,6 +4000,11 @@ void Planet::drawSphere(StelPainter* painter, float screenRd, bool drawOnlyRing)
 	GL(shader->bind());
 
 	RenderData rData = setCommonShaderUniforms(*painter,shader,*shaderVars);
+	if(this==ssm->getSun())
+	{
+		const auto color = painter->getColor();
+		GL(shader->setUniformValue(shaderVars->sunInfo, color[0], color[1], color[2], 0.f));
+	}
 	
 	if (rings!=Q_NULLPTR)
 	{
