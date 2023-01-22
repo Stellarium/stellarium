@@ -144,17 +144,17 @@ mediump float orenNayar(in mediump vec3 normal, in highp vec3 lightDir, in highp
     mediump float beta = min(angleEyeNormal, angleLightNormal); //beta = min(theta_i, theta_r)
     mediump float gamma = dot(viewDir - normal * cosAngleEyeNormal, lightDir - normal * cosAngleLightNormal); // cos(phi_r-phi_i)
     mediump float C = sin(alpha) * tan(beta);
-	mediump float ON = cosAngleLightNormal * ((A + B * max(0.0, gamma) * C) * scale); // Qualitative model done.
+	mediump float ON = A + B * max(0.0, gamma) * C; // Qualitative model done.
     // Now add third term:
     mediump float C3_2 = (4.0*alpha*beta)/(M_PI*M_PI);
     mediump float C3=0.125*roughSq/(roughSq+0.09)*C3_2*C3_2;
-    mediump float third=(1.0-abs(gamma))*C3*tan(0.5*(alpha+beta))*cosAngleLightNormal*scale;
+    mediump float third=(1.0-abs(gamma))*C3*tan(0.5*(alpha+beta));
     ON += third;
     // Add the intereflection term:
     mediump float betaterm = 2.0*beta/M_PI;
-    mediump float ONir = cosAngleLightNormal * ((1.0-gamma*betaterm*betaterm)*0.17*scale*roughSq/(roughSq+0.13));
+    mediump float ONir = (1.0-gamma*betaterm*betaterm)*0.17*roughSq/(roughSq+0.13);
     ON += ONir;
-    return ON;
+    return ON * cosAngleLightNormal * scale;
 }
 #endif
 
