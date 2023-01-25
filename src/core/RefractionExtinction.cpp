@@ -282,6 +282,23 @@ QByteArray Refraction::getForwardTransformShader() const
 {
 	return QByteArray(1+R"(
 uniform float REFRACTION_press_temp_corr;
+// Workaround for Intel's unusable implementation of sin & cos, which leads to broken geometry of the Moon every 0.9° of elevation.
+float REFRACTION_sin(float x)
+{
+	const float PI = 3.14159265;
+	x = mod(x+PI, 2.0*PI)-PI;
+	return x*(0.999999599920672 + x*x*(-0.166665526354071 + x*x*(0.00833240298869917 + x*x*(-0.0001980863334175 + x*x*(2.69971463693744e-6 - 2.03622449118901e-8*x*x)))));
+}
+// Workaround for Intel's and AMD's unusable implementation of asin, which leads to time-dependent shifts of the Moon from its refracted positions.
+float REFRACTION_asin(float x)
+{
+	float sign = x < 0. ? -1. : 1.;
+	if(x < 0.) x = -x;
+	x = 2. * sqrt(1. - x) - 1.;
+	float v = 0.848061881596496 + x*(-0.755929497461161 + x*(-0.0539853235799928 + x*(-0.025701166121295 + x*(-0.00723634508887381 +
+	           x*(-0.00314276748524976 + x*(-0.00101365621070969 + x*(-0.000411380592372285 + x*(-0.000428167561924693 - 0.000213293541786718*x))))))));
+	return v * sign;
+}
 vec3 innerRefractionForward(vec3 altAzPos)
 {
 	const float PI = 3.14159265;
@@ -300,7 +317,7 @@ vec3 innerRefractionForward(vec3 altAzPos)
 	}
 
 	float sinGeo = altAzPos[2]/len;
-	float geom_alt_rad = asin(sinGeo);
+	float geom_alt_rad = REFRACTION_asin(sinGeo);
 	float geom_alt_deg = M_180_PI*geom_alt_rad;
 	if (geom_alt_deg > MIN_GEO_ALTITUDE_DEG)
 	{
@@ -321,7 +338,7 @@ vec3 innerRefractionForward(vec3 altAzPos)
 	// We have to shorten X,Y components of the vector as well by the change in cosines of altitude, or (sqrt(1-sin(alt))
 
 	float refr_alt_rad=geom_alt_deg*M_PI_180;
-	float sinRef=sin(refr_alt_rad);
+	float sinRef = REFRACTION_sin(refr_alt_rad);
 
 	// FIXME: do we really need double's mantissa length here as a comment in the C++ code says?
 	float shortenxy = abs(sinGeo)>=1.0 ? 1.0 : sqrt((1.-sinRef*sinRef)/(1.-sinGeo*sinGeo));
