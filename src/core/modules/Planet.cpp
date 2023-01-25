@@ -3859,10 +3859,11 @@ Planet::RenderData Planet::setCommonShaderUniforms(const StelPainter& painter, Q
 	projector->getModelViewTransform()->backward(lightPos3);
 	lightPos3.normalize();
 
-	data.eyePos = StelApp::getInstance().getCore()->getObserverHeliocentricEclipticPos();
+	const auto core = StelApp::getInstance().getCore();
+	data.eyePos = core->getObserverHeliocentricEclipticPos();
 	//qDebug() << eyePos[0] << " " << eyePos[1] << " " << eyePos[2] << " --> ";
 	// Use refractionOff for avoiding flickering Moon. (Bug #1411958)
-	StelApp::getInstance().getCore()->getHeliocentricEclipticModelViewTransform(StelCore::RefractionOff)->forward(data.eyePos);
+	core->getHeliocentricEclipticModelViewTransform(StelCore::RefractionOff)->forward(data.eyePos);
 	//qDebug() << "-->" << eyePos[0] << " " << eyePos[1] << " " << eyePos[2];
 	projector->getModelViewTransform()->backward(data.eyePos);
 	data.eyePos.normalize();
@@ -3873,13 +3874,21 @@ Planet::RenderData Planet::setCommonShaderUniforms(const StelPainter& painter, Q
 	GL(shader->setUniformValue(shaderVars.projectionMatrix, qMat));
 	GL(shader->setUniformValue(shaderVars.hasAtmosphere, GLint(atmosphere)));
 	GL(shader->setUniformValue(shaderVars.lightDirection, lightPos3[0], lightPos3[1], lightPos3[2]));
-	GL(shader->setUniformValue(shaderVars.eyeDirection, static_cast<GLfloat>(data.eyePos[0]), static_cast<GLfloat>(data.eyePos[1]), static_cast<GLfloat>(data.eyePos[2])));
+	GL(shader->setUniformValue(shaderVars.eyeDirection, static_cast<GLfloat>(data.eyePos[0]),
+														static_cast<GLfloat>(data.eyePos[1]),
+														static_cast<GLfloat>(data.eyePos[2])));
 	GL(shader->setUniformValue(shaderVars.diffuseLight, light.diffuse[0], light.diffuse[1], light.diffuse[2]));
 	GL(shader->setUniformValue(shaderVars.ambientLight, light.ambient[0], light.ambient[1], light.ambient[2]));
 	GL(shader->setUniformValue(shaderVars.tex, 0));
 	GL(shader->setUniformValue(shaderVars.shadowCount, static_cast<GLint>(data.shadowCandidates.size())));
 	GL(shader->setUniformValue(shaderVars.shadowData, data.shadowCandidatesData));
-	GL(shader->setUniformValue(shaderVars.sunInfo, static_cast<GLfloat>(data.mTarget[12]), static_cast<GLfloat>(data.mTarget[13]), static_cast<GLfloat>(data.mTarget[14]), static_cast<GLfloat>(sun->getEquatorialRadius())));
+	if(this!=sun)
+	{
+		GL(shader->setUniformValue(shaderVars.sunInfo, static_cast<GLfloat>(data.mTarget[12]),
+													   static_cast<GLfloat>(data.mTarget[13]),
+													   static_cast<GLfloat>(data.mTarget[14]),
+													   static_cast<GLfloat>(sun->getEquatorialRadius())));
+	}
 	GL(shader->setUniformValue(shaderVars.skyBrightness, lmgr->getAtmosphereAverageLuminance()));
 	GL(shader->setUniformValue(shaderVars.poleLat, 1.1f, -0.1f)); // Avoid white objects. poleLat is only used for Mars.
 
@@ -3950,15 +3959,6 @@ void Planet::drawSphere(StelPainter* painter, float screenRd, bool drawOnlyRing)
 	
 	const SolarSystem* ssm = GETSTELMODULE(SolarSystem);
 
-	if (this==ssm->getSun())
-	{
-		texMap->bind();
-		//painter->setColor(2, 2, 0.2); // This is now in draw3dModel() to apply extinction
-		painter->setArrays(reinterpret_cast<const Vec3f*>(projectedVertexArr.constData()), reinterpret_cast<const Vec2f*>(model.texCoordArr.constData()));
-		painter->drawFromArray(StelPainter::Triangles, model.indiceArr.size(), 0, false, model.indiceArr.constData());
-		return;
-	}
-
 	//cancel out if shaders are invalid
 	if(shaderError)
 		return;
@@ -4000,6 +4000,11 @@ void Planet::drawSphere(StelPainter* painter, float screenRd, bool drawOnlyRing)
 	GL(shader->bind());
 
 	RenderData rData = setCommonShaderUniforms(*painter,shader,*shaderVars);
+	if(this==ssm->getSun())
+	{
+		const auto color = painter->getColor();
+		GL(shader->setUniformValue(shaderVars->sunInfo, color[0], color[1], color[2], 0.f));
+	}
 	
 	if (rings!=Q_NULLPTR)
 	{
