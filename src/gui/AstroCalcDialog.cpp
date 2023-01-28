@@ -2127,22 +2127,37 @@ void AstroCalcDialog::generateRTS()
 			double startJD = StelUtils::qDateTimeToJd(QDateTime(ui->rtsFromDateEdit->date()));
 			double stopJD = StelUtils::qDateTimeToJd(QDateTime(ui->rtsToDateEdit->date()));
  #endif
-			startJD = startJD - core->getUTCOffset(startJD) / 24.;
-			stopJD = stopJD - core->getUTCOffset(stopJD) / 24.;
 
 			if (stopJD<startJD) // Stop warming atmosphere!..
 				return;
 
 			int elements = static_cast<int>((stopJD - startJD) / currentStep);
-			double JD, az, alt;
+			double JD, az, alt, beginJD, endJD;
 			float magnitude;
-			QString riseStr, setStr, altStr, magStr, elongSStr = dash, elongLStr = dash;
+			QString riseStr, setStr, transitStr, altStr, magStr, elongSStr = dash, elongLStr = dash;
 			for (int i = 0; i <= elements; i++)
 			{
-				JD = startJD + i * currentStep + 1;
-				core->setJD(JD);
+				JD = startJD + i * currentStep;
+				beginJD = JD - core->getUTCOffset(JD) / 24.; // JD at start of local date
+				endJD = JD+1. - core->getUTCOffset(JD+1.) / 24.;; // JD at the end of local date
+				core->setJD(JD+.5); // start the calculation at noon of local date
 				core->update(0); // force update to get new coordinates
 				Vec4d rts = selectedObject->getRTSTime(core);
+				Vec4d rtsNew;
+				if (rts[1]<beginJD) // found time before current date
+				{
+					core->setJD(rts[1]+1.); // try again for current date
+					core->update(0); // force update to get new coordinates
+					rtsNew = selectedObject->getRTSTime(core);
+					rts[1] = rtsNew[1];
+				}
+				if (rts[1]>endJD) // found time after current date
+				{
+					core->setJD(rts[1]-1.); // try again for current date
+					core->update(0); // force update to get new coordinates
+					rtsNew = selectedObject->getRTSTime(core);
+					rts[1] = rtsNew[1];
+				}
 				JD = rts[1];
 				core->setJD(JD);
 				core->update(0); // force update to get new coordinates
@@ -2163,10 +2178,57 @@ void AstroCalcDialog::generateRTS()
 				magnitude = selectedObject->getVMagnitudeWithExtinction(core);
 				magStr = (magnitude > 50.f || selectedObject->getEnglishName().contains("marker", Qt::CaseInsensitive)? dash : QString::number(magnitude, 'f', 2));
 
+				if (JD>beginJD && JD<endJD)
+				{
+					transitStr = QString("%1 %2").arg(localeMgr->getPrintableDateLocal(JD), localeMgr->getPrintableTimeLocal(JD));
+				}
+				else
+				{
+					transitStr = dash;
+					altStr = dash;
+					magStr = dash;
+					elongSStr = dash;
+					elongLStr = dash;
+				}
+
 				if (rts[3]==0.)
 				{
-					riseStr = QString("%1 %2").arg(localeMgr->getPrintableDateLocal(rts[0]), localeMgr->getPrintableTimeLocal(rts[0]));
-					setStr = QString("%1 %2").arg(localeMgr->getPrintableDateLocal(rts[2]), localeMgr->getPrintableTimeLocal(rts[2]));
+					if (rts[0]<beginJD) // found time before current date
+					{
+						core->setJD(rts[0]+1.); // try again for current date
+						core->update(0); // force update to get new coordinates
+						rtsNew = selectedObject->getRTSTime(core);
+						rts[0] = rtsNew[0];
+					}
+					if (rts[0]>endJD) // found time after current date
+					{
+						core->setJD(rts[0]-1.); // try again for current date
+						core->update(0); // force update to get new coordinates
+						rtsNew = selectedObject->getRTSTime(core);
+						rts[0] = rtsNew[0];
+					}
+					if (rts[2]<beginJD) // found time before current date
+					{
+						core->setJD(rts[2]+1.); // try again for current date
+						core->update(0); // force update to get new coordinates
+						rtsNew = selectedObject->getRTSTime(core);
+						rts[2] = rtsNew[2];
+					}
+					if (rts[2]>endJD) // found time after current date
+					{
+						core->setJD(rts[2]-1.); // try again for current date
+						core->update(0); // force update to get new coordinates
+						rtsNew = selectedObject->getRTSTime(core);
+						rts[2] = rtsNew[2];
+					}
+					if (rts[0]>beginJD && rts[0]<endJD)
+						riseStr = QString("%1 %2").arg(localeMgr->getPrintableDateLocal(rts[0]), localeMgr->getPrintableTimeLocal(rts[0]));
+					else
+						riseStr = dash;
+					if (rts[2]>beginJD && rts[2]<endJD)
+						setStr = QString("%1 %2").arg(localeMgr->getPrintableDateLocal(rts[2]), localeMgr->getPrintableTimeLocal(rts[2]));
+					else
+						setStr = dash;
 				}
 				else
 					riseStr = setStr = dash;
@@ -2177,7 +2239,7 @@ void AstroCalcDialog::generateRTS()
 				treeItem->setText(RTSRiseDate, riseStr); // local date and time
 				treeItem->setData(RTSRiseDate, Qt::UserRole, rts[0]);
 				treeItem->setTextAlignment(RTSRiseDate, Qt::AlignRight);
-				treeItem->setText(RTSTransitDate, QString("%1 %2").arg(localeMgr->getPrintableDateLocal(JD), localeMgr->getPrintableTimeLocal(JD))); // local date and time
+				treeItem->setText(RTSTransitDate, transitStr); // local date and time
 				treeItem->setData(RTSTransitDate, Qt::UserRole, JD);
 				treeItem->setTextAlignment(RTSTransitDate, Qt::AlignRight);
 				treeItem->setText(RTSSetDate, setStr); // local date and time

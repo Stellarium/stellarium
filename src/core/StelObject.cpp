@@ -677,15 +677,21 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 
 	if (flags&RTSTime && getType()!=QStringLiteral("Satellite") && !currentPlanet.contains("observer", Qt::CaseInsensitive) && !(core->getCurrentLocation().name.contains("->")))
 	{
-		const double utcShift = core->getUTCOffset(core->getJD()) / 24.; // Fix DST shift...
+		const double currentJD = core->getJD();
+		const double utcShift = core->getUTCOffset(currentJD) / 24.; // Fix DST shift...
 		Vec4d rts = getRTSTime(core);
 		QString sTransit = qc_("Transit", "celestial event; passage across a meridian");
 		QString sRise = qc_("Rise", "celestial event");
 		QString sSet = qc_("Set", "celestial event");
+		QString diffDate;
+		QString prvDay = q_("(previous day)");
+		QString nxtDay = q_("(next day)");
 		double sunrise = 0.;
 		double sunset = 24.;
-		const bool isSun = (getEnglishName()=="Sun");		
+		const bool isSun = (getEnglishName()=="Sun");
 		double hour(0);
+		int year, month, day, currentdate;
+		StelUtils::getDateFromJulianDay(currentJD+utcShift, &year, &month, &currentdate);
 
 		if (withTables && !(flags&SiderealTime && currentPlanet==QStringLiteral("Earth")))
 			res += "<table style='margin:0em 0em 0em -0.125em;border-spacing:0px;border:0px;'>";
@@ -693,27 +699,42 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 		if (rts[3]==0.)
 		{
 			hour = StelUtils::getHoursFromJulianDay(rts[0]+utcShift);
-			if (withTables)
-				res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2</td></tr>").arg(sRise, StelUtils::hoursToHmsStr(hour, true));
+			StelUtils::getDateFromJulianDay(rts[0]+utcShift, &year, &month, &day);
+			if (day != currentdate)
+				diffDate = (rts[0]<currentJD) ? prvDay : nxtDay;
 			else
-				res += QString("%1: %2<br/>").arg(sRise, StelUtils::hoursToHmsStr(hour, true));
+				diffDate = "";
+			if (withTables)
+				res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2 %3</td></tr>").arg(sRise, StelUtils::hoursToHmsStr(hour, true)).arg(diffDate);
+			else
+				res += QString("%1: %2 %3<br/>").arg(sRise, StelUtils::hoursToHmsStr(hour, true)).arg(diffDate);
 
 			sunrise = hour;
 		}
 
 		hour = StelUtils::getHoursFromJulianDay(rts[1]+utcShift);
-		if (withTables)
-			res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2</td></tr>").arg(sTransit, StelUtils::hoursToHmsStr(hour, true));
+		StelUtils::getDateFromJulianDay(rts[1]+utcShift, &year, &month, &day);
+		if (day != currentdate)
+			diffDate = (rts[1]<currentJD) ? prvDay : nxtDay;
 		else
-			res += QString("%1: %2<br/>").arg(sTransit, StelUtils::hoursToHmsStr(hour, true));
+				diffDate = "";
+		if (withTables)
+			res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2 %3</td></tr>").arg(sTransit, StelUtils::hoursToHmsStr(hour, true)).arg(diffDate);
+		else
+			res += QString("%1: %2 %3<br/>").arg(sTransit, StelUtils::hoursToHmsStr(hour, true)).arg(diffDate);
 
 		if (rts[3]==0.)
 		{
 			hour = StelUtils::getHoursFromJulianDay(rts[2]+utcShift);
-			if (withTables)
-				res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2</td></tr>").arg(sSet, StelUtils::hoursToHmsStr(hour, true));
+			StelUtils::getDateFromJulianDay(rts[2]+utcShift, &year, &month, &day);
+			if (day != currentdate)
+				diffDate = (rts[2]<currentJD) ? prvDay : nxtDay;
 			else
-				res += QString("%1: %2<br/>").arg(sSet, StelUtils::hoursToHmsStr(hour, true));
+				diffDate = "";
+			if (withTables)
+				res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2 %3</td></tr>").arg(sSet, StelUtils::hoursToHmsStr(hour, true)).arg(diffDate);
+			else
+				res += QString("%1: %2 %3<br/>").arg(sSet, StelUtils::hoursToHmsStr(hour, true)).arg(diffDate);
 
 			sunset = hour;
 		}
