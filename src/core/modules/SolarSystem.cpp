@@ -760,11 +760,19 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 
 #ifdef USE_GIMBAL_ORBIT
 		// undefine the flag in Orbit.h to disable and use the old, static observer solution (on an infinitely slow KeplerOrbit)
-		// Note that for now we ignore any orbit-related config values from the ini file.
+		// Note that for now we ignore any orbit-related config values except orbit_SemiMajorAxis from the ini file.
 		if (type=="observer")
 		{
+			double unit = 1; // AU
+			double defaultSemiMajorAxis = 1;
+			if (strParent!="Sun")
+			{
+				unit /= AU;  // Planet moons have distances given in km in the .ini file! But all further computation done in AU.
+				defaultSemiMajorAxis *= AU;
+			}
+			semi_major_axis = pd.value(secname+"/orbit_SemiMajorAxis", defaultSemiMajorAxis).toDouble() * unit;
 			// Create a pseudo orbit that allows interaction with keyboard
-			GimbalOrbit *orb = new GimbalOrbit(1, 0., 90.);    // [1 AU over north pole]
+			GimbalOrbit *orb = new GimbalOrbit(semi_major_axis, 0., 90.); // [Over north pole]
 			orbits.push_back(orb);
 
 			orbitPtr = orb;
