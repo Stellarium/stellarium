@@ -66,6 +66,13 @@ public:
 	//! @return azimuth counted from north or south as set in the StelApp preferences, in [0...360].
 	double getAzimuthForLocation(double longTarget, double latTarget) const;
 
+	//! longitude and latitude are private to force use of special getters. These return a location on the north pole if we are located on an "Observer".
+	//! By this we force useful view orientation.
+	float getLatitude()  const { if (planetName.endsWith(" Observer")) return 90.f; else return latitude;}
+	float getLongitude() const { if (planetName.endsWith(" Observer")) return 0.f; else return longitude;}
+	void setLatitude(float l)  { latitude=l;}
+	void setLongitude(float l) { longitude=l;}
+
 	//! Location/city name
 	QString name;
 	//! English region name (Northern Europe for example) or empty string
@@ -74,10 +81,6 @@ public:
 	QString state;
 	//! English planet name
 	QString planetName;
-	//! Longitude in degree
-	float longitude;
-	//! Latitude in degree
-	float latitude;
 	//! Altitude in meter
 	int altitude;
 	//! Zenith luminance at moonless night as could be measured by a Sky Quality Meter, in cd/m²
@@ -131,6 +134,11 @@ private:
 	//Register with Qt
 	static int metaTypeId;
 	static int initMetaType();
+	//! Longitude in degree
+	float longitude;
+	//! Latitude in degree
+	float latitude;
+
 };
 
 Q_DECLARE_METATYPE(StelLocation)

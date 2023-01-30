@@ -301,8 +301,8 @@ void LocationDialog::setFieldsFromLocation(const StelLocation& loc)
 		customTimeZone=core->getCurrentTimeZone();
 
 	ui->cityNameLineEdit->setText(loc.name);
-	ui->longitudeSpinBox->setDegrees(loc.longitude);
-	ui->latitudeSpinBox->setDegrees(loc.latitude);
+	ui->longitudeSpinBox->setDegrees(loc.getLongitude());
+	ui->latitudeSpinBox->setDegrees(loc.getLatitude());
 	ui->altitudeSpinBox->setValue(loc.altitude);
 
 	int idx = ui->planetNameComboBox->findData(loc.planetName, Qt::UserRole, Qt::MatchCaseSensitive);
@@ -405,7 +405,7 @@ void LocationDialog::setMapForLocation(const StelLocation& loc)
 		// For caching
 		lastPlanet = loc.planetName;
 	}
-	ui->mapWidget->setMarkerPos(loc.longitude, loc.latitude);
+	ui->mapWidget->setMarkerPos(loc.getLongitude(), loc.getLatitude());
 }
 
 void LocationDialog::populatePlanetList()
@@ -554,8 +554,8 @@ StelLocation LocationDialog::locationFromFields() const
 	else
 		loc.planetName = ui->planetNameComboBox->itemData(index).toString();
 	loc.name = ui->cityNameLineEdit->text().trimmed(); // avoid locations with leading whitespace
-	loc.latitude = qBound(-90.0, ui->latitudeSpinBox->valueDegrees(), 90.0);
-	loc.longitude = ui->longitudeSpinBox->valueDegrees();
+	loc.setLatitude(qBound(-90.0, ui->latitudeSpinBox->valueDegrees(), 90.0));
+	loc.setLongitude(ui->longitudeSpinBox->valueDegrees());
 	loc.altitude = ui->altitudeSpinBox->value();
 	index = ui->regionNameComboBox->currentIndex();
 	if (index < 0)
@@ -597,9 +597,9 @@ void LocationDialog::setLocationFromMap(double longitude, double latitude)
 		customTimeZone=core->getCurrentTimeZone();
 	reportEdit();
 	StelLocation loc = locationFromFields();
-	loc.latitude = latitude;
-	loc.longitude = longitude;
-	loc.name= QString("%1, %2").arg(loc.latitude).arg(loc.longitude); // Force a preliminary name
+	loc.setLatitude(latitude);
+	loc.setLongitude(longitude);
+	loc.name= QString("%1, %2").arg(loc.getLatitude()).arg(loc.getLongitude()); // Force a preliminary name
 	setFieldsFromLocation(loc);
 	core->moveObserverTo(loc, 0.);
 	// Only for locations on Earth: set zone to LMST.
@@ -672,7 +672,7 @@ void LocationDialog::setLocationFromCoords(int i)
 	StelLocation loc = locationFromFields();
 	StelApp::getInstance().getCore()->moveObserverTo(loc, 0.);
 	//Update the position of the map pointer
-	ui->mapWidget->setMarkerPos(loc.longitude, loc.latitude);
+	ui->mapWidget->setMarkerPos(loc.getLongitude(), loc.getLatitude());
 }
 
 void LocationDialog::saveTimeZone()
@@ -892,7 +892,7 @@ void LocationDialog::gpsReturn(bool success)
 		}
 		QSettings* conf = StelApp::getInstance().getSettings();
 		conf->setValue("init_location/location", loc.getID());
-		conf->setValue("init_location/last_location", QString("%1, %2, %3").arg(loc.latitude).arg(loc.longitude).arg(loc.altitude));
+		conf->setValue("init_location/last_location", QString("%1, %2, %3").arg(loc.getLatitude()).arg(loc.getLongitude()).arg(loc.altitude));
 	}
 	else
 	{

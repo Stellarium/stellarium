@@ -1624,8 +1624,8 @@ void Observability::onLocationChanged(const StelLocation & location)
 {
    qDebug() << "[Observability] Location updated.";
 
-   mylat          = static_cast<double>(location.latitude)/Rad2Deg;
-   mylon          = static_cast<double>(location.longitude)/Rad2Deg;
+   mylat          = static_cast<double>(location.getLatitude())/Rad2Deg;
+   mylon          = static_cast<double>(location.getLongitude())/Rad2Deg;
    double currheight = (6371. + (location.altitude) / 1000.) / UA;
 
    double temp1   = currheight * std::cos(mylat);

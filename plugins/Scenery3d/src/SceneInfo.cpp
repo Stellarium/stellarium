@@ -161,9 +161,9 @@ bool SceneInfo::loadByID(const QString &id,SceneInfo& info)
 		}
 
 		if(ini.contains("latitude"))
-			info.location->latitude = StelUtils::getDecAngle(ini.value("latitude").toString())*M_180_PI;
+			info.location->setLatitude(StelUtils::getDecAngle(ini.value("latitude").toString())*M_180_PI);
 		if (ini.contains("longitude"))
-			info.location->longitude = StelUtils::getDecAngle(ini.value("longitude").toString())*M_180_PI;
+			info.location->setLongitude(StelUtils::getDecAngle(ini.value("longitude").toString())*M_180_PI);
 		if (ini.contains("country"))
 			info.location->region = StelLocationMgr::pickRegionFromCountry(ini.value("country").toString());
 		if (ini.contains("state"))
@@ -197,10 +197,10 @@ bool SceneInfo::loadByID(const QString &id,SceneInfo& info)
 				// Formula from: http://en.wikipedia.org/wiki/Transverse_Mercator_projection, Convergence
 				//rot_z=std::atan(std::tan((lng-gridCentralMeridian)*M_PI/180.)*std::sin(lat*M_PI/180.));
 				// or from http://de.wikipedia.org/wiki/Meridiankonvergenz
-				rot_z=(info.location->longitude - gridCentralMeridian)*M_PI_180*std::sin(info.location->latitude*M_PI_180);
+				rot_z=(info.location->getLongitude() - gridCentralMeridian)*M_PI_180*std::sin(info.location->getLatitude()*M_PI_180);
 
-				qCDebug(sceneInfo) << "With Longitude " << info.location->longitude
-					 << ", Latitude " << info.location->latitude << " and CM="
+				qCDebug(sceneInfo) << "With Longitude " << info.location->getLongitude()
+					 << ", Latitude " << info.location->getLatitude() << " and CM="
 					 << gridCentralMeridian << ", ";
 				qCDebug(sceneInfo) << "setting meridian convergence to " << rot_z*M_180_PI << "degrees";
 			}

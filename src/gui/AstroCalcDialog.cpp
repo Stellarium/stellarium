@@ -942,7 +942,7 @@ double AstroCalcDialog::computeMaxElevation(StelObjectP obj)
 {
 	// NOTE: Without refraction!
 	double ra, dec, elevation;
-	const double lat = static_cast<double>(core->getCurrentLocation().latitude);
+	const double lat = static_cast<double>(core->getCurrentLocation().getLatitude());
 	StelUtils::rectToSphe(&ra, &dec, obj->getEquinoxEquatorialPos(core));
 	dec *= M_180_PI;
 	if (lat>=0.)
@@ -3026,8 +3026,8 @@ LocalSEparams localSolarEclipse(double JD,int contact,bool central) {
 	// and the American Ephemeris and Nautical Almanac (1961)
 
 	StelCore* core = StelApp::getInstance().getCore();
-	const double lat = static_cast<double>(core->getCurrentLocation().latitude);
-	const double lon = static_cast<double>(core->getCurrentLocation().longitude);
+	const double lat = static_cast<double>(core->getCurrentLocation().getLatitude());
+	const double lon = static_cast<double>(core->getCurrentLocation().getLongitude());
 	const double elevation = static_cast<double>(core->getCurrentLocation().altitude);
 
 	static SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
@@ -3902,8 +3902,8 @@ void AstroCalcDialog::selectCurrentSolarEclipseContact(const QModelIndex& modelI
 	float lon = modelIndex.sibling(modelIndex.row(), SolarEclipseContactLongitude).data(Qt::UserRole).toFloat();
 
 	StelLocation loc;
-	loc.latitude = lat;
-	loc.longitude = lon;
+	loc.setLatitude(lat);
+	loc.setLongitude(lon);
 	loc.altitude = 10; // 10 meters above sea level
 	loc.name = q_("Eclipse’s contact point");
 	loc.planetName = "Earth";
@@ -3956,8 +3956,8 @@ void AstroCalcDialog::selectCurrentSolarEclipseDate(const QModelIndex& modelInde
 	float lon = modelIndex.sibling(modelIndex.row(), SolarEclipseLongitude).data(Qt::UserRole).toFloat();
 
 	StelLocation loc;
-	loc.latitude = lat;
-	loc.longitude = lon;
+	loc.setLatitude(lat);
+	loc.setLongitude(lon);
 	loc.altitude = 10; // 10 meters above sea level
 	loc.name = q_("Greatest eclipse’s point");
 	loc.planetName = "Earth";
@@ -5039,8 +5039,8 @@ LocalTransitparams localTransit(double JD, int contact, bool central, PlanetP ob
 
 	StelCore* core = StelApp::getInstance().getCore();
 	static SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
-	const double lat = static_cast<double>(core->getCurrentLocation().latitude);
-	const double lon = static_cast<double>(core->getCurrentLocation().longitude);
+	const double lat = static_cast<double>(core->getCurrentLocation().getLatitude());
+	const double lon = static_cast<double>(core->getCurrentLocation().getLongitude());
 	const double elevation = static_cast<double>(core->getCurrentLocation().altitude);
 	double rc = 0., rs = 0.;
 	if (topocentric)

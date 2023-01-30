@@ -109,8 +109,8 @@ void gSatWrapper::calcObserverECIPosition(Vec3d& ao_position, Vec3d& ao_velocity
 	{
 		StelLocation loc   = StelApp::getInstance().getCore()->getCurrentLocation();
 
-		double radLatitude	= loc.latitude * KDEG2RAD;
-		double theta		= epoch.toThetaLMST(loc.longitude * KDEG2RAD);
+		double radLatitude	= loc.getLatitude() * KDEG2RAD;
+		double theta		= epoch.toThetaLMST(loc.getLongitude() * KDEG2RAD);
 
 		/* Reference:  Explanatory supplement to the Astronomical Almanac 1992, page 209-210. */
 		/* Ellipsoid earth model*/
@@ -135,8 +135,8 @@ Vec3d gSatWrapper::getAltAz() const
 	StelLocation loc   = StelApp::getInstance().getCore()->getCurrentLocation();
 	Vec3d topoSatPos;
 
-	const double  radLatitude	= loc.latitude * KDEG2RAD;
-	const double  theta		= epoch.toThetaLMST(loc.longitude * KDEG2RAD);
+	const double  radLatitude	= loc.getLatitude() * KDEG2RAD;
+	const double  theta		= epoch.toThetaLMST(loc.getLongitude() * KDEG2RAD);
 	const double sinRadLatitude	= sin(radLatitude);
 	const double cosRadLatitude	= cos(radLatitude);
 	const double sinTheta	= sin(theta);

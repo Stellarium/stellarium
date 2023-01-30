@@ -354,7 +354,7 @@ int NewHinduCalendar::hinduCalendarYear(const double rd_ut)
 double NewHinduCalendar::hinduAscensionalDifference(const int rd, const StelLocation &loc)
 {
 	const double sinD=(1397./3438.)*hinduSine(hinduTropicalLongitude(rd));
-	const double phi=static_cast<double>(loc.latitude);
+	const double phi=static_cast<double>(loc.getLatitude());
 	const double diurnalRadius=hinduSine(90.+hinduArcsin(sinD));
 	const double tanPhi=hinduSine(phi)/hinduSine(90.+phi);
 	const double earthSine=sinD*tanPhi;
@@ -402,7 +402,7 @@ double NewHinduCalendar::hinduEquationOfTime(const double rd_ut)
 // return hindu time of sunrise (CC:UE 20.33)
 double NewHinduCalendar::hinduSunrise(const int rd)
 {
-	return rd+0.25+static_cast<double>(ujjain.longitude-hinduLocation.longitude)/360.-hinduEquationOfTime(rd)
+	return rd+0.25+static_cast<double>(ujjain.getLongitude()-hinduLocation.getLongitude())/360.-hinduEquationOfTime(rd)
 			+ (1577917828./(1582237828.*360.))*(hinduAscensionalDifference(rd, hinduLocation)+0.25*hinduSolarSiderealDifference(rd));
 }
 
@@ -410,7 +410,7 @@ double NewHinduCalendar::hinduSunrise(const int rd)
 // return hindu time of sunset (CC:UE 20.34)
 double NewHinduCalendar::hinduSunset(const int rd)
 {
-	return rd+0.75+static_cast<double>(ujjain.longitude-hinduLocation.longitude)/360.-hinduEquationOfTime(rd)
+	return rd+0.75+static_cast<double>(ujjain.getLongitude()-hinduLocation.getLongitude())/360.-hinduEquationOfTime(rd)
 			+ (1577917828./(1582237828.*360.))*(0.75*hinduSolarSiderealDifference(rd) - hinduAscensionalDifference(rd, hinduLocation));
 }
 // return hindu time  (CC:UE 20.35)
