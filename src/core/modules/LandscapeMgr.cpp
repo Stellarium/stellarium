@@ -700,6 +700,10 @@ void LandscapeMgr::draw(StelCore* core)
 // Some element in drawing order behind LandscapeMgr can call this at the end of its own draw() to overdraw with the polygon line and gazetteer.
 void LandscapeMgr::drawPolylineOnly(StelCore* core)
 {
+	// For observers we never draw anything of landscape, atmosphere, cardinals.
+	if (core->getCurrentPlanet()->getPlanetType()==Planet::isObserver)
+		return;
+
 	// Draw the landscape
 	if (oldLandscape && oldLandscape->hasLandscapePolygon())
 		oldLandscape->draw(core, true);
