@@ -646,6 +646,10 @@ void LandscapeMgr::update(double deltaTime)
 
 void LandscapeMgr::draw(StelCore* core)
 {
+	// For observers we never draw anything of landscape, atmosphere, cardinals.
+	if (core->getCurrentPlanet()->getPlanetType()==Planet::isObserver)
+		return;
+
 	StelSkyDrawer* drawer=core->getSkyDrawer();
 
 	// Draw the atmosphere
