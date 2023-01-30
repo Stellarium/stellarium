@@ -651,8 +651,8 @@ void NavStars::extraInfo(StelCore* core, const StelObjectP& selectedObject)
 
 	NavStarsCalculator calc;
 	calc.setUTC(StelUtils::julianDayToISO8601String(jd))
-		.setLatDeg(core->getCurrentLocation().latitude)
-		.setLonDeg(core->getCurrentLocation().longitude)
+		.setLatDeg(core->getCurrentLocation().getLatitude())
+		.setLonDeg(core->getCurrentLocation().getLongitude())
 		.setJd(jd)
 		.setJde(jde)
 		.setGmst(get_mean_sidereal_time(jd, jde));

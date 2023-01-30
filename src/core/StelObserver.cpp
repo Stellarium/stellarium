@@ -212,21 +212,21 @@ double StelObserver::getDistanceFromCenter(void) const
 Vec4d StelObserver::getTopographicOffsetFromCenter(void) const
 {
 	if (getHomePlanet()->getEquatorialRadius()==0.0) // the transitional ArtificialPlanet or SpaceShipObserver have this
-		return Vec4d(0.,0.,static_cast<double>(currentLocation.latitude)*(M_PI/180.0),currentLocation.altitude/(1000.0*AU));
+		return Vec4d(0.,0.,static_cast<double>(currentLocation.getLatitude())*(M_PI/180.0),currentLocation.altitude/(1000.0*AU));
 
-	return getHomePlanet()->getRectangularCoordinates(static_cast<double>(currentLocation.longitude),
-							  static_cast<double>(currentLocation.latitude),
+	return getHomePlanet()->getRectangularCoordinates(static_cast<double>(currentLocation.getLongitude()),
+							  static_cast<double>(currentLocation.getLatitude()),
 							  currentLocation.altitude);
 }
 
 // For Earth we require JD, for other planets JDE to describe rotation!
 Mat4d StelObserver::getRotAltAzToEquatorial(double JD, double JDE) const
 {
-	double lat = qBound(-90.0, static_cast<double>(currentLocation.latitude), 90.0);
+	double lat = qBound(-90.0, static_cast<double>(currentLocation.getLatitude()), 90.0);
 	// TODO: Figure out how to keep continuity in sky as we reach poles
 	// otherwise sky jumps in rotation when reach poles in equatorial mode
 	// This is a kludge
-	return Mat4d::zrotation((getHomePlanet()->getSiderealTime(JD, JDE)+static_cast<double>(currentLocation.longitude))*M_PI/180.)
+	return Mat4d::zrotation((getHomePlanet()->getSiderealTime(JD, JDE)+static_cast<double>(currentLocation.getLongitude()))*M_PI/180.)
 		* Mat4d::yrotation((90.-lat)*M_PI/180.);
 }
 
@@ -313,8 +313,8 @@ bool SpaceShipObserver::update(double deltaTime)
 
 		// Move the lon/lat/alt on the planet
 		const float moveToMult = 1.f-static_cast<float>(timeToGo/transitSeconds);
-		currentLocation.latitude = moveStartLocation.latitude - moveToMult*(moveStartLocation.latitude-moveTargetLocation.latitude);
-		currentLocation.longitude = moveStartLocation.longitude - moveToMult*(moveStartLocation.longitude-moveTargetLocation.longitude);
+		currentLocation.setLatitude( moveStartLocation.getLatitude() - moveToMult*(moveStartLocation.getLatitude()-moveTargetLocation.getLatitude()));
+		currentLocation.setLongitude(moveStartLocation.getLongitude() - moveToMult*(moveStartLocation.getLongitude()-moveTargetLocation.getLongitude()));
 		currentLocation.altitude = int(moveStartLocation.altitude - moveToMult*(moveStartLocation.altitude-moveTargetLocation.altitude));		
 	}
 	return true;

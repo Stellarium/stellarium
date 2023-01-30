@@ -120,8 +120,8 @@ void MainService::get(const QByteArray& operation, const APIParameters &paramete
 			obj2.insert("name",loc.name);
 			obj2.insert("role",QString(loc.role));
 			obj2.insert("planet",loc.planetName);
-			obj2.insert("latitude",static_cast<double>(loc.latitude));
-			obj2.insert("longitude",static_cast<double>(loc.longitude));
+			obj2.insert("latitude",static_cast<double>(loc.getLatitude()));
+			obj2.insert("longitude",static_cast<double>(loc.getLongitude()));
 			obj2.insert("altitude",loc.altitude);
 			obj2.insert("region",loc.region);
 			obj2.insert("state",loc.state);

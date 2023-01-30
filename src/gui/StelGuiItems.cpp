@@ -847,7 +847,7 @@ void BottomStelBar::updateText(bool updatePos)
 	{
 		const StelLocation* loc = &core->getCurrentLocation();
 		if(loc->name.isEmpty())
-			newLocation = planetNameI18n +", "+StelUtils::decDegToDmsStr(loc->latitude)+", "+StelUtils::decDegToDmsStr(loc->longitude);
+			newLocation = planetNameI18n +", "+StelUtils::decDegToDmsStr(loc->getLatitude())+", "+StelUtils::decDegToDmsStr(loc->getLongitude());
 		else
 		{
 			if (loc->name.contains("->")) // a spaceship
@@ -864,8 +864,8 @@ void BottomStelBar::updateText(bool updatePos)
 	{
 		updatePos = true;
 		location->setText(newLocation);
-		double lat = static_cast<double>(core->getCurrentLocation().latitude);
-		double lon = static_cast<double>(core->getCurrentLocation().longitude);
+		double lat = static_cast<double>(core->getCurrentLocation().getLatitude());
+		double lon = static_cast<double>(core->getCurrentLocation().getLongitude());
 		QString latStr, lonStr, pm;
 		if (lat >= 0)
 			pm = "N";

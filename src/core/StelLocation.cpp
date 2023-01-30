@@ -92,14 +92,17 @@ QDataStream& operator<<(QDataStream& out, const StelLocation& loc)
 {
 	const auto lum = loc.lightPollutionLuminance.toFloat();
 	const int bortleScaleIndex = loc.lightPollutionLuminance.isValid() ? StelCore::luminanceToBortleScaleIndex(lum) : -1;
-	out << loc.name << loc.state << loc.region << loc.role << loc.population << loc.latitude << loc.longitude << loc.altitude << bortleScaleIndex << loc.ianaTimeZone << loc.planetName << loc.landscapeKey << loc.isUserLocation;
+	out << loc.name << loc.state << loc.region << loc.role << loc.population << loc.getLatitude() << loc.getLongitude() << loc.altitude << bortleScaleIndex << loc.ianaTimeZone << loc.planetName << loc.landscapeKey << loc.isUserLocation;
 	return out;
 }
 
 QDataStream& operator>>(QDataStream& in, StelLocation& loc)
 {
 	int bortleScaleIndex;
-	in >> loc.name >> loc.state >> loc.region >> loc.role >> loc.population >> loc.latitude >> loc.longitude >> loc.altitude >> bortleScaleIndex >> loc.ianaTimeZone >> loc.planetName >> loc.landscapeKey >> loc.isUserLocation;
+	float lng, lat;
+	in >> loc.name >> loc.state >> loc.region >> loc.role >> loc.population >> lat >> lng >> loc.altitude >> bortleScaleIndex >> loc.ianaTimeZone >> loc.planetName >> loc.landscapeKey >> loc.isUserLocation;
+	loc.setLongitude(lng);
+	loc.setLatitude(lat);
 	if(bortleScaleIndex > 0)
 		loc.lightPollutionLuminance = StelCore::bortleScaleIndexToLuminance(bortleScaleIndex);
 	return in;

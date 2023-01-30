@@ -4924,8 +4924,8 @@ Vec4d Planet::getClosestRTSTime(const StelCore *core, const double altitude) con
 	const double currentJDE = core->getJDE();
 	double mr, ms, mt, flag=0.;
 
-	const double phi = static_cast<double>(loc.latitude) * M_PI_180;
-	const double L = static_cast<double>(loc.longitude) * M_PI_180; // OUR longitude. Meeus has it reversed
+	const double phi = static_cast<double>(loc.getLatitude()) * M_PI_180;
+	const double L = static_cast<double>(loc.getLongitude()) * M_PI_180; // OUR longitude. Meeus has it reversed
 
 	if ((getEnglishName()=="Moon") && (loc.planetName=="Earth"))
 	{

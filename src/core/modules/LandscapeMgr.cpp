@@ -674,7 +674,7 @@ void LandscapeMgr::draw(StelCore* core)
 	landscape->draw(core, flagPolyLineDisplayedOnly);
 
 	// Draw the cardinal points
-	cardinalPoints->draw(core, static_cast<double>(StelApp::getInstance().getCore()->getCurrentLocation().latitude));
+	cardinalPoints->draw(core, static_cast<double>(StelApp::getInstance().getCore()->getCurrentLocation().getLatitude()));
 
 	if(messageFader.getInterstate())
 	{
@@ -707,7 +707,7 @@ void LandscapeMgr::drawPolylineOnly(StelCore* core)
 		landscape->draw(core, true);
 
 	// Draw the cardinal points
-	cardinalPoints->draw(core, static_cast<double>(StelApp::getInstance().getCore()->getCurrentLocation().latitude));
+	cardinalPoints->draw(core, static_cast<double>(StelApp::getInstance().getCore()->getCurrentLocation().getLatitude()));
 }
 
 void LandscapeMgr::createAtmosphere()
@@ -1322,8 +1322,8 @@ QString LandscapeMgr::getCurrentLandscapeHtmlDescription() const
 
 		desc += QString("<b>%1</b>: %2, %3, %4 %5").arg(
 				q_("Location"),
-				StelUtils::radToDmsStrAdapt(static_cast<double>(landscape->getLocation().latitude) *M_PI_180),
-				StelUtils::radToDmsStrAdapt(static_cast<double>(landscape->getLocation().longitude) * M_PI_180),
+				StelUtils::radToDmsStrAdapt(static_cast<double>(landscape->getLocation().getLatitude()) *M_PI_180),
+				StelUtils::radToDmsStrAdapt(static_cast<double>(landscape->getLocation().getLongitude()) * M_PI_180),
 				QString::number(landscape->getLocation().altitude),
 				alt);
 

@@ -85,13 +85,13 @@ void ArchaeoLinesDialogLocations::setLocationFromList(const QModelIndex& index)
 	switch (modalContext)
 	{
 		case 1:
-			al->setGeographicLocation1Latitude(static_cast<double>(loc.latitude));
-			al->setGeographicLocation1Longitude(static_cast<double>(loc.longitude));
+			al->setGeographicLocation1Latitude(static_cast<double>(loc.getLatitude()));
+			al->setGeographicLocation1Longitude(static_cast<double>(loc.getLongitude()));
 			al->setGeographicLocation1Label(loc.name);
 			break;
 		case 2:
-			al->setGeographicLocation2Latitude(static_cast<double>(loc.latitude));
-			al->setGeographicLocation2Longitude(static_cast<double>(loc.longitude));
+			al->setGeographicLocation2Latitude(static_cast<double>(loc.getLatitude()));
+			al->setGeographicLocation2Longitude(static_cast<double>(loc.getLongitude()));
 			al->setGeographicLocation2Label(loc.name);
 			break;
 		default:
