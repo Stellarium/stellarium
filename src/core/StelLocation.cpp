@@ -87,6 +87,30 @@ QString StelLocation::getID() const
 		return name;
 }
 
+float StelLocation::getLatitude()  const
+{
+	SolarSystem *ss=GETSTELMODULE(SolarSystem);
+	PlanetP planet=nullptr;
+	if (ss)
+		planet=ss->searchByEnglishName(planetName);
+	if (planet && planet->getPlanetType()==Planet::isObserver)
+		return 90.f;
+	else
+		return latitude;
+}
+
+float StelLocation::getLongitude() const
+{
+	SolarSystem *ss=GETSTELMODULE(SolarSystem);
+	PlanetP planet=nullptr;
+	if (ss)
+		planet=GETSTELMODULE(SolarSystem)->searchByEnglishName(planetName);
+	if (planet && planet->getPlanetType()==Planet::isObserver)
+		return 0.f;
+	else
+		return longitude;
+}
+
 // GZ TODO: These operators may require sanitizing for timezone names!
 QDataStream& operator<<(QDataStream& out, const StelLocation& loc)
 {
