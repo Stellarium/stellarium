@@ -68,8 +68,8 @@ public:
 
 	//! longitude and latitude are private to force use of special getters. These return a location on the north pole if we are located on an "Observer".
 	//! By this we force useful view orientation.
-	float getLatitude()  const { if (planetName.endsWith(" Observer")) return 90.f; else return latitude;}
-	float getLongitude() const { if (planetName.endsWith(" Observer")) return 0.f; else return longitude;}
+	float getLatitude()  const;
+	float getLongitude() const;
 	void setLatitude(float l)  { latitude=l;}
 	void setLongitude(float l) { longitude=l;}
 
