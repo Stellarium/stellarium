@@ -854,8 +854,11 @@ void BottomStelBar::updateText(bool updatePos)
 				newLocation = QString("%1 [%2 %3]").arg(planetNameI18n, q_("flight"), loc->name);
 			else
 			{
-				//TRANSLATORS: Unit of measure for distance - meter
-				newLocation = planetNameI18n +", "+q_(loc->name) + ", "+ QString("%1 %2").arg(loc->altitude).arg(qc_("m", "distance"));
+				if (core->getCurrentPlanet()->getPlanetType()==Planet::isObserver)
+					newLocation = planetNameI18n;
+				else
+					//TRANSLATORS: Unit of measure for distance - meter
+					newLocation = planetNameI18n +", "+q_(loc->name) + ", "+ QString("%1 %2").arg(loc->altitude).arg(qc_("m", "distance"));
 			}
 		}
 	}
