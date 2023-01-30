@@ -2034,8 +2034,11 @@ void GridLinesMgr::draw(StelCore* core)
 	circumpolarCircleN->draw(core);
 	circumpolarCircleS->draw(core);
 
-	fixedEquatorialGrid->draw(core);
-	fixedEquatorLine->draw(core);
+	if (core->getCurrentPlanet()->getPlanetType()!=Planet::isObserver)
+	{
+		fixedEquatorialGrid->draw(core);
+		fixedEquatorLine->draw(core);
+	}
 
 	aziGrid->draw(core);
 	meridianLine->draw(core);
