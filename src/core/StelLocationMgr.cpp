@@ -185,12 +185,12 @@ void LibGPSLookupHelper::query()
 				// qDebug() << "Spherical Position Error (epe):" << newdata->epe;
 				// #endif
 			}
-			loc.longitude = static_cast<float> (newdata->fix.longitude);
-			loc.latitude  = static_cast<float> (newdata->fix.latitude);
+			loc.setLongitude(static_cast<float> (newdata->fix.longitude));
+			loc.setLatitude (static_cast<float> (newdata->fix.latitude));
 			// Frequently hdop, vdop and satellite counts are NaN. Sometimes they show OK. This is minor issue.
 			if ((verbose) && (fixmode<3))
 			{
-				qDebug() << "GPSDfix " << fixmode << ": Location" << QString("lat %1, long %2, alt %3").arg(loc.latitude).arg(loc.longitude).arg(loc.altitude);
+				qDebug() << "GPSDfix " << fixmode << ": Location" << QString("lat %1, long %2, alt %3").arg(loc.getLatitude()).arg(loc.getLongitude()).arg(loc.altitude);
 				qDebug() << "    Estimated HDOP " << newdata->dop.hdop << "m from " << newdata->satellites_used << "(of" << newdata->satellites_visible  << "visible) satellites";
 			}
 			else
@@ -202,7 +202,7 @@ void LibGPSLookupHelper::query()
 #endif
 				if (verbose)
 				{
-					qDebug() << "GPSDfix " << fixmode << ": Location" << QString("lat %1, long %2, alt %3").arg(loc.latitude).arg(loc.longitude).arg(loc.altitude);
+					qDebug() << "GPSDfix " << fixmode << ": Location" << QString("lat %1, long %2, alt %3").arg(loc.getLatitude()).arg(loc.getLongitude()).arg(loc.altitude);
 					qDebug() << "    Estimated HDOP " << newdata->dop.hdop << "m, VDOP " << newdata->dop.vdop <<  "m from " << newdata->satellites_used << "(of" << newdata->satellites_visible  << "visible) satellites";
 				}
 				break; // escape from the tries loop
@@ -220,7 +220,7 @@ void LibGPSLookupHelper::query()
 		qDebug() << "Fix only quality " << fixmode << " after " << tries << " tries";
 	}
 	if (verbose)
-		qDebug() << "GPSD location" << QString("lat %1, long %2, alt %3").arg(loc.latitude).arg(loc.longitude).arg(loc.altitude);
+		qDebug() << "GPSD location" << QString("lat %1, long %2, alt %3").arg(loc.getLatitude()).arg(loc.getLongitude()).arg(loc.altitude);
 
 	emit queryFinished(loc);
 }
