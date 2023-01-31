@@ -89,7 +89,9 @@ QString StelLocation::getID() const
 
 float StelLocation::getLatitude()  const
 {
-	SolarSystem *ss=GETSTELMODULE(SolarSystem);
+	SolarSystem *ss=nullptr;
+	if (StelApp::exists()) // allow running in test modules
+		ss=GETSTELMODULE(SolarSystem);
 	PlanetP planet=nullptr;
 	if (ss)
 		planet=ss->searchByEnglishName(planetName);
