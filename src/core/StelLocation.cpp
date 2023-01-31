@@ -108,7 +108,7 @@ float StelLocation::getLongitude() const
 		ss=GETSTELMODULE(SolarSystem);
 	PlanetP planet=nullptr;
 	if (ss)
-		planet=GETSTELMODULE(SolarSystem)->searchByEnglishName(planetName);
+		planet=ss->searchByEnglishName(planetName);
 	if (planet && planet->getPlanetType()==Planet::isObserver)
 		return 0.f;
 	else

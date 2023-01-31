@@ -138,7 +138,6 @@ private:
 	float longitude;
 	//! Latitude in degree
 	float latitude;
-
 };
 
 Q_DECLARE_METATYPE(StelLocation)
