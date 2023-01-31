@@ -306,3 +306,11 @@ void GimbalOrbit::positionAtTimevInVSOP87Coordinates(double JDE, double* v)
 	v[1] *= distance;
 	v[2] *= distance;
 }
+
+void GimbalOrbit::addToLatitude(const double dlat)
+{
+    // This value lets us avoid jumpiness of view roll when looking at the poles
+    static const double epsilon = 1e-8;
+    static const double max = M_PI_2*(1 - epsilon);
+    latitude = qBound(-max, latitude+dlat*M_PI_180, +max);
+}
