@@ -151,10 +151,8 @@ private:
 //! This class ic currently in an experimental state. rotateToVsop87 may need to be set up correctly, and view frame currently cannot be controlled properly.
 class GimbalOrbit : public Orbit {
 public:
-	GimbalOrbit(double distance,
-		   double longitude,
-		   double latitude
-		   );
+	//! Constructor. @param distance in AU, @param longitude in radians, @param latitude in radians.
+	GimbalOrbit(double distance, double longitude, double latitude);
 	//! Compute position for a (unused) Julian day.
 	virtual void positionAtTimevInVSOP87Coordinates(double JDE, double* v) Q_DECL_OVERRIDE;
 	//! Returns (pseudo) semimajor axis [AU] of a circular orbit.
@@ -167,7 +165,7 @@ public:
 	void setLatitude(const double lat) { latitude=lat*M_PI_180;}
 	void setDistance(const double dist){ distance=dist;}
 	void addToLongitude(const double dlong){ longitude+=dlong*M_PI_180; }
-	void addToLatitude(const double dlat)  { latitude=qBound(-M_PI_2, latitude+dlat*M_PI_180, M_PI_2);}
+	void addToLatitude(const double dlat)  { latitude=qBound(-89.99*M_PI_180, latitude+dlat*M_PI_180, 89.99*M_PI_180);}
 	void addToDistance(const double ddist) { distance=qBound(0.01, distance+ddist, 50.);}
 
 private:
