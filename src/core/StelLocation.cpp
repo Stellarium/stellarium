@@ -18,7 +18,6 @@
 
 #include "StelLocation.hpp"
 #include "StelLocationMgr.hpp"
-#include "StelLocaleMgr.hpp"
 #include "StelUtils.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelApp.hpp"
@@ -44,8 +43,6 @@ StelLocation::StelLocation(QString lName, QString lState, QString lRegion, float
 	: name(lName)
 	, region(lRegion)
 	, state(lState)
-	, longitude(lng)
-	, latitude(lat)
 	, altitude(alt)
 	, lightPollutionLuminance(StelCore::bortleScaleIndexToLuminance(bortleIndex))
 	, landscapeKey(landscapeID)
@@ -53,6 +50,8 @@ StelLocation::StelLocation(QString lName, QString lState, QString lRegion, float
 	, role(roleKey)
 	, ianaTimeZone(timeZone)
 	, isUserLocation(true)
+	, longitude(lng)
+	, latitude(lat)
 {
 }
 
