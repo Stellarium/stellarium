@@ -128,7 +128,16 @@ void SpecificTimeMgr::nextTransit()
 		core->update(0);
 		Vec4d rts = selected[0]->getRTSTime(core);
 		if (rts[3]>-1000.)
-			core->setJD(rts[1]);
+		{
+			if (rts[3]!=20)
+				core->setJD(rts[1]);
+			else { // no transit
+				core->addSolarDays(1.0);
+				core->update(0);
+				rts = selected[0]->getRTSTime(core);
+				core->setJD(rts[1]);
+			}
+		}
 	}
 }
 
@@ -141,7 +150,16 @@ void SpecificTimeMgr::nextRising()
 		core->update(0);
 		Vec4d rts = selected[0]->getRTSTime(core);
 		if (rts[3]>-1000.)
-			core->setJD(rts[0]);
+		{
+			if (rts[3]!=30)
+				core->setJD(rts[0]);
+			else { // no rise
+				core->addSolarDays(1.0);
+				core->update(0);
+				rts = selected[0]->getRTSTime(core);
+				core->setJD(rts[0]);
+			}
+		}
 	}
 }
 
@@ -154,7 +172,16 @@ void SpecificTimeMgr::nextSetting()
 		core->update(0);
 		Vec4d rts = selected[0]->getRTSTime(core);
 		if (rts[3]>-1000.)
-			core->setJD(rts[2]);
+		{
+			if (rts[3]!=40)
+				core->setJD(rts[2]);
+			else { // no set
+				core->addSolarDays(1.0);
+				core->update(0);
+				rts = selected[0]->getRTSTime(core);
+				core->setJD(rts[2]);
+			}
+		}
 	}
 }
 
@@ -167,7 +194,16 @@ void SpecificTimeMgr::previousTransit()
 		core->update(0);
 		Vec4d rts = selected[0]->getRTSTime(core);
 		if (rts[3]>-1000.)
-			core->setJD(rts[1]);
+		{
+			if (rts[3]!=20)
+				core->setJD(rts[1]);
+			else { // no transit
+				core->addSolarDays(-1.0);
+				core->update(0);
+				rts = selected[0]->getRTSTime(core);
+				core->setJD(rts[1]);
+			}
+		}
 	}
 }
 
@@ -180,7 +216,16 @@ void SpecificTimeMgr::previousRising()
 		core->update(0);
 		Vec4d rts = selected[0]->getRTSTime(core);
 		if (rts[3]>-1000.)
-			core->setJD(rts[0]);
+		{
+			if (rts[3]!=30)
+				core->setJD(rts[0]);
+			else { // no rise
+				core->addSolarDays(-1.0);
+				core->update(0);
+				rts = selected[0]->getRTSTime(core);
+				core->setJD(rts[0]);
+			}
+		}
 	}
 }
 
@@ -193,7 +238,16 @@ void SpecificTimeMgr::previousSetting()
 		core->update(0);
 		Vec4d rts = selected[0]->getRTSTime(core);
 		if (rts[3]>-1000.)
-			core->setJD(rts[2]);
+		{
+			if (rts[3]!=40)
+				core->setJD(rts[2]);
+			else { // no set
+				core->addSolarDays(-1.0);
+				core->update(0);
+				rts = selected[0]->getRTSTime(core);
+				core->setJD(rts[2]);
+			}
+		}
 	}
 }
 

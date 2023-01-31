@@ -612,6 +612,13 @@ public:
 	//!       * -1000. is used as "invalid" value. The result should then not be used.
 	//! @note This is based on Meeus, Astronomical Algorithms (2nd ed.), but deviates in details.
 	//! @note Limitation for efficiency: If this is a planet moon from another planet, we compute RTS for the parent planet instead!
+	virtual Vec4d getClosestRTSTime(const StelCore* core, const double altitude=0.) const;
+
+	//! Adaptation of getClosestRTSTime() to compute times of rise, transit and set for a solar system object for current location and date.
+	//! @note The fourth element flags particular conditions:
+	//!       *   +20 for objects with no transit time on current date.
+	//!       *   +30 for objects with no rise time on current date.
+	//!       *   +40 for objects with no set time on current date.
 	virtual Vec4d getRTSTime(const StelCore* core, const double altitude=0.) const Q_DECL_OVERRIDE;
 
 	void resetTextures();

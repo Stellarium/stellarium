@@ -683,58 +683,69 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 		QString sTransit = qc_("Transit", "celestial event; passage across a meridian");
 		QString sRise = qc_("Rise", "celestial event");
 		QString sSet = qc_("Set", "celestial event");
-		QString diffDate;
-		QString prvDay = q_("(previous day)");
-		QString nxtDay = q_("(next day)");
+		const QString dash = QChar(0x2014);
 		double sunrise = 0.;
 		double sunset = 24.;
 		const bool isSun = (getEnglishName()=="Sun");
 		double hour(0);
+
 		int year, month, day, currentdate;
 		StelUtils::getDateFromJulianDay(currentJD+utcShift, &year, &month, &currentdate);
 
 		if (withTables && !(flags&SiderealTime && currentPlanet==QStringLiteral("Earth")))
 			res += "<table style='margin:0em 0em 0em -0.125em;border-spacing:0px;border:0px;'>";
 
-		if (rts[3]==0.)
+		// Rise
+		if (rts[3]==30 || rts[3]<0 || rts[3]>50) // no rise
+		{
+			if (withTables)
+				res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2</td></tr>").arg(sRise, dash);
+			else
+				res += QString("%1: %2<br/>").arg(sRise, dash);
+		}
+		else
 		{
 			hour = StelUtils::getHoursFromJulianDay(rts[0]+utcShift);
-			StelUtils::getDateFromJulianDay(rts[0]+utcShift, &year, &month, &day);
-			if (day != currentdate)
-				diffDate = (rts[0]<currentJD) ? prvDay : nxtDay;
-			else
-				diffDate = "";
 			if (withTables)
-				res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2 %3</td></tr>").arg(sRise, StelUtils::hoursToHmsStr(hour, true)).arg(diffDate);
+				res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2</td></tr>").arg(sRise, StelUtils::hoursToHmsStr(hour, true));
 			else
-				res += QString("%1: %2 %3<br/>").arg(sRise, StelUtils::hoursToHmsStr(hour, true)).arg(diffDate);
+				res += QString("%1: %2<br/>").arg(sRise, StelUtils::hoursToHmsStr(hour, true));
 
 			sunrise = hour;
 		}
 
-		hour = StelUtils::getHoursFromJulianDay(rts[1]+utcShift);
+		// Transit
 		StelUtils::getDateFromJulianDay(rts[1]+utcShift, &year, &month, &day);
-		if (day != currentdate)
-			diffDate = (rts[1]<currentJD) ? prvDay : nxtDay;
-		else
-				diffDate = "";
-		if (withTables)
-			res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2 %3</td></tr>").arg(sTransit, StelUtils::hoursToHmsStr(hour, true)).arg(diffDate);
-		else
-			res += QString("%1: %2 %3<br/>").arg(sTransit, StelUtils::hoursToHmsStr(hour, true)).arg(diffDate);
-
-		if (rts[3]==0.)
+		if (rts[3]==20 || day != currentdate) // no transit
 		{
-			hour = StelUtils::getHoursFromJulianDay(rts[2]+utcShift);
-			StelUtils::getDateFromJulianDay(rts[2]+utcShift, &year, &month, &day);
-			if (day != currentdate)
-				diffDate = (rts[2]<currentJD) ? prvDay : nxtDay;
-			else
-				diffDate = "";
 			if (withTables)
-				res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2 %3</td></tr>").arg(sSet, StelUtils::hoursToHmsStr(hour, true)).arg(diffDate);
+				res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2</td></tr>").arg(sTransit, dash);
 			else
-				res += QString("%1: %2 %3<br/>").arg(sSet, StelUtils::hoursToHmsStr(hour, true)).arg(diffDate);
+				res += QString("%1: %2<br/>").arg(sTransit, dash);
+		}
+		else {
+			hour = StelUtils::getHoursFromJulianDay(rts[1]+utcShift);
+
+			if (withTables)
+				res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2</td></tr>").arg(sTransit, StelUtils::hoursToHmsStr(hour, true));
+			else
+				res += QString("%1: %2<br/>").arg(sTransit, StelUtils::hoursToHmsStr(hour, true));
+		}
+
+		// Set
+		if (rts[3]==40 || rts[3]<0 || rts[3]>50) // no set
+		{
+			if (withTables)
+				res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2</td></tr>").arg(sSet, dash);
+			else
+				res += QString("%1: %2<br/>").arg(sSet, dash);
+		}
+		else {
+			hour = StelUtils::getHoursFromJulianDay(rts[2]+utcShift);
+			if (withTables)
+				res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2</td></tr>").arg(sSet, StelUtils::hoursToHmsStr(hour, true));
+			else
+				res += QString("%1: %2<br/>").arg(sSet, StelUtils::hoursToHmsStr(hour, true));
 
 			sunset = hour;
 		}
@@ -781,7 +792,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 			else
 				res += q_("This object never rises") + "<br />";
 		}
-		else if (rts[3]>0.)
+		else if (rts[3]>50.)
 		{
 			if (isSun)
 				res += q_("Polar day") + "<br />";
@@ -1074,8 +1085,40 @@ QVariantMap StelObject::getInfoMap(const StelCore *core) const
 		StelUtils::getTimeFromJulianDay(rts[1]+utcShift, &hr, &min, &sec);
 		double hours=hr+static_cast<double>(min)/60. + static_cast<double>(sec)/3600.;
 
-		map.insert("transit", StelUtils::hoursToHmsStr(hours, true));
-		map.insert("transit-dhr", hours);
+		int year, month, day, currentdate;
+		StelUtils::getDateFromJulianDay(core->getJD()+utcShift, &year, &month, &currentdate);
+		StelUtils::getDateFromJulianDay(rts[1]+utcShift, &year, &month, &day);
+		if (rts[3]==20 || day != currentdate) // no transit
+		{
+			map.insert("transit", "---");
+		}
+		else {
+			map.insert("transit", StelUtils::hoursToHmsStr(hours, true));
+			map.insert("transit-dhr", hours);
+		}
+
+		if (rts[3]==30 || rts[3]<0 || rts[3]>50) // no rise
+		{
+			map.insert("rise", "---");
+		}
+		else {
+			StelUtils::getTimeFromJulianDay(rts[0]+utcShift, &hr, &min, &sec);
+			hours=hr+static_cast<double>(min)/60. + static_cast<double>(sec)/3600.;
+			map.insert("rise", StelUtils::hoursToHmsStr(hours, true));
+			map.insert("rise-dhr", hours);
+		}
+
+		if (rts[3]==40 || rts[3]<0 || rts[3]>50) // no set
+		{
+			map.insert("set", "---");
+		}
+		else {
+			StelUtils::getTimeFromJulianDay(rts[2]+utcShift, &hr, &min, &sec);
+			hours=hr+static_cast<double>(min)/60. + static_cast<double>(sec)/3600.;
+			map.insert("set", StelUtils::hoursToHmsStr(hours, true));
+			map.insert("set-dhr", hours);
+		}
+		/*
 		if (rts[3]==0.)
 		{
 			StelUtils::getTimeFromJulianDay(rts[0]+utcShift, &hr, &min, &sec);
@@ -1091,6 +1134,7 @@ QVariantMap StelObject::getInfoMap(const StelCore *core) const
 			map.insert("rise", "---");
 			map.insert("set", "---");
 		}
+		*/
 	}
 	return map;
 }

@@ -1150,7 +1150,8 @@ void AstroCalcDialog::currentCelestialPositions()
 				QString sTransit = dash;
 				QString sMaxElevation = dash;
 				rts = obj->getRTSTime(core);
-				if (rts[1]>=0.)
+				//if (rts[1]>=0.)
+				if (rts[3]!=20)
 				{
 					sTransit = StelUtils::hoursToHmsStr(StelUtils::getHoursFromJulianDay(rts[1]+utcShift), true);
 					if (withDecimalDegree)
@@ -1243,7 +1244,8 @@ void AstroCalcDialog::currentCelestialPositions()
 				QString sMaxElevation = dash;
 				QString elongStr;
 				rts = planet->getRTSTime(core);
-				if (rts[1]>=0.)
+				//if (rts[1]>=0.)
+				if (rts[3]!=20)
 				{
 					sTransit = StelUtils::hoursToHmsStr(StelUtils::getHoursFromJulianDay(rts[1]+utcShift), true);
 					if (withDecimalDegree)
@@ -2132,32 +2134,17 @@ void AstroCalcDialog::generateRTS()
 				return;
 
 			int elements = static_cast<int>((stopJD - startJD) / currentStep);
-			double JD, az, alt, beginJD, endJD;
+			double JD, JDn, az, alt;
 			float magnitude;
 			QString riseStr, setStr, transitStr, altStr, magStr, elongSStr = dash, elongLStr = dash;
 			for (int i = 0; i <= elements; i++)
 			{
 				JD = startJD + i * currentStep;
-				beginJD = JD - core->getUTCOffset(JD) / 24.; // JD at start of local date
-				endJD = JD+1. - core->getUTCOffset(JD+1.) / 24.;; // JD at the end of local date
-				core->setJD(JD+.5); // start the calculation at noon of local date
+				JDn = JD +.5 - core->getUTCOffset(JD) / 24.; // JD at noon of local date
+				core->setJD(JDn); // start the calculation 
 				core->update(0); // force update to get new coordinates
 				Vec4d rts = selectedObject->getRTSTime(core);
-				Vec4d rtsNew;
-				if (rts[1]<beginJD) // found time before current date
-				{
-					core->setJD(rts[1]+1.); // try again for current date
-					core->update(0); // force update to get new coordinates
-					rtsNew = selectedObject->getRTSTime(core);
-					rts[1] = rtsNew[1];
-				}
-				if (rts[1]>endJD) // found time after current date
-				{
-					core->setJD(rts[1]-1.); // try again for current date
-					core->update(0); // force update to get new coordinates
-					rtsNew = selectedObject->getRTSTime(core);
-					rts[1] = rtsNew[1];
-				}
+
 				JD = rts[1];
 				core->setJD(JD);
 				core->update(0); // force update to get new coordinates
@@ -2178,11 +2165,12 @@ void AstroCalcDialog::generateRTS()
 				magnitude = selectedObject->getVMagnitudeWithExtinction(core);
 				magStr = (magnitude > 50.f || selectedObject->getEnglishName().contains("marker", Qt::CaseInsensitive)? dash : QString::number(magnitude, 'f', 2));
 
-				if (JD>beginJD && JD<endJD)
-				{
-					transitStr = QString("%1 %2").arg(localeMgr->getPrintableDateLocal(JD), localeMgr->getPrintableTimeLocal(JD));
-				}
-				else
+				int year, month, day, currentdate;
+				const double utcShift = core->getUTCOffset(rts[1]) / 24.;
+				StelUtils::getDateFromJulianDay(JDn+utcShift, &year, &month, &currentdate);
+				StelUtils::getDateFromJulianDay(rts[1]+utcShift, &year, &month, &day);
+
+				if (rts[3]==20 || day != currentdate) // no transit time
 				{
 					transitStr = dash;
 					altStr = dash;
@@ -2190,48 +2178,20 @@ void AstroCalcDialog::generateRTS()
 					elongSStr = dash;
 					elongLStr = dash;
 				}
-
-				if (rts[3]==0.)
-				{
-					if (rts[0]<beginJD) // found time before current date
-					{
-						core->setJD(rts[0]+1.); // try again for current date
-						core->update(0); // force update to get new coordinates
-						rtsNew = selectedObject->getRTSTime(core);
-						rts[0] = rtsNew[0];
-					}
-					if (rts[0]>endJD) // found time after current date
-					{
-						core->setJD(rts[0]-1.); // try again for current date
-						core->update(0); // force update to get new coordinates
-						rtsNew = selectedObject->getRTSTime(core);
-						rts[0] = rtsNew[0];
-					}
-					if (rts[2]<beginJD) // found time before current date
-					{
-						core->setJD(rts[2]+1.); // try again for current date
-						core->update(0); // force update to get new coordinates
-						rtsNew = selectedObject->getRTSTime(core);
-						rts[2] = rtsNew[2];
-					}
-					if (rts[2]>endJD) // found time after current date
-					{
-						core->setJD(rts[2]-1.); // try again for current date
-						core->update(0); // force update to get new coordinates
-						rtsNew = selectedObject->getRTSTime(core);
-						rts[2] = rtsNew[2];
-					}
-					if (rts[0]>beginJD && rts[0]<endJD)
-						riseStr = QString("%1 %2").arg(localeMgr->getPrintableDateLocal(rts[0]), localeMgr->getPrintableTimeLocal(rts[0]));
-					else
-						riseStr = dash;
-					if (rts[2]>beginJD && rts[2]<endJD)
-						setStr = QString("%1 %2").arg(localeMgr->getPrintableDateLocal(rts[2]), localeMgr->getPrintableTimeLocal(rts[2]));
-					else
-						setStr = dash;
-				}
 				else
-					riseStr = setStr = dash;
+				{
+					transitStr = QString("%1 %2").arg(localeMgr->getPrintableDateLocal(JD), localeMgr->getPrintableTimeLocal(JD));
+				}
+
+				if (rts[3]==30 || rts[3]<0 || rts[3]>50) // no rise time
+					riseStr = dash;
+				else
+					riseStr = QString("%1 %2").arg(localeMgr->getPrintableDateLocal(rts[0]), localeMgr->getPrintableTimeLocal(rts[0]));
+
+				if (rts[3]==40 || rts[3]<0 || rts[3]>50) // no set time
+					setStr = dash;
+				else
+					setStr = QString("%1 %2").arg(localeMgr->getPrintableDateLocal(rts[2]), localeMgr->getPrintableTimeLocal(rts[2]));
 
 				ACRTSTreeWidgetItem* treeItem = new ACRTSTreeWidgetItem(ui->rtsTreeWidget);
 				treeItem->setText(RTSCOName, name);
