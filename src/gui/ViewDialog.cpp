@@ -373,6 +373,7 @@ void ViewDialog::createDialogContent()
 	connectCheckBox(ui->showCardinalPointsCheckBox,           "actionShow_Cardinal_Points");
 	connectCheckBox(ui->showOrdinal8WRPointsCheckBox,         "actionShow_Intercardinal_Points");
 	connectCheckBox(ui->showOrdinal16WRPointsCheckBox,        "actionShow_Secondary_Intercardinal_Points");
+	connectCheckBox(ui->showOrdinal32WRPointsCheckBox,        "actionShow_Quarter_Intercardinal_Points");
 	connectCheckBox(ui->showCompassMarksCheckBox,             "actionShow_Compass_Marks");
 	connectCheckBox(ui->showPrecessionCirclesCheckBox,        "actionShow_Precession_Circles");
 	connectCheckBox(ui->showPrimeVerticalLineCheckBox,        "actionShow_Prime_Vertical_Line");
@@ -487,6 +488,7 @@ void ViewDialog::createDialogContent()
 
 	connect(ui->showCardinalPointsCheckBox, SIGNAL(stateChanged(int)), this, SLOT(setSelectedCardinalCheckBoxes()));
 	connect(ui->showOrdinal8WRPointsCheckBox, SIGNAL(stateChanged(int)), this, SLOT(setSelectedCardinalCheckBoxes()));
+	connect(ui->showOrdinal16WRPointsCheckBox, SIGNAL(stateChanged(int)), this, SLOT(setSelectedCardinalCheckBoxes()));
 	setSelectedCardinalCheckBoxes();
 
 	// Projection
@@ -739,8 +741,10 @@ void ViewDialog::setSelectedCardinalCheckBoxes()
 	StelPropertyMgr* propMgr = StelApp::getInstance().getStelPropertyManager();
 	bool cardinals = propMgr->getProperty("LandscapeMgr.cardinalPointsDisplayed")->getValue().toBool();
 	bool ordinals = propMgr->getProperty("LandscapeMgr.ordinalPointsDisplayed")->getValue().toBool();
+	bool secondary = propMgr->getProperty("LandscapeMgr.ordinal16WRPointsDisplayed")->getValue().toBool();
 	ui->showOrdinal8WRPointsCheckBox->setEnabled(cardinals);
 	ui->showOrdinal16WRPointsCheckBox->setEnabled(cardinals && ordinals);
+	ui->showOrdinal32WRPointsCheckBox->setEnabled(cardinals && ordinals && secondary);
 }
 
 void ViewDialog::setSelectedCatalogsFromCheckBoxes()

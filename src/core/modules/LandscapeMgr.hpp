@@ -40,58 +40,79 @@ class QTimer;
 //! @class Cardinals manages the display of cardinal points
 class Cardinals
 {
-    Q_GADGET
+	Q_GADGET
 public:
-    enum CompassDirection
-    {
-	// Cardinals (4-wind compass rose)
-	dN	=  1,	// north
-	dS	=  2,	// south
-	dE	=  3,	// east
-	dW	=  4,	// west
-	// Intercardinals (or ordinals) (8-wind compass rose)
-	dNE	=  5,	// northeast
-	dSE	=  6,	// southeast
-	dNW	=  7,	// northwest
-	dSW	=  8,	// southwest
-	// Secondary Intercardinals (16-wind compass rose)
-	dNNE	=  9,	// north-northeast
-	dENE	= 10,	// east-northeast
-	dESE	= 11,	// east-southeast
-	dSSE	= 12,	// south-southeast
-	dSSW	= 13,	// south-southwest
-	dWSW	= 14,	// west-southwest
-	dWNW	= 15,	// west-northwest
-	dNNW	= 16	// north-northwest
-    };
-    Q_ENUM(CompassDirection)
+	enum CompassDirection
+	{
+		// Cardinals (4-wind compass rose)
+		dN	=  1,	// north
+		dS	=  2,	// south
+		dE	=  3,	// east
+		dW	=  4,	// west
+		// Intercardinals (or ordinals) (8-wind compass rose)
+		dNE	=  5,	// northeast
+		dSE	=  6,	// southeast
+		dNW	=  7,	// northwest
+		dSW	=  8,	// southwest
+		// Secondary Intercardinals (16-wind compass rose)
+		dNNE	=  9,	// north-northeast
+		dENE	= 10,	// east-northeast
+		dESE	= 11,	// east-southeast
+		dSSE	= 12,	// south-southeast
+		dSSW	= 13,	// south-southwest
+		dWSW	= 14,	// west-southwest
+		dWNW	= 15,	// west-northwest
+		dNNW	= 16,	// north-northwest
+		// Quarter Intercardinals / quarter-winds (32-wind compass rose)
+		dNbE	= 17,	// north by east
+		dNEbN	= 18,	// northeast by north
+		dNEbE	= 19,	// northeast by east
+		dEbN	= 20,	// east by north
+		dEbS	= 21,	// east by south
+		dSEbE	= 22,	// southeast by east
+		dSEbS	= 23,	// southeast by south
+		dSbE	= 24,	// south by east
+		dSbW	= 25,	// south by west
+		dSWbS	= 26,	// southwest by south
+		dSWbW	= 27,	// southwest by west
+		dWbS	= 28,	// west by south
+		dWbN	= 29,	// west by north
+		dNWbW	= 30,	// northwest by west
+		dNWbN	= 31,	// northwest by north
+		dNbW	= 32	// north by west
+	};
+	Q_ENUM(CompassDirection)
 
-    Cardinals();
-    virtual ~Cardinals();
-    void draw(const StelCore* core, double latitude) const;
-    void setColor(const Vec3f& c) {color = c;}
-    Vec3f getColor() const {return color;}
-    void updateI18n();
-    void update(double deltaTime);
-    void setFadeDuration(float duration);
-    void setFlagShowCardinals(bool b) { fader4WCR = b; }
-    bool getFlagShowCardinals() const { return fader4WCR; }
+	Cardinals();
+	virtual ~Cardinals();
+	void draw(const StelCore* core, double latitude) const;
+	void setColor(const Vec3f& c) {color = c;}
+	Vec3f getColor() const {return color;}
+	void updateI18n();
+	void update(double deltaTime);
+	void setFadeDuration(float duration);
+	void setFlagShowCardinals(bool b) { fader4WCR = b; }
+	bool getFlagShowCardinals() const { return fader4WCR; }
 
-    void setFlagShow4WCRLabels(bool b) { fader4WCR = b; }
-    bool getFlagShow4WCRLabels() const { return fader4WCR; }
-    void setFlagShow8WCRLabels(bool b) { fader8WCR = b; }
-    bool getFlagShow8WCRLabels() const { return fader8WCR; }
-    void setFlagShow16WCRLabels(bool b) { fader16WCR = b; }
-    bool getFlagShow16WCRLabels() const { return fader16WCR; }
+	void setFlagShow4WCRLabels(bool b) { fader4WCR = b; }
+	bool getFlagShow4WCRLabels() const { return fader4WCR; }
+	void setFlagShow8WCRLabels(bool b) { fader8WCR = b; }
+	bool getFlagShow8WCRLabels() const { return fader8WCR; }
+	void setFlagShow16WCRLabels(bool b) { fader16WCR = b; }
+	bool getFlagShow16WCRLabels() const { return fader16WCR; }
+	void setFlagShow32WCRLabels(bool b) { fader32WCR = b; }
+	bool getFlagShow32WCRLabels() const { return fader32WCR; }
 private:
-    class StelPropertyMgr* propMgr;
-    QFont font4WCR, font8WCR, font16WCR;
-    Vec3f color;
-    static constexpr float cp = static_cast<float>(1./(1.+M_SQRT2)); // dimension for secondary intercardinals
-    static const QMap<Cardinals::CompassDirection, Vec3f> rose4winds, rose8winds, rose16winds;
-    QMap<Cardinals::CompassDirection, QString> labels;
-    LinearFader fader4WCR, fader8WCR, fader16WCR;
-    int screenFontSize;
+	class StelPropertyMgr* propMgr;
+	QFont font4WCR, font8WCR, font16WCR, font32WCR;
+	Vec3f color;
+	static constexpr float cp = static_cast<float>(1./(1.+M_SQRT2)); // dimension for secondary intercardinals
+	static constexpr float qp = static_cast<float>(0.5f*cp);
+	static constexpr float tqp = static_cast<float>(1.5f*cp);
+	static const QMap<Cardinals::CompassDirection, Vec3f> rose4winds, rose8winds, rose16winds, rose32winds;
+	QMap<Cardinals::CompassDirection, QString> labels;
+	LinearFader fader4WCR, fader8WCR, fader16WCR, fader32WCR;
+	int screenFontSize;
 };
 
 //! @class LandscapeMgr
@@ -166,6 +187,10 @@ class LandscapeMgr : public StelModule
 		   READ getFlagOrdinal16WRPoints
 		   WRITE setFlagOrdinal16WRPoints
 		   NOTIFY ordinal16WRPointsDisplayedChanged)
+	Q_PROPERTY(bool ordinal32WRPointsDisplayed
+		   READ getFlagOrdinal32WRPoints
+		   WRITE setFlagOrdinal32WRPoints
+		   NOTIFY ordinal32WRPointsDisplayedChanged)
 	Q_PROPERTY(Vec3f cardinalPointsColor
 		   READ getColorCardinalPoints
 		   WRITE setColorCardinalPoints
@@ -475,6 +500,11 @@ public slots:
 	//! Set flag for displaying intercardinal (or ordinal) points (16-wind compass rose directions).
 	void setFlagOrdinal16WRPoints(const bool displayed);
 
+	//! Get flag for displaying intercardinal (or ordinal) points (32-wind compass rose directions).
+	bool getFlagOrdinal32WRPoints() const;
+	//! Set flag for displaying intercardinal (or ordinal) points (32-wind compass rose directions).
+	void setFlagOrdinal32WRPoints(const bool displayed);
+
 	//! Get Cardinals Points color.
 	Vec3f getColorCardinalPoints() const;
 	//! Set Cardinals Points color.
@@ -653,6 +683,7 @@ signals:
 	void cardinalPointsDisplayedChanged(const bool displayed);
 	void ordinalPointsDisplayedChanged(const bool displayed);
 	void ordinal16WRPointsDisplayedChanged(const bool displayed);
+	void ordinal32WRPointsDisplayedChanged(const bool displayed);
 	void cardinalPointsColorChanged(const Vec3f & newColor) const;
 	void fogDisplayedChanged(const bool displayed);
 	void landscapeDisplayedChanged(const bool displayed);

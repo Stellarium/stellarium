@@ -77,13 +77,18 @@ Cardinals::Cardinals()
 	font8WCR.setPixelSize(conf->value("viewing/ordinal_font_size", screenFontSize+5).toInt());
 	// Draw the principal wind points even smaller.
 	font16WCR.setPixelSize(conf->value("viewing/16wcr_font_size", screenFontSize+2).toInt());
+	font32WCR.setPixelSize(conf->value("viewing/32wcr_font_size", screenFontSize).toInt());
 
 	// English names for cardinals
 	labels = {
 		{   dN,  "N" }, {   dS,  "S" }, {   dE,  "E" }, {   dW,  "W" },
 		{  dNE, "NE" }, {  dSE, "SE" }, {  dSW, "SW" }, {  dNW, "NW" },
 		{ dNNE,"NNE" }, { dENE,"ENE" }, { dESE,"ESE" }, { dSSE,"SSE" },
-		{ dSSW,"SSW" }, { dWSW,"WSW" }, { dWNW,"WNW" }, { dNNW,"NNW" }
+		{ dSSW,"SSW" }, { dWSW,"WSW" }, { dWNW,"WNW" }, { dNNW,"NNW" },
+		{ dNbE,"NbE" }, {dNEbN,"NEbN"}, {dNEbE,"NEbE"}, { dEbN,"EbN" },
+		{ dEbS,"EbS" }, {dSEbE,"SEbE"}, {dSEbS,"SEbS"}, { dSbE,"SbE" },
+		{ dSbW,"SbW" }, {dSWbS,"SWbS"}, {dSWbW,"SWbW"}, { dWbS,"WbS" },
+		{ dWbN,"WbN" }, {dNWbW,"NWbW"}, {dNWbN,"NWbN"}, { dNbW,"NbW" }
 	};
 }
 
@@ -100,10 +105,20 @@ const QMap<Cardinals::CompassDirection, Vec3f> Cardinals::rose8winds = {
 	{ Cardinals::dSW, Vec3f( 1.f, -1.f, 0.f) }, { Cardinals::dNW, Vec3f(-1.f, -1.f, 0.f) }
 };
 const QMap<Cardinals::CompassDirection, Vec3f> Cardinals::rose16winds = {
-	{ dNNE, Vec3f(-1.f,   cp, 0.f) }, { dENE, Vec3f( -cp,  1.f, 0.f) },
-	{ dESE, Vec3f(  cp,  1.f, 0.f) }, { dSSE, Vec3f( 1.f,   cp, 0.f) },
-	{ dSSW, Vec3f( 1.f,  -cp, 0.f) }, { dWSW, Vec3f(  cp, -1.f, 0.f) },
-	{ dWNW, Vec3f( -cp, -1.f, 0.f) }, { dNNW, Vec3f(-1.f,  -cp, 0.f) }
+	{ Cardinals::dNNE, Vec3f(-1.f,   cp, 0.f) }, { Cardinals::dENE, Vec3f( -cp,  1.f, 0.f) },
+	{ Cardinals::dESE, Vec3f(  cp,  1.f, 0.f) }, { Cardinals::dSSE, Vec3f( 1.f,   cp, 0.f) },
+	{ Cardinals::dSSW, Vec3f( 1.f,  -cp, 0.f) }, { Cardinals::dWSW, Vec3f(  cp, -1.f, 0.f) },
+	{ Cardinals::dWNW, Vec3f( -cp, -1.f, 0.f) }, { Cardinals::dNNW, Vec3f(-1.f,  -cp, 0.f) }
+};
+const QMap<Cardinals::CompassDirection, Vec3f> Cardinals::rose32winds = {
+	{ Cardinals::dNbE,  Vec3f(-1.f,   qp, 0.f) }, { Cardinals::dNbW,  Vec3f(-1.f,  -qp, 0.f) },
+	{ Cardinals::dSbE,  Vec3f( 1.f,   qp, 0.f) }, { Cardinals::dSbW,  Vec3f( 1.f,  -qp, 0.f) },
+	{ Cardinals::dEbS,  Vec3f(  qp,  1.f, 0.f) }, { Cardinals::dEbN,  Vec3f( -qp,  1.f, 0.f) },
+	{ Cardinals::dWbN,  Vec3f( -qp, -1.f, 0.f) }, { Cardinals::dWbS,  Vec3f(  qp, -1.f, 0.f) },
+	{ Cardinals::dNEbN, Vec3f(-1.f,  tqp, 0.f) }, { Cardinals::dNWbN, Vec3f(-1.f, -tqp, 0.f) },
+	{ Cardinals::dSEbS, Vec3f( 1.f,  tqp, 0.f) }, { Cardinals::dSWbS, Vec3f( 1.f, -tqp, 0.f) },
+	{ Cardinals::dSEbE, Vec3f( tqp,  1.f, 0.f) }, { Cardinals::dNEbE, Vec3f(-tqp,  1.f, 0.f) },
+	{ Cardinals::dNWbW, Vec3f(-tqp, -1.f, 0.f) }, { Cardinals::dSWbW, Vec3f( tqp, -1.f, 0.f) }
 };
 
 void Cardinals::update(double deltaTime)
@@ -111,6 +126,7 @@ void Cardinals::update(double deltaTime)
 	fader4WCR.update(static_cast<int>(deltaTime*1000));
 	fader8WCR.update(static_cast<int>(deltaTime*1000));
 	fader16WCR.update(static_cast<int>(deltaTime*1000));
+	fader32WCR.update(static_cast<int>(deltaTime*1000));
 }
 
 void Cardinals::setFadeDuration(float duration)
@@ -118,6 +134,7 @@ void Cardinals::setFadeDuration(float duration)
 	fader4WCR.setDuration(static_cast<int>(duration*1000.f));
 	fader8WCR.setDuration(static_cast<int>(duration*1000.f));
 	fader16WCR.setDuration(static_cast<int>(duration*1000.f));
+	fader32WCR.setDuration(static_cast<int>(duration*1000.f));
 }
 
 // Draw the cardinals points : N S E W and the subcardinal and sub-subcardinal.
@@ -134,7 +151,7 @@ void Cardinals::draw(const StelCore* core, double latitude) const
 		const float ppx = static_cast<float>(core->getCurrentStelProjectorParams().devicePixelsPerPixel);
 		StelPainter sPainter(prj);
 		sPainter.setFont(font4WCR);
-		float sshift=0.f, bshift=0.f, cshift=0.f, vshift=1.f;
+		float sshift=0.f, bshift=0.f, cshift=0.f, dshift=0.f, vshift=1.f;
 		bool flagMask = (core->getProjection(StelCore::FrameJ2000)->getMaskType() != StelProjector::MaskDisk);
 		if (propMgr->getProperty("SpecialMarkersMgr.compassMarksDisplayed")->getValue().toBool())
 			vshift = static_cast<float>(screenFontSize + 12)*ppx;
@@ -215,6 +232,33 @@ void Cardinals::draw(const StelCore* core, double latitude) const
 						sPainter.drawText(xy[0], xy[1], directionLabel, -textAngle*M_180_PIf, -cshift, vshift, true);
 					}
 				}
+
+				if (fader32WCR.getInterstate()>0.f)
+				{
+					sPainter.setColor(color, qMin(minFader, fader32WCR.getInterstate()));
+					sPainter.setFont(font32WCR);
+
+					QMapIterator<Cardinals::CompassDirection, Vec3f> it32w(rose32winds);
+					while(it32w.hasNext())
+					{
+						it32w.next();
+						QString directionLabel = labels.value(it32w.key(), "");
+
+						if (flagMask)
+							dshift = ppx*static_cast<float>(sPainter.getFontMetrics().boundingRect(directionLabel).width())*0.5f;
+
+						if (prj->project(it32w.value(), xy))
+						{
+							Vec3f up(it32w.value()[0], it32w.value()[1], 1.f*M_PI_180f);
+							Vec3f upPrj;
+							prj->project(up, upPrj);
+							float dx=upPrj[0]-xy[0];
+							float dy=upPrj[1]-xy[1];
+							float textAngle=atan2(dx, dy);
+							sPainter.drawText(xy[0], xy[1], directionLabel, -textAngle*M_180_PIf, -dshift, vshift, true);
+						}
+					}
+				}
 			}
 		}
 	}
@@ -255,7 +299,39 @@ void Cardinals::updateI18n()
 		// TRANSLATORS: West-northwest
 		{ dWNW, qc_("WNW", "compass direction") },
 		// TRANSLATORS: North-northwest
-		{ dNNW,	qc_("NNW", "compass direction") }
+		{ dNNW,	qc_("NNW", "compass direction") },
+		// TRANSLATORS: North by east
+		{ dNbE, qc_("NbE", "compass direction") },
+		// TRANSLATORS: Northeast by north
+		{dNEbN, qc_("NEbN","compass direction") },
+		// TRANSLATORS: Northeast by east
+		{dNEbE, qc_("NEbE","compass direction") },
+		// TRANSLATORS: East by north
+		{ dEbN, qc_("EbN", "compass direction") },
+		// TRANSLATORS: East by south
+		{ dEbS, qc_("EbS", "compass direction") },
+		// TRANSLATORS: Southeast by east
+		{dSEbE, qc_("SEbE","compass direction") },
+		// TRANSLATORS: Southeast by south
+		{dSEbS, qc_("SEbS","compass direction") },
+		// TRANSLATORS: South by east
+		{ dSbE, qc_("SbE", "compass direction") },
+		// TRANSLATORS: South by west
+		{ dSbW, qc_("SbW", "compass direction") },
+		// TRANSLATORS: Southwest by south
+		{dSWbS, qc_("SWbS","compass direction") },
+		// TRANSLATORS: Southwest by west
+		{dSWbW, qc_("SWbW","compass direction") },
+		// TRANSLATORS: West by south
+		{ dWbS, qc_("WbS", "compass direction") },
+		// TRANSLATORS: West by north
+		{ dWbN, qc_("WbN", "compass direction") },
+		// TRANSLATORS: Northwest by west
+		{dNWbW, qc_("NWbW","compass direction") },
+		// TRANSLATORS: Northwest by north
+		{dNWbN, qc_("NWbN","compass direction") },
+		// TRANSLATORS: North by west
+		{ dNbW, qc_("NbW", "compass direction") }
 	};
 }
 
@@ -762,6 +838,7 @@ void LandscapeMgr::init()
 	cardinalPoints->setFlagShow4WCRLabels(conf->value("viewing/flag_cardinal_points", true).toBool());
 	cardinalPoints->setFlagShow8WCRLabels(conf->value("viewing/flag_ordinal_points", true).toBool());
 	cardinalPoints->setFlagShow16WCRLabels(conf->value("viewing/flag_16wcr_points", false).toBool());
+	cardinalPoints->setFlagShow32WCRLabels(conf->value("viewing/flag_32wcr_points", false).toBool());
 	// Load colors from config file
 	QString defaultColor = conf->value("color/default_color").toString();
 	setColorCardinalPoints(Vec3f(conf->value("color/cardinal_color", defaultColor).toString()));
@@ -782,6 +859,7 @@ void LandscapeMgr::init()
 	addAction("actionShow_Cardinal_Points", displayGroup, N_("Cardinal points"), "cardinalPointsDisplayed", "Q");
 	addAction("actionShow_Intercardinal_Points", displayGroup, N_("Ordinal (Intercardinal) points"), "ordinalPointsDisplayed");
 	addAction("actionShow_Secondary_Intercardinal_Points", displayGroup, N_("Secondary Intercardinal points"), "ordinal16WRPointsDisplayed");
+	addAction("actionShow_Quarter_Intercardinal_Points", displayGroup, N_("Quarter Intercardinal points"), "ordinal32WRPointsDisplayed");
 	addAction("actionShow_Ground", displayGroup, N_("Ground"), "landscapeDisplayed", "G");
 	addAction("actionShow_LandscapeIllumination", displayGroup, N_("Landscape illumination"), "illuminationDisplayed", "Shift+G");
 	addAction("actionShow_LandscapeLabels", displayGroup, N_("Landscape labels"), "labelsDisplayed", "Ctrl+Shift+G");
@@ -1096,6 +1174,7 @@ void LandscapeMgr::onTargetLocationChanged(const StelLocation &loc)
 				setFlagCardinalPoints(conf->value("viewing/flag_cardinal_points", true).toBool());
 				setFlagOrdinalPoints(conf->value("viewing/flag_ordinal_points", true).toBool());
 				setFlagOrdinal16WRPoints(conf->value("viewing/flag_16wcr_points", false).toBool());
+				setFlagOrdinal32WRPoints(conf->value("viewing/flag_32wcr_points", false).toBool());
 			}
 		}
 	}
@@ -1350,6 +1429,22 @@ void LandscapeMgr::setFlagOrdinal16WRPoints(const bool displayed)
 bool LandscapeMgr::getFlagOrdinal16WRPoints() const
 {
 	return cardinalPoints->getFlagShow16WCRLabels();
+}
+
+//! Set flag for displaying ordinal points
+void LandscapeMgr::setFlagOrdinal32WRPoints(const bool displayed)
+{
+	if (cardinalPoints->getFlagShow32WCRLabels() != displayed)
+	{
+		cardinalPoints->setFlagShow32WCRLabels(displayed);
+		emit ordinal32WRPointsDisplayedChanged(displayed);
+	}
+}
+
+//! Get flag for displaying ordinal points
+bool LandscapeMgr::getFlagOrdinal32WRPoints() const
+{
+	return cardinalPoints->getFlagShow32WCRLabels();
 }
 
 //! Set Cardinals Points color
