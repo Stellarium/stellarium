@@ -449,10 +449,13 @@ void main()
     if(final_illumination < 0.9999)
     {
         lowp vec4 shadowColor = texture2D(earthShadow, vec2(final_illumination, 0.5));
-		shadowColor.rgb = srgbToLinear(shadowColor.rgb);
-        finalColor =
-		eclipsePush*(1.0-0.75*shadowColor.a)*
-		mix(finalColor * litColor, shadowColor, clamp(shadowColor.a, 0.0, 0.7)); // clamp alpha to allow some maria detail.
+		// FIXME: this should be calculated properly in linear space as
+		// extinction of sunlight, and with subsequent tone mapping.
+		// Current implementation is a legacy from older times.
+		lowp vec4 color = vec4(linearToSRGB(finalColor.rgb), finalColor.a);
+		lowp float alpha = clamp(shadowColor.a, 0.0, 0.7); // clamp alpha to allow some maria detail
+        finalColor = eclipsePush * (1.0-0.75*shadowColor.a) * mix(color * litColor, shadowColor, alpha);
+		finalColor.rgb = srgbToLinear(finalColor.rgb);
     }
     else
 #endif
