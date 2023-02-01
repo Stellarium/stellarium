@@ -89,13 +89,7 @@ QString StelLocation::getID() const
 
 float StelLocation::getLatitude()  const
 {
-	SolarSystem *ss=nullptr;
-	if (StelApp::exists()) // allow running in test modules
-		ss=GETSTELMODULE(SolarSystem);
-	PlanetP planet=nullptr;
-	if (ss)
-		planet=ss->searchByEnglishName(planetName);
-	if (planet && planet->getPlanetType()==Planet::isObserver)
+	if (role==QChar('o'))
 		return 90.f;
 	else
 		return latitude;
@@ -103,13 +97,7 @@ float StelLocation::getLatitude()  const
 
 float StelLocation::getLongitude() const
 {
-	SolarSystem *ss=nullptr;
-	if (StelApp::exists()) // allow running in test modules
-		ss=GETSTELMODULE(SolarSystem);
-	PlanetP planet=nullptr;
-	if (ss)
-		planet=ss->searchByEnglishName(planetName);
-	if (planet && planet->getPlanetType()==Planet::isObserver)
+	if (role==QChar('o'))
 		return 0.f;
 	else
 		return longitude;

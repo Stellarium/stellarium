@@ -660,7 +660,6 @@ void LocationDialog::moveToAnotherPlanet()
 		proxyModel->sort(0, Qt::AscendingOrder);
 		ui->citySearchLineEdit->setText(""); // https://wiki.qt.io/Technical_FAQ#Why_does_the_memory_keep_increasing_when_repeatedly_pasting_text_and_calling_clear.28.29_in_a_QLineEdit.3F
 		ui->citySearchLineEdit->setFocus();
-		stelCore->moveObserverTo(loc, 0., 0.);
 
 		// If we change to an Observer "planet", auto-select and focus on the observed object.
 		SolarSystem *ss=GETSTELMODULE(SolarSystem);
@@ -669,6 +668,7 @@ void LocationDialog::moveToAnotherPlanet()
 			planet=GETSTELMODULE(SolarSystem)->searchByEnglishName(loc.planetName);
 		if (planet && planet->getPlanetType()==Planet::isObserver)
 		{
+			loc.role=QChar('o'); // Mark this ad-hoc location as "observer".
 			StelObjectMgr *soMgr=GETSTELMODULE(StelObjectMgr);
 			if (soMgr)
 			{
@@ -676,6 +676,8 @@ void LocationDialog::moveToAnotherPlanet()
 				GETSTELMODULE(StelMovementMgr)->setFlagTracking(true);
 			}
 		}
+
+		stelCore->moveObserverTo(loc, 0., 0.);
 	}
 	// Planet transition time also set to null to prevent ugliness when
 	// "use landscape location" is enabled for that planet's landscape. --BM
