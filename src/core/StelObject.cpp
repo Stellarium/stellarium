@@ -1131,7 +1131,8 @@ QVariantMap StelObject::getInfoMap(const StelCore *core) const
 			map.insert("transit-dhr", hours);
 		}
 
-		if (rts[3]==30 || rts[3]<0 || rts[3]>50) // no rise
+		StelUtils::getDateFromJulianDay(rts[0]+utcShift, &year, &month, &day);
+		if (rts[3]==30 || rts[3]<0 || rts[3]>50 || day != currentdate) // no rise
 		{
 			map.insert("rise", "---");
 		}
@@ -1142,7 +1143,8 @@ QVariantMap StelObject::getInfoMap(const StelCore *core) const
 			map.insert("rise-dhr", hours);
 		}
 
-		if (rts[3]==40 || rts[3]<0 || rts[3]>50) // no set
+		StelUtils::getDateFromJulianDay(rts[2]+utcShift, &year, &month, &day);
+		if (rts[3]==40 || rts[3]<0 || rts[3]>50 || day != currentdate) // no set
 		{
 			map.insert("set", "---");
 		}
