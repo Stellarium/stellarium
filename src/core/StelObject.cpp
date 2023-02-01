@@ -209,6 +209,7 @@ Vec4d StelObject::getRTSTime(const StelCore *core, const double altitude) const
 
 	double mr, ms, flag=0.;
 	double mt=-h2*(0.5*rotRate/M_PI);
+	// Transit should occur on current date
 	StelUtils::getDateFromJulianDay(currentJD+mt+utcShift, &year, &month, &day);
 	if (day != currentdate)
 	{
@@ -232,6 +233,26 @@ Vec4d StelObject::getRTSTime(const StelCore *core, const double altitude) const
 
 		mr = mt - H0*rotRate/(2.*M_PI);
 		ms = mt + H0*rotRate/(2.*M_PI);
+	}
+
+	// Rise should occur on current date
+	StelUtils::getDateFromJulianDay(currentJD+mr+utcShift, &year, &month, &day);
+	if (day != currentdate)
+	{
+		if (mr<0.)
+			mr += rotRate;
+		else
+			mr -= rotRate;
+	}
+
+	// Set should occur on current date
+	StelUtils::getDateFromJulianDay(currentJD+ms+utcShift, &year, &month, &day);
+	if (day != currentdate)
+	{
+		if (ms<0.)
+			ms += rotRate;
+		else
+			ms -= rotRate;
 	}
 
 	//omgr->addToExtraInfoString(StelObject::DebugAid, QString("m<sub>t</sub>= %1<br/>").arg(QString::number(mt, 'f', 6)));
@@ -707,7 +728,8 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 			res += "<table style='margin:0em 0em 0em -0.125em;border-spacing:0px;border:0px;'>";
 
 		// Rise
-		if (rts[3]==30 || rts[3]<0 || rts[3]>50) // no rise
+		StelUtils::getDateFromJulianDay(rts[0]+utcShift, &year, &month, &day);
+		if (rts[3]==30 || rts[3]<0 || rts[3]>50 || day != currentdate) // no rise
 		{
 			if (withTables)
 				res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2</td></tr>").arg(sRise, dash);
@@ -744,7 +766,8 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 		}
 
 		// Set
-		if (rts[3]==40 || rts[3]<0 || rts[3]>50) // no set
+		StelUtils::getDateFromJulianDay(rts[2]+utcShift, &year, &month, &day);
+		if (rts[3]==40 || rts[3]<0 || rts[3]>50 || day != currentdate) // no set
 		{
 			if (withTables)
 				res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2</td></tr>").arg(sSet, dash);
