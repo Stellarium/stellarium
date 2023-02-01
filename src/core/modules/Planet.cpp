@@ -4918,7 +4918,9 @@ Vec4d Planet::getClosestRTSTime(const StelCore *core, const double altitude) con
 	if (loc.name.contains("->")) // a spaceship
 		return Vec4d(0., 0., 0., -1000.);
 
+	// Keep time in sync (method from line 592) to fix slow down of time when the moon is selected
 	const double currentJD = core->getJDOfLastJDUpdate();
+	const qint64 millis = core->getMilliSecondsOfLastJDUpdate();
 	const double currentJDE = core->getJDE();
 	double mr, ms, mt, flag=0.;
 
@@ -5049,6 +5051,7 @@ Vec4d Planet::getClosestRTSTime(const StelCore *core, const double altitude) con
 			ms += ms2;
 		}
 		core1->setJD(currentJD);
+		core1->setMilliSecondsOfLastJDUpdate(millis); // restore millis.
 		core1->update(0); // enforce update
 	}
 	else
