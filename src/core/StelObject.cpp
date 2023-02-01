@@ -172,6 +172,9 @@ Vec4d StelObject::getRTSTime(const StelCore *core, const double altitude) const
 	const double rotRate = obsPlanet->getSiderealDay();
 	const double currentJD=core->getJD();
 	const double currentJDE=core->getJDE();
+	const double utcShift = core->getUTCOffset(currentJD) / 24.;
+	int year, month, day, currentdate;
+	StelUtils::getDateFromJulianDay(currentJD+utcShift, &year, &month, &currentdate);
 
 	// And convert to equatorial coordinates of date. We can also use this day's current aberration, given the other uncertainties/omissions.
 	const Vec3d eq_2=getEquinoxEquatorialPos(core);
@@ -206,6 +209,14 @@ Vec4d StelObject::getRTSTime(const StelCore *core, const double altitude) const
 
 	double mr, ms, flag=0.;
 	double mt=-h2*(0.5*rotRate/M_PI);
+	StelUtils::getDateFromJulianDay(currentJD+mt+utcShift, &year, &month, &day);
+	if (day != currentdate)
+	{
+		if (mt<0.)
+			mt += rotRate;
+		else
+			mt -= rotRate;
+	}
 
 	// circumpolar: set rise and set times to lower culmination, i.e. 1/2 rotation from transit
 	if (fabs(cosH0)>1.)
@@ -1118,23 +1129,6 @@ QVariantMap StelObject::getInfoMap(const StelCore *core) const
 			map.insert("set", StelUtils::hoursToHmsStr(hours, true));
 			map.insert("set-dhr", hours);
 		}
-		/*
-		if (rts[3]==0.)
-		{
-			StelUtils::getTimeFromJulianDay(rts[0]+utcShift, &hr, &min, &sec);
-			hours=hr+static_cast<double>(min)/60. + static_cast<double>(sec)/3600.;
-			map.insert("rise", StelUtils::hoursToHmsStr(hours, true));
-			map.insert("rise-dhr", hours);
-			StelUtils::getTimeFromJulianDay(rts[2]+utcShift, &hr, &min, &sec);
-			hours=hr+static_cast<double>(min)/60. + static_cast<double>(sec)/3600.;
-			map.insert("set", StelUtils::hoursToHmsStr(hours, true));
-			map.insert("set-dhr", hours);
-		}
-		else {
-			map.insert("rise", "---");
-			map.insert("set", "---");
-		}
-		*/
 	}
 	return map;
 }
