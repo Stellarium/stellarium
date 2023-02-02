@@ -63,7 +63,7 @@ public:
 		dWSW	= 14,	// west-southwest
 		dWNW	= 15,	// west-northwest
 		dNNW	= 16,	// north-northwest
-		// Quarter Intercardinals / quarter-winds (32-wind compass rose)
+		// Tertiary Intercardinals (32-wind compass rose)
 		dNbE	= 17,	// north by east
 		dNEbN	= 18,	// northeast by north
 		dNEbE	= 19,	// northeast by east

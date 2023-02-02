@@ -859,7 +859,7 @@ void LandscapeMgr::init()
 	addAction("actionShow_Cardinal_Points", displayGroup, N_("Cardinal points"), "cardinalPointsDisplayed", "Q");
 	addAction("actionShow_Intercardinal_Points", displayGroup, N_("Ordinal (Intercardinal) points"), "ordinalPointsDisplayed");
 	addAction("actionShow_Secondary_Intercardinal_Points", displayGroup, N_("Secondary Intercardinal points"), "ordinal16WRPointsDisplayed");
-	addAction("actionShow_Quarter_Intercardinal_Points", displayGroup, N_("Quarter Intercardinal points"), "ordinal32WRPointsDisplayed");
+	addAction("actionShow_Tertiary_Intercardinal_Points", displayGroup, N_("Tertiary Intercardinal points"), "ordinal32WRPointsDisplayed");
 	addAction("actionShow_Ground", displayGroup, N_("Ground"), "landscapeDisplayed", "G");
 	addAction("actionShow_LandscapeIllumination", displayGroup, N_("Landscape illumination"), "illuminationDisplayed", "Shift+G");
 	addAction("actionShow_LandscapeLabels", displayGroup, N_("Landscape labels"), "labelsDisplayed", "Ctrl+Shift+G");
