@@ -425,6 +425,7 @@ void main()
 	// maximum at 1.0 instead of 0.4.
 	texColor.rgb = vec3(0.4) + 0.6 * texColor.rgb;
     texColor.rgb = pow(texColor.rgb, vec3(2.8));
+	texColor.rgb *= vec3(1., 0.79, 0.57);
 #else
     texColor.rgb = srgbToLinear(texColor.rgb);
 #endif
