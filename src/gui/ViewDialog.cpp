@@ -373,7 +373,7 @@ void ViewDialog::createDialogContent()
 	connectCheckBox(ui->showCardinalPointsCheckBox,           "actionShow_Cardinal_Points");
 	connectCheckBox(ui->showOrdinal8WRPointsCheckBox,         "actionShow_Intercardinal_Points");
 	connectCheckBox(ui->showOrdinal16WRPointsCheckBox,        "actionShow_Secondary_Intercardinal_Points");
-	connectCheckBox(ui->showOrdinal32WRPointsCheckBox,        "actionShow_Quarter_Intercardinal_Points");
+	connectCheckBox(ui->showOrdinal32WRPointsCheckBox,        "actionShow_Tertiary_Intercardinal_Points");
 	connectCheckBox(ui->showCompassMarksCheckBox,             "actionShow_Compass_Marks");
 	connectCheckBox(ui->showPrecessionCirclesCheckBox,        "actionShow_Precession_Circles");
 	connectCheckBox(ui->showPrimeVerticalLineCheckBox,        "actionShow_Prime_Vertical_Line");
