@@ -445,6 +445,7 @@ void main()
 		//finalColor.xyz=mix(vec3(1., 1., 1.), finalColor.xyz, 1.-mixfactor); 
 		finalColor.xyz=mix(vec3(1., 1., 1.), finalColor.xyz, smoothstep(0., 1., 1.-mixfactor)); 
 	}
+	finalColor *= litColor;
 #ifdef IS_MOON
     if(final_illumination < 0.9999)
     {
@@ -454,14 +455,10 @@ void main()
 		// Current implementation is a legacy from older times.
 		lowp vec4 color = vec4(linearToSRGB(finalColor.rgb), finalColor.a);
 		lowp float alpha = clamp(shadowColor.a, 0.0, 0.7); // clamp alpha to allow some maria detail
-        finalColor = eclipsePush * (1.0-0.75*shadowColor.a) * mix(color * litColor, shadowColor, alpha);
+        finalColor = eclipsePush * (1.0-0.75*shadowColor.a) * mix(color, shadowColor, alpha);
 		finalColor.rgb = srgbToLinear(finalColor.rgb);
     }
-    else
 #endif
-    {
-        finalColor *= litColor;
-    }
 
     //apply white rimlight
     finalColor.xyz = clamp( finalColor.xyz + vec3(outgas), 0.0, 1.0);
