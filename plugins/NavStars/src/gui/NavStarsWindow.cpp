@@ -128,13 +128,15 @@ void NavStarsWindow::populateToday()
 
 	// Moon
 	Vec4d moon = GETSTELMODULE(SolarSystem)->getMoon()->getRTSTime(core, 0.);
-	if (moon[3]==0.)
-	{
-		moonrise = StelUtils::hoursToHmsStr(StelUtils::getHoursFromJulianDay(moon[0]+utcShift), true);
-		moonset = StelUtils::hoursToHmsStr(StelUtils::getHoursFromJulianDay(moon[2]+utcShift), true);
-	}
+	if (moon[3]==30 || moon[3]<0 || moon[3]>50) // no moonrise on current date
+		moonrise = dash;
 	else
-		moonrise = moonset = dash;
+		moonrise = StelUtils::hoursToHmsStr(StelUtils::getHoursFromJulianDay(moon[0]+utcShift), true);
+
+	if (moon[3]==40 || moon[3]<0 || moon[3]>50) // no moonset on current date
+		moonset = dash;
+	else
+		moonset = StelUtils::hoursToHmsStr(StelUtils::getHoursFromJulianDay(moon[2]+utcShift), true);
 
 	// day
 	Vec4d day = sun->getRTSTime(core, 0.);

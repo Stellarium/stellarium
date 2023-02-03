@@ -451,7 +451,11 @@
                 <label><input type="checkbox" class="stelaction" name="actionShow_Meridian_Line" /><?= tr("Meridian")?></label>
 			    <label title='<?= tr("Show Prime (East-West) Vertical.")?>'><input type="checkbox" class="stelaction" name="actionShow_Prime_Vertical_Line" /><?= tr("Prime Vertical")?></label>
                 <label title='<?= tr("Show colures (great circles through poles and solstices/equinoxes).")?>'><input type="checkbox" class="stelaction" name="actionShow_Colure_Lines" /><?= tr("Colures")?></label>
-                <label><input type="checkbox" class="stelaction" name="actionShow_Cardinal_Points" /><?= tr("Cardinal points")?></label>
+                <label><input type="checkbox" class="stelaction" name="actionShow_Cardinal_Points" /><?= tr("Cardinal points")?>
+				       <input type="checkbox" class="stelaction" name="actionShow_Intercardinal_Points" />8
+					   <input type="checkbox" class="stelaction" name="actionShow_Secondary_Intercardinal_Points" />16
+					   <input type="checkbox" class="stelaction" name="actionShow_Tertiary_Intercardinal_Points" />32</label>
+                <label><input type="checkbox" class="stelaction" name="actionShow_Compass_Marks"/><?= tr("Compass marks")?></label>
               </div>
 			  <div class="inline-block blocklabel">
                 <label><input type="checkbox" class="stelaction" name="actionShow_Celestial_J2000_Poles" /><?= tr("Celestial poles (J2000)")?></label>
@@ -508,10 +512,6 @@
               <label><input type="checkbox" class="stelproperty" name="ArchaeoLines.flagShowCustomDeclination2"/><?= tr("Custom Declination 2")?> (<span class="stelproperty" data-prop="ArchaeoLines.customDeclination2" data-numberformat="n1"></span>&deg;=<span class="stelproperty" data-prop="ArchaeoLines.customDeclination2Label"></span>)</label>
             </div>
           </div>
-          <div class="smallblock stelplugin" data-plugin="CompassMarks">
-                   <label><input type="checkbox" class="stelaction" name="actionShow_Compass_Marks"/><?= tr("Compass Marks")?></label>
-          </div>
-
         </div>
       </div>
       <div id="tab_dso">

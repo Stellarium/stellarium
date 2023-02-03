@@ -1150,7 +1150,8 @@ void AstroCalcDialog::currentCelestialPositions()
 				QString sTransit = dash;
 				QString sMaxElevation = dash;
 				rts = obj->getRTSTime(core);
-				if (rts[1]>=0.)
+				//if (rts[1]>=0.)
+				if (rts[3]!=20)
 				{
 					sTransit = StelUtils::hoursToHmsStr(StelUtils::getHoursFromJulianDay(rts[1]+utcShift), true);
 					if (withDecimalDegree)
@@ -1243,7 +1244,8 @@ void AstroCalcDialog::currentCelestialPositions()
 				QString sMaxElevation = dash;
 				QString elongStr;
 				rts = planet->getRTSTime(core);
-				if (rts[1]>=0.)
+				//if (rts[1]>=0.)
+				if (rts[3]!=20)
 				{
 					sTransit = StelUtils::hoursToHmsStr(StelUtils::getHoursFromJulianDay(rts[1]+utcShift), true);
 					if (withDecimalDegree)
@@ -2127,22 +2129,22 @@ void AstroCalcDialog::generateRTS()
 			double startJD = StelUtils::qDateTimeToJd(QDateTime(ui->rtsFromDateEdit->date()));
 			double stopJD = StelUtils::qDateTimeToJd(QDateTime(ui->rtsToDateEdit->date()));
  #endif
-			startJD = startJD - core->getUTCOffset(startJD) / 24.;
-			stopJD = stopJD - core->getUTCOffset(stopJD) / 24.;
 
 			if (stopJD<startJD) // Stop warming atmosphere!..
 				return;
 
 			int elements = static_cast<int>((stopJD - startJD) / currentStep);
-			double JD, az, alt;
+			double JD, JDn, az, alt;
 			float magnitude;
-			QString riseStr, setStr, altStr, magStr, elongSStr = dash, elongLStr = dash;
+			QString riseStr, setStr, transitStr, altStr, magStr, elongSStr = dash, elongLStr = dash;
 			for (int i = 0; i <= elements; i++)
 			{
-				JD = startJD + i * currentStep + 1;
-				core->setJD(JD);
+				JD = startJD + i * currentStep;
+				JDn = JD +.5 - core->getUTCOffset(JD) / 24.; // JD at noon of local date
+				core->setJD(JDn); // start the calculation 
 				core->update(0); // force update to get new coordinates
 				Vec4d rts = selectedObject->getRTSTime(core);
+
 				JD = rts[1];
 				core->setJD(JD);
 				core->update(0); // force update to get new coordinates
@@ -2163,13 +2165,33 @@ void AstroCalcDialog::generateRTS()
 				magnitude = selectedObject->getVMagnitudeWithExtinction(core);
 				magStr = (magnitude > 50.f || selectedObject->getEnglishName().contains("marker", Qt::CaseInsensitive)? dash : QString::number(magnitude, 'f', 2));
 
-				if (rts[3]==0.)
+				int year, month, day, currentdate;
+				const double utcShift = core->getUTCOffset(rts[1]) / 24.;
+				StelUtils::getDateFromJulianDay(JDn+utcShift, &year, &month, &currentdate);
+				StelUtils::getDateFromJulianDay(rts[1]+utcShift, &year, &month, &day);
+
+				if (rts[3]==20 || day != currentdate) // no transit time
 				{
-					riseStr = QString("%1 %2").arg(localeMgr->getPrintableDateLocal(rts[0]), localeMgr->getPrintableTimeLocal(rts[0]));
-					setStr = QString("%1 %2").arg(localeMgr->getPrintableDateLocal(rts[2]), localeMgr->getPrintableTimeLocal(rts[2]));
+					transitStr = dash;
+					altStr = dash;
+					magStr = dash;
+					elongSStr = dash;
+					elongLStr = dash;
 				}
 				else
-					riseStr = setStr = dash;
+				{
+					transitStr = QString("%1 %2").arg(localeMgr->getPrintableDateLocal(JD), localeMgr->getPrintableTimeLocal(JD));
+				}
+
+				if (rts[3]==30 || rts[3]<0 || rts[3]>50) // no rise time
+					riseStr = dash;
+				else
+					riseStr = QString("%1 %2").arg(localeMgr->getPrintableDateLocal(rts[0]), localeMgr->getPrintableTimeLocal(rts[0]));
+
+				if (rts[3]==40 || rts[3]<0 || rts[3]>50) // no set time
+					setStr = dash;
+				else
+					setStr = QString("%1 %2").arg(localeMgr->getPrintableDateLocal(rts[2]), localeMgr->getPrintableTimeLocal(rts[2]));
 
 				ACRTSTreeWidgetItem* treeItem = new ACRTSTreeWidgetItem(ui->rtsTreeWidget);
 				treeItem->setText(RTSCOName, name);
@@ -2177,7 +2199,7 @@ void AstroCalcDialog::generateRTS()
 				treeItem->setText(RTSRiseDate, riseStr); // local date and time
 				treeItem->setData(RTSRiseDate, Qt::UserRole, rts[0]);
 				treeItem->setTextAlignment(RTSRiseDate, Qt::AlignRight);
-				treeItem->setText(RTSTransitDate, QString("%1 %2").arg(localeMgr->getPrintableDateLocal(JD), localeMgr->getPrintableTimeLocal(JD))); // local date and time
+				treeItem->setText(RTSTransitDate, transitStr); // local date and time
 				treeItem->setData(RTSTransitDate, Qt::UserRole, JD);
 				treeItem->setTextAlignment(RTSTransitDate, Qt::AlignRight);
 				treeItem->setText(RTSSetDate, setStr); // local date and time
