@@ -4912,7 +4912,7 @@ void Planet::setApparentMagnitudeAlgorithm(QString algorithm)
 // We don't compute positions for midnights, but only for two extra positions 1 JD before and after "now", to allow interpolation of positions.
 // Also, the estimate h0 for the Moon in the literature is based on geocentric computation.
 // NOTE: Limitation for efficiency: If this is a planet moon from another planet, we compute RTS for the parent planet instead!
-Vec4d Planet::getRTSTime(const StelCore *core, const double altitude) const
+Vec4d Planet::getClosestRTSTime(const StelCore *core, const double altitude) const
 {
 	const StelLocation loc=core->getCurrentLocation();
 	if (loc.name.contains("->")) // a spaceship
@@ -5242,4 +5242,102 @@ Vec4d Planet::getRTSTime(const StelCore *core, const double altitude) const
 	//omgr->addToExtraInfoString(StelObject::DebugAid, QString("set     = %1<br/>").arg(StelUtils::julianDayToISO8601String(currentJD+ms)));
 
 	return Vec4d(currentJD+mr, currentJD+mt, currentJD+ms, flag);
+}
+
+Vec4d Planet::getRTSTime(const StelCore *core, const double altitude) const
+{
+	// Keep time in sync (method from line 592) to fix slow down of time when the moon is selected
+	const double currentJD = core->getJDOfLastJDUpdate();
+	const qint64 millis = core->getMilliSecondsOfLastJDUpdate();
+	const double utcShift = core->getUTCOffset(currentJD) / 24.;
+	StelCore* core1 = StelApp::getInstance().getCore();
+	Vec4d rts = getClosestRTSTime(core1,altitude);
+	int year, month, day, currentdate;
+	StelUtils::getDateFromJulianDay(currentJD+utcShift, &year, &month, &currentdate);
+	Vec4d rtsNew;
+
+	// Transit
+	StelUtils::getDateFromJulianDay(rts[1]+utcShift, &year, &month, &day);
+	if (day != currentdate)
+	{
+		if (rts[1]<currentJD) // found time before current date
+		{
+			core1->setJD(rts[1]+1.); // try again for current date
+			core1->update(0); // force update to get new coordinates
+			rtsNew = getClosestRTSTime(core1,altitude);
+			rts[1] = rtsNew[1];
+			rts[3] = rtsNew[3];
+		}
+		else if (rts[1]>currentJD) // found time after current date
+		{
+			core1->setJD(rts[1]-1.); // try again for current date
+			core1->update(0); // force update to get new coordinates
+			rtsNew = getClosestRTSTime(core1,altitude);
+			rts[1] = rtsNew[1];
+			rts[3] = rtsNew[3];
+		}
+	}
+
+	// Rise
+	StelUtils::getDateFromJulianDay(rts[0]+utcShift, &year, &month, &day);
+	if (day != currentdate)
+	{
+		if (rts[0]<currentJD) // found time before current date
+		{
+			core1->setJD(rts[0]+1.); // try again for current date
+			core1->update(0); // force update to get new coordinates
+			rtsNew = getClosestRTSTime(core1,altitude);
+			rts[0] = rtsNew[0];
+			rts[3] = rtsNew[3];
+		}
+		else if (rts[0]>currentJD) // found time after current date
+		{
+			core1->setJD(rts[0]-1.); // try again for current date
+			core1->update(0); // force update to get new coordinates
+			rtsNew = getClosestRTSTime(core1,altitude);
+			rts[0] = rtsNew[0];
+			rts[3] = rtsNew[3];
+		}
+	}
+
+	// Set
+	StelUtils::getDateFromJulianDay(rts[2]+utcShift, &year, &month, &day);
+	if (day != currentdate)
+	{
+		if (rts[2]<currentJD) // found time before current date
+		{
+			core1->setJD(rts[2]+1.); // try again for current date
+			core1->update(0); // force update to get new coordinates
+			rtsNew = getClosestRTSTime(core1,altitude);
+			rts[2] = rtsNew[2];
+			rts[3] = rtsNew[3];
+		}
+		else if (rts[2]>currentJD) // found time after current date
+		{
+			core1->setJD(rts[2]-1.); // try again for current date
+			core1->update(0); // force update to get new coordinates
+			rtsNew = getClosestRTSTime(core1,altitude);
+			rts[2] = rtsNew[2];
+			rts[3] = rtsNew[3];
+		}
+	}
+
+	double mr = rts[0];
+	double mt = rts[1];
+	double ms = rts[2];
+	int flag = rts[3];
+	if (flag==0)
+	{
+		StelUtils::getDateFromJulianDay(mt+utcShift, &year, &month, &day);
+		if (day != currentdate) flag = 20; // no transit
+		StelUtils::getDateFromJulianDay(mr+utcShift, &year, &month, &day);
+		if (day != currentdate) flag = 30; // no rise
+		StelUtils::getDateFromJulianDay(ms+utcShift, &year, &month, &day);
+		if (day != currentdate) flag = 40; // no set
+	}
+	core1->setJD(currentJD);
+	core1->setMilliSecondsOfLastJDUpdate(millis); // restore millis.
+	core1->update(0); // enforce update
+
+	return Vec4d(mr, mt, ms, flag);
 }
