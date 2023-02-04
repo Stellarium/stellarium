@@ -217,7 +217,7 @@ void LocationDialog::setDisplayFormatForSpins(bool flagDecimalDegrees)
 void LocationDialog::handleDialogSizeChanged(QSizeF size)
 {
 	StelDialog::handleDialogSizeChanged(size);
-	StelLocation loc = locationFromFields();
+	//StelLocation loc = locationFromFields();
 	//resizePixmap();
 	//ui->mapWidget->setMarkerPos(loc.longitude, loc.latitude);
 }
@@ -238,22 +238,22 @@ void LocationDialog::populateTooltips()
 }
 
 // Update the widget to make sure it is synchrone if the location is changed programmatically
-void LocationDialog::updateFromProgram(const StelLocation& currentLocation)
+void LocationDialog::updateFromProgram(const StelLocation& newLocation)
 {
 	if (!dialog)
 		return;
 
-	if (currentLocation.name.contains("->")) // avoid extra updates
+	if (newLocation.name.contains("->")) // avoid extra updates
 		return;
 
-	populateRegionList(currentLocation.planetName);
+	populateRegionList(newLocation.planetName);
 	StelCore* stelCore = StelApp::getInstance().getCore();
 
 	isEditingNew = false;
 
 	// Check that the use as default check box needs to be updated
 	// Move to setFieldsFromLocation()? --BM?
-	const bool b = currentLocation.getID() == stelCore->getDefaultLocationID();
+	const bool b = newLocation.getID() == stelCore->getDefaultLocationID();
 	QSettings* conf = StelApp::getInstance().getSettings();
 	if (conf->value("init_location/location", "auto").toString() != ("auto"))
 	{
@@ -261,11 +261,12 @@ void LocationDialog::updateFromProgram(const StelLocation& currentLocation)
 		ui->pushButtonReturnToDefault->setEnabled(!b);
 	}
 
-	const QString& key1 = currentLocation.getID();
+	const QString& key1 = newLocation.getID();
 	const QString& key2 = locationFromFields().getID();
 	if (key1!=key2)
 	{
-		setFieldsFromLocation(currentLocation);
+		setFieldsFromLocation(newLocation);
+		setLocationUIvisible(newLocation.role!='o'); // hide various detail settings when changing to an "observer"
 	}
 }
 
@@ -289,6 +290,30 @@ void LocationDialog::connectEditSignals()
 	connect(ui->regionNameComboBox, SIGNAL(currentIndexChanged(const int)), this, SLOT(reportEdit()));
 	connect(ui->timeZoneNameComboBox, SIGNAL(currentIndexChanged(const int)), this, SLOT(saveTimeZone()));
 	connect(ui->cityNameLineEdit, SIGNAL(textEdited(const QString&)), this, SLOT(reportEdit()));
+}
+
+void LocationDialog::setLocationUIvisible(bool visible)
+{
+	ui->latitudeSpinBox->setEnabled(visible);
+	ui->latitudeSpinBox->setVisible(visible);
+	ui->labelLatitude->setVisible(visible);
+	ui->longitudeSpinBox->setEnabled(visible);
+	ui->longitudeSpinBox->setVisible(visible);
+	ui->labelLongitude->setVisible(visible);
+	ui->altitudeSpinBox->setEnabled(visible);
+	ui->altitudeSpinBox->setVisible(visible);
+	ui->labelElevation->setVisible(visible);
+	ui->regionNameComboBox->setVisible(visible);
+	ui->labelRegion->setVisible(visible);
+	ui->cityNameLineEdit->setVisible(visible);
+	ui->labelName->setVisible(visible);
+	ui->gpsToolButton->setVisible(visible);
+	ui->useIpQueryCheckBox->setVisible(visible);
+	ui->useAsDefaultLocationCheckBox->setVisible(visible);
+	ui->citiesListView->setVisible(visible);
+	ui->citySearchLineEdit->setVisible(visible);
+	ui->resetListPushButton->setVisible(visible);
+	ui->mapWidget->setMarkerVisible(visible);
 }
 
 void LocationDialog::setFieldsFromLocation(const StelLocation& loc)
@@ -555,6 +580,9 @@ StelLocation LocationDialog::locationFromFields() const
 	}
 	else
 		loc.planetName = ui->planetNameComboBox->itemData(index).toString();
+
+
+
 	loc.name = ui->cityNameLineEdit->text().trimmed(); // avoid locations with leading whitespace
 	loc.setLatitude(qBound(-90.0, ui->latitudeSpinBox->valueDegrees(), 90.0));
 	loc.setLongitude(ui->longitudeSpinBox->valueDegrees());
@@ -668,13 +696,21 @@ void LocationDialog::moveToAnotherPlanet()
 			planet=GETSTELMODULE(SolarSystem)->searchByEnglishName(loc.planetName);
 		if (planet && planet->getPlanetType()==Planet::isObserver)
 		{
+			setLocationUIvisible(false);
+
 			loc.role=QChar('o'); // Mark this ad-hoc location as "observer".
+			loc.setLatitude(90.f);
+			loc.setLongitude(0.f);
 			StelObjectMgr *soMgr=GETSTELMODULE(StelObjectMgr);
 			if (soMgr)
 			{
 				soMgr->findAndSelect(planet->getParent()->getEnglishName());
 				GETSTELMODULE(StelMovementMgr)->setFlagTracking(true);
 			}
+		}
+		else
+		{
+			setLocationUIvisible(true);
 		}
 
 		stelCore->moveObserverTo(loc, 0., 0.);

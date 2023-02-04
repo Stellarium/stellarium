@@ -140,7 +140,6 @@
         </property>
         <property name="font">
          <font>
-          <weight>75</weight>
           <italic>false</italic>
           <bold>true</bold>
          </font>
@@ -264,8 +263,7 @@
           <number>0</number>
          </property>
          <item row="1" column="0">
-          <widget class="MapWidget" name="mapWidget">
-          </widget>
+          <widget class="MapWidget" name="mapWidget" native="true"/>
          </item>
          <item row="1" column="1">
           <widget class="QFrame" name="frame_2">
@@ -521,7 +519,7 @@
              <number>6</number>
             </property>
             <item row="0" column="0">
-             <widget class="QLabel" name="label_5">
+             <widget class="QLabel" name="labelLatitude">
               <property name="text">
                <string>Latitude:</string>
               </property>
@@ -570,7 +568,7 @@
              </widget>
             </item>
             <item row="2" column="0">
-             <widget class="QLabel" name="label_7">
+             <widget class="QLabel" name="labelElevation">
               <property name="text">
                <string>Elevation:</string>
               </property>
@@ -593,7 +591,7 @@
              </widget>
             </item>
             <item row="1" column="0">
-             <widget class="QLabel" name="label">
+             <widget class="QLabel" name="labelLongitude">
               <property name="text">
                <string>Longitude:</string>
               </property>
@@ -731,7 +729,7 @@
              </widget>
             </item>
             <item row="2" column="0">
-             <widget class="QLabel" name="label_6">
+             <widget class="QLabel" name="labelPlanet">
               <property name="text">
                <string>Planet:</string>
               </property>
@@ -745,14 +743,14 @@
              </widget>
             </item>
             <item row="3" column="0">
-             <widget class="QLabel" name="timeZoneLabel">
+             <widget class="QLabel" name="labelTimeZone">
               <property name="text">
                <string>Time zone:</string>
               </property>
              </widget>
             </item>
             <item row="0" column="0">
-             <widget class="QLabel" name="label_3">
+             <widget class="QLabel" name="labelName">
               <property name="text">
                <string>Name/City:</string>
               </property>
@@ -800,7 +798,7 @@
              </widget>
             </item>
             <item row="1" column="0">
-             <widget class="QLabel" name="label_4">
+             <widget class="QLabel" name="labelRegion">
               <property name="text">
                <string>Region:</string>
               </property>

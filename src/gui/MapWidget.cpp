@@ -32,7 +32,13 @@ MapWidget::MapWidget(QWidget* parent)
 	: QWidget(parent)
 	, map(":/graphicGui/miscWorldMap.jpg")
 	, locationMarker(":/graphicGui/uieMapPointer.png")
+	, markerVisible(true)
 {
+}
+
+void MapWidget::setMarkerVisible(bool visible)
+{
+	markerVisible=visible;
 }
 
 void MapWidget::setMarkerPos(double longitude, double latitude)
@@ -76,6 +82,8 @@ void MapWidget::paintEvent(QPaintEvent*)
 
 	painter.drawPixmap(mapRect.topLeft(), scaledMap);
 
+	if (markerVisible)
+	{
 	// We want the marker to have odd width, so that the arrow tip is one pixel wide.
 	auto locMarkerWidth = int(locationMarker.width() * (ratio / GUI_PIXMAPS_SCALE));
 	if(locMarkerWidth % 2 == 0)
@@ -88,4 +96,5 @@ void MapWidget::paintEvent(QPaintEvent*)
 	painter.drawPixmap(markerCenterPosX - scaledMarker.width()/2,
 					   markerCenterPosY - scaledMarker.height(),
 					   scaledMarker);
+	}
 }
