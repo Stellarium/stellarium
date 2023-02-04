@@ -189,6 +189,38 @@ void StelMovementMgr::init()
 		}
 	}
 
+	resetInitViewPos();
+
+
+	QString movementGroup = N_("Movement and Selection");
+	addAction("actionSwitch_Equatorial_Mount", N_("Miscellaneous"), N_("Switch between equatorial and azimuthal mount"), "equatorialMount", "Ctrl+M");
+	addAction("actionGoto_Selected_Object", movementGroup, N_("Center on selected object"), "tracking", "Space");
+	addAction("actionGoto_Deselection", movementGroup, N_("Deselect the selected object"), "deselection()", "Ctrl+Space");
+	addAction("actionZoom_In_Auto", movementGroup, N_("Zoom in on selected object"), "autoZoomIn()", "/");
+	addAction("actionZoom_Out_Auto", movementGroup, N_("Zoom out"), "autoZoomOut()", "\\");
+	// AW: Same behaviour has action "actionGoto_Selected_Object" by the fact (Is it for backward compatibility?)
+	addAction("actionSet_Tracking", movementGroup, N_("Track object"), "tracking", "T");
+	// Implementation of quick turning to different directions (examples: CdC, HNSKY)
+	addAction("actionLook_Towards_East", movementGroup, N_("Look towards East"), "lookEast()", "Shift+E");
+	addAction("actionLook_Towards_West", movementGroup, N_("Look towards West"), "lookWest()", "Shift+W");
+	addAction("actionLook_Towards_North", movementGroup, N_("Look towards North"), "lookNorth()", "Shift+N");
+	addAction("actionLook_Towards_South", movementGroup, N_("Look towards South"), "lookSouth()", "Shift+S");
+	addAction("actionLook_Towards_Zenith", movementGroup, N_("Look towards Zenith"), "lookZenith()", "Shift+Z");
+	// Additional hooks
+	addAction("actionLook_Towards_NCP", movementGroup, N_("Look towards North Celestial pole"), "lookTowardsNCP()", "Alt+Shift+N");
+	addAction("actionLook_Towards_SCP", movementGroup, N_("Look towards South Celestial pole"), "lookTowardsSCP()", "Alt+Shift+S");
+	// Field of view
+	// The feature was moved from FOV plugin	
+	bindingFOVActions();
+
+	viewportOffsetTimeline=new QTimeLine(1000, this);
+	viewportOffsetTimeline->setFrameRange(0, 100);
+	connect(viewportOffsetTimeline, SIGNAL(valueChanged(qreal)), this, SLOT(handleViewportOffsetMovement(qreal)));
+	targetViewportOffset.set(core->getViewportHorizontalOffset(), core->getViewportVerticalOffset());
+}
+
+void StelMovementMgr::resetInitViewPos()
+{
 	// With a special code of init_view_position=x/y/1 (or actually, anything equal or larger to 1) you can set zenith into the center and atan2(x/y) to bottom of screen.
 	// examples:  1/0   ->0     NORTH is bottom
 	//           -1/0   ->180   SOUTH is bottom
@@ -220,38 +252,12 @@ void StelMovementMgr::init()
 		viewDirectionJ2000 = core->altAzToJ2000(initViewPos, StelCore::RefractionOff);
 		//qDebug() << "viewDirectionJ2000: " << viewDirectionJ2000[0] << "/" << viewDirectionJ2000[1] << "/" << viewDirectionJ2000[2];
 		setViewDirectionJ2000(viewDirectionJ2000);
-		//qDebug() << "   up2000 initViewUp becomes " << initViewUp[0] << "/" << initViewUp[1] << "/" << initViewUp[2];		
+		//qDebug() << "   up2000 initViewUp becomes " << initViewUp[0] << "/" << initViewUp[1] << "/" << initViewUp[2];
 		setViewUpVector(initViewUp);
 
 		//qDebug() << "   upVectorMountFrame becomes " << upVectorMountFrame[0] << "/" << upVectorMountFrame[1] << "/" << upVectorMountFrame[2];
 	}
 
-
-	QString movementGroup = N_("Movement and Selection");
-	addAction("actionSwitch_Equatorial_Mount", N_("Miscellaneous"), N_("Switch between equatorial and azimuthal mount"), "equatorialMount", "Ctrl+M");
-	addAction("actionGoto_Selected_Object", movementGroup, N_("Center on selected object"), "tracking", "Space");
-	addAction("actionGoto_Deselection", movementGroup, N_("Deselect the selected object"), "deselection()", "Ctrl+Space");
-	addAction("actionZoom_In_Auto", movementGroup, N_("Zoom in on selected object"), "autoZoomIn()", "/");
-	addAction("actionZoom_Out_Auto", movementGroup, N_("Zoom out"), "autoZoomOut()", "\\");
-	// AW: Same behaviour has action "actionGoto_Selected_Object" by the fact (Is it for backward compatibility?)
-	addAction("actionSet_Tracking", movementGroup, N_("Track object"), "tracking", "T");
-	// Implementation of quick turning to different directions (examples: CdC, HNSKY)
-	addAction("actionLook_Towards_East", movementGroup, N_("Look towards East"), "lookEast()", "Shift+E");
-	addAction("actionLook_Towards_West", movementGroup, N_("Look towards West"), "lookWest()", "Shift+W");
-	addAction("actionLook_Towards_North", movementGroup, N_("Look towards North"), "lookNorth()", "Shift+N");
-	addAction("actionLook_Towards_South", movementGroup, N_("Look towards South"), "lookSouth()", "Shift+S");
-	addAction("actionLook_Towards_Zenith", movementGroup, N_("Look towards Zenith"), "lookZenith()", "Shift+Z");
-	// Additional hooks
-	addAction("actionLook_Towards_NCP", movementGroup, N_("Look towards North Celestial pole"), "lookTowardsNCP()", "Alt+Shift+N");
-	addAction("actionLook_Towards_SCP", movementGroup, N_("Look towards South Celestial pole"), "lookTowardsSCP()", "Alt+Shift+S");
-	// Field of view
-	// The feature was moved from FOV plugin	
-	bindingFOVActions();
-
-	viewportOffsetTimeline=new QTimeLine(1000, this);
-	viewportOffsetTimeline->setFrameRange(0, 100);
-	connect(viewportOffsetTimeline, SIGNAL(valueChanged(qreal)), this, SLOT(handleViewportOffsetMovement(qreal)));
-	targetViewportOffset.set(core->getViewportHorizontalOffset(), core->getViewportVerticalOffset());
 }
 
 void StelMovementMgr::bindingFOVActions()

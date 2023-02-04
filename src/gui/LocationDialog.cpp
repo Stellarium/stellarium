@@ -266,7 +266,7 @@ void LocationDialog::updateFromProgram(const StelLocation& newLocation)
 	if (key1!=key2)
 	{
 		setFieldsFromLocation(newLocation);
-		setLocationUIvisible(newLocation.role!='o'); // hide various detail settings when changing to an "observer"
+		//(newLocation.role!='o'); // hide various detail settings when changing to an "observer"
 	}
 }
 
@@ -314,6 +314,16 @@ void LocationDialog::setLocationUIvisible(bool visible)
 	ui->citySearchLineEdit->setVisible(visible);
 	ui->resetListPushButton->setVisible(visible);
 	ui->mapWidget->setMarkerVisible(visible);
+
+	if(visible)
+	{
+		connect(ui->mapWidget, SIGNAL(positionChanged(double, double)), this, SLOT(setLocationFromMap(double, double)));
+	}
+	else
+	{
+		disconnect(ui->mapWidget, SIGNAL(positionChanged(double, double)), this, SLOT(setLocationFromMap(double, double)));
+	}
+
 }
 
 void LocationDialog::setFieldsFromLocation(const StelLocation& loc)
@@ -328,8 +338,8 @@ void LocationDialog::setFieldsFromLocation(const StelLocation& loc)
 		customTimeZone=core->getCurrentTimeZone();
 
 	ui->cityNameLineEdit->setText(loc.name);
-	ui->longitudeSpinBox->setDegrees(loc.getLongitude());
-	ui->latitudeSpinBox->setDegrees(loc.getLatitude());
+	ui->longitudeSpinBox->setDegrees(loc.getLongitude(true));
+	ui->latitudeSpinBox->setDegrees(loc.getLatitude(true));
 	ui->altitudeSpinBox->setValue(loc.altitude);
 
 	int idx = ui->planetNameComboBox->findData(loc.planetName, Qt::UserRole, Qt::MatchCaseSensitive);
@@ -699,8 +709,6 @@ void LocationDialog::moveToAnotherPlanet()
 			setLocationUIvisible(false);
 
 			loc.role=QChar('o'); // Mark this ad-hoc location as "observer".
-			loc.setLatitude(90.f);
-			loc.setLongitude(0.f);
 			StelObjectMgr *soMgr=GETSTELMODULE(StelObjectMgr);
 			if (soMgr)
 			{
@@ -710,7 +718,10 @@ void LocationDialog::moveToAnotherPlanet()
 		}
 		else
 		{
+			GETSTELMODULE(StelMovementMgr)->setFlagTracking(false);
 			setLocationUIvisible(true);
+			// TODO: Set default sky view?
+			GETSTELMODULE(StelMovementMgr)->resetInitViewPos();
 		}
 
 		stelCore->moveObserverTo(loc, 0., 0.);

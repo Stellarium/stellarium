@@ -176,6 +176,9 @@ public:
 	void moveToObject(const StelObjectP& target, float moveDuration = 1., ZoomingMode zooming = ZoomNone);
 
 public slots:
+	//! load and process initial viewing position. Can be called later to restore original "default" view.
+	void resetInitViewPos();
+
 	// UNUSED, but scriptable
 	//! Toggle current mount mode between equatorial and altazimuthal
 	void toggleMountMode() {if (getMountMode()==MountAltAzimuthal) setMountMode(MountEquinoxEquatorial); else setMountMode(MountAltAzimuthal);}
