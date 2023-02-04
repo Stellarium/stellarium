@@ -294,25 +294,29 @@ void LocationDialog::connectEditSignals()
 
 void LocationDialog::setLocationUIvisible(bool visible)
 {
-	ui->latitudeSpinBox->setEnabled(visible);
-	ui->latitudeSpinBox->setVisible(visible);
-	ui->labelLatitude->setVisible(visible);
-	ui->longitudeSpinBox->setEnabled(visible);
-	ui->longitudeSpinBox->setVisible(visible);
-	ui->labelLongitude->setVisible(visible);
-	ui->altitudeSpinBox->setEnabled(visible);
-	ui->altitudeSpinBox->setVisible(visible);
-	ui->labelElevation->setVisible(visible);
+	ui->frame_coordinates->setVisible(visible);
+	//ui->latitudeSpinBox->setEnabled(visible);
+	//ui->latitudeSpinBox->setVisible(visible);
+	//ui->labelLatitude->setVisible(visible);
+	//ui->longitudeSpinBox->setEnabled(visible);
+	//ui->longitudeSpinBox->setVisible(visible);
+	//ui->labelLongitude->setVisible(visible);
+	//ui->altitudeSpinBox->setEnabled(visible);
+	//ui->altitudeSpinBox->setVisible(visible);
+	//ui->labelElevation->setVisible(visible);
 	ui->regionNameComboBox->setVisible(visible);
 	ui->labelRegion->setVisible(visible);
 	ui->cityNameLineEdit->setVisible(visible);
 	ui->labelName->setVisible(visible);
+
 	ui->gpsToolButton->setVisible(visible);
 	ui->useIpQueryCheckBox->setVisible(visible);
 	ui->useAsDefaultLocationCheckBox->setVisible(visible);
-	ui->citiesListView->setVisible(visible);
-	ui->citySearchLineEdit->setVisible(visible);
-	ui->resetListPushButton->setVisible(visible);
+
+	ui->frame_citylist->setVisible(visible);
+	//ui->citiesListView->setVisible(visible);
+	//ui->citySearchLineEdit->setVisible(visible);
+	//ui->resetListPushButton->setVisible(visible);
 	ui->mapWidget->setMarkerVisible(visible);
 
 	if(visible)
@@ -323,7 +327,7 @@ void LocationDialog::setLocationUIvisible(bool visible)
 	{
 		disconnect(ui->mapWidget, SIGNAL(positionChanged(double, double)), this, SLOT(setLocationFromMap(double, double)));
 	}
-
+	ui->frame_buttons->setVisible(visible); // prevent bad ideas...
 }
 
 void LocationDialog::setFieldsFromLocation(const StelLocation& loc)
