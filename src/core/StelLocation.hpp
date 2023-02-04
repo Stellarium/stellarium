@@ -66,10 +66,11 @@ public:
 	//! @return azimuth counted from north or south as set in the StelApp preferences, in [0...360].
 	double getAzimuthForLocation(double longTarget, double latTarget) const;
 
-	//! longitude and latitude are private to force use of special getters. These return a location on the north pole if we are located on an "Observer".
-	//! By this we force useful view orientation.
-	float getLatitude()  const;
-	float getLongitude() const;
+	//! longitude and latitude are private to force use of special getters. These return a location on the north pole if we are located on an "Observer" (when "role" == 'o').
+	//! By this we force useful view orientation when on an observer pseudo-planet.
+	//! @param suppressObserver set to true to return the actual number in every case. (Required for some UI elements)
+	float getLatitude(bool suppressObserver=false)  const;
+	float getLongitude(bool suppressObserver=false) const;
 	void setLatitude(float l)  { latitude=l;}
 	void setLongitude(float l) { longitude=l;}
 
@@ -100,6 +101,7 @@ public:
 	//! @li @p A is a spacecraft crash
 	//! @li @p X is an unknown or user-defined location (the default value).
 	//! @li @p ! is an invalid location.
+	//! @li @p o is an "observer" pseudo-planet. This is not stored in the location database but used ad-hoc in the LocationDialog.
 	QChar role;
 	//! IANA identificator of time zone.
 	//! Note that timezone names under various OSes may be different than those used in Stellarium's
