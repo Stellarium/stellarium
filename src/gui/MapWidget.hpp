@@ -38,6 +38,8 @@ public:
 	//! @param longitude longitude in degree in range [-180;180[
 	//! @param latitude latitude in degree in range [-90;90]
 	void setMarkerPos(double longitude, double latitude);
+	//! allow hiding the location arrow (if sitting on an observer)
+	void setMarkerVisible(bool visible);
 
 	void setMap(const QPixmap &map);
 	
@@ -51,6 +53,7 @@ protected:
 
 private:
 	double markerLat=0, markerLon=0;
+	bool markerVisible;
 	QPixmap map;
 	QPixmap locationMarker;
 	QRectF mapRect; // in device pixels

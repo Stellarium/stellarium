@@ -89,17 +89,17 @@ QString StelLocation::getID() const
 
 float StelLocation::getLatitude()  const
 {
-	if (role==QChar('o'))
-		return 90.f;
-	else
+	//if (role==QChar('o'))
+	//	return 90.f;
+	//else
 		return latitude;
 }
 
 float StelLocation::getLongitude() const
 {
-	if (role==QChar('o'))
-		return 0.f;
-	else
+	//if (role==QChar('o'))
+	//	return 0.f;
+	//else
 		return longitude;
 }
 
