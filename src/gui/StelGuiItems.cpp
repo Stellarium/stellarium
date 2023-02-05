@@ -902,6 +902,8 @@ void BottomStelBar::updateText(bool updatePos)
 				weather = QString("%1: %2 %3; %4: %5 °C").arg(q_("Atmospheric pressure"), QString::number(propMgr->getStelPropertyValue("StelSkyDrawer.atmospherePressure").toDouble(), 'f', 2), qc_("mbar", "pressure unit"), q_("temperature"), QString::number(propMgr->getStelPropertyValue("StelSkyDrawer.atmosphereTemperature").toDouble(), 'f', 1));
 				location->setToolTip(QString("<p style='white-space:pre'>%1 %2; %3<br>%4</p>").arg(latStr, lonStr, rho, weather));
 			}
+			else if (core->getCurrentPlanet()->getPlanetType()==Planet::isObserver)
+				newLocation = planetNameI18n;
 			else
 				location->setToolTip(QString("%1 %2; %3").arg(latStr, lonStr, rho));
 		}
