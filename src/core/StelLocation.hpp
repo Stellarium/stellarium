@@ -30,7 +30,7 @@ class Planet;
 class StelLocation
 {
 public:
-	StelLocation() : longitude(0.f), latitude(0.f), altitude(0), population(0), role('X'), isUserLocation(true) {}
+	StelLocation() : altitude(0), population(0), role('X'), isUserLocation(true), longitude(0.f), latitude(0.f) {}
 	//! constructor for ad-hoc locations.
 	//! @arg lName location name
 	//! @arg lState may be usedful if region has more than one such name
