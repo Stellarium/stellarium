@@ -58,7 +58,6 @@ private slots:
 	void skyCultureChanged();
 	void changeProjection(const QString& projectionNameI18n);
 	void projectionChanged();
-	void changeLandscape(QListWidgetItem* item);
 	void landscapeChanged(QString id,QString name);
 	void updateZhrDescription(int zhr);
 	void setCurrentLandscapeAsDefault(void);
