@@ -19,6 +19,7 @@
 */
 
 #include "Dialog.hpp"
+#include "LandscapeMgr.hpp"
 #include "LocationDialog.hpp"
 #include "StelLocationMgr.hpp"
 #include "StelMovementMgr.hpp"
@@ -182,7 +183,8 @@ void LocationDialog::createDialogContent()
 	connect(ui->useIpQueryCheckBox, SIGNAL(clicked(bool)), this, SLOT(ipQueryLocation(bool)));
 	connect(ui->useAsDefaultLocationCheckBox, SIGNAL(clicked(bool)), this, SLOT(setDefaultLocation(bool)));
 	connect(ui->pushButtonReturnToDefault, SIGNAL(clicked()), this, SLOT(resetLocationList()));
-	connect(ui->pushButtonReturnToDefault, SIGNAL(clicked()), core, SLOT(returnToDefaultLocation()));
+	//connect(ui->pushButtonReturnToDefault, SIGNAL(clicked()), core, SLOT(returnToDefaultLocation()));
+
 	connectBoolProperty(ui->dstCheckBox, "StelCore.flagUseDST");
 	connectBoolProperty(ui->useCustomTimeZoneCheckBox, "StelCore.flagUseCTZ");
 	connect(ui->useCustomTimeZoneCheckBox, SIGNAL(toggled(bool)), ui->timeZoneNameComboBox, SLOT(setEnabled(bool)));
@@ -194,7 +196,18 @@ void LocationDialog::createDialogContent()
 
 	populateTooltips();
 
-	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(updateFromProgram(StelLocation)));
+	//connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(updateFromProgram(StelLocation)));
+	connect(core, SIGNAL(targetLocationChanged(StelLocation)), this, SLOT(updateFromProgram(StelLocation))); // Fill with actually selected location!
+
+	connect(ui->pushButtonReturnToDefault, &QPushButton::clicked, this, [=]{
+		static StelMovementMgr *mMgr=GETSTELMODULE(StelMovementMgr);
+		static LandscapeMgr *lMgr=GETSTELMODULE(LandscapeMgr);
+		mMgr->setFlagTracking(false);      // break orientation lock
+		this->setLocationUIvisible(true);  // restore UI
+		core->returnToDefaultLocation();
+		mMgr->resetInitViewPos();
+		lMgr->setCurrentLandscapeID(lMgr->getDefaultLandscapeID(), 0.);
+	});
 
 	ui->citySearchLineEdit->setFocus();
 }
@@ -327,7 +340,9 @@ void LocationDialog::setLocationUIvisible(bool visible)
 	{
 		disconnect(ui->mapWidget, SIGNAL(positionChanged(double, double)), this, SLOT(setLocationFromMap(double, double)));
 	}
-	ui->frame_buttons->setVisible(visible); // prevent bad ideas...
+	//ui->frame_buttons->setVisible(visible); // prevent bad ideas...
+	ui->addLocationToListPushButton->setVisible(visible);
+	ui->deleteLocationFromListPushButton->setVisible(visible);
 }
 
 void LocationDialog::setFieldsFromLocation(const StelLocation& loc)
