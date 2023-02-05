@@ -846,21 +846,15 @@ void BottomStelBar::updateText(bool updatePos)
 	if (getFlagShowLocation())
 	{
 		const StelLocation* loc = &core->getCurrentLocation();
-		if(loc->name.isEmpty())
+		if (core->getCurrentPlanet()->getPlanetType()==Planet::isObserver)
+			newLocation = planetNameI18n;
+		else if(loc->name.isEmpty())
 			newLocation = planetNameI18n +", "+StelUtils::decDegToDmsStr(loc->getLatitude())+", "+StelUtils::decDegToDmsStr(loc->getLongitude());
+		else if (loc->name.contains("->")) // a spaceship
+			newLocation = QString("%1 [%2 %3]").arg(planetNameI18n, q_("flight"), loc->name);
 		else
-		{
-			if (loc->name.contains("->")) // a spaceship
-				newLocation = QString("%1 [%2 %3]").arg(planetNameI18n, q_("flight"), loc->name);
-			else
-			{
-				if (core->getCurrentPlanet()->getPlanetType()==Planet::isObserver)
-					newLocation = planetNameI18n;
-				else
-					//TRANSLATORS: Unit of measure for distance - meter
-					newLocation = planetNameI18n +", "+q_(loc->name) + ", "+ QString("%1 %2").arg(loc->altitude).arg(qc_("m", "distance"));
-			}
-		}
+			//TRANSLATORS: Unit of measure for distance - meter
+			newLocation = planetNameI18n +", "+q_(loc->name) + ", "+ QString("%1 %2").arg(loc->altitude).arg(qc_("m", "distance"));
 	}
 	// TODO: When topocentric switch is toggled, this must be redrawn!
 	if (location->text()!=newLocation)
