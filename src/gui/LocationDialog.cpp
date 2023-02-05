@@ -227,13 +227,13 @@ void LocationDialog::setDisplayFormatForSpins(bool flagDecimalDegrees)
 	ui->latitudeSpinBox->setDisplayFormat(format);
 }
 
-void LocationDialog::handleDialogSizeChanged(QSizeF size)
-{
-	StelDialog::handleDialogSizeChanged(size);
-	//StelLocation loc = locationFromFields();
-	//resizePixmap();
-	//ui->mapWidget->setMarkerPos(loc.longitude, loc.latitude);
-}
+//void LocationDialog::handleDialogSizeChanged(QSizeF size)
+//{
+//	StelDialog::handleDialogSizeChanged(size);
+//	//StelLocation loc = locationFromFields();
+//	//resizePixmap();
+//	//ui->mapWidget->setMarkerPos(loc.longitude, loc.latitude);
+//}
 
 void LocationDialog::reloadLocations()
 {
@@ -317,14 +317,14 @@ void LocationDialog::setLocationUIvisible(bool visible)
 	//ui->altitudeSpinBox->setEnabled(visible);
 	//ui->altitudeSpinBox->setVisible(visible);
 	//ui->labelElevation->setVisible(visible);
+	//ui->gpsToolButton->setVisible(visible);
+	//ui->useIpQueryCheckBox->setVisible(visible);
+	//ui->useAsDefaultLocationCheckBox->setVisible(visible);
+
 	ui->regionNameComboBox->setVisible(visible);
 	ui->labelRegion->setVisible(visible);
 	ui->cityNameLineEdit->setVisible(visible);
 	ui->labelName->setVisible(visible);
-
-	ui->gpsToolButton->setVisible(visible);
-	ui->useIpQueryCheckBox->setVisible(visible);
-	ui->useAsDefaultLocationCheckBox->setVisible(visible);
 
 	ui->frame_citylist->setVisible(visible);
 	//ui->citiesListView->setVisible(visible);
