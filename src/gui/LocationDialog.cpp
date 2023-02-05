@@ -278,8 +278,10 @@ void LocationDialog::updateFromProgram(const StelLocation& newLocation)
 	const QString& key2 = locationFromFields().getID();
 	if (key1!=key2)
 	{
+		if (newLocation.role!='o')
+			GETSTELMODULE(StelMovementMgr)->setFlagTracking(false);
 		setFieldsFromLocation(newLocation);
-		//(newLocation.role!='o'); // hide various detail settings when changing to an "observer"
+		setLocationUIvisible(newLocation.role!='o'); // hide various detail settings when changing to an "observer"
 	}
 }
 
