@@ -40,8 +40,8 @@ public slots:
 	//! Apply application style change
 	void styleChanged(const QString &style) override;
 	void retranslate() override;
-	//! In addition to StelDialog's inherited solution, puts the arrow on the right spot in the map.
-	void handleDialogSizeChanged(QSizeF size) override;
+	// ! In addition to StelDialog's inherited solution, puts the arrow on the right spot in the map.
+	//void handleDialogSizeChanged(QSizeF size) override;
 
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots
