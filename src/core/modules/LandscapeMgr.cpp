@@ -1144,11 +1144,10 @@ void LandscapeMgr::onTargetLocationChanged(const StelLocation &loc)
 {
 	if (loc.planetName != currentPlanetName)
 	{
-		currentPlanetName = loc.planetName;
-		if (flagLandscapeAutoSelection)
+		if (flagLandscapeAutoSelection && !currentPlanetName.endsWith("observer", Qt::CaseInsensitive))
 		{
 			// If we have a landscape for selected planet then set it, otherwise use zero horizon landscape
-			bool landscapeSetsLocation = getFlagLandscapeSetsLocation();
+			const bool landscapeSetsLocation = getFlagLandscapeSetsLocation();
 			setFlagLandscapeSetsLocation(false);
 			if (getAllLandscapeNames().indexOf(loc.planetName)>0)
 				setCurrentLandscapeName(loc.planetName);
@@ -1156,8 +1155,9 @@ void LandscapeMgr::onTargetLocationChanged(const StelLocation &loc)
 				setCurrentLandscapeID("zero");
 			setFlagLandscapeSetsLocation(landscapeSetsLocation);
 		}
+		currentPlanetName = loc.planetName;
 
-		if (loc.planetName.contains("Observer", Qt::CaseInsensitive))
+		if (loc.role==QChar('o')) // observer?
 		{
 			if (flagEnvironmentAutoEnabling)
 			{
