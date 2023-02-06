@@ -738,7 +738,8 @@ signals:
 private slots:
 	//! Reacts to StelCore::locationChanged.
 	void onLocationChanged(const StelLocation &loc);
-	void onTargetLocationChanged(const StelLocation &loc);
+	//! To be connected to StelCore::targetLocationChanged
+	void onTargetLocationChanged(const StelLocation &loc, const QString &landscapeID);
 
 	//! Translate labels to new language settings.
 	void updateI18n();

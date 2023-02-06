@@ -857,7 +857,7 @@ void LandscapeMgr::init()
 	Q_ASSERT(drawer);
 	setAtmosphereLightPollutionLuminance(drawer->getLightPollutionLuminance());
 	connect(app->getCore(), SIGNAL(locationChanged(StelLocation)), this, SLOT(onLocationChanged(StelLocation)));
-	connect(app->getCore(), SIGNAL(targetLocationChanged(StelLocation)), this, SLOT(onTargetLocationChanged(StelLocation)));
+	connect(app->getCore(), SIGNAL(targetLocationChanged(const StelLocation&, const QString&)), this, SLOT(onTargetLocationChanged(const StelLocation&, const QString&)));
 	connect(drawer, &StelSkyDrawer::lightPollutionLuminanceChanged, this, &LandscapeMgr::setAtmosphereLightPollutionLuminance);
 	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
 
@@ -953,7 +953,7 @@ bool LandscapeMgr::setCurrentLandscapeID(const QString& id, const double changeL
 	if (getFlagLandscapeSetsLocation() && landscape->hasLocation())
 	{
 		StelCore *core = StelApp::getInstance().getCore();
-		core->moveObserverTo(landscape->getLocation(), changeLocationDuration);
+		core->moveObserverTo(landscape->getLocation(), changeLocationDuration, changeLocationDuration, id);
 		StelSkyDrawer* drawer=core->getSkyDrawer();
 
 		if (landscape->getLocation().ianaTimeZone.length())
@@ -1140,11 +1140,14 @@ void LandscapeMgr::onLocationChanged(const StelLocation &loc)
 	}
 }
 
-void LandscapeMgr::onTargetLocationChanged(const StelLocation &loc)
+void LandscapeMgr::onTargetLocationChanged(const StelLocation &loc, const QString& landscapeID)
 {
+	qDebug() << "LandscapeMgr::onTargetLocationCHanged(): loc.planetName:" << loc.planetName << "currentPlanetName" << currentPlanetName;
 	if (loc.planetName != currentPlanetName)
 	{
-		if (flagLandscapeAutoSelection && !currentPlanetName.endsWith("observer", Qt::CaseInsensitive))
+		if (landscapeID.length()>0)
+			setCurrentLandscapeID(landscapeID);
+		else if (flagLandscapeAutoSelection)
 		{
 			// If we have a landscape for selected planet then set it, otherwise use zero horizon landscape
 			const bool landscapeSetsLocation = getFlagLandscapeSetsLocation();

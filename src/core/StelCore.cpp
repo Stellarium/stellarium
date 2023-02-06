@@ -1279,7 +1279,7 @@ void StelCore::setObserver(StelObserver *obs)
 }
 
 // Smoothly move the observer to the given location
-void StelCore::moveObserverTo(const StelLocation& target, double duration, double durationIfPlanetChange)
+void StelCore::moveObserverTo(const StelLocation& target, double duration, double durationIfPlanetChange, const QString &landscapeID)
 {
 	double d = (getCurrentLocation().planetName==target.planetName) ? duration : durationIfPlanetChange;
 	if (d>0.)
@@ -1317,7 +1317,7 @@ void StelCore::moveObserverTo(const StelLocation& target, double duration, doubl
 			}
 		}
 	}
-	emit targetLocationChanged(target);
+	emit targetLocationChanged(target, landscapeID);
 	emit locationChanged(getCurrentLocation());
 }
 
