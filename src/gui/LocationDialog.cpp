@@ -196,6 +196,8 @@ void LocationDialog::createDialogContent()
 
 	populateTooltips();
 
+	// In case this dialog is called up before going to an "observer", we need to update a few UI elements:
+	updateFromProgram(core->getCurrentLocation());
 	//connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(updateFromProgram(StelLocation)));
 	connect(core, SIGNAL(targetLocationChanged(StelLocation)), this, SLOT(updateFromProgram(StelLocation))); // Fill with actually selected location!
 

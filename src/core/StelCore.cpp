@@ -1217,6 +1217,10 @@ void StelCore::moveObserverToSelected()
 				loc.planetName = pl->getEnglishName();				
 				loc.name = "landing site";
 				loc.state = "";
+				if (pl->getPlanetType()==Planet::isObserver)
+					loc.role=QChar('o');
+				else
+					loc.role=QChar('X');
 
 				// Let's try guess name of location...
 				LocationMap results = StelApp::getInstance().getLocationMgr().pickLocationsNearby(loc.planetName, loc.getLongitude(), loc.getLatitude(), 1.0f);
@@ -1293,6 +1297,25 @@ void StelCore::moveObserverTo(const StelLocation& target, double duration, doubl
 	else
 	{
 		setObserver(new StelObserver(target));
+	}
+
+	// Auto-select observed planet for observer locations
+	if (target.role==QChar('o'))
+	{
+		// If we change to an Observer "planet", auto-select and focus on the observed object.
+		SolarSystem *ss=GETSTELMODULE(SolarSystem);
+		PlanetP planet=nullptr;
+		if (ss)
+			planet=GETSTELMODULE(SolarSystem)->searchByEnglishName(target.planetName);
+		if (planet && planet->getPlanetType()==Planet::isObserver)
+		{
+			StelObjectMgr *soMgr=GETSTELMODULE(StelObjectMgr);
+			if (soMgr)
+			{
+				soMgr->findAndSelect(planet->getParent()->getEnglishName());
+				GETSTELMODULE(StelMovementMgr)->setFlagTracking(true);
+			}
+		}
 	}
 	emit targetLocationChanged(target);
 	emit locationChanged(getCurrentLocation());
