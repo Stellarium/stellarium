@@ -511,12 +511,13 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 	// Load sides textures
 	nbSideTexs = static_cast<unsigned short>(landscapeIni.value("landscape/nbsidetex", 0).toUInt());
 	sideTexs = new StelTextureSP[static_cast<size_t>(nbSideTexs)*2]; // 0.14: allow upper half for light textures!
+	const auto texParams = StelTexture::StelTextureParams(true, GL_LINEAR, GL_CLAMP_TO_EDGE, true);
 	for (unsigned int i=0; i<nbSideTexs; ++i)
 	{
 		QString textureKey = QString("landscape/tex%1").arg(i);
 		QString textureName = landscapeIni.value(textureKey).toString();
 		const QString texturePath = getTexturePath(textureName, landscapeId);
-		sideTexs[i] = StelApp::getInstance().getTextureManager().createTexture(texturePath);
+		sideTexs[i] = StelApp::getInstance().getTextureManager().createTexture(texturePath, texParams);
 		// GZ: To query the textures, also keep an array of QImage*, but only
 		// if that query is not going to be prevented by the polygon that already has been loaded at that point...
 		if ( (!horizonPolygon) && calibrated ) { // for uncalibrated landscapes the texture is currently never queried, so no need to store.
@@ -534,7 +535,7 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 		if (textureName.length())
 		{
 			const QString lightTexturePath = getTexturePath(textureName, landscapeId);
-			sideTexs[nbSideTexs+i] = StelApp::getInstance().getTextureManager().createTexture(lightTexturePath);
+			sideTexs[nbSideTexs+i] = StelApp::getInstance().getTextureManager().createTexture(lightTexturePath, texParams);
 			if(sideTexs[nbSideTexs+i])
 				memorySize+=sideTexs[nbSideTexs+i]->getGlSize();
 		}
@@ -577,7 +578,7 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 	}
 	const QString groundTexName = landscapeIni.value("landscape/groundtex").toString();
 	const QString groundTexPath = getTexturePath(groundTexName, landscapeId);
-	groundTex = StelApp::getInstance().getTextureManager().createTexture(groundTexPath, StelTexture::StelTextureParams(true));
+	groundTex = StelApp::getInstance().getTextureManager().createTexture(groundTexPath, texParams);
 	if (groundTex)
 		memorySize+=groundTex->getGlSize();
 
