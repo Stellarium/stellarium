@@ -93,6 +93,14 @@ public:
 		double &pathWidth, double &duration, double &magnitude);
 };
 
+
+//! @class Planet
+//! The Planet class is used for the major planets, moons, "Observer" planets, and artificial objects ("Spaceship").
+//! Major planets and many moons have their own positional computation, the others, and derivatives Comet and MinorPlanet, use KeplerOrbit for their position.
+//! "Observer" objects (Solar System Observer, Earth Observer, Mars Observer, Jupiter Observer, Saturn Observer, Uranus Observer, Neptune Observer)
+//! are positioned with a GimbalOrbit and can be rotated around their parent by keyboard interaction.
+//! These are oriented parallel to their parents' polar axis. The actual observer location must be on the North pole so that the vertical screen axis
+//! aligns with the parent planet's rotational axis.
 class Planet : public StelObject
 {
 public:
