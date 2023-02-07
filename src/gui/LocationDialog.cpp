@@ -183,8 +183,6 @@ void LocationDialog::createDialogContent()
 	connect(ui->useIpQueryCheckBox, SIGNAL(clicked(bool)), this, SLOT(ipQueryLocation(bool)));
 	connect(ui->useAsDefaultLocationCheckBox, SIGNAL(clicked(bool)), this, SLOT(setDefaultLocation(bool)));
 	connect(ui->pushButtonReturnToDefault, SIGNAL(clicked()), this, SLOT(resetLocationList()));
-	//connect(ui->pushButtonReturnToDefault, SIGNAL(clicked()), core, SLOT(returnToDefaultLocation()));
-
 	connectBoolProperty(ui->dstCheckBox, "StelCore.flagUseDST");
 	connectBoolProperty(ui->useCustomTimeZoneCheckBox, "StelCore.flagUseCTZ");
 	connect(ui->useCustomTimeZoneCheckBox, SIGNAL(toggled(bool)), ui->timeZoneNameComboBox, SLOT(setEnabled(bool)));
@@ -198,7 +196,6 @@ void LocationDialog::createDialogContent()
 
 	// In case this dialog is called up before going to an "observer", we need to update a few UI elements:
 	updateFromProgram(core->getCurrentLocation());
-	//connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(updateFromProgram(StelLocation)));
 	connect(core, SIGNAL(targetLocationChanged(StelLocation)), this, SLOT(updateFromProgram(StelLocation))); // Fill with actually selected location!
 
 	connect(ui->pushButtonReturnToDefault, &QPushButton::clicked, this, [=]{
@@ -228,14 +225,6 @@ void LocationDialog::setDisplayFormatForSpins(bool flagDecimalDegrees)
 	ui->latitudeSpinBox->setDecimals(places);
 	ui->latitudeSpinBox->setDisplayFormat(format);
 }
-
-//void LocationDialog::handleDialogSizeChanged(QSizeF size)
-//{
-//	StelDialog::handleDialogSizeChanged(size);
-//	//StelLocation loc = locationFromFields();
-//	//resizePixmap();
-//	//ui->mapWidget->setMarkerPos(loc.longitude, loc.latitude);
-//}
 
 void LocationDialog::reloadLocations()
 {
@@ -312,28 +301,11 @@ void LocationDialog::connectEditSignals()
 void LocationDialog::setLocationUIvisible(bool visible)
 {
 	ui->frame_coordinates->setVisible(visible);
-	//ui->latitudeSpinBox->setEnabled(visible);
-	//ui->latitudeSpinBox->setVisible(visible);
-	//ui->labelLatitude->setVisible(visible);
-	//ui->longitudeSpinBox->setEnabled(visible);
-	//ui->longitudeSpinBox->setVisible(visible);
-	//ui->labelLongitude->setVisible(visible);
-	//ui->altitudeSpinBox->setEnabled(visible);
-	//ui->altitudeSpinBox->setVisible(visible);
-	//ui->labelElevation->setVisible(visible);
-	//ui->gpsToolButton->setVisible(visible);
-	//ui->useIpQueryCheckBox->setVisible(visible);
-	//ui->useAsDefaultLocationCheckBox->setVisible(visible);
-
 	ui->regionNameComboBox->setVisible(visible);
 	ui->labelRegion->setVisible(visible);
 	ui->cityNameLineEdit->setVisible(visible);
 	ui->labelName->setVisible(visible);
-
 	ui->frame_citylist->setVisible(visible);
-	//ui->citiesListView->setVisible(visible);
-	//ui->citySearchLineEdit->setVisible(visible);
-	//ui->resetListPushButton->setVisible(visible);
 	ui->mapWidget->setMarkerVisible(visible);
 
 	if(visible)
@@ -344,7 +316,6 @@ void LocationDialog::setLocationUIvisible(bool visible)
 	{
 		disconnect(ui->mapWidget, SIGNAL(positionChanged(double, double)), this, SLOT(setLocationFromMap(double, double)));
 	}
-	//ui->frame_buttons->setVisible(visible); // prevent bad ideas...
 	ui->addLocationToListPushButton->setVisible(visible);
 	ui->deleteLocationFromListPushButton->setVisible(visible);
 }
@@ -613,9 +584,6 @@ StelLocation LocationDialog::locationFromFields() const
 	}
 	else
 		loc.planetName = ui->planetNameComboBox->itemData(index).toString();
-
-
-
 	loc.name = ui->cityNameLineEdit->text().trimmed(); // avoid locations with leading whitespace
 	loc.setLatitude(qBound(-90.0, ui->latitudeSpinBox->valueDegrees(), 90.0));
 	loc.setLongitude(ui->longitudeSpinBox->valueDegrees());
@@ -743,7 +711,6 @@ void LocationDialog::moveToAnotherPlanet()
 		{
 			GETSTELMODULE(StelMovementMgr)->setFlagTracking(false);
 			setLocationUIvisible(true);
-			// TODO: Set default sky view?
 			GETSTELMODULE(StelMovementMgr)->resetInitViewPos();
 		}
 

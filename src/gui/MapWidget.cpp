@@ -84,17 +84,17 @@ void MapWidget::paintEvent(QPaintEvent*)
 
 	if (markerVisible)
 	{
-	// We want the marker to have odd width, so that the arrow tip is one pixel wide.
-	auto locMarkerWidth = int(locationMarker.width() * (ratio / GUI_PIXMAPS_SCALE));
-	if(locMarkerWidth % 2 == 0)
-		++locMarkerWidth;
-	const auto scaledMarker = locationMarker.scaledToWidth(locMarkerWidth, Qt::SmoothTransformation);
+		// We want the marker to have odd width, so that the arrow tip is one pixel wide.
+		auto locMarkerWidth = int(locationMarker.width() * (ratio / GUI_PIXMAPS_SCALE));
+		if(locMarkerWidth % 2 == 0)
+			++locMarkerWidth;
+		const auto scaledMarker = locationMarker.scaledToWidth(locMarkerWidth, Qt::SmoothTransformation);
 
-	const auto markerCenterPosX = std::lround(mapRect.left() + (markerLon + 180) /  360. * scaledMap.width() );
-	const auto markerCenterPosY = std::lround(mapRect.top()  + (markerLat -  90) / -180. * scaledMap.height());
+		const auto markerCenterPosX = std::lround(mapRect.left() + (markerLon + 180) /  360. * scaledMap.width() );
+		const auto markerCenterPosY = std::lround(mapRect.top()  + (markerLat -  90) / -180. * scaledMap.height());
 
-	painter.drawPixmap(markerCenterPosX - scaledMarker.width()/2,
-					   markerCenterPosY - scaledMarker.height(),
-					   scaledMarker);
+		painter.drawPixmap(markerCenterPosX - scaledMarker.width()/2,
+				   markerCenterPosY - scaledMarker.height(),
+				   scaledMarker);
 	}
 }

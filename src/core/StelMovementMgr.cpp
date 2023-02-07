@@ -1489,7 +1489,6 @@ void StelMovementMgr::moveToAltAzi(const Vec3d& aim, const Vec3d &aimUp, float m
 		move.start=safeAltAz; //core->altAzToJ2000(safeAltAz, StelCore::RefractionOff);
 		viewDirectionJ2000=core->altAzToJ2000(move.start, StelCore::RefractionOff);
 		upVectorMountFrame.set(0,0,1);
-
 	}
 	move.startUp=aimUp; // we must put this to the target up vector immediately.
 	move.speed=1.f/(moveDuration*1000);
