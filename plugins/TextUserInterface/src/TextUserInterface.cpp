@@ -764,10 +764,10 @@ void TextUserInterface::setAltitude(int altitude)
 void TextUserInterface::setLatitude(double latitude)
 {
 	StelCore* core = StelApp::getInstance().getCore();
-	if (core->getCurrentLocation().latitude != latitude)
+	if (core->getCurrentLocation().getLatitude() != latitude)
 	{
 		StelLocation newLocation = core->getCurrentLocation();
-		newLocation.latitude = static_cast<float>(latitude);
+		newLocation.setLatitude(static_cast<float>(latitude));
 		core->moveObserverTo(newLocation, 0.0, 0.0);
 	}
 }
@@ -775,22 +775,22 @@ void TextUserInterface::setLatitude(double latitude)
 void TextUserInterface::setLongitude(double longitude)
 {
 	StelCore* core = StelApp::getInstance().getCore();
-	if (core->getCurrentLocation().longitude != longitude)
+	if (core->getCurrentLocation().getLongitude() != longitude)
 	{
 		StelLocation newLocation = core->getCurrentLocation();
-		newLocation.longitude = static_cast<float>(longitude);
+		newLocation.setLongitude(static_cast<float>(longitude));
 		core->moveObserverTo(newLocation, 0.0, 0.0);
 	}
 }
 
 double TextUserInterface::getLatitude(void)
 {
-	return static_cast<double>(StelApp::getInstance().getCore()->getCurrentLocation().latitude);
+	return static_cast<double>(StelApp::getInstance().getCore()->getCurrentLocation().getLatitude());
 }
 
 double TextUserInterface::getLongitude(void)
 {
-	return static_cast<double>(StelApp::getInstance().getCore()->getCurrentLocation().longitude);
+	return static_cast<double>(StelApp::getInstance().getCore()->getCurrentLocation().getLongitude());
 }
 
 void TextUserInterface::setStartupDateMode(QString mode)

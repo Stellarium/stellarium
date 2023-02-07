@@ -168,9 +168,9 @@ void Landscape::loadCommon(const QSettings& landscapeIni, const QString& landsca
 		if (landscapeIni.contains("location/altitude"))
 			location.altitude = qRound(landscapeIni.value("location/altitude").toDouble());
 		if (landscapeIni.contains("location/latitude"))
-			location.latitude = static_cast<float>(StelUtils::getDecAngle(landscapeIni.value("location/latitude").toString())*M_180_PI);
+			location.setLatitude(static_cast<float>(StelUtils::getDecAngle(landscapeIni.value("location/latitude").toString())*M_180_PI));
 		if (landscapeIni.contains("location/longitude"))
-			location.longitude = static_cast<float>(StelUtils::getDecAngle(landscapeIni.value("location/longitude").toString())*M_180_PI);
+			location.setLongitude(static_cast<float>(StelUtils::getDecAngle(landscapeIni.value("location/longitude").toString())*M_180_PI));
 		if (landscapeIni.contains("location/country"))
 			location.region = StelLocationMgr::pickRegionFromCountry(landscapeIni.value("location/country").toString());
 		if (landscapeIni.contains("location/state"))

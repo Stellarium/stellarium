@@ -30,6 +30,8 @@
 #include "ConfigureOrbitColorsDialog.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
+#include "StelModule.hpp"
+#include "LandscapeMgr.hpp"
 #include "StelSkyCultureMgr.hpp"
 #include "StelFileMgr.hpp"
 #include "StelProjector.hpp"
@@ -339,7 +341,9 @@ void ViewDialog::createDialogContent()
 	connectBoolProperty(ui->localLandscapeBrightnessCheckBox,"LandscapeMgr.flagLandscapeSetsMinimalBrightness");
 	connectBoolProperty(ui->landscapePolylineCheckBox, "LandscapeMgr.flagPolyLineDisplayedOnly");
 	connectIntProperty(ui->landscapePolylineThicknessSpinBox, "LandscapeMgr.polyLineThickness");
-	connect(ui->landscapesListWidget, SIGNAL(currentItemChanged(QListWidgetItem*,QListWidgetItem*)), this, SLOT(changeLandscape(QListWidgetItem*)));
+	connect(ui->landscapesListWidget, &QListWidget::currentItemChanged, this, [=](QListWidgetItem *newItem, QListWidgetItem *oldItem){
+		GETSTELMODULE(LandscapeMgr)->setCurrentLandscapeName(newItem->data(Qt::UserRole).toString());
+	});
 	connect(lmgr, SIGNAL(currentLandscapeChanged(QString,QString)), this, SLOT(landscapeChanged(QString,QString)));
 	connect(ui->useAsDefaultLandscapeCheckBox, SIGNAL(clicked()), this, SLOT(setCurrentLandscapeAsDefault()));
 	connect(lmgr,SIGNAL(defaultLandscapeChanged(QString)),this,SLOT(updateDefaultLandscape()));
@@ -1035,12 +1039,6 @@ void ViewDialog::projectionChanged()
 	QListWidget* l = ui->projectionListWidget;
 	l->setCurrentItem(l->findItems(core->getCurrentProjectionNameI18n(), Qt::MatchExactly).at(0),QItemSelectionModel::SelectCurrent);
 	ui->projectionTextBrowser->setHtml(core->getProjection(StelCore::FrameJ2000)->getHtmlSummary());
-}
-
-
-void ViewDialog::changeLandscape(QListWidgetItem* item)
-{
-	StelApp::getInstance().getModule("LandscapeMgr")->setProperty("currentLandscapeName", item->data(Qt::UserRole).toString());
 }
 
 void ViewDialog::landscapeChanged(QString id, QString name)

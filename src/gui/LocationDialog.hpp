@@ -40,8 +40,6 @@ public slots:
 	//! Apply application style change
 	void styleChanged(const QString &style) override;
 	void retranslate() override;
-	//! In addition to StelDialog's inherited solution, puts the arrow on the right spot in the map.
-	void handleDialogSizeChanged(QSizeF size) override;
 
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots
@@ -61,6 +59,9 @@ private:
 	
 	void disconnectEditSignals();
 	void connectEditSignals();
+
+	//! show or hide UI elements to edit location (Hide if on observer planet!)
+	void setLocationUIvisible(bool visible);
 	
 	//! Update the map for the given location.
 	void setMapForLocation(const StelLocation& loc);
@@ -101,7 +102,7 @@ private slots:
 	
 	//! Update the widget to make sure it is synchrone if the location is changed programmatically
 	//! This function should be called repeatidly with e.g. a timer
-	void updateFromProgram(const StelLocation& location);
+	void updateFromProgram(const StelLocation& newLocation);
 	
 	//! Called when the map is clicked.
 	//! create new list for places nearby and feed into location list box.

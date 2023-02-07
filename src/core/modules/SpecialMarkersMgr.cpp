@@ -18,6 +18,7 @@
  */
 
 #include "SpecialMarkersMgr.hpp"
+#include "Planet.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelPainter.hpp"
@@ -283,7 +284,8 @@ void SpecialMarkersMgr::draw(StelCore* core)
 	fovCenterMarker->draw(core);
 	fovCircularMarker->draw(core);
 	fovRectangularMarker->draw(core);
-	compassMarks->draw(core);
+	if (core->getCurrentPlanet()->getPlanetType()!=Planet::isObserver)
+		compassMarks->draw(core);
 }
 
 void SpecialMarkersMgr::setFlagFOVCenterMarker(const bool displayed)

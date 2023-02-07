@@ -22,7 +22,6 @@
 #include "StelObjectMgr.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
-#include "StelProjector.hpp"
 #include "StelUtils.hpp"
 #include "StelTranslator.hpp"
 #include "StelSkyDrawer.hpp"
@@ -104,7 +103,7 @@ Vec3d StelObject::getSupergalacticPos(const StelCore *core) const
 // Meeus, Astronomical Algorithms, 2nd ed. (1998), p.98.
 float StelObject::getParallacticAngle(const StelCore* core) const
 {
-	const double phi=static_cast<double>(core->getCurrentLocation().latitude)*M_PI/180.0;
+	const double phi=static_cast<double>(core->getCurrentLocation().getLatitude())*M_PI/180.0;
 	const Vec3d siderealPos=getSiderealPosApparent(core);
 	double delta, ha;
 	StelUtils::rectToSphe(&ha, &delta, siderealPos);
@@ -166,8 +165,8 @@ Vec4d StelObject::getRTSTime(const StelCore *core, const double altitude) const
 	}
 	if (altitude != 0.)
 		ho = altitude*M_PI_180; // Not sure if we use refraction for off-zero settings?
-	const double phi = static_cast<double>(loc.latitude) * M_PI_180;
-	const double L = static_cast<double>(loc.longitude) * M_PI_180; // OUR longitude. Meeus has it reversed
+	const double phi = static_cast<double>(loc.getLatitude()) * M_PI_180;
+	const double L = static_cast<double>(loc.getLongitude()) * M_PI_180; // OUR longitude. Meeus has it reversed
 	PlanetP obsPlanet = core->getCurrentPlanet();
 	const double rotRate = obsPlanet->getSiderealDay();
 	const double currentJD=core->getJD();
@@ -676,7 +675,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 
 	if ((flags&SiderealTime) && (currentPlanet==QStringLiteral("Earth")))
 	{
-		const double longitude=static_cast<double>(core->getCurrentLocation().longitude);
+		const double longitude=static_cast<double>(core->getCurrentLocation().getLongitude());
 		double sidereal=(get_mean_sidereal_time(core->getJD(), core->getJDE())  + longitude) / 15.;
 		sidereal=StelUtils::fmodpos(sidereal, 24.);
 		QString STc = q_("Mean Sidereal Time");
@@ -843,7 +842,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 		// Greatest Digression: limiting azimuth and hour angles for stars with upper culmination between pole and zenith
 		double dec_equ, ra_equ;
 		StelUtils::rectToSphe(&ra_equ,&dec_equ,getEquinoxEquatorialPos(core));
-		const double latitude=static_cast<double>(core->getCurrentLocation().latitude)*M_PI_180;
+		const double latitude=static_cast<double>(core->getCurrentLocation().getLatitude())*M_PI_180;
 		if (((latitude>0.) && (dec_equ>=latitude)) || ((latitude<0.) && (dec_equ<=latitude)))
 		{
 			const double theta=acos(tan(latitude)/tan(dec_equ)); // hour angle
@@ -1007,7 +1006,7 @@ QVariantMap StelObject::getInfoMap(const StelCore *core) const
 	// Sidereal Time and hour angle
 	if (core->getCurrentLocation().planetName=="Earth")
 	{
-		const double longitude=static_cast<double>(core->getCurrentLocation().longitude);
+		const double longitude=static_cast<double>(core->getCurrentLocation().getLongitude());
 		double sidereal=(get_mean_sidereal_time(core->getJD(), core->getJDE())  + longitude) / 15.;
 		sidereal=fmod(sidereal, 24.);
 		if (sidereal < 0.) sidereal+=24.;

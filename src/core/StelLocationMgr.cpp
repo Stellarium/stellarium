@@ -185,12 +185,12 @@ void LibGPSLookupHelper::query()
 				// qDebug() << "Spherical Position Error (epe):" << newdata->epe;
 				// #endif
 			}
-			loc.longitude = static_cast<float> (newdata->fix.longitude);
-			loc.latitude  = static_cast<float> (newdata->fix.latitude);
+			loc.setLongitude(static_cast<float> (newdata->fix.longitude));
+			loc.setLatitude (static_cast<float> (newdata->fix.latitude));
 			// Frequently hdop, vdop and satellite counts are NaN. Sometimes they show OK. This is minor issue.
 			if ((verbose) && (fixmode<3))
 			{
-				qDebug() << "GPSDfix " << fixmode << ": Location" << QString("lat %1, long %2, alt %3").arg(loc.latitude).arg(loc.longitude).arg(loc.altitude);
+				qDebug() << "GPSDfix " << fixmode << ": Location" << QString("lat %1, long %2, alt %3").arg(loc.getLatitude()).arg(loc.getLongitude()).arg(loc.altitude);
 				qDebug() << "    Estimated HDOP " << newdata->dop.hdop << "m from " << newdata->satellites_used << "(of" << newdata->satellites_visible  << "visible) satellites";
 			}
 			else
@@ -202,7 +202,7 @@ void LibGPSLookupHelper::query()
 #endif
 				if (verbose)
 				{
-					qDebug() << "GPSDfix " << fixmode << ": Location" << QString("lat %1, long %2, alt %3").arg(loc.latitude).arg(loc.longitude).arg(loc.altitude);
+					qDebug() << "GPSDfix " << fixmode << ": Location" << QString("lat %1, long %2, alt %3").arg(loc.getLatitude()).arg(loc.getLongitude()).arg(loc.altitude);
 					qDebug() << "    Estimated HDOP " << newdata->dop.hdop << "m, VDOP " << newdata->dop.vdop <<  "m from " << newdata->satellites_used << "(of" << newdata->satellites_visible  << "visible) satellites";
 				}
 				break; // escape from the tries loop
@@ -220,7 +220,7 @@ void LibGPSLookupHelper::query()
 		qDebug() << "Fix only quality " << fixmode << " after " << tries << " tries";
 	}
 	if (verbose)
-		qDebug() << "GPSD location" << QString("lat %1, long %2, alt %3").arg(loc.latitude).arg(loc.longitude).arg(loc.altitude);
+		qDebug() << "GPSD location" << QString("lat %1, long %2, alt %3").arg(loc.getLatitude()).arg(loc.getLongitude()).arg(loc.altitude);
 
 	emit queryFinished(loc);
 }
@@ -375,8 +375,8 @@ void NMEALookupHelper::nmeaUpdated(const QGeoPositionInfo &update)
 	if (update.isValid()) // emit queryFinished(loc) with new location
 	{
 		StelLocation loc;
-		loc.longitude=static_cast<float>(coord.longitude());
-		loc.latitude=static_cast<float>(coord.latitude());
+		loc.setLongitude(static_cast<float>(coord.longitude()));
+		loc.setLatitude(static_cast<float>(coord.latitude()));
 		// 2D fix may have only long/lat, invalid altitude.
 		loc.altitude=( qIsNaN(coord.altitude()) ? 0 : static_cast<int>(floor(coord.altitude())));
 		emit queryFinished(loc);
@@ -725,13 +725,13 @@ const StelLocation StelLocationMgr::locationForString(const QString& s) const
 	{
 		bool ok;
 		// We have a set of coordinates
-		ret.latitude = parseAngle(csMatch.captured(1).trimmed(), &ok);
+		ret.setLatitude(parseAngle(csMatch.captured(1).trimmed(), &ok));
 		if (!ok) ret.role = '!';
-		ret.longitude = parseAngle(csMatch.captured(2).trimmed(), &ok);
+		ret.setLongitude(parseAngle(csMatch.captured(2).trimmed(), &ok));
 		if (!ok) ret.role = '!';
 		ret.altitude = csMatch.captured(3).trimmed().toInt(&ok);
 		if (!ok) ret.role = '!';
-		ret.name = QString("%1, %2").arg(QString::number(ret.latitude, 'f', 2), QString::number(ret.longitude, 'f', 2));
+		ret.name = QString("%1, %2").arg(QString::number(ret.getLatitude(), 'f', 2), QString::number(ret.getLongitude(), 'f', 2));
 		ret.planetName = "Earth";
 		return ret;
 	}
@@ -742,9 +742,9 @@ const StelLocation StelLocationMgr::locationForString(const QString& s) const
 	{
 		bool ok;
 		// We have a set of coordinates
-		ret.latitude = parseAngle(match.captured(2).trimmed(), &ok);
+		ret.setLatitude(parseAngle(match.captured(2).trimmed(), &ok));
 		if (!ok) ret.role = '!';
-		ret.longitude = parseAngle(match.captured(3).trimmed(), &ok);
+		ret.setLongitude(parseAngle(match.captured(3).trimmed(), &ok));
 		if (!ok) ret.role = '!';
 		ret.name = match.captured(1).trimmed();
 		ret.planetName = "Earth";
@@ -765,13 +765,13 @@ const StelLocation StelLocationMgr::locationFromCLI() const
 
 	const auto latVar = conf->value("latitude");
 	if (latVar.isValid())
-		ret.latitude = 180/M_PI * latVar.toDouble();
+		ret.setLatitude(180/M_PI * latVar.toDouble());
 	else
 		ret.role = '!';
 
 	const auto lonVar = conf->value("longitude");
 	if (lonVar.isValid())
-		ret.longitude = 180/M_PI * lonVar.toDouble();
+		ret.setLongitude(180/M_PI * lonVar.toDouble());
 	else
 		ret.role = '!';
 	bool ok;
@@ -1041,8 +1041,8 @@ void StelLocationMgr::positionUpdated(QGeoPositionInfo info)
 	StelLocation loc;
 	if (info.isValid())
 	{
-		loc.longitude = info.coordinate().longitude();
-		loc.latitude = info.coordinate().latitude();
+		loc.setLongitude(info.coordinate().longitude());
+		loc.setLatitude(info.coordinate().latitude());
 		double a = info.coordinate().altitude();
 		loc.altitude = qIsNaN(a) ? 0 : qRound(a);
 		changeLocationFromGPSQuery(loc);
@@ -1071,8 +1071,8 @@ void StelLocationMgr::changeLocationFromGPSQuery(const StelLocation &locin)
 	loc.isUserLocation=true;
 	loc.planetName="Earth";
 	loc.name=QString("GPS %1%2 %3%4")
-		.arg(loc.latitude<0?"S":"N").arg(qRound(abs(loc.latitude)))
-		.arg(loc.longitude<0?"W":"E").arg(qRound(abs(loc.longitude)));
+		.arg(loc.getLatitude()<0?"S":"N").arg(qRound(abs(loc.getLatitude())))
+		.arg(loc.getLongitude()<0?"W":"E").arg(qRound(abs(loc.getLongitude())));
 
 	core->moveObserverTo(loc, 0.0, 0.0);
 	if (nmeaHelper)
@@ -1082,7 +1082,7 @@ void StelLocationMgr::changeLocationFromGPSQuery(const StelLocation &locin)
 	}
 	if (verbose)
 	{
-		qDebug() << "Location in progress: Long=" << loc.longitude << " Lat=" << loc.latitude << " Alt" << loc.altitude;
+		qDebug() << "Location in progress: Long=" << loc.getLongitude() << " Lat=" << loc.getLatitude() << " Alt" << loc.altitude;
 		qDebug() << "New location named " << loc.name;
 		qDebug() << "queryOK, resetting GUI";
 	}
@@ -1141,8 +1141,8 @@ void StelLocationMgr::changeLocationFromNetworkLookup()
 			loc.region = pickRegionFromCountryCode(ipCountryCode.isEmpty() ? "" : ipCountryCode.toLower());
 			loc.role    = QChar(0x0058); // char 'X'
 			loc.population = 0;
-			loc.latitude  = static_cast<float>(latitude);
-			loc.longitude = static_cast<float>(longitude);
+			loc.setLatitude  (static_cast<float>(latitude));
+			loc.setLongitude (static_cast<float>(longitude));
 			loc.altitude = 0;
 			loc.lightPollutionLuminance = StelLocation::DEFAULT_LIGHT_POLLUTION_LUMINANCE;
 			loc.ianaTimeZone = (ipTimeZone.isEmpty() ? "" : ipTimeZone);
@@ -1180,7 +1180,7 @@ LocationMap StelLocationMgr::pickLocationsNearby(const QString planetName, const
 		iter.next();
 		const StelLocation *loc=&iter.value();
 		if ( (loc->planetName == planetName) &&
-				(StelLocation::distanceDegrees(longitude, latitude, loc->longitude, loc->latitude) <= radiusDegrees) )
+				(StelLocation::distanceDegrees(longitude, latitude, loc->getLongitude(), loc->getLatitude()) <= radiusDegrees) )
 		{
 			results.insert(iter.key(), iter.value());
 		}

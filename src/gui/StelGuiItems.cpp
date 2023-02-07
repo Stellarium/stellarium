@@ -853,26 +853,23 @@ void BottomStelBar::updateText(bool updatePos)
 	if (getFlagShowLocation())
 	{
 		const StelLocation* loc = &core->getCurrentLocation();
-		if(loc->name.isEmpty())
-			newLocation = planetNameI18n +", "+StelUtils::decDegToDmsStr(loc->latitude)+", "+StelUtils::decDegToDmsStr(loc->longitude);
+		if (core->getCurrentPlanet()->getPlanetType()==Planet::isObserver)
+			newLocation = planetNameI18n;
+		else if(loc->name.isEmpty())
+			newLocation = planetNameI18n +", "+StelUtils::decDegToDmsStr(loc->getLatitude())+", "+StelUtils::decDegToDmsStr(loc->getLongitude());
+		else if (loc->name.contains("->")) // a spaceship
+			newLocation = QString("%1 [%2 %3]").arg(planetNameI18n, q_("flight"), loc->name);
 		else
-		{
-			if (loc->name.contains("->")) // a spaceship
-				newLocation = QString("%1 [%2 %3]").arg(planetNameI18n, q_("flight"), loc->name);
-			else
-			{
-				//TRANSLATORS: Unit of measure for distance - meter
-				newLocation = planetNameI18n +", "+q_(loc->name) + ", "+ QString("%1 %2").arg(loc->altitude).arg(qc_("m", "distance"));
-			}
-		}
+			//TRANSLATORS: Unit of measure for distance - meter
+			newLocation = planetNameI18n +", "+q_(loc->name) + ", "+ QString("%1 %2").arg(loc->altitude).arg(qc_("m", "distance"));
 	}
 	// TODO: When topocentric switch is toggled, this must be redrawn!
 	if (location->text()!=newLocation)
 	{
 		updatePos = true;
 		location->setText(newLocation);
-		double lat = static_cast<double>(core->getCurrentLocation().latitude);
-		double lon = static_cast<double>(core->getCurrentLocation().longitude);
+		double lat = static_cast<double>(core->getCurrentLocation().getLatitude());
+		double lon = static_cast<double>(core->getCurrentLocation().getLongitude());
 		QString latStr, lonStr, pm;
 		if (lat >= 0)
 			pm = "N";
@@ -906,6 +903,8 @@ void BottomStelBar::updateText(bool updatePos)
 				weather = QString("%1: %2 %3; %4: %5 °C").arg(q_("Atmospheric pressure"), QString::number(propMgr->getStelPropertyValue("StelSkyDrawer.atmospherePressure").toDouble(), 'f', 2), qc_("mbar", "pressure unit"), q_("temperature"), QString::number(propMgr->getStelPropertyValue("StelSkyDrawer.atmosphereTemperature").toDouble(), 'f', 1));
 				location->setToolTip(QString("<p style='white-space:pre'>%1 %2; %3<br>%4</p>").arg(latStr, lonStr, rho, weather));
 			}
+			else if (core->getCurrentPlanet()->getPlanetType()==Planet::isObserver)
+				newLocation = planetNameI18n;
 			else
 				location->setToolTip(QString("%1 %2; %3").arg(latStr, lonStr, rho));
 		}

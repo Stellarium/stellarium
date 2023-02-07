@@ -1022,7 +1022,7 @@ void StelCore::updateTransformMatrices()
 	if (flagUseTopocentricCoordinates)
 	{
 		const Vec4d offset=position->getTopographicOffsetFromCenter(); // [rho cosPhi', rho sinPhi', phi'_rad, rho]
-		const double sigma=static_cast<double>(position->getCurrentLocation().latitude)*M_PI/180.0 - offset.v[2];
+		const double sigma=static_cast<double>(position->getCurrentLocation().getLatitude())*M_PI/180.0 - offset.v[2];
 		const double rho=offset.v[3];
 
 		matAltAzToHeliocentricEclipticJ2000 =  Mat4d::translation(position->getCenterVsop87Pos()) * matAltAzToVsop87 *
@@ -1058,7 +1058,7 @@ void StelCore::updateTransformMatrices()
 // This avoids calling a costly operation every frame.
 void StelCore::updateFixedEquatorialTransformMatrices()
 {
-	matAltAzToFixedEquatorial = Mat4d::yrotation(M_PI_2-static_cast<double>(getCurrentLocation().latitude)*M_PI_180);
+	matAltAzToFixedEquatorial = Mat4d::yrotation(M_PI_2-static_cast<double>(getCurrentLocation().getLatitude())*M_PI_180);
 	matFixedEquatorialToAltAz = matAltAzToFixedEquatorial.transpose();
 }
 // Return the observer heliocentric position
@@ -1217,9 +1217,13 @@ void StelCore::moveObserverToSelected()
 				loc.planetName = pl->getEnglishName();				
 				loc.name = "landing site";
 				loc.state = "";
+				if (pl->getPlanetType()==Planet::isObserver)
+					loc.role=QChar('o');
+				else
+					loc.role=QChar('X');
 
 				// Let's try guess name of location...
-				LocationMap results = StelApp::getInstance().getLocationMgr().pickLocationsNearby(loc.planetName, loc.longitude, loc.latitude, 1.0f);
+				LocationMap results = StelApp::getInstance().getLocationMgr().pickLocationsNearby(loc.planetName, loc.getLongitude(), loc.getLatitude(), 1.0f);
 				if (results.size()>0)
 					loc = results.value(results.firstKey()); // ...and use it!
 
@@ -1236,8 +1240,8 @@ void StelCore::moveObserverToSelected()
 				loc.planetName = ni->getPlanet()->getEnglishName();
 				loc.name=ni->getEnglishName();
 				loc.state = "";
-				loc.longitude=ni->getLongitude();
-				loc.latitude=ni->getLatitude();
+				loc.setLongitude(ni->getLongitude());
+				loc.setLatitude(ni->getLatitude());
 				loc.lightPollutionLuminance = 0;
 
 				moveObserverTo(loc);
@@ -1275,7 +1279,7 @@ void StelCore::setObserver(StelObserver *obs)
 }
 
 // Smoothly move the observer to the given location
-void StelCore::moveObserverTo(const StelLocation& target, double duration, double durationIfPlanetChange)
+void StelCore::moveObserverTo(const StelLocation& target, double duration, double durationIfPlanetChange, const QString &landscapeID)
 {
 	double d = (getCurrentLocation().planetName==target.planetName) ? duration : durationIfPlanetChange;
 	if (d>0.)
@@ -1294,7 +1298,26 @@ void StelCore::moveObserverTo(const StelLocation& target, double duration, doubl
 	{
 		setObserver(new StelObserver(target));
 	}
-	emit targetLocationChanged(target);
+
+	// Auto-select observed planet for observer locations
+	if (target.role==QChar('o'))
+	{
+		// If we change to an Observer "planet", auto-select and focus on the observed object.
+		SolarSystem *ss=GETSTELMODULE(SolarSystem);
+		PlanetP planet=nullptr;
+		if (ss)
+			planet=GETSTELMODULE(SolarSystem)->searchByEnglishName(target.planetName);
+		if (planet && planet->getPlanetType()==Planet::isObserver)
+		{
+			StelObjectMgr *soMgr=GETSTELMODULE(StelObjectMgr);
+			if (soMgr)
+			{
+				soMgr->findAndSelect(planet->getParent()->getEnglishName());
+				GETSTELMODULE(StelMovementMgr)->setFlagTracking(true);
+			}
+		}
+	}
+	emit targetLocationChanged(target, landscapeID);
 	emit locationChanged(getCurrentLocation());
 }
 
@@ -1377,7 +1400,7 @@ double StelCore::getUTCOffset(const double JD) const
 		}
 		else
 		{
-			shiftInSeconds = qRound((loc.longitude/15.f)*3600.f); // Local Mean Solar Time
+			shiftInSeconds = qRound((loc.getLongitude()/15.f)*3600.f); // Local Mean Solar Time
 		}
 		if (tzName=="LTST")
 			shiftInSeconds += qRound(getSolutionEquationOfTime()*60);
@@ -1869,7 +1892,7 @@ void StelCore::addSiderealDays(double d)
 double StelCore::getLocalSiderealTime() const
 {
 	// On Earth, this requires UT deliberately with all its faults, on other planets we use the more regular TT.
-	return (getCurrentPlanet()->getSiderealTime(getJD(), getJDE())+static_cast<double>(position->getCurrentLocation().longitude))*M_PI/180.;
+	return (getCurrentPlanet()->getSiderealTime(getJD(), getJDE())+static_cast<double>(position->getCurrentLocation().getLongitude()))*M_PI/180.;
 }
 
 //! Get the duration of a sidereal day for the current observer in day.

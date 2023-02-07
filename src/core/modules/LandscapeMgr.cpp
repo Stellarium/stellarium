@@ -646,6 +646,10 @@ void LandscapeMgr::update(double deltaTime)
 
 void LandscapeMgr::draw(StelCore* core)
 {
+	// For observers we never draw anything of landscape, atmosphere, cardinals.
+	if (core->getCurrentPlanet()->getPlanetType()==Planet::isObserver)
+		return;
+
 	StelSkyDrawer* drawer=core->getSkyDrawer();
 
 	// Draw the atmosphere
@@ -670,7 +674,7 @@ void LandscapeMgr::draw(StelCore* core)
 	landscape->draw(core, flagPolyLineDisplayedOnly);
 
 	// Draw the cardinal points
-	cardinalPoints->draw(core, static_cast<double>(StelApp::getInstance().getCore()->getCurrentLocation().latitude));
+	cardinalPoints->draw(core, static_cast<double>(StelApp::getInstance().getCore()->getCurrentLocation().getLatitude()));
 
 	if(messageFader.getInterstate())
 	{
@@ -696,6 +700,10 @@ void LandscapeMgr::draw(StelCore* core)
 // Some element in drawing order behind LandscapeMgr can call this at the end of its own draw() to overdraw with the polygon line and gazetteer.
 void LandscapeMgr::drawPolylineOnly(StelCore* core)
 {
+	// For observers we never draw anything of landscape, atmosphere, cardinals.
+	if (core->getCurrentPlanet()->getPlanetType()==Planet::isObserver)
+		return;
+
 	// Draw the landscape
 	if (oldLandscape && oldLandscape->hasLandscapePolygon())
 		oldLandscape->draw(core, true);
@@ -703,7 +711,7 @@ void LandscapeMgr::drawPolylineOnly(StelCore* core)
 		landscape->draw(core, true);
 
 	// Draw the cardinal points
-	cardinalPoints->draw(core, static_cast<double>(StelApp::getInstance().getCore()->getCurrentLocation().latitude));
+	cardinalPoints->draw(core, static_cast<double>(StelApp::getInstance().getCore()->getCurrentLocation().getLatitude()));
 }
 
 void LandscapeMgr::createAtmosphere()
@@ -849,7 +857,7 @@ void LandscapeMgr::init()
 	Q_ASSERT(drawer);
 	setAtmosphereLightPollutionLuminance(drawer->getLightPollutionLuminance());
 	connect(app->getCore(), SIGNAL(locationChanged(StelLocation)), this, SLOT(onLocationChanged(StelLocation)));
-	connect(app->getCore(), SIGNAL(targetLocationChanged(StelLocation)), this, SLOT(onTargetLocationChanged(StelLocation)));
+	connect(app->getCore(), SIGNAL(targetLocationChanged(const StelLocation&, const QString&)), this, SLOT(onTargetLocationChanged(const StelLocation&, const QString&)));
 	connect(drawer, &StelSkyDrawer::lightPollutionLuminanceChanged, this, &LandscapeMgr::setAtmosphereLightPollutionLuminance);
 	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
 
@@ -945,7 +953,7 @@ bool LandscapeMgr::setCurrentLandscapeID(const QString& id, const double changeL
 	if (getFlagLandscapeSetsLocation() && landscape->hasLocation())
 	{
 		StelCore *core = StelApp::getInstance().getCore();
-		core->moveObserverTo(landscape->getLocation(), changeLocationDuration);
+		core->moveObserverTo(landscape->getLocation(), changeLocationDuration, changeLocationDuration, id);
 		StelSkyDrawer* drawer=core->getSkyDrawer();
 
 		if (landscape->getLocation().ianaTimeZone.length())
@@ -1132,15 +1140,17 @@ void LandscapeMgr::onLocationChanged(const StelLocation &loc)
 	}
 }
 
-void LandscapeMgr::onTargetLocationChanged(const StelLocation &loc)
+void LandscapeMgr::onTargetLocationChanged(const StelLocation &loc, const QString& landscapeID)
 {
+	qDebug() << "LandscapeMgr::onTargetLocationCHanged(): loc.planetName:" << loc.planetName << "currentPlanetName" << currentPlanetName;
 	if (loc.planetName != currentPlanetName)
 	{
-		currentPlanetName = loc.planetName;
-		if (flagLandscapeAutoSelection)
+		if (landscapeID.length()>0)
+			setCurrentLandscapeID(landscapeID);
+		else if (flagLandscapeAutoSelection)
 		{
 			// If we have a landscape for selected planet then set it, otherwise use zero horizon landscape
-			bool landscapeSetsLocation = getFlagLandscapeSetsLocation();
+			const bool landscapeSetsLocation = getFlagLandscapeSetsLocation();
 			setFlagLandscapeSetsLocation(false);
 			if (getAllLandscapeNames().indexOf(loc.planetName)>0)
 				setCurrentLandscapeName(loc.planetName);
@@ -1148,8 +1158,9 @@ void LandscapeMgr::onTargetLocationChanged(const StelLocation &loc)
 				setCurrentLandscapeID("zero");
 			setFlagLandscapeSetsLocation(landscapeSetsLocation);
 		}
+		currentPlanetName = loc.planetName;
 
-		if (loc.planetName.contains("Observer", Qt::CaseInsensitive))
+		if (loc.role==QChar('o')) // observer?
 		{
 			if (flagEnvironmentAutoEnabling)
 			{
@@ -1318,8 +1329,8 @@ QString LandscapeMgr::getCurrentLandscapeHtmlDescription() const
 
 		desc += QString("<b>%1</b>: %2, %3, %4 %5").arg(
 				q_("Location"),
-				StelUtils::radToDmsStrAdapt(static_cast<double>(landscape->getLocation().latitude) *M_PI_180),
-				StelUtils::radToDmsStrAdapt(static_cast<double>(landscape->getLocation().longitude) * M_PI_180),
+				StelUtils::radToDmsStrAdapt(static_cast<double>(landscape->getLocation().getLatitude()) *M_PI_180),
+				StelUtils::radToDmsStrAdapt(static_cast<double>(landscape->getLocation().getLongitude()) * M_PI_180),
 				QString::number(landscape->getLocation().altitude),
 				alt);
 

@@ -807,7 +807,7 @@ void SkyLine::draw(StelCore *core) const
 		}
 		else if (line_type==CIRCUMPOLARCIRCLE_N || line_type==CIRCUMPOLARCIRCLE_S)
 		{
-			const double obsLatRad=core->getCurrentLocation().latitude * (M_PI_180);
+			const double obsLatRad=core->getCurrentLocation().getLatitude() * (M_PI_180);
 			if (obsLatRad == 0.)
 			{
 				sPainter.setLineWidth(oldLineWidth); // restore painter state
@@ -1141,7 +1141,7 @@ void SkyLine::draw(StelCore *core) const
 					if (showLabel)
 					{
 						// we must adapt (rotate) some labels to observers on the southern hemisphere.
-						const bool southernHemi = core->getCurrentLocation().latitude < 0.f;
+						const bool southernHemi = core->getCurrentLocation().getLatitude() < 0.f;
 						int value=i;
 						float extraTextAngle=0.f;
 						// shiftx/y is OK for equator, horizon, ecliptic.
@@ -2034,8 +2034,11 @@ void GridLinesMgr::draw(StelCore* core)
 	circumpolarCircleN->draw(core);
 	circumpolarCircleS->draw(core);
 
-	fixedEquatorialGrid->draw(core);
-	fixedEquatorLine->draw(core);
+	if (core->getCurrentPlanet()->getPlanetType()!=Planet::isObserver)
+	{
+		fixedEquatorialGrid->draw(core);
+		fixedEquatorLine->draw(core);
+	}
 
 	aziGrid->draw(core);
 	meridianLine->draw(core);

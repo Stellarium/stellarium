@@ -273,49 +273,38 @@ requires a special kind of location.
 \label{sec:ssystem.ini:SolarSystemObserver}
 
 The Solar System Observer has
-been provided as a neutral view location high above the North pole of
-the Solar System. It has been configured like this:
+been provided in earlier versions as a neutral view location high above the North pole of
+the Solar System. Meanwhile \newFeature{0.19.2} the location can be changed by keyboard interaction. See section \ref{sec:gui:location:observers}.
 \begin{configfile}
 [solar_system_observer]
 name=Solar System Observer
 parent=Sun
 halo=false
 hidden=true
-coord_func=ell_orbit
-orbit_Inclination=90
-orbit_MeanLongitude=90
-orbit_Period=70000000000
-orbit_SemiMajorAxis=70000000000
-rot_obliquity=90
+orbit_SemiMajorAxis=30
 type=observer
 \end{configfile}
-Note the inclination and mean longitude of 90 degrees, and that it is \texttt{hidden} and has no \texttt{halo}. 
+Note that it is \texttt{hidden} and has no \texttt{halo}. 
+The observer is attached to the Sun, therefore distance \texttt{orbit\_semiMajorAxis} is given in AU.
 
 \paragraph{Planet Observers}
 \label{sec:ssystem.ini:PlanetObserver}
 
 There are other ``observer'' locations for all planets \newFeature{0.19.2} which have moons: Earth, Mars, Jupiter, Saturn, Uranus, and Neptune.
-They have all been provided as neutral view locations above the Northern hemisphere of
-the respective planet. For example:
+For example:
 \begin{configfile}
 [earth_observer]
 name=Earth Observer
 parent=Earth
 halo=false
 hidden=true
-coord_func=ell_orbit
-orbit_Inclination=90
-orbit_MeanLongitude=90
-orbit_Period=100000000000
 orbit_SemiMajorAxis=149600000
-rot_obliquity=90
 type=observer
 \end{configfile}
 
-The distance \texttt{orbit\_semiMajorAxis} has been configured with a
-distance that resembles the semimajor axis of the respective planet:
-when you want to compare the views from Earth and from the observer,
-light time correction should be at least approximately equal.
+The distance \texttt{orbit\_semiMajorAxis} has been preconfigured \newFeature{23.1} with a
+distance that gives a good view of the planet with its moons. 
+Like for moons, the units are \km\ from the planet. 
 
 \subsection{File ssystem\_minor.ini}
 \label{sec:ssystem.ini:minor}

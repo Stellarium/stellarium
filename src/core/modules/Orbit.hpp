@@ -148,31 +148,44 @@ private:
 };
 
 //! A pseudo-orbit for "observers" linked to a planet's sphere. It allows setting distance and longitude/latitude in the VSOP87 frame.
-//! This class ic currently in an experimental state. rotateToVsop87 may need to be set up correctly, and view frame currently cannot be controlled properly.
+//! This class is currently in an experimental state. rotateToVsop87 may need to be set up correctly.
+//! The view frame for an observer is correctly oriented when the observer is located on the pseudo-planet's North pole.
+//! Positional changes are currently performed with keyboard interaction (see @class StelMovementMgr)
 class GimbalOrbit : public Orbit {
 public:
-	GimbalOrbit(double distance,
-		   double longitude,
-		   double latitude
-		   );
+	//! Constructor. @param distance in AU, @param longitude in radians, @param latitude in radians.
+	GimbalOrbit(double distance, double longitude, double latitude);
 	//! Compute position for a (unused) Julian day.
 	virtual void positionAtTimevInVSOP87Coordinates(double JDE, double* v) Q_DECL_OVERRIDE;
-	//! Returns (pseudo) semimajor axis [AU] of a circular orbit.
+	//! Returns (pseudo) semimajor axis [AU] of a circular "orbit", i.e., distance.
 	double getSemimajorAxis() const Q_DECL_OVERRIDE { return distance; }
 
+	//! Set minimum distance for observers (may depend on central object)
+	void setMinDistance(double dist) {minDistance=dist; distance=qMax(distance, minDistance);}
+
+	//! Retrieve observer's longitude in degrees
 	double getLongitude() const { return longitude*M_180_PI;}
+	//! Retrieve observer's latitude in degrees
 	double getLatitude()  const { return latitude*M_180_PI;}
+	//! Retrieve observer's distance in AU
 	double getDistance()  const { return distance;}
+	//! Set observer's longitude in degrees
 	void setLongitude(const double lng){ longitude=lng*M_PI_180;}
+	//! Set observer's latitude in degrees
 	void setLatitude(const double lat) { latitude=lat*M_PI_180;}
+	//! Set observer's distance in AU
 	void setDistance(const double dist){ distance=dist;}
+	//! Incrementally change longitude by @param dlong degrees
 	void addToLongitude(const double dlong){ longitude+=dlong*M_PI_180; }
-	void addToLatitude(const double dlat)  { latitude=qBound(-M_PI_2, latitude+dlat*M_PI_180, M_PI_2);}
-	void addToDistance(const double ddist) { distance=qBound(0.01, distance+ddist, 50.);}
+	//! Incrementally change latitude by @param dlat degrees. Clamped to |lat|<(90-delta) with a small delta at the poles.
+	void addToLatitude(const double dlat);
+	//! Incrementally change distance by @param ddist AU. Clamped to minDistance...50 AU.
+	void addToDistance(const double ddist) { distance=qBound(minDistance, distance+ddist, 50.);}
 
 private:
 	double distance;   //! distance to parent planet center, AU
 	double longitude;  //! longitude [radians]
 	double latitude;   //! latitude [radians]
+	double minDistance; //! minimum distance. May depend on size of observed object
 };
 #endif // ORBIT_HPP

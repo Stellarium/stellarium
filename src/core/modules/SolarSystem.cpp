@@ -772,7 +772,8 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			}
 			semi_major_axis = pd.value(secname+"/orbit_SemiMajorAxis", defaultSemiMajorAxis).toDouble() * unit;
 			// Create a pseudo orbit that allows interaction with keyboard
-			GimbalOrbit *orb = new GimbalOrbit(semi_major_axis, 0., 90.); // [Over north pole]
+			GimbalOrbit *orb = new GimbalOrbit(semi_major_axis, 0.*M_PI_180, 45.*M_PI_180); // [Over mid-north latitude]
+			orb->setMinDistance(parent->getEquatorialRadius()*1.5);
 			orbits.push_back(orb);
 
 			orbitPtr = orb;

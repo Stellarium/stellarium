@@ -17,8 +17,8 @@
  */
 
 #include "StelLocation.hpp"
+#include "StelCore.hpp"
 #include "StelLocationMgr.hpp"
-#include "StelLocaleMgr.hpp"
 #include "StelUtils.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelApp.hpp"
@@ -44,8 +44,6 @@ StelLocation::StelLocation(QString lName, QString lState, QString lRegion, float
 	: name(lName)
 	, region(lRegion)
 	, state(lState)
-	, longitude(lng)
-	, latitude(lat)
 	, altitude(alt)
 	, lightPollutionLuminance(StelCore::bortleScaleIndexToLuminance(bortleIndex))
 	, landscapeKey(landscapeID)
@@ -53,6 +51,8 @@ StelLocation::StelLocation(QString lName, QString lState, QString lRegion, float
 	, role(roleKey)
 	, ianaTimeZone(timeZone)
 	, isUserLocation(true)
+	, longitude(lng)
+	, latitude(lat)
 {
 }
 
@@ -87,19 +87,38 @@ QString StelLocation::getID() const
 		return name;
 }
 
+float StelLocation::getLatitude(bool suppressObserver)  const
+{
+	if (!suppressObserver && role==QChar('o'))
+		return 90.f;
+	else
+		return latitude;
+}
+
+float StelLocation::getLongitude(bool suppressObserver) const
+{
+	if (!suppressObserver && role==QChar('o'))
+		return 0.f;
+	else
+		return longitude;
+}
+
 // GZ TODO: These operators may require sanitizing for timezone names!
 QDataStream& operator<<(QDataStream& out, const StelLocation& loc)
 {
 	const auto lum = loc.lightPollutionLuminance.toFloat();
 	const int bortleScaleIndex = loc.lightPollutionLuminance.isValid() ? StelCore::luminanceToBortleScaleIndex(lum) : -1;
-	out << loc.name << loc.state << loc.region << loc.role << loc.population << loc.latitude << loc.longitude << loc.altitude << bortleScaleIndex << loc.ianaTimeZone << loc.planetName << loc.landscapeKey << loc.isUserLocation;
+	out << loc.name << loc.state << loc.region << loc.role << loc.population << loc.getLatitude() << loc.getLongitude() << loc.altitude << bortleScaleIndex << loc.ianaTimeZone << loc.planetName << loc.landscapeKey << loc.isUserLocation;
 	return out;
 }
 
 QDataStream& operator>>(QDataStream& in, StelLocation& loc)
 {
 	int bortleScaleIndex;
-	in >> loc.name >> loc.state >> loc.region >> loc.role >> loc.population >> loc.latitude >> loc.longitude >> loc.altitude >> bortleScaleIndex >> loc.ianaTimeZone >> loc.planetName >> loc.landscapeKey >> loc.isUserLocation;
+	float lng, lat;
+	in >> loc.name >> loc.state >> loc.region >> loc.role >> loc.population >> lat >> lng >> loc.altitude >> bortleScaleIndex >> loc.ianaTimeZone >> loc.planetName >> loc.landscapeKey >> loc.isUserLocation;
+	loc.setLongitude(lng);
+	loc.setLatitude(lat);
 	if(bortleScaleIndex > 0)
 		loc.lightPollutionLuminance = StelCore::bortleScaleIndexToLuminance(bortleScaleIndex);
 	return in;

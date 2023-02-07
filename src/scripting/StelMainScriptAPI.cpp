@@ -258,8 +258,8 @@ void StelMainScriptAPI::setObserverLocation(double longitude, double latitude, d
 {
 	StelCore* core = StelApp::getInstance().getCore();
 	StelLocation loc = core->getCurrentLocation();
-	loc.longitude = static_cast<float>(longitude);
-	loc.latitude = static_cast<float>(latitude);
+	loc.setLongitude(static_cast<float>(longitude));
+	loc.setLatitude(static_cast<float>(latitude));
 	if (altitude > -1000)
 		loc.altitude = qRound(altitude);
 	if (!planet.isEmpty())
@@ -303,8 +303,8 @@ QVariantMap StelMainScriptAPI::getObserverLocationInfo()
 	const PlanetP& planet = core->getCurrentPlanet();
 	QString planetName = core->getCurrentLocation().planetName;
 	QVariantMap map;
-	map.insert("longitude", core->getCurrentLocation().longitude);
-	map.insert("latitude", core->getCurrentLocation().latitude);
+	map.insert("longitude", core->getCurrentLocation().getLongitude());
+	map.insert("latitude", core->getCurrentLocation().getLatitude());
 	map.insert("planet", planetName);
 	map.insert("altitude", core->getCurrentLocation().altitude);
 	map.insert("location", core->getCurrentLocation().getID());

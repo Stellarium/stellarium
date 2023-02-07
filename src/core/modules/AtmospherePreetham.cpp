@@ -318,7 +318,7 @@ void AtmospherePreetham::computeColor(StelCore* core, const double JD, const Pla
 	Vec3f moonPosF=moonPos.toVec3f();
 	sky.setParamsv(sunPosF, qBound(2.f, turbidity, 16.f));  // GZ-AT allow more turbidity for testing
 
-	skyb.setLocation(location.latitude * M_PI_180f, static_cast<float>(location.altitude), temperature, relativeHumidity);
+	skyb.setLocation(location.getLatitude() * M_PI_180f, static_cast<float>(location.altitude), temperature, relativeHumidity);
 	skyb.setSunMoon(moonPosF[2], sunPosF[2]);
 
 	// Calculate the date from the julian day.

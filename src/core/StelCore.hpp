@@ -373,7 +373,7 @@ public slots:
 	//! @param duration direction of view move duration in s
 	//! @param durationIfPlanetChange direction of view + planet travel move duration in s.
 	//! This is used only if the destination planet is different from the starting one.
-	void moveObserverTo(const StelLocation& target, double duration=1., double durationIfPlanetChange=1.);
+	void moveObserverTo(const StelLocation& target, double duration=1., double durationIfPlanetChange=1., const QString& landscapeID=QString());
 
 	//! Set the current ProjectionType to use
 	void setCurrentProjectionType(StelCore::ProjectionType type);
@@ -789,8 +789,8 @@ public slots:
 signals:
 	//! This signal is emitted when the observer location has changed.
 	void locationChanged(const StelLocation&);
-	//! This signal is emitted whenever the targeted location changes
-	void targetLocationChanged(const StelLocation&);
+	//! This signal is emitted whenever the targeted location changes. The second parameter can transmit a landscapeID.
+	void targetLocationChanged(const StelLocation&, const QString& = QString());
 	//! This signal is emitted when the current timezone name is changed.
 	void currentTimeZoneChanged(const QString& tz);
 	//! This signal is emitted when custom timezone use is activated (true) or deactivated (false).
