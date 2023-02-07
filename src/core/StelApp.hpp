@@ -120,7 +120,6 @@ public:
 	//! Get the StelApp singleton instance.
 	//! @return the StelApp singleton instance
 	static StelApp& getInstance() {Q_ASSERT(singleton); return *singleton;}
-	static bool exists() { return singleton!=nullptr;}
 
 	//! Get the module manager to use for accessing any module loaded in the application.
 	//! @return the module manager.
