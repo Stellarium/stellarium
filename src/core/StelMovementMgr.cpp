@@ -188,9 +188,7 @@ void StelMovementMgr::init()
 			setMountMode(StelMovementMgr::MountEquinoxEquatorial);
 		}
 	}
-
 	resetInitViewPos();
-
 
 	QString movementGroup = N_("Movement and Selection");
 	addAction("actionSwitch_Equatorial_Mount", N_("Miscellaneous"), N_("Switch between equatorial and azimuthal mount"), "equatorialMount", "Ctrl+M");
@@ -257,7 +255,6 @@ void StelMovementMgr::resetInitViewPos()
 
 		//qDebug() << "   upVectorMountFrame becomes " << upVectorMountFrame[0] << "/" << upVectorMountFrame[1] << "/" << upVectorMountFrame[2];
 	}
-
 }
 
 void StelMovementMgr::bindingFOVActions()
@@ -1502,7 +1499,6 @@ void StelMovementMgr::moveToAltAzi(const Vec3d& aim, const Vec3d &aimUp, float m
 	//StelUtils::rectToSphe(&newAzi, &newAlt, move.aim);
 	//qDebug() << "StelMovementMgr::moveToAltAzi() from alt:" << currAlt*(180./M_PI) << "/azi" << currAzi*(180./M_PI)  << "to alt:" << newAlt*(180./M_PI)  << "azi" << newAzi*(180./M_PI) ;
 }
-
 
 Vec3d StelMovementMgr::j2000ToMountFrame(const Vec3d& v) const
 {
