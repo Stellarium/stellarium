@@ -43,7 +43,7 @@
 #include "mathUtils.hpp"
 #include "sgp4io.h"
 
-#define CONSTANTS_SET wgs72
+#define CONSTANTS_SET wgs84
 #define TYPERUN_SET   'c'
 #define OPSMODE_SET   'i'
 #define TYPEINPUT_SET 'm'
@@ -110,11 +110,11 @@ Vec3d gSatTEME::computeSubPoint(gTime ai_Time)
 	{
 		phi = resultVector[ LATITUDE];
 		c = 1./std::sqrt(1. - e2*Sqr(sin(phi)));
-		resultVector[ LATITUDE] = atan2(m_Position[2] + KEARTHRADIUS*c*e2*sin(phi),r);
+		resultVector[ LATITUDE] = atan2(m_Position[2] + EARTH_RADIUS*c*e2*sin(phi),r);
 	}
 	while(fabs(resultVector[ LATITUDE] - phi) >= 1E-10);
 
-	resultVector[ ALTITUDE] = r/cos(resultVector[ LATITUDE]) - KEARTHRADIUS*c;/*kilometers*/
+	resultVector[ ALTITUDE] = r/cos(resultVector[ LATITUDE]) - EARTH_RADIUS*c;/*kilometers*/
 
 	if(resultVector[ LATITUDE] > (KPI/2.0)) resultVector[ LATITUDE] -= K2PI;
 

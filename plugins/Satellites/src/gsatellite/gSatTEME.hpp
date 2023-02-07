@@ -39,6 +39,7 @@
 
 #include "gTime.hpp"
 #include "VecMath.hpp"
+#include "StelUtils.hpp"
 
 #include "sgp4unit.h"
 #include "stdsat.h"
@@ -143,7 +144,7 @@ public:
 	Vec2d getPerigeeApogee() const
 	{
 		double semiMajorAxis = std::cbrt((xke/satrec.no)*(xke/satrec.no));
-		return Vec2d((semiMajorAxis*(1.0 - satrec.ecco) - 1.0)*KEARTHRADIUS, (semiMajorAxis*(1.0 + satrec.ecco) - 1.0)*KEARTHRADIUS);
+		return Vec2d((semiMajorAxis*(1.0 - satrec.ecco) - 1.0)*EARTH_RADIUS, (semiMajorAxis*(1.0 + satrec.ecco) - 1.0)*EARTH_RADIUS);
 	}
 
 private:

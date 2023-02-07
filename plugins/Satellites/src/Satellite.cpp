@@ -359,7 +359,7 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 		oss << QString("%1: %2 %3").arg(q_("Range rate")).arg(rangeRate, 5, 'f', 3).arg(qc_("km/s", "speed")) << "<br/>";
 		// TRANSLATORS: Satellite altitude
 		oss << QString("%1: %2 %3").arg(q_("Altitude")).arg(qRound(height)).arg(km) << "<br/>";
-		oss << QString("%1: %2 %3 / %4 %5").arg(q_("Perigee/apogee altitudes")).arg(qRound(perigee)).arg(km).arg(qRound(apogee)).arg(km) << "<br/>";
+		oss << QString("%1 (WGS-84): %2 %3 / %4 %5").arg(q_("Perigee/apogee altitudes")).arg(qRound(perigee)).arg(km).arg(qRound(apogee)).arg(km) << "<br/>";
 	}
 
 	if (flags&Size && RCS>0.)
@@ -508,13 +508,12 @@ QString Satellite::getCommLinkInfo(CommLink comm) const
 void Satellite::calculateSatDataFromLine2(QString tle)
 {
 	// Details: http://www.satobs.org/seesat/Dec-2002/0197.html
-	const double meanEarthRadius = 6371.0088;
 	const double k = 8681663.653;
 	const double meanMotion = tle.left(63).right(11).toDouble();
 	const double semiMajorAxis = std::cbrt((k/meanMotion)*(k/meanMotion));
 	eccentricity = QString("0.%1").arg(tle.left(33).right(7)).toDouble();
-	perigee = semiMajorAxis*(1.0 - eccentricity) - meanEarthRadius;
-	apogee = semiMajorAxis*(1.0 + eccentricity) - meanEarthRadius;
+	perigee = semiMajorAxis*(1.0 - eccentricity) - EARTH_RADIUS;
+	apogee = semiMajorAxis*(1.0 + eccentricity) - EARTH_RADIUS;
 	inclination = QString(tle.left(16).right(8)).toDouble();
 }
 
@@ -821,6 +820,11 @@ void Satellite::update(double)
 		velocity                 = pSatWrapper->getTEMEVel();
 		latLongSubPointPosition  = pSatWrapper->getSubPoint();
 		height                   = latLongSubPointPosition[2]; // km
+		/*
+		Vec2d pa                 = pSatWrapper->getPerigeeApogeeAltitudes();
+		perigee                  = pa[0];
+		apogee                   = pa[1];
+		*/
 		if (height < 0.1)
 		{
 			// The orbit is no longer valid.  Causes include very out of date

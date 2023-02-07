@@ -40,7 +40,7 @@
 #define SPEED_OF_LIGHT 299792.458
 // Ecliptic obliquity of J2000.0, degrees
 #define EPS_0 23.4392803055555555555556
-// Equatorial radius of the Earth in km
+// Equatorial radius of the Earth in km (WGS-84)
 #define EARTH_RADIUS 6378.1366
 // Equatorial radius of the Sun in km
 #define SUN_RADIUS 696000.
