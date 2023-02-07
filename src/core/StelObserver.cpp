@@ -21,12 +21,9 @@
 #include "StelUtils.hpp"
 #include "SolarSystem.hpp"
 #include "Planet.hpp"
-#include "StelLocaleMgr.hpp"
-#include "StelTranslator.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 
-#include "StelLocationMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "LandscapeMgr.hpp"
 
@@ -40,6 +37,8 @@ class ArtificialPlanet : public Planet
 public:
 	ArtificialPlanet(const PlanetP& orig);
 	void setDest(const PlanetP& dest);
+	//! computes position and orientation between itself and @variable dest.
+	//! @param f1 mixing factor. [0...1]. 1 means dest.
 	void computeAverage(double f1);
 	//! This does nothing, but avoids a crash.
 	virtual void computePosition(const double dateJDE, const Vec3d &aberrationPush) Q_DECL_OVERRIDE;

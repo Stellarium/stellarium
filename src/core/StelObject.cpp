@@ -22,7 +22,6 @@
 #include "StelObjectMgr.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
-#include "StelProjector.hpp"
 #include "StelUtils.hpp"
 #include "StelTranslator.hpp"
 #include "StelSkyDrawer.hpp"
