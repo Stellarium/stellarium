@@ -173,13 +173,13 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	int scale=static_cast<int>(lineHeight*scv*0.01f);
 	// TODO: change this load-once to interactively editable value of scaling coefficient
 	QPixmap pa(":/graphicGui/btTimeRewind-on.png");
-	QPixmap prevArrow = pa.scaledToHeight(scale * StelButton::getPixmapsDevicePixelRatio(), Qt::SmoothTransformation);
+	QPixmap prevArrow = pa.scaledToHeight(scale * StelButton::getInputPixmapsDevicePixelRatio(), Qt::SmoothTransformation);
 	QPixmap paOff(":/graphicGui/btTimeRewind-off.png");
-	QPixmap prevArrowOff = paOff.scaledToHeight(scale * StelButton::getPixmapsDevicePixelRatio(), Qt::SmoothTransformation);
+	QPixmap prevArrowOff = paOff.scaledToHeight(scale * StelButton::getInputPixmapsDevicePixelRatio(), Qt::SmoothTransformation);
 	QPixmap na(":/graphicGui/btTimeForward-on.png");
-	QPixmap nextArrow = na.scaledToHeight(scale * StelButton::getPixmapsDevicePixelRatio(), Qt::SmoothTransformation);
+	QPixmap nextArrow = na.scaledToHeight(scale * StelButton::getInputPixmapsDevicePixelRatio(), Qt::SmoothTransformation);
 	QPixmap naOff(":/graphicGui/btTimeForward-off.png");
-	QPixmap nextArrowOff = naOff.scaledToHeight(scale * StelButton::getPixmapsDevicePixelRatio(), Qt::SmoothTransformation);
+	QPixmap nextArrowOff = naOff.scaledToHeight(scale * StelButton::getInputPixmapsDevicePixelRatio(), Qt::SmoothTransformation);
 
 	StelActionMgr* actionMgr = StelApp::getInstance().getStelActionManager();
 	QString ocularsGroup = N_("Oculars"); // Possible group name: Oculars on-screen control panel
@@ -1258,13 +1258,13 @@ QPixmap OcularsGuiPanel::createPixmapFromText(const QString& text,
 		return QPixmap();
 	}
 
-	width  *= StelButton::getPixmapsDevicePixelRatio();
-	height *= StelButton::getPixmapsDevicePixelRatio();
+	width  *= StelButton::getInputPixmapsDevicePixelRatio();
+	height *= StelButton::getInputPixmapsDevicePixelRatio();
 
 	QPixmap pixmap(width, height);
 	pixmap.fill(backgroundColor);
 	auto scaledFont(font);
-	scaledFont.setPixelSize(font.pixelSize() * StelButton::getPixmapsDevicePixelRatio());
+	scaledFont.setPixelSize(font.pixelSize() * StelButton::getInputPixmapsDevicePixelRatio());
 
 	if (text.isEmpty())
 	{
