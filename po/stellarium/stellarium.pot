@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2023-02-08 20:04+0700\n"
+"POT-Creation-Date: 2023-02-09 12:03+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -821,7 +821,7 @@ msgid "Author"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for distance - meter
-#: src/core/modules/LandscapeMgr.cpp:1328 src/gui/StelGuiItems.cpp:857
+#: src/core/modules/LandscapeMgr.cpp:1328 src/gui/StelGuiItems.cpp:871
 #: plugins/Satellites/src/Satellite.cpp:432
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1142
 #: plugins/Satellites/src/gui/SatellitesFilterDialog.cpp:134
@@ -918,7 +918,7 @@ msgstr ""
 #: src/core/modules/NomenclatureItem.cpp:240 src/core/modules/Planet.cpp:649
 #: src/core/modules/Planet.cpp:674 src/core/modules/Planet.cpp:777
 #: src/core/modules/Planet.cpp:1495 src/core/modules/Comet.cpp:157
-#: src/core/modules/Comet.cpp:167 src/gui/StelGuiItems.cpp:885
+#: src/core/modules/Comet.cpp:167 src/gui/StelGuiItems.cpp:899
 #: src/gui/AstroCalcDialog.cpp:3183 src/gui/AstroCalcDialog.cpp:3698
 #: src/gui/AstroCalcDialog.cpp:9212 plugins/Satellites/src/Satellites.cpp:2906
 #: plugins/Satellites/src/Satellite.cpp:355
@@ -4811,7 +4811,7 @@ msgid "Custom equation of %1T"
 msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1953 src/gui/ConfigurationDialog.cpp:1990
-#: src/gui/StelGuiItems.cpp:774 src/gui/LocationDialog.cpp:564
+#: src/gui/StelGuiItems.cpp:788 src/gui/LocationDialog.cpp:564
 msgid "System default"
 msgstr ""
 
@@ -5350,93 +5350,93 @@ msgstr ""
 msgid "Custom info"
 msgstr ""
 
-#: src/gui/StelGuiItems.cpp:422 src/gui/StelGuiItems.cpp:1057
+#: src/gui/StelGuiItems.cpp:436 src/gui/StelGuiItems.cpp:1071
 msgid "Space"
 msgstr ""
 
-#: src/gui/StelGuiItems.cpp:776
+#: src/gui/StelGuiItems.cpp:790
 msgid "Time zone"
 msgstr ""
 
-#: src/gui/StelGuiItems.cpp:779 src/gui/LocationDialog.cpp:562
+#: src/gui/StelGuiItems.cpp:793 src/gui/LocationDialog.cpp:562
 msgid "Local Mean Solar Time"
 msgstr ""
 
-#: src/gui/StelGuiItems.cpp:782 src/gui/LocationDialog.cpp:563
+#: src/gui/StelGuiItems.cpp:796 src/gui/LocationDialog.cpp:563
 msgid "Local True Solar Time"
 msgstr ""
 
 #. TRANSLATORS: unit of measurement: minutes per second
-#: src/gui/StelGuiItems.cpp:785
+#: src/gui/StelGuiItems.cpp:799
 msgctxt "unit of measurement"
 msgid "min/s"
 msgstr ""
 
 #. TRANSLATORS: unit of measurement: hours per second
-#: src/gui/StelGuiItems.cpp:793
+#: src/gui/StelGuiItems.cpp:807
 msgctxt "unit of measurement"
 msgid "hr/s"
 msgstr ""
 
 #. TRANSLATORS: unit of measurement: days per second
-#: src/gui/StelGuiItems.cpp:799
+#: src/gui/StelGuiItems.cpp:813
 msgctxt "unit of measurement"
 msgid "d/s"
 msgstr ""
 
 #. TRANSLATORS: unit of measurement: years per second
-#: src/gui/StelGuiItems.cpp:805
+#: src/gui/StelGuiItems.cpp:819
 msgctxt "unit of measurement"
 msgid "yr/s"
 msgstr ""
 
-#: src/gui/StelGuiItems.cpp:807 src/gui/StelGuiItems.cpp:809
+#: src/gui/StelGuiItems.cpp:821 src/gui/StelGuiItems.cpp:823
 msgid "Simulation speed"
 msgstr ""
 
-#: src/gui/StelGuiItems.cpp:854
+#: src/gui/StelGuiItems.cpp:868
 msgid "flight"
 msgstr ""
 
-#: src/gui/StelGuiItems.cpp:885
+#: src/gui/StelGuiItems.cpp:899
 msgid "planetocentric distance"
 msgstr ""
 
-#: src/gui/StelGuiItems.cpp:887
+#: src/gui/StelGuiItems.cpp:901
 msgid "planetocentric observer"
 msgstr ""
 
-#: src/gui/StelGuiItems.cpp:896
+#: src/gui/StelGuiItems.cpp:910
 msgid "Atmospheric pressure"
 msgstr ""
 
-#: src/gui/StelGuiItems.cpp:896
+#: src/gui/StelGuiItems.cpp:910
 msgctxt "pressure unit"
 msgid "mbar"
 msgstr ""
 
-#: src/gui/StelGuiItems.cpp:896
+#: src/gui/StelGuiItems.cpp:910
 msgid "temperature"
 msgstr ""
 
 #. TRANSLATORS: Field of view. Please use abbreviation.
-#: src/gui/StelGuiItems.cpp:917
+#: src/gui/StelGuiItems.cpp:931
 msgctxt "abbreviation"
 msgid "FOV"
 msgstr ""
 
-#: src/gui/StelGuiItems.cpp:933
+#: src/gui/StelGuiItems.cpp:947
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:492
 msgid "Field of view"
 msgstr ""
 
 #. TRANSLATORS: Frames per second. Please use abbreviation.
-#: src/gui/StelGuiItems.cpp:952
+#: src/gui/StelGuiItems.cpp:966
 msgctxt "abbreviation"
 msgid "FPS"
 msgstr ""
 
-#: src/gui/StelGuiItems.cpp:960
+#: src/gui/StelGuiItems.cpp:974
 msgid "Frames per second"
 msgstr ""
 
@@ -5987,7 +5987,7 @@ msgid ""
 msgstr ""
 
 #: src/gui/AstroCalcDialog.cpp:612
-msgid "Valid range magnitues:"
+msgid "Valid range magnitudes:"
 msgstr ""
 
 #: src/gui/AstroCalcDialog.cpp:620
@@ -12077,7 +12077,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:3950
 msgid ""
-"Labels for the secondary intercardinal directions (32-wind compass rose)."
+"Labels for the tertiary intercardinal directions (32-wind compass rose)."
 msgstr ""
 
 #: src/ui_viewDialog.h:3953 src/ui_viewDialog.h:3957 src/ui_viewDialog.h:3985
