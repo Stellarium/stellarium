@@ -609,7 +609,7 @@ void AstroCalcDialog::populateToolTips()
 	ui->eclipseFromYearSpinBox->setToolTip(QString("%1 %2..%3").arg(q_("Valid range years:"), QString::number(ui->eclipseFromYearSpinBox->minimum()), QString::number(ui->eclipseFromYearSpinBox->maximum())));
 	ui->allowedSeparationSpinBox->setToolTip(QString("%1: %2..%3").arg(q_("Valid range"), StelUtils::decDegToDmsStr(ui->allowedSeparationSpinBox->getMinimum(true)), StelUtils::decDegToDmsStr(ui->allowedSeparationSpinBox->getMaximum(true))));
 	ui->allowedSeparationLabel->setToolTip(QString("<p>%1</p>").arg(q_("This is a tolerance for the angular distance for conjunctions and oppositions from 0 and 180 degrees respectively.")));
-	ui->hecMagnitudeLimitSpinBox->setToolTip(QString("%1 %2..%3").arg(q_("Valid range magnitues:"), QString::number(ui->hecMagnitudeLimitSpinBox->minimum(), 'f', 2), QString::number(ui->hecMagnitudeLimitSpinBox->maximum(), 'f', 2)));
+	ui->hecMagnitudeLimitSpinBox->setToolTip(QString("%1 %2..%3").arg(q_("Valid range magnitudes:"), QString::number(ui->hecMagnitudeLimitSpinBox->minimum(), 'f', 2), QString::number(ui->hecMagnitudeLimitSpinBox->maximum(), 'f', 2)));
 }
 
 void AstroCalcDialog::saveGraph(QChartView *graph)
