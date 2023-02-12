@@ -279,7 +279,7 @@ void DateTimeDialog::setDateTime(double newJd)
 		if (oldyear != year || oldmonth != month || oldday != day) 
 			emit core->dateChanged();
 		if (oldyear != year) 
-			emit core->dateChangedByYear();
+			emit core->dateChangedByYear(year);
 		if (oldmonth != month) 
 			emit core->dateChangedForMonth();
 

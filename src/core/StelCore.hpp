@@ -811,7 +811,7 @@ signals:
 	//! This signal is emitted when the date has changed for a month.
 	void dateChangedForMonth();
 	//! This signal is emitted when the date has changed by one year.
-	void dateChangedByYear();
+	void dateChangedByYear(const int year);
 	//! This signal indicates a horizontal display flip
 	void flipHorzChanged(bool b);
 	//! This signal indicates a vertical display flip
