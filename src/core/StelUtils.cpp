@@ -1147,8 +1147,19 @@ bool isLeapYear(const int year)
 // Meeus, AA 2nd, 1998, ch.7 p.65
 int dayInYear(const int year, const int month, const int day)
 {
-	int k=(isLeapYear(year) ? 1:2);
+	const int k=(isLeapYear(year) ? 1:2);
 	return static_cast<int>(275*month/9) - k*static_cast<int>((month+9)/12) + day -30;
+}
+
+// Find date from day number within year and the year.
+// Meeus, AA 2nd, 1998, ch.7 p.66
+Vec3i dateFromDayYear(const int day, const int year)
+{
+	const int k=(isLeapYear(year) ? 1:2);
+	int month = day<32 ? 1 : static_cast<int>(9.f*(k+day)/275.f+0.98f);
+
+	int monthDay = day - static_cast<int>(275.f*month/9.f) + k*static_cast<int>((month+9)/12.f) + 30;
+	return {year, month, monthDay};
 }
 
 // Return a fractional year like YYYY.ddddd. For negative years, the year number is of course decrease. E.g. -500.5 occurs in -501.

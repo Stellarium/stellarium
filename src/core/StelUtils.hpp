@@ -539,6 +539,10 @@ namespace StelUtils
 	//! Find day number for date in year.
 	//! Meeus, Astronomical Algorithms 2nd ed., 1998, ch.7, p.65
 	int dayInYear(const int year, const int month, const int day);
+	//! Find date from day number within year and the year.
+	//! Meeus, AA 2nd, 1998, ch.7 p.66
+	//! @returns Vec3i(year, month, day)
+	Vec3i dateFromDayYear(const int day, const int year);
 	//! Return a fractional year like YYYY.ddddd. For negative years, the year number is decreased. E.g. -500.5 occurs in -501.
 	double yearFraction(const int year, const int month, const double day);
 
