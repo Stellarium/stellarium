@@ -928,6 +928,7 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("viewing/flag_ecliptic_line",				propMgr->getStelPropertyValue("GridLinesMgr.eclipticLineDisplayed").toBool());
 	conf->setValue("viewing/flag_ecliptic_parts",			propMgr->getStelPropertyValue("GridLinesMgr.eclipticPartsDisplayed").toBool());
 	conf->setValue("viewing/flag_ecliptic_labels",			propMgr->getStelPropertyValue("GridLinesMgr.eclipticPartsLabeled").toBool());
+	conf->setValue("viewing/flag_ecliptic_dates_labels",		propMgr->getStelPropertyValue("GridLinesMgr.eclipticDatesLabeled").toBool());
 	conf->setValue("viewing/flag_ecliptic_J2000_line",		propMgr->getStelPropertyValue("GridLinesMgr.eclipticJ2000LineDisplayed").toBool());
 	conf->setValue("viewing/flag_ecliptic_J2000_parts",		propMgr->getStelPropertyValue("GridLinesMgr.eclipticJ2000PartsDisplayed").toBool());
 	conf->setValue("viewing/flag_ecliptic_J2000_labels",		propMgr->getStelPropertyValue("GridLinesMgr.eclipticJ2000PartsLabeled").toBool());
