@@ -1204,6 +1204,11 @@ void SkyLine::draw(StelCore *core) const
 		}
 		if (line_type==ECLIPTIC_WITH_DATE)
 		{
+			// we must adapt (rotate) some labels to observers on the southern hemisphere.
+			const bool southernHemi = core->getCurrentLocation().getLatitude() < 0.f;
+			const float extraTextAngle = southernHemi ? M_PI_2f : -M_PI_2f;
+			const float shifty = (southernHemi ? -1.f : 0.25) *  static_cast<float>(sPainter.getFontMetrics().height());
+
 			// This special line type does not show the actual ecliptic line but only the partitions. These must be read from the precomputed static array eclipticOnDatePartitions
 			QMap<Vec3d, QString>::const_iterator it=eclipticOnDatePartitions.constBegin();
 			while (it != eclipticOnDatePartitions.constEnd())
@@ -1235,10 +1240,9 @@ void SkyLine::draw(StelCore *core) const
 					prj->project(end, screenPosTgtL);
 					double dx=screenPosTgtL[0]-screenPosTgt[0];
 					double dy=screenPosTgtL[1]-screenPosTgt[1];
-					float textAngle=static_cast<float>(atan2(dy,dx))-M_PI_2;
+					float textAngle=static_cast<float>(atan2(dy,dx))+extraTextAngle;
 					// Gravity labels look outright terrible here! Disable them.
 					float shiftx = - static_cast<float>(sPainter.getFontMetrics().boundingRect(label).width()) * 0.5f;
-					float shifty = + 0.25*static_cast<float>(sPainter.getFontMetrics().height());
 					sPainter.drawText(end, label, textAngle*M_180_PIf, shiftx, shifty, true);
 				}
 				it++;
