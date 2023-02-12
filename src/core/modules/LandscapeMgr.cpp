@@ -1142,7 +1142,6 @@ void LandscapeMgr::onLocationChanged(const StelLocation &loc)
 
 void LandscapeMgr::onTargetLocationChanged(const StelLocation &loc, const QString& landscapeID)
 {
-	qDebug() << "LandscapeMgr::onTargetLocationCHanged(): loc.planetName:" << loc.planetName << "currentPlanetName" << currentPlanetName;
 	if (loc.planetName != currentPlanetName)
 	{
 		if (landscapeID.length()>0)
