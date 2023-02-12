@@ -170,7 +170,7 @@ public:
 	void updateLabel();
 	static void setSolarSystem(SolarSystem* ss);
 	//! Compute eclipticOnDatePartitions for @param year. Trigger a call to this from a signal StelCore::dateChangedByYear()
-	static void computeEclipticDatePartitions(int year = MININT32);
+	static void computeEclipticDatePartitions(int year = std::numeric_limits<int>::min());
 private:
 	static QSharedPointer<Planet> earth, sun, moon;
 	SKY_LINE_TYPE line_type;
@@ -674,7 +674,7 @@ void SkyLine::computeEclipticDatePartitions(int year)
 	StelCore *core=StelApp::getInstance().getCore();
 	eclipticOnDatePartitions.clear();
 
-	if (year==MININT32)
+	if (year==std::numeric_limits<int>::min())
 	{
 		int m, d;
 		StelUtils::getDateFromJulianDay(core->getJD(), &year, &m, &d);
