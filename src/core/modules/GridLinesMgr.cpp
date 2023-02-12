@@ -170,7 +170,7 @@ public:
 	void updateLabel();
 	static void setSolarSystem(SolarSystem* ss);
 	//! Compute eclipticOnDatePartitions for @param year. Trigger a call to this from a signal StelCore::dateChangedByYear()
-	static void computeEclipticDatePartitions(int year);
+	static void computeEclipticDatePartitions(int year = MININT32);
 private:
 	static QSharedPointer<Planet> earth, sun, moon;
 	SKY_LINE_TYPE line_type;
@@ -666,10 +666,20 @@ void SkyLine::init()
 
 void SkyLine::computeEclipticDatePartitions(int year)
 {
+	static GridLinesMgr* gMgr=GETSTELMODULE(GridLinesMgr);
+	if (gMgr && (! gMgr->getFlagEclipticDatesLabeled()))
+		return;
+
 	qDebug() << "SkyLine::computeEclipticPartitions() for " << year;
 	Q_ASSERT(earth);
 	StelCore *core=StelApp::getInstance().getCore();
 	eclipticOnDatePartitions.clear();
+
+	if (year==MININT32)
+	{
+		int m, d;
+		StelUtils::getDateFromJulianDay(core->getJD(), &year, &m, &d);
+	}
 	for (int day=1; day <= (StelUtils::isLeapYear(year) ? 366 : 365); day++)
 	{
 		const Vec3i date=StelUtils::dateFromDayYear(day, year);
@@ -1801,6 +1811,10 @@ GridLinesMgr::GridLinesMgr()
 
 	// Whenever year changes we must recompute the labels for the ecliptic when dates are shown.
 	connect(StelApp::getInstance().getCore(), &StelCore::dateChangedByYear, this, [=](const int year){ SkyLine::computeEclipticDatePartitions(year);});
+	// Likewise, recreate when switching them on...
+	connect(this, &GridLinesMgr::eclipticDatesLabeledChanged, this, [=](const bool displayed){ if (displayed) SkyLine::computeEclipticDatePartitions();});
+	// ... or as timezone changes
+	connect(StelApp::getInstance().getCore(), &StelCore::currentTimeZoneChanged, this, [=](const QString&){ SkyLine::computeEclipticDatePartitions();});
 }
 
 GridLinesMgr::~GridLinesMgr()
