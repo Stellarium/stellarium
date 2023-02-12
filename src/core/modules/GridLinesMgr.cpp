@@ -670,7 +670,6 @@ void SkyLine::computeEclipticDatePartitions(int year)
 	if (gMgr && (! gMgr->getFlagEclipticDatesLabeled()))
 		return;
 
-	qDebug() << "SkyLine::computeEclipticPartitions() for " << year;
 	Q_ASSERT(earth);
 	StelCore *core=StelApp::getInstance().getCore();
 	eclipticOnDatePartitions.clear();
@@ -711,7 +710,6 @@ void SkyLine::computeEclipticDatePartitions(int year)
 			{
 				label=QString("%1.").arg(QString::number(date[2]));
 			}
-			//qDebug() << "day" << day << date << "=JD" << QString::number(jde, 'f', 7) << "Long:" << lng*M_180_PI << label;
 		}
 		else
 		{
@@ -724,11 +722,9 @@ void SkyLine::computeEclipticDatePartitions(int year)
 			{
 				label=QString("%1.").arg(QString::number(date[2]));
 			}
-			//qDebug() << "day" << day << date << "=JD" << QString::number(jde, 'f', 7) << "Long:" << lng*M_180_PI << label;
 		}
 		eclipticOnDatePartitions.insert(Vec3d(lng, aberration, deltaPsi), label);
 	}
-	qDebug() << eclipticOnDatePartitions.size() << "entries";
 }
 
 void SkyLine::setSolarSystem(SolarSystem* ss)
