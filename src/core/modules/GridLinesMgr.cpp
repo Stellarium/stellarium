@@ -702,27 +702,13 @@ void SkyLine::computeEclipticDatePartitions(int year)
 		if ((year==1582) && (date[1]==10))
 		{
 			// Gregorian calendar reform. Duplicate ticks are harmless, but we must tweak date labels.
-			// Labels: 1, 10, 20: full month label
-			if (QList<int>({1, 20}).contains(date[2]))
-			{
-				label=QString("%1.%2.").arg(QString::number(date[2]), StelLocaleMgr::romanMonthName(date[1]));
-			}
-			else if (QList<int>({4, 15, 25}).contains(date[2]))
-			{
-				label=QString("%1.").arg(QString::number(date[2]));
-			}
+			if (QList<int>({1, 4, 15, 20, 25}).contains(date[2]))
+				label=QString("%1.%2").arg(QString::number(date[2]), StelLocaleMgr::romanMonthName(date[1]));
 		}
 		else
 		{
-			// Labels: 1, 10, 20: full month label
-			if (QList<int>({1, 10, 20}).contains(date[2]))
-			{
-				label=QString("%1.%2.").arg(QString::number(date[2]), StelLocaleMgr::romanMonthName(date[1]));
-			}
-			else if (QList<int>({5, 15, 25}).contains(date[2]))
-			{
-				label=QString("%1.").arg(QString::number(date[2]));
-			}
+			if (QList<int>({1, 5, 10, 15, 20, 25}).contains(date[2]))
+				label=QString("%1.%2").arg(QString::number(date[2]), StelLocaleMgr::romanMonthName(date[1]));
 		}
 		eclipticOnDatePartitions.insert(Vec3d(lng, aberration, deltaPsi), label);
 	}
@@ -1231,31 +1217,33 @@ void SkyLine::draw(StelCore *core) const
 				const QString &label=it.value();
 				// draw and labels: derive the irregular tick lengths from labeling
 				Vec3d start=fpt;
-				Vec3d end= (label.length()>0) ? part5 : part1;
-				if (label.length()>=4)
-					end=part10;
+				Vec3d end= (label.length()>0) ? part10 : part1;
+				if (label.contains("5"))
+					end=part5;
+				Vec3d end10=part10;
 
 				const Mat4d& rotDay = Mat4d::rotation(partZAxis, lng);
 				start.transfo4d(rotDay);
 				end.transfo4d(rotDay);
+				end10.transfo4d(rotDay);
 
 				sPainter.drawGreatCircleArc(start, end, Q_NULLPTR, Q_NULLPTR, Q_NULLPTR);
 
 				if ((label.length()>0) && (
-					(currentFoV<120.) // all labels
-					|| ((currentFoV<=180.) && label.length()>=4)) // 1.MM./10.MM./20.MM.
+					(currentFoV<60.) // all labels
+					|| ((currentFoV<=180.) && !label.contains("5"))) // 1.MM/10.MM/20.MM
 					|| ((label.startsWith("1."))) // in any case
 					)
 				{
 					Vec3d screenPosTgt, screenPosTgtL;
 					prj->project(start, screenPosTgt);
-					prj->project(end, screenPosTgtL);
+					prj->project(end10, screenPosTgtL);
 					double dx=screenPosTgtL[0]-screenPosTgt[0];
 					double dy=screenPosTgtL[1]-screenPosTgt[1];
 					float textAngle=static_cast<float>(atan2(dy,dx))+extraTextAngle;
 					// Gravity labels look outright terrible here! Disable them.
 					float shiftx = - static_cast<float>(sPainter.getFontMetrics().boundingRect(label).width()) * 0.5f;
-					sPainter.drawText(end, label, textAngle*M_180_PIf, shiftx, shifty, true);
+					sPainter.drawText(end10, label, textAngle*M_180_PIf, shiftx, shifty, true);
 				}
 				it++;
 			}
