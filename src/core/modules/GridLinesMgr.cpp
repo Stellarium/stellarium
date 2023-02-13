@@ -19,6 +19,7 @@
 
 #include "GridLinesMgr.hpp"
 #include "StelApp.hpp"
+#include "StelLocaleMgr.hpp"
 #include "StelUtils.hpp"
 #include "StelTranslator.hpp"
 #include "StelProjector.hpp"
@@ -704,7 +705,7 @@ void SkyLine::computeEclipticDatePartitions(int year)
 			// Labels: 1, 10, 20: full month label
 			if (QList<int>({1, 20}).contains(date[2]))
 			{
-				label=QString("%1.%2.").arg(QString::number(date[2]), QString::number(date[1]));
+				label=QString("%1.%2.").arg(QString::number(date[2]), StelLocaleMgr::romanMonthName(date[1]));
 			}
 			else if (QList<int>({4, 15, 25}).contains(date[2]))
 			{
@@ -716,7 +717,7 @@ void SkyLine::computeEclipticDatePartitions(int year)
 			// Labels: 1, 10, 20: full month label
 			if (QList<int>({1, 10, 20}).contains(date[2]))
 			{
-				label=QString("%1.%2.").arg(QString::number(date[2]), QString::number(date[1]));
+				label=QString("%1.%2.").arg(QString::number(date[2]), StelLocaleMgr::romanMonthName(date[1]));
 			}
 			else if (QList<int>({5, 15, 25}).contains(date[2]))
 			{
@@ -1214,6 +1215,7 @@ void SkyLine::draw(StelCore *core) const
 			const bool southernHemi = core->getCurrentLocation().getLatitude() < 0.f;
 			const float extraTextAngle = southernHemi ? M_PI_2f : -M_PI_2f;
 			const float shifty = (southernHemi ? -1.f : 0.25) *  static_cast<float>(sPainter.getFontMetrics().height());
+			const double currentFoV=core->getMovementMgr()->getCurrentFov();
 
 			// This special line type does not show the actual ecliptic line but only the partitions. These must be read from the precomputed static array eclipticOnDatePartitions
 			QMap<Vec3d, QString>::const_iterator it=eclipticOnDatePartitions.constBegin();
@@ -1239,7 +1241,11 @@ void SkyLine::draw(StelCore *core) const
 
 				sPainter.drawGreatCircleArc(start, end, Q_NULLPTR, Q_NULLPTR, Q_NULLPTR);
 
-				if (((label.length()>0) && (core->getMovementMgr()->getCurrentFov()<120.)) || label.length()>=4)
+				if ((label.length()>0) && (
+					(currentFoV<120.) // all labels
+					|| ((currentFoV<=180.) && label.length()>=4)) // 1.MM./10.MM./20.MM.
+					|| ((label.startsWith("1."))) // in any case
+					)
 				{
 					Vec3d screenPosTgt, screenPosTgtL;
 					prj->project(start, screenPosTgt);
