@@ -430,6 +430,7 @@ void ViewDialog::createDialogContent()
 	connectBoolProperty(ui->equatorJ2000LabelsCheckBox,         "GridLinesMgr.equatorJ2000PartsLabeled");
 	connectBoolProperty(ui->fixedEquatorLabelsCheckBox,         "GridLinesMgr.fixedEquatorPartsLabeled");
 	connectBoolProperty(ui->eclipticLabelsCheckBox,             "GridLinesMgr.eclipticPartsLabeled");
+	connectBoolProperty(ui->withSolarTicksCheckbox,             "GridLinesMgr.eclipticDatesLabeled");
 	connectBoolProperty(ui->eclipticJ2000LabelsCheckBox,        "GridLinesMgr.eclipticJ2000PartsLabeled");
 	connectBoolProperty(ui->solarEquatorLabelsCheckBox,         "GridLinesMgr.solarEquatorPartsLabeled");
 	connectBoolProperty(ui->longitudeLabelsCheckBox,            "GridLinesMgr.longitudePartsLabeled");

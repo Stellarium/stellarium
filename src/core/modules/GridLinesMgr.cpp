@@ -19,6 +19,7 @@
 
 #include "GridLinesMgr.hpp"
 #include "StelApp.hpp"
+#include "StelLocaleMgr.hpp"
 #include "StelUtils.hpp"
 #include "StelTranslator.hpp"
 #include "StelProjector.hpp"
@@ -125,6 +126,7 @@ public:
 		FIXED_EQUATOR,
 		ECLIPTIC_J2000,
 		ECLIPTIC_OF_DATE,
+		ECLIPTIC_WITH_DATE,
 		PRECESSIONCIRCLE_N,
 		PRECESSIONCIRCLE_S,
 		MERIDIAN,
@@ -168,6 +170,8 @@ public:
 	//! Re-translates the label and sets the frameType. Must be called in the constructor!
 	void updateLabel();
 	static void setSolarSystem(SolarSystem* ss);
+	//! Compute eclipticOnDatePartitions for @param year. Trigger a call to this from a signal StelCore::dateChangedByYear()
+	static void computeEclipticDatePartitions(int year = std::numeric_limits<int>::min());
 private:
 	static QSharedPointer<Planet> earth, sun, moon;
 	SKY_LINE_TYPE line_type;
@@ -181,6 +185,7 @@ private:
 	bool showPartitions;
 	bool showLabel;
 	static QMap<int, double> precessionPartitions;
+	static QMap<Vec3d, QString> eclipticOnDatePartitions; //!< Map of up to 366 entries double={eclLongitude, aberration, nutation}, QString label
 };
 
 // rms added color as parameter
@@ -637,6 +642,8 @@ SkyLine::SkyLine(SKY_LINE_TYPE _line_type) : line_type(_line_type), color(0.f, 0
 
 // Contains ecliptic rotations from -13000, -12900, ... , +13000
 QMap<int, double> SkyLine::precessionPartitions;
+// Contains ecliptic partitions {eclLongitude, aberration, nutation} with labels for the current year
+QMap<Vec3d, QString> SkyLine::eclipticOnDatePartitions;
 QSharedPointer<Planet> SkyLine::earth, SkyLine::sun, SkyLine::moon;
 
 //! call once before creating the first line.
@@ -650,6 +657,61 @@ void SkyLine::init()
 		StelUtils::getJDFromDate(&jdY0, y, 1, 0, 0, 0, 0); // JD of Jan.0.
 		getPrecessionAnglesVondrak(jdY0, &epsilonA, &chiA, &omegaA, &psiA);
 		precessionPartitions.insert(y, psiA); // Store only the value of shift along the ecliptic.
+	}
+	StelCore *core=StelApp::getInstance().getCore();
+	const double jde=core->getJDE();
+	int year, month, day;
+	StelUtils::getDateFromJulianDay(jde, &year, &month, &day);
+	computeEclipticDatePartitions(year);
+}
+
+void SkyLine::computeEclipticDatePartitions(int year)
+{
+	static GridLinesMgr* gMgr=GETSTELMODULE(GridLinesMgr);
+	if (gMgr && (! gMgr->getFlagEclipticDatesLabeled()))
+		return;
+
+	Q_ASSERT(earth);
+	StelCore *core=StelApp::getInstance().getCore();
+	eclipticOnDatePartitions.clear();
+
+	if (year==std::numeric_limits<int>::min())
+	{
+		int m, d;
+		StelUtils::getDateFromJulianDay(core->getJD(), &year, &m, &d);
+	}
+	const int lastDoY = (StelUtils::isLeapYear(year) ? 366 : 365);
+	for (int day=1; day <= lastDoY; day++)
+	{
+		const Vec3i date=StelUtils::dateFromDayYear(day, year);
+		double jd;
+		StelUtils::getJDFromDate(&jd, year, date[1], date[2], 0, 0, 0.f);
+		const double tzOffset=core->getUTCOffset(jd)/24.;
+		const double jde=jd+core->getDeltaT()/86400.-tzOffset;
+		Vec3d earthPos=earth->getEclipticPos(jde); // J2000 position!
+		double lng, lat, r;
+		StelUtils::rectToSphe(&lng, &lat, &r, earthPos);
+		lng+=M_PI; lat*=-1.; // derive Solar data from this.
+		double epsilonA, chiA, omegaA, psiA;
+		getPrecessionAnglesVondrak(jde, &epsilonA, &chiA, &omegaA, &psiA);
+		lng+=psiA;
+		double aberration=-20.4898/3600.*M_PI_180/r; // Meeus AA (25.10)
+		double deltaEps, deltaPsi;
+		getNutationAngles(jde, &deltaPsi, &deltaEps);
+
+		QString label;
+		if ((year==1582) && (date[1]==10))
+		{
+			// Gregorian calendar reform. Duplicate ticks are harmless, but we must tweak date labels.
+			if (QList<int>{1, 4, 15, 20, 25}.contains(date[2]))
+				label=QString("%1.%2").arg(QString::number(date[2]), StelLocaleMgr::romanMonthName(date[1]));
+		}
+		else
+		{
+			if (QList<int>{1, 5, 10, 15, 20, 25}.contains(date[2]))
+				label=QString("%1.%2").arg(QString::number(date[2]), StelLocaleMgr::romanMonthName(date[1]));
+		}
+		eclipticOnDatePartitions.insert(Vec3d(lng, aberration, deltaPsi), label);
 	}
 }
 
@@ -691,6 +753,10 @@ void SkyLine::updateLabel()
 		case ECLIPTIC_OF_DATE:
 			frameType = StelCore::FrameObservercentricEclipticOfDate;
 			label = q_("Ecliptic of Date");
+			break;
+		case ECLIPTIC_WITH_DATE:
+			frameType = StelCore::FrameObservercentricEclipticOfDate;
+			label = QString(); // No label: parallel to ecliptic.
 			break;
 		case EQUATOR_J2000:
 			frameType = StelCore::FrameJ2000;
@@ -1092,6 +1158,7 @@ void SkyLine::draw(StelCore *core) const
 	if (showPartitions && !(QList<SKY_LINE_TYPE>({INVARIABLEPLANE, EARTH_UMBRA, EARTH_PENUMBRA, QUADRATURE}).contains(line_type)))
 	{
 		const float lineThickness=sPainter.getLineWidth();
+		const float rotSign= (line_type==ECLIPTIC_WITH_DATE ? -1.f : 1.f);
 		sPainter.setLineWidth(partThickness);
 
 		// Before drawing the lines themselves (and returning), draw the short partition lines
@@ -1113,11 +1180,11 @@ void SkyLine::draw(StelCore *core) const
 			partAxis=sphericalCap.n ^ part0;
 		}
 
-		Vec3d part1=part0;  part1.transfo4d(Mat4d::rotation(partAxis, 0.10*M_PI/180)); // part1 should point to 0.05deg south of "equator"
-		Vec3d part5=part0;  part5.transfo4d(Mat4d::rotation(partAxis, 0.25*M_PI/180));
-		Vec3d part10=part0; part10.transfo4d(Mat4d::rotation(partAxis, 0.45*M_PI/180));
-		Vec3d part30=part0; part30.transfo4d(Mat4d::rotation(partAxis, 0.75*M_PI/180));
-		Vec3d part30l=part0; part30l.transfo4d(Mat4d::rotation(partAxis, 0.775*M_PI/180));
+		Vec3d part1=part0;  part1.transfo4d(Mat4d::rotation(partAxis, rotSign*0.10*M_PI/180)); // part1 should point to 0.05deg south of "equator"
+		Vec3d part5=part0;  part5.transfo4d(Mat4d::rotation(partAxis, rotSign*0.25*M_PI/180));
+		Vec3d part10=part0; part10.transfo4d(Mat4d::rotation(partAxis, rotSign*0.45*M_PI/180));
+		Vec3d part30=part0; part30.transfo4d(Mat4d::rotation(partAxis, rotSign*0.75*M_PI/180));
+		Vec3d part30l=part0; part30l.transfo4d(Mat4d::rotation(partAxis, rotSign*0.775*M_PI/180));
 		const Mat4d& rotZ1 = Mat4d::rotation(partZAxis, 1.0*M_PI/180.);
 		// Limit altitude marks to the displayed range
 		int i_min= 0;
@@ -1129,8 +1196,60 @@ void SkyLine::draw(StelCore *core) const
 			if (alt<= 2*M_PI_180) i_min =static_cast<int>(-alt*M_180_PI)+2;
 			if (alt>=-2*M_PI_180) i_max-=static_cast<int>( alt*M_180_PI)+2;
 		}
+		if (line_type==ECLIPTIC_WITH_DATE)
+		{
+			// we must adapt (rotate) some labels to observers on the southern hemisphere.
+			const bool southernHemi = core->getCurrentLocation().getLatitude() < 0.f;
+			const float extraTextAngle = southernHemi ? M_PI_2f : -M_PI_2f;
+			const float shifty = (southernHemi ? -1.f : 0.25) *  static_cast<float>(sPainter.getFontMetrics().height());
+			const double currentFoV=core->getMovementMgr()->getCurrentFov();
 
-		for (int i=0; i<i_max; ++i)
+			// This special line type does not show the actual ecliptic line but only the partitions. These must be read from the precomputed static array eclipticOnDatePartitions
+			QMap<Vec3d, QString>::const_iterator it=eclipticOnDatePartitions.constBegin();
+			while (it != eclipticOnDatePartitions.constEnd())
+			{
+				double lng=it.key()[0]; // ecl. longitude, radians
+				const double nutation=it.key()[1]; // nutation in longitude, radians
+				const double aberration=it.key()[2]; // aberration, radians
+				if (core->getUseNutation())
+					lng+=nutation;
+				if (core->getUseAberration())
+					lng+=aberration;
+				const QString &label=it.value();
+				// draw and labels: derive the irregular tick lengths from labeling
+				Vec3d start=fpt;
+				Vec3d end= (label.length()>0) ? part10 : part1;
+				if (label.contains("5"))
+					end=part5;
+				Vec3d end10=part10;
+
+				const Mat4d& rotDay = Mat4d::rotation(partZAxis, lng);
+				start.transfo4d(rotDay);
+				end.transfo4d(rotDay);
+				end10.transfo4d(rotDay);
+
+				sPainter.drawGreatCircleArc(start, end, Q_NULLPTR, Q_NULLPTR, Q_NULLPTR);
+
+				if (label.length()>0 && (
+					currentFoV<60. // all labels
+					|| (currentFoV<=180. && !label.contains("5")) // 1.MM/10.MM/20.MM
+					|| label.startsWith("1.") // in any case
+					))
+				{
+					Vec3d screenPosTgt, screenPosTgtL;
+					prj->project(start, screenPosTgt);
+					prj->project(end10, screenPosTgtL);
+					double dx=screenPosTgtL[0]-screenPosTgt[0];
+					double dy=screenPosTgtL[1]-screenPosTgt[1];
+					float textAngle=static_cast<float>(atan2(dy,dx))+extraTextAngle;
+					// Gravity labels look outright terrible here! Disable them.
+					float shiftx = - static_cast<float>(sPainter.getFontMetrics().boundingRect(label).width()) * 0.5f;
+					sPainter.drawText(end10, label, textAngle*M_180_PIf, shiftx, shifty, true);
+				}
+				it++;
+			}
+		}
+		else for (int i=0; i<i_max; ++i)
 		{
 			if ((line_type==CURRENT_VERTICAL && i>=i_min) || (line_type!=CURRENT_VERTICAL))
 			{
@@ -1296,7 +1415,7 @@ void SkyLine::draw(StelCore *core) const
 		sPainter.drawGreatCircleArc(p1, pHori, Q_NULLPTR, viewportEdgeIntersectCallback, &userData);
 		sPainter.drawGreatCircleArc(p2, pHori, Q_NULLPTR, viewportEdgeIntersectCallback, &userData);
 	}
-	else
+	else if (line_type!=ECLIPTIC_WITH_DATE) // Exclude the pseudo-line ecliptic with date marks: This has only partitions!
 	{
 		if (!SphericalCap::intersectionPoints(viewPortSphericalCap, sphericalCap, p1, p2))
 		{
@@ -1643,6 +1762,7 @@ GridLinesMgr::GridLinesMgr()
 	fixedEquatorLine = new SkyLine(SkyLine::FIXED_EQUATOR);
 	eclipticJ2000Line = new SkyLine(SkyLine::ECLIPTIC_J2000);
 	eclipticLine = new SkyLine(SkyLine::ECLIPTIC_OF_DATE);
+	eclipticWithDateLine = new SkyLine(SkyLine::ECLIPTIC_WITH_DATE);
 	invariablePlaneLine = new SkyLine(SkyLine::INVARIABLEPLANE);
 	solarEquatorLine = new SkyLine(SkyLine::SOLAR_EQUATOR);
 	precessionCircleN = new SkyLine(SkyLine::PRECESSIONCIRCLE_N);
@@ -1679,6 +1799,13 @@ GridLinesMgr::GridLinesMgr()
 
 	earth = GETSTELMODULE(SolarSystem)->getEarth();
 	connect(GETSTELMODULE(SolarSystem), SIGNAL(solarSystemDataReloaded()), this, SLOT(connectSolarSystem()));
+
+	// Whenever year changes we must recompute the labels for the ecliptic when dates are shown.
+	connect(StelApp::getInstance().getCore(), &StelCore::dateChangedByYear, this, [=](const int year){ SkyLine::computeEclipticDatePartitions(year);});
+	// Likewise, recreate when switching them on...
+	connect(this, &GridLinesMgr::eclipticDatesLabeledChanged, this, [=](const bool displayed){ if (displayed) SkyLine::computeEclipticDatePartitions();});
+	// ... or as timezone changes
+	connect(StelApp::getInstance().getCore(), &StelCore::currentTimeZoneChanged, this, [=](const QString&){ SkyLine::computeEclipticDatePartitions();});
 }
 
 GridLinesMgr::~GridLinesMgr()
@@ -1695,6 +1822,7 @@ GridLinesMgr::~GridLinesMgr()
 	delete equatorJ2000Line;
 	delete fixedEquatorLine;
 	delete eclipticLine;
+	delete eclipticWithDateLine;
 	delete eclipticJ2000Line;
 	delete invariablePlaneLine;
 	delete solarEquatorLine;
@@ -1775,6 +1903,7 @@ void GridLinesMgr::init()
 	setFlagEclipticLine(conf->value("viewing/flag_ecliptic_line").toBool());
 	setFlagEclipticParts(conf->value("viewing/flag_ecliptic_parts").toBool());
 	setFlagEclipticLabeled(conf->value("viewing/flag_ecliptic_labels").toBool());
+	setFlagEclipticDatesLabeled(conf->value("viewing/flag_ecliptic_dates_labels", true).toBool());
 	setFlagEclipticJ2000Line(conf->value("viewing/flag_ecliptic_J2000_line").toBool());
 	setFlagEclipticJ2000Parts(conf->value("viewing/flag_ecliptic_J2000_parts").toBool());
 	setFlagEclipticJ2000Labeled(conf->value("viewing/flag_ecliptic_J2000_labels").toBool());	
@@ -1951,6 +2080,7 @@ void GridLinesMgr::update(double deltaTime)
 	equatorJ2000Line->update(deltaTime);
 	fixedEquatorLine->update(deltaTime);
 	eclipticLine->update(deltaTime);
+	eclipticWithDateLine->update(deltaTime);
 	eclipticJ2000Line->update(deltaTime);
 	invariablePlaneLine->update(deltaTime);
 	solarEquatorLine->update(deltaTime);
@@ -2020,6 +2150,7 @@ void GridLinesMgr::draw(StelCore* core)
 		umbraCircle->draw(core);
 		eclGrid->draw(core);
 		eclipticLine->draw(core);
+		eclipticWithDateLine->draw(core);
 		precessionCircleN->draw(core);
 		precessionCircleS->draw(core);
 		colureLine_1->draw(core);
@@ -2067,6 +2198,7 @@ void GridLinesMgr::updateLabels()
 	equatorLine->updateLabel();
 	fixedEquatorLine->updateLabel();
 	eclipticLine->updateLabel();
+	eclipticWithDateLine->updateLabel();
 	eclipticJ2000Line->updateLabel();
 	invariablePlaneLine->updateLabel();
 	solarEquatorLine->updateLabel();
@@ -2557,6 +2689,7 @@ void GridLinesMgr::setFlagEclipticLine(const bool displayed)
 	if(displayed != eclipticLine->isDisplayed())
 	{
 		eclipticLine->setDisplayed(displayed);
+		eclipticWithDateLine->setDisplayed(displayed);
 		emit eclipticLineDisplayedChanged(displayed);
 	}
 }
@@ -2593,6 +2726,22 @@ bool GridLinesMgr::getFlagEclipticLabeled() const
 {
 	return eclipticLine->isLabeled();
 }
+
+//! Set flag for displaying Ecliptic Date partitions
+void GridLinesMgr::setFlagEclipticDatesLabeled(const bool displayed)
+{
+	if(displayed != eclipticWithDateLine->isLabeled())
+	{
+		eclipticWithDateLine->setPartitions(displayed);
+		eclipticWithDateLine->setLabeled(displayed);
+		emit eclipticDatesLabeledChanged(displayed);
+	}
+}
+//! Get flag for displaying Ecliptic Line partitions
+bool GridLinesMgr::getFlagEclipticDatesLabeled() const
+{
+	return eclipticWithDateLine->isLabeled();
+}
 Vec3f GridLinesMgr::getColorEclipticLine() const
 {
 	return eclipticLine->getColor();
@@ -2602,6 +2751,7 @@ void GridLinesMgr::setColorEclipticLine(const Vec3f& newColor)
 	if(newColor != eclipticLine->getColor())
 	{
 		eclipticLine->setColor(newColor);
+		eclipticWithDateLine->setColor(newColor); // One color for both!
 		emit eclipticLineColorChanged(newColor);
 	}
 }
@@ -3770,6 +3920,7 @@ void GridLinesMgr::setLineThickness(const float thickness)
 		equatorJ2000Line->setLineThickness(lineThickness);
 		fixedEquatorLine->setLineThickness(lineThickness);
 		eclipticLine->setLineThickness(lineThickness);
+		eclipticWithDateLine->setLineThickness(lineThickness);
 		eclipticJ2000Line->setLineThickness(lineThickness);
 		invariablePlaneLine->setLineThickness(lineThickness);
 		solarEquatorLine->setLineThickness(lineThickness);
@@ -3810,6 +3961,7 @@ void GridLinesMgr::setPartThickness(const float thickness)
 		equatorJ2000Line->setPartThickness(partThickness);
 		fixedEquatorLine->setPartThickness(partThickness);
 		eclipticLine->setPartThickness(partThickness);
+		eclipticWithDateLine->setPartThickness(partThickness);
 		eclipticJ2000Line->setPartThickness(partThickness);
 		//invariablePlaneLine->setPartThickness(partThickness);
 		solarEquatorLine->setPartThickness(partThickness);
@@ -3854,6 +4006,7 @@ void GridLinesMgr::setFontSizeFromApp(int size)
 	equatorJ2000Line->setFontSize(lineFontSize);
 	fixedEquatorLine->setFontSize(lineFontSize);
 	eclipticLine->setFontSize(lineFontSize);
+	eclipticWithDateLine->setFontSize(lineFontSize);
 	eclipticJ2000Line->setFontSize(lineFontSize);
 	invariablePlaneLine->setFontSize(lineFontSize);
 	solarEquatorLine->setFontSize(lineFontSize);

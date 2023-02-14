@@ -81,11 +81,12 @@ class GridLinesMgr : public StelModule
 	Q_PROPERTY(bool eclipticLineDisplayed		READ getFlagEclipticLine	WRITE setFlagEclipticLine		NOTIFY eclipticLineDisplayedChanged)
 	Q_PROPERTY(bool eclipticPartsDisplayed		READ getFlagEclipticParts	WRITE setFlagEclipticParts		NOTIFY eclipticPartsDisplayedChanged)
 	Q_PROPERTY(bool eclipticPartsLabeled		READ getFlagEclipticLabeled	WRITE setFlagEclipticLabeled		NOTIFY eclipticPartsLabeledChanged)
+	Q_PROPERTY(bool eclipticDatesLabeled           READ getFlagEclipticDatesLabeled WRITE setFlagEclipticDatesLabeled	NOTIFY eclipticDatesLabeledChanged)
 	Q_PROPERTY(Vec3f eclipticLineColor		READ getColorEclipticLine	WRITE setColorEclipticLine		NOTIFY eclipticLineColorChanged)
 
 	Q_PROPERTY(bool eclipticJ2000LineDisplayed	READ getFlagEclipticJ2000Line	 WRITE setFlagEclipticJ2000Line		NOTIFY eclipticJ2000LineDisplayedChanged)
 	Q_PROPERTY(bool eclipticJ2000PartsDisplayed	READ getFlagEclipticJ2000Parts	 WRITE setFlagEclipticJ2000Parts	NOTIFY eclipticJ2000PartsDisplayedChanged)
-	Q_PROPERTY(bool eclipticJ2000PartsLabeled		READ getFlagEclipticJ2000Labeled WRITE setFlagEclipticJ2000Labeled	NOTIFY eclipticJ2000PartsLabeledChanged)
+	Q_PROPERTY(bool eclipticJ2000PartsLabeled	READ getFlagEclipticJ2000Labeled WRITE setFlagEclipticJ2000Labeled	NOTIFY eclipticJ2000PartsLabeledChanged)
 	Q_PROPERTY(Vec3f eclipticJ2000LineColor		READ getColorEclipticJ2000Line	 WRITE setColorEclipticJ2000Line	NOTIFY eclipticJ2000LineColorChanged)
 
 	Q_PROPERTY(bool invariablePlaneLineDisplayed	READ getFlagInvariablePlaneLine	 WRITE setFlagInvariablePlaneLine	NOTIFY invariablePlaneLineDisplayedChanged)
@@ -453,6 +454,11 @@ public slots:
 	void setFlagEclipticLabeled(const bool displayed);
 	//! Accessor for displaying Ecliptic line partition labels.
 	bool getFlagEclipticLabeled() const;
+	//! Setter for displaying Ecliptic line partition labels of dates for Solar position in the current year.
+	void setFlagEclipticDatesLabeled(const bool displayed);
+	//! Accessor for displaying Ecliptic line partition labels of dates for Solar position in the current year.
+	bool getFlagEclipticDatesLabeled() const;
+
 	//! Get the current color of the Ecliptic Line.
 	Vec3f getColorEclipticLine() const;
 	//! Set the color of the Ecliptic Line.
@@ -1001,6 +1007,7 @@ signals:
 	void eclipticLineDisplayedChanged(const bool displayed);
 	void eclipticPartsDisplayedChanged(const bool displayed);
 	void eclipticPartsLabeledChanged(const bool displayed);
+	void eclipticDatesLabeledChanged(const bool displayed);
 	void eclipticLineColorChanged(const Vec3f & newColor);
 	void invariablePlaneLineDisplayedChanged(const bool displayed);
 	//void invariablePlanePartsDisplayedChanged(const bool displayed);
@@ -1114,6 +1121,7 @@ private:
 	SkyLine * equatorJ2000Line;		// Celestial Equator line of J2000
 	SkyLine * fixedEquatorLine;		// Fixed Celestial Equator line (hour angles)
 	SkyLine * eclipticLine;			// Ecliptic line
+	SkyLine * eclipticWithDateLine;		// Ecliptic line (line actually invisible!) with date partitions for the current year indicating Solar position at midnight
 	SkyLine * eclipticJ2000Line;		// Ecliptic line of J2000
 	SkyLine * invariablePlaneLine;		// Invariable Plane of the Solar System (WGCCRE2015 report)
 	SkyLine * solarEquatorLine;		// Projected Solar equator (WGCCRE2015 report)

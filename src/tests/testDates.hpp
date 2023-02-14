@@ -36,6 +36,8 @@ private slots:
 	void testFixedFromGregorian();
 	void testWeekdays();
 	void testDatesFromJD();
+	void testDayInYear();
+	void testDateFromDayYear();
 	void benchmarkOldGetDateFromJulianDay();
 	void benchmarkGetDateFromJulianDayFloatingPoint();
 	void benchmarkGetDateFromJulianDay();

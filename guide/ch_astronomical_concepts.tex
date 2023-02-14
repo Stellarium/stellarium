@@ -270,6 +270,7 @@ coordinates in the Markings dialog (\ref{sec:gui:view:markings}).
 
 The Earth's orbit around the Sun, i.e., the \indexterm{ecliptic},
 defines the ``equatorial line'' of this coordinate system, which is traditionally used when computing the coordinates for planets because of their close proximity to this line.
+Mirroring Earth's motion, the Sun is seen to move along the ecliptic. 
 
 The zero point of \indexterm{ecliptical longitude} $\lambda$ is the
 same as for equatorial coordinates (\Aries), and the \indexterm{ecliptical
@@ -286,11 +287,12 @@ over a period of almost 26.000 years (see section~\ref{sec:Concepts:Precession})
 In addition, \indexterm[obliquity, ecliptic]{ecliptic obliquity} against the equatorial coordinates,
 which mirrors the Earth's axial tilt, slowly changes.
 
-Therefore, also for ecliptical coordinates is is required to specify
+Therefore, also for ecliptical coordinates it is required to specify
 which date (epoch) the coordinates refer to.  Stellarium can draw grids
 for two epochs. Use the \key{,} key to draw the \indexterm{ecliptic}
 for the simulation time. The Markings dialog
-(\ref{sec:gui:view:markings}) allows you to also show a line for epoch
+(\ref{sec:gui:view:markings}) allows you to add date marks to the ecliptic 
+line \newFeature{23.1} and also show a line for epoch
 J2000.0 and grids for the ecliptical coordinates for current epoch and
 epoch J2000.0. You can assign your own shortcut keys
 (section~\ref{sec:gui:help:hotkeys}) if you frequently operate with
@@ -309,7 +311,7 @@ see that these circles vary in size, reflecting the changes in
 ecliptic \indexterm[obliquity, ecliptic]{obliquity}. The real track of where Earth's axis is pointing forms an open helical loop.
 
 The inner planets are best observed when their apparent distance from
-the Sun, or \indexterm{elongation} reaches a maximum. Unfortunately
+the Sun, or \indexterm{elongation}, reaches a maximum. Unfortunately
 there are two definitions for elongation, though:
 \begin{description}
 \item[$\psi$] angular distance on the sphere. This is today the most widely used definition.
