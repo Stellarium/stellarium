@@ -709,12 +709,12 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 		static float vertexData[8];
 		// compute the vertex coordinates applying the translation and the rotation
 		static const float vertexBase[] = {0., 0., 1., 0., 0., 1., 1., 1.};
-		if (std::fabs(angleDeg)>1.f*static_cast<float>(M_PI)/180.f)
+		if (std::fabs(angleDeg)>1.f*M_PI_180f)
 		{
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-			const float cosr = std::cos(angleDeg * static_cast<float>(M_PI/180.));
-			const float sinr = std::sin(angleDeg * static_cast<float>(M_PI/180.));
+			const float cosr = std::cos(angleDeg * M_PI_180f);
+			const float sinr = std::sin(angleDeg * M_PI_180f);
 			for (int i = 0; i < 8; i+=2)
 			{
 				vertexData[i]   = int(x + (tex->size.width()*vertexBase[i]+xshift) * cosr - (tex->size.height()*vertexBase[i+1]+yshift) * sinr);
@@ -865,14 +865,13 @@ void StelPainter::drawSmallCircleVertexArray()
 	smallCircleColorArray.resize(0);
 }
 
-static Vec3d pt1, pt2;
 void StelPainter::drawGreatCircleArc(const Vec3d& start, const Vec3d& stop, const SphericalCap* clippingCap,
 	void (*viewportEdgeIntersectCallback)(const Vec3d& screenPos, const Vec3d& direction, void* userData), void* userData)
  {
 	 if (clippingCap)
 	 {
-		 pt1=start;
-		 pt2=stop;
+		 Vec3d pt1=start;
+		 Vec3d pt2=stop;
 		 if (clippingCap->clipGreatCircle(pt1, pt2))
 		 {
 			drawSmallCircleArc(pt1, pt2, Vec3d(0.), viewportEdgeIntersectCallback, userData);
