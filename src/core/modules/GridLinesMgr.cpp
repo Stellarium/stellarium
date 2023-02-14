@@ -252,6 +252,9 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 	const bool useOldAzimuth = StelApp::getInstance().getFlagSouthAzimuthUsage();
 	const float ppx = static_cast<float>(d->sPainter->getProjector()->getDevicePixelsPerPixel());
 
+	const int viewportWidth  = d->sPainter->getProjector()->getViewportWidth();
+	const int viewportHeight = d->sPainter->getProjector()->getViewportHeight();
+
 	QString text;
 	if (d->text.isEmpty())
 	{
@@ -358,6 +361,9 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 	Vec3f direc=direction.toVec3f();	
 	direc.normalize();	
 	float angleDeg = std::atan2(-direc[1], -direc[0])*M_180_PIf;
+	// DEBUG INFO ONLY!
+	//text.append(QString(" <:%1° %2/%3 (%4x%5)").arg(QString::number(angleDeg, 'f', 2), QString::number(screenPos[0], 'f', 2), QString::number(screenPos[1], 'f', 2),
+	//		QString::number(viewportWidth),	QString::number(viewportHeight)));
 	float xshift=6.f;
 	float yshift=6.f;
 	if (angleDeg>90.f || angleDeg<-90.f)
@@ -365,10 +371,51 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 		angleDeg+=180.f;
 		xshift=-(static_cast<float>(d->sPainter->getFontMetrics().boundingRect(text).width()) + xshift*ppx);
 	}
+	// Tweak edges with two ideas:
+	// xshift is a left-right-shift after text rotation, i.e. along text direction --> SEEMS ENOUGH!
+	// edgeOffset is a more radical change in string placement. Test here to see what the better solution is.
+	Vec2f edgeOffset(0.f);
+	// Left edge
+	if ((fabs(screenPos[0])<1.) && (angleDeg>0.f ))
+	{
+		//text.append(" - LeftEdge"); // DEBUG ONLY!
+		xshift+=0.5f*tan(angleDeg*M_PI_180f)*d->sPainter->getFontMetrics().boundingRect(text).height();
+		//edgeOffset[0]=qMin(0.5f, tan(angleDeg*M_PI_180f))*d->sPainter->getFontMetrics().boundingRect(text).height();
+		//edgeOffset[1]=qMin(2.0f, tan(angleDeg*M_PI_180f))*d->sPainter->getFontMetrics().boundingRect(text).height(); // 5?
+		//text.append(edgeOffset.toString());
+	}
+	// Right edge
+	else if ((fabs(screenPos[0]-viewportWidth)<1.) && (angleDeg>0.f ))
+	{
+		//text.append(" - RightEdge"); // DEBUG ONLY!
+		//xshift*=(1.+1.f/tan(angleDeg*M_PI_180f));
+		xshift+=0.5f*tan(angleDeg*M_PI_180f)*d->sPainter->getFontMetrics().boundingRect(text).height();
+		//edgeOffset[0]=qMin(0.5f, tan(angleDeg*M_PI_180f))*d->sPainter->getFontMetrics().boundingRect(text).height();
+		//edgeOffset[1]=qMin(2.0f, -tan(angleDeg*M_PI_180f))*d->sPainter->getFontMetrics().boundingRect(text).height(); // 5?
+		//text.append(edgeOffset.toString());
+	}
+	else if ((fabs(screenPos[1])<1.) && (angleDeg<0.f && angleDeg>-75.f))
+	{
+		text.append(" - BottomEdge"); // DEBUG ONLY!
+		//xshift*=(1.+1.f/tan(angleDeg*M_PI_180f));
+		edgeOffset[0]=qMin(5.0f, -1./tan(angleDeg*M_PI_180f))*d->sPainter->getFontMetrics().boundingRect(text).height();
+		edgeOffset[1]=-qMin(0.5f, -1./tan(angleDeg*M_PI_180f))*d->sPainter->getFontMetrics().boundingRect(text).height();
+		text.append(edgeOffset.toString());
+	}
+	else if ((fabs(screenPos[1]-viewportHeight)<1.)) // TOP
+	{
+		const float sign = angleDeg<-90.f ? 0.5f : -0.5f;
+		//text.append(" - TopEdge"); // DEBUG ONLY!
+		//xshift*=(1.+1.f/tan(angleDeg*M_PI_180f));
+		xshift += sign * (1./tan(angleDeg*M_PI_180f))*d->sPainter->getFontMetrics().boundingRect(text).height();
+		//edgeOffset[0]=qMin(0.5f, tan(angleDeg*M_PI_180f))*d->sPainter->getFontMetrics().boundingRect(text).height();
+		//edgeOffset[1]=qMin(2.0f, -tan(angleDeg*M_PI_180f))*d->sPainter->getFontMetrics().boundingRect(text).height(); // 5?
+		//text.append(edgeOffset.toString());
+	}
 
-	d->sPainter->drawText(static_cast<float>(screenPos[0]), static_cast<float>(screenPos[1]), text, angleDeg, xshift*ppx, yshift*ppx);
+	d->sPainter->drawText(static_cast<float>(screenPos[0])+edgeOffset[0], static_cast<float>(screenPos[1])+edgeOffset[1], text, angleDeg, xshift*ppx, yshift*ppx);
 	d->sPainter->setColor(tmpColor);
-	d->sPainter->setBlending(true);
+	//d->sPainter->setBlending(true); // This should have been true on entry, and we don't change it, why set it here?
 }
 
 //! Draw the sky grid in the current frame
