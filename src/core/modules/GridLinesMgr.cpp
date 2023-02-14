@@ -680,7 +680,8 @@ void SkyLine::computeEclipticDatePartitions(int year)
 		int m, d;
 		StelUtils::getDateFromJulianDay(core->getJD(), &year, &m, &d);
 	}
-	for (int day=1; day <= (StelUtils::isLeapYear(year) ? 366 : 365); day++)
+	const int lastDoY = (StelUtils::isLeapYear(year) ? 366 : 365);
+	for (int day=1; day <= lastDoY; day++)
 	{
 		const Vec3i date=StelUtils::dateFromDayYear(day, year);
 		double jd;
@@ -702,12 +703,12 @@ void SkyLine::computeEclipticDatePartitions(int year)
 		if ((year==1582) && (date[1]==10))
 		{
 			// Gregorian calendar reform. Duplicate ticks are harmless, but we must tweak date labels.
-			if (QList<int>({1, 4, 15, 20, 25}).contains(date[2]))
+			if (QList<int>{1, 4, 15, 20, 25}.contains(date[2]))
 				label=QString("%1.%2").arg(QString::number(date[2]), StelLocaleMgr::romanMonthName(date[1]));
 		}
 		else
 		{
-			if (QList<int>({1, 5, 10, 15, 20, 25}).contains(date[2]))
+			if (QList<int>{1, 5, 10, 15, 20, 25}.contains(date[2]))
 				label=QString("%1.%2").arg(QString::number(date[2]), StelLocaleMgr::romanMonthName(date[1]));
 		}
 		eclipticOnDatePartitions.insert(Vec3d(lng, aberration, deltaPsi), label);
@@ -1229,11 +1230,11 @@ void SkyLine::draw(StelCore *core) const
 
 				sPainter.drawGreatCircleArc(start, end, Q_NULLPTR, Q_NULLPTR, Q_NULLPTR);
 
-				if ((label.length()>0) && (
-					(currentFoV<60.) // all labels
-					|| ((currentFoV<=180.) && !label.contains("5"))) // 1.MM/10.MM/20.MM
-					|| ((label.startsWith("1."))) // in any case
-					)
+				if (label.length()>0 && (
+					currentFoV<60. // all labels
+					|| (currentFoV<=180. && !label.contains("5")) // 1.MM/10.MM/20.MM
+					|| label.startsWith("1.") // in any case
+					))
 				{
 					Vec3d screenPosTgt, screenPosTgtL;
 					prj->project(start, screenPosTgt);
