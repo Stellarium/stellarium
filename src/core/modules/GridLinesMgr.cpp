@@ -361,9 +361,6 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 	Vec3f direc=direction.toVec3f();	
 	direc.normalize();	
 	float angleDeg = std::atan2(-direc[1], -direc[0])*M_180_PIf;
-	// DEBUG INFO ONLY!
-	//text.append(QString(" <:%1° %2/%3 (%4x%5)").arg(QString::number(angleDeg, 'f', 2), QString::number(screenPos[0], 'f', 2), QString::number(screenPos[1], 'f', 2),
-	//		QString::number(viewportWidth),	QString::number(viewportHeight)));
 	float xshift=6.f;
 	float yshift=6.f;
 	if (angleDeg>90.f || angleDeg<-90.f)
@@ -371,12 +368,15 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 		angleDeg+=180.f;
 		xshift=-(static_cast<float>(d->sPainter->getFontMetrics().boundingRect(text).width()) + xshift*ppx);
 	}
+	// DEBUG INFO ONLY!
+	//text=QString(" <:%1°").arg(QString::number(angleDeg, 'f', 2));
+	//text.append(QString(" <:%1° %2/%3 (%4x%5)").arg(QString::number(angleDeg, 'f', 2), QString::number(screenPos[0], 'f', 2), QString::number(screenPos[1], 'f', 2),
+	//		QString::number(viewportWidth),	QString::number(viewportHeight)));
 	// Tweak edges with two ideas:
 	// xshift is a left-right-shift after text rotation, i.e. along text direction --> SEEMS ENOUGH!
 	// edgeOffset is a more radical change in string placement. Test here to see what the better solution is.
 	Vec2f edgeOffset(0.f);
-	// Left edge
-	if ((fabs(screenPos[0])<1.) && (angleDeg>0.f ))
+	if ((fabs(screenPos[0])<1.) && (angleDeg>0.f )) // LEFT
 	{
 		//text.append(" - LeftEdge"); // DEBUG ONLY!
 		xshift+=0.5f*tan(angleDeg*M_PI_180f)*d->sPainter->getFontMetrics().boundingRect(text).height();
@@ -384,23 +384,14 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 		//edgeOffset[1]=qMin(2.0f, tan(angleDeg*M_PI_180f))*d->sPainter->getFontMetrics().boundingRect(text).height(); // 5?
 		//text.append(edgeOffset.toString());
 	}
-	// Right edge
-	else if ((fabs(screenPos[0]-viewportWidth)<1.) && (angleDeg>0.f ))
+	else if ((fabs(screenPos[0]-viewportWidth)<1.) && (angleDeg>180.f )) // RIGHT
 	{
-		//text.append(" - RightEdge"); // DEBUG ONLY!
+		//text.append("-RightEdge"); // DEBUG ONLY!
 		//xshift*=(1.+1.f/tan(angleDeg*M_PI_180f));
-		xshift+=0.5f*tan(angleDeg*M_PI_180f)*d->sPainter->getFontMetrics().boundingRect(text).height();
+		xshift += 0.5 * tan(angleDeg*M_PI_180f)*d->sPainter->getFontMetrics().boundingRect(text).height();
 		//edgeOffset[0]=qMin(0.5f, tan(angleDeg*M_PI_180f))*d->sPainter->getFontMetrics().boundingRect(text).height();
 		//edgeOffset[1]=qMin(2.0f, -tan(angleDeg*M_PI_180f))*d->sPainter->getFontMetrics().boundingRect(text).height(); // 5?
 		//text.append(edgeOffset.toString());
-	}
-	else if ((fabs(screenPos[1])<1.) && (angleDeg<0.f && angleDeg>-75.f))
-	{
-		text.append(" - BottomEdge"); // DEBUG ONLY!
-		//xshift*=(1.+1.f/tan(angleDeg*M_PI_180f));
-		edgeOffset[0]=qMin(5.0f, -1./tan(angleDeg*M_PI_180f))*d->sPainter->getFontMetrics().boundingRect(text).height();
-		edgeOffset[1]=-qMin(0.5f, -1./tan(angleDeg*M_PI_180f))*d->sPainter->getFontMetrics().boundingRect(text).height();
-		text.append(edgeOffset.toString());
 	}
 	else if ((fabs(screenPos[1]-viewportHeight)<1.)) // TOP
 	{
@@ -412,6 +403,7 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 		//edgeOffset[1]=qMin(2.0f, -tan(angleDeg*M_PI_180f))*d->sPainter->getFontMetrics().boundingRect(text).height(); // 5?
 		//text.append(edgeOffset.toString());
 	}
+	// It seems bottom edge is always OK!
 
 	d->sPainter->drawText(static_cast<float>(screenPos[0])+edgeOffset[0], static_cast<float>(screenPos[1])+edgeOffset[1], text, angleDeg, xshift*ppx, yshift*ppx);
 	d->sPainter->setColor(tmpColor);
