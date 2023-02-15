@@ -818,7 +818,7 @@ QSurfaceFormat StelMainView::getDesiredGLFormat(QSettings* configuration)
 #else
 	const bool vsdef = true;
 #endif
-	if (configuration->value("video/vsync", vsdef).toBool())
+	if (configuration && configuration->value("video/vsync", vsdef).toBool())
 		fmt.setSwapInterval(1);
 	else
 		fmt.setSwapInterval(0);
@@ -1631,11 +1631,15 @@ void StelMainView::doScreenshot(void)
 	// HiDPI screens interfere, and the viewing angle has to be maintained.
 	// First, image size:
 	glWidget->makeCurrent();
-	float pixelRatio = 1.f; // static_cast<float>(QOpenGLContext::currentContext()->screen()->devicePixelRatio());
+	const bool nightModeWasEnabled=nightModeEffect->isEnabled();
+	nightModeEffect->setEnabled(false);
+	const float pixelRatio = static_cast<float>(QOpenGLContext::currentContext()->screen()->devicePixelRatio());
 	int imgWidth =static_cast<int>(stelScene->width());
 	int imgHeight=static_cast<int>(stelScene->height());
-	bool nightModeWasEnabled=nightModeEffect->isEnabled();
-	nightModeEffect->setEnabled(false);
+	// Screen scaling makes things worse again.
+	int finalImgWidth  = int(static_cast<float>(imgWidth)  * pixelRatio);
+	int finalImgHeight = int(static_cast<float>(imgHeight) * pixelRatio);
+
 	if (flagUseCustomScreenshotSize)
 	{
 		// Borrowed from Scenery3d renderer: determine maximum framebuffer size as minimum of texture, viewport and renderbuffer size
@@ -1672,8 +1676,8 @@ void StelMainView::doScreenshot(void)
 			int maximumFramebufferSize = qMin(texSize,qMin(rbSize,qMin(viewportSize[0],viewportSize[1])));
 			qCDebug(mainview)<<"Maximum framebuffer size:"<<maximumFramebufferSize;
 
-			imgWidth =qMin(maximumFramebufferSize, customScreenshotWidth);
-			imgHeight=qMin(maximumFramebufferSize, customScreenshotHeight);
+			finalImgWidth =qMin(maximumFramebufferSize, customScreenshotWidth);
+			finalImgHeight=qMin(maximumFramebufferSize, customScreenshotHeight);
 		}
 		else
 		{
@@ -1681,6 +1685,7 @@ void StelMainView::doScreenshot(void)
 			return;
 		}
 	}
+
 	// The texture format depends on used GL version. RGB is fine on OpenGL. on GLES, we must use RGBA and circumvent problems with a few more steps.
 	bool isGLES=(QOpenGLContext::currentContext()->format().renderableType() == QSurfaceFormat::OpenGLES);
 
@@ -1689,16 +1694,17 @@ void StelMainView::doScreenshot(void)
 	fbFormat.setInternalTextureFormat(isGLES ? GL_RGBA : GL_RGB); // try to avoid transparent background!
 	if(const auto multisamplingLevel = configuration->value("video/multisampling", 0).toInt())
         fbFormat.setSamples(multisamplingLevel);
-	QOpenGLFramebufferObject * fbObj = new QOpenGLFramebufferObject(static_cast<int>(static_cast<float>(imgWidth) * pixelRatio), static_cast<int>(static_cast<float>(imgHeight) * pixelRatio), fbFormat);
+	QOpenGLFramebufferObject * fbObj = new QOpenGLFramebufferObject(finalImgWidth, finalImgHeight, fbFormat);
 	fbObj->bind();
 	// Now the painter has to be convinced to paint to the potentially larger image frame.
-	QOpenGLPaintDevice fbObjPaintDev(static_cast<int>(static_cast<float>(imgWidth) * pixelRatio), static_cast<int>(static_cast<float>(imgHeight) * pixelRatio));
+	QOpenGLPaintDevice fbObjPaintDev(finalImgWidth, finalImgHeight);
 
 	// It seems the projector has its own knowledge about image size. We must adjust fov and image size, but reset afterwards.
 	StelCore *core=StelApp::getInstance().getCore();
 	StelProjector::StelProjectorParams pParams=core->getCurrentStelProjectorParams();
 	StelProjector::StelProjectorParams sParams=pParams;
-	//qCDebug(mainview) << "Screenshot Viewport: x" << pParams.viewportXywh[0] << "/y" << pParams.viewportXywh[1] << "/w" << pParams.viewportXywh[2] << "/h" << pParams.viewportXywh[3];
+	qCDebug(mainview) << "Screenshot Viewport: x" << pParams.viewportXywh[0] << "/y" << pParams.viewportXywh[1] << "/w" << pParams.viewportXywh[2] << "/h" << pParams.viewportXywh[3];
+	qCDebug(mainview) << "Screenshot: setting dimensions to" << imgWidth << "x" << imgHeight;
 	sParams.viewportXywh[2]=imgWidth;
 	sParams.viewportXywh[3]=imgHeight;
 
@@ -1708,6 +1714,7 @@ void StelMainView::doScreenshot(void)
 #else
 	customScreenshotMagnification=static_cast<float>(imgHeight)/static_cast<float>(qApp->screens().at(qApp->desktop()->screenNumber())->geometry().height());
 #endif
+	qCDebug(mainview) << "Screenshot: customScreenshotMagnification" << customScreenshotMagnification;
 	sParams.viewportCenter.set(0.0+(0.5+pParams.viewportCenterOffset.v[0])*imgWidth, 0.0+(0.5+pParams.viewportCenterOffset.v[1])*imgHeight);
 	sParams.viewportFovDiameter = qMin(imgWidth,imgHeight);
 	core->setCurrentStelProjectorParams(sParams);
