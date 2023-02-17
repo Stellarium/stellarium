@@ -20,6 +20,10 @@ SET_PROPERTY(GLOBAL PROPERTY USE_FOLDERS ON)
 
 ########### Project name ###########
 PROJECT(Stellarium C CXX)
+
+SET(STELLARIUM_RELEASE_BUILD 0 CACHE BOOL "Set 1 to build as an official release (0 for development snapshots).")
+SET(STELLARIUM_RELEASE_NUMBER 0)
+
 ########### Detect Qt version
 SET(ENABLE_QT6 1 CACHE BOOL "Whether to try building with Qt6. If Qt6 is not found, Qt5 will be used.")
 IF(ENABLE_QT6)
@@ -32,28 +36,34 @@ ENDIF()
 # Activate this to error on all things deprecated in 5.15
 #add_compile_definitions("QT_DISABLE_DEPRECATED_BEFORE=0x050F00")
 
-# If Qt6, set series number to 1.
-IF(Qt6_FOUND)
-     SET(STELLARIUM_MAJOR 1)
+# two last digits of the current year
+STRING(TIMESTAMP SHORTYEAR "%y")
+MATH(EXPR STELLARIUM_MAJOR_DIGIT "${SHORTYEAR} + 0" OUTPUT_FORMAT DECIMAL)
+# Version of Stellarium has format YY.V.YD, where:
+# -- YY (MAJOR) - two last digits of the year of release
+# -- V  (MINOR) - version of the release (0 is used before first release)
+# -- YD (PATCH) - 0 for releases and the day of the current year for snapshots
+# Example: first release in year 2023 has version 23.1.0 and short (public) version 23.1
+SET(STELLARIUM_MAJOR ${STELLARIUM_MAJOR_DIGIT})
+SET(STELLARIUM_MINOR ${STELLARIUM_RELEASE_NUMBER})
+IF(STELLARIUM_RELEASE_BUILD)
+    ADD_DEFINITIONS(-DSTELLARIUM_RELEASE_BUILD)
+    SET(STELLARIUM_PATCH 0)
 ELSE()
-     SET(STELLARIUM_MAJOR 0)
+    ########### Get revision number for non-release builds ###########
+    STRING(TIMESTAMP CDNUMBER "%j")
+    MATH(EXPR STELLARIUM_PATCH_DIGIT "${CDNUMBER} + 0" OUTPUT_FORMAT DECIMAL)
+    SET(STELLARIUM_PATCH ${STELLARIUM_PATCH_DIGIT})
 ENDIF()
-# Use integer versions instead of strings for easier handling if required
-SET(STELLARIUM_MINOR 22)
-SET(STELLARIUM_PATCH 5)
+
 ADD_DEFINITIONS(
      -DSTELLARIUM_MAJOR=${STELLARIUM_MAJOR}
      -DSTELLARIUM_MINOR=${STELLARIUM_MINOR}
      -DSTELLARIUM_PATCH=${STELLARIUM_PATCH}
 )
 SET(VERSION "${STELLARIUM_MAJOR}.${STELLARIUM_MINOR}.${STELLARIUM_PATCH}")
-# Public version has format YY.V, where:
-# -- YY - two last digits of the year of release
-# -- V  - version of the release
-# Example: first release in year 2023 has version 1.23.0 and public version 23.1
-MATH(EXPR STELLARIUM_V "${STELLARIUM_PATCH} + 1" OUTPUT_FORMAT DECIMAL)
-#SET(STELLARIUM_PUBLIC_VERSION "${STELLARIUM_MINOR}.${STELLARIUM_V}")
-SET(STELLARIUM_PUBLIC_VERSION "1.2")
+SET(STELLARIUM_SERIES "${STELLARIUM_MAJOR}.0")
+SET(STELLARIUM_PUBLIC_VERSION "${STELLARIUM_MAJOR}.${STELLARIUM_MINOR}")
 SET(PACKAGE stellarium)
 STRING(TIMESTAMP CURRENTYEAR "%Y")
 SET(COPYRIGHT_YEARS "2000-${CURRENTYEAR}")
@@ -76,6 +86,7 @@ ADD_DEFINITIONS(-DPACKAGE_VERSION="${PACKAGE_VERSION}")
 ADD_DEFINITIONS(-DCOPYRIGHT_YEARS="${COPYRIGHT_YEARS}")
 ADD_DEFINITIONS(-DSTELLARIUM_SOURCE_DIR="${PROJECT_SOURCE_DIR}")
 ADD_DEFINITIONS(-DSTELLARIUM_PUBLIC_VERSION="${STELLARIUM_PUBLIC_VERSION}")
+ADD_DEFINITIONS(-DSTELLARIUM_SERIES="${STELLARIUM_SERIES}")
 
 # Qt 5.15+ is preferred as it provides version-less CMake functions (QT_WRAP_UI etc.)
 IF(Qt6_FOUND)
@@ -140,19 +151,11 @@ IF(${CMAKE_BUILD_TYPE} MATCHES "Debug")
      ENDIF()
 ENDIF()
 
-SET(STELLARIUM_RELEASE_BUILD 0 CACHE BOOL "Set 1 to build as an official release (0 for development snapshots).")
 IF(STELLARIUM_RELEASE_BUILD)
-     ADD_DEFINITIONS(-DSTELLARIUM_RELEASE_BUILD)
-     SET(SERIES "${STELLARIUM_MINOR}.x")
-     SET(WINDOWS_PACKAGE_VERSION "${VERSION}.0")
      SET(ISS_PACKAGE_VERSION "${STELLARIUM_PUBLIC_VERSION}")
-     SET(STELLARIUM_BUNDLE_VERSION "${STELLARIUM_PUBLIC_VERSION}")
      SET(STELLARIUM_BUIDING_VERSION "${STELLARIUM_PUBLIC_VERSION}")
 ELSE()
-     SET(SERIES "head")
-     ########### Get revision number for non-release builds ###########
-     STRING(TIMESTAMP CDNUMBER "%j")
-     SET(WINDOWS_PACKAGE_VERSION "${VERSION}.${CDNUMBER}")
+     SET(STELLARIUM_SERIES "head")
      FIND_PACKAGE(Git QUIET)
      IF(Git_FOUND)
           MESSAGE(STATUS "Found Git ${GIT_VERSION_STRING}")
@@ -162,39 +165,21 @@ ELSE()
           EXECUTE_PROCESS(COMMAND ${GIT_EXECUTABLE} log -1 --pretty=format:%h WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} TIMEOUT 30 OUTPUT_VARIABLE GIT_REVISION OUTPUT_STRIP_TRAILING_WHITESPACE ERROR_VARIABLE GIT_ERROR)
           # get the name of latest annotated tag
           EXECUTE_PROCESS(COMMAND ${GIT_EXECUTABLE} describe --tags --abbrev=0 WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} TIMEOUT 30 OUTPUT_VARIABLE GIT_TAGS OUTPUT_STRIP_TRAILING_WHITESPACE ERROR_VARIABLE GIT_ERROR)
-          # get the count of commits between latest release (we use tags for releases) and current HEAD
-          IF(WIN32)
-               EXECUTE_PROCESS(COMMAND ${GIT_EXECUTABLE} log ${GIT_TAGS}..HEAD --pretty=oneline COMMAND find /c /v "" WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} TIMEOUT 30 OUTPUT_VARIABLE GIT_COMMITS OUTPUT_STRIP_TRAILING_WHITESPACE ERROR_VARIABLE GIT_ERROR)
-          ELSE()
-               EXECUTE_PROCESS(COMMAND ${GIT_EXECUTABLE} log ${GIT_TAGS}..HEAD --pretty=oneline COMMAND wc -l WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} TIMEOUT 30 OUTPUT_VARIABLE GIT_COMMITS OUTPUT_STRIP_TRAILING_WHITESPACE ERROR_VARIABLE GIT_ERROR)
-          ENDIF()
-          # remove all whitespaces
-          STRING(REPLACE " " "" GIT_COMMITS "${GIT_COMMITS}")
-          IF(GIT_REVISION)
+	  IF(GIT_REVISION)
                # Let's use short hash in all cases
                STRING(SUBSTRING ${GIT_REVISION} 0 7 REVISION)
                SET(PACKAGE_VERSION "${VERSION}-${REVISION}")
-	       SET(ISS_PACKAGE_VERSION "${STELLARIUM_PUBLIC_VERSION}-${REVISION}")
-               ADD_DEFINITIONS(-DGIT_REVISION="${REVISION}")
+	       ADD_DEFINITIONS(-DGIT_REVISION="${REVISION}")
                ADD_DEFINITIONS(-DGIT_BRANCH="${GIT_BRANCH}")
-               # check to use --depth param...
-               IF(${GIT_COMMITS} EQUAL 0)
-                    # Append the day of the current year to the number 1 as string
-                    # because we never reaches 1000 commits per 1/4 year
-                    STRING(TIMESTAMP GIT_COMMITS "1%j")
-               ENDIF()
-               # better way to numbering
-	       SET(WINDOWS_PACKAGE_VERSION "${VERSION}.${GIT_COMMITS}")
-          ENDIF()
+	  ENDIF()
      ELSE()
           STRING(TIMESTAMP TODAY "%j%H%M")
 	  SET(PACKAGE_VERSION "${VERSION}-${TODAY}")
-	  SET(ISS_PACKAGE_VERSION "${STELLARIUM_PUBLIC_VERSION}-${TODAY}")
-          ADD_DEFINITIONS(-DGIT_REVISION="${TODAY}")
+	  ADD_DEFINITIONS(-DGIT_REVISION="${TODAY}")
           ADD_DEFINITIONS(-DGIT_BRANCH="tarball")
      ENDIF()
+     SET(ISS_PACKAGE_VERSION "${PACKAGE_VERSION}")
      SET(STELLARIUM_BUIDING_VERSION "${STELLARIUM_PUBLIC_VERSION}+")
-     SET(STELLARIUM_BUNDLE_VERSION "${STELLARIUM_PUBLIC_VERSION}+")
 ENDIF()
 MESSAGE(STATUS "Building ${PROJECT_NAME} ${STELLARIUM_BUIDING_VERSION} (v${PACKAGE_VERSION}; Mode: ${CMAKE_BUILD_TYPE})")
 
@@ -870,11 +855,8 @@ IF(WIN32)
      ### Generate a VersionInfo file
      #######################################################
 
-     IF(STELLARIUM_RELEASE_BUILD)
-	  SET(PACKAGE_VERSION_RC "${PACKAGE_VERSION},0")
-     ELSE()
-          SET(PACKAGE_VERSION_RC "${WINDOWS_PACKAGE_VERSION}")
-     ENDIF()
+     SET(WINDOWS_PACKAGE_VERSION "${VERSION}.0")
+     SET(PACKAGE_VERSION_RC "${WINDOWS_PACKAGE_VERSION}")
      STRING(REGEX REPLACE "([.]+)" "," PACKAGE_VERSION_RC ${PACKAGE_VERSION_RC})
      CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/cmake/stellarium.rc.cmake ${CMAKE_CURRENT_BINARY_DIR}/stellarium.rc @ONLY)
 
