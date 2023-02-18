@@ -43,7 +43,8 @@ MATH(EXPR STELLARIUM_MAJOR_DIGIT "${SHORTYEAR} + 0" OUTPUT_FORMAT DECIMAL)
 # -- YY (MAJOR) - two last digits of the year of release
 # -- V  (MINOR) - version of the release (0 is used before first release)
 # -- YD (PATCH) - 0 for releases and the day of the current year for snapshots
-# Example: first release in year 2023 has version 23.1.0 and short (public) version 23.1
+# Example: first release in year 2023 has version 23.1.0 and short (public) version 23.1, series 23.0
+# Note: Use integer versions instead of strings for easier handling if required
 SET(STELLARIUM_MAJOR ${STELLARIUM_MAJOR_DIGIT})
 SET(STELLARIUM_MINOR ${STELLARIUM_RELEASE_NUMBER})
 IF(STELLARIUM_RELEASE_BUILD)
@@ -55,7 +56,7 @@ ELSE()
     MATH(EXPR STELLARIUM_PATCH_DIGIT "${CDNUMBER} + 0" OUTPUT_FORMAT DECIMAL)
     SET(STELLARIUM_PATCH ${STELLARIUM_PATCH_DIGIT})
 ENDIF()
-
+# Use integer versions instead of strings for easier handling if required
 ADD_DEFINITIONS(
      -DSTELLARIUM_MAJOR=${STELLARIUM_MAJOR}
      -DSTELLARIUM_MINOR=${STELLARIUM_MINOR}
