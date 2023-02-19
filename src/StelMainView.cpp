@@ -1634,11 +1634,12 @@ void StelMainView::doScreenshot(void)
 	const bool nightModeWasEnabled=nightModeEffect->isEnabled();
 	nightModeEffect->setEnabled(false);
 	const float pixelRatio = static_cast<float>(QOpenGLContext::currentContext()->screen()->devicePixelRatio());
+	qDebug() << "pixelRatio:" << QString::number(pixelRatio, 'f', 2);
 	int imgWidth =static_cast<int>(stelScene->width());
 	int imgHeight=static_cast<int>(stelScene->height());
 	// Screen scaling makes things worse again.
-	int finalImgWidth  = int(static_cast<float>(imgWidth)  * pixelRatio);
-	int finalImgHeight = int(static_cast<float>(imgHeight) * pixelRatio);
+	//int scaledImgWidth  = int(static_cast<float>(imgWidth)  * pixelRatio);
+	//int scaledImgHeight = int(static_cast<float>(imgHeight) * pixelRatio);
 
 	if (flagUseCustomScreenshotSize)
 	{
@@ -1676,8 +1677,8 @@ void StelMainView::doScreenshot(void)
 			int maximumFramebufferSize = qMin(texSize,qMin(rbSize,qMin(viewportSize[0],viewportSize[1])));
 			qCDebug(mainview)<<"Maximum framebuffer size:"<<maximumFramebufferSize;
 
-			finalImgWidth =qMin(maximumFramebufferSize, customScreenshotWidth);
-			finalImgHeight=qMin(maximumFramebufferSize, customScreenshotHeight);
+			imgWidth =qMin(maximumFramebufferSize, customScreenshotWidth);
+			imgHeight=qMin(maximumFramebufferSize, customScreenshotHeight);
 		}
 		else
 		{
@@ -1694,19 +1695,22 @@ void StelMainView::doScreenshot(void)
 	fbFormat.setInternalTextureFormat(isGLES ? GL_RGBA : GL_RGB); // try to avoid transparent background!
 	if(const auto multisamplingLevel = configuration->value("video/multisampling", 0).toInt())
         fbFormat.setSamples(multisamplingLevel);
-	QOpenGLFramebufferObject * fbObj = new QOpenGLFramebufferObject(finalImgWidth, finalImgHeight, fbFormat);
+	//QOpenGLFramebufferObject * fbObj = new QOpenGLFramebufferObject(scaledImgWidth, scaledImgHeight, fbFormat);
+	QOpenGLFramebufferObject * fbObj = new QOpenGLFramebufferObject(imgWidth, imgHeight, fbFormat);
 	fbObj->bind();
 	// Now the painter has to be convinced to paint to the potentially larger image frame.
-	QOpenGLPaintDevice fbObjPaintDev(finalImgWidth, finalImgHeight);
+	//QOpenGLPaintDevice fbObjPaintDev(scaledImgWidth, scaledImgHeight);
+	QOpenGLPaintDevice fbObjPaintDev(imgWidth, imgHeight);
 
 	// It seems the projector has its own knowledge about image size. We must adjust fov and image size, but reset afterwards.
 	StelCore *core=StelApp::getInstance().getCore();
-	StelProjector::StelProjectorParams pParams=core->getCurrentStelProjectorParams();
+	const StelProjector::StelProjectorParams pParams=core->getCurrentStelProjectorParams();
 	StelProjector::StelProjectorParams sParams=pParams;
 	qCDebug(mainview) << "Screenshot Viewport: x" << pParams.viewportXywh[0] << "/y" << pParams.viewportXywh[1] << "/w" << pParams.viewportXywh[2] << "/h" << pParams.viewportXywh[3];
 	qCDebug(mainview) << "Screenshot: setting dimensions to" << imgWidth << "x" << imgHeight;
 	sParams.viewportXywh[2]=imgWidth;
 	sParams.viewportXywh[3]=imgHeight;
+	sParams.devicePixelsPerPixel=1.; // Forget about scaling. We know what we want!
 
 	// Configure a helper value to allow some modules to tweak their output sizes. Currently used by StarMgr, maybe solve font issues?
 #if (QT_VERSION>=QT_VERSION_CHECK(5,12,0))
