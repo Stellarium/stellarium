@@ -113,8 +113,8 @@ Satellite::Satellite(const QString& identifier, const QVariantMap& map)
 	, range(0.)
 	, rangeRate(0.)
 	, hintColor(0.f,0.f,0.f)
-	, lastUpdated()	
-	, isISS(false)	
+	, lastUpdated()
+	, isISS(false)
 	, pSatWrapper(nullptr)
 	, visibility(gSatWrapper::UNKNOWN)
 	, phaseAngle(0.)
@@ -133,7 +133,7 @@ Satellite::Satellite(const QString& identifier, const QVariantMap& map)
 	name  = map.value("name").toString();
 	if (name.isEmpty())
 		return;
-	
+
 	// If there are no such keys, these will be initialized with the default
 	// values given them above.
 	description = map.value("description", description).toString().trimmed();
@@ -248,7 +248,7 @@ QString Satellite::getNameI18n() const
 QVariantMap Satellite::getMap(void)
 {
 	QVariantMap map;
-	map["name"] = name;	
+	map["name"] = name;
 	map["stdMag"] = stdMag;
 	map["rcs"] = RCS;
 	map["status"] = status;
@@ -313,7 +313,7 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 	QTextStream oss(&str);
 	QString degree = QChar(0x00B0);
 	const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
-	
+
 	if (flags & Name)
 	{
 		oss << "<h2>" << getNameI18n() << "</h2>";
@@ -323,7 +323,7 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 			oss << q_(description).replace("\n", "<br/>") << "<br/>";
 		}
 	}
-	
+
 	if (flags & CatalogNumber)
 	{
 		QString catalogNumbers;
@@ -336,7 +336,7 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 
 	if (flags & ObjectType)
 		oss << QString("%1: <b>%2</b>").arg(q_("Type"), getObjectTypeI18n())  << "<br/>";
-	
+
 	if ((flags & Magnitude) && (stdMag<99. || RCS>0.) && (visibility==gSatWrapper::VISIBLE))
 	{
 		const int decimals = 2;
@@ -390,13 +390,13 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 		double inclination = pSatWrapper->getOrbitalInclination();
 		oss << QString("%1: %2 (%3%4)").arg(q_("Inclination"), StelUtils::decDegToDmsStr(inclination), QString::number(inclination, 'f', 4), degree) << "<br/>";
 		oss << QString("%1: %2&deg;/%3&deg;").arg(q_("SubPoint (Lat./Long.)")).arg(latLongSubPointPosition[0], 5, 'f', 2).arg(latLongSubPointPosition[1], 5, 'f', 3) << "<br/>";
-		
+
 		//TODO: This one can be done better
 		const char* xyz = "<b>X:</b> %1, <b>Y:</b> %2, <b>Z:</b> %3";
 		QString temeCoords = QString(xyz).arg(qRound(position[0])).arg(qRound(position[1])).arg(qRound(position[2]));
 		// TRANSLATORS: TEME (True Equator, Mean Equinox) is an Earth-centered inertial coordinate system
 		oss << QString("%1: %2 %3").arg(q_("TEME coordinates"), temeCoords, qc_("km", "distance")) << "<br/>";
-		
+
 		QString temeVel = QString(xyz).arg(velocity[0], 5, 'f', 2).arg(velocity[1], 5, 'f', 2).arg(velocity[2], 5, 'f', 2);
 		// TRANSLATORS: TEME (True Equator, Mean Equinox) is an Earth-centered inertial coordinate system
 		oss << QString("%1: %2 %3").arg(q_("TEME velocity"), temeVel, qc_("km/s", "speed")) << "<br/>";
@@ -444,7 +444,7 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 
 		if (status!=StatusUnknown)
 			oss << QString("%1: %2").arg(q_("Operational status"), getOperationalStatus()) << "<br />";
-		//Visibility: Full text		
+		//Visibility: Full text
 		oss << q_(visibilityDescription.value(visibility, "")) << "<br />";
 
 		if (comms.size() > 0)
@@ -521,7 +521,7 @@ void Satellite::calculateSatDataFromLine2(QString tle)
 void Satellite::calculateEpochFromLine1(QString tle)
 {
 	QString epochStr;
-	// Details: https://celestrak.com/columns/v04n03/ or https://en.wikipedia.org/wiki/Two-line_element_set
+	// Details: https://celestrak.org/columns/v04n03/ or https://en.wikipedia.org/wiki/Two-line_element_set
 	int year = tle.left(20).right(2).toInt();
 	if (year>=0 && year<57)
 		year += 2000;
@@ -601,7 +601,7 @@ Vec3f Satellite::getInfoColor(void) const
 }
 
 float Satellite::getVMagnitude(const StelCore* core) const
-{	
+{
 	Q_UNUSED(core)
 	float vmag = 7.f; // Optimistic value of magnitude for artificial satellite without data for standard magnitude
 	if (iconicModeFlag)
@@ -796,7 +796,7 @@ void Satellite::setNewTleElements(const QString& tle1, const QString& tle2)
 	pSatWrapper = new gSatWrapper(id, tle1, tle2);
 	orbitPoints.clear();
 	visibilityPoints.clear();
-	
+
 	parseInternationalDesignator(tle1);
 	calculateEpochFromLine1(tle1);
 	calculateSatDataFromLine2(tle2);
@@ -1026,7 +1026,7 @@ bool Satellite::getCustomFiltersFlag() const
 void Satellite::parseInternationalDesignator(const QString& tle1)
 {
 	Q_ASSERT(!tle1.isEmpty());
-	
+
 	// The designator is encoded in chunk 3 on the first line.
 	QStringList tleData = tle1.split(" ");
 	QString rawString = tleData.at(2);
@@ -1043,8 +1043,8 @@ void Satellite::parseInternationalDesignator(const QString& tle1)
 	}
 	else
 		year = 1957;
-	
-	StelUtils::getJDFromDate(&jdLaunchYearJan1, year, 1, 1, 0, 0, 0);	
+
+	StelUtils::getJDFromDate(&jdLaunchYearJan1, year, 1, 1, 0, 0, 0);
 }
 
 bool Satellite::operator <(const Satellite& another) const
@@ -1055,7 +1055,7 @@ bool Satellite::operator <(const Satellite& another) const
 		return true;
 	if (comp > 0)
 		return false;
-	
+
 	// If the names are the same, compare IDs, i.e. NORAD numbers.
 	return (id < another.id);
 }
@@ -1237,7 +1237,7 @@ void Satellite::computeOrbitPoints()
 	gTimeSpan orbitSpan(0, 0, 0, orbitLineSegments*orbitLineSegmentDuration/2);
 	gTime epochTm;
 	gTime epoch(epochTime);
-	gTime lastEpochComp(lastEpochCompForOrbit);	
+	gTime lastEpochComp(lastEpochCompForOrbit);
 	int diffSlots;
 
 	if (orbitPoints.isEmpty())//Setup orbitPoints
@@ -1330,6 +1330,6 @@ bool operator <(const SatelliteP& left, const SatelliteP& right)
 	}
 	if (right.isNull())
 		return false; // No sense to check the left one now
-	
+
 	return ((*left) < (*right));
 }
