@@ -857,7 +857,7 @@ Vec4d Satellite::getUmbraData()
 	static PlanetP earth=GETSTELMODULE(SolarSystem)->getEarth();
 	// Compute altitudes of umbra and penumbra circles. These should show where the satellite enters/exits umbra/penumbra.
 	// The computation follows ideas from https://celestrak.org/columns/v03n01/
-	// These sources mention ECI coordinates (Earth Centered Intertial). Presumably TEME (True Equator Mean Equinox) are equivalent, at least for our purposes.
+	// These sources mention ECI coordinates (Earth Centered Inertial). Presumably TEME (True Equator Mean Equinox) are equivalent, at least for our purposes.
 	const double rhoE=position.norm(); // geocentric Satellite distance, km
 	const double rS=earth->getHeliocentricEclipticPos().norm()*AU; // distance earth...sun
 	const double thetaE=asin((earth->getEquatorialRadius()*AU)/(rhoE));
