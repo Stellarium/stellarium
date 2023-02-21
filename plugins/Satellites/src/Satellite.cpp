@@ -1003,7 +1003,7 @@ bool Satellite::getCustomFiltersFlag() const
 	bool cfe = true;
 	if (flagCFEccentricity)
 		cfe = (eccentricity>=minCFEccentricity && eccentricity<=maxCFEccentricity);
-	// Known standrad magnitude
+	// Known standard magnitude
 	bool cfm = true;
 	if (flagCFKnownStdMagnitude)
 		cfm = (stdMag<99.0);
