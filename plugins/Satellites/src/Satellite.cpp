@@ -521,7 +521,7 @@ void Satellite::calculateSatDataFromLine2(QString tle)
 void Satellite::calculateEpochFromLine1(QString tle)
 {
 	QString epochStr;
-	// Details: https://celestrak.com/columns/v04n03/ or https://en.wikipedia.org/wiki/Two-line_element_set
+	// Details: https://celestrak.org/columns/v04n03/ or https://en.wikipedia.org/wiki/Two-line_element_set
 	int year = tle.left(20).right(2).toInt();
 	if (year>=0 && year<57)
 		year += 2000;
@@ -857,7 +857,7 @@ Vec4d Satellite::getUmbraData()
 	static PlanetP earth=GETSTELMODULE(SolarSystem)->getEarth();
 	// Compute altitudes of umbra and penumbra circles. These should show where the satellite enters/exits umbra/penumbra.
 	// The computation follows ideas from https://celestrak.org/columns/v03n01/
-	// These sources mention ECI coordinates (Earth Centered Intertial). Presumably TEME (True Equator Mean Equinox) are equivalent, at least for our purposes.
+	// These sources mention ECI coordinates (Earth Centered Inertial). Presumably TEME (True Equator Mean Equinox) are equivalent, at least for our purposes.
 	const double rhoE=position.norm(); // geocentric Satellite distance, km
 	const double rS=earth->getHeliocentricEclipticPos().norm()*AU; // distance earth...sun
 	const double thetaE=asin((earth->getEquatorialRadius()*AU)/(rhoE));
@@ -1003,7 +1003,7 @@ bool Satellite::getCustomFiltersFlag() const
 	bool cfe = true;
 	if (flagCFEccentricity)
 		cfe = (eccentricity>=minCFEccentricity && eccentricity<=maxCFEccentricity);
-	// Known standrad magnitude
+	// Known standard magnitude
 	bool cfm = true;
 	if (flagCFKnownStdMagnitude)
 		cfm = (stdMag<99.0);
