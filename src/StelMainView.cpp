@@ -1632,9 +1632,9 @@ void StelMainView::doScreenshot(void)
 	// HiDPI screens interfere, and the viewing angle has to be maintained.
 	// First, image size:
 	glWidget->makeCurrent();
-	float pixelRatio = static_cast<float>(QOpenGLContext::currentContext()->screen()->devicePixelRatio());
-	int imgWidth =static_cast<int>(stelScene->width());
-	int imgHeight=static_cast<int>(stelScene->height());
+	const auto pixelRatio = QOpenGLContext::currentContext()->screen()->devicePixelRatio();
+	int physImgWidth  = std::lround(stelScene->width() * pixelRatio);
+	int physImgHeight = std::lround(stelScene->height() * pixelRatio);
 	bool nightModeWasEnabled=nightModeEffect->isEnabled();
 	nightModeEffect->setEnabled(false);
 	if (flagUseCustomScreenshotSize)
@@ -1673,8 +1673,8 @@ void StelMainView::doScreenshot(void)
 			int maximumFramebufferSize = qMin(texSize,qMin(rbSize,qMin(viewportSize[0],viewportSize[1])));
 			qCDebug(mainview)<<"Maximum framebuffer size:"<<maximumFramebufferSize;
 
-			imgWidth =qMin(maximumFramebufferSize, customScreenshotWidth);
-			imgHeight=qMin(maximumFramebufferSize, customScreenshotHeight);
+			physImgWidth =qMin(maximumFramebufferSize, customScreenshotWidth);
+			physImgHeight=qMin(maximumFramebufferSize, customScreenshotHeight);
 		}
 		else
 		{
@@ -1690,41 +1690,44 @@ void StelMainView::doScreenshot(void)
 	fbFormat.setInternalTextureFormat(isGLES ? GL_RGBA : GL_RGB); // try to avoid transparent background!
 	if(const auto multisamplingLevel = configuration->value("video/multisampling", 0).toInt())
         fbFormat.setSamples(multisamplingLevel);
-	QOpenGLFramebufferObject * fbObj = new QOpenGLFramebufferObject(static_cast<int>(static_cast<float>(imgWidth) * pixelRatio), static_cast<int>(static_cast<float>(imgHeight) * pixelRatio), fbFormat);
+	QOpenGLFramebufferObject * fbObj = new QOpenGLFramebufferObject(physImgWidth, physImgHeight, fbFormat);
 	fbObj->bind();
 	// Now the painter has to be convinced to paint to the potentially larger image frame.
-	QOpenGLPaintDevice fbObjPaintDev(static_cast<int>(static_cast<float>(imgWidth) * pixelRatio), static_cast<int>(static_cast<float>(imgHeight) * pixelRatio));
+	QOpenGLPaintDevice fbObjPaintDev(physImgWidth, physImgHeight);
 
 	// It seems the projector has its own knowledge about image size. We must adjust fov and image size, but reset afterwards.
 	StelCore *core=StelApp::getInstance().getCore();
 	StelProjector::StelProjectorParams pParams=core->getCurrentStelProjectorParams();
 	StelProjector::StelProjectorParams sParams=pParams;
 	//qCDebug(mainview) << "Screenshot Viewport: x" << pParams.viewportXywh[0] << "/y" << pParams.viewportXywh[1] << "/w" << pParams.viewportXywh[2] << "/h" << pParams.viewportXywh[3];
-	sParams.viewportXywh[2]=imgWidth;
-	sParams.viewportXywh[3]=imgHeight;
+	const auto virtImgWidth  = physImgWidth  / pixelRatio;
+	const auto virtImgHeight = physImgHeight / pixelRatio;
+	sParams.viewportXywh[2] = virtImgWidth;
+	sParams.viewportXywh[3] = virtImgHeight;
 
 	// Configure a helper value to allow some modules to tweak their output sizes. Currently used by StarMgr, maybe solve font issues?
 #if (QT_VERSION>=QT_VERSION_CHECK(5,12,0))
-	customScreenshotMagnification=static_cast<float>(imgHeight)/static_cast<float>(qApp->screenAt(QPoint(stelScene->width()*0.5, stelScene->height()*0.5))->geometry().height());
+	customScreenshotMagnification=static_cast<float>(virtImgHeight)/static_cast<float>(qApp->screenAt(QPoint(stelScene->width()*0.5, stelScene->height()*0.5))->geometry().height());
 #else
-	customScreenshotMagnification=static_cast<float>(imgHeight)/static_cast<float>(qApp->screens().at(qApp->desktop()->screenNumber())->geometry().height());
+	customScreenshotMagnification=static_cast<float>(virtImgHeight)/static_cast<float>(qApp->screens().at(qApp->desktop()->screenNumber())->geometry().height());
 #endif
-	sParams.viewportCenter.set(0.0+(0.5+pParams.viewportCenterOffset.v[0])*imgWidth, 0.0+(0.5+pParams.viewportCenterOffset.v[1])*imgHeight);
-	sParams.viewportFovDiameter = qMin(imgWidth,imgHeight);
+	sParams.viewportCenter.set(0.0+(0.5+pParams.viewportCenterOffset.v[0])*virtImgWidth,
+							   0.0+(0.5+pParams.viewportCenterOffset.v[1])*virtImgHeight);
+	sParams.viewportFovDiameter = qMin(virtImgWidth,virtImgHeight);
 	core->setCurrentStelProjectorParams(sParams);
 
 	QPainter painter;
 	painter.begin(&fbObjPaintDev);
 	// next line was above begin(), but caused a complaint. Maybe use after begin()?
 	painter.setRenderHints(QPainter::Antialiasing | QPainter::TextAntialiasing);
-	stelScene->setSceneRect(0, 0, imgWidth, imgHeight);
+	stelScene->setSceneRect(0, 0, virtImgWidth, virtImgHeight);
 
 	// push the button bars back to the sides where they belong, and fix root item clipping its children.
-	dynamic_cast<StelGui*>(gui)->getSkyGui()->setGeometry(0, 0, imgWidth, imgHeight);
-	rootItem->setSize(QSize(imgWidth, imgHeight));
+	dynamic_cast<StelGui*>(gui)->getSkyGui()->setGeometry(0, 0, virtImgWidth, virtImgHeight);
+	rootItem->setSize(QSize(virtImgWidth, virtImgHeight));
 	dynamic_cast<StelGui*>(gui)->forceRefreshGui(); // refresh bar position.
 
-	stelScene->render(&painter, QRectF(), QRectF(0,0,imgWidth,imgHeight) , Qt::KeepAspectRatio);
+	stelScene->render(&painter, QRectF(), QRectF(0,0,virtImgWidth,virtImgHeight) , Qt::KeepAspectRatio);
 	painter.end();
 
 	QImage im;
