@@ -346,7 +346,7 @@ void StelButton::paint(QPainter* painter, const QStyleOptionGraphicsItem*, QWidg
 	 *    rectangles.
 	 *    Our keeping QPixmap alive instead of deleting it on return from this function prevents this.
 	 */
-	const double ratio = painter->device()->devicePixelRatioF();
+	const double ratio = QOpenGLContext::currentContext()->screen()->devicePixelRatio();
 	if(scaledCurrentPixmap.isNull() || ratio != scaledCurrentPixmap.devicePixelRatioF())
 	{
 		const auto scale = ratio / pixmapsScale;
