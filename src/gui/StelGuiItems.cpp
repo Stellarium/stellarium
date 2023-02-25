@@ -42,6 +42,7 @@
 #include <QGraphicsLineItem>
 #include <QRectF>
 #include <QDebug>
+#include <QScreen>
 #include <QGraphicsSceneMouseEvent>
 #include <QGraphicsTextItem>
 #include <QTimeLine>
