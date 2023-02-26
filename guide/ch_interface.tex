@@ -378,6 +378,17 @@ disabled) or by dragging the text itself (enabled), as it is known
 from touch-enabled devices like smartphones. 
 \end{description}
 
+\paragraph{Framerate intent} \label{sec:gui:configuration:tools:fps} The pace of screen updates (frames per second, FPS) depends on several factors: 
+CPU speed, graphics card speed, screen size, number of displayed objects and grids, etc. 
+As is common for interactive programs, the main program thread runs on a single core also on a multicore system. 
+For running Stellarium, a CPU with few but fast cores will appear faster in total than a multicore system at slower CPU cycles.  
+High-end systems may deliver needlessly high framerates, at cost of energy consumption.
+The maximum FPS setting limits the frame rate when Stellarium is interactively operated 
+(zoomed, panned, settings switched, etc.) 
+After a few seconds, when Stellarium is not interactively operated, it falls back to a minimum FPS setting to conserve energy. 
+Of course, when the system cannot even reach this FPS, the factual FPS will be lower and the system may be overloaded.
+Keep in mind that the mimimum setting also applies to running scripts (non-interactively).
+
 \paragraph{Font size and font selection} \newFeature{0.18.3} You can change the font sizes for on-screen
 text and GUI dialogs separately.  For some purposes like presentations
 it may be helpful to enlarge screen font size while keeping GUI font

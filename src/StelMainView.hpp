@@ -62,6 +62,8 @@ class StelMainView : public QGraphicsView
 	Q_PROPERTY(bool flagCursorTimeout          READ getFlagCursorTimeout          WRITE setFlagCursorTimeout          NOTIFY flagCursorTimeoutChanged)
 	Q_PROPERTY(double cursorTimeout            READ getCursorTimeout              WRITE setCursorTimeout              NOTIFY cursorTimeoutChanged)
 	Q_PROPERTY(Vec3f skyBackgroundColor        READ getSkyBackgroundColor         WRITE setSkyBackgroundColor         NOTIFY skyBackgroundColorChanged)
+	Q_PROPERTY(int minFps	                   READ getMinFps                     WRITE setMinFps                     NOTIFY minFpsChanged)
+	Q_PROPERTY(int maxFps	                   READ getMaxFps                     WRITE setMaxFps                     NOTIFY maxFpsChanged)
 
 public:
 	//! Contains some basic info about the OpenGL context used
@@ -196,13 +198,12 @@ public slots:
 	//! user events for some seconds to save power. However, if can be useful to set this to a high
 	//! value to improve playing smoothness in scripts.
 	//! @param m the new minimum fps setting.
-	void setMinFps(float m) {minfps=m;}
+	void setMinFps(float m) {minfps=qMin(m, maxfps); emit minFpsChanged(minfps);}
 	//! Get the current minimum frames per second.
 	float getMinFps() const {return minfps;}
 	//! Set the maximum frames per second.
 	//! @param m the new maximum fps setting.
-	//! @todo this setting currently does nothing
-	void setMaxFps(float m) {maxfps = m;}
+	void setMaxFps(float m) {maxfps = qMax(m, minfps);  emit maxFpsChanged(maxfps);}
 	//! Get the current maximum frames per second.
 	float getMaxFps() const {return maxfps;}
 
@@ -263,6 +264,8 @@ signals:
 
 	void flagCursorTimeoutChanged(bool b);
 	void cursorTimeoutChanged(double t);
+	void minFpsChanged(int fps);
+	void maxFpsChanged(int fps);
 
 private slots:
 	// Do the actual screenshot generation in the main thread with this method.
