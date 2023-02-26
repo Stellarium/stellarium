@@ -2030,16 +2030,6 @@
                </item>
               </layout>
              </item>
-             <item row="13" column="3">
-              <widget class="QCheckBox" name="kineticScrollingCheckBox">
-               <property name="toolTip">
-                <string>Kinetic scrolling means dragging text panels directly instead of dragging window handles.</string>
-               </property>
-               <property name="text">
-                <string>Use kinetic scrolling</string>
-               </property>
-              </widget>
-             </item>
              <item row="9" column="1">
               <widget class="QCheckBox" name="autoEnableEnvironmentCheckBox">
                <property name="toolTip">
@@ -2057,26 +2047,6 @@
                </property>
                <property name="text">
                 <string>Auto-direction at zoom out</string>
-               </property>
-              </widget>
-             </item>
-             <item row="12" column="3">
-              <widget class="QCheckBox" name="indicationMountModeCheckBox">
-               <property name="toolTip">
-                <string>Flash a short message when toggling mount mode.</string>
-               </property>
-               <property name="text">
-                <string>Indication for mount mode</string>
-               </property>
-              </widget>
-             </item>
-             <item row="4" column="3">
-              <widget class="QCheckBox" name="nutationCheckBox">
-               <property name="toolTip">
-                <string>Nutation is a small wobble of Earth's axis, amounting to a few arcseconds.</string>
-               </property>
-               <property name="text">
-                <string>Include nutation</string>
                </property>
               </widget>
              </item>
@@ -2099,104 +2069,6 @@
                 <string>Set keyboard focus to day input</string>
                </property>
               </widget>
-             </item>
-             <item row="16" column="3">
-              <layout class="QHBoxLayout" name="mouseTimeoutLayout">
-               <item>
-                <widget class="QCheckBox" name="mouseTimeoutCheckbox">
-                 <property name="toolTip">
-                  <string>Hides the mouse cursor when inactive</string>
-                 </property>
-                 <property name="text">
-                  <string>Mouse cursor timeout:</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QDoubleSpinBox" name="mouseTimeoutSpinBox">
-                 <property name="maximumSize">
-                  <size>
-                   <width>16777215</width>
-                   <height>24</height>
-                  </size>
-                 </property>
-                 <property name="toolTip">
-                  <string>seconds</string>
-                 </property>
-                 <property name="decimals">
-                  <number>1</number>
-                 </property>
-                 <property name="minimum">
-                  <double>0.000000000000000</double>
-                 </property>
-                 <property name="maximum">
-                  <double>3600.000000000000000</double>
-                 </property>
-                 <property name="value">
-                  <double>10.000000000000000</double>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <spacer name="horizontalSpacer">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>30</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-              </layout>
-             </item>
-             <item row="5" column="3">
-              <layout class="QHBoxLayout" name="aberrationHorizontalLayout">
-               <item>
-                <widget class="QCheckBox" name="aberrationCheckBox">
-                 <property name="toolTip">
-                  <string>Annual aberration is an annual wobble in positions, amounting to max. about 20 arcseconds for observers on Earth.</string>
-                 </property>
-                 <property name="text">
-                  <string>Include aberration</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QDoubleSpinBox" name="aberrationSpinBox">
-                 <property name="toolTip">
-                  <string>Exaggerate aberration (for didactic explanations)</string>
-                 </property>
-                 <property name="decimals">
-                  <number>1</number>
-                 </property>
-                 <property name="maximum">
-                  <double>5.000000000000000</double>
-                 </property>
-                 <property name="singleStep">
-                  <double>0.100000000000000</double>
-                 </property>
-                 <property name="value">
-                  <double>1.000000000000000</double>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <spacer name="horizontalSpacer_4">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>40</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-              </layout>
              </item>
              <item row="18" column="1">
               <layout class="QHBoxLayout" name="horizontalLayout_15">
@@ -2326,6 +2198,205 @@
                 <bool>true</bool>
                </property>
               </widget>
+             </item>
+             <item row="4" column="3">
+              <layout class="QHBoxLayout" name="aberrationHorizontalLayout">
+               <item>
+                <widget class="QLabel" name="label_Include">
+                 <property name="text">
+                  <string>Include </string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="nutationCheckBox">
+                 <property name="toolTip">
+                  <string>Nutation is a small wobble of Earth's axis, amounting to a few arcseconds.</string>
+                 </property>
+                 <property name="text">
+                  <string>nutation</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="aberrationCheckBox">
+                 <property name="toolTip">
+                  <string>Annual aberration is an annual wobble in positions, amounting to max. about 20 arcseconds for observers on Earth.</string>
+                 </property>
+                 <property name="text">
+                  <string>aberration</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QDoubleSpinBox" name="aberrationSpinBox">
+                 <property name="toolTip">
+                  <string>Exaggerate aberration (for didactic explanations)</string>
+                 </property>
+                 <property name="decimals">
+                  <number>1</number>
+                 </property>
+                 <property name="maximum">
+                  <double>5.000000000000000</double>
+                 </property>
+                 <property name="singleStep">
+                  <double>0.100000000000000</double>
+                 </property>
+                 <property name="value">
+                  <double>1.000000000000000</double>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <spacer name="horizontalSpacer_4">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+              </layout>
+             </item>
+             <item row="5" column="3">
+              <widget class="QCheckBox" name="indicationMountModeCheckBox">
+               <property name="toolTip">
+                <string>Flash a short message when toggling mount mode.</string>
+               </property>
+               <property name="text">
+                <string>Indication for mount mode</string>
+               </property>
+              </widget>
+             </item>
+             <item row="12" column="3">
+              <widget class="QCheckBox" name="kineticScrollingCheckBox">
+               <property name="toolTip">
+                <string>Kinetic scrolling means dragging text panels directly instead of dragging window handles.</string>
+               </property>
+               <property name="text">
+                <string>Use kinetic scrolling</string>
+               </property>
+              </widget>
+             </item>
+             <item row="13" column="3">
+              <layout class="QHBoxLayout" name="mouseTimeoutLayout">
+               <item>
+                <widget class="QCheckBox" name="mouseTimeoutCheckbox">
+                 <property name="toolTip">
+                  <string>Hides the mouse cursor when inactive</string>
+                 </property>
+                 <property name="text">
+                  <string>Mouse cursor timeout:</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <spacer name="horizontalSpacer">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>30</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item>
+                <widget class="QDoubleSpinBox" name="mouseTimeoutSpinBox">
+                 <property name="maximumSize">
+                  <size>
+                   <width>16777215</width>
+                   <height>24</height>
+                  </size>
+                 </property>
+                 <property name="toolTip">
+                  <string>seconds</string>
+                 </property>
+                 <property name="decimals">
+                  <number>1</number>
+                 </property>
+                 <property name="minimum">
+                  <double>0.000000000000000</double>
+                 </property>
+                 <property name="maximum">
+                  <double>3600.000000000000000</double>
+                 </property>
+                 <property name="value">
+                  <double>10.000000000000000</double>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item row="16" column="3">
+              <layout class="QHBoxLayout" name="horizontalLayout_fps">
+               <item>
+                <widget class="QLabel" name="label_fpsIntent">
+                 <property name="text">
+                  <string>Fps intent:</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <spacer name="horizontalSpacer_6">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_min">
+                 <property name="text">
+                  <string>min:</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QSpinBox" name="minFpsSpinBox">
+                 <property name="toolTip">
+                  <string>Minimum intended fps between user interaction. Set very low to conserve energy or save CPU use.</string>
+                 </property>
+                 <property name="minimum">
+                  <number>1</number>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_max">
+                 <property name="text">
+                  <string>max:</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QSpinBox" name="maxFpsSpinBox">
+                 <property name="toolTip">
+                  <string>Maximum allowed fps. 10000 just means &quot;as fast as possible&quot;. </string>
+                 </property>
+                 <property name="minimum">
+                  <number>10</number>
+                 </property>
+                 <property name="maximum">
+                  <number>10000</number>
+                 </property>
+                 <property name="value">
+                  <number>10000</number>
+                 </property>
+                </widget>
+               </item>
+              </layout>
              </item>
             </layout>
            </widget>
