@@ -2342,7 +2342,7 @@
                <item>
                 <widget class="QLabel" name="label_fpsIntent">
                  <property name="text">
-                  <string>Fps intent:</string>
+                  <string>Framerate intent:</string>
                  </property>
                 </widget>
                </item>
@@ -2369,7 +2369,7 @@
                <item>
                 <widget class="QSpinBox" name="minFpsSpinBox">
                  <property name="toolTip">
-                  <string>Minimum intended fps between user interaction. Set very low to conserve energy or save CPU use.</string>
+                  <string>Minimum intended FPS between user interaction. Set very low to conserve energy or save CPU use.</string>
                  </property>
                  <property name="keyboardTracking">
                   <bool>false</bool>
@@ -2389,7 +2389,7 @@
                <item>
                 <widget class="QSpinBox" name="maxFpsSpinBox">
                  <property name="toolTip">
-                  <string>Maximum allowed fps. 10000 just means &quot;as fast as possible&quot;. </string>
+                  <string>Maximum allowed FPS. 10000 just means &quot;as fast as possible&quot;. </string>
                  </property>
                  <property name="keyboardTracking">
                   <bool>false</bool>
