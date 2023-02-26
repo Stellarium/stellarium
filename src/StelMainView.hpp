@@ -198,12 +198,12 @@ public slots:
 	//! user events for some seconds to save power. However, if can be useful to set this to a high
 	//! value to improve playing smoothness in scripts.
 	//! @param m the new minimum fps setting.
-	void setMinFps(float m) {minfps=m; emit minFpsChanged(minfps);}
+	void setMinFps(float m) {minfps=qMin(m, maxfps); emit minFpsChanged(minfps);}
 	//! Get the current minimum frames per second.
 	float getMinFps() const {return minfps;}
 	//! Set the maximum frames per second.
 	//! @param m the new maximum fps setting.
-	void setMaxFps(float m) {maxfps = m;  emit maxFpsChanged(maxfps);}
+	void setMaxFps(float m) {maxfps = qMax(m, minfps);  emit maxFpsChanged(maxfps);}
 	//! Get the current maximum frames per second.
 	float getMaxFps() const {return maxfps;}
 
