@@ -2318,6 +2318,9 @@
                  <property name="toolTip">
                   <string>seconds</string>
                  </property>
+                 <property name="keyboardTracking">
+                  <bool>false</bool>
+                 </property>
                  <property name="decimals">
                   <number>1</number>
                  </property>
@@ -2368,6 +2371,9 @@
                  <property name="toolTip">
                   <string>Minimum intended fps between user interaction. Set very low to conserve energy or save CPU use.</string>
                  </property>
+                 <property name="keyboardTracking">
+                  <bool>false</bool>
+                 </property>
                  <property name="minimum">
                   <number>1</number>
                  </property>
@@ -2384,6 +2390,9 @@
                 <widget class="QSpinBox" name="maxFpsSpinBox">
                  <property name="toolTip">
                   <string>Maximum allowed fps. 10000 just means &quot;as fast as possible&quot;. </string>
+                 </property>
+                 <property name="keyboardTracking">
+                  <bool>false</bool>
                  </property>
                  <property name="minimum">
                   <number>10</number>
