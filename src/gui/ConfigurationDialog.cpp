@@ -1215,10 +1215,10 @@ void ConfigurationDialog::saveAllSettings()
 	{
 		QRect screenGeom = QGuiApplication::screens().at(screenNum)->geometry();
 
-		conf->setValue("video/screen_w", mainWindow.size().width());
-		conf->setValue("video/screen_h", mainWindow.size().height());
-		conf->setValue("video/screen_x", mainWindow.x() - screenGeom.x());
-		conf->setValue("video/screen_y", mainWindow.y() - screenGeom.y());
+		conf->setValue("video/screen_w", int(std::lround(mainWindow.size().width() * mainWindow.devicePixelRatio())));
+		conf->setValue("video/screen_h", int(std::lround(mainWindow.size().height() * mainWindow.devicePixelRatio())));
+		conf->setValue("video/screen_x", int(std::lround((mainWindow.x() - screenGeom.x()) * mainWindow.devicePixelRatio())));
+		conf->setValue("video/screen_y", int(std::lround((mainWindow.y() - screenGeom.y()) * mainWindow.devicePixelRatio())));
 	}
 
 	// clear the restore defaults flag if it is set.
