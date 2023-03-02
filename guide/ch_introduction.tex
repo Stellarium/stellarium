@@ -155,6 +155,21 @@ Our ``internal'' version numbers therefore indicate which version of Qt is used:
 series 0.* will continue to be based on Qt5, and series 1.* will be
 based on Qt6.
 
+Since 2023 we've changed the scheme of numbering again to avoid 
+misunderstanding and reduce puzzling of maintainers. Our ``internal'' 
+version has standard 3 digits\footnote{The ``internal'' version of package 
+on Windows has 4 digits, where the last one is always 0}, where first one 
+meaning two last digits of the year of release, the second one meaning the 
+number of the release (0 is used before first release --- from January to 
+March) and last one can be 0 for releases or the day number of the current 
+year for snapshots. Our short (``public'') version has 2 digits --- year 
+and number of the release. Example: the first release in year 2023 has 
+version 23.1.0 and short (public) version 23.1, the series has number 23.0.
+
+In addition to the version number we added the suffix qtX, where X is 5 or 
+6 respectively and marks the version of Qt, which is used as the base for 
+the package.
+
 \section{Acknowledgements}
 Stellarium has been kindly supported by ESA in their Summer of Code in
 Space initiatives, which so far has resulted in better planetary rendering
