@@ -19,9 +19,9 @@
 	<key>CFBundleSignature</key>
 	<string>Stel</string>
 	<key>CFBundleVersion</key>
-	<string>@STELLARIUM_BUNDLE_VERSION@</string>
+	<string>@VERSION@</string>
 	<key>CFBundleShortVersionString</key>
-	<string>@STELLARIUM_BUNDLE_VERSION@</string>
+	<string>@VERSION@</string>
 	<key>LSMinimumSystemVersion</key>
 	<string>@PACKAGE_OSX_TARGET@</string>
 	<key>NSHumanReadableCopyright</key>

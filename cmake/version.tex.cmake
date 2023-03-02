@@ -1,2 +1,2 @@
 \newcommand{\StelVersion}{@STELLARIUM_PUBLIC_VERSION@}
-\newcommand{\StelSeries}{@SERIES@}
+\newcommand{\StelSeries}{@STELLARIUM_SERIES@}

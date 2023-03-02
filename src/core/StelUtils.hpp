@@ -85,11 +85,14 @@ namespace StelUtils
 	//! Return the full name of stellarium, i.e. "Stellarium 23.1"
 	QString getApplicationName();
 
-	//! Return the version of stellarium, i.e. "0.23.1"
+	//! Return the version of stellarium, i.e. "23.1.0"
 	QString getApplicationVersion();
 
 	//! Return the public version of stellarium, i.e. "23.1"
 	QString getApplicationPublicVersion();
+
+	//! Return the series of stellarium, i.e. "23.0"
+	QString getApplicationSeries();
 
 	//! Return the name and the version of operating system, i.e. "macOS 12.5"
 	QString getOperatingSystemInfo();
