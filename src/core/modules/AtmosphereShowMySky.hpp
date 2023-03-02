@@ -41,6 +41,7 @@ class StelProjector;
 class StelToneReproducer;
 class StelCore;
 class QOpenGLFunctions;
+class TextureAverageComputer;
 
 class AtmosphereShowMySky : public Atmosphere, public QObject
 {
@@ -115,6 +116,7 @@ private:
 	} shaderAttribLocations;
 
 	StelTextureSP ditherPatternTex_;
+	std::unique_ptr<TextureAverageComputer> textureAverager_;
 
 	float prevFad=0, prevFov=0;
 	Vec3d prevPos=Vec3d(0,0,0), prevSun=Vec3d(0,0,0);
