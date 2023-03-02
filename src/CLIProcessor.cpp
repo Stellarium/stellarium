@@ -60,6 +60,19 @@ void CLIProcessor::parseCLIArgsPreQApp(const QStringList argList)
 	if (argsGetOption(argList, "-m", "--mesa-mode"))
 		qputenv("QT_OPENGL", "software");
 #endif
+	// Override user dir. This must be made via environment variable, else an empty user dir is created before resetting (GH:#3079)
+	try
+	{
+		QString newUserDir;
+		newUserDir = argsGetOptionWithArg(argList, "-u", "--user-dir", "").toString();
+		if (newUserDir!="" && !newUserDir.isEmpty())
+			qputenv("STEL_USERDIR", newUserDir.toLocal8Bit());
+	}
+	catch (std::runtime_error& e)
+	{
+		qCritical() << "ERROR: while processing --user-dir option: " << e.what();
+		exit(1);
+	}
 }
 
 void CLIProcessor::parseCLIArgsPreConfig(const QStringList& argList)
@@ -153,19 +166,6 @@ void CLIProcessor::parseCLIArgsPreConfig(const QStringList& argList)
 				std::cout << qPrintable(i) << std::endl;
 		}
 		exit(0);
-	}
-
-	try
-	{
-		QString newUserDir;
-		newUserDir = argsGetOptionWithArg(argList, "-u", "--user-dir", "").toString();
-		if (newUserDir!="" && !newUserDir.isEmpty())
-			StelFileMgr::setUserDir(newUserDir);
-	}
-	catch (std::runtime_error& e)
-	{
-		qCritical() << "ERROR: while processing --user-dir option: " << e.what();
-		exit(1);
 	}
 }
 
