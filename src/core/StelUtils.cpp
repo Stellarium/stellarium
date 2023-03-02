@@ -49,7 +49,7 @@ QString getApplicationName()
 #endif
 }
 
-//! Return the version of stellarium, e.g. "0.23.1"
+//! Return the version of stellarium, e.g. "23.1.0"
 QString getApplicationVersion()
 {
 #if defined(GIT_REVISION)
@@ -63,6 +63,12 @@ QString getApplicationVersion()
 QString getApplicationPublicVersion()
 {
 	return QString(STELLARIUM_PUBLIC_VERSION);
+}
+
+//! Return the series of stellarium, e.g. "23.0"
+QString getApplicationSeries()
+{
+	return QString(STELLARIUM_SERIES);
 }
 
 QString getUserAgentString()

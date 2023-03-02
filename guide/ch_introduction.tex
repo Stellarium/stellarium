@@ -133,7 +133,8 @@ Since its inception, Stellarium's version number had started with 0 to
 indicate ``work in progress''. The numbers after that have followed a
 year.release convention with approximately seasonal releases since
 2018. (For example, 0.18.2 was the third release in 2018 which
-appeared around autumn equinox, after 0.18.0 and 0.18.1.)
+appeared around autumn equinox, after 0.18.0 and 0.18.1.) 
+If needed urgently, there can be additional releases which however break the simple season count.
 
 A software version number of 1.0 signifies a milestone of some sort,
 like completion of a particular original feature set, usability, or
@@ -148,12 +149,24 @@ Qt6 does not support old hardware, particularly 32-bit systems will
 not be able to run 1.* versions.  Therefore, we are going to keep both
 series alive for those with older hardware. Thanks to only minor
 differences in the underlying frameworks, both series should retain
-feature equivalence. The only notable difference for now lies in the
+feature equivalence. The only notable difference for now lied in the
 Scripting functionality (see chapter~\ref{ch:scripting}).
+Our ``internal'' version numbers therefore indicated which version of Qt was used:
+series 0.* continued to be based on Qt5, and series 1.* was based on Qt6.
 
-Our ``internal'' version numbers therefore indicate which version of Qt is used:
-series 0.* will continue to be based on Qt5, and series 1.* will be
-based on Qt6.
+In 2023 we've changed the numbering scheme again to avoid new misunderstandings. 
+Our ``internal'' version has a standard of 3 components\footnote{On Windows 
+it has 4 components, where the last one is always 0.}, where the first indicates 
+the two last digits of the year of release, the second is the release within 
+that year (0 is used before first release, from January to March) and the last 
+one can be 0 for releases, or the day number of the current year for snapshots. 
+Our short (``public'') version has 2 components: year 
+and number of the release. Example: the first release in year 2023 has 
+version 23.1.0 and short (public) version 23.1, the series has number 23.0.
+
+In addition to the version number we are adding the name component \texttt{qtX}, 
+where \texttt{X} is \texttt{5} or \texttt{6} respectively and marks the 
+major version of Qt which is used as the base for the package.
 
 \section{Acknowledgements}
 Stellarium has been kindly supported by ESA in their Summer of Code in
@@ -170,7 +183,7 @@ Prospection and Virtual Archaeology, Vienna, Austria.
 Stellarium has gained wide popularity in the research areas of
 cultural astronomy. Please note limitations of Stellarium mentioned in
 Appendix~\ref{ch:Accuracy}. If you used Stellarium in scientific work,
-please cite our recent paper \citep{Zotti-etal:JSA2020.6.2} or those
+please cite our overview paper \citep{Zotti-etal:JSA2020.6.2} or those
 mentioned in the respective feature descriptions.
 
 \section{About this User Guide}
