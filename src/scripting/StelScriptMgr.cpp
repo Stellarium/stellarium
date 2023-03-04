@@ -794,8 +794,10 @@ bool StelScriptMgr::runPreprocessedScript(const QString &preprocessedScript, con
 bool StelScriptMgr::runScript(const QString& fileName, const QString& includePath)
 {
 	QString preprocessedScript;
-	prepareScript(preprocessedScript,fileName,includePath);
-	return runPreprocessedScript(preprocessedScript,fileName);
+	if (prepareScript(preprocessedScript,fileName,includePath))
+		return runPreprocessedScript(preprocessedScript,fileName);
+	else
+		return false;
 }
 
 bool StelScriptMgr::runScriptDirect(const QString scriptId, const QString &scriptCode, int &errLoc, const QString& includePath)
@@ -820,9 +822,20 @@ bool StelScriptMgr::runScriptDirect(const QString& scriptCode, const QString &in
 bool StelScriptMgr::prepareScript( QString &script, const QString &fileName, const QString &includePath)
 {
 	QString absPath;
+	const bool okToRunScriptFromAbsolutePath=StelApp::getInstance().getSettings()->value("scripts/flag_script_allow_absolute_path", false).toBool();
 
 	if (QFileInfo(fileName).isAbsolute())
-		absPath = fileName;
+	{
+		// Absolute paths may bear a security risk. We need a flag to allow them!
+		if (okToRunScriptFromAbsolutePath)
+			absPath = fileName;
+		else
+		{
+			qWarning() << "SCRIPTING CONFIGURATION ISSUE: You are trying to run a script from absolute pathname.";
+			qWarning() << "  To enable this, edit config.ini and set [scripts]/flag_script_allow_absolute_path=true";
+			return false;
+		}
+	}
 	else
 		absPath = StelFileMgr::findFile("scripts/" + fileName);
 
