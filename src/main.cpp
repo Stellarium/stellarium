@@ -397,17 +397,22 @@ int main(int argc, char **argv)
 		qWarning() << "WARNING: screen" << screen << "not found";
 		screen = 0;
 	}
-	const QRect screenGeom = qApp->screens().at(screen)->geometry();
+	const auto qscreen = qApp->screens().at(screen);
+	const QRect screenGeom = qscreen->geometry();
+	const auto pixelRatio = qscreen->devicePixelRatio();
 
-	const auto size = QSize(confSettings->value("video/screen_w", screenGeom.width()).toInt(),
-							confSettings->value("video/screen_h", screenGeom.height()).toInt());
+	const auto virtSize = QSize(confSettings->value("video/screen_w", screenGeom.width()).toInt(),
+								confSettings->value("video/screen_h", screenGeom.height()).toInt());
+	const auto size = QSize(std::lround(virtSize.width()/pixelRatio),
+							std::lround(virtSize.height()/pixelRatio));
 	mainWin.resize(size);
 
 	const bool fullscreen = confSettings->value("video/fullscreen", true).toBool();
 	if (fullscreen)
 	{
 		// The "+1" below is to work around Linux/Gnome problem with mouse focus.
-		mainWin.move(screenGeom.x()+1, screenGeom.y()+1);
+		mainWin.move((screenGeom.x()+1)/pixelRatio,
+					 (screenGeom.y()+1)/pixelRatio);
 		// The fullscreen window appears on screen where is the majority of
 		// the normal window. Therefore we crop the normal window to the
 		// screen area to ensure that the majority is not on another screen.
@@ -418,7 +423,8 @@ int main(int argc, char **argv)
 	{
 		const int x = confSettings->value("video/screen_x", 0).toInt();
 		const int y = confSettings->value("video/screen_y", 0).toInt();
-		mainWin.move(x + screenGeom.x(), y + screenGeom.y());
+		mainWin.move((x + screenGeom.x())/pixelRatio,
+					 (y + screenGeom.y())/pixelRatio);
 	}
 
 	mainWin.show();
