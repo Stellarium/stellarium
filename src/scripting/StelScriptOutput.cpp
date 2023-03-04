@@ -56,15 +56,15 @@ void StelScriptOutput::reset(void)
 void StelScriptOutput::saveOutputAs(const QString &name)
 {
 	QFile asFile;
-	QFileInfo outputInfo(outputFile);
-	QDir dir=outputInfo.dir(); // will hold complete dirname
-	QFileInfo newFileNameInfo(name);
+	const QFileInfo outputInfo(outputFile);
+	const QDir dir=outputInfo.dir(); // will hold complete dirname
+	const QFileInfo newFileNameInfo(name);
 
-	bool okToSaveToAbsolutePath=StelApp::getInstance().getSettings()->value("scripts/flag_script_allow_write_absolute_path", false).toBool();
+	const bool okToSaveToAbsolutePath=StelApp::getInstance().getSettings()->value("scripts/flag_script_allow_write_absolute_path", false).toBool();
 
-	if (!okToSaveToAbsolutePath && (newFileNameInfo.isAbsolute()))
+	if (!okToSaveToAbsolutePath && ((newFileNameInfo.isAbsolute() || (name.contains(".."))))) // The last condition may include dangerous/malicious paths
 	{
-		qWarning() << "SCRIPTING CONFIGURATION ISSUE: You are trying to save to an absolute pathname.";
+		qWarning() << "SCRIPTING CONFIGURATION ISSUE: You are trying to save to an absolute pathname or move up in directories.";
 		qWarning() << "  To enable this, edit config.ini and set [scripts]/flag_script_allow_write_absolute_path=true";
 		asFile.setFileName(dir.absolutePath() + "/" + newFileNameInfo.fileName());
 		qWarning() << "  Storing to " << asFile.fileName() << " instead";
