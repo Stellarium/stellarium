@@ -62,6 +62,12 @@ void StelScriptOutput::saveOutputAs(const QString &name)
 
 	const bool okToSaveToAbsolutePath=StelApp::getInstance().getSettings()->value("scripts/flag_script_allow_write_absolute_path", false).toBool();
 
+	if (name.contains("config.ini"))
+	{
+		qWarning() << "SCRIPTING ERROR: You are trying to overwrite config.ini. Ignoring.";
+		return;
+	}
+
 	if (!okToSaveToAbsolutePath && ((newFileNameInfo.isAbsolute() || (name.contains(".."))))) // The last condition may include dangerous/malicious paths
 	{
 		qWarning() << "SCRIPTING CONFIGURATION ISSUE: You are trying to save to an absolute pathname or move up in directories.";
