@@ -37,7 +37,10 @@ void CLIProcessor::parseCLIArgsPreQApp(const QStringList argList)
 {
 #ifdef Q_OS_WIN
 	if (argsGetOption(argList, "-s", "--safe-mode"))
+	{
+		qDebug() << "DEPRECATION NOTE: --safe-mode given on command line. Use --mesa-mode instead!";
 		qputenv("QT_OPENGL", "software");
+	}
 
 	if (argsGetOption(argList, "-a", "--angle-mode"))
 		qputenv("QT_OPENGL", "angle");
@@ -133,7 +136,7 @@ void CLIProcessor::parseCLIArgsPreConfig(const QStringList& argList)
 			  << "--angle-d3d11           : Force use Direct3D 11 for ANGLE OpenGL ES2 rendering engine\n"
 			  << "--angle-warp            : Force use the Direct3D 11 software rasterizer for ANGLE OpenGL ES2 rendering engine\n"
 			  << "--mesa-mode (or -m)     : Use MESA as software OpenGL rendering engine\n"
-			  << "--safe-mode (or -s)     : Synonymous to --mesa-mode \n"
+			  << "--safe-mode (or -s)     : DEPRECATED! Synonymous to --mesa-mode \n"
 			  #ifdef ENABLE_SPOUT
 			  << "--spout (or -S) <sky|all> : Act as SPOUT sender (Sky only/including GUI)\n"
 			  << "--spout-name <name>     : Set particular name for SPOUT sender.\n"
