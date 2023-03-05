@@ -372,31 +372,23 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 	//text=QString(" <:%1°").arg(QString::number(angleDeg, 'f', 2));
 	//text.append(QString(" <:%1° %2/%3 (%4x%5)").arg(QString::number(angleDeg, 'f', 2), QString::number(screenPos[0], 'f', 2), QString::number(screenPos[1], 'f', 2),
 	//		QString::number(viewportWidth),	QString::number(viewportHeight)));
-	// Tweak edges with two ideas:
-	// xshift is a left-right-shift after text rotation, i.e. along text direction --> SEEMS ENOUGH!
 	if ((fabs(screenPos[0])<1.) && (angleDeg>0.f )) // LEFT
 	{
-		//text.append(" - LeftEdge"); // DEBUG ONLY!
 		xshift+=0.5f*tan(angleDeg*M_PI_180f)*d->sPainter->getFontMetrics().boundingRect(text).height();
 	}
 	else if ((fabs(screenPos[0]-viewportWidth)<1.) && (angleDeg>180.f )) // RIGHT
 	{
-		//text.append("-RightEdge"); // DEBUG ONLY!
-		//xshift*=(1.+1.f/tan(angleDeg*M_PI_180f));
 		xshift += 0.5 * tan(angleDeg*M_PI_180f)*d->sPainter->getFontMetrics().boundingRect(text).height();
 	}
 	else if ((fabs(screenPos[1]-viewportHeight)<1.) && fabs(angleDeg)>5.f) // TOP
 	{
 		const float sign = angleDeg<-90.f ? 0.5f : -0.5f;
-		//text.append(" - TopEdge"); // DEBUG ONLY!
-		//xshift*=(1.+1.f/tan(angleDeg*M_PI_180f));
 		xshift += sign * (1./tan(angleDeg*M_PI_180f))*d->sPainter->getFontMetrics().boundingRect(text).height();
 	}
 	// It seems bottom edge is always OK!
 
 	d->sPainter->drawText(static_cast<float>(screenPos[0]), static_cast<float>(screenPos[1]), text, angleDeg, xshift*ppx, yshift*ppx);
 	d->sPainter->setColor(tmpColor);
-	//d->sPainter->setBlending(true); // This should have been true on entry, and we don't change it, why set it here?
 }
 
 //! Draw the sky grid in the current frame
