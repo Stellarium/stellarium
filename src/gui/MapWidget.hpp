@@ -53,10 +53,10 @@ protected:
 
 private:
 	double markerLat=0, markerLon=0;
-	bool markerVisible;
 	QPixmap map;
 	QPixmap locationMarker;
 	QRectF mapRect; // in device pixels
+	bool markerVisible;
 };
 
 #endif // MAPWIDGET_HPP
