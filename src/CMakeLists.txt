@@ -128,6 +128,8 @@ SET(stellarium_lib_SRCS
      core/StelOpenGLArray.cpp
      core/StelHips.hpp
      core/StelHips.cpp
+     core/TextureAverageComputer.hpp
+     core/TextureAverageComputer.cpp
 
      ${spout_SRCS}
 

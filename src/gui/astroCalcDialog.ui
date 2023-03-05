@@ -891,6 +891,21 @@
                 </property>
                </widget>
               </item>
+              <item>
+               <widget class="QPushButton" name="pushButtonNow">
+                <property name="toolTip">
+                 <string>Now</string>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="icon">
+                 <iconset resource="../../data/gui/guiRes.qrc">
+                  <normaloff>:/graphicGui/btTimeNow-off.png</normaloff>
+                  <disabledoff>:/graphicGui/btTimeNow-off.png</disabledoff>:/graphicGui/btTimeNow-off.png</iconset>
+                </property>
+               </widget>
+              </item>
              </layout>
             </item>
             <item>

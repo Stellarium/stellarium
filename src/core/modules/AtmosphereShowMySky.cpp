@@ -30,6 +30,7 @@
 #include "StelPainter.hpp"
 #include "Dithering.hpp"
 #include "StelTranslator.hpp"
+#include "TextureAverageComputer.hpp"
 
 #include <cassert>
 #include <cstring>
@@ -316,7 +317,10 @@ vec3 calcViewDir()
 
 void AtmosphereShowMySky::resizeRenderTarget(int width, int height)
 {
-	renderer_->resizeEvent(width/atmoRes, height/atmoRes);
+	const int physWidth = width/atmoRes;
+	const int physHeight = height/atmoRes;
+	renderer_->resizeEvent(physWidth, physHeight);
+	textureAverager_.reset(new TextureAverageComputer(*glfuncs(), physWidth, physHeight, GL_RGBA32F));
 
 	prevWidth_=width;
 	prevHeight_=height;
@@ -698,33 +702,7 @@ void AtmosphereShowMySky::drawAtmosphere(Mat4f const& projectionMatrix, const fl
 Vec4f AtmosphereShowMySky::getMeanPixelValue()
 {
 	StelOpenGL::checkGLErrors(__FILE__,__LINE__);
-	auto& gl = *glfuncs();
-
-	GL(gl.glActiveTexture(GL_TEXTURE0));
-	GL(gl.glBindTexture(GL_TEXTURE_2D, renderer_->getLuminanceTexture()));
-	GL(gl.glGenerateMipmap(GL_TEXTURE_2D));
-
-	int texW=-1, texH=-1;
-	GL(gl.glGetTexLevelParameteriv(GL_TEXTURE_2D, 0, GL_TEXTURE_WIDTH, &texW));
-	GL(gl.glGetTexLevelParameteriv(GL_TEXTURE_2D, 0, GL_TEXTURE_HEIGHT, &texH));
-
-	using namespace std;
-	// Formula from the glspec, "Mipmapping" subsection in section 3.8.11 Texture Minification
-	const auto totalMipmapLevels = 1+floor(log2(max(texW,texH)));
-	const auto deepestLevel=totalMipmapLevels-1;
-
-#ifndef NDEBUG
-	// Sanity check
-	int deepestMipmapLevelWidth=-1, deepestMipmapLevelHeight=-1;
-	GL(gl.glGetTexLevelParameteriv(GL_TEXTURE_2D, deepestLevel, GL_TEXTURE_WIDTH, &deepestMipmapLevelWidth));
-	GL(gl.glGetTexLevelParameteriv(GL_TEXTURE_2D, deepestLevel, GL_TEXTURE_HEIGHT, &deepestMipmapLevelHeight));
-	assert(deepestMipmapLevelWidth==1);
-	assert(deepestMipmapLevelHeight==1);
-#endif
-
-	Vec4f pixel;
-	GL(gl.glGetTexImage(GL_TEXTURE_2D, deepestLevel, GL_RGBA, GL_FLOAT, &pixel[0]));
-	return pixel;
+	return textureAverager_->getTextureAverage(renderer_->getLuminanceTexture());
 }
 
 bool AtmosphereShowMySky::dynamicResolution(StelProjectorP prj, Vec3d &currPos, int width, int height)

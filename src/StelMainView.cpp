@@ -33,6 +33,7 @@
 #include "StelOpenGL.hpp"
 #include "StelOpenGLArray.hpp"
 #include "StelProjector.hpp"
+#include "TextureAverageComputer.hpp"
 
 #include <QDebug>
 #include <QDir>

@@ -305,6 +305,7 @@ private slots:
 	void saveEphemeris();	
 	void onChangedEphemerisPosition();
 	void reGenerateEphemeris();
+	void setDateTimeNow();
 
 	//! Calculating the rises, transits and sets for selected celestial body and fill the list.
 	void generateRTS();
