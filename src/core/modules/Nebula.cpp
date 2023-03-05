@@ -1094,7 +1094,7 @@ bool Nebula::objectInDisplayedType() const
 		|| (typeFilters&TypeDarkNebulae          && cntype==6)
 		|| (typeFilters&TypePlanetaryNebulae     && cntype==7)
 		|| (typeFilters&TypeSupernovaRemnants    && cntype==8)
-		|| (typeFilters&TypeOpenStarClusters     && (typeFilters&TypeBrightNebulae || typeFilters&TypeHydrogenRegions) && cntype==9)
+		|| ((typeFilters&TypeOpenStarClusters || typeFilters&TypeBrightNebulae || typeFilters&TypeHydrogenRegions) && cntype==9)
 		|| (typeFilters&TypeGalaxyClusters       && cntype==10)
 		|| (typeFilters&TypeOther                && cntype==12));
 
