@@ -257,6 +257,9 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 	const bool useOldAzimuth = StelApp::getInstance().getFlagSouthAzimuthUsage();
 	const float ppx = static_cast<float>(d->sPainter->getProjector()->getDevicePixelsPerPixel());
 
+	const int viewportWidth  = d->sPainter->getProjector()->getViewportWidth();
+	const int viewportHeight = d->sPainter->getProjector()->getViewportHeight();
+
 	QString text;
 	if (d->text.isEmpty())
 	{
@@ -370,10 +373,27 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 		angleDeg+=180.f;
 		xshift=-(static_cast<float>(d->sPainter->getFontMetrics().boundingRect(text).width()) + xshift*ppx);
 	}
+	// DEBUG INFO ONLY!
+	//text=QString(" <:%1°").arg(QString::number(angleDeg, 'f', 2));
+	//text.append(QString(" <:%1° %2/%3 (%4x%5)").arg(QString::number(angleDeg, 'f', 2), QString::number(screenPos[0], 'f', 2), QString::number(screenPos[1], 'f', 2),
+	//		QString::number(viewportWidth),	QString::number(viewportHeight)));
+	if ((fabs(screenPos[0])<1.) && (angleDeg>0.f )) // LEFT
+	{
+		xshift+=0.5f*tan(angleDeg*M_PI_180f)*d->sPainter->getFontMetrics().boundingRect(text).height();
+	}
+	else if ((fabs(screenPos[0]-viewportWidth)<1.) && (angleDeg>180.f )) // RIGHT
+	{
+		xshift += 0.5 * tan(angleDeg*M_PI_180f)*d->sPainter->getFontMetrics().boundingRect(text).height();
+	}
+	else if ((fabs(screenPos[1]-viewportHeight)<1.) && fabs(angleDeg)>5.f) // TOP
+	{
+		const float sign = angleDeg<-90.f ? 0.5f : -0.5f;
+		xshift += sign * (1./tan(angleDeg*M_PI_180f))*d->sPainter->getFontMetrics().boundingRect(text).height();
+	}
+	// It seems bottom edge is always OK!
 
 	d->sPainter->drawText(static_cast<float>(screenPos[0]), static_cast<float>(screenPos[1]), text, angleDeg, xshift*ppx, yshift*ppx);
 	d->sPainter->setColor(tmpColor);
-	d->sPainter->setBlending(true);
 }
 
 //! Draw the sky grid in the current frame
