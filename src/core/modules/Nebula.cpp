@@ -151,6 +151,8 @@ Nebula::Nebula()
 	, VdBH_nb("")
 	, withoutID(false)
 	, nameI18("")
+	, discoverer("")
+	, discoveryYear("")
 	, mTypeString()
 	, bMag(99.)
 	, vMag(99.)
@@ -429,6 +431,8 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 
 			oss << QString("%1: %2 %3").arg(q_("Parallax"), px, qc_("mas", "parallax")) << "<br />";
 		}
+		if (!discoverer.isEmpty())
+			oss << QString("%1: %2 (%3)").arg(q_("Discoverer"), discoverer, discoveryYear) << "<br />";
 		if (!getMorphologicalTypeDescription().isEmpty())
 			oss << QString("%1: %2.").arg(q_("Morphological description"), getMorphologicalTypeDescription()) << "<br />";
 	}
