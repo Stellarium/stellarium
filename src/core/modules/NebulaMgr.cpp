@@ -1628,6 +1628,52 @@ bool NebulaMgr::loadDSONames(const QString &filename)
 	return true;
 }
 
+bool NebulaMgr::loadDSODiscoveryData(const QString &filename)
+{
+	qDebug() << "Loading DSO discovery data ...";
+	QFile dsoDiscoveryFile(filename);
+	if (!dsoDiscoveryFile.open(QIODevice::ReadOnly | QIODevice::Text))
+	{
+		qWarning().noquote() << "DSO discovery data file" << QDir::toNativeSeparators(filename) << "not found.";
+		return false;
+	}
+
+	int readOk = 0;
+	int totalRecords = 0;
+	QString record, dso, dYear, dName;
+	NebulaP e;
+	while (!dsoDiscoveryFile.atEnd())
+	{
+		record = QString::fromUtf8(dsoDiscoveryFile.readLine());
+		if (record.startsWith("//") || record.startsWith("#") || record.isEmpty())
+			continue;
+
+		totalRecords++;
+		#if (QT_VERSION>=QT_VERSION_CHECK(5, 14, 0))
+		QStringList list=record.split("\t", Qt::KeepEmptyParts);
+		#else
+		QStringList list=record.split("\t", QString::KeepEmptyParts);
+		#endif
+
+		dso	= list.at(0).trimmed();
+		dYear	= list.at(1).trimmed();
+		dName	= list.at(2).trimmed();
+
+		e = search(dso);
+		if (e.isNull()) // maybe this is inner number of DSO
+			e = searchDSO(dso.toUInt());
+
+		if (!e.isNull())
+		{
+			e->setDiscoveryData(dName, dYear);
+			readOk++;
+		}
+	}
+	dsoDiscoveryFile.close();
+	qDebug().noquote() << "Loaded" << readOk << "/" << totalRecords << "DSO discovery records successfully";
+	return true;
+}
+
 bool NebulaMgr::loadDSOOutlines(const QString &filename)
 {
 	qDebug() << "Loading DSO outline data ...";
@@ -1739,6 +1785,13 @@ void NebulaMgr::updateSkyCulture(const QString& skyCultureDir)
 			return;
 		}
 		loadDSONames(dsoNamesPath);
+		QString dsoDiscoveryPath = StelFileMgr::findFile("nebulae/" + setName + "/discovery.dat");
+		if (dsoDiscoveryPath.isEmpty())
+		{
+			qWarning().noquote() << "ERROR while loading deep-sky discovery data set " << setName;
+			return;
+		}
+		loadDSODiscoveryData(dsoDiscoveryPath);
 	}
 	else
 	{
