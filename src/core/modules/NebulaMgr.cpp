@@ -812,11 +812,12 @@ NebulaP NebulaMgr::search(const QString& name)
 
 void NebulaMgr::loadNebulaSet(const QString& setName)
 {
-	QString srcCatalogPath		= StelFileMgr::findFile("nebulae/" + setName + "/catalog.txt");
+	QString srcCatalogPath	= StelFileMgr::findFile("nebulae/" + setName + "/catalog.txt");
 	QString dsoCatalogPath	= StelFileMgr::findFile("nebulae/" + setName + "/catalog-" + StellariumDSOCatalogVersion + ".dat");
 	if (dsoCatalogPath.isEmpty()) // Extended edition is not exist, let's try find standard edition
-		dsoCatalogPath		= StelFileMgr::findFile("nebulae/" + setName + "/catalog.dat");
+		dsoCatalogPath	= StelFileMgr::findFile("nebulae/" + setName + "/catalog.dat");
 	QString dsoOutlinesPath	= StelFileMgr::findFile("nebulae/" + setName + "/outlines.dat");
+	QString dsoDiscoveryPath = StelFileMgr::findFile("nebulae/" + setName + "/discovery.dat");
 
 	dsoArray.clear();
 	dsoIndex.clear();
@@ -840,6 +841,9 @@ void NebulaMgr::loadNebulaSet(const QString& setName)
 
 	if (!dsoOutlinesPath.isEmpty())
 		loadDSOOutlines(dsoOutlinesPath);
+
+	if (!dsoDiscoveryPath.isEmpty())
+		loadDSODiscoveryData(dsoDiscoveryPath);
 }
 
 // Look for a nebula by XYZ coords
@@ -1478,7 +1482,6 @@ bool NebulaMgr::loadDSONames(const QString &filename)
 	QStringList nodata;
 	nodata.clear();
 	int totalRecords=0;
-	int lineNumber=0;
 	int readOk=0;
 	unsigned int nb;
 	NebulaP e;
@@ -1486,7 +1489,6 @@ bool NebulaMgr::loadDSONames(const QString &filename)
 	while (!dsoNameFile.atEnd())
 	{
 		record = QString::fromUtf8(dsoNameFile.readLine());
-		lineNumber++;
 		if (commentRx.match(record).hasMatch())
 			continue;
 
@@ -1785,13 +1787,6 @@ void NebulaMgr::updateSkyCulture(const QString& skyCultureDir)
 			return;
 		}
 		loadDSONames(dsoNamesPath);
-		QString dsoDiscoveryPath = StelFileMgr::findFile("nebulae/" + setName + "/discovery.dat");
-		if (dsoDiscoveryPath.isEmpty())
-		{
-			qWarning().noquote() << "ERROR while loading deep-sky discovery data set " << setName;
-			return;
-		}
-		loadDSODiscoveryData(dsoDiscoveryPath);
 	}
 	else
 	{
