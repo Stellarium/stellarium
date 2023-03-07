@@ -812,11 +812,12 @@ NebulaP NebulaMgr::search(const QString& name)
 
 void NebulaMgr::loadNebulaSet(const QString& setName)
 {
-	QString srcCatalogPath		= StelFileMgr::findFile("nebulae/" + setName + "/catalog.txt");
+	QString srcCatalogPath	= StelFileMgr::findFile("nebulae/" + setName + "/catalog.txt");
 	QString dsoCatalogPath	= StelFileMgr::findFile("nebulae/" + setName + "/catalog-" + StellariumDSOCatalogVersion + ".dat");
 	if (dsoCatalogPath.isEmpty()) // Extended edition is not exist, let's try find standard edition
-		dsoCatalogPath		= StelFileMgr::findFile("nebulae/" + setName + "/catalog.dat");
+		dsoCatalogPath	= StelFileMgr::findFile("nebulae/" + setName + "/catalog.dat");
 	QString dsoOutlinesPath	= StelFileMgr::findFile("nebulae/" + setName + "/outlines.dat");
+	QString dsoDiscoveryPath = StelFileMgr::findFile("nebulae/" + setName + "/discovery.dat");
 
 	dsoArray.clear();
 	dsoIndex.clear();
@@ -840,6 +841,9 @@ void NebulaMgr::loadNebulaSet(const QString& setName)
 
 	if (!dsoOutlinesPath.isEmpty())
 		loadDSOOutlines(dsoOutlinesPath);
+
+	if (!dsoDiscoveryPath.isEmpty())
+		loadDSODiscoveryData(dsoDiscoveryPath);
 }
 
 // Look for a nebula by XYZ coords
@@ -1478,7 +1482,6 @@ bool NebulaMgr::loadDSONames(const QString &filename)
 	QStringList nodata;
 	nodata.clear();
 	int totalRecords=0;
-	int lineNumber=0;
 	int readOk=0;
 	unsigned int nb;
 	NebulaP e;
@@ -1486,7 +1489,6 @@ bool NebulaMgr::loadDSONames(const QString &filename)
 	while (!dsoNameFile.atEnd())
 	{
 		record = QString::fromUtf8(dsoNameFile.readLine());
-		lineNumber++;
 		if (commentRx.match(record).hasMatch())
 			continue;
 
@@ -1625,6 +1627,52 @@ bool NebulaMgr::loadDSONames(const QString &filename)
 	if (err>0)
 		qDebug().noquote() << "WARNING - No position data for" << err << "objects:" << nodata.join(", ");
 
+	return true;
+}
+
+bool NebulaMgr::loadDSODiscoveryData(const QString &filename)
+{
+	qDebug() << "Loading DSO discovery data ...";
+	QFile dsoDiscoveryFile(filename);
+	if (!dsoDiscoveryFile.open(QIODevice::ReadOnly | QIODevice::Text))
+	{
+		qWarning().noquote() << "DSO discovery data file" << QDir::toNativeSeparators(filename) << "not found.";
+		return false;
+	}
+
+	int readOk = 0;
+	int totalRecords = 0;
+	QString record, dso, dYear, dName;
+	NebulaP e;
+	while (!dsoDiscoveryFile.atEnd())
+	{
+		record = QString::fromUtf8(dsoDiscoveryFile.readLine());
+		if (record.startsWith("//") || record.startsWith("#") || record.isEmpty())
+			continue;
+
+		totalRecords++;
+		#if (QT_VERSION>=QT_VERSION_CHECK(5, 14, 0))
+		QStringList list=record.split("\t", Qt::KeepEmptyParts);
+		#else
+		QStringList list=record.split("\t", QString::KeepEmptyParts);
+		#endif
+
+		dso	= list.at(0).trimmed();
+		dYear	= list.at(1).trimmed();
+		dName	= list.at(2).trimmed();
+
+		e = search(dso);
+		if (e.isNull()) // maybe this is inner number of DSO
+			e = searchDSO(dso.toUInt());
+
+		if (!e.isNull())
+		{
+			e->setDiscoveryData(dName, dYear);
+			readOk++;
+		}
+	}
+	dsoDiscoveryFile.close();
+	qDebug().noquote() << "Loaded" << readOk << "/" << totalRecords << "DSO discovery records successfully";
 	return true;
 }
 

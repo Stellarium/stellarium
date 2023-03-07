@@ -1003,6 +1003,9 @@ private:
 	bool loadDSONames(const QString& filename);
 	// Load outlines for DSO
 	bool loadDSOOutlines(const QString& filename);
+	// Load discovery data for DSO
+	// TODO: Move these data into main DSO catalog to fast reading (v4)
+	bool loadDSODiscoveryData(const QString& filename);
 
 	QVector<NebulaP> dsoArray;		// The DSO list
 	QHash<unsigned int, NebulaP> dsoIndex;
