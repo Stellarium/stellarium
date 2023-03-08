@@ -87,7 +87,8 @@ public:
 		SOLSTICES_OF_DATE,
 		ANTISOLAR,
 		EARTH_UMBRA_CENTER,
-		APEX
+		APEX,
+		LAGRANGE
 	};
 	// Create and precompute positions of a SkyGrid
 	SkyPoint(SKY_POINT_TYPE _point_type = CELESTIALPOLES_J2000);
@@ -1634,7 +1635,15 @@ void SkyPoint::updateLabel()
 				southernLabel += speedStr;
 			}
 			break;
-		}		
+		}
+		case LAGRANGE:
+		{
+			frameType = StelCore::FrameHeliocentricEclipticJ2000;
+			// TRANSLATORS: Center of the umbra
+			northernLabel = q_("L4");
+			southernLabel = q_("L5");
+			break;
+		}
 		default:
 			Q_ASSERT(0);
 	}
@@ -1756,7 +1765,20 @@ void SkyPoint::draw(StelCore *core) const
 				sPainter.drawText(-dir, southernLabel, 0, shift, shift, false);
 			}
 			break;
-		}		
+		}
+		case LAGRANGE:
+		{
+			Vec3d pos= core->getCurrentObserver()->getHomePlanet()->getHeliocentricEclipticPos();
+			const Vec3d l4 = Vec3d(pos.v[0]*cos(M_PI/6)-pos.v[1]*sin(M_PI/6), pos.v[1]*cos(M_PI/6)+pos.v[0]*sin(M_PI/6), pos.v[2]);
+			const Vec3d l5 = Vec3d(pos.v[0]*cos(M_PI/6)+pos.v[1]*sin(M_PI/6), pos.v[1]*cos(M_PI/6)-pos.v[0]*sin(M_PI/6), pos.v[2]);
+
+			sPainter.drawSprite2dMode(l4, 5.f);
+			sPainter.drawText(l4, northernLabel, 0, shift, shift, false);
+			sPainter.drawSprite2dMode(l5, 5.f);
+			sPainter.drawText(l5, southernLabel, 0, shift, shift, false);
+
+			break;
+		}
 		default:
 			Q_ASSERT(0);
 	}
@@ -1816,6 +1838,7 @@ GridLinesMgr::GridLinesMgr()
 	antisolarPoint = new SkyPoint(SkyPoint::ANTISOLAR);
 	umbraCenterPoint = new SkyPoint(SkyPoint::EARTH_UMBRA_CENTER);
 	apexPoints = new SkyPoint(SkyPoint::APEX);	
+	lagrangePoints = new SkyPoint(SkyPoint::LAGRANGE);
 
 	earth = GETSTELMODULE(SolarSystem)->getEarth();
 	connect(GETSTELMODULE(SolarSystem), SIGNAL(solarSystemDataReloaded()), this, SLOT(connectSolarSystem()));
@@ -1876,7 +1899,8 @@ GridLinesMgr::~GridLinesMgr()
 	delete solsticePoints;
 	delete antisolarPoint;
 	delete umbraCenterPoint;
-	delete apexPoints;	
+	delete apexPoints;
+	delete lagrangePoints;
 	SkyLine::deinit();
 }
 
@@ -1977,6 +2001,7 @@ void GridLinesMgr::init()
 	setFlagAntisolarPoint(conf->value("viewing/flag_antisolar_point").toBool());
 	setFlagUmbraCenterPoint(conf->value("viewing/flag_umbra_center_point").toBool());
 	setFlagApexPoints(conf->value("viewing/flag_apex_points").toBool());
+	setFlagLagrangePoints(conf->value("viewing/flag_lagrange_points").toBool());
 
 	// Set the line thickness for grids and lines
 	setLineThickness(conf->value("viewing/line_thickness", 1.f).toFloat());
@@ -2026,6 +2051,7 @@ void GridLinesMgr::init()
 	setColorSolsticePoints(          Vec3f(conf->value("color/solstice_points_color", defaultColor).toString()));
 	setColorAntisolarPoint(          Vec3f(conf->value("color/antisolar_point_color", defaultColor).toString()));
 	setColorApexPoints(              Vec3f(conf->value("color/apex_points_color", defaultColor).toString()));
+	setColorLagrangePoints(          Vec3f(conf->value("color/lagrange_points_color", defaultColor).toString()));
 
 	StelApp& app = StelApp::getInstance();
 	connect(&app, SIGNAL(languageChanged()), this, SLOT(updateLabels()));
@@ -2076,6 +2102,7 @@ void GridLinesMgr::init()
 	addAction("actionShow_Antisolar_Point",            displayGroup, N_("Antisolar point"), "antisolarPointDisplayed");
 	addAction("actionShow_Umbra_Center_Point",         displayGroup, N_("The center of the Earth's umbra"), "umbraCenterPointDisplayed");
 	addAction("actionShow_Apex_Points",                displayGroup, N_("Apex points"), "apexPointsDisplayed");
+	addAction("actionShow_Lagrange_Points",            displayGroup, N_("Lagrange points"), "lagrangePointsDisplayed");
 }
 
 void GridLinesMgr::connectSolarSystem()
@@ -2135,6 +2162,7 @@ void GridLinesMgr::update(double deltaTime)
 	antisolarPoint->update(deltaTime);
 	umbraCenterPoint->update(deltaTime);
 	apexPoints->update(deltaTime);
+	lagrangePoints->update(deltaTime);
 	apexPoints->updateLabel();	
 }
 
@@ -2208,7 +2236,7 @@ void GridLinesMgr::draw(StelCore* core)
 	solsticeJ2000Points->draw(core);
 	celestialJ2000Poles->draw(core);
 	celestialPoles->draw(core);
-
+	lagrangePoints->draw(core);
 	zenithNadir->draw(core);
 }
 
@@ -2252,7 +2280,8 @@ void GridLinesMgr::updateLabels()
 	solsticePoints->updateLabel();
 	antisolarPoint->updateLabel();
 	umbraCenterPoint->updateLabel();
-	apexPoints->updateLabel();	
+	apexPoints->updateLabel();
+	lagrangePoints->updateLabel();
 }
 
 //! Setter ("master switch") for displaying any grid/line.
@@ -2326,6 +2355,7 @@ void GridLinesMgr::setFlagAllPoints(const bool displayed)
 	setFlagSolsticeJ2000Points(displayed);
 	setFlagApexPoints(displayed);
 	setFlagUmbraCenterPoint(displayed);
+	setFlagLagrangePoints(displayed);
 }
 
 //! Set flag for displaying Azimuthal Grid
@@ -3920,6 +3950,36 @@ void GridLinesMgr::setColorApexPoints(const Vec3f& newColor)
 	}
 }
 
+
+//! Set flag for displaying vector point
+void GridLinesMgr::setFlagLagrangePoints(const bool displayed)
+{
+	if(displayed != lagrangePoints->isDisplayed())
+	{
+		lagrangePoints->setDisplayed(displayed);
+		emit lagrangePointsDisplayedChanged(displayed);
+	}
+}
+//! Get flag for displaying vector point
+bool GridLinesMgr::getFlagLagrangePoints() const
+{
+	return lagrangePoints->isDisplayed();
+}
+Vec3f GridLinesMgr::getColorLagrangePoints() const
+{
+	return lagrangePoints->getColor();
+}
+void GridLinesMgr::setColorLagrangePoints(const Vec3f& newColor)
+{
+	if(newColor != lagrangePoints->getColor())
+	{
+		lagrangePoints->setColor(newColor);
+		emit lagrangePointsColorChanged(newColor);
+	}
+
+}
+
+
 void GridLinesMgr::setLineThickness(const float thickness)
 {
 	float lineThickness = equGrid->getLineThickness();
@@ -4059,5 +4119,6 @@ void GridLinesMgr::setFontSizeFromApp(int size)
 	solsticeJ2000Points->setFontSize(pointFontSize);
 	solsticePoints->setFontSize(pointFontSize);
 	apexPoints->setFontSize(pointFontSize);
+	lagrangePoints->setFontSize(pointFontSize);
 	umbraCenterPoint->setFontSize(pointFontSize);
 }
