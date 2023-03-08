@@ -3821,6 +3821,16 @@
                  </property>
                 </widget>
                </item>
+               <item row="17" column="0">
+                <widget class="QToolButton" name="colorLagrangePoints">
+                 <property name="toolTip">
+                  <string>Color of Lagrange points</string>
+                 </property>
+                 <property name="text">
+                  <string notr="true"/>
+                 </property>
+                </widget>
+               </item>
                <item row="2" column="4">
                 <widget class="QCheckBox" name="fixedEquatorPartsCheckBox">
                  <property name="toolTip">
@@ -4062,6 +4072,16 @@
                  </property>
                  <property name="text">
                   <string>Apex points</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="17" column="1">
+                <widget class="QCheckBox" name="showLagrangePointsCheckBox">
+                 <property name="toolTip">
+                  <string>Lagrange points L4 and L5</string>
+                 </property>
+                 <property name="text">
+                  <string>Lagrange Points</string>
                  </property>
                 </widget>
                </item>
