@@ -1614,6 +1614,47 @@ QVariantMap Planet::getInfoMap(const StelCore *core) const
 				QPair<double,double> magnitudes = getLunarEclipseMagnitudes();
 				map.insert("penumbral-eclipse-magnitude", magnitudes.first);
 				map.insert("umbral-eclipse-magnitude", magnitudes.second);
+
+				// For computing the Moon age we use geocentric coordinates
+				StelCore* core1 = StelApp::getInstance().getCore(); // we need non-const reference here.
+				const bool useTopocentric = core1->getUseTopocentricCoordinates();
+				core1->setUseTopocentricCoordinates(false);
+				core1->update(0); // enforce update cache!
+				const double eclJDE = earth->getRotObliquity(core1->getJDE());
+				double ra_equ, dec_equ, lambdaMoon, lambdaSun, betaMoon, betaSun, raSun, deSun;
+				StelUtils::rectToSphe(&ra_equ,&dec_equ, getEquinoxEquatorialPos(core1));
+				StelUtils::equToEcl(ra_equ, dec_equ, eclJDE, &lambdaMoon, &betaMoon);
+				StelUtils::rectToSphe(&raSun,&deSun, ssystem->getSun()->getEquinoxEquatorialPos(core1));
+				StelUtils::equToEcl(raSun, deSun, eclJDE, &lambdaSun, &betaSun);
+				core1->setUseTopocentricCoordinates(useTopocentric);
+				core1->update(0); // enforce update cache to avoid odd selection of Moon details!
+				const double deltaLong = StelUtils::fmodpos((lambdaMoon-lambdaSun)*M_180_PI, 360.);
+				QString moonPhase = "";
+				if (deltaLong<0.5 || deltaLong>359.5)
+					moonPhase = qc_("New Moon", "Moon phase");
+				else if (deltaLong<89.5)
+					moonPhase = qc_("Waxing Crescent", "Moon phase");
+				else if (deltaLong<90.5)
+					moonPhase = qc_("First Quarter", "Moon phase");
+				else if (deltaLong<179.5)
+					moonPhase = qc_("Waxing Gibbous", "Moon phase");
+				else if (deltaLong<180.5)
+					moonPhase = qc_("Full Moon", "Moon phase");
+				else if (deltaLong<269.5)
+					moonPhase = qc_("Waning Gibbous", "Moon phase");
+				else if (deltaLong<270.5)
+					moonPhase = qc_("Third Quarter", "Moon phase");
+				else if (deltaLong<359.5)
+					moonPhase = qc_("Waning Crescent", "Moon phase");
+				else
+				{
+					qWarning() << "ERROR IN PHASE STRING PROGRAMMING!";
+					Q_ASSERT(0);
+				}
+				map.insert("phase-name", moonPhase);
+
+				const double age = deltaLong*29.530588853/360.;
+				map.insert("age", QString::number(age, 'f', 2));
 			}
 		}
 	}

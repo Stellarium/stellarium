@@ -234,6 +234,8 @@ public:
 	//! - libration_l (on Earth for Moon only; degrees)
 	//! - libration_b (on Earth for Moon only; degrees)
 	//! - colongitude (on Earth for Moon only; degrees)
+	//! - phase-name (on Earth for Moon only; string)
+	//! - age (on Earth for Moon only; days. This is currently "elongation angle age" only, not time since last conjunction!)
 	//! - penumbral-eclipse-magnitude (on Earth for Moon only)
 	//! - umbral-eclipse-magnitude (on Earth for Moon only)
 	virtual QVariantMap getInfoMap(const StelCore *core) const  Q_DECL_OVERRIDE;
