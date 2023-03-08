@@ -41,7 +41,7 @@ jobs:
       run: |
         sudo apt remove php7.* -y
         sudo apt remove php8.* -y
-        #sudo apt update
+        sudo apt update
         # using force-overwrite due to
         # https://github.com/actions/virtual-environments/issues/2703
         #sudo ACCEPT_EULA=Y apt upgrade -o Dpkg::Options::="--force-overwrite" --yes
