@@ -37,7 +37,7 @@ jobs:
     steps:
     - name: Install dependencies
       run: |
-        #sudo apt-get update
+        sudo apt-get update
         # using force-overwrite due to
         # https://github.com/actions/virtual-environments/issues/2703
         #sudo ACCEPT_EULA=Y apt-get upgrade -o Dpkg::Options::="--force-overwrite" --yes
