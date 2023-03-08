@@ -403,12 +403,10 @@ void main(void)
 
 	auto& gl = *QOpenGLContext::currentContext()->functions();
 
-	gl.glEnable(GL_CULL_FACE);
 	gl.glEnable(GL_BLEND);
 	gl.glBlendFunc(GL_ONE,GL_ONE); // allow colored sky background
 	bindVAO();
 	gl.glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 	releaseVAO();
 	gl.glDisable(GL_BLEND);
-	gl.glDisable(GL_CULL_FACE);
 }
