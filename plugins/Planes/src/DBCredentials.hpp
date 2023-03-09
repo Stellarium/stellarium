@@ -19,6 +19,7 @@
 #ifndef DBCREDENTIALS_HPP
 #define DBCREDENTIALS_HPP
 
+#include <QString>
 //! @struct DBCredentials
 //! Struct that holds credentials to connect to a database
 typedef struct db_creds_s
