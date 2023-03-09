@@ -23,6 +23,7 @@
 #include "StelObject.hpp"
 #include "StelPainter.hpp"
 #include "StelLocation.hpp"
+#include "StelTranslator.hpp"
 #include "ADS-B.hpp"
 #include <vector>
 
@@ -36,6 +37,8 @@
 //! @author Felix Zeltner
 class Flight : public StelObject
 {
+	//Required for Q_FLAG macro, this requires this header to be MOC'ed
+	Q_GADGET
 public:
 
 	//! @enum PathColour
@@ -46,6 +49,7 @@ public:
 		EncodeHeight = 1,		//!< Draw flight paths coloured by height
 		EncodeVelocity = 2		//!< Draw flight paths coloured by velocity
 	};
+	Q_ENUM(PathColour);
 
 	//! @enum PathDrawMode
 	//! Determins for which flights paths are drawn
@@ -56,6 +60,7 @@ public:
 		InViewOnly = 2,			//!< Draw paths for all planes in view
 		AllPaths = 3			//!< Draw paths for all planes, regardless of screen position
 	};
+	Q_ENUM(PathDrawMode);
 
 	//! Default constructor1
 	Flight();
@@ -105,23 +110,40 @@ public:
 	//! Get an HTML string to describe the flight.
 	//! @param core A pointer to the StelCore.
 	//! @param flags A set of flags indicating which info to include.
-	virtual QString getInfoString(const StelCore *core, const InfoStringGroup &flags) const;
+	QString getInfoString(const StelCore *core, const InfoStringGroup &flags) const override;
 
 
 	//! Return the object's type. Type is the classname.
-	virtual QString getType() const
+	QString getType() const override
 	{
 		return QStringLiteral("Flight");
+	}
+	//! Return object's type. It should be English lowercase name of the type of the object.
+	virtual QString getObjectType() const override
+	{
+		return QStringLiteral("flight");
+	}
+	//! Return object's type. It should be translated lowercase name of the type of the object.
+	virtual QString getObjectTypeI18n() const override
+	{
+		return QString(q_("flight"));
 	}
 
 	//! Returns the english name of this flight.
 	//! This is either the callsign, or if that is empty, the hex ModeS address.
-	virtual QString getEnglishName() const;
+	QString getEnglishName() const override;
 
 	//! Returns the translated name.
 	//! This is the same as the english name, as they are only combinations
 	//! of letters and numbers anyways.
-	virtual QString getNameI18n() const;
+	QString getNameI18n() const override;
+
+	//! An object may have multiple IDs (different catalog numbers, etc). StelObjectMgr::searchByID()
+	//! should search through all ID variants, but this method only returns one of them.
+	virtual QString getID() const override
+	{
+		return getCallsign();
+	}
 
 	//! Get the callsign of this flight.
 	QString getCallsign() const;
@@ -136,31 +158,31 @@ public:
 	QString getCountry() const;
 
 	//! Get the J2000Equatorial Position
-	virtual Vec3d getJ2000EquatorialPos(const StelCore *core) const;
+	Vec3d getJ2000EquatorialPos(const StelCore *core) const override;
 
 	//! Get azimuth / elevation position, depends on observer
 	Vec3d getAzAl() const;
 
 	//! Selection priority for Flight objects when user clicks
-	virtual float getSelectPriority(const StelCore *core) const
+	float getSelectPriority(const StelCore *core) const override
 	{
 		return -11;
 	}
 
 	//! Angular size of Flight objects
-	virtual double getAngularSize(const StelCore *core) const
+	virtual double getAngularRadius(const StelCore *core) const override
 	{
-		return .1;
+		return .05;
 	}
 
 	//! Magnitude of Flight objects
-	virtual float getVMagnitude(const StelCore *core) const
+	float getVMagnitude(const StelCore *core) const override
 	{
 		return 100;
 	}
 
 	//! Colour used to colour the info string
-	virtual Vec3f getInfoColor() const
+	Vec3f getInfoColor() const override
 	{
 		return infoColour;
 	}

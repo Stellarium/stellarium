@@ -571,7 +571,8 @@ ADD_PLUGIN(Vts 0)
 ########## for the compilation of Stellarium itself
 
 IF(USE_PLUGIN_PLANES)
-	SET(QT_USE_QTSQL TRUE) # Planes plugin needs SQL module
+     FIND_PACKAGE(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Sql)
+     SET(QT_USE_QTSQL TRUE) # Planes plugin needs SQL module
 ENDIF()
 
 # Custom target used to manage dependencies of stellarium -> Static plugins
@@ -648,6 +649,7 @@ IF(WIN32)
 		SET(ISS_SQLDRIVERS "; Sql drivers not used")
 		SET(ISS_LIBMYSQL "; libmysql.dll unused")
 	ENDIF()
+
 #    IF(ENABLE_SCRIPTING)
 #        GET_TARGET_PROPERTY(QtScript_location Qt5::Script LOCATION)
 #        SET(ISS_QT_SCRIPT "Source: \"${QtScript_location}\"; DestDir: \"{app}\";")
