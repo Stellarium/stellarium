@@ -82,7 +82,7 @@ msgstr "नक्षत्र रेखाएं"
 
 #: src/core/modules/AsterismMgr.cpp:97 src/ui_configurationDialog.h:1937
 msgid "Asterism labels"
-msgstr "नक्षत्र चिप्पी"
+msgstr "नक्षत्र नामसूचक"
 
 #: src/core/modules/AsterismMgr.cpp:98
 msgid "Toggle single asterism selection mode"
@@ -94,26 +94,26 @@ msgstr "किरण सहायक"
 
 #: src/core/modules/Constellation.hpp:70
 msgid "constellation"
-msgstr "नक्षत्र"
+msgstr "तारामण्डल"
 
 #: src/core/modules/ConstellationMgr.cpp:132
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:319
 msgid "Constellation lines"
-msgstr "तारामंडल की रेखाएं"
+msgstr "तारामण्डल रेखाएँ"
 
 #: src/core/modules/ConstellationMgr.cpp:133
 msgid "Constellation art"
-msgstr "तारामंडल की चित्रकारी"
+msgstr "तारामण्डल चित्रकला"
 
 #: src/core/modules/ConstellationMgr.cpp:134
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:324
 msgid "Constellation labels"
-msgstr "तारामंडल की आकृतियों के नाम"
+msgstr "तारामण्डल नामसूचक"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/ui_configurationDialog.h:1932
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:337
 msgid "Constellation boundaries"
-msgstr "तारामंडल की आकृतियों की सीमाएँ"
+msgstr "तारामण्डल सीमाएँ"
 
 #: src/core/modules/ConstellationMgr.cpp:136 src/ui_configurationDialog.h:2075
 msgid "Select single constellation"
@@ -135,19 +135,19 @@ msgstr "आकाश दर्शन का पुनर्भरण करे�
 #: src/ui_dsoColorsDialog.h:703
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:254
 msgid "Stars"
-msgstr "तारे"
+msgstr "तारें"
 
 #: src/core/modules/StarMgr.cpp:463
 msgid "Stars labels"
-msgstr "तारों का चिप्पी"
+msgstr "तारा नामसूचक"
 
 #: src/core/modules/StarMgr.cpp:465
 msgid "Increase the magnitude limit for stars"
-msgstr "तारों का परिमाण परिसीमा बढाएं"
+msgstr "तारों की मात्रा सीमा बढाएँ"
 
 #: src/core/modules/StarMgr.cpp:466
 msgid "Reduce the magnitude limit for stars"
-msgstr "तारों का परिमाण परिसीमा घटाएं"
+msgstr "तारों की मात्रा सीमा घटाएँ"
 
 #: src/core/modules/GridLinesMgr.cpp:767 src/ui_viewDialog.h:3937
 msgid "Meridian"
@@ -155,11 +155,11 @@ msgstr "देशान्तर रेखा"
 
 #: src/core/modules/GridLinesMgr.cpp:771
 msgid "Ecliptic of J2000.0"
-msgstr "J2000.0 का क्रांतिवृत्त"
+msgstr "जू॰2000.0 का क्रान्तिवृत्त"
 
 #: src/core/modules/GridLinesMgr.cpp:775
 msgid "Ecliptic of Date"
-msgstr "दिनांक पे क्रांतिवृत्त"
+msgstr "दिनांक पर क्रान्तिवृत्त"
 
 #: src/core/modules/GridLinesMgr.cpp:783
 msgid "Equator of J2000.0"
@@ -167,7 +167,7 @@ msgstr "भूमध्यरेखा जू॰2000.0 पर"
 
 #: src/core/modules/GridLinesMgr.cpp:787
 msgid "Equator"
-msgstr "विषुवत रेखा"
+msgstr "भूमध्यरेखा"
 
 #: src/core/modules/GridLinesMgr.cpp:791
 msgid "Hour Angle"
@@ -377,7 +377,7 @@ msgstr "सौर मध्यरेखा समतल रेखा"
 #: src/core/modules/GridLinesMgr.cpp:2043
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:381
 msgid "Equator line"
-msgstr "खगोलीय भूमध्यरेखा"
+msgstr "भूमध्यरेखा"
 
 #: src/core/modules/GridLinesMgr.cpp:2044
 msgid "Equator J2000 line"
@@ -799,11 +799,11 @@ msgstr "प्रकाशीय प्रदूषण तथ्य स्था
 
 #: src/core/modules/LandscapeMgr.cpp:876
 msgid "Increase light pollution"
-msgstr "प्राकाशिक प्रदूषण बढाएं"
+msgstr "प्राकाशिक प्रदूषण बढाएँ"
 
 #: src/core/modules/LandscapeMgr.cpp:877
 msgid "Reduce light pollution"
-msgstr "प्राकाशिक प्रदूषण घटाएं"
+msgstr "प्राकाशिक प्रदूषण घटाएँ"
 
 #: src/core/modules/LandscapeMgr.cpp:878
 msgid "Cyclic change in light pollution"
@@ -2650,7 +2650,7 @@ msgstr "वायु पूँछ लम्बाई ( अनुमान )"
 
 #: src/core/modules/Comet.cpp:449 src/core/StelProjectorClasses.cpp:729
 msgid "Orthographic"
-msgstr "ऑर्थोग्राफिक"
+msgstr "लम्बरेखाचित्रीय"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/core/modules/SolarSystem.cpp:298 src/gui/AstroCalcDialog.cpp:5992
@@ -2666,12 +2666,12 @@ msgstr "ग्रह नाम सूचक"
 #: src/core/modules/SolarSystem.cpp:300
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:352
 msgid "Planet orbits"
-msgstr "ग्रहों की कक्षा"
+msgstr "ग्रहपथ"
 
 #: src/core/modules/SolarSystem.cpp:301
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:356
 msgid "Planet trails"
-msgstr "ग्रहों के पदचिन्ह"
+msgstr "ग्रहों के पदचिह्न"
 
 #: src/core/modules/SolarSystem.cpp:302
 msgid "Planet trails reset"
@@ -3071,7 +3071,7 @@ msgstr "वर्ण शैली का आरम्भीकरण"
 
 #: src/core/StelApp.cpp:655 src/ui_configurationDialog.h:1961
 msgid "Night mode"
-msgstr "रात्री उपयोगी मोड"
+msgstr "रात्री अनुकूल शैली"
 
 #: src/core/StelApp.cpp:682
 msgid "Initializing SPOUT sender..."
@@ -3092,35 +3092,35 @@ msgstr "उपलग्न का आरोहण"
 #: src/ui_dateTimeDialogGui.h:373 src/ui_dateTimeDialogGui.h:376
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:172
 msgid "Date and Time"
-msgstr "तारीख और समय"
+msgstr "दिनांक तथा समय"
 
 #: src/core/StelCore.cpp:290 src/core/StelMovementMgr.cpp:193
 msgid "Movement and Selection"
-msgstr "गतिविधि व चयन"
+msgstr "गतिविधि तथा चयन"
 
 #: src/core/StelCore.cpp:293
 msgid "Increase time speed"
-msgstr "समय की गती बढ़ाएं"
+msgstr "समय की गति बढाएँ"
 
 #: src/core/StelCore.cpp:294
 msgid "Decrease time speed"
-msgstr "समय की गती धीमी करें"
+msgstr "समय की गति घटाएँ"
 
 #: src/core/StelCore.cpp:295
 msgid "Increase time speed (a little)"
-msgstr "समय की गती बढ़ाएं (थोड़ी)"
+msgstr "समय की गति बढाएँ ( थोडा )"
 
 #: src/core/StelCore.cpp:296
 msgid "Decrease time speed (a little)"
-msgstr "समय की गती धीमी करें (थोड़ी)"
+msgstr "समय की गति घटाएँ ( थोडा )"
 
 #: src/core/StelCore.cpp:297
 msgid "Set normal time rate"
-msgstr "सामान्य समय की गती"
+msgstr "स्थापित करें सामान्य समय गति"
 
 #: src/core/StelCore.cpp:298
 msgid "Set time rate to zero"
-msgstr "समय की गती को शून्य करें"
+msgstr "समय की गति शून्य स्थापित करें"
 
 #: src/core/StelCore.cpp:299
 msgid "Set reverse time direction"
@@ -3128,7 +3128,7 @@ msgstr "उल्टा समय दिशा स्थापित करे�
 
 #: src/core/StelCore.cpp:300
 msgid "Set time to now"
-msgstr "वर्तमान समय लागू' करें"
+msgstr "वर्तमान समय स्थापित करें"
 
 #: src/core/StelCore.cpp:301
 msgid "Add 1 solar minute"
