@@ -3831,6 +3831,16 @@
                  </property>
                 </widget>
                </item>
+               <item row="18" column="0">
+                <widget class="QToolButton" name="colorLagrangePointsLunar">
+                 <property name="toolTip">
+                  <string>Color of Earth-Moon Lagrange points</string>
+                 </property>
+                 <property name="text">
+                  <string notr="true"/>
+                 </property>
+                </widget>
+               </item>
                <item row="2" column="4">
                 <widget class="QCheckBox" name="fixedEquatorPartsCheckBox">
                  <property name="toolTip">
@@ -4082,6 +4092,16 @@
                  </property>
                  <property name="text">
                   <string>Sun-Planet Lagrange Points</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="18" column="1">
+                <widget class="QCheckBox" name="showLagrangePointsLunarCheckBox">
+                 <property name="toolTip">
+                  <string>Earth-Moon Lagrange points L4 and L5</string>
+                 </property>
+                 <property name="text">
+                  <string>Earth-Moon Lagrange Points</string>
                  </property>
                 </widget>
                </item>
