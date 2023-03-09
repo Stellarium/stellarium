@@ -3822,9 +3822,9 @@
                 </widget>
                </item>
                <item row="17" column="0">
-                <widget class="QToolButton" name="colorLagrangePoints">
+                <widget class="QToolButton" name="colorLagrangePointsSolar">
                  <property name="toolTip">
-                  <string>Color of Lagrange points</string>
+                  <string>Color of Sun-Planet Lagrange points</string>
                  </property>
                  <property name="text">
                   <string notr="true"/>
@@ -4076,12 +4076,12 @@
                 </widget>
                </item>
                <item row="17" column="1">
-                <widget class="QCheckBox" name="showLagrangePointsCheckBox">
+                <widget class="QCheckBox" name="showLagrangePointsSolarCheckBox">
                  <property name="toolTip">
-                  <string>Lagrange points L4 and L5</string>
+                  <string>Sun-planet Lagrange points L4 and L5</string>
                  </property>
                  <property name="text">
-                  <string>Lagrange Points</string>
+                  <string>Sun-Planet Lagrange Points</string>
                  </property>
                 </widget>
                </item>
