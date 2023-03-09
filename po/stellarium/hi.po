@@ -3779,7 +3779,7 @@ msgstr ""
 
 #: src/core/StelProjectorClasses.cpp:251
 msgid "Stereographic"
-msgstr "स्टिरिओग्राफ़िक"
+msgstr "गोलचत्रीय"
 
 #: src/core/StelProjectorClasses.cpp:256
 msgid ""
@@ -3787,13 +3787,13 @@ msgid ""
 "as the planisphere projection. It preserves the angles at which curves cross"
 " each other but it does not preserve area."
 msgstr ""
-"द्विचित्रीय प्रदर्शन जाना गया है प्राचीन काल से तथा मूलतः जाना जाता था "
-"समतलगोल प्रदर्शन। यह ठीक रखता है अस्रों को वक्ररेखाओं का जो परस्पर पार करते "
-"हैं परन्तु क्षेत्रफल को नही।"
+"गोलचित्रीय प्रदर्शन जाना गया है प्राचीन काल से तथा मूलतः जाना जाता था "
+"समतलगोल प्रदर्शन। यह ठीक रखता है परस्पर पार करते हुए वक्ररेखाओं के अस्रों को"
+" परन्तु क्षेत्रफल को नही।"
 
 #: src/core/StelProjectorClasses.cpp:355
 msgid "Fish-eye"
-msgstr "फिश-आय"
+msgstr "मत्स्य आंख"
 
 #: src/core/StelProjectorClasses.cpp:360
 msgid ""
@@ -3808,7 +3808,7 @@ msgstr ""
 
 #: src/core/StelProjectorClasses.cpp:460
 msgid "Hammer-Aitoff"
-msgstr "हैम्मर-ऐतोफ़"
+msgstr "हाम्मर-एैटोफ्फ"
 
 #: src/core/StelProjectorClasses.cpp:465
 msgid ""
@@ -3849,7 +3849,7 @@ msgstr ""
 
 #: src/core/StelProjectorClasses.cpp:644
 msgid "Mercator"
-msgstr "मर्केटर"
+msgstr "मेर्काटोर"
 
 #: src/core/StelProjectorClasses.cpp:649
 msgid ""
@@ -4366,7 +4366,7 @@ msgstr "भूमध्यरेखीय अथवा दिगम्शीय 
 
 #: src/core/StelMovementMgr.cpp:195
 msgid "Center on selected object"
-msgstr "चुनी हुई वास्तु पर केंद्रित करें"
+msgstr "चुनी हुई वास्तु मध्यपटल करें"
 
 #: src/core/StelMovementMgr.cpp:196
 msgid "Deselect the selected object"
@@ -4374,7 +4374,7 @@ msgstr "चयनित वस्तु को अचयनित करें"
 
 #: src/core/StelMovementMgr.cpp:197
 msgid "Zoom in on selected object"
-msgstr "चुनी वस्तु को बड़ा करें"
+msgstr "चयनित वस्तु बृहत्तर करें"
 
 #: src/core/StelMovementMgr.cpp:198
 msgid "Zoom out"
@@ -4382,7 +4382,7 @@ msgstr "आकार छोटा करें"
 
 #: src/core/StelMovementMgr.cpp:200
 msgid "Track object"
-msgstr "वस्तु दृश्य रखें"
+msgstr "वस्तु का पीछा करें"
 
 #: src/core/StelMovementMgr.cpp:202
 msgid "Look towards East"
@@ -4741,11 +4741,11 @@ msgstr "अधिक जानकारी प्राप्त कर सक�
 
 #: src/gui/ConfigurationDialog.cpp:128 src/ui_configurationDialog.h:1769
 msgid "Plugins"
-msgstr "प्लग-इन"
+msgstr "उपलग्न"
 
 #: src/gui/ConfigurationDialog.cpp:769
 msgid "Select screenshot directory"
-msgstr "स्क्रीनशॉट डायरेक्टरी चुने"
+msgstr "पटलचित्र अभिलेखकोश चुनें"
 
 #: src/gui/ConfigurationDialog.cpp:799
 #: plugins/Oculars/src/gui/OcularDialog.cpp:591
@@ -4851,8 +4851,8 @@ msgid ""
 "Downloading %1...\n"
 "(You can close this window.)"
 msgstr ""
-"डाउनलोड शुरू %1...\n"
-"(खिडकी बंद कर सकते है)"
+"जालावरोहण %1...\n"
+"( आप इस खिडकी को मिटा सकते हैं )"
 
 #: src/gui/ConfigurationDialog.cpp:1524
 #, qt-format
@@ -4876,7 +4876,7 @@ msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1660
 msgid "Verifying file integrity..."
-msgstr "फाइल की जांच हो रही है..."
+msgstr "अभिलेख समग्रता की जाँच चालू।"
 
 #: src/gui/ConfigurationDialog.cpp:1664
 #, qt-format
