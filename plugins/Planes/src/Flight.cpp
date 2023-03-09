@@ -314,8 +314,7 @@ void Flight::drawPath(StelCore *core, StelPainter &painter)
 	}
 	//TODO eventually do this all in a shader
 	numPaths++;
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	painter.setBlending(true);
 
 	StelProjectorP prj = core->getProjection(StelCore::FrameAltAz);
 	Vec3d onscreen; // projected coords
