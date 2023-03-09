@@ -30,8 +30,6 @@
 FlightMgr::FlightMgr(QObject *parent) :
 	QObject(parent), displayBrightness(0), lastSelectedObject(NULL)
 {
-	pathDrawMode = Flight::SelectedOnly;
-	labelsVisible = true;
 	earth = GETSTELMODULE(SolarSystem)->getEarth();
 	texPointer = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/pointeur5.png");
 	Flight::updateObserverPos(StelApp::getInstance().getCore()->getCurrentLocation());
@@ -46,19 +44,17 @@ FlightMgr::~FlightMgr()
 
 void FlightMgr::draw(StelCore *core)
 {
+	const bool labelsVisible=GETSTELMODULE(Planes)->getFlagShowLabels();
 	// Don't render anything if we aren't on earth or before the year 2000
 	if (core->getCurrentLocation().planetName != earth->getEnglishName() ||
 			core->getJD() < 2451545.0)
 	{
 		return;
 	}
-	StelProjectorP projection = core->getProjection(StelCore::FrameAltAz);
+	StelProjectorP projection = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
 	StelPainter painter(projection);
-	//painter.setColor(0, 1, 0, displayBrightness);
-	painter.setColor(Flight::getFlightInfoColour()[0], Flight::getFlightInfoColour()[1], Flight::getFlightInfoColour()[2], displayBrightness);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	glEnable(GL_BLEND);
-	glEnable(GL_TEXTURE_2D);
+	painter.setColor(Flight::getFlightInfoColor(), displayBrightness);
+	painter.setBlending(true);
 	Planes::planeTexture->bind();
 	Flight::numPaths = 0;
 	Flight::numVisible = 0;
@@ -69,7 +65,7 @@ void FlightMgr::draw(StelCore *core)
 		{
 			for (int i = 0; i < l->size(); ++i)
 			{
-				l->at(i)->draw(core, painter, pathDrawMode, labelsVisible);
+				l->at(i)->draw(core, painter, Flight::getPathDrawMode(), labelsVisible);
 			}
 		}
 	}
@@ -84,7 +80,7 @@ void FlightMgr::draw(StelCore *core)
 
 void FlightMgr::drawPointer(StelCore *core, StelPainter &painter)
 {
-	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
+	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000, StelCore::RefractionOff);
 
 	const QList<StelObjectP> newSelected = GETSTELMODULE(StelObjectMgr)->getSelectedObject(QStringLiteral("Flight"));
 	if (!newSelected.empty())
@@ -99,9 +95,7 @@ void FlightMgr::drawPointer(StelCore *core, StelPainter &painter)
 			return;
 		texPointer->bind();
 
-		glEnable(GL_TEXTURE_2D);
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
+		painter.setBlending(true);
 
 		// Size on screen
 		float size = 2.f*obj->getAngularRadius(core)*M_PI_180f*prj->getPixelPerRadAtCenter();
@@ -319,7 +313,4 @@ void FlightMgr::updateSelectedObject()
 	}
 }
 
-void FlightMgr::setInterpEnabled(bool interp)
-{
-	ADSBData::useInterp = interp;
-}
+

@@ -172,7 +172,7 @@ ADSBFrame const *ADSBData::getData(double jd)
 	}
 	//qDebug() << "didn't find " << lastIndex << " lastRequestedJd " << lastRequestedJd;
 	lastRequestedJd = jd;
-	return NULL;
+	return Q_NULLPTR;
 }
 
 bool ADSBData::append(QList<ADSBFrame> &newdata)

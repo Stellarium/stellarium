@@ -37,44 +37,34 @@ Vec3d Flight::observerPos(R_EARTH,0,0);
 double Flight::ECEFtoAzAl[3][3];
 int Flight::numPaths;
 int Flight::numVisible;
-Flight::PathColourMode Flight::pathColourMode = Flight::SolidColour;
+Flight::PathColorMode Flight::pathColorMode = Flight::SolidColor;
+Flight::PathDrawMode Flight::pathDrawMode = Flight::SelectedOnly;     //!< Path drawing mode
 QFont Flight::labelFont;
-Vec3f Flight::infoColour(0, 1, 0);
+Vec3f Flight::infoColor(0, 1, 0);
 
-double Flight::maxVertRate = 50;	//!< Max vertical rate, used for path colouring
-double Flight::minVertRate = -50;	//!< Min vertical rate, used for path colouring
-double Flight::maxVelocity = 500;	//!< Max ground speed, used for path colouring
-double Flight::minVelocity = 0;  	//!< Min ground speed, used for path colouring
+double Flight::maxVertRate = 50;	//!< Max vertical rate, used for path coloring
+double Flight::minVertRate = -50;	//!< Min vertical rate, used for path coloring
+double Flight::maxVelocity = 500;	//!< Max ground speed, used for path coloring
+double Flight::minVelocity = 0;  	//!< Min ground speed, used for path coloring
 double Flight::velRange = Flight::maxVelocity - Flight::minVelocity;
-double Flight::maxHeight = 20000;	//!< Max height, used for path colouring
-double Flight::minHeight = 0;		//!< Min height, used for path colouring
+double Flight::maxHeight = 20000;	//!< Max height, used for path coloring
+double Flight::minHeight = 0;		//!< Min height, used for path coloring
 double Flight::heightRange = Flight::maxHeight - Flight::minHeight;
 
 std::vector<float> Flight::pathVert;
 std::vector<float> Flight::pathCol;
 
-Flight::Flight() : position(0, 0, 0)
-{
-	data = Q_NULLPTR;
-	currentFrame = Q_NULLPTR;
-	inTimeRange = false;
-	flightSelected = false;
-}
+Flight::Flight() : data(Q_NULLPTR), flightSelected(false), currentFrame(Q_NULLPTR), position(0, 0, 0), inTimeRange(false)
+{}
 
-Flight::Flight(QStringList &data) : position(0, 0, 0)
+Flight::Flight(QStringList &data) : flightSelected(false), currentFrame(Q_NULLPTR), position(0, 0, 0), inTimeRange(false)
 {
 	this->data = new ADSBData(data);
-	currentFrame = Q_NULLPTR;
-	inTimeRange = false;
-	flightSelected = false;
 }
 
-Flight::Flight(QList<ADSBFrame> &data, QString &modeS, QString &modeSHex, QString &callsign, QString &country) : position(0, 0, 0)
+Flight::Flight(QList<ADSBFrame> &data, QString &modeS, QString &modeSHex, QString &callsign, QString &country) : flightSelected(false), currentFrame(Q_NULLPTR), position(0, 0, 0), inTimeRange(false)
 {
 	this->data = new ADSBData(data, modeS, modeSHex, callsign, country);
-	currentFrame = Q_NULLPTR;
-	inTimeRange = false;
-	flightSelected = false;
 }
 
 Flight::~Flight()
@@ -343,19 +333,19 @@ void Flight::drawPath(StelCore *core, StelPainter &painter)
 		prj->project(getAzAl(pdata->at(i).ecefPos), onscreen);
 		pathVert[i * 2] = onscreen[0];
 		pathVert[i * 2 + 1] = onscreen[1];
-		if (pathColourMode == SolidColour)
+		if (pathColorMode == SolidColor)
 		{
 			pathCol[i * 4] = .2 + .8 * (float)(i) / pdata->size();
 			pathCol[i * 4 + 1] = .2 + .8 * (float)(i) / pdata->size();
 			pathCol[i * 4 + 2] = .2 + .8 * (float)(i) / pdata->size();
 		}
-		else if (pathColourMode == EncodeHeight)
+		else if (pathColorMode == EncodeHeight)
 		{
 			pathCol[i * 4] = clamp(minHeight, pdata->at(i).altitude, maxHeight) / heightRange;
 			pathCol[i * 4 + 1] = 0;
 			pathCol[i * 4 + 2] = 0;
 		}
-		else if (pathColourMode == EncodeVelocity)
+		else if (pathColorMode == EncodeVelocity)
 		{
 			pathCol[i * 4] = clamp(minVelocity, pdata->at(i).ground_speed, maxVelocity) / velRange;
 			pathCol[i * 4 + 1] = clamp(minVertRate, pdata->at(i).vertical_rate, 0) / minVertRate;
@@ -417,64 +407,6 @@ Vec3d Flight::getAzAl(const Vec3d &v)
 			+ ECEFtoAzAl[2][1] * toPoint[1]
 			+ ECEFtoAzAl[2][2] * toPoint[2];
 	return ret;
-}
-double Flight::getMaxVertRate()
-{
-	return maxVertRate;
-}
-
-void Flight::setMaxVertRate(double value)
-{
-	maxVertRate = value;
-}
-double Flight::getMinVertRate()
-{
-	return minVertRate;
-}
-
-void Flight::setMinVertRate(double value)
-{
-	minVertRate = value;
-}
-double Flight::getMaxVelocity()
-{
-	return maxVelocity;
-}
-
-void Flight::setMaxVelocity(double value)
-{
-	maxVelocity = value;
-	velRange = maxVelocity - minVelocity;
-}
-double Flight::getMinVelocity()
-{
-	return minVelocity;
-}
-
-void Flight::setMinVelocity(double value)
-{
-	minVelocity = value;
-	velRange = maxVelocity - minVelocity;
-}
-double Flight::getMaxHeight()
-{
-	return maxHeight;
-}
-
-void Flight::setMaxHeight(double value)
-{
-	maxHeight = value;
-	heightRange = maxHeight - minHeight;
-}
-double Flight::getMinHeight()
-{
-	return minHeight;
-}
-
-void Flight::setMinHeight(double value)
-{
-	minHeight = value;
-	heightRange = maxHeight - minHeight;
 }
 
 void Flight::writeToDb() const
@@ -571,21 +503,6 @@ int Flight::size() const
 	Q_ASSERT(data);
 	return data->size();
 }
-Vec3f Flight::getFlightInfoColour()
-{
-	return infoColour;
-}
-
-void Flight::setFlightInfoColour(const int &r, const int &g, const int &b)
-{
-	infoColour = Vec3f(r / 255.0, g / 255.0, b / 255.0);
-}
-
-void Flight::setFlightInfoColour(const Vec3f &col)
-{
-	infoColour = col;
-}
-
 
 Vec3d Flight::calcECEFPosition(const Vec3d &pos)
 {

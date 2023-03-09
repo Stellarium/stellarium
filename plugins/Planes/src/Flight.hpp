@@ -27,8 +27,7 @@
 #include "ADS-B.hpp"
 #include <vector>
 
-
-
+class Planes;
 
 //! @class Flight
 //! Represents a series of ADS-B Datapoints that make up a flight event.
@@ -37,22 +36,23 @@
 //! @author Felix Zeltner
 class Flight : public StelObject
 {
+	friend Planes;
 	//Required for Q_FLAG macro, this requires this header to be MOC'ed
 	Q_GADGET
 public:
 
-	//! @enum PathColour
-	//! Determins how the flight paths are coloured
-	enum PathColourMode
+	//! @enum PathColorMode
+	//! Determines how the flight paths are colored
+	enum PathColorMode
 	{
-		SolidColour    = 0,  //!< Draw flight paths in solid colour
-		EncodeHeight   = 1,  //!< Draw flight paths coloured by height
-		EncodeVelocity = 2   //!< Draw flight paths coloured by velocity
+		SolidColor    = 0,  //!< Draw flight paths in solid color
+		EncodeHeight   = 1,  //!< Draw flight paths colored by height
+		EncodeVelocity = 2   //!< Draw flight paths colored by velocity
 	};
-	Q_ENUM(PathColourMode)
+	Q_ENUM(PathColorMode)
 
 	//! @enum PathDrawMode
-	//! Determins for which flights paths are drawn
+	//! Determines for which flights paths are drawn
 	enum PathDrawMode
 	{
 		NoPaths      = 0,    //!< Draw no paths at all
@@ -181,10 +181,10 @@ public:
 		return 100;
 	}
 
-	//! Colour used to colour the info string
+	//! Color used to color the info string
 	Vec3f getInfoColor() const override
 	{
-		return infoColour;
+		return infoColor;
 	}
 
 	//! Checks if this plane is visible at the current time.
@@ -246,41 +246,26 @@ public:
 	//! @returns the vector in Az/Al
 	static Vec3d getAzAl(const Vec3d &v);
 
-	//! Set the path colouring mode to mode.
-	static void setPathColourMode(PathColourMode mode)
+	//! Set the path coloring mode to mode.
+	static void setPathColorMode(PathColorMode mode)
 	{
-		pathColourMode = mode;
+		pathColorMode = mode;
 	}
 
-	//! Get the current path colouring mode
-	static PathColourMode getPathColourMode()
+	//! Get the current path coloring mode
+	static PathColorMode getPathColorMode()
 	{
-		return pathColourMode;
+		return pathColorMode;
+	}
+	//! Get the current path draw mode
+	static PathDrawMode getPathDrawMode()
+	{
+		return pathDrawMode;
 	}
 
 	static int numVisible; //!< Debugging count of planes visible currently
 	static int numPaths; //!< Debugging count of paths drawn currently
 
-	//!@{
-	//! Personalise path colouring
-	static double getMaxVertRate();
-	static void setMaxVertRate(double value);
-
-	static double getMinVertRate();
-	static void setMinVertRate(double value);
-
-	static double getMaxVelocity();
-	static void setMaxVelocity(double value);
-
-	static double getMinVelocity();
-	static void setMinVelocity(double value);
-
-	static double getMaxHeight();
-	static void setMaxHeight(double value);
-
-	static double getMinHeight();
-	static void setMinHeight(double value);
-	//!@}
 
 	//! Write this flight to the database.
 	void writeToDb() const;
@@ -288,21 +273,20 @@ public:
 	//! Return number of available data points
 	int size() const;
 
-	//! The colour used for drawing info text and icons
-	static Vec3f getFlightInfoColour();
+	//! The color used for drawing info text and icons
+	static Vec3f getFlightInfoColor() {return infoColor;}
 
-	//! Set the colour used for drawing info text and icons
-	static void setFlightInfoColour(const int &r, const int &g, const int &b);
-	static void setFlightInfoColour(const Vec3f &col);
 
 private:
 	static Vec3d observerPos; //!< The position of the observer, used to calculate Az/Al pos
 	static double ECEFtoAzAl[3][3]; //!< Matrix to transform from ECEF to Az/Al
-	static PathColourMode pathColourMode; //!< Path colouring mode
+	static PathColorMode pathColorMode; //!< Path coloring mode
+	static PathDrawMode pathDrawMode;     //!< Path drawing mode
+
 	static QFont labelFont; //!< Font for rendering labels
-	static Vec3f infoColour;
+	static Vec3f infoColor; //!< Color for rendering infoString
 	//!@{
-	//! Values for colour coding paths
+	//! Values for color coding paths
 	static double maxVertRate;
 	static double minVertRate;
 	static double maxVelocity;
@@ -313,7 +297,7 @@ private:
 	static double heightRange;
 	//!@}
 	static std::vector<float> pathVert;	//!< Buffer holding path points for rendering
-	static std::vector<float> pathCol;	//!< Buffer holding path colours for rendering
+	static std::vector<float> pathCol;	//!< Buffer holding path colors for rendering
 
 	ADSBData *data; //!< Holds the actual ADS-B Data
 	Vec3d azAlPos; //!< Current position in Az/Al frame

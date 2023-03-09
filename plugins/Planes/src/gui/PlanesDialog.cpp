@@ -72,14 +72,6 @@ void PlanesDialog::setBSStatus(QString status)
 	}
 }
 
-void PlanesDialog::setColour(const int &r, const int &g, const int &b)
-{
-	ui->red->setValue(r);
-	ui->green->setValue(g);
-	ui->blue->setValue(b);
-	ui->col_out->setStyleSheet(QString("background-color: rgb(%1, %2, %3);").arg(r).arg(g).arg(b));
-}
-
 void PlanesDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
@@ -92,7 +84,6 @@ void PlanesDialog::createDialogContent()
 	ui->BSGroup->setChecked(planes->isUsingBS());
 	ui->useBSDB->setChecked(planes->isDumpingOldFlights());
 	ui->useBSDB->setEnabled(planes->isUsingDB() && planes->isUsingBS());
-	ui->connectOnStartup->setChecked(planes->isConnectOnStartupEnabled());
 	ui->reconnectOnConnectionLoss->setChecked(planes->isReconnectOnConnectionLossEnabled());
 
 	DBCredentials c = planes->getDBCreds();
@@ -111,24 +102,26 @@ void PlanesDialog::createDialogContent()
 	ui->dbPass->setText(c.pass);
 	ui->dbName->setText(c.name);
 
-	ui->useInterp->setChecked(planes->getFlightMgr()->isInterpEnabled());
-	ui->showLabels->setChecked(planes->getFlightMgr()->isLabelsVisible());
-	Flight::PathDrawMode showTrails = planes->getFlightMgr()->getPathDrawMode();
+	connectBoolProperty(ui->useInterp, "Planes.useInterpolation");
+	connectBoolProperty(ui->showLabels,"Planes.showLabels");
+	Flight::PathDrawMode showTrails = planes->getPathDrawMode();
 	ui->trails_nothing->setChecked(showTrails == Flight::NoPaths);
 	ui->trails_selected->setChecked(showTrails == Flight::SelectedOnly);
 	ui->trails_inView->setChecked(showTrails == Flight::InViewOnly);
 	ui->trails_all->setChecked(showTrails == Flight::AllPaths);
-	Flight::PathColourMode trailCol = planes->getFlightMgr()->getPathColourMode();
-	ui->col_solid->setChecked(trailCol == Flight::SolidColour);
+	Flight::PathColorMode trailCol = planes->getPathColorMode();
+	ui->col_solid->setChecked(trailCol == Flight::SolidColor);
 	ui->col_height->setChecked(trailCol == Flight::EncodeHeight);
 	ui->col_velocity->setChecked(trailCol == Flight::EncodeVelocity);
 
-	ui->maxHeight->setValue(Flight::getMaxHeight());
-	ui->minHeight->setValue(Flight::getMinHeight());
-	ui->maxVel->setValue(Flight::getMaxVelocity());
-	ui->minVel->setValue(Flight::getMinVelocity());
-	ui->maxVertRate->setValue(Flight::getMaxVertRate());
-	ui->minVertRate->setValue(Flight::getMinVertRate());
+	connectDoubleProperty(ui->maxHeight, "Planes.maxHeight");
+	connectDoubleProperty(ui->minHeight, "Planes.minHeight");
+	connectDoubleProperty(ui->maxVel, "Planes.maxVelocity");
+	connectDoubleProperty(ui->minVel, "Planes.minVelocity");
+	connectDoubleProperty(ui->maxVertRate, "Planes.maxVertRate");
+	connectDoubleProperty(ui->minVertRate, "Planes.minVertRate");
+
+	//connectStringProperty()
 
 	ui->bsHost->setText(planes->getBSHost());
 	ui->bsPort->setText(QString::number((int)planes->getBSPort()));
@@ -136,9 +129,6 @@ void PlanesDialog::createDialogContent()
 
 	ui->bsStatus->setText(cachedBSStatus);
 	ui->dbStatus->setText(cachedDBStatus);
-
-	Vec3f col = Flight::getFlightInfoColour();
-	setColour((int)(col[0] * 255), (int)(col[1] * 255), (int)(col[2] * 255));
 
 	this->connect(ui->closeStelWindow, SIGNAL(clicked()), SLOT(close()));
 	this->connect(&StelApp::getInstance(), SIGNAL(languageChanged()), SLOT(retranslate()));
@@ -151,17 +141,8 @@ void PlanesDialog::createDialogContent()
 	this->connect(ui->trails_inView, SIGNAL(clicked()), SLOT(setInviewPaths()));
 	this->connect(ui->trails_all, SIGNAL(clicked()), SLOT(setAllPaths()));
 
-	this->connect(ui->minHeight, SIGNAL(valueChanged(double)), SLOT(setMinHeight(double)));
-	this->connect(ui->maxHeight, SIGNAL(valueChanged(double)), SLOT(setMaxHeight(double)));
-	this->connect(ui->minVel, SIGNAL(valueChanged(double)), SLOT(setMinVel(double)));
-	this->connect(ui->maxVel, SIGNAL(valueChanged(double)), SLOT(setMaxVel(double)));
-	this->connect(ui->minVertRate, SIGNAL(valueChanged(double)), SLOT(setMinVertRate(double)));
-	this->connect(ui->maxVertRate, SIGNAL(valueChanged(double)), SLOT(setMaxVertRate(double)));
-
 	this->connect(ui->importFileButton, SIGNAL(clicked()), SLOT(openFile()));
 
-	this->connect(ui->showLabels, SIGNAL(clicked(bool)), SLOT(setLabels(bool)));
-	this->connect(ui->useInterp, SIGNAL(clicked(bool)), SLOT(setInterp(bool)));
 	this->connect(ui->dbConnectButton, SIGNAL(clicked()), SLOT(connectDB()));
 	this->connect(ui->dbDisconnectButton, SIGNAL(clicked()), SLOT(disconnectDB()));
 
@@ -181,12 +162,10 @@ void PlanesDialog::createDialogContent()
 	this->connect(ui->bsConnectButton, SIGNAL(clicked()), SLOT(connectBS()));
 	this->connect(ui->bsDisconnectButton, SIGNAL(clicked()), SLOT(disconnectBS()));
 
-	this->connect(ui->connectOnStartup, SIGNAL(clicked()), SLOT(setConnectOnStartup()));
+	connectBoolProperty(ui->connectOnStartup, "Planes.connectOnStartup");
 	this->connect(ui->reconnectOnConnectionLoss, SIGNAL(clicked(bool)), SLOT(setReconnectOnConnectionLoss(bool)));
 
-	this->connect(ui->red, SIGNAL(valueChanged(int)), SLOT(setColour()));
-	this->connect(ui->green, SIGNAL(valueChanged(int)), SLOT(setColour()));
-	this->connect(ui->blue, SIGNAL(valueChanged(int)), SLOT(setColour()));
+	connectColorButton(ui->infoTextColorButton, "Planes.infoColor", "Planes/planes_color");
 }
 
 void PlanesDialog::updateDBFields()
@@ -246,16 +225,3 @@ void PlanesDialog::setUseBS()
 	ui->useBSDB->setEnabled(ui->databaseGroup->isChecked());
 }
 
-void PlanesDialog::setConnectOnStartup()
-{
-	emit connectOnStartupChanged(ui->connectOnStartup->isChecked());
-}
-
-void PlanesDialog::setColour()
-{
-	int r = ui->red->value();
-	int g = ui->green->value();
-	int b = ui->blue->value();
-	ui->col_out->setStyleSheet(QString(QStringLiteral("background-color: rgb(%1, %2, %3);")).arg(r).arg(g).arg(b));
-	Flight::setFlightInfoColour(r, g, b);
-}

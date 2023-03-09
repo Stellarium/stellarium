@@ -49,7 +49,7 @@ public slots:
 signals:
 	//!@{
 	//! Signals emitted, when settings change or buttons are clicked
-	void pathColourModeChanged(Flight::PathColourMode mode);
+	void pathColorModeChanged(Flight::PathColorMode mode);
 	void pathDrawModeChanged(Flight::PathDrawMode mode);
 	void showLabelsChanged(bool enabled);
 	void fileSelected(QString filename);
@@ -64,7 +64,6 @@ signals:
 	void bsUseDBChanged(bool dbUsedSet);
 	void connectBSRequested();
 	void disconnectBSRequested();
-	void connectOnStartupChanged(bool enabled);
 	void reconnectOnConnectionLossChanged(bool enabled);
 	//!@}
 
@@ -75,7 +74,7 @@ protected:
 private:
 	//! Toggle certain settings that depend on other settings being enabled
 	void updateDBFields();
-	void setColour(const int &r, const int &g, const int &b);
+	//void setColor(const int &r, const int &g, const int &b);
 
 	Ui::PlanesDialog *ui;
 	QString cachedDBStatus;
@@ -87,15 +86,15 @@ private slots:
 	//! value changes.
 	void setSolidCol()
 	{
-		emit pathColourModeChanged(Flight::SolidColour);
+		emit pathColorModeChanged(Flight::SolidColor);
 	}
 	void setHeightCol()
 	{
-		emit pathColourModeChanged(Flight::EncodeHeight);
+		emit pathColorModeChanged(Flight::EncodeHeight);
 	}
 	void setVelocityCol()
 	{
-		emit pathColourModeChanged(Flight::EncodeVelocity);
+		emit pathColorModeChanged(Flight::EncodeVelocity);
 	}
 	void setNoPaths()
 	{
@@ -112,32 +111,6 @@ private slots:
 	void setAllPaths()
 	{
 		emit pathDrawModeChanged(Flight::AllPaths);
-	}
-	void setLabels(bool enabled)
-	{
-		emit showLabelsChanged(enabled);
-	}
-	void setInterp(bool checked)
-	{
-		emit useInterpChanged(checked);
-	}
-	void setMinHeight(double val) {
-		Flight::setMinHeight(val);
-	}
-	void setMaxHeight(double val) {
-		Flight::setMaxHeight(val);
-	}
-	void setMinVel(double val) {
-		Flight::setMinVelocity(val);
-	}
-	void setMaxVel(double val) {
-		Flight::setMaxVelocity(val);
-	}
-	void setMinVertRate(double val) {
-		Flight::setMinVertRate(val);
-	}
-	void setMaxVertRate(double val) {
-		Flight::setMaxVertRate(val);
 	}
 
 	void openFile();
@@ -175,8 +148,6 @@ private slots:
 		emit disconnectBSRequested();
 	}
 	void setUseBS();
-	void setConnectOnStartup();
-	void setColour();
 	void setReconnectOnConnectionLoss(bool enabled)
 	{
 		emit reconnectOnConnectionLossChanged(enabled);
