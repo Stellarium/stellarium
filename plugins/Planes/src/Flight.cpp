@@ -20,8 +20,8 @@
 #include <QDebug>
 #include "StelCore.hpp"
 #include "StelUtils.hpp"
-#include "StelApp.hpp"
-#include "Planes.hpp"
+//#include "StelApp.hpp"
+//#include "Planes.hpp"
 #include "StelTranslator.hpp"
 
 #include <QSqlQuery>
@@ -55,8 +55,8 @@ std::vector<float> Flight::pathCol;
 
 Flight::Flight() : position(0, 0, 0)
 {
-	data = NULL;
-	currentFrame = NULL;
+	data = Q_NULLPTR;
+	currentFrame = Q_NULLPTR;
 	inTimeRange = false;
 	flightSelected = false;
 }
@@ -64,7 +64,7 @@ Flight::Flight() : position(0, 0, 0)
 Flight::Flight(QStringList &data) : position(0, 0, 0)
 {
 	this->data = new ADSBData(data);
-	currentFrame = NULL;
+	currentFrame = Q_NULLPTR;
 	inTimeRange = false;
 	flightSelected = false;
 }
@@ -72,7 +72,7 @@ Flight::Flight(QStringList &data) : position(0, 0, 0)
 Flight::Flight(QList<ADSBFrame> &data, QString &modeS, QString &modeSHex, QString &callsign, QString &country) : position(0, 0, 0)
 {
 	this->data = new ADSBData(data, modeS, modeSHex, callsign, country);
-	currentFrame = NULL;
+	currentFrame = Q_NULLPTR;
 	inTimeRange = false;
 	flightSelected = false;
 }
@@ -128,7 +128,7 @@ QString Flight::getInfoString(const StelCore *core, const StelObject::InfoString
 {
 	if (!data || !data->isInitialised())
 	{
-		return QStringLiteral("");
+		return QString();
 	}
 	QString infoStr;
 	QTextStream ss(&infoStr);
@@ -170,7 +170,7 @@ QString Flight::getInfoString(const StelCore *core, const StelObject::InfoString
 			// TRANSLATORS: Height plane is flying at
 			ss << q_("Altitude: ") << currentFrame->altitude << QStringLiteral(" m (") << currentFrame->altitude_feet << QStringLiteral(" ft)") << br;
 			// TRANSLATORS: Distance to observer
-			ss << q_("Distance: ") << azAlPos.length() << QStringLiteral(" m") << br;
+			ss << q_("Distance: ") << azAlPos.norm() << QStringLiteral(" m") << br;
 			double a;
 			double b;
 			StelUtils::rectToSphe(&a, &b, azAlPos);
@@ -383,11 +383,11 @@ Vec3d Flight::calcECEFPosition(double lat, double lon, double alt)
 
 void Flight::updateObserverPos(StelLocation pos)
 {
-	observerPos = calcECEFPosition(Vec3d(pos.latitude * M_PI / 180.0, pos.longitude * M_PI / 180.0, pos.altitude));
-	double sla = sin(pos.latitude * M_PI / 180.0);
-	double cla = cos(pos.latitude * M_PI / 180.0);
-	double slo = sin(pos.longitude * M_PI / 180.0);
-	double clo = cos(pos.longitude * M_PI / 180.0);
+	observerPos = calcECEFPosition(Vec3d(pos.getLatitude() * M_PI / 180.0, pos.getLongitude() * M_PI / 180.0, pos.altitude));
+	double sla = sin(pos.getLatitude() * M_PI / 180.0);
+	double cla = cos(pos.getLatitude() * M_PI / 180.0);
+	double slo = sin(pos.getLongitude() * M_PI / 180.0);
+	double clo = cos(pos.getLongitude() * M_PI / 180.0);
 	ECEFtoAzAl[0][0] = sla * clo;
 	ECEFtoAzAl[0][1] = sla * slo;
 	ECEFtoAzAl[0][2] = -cla;

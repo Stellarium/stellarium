@@ -42,6 +42,7 @@ StelTextureSP Planes::planeTexture;
 
 Planes::Planes()
 {
+	qDebug() << "Planes: CTOR";
 	// Register metatypes so they can be passed on signals/slots across threads
 	qRegisterMetaType<DBCredentials>();
 	qRegisterMetaType<QList<ADSBFrame> >();
@@ -67,19 +68,40 @@ void Planes::init()
 	connect(StelApp::getInstance().getCore(), SIGNAL(locationChanged(StelLocation)), this, SLOT(updateLocation(StelLocation)));
 
 	QString planesGroup = N_("Planes");
-	addAction("action_enable_planes", planesGroup, N_("Show Planes"), "enabled", "Shift+P");
-	addAction("action_show_planes_settings", planesGroup, N_("Show Planes Settings"), settingsDialog, "visible", "Ctrl+P");
+	addAction("actionShow_planes",          planesGroup, N_("Show Planes"), "enabled", "Shift+P");
+	addAction("actionShow_planes_settings", planesGroup, N_("Show Planes Settings"), settingsDialog, "visible", "Ctrl+P");
 
-	onPix = new QPixmap(QStringLiteral(":/planes/planes_on.png"));
-	offPix = new QPixmap(QStringLiteral(":/planes/planes_off.png"));
-	glowPix = new QPixmap(QStringLiteral(":/graphicGui/glow32x32.png"));
-	onSettingsPix = new QPixmap(QStringLiteral(":/planes/planes_settings.png"));
-	offSettingsPix = new QPixmap(QStringLiteral(":/planes/planes_settings_off.png"));
-	enableButton = new StelButton(NULL, *onPix, *offPix, *glowPix, "action_enable_planes");
-	settingsButton = new StelButton(NULL, *onSettingsPix, *offSettingsPix, *glowPix, "action_show_planes_settings");
-	StelGui *gui = dynamic_cast<StelGui *>(StelApp::getInstance().getGui());
-	gui->getButtonBar()->addButton(enableButton, QStringLiteral("065-pluginsGroup"));
-	gui->getButtonBar()->addButton(settingsButton, QStringLiteral("065-pluginsGroup"));
+	// Add a toolbar button
+	try
+	{
+		StelGui *gui = dynamic_cast<StelGui *>(StelApp::getInstance().getGui());
+		if (gui!=Q_NULLPTR)
+		{
+			//onPix = new QPixmap(QStringLiteral(":/planes/planes_on.png"));
+			//offPix = new QPixmap(QStringLiteral(":/planes/planes_off.png"));
+			//glowPix = new QPixmap(QStringLiteral(":/graphicGui/miscGlow32x32.png"));
+			//onSettingsPix = new QPixmap(QStringLiteral(":/planes/planes_settings.png"));
+			//offSettingsPix = new QPixmap(QStringLiteral(":/planes/planes_settings_off.png"));
+			toolbarButton = new StelButton(NULL,
+						      QPixmap(QStringLiteral(":/planes/planes_on.png")),
+						      QPixmap(QStringLiteral(":/planes/planes_off.png")),
+						      QPixmap(QStringLiteral(":/graphicGui/miscGlow32x32.png")),
+						      "actionShow_planes",
+						      false,
+						      "actionShow_planes_settings");
+
+			//enableButton = new StelButton(NULL, *onPix, *offPix, *glowPix, "actionShow_planes", false, "actionShow_planes_settings");
+			//settingsButton = new StelButton(NULL, *onSettingsPix, *offSettingsPix, *glowPix, "action_show_planes_settings");
+			gui->getButtonBar()->addButton(toolbarButton, QStringLiteral("065-pluginsGroup"));
+			//gui->getButtonBar()->addButton(settingsButton, QStringLiteral("065-pluginsGroup"));
+		}
+
+	}
+	catch (std::runtime_error& e)
+	{
+		qWarning() << "WARNING: unable to create toolbar button for Planes plugin: " << e.what();
+	}
+
 
 	// Settings
 	// Appearance
@@ -161,18 +183,18 @@ void Planes::handleKeys(QKeyEvent *event)
 	event->ignore();
 }
 
-void Planes::handleMouseClicks(QMouseEvent *event)
-{
-	event->ignore();
-}
-
-bool Planes::handleMouseMoves(int x, int y, Qt::MouseButtons b)
-{
-	Q_UNUSED(x);
-	Q_UNUSED(y);
-	Q_UNUSED(b);
-	return false;
-}
+//void Planes::handleMouseClicks(QMouseEvent *event)
+//{
+//	event->ignore();
+//}
+//
+//bool Planes::handleMouseMoves(int x, int y, Qt::MouseButtons b)
+//{
+//	Q_UNUSED(x);
+//	Q_UNUSED(y);
+//	Q_UNUSED(b);
+//	return false;
+//}
 
 bool Planes::configureGui(bool show)
 {
@@ -193,11 +215,11 @@ void Planes::loadSettings()
 	bsDataSource.setReconnectOnConnectionLoss(conf->value(QStringLiteral("attempt_reconnects"), false).toBool());
 
 	dbc.type = conf->value(QStringLiteral("db_type"), QStringLiteral("QMYSQL")).toString();
-	dbc.host = conf->value(QStringLiteral("db_host"), QStringLiteral("")).toString();
+	dbc.host = conf->value(QStringLiteral("db_host"), QString()).toString();
 	dbc.port = conf->value(QStringLiteral("db_port"), 3306).toInt();
-	dbc.user = conf->value(QStringLiteral("db_user"), QStringLiteral("")).toString();
-	dbc.pass = conf->value(QStringLiteral("db_pass"), QStringLiteral("")).toString();
-	dbc.name = conf->value(QStringLiteral("db_name"), QStringLiteral("")).toString();
+	dbc.user = conf->value(QStringLiteral("db_user"), QString()).toString();
+	dbc.pass = conf->value(QStringLiteral("db_pass"), QString()).toString();
+	dbc.name = conf->value(QStringLiteral("db_name"), QString()).toString();
 
 	flightMgr.setInterpEnabled(conf->value(QStringLiteral("use_interp"), true).toBool());
 	flightMgr.setLabelsVisible(conf->value(QStringLiteral("show_labels"), true).toBool());
@@ -217,7 +239,7 @@ void Planes::loadSettings()
 
 	connectOnStartup = conf->value(QStringLiteral("connect_on_startup"), false).toBool();
 
-	Flight::setFlightInfoColour(StelUtils::strToVec3f(conf->value(QStringLiteral("planes_colour"), QStringLiteral("0.,1.,0.")).toString()));
+	Flight::setFlightInfoColour(Vec3f(conf->value(QStringLiteral("planes_colour"), QStringLiteral("0.,1.,0.")).toString()));
 
 	conf->endGroup();
 }
@@ -269,6 +291,7 @@ void Planes::enablePlanes(bool b)
 		displayFader = b;
 	}
 	qDebug() << "Planes enabled " << b;
+	emit enabledChanged(b);
 }
 
 void Planes::setDBCreds(DBCredentials creds)
@@ -313,8 +336,9 @@ StelPluginInfo PlanesStelPluginInterface::getPluginInfo() const
 	info.id = QStringLiteral("Planes");
 	info.displayedName = N_("Planes");
 	info.authors = N_("Felix Zeltner");
-	info.contact = QStringLiteral("");
+	info.contact = QString();
 	info.description = N_("Display flight trajectories from ADS-B tracking data.");
 	info.version = PLANES_PLUGIN_VERSION;
+	info.license = PLANES_PLUGIN_LICENSE;
 	return info;
 }

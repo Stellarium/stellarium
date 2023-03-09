@@ -25,6 +25,7 @@
 #include "StelFileMgr.hpp"
 #include "StelObjectMgr.hpp"
 #include "Planes.hpp"
+#include "StelUtils.hpp"
 
 FlightMgr::FlightMgr(QObject *parent) :
 	QObject(parent), displayBrightness(0), lastSelectedObject(NULL)
@@ -47,7 +48,7 @@ void FlightMgr::draw(StelCore *core)
 {
 	// Don't render anything if we aren't on earth or before the year 2000
 	if (core->getCurrentLocation().planetName != earth->getEnglishName() ||
-			core->getJDay() < 2451545.0)
+			core->getJD() < 2451545.0)
 	{
 		return;
 	}
@@ -103,7 +104,7 @@ void FlightMgr::drawPointer(StelCore *core, StelPainter &painter)
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
 
 		// Size on screen
-		float size = obj->getAngularSize(core)*M_PI/180.*prj->getPixelPerRadAtCenter();
+		float size = 2.f*obj->getAngularRadius(core)*M_PI_180f*prj->getPixelPerRadAtCenter();
 		size += 12.f + 3.f*std::sin(2.f * StelApp::getInstance().getTotalRunTime());
 		// size+=20.f + 10.f*std::sin(2.f * StelApp::getInstance().getTotalRunTime());
 		painter.drawSprite2dMode(screenpos[0]-size/2, screenpos[1]-size/2, 20, 90);
@@ -115,7 +116,7 @@ void FlightMgr::drawPointer(StelCore *core, StelPainter &painter)
 
 void FlightMgr::update(double deltaTime)
 {
-	double jdate = StelApp::getInstance().getCore()->getJDay();
+	double jdate = StelApp::getInstance().getCore()->getJD();
 	if (dataSource)
 	{
 		dataSource->update(deltaTime, jdate, StelApp::getInstance().getCore()->getTimeRate());
@@ -282,7 +283,7 @@ void FlightMgr::setDataSource(FlightDataSource *source)
 		}
 		dataSource = source;
 		dataSource->init();
-		dataSource->updateRelevantFlights(StelApp::getInstance().getCore()->getJDay(), StelApp::getInstance().getCore()->getTimeRate());
+		dataSource->updateRelevantFlights(StelApp::getInstance().getCore()->getJD(), StelApp::getInstance().getCore()->getTimeRate());
 	}
 }
 

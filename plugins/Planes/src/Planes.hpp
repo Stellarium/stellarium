@@ -37,7 +37,7 @@ Q_DECLARE_METATYPE(DBCredentials)
 class Planes : public StelObjectModule
 {
 	Q_OBJECT
-	Q_PROPERTY(bool enabled READ isEnabled WRITE enablePlanes)
+	Q_PROPERTY(bool enabled READ isEnabled WRITE enablePlanes NOTIFY enabledChanged)
 	friend class FlightMgr;
 public:
 	Planes();
@@ -46,34 +46,42 @@ public:
 	///////////////////////////////////////////////////////////////////////////
 	//!@{
 	//! Methods defined in the StelModule class
-	void init();
-	void deinit();
-	void update(double deltaTime);
-	void draw(StelCore* core);
-	double getCallOrder(StelModuleActionName actionName) const;
-	void handleKeys(class QKeyEvent* event);
-	void handleMouseClicks(class QMouseEvent* event);
-	bool handleMouseMoves(int x, int y, Qt::MouseButtons b);
-	bool configureGui(bool show = true);
+	void init() override;
+	void deinit() override;
+	void update(double deltaTime) override;
+	void draw(StelCore* core) override;
+	double getCallOrder(StelModuleActionName actionName) const override;
+	void handleKeys(class QKeyEvent* event) override;
+	//void handleMouseClicks(class QMouseEvent* event) override;
+	//bool handleMouseMoves(int x, int y, Qt::MouseButtons b) override;
+	bool configureGui(bool show = true) override;
 	//!@}
 
 	////////////////////////////////////////////////////////////////////////////
 	//!@{
 	//! Methods defined in StelObjectModule
 	//! Forward requests to FlightMgr
-	QList<StelObjectP> searchAround(const Vec3d &v, double limitFov, const StelCore *core) const
+	QList<StelObjectP> searchAround(const Vec3d &v, double limitFov, const StelCore *core) const override
 	{
 		return flightMgr.searchAround(v, limitFov , core);
 	}
 
-	StelObjectP searchByNameI18n(const QString &nameI18n) const
+	StelObjectP searchByNameI18n(const QString &nameI18n) const override
 	{
 		return flightMgr.searchByNameI18n(nameI18n);
 	}
 
-	StelObjectP searchByName(const QString &name) const
+	StelObjectP searchByName(const QString &name) const override
 	{
 		return flightMgr.searchByName(name);
+	}
+
+	//! Return the StelObject with the given ID if exists or the empty StelObject if not found
+	//! @param name the english object name
+	//! @todo for now this is equal to searchByName(). Maybe this is wrong.
+	virtual StelObjectP searchByID(const QString& id) const override
+	{
+		return searchByName(id);
 	}
 
 	QStringList listMatchingObjectsI18n(const QString &objPrefix, int maxNbItem, bool useStartOfWords) const
@@ -81,12 +89,12 @@ public:
 		return flightMgr.listMatchingObjectsI18n(objPrefix, maxNbItem, useStartOfWords);
 	}
 
-	QStringList listMatchingObjects(const QString &objPrefix, int maxNbItem, bool useStartOfWords) const
+	QStringList listMatchingObjects(const QString &objPrefix, int maxNbItem, bool useStartOfWords) const override
 	{
 		return flightMgr.listMatchingObjects(objPrefix, maxNbItem, useStartOfWords);
 	}
 
-	QStringList listAllObjects(bool inEnglish) const
+	QStringList listAllObjects(bool inEnglish) const override
 	{
 		return flightMgr.listAllObjects(inEnglish);
 	}
@@ -94,9 +102,14 @@ public:
 
 	//! Return the name of this StelObject.
 	//! Name is the class name.
-	QString getName() const
+	QString getName() const override
 	{
 		return QStringLiteral("Planes");
+	}
+	//! Returns the name that will be returned by StelObject::getType() for the objects this module manages
+	virtual QString getStelObjectType() const override
+	{
+		return QStringLiteral("Flight");
 	}
 
 	//! Is the plugin enabled?
@@ -162,6 +175,9 @@ public:
 		return bsDataSource.isReconnectOnConnectionLossEnabled();
 	}
 
+signals:
+	void enabledChanged(bool enabled);
+
 public slots:
 	//! Turn this plugin on or off
 	void enablePlanes(bool b);
@@ -207,16 +223,16 @@ private:
 	BSRecordingDataSource bsRecordingDataSource; //!< data source for loading files
 	BSDataSource bsDataSource; //!< data source for database and data port
 
-	StelButton *settingsButton; //!< Button to show settings
-	StelButton *enableButton; //!< Button to enable/disable plugin
+	//StelButton *settingsButton; //!< Button to show settings
+	StelButton *toolbarButton; //!< Button to enable/disable plugin
 
 	//!@{
 	//! Icons for the buttons
-	QPixmap *onPix;
-	QPixmap *offPix;
-	QPixmap *glowPix;
-	QPixmap *onSettingsPix;
-	QPixmap *offSettingsPix;
+	//QPixmap *onPix;
+	//QPixmap *offPix;
+	//QPixmap *glowPix;
+	//QPixmap *onSettingsPix;
+	//QPixmap *offSettingsPix;
 	//!@}
 
 	DBCredentials dbc; //!< Database credentials
@@ -235,11 +251,12 @@ private:
 class PlanesStelPluginInterface : public QObject, public StelPluginInterface
 {
 	Q_OBJECT
-	Q_PLUGIN_METADATA(IID "stellarium.StelGuiPluginInterface/1.0")
+	Q_PLUGIN_METADATA(IID StelPluginInterface_iid)
 	Q_INTERFACES(StelPluginInterface)
 public:
-	virtual StelModule* getStelModule() const;
-	virtual StelPluginInfo getPluginInfo() const;
+	virtual StelModule* getStelModule()    const override;
+	virtual StelPluginInfo getPluginInfo() const override;
+	virtual QObjectList getExtensionList() const override { return QObjectList(); }
 };
 
 #endif /*PLANES_HPP_*/

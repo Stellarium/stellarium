@@ -598,7 +598,8 @@ ADD_PLUGIN(Vts 0)
 ########## for the compilation of Stellarium itself
 
 IF(USE_PLUGIN_PLANES)
-	SET(QT_USE_QTSQL TRUE) # Planes plugin needs SQL module
+     FIND_PACKAGE(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Sql)
+     SET(QT_USE_QTSQL TRUE) # Planes plugin needs SQL module
 ENDIF()
 
 # Custom target used to manage dependencies of stellarium -> Static plugins
@@ -715,14 +716,15 @@ IF(WIN32)
 #    GET_TARGET_PROPERTY(QtSql_location Qt5::Sql LOCATION)
 #    GET_TARGET_PROPERTY(QtSvg_location Qt5::Svg LOCATION)
 #    GET_TARGET_PROPERTY(QtXmlPatterns_location Qt5::XmlPatterns LOCATION)
-    GET_FILENAME_COMPONENT(QT5_LIBS ${QtCore_location} PATH)
-	IF (USE_PLUGIN_PLANES)
-		SET(ISS_SQLDRIVERS "Source: \"${QT5_LIBS}/../plugins/sqldrivers/*\"; Excludes: \"*d.dll,*psql*\"; DestDir: \"{app}/sqldrivers/\";")
-		SET(ISS_LIBMYSQL "Source: \"libmysql.dll\"; DestDir: \"{app}\";")
-	ELSEIF()
-		SET(ISS_SQLDRIVERS "; Sql drivers not used")
-		SET(ISS_LIBMYSQL "; libmysql.dll unused")
-	ENDIF()
+# ##2023 Probably SQL has to be re-activated? TODO!
+#    GET_FILENAME_COMPONENT(QT5_LIBS ${QtCore_location} PATH)
+#	IF (USE_PLUGIN_PLANES)
+#		SET(ISS_SQLDRIVERS "Source: \"${QT5_LIBS}/../plugins/sqldrivers/*\"; Excludes: \"*d.dll,*psql*\"; DestDir: \"{app}/sqldrivers/\";")
+#		SET(ISS_LIBMYSQL "Source: \"libmysql.dll\"; DestDir: \"{app}\";")
+#	ELSEIF()
+#		SET(ISS_SQLDRIVERS "; Sql drivers not used")
+#		SET(ISS_LIBMYSQL "; libmysql.dll unused")
+#	ENDIF()
 #    IF(ENABLE_SCRIPTING)
 #        GET_TARGET_PROPERTY(QtScript_location Qt5::Script LOCATION)
 #        SET(ISS_QT_SCRIPT "Source: \"${QtScript_location}\"; DestDir: \"{app}\";")
