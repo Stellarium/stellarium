@@ -49,7 +49,7 @@ public slots:
 signals:
 	//!@{
 	//! Signals emitted, when settings change or buttons are clicked
-	void pathColourModeChanged(Flight::PathColour mode);
+	void pathColourModeChanged(Flight::PathColourMode mode);
 	void pathDrawModeChanged(Flight::PathDrawMode mode);
 	void showLabelsChanged(bool enabled);
 	void fileSelected(QString filename);

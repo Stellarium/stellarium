@@ -118,7 +118,7 @@ void PlanesDialog::createDialogContent()
 	ui->trails_selected->setChecked(showTrails == Flight::SelectedOnly);
 	ui->trails_inView->setChecked(showTrails == Flight::InViewOnly);
 	ui->trails_all->setChecked(showTrails == Flight::AllPaths);
-	Flight::PathColour trailCol = planes->getFlightMgr()->getPathColourMode();
+	Flight::PathColourMode trailCol = planes->getFlightMgr()->getPathColourMode();
 	ui->col_solid->setChecked(trailCol == Flight::SolidColour);
 	ui->col_height->setChecked(trailCol == Flight::EncodeHeight);
 	ui->col_velocity->setChecked(trailCol == Flight::EncodeVelocity);

@@ -37,7 +37,7 @@ Vec3d Flight::observerPos(R_EARTH,0,0);
 double Flight::ECEFtoAzAl[3][3];
 int Flight::numPaths;
 int Flight::numVisible;
-Flight::PathColour Flight::pathColour = Flight::SolidColour;
+Flight::PathColourMode Flight::pathColourMode = Flight::SolidColour;
 QFont Flight::labelFont;
 Vec3f Flight::infoColour(0, 1, 0);
 
@@ -343,19 +343,19 @@ void Flight::drawPath(StelCore *core, StelPainter &painter)
 		prj->project(getAzAl(pdata->at(i).ecefPos), onscreen);
 		pathVert[i * 2] = onscreen[0];
 		pathVert[i * 2 + 1] = onscreen[1];
-		if (pathColour == SolidColour)
+		if (pathColourMode == SolidColour)
 		{
 			pathCol[i * 4] = .2 + .8 * (float)(i) / pdata->size();
 			pathCol[i * 4 + 1] = .2 + .8 * (float)(i) / pdata->size();
 			pathCol[i * 4 + 2] = .2 + .8 * (float)(i) / pdata->size();
 		}
-		else if (pathColour == EncodeHeight)
+		else if (pathColourMode == EncodeHeight)
 		{
 			pathCol[i * 4] = clamp(minHeight, pdata->at(i).altitude, maxHeight) / heightRange;
 			pathCol[i * 4 + 1] = 0;
 			pathCol[i * 4 + 2] = 0;
 		}
-		else if (pathColour == EncodeVelocity)
+		else if (pathColourMode == EncodeVelocity)
 		{
 			pathCol[i * 4] = clamp(minVelocity, pdata->at(i).ground_speed, maxVelocity) / velRange;
 			pathCol[i * 4 + 1] = clamp(minVertRate, pdata->at(i).vertical_rate, 0) / minVertRate;

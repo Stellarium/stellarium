@@ -224,7 +224,7 @@ void Planes::loadSettings()
 	flightMgr.setInterpEnabled(conf->value(QStringLiteral("use_interp"), true).toBool());
 	flightMgr.setLabelsVisible(conf->value(QStringLiteral("show_labels"), true).toBool());
 	flightMgr.setPathDrawMode(static_cast<Flight::PathDrawMode>(conf->value(QStringLiteral("show_trails"), 1).toUInt()));
-	flightMgr.setPathColourMode(static_cast<Flight::PathColour>(conf->value(QStringLiteral("trail_col"), 0).toUInt()));
+	flightMgr.setPathColourMode(static_cast<Flight::PathColourMode>(conf->value(QStringLiteral("trail_col"), 0).toUInt()));
 
 	Flight::setMaxVertRate(conf->value(QStringLiteral("max_vert_rate"), 50).toDouble());
 	Flight::setMinVertRate(conf->value(QStringLiteral("min_vert_rate"), -50).toDouble());

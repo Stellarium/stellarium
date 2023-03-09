@@ -65,6 +65,7 @@ public:
 		AirToAirMessage = 7,
 		AllCallReply = 8
 	};
+	Q_ENUM(MsgMsgType)
 
 	//! Constructor
 	BSDataSource();

@@ -21,7 +21,6 @@
 
 #include <QObject>
 #include "Planet.hpp"
-#include "StelTexture.hpp"
 #include "Flight.hpp"
 #include "FlightDataSource.hpp"
 
@@ -93,7 +92,7 @@ public:
 	}
 
 	//! Get the path colouring mode
-	Flight::PathColour getPathColourMode() const
+	Flight::PathColourMode getPathColourMode() const
 	{
 		return Flight::getPathColourMode();
 	}
@@ -113,7 +112,7 @@ public slots:
 	void updateSelectedObject();
 
 	//! Change the path colouring mode
-	void setPathColourMode(Flight::PathColour mode)
+	void setPathColourMode(Flight::PathColourMode mode)
 	{
 		Flight::setPathColourMode(mode);
 	}

@@ -43,24 +43,24 @@ public:
 
 	//! @enum PathColour
 	//! Determins how the flight paths are coloured
-	enum PathColour
+	enum PathColourMode
 	{
-		SolidColour = 0,		//!< Draw flight paths in solid colour
-		EncodeHeight = 1,		//!< Draw flight paths coloured by height
-		EncodeVelocity = 2		//!< Draw flight paths coloured by velocity
+		SolidColour    = 0,  //!< Draw flight paths in solid colour
+		EncodeHeight   = 1,  //!< Draw flight paths coloured by height
+		EncodeVelocity = 2   //!< Draw flight paths coloured by velocity
 	};
-	Q_ENUM(PathColour);
+	Q_ENUM(PathColourMode)
 
 	//! @enum PathDrawMode
 	//! Determins for which flights paths are drawn
 	enum PathDrawMode
 	{
-		NoPaths = 0,			//!< Draw no paths at all
-		SelectedOnly = 1,		//!< Draw path for the selected flight only
-		InViewOnly = 2,			//!< Draw paths for all planes in view
-		AllPaths = 3			//!< Draw paths for all planes, regardless of screen position
+		NoPaths      = 0,    //!< Draw no paths at all
+		SelectedOnly = 1,    //!< Draw path for the selected flight only
+		InViewOnly   = 2,    //!< Draw paths for all planes in view
+		AllPaths     = 3     //!< Draw paths for all planes, regardless of screen position
 	};
-	Q_ENUM(PathDrawMode);
+	Q_ENUM(PathDrawMode)
 
 	//! Default constructor1
 	Flight();
@@ -247,15 +247,15 @@ public:
 	static Vec3d getAzAl(const Vec3d &v);
 
 	//! Set the path colouring mode to mode.
-	static void setPathColourMode(PathColour mode)
+	static void setPathColourMode(PathColourMode mode)
 	{
-		pathColour = mode;
+		pathColourMode = mode;
 	}
 
 	//! Get the current path colouring mode
-	static PathColour getPathColourMode()
+	static PathColourMode getPathColourMode()
 	{
-		return pathColour;
+		return pathColourMode;
 	}
 
 	static int numVisible; //!< Debugging count of planes visible currently
@@ -298,7 +298,7 @@ public:
 private:
 	static Vec3d observerPos; //!< The position of the observer, used to calculate Az/Al pos
 	static double ECEFtoAzAl[3][3]; //!< Matrix to transform from ECEF to Az/Al
-	static PathColour pathColour; //!< Path colouring mode
+	static PathColourMode pathColourMode; //!< Path colouring mode
 	static QFont labelFont; //!< Font for rendering labels
 	static Vec3f infoColour;
 	//!@{
