@@ -31,8 +31,6 @@
 class FlightMgr : public QObject
 {
 	Q_OBJECT
-	Q_PROPERTY(bool labelsVisible READ isLabelsVisible WRITE setLabelsVisible)
-	Q_PROPERTY(bool useInterp READ isInterpEnabled WRITE setInterpEnabled)
 public:
 	//! Constructor
 	explicit FlightMgr(QObject *parent = 0);
@@ -73,30 +71,6 @@ public:
 	//! @param source a pointer to the data source to use.
 	void setDataSource(FlightDataSource *source);
 
-	//! Check whether labels are drawn
-	bool isLabelsVisible() const
-	{
-		return labelsVisible;
-	}
-
-	//! Check whether interp is enabled
-	bool isInterpEnabled() const
-	{
-		return ADSBData::useInterp;
-	}
-
-	//! Get the path drawing mode
-	Flight::PathDrawMode getPathDrawMode() const
-	{
-		return pathDrawMode;
-	}
-
-	//! Get the path colouring mode
-	Flight::PathColourMode getPathColourMode() const
-	{
-		return Flight::getPathColourMode();
-	}
-
 signals:
 
 public slots:
@@ -111,30 +85,7 @@ public slots:
 	//! If not, mark last selected Flight as no longer selected.
 	void updateSelectedObject();
 
-	//! Change the path colouring mode
-	void setPathColourMode(Flight::PathColourMode mode)
-	{
-		Flight::setPathColourMode(mode);
-	}
-
-	//! Change the path drawing mode
-	void setPathDrawMode(Flight::PathDrawMode mode)
-	{
-		pathDrawMode = mode;
-	}
-
-	//! Turn label drawing on or off
-	void setLabelsVisible(bool visible)
-	{
-		labelsVisible = visible;
-	}
-
-	//! Turn interpolation on or off
-	void setInterpEnabled(bool interp);
-
 private:
-	bool labelsVisible; //!< are labels shown
-	Flight::PathDrawMode pathDrawMode; //!< Path drawing mode
 	StelTextureSP texPointer; //!< Selection rectangle
 	FlightDataSource *dataSource; //!< current data source
 	QSharedPointer<Planet> earth; //!< Reference to planet earth, to check if we are on earth

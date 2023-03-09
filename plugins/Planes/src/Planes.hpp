@@ -37,7 +37,20 @@ Q_DECLARE_METATYPE(DBCredentials)
 class Planes : public StelObjectModule
 {
 	Q_OBJECT
-	Q_PROPERTY(bool enabled READ isEnabled WRITE enablePlanes NOTIFY enabledChanged)
+	Q_PROPERTY(bool enabled          READ isEnabled               WRITE enablePlanes            NOTIFY enabledChanged)
+	Q_PROPERTY(bool connectOnStartup READ isConnectOnStartup      WRITE setConnectOnStartup     NOTIFY connectOnStartupChanged)
+	Q_PROPERTY(bool showLabels       READ getFlagShowLabels       WRITE setFlagShowLabels       NOTIFY showLabelsChanged)                // From FlightMgr
+	Q_PROPERTY(bool useInterpolation READ getFlagUseInterpolation WRITE setFlagUseInterpolation NOTIFY useInterpolationChanged)          // From FlightMgr
+	Q_PROPERTY(Flight::PathColorMode pathColorMode READ getPathColorMode WRITE setPathColorMode NOTIFY pathColorModeChanged)
+	Q_PROPERTY(Flight::PathDrawMode pathDrawMode   READ getPathDrawMode   WRITE setPathDrawMode   NOTIFY pathDrawModeChanged)
+	Q_PROPERTY(double maxVertRate READ getMaxVertRate WRITE setMaxVertRate NOTIFY maxVertRateChanged)
+	Q_PROPERTY(double minVertRate READ getMinVertRate WRITE setMinVertRate NOTIFY minVertRateChanged)
+	Q_PROPERTY(double maxVelocity READ getMaxVelocity WRITE setMaxVelocity NOTIFY maxVelocityChanged)
+	Q_PROPERTY(double minVelocity READ getMinVelocity WRITE setMinVelocity NOTIFY minVelocityChanged)
+	Q_PROPERTY(double maxHeight   READ getMaxHeight   WRITE setMaxHeight   NOTIFY maxHeightChanged)
+	Q_PROPERTY(double minHeight   READ getMinHeight   WRITE setMinHeight   NOTIFY minHeightChanged)
+	Q_PROPERTY(Vec3f infoColor   READ getFlightInfoColor  WRITE setFlightInfoColor  NOTIFY flightInfoColorChanged)
+
 	friend class FlightMgr;
 public:
 	Planes();
@@ -166,8 +179,6 @@ public:
 		return bsPort;
 	}
 
-	//! Should we autoconnect on startup?
-	bool isConnectOnStartupEnabled() const;
 
 	//! Should the data port attempt to reconnect on connection loss?
 	bool isReconnectOnConnectionLossEnabled() const
@@ -176,7 +187,20 @@ public:
 	}
 
 signals:
-	void enabledChanged(bool enabled);
+	void enabledChanged(bool b);
+	void connectOnStartupChanged(bool b);
+	void showLabelsChanged(bool b);
+	void useInterpolationChanged(bool b);
+	void pathColorModeChanged(Flight::PathColorMode mode);
+	void pathDrawModeChanged(Flight::PathDrawMode mode);
+	void maxVertRateChanged(double d);
+	void minVertRateChanged(double d);
+	void maxVelocityChanged(double d);
+	void minVelocityChanged(double d);
+	void maxHeightChanged(double d);
+	void minHeightChanged(double d);
+	void flightInfoColorChanged(Vec3f c);
+
 
 public slots:
 	//! Turn this plugin on or off
@@ -210,10 +234,85 @@ public slots:
 		bsPort = port;
 	}
 
+	// Property getters/setters. Some moved over from Flight class
+	//!@{
+
+	//! Should we autoconnect on startup?
+	bool isConnectOnStartup() const;
 	//! User changed connect on startup setting
 	void setConnectOnStartup(bool value);
 
+	//! Personalise path coloring
+	double getMaxVertRate() const;
+	void setMaxVertRate(double value);
+
+	double getMinVertRate() const;
+	void setMinVertRate(double value);
+
+	double getMaxVelocity() const;
+	void setMaxVelocity(double value);
+
+	double getMinVelocity() const;
+	void setMinVelocity(double value);
+
+	double getMaxHeight() const;
+	void setMaxHeight(double value);
+
+	double getMinHeight() const;
+	void setMinHeight(double value);
+
+	//! The color used for drawing info text and icons
+	Vec3f getFlightInfoColor() const;
+	//! Set the color used for drawing info text and icons
+	void setFlightInfoColor(const Vec3f &col);
+	//!@}
+	//! Check whether labels are drawn
+	bool getFlagShowLabels() const
+	{
+		return labelsVisible;
+	}
+	//! Turn label drawing on or off
+	void setFlagShowLabels(bool visible)
+	{
+		labelsVisible = visible;
+		emit showLabelsChanged(visible);
+	}
+
+	//! Check whether interp is enabled
+	bool getFlagUseInterpolation() const
+	{
+		return ADSBData::useInterp;
+	}
+	//! Turn interpolation on or off
+	void setFlagUseInterpolation(bool interp);
+
+	//! Get the path drawing mode
+	Flight::PathDrawMode getPathDrawMode() const
+	{
+		return Flight::pathDrawMode;
+	}
+	//! Change the path drawing mode
+	void setPathDrawMode(Flight::PathDrawMode mode)
+	{
+		Flight::pathDrawMode = mode;
+		emit pathDrawModeChanged(mode);
+	}
+
+	//! Get the path coloring mode
+	Flight::PathColorMode getPathColorMode() const
+	{
+		return Flight::pathColorMode;
+	}
+	//! Change the path coloring mode
+	void setPathColorMode(Flight::PathColorMode mode)
+	{
+		Flight::setPathColorMode(mode);
+		emit pathColorModeChanged(mode);
+	}
+
 private:
+	bool labelsVisible; //!< are labels shown
+
 	static StelTextureSP planeTexture; //!< the texture used for drawing the plane icons
 	FlightMgr flightMgr; //!< The FlightMgr
 	LinearFader displayFader; //!< Fader to fade in and out on enable/disable
@@ -223,17 +322,7 @@ private:
 	BSRecordingDataSource bsRecordingDataSource; //!< data source for loading files
 	BSDataSource bsDataSource; //!< data source for database and data port
 
-	//StelButton *settingsButton; //!< Button to show settings
 	StelButton *toolbarButton; //!< Button to enable/disable plugin
-
-	//!@{
-	//! Icons for the buttons
-	//QPixmap *onPix;
-	//QPixmap *offPix;
-	//QPixmap *glowPix;
-	//QPixmap *onSettingsPix;
-	//QPixmap *offSettingsPix;
-	//!@}
 
 	DBCredentials dbc; //!< Database credentials
 	QString bsHost; //!< data port hostname
