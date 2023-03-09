@@ -27,9 +27,9 @@
 #include "PlanesDialog.hpp"
 #include "DBCredentials.hpp"
 
-
+#if (QT_VERSION<QT_VERSION_CHECK(6,0,0))
 Q_DECLARE_METATYPE(DBCredentials)
-
+#endif
 
 //! @class Planes
 //! This class is the entry point for the plugin.
