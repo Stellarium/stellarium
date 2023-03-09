@@ -1790,7 +1790,7 @@ void SkyPoint::draw(StelCore *core) const
 			// Calculate the z of the pos on the common plane by enforcing common norm
 			// Sign it to point between v[2] and 0
 			const double lZSgn = (pos.v[2] >= 0) ? 1 : -1;
-			const double lZ = sqrt(pos.normSquared() - l4X*l4X - l4Y*l4Y);
+			const double lZ = lZSgn * sqrt(pos.normSquared() - l4X*l4X - l4Y*l4Y);
 			const Vec3d l4 = Vec3d(l4X, l4Y, lZ);
 			const Vec3d l5 = Vec3d(l5X, l5Y, lZ);
 			sPainter.drawSprite2dMode(l4, 5.f);
@@ -1812,7 +1812,7 @@ void SkyPoint::draw(StelCore *core) const
 			// Calculate the z of the pos on the common plane by enforcing common norm
 			// Sign it to point between v[2] and 0
 			const double lZSgn = (pos.v[2] >= 0) ? 1 : -1;
-			const double lZ = sqrt(pos.normSquared() - l4X*l4X - l4Y*l4Y);
+			const double lZ = lZSgn * sqrt(pos.normSquared() - l4X*l4X - l4Y*l4Y);
 			const Vec3d l4 = Vec3d(l4X, l4Y, lZ);
 			const Vec3d l5 = Vec3d(l5X, l5Y, lZ);
 			sPainter.drawSprite2dMode(l4, 5.f);
@@ -2258,6 +2258,7 @@ void GridLinesMgr::draw(StelCore* core)
 		longitudeLine->draw(core);
 		quadratureLine->draw(core);
 		umbraCenterPoint->draw(core);
+		lagrangePointsLunar->draw(core);
 	}
 	circumpolarCircleN->draw(core);
 	circumpolarCircleS->draw(core);
@@ -2286,7 +2287,6 @@ void GridLinesMgr::draw(StelCore* core)
 	celestialJ2000Poles->draw(core);
 	celestialPoles->draw(core);
 	lagrangePointsSolar->draw(core);
-	lagrangePointsLunar->draw(core);
 	zenithNadir->draw(core);
 }
 
@@ -4002,7 +4002,6 @@ void GridLinesMgr::setColorApexPoints(const Vec3f& newColor)
 	}
 }
 
-
 //! Set flag for displaying vector point
 void GridLinesMgr::setFlagLagrangePointsSolar(const bool displayed)
 {
@@ -4028,7 +4027,6 @@ void GridLinesMgr::setColorLagrangePointsSolar(const Vec3f& newColor)
 		lagrangePointsSolar->setColor(newColor);
 		emit lagrangePointsSolarColorChanged(newColor);
 	}
-
 }
 
 //! Set flag for displaying vector point
@@ -4056,7 +4054,6 @@ void GridLinesMgr::setColorLagrangePointsLunar(const Vec3f& newColor)
 		lagrangePointsLunar->setColor(newColor);
 		emit lagrangePointsLunarColorChanged(newColor);
 	}
-
 }
 
 void GridLinesMgr::setLineThickness(const float thickness)
