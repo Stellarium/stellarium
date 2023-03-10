@@ -36,6 +36,7 @@ FieldOfViewDialog::FieldOfViewDialog(QObject* parent)
 	, degree(0)
 	, minute(0)
 	, second(0)
+	, fov(0.)
 {
 	ui = new Ui_fieldOfViewDialogForm;
 	core = StelApp::getInstance().getCore();	
@@ -63,7 +64,13 @@ void FieldOfViewDialog::createDialogContent()
 	connect(ui->spinner_degree, &ExternalStepSpinBox::stepsRequested, this, [this](int steps){degreeChanged(degree+steps);});
 
 	ui->spinner_degree->setFocus();
+	ui->spinner_degree->setSuffix("°");
+	ui->spinner_decimal->setSuffix("°");
+	ui->spinner_minute->setSuffix("′");
+	ui->spinner_second->setSuffix("″");
+
 	connect(core, SIGNAL(currentProjectionTypeKeyChanged(QString)), this, SLOT(setFieldOfViewLimit(QString)));
+	connect(core->getMovementMgr(), SIGNAL(fovChagned(double)), this, SLOT(setFieldOfView(double)));
 	setFieldOfViewLimit(QString());
 }
 
@@ -72,18 +79,22 @@ void FieldOfViewDialog::connectSpinnerEvents() const
 	connect(ui->spinner_degree, SIGNAL(valueChanged(int)), this, SLOT(degreeChanged(int)));
 	connect(ui->spinner_minute, SIGNAL(valueChanged(int)), this, SLOT(minuteChanged(int)));
 	connect(ui->spinner_second, SIGNAL(valueChanged(int)), this, SLOT(secondChanged(int)));	
+	connect(ui->spinner_decimal, SIGNAL(valueChanged(double)), this, SLOT(fovChanged(double)));
 }
 
 void FieldOfViewDialog::disconnectSpinnerEvents()const
 {
 	disconnect(ui->spinner_degree, SIGNAL(valueChanged(int)), this, SLOT(degreeChanged(int)));
 	disconnect(ui->spinner_minute, SIGNAL(valueChanged(int)), this, SLOT(minuteChanged(int)));
-	disconnect(ui->spinner_second, SIGNAL(valueChanged(int)), this, SLOT(secondChanged(int)));	
+	disconnect(ui->spinner_second, SIGNAL(valueChanged(int)), this, SLOT(secondChanged(int)));
+	disconnect(ui->spinner_decimal, SIGNAL(valueChanged(double)), this, SLOT(fovChanged(double)));
 }
 
 void FieldOfViewDialog::setFieldOfViewLimit(QString)
 {
-	ui->spinner_degree->setMaximum(qRound(core->getProjection(StelCore::FrameJ2000)->getMaxFov()));
+	double maxFov = core->getProjection(StelCore::FrameJ2000)->getMaxFov();
+	ui->spinner_degree->setMaximum(qRound(maxFov));
+	ui->spinner_decimal->setMaximum(maxFov);
 }
 
 bool FieldOfViewDialog::makeValidAndApply(int d, int m, int s)
@@ -92,9 +103,10 @@ bool FieldOfViewDialog::makeValidAndApply(int d, int m, int s)
 		degree = d;
 		minute = m;
 		second = s;
+		fov = degree + minute/60. + second/3600.;
 	}
 
-	return applyFieldOfView(degree + minute/60. + second/3600.);
+	return applyFieldOfView(fov);
 }
 
 bool FieldOfViewDialog::applyFieldOfView(double fov)
@@ -113,6 +125,12 @@ void FieldOfViewDialog::retranslate()
 void FieldOfViewDialog::close()
 {
 	StelDialog::close();
+}
+
+void FieldOfViewDialog::fovChanged(double nd)
+{
+	setFieldOfView(nd);
+	core->getMovementMgr()->zoomTo(nd, 0.f);
 }
 
 void FieldOfViewDialog::degreeChanged(int newdegree)
@@ -152,6 +170,8 @@ void FieldOfViewDialog::pushToWidgets()
 		ui->spinner_minute->setValue(minute);
 	if(ui->spinner_second->value() != second)
 		ui->spinner_second->setValue(second);
+	if(ui->spinner_decimal->value() != fov)
+		ui->spinner_decimal->setValue(fov);
 
 	connectSpinnerEvents();
 }
@@ -166,6 +186,7 @@ void FieldOfViewDialog::setFieldOfView(double newFOV)
 	degree = d;
 	minute = m;
 	second = qRound(s);
+	fov = newFOV;
 
 	pushToWidgets();
 }

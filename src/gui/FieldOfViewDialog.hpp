@@ -53,6 +53,8 @@ private slots:
 	void minuteChanged(int nm);
 	//! second slider or dial changed
 	void secondChanged(int ns);
+	//! decimal degree slider or dial changed
+	void fovChanged(double nd);
 	//! set FOV limit when projection type is changed
 	void setFieldOfViewLimit(QString);
 
@@ -62,6 +64,7 @@ private:
 	int degree;
 	int minute;
 	int second;
+	double fov;
 	void pushToWidgets();
 };
 

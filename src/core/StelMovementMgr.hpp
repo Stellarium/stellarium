@@ -465,6 +465,7 @@ signals:
 	void flagEnableMoveKeysChanged(bool b);
 	void flagEnableZoomKeysChanged(bool b);
 	void userMaxFovChanged(double fov);
+	void fovChagned(double fov);
 
 private slots:
 	//! Called when the selected object changes.
@@ -492,6 +493,8 @@ private:
 			currentFov=180.0;
 		else
 			currentFov=qBound(minFov, f, maxFov);
+
+		emit fovChagned(currentFov);
 	}
 	// immediately add deltaFov argument to FOV - does not change private var.
 	void changeFov(double deltaFov);
