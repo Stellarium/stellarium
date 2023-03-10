@@ -28,13 +28,14 @@
 
 FieldOfViewDialog::FieldOfViewDialog(QObject* parent)
 	: StelDialog("FieldOfView", parent)
+	, ui(new Ui_fieldOfViewDialogForm)
+	, core(StelApp::getInstance().getCore())
 	, degree(0)
 	, minute(0)
 	, second(0)
 	, fov(0.)
 {
-	ui = new Ui_fieldOfViewDialogForm;
-	core = StelApp::getInstance().getCore();	
+//
 }
 
 FieldOfViewDialog::~FieldOfViewDialog()
