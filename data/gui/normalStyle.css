@@ -880,6 +880,74 @@ QLineEdit[collision="true"] {
 }
 
 /**************************************************************************************************************
+ * fieldOfViewDialog
+ *************************************************************************************************************/
+
+#fieldOfViewDialogForm #fieldOfViewWidget QFrame {
+        background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(235, 239, 249), stop: 1 rgb(210, 214, 224));
+        border: none;
+}
+
+#fieldOfViewDialogForm #fieldOfViewWidget QLabel {
+        padding: 0;
+        margin: 0;
+        font-size: 24px;
+        text-align: center;
+        background: none;
+}
+
+#fieldOfViewDialogForm QSpinBox,
+#fieldOfViewDialogForm QDoubleSpinBox {
+        border-image: none;
+        border: 0;
+        background: rgba(0, 0, 0, 0%);
+        padding-top: 16px;
+        padding-bottom: 16px;
+        font-size: 18px;
+        text-align: center;
+        padding-left: 3px;
+        padding-right: 3px;
+}
+
+#fieldOfViewDialogForm QSpinBox::up-button,
+#fieldOfViewDialogForm QDoubleSpinBox::up-button {
+        subcontrol-origin: border;
+        subcontrol-position: top center;
+        margin: 0 14px 8px 12px;
+        width: 32px;
+        border: none;
+        background: none;
+        image: url(:/graphicGui/uieSpinup.png);
+}
+
+#fieldOfViewDialogForm QSpinBox::up-arrow,
+#fieldOfViewDialogForm QDoubleSpinBox::up-arrow {
+        image: none;
+        subcontrol-origin: border;
+        subcontrol-position: bottom center;
+        padding-bottom: 20px;
+}
+
+#fieldOfViewDialogForm QSpinBox::down-button,
+#fieldOfViewDialogForm QDoubleSpinBox::down-button {
+        subcontrol-origin: border;
+        subcontrol-position: bottom center;
+        margin: 8px 14px 0 12px;
+        border: none;
+        width: 32px;
+        background: none;
+        image: url(:/graphicGui/uieSpindown.png);
+}
+
+#fieldOfViewDialogForm QSpinBox::down-arrow,
+#fieldOfViewDialogForm QDoubleSpinBox::down-arrow {
+        image: none;
+        subcontrol-origin: border;
+        subcontrol-position: top center;
+        padding-top: 20px;
+}
+
+/**************************************************************************************************************
  * AstroCalc
  *************************************************************************************************************/
 

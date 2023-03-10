@@ -43,6 +43,7 @@
 
 #include "ConfigurationDialog.hpp"
 #include "DateTimeDialog.hpp"
+#include "FieldOfViewDialog.hpp"
 #include "HelpDialog.hpp"
 #include "LocationDialog.hpp"
 #include "SearchDialog.hpp"
@@ -83,6 +84,7 @@ StelGui::StelGui()
 	, locationDialog(nullptr)
 	, helpDialog(nullptr)
 	, dateTimeDialog(nullptr)
+	, fieldOfViewDialog(nullptr)
 	, searchDialog(nullptr)
 	, viewDialog(nullptr)
 	, shortcutsDialog(nullptr)
@@ -154,6 +156,11 @@ StelGui::~StelGui()
 		delete dateTimeDialog;
 		dateTimeDialog = nullptr;
 	}
+	if (fieldOfViewDialog)
+	{
+		delete fieldOfViewDialog;
+		fieldOfViewDialog = nullptr;
+	}
 	if (searchDialog)
 	{
 		delete searchDialog;
@@ -198,6 +205,7 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 	locationDialog = new LocationDialog(atopLevelGraphicsWidget);
 	helpDialog = new HelpDialog(atopLevelGraphicsWidget);
 	dateTimeDialog = new DateTimeDialog(atopLevelGraphicsWidget);
+	fieldOfViewDialog = new FieldOfViewDialog(atopLevelGraphicsWidget);
 	searchDialog = new SearchDialog(atopLevelGraphicsWidget);
 	viewDialog = new ViewDialog(atopLevelGraphicsWidget);
 	shortcutsDialog = new ShortcutsDialog(atopLevelGraphicsWidget);
@@ -241,6 +249,7 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 	actionsMgr->addAction("actionShow_Search_Window_Global", windowsGroup, N_("Search window"), searchDialog, "visible", "F3", "Ctrl+F", true);
 	actionsMgr->addAction("actionShow_SkyView_Window_Global", windowsGroup, N_("Sky and viewing options window"), viewDialog, "visible", "F4", "", true);
 	actionsMgr->addAction("actionShow_DateTime_Window_Global", windowsGroup, N_("Date/time window"), dateTimeDialog, "visible", "F5", "", true);
+	actionsMgr->addAction("actionShow_FieldOfView_Window_Global", windowsGroup, N_("Field of View window"), fieldOfViewDialog, "visible", "F9", "", true);
 	actionsMgr->addAction("actionShow_Location_Window_Global", windowsGroup, N_("Location window"), locationDialog, "visible", "F6", "", true);
 	actionsMgr->addAction("actionShow_Shortcuts_Window_Global", windowsGroup, N_("Shortcuts window"), shortcutsDialog, "visible", "F7", "", true);
 	actionsMgr->addAction("actionShow_AstroCalc_Window_Global", windowsGroup, N_("Astronomical calculations window"), astroCalcDialog, "visible", "F10", "", true);

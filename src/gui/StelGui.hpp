@@ -36,6 +36,7 @@ class BottomStelBar;
 class InfoPanel;
 class ConfigurationDialog;
 class DateTimeDialog;
+class FieldOfViewDialog;
 class HelpDialog;
 class LocationDialog;
 class SearchDialog;
@@ -340,6 +341,7 @@ private:
 	LocationDialog* locationDialog;
 	HelpDialog* helpDialog;
 	DateTimeDialog* dateTimeDialog;
+	FieldOfViewDialog* fieldOfViewDialog;
 	SearchDialog* searchDialog;
 	ViewDialog* viewDialog;
 	ShortcutsDialog* shortcutsDialog;

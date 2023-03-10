@@ -322,6 +322,8 @@ IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
           gui/LocationDialog.cpp
           gui/DateTimeDialog.hpp
           gui/DateTimeDialog.cpp
+          gui/FieldOfViewDialog.hpp
+          gui/FieldOfViewDialog.cpp
           gui/ViewDialog.hpp
           gui/ViewDialog.cpp
           gui/LightPollutionWidget.hpp
@@ -380,6 +382,7 @@ IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
           gui/helpDialogGui.ui
           gui/shortcutsDialog.ui
           gui/dateTimeDialogGui.ui
+          gui/fieldOfViewDialogGui.ui
           gui/viewDialog.ui
           gui/lightPollutionWidget.ui
           gui/searchDialogGui.ui
