@@ -23,13 +23,11 @@
 #include "StelCore.hpp"
 #include "StelMovementMgr.hpp"
 #include "StelUtils.hpp"
-#include "StelGui.hpp"
 
 #include "ui_fieldOfViewDialogGui.h"
 
 #include <QDebug>
 #include <QFrame>
-#include <QLineEdit>
 
 FieldOfViewDialog::FieldOfViewDialog(QObject* parent)
 	: StelDialog("FieldOfView", parent)
@@ -63,7 +61,7 @@ void FieldOfViewDialog::createDialogContent()
 	connect(ui->spinner_minute, &ExternalStepSpinBox::stepsRequested, this, [this](int steps){minuteChanged(minute+steps);});
 	connect(ui->spinner_degree, &ExternalStepSpinBox::stepsRequested, this, [this](int steps){degreeChanged(degree+steps);});
 
-	ui->spinner_degree->setFocus();
+	//ui->spinner_degree->setFocus();
 	ui->spinner_degree->setSuffix("°");
 	ui->spinner_decimal->setSuffix("°");
 	ui->spinner_minute->setSuffix("′");

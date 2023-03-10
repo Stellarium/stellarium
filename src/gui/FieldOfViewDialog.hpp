@@ -21,7 +21,6 @@
 #define FIELDOFVIEWDIALOG_HPP
 
 #include <QObject>
-#include <QTimer>
 #include "StelDialog.hpp"
 
 class Ui_fieldOfViewDialogForm;
@@ -31,18 +30,18 @@ class FieldOfViewDialog : public StelDialog
 	Q_OBJECT
 public:
 	FieldOfViewDialog(QObject* parent);
-	~FieldOfViewDialog() Q_DECL_OVERRIDE;
+	~FieldOfViewDialog() override;
 	double getFieldOfView();
 	bool makeValidAndApply(int d, int m, int s);
 	bool applyFieldOfView(double fov);
 public slots:
-	virtual void retranslate() Q_DECL_OVERRIDE;
-	virtual void close() Q_DECL_OVERRIDE;	
+	void retranslate() override;
+	void close() override;
 	void setFieldOfView(double newFOV);
 
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots
-	virtual void createDialogContent() Q_DECL_OVERRIDE;
+	void createDialogContent() override;
 	void connectSpinnerEvents() const;
 	void disconnectSpinnerEvents()const;
 
