@@ -36,7 +36,6 @@ class BottomStelBar;
 class InfoPanel;
 class ConfigurationDialog;
 class DateTimeDialog;
-class FieldOfViewDialog;
 class HelpDialog;
 class LocationDialog;
 class SearchDialog;
@@ -44,6 +43,7 @@ class ViewDialog;
 class ShortcutsDialog;
 class AstroCalcDialog;
 class ObsListDialog;
+class FieldOfViewDialog;
 #ifdef ENABLE_SCRIPT_CONSOLE
 class ScriptConsole;
 #endif
@@ -341,7 +341,6 @@ private:
 	LocationDialog* locationDialog;
 	HelpDialog* helpDialog;
 	DateTimeDialog* dateTimeDialog;
-	FieldOfViewDialog* fieldOfViewDialog;
 	SearchDialog* searchDialog;
 	ViewDialog* viewDialog;
 	ShortcutsDialog* shortcutsDialog;
@@ -350,7 +349,8 @@ private:
 	ScriptConsole* scriptConsole;
 #endif
 	AstroCalcDialog* astroCalcDialog;
-    ObsListDialog* obsListDialog;
+	ObsListDialog* obsListDialog;
+	FieldOfViewDialog* fieldOfViewDialog;
 
 	bool flagShowFlipButtons;
 	StelButton* flipVert;

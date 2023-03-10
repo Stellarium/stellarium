@@ -26,9 +26,6 @@
 
 #include "ui_fieldOfViewDialogGui.h"
 
-#include <QDebug>
-#include <QFrame>
-
 FieldOfViewDialog::FieldOfViewDialog(QObject* parent)
 	: StelDialog("FieldOfView", parent)
 	, degree(0)

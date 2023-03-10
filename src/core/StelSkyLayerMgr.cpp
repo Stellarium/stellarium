@@ -252,12 +252,15 @@ StelSkyLayerMgr::SkyLayerElem::~SkyLayerElem()
 }
 
 bool StelSkyLayerMgr::loadSkyImage(const QString& id, const QString& filename,
-								   double long0, double lat0,
-								   double long1, double lat1,
-								   double long2, double lat2,
-								   double long3, double lat3,
-								   double minRes, double maxBright, bool visible, StelCore::FrameType frameType, bool withAberration, int decimateBy)
+				   double long0, double lat0,
+				   double long1, double lat1,
+				   double long2, double lat2,
+				   double long3, double lat3,
+				   double minRes, double maxBright,
+				   bool visible, StelCore::FrameType frameType,
+				   bool withAberration, int decimateBy)
 {
+	Q_UNUSED(decimateBy)
 	if (allSkyLayers.contains(id))
 	{
 		qWarning() << "Image ID" << id << "already exists, removing old image before loading";

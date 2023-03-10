@@ -43,7 +43,6 @@
 
 #include "ConfigurationDialog.hpp"
 #include "DateTimeDialog.hpp"
-#include "FieldOfViewDialog.hpp"
 #include "HelpDialog.hpp"
 #include "LocationDialog.hpp"
 #include "SearchDialog.hpp"
@@ -51,6 +50,7 @@
 #include "ShortcutsDialog.hpp"
 #include "AstroCalcDialog.hpp"
 #include "ObsListDialog.hpp"
+#include "FieldOfViewDialog.hpp"
 
 #include <QDebug>
 #include <QTimeLine>
@@ -84,7 +84,6 @@ StelGui::StelGui()
 	, locationDialog(nullptr)
 	, helpDialog(nullptr)
 	, dateTimeDialog(nullptr)
-	, fieldOfViewDialog(nullptr)
 	, searchDialog(nullptr)
 	, viewDialog(nullptr)
 	, shortcutsDialog(nullptr)
@@ -94,6 +93,7 @@ StelGui::StelGui()
 #endif
 	, astroCalcDialog(nullptr)
 	, obsListDialog(nullptr)
+	, fieldOfViewDialog(nullptr)
 	, flagShowFlipButtons(false)
 	, flipVert(nullptr)
 	, flipHoriz(nullptr)
@@ -156,11 +156,6 @@ StelGui::~StelGui()
 		delete dateTimeDialog;
 		dateTimeDialog = nullptr;
 	}
-	if (fieldOfViewDialog)
-	{
-		delete fieldOfViewDialog;
-		fieldOfViewDialog = nullptr;
-	}
 	if (searchDialog)
 	{
 		delete searchDialog;
@@ -194,6 +189,11 @@ StelGui::~StelGui()
 		delete obsListDialog;
 		obsListDialog = nullptr;
 	}
+	if (fieldOfViewDialog)
+	{
+		delete fieldOfViewDialog;
+		fieldOfViewDialog = nullptr;
+	}
 }
 
 void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
@@ -205,7 +205,6 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 	locationDialog = new LocationDialog(atopLevelGraphicsWidget);
 	helpDialog = new HelpDialog(atopLevelGraphicsWidget);
 	dateTimeDialog = new DateTimeDialog(atopLevelGraphicsWidget);
-	fieldOfViewDialog = new FieldOfViewDialog(atopLevelGraphicsWidget);
 	searchDialog = new SearchDialog(atopLevelGraphicsWidget);
 	viewDialog = new ViewDialog(atopLevelGraphicsWidget);
 	shortcutsDialog = new ShortcutsDialog(atopLevelGraphicsWidget);
@@ -215,6 +214,7 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 #endif
 	astroCalcDialog = new AstroCalcDialog(atopLevelGraphicsWidget);
 	obsListDialog = new ObsListDialog(atopLevelGraphicsWidget);
+	fieldOfViewDialog = new FieldOfViewDialog(atopLevelGraphicsWidget);
 
 	///////////////////////////////////////////////////////////////////////
 	// Create all the main actions of the program, associated with shortcuts

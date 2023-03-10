@@ -342,6 +342,7 @@ void ViewDialog::createDialogContent()
 	connectBoolProperty(ui->landscapePolylineCheckBox, "LandscapeMgr.flagPolyLineDisplayedOnly");
 	connectIntProperty(ui->landscapePolylineThicknessSpinBox, "LandscapeMgr.polyLineThickness");
 	connect(ui->landscapesListWidget, &QListWidget::currentItemChanged, this, [=](QListWidgetItem *newItem, QListWidgetItem *oldItem){
+		Q_UNUSED(oldItem)
 		GETSTELMODULE(LandscapeMgr)->setCurrentLandscapeName(newItem->data(Qt::UserRole).toString());
 	});
 	connect(lmgr, SIGNAL(currentLandscapeChanged(QString,QString)), this, SLOT(landscapeChanged(QString,QString)));

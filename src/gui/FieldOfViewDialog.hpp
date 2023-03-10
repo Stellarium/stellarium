@@ -34,16 +34,18 @@ public:
 	double getFieldOfView();
 	bool makeValidAndApply(int d, int m, int s);
 	bool applyFieldOfView(double fov);
+
 public slots:
 	void retranslate() override;
 	void close() override;
 	void setFieldOfView(double newFOV);
 
 protected:
+	Ui_fieldOfViewDialogForm* ui;
 	//! Initialize the dialog widgets and connect the signals/slots
 	void createDialogContent() override;
 	void connectSpinnerEvents() const;
-	void disconnectSpinnerEvents()const;
+	void disconnectSpinnerEvents() const;
 
 private slots:
 	//! degree slider or dial changed
@@ -59,11 +61,12 @@ private slots:
 
 private:
 	StelCore* core;	
-	Ui_fieldOfViewDialogForm* ui;
+
 	int degree;
 	int minute;
 	int second;
 	double fov;
+
 	void pushToWidgets();
 };
 
