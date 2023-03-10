@@ -1783,16 +1783,14 @@ void SkyPoint::draw(StelCore *core) const
 			// Takes the positional vector of the planet from the solar object
 			Vec3d pos= core->getCurrentObserver()->getHomePlanet()->getHeliocentricEclipticPos();
 			// Creates points by adding/subtracting 60 degrees to the vector along the common plane
-			const double l4X = pos.v[0]*cos(M_PI/6)-pos.v[1]*sin(M_PI/6);
-			const double l4Y = pos.v[1]*cos(M_PI/6)+pos.v[0]*sin(M_PI/6);
-			const double l5X = pos.v[0]*cos(M_PI/6)+pos.v[1]*sin(M_PI/6);
-			const double l5Y = pos.v[1]*cos(M_PI/6)-pos.v[0]*sin(M_PI/6);
-			// Calculate the z of the pos on the common plane by enforcing common norm
-			// Sign it to point between v[2] and 0
-			const double lZSgn = (pos.v[2] >= 0) ? 1 : -1;
-			const double lZ = lZSgn * sqrt(pos.normSquared() - l4X*l4X - l4Y*l4Y);
-			const Vec3d l4 = Vec3d(l4X, l4Y, lZ);
-			const Vec3d l5 = Vec3d(l5X, l5Y, lZ);
+			// Vector orthogonal to pos vector, which should have z=0
+			Vec3d orth = Vec3d(pos.v[0]*cos(M_PI/2)-pos.v[1]*sin(M_PI/2),pos.v[1]*cos(M_PI/2)+pos.v[0]*sin(M_PI/2),0);
+			// Normal to the plane
+			Vec3d normal = pos^orth;
+			normal.normalize();
+			Vec3d l4 = cos(M_PI/3)*pos + sin(M_PI/3)*(normal^pos);
+			Vec3d l5 = cos(-M_PI/3)*pos + sin(-M_PI/3)*(normal^pos);
+
 			sPainter.drawSprite2dMode(l4, 5.f);
 			sPainter.drawText(l4, northernLabel, 0, shift, shift, false);
 			sPainter.drawSprite2dMode(l5, 5.f);
@@ -1805,16 +1803,14 @@ void SkyPoint::draw(StelCore *core) const
 			// Takes the positional vector of the moon from the earth
 			const Vec3d pos = moon->getEclipticPos();
 			// Creates points by adding/subtracting 60 degrees to the vector along the common plane
-			const double l4X = pos.v[0]*cos(M_PI/6)-pos.v[1]*sin(M_PI/6);
-			const double l4Y = pos.v[1]*cos(M_PI/6)+pos.v[0]*sin(M_PI/6);
-			const double l5X = pos.v[0]*cos(M_PI/6)+pos.v[1]*sin(M_PI/6);
-			const double l5Y = pos.v[1]*cos(M_PI/6)-pos.v[0]*sin(M_PI/6);
-			// Calculate the z of the pos on the common plane by enforcing common norm
-			// Sign it to point between v[2] and 0
-			const double lZSgn = (pos.v[2] >= 0) ? 1 : -1;
-			const double lZ = lZSgn * sqrt(pos.normSquared() - l4X*l4X - l4Y*l4Y);
-			const Vec3d l4 = Vec3d(l4X, l4Y, lZ);
-			const Vec3d l5 = Vec3d(l5X, l5Y, lZ);
+			// Vector orthogonal to pos vector, which should have z=0
+			Vec3d orth = Vec3d(pos.v[0]*cos(M_PI/2)-pos.v[1]*sin(M_PI/2),pos.v[1]*cos(M_PI/2)+pos.v[0]*sin(M_PI/2),0);
+			// Normal to the plane
+			Vec3d normal = pos^orth;
+			normal.normalize();
+			Vec3d l4 = cos(M_PI/3)*pos + sin(M_PI/3)*(normal^pos);
+			Vec3d l5 = cos(-M_PI/3)*pos + sin(-M_PI/3)*(normal^pos);
+
 			sPainter.drawSprite2dMode(l4, 5.f);
 			sPainter.drawText(l4, northernLabel, 0, shift, shift, false);
 			sPainter.drawSprite2dMode(l5, 5.f);
