@@ -170,10 +170,23 @@ void ObsListDialog::createDialogContent()
 	else
 	{
 		// begin with empty maps
+		const QString olud=QUuid::createUuid().toString();
 		jsonMap = { {KEY_SHORT_NAME       , SHORT_NAME_VALUE},
 			    {KEY_VERSION          , FILE_VERSION},
-			    {KEY_DEFAULT_LIST_OLUD, ""}};
+			    {KEY_DEFAULT_LIST_OLUD, olud}};
 		observingLists = QMap<QString, QVariant>();
+		// Create one default empty list
+		// Creation date
+		const double JD = core->getJD();
+		const QString listCreationDate = StelUtils::julianDayToISO8601String(JD + core->getUTCOffset(JD) / 24.).replace("T", " ");
+		QVariantMap emptyList = {
+			// Name, description, current date for the list, current sorting
+			{KEY_NAME,          qc_("new list", "default name for observing list if none is available")},
+			{KEY_DESCRIPTION,   QString()},
+			{KEY_SORTING,       QString()},
+			{KEY_CREATION_DATE, listCreationDate }};
+
+		observingLists.insert(olud, emptyList);
 		jsonMap.insert(KEY_OBSERVING_LISTS, observingLists);
 	}
 
@@ -1093,7 +1106,7 @@ void ObsListDialog::addObjectButtonPressed()
 
 	if (!selectedObject.isEmpty())
 	{
-// TBD: this test should prevent adding duplicate entries, but fails. Maybe for V23.1!
+// TBD: this test should prevent adding duplicate entries, but fails. Maybe for V23.2!
 //		// No duplicate item in the same list
 //		bool is_already_in_list = false;
 //		QHash<QString, observingListItem>::iterator i;
