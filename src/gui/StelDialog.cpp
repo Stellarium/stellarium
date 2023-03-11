@@ -331,17 +331,17 @@ void StelDialog::connectBoolProperty(QGroupBox *checkBox, const QString &propNam
 	new QGroupBoxStelPropertyConnectionHelper(prop,checkBox);
 }
 
-bool StelDialog::askConfirmation(QString message)
+bool StelDialog::askConfirmation(const QString &message)
 {
 	return (QMessageBox::warning(&StelMainView::getInstance(), q_("Attention!"), message, QMessageBox::Yes | QMessageBox::No, QMessageBox::No) == QMessageBox::Yes);
 }
 
-void StelDialog::messageBox(QString title, QString message)
+void StelDialog::messageBox(const QString &title, const QString &message)
 {
 	QMessageBox::information(&StelMainView::getInstance(), title, message);
 }
 
-void StelDialog::connectColorButton(QToolButton *toolButton, QString propertyName, QString iniName, QString moduleName)
+void StelDialog::connectColorButton(QToolButton *toolButton, const QString &propertyName, const QString &iniName, const QString &moduleName)
 {
 	toolButton->setProperty("propName", propertyName);
 	toolButton->setProperty("iniName", iniName);
