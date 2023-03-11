@@ -226,10 +226,12 @@ public:
 	void removeAllNames() { englishName=""; englishAliases.clear(); }
 
 	//! Get designation for DSO (with priority: M, C, NGC, IC, B, Sh2, vdB, RCW, LDN, LBN, Cr, Mel, PGC, UGC, Ced, Arp, VV, PK, PN G, SNR G, ACO, HCG, ESO, vdBH, DWB, Tr, St, Ru, vdB-Ha)
-	//! @return a designation
+	//! from the first catalog that is activated.
+	//! @return a designation for DSO
 	QString getDSODesignation() const;
-	//! Get designation for DSO with priority and ignorance of availability of catalogs
-	//! @return a designation
+	//! Get designation for DSO (with priority: M, C, NGC, IC, B, Sh2, vdB, RCW, LDN, LBN, Cr, Mel, PGC, UGC, Ced, Arp, VV, PK, PN G, SNR G, ACO, HCG, ESO, vdBH, DWB, Tr, St, Ru, vdB-Ha)
+	//! but ignorance of availability of catalogs
+	//! @return a designation for DSO
 	QString getDSODesignationWIC() const;	
 
 	bool objectInDisplayedCatalog() const;
