@@ -1642,18 +1642,18 @@ void SkyPoint::updateLabel()
 		{
 			frameType = StelCore::FrameHeliocentricEclipticJ2000;
 			// TRANSLATORS: Lagrange point L4
-			northernLabel = q_("L4(Sun-Planet)");
+			northernLabel = q_("L4 (Sun-Planet)");
 			// TRANSLATORS: Lagrange point L5
-			southernLabel = q_("L5(Sun-Planet)");
+			southernLabel = q_("L5 (Sun-Planet)");
 			break;
 		}
 		case LAGRANGE_LUNAR:
 		{
 			frameType = StelCore::FrameObservercentricEclipticJ2000;
 			// TRANSLATORS: Lagrange point L4
-			northernLabel = q_("L4(Earth-Moon)");
+			northernLabel = q_("L4 (Earth-Moon)");
 			// TRANSLATORS: Lagrange point L5
-			southernLabel = q_("L5(Earth-Moon)");
+			southernLabel = q_("L5 (Earth-Moon)");
 			break;
 		}
 		default:
@@ -1780,8 +1780,13 @@ void SkyPoint::draw(StelCore *core) const
 		}
 		case LAGRANGE_SOLAR:
 		{
+			QSharedPointer<Planet> observerPlanet = core->getCurrentObserver()->getHomePlanet();
+			if (observerPlanet->getPlanetType() == Planet::isObserver)
+			{
+				observerPlanet = observerPlanet->getParent();
+			}
 			// Takes the positional vector of the planet from the solar object
-			Vec3d pos= core->getCurrentObserver()->getHomePlanet()->getHeliocentricEclipticPos();
+			Vec3d pos= observerPlanet->getHeliocentricEclipticPos();
 			// Creates points by adding/subtracting 60 degrees to the vector along the common plane
 			// Vector orthogonal to pos vector, which should have z=0
 			Vec3d orth = Vec3d(pos.v[0]*cos(M_PI/2)-pos.v[1]*sin(M_PI/2),pos.v[1]*cos(M_PI/2)+pos.v[0]*sin(M_PI/2),0);
