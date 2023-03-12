@@ -463,7 +463,7 @@ public slots:
 		else
 			currentFov=qBound(minFov, f, maxFov);
 
-		emit currentFovChagned(currentFov);
+		emit currentFovChanged(currentFov);
 	}
 
 signals:
