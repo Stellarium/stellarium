@@ -345,7 +345,6 @@ void LocationDialog::setFieldsFromLocation(const StelLocation& loc)
 	ui->planetNameComboBox->setCurrentIndex(idx);
 
 	idx = ui->regionNameComboBox->findData(loc.region, Qt::UserRole, Qt::MatchCaseSensitive);
-	qWarning() << "[2]" << loc.region << idx;
 	if (idx<0)
 	{
 		if (ui->planetNameComboBox->currentData(Qt::UserRole).toString()=="Earth")
