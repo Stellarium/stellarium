@@ -46,6 +46,7 @@
 #include "StelActionMgr.hpp"
 #include "StelPropertyMgr.hpp"
 #include "StelHips.hpp"
+#include "StelMovementMgr.hpp"
 
 #include <QDebug>
 #include <QFrame>
@@ -160,9 +161,9 @@ void ViewDialog::createDialogContent()
 	ui->tonemappingPushButton->setFixedSize(bs);
 	ui->pushButtonOrbitColors->setFixedSize(bs);	
 
-	ui->currentFovSpinBox->setMinimum(  0.0, true);
+	ui->currentFovSpinBox->setMinimum(app->getCore()->getMovementMgr()->getMinFov(), true);
 	ui->currentFovSpinBox->setMaximum(360.0, true);
-	ui->currentFovSpinBox->setWrapping(true);
+	ui->currentFovSpinBox->setWrapping(false);
 	setDisplayFormatForSpins(app->getFlagShowDecimalDegrees());
 
 	// TODOs after properties merge:
