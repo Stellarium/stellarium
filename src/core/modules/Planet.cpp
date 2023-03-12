@@ -566,10 +566,10 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 			const QString cometType = (static_cast<KeplerOrbit*>(orbitPtr)->getEccentricity() < 1.0) ?
 						qc_("periodic", "type of comet") :
 						qc_("non-periodic", "type of comet");
-			oss << QString("%1: <b>%2</b> (%3)<br/>").arg(q_("Type"), q_(getPlanetTypeString()), cometType);
+			oss << QString("%1: <b>%2</b> (%3)<br/>").arg(q_("Type"), getObjectTypeI18n(), cometType);
 		}
 		else		
-			oss << QString("%1: <b>%2</b><br/>").arg(q_("Type"), q_(getPlanetTypeString()));		
+			oss << QString("%1: <b>%2</b><br/>").arg(q_("Type"), getObjectTypeI18n());
 	}
 
 	if (getPlanetType()==PlanetType::isObserver)

@@ -1684,7 +1684,7 @@ QString SolarSystem::getPlanetType(QString planetName) const
 		p = searchMinorPlanetByEnglishName(planetName);
 	if (p.isNull())
 		return QString("UNDEFINED");
-	return p->getPlanetTypeString();
+	return p->getObjectType();
 }
 
 double SolarSystem::getDistanceToPlanet(QString planetName) const
@@ -2078,7 +2078,7 @@ QStringList SolarSystem::listAllObjectsByType(const QString &objType, bool inEng
 	{
 		for (const auto& p : systemPlanets)
 		{
-			if (p->getPlanetTypeString()==objType)
+			if (p->getObjectType()==objType)
 				result << p->getEnglishName();
 		}
 	}
@@ -2086,7 +2086,7 @@ QStringList SolarSystem::listAllObjectsByType(const QString &objType, bool inEng
 	{
 		for (const auto& p : systemPlanets)
 		{
-			if (p->getPlanetTypeString()==objType)
+			if (p->getObjectType()==objType)
 				result << p->getNameI18n();
 		}
 	}
