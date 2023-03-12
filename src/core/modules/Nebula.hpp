@@ -175,7 +175,7 @@ public:
 	}
 	virtual QString getObjectTypeI18n() const Q_DECL_OVERRIDE
 	{
-		return getTypeString();
+		return q_(typeEnglishStringMap.value(nType, q_("undocumented type")));
 	}
 	virtual QString getID() const Q_DECL_OVERRIDE {return getDSODesignation(); } //this depends on the currently shown catalog flags, should this be changed?
 	virtual Vec3d getJ2000EquatorialPos(const StelCore* core) const Q_DECL_OVERRIDE;
@@ -194,10 +194,10 @@ public:
 	void setLabelColor(const Vec3f& v) {labelColor = v;}
 	// void setCircleColor(const Vec3f& v) {hintColorMap.insert(NebUnknown, v);}
 
-	//! Get the printable nebula Type.
-	//! @return the nebula type code.
-	QString getTypeString() const {return getTypeString(nType);}
-	static QString getTypeString(Nebula::NebulaType nType);
+	//! Get the printable localized nebula Type for @arg nType.
+	//! @return the localized nebula type code.
+	//! @note for actual objects, use getObjectTypeI18n()
+	static QString getTypeStringI18n(Nebula::NebulaType nType);
 
 	NebulaType getDSOType() const {return nType;}
 

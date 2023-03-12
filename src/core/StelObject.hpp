@@ -159,7 +159,10 @@ public:
 	//! Return object's type. It should be the name of the class.
 	virtual QString getType() const = 0;
 
-	//! Return object's type. It should be English lowercase name of the type of the object.
+	//! Return object's type. It should be English lowercase name of the astronomical type of the object.
+	//! The purpose of this string is a distinction or further refinement over object class name retrieved with getType():
+	//! Planet objects can be planets, moons, or even the Sun. The Sun should however return "star".
+	//! Nebula objects should return their actual type like "open cluster", "galaxy", "nebula", ...
 	virtual QString getObjectType() const = 0;
 	//! Return object's type. It should be translated lowercase name of the type of the object.
 	virtual QString getObjectTypeI18n() const = 0;

@@ -259,9 +259,9 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 	{
 		QString mt = getMorphologicalTypeString();
 		if (mt.isEmpty())
-			oss << QString("%1: <b>%2</b>").arg(q_("Type"), getTypeString()) << "<br>";
+			oss << QString("%1: <b>%2</b>").arg(q_("Type"), getObjectTypeI18n()) << "<br>";
 		else
-			oss << QString("%1: <b>%2</b> (%3)").arg(q_("Type"), getTypeString(), mt) << "<br>";
+			oss << QString("%1: <b>%2</b> (%3)").arg(q_("Type"), getObjectTypeI18n(), mt) << "<br>";
 		oss << getExtraInfoStrings(ObjectType).join("");
 	}
 
@@ -444,7 +444,7 @@ QVariantMap Nebula::getInfoMap(const StelCore *core) const
 {
 	QVariantMap map = StelObject::getInfoMap(core);
 
-	map["type"]=getTypeString(); // replace "Nebula" type by detail. This is localized. Maybe add argument such as getTypeString(bool translated=true)?
+	map["type"]=getObjectTypeI18n(); // replace "Nebula" type by detail. This is localized.
 	map.insert("morpho", getMorphologicalTypeString());
 	map.insert("surface-brightness", getSurfaceBrightness(core));
 	map.insert("designations", withoutID ? QString() : designations.join(" - "));
@@ -1414,7 +1414,7 @@ QString Nebula::getMorphologicalTypeDescription(void) const
 	return r;
 }
 
-QString Nebula::getTypeString(Nebula::NebulaType nType)
+QString Nebula::getTypeStringI18n(Nebula::NebulaType nType)
 {
 	return q_(typeEnglishStringMap.value(nType, q_("undocumented type")));
 }
