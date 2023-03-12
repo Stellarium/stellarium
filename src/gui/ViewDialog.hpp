@@ -98,6 +98,8 @@ private slots:
 	void populateTrailsControls(bool flag);
 	void populateNomenclatureControls(bool flag);
 
+	void setDisplayFormatForSpins(bool flagDecimalDegrees);
+
 private:
 	void connectGroupBox(class QGroupBox* groupBox, const QString& actionId);
 	void updateSkyCultureText();

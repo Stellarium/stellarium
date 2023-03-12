@@ -1264,40 +1264,6 @@ bool changeDateTimeForRollover(int oy, int om, int od, int oh, int omin, int os,
 	return change;
 }
 
-bool changeFieldOfViewForRollover(int od, int om, int os, int* rd, int* rm, int* rs)
-{
-	bool change = false;
-
-	while (om > 59 ) {
-		om -= 60;
-		od += 1;
-		change = true;
-	}
-	while (om < 0 ) {
-		om += 60;
-		od -= 1;
-		change = true;
-	}
-
-	while (os > 59 ) {
-		os -= 60;
-		om += 1;
-		change = true;
-	}
-	while (os < 0 ) {
-		os += 60;
-		om -= 1;
-		change = true;
-	}
-
-	if ( change ) {
-		*rd = od;
-		*rm = om;
-		*rs = os;
-	}
-	return change;
-}
-
 void debugQVariantMap(const QVariant& m, const QString& indent, const QString& key)
 {
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
