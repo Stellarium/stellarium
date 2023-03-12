@@ -103,7 +103,7 @@ class StelMovementMgr : public StelModule
 	Q_PROPERTY(double currentFov
 		   READ getCurrentFov
 		   WRITE setFov
-		   NOTIFY currentFovChagned)
+		   NOTIFY currentFovChanged)
 public:
 	//! Possible mount modes defining the reference frame in which head movements occur.
 	//! MountGalactic and MountSupergalactic is currently only available via scripting API: core.clear("galactic") and core.clear("supergalactic")
@@ -479,7 +479,7 @@ signals:
 	void flagEnableMoveKeysChanged(bool b);
 	void flagEnableZoomKeysChanged(bool b);
 	void userMaxFovChanged(double fov);
-	void currentFovChagned(double fov);
+	void currentFovChanged(double fov);
 
 private slots:
 	//! Called when the selected object changes.
