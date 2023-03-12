@@ -60,6 +60,7 @@ void StelOpenGL::clearGLErrors()
 QByteArray StelOpenGL::globalShaderPrefix(const ShaderType type)
 {
 	const auto& glInfo = StelMainView::getInstance().getGLInformation();
+
 	if(glInfo.isCoreProfile)
 	{
 		if(type == VERTEX_SHADER)
