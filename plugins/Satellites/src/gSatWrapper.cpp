@@ -204,7 +204,7 @@ Vec3d gSatWrapper::getSunECIPos()
 // @brief This operation predicts the satellite visibility conditions.
 gSatWrapper::Visibility gSatWrapper::getVisibilityPredict() const
 {
-	gSatWrapper::Visibility rval = RADAR_NIGHT;
+	gSatWrapper::Visibility rval = BELOW_HORIZON;
 	Vec3d satAltAzPos = getAltAz();
 	if (satAltAzPos[2] > 0)
 	{
