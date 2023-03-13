@@ -219,7 +219,8 @@ Satellite::Satellite(const QString& identifier, const QVariantMap& map)
 		{ gSatWrapper::VISIBLE,		N_("The satellite is sunlit and the observer is in the dark") },
 		{ gSatWrapper::RADAR_NIGHT,	N_("The satellite isn't sunlit") },
 		{ gSatWrapper::PENUMBRAL,	N_("The satellite is in penumbra") },
-		{ gSatWrapper::ANNULAR,		N_("The satellite is eclipsed") }
+		{ gSatWrapper::ANNULAR,		N_("The satellite is eclipsed") },
+		{ gSatWrapper::BELOW_HORIZON,   N_("The satellite is below the horizon") }
 	};
 
 	update(0.);
