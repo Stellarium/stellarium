@@ -230,7 +230,7 @@ public:
 	//! @return a designation for DSO
 	QString getDSODesignation() const;
 	//! Get designation for DSO (with priority: M, C, NGC, IC, B, Sh2, vdB, RCW, LDN, LBN, Cr, Mel, PGC, UGC, Ced, Arp, VV, PK, PN G, SNR G, ACO, HCG, ESO, vdBH, DWB, Tr, St, Ru, vdB-Ha)
-	//! but ignorance of availability of catalogs
+	//! without accounting for activation of catalogs. This should be preferred to retrieve the most common designation regardless of settings.
 	//! @return a designation for DSO
 	QString getDSODesignationWIC() const;	
 
