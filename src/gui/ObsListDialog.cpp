@@ -212,7 +212,7 @@ void ObsListDialog::createDialogContent()
 		tainted=false;
 	}
 	// Now we certainly have a json file and have parsed everything that exists.
-	defaultOlud = extractDefaultOlud();
+	defaultOlud = jsonMap.value(KEY_DEFAULT_LIST_OLUD).toString();
 	loadListNames(); // also populate Combobox and make sure at least some defaultOlud exists.
 	loadDefaultList();
 }
@@ -368,6 +368,8 @@ void ObsListDialog::loadListNames()
 	{
 		qDebug() << "populateListNameInComboBox: Cannot find defaultListOlud" << defaultOlud << ". Setting to first list.";
 		defaultOlud = observingLists.firstKey();
+		jsonMap.insert(KEY_DEFAULT_LIST_OLUD, defaultOlud);
+		tainted=true;
 	}
 }
 
@@ -396,6 +398,8 @@ void ObsListDialog::loadDefaultList()
 		}
 		selectedOlud = ui->obsListComboBox->itemData(currentIndex).toString();
 		defaultOlud = selectedOlud;
+		jsonMap.insert(KEY_DEFAULT_LIST_OLUD, defaultOlud);
+		tainted=true;
 	}
 	loadSelectedList();
 }
@@ -1113,21 +1117,20 @@ void ObsListDialog::addObjectButtonPressed()
 			const QString objectUUID = QUuid::createUuid().toString();
 
 			// Object name (designation) and object name I18n
-			item.designation = selectedObject[0]->getEnglishName();
+			if (selectedObject[0]->getType() == "Nebula")
+				item.designation = GETSTELMODULE(NebulaMgr)->getLatestSelectedDSODesignationWIC(); // Store most common catalog ID as of our catalog sequence, even if catalog is not active
+			else
+				item.designation = selectedObject[0]->getEnglishName();
+			item.name = selectedObject[0]->getEnglishName();
 			item.nameI18n = selectedObject[0]->getNameI18n();
 			if(item.nameI18n.isEmpty())
 				item.nameI18n = DASH;
 			// Check if the object name is empty.
 			if (item.designation.isEmpty())
 			{
-				if (selectedObject[0]->getType() == "Nebula")
-					item.designation = GETSTELMODULE(NebulaMgr)->getLatestSelectedDSODesignationWIC(); // Store most common catalog ID as of our catalog sequence, even if catalog is not active
-				else
-				{
-					item.designation = "Unnamed object";
-					if (item.nameI18n.isEmpty()) {
-						item.nameI18n = q_("Unnamed object");
-					}
+				item.designation = "Unnamed object";
+				if (item.nameI18n.isEmpty()) {
+					item.nameI18n = q_("Unnamed object");
 				}
 			}
 			// Type, Object Type
@@ -1289,7 +1292,7 @@ void ObsListDialog::switchEditMode(bool enableEditMode, bool newList)
 		//ui->horizontalLayout_Name->setEnabled(isEditMode);  // enable list name editing
 		ui->listNameLabel->setVisible(isEditMode);
 		//ui->horizontalSpacer_listName->sizePolicy().setHeightForWidth(isEditMode);// ->setVisible(isEditMode);
-		qDebug() << "Spacer geometry, policy:" << ui->horizontalSpacer_listName->geometry() << ui->horizontalSpacer_listName->sizePolicy();
+		//qDebug() << "Spacer geometry, policy:" << ui->horizontalSpacer_listName->geometry() << ui->horizontalSpacer_listName->sizePolicy();
 		ui->listNameLineEdit->setVisible(isEditMode);
 		ui->listNameLineEdit->setText(currentListName);
 
@@ -1317,14 +1320,6 @@ void ObsListDialog::switchEditMode(bool enableEditMode, bool newList)
 		ui->removeObjectButton->setVisible(isEditMode);
 		ui->saveButton->setVisible(isEditMode);
 		ui->cancelButton->setVisible(isEditMode);
-}
-
-/*
- * Returns the defaultOlud from the jsonMap, or an empty QString.
-*/
-QString ObsListDialog::extractDefaultOlud()
-{
-	return jsonMap.value(KEY_DEFAULT_LIST_OLUD).toString();
 }
 
 /*
