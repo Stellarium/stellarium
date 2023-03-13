@@ -26,6 +26,7 @@
 #include <QSettings>
 #include <QWidget>
 #include "StelApp.hpp"
+#include "StelTranslator.hpp"
 
 class QAbstractButton;
 class QGroupBox;
@@ -201,7 +202,7 @@ protected:
 	//! @param moduleName if the iniName is for a module (plugin)-specific ini file, add the module name here. The module needs an implementation of getSettings()
 	//! @warning If the action with \c propName is invalid/unregistered, or cannot be converted
 	//! to the required datatype, the application will crash
-	void connectColorButton(QToolButton* button, QString propertyName, QString iniName, QString moduleName="");
+	void connectColorButton(QToolButton* button, const QString &propertyName, const QString &iniName, const QString &moduleName="");
 
 	//! The main dialog
 	QWidget* dialog;
@@ -214,7 +215,9 @@ protected:
 	QList<QWidget *> kineticScrollingList;
 
 protected slots:
-	bool askConfirmation();
+	bool askConfirmation(const QString &message = q_("Are you sure? This will delete your customized data."));
+	void messageBox(const QString &title, const QString &message);
+
 	//! To be called by a connected QToolButton with a color background.
 	//! This QToolButton needs properties "propName" and "iniName" which should be prepared using connectColorButton().
 	void askColor();

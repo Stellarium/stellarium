@@ -408,10 +408,10 @@ bool StelObjectMgr::findAndSelectI18n(const QString &nameI18n, StelModule::StelM
 		return setSelectedObject(obj, action);
 }
 
-bool StelObjectMgr::findAndSelectI18n(const QString &name, const QString &objtype, StelModule::StelModuleSelectAction action)
+bool StelObjectMgr::findAndSelectI18n(const QString &nameI18n, const QString &objtype, StelModule::StelModuleSelectAction action)
 {
 	// Then look for another object
-	StelObjectP obj = searchByNameI18n(name, objtype);
+	StelObjectP obj = searchByNameI18n(nameI18n, objtype);
 	if (!obj)
 		return false;
 	else

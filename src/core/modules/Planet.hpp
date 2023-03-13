@@ -245,9 +245,15 @@ public:
 	virtual float getVMagnitude(const StelCore* core) const Q_DECL_OVERRIDE;
 	virtual float getSelectPriority(const StelCore* core) const Q_DECL_OVERRIDE;
 	virtual Vec3f getInfoColor(void) const Q_DECL_OVERRIDE;
+	//! @return "Planet". For technical reasons this is also returned by Comets and MinorPlanets and the Sun. A better type is returned by getObjectType()
 	virtual QString getType(void) const Q_DECL_OVERRIDE {return PLANET_TYPE;}
-	virtual QString getObjectType(void) const Q_DECL_OVERRIDE { return getPlanetTypeString(); }
-	virtual QString getObjectTypeI18n(void) const Q_DECL_OVERRIDE { return q_(getPlanetTypeString()); }
+	//! Get more specific Planet type for scripts
+	//! @return an English type description of planet (star, planet, moon, observer, artificial, asteroid, plutino, comet, dwarf planet, cubewano, scattered disc object, Oort cloud object, sednoid, interstellar object)
+	virtual QString getObjectType(void) const Q_DECL_OVERRIDE { return pTypeMap.value(pType); }
+	//! Get more specific Planet type for scripts
+	//! @return a localized type description of planet (star, planet, moon, observer, artificial, asteroid, plutino, comet, dwarf planet, cubewano, scattered disc object, Oort cloud object, sednoid, interstellar object)
+	virtual QString getObjectTypeI18n(void) const Q_DECL_OVERRIDE { return q_(pTypeMap.value(pType)); }
+	//! @return English name of planet
 	virtual QString getID(void) const Q_DECL_OVERRIDE { return englishName; }
 	//! A Planet's own eclipticPos is in VSOP87 ref. frame (practically equal to ecliptic of J2000 for us) coordinates relative to the parent body (sun, planet).
 	//! To get J2000 equatorial coordinates, we require heliocentric ecliptical positions (adding up parent positions) of observer and Planet.
@@ -311,8 +317,9 @@ public:
 	//! Get albedo
 	double getAlbedo(void) const { return static_cast<double>(albedo); }
 
+	//! @return texture map name
 	const QString& getTextMapName() const {return texMapName;}
-	const QString getPlanetTypeString() const {return pTypeMap.value(pType);}
+	//! @return a type code enum
 	PlanetType getPlanetType() const {return pType;}
 	Orbit* getOrbit() const {return orbitPtr;}
 

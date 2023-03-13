@@ -152,7 +152,8 @@ double ConstellationMgr::getCallOrder(StelModuleActionName actionName) const
 
 void ConstellationMgr::reloadSkyCulture()
 {
-	updateSkyCulture(StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureID());
+	StelSkyCultureMgr* skyCulMgr = &StelApp::getInstance().getSkyCultureMgr();
+	emit skyCulMgr->currentSkyCultureChanged(skyCulMgr->getCurrentSkyCultureID());
 }
 
 void ConstellationMgr::updateSkyCulture(const QString& skyCultureDir)

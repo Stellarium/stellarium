@@ -331,12 +331,17 @@ void StelDialog::connectBoolProperty(QGroupBox *checkBox, const QString &propNam
 	new QGroupBoxStelPropertyConnectionHelper(prop,checkBox);
 }
 
-bool StelDialog::askConfirmation()
+bool StelDialog::askConfirmation(const QString &message)
 {
-	return (QMessageBox::warning(&StelMainView::getInstance(), q_("Attention!"), q_("Are you sure? This will delete your customized data."), QMessageBox::Yes | QMessageBox::No, QMessageBox::No) == QMessageBox::Yes);
+	return (QMessageBox::warning(&StelMainView::getInstance(), q_("Attention!"), message, QMessageBox::Yes | QMessageBox::No, QMessageBox::No) == QMessageBox::Yes);
 }
 
-void StelDialog::connectColorButton(QToolButton *toolButton, QString propertyName, QString iniName, QString moduleName)
+void StelDialog::messageBox(const QString &title, const QString &message)
+{
+	QMessageBox::information(&StelMainView::getInstance(), title, message);
+}
+
+void StelDialog::connectColorButton(QToolButton *toolButton, const QString &propertyName, const QString &iniName, const QString &moduleName)
 {
 	toolButton->setProperty("propName", propertyName);
 	toolButton->setProperty("iniName", iniName);
@@ -444,7 +449,7 @@ QAbstractButtonStelPropertyConnectionHelper::QAbstractButtonStelPropertyConnecti
 	bool ok = val.canConvert<bool>();
 	Q_ASSERT_X(ok,"QAbstractButtonStelPropertyConnectionHelper","Can not convert to bool datatype");
 	Q_UNUSED(ok)
-	onPropertyChanged(val);
+	QAbstractButtonStelPropertyConnectionHelper::onPropertyChanged(val);
 
 	//in this direction, we can directly connect because Qt supports QVariant slots with the new syntax
 	connect(button, &QAbstractButton::toggled, prop, &StelProperty::setValue);
@@ -465,7 +470,7 @@ QGroupBoxStelPropertyConnectionHelper::QGroupBoxStelPropertyConnectionHelper(Ste
 	bool ok = val.canConvert<bool>();
 	Q_ASSERT_X(ok,"QGroupBoxStelPropertyConnectionHelper","Can not convert to bool datatype");
 	Q_UNUSED(ok)
-	onPropertyChanged(val);
+	QGroupBoxStelPropertyConnectionHelper::onPropertyChanged(val);
 
 	//in this direction, we can directly connect because Qt supports QVariant slots with the new syntax
 	connect(box, &QGroupBox::toggled, prop, &StelProperty::setValue);
@@ -486,7 +491,7 @@ QComboBoxStelPropertyConnectionHelper::QComboBoxStelPropertyConnectionHelper(Ste
 	bool ok = val.canConvert<int>();
 	Q_ASSERT_X(ok,"QComboBoxStelPropertyConnectionHelper","Can not convert to int datatype");
 	Q_UNUSED(ok)
-	onPropertyChanged(val);
+	QComboBoxStelPropertyConnectionHelper::onPropertyChanged(val);
 
 	//in this direction, we can directly connect because Qt supports QVariant slots with the new syntax
 	connect(combo, static_cast<void (QComboBox::*)(int)>(&QComboBox::activated),prop,&StelProperty::setValue);
@@ -506,7 +511,7 @@ QComboBoxStelStringPropertyConnectionHelper::QComboBoxStelStringPropertyConnecti
 	bool ok = val.canConvert<QString>();
 	Q_ASSERT_X(ok,"QComboBoxStelStringPropertyConnectionHelper","Can not convert to QString datatype");
 	Q_UNUSED(ok)
-	onPropertyChanged(val);
+	QComboBoxStelStringPropertyConnectionHelper::onPropertyChanged(val);
 
 	//in this direction, we can directly connect because Qt supports QVariant slots with the new syntax
 #if (QT_VERSION>=QT_VERSION_CHECK(5, 14, 0))
@@ -531,7 +536,7 @@ QLineEditStelPropertyConnectionHelper::QLineEditStelPropertyConnectionHelper(Ste
 	bool ok = val.canConvert<int>();
 	Q_ASSERT_X(ok,"QLineEditStelPropertyConnectionHelper","Can not convert to int datatype");
 	Q_UNUSED(ok)
-	onPropertyChanged(val);
+	QLineEditStelPropertyConnectionHelper::onPropertyChanged(val);
 
 	//in this direction, we can directly connect because Qt supports QVariant slots with the new syntax
 	connect(edit, static_cast<void (QLineEdit::*)(const QString&)>(&QLineEdit::textEdited),prop,&StelProperty::setValue);
@@ -552,7 +557,7 @@ QSpinBoxStelPropertyConnectionHelper::QSpinBoxStelPropertyConnectionHelper(StelP
 	bool ok = val.canConvert<int>();
 	Q_ASSERT_X(ok,"QSpinBoxStelPropertyConnectionHelper","Can not convert to int datatype");
 	Q_UNUSED(ok)
-	onPropertyChanged(val);
+	QSpinBoxStelPropertyConnectionHelper::onPropertyChanged(val);
 
 	//in this direction, we can directly connect because Qt supports QVariant slots with the new syntax
 	connect(spin, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged),prop,&StelProperty::setValue);
@@ -573,7 +578,7 @@ QDoubleSpinBoxStelPropertyConnectionHelper::QDoubleSpinBoxStelPropertyConnection
 	bool ok = val.canConvert<double>();
 	Q_ASSERT_X(ok,"QDoubleSpinBoxStelPropertyConnectionHelper","Can not convert to double datatype");
 	Q_UNUSED(ok)
-	onPropertyChanged(val);
+	QDoubleSpinBoxStelPropertyConnectionHelper::onPropertyChanged(val);
 
 	//in this direction, we can directly connect because Qt supports QVariant slots with the new syntax
 	connect(spin, static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged),prop,&StelProperty::setValue);
@@ -594,7 +599,7 @@ AngleSpinBoxStelPropertyConnectionHelper::AngleSpinBoxStelPropertyConnectionHelp
 	bool ok = val.canConvert<double>();
 	Q_ASSERT_X(ok,"AngleSpinBoxStelPropertyConnectionHelper","Can not convert to double datatype");
 	Q_UNUSED(ok)
-	onPropertyChanged(val);
+	AngleSpinBoxStelPropertyConnectionHelper::onPropertyChanged(val);
 
 	//in this direction, we can directly connect because Qt supports QVariant slots with the new syntax
 	connect(spin, static_cast<void (AngleSpinBox::*)(double)>(&AngleSpinBox::valueChangedDeg),prop,&StelProperty::setValue);
@@ -618,7 +623,7 @@ QSliderStelPropertyConnectionHelper::QSliderStelPropertyConnectionHelper(StelPro
 	Q_UNUSED(ok)
 
 	dRange = maxValue - minValue;
-	onPropertyChanged(val);
+	QSliderStelPropertyConnectionHelper::onPropertyChanged(val);
 
 	connect(slider,SIGNAL(valueChanged(int)),this,SLOT(sliderIntValueChanged(int)));
 }
@@ -632,7 +637,7 @@ QSliderStelPropertyConnectionHelper::QSliderStelPropertyConnectionHelper(StelPro
 	Q_UNUSED(ok)
 
 	dRange = maxValue - minValue;
-	onPropertyChanged(val);
+	QSliderStelPropertyConnectionHelper::onPropertyChanged(val);
 
 	connect(slider,SIGNAL(valueChanged(int)),this,SLOT(sliderIntValueChanged(int)));
 }

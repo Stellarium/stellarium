@@ -308,18 +308,26 @@ arbitrary number of lists.
 
 The list display shows all entries from the current list. A double
 click on an entry selects the object.  To add an object to the list,
-press \menu{Edit list}. This opens another view. Highlight (select)
+press \menu{Edit list}. This changes the view. Highlight (select)
 your object in the sky and press \menu{Add object}. To remove an
 object from a list, select its entry in the list and press
-\menu{Remove object}. You can also export a list with the according
-button.
+\menu{Remove object}. 
 
-Sometimes the object alone is not enough. Interesting views like
+Sometimes storing the object alone is not enough. Interesting views like
 planet conjunctions or eclipses require at least a time entry, if not
 a particular location. Likewise, the displayed landscape may be nice
-to adapt. Additionally, the field of view may be relevant. To store
+to restore. Additionally, the field of view may be relevant. To store
 these data and later retrieve them, use the respective checkboxes.
 
+You can also export the current list with the according
+button, or import such an exported list on another system. Lists are identified with an 
+Universally Unique Identifier (UUID) which we call OLUD (Observing List Unique Identifier). 
+On importing a list, existing lists with the same OLUD may be replaced after a warning. 
+During editing, storing a list with an existing name is prevented. 
+The list import may however import a list with an existing name as long as the OLUD is different. 
+To transfer all your lists to another system, copy, rename and import 
+(or just copy, to replace the existing) the full file \file{observingLists.json} 
+from the \file{data/} subdirectory of your user directory (see section~\ref{sec:Directories}).
 
 
 \section{Custom Markers}
