@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2023-03-12 22:36+0700\n"
+"POT-Creation-Date: 2023-03-13 19:29+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: राजಐயர், 2023\n"
 "Language-Team: Hindi (https://www.transifex.com/stellarium/teams/80998/hi/)\n"
@@ -34,8 +34,8 @@ msgstr ""
 #: src/gui/AstroCalcDialog.cpp:890 src/gui/AstroCalcDialog.cpp:2320
 #: src/gui/AstroCalcDialog.cpp:2957 src/gui/AstroCalcDialog.cpp:2989
 #: src/gui/AstroCalcDialog.cpp:3376 src/gui/AstroCalcDialog.cpp:8400
-#: src/gui/ObsListDialog.cpp:206 src/gui/ObsListCreateEditDialog.cpp:178
-#: src/ui_configurationDialog.h:1869 plugins/Satellites/src/Satellite.cpp:338
+#: src/gui/ObsListDialog.cpp:260 src/ui_configurationDialog.h:1869
+#: plugins/Satellites/src/Satellite.cpp:338
 #: plugins/TelescopeControl/src/TelescopeClient.cpp:136
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:515
 #: plugins/Supernovae/src/Supernova.cpp:143 plugins/Novae/src/Nova.cpp:150
@@ -838,9 +838,9 @@ msgctxt "distance"
 msgid "m"
 msgstr "मी॰"
 
-#: src/core/modules/LandscapeMgr.cpp:1330 src/gui/ObsListDialog.cpp:212
-#: src/gui/ObsListCreateEditDialog.cpp:184 src/ui_locationDialogGui.h:470
-#: src/ui_obsListDialog.h:326 src/ui_obsListCreateEditDialog.h:329
+#: src/core/modules/LandscapeMgr.cpp:1330 src/gui/ObsListDialog.cpp:266
+#: src/ui_locationDialogGui.h:470 src/ui_obsListDialog.h:414
+#: src/ui_obsListCreateEditDialog.h:329
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:144
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:490
 msgid "Location"
@@ -1802,8 +1802,7 @@ msgstr "अज्ञात चरित्र का वस्तु"
 #: src/core/modules/Nebula.cpp:190 src/core/StelObject.cpp:347
 #: src/gui/AstroCalcChart.cpp:95 src/gui/AstroCalcChart.cpp:105
 #: src/gui/AstroCalcChart.cpp:434 src/gui/AstroCalcChart.cpp:460
-#: src/gui/ObsListDialog.cpp:209 src/gui/ObsListCreateEditDialog.cpp:181
-#: plugins/Supernovae/src/Supernova.cpp:127
+#: src/gui/ObsListDialog.cpp:263 plugins/Supernovae/src/Supernova.cpp:127
 msgid "Magnitude"
 msgstr "मात्रा"
 
@@ -3708,6 +3707,12 @@ msgstr ""
 "निर्धारित हो।"
 
 #: src/core/StelCore.cpp:2537 src/core/SimbadSearcher.cpp:173
+#: src/gui/ObsListDialog.cpp:83 src/gui/ObsListDialog.cpp:900
+#: src/gui/ObsListDialog.cpp:918 src/gui/ObsListDialog.cpp:952
+#: src/gui/ObsListDialog.cpp:968 src/gui/ObsListDialog.cpp:1003
+#: src/gui/ObsListDialog.cpp:1015 src/gui/ObsListDialog.cpp:1024
+#: src/gui/ObsListDialog.cpp:1036 src/gui/ObsListDialog.cpp:1053
+#: src/gui/ObsListDialog.cpp:1216 src/gui/ObsListDialog.cpp:1221
 #: plugins/OnlineQueries/src/HipOnlineQuery.cpp:91
 msgid "Error"
 msgstr "अपक्रम"
@@ -5709,10 +5714,6 @@ msgstr "चि॰प्र॰से॰"
 msgid "Frames per second"
 msgstr "चित्र प्रति सेकण्ड"
 
-#: src/gui/StelDialog.cpp:336
-msgid "Are you sure? This will delete your customized data."
-msgstr "क्या आप निश्चित हैं। यह आपके वैयक्तीकृत तथ्य मिटा देगा।"
-
 #: src/gui/ViewDialog.cpp:667
 msgid "properties"
 msgstr "लक्षण"
@@ -6143,15 +6144,13 @@ msgid "Ecliptic (J2000.0)"
 msgstr "क्रान्तिवृत्तीय ( जू॰2000.0 )"
 
 #: src/gui/SearchDialog.cpp:296 src/gui/AstroCalcChart.cpp:442
-#: src/gui/AstroCalcChart.cpp:468 src/gui/ObsListDialog.cpp:207
-#: src/gui/ObsListCreateEditDialog.cpp:179
+#: src/gui/AstroCalcChart.cpp:468 src/gui/ObsListDialog.cpp:261
 msgid "Right ascension"
 msgstr "दाएँ आरोहण"
 
 #: src/gui/SearchDialog.cpp:299 src/gui/AstroCalcChart.cpp:91
 #: src/gui/AstroCalcChart.cpp:101 src/gui/AstroCalcChart.cpp:425
-#: src/gui/AstroCalcChart.cpp:451 src/gui/ObsListDialog.cpp:208
-#: src/gui/ObsListCreateEditDialog.cpp:180
+#: src/gui/AstroCalcChart.cpp:451 src/gui/ObsListDialog.cpp:262
 msgid "Declination"
 msgstr "झुकाव"
 
@@ -6779,7 +6778,7 @@ msgid "Duration of total or annular phase at greatest eclipse"
 msgstr "अवधि पूर्णता अथवा वलयता की ग्रहण अधिकतम होने पर"
 
 #: src/gui/AstroCalcDialog.cpp:3375 src/gui/AstroCalcChart.cpp:378
-#: src/gui/ObsListDialog.cpp:211 src/gui/ObsListCreateEditDialog.cpp:183
+#: src/gui/ObsListDialog.cpp:265 src/ui_obsListDialog.h:410
 #: src/ui_obsListCreateEditDialog.h:325
 msgid "Date"
 msgstr "दिनांक"
@@ -7995,58 +7994,118 @@ msgctxt "unit of measurement"
 msgid "saros"
 msgstr "ग्रहणचक्रावधि"
 
-#: src/gui/ObsListDialog.cpp:204 src/gui/ObsListCreateEditDialog.cpp:176
+#: src/gui/ObsListDialog.cpp:83 src/gui/ObsListDialog.cpp:1024
+msgid "Cannot open observingLists.json to write"
+msgstr "लिखने के लिए खोल नही सके observingLists.json"
+
+#: src/gui/ObsListDialog.cpp:184
+msgctxt "default name for observing list if none is available"
+msgid "new list"
+msgstr "नयी सूची"
+
+#: src/gui/ObsListDialog.cpp:258
 msgid "Object designation"
 msgstr "वस्तु उपाधि"
 
-#: src/gui/ObsListDialog.cpp:205 src/gui/ObsListCreateEditDialog.cpp:177
+#: src/gui/ObsListDialog.cpp:259
 msgid "Object name"
 msgstr "वस्तु नाम"
 
-#: src/gui/ObsListDialog.cpp:210 src/gui/ObsListCreateEditDialog.cpp:182
-#: src/ui_configurationDialog.h:1878
+#: src/gui/ObsListDialog.cpp:264 src/ui_configurationDialog.h:1878
 msgid "Constellation"
 msgstr "तारामण्डल"
 
-#: src/gui/ObsListDialog.cpp:213 src/gui/ObsListCreateEditDialog.cpp:185
-#: src/ui_viewDialog.h:3510 src/ui_obsListDialog.h:330
-#: src/ui_obsListCreateEditDialog.h:333
+#: src/gui/ObsListDialog.cpp:267 src/ui_viewDialog.h:3510
+#: src/ui_obsListDialog.h:418 src/ui_obsListCreateEditDialog.h:333
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:480
 msgid "Landscape"
 msgstr "भूदृश्य"
 
-#: src/gui/ObsListCreateEditDialog.cpp:311
-msgid "Unnamed object"
-msgstr "नाम रहित वस्तु"
+#: src/gui/ObsListDialog.cpp:881
+msgid "New Observation List"
+msgstr "नयी अवलोकन सूची"
 
-#: src/gui/ObsListCreateEditDialog.cpp:500
+#: src/gui/ObsListDialog.cpp:882
+msgid "Observing list creation mode"
+msgstr "अवलोकन सूची सृजन शैली"
+
+#: src/gui/ObsListDialog.cpp:895
+msgid "Observing list editor mode"
+msgstr "अवलोकन सूची सम्पादन शैली"
+
+#: src/gui/ObsListDialog.cpp:900
+msgid "selectedOlud empty. This is a bug"
+msgstr "selectedOlud रिक्त है। यह एक अपक्रम है।"
+
+#: src/gui/ObsListDialog.cpp:910
 msgid "Export observing list as..."
 msgstr "अवलोकन सूची निर्यात करें इस नाम से"
 
-#: src/gui/ObsListCreateEditDialog.cpp:512
+#: src/gui/ObsListDialog.cpp:918
+msgid "Cannot export. See logfile for details."
+msgstr "निर्यात करने में अक्षम। कार्याभिलेख देखें विवरण के लिए।"
+
+#: src/gui/ObsListDialog.cpp:943
 msgid "Import observing list"
 msgstr "अवलोकन सूची आयात करें"
 
-#: src/gui/ObsListCreateEditDialog.cpp:539
-msgid "Error: here is no list or more than one list."
-msgstr "अपक्रम : इधर सूची नही अथवा एक से अधिक सूची।"
+#: src/gui/ObsListDialog.cpp:952
+msgid "Cannot open selected file for import"
+msgstr "चयनित अभिलेख खोल नही सके आयात के लिए।"
 
-#: src/gui/ObsListCreateEditDialog.cpp:564
-msgid "Error: the file is empty or doesn't contain legacy bookmarks."
-msgstr "अपक्रम : अभिलेख रिक्त है अथवा पुराने पृष्ठचिह्न इस में नही।"
+#: src/gui/ObsListDialog.cpp:968
+msgid "Empty list."
+msgstr "रिक्त सूची।"
 
-#: src/gui/ObsListCreateEditDialog.cpp:570
+#: src/gui/ObsListDialog.cpp:987
+#, qt-format
+msgid ""
+"A list named '%1' and dated %2 would overwrite your existing list '%3', "
+"dated %4. Accept?"
+msgstr ""
+"एक '%1' नाम की सूची दिनांक %2 का आपके दिनांक %4 के '%3' नाम की सूची को "
+"अधिलिखित कर देगा। क्या यह स्वीकृत है।"
+
+#: src/gui/ObsListDialog.cpp:1003
+msgid "The file is empty or doesn't contain legacy bookmarks."
+msgstr "अभिलेख रिक्त है अथवा इसमें कोई पुराने स्मरणचिह्न नही।"
+
+#: src/gui/ObsListDialog.cpp:1015
+msgid "File does not contain observing lists or legacy bookmarks"
+msgstr "अभिलेख में ना कोई अवलोकन सूची हैं ना कोई पुराने स्मरणचिह्न"
+
+#: src/gui/ObsListDialog.cpp:1036
 msgid "File format is wrong!"
 msgstr "अभिलेख प्रकार ठीक नही।"
 
-#: src/gui/ObsListCreateEditDialog.cpp:589
-#, qt-format
-msgid "Error: a list with the name %1 already exists!"
-msgstr "अपक्रम : एक सूची जिसका नाम %1 है पहले से ही है। "
+#: src/gui/ObsListDialog.cpp:1053
+msgid "Cannot open JSON output file. Will not delete."
+msgstr "खोल मही सके JSON उत्पादन अभिलेख। नही मिटाया जाएगा।"
 
-#: src/gui/ObsListCreateEditDialog.cpp:594
-msgid "Error: the list name is empty."
-msgstr "अपक्रम : सूची का नाम रिक्त है।"
+#: src/gui/ObsListDialog.cpp:1077 src/ui_configurationDialog.h:1753
+msgid "Information"
+msgstr "जानकारी"
+
+#: src/gui/ObsListDialog.cpp:1077
+msgid "You cannot delete the default or the last list."
+msgstr "मूलविकल्प सूची अथवा अन्तिम सूची नही मिटा सकते।"
+
+#: src/gui/ObsListDialog.cpp:1133
+msgid "Unnamed object"
+msgstr "नाम रहित वस्तु"
+
+#: src/gui/ObsListDialog.cpp:1216
+msgid "Empty name"
+msgstr "रिक्त नाम"
+
+#: src/gui/ObsListDialog.cpp:1221
+msgid "List name already exists"
+msgstr "सूची नाम पहले से है"
+
+#: src/gui/ObsListDialog.cpp:1286 src/ui_configurationDialog.h:1936
+#: src/ui_obsListDialog.h:353
+msgid "Observing lists"
+msgstr "अवलोकन सूचीयाँ"
 
 #: src/gui/DateTimeDialog.cpp:253 src/gui/DateTimeDialog.cpp:254
 msgid "Date and Time in Julian calendar"
@@ -9743,7 +9802,7 @@ msgid "&Choose"
 msgstr "चुनें"
 
 #: src/translations.h:630 src/ui_configurationDialog.h:1978
-#: src/ui_obsListCreateEditDialog.h:355
+#: src/ui_obsListDialog.h:364 src/ui_obsListCreateEditDialog.h:355
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:645
 msgid "Cancel"
 msgstr "निरस्त करें"
@@ -13398,10 +13457,6 @@ msgstr "समाकृति"
 msgid "Main"
 msgstr "मुख्य"
 
-#: src/ui_configurationDialog.h:1753
-msgid "Information"
-msgstr "जानकारी"
-
 #: src/ui_configurationDialog.h:1758
 msgctxt "Additional settings for Graphical User Interface"
 msgid "Extras"
@@ -13787,10 +13842,6 @@ msgstr "अन्तरिक्षमेघ पृष्ठपटल"
 #: src/ui_configurationDialog.h:1934
 msgid "Enable a feature to store favorite views."
 msgstr "प्रिय दृश्यों को अभिलिखित करने की सुविधा सक्षम करें।"
-
-#: src/ui_configurationDialog.h:1936 src/ui_obsListDialog.h:293
-msgid "Observing lists"
-msgstr "अवलोकन सूचीयाँ"
 
 #: src/ui_configurationDialog.h:1939
 msgid "Toggle the usage of background under GUI buttons"
@@ -15076,95 +15127,143 @@ msgstr "वैयक्तीकृत अवधि"
 msgid "Unit of measurement:"
 msgstr "मापन इकाई : "
 
-#: src/ui_obsListDialog.h:295
-msgid "List:"
-msgstr "सूची : "
-
-#: src/ui_obsListDialog.h:297 src/ui_obsListCreateEditDialog.h:339
+#: src/ui_obsListDialog.h:356 src/ui_obsListDialog.h:374
+#: src/ui_obsListCreateEditDialog.h:339
 msgid "Highlight all the objects of the selected list"
 msgstr "चयनित सूची के सभी वस्तुओं को उद्दीप्त करें"
 
-#: src/ui_obsListDialog.h:299
-msgid "Highlight all"
-msgstr "सब को उद्दीप्त करें"
+#: src/ui_obsListDialog.h:358 src/ui_obsListCreateEditDialog.h:341
+msgid "Add object"
+msgstr "वस्तु जोडें"
 
-#: src/ui_obsListDialog.h:301 src/ui_obsListCreateEditDialog.h:343
+#: src/ui_obsListDialog.h:360 src/ui_obsListDialog.h:378
+#: src/ui_obsListCreateEditDialog.h:343
 msgid "Clear all the highlight objects"
 msgstr "उद्दीप्त वस्तुओं को हटाएँ"
 
-#: src/ui_obsListDialog.h:303
-msgid "Clear highlight(s)"
-msgstr "उद्दीप्त(ओं) को हटाएँ"
+#: src/ui_obsListDialog.h:362 src/ui_obsListCreateEditDialog.h:345
+msgid "Remove object"
+msgstr "वस्तु हटाएँ"
 
-#: src/ui_obsListDialog.h:305
-msgid "Create a new observing list"
-msgstr "नया अवलोकन सूची बनाएँ"
+#: src/ui_obsListDialog.h:363
+msgid "Save list"
+msgstr "सूची अभिलिखित करें"
 
-#: src/ui_obsListDialog.h:307
-msgid "New list"
-msgstr "नया सूची"
+#: src/ui_obsListDialog.h:365 src/ui_obsListCreateEditDialog.h:316
+#: plugins/Satellites/src/ui_satellitesDialog.h:1385
+#: plugins/Scenery3d/src/ui_storedViewDialog.h:217
+msgid "Description:"
+msgstr "विवरण : "
 
-#: src/ui_obsListDialog.h:309
-msgid "Edit the selected list"
-msgstr "चयनित सूची का संपादन करें"
+#: src/ui_obsListDialog.h:367
+msgid "Activate to set list as default"
+msgstr "सक्षम करें सूची को मूलविकल्प बनाने के लिए"
 
-#: src/ui_obsListDialog.h:311
-msgid "Edit list"
-msgstr "सूची का संपादन करें"
+#: src/ui_obsListDialog.h:369
+msgid "Default list"
+msgstr "मूलविकल्प सूची"
 
-#: src/ui_obsListDialog.h:313
-msgid "Delete the selected list"
-msgstr "चयनित सूची मिटाएँ"
-
-#: src/ui_obsListDialog.h:315
-msgid "Delete list"
-msgstr "सूची मिटाएँ"
-
-#: src/ui_obsListDialog.h:316
-msgid "Observing list description:"
-msgstr "अवलोकन सूची विवरण : "
-
-#: src/ui_obsListDialog.h:317
-msgid "Defined as default list"
-msgstr "मूलविकल्प सूची के रूप में परिभाषित"
-
-#: src/ui_obsListDialog.h:318
+#: src/ui_obsListDialog.h:370
 msgid "Creation date:"
 msgstr "निर्माण दिनांक : "
 
-#: src/ui_obsListDialog.h:319
+#: src/ui_obsListDialog.h:371
+msgid "List name:"
+msgstr "सूची नाम : "
+
+#: src/ui_obsListDialog.h:372
+msgid "List:"
+msgstr "सूची : "
+
+#: src/ui_obsListDialog.h:376
+msgid "Highlight all"
+msgstr "सब को उद्दीप्त करें"
+
+#: src/ui_obsListDialog.h:380
+msgid "Clear highlight(s)"
+msgstr "उद्दीप्त(ओं) को हटाएँ"
+
+#: src/ui_obsListDialog.h:382
+msgid "Create a new observing list"
+msgstr "नया अवलोकन सूची बनाएँ"
+
+#: src/ui_obsListDialog.h:384
+msgid "New list"
+msgstr "नया सूची"
+
+#: src/ui_obsListDialog.h:386
+msgid "Edit the selected list"
+msgstr "चयनित सूची का संपादन करें"
+
+#: src/ui_obsListDialog.h:388
+msgid "Edit list"
+msgstr "सूची का संपादन करें"
+
+#: src/ui_obsListDialog.h:390 src/ui_obsListCreateEditDialog.h:347
+#: src/ui_obsListCreateEditDialog.h:349
+msgid "Export list"
+msgstr "सूची निर्यात करें"
+
+#: src/ui_obsListDialog.h:392
+msgid "Export list..."
+msgstr "निर्यात सूची।"
+
+#: src/ui_obsListDialog.h:394 src/ui_obsListCreateEditDialog.h:351
+#: src/ui_obsListCreateEditDialog.h:353
+msgid "Import list"
+msgstr "सूची आयात करें"
+
+#: src/ui_obsListDialog.h:396
+msgid "Import list..."
+msgstr "आयात सूची।"
+
+#: src/ui_obsListDialog.h:398
+msgid "Delete the selected list"
+msgstr "चयनित सूची मिटाएँ"
+
+#: src/ui_obsListDialog.h:400
+msgid "Delete list"
+msgstr "सूची मिटाएँ"
+
+#: src/ui_obsListDialog.h:401
 msgid "Also load:"
 msgstr "प्रयोग में लाएँ इसे भी : "
 
-#: src/ui_obsListDialog.h:321
-msgid "Retrieve stored Julian Day"
-msgstr "अभिलिखित जूलियन दिनांक पुनः प्राप्त करें"
+#: src/ui_obsListDialog.h:402
+msgid "Also store:"
+msgstr "इसे भी स्मृत रखें : "
 
-#: src/ui_obsListDialog.h:324
-msgid "Retrieve stored location"
-msgstr "अभिलिखित स्थान पुनः प्राप्त करें"
+#: src/ui_obsListDialog.h:404
+msgid "Store/load equatorial coordinates (J2000.0)"
+msgstr "स्मृत रखें / भरण करें भूमध्यरेखा निर्देशांक ( जू॰2000.0 )"
 
-#: src/ui_obsListDialog.h:328
-msgid "Retrieve stored landscape"
-msgstr "अभिलिखित भूदृश्य पुनः प्राप्त करें"
+#: src/ui_obsListDialog.h:406 src/ui_obsListCreateEditDialog.h:321
+msgid "Coordinates (RA and DEC)"
+msgstr "निर्देशांक ( दा॰आ॰ तथा झु॰ )"
 
-#: src/ui_obsListDialog.h:332
-msgid "Retrieve stored field of view"
-msgstr "अभिलिखित दृश्यक्षेत्र पुनः प्राप्त करें"
+#: src/ui_obsListDialog.h:408
+msgid "Store/load with date/time (JD)"
+msgstr "स्मृत रखें / भरण करें दिनांक / समय के साथ ( जू॰ दि॰ )"
 
-#: src/ui_obsListDialog.h:334
-msgid "FoV"
+#: src/ui_obsListDialog.h:412
+msgid "Store/load with location"
+msgstr "स्मृत रखें / भरण करें स्थान के साथ"
+
+#: src/ui_obsListDialog.h:416
+msgid "Store/load with landscape"
+msgstr "स्मृत रखें / भरण करें भूदृश्य के साथ"
+
+#: src/ui_obsListDialog.h:420
+msgid "Store/load with field of view"
+msgstr "स्मृत रखें / भरण करें दृश्यक्षेत्र के साथ"
+
+#: src/ui_obsListDialog.h:422 src/ui_obsListCreateEditDialog.h:337
+msgid "FOV"
 msgstr "दृ॰क्षे॰"
 
 #: src/ui_obsListCreateEditDialog.h:314
 msgid "Observing Lists editor"
 msgstr "अवलोकन सूची संपादक"
-
-#: src/ui_obsListCreateEditDialog.h:316
-#: plugins/Satellites/src/ui_satellitesDialog.h:1385
-#: plugins/Scenery3d/src/ui_storedViewDialog.h:217
-msgid "Description:"
-msgstr "विवरण : "
 
 #: src/ui_obsListCreateEditDialog.h:317
 msgid "Also store: "
@@ -15173,10 +15272,6 @@ msgstr "अभिलिखित करें इसे भी : "
 #: src/ui_obsListCreateEditDialog.h:319
 msgid "Store with equatorial coordinates (J2000.0)"
 msgstr "भूमध्यरेखीय निर्देशांकों ( जू॰2000.0 ) के साथ अभिलिखित करें"
-
-#: src/ui_obsListCreateEditDialog.h:321
-msgid "Coordinates (RA and DEC)"
-msgstr "निर्देशांक ( दा॰आ॰ तथा झु॰ )"
 
 #: src/ui_obsListCreateEditDialog.h:323
 msgid "Store with current JD"
@@ -15193,26 +15288,6 @@ msgstr "वर्तमान भूदृश्य के साथ अभि�
 #: src/ui_obsListCreateEditDialog.h:335
 msgid "Store with current field of view"
 msgstr "वर्तमान दृश्यक्षेत्र के साथ अभिलिखित करें"
-
-#: src/ui_obsListCreateEditDialog.h:337
-msgid "FOV"
-msgstr "दृ॰क्षे॰"
-
-#: src/ui_obsListCreateEditDialog.h:341
-msgid "Add object"
-msgstr "वस्तु जोडें"
-
-#: src/ui_obsListCreateEditDialog.h:345
-msgid "Remove object"
-msgstr "वस्तु हटाएँ"
-
-#: src/ui_obsListCreateEditDialog.h:347 src/ui_obsListCreateEditDialog.h:349
-msgid "Export list"
-msgstr "सूची निर्यात करें"
-
-#: src/ui_obsListCreateEditDialog.h:351 src/ui_obsListCreateEditDialog.h:353
-msgid "Import list"
-msgstr "सूची आयात करें"
 
 #: src/ui_obsListCreateEditDialog.h:354
 msgid "Save and close"
