@@ -470,6 +470,9 @@
                </item>
                <item>
                 <widget class="QPushButton" name="pushButtonSkylightDetails">
+                 <property name="focusPolicy">
+                  <enum>Qt::NoFocus</enum>
+                 </property>
                  <property name="toolTip">
                   <string>Open skylight details (color tweaks for the atmosphere)</string>
                  </property>
@@ -485,6 +488,9 @@
                </item>
                <item>
                 <widget class="QPushButton" name="tonemappingPushButton">
+                 <property name="focusPolicy">
+                  <enum>Qt::NoFocus</enum>
+                 </property>
                  <property name="toolTip">
                   <string>Open tone mapping details.</string>
                  </property>
