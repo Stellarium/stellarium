@@ -599,7 +599,7 @@ void OcularsGuiPanel::updateOcularControls()
 
 	ocularControls->setMinimumSize(widgetWidth, widgetHeight);
 	ocularControls->resize(widgetWidth, widgetHeight);
-	setOcularControlsVisible(ocularsPlugin->getEnableOcular());
+	setOcularControlsVisible(ocularsPlugin->getPluginMode()==Oculars::OcOcular);
 
 	updateTelescopeControls();//Contains a call to updatePosition()
 }
@@ -924,7 +924,7 @@ void OcularsGuiPanel::updateCcdControls()
 
 	ccdControls->setMinimumSize(widgetWidth, widgetHeight);
 	ccdControls->resize(widgetWidth, widgetHeight);
-	setCcdControlsVisible(ocularsPlugin->getEnableCCD());
+	setCcdControlsVisible(ocularsPlugin->getPluginMode()==Oculars::OcSensor);
 
 	updateTelescopeControls();//Contains a call to updatePosition()
 }
@@ -1137,7 +1137,7 @@ void OcularsGuiPanel::updateTelescopeControls()
 
 	telescopeControls->setMinimumSize(widgetWidth, widgetHeight);
 	telescopeControls->resize(widgetWidth, widgetHeight);
-	if (ocularsPlugin->getEnableCCD() || ocularsPlugin->getEnableOcular())
+	if (ocularsPlugin->getPluginMode()==Oculars::OcSensor || ocularsPlugin->getPluginMode()==Oculars::OcOcular)
 		setTelescopeControlsVisible(true);
 	else
 		setTelescopeControlsVisible(false);
