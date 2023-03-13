@@ -25,10 +25,12 @@
 
 #include "StelDialog.hpp"
 #include "StelCore.hpp"
+#include "StelObjectType.hpp"
 
 //! @class ObsListDialog
 //! Since V0.21.2, this class manages the ObservingLists, successor of the Bookmarks feature available since 0.15.
 //! Updated in Version 1.0: ObservingLists Version 2.0
+//! Updated in Version 23.1: ObservingLists Version 2.1
 //!
 //! This tool manages Observing Lists based on a unique list identifier, the OLUD = Observing List Unique Designation
 //! Old bookmarks.json files are auto-imported at first run. The old file is then not touched any further and could still be used in older versions of Stellarium.
@@ -46,30 +48,32 @@
 //! {
 //! "defaultListOlud": "{6d297068-a644-4d1b-9d2d-9c2dd64eef53}",
 //! "observingLists": {
-//!     "{84744f7b-c353-45b0-8394-69af2a1e0917}": {
+//!     "{84744f7b-c353-45b0-8394-69af2a1e0917}": { // List OLUD. This is a unique ID
 //! 	"creation date": "2022-09-29 20:05:07",
 //! 	"description": "Bookmarks of previous Stellarium version.",
 //! 	"name": "bookmarks list",
-//! 	"objects": [
+//! 	"objects": [                                // List is stored alphabetized, but given here in contextualized order for clarity.
 //! 	    {
-//! 		"constellation": "Leo",
-//! 		"dec": "+14°34'15\"",
-//! 		"designation": "HIP 57632",
-//! 		"fov": 0,
-//! 		"isVisibleMarker": false,
-//! 		"jd": 0,
-//! 		"landscapeID": "",
-//! 		"location": "",
-//! 		"magnitude": "2.10",
-//! 		"nameI18n": "Denebola",
-//! 		"ra": "11h49m05.0s",
-//! 		"type": "Star"
+//! 		"designation": "HIP 57632",         // Catalog name. Object should be found by one of StelObjectModuleSubclasses->getStelObjectType(designation, type)
+//! 		"type": "Star"                      // Object type code (actually its class name in Stellarium) given by StelObjectModuleSubclasses->getStelObjectType() or StelObject->getType()
+//!             "objtype" : "binary, pulsating variable" // More extensive description, localized. This will be re-read on program start to ensure current language.
+//! 		"name": "Denebola",                 // Primary English name of the object. This will be re-read on program start to ensure current language.
+//! 		"nameI18n": "Denebola",             // Translated name at time of addition to the list. Added for reference when using the exported list elsewhere. The name is retranslated in Stellarium after loading because user language may have changed.
+//! 		"ra": "11h49m05.0s",                // Optional. Right Ascension in J2000.0 frame. Good if moving object is stored. If empty, current coordinates will be added on loading.
+//! 		"dec": "+14°34'15\"",               // Optional. Declination     in J2000.0 frame. Good if moving object is stored. If empty, current coordinates will be added on loading.
+//! 		"constellation": "Leo",             // Optional. Good if moving object is stored.
+//! 		"magnitude": "2.10",                // Optional. Good if moving object is stored.
+//! 		"fov": 0,                           // Optional. Good if event is stored.
+//! 		"jd": 0,                            // Optional. Good if event is stored.
+//! 		"landscapeID": "",                  // Optional. Good if event is stored.
+//! 		"location": "",                     // Optional. Good if event is stored.
+//! 		"isVisibleMarker": false,           // UNKNOWN PURPOSE or NO PROPER IMPLEMENTATION OF WHATEVER THIS SHOULD DO
 //! 	    },
 //!         ... <other objects>
 //! 	],
 //! 	"sorting": ""
-//!     },
-//!     "{bd40274c-a321-40c1-a6f3-bc8f11026326}": {
+//!     },                                            // end of list 84744f7b-...
+//!     "{bd40274c-a321-40c1-a6f3-bc8f11026326}": {   // List OLUD of next list.
 //! 	"creation date": "2022-12-21 11:12:39",
 //! 	"description": "test of unification",
 //! 	"name": "mine_edited",
@@ -84,9 +88,10 @@
 //! 		"landscapeID": "",
 //! 		"location": "",
 //! 		"magnitude": "1.25",
-//! 		"nameI18n": "Deneb",
+//! 		"name": "Deneb",                     // Used to be nameI18n, but this is a bad idea for list exchange!
 //! 		"ra": "20h41m24.4s",
-//! 		"type": "double star, pulsating variable star"
+//! 		"type": "Star"
+//! 		"objType": "double star, pulsating variable star"
 //! 	    },
 //!         ...  <other objects>
 //! 	],
@@ -107,9 +112,14 @@
 //!
 //! Attempt to fix a confusion introduced in the 1.* series:
 //! The ObsList has entries
-//! - "designation": The catalog number (DSO), HIP number (star), or canonical name (planet)
+//! - "designation": The catalog number (DSO), HIP number (star), or canonical name (planet).
 //! - "nameI18n": translated name for display. Actually this is bad in case of exchange.
-//! - "type": As given by ObjectP->
+//! - "type": As given by ObjectP->getType() or getObjectType()?
+//! FIXES:
+//! - "designation" used in combination with type as real unique object ID. For DSO, getDSODesignationWIC() must be used.
+//! - "type": Stellarium class name. Used to unambiguously identify an object even if equal-named objects exist in different classes.
+//! - "name" (new entry) English name of object. Will be written for external use, but never read.
+//! - "nameI18n" translated name. Will be written for external use, but never read.
 
 
 class Ui_obsListDialogForm;
@@ -132,12 +142,13 @@ public:
 	{
 	public:
 		QString designation;   //!< Relates to designation in the JSON file
-		QString nameI18n;      //!< Relates to name in the JSON file.
-		QString type;          //!< type oriented on Stellarium's object class: Star, Planet (also for sun and moons!), Nebula, ...
-		QString objtype;       //!< More physical type description: star (also Sun!), planet, moon, open cluster, galaxy, region in the sky, ...
-		QString ra;
-		QString dec;
-		QString magnitude;
+		QString name;          //!< Relates to name in the JSON file. This is the object's englishName
+		QString nameI18n;      //!< Relates to nameI18n in the JSON file. This is recreated from the actual object and current language during loading of the list. In the JSON file, it has purely add-on value.
+		QString objClass;      //!< Object kind ID oriented on Stellarium's object class: Star, Planet (also for sun, moons, Comets, MinorPlanets!), Nebula, ...
+		QString objTypeI18n;   //!< More physical type description: star (also Sun!), planet, moon, open cluster, galaxy, region in the sky, ...
+		QString ra;            //!< Optional, eq. J2000.0 position at date jd; useful for moving objects
+		QString dec;           //!< Optional, eq. J2000.0 position at date jd; useful for moving objects
+		QString magnitude;     //!< NOT a redundant bit of information! In case of moving objects, it spares computing details on loading.
 		QString constellation; //!< NOT a redundant bit of information! In case of moving objects, it spares computing positions on loading.
 		double jd;             //!< optional: stores date of observation
 		QString location;      //!< optional: should be a full location encoded with StelLocation::serializeToLine()
@@ -148,9 +159,10 @@ public:
 		//! constructor
 		observingListItem():
 		designation(""),
+		name(""),
 		nameI18n(""),
-		type(""),
-		objtype(""),
+		objClass(""),
+		objTypeI18n(""),
 		ra(""),
 		dec(""),
 		magnitude(""),
@@ -165,9 +177,10 @@ public:
 		QVariantMap toVariantMap(){
 			return {
 				{QString(KEY_DESIGNATION)      , designation},
+				{QString(KEY_NAME)             , name},
 				{QString(KEY_NAME_I18N)        , nameI18n},
-				{QString(KEY_TYPE)             , type},
-				{QString(KEY_OBJECTS_TYPE)     , objtype},
+				{QString(KEY_TYPE)             , objClass},
+				{QString(KEY_OBJECTS_TYPE)     , objTypeI18n},
 				{QString(KEY_RA)               , ra},
 				{QString(KEY_DEC)              , dec},
 				{QString(KEY_MAGNITUDE)        , magnitude},
@@ -182,9 +195,9 @@ public:
 
 	enum ObsListColumns {
 		ColumnUUID,          //! UUID of object
-		ColumnName,          //! Name or designation of object
-		ColumnNameI18n,      //! Localized name of object
-		ColumnType,          //! Type of the object
+		ColumnDesignation,   //! English name or catalog designation of object
+		ColumnNameI18n,      //! Localized name/nickname of object
+		ColumnType,          //! Localized detailed Type of the object
 		ColumnRa,            //! Right ascension of the object
 		ColumnDec,           //! Declination of the object
 		ColumnMagnitude,     //! Magnitude of the object
@@ -253,8 +266,9 @@ private:
 
 	//! Append row in the obsListListModel (the table to display/select list entries)
 	//! @param olud id of the record
-	//! @param name name or the designation of the object
-	//! @param type type of the object
+	//! @param designation name or the designation of the object
+	//! @param nameI18n localized name of the object
+	//! @param typeI18n Localized detailed type (e.g. moon, cubewano, galaxy, binary star) of the object
 	//! @param ra right assencion of the object
 	//! @param dec declination of the object
 	//! @param magnitude magnitude of the object
@@ -262,7 +276,7 @@ private:
 	//! @param date human-redable event date (optional)
 	//! @param location name of location (optional)
 	//! @param landscapeID of observation (optional)
-	void addModelRow(const QString &olud, const QString &name, const QString &nameI18n, const QString &type,
+	void addModelRow(const QString &olud, const QString &designation, const QString &nameI18n, const QString &typeI18n,
 			 const QString &ra, const QString &dec, const QString &magnitude, const QString &constellation,
 			 const QString &date, const QString &location, const QString &landscapeID);
 
