@@ -128,8 +128,7 @@ void ObsListDialog::createDialogContent()
 	// Allow loading one list entry
 	connect(ui->treeView,           SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectAndGoToObject(QModelIndex)));
 
-	//connect(ui->listNameLineEdit,   SIGNAL(textChanged(const QString&)), this, SLOT(listNameTextChange(const QString&)));
-	switchEditMode(false, false); // NEW  start with view mode
+	switchEditMode(false, false); // start with view mode
 
 	connectBoolProperty(ui->jdCheckBox,        "ObsListDialog.flagUseJD");
 	connectBoolProperty(ui->locationCheckBox,  "ObsListDialog.flagUseLocation");
@@ -157,9 +156,10 @@ void ObsListDialog::createDialogContent()
 	ui->treeView->setSortingEnabled(true);
 
 	// Load all observing lists from JSON.
+	// We need to load the global list only once!
 	QFile jsonFile(observingListJsonPath);
 	if (!jsonFile.open(QIODevice::ReadWrite | QIODevice::Text)) {
-		qWarning() << "[ObservingList] JSON list can not be opened. A file can not be open for reading and writing:"
+		qWarning() << "[ObservingList] JSON list file can not be opened for reading and writing:"
 			   << QDir::toNativeSeparators(observingListJsonPath);
 		return;
 	}
@@ -191,23 +191,19 @@ void ObsListDialog::createDialogContent()
 	}
 
 	// For no regression we must take into account the legacy bookmarks file
-	// We need to load the global list only once!
 	QFile jsonBookmarksFile(bookmarksJsonPath);
 	if (jsonBookmarksFile.exists())
 	{
-		//qDebug() << "OLD BOOKMARKS FOUND: TRY IF WE NEED TO PROCESS/IMPORT THEM";
-
+		//qDebug() << "Old Bookmarks found: Try if we need to process/import them";
 		if (!checkIfBookmarksListExists())
 		{
-			//qDebug() << "NO BOOKMARK LIST SO FAR. IMPORTING...";
+			//qDebug() << "No bookmark list so far. Importing...";
 			QHash<QString, observingListItem> bookmarksForImport=loadBookmarksFile(jsonBookmarksFile);
 			saveBookmarksHashInObservingLists(bookmarksForImport);
-			//qDebug() << "read into allListMap of size" << allListsMap.size();
 			jsonMap.insert(KEY_OBSERVING_LISTS, observingLists); // Update the global map
 		}
 		//else
-		//	qDebug() << "BOOKMARK LIST EXISTS. WE CAN SKIP THE IMPORT";
-
+		//	qDebug() << "Bookmark list exists. We can skip the import.";
 
 		jsonFile.resize(0);
 		StelJsonParser::write(jsonMap, &jsonFile);
@@ -239,8 +235,6 @@ bool ObsListDialog::checkIfBookmarksListExists()
 	}
 	return false;
 }
-
-
 
 /*
  * Retranslate dialog
@@ -335,7 +329,6 @@ void ObsListDialog::addModelRow(const QString &olud, const QString &designation,
 		ui->treeView->resizeColumnToContents(i);
 }
 
-
 /*
  * Load the lists names from jsonMap,
  * Populate the list names into combo box and extract defaultOlud
@@ -377,7 +370,6 @@ void ObsListDialog::loadListNames()
 		defaultOlud = observingLists.firstKey();
 	}
 }
-
 
 /*
  * Load the default list
@@ -460,26 +452,16 @@ void ObsListDialog::loadSelectedList()
 				observingListItem item;
 				const QString objectUUID = QUuid::createUuid().toString();
 				item.designation = objectMap.value(KEY_DESIGNATION).toString();  // This is the common name or catalog number (with catalog ID)
-				item.name = objectMap.value(KEY_NAME).toString();          // PRELIMINARY ASSIGNMENT: Do not rely on name in the JSON file. It may have changed in Stellarium's name lists! Retrieve name from the actual object later.
-				item.nameI18n = objectMap.value(KEY_NAME_I18N).toString(); // PRELIMINARY ASSIGNMENT: Do not rely on translated name in the JSON file. It may be in the wrong language or may have changed in Stellarium's name lists! Retrieve translated name from the actual object later.
-
-				// // Caveat - Please make the code more readable!
-				// // We assign KEY_TYPE to item.objtype and KEY_OBJECTS_TYPE to item.type.
-				// // Compare this to the same passage when importing bookmarks.
-				// // --> CAVEAT SOLVED
+				item.name = objectMap.value(KEY_NAME).toString();          // Preliminary: Do not rely on name in the JSON file. It may have changed in Stellarium's name lists! Retrieve name from the actual object later.
+				item.nameI18n = objectMap.value(KEY_NAME_I18N).toString(); // Preliminary: Do not rely on translated name in the JSON file. It may be in the wrong language or may have changed in Stellarium's name lists! Retrieve translated name from the actual object later.
 				item.objClass = objectMap.value(KEY_TYPE).toString();
-				item.objTypeI18n  = objectMap.value(KEY_OBJECTS_TYPE).toString(); // TODO: Do not rely on this translated string! Re-retrieve later
-
+				item.objTypeI18n  = objectMap.value(KEY_OBJECTS_TYPE).toString(); // Preliminary: Do not rely on this translated string! Re-retrieve later
 				item.ra  = objectMap.value(KEY_RA).toString();
 				item.dec = objectMap.value(KEY_DEC).toString();
 
-				// CAVEAT! The implementation in the 1.* series has a bug here, maybe caused by just too much confusion about type, objtype and trying to be smart.
-				// It seems searching for objtype is too strong. Compare this to the same passage when importing bookmarks.
-				// "Star"s are not found! Likewise, "cubewanos" cannot be found like that! They are "Planet"s, according to SolarSystem::getStelObjectType() called by findAndSelect(.,.)
-				// Therefore FIX: Search for item.objClass (new, clearer name for previously named 'item.type')
 				if (objectMgr->findAndSelect(item.designation, item.objClass) && !objectMgr->getSelectedObject().isEmpty())
 				{
-					qDebug() << "Horray, we have found an object of objClass" << item.objClass << "for" << item.designation;
+					//qDebug() << "ObsList: found an object of objClass" << item.objClass << "for" << item.designation;
 					const QList<StelObjectP> &selectedObject = objectMgr->getSelectedObject();
 					double ra, dec;
 					StelUtils::rectToSphe(&ra, &dec, selectedObject[0]->getJ2000EquatorialPos(core));
@@ -503,7 +485,7 @@ void ObsListDialog::loadSelectedList()
 						item.ra = StelUtils::radToHmsStr(ra, false).trimmed();
 					if (item.dec.isEmpty())
 						item.dec = StelUtils::radToDmsStr(dec, false).trimmed();
-					qDebug() << "Changing item.objClass " << item.objClass << "to" << selectedObject[0]->getType();
+					//qDebug() << "Changing item.objClass " << item.objClass << "to" << selectedObject[0]->getType();
 					item.objClass = selectedObject[0]->getType();
 					item.objTypeI18n = selectedObject[0]->getObjectTypeI18n();
 					item.name=selectedObject[0]->getEnglishName();
@@ -524,11 +506,9 @@ void ObsListDialog::loadSelectedList()
 				if (item.jd != 0.)
 					dateStr = StelUtils::julianDayToISO8601String(item.jd + core->getUTCOffset(item.jd) / 24.).replace("T", " ");
 
-				// Location, landscapeID (may be empty)
+				// Location, landscapeID, FoV (may be empty)
 				item.location = objectMap.value(KEY_LOCATION).toString();
 				item.landscapeID = objectMap.value(KEY_LANDSCAPE_ID).toString();
-
-				// Fov (may be empty/0=invalid)
 				item.fov = objectMap.value(KEY_FOV).toDouble();
 
 				// Visible flag
@@ -577,7 +557,6 @@ void ObsListDialog::loadSelectedList()
 
 /*
  * Load the bookmarks of bookmarks.json file into observing lists file
- * For no regression we must take into account the legacy bookmarks.json file
 */
 QHash<QString, ObsListDialog::observingListItem> ObsListDialog::loadBookmarksFile(QFile &file)
 {
@@ -708,7 +687,6 @@ void ObsListDialog::saveBookmarksHashInObservingLists(const QHash<QString, obser
 	observingLists.insert(bookmarkListOlud, bookmarksObsList);
 }
 
-
 /*
  * Select and go to object
 */
@@ -747,7 +725,7 @@ void ObsListDialog::selectAndGoToObject(QModelIndex index)
 		if (item.designation.contains("marker", Qt::CaseInsensitive))
 		{
 			// Add a custom object on the sky
-			GETSTELMODULE (CustomObjectMgr)->addCustomObject(item.designation, pos, item.isVisibleMarker);
+			GETSTELMODULE(CustomObjectMgr)->addCustomObject(item.designation, pos, item.isVisibleMarker);
 			objectFound = objectMgr->findAndSelect(item.designation);
 		}
 		else
@@ -760,10 +738,10 @@ void ObsListDialog::selectAndGoToObject(QModelIndex index)
 			mvmgr->zoomTo(fov, 0.0);
 			mvmgr->moveToJ2000(pos, mvmgr->mountFrameToJ2000(Vec3d(0., 0., 1.)), 0.0);
 
-			QList<StelObjectP> candidates = GETSTELMODULE (StarMgr)->searchAround(pos, 0.5, core);
+			QList<StelObjectP> candidates = GETSTELMODULE(StarMgr)->searchAround(pos, 0.5, core);
 			if (candidates.empty()) { // The FOV is too big, let's reduce it to see dimmer objects.
 				mvmgr->zoomTo(0.5 * fov, 0.0);
-				candidates = GETSTELMODULE (StarMgr)->searchAround(pos, 0.5, core);
+				candidates = GETSTELMODULE(StarMgr)->searchAround(pos, 0.5, core);
 			}
 
 			Vec3d winpos;
@@ -781,7 +759,6 @@ void ObsListDialog::selectAndGoToObject(QModelIndex index)
 					sobj = obj;
 				}
 			}
-
 			if (sobj)
 				objectFound = objectMgr->setSelectedObject(sobj);
 		}
@@ -791,7 +768,6 @@ void ObsListDialog::selectAndGoToObject(QModelIndex index)
 		const QList<StelObjectP> newSelected = objectMgr->getSelectedObject();
 		if (!newSelected.empty())
 		{
-
 			const float amd = mvmgr->getAutoMoveDuration();
 			mvmgr->moveToObject(newSelected[0], amd);
 			mvmgr->setFlagTracking(true);
@@ -813,7 +789,6 @@ void ObsListDialog::loadSelectedObservingList(int selectedIndex)
 	selectedOlud = ui->obsListComboBox->itemData(selectedIndex).toString();
 	loadSelectedList();
 }
-
 
 /*
  * Slot for button highlightAllButton: show all objects of active list.
@@ -856,7 +831,6 @@ void ObsListDialog::highlightAll()
 				pos = selected[0]->getJ2000EquatorialPos(core);
 			}
 		}
-
 		if (usablePosition)
 			highlights.append(pos);
 
@@ -1174,7 +1148,6 @@ void ObsListDialog::addObjectButtonPressed()
 			const Vec3d posNow = selectedObject[0]->getEquinoxEquatorialPos(core);
 			item.constellation = core->getIAUConstellation(posNow);
 
-
 			// Optional: JD, Location, landscape, fov
 			if (getFlagUseJD())
 				item.jd = JD;
@@ -1403,7 +1376,6 @@ void ObsListDialog::setFlagUseFov(bool b)
 	emit flagUseFovChanged(b);
 }
 
-
 /*
  * Prepare the currently displayed/edited list for storage
  * Returns QVariantList with keys={creation date, description, name, objects, sorting}
@@ -1482,25 +1454,7 @@ void ObsListDialog::defaultClicked(bool b)
 {
 	defaultOlud = (b ? selectedOlud : "");
 	jsonMap.insert(KEY_DEFAULT_LIST_OLUD, defaultOlud);
-	tainted=true; // Not a crucial change, so only mark for store-on-exit.
-
-/*
- * 	// If we consider this an important change that needs to be stored.
-	QFile jsonFile(observingListJsonPath);
-	if (!jsonFile.open(QIODevice::ReadWrite | QIODevice::Text))
-	{
-		qWarning() << "[ObservingList defaultToggled] Error saving observing list. "
-			   << "File cannot be opened for reading and writing:"
-			   << QDir::toNativeSeparators(observingListJsonPath);
-		messageBox(q_("Error"), q_("Cannot store after changing default list."));
-		return;
-	}
-
-	jsonFile.resize(0);
-	StelJsonParser::write(jsonMap, &jsonFile);
-	jsonFile.flush();
-	jsonFile.close();
-*/
+	tainted=true;
 }
 
 const QString ObsListDialog::JSON_FILE_NAME     = QStringLiteral("observingList.json");

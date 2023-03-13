@@ -110,11 +110,11 @@
 //! Importing a JSON file with observingLists will import all lists and unconditionally overwrite existing lists with the same OLUD.
 //! Exporting writes an observingList file with only the currently displayed list.
 //!
-//! Attempt to fix a confusion introduced in the 1.* series:
+//! Fix a confusion introduced in the 1.* series:
 //! The ObsList has entries
 //! - "designation": The catalog number (DSO), HIP number (star), or canonical name (planet).
-//! - "nameI18n": translated name for display. Actually this is bad in case of exchange.
-//! - "type": As given by ObjectP->getType() or getObjectType()?
+//! - "nameI18n": translated name for display. Actually this is bad in case of list exchange.
+//! - "type": As given by ObjectP->getType() or getObjectType()? This was inconsistent.
 //! FIXES:
 //! - "designation" used in combination with type as real unique object ID. For DSO, getDSODesignationWIC() must be used.
 //! - "type": Stellarium class name. Used to unambiguously identify an object even if equal-named objects exist in different classes.
@@ -154,7 +154,7 @@ public:
 		QString location;      //!< optional: should be a full location encoded with StelLocation::serializeToLine()
 		QString landscapeID;   //!< optional: landscapeID of landscape at moment of item creation.
 		double fov;            //!< optional: Field of view
-		bool isVisibleMarker;  //!<
+		bool isVisibleMarker;  //!< Something around user-markers or SIMBAD-retrieved objects. Test and document!
 
 		//! constructor
 		observingListItem():
@@ -208,10 +208,6 @@ public:
 		ColumnCount          //! Total number of columns
 	};
 	Q_ENUM(ObsListColumns)
-	// Notify that the application style changed
-	//void styleChanged() override;
-
-	//void setVisible(bool v) override;
 
 protected:
 	Ui_obsListDialogForm *ui;
@@ -225,7 +221,7 @@ private:
 	class LandscapeMgr *landscapeMgr;
 	class LabelMgr *labelMgr;
 
-	QStandardItemModel *itemModel; //!< Data for the table display.
+	QStandardItemModel *itemModel;       //!< Data for the table display.
 	const QString observingListJsonPath; //!< Path to observingList.json file, set once in constructor.
 	const QString bookmarksJsonPath;     //!< Path to bookmarks.json, set once in constructor.
 
@@ -233,31 +229,29 @@ private:
 	//! - defaultListOlud: The OLUD of the currently configured default list. If empty or invalid, the first list is used as default.
 	//! - observingLists:  QVariantMap of OLUD/ObsList pairs
 	//! - shortName: "Observing list for Stellarium"
-	//! - version: "2.0"
+	//! - version: "2.1"
 	//! The other methods can load, add, delete, or edit lists from the observingLists list.
 	QVariantMap jsonMap;
 	QVariantMap observingLists; //!< Contains the observingLists map from the JSON file
 
 	QString defaultOlud;  //!< OLUD (UUID) of default list
-	QString selectedOlud; //!< OLUD has to be set before calling loadSelectedObservingList. Could be called currentListOlud
+	QString selectedOlud; //!< OLUD has to be set before calling loadSelectedObservingList. Could be called currentOlud
 
 	//! filled when loading a selected observing list. This is needed for the interaction with the table/itemModel in GUI
 	QHash<QString, observingListItem> currentItemCollection;
 
 	QList<int> highlightLabelIDs; //!< int label IDs for addressing labels by the HighlightMgr
 
-	//!List names, used for the ComboBox
-	QList<QString> listNames;
-	QString currentListName;
-	QString sorting;	//!< Sorting of the list ex: right ascension
+	QList<QString> listNames; //!< List names, used for the ComboBox
+	QString currentListName;  //!< Name of list with selectedOlud
+	QString sorting;	  //!< Sorting of the list ex: right ascension
 
-	//properties:
-	bool flagUseJD;
-	bool flagUseLandscape;
-	bool flagUseLocation;
-	bool flagUseFov;
+	bool flagUseJD;         //!< Property. Store/retrieve date
+	bool flagUseLandscape;  //!< Property. Store/retrieve landscape
+	bool flagUseLocation;   //!< Property. Store/retrieve location
+	bool flagUseFov;        //!< Property. Store/retrieve field of view
 
-	bool tainted;           //!< Needs write on exit
+	bool tainted;           //!< List has changed. Needs write on exit.
 	bool isEditMode;        //!< true if in Edit/Create New mode.
 	bool isCreationMode;    //!< if true we are in creation mode otherwise in edit mode. We ONLY need this to decide what to do in case of a CANCEL during EDIT.
 
@@ -306,7 +300,6 @@ private:
 	//! Sort the obsListTreeView by the column name given in parameter
 	void sortObsListTreeViewByColumnName(const QString &columnName);
 
-
 	//! Check if bookmarks list already exists in observing list file,
 	//! i.e., if the old bookmarks file has already be loaded.
 	bool checkIfBookmarksListExists();
@@ -328,7 +321,6 @@ signals:
 	void flagUseFovChanged(bool b);
 
 public slots:
-
 	void retranslate() override;
 	bool getFlagUseJD() {return flagUseJD;}
 	bool getFlagUseLandscape() {return flagUseLandscape;}
@@ -340,8 +332,7 @@ public slots:
 	void setFlagUseFov(bool b);
 
 private slots:
-
-	//! Label all bookmarked objects with a label
+	//! Label all bookmarked objects of the current list with a label
 	void highlightAll();
 	//! Clear highlights (remove screen labels)
 	void clearHighlights();
