@@ -4,18 +4,19 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Gemma Domènech <info@gemmadomenech.com>, 2020
-# Pascual Martínez Reig <pascualmralcoi@gmail.com>, 2021
 # cardinot <mcardinot@gmail.com>, 2022
+# Pascual Martínez Reig <pascualmralcoi@gmail.com>, 2022
+# Gemma Domènech <info@gemmadomenech.com>, 2022
+# Daniel Alomar <daniel.adastra@gmail.com>, 2023
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2021-09-19 19:50+0700\n"
-"PO-Revision-Date: 2020-11-24 18:28+0000\n"
-"Last-Translator: cardinot <mcardinot@gmail.com>, 2022\n"
+"POT-Creation-Date: 2022-10-06 00:11+0700\n"
+"PO-Revision-Date: 2022-10-05 17:03+0000\n"
+"Last-Translator: Daniel Alomar <daniel.adastra@gmail.com>, 2023\n"
 "Language-Team: Catalan (https://www.transifex.com/stellarium/teams/80998/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -36,11 +37,16 @@ msgid ""
 "or some other details to find out how this plugin behaves. Then build and "
 "present your own work!"
 msgstr ""
+"Aquesta escena és útil sobretot com a banc de proves per als vostres propis "
+"desenvolupaments. Hauríeu de fer una còpia de la carpeta de l'escena i "
+"modificar-la a voluntat, provar la configuració del material o alguns altres"
+" detalls per esbrinar com es comporta aquest connector. Llavors construeix i"
+" presenta el teu propi treball!"
 
 #. type: Content of: <h4>
 #: ../../scenery3d/Testscene/description.en.utf8:8
 msgid "Coordinate and orientation tests"
-msgstr ""
+msgstr "Proves de coordinació i orientació"
 
 #. type: Content of: <p>
 #: ../../scenery3d/Testscene/description.en.utf8:10
@@ -54,6 +60,15 @@ msgid ""
 "absolutely and always point west-east, the grid lines hit the northern "
 "horizon slightly (4.2 deg) left of north!"
 msgstr ""
+"Els pilars que es mostren aquí, vistos des del centre de l'estructura, "
+"proporcionen una visió aproximada (no d'alta precisió!) de les posicions de "
+"solstici/equinocci a latituds d'Europa central. Els pilars centrals "
+"proporcionen una línia est-oest. La quadrícula de coordenades de l'enquesta "
+"visible a terra no s'alinea amb el nord geogràfic. S'ha de compensar una "
+"rotació de -4,2 graus (prova de convergència del meridià), és a dir, mentre "
+"que els pilars centrals han d'apuntar absolutament i sempre cap a l'oest, "
+"les línies de la quadrícula toquen lleugerament l'horitzó nord (4,2 graus) a"
+" l'esquerra del nord!"
 
 #. type: Content of: <p>
 #: ../../scenery3d/Testscene/description.en.utf8:19
@@ -61,11 +76,13 @@ msgid ""
 "Walkaround ground coordinates (Ctrl-R, T) should display the coordinates "
 "visible along the south and west border of the ground."
 msgstr ""
+"Les coordenades del terreny (Ctrl-R, T) han de mostrar les coordenades "
+"visibles al llarg de la vora sud i oest del terreny."
 
 #. type: Content of: <h4>
 #: ../../scenery3d/Testscene/description.en.utf8:23
 msgid "Material test"
-msgstr ""
+msgstr "Prova de material"
 
 #. type: Content of: <p>
 #: ../../scenery3d/Testscene/description.en.utf8:25
@@ -74,6 +91,9 @@ msgid ""
 " can play with material parameters to create funny effects like "
 "semitransparent or glow-in-the-dark brick spheres."
 msgstr ""
+"Aquest model també s'utilitza per provar les capacitats gràfiques del "
+"connector. Podeu jugar amb els paràmetres del material per crear efectes "
+"divertits com esferes de maó semitransparents o que brillen a la foscor."
 
 #. type: Content of: <p>
 #: ../../scenery3d/Testscene/description.en.utf8:29
@@ -81,6 +101,9 @@ msgid ""
 "To test temporal features, the pillars and spheres are visible only from the"
 " years 2000 until 2020.  Edit the material file to change that!"
 msgstr ""
+"Per provar les característiques temporals, els pilars i les esferes només "
+"són visibles des dels anys 2000 fins al 2020. Editeu el fitxer de material "
+"per canviar-ho!"
 
 #. type: Content of: <h4>
 #: ../../scenery3d/Testscene/description.en.utf8:32
@@ -108,6 +131,8 @@ msgid ""
 "Sterngarten (\"Star Garden\") is an open-air planetarium in the south-west "
 "of Vienna, demonstrating the solar year."
 msgstr ""
+"Sterngarten (\"Jardí de les estrelles\") és un planetari a l'aire lliure al "
+"sud-oest de Viena, que mostra l'any solar."
 
 #. type: Content of: <h4>
 #: ../../scenery3d/Sterngarten/description.en.utf8:7
@@ -121,6 +146,9 @@ msgid ""
 "Astronomical Bureau (1907) and Austrian Astronomical Society (1924). "
 "Director of first Vienna Planetarium (1927) and Urania observatory."
 msgstr ""
+"Prof.univ.Dr.Oswald Thomas (1882 Kronstadt - 1963 Viena). Fundador, "
+"Astronomical Bureau (1907) i Austrian Astronomical Society (1924). Director "
+"del primer Planetari de Viena (1927) i de l'Observatori d'Urània."
 
 #. type: Content of: <h4>
 #: ../../scenery3d/Sterngarten/description.en.utf8:14
@@ -139,6 +167,14 @@ msgid ""
 "Calendar)  and the monthly journal \"Der Sternenbote\" (The Starry "
 "Messenger)."
 msgstr ""
+"El Sterngarten va ser desenvolupat per l'alumne de Thomas i successor a "
+"l'Oficina Astronòmica, el professor Hermann Mucke (1935-2019) amb els seus "
+"col·laboradors. Mucke també va ser secretari de la Societat Astronòmica "
+"Austríaca de 1963 a 2018, director del planetari de Viena 1963-2001 i de "
+"l'observatori públic Urania de Viena de 1971 a 2001. Durant més de 60 anys, "
+"Mucke i la Societat van publicar el \"Österreichischer Himmelskalender\" "
+"(calendari celeste austríac) i la revista mensual \"Der Sternenbote\" (El "
+"missatger estrellat)."
 
 #. type: Content of: <p>
 #: ../../scenery3d/Sterngarten/description.en.utf8:22
@@ -146,7 +182,7 @@ msgid ""
 "It was built 1997-2001 by the Austrian Astronomical Society, supported by "
 "public and private sponsors."
 msgstr ""
-"Va ser construit entre 1997-2001 per la Societat Astronòmica Australiana, "
+"Va ser construït entre 1997 i 2001 per la Societat Astronòmica Australiana, "
 "amb el suport de patrocinadors públics i privats."
 
 #. type: Content of: <h4>
@@ -163,6 +199,11 @@ msgid ""
 "southwest of Vienna; always open privately for everybody free of charge. "
 "Frequently guided tours."
 msgstr ""
+"Millora dels coneixements astronòmics bàsics en el públic en general. La "
+"nostra instal·lació, situada a l'extrem sud-oest de Viena, ens ofereix "
+"presenciar fets i canvis celestials a simple vista, opcionalment amb un "
+"vidre de camp; sempre obert de manera privada per a tothom gratuïtament. "
+"Visites guiades freqüentment."
 
 #. type: Content of: <h4>
 #: ../../scenery3d/Sterngarten/description.en.utf8:32
@@ -175,17 +216,21 @@ msgid ""
 "Pyramid with platform 7x7m. Seen from 1.5m above Center Plate all angles "
 "fit."
 msgstr ""
+"Piràmide amb plataforma 7x7m. Vist des d'1,5 m per sobre de la placa "
+"central, tots els angles encaixen."
 
 #. type: Content of: <ul><li>
 #: ../../scenery3d/Sterngarten/description.en.utf8:36
 msgid "Horizon Railing, representing the mathematical horizon."
-msgstr ""
+msgstr "Horitzó Barana, que representa l'horitzó matemàtic."
 
 #. type: Content of: <ul><li>
 #: ../../scenery3d/Sterngarten/description.en.utf8:37
 msgid ""
 "Surrounding Steps; 200 seats. Entrance by staircase and wheelchair ramp."
 msgstr ""
+"Envoltat d'esglaons; 200 places. Entrada per escala i rampa per a cadira de "
+"rodes."
 
 #. type: Content of: <ul><li>
 #: ../../scenery3d/Sterngarten/description.en.utf8:38
@@ -196,6 +241,11 @@ msgid ""
 "rising/setting on the mathematical horizon is not possible in the field due "
 "to vegetation and landscape)."
 msgstr ""
+"Pilars per a la sortida i la posta de sol al començament de les estacions. "
+"Les posicions dels pilars es troben just als azimuts dels equinoccis i dels "
+"solsticis. Els braços indiquen l'horitzó i l'efecte de desplaçament a causa "
+"de la refracció. (No és possible l'observació de pujada/coberta a l'horitzó "
+"matemàtic al camp a causa de la vegetació i el paisatge)."
 
 #. type: Content of: <ul><li>
 #: ../../scenery3d/Sterngarten/description.en.utf8:42
@@ -203,6 +253,8 @@ msgid ""
 "South Pillar, marked (10&deg;/10&deg; altitude); Transit marks for sun at "
 "seasons' beginning."
 msgstr ""
+"Pilar Sud, marcat (10&deg;/10&deg; altitud); Marques de trànsit per al sol a"
+" l'inici de les estacions."
 
 #. type: Content of: <ul><li>
 #: ../../scenery3d/Sterngarten/description.en.utf8:43
@@ -210,6 +262,8 @@ msgid ""
 "North Pillar, marked (10&deg;/10&deg; altitude); on top Shadow Disc with "
 "central hole: North celestial Pole."
 msgstr ""
+"Pilar Nord, marcat (10/deg/10/deg d'altitud); a la part superior Disc "
+"d'Ombra amb forat central: Pol nord celeste."
 
 #. type: Content of: <ul><li>
 #: ../../scenery3d/Sterngarten/description.en.utf8:44
@@ -219,11 +273,15 @@ msgid ""
 " longitude, with zodiacal signs. Ascending part serves as polar gnomon for "
 "the"
 msgstr ""
+"Analema doblegat, dividit. Dates de primavera i estiu a la part horitzontal,"
+" dates de tardor i hivern a la ascendent, marcada (10&deg/10&deg) longitud "
+"solar, amb signes zodiacals. La part ascendent serveix com a gnom polar per "
+"al"
 
 #. type: Content of: <ul><li>
 #: ../../scenery3d/Sterngarten/description.en.utf8:45
 msgid "Sundial, full hours Vh to VIIh marked."
-msgstr ""
+msgstr "Rellotge de sol, hores completes de Vh a VIIh marcades."
 
 #. type: Content of: <ul><li>
 #: ../../scenery3d/Sterngarten/description.en.utf8:46
@@ -246,6 +304,8 @@ msgid ""
 "Österreichischer Astronomischer Verein: <a "
 "href=\"https://www.astroverein.at\">https://www.astroverein.at</a>"
 msgstr ""
+"Österreichischer Astronomischer Verein: <a "
+"href=\"https://www.astroverein.at\">https://www.astroverein.at</a>"
 
 #. type: Content of: <ul><li>
 #: ../../scenery3d/Sterngarten/description.en.utf8:53
@@ -253,6 +313,8 @@ msgid ""
 "German Wikipedia article on the <a "
 "href=\"https://de.wikipedia.org/wiki/Sterngarten\">Sterngarten</a>"
 msgstr ""
+"Article de la Viquipèdia alemanya <a "
+"href=\"https://de.wikipedia.org/wiki/Sterngarten\">Sterngarten</a>"
 
 #. type: Content of: <p>
 #: ../../scenery3d/Sterngarten/description.en.utf8:57
@@ -262,6 +324,10 @@ msgid ""
 "by Mucke in his primary school days. Mucke's spirit will remain alive in the"
 " Sterngarten."
 msgstr ""
+"Creat per Georg Zotti seguint els plans de H. Mucke; Com innombrables "
+"astrònoms aficionats i professionals a Àustria, Zotti va ser introduït a "
+"l'astronomia per Mucke als seus dies de primària. L'esperit de Mucke "
+"romandrà viu al Sterngarten."
 
 #. type: Content of: <p>
 #: ../../scenery3d/Sterngarten/description.en.utf8:60
@@ -269,3 +335,5 @@ msgid ""
 "Model created in 2010 with Google Sketchup 8, exported from Google Sketchup "
 "8.0.14346."
 msgstr ""
+"Model creat el 2010 amb Google Sketchup 8, exportat des de Google Sketchup "
+"8.0.14346."
