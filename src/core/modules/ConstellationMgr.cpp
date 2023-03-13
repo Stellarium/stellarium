@@ -157,10 +157,6 @@ void ConstellationMgr::reloadSkyCulture()
 
 void ConstellationMgr::updateSkyCulture(const QString& skyCultureDir)
 {
-	// Check if the sky culture changed since last load, if not don't load anything
-	if (lastLoadedSkyCulture == skyCultureDir)
-		return;
-
 	// Find constellation art.  If this doesn't exist, warn, but continue using ""
 	// the loadLinesAndArt function knows how to handle this (just loads lines).
 	QString conArtFile = StelFileMgr::findFile("skycultures/"+skyCultureDir+"/constellationsart.fab");
