@@ -142,7 +142,7 @@ void ObsListDialog::createDialogContent()
 	ui->treeView->setModel(itemModel);
 	ui->treeView->header()->setSectionsMovable(false);
 	ui->treeView->hideColumn(ColumnUUID);
-	ui->treeView->header()->setSectionResizeMode(ColumnName,          QHeaderView::ResizeToContents);
+	ui->treeView->header()->setSectionResizeMode(ColumnDesignation,   QHeaderView::ResizeToContents);
 	ui->treeView->header()->setSectionResizeMode(ColumnNameI18n,      QHeaderView::ResizeToContents);
 	ui->treeView->header()->setSectionResizeMode(ColumnType,          QHeaderView::ResizeToContents);
 	ui->treeView->header()->setSectionResizeMode(ColumnRa,            QHeaderView::ResizeToContents);
@@ -191,7 +191,7 @@ void ObsListDialog::createDialogContent()
 	}
 
 	// For no regression we must take into account the legacy bookmarks file
-	// TBD: We should load the global list only once!
+	// We need to load the global list only once!
 	QFile jsonBookmarksFile(bookmarksJsonPath);
 	if (jsonBookmarksFile.exists())
 	{
@@ -260,17 +260,17 @@ void ObsListDialog::retranslate()
 void ObsListDialog::setObservingListHeaderNames()
 {
 	const QStringList headerStrings = {
-		"UUID", // Hidden column
-		q_("Object designation"),
-		q_("Object name"),
-		q_("Type"),
-		q_("Right ascension"),
-		q_("Declination"),
-		q_("Magnitude"),
-		q_("Constellation"),
-		q_("Date"),
-		q_("Location"),
-		q_("Landscape")
+		"UUID",                     // Hidden column
+		q_("Object designation"),   // English name and/or catalog number
+		q_("Object name"),          // Localized name
+		q_("Type"),                 // Localized type description (not just class name)
+		q_("Right ascension"),      // J2000.0 RA
+		q_("Declination"),          // J2000.0 DE
+		q_("Magnitude"),            // visual magnitude
+		q_("Constellation"),        // IAU constellation code
+		q_("Date"),                 // date string (if stored)
+		q_("Location"),             // location (if stored)
+		q_("Landscape")             // landscape ID (if stored)
 	};
 	Q_ASSERT(headerStrings.length()==ColumnCount);
 	itemModel->setHorizontalHeaderLabels(headerStrings);
@@ -279,8 +279,8 @@ void ObsListDialog::setObservingListHeaderNames()
 /*
  * Add row in the obsListListModel
 */
-void ObsListDialog::addModelRow(const QString &olud, const QString &name, const QString &nameI18n,
-                                const QString &type, const QString &ra,
+void ObsListDialog::addModelRow(const QString &olud, const QString &designation, const QString &nameI18n,
+				const QString &typeI18n, const QString &ra,
                                 const QString &dec, const QString &magnitude, const QString &constellation,
 				const QString &date, const QString &location, const QString &landscapeID)
 {
@@ -291,15 +291,15 @@ void ObsListDialog::addModelRow(const QString &olud, const QString &name, const 
 	item->setEditable(false);
 	itemModel->setItem(number, ColumnUUID, item);
 
-	item = new QStandardItem(name);
+	item = new QStandardItem(designation);
 	item->setEditable(false);
-	itemModel->setItem(number, ColumnName, item);
+	itemModel->setItem(number, ColumnDesignation, item);
 
 	item = new QStandardItem(nameI18n);
 	item->setEditable(false);
 	itemModel->setItem(number, ColumnNameI18n, item);
 
-	item = new QStandardItem(type);
+	item = new QStandardItem(typeI18n);
 	item->setEditable(false);
 	itemModel->setItem(number, ColumnType, item);
 
@@ -459,14 +459,16 @@ void ObsListDialog::loadSelectedList()
 
 				observingListItem item;
 				const QString objectUUID = QUuid::createUuid().toString();
-				item.designation = objectMap.value(KEY_DESIGNATION).toString();
-				item.nameI18n = objectMap.value(KEY_NAME_I18N).toString();
+				item.designation = objectMap.value(KEY_DESIGNATION).toString();  // This is the common name or catalog number (with catalog ID)
+				item.name = objectMap.value(KEY_NAME).toString();          // PRELIMINARY ASSIGNMENT: Do not rely on name in the JSON file. It may have changed in Stellarium's name lists! Retrieve name from the actual object later.
+				item.nameI18n = objectMap.value(KEY_NAME_I18N).toString(); // PRELIMINARY ASSIGNMENT: Do not rely on translated name in the JSON file. It may be in the wrong language or may have changed in Stellarium's name lists! Retrieve translated name from the actual object later.
 
-				// Caveat - Please make the code more readable!
-				// We assign KEY_TYPE to item.objtype and KEY_OBJECTS_TYPE to item.type.
-				// Compare this to the same passage when importing bookmarks.
-				item.objtype    = objectMap.value(KEY_TYPE).toString();
-				//item.type = objectMap.value(KEY_OBJECTS_TYPE).toString();
+				// // Caveat - Please make the code more readable!
+				// // We assign KEY_TYPE to item.objtype and KEY_OBJECTS_TYPE to item.type.
+				// // Compare this to the same passage when importing bookmarks.
+				// // --> CAVEAT SOLVED
+				item.objClass = objectMap.value(KEY_TYPE).toString();
+				item.objTypeI18n  = objectMap.value(KEY_OBJECTS_TYPE).toString(); // TODO: Do not rely on this translated string! Re-retrieve later
 
 				item.ra  = objectMap.value(KEY_RA).toString();
 				item.dec = objectMap.value(KEY_DEC).toString();
@@ -474,9 +476,10 @@ void ObsListDialog::loadSelectedList()
 				// CAVEAT! The implementation in the 1.* series has a bug here, maybe caused by just too much confusion about type, objtype and trying to be smart.
 				// It seems searching for objtype is too strong. Compare this to the same passage when importing bookmarks.
 				// "Star"s are not found! Likewise, "cubewanos" cannot be found like that! They are "Planet"s, according to SolarSystem::getStelObjectType() called by findAndSelect(.,.)
-				if (objectMgr->findAndSelect(item.designation, item.objtype) && !objectMgr->getSelectedObject().isEmpty())
+				// Therefore FIX: Search for item.objClass (new, clearer name for previously named 'item.type')
+				if (objectMgr->findAndSelect(item.designation, item.objClass) && !objectMgr->getSelectedObject().isEmpty())
 				{
-					qDebug() << "Horray, we have found objType" << item.objtype << "for" << item.designation;
+					qDebug() << "Horray, we have found an object of objClass" << item.objClass << "for" << item.designation;
 					const QList<StelObjectP> &selectedObject = objectMgr->getSelectedObject();
 					double ra, dec;
 					StelUtils::rectToSphe(&ra, &dec, selectedObject[0]->getJ2000EquatorialPos(core));
@@ -485,7 +488,9 @@ void ObsListDialog::loadSelectedList()
 						item.ra = StelUtils::radToHmsStr(ra, false).trimmed();
 					if (item.dec.isEmpty())
 						item.dec = StelUtils::radToDmsStr(dec, false).trimmed();
-					item.type = selectedObject[0]->getObjectTypeI18n();
+					item.objTypeI18n = selectedObject[0]->getObjectTypeI18n();
+					item.name=selectedObject[0]->getEnglishName();
+					item.nameI18n=selectedObject[0]->getNameI18n();
 				}
 				else // THEREFORE: repeat the same code with findAndSelect with any type.
 					if (objectMgr->findAndSelect(item.designation) && !objectMgr->getSelectedObject().isEmpty())
@@ -498,14 +503,16 @@ void ObsListDialog::loadSelectedList()
 						item.ra = StelUtils::radToHmsStr(ra, false).trimmed();
 					if (item.dec.isEmpty())
 						item.dec = StelUtils::radToDmsStr(dec, false).trimmed();
-					item.type = selectedObject[0]->getObjectTypeI18n();
-					qDebug() << "item.objType " << item.objtype << "changed to " << selectedObject[0]->getObjectType();
-					item.objtype = selectedObject[0]->getObjectType();
+					qDebug() << "Changing item.objClass " << item.objClass << "to" << selectedObject[0]->getType();
+					item.objClass = selectedObject[0]->getType();
+					item.objTypeI18n = selectedObject[0]->getObjectTypeI18n();
+					item.name=selectedObject[0]->getEnglishName();
+					item.nameI18n=selectedObject[0]->getNameI18n();
 				}
 				else
 				{
-					qWarning() << "[ObservingList] object: " << item.designation << " not found or empty. Cannot set item.type !";
-					qWarning() << "item.objType:" << item.objtype;
+					qWarning() << "[ObservingList] object: " << item.designation << " not found or empty. Cannot set item.objClass !";
+					qWarning() << "item.objType given as:" << item.objTypeI18n;
 				}
 
 				item.magnitude = objectMap.value(KEY_MAGNITUDE).toString();
@@ -537,7 +544,7 @@ void ObsListDialog::loadSelectedList()
 				addModelRow(objectUUID,
 					    item.designation,
 					    item.nameI18n,
-					    item.type,
+					    item.objTypeI18n,
 					    item.ra,
 					    item.dec,
 					    item.magnitude,
@@ -616,8 +623,10 @@ QHash<QString, ObsListDialog::observingListItem> ObsListDialog::loadBookmarksFil
 				if (objectMgr->findAndSelect(item.designation) && !objectMgr->getSelectedObject().isEmpty()) {
 					const QList<StelObjectP> &selectedObject = objectMgr->getSelectedObject();
 
-					item.type = selectedObject[0]->getType(); // Assign class name
-					item.objtype = selectedObject[0]->getObjectType(); // Assign a detailed object type description
+					item.objClass = selectedObject[0]->getType(); // Assign class name
+					item.objTypeI18n = selectedObject[0]->getObjectTypeI18n(); // Assign a detailed object type description
+					item.name = selectedObject[0]->getEnglishName();
+					item.nameI18n = selectedObject[0]->getNameI18n();
 					item.jd = bookmarkMap.value(KEY_JD).toDouble();
 					if (item.jd!=0.)
 					{
@@ -712,7 +721,7 @@ void ObsListDialog::selectAndGoToObject(QModelIndex index)
 	QString itemUuid = uuidItem->text();
 	observingListItem item = currentItemCollection.value(itemUuid);
 
-	// Load landscape/location before dealing with the object: It could be a view fom another planet!
+	// Load landscape/location before dealing with the object: It could be a view from another planet!
 	// We load stored landscape/location if the respective checkbox is checked.
 	if (getFlagUseLandscape() && !item.landscapeID.isEmpty())
 		GETSTELMODULE(LandscapeMgr)->setCurrentLandscapeID(item.landscapeID, 0);
@@ -731,7 +740,7 @@ void ObsListDialog::selectAndGoToObject(QModelIndex index)
 	StelMovementMgr *mvmgr = GETSTELMODULE(StelMovementMgr);
 	//objectMgr->unSelect();
 
-	bool objectFound = objectMgr->findAndSelect(item.designation);
+	bool objectFound = objectMgr->findAndSelect(item.designation); // TODO: We should prefer to use findAndSelect(item.designation, item.objClass). But what are the implications for markers?
 	if (!item.ra.isEmpty() && !item.dec.isEmpty() && (!objectFound || item.designation.contains("marker", Qt::CaseInsensitive))) {
 		Vec3d pos;
 		StelUtils::spheToRect(StelUtils::getDecAngle(item.ra.trimmed()), StelUtils::getDecAngle(item.dec.trimmed()), pos);
@@ -1138,7 +1147,7 @@ void ObsListDialog::addObjectButtonPressed()
 			if (item.designation.isEmpty())
 			{
 				if (selectedObject[0]->getType() == "Nebula")
-					item.designation = GETSTELMODULE(NebulaMgr)->getLatestSelectedDSODesignation();
+					item.designation = GETSTELMODULE(NebulaMgr)->getLatestSelectedDSODesignationWIC(); // Store most common catalog ID as of our catalog sequence, even if catalog is not active
 				else
 				{
 					item.designation = "Unnamed object";
@@ -1148,11 +1157,11 @@ void ObsListDialog::addObjectButtonPressed()
 				}
 			}
 			// Type, Object Type
-			item.type = selectedObject[0]->getType();
-			item.objtype = selectedObject[0]->getObjectTypeI18n();
+			item.objClass = selectedObject[0]->getType();
+			item.objTypeI18n = selectedObject[0]->getObjectTypeI18n();
 
 			// Ra & Dec
-			if (ui->coordinatesCheckBox->isChecked() || item.objtype == CUSTOM_OBJECT || item.designation.isEmpty()) {
+			if (ui->coordinatesCheckBox->isChecked() || (item.objClass == "Planet" && getFlagUseJD()) || item.objClass == CUSTOM_OBJECT || item.designation.isEmpty()) {
 				double ra, dec;
 				StelUtils::rectToSphe(&ra, &dec, selectedObject[0]->getJ2000EquatorialPos(core));
 				item.ra  = StelUtils::radToHmsStr(ra,  false).trimmed();
@@ -1167,13 +1176,13 @@ void ObsListDialog::addObjectButtonPressed()
 
 
 			// Optional: JD, Location, landscape, fov
-			if (ui->jdCheckBox->isChecked())
+			if (getFlagUseJD())
 				item.jd = JD;
-			if (ui->locationCheckBox->isChecked())
+			if (getFlagUseLocation())
 				item.location = Location;
-			if (ui->landscapeCheckBox->isChecked())
+			if (getFlagUseLandscape())
 				item.landscapeID = landscapeID;
-			if (ui->fovCheckBox->isChecked() && (fov > 1.e-6))
+			if (getFlagUseFov() && (fov > 1.e-6))
 				item.fov = fov;
 
 			currentItemCollection.insert(objectUUID, item);
@@ -1184,7 +1193,7 @@ void ObsListDialog::addObjectButtonPressed()
 			addModelRow(objectUUID,
 				    item.designation,
 				    item.nameI18n,
-				    item.objtype,
+				    item.objTypeI18n,
 				    item.ra,
 				    item.dec,
 				    item.magnitude,
@@ -1224,7 +1233,7 @@ void ObsListDialog::saveButtonPressed()
 		return;
 	}
 
-	// we have a valid selectedListOlud. In addition, the list has a human-readable name.
+	// we have a valid selectedListOlud. In addition, the list must have a human-readable name.
 	QString listName = ui->listNameLineEdit->text().trimmed();
 	if (listName.length()==0)
 	{
@@ -1351,7 +1360,7 @@ QString ObsListDialog::extractDefaultOlud()
 void ObsListDialog::sortObsListTreeViewByColumnName(const QString &columnName)
 {
 	static const QMap<QString,int>map={
-		{SORTING_BY_NAME,          ColumnName},
+		{SORTING_BY_NAME,          ColumnDesignation},
 		{SORTING_BY_NAMEI18N,      ColumnNameI18n},
 		{SORTING_BY_TYPE,          ColumnType},
 		{SORTING_BY_RA,            ColumnRa},
@@ -1431,7 +1440,7 @@ QVariantMap ObsListDialog::prepareCurrentList(QHash<QString, observingListItem> 
 void ObsListDialog::headerClicked(int index)
 {
 	static const QMap<int,QString> map={
-		{ColumnName,          SORTING_BY_NAME},
+		{ColumnDesignation,   SORTING_BY_NAME},
 		{ColumnNameI18n,      SORTING_BY_NAMEI18N},
 		{ColumnType,          SORTING_BY_TYPE},
 		{ColumnRa,            SORTING_BY_RA},
@@ -1496,7 +1505,7 @@ void ObsListDialog::defaultClicked(bool b)
 
 const QString ObsListDialog::JSON_FILE_NAME     = QStringLiteral("observingList.json");
 const QString ObsListDialog::JSON_FILE_BASENAME = QStringLiteral("observingList");
-const QString ObsListDialog::FILE_VERSION       = QStringLiteral("2.0");
+const QString ObsListDialog::FILE_VERSION       = QStringLiteral("2.1");
 
 const QString ObsListDialog::JSON_BOOKMARKS_FILE_NAME   = QStringLiteral("bookmarks.json");
 const QString ObsListDialog::BOOKMARKS_LIST_NAME        = QStringLiteral("bookmarks list");
