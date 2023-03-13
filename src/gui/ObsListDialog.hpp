@@ -274,9 +274,6 @@ private:
 			 const QString &ra, const QString &dec, const QString &magnitude, const QString &constellation,
 			 const QString &date, const QString &location, const QString &landscapeID);
 
-	//! Returns the defaultListOlud from the jsonMap, or an empty QString.
-	QString extractDefaultOlud();
-
 	//! Load the lists names from jsonMap,
 	//! Populate the list names into combo box and extract defaultOlud
 	void loadListNames();
