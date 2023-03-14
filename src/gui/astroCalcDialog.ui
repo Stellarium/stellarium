@@ -725,6 +725,16 @@
              </spacer>
             </item>
             <item>
+             <widget class="QCheckBox" name="ephemerisIgnoreDateTestCheckBox">
+              <property name="toolTip">
+               <string>Allow results outside recommended range of orbital elements</string>
+              </property>
+              <property name="text">
+               <string comment="Ignore date test">I.D.T.</string>
+              </property>
+             </widget>
+            </item>
+            <item>
              <widget class="QCheckBox" name="ephemerisHorizontalCoordinatesCheckBox">
               <property name="toolTip">
                <string>Use horizontal coordinates</string>
@@ -3092,6 +3102,11 @@
    <container>1</container>
   </customwidget>
   <customwidget>
+   <class>StelCloseButton</class>
+   <extends>QPushButton</extends>
+   <header>gui/StelCloseButton.hpp</header>
+  </customwidget>
+  <customwidget>
    <class>AngleSpinBox</class>
    <extends>QSpinBox</extends>
    <header>AngleSpinBox.hpp</header>
@@ -3100,11 +3115,6 @@
    <class>QChartView</class>
    <extends>QGraphicsView</extends>
    <header>QtCharts/qchartview.h</header>
-  </customwidget>
-  <customwidget>
-   <class>StelCloseButton</class>
-   <extends>QPushButton</extends>
-   <header>gui/StelCloseButton.hpp</header>
   </customwidget>
  </customwidgets>
  <resources>
