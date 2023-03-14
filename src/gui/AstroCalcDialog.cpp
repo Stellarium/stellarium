@@ -329,6 +329,8 @@ void AstroCalcDialog::createDialogContent()
 	initListEphemeris();
 	initEphemerisFlagNakedEyePlanets();
 	enableEphemerisButtons(buttonState);
+	ui->ephemerisIgnoreDateTestCheckBox->setChecked(conf->value("astrocalc/flag_ephemeris_ignore_date_test", true).toBool());
+	connect(ui->ephemerisIgnoreDateTestCheckBox, SIGNAL(toggled(bool)), this, SLOT(saveIgnoreDateTestFlag(bool)));
 	connect(ui->ephemerisHorizontalCoordinatesCheckBox, SIGNAL(toggled(bool)), this, SLOT(reGenerateEphemeris()));
 	connect(ui->allNakedEyePlanetsCheckBox, SIGNAL(toggled(bool)), this, SLOT(saveEphemerisFlagNakedEyePlanets(bool)));
 	connect(ui->ephemerisPushButton, SIGNAL(clicked()), this, SLOT(generateEphemeris()));
@@ -1785,6 +1787,12 @@ void AstroCalcDialog::setDateTimeNow()
 	ui->dateFromDateTimeEdit->setDateTime(StelUtils::jdToQDateTime(JD, Qt::LocalTime));
 }
 
+void AstroCalcDialog::saveIgnoreDateTestFlag(bool b)
+{
+	conf->setValue("astrocalc/flag_ephemeris_ignore_date_test", b);
+	reGenerateEphemeris(true);
+}
+
 void AstroCalcDialog::reGenerateEphemeris(bool withSelection)
 {
 	if (EphemerisList.size() > 0)
@@ -1809,6 +1817,7 @@ void AstroCalcDialog::generateEphemeris()
 	const QString distanceUM = qc_("AU", "distance, astronomical unit");
 	QString englishName, nameI18n, elongStr = "", phaseStr = "";
 	const bool useHorizontalCoords = ui->ephemerisHorizontalCoordinatesCheckBox->isChecked();
+	const bool ignoreDateTest = ui->ephemerisIgnoreDateTestCheckBox->isChecked();
 	const bool useSouthAzimuth = StelApp::getInstance().getFlagSouthAzimuthUsage();
 	const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
 
@@ -1944,11 +1953,8 @@ void AstroCalcDialog::generateEphemeris()
 			core->setJD(JD);
 			core->update(0); // force update to get new coordinates
 
-			/*
-			 * Probably this features should be an optional
-			if (!obj->hasValidPositionalData(JD, Planet::PositionQuality::OrbitPlotting))
+			if (!ignoreDateTest && !obj->hasValidPositionalData(JD, Planet::PositionQuality::OrbitPlotting))
 				continue;
-			*/
 
 			if (useHorizontalCoords)
 			{

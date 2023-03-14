@@ -613,6 +613,7 @@ public slots:
 
 	//! Set whether ring of Earth's umbra should be displayed at fixed distance.
 	//! Emits settingsChanged() if the value changes.
+	//! V23.1: For now this had to be disabled/set to false.
 	void setFlagUmbraAtFixedDistance(bool b);
 	bool getFlagUmbraAtFixedDistance() { return flagUmbraAtFixedDistance; }
 
@@ -916,7 +917,8 @@ private:
 	//! Flag enabling visualization the Earth's umbra.
 	bool flagUmbraVisible;
 	//! Flag enabling visualization the Earth's umbra at fixed distance
-	bool flagUmbraAtFixedDistance;
+	//! V23.1: This had to be disabled until computation will be implemented correctly.
+	bool flagUmbraAtFixedDistance; // MUST REMAIN false FOR NOW!
 	Vec3f umbraColor;
 	//! The distance for center of visualized Earth's umbra in kilometers
 	double fixedUmbraDistance;

@@ -834,7 +834,9 @@ void Satellites::loadSettings()
 
 	// umbra/penumbra
 	setFlagUmbraVisible(conf->value("umbra_flag", false).toBool());
-	setFlagUmbraAtFixedDistance(conf->value("umbra_fixed_distance_flag", false).toBool());
+	// FIXME: Repair the functionality!
+	setFlagUmbraAtFixedDistance(false);
+	//setFlagUmbraAtFixedDistance(conf->value("umbra_fixed_distance_flag", false).toBool());
 	setUmbraColor(Vec3f(conf->value("umbra_color", "1.0,0.0,0.0").toString()));
 	setUmbraDistance(conf->value("umbra_fixed_distance", 1000.0).toDouble());
 	setFlagPenumbraVisible(conf->value("penumbra_flag", false).toBool());
@@ -928,7 +930,9 @@ void Satellites::saveSettingsToConfig()
 
 	// umbra/penumbra
 	conf->setValue("umbra_flag", getFlagUmbraVisible());
-	conf->setValue("umbra_fixed_distance_flag", getFlagUmbraAtFixedDistance());
+	// FIXME: Fix and re-enable this function
+	//conf->setValue("umbra_fixed_distance_flag", getFlagUmbraAtFixedDistance());
+	conf->setValue("umbra_fixed_distance_flag", false); // Preliminary
 	conf->setValue("umbra_color", getUmbraColor().toStr());
 	conf->setValue("umbra_fixed_distance", getUmbraDistance());
 	conf->setValue("penumbra_flag", getFlagPenumbraVisible());
@@ -1896,12 +1900,16 @@ void Satellites::setFlagUmbraVisible(bool b)
 
 void Satellites::setFlagUmbraAtFixedDistance(bool b)
 {
-	if (flagUmbraAtFixedDistance != b)
-	{
-		flagUmbraAtFixedDistance = b;
-		emit settingsChanged(); // GZ IS THIS REQUIRED/USEFUL??
-		emit flagUmbraAtFixedDistanceChanged(b);
-	}
+	flagUmbraAtFixedDistance = false;
+	qDebug() << "setFlagUmbraAtFixedDistance() currently not possible";
+
+	// TO BE FIXED
+	//if (flagUmbraAtFixedDistance != b)
+	//{
+	//	flagUmbraAtFixedDistance = b;
+	//	emit settingsChanged(); // GZ IS THIS REQUIRED/USEFUL??
+	//	emit flagUmbraAtFixedDistanceChanged(b);
+	//}
 }
 
 void Satellites::setUmbraColor(const Vec3f &c)
