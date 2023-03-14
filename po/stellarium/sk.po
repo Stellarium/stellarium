@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2023-03-05 19:55+0700\n"
+"POT-Creation-Date: 2023-03-14 10:28+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Lubomir Hambalek <lubomir.hambalek@gmail.com>, 2023\n"
 "Language-Team: Slovak (https://www.transifex.com/stellarium/teams/80998/sk/)\n"
@@ -28,15 +28,15 @@ msgstr ""
 #. TRANSLATORS: type of object
 #: src/core/modules/CustomObject.cpp:81 src/core/modules/Asterism.cpp:194
 #: src/core/modules/Constellation.cpp:290
-#: src/core/modules/NomenclatureItem.cpp:224 src/core/modules/Nebula.cpp:262
-#: src/core/modules/Nebula.cpp:264 src/core/modules/Planet.cpp:569
+#: src/core/modules/NomenclatureItem.cpp:224 src/core/modules/Nebula.cpp:264
+#: src/core/modules/Nebula.cpp:266 src/core/modules/Planet.cpp:569
 #: src/core/modules/Planet.cpp:572 src/core/modules/StarWrapper.cpp:49
 #: src/core/modules/StarWrapper.cpp:290 src/core/modules/StarWrapper.cpp:292
 #: src/gui/AstroCalcDialog.cpp:890 src/gui/AstroCalcDialog.cpp:2320
 #: src/gui/AstroCalcDialog.cpp:2957 src/gui/AstroCalcDialog.cpp:2989
 #: src/gui/AstroCalcDialog.cpp:3376 src/gui/AstroCalcDialog.cpp:8400
-#: src/gui/ObsListDialog.cpp:206 src/gui/ObsListCreateEditDialog.cpp:178
-#: src/ui_configurationDialog.h:1869 plugins/Satellites/src/Satellite.cpp:338
+#: src/gui/ObsListDialog.cpp:260 src/ui_configurationDialog.h:1869
+#: plugins/Satellites/src/Satellite.cpp:339
 #: plugins/TelescopeControl/src/TelescopeClient.cpp:136
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:515
 #: plugins/Supernovae/src/Supernova.cpp:143 plugins/Novae/src/Nova.cpp:150
@@ -210,7 +210,7 @@ msgstr "Prvý vertikál"
 #: src/gui/AstroCalcDialog.cpp:837 src/gui/AstroCalcDialog.cpp:1742
 #: src/gui/AstroCalcDialog.cpp:2079 src/gui/AstroCalcDialog.cpp:2343
 #: src/gui/AstroCalcChart.cpp:80 src/gui/AstroCalcChart.cpp:417
-#: src/ui_viewDialog.h:3949 plugins/Satellites/src/Satellite.cpp:361
+#: src/ui_viewDialog.h:3949 plugins/Satellites/src/Satellite.cpp:362
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1496
 msgid "Altitude"
 msgstr "Výška"
@@ -333,8 +333,8 @@ msgstr "Antapex"
 #. TRANSLATORS: Unit of measure for speed - kilometers per second
 #: src/core/modules/GridLinesMgr.cpp:1630 src/core/modules/Planet.cpp:693
 #: src/core/modules/Planet.cpp:1179 src/gui/AstroCalcDialog.cpp:9287
-#: plugins/Satellites/src/Satellite.cpp:359
-#: plugins/Satellites/src/Satellite.cpp:402
+#: plugins/Satellites/src/Satellite.cpp:360
+#: plugins/Satellites/src/Satellite.cpp:403
 #: plugins/MeteorShowers/src/MeteorShower.cpp:564
 msgctxt "speed"
 msgid "km/s"
@@ -831,16 +831,16 @@ msgstr "Autor"
 
 #. TRANSLATORS: Unit of measure for distance - meter
 #: src/core/modules/LandscapeMgr.cpp:1327 src/gui/StelGuiItems.cpp:872
-#: plugins/Satellites/src/Satellite.cpp:432
+#: plugins/Satellites/src/Satellite.cpp:433
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1142
 #: plugins/Satellites/src/gui/SatellitesFilterDialog.cpp:134
 msgctxt "distance"
 msgid "m"
 msgstr "m"
 
-#: src/core/modules/LandscapeMgr.cpp:1330 src/gui/ObsListDialog.cpp:212
-#: src/gui/ObsListCreateEditDialog.cpp:184 src/ui_locationDialogGui.h:470
-#: src/ui_obsListDialog.h:326 src/ui_obsListCreateEditDialog.h:329
+#: src/core/modules/LandscapeMgr.cpp:1330 src/gui/ObsListDialog.cpp:266
+#: src/ui_locationDialogGui.h:470 src/ui_obsListDialog.h:414
+#: src/ui_obsListCreateEditDialog.h:329
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:144
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:490
 msgid "Location"
@@ -930,8 +930,8 @@ msgstr "Priemer"
 #: src/core/modules/Comet.cpp:167 src/gui/StelGuiItems.cpp:900
 #: src/gui/AstroCalcDialog.cpp:3193 src/gui/AstroCalcDialog.cpp:3708
 #: src/gui/AstroCalcDialog.cpp:9222 plugins/Satellites/src/Satellites.cpp:2906
-#: plugins/Satellites/src/Satellite.cpp:355
-#: plugins/Satellites/src/Satellite.cpp:398
+#: plugins/Satellites/src/Satellite.cpp:356
+#: plugins/Satellites/src/Satellite.cpp:399
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1151
 #: plugins/Satellites/src/gui/SatellitesFilterDialog.cpp:133
 msgctxt "distance"
@@ -1797,92 +1797,91 @@ msgstr "oblasť oblohy"
 msgid "object of unknown nature"
 msgstr "objekt neznámej povahy"
 
-#: src/core/modules/Nebula.cpp:188 src/core/StelObject.cpp:347
+#: src/core/modules/Nebula.cpp:190 src/core/StelObject.cpp:347
 #: src/gui/AstroCalcChart.cpp:95 src/gui/AstroCalcChart.cpp:105
 #: src/gui/AstroCalcChart.cpp:434 src/gui/AstroCalcChart.cpp:460
-#: src/gui/ObsListDialog.cpp:209 src/gui/ObsListCreateEditDialog.cpp:181
-#: plugins/Supernovae/src/Supernova.cpp:127
+#: src/gui/ObsListDialog.cpp:263 plugins/Supernovae/src/Supernova.cpp:127
 msgid "Magnitude"
 msgstr "Magnitúda"
 
-#: src/core/modules/Nebula.cpp:190
+#: src/core/modules/Nebula.cpp:192
 msgid "Opacity"
 msgstr "Opacita"
 
-#: src/core/modules/Nebula.cpp:194
+#: src/core/modules/Nebula.cpp:196
 msgid "photometric passband"
 msgstr "fotometrický filter"
 
-#: src/core/modules/Nebula.cpp:207 src/core/StelObject.cpp:350
-#: plugins/Satellites/src/Satellite.cpp:346
+#: src/core/modules/Nebula.cpp:209 src/core/StelObject.cpp:350
+#: plugins/Satellites/src/Satellite.cpp:347
 msgid "reduced to"
 msgstr "znížená na"
 
-#: src/core/modules/Nebula.cpp:207 src/core/StelObject.cpp:350
-#: plugins/Satellites/src/Satellite.cpp:346
+#: src/core/modules/Nebula.cpp:209 src/core/StelObject.cpp:350
+#: plugins/Satellites/src/Satellite.cpp:347
 msgid "by"
 msgstr "o"
 
-#: src/core/modules/Nebula.cpp:207 src/core/StelObject.cpp:350
-#: plugins/Satellites/src/Satellite.cpp:346
+#: src/core/modules/Nebula.cpp:209 src/core/StelObject.cpp:350
+#: plugins/Satellites/src/Satellite.cpp:347
 msgid "Airmasses"
 msgstr "Vzdušné hmoty"
 
-#: src/core/modules/Nebula.cpp:249 src/core/modules/Planet.cpp:552
+#: src/core/modules/Nebula.cpp:251 src/core/modules/Planet.cpp:552
 #: src/core/modules/StarWrapper.cpp:276
 msgid "Additional names: "
 msgstr "Ďalšie mená:"
 
-#: src/core/modules/Nebula.cpp:255 src/core/modules/Planet.cpp:559
+#: src/core/modules/Nebula.cpp:257 src/core/modules/Planet.cpp:559
 #: src/core/modules/StarWrapper.cpp:282
 msgid "Additional catalog numbers: "
 msgstr "Ďalšie katalógové čísla:"
 
-#: src/core/modules/Nebula.cpp:273 src/core/modules/Planet.cpp:787
+#: src/core/modules/Nebula.cpp:275 src/core/modules/Planet.cpp:787
 #: src/core/modules/MinorPlanet.cpp:174 src/core/modules/StarWrapper.cpp:54
 #: src/core/modules/StarWrapper.cpp:306 plugins/Quasars/src/Quasar.cpp:134
 msgid "Color Index (B-V)"
 msgstr "Farebný index (B-V)"
 
-#: src/core/modules/Nebula.cpp:278
+#: src/core/modules/Nebula.cpp:280
 msgid "Surface brightness"
 msgstr "Plošná jasnosť"
 
-#: src/core/modules/Nebula.cpp:279
+#: src/core/modules/Nebula.cpp:281
 msgid "after extinction"
 msgstr "po extinkcii"
 
-#: src/core/modules/Nebula.cpp:289 src/core/modules/Nebula.cpp:291
+#: src/core/modules/Nebula.cpp:291 src/core/modules/Nebula.cpp:293
 #: src/gui/AstroCalcDialog.cpp:1102 src/gui/AstroCalcDialog.cpp:1104
 msgctxt "magnitude"
 msgid "mag"
 msgstr "mag"
 
-#: src/core/modules/Nebula.cpp:289 src/gui/AstroCalcDialog.cpp:1102
+#: src/core/modules/Nebula.cpp:291 src/gui/AstroCalcDialog.cpp:1102
 #: src/gui/AstroCalcDialog.cpp:1109 src/gui/AstroCalcDialog.cpp:1184
 msgid "arc-min"
 msgstr "uhl. min."
 
-#: src/core/modules/Nebula.cpp:291 src/gui/AstroCalcDialog.cpp:1104
+#: src/core/modules/Nebula.cpp:293 src/gui/AstroCalcDialog.cpp:1104
 msgid "arc-sec"
 msgstr "uhl. sek."
 
-#: src/core/modules/Nebula.cpp:305
+#: src/core/modules/Nebula.cpp:307
 msgid "Contrast index"
 msgstr "Index kontrastu"
 
-#: src/core/modules/Nebula.cpp:313 src/ui_configurationDialog.h:1882
+#: src/core/modules/Nebula.cpp:315 src/ui_configurationDialog.h:1882
 msgid "Size"
 msgstr "Veľkosť"
 
-#: src/core/modules/Nebula.cpp:331
+#: src/core/modules/Nebula.cpp:333
 msgid "Orientation angle"
 msgstr "Uhol orientácie"
 
 #. TRANSLATORS: Unit of measure for distance - Light Years
 #. TRANSLATORS: Unit of measure for distance - light years
 #. TRANSLATORS: Unit of measure for distance - Light Years
-#: src/core/modules/Nebula.cpp:358 src/core/modules/Nebula.cpp:371
+#: src/core/modules/Nebula.cpp:360 src/core/modules/Nebula.cpp:373
 #: src/core/modules/StarWrapper.cpp:336
 #: plugins/Supernovae/src/Supernova.cpp:158 plugins/Novae/src/Nova.cpp:164
 #: plugins/Pulsars/src/Pulsar.cpp:268 plugins/Exoplanets/src/Exoplanet.cpp:333
@@ -1891,7 +1890,7 @@ msgid "ly"
 msgstr "ly"
 
 #. TRANSLATORS: distance
-#: src/core/modules/Nebula.cpp:359 src/core/modules/Nebula.cpp:405
+#: src/core/modules/Nebula.cpp:361 src/core/modules/Nebula.cpp:407
 #: src/core/modules/Planet.cpp:684 src/core/modules/StarWrapper.cpp:341
 #: src/core/modules/StarWrapper.cpp:343 src/gui/AstroCalcDialog.cpp:925
 #: src/gui/AstroCalcChart.cpp:92 src/gui/AstroCalcChart.cpp:102
@@ -1902,306 +1901,310 @@ msgid "Distance"
 msgstr "Vzdialenosť"
 
 #. TRANSLATORS: Unit of measure for distance - kiloparsecs
-#: src/core/modules/Nebula.cpp:369 plugins/Pulsars/src/Pulsar.cpp:265
+#: src/core/modules/Nebula.cpp:371 plugins/Pulsars/src/Pulsar.cpp:265
 msgctxt "distance"
 msgid "kpc"
 msgstr "kpc"
 
 #. TRANSLATORS: Unit of measure for distance - Megaparsecs
-#: src/core/modules/Nebula.cpp:382
+#: src/core/modules/Nebula.cpp:384
 msgctxt "distance"
 msgid "Mpc"
 msgstr "Mpc"
 
 #. TRANSLATORS: Unit of measure for distance - Millions of Light Years
-#: src/core/modules/Nebula.cpp:391
+#: src/core/modules/Nebula.cpp:393
 msgctxt "distance"
 msgid "M ly"
 msgstr "mil. ly"
 
-#: src/core/modules/Nebula.cpp:420 plugins/Quasars/src/Quasar.cpp:146
+#: src/core/modules/Nebula.cpp:422 plugins/Quasars/src/Quasar.cpp:146
 msgid "Redshift"
 msgstr "Červený posun"
 
-#: src/core/modules/Nebula.cpp:430 src/core/modules/StarWrapper.cpp:370
+#: src/core/modules/Nebula.cpp:432 src/core/modules/StarWrapper.cpp:370
 msgid "Parallax"
 msgstr "Paralaxa"
 
 #. TRANSLATORS: Unit of measure for annual parallax - milliarcseconds
-#: src/core/modules/Nebula.cpp:430 src/core/modules/StarWrapper.cpp:375
+#: src/core/modules/Nebula.cpp:432 src/core/modules/StarWrapper.cpp:375
 #: plugins/Pulsars/src/Pulsar.cpp:257
 msgctxt "parallax"
 msgid "mas"
 msgstr "mas"
 
-#: src/core/modules/Nebula.cpp:433 src/ui_searchDialogGui.h:923
+#: src/core/modules/Nebula.cpp:435
+msgid "Discoverer"
+msgstr "Objaviteľ"
+
+#: src/core/modules/Nebula.cpp:437 src/ui_searchDialogGui.h:923
 msgid "Morphological description"
 msgstr "Morfologický popis"
 
-#: src/core/modules/Nebula.cpp:1182
+#: src/core/modules/Nebula.cpp:1186
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "high concentration of stars toward the center"
 msgstr "vysoké zhustenie hviezd smerom k stredu"
 
-#: src/core/modules/Nebula.cpp:1185
+#: src/core/modules/Nebula.cpp:1189
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "dense central concentration of stars"
 msgstr "hustý stred"
 
-#: src/core/modules/Nebula.cpp:1188
+#: src/core/modules/Nebula.cpp:1192
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "strong inner core of stars"
 msgstr "výrazné hviezdne jadro"
 
-#: src/core/modules/Nebula.cpp:1191
+#: src/core/modules/Nebula.cpp:1195
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "intermediate rich concentrations of stars"
 msgstr "stredné až bohaté zhustenie hviezd"
 
-#: src/core/modules/Nebula.cpp:1196
+#: src/core/modules/Nebula.cpp:1200
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "intermediate concentrations of stars"
 msgstr "stredné zhustenie hviezd"
 
-#: src/core/modules/Nebula.cpp:1199
+#: src/core/modules/Nebula.cpp:1203
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "rather loose concentration of stars towards the center"
 msgstr "vcelku voľné zhustenie hviezd smerom k stredu"
 
-#: src/core/modules/Nebula.cpp:1202
+#: src/core/modules/Nebula.cpp:1206
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "loose concentration of stars towards the center"
 msgstr "voľné zhustenie hviezd smerom k stredu"
 
-#: src/core/modules/Nebula.cpp:1205
+#: src/core/modules/Nebula.cpp:1209
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "loose concentration of stars"
 msgstr "voľné zhustenie hviezd"
 
-#: src/core/modules/Nebula.cpp:1208
+#: src/core/modules/Nebula.cpp:1212
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "very loose concentration of stars towards the center"
 msgstr "veľmi voľné zhustenie hviezd smerom k stredu"
 
-#: src/core/modules/Nebula.cpp:1211
+#: src/core/modules/Nebula.cpp:1215
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "almost no concentration towards the center"
 msgstr "takmer bez zhustenia smerom k stredu"
 
-#: src/core/modules/Nebula.cpp:1214
+#: src/core/modules/Nebula.cpp:1218
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "undocumented concentration class"
 msgstr "neuvedená trieda koncentrácie"
 
-#: src/core/modules/Nebula.cpp:1235
+#: src/core/modules/Nebula.cpp:1239
 msgctxt "Trumpler's Concentration Class"
 msgid "strong central concentration of stars"
 msgstr "intenzívne stredové zhustenie hviezd"
 
-#: src/core/modules/Nebula.cpp:1238
+#: src/core/modules/Nebula.cpp:1242
 msgctxt "Trumpler's Concentration Class"
 msgid "little central concentration of stars"
 msgstr "slabé stredové zhustenie hviezd"
 
-#: src/core/modules/Nebula.cpp:1241
+#: src/core/modules/Nebula.cpp:1245
 msgctxt "Trumpler's Concentration Class"
 msgid "no noticeable concentration of stars"
 msgstr "nepostrehnuteľné zhustenie hviezd"
 
-#: src/core/modules/Nebula.cpp:1244
+#: src/core/modules/Nebula.cpp:1248
 msgctxt "Trumpler's Concentration Class"
 msgid "a star field condensation"
 msgstr "kondenzácia hviezdneho poľa"
 
-#: src/core/modules/Nebula.cpp:1247
+#: src/core/modules/Nebula.cpp:1251
 msgctxt "Trumpler's Concentration Class"
 msgid "undocumented concentration class"
 msgstr "neuvedená trieda koncentrácie"
 
-#: src/core/modules/Nebula.cpp:1253
+#: src/core/modules/Nebula.cpp:1257
 msgctxt "Trumpler's Brightness Class"
 msgid "small brightness range of cluster members"
 msgstr "malý rozsah jasností členov hviezdokopy"
 
-#: src/core/modules/Nebula.cpp:1256
+#: src/core/modules/Nebula.cpp:1260
 msgctxt "Trumpler's Brightness Class"
 msgid "medium brightness range of cluster members"
 msgstr "stredný rozsah jasností členov hviezdokopy"
 
-#: src/core/modules/Nebula.cpp:1259
+#: src/core/modules/Nebula.cpp:1263
 msgctxt "Trumpler's Brightness Class"
 msgid "large brightness range of cluster members"
 msgstr "veľký rozsah jasností členov hviezdokopy"
 
-#: src/core/modules/Nebula.cpp:1262
+#: src/core/modules/Nebula.cpp:1266
 msgctxt "Trumpler's Brightness Class"
 msgid "undocumented brightness range of cluster members"
 msgstr "neuvedený rozsah jasností členov hviezdokopy"
 
-#: src/core/modules/Nebula.cpp:1268
+#: src/core/modules/Nebula.cpp:1272
 msgctxt "Trumpler's Number of Members Class"
 msgid "poor cluster with less than 50 stars"
 msgstr "chudobná hviezdokopa s menej než 50 hviezdami"
 
-#: src/core/modules/Nebula.cpp:1271
+#: src/core/modules/Nebula.cpp:1275
 msgctxt "Trumpler's Number of Members Class"
 msgid "moderately rich cluster with 50-100 stars"
 msgstr "mierne bohatá hviezdokopa s 50 až 100 hviezdami"
 
-#: src/core/modules/Nebula.cpp:1274
+#: src/core/modules/Nebula.cpp:1278
 msgctxt "Trumpler's Number of Members Class"
 msgid "rich cluster with more than 100 stars"
 msgstr "bohatá hviezdokopa s viac než 100 hviezdami"
 
-#: src/core/modules/Nebula.cpp:1277
+#: src/core/modules/Nebula.cpp:1281
 msgctxt "Trumpler's Number of Members Class"
 msgid "undocumented number of members class"
 msgstr "trieda s neuvedeným počtom členov"
 
-#: src/core/modules/Nebula.cpp:1281
+#: src/core/modules/Nebula.cpp:1285
 msgctxt "nebulosity factor of open clusters"
 msgid "the cluster lies within nebulosity"
 msgstr "hviezdokopa sa nachádza v hmlovine"
 
-#: src/core/modules/Nebula.cpp:1303
+#: src/core/modules/Nebula.cpp:1307
 msgctxt "Reflection Nebulae Brightness"
 msgid "very bright"
 msgstr "veľmi jasná"
 
-#: src/core/modules/Nebula.cpp:1306
+#: src/core/modules/Nebula.cpp:1310
 msgctxt "Reflection Nebulae Brightness"
 msgid "bright"
 msgstr "jasná"
 
-#: src/core/modules/Nebula.cpp:1309
+#: src/core/modules/Nebula.cpp:1313
 msgctxt "Reflection Nebulae Brightness"
 msgid "moderate brightness"
 msgstr "stredne jasná"
 
-#: src/core/modules/Nebula.cpp:1312
+#: src/core/modules/Nebula.cpp:1316
 msgctxt "Reflection Nebulae Brightness"
 msgid "faint"
 msgstr "slabá"
 
-#: src/core/modules/Nebula.cpp:1315
+#: src/core/modules/Nebula.cpp:1319
 msgctxt "Reflection Nebulae Brightness"
 msgid "very faint"
 msgstr "veľmi slabá"
 
-#: src/core/modules/Nebula.cpp:1318
+#: src/core/modules/Nebula.cpp:1322
 msgctxt "Reflection Nebulae Brightness"
 msgid "uncertain brightness"
 msgstr "neurčitá jasnosť"
 
-#: src/core/modules/Nebula.cpp:1321
+#: src/core/modules/Nebula.cpp:1325
 msgctxt "Reflection Nebulae Brightness"
 msgid "undocumented brightness of reflection nebulae"
 msgstr "neuvedená jasnosť reflexnej hmloviny"
 
-#: src/core/modules/Nebula.cpp:1327
+#: src/core/modules/Nebula.cpp:1331
 msgctxt "Reflection Nebulae Classification"
 msgid "the illuminating star is embedded in the nebulosity"
 msgstr "osvetľujúca hviezda je zahalená v hmlovine"
 
-#: src/core/modules/Nebula.cpp:1330
+#: src/core/modules/Nebula.cpp:1334
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located outside the illuminated nebulosity"
 msgstr "hviezda sa nachádza mimo osvetlovanej hmloviny"
 
-#: src/core/modules/Nebula.cpp:1333
+#: src/core/modules/Nebula.cpp:1337
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located on the corner of the illuminated nebulosity"
 msgstr "hviezda sa nachádza na kraji osvetlenej hmloviny"
 
 #. TRANSLATORS: peculiar: odd or unusual, cf. peculiar star, peculiar galaxy
-#: src/core/modules/Nebula.cpp:1338
+#: src/core/modules/Nebula.cpp:1342
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located outside the illuminated peculiar nebulosity"
 msgstr "hviezda sa nachádza mimo zvláštnej hmloviny"
 
 #. TRANSLATORS: peculiar: odd or unusual, cf. peculiar star, peculiar galaxy
-#: src/core/modules/Nebula.cpp:1344
+#: src/core/modules/Nebula.cpp:1348
 msgctxt "Reflection Nebulae Classification"
 msgid "the illuminated peculiar nebulosity"
 msgstr "osvetlená zvláštna hmlovina"
 
-#: src/core/modules/Nebula.cpp:1348
+#: src/core/modules/Nebula.cpp:1352
 msgctxt "Reflection Nebulae Classification"
 msgid "undocumented reflection nebulae"
 msgstr "neuvedený druh reflexných hmlovín"
 
-#: src/core/modules/Nebula.cpp:1369
+#: src/core/modules/Nebula.cpp:1373
 msgid "circular form"
 msgstr "okrúhly tvar"
 
-#: src/core/modules/Nebula.cpp:1370
+#: src/core/modules/Nebula.cpp:1374
 msgid "elliptical form"
 msgstr "oválny tvar"
 
-#: src/core/modules/Nebula.cpp:1371
+#: src/core/modules/Nebula.cpp:1375
 msgid "irregular form"
 msgstr "nepravidelný tvar"
 
-#: src/core/modules/Nebula.cpp:1373
+#: src/core/modules/Nebula.cpp:1377
 msgid "amorphous structure"
 msgstr "amorfná štruktúra"
 
-#: src/core/modules/Nebula.cpp:1374
+#: src/core/modules/Nebula.cpp:1378
 msgid "conventional structure"
 msgstr "obvyklá štruktúra"
 
-#: src/core/modules/Nebula.cpp:1375
+#: src/core/modules/Nebula.cpp:1379
 msgid "filamentary structure"
 msgstr "vláknitá štruktúra"
 
-#: src/core/modules/Nebula.cpp:1377
+#: src/core/modules/Nebula.cpp:1381
 msgctxt "HII region brightness"
 msgid "faintest"
 msgstr "najslabšia"
 
-#: src/core/modules/Nebula.cpp:1378
+#: src/core/modules/Nebula.cpp:1382
 msgctxt "HII region brightness"
 msgid "moderate brightness"
 msgstr "stredne jasná"
 
-#: src/core/modules/Nebula.cpp:1379
+#: src/core/modules/Nebula.cpp:1383
 msgctxt "HII region brightness"
 msgid "brightest"
 msgstr "najjasnejšia"
 
-#: src/core/modules/Nebula.cpp:1382
+#: src/core/modules/Nebula.cpp:1386
 msgid "undocumented form"
 msgstr "neuvedený tvar"
 
-#: src/core/modules/Nebula.cpp:1383
+#: src/core/modules/Nebula.cpp:1387
 msgid "undocumented structure"
 msgstr "neuvedená štruktúra"
 
-#: src/core/modules/Nebula.cpp:1384
+#: src/core/modules/Nebula.cpp:1388
 msgid "undocumented brightness"
 msgstr "neuvedená jasnosť"
 
-#: src/core/modules/Nebula.cpp:1396
+#: src/core/modules/Nebula.cpp:1400
 msgctxt "supernova remnant structure classification"
 msgid "remnant shows a shell radio structure"
 msgstr "zvyšok vykazuje obálkovú rádiovú štruktúru"
 
-#: src/core/modules/Nebula.cpp:1399
+#: src/core/modules/Nebula.cpp:1403
 msgctxt "supernova remnant structure classification"
 msgid "remnant shows a filled center ('plerion') radio structure"
 msgstr "zvyšok vykazuje rádiovú štruktúru s vyplneným stredom (plerión)"
 
-#: src/core/modules/Nebula.cpp:1402
+#: src/core/modules/Nebula.cpp:1406
 msgctxt "supernova remnant structure classification"
 msgid "remnant shows a composite (or combination) radio structure"
 msgstr "zvyšok vykazuje kompozitnú (alebo kombinovanú) rádiovú štruktúru"
 
-#: src/core/modules/Nebula.cpp:1405
+#: src/core/modules/Nebula.cpp:1409
 msgctxt "supernova remnant structure classification"
 msgid "remnant shows a shell radio structure with some uncertainty"
 msgstr "zvyšok vykazuje neistú obálkovú rádiovú štruktúru"
 
-#: src/core/modules/Nebula.cpp:1408
+#: src/core/modules/Nebula.cpp:1412
 msgctxt "supernova remnant structure classification"
 msgid ""
 "remnant shows a filled center ('plerion') radio structure with some "
@@ -2209,7 +2212,7 @@ msgid ""
 msgstr ""
 "zvyšok vykazuje neistú rádiovú štruktúru s vyplneným stredom (plerión)"
 
-#: src/core/modules/Nebula.cpp:1411
+#: src/core/modules/Nebula.cpp:1415
 msgctxt "supernova remnant structure classification"
 msgid ""
 "remnant shows a composite (or combination) radio structure with some "
@@ -2217,7 +2220,7 @@ msgid ""
 msgstr ""
 "zvyšok vykazuje neistú kompozitnú (alebo kombinovanú) rádiovú štruktúru"
 
-#: src/core/modules/Nebula.cpp:1419
+#: src/core/modules/Nebula.cpp:1423
 msgid "undocumented type"
 msgstr "neuvedený druh"
 
@@ -2230,27 +2233,27 @@ msgstr "Objekty hlbokého vesmíru"
 msgid "Toggle DSO type filter"
 msgstr "Prepnúť filter typov DSO"
 
-#: src/core/modules/NebulaMgr.cpp:1444 src/gui/StelDialog.cpp:336
+#: src/core/modules/NebulaMgr.cpp:1448 src/gui/StelDialog.cpp:336
 #: src/StelMainView.cpp:1034
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:773
 msgid "Attention!"
 msgstr "Pozor!"
 
-#: src/core/modules/NebulaMgr.cpp:1444
+#: src/core/modules/NebulaMgr.cpp:1448
 msgid "DSO catalog version mismatch"
 msgstr "Nesúlad verzií katalógu objektov"
 
-#: src/core/modules/NebulaMgr.cpp:1444 src/core/SimbadSearcher.cpp:175
+#: src/core/modules/NebulaMgr.cpp:1448 src/core/SimbadSearcher.cpp:175
 #: src/core/SimbadSearcher.cpp:177
 #: plugins/OnlineQueries/src/HipOnlineQuery.cpp:93
 msgid "Found"
 msgstr "Nájdené"
 
-#: src/core/modules/NebulaMgr.cpp:1444
+#: src/core/modules/NebulaMgr.cpp:1448
 msgid "Expected"
 msgstr "Očakávané"
 
-#: src/core/modules/NebulaMgr.cpp:1444
+#: src/core/modules/NebulaMgr.cpp:1448
 msgid "See Logfile for instructions."
 msgstr "Inštrukcie sú uvedené v súbore záznamov."
 
@@ -2418,7 +2421,7 @@ msgstr "Elongácia"
 #: src/core/modules/Planet.cpp:842 src/core/modules/Planet.cpp:851
 #: src/gui/AstroCalcChart.cpp:96 src/gui/AstroCalcChart.cpp:106
 #: src/gui/AstroCalcChart.cpp:438 src/gui/AstroCalcChart.cpp:464
-#: plugins/Satellites/src/Satellite.cpp:407
+#: plugins/Satellites/src/Satellite.cpp:408
 msgid "Phase angle"
 msgstr "Fázový uhol"
 
@@ -2474,42 +2477,42 @@ msgstr "Perióda rotácie je chaotická"
 msgid "Equatorial rotation velocity"
 msgstr "Rovníková rýchlosť rotácie"
 
-#: src/core/modules/Planet.cpp:1244
+#: src/core/modules/Planet.cpp:1244 src/core/modules/Planet.cpp:1634
 msgctxt "Moon phase"
 msgid "New Moon"
 msgstr "Nov"
 
-#: src/core/modules/Planet.cpp:1246
+#: src/core/modules/Planet.cpp:1246 src/core/modules/Planet.cpp:1636
 msgctxt "Moon phase"
 msgid "Waxing Crescent"
 msgstr "Dorastajúci polmesiac"
 
-#: src/core/modules/Planet.cpp:1248
+#: src/core/modules/Planet.cpp:1248 src/core/modules/Planet.cpp:1638
 msgctxt "Moon phase"
 msgid "First Quarter"
 msgstr "Prvá štvrť"
 
-#: src/core/modules/Planet.cpp:1250
+#: src/core/modules/Planet.cpp:1250 src/core/modules/Planet.cpp:1640
 msgctxt "Moon phase"
 msgid "Waxing Gibbous"
 msgstr "Dorastajúci mesiac"
 
-#: src/core/modules/Planet.cpp:1252
+#: src/core/modules/Planet.cpp:1252 src/core/modules/Planet.cpp:1642
 msgctxt "Moon phase"
 msgid "Full Moon"
 msgstr "Spln"
 
-#: src/core/modules/Planet.cpp:1254
+#: src/core/modules/Planet.cpp:1254 src/core/modules/Planet.cpp:1644
 msgctxt "Moon phase"
 msgid "Waning Gibbous"
 msgstr "Ubúdajúci mesiac"
 
-#: src/core/modules/Planet.cpp:1256
+#: src/core/modules/Planet.cpp:1256 src/core/modules/Planet.cpp:1646
 msgctxt "Moon phase"
 msgid "Third Quarter"
 msgstr "Posledná štvrť"
 
-#: src/core/modules/Planet.cpp:1258
+#: src/core/modules/Planet.cpp:1258 src/core/modules/Planet.cpp:1648
 msgctxt "Moon phase"
 msgid "Waning Crescent"
 msgstr "Ubúdajúci polmesiac"
@@ -3700,6 +3703,12 @@ msgstr ""
 "užívateľom."
 
 #: src/core/StelCore.cpp:2537 src/core/SimbadSearcher.cpp:173
+#: src/gui/ObsListDialog.cpp:83 src/gui/ObsListDialog.cpp:900
+#: src/gui/ObsListDialog.cpp:918 src/gui/ObsListDialog.cpp:952
+#: src/gui/ObsListDialog.cpp:968 src/gui/ObsListDialog.cpp:1003
+#: src/gui/ObsListDialog.cpp:1015 src/gui/ObsListDialog.cpp:1024
+#: src/gui/ObsListDialog.cpp:1036 src/gui/ObsListDialog.cpp:1053
+#: src/gui/ObsListDialog.cpp:1216 src/gui/ObsListDialog.cpp:1221
 #: plugins/OnlineQueries/src/HipOnlineQuery.cpp:91
 msgid "Error"
 msgstr "Chyba"
@@ -5041,7 +5050,7 @@ msgid "Custom equation of %1T"
 msgstr "Vlastná rovnica %1T"
 
 #: src/gui/ConfigurationDialog.cpp:1958 src/gui/ConfigurationDialog.cpp:1995
-#: src/gui/StelGuiItems.cpp:789 src/gui/LocationDialog.cpp:564
+#: src/gui/StelGuiItems.cpp:789 src/gui/LocationDialog.cpp:563
 msgid "System default"
 msgstr "Systémové predvolené"
 
@@ -5610,11 +5619,11 @@ msgstr "Medzerník"
 msgid "Time zone"
 msgstr "Časová zóna"
 
-#: src/gui/StelGuiItems.cpp:794 src/gui/LocationDialog.cpp:562
+#: src/gui/StelGuiItems.cpp:794 src/gui/LocationDialog.cpp:561
 msgid "Local Mean Solar Time"
 msgstr "Miestny stredný slnečný čas"
 
-#: src/gui/StelGuiItems.cpp:797 src/gui/LocationDialog.cpp:563
+#: src/gui/StelGuiItems.cpp:797 src/gui/LocationDialog.cpp:562
 msgid "Local True Solar Time"
 msgstr "Miestny pravý slnečný čas"
 
@@ -5691,10 +5700,6 @@ msgstr "FPS"
 #: src/gui/StelGuiItems.cpp:975
 msgid "Frames per second"
 msgstr "Počet snímok za sekundu"
-
-#: src/gui/StelDialog.cpp:336
-msgid "Are you sure? This will delete your customized data."
-msgstr "Ste si istý? Toto vymaže vaše upravené dáta."
 
 #: src/gui/ViewDialog.cpp:667
 msgid "properties"
@@ -5860,11 +5865,11 @@ msgstr ""
 msgid "Visual magnitude based on phase angle and albedo."
 msgstr "Vizuálna magnitúda podľa fázového uhla a albeda."
 
-#: src/gui/LocationDialog.cpp:172 src/gui/LocationDialog.cpp:968
+#: src/gui/LocationDialog.cpp:172 src/gui/LocationDialog.cpp:967
 msgid "Get location from GPS or system service"
 msgstr "Získať polohu z GPS alebo služby systému"
 
-#: src/gui/LocationDialog.cpp:174 src/gui/LocationDialog.cpp:970
+#: src/gui/LocationDialog.cpp:174 src/gui/LocationDialog.cpp:969
 #: src/ui_locationDialogGui.h:499
 msgid "Get location from GPS"
 msgstr "Zistiť polohu pomocou GPS"
@@ -5891,23 +5896,23 @@ msgstr ""
 "Zapnúť získavanie polohy z GPS. (Nezmení časové pásmo!) Vypnite, ak ste s "
 "polohou spokojní a umožníte tak iným programom prístup k zariadeniu GPS."
 
-#: src/gui/LocationDialog.cpp:912
+#: src/gui/LocationDialog.cpp:911
 msgid "GPS listening..."
 msgstr "GPS načúva..."
 
-#: src/gui/LocationDialog.cpp:919
+#: src/gui/LocationDialog.cpp:918
 msgid "GPS disconnecting..."
 msgstr "GPS sa odpája..."
 
-#: src/gui/LocationDialog.cpp:941
+#: src/gui/LocationDialog.cpp:940
 msgid "2D location fix"
 msgstr "2D zameranie polohy"
 
-#: src/gui/LocationDialog.cpp:946
+#: src/gui/LocationDialog.cpp:945
 msgid "3D location fix"
 msgstr "3D zameranie polohy"
 
-#: src/gui/LocationDialog.cpp:955
+#: src/gui/LocationDialog.cpp:954
 msgid "GPS:FAILED"
 msgstr "GPS:ZLYHALO"
 
@@ -6127,15 +6132,13 @@ msgid "Ecliptic (J2000.0)"
 msgstr "Ekliptikálne (J2000,0)"
 
 #: src/gui/SearchDialog.cpp:296 src/gui/AstroCalcChart.cpp:442
-#: src/gui/AstroCalcChart.cpp:468 src/gui/ObsListDialog.cpp:207
-#: src/gui/ObsListCreateEditDialog.cpp:179
+#: src/gui/AstroCalcChart.cpp:468 src/gui/ObsListDialog.cpp:261
 msgid "Right ascension"
 msgstr "Rektascenzia"
 
 #: src/gui/SearchDialog.cpp:299 src/gui/AstroCalcChart.cpp:91
 #: src/gui/AstroCalcChart.cpp:101 src/gui/AstroCalcChart.cpp:425
-#: src/gui/AstroCalcChart.cpp:451 src/gui/ObsListDialog.cpp:208
-#: src/gui/ObsListCreateEditDialog.cpp:180
+#: src/gui/AstroCalcChart.cpp:451 src/gui/ObsListDialog.cpp:262
 msgid "Declination"
 msgstr "Deklinácia"
 
@@ -6763,7 +6766,7 @@ msgid "Duration of total or annular phase at greatest eclipse"
 msgstr "Trvanie úplnej alebo prstencovej fázy u najväčšieho zatmenia"
 
 #: src/gui/AstroCalcDialog.cpp:3375 src/gui/AstroCalcChart.cpp:378
-#: src/gui/ObsListDialog.cpp:211 src/gui/ObsListCreateEditDialog.cpp:183
+#: src/gui/ObsListDialog.cpp:265 src/ui_obsListDialog.h:410
 #: src/ui_obsListCreateEditDialog.h:325
 msgid "Date"
 msgstr "Dátum"
@@ -7975,58 +7978,118 @@ msgctxt "unit of measurement"
 msgid "saros"
 msgstr "saros"
 
-#: src/gui/ObsListDialog.cpp:204 src/gui/ObsListCreateEditDialog.cpp:176
+#: src/gui/ObsListDialog.cpp:83 src/gui/ObsListDialog.cpp:1024
+msgid "Cannot open observingLists.json to write"
+msgstr "Nemôžem otvoriť observingLists.json na zápis"
+
+#: src/gui/ObsListDialog.cpp:184
+msgctxt "default name for observing list if none is available"
+msgid "new list"
+msgstr "nový zoznam"
+
+#: src/gui/ObsListDialog.cpp:258
 msgid "Object designation"
 msgstr "Označenie objektu"
 
-#: src/gui/ObsListDialog.cpp:205 src/gui/ObsListCreateEditDialog.cpp:177
+#: src/gui/ObsListDialog.cpp:259
 msgid "Object name"
 msgstr "Názov objektu"
 
-#: src/gui/ObsListDialog.cpp:210 src/gui/ObsListCreateEditDialog.cpp:182
-#: src/ui_configurationDialog.h:1878
+#: src/gui/ObsListDialog.cpp:264 src/ui_configurationDialog.h:1878
 msgid "Constellation"
 msgstr "Súhvezdie"
 
-#: src/gui/ObsListDialog.cpp:213 src/gui/ObsListCreateEditDialog.cpp:185
-#: src/ui_viewDialog.h:3510 src/ui_obsListDialog.h:330
-#: src/ui_obsListCreateEditDialog.h:333
+#: src/gui/ObsListDialog.cpp:267 src/ui_viewDialog.h:3510
+#: src/ui_obsListDialog.h:418 src/ui_obsListCreateEditDialog.h:333
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:480
 msgid "Landscape"
 msgstr "Terén"
 
-#: src/gui/ObsListCreateEditDialog.cpp:311
-msgid "Unnamed object"
-msgstr "Nepomenovaný objekt"
+#: src/gui/ObsListDialog.cpp:881
+msgid "New Observation List"
+msgstr "Nový zoznam pozorovaní"
 
-#: src/gui/ObsListCreateEditDialog.cpp:500
+#: src/gui/ObsListDialog.cpp:882
+msgid "Observing list creation mode"
+msgstr "Režim tvorby zoznamov pozorovaní"
+
+#: src/gui/ObsListDialog.cpp:895
+msgid "Observing list editor mode"
+msgstr "Režim editovania zoznamov pozorovaní"
+
+#: src/gui/ObsListDialog.cpp:900
+msgid "selectedOlud empty. This is a bug"
+msgstr "vybraný Olud je prázdny. Toto je chyba"
+
+#: src/gui/ObsListDialog.cpp:910
 msgid "Export observing list as..."
 msgstr "Exportovať zoznam pozorovaní ako..."
 
-#: src/gui/ObsListCreateEditDialog.cpp:512
+#: src/gui/ObsListDialog.cpp:918
+msgid "Cannot export. See logfile for details."
+msgstr "Nepodaril sa export. Viac info v súbore log."
+
+#: src/gui/ObsListDialog.cpp:943
 msgid "Import observing list"
 msgstr "Importovať zoznam pozorovaní"
 
-#: src/gui/ObsListCreateEditDialog.cpp:539
-msgid "Error: here is no list or more than one list."
-msgstr "Chyba: žiadny zoznam alebo viac ako jeden."
+#: src/gui/ObsListDialog.cpp:952
+msgid "Cannot open selected file for import"
+msgstr "Nemôžem otvoriť zvolený súbor na import"
 
-#: src/gui/ObsListCreateEditDialog.cpp:564
-msgid "Error: the file is empty or doesn't contain legacy bookmarks."
-msgstr "Chyba: súbor je prázdny alebo neobsahuje záložky."
+#: src/gui/ObsListDialog.cpp:968
+msgid "Empty list."
+msgstr "Prázdny zoznam."
 
-#: src/gui/ObsListCreateEditDialog.cpp:570
+#: src/gui/ObsListDialog.cpp:987
+#, qt-format
+msgid ""
+"A list named '%1' and dated %2 would overwrite your existing list '%3', "
+"dated %4. Accept?"
+msgstr ""
+"Zoznam s menom '%1' a datovaný %2 prepíše Váš existujúci zoznam '%3', "
+"datovaný %4. Súhlasíte?"
+
+#: src/gui/ObsListDialog.cpp:1003
+msgid "The file is empty or doesn't contain legacy bookmarks."
+msgstr "Súbor je prázdny, alebo neobsahuje záložky."
+
+#: src/gui/ObsListDialog.cpp:1015
+msgid "File does not contain observing lists or legacy bookmarks"
+msgstr "Súbor neobsahuje zoznam pozorovaní alebo záložky"
+
+#: src/gui/ObsListDialog.cpp:1036
 msgid "File format is wrong!"
 msgstr "Nesprávny formát súboru!"
 
-#: src/gui/ObsListCreateEditDialog.cpp:589
-#, qt-format
-msgid "Error: a list with the name %1 already exists!"
-msgstr "Chyba: zoznam s menom %1 už existuje!"
+#: src/gui/ObsListDialog.cpp:1053
+msgid "Cannot open JSON output file. Will not delete."
+msgstr "Nemôžem otvoriť súbor JSON na písanie. Nebude zmazaný."
 
-#: src/gui/ObsListCreateEditDialog.cpp:594
-msgid "Error: the list name is empty."
-msgstr "Chyba: chýba meno zoznamu."
+#: src/gui/ObsListDialog.cpp:1077 src/ui_configurationDialog.h:1753
+msgid "Information"
+msgstr "Informácie"
+
+#: src/gui/ObsListDialog.cpp:1077
+msgid "You cannot delete the default or the last list."
+msgstr "Nemôžete zmazať predvolený alebo posledný zoznam."
+
+#: src/gui/ObsListDialog.cpp:1133
+msgid "Unnamed object"
+msgstr "Nepomenovaný objekt"
+
+#: src/gui/ObsListDialog.cpp:1216
+msgid "Empty name"
+msgstr "Prázdny názov"
+
+#: src/gui/ObsListDialog.cpp:1221
+msgid "List name already exists"
+msgstr "Názov zoznamu už existuje"
+
+#: src/gui/ObsListDialog.cpp:1286 src/ui_configurationDialog.h:1936
+#: src/ui_obsListDialog.h:353
+msgid "Observing lists"
+msgstr "Zoznamy pozorovaní"
 
 #: src/gui/DateTimeDialog.cpp:253 src/gui/DateTimeDialog.cpp:254
 msgid "Date and Time in Julian calendar"
@@ -9711,7 +9774,7 @@ msgid "&Choose"
 msgstr "&Zvoliť"
 
 #: src/translations.h:630 src/ui_configurationDialog.h:1978
-#: src/ui_obsListCreateEditDialog.h:355
+#: src/ui_obsListDialog.h:364 src/ui_obsListCreateEditDialog.h:355
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:645
 msgid "Cancel"
 msgstr "Zrušiť"
@@ -13357,10 +13420,6 @@ msgstr "Nastavenia"
 msgid "Main"
 msgstr "Hlavné"
 
-#: src/ui_configurationDialog.h:1753
-msgid "Information"
-msgstr "Informácie"
-
 #: src/ui_configurationDialog.h:1758
 msgctxt "Additional settings for Graphical User Interface"
 msgid "Extras"
@@ -13744,10 +13803,6 @@ msgstr "Pozadie hmlovín"
 #: src/ui_configurationDialog.h:1934
 msgid "Enable a feature to store favorite views."
 msgstr "Povoliť funkciu uloženia obľúbených pohľadov."
-
-#: src/ui_configurationDialog.h:1936 src/ui_obsListDialog.h:293
-msgid "Observing lists"
-msgstr "Zoznamy pozorovaní"
 
 #: src/ui_configurationDialog.h:1939
 msgid "Toggle the usage of background under GUI buttons"
@@ -14650,7 +14705,7 @@ msgid "First celestial body"
 msgstr "Prvé nebeské teleso"
 
 #: src/ui_astroCalcDialog.h:2304 src/ui_astroCalcDialog.h:2323
-#: plugins/Satellites/src/Satellite.cpp:489
+#: plugins/Satellites/src/Satellite.cpp:490
 msgid "and"
 msgstr "a"
 
@@ -15028,95 +15083,143 @@ msgstr "Vlastný interval"
 msgid "Unit of measurement:"
 msgstr "Jednotka merania:"
 
-#: src/ui_obsListDialog.h:295
-msgid "List:"
-msgstr "Zoznam:"
-
-#: src/ui_obsListDialog.h:297 src/ui_obsListCreateEditDialog.h:339
+#: src/ui_obsListDialog.h:356 src/ui_obsListDialog.h:374
+#: src/ui_obsListCreateEditDialog.h:339
 msgid "Highlight all the objects of the selected list"
 msgstr "Zvýrazniť všetky objekty zo zvoleného zoznamu"
 
-#: src/ui_obsListDialog.h:299
-msgid "Highlight all"
-msgstr "Zvýrazniť všetky"
+#: src/ui_obsListDialog.h:358 src/ui_obsListCreateEditDialog.h:341
+msgid "Add object"
+msgstr "Pridať objekt"
 
-#: src/ui_obsListDialog.h:301 src/ui_obsListCreateEditDialog.h:343
+#: src/ui_obsListDialog.h:360 src/ui_obsListDialog.h:378
+#: src/ui_obsListCreateEditDialog.h:343
 msgid "Clear all the highlight objects"
 msgstr "Vyčistiť zvýraznené objekty"
 
-#: src/ui_obsListDialog.h:303
-msgid "Clear highlight(s)"
-msgstr "Vyčistiť zvýraznené"
+#: src/ui_obsListDialog.h:362 src/ui_obsListCreateEditDialog.h:345
+msgid "Remove object"
+msgstr "Odobrať objekt"
 
-#: src/ui_obsListDialog.h:305
-msgid "Create a new observing list"
-msgstr "Vytvoriť nový zoznam pozorovaní"
+#: src/ui_obsListDialog.h:363
+msgid "Save list"
+msgstr "Uložiť zoznam"
 
-#: src/ui_obsListDialog.h:307
-msgid "New list"
-msgstr "Nový zoznam"
-
-#: src/ui_obsListDialog.h:309
-msgid "Edit the selected list"
-msgstr "Upraviť zvolený zoznam"
-
-#: src/ui_obsListDialog.h:311
-msgid "Edit list"
-msgstr "Upraviť zoznam"
-
-#: src/ui_obsListDialog.h:313
-msgid "Delete the selected list"
-msgstr "Vymazať zvolený zoznam"
-
-#: src/ui_obsListDialog.h:315
-msgid "Delete list"
-msgstr "Vymazať zoznam"
-
-#: src/ui_obsListDialog.h:316
-msgid "Observing list description:"
-msgstr "Popis zoznamu pozorovaní:"
-
-#: src/ui_obsListDialog.h:317
-msgid "Defined as default list"
-msgstr "Definovaný ako predvolený zoznam"
-
-#: src/ui_obsListDialog.h:318
-msgid "Creation date:"
-msgstr "Dátum vytvorenia:"
-
-#: src/ui_obsListDialog.h:319
-msgid "Also load:"
-msgstr "Nahrať aj:"
-
-#: src/ui_obsListDialog.h:321
-msgid "Retrieve stored Julian Day"
-msgstr "Obnoviť uložený Juliánsky deň"
-
-#: src/ui_obsListDialog.h:324
-msgid "Retrieve stored location"
-msgstr "Obnoviť uloženú polohu"
-
-#: src/ui_obsListDialog.h:328
-msgid "Retrieve stored landscape"
-msgstr "Obnoviť uložený terén"
-
-#: src/ui_obsListDialog.h:332
-msgid "Retrieve stored field of view"
-msgstr "Obnoviť uložené zorné pole"
-
-#: src/ui_obsListDialog.h:334
-msgid "FoV"
-msgstr "FoV"
-
-#: src/ui_obsListCreateEditDialog.h:314
-msgid "Observing Lists editor"
-msgstr "Editor zoznamov pozorovaní"
-
-#: src/ui_obsListCreateEditDialog.h:316
+#: src/ui_obsListDialog.h:365 src/ui_obsListCreateEditDialog.h:316
 #: plugins/Satellites/src/ui_satellitesDialog.h:1385
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:217
 msgid "Description:"
 msgstr "Opis:"
+
+#: src/ui_obsListDialog.h:367
+msgid "Activate to set list as default"
+msgstr "Aktivovať tento zoznam ako predvolený"
+
+#: src/ui_obsListDialog.h:369
+msgid "Default list"
+msgstr "Predvolený zoznam"
+
+#: src/ui_obsListDialog.h:370
+msgid "Creation date:"
+msgstr "Dátum vytvorenia:"
+
+#: src/ui_obsListDialog.h:371
+msgid "List name:"
+msgstr "Názov zoznamu:"
+
+#: src/ui_obsListDialog.h:372
+msgid "List:"
+msgstr "Zoznam:"
+
+#: src/ui_obsListDialog.h:376
+msgid "Highlight all"
+msgstr "Zvýrazniť všetky"
+
+#: src/ui_obsListDialog.h:380
+msgid "Clear highlight(s)"
+msgstr "Vyčistiť zvýraznené"
+
+#: src/ui_obsListDialog.h:382
+msgid "Create a new observing list"
+msgstr "Vytvoriť nový zoznam pozorovaní"
+
+#: src/ui_obsListDialog.h:384
+msgid "New list"
+msgstr "Nový zoznam"
+
+#: src/ui_obsListDialog.h:386
+msgid "Edit the selected list"
+msgstr "Upraviť zvolený zoznam"
+
+#: src/ui_obsListDialog.h:388
+msgid "Edit list"
+msgstr "Upraviť zoznam"
+
+#: src/ui_obsListDialog.h:390 src/ui_obsListCreateEditDialog.h:347
+#: src/ui_obsListCreateEditDialog.h:349
+msgid "Export list"
+msgstr "Exportovať zoznam"
+
+#: src/ui_obsListDialog.h:392
+msgid "Export list..."
+msgstr "Exportovať zoznam..."
+
+#: src/ui_obsListDialog.h:394 src/ui_obsListCreateEditDialog.h:351
+#: src/ui_obsListCreateEditDialog.h:353
+msgid "Import list"
+msgstr "Importovať zoznam"
+
+#: src/ui_obsListDialog.h:396
+msgid "Import list..."
+msgstr "Importovať zoznam..."
+
+#: src/ui_obsListDialog.h:398
+msgid "Delete the selected list"
+msgstr "Vymazať zvolený zoznam"
+
+#: src/ui_obsListDialog.h:400
+msgid "Delete list"
+msgstr "Vymazať zoznam"
+
+#: src/ui_obsListDialog.h:401
+msgid "Also load:"
+msgstr "Nahrať aj:"
+
+#: src/ui_obsListDialog.h:402
+msgid "Also store:"
+msgstr "Uložiť aj:"
+
+#: src/ui_obsListDialog.h:404
+msgid "Store/load equatorial coordinates (J2000.0)"
+msgstr "Uložiť/nahrať rovníkové súradnice (J2000,0)"
+
+#: src/ui_obsListDialog.h:406 src/ui_obsListCreateEditDialog.h:321
+msgid "Coordinates (RA and DEC)"
+msgstr "Súradnice (RA a DEC)"
+
+#: src/ui_obsListDialog.h:408
+msgid "Store/load with date/time (JD)"
+msgstr "Uložiť/nahrať s dátumom/časom (JD)"
+
+#: src/ui_obsListDialog.h:412
+msgid "Store/load with location"
+msgstr "Uložiť/nahrať s polohou"
+
+#: src/ui_obsListDialog.h:416
+msgid "Store/load with landscape"
+msgstr "Uložiť/nahrať s terénom"
+
+#: src/ui_obsListDialog.h:420
+msgid "Store/load with field of view"
+msgstr "Uložiť/nahrať so zorným poľom"
+
+#: src/ui_obsListDialog.h:422 src/ui_obsListCreateEditDialog.h:337
+msgid "FOV"
+msgstr "FOV"
+
+#: src/ui_obsListCreateEditDialog.h:314
+msgid "Observing Lists editor"
+msgstr "Editor zoznamov pozorovaní"
 
 #: src/ui_obsListCreateEditDialog.h:317
 msgid "Also store: "
@@ -15125,10 +15228,6 @@ msgstr "Uložiť aj:"
 #: src/ui_obsListCreateEditDialog.h:319
 msgid "Store with equatorial coordinates (J2000.0)"
 msgstr "Uložiť s rovníkovými súradnicami (J2000,0)"
-
-#: src/ui_obsListCreateEditDialog.h:321
-msgid "Coordinates (RA and DEC)"
-msgstr "Súradnice (RA a DEC)"
 
 #: src/ui_obsListCreateEditDialog.h:323
 msgid "Store with current JD"
@@ -15145,26 +15244,6 @@ msgstr "Uložiť s aktuálnym terénom"
 #: src/ui_obsListCreateEditDialog.h:335
 msgid "Store with current field of view"
 msgstr "Uložiť s aktuálnym pohľadom"
-
-#: src/ui_obsListCreateEditDialog.h:337
-msgid "FOV"
-msgstr "FOV"
-
-#: src/ui_obsListCreateEditDialog.h:341
-msgid "Add object"
-msgstr "Pridať objekt"
-
-#: src/ui_obsListCreateEditDialog.h:345
-msgid "Remove object"
-msgstr "Odobrať objekt"
-
-#: src/ui_obsListCreateEditDialog.h:347 src/ui_obsListCreateEditDialog.h:349
-msgid "Export list"
-msgstr "Exportovať zoznam"
-
-#: src/ui_obsListCreateEditDialog.h:351 src/ui_obsListCreateEditDialog.h:353
-msgid "Import list"
-msgstr "Importovať zoznam"
 
 #: src/ui_obsListCreateEditDialog.h:354
 msgid "Save and close"
@@ -17986,163 +18065,167 @@ msgstr "Družica je v polotieni"
 msgid "The satellite is eclipsed"
 msgstr "Družica je skrytá"
 
-#: plugins/Satellites/src/Satellite.cpp:333
+#: plugins/Satellites/src/Satellite.cpp:223
+msgid "The satellite is below the horizon"
+msgstr "Družica je pod obzorom"
+
+#: plugins/Satellites/src/Satellite.cpp:334
 msgid "International Designator"
 msgstr "Medzinárodný identifikátor"
 
-#: plugins/Satellites/src/Satellite.cpp:344
+#: plugins/Satellites/src/Satellite.cpp:345
 msgid "Approx. magnitude"
 msgstr "Pribl. jasnosť"
 
 #. TRANSLATORS: Slant range: distance between the satellite and the observer
-#: plugins/Satellites/src/Satellite.cpp:357
+#: plugins/Satellites/src/Satellite.cpp:358
 msgid "Range"
 msgstr "Vzdialenosť"
 
 #. TRANSLATORS: Rate at which the distance changes
-#: plugins/Satellites/src/Satellite.cpp:359
+#: plugins/Satellites/src/Satellite.cpp:360
 msgid "Range rate"
 msgstr "Zmena vzdialenosti"
 
-#: plugins/Satellites/src/Satellite.cpp:362
+#: plugins/Satellites/src/Satellite.cpp:363
 msgid "Perigee/apogee altitudes"
 msgstr "Výšky perigea/apogea"
 
-#: plugins/Satellites/src/Satellite.cpp:373
+#: plugins/Satellites/src/Satellite.cpp:374
 msgid "Approx. angular size"
 msgstr "Pribl. uhlová veľkosť"
 
 #. TRANSLATORS: Revolutions per day - measurement of the frequency of a
 #. rotation
-#: plugins/Satellites/src/Satellite.cpp:382
+#: plugins/Satellites/src/Satellite.cpp:383
 msgctxt "frequency"
 msgid "rpd"
 msgstr "otáčky za deň"
 
 #. TRANSLATORS: minutes - orbital period for artificial satellites
-#: plugins/Satellites/src/Satellite.cpp:384
+#: plugins/Satellites/src/Satellite.cpp:385
 msgctxt "period"
 msgid "min"
 msgstr "min"
 
-#: plugins/Satellites/src/Satellite.cpp:386
+#: plugins/Satellites/src/Satellite.cpp:387
 msgid "Orbital period"
 msgstr "Obežná doba"
 
-#: plugins/Satellites/src/Satellite.cpp:391
+#: plugins/Satellites/src/Satellite.cpp:392
 #: plugins/Satellites/src/ui_satellitesFilterDialog.h:295
 #: plugins/Exoplanets/src/Exoplanet.cpp:365
 msgid "Inclination"
 msgstr "Sklon dráhy"
 
-#: plugins/Satellites/src/Satellite.cpp:392
+#: plugins/Satellites/src/Satellite.cpp:393
 msgid "SubPoint (Lat./Long.)"
 msgstr "Miesto (šír./dĺž.)"
 
 #. TRANSLATORS: TEME (True Equator, Mean Equinox) is an Earth-centered
 #. inertial coordinate system
-#: plugins/Satellites/src/Satellite.cpp:398
+#: plugins/Satellites/src/Satellite.cpp:399
 msgid "TEME coordinates"
 msgstr "Geocentrické súradnice (TEME)"
 
 #. TRANSLATORS: TEME (True Equator, Mean Equinox) is an Earth-centered
 #. inertial coordinate system
-#: plugins/Satellites/src/Satellite.cpp:402
+#: plugins/Satellites/src/Satellite.cpp:403
 msgid "TEME velocity"
 msgstr "Rýchlosť (TEME)"
 
-#: plugins/Satellites/src/Satellite.cpp:412
+#: plugins/Satellites/src/Satellite.cpp:413
 msgid "Sun reflection angle"
 msgstr "Uhol odrazu Slnka"
 
-#: plugins/Satellites/src/Satellite.cpp:420
-#: plugins/Satellites/src/Satellite.cpp:533
+#: plugins/Satellites/src/Satellite.cpp:421
+#: plugins/Satellites/src/Satellite.cpp:534
 msgctxt "unknown date"
 msgid "unknown"
 msgstr "neznáme"
 
-#: plugins/Satellites/src/Satellite.cpp:427
+#: plugins/Satellites/src/Satellite.cpp:428
 msgctxt "at time"
 msgid "at"
 msgstr "na"
 
-#: plugins/Satellites/src/Satellite.cpp:429
+#: plugins/Satellites/src/Satellite.cpp:430
 msgid "Last updated TLE"
 msgstr "Naposledy aktualizované TLE"
 
-#: plugins/Satellites/src/Satellite.cpp:430
+#: plugins/Satellites/src/Satellite.cpp:431
 msgid "Epoch of the TLE"
 msgstr "Epocha TLE"
 
-#: plugins/Satellites/src/Satellite.cpp:432
+#: plugins/Satellites/src/Satellite.cpp:433
 msgid "Radar cross-section (RCS)"
 msgstr "Radarový účinný prierez (RCS)"
 
-#: plugins/Satellites/src/Satellite.cpp:441
+#: plugins/Satellites/src/Satellite.cpp:442
 msgid "Group"
 msgstr "Skupina"
 
-#: plugins/Satellites/src/Satellite.cpp:441
+#: plugins/Satellites/src/Satellite.cpp:442
 msgid "Groups"
 msgstr "Skupiny"
 
-#: plugins/Satellites/src/Satellite.cpp:446
+#: plugins/Satellites/src/Satellite.cpp:447
 msgid "Operational status"
 msgstr "Prevádzkový stav"
 
-#: plugins/Satellites/src/Satellite.cpp:452
+#: plugins/Satellites/src/Satellite.cpp:453
 msgid "Radio communication"
 msgstr "Rádiokomunikácia"
 
 #. TRANSLATORS: Unit of measurement of frequency
-#: plugins/Satellites/src/Satellite.cpp:502
+#: plugins/Satellites/src/Satellite.cpp:503
 #: plugins/Satellites/src/gui/SatellitesCommDialog.cpp:88
 #: plugins/Pulsars/src/Pulsar.cpp:283
 msgctxt "frequency"
 msgid "MHz"
 msgstr "MHz"
 
-#: plugins/Satellites/src/Satellite.cpp:502
+#: plugins/Satellites/src/Satellite.cpp:503
 msgctxt "frequency"
 msgid "kHz"
 msgstr "kHz"
 
-#: plugins/Satellites/src/Satellite.cpp:760
+#: plugins/Satellites/src/Satellite.cpp:761
 msgctxt "operational status"
 msgid "operational"
 msgstr "v prevádzke"
 
-#: plugins/Satellites/src/Satellite.cpp:761
+#: plugins/Satellites/src/Satellite.cpp:762
 msgctxt "operational status"
 msgid "non-operational"
 msgstr "nefunkčné"
 
-#: plugins/Satellites/src/Satellite.cpp:762
+#: plugins/Satellites/src/Satellite.cpp:763
 msgctxt "operational status"
 msgid "partially operational"
 msgstr "čiastočne v prevádzke"
 
-#: plugins/Satellites/src/Satellite.cpp:763
+#: plugins/Satellites/src/Satellite.cpp:764
 msgctxt "operational status"
 msgid "standby"
 msgstr "v pohotovostnom režime"
 
-#: plugins/Satellites/src/Satellite.cpp:764
+#: plugins/Satellites/src/Satellite.cpp:765
 msgctxt "operational status"
 msgid "spare"
 msgstr "náhradný"
 
-#: plugins/Satellites/src/Satellite.cpp:765
+#: plugins/Satellites/src/Satellite.cpp:766
 msgctxt "operational status"
 msgid "extended mission"
 msgstr "predĺžená misia"
 
-#: plugins/Satellites/src/Satellite.cpp:766
+#: plugins/Satellites/src/Satellite.cpp:767
 msgctxt "operational status"
 msgid "decayed"
 msgstr "rozpadnutý"
 
-#: plugins/Satellites/src/Satellite.cpp:768
+#: plugins/Satellites/src/Satellite.cpp:769
 msgctxt "operational status"
 msgid "unknown"
 msgstr "neznámy"
