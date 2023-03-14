@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2023-03-13 19:29+0700\n"
+"POT-Creation-Date: 2023-03-14 10:28+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>, 2023\n"
 "Language-Team: Ukrainian (https://www.transifex.com/stellarium/teams/80998/uk/)\n"
@@ -34,7 +34,7 @@ msgstr ""
 #: src/gui/AstroCalcDialog.cpp:2957 src/gui/AstroCalcDialog.cpp:2989
 #: src/gui/AstroCalcDialog.cpp:3376 src/gui/AstroCalcDialog.cpp:8400
 #: src/gui/ObsListDialog.cpp:260 src/ui_configurationDialog.h:1869
-#: plugins/Satellites/src/Satellite.cpp:338
+#: plugins/Satellites/src/Satellite.cpp:339
 #: plugins/TelescopeControl/src/TelescopeClient.cpp:136
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:515
 #: plugins/Supernovae/src/Supernova.cpp:143 plugins/Novae/src/Nova.cpp:150
@@ -208,7 +208,7 @@ msgstr "Головна вертикаль"
 #: src/gui/AstroCalcDialog.cpp:837 src/gui/AstroCalcDialog.cpp:1742
 #: src/gui/AstroCalcDialog.cpp:2079 src/gui/AstroCalcDialog.cpp:2343
 #: src/gui/AstroCalcChart.cpp:80 src/gui/AstroCalcChart.cpp:417
-#: src/ui_viewDialog.h:3949 plugins/Satellites/src/Satellite.cpp:361
+#: src/ui_viewDialog.h:3949 plugins/Satellites/src/Satellite.cpp:362
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1496
 msgid "Altitude"
 msgstr "Висота"
@@ -331,8 +331,8 @@ msgstr "Антапекс"
 #. TRANSLATORS: Unit of measure for speed - kilometers per second
 #: src/core/modules/GridLinesMgr.cpp:1630 src/core/modules/Planet.cpp:693
 #: src/core/modules/Planet.cpp:1179 src/gui/AstroCalcDialog.cpp:9287
-#: plugins/Satellites/src/Satellite.cpp:359
-#: plugins/Satellites/src/Satellite.cpp:402
+#: plugins/Satellites/src/Satellite.cpp:360
+#: plugins/Satellites/src/Satellite.cpp:403
 #: plugins/MeteorShowers/src/MeteorShower.cpp:564
 msgctxt "speed"
 msgid "km/s"
@@ -830,7 +830,7 @@ msgstr "Автор"
 
 #. TRANSLATORS: Unit of measure for distance - meter
 #: src/core/modules/LandscapeMgr.cpp:1327 src/gui/StelGuiItems.cpp:872
-#: plugins/Satellites/src/Satellite.cpp:432
+#: plugins/Satellites/src/Satellite.cpp:433
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1142
 #: plugins/Satellites/src/gui/SatellitesFilterDialog.cpp:134
 msgctxt "distance"
@@ -931,8 +931,8 @@ msgstr "Діаметр"
 #: src/core/modules/Comet.cpp:167 src/gui/StelGuiItems.cpp:900
 #: src/gui/AstroCalcDialog.cpp:3193 src/gui/AstroCalcDialog.cpp:3708
 #: src/gui/AstroCalcDialog.cpp:9222 plugins/Satellites/src/Satellites.cpp:2906
-#: plugins/Satellites/src/Satellite.cpp:355
-#: plugins/Satellites/src/Satellite.cpp:398
+#: plugins/Satellites/src/Satellite.cpp:356
+#: plugins/Satellites/src/Satellite.cpp:399
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1151
 #: plugins/Satellites/src/gui/SatellitesFilterDialog.cpp:133
 msgctxt "distance"
@@ -1820,17 +1820,17 @@ msgid "photometric passband"
 msgstr "фотометрична смуга пропускання"
 
 #: src/core/modules/Nebula.cpp:209 src/core/StelObject.cpp:350
-#: plugins/Satellites/src/Satellite.cpp:346
+#: plugins/Satellites/src/Satellite.cpp:347
 msgid "reduced to"
 msgstr "зменшилася до"
 
 #: src/core/modules/Nebula.cpp:209 src/core/StelObject.cpp:350
-#: plugins/Satellites/src/Satellite.cpp:346
+#: plugins/Satellites/src/Satellite.cpp:347
 msgid "by"
 msgstr "на"
 
 #: src/core/modules/Nebula.cpp:209 src/core/StelObject.cpp:350
-#: plugins/Satellites/src/Satellite.cpp:346
+#: plugins/Satellites/src/Satellite.cpp:347
 msgid "Airmasses"
 msgstr "Оптична маса атмосфери"
 
@@ -2430,7 +2430,7 @@ msgstr "Видовження"
 #: src/core/modules/Planet.cpp:842 src/core/modules/Planet.cpp:851
 #: src/gui/AstroCalcChart.cpp:96 src/gui/AstroCalcChart.cpp:106
 #: src/gui/AstroCalcChart.cpp:438 src/gui/AstroCalcChart.cpp:464
-#: plugins/Satellites/src/Satellite.cpp:407
+#: plugins/Satellites/src/Satellite.cpp:408
 msgid "Phase angle"
 msgstr "Фазовий кут"
 
@@ -14831,7 +14831,7 @@ msgid "First celestial body"
 msgstr "Перше небесне тіло"
 
 #: src/ui_astroCalcDialog.h:2304 src/ui_astroCalcDialog.h:2323
-#: plugins/Satellites/src/Satellite.cpp:489
+#: plugins/Satellites/src/Satellite.cpp:490
 msgid "and"
 msgstr "і"
 
@@ -18226,163 +18226,167 @@ msgstr "Супутник перебуває у напівтіні"
 msgid "The satellite is eclipsed"
 msgstr "Супутник затемнено"
 
-#: plugins/Satellites/src/Satellite.cpp:333
+#: plugins/Satellites/src/Satellite.cpp:223
+msgid "The satellite is below the horizon"
+msgstr "Супутник перебуває під горизонтом"
+
+#: plugins/Satellites/src/Satellite.cpp:334
 msgid "International Designator"
 msgstr "Міжнародний ідентифікатор (NSSDC ID)"
 
-#: plugins/Satellites/src/Satellite.cpp:344
+#: plugins/Satellites/src/Satellite.cpp:345
 msgid "Approx. magnitude"
 msgstr "Прибл. величина"
 
 #. TRANSLATORS: Slant range: distance between the satellite and the observer
-#: plugins/Satellites/src/Satellite.cpp:357
+#: plugins/Satellites/src/Satellite.cpp:358
 msgid "Range"
 msgstr "Діапазон"
 
 #. TRANSLATORS: Rate at which the distance changes
-#: plugins/Satellites/src/Satellite.cpp:359
+#: plugins/Satellites/src/Satellite.cpp:360
 msgid "Range rate"
 msgstr "Швидкість зміни відстані"
 
-#: plugins/Satellites/src/Satellite.cpp:362
+#: plugins/Satellites/src/Satellite.cpp:363
 msgid "Perigee/apogee altitudes"
 msgstr "Висоти у перигеї та апогеї"
 
-#: plugins/Satellites/src/Satellite.cpp:373
+#: plugins/Satellites/src/Satellite.cpp:374
 msgid "Approx. angular size"
 msgstr "Прибл. кутовий розмір"
 
 #. TRANSLATORS: Revolutions per day - measurement of the frequency of a
 #. rotation
-#: plugins/Satellites/src/Satellite.cpp:382
+#: plugins/Satellites/src/Satellite.cpp:383
 msgctxt "frequency"
 msgid "rpd"
 msgstr "об./д."
 
 #. TRANSLATORS: minutes - orbital period for artificial satellites
-#: plugins/Satellites/src/Satellite.cpp:384
+#: plugins/Satellites/src/Satellite.cpp:385
 msgctxt "period"
 msgid "min"
 msgstr "хв."
 
-#: plugins/Satellites/src/Satellite.cpp:386
+#: plugins/Satellites/src/Satellite.cpp:387
 msgid "Orbital period"
 msgstr "Період обертання"
 
-#: plugins/Satellites/src/Satellite.cpp:391
+#: plugins/Satellites/src/Satellite.cpp:392
 #: plugins/Satellites/src/ui_satellitesFilterDialog.h:295
 #: plugins/Exoplanets/src/Exoplanet.cpp:365
 msgid "Inclination"
 msgstr "Нахил орбіти"
 
-#: plugins/Satellites/src/Satellite.cpp:392
+#: plugins/Satellites/src/Satellite.cpp:393
 msgid "SubPoint (Lat./Long.)"
 msgstr "Підточка (шир./довг.)"
 
 #. TRANSLATORS: TEME (True Equator, Mean Equinox) is an Earth-centered
 #. inertial coordinate system
-#: plugins/Satellites/src/Satellite.cpp:398
+#: plugins/Satellites/src/Satellite.cpp:399
 msgid "TEME coordinates"
 msgstr "Координати у TEME"
 
 #. TRANSLATORS: TEME (True Equator, Mean Equinox) is an Earth-centered
 #. inertial coordinate system
-#: plugins/Satellites/src/Satellite.cpp:402
+#: plugins/Satellites/src/Satellite.cpp:403
 msgid "TEME velocity"
 msgstr "Швидкість у TEME"
 
-#: plugins/Satellites/src/Satellite.cpp:412
+#: plugins/Satellites/src/Satellite.cpp:413
 msgid "Sun reflection angle"
 msgstr "Кут відбиття Сонця"
 
-#: plugins/Satellites/src/Satellite.cpp:420
-#: plugins/Satellites/src/Satellite.cpp:533
+#: plugins/Satellites/src/Satellite.cpp:421
+#: plugins/Satellites/src/Satellite.cpp:534
 msgctxt "unknown date"
 msgid "unknown"
 msgstr "невідома"
 
-#: plugins/Satellites/src/Satellite.cpp:427
+#: plugins/Satellites/src/Satellite.cpp:428
 msgctxt "at time"
 msgid "at"
 msgstr "о"
 
-#: plugins/Satellites/src/Satellite.cpp:429
+#: plugins/Satellites/src/Satellite.cpp:430
 msgid "Last updated TLE"
 msgstr "Останнє оновлення даних TLE"
 
-#: plugins/Satellites/src/Satellite.cpp:430
+#: plugins/Satellites/src/Satellite.cpp:431
 msgid "Epoch of the TLE"
 msgstr "Епоха TLE"
 
-#: plugins/Satellites/src/Satellite.cpp:432
+#: plugins/Satellites/src/Satellite.cpp:433
 msgid "Radar cross-section (RCS)"
 msgstr "Ефективна площа розсіювання (ЕПР)"
 
-#: plugins/Satellites/src/Satellite.cpp:441
+#: plugins/Satellites/src/Satellite.cpp:442
 msgid "Group"
 msgstr "Група"
 
-#: plugins/Satellites/src/Satellite.cpp:441
+#: plugins/Satellites/src/Satellite.cpp:442
 msgid "Groups"
 msgstr "Групи"
 
-#: plugins/Satellites/src/Satellite.cpp:446
+#: plugins/Satellites/src/Satellite.cpp:447
 msgid "Operational status"
 msgstr "Стан працездатності"
 
-#: plugins/Satellites/src/Satellite.cpp:452
+#: plugins/Satellites/src/Satellite.cpp:453
 msgid "Radio communication"
 msgstr "Радіозв'язок"
 
 #. TRANSLATORS: Unit of measurement of frequency
-#: plugins/Satellites/src/Satellite.cpp:502
+#: plugins/Satellites/src/Satellite.cpp:503
 #: plugins/Satellites/src/gui/SatellitesCommDialog.cpp:88
 #: plugins/Pulsars/src/Pulsar.cpp:283
 msgctxt "frequency"
 msgid "MHz"
 msgstr "МГц"
 
-#: plugins/Satellites/src/Satellite.cpp:502
+#: plugins/Satellites/src/Satellite.cpp:503
 msgctxt "frequency"
 msgid "kHz"
 msgstr "кГц"
 
-#: plugins/Satellites/src/Satellite.cpp:760
+#: plugins/Satellites/src/Satellite.cpp:761
 msgctxt "operational status"
 msgid "operational"
 msgstr "працездатний"
 
-#: plugins/Satellites/src/Satellite.cpp:761
+#: plugins/Satellites/src/Satellite.cpp:762
 msgctxt "operational status"
 msgid "non-operational"
 msgstr "недієздатні"
 
-#: plugins/Satellites/src/Satellite.cpp:762
+#: plugins/Satellites/src/Satellite.cpp:763
 msgctxt "operational status"
 msgid "partially operational"
 msgstr "частково працездатний"
 
-#: plugins/Satellites/src/Satellite.cpp:763
+#: plugins/Satellites/src/Satellite.cpp:764
 msgctxt "operational status"
 msgid "standby"
 msgstr "приспаний"
 
-#: plugins/Satellites/src/Satellite.cpp:764
+#: plugins/Satellites/src/Satellite.cpp:765
 msgctxt "operational status"
 msgid "spare"
 msgstr "резервний"
 
-#: plugins/Satellites/src/Satellite.cpp:765
+#: plugins/Satellites/src/Satellite.cpp:766
 msgctxt "operational status"
 msgid "extended mission"
 msgstr "розширена місія"
 
-#: plugins/Satellites/src/Satellite.cpp:766
+#: plugins/Satellites/src/Satellite.cpp:767
 msgctxt "operational status"
 msgid "decayed"
 msgstr "зруйнований"
 
-#: plugins/Satellites/src/Satellite.cpp:768
+#: plugins/Satellites/src/Satellite.cpp:769
 msgctxt "operational status"
 msgid "unknown"
 msgstr "невідомий"
