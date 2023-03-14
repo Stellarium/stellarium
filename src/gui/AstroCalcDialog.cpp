@@ -1944,8 +1944,11 @@ void AstroCalcDialog::generateEphemeris()
 			core->setJD(JD);
 			core->update(0); // force update to get new coordinates
 
+			/*
+			 * Probably this features should be an optional
 			if (!obj->hasValidPositionalData(JD, Planet::PositionQuality::OrbitPlotting))
 				continue;
+			*/
 
 			if (useHorizontalCoords)
 			{
