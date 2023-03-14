@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2023-03-13 19:29+0700\n"
+"POT-Creation-Date: 2023-03-14 10:28+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Alexander V. Wolf <alex.v.wolf@gmail.com>, 2023\n"
 "Language-Team: Russian (https://www.transifex.com/stellarium/teams/80998/ru/)\n"
@@ -34,7 +34,7 @@ msgstr ""
 #: src/gui/AstroCalcDialog.cpp:2957 src/gui/AstroCalcDialog.cpp:2989
 #: src/gui/AstroCalcDialog.cpp:3376 src/gui/AstroCalcDialog.cpp:8400
 #: src/gui/ObsListDialog.cpp:260 src/ui_configurationDialog.h:1869
-#: plugins/Satellites/src/Satellite.cpp:338
+#: plugins/Satellites/src/Satellite.cpp:339
 #: plugins/TelescopeControl/src/TelescopeClient.cpp:136
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:515
 #: plugins/Supernovae/src/Supernova.cpp:143 plugins/Novae/src/Nova.cpp:150
@@ -208,7 +208,7 @@ msgstr "Первый вертикал"
 #: src/gui/AstroCalcDialog.cpp:837 src/gui/AstroCalcDialog.cpp:1742
 #: src/gui/AstroCalcDialog.cpp:2079 src/gui/AstroCalcDialog.cpp:2343
 #: src/gui/AstroCalcChart.cpp:80 src/gui/AstroCalcChart.cpp:417
-#: src/ui_viewDialog.h:3949 plugins/Satellites/src/Satellite.cpp:361
+#: src/ui_viewDialog.h:3949 plugins/Satellites/src/Satellite.cpp:362
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1496
 msgid "Altitude"
 msgstr "Высота"
@@ -331,8 +331,8 @@ msgstr "Антиапекс"
 #. TRANSLATORS: Unit of measure for speed - kilometers per second
 #: src/core/modules/GridLinesMgr.cpp:1630 src/core/modules/Planet.cpp:693
 #: src/core/modules/Planet.cpp:1179 src/gui/AstroCalcDialog.cpp:9287
-#: plugins/Satellites/src/Satellite.cpp:359
-#: plugins/Satellites/src/Satellite.cpp:402
+#: plugins/Satellites/src/Satellite.cpp:360
+#: plugins/Satellites/src/Satellite.cpp:403
 #: plugins/MeteorShowers/src/MeteorShower.cpp:564
 msgctxt "speed"
 msgid "km/s"
@@ -830,7 +830,7 @@ msgstr "Автор"
 
 #. TRANSLATORS: Unit of measure for distance - meter
 #: src/core/modules/LandscapeMgr.cpp:1327 src/gui/StelGuiItems.cpp:872
-#: plugins/Satellites/src/Satellite.cpp:432
+#: plugins/Satellites/src/Satellite.cpp:433
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1142
 #: plugins/Satellites/src/gui/SatellitesFilterDialog.cpp:134
 msgctxt "distance"
@@ -931,8 +931,8 @@ msgstr "Диаметр"
 #: src/core/modules/Comet.cpp:167 src/gui/StelGuiItems.cpp:900
 #: src/gui/AstroCalcDialog.cpp:3193 src/gui/AstroCalcDialog.cpp:3708
 #: src/gui/AstroCalcDialog.cpp:9222 plugins/Satellites/src/Satellites.cpp:2906
-#: plugins/Satellites/src/Satellite.cpp:355
-#: plugins/Satellites/src/Satellite.cpp:398
+#: plugins/Satellites/src/Satellite.cpp:356
+#: plugins/Satellites/src/Satellite.cpp:399
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1151
 #: plugins/Satellites/src/gui/SatellitesFilterDialog.cpp:133
 msgctxt "distance"
@@ -1816,17 +1816,17 @@ msgid "photometric passband"
 msgstr "фотометрическая полоса пропускания"
 
 #: src/core/modules/Nebula.cpp:209 src/core/StelObject.cpp:350
-#: plugins/Satellites/src/Satellite.cpp:346
+#: plugins/Satellites/src/Satellite.cpp:347
 msgid "reduced to"
 msgstr "ослаблена до"
 
 #: src/core/modules/Nebula.cpp:209 src/core/StelObject.cpp:350
-#: plugins/Satellites/src/Satellite.cpp:346
+#: plugins/Satellites/src/Satellite.cpp:347
 msgid "by"
 msgstr " "
 
 #: src/core/modules/Nebula.cpp:209 src/core/StelObject.cpp:350
-#: plugins/Satellites/src/Satellite.cpp:346
+#: plugins/Satellites/src/Satellite.cpp:347
 msgid "Airmasses"
 msgstr "возд. масс."
 
@@ -2429,7 +2429,7 @@ msgstr "Элонгация"
 #: src/core/modules/Planet.cpp:842 src/core/modules/Planet.cpp:851
 #: src/gui/AstroCalcChart.cpp:96 src/gui/AstroCalcChart.cpp:106
 #: src/gui/AstroCalcChart.cpp:438 src/gui/AstroCalcChart.cpp:464
-#: plugins/Satellites/src/Satellite.cpp:407
+#: plugins/Satellites/src/Satellite.cpp:408
 msgid "Phase angle"
 msgstr "Фазовый угол"
 
@@ -14791,7 +14791,7 @@ msgid "First celestial body"
 msgstr "Первое небесное тело"
 
 #: src/ui_astroCalcDialog.h:2304 src/ui_astroCalcDialog.h:2323
-#: plugins/Satellites/src/Satellite.cpp:489
+#: plugins/Satellites/src/Satellite.cpp:490
 msgid "and"
 msgstr "и"
 
@@ -18176,163 +18176,167 @@ msgstr "ИСЗ в полутени"
 msgid "The satellite is eclipsed"
 msgstr "ИСЗ в тени"
 
-#: plugins/Satellites/src/Satellite.cpp:333
+#: plugins/Satellites/src/Satellite.cpp:223
+msgid "The satellite is below the horizon"
+msgstr "ИСЗ под горизонтом"
+
+#: plugins/Satellites/src/Satellite.cpp:334
 msgid "International Designator"
 msgstr "Международное обозначение"
 
-#: plugins/Satellites/src/Satellite.cpp:344
+#: plugins/Satellites/src/Satellite.cpp:345
 msgid "Approx. magnitude"
 msgstr "Приблиз. звёздная величина"
 
 #. TRANSLATORS: Slant range: distance between the satellite and the observer
-#: plugins/Satellites/src/Satellite.cpp:357
+#: plugins/Satellites/src/Satellite.cpp:358
 msgid "Range"
 msgstr "Дистанция до ИСЗ"
 
 #. TRANSLATORS: Rate at which the distance changes
-#: plugins/Satellites/src/Satellite.cpp:359
+#: plugins/Satellites/src/Satellite.cpp:360
 msgid "Range rate"
 msgstr "Скорость изменения дистанции"
 
-#: plugins/Satellites/src/Satellite.cpp:362
+#: plugins/Satellites/src/Satellite.cpp:363
 msgid "Perigee/apogee altitudes"
 msgstr "Высота перигея/апогея"
 
-#: plugins/Satellites/src/Satellite.cpp:373
+#: plugins/Satellites/src/Satellite.cpp:374
 msgid "Approx. angular size"
 msgstr "Приблиз. угловой размер"
 
 #. TRANSLATORS: Revolutions per day - measurement of the frequency of a
 #. rotation
-#: plugins/Satellites/src/Satellite.cpp:382
+#: plugins/Satellites/src/Satellite.cpp:383
 msgctxt "frequency"
 msgid "rpd"
 msgstr "об./день"
 
 #. TRANSLATORS: minutes - orbital period for artificial satellites
-#: plugins/Satellites/src/Satellite.cpp:384
+#: plugins/Satellites/src/Satellite.cpp:385
 msgctxt "period"
 msgid "min"
 msgstr "мин."
 
-#: plugins/Satellites/src/Satellite.cpp:386
+#: plugins/Satellites/src/Satellite.cpp:387
 msgid "Orbital period"
 msgstr "Орбитальный период"
 
-#: plugins/Satellites/src/Satellite.cpp:391
+#: plugins/Satellites/src/Satellite.cpp:392
 #: plugins/Satellites/src/ui_satellitesFilterDialog.h:295
 #: plugins/Exoplanets/src/Exoplanet.cpp:365
 msgid "Inclination"
 msgstr "Наклон орбиты"
 
-#: plugins/Satellites/src/Satellite.cpp:392
+#: plugins/Satellites/src/Satellite.cpp:393
 msgid "SubPoint (Lat./Long.)"
 msgstr "Подпункт (Шир./Долг.)"
 
 #. TRANSLATORS: TEME (True Equator, Mean Equinox) is an Earth-centered
 #. inertial coordinate system
-#: plugins/Satellites/src/Satellite.cpp:398
+#: plugins/Satellites/src/Satellite.cpp:399
 msgid "TEME coordinates"
 msgstr "Координаты TEME"
 
 #. TRANSLATORS: TEME (True Equator, Mean Equinox) is an Earth-centered
 #. inertial coordinate system
-#: plugins/Satellites/src/Satellite.cpp:402
+#: plugins/Satellites/src/Satellite.cpp:403
 msgid "TEME velocity"
 msgstr "Скорость TEME"
 
-#: plugins/Satellites/src/Satellite.cpp:412
+#: plugins/Satellites/src/Satellite.cpp:413
 msgid "Sun reflection angle"
 msgstr "Угол отражения Солнца"
 
-#: plugins/Satellites/src/Satellite.cpp:420
-#: plugins/Satellites/src/Satellite.cpp:533
+#: plugins/Satellites/src/Satellite.cpp:421
+#: plugins/Satellites/src/Satellite.cpp:534
 msgctxt "unknown date"
 msgid "unknown"
 msgstr "неизвестно"
 
-#: plugins/Satellites/src/Satellite.cpp:427
+#: plugins/Satellites/src/Satellite.cpp:428
 msgctxt "at time"
 msgid "at"
 msgstr "в"
 
-#: plugins/Satellites/src/Satellite.cpp:429
+#: plugins/Satellites/src/Satellite.cpp:430
 msgid "Last updated TLE"
 msgstr "Последнее обновление TLE"
 
-#: plugins/Satellites/src/Satellite.cpp:430
+#: plugins/Satellites/src/Satellite.cpp:431
 msgid "Epoch of the TLE"
 msgstr "Эпоха TLE"
 
-#: plugins/Satellites/src/Satellite.cpp:432
+#: plugins/Satellites/src/Satellite.cpp:433
 msgid "Radar cross-section (RCS)"
 msgstr "Эффективная площадь рассеяния (ЭПР)"
 
-#: plugins/Satellites/src/Satellite.cpp:441
+#: plugins/Satellites/src/Satellite.cpp:442
 msgid "Group"
 msgstr "Группа"
 
-#: plugins/Satellites/src/Satellite.cpp:441
+#: plugins/Satellites/src/Satellite.cpp:442
 msgid "Groups"
 msgstr "Группы"
 
-#: plugins/Satellites/src/Satellite.cpp:446
+#: plugins/Satellites/src/Satellite.cpp:447
 msgid "Operational status"
 msgstr "Рабочее состояние"
 
-#: plugins/Satellites/src/Satellite.cpp:452
+#: plugins/Satellites/src/Satellite.cpp:453
 msgid "Radio communication"
 msgstr "Радиосвязь"
 
 #. TRANSLATORS: Unit of measurement of frequency
-#: plugins/Satellites/src/Satellite.cpp:502
+#: plugins/Satellites/src/Satellite.cpp:503
 #: plugins/Satellites/src/gui/SatellitesCommDialog.cpp:88
 #: plugins/Pulsars/src/Pulsar.cpp:283
 msgctxt "frequency"
 msgid "MHz"
 msgstr "МГц"
 
-#: plugins/Satellites/src/Satellite.cpp:502
+#: plugins/Satellites/src/Satellite.cpp:503
 msgctxt "frequency"
 msgid "kHz"
 msgstr "кГц"
 
-#: plugins/Satellites/src/Satellite.cpp:760
+#: plugins/Satellites/src/Satellite.cpp:761
 msgctxt "operational status"
 msgid "operational"
 msgstr "рабочий"
 
-#: plugins/Satellites/src/Satellite.cpp:761
+#: plugins/Satellites/src/Satellite.cpp:762
 msgctxt "operational status"
 msgid "non-operational"
 msgstr "нерабочий"
 
-#: plugins/Satellites/src/Satellite.cpp:762
+#: plugins/Satellites/src/Satellite.cpp:763
 msgctxt "operational status"
 msgid "partially operational"
 msgstr "частично рабочий"
 
-#: plugins/Satellites/src/Satellite.cpp:763
+#: plugins/Satellites/src/Satellite.cpp:764
 msgctxt "operational status"
 msgid "standby"
 msgstr "резервный"
 
-#: plugins/Satellites/src/Satellite.cpp:764
+#: plugins/Satellites/src/Satellite.cpp:765
 msgctxt "operational status"
 msgid "spare"
 msgstr "запасной"
 
-#: plugins/Satellites/src/Satellite.cpp:765
+#: plugins/Satellites/src/Satellite.cpp:766
 msgctxt "operational status"
 msgid "extended mission"
 msgstr "расширенная миссия"
 
-#: plugins/Satellites/src/Satellite.cpp:766
+#: plugins/Satellites/src/Satellite.cpp:767
 msgctxt "operational status"
 msgid "decayed"
 msgstr "разрушенный"
 
-#: plugins/Satellites/src/Satellite.cpp:768
+#: plugins/Satellites/src/Satellite.cpp:769
 msgctxt "operational status"
 msgid "unknown"
 msgstr "неизвестно"
