@@ -25,14 +25,16 @@
 #include "VecMath.hpp"
 
 template<typename F>
+F srgbToLinear(const F c)
+{
+	return c > F(0.04045) ? std::pow((c+F(0.055))/F(1.055), F(2.4))
+						  : c / F(12.92);
+}
+
+template<typename F>
 Vector3<F> srgbToLinear(const Vector3<F>& srgb)
 {
-	const auto lin = [](const F c)
-	{
-		return c > F(0.04045) ? std::pow((c+F(0.055))/F(1.055), F(2.4))
-							  : c / F(12.92);
-	};
-	return {lin(srgb[0]), lin(srgb[1]), lin(srgb[2])};
+	return {srgbToLinear(srgb[0]), srgbToLinear(srgb[1]), srgbToLinear(srgb[2])};
 }
 
 inline QByteArray makeSRGBUtilsShader()

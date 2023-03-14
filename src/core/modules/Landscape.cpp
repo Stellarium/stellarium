@@ -21,6 +21,7 @@
 
 #include "Landscape.hpp"
 #include "StelApp.hpp"
+#include "StelSRGB.hpp"
 #include "StelTextureMgr.hpp"
 #include "StelFileMgr.hpp"
 #include "StelLocation.hpp"
@@ -1063,7 +1064,9 @@ void LandscapeOldStyle::drawFog(StelCore*const core, const int firstFreeTexSampl
 	renderProgram->setUniformValue(shaderVars.vshift, vpos);
 
 	const float brightness = landFader.getInterstate()*fogFader.getInterstate()*(0.1f+0.1f*landscapeBrightness);
-	renderProgram->setUniformValue(shaderVars.brightness, brightness, brightness, brightness, landFader.getInterstate());
+	renderProgram->setUniformValue(shaderVars.brightness,
+								   srgbToLinear(brightness), srgbToLinear(brightness), srgbToLinear(brightness),
+								   landFader.getInterstate());
 	renderProgram->setUniformValue(shaderVars.projectionMatrixInverse, prj->getProjectionMatrix().toQMatrix().inverted());
 	prj->setUnProjectUniforms(*renderProgram);
 
@@ -1085,13 +1088,14 @@ void LandscapeOldStyle::drawDecor(StelCore*const core, const int firstFreeTexSam
 	if (drawLight)
 	{
 		const auto brightness = illumFader.getInterstate()*lightScapeBrightness;
-		renderProgram->setUniformValue(shaderVars.brightness, brightness, brightness, brightness,
+		renderProgram->setUniformValue(shaderVars.brightness,
+									   srgbToLinear(brightness), srgbToLinear(brightness), srgbToLinear(brightness),
 									   landFader.getInterstate());
 	}
 	else
 	{
 		renderProgram->setUniformValue(shaderVars.brightness,
-									   landscapeBrightness, landscapeBrightness, landscapeBrightness,
+									   srgbToLinear(landscapeBrightness), srgbToLinear(landscapeBrightness), srgbToLinear(landscapeBrightness),
 									   landFader.getInterstate());
 	}
 
@@ -1187,7 +1191,7 @@ void LandscapeOldStyle::drawGround(StelCore*const core, const int firstFreeTexSa
 	renderProgram->setUniformValue(shaderVars.vshift, vshift);
 	renderProgram->setUniformValue(shaderVars.projectionMatrixInverse, prj->getProjectionMatrix().toQMatrix().inverted());
 	renderProgram->setUniformValue(shaderVars.brightness,
-								   landscapeBrightness, landscapeBrightness, landscapeBrightness,
+								   srgbToLinear(landscapeBrightness), srgbToLinear(landscapeBrightness), srgbToLinear(landscapeBrightness),
 								   landFader.getInterstate());
 	prj->setUnProjectUniforms(*renderProgram);
 	gl.glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
@@ -1649,8 +1653,8 @@ void main(void)
 	{
 		renderProgram->bind();
 		renderProgram->setUniformValue(shaderVars.brightness,
-									   landscapeBrightness, landscapeBrightness,
-									   landscapeBrightness, landFader.getInterstate());
+									   srgbToLinear(landscapeBrightness), srgbToLinear(landscapeBrightness),
+									   srgbToLinear(landscapeBrightness), landFader.getInterstate());
 		const int mainTexSampler = 0;
 		mapTex->bind(mainTexSampler);
 		renderProgram->setUniformValue(shaderVars.mapTex, mainTexSampler);
@@ -1672,7 +1676,7 @@ void main(void)
 			gl.glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_COLOR);
 			const float brightness = landFader.getInterstate()*fogFader.getInterstate()*(0.1f+0.1f*landscapeBrightness);
 
-			renderProgram->setUniformValue(shaderVars.brightness, brightness, brightness, brightness,
+			renderProgram->setUniformValue(shaderVars.brightness, srgbToLinear(brightness), srgbToLinear(brightness), srgbToLinear(brightness),
 										   landFader.getInterstate());
 			mapTexFog->bind();
 			gl.glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
@@ -1682,7 +1686,7 @@ void main(void)
 		{
 			gl.glBlendFunc(GL_SRC_ALPHA, GL_ONE);
 			const float brightness = lightScapeBrightness*illumFader.getInterstate();
-			renderProgram->setUniformValue(shaderVars.brightness, brightness, brightness, brightness,
+			renderProgram->setUniformValue(shaderVars.brightness, srgbToLinear(brightness), srgbToLinear(brightness), srgbToLinear(brightness),
 										   landFader.getInterstate());
 			mapTexIllum->bind();
 			gl.glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
@@ -2001,14 +2005,14 @@ void main(void)
 	{
 		renderProgram->bind();
 		renderProgram->setUniformValue(shaderVars.bottomCapColor,
-									   landscapeBrightness*bottomCapColor[0],
-									   landscapeBrightness*bottomCapColor[1],
-									   landscapeBrightness*bottomCapColor[2],
+									   srgbToLinear(landscapeBrightness*bottomCapColor[0]),
+									   srgbToLinear(landscapeBrightness*bottomCapColor[1]),
+									   srgbToLinear(landscapeBrightness*bottomCapColor[2]),
 									   bottomCapColor[0] < 0 ? 0 : landFader.getInterstate());
 
 		renderProgram->setUniformValue(shaderVars.brightness,
-									   landscapeBrightness, landscapeBrightness,
-									   landscapeBrightness, landFader.getInterstate());
+									   srgbToLinear(landscapeBrightness), srgbToLinear(landscapeBrightness),
+									   srgbToLinear(landscapeBrightness), landFader.getInterstate());
 		const int mainTexSampler = 0;
 		mapTex->bind(mainTexSampler);
 		renderProgram->setUniformValue(shaderVars.mapTex, mainTexSampler);
@@ -2033,7 +2037,7 @@ void main(void)
 			const float brightness = landFader.getInterstate()*fogFader.getInterstate()*(0.1f+0.1f*landscapeBrightness);
 
 			renderProgram->setUniformValue(shaderVars.bottomCapColor, 0.f, 0.f, 0.f, 0.f);
-			renderProgram->setUniformValue(shaderVars.brightness, brightness, brightness, brightness,
+			renderProgram->setUniformValue(shaderVars.brightness, srgbToLinear(brightness), srgbToLinear(brightness), srgbToLinear(brightness),
 										   landFader.getInterstate());
 			mapTexFog->bind();
 			renderProgram->setUniformValue(shaderVars.mapTexTop, fogTexTop);
@@ -2047,7 +2051,7 @@ void main(void)
 			gl.glBlendFunc(GL_SRC_ALPHA, GL_ONE);
 			const float brightness = lightScapeBrightness*illumFader.getInterstate();
 			renderProgram->setUniformValue(shaderVars.bottomCapColor, 0.f, 0.f, 0.f, 0.f);
-			renderProgram->setUniformValue(shaderVars.brightness, brightness, brightness, brightness,
+			renderProgram->setUniformValue(shaderVars.brightness, srgbToLinear(brightness), srgbToLinear(brightness), srgbToLinear(brightness),
 										   landFader.getInterstate());
 			mapTexIllum->bind();
 			renderProgram->setUniformValue(shaderVars.mapTexTop, illumTexTop);
