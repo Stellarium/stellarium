@@ -52,6 +52,7 @@ protected:
 	Ui_viewDialogForm* ui;
 	//! Initialize the dialog widgets and connect the signals/slots
 	void createDialogContent() override;
+	bool eventFilter(QObject* object, QEvent* event) override;
 private slots:
 	void populateLists();
 	void populateToolTips();

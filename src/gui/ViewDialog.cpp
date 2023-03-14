@@ -134,6 +134,8 @@ void ViewDialog::connectGroupBox(QGroupBox* groupBox, const QString& actionId)
 void ViewDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
+	dialog->installEventFilter(this);
+
 	StelApp *app = &StelApp::getInstance();
 	connect(app, SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	// Set the Sky tab activated by default
@@ -564,6 +566,16 @@ void ViewDialog::createDialogContent()
 		ui->landscapeTextBrowser->document()->setDefaultStyleSheet(style);
 		ui->skyCultureTextBrowser->document()->setDefaultStyleSheet(style);
 	});
+}
+
+bool ViewDialog::eventFilter(QObject* object, QEvent* event)
+{
+	if (object != dialog || event->type() != QEvent::KeyPress)
+		return false;
+	const auto keyEvent = static_cast<QKeyEvent*>(event);
+	if (keyEvent->key() == Qt::Key_Enter || keyEvent->key() == Qt::Key_Return)
+		return true; // Prevent these keys pressing buttons when focus is not on the buttons
+	return false;
 }
 
 void ViewDialog::setDisplayFormatForSpins(bool flagDecimalDegrees)
