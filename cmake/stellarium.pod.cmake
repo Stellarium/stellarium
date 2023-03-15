@@ -94,6 +94,10 @@ latitudes should be prefixed with C<->.
 
 Print a list of landscape names and exit.
 
+=item B<--unsafe>
+
+Allow unsafe script execution.
+
 =item B<--landscape> I<name>
 
 Start Stellarium using landscape I<name>.

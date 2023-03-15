@@ -130,6 +130,7 @@ void CLIProcessor::parseCLIArgsPreConfig(const QStringList& argList)
 		          << "--restore-defaults      : Delete existing config.ini and use defaults\n"
 		          << "--multires-image        : With filename / URL argument, specify a\n"
 			  << "                          multi-resolution image to load\n"
+			  << "--unsafe                : Allow unsafe script execution\n"
 #ifdef Q_OS_WIN
 			  << "--angle-mode (or -a)    : Use ANGLE as OpenGL ES2 rendering engine (autodetect driver)\n"
 			  << "--angle-d3d9 (or -9)    : Force use Direct3D 9 for ANGLE OpenGL ES2 rendering engine\n"
@@ -176,7 +177,7 @@ void CLIProcessor::parseCLIArgsPostConfig(const QStringList& argList, QSettings*
 {	
 	// Over-ride config file options with command line options
 	// We should catch exceptions from argsGetOptionWithArg...
-	int fullScreen, altitude;
+	int fullScreen, altitude, allowUnsafe;
 	float fov;
 	QString landscapeId, homePlanet, longitude, latitude, skyDate, skyTime;
 	QString projectionType, screenshotDir, multiresImage, startupScript, customCSS;
@@ -195,6 +196,7 @@ void CLIProcessor::parseCLIArgsPostConfig(const QStringList& argList, QSettings*
 		latitude = argsGetOptionWithArg(argList, "", "--latitude", "").toString();
 		skyDate = argsGetOptionWithArg(argList, "", "--sky-date", "").toString();
 		skyTime = argsGetOptionWithArg(argList, "", "--sky-time", "").toString();
+		allowUnsafe = argsGetOption(argList, "", "--unsafe");
 		fov = argsGetOptionWithArg(argList, "", "--fov", -1.f).toFloat();
 		projectionType = argsGetOptionWithArg(argList, "", "--projection-type", "").toString();
 		screenshotDir = argsGetOptionWithArg(argList, "", "--screenshot-dir", "").toString();
@@ -213,6 +215,8 @@ void CLIProcessor::parseCLIArgsPostConfig(const QStringList& argList, QSettings*
 		qCritical() << "ERROR while checking command line options: " << e.what();
 		exit(0);
 	}
+
+	qApp->setProperty("allow_unsafe", allowUnsafe);
 
 	// Will be -1 if option is not found, in which case we don't change anything.
 	if (fullScreen==1)
