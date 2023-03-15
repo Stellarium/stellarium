@@ -348,7 +348,7 @@ private:
 	ScriptConsole* scriptConsole;
 #endif
 	AstroCalcDialog* astroCalcDialog;
-    ObsListDialog* obsListDialog;
+	ObsListDialog* obsListDialog;
 
 	bool flagShowFlipButtons;
 	StelButton* flipVert;

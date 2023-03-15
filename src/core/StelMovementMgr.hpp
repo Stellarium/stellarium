@@ -100,6 +100,10 @@ class StelMovementMgr : public StelModule
 		   READ getUserMaxFov
 		   WRITE setUserMaxFov
 		   NOTIFY userMaxFovChanged)
+	Q_PROPERTY(double currentFov
+		   READ getCurrentFov
+		   WRITE setFov
+		   NOTIFY currentFovChanged)
 public:
 	//! Possible mount modes defining the reference frame in which head movements occur.
 	//! MountGalactic and MountSupergalactic is currently only available via scripting API: core.clear("galactic") and core.clear("supergalactic")
@@ -452,6 +456,16 @@ public slots:
 	void setUserMaxFov(double max);
 	double getUserMaxFov() const {return userMaxFov; }
 
+	void setFov(double f)
+	{
+		if (core->getCurrentProjectionType()==StelCore::ProjectionCylinderFill)
+			currentFov=180.0;
+		else
+			currentFov=qBound(minFov, f, maxFov);
+
+		emit currentFovChanged(currentFov);
+	}
+
 signals:
 	//! Emitted when the tracking property changes
 	void flagTrackingChanged(bool b);
@@ -465,6 +479,7 @@ signals:
 	void flagEnableMoveKeysChanged(bool b);
 	void flagEnableZoomKeysChanged(bool b);
 	void userMaxFovChanged(double fov);
+	void currentFovChanged(double fov);
 
 private slots:
 	//! Called when the selected object changes.
@@ -486,13 +501,7 @@ private:
 	StelCore* core;          // The core on which the movement are applied
 	QSettings* conf;
 	class StelObjectMgr* objectMgr;
-	void setFov(double f)
-	{
-		if (core->getCurrentProjectionType()==StelCore::ProjectionCylinderFill)
-			currentFov=180.0;
-		else
-			currentFov=qBound(minFov, f, maxFov);
-	}
+
 	// immediately add deltaFov argument to FOV - does not change private var.
 	void changeFov(double deltaFov);
 
