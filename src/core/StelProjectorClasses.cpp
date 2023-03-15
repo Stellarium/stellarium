@@ -1068,6 +1068,7 @@ QByteArray StelProjector2d::getForwardTransformShader() const
 
 void StelProjector2d::setForwardTransformUniforms(QOpenGLShaderProgram& program) const
 {
+	Q_UNUSED(program)
 	Q_ASSERT(0);
 }
 
@@ -1079,5 +1080,6 @@ QByteArray StelProjector2d::getBackwardTransformShader() const
 
 void StelProjector2d::setBackwardTransformUniforms(QOpenGLShaderProgram& program) const
 {
+	Q_UNUSED(program)
 	Q_ASSERT(0);
 }

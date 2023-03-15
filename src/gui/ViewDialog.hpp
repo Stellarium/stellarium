@@ -52,6 +52,7 @@ protected:
 	Ui_viewDialogForm* ui;
 	//! Initialize the dialog widgets and connect the signals/slots
 	void createDialogContent() override;
+	bool eventFilter(QObject* object, QEvent* event) override;
 private slots:
 	void populateLists();
 	void populateToolTips();
@@ -97,6 +98,8 @@ private slots:
 	void populateOrbitsControls(bool flag);
 	void populateTrailsControls(bool flag);
 	void populateNomenclatureControls(bool flag);
+
+	void setDisplayFormatForSpins(bool flagDecimalDegrees);
 
 private:
 	void connectGroupBox(class QGroupBox* groupBox, const QString& actionId);

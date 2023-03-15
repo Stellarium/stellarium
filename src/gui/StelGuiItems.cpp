@@ -937,9 +937,10 @@ void BottomStelBar::updateText(bool updatePos)
 	QTextStream wos(&str);
 	// TRANSLATORS: Field of view. Please use abbreviation.
 	QString fovstr = QString("%1 ").arg(qc_("FOV", "abbreviation"));
+	QString fovdms = StelUtils::decDegToDmsStr(core->getMovementMgr()->getCurrentFov());
 	if (getFlagFovDms())
 	{
-		wos << fovstr << StelUtils::decDegToDmsStr(core->getMovementMgr()->getCurrentFov());
+		wos << fovstr << fovdms;
 	}
 	else
 	{
@@ -952,7 +953,7 @@ void BottomStelBar::updateText(bool updatePos)
 		if (getFlagShowFov())
 		{
 			fov->setText(str);
-			fov->setToolTip(q_("Field of view"));
+			fov->setToolTip(QString("%1: %2").arg(q_("Field of view"), fovdms));
 			if (qApp->property("text_texture")==true) // CLI option -t given?
 			{
 				fovPixmap->setPixmap(getTextPixmap(str, fov->font()));

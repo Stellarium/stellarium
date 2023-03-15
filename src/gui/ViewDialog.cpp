@@ -46,6 +46,7 @@
 #include "StelActionMgr.hpp"
 #include "StelPropertyMgr.hpp"
 #include "StelHips.hpp"
+#include "StelMovementMgr.hpp"
 
 #include <QDebug>
 #include <QFrame>
@@ -133,7 +134,10 @@ void ViewDialog::connectGroupBox(QGroupBox* groupBox, const QString& actionId)
 void ViewDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
+	dialog->installEventFilter(this);
+
+	StelApp *app = &StelApp::getInstance();
+	connect(app, SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	// Set the Sky tab activated by default
 	ui->stackedWidget->setCurrentIndex(0);
 	ui->stackListWidget->setCurrentRow(0);
@@ -158,6 +162,11 @@ void ViewDialog::createDialogContent()
 	ui->pushButtonSkylightDetails->setFixedSize(bs);
 	ui->tonemappingPushButton->setFixedSize(bs);
 	ui->pushButtonOrbitColors->setFixedSize(bs);	
+
+	ui->currentFovSpinBox->setMinimum(app->getCore()->getMovementMgr()->getMinFov(), true);
+	ui->currentFovSpinBox->setMaximum(360.0, true);
+	ui->currentFovSpinBox->setWrapping(false);
+	setDisplayFormatForSpins(app->getFlagShowDecimalDegrees());
 
 	// TODOs after properties merge:
 	// Jupiter's GRS should become property, and recheck the other "from trunk" entries.
@@ -342,6 +351,7 @@ void ViewDialog::createDialogContent()
 	connectBoolProperty(ui->landscapePolylineCheckBox, "LandscapeMgr.flagPolyLineDisplayedOnly");
 	connectIntProperty(ui->landscapePolylineThicknessSpinBox, "LandscapeMgr.polyLineThickness");
 	connect(ui->landscapesListWidget, &QListWidget::currentItemChanged, this, [=](QListWidgetItem *newItem, QListWidgetItem *oldItem){
+		Q_UNUSED(oldItem)
 		GETSTELMODULE(LandscapeMgr)->setCurrentLandscapeName(newItem->data(Qt::UserRole).toString());
 	});
 	connect(lmgr, SIGNAL(currentLandscapeChanged(QString,QString)), this, SLOT(landscapeChanged(QString,QString)));
@@ -499,8 +509,10 @@ void ViewDialog::createDialogContent()
 	// Projection
 	connect(ui->projectionListWidget, SIGNAL(currentTextChanged(const QString&)), this, SLOT(changeProjection(const QString&)));
 	connect(StelApp::getInstance().getCore(), SIGNAL(currentProjectionTypeChanged(StelCore::ProjectionType)),this,SLOT(projectionChanged()));
+	connect(app, SIGNAL(flagShowDecimalDegreesChanged(bool)), this, SLOT(setDisplayFormatForSpins(bool)));
 	connectDoubleProperty(ui->viewportOffsetSpinBox, "StelMovementMgr.viewportVerticalOffsetTarget");
 	connectDoubleProperty(ui->userMaxFovSpinBox, "StelMovementMgr.userMaxFov");
+	connectDoubleProperty(ui->currentFovSpinBox, "StelMovementMgr.currentFov");
 
 	// Sky Culture
 	connect(ui->useAsDefaultSkyCultureCheckBox, SIGNAL(clicked()), this, SLOT(setCurrentCultureAsDefault()));
@@ -554,6 +566,29 @@ void ViewDialog::createDialogContent()
 		ui->landscapeTextBrowser->document()->setDefaultStyleSheet(style);
 		ui->skyCultureTextBrowser->document()->setDefaultStyleSheet(style);
 	});
+}
+
+bool ViewDialog::eventFilter(QObject* object, QEvent* event)
+{
+	if (object != dialog || event->type() != QEvent::KeyPress)
+		return false;
+	const auto keyEvent = static_cast<QKeyEvent*>(event);
+	if (keyEvent->key() == Qt::Key_Enter || keyEvent->key() == Qt::Key_Return)
+		return true; // Prevent these keys pressing buttons when focus is not on the buttons
+	return false;
+}
+
+void ViewDialog::setDisplayFormatForSpins(bool flagDecimalDegrees)
+{
+	int places = 0;
+	AngleSpinBox::DisplayFormat format = AngleSpinBox::DMSSymbols;
+	if (flagDecimalDegrees)
+	{
+		places = 5;
+		format = AngleSpinBox::DecimalDeg;
+	}
+	ui->currentFovSpinBox->setDecimals(places);
+	ui->currentFovSpinBox->setDisplayFormat(format);
 }
 
 void ViewDialog::populateOrbitsControls(bool flag)
@@ -1040,6 +1075,7 @@ void ViewDialog::projectionChanged()
 	QListWidget* l = ui->projectionListWidget;
 	l->setCurrentItem(l->findItems(core->getCurrentProjectionNameI18n(), Qt::MatchExactly).at(0),QItemSelectionModel::SelectCurrent);
 	ui->projectionTextBrowser->setHtml(core->getProjection(StelCore::FrameJ2000)->getHtmlSummary());
+	ui->currentFovSpinBox->setMaximum(core->getProjection(StelCore::FrameJ2000)->getMaxFov(), true);
 }
 
 void ViewDialog::landscapeChanged(QString id, QString name)
