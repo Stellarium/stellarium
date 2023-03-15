@@ -239,6 +239,11 @@ QString StelSkyCultureMgr::getCurrentSkyCultureHtmlLicense() const
 			color = "#33ff33"; // "green" area; free license
 			description = q_("This sky culture is provided under GNU General Public License. You can use it for commercial and non-commercial purposes, freely adapt it and share adapted work.");
 		}
+		else if (license.contains("MIT", Qt::CaseSensitive))
+		{
+			color = "#33ff33"; // "green" area; free license
+			description = q_("This sky culture is provided under MIT License. You can use it for commercial and non-commercial purposes, freely adapt it and share adapted work.");
+		}
 		else if (license.startsWith("CC", Qt::CaseSensitive) || license.contains("Creative Commons", Qt::CaseInsensitive))
 		{
 			description = q_("This sky culture is provided under Creative Commons License.");
