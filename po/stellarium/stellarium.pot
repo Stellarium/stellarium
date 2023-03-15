@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2023-03-15 18:46+0700\n"
+"POT-Creation-Date: 2023-03-15 19:08+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -4025,17 +4025,24 @@ msgid ""
 "adapted work."
 msgstr ""
 
-#: src/core/StelSkyCultureMgr.cpp:244
+#: src/core/StelSkyCultureMgr.cpp:245
+msgid ""
+"This sky culture is provided under MIT License. You can use it for "
+"commercial and non-commercial purposes, freely adapt it and share adapted "
+"work."
+msgstr ""
+
+#: src/core/StelSkyCultureMgr.cpp:249
 msgid "This sky culture is provided under Creative Commons License."
 msgstr ""
 
-#: src/core/StelSkyCultureMgr.cpp:252
+#: src/core/StelSkyCultureMgr.cpp:257
 msgid ""
 "You may distribute, remix, adapt, and build upon this sky culture, even "
 "commercially, as long as you credit authors for the original creation."
 msgstr ""
 
-#: src/core/StelSkyCultureMgr.cpp:253
+#: src/core/StelSkyCultureMgr.cpp:258
 msgid ""
 "You may remix, adapt, and build upon this sky culture even for commercial "
 "purposes, as long as you credit authors and license the new creations under "
@@ -4043,49 +4050,49 @@ msgid ""
 "open source software licenses."
 msgstr ""
 
-#: src/core/StelSkyCultureMgr.cpp:254
+#: src/core/StelSkyCultureMgr.cpp:259
 msgid ""
 "You may reuse this sky culture for any purpose, including commercially; "
 "however, adapted work cannot be shared with others, and credit must be "
 "provided by you."
 msgstr ""
 
-#: src/core/StelSkyCultureMgr.cpp:255
+#: src/core/StelSkyCultureMgr.cpp:260
 msgid ""
 "You may remix, adapt, and build upon this sky culture non-commercially, and "
 "although your new works must also acknowledge authors and be non-commercial, "
 "you don’t have to license your derivative works on the same terms."
 msgstr ""
 
-#: src/core/StelSkyCultureMgr.cpp:256
+#: src/core/StelSkyCultureMgr.cpp:261
 msgid ""
 "You may remix, adapt, and build upon this sky culture non-commercially, as "
 "long as you credit authors and license your new creations under the "
 "identical terms."
 msgstr ""
 
-#: src/core/StelSkyCultureMgr.cpp:257
+#: src/core/StelSkyCultureMgr.cpp:262
 msgid ""
 "You may use this sky culture and share them with others as long as you "
 "credit authors, but you can’t change it in any way or use it commercially."
 msgstr ""
 
-#: src/core/StelSkyCultureMgr.cpp:269
+#: src/core/StelSkyCultureMgr.cpp:274
 msgid "This sky culture is distributed as public domain."
 msgstr ""
 
 #. TRANSLATORS: A phrase like "Please credit: XY Museum". The creditee is in a skyculture's info.ini.
-#: src/core/StelSkyCultureMgr.cpp:275
+#: src/core/StelSkyCultureMgr.cpp:280
 msgid "Please credit:"
 msgstr ""
 
-#: src/core/StelSkyCultureMgr.cpp:279
+#: src/core/StelSkyCultureMgr.cpp:284
 msgid ""
 "Illustrations are provided under Free Art License that grants the right to "
 "freely copy, distribute, and transform."
 msgstr ""
 
-#: src/core/StelSkyCultureMgr.cpp:284 src/gui/ConfigurationDialog.cpp:1317
+#: src/core/StelSkyCultureMgr.cpp:289 src/gui/ConfigurationDialog.cpp:1317
 #: src/scripting/StelScriptMgr.cpp:649
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:100
 #: plugins/Oculars/src/gui/OcularDialog.cpp:626
@@ -4110,31 +4117,31 @@ msgstr ""
 msgid "License"
 msgstr ""
 
-#: src/core/StelSkyCultureMgr.cpp:292
+#: src/core/StelSkyCultureMgr.cpp:297
 msgid ""
 "The region indicates the geographical area of origin of a given sky culture."
 msgstr ""
 
-#: src/core/StelSkyCultureMgr.cpp:298
+#: src/core/StelSkyCultureMgr.cpp:303
 msgid "World"
 msgstr ""
 
-#: src/core/StelSkyCultureMgr.cpp:299
+#: src/core/StelSkyCultureMgr.cpp:304
 msgid ""
 "All 'modern' sky cultures are based on the IAU-approved 88 constellations "
 "with standardized boundaries and are used worldwide. The origins of these "
 "constellations are pan-European."
 msgstr ""
 
-#: src/core/StelSkyCultureMgr.cpp:303 src/ui_locationDialogGui.h:505
+#: src/core/StelSkyCultureMgr.cpp:308 src/ui_locationDialogGui.h:505
 msgid "Region:"
 msgstr ""
 
-#: src/core/StelSkyCultureMgr.cpp:365
+#: src/core/StelSkyCultureMgr.cpp:370
 msgid "No description"
 msgstr ""
 
-#: src/core/StelSkyCultureMgr.cpp:400
+#: src/core/StelSkyCultureMgr.cpp:405
 msgid "References / Further Reading"
 msgstr ""
 
