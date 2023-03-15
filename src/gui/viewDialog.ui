@@ -455,9 +455,6 @@
                </item>
                <item>
                 <widget class="QPushButton" name="pushButtonAtmosphereDetails">
-                 <property name="focusPolicy">
-                  <enum>Qt::NoFocus</enum>
-                 </property>
                  <property name="toolTip">
                   <string>Atmosphere settings: visual model, pressure, temperature, extinction coefficient, etc.</string>
                  </property>
