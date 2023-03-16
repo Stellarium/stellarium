@@ -727,10 +727,10 @@
             <item>
              <widget class="QCheckBox" name="ephemerisIgnoreDateTestCheckBox">
               <property name="toolTip">
-               <string>Allow results outside recommended range of orbital elements</string>
+               <string>Allow results outside recommended time range of orbital elements</string>
               </property>
               <property name="text">
-               <string comment="Ignore date test">I.D.T.</string>
+               <string comment="Ignore date test">boundless</string>
               </property>
              </widget>
             </item>
