@@ -142,12 +142,13 @@ Calendars::Calendars():
 	flagShowTibetan(false)
 {
 	setObjectName("Calendars");
-	font.setPixelSize(15);
+	font.setPixelSize(StelApp::getInstance().getScreenFontSize());
 
 	configDialog = new CalendarsDialog();
 	conf = StelApp::getInstance().getSettings();
 
 	infoPanel=new CalendarsInfoPanel(this, static_cast<StelGui*>(StelApp::getInstance().getGui())->getSkyGui());
+	connect(&StelApp::getInstance(), &StelApp::screenFontSizeChanged, this, [=](int size){font.setPixelSize(size); infoPanel->setFont(font); infoPanel->updatePosition(true);});
 }
 
 /*************************************************************************
