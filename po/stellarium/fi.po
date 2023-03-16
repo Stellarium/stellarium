@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2023-03-15 19:08+0700\n"
+"POT-Creation-Date: 2023-03-16 09:28+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Ilpo Kantonen, 2023\n"
 "Language-Team: Finnish (https://www.transifex.com/stellarium/teams/80998/fi/)\n"
@@ -14721,14 +14721,14 @@ msgid "Extra options for ephemeris visualization"
 msgstr "Lisävaihtoehdot efemeridin visualisointiin"
 
 #: src/ui_astroCalcDialog.h:2261
-msgid "Allow results outside recommended range of orbital elements"
+msgid "Allow results outside recommended time range of orbital elements"
 msgstr ""
-"Salli tulokset suositellun kiertoradan elementtien alueen ulkopuolella"
+"Salli tulokset kiertoradan elementtien suositellun aika-alueen ulkopuolella"
 
 #: src/ui_astroCalcDialog.h:2263
 msgctxt "Ignore date test"
-msgid "I.D.T."
-msgstr "I.D.T."
+msgid "boundless"
+msgstr "rajaton"
 
 #: src/ui_astroCalcDialog.h:2269
 msgid "Color of ephemeris marker for first celestial body"
