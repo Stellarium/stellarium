@@ -411,8 +411,8 @@ int main(int argc, char **argv)
 	if (fullscreen)
 	{
 		// The "+1" below is to work around Linux/Gnome problem with mouse focus.
-		mainWin.move((screenGeom.x()+1)/pixelRatio,
-					 (screenGeom.y()+1)/pixelRatio);
+		mainWin.move(screenGeom.x()+1,
+					 screenGeom.y()+1);
 		// The fullscreen window appears on screen where is the majority of
 		// the normal window. Therefore we crop the normal window to the
 		// screen area to ensure that the majority is not on another screen.
@@ -423,8 +423,8 @@ int main(int argc, char **argv)
 	{
 		const int x = confSettings->value("video/screen_x", 0).toInt();
 		const int y = confSettings->value("video/screen_y", 0).toInt();
-		mainWin.move((x + screenGeom.x())/pixelRatio,
-					 (y + screenGeom.y())/pixelRatio);
+		mainWin.move(screenGeom.x() + x/pixelRatio,
+					 screenGeom.y() + y/pixelRatio);
 	}
 
 	mainWin.show();
