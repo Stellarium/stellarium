@@ -96,38 +96,38 @@ msgstr "Sädeosoittimet"
 
 #: src/core/modules/Constellation.hpp:70
 msgid "constellation"
-msgstr "tähdistö"
+msgstr "tähtikuvio"
 
 #: src/core/modules/ConstellationMgr.cpp:132
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:319
 msgid "Constellation lines"
-msgstr "Tähdistöviivat"
+msgstr "Tähtikuvioviivat"
 
 #: src/core/modules/ConstellationMgr.cpp:133
 msgid "Constellation art"
-msgstr "Tähdistökuvat"
+msgstr "Tähtikuvioiden kuvat"
 
 #: src/core/modules/ConstellationMgr.cpp:134
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:324
 msgid "Constellation labels"
-msgstr "Tähdistöjen nimet"
+msgstr "Tähtikuvioiden nimet"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/ui_configurationDialog.h:1932
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:337
 msgid "Constellation boundaries"
-msgstr "Tähdistöjen rajaviivat"
+msgstr "Tähtikuvioiden rajaviivat"
 
 #: src/core/modules/ConstellationMgr.cpp:136 src/ui_configurationDialog.h:2075
 msgid "Select single constellation"
-msgstr "Valitse yksittäinen tähdistö"
+msgstr "Valitse yksittäinen tähtikuvio"
 
 #: src/core/modules/ConstellationMgr.cpp:137
 msgid "Remove selection of constellations"
-msgstr "Poista tähdistöjen valinnat"
+msgstr "Poista tähtikuvioiden valinnat"
 
 #: src/core/modules/ConstellationMgr.cpp:138
 msgid "Select all constellations"
-msgstr "Valitse kaikki tähdistöt"
+msgstr "Valitse kaikki tähtikuviot"
 
 #: src/core/modules/ConstellationMgr.cpp:140
 msgid "Reload the sky culture"
@@ -348,7 +348,7 @@ msgstr "Asteikot ja viivat"
 #: src/core/modules/GridLinesMgr.cpp:2036
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:371
 msgid "Equatorial grid"
-msgstr "Ekvatoriaaliasteikko"
+msgstr "Ekvatoriaalinen asteikko"
 
 #: src/core/modules/GridLinesMgr.cpp:2037 src/ui_viewDialog.h:3910
 msgid "Fixed Equatorial grid"
@@ -357,7 +357,7 @@ msgstr "Kiinteä päiväntasaajan ruudukko"
 #: src/core/modules/GridLinesMgr.cpp:2038 src/ui_viewDialog.h:3962
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:366
 msgid "Azimuthal grid"
-msgstr "Atsimutaaliasteikko"
+msgstr "Atsimutaalinen asteikko"
 
 #: src/core/modules/GridLinesMgr.cpp:2039
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:386
@@ -402,7 +402,7 @@ msgstr "Horisontti"
 #: src/core/modules/GridLinesMgr.cpp:2048
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:376
 msgid "Equatorial J2000 grid"
-msgstr "Ekvatoriaaliasteikko J2000"
+msgstr "Ekvatoriaalinen asteikko J2000"
 
 #: src/core/modules/GridLinesMgr.cpp:2049
 msgid "Ecliptic J2000 grid"
@@ -784,7 +784,7 @@ msgstr "Tertiääriset interkardiaaliset pisteet"
 
 #: src/core/modules/LandscapeMgr.cpp:871
 msgid "Ground"
-msgstr "Maanpinta"
+msgstr "Maan pinta"
 
 #: src/core/modules/LandscapeMgr.cpp:872
 msgid "Landscape illumination"
@@ -3031,7 +3031,7 @@ msgstr "Alustetaan video..."
 
 #: src/core/StelApp.cpp:569
 msgid "Initializing constellations..."
-msgstr "Alustetaan tähdistöjä..."
+msgstr "Alustetaan tähtikuvioita..."
 
 #: src/core/StelApp.cpp:575
 msgid "Initializing asterisms..."
@@ -4070,7 +4070,7 @@ msgstr "Parallaksikulma"
 
 #: src/core/StelObject.cpp:925 src/gui/AstroCalcDialog.cpp:8491
 msgid "IAU Constellation"
-msgstr "IAU:n tähdistö"
+msgstr "IAU:n tähtikuvio"
 
 #. TRANSLATORS: Azimuth/Altitude
 #: src/core/StelObject.cpp:1236
@@ -4395,7 +4395,7 @@ msgstr "Sekalaista"
 
 #: src/core/StelMovementMgr.cpp:194
 msgid "Switch between equatorial and azimuthal mount"
-msgstr "Vaihda ekvatoriaali- ja atsimutaalijalustan välillä"
+msgstr "Vaihda ekvatoriaalisen ja atsimutaalisen jalustan välillä"
 
 #: src/core/StelMovementMgr.cpp:195
 msgid "Center on selected object"
@@ -5609,7 +5609,7 @@ msgstr "Tähtitieteellinen laskin -ikkuna"
 
 #: src/gui/StelGui.cpp:247
 msgid "Observing list"
-msgstr "Havaintolista"
+msgstr "Havaintoluettelo"
 
 #: src/gui/StelGui.cpp:248
 msgid "Copy selected object information to clipboard"
@@ -8046,7 +8046,7 @@ msgstr "Kohteen nimi"
 
 #: src/gui/ObsListDialog.cpp:264 src/ui_configurationDialog.h:1878
 msgid "Constellation"
-msgstr "Tähdistö"
+msgstr "Tähtikuvio"
 
 #: src/gui/ObsListDialog.cpp:267 src/ui_viewDialog.h:3538
 #: src/ui_obsListDialog.h:418 src/ui_obsListCreateEditDialog.h:333
@@ -8295,7 +8295,7 @@ msgstr "Kuut"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:56
 msgid "Constellations"
-msgstr "Tähdistöt"
+msgstr "Tähtikuviot"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:58
@@ -9293,7 +9293,7 @@ msgstr "Aurinkokuntanäytönsäästäjä"
 #. TRANSLATORS: Name of script
 #: src/translations.h:501
 msgid "Constellations Tour"
-msgstr "Tähdistömatka"
+msgstr "Tähtikuviomatka"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:503
@@ -9498,8 +9498,9 @@ msgid ""
 "constellations which lie along the line which the Sun traces across the "
 "celestial sphere over the course of a year."
 msgstr ""
-"Komentojono näyttää eläinradan tähdistöt. Eläinrata tarkoittaa tähdistöjä, "
-"joiden poikki Aurinko kulkee taivaanpallolla vuotuisen kiertonsa aikana."
+"Komentojono näyttää horoskoopin tähtikuviot. Eläinrata tarkoittaa "
+"tähtikuvioita, joiden poikki Aurinko kulkee taivaanpallolla vuotuisen "
+"kiertonsa aikana."
 
 #: src/translations.h:580
 msgid ""
@@ -12118,11 +12119,11 @@ msgstr "Kartoitukset"
 
 #: src/ui_viewDialog.h:3546
 msgid "Solar altitude for Twilight Finder:"
-msgstr "Auringon korkeus hämäsän etsijälle:"
+msgstr "Auringon korkeus hämärän etsijälle:"
 
 #: src/ui_viewDialog.h:3547
 msgid "Atmosphere visualization"
-msgstr "ilmakehän visualisointi"
+msgstr "Ilmakehän visualisointi"
 
 #: src/ui_viewDialog.h:3549
 msgid ""
@@ -13340,7 +13341,7 @@ msgstr "Lisää/poista maisemia..."
 
 #: src/ui_viewDialog.h:4402
 msgid "Show ground"
-msgstr "Näytä maanpinta"
+msgstr "Näytä maan pinta"
 
 #: src/ui_viewDialog.h:4403
 msgid "Show landscape labels"
@@ -13399,7 +13400,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:4430
 msgid "from landscape, if given"
-msgstr "maiseman perusteella, jos annettu"
+msgstr "Maiseman perusteella, jos annettu"
 
 #: src/ui_viewDialog.h:4431
 msgid "Use this landscape as default"
@@ -13423,7 +13424,7 @@ msgstr "Käytä planeettojen omakielisiä nimiä"
 
 #: src/ui_viewDialog.h:4442
 msgid "Color of constellation names"
-msgstr "Tähdistönimien väri"
+msgstr "Tähtikuvioiden väri"
 
 #: src/ui_viewDialog.h:4444
 msgid "Show labels"
@@ -13443,11 +13444,11 @@ msgstr "Näytä asterismiviivat"
 
 #: src/ui_viewDialog.h:4457
 msgid "Color of constellation boundaries"
-msgstr "Tähdistörajojen väri"
+msgstr "Tähtikuvioiden rajojen väri"
 
 #: src/ui_viewDialog.h:4460
 msgid "Show boundaries of constellations"
-msgstr "Näytä tähdistöjen rajat"
+msgstr "Näytä tähtikuvioiden rajat"
 
 #: src/ui_viewDialog.h:4462
 msgid "Show boundaries"
@@ -13467,11 +13468,11 @@ msgstr "Tähdistökuvien kirkkaus"
 
 #: src/ui_viewDialog.h:4475
 msgid "Color of constellation lines"
-msgstr "Tähdistöviivojen väri"
+msgstr "Tähtikuvioviivojen väri"
 
 #: src/ui_viewDialog.h:4477
 msgid "Show constellation lines"
-msgstr "Näytä tähdistöviivat"
+msgstr "Näytä tähtikuvioviivat"
 
 #: src/ui_viewDialog.h:4482
 msgid "Color of asterism names"
@@ -13483,7 +13484,7 @@ msgstr "Näytä asterisminimet"
 
 #: src/ui_viewDialog.h:4485
 msgid "Constellations font size"
-msgstr "Kirjasinkoko tähdistöille"
+msgstr "Kirjasinkoko tähtikuvioille"
 
 #: src/ui_viewDialog.h:4486
 msgid "Asterisms font size"
@@ -13785,7 +13786,7 @@ msgstr "Lisäkoordinaatit (laajennuksista)"
 #: src/ui_configurationDialog.h:1876
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:312
 msgid "3-letter IAU constellation abbreviation"
-msgstr "IAU:n kolmikirjaiminen tähdistölyhenne"
+msgstr "IAU:n kolmikirjaiminen tähtikuviolyhenne"
 
 #: src/ui_configurationDialog.h:1880
 msgid "Angular or physical size"
@@ -14149,7 +14150,7 @@ msgstr "Ditterointi"
 
 #: src/ui_configurationDialog.h:2070 src/ui_configurationDialog.h:2073
 msgid "Hide other constellations when you click one"
-msgstr "Piilota muut tähdistöt napsautettaessa yhtä"
+msgstr "Piilota muut tähtikuviot napsautettaessa yhtä"
 
 #: src/ui_configurationDialog.h:2077
 msgid "Automatic change of landscape when planet is changed"
@@ -14272,7 +14273,7 @@ msgstr "sekuntia"
 
 #: src/ui_configurationDialog.h:2131
 msgid "Framerate intent:"
-msgstr "Kehysten tarkoitus:"
+msgstr "Ruudunpäivitysnopeus:"
 
 #: src/ui_configurationDialog.h:2132
 msgid "min:"
@@ -15139,7 +15140,7 @@ msgstr "Vuodesta"
 
 #: src/ui_astroCalcDialog.h:2462
 msgid "to the next"
-msgstr "seuraavaan"
+msgstr "vuosia"
 
 #: src/ui_astroCalcExtraEphemerisDialog.h:195
 msgid "Extra options"
@@ -23395,7 +23396,7 @@ msgid ""
 "star's position in the constellation Ursa Major."
 msgstr ""
 "Intercrus on latinaa ja tarkoittaa <em>jalkojen välissä</em>, ja viittaa "
-"tähden sijaintiin Ison karhun tähdistössä."
+"tähden sijaintiin Ison karhun tähtikuviossa."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:359
 msgid "Arkas was the son of Callisto (Ursa Major) in Greek mythology."
@@ -23534,9 +23535,9 @@ msgid ""
 "popular symbol of liberty."
 msgstr ""
 "Libertas on latinaa ja tarkoittaa <em>vapautta</em>. Vapaus viittaa "
-"sosiaaliseen ja poliittiseen vapauteen, ja nimi muistuttaa, etää maailmassa "
-"on yhä tänäkin päivänä ihmisiä joiden vapaus on riistetty. Kotkan tähdistön "
-"esittämä kotka on tunnetu vapauden vertauskuva."
+"sosiaaliseen ja poliittiseen vapauteen, ja nimi muistuttaa, että maailmassa "
+"on yhä tänäkin päivänä ihmisiä joiden vapaus on riistetty. Kotkan "
+"tähtikuvion esittämä kotka on tunnettu vapauden vertauskuva."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:375
 msgid ""
@@ -23546,7 +23547,7 @@ msgid ""
 msgstr ""
 "Fortitudo on latinaa ja tarkoittaa <em>lujuutta</em>. Mielenlujuus "
 "tarkoittaa henkistä vahvuutta vaikeuksien edessä, joka ilmentyy Kotkan "
-"tähdistön esittämässä kotkassa."
+"tähtikuvion esittämässä kotkassa."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:377
 msgid ""
@@ -24167,7 +24168,7 @@ msgid ""
 "happens to be in the constellation of Camelopardis (the giraffe)."
 msgstr ""
 "Mago on kirahveistaan tunnettu kansallispuisto Etiopiassa. Tähti sattuu "
-"olemaan myös Camelopardisin (kirahvi) tähdistössä."
+"olemaan myös Camelopardisin (kirahvi) tähtikuviossa."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:454
 msgid ""
@@ -24194,7 +24195,7 @@ msgid ""
 msgstr ""
 "Lerna oli itäisessä Peloponnesoksessa sijaitsevan järven nimi, jossa asui "
 "Lernaean Hydra, kuolematon myyttinen yhdeksänpäinen peto. Tähti on "
-"tähdistössä"
+"Vesikäärmeen tähtikuviossa."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:458
 msgid ""
@@ -24204,7 +24205,8 @@ msgid ""
 msgstr ""
 "Iolaus oli kreikkalaisen mytologian Herakleen veljenpoika, joka liikkui "
 "Lerna-järven ympäri auttamaan Heraklesta tuhoamaan Lernaean Hydran. Samoin "
-"tämä Hydran tähdistössä oleva eksoplaneetta liikkuu emotähtensä ympäri."
+"tämä Vesikäärmeen tähtikuviossa oleva eksoplaneetta liikkuu emotähtensä "
+"ympäri."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:459
 msgid ""
@@ -24947,7 +24949,7 @@ msgid ""
 msgstr ""
 "Dombay on Pohjois-Kaukasuksen vuoristossa sijaitseva lomakeskusalue, jota "
 "ympäröivät vuoristometsät ja rikkaat villieläimet, mukaan lukien karhut "
-"(koska tämä tähti sijaitsee Ursa Majorin, suuren karhun tähdistössä)."
+"(koska tämä tähti sijaitsee Ison Karhun tähtikuviossa)."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:552
 msgid ""
@@ -26889,7 +26891,7 @@ msgid ""
 msgstr ""
 "Meteoriparven radiantti on se taivaan piste, josta meteorit näyttävät "
 "tulevan. Esimerkiksi perseidien meteorit näyttävät tulevan tietystä "
-"Perseuksen tähdistössä sijaitsevasta pisteestä."
+"Perseuksen tähtikuviossa sijaitsevasta pisteestä."
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:256
 msgid ""
@@ -27268,7 +27270,7 @@ msgstr "Näytä laajennuksen näppäin työkalupalkissa"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:314
 msgid "Show IAU constellation code"
-msgstr "Näytä IAU:n tähdistökoodi"
+msgstr "Näytä IAU:n tähtikuviokoodi"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:315
 msgid "Show crossed lines under mouse cursor"
@@ -27366,7 +27368,7 @@ msgstr "Ladataan maanpntaa..."
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:500
 msgid "Transforming ground..."
-msgstr "Muunnetaan maanpintaa..."
+msgstr "Muunnetaan maan pintaa..."
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:511
 msgid "Finalizing load..."

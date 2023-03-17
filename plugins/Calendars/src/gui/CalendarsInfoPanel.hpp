@@ -39,7 +39,8 @@ public:
 public slots:
 	//! Update the position of the widget within the parent.
 	//! Tied to the parent's geometryChanged() signal.
-	void updatePosition();
+	//! @arg resetPos true to reset position into the lower right corner
+	void updatePosition(bool resetPos=false);
 
 private slots:
 	//! Sets the color scheme (day/night mode)
