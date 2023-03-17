@@ -183,8 +183,13 @@ present there, it will be used to define object visibility (instead of
 the opacity of the landscape photo textures) and, if
 \var{horizon\_line\_color} is defined, will be plotted.
 
-There are two little caveats:
+There are a few little caveats:
 \begin{itemize}
+\item If you create a polygonal line with vertex azimuths 0, 90, 180, 270 (exactly), 
+the horizon may not show up at all. Add a tiny nonzero value to the global rotation, like 
+\begin{configfile}
+polygonal_angle_rotatez = 0.0000001
+\end{configfile}
 \item Sometimes, there may appear vertical lines
 from some corners towards the zenith or the mathematical horizon,
 e.g.\ if there is a vertex including azimuth 0 or 180. If this
