@@ -10,17 +10,17 @@
 # alex <alex.a.nder.duy.tschaever@gmail.com>, 2022
 # cardinot <mcardinot@gmail.com>, 2022
 # bb4713398ff25b15ca398fdfd7cd6958_563a200 <e3e20db5fb3e1853af1e851959210c55_710271>, 2022
-# Alex Rijckaert, 2022
 # Harry Mensch, 2022
+# Alex Rijckaert, 2023
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2022-11-14 22:49+0700\n"
+"POT-Creation-Date: 2022-12-18 15:53+0700\n"
 "PO-Revision-Date: 2022-10-05 17:12+0000\n"
-"Last-Translator: Harry Mensch, 2022\n"
+"Last-Translator: Alex Rijckaert, 2023\n"
 "Language-Team: Dutch (https://www.transifex.com/stellarium/teams/80998/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -445,6 +445,7 @@ msgstr "Venus(?)"
 
 #. type: Content of: <h2>
 #: ../../skycultures/anutan/description.en.utf8:37
+#: ../../skycultures/greek_dante/description.en.utf8:9
 #: ../../skycultures/greek_leidenAratea/description.en.utf8:275
 #: ../../skycultures/indian/description.en.utf8:35
 #: ../../skycultures/lokono/description.en.utf8:381
@@ -483,6 +484,7 @@ msgstr ""
 #: ../../skycultures/babylonian_seleucid/description.en.utf8:473
 #: ../../skycultures/chinese_medieval/description.en.utf8:49
 #: ../../skycultures/egyptian/description.en.utf8:17
+#: ../../skycultures/greek_dante/description.en.utf8:15
 #: ../../skycultures/greek_farnese/description.en.utf8:297
 #: ../../skycultures/greek_leidenAratea/description.en.utf8:291
 #: ../../skycultures/korean/description.en.utf8:12
@@ -493,6 +495,7 @@ msgstr ""
 #: ../../skycultures/sami/description.en.utf8:63
 #: ../../skycultures/samoan/description.en.utf8:119
 #: ../../skycultures/sardinian/description.en.utf8:11
+#: ../../skycultures/seri/description.en.utf8:174
 #: ../../skycultures/tongan/description.en.utf8:85
 #: ../../skycultures/tupi/description.en.utf8:23
 msgid "Author"
@@ -817,6 +820,7 @@ msgstr ""
 #: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:149
 #: ../../skycultures/arabic_lunar_mansions/description.en.utf8:75
 #: ../../skycultures/chinese/description.en.utf8:2960
+#: ../../skycultures/greek_dante/description.en.utf8:18
 #: ../../skycultures/sami/description.en.utf8:57
 msgid "Notes"
 msgstr "Notities"
@@ -1126,6 +1130,7 @@ msgstr ""
 #: ../../skycultures/modern_st/description.en.utf8:4
 #: ../../skycultures/modern_iau/description.en.utf8:34
 #: ../../skycultures/mongolian/description.en.utf8:15
+#: ../../skycultures/seri/description.en.utf8:35
 #: ../../skycultures/tupi/description.en.utf8:4
 msgid "Constellations"
 msgstr "Sterrenbeelden"
@@ -1216,7 +1221,7 @@ msgstr "De twee sterren: β UMi en γ UMi"
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:43
 msgid "Al-Nayem"
-msgstr ""
+msgstr "Al-Nayem"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:43
@@ -1343,7 +1348,7 @@ msgstr "Al-Thurayya"
 #: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:53
 msgid ""
 "Al-Thurayya is a proper name of the Pleiades (first mansion of the Moon)."
-msgstr ""
+msgstr "Al-Thurayya is een eigennaam van de Pleiaden (eerste maanlandschap)."
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:54
@@ -2184,6 +2189,8 @@ msgid ""
 "Name of the star: β Ori, this name is infered from the name of \"Northern "
 "Claw of al-Jawza\" for α Ori."
 msgstr ""
+"Naam van de ster: β Ori, deze naam is afgeleid van de naam \"Noordelijke "
+"Klauw van al-Jawza\" voor α Ori."
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:133
@@ -2242,7 +2249,7 @@ msgstr ""
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:137
 msgid "Aba Alsihil"
-msgstr ""
+msgstr "Aba Alsihil"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:137
@@ -2259,12 +2266,12 @@ msgstr "Al-Miss.hil"
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:139
 msgid "(S here is pronounced as in same, not as in share)"
-msgstr ""
+msgstr "(S wordt hier uitgesproken als in same, niet als in share)"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:139
 msgid "As-S.hali"
-msgstr ""
+msgstr "As-S.hali"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:140
@@ -3298,9 +3305,10 @@ msgstr ""
 "schorpioen, in deze codex de iconen tonen figuren van dieren hangend aan het"
 " lichaam van de Hemelse Draak."
 
-#. type: Content of: <img><p><p><p><p><h2>
+#. type: Content of: <h2>
 #: ../../skycultures/aztec/description.en.utf8:29
 #: ../../skycultures/mongolian/description.en.utf8:237
+#: ../../skycultures/seri/description.en.utf8:156
 msgid "Conclusion"
 msgstr "Conclusie"
 
@@ -3470,10 +3478,11 @@ msgstr ""
 "<a "
 "href=\"http://sepiensa.org.mx/contenidos/fd_depo/nahuatl/tlach_1.html\">Tlachtli</a>"
 
-#. type: Content of: <h3>
+#. type: Content of: <h2>
 #: ../../skycultures/aztec/description.en.utf8:51
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:525
 #: ../../skycultures/babylonian_seleucid/description.en.utf8:465
+#: ../../skycultures/seri/description.en.utf8:165
 msgid "Thanks to"
 msgstr "Met dankzegging aan"
 
@@ -4810,6 +4819,7 @@ msgstr ""
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:522
 #: ../../skycultures/egyptian_dendera/description.en.utf8:222
 #: ../../skycultures/greek_almagest/description.en.utf8:489
+#: ../../skycultures/greek_dante/description.en.utf8:11
 #: ../../skycultures/greek_farnese/description.en.utf8:294
 #: ../../skycultures/greek_leidenAratea/description.en.utf8:288
 msgid "Fair Use"
@@ -4900,6 +4910,7 @@ msgstr ""
 #. type: Content of: <h5>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:541
 #: ../../skycultures/egyptian_dendera/description.en.utf8:228
+#: ../../skycultures/greek_dante/description.en.utf8:20
 #: ../../skycultures/greek_farnese/description.en.utf8:300
 #: ../../skycultures/greek_leidenAratea/description.en.utf8:294
 msgid "written in English:"
@@ -4908,6 +4919,7 @@ msgstr "written in English:"
 #. type: Content of: <h5>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:541
 #: ../../skycultures/egyptian_dendera/description.en.utf8:228
+#: ../../skycultures/greek_dante/description.en.utf8:20
 msgid "SMH"
 msgstr "SMH"
 
@@ -5917,6 +5929,8 @@ msgid ""
 "The Sieve &mdash; It was said that “God used to sift grains of <i>zhito</i> "
 "through it“."
 msgstr ""
+"De Zeef &mdash; Er werd gezegd dat \"God er <i>zhito</i> korrels doorheen "
+"zeefde\"."
 
 #. type: Content of: <ul><li>
 #: ../../skycultures/belarusian/description.en.utf8:25
@@ -11389,6 +11403,145 @@ msgid "Written in English: the authors"
 msgstr "Geschreven in het Engels: de auteurs"
 
 #. type: Content of: <h1>
+#: ../../skycultures/greek_dante/description.en.utf8:1
+msgid "Dante's Divina Comedia"
+msgstr "Dante's Divina Comedia"
+
+#. type: Content of: <p>
+#: ../../skycultures/greek_dante/description.en.utf8:2
+msgid ""
+"Dante Alighieri mentions several stars and a few constellations: "
+"predominantly, the zodiacal constellation of Gemini. The Twins occurs in his"
+" texts (in the comedia as well as his poems). As Dante is not an astronomer "
+"but a person with broad knowledge, his view of the constellations is highly "
+"like not based upon observations of the sky but on manuscripts that he read."
+" Therefore, we chose to take the zodiacal constellation images from Michael "
+"Scotus whose manuscript was very popular in Dante's time."
+msgstr ""
+"Dante Alighieri noemt verschillende sterren en enkele sterrenbeelden: "
+"voornamelijk het sterrenbeeld Tweelingen. De Tweeling komt in zijn teksten "
+"voor (zowel in de comedia als in zijn gedichten). Aangezien Dante geen "
+"astronoom is maar een persoon met een brede kennis, is zijn visie op de "
+"sterrenbeelden hoogstwaarschijnlijk niet gebaseerd op waarnemingen aan de "
+"hemel maar op manuscripten die hij las. Daarom hebben wij ervoor gekozen de "
+"afbeeldingen van de sterrenbeelden te ontlenen aan Michael Scotus, wiens "
+"manuscript zeer populair was in Dantes tijd."
+
+#. type: Content of: <p>
+#: ../../skycultures/greek_dante/description.en.utf8:3
+msgid ""
+"Dante Alighieri was a citizen of Florence, Italy, who was later banned and "
+"lived at several places in Northern Italy. The comedia was written around "
+"1300 but finished only short before his death in 1321. It is commonly "
+"assumed that the story plays in around the Christian festival of Easter in "
+"1300 CE."
+msgstr ""
+"Dante Alighieri was een inwoner van Florence, Italië, die later werd "
+"verbannen en op verschillende plaatsen in Noord-Italië woonde. De comedia is"
+" geschreven rond 1300 maar pas kort voor zijn dood in 1321 voltooid. "
+"Algemeen wordt aangenomen dat het verhaal speelt rond het Christelijke "
+"Paasfeest in 1300 CE."
+
+#. type: Content of: <h2>
+#: ../../skycultures/greek_dante/description.en.utf8:5
+#: ../../skycultures/greek_leidenAratea/description.en.utf8:8
+msgid "How this Sky Culture was made"
+msgstr "Hoe deze hemelcultuur is gemaakt"
+
+#. type: Content of: <p>
+#: ../../skycultures/greek_dante/description.en.utf8:6
+msgid ""
+"The Dante-experts of the German Dante Society selected some text passages "
+"with astronomical references in order to present them at Planetarium Jena in"
+" the dome. Professor Blume'ODs suggestion that Dante likely had Michael "
+"Scotus's drawings of the constellations in mind was accepted. Therefore, we "
+"copied these drawings and mapped them onto the stars. The \"16\" bright "
+"stars that are mentioned by Dante are usually interpreted by romanists as "
+"the stars of first magnitude in the Almagest. Therefore, these stars where "
+"highlighted with the \"star\"-symbol in Stellarium. Additionally, we painted"
+" a chariot (wagon) and a horn."
+msgstr ""
+"De Dante-experts van het Duitse Dante Genootschap selecteerden enkele "
+"tekstpassages met astronomische verwijzingen om deze in Planetarium Jena in "
+"de koepel te presenteren. De suggestie van professor Blume dat Dante "
+"waarschijnlijk de tekeningen van de sterrenbeelden van Michael Scotus in "
+"gedachten had, werd aanvaard. Daarom hebben we deze tekeningen gekopieerd en"
+" op de sterren afgebeeld. De \"16\" heldere sterren die door Dante worden "
+"genoemd, worden door romanschrijvers gewoonlijk geïnterpreteerd als de "
+"sterren van eerste magnitude in de Almagest. Daarom zijn deze sterren "
+"gemarkeerd met het \"ster\"-symbool in Stellarium. Daarnaast hebben we een "
+"koets (wagen) en een hoorn geschilderd."
+
+#. type: Content of: <p>
+#: ../../skycultures/greek_dante/description.en.utf8:7
+msgid ""
+"Dante calls the seven bright stars of Ursa Major \"The Chariot\", the "
+"constellation of Ursa Minor \"The Horn\", and possibly refers to Corona "
+"Borealis when he mentions a ring of stars. The latter interpretation is in "
+"our view unlikely but is discussed among researchers which is why we marked "
+"the stars of Corona Borealis as it is described in the Almagest."
+msgstr ""
+"Dante noemt de zeven heldere sterren van de Grote Beer \"De wagen\", het "
+"sterrenbeeld Kleine Beer \"De Hoorn\", en verwijst mogelijk naar Corona "
+"Borealis wanneer hij het heeft over een ring van sterren. De laatste "
+"interpretatie is volgens ons onwaarschijnlijk, maar wordt onder onderzoekers"
+" besproken. Daarom hebben wij de sterren van Corona Borealis gemarkeerd "
+"zoals die in de Almagest wordt beschreven."
+
+#. type: Content of: <p>
+#: ../../skycultures/greek_dante/description.en.utf8:10
+msgid ""
+"The Italian Dante Society (Societá Dantesca Italiana) provides Dante's work "
+"online: <a href=\"https://danteonline.it/opere/index.php\">Dante_Online</a>."
+msgstr ""
+"Het Italiaanse Dante Genootschap (Societá Dantesca Italiana) biedt het werk "
+"van Dante online aan: <a "
+"href=\"https://danteonline.it/opere/index.php\">Dante_Online</a>."
+
+#. type: Content of: <p>
+#: ../../skycultures/greek_dante/description.en.utf8:12
+#: ../../skycultures/greek_farnese/description.en.utf8:295
+#: ../../skycultures/greek_leidenAratea/description.en.utf8:289
+msgid ""
+"We provide this sky culture free of charge, but the authors deserve to be "
+"cited according to the usual rules. Thank you!"
+msgstr ""
+"Wij stellen deze luchtcultuur gratis ter beschikking, maar de auteurs "
+"verdienen het om volgens de gebruikelijke regels geciteerd te worden. "
+"Bedankt!"
+
+#. type: Content of: <p>
+#: ../../skycultures/greek_dante/description.en.utf8:13
+msgid ""
+"Susanne M Hoffmann, Dieter Blume, Karl Ph. Ellerbrock, Eduardo Castadura, "
+"Bodo Zöll (2022)"
+msgstr ""
+"Susanne M Hoffmann, Dieter Blume, Karl Ph. Ellerbrock, Eduardo Castadura, "
+"Bodo Zöll (2022)"
+
+#. type: Content of: <p>
+#: ../../skycultures/greek_dante/description.en.utf8:16
+msgid ""
+"This sky culture was added to Stellarium by Susanne M. Hoffmann "
+"(service@uhura-uraniae.com) as a byproduct of a collaboration with Prof. Dr."
+" Dieter Blume (Art History, FSU Jena, Germany), The German Dante Society "
+"(Deutsche Dante Gesellschaft) and Planetarium Jena."
+msgstr ""
+"Deze hemelcultuur werd aan Stellarium toegevoegd door Susanne M. Hoffmann "
+"(service@uhura-uraniae.com) als bijproduct van een samenwerking met Prof. "
+"Dr. Dieter Blume (Kunstgeschiedenis, FSU Jena, Duitsland), The German Dante "
+"Society (Deutsche Dante Gesellschaft) en Planetarium Jena."
+
+#. type: Content of: <p>
+#: ../../skycultures/greek_dante/description.en.utf8:19
+msgid ""
+"region of origin: Florence, Italy; this single sky culture was made for use "
+"in research"
+msgstr ""
+"regio van herkomst: Florence, Italië; deze enkele hemelcultuur is gemaakt "
+"voor gebruik in onderzoek."
+
+#. type: Content of: <h1>
 #: ../../skycultures/greek_farnese/description.en.utf8:1
 msgid "The Globe of the Atlas Farnese Statue"
 msgstr "De globe van het Atlas Farnese standbeeld"
@@ -11706,17 +11859,6 @@ msgid "missing [covered by the shoulder of Atlas]"
 msgstr "ontbreekt [bedekt door de schouder van Atlas]"
 
 #. type: Content of: <p>
-#: ../../skycultures/greek_farnese/description.en.utf8:295
-#: ../../skycultures/greek_leidenAratea/description.en.utf8:289
-msgid ""
-"We provide this sky culture free of charge, but the authors deserve to be "
-"cited according to the usual rules. Thank you!"
-msgstr ""
-"Wij stellen deze luchtcultuur gratis ter beschikking, maar de auteurs "
-"verdienen het om volgens de gebruikelijke regels geciteerd te worden. "
-"Bedankt!"
-
-#. type: Content of: <p>
 #: ../../skycultures/greek_farnese/description.en.utf8:298
 msgid ""
 "This sky culture was contributed to Stellarium by Susanne M. Hoffmann "
@@ -11797,11 +11939,6 @@ msgstr ""
 "<i>Een voorbeeldpagina van het middeleeuwse manuscript toont de drie kussen "
 "afbeeldingen Draak, Grote Beer en de Kleine Beer met de tekst er "
 "tegenover.</i>"
-
-#. type: Content of: <h2>
-#: ../../skycultures/greek_leidenAratea/description.en.utf8:8
-msgid "How this Sky Culture was made"
-msgstr "Hoe deze hemelcultuur is gemaakt"
 
 #. type: Content of: <p>
 #: ../../skycultures/greek_leidenAratea/description.en.utf8:9
@@ -17599,6 +17736,10 @@ msgid ""
 "historical roots in Ancient Greek astronomy, with influences from Islamic "
 "astronomy."
 msgstr ""
+"De moderne hemelcultuur wordt internationaal gebruikt door moderne "
+"astronomen, en is het officiële schema van de Internationale Astronomische "
+"Unie. Het heeft historische wortels in de oude Griekse astronomie, met "
+"invloeden uit de islamitische astronomie."
 
 #. type: Content of: <p>
 #: ../../skycultures/modern/description.en.utf8:7
@@ -17609,6 +17750,12 @@ msgid ""
 "the standard way to describe the sky, replacing similar sets in other sky "
 "cultures exhaustively in daily usage."
 msgstr ""
+"De moderne hemelcultuur verdeelt de hemelsfeer in 88 gebieden van "
+"verschillende grootte, die sterrenbeelden worden genoemd, elk met een "
+"precieze begrenzing, uitgevaardigd door de Internationale Astronomische Unie"
+" in 1922. Deze sterrenbeelden zijn de standaard manier geworden om de hemel "
+"te beschrijven, en vervangen soortgelijke reeksen in andere hemelculturen "
+"volledig in het dagelijks gebruik."
 
 #. type: Content of: <p>
 #: ../../skycultures/modern/description.en.utf8:10
@@ -17620,6 +17767,13 @@ msgid ""
 " Arabic more than in the Latin tradition, the Ptolemaic figures were "
 "enriched and transformed by native Arabic constellations and star names."
 msgstr ""
+"De tegenwoordig gebruikte sterrenbeelden zijn voornamelijk gebaseerd op de "
+"oude Griekse sterrenbeelden die Ptolemaeus in de 2e eeuw CE in zijn boek de "
+"Almagest afbeeldde. In de daaropvolgende eeuwen is dit boek vanuit het "
+"Grieks vertaald in het Arabisch (6e tot 9e eeuw) en later in het middeleeuws"
+" Latijn. In de Arabische meer dan in de Latijnse traditie werden de "
+"Ptolemeïsche figuren verrijkt en getransformeerd met inheemse Arabische "
+"sterrenbeelden en ster namen."
 
 #. type: Content of: <p>
 #: ../../skycultures/modern/description.en.utf8:13
@@ -17635,6 +17789,17 @@ msgid ""
 "bird).  Among them several constellations were also named with political "
 "consideration to honor certain kings or patrons."
 msgstr ""
+"In de 16-18e eeuw stelden Europese astronomen nieuwe sterrenbeelden voor om "
+"de gaten tussen de noordelijke sterrenbeelden op te vullen (bv. het "
+"sterrenbeeld \"de lynx\" voor een gebied dicht bij de Grote Beer, maar met "
+"sterren die zo zwak waren dat je de ogen van een lynx nodig had om ze te "
+"zien) en bedachten zij ook nieuwe sterrenbeelden in het zuidelijke deel van "
+"de hemel die voor Ptolemaeus niet zichtbaar waren geweest. Deze nieuwe "
+"sterrenbeelden werden meestal genoemd naar nieuwe technische uitvindingen "
+"uit de vroegmoderne tijd (bv. een chemische oven, een ballon, een luchtpomp)"
+" of exotische dieren (bv. een kameleon, een toekan, een paradijsvogel). "
+"Onder hen werden ook verschillende sterrenbeelden genoemd met een politieke "
+"overweging om bepaalde koningen of beschermheren te eren."
 
 #. type: Content of: <p>
 #: ../../skycultures/modern/description.en.utf8:19
@@ -17644,11 +17809,15 @@ msgid ""
 "of 88 constellation names. In 1928 it also defined precise constellation "
 "boundaries [#40] still in use today."
 msgstr ""
+"In het begin van de 20e eeuw streefde de IAU (Internationale Astronomische "
+"Unie) naar een grote schoonmaak: in 1922 werd de lijst van 88 sterrenbeelden"
+" officieel aanvaard. In 1928 werden ook de exacte grenzen van de "
+"sterrenbeelden vastgelegd [#40], die nu nog steeds in gebruik zijn."
 
 #. type: Content of: <h2>
 #: ../../skycultures/modern/description.en.utf8:22
 msgid "Extras"
-msgstr ""
+msgstr "Extra's"
 
 #. type: Content of: <p>
 #: ../../skycultures/modern/description.en.utf8:23
@@ -17662,6 +17831,14 @@ msgid ""
 "transformation, it is now known under the artificial name Almagest, derived "
 "from the Arabic title [#46]."
 msgstr ""
+"In de 2e eeuw na Christus publiceerde Ptolemaeus in Alexandrië een meerdelig"
+" boek waarin de astronomische kennis van die tijd werd samengevat, geworteld"
+" in een traditie van mathematische astronomie sinds Hipparchus (minstens 265"
+" jaar eerder). In de daaropvolgende eeuwen is dit boek vertaald van het "
+"Grieks naar het Arabisch (6e tot 9e eeuw), van het Arabisch naar het Latijn,"
+" en later van het oorspronkelijke oud-Grieks naar het middeleeuws Latijn. "
+"Door deze transformatie is het nu bekend onder de kunstmatige naam Almagest,"
+" afgeleid van de Arabische titel [#46]."
 
 #. type: Content of: <p>
 #: ../../skycultures/modern/description.en.utf8:27
@@ -17675,6 +17852,14 @@ msgid ""
 " Ptolemaic one with traces of translations, misunderstandings, "
 "transformations, and deliberate additions."
 msgstr ""
+"De sterrencatalogus van de Almagest (boeken VII en VIII) is vele malen "
+"afgebeeld in zowel de islamitische als de Christelijke astronomische "
+"traditie. Vaak werden de figuren hertekend om ze aan te passen aan de "
+"kunstsmaak van het tijdperk. In de Arabische meer dan in de Latijnse "
+"traditie werden de Ptolemeïsche figuren verrijkt en getransformeerd met "
+"inheemse Arabische sterrenbeelden en ster namen. Daarom vertoont deze "
+"hemelcultuur een moderne afstammeling van de Ptolemeïsche met sporen van "
+"vertalingen, misverstanden, transformaties en opzettelijke toevoegingen."
 
 #. type: Content of: <p>
 #: ../../skycultures/modern/description.en.utf8:31
@@ -17686,6 +17871,12 @@ msgid ""
 "Subsequently, it was established to name a star with a Greek letter and the "
 "Latin constellation name in casus genitive."
 msgstr ""
+"In 1603 maakte de jurist en hobby-astronoom Johann Bayer uit Augsburg, "
+"Duitsland, een nieuwe hemelatlas, Uranometria [#41] genaamd. In deze atlas "
+"introduceerde hij een systematische naamgeving van sterren beginnend met "
+"alpha, de helderste, beta, de tweede helderste, gamma, de derde ... binnen "
+"een sterrenbeeld. Vervolgens werd het opgezet om een ster te benoemen met "
+"een Griekse letter en de Latijnse sterrenbeeldnaam in casus genitive."
 
 #. type: Content of: <p>
 #: ../../skycultures/modern/description.en.utf8:34
@@ -17701,6 +17892,16 @@ msgid ""
 "an air pump)  as well as exotic animals (e.g. a chamaeleon, a tucan, a "
 "paradise bird)."
 msgstr ""
+"In de 18e eeuw, de eeuw van de grote atlassen (Flamsteed, Fortin, Bode: "
+"[#42][#43]), werden nieuwe sterrenbeelden toegevoegd om de gaten tussen de "
+"noordelijke sterrenbeelden op te vullen. Bovendien waren er suggesties om "
+"nieuwe sterrenbeelden te scheppen in het zuidelijke deel van de hemel die "
+"voor Ptolemaeus niet zichtbaar waren geweest. Europese astronomen bezochten "
+"de Europese koloniën en in plaats van de inheemse bevolking naar hun "
+"sterrenbeelden te vragen, gingen de Europeanen creatief te werk. Zo werden "
+"veel nieuwe technische uitvindingen uit de vroegmoderne tijd afgebeeld in "
+"sterrenbeelden (bv. een chemische oven, een ballon, een luchtpomp) en ook "
+"exotische dieren (bv. een kameleon, een tucan, een paradijsvogel)."
 
 #. type: Content of: <p>
 #: ../../skycultures/modern/description.en.utf8:39
@@ -17708,6 +17909,8 @@ msgid ""
 "The problem was that sometimes astronomers did not agree with each other "
 "and, thus, atlases showed deviations from each other."
 msgstr ""
+"Het probleem was dat astronomen het soms niet met elkaar eens waren, "
+"waardoor atlassen afwijkingen vertoonden."
 
 #. type: Content of: <p>
 #: ../../skycultures/modern/description.en.utf8:40
@@ -17719,6 +17922,9 @@ msgid ""
 "\"Betelgeuse\", Orion's right shoulder), it is necessary to use "
 "constellation names and star names uniformly all over the world."
 msgstr ""
+"Nadat vele eeuwen lang astronomen vrijheden hadden genomen bij de interpretatie van het Ptolemeïsche origineel, waren er vele varianten van sterrenbeelden. Aangezien sterrenbeelden een plaatsbepalingssysteem zijn, d.w.z. astronomen beschrijven posities aan de hemel ten opzichte van sterren en sterren ten opzichte van sterrenbeelden (zoals \"Betelgeuse\", de rechterschouder van Orion), is het noodzakelijk om overal ter wereld uniforme namen voor sterrenbeelden en sterren te gebruiken.\n"
+"\n"
+"Translated with DeepL"
 
 #. type: Content of: <p>
 #: ../../skycultures/modern/description.en.utf8:43
@@ -17727,6 +17933,9 @@ msgid ""
 "astronomical community to unify the system of constellations and star names "
 "[#44]."
 msgstr ""
+"In het \"Fin de siècle\", waren er opkomende suggesties in de astronomische "
+"gemeenschap om het systeem van sterrenbeelden en sterrennamen te "
+"standaardiseren [#44]."
 
 #. type: Content of: <p>
 #: ../../skycultures/modern/description.en.utf8:44
@@ -17737,6 +17946,12 @@ msgid ""
 " stickfigures were developed during the 20th and 21st century.  We provide "
 "some of them as further sky cultures."
 msgstr ""
+"De IAU, pas opgericht in 1919, definieerde in 1928 de grenzen van deze "
+"gebieden [#43] en niet de manier van tekenen van kunstwerken of het "
+"verbinden van lijnen daarbinnen. Bijgevolg werden in de 20e en 21e eeuw "
+"verschillende subculturen van het schilderen van figuren en het tekenen van "
+"vereenvoudigde stokfiguren ontwikkeld. Wij vermelden er enkele als verdere "
+"hemelculturen."
 
 #. type: Content of: <p>
 #: ../../skycultures/modern/description.en.utf8:49
@@ -17751,6 +17966,17 @@ msgid ""
 "In the late 19th century, the astronomical research community aimed for a "
 "huge clean-up to avoid ambiguities in assigning stars to constellations."
 msgstr ""
+"Deze sterrenbeelden zijn voornamelijk gebaseerd op de Ptolemeïsche traditie "
+"die in alle drie de Abrahamitische godsdiensten werd gebruikt en dus "
+"gebruikelijk was in het Nabije Oosten, in Europa en zijn koloniën op alle "
+"continenten. Tussen de oude Griekse sterrenbeelden waren er echter gaten van"
+" gebieden met alleen zwakke sterren die tot geen enkel sterrenbeeld "
+"behoorden.[#47] In het Moderne Tijdperk stelden verschillende astronomen "
+"sterrenbeelden voor die deze gaten opvulden, waaronder verschillende "
+"politieke sterrenbeelden ter ere van bepaalde koningen of beschermheren. Aan"
+" het eind van de 19e eeuw streefde de astronomische onderzoeksgemeenschap "
+"naar een grote schoonmaak om onduidelijkheden bij het toewijzen van sterren "
+"aan sterrenbeelden te voorkomen."
 
 #. type: Content of: <p>
 #: ../../skycultures/modern/description.en.utf8:55
@@ -17763,6 +17989,13 @@ msgid ""
 "In 1928, he finished the work, based on an atlas from Argentina [#51], and "
 "the IAU accepted his delimitations [#40]."
 msgstr ""
+"In 1922 keurde de IAU officieel de lijst van 88 sterrenbeelden en hun "
+"officiële afkortingen met drie letters goed. Het enige overgebleven "
+"politieke sterrenbeeld is Scutum, het schild van een Poolse koning, maar dan"
+" zonder vermelding van de politieke referentie. De Belgische priester E. "
+"Delporte kreeg de taak om de grenzen van de sterrenbeelden te bepalen aan de"
+" hand van coördinaten. In 1928 voltooide hij het werk, gebaseerd op een "
+"atlas uit Argentinië [#51], en de IAU accepteerde zijn afbakeningen [#40]."
 
 #. type: Content of: <p>
 #: ../../skycultures/modern/description.en.utf8:59
@@ -17774,6 +18007,13 @@ msgid ""
 "constellations became the standard way to describe the sky, replacing "
 "similar sets in other sky cultures exhaustively in daily usage."
 msgstr ""
+"Deze \"sterrenbeelden\" zijn naakte gebieden aan de hemel zonder stokjes of "
+"afbeeldingen [#44]. De grenzen volgen gewoon de lijnen van rechte klimming "
+"en declinatie uit het tijdperk 1875.0. Precessie veroorzaakt een langzaam "
+"toenemende afwijking van het oorspronkelijk rechtlijnige raster. Deze "
+"sterrenbeelden werden de standaard manier om de hemel te beschrijven en "
+"vervingen soortgelijke reeksen in andere hemelculturen uitputtend in het "
+"dagelijks gebruik."
 
 #. type: Content of: <p>
 #: ../../skycultures/modern/description.en.utf8:63
@@ -17782,6 +18022,9 @@ msgid ""
 "artwork constellations on the basis of Ptolemaic figures but following our "
 "contemporary taste of art."
 msgstr ""
+"Stellarium toont standaard de precieze RA-DEC-grenzen en een set "
+"kunstopstellingen op basis van de Ptolemeïsche figuren, maar volgens onze "
+"hedendaagse kunstsmaak."
 
 #. type: Content of: <h3>
 #: ../../skycultures/modern/description.en.utf8:65
@@ -17801,11 +18044,21 @@ msgid ""
 "the Coathanger.  They are often discussed in the observing columns of "
 "popular astronomy magazines."
 msgstr ""
+"De term \"asterisme\" (verzameling sterren) wordt soms synoniem gebruikt met"
+" \"sterrenbeeld\". In het moderne gebruik beschrijft het een figuur die geen"
+" deel uitmaakt van de officiële canon. Soms is een asterisme een deel van "
+"een sterrenbeeld, bijvoorbeeld de Grote Beer als deel van Ursa Major, of het"
+" Grote Vierkant als deel van Pegasus. Andere asterismen beslaan meerdere "
+"sterrenbeelden, bijvoorbeeld de Zomerdriehoek of de Winterzeshoek. Weer "
+"andere zijn alleen zichtbaar met een verrekijker of telescoop en krijgen de "
+"toepasselijke naam \"telescopisch asterisme\", bv. de Coathanger (Kapstok) ."
+" Ze worden vaak besproken in de waarneemrubrieken van populaire "
+"sterrenkundetijdschriften."
 
 #. type: Content of: <h3>
 #: ../../skycultures/modern/description.en.utf8:72
 msgid "Ray Helpers"
-msgstr ""
+msgstr "Straal Helpers"
 
 #. type: Content of: <p>
 #: ../../skycultures/modern/description.en.utf8:73
@@ -17814,12 +18067,16 @@ msgid ""
 "tool are associative chains of stars that span large distances.  We show "
 "them as \"ray helpers\". These are not standardized."
 msgstr ""
+"Doorgewinterde waarnemers kunnen gemakkelijk hun weg vinden aan de hemel. "
+"Een geheugensteun zijn associatieve ketens van sterren die grote afstanden "
+"overbruggen. Wij tonen ze als \" straalhelpers \". Deze zijn niet "
+"gestandaardiseerd."
 
 #. type: Content of: <h3>
 #: ../../skycultures/modern/description.en.utf8:76
 #: ../../skycultures/modern_iau/description.en.utf8:70
 msgid "Proper names of stars"
-msgstr ""
+msgstr "Eigennamen van sterren"
 
 #. type: Content of: <p>
 #: ../../skycultures/modern/description.en.utf8:77
@@ -17830,6 +18087,10 @@ msgid ""
 "coordinates, and the magnitude e.g.: \"The star at the tip of the tail of "
 "Ursa Minor\", \"Gem 0 1/6, +66\", \"Mag 3\"."
 msgstr ""
+"De sterrencatalogus van Ptolemaeus had de indeling van een tabel met de "
+"beschrijving van de positie van de ster in het sterrenbeeld, de eclipticale "
+"coördinaten en de magnitude, bijv: \"De ster op het puntje van de staart van"
+" de Kleine Beer\", \"Gem 0 1/6, +66\", \"Mag 3\"."
 
 #. type: Content of: <p>
 #: ../../skycultures/modern/description.en.utf8:79
@@ -17843,6 +18104,16 @@ msgid ""
 " misspelling of the Arabic words (e.g. the Arabic \"yad al gauza\", the hand"
 " of the giant woman, was mangled to the common term \"Betelgeuse\")."
 msgstr ""
+"In de meeste gevallen ontwikkelden de sterrennamen zich door systematische "
+"afkortingen van deze beschrijvingen door astronomen, bijv. een eerste "
+"astronoom kortte in een tekst \"staartpunt\" af, een volgende astronoom "
+"tekende een kaart met minder ruimte en schreef alleen \"staart\" naast de "
+"ster en deze naam bleef bestaan. In de loop der eeuwen werden deze "
+"beschrijvingen vertaald in het Arabisch en Latijn, en in sommige gevallen "
+"maakten de vertalers of schriftgeleerden fouten door verkeerd lezen of "
+"verkeerd spellen van de Arabische woorden (bv. het Arabische \"yad al "
+"gauza\", de hand van de reusachtige vrouw, werd vervormd tot de gewone term "
+"\"Betelgeuse\")."
 
 #. type: Content of: <p>
 #: ../../skycultures/modern/description.en.utf8:83
@@ -17857,6 +18128,16 @@ msgid ""
 " or newly adopted star names from Polynesian, Hawaiian, or Aboriginal "
 "cultures for names of stars with exoplanets."
 msgstr ""
+"Er zijn echter ook een paar oorspronkelijke Griekse woorden zoals de rode "
+"ster \"Antares\", de tegenhanger van Ares (Mars), en zelfs een paar "
+"oorspronkelijke Babylonische termen zoals \"Shargaz\", de angel, in "
+"Scorpius. Onze moderne, meest recente IAU-sterrennamen [#45] zijn een "
+"hernieuwd mengsel, ook met invloeden of zelfs politiek gewilde toevoegingen "
+"van sterrennamen uit de niet-Ptolemeïsche hemelculturen, bijvoorbeeld de "
+"traditionele Pingsing, een Chinese sterrennaam voor een ster in Hydra (de "
+"betekenis is alleen \"ster\", een herinnering aan zijn eenzame positie), of "
+"nieuw overgenomen sterrennamen uit Polynesische, Hawaiiaanse of Aboriginal "
+"culturen voor namen van sterren met exoplaneten."
 
 #. type: Content of: <p>
 #: ../../skycultures/modern/description.en.utf8:87
@@ -17866,11 +18147,16 @@ msgid ""
 "for commemorative purposes or as gifts, only sell printed pieces of paper.  "
 "These names are not approved and never used by scientists."
 msgstr ""
+"De IAU is de enige wetenschappelijk aanvaarde autoriteit om nieuwe namen aan"
+" sterren toe te kennen. Commerciële exploitanten zoals "
+"\"sterrennaamregisters\", die sterren verkopen voor herdenkingsdoeleinden of"
+" als geschenk, verkopen alleen gedrukte stukjes papier. Deze namen zijn niet"
+" goedgekeurd en worden nooit door wetenschappers gebruikt."
 
 #. type: Content of: <h1>
 #: ../../skycultures/modern_chinese/description.en.utf8:1
 msgid "Modern (Chinese)"
-msgstr ""
+msgstr "Modern (Chinees)"
 
 #. type: Content of: <p>
 #: ../../skycultures/modern_chinese/description.en.utf8:3
@@ -17880,6 +18166,11 @@ msgid ""
 "constellations and Chinese star names in astronomy. This is the skyculture "
 "that the Chinese actually use now, with a great practical value."
 msgstr ""
+"De Moderne (Chinese) Hemelcultuur is een combinatie van Chinese tradities en"
+" Westerse sterrenbeelden. De Chinezen gebruiken combinaties van moderne "
+"sterrenbeelden en Chinese sterrennamen in de astronomie. Dit is de "
+"hemelcultuur die de Chinezen nu daadwerkelijk gebruiken, met een grote "
+"praktische waarde."
 
 #. type: Content of: <p>
 #: ../../skycultures/modern_chinese/description.en.utf8:7
@@ -17890,6 +18181,12 @@ msgid ""
 " do not have the role of dividing the celestial sphere into different areas,"
 " so they are no longer applicable in astronomy."
 msgstr ""
+"De moderne Chinezen gebruiken de sterrenbeelden van de Internationale "
+"Astronomische Unie. De traditionele Chinese sterrenbeelden hebben geen "
+"specifieke onderlinge grenzen. Zij stellen alleen de overeenkomstige reeks "
+"heldere sterren voor, en hebben niet de functie om de hemelbol in "
+"verschillende gebieden te verdelen, zodat zij niet langer van toepassing "
+"zijn in de astronomie."
 
 #. type: Content of: <p>
 #: ../../skycultures/modern_chinese/description.en.utf8:11
@@ -17978,6 +18275,8 @@ msgid ""
 "Constellation art，Constellation lines based on <i>Modern Skyculture for "
 "Stellarium</i>."
 msgstr ""
+"Sterrenbeeld kunst， Sterrenbeeld lijnen gebaseerd op <i>Moderne Skycultuur "
+"voor Stellarium</i>."
 
 #. type: Content of: <p>
 #: ../../skycultures/modern_chinese/description.en.utf8:27
@@ -17985,11 +18284,13 @@ msgid ""
 "Asterism lines and traditional Chinese star names based on <i>Chinese "
 "Traditional Skyculture for Stellarium</i>."
 msgstr ""
+"Asterismelijnen en traditionele Chinese sterrennamen gebaseerd op de "
+"<i>Chinese Traditionele Skycultuur voor Stellarium</i>."
 
 #. type: Content of: <h1>
 #: ../../skycultures/modern_st/description.en.utf8:1
 msgid "Modern (Sky & Telescope)"
-msgstr ""
+msgstr "Moderne (Sky & Telescoop)"
 
 #. type: Content of: <p>
 #: ../../skycultures/modern_st/description.en.utf8:2
@@ -18001,6 +18302,13 @@ msgid ""
 "definitions, and should be familiar to users of Sky & Telescope's Pocket Sky"
 " Atlas, Sky Atlas 2000.0, and the figures in Sky & Telescope magazine."
 msgstr ""
+"De Moderne Hemelcultuur wordt internationaal gebruikt door moderne "
+"astronomen, en is het officiële schema van de Internationale Astronomische "
+"Unie. Het heeft historische wortels in de Oud-Griekse astronomie, met "
+"invloeden uit de Islamitische astronomie. De sterrenbeelden en sterrennamen "
+"komen uit de definities van Sky & Telescope, en zouden bekend moeten zijn "
+"bij gebruikers van Sky & Telescope's Pocket Sky Atlas, Sky Atlas 2000.0, en "
+"de cijfers in Sky & Telescope magazine."
 
 #. type: Content of: <p><p>
 #: ../../skycultures/modern_st/description.en.utf8:5
@@ -18011,6 +18319,12 @@ msgid ""
 "standard way to describe the sky, replacing similar sets in other sky "
 "cultures exhaustively in daily usage."
 msgstr ""
+"De moderne cultuur verdeelt de hemelbol in 88 gebieden van verschillende "
+"grootte, die <i>sterrenbeelden</i> worden genoemd, elk met een precieze "
+"begrenzing, uitgegeven door de Internationale Astronomische Unie. Deze "
+"sterrenbeelden zijn de standaard manier geworden om de hemel te beschrijven,"
+" en vervangen soortgelijke reeksen in andere hemelculturen volledig in het "
+"dagelijks gebruik."
 
 #. type: Content of: <p><p>
 #: ../../skycultures/modern_st/description.en.utf8:7
@@ -18075,7 +18389,7 @@ msgstr ""
 #. type: Content of: <h1>
 #: ../../skycultures/modern_hlad/description.en.utf8:1
 msgid "Modern (O. Hlad)"
-msgstr ""
+msgstr "Modern (O. Hlad)"
 
 #. type: Content of: <p>
 #: ../../skycultures/modern_hlad/description.en.utf8:3
@@ -18171,7 +18485,7 @@ msgstr ""
 #. type: Content of: <h1>
 #: ../../skycultures/modern_rey/description.en.utf8:1
 msgid "Modern (H.A. Rey)"
-msgstr ""
+msgstr "Modern (H.A. Rey)"
 
 #. type: Content of: <p>
 #: ../../skycultures/modern_rey/description.en.utf8:5
@@ -18355,7 +18669,7 @@ msgstr ""
 #. type: Content of: <h1>
 #: ../../skycultures/modern_iau/description.en.utf8:1
 msgid "Modern (IAU)"
-msgstr ""
+msgstr "Modern (IAU)"
 
 #. type: Content of: <p>
 #: ../../skycultures/modern_iau/description.en.utf8:8
@@ -18366,6 +18680,12 @@ msgid ""
 "the standard way to describe the sky, replacing similar sets in other sky "
 "cultures exhaustively in daily usage."
 msgstr ""
+"De moderne hemelcultuur verdeelt de hemelbol in 88 gebieden van "
+"verschillende grootte, die sterrenbeelden worden genoemd, elk met een "
+"precieze begrenzing, in 1922 door de Internationale Astronomische Unie "
+"uitgevaardigd. Deze sterrenbeelden zijn de standaard manier geworden om de "
+"hemel te beschrijven, en vervangen soortgelijke reeksen in andere "
+"hemelculturen volledig in het dagelijks gebruik."
 
 #. type: Content of: <p>
 #: ../../skycultures/modern_iau/description.en.utf8:13
@@ -18377,6 +18697,13 @@ msgid ""
 "Arabic more than in the Latin tradition, the Ptolemaic figures were enriched"
 " and transformed by native Arabic constellations and star names."
 msgstr ""
+"De tegenwoordig gebruikte sterrenbeelden zijn voornamelijk gebaseerd op de "
+"oude Griekse sterrenbeelden die Ptolemaeus in de 2e eeuw CE in zijn boek de "
+"Almagest afbeeldde. In de daaropvolgende eeuwen is dit boek vanuit het "
+"Grieks vertaald in het Arabisch (6e tot 9e eeuw) en later in het middeleeuws"
+" Latijn. In de Arabische meer dan in de Latijnse traditie werden de "
+"Ptolemeïsche figuren verrijkt en getransformeerd met inheemse Arabische "
+"sterrenbeelden en sterrennamen."
 
 #. type: Content of: <p>
 #: ../../skycultures/modern_iau/description.en.utf8:19
@@ -18392,6 +18719,17 @@ msgid ""
 "bird).  Among them several constellations were also named with political "
 "consideration to honor certain kings or patrons."
 msgstr ""
+"In de 16-18e eeuw stelden Europese astronomen nieuwe sterrenbeelden voor om "
+"de gaten tussen de noordelijke sterrenbeelden op te vullen (bv. het "
+"sterrenbeeld \"de lynx\" voor een gebied dicht bij de Grote Beer, maar met "
+"sterren die zo zwak waren dat je de ogen van een lynx nodig had om ze te "
+"zien) en creëerden zij ook nieuwe sterrenbeelden in het zuidelijke deel van "
+"de hemel die voor Ptolemaeus niet zichtbaar waren geweest. Deze nieuwe "
+"sterrenbeelden werden meestal genoemd naar nieuwe technische uitvindingen "
+"uit de vroegmoderne tijd (bv. een chemische oven, een ballon, een luchtpomp)"
+" of exotische dieren (bv. een kameleon, een toekan, een paradijsvogel). "
+"Onder hen werden ook verschillende sterrenbeelden genoemd met een politieke "
+"overweging om bepaalde koningen of beschermheren te eren."
 
 #. type: Content of: <p>
 #: ../../skycultures/modern_iau/description.en.utf8:29
@@ -18401,6 +18739,10 @@ msgid ""
 "of 88 constellation names. In 1928 it also defined precise constellation "
 "boundaries [#4] still in use today."
 msgstr ""
+"In het begin van de 20e eeuw streefde de IAU (Internationale Astronomische "
+"Unie) naar een grote schoonmaak: in 1922 aanvaardde zij officieel de lijst "
+"van 88 sterrenbeeldnamen. In 1928 definieerde ze ook precieze grenzen van de"
+" sterrenbeelden [#4] die nu nog steeds in gebruik zijn."
 
 #. type: Content of: <p>
 #: ../../skycultures/modern_iau/description.en.utf8:35
@@ -18415,6 +18757,17 @@ msgid ""
 "In the late 19th century, the astronomical research community aimed for a "
 "huge clean-up to avoid ambiguities in assigning stars to constellations."
 msgstr ""
+"Deze sterrenbeelden zijn voornamelijk gebaseerd op de Ptolemeïsche traditie "
+"die in alle drie de Abrahamitische godsdiensten werd gebruikt en dus "
+"gebruikelijk was in het Nabije Oosten, in Europa en zijn koloniën op alle "
+"continenten. Tussen de oude Griekse sterrenbeelden waren er echter gaten van"
+" gebieden met alleen zwakke sterren die tot geen enkel sterrenbeeld "
+"behoorden.[#5] In het Moderne Tijdperk stelden verschillende astronomen "
+"sterrenbeelden voor deze gaten voor, waaronder verschillende politieke "
+"sterrenbeelden ter ere van bepaalde koningen of beschermheren. Aan het eind "
+"van de 19e eeuw streefde de astronomische onderzoeksgemeenschap naar een "
+"grote schoonmaak om onduidelijkheden bij het toewijzen van sterren aan "
+"sterrenbeelden te voorkomen."
 
 #. type: Content of: <p>
 #: ../../skycultures/modern_iau/description.en.utf8:44
@@ -18427,6 +18780,13 @@ msgid ""
 "In 1928, he finished the work, based on an atlas from Argentina [#6], and "
 "the IAU accepted his delimitations [#4]."
 msgstr ""
+"In 1922 keurde de IAU officieel de lijst van 88 sterrenbeelden en hun "
+"officiële afkortingen met drie letters goed. Het enige overgebleven "
+"politieke sterrenbeeld is Scutum, het schild van een Poolse koning, maar "
+"zonder de politieke referentie meer te vermelden. De Belgische priester E. "
+"Delporte kreeg de taak om de grenzen van de sterrenbeelden te bepalen aan de"
+" hand van coördinaten. In 1928 voltooide hij het werk, gebaseerd op een "
+"atlas uit Argentinië [#6], en de IAU accepteerde zijn afbakeningen [#4]."
 
 #. type: Content of: <p>
 #: ../../skycultures/modern_iau/description.en.utf8:51
@@ -18438,11 +18798,18 @@ msgid ""
 "constellations became the standard way to describe the sky, replacing "
 "similar sets in other sky cultures exhaustively in daily usage."
 msgstr ""
+"Deze \"sterrenbeelden\" zijn naakte gebieden aan de hemel zonder stokjes of "
+"afbeeldingen [#1]. De grenzen volgen gewoon de lijnen van rechte klimming en"
+" declinatie uit het tijdperk 1875.0. Precessie veroorzaakt een langzaam "
+"toenemende afwijking van het oorspronkelijk rechtlijnige raster. Deze "
+"sterrenbeelden werden de standaard manier om de hemel te beschrijven en "
+"vervingen soortgelijke reeksen in andere hemelculturen uitputtend in het "
+"dagelijks gebruik."
 
 #. type: Content of: <h4>
 #: ../../skycultures/modern_iau/description.en.utf8:58
 msgid "Constellation Figures"
-msgstr ""
+msgstr "Sterrenbeelden"
 
 #. type: Content of: <p>
 #: ../../skycultures/modern_iau/description.en.utf8:59
@@ -18453,6 +18820,11 @@ msgid ""
 "pattern and the same constellation may have several variants in its "
 "representation."
 msgstr ""
+"Op sterrenkaarten is het gebruikelijk om lijn-\"patronen\" aan te geven die "
+"de vormen voorstellen waaraan de sterrenbeelden hun naam ontlenen. De IAU "
+"definieert een sterrenbeeld echter aan de hand van zijn grens (aangegeven "
+"door hemelcoördinaten) en niet aan de hand van zijn patroon, en hetzelfde "
+"sterrenbeeld kan verschillende varianten in zijn weergave hebben."
 
 #. type: Content of: <p>
 #: ../../skycultures/modern_iau/description.en.utf8:64
@@ -18463,6 +18835,12 @@ msgid ""
 "patterns, were influenced by those of H. A. Rey but in many cases were "
 "adjusted to preserve earlier traditions."
 msgstr ""
+"Deze hemelcultuur gebruikt sterrenbeeldfiguren die zijn gemaakt in "
+"samenwerking met het tijdschrift \"Sky and Telescope\" (Roger Sinnott en "
+"Rick Fienberg) en gepubliceerd op de officiële website van de IAU [#1]. De "
+"sterrenbeeldpatronen van Alan MacRobert zijn beïnvloed door die van H. A. "
+"Rey, maar in veel gevallen aangepast om eerdere tradities in stand te "
+"houden."
 
 #. type: Content of: <p>
 #: ../../skycultures/modern_iau/description.en.utf8:75
@@ -18476,6 +18854,16 @@ msgid ""
 " misspelling of the Arabic words (e.g. the Arabic \"yad al gauza\", the hand"
 " of the giant woman, was mangled to the common term \"Betelgeuse\")."
 msgstr ""
+"In de meeste gevallen ontwikkelden de sterrennamen zich door systematische "
+"afkortingen van deze beschrijvingen door astronomen, bijv. een eerste "
+"astronoom kortte in een tekst \"staartpunt\" af, een volgende astronoom "
+"tekende een kaart met minder ruimte en schreef alleen \"staart\" naast de "
+"ster en deze naam bleef bestaan. In de loop der eeuwen werden deze "
+"beschrijvingen vertaald in het Arabisch en Latijn, en in sommige gevallen "
+"maakten de vertalers of schriftgeleerden fouten door verkeerd lezen of "
+"verkeerd spellen van de Arabische woorden (bv. het Arabische \"yad al "
+"gauza\", de hand van de reusachtige vrouw, werd gemangeld tot de gewone term"
+" \"Betelgeuse\")."
 
 #. type: Content of: <p>
 #: ../../skycultures/modern_iau/description.en.utf8:83
@@ -18490,6 +18878,16 @@ msgid ""
 " or newly adopted star names from Polynesian, Hawaiian, or Aboriginal "
 "cultures for names of stars with exoplanets."
 msgstr ""
+"Er zijn echter ook een paar oorspronkelijke Griekse woorden zoals de rode "
+"ster \"Antares\", de tegenhanger van Ares (Mars), en zelfs een paar "
+"oorspronkelijke Babylonische termen zoals \"Shargaz\", de Angel, in "
+"Schorpioen. Onze moderne, meest recente IAU-sterrennamen [#7] zijn een "
+"hernieuwd mengsel, ook met invloeden of zelfs politiek gewilde toevoegingen "
+"van sterrennamen uit de niet-Ptolemeïsche hemelculturen, bijvoorbeeld de "
+"traditionele Pingsing, een Chinese sterrennaam voor een ster in Waterslang "
+"(de betekenis is alleen \"ster\", een herinnering aan zijn eenzame positie),"
+" of nieuw overgenomen sterrennamen uit Polynesische, Hawaiiaanse of "
+"Aboriginal culturen voor namen van sterren met exoplaneten."
 
 #. type: Content of: <p>
 #: ../../skycultures/modern_iau/description.en.utf8:92
@@ -18499,11 +18897,16 @@ msgid ""
 "for commemorative purposes or as gifts, only sell printed pieces of paper. "
 "These names are not approved and never used by scientists."
 msgstr ""
+"De IAU is de enige wetenschappelijk aanvaarde autoriteit om nieuwe namen aan"
+" sterren toe te kennen. Commerciële exploitanten zoals "
+"\"sterrennaamregisters\", die sterren verkopen voor herdenkingsdoeleinden of"
+" als geschenk, verkopen alleen gedrukte stukjes papier. Deze namen zijn niet"
+" goedgekeurd en worden nooit door wetenschappers gebruikt."
 
 #. type: Content of: <h3>
 #: ../../skycultures/modern_iau/description.en.utf8:97
 msgid "Proper names of deep-sky objects"
-msgstr ""
+msgstr "Eigennamen van deep-sky objecten"
 
 #. type: Content of: <p>
 #: ../../skycultures/modern_iau/description.en.utf8:98
@@ -18512,6 +18915,10 @@ msgid ""
 "Dutch artist Wil Thirion and published in 1987 by the American publishing "
 "house Willmann-Bell, specializing in astronomical literature."
 msgstr ""
+"Uranometria 2000.0 is een atlas van de sterrenhemel van het jaar 2000, "
+"opgesteld door de Nederlandse kunstenaar Wil Thirion en in 1987 uitgegeven "
+"door de Amerikaanse uitgeverij Willmann-Bell, gespecialiseerd in "
+"astronomische literatuur."
 
 #. type: Content of: <p>
 #: ../../skycultures/modern_iau/description.en.utf8:101
@@ -18523,6 +18930,11 @@ msgid ""
 "deep-sky objects - in particular, all the objects of the Messier and NGC "
 "catalogs."
 msgstr ""
+"De Atlas van Tirion, door astronomen gerespecteerd om zijn nauwkeurigheid en"
+" schoonheid, is voorzien van gedetailleerde tabellen en diverse indexen. Het"
+" tweede deel bevat drie transparante overlays voor nauwkeurige metingen. "
+"Uranometriya 2000.0 bevat meer dan 280.000 sterren en meer dan 30.000 deep-"
+"sky objecten - met name alle objecten uit de Messier- en NGC-catalogi."
 
 #. type: Content of: <p>
 #: ../../skycultures/modern_iau/description.en.utf8:107
@@ -18535,6 +18947,13 @@ msgid ""
 " objects, there are more than 30 thousand of them in the second edition - "
 "many times more than in any other paper atlas."
 msgstr ""
+"De tweede (gecorrigeerde en meest complete) driedelige editie van "
+"\"Uranometria 2000.0\" is in 2001 verschenen onder de naam \"Uranometria "
+"2000.0 Deep Sky Atlas\" en bevat 280035 sterren van beide halfronden tot "
+"9,75 <sup>m</sup> op een schaal van 1,85 cm per declinatiegraad op 220 "
+"spreads van A3-formaat. In de atlas wordt bijzondere aandacht besteed aan "
+"deepsky-objecten, waarvan er in de tweede editie meer dan 30 duizend zijn "
+"opgenomen - vele malen meer dan in enige andere papieren atlas."
 
 #. type: Content of: <p>
 #: ../../skycultures/modern_iau/description.en.utf8:114
@@ -18543,6 +18962,10 @@ msgid ""
 "Deep Sky Field Guide, consisting of tables with scientific data and proper "
 "names on objects depicted in the first two volumes [#3]."
 msgstr ""
+"Het derde deel van \"Uranometria 2000.0\" is een gids voor deepsky-objecten "
+"- Deep Sky Field Guide, bestaande uit tabellen met wetenschappelijke "
+"gegevens en eigennamen over objecten die in de eerste twee delen zijn "
+"afgebeeld [#3]."
 
 #. type: Content of: <h1>
 #: ../../skycultures/mongolian/description.en.utf8:1
@@ -20565,6 +20988,470 @@ msgstr ""
 "onderzoek uitgevoerd door Tonino Bussu en Marco Puddu"
 
 #. type: Content of: <h1>
+#: ../../skycultures/seri/description.en.utf8:1
+msgid "Seri (Comca'ac)"
+msgstr "Seri (Volk)"
+
+#. type: Content of: <p>
+#: ../../skycultures/seri/description.en.utf8:3
+msgid ""
+"The <a href=\"https://en.wikipedia.org/wiki/Seri_people\">Seri people</a> "
+"are an indigenous group in Mexico."
+msgstr ""
+"Het <a href=\"https://en.wikipedia.org/wiki/Seri_people\">Seri volk</a> is "
+"een inheemse groep in Mexico."
+
+#. type: Content of: <p>
+#: ../../skycultures/seri/description.en.utf8:5
+msgid "There have been six different Comca'ac groups (Comca'ac means \"people\"):"
+msgstr ""
+"Er zijn zes verschillende Comca'ac groepen geweest (Comca'ac betekent "
+"\"volk\"):"
+
+#. type: Content of: <p><ul><li>
+#: ../../skycultures/seri/description.en.utf8:7
+msgid ""
+"the Xica hacataj quitoj, who eat meat of sharks, inhabited San Esteban "
+"Island (Isla Turón);"
+msgstr ""
+"de Xica hacataj quitoj, die haaienvlees eten, bewoonden het eiland San "
+"Esteban ( Isla Turón);"
+
+#. type: Content of: <p><ul><li>
+#: ../../skycultures/seri/description.en.utf8:8
+msgid ""
+"the Xnamotat, who lived in the south, inhabit San Carlos, Guaymas and "
+"Tastiota;"
+msgstr ""
+"de Xnamotat, die in het zuiden leefden, wonen in San Carlos, Guaymas en "
+"Tastiota;"
+
+#. type: Content of: <p><ul><li>
+#: ../../skycultures/seri/description.en.utf8:9
+msgid ""
+"the Cail hitic 'tamoc, the men from the valley, inhabited the region between"
+" Tastiota and Bahía Kino;"
+msgstr ""
+"de Cail hitic 'tamoc, de mannen uit de vallei, bewoonden het gebied tussen "
+"Tastiota en Bahía Kino;"
+
+#. type: Content of: <p><ul><li>
+#: ../../skycultures/seri/description.en.utf8:10
+msgid ""
+"the Heno comca'ac, who live in the mountains, inhabited the centre of "
+"Tiburón Island;"
+msgstr ""
+"de Heno comca'ac, die in de bergen leven, bewoonden het centrum van het "
+"eiland Tiburón;"
+
+#. type: Content of: <p><ul><li>
+#: ../../skycultures/seri/description.en.utf8:11
+msgid ""
+"the Tepocaj, the fishermen, who inhabited the region between Puerto Libertad"
+" and Puerto Peñasco; and,"
+msgstr ""
+"de Tepocaj, de vissers, die het gebied tussen Puerto Libertad en Puerto "
+"Peñasco bewoonden; en,"
+
+#. type: Content of: <p><ul><li>
+#: ../../skycultures/seri/description.en.utf8:12
+msgid ""
+"the Tosni hox hanoquipilc, who fed themselves on sea birds (ducks and "
+"pelicans), inhabited Island San Lorenzo."
+msgstr ""
+"de Tosni hox hanoquipilc, die zich voedden met zeevogels (eenden en "
+"pelikanen), bewoonden het eiland San Lorenzo."
+
+#. type: Content of: <p>
+#: ../../skycultures/seri/description.en.utf8:14
+msgid ""
+"Nowadays, the Seri people live at Punta Chueca and Desemboque, located in "
+"the coast of the northwestern state of Sonora, Mexico.  According with the "
+"fishing cycles, Comca'ac occupy several fishing camps at the litoral "
+"distributed along a 100 km territory.  The whole area assigned to them "
+"reaches the 210 thousand hectares which corresponds to a region in the "
+"continent and the Tiburón Island in the California gulf."
+msgstr ""
+"Tegenwoordig woont het Seri volk in Punta Chueca en Desemboque, aan de kust "
+"van de noordwestelijke staat Sonora, Mexico. Volgens de vis-cycli bezetten "
+"de Comca'ac verschillende visserskampen aan de kust, verspreid over een "
+"gebied van 100 km. Het hele gebied dat hen is toegewezen bereikt de 210 "
+"duizend hectare die overeenkomt met een regio in het continent en het "
+"Tiburón-eiland in de Californische golf."
+
+#. type: Content of: <p>
+#: ../../skycultures/seri/description.en.utf8:19
+msgid ""
+"The Seri language (coiiqui'itom) forms part of the seriyumana family which "
+"means that, on one hand, its most recent relation can be given by the yumano"
+" coming from the north of the Californian peninsula, and, on the other hand,"
+" this language totally contrasts with the languages of its neighbouring "
+"nations who talk uto-aztec ones like pima, p&#225;pago, yaqui and mayo; all "
+"of them fila with a much more recent origin."
+msgstr ""
+"De Seri-taal (coiiqui'itom) maakt deel uit van de seriyumana-familie, wat "
+"betekent dat enerzijds de meest recente verwantschap kan worden gegeven door"
+" de yumano afkomstig uit het noorden van het Californische schiereiland, en "
+"dat anderzijds deze taal volledig contrasteert met de talen van de naburige "
+"volkeren die uto-aztec spreken zoals pima, pápago, yaqui en mayo; allemaal "
+"fila met een veel recentere oorsprong."
+
+#. type: Content of: <p>
+#: ../../skycultures/seri/description.en.utf8:24
+msgid ""
+"The description of the Comca'ac (Seri) Constellations presented here comes "
+"from the book \"Bajo el cielo Comca'ac: Astronomía entre el mar y el "
+"desierto\", written by Arturo Morales Blanco, in which it is possible to "
+"identify the relations between sky, sea and desert, as they are recovered by"
+" oral tradition and family memories."
+msgstr ""
+"De hier gepresenteerde beschrijving van de Comca'ac (Seri) Sterrenbeelden "
+"komt uit het boek \"Bajo el cielo Comca'ac: Astronomía entre el mar y el "
+"desierto\", geschreven door Arturo Morales Blanco, waarin het mogelijk is de"
+" relaties tussen hemel, zee en woestijn vast te stellen, zoals deze door "
+"mondelinge overlevering en familieherinneringen zijn teruggevonden."
+
+#. type: Content of: <p>
+#: ../../skycultures/seri/description.en.utf8:28
+msgid ""
+"This knowledge has arrived to us by oral transmission from generation to "
+"generation through time and shows how the events from the sea like the "
+"appearance of crabs or the abundance of Totoaba (a large fish, now in "
+"danger), comes along with the presence of sets of stars in the sky. Comca'ac"
+" people has named them Zaamth or Zix cam caoc'la, respectively; also, the "
+"coincidence of Pitahayas (cactus fruits) in the cactus with the appearance "
+"of constellation Hácosa (Corta-pitahayas) in the sky is very suggestive."
+msgstr ""
+"Deze kennis is tot ons gekomen door mondelinge overdracht van generatie op "
+"generatie door de tijd heen en laat zien hoe de gebeurtenissen uit de zee "
+"zoals het verschijnen van krabben of de overvloed aan Totoaba (een grote "
+"vis, nu in gevaar), samengaan met de aanwezigheid van reeksen sterren aan de"
+" hemel. Het Comca'ac volk heeft ze respectievelijk Zaamth of Zix cam caoc'la"
+" genoemd; ook het samenvallen van Pitahayas (cactusvruchten) in de cactus "
+"met het verschijnen van het sterrenbeeld Hácosa (Corta-pitahayas) aan de "
+"hemel is zeer suggestief."
+
+#. type: Content of: <table><tr><td><p>
+#: ../../skycultures/seri/description.en.utf8:41
+msgid ""
+"When the stars of Orion's Belt, Rigel and Betelgeuse appear above the "
+"western horizon, in the month of March, Comca'ac people see how in shallow "
+"waters of the marsh, the crabs are found forming groups of about 300 or 400 "
+"items which can be collected easily; that is the reason to call Zaamth to "
+"constellation.  After six months, when the sea is cold, the crabs do not "
+"appear any more going from one place to another; instead the sea wheat, "
+"xnois, comes and their seed has been used to make flour and different food "
+"plates for centuries. The legend says that in the days corresponding to the "
+"crab \"harvesting\", it must be avoided to break a leg or a claw because, if"
+" this happens, the day after there will not be any more crabs at the site."
+msgstr ""
+"Wanneer de sterren van de Gordel van Orion, Rigel en Betelgeuse boven de "
+"westelijke horizon verschijnen, in de maand maart, zien de Comca'acs hoe in "
+"de ondiepe wateren van het moeras de krabben worden gevonden die groepen "
+"vormen van ongeveer 300 of 400 stuks die gemakkelijk kunnen worden "
+"verzameld; dat is de reden om Zaamth naar sterrenbeeld te noemen. Na zes "
+"maanden, wanneer de zee koud is, verschijnen de krabben niet meer die van de"
+" ene plaats naar de andere gaan; in plaats daarvan komt de zeetarwe, xnois, "
+"en hun zaad wordt al eeuwenlang gebruikt om meel en verschillende "
+"voedselplaten te maken. De legende zegt dat in de dagen die overeenkomen met"
+" de \"oogst\" van de krabben, vermeden moet worden een poot of een klauw te "
+"breken, want als dit gebeurt, zullen er de dag erna geen krabben meer op de "
+"plaats zijn."
+
+#. type: Content of: <table><tr><td><p>
+#: ../../skycultures/seri/description.en.utf8:52
+msgid ""
+"About October 18th, an alignment of stars takes place in the morning sky and"
+" it is called, since ancient times, as Cohamc constellation, women. Then "
+"four or five days after the rains begin to fall with intensity and the wind "
+"runs by the desert. The star that is at the north of the alignment, the "
+"Comca'ac's name is Hacamta, the husband, and is the one appearing behind the"
+" other six named women, (the star Psi of Ursa Major); the six stars appear "
+"in sequence, two by two. The forecast of this bad weather motivated their "
+"ancestors to go to the caves in the mountain and to go far from the beach. "
+"After the difficult days, around two months later, Comca'ac people returned "
+"to the beach carrying with them all the food and materials kept along: dried"
+" meat, fish, 'caguama' turtle, honey, and flour from 'péchita de mezquite' "
+"(seeds from Mesquite tree), between them."
+msgstr ""
+"Rond 18 oktober vindt er een uitlijning van sterren plaats aan de "
+"ochtendhemel en deze wordt sinds de oudheid Cohamc sterrenbeeld genoemd. Dan"
+" vier of vijf dagen later beginnen de regens met intensiteit te vallen en "
+"gaat de wind door de woestijn. De ster die in het noorden van de uitlijning "
+"staat, de Comca'ac heet Hacamta, de man, en is degene die verschijnt achter "
+"de andere zes genoemde vrouwen, (de ster Psi van Ursa Major); de zes sterren"
+" verschijnen achter elkaar, twee aan twee. De voorspelling van dit slechte "
+"weer motiveerde hun voorouders om naar de grotten in de bergen te gaan en "
+"ver van het strand te gaan. Na de moeilijke dagen, ongeveer twee maanden "
+"later, keerden de Comca'ac mensen terug naar het strand met al het voedsel "
+"en materiaal dat zij bij zich hadden: gedroogd vlees, vis, \"caguama\" "
+"schildpad, honing, en meel van \"péchita de mezquite\" (zaden van de "
+"Mesquite boom), tussen hen in."
+
+#. type: Content of: <table><tr><td><p>
+#: ../../skycultures/seri/description.en.utf8:66
+msgid ""
+"This star that appears alone in the sky with its multicolour shine can be "
+"seen along the year.  However, in the first days of September (after the "
+"heliacal rising), one has to get up at 4 or 5 in the morning to see it. This"
+" star corresponds to Sirius and it announces the new day. The legend says "
+"that when someone gets up when the Sun is already in the sky, all his tents "
+"to become the skin of the dead. Hazoj means constellation and Hantificaö is "
+"\"Who comes at the dawn\"."
+msgstr ""
+"Deze ster die alleen aan de hemel staat met zijn veelkleurige glans is het "
+"hele jaar door te zien. Maar in de eerste dagen van september (na de "
+"heliakale opkomst) moet men om 4 of 5 uur 's ochtends opstaan om hem te "
+"zien. Deze ster komt overeen met Sirius en kondigt de nieuwe dag aan. De "
+"legende zegt dat als iemand opstaat als de Zon al aan de hemel staat, al "
+"zijn tenten de huid van de doden worden. Hazoj betekent sterrenbeeld en "
+"Hantificaö is \"Die komt bij de dageraad\"."
+
+#. type: Content of: <table><tr><td><p>
+#: ../../skycultures/seri/description.en.utf8:77
+msgid ""
+"This constellation is, perhaps, the most complex of Comca'ac ones, due to "
+"the fact that it covers a wide area in the sky and in it, one can find stars"
+" from Taurus, Twins, and the Capella star.  It can be said that Haapjc (Deer"
+" hunter) has the following sections: the whitetail deer, the bura deer and "
+"bighorn deer (Hépem, Háap and Möjit, respectively), which are the stars "
+"known as Hassaleh, Elnath and 123 Tau; the spear with its flint at Aldebaran"
+" and the stars forming a 'V' of Taurus, while the feathers are Castor and "
+"Pollux of Gemini; and, finally, the hunter, properly said, is Cozaactim "
+"(\"Who crosses\"), with his head at Capella."
+msgstr ""
+"Dit sterrenbeeld is misschien wel het meest complexe van de Comca'acs, omdat"
+" het een groot gebied aan de hemel beslaat en men er sterren in kan vinden "
+"uit Stier, Tweelingen en de Capella-ster. Men kan zeggen dat Haapjc "
+"(Hertenjager) de volgende delen heeft: het witstaarthert, het burahert en "
+"het dikhoornhert (respectievelijk Hépem, Háap en Möjit), die de sterren zijn"
+" die bekend staan als Hassaleh, Elnath en 123 Tau; de speer met zijn "
+"vuursteen bij Aldebaran en de sterren die een 'V' van Stier vormen, terwijl "
+"de veren Castor en Pollux van Tweelingen zijn; en ten slotte is de jager, "
+"goed gezegd, Cozaactim (\"Die oversteekt\"), met zijn hoofd bij Capella."
+
+#. type: Content of: <table><tr><td><p>
+#: ../../skycultures/seri/description.en.utf8:84
+msgid ""
+"The legend says that Cozaactim threw his spear and hit the Bura deer. Háap "
+"was wounded and flew through the sky bleeding; then, a little drop of blood "
+"fell in the Tiburón Island, and that is the reason why bura deer are native "
+"of the island. This constellation can be observed in September morning "
+"skies."
+msgstr ""
+"De legende zegt dat Cozaactim zijn speer gooide en het Burahert raakte. Háap"
+" raakte gewond en vloog bloedend door de lucht; vervolgens viel er een "
+"druppeltje bloed in het Tiburón-eiland, en dat is de reden waarom het "
+"Burahert op het eiland voorkomt. Dit sterrenbeeld kan worden waargenomen in "
+"de ochtendhemel van september."
+
+#. type: Content of: <table><tr><td><p>
+#: ../../skycultures/seri/description.en.utf8:92
+msgid ""
+"It is said that when this constellation is pointing to the top of the sky, "
+"at September 7th, it appears similar to the instrument Hácosa (Pitahaya-"
+"cutter), and it is time to collect the wild fruits: 'péchitas de mezquite' "
+"(Mesquite seeds) and pitahayas (cactus fruit), for example.  When there is "
+"no sign of it, the season will be bad."
+msgstr ""
+"Men zegt dat wanneer dit sterrenbeeld naar de top van de hemel wijst, op 7 "
+"september, het lijkt op het instrument Hácosa (Pitahaya-snijder), en het "
+"tijd is om de wilde vruchten te verzamelen: \"péchitas de mezquite\" "
+"(Mesquite-zaden) en pitahayas (cactusvruchten), bijvoorbeeld. Als er geen "
+"teken van is, is het seizoen slecht."
+
+#. type: Content of: <table><tr><td><p>
+#: ../../skycultures/seri/description.en.utf8:101
+msgid ""
+"Between the twelve stars of Cöiquih (Person) is the star Antares. In this "
+"constellation, the person seems to be fishing; that is why the corresponding"
+" legend affirms that Zix hantpatj (cochito fish) has at the roof of its "
+"mouth a kind of jelly substance, coming from the pulp of a cactus that the "
+"ancestors used as bait. This constellation goes, month after month, "
+"revolving in the sky and it is seen in a recumbent position when it is over "
+"Tiburón Island on midnight at September 8th."
+msgstr ""
+"Tussen de twaalf sterren van Cöiquih (Persoon) staat de ster Antares. In dit"
+" sterrenbeeld lijkt de persoon te vissen; daarom beweert de bijbehorende "
+"legende dat Zix hantpatj (cochitovis) aan het dak van zijn bek een soort "
+"geleisubstantie heeft, afkomstig van het vruchtvlees van een cactus die de "
+"voorouders als aas gebruikten. Dit sterrenbeeld draait, maand na maand, aan "
+"de hemel en is te zien in een liggende positie wanneer het op 8 september "
+"middernacht boven het eiland Tiburón staat."
+
+#. type: Content of: <table><tr><td><p>
+#: ../../skycultures/seri/description.en.utf8:111
+msgid ""
+"This constellation named Caamooilcoj (Wheel Game), is one of the most "
+"important arrays of stars between Comca'ac people; it can be observed at "
+"plenitude at winter; with around fifteen stars in a wheeled shape, and stars"
+" as reed tablets (tablillas de carrizo) which play the role of dice. It is "
+"said that in ancient times, this game was played by men, exclusively, who "
+"put as bet their own life; now, the game is played at festivals and special "
+"occasions by women representing events of life and protection; in "
+"particular, it is played during puberty ceremonies for example; or at the "
+"feast of zaaptim (great basket)."
+msgstr ""
+"Dit sterrenbeeld, Caamooilcoj (Wielenspel) genaamd, is een van de "
+"belangrijkste sterrenstelsels van de Comca'ac; het kan in de winter in volle"
+" omvang worden waargenomen; met ongeveer vijftien sterren in een wielvorm, "
+"en sterren als riet-tabletten (tablillas de carrizo) die de rol van "
+"dobbelsteen spelen. Er wordt gezegd dat dit spel in de oudheid uitsluitend "
+"door mannen werd gespeeld, die hun eigen leven als inzet namen; nu wordt het"
+" spel bij feesten en speciale gelegenheden gespeeld door vrouwen die "
+"gebeurtenissen van leven en bescherming voorstellen; het wordt met name "
+"gespeeld tijdens puberteitsceremonies bijvoorbeeld; of bij het feest van "
+"zaaptim (grote mand)."
+
+#. type: Content of: <table><tr><td><p>
+#: ../../skycultures/seri/description.en.utf8:117
+msgid ""
+"For this game, several round pieces of Pitahayas (cactus fruits) or of "
+"'cinita' (four lines cactus) made the circle (today, they are decorated "
+"stones with different motives); and, three reed pieces (tablillas de "
+"carrizo), painted in colours.  The meaning of these three colours are: Red -"
+" the blood and death; Blue - the sky and the sea; and, White - purity, good "
+"health and protection."
+msgstr ""
+"Voor dit spel maakten verschillende ronde stukken van Pitahayas "
+"(cactusvruchten) of van \"cinita\" (cactus met vier lijnen) de cirkel "
+"(tegenwoordig zijn het versierde stenen met verschillende motieven); en, "
+"drie rieten stukken (tablillas de carrizo), beschilderd in kleuren. De "
+"betekenis van deze drie kleuren is: Rood - het bloed en de dood; Blauw - de "
+"lucht en de zee; en Wit - zuiverheid, goede gezondheid en bescherming."
+
+#. type: Content of: <table><tr><td><p>
+#: ../../skycultures/seri/description.en.utf8:126
+msgid ""
+"This lonely star is known as Quetoh (little dove), it is modern Arcturus. It"
+" appears around October 8th announcing an epoch of good fishing. The "
+"ancestors did not have nets or other fishing arts, they used harpoons to "
+"capture their preys and a \"flint\" harpoon or double point tool. The legend"
+" says that many years ago, with the appearance of this star in the sky, the "
+"floriation of cactus begun and at the end of the week, there were Pitahayas "
+"on them; however, the next day, all the pitahayas disappeared: it was Quetoh"
+" yacaso or 'spell of the dove' responsible of eating that fruit."
+msgstr ""
+"Deze eenzame ster staat bekend als Quetoh (kleine duif), het is de moderne "
+"Arcturus. Hij verschijnt rond 8 oktober en kondigt een tijdperk van goede "
+"visvangst aan. De voorouders hadden geen netten of andere viskunsten, zij "
+"gebruikten harpoenen om hun prooi te vangen en een \"vuurstenen\" harpoen of"
+" dubbele punt gereedschap. De legende vertelt dat vele jaren geleden, met "
+"het verschijnen van deze ster aan de hemel, de bloei van de cactussen begon "
+"en aan het eind van de week zaten er Pitahayas op; de volgende dag echter "
+"waren alle Pitahayas verdwenen: het was Quetoh yacaso of \"spreuk van de "
+"duif\" die verantwoordelijk was voor het eten van die vrucht."
+
+#. type: Content of: <table><tr><td><p>
+#: ../../skycultures/seri/description.en.utf8:137
+msgid ""
+"This lonely star is known as Hazoj canoj Himatax because its meaning is a "
+"star which does not move and around which all turns.  It is present all "
+"night long, all the days of the year."
+msgstr ""
+"Deze eenzame ster staat bekend als Hazoj canoj Himatax omdat het een ster is"
+" die niet beweegt en waar alles omheen draait. Hij is de hele nacht "
+"aanwezig, alle dagen van het jaar."
+
+#. type: Content of: <table><tr><td><p>
+#: ../../skycultures/seri/description.en.utf8:144
+msgid ""
+"The young hunter, says the legend, was a boy who went hunting, and several "
+"weeks after his departure he was still absent, and the members of his camp "
+"considered him dead. But several months later, at daybreak, he has shown "
+"himself to his parents who were surprised telling him: \"We thought you were"
+" dead, we have spent many days looking for you, until we were tired; we "
+"cried for you a lot\". The young man told his parents: \"I live near the "
+"beach, I found a good place and stayed there\". \"But what kind of water you"
+" drink?\" They asked.  \"I found any water and that is I drink, Haxhaxaha "
+"tahomisi\", he said to them while talking about the Tecomate Bay."
+msgstr ""
+"De jonge jager, zegt de legende, was een jongen die ging jagen, en enkele "
+"weken na zijn vertrek was hij nog steeds afwezig, en de leden van zijn kamp "
+"beschouwden hem als dood. Maar enkele maanden later, bij het aanbreken van "
+"de dag, heeft hij zich laten zien aan zijn ouders, die hem verbaasd "
+"vertelden: \"We dachten dat je dood was, we hebben vele dagen naar je "
+"gezocht, tot we moe waren; we hebben veel om je gehuild\". De jongeman "
+"vertelde zijn ouders: \"Ik woon vlakbij het strand, ik heb een goede plek "
+"gevonden en ben daar gebleven\". \"Maar wat voor water drink je?\" vroegen "
+"ze. \"Ik heb elk water gevonden en dat drink ik, Haxhaxaha tahomisi\", zei "
+"hij tegen hen terwijl hij sprak over de Baai van Tecomate."
+
+#. type: Content of: <table><tr><td><p>
+#: ../../skycultures/seri/description.en.utf8:151
+msgid ""
+"According to this legend, the young hunter became the Constellation with "
+"Canopus at its centre caused by a conflict with his elder brother. It "
+"appears directly towards the south."
+msgstr ""
+"Volgens deze legende werd de jonge jager door een conflict met zijn oudere "
+"broer het sterrenbeeld met Canopus in het centrum. Het verschijnt recht naar"
+" het zuiden."
+
+#. type: Content of: <p>
+#: ../../skycultures/seri/description.en.utf8:157
+msgid ""
+"All this knowledge of Comca'ac people comes from prehispanic epoch, and it "
+"has prevailed through centuries, thanks to oral tradition and the strength "
+"of the community to colonization, at first, and his opposition to "
+"evangelization, later on. Still today, it is possible to hear the stories "
+"and legends behind the naming of constellations and the events on the sea "
+"and on the desert. With the recovery of these legends, by exercise of memory"
+" and lively events with his ancestors, Arturo Morales Blanco gave us a "
+"legacy that must be conserved for future generations: children, young people"
+" who will keep in their own language how and what to look for in the sky."
+msgstr ""
+"Al deze kennis van de Comca'ac stamt uit het prehispanische tijdperk, en "
+"heeft eeuwenlang stand gehouden, dankzij de mondelinge overlevering en de "
+"kracht van de gemeenschap tegen de kolonisatie, in het begin, en zijn verzet"
+" tegen de evangelisatie, later. Ook nu nog kan men de verhalen en legenden "
+"horen achter de naamgeving van de sterrenbeelden en de gebeurtenissen op zee"
+" en in de woestijn. Met het herstel van deze legendes, door het oefenen van "
+"het geheugen en levendige gebeurtenissen met zijn voorouders, heeft Arturo "
+"Morales Blanco ons een erfenis geschonken die bewaard moet blijven voor "
+"toekomstige generaties: kinderen, jonge mensen die in hun eigen taal zullen "
+"bijhouden hoe en wat te zoeken aan de hemel."
+
+#. type: Content of: <ul><li>
+#: ../../skycultures/seri/description.en.utf8:167
+msgid "Arturo Morales Blanco"
+msgstr "Arturo Morales Blanco"
+
+#. type: Content of: <ul><li>
+#: ../../skycultures/seri/description.en.utf8:168
+msgid "Alejandro Aguilar Zeleny"
+msgstr "Alejandro Aguilar Zeleny"
+
+#. type: Content of: <ul><li>
+#: ../../skycultures/seri/description.en.utf8:169
+msgid "Julio Saucedo Morales"
+msgstr "Julio Saucedo Morales"
+
+#. type: Content of: <ul><li>
+#: ../../skycultures/seri/description.en.utf8:170
+msgid "Alfredo Manríquez"
+msgstr "Alfredo Manríquez"
+
+#. type: Content of: <ul><li>
+#: ../../skycultures/seri/description.en.utf8:171
+msgid "UNISON"
+msgstr "UNISON"
+
+#. type: Content of: <p>
+#: ../../skycultures/seri/description.en.utf8:175
+msgid ""
+"<strong>Ra&#250;l Pérez-Enríquez</strong>: <a "
+"href=\"mailto:raulpe55@gmail.com\">raulpe55(at)gmail(dot)com</a>"
+msgstr ""
+"<strong>Ra&#250;l Pérez-Enríquez</strong>: <a "
+"href=\"mailto:raulpe55@gmail.com\">raulpe55(at)gmail(dot)com</a>"
+
+#. type: Content of: <p>
+#: ../../skycultures/seri/description.en.utf8:177
+msgid "English translation by: Alfredo Manríquez"
+msgstr "Engelse vertaling door: Alfredo Manríquez"
+
+#. type: Content of: <h1>
 #: ../../skycultures/russian_siberian/description.en.utf8:1
 msgid "Russian (Siberian)"
 msgstr "Russisch (Siberisch)"
@@ -21546,6 +22433,498 @@ msgid ""
 msgstr ""
 "Illustratie zijn gemaakt door Antonio Gumercindo Taques dos Santos (Ticão) "
 "en Youssif Ganthous Filho (youssif@gmail.com)."
+
+#. type: Content of: <h1>
+#: ../../skycultures/tikuna/description.en.utf8:1
+msgid "The Tikuna Skyscape: Constellations and Seasonality"
+msgstr "Het Tikuna landschap: Sterrenbeelden en seizoensgebondenheid"
+
+#. type: Content of: <h3>
+#: ../../skycultures/tikuna/description.en.utf8:3
+msgid "Priscila Faulhaber"
+msgstr "Priscila Faulhaber"
+
+#. type: Content of: <h3>
+#: ../../skycultures/tikuna/description.en.utf8:3
+msgid "MAST (Museu de Astronomia e Ciências Afins (Brasil)"
+msgstr "MAST (Museu de Astronomia e Ciências Afins (Brasil)"
+
+#. type: Content of: <p>
+#: ../../skycultures/tikuna/description.en.utf8:5
+msgid ""
+"The Tikuna indigenous people have inhabited the region of the Upper Solimões"
+" river for the past 2,000 years.  They currently occupy a territory where "
+"the political borders of three countries converge: Brazil, Colombia, and "
+"Peru.  This is the reason why the Tikuna recognize themselves as a "
+"differentiated indigenous group, while also identifying with the national "
+"identities related to these three countries."
+msgstr ""
+"De inheemse Tikuna-bevolking bewoont het gebied van de Boven-Solimões al "
+"2000 jaar. Momenteel bezetten zij een gebied waar de politieke grenzen van "
+"drie landen samenkomen: Brazilië, Colombia en Peru. Dit is de reden waarom "
+"de Tikuna zichzelf erkennen als een gedifferentieerde inheemse groep, "
+"terwijl ze zich tegelijkertijd identificeren met de nationale identiteiten "
+"van deze drie landen."
+
+#. type: Content of: <p>
+#: ../../skycultures/tikuna/description.en.utf8:10
+msgid ""
+"Tikuna territory encompasses a region 600 kilometers long, running west to "
+"east from the Chimbote region in Peru—along the emptiness of the Amazonas-"
+"Solimões valley, in the so-called Trapézio Amazônico (Colombian Amazonian "
+"Trapezoid)—to the Barreira da Missão region, in the municipality of Tefé, in"
+" the Brazilian state of Amazonas (See The Ticuna Atlas, Figure I)."
+msgstr ""
+"Het grondgebied van de Tikuna omvat een 600 kilometer lang gebied dat van "
+"west naar oost loopt van de Chimbote regio in Peru - langs de leegte van de "
+"Amazonas-Solimões vallei, in het zogenaamde Trapézio Amazônico (Colombiaanse"
+" Amazone Trapezoïde) - tot de Barreira da Missão regio, in de gemeente Tefé,"
+" in de Braziliaanse staat Amazonas (Zie De Ticuna Atlas, Figuur I)."
+
+#. type: Content of: <p><p><h5><em><cite><a>
+#: ../../skycultures/tikuna/description.en.utf8:16
+msgid "<em>Figure 1: The Tikuna Atlas<cite id=\"cit1a\"><a href=\"#cit1\">"
+msgstr "<em>Figuur 1: De Tikuna Atlas<cite id=\"cit1a\"><a href=\"#cit1\">"
+
+#. type: Content of: <p><p><h5><em><cite><a><B>
+#: ../../skycultures/tikuna/description.en.utf8:16
+msgid "¹"
+msgstr "¹"
+
+#. type: Content of: <p><p><h5>
+#: ../../skycultures/tikuna/description.en.utf8:16
+msgid "</a></cite> </em>"
+msgstr "</a></cite> </em>"
+
+#. type: Content of: <p><p><p><cite><a>
+#: ../../skycultures/tikuna/description.en.utf8:18
+msgid ""
+"The agencies and researchers that deal with them estimate that more than "
+"53,544 (Siasi/Sesai, 2014) Tikunas live in Brazil (FUNASA, 2009), 8.000 in "
+"Colombia (Goulard, 2010), and 6.982 in Peru (INEL, 2007)<cite "
+"id=\"cit2a\"><a href=\"#cit2\">"
+msgstr ""
+"De instanties en onderzoekers die zich met hen bezighouden, schatten dat er "
+"meer dan 53.544 (Siasi/Sesai, 2014) Tikuna's leven in Brazilië (FUNASA, "
+"2009), 8.000 in Colombia (Goulard, 2010), en 6.982 in Peru (INEL, 2007)<cite"
+" id=\"cit2a\"><a href=\"#cit2\">"
+
+#. type: Content of: <p><p><p><cite><a><B>
+#: ../../skycultures/tikuna/description.en.utf8:19
+msgid "²"
+msgstr "²"
+
+#. type: Content of: <p><p><p>
+#: ../../skycultures/tikuna/description.en.utf8:19
+msgid ""
+"</a></cite>.  Together, they constitute the largest Amazonian indigenous "
+"population.  Aside from their own Tikuna language, they also speak Spanish "
+"and Portuguese, depending on whether they live in Colombia and Peru or in "
+"Brazil."
+msgstr ""
+"</a></cite>. Samen vormen zij de grootste inheemse bevolking van het "
+"Amazonegebied. Naast hun eigen Tikuna-taal spreken zij ook Spaans en "
+"Portugees, naargelang zij in Colombia en Peru of in Brazilië wonen."
+
+#. type: Content of: <p><p><p>
+#: ../../skycultures/tikuna/description.en.utf8:23
+msgid ""
+"The Tikuna live in riverside villages along the Amazonas-Solimões and its "
+"tributaries, called igarapés.  Their daily life revolve around the "
+"cultivation cycles of different agricultural goods; specially, manioc, used "
+"to produce the flour the Tikuna sell in the markets of the region’s main "
+"cities.  They are also fishers, hunters, and gatherers of the forest "
+"products.  The women make hammocks, bags, and other objects with plant "
+"fibers; and the men paint on tururi fiber and fabricate arrows, paddles, and"
+" canoes."
+msgstr ""
+"De Tikuna wonen in dorpen langs de Amazonas-Solimões en zijn zijrivieren, "
+"igarapés genaamd. Hun dagelijks leven draait om de teeltcycli van "
+"verschillende landbouwproducten, met name maniok, waarmee het meel wordt "
+"geproduceerd dat de Tikuna verkopen op de markten van de belangrijkste "
+"steden in de regio. Ze zijn ook vissers, jagers en verzamelaars van "
+"bosproducten. De vrouwen maken hangmatten, tassen en andere voorwerpen van "
+"plantenvezels; en de mannen schilderen op tururi-vezels en maken pijlen, "
+"peddels en kano's."
+
+#. type: Content of: <p><p><p>
+#: ../../skycultures/tikuna/description.en.utf8:29
+msgid ""
+"It should be noted that, in Brazil, the Tikuna Indians live in indigenous "
+"lands recognized by Brazil’s indigenous policy.  They are located in "
+"“terrestrial islands” among non-indigenous territories occupied by the "
+"Brazilian Population, from Tabatinga to Manaus (as illustrated in the "
+"Brazilian Tikuna Atlas)."
+msgstr ""
+"Er zij op gewezen dat de Tikuna-indianen in Brazilië leven in inheemse "
+"gebieden die door het inheemse beleid van Brazilië worden erkend. Zij "
+"bevinden zich op \"terrestrische eilanden\" tussen niet-inheemse gebieden "
+"die door de Braziliaanse bevolking worden bezet, van Tabatinga tot Manaus "
+"(zoals blijkt uit de Braziliaanse Tikuna-atlas)."
+
+#. type: Content of: <p><p><h2>
+#: ../../skycultures/tikuna/description.en.utf8:33
+msgid "The Astronomical Correlations"
+msgstr "De Astronomische Relaties"
+
+#. type: Content of: <p><p><p>
+#: ../../skycultures/tikuna/description.en.utf8:35
+msgid ""
+"The movements of the Tikuna constellations correspond to an interpretation "
+"of the seasonality of rainfall, as the Tikuna narratives suggest.  These "
+"constellations are related to myths referencing the ascension and fall of "
+"Wücütcha (a heavenly beast related to the Jaguar Clan), Coyatchicüra "
+"(Caiman’s Jaw) and Baweta (Tracajá, the Aquatic Turtle Collective), the "
+"Anteater’s fight with the Jaguar, and the Way of the Tapir."
+msgstr ""
+"De bewegingen van de Tikuna-sterrenbeelden komen overeen met een "
+"interpretatie van de seizoensgebondenheid van de regenval, zoals de Tikuna-"
+"verhalen suggereren. Deze sterrenbeelden zijn gerelateerd aan mythen die "
+"verwijzen naar de opkomst en ondergang van Wücütcha (een hemels beest dat "
+"gerelateerd is aan de Jaguar Clan), Coyatchicüra (Kaaiman's Kaak) en Baweta "
+"(Tracajá, het Verzamelorgaan van de Waterschildpad), het gevecht van de "
+"Miereneter met de Jaguar, en de Weg van de Tapir."
+
+#. type: Content of: <p><p><p>
+#: ../../skycultures/tikuna/description.en.utf8:39
+msgid ""
+"According to the testimony of the Tikuna indigenous people, Baweta (the "
+"Pleiades Star Cluster) appears in the eastern sky towards the end of "
+"November, at nightfall.  After Baweta rises, Caiman’s Jaw rises. Wücütcha’s "
+"leg corresponds to a portion of The Orion Constellation; and it begins to "
+"disappear from the western sky around the 20th of May, at nightfall.  About "
+"one month earlier, the Caiman’s Jaw, corresponding to The Hyades Star "
+"Cluster in Taurus, also disappears to the West."
+msgstr ""
+"Volgens het getuigenis van de inheemse Tikuna-bevolking verschijnt Baweta "
+"(de Pleiaden-sterrenhoop) aan de oostelijke hemel tegen het einde van "
+"november, bij het vallen van de avond. Na de opkomst van Baweta komt de Kaak"
+" van Kaaiman op. Het been van Wücütcha komt overeen met een deel van de "
+"sterrenbeeld Orion; en het begint aan de westelijke hemel te verdwijnen rond"
+" 20 mei, bij het vallen van de avond. Ongeveer een maand eerder verdwijnt de"
+" Kaaiman's Kaak, die overeenkomt met de Hyaden-sterrenhoop in Stier, ook in "
+"het westen."
+
+#. type: Content of: <p><p><p>
+#: ../../skycultures/tikuna/description.en.utf8:44
+msgid ""
+"According to Vieira’s interpretation, the form of Baweta (the Turtle "
+"Collective) is associated with the stars within the asterisms of the "
+"Pleiades and of Perseus.  Baweta’s eyes are the feet of Perseus (Omicron "
+"Persei - Atik and ζ (Zeta) Persei).  The “V” shape that Western astronomy "
+"relates to the head of Taurus is called Coyatchicüra (Caiman’s Jaw).  "
+"Wücütcha’s Leg corresponds to the stars that groups as Orion.  Its toes are "
+"Orion’s Belt and the bend of the legs are ι (iota) Orionis; κ (kappa) "
+"Orionis; η (eta) Leporis and δ (delta) Leporis."
+msgstr ""
+"Volgens de interpretatie van Vieira wordt de vorm van Baweta (het "
+"schildpaddencollectief) geassocieerd met de sterren binnen de asterismen van"
+" de Pleiaden en van Perseus. De ogen van Baweta zijn de voeten van Perseus "
+"(Omicron Persei - Atik en ζ (Zeta) Persei). De \"V\"-vorm die de westerse "
+"astronomie in verband brengt met het hoofd van Taurus wordt Coyatchicüra "
+"(Kaaimankaak) genoemd. Het been van Wücütcha komt overeen met de sterren die"
+" zich groeperen als Orion. Zijn tenen zijn de Gordel van Orion en de bochten"
+" van de benen zijn ι (iota) Orionis; κ (kappa) Orionis; η (eta) Leporis en δ"
+" (delta) Leporis."
+
+#. type: Content of: <p><p><p>
+#: ../../skycultures/tikuna/description.en.utf8:50
+msgid ""
+"During the summer, the fight between the Anteater (Tchatü) and the Jaguar "
+"(Ai) occurs.  The end of the battle coincides with the death and ascension "
+"of Wücütcha.  The eyes of the Anteater are located in β (beta) of Triangulum"
+" Australe; his claw and body is in the constellations Norma and Ara.  The "
+"right foot of the Jaguar is in Scorpio’s α (Antares), σ (Sigma), and τ "
+"(tau); its eyes are in ε (epsilon) and μ (mu) Scorpii; and its left paw is "
+"in λ (Shaula), υ (upsilon Sco – Lesath) and κ (kappa) of the same "
+"constellation.  Wücütcha (the Jaguar’s leg) represents the beginning of the "
+"rains in late September; and its reappearance to the east follows the "
+"setting of Tchatü in the west, at nightfall, in the end of November.  Those "
+"correlations are illuminated by indigenous testimony reproduced below:"
+msgstr ""
+"In de zomer vindt het gevecht plaats tussen de Miereneter (Tchatü) en de "
+"Jaguar (Ai). Het einde van de strijd valt samen met de dood en de hemelvaart"
+" van Wücütcha. De ogen van de Miereneter bevinden zich in β (bèta) van "
+"Triangulum Australe; zijn klauw en lichaam bevinden zich in de "
+"sterrenbeelden Norma en Ara. De rechtervoet van de Jaguar staat in α "
+"(Antares), σ (Sigma) en τ (tau) van Scorpio; zijn ogen staan in ε (epsilon) "
+"en μ (mu) van Scorpii; en zijn linkerpoot staat in λ (Shaula), υ (upsilon "
+"Sco - Lesath) en κ (kappa) van hetzelfde sterrenbeeld. Wücütcha (de poot van"
+" de jaguar) staat voor het begin van de regens eind september; en zijn "
+"terugkeer naar het oosten volgt op de ondergang van Tchatü in het westen, "
+"bij het vallen van de avond, eind november. Deze correlaties worden "
+"verduidelijkt door inheemse getuigenissen die hieronder worden weergegeven:"
+
+#. type: Content of: <p><p><blockquote><p>
+#: ../../skycultures/tikuna/description.en.utf8:59
+msgid ""
+"“The stars fit into their respective constellations. First is Wücütcha. "
+"After winter, summer begins to walk. It is the Jaguar.  After him, comes "
+"Coyathicüra in the month of May, at nightfall, when the Caiman’s Jaw appears"
+" on the beach.  Baweta appears in September, the month of the turtle. In "
+"May, Wücütcha and Coyatchicüra fall. They all fall together at the end of "
+"May.  In July, they come again. Baweta already begins to appear in July.  "
+"When Wücütcha falls, beginning in May, caimans and turtles begin to appear. "
+"The apex is in September.”"
+msgstr ""
+"\"De sterren passen in hun respectievelijke sterrenbeelden. De eerste is "
+"Wücütcha. Na de winter begint de zomer te lopen. Het is de Jaguar. Na hem, "
+"komt Coyathicüra in de maand mei, bij het vallen van de avond, wanneer de "
+"Kaaiman's Kaak op het strand verschijnt. Baweta verschijnt in september, de "
+"maand van de schildpad. In mei vallen Wücütcha en Coyatchicüra. Eind mei "
+"vallen ze allemaal samen. In juli komen ze weer. Baweta begint al in juli te"
+" verschijnen. Als Wücütcha valt, begin mei, beginnen kaaimannen en "
+"schildpadden te verschijnen. Het hoogtepunt is in september.\""
+
+#. type: Content of: <p><p><blockquote><p>
+#: ../../skycultures/tikuna/description.en.utf8:65
+msgid ""
+"“In May, all the constellations fall, together with their planets.  It is "
+"summertime. Later, in July, they appear again for the New Year.  Coya and "
+"Wücütcha leave the sky from May to September. Later, in July, they appear "
+"again.”"
+msgstr ""
+"\"In mei vallen alle sterrenbeelden, samen met hun planeten. Het is "
+"zomertijd. Later, in juli, verschijnen ze weer voor het nieuwe jaar. Coya en"
+" Wücütcha verlaten de hemel van mei tot september. Later, in juli, "
+"verschijnen ze weer.\""
+
+#. type: Content of: <p><p><blockquote><p>
+#: ../../skycultures/tikuna/description.en.utf8:68
+msgid "Fernando Marques or Ütchancu – translated by Lucho"
+msgstr "Fernando Marques of Ütchancu - vertaald door Lucho"
+
+#. type: Content of: <p><p><p>
+#: ../../skycultures/tikuna/description.en.utf8:71
+msgid ""
+"The Tikuna interpret processes affected by a succession of meteorological "
+"changes that, in turn, determine the rainy and the dry seasons.  In this "
+"region of Western Amazon, the rainy season runs from December to March and "
+"the dry season from June to September.  During April, May, October, and "
+"November the rainfall is intermediate. In November, the water level starts "
+"to rise and in late December the tides occur.  During the month of May, the "
+"water level drops until September, the peak of the drought.  The periods of "
+"El Niño imply a rain deficit, causing the extreme drought of the great "
+"river; during La Niña, the cooling of the Pacific increases the amount of "
+"water, causing dramatic tides and floods."
+msgstr ""
+"De Tikuna interpreteren processen die beïnvloed worden door een opeenvolging"
+" van meteorologische veranderingen die op hun beurt het regenseizoen en het "
+"droge seizoen bepalen. In deze regio van het westelijke Amazonegebied loopt "
+"het regenseizoen van december tot maart en het droge seizoen van juni tot "
+"september. In april, mei, oktober en november is de regenval gemiddeld. In "
+"november begint het waterpeil te stijgen en eind december treden de getijden"
+" op. In mei daalt het waterpeil tot september, het hoogtepunt van de "
+"droogte. De perioden van El Niño houden een regentekort in, wat de extreme "
+"droogte van de grote rivier veroorzaakt; tijdens La Niña verhoogt de "
+"afkoeling van de Stille Oceaan de hoeveelheid water, wat dramatische "
+"getijden en overstromingen veroorzaakt."
+
+#. type: Content of: <p><p><p>
+#: ../../skycultures/tikuna/description.en.utf8:78
+msgid ""
+"Although dependent on weather variability, at the September Equinox the "
+"Tikuna observe how fog affects how they see in early morning; the Pleiades "
+"star cluster disappears on the morning horizon in early June and reappears "
+"in the evening, in late November.  The goal of the Tikuna is to predict the "
+"intensity of the coming rains in order to negotiate with the entity Mawü, "
+"the “Master of Rain,” the effects of the floods on their subsistence "
+"activities."
+msgstr ""
+"Hoewel ze afhankelijk zijn van de veranderlijkheid van het weer, observeren "
+"de Tikuna bij de september-equinox hoe mist hun zicht in de vroege ochtend "
+"beïnvloedt; de sterrenhoop Plejaden verdwijnt begin juni aan de "
+"ochtendhorizon en verschijnt 's avonds weer, eind november. Het doel van de "
+"Tikuna is de intensiteit van de komende regens te voorspellen om met de "
+"entiteit Mawü, de \"Meester van de Regen\", te onderhandelen over de "
+"gevolgen van de overstromingen voor hun levensonderhoud."
+
+#. type: Content of: <p><p><p>
+#: ../../skycultures/tikuna/description.en.utf8:82
+msgid ""
+"According to the explanations found in Enepü (a Tikuna community in the "
+"indigenous Land Eware II, in the Brazilian State of Amazon, in Western "
+"Amazonia), the influence of seasonality upon Tikuna subsistence activities "
+"is more prevalent along the Solimões.  In the headwaters of the igarapés, "
+"where Enepü is situated, plenty of food exists all year long.  In Enepü, "
+"trees and palms, such as the ingá and açaí, are fertile all year long due to"
+" the “virginity” and the enrichment of the soil by natural compost.  The "
+"same thing occurs with the fishing in Lake Preto, within the limits of "
+"Enepü, where they can supply themselves abundantly with fish all year long."
+"  On the Solimões, however, one finds fish only from April to July, when the"
+" water level drops. Abundance in the hunt is also from April to July (or "
+"September, at most), along the Solimões.  Fishing becomes more difficult "
+"when the river is high. The fruit of the native açaí palm is collected in "
+"summer, and customarily saved for preparation during winter—time of poor "
+"hunting and fishing.  Through planning and regular gardening, harvests are "
+"available all year long. The harvest of cultivated plants also occurs during"
+" the drought months.  There is a certain degree of flexibility in adapting "
+"the agricultural calendar to the rainy season (when fishing and hunting are "
+"not productive) and the dry season, (when fishing is more abundant); "
+"however, difficulties involving navigation and transport grow as the water "
+"level drops along the igarapés linking the river.  Traditional culture, "
+"however, is not prepared for unforeseen alterations in the rainy season, "
+"such as it occurred in 2002.  In that year, July saw the beginning of the "
+"repiquete (the rise on water levels), which normally occurs in September.  "
+"This destroyed the short-range agricultural cycle and made the fish scarcer,"
+" changing alimentary habits."
+msgstr ""
+"Volgens de verklaringen die in Enepü (een Tikuna-gemeenschap in het inheemse"
+" Land Eware II, in de Braziliaanse deelstaat Amazone, in het westen van "
+"Amazonia) zijn gevonden, is de invloed van de seizoensgebondenheid op de "
+"bestaansactiviteiten van de Tikuna groter langs de Solimões. In de bovenloop"
+" van de igarapés, waar Enepü zich bevindt, is er het hele jaar door "
+"voldoende voedsel. In Enepü zijn de bomen en palmen, zoals de ingá en de "
+"açaí, het hele jaar door vruchtbaar door de \"maagdelijkheid\" en de "
+"verrijking van de bodem door natuurlijke compost. Hetzelfde gebeurt met de "
+"visserij in het Preto-meer, binnen de grenzen van Enepü, waar ze zich het "
+"hele jaar door overvloedig van vis kunnen voorzien. Op de Solimões "
+"daarentegen vindt men alleen vis van april tot juli, wanneer het waterpeil "
+"daalt. Langs de Solimões is de jacht ook van april tot juli (of hooguit "
+"september). Vissen wordt moeilijker als de rivier hoog staat. De vruchten "
+"van de inheemse açaí-palm worden in de zomer verzameld, en gewoonlijk "
+"bewaard als voorbereiding in de winter als de jacht en de visvangst slecht "
+"zijn. Door planning en regelmatig tuinieren is de oogst het hele jaar door "
+"beschikbaar. De oogst van gecultiveerde planten vindt ook plaats tijdens de "
+"droogtemaanden. Er is een zekere mate van flexibiliteit in de aanpassing van"
+" de landbouwkalender aan het regenseizoen (wanneer de visserij en de jacht "
+"niet productief zijn) en het droge seizoen, (wanneer de visvangst "
+"overvloediger is); de moeilijkheden met de scheepvaart en het vervoer nemen "
+"echter toe naarmate het waterpeil daalt langs de igarapés die de rivier "
+"verbinden. De traditionele cultuur is echter niet voorbereid op onvoorziene "
+"veranderingen in het regenseizoen, zoals in 2002. In dat jaar begon in juli "
+"de repiquete (de stijging van het waterpeil), die normaal in september "
+"plaatsvindt. Dit vernietigde de landbouwcyclus op korte termijn en maakte de"
+" vis schaarser, waardoor de eetgewoonten veranderden."
+
+#. type: Content of: <p><p><h2>
+#: ../../skycultures/tikuna/description.en.utf8:96
+msgid "Researchers"
+msgstr "Onderzoekers"
+
+#. type: Content of: <p><p><p>
+#: ../../skycultures/tikuna/description.en.utf8:98
+msgid "<b>Priscila Faulhaber</b> (Museum of Astronomy and Related Sciences)"
+msgstr "<b>Priscila Faulhaber</b> (Museum of Astronomy and Related Sciences)"
+
+#. type: Content of: <p><p><p>
+#: ../../skycultures/tikuna/description.en.utf8:100
+msgid ""
+"<b>Fernando Vieira</b> (Astronomer and Former Coordinator of Astronomy in "
+"The Planetarium Foundation of the City of Rio de Janeiro)  helped with the "
+"interpretation of the astronomical correlations between Western and Tikuna "
+"constellations, identified by the Tikuna in November 2002, during a research"
+" visit at the Science Center and Planetarium of the Universidade do Pará "
+"(Belém/Brazil), using the Starry Night System.  Vieira plotted the "
+"correspondence between the traces of Tikuna mythical animals and the "
+"Official IAU constellations of western astronomy.  He also reviewed this "
+"text for any skyscape incongruences related to corresponding Western "
+"astronomy and Tikuna cosmovision."
+msgstr ""
+"Fernando Vieira (astronoom en voormalig coördinator sterrenkunde in de "
+"Stichting Planetarium van de stad Rio de Janeiro) hielp bij de interpretatie"
+" van de astronomische correlaties tussen westerse en Tikuna-sterrenbeelden, "
+"die door de Tikuna in november 2002 tijdens een onderzoeksbezoek aan het "
+"Science Center en Planetarium van de Universidade do Pará (Belém/Brazilië) "
+"zijn vastgesteld met behulp van het Starry Night System. Vieira heeft de "
+"overeenstemming uitgezet tussen de sporen van de mythische dieren van Tikuna"
+" en de officiële IAU-sterrenbeelden van de westerse astronomie. Ook bekeek "
+"hij deze tekst op eventuele ongerijmdheden tussen de westerse astronomie en "
+"de kosmovisie van de Tikuna."
+
+#. type: Content of: <p><p><p>
+#: ../../skycultures/tikuna/description.en.utf8:106
+msgid ""
+"We are integrating in this investigation <b>Walmir Thomazi Cardoso</b>, a "
+"Physics Professor in the Postgraduate Program in History of Sciences and "
+"Techniques and Epistemology at the Federal University of Rio de Janeiro "
+"(HCTE-UFRJ) and researcher of astronomy in culture; he made some "
+"reinterpretations in a collaborative work with physics undergraduate "
+"students; and <b>Youssif Ghantous Filho</b>, adapting and anchoring original"
+" drawings to Stellarium.  Nevertheless, every sky interpretation is "
+"contextual and circumstantial.  Current collaborative investigations are "
+"looking for new astronomical observation together with the Tikuna, which "
+"will improve the initial findings."
+msgstr ""
+"Wij integreren in dit onderzoek <b>Walmir Thomazi Cardoso</b>, hoogleraar "
+"natuurkunde in het Postgraduaatprogramma Geschiedenis van de Wetenschappen "
+"en Technieken en Epistemologie aan de Federale Universiteit van Rio de "
+"Janeiro (HCTE-UFRJ) en onderzoeker van de astronomie in de cultuur; hij "
+"maakte enkele herinterpretaties in een samenwerkingsverband met studenten "
+"natuurkunde; en <b>Youssif Ghantous Filho</b>, die originele tekeningen "
+"aanpaste en verankerde in Stellarium. Niettemin is elke hemelinterpretatie "
+"contextueel en indirect. Momenteel wordt in samenwerking met de Tikuna "
+"gezocht naar nieuwe astronomische waarnemingen die de eerste bevindingen "
+"zullen verbeteren."
+
+#.  GZ: I have removed this as there is no panorama horizon included. Such
+#. acknowledgement would be applicable in a separate "landscape" contribution.
+#.  Barthelemy D’Ans (Instituto Peruano de Astronomia, Planetarium Maria Reich
+#. Lima-Ica-Nasca-Colca-Cusco), edited the panoramic picture and adapted it to
+#. the horizons of the Stellarium Astronomy Software.
+#. type: Content of: <p><p><p>
+#: ../../skycultures/tikuna/description.en.utf8:112
+msgid ""
+"The data used in <b>Cardoso & Ghantous Filho</b> were a reinterpretation of "
+"charts used by the Tikunas, <b>Pedro Inácio Pinheiro</b> and <b>Luís Angel "
+"Ramos</b>, to interpret Tikuna constellations.  The calculations were "
+"established based upon coordinates 70° W and 3°S with the help of Oswaldo "
+"dos Santos Barros, Pará State (CCPP).  The different interpretations of the "
+"drawings developed from the ongoing collaborative investigation with Walmir "
+"T. Cardoso, researcher of astronomy in Culture, takes into consideration "
+"some changes, such as the ones shown in this work.  <b>Marcio D´Olne "
+"Campos</b> (UNICAMP and SULear/SOUTHing Proposal) helped map the location of"
+" the Tikuna village and define their latitude and longitude coordinates (See"
+" Tikuna Lands Atlas)."
+msgstr ""
+"De in <b>Cardoso & Ghantous Filho</b> gebruikte gegevens waren een "
+"herinterpretatie van kaarten die door de Tikuna's, <b>Pedro Inácio "
+"Pinheiro</b> en <b>Luís Angel Ramos</b>, werden gebruikt om Tikuna-"
+"sterrenbeelden te interpreteren. De berekeningen werden uitgewerkt op basis "
+"van de coördinaten 70° W en 3° ZB met de hulp van Oswaldo dos Santos Barros,"
+" staat Pará (CCPP). De verschillende interpretaties van de tekeningen die "
+"zijn ontwikkeld in het lopende samenwerkingsonderzoek met Walmir T. Cardoso,"
+" onderzoeker van astronomie in Cultuur, houden rekening met enkele "
+"veranderingen, zoals die welke in dit werk worden getoond. <b>Marcio D´Olne "
+"Campos</b> (UNICAMP en SULear/SOUTHing Proposal) hielp de locatie van het "
+"Tikuna-dorp in kaart te brengen en hun lengte- en breedtecoördinaten te "
+"bepalen (Zie Tikuna Lands Atlas)."
+
+#. type: Content of: <p><p><p>
+#: ../../skycultures/tikuna/description.en.utf8:119
+msgid ""
+"The recording of this myth and the identification of the Jaguar’s eyes was "
+"inspired by Curt Nimuendajú, (1952 p.143)."
+msgstr ""
+"De opname van deze mythe en de identificatie van de ogen van de Jaguar is "
+"geïnspireerd door Curt Nimuendajú, (1952 p.143)."
+
+#. type: Content of: <p><p><p><notr><a><B>
+#: ../../skycultures/tikuna/description.en.utf8:120
+msgid "1"
+msgstr "1"
+
+#. type: Content of: <p><p><p>
+#: ../../skycultures/tikuna/description.en.utf8:120
+msgid ""
+"<cite>This work adopts linguistic convention when writing Tikuna, even "
+"though several Anthropologists and Indigenous experts use the vernacular "
+"form (Ticuna).</cite>"
+msgstr ""
+"<cite>In dit werk wordt de taalkundige conventie gevolgd bij het schrijven "
+"van Tikuna, hoewel verscheidene antropologen en inheemse deskundigen de "
+"volkstaalvorm (Ticuna) gebruiken.</cite>"
+
+#. type: Content of: <p><p><p><notr><a><B>
+#: ../../skycultures/tikuna/description.en.utf8:121
+msgid "2"
+msgstr "2"
+
+#. type: Content of: <p><p><p>
+#: ../../skycultures/tikuna/description.en.utf8:121
+msgid ""
+"<cite> According to socioambiental.org, consulted on 08/05/2019.</cite>"
+msgstr "<cite> Volgens socioambiental.org, geraadpleegd op 08/05/2019.</cite>"
 
 #. type: Content of: <h1>
 #: ../../skycultures/tupi/description.en.utf8:1
