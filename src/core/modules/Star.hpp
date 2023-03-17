@@ -24,6 +24,7 @@
 
 #include "ZoneData.hpp"
 #include "StelObjectType.hpp"
+#include "StarMgr.hpp"
 #include <QString>
 #include <QtEndian>
 
@@ -110,9 +111,29 @@ public:
 	void getJ2000Pos(const ZoneData *z,float movementFactor, Vec3f& pos) const
 	{
 		pos = z->axis0;
-		pos*=(static_cast<float>(getX0())+movementFactor*getDx0());
-		pos+=(static_cast<float>(getX1())+movementFactor*getDx1())*z->axis1;
+		pos*=static_cast<float>(getX0());
+		pos+=(static_cast<float>(getX1()))*z->axis1;
 		pos+=z->center;
+		PMData pm=StarMgr::getProperMotion(getHip());
+		if((pm.first!=NAN) && (pm.second!=NAN))
+		{
+			float dra=pm.first*movementFactor*10.0;
+			float ddec=pm.second*movementFactor*10.0;
+			float r=pos.norm();
+			float sd=pos[2]/r;
+			float dec=std::asin(sd);
+			float phi=pos.longitude();
+			float cd=std::cos(dec);
+			float cp=std::cos(phi);
+			float sp=std::sin(phi);
+			float a1=ddec*sd;
+			float a2=r*a1;
+			float a3=r*dra;
+			float dx=-a2*cp-a3*sp;
+			float dy=a3*cp-a2*sp;
+			float dz=r*ddec*cd;
+			pos+=Vec3f(dx,dy,dz);
+		}
 	}
 	inline int getBVIndex() const {return d.uint8[12];}
 	inline int getMag() const {return d.uint8[13];}

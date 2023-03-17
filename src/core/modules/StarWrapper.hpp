@@ -79,7 +79,7 @@ protected:
 	{
 		static const double d2000 = 2451545.0;
 		Vec3f v;
-		s->getJ2000Pos(z, (M_PI/180.)*(0.0001/3600.) * ((core->getJDE()-d2000)/365.25) / a->star_position_scale, v);
+		s->getJ2000Pos(z, (M_PI/180.)*(0.0001/3600.) * ((core->getJDE()-d2000)/365.25),v);
 
 		// Aberration: Explanatory Supplement 2013, (7.38). We must get the observer planet speed vector in Equatorial J2000 coordinates.
 		if (core->getUseAberration())
@@ -107,7 +107,7 @@ protected:
 		return 0.001f*a->mag_min + s->getMag()*(0.001f*a->mag_range)/a->mag_steps;
 	}
 	virtual float getBV(void) const  Q_DECL_OVERRIDE {return s->getBV();}
-	//virtual QString getEnglishName(void) const Q_DECL_OVERRIDE {return QString();}
+	virtual QString getEnglishName(void) const Q_DECL_OVERRIDE {return QString();}
 	virtual QString getNameI18n(void) const Q_DECL_OVERRIDE {return s->getNameI18n();}
 protected:
 	const SpecialZoneArray<Star> *const a;
