@@ -342,11 +342,18 @@ QStringList StelMainScriptAPI::getAllTimezoneNames()
 
 void StelMainScriptAPI::screenshot(const QString& prefix, bool invert, const QString& dir, const bool overwrite, const QString &format)
 {
-	bool oldInvertSetting = StelMainView::getInstance().getFlagInvertScreenShotColors();
-	QString oldFormat=StelMainView::getInstance().getScreenshotFormat();
-	StelMainView::getInstance().setFlagInvertScreenShotColors(invert);
+	const bool oldInvertSetting = StelMainView::getInstance().getFlagInvertScreenShotColors();
+	const QString oldFormat=StelMainView::getInstance().getScreenshotFormat();
 	if ((format.length()>0) && (format.length()<=4))
 		StelMainView::getInstance().setScreenshotFormat(format);
+	// Check requested against set image format.
+	if (StelMainView::getInstance().getScreenshotFormat() != format)
+	{
+		qWarning() << "Screenshot format" << format << "not supported. Not saving screenshot.";
+		return;
+	}
+
+	StelMainView::getInstance().setFlagInvertScreenShotColors(invert);
 	StelMainView::getInstance().setFlagOverwriteScreenShots(overwrite);
 	StelMainView::getInstance().saveScreenShot(prefix, dir, overwrite);
 	StelMainView::getInstance().setFlagInvertScreenShotColors(oldInvertSetting);
