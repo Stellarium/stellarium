@@ -819,7 +819,7 @@ QSurfaceFormat StelMainView::getDesiredGLFormat(QSettings* configuration)
 #else
 	const bool vsdef = true;
 #endif
-	if (configuration->value("video/vsync", vsdef).toBool())
+	if (configuration && configuration->value("video/vsync", vsdef).toBool())
 		fmt.setSwapInterval(1);
 	else
 		fmt.setSwapInterval(0);
