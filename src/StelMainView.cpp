@@ -1644,7 +1644,7 @@ void StelMainView::setScreenshotDpi(int dpi)
 
 void StelMainView::saveScreenShot(const QString& filePrefix, const QString& saveDir, const bool overwrite)
 {
-	screenShotPrefix = filePrefix;
+	screenShotPrefix = QFileInfo(filePrefix).fileName(); // Strip away any path elements (Security issue!)
 	screenShotDir = saveDir;
 	flagOverwriteScreenshots=overwrite;
 	emit screenshotRequested();
