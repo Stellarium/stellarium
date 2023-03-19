@@ -123,58 +123,47 @@ QString Flight::getInfoString(const StelCore *core, const StelObject::InfoString
 	QString infoStr;
 	QTextStream ss(&infoStr);
 	static const QString br = QStringLiteral("<br/>");
+	QString speed = qc_("m/s", "speed");
+	QString meters = qc_("m", "distance");
+
 	if (flags & Name)
-	{
-		ss << QStringLiteral("<h2>") << getEnglishName() << QStringLiteral("</h2>");
-		ss << br;
-	}
+		ss << QStringLiteral("<h2>") << (data->getCallsign().isEmpty() ? data->getHexAddress() : QString("%1 / %2").arg(data->getCallsign(), data->getHexAddress())) << QStringLiteral("</h2>");
 
 	if (flags & CatalogNumber)
-	{
-		if (!data->getCallsign().isEmpty())
-		{
-			ss << q_("Callsign: ") << data->getCallsign() << br;
-		}
-		ss << q_("Mode S Address (hex): ");
-		ss << data->getHexAddress() << br << br;
-	}
+		ss << QString("ICAO %1").arg(data->getHexAddress()) << br << br;
 
 	if (flags & ObjectType)
+		ss << QString("%1: <b>%2</b> (%3)").arg(q_("Type"), getObjectTypeI18n(), currentFrame->onGround ? q_("on groud") : q_("in flight")) << br;
+
+	if (flags & Distance)
 	{
-		ss << q_("Type: <b>plane</b>") << br;
-	}
-	if (flags & Extra)
-	{
-		if (data->getCountry() != QStringLiteral("N/A"))
-		{
-			ss << q_("Country: ") << data->getCountry() << br;
-		}
 		if (currentFrame)
 		{
-			// TRANSLATORS: Is the plane on the ground or not
-			ss << q_("On ground: ") << (currentFrame->onGround ? q_("yes") : q_("no")) << br;
-			// TRANSLATORS: Plane latitude position
-			ss << q_("Position: lat ") << StelUtils::radToDmsStr(currentFrame->latitude)
-				  // TRANSLATORS: Plane longitude position
-			   << q_(", lon ") << StelUtils::radToDmsStr(currentFrame->longitude) << br;
 			// TRANSLATORS: Height plane is flying at
-			ss << q_("Altitude: ") << currentFrame->altitude << QStringLiteral(" m (") << currentFrame->altitude_feet << QStringLiteral(" ft)") << br;
+			ss << QString("%1: %2 %3 (%4 %5)").arg(q_("Altitude"), QString::number(currentFrame->altitude, 'f', 2), meters, QString::number(currentFrame->altitude_feet, 'f', 1), qc_("ft","distance")) << br;
 			// TRANSLATORS: Distance to observer
-			ss << q_("Distance: ") << azAlPos.norm() << QStringLiteral(" m") << br;
+			ss << QString("%1: %2 %3").arg(q_("Distance"), QString::number(azAlPos.norm(), 'f', 2), meters) << br;
+		}
+	}
+
+	if (flags & Extra)
+	{
+		if (currentFrame)
+		{
+			// TRANSLATORS: Plane latitude/longitude position
+			ss << QString("%1: %2 / %3").arg(q_("Position (Lat./Long.)"), StelUtils::radToDmsStr(currentFrame->latitude), StelUtils::radToDmsStr(currentFrame->longitude)) << br;
 			double a;
 			double b;
 			StelUtils::rectToSphe(&a, &b, azAlPos);
 			// TRANSLATORS: sight angles to the plane
-			ss << q_("Azimuth / Elevation: ") << StelUtils::radToDmsStr(M_PI - a) << QStringLiteral(" / ") << StelUtils::radToDmsStr(b) << br;
-			ss << q_("Over ground speed: ") << currentFrame->ground_speed << QStringLiteral(" m/s (") << currentFrame->ground_speed_knots << QStringLiteral(" knots)") << br;
-			ss << q_("Vertical rate: ") << currentFrame->vertical_rate << QStringLiteral(" m/s (") << currentFrame->vertical_rate_ft_min << QStringLiteral(" ft/min)") << br;
-			ss << q_("Ground track: ") << currentFrame->ground_track << QStringLiteral(" deg") << br;
+			ss << QString("%1: %2 / %3").arg(q_("Azimuth / Elevation"), StelUtils::radToDmsStr(M_PI - a), StelUtils::radToDmsStr(b)) << br;
+			ss << QString("%1: %2 %3 (%4 %5)").arg(q_("Over ground speed"), QString::number(currentFrame->ground_speed, 'f', 3), speed, QString::number(currentFrame->ground_speed_knots, 'f', 3), qc_("knots","speed")) << br;
+			ss << QString("%1: %2 %3 (%4 %5)").arg(q_("Vertical rate"), QString::number(currentFrame->vertical_rate, 'f', 5), speed, QString::number(currentFrame->vertical_rate_ft_min, 'f', 2), qc_("ft/min", "speed")) << br;
+			ss << QString("%1: %2°").arg(q_("Ground track"), QString::number(currentFrame->ground_track, 'f', 3)) << br;
 		}
-		else
-		{
-			// TRANSLATORS: There is no data for the flight for the current time
-			ss << q_("No data for this time.") << br;
-		}
+
+		if (data->getCountry() != QStringLiteral("N/A"))
+			ss << QString("%1: %2").arg(q_("Country"), data->getCountry()) << br;
 	}
 
 	postProcessInfoString(infoStr, flags);
@@ -184,7 +173,7 @@ QString Flight::getInfoString(const StelCore *core, const StelObject::InfoString
 QString Flight::getEnglishName() const
 {
 	Q_ASSERT(data);
-	return data->getCallsign().isEmpty() ? data->getHexAddress() : data->getCallsign();
+	return data->getCallsign();
 }
 
 QString Flight::getNameI18n() const

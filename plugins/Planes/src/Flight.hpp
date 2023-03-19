@@ -121,12 +121,12 @@ public:
 	//! Return object's type. It should be English lowercase name of the type of the object.
 	virtual QString getObjectType() const override
 	{
-		return QStringLiteral("flight");
+		return N_("plane");
 	}
 	//! Return object's type. It should be translated lowercase name of the type of the object.
 	virtual QString getObjectTypeI18n() const override
 	{
-		return QString(q_("flight"));
+		return q_(getObjectType());
 	}
 
 	//! Returns the english name of this flight.
