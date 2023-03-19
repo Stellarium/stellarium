@@ -949,7 +949,7 @@ void StelMainView::init()
 	rootItem->setGraphicsEffect(nightModeEffect);
 
 	flagInvertScreenShotColors = configuration->value("main/invert_screenshots_colors", false).toBool();
-	screenShotFormat = configuration->value("main/screenshot_format", "png").toString();
+	setScreenshotFormat(configuration->value("main/screenshot_format", "png").toString()); // includes check for supported formats.
 	flagScreenshotDateFileName=configuration->value("main/screenshot_datetime_filename", false).toBool();
 	screenShotFileMask = configuration->value("main/screenshot_datetime_filemask", "yyyyMMdd-hhmmssz").toString();
 	flagUseCustomScreenshotSize=configuration->value("main/screenshot_custom_size", false).toBool();
