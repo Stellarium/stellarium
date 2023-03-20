@@ -1094,6 +1094,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 					       pd.value(secname+"/halo", true).toBool(),
 					       type));
 			newP->absoluteMagnitude = pd.value(secname+"/absolute_magnitude", -99.f).toFloat();
+			newP->massKg = pd.value(secname+"/mass_kg", 0.).toDouble();
 
 			// Moon designation (planet index + IAU moon number)
 			QString moonDesignation = pd.value(secname+"/iau_moon_number", "").toString();
