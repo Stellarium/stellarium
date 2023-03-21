@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2023-03-16 09:28+0700\n"
+"POT-Creation-Date: 2023-03-19 12:54+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: राजಐயர், 2023\n"
 "Language-Team: Hindi (https://www.transifex.com/stellarium/teams/80998/hi/)\n"
@@ -2710,7 +2710,7 @@ msgstr "मूल ग्रह नाम ( तारा कथाओं से )
 
 #: src/core/modules/StarWrapper.cpp:90
 msgid "double star"
-msgstr "द्वि तारें"
+msgstr "द्वितारें"
 
 #: src/core/modules/StarWrapper.cpp:95
 msgid "eruptive variable star"
@@ -2730,7 +2730,7 @@ msgstr "प्रलयात्मक विकारी तारा"
 
 #: src/core/modules/StarWrapper.cpp:103
 msgid "eclipsing binary system"
-msgstr "ग्रहणकारी द्वितारा मण्डल"
+msgstr "ग्रहणकारी युगलतारा मण्डल"
 
 #: src/core/modules/StarWrapper.cpp:107
 msgid "variable star"
@@ -7303,7 +7303,7 @@ msgstr "उज्ज्वल तारें ( <%1 मात्रा )"
 #: src/gui/AstroCalcDialog.cpp:6004
 #, qt-format
 msgid "Bright double stars (<%1 mag)"
-msgstr "उज्ज्वल द्वि तारें ( <%1 मात्रा )"
+msgstr "उज्ज्वल द्वितारें ( <%1 मात्रा )"
 
 #: src/gui/AstroCalcDialog.cpp:6005
 #, qt-format
@@ -7660,7 +7660,7 @@ msgstr "ग्रहमय अन्तरिक्षमेघ"
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:8288 src/translations.h:416
 msgid "Bright double stars"
-msgstr "उज्ज्वल द्वि तारें"
+msgstr "उज्ज्वल द्वितारें"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:8289 src/translations.h:418
@@ -7794,15 +7794,15 @@ msgstr "अस्रीय अन्तर सीमा : "
 
 #: src/gui/AstroCalcDialog.cpp:8804
 msgid "Set limits for angular separation for visible double stars"
-msgstr "दृश्य द्वि तारों के अस्रीय अन्तर सीमा स्थापित करें"
+msgstr "दृश्य द्वितारों के अस्रीय अन्तर सीमा स्थापित करें"
 
 #: src/gui/AstroCalcDialog.cpp:8805
 msgid "Minimal angular separation for visible double stars"
-msgstr "दृश्य द्वि तारों के लिए न्यूनतम अस्रीय अन्तर"
+msgstr "दृश्य द्वितारों के लिए न्यूनतम अस्रीय अन्तर"
 
 #: src/gui/AstroCalcDialog.cpp:8806
 msgid "Maximum angular separation for visible double stars"
-msgstr "दृश्य द्वि तारों के लिए अधिकतम अस्रीय अन्तर"
+msgstr "दृश्य द्वितारों के लिए अधिकतम अस्रीय अन्तर"
 
 #: src/gui/AstroCalcDialog.cpp:9181
 msgid "Save list of objects as..."
@@ -9106,7 +9106,7 @@ msgstr "वान डेन बेर्घ - हागेन सूचीपत
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
 #: src/translations.h:412
 msgid "Interesting double stars"
-msgstr "रुचिकर द्वि तारें"
+msgstr "रुचिकर द्वितारें"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
 #: src/translations.h:414
@@ -9347,7 +9347,7 @@ msgstr "द्वयोपनेत्र विशेषताएँ"
 #. TRANSLATORS: Name of script
 #: src/translations.h:531
 msgid "20 Fun Naked-Eye Double Stars"
-msgstr "20 मनोरंजक नग्ननेत्र द्वि तारें"
+msgstr "20 मनोरंजक नग्ननेत्र द्वितारें"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:533
@@ -9614,8 +9614,8 @@ msgid ""
 " has been collected by Jerry Lodriguss and published in Sky & Telescope "
 "09/2014. Data taken from his website, http://www.astropix.com/doubles/"
 msgstr ""
-"यह क्रमादेश आपको सहायता देता है 20 मनोरंजक द्वि तारों का पर्यटन करने के लिए।"
-" सूची संग्रहित किया गया जेर्री लोड्रिगस्स द्वारा तथा प्रकाशित आकाश तथा "
+"यह क्रमादेश आपको सहायता देता है 20 मनोरंजक द्वितारों का पर्यटन करने के लिए। "
+"सूची संग्रहित किया गया जेर्री लोड्रिगस्स द्वारा तथा प्रकाशित आकाश तथा "
 "दूरदर्शक 09/2014 में। तथ्य लिए गये उनके जालस्थान से "
 "http://www.astropix.com/doubles/"
 
@@ -12215,8 +12215,8 @@ msgid ""
 "Show traditional designations of double stars if proper name, Bayer or "
 "Flamsteed designations do not exist for the star."
 msgstr ""
-"द्वि तारों के पारम्परिक उपाधि दिखाएँ यदि निजी नाम अथवा बेयर अथवा फ्लाम्स्टीड"
-" उपाधि ना हों तो। "
+"द्वितारों के पारम्परिक उपाधि दिखाएँ यदि निजी नाम अथवा बेयर अथवा फ्लाम्स्टीड "
+"उपाधि ना हों तो। "
 
 #: src/ui_viewDialog.h:3602
 msgctxt "double stars"
@@ -12229,7 +12229,7 @@ msgid ""
 "designations, or designation of double star do not exist for the star."
 msgstr ""
 "विकारी तारों के उपाधि दिखाएँ यदि निजी नाम अथवा बेयर अथवा फ्लाम्स्टीड  अथवा "
-"द्वि तारा उपाधि ना हों तो।"
+"द्वितारा उपाधि ना हों तो।"
 
 #: src/ui_viewDialog.h:3606
 msgctxt "variable stars"
@@ -16225,7 +16225,7 @@ msgstr "टेल्राड दृश्यदर्शी"
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:102
 #: plugins/Scenery3d/src/Scenery3d.cpp:334
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:272
-#: plugins/Calendars/src/Calendars.cpp:193
+#: plugins/Calendars/src/Calendars.cpp:194
 msgid "Show settings dialog"
 msgstr "प्रबन्ध पटल दिखाएँ"
 
@@ -22208,7 +22208,7 @@ msgstr "ए॰प्र॰से॰"
 
 #: plugins/Pulsars/src/Pulsar.cpp:243
 msgid "Binary period of pulsar"
-msgstr "द्वितारा अवधि स्फुरन्ततारा की"
+msgstr "युगल अवधि स्फुरन्ततारा की"
 
 #. TRANSLATORS: Unit of measure for period - days
 #: plugins/Pulsars/src/Pulsar.cpp:246 plugins/Exoplanets/src/Exoplanet.cpp:360
@@ -22256,7 +22256,7 @@ msgstr ""
 
 #: plugins/Pulsars/src/Pulsar.cpp:390
 msgid "has one or more binary companions"
-msgstr "एक अथवा अधिक द्वितारा साथी हैं"
+msgstr "एक अथवा अधिक युगलतारा साथी हैं"
 
 #: plugins/Pulsars/src/Pulsar.cpp:395
 msgid "with pulsed emission from radio to infrared or higher frequencies"
@@ -25389,7 +25389,7 @@ msgstr "एच॰ई॰के॰ ( बाह्योपग्रहों क�
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:633
 msgid "Exoplanets in binaries and multiple systems (Richard Schwarz)"
-msgstr "बाह्यग्रह द्वितारों में तथा बहुतारा मण्डलों में ( रिचर्ड श्वार्ट्स )"
+msgstr "बाह्यग्रह युगलतारों में तथा बहुतारा मण्डलों में ( रिचर्ड श्वार्ट्स )"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:634
 msgid "Naming exoplanets (IAU)"
@@ -28239,8 +28239,8 @@ msgstr ""
 "वी॰टी॰एस॰ में।"
 
 #: plugins/Calendars/src/Calendars.cpp:89
-#: plugins/Calendars/src/Calendars.cpp:191
 #: plugins/Calendars/src/Calendars.cpp:192
+#: plugins/Calendars/src/Calendars.cpp:193
 msgid "Calendars"
 msgstr "कालदर्शिका"
 
@@ -28248,243 +28248,243 @@ msgstr "कालदर्शिका"
 msgid "Calendars of the world"
 msgstr "विश्व के कालदर्शिकाएँ"
 
-#: plugins/Calendars/src/Calendars.cpp:357
+#: plugins/Calendars/src/Calendars.cpp:358
 #: plugins/Calendars/src/ui_calendarsDialog.h:972
 #: plugins/Calendars/src/ui_calendarsDialog.h:992
 msgctxt "calendar"
 msgid "Gregorian"
 msgstr "ग्रेगोरीय"
 
-#: plugins/Calendars/src/Calendars.cpp:358
+#: plugins/Calendars/src/Calendars.cpp:359
 #: plugins/Calendars/src/ui_calendarsDialog.h:944
 #: plugins/Calendars/src/ui_calendarsDialog.h:993
 msgctxt "calendar"
 msgid "Julian"
 msgstr "जूलीय"
 
-#: plugins/Calendars/src/Calendars.cpp:359
+#: plugins/Calendars/src/Calendars.cpp:360
 #: plugins/Calendars/src/ui_calendarsDialog.h:970
 #: plugins/Calendars/src/ui_calendarsDialog.h:994
 msgctxt "calendar"
 msgid "Revised Julian"
 msgstr "संशोधित जूलीय"
 
-#: plugins/Calendars/src/Calendars.cpp:360
+#: plugins/Calendars/src/Calendars.cpp:361
 msgctxt "calendar"
 msgid "ISO week"
 msgstr "एै॰एस॰ओ॰ वार"
 
-#: plugins/Calendars/src/Calendars.cpp:361
+#: plugins/Calendars/src/Calendars.cpp:362
 #: plugins/Calendars/src/ui_calendarsDialog.h:976
 msgctxt "calendar"
 msgid "Icelandic"
 msgstr "एैसलाण्डीय"
 
-#: plugins/Calendars/src/Calendars.cpp:362
+#: plugins/Calendars/src/Calendars.cpp:363
 #: plugins/Calendars/src/ui_calendarsDialog.h:969
 msgctxt "calendar"
 msgid "Roman"
 msgstr "रोमक"
 
-#: plugins/Calendars/src/Calendars.cpp:363
+#: plugins/Calendars/src/Calendars.cpp:364
 #: plugins/Calendars/src/ui_calendarsDialog.h:956
 msgctxt "calendar"
 msgid "Olympic"
 msgstr "ओलिम्पिक"
 
-#: plugins/Calendars/src/Calendars.cpp:364
+#: plugins/Calendars/src/Calendars.cpp:365
 #: plugins/Calendars/src/ui_calendarsDialog.h:945
 msgctxt "calendar"
 msgid "Egyptian"
 msgstr "ईजिप्तीय"
 
-#: plugins/Calendars/src/Calendars.cpp:365
+#: plugins/Calendars/src/Calendars.cpp:366
 #: plugins/Calendars/src/ui_calendarsDialog.h:948
 msgctxt "calendar"
 msgid "Armenian"
 msgstr "आर्मीनीय"
 
-#: plugins/Calendars/src/Calendars.cpp:366
+#: plugins/Calendars/src/Calendars.cpp:367
 #: plugins/Calendars/src/ui_calendarsDialog.h:962
 msgctxt "calendar"
 msgid "Zoroastrian"
 msgstr "ज्सोरोस्त्रीय"
 
-#: plugins/Calendars/src/Calendars.cpp:367
+#: plugins/Calendars/src/Calendars.cpp:368
 #: plugins/Calendars/src/ui_calendarsDialog.h:947
 msgctxt "calendar"
 msgid "Coptic"
 msgstr "कोप्तिक"
 
-#: plugins/Calendars/src/Calendars.cpp:368
+#: plugins/Calendars/src/Calendars.cpp:369
 #: plugins/Calendars/src/ui_calendarsDialog.h:946
 msgctxt "calendar"
 msgid "Ethiopic"
 msgstr "इथियोपीय"
 
-#: plugins/Calendars/src/Calendars.cpp:369
+#: plugins/Calendars/src/Calendars.cpp:370
 msgctxt "calendar"
 msgid "French Rev. (Astron.)"
 msgstr "फ्रांसीसी क्रा॰ ( ज्योतिष॰ )"
 
-#: plugins/Calendars/src/Calendars.cpp:370
+#: plugins/Calendars/src/Calendars.cpp:371
 msgctxt "calendar"
 msgid "French Rev. (Arithm.)"
 msgstr "फ्रांसीसी क्रा॰ ( गणित॰ )"
 
-#: plugins/Calendars/src/Calendars.cpp:371
+#: plugins/Calendars/src/Calendars.cpp:372
 #: plugins/Calendars/src/ui_calendarsDialog.h:943
 msgctxt "calendar"
 msgid "Islamic"
 msgstr "इस्लामीय"
 
-#: plugins/Calendars/src/Calendars.cpp:372
+#: plugins/Calendars/src/Calendars.cpp:373
 #: plugins/Calendars/src/ui_calendarsDialog.h:953
 msgctxt "calendar"
 msgid "Hebrew"
 msgstr "इब्रानी"
 
-#: plugins/Calendars/src/Calendars.cpp:373
+#: plugins/Calendars/src/Calendars.cpp:374
 msgctxt "calendar"
 msgid "Persian (Arithm.)"
 msgstr "पारसी ( गणित॰ )"
 
-#: plugins/Calendars/src/Calendars.cpp:374
+#: plugins/Calendars/src/Calendars.cpp:375
 msgctxt "calendar"
 msgid "Persian (Astron.)"
 msgstr "पारसी ( ज्योतिष॰ )"
 
-#: plugins/Calendars/src/Calendars.cpp:375
+#: plugins/Calendars/src/Calendars.cpp:376
 msgctxt "calendar"
 msgid "Bahá’í (Arithm.)"
 msgstr "बहाई ( गणित॰ )"
 
-#: plugins/Calendars/src/Calendars.cpp:376
+#: plugins/Calendars/src/Calendars.cpp:377
 msgctxt "calendar"
 msgid "Bahá’í (Astron.)"
 msgstr "बहाई ( ज्योतिष॰ )"
 
-#: plugins/Calendars/src/Calendars.cpp:377
+#: plugins/Calendars/src/Calendars.cpp:378
 #: plugins/Calendars/src/ui_calendarsDialog.h:949
 msgctxt "calendar"
 msgid "Old Hindu Solar"
 msgstr "पुराना हिन्दु सौर"
 
-#: plugins/Calendars/src/Calendars.cpp:378
+#: plugins/Calendars/src/Calendars.cpp:379
 msgctxt "calendar"
 msgid "Old Hindu Lunisolar"
 msgstr "पुराना हिन्दु चन्द्रसौर"
 
-#: plugins/Calendars/src/Calendars.cpp:379
+#: plugins/Calendars/src/Calendars.cpp:380
 #: plugins/Calendars/src/ui_calendarsDialog.h:952
 msgctxt "calendar"
 msgid "New Hindu Solar"
 msgstr "नव हिन्दु सौर"
 
-#: plugins/Calendars/src/Calendars.cpp:380
+#: plugins/Calendars/src/Calendars.cpp:381
 msgctxt "calendar"
 msgid "New Hindu Lunisolar"
 msgstr "नव हिन्दु चन्द्रसौर"
 
-#: plugins/Calendars/src/Calendars.cpp:381
+#: plugins/Calendars/src/Calendars.cpp:382
 msgctxt "calendar"
 msgid "New Hindu Panchang"
 msgstr "नव हिन्दु पंचांग"
 
-#: plugins/Calendars/src/Calendars.cpp:383
+#: plugins/Calendars/src/Calendars.cpp:384
 #: plugins/Calendars/src/ui_calendarsDialog.h:959
 msgctxt "calendar"
 msgid "Hindu Astro Solar"
 msgstr "हिन्दु ज्योतिष सौर"
 
-#: plugins/Calendars/src/Calendars.cpp:384
+#: plugins/Calendars/src/Calendars.cpp:385
 #: plugins/Calendars/src/ui_calendarsDialog.h:966
 msgctxt "calendar"
 msgid "Hindu Astro Lunisolar"
 msgstr "हिन्दु ज्योतिष चन्द्रसौर"
 
-#: plugins/Calendars/src/Calendars.cpp:385
+#: plugins/Calendars/src/Calendars.cpp:386
 #: plugins/Calendars/src/ui_calendarsDialog.h:968
 msgctxt "calendar"
 msgid "Tibetan"
 msgstr "तिबतीय"
 
-#: plugins/Calendars/src/Calendars.cpp:387
+#: plugins/Calendars/src/Calendars.cpp:388
 #: plugins/Calendars/src/ui_calendarsDialog.h:973
 #: plugins/Calendars/src/ui_calendarsDialog.h:996
 msgctxt "calendar"
 msgid "Chinese"
 msgstr "चीनिस्तानी"
 
-#: plugins/Calendars/src/Calendars.cpp:388
+#: plugins/Calendars/src/Calendars.cpp:389
 msgctxt "calendar"
 msgid "Chinese Solar Terms"
 msgstr "चीनिस्तानी सौर शब्दावली"
 
-#: plugins/Calendars/src/Calendars.cpp:391
+#: plugins/Calendars/src/Calendars.cpp:392
 #: plugins/Calendars/src/ui_calendarsDialog.h:950
 msgctxt "calendar"
 msgid "Japanese"
 msgstr "जापानी"
 
-#: plugins/Calendars/src/Calendars.cpp:392
+#: plugins/Calendars/src/Calendars.cpp:393
 msgctxt "calendar"
 msgid "Japanese Solar Terms"
 msgstr "जापानी सौर शब्दावली"
 
-#: plugins/Calendars/src/Calendars.cpp:395
+#: plugins/Calendars/src/Calendars.cpp:396
 #: plugins/Calendars/src/ui_calendarsDialog.h:977
 msgctxt "calendar"
 msgid "Korean"
 msgstr "कोरियाई"
 
-#: plugins/Calendars/src/Calendars.cpp:396
+#: plugins/Calendars/src/Calendars.cpp:397
 msgctxt "calendar"
 msgid "Korean Solar Terms"
 msgstr "कोरियाई सौर शब्दावली"
 
-#: plugins/Calendars/src/Calendars.cpp:399
+#: plugins/Calendars/src/Calendars.cpp:400
 #: plugins/Calendars/src/ui_calendarsDialog.h:979
 msgctxt "calendar"
 msgid "Vietnamese"
 msgstr "वियेत्नामीय"
 
-#: plugins/Calendars/src/Calendars.cpp:400
+#: plugins/Calendars/src/Calendars.cpp:401
 msgctxt "calendar"
 msgid "Vietnamese Solar Terms"
 msgstr "वियेत्नामीय सौर शब्दावली"
 
-#: plugins/Calendars/src/Calendars.cpp:402
+#: plugins/Calendars/src/Calendars.cpp:403
 #: plugins/Calendars/src/ui_calendarsDialog.h:957
 msgctxt "calendar"
 msgid "Balinese Pawukon"
 msgstr "बालीय पावुकोन"
 
-#: plugins/Calendars/src/Calendars.cpp:403
+#: plugins/Calendars/src/Calendars.cpp:404
 #: plugins/Calendars/src/ui_calendarsDialog.h:964
 msgctxt "calendar"
 msgid "Maya Long Count"
 msgstr "माया सभ्यता दीर्घ गणना"
 
-#: plugins/Calendars/src/Calendars.cpp:404
+#: plugins/Calendars/src/Calendars.cpp:405
 #: plugins/Calendars/src/ui_calendarsDialog.h:978
 msgctxt "calendar"
 msgid "Maya Haab"
 msgstr "माया सभ्यता हााब"
 
-#: plugins/Calendars/src/Calendars.cpp:405
+#: plugins/Calendars/src/Calendars.cpp:406
 #: plugins/Calendars/src/ui_calendarsDialog.h:954
 msgctxt "calendar"
 msgid "Maya Tzolkin"
 msgstr "माया सभ्यता ट्ज्सोल्किन"
 
-#: plugins/Calendars/src/Calendars.cpp:406
+#: plugins/Calendars/src/Calendars.cpp:407
 #: plugins/Calendars/src/ui_calendarsDialog.h:975
 msgctxt "calendar"
 msgid "Aztec Xihuitl"
 msgstr "आज्स्टेकीय क्सिहुइट्ल"
 
-#: plugins/Calendars/src/Calendars.cpp:407
+#: plugins/Calendars/src/Calendars.cpp:408
 #: plugins/Calendars/src/ui_calendarsDialog.h:963
 msgctxt "calendar"
 msgid "Aztec Tonalpohualli"
