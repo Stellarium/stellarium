@@ -99,7 +99,7 @@
        </spacer>
       </item>
       <item>
-       <widget class="QPushButton" name="closeStelWindow">
+       <widget class="StelCloseButton" name="closeStelWindow">
         <property name="minimumSize">
          <size>
           <width>16</width>
@@ -139,7 +139,7 @@
           <bool>true</bool>
          </property>
          <property name="title">
-          <string>Use BaseStation data port</string>
+          <string>Use ABS-B receiver data port</string>
          </property>
          <property name="checkable">
           <bool>true</bool>
@@ -764,6 +764,11 @@ li.checked::marker { content: &quot;\2612&quot;; }
    <extends>QFrame</extends>
    <header>Dialog.hpp</header>
    <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>StelCloseButton</class>
+   <extends>QPushButton</extends>
+   <header>gui/StelCloseButton.hpp</header>
   </customwidget>
  </customwidgets>
  <tabstops>
