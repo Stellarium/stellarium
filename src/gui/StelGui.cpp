@@ -598,7 +598,9 @@ void StelGui::update()
 	if (getAction("actionSet_Full_Screen_Global")->isChecked() != flag)
 		getAction("actionSet_Full_Screen_Global")->setChecked(flag);
 
-	skyGui->infoPanel->setTextFromObjects(GETSTELMODULE(StelObjectMgr)->getSelectedObject());
+	// to avoid crash when observer is on the spaceship
+	const QList<StelObjectP> selected = GETSTELMODULE(StelObjectMgr)->getSelectedObject();
+	skyGui->infoPanel->setTextFromObjects(selected);
 
 	// Check if the progressbar window changed, if yes update the whole view
 	if (savedProgressBarSize!=skyGui->progressBarMgr->boundingRect().size())
