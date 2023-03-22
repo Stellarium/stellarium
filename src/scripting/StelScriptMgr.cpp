@@ -505,6 +505,8 @@ StelScriptMgr::StelScriptMgr(QObject *parent): QObject(parent)
 	engine->setAgent(agent);
 #endif
 	initActions();
+	QSettings *conf=StelApp::getInstance().getSettings();
+	flagAllowExternalScreenshotDir=conf->value("scripts/flag_allow_screenshots_dir", false).toBool();
 }
 
 void StelScriptMgr::initActions()
@@ -1204,3 +1206,14 @@ void StelScriptEngineAgent::positionChange(qint64 scriptId, int lineNumber, int 
 	}
 }
 #endif
+
+void StelScriptMgr::setFlagAllowExternalScreenshotDir(bool flag)
+{
+	if (flag!=flagAllowExternalScreenshotDir)
+	{
+		flagAllowExternalScreenshotDir=flag;
+		QSettings* conf = StelApp::getInstance().getSettings();
+		conf->setValue("scripts/flag_allow_screenshots_dir", flag);
+		emit flagAllowExternalScreenshotDirChanged(flag);
+	}
+}

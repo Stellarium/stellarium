@@ -54,6 +54,8 @@ class StelScriptMgr : public QObject
 	Q_OBJECT
 
 	Q_PROPERTY(QString runningScriptId READ runningScriptId NOTIFY runningScriptIdChanged)
+	// CAVEAT: Do not convert this class to a StelModule: The Qt properties (esp. the following) should not be available in the StelProperty system!
+	Q_PROPERTY(bool flagAllowExternalScreenshotDir READ getFlagAllowExternalScreenshotDir WRITE setFlagAllowExternalScreenshotDir NOTIFY flagAllowExternalScreenshotDirChanged)
 		
 #ifdef ENABLE_SCRIPT_CONSOLE
 friend class ScriptConsole;
@@ -249,6 +251,11 @@ public slots:
 	//! @note This method only works with the Qt5-based scripting engine.
 	void resumeScript();
 
+	//! Ensure that users must actively enable storing screenshots to directories configured in scripts.
+	//! If this is false, a directory dir given in StelMainScriptAPI::screenshot(prefix, invert, dir, ...) is ignored.
+	bool getFlagAllowExternalScreenshotDir() {return flagAllowExternalScreenshotDir;}
+	void setFlagAllowExternalScreenshotDir(bool flag);
+
 private slots:
 	//! Called at the end of the running threa
 	void scriptEnded();
@@ -265,6 +272,8 @@ signals:
 	void scriptDebug(const QString&);
 	//! Notification of a script event - output line.
 	void scriptOutput(const QString&);
+	//! Notification that screenshots to script-defined directories are allowed
+	void flagAllowExternalScreenshotDirChanged(bool flag);
 
 private:
 	// Utility functions for preprocessor. DEAD CODE!
@@ -310,6 +319,10 @@ private:
 
 	// Registry for include files
 	QSet<QString> includeSet;
+
+	//! Ensure that users must actively allow storing screenshots to directories configured in scripts.
+	//! If this is false, a directory dir given in StelMainScriptAPI::screenshot(prefix, invert, dir, ...) is ignored.
+	bool flagAllowExternalScreenshotDir;
 };
 
 #endif // STELSCRIPTMGR_HPP

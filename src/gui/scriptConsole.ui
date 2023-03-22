@@ -482,6 +482,16 @@
            </widget>
           </item>
           <item>
+           <widget class="QCheckBox" name="allowScreenshotDirCheckBox">
+            <property name="toolTip">
+             <string>If disabled, all screenshots go to the directory set in the Configuration dialog.</string>
+            </property>
+            <property name="text">
+             <string>Allow scripts to store screenshots to other directories</string>
+            </property>
+           </widget>
+          </item>
+          <item>
            <spacer name="verticalSpacer">
             <property name="orientation">
              <enum>Qt::Vertical</enum>
@@ -620,7 +630,6 @@
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="../../data/gui/guiRes.qrc"/>
   <include location="../../data/gui/guiRes.qrc"/>
  </resources>
  <connections/>
