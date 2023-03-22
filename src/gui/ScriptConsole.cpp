@@ -143,6 +143,9 @@ void ScriptConsole::createDialogContent()
 	connect(ui->closeWindowAtScriptRunCheckbox, SIGNAL(toggled(bool)), this, SLOT(setFlagHideWindow(bool)));
 	connect(ui->clearOutputCheckbox, SIGNAL(toggled(bool)), this, SLOT(setFlagClearOutput(bool)));
 
+	ui->allowScreenshotDirCheckBox->setChecked(StelApp::getInstance().getScriptMgr().getFlagAllowExternalScreenshotDir());
+	connect(ui->allowScreenshotDirCheckBox, SIGNAL(clicked(bool)), &StelApp::getInstance().getScriptMgr(), SLOT(setFlagAllowExternalScreenshotDir(bool)), Qt::AutoConnection);
+
 	dirty = false;
 }
 

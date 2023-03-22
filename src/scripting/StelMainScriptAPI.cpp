@@ -342,12 +342,23 @@ QStringList StelMainScriptAPI::getAllTimezoneNames()
 
 void StelMainScriptAPI::screenshot(const QString& prefix, bool invert, const QString& dir, const bool overwrite, const QString &format)
 {
+	QString realDir("");
+	if ((!dir.isEmpty()) && (!StelApp::getInstance().getScriptMgr().getFlagAllowExternalScreenshotDir()))
+	{
+		qWarning() << "SCRIPT CONFIGURATION ISSUE: the script wants to store a screenshot" << prefix << "." << format << "to an external directory " << dir;
+		qWarning() << "  To enable this, check the settings in the script console";
+		qWarning() << "  or set entry scripts/flag_allow_screenshots_dir=true in config.ini.";
+	}
+	else
+		realDir=dir;
+
+
 	const bool oldInvertSetting = StelMainView::getInstance().getFlagInvertScreenShotColors();
 	const QString oldFormat=StelMainView::getInstance().getScreenshotFormat();
 	if ((format.length()>0) && (format.length()<=4))
 		StelMainView::getInstance().setScreenshotFormat(format);
 	// Check requested against set image format.
-	if (StelMainView::getInstance().getScreenshotFormat() != format)
+	if ((format.length()>0) && (StelMainView::getInstance().getScreenshotFormat() != format))
 	{
 		qWarning() << "Screenshot format" << format << "not supported. Not saving screenshot.";
 		return;
@@ -355,7 +366,7 @@ void StelMainScriptAPI::screenshot(const QString& prefix, bool invert, const QSt
 
 	StelMainView::getInstance().setFlagInvertScreenShotColors(invert);
 	StelMainView::getInstance().setFlagOverwriteScreenShots(overwrite);
-	StelMainView::getInstance().saveScreenShot(prefix, dir, overwrite);
+	StelMainView::getInstance().saveScreenShot(prefix, realDir, overwrite);
 	StelMainView::getInstance().setFlagInvertScreenShotColors(oldInvertSetting);
 	StelMainView::getInstance().setScreenshotFormat(oldFormat);
 }
