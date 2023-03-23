@@ -74,6 +74,7 @@ protected:
 private:
 	//! Toggle certain settings that depend on other settings being enabled
 	void updateDBFields();
+	void setAboutHtml();
 	//void setColor(const int &r, const int &g, const int &b);
 
 	Ui::PlanesDialog *ui;

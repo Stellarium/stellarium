@@ -45,6 +45,7 @@ void PlanesDialog::retranslate()
 	if (dialog)
 	{
 		ui->retranslateUi(dialog);
+		setAboutHtml();
 	}
 }
 
@@ -166,6 +167,33 @@ void PlanesDialog::createDialogContent()
 	this->connect(ui->reconnectOnConnectionLoss, SIGNAL(clicked(bool)), SLOT(setReconnectOnConnectionLoss(bool)));
 
 	connectColorButton(ui->infoTextColorButton, "Planes.infoColor", "Planes/planes_color");
+
+	setAboutHtml();
+}
+
+void PlanesDialog::setAboutHtml(void)
+{
+	QString html = "<html><head></head><body>";
+	html += "<h2>" + q_("Planes Plug-in") + "</h2><table width=\"90%\">";
+	html += "<tr width=\"30%\"><td><strong>" + q_("Version") + ":</strong></td><td>" + PLANES_PLUGIN_VERSION + "</td></tr>";
+	html += "<tr><td><strong>" + q_("License") + ":</strong></td><td>" + PLANES_PLUGIN_LICENSE + "</td></tr>";
+	html += "<tr><td><strong>" + q_("Author") + ":</strong></td><td>Felix Z.</td></tr>";
+	html += "<tr><td rowspan=2><strong>" + q_("Contributors") + ":</strong></td><td>Georg Zotti</td></tr>";
+	html += "<tr><td>Alexander Wolf</td></tr>";
+	html += "</table>";
+
+	html += "<p>" + q_("This plugin allows the visualisation of flight trajectories from ADS-B data. The data can either be imported from a BaseStation recording, from a database or gathered in realtime from a BaseStation session's data port.") + "</p>";
+
+	html += StelApp::getInstance().getModuleMgr().getStandardSupportLinksInfo("Planes plugin");
+	html += "</body></html>";
+
+	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+	if(gui!=Q_NULLPTR)
+	{
+		QString htmlStyleSheet(gui->getStelStyle().htmlStyleSheet);
+		ui->aboutTextBrowser->document()->setDefaultStyleSheet(htmlStyleSheet);
+	}
+	ui->aboutTextBrowser->setHtml(html);
 }
 
 void PlanesDialog::updateDBFields()
