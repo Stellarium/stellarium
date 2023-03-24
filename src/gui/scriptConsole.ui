@@ -492,6 +492,16 @@
            </widget>
           </item>
           <item>
+           <widget class="QCheckBox" name="allowStoreAbsoluteCheckBox">
+            <property name="toolTip">
+             <string>If disabled, all output goes to the user data directory. Enabling this bears some risks!</string>
+            </property>
+            <property name="text">
+             <string>Allow scripts to store output to arbitrary directories</string>
+            </property>
+           </widget>
+          </item>
+          <item>
            <spacer name="verticalSpacer">
             <property name="orientation">
              <enum>Qt::Vertical</enum>

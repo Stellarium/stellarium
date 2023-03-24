@@ -144,7 +144,11 @@ void ScriptConsole::createDialogContent()
 	connect(ui->clearOutputCheckbox, SIGNAL(toggled(bool)), this, SLOT(setFlagClearOutput(bool)));
 
 	ui->allowScreenshotDirCheckBox->setChecked(StelApp::getInstance().getScriptMgr().getFlagAllowExternalScreenshotDir());
-	connect(ui->allowScreenshotDirCheckBox, SIGNAL(clicked(bool)), &StelApp::getInstance().getScriptMgr(), SLOT(setFlagAllowExternalScreenshotDir(bool)), Qt::AutoConnection);
+	connect(ui->allowScreenshotDirCheckBox, SIGNAL(clicked(bool)), &StelApp::getInstance().getScriptMgr(), SLOT(setFlagAllowExternalScreenshotDir(bool)));
+
+	ui->allowStoreAbsoluteCheckBox->setChecked(StelApp::getInstance().getScriptMgr().getFlagAllowWriteAbsolutePaths());
+	connect(ui->allowStoreAbsoluteCheckBox, SIGNAL(clicked(bool)), &StelApp::getInstance().getScriptMgr(), SLOT(setFlagAllowWriteAbsolutePaths(bool)));
+
 
 	dirty = false;
 }

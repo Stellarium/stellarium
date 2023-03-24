@@ -507,6 +507,7 @@ StelScriptMgr::StelScriptMgr(QObject *parent): QObject(parent)
 	initActions();
 	QSettings *conf=StelApp::getInstance().getSettings();
 	flagAllowExternalScreenshotDir=conf->value("scripts/flag_allow_screenshots_dir", false).toBool();
+	flagAllowWriteAbsolutePaths=conf->value("scripts/flag_allow_write_absolute_path", false).toBool();
 }
 
 void StelScriptMgr::initActions()
@@ -1214,6 +1215,18 @@ void StelScriptMgr::setFlagAllowExternalScreenshotDir(bool flag)
 		flagAllowExternalScreenshotDir=flag;
 		QSettings* conf = StelApp::getInstance().getSettings();
 		conf->setValue("scripts/flag_allow_screenshots_dir", flag);
+		conf->sync();
 		emit flagAllowExternalScreenshotDirChanged(flag);
+	}
+}
+void StelScriptMgr::setFlagAllowWriteAbsolutePaths(bool flag)
+{
+	if (flag!=flagAllowWriteAbsolutePaths)
+	{
+		flagAllowWriteAbsolutePaths=flag;
+		QSettings* conf = StelApp::getInstance().getSettings();
+		conf->setValue("scripts/flag_allow_write_absolute_path", flag);
+		conf->sync();
+		emit flagAllowWriteAbsolutePathsChanged(flag);
 	}
 }
