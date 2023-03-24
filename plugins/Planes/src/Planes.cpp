@@ -56,7 +56,7 @@ Planes::~Planes()
 
 void Planes::init()
 {
-	qDebug() << "Planes init()";
+	//qDebug() << "Planes init()";
 	loadSettings();
 	planeTexture = StelApp::getInstance().getTextureManager().createTexture(":/planes/plane.png");
 
@@ -65,8 +65,8 @@ void Planes::init()
 	connect(StelApp::getInstance().getCore(), SIGNAL(locationChanged(StelLocation)), this, SLOT(updateLocation(StelLocation)));
 
 	QString planesGroup = N_("Planes");
-	addAction("actionShow_planes",          planesGroup, N_("Show Planes"), "enabled", "Shift+P");
-	addAction("actionShow_planes_settings", planesGroup, N_("Show Planes Settings"), settingsDialog, "visible", "Ctrl+P");
+	addAction("actionShow_Planes",          planesGroup, N_("Show Planes"), "enabled", "Shift+P");
+	addAction("actionShow_Planes_Settings", planesGroup, N_("Show Planes Settings"), settingsDialog, "visible", "Ctrl+P");
 
 	// Add a toolbar button
 	try
@@ -78,9 +78,9 @@ void Planes::init()
 						      QPixmap(":/planes/planes_on_160.png"),
 						      QPixmap(":/planes/planes_off_160.png"),
 						      QPixmap(":/graphicGui/miscGlow32x32.png"),
-						      "actionShow_planes",
+						      "actionShow_Planes",
 						      false,
-						      "actionShow_planes_settings");
+						      "actionShow_Planes_Settings");
 			gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
 		}
 	}
@@ -120,7 +120,7 @@ void Planes::init()
 
 void Planes::deinit()
 {
-	qDebug() << "Planes deinit()";
+	//qDebug() << "Planes deinit()";
 	saveSettings();
 	planeTexture.clear();
 	bsDataSource.deinit();
@@ -272,7 +272,7 @@ void Planes::enablePlanes(bool b)
 	{
 		displayFader = b;
 	}
-	qDebug() << "Planes enabled " << b;
+	//qDebug() << "Planes enabled " << b;
 	emit enabledChanged(b);
 }
 

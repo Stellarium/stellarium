@@ -30,7 +30,7 @@ DatabaseWorker::DatabaseWorker(QObject *parent) :
 
 void DatabaseWorker::connectDB(DBCredentials creds)
 {
-	qDebug() << "DatabaseWorker::connectDB()";
+	//qDebug() << "DatabaseWorker::connectDB()";
 	QSqlDatabase oldDb = QSqlDatabase::database();
 	if (oldDb.isValid())
 	{

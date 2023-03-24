@@ -192,12 +192,12 @@ void BSDataSource::connectDBBS(QString host, quint16 port, DBCredentials creds)
 	if (useSocket && !isSocketConnected)
 	{
 		qDebug() << "Connecting socket";
-		emit bsStatusChanged("Connecting...");
+		emit bsStatusChanged(q_("Connecting..."));
 		socket.connectToHost(host, port);
 	}
 	if (useDatabase && !isDbConnected && !connectionAttemptInProgress)
 	{
-		emit dbStatusChanged("Connecting...");
+		emit dbStatusChanged(q_("Connecting..."));
 		connectionAttemptInProgress = true;
 		qDebug() << "Connecting database";
 		dbWorker = new DatabaseWorker();
@@ -420,7 +420,7 @@ void BSDataSource::parseMsg(QByteArray &buf, int start, int end)
 #endif
 		if (line.size() != 10)
 		{
-			qDebug() << "invalid msg length";
+			qDebug() << "invalid msg length (AIR)";
 			return;
 		}
 	}
@@ -432,7 +432,7 @@ void BSDataSource::parseMsg(QByteArray &buf, int start, int end)
 #endif
 		if (line.size() != 11)
 		{
-			qDebug() << "invalid msg length";
+			qDebug() << "invalid msg length (ID)";
 			return;
 		}
 		if (flights.contains(flightId))
@@ -460,7 +460,7 @@ void BSDataSource::parseMsg(QByteArray &buf, int start, int end)
 #endif
 		if (line.size() != 22)
 		{
-			qDebug() << "invalid msg length";
+			qDebug() << "invalid msg length (MSG)";
 			return;
 		}
 		int msgType = line.at(MSG_TYPE_POS).toInt();

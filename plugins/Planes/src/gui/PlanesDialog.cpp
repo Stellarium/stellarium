@@ -177,7 +177,7 @@ void PlanesDialog::setAboutHtml(void)
 	html += "<h2>" + q_("Planes Plug-in") + "</h2><table width=\"90%\">";
 	html += "<tr width=\"30%\"><td><strong>" + q_("Version") + ":</strong></td><td>" + PLANES_PLUGIN_VERSION + "</td></tr>";
 	html += "<tr><td><strong>" + q_("License") + ":</strong></td><td>" + PLANES_PLUGIN_LICENSE + "</td></tr>";
-	html += "<tr><td><strong>" + q_("Author") + ":</strong></td><td>Felix Z.</td></tr>";
+	html += "<tr><td><strong>" + q_("Author") + ":</strong></td><td>Felix Zeltner</td></tr>";
 	html += "<tr><td rowspan=2><strong>" + q_("Contributors") + ":</strong></td><td>Georg Zotti</td></tr>";
 	html += "<tr><td>Alexander Wolf</td></tr>";
 	html += "</table>";
@@ -207,7 +207,7 @@ void PlanesDialog::updateDBFields()
 	ui->dbUserLabel->setHidden(isSqLite);
 	ui->dbPass->setHidden(isSqLite);
 	ui->dbPasswordLabel->setHidden(isSqLite);
-	ui->dbNameLabel->setText(isSqLite ? QStringLiteral("File") : QStringLiteral("Database"));
+	ui->dbNameLabel->setText(isSqLite ? q_("File") : q_("Database"));
 }
 
 void PlanesDialog::openFile()
