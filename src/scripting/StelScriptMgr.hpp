@@ -54,9 +54,10 @@ class StelScriptMgr : public QObject
 	Q_OBJECT
 
 	Q_PROPERTY(QString runningScriptId READ runningScriptId NOTIFY runningScriptIdChanged)
-	// CAVEAT: Do not convert this class to a StelModule: The Qt properties (esp. the following) should not be available in the StelProperty system!
+	// CAVEAT: Do not convert this class to a StelModule: The Qt properties (esp. the following 2) should not be available in the StelProperty system (and the object should not be scriptable)!
 	Q_PROPERTY(bool flagAllowExternalScreenshotDir READ getFlagAllowExternalScreenshotDir WRITE setFlagAllowExternalScreenshotDir NOTIFY flagAllowExternalScreenshotDirChanged)
-		
+	Q_PROPERTY(bool flagAllowWriteAbsolutePaths READ getFlagAllowWriteAbsolutePaths WRITE setFlagAllowWriteAbsolutePaths NOTIFY flagAllowWriteAbsolutePathsChanged)
+
 #ifdef ENABLE_SCRIPT_CONSOLE
 friend class ScriptConsole;
 #endif
@@ -256,6 +257,11 @@ public slots:
 	bool getFlagAllowExternalScreenshotDir() {return flagAllowExternalScreenshotDir;}
 	void setFlagAllowExternalScreenshotDir(bool flag);
 
+	//! Ensure that users must actively enable writing to absolute paths configured in scripts.
+	//! If this is false, the output file is just stored to the user data directory
+	bool getFlagAllowWriteAbsolutePaths() {return flagAllowWriteAbsolutePaths;}
+	void setFlagAllowWriteAbsolutePaths(bool flag);
+
 private slots:
 	//! Called at the end of the running threa
 	void scriptEnded();
@@ -274,6 +280,8 @@ signals:
 	void scriptOutput(const QString&);
 	//! Notification that screenshots to script-defined directories are allowed
 	void flagAllowExternalScreenshotDirChanged(bool flag);
+	//! Notification that flag to allow scripts to write to absolute paths changed
+	void flagAllowWriteAbsolutePathsChanged(bool flag);
 
 private:
 	// Utility functions for preprocessor. DEAD CODE!
@@ -323,6 +331,9 @@ private:
 	//! Ensure that users must actively allow storing screenshots to directories configured in scripts.
 	//! If this is false, a directory dir given in StelMainScriptAPI::screenshot(prefix, invert, dir, ...) is ignored.
 	bool flagAllowExternalScreenshotDir;
+	//! Ensure that users must actively allow storing output data to absolute paths.
+	//! If this is false, the output file is stored to the user data directory.
+	bool flagAllowWriteAbsolutePaths;
 };
 
 #endif // STELSCRIPTMGR_HPP
