@@ -541,6 +541,7 @@ BottomStelBar::BottomStelBar(QGraphicsItem* parent,
 	setFontSizeFromApp(StelApp::getInstance().getScreenFontSize());
 	connect(&StelApp::getInstance(), SIGNAL(screenFontSizeChanged(int)), this, SLOT(setFontSizeFromApp(int)));
 	connect(&StelApp::getInstance(), SIGNAL(fontChanged(QFont)), this, SLOT(setFont(QFont)));
+	connect(StelApp::getInstance().getCore(), &StelCore::flagUseTopocentricCoordinatesChanged, this, [=](bool){updateText(false, true);});
 
 	QSettings* confSettings = StelApp::getInstance().getSettings();
 	setFlagShowTime(confSettings->value("gui/flag_show_datetime", true).toBool());
@@ -723,7 +724,7 @@ QRectF BottomStelBar::getButtonsBoundingRect() const
 void BottomStelBar::updateButtonsGroups()
 {
 	double x = 0;
-	double y = datetime->boundingRect().height() + 3;
+	const double y = datetime->boundingRect().height() + 3;
 	for (auto& group : buttonGroups)
 	{
 		QList<StelButton*>& buttons = group.elems;
@@ -786,13 +787,13 @@ void BottomStelBar::updateButtonsGroups()
 
 // create text elements and tooltips in bottom toolbar.
 // Make sure to avoid any change if not necessary to avoid triggering useless redraw
-void BottomStelBar::updateText(bool updatePos)
+// This is also called when button groups have been updated.
+void BottomStelBar::updateText(bool updatePos, bool updateTopocentric)
 {
 	StelCore* core = StelApp::getInstance().getCore();
 	const double jd = core->getJD();
 	const double deltaT = core->getDeltaT();
 	const double sigma = StelUtils::getDeltaTStandardError(jd);
-	QString sigmaInfo = "";
 	QString validRangeMarker = "";
 	core->getCurrentDeltaTAlgorithmValidRangeDescription(jd, &validRangeMarker);
 
@@ -870,10 +871,11 @@ void BottomStelBar::updateText(bool updatePos)
 
 	if (core->getCurrentDeltaTAlgorithm()!=StelCore::WithoutCorrection)
 	{
+		QString sigmaInfo("");
 		if (sigma>0)
 			sigmaInfo = QString("; %1(%2T) = %3s").arg(QChar(0x03c3)).arg(QChar(0x0394)).arg(sigma, 3, 'f', 1);
 
-		QString deltaTInfo = "";
+		QString deltaTInfo;
 		if (qAbs(deltaT)>60.)
 			deltaTInfo = QString("%1 (%2s)%3").arg(StelUtils::hoursToHmsStr(deltaT/3600.)).arg(deltaT, 5, 'f', 2).arg(validRangeMarker);
 		else
@@ -896,7 +898,7 @@ void BottomStelBar::updateText(bool updatePos)
 	}
 
 	// build location tooltip
-	QString newLocation = "";
+	QString newLocation("");
 	if (getFlagShowLocation())
 	{
 		const StelLocation* loc = &core->getCurrentLocation();
@@ -910,8 +912,8 @@ void BottomStelBar::updateText(bool updatePos)
 			//TRANSLATORS: Unit of measure for distance - meter
 			newLocation = planetNameI18n +", "+q_(loc->name) + ", "+ QString("%1 %2").arg(loc->altitude).arg(qc_("m", "distance"));
 	}
-	// TODO: When topocentric switch is toggled, this must be redrawn!
-	if (location->text()!=newLocation)
+	// When topocentric switch is toggled, this must be redrawn!
+	if (location->text()!=newLocation || updateTopocentric)
 	{
 		updatePos = true;
 		location->setText(newLocation);

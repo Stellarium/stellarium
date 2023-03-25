@@ -292,7 +292,8 @@ private slots:
 	void setFont(QFont font);
 
 private:
-	void updateText(bool forceUpdatePos=false);
+	// updateTopocentric: regardless of topocentric setting, reformat the string if true
+	void updateText(bool forceUpdatePos=false, bool updateTopocentric=false);
 	void updateButtonsGroups();
 	QRectF getButtonsBoundingRect() const;
 	// Elements which get displayed above the buttons:
