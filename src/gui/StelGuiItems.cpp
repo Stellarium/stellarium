@@ -1152,23 +1152,23 @@ StelBarsPath::StelBarsPath(QGraphicsItem* parent) : QGraphicsPathItem(parent), r
 	setPen(aPen);
 }
 
-void StelBarsPath::updatePath(BottomStelBar* bot, LeftStelBar* lef)
+void StelBarsPath::updatePath(BottomStelBar* bottom, LeftStelBar* left)
 {
-	QPainterPath newPath;
-	QPointF p = lef->pos() + QPointF(-0.5,0.5);
-	QRectF r = lef->boundingRectNoHelpLabel();
-	QPointF p2 = bot->pos() + QPointF(-0.5,0.5);
-	QRectF r2 = bot->boundingRectNoHelpLabel();
+	const QPointF l = left->pos() + QPointF(-0.5,0.5);   // pos() seems to be the top-left point.
+	const QRectF lB = left->boundingRectNoHelpLabel();
+	const QPointF b = bottom->pos() + QPointF(-0.5,0.5);
+	const QRectF bB = bottom->boundingRectNoHelpLabel();
 
-	newPath.moveTo(p.x()-roundSize, p.y()-roundSize);
-	newPath.lineTo(p.x()+r.width(),p.y()-roundSize);
-	newPath.arcTo(p.x()+r.width()-roundSize, p.y()-roundSize, 2.*roundSize, 2.*roundSize, 90, -90);
-	newPath.lineTo(p.x()+r.width()+roundSize, p2.y()-roundSize);
-	newPath.lineTo(p2.x()+r2.width(),p2.y()-roundSize);
-	newPath.arcTo(p2.x()+r2.width()-roundSize, p2.y()-roundSize, 2.*roundSize, 2.*roundSize, 90, -90);
-	newPath.lineTo(p2.x()+r2.width()+roundSize, p2.y()+r2.height()+roundSize);
-	newPath.lineTo(p.x()-roundSize, p2.y()+r2.height()+roundSize);
-	setPath(newPath);
+	QPainterPath path(QPointF(l.x()-roundSize, l.y()-roundSize));                                 // top left point
+	//path.lineTo(l.x()+lB.width()-roundSize,l.y()-roundSize);                                    // top edge. Not needed because the arc connects anyhow!
+	path.arcTo(l.x()+lB.width()-roundSize, l.y()-roundSize, 2.*roundSize, 2.*roundSize, 90, -90); // top-right curve of left bar
+	path.lineTo(l.x()+lB.width()+roundSize, b.y()-roundSize);                                     // vertical to inside sharp edge
+	//path.lineTo(b.x()+bB.width(),b.y()-roundSize);                                              // Top edge of bottom bar. Not needed because the arc connects anyhow!
+	path.arcTo(b.x()+bB.width()-roundSize, b.y()-roundSize, 2.*roundSize, 2.*roundSize, 90, -90); // top right curved edge of bottom bar (just connects.)
+	path.lineTo(b.x()+bB.width()+roundSize, b.y()+bB.height()+roundSize);
+	path.lineTo(l.x()-roundSize, b.y()+bB.height()+roundSize);                                    // bottom line (outside screen area!)
+	path.closeSubpath();                                                                          // vertical line up left outside screen
+	setPath(path);
 }
 
 void StelBarsPath::setBackgroundOpacity(double opacity)
