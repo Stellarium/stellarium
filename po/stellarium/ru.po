@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2023-03-16 09:28+0700\n"
+"POT-Creation-Date: 2023-03-19 12:54+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Alexander V. Wolf <alex.v.wolf@gmail.com>, 2023\n"
 "Language-Team: Russian (https://www.transifex.com/stellarium/teams/80998/ru/)\n"
@@ -16278,7 +16278,7 @@ msgstr "Поле зрения Telrad"
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:102
 #: plugins/Scenery3d/src/Scenery3d.cpp:334
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:272
-#: plugins/Calendars/src/Calendars.cpp:193
+#: plugins/Calendars/src/Calendars.cpp:194
 msgid "Show settings dialog"
 msgstr "Показать диалог настройки"
 
@@ -28343,8 +28343,8 @@ msgid "Allow to use Stellarium as a plugin in CNES VTS."
 msgstr "Разрешает использовать Stellarium в качестве плагина в CNES VTS."
 
 #: plugins/Calendars/src/Calendars.cpp:89
-#: plugins/Calendars/src/Calendars.cpp:191
 #: plugins/Calendars/src/Calendars.cpp:192
+#: plugins/Calendars/src/Calendars.cpp:193
 msgid "Calendars"
 msgstr "Календари"
 
@@ -28352,243 +28352,243 @@ msgstr "Календари"
 msgid "Calendars of the world"
 msgstr "Календари мира"
 
-#: plugins/Calendars/src/Calendars.cpp:357
+#: plugins/Calendars/src/Calendars.cpp:358
 #: plugins/Calendars/src/ui_calendarsDialog.h:972
 #: plugins/Calendars/src/ui_calendarsDialog.h:992
 msgctxt "calendar"
 msgid "Gregorian"
 msgstr "Григорианский"
 
-#: plugins/Calendars/src/Calendars.cpp:358
+#: plugins/Calendars/src/Calendars.cpp:359
 #: plugins/Calendars/src/ui_calendarsDialog.h:944
 #: plugins/Calendars/src/ui_calendarsDialog.h:993
 msgctxt "calendar"
 msgid "Julian"
 msgstr "Юлианский"
 
-#: plugins/Calendars/src/Calendars.cpp:359
+#: plugins/Calendars/src/Calendars.cpp:360
 #: plugins/Calendars/src/ui_calendarsDialog.h:970
 #: plugins/Calendars/src/ui_calendarsDialog.h:994
 msgctxt "calendar"
 msgid "Revised Julian"
 msgstr "Новоюлианский"
 
-#: plugins/Calendars/src/Calendars.cpp:360
+#: plugins/Calendars/src/Calendars.cpp:361
 msgctxt "calendar"
 msgid "ISO week"
 msgstr "Неделя ISO"
 
-#: plugins/Calendars/src/Calendars.cpp:361
+#: plugins/Calendars/src/Calendars.cpp:362
 #: plugins/Calendars/src/ui_calendarsDialog.h:976
 msgctxt "calendar"
 msgid "Icelandic"
 msgstr "Исландский"
 
-#: plugins/Calendars/src/Calendars.cpp:362
+#: plugins/Calendars/src/Calendars.cpp:363
 #: plugins/Calendars/src/ui_calendarsDialog.h:969
 msgctxt "calendar"
 msgid "Roman"
 msgstr "Римский"
 
-#: plugins/Calendars/src/Calendars.cpp:363
+#: plugins/Calendars/src/Calendars.cpp:364
 #: plugins/Calendars/src/ui_calendarsDialog.h:956
 msgctxt "calendar"
 msgid "Olympic"
 msgstr "Олимпийский"
 
-#: plugins/Calendars/src/Calendars.cpp:364
+#: plugins/Calendars/src/Calendars.cpp:365
 #: plugins/Calendars/src/ui_calendarsDialog.h:945
 msgctxt "calendar"
 msgid "Egyptian"
 msgstr "Египетский"
 
-#: plugins/Calendars/src/Calendars.cpp:365
+#: plugins/Calendars/src/Calendars.cpp:366
 #: plugins/Calendars/src/ui_calendarsDialog.h:948
 msgctxt "calendar"
 msgid "Armenian"
 msgstr "Армянский"
 
-#: plugins/Calendars/src/Calendars.cpp:366
+#: plugins/Calendars/src/Calendars.cpp:367
 #: plugins/Calendars/src/ui_calendarsDialog.h:962
 msgctxt "calendar"
 msgid "Zoroastrian"
 msgstr "Зороастрийский"
 
-#: plugins/Calendars/src/Calendars.cpp:367
+#: plugins/Calendars/src/Calendars.cpp:368
 #: plugins/Calendars/src/ui_calendarsDialog.h:947
 msgctxt "calendar"
 msgid "Coptic"
 msgstr "Коптский"
 
-#: plugins/Calendars/src/Calendars.cpp:368
+#: plugins/Calendars/src/Calendars.cpp:369
 #: plugins/Calendars/src/ui_calendarsDialog.h:946
 msgctxt "calendar"
 msgid "Ethiopic"
 msgstr "Эфиопский"
 
-#: plugins/Calendars/src/Calendars.cpp:369
+#: plugins/Calendars/src/Calendars.cpp:370
 msgctxt "calendar"
 msgid "French Rev. (Astron.)"
 msgstr "Французский револ. (астрон.)"
 
-#: plugins/Calendars/src/Calendars.cpp:370
+#: plugins/Calendars/src/Calendars.cpp:371
 msgctxt "calendar"
 msgid "French Rev. (Arithm.)"
 msgstr "Французский револ. (арифмет.)"
 
-#: plugins/Calendars/src/Calendars.cpp:371
+#: plugins/Calendars/src/Calendars.cpp:372
 #: plugins/Calendars/src/ui_calendarsDialog.h:943
 msgctxt "calendar"
 msgid "Islamic"
 msgstr "Исламский"
 
-#: plugins/Calendars/src/Calendars.cpp:372
+#: plugins/Calendars/src/Calendars.cpp:373
 #: plugins/Calendars/src/ui_calendarsDialog.h:953
 msgctxt "calendar"
 msgid "Hebrew"
 msgstr "Еврейский"
 
-#: plugins/Calendars/src/Calendars.cpp:373
+#: plugins/Calendars/src/Calendars.cpp:374
 msgctxt "calendar"
 msgid "Persian (Arithm.)"
 msgstr "Персидский (арифмет.)"
 
-#: plugins/Calendars/src/Calendars.cpp:374
+#: plugins/Calendars/src/Calendars.cpp:375
 msgctxt "calendar"
 msgid "Persian (Astron.)"
 msgstr "Персидский (астрон.)"
 
-#: plugins/Calendars/src/Calendars.cpp:375
+#: plugins/Calendars/src/Calendars.cpp:376
 msgctxt "calendar"
 msgid "Bahá’í (Arithm.)"
 msgstr "Бахаизский (арифм.)"
 
-#: plugins/Calendars/src/Calendars.cpp:376
+#: plugins/Calendars/src/Calendars.cpp:377
 msgctxt "calendar"
 msgid "Bahá’í (Astron.)"
 msgstr "Бахаизский (астрон.)"
 
-#: plugins/Calendars/src/Calendars.cpp:377
+#: plugins/Calendars/src/Calendars.cpp:378
 #: plugins/Calendars/src/ui_calendarsDialog.h:949
 msgctxt "calendar"
 msgid "Old Hindu Solar"
 msgstr "Древнеиндийский солнечный"
 
-#: plugins/Calendars/src/Calendars.cpp:378
+#: plugins/Calendars/src/Calendars.cpp:379
 msgctxt "calendar"
 msgid "Old Hindu Lunisolar"
 msgstr "Древнеиндийский лунно-солнечный"
 
-#: plugins/Calendars/src/Calendars.cpp:379
+#: plugins/Calendars/src/Calendars.cpp:380
 #: plugins/Calendars/src/ui_calendarsDialog.h:952
 msgctxt "calendar"
 msgid "New Hindu Solar"
 msgstr "Новоиндийский солнечный"
 
-#: plugins/Calendars/src/Calendars.cpp:380
+#: plugins/Calendars/src/Calendars.cpp:381
 msgctxt "calendar"
 msgid "New Hindu Lunisolar"
 msgstr "Новоиндийский лунно-солнечный"
 
-#: plugins/Calendars/src/Calendars.cpp:381
+#: plugins/Calendars/src/Calendars.cpp:382
 msgctxt "calendar"
 msgid "New Hindu Panchang"
 msgstr "Новоиндийский панчанга"
 
-#: plugins/Calendars/src/Calendars.cpp:383
+#: plugins/Calendars/src/Calendars.cpp:384
 #: plugins/Calendars/src/ui_calendarsDialog.h:959
 msgctxt "calendar"
 msgid "Hindu Astro Solar"
 msgstr "Индийский астрон. солнечный"
 
-#: plugins/Calendars/src/Calendars.cpp:384
+#: plugins/Calendars/src/Calendars.cpp:385
 #: plugins/Calendars/src/ui_calendarsDialog.h:966
 msgctxt "calendar"
 msgid "Hindu Astro Lunisolar"
 msgstr "Индийский астрон. лунно-солн."
 
-#: plugins/Calendars/src/Calendars.cpp:385
+#: plugins/Calendars/src/Calendars.cpp:386
 #: plugins/Calendars/src/ui_calendarsDialog.h:968
 msgctxt "calendar"
 msgid "Tibetan"
 msgstr "Тибетский"
 
-#: plugins/Calendars/src/Calendars.cpp:387
+#: plugins/Calendars/src/Calendars.cpp:388
 #: plugins/Calendars/src/ui_calendarsDialog.h:973
 #: plugins/Calendars/src/ui_calendarsDialog.h:996
 msgctxt "calendar"
 msgid "Chinese"
 msgstr "Китайский"
 
-#: plugins/Calendars/src/Calendars.cpp:388
+#: plugins/Calendars/src/Calendars.cpp:389
 msgctxt "calendar"
 msgid "Chinese Solar Terms"
 msgstr "Китайский солнечный год"
 
-#: plugins/Calendars/src/Calendars.cpp:391
+#: plugins/Calendars/src/Calendars.cpp:392
 #: plugins/Calendars/src/ui_calendarsDialog.h:950
 msgctxt "calendar"
 msgid "Japanese"
 msgstr "Японский"
 
-#: plugins/Calendars/src/Calendars.cpp:392
+#: plugins/Calendars/src/Calendars.cpp:393
 msgctxt "calendar"
 msgid "Japanese Solar Terms"
 msgstr "Японский солнечный год"
 
-#: plugins/Calendars/src/Calendars.cpp:395
+#: plugins/Calendars/src/Calendars.cpp:396
 #: plugins/Calendars/src/ui_calendarsDialog.h:977
 msgctxt "calendar"
 msgid "Korean"
 msgstr "Корейский"
 
-#: plugins/Calendars/src/Calendars.cpp:396
+#: plugins/Calendars/src/Calendars.cpp:397
 msgctxt "calendar"
 msgid "Korean Solar Terms"
 msgstr "Корейский солнечный год"
 
-#: plugins/Calendars/src/Calendars.cpp:399
+#: plugins/Calendars/src/Calendars.cpp:400
 #: plugins/Calendars/src/ui_calendarsDialog.h:979
 msgctxt "calendar"
 msgid "Vietnamese"
 msgstr "Вьетнамский"
 
-#: plugins/Calendars/src/Calendars.cpp:400
+#: plugins/Calendars/src/Calendars.cpp:401
 msgctxt "calendar"
 msgid "Vietnamese Solar Terms"
 msgstr "Вьетнамский солнечный год"
 
-#: plugins/Calendars/src/Calendars.cpp:402
+#: plugins/Calendars/src/Calendars.cpp:403
 #: plugins/Calendars/src/ui_calendarsDialog.h:957
 msgctxt "calendar"
 msgid "Balinese Pawukon"
 msgstr "Балийский павукон"
 
-#: plugins/Calendars/src/Calendars.cpp:403
+#: plugins/Calendars/src/Calendars.cpp:404
 #: plugins/Calendars/src/ui_calendarsDialog.h:964
 msgctxt "calendar"
 msgid "Maya Long Count"
 msgstr "Длинный счёт майя"
 
-#: plugins/Calendars/src/Calendars.cpp:404
+#: plugins/Calendars/src/Calendars.cpp:405
 #: plugins/Calendars/src/ui_calendarsDialog.h:978
 msgctxt "calendar"
 msgid "Maya Haab"
 msgstr "Хааб майя"
 
-#: plugins/Calendars/src/Calendars.cpp:405
+#: plugins/Calendars/src/Calendars.cpp:406
 #: plugins/Calendars/src/ui_calendarsDialog.h:954
 msgctxt "calendar"
 msgid "Maya Tzolkin"
 msgstr "Цолькин майя"
 
-#: plugins/Calendars/src/Calendars.cpp:406
+#: plugins/Calendars/src/Calendars.cpp:407
 #: plugins/Calendars/src/ui_calendarsDialog.h:975
 msgctxt "calendar"
 msgid "Aztec Xihuitl"
 msgstr "Шиупоуалли ацтеков"
 
-#: plugins/Calendars/src/Calendars.cpp:407
+#: plugins/Calendars/src/Calendars.cpp:408
 #: plugins/Calendars/src/ui_calendarsDialog.h:963
 msgctxt "calendar"
 msgid "Aztec Tonalpohualli"
