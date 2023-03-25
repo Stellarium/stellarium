@@ -1892,7 +1892,8 @@ void StelMainView::doScreenshot(void)
 			}
 		}
 	}
-	// Determine free space and reject storing. This should avoid filling user space.
+	/*
+	// OPTIONAL: Determine free space and reject storing. This should avoid filling user space.
 	QStorageInfo storageInfo(shotPath.filePath());
 	if (storageInfo.bytesAvailable() < 50*1024*1024)
 	{
@@ -1900,6 +1901,7 @@ void StelMainView::doScreenshot(void)
 		qWarning() << "         You must clean up your system to free disk space!";
 		return;
 	}
+	*/
 
 	// Set preferred image resolution (for some printing workflows)
 	im.setDotsPerMeterX(qRound(screenshotDpi*100./2.54));
