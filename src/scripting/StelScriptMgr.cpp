@@ -968,7 +968,7 @@ void StelScriptMgr::resumeScript()
 #endif
 }
 
-double StelScriptMgr::getScriptRate()
+double StelScriptMgr::getScriptRate() const
 {
 	return engine->globalObject().property("scriptRateReadOnly").toNumber();
 }

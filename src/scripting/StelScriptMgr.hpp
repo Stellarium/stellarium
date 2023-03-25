@@ -104,10 +104,10 @@ public:
 	#endif
 
 	//! Permit access to StelScriptMainAPI's methods
-	const QMetaObject * getMetaOfStelMainScriptAPI(){ return mainAPI->metaObject(); }
+	const QMetaObject * getMetaOfStelMainScriptAPI() const { return mainAPI->metaObject(); }
 
 	//! Accessor to QEventLoop
-	QEventLoop* getWaitEventLoop(){ return waitEventLoop; }
+	QEventLoop* getWaitEventLoop() const { return waitEventLoop; }
 
 public slots:
 	//! Returns a HTML description of the specified script.
@@ -225,7 +225,7 @@ public slots:
 	
 	//! Get the rate at which the script is running as a multiple of the normal
 	//! execution rate.
-	double getScriptRate();
+	double getScriptRate() const;
 
 	//! cause the emission of the scriptDebug signal. This is so that functions in
 	//! StelMainScriptAPI can explicitly send information to the ScriptConsole
@@ -254,12 +254,12 @@ public slots:
 
 	//! Ensure that users must actively enable storing screenshots to directories configured in scripts.
 	//! If this is false, a directory dir given in StelMainScriptAPI::screenshot(prefix, invert, dir, ...) is ignored.
-	bool getFlagAllowExternalScreenshotDir() {return flagAllowExternalScreenshotDir;}
+	bool getFlagAllowExternalScreenshotDir() const {return flagAllowExternalScreenshotDir;}
 	void setFlagAllowExternalScreenshotDir(bool flag);
 
 	//! Ensure that users must actively enable writing to absolute paths configured in scripts.
 	//! If this is false, the output file is just stored to the user data directory
-	bool getFlagAllowWriteAbsolutePaths() {return flagAllowWriteAbsolutePaths;}
+	bool getFlagAllowWriteAbsolutePaths() const {return flagAllowWriteAbsolutePaths;}
 	void setFlagAllowWriteAbsolutePaths(bool flag);
 
 private slots:
@@ -286,7 +286,7 @@ signals:
 private:
 	// Utility functions for preprocessor. DEAD CODE!
 	//QMap<QString, QString> mappify(const QStringList& args, bool lowerKey=false);
-	bool strToBool(const QString& str);
+	static bool strToBool(const QString& str);
 	// The recursive preprocessing workhorse.
 	void expand(const QString fileName, const QString &input, QString &output, const QString &scriptDir, int &errLoc);
 
