@@ -62,6 +62,7 @@
 #include <QWindow>
 #include <QMessageBox>
 #include <QStandardPaths>
+#include <QStorageInfo>
 #ifdef Q_OS_WIN
 	#include <QPinchGesture>
 #endif
@@ -1645,6 +1646,8 @@ void StelMainView::setScreenshotDpi(int dpi)
 void StelMainView::saveScreenShot(const QString& filePrefix, const QString& saveDir, const bool overwrite)
 {
 	screenShotPrefix = QFileInfo(filePrefix).fileName(); // Strip away any path elements (Security issue!)
+	if (screenShotPrefix.isEmpty())
+			screenShotPrefix = "stellarium-";
 	screenShotDir = saveDir;
 	flagOverwriteScreenshots=overwrite;
 	emit screenshotRequested();
@@ -1889,11 +1892,21 @@ void StelMainView::doScreenshot(void)
 			}
 		}
 	}
+	// Determine free space and reject storing. This should avoid filling user space.
+	QStorageInfo storageInfo(shotPath.filePath());
+	if (storageInfo.bytesAvailable() < 50*1024*1024)
+	{
+		qWarning() << "WARNING: Less than 50MB free. Not storing screenshot to" << shotPath.filePath();
+		qWarning() << "         You must clean up your system to free disk space!";
+		return;
+	}
 
 	// Set preferred image resolution (for some printing workflows)
 	im.setDotsPerMeterX(qRound(screenshotDpi*100./2.54));
 	im.setDotsPerMeterY(qRound(screenshotDpi*100./2.54));
 	qDebug() << "INFO Saving screenshot in file: " << QDir::toNativeSeparators(shotPath.filePath());
+
+
 	QImageWriter imageWriter(shotPath.filePath());
 	if (screenShotFormat=="tif")
 		imageWriter.setCompression(1); // use LZW
