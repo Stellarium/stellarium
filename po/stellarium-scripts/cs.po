@@ -5,16 +5,17 @@
 # 
 # Translators:
 # cardinot <mcardinot@gmail.com>, 2022
-# Zdeněk Moravec <moravec@hapteplice.cz>, 2022
+# Alexander V. Wolf <alex.v.wolf@gmail.com>, 2022
+# Zdeněk Moravec <moravec@hapteplice.cz>, 2023
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2022-09-30 13:16+0700\n"
-"PO-Revision-Date: 2019-01-19 14:25+0000\n"
-"Last-Translator: Zdeněk Moravec <moravec@hapteplice.cz>, 2022\n"
+"POT-Creation-Date: 2023-03-19 12:54+0700\n"
+"PO-Revision-Date: 2022-10-05 14:25+0000\n"
+"Last-Translator: Zdeněk Moravec <moravec@hapteplice.cz>, 2023\n"
 "Language-Team: Czech (https://www.transifex.com/stellarium/teams/80998/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -718,7 +719,7 @@ msgstr "Snadná dvojhvězda viditelná pouhým okem"
 
 #: scripts/double_stars.ssc:37
 msgid "Zubenelgenubi"
-msgstr "Zuben Elgenubi"
+msgstr "Zubenelgenubi"
 
 #: scripts/double_stars.ssc:37
 msgid "3.83 arcminutes (NW)"
@@ -958,43 +959,47 @@ msgstr "Zásuvný modul Historické supernovy není načten!"
 
 #: scripts/h400_tour.ssc:16
 msgid "The Herschel 400 Catalogue"
-msgstr ""
+msgstr "Katalog Herschel 400"
 
 #: scripts/h400_tour.ssc:17
 msgid ""
 "The Herschel 400 is a subset of John Herschel's General Catalogue of Nebulae"
 " and Clusters"
 msgstr ""
+"Kalatlog Herschel 400 je podmnožinou Všeobecného katalogu mlhovin a "
+"hvězdokup od Johna Herschela."
 
 #: scripts/h400_tour.ssc:18
 msgid ""
 "published in 1864 of 5,000 objects, and hence also of the New General "
 "Catalogue."
 msgstr ""
+"publikovaného v roce 1864 a zahrnujícího 5000 objektů. Je tedy zároveň "
+"podmnožinou Nového všeobecného katalogu (New General Catalogue, NGC)."
 
 #: scripts/h400_tour.ssc:19
 msgid "Vital statistics:"
-msgstr ""
+msgstr "Důležité statistiky:"
 
 #: scripts/h400_tour.ssc:20
 msgid "* The catalogue contains 400 objects"
-msgstr ""
+msgstr "* Katalog obsahuje 400 objektů"
 
 #: scripts/h400_tour.ssc:21
 msgid "* All objects are from the NGC"
-msgstr ""
+msgstr "* Všechny objekty jsou z NGC"
 
 #: scripts/h400_tour.ssc:22
 msgid "* All visible in mid northern latitudes"
-msgstr ""
+msgstr "* Všechny jsou viditelné ze středních severních zeměpisných šířek"
 
 #: scripts/h400_tour.ssc:23
 msgid "* All visible in 150 mm (6\") or larger telescopes"
-msgstr ""
+msgstr "* Všechny lze spatřit ve 150 mm (6\") nebo větších dalekohledech"
 
 #: scripts/largest_known_stars.ssc:12
 msgid "PZ Cassiopeiae"
-msgstr ""
+msgstr "PZ Cassiopeiae"
 
 #: scripts/largest_known_stars.ssc:13
 msgid ""
@@ -1002,20 +1007,25 @@ msgid ""
 "The quoted size is the average size parameter, the true\n"
 "value is from 1,340-1,940."
 msgstr ""
+"PZ Cas se nachází v oblasti s vysokou extinkcí na prachových částicích.\n"
+"Uvedená velikost je průměrným parametrem, skutečná\n"
+"hodnota leží v rozmezí 1340 až 1940."
 
 #: scripts/largest_known_stars.ssc:14
 msgid "VX Sagittarii"
-msgstr ""
+msgstr "VX Sagittarii"
 
 #: scripts/largest_known_stars.ssc:15
 msgid ""
 "VX Sgr is a pulsating variable with a large visual range\n"
 "and varies significantly in size."
 msgstr ""
+"VX Sgr je pulsující proměnná hvězda s velkými rozdíly v jasnosti\n"
+"ve viditelném oboru, která mění značně svou velikost."
 
 #: scripts/largest_known_stars.ssc:16
 msgid "VV Cephei A"
-msgstr ""
+msgstr "VV Cephei A"
 
 #: scripts/largest_known_stars.ssc:17
 msgid ""
@@ -1023,10 +1033,13 @@ msgid ""
 "losing mass to its B-type companion VV Cephei B for at least\n"
 "part of its orbit."
 msgstr ""
+"VV Cep A je velmi zdeformovaná hvězda v dvojhvězdné soustavě,\n"
+"která alespoň v části své dráhy ztrácí svou hmotu ve prospěch svého \n"
+"společníka VV Cephei B, který je hvězdou spektrálního typu B."
 
 #: scripts/largest_known_stars.ssc:18
 msgid "RW Cephei"
-msgstr ""
+msgstr "RW Cephei"
 
 #: scripts/largest_known_stars.ssc:19
 msgid ""
@@ -1034,10 +1047,13 @@ msgid ""
 "of 3) and spectral type (observed from G8 to M), thus\n"
 "probably also in diameter."
 msgstr ""
+"RW Cep je proměnná jak v jasnosti (minimálně s faktorem 3),\n"
+"tak ve spektrálním typu (pozorovány změny od G8 do M),\n"
+"patrně tedy dochází i ke změnám jejího průměru."
 
 #: scripts/largest_known_stars.ssc:20
 msgid "VY Canis Majoris"
-msgstr ""
+msgstr "VY Canis Majoris"
 
 #: scripts/largest_known_stars.ssc:21
 msgid ""
@@ -1045,10 +1061,13 @@ msgid ""
 "contradicted stellar evolutionary theory, improved measurements\n"
 "and estimates have brought it down to size."
 msgstr ""
+"Kdysi byla považována za rudou hyperobří hvězdu tak velikou, \n"
+"že odporovala teorii vývoje hvězd, vylepšená měření a odhady\n"
+"ale její velikost nakonec zmenšily."
 
 #: scripts/largest_known_stars.ssc:22
 msgid "AH Scorpii"
-msgstr ""
+msgstr "AH Scorpii"
 
 #: scripts/largest_known_stars.ssc:23
 msgid ""
@@ -1056,28 +1075,33 @@ msgid ""
 "and an estimated 20% in total luminosity. The variation in diameter\n"
 "is not clear because the temperature also varies."
 msgstr ""
+"AH Sco je proměnná měnící jasnost ve vizuální oblasti o téměř 3 magnitudy,\n"
+"a odhaden o 20% v celkovém zářivém výkonu. Změny v jejím průměru\n"
+"nedokážeme určit, neboť dochází též ke změnám její teploty."
 
 #: scripts/largest_known_stars.ssc:24
 msgid "V766 Centauri A"
-msgstr ""
+msgstr "V766 Centauri A"
 
 #: scripts/largest_known_stars.ssc:25
 msgid ""
 "V766 Centauri A is a highly distorted star in a close binary system,\n"
 "losing mass to the secondary."
 msgstr ""
+"V766 Centauri A je velmi zdeformváná hvězda v soustavě těsné dvojhvězdy,\n"
+"která ztrácí svojí hmotu ve prospěch druhé složky soustavy."
 
 #: scripts/largest_known_stars.ssc:26
 msgid "KW Sagittarii"
-msgstr ""
+msgstr "KW Sagittarii"
 
 #: scripts/largest_known_stars.ssc:27
 msgid "BC Cygni"
-msgstr ""
+msgstr "BC Cygni"
 
 #: scripts/largest_known_stars.ssc:28
 msgid "RT Carinae"
-msgstr ""
+msgstr "RT Carinae"
 
 #: scripts/largest_known_stars.ssc:29
 msgid "Betelgeuse"
@@ -1085,162 +1109,166 @@ msgstr "Betelgeuse"
 
 #: scripts/largest_known_stars.ssc:30
 msgid "Ninth brightest star in the night sky."
-msgstr ""
+msgstr "Devátá nejjasnější hvězda noční oblohy."
 
 #: scripts/largest_known_stars.ssc:31
 msgid "Mu Cephei (Herschel's \"Garnet Star\")"
-msgstr ""
+msgstr "Mí Cephei (Herschelova \"Granátová hvězda\")"
 
 #: scripts/largest_known_stars.ssc:32
 msgid "S Persei"
-msgstr ""
+msgstr "S Persei"
 
 #: scripts/largest_known_stars.ssc:33
 msgid "In the Perseus Double Cluster."
-msgstr ""
+msgstr "Ve Dvojité hvězdokupě v Perseovi"
 
 #: scripts/largest_known_stars.ssc:34
 msgid "RW Cygni"
-msgstr ""
+msgstr "RW Cygni"
 
 #: scripts/largest_known_stars.ssc:35
 msgid "Antares A"
-msgstr ""
+msgstr "Antares A"
 
 #: scripts/largest_known_stars.ssc:36
 msgid "Theta Muscae"
-msgstr ""
+msgstr "Théta Muscae"
 
 #: scripts/largest_known_stars.ssc:37
 msgid "V1749 Cygni"
-msgstr ""
+msgstr "V1749 Cygni"
 
 #: scripts/largest_known_stars.ssc:38
 msgid "TZ Cassiopeiae"
-msgstr ""
+msgstr "TZ Cassiopeiae"
 
 #: scripts/largest_known_stars.ssc:39
 msgid "IX Carinae"
-msgstr ""
+msgstr "IX Carinae"
 
 #: scripts/largest_known_stars.ssc:40
 msgid "TV Geminorum"
-msgstr ""
+msgstr "TV Geminorum"
 
 #: scripts/largest_known_stars.ssc:41
 msgid "T Cephei"
-msgstr ""
+msgstr "T Cephei"
 
 #: scripts/largest_known_stars.ssc:42
 msgid "V382 Carinae"
-msgstr ""
+msgstr "V382 Carinae"
 
 #: scripts/largest_known_stars.ssc:43 scripts/largest_known_stars.ssc:45
 msgid "Yellow hypergiant, one of the rarest types of star."
-msgstr ""
+msgstr "Žlutý hyperobr, velmi vzácně se vyskytující typ hvězdy."
 
 #: scripts/largest_known_stars.ssc:44
 msgid "V509 Cassiopeiae"
-msgstr ""
+msgstr "V509 Cassiopeiae"
 
 #: scripts/largest_known_stars.ssc:46
 msgid "CE Tauri (\"Ruby Star\")"
-msgstr ""
+msgstr "CE Tauri (\"Rubínová hvězda\")"
 
 #: scripts/largest_known_stars.ssc:47
 msgid ""
 "Can be occulted by the Moon, allowing accurate determination\n"
 "of its apparent diameter."
 msgstr ""
+"Může být zakryta Měsícem, což umožňuje přesné určení\n"
+"jejího zdánlivého průměru."
 
 #: scripts/largest_known_stars.ssc:48
 msgid "R Leporis (\"Hind's Crimson Star\")"
-msgstr ""
+msgstr "R Leporis (\"Hindova karmínová hvězda\")"
 
 #: scripts/largest_known_stars.ssc:49
 msgid "One of the largest carbon stars existent in the Milky Way Galaxy."
-msgstr ""
+msgstr "Jedna z největších existujících uhlíkových hvězd v Mléčné dráze."
 
 #: scripts/largest_known_stars.ssc:50
 msgid "Alpha Herculis (\"Ras Algethi\")"
-msgstr ""
+msgstr "Alfa Herculis (\"Ras Algethi\")"
 
 #: scripts/largest_known_stars.ssc:51
 msgid "Rho Cassiopeiae"
-msgstr ""
+msgstr "Ró Cassiopeiae"
 
 #: scripts/largest_known_stars.ssc:52
 msgid "A yellow hypergiant, one of the rarest types of a star."
-msgstr ""
+msgstr "Žlutý hyperobr, velmi vzácně se vyskytující typ hvězdy."
 
 #: scripts/largest_known_stars.ssc:53
 msgid "Mira A (Omicron Ceti)"
-msgstr ""
+msgstr "Mira A (Omikron Ceti)"
 
 #: scripts/largest_known_stars.ssc:54
 msgid "Prototype Mira variable"
-msgstr ""
+msgstr "Prototyp proměnných hvězd zvaných miridy"
 
 #: scripts/largest_known_stars.ssc:55
 msgid "R Doradus"
-msgstr ""
+msgstr "R Doradus"
 
 #: scripts/largest_known_stars.ssc:56
 msgid "Star with the second largest apparent size after the Sun."
 msgstr ""
+"Hvězda s druhou největší zdánlivou velikostí na obloze, hned po Slunci."
 
 #: scripts/largest_known_stars.ssc:57
 msgid "La Superba (Y Canum Venaticorum)"
-msgstr ""
+msgstr "La Superba (Y Canum Venaticorum)"
 
 #: scripts/largest_known_stars.ssc:58
 msgid "One of the coolest and reddest known stars."
-msgstr ""
+msgstr "Jedna z nejchladnějších a nejrudějších hvězd."
 
 #: scripts/largest_known_stars.ssc:59
 msgid "Deneb (Alpha Cygni)"
-msgstr ""
+msgstr "Deneb (alfa Cygni)"
 
 #: scripts/largest_known_stars.ssc:60
 msgid "19th brightest star in the night sky."
-msgstr ""
+msgstr "19. nejjasnější hvězda noční oblohy."
 
 #: scripts/largest_known_stars.ssc:61
 msgid "Rigel A (Beta Orionis A)"
-msgstr ""
+msgstr "Rigel A (beta Orionis A)"
 
 #: scripts/largest_known_stars.ssc:62
 msgid "Seventh brightest star in the night sky."
-msgstr ""
+msgstr "Sedmá nejjasnější hvězda noční oblohy."
 
 #: scripts/largest_known_stars.ssc:63
 msgid "Canopus (Alpha Carinae)"
-msgstr ""
+msgstr "Canopus (alfa Carinae)"
 
 #: scripts/largest_known_stars.ssc:64
 msgid "Second brightest star in the night sky."
-msgstr ""
+msgstr "Druhá nejjasnější hvězda noční oblohy."
 
 #: scripts/largest_known_stars.ssc:65
 msgid "Aldebaran (Alpha Tauri)"
-msgstr ""
+msgstr "Aldebaran (alfa Tauri)"
 
 #: scripts/largest_known_stars.ssc:66
 msgid "VV Cephei B"
-msgstr ""
+msgstr "VV Cephei B"
 
 #: scripts/largest_known_stars.ssc:67
 msgid "The B-type main sequence companion of VV Cephei A."
 msgstr ""
+"Průvodcem VV Cephei A je hvězda hlavní posloupnosti spektrálního typu B."
 
 #: scripts/largest_known_stars.ssc:92
 msgid "Solar radii"
-msgstr ""
+msgstr "poloměrů Slunce"
 
 #: scripts/constellations_tour.ssc:19
-#: scripts/western_constellations_tour.ssc:22
+#: scripts/modern_constellations_tour.ssc:22
 msgid "Press Ctrl+T to un-hide the toolbar"
-msgstr ""
+msgstr "Stisknutím Ctrl+T odkryjte panel nástrojů"
 
 #: scripts/triple_sunrise_and_sunsets.ssc:17
 msgid "Location: Mercury, 0N, 90E"

@@ -7,16 +7,17 @@
 # Виктор, 2022
 # cardinot <mcardinot@gmail.com>, 2022
 # Aleksey Kabanov <ak099@mail.ru>, 2022
-# Alexander V. Wolf <alex.v.wolf@gmail.com>, 2022
+# Dmitry Broover, 2023
+# Alexander V. Wolf <alex.v.wolf@gmail.com>, 2023
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2022-11-14 22:49+0700\n"
+"POT-Creation-Date: 2022-12-18 15:53+0700\n"
 "PO-Revision-Date: 2022-10-05 17:12+0000\n"
-"Last-Translator: Alexander V. Wolf <alex.v.wolf@gmail.com>, 2022\n"
+"Last-Translator: Alexander V. Wolf <alex.v.wolf@gmail.com>, 2023\n"
 "Language-Team: Russian (https://www.transifex.com/stellarium/teams/80998/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -440,6 +441,7 @@ msgstr "Венера (?)"
 
 #. type: Content of: <h2>
 #: ../../skycultures/anutan/description.en.utf8:37
+#: ../../skycultures/greek_dante/description.en.utf8:9
 #: ../../skycultures/greek_leidenAratea/description.en.utf8:275
 #: ../../skycultures/indian/description.en.utf8:35
 #: ../../skycultures/lokono/description.en.utf8:381
@@ -478,6 +480,7 @@ msgstr ""
 #: ../../skycultures/babylonian_seleucid/description.en.utf8:473
 #: ../../skycultures/chinese_medieval/description.en.utf8:49
 #: ../../skycultures/egyptian/description.en.utf8:17
+#: ../../skycultures/greek_dante/description.en.utf8:15
 #: ../../skycultures/greek_farnese/description.en.utf8:297
 #: ../../skycultures/greek_leidenAratea/description.en.utf8:291
 #: ../../skycultures/korean/description.en.utf8:12
@@ -488,6 +491,7 @@ msgstr ""
 #: ../../skycultures/sami/description.en.utf8:63
 #: ../../skycultures/samoan/description.en.utf8:119
 #: ../../skycultures/sardinian/description.en.utf8:11
+#: ../../skycultures/seri/description.en.utf8:174
 #: ../../skycultures/tongan/description.en.utf8:85
 #: ../../skycultures/tupi/description.en.utf8:23
 msgid "Author"
@@ -810,6 +814,7 @@ msgstr ""
 #: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:149
 #: ../../skycultures/arabic_lunar_mansions/description.en.utf8:75
 #: ../../skycultures/chinese/description.en.utf8:2960
+#: ../../skycultures/greek_dante/description.en.utf8:18
 #: ../../skycultures/sami/description.en.utf8:57
 msgid "Notes"
 msgstr "Примечания"
@@ -1115,6 +1120,7 @@ msgstr ""
 #: ../../skycultures/modern_st/description.en.utf8:4
 #: ../../skycultures/modern_iau/description.en.utf8:34
 #: ../../skycultures/mongolian/description.en.utf8:15
+#: ../../skycultures/seri/description.en.utf8:35
 #: ../../skycultures/tupi/description.en.utf8:4
 msgid "Constellations"
 msgstr "Созвездия"
@@ -3259,9 +3265,10 @@ msgstr ""
 "зодиаком и в нём значки показаны как висящие на теле Небесного Дракона "
 "фигурки животных."
 
-#. type: Content of: <img><p><p><p><p><h2>
+#. type: Content of: <h2>
 #: ../../skycultures/aztec/description.en.utf8:29
 #: ../../skycultures/mongolian/description.en.utf8:237
+#: ../../skycultures/seri/description.en.utf8:156
 msgid "Conclusion"
 msgstr "Заключение"
 
@@ -3430,10 +3437,11 @@ msgstr ""
 "<a "
 "href=\"http://sepiensa.org.mx/contenidos/fd_depo/nahuatl/tlach_1.html\">Tlachtli</a>"
 
-#. type: Content of: <h3>
+#. type: Content of: <h2>
 #: ../../skycultures/aztec/description.en.utf8:51
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:525
 #: ../../skycultures/babylonian_seleucid/description.en.utf8:465
+#: ../../skycultures/seri/description.en.utf8:165
 msgid "Thanks to"
 msgstr "Благодарность"
 
@@ -4145,7 +4153,7 @@ msgstr "Юпитер [гипсома]"
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:263
 msgid "33 STAR<sup>s</sup> of <sup>GOD</sup>Enlil"
-msgstr ""
+msgstr "33 ЗВЕЗ<sup>ды</sup> <sup>БОГА</sup>Энлиль"
 
 #. type: Content of: <p>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:267
@@ -4429,7 +4437,7 @@ msgstr "Меркурий"
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:397
 msgid "23 STAR<sup>s</sup> of Anum"
-msgstr ""
+msgstr "23 ЗВЕЗД<sup>ы</sup> Ану"
 
 #. type: Content of: <p>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:402
@@ -4613,7 +4621,7 @@ msgstr "<sup>ЗВЕЗДА</sup><i>SU&#7722;URM&#256;&Scaron;U</i>(Козёл)"
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:498
 msgid "15 STAR<sup>s</sup> of <sup>GOD</sup>Ea"
-msgstr ""
+msgstr "15 ЗВЕЗ<sup>д</sup> <sup>БОГА</sup>Эа"
 
 #. type: Content of: <h2>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:503
@@ -4735,6 +4743,7 @@ msgstr ""
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:522
 #: ../../skycultures/egyptian_dendera/description.en.utf8:222
 #: ../../skycultures/greek_almagest/description.en.utf8:489
+#: ../../skycultures/greek_dante/description.en.utf8:11
 #: ../../skycultures/greek_farnese/description.en.utf8:294
 #: ../../skycultures/greek_leidenAratea/description.en.utf8:288
 msgid "Fair Use"
@@ -4823,6 +4832,7 @@ msgstr ""
 #. type: Content of: <h5>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:541
 #: ../../skycultures/egyptian_dendera/description.en.utf8:228
+#: ../../skycultures/greek_dante/description.en.utf8:20
 #: ../../skycultures/greek_farnese/description.en.utf8:300
 #: ../../skycultures/greek_leidenAratea/description.en.utf8:294
 msgid "written in English:"
@@ -4831,6 +4841,7 @@ msgstr "написано на английском языке:"
 #. type: Content of: <h5>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:541
 #: ../../skycultures/egyptian_dendera/description.en.utf8:228
+#: ../../skycultures/greek_dante/description.en.utf8:20
 msgid "SMH"
 msgstr "SMH"
 
@@ -4995,7 +5006,7 @@ msgstr ""
 #. type: Content of: <p><table><tbody><tr><td>
 #: ../../skycultures/babylonian_seleucid/description.en.utf8:93
 msgid "<sup>STAR</sup>&Scaron;U.PA(The Bright?) = <sup>GOD</sup>Enlil"
-msgstr ""
+msgstr "<sup>ЗВЕЗДА</sup>&Scaron;U.PA (Светочь?) = <sup>БОГ</sup>Энлиль"
 
 #. type: Content of: <p><table><tbody><tr><td>
 #: ../../skycultures/babylonian_seleucid/description.en.utf8:99
@@ -5126,7 +5137,7 @@ msgstr ""
 #. type: Content of: <p><table><tbody><tr><td>
 #: ../../skycultures/babylonian_seleucid/description.en.utf8:201
 msgid "Path of <sup>GOD</sup>Enlil finished."
-msgstr ""
+msgstr "Путь <sup>БОГА</sup>Энлиля закончен."
 
 #. type: Content of: <p><table><tbody><tr><td>
 #: ../../skycultures/babylonian_seleucid/description.en.utf8:223
@@ -5147,7 +5158,7 @@ msgstr ""
 #. type: Content of: <p><table><tbody><tr><td>
 #: ../../skycultures/babylonian_seleucid/description.en.utf8:229
 msgid "<sup>STAR</sup><i>ZIBATI</i>(Tails)"
-msgstr ""
+msgstr "<sup>ЗВЕЗДА</sup><i>ZIBATI</i>(Хвосты)"
 
 #. type: Content of: <p><table><tbody><tr><td>
 #: ../../skycultures/babylonian_seleucid/description.en.utf8:230
@@ -5186,7 +5197,7 @@ msgstr ""
 #. type: Content of: <p><table><tbody><tr><td>
 #: ../../skycultures/babylonian_seleucid/description.en.utf8:242
 msgid "STAR behind it: <sup>STAR</sup><i>AGRU</i>(Hired Worker)"
-msgstr ""
+msgstr "ЗВЕЗДА позади этой: <sup>ЗВЕЗДА</sup><i>AGRU</i>(Наемный работник)"
 
 #. type: Content of: <p><table><tbody><tr><td>
 #: ../../skycultures/babylonian_seleucid/description.en.utf8:243
@@ -5206,7 +5217,7 @@ msgstr ""
 #. type: Content of: <p><table><tbody><tr><td>
 #: ../../skycultures/babylonian_seleucid/description.en.utf8:249
 msgid "STAR.STAR(<i>ZAPPU</i>, Bristle): <sup>GOD</sup>Sebettu"
-msgstr ""
+msgstr "ЗВЕЗДА.ЗВЕЗДА (<i>ZAPPU</i>, Щетина): <sup>БОГ</sup>Себетту"
 
 #. type: Content of: <p><table><tbody><tr><td>
 #: ../../skycultures/babylonian_seleucid/description.en.utf8:250
@@ -5247,7 +5258,7 @@ msgstr "и Гиады"
 #. type: Content of: <p><table><tbody><tr><td>
 #: ../../skycultures/babylonian_seleucid/description.en.utf8:277
 msgid "STAR behind it: <sup>STAR</sup><i>TARLUGALLU</i> (Cock)"
-msgstr ""
+msgstr "ЗВЕЗДА позади этой: <sup>ЗВЕЗДА</sup><i>TARLUGALLU</i> (Петух)"
 
 #. type: Content of: <p><table><tbody><tr><td>
 #: ../../skycultures/babylonian_seleucid/description.en.utf8:278
@@ -5355,6 +5366,8 @@ msgid ""
 "<sup>STAR</sup><i>ER&Ucirc;</i> (Eagle) and <sup>STAR</sup><i>PAGRU</i> "
 "(Corpse)"
 msgstr ""
+"<sup>ЗВЕЗДА</sup><i>ER&Ucirc;</i> (Орёл) и <sup>ЗВЕЗДА</sup><i>PAGRU</i> "
+"(Труп)"
 
 #. type: Content of: <p><table><tbody><tr><td>
 #: ../../skycultures/babylonian_seleucid/description.en.utf8:333
@@ -5376,7 +5389,7 @@ msgstr ""
 #. type: Content of: <p><table><tbody><tr><td>
 #: ../../skycultures/babylonian_seleucid/description.en.utf8:339
 msgid "Path of Anum completed."
-msgstr ""
+msgstr "Путь Ану закончен."
 
 #. type: Content of: <p><table><tbody><tr><td>
 #: ../../skycultures/babylonian_seleucid/description.en.utf8:356
@@ -11225,6 +11238,140 @@ msgid "Written in English: the authors"
 msgstr "Написано по-английски: авторы"
 
 #. type: Content of: <h1>
+#: ../../skycultures/greek_dante/description.en.utf8:1
+msgid "Dante's Divina Comedia"
+msgstr "Божественная комедия Данте"
+
+#. type: Content of: <p>
+#: ../../skycultures/greek_dante/description.en.utf8:2
+msgid ""
+"Dante Alighieri mentions several stars and a few constellations: "
+"predominantly, the zodiacal constellation of Gemini. The Twins occurs in his"
+" texts (in the comedia as well as his poems). As Dante is not an astronomer "
+"but a person with broad knowledge, his view of the constellations is highly "
+"like not based upon observations of the sky but on manuscripts that he read."
+" Therefore, we chose to take the zodiacal constellation images from Michael "
+"Scotus whose manuscript was very popular in Dante's time."
+msgstr ""
+"Данте Алигьери упоминает несколько звезд и несколько созвездий: "
+"преимущественно зодиакальное созвездие Близнецов. Близнецы встречаются в его"
+" текстах (как в комедии, так и в его стихах). Так как Данте не астроном, а "
+"человек с широким кругозором, его взгляд на созвездия весьма похож не на "
+"наблюдения за небом, а на манускрипты, которые он читал. Поэтому мы решили "
+"взять изображения зодиакальных созвездий у Михаила Скота, чья рукопись была "
+"очень популярна во времена Данте."
+
+#. type: Content of: <p>
+#: ../../skycultures/greek_dante/description.en.utf8:3
+msgid ""
+"Dante Alighieri was a citizen of Florence, Italy, who was later banned and "
+"lived at several places in Northern Italy. The comedia was written around "
+"1300 but finished only short before his death in 1321. It is commonly "
+"assumed that the story plays in around the Christian festival of Easter in "
+"1300 CE."
+msgstr ""
+"Данте Алигьери был гражданином Флоренции, Италия, который позже был запрещен"
+" и жил в нескольких местах в Северной Италии. Комедия была написана около "
+"1300 года, но закончена незадолго до его смерти в 1321 году. Принято "
+"считать, что действие истории происходит во время христианского праздника "
+"Пасхи в 1300 году нашей эры."
+
+#. type: Content of: <h2>
+#: ../../skycultures/greek_dante/description.en.utf8:5
+#: ../../skycultures/greek_leidenAratea/description.en.utf8:8
+msgid "How this Sky Culture was made"
+msgstr "Как создавалась эта культура неба"
+
+#. type: Content of: <p>
+#: ../../skycultures/greek_dante/description.en.utf8:6
+msgid ""
+"The Dante-experts of the German Dante Society selected some text passages "
+"with astronomical references in order to present them at Planetarium Jena in"
+" the dome. Professor Blume'ODs suggestion that Dante likely had Michael "
+"Scotus's drawings of the constellations in mind was accepted. Therefore, we "
+"copied these drawings and mapped them onto the stars. The \"16\" bright "
+"stars that are mentioned by Dante are usually interpreted by romanists as "
+"the stars of first magnitude in the Almagest. Therefore, these stars where "
+"highlighted with the \"star\"-symbol in Stellarium. Additionally, we painted"
+" a chariot (wagon) and a horn."
+msgstr ""
+"Данте-эксперты Немецкого общества Данте отобрали несколько отрывков текста с"
+" астрономическими ссылками, чтобы представить их на куполе планетария Йены. "
+"Предположение профессора Блюма о том, что Данте, вероятно, имел в виду "
+"рисунки созвездий Майкла Скота, было принято. Поэтому мы скопировали эти "
+"рисунки и нанесли их на звезды. «16» ярких звезд, о которых упоминает Данте,"
+" обычно истолковываются романистами как звезды первой величины в Альмагесте."
+" Поэтому эти звезды были отмечены символом «звезда» в Stellarium. "
+"Дополнительно нарисовали колесницу (повозку) и рог."
+
+#. type: Content of: <p>
+#: ../../skycultures/greek_dante/description.en.utf8:7
+msgid ""
+"Dante calls the seven bright stars of Ursa Major \"The Chariot\", the "
+"constellation of Ursa Minor \"The Horn\", and possibly refers to Corona "
+"Borealis when he mentions a ring of stars. The latter interpretation is in "
+"our view unlikely but is discussed among researchers which is why we marked "
+"the stars of Corona Borealis as it is described in the Almagest."
+msgstr ""
+"Данте называет семь ярких звезд Большой Медведицы «Колесницей», созвездие "
+"Малой Медведицы «Рогом» и, возможно, имеет в виду Северную Корону, когда "
+"упоминает кольцо звезд. Последняя интерпретация, на наш взгляд, "
+"маловероятна, но обсуждается исследователями, поэтому мы отметили звезды "
+"Северной Короны так, как она описана в Альмагесте."
+
+#. type: Content of: <p>
+#: ../../skycultures/greek_dante/description.en.utf8:10
+msgid ""
+"The Italian Dante Society (Societá Dantesca Italiana) provides Dante's work "
+"online: <a href=\"https://danteonline.it/opere/index.php\">Dante_Online</a>."
+msgstr ""
+"Итальянское общество Данте (Societá Dantesca Italiana) предоставляет работы "
+"Данте в Интернете: <a "
+"href=\"https://danteonline.it/opere/index.php\">Dante_Online</a>."
+
+#. type: Content of: <p>
+#: ../../skycultures/greek_dante/description.en.utf8:12
+#: ../../skycultures/greek_farnese/description.en.utf8:295
+#: ../../skycultures/greek_leidenAratea/description.en.utf8:289
+msgid ""
+"We provide this sky culture free of charge, but the authors deserve to be "
+"cited according to the usual rules. Thank you!"
+msgstr ""
+"Мы предоставляем эту культуру неба бесплатно, но авторы заслуживают того, "
+"чтобы их цитировали по обычным правилам. Благодарю вас!"
+
+#. type: Content of: <p>
+#: ../../skycultures/greek_dante/description.en.utf8:13
+msgid ""
+"Susanne M Hoffmann, Dieter Blume, Karl Ph. Ellerbrock, Eduardo Castadura, "
+"Bodo Zöll (2022)"
+msgstr ""
+"Сюзанна М. Хоффманн, Дитер Блюм, Карл Ф. Эллерброк, Эдуардо Кастадура, Бодо "
+"Цёлль (2022)"
+
+#. type: Content of: <p>
+#: ../../skycultures/greek_dante/description.en.utf8:16
+msgid ""
+"This sky culture was added to Stellarium by Susanne M. Hoffmann "
+"(service@uhura-uraniae.com) as a byproduct of a collaboration with Prof. Dr."
+" Dieter Blume (Art History, FSU Jena, Germany), The German Dante Society "
+"(Deutsche Dante Gesellschaft) and Planetarium Jena."
+msgstr ""
+"Эта культура неба была добавлена в Stellarium Сюзанной М. Хоффманн "
+"(service@uhura-uraniae.com) как побочный продукт сотрудничества с "
+"профессором, доктором Дитером Блюмом (Art History, FSU Jena, Germany), "
+"Немецким обществом Данте (Deutsche Dante Gesellschaft) и планетарием Йены."
+
+#. type: Content of: <p>
+#: ../../skycultures/greek_dante/description.en.utf8:19
+msgid ""
+"region of origin: Florence, Italy; this single sky culture was made for use "
+"in research"
+msgstr ""
+"регион происхождения: Флоренция, Италия; эта единичная культура неба была "
+"создана для использования в исследованиях"
+
+#. type: Content of: <h1>
 #: ../../skycultures/greek_farnese/description.en.utf8:1
 msgid "The Globe of the Atlas Farnese Statue"
 msgstr "Глобус статуи Атласа Фарнезе "
@@ -11540,16 +11687,6 @@ msgid "missing [covered by the shoulder of Atlas]"
 msgstr "отсутствует [прикрыт плечами Атласа]"
 
 #. type: Content of: <p>
-#: ../../skycultures/greek_farnese/description.en.utf8:295
-#: ../../skycultures/greek_leidenAratea/description.en.utf8:289
-msgid ""
-"We provide this sky culture free of charge, but the authors deserve to be "
-"cited according to the usual rules. Thank you!"
-msgstr ""
-"Мы предоставляем эту культуру неба бесплатно, но авторы заслуживают того, "
-"чтобы их цитировали по обычным правилам. Благодарю вас!"
-
-#. type: Content of: <p>
 #: ../../skycultures/greek_farnese/description.en.utf8:298
 msgid ""
 "This sky culture was contributed to Stellarium by Susanne M. Hoffmann "
@@ -11626,11 +11763,6 @@ msgid ""
 msgstr ""
 "<i>На образце страницы средневекового манускрипта показаны три изображения "
 "подушки: Дракон, Большая и Малая Медведицы, а текст находится напротив.</i>"
-
-#. type: Content of: <h2>
-#: ../../skycultures/greek_leidenAratea/description.en.utf8:8
-msgid "How this Sky Culture was made"
-msgstr "Как создавалась эта культура неба"
 
 #. type: Content of: <p>
 #: ../../skycultures/greek_leidenAratea/description.en.utf8:9
@@ -12325,7 +12457,7 @@ msgstr ""
 #. type: Content of: <p><p><ul><li>
 #: ../../skycultures/hawaiian_starlines/description.en.utf8:88
 msgid "<a href=\"http://hokulea.com\">Polynesian Voyaging Society</a>"
-msgstr ""
+msgstr "<a href=\"http://hokulea.com\">Polynesian Voyaging Society</a>"
 
 #. type: Content of: <p><p><ul><li>
 #: ../../skycultures/hawaiian_starlines/description.en.utf8:89
@@ -12334,6 +12466,9 @@ msgid ""
 "href=\"http://pvs.kcc.hawaii.edu/ike/hookele/hawaiian_star_lines.html\">Hawaiian"
 " Voyaging Society</a>"
 msgstr ""
+"<a "
+"href=\"http://pvs.kcc.hawaii.edu/ike/hookele/hawaiian_star_lines.html\">Hawaiian"
+" Voyaging Society</a>"
 
 #. type: Content of: <p><p><ul><li>
 #: ../../skycultures/hawaiian_starlines/description.en.utf8:90
@@ -19650,6 +19785,454 @@ msgstr ""
 " Тонино Буссу (Tonino Bussu) и Марко Пудду (Marco Puddu)."
 
 #. type: Content of: <h1>
+#: ../../skycultures/seri/description.en.utf8:1
+msgid "Seri (Comca'ac)"
+msgstr "Сери (Comca'ac)"
+
+#. type: Content of: <p>
+#: ../../skycultures/seri/description.en.utf8:3
+msgid ""
+"The <a href=\"https://en.wikipedia.org/wiki/Seri_people\">Seri people</a> "
+"are an indigenous group in Mexico."
+msgstr ""
+"<a href=\"https://en.wikipedia.org/wiki/Seri_people\">Сери</a> - коренная "
+"народность в Мексике."
+
+#. type: Content of: <p>
+#: ../../skycultures/seri/description.en.utf8:5
+msgid "There have been six different Comca'ac groups (Comca'ac means \"people\"):"
+msgstr "Было шесть различных групп Comca'ac (Comca'ac означает «люди»):"
+
+#. type: Content of: <p><ul><li>
+#: ../../skycultures/seri/description.en.utf8:7
+msgid ""
+"the Xica hacataj quitoj, who eat meat of sharks, inhabited San Esteban "
+"Island (Isla Turón);"
+msgstr ""
+"Xica hacataj quitoj, питающиеся мясом акул, населяли остров Сан-Эстебан "
+"(Isla Turón);"
+
+#. type: Content of: <p><ul><li>
+#: ../../skycultures/seri/description.en.utf8:8
+msgid ""
+"the Xnamotat, who lived in the south, inhabit San Carlos, Guaymas and "
+"Tastiota;"
+msgstr "Xnamotat, жившие на юге, населяют Сан-Карлос, Гуаймас и Тастиоту;"
+
+#. type: Content of: <p><ul><li>
+#: ../../skycultures/seri/description.en.utf8:9
+msgid ""
+"the Cail hitic 'tamoc, the men from the valley, inhabited the region between"
+" Tastiota and Bahía Kino;"
+msgstr ""
+"Cail hitic 'tamoc, люди из долины, населяли район между Тастиотой и Баия-"
+"Кино;"
+
+#. type: Content of: <p><ul><li>
+#: ../../skycultures/seri/description.en.utf8:10
+msgid ""
+"the Heno comca'ac, who live in the mountains, inhabited the centre of "
+"Tiburón Island;"
+msgstr "Heno comca'ac, живущие в горах, заселили центр острова Тибурон;"
+
+#. type: Content of: <p><ul><li>
+#: ../../skycultures/seri/description.en.utf8:11
+msgid ""
+"the Tepocaj, the fishermen, who inhabited the region between Puerto Libertad"
+" and Puerto Peñasco; and,"
+msgstr ""
+"Tepocaj, рыбаки, населявшие район между Пуэрто-Либертад и Пуэрто-Пеньяско; а"
+" также,"
+
+#. type: Content of: <p><ul><li>
+#: ../../skycultures/seri/description.en.utf8:12
+msgid ""
+"the Tosni hox hanoquipilc, who fed themselves on sea birds (ducks and "
+"pelicans), inhabited Island San Lorenzo."
+msgstr ""
+"Tosni hox hanoquipilc, которые питались морскими птицами (утками и "
+"пеликанами), населявшими остров Сан-Лоренцо."
+
+#. type: Content of: <p>
+#: ../../skycultures/seri/description.en.utf8:14
+msgid ""
+"Nowadays, the Seri people live at Punta Chueca and Desemboque, located in "
+"the coast of the northwestern state of Sonora, Mexico.  According with the "
+"fishing cycles, Comca'ac occupy several fishing camps at the litoral "
+"distributed along a 100 km territory.  The whole area assigned to them "
+"reaches the 210 thousand hectares which corresponds to a region in the "
+"continent and the Tiburón Island in the California gulf."
+msgstr ""
+"В настоящее время люди сери живут в Пунта-Чуэка и Десембоке, расположенных "
+"на побережье северо-западного штата Сонора, Мексика. В соответствии с "
+"рыболовными циклами Comca'ac занимают несколько рыбацких стоянок на "
+"литорале, распределенных на территории в 100 км. Общая закрепленная за ними "
+"площадь достигает 210 тысяч гектаров, что соответствует региону на "
+"континенте и острову Тибурон в Калифорнийском заливе."
+
+#. type: Content of: <p>
+#: ../../skycultures/seri/description.en.utf8:19
+msgid ""
+"The Seri language (coiiqui'itom) forms part of the seriyumana family which "
+"means that, on one hand, its most recent relation can be given by the yumano"
+" coming from the north of the Californian peninsula, and, on the other hand,"
+" this language totally contrasts with the languages of its neighbouring "
+"nations who talk uto-aztec ones like pima, p&#225;pago, yaqui and mayo; all "
+"of them fila with a much more recent origin."
+msgstr ""
+"Язык сери (coiiqui'itom) является частью семейства серийумана, что означает,"
+" что, с одной стороны, его самое последнее родство может быть дано юмано, "
+"пришедшим с севера Калифорнийского полуострова, а с другой стороны, этот "
+"язык полностью контрастирует с языками соседних народов, говорящих на уто-"
+"ацтекских языках, таких как пима, папаго, яки и майо; все они гораздо более "
+"позднего происхождения."
+
+#. type: Content of: <p>
+#: ../../skycultures/seri/description.en.utf8:24
+msgid ""
+"The description of the Comca'ac (Seri) Constellations presented here comes "
+"from the book \"Bajo el cielo Comca'ac: Astronomía entre el mar y el "
+"desierto\", written by Arturo Morales Blanco, in which it is possible to "
+"identify the relations between sky, sea and desert, as they are recovered by"
+" oral tradition and family memories."
+msgstr ""
+"Представленное здесь описание созвездий Comca'ac (сери) взято из книги «Bajo"
+" el cielo Comca'ac: Astronomía entre el mar y el desierto», написанной "
+"Артуро Моралесом Бланко, в которой можно определить отношения между небом, "
+"морем и пустыней, как они восстановлены из устных преданий и семейных "
+"воспоминаний."
+
+#. type: Content of: <p>
+#: ../../skycultures/seri/description.en.utf8:28
+msgid ""
+"This knowledge has arrived to us by oral transmission from generation to "
+"generation through time and shows how the events from the sea like the "
+"appearance of crabs or the abundance of Totoaba (a large fish, now in "
+"danger), comes along with the presence of sets of stars in the sky. Comca'ac"
+" people has named them Zaamth or Zix cam caoc'la, respectively; also, the "
+"coincidence of Pitahayas (cactus fruits) in the cactus with the appearance "
+"of constellation Hácosa (Corta-pitahayas) in the sky is very suggestive."
+msgstr ""
+"Это знание пришло к нам посредством устной передачи из поколения в поколение"
+" во времени и показывает, как морские события, такие как появление крабов "
+"или обилие тотоабы (крупная рыба, находящаяся сейчас в опасности), "
+"сопровождаются наличием множества звезд на небе. Люди Comca'ac назвали их "
+"Zaamth или Zix cam caoc'la соответственно; также очень показательно "
+"совпадение питахайи (плодов кактуса) в кактусе с появлением на небе "
+"созвездия Hácosa (Корта-питахайя)."
+
+#. type: Content of: <table><tr><td><p>
+#: ../../skycultures/seri/description.en.utf8:41
+msgid ""
+"When the stars of Orion's Belt, Rigel and Betelgeuse appear above the "
+"western horizon, in the month of March, Comca'ac people see how in shallow "
+"waters of the marsh, the crabs are found forming groups of about 300 or 400 "
+"items which can be collected easily; that is the reason to call Zaamth to "
+"constellation.  After six months, when the sea is cold, the crabs do not "
+"appear any more going from one place to another; instead the sea wheat, "
+"xnois, comes and their seed has been used to make flour and different food "
+"plates for centuries. The legend says that in the days corresponding to the "
+"crab \"harvesting\", it must be avoided to break a leg or a claw because, if"
+" this happens, the day after there will not be any more crabs at the site."
+msgstr ""
+"Когда звезды пояса Ориона, Ригель и Бетельгейзе появляются над западным "
+"горизонтом, в марте месяце, люди Комка'ак видят, как на мелководье болота "
+"встречаются крабы, образующие группы примерно из 300 или 400 штук, которые "
+"можно легко собрать; это и есть причина называть Заамт созвездием. Через "
+"шесть месяцев, когда море становится холодным, крабы больше не появляются, "
+"переходя с одного места на другое; вместо них появляется морская пшеница, "
+"xnois, семена которой на протяжении веков использовались для изготовления "
+"муки и различных пищевых пластин. Легенда гласит, что в дни, соответствующие"
+" \"сбору урожая\" крабов, нужно избегать сломать ногу или клешню, потому "
+"что, если это случится, на следующий день на этом месте больше не будет "
+"крабов."
+
+#. type: Content of: <table><tr><td><p>
+#: ../../skycultures/seri/description.en.utf8:52
+msgid ""
+"About October 18th, an alignment of stars takes place in the morning sky and"
+" it is called, since ancient times, as Cohamc constellation, women. Then "
+"four or five days after the rains begin to fall with intensity and the wind "
+"runs by the desert. The star that is at the north of the alignment, the "
+"Comca'ac's name is Hacamta, the husband, and is the one appearing behind the"
+" other six named women, (the star Psi of Ursa Major); the six stars appear "
+"in sequence, two by two. The forecast of this bad weather motivated their "
+"ancestors to go to the caves in the mountain and to go far from the beach. "
+"After the difficult days, around two months later, Comca'ac people returned "
+"to the beach carrying with them all the food and materials kept along: dried"
+" meat, fish, 'caguama' turtle, honey, and flour from 'péchita de mezquite' "
+"(seeds from Mesquite tree), between them."
+msgstr ""
+"Примерно 18 октября на утреннем небе происходит выравнивание звезд, которое "
+"с древних времен называется созвездием Кохамк, женщины. Затем через четыре-"
+"пять дней после этого начинаются интенсивные дожди, и ветер проносится по "
+"пустыне. Звезда, которая находится на севере выравнивания, Комка'ак "
+"называется Хакамта, муж, и это та, которая появляется позади других шести "
+"названных женщин, (звезда Пси из Ursa Major); шесть звезд появляются "
+"последовательно, две за двумя. Прогноз такой плохой погоды побудил предков "
+"уйти в пещеры в горах и удалиться от берега. После трудных дней, примерно "
+"через два месяца, люди Комка'ак вернулись на пляж, неся с собой все продукты"
+" и материалы, которые хранили: сушеное мясо, рыбу, черепаху \"кагуама\", мед"
+" и муку из \"печита де мескит\" (семена мескитового дерева)."
+
+#. type: Content of: <table><tr><td><p>
+#: ../../skycultures/seri/description.en.utf8:66
+msgid ""
+"This star that appears alone in the sky with its multicolour shine can be "
+"seen along the year.  However, in the first days of September (after the "
+"heliacal rising), one has to get up at 4 or 5 in the morning to see it. This"
+" star corresponds to Sirius and it announces the new day. The legend says "
+"that when someone gets up when the Sun is already in the sky, all his tents "
+"to become the skin of the dead. Hazoj means constellation and Hantificaö is "
+"\"Who comes at the dawn\"."
+msgstr ""
+"Эту звезду, одиноко сияющую на небе разноцветным блеском, можно наблюдать в "
+"течение всего года. Однако в первые дни сентября (после гелиакического "
+"восхода), чтобы увидеть ее, нужно встать в 4 или 5 часов утра. Эта звезда "
+"соответствует Сириусу и возвещает о наступлении нового дня. Легенда гласит, "
+"что если кто-то встает, когда Солнце уже на небе, то все его палатки "
+"превращаются в кожу мертвеца. Hazoj означает \"созвездие\", а Hantificaö - "
+"\"Тот, кто приходит на рассвете\"."
+
+#. type: Content of: <table><tr><td><p>
+#: ../../skycultures/seri/description.en.utf8:77
+msgid ""
+"This constellation is, perhaps, the most complex of Comca'ac ones, due to "
+"the fact that it covers a wide area in the sky and in it, one can find stars"
+" from Taurus, Twins, and the Capella star.  It can be said that Haapjc (Deer"
+" hunter) has the following sections: the whitetail deer, the bura deer and "
+"bighorn deer (Hépem, Háap and Möjit, respectively), which are the stars "
+"known as Hassaleh, Elnath and 123 Tau; the spear with its flint at Aldebaran"
+" and the stars forming a 'V' of Taurus, while the feathers are Castor and "
+"Pollux of Gemini; and, finally, the hunter, properly said, is Cozaactim "
+"(\"Who crosses\"), with his head at Capella."
+msgstr ""
+"Это созвездие, пожалуй, самое сложное из созвездий Comca'ac, благодаря тому,"
+" что оно занимает большую площадь на небе и в нем можно найти звезды Тельца,"
+" Близнецов и звезду Капелла. Можно сказать, что Haapjc (Охотник на оленей) "
+"имеет следующие разделы: белохвостый олень, олень бура и олень бигхорн "
+"(Hépem, Háap и Möjit, соответственно), которые являются звездами, известными"
+" как Hassaleh, Elnath и 123 Tau; копье с кремнем на Альдебаране и звезды, "
+"образующие \"V\" Тельца, а перья - это Кастор и Поллукс из Близнецов; и, "
+"наконец, охотник, правильно говоря, это Cozaactim (\"Кто пересекает\"), с "
+"головой на Капелле."
+
+#. type: Content of: <table><tr><td><p>
+#: ../../skycultures/seri/description.en.utf8:84
+msgid ""
+"The legend says that Cozaactim threw his spear and hit the Bura deer. Háap "
+"was wounded and flew through the sky bleeding; then, a little drop of blood "
+"fell in the Tiburón Island, and that is the reason why bura deer are native "
+"of the island. This constellation can be observed in September morning "
+"skies."
+msgstr ""
+"Легенда гласит, что Козаактим бросил свое копье и попал в оленя бура. Хаап "
+"был ранен и полетел по небу, истекая кровью; затем маленькая капля крови "
+"упала на остров Тибурон, и именно по этой причине олени бура являются "
+"уроженцами этого острова. Это созвездие можно наблюдать на утреннем небе в "
+"сентябре."
+
+#. type: Content of: <table><tr><td><p>
+#: ../../skycultures/seri/description.en.utf8:92
+msgid ""
+"It is said that when this constellation is pointing to the top of the sky, "
+"at September 7th, it appears similar to the instrument Hácosa (Pitahaya-"
+"cutter), and it is time to collect the wild fruits: 'péchitas de mezquite' "
+"(Mesquite seeds) and pitahayas (cactus fruit), for example.  When there is "
+"no sign of it, the season will be bad."
+msgstr ""
+"Говорят, что когда это созвездие указывает на вершину неба, 7 сентября, оно "
+"становится похожим на инструмент Hácosa (Pitahaya-cutter), и наступает время"
+" собирать дикие плоды: например, \"péchitas de mezquite\" (семена мескита) и"
+" pitahayas (плоды кактуса). Когда нет никаких признаков, сезон будет "
+"неудачным."
+
+#. type: Content of: <table><tr><td><p>
+#: ../../skycultures/seri/description.en.utf8:101
+msgid ""
+"Between the twelve stars of Cöiquih (Person) is the star Antares. In this "
+"constellation, the person seems to be fishing; that is why the corresponding"
+" legend affirms that Zix hantpatj (cochito fish) has at the roof of its "
+"mouth a kind of jelly substance, coming from the pulp of a cactus that the "
+"ancestors used as bait. This constellation goes, month after month, "
+"revolving in the sky and it is seen in a recumbent position when it is over "
+"Tiburón Island on midnight at September 8th."
+msgstr ""
+"Между двенадцатью звездами Cöiquih (Человек) находится звезда Антарес. В "
+"этом созвездии человек как бы ловит рыбу; поэтому соответствующая легенда "
+"утверждает, что у Zix hantpatj (рыбы-кочито) в крыше рта находится "
+"желеобразное вещество, получаемое из мякоти кактуса, который предки "
+"использовали в качестве приманки. Это созвездие месяц за месяцем вращается в"
+" небе, и его можно увидеть в лежачем положении, когда оно находится над "
+"островом Тибурон в полночь 8 сентября."
+
+#. type: Content of: <table><tr><td><p>
+#: ../../skycultures/seri/description.en.utf8:111
+msgid ""
+"This constellation named Caamooilcoj (Wheel Game), is one of the most "
+"important arrays of stars between Comca'ac people; it can be observed at "
+"plenitude at winter; with around fifteen stars in a wheeled shape, and stars"
+" as reed tablets (tablillas de carrizo) which play the role of dice. It is "
+"said that in ancient times, this game was played by men, exclusively, who "
+"put as bet their own life; now, the game is played at festivals and special "
+"occasions by women representing events of life and protection; in "
+"particular, it is played during puberty ceremonies for example; or at the "
+"feast of zaaptim (great basket)."
+msgstr ""
+"Это созвездие, названное Caamooilcoj (Игра колеса), является одним из самых "
+"важных звездных массивов у народа Comca'ac; его можно наблюдать во всей "
+"полноте зимой; в нем около пятнадцати звезд в форме колеса, и звезды в виде "
+"тростниковых табличек (tablillas de carrizo), которые играют роль игральных "
+"костей. Говорят, что в древние времена в эту игру играли исключительно "
+"мужчины, которые ставили на кон свою жизнь; сейчас в эту игру играют на "
+"праздниках и в особых случаях женщины, представляя события жизни и защиты; в"
+" частности, в нее играют во время церемоний полового созревания, например, "
+"или на празднике zaaptim (большая корзина)."
+
+#. type: Content of: <table><tr><td><p>
+#: ../../skycultures/seri/description.en.utf8:117
+msgid ""
+"For this game, several round pieces of Pitahayas (cactus fruits) or of "
+"'cinita' (four lines cactus) made the circle (today, they are decorated "
+"stones with different motives); and, three reed pieces (tablillas de "
+"carrizo), painted in colours.  The meaning of these three colours are: Red -"
+" the blood and death; Blue - the sky and the sea; and, White - purity, good "
+"health and protection."
+msgstr ""
+"Для этой игры круг составляли несколько круглых фигур из Pitahayas (плоды "
+"кактуса) или из \"cinita\" (четырехлинейный кактус) (сегодня это украшенные "
+"камни с различными мотивами); и три тростниковые фигуры (tablillas de "
+"carrizo), окрашенные в разные цвета. Значение этих трех цветов следующее: "
+"Красный - кровь и смерть; Синий - небо и море; и Белый - чистота, здоровье и"
+" защита."
+
+#. type: Content of: <table><tr><td><p>
+#: ../../skycultures/seri/description.en.utf8:126
+msgid ""
+"This lonely star is known as Quetoh (little dove), it is modern Arcturus. It"
+" appears around October 8th announcing an epoch of good fishing. The "
+"ancestors did not have nets or other fishing arts, they used harpoons to "
+"capture their preys and a \"flint\" harpoon or double point tool. The legend"
+" says that many years ago, with the appearance of this star in the sky, the "
+"floriation of cactus begun and at the end of the week, there were Pitahayas "
+"on them; however, the next day, all the pitahayas disappeared: it was Quetoh"
+" yacaso or 'spell of the dove' responsible of eating that fruit."
+msgstr ""
+"Эта одинокая звезда известна под названием Кветох (маленький голубь), это "
+"современный Арктур. Она появляется около 8 октября, объявляя эпоху хорошей "
+"рыбалки. У предков не было сетей и других рыболовных искусств, они "
+"использовали гарпуны для ловли добычи и \"кремневый\" гарпун или двуострое "
+"орудие. Легенда гласит, что много лет назад с появлением этой звезды на небе"
+" началось цветение кактусов, и в конце недели на них появились питахайи; "
+"однако на следующий день все питахайи исчезли: это было Quetoh yacaso или "
+"\"заклинание голубя\", ответственное за поедание этого плода."
+
+#. type: Content of: <table><tr><td><p>
+#: ../../skycultures/seri/description.en.utf8:137
+msgid ""
+"This lonely star is known as Hazoj canoj Himatax because its meaning is a "
+"star which does not move and around which all turns.  It is present all "
+"night long, all the days of the year."
+msgstr ""
+"Эта одинокая звезда известна как Hazoj canoj Himatax, потому что ее значение"
+" - звезда, которая не движется и вокруг которой все вертится. Она "
+"присутствует всю ночь напролет, все дни в году."
+
+#. type: Content of: <table><tr><td><p>
+#: ../../skycultures/seri/description.en.utf8:144
+msgid ""
+"The young hunter, says the legend, was a boy who went hunting, and several "
+"weeks after his departure he was still absent, and the members of his camp "
+"considered him dead. But several months later, at daybreak, he has shown "
+"himself to his parents who were surprised telling him: \"We thought you were"
+" dead, we have spent many days looking for you, until we were tired; we "
+"cried for you a lot\". The young man told his parents: \"I live near the "
+"beach, I found a good place and stayed there\". \"But what kind of water you"
+" drink?\" They asked.  \"I found any water and that is I drink, Haxhaxaha "
+"tahomisi\", he said to them while talking about the Tecomate Bay."
+msgstr ""
+"Юный охотник, гласит легенда, был мальчиком, который отправился на охоту, и "
+"несколько недель после своего ухода он все еще отсутствовал, а члены его "
+"лагеря считали его мертвым. Но несколько месяцев спустя, на рассвете, он "
+"показался своим родителям, которые удивленно сказали ему: \"Мы думали, что "
+"ты умер, мы провели много дней в поисках тебя, пока не устали; мы много "
+"плакали по тебе\". Молодой человек рассказал родителям: \"Я живу недалеко от"
+" пляжа, я нашел хорошее место и остался там\". \"Но какую воду ты пьешь?\" "
+"спросили они. \"Я нашел любую воду и пью ее, Haxhaxaha tahomisi\", - сказал "
+"он им, рассказывая о заливе Текомате."
+
+#. type: Content of: <table><tr><td><p>
+#: ../../skycultures/seri/description.en.utf8:151
+msgid ""
+"According to this legend, the young hunter became the Constellation with "
+"Canopus at its centre caused by a conflict with his elder brother. It "
+"appears directly towards the south."
+msgstr ""
+"Согласно этой легенде, молодой охотник стал созвездием с Канопусом в центре "
+"из-за конфликта со своим старшим братом. Оно появляется прямо на юге."
+
+#. type: Content of: <p>
+#: ../../skycultures/seri/description.en.utf8:157
+msgid ""
+"All this knowledge of Comca'ac people comes from prehispanic epoch, and it "
+"has prevailed through centuries, thanks to oral tradition and the strength "
+"of the community to colonization, at first, and his opposition to "
+"evangelization, later on. Still today, it is possible to hear the stories "
+"and legends behind the naming of constellations and the events on the sea "
+"and on the desert. With the recovery of these legends, by exercise of memory"
+" and lively events with his ancestors, Arturo Morales Blanco gave us a "
+"legacy that must be conserved for future generations: children, young people"
+" who will keep in their own language how and what to look for in the sky."
+msgstr ""
+"Все эти знания народа комка'ак происходят из доиспанской эпохи и сохранились"
+" на протяжении веков, благодаря устной традиции и стойкости общины к "
+"колонизации, вначале, и противостоянию евангелизации, позже. До сих пор "
+"можно услышать истории и легенды, связанные с названиями созвездий и "
+"событиями на море и в пустыне. Восстанавливая эти легенды, используя память "
+"и живые встречи с предками, Артуро Моралес Бланко передал нам наследие, "
+"которое должно быть сохранено для будущих поколений: детей, молодых людей, "
+"которые будут хранить на своем родном языке, как и что искать на небе."
+
+#. type: Content of: <ul><li>
+#: ../../skycultures/seri/description.en.utf8:167
+msgid "Arturo Morales Blanco"
+msgstr "Arturo Morales Blanco"
+
+#. type: Content of: <ul><li>
+#: ../../skycultures/seri/description.en.utf8:168
+msgid "Alejandro Aguilar Zeleny"
+msgstr "Alejandro Aguilar Zeleny"
+
+#. type: Content of: <ul><li>
+#: ../../skycultures/seri/description.en.utf8:169
+msgid "Julio Saucedo Morales"
+msgstr "Julio Saucedo Morales"
+
+#. type: Content of: <ul><li>
+#: ../../skycultures/seri/description.en.utf8:170
+msgid "Alfredo Manríquez"
+msgstr "Alfredo Manríquez"
+
+#. type: Content of: <ul><li>
+#: ../../skycultures/seri/description.en.utf8:171
+msgid "UNISON"
+msgstr "UNISON"
+
+#. type: Content of: <p>
+#: ../../skycultures/seri/description.en.utf8:175
+msgid ""
+"<strong>Ra&#250;l Pérez-Enríquez</strong>: <a "
+"href=\"mailto:raulpe55@gmail.com\">raulpe55(at)gmail(dot)com</a>"
+msgstr ""
+"<strong>Ra&#250;l Pérez-Enríquez</strong>: <a "
+"href=\"mailto:raulpe55@gmail.com\">raulpe55(at)gmail(dot)com</a>"
+
+#. type: Content of: <p>
+#: ../../skycultures/seri/description.en.utf8:177
+msgid "English translation by: Alfredo Manríquez"
+msgstr "Английский перевод: Alfredo Manríquez"
+
+#. type: Content of: <h1>
 #: ../../skycultures/russian_siberian/description.en.utf8:1
 msgid "Russian (Siberian)"
 msgstr "Русская (Сибирская)"
@@ -20624,6 +21207,465 @@ msgstr ""
 "Юссифом Гантусом Филью (youssif@gmail.com). "
 
 #. type: Content of: <h1>
+#: ../../skycultures/tikuna/description.en.utf8:1
+msgid "The Tikuna Skyscape: Constellations and Seasonality"
+msgstr "Небесный пейзаж Тикуны: созвездия и сезонность"
+
+#. type: Content of: <h3>
+#: ../../skycultures/tikuna/description.en.utf8:3
+msgid "Priscila Faulhaber"
+msgstr "Присцила Фаульхабер"
+
+#. type: Content of: <h3>
+#: ../../skycultures/tikuna/description.en.utf8:3
+msgid "MAST (Museu de Astronomia e Ciências Afins (Brasil)"
+msgstr "MAST (Museu de Astronomia e Ciências Afins (Brasil)"
+
+#. type: Content of: <p>
+#: ../../skycultures/tikuna/description.en.utf8:5
+msgid ""
+"The Tikuna indigenous people have inhabited the region of the Upper Solimões"
+" river for the past 2,000 years.  They currently occupy a territory where "
+"the political borders of three countries converge: Brazil, Colombia, and "
+"Peru.  This is the reason why the Tikuna recognize themselves as a "
+"differentiated indigenous group, while also identifying with the national "
+"identities related to these three countries."
+msgstr ""
+"Коренные жители тикуна населяли район верхнего течения реки Солимоэнс на "
+"протяжении последних 2000 лет. В настоящее время они занимают территорию, "
+"где сходятся политические границы трех стран: Бразилии, Колумбии и Перу. Это"
+" причина, по которой тикуна признают себя дифференцированной группой "
+"коренных народов, а также отождествляют себя с национальной идентичностью, "
+"связанной с этими тремя странами."
+
+#. type: Content of: <p>
+#: ../../skycultures/tikuna/description.en.utf8:10
+msgid ""
+"Tikuna territory encompasses a region 600 kilometers long, running west to "
+"east from the Chimbote region in Peru—along the emptiness of the Amazonas-"
+"Solimões valley, in the so-called Trapézio Amazônico (Colombian Amazonian "
+"Trapezoid)—to the Barreira da Missão region, in the municipality of Tefé, in"
+" the Brazilian state of Amazonas (See The Ticuna Atlas, Figure I)."
+msgstr ""
+"Территория Тикуны охватывает регион протяженностью 600 километров, "
+"протянувшийся с запада на восток от региона Чимботе в Перу — вдоль пустыни "
+"долины Амазонас-Солимоэнс, в так называемой Трапецио Амазонико (Колумбийская"
+" амазонская трапеция) — до региона Баррейра-да-Миссан, в муниципалитете "
+"Тефе, в бразильском штате Амазонас (см. Атлас Тикуны, рис. I)."
+
+#. type: Content of: <p><p><h5><em><cite><a>
+#: ../../skycultures/tikuna/description.en.utf8:16
+msgid "<em>Figure 1: The Tikuna Atlas<cite id=\"cit1a\"><a href=\"#cit1\">"
+msgstr "<em>Рисунок 1: Атлас Тикуны<cite id=\"cit1a\"><a href=\"#cit1\">"
+
+#. type: Content of: <p><p><h5><em><cite><a><B>
+#: ../../skycultures/tikuna/description.en.utf8:16
+msgid "¹"
+msgstr "¹"
+
+#. type: Content of: <p><p><h5>
+#: ../../skycultures/tikuna/description.en.utf8:16
+msgid "</a></cite> </em>"
+msgstr "</a></cite> </em>"
+
+#. type: Content of: <p><p><p><cite><a>
+#: ../../skycultures/tikuna/description.en.utf8:18
+msgid ""
+"The agencies and researchers that deal with them estimate that more than "
+"53,544 (Siasi/Sesai, 2014) Tikunas live in Brazil (FUNASA, 2009), 8.000 in "
+"Colombia (Goulard, 2010), and 6.982 in Peru (INEL, 2007)<cite "
+"id=\"cit2a\"><a href=\"#cit2\">"
+msgstr ""
+"Агентства и исследователи, которые имеют с ними дело, считают, что более "
+"53 544 (Siasi/Sesai, 2014) тикуна живут в Бразилии (FUNASA, 2009), 8 000 — в"
+" Колумбии (Goulard, 2010) и 6 982 — в Перу (INEL, 2007)<cite id=\"cit2a\"><a"
+" href=\"#cit2\">"
+
+#. type: Content of: <p><p><p><cite><a><B>
+#: ../../skycultures/tikuna/description.en.utf8:19
+msgid "²"
+msgstr "²"
+
+#. type: Content of: <p><p><p>
+#: ../../skycultures/tikuna/description.en.utf8:19
+msgid ""
+"</a></cite>.  Together, they constitute the largest Amazonian indigenous "
+"population.  Aside from their own Tikuna language, they also speak Spanish "
+"and Portuguese, depending on whether they live in Colombia and Peru or in "
+"Brazil."
+msgstr ""
+"</a></cite>.  Вместе они составляют крупнейшее коренное население Амазонки. "
+"Помимо своего собственного языка тикуна, они также говорят на испанском и "
+"португальском языках, в зависимости от того, живут ли они в Колумбии и Перу "
+"или в Бразилии."
+
+#. type: Content of: <p><p><p>
+#: ../../skycultures/tikuna/description.en.utf8:23
+msgid ""
+"The Tikuna live in riverside villages along the Amazonas-Solimões and its "
+"tributaries, called igarapés.  Their daily life revolve around the "
+"cultivation cycles of different agricultural goods; specially, manioc, used "
+"to produce the flour the Tikuna sell in the markets of the region’s main "
+"cities.  They are also fishers, hunters, and gatherers of the forest "
+"products.  The women make hammocks, bags, and other objects with plant "
+"fibers; and the men paint on tururi fiber and fabricate arrows, paddles, and"
+" canoes."
+msgstr ""
+"Тикуна живут в прибрежных деревнях вдоль реки Амазонас-Солимоэнс и ее "
+"притоков, называемых игарапе. Их повседневная жизнь вращается вокруг циклов "
+"выращивания различных сельскохозяйственных продуктов; в частности, маниока, "
+"используемая для производства муки, которую Тикуна продает на рынках "
+"основных городов региона. Они также рыбаки, охотники и собиратели даров "
+"леса. Женщины делают гамаки, сумки и другие предметы из растительных "
+"волокон; а мужчины рисуют на волокне турури и изготавливают стрелы, весла и "
+"каноэ."
+
+#. type: Content of: <p><p><p>
+#: ../../skycultures/tikuna/description.en.utf8:29
+msgid ""
+"It should be noted that, in Brazil, the Tikuna Indians live in indigenous "
+"lands recognized by Brazil’s indigenous policy.  They are located in "
+"“terrestrial islands” among non-indigenous territories occupied by the "
+"Brazilian Population, from Tabatinga to Manaus (as illustrated in the "
+"Brazilian Tikuna Atlas)."
+msgstr ""
+"Следует отметить, что в Бразилии индейцы тикуна живут на землях коренных "
+"народов, признанных политикой Бразилии в отношении коренных народов. Они "
+"расположены на «земных островах» среди некоренных территорий, занятых "
+"бразильским населением, от Табатинга до Манауса (как показано в бразильском "
+"атласе Тикуна)."
+
+#. type: Content of: <p><p><h2>
+#: ../../skycultures/tikuna/description.en.utf8:33
+msgid "The Astronomical Correlations"
+msgstr "Астрономические корреляции"
+
+#. type: Content of: <p><p><p>
+#: ../../skycultures/tikuna/description.en.utf8:35
+msgid ""
+"The movements of the Tikuna constellations correspond to an interpretation "
+"of the seasonality of rainfall, as the Tikuna narratives suggest.  These "
+"constellations are related to myths referencing the ascension and fall of "
+"Wücütcha (a heavenly beast related to the Jaguar Clan), Coyatchicüra "
+"(Caiman’s Jaw) and Baweta (Tracajá, the Aquatic Turtle Collective), the "
+"Anteater’s fight with the Jaguar, and the Way of the Tapir."
+msgstr ""
+"Движение созвездий тикуна соответствует интерпретации сезонности осадков, "
+"как предполагают рассказы тикуны. Эти созвездия связаны с мифами, "
+"относящимися к восхождению и падению Вюкютчи (небесного зверя, связанного с "
+"кланом Ягуара), Коятчикюра (Челюсть Каймана) и Баветы (Тракаха, Коллектив "
+"водных черепах), битве Муравьеда с Ягуаром и Пути тапира."
+
+#. type: Content of: <p><p><p>
+#: ../../skycultures/tikuna/description.en.utf8:39
+msgid ""
+"According to the testimony of the Tikuna indigenous people, Baweta (the "
+"Pleiades Star Cluster) appears in the eastern sky towards the end of "
+"November, at nightfall.  After Baweta rises, Caiman’s Jaw rises. Wücütcha’s "
+"leg corresponds to a portion of The Orion Constellation; and it begins to "
+"disappear from the western sky around the 20th of May, at nightfall.  About "
+"one month earlier, the Caiman’s Jaw, corresponding to The Hyades Star "
+"Cluster in Taurus, also disappears to the West."
+msgstr ""
+"По свидетельству коренного народа тикуна, Бавета (звездное скопление Плеяды)"
+" появляется на восточном небе в конце ноября, в сумерках. После восхода "
+"Баветы поднимается челюсть Каимана. Лапа Вукутча соответствует части "
+"созвездия Ориона; она начинает исчезать с западного неба примерно в 20-х "
+"числах мая, в сумерках. Примерно за месяц до этого Челюсть Каима, "
+"соответствующая звездному скоплению Гиады в Тельце, также исчезает на "
+"западе."
+
+#. type: Content of: <p><p><p>
+#: ../../skycultures/tikuna/description.en.utf8:44
+msgid ""
+"According to Vieira’s interpretation, the form of Baweta (the Turtle "
+"Collective) is associated with the stars within the asterisms of the "
+"Pleiades and of Perseus.  Baweta’s eyes are the feet of Perseus (Omicron "
+"Persei - Atik and ζ (Zeta) Persei).  The “V” shape that Western astronomy "
+"relates to the head of Taurus is called Coyatchicüra (Caiman’s Jaw).  "
+"Wücütcha’s Leg corresponds to the stars that groups as Orion.  Its toes are "
+"Orion’s Belt and the bend of the legs are ι (iota) Orionis; κ (kappa) "
+"Orionis; η (eta) Leporis and δ (delta) Leporis."
+msgstr ""
+"Согласно интерпретации Виейры, форма Баветы (Коллектива Черепах) связана со "
+"звездами в астеризмах Плеяд и Персея. Глаза Баветы - это ноги Персея "
+"(Омикрон Персея - Атик и ζ (Зета) Персея). Форма \"V\", которую западная "
+"астрономия связывает с головой Тельца, называется Coyatchicüra (Челюсть "
+"каймана). Нога Вукутча соответствует звездам, которые группируются как "
+"Орион. Ее пальцы - это Пояс Ориона, а изгиб ноги - ι (йота) Ориона; κ "
+"(каппа) Ориона; η (эта) Лепориса и δ (дельта) Лепориса."
+
+#. type: Content of: <p><p><p>
+#: ../../skycultures/tikuna/description.en.utf8:50
+msgid ""
+"During the summer, the fight between the Anteater (Tchatü) and the Jaguar "
+"(Ai) occurs.  The end of the battle coincides with the death and ascension "
+"of Wücütcha.  The eyes of the Anteater are located in β (beta) of Triangulum"
+" Australe; his claw and body is in the constellations Norma and Ara.  The "
+"right foot of the Jaguar is in Scorpio’s α (Antares), σ (Sigma), and τ "
+"(tau); its eyes are in ε (epsilon) and μ (mu) Scorpii; and its left paw is "
+"in λ (Shaula), υ (upsilon Sco – Lesath) and κ (kappa) of the same "
+"constellation.  Wücütcha (the Jaguar’s leg) represents the beginning of the "
+"rains in late September; and its reappearance to the east follows the "
+"setting of Tchatü in the west, at nightfall, in the end of November.  Those "
+"correlations are illuminated by indigenous testimony reproduced below:"
+msgstr ""
+"Летом происходит битва между муравьедом (Tchatü) и ягуаром (Ai). Окончание "
+"битвы совпадает со смертью и вознесением Вукутча. Глаза Муравьеда "
+"расположены в β (бета) Triangulum Australe; его клешня и тело - в созвездиях"
+" Norma и Ara. Правая лапа Ягуара находится в α (Антарес), σ (Сигма) и τ "
+"(тау) Скорпиона; его глаза - в ε (эпсилон) и μ (мю) Скорпиона; а левая лапа "
+"- в λ (Шаула), υ (апсилон Ско - Лесат) и κ (каппа) того же созвездия. "
+"Вукутча (лапа ягуара) символизирует начало дождей в конце сентября; а его "
+"повторное появление на востоке следует за заходом Чату на западе, в конце "
+"ноября, в сумерках. Эти взаимосвязи освещены в свидетельствах коренных "
+"жителей, приведенных ниже:"
+
+#. type: Content of: <p><p><blockquote><p>
+#: ../../skycultures/tikuna/description.en.utf8:59
+msgid ""
+"“The stars fit into their respective constellations. First is Wücütcha. "
+"After winter, summer begins to walk. It is the Jaguar.  After him, comes "
+"Coyathicüra in the month of May, at nightfall, when the Caiman’s Jaw appears"
+" on the beach.  Baweta appears in September, the month of the turtle. In "
+"May, Wücütcha and Coyatchicüra fall. They all fall together at the end of "
+"May.  In July, they come again. Baweta already begins to appear in July.  "
+"When Wücütcha falls, beginning in May, caimans and turtles begin to appear. "
+"The apex is in September.”"
+msgstr ""
+"\"Звезды вписываются в соответствующие созвездия. Первая - Вюкютча. После "
+"зимы наступает лето. Это Ягуар. После него появляется Койатикуру в мае, в "
+"сумерках, когда на берегу появляется челюсть каймана. Бавета появляется в "
+"сентябре, в месяц черепахи. В мае падают Вукутча и Коятчикура. В конце мая "
+"они падают все вместе. В июле они появляются снова. В июле уже начинает "
+"появляться Бавета. Когда падает Вюкютча, начиная с мая, начинают появляться "
+"кайманы и черепахи. Апогей приходится на сентябрь\"."
+
+#. type: Content of: <p><p><blockquote><p>
+#: ../../skycultures/tikuna/description.en.utf8:65
+msgid ""
+"“In May, all the constellations fall, together with their planets.  It is "
+"summertime. Later, in July, they appear again for the New Year.  Coya and "
+"Wücütcha leave the sky from May to September. Later, in July, they appear "
+"again.”"
+msgstr ""
+"\"В мае все созвездия падают вместе со своими планетами. Это летнее время. "
+"Позже, в июле, они снова появляются на Новый год. Койя и Вукутча покидают "
+"небо с мая по сентябрь. Позже, в июле, они появляются снова\"."
+
+#. type: Content of: <p><p><blockquote><p>
+#: ../../skycultures/tikuna/description.en.utf8:68
+msgid "Fernando Marques or Ütchancu – translated by Lucho"
+msgstr "Фернандо Маркес или Утчанку - перевод Лучо"
+
+#. type: Content of: <p><p><p>
+#: ../../skycultures/tikuna/description.en.utf8:71
+msgid ""
+"The Tikuna interpret processes affected by a succession of meteorological "
+"changes that, in turn, determine the rainy and the dry seasons.  In this "
+"region of Western Amazon, the rainy season runs from December to March and "
+"the dry season from June to September.  During April, May, October, and "
+"November the rainfall is intermediate. In November, the water level starts "
+"to rise and in late December the tides occur.  During the month of May, the "
+"water level drops until September, the peak of the drought.  The periods of "
+"El Niño imply a rain deficit, causing the extreme drought of the great "
+"river; during La Niña, the cooling of the Pacific increases the amount of "
+"water, causing dramatic tides and floods."
+msgstr ""
+"Тикуна интерпретирует процессы, на которые влияет череда метеорологических "
+"изменений, которые, в свою очередь, определяют дождливый и сухой сезоны. В "
+"этом регионе Западной Амазонии сезон дождей длится с декабря по март, а "
+"сухой сезон - с июня по сентябрь. В апреле, мае, октябре и ноябре количество"
+" осадков является промежуточным. В ноябре уровень воды начинает подниматься,"
+" а в конце декабря происходят приливы и отливы. В мае уровень воды падает до"
+" сентября - пика засухи. Периоды Эль-Ниньо предполагают дефицит осадков, "
+"вызывая экстремальную засуху великой реки; во время Ла-Нинья охлаждение "
+"Тихого океана увеличивает количество воды, вызывая резкие приливы и "
+"наводнения."
+
+#. type: Content of: <p><p><p>
+#: ../../skycultures/tikuna/description.en.utf8:78
+msgid ""
+"Although dependent on weather variability, at the September Equinox the "
+"Tikuna observe how fog affects how they see in early morning; the Pleiades "
+"star cluster disappears on the morning horizon in early June and reappears "
+"in the evening, in late November.  The goal of the Tikuna is to predict the "
+"intensity of the coming rains in order to negotiate with the entity Mawü, "
+"the “Master of Rain,” the effects of the floods on their subsistence "
+"activities."
+msgstr ""
+"Несмотря на зависимость от изменчивости погоды, во время сентябрьского "
+"равноденствия тикуна наблюдают, как туман влияет на то, как они видят ранним"
+" утром; звездное скопление Плеяды исчезает на утреннем горизонте в начале "
+"июня и вновь появляется вечером, в конце ноября. Цель тикуна - предсказать "
+"интенсивность предстоящих дождей, чтобы договориться с сущностью Маву, "
+"\"хозяином дождя\", о влиянии наводнений на их жизнедеятельность."
+
+#. type: Content of: <p><p><p>
+#: ../../skycultures/tikuna/description.en.utf8:82
+msgid ""
+"According to the explanations found in Enepü (a Tikuna community in the "
+"indigenous Land Eware II, in the Brazilian State of Amazon, in Western "
+"Amazonia), the influence of seasonality upon Tikuna subsistence activities "
+"is more prevalent along the Solimões.  In the headwaters of the igarapés, "
+"where Enepü is situated, plenty of food exists all year long.  In Enepü, "
+"trees and palms, such as the ingá and açaí, are fertile all year long due to"
+" the “virginity” and the enrichment of the soil by natural compost.  The "
+"same thing occurs with the fishing in Lake Preto, within the limits of "
+"Enepü, where they can supply themselves abundantly with fish all year long."
+"  On the Solimões, however, one finds fish only from April to July, when the"
+" water level drops. Abundance in the hunt is also from April to July (or "
+"September, at most), along the Solimões.  Fishing becomes more difficult "
+"when the river is high. The fruit of the native açaí palm is collected in "
+"summer, and customarily saved for preparation during winter—time of poor "
+"hunting and fishing.  Through planning and regular gardening, harvests are "
+"available all year long. The harvest of cultivated plants also occurs during"
+" the drought months.  There is a certain degree of flexibility in adapting "
+"the agricultural calendar to the rainy season (when fishing and hunting are "
+"not productive) and the dry season, (when fishing is more abundant); "
+"however, difficulties involving navigation and transport grow as the water "
+"level drops along the igarapés linking the river.  Traditional culture, "
+"however, is not prepared for unforeseen alterations in the rainy season, "
+"such as it occurred in 2002.  In that year, July saw the beginning of the "
+"repiquete (the rise on water levels), which normally occurs in September.  "
+"This destroyed the short-range agricultural cycle and made the fish scarcer,"
+" changing alimentary habits."
+msgstr ""
+"Согласно объяснениям, полученным в Энепу (община тикуна в коренной земле "
+"Эваре II, в бразильском штате Амазония, в Западной Амазонии), влияние "
+"сезонности на жизнедеятельность тикуна более распространено вдоль реки "
+"Солимойнс. В верховьях Игарапеша, где расположен Энепу, пища в изобилии "
+"имеется круглый год. В Энепу деревья и пальмы, такие как инга и асаи, "
+"плодородны в течение всего года благодаря \"девственности\" и обогащению "
+"почвы естественным компостом. То же самое происходит и с рыбалкой в озере "
+"Прето, в пределах Энепу, где они могут в изобилии снабжать себя рыбой в "
+"течение всего года. А вот на Солимойнше рыбу можно найти только с апреля по "
+"июль, когда уровень воды падает. На Солимойнше изобилие рыбы также "
+"наблюдается с апреля по июль (или максимум в сентябре). Рыбалка усложняется,"
+" когда река находится высоко. Плоды местной пальмы асаи собирают летом и "
+"обычно приберегают для заготовок на зиму, когда охота и рыбалка скудны. "
+"Благодаря планированию и регулярному садоводству урожай можно собирать в "
+"течение всего года. Сбор урожая культурных растений также происходит в "
+"месяцы засухи. Существует определенная степень гибкости в адаптации "
+"сельскохозяйственного календаря к сезону дождей (когда рыбалка и охота "
+"малопродуктивны) и сухому сезону (когда рыбалка более обильная); однако "
+"трудности, связанные с навигацией и транспортом, возрастают по мере снижения"
+" уровня воды вдоль игарапе, связывающих реку. Однако традиционная культура "
+"не готова к непредвиденным изменениям в сезоне дождей, как это произошло в "
+"2002 году. В тот год в июле начался сезон репикете (подъем уровня воды), "
+"который обычно происходит в сентябре. Это разрушило краткосрочный "
+"сельскохозяйственный цикл и сделало рыбу более скудной, изменив пищевые "
+"привычки."
+
+#. type: Content of: <p><p><h2>
+#: ../../skycultures/tikuna/description.en.utf8:96
+msgid "Researchers"
+msgstr "Исследователи"
+
+#. type: Content of: <p><p><p>
+#: ../../skycultures/tikuna/description.en.utf8:98
+msgid "<b>Priscila Faulhaber</b> (Museum of Astronomy and Related Sciences)"
+msgstr ""
+
+#. type: Content of: <p><p><p>
+#: ../../skycultures/tikuna/description.en.utf8:100
+msgid ""
+"<b>Fernando Vieira</b> (Astronomer and Former Coordinator of Astronomy in "
+"The Planetarium Foundation of the City of Rio de Janeiro)  helped with the "
+"interpretation of the astronomical correlations between Western and Tikuna "
+"constellations, identified by the Tikuna in November 2002, during a research"
+" visit at the Science Center and Planetarium of the Universidade do Pará "
+"(Belém/Brazil), using the Starry Night System.  Vieira plotted the "
+"correspondence between the traces of Tikuna mythical animals and the "
+"Official IAU constellations of western astronomy.  He also reviewed this "
+"text for any skyscape incongruences related to corresponding Western "
+"astronomy and Tikuna cosmovision."
+msgstr ""
+
+#. type: Content of: <p><p><p>
+#: ../../skycultures/tikuna/description.en.utf8:106
+msgid ""
+"We are integrating in this investigation <b>Walmir Thomazi Cardoso</b>, a "
+"Physics Professor in the Postgraduate Program in History of Sciences and "
+"Techniques and Epistemology at the Federal University of Rio de Janeiro "
+"(HCTE-UFRJ) and researcher of astronomy in culture; he made some "
+"reinterpretations in a collaborative work with physics undergraduate "
+"students; and <b>Youssif Ghantous Filho</b>, adapting and anchoring original"
+" drawings to Stellarium.  Nevertheless, every sky interpretation is "
+"contextual and circumstantial.  Current collaborative investigations are "
+"looking for new astronomical observation together with the Tikuna, which "
+"will improve the initial findings."
+msgstr ""
+
+#.  GZ: I have removed this as there is no panorama horizon included. Such
+#. acknowledgement would be applicable in a separate "landscape" contribution.
+#.  Barthelemy D’Ans (Instituto Peruano de Astronomia, Planetarium Maria Reich
+#. Lima-Ica-Nasca-Colca-Cusco), edited the panoramic picture and adapted it to
+#. the horizons of the Stellarium Astronomy Software.
+#. type: Content of: <p><p><p>
+#: ../../skycultures/tikuna/description.en.utf8:112
+msgid ""
+"The data used in <b>Cardoso & Ghantous Filho</b> were a reinterpretation of "
+"charts used by the Tikunas, <b>Pedro Inácio Pinheiro</b> and <b>Luís Angel "
+"Ramos</b>, to interpret Tikuna constellations.  The calculations were "
+"established based upon coordinates 70° W and 3°S with the help of Oswaldo "
+"dos Santos Barros, Pará State (CCPP).  The different interpretations of the "
+"drawings developed from the ongoing collaborative investigation with Walmir "
+"T. Cardoso, researcher of astronomy in Culture, takes into consideration "
+"some changes, such as the ones shown in this work.  <b>Marcio D´Olne "
+"Campos</b> (UNICAMP and SULear/SOUTHing Proposal) helped map the location of"
+" the Tikuna village and define their latitude and longitude coordinates (See"
+" Tikuna Lands Atlas)."
+msgstr ""
+"Данные, использованные в работе <b>Cardoso & Ghantous Filho</b>, "
+"представляли собой реинтерпретацию карт, которые использовали Тикуны, "
+"<b>Педро Инасио Пиньейро</b> и <b>Луис Анхель Рамос</b>, для интерпретации "
+"созвездий Тикуны. Расчеты были сделаны на основе координат 70° з.д. и 3° "
+"ю.ш. с помощью Освальдо дос Сантоса Барроса, штат Пара (CCPP). Различные "
+"интерпретации рисунков, разработанные в ходе продолжающегося совместного "
+"исследования с Вальмиром Т. Кардосо, исследователем астрономии в Культуре, "
+"учитывают некоторые изменения, такие как те, что представлены в данной "
+"работе. <b>Марсио Д´Олне Кампос </b>(UNICAMP и SULear/SOUTHing Proposal) "
+"помог составить карту расположения деревни Тикуна и определить их координаты"
+" широты и долготы (см. Атлас земель Тикуна)."
+
+#. type: Content of: <p><p><p>
+#: ../../skycultures/tikuna/description.en.utf8:119
+msgid ""
+"The recording of this myth and the identification of the Jaguar’s eyes was "
+"inspired by Curt Nimuendajú, (1952 p.143)."
+msgstr ""
+"Запись этого мифа и идентификация глаз ягуара была вдохновлена Куртом "
+"Нимуэндажу (Curt Nimuendajú, 1952 p.143)."
+
+#. type: Content of: <p><p><p><notr><a><B>
+#: ../../skycultures/tikuna/description.en.utf8:120
+msgid "1"
+msgstr "1"
+
+#. type: Content of: <p><p><p>
+#: ../../skycultures/tikuna/description.en.utf8:120
+msgid ""
+"<cite>This work adopts linguistic convention when writing Tikuna, even "
+"though several Anthropologists and Indigenous experts use the vernacular "
+"form (Ticuna).</cite>"
+msgstr ""
+"<cite>В данной работе принята лингвистическая конвенция при написании "
+"Tikuna, хотя некоторые антропологи и специалисты по коренным народам "
+"используют просторечную форму (Ticuna).</cite>"
+
+#. type: Content of: <p><p><p><notr><a><B>
+#: ../../skycultures/tikuna/description.en.utf8:121
+msgid "2"
+msgstr "2"
+
+#. type: Content of: <p><p><p>
+#: ../../skycultures/tikuna/description.en.utf8:121
+msgid ""
+"<cite> According to socioambiental.org, consulted on 08/05/2019.</cite>"
+msgstr "<cite>По данным socioambiental.org, проверено 08/05/2019.</cite>"
+
+#. type: Content of: <h1>
 #: ../../skycultures/tupi/description.en.utf8:1
 msgid "Tupi-Guarani"
 msgstr "Тупи-гуарани"
@@ -21056,6 +22098,9 @@ msgid ""
 "girls were not allowed to date in public, but met at the fountain where the "
 "girls fetched water when Venus was visible in the evening."
 msgstr ""
+"Венеру также называли звездой свиданий&#8220;Madingeni&#8221;. Юношам и "
+"девушкам не разрешалось встречаться на людях, но они встречались у фонтана, "
+"где девушки набирали воду, когда вечером была видна Венера."
 
 #. type: Content of: <h2>
 #: ../../skycultures/xhosa/description.en.utf8:7
