@@ -1030,29 +1030,36 @@ void BottomStelBar::updateText(bool updatePos, bool updateTopocentric)
 
 	if (updatePos)
 	{
+		// The location string starts at left, dateTime ends at right. FoV and FPS come ahead of dateTime.
+		// In case the strings are wider than available button space, they are now pushed to the right.
 		QFontMetrics fpsMetrics(fps->font());
-		int fpsShift = fpsMetrics.boundingRect(fpsstr).width() + 50;
+		int fpsShift = fpsMetrics.boundingRect(fpsstr).width() + fpsMetrics.boundingRect("MMMM").width();
 
 		QFontMetrics fovMetrics(fov->font());
-		int fovShift = fpsShift + fovMetrics.boundingRect(fovstr).width() + 80;
+		int fovShift = fpsShift + fovMetrics.boundingRect(fovstr).width() + fovMetrics.boundingRect("MMMM").width();
 		if (getFlagFovDms())
-			fovShift += 25;
+			fovShift += fovMetrics.boundingRect("MM'SS\"").width();
 
 		QRectF rectCh = getButtonsBoundingRect();
-		location->setPos(0, 0);		
-		int dtp = static_cast<int>(rectCh.right()-datetime->boundingRect().width())-5;
-		if ((dtp%2) == 1) dtp--; // make even pixel
-		datetime->setPos(dtp,0);
+		location->setPos(0, 0);
+		QFontMetrics locationMetrics(fov->font());
+		int locationWidth=locationMetrics.boundingRect(location->text()).width() + locationMetrics.boundingRect("MMM").width();
+
+		int dateTimePos = static_cast<int>(rectCh.right()-datetime->boundingRect().width())-5;
+		if ((dateTimePos%2) == 1) dateTimePos--; // make even pixel
+
+		const int rightPush=qMax(0, locationWidth-(dateTimePos-fovShift));
+		datetime->setPos(dateTimePos+rightPush,0);
 		fov->setPos(datetime->x()-fovShift, 0);
 		fps->setPos(datetime->x()-fpsShift, 0);
 		if (qApp->property("text_texture")==true) // CLI option -t given?
 		{
 			locationPixmap->setPos(0,0);
-			int dtp = static_cast<int>(rectCh.right()-datetimePixmap->boundingRect().width())-5;
-			if ((dtp%2) == 1) dtp--; // make even pixel
-			datetimePixmap->setPos(dtp,0);
-			fovPixmap->setPos(datetime->x()-fovShift, 0);
-			fpsPixmap->setPos(datetime->x()-fpsShift, 0);
+			int dateTimePos = static_cast<int>(rectCh.right()-datetimePixmap->boundingRect().width())-5;
+			if ((dateTimePos%2) == 1) dateTimePos--; // make even pixel
+			datetimePixmap->setPos(dateTimePos,0);
+			fovPixmap->setPos(datetimePixmap->x()-fovShift, 0);
+			fpsPixmap->setPos(datetimePixmap->x()-fpsShift, 0);
 		}
 	}
 }
