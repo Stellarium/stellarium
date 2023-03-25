@@ -371,6 +371,10 @@ LeftStelBar::LeftStelBar(QGraphicsItem* parent)
 	helpLabel->setBrush(QBrush(QColor::fromRgbF(1,1,1,1)));
 	if (qApp->property("text_texture")==true) // CLI option -t given?
 		helpLabelPixmap=new QGraphicsPixmapItem(this);
+
+	setFontSizeFromApp(StelApp::getInstance().getScreenFontSize());
+	connect(&StelApp::getInstance(), SIGNAL(screenFontSizeChanged(int)), this, SLOT(setFontSizeFromApp(int)));
+	connect(&StelApp::getInstance(), SIGNAL(fontChanged(QFont)), this, SLOT(setFont(QFont)));
 }
 
 LeftStelBar::~LeftStelBar()
@@ -464,6 +468,40 @@ void LeftStelBar::setColor(const QColor& c)
 	helpLabel->setBrush(c);
 }
 
+//! connect from StelApp to resize fonts on the fly.
+void LeftStelBar::setFontSizeFromApp(int size)
+{
+	// Font size was developed based on base font size 13, i.e. 12
+	int screenFontSize = size-1;
+	QFont font=QGuiApplication::font();
+	font.setPixelSize(screenFontSize);
+	helpLabel->setFont(font);
+	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+	if (gui)
+	{
+		// to avoid crash
+		SkyGui* skyGui=gui->getSkyGui();
+		if (skyGui)
+			skyGui->updateBarsPos();
+	}
+}
+
+//! connect from StelApp to resize fonts on the fly.
+void LeftStelBar::setFont(QFont font)
+{
+	font.setPixelSize(StelApp::getInstance().getScreenFontSize()-1);
+	helpLabel->setFont(font);
+	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+	if (gui)
+	{
+		// to avoid crash
+		SkyGui* skyGui=gui->getSkyGui();
+		if (skyGui)
+			skyGui->updateBarsPos();
+	}
+}
+
+
 BottomStelBar::BottomStelBar(QGraphicsItem* parent,
                              const QPixmap& pixLeft,
                              const QPixmap& pixRight,
@@ -525,6 +563,7 @@ void BottomStelBar::setFontSizeFromApp(int size)
 	location->setFont(font);
 	fov->setFont(font);
 	fps->setFont(font);
+	helpLabel->setFont(font);
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	if (gui)
 	{
@@ -1075,7 +1114,8 @@ void BottomStelBar::buttonHoverChanged(bool b)
 			}
 			helpLabel->setText(tip);
 			//helpLabel->setPos(button->pos().x()+button->pixmap().size().width()/2,-27);
-			helpLabel->setPos(20,-27);
+			helpLabel->setPos(20,-10-location->font().pixelSize()); // Set help text XY position. Y adjusted for font size!
+
 			if (qApp->property("text_texture")==true)
 			{
 				helpLabel->setVisible(false);
