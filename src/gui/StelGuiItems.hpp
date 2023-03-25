@@ -346,12 +346,13 @@ private:
 	QGraphicsPixmapItem* helpLabelPixmap; // bad-graphics replacement.
 };
 
-// The path around the bottom left button bars
+//! @class StelBarsPath: The path around the bottom and left button bars
 class StelBarsPath : public QGraphicsPathItem
 {
 	public:
 		StelBarsPath(QGraphicsItem* parent);
-		void updatePath(BottomStelBar* bot, LeftStelBar* lef);
+		//! defines a line around the two button bars
+		void updatePath(BottomStelBar* bottom, LeftStelBar* left);
 		//! return radius of corner arc
 		double getRoundSize() const {return roundSize;}
 		void setBackgroundOpacity(double opacity);
