@@ -39,7 +39,6 @@ class InfoPanel : public QGraphicsTextItem
 {
 	public:
 		//! Reads "gui/selected_object_info", etc from the configuration file.
-		//! @todo Bad idea to read from the configuration file in a constructor? --BM
 		InfoPanel(QGraphicsItem* parent);
 		~InfoPanel() Q_DECL_OVERRIDE;
 		void setInfoTextFilters(const StelObject::InfoStringGroup& aflags) {infoTextFilters=aflags;}
@@ -90,12 +89,12 @@ public slots:
 	void updateBarsPos();
 
 private:
-	class StelBarsPath* buttonBarPath;
+	class StelBarsPath* buttonBarsPath;
 	QTimeLine* animLeftBarTimeLine;
 	QTimeLine* animBottomBarTimeLine;
-	int lastButtonbarWidth;
-	class LeftStelBar* winBar;
-	BottomStelBar* buttonBar;
+	int lastBottomBarWidth;
+	class LeftStelBar* leftBar;
+	BottomStelBar* bottomBar;
 	class InfoPanel* infoPanel;
 	class StelProgressBarMgr* progressBarMgr;
 
@@ -105,8 +104,8 @@ private:
 
 	class CornerButtons* autoHidebts;
 
-	bool autoHideHorizontalButtonBar;
-	bool autoHideVerticalButtonBar;
+	bool autoHideBottomBar;
+	bool autoHideLeftBar;
 	
 	StelGui* stelGui;
 };
