@@ -37,7 +37,7 @@ $prefix = "        ";
 # bots and synonyms
 @exclude_list = ('Alexander Wolf', 'Launchpad Translations', 'Marcos CARDINOT', 'treaves', 'gzotti',
 		 'whitesource-bolt-for-github\[bot\]', 'Александр Вольф', 'fossabot', 'toshaevil',
-		 't4saha', 'jess', 'pjw', 'wlaun', 'S', 'transifex-integration\[bot\]');
+		 't4saha', 'jess', 'pjw', 'wlaun', 'S', 'transifex-integration\[bot\]', 'codesee-maps\[bot\]');
 # replacements for nicks
 %replacements = ('holgerno'=>'Holger Nießner', 'Hans'=>'Hans Lambermont', 'rossmitchell'=>'Ross Mitchell',
 		 'seescho'=>'Edgar Scholz', 'martinber'=>'Martin Bernardi', 'daniel.adastra'=>'Daniel Adastra',

@@ -61,9 +61,9 @@ namespace StelContributors {
         "Song Li", "Sripath Roy Koganti", "Sveinn í Felli", "Thomas1664", "Tig la Pomme", 
         "Tomasz Buchert", "TotalCaesar659", "Tuomas Teipainen", "Tēvita O. Kaʻili", "Vancho Stojkoski", 
         "Vicente Reyes", "Wonkyo Choe", "Yaakov Selkowitz", "Youssif Ghantous Filho", "Yury Solomonov", 
-        "adalava", "afontenot", "bkuhls", "chithihuynh", "codesee-maps[bot]", 
-        "Marc Espie", "leonardcj", "luz paz", "Pavel Klimenko", "rikardfalkeborn", 
-        "riodoro1", "Ross Mitchell", "Edgar Scholz", "zhu1995zpb", "Łukasz 'sil2100' Zemczak"
+        "adalava", "afontenot", "bkuhls", "chithihuynh", "Marc Espie", 
+        "leonardcj", "luz paz", "Pavel Klimenko", "rikardfalkeborn", "riodoro1", 
+        "Ross Mitchell", "Edgar Scholz", "zhu1995zpb", "Łukasz 'sil2100' Zemczak"
     };
     
 }
