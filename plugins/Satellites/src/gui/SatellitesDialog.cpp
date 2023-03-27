@@ -51,6 +51,12 @@
 #include "StelActionMgr.hpp"
 #include "StelMainView.hpp"
 
+#if defined(ENABLE_XLSX) && (SATELLITES_PLUGIN_IRIDIUM == 1)
+#include <xlsxdocument.h>
+#include <xlsxcellrange.h>
+using namespace QXlsx;
+#endif
+
 const QString SatellitesDialog::dash = QChar(0x2014);
 
 SatellitesDialog::SatellitesDialog()
@@ -1573,7 +1579,7 @@ void SatellitesDialog::selectCurrentIridiumFlare(const QModelIndex &modelIndex)
 void SatellitesDialog::savePredictedIridiumFlares()
 {
 	QString csv  = QString("%1 (*.csv)").arg(q_("CSV (Comma delimited)"));
-	QSrting xlsx = QString("%1 (*.xlsx)").arg(q_("Microsoft Excel Open XML Spreadsheet"));
+	QString xlsx = QString("%1 (*.xlsx)").arg(q_("Microsoft Excel Open XML Spreadsheet"));
 	QString filter, defaultExtension;
 
 	#ifdef ENABLE_XLSX

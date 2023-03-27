@@ -673,8 +673,8 @@ float Satellite::getVMagnitude(const StelCore* core) const
 				m[2].rotate(-120, Vz);
 
 				StelLocation loc   = StelApp::getInstance().getCore()->getCurrentLocation();
-				const double  radLatitude    = loc.latitude * KDEG2RAD;
-				const double  theta          = pSatWrapper->getEpoch().toThetaLMST(loc.longitude * KDEG2RAD);
+				const double  radLatitude    = loc.getLatitude() * KDEG2RAD;
+				const double  theta          = pSatWrapper->getEpoch().toThetaLMST(loc.getLongitude() * KDEG2RAD);
 				const double sinRadLatitude=sin(radLatitude);
 				const double cosRadLatitude=cos(radLatitude);
 				const double sinTheta=sin(theta);
