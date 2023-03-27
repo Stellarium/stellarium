@@ -1,3 +1,44 @@
+23.1 [2023-03-27]
+The Stellarium Team has released version 23.1.
+
+From now on, releases will have version numbers indicating a year.release 
+scheme. For Windows, the version of the Qt framework used is visible as part 
+of the package name. Details are in the User Guide.
+
+PLEASE UPDATE!
+
+This issue mitigates a potential security issue (reported as CVE-2023-28371), 
+where scripts were allowed to write output text and screenshots to other places 
+on users' systems apart from the Stellarium user data directory or configured 
+screenshot directory. Running unknown scripts (which is a Bad Idea(tm) to begin 
+with) could have exploited that by attackers (script authors) writing even 
+command files to vulnerable places. We have not received a report where this
+would have caused a problem.
+
+However, now users must explicitly allow such behaviour in the settings
+tab of the Script Console.
+
+Apart from that, this release mostly aimed at fixing issues in the 1.*
+series, but also brought a few new features:
+- Much improved "Solar System observer" and other "Planet observers".
+- Solar dates along the ecliptic
+- Fixed issues with Observation Lists, and removed need for the extra
+  edit dialog.
+- Updated shader code for smoother projection
+- Allow texture decimation on the fly for very weak systems like
+  Raspberry Pi 3.
+- Solar limb darkening
+- Proper shadow edge for satellites
+
+Behind the scenes, many more minor issues were fixed.
+
+TELESCOPE USERS
+
+Like in the 1.* series, it seems the TelescopeControl plugin at least on
+Windows works better in the Qt5-based releases. Just install this if you
+are affected. We are looking for telescope users with programming skills
+to help us fixing this issue. Reward possible!
+
 1.2 [2022-12-25]
 The Stellarium Team has released version 1.2.
 
