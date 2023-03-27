@@ -39,9 +39,8 @@ before_build:
   - set PUBLISH_BINARY=false
   - set USE_EXT_LIBGLES=false
   - set SIGNING=false
-  - mkdir c:\stellarium-OpenSSL
   - set INNSPATH=C:\Program Files (x86)\Inno Setup 5;C:\Program Files (x86)\Inno Setup 6
-  - set PATH=C:\Qt\%qtver%\%qtbin%\bin;C:\stellarium-OpenSSL;%INNSPATH%;%PATH%
+  - set PATH=C:\Qt\%qtver%\%qtbin%\bin;%INNSPATH%;%PATH%
   - ps: if($env:APPVEYOR_REPO_BRANCH -eq "stellarium-next") { $env:PUBLISH_BINARY = 'true' }
   - ps: if($env:APPVEYOR_REPO_BRANCH -eq "stellarium-stable") { $env:PUBLISH_BINARY = 'true' }
   - ps: if($env:APPVEYOR_REPO_BRANCH -eq "stellarium-oldstable") { $env:PUBLISH_BINARY = 'true' }
@@ -51,6 +50,8 @@ before_build:
   - ps: if($env:APPVEYOR_REPO_BRANCH -eq "stellarium-stable" -and $env:qtver.contains('6.')) { $env:SIGNING = 'true' }
   - ps: if($env:APPVEYOR_REPO_BRANCH -eq "stellarium-oldstable" -and $env:qtver.contains('5.')) { $env:SIGNING = 'true' }
   - if [%PUBLISH_BINARY%]==[true] appveyor DownloadFile https://github.com/Stellarium/stellarium-data/releases/download/guide/guide.pdf -FileName c:\stellarium\guide\guide.pdf
+  - if [%PUBLISH_BINARY%]==[true] mkdir c:\stellarium-OpenSSL
+  - if [%PUBLISH_BINARY%]==[true] set PATH=C:\stellarium-OpenSSL;%PATH%
   - if [%PUBLISH_BINARY%]==[true] appveyor DownloadFile https://github.com/Stellarium/stellarium-data/releases/download/qt-5.6/OpenSSL-Win%BITS%.zip -FileName c:\stellarium-OpenSSL.zip
   - if [%PUBLISH_BINARY%]==[true] 7z e c:\stellarium-OpenSSL.zip -aoa -oc:\stellarium-OpenSSL
   - mkdir stellarium-%qtver%-%qtbin%
