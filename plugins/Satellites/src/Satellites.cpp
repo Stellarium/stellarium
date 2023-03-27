@@ -3107,7 +3107,7 @@ IridiumFlaresPredictionList Satellites::getIridiumFlaresPrediction()
 		nextJD = predictionJD + 1./24;
 		pcore->setJD(predictionJD);
 
-		ssystem->getEarth()->computePosition(predictionJD);
+		ssystem->getEarth()->computePosition(predictionJD, Vec3d(0.));
 		pcore->update(0);
 
 		for (auto i = iridiums.begin(); i != iridiums.end(); ++i)
