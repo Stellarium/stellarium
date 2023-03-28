@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2023-03-19 12:54+0700\n"
+"POT-Creation-Date: 2023-03-28 11:14+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Alexander V. Wolf <alex.v.wolf@gmail.com>, 2023\n"
 "Language-Team: Russian (https://www.transifex.com/stellarium/teams/80998/ru/)\n"
@@ -27,8 +27,8 @@ msgstr ""
 #: src/core/modules/CustomObject.cpp:81 src/core/modules/Asterism.cpp:194
 #: src/core/modules/Constellation.cpp:290
 #: src/core/modules/NomenclatureItem.cpp:224 src/core/modules/Nebula.cpp:264
-#: src/core/modules/Nebula.cpp:266 src/core/modules/Planet.cpp:569
-#: src/core/modules/Planet.cpp:572 src/core/modules/StarWrapper.cpp:49
+#: src/core/modules/Nebula.cpp:266 src/core/modules/Planet.cpp:570
+#: src/core/modules/Planet.cpp:573 src/core/modules/StarWrapper.cpp:49
 #: src/core/modules/StarWrapper.cpp:290 src/core/modules/StarWrapper.cpp:292
 #: src/gui/AstroCalcDialog.cpp:892 src/gui/AstroCalcDialog.cpp:2329
 #: src/gui/AstroCalcDialog.cpp:2966 src/gui/AstroCalcDialog.cpp:2998
@@ -71,7 +71,7 @@ msgstr "астеризм"
 #: src/core/modules/ToastMgr.cpp:62 src/core/modules/HipsMgr.cpp:156
 #: src/core/StelApp.cpp:655 src/core/StelCore.cpp:291
 #: src/core/StelSkyLayerMgr.cpp:83 src/core/StelSkyLayerMgr.cpp:84
-#: src/StelMainView.cpp:938
+#: src/StelMainView.cpp:939
 msgid "Display Options"
 msgstr "Параметры отображения"
 
@@ -209,7 +209,7 @@ msgstr "Первый вертикал"
 #: src/gui/AstroCalcDialog.cpp:2088 src/gui/AstroCalcDialog.cpp:2352
 #: src/gui/AstroCalcChart.cpp:80 src/gui/AstroCalcChart.cpp:417
 #: src/ui_viewDialog.h:3978 plugins/Satellites/src/Satellite.cpp:362
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1499
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1505
 msgid "Altitude"
 msgstr "Высота"
 
@@ -329,8 +329,8 @@ msgid "Antapex"
 msgstr "Антиапекс"
 
 #. TRANSLATORS: Unit of measure for speed - kilometers per second
-#: src/core/modules/GridLinesMgr.cpp:1630 src/core/modules/Planet.cpp:693
-#: src/core/modules/Planet.cpp:1179 src/gui/AstroCalcDialog.cpp:9296
+#: src/core/modules/GridLinesMgr.cpp:1630 src/core/modules/Planet.cpp:694
+#: src/core/modules/Planet.cpp:1180 src/gui/AstroCalcDialog.cpp:9296
 #: plugins/Satellites/src/Satellite.cpp:360
 #: plugins/Satellites/src/Satellite.cpp:403
 #: plugins/MeteorShowers/src/MeteorShower.cpp:564
@@ -538,97 +538,97 @@ msgid "Compass marks"
 msgstr "Компас"
 
 #. TRANSLATORS: North
-#: src/core/modules/LandscapeMgr.cpp:272 src/core/modules/Planet.cpp:1301
+#: src/core/modules/LandscapeMgr.cpp:272 src/core/modules/Planet.cpp:1302
 msgctxt "compass direction"
 msgid "N"
 msgstr "С"
 
 #. TRANSLATORS: South
-#: src/core/modules/LandscapeMgr.cpp:274 src/core/modules/Planet.cpp:1293
+#: src/core/modules/LandscapeMgr.cpp:274 src/core/modules/Planet.cpp:1294
 msgctxt "compass direction"
 msgid "S"
 msgstr "Ю"
 
 #. TRANSLATORS: East
-#: src/core/modules/LandscapeMgr.cpp:276 src/core/modules/Planet.cpp:1305
+#: src/core/modules/LandscapeMgr.cpp:276 src/core/modules/Planet.cpp:1306
 msgctxt "compass direction"
 msgid "E"
 msgstr "В"
 
 #. TRANSLATORS: West
-#: src/core/modules/LandscapeMgr.cpp:278 src/core/modules/Planet.cpp:1297
+#: src/core/modules/LandscapeMgr.cpp:278 src/core/modules/Planet.cpp:1298
 msgctxt "compass direction"
 msgid "W"
 msgstr "З"
 
 #. TRANSLATORS: Northeast
-#: src/core/modules/LandscapeMgr.cpp:280 src/core/modules/Planet.cpp:1303
+#: src/core/modules/LandscapeMgr.cpp:280 src/core/modules/Planet.cpp:1304
 msgctxt "compass direction"
 msgid "NE"
 msgstr "СВ"
 
 #. TRANSLATORS: Southeast
-#: src/core/modules/LandscapeMgr.cpp:282 src/core/modules/Planet.cpp:1307
+#: src/core/modules/LandscapeMgr.cpp:282 src/core/modules/Planet.cpp:1308
 msgctxt "compass direction"
 msgid "SE"
 msgstr "ЮВ"
 
 #. TRANSLATORS: Southwest
-#: src/core/modules/LandscapeMgr.cpp:284 src/core/modules/Planet.cpp:1295
+#: src/core/modules/LandscapeMgr.cpp:284 src/core/modules/Planet.cpp:1296
 msgctxt "compass direction"
 msgid "SW"
 msgstr "ЮЗ"
 
 #. TRANSLATORS: Northwest
-#: src/core/modules/LandscapeMgr.cpp:286 src/core/modules/Planet.cpp:1299
+#: src/core/modules/LandscapeMgr.cpp:286 src/core/modules/Planet.cpp:1300
 msgctxt "compass direction"
 msgid "NW"
 msgstr "СЗ"
 
 #. TRANSLATORS: North-northeast
-#: src/core/modules/LandscapeMgr.cpp:288 src/core/modules/Planet.cpp:1302
+#: src/core/modules/LandscapeMgr.cpp:288 src/core/modules/Planet.cpp:1303
 msgctxt "compass direction"
 msgid "NNE"
 msgstr "ССВ"
 
 #. TRANSLATORS: East-northeast
-#: src/core/modules/LandscapeMgr.cpp:290 src/core/modules/Planet.cpp:1304
+#: src/core/modules/LandscapeMgr.cpp:290 src/core/modules/Planet.cpp:1305
 msgctxt "compass direction"
 msgid "ENE"
 msgstr "ВСВ"
 
 #. TRANSLATORS: East-southeast
-#: src/core/modules/LandscapeMgr.cpp:292 src/core/modules/Planet.cpp:1306
+#: src/core/modules/LandscapeMgr.cpp:292 src/core/modules/Planet.cpp:1307
 msgctxt "compass direction"
 msgid "ESE"
 msgstr "ВЮВ"
 
 #. TRANSLATORS: South-southeast
-#: src/core/modules/LandscapeMgr.cpp:294 src/core/modules/Planet.cpp:1308
+#: src/core/modules/LandscapeMgr.cpp:294 src/core/modules/Planet.cpp:1309
 msgctxt "compass direction"
 msgid "SSE"
 msgstr "ЮЮВ"
 
 #. TRANSLATORS: South-southwest
-#: src/core/modules/LandscapeMgr.cpp:296 src/core/modules/Planet.cpp:1294
+#: src/core/modules/LandscapeMgr.cpp:296 src/core/modules/Planet.cpp:1295
 msgctxt "compass direction"
 msgid "SSW"
 msgstr "ЮЮЗ"
 
 #. TRANSLATORS: West-southwest
-#: src/core/modules/LandscapeMgr.cpp:298 src/core/modules/Planet.cpp:1296
+#: src/core/modules/LandscapeMgr.cpp:298 src/core/modules/Planet.cpp:1297
 msgctxt "compass direction"
 msgid "WSW"
 msgstr "ЗЮЗ"
 
 #. TRANSLATORS: West-northwest
-#: src/core/modules/LandscapeMgr.cpp:300 src/core/modules/Planet.cpp:1298
+#: src/core/modules/LandscapeMgr.cpp:300 src/core/modules/Planet.cpp:1299
 msgctxt "compass direction"
 msgid "WNW"
 msgstr "ЗСЗ"
 
 #. TRANSLATORS: North-northwest
-#: src/core/modules/LandscapeMgr.cpp:302 src/core/modules/Planet.cpp:1300
+#: src/core/modules/LandscapeMgr.cpp:302 src/core/modules/Planet.cpp:1301
 msgctxt "compass direction"
 msgid "NNW"
 msgstr "ССЗ"
@@ -808,7 +808,7 @@ msgstr "Уменьшить засветку"
 msgid "Cyclic change in light pollution"
 msgstr "Циклическое изменение засветки"
 
-#: src/core/modules/LandscapeMgr.cpp:1321 src/scripting/StelScriptMgr.cpp:644
+#: src/core/modules/LandscapeMgr.cpp:1321 src/scripting/StelScriptMgr.cpp:647
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:101
 #: plugins/Oculars/src/gui/OcularDialog.cpp:627
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:238
@@ -831,7 +831,7 @@ msgstr "Автор"
 #. TRANSLATORS: Unit of measure for distance - meter
 #: src/core/modules/LandscapeMgr.cpp:1327 src/gui/StelGuiItems.cpp:872
 #: plugins/Satellites/src/Satellite.cpp:433
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1145
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1151
 #: plugins/Satellites/src/gui/SatellitesFilterDialog.cpp:134
 msgctxt "distance"
 msgid "m"
@@ -839,7 +839,6 @@ msgstr "м"
 
 #: src/core/modules/LandscapeMgr.cpp:1330 src/gui/ObsListDialog.cpp:266
 #: src/ui_locationDialogGui.h:470 src/ui_obsListDialog.h:414
-#: src/ui_obsListCreateEditDialog.h:329
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:144
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:490
 msgid "Location"
@@ -920,20 +919,20 @@ msgstr "геологический термин"
 msgid "Linear size"
 msgstr "Линейный размер"
 
-#: src/core/modules/NomenclatureItem.cpp:239 src/core/modules/Planet.cpp:776
+#: src/core/modules/NomenclatureItem.cpp:239 src/core/modules/Planet.cpp:777
 msgid "Diameter"
 msgstr "Диаметр"
 
 #. TRANSLATORS: Unit of measure for distance - kilometers
-#: src/core/modules/NomenclatureItem.cpp:240 src/core/modules/Planet.cpp:649
-#: src/core/modules/Planet.cpp:674 src/core/modules/Planet.cpp:777
-#: src/core/modules/Planet.cpp:1495 src/core/modules/Comet.cpp:157
+#: src/core/modules/NomenclatureItem.cpp:240 src/core/modules/Planet.cpp:650
+#: src/core/modules/Planet.cpp:675 src/core/modules/Planet.cpp:778
+#: src/core/modules/Planet.cpp:1496 src/core/modules/Comet.cpp:157
 #: src/core/modules/Comet.cpp:167 src/gui/StelGuiItems.cpp:900
 #: src/gui/AstroCalcDialog.cpp:3202 src/gui/AstroCalcDialog.cpp:3717
 #: src/gui/AstroCalcDialog.cpp:9231 plugins/Satellites/src/Satellites.cpp:2914
 #: plugins/Satellites/src/Satellite.cpp:356
 #: plugins/Satellites/src/Satellite.cpp:399
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1154
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1160
 #: plugins/Satellites/src/gui/SatellitesFilterDialog.cpp:133
 msgctxt "distance"
 msgid "km"
@@ -1830,17 +1829,17 @@ msgstr " "
 msgid "Airmasses"
 msgstr "возд. масс."
 
-#: src/core/modules/Nebula.cpp:251 src/core/modules/Planet.cpp:552
+#: src/core/modules/Nebula.cpp:251 src/core/modules/Planet.cpp:553
 #: src/core/modules/StarWrapper.cpp:276
 msgid "Additional names: "
 msgstr "Дополнительные названия:"
 
-#: src/core/modules/Nebula.cpp:257 src/core/modules/Planet.cpp:559
+#: src/core/modules/Nebula.cpp:257 src/core/modules/Planet.cpp:560
 #: src/core/modules/StarWrapper.cpp:282
 msgid "Additional catalog numbers: "
 msgstr "Дополнительные каталожные номера:"
 
-#: src/core/modules/Nebula.cpp:275 src/core/modules/Planet.cpp:787
+#: src/core/modules/Nebula.cpp:275 src/core/modules/Planet.cpp:788
 #: src/core/modules/MinorPlanet.cpp:174 src/core/modules/StarWrapper.cpp:54
 #: src/core/modules/StarWrapper.cpp:306 plugins/Quasars/src/Quasar.cpp:134
 msgid "Color Index (B-V)"
@@ -1894,7 +1893,7 @@ msgstr "св. лет"
 
 #. TRANSLATORS: distance
 #: src/core/modules/Nebula.cpp:361 src/core/modules/Nebula.cpp:407
-#: src/core/modules/Planet.cpp:684 src/core/modules/StarWrapper.cpp:341
+#: src/core/modules/Planet.cpp:685 src/core/modules/StarWrapper.cpp:341
 #: src/core/modules/StarWrapper.cpp:343 src/gui/AstroCalcDialog.cpp:927
 #: src/gui/AstroCalcChart.cpp:92 src/gui/AstroCalcChart.cpp:102
 #: src/gui/AstroCalcChart.cpp:427 src/gui/AstroCalcChart.cpp:453
@@ -2242,7 +2241,7 @@ msgid "Toggle DSO type filter"
 msgstr "Переключить фильтр типа ОГК"
 
 #: src/core/modules/NebulaMgr.cpp:1448 src/gui/StelDialog.cpp:336
-#: src/StelMainView.cpp:1034
+#: src/StelMainView.cpp:1035
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:773
 msgid "Attention!"
 msgstr "Внимание!"
@@ -2324,44 +2323,44 @@ msgstr "седноид"
 msgid "interstellar object"
 msgstr "межзвёздный объект"
 
-#: src/core/modules/Planet.cpp:530 src/core/modules/Comet.cpp:148
+#: src/core/modules/Planet.cpp:531 src/core/modules/Comet.cpp:148
 #: src/core/modules/StarWrapper.cpp:300 plugins/Quasars/src/Quasar.cpp:131
 msgid "Absolute Magnitude"
 msgstr "Абсолютная звёздная величина"
 
-#: src/core/modules/Planet.cpp:533
+#: src/core/modules/Planet.cpp:534
 msgid "Mean Opposition Magnitude"
 msgstr "Звёздная величина среднего противостояния"
 
-#: src/core/modules/Planet.cpp:567
+#: src/core/modules/Planet.cpp:568
 msgctxt "type of comet"
 msgid "periodic"
 msgstr "периодическая"
 
-#: src/core/modules/Planet.cpp:568
+#: src/core/modules/Planet.cpp:569
 msgctxt "type of comet"
 msgid "non-periodic"
 msgstr "непериодическая"
 
 #. TRANSLATORS: Ecliptical rectangular coordinates
-#: src/core/modules/Planet.cpp:624 src/core/modules/Planet.cpp:626
+#: src/core/modules/Planet.cpp:625 src/core/modules/Planet.cpp:627
 msgctxt "coordinates"
 msgid "Ecliptical"
 msgstr "Эклиптические"
 
-#: src/core/modules/Planet.cpp:635 src/core/modules/Planet.cpp:636
+#: src/core/modules/Planet.cpp:636 src/core/modules/Planet.cpp:637
 msgid "Hourly motion"
 msgstr "Часовое движение"
 
-#: src/core/modules/Planet.cpp:635 src/core/modules/Planet.cpp:1354
-#: src/core/modules/Planet.cpp:1363 src/core/modules/StarWrapper.cpp:358
+#: src/core/modules/Planet.cpp:636 src/core/modules/Planet.cpp:1355
+#: src/core/modules/Planet.cpp:1364 src/core/modules/StarWrapper.cpp:358
 #: plugins/Pulsars/src/Pulsar.cpp:204
 msgctxt "into the direction of"
 msgid "towards"
 msgstr "в направлении"
 
 #. TRANSLATORS: Unit of measure for distance - astronomical unit
-#: src/core/modules/Planet.cpp:647 src/gui/AstroCalcDialog.cpp:873
+#: src/core/modules/Planet.cpp:648 src/gui/AstroCalcDialog.cpp:873
 #: src/gui/AstroCalcDialog.cpp:1184 src/gui/AstroCalcDialog.cpp:1473
 #: src/gui/AstroCalcDialog.cpp:1758 src/gui/AstroCalcDialog.cpp:1817
 #: src/gui/AstroCalcDialog.cpp:9256 src/gui/AstroCalcChart.cpp:427
@@ -2376,257 +2375,257 @@ msgstr "а.е."
 #. TRANSLATORS: Unit of measure for distance - millions of kilometers
 #. TRANSLATORS: Unit of measure for distance - milliones kilometers
 #. TRANSLATORS: Unit of measure for distance - millions kilometers
-#: src/core/modules/Planet.cpp:663 src/core/modules/Planet.cpp:681
+#: src/core/modules/Planet.cpp:664 src/core/modules/Planet.cpp:682
 #: src/core/modules/Comet.cpp:159 src/gui/AstroCalcDialog.cpp:9233
 msgctxt "distance"
 msgid "M km"
 msgstr "млн. км"
 
-#: src/core/modules/Planet.cpp:666
+#: src/core/modules/Planet.cpp:667
 msgid "Distance from Sun"
 msgstr "Расстояние от Солнца"
 
 #. TRANSLATORS: Distance measured in terms of the speed of light
-#: src/core/modules/Planet.cpp:686
+#: src/core/modules/Planet.cpp:687
 msgid "Light time"
 msgstr "Световой промежуток"
 
-#: src/core/modules/Planet.cpp:700
+#: src/core/modules/Planet.cpp:701
 msgid "Orbital velocity"
 msgstr "Орбитальная скорость"
 
-#: src/core/modules/Planet.cpp:703
+#: src/core/modules/Planet.cpp:704
 msgid "Heliocentric velocity"
 msgstr "Гелиоцентрическая скорость"
 
-#: src/core/modules/Planet.cpp:713
+#: src/core/modules/Planet.cpp:714
 msgid "NOTE: orbital elements outdated -- consider updating!"
 msgstr "ПРИМЕЧАНИЕ: элементы орбиты устарели - подумайте об обновлении!"
 
-#: src/core/modules/Planet.cpp:744
+#: src/core/modules/Planet.cpp:745
 msgid "with rings"
 msgstr "с кольцами"
 
-#: src/core/modules/Planet.cpp:761
+#: src/core/modules/Planet.cpp:762
 msgid "scaled up to"
 msgstr "масштабирован до"
 
-#: src/core/modules/Planet.cpp:771
+#: src/core/modules/Planet.cpp:772
 msgid "Apparent diameter"
 msgstr "Видимый диаметр"
 
-#: src/core/modules/Planet.cpp:776
+#: src/core/modules/Planet.cpp:777
 msgid "Equatorial diameter"
 msgstr "Экваториальный диаметр"
 
-#: src/core/modules/Planet.cpp:840 src/core/modules/Planet.cpp:841
-#: src/core/modules/Planet.cpp:849 src/gui/AstroCalcChart.cpp:93
+#: src/core/modules/Planet.cpp:841 src/core/modules/Planet.cpp:842
+#: src/core/modules/Planet.cpp:850 src/gui/AstroCalcChart.cpp:93
 #: src/gui/AstroCalcChart.cpp:103 src/gui/AstroCalcChart.cpp:429
 #: src/gui/AstroCalcChart.cpp:455 src/ui_configurationDialog.h:1893
 msgid "Elongation"
 msgstr "Элонгация"
 
-#: src/core/modules/Planet.cpp:842 src/core/modules/Planet.cpp:851
+#: src/core/modules/Planet.cpp:843 src/core/modules/Planet.cpp:852
 #: src/gui/AstroCalcChart.cpp:96 src/gui/AstroCalcChart.cpp:106
 #: src/gui/AstroCalcChart.cpp:438 src/gui/AstroCalcChart.cpp:464
 #: plugins/Satellites/src/Satellite.cpp:408
 msgid "Phase angle"
 msgstr "Фазовый угол"
 
-#: src/core/modules/Planet.cpp:844 src/core/modules/Planet.cpp:853
+#: src/core/modules/Planet.cpp:845 src/core/modules/Planet.cpp:854
 msgid "Illuminated"
 msgstr "Освещено"
 
-#: src/core/modules/Planet.cpp:850
+#: src/core/modules/Planet.cpp:851
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:323
 msgid "Elong. in Ecl.Long."
 msgstr "Элонг. по эклип. долг."
 
-#: src/core/modules/Planet.cpp:865 src/gui/AstroCalcDialog.cpp:9466
+#: src/core/modules/Planet.cpp:866 src/gui/AstroCalcDialog.cpp:9466
 #: src/gui/AstroCalcChart.cpp:472
 msgid "Angular distance"
 msgstr "Угловое расстояние"
 
 #. TRANSLATORS: Unit of measure for period - days
-#: src/core/modules/Planet.cpp:883 src/core/modules/StarWrapper.cpp:382
+#: src/core/modules/Planet.cpp:884 src/core/modules/StarWrapper.cpp:382
 #: src/gui/AstroCalcDialog.cpp:9267
 msgctxt "duration"
 msgid "days"
 msgstr "дней"
 
-#: src/core/modules/Planet.cpp:892
+#: src/core/modules/Planet.cpp:893
 msgid "Sidereal period"
 msgstr "Звёздный период обращения"
 
-#: src/core/modules/Planet.cpp:901
+#: src/core/modules/Planet.cpp:902
 msgid "Synodic period"
 msgstr "Синодический период обращения"
 
 #. TRANSLATORS: Unit of measure for speed - meters per second
-#: src/core/modules/Planet.cpp:1181
+#: src/core/modules/Planet.cpp:1182
 msgctxt "speed"
 msgid "m/s"
 msgstr "м/с"
 
-#: src/core/modules/Planet.cpp:1196
+#: src/core/modules/Planet.cpp:1197
 msgid "Sidereal day"
 msgstr "Звёздные сутки"
 
-#: src/core/modules/Planet.cpp:1198
+#: src/core/modules/Planet.cpp:1199
 msgid "Mean solar day"
 msgstr "Средние солнечные сутки"
 
-#: src/core/modules/Planet.cpp:1204
+#: src/core/modules/Planet.cpp:1205
 msgid "The period of rotation is chaotic"
 msgstr "Период вращения хаотичен"
 
-#: src/core/modules/Planet.cpp:1210 src/core/modules/Planet.cpp:1212
-#: src/core/modules/Planet.cpp:1218 src/core/modules/Planet.cpp:1220
+#: src/core/modules/Planet.cpp:1211 src/core/modules/Planet.cpp:1213
+#: src/core/modules/Planet.cpp:1219 src/core/modules/Planet.cpp:1221
 msgid "Equatorial rotation velocity"
 msgstr "Экваториальная скорость вращения"
 
-#: src/core/modules/Planet.cpp:1244 src/core/modules/Planet.cpp:1634
+#: src/core/modules/Planet.cpp:1245 src/core/modules/Planet.cpp:1635
 msgctxt "Moon phase"
 msgid "New Moon"
 msgstr "Новолуние"
 
-#: src/core/modules/Planet.cpp:1246 src/core/modules/Planet.cpp:1636
+#: src/core/modules/Planet.cpp:1247 src/core/modules/Planet.cpp:1637
 msgctxt "Moon phase"
 msgid "Waxing Crescent"
 msgstr "Молодой месяц"
 
-#: src/core/modules/Planet.cpp:1248 src/core/modules/Planet.cpp:1638
+#: src/core/modules/Planet.cpp:1249 src/core/modules/Planet.cpp:1639
 msgctxt "Moon phase"
 msgid "First Quarter"
 msgstr "Первая четверть"
 
-#: src/core/modules/Planet.cpp:1250 src/core/modules/Planet.cpp:1640
+#: src/core/modules/Planet.cpp:1251 src/core/modules/Planet.cpp:1641
 msgctxt "Moon phase"
 msgid "Waxing Gibbous"
 msgstr "Нарастающая Луна"
 
-#: src/core/modules/Planet.cpp:1252 src/core/modules/Planet.cpp:1642
+#: src/core/modules/Planet.cpp:1253 src/core/modules/Planet.cpp:1643
 msgctxt "Moon phase"
 msgid "Full Moon"
 msgstr "Полнолуние"
 
-#: src/core/modules/Planet.cpp:1254 src/core/modules/Planet.cpp:1644
+#: src/core/modules/Planet.cpp:1255 src/core/modules/Planet.cpp:1645
 msgctxt "Moon phase"
 msgid "Waning Gibbous"
 msgstr "Убывающая Луна"
 
-#: src/core/modules/Planet.cpp:1256 src/core/modules/Planet.cpp:1646
+#: src/core/modules/Planet.cpp:1257 src/core/modules/Planet.cpp:1647
 msgctxt "Moon phase"
 msgid "Third Quarter"
 msgstr "Третья четверть"
 
-#: src/core/modules/Planet.cpp:1258 src/core/modules/Planet.cpp:1648
+#: src/core/modules/Planet.cpp:1259 src/core/modules/Planet.cpp:1649
 msgctxt "Moon phase"
 msgid "Waning Crescent"
 msgstr "Старый месяц"
 
-#: src/core/modules/Planet.cpp:1266
+#: src/core/modules/Planet.cpp:1267
 msgid "Moon age"
 msgstr "Возраст Луны"
 
-#: src/core/modules/Planet.cpp:1266
+#: src/core/modules/Planet.cpp:1267
 msgid "days old"
 msgstr "дней"
 
-#: src/core/modules/Planet.cpp:1286 src/core/modules/Planet.cpp:1289
+#: src/core/modules/Planet.cpp:1287 src/core/modules/Planet.cpp:1290
 msgid "Position angle of bright limb"
 msgstr "Позиционный угол яркого лимба"
 
-#: src/core/modules/Planet.cpp:1353 src/core/modules/Planet.cpp:1362
-#: src/core/modules/Planet.cpp:1398 src/core/modules/Planet.cpp:1405
+#: src/core/modules/Planet.cpp:1354 src/core/modules/Planet.cpp:1363
+#: src/core/modules/Planet.cpp:1399 src/core/modules/Planet.cpp:1406
 msgid "Position Angle of axis"
 msgstr "Позиционный угол оси"
 
-#: src/core/modules/Planet.cpp:1354 src/core/modules/Planet.cpp:1355
-#: src/core/modules/Planet.cpp:1363 src/core/modules/Planet.cpp:1364
+#: src/core/modules/Planet.cpp:1355 src/core/modules/Planet.cpp:1356
+#: src/core/modules/Planet.cpp:1364 src/core/modules/Planet.cpp:1365
 msgid "Libration"
 msgstr "Либрация"
 
-#: src/core/modules/Planet.cpp:1356 src/core/modules/Planet.cpp:1365
-#: src/core/modules/Planet.cpp:1400 src/core/modules/Planet.cpp:1407
+#: src/core/modules/Planet.cpp:1357 src/core/modules/Planet.cpp:1366
+#: src/core/modules/Planet.cpp:1401 src/core/modules/Planet.cpp:1408
 msgid "Subsolar point"
 msgstr "Подсолнечная точка"
 
-#: src/core/modules/Planet.cpp:1357 src/core/modules/Planet.cpp:1366
+#: src/core/modules/Planet.cpp:1358 src/core/modules/Planet.cpp:1367
 msgid "Colongitude"
 msgstr "Ко-долгота"
 
-#: src/core/modules/Planet.cpp:1399 src/core/modules/Planet.cpp:1406
+#: src/core/modules/Planet.cpp:1400 src/core/modules/Planet.cpp:1407
 msgid "Center point"
 msgstr "Центральная точка"
 
-#: src/core/modules/Planet.cpp:1426
+#: src/core/modules/Planet.cpp:1427
 msgid "Eclipse magnitude"
 msgstr "Линейная фаза затмения"
 
-#: src/core/modules/Planet.cpp:1428
+#: src/core/modules/Planet.cpp:1429
 msgid "Eclipse obscuration"
 msgstr "Поверхностная фаза затмения"
 
-#: src/core/modules/Planet.cpp:1454
+#: src/core/modules/Planet.cpp:1455
 msgid "Moon/Sun diameter ratio"
 msgstr "Отношение диаметров Луны/Солнца"
 
-#: src/core/modules/Planet.cpp:1457
+#: src/core/modules/Planet.cpp:1458
 msgctxt "type of solar eclipse"
 msgid "(annular)"
 msgstr "(кольцеобразное)"
 
-#: src/core/modules/Planet.cpp:1459
+#: src/core/modules/Planet.cpp:1460
 msgctxt "type of solar eclipse"
 msgid "(total)"
 msgstr "(полное)"
 
-#: src/core/modules/Planet.cpp:1470
+#: src/core/modules/Planet.cpp:1471
 msgid "Central eclipse duration"
 msgstr "Длительность максимальной фазы"
 
 #. TRANSLATORS: Short for "minutes".
-#: src/core/modules/Planet.cpp:1472
+#: src/core/modules/Planet.cpp:1473
 #: plugins/Observability/src/Observability.cpp:153
 msgid "m"
 msgstr "м"
 
 #. TRANSLATORS: Short for "seconds".
-#: src/core/modules/Planet.cpp:1474
+#: src/core/modules/Planet.cpp:1475
 #: plugins/Observability/src/Observability.cpp:155
 msgid "s"
 msgstr "с"
 
-#: src/core/modules/Planet.cpp:1475
+#: src/core/modules/Planet.cpp:1476
 msgid "Center of solar eclipse (Lat./Long.)"
 msgstr "Центр солнечного затмения (Шир./Долг.)"
 
-#: src/core/modules/Planet.cpp:1485
+#: src/core/modules/Planet.cpp:1486
 msgid "Shadow center point is"
 msgstr "Центр тени"
 
-#: src/core/modules/Planet.cpp:1487
+#: src/core/modules/Planet.cpp:1488
 msgid "km towards azimuth"
 msgstr "км в направлении азимута"
 
-#: src/core/modules/Planet.cpp:1490
+#: src/core/modules/Planet.cpp:1491
 msgid "Width of antumbra"
 msgstr "Ширина тени (antumbra)"
 
-#: src/core/modules/Planet.cpp:1492
+#: src/core/modules/Planet.cpp:1493
 msgid "Width of umbra"
 msgstr "Ширина тени (umbra)"
 
-#: src/core/modules/Planet.cpp:1509
+#: src/core/modules/Planet.cpp:1510
 msgid "Penumbral eclipse magnitude"
 msgstr "Полутеневая линейная фаза затмения"
 
-#: src/core/modules/Planet.cpp:1512
+#: src/core/modules/Planet.cpp:1513
 msgid "Umbral eclipse magnitude"
 msgstr "Теневая линейная фаза затмения"
 
-#: src/core/modules/Planet.cpp:1519
+#: src/core/modules/Planet.cpp:1520
 msgid "Albedo"
 msgstr "Альбедо"
 
@@ -4329,10 +4328,10 @@ msgstr ""
 " на их свободное копирование, распространение и преобразование."
 
 #: src/core/StelSkyCultureMgr.cpp:289 src/gui/ConfigurationDialog.cpp:1317
-#: src/scripting/StelScriptMgr.cpp:649
+#: src/scripting/StelScriptMgr.cpp:652
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:100
 #: plugins/Oculars/src/gui/OcularDialog.cpp:626
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:778
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:784
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:257
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:237
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:116
@@ -4386,7 +4385,7 @@ msgid "References / Further Reading"
 msgstr "Ссылки / Дополнительная литература"
 
 #: src/core/StelMovementMgr.cpp:194 src/gui/StelGui.cpp:220
-#: src/StelMainView.cpp:936 src/StelMainView.cpp:937
+#: src/StelMainView.cpp:937 src/StelMainView.cpp:938
 msgid "Miscellaneous"
 msgstr "Разное"
 
@@ -4808,7 +4807,7 @@ msgid "Acknowledgments"
 msgstr "Благодарности"
 
 #: src/gui/ConfigurationDialog.cpp:1313
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:779
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:785
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:258
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:275
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:138
@@ -4821,10 +4820,10 @@ msgid "Contact"
 msgstr "Обратная связь"
 
 #: src/gui/ConfigurationDialog.cpp:1316 src/gui/HelpDialog.cpp:517
-#: src/scripting/StelScriptMgr.cpp:654
+#: src/scripting/StelScriptMgr.cpp:657
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:99
 #: plugins/Oculars/src/gui/OcularDialog.cpp:625
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:777
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:783
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:256
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:236
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:115
@@ -5295,19 +5294,19 @@ msgstr ""
 "Все эти горячие клавиши локально доступны для запуска при открытии "
 "определенного окна или вкладки."
 
-#: src/gui/HelpDialog.cpp:407 src/ui_scriptConsole.h:381
+#: src/gui/HelpDialog.cpp:407 src/ui_scriptConsole.h:393
 msgid "Script console"
 msgstr "Консоль сценариев"
 
-#: src/gui/HelpDialog.cpp:408 src/ui_scriptConsole.h:384
+#: src/gui/HelpDialog.cpp:408 src/ui_scriptConsole.h:396
 msgid "Load script from file"
 msgstr "Загрузить сценарий из файла"
 
-#: src/gui/HelpDialog.cpp:410 src/ui_scriptConsole.h:388
+#: src/gui/HelpDialog.cpp:410 src/ui_scriptConsole.h:400
 msgid "Save script to file"
 msgstr "Сохранить сценарий в файл"
 
-#: src/gui/HelpDialog.cpp:412 src/ui_scriptConsole.h:406
+#: src/gui/HelpDialog.cpp:412 src/ui_scriptConsole.h:418
 msgid "Run script"
 msgstr "Выполнить сценарий"
 
@@ -5462,7 +5461,7 @@ msgstr "OSX-разработчик: %1"
 #: src/gui/HelpDialog.cpp:566
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:102
 #: plugins/Oculars/src/gui/OcularDialog.cpp:628
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:781
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:787
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:263
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:239
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:140
@@ -6086,51 +6085,51 @@ msgctxt "command"
 msgid "clear map: supergalactic"
 msgstr "очистить карту: супергалактическая"
 
-#: src/gui/ScriptConsole.cpp:181 src/gui/ScriptConsole.cpp:256
+#: src/gui/ScriptConsole.cpp:188 src/gui/ScriptConsole.cpp:263
 msgid "Caution!"
 msgstr "Осторожно!"
 
-#: src/gui/ScriptConsole.cpp:181
+#: src/gui/ScriptConsole.cpp:188
 msgid "Are you sure you want to load script without saving changes?"
 msgstr "Вы уверены, что хотите загрузить сценарий без сохранения изменений?"
 
-#: src/gui/ScriptConsole.cpp:195
+#: src/gui/ScriptConsole.cpp:202
 msgid "Stellarium Script Files"
 msgstr "Файлы сценариев Stellarium"
 
-#: src/gui/ScriptConsole.cpp:198
+#: src/gui/ScriptConsole.cpp:205
 msgid "Load Script"
 msgstr "Загрузить сценарий"
 
-#: src/gui/ScriptConsole.cpp:219 src/gui/ScriptConsole.cpp:418
+#: src/gui/ScriptConsole.cpp:226 src/gui/ScriptConsole.cpp:425
 msgid "Stellarium Script"
 msgstr "Сценарий Stellarium"
 
-#: src/gui/ScriptConsole.cpp:224
+#: src/gui/ScriptConsole.cpp:231
 msgid "Save Script"
 msgstr "Сохранить сценарий"
 
-#: src/gui/ScriptConsole.cpp:256
+#: src/gui/ScriptConsole.cpp:263
 msgid "Are you sure you want to clear script?"
 msgstr "Вы уверены, что хотите очистить сценарий?"
 
-#: src/gui/ScriptConsole.cpp:366
+#: src/gui/ScriptConsole.cpp:373
 msgid "Select Script Include Directory"
 msgstr "Выбрать включающую сценарий директорию"
 
 #. TRANSLATORS: The first letter of word "Row"
-#: src/gui/ScriptConsole.cpp:400
+#: src/gui/ScriptConsole.cpp:407
 msgctxt "text cursor"
 msgid "R"
 msgstr "Стр."
 
 #. TRANSLATORS: The first letter of word "Column"
-#: src/gui/ScriptConsole.cpp:402
+#: src/gui/ScriptConsole.cpp:409
 msgctxt "text cursor"
 msgid "C"
 msgstr "Кол."
 
-#: src/gui/ScriptConsole.cpp:420
+#: src/gui/ScriptConsole.cpp:427
 msgid "Include File"
 msgstr "Включаемый файл"
 
@@ -6184,7 +6183,7 @@ msgstr "Склонение"
 #: src/gui/SearchDialog.cpp:307 src/gui/AstroCalcDialog.cpp:837
 #: src/gui/AstroCalcDialog.cpp:1742 src/gui/AstroCalcDialog.cpp:2353
 #: src/gui/AstroCalcChart.cpp:88 src/gui/AstroCalcChart.cpp:419
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1500
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1506
 msgid "Azimuth"
 msgstr "Азимут"
 
@@ -6293,7 +6292,7 @@ msgid "Valid range years:"
 msgstr "Допустимый диапазон лет:"
 
 #: src/gui/AstroCalcDialog.cpp:616
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1144
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1150
 #: plugins/Satellites/src/gui/SatellitesFilterDialog.cpp:136
 msgid "Valid range"
 msgstr "Допустимый диапазон"
@@ -6807,7 +6806,6 @@ msgstr ""
 
 #: src/gui/AstroCalcDialog.cpp:3384 src/gui/AstroCalcChart.cpp:378
 #: src/gui/ObsListDialog.cpp:265 src/ui_obsListDialog.h:410
-#: src/ui_obsListCreateEditDialog.h:325
 msgid "Date"
 msgstr "Дата"
 
@@ -7457,8 +7455,8 @@ msgstr "Склонение от времени"
 #. TRANSLATORS: hours.
 #: src/gui/AstroCalcDialog.cpp:6484 src/gui/AstroCalcChart.cpp:442
 #: src/gui/AstroCalcChart.cpp:468
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:877
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1152
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:883
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1158
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:173
 #: plugins/Novae/src/gui/NovaeDialog.cpp:168
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:165
@@ -7851,12 +7849,12 @@ msgid "Angular distance between the Moon and celestial object"
 msgstr "Угловое расстояние между Луной и небесным объектом"
 
 #: src/gui/AstroCalcDialog.cpp:9616
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1575
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1581
 msgid "CSV (Comma delimited)"
 msgstr "CSV (разделители - запятые)"
 
 #: src/gui/AstroCalcDialog.cpp:9617
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1576
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1582
 msgid "Microsoft Excel Open XML Spreadsheet"
 msgstr "Электронная таблица Microsoft Excel Open XML"
 
@@ -8046,7 +8044,7 @@ msgid "Constellation"
 msgstr "Созвездие"
 
 #: src/gui/ObsListDialog.cpp:267 src/ui_viewDialog.h:3538
-#: src/ui_obsListDialog.h:418 src/ui_obsListCreateEditDialog.h:333
+#: src/ui_obsListDialog.h:418
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:480
 msgid "Landscape"
 msgstr "Ландшафт"
@@ -8200,28 +8198,28 @@ msgstr ""
 "Класс Бортля %1: %2\n"
 "Предельная звёздная величина для невооруженного глаза: %3"
 
-#: src/scripting/StelScriptMgr.cpp:518 src/ui_configurationDialog.h:1767
+#: src/scripting/StelScriptMgr.cpp:521 src/ui_configurationDialog.h:1767
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:533
 msgid "Scripts"
 msgstr "Сценарии"
 
-#: src/scripting/StelScriptMgr.cpp:659
+#: src/scripting/StelScriptMgr.cpp:662
 msgid "Shortcut"
 msgstr "Сочетание клавиш"
 
-#: src/StelMainView.cpp:936
+#: src/StelMainView.cpp:937
 msgid "Save screenshot"
 msgstr "Сохранить снимок экрана"
 
-#: src/StelMainView.cpp:937
+#: src/StelMainView.cpp:938
 msgid "Reload shaders (for development)"
 msgstr "Перезагрузить шейдеры (для разработки)"
 
-#: src/StelMainView.cpp:938
+#: src/StelMainView.cpp:939
 msgid "Full-screen mode"
 msgstr "Полноэкранный режим"
 
-#: src/StelMainView.cpp:1034
+#: src/StelMainView.cpp:1035
 msgid ""
 "Shortcuts have conflicts! Please press F7 after program startup and check "
 "following multiple assignments"
@@ -8229,7 +8227,7 @@ msgstr ""
 "Клавиатурные сокращения конфликтуют! Нажмите F7 после запуска программы и "
 "проверьте следующие клавиатурные сокращения"
 
-#: src/StelMainView.cpp:1117
+#: src/StelMainView.cpp:1118
 msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use --angle-mode (or --mesa-mode) option."
@@ -8238,7 +8236,7 @@ msgstr ""
 "оборудование или используйте режим запуска с --angle-mode (или с --mesa-"
 "mode)."
 
-#: src/StelMainView.cpp:1119
+#: src/StelMainView.cpp:1120
 msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use --mesa-mode option."
@@ -8246,14 +8244,14 @@ msgstr ""
 "Недостаточная версия OpenGL. Пожалуйста, обновите драйвер, графическое "
 "оборудование или используйте режим запуска с --mesa-mode."
 
-#: src/StelMainView.cpp:1123
+#: src/StelMainView.cpp:1124
 msgid ""
 "Insufficient OpenGL version. Please update drivers, or graphics hardware."
 msgstr ""
 "Недостаточная версия OpenGL. Пожалуйста, обновите драйверы или графическое "
 "оборудование."
 
-#: src/StelMainView.cpp:1166
+#: src/StelMainView.cpp:1167
 msgid ""
 "Your DirectX/OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -8261,7 +8259,7 @@ msgstr ""
 "Ваша подсистема DirectX/OpenGL ES имеет проблемы. См. подробности в журнале.\n"
 "Игнорировать и не показывать это уведомление в будущем, и попытаться продолжить в ограниченном режиме в любом случае?"
 
-#: src/StelMainView.cpp:1217
+#: src/StelMainView.cpp:1218
 msgid ""
 "Your OpenGL/Mesa subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -8269,7 +8267,7 @@ msgstr ""
 "Ваша подсистема OpenGL/Mesa имеет проблемы. См. подробности в журнале.\n"
 "Игнорировать и не показывать это уведомление в будущем, и попытаться продолжить в ограниченном режиме в любом случае?"
 
-#: src/StelMainView.cpp:1277
+#: src/StelMainView.cpp:1278
 msgid ""
 "Your OpenGL subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -8277,7 +8275,7 @@ msgstr ""
 "Ваша подсистема OpenGL имеет проблемы. См. подробности в журнале.\n"
 "Игнорировать и не показывать это уведомление в будущем, и попытаться продолжить в ограниченном режиме в любом случае?"
 
-#: src/StelMainView.cpp:1318
+#: src/StelMainView.cpp:1319
 msgid ""
 "Your OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -9832,7 +9830,7 @@ msgid "&Choose"
 msgstr "&Выбрать"
 
 #: src/translations.h:630 src/ui_configurationDialog.h:1978
-#: src/ui_obsListDialog.h:364 src/ui_obsListCreateEditDialog.h:355
+#: src/ui_obsListDialog.h:364
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:645
 msgid "Cancel"
 msgstr "Отмена"
@@ -11735,7 +11733,7 @@ msgstr "Справка"
 msgid "About"
 msgstr "О программе"
 
-#: src/ui_helpDialogGui.h:282 src/ui_scriptConsole.h:414
+#: src/ui_helpDialogGui.h:282 src/ui_scriptConsole.h:426
 msgid "Log"
 msgstr "Журнал"
 
@@ -12495,7 +12493,7 @@ msgstr "Только для солнечной высоты"
 msgid "Minimum Solar altitude"
 msgstr "Минимальная высота Солнца"
 
-#: src/ui_viewDialog.h:3712 src/ui_scriptConsole.h:425
+#: src/ui_viewDialog.h:3712 src/ui_scriptConsole.h:445
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:358
 msgid "..."
 msgstr "..."
@@ -13521,7 +13519,7 @@ msgid "Additional settings for Graphical User Interface"
 msgstr "Дополнительные настройки для графического интерфейса пользователя"
 
 #: src/ui_configurationDialog.h:1763
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1497
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1503
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:489
 msgid "Time"
 msgstr "Время"
@@ -14341,7 +14339,7 @@ msgstr ""
 "Точек на дюйм (для вычисления размера печати в метаданных изображения). "
 "Собственный размер печати в дюймах равен pixelSize/dpi. "
 
-#: src/ui_configurationDialog.h:2155 src/ui_scriptConsole.h:417
+#: src/ui_configurationDialog.h:2155 src/ui_scriptConsole.h:429
 msgid "Close window when script runs"
 msgstr "Закрыть окно во время работы сценария"
 
@@ -14553,39 +14551,63 @@ msgstr "Открыть вебсайт JUPOS"
 msgid "View recent GRS measurements"
 msgstr "Посмотреть последние измерения БКП"
 
-#: src/ui_scriptConsole.h:392
+#: src/ui_scriptConsole.h:404
 msgid "Clear"
 msgstr "Очистить"
 
-#: src/ui_scriptConsole.h:396
+#: src/ui_scriptConsole.h:408
 msgid "Pre-process script using SSC preprocessor"
 msgstr "Предварительная обработка сценария с помощью препроцессора SSC"
 
-#: src/ui_scriptConsole.h:401
+#: src/ui_scriptConsole.h:413
 msgid "Execute:"
 msgstr "Выполнить:"
 
-#: src/ui_scriptConsole.h:410
+#: src/ui_scriptConsole.h:422
 msgid "Stop script"
 msgstr "Остановить сценарий"
 
-#: src/ui_scriptConsole.h:413
+#: src/ui_scriptConsole.h:425
 msgid "Script"
 msgstr "Сценарий"
 
-#: src/ui_scriptConsole.h:415
+#: src/ui_scriptConsole.h:427
 msgid "Output"
 msgstr "Вывод"
 
-#: src/ui_scriptConsole.h:416
+#: src/ui_scriptConsole.h:428
 msgid "Load scripts from the User Directory by default"
 msgstr "Загружать скрипты из каталога пользователя по умолчанию"
 
-#: src/ui_scriptConsole.h:418
+#: src/ui_scriptConsole.h:430
 msgid "Clear output before script runs"
 msgstr "Очистить вывод перед запуском сценария"
 
-#: src/ui_scriptConsole.h:419
+#: src/ui_scriptConsole.h:432
+msgid ""
+"If disabled, all screenshots go to the directory set in the Configuration "
+"dialog."
+msgstr ""
+"Если этот параметр отключен, все снимки экрана помещаются в каталог, "
+"указанный в диалоговом окне «Конфигурация»."
+
+#: src/ui_scriptConsole.h:434
+msgid "Allow scripts to store screenshots to other directories"
+msgstr "Разрешить сценариям сохранять снимки экрана в другие каталоги"
+
+#: src/ui_scriptConsole.h:436
+msgid ""
+"If disabled, all output goes to the user data directory. Enabling this bears"
+" some risks!"
+msgstr ""
+"Если этот параметр отключен, весь вывод идет в каталог пользовательских "
+"данных. Включение этого сопряжено с некоторыми рисками!"
+
+#: src/ui_scriptConsole.h:438
+msgid "Allow scripts to store output to arbitrary directories"
+msgstr "Разрешить сценариям сохранять вывод в произвольные каталоги"
+
+#: src/ui_scriptConsole.h:439
 #: plugins/Satellites/src/ui_satellitesDialog.h:1307
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:245
 #: plugins/NavStars/src/ui_navStarsWindow.h:539
@@ -14597,15 +14619,15 @@ msgstr "Очистить вывод перед запуском сценария
 msgid "Settings"
 msgstr "Настройки"
 
-#: src/ui_scriptConsole.h:421
+#: src/ui_scriptConsole.h:441
 msgid "Cursor position"
 msgstr "Позиция курсора"
 
-#: src/ui_scriptConsole.h:423
+#: src/ui_scriptConsole.h:443
 msgid "R:0 C:0"
 msgstr "Стр.:0 Кол.:0"
 
-#: src/ui_scriptConsole.h:424
+#: src/ui_scriptConsole.h:444
 msgid "Include dir:"
 msgstr "Включая каталог:"
 
@@ -15183,7 +15205,7 @@ msgstr "Толщина линии эфемерид:"
 #: src/ui_astroCalcExtraEphemerisDialog.h:204
 #: plugins/Oculars/src/Oculars.cpp:1780
 #: plugins/Oculars/src/gui/OcularDialog.cpp:598
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1155
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1161
 #: plugins/Satellites/src/ui_satellitesDialog.h:1285
 msgctxt "pixels"
 msgid "px"
@@ -15198,20 +15220,18 @@ msgid "Unit of measurement:"
 msgstr "Единица измерения:"
 
 #: src/ui_obsListDialog.h:356 src/ui_obsListDialog.h:374
-#: src/ui_obsListCreateEditDialog.h:339
 msgid "Highlight all the objects of the selected list"
 msgstr "Выделить все объекты выбранного списка"
 
-#: src/ui_obsListDialog.h:358 src/ui_obsListCreateEditDialog.h:341
+#: src/ui_obsListDialog.h:358
 msgid "Add object"
 msgstr "Добавить объект"
 
 #: src/ui_obsListDialog.h:360 src/ui_obsListDialog.h:378
-#: src/ui_obsListCreateEditDialog.h:343
 msgid "Clear all the highlight objects"
 msgstr "Убрать подсветку со всех объектов"
 
-#: src/ui_obsListDialog.h:362 src/ui_obsListCreateEditDialog.h:345
+#: src/ui_obsListDialog.h:362
 msgid "Remove object"
 msgstr "Удалить объект"
 
@@ -15219,7 +15239,7 @@ msgstr "Удалить объект"
 msgid "Save list"
 msgstr "Сохранить список"
 
-#: src/ui_obsListDialog.h:365 src/ui_obsListCreateEditDialog.h:316
+#: src/ui_obsListDialog.h:365
 #: plugins/Satellites/src/ui_satellitesDialog.h:1385
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:217
 msgid "Description:"
@@ -15269,8 +15289,7 @@ msgstr "Править выбранной список"
 msgid "Edit list"
 msgstr "Править список"
 
-#: src/ui_obsListDialog.h:390 src/ui_obsListCreateEditDialog.h:347
-#: src/ui_obsListCreateEditDialog.h:349
+#: src/ui_obsListDialog.h:390
 msgid "Export list"
 msgstr "Экспортировать список"
 
@@ -15278,8 +15297,7 @@ msgstr "Экспортировать список"
 msgid "Export list..."
 msgstr "Экспортировать список..."
 
-#: src/ui_obsListDialog.h:394 src/ui_obsListCreateEditDialog.h:351
-#: src/ui_obsListCreateEditDialog.h:353
+#: src/ui_obsListDialog.h:394
 msgid "Import list"
 msgstr "Импортировать список"
 
@@ -15307,7 +15325,7 @@ msgstr "Также сохранить:"
 msgid "Store/load equatorial coordinates (J2000.0)"
 msgstr "Сохранить/загрузить экваториальные координаты (J2000.0)"
 
-#: src/ui_obsListDialog.h:406 src/ui_obsListCreateEditDialog.h:321
+#: src/ui_obsListDialog.h:406
 msgid "Coordinates (RA and DEC)"
 msgstr "Координаты (П.В. и Скл.)"
 
@@ -15327,53 +15345,9 @@ msgstr "Сохранить/загрузить с ландшафтом"
 msgid "Store/load with field of view"
 msgstr "Сохранить/загрузить с полем зрения"
 
-#: src/ui_obsListDialog.h:422 src/ui_obsListCreateEditDialog.h:337
+#: src/ui_obsListDialog.h:422
 msgid "FOV"
 msgstr "ПЗ"
-
-#: src/ui_obsListCreateEditDialog.h:314
-msgid "Observing Lists editor"
-msgstr "Редактор списков наблюдения"
-
-#: src/ui_obsListCreateEditDialog.h:317
-msgid "Also store: "
-msgstr "Также сохранить:"
-
-#: src/ui_obsListCreateEditDialog.h:319
-msgid "Store with equatorial coordinates (J2000.0)"
-msgstr "Сохранить с экваториальными координатами (J2000.0)"
-
-#: src/ui_obsListCreateEditDialog.h:323
-msgid "Store with current JD"
-msgstr "Сохранить с текущим JD"
-
-#: src/ui_obsListCreateEditDialog.h:327
-msgid "Store with current location"
-msgstr "Сохранить с текущим местоположением"
-
-#: src/ui_obsListCreateEditDialog.h:331
-msgid "Store with current landscape"
-msgstr "Сохранить с текущим ландшафтом"
-
-#: src/ui_obsListCreateEditDialog.h:335
-msgid "Store with current field of view"
-msgstr "Сохранить с текущим полем зрения"
-
-#: src/ui_obsListCreateEditDialog.h:354
-msgid "Save and close"
-msgstr "Сохранить и закрыть"
-
-#: src/ui_obsListCreateEditDialog.h:358
-msgid "Set the list as default"
-msgstr "Установить список по умолчанию"
-
-#: src/ui_obsListCreateEditDialog.h:360
-msgid "Set list as default"
-msgstr "Установить список по умолчанию"
-
-#: src/ui_obsListCreateEditDialog.h:361
-msgid "Name of the list:"
-msgstr "Название списка:"
 
 #: src/ui_dsoColorsDialog.h:545 src/ui_orbitColorsDialog.h:387
 msgid "Color settings"
@@ -16064,10 +16038,6 @@ msgstr ""
 "Мы измерили. Мы рассчитали. Мы представляли, что мы были на Гавайях."
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:323
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:328
-msgid "Pulsars Configuration"
-msgstr "Настройка пульсаров"
-
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:324
 msgid "Angle Measure Plug-in Configuration"
 msgstr "Настройка плагина \"Угломер\""
@@ -16233,8 +16203,8 @@ msgstr "&Сбросить поворот"
 #: plugins/Oculars/src/gui/OcularDialog.cpp:118
 #: plugins/Oculars/src/gui/OcularDialog.cpp:135
 #: plugins/Oculars/src/gui/OcularDialog.cpp:152
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:915
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:922
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:921
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:928
 msgid "Warning!"
 msgstr "Предупреждение!"
 
@@ -16348,7 +16318,7 @@ msgstr "Макс. экпозиция"
 #. TRANSLATORS: duration
 #. TRANSLATORS: seconds.
 #: plugins/Oculars/src/Oculars.cpp:1797
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1149
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1155
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:223
 msgctxt "time"
 msgid "s"
@@ -18370,28 +18340,28 @@ msgstr "неизвестно"
 msgid "artificial satellite"
 msgstr "искусственный спутник"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:776
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:782
 msgid "Stellarium Satellites Plugin"
 msgstr "Плагин \"Спутники\""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:787
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:793
 msgid ""
 "The Satellites plugin predicts the positions of artificial satellites in "
 "Earth orbit."
 msgstr "Плагин Спутники предвычисляет положение искуственных спутников Земли."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:789
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:795
 msgid "Notes for users"
 msgstr "Примечания для пользователей"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:790
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:796
 msgid ""
 "Satellites and their orbits are only shown when the observer is on Earth."
 msgstr ""
 "Спутники и их орбиты отображаются только для наблюдателя, находящегося на "
 "Земле."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:791
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:797
 msgid ""
 "Predicted positions are only good for a fairly short time (on the order of "
 "days, weeks or perhaps a month into the past and future). Expect high "
@@ -18402,7 +18372,7 @@ msgstr ""
 "месяца в будущее и прошлое). Вне указанного временного диапазона для "
 "спутников можно ожидать странностей с их местоположением."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:792
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:798
 msgid ""
 "Orbital elements go out of date pretty quickly (over mere weeks, sometimes "
 "days).  To get useful data out, you need to update the TLE data regularly."
@@ -18414,7 +18384,7 @@ msgstr ""
 #. TRANSLATORS: The translated names of the button and the tab are filled in
 #. automatically. You can check the original names in Stellarium. File names
 #. are not translated.
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:794
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:800
 #, qt-format
 msgid ""
 "Clicking the \"%1\" button in the \"%2\" tab of this dialog will revert to "
@@ -18426,13 +18396,13 @@ msgstr ""
 "найден в каталоге пользовательских данных в подкаталоге "
 "\"modules/Satellites/\"."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:797
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:803
 msgid ""
 "The value of perigee and apogee altitudes compute for mean Earth radius."
 msgstr ""
 "Значения высот перигея и апогея вычисляются для среднего радиуса Земли."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:798
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:804
 msgid ""
 "The Satellites plugin is still under development.  Some features are "
 "incomplete, missing or buggy."
@@ -18440,11 +18410,11 @@ msgstr ""
 "Плагин находится в состоянии постоянной разработки, поэтому часть функций "
 "неполные, потерянные или с ошибками."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:802
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:808
 msgid "Altitude classifications for geocentric orbits"
 msgstr "Высотная классификация геоцентрических орбит"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:803
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:809
 msgid ""
 "Low Earth orbit (LEO): geocentric orbits with altitudes of apogee below 4400"
 " km, inclination of orbits in range 0-180 degrees and eccentricity below "
@@ -18454,7 +18424,7 @@ msgstr ""
 "км, наклонением орбит в диапазоне 0-180 градусов и эксцентриситетом менее "
 "0.25. "
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:804
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:810
 msgid ""
 "Medium Earth orbit (MEO): geocentric orbits with altitude of apogee at least"
 " 4400 km, inclination of orbits in range 0-180 degrees, eccentricity below "
@@ -18464,7 +18434,7 @@ msgstr ""
 "менее 4400 км, наклонением орбит в диапазоне 0-180 градусов, "
 "эксцентриситетом менее 0.25 и периодом обращения не менее 1100 минут."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:805
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:811
 msgid ""
 "Geosynchronous orbit (GSO) and geostationary orbit (GEO) are orbits with "
 "inclination of orbits below 25 degrees, eccentricity below 0.25 and period "
@@ -18476,7 +18446,7 @@ msgstr ""
 "периодом обращения в диапазоне 1100-2000 минут (орбиты вокруг Земли, "
 "совпадающие с периодом звёздного вращения Земли)."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:806
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:812
 msgid ""
 "Highly elliptical orbit (HEO): geocentric orbits with altitudes of perigee "
 "below 70000 km, inclination of orbits in range 0-180 degrees, eccentricity "
@@ -18486,7 +18456,7 @@ msgstr ""
 "перигея менее 70000 км, наклонением орбит в диапазоне 0-180 градусов, "
 "эксцентриситетом не менее 0.25 и периодом обращения менее 14000 минут."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:807
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:813
 msgid ""
 "High geosynchronous orbit (HGSO): geocentric orbits above the altitude of "
 "geosynchronous orbit: inclination of orbits in range 25-180 degrees, "
@@ -18497,7 +18467,7 @@ msgstr ""
 "эксцентриситетом менее 0.25 и периодом обращения в диапазоне 1100-2000 "
 "минут."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:809
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:815
 msgid ""
 "High Earth orbit (HEO or HEO/E): a geocentric orbit with an altitude "
 "entirely above that of a geosynchronous orbit (35786 kilometres). The "
@@ -18509,11 +18479,11 @@ msgstr ""
 "Период обращения таких орбит превышает 24 часа, поэтому спутники на таких "
 "орбитах имеют кажущееся попятное движение."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:812
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:818
 msgid "Inclination classifications for geocentric orbits"
 msgstr "Классификация геоцентрических орбит по наклонению"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:813
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:819
 msgid ""
 "Equatorial orbit: an orbit whose inclination in reference to the equatorial "
 "plane is (or very close to) 0 degrees."
@@ -18521,7 +18491,7 @@ msgstr ""
 "Экваториальная орбита: орбита, наклонение которой относительно "
 "экваториальной плоскости составляет (или очень близко к) 0 градусов."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:814
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:820
 msgid ""
 "Polar orbit: a satellite that passes above or nearly above both poles of the"
 " planet on each revolution. Therefore it has an inclination of (or very "
@@ -18531,7 +18501,7 @@ msgstr ""
 " планеты при каждом обороте. Следовательно, он имеет наклонение (или очень "
 "близко к) 90 градусов."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:815
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:821
 msgid ""
 "Polar sun-synchronous orbit (PSSO): A nearly polar orbit that passes the "
 "equator at the same local time on every pass. Useful for image-taking "
@@ -18547,11 +18517,11 @@ msgstr ""
 "градусов."
 
 #. TRANSLATORS: Title of a section in the About tab of the Satellites window
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:819
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:825
 msgid "TLE data updates"
 msgstr "Обновление данных TLE"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:820
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:826
 msgid ""
 "The Satellites plugin can automatically download TLE data from Internet "
 "sources, and by default the plugin will do this if the existing data is more"
@@ -18560,7 +18530,7 @@ msgstr ""
 "Плагин Спутники может автоматически загружать TLE из интернета и по "
 "умолчанию плагин будет делать это для данных старше 72 часов. "
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:821
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:827
 #, qt-format
 msgid ""
 "If you disable Internet updates, you may update from a file on your "
@@ -18571,7 +18541,7 @@ msgstr ""
 "вашем компьютере. Этот файл должен быть в формате обновлений Celestrak'а "
 "(см. %1 для примера)."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:822
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:828
 msgid ""
 "<b>Note:</b> if the name of a satellite in update data has anything in "
 "square brackets at the end, it will be removed before the data is used."
@@ -18579,11 +18549,11 @@ msgstr ""
 "<b>Примечание: </b> если название спутника в файле обновлений заключено в  "
 "квадратных скобках, то этот спутник будет удален перед добавлением данных."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:825
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:831
 msgid "Adding new satellites"
 msgstr "Добавление новых спутников"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:826
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:832
 msgid ""
 "Make sure the satellite(s) you wish to add are included in one of the URLs "
 "listed in the Sources tab of the satellites configuration dialog."
@@ -18592,7 +18562,7 @@ msgstr ""
 "одну из ссылок, содержащихся в источниках диалогового окна конфигурации "
 "спутников."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:827
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:833
 msgid ""
 "Go to the Satellites tab, and click the '+' button.  Select the satellite(s)"
 " you wish to add and select the 'add' button."
@@ -18600,11 +18570,11 @@ msgstr ""
 "Перейдите на вкладку спутники и нажмите кнопку \"+\". Выберите спутник или "
 "спутники, которые хотите добавить, и нажмите кнопку \"Добавить\"."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:829
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:835
 msgid "Technical notes"
 msgstr "Технические примечания"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:830
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:836
 msgid ""
 "Positions are calculated using the SGP4 & SDP4 methods, using NORAD TLE data"
 " as the input."
@@ -18612,7 +18582,7 @@ msgstr ""
 "Метоположение рассчитываются с использованием методов SGP4 и SDP4, для "
 "которых входными данными являются двустрочные элементы орбит NORAD."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:831
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:837
 msgid ""
 "The orbital calculation code is written by Jose Luis Canales according to "
 "the revised Spacetrack Report #3 (including Spacetrack Report #6)"
@@ -18620,7 +18590,7 @@ msgstr ""
 "Хосе Луис Каналес написал код расчёта орбит в соответствии с пересмотренным "
 "отчётом #3 Spacetrack (включая 6-й отчёт Spacetrack)"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:832
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:838
 msgid ""
 "To calculate an approximate visual magnitude of satellites we use data from "
 "Mike McCants' database (with permissions) of the radar cross-section (RCS) "
@@ -18630,7 +18600,7 @@ msgstr ""
 "используем данные из базы данных Майка МакКантса (с разрешениями) об "
 "эффективной площади рассеяния (ЭПР) и стандартных звёздных величинах."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:833
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:839
 msgid ""
 "Formula to calculate an approximate visual magnitude of satellites from the "
 "standard magnitude may be found at Mike McCants website"
@@ -18638,7 +18608,7 @@ msgstr ""
 "Формулу для расчета приблизительной визуальной звёздной величины спутников "
 "из стандартной звёздной величины можно найти на вебсайте Майка МакКантса"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:834
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:840
 msgid ""
 "We use a spherical shape of satellite to calculate an approximate visual "
 "magnitude from RCS values."
@@ -18646,13 +18616,13 @@ msgstr ""
 "Мы используем сферическую форму спутника, чтобы рассчитать приблизительную "
 "визуальную звёздную величину на основе значений ЭПР."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:835
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:841
 msgid "For modelling Starlink magnitudes we use Anthony Mallama's formula"
 msgstr ""
 "Для моделирования звёздных величин спутников Starlink мы используем формулу "
 "Энтони Маллама"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:854
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:860
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:152
 #: plugins/Novae/src/gui/NovaeDialog.cpp:147
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:144
@@ -18662,7 +18632,7 @@ msgstr ""
 msgid "Next update"
 msgstr "Следующее обновление"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:859
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:865
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:158
 #: plugins/Novae/src/gui/NovaeDialog.cpp:153
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:150
@@ -18672,8 +18642,8 @@ msgstr "Следующее обновление"
 msgid "Internet updates disabled"
 msgstr "Обновление через интернет выключено"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:861
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:885
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:867
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:891
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:160
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:206
 #: plugins/Novae/src/gui/NovaeDialog.cpp:155
@@ -18688,7 +18658,7 @@ msgstr "Обновление через интернет выключено"
 msgid "Updating now..."
 msgstr "Обновляется..."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:866
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:872
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:162
 #: plugins/Novae/src/gui/NovaeDialog.cpp:157
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:154
@@ -18698,7 +18668,7 @@ msgid "< 1 minute"
 msgstr "менее минуты"
 
 #. TRANSLATORS: minutes.
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:871
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:877
 #: plugins/Satellites/src/gui/SatellitesFilterDialog.cpp:135
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:167
 #: plugins/Novae/src/gui/NovaeDialog.cpp:162
@@ -18710,7 +18680,7 @@ msgctxt "time"
 msgid "m"
 msgstr "м"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:888
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:894
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:209
 #: plugins/Novae/src/gui/NovaeDialog.cpp:204
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:225
@@ -18720,29 +18690,29 @@ msgstr "м"
 msgid "Update error"
 msgstr "Ошибка обновления"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:898
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:904
 #, qt-format
 msgid "Updated %1/%2 satellite(s); %3 added; %4 removed"
 msgstr "Обновлено %1/%2 спутников; %3 добавлено; %4 удалено"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:900
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:906
 #, qt-format
 msgid "Updated %1/%2 satellite(s); %3 added; %4 missing"
 msgstr "Обновлено %1/%2 спутников; %3 добавлено; %4 потеряно"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:915
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:921
 msgid "Empty string - not saving"
 msgstr "Пустая строка - не сохраняется"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:922
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:928
 msgid "Invalid URL - not saving"
 msgstr "Неверный URL - не сохраняется"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:989
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:995
 msgid "[new source]"
 msgstr "[новый источник]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1075
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1081
 #: plugins/Satellites/src/ui_satellitesDialog.h:1258
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:195
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:242
@@ -18758,7 +18728,7 @@ msgstr "[новый источник]"
 msgid "Update now"
 msgstr "Обновить сейчас"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1077
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1083
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:197
 #: plugins/Novae/src/gui/NovaeDialog.cpp:192
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:189
@@ -18767,107 +18737,107 @@ msgstr "Обновить сейчас"
 msgid "Update from files"
 msgstr "Обновить из файлов"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1105
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1111
 msgid "[orbit calculation error]"
 msgstr "[ошибка в расчёте орбиты]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1106
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1112
 msgid "[atmospheric entry]"
 msgstr "[вход в атмосферу]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1107
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1113
 msgid "[all newly added]"
 msgstr "[все вновь добавленные]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1108
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1114
 msgid "[all not displayed]"
 msgstr "[все не отображаемые]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1109
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1115
 msgid "[all displayed]"
 msgstr "[все отображаемые]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1110
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1116
 msgid "[all communications]"
 msgstr "[все коммуникационные]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1111
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1117
 msgid "[small satellites]"
 msgstr "[малые спутники]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1112
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1118
 msgid "[medium satellites]"
 msgstr "[средние спутники]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1113
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1119
 msgid "[large satellites]"
 msgstr "[большие спутники]"
 
 #. TRANSLATORS: LEO = Low Earth orbit
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1115
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1121
 msgid "[LEO satellites]"
 msgstr "[НО спутники]"
 
 #. TRANSLATORS: GEO = Geosynchronous equatorial orbit (Geostationary orbit)
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1117
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1123
 msgid "[GEO/GSO satellites]"
 msgstr "[ГСО спутники]"
 
 #. TRANSLATORS: MEO = Medium Earth orbit
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1119
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1125
 msgid "[MEO satellites]"
 msgstr "[СВО спутники]"
 
 #. TRANSLATORS: HEO = Highly elliptical orbit
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1121
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1127
 msgid "[HEO satellites]"
 msgstr "[ВЭО спутники]"
 
 #. TRANSLATORS: HGEO = High geosynchronous orbit
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1123
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1129
 msgid "[HGSO satellites]"
 msgstr "[ВГО спутники]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1124
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1130
 msgid "[polar orbit satellites]"
 msgstr "[спутники на полярной орбите]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1125
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1131
 msgid "[equatorial orbit satellites]"
 msgstr "[спутники на экватор. орбите]"
 
 #. TRANSLATORS: PSSO = Polar sun synchronous orbit
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1127
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1133
 msgid "[PSSO satellites]"
 msgstr "[ССО спутники]"
 
 #. TRANSLATORS: HEO/E = High Earth orbit
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1129
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1135
 msgid "[HEO/E satellites]"
 msgstr "[ВО спутники]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1130
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1136
 msgid "[outdated TLE]"
 msgstr "[устаревшие TLE]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1131
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1137
 msgid "[custom filter]"
 msgstr "[пользовательский фильтр]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1132
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1138
 msgid "[all user defined]"
 msgstr "[все пользовательские]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1133
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1139
 msgid "[all]"
 msgstr "[все]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1145
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1151
 #: plugins/Satellites/src/ui_satellitesFilterDialog.h:301
 msgid "RCS"
 msgstr "ЭПР"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1146
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1152
 msgid ""
 "Radar cross-section (RCS) is a measure of how detectable an object is with a"
 " radar. A larger RCS indicates that an object is more easily detected."
@@ -18876,7 +18846,7 @@ msgstr ""
 "обнаруживается объект с помощью радара. Более крупное значение ЭПР указывает"
 " на то, что объект легче обнаружить."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1147
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1153
 msgid ""
 "The standard magnitude of a satellite is defined as its apparent magnitude "
 "when at half-phase and at a distance 1000 km from the observer."
@@ -18885,12 +18855,12 @@ msgstr ""
 " величина, когда он находится в полуфазе и на расстоянии 1000 км от "
 "наблюдателя."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1160
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1166
 msgid ""
 "Display satellites and their orbits within selected range of altitudes only."
 msgstr "Отображение спутников и их орбит только в выбранном диапазоне высот."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1162
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1168
 #: plugins/Satellites/src/ui_satellitesDialog.h:1278
 msgid ""
 "Distance to the center of umbra from Earth's surface (height of imagined "
@@ -18899,46 +18869,46 @@ msgstr ""
 "Расстояние до центра тени от поверхности Земли (высота воображаемого "
 "спутника)"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1163
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1169
 msgid "Number of segments: number of segments used to draw the line"
 msgstr "Число сегментов: число сегментов для построения линии орбиты"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1164
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1170
 msgid "Segment length: duration of a single segment in seconds"
 msgstr ""
 "Длина сегмента: продолжительность видимости одного сегмента в секундах"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1165
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1171
 msgid "Fade length: number of segments used to draw each end of the line"
 msgstr "Длина затухания: число сегментов для рисования каждого края линии"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1166
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1172
 msgid "Orbit line thickness"
 msgstr "Толщина линии орбиты"
 
 #. TRANSLATORS: Displayed in the satellite group selection box.
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1200
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1206
 msgid "New group..."
 msgstr "Новая группа..."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1476
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1482
 msgid "Select TLE Update File"
 msgstr "Выберите файла обновления TLE"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1498
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1504
 msgid "Brightness"
 msgstr "Яркость"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1501
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1507
 msgid "Satellite"
 msgstr "Спутник"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1589
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1595
 msgid "Save predicted Iridium flares as..."
 msgstr "Сохранить прогнозируемые вспышки Иридиумов как..."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1635
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1637
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1641
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1643
 msgid "Predicted Iridium flares"
 msgstr "Предсказанные вспышки Иридиумов"
 
@@ -22423,6 +22393,7 @@ msgstr "во Франции"
 msgid "Pulsars is updated"
 msgstr "Пульсары обновляются"
 
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:328
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:329
 msgid "Pulsars Plug-in Configuration"
 msgstr "Настройка плагина \"Пульсары\""
