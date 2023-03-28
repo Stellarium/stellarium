@@ -22,6 +22,11 @@ This is checklist for maintainer of Stellarium (a release master)
 - [ ] Publish first release candidate (RC1)
 - [ ] Assign this issue to the milestone of upcoming release
 
+### Dependencies
+- [ ] Actualize CalcMySky/ShowMySky version
+- [ ] Actualize QXlsx version
+- [ ] Actualize INDI version
+
 ## Step 2: one week before release
 
 ### Core
