@@ -497,10 +497,11 @@ void HelpDialog::updateAboutText(void) const
 	typedef QPair<QString, int> donator;
 	QVector<donator> financialContributors = {
 		// Individuals
-		{ "Laurence Holt", 1000 }, { "Jeff Moe (Spacecruft)", 512 }, { "John Bellora", 470 }, { "Vernon Hermsen", 324 },
-		{ "Satish Mallesh", 260 }, { "Marla Pinaire", 260 }, { "Vlad Magdalin", 250  },
+		{ "Laurence Holt", 1000 }, { "John Bellora", 570 }, { "Jeff Moe (Spacecruft)", 512 }, { "Vernon Hermsen", 324 },
+		{ "Marla Pinaire", 320 }, { "Satish Mallesh", 260 }, { "Vlad Magdalin", 250  }, { "Philippe Renoux", 250 },
+		{ "Fito Martin", 250 },
 		// Organizations
-		{ "Astronomie-Werkstatt \"Sterne ohne Grenzen\"", 520 }, { "Triplebyte", 280 }
+		{ "Astronomie-Werkstatt \"Sterne ohne Grenzen\"", 580 }, { "Triplebyte", 280 }
 	};
 	std::sort(financialContributors.begin(), financialContributors.end(), [](donator i, donator j){ return i.second > j.second; });
 	QStringList bestFinancialContributors;

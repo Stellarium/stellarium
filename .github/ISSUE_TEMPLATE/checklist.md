@@ -48,6 +48,8 @@ This is checklist for maintainer of Stellarium (a release master)
 ### Core
 - [ ] Actualize the default list of locations
 - [ ] Actualize orbital elements for minor bodies of Solar system
+- [ ] Actualize the list of contributors
+- [ ] Actualize the list of financial supporters
 
 ### Plugins
 - [ ] Actualize the default list of satellites
