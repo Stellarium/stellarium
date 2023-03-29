@@ -19,6 +19,7 @@
 
 #include <QOpenGLFunctions_1_0>
 #include "StelApp.hpp"
+#include "StelSRGB.hpp"
 #include "StelCore.hpp"
 #include "StelFileMgr.hpp"
 #include "StelTexture.hpp"
@@ -3192,20 +3193,24 @@ bool Planet::initShader()
 	shaderError = false;
 
 	// Default planet shader program
-	planetShaderProgram = createShader("planetShaderProgram",planetShaderVars,vsrc,fsrc);
+	planetShaderProgram = createShader("planetShaderProgram",planetShaderVars,vsrc,
+									   makeSRGBUtilsShader()+fsrc);
 	// Planet with ring shader program
-	ringPlanetShaderProgram = createShader("ringPlanetShaderProgram",ringPlanetShaderVars,vsrc,fsrc,"#define RINGS_SUPPORT\n\n");
+	ringPlanetShaderProgram = createShader("ringPlanetShaderProgram",ringPlanetShaderVars,vsrc,
+										   makeSRGBUtilsShader()+fsrc,"#define RINGS_SUPPORT\n\n");
 	// Moon shader program
-	moonShaderProgram = createShader("moonShaderProgram",moonShaderVars,vsrc,fsrc,"#define IS_MOON\n\n");
+	moonShaderProgram = createShader("moonShaderProgram",moonShaderVars,vsrc,
+									 makeSRGBUtilsShader()+fsrc,"#define IS_MOON\n\n");
 	// OBJ model shader program
 	// we REQUIRE some fixed attribute locations here
 	QMap<QByteArray,int> attrLoc;
 	attrLoc.insert("unprojectedVertex", StelOpenGLArray::ATTLOC_VERTEX);
 	attrLoc.insert("texCoord", StelOpenGLArray::ATTLOC_TEXCOORD);
 	attrLoc.insert("normalIn", StelOpenGLArray::ATTLOC_NORMAL);
-	objShaderProgram = createShader("objShaderProgram",objShaderVars,vsrc,fsrc,"#define IS_OBJ\n\n",attrLoc);
+	objShaderProgram = createShader("objShaderProgram",objShaderVars,vsrc,
+									makeSRGBUtilsShader()+fsrc,"#define IS_OBJ\n\n",attrLoc);
 	//OBJ shader with shadowmap support
-	objShadowShaderProgram = createShader("objShadowShaderProgram",objShadowShaderVars,vsrc,fsrc,
+	objShadowShaderProgram = createShader("objShadowShaderProgram",objShadowShaderVars,vsrc,makeSRGBUtilsShader()+fsrc,
 					      "#define IS_OBJ\n"
 					      "#define SHADOWMAP\n"
 					      "#define SM_SIZE " STRINGIFY(SM_SIZE) "\n"
