@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2023-03-19 12:54+0700\n"
+"POT-Creation-Date: 2023-03-28 11:14+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: राजಐயர், 2023\n"
 "Language-Team: Hindi (https://www.transifex.com/stellarium/teams/80998/hi/)\n"
@@ -28,8 +28,8 @@ msgstr ""
 #: src/core/modules/CustomObject.cpp:81 src/core/modules/Asterism.cpp:194
 #: src/core/modules/Constellation.cpp:290
 #: src/core/modules/NomenclatureItem.cpp:224 src/core/modules/Nebula.cpp:264
-#: src/core/modules/Nebula.cpp:266 src/core/modules/Planet.cpp:569
-#: src/core/modules/Planet.cpp:572 src/core/modules/StarWrapper.cpp:49
+#: src/core/modules/Nebula.cpp:266 src/core/modules/Planet.cpp:570
+#: src/core/modules/Planet.cpp:573 src/core/modules/StarWrapper.cpp:49
 #: src/core/modules/StarWrapper.cpp:290 src/core/modules/StarWrapper.cpp:292
 #: src/gui/AstroCalcDialog.cpp:892 src/gui/AstroCalcDialog.cpp:2329
 #: src/gui/AstroCalcDialog.cpp:2966 src/gui/AstroCalcDialog.cpp:2998
@@ -72,7 +72,7 @@ msgstr "नक्षत्र"
 #: src/core/modules/ToastMgr.cpp:62 src/core/modules/HipsMgr.cpp:156
 #: src/core/StelApp.cpp:655 src/core/StelCore.cpp:291
 #: src/core/StelSkyLayerMgr.cpp:83 src/core/StelSkyLayerMgr.cpp:84
-#: src/StelMainView.cpp:938
+#: src/StelMainView.cpp:939
 msgid "Display Options"
 msgstr "प्रदर्शन विकल्प"
 
@@ -210,7 +210,7 @@ msgstr "प्रधान उर्ध्वरेखा"
 #: src/gui/AstroCalcDialog.cpp:2088 src/gui/AstroCalcDialog.cpp:2352
 #: src/gui/AstroCalcChart.cpp:80 src/gui/AstroCalcChart.cpp:417
 #: src/ui_viewDialog.h:3978 plugins/Satellites/src/Satellite.cpp:362
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1499
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1505
 msgid "Altitude"
 msgstr "उँचाई"
 
@@ -330,8 +330,8 @@ msgid "Antapex"
 msgstr "प्रतिशिखर"
 
 #. TRANSLATORS: Unit of measure for speed - kilometers per second
-#: src/core/modules/GridLinesMgr.cpp:1630 src/core/modules/Planet.cpp:693
-#: src/core/modules/Planet.cpp:1179 src/gui/AstroCalcDialog.cpp:9296
+#: src/core/modules/GridLinesMgr.cpp:1630 src/core/modules/Planet.cpp:694
+#: src/core/modules/Planet.cpp:1180 src/gui/AstroCalcDialog.cpp:9296
 #: plugins/Satellites/src/Satellite.cpp:360
 #: plugins/Satellites/src/Satellite.cpp:403
 #: plugins/MeteorShowers/src/MeteorShower.cpp:564
@@ -539,97 +539,97 @@ msgid "Compass marks"
 msgstr "दिशा सूचक चिह्न"
 
 #. TRANSLATORS: North
-#: src/core/modules/LandscapeMgr.cpp:272 src/core/modules/Planet.cpp:1301
+#: src/core/modules/LandscapeMgr.cpp:272 src/core/modules/Planet.cpp:1302
 msgctxt "compass direction"
 msgid "N"
 msgstr "उ॰"
 
 #. TRANSLATORS: South
-#: src/core/modules/LandscapeMgr.cpp:274 src/core/modules/Planet.cpp:1293
+#: src/core/modules/LandscapeMgr.cpp:274 src/core/modules/Planet.cpp:1294
 msgctxt "compass direction"
 msgid "S"
 msgstr "द॰"
 
 #. TRANSLATORS: East
-#: src/core/modules/LandscapeMgr.cpp:276 src/core/modules/Planet.cpp:1305
+#: src/core/modules/LandscapeMgr.cpp:276 src/core/modules/Planet.cpp:1306
 msgctxt "compass direction"
 msgid "E"
 msgstr "पू॰"
 
 #. TRANSLATORS: West
-#: src/core/modules/LandscapeMgr.cpp:278 src/core/modules/Planet.cpp:1297
+#: src/core/modules/LandscapeMgr.cpp:278 src/core/modules/Planet.cpp:1298
 msgctxt "compass direction"
 msgid "W"
 msgstr "प॰"
 
 #. TRANSLATORS: Northeast
-#: src/core/modules/LandscapeMgr.cpp:280 src/core/modules/Planet.cpp:1303
+#: src/core/modules/LandscapeMgr.cpp:280 src/core/modules/Planet.cpp:1304
 msgctxt "compass direction"
 msgid "NE"
 msgstr "उ॰पू॰"
 
 #. TRANSLATORS: Southeast
-#: src/core/modules/LandscapeMgr.cpp:282 src/core/modules/Planet.cpp:1307
+#: src/core/modules/LandscapeMgr.cpp:282 src/core/modules/Planet.cpp:1308
 msgctxt "compass direction"
 msgid "SE"
 msgstr "द॰पू॰"
 
 #. TRANSLATORS: Southwest
-#: src/core/modules/LandscapeMgr.cpp:284 src/core/modules/Planet.cpp:1295
+#: src/core/modules/LandscapeMgr.cpp:284 src/core/modules/Planet.cpp:1296
 msgctxt "compass direction"
 msgid "SW"
 msgstr "द॰प॰"
 
 #. TRANSLATORS: Northwest
-#: src/core/modules/LandscapeMgr.cpp:286 src/core/modules/Planet.cpp:1299
+#: src/core/modules/LandscapeMgr.cpp:286 src/core/modules/Planet.cpp:1300
 msgctxt "compass direction"
 msgid "NW"
 msgstr "उ॰प॰"
 
 #. TRANSLATORS: North-northeast
-#: src/core/modules/LandscapeMgr.cpp:288 src/core/modules/Planet.cpp:1302
+#: src/core/modules/LandscapeMgr.cpp:288 src/core/modules/Planet.cpp:1303
 msgctxt "compass direction"
 msgid "NNE"
 msgstr "उ॰उ॰पू॰"
 
 #. TRANSLATORS: East-northeast
-#: src/core/modules/LandscapeMgr.cpp:290 src/core/modules/Planet.cpp:1304
+#: src/core/modules/LandscapeMgr.cpp:290 src/core/modules/Planet.cpp:1305
 msgctxt "compass direction"
 msgid "ENE"
 msgstr "पू॰उ॰पू॰"
 
 #. TRANSLATORS: East-southeast
-#: src/core/modules/LandscapeMgr.cpp:292 src/core/modules/Planet.cpp:1306
+#: src/core/modules/LandscapeMgr.cpp:292 src/core/modules/Planet.cpp:1307
 msgctxt "compass direction"
 msgid "ESE"
 msgstr "पू॰द॰पू॰"
 
 #. TRANSLATORS: South-southeast
-#: src/core/modules/LandscapeMgr.cpp:294 src/core/modules/Planet.cpp:1308
+#: src/core/modules/LandscapeMgr.cpp:294 src/core/modules/Planet.cpp:1309
 msgctxt "compass direction"
 msgid "SSE"
 msgstr "द॰द॰पू॰"
 
 #. TRANSLATORS: South-southwest
-#: src/core/modules/LandscapeMgr.cpp:296 src/core/modules/Planet.cpp:1294
+#: src/core/modules/LandscapeMgr.cpp:296 src/core/modules/Planet.cpp:1295
 msgctxt "compass direction"
 msgid "SSW"
 msgstr "द॰द॰प॰"
 
 #. TRANSLATORS: West-southwest
-#: src/core/modules/LandscapeMgr.cpp:298 src/core/modules/Planet.cpp:1296
+#: src/core/modules/LandscapeMgr.cpp:298 src/core/modules/Planet.cpp:1297
 msgctxt "compass direction"
 msgid "WSW"
 msgstr "प॰द॰प॰"
 
 #. TRANSLATORS: West-northwest
-#: src/core/modules/LandscapeMgr.cpp:300 src/core/modules/Planet.cpp:1298
+#: src/core/modules/LandscapeMgr.cpp:300 src/core/modules/Planet.cpp:1299
 msgctxt "compass direction"
 msgid "WNW"
 msgstr "प॰उ॰प॰"
 
 #. TRANSLATORS: North-northwest
-#: src/core/modules/LandscapeMgr.cpp:302 src/core/modules/Planet.cpp:1300
+#: src/core/modules/LandscapeMgr.cpp:302 src/core/modules/Planet.cpp:1301
 msgctxt "compass direction"
 msgid "NNW"
 msgstr "उ॰उ॰प॰"
@@ -809,7 +809,7 @@ msgstr "प्राकाशिक प्रदूषण घटाएँ"
 msgid "Cyclic change in light pollution"
 msgstr "चक्रीय परिवर्तन प्रकाशीय प्रदूषण में"
 
-#: src/core/modules/LandscapeMgr.cpp:1321 src/scripting/StelScriptMgr.cpp:644
+#: src/core/modules/LandscapeMgr.cpp:1321 src/scripting/StelScriptMgr.cpp:647
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:101
 #: plugins/Oculars/src/gui/OcularDialog.cpp:627
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:238
@@ -832,7 +832,7 @@ msgstr "रचयिता"
 #. TRANSLATORS: Unit of measure for distance - meter
 #: src/core/modules/LandscapeMgr.cpp:1327 src/gui/StelGuiItems.cpp:872
 #: plugins/Satellites/src/Satellite.cpp:433
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1145
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1151
 #: plugins/Satellites/src/gui/SatellitesFilterDialog.cpp:134
 msgctxt "distance"
 msgid "m"
@@ -840,7 +840,6 @@ msgstr "मी॰"
 
 #: src/core/modules/LandscapeMgr.cpp:1330 src/gui/ObsListDialog.cpp:266
 #: src/ui_locationDialogGui.h:470 src/ui_obsListDialog.h:414
-#: src/ui_obsListCreateEditDialog.h:329
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:144
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:490
 msgid "Location"
@@ -921,20 +920,20 @@ msgstr "भौगोलिक नाम"
 msgid "Linear size"
 msgstr "रेखीय आकार"
 
-#: src/core/modules/NomenclatureItem.cpp:239 src/core/modules/Planet.cpp:776
+#: src/core/modules/NomenclatureItem.cpp:239 src/core/modules/Planet.cpp:777
 msgid "Diameter"
 msgstr "व्यास"
 
 #. TRANSLATORS: Unit of measure for distance - kilometers
-#: src/core/modules/NomenclatureItem.cpp:240 src/core/modules/Planet.cpp:649
-#: src/core/modules/Planet.cpp:674 src/core/modules/Planet.cpp:777
-#: src/core/modules/Planet.cpp:1495 src/core/modules/Comet.cpp:157
+#: src/core/modules/NomenclatureItem.cpp:240 src/core/modules/Planet.cpp:650
+#: src/core/modules/Planet.cpp:675 src/core/modules/Planet.cpp:778
+#: src/core/modules/Planet.cpp:1496 src/core/modules/Comet.cpp:157
 #: src/core/modules/Comet.cpp:167 src/gui/StelGuiItems.cpp:900
 #: src/gui/AstroCalcDialog.cpp:3202 src/gui/AstroCalcDialog.cpp:3717
 #: src/gui/AstroCalcDialog.cpp:9231 plugins/Satellites/src/Satellites.cpp:2914
 #: plugins/Satellites/src/Satellite.cpp:356
 #: plugins/Satellites/src/Satellite.cpp:399
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1154
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1160
 #: plugins/Satellites/src/gui/SatellitesFilterDialog.cpp:133
 msgctxt "distance"
 msgid "km"
@@ -1829,17 +1828,17 @@ msgstr "द्वारा"
 msgid "Airmasses"
 msgstr "वायुखण्ड"
 
-#: src/core/modules/Nebula.cpp:251 src/core/modules/Planet.cpp:552
+#: src/core/modules/Nebula.cpp:251 src/core/modules/Planet.cpp:553
 #: src/core/modules/StarWrapper.cpp:276
 msgid "Additional names: "
 msgstr "अतिरिक्त नाम : "
 
-#: src/core/modules/Nebula.cpp:257 src/core/modules/Planet.cpp:559
+#: src/core/modules/Nebula.cpp:257 src/core/modules/Planet.cpp:560
 #: src/core/modules/StarWrapper.cpp:282
 msgid "Additional catalog numbers: "
 msgstr "अतिरिक्त सूचीपत्र संख्या : "
 
-#: src/core/modules/Nebula.cpp:275 src/core/modules/Planet.cpp:787
+#: src/core/modules/Nebula.cpp:275 src/core/modules/Planet.cpp:788
 #: src/core/modules/MinorPlanet.cpp:174 src/core/modules/StarWrapper.cpp:54
 #: src/core/modules/StarWrapper.cpp:306 plugins/Quasars/src/Quasar.cpp:134
 msgid "Color Index (B-V)"
@@ -1893,7 +1892,7 @@ msgstr "प्र॰व॰"
 
 #. TRANSLATORS: distance
 #: src/core/modules/Nebula.cpp:361 src/core/modules/Nebula.cpp:407
-#: src/core/modules/Planet.cpp:684 src/core/modules/StarWrapper.cpp:341
+#: src/core/modules/Planet.cpp:685 src/core/modules/StarWrapper.cpp:341
 #: src/core/modules/StarWrapper.cpp:343 src/gui/AstroCalcDialog.cpp:927
 #: src/gui/AstroCalcChart.cpp:92 src/gui/AstroCalcChart.cpp:102
 #: src/gui/AstroCalcChart.cpp:427 src/gui/AstroCalcChart.cpp:453
@@ -2236,7 +2235,7 @@ msgid "Toggle DSO type filter"
 msgstr "गहनाकाश प्रकार छलनी पलटें"
 
 #: src/core/modules/NebulaMgr.cpp:1448 src/gui/StelDialog.cpp:336
-#: src/StelMainView.cpp:1034
+#: src/StelMainView.cpp:1035
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:773
 msgid "Attention!"
 msgstr "सावधान।"
@@ -2318,44 +2317,44 @@ msgstr "सेडनामय ग्रहखण्ड"
 msgid "interstellar object"
 msgstr "तारान्तर वस्तु"
 
-#: src/core/modules/Planet.cpp:530 src/core/modules/Comet.cpp:148
+#: src/core/modules/Planet.cpp:531 src/core/modules/Comet.cpp:148
 #: src/core/modules/StarWrapper.cpp:300 plugins/Quasars/src/Quasar.cpp:131
 msgid "Absolute Magnitude"
 msgstr "निरपेक्ष मात्रा"
 
-#: src/core/modules/Planet.cpp:533
+#: src/core/modules/Planet.cpp:534
 msgid "Mean Opposition Magnitude"
 msgstr "मध्यमान विपक्षता मात्रा"
 
-#: src/core/modules/Planet.cpp:567
+#: src/core/modules/Planet.cpp:568
 msgctxt "type of comet"
 msgid "periodic"
 msgstr "आवधिक"
 
-#: src/core/modules/Planet.cpp:568
+#: src/core/modules/Planet.cpp:569
 msgctxt "type of comet"
 msgid "non-periodic"
 msgstr "अनावधिक"
 
 #. TRANSLATORS: Ecliptical rectangular coordinates
-#: src/core/modules/Planet.cpp:624 src/core/modules/Planet.cpp:626
+#: src/core/modules/Planet.cpp:625 src/core/modules/Planet.cpp:627
 msgctxt "coordinates"
 msgid "Ecliptical"
 msgstr "क्रान्तिवृत्त"
 
-#: src/core/modules/Planet.cpp:635 src/core/modules/Planet.cpp:636
+#: src/core/modules/Planet.cpp:636 src/core/modules/Planet.cpp:637
 msgid "Hourly motion"
 msgstr "घण्टेवार गति"
 
-#: src/core/modules/Planet.cpp:635 src/core/modules/Planet.cpp:1354
-#: src/core/modules/Planet.cpp:1363 src/core/modules/StarWrapper.cpp:358
+#: src/core/modules/Planet.cpp:636 src/core/modules/Planet.cpp:1355
+#: src/core/modules/Planet.cpp:1364 src/core/modules/StarWrapper.cpp:358
 #: plugins/Pulsars/src/Pulsar.cpp:204
 msgctxt "into the direction of"
 msgid "towards"
 msgstr "की ओर"
 
 #. TRANSLATORS: Unit of measure for distance - astronomical unit
-#: src/core/modules/Planet.cpp:647 src/gui/AstroCalcDialog.cpp:873
+#: src/core/modules/Planet.cpp:648 src/gui/AstroCalcDialog.cpp:873
 #: src/gui/AstroCalcDialog.cpp:1184 src/gui/AstroCalcDialog.cpp:1473
 #: src/gui/AstroCalcDialog.cpp:1758 src/gui/AstroCalcDialog.cpp:1817
 #: src/gui/AstroCalcDialog.cpp:9256 src/gui/AstroCalcChart.cpp:427
@@ -2370,257 +2369,257 @@ msgstr "ज्यो॰मा॰"
 #. TRANSLATORS: Unit of measure for distance - millions of kilometers
 #. TRANSLATORS: Unit of measure for distance - milliones kilometers
 #. TRANSLATORS: Unit of measure for distance - millions kilometers
-#: src/core/modules/Planet.cpp:663 src/core/modules/Planet.cpp:681
+#: src/core/modules/Planet.cpp:664 src/core/modules/Planet.cpp:682
 #: src/core/modules/Comet.cpp:159 src/gui/AstroCalcDialog.cpp:9233
 msgctxt "distance"
 msgid "M km"
 msgstr "प्र॰स॰मे॰"
 
-#: src/core/modules/Planet.cpp:666
+#: src/core/modules/Planet.cpp:667
 msgid "Distance from Sun"
 msgstr "सूर्य से दूरी"
 
 #. TRANSLATORS: Distance measured in terms of the speed of light
-#: src/core/modules/Planet.cpp:686
+#: src/core/modules/Planet.cpp:687
 msgid "Light time"
 msgstr "प्रकाश यात्रासमय"
 
-#: src/core/modules/Planet.cpp:700
+#: src/core/modules/Planet.cpp:701
 msgid "Orbital velocity"
 msgstr "कक्षीय वेग"
 
-#: src/core/modules/Planet.cpp:703
+#: src/core/modules/Planet.cpp:704
 msgid "Heliocentric velocity"
 msgstr "सूर्यमध्यमान वेग"
 
-#: src/core/modules/Planet.cpp:713
+#: src/core/modules/Planet.cpp:714
 msgid "NOTE: orbital elements outdated -- consider updating!"
 msgstr "ध्यातव्य। ग्रहपथीय तत्व पुराना हो चुके। नवीकरण का विचार करें।"
 
-#: src/core/modules/Planet.cpp:744
+#: src/core/modules/Planet.cpp:745
 msgid "with rings"
 msgstr "वलय युक्त"
 
-#: src/core/modules/Planet.cpp:761
+#: src/core/modules/Planet.cpp:762
 msgid "scaled up to"
 msgstr "मानदण्ड गुणांक"
 
-#: src/core/modules/Planet.cpp:771
+#: src/core/modules/Planet.cpp:772
 msgid "Apparent diameter"
 msgstr "प्रतीयमान व्यास"
 
-#: src/core/modules/Planet.cpp:776
+#: src/core/modules/Planet.cpp:777
 msgid "Equatorial diameter"
 msgstr "भूमध्यरेखा व्यास"
 
-#: src/core/modules/Planet.cpp:840 src/core/modules/Planet.cpp:841
-#: src/core/modules/Planet.cpp:849 src/gui/AstroCalcChart.cpp:93
+#: src/core/modules/Planet.cpp:841 src/core/modules/Planet.cpp:842
+#: src/core/modules/Planet.cpp:850 src/gui/AstroCalcChart.cpp:93
 #: src/gui/AstroCalcChart.cpp:103 src/gui/AstroCalcChart.cpp:429
 #: src/gui/AstroCalcChart.cpp:455 src/ui_configurationDialog.h:1893
 msgid "Elongation"
 msgstr "दीर्घकरण"
 
-#: src/core/modules/Planet.cpp:842 src/core/modules/Planet.cpp:851
+#: src/core/modules/Planet.cpp:843 src/core/modules/Planet.cpp:852
 #: src/gui/AstroCalcChart.cpp:96 src/gui/AstroCalcChart.cpp:106
 #: src/gui/AstroCalcChart.cpp:438 src/gui/AstroCalcChart.cpp:464
 #: plugins/Satellites/src/Satellite.cpp:408
 msgid "Phase angle"
 msgstr "चरण अस्र"
 
-#: src/core/modules/Planet.cpp:844 src/core/modules/Planet.cpp:853
+#: src/core/modules/Planet.cpp:845 src/core/modules/Planet.cpp:854
 msgid "Illuminated"
 msgstr "प्रकाशित"
 
-#: src/core/modules/Planet.cpp:850
+#: src/core/modules/Planet.cpp:851
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:323
 msgid "Elong. in Ecl.Long."
 msgstr "दी॰क्रा॰दे॰"
 
-#: src/core/modules/Planet.cpp:865 src/gui/AstroCalcDialog.cpp:9466
+#: src/core/modules/Planet.cpp:866 src/gui/AstroCalcDialog.cpp:9466
 #: src/gui/AstroCalcChart.cpp:472
 msgid "Angular distance"
 msgstr "अस्रीय दूरी"
 
 #. TRANSLATORS: Unit of measure for period - days
-#: src/core/modules/Planet.cpp:883 src/core/modules/StarWrapper.cpp:382
+#: src/core/modules/Planet.cpp:884 src/core/modules/StarWrapper.cpp:382
 #: src/gui/AstroCalcDialog.cpp:9267
 msgctxt "duration"
 msgid "days"
 msgstr "दिन"
 
-#: src/core/modules/Planet.cpp:892
+#: src/core/modules/Planet.cpp:893
 msgid "Sidereal period"
 msgstr "नक्षत्रमान अवधि"
 
-#: src/core/modules/Planet.cpp:901
+#: src/core/modules/Planet.cpp:902
 msgid "Synodic period"
 msgstr "चन्द्रकला अवधि"
 
 #. TRANSLATORS: Unit of measure for speed - meters per second
-#: src/core/modules/Planet.cpp:1181
+#: src/core/modules/Planet.cpp:1182
 msgctxt "speed"
 msgid "m/s"
 msgstr "मे॰प्र॰से॰"
 
-#: src/core/modules/Planet.cpp:1196
+#: src/core/modules/Planet.cpp:1197
 msgid "Sidereal day"
 msgstr "नक्षत्रमान दिन"
 
-#: src/core/modules/Planet.cpp:1198
+#: src/core/modules/Planet.cpp:1199
 msgid "Mean solar day"
 msgstr "मध्यमान सौर दिन"
 
-#: src/core/modules/Planet.cpp:1204
+#: src/core/modules/Planet.cpp:1205
 msgid "The period of rotation is chaotic"
 msgstr "घुमाव की अवधि अनियमित"
 
-#: src/core/modules/Planet.cpp:1210 src/core/modules/Planet.cpp:1212
-#: src/core/modules/Planet.cpp:1218 src/core/modules/Planet.cpp:1220
+#: src/core/modules/Planet.cpp:1211 src/core/modules/Planet.cpp:1213
+#: src/core/modules/Planet.cpp:1219 src/core/modules/Planet.cpp:1221
 msgid "Equatorial rotation velocity"
 msgstr "भूमध्यरेखा घुमाव वेग"
 
-#: src/core/modules/Planet.cpp:1244 src/core/modules/Planet.cpp:1634
+#: src/core/modules/Planet.cpp:1245 src/core/modules/Planet.cpp:1635
 msgctxt "Moon phase"
 msgid "New Moon"
 msgstr "अमावस्या"
 
-#: src/core/modules/Planet.cpp:1246 src/core/modules/Planet.cpp:1636
+#: src/core/modules/Planet.cpp:1247 src/core/modules/Planet.cpp:1637
 msgctxt "Moon phase"
 msgid "Waxing Crescent"
 msgstr "शुक्लपक्ष पूर्वार्द्ध"
 
-#: src/core/modules/Planet.cpp:1248 src/core/modules/Planet.cpp:1638
+#: src/core/modules/Planet.cpp:1249 src/core/modules/Planet.cpp:1639
 msgctxt "Moon phase"
 msgid "First Quarter"
 msgstr "प्रथम चौथाई"
 
-#: src/core/modules/Planet.cpp:1250 src/core/modules/Planet.cpp:1640
+#: src/core/modules/Planet.cpp:1251 src/core/modules/Planet.cpp:1641
 msgctxt "Moon phase"
 msgid "Waxing Gibbous"
 msgstr "शुक्लपक्ष परार्द्ध"
 
-#: src/core/modules/Planet.cpp:1252 src/core/modules/Planet.cpp:1642
+#: src/core/modules/Planet.cpp:1253 src/core/modules/Planet.cpp:1643
 msgctxt "Moon phase"
 msgid "Full Moon"
 msgstr "पूर्णिमा"
 
-#: src/core/modules/Planet.cpp:1254 src/core/modules/Planet.cpp:1644
+#: src/core/modules/Planet.cpp:1255 src/core/modules/Planet.cpp:1645
 msgctxt "Moon phase"
 msgid "Waning Gibbous"
 msgstr "कृष्णपक्ष पूर्वार्द्ध"
 
-#: src/core/modules/Planet.cpp:1256 src/core/modules/Planet.cpp:1646
+#: src/core/modules/Planet.cpp:1257 src/core/modules/Planet.cpp:1647
 msgctxt "Moon phase"
 msgid "Third Quarter"
 msgstr "तृतीय चौथाई"
 
-#: src/core/modules/Planet.cpp:1258 src/core/modules/Planet.cpp:1648
+#: src/core/modules/Planet.cpp:1259 src/core/modules/Planet.cpp:1649
 msgctxt "Moon phase"
 msgid "Waning Crescent"
 msgstr "कृष्णपक्ष परार्द्ध"
 
-#: src/core/modules/Planet.cpp:1266
+#: src/core/modules/Planet.cpp:1267
 msgid "Moon age"
 msgstr "चन्द्रमा आयु"
 
-#: src/core/modules/Planet.cpp:1266
+#: src/core/modules/Planet.cpp:1267
 msgid "days old"
 msgstr "दिन पुराना"
 
-#: src/core/modules/Planet.cpp:1286 src/core/modules/Planet.cpp:1289
+#: src/core/modules/Planet.cpp:1287 src/core/modules/Planet.cpp:1290
 msgid "Position angle of bright limb"
 msgstr "स्थान अस्र उज्ज्वल अंग का"
 
-#: src/core/modules/Planet.cpp:1353 src/core/modules/Planet.cpp:1362
-#: src/core/modules/Planet.cpp:1398 src/core/modules/Planet.cpp:1405
+#: src/core/modules/Planet.cpp:1354 src/core/modules/Planet.cpp:1363
+#: src/core/modules/Planet.cpp:1399 src/core/modules/Planet.cpp:1406
 msgid "Position Angle of axis"
 msgstr "स्थान अस्र अक्ष का"
 
-#: src/core/modules/Planet.cpp:1354 src/core/modules/Planet.cpp:1355
-#: src/core/modules/Planet.cpp:1363 src/core/modules/Planet.cpp:1364
+#: src/core/modules/Planet.cpp:1355 src/core/modules/Planet.cpp:1356
+#: src/core/modules/Planet.cpp:1364 src/core/modules/Planet.cpp:1365
 msgid "Libration"
 msgstr "लडखडाना"
 
-#: src/core/modules/Planet.cpp:1356 src/core/modules/Planet.cpp:1365
-#: src/core/modules/Planet.cpp:1400 src/core/modules/Planet.cpp:1407
+#: src/core/modules/Planet.cpp:1357 src/core/modules/Planet.cpp:1366
+#: src/core/modules/Planet.cpp:1401 src/core/modules/Planet.cpp:1408
 msgid "Subsolar point"
 msgstr "उपसौर बिन्दु"
 
-#: src/core/modules/Planet.cpp:1357 src/core/modules/Planet.cpp:1366
+#: src/core/modules/Planet.cpp:1358 src/core/modules/Planet.cpp:1367
 msgid "Colongitude"
 msgstr "सदेशान्तर"
 
-#: src/core/modules/Planet.cpp:1399 src/core/modules/Planet.cpp:1406
+#: src/core/modules/Planet.cpp:1400 src/core/modules/Planet.cpp:1407
 msgid "Center point"
 msgstr "मध्य बिन्दु"
 
-#: src/core/modules/Planet.cpp:1426
+#: src/core/modules/Planet.cpp:1427
 msgid "Eclipse magnitude"
 msgstr "ग्रहण अम्श मात्रा"
 
-#: src/core/modules/Planet.cpp:1428
+#: src/core/modules/Planet.cpp:1429
 msgid "Eclipse obscuration"
 msgstr "ग्रहण आवृत"
 
-#: src/core/modules/Planet.cpp:1454
+#: src/core/modules/Planet.cpp:1455
 msgid "Moon/Sun diameter ratio"
 msgstr "चन्द्र सूर्य व्यास अनुपात"
 
-#: src/core/modules/Planet.cpp:1457
+#: src/core/modules/Planet.cpp:1458
 msgctxt "type of solar eclipse"
 msgid "(annular)"
 msgstr "( वलयाकार )"
 
-#: src/core/modules/Planet.cpp:1459
+#: src/core/modules/Planet.cpp:1460
 msgctxt "type of solar eclipse"
 msgid "(total)"
 msgstr "( पूर्ण )"
 
-#: src/core/modules/Planet.cpp:1470
+#: src/core/modules/Planet.cpp:1471
 msgid "Central eclipse duration"
 msgstr "मध्य ग्रहण अवधि"
 
 #. TRANSLATORS: Short for "minutes".
-#: src/core/modules/Planet.cpp:1472
+#: src/core/modules/Planet.cpp:1473
 #: plugins/Observability/src/Observability.cpp:153
 msgid "m"
 msgstr "मि॰"
 
 #. TRANSLATORS: Short for "seconds".
-#: src/core/modules/Planet.cpp:1474
+#: src/core/modules/Planet.cpp:1475
 #: plugins/Observability/src/Observability.cpp:155
 msgid "s"
 msgstr "से॰"
 
-#: src/core/modules/Planet.cpp:1475
+#: src/core/modules/Planet.cpp:1476
 msgid "Center of solar eclipse (Lat./Long.)"
 msgstr "सूर्यग्रहण मध्य ( अक्ष॰/देश॰ )"
 
-#: src/core/modules/Planet.cpp:1485
+#: src/core/modules/Planet.cpp:1486
 msgid "Shadow center point is"
 msgstr "छाया मध्य बिन्दु यह है"
 
-#: src/core/modules/Planet.cpp:1487
+#: src/core/modules/Planet.cpp:1488
 msgid "km towards azimuth"
 msgstr "स॰मे॰ दिगम्श की ओर"
 
-#: src/core/modules/Planet.cpp:1490
+#: src/core/modules/Planet.cpp:1491
 msgid "Width of antumbra"
 msgstr "चौडाई अन्तःछाया की"
 
-#: src/core/modules/Planet.cpp:1492
+#: src/core/modules/Planet.cpp:1493
 msgid "Width of umbra"
 msgstr "चौडाई छाया की"
 
-#: src/core/modules/Planet.cpp:1509
+#: src/core/modules/Planet.cpp:1510
 msgid "Penumbral eclipse magnitude"
 msgstr "अम्शछाया ग्रहण मात्रा"
 
-#: src/core/modules/Planet.cpp:1512
+#: src/core/modules/Planet.cpp:1513
 msgid "Umbral eclipse magnitude"
 msgstr "छाया ग्रहण मात्रा"
 
-#: src/core/modules/Planet.cpp:1519
+#: src/core/modules/Planet.cpp:1520
 msgid "Albedo"
 msgstr "प्रतिबिम्बन"
 
@@ -4319,10 +4318,10 @@ msgstr ""
 "मुक्ततः अनुकरण वितरण तथा परिवर्तन करने की।"
 
 #: src/core/StelSkyCultureMgr.cpp:289 src/gui/ConfigurationDialog.cpp:1317
-#: src/scripting/StelScriptMgr.cpp:649
+#: src/scripting/StelScriptMgr.cpp:652
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:100
 #: plugins/Oculars/src/gui/OcularDialog.cpp:626
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:778
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:784
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:257
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:237
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:116
@@ -4375,7 +4374,7 @@ msgid "References / Further Reading"
 msgstr "शोधपत्रसंकेतक सूची / अधिक पढने के लिए"
 
 #: src/core/StelMovementMgr.cpp:194 src/gui/StelGui.cpp:220
-#: src/StelMainView.cpp:936 src/StelMainView.cpp:937
+#: src/StelMainView.cpp:937 src/StelMainView.cpp:938
 msgid "Miscellaneous"
 msgstr "विविध"
 
@@ -4797,7 +4796,7 @@ msgid "Acknowledgments"
 msgstr "आभार"
 
 #: src/gui/ConfigurationDialog.cpp:1313
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:779
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:785
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:258
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:275
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:138
@@ -4810,10 +4809,10 @@ msgid "Contact"
 msgstr "सम्पर्क करें"
 
 #: src/gui/ConfigurationDialog.cpp:1316 src/gui/HelpDialog.cpp:517
-#: src/scripting/StelScriptMgr.cpp:654
+#: src/scripting/StelScriptMgr.cpp:657
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:99
 #: plugins/Oculars/src/gui/OcularDialog.cpp:625
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:777
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:783
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:256
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:236
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:115
@@ -5283,19 +5282,19 @@ msgstr ""
 "ये सभी कुंजीक्रमें स्थानीय रूप से उपलब्ध है चलाने के लिए जब विशिष्ट खिडकी "
 "अथवा क्रमसूचक खोले जाएँ।"
 
-#: src/gui/HelpDialog.cpp:407 src/ui_scriptConsole.h:381
+#: src/gui/HelpDialog.cpp:407 src/ui_scriptConsole.h:393
 msgid "Script console"
 msgstr "क्रमादेश अंतक"
 
-#: src/gui/HelpDialog.cpp:408 src/ui_scriptConsole.h:384
+#: src/gui/HelpDialog.cpp:408 src/ui_scriptConsole.h:396
 msgid "Load script from file"
 msgstr "क्रमादेश को अभिलेख से लें"
 
-#: src/gui/HelpDialog.cpp:410 src/ui_scriptConsole.h:388
+#: src/gui/HelpDialog.cpp:410 src/ui_scriptConsole.h:400
 msgid "Save script to file"
 msgstr "क्रमादेश अभिलेख में लिखें"
 
-#: src/gui/HelpDialog.cpp:412 src/ui_scriptConsole.h:406
+#: src/gui/HelpDialog.cpp:412 src/ui_scriptConsole.h:418
 msgid "Run script"
 msgstr "क्रमादेश चलाएँ"
 
@@ -5452,7 +5451,7 @@ msgstr "ओ॰एस॰एक्स॰ विकासकर्ता : %1"
 #: src/gui/HelpDialog.cpp:566
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:102
 #: plugins/Oculars/src/gui/OcularDialog.cpp:628
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:781
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:787
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:263
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:239
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:140
@@ -6070,51 +6069,51 @@ msgctxt "command"
 msgid "clear map: supergalactic"
 msgstr "स्पष्ट मानचित्र : तारासंगम संग्रह"
 
-#: src/gui/ScriptConsole.cpp:181 src/gui/ScriptConsole.cpp:256
+#: src/gui/ScriptConsole.cpp:188 src/gui/ScriptConsole.cpp:263
 msgid "Caution!"
 msgstr "सावधान।"
 
-#: src/gui/ScriptConsole.cpp:181
+#: src/gui/ScriptConsole.cpp:188
 msgid "Are you sure you want to load script without saving changes?"
 msgstr "क्या आप परिवर्तनों को अभिलिखित किये बिना क्रमादेश ले आना चाहते हैं।"
 
-#: src/gui/ScriptConsole.cpp:195
+#: src/gui/ScriptConsole.cpp:202
 msgid "Stellarium Script Files"
 msgstr "स्टेल्लारियम क्रमादेश अभिलेख"
 
-#: src/gui/ScriptConsole.cpp:198
+#: src/gui/ScriptConsole.cpp:205
 msgid "Load Script"
 msgstr "क्रमादेश ले आएँ"
 
-#: src/gui/ScriptConsole.cpp:219 src/gui/ScriptConsole.cpp:418
+#: src/gui/ScriptConsole.cpp:226 src/gui/ScriptConsole.cpp:425
 msgid "Stellarium Script"
 msgstr "स्टेल्लारियम क्रमादेश"
 
-#: src/gui/ScriptConsole.cpp:224
+#: src/gui/ScriptConsole.cpp:231
 msgid "Save Script"
 msgstr "क्रमादेश अभिलिखित करें"
 
-#: src/gui/ScriptConsole.cpp:256
+#: src/gui/ScriptConsole.cpp:263
 msgid "Are you sure you want to clear script?"
 msgstr "क्या आप निश्चित हैं कि क्रमादेश रिक्त करें।"
 
-#: src/gui/ScriptConsole.cpp:366
+#: src/gui/ScriptConsole.cpp:373
 msgid "Select Script Include Directory"
 msgstr "चयन करें क्रमादेश समावेशित अभिलेखकोश"
 
 #. TRANSLATORS: The first letter of word "Row"
-#: src/gui/ScriptConsole.cpp:400
+#: src/gui/ScriptConsole.cpp:407
 msgctxt "text cursor"
 msgid "R"
 msgstr "पं॰"
 
 #. TRANSLATORS: The first letter of word "Column"
-#: src/gui/ScriptConsole.cpp:402
+#: src/gui/ScriptConsole.cpp:409
 msgctxt "text cursor"
 msgid "C"
 msgstr "स्त॰"
 
-#: src/gui/ScriptConsole.cpp:420
+#: src/gui/ScriptConsole.cpp:427
 msgid "Include File"
 msgstr "समावेश अभिलेख"
 
@@ -6168,7 +6167,7 @@ msgstr "झुकाव"
 #: src/gui/SearchDialog.cpp:307 src/gui/AstroCalcDialog.cpp:837
 #: src/gui/AstroCalcDialog.cpp:1742 src/gui/AstroCalcDialog.cpp:2353
 #: src/gui/AstroCalcChart.cpp:88 src/gui/AstroCalcChart.cpp:419
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1500
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1506
 msgid "Azimuth"
 msgstr "दिगम्श"
 
@@ -6277,7 +6276,7 @@ msgid "Valid range years:"
 msgstr "वैध वर्ष विस्तार : "
 
 #: src/gui/AstroCalcDialog.cpp:616
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1144
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1150
 #: plugins/Satellites/src/gui/SatellitesFilterDialog.cpp:136
 msgid "Valid range"
 msgstr "वैध विस्तार"
@@ -6789,7 +6788,6 @@ msgstr "अवधि पूर्णता अथवा वलयता की �
 
 #: src/gui/AstroCalcDialog.cpp:3384 src/gui/AstroCalcChart.cpp:378
 #: src/gui/ObsListDialog.cpp:265 src/ui_obsListDialog.h:410
-#: src/ui_obsListCreateEditDialog.h:325
 msgid "Date"
 msgstr "दिनांक"
 
@@ -7439,8 +7437,8 @@ msgstr "झुकाव प्र॰ समय"
 #. TRANSLATORS: hours.
 #: src/gui/AstroCalcDialog.cpp:6484 src/gui/AstroCalcChart.cpp:442
 #: src/gui/AstroCalcChart.cpp:468
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:877
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1152
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:883
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1158
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:173
 #: plugins/Novae/src/gui/NovaeDialog.cpp:168
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:165
@@ -7831,12 +7829,12 @@ msgid "Angular distance between the Moon and celestial object"
 msgstr "अस्रीय दूरी चन्द्रमा तथा खगोलीय वस्तु के बीच"
 
 #: src/gui/AstroCalcDialog.cpp:9616
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1575
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1581
 msgid "CSV (Comma delimited)"
 msgstr "सी॰एस॰वी ( अल्पविराम चिह्न सीमांकित )"
 
 #: src/gui/AstroCalcDialog.cpp:9617
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1576
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1582
 msgid "Microsoft Excel Open XML Spreadsheet"
 msgstr "मैक्रोसोफ्ट एक्सेल ओपन एक्स॰एम॰एल॰ फलकपत्र"
 
@@ -8026,7 +8024,7 @@ msgid "Constellation"
 msgstr "तारामण्डल"
 
 #: src/gui/ObsListDialog.cpp:267 src/ui_viewDialog.h:3538
-#: src/ui_obsListDialog.h:418 src/ui_obsListCreateEditDialog.h:333
+#: src/ui_obsListDialog.h:418
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:480
 msgid "Landscape"
 msgstr "भूदृश्य"
@@ -8180,28 +8178,28 @@ msgstr ""
 "बोर्टिल वर्ग %1 : %2\n"
 "नंगी आँख मात्रा सीमा : %3"
 
-#: src/scripting/StelScriptMgr.cpp:518 src/ui_configurationDialog.h:1767
+#: src/scripting/StelScriptMgr.cpp:521 src/ui_configurationDialog.h:1767
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:533
 msgid "Scripts"
 msgstr "क्रमादेश"
 
-#: src/scripting/StelScriptMgr.cpp:659
+#: src/scripting/StelScriptMgr.cpp:662
 msgid "Shortcut"
 msgstr "छोटामार्ग"
 
-#: src/StelMainView.cpp:936
+#: src/StelMainView.cpp:937
 msgid "Save screenshot"
 msgstr "पटलचित्र अभिलिखित करें"
 
-#: src/StelMainView.cpp:937
+#: src/StelMainView.cpp:938
 msgid "Reload shaders (for development)"
 msgstr "छायाकर्ता पुनर्भरण करें ( विकास के लिए )"
 
-#: src/StelMainView.cpp:938
+#: src/StelMainView.cpp:939
 msgid "Full-screen mode"
 msgstr "पूर्ण पटल शैली"
 
-#: src/StelMainView.cpp:1034
+#: src/StelMainView.cpp:1035
 msgid ""
 "Shortcuts have conflicts! Please press F7 after program startup and check "
 "following multiple assignments"
@@ -8209,7 +8207,7 @@ msgstr ""
 "छोटेमार्गों में टकराव हैं। कृपया एफ 7 टाँकें क्रम आरम्भ पश्चात तथा जाँच करें"
 " आगे दर्शाए गये बहु नियोजितों को।"
 
-#: src/StelMainView.cpp:1117
+#: src/StelMainView.cpp:1118
 msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use --angle-mode (or --mesa-mode) option."
@@ -8218,7 +8216,7 @@ msgstr ""
 "चित्रकारक उपकरणों को अथवा प्रयोग करें --angle-mode ( अथवा --mesa-mode ) "
 "विकल्प।"
 
-#: src/StelMainView.cpp:1119
+#: src/StelMainView.cpp:1120
 msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use --mesa-mode option."
@@ -8226,14 +8224,14 @@ msgstr ""
 "ओपन॰जी॰एल॰ प्रकाशन संख्या पर्याप्त नही। कृपया चालकों का नवीकरण करें अथवा "
 "चित्रकारक उपकरणों को अथवा प्रयोग करें --mesa-mode विकल्प।"
 
-#: src/StelMainView.cpp:1123
+#: src/StelMainView.cpp:1124
 msgid ""
 "Insufficient OpenGL version. Please update drivers, or graphics hardware."
 msgstr ""
 "ओपन॰जी॰एल॰ प्रकाशन संख्या पर्याप्त नही। कृपया चालकों का नवीकरण करें अथवा "
 "चित्रकारक उपकरणों को।"
 
-#: src/StelMainView.cpp:1166
+#: src/StelMainView.cpp:1167
 msgid ""
 "Your DirectX/OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -8241,7 +8239,7 @@ msgstr ""
 "आपके डिरेक्ट॰एक्स॰/ओपन॰जी॰एल॰ ई॰एस॰ उपव्यवस्था में कुछ समस्याएँ हैं। कार्याभिलेख देखें विवरणों के लिए।\n"
 "उपेक्षा करें तथा दबाएँ इस सूचना को भविष्य में तथा प्रयास करें चलने के लिए निम्नीकृत रूप में।"
 
-#: src/StelMainView.cpp:1217
+#: src/StelMainView.cpp:1218
 msgid ""
 "Your OpenGL/Mesa subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -8249,7 +8247,7 @@ msgstr ""
 "आपके ओपन॰जी॰एल॰/मेसा उपव्यवस्था में कुछ समस्याएँ हैं। कार्याभिलेख देखें विवरणों के लिए।\n"
 "उपेक्षा करें तथा दबाएँ इस सूचना को भविष्य में तथा प्रयास करें चलने के लिए निम्नीकृत रूप में।"
 
-#: src/StelMainView.cpp:1277
+#: src/StelMainView.cpp:1278
 msgid ""
 "Your OpenGL subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -8257,7 +8255,7 @@ msgstr ""
 "आपके ओपन॰जी॰एल॰ उपव्यवस्था में कुछ समस्याएँ हैं। कार्याभिलेख देखें विवरणों के लिए।\n"
 "उपेक्षा करें तथा दबाएँ इस सूचना को भविष्य में तथा प्रयास करें चलने के लिए निम्नीकृत रूप में।"
 
-#: src/StelMainView.cpp:1318
+#: src/StelMainView.cpp:1319
 msgid ""
 "Your OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -9812,7 +9810,7 @@ msgid "&Choose"
 msgstr "चुनें"
 
 #: src/translations.h:630 src/ui_configurationDialog.h:1978
-#: src/ui_obsListDialog.h:364 src/ui_obsListCreateEditDialog.h:355
+#: src/ui_obsListDialog.h:364
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:645
 msgid "Cancel"
 msgstr "निरस्त करें"
@@ -11715,7 +11713,7 @@ msgstr "सहायता"
 msgid "About"
 msgstr "जानकारी"
 
-#: src/ui_helpDialogGui.h:282 src/ui_scriptConsole.h:414
+#: src/ui_helpDialogGui.h:282 src/ui_scriptConsole.h:426
 msgid "Log"
 msgstr "कार्याभिलेख"
 
@@ -12469,7 +12467,7 @@ msgstr "केवल सूर्य की ऊँचाई के लिए"
 msgid "Minimum Solar altitude"
 msgstr "न्यूनतम सूर्य ऊँचाई"
 
-#: src/ui_viewDialog.h:3712 src/ui_scriptConsole.h:425
+#: src/ui_viewDialog.h:3712 src/ui_scriptConsole.h:445
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:358
 msgid "..."
 msgstr "इत्यादि"
@@ -13481,7 +13479,7 @@ msgid "Additional settings for Graphical User Interface"
 msgstr "अतिरिक्त प्रबन्ध चित्रीय उपयोग माध्यम के लिए"
 
 #: src/ui_configurationDialog.h:1763
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1497
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1503
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:489
 msgid "Time"
 msgstr "समय"
@@ -14298,7 +14296,7 @@ msgstr ""
 "बिन्दु प्रति इंच ( मुद्रण आकार की गणना के लिए चित्र परितथ्य में ) । मूल "
 "मुद्रण आकार इंचों में होगा बिन्दु आकार प्रति बि॰प्र॰इ।"
 
-#: src/ui_configurationDialog.h:2155 src/ui_scriptConsole.h:417
+#: src/ui_configurationDialog.h:2155 src/ui_scriptConsole.h:429
 msgid "Close window when script runs"
 msgstr "क्रमादेश चलने पर खिडकी हटा दें"
 
@@ -14509,40 +14507,64 @@ msgstr "जू॰पोस॰ जालस्थान खोलें"
 msgid "View recent GRS measurements"
 msgstr "निकट अतीत के म॰र॰बि॰ मापन देखें"
 
-#: src/ui_scriptConsole.h:392
+#: src/ui_scriptConsole.h:404
 msgid "Clear"
 msgstr "सब हटाएँ"
 
-#: src/ui_scriptConsole.h:396
+#: src/ui_scriptConsole.h:408
 msgid "Pre-process script using SSC preprocessor"
 msgstr ""
 "पूर्व प्रक्रिया चलाएँ क्रमादेश पर एस॰एस॰सी॰ पूर्वसाधक का प्रयोग करते हुए"
 
-#: src/ui_scriptConsole.h:401
+#: src/ui_scriptConsole.h:413
 msgid "Execute:"
 msgstr "चलाएँ : "
 
-#: src/ui_scriptConsole.h:410
+#: src/ui_scriptConsole.h:422
 msgid "Stop script"
 msgstr "क्रमादेश रोकें"
 
-#: src/ui_scriptConsole.h:413
+#: src/ui_scriptConsole.h:425
 msgid "Script"
 msgstr "क्रमादेश"
 
-#: src/ui_scriptConsole.h:415
+#: src/ui_scriptConsole.h:427
 msgid "Output"
 msgstr "उत्पादन"
 
-#: src/ui_scriptConsole.h:416
+#: src/ui_scriptConsole.h:428
 msgid "Load scripts from the User Directory by default"
 msgstr "क्रमादेश लें उपयोगकर्ता के अभिलेखकोश से मूलविकल्पतः"
 
-#: src/ui_scriptConsole.h:418
+#: src/ui_scriptConsole.h:430
 msgid "Clear output before script runs"
 msgstr "क्रमादेश चलाने के पूर्व उत्पादन सब हटाएँ"
 
-#: src/ui_scriptConsole.h:419
+#: src/ui_scriptConsole.h:432
+msgid ""
+"If disabled, all screenshots go to the directory set in the Configuration "
+"dialog."
+msgstr ""
+"यदि अक्षम किया गया तो सभी पटलचित्र उस अभिलेखकोश में जाएँगे जो समाकृति पटल "
+"में स्थापित किया गया है।"
+
+#: src/ui_scriptConsole.h:434
+msgid "Allow scripts to store screenshots to other directories"
+msgstr "क्रमादेशों को अनुमित दें कि पटलचित्रों को अन्य अभिलेखकोशों में रखें।"
+
+#: src/ui_scriptConsole.h:436
+msgid ""
+"If disabled, all output goes to the user data directory. Enabling this bears"
+" some risks!"
+msgstr ""
+"यदि अक्षम किया गया तो सभी उत्पादन उपयोगकर्ता तथ्य अभिलेखकोश में जाएगा। इसे "
+"सक्षम करने से कुछ हानी हो सकता है।"
+
+#: src/ui_scriptConsole.h:438
+msgid "Allow scripts to store output to arbitrary directories"
+msgstr "उत्पादन किसी भी अभिलेखकोश में रखने की अनुमति दें क्रमादेशों को"
+
+#: src/ui_scriptConsole.h:439
 #: plugins/Satellites/src/ui_satellitesDialog.h:1307
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:245
 #: plugins/NavStars/src/ui_navStarsWindow.h:539
@@ -14554,15 +14576,15 @@ msgstr "क्रमादेश चलाने के पूर्व उत�
 msgid "Settings"
 msgstr "प्रबन्ध"
 
-#: src/ui_scriptConsole.h:421
+#: src/ui_scriptConsole.h:441
 msgid "Cursor position"
 msgstr "धावक स्थान"
 
-#: src/ui_scriptConsole.h:423
+#: src/ui_scriptConsole.h:443
 msgid "R:0 C:0"
 msgstr "प॰ : 0 स्त : 0"
 
-#: src/ui_scriptConsole.h:424
+#: src/ui_scriptConsole.h:444
 msgid "Include dir:"
 msgstr "समावेशित अ॰को॰ : "
 
@@ -15136,7 +15158,7 @@ msgstr "ग्रहपत्री रेखा मोटापन : "
 #: src/ui_astroCalcExtraEphemerisDialog.h:204
 #: plugins/Oculars/src/Oculars.cpp:1780
 #: plugins/Oculars/src/gui/OcularDialog.cpp:598
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1155
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1161
 #: plugins/Satellites/src/ui_satellitesDialog.h:1285
 msgctxt "pixels"
 msgid "px"
@@ -15151,20 +15173,18 @@ msgid "Unit of measurement:"
 msgstr "मापन इकाई : "
 
 #: src/ui_obsListDialog.h:356 src/ui_obsListDialog.h:374
-#: src/ui_obsListCreateEditDialog.h:339
 msgid "Highlight all the objects of the selected list"
 msgstr "चयनित सूची के सभी वस्तुओं को उद्दीप्त करें"
 
-#: src/ui_obsListDialog.h:358 src/ui_obsListCreateEditDialog.h:341
+#: src/ui_obsListDialog.h:358
 msgid "Add object"
 msgstr "वस्तु जोडें"
 
 #: src/ui_obsListDialog.h:360 src/ui_obsListDialog.h:378
-#: src/ui_obsListCreateEditDialog.h:343
 msgid "Clear all the highlight objects"
 msgstr "उद्दीप्त वस्तुओं को हटाएँ"
 
-#: src/ui_obsListDialog.h:362 src/ui_obsListCreateEditDialog.h:345
+#: src/ui_obsListDialog.h:362
 msgid "Remove object"
 msgstr "वस्तु हटाएँ"
 
@@ -15172,7 +15192,7 @@ msgstr "वस्तु हटाएँ"
 msgid "Save list"
 msgstr "सूची अभिलिखित करें"
 
-#: src/ui_obsListDialog.h:365 src/ui_obsListCreateEditDialog.h:316
+#: src/ui_obsListDialog.h:365
 #: plugins/Satellites/src/ui_satellitesDialog.h:1385
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:217
 msgid "Description:"
@@ -15222,8 +15242,7 @@ msgstr "चयनित सूची का संपादन करें"
 msgid "Edit list"
 msgstr "सूची का संपादन करें"
 
-#: src/ui_obsListDialog.h:390 src/ui_obsListCreateEditDialog.h:347
-#: src/ui_obsListCreateEditDialog.h:349
+#: src/ui_obsListDialog.h:390
 msgid "Export list"
 msgstr "सूची निर्यात करें"
 
@@ -15231,8 +15250,7 @@ msgstr "सूची निर्यात करें"
 msgid "Export list..."
 msgstr "निर्यात सूची।"
 
-#: src/ui_obsListDialog.h:394 src/ui_obsListCreateEditDialog.h:351
-#: src/ui_obsListCreateEditDialog.h:353
+#: src/ui_obsListDialog.h:394
 msgid "Import list"
 msgstr "सूची आयात करें"
 
@@ -15260,7 +15278,7 @@ msgstr "इसे भी स्मृत रखें : "
 msgid "Store/load equatorial coordinates (J2000.0)"
 msgstr "स्मृत रखें / भरण करें भूमध्यरेखा निर्देशांक ( जू॰2000.0 )"
 
-#: src/ui_obsListDialog.h:406 src/ui_obsListCreateEditDialog.h:321
+#: src/ui_obsListDialog.h:406
 msgid "Coordinates (RA and DEC)"
 msgstr "निर्देशांक ( दा॰आ॰ तथा झु॰ )"
 
@@ -15280,53 +15298,9 @@ msgstr "स्मृत रखें / भरण करें भूदृश्
 msgid "Store/load with field of view"
 msgstr "स्मृत रखें / भरण करें दृश्यक्षेत्र के साथ"
 
-#: src/ui_obsListDialog.h:422 src/ui_obsListCreateEditDialog.h:337
+#: src/ui_obsListDialog.h:422
 msgid "FOV"
 msgstr "दृ॰क्षे॰"
-
-#: src/ui_obsListCreateEditDialog.h:314
-msgid "Observing Lists editor"
-msgstr "अवलोकन सूची संपादक"
-
-#: src/ui_obsListCreateEditDialog.h:317
-msgid "Also store: "
-msgstr "अभिलिखित करें इसे भी : "
-
-#: src/ui_obsListCreateEditDialog.h:319
-msgid "Store with equatorial coordinates (J2000.0)"
-msgstr "भूमध्यरेखीय निर्देशांकों ( जू॰2000.0 ) के साथ अभिलिखित करें"
-
-#: src/ui_obsListCreateEditDialog.h:323
-msgid "Store with current JD"
-msgstr "वर्तमान जू॰दि॰ के साथ अभिलिखित करें"
-
-#: src/ui_obsListCreateEditDialog.h:327
-msgid "Store with current location"
-msgstr "वर्तमान स्थान के साथ अभिलिखित करें"
-
-#: src/ui_obsListCreateEditDialog.h:331
-msgid "Store with current landscape"
-msgstr "वर्तमान भूदृश्य के साथ अभिलिखित करें"
-
-#: src/ui_obsListCreateEditDialog.h:335
-msgid "Store with current field of view"
-msgstr "वर्तमान दृश्यक्षेत्र के साथ अभिलिखित करें"
-
-#: src/ui_obsListCreateEditDialog.h:354
-msgid "Save and close"
-msgstr "अभिलिखित तथा आच्छादित करें"
-
-#: src/ui_obsListCreateEditDialog.h:358
-msgid "Set the list as default"
-msgstr "सूची को मूलविकल्प के रूप में स्थापित करें"
-
-#: src/ui_obsListCreateEditDialog.h:360
-msgid "Set list as default"
-msgstr "सूची को मूलविकल्प के रूप में स्थापित करें"
-
-#: src/ui_obsListCreateEditDialog.h:361
-msgid "Name of the list:"
-msgstr "सूची का नाम : "
 
 #: src/ui_dsoColorsDialog.h:545 src/ui_orbitColorsDialog.h:387
 msgid "Color settings"
@@ -16012,10 +15986,6 @@ msgstr ""
 "परिकलन किया। हवाई में होने की कामना हुई।"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:323
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:328
-msgid "Pulsars Configuration"
-msgstr "स्फुरन्ततारें समाकृति"
-
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:324
 msgid "Angle Measure Plug-in Configuration"
 msgstr "अस्र मापन उपलग्न समाकृति"
@@ -16180,8 +16150,8 @@ msgstr "घुमाव पुनर्स्थापित करें"
 #: plugins/Oculars/src/gui/OcularDialog.cpp:118
 #: plugins/Oculars/src/gui/OcularDialog.cpp:135
 #: plugins/Oculars/src/gui/OcularDialog.cpp:152
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:915
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:922
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:921
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:928
 msgid "Warning!"
 msgstr "सावधान।"
 
@@ -16295,7 +16265,7 @@ msgstr "अधिकतम अनावृत"
 #. TRANSLATORS: duration
 #. TRANSLATORS: seconds.
 #: plugins/Oculars/src/Oculars.cpp:1797
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1149
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1155
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:223
 msgctxt "time"
 msgid "s"
@@ -18310,11 +18280,11 @@ msgstr "अज्ञात"
 msgid "artificial satellite"
 msgstr "मनुष्यकृत उपग्रह"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:776
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:782
 msgid "Stellarium Satellites Plugin"
 msgstr "स्टेल्लारियम उपग्रह उपलग्न"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:787
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:793
 msgid ""
 "The Satellites plugin predicts the positions of artificial satellites in "
 "Earth orbit."
@@ -18322,16 +18292,16 @@ msgstr ""
 "उपग्रह उपलग्न पूर्वानुमान देता है मनुष्यकृत उपग्रहों के स्थानों का पृथ्वी के"
 " उपग्रहपथ में।"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:789
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:795
 msgid "Notes for users"
 msgstr "उपयोगकर्ताओं के लिए ध्यातव्य"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:790
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:796
 msgid ""
 "Satellites and their orbits are only shown when the observer is on Earth."
 msgstr "उपग्रह तथा उनके पथ दर्शाए गये हैं तब ही जब अवलोकनकर्ता पृथ्वी पर हो।"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:791
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:797
 msgid ""
 "Predicted positions are only good for a fairly short time (on the order of "
 "days, weeks or perhaps a month into the past and future). Expect high "
@@ -18341,7 +18311,7 @@ msgstr ""
 "अतीत अथवा भविष्य में ) । उच्च विचित्रता की अपेक्षा कर सकते हैं इस अवधि के "
 "बाहर के दिनांकों के लिए।"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:792
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:798
 msgid ""
 "Orbital elements go out of date pretty quickly (over mere weeks, sometimes "
 "days).  To get useful data out, you need to update the TLE data regularly."
@@ -18352,7 +18322,7 @@ msgstr ""
 #. TRANSLATORS: The translated names of the button and the tab are filled in
 #. automatically. You can check the original names in Stellarium. File names
 #. are not translated.
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:794
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:800
 #, qt-format
 msgid ""
 "Clicking the \"%1\" button in the \"%2\" tab of this dialog will revert to "
@@ -18363,14 +18333,14 @@ msgstr ""
 "पुनर्स्थापित होगा। पुराना अभिलेख सुरक्षित किया जाएगा %4 के नाम से। इसको देख "
 "पाएँगे उपयोगकर्ता तथ्य अभिलेखकोश में \"modules/Satellites\" के भीतर।"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:797
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:803
 msgid ""
 "The value of perigee and apogee altitudes compute for mean Earth radius."
 msgstr ""
 "भू निकटतम तथा दूरतम ऊँचाईयों के मूल्य का गणित उपयोग करता है पृथ्वी का "
 "मध्यमान व्यासार्ध।"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:798
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:804
 msgid ""
 "The Satellites plugin is still under development.  Some features are "
 "incomplete, missing or buggy."
@@ -18378,11 +18348,11 @@ msgstr ""
 "उपग्रह उपलग्न अब भी विकसित किया जा रहा है। कुछ सुविधाएँ अपूर्ण अथवा अनुपलब्ध"
 " अथवा दोषपूर्ण हैं।"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:802
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:808
 msgid "Altitude classifications for geocentric orbits"
 msgstr "ऊँचाई वर्गीकरण भूमध्याधारित उपग्रहपथों के लिए "
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:803
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:809
 msgid ""
 "Low Earth orbit (LEO): geocentric orbits with altitudes of apogee below 4400"
 " km, inclination of orbits in range 0-180 degrees and eccentricity below "
@@ -18392,7 +18362,7 @@ msgstr ""
 " हैं दूरतम 4400 स॰मे॰ के नीचे तथा प्रवृत्ति 0-180 अम्श के बीच तथा सनकीपन "
 "0.25 के नीचे।"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:804
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:810
 msgid ""
 "Medium Earth orbit (MEO): geocentric orbits with altitude of apogee at least"
 " 4400 km, inclination of orbits in range 0-180 degrees, eccentricity below "
@@ -18402,7 +18372,7 @@ msgstr ""
 "4400 स॰मे॰ से अधिक तथा प्रवृत्ति 0-180 अम्श के बीच तथा सनकीपन 0.25 के नीचे "
 "तथा अवधि 1100 मिनट से अधिक।"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:805
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:811
 msgid ""
 "Geosynchronous orbit (GSO) and geostationary orbit (GEO) are orbits with "
 "inclination of orbits below 25 degrees, eccentricity below 0.25 and period "
@@ -18413,7 +18383,7 @@ msgstr ""
 "प्रवृत्ति 25 अम्श के नीचे तथा सनकीपन 0.25 के नीचे तथा अवधि 1100-2000 मिनट के"
 " बीच ( पृथ्वी के उपग्रहपथ तथा पृथ्वी के नक्षत्रीय घुमाव आवधि एक समान ) ।"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:806
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:812
 msgid ""
 "Highly elliptical orbit (HEO): geocentric orbits with altitudes of perigee "
 "below 70000 km, inclination of orbits in range 0-180 degrees, eccentricity "
@@ -18423,7 +18393,7 @@ msgstr ""
 "ऊँचाई निकटतम 70000 स॰मे॰ के नीचे तथा प्रवृत्ति 0-180 अम्श के बीच तथा सनकीपन "
 "न्यूनतम 0.25 तथा अवधि 14000 मिमट से नीचे।"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:807
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:813
 msgid ""
 "High geosynchronous orbit (HGSO): geocentric orbits above the altitude of "
 "geosynchronous orbit: inclination of orbits in range 25-180 degrees, "
@@ -18433,7 +18403,7 @@ msgstr ""
 "उपग्रहपथ से ऊँचे हैं तथा प्रवृत्ति 25-180 अम्श के बीच तथा सनकीपन 0.25 के "
 "नीचे तथा अवधि 1100-2000 मिनट के बीच।"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:809
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:815
 msgid ""
 "High Earth orbit (HEO or HEO/E): a geocentric orbit with an altitude "
 "entirely above that of a geosynchronous orbit (35786 kilometres). The "
@@ -18444,11 +18414,11 @@ msgstr ""
 "सर्वदा एक भूसमचरण उपग्रहपथ से ऊपर ( 35786 स॰मे॰ ) । इनके उपग्रहपथ अवधि 24 "
 "घण्टों से अधिक हैं इसलिए एैसे उपग्रहों में वक्र गति प्रतीयमान हैं।"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:812
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:818
 msgid "Inclination classifications for geocentric orbits"
 msgstr "प्रवृत्ति वर्गीकरण भूमध्याधारित उपग्रहपथों के लिए"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:813
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:819
 msgid ""
 "Equatorial orbit: an orbit whose inclination in reference to the equatorial "
 "plane is (or very close to) 0 degrees."
@@ -18456,7 +18426,7 @@ msgstr ""
 "भूमध्यरेखीय उपग्रहपथ। एक उयग्रहपथ जिसका प्रवृत्ति भूमध्यरेखीय समतल के आधार "
 "पर 0 अम्श ( अथवा उसके अत्यन्त निकट ) है।"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:814
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:820
 msgid ""
 "Polar orbit: a satellite that passes above or nearly above both poles of the"
 " planet on each revolution. Therefore it has an inclination of (or very "
@@ -18466,7 +18436,7 @@ msgstr ""
 "जाता है प्रत्येक परिक्रमा में। इसीलिए इसका प्रवृत्ति 90 अम्श ( अथवा उसके "
 "अत्यन्त निकट ) है।"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:815
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:821
 msgid ""
 "Polar sun-synchronous orbit (PSSO): A nearly polar orbit that passes the "
 "equator at the same local time on every pass. Useful for image-taking "
@@ -18481,11 +18451,11 @@ msgstr ""
 "अवधि 96-100 मिनट के बीच तथा प्रवृत्ति लगभग 98 अम्श।"
 
 #. TRANSLATORS: Title of a section in the About tab of the Satellites window
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:819
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:825
 msgid "TLE data updates"
 msgstr "टी॰एल॰ई॰ तथ्य नवीकरण"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:820
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:826
 msgid ""
 "The Satellites plugin can automatically download TLE data from Internet "
 "sources, and by default the plugin will do this if the existing data is more"
@@ -18495,7 +18465,7 @@ msgstr ""
 "सूत्रों से तथा मूलविकल्पतः इसे करेगा यदि वर्तमान तथ्य 72 घण्टों से अधिक "
 "पुराना हो।"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:821
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:827
 #, qt-format
 msgid ""
 "If you disable Internet updates, you may update from a file on your "
@@ -18506,7 +18476,7 @@ msgstr ""
 "नवीकरण कर सकते हैं। यह अभिलेख उसी प्रारूप में होना चाहिए जैसे सेलेस्ट्राक के"
 " नवीकरण ( %1 देखें उदाहरण के लिए ) ।"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:822
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:828
 msgid ""
 "<b>Note:</b> if the name of a satellite in update data has anything in "
 "square brackets at the end, it will be removed before the data is used."
@@ -18514,11 +18484,11 @@ msgstr ""
 "<b> ध्यातव्य। </b> यदि नवीकरण तथ्य में एक उपग्रह के नाम के अन्त में वर्गाकार"
 " कोष्ठक में कुछ है तो उसे हटाया जाएगा तथ्य के प्रयोग के पहले।"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:825
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:831
 msgid "Adding new satellites"
 msgstr "नये उपग्रह जोडा जा रहा है"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:826
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:832
 msgid ""
 "Make sure the satellite(s) you wish to add are included in one of the URLs "
 "listed in the Sources tab of the satellites configuration dialog."
@@ -18526,7 +18496,7 @@ msgstr ""
 "सुनिश्चित करें कि जो उपग्रह ( एक अथवा अनेक ) आप जोडना चाहते हैं समावेशित हैं"
 " किसी एक जालपता में जो सूचित हैं सूत्र पटलसूचक में उपग्रह समाकृति पटल में।"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:827
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:833
 msgid ""
 "Go to the Satellites tab, and click the '+' button.  Select the satellite(s)"
 " you wish to add and select the 'add' button."
@@ -18534,11 +18504,11 @@ msgstr ""
 "उपग्रह पटलसूचक जाएँ तत्पश्चात '+' घुण्डी टाँकें। चयन करें उपग्रह(ओं) को जो "
 "आप जोडना चाहते हैं तत्पश्चात चयन करें 'जोडें' घुण्डी।"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:829
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:835
 msgid "Technical notes"
 msgstr "तन्त्रात्मक ध्यातव्य।"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:830
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:836
 msgid ""
 "Positions are calculated using the SGP4 & SDP4 methods, using NORAD TLE data"
 " as the input."
@@ -18546,7 +18516,7 @@ msgstr ""
 "स्थानों का परिकलन किया जाता है एस॰जी॰पी॰4 तथा एस॰डी॰पी॰4 विधि से तथा "
 "एन॰ओ॰आर॰ए॰डी॰ टी॰एल॰ई॰ तथ्य का प्रयोग करते हुए।"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:831
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:837
 msgid ""
 "The orbital calculation code is written by Jose Luis Canales according to "
 "the revised Spacetrack Report #3 (including Spacetrack Report #6)"
@@ -18554,7 +18524,7 @@ msgstr ""
 "उपग्रहपथ परिकलन क्रमलेख लिखा गया है होसे लूइस कनालेस द्वारा संशोधित "
 "स्पेस्ट्राक सूचना #3 ( स्पेस्ट्राक सूचना #6 समावेशित ) के अनुसार।"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:832
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:838
 msgid ""
 "To calculate an approximate visual magnitude of satellites we use data from "
 "Mike McCants' database (with permissions) of the radar cross-section (RCS) "
@@ -18564,7 +18534,7 @@ msgstr ""
 "मक्कान्ट्स के तथ्यकोश से ( अनुमति पूर्वक ) दीर्घतरंगदर्शक प्रतीयमान "
 "क्षेत्रफल ( दी॰प्र॰क्षे॰ ) का तथा मानक मात्राओं का।"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:833
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:839
 msgid ""
 "Formula to calculate an approximate visual magnitude of satellites from the "
 "standard magnitude may be found at Mike McCants website"
@@ -18572,7 +18542,7 @@ msgstr ""
 "उपग्रहों के लगभग दृश्य मात्रा का परिकलन के लिए कारिका प्राप्त कर सकते हैं "
 "मैक मक्कान्ट्स के जालस्थान पर।"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:834
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:840
 msgid ""
 "We use a spherical shape of satellite to calculate an approximate visual "
 "magnitude from RCS values."
@@ -18580,13 +18550,13 @@ msgstr ""
 "हम प्रयोग करते हैं उपग्रह के लिए गोलाकार लगभग दृश्य मात्रा का परिकलन के लिए "
 "दि॰प्र॰क्षे॰ मूल्यों से।"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:835
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:841
 msgid "For modelling Starlink magnitudes we use Anthony Mallama's formula"
 msgstr ""
 "स्टार्लिन्क मात्राओं के प्रतिरूपण के लिए हम प्रयोग करते हैं आन्थोनी माल्लामा"
 " के कारिका।"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:854
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:860
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:152
 #: plugins/Novae/src/gui/NovaeDialog.cpp:147
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:144
@@ -18596,7 +18566,7 @@ msgstr ""
 msgid "Next update"
 msgstr "अगला नवीकरण"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:859
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:865
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:158
 #: plugins/Novae/src/gui/NovaeDialog.cpp:153
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:150
@@ -18606,8 +18576,8 @@ msgstr "अगला नवीकरण"
 msgid "Internet updates disabled"
 msgstr "संचारजाल से नवीकरण अक्षम किया गया है"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:861
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:885
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:867
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:891
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:160
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:206
 #: plugins/Novae/src/gui/NovaeDialog.cpp:155
@@ -18622,7 +18592,7 @@ msgstr "संचारजाल से नवीकरण अक्षम क�
 msgid "Updating now..."
 msgstr "नवीकरण अब चालू।"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:866
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:872
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:162
 #: plugins/Novae/src/gui/NovaeDialog.cpp:157
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:154
@@ -18632,7 +18602,7 @@ msgid "< 1 minute"
 msgstr "1 मिनट से न्यून"
 
 #. TRANSLATORS: minutes.
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:871
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:877
 #: plugins/Satellites/src/gui/SatellitesFilterDialog.cpp:135
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:167
 #: plugins/Novae/src/gui/NovaeDialog.cpp:162
@@ -18644,7 +18614,7 @@ msgctxt "time"
 msgid "m"
 msgstr "मि॰"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:888
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:894
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:209
 #: plugins/Novae/src/gui/NovaeDialog.cpp:204
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:225
@@ -18654,29 +18624,29 @@ msgstr "मि॰"
 msgid "Update error"
 msgstr "नवीकरण में अपक्रम"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:898
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:904
 #, qt-format
 msgid "Updated %1/%2 satellite(s); %3 added; %4 removed"
 msgstr "नवीकृत %1/%2 उपग्रह ( एक अथवा अनेक )‌ । %3 जोडा गया। %4 हटाया गया।"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:900
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:906
 #, qt-format
 msgid "Updated %1/%2 satellite(s); %3 added; %4 missing"
 msgstr "नवीकृत %1/%2 उपग्रह ( एक अथवा अनेक )‌ । %3 जोडा गया। %4 अनुपलब्ध।"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:915
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:921
 msgid "Empty string - not saving"
 msgstr "रिक्त अक्षरमाला। अभिलिखित नही होगा।"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:922
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:928
 msgid "Invalid URL - not saving"
 msgstr "अवैध जालपता। अभिलिखित नही होगा।"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:989
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:995
 msgid "[new source]"
 msgstr "[ नया सूत्र ]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1075
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1081
 #: plugins/Satellites/src/ui_satellitesDialog.h:1258
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:195
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:242
@@ -18692,7 +18662,7 @@ msgstr "[ नया सूत्र ]"
 msgid "Update now"
 msgstr "नवीकरण अब करें"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1077
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1083
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:197
 #: plugins/Novae/src/gui/NovaeDialog.cpp:192
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:189
@@ -18701,107 +18671,107 @@ msgstr "नवीकरण अब करें"
 msgid "Update from files"
 msgstr "अभिलेखों से नवीकरण करें"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1105
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1111
 msgid "[orbit calculation error]"
 msgstr "[ ग्रहपथ परिकलन अपक्रम ]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1106
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1112
 msgid "[atmospheric entry]"
 msgstr "[ वायुमण्डलीय प्रविष्टि ]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1107
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1113
 msgid "[all newly added]"
 msgstr "[ सब नवीनतः जोडित ]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1108
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1114
 msgid "[all not displayed]"
 msgstr "[ सब दर्शित नही ]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1109
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1115
 msgid "[all displayed]"
 msgstr "[ सब दर्शित ]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1110
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1116
 msgid "[all communications]"
 msgstr "[ सब संचार ]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1111
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1117
 msgid "[small satellites]"
 msgstr "[ छोटे उपग्रह ]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1112
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1118
 msgid "[medium satellites]"
 msgstr "[ मध्यम उपग्रह ]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1113
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1119
 msgid "[large satellites]"
 msgstr "[ बडे उपग्रह ]"
 
 #. TRANSLATORS: LEO = Low Earth orbit
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1115
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1121
 msgid "[LEO satellites]"
 msgstr "[ पृ॰नि॰उ॰ उपग्रह ]"
 
 #. TRANSLATORS: GEO = Geosynchronous equatorial orbit (Geostationary orbit)
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1117
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1123
 msgid "[GEO/GSO satellites]"
 msgstr "[ भू॰स॰उ॰/भू॰स्थि॰उ॰ उपग्रह ]"
 
 #. TRANSLATORS: MEO = Medium Earth orbit
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1119
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1125
 msgid "[MEO satellites]"
 msgstr "[ पृ॰म॰उ॰ उपग्रह ]"
 
 #. TRANSLATORS: HEO = Highly elliptical orbit
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1121
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1127
 msgid "[HEO satellites]"
 msgstr "[ अ॰दी॰उ॰ उपग्रह ]"
 
 #. TRANSLATORS: HGEO = High geosynchronous orbit
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1123
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1129
 msgid "[HGSO satellites]"
 msgstr "[ उ॰भू॰स॰उ॰ उपग्रह ]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1124
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1130
 msgid "[polar orbit satellites]"
 msgstr "[ ध्रु॰उ॰ उपग्रह ]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1125
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1131
 msgid "[equatorial orbit satellites]"
 msgstr "[भू॰म॰उ॰ उपग्रह ]"
 
 #. TRANSLATORS: PSSO = Polar sun synchronous orbit
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1127
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1133
 msgid "[PSSO satellites]"
 msgstr "[ ध्रु॰सू॰स॰उ॰ उपग्रह ]"
 
 #. TRANSLATORS: HEO/E = High Earth orbit
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1129
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1135
 msgid "[HEO/E satellites]"
 msgstr "[ पृ॰उ॰उ॰ उपग्रह ]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1130
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1136
 msgid "[outdated TLE]"
 msgstr "[ पुराना टी॰एल॰ई॰ ]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1131
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1137
 msgid "[custom filter]"
 msgstr "[ वैयक्तीकृत छलनी ]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1132
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1138
 msgid "[all user defined]"
 msgstr "[ सब उपयोगकर्ता परिभाषित ]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1133
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1139
 msgid "[all]"
 msgstr "[ सब ]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1145
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1151
 #: plugins/Satellites/src/ui_satellitesFilterDialog.h:301
 msgid "RCS"
 msgstr "दी॰प्र॰क्षे॰"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1146
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1152
 msgid ""
 "Radar cross-section (RCS) is a measure of how detectable an object is with a"
 " radar. A larger RCS indicates that an object is more easily detected."
@@ -18810,7 +18780,7 @@ msgstr ""
 "कितना खोजनीय है दीर्घतरंगदर्शक के साथ। बडा दी॰प्र॰क्षे॰ संकेत करता है कि कोई"
 " वस्तु सरलता से खोजा जा सकता है।"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1147
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1153
 msgid ""
 "The standard magnitude of a satellite is defined as its apparent magnitude "
 "when at half-phase and at a distance 1000 km from the observer."
@@ -18818,59 +18788,59 @@ msgstr ""
 "उपग्रह की मानक मात्रा परिभाषित है उसके प्रतीयमान मात्रा अनुसार जब वह अर्ध "
 "चरण का हो तथा दूरी 1000 स॰मे॰ हो अवलोकनकर्ता से।"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1160
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1166
 msgid ""
 "Display satellites and their orbits within selected range of altitudes only."
 msgstr "उपग्रह तथा उनके पथ दर्शाएँ केवल चयनित ऊँचाईयों के भीतर "
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1162
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1168
 #: plugins/Satellites/src/ui_satellitesDialog.h:1278
 msgid ""
 "Distance to the center of umbra from Earth's surface (height of imagined "
 "satellite)"
 msgstr "पृथ्वी धरातल से छाया मध्य तक की दूरी ( काल्पनिक उपग्रह की ऊँचाई )"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1163
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1169
 msgid "Number of segments: number of segments used to draw the line"
 msgstr "खण्डों की संख्या। रेखा चित्रित करने के लिए प्रयुक्त खण्डों की संख्या।"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1164
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1170
 msgid "Segment length: duration of a single segment in seconds"
 msgstr "खण्ड लम्बाई। अवधि सेकण्डों में एक खण्ड की।"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1165
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1171
 msgid "Fade length: number of segments used to draw each end of the line"
 msgstr ""
 "सीमांत लम्बाई। खण्डों की संख्या जो रेखा के अन्तों को चित्रित करने के लिए "
 "प्रयुक्त हो।"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1166
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1172
 msgid "Orbit line thickness"
 msgstr "ग्रहपथ रेखा मोटापन"
 
 #. TRANSLATORS: Displayed in the satellite group selection box.
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1200
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1206
 msgid "New group..."
 msgstr "नया गुट।"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1476
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1482
 msgid "Select TLE Update File"
 msgstr "चुनें टी॰एल॰ई॰ नवीकरण अभिलेख"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1498
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1504
 msgid "Brightness"
 msgstr "चमक"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1501
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1507
 msgid "Satellite"
 msgstr "उपग्रह"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1589
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1595
 msgid "Save predicted Iridium flares as..."
 msgstr "पूर्वानुमानित इरिडियम भडकों को अभिलिखित करें इस नाम से।"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1635
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1637
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1641
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1643
 msgid "Predicted Iridium flares"
 msgstr "पूर्वानुमानित इरिडियम भडकें"
 
@@ -22339,6 +22309,7 @@ msgstr "फ्रांस में"
 msgid "Pulsars is updated"
 msgstr "स्फुरन्ततारें नवीकरण हुआ"
 
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:328
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:329
 msgid "Pulsars Plug-in Configuration"
 msgstr "स्फुरन्ततारें उपलग्न समाकृति"
