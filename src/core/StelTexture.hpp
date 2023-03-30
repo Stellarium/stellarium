@@ -85,7 +85,7 @@ public:
 	//! Return the width and height of the texture in pixels
 	bool getDimensions(int &width, int &height);
 
-	//! Returns whether the texture has an alpha channel (GL_RGBA or GL_LUMINANCE_ALPHA format)
+	//! Returns whether the texture has an alpha channel (GL_RGBA format)
 	//! This only returns valid information after the texture is fully loaded.
 	bool hasAlphaChannel() const { return alphaChannel ; }
 

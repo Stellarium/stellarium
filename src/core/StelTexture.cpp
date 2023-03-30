@@ -300,21 +300,14 @@ QByteArray StelTexture::convertToGLFormat(QImage image, GLint& format, GLint& ty
 		image = image.scaled(width, height, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
 	}
 
-	if (glInfo.supportsLuminanceTextures && image.isGrayscale())
-	{
-		format = image.hasAlphaChannel() ? GL_LUMINANCE_ALPHA : GL_LUMINANCE;
-	}
-	else if (image.hasAlphaChannel())
+	if (image.hasAlphaChannel())
 	{
 		format = GL_RGBA;
 	}
 	else
 		format = GL_RGB;
 	type = GL_UNSIGNED_BYTE;
-	int bpp = format == GL_LUMINANCE_ALPHA ? 2 :
-						  format == GL_LUMINANCE ? 1 :
-									    format == GL_RGBA ? 4 :
-												 3;
+	int bpp = format == format == GL_RGBA ? 4 : 3;
 
 	ret.reserve(width * height * bpp);
 	QImage tmp = image.convertToFormat(QImage::Format_ARGB32);
@@ -337,13 +330,6 @@ QByteArray StelTexture::convertToGLFormat(QImage image, GLint& format, GLint& ty
 					break;
 				case GL_RGB:
 					ret.append(ptr + 1, 3);
-					break;
-				case GL_LUMINANCE:
-					ret.append(ptr + 1, 1);
-					break;
-				case GL_LUMINANCE_ALPHA:
-					ret.append(ptr + 1, 1);
-					ret.append(ptr, 1);
 					break;
 				default:
 					Q_ASSERT(false);
@@ -396,11 +382,6 @@ bool StelTexture::glLoad(const GLData& data)
 		case GL_RGBA:
 			//RGBA pixels are always in 4 byte aligned rows
 			gl->glPixelStorei(GL_UNPACK_ALIGNMENT, 4);
-			alphaChannel = true;
-			break;
-		case GL_LUMINANCE_ALPHA:
-			//these ones are at least always in 2 byte aligned rows, but may also be 4 aligned
-			gl->glPixelStorei(GL_UNPACK_ALIGNMENT, 2);
 			alphaChannel = true;
 			break;
 		default:

@@ -77,7 +77,6 @@ public:
 		PFNGLMINSAMPLESHADINGPROC glMinSampleShading = nullptr;
 		GLint maxAnisotropy = 0;
 		GLint maxTextureSize = 2048;
-		bool supportsLuminanceTextures = false;
 		bool isCoreProfile = false;
 		bool isGLES = false;
 	};
