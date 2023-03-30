@@ -398,20 +398,7 @@ void main()
         texColor = texture2D(tex, texc);
     }
 
-#ifdef IS_MOON
-	// In the original NASA CGI Moon Kit the following description is given
-	// about the color texture:
-	//  * A gamma of 2.8 was applied (the LROC data is linear), and the channels
-	//    were multiplied by (0.935, 1.005, 1.04) to balance the color.
-	//  * The intensity range (0.16, 0.4) was mapped into the full
-	//    (0, 255) 8-bit range per channel.
-	// We undo the intensity range and gamma transformations here, but leave the
-	// maximum at 1.0 instead of 0.4.
-	texColor.rgb = vec3(0.4) + 0.6 * texColor.rgb;
-    texColor.rgb = pow(texColor.rgb, vec3(2.8));
-#else
     texColor.rgb = srgbToLinear(texColor.rgb);
-#endif
 
     mediump vec4 finalColor = texColor;
 	// apply (currently only Martian) pole caps. texc.t=0 at south pole, 1 at north pole. 
