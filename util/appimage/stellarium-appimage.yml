@@ -28,8 +28,10 @@ AppDir:
       - libqt5gui5
       - libqt5multimedia5
       - libqt5multimediawidgets5
+      - libqt5multimedia5-plugins
       - libqt5network5
       - libqt5positioning5
+      - libqt5positioning5-plugins
       - libqt5printsupport5
       - libqt5script5
       - libqt5serialport5
@@ -39,6 +41,7 @@ AppDir:
       - libqt5webenginewidgets5
       - libqt5webengine-data
       - libqt5charts5
+      - libqt5opengl5
       - libgps26
     exclude: []
 
