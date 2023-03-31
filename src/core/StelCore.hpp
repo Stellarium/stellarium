@@ -65,6 +65,7 @@ class StelCore : public QObject
 	Q_PROPERTY(QString currentTimeZone READ getCurrentTimeZone WRITE setCurrentTimeZone NOTIFY currentTimeZoneChanged)
 	Q_PROPERTY(bool flagUseCTZ READ getUseCustomTimeZone WRITE setUseCustomTimeZone NOTIFY useCustomTimeZoneChanged)
 	Q_PROPERTY(bool flagUseDST READ getUseDST WRITE setUseDST NOTIFY flagUseDSTChanged)
+	Q_PROPERTY(bool startupTimeStop READ getStartupTimeStop WRITE setStartupTimeStop NOTIFY startupTimeStopChanged)
 	Q_PROPERTY(DitheringMode ditheringMode READ getDitheringMode WRITE setDitheringMode NOTIFY ditheringModeChanged)
 
 public:
@@ -491,6 +492,9 @@ public slots:
 	bool getUseDST() const;
 	void setUseDST(const bool b);
 
+	bool getStartupTimeStop() const;
+	void setStartupTimeStop(const bool b);
+
 	DitheringMode getDitheringMode() const { return ditheringMode; }
 	void setDitheringMode(DitheringMode mode);
 	void setDitheringMode(const QString& modeName);
@@ -797,6 +801,8 @@ signals:
 	void useCustomTimeZoneChanged(const bool b);
 	//! This signal is emitted when daylight saving time is enabled or disabled.
 	void flagUseDSTChanged(const bool b);
+	//! This signal is emitted when stop clock at startup is enabled or disabled.
+	void startupTimeStopChanged(const bool b);
 	//! This signal is emitted when the time rate has changed
 	void timeRateChanged(double rate);
 	//! This signal is emitted whenever the time is re-synced.
@@ -919,6 +925,7 @@ private:
 	QString currentTimeZone;	
 	bool flagUseDST;
 	bool flagUseCTZ; // custom time zone
+	bool startupTimeStop;
 
 	// Variables for equations of DeltaT
 	Vec3d deltaTCustomEquationCoeff;
