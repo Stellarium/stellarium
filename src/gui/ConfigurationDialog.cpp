@@ -267,6 +267,7 @@ void ConfigurationDialog::createDialogContent()
 	}
 	ui->dateFormatsComboBox->setCurrentIndex(idx);
 	connect(ui->dateFormatsComboBox, SIGNAL(currentIndexChanged(const int)), this, SLOT(setDateFormat()));
+	connectBoolProperty(ui->startupTimeStopCheckBox, "StelCore.startupTimeStop");
 
 	// Display formats of time
 	populateTimeFormatsList();
@@ -1157,6 +1158,7 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("navigation/flag_enable_mouse_zooming",		mvmgr->getFlagEnableMouseZooming());
 	conf->setValue("navigation/flag_enable_move_keys",		mvmgr->getFlagEnableMoveKeys());
 	conf->setValue("navigation/startup_time_mode",			core->getStartupTimeMode());
+	conf->setValue("navigation/startup_time_stop",			core->getStartupTimeStop());
 	conf->setValue("navigation/today_time",				core->getInitTodayTime());
 	conf->setValue("navigation/preset_sky_time",			core->getPresetSkyTime());
 	conf->setValue("navigation/time_correction_algorithm",	core->getCurrentDeltaTAlgorithmKey());
