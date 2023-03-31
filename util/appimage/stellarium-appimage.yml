@@ -1,7 +1,7 @@
 version: 1
 
 script:
-    - cmake ../.. -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release
+    - cmake ../.. -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release -DENABLE_QTWEBENGINE=Off
     - make -j3
     - make install DESTDIR=AppDir
 
@@ -36,10 +36,10 @@ AppDir:
       - libqt5script5
       - libqt5serialport5
       - libqt5widgets5
-      - libqt5webengine5
-      - libqt5webenginecore5
-      - libqt5webenginewidgets5
-      - libqt5webengine-data
+#      - libqt5webengine5
+#      - libqt5webenginecore5
+#      - libqt5webenginewidgets5
+#      - libqt5webengine-data
       - libqt5charts5
       - libqt5opengl5
       - libgps26
