@@ -326,12 +326,12 @@ qreal SkyGui::getLeftBarWidth() const
 //! Update the position of the button bars in the main window
 void SkyGui::updateBarsPos()
 {
-	const int ww = getSkyGuiWidth();
-	const int hh = getSkyGuiHeight();
+	const int ww = getSkyGuiWidth();  // actually: window width
+	const int hh = getSkyGuiHeight(); // actually: window height
 	bool updatePath = false;
 
 	// Use a position cache to avoid useless redraw triggered by the position set if the bars don't move
-	double rangeX = leftBar->boundingRectNoHelpLabel().width()+2.*buttonBarsPath->getRoundSize()+1.;
+	const double rangeX = leftBar->boundingRectNoHelpLabel().width()+2.*buttonBarsPath->getRoundSize()+1.;
 	const qreal newLeftBarX = buttonBarsPath->getRoundSize()-(1.-animLeftBarTimeLine->currentValue())*rangeX-0.5;
 	const qreal newLeftBarY = hh-leftBar->boundingRectNoHelpLabel().height()-bottomBar->boundingRectNoHelpLabel().height()-20;
 	if (!qFuzzyCompare(leftBar->pos().x(), newLeftBarX) || !qFuzzyCompare(leftBar->pos().y(), newLeftBarY))
@@ -340,12 +340,14 @@ void SkyGui::updateBarsPos()
 		updatePath = true;
 	}
 
-	double rangeY = bottomBar->boundingRectNoHelpLabel().height()+0.5-7.-buttonBarsPath->getRoundSize();
+	const double rangeY = bottomBar->getButtonsBoundingRect().height()+1.5+bottomBar->getGap();
 	const qreal newBottomBarX = leftBar->boundingRectNoHelpLabel().right()+buttonBarsPath->getRoundSize();
-	const qreal newBottomBarY = hh-bottomBar->boundingRectNoHelpLabel().height()-buttonBarsPath->getRoundSize()+0.5+(1.-animBottomBarTimeLine->currentValue())*rangeY;
+	const qreal newBottomBarY = hh-bottomBar->boundingRectNoHelpLabel().height()+bottomBar->getGap()-buttonBarsPath->getRoundSize()+0.5+(1.-animBottomBarTimeLine->currentValue())*rangeY;
+
 	if (!qFuzzyCompare(bottomBar->pos().x(), newBottomBarX) || !qFuzzyCompare(bottomBar->pos().y(), newBottomBarY))
 	{
-		bottomBar->setPos(qRound(newBottomBarX), qRound(newBottomBarY));
+		//bottomBar->setPos(qRound(newBottomBarX), qRound(newBottomBarY)); // GZ: why qRound???
+		bottomBar->setPos(newBottomBarX, newBottomBarY);
 		updatePath = true;
 	}
 
@@ -366,7 +368,7 @@ void SkyGui::updateBarsPos()
 	// Update position of the auto-hide buttons
 	autoHidebts->setPos(0, hh-autoHidebts->childrenBoundingRect().height()+1);
 	double opacity = qMax(animLeftBarTimeLine->currentValue(), animBottomBarTimeLine->currentValue());
-	autoHidebts->setOpacity(opacity < 0.01 ? 0.01 : opacity);	// Work around a qt bug
+	autoHidebts->setOpacity(qMax(0.01, opacity));	// Work around a qt bug
 
 	// Update the screen as soon as possible.
 	StelMainView::getInstance().thereWasAnEvent();
@@ -384,7 +386,7 @@ void SkyGui::setStelStyle(const QString& style)
 // Add a new progress bar in the lower right corner of the screen.
 void SkyGui::addProgressBar(StelProgressController* p)
 {
-	return progressBarMgr->addProgressBar(p);
+	progressBarMgr->addProgressBar(p);
 }
 
 void SkyGui::paint(QPainter*, const QStyleOptionGraphicsItem*, QWidget*)
