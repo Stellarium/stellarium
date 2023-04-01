@@ -254,7 +254,7 @@ public:
 							const QPixmap& pixRight=QPixmap(), const QPixmap& pixMiddle=QPixmap(),
 							const QPixmap& pixSingle=QPixmap());
 
-	//! Set the color for all the sub elements
+	//! Set the brush color for all the sub elements (Seems not to do anything, in fact!)
 	void setColor(const QColor& c);
 
 	//! Set whether time must be displayed in the bottom bar
@@ -279,6 +279,10 @@ public:
 	void setFlagShowTz(bool b) { flagShowTZ=b; }
 	bool getFlagShowTz() const { return flagShowTZ; }
 
+	//! @return boundingRect of the buttons only
+	QRectF getButtonsBoundingRect() const;
+	//! @return height of vertical gap (pixels)
+	int getGap() const {return gap;}
 signals:
 	void sizeChanged();
 
@@ -295,7 +299,6 @@ private:
 	// updateTopocentric: regardless of topocentric setting, reformat the string if true
 	void updateText(bool forceUpdatePos=false, bool updateTopocentric=false);
 	void updateButtonsGroups();
-	QRectF getButtonsBoundingRect() const;
 	// Elements which get displayed above the buttons:
 	QGraphicsSimpleTextItem* location;
 	QGraphicsSimpleTextItem* datetime;
@@ -307,6 +310,7 @@ private:
 	QGraphicsPixmapItem* datetimePixmap;
 	QGraphicsPixmapItem* fovPixmap;
 	QGraphicsPixmapItem* fpsPixmap;
+	int gap; // a pixel distance between status line and buttons. May have fixed size or could depend on status element font size QFontMetrics::descent()
 
 
 

@@ -129,8 +129,7 @@ void StelButton::initCtor(const QPixmap& apixOn,
 	setAcceptHoverEvents(true);
 	timeLine = new QTimeLine(250, this);
 	timeLine->setEasingCurve(QEasingCurve(QEasingCurve::OutCurve));
-	connect(timeLine, SIGNAL(valueChanged(qreal)),
-	        this, SLOT(animValueChanged(qreal)));
+	connect(timeLine, SIGNAL(valueChanged(qreal)), this, SLOT(animValueChanged(qreal)));
 	connect(&StelMainView::getInstance(), SIGNAL(updateIconsRequested()), this, SLOT(updateIcon()));  // Not sure if this is ever called?
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	connect(gui, SIGNAL(flagUseButtonsBackgroundChanged(bool)), this, SLOT(updateIcon()));
@@ -512,6 +511,7 @@ BottomStelBar::BottomStelBar(QGraphicsItem* parent,
 	datetimePixmap(Q_NULLPTR),
 	fovPixmap(Q_NULLPTR),
 	fpsPixmap(Q_NULLPTR),
+	gap(2),
 	pixBackgroundLeft(pixLeft),
 	pixBackgroundRight(pixRight),
 	pixBackgroundMiddle(pixMiddle),
@@ -539,7 +539,7 @@ BottomStelBar::BottomStelBar(QGraphicsItem* parent,
 	setColor(QColor::fromRgbF(1,1,1,1));
 
 	setFontSizeFromApp(StelApp::getInstance().getScreenFontSize());
-	connect(&StelApp::getInstance(), SIGNAL(screenFontSizeChanged(int)), this, SLOT(setFontSizeFromApp(int)));
+	connect(&StelApp::getInstance(), &StelApp::screenFontSizeChanged, this, [=](int fontsize){setFontSizeFromApp(fontsize); setFontSizeFromApp(fontsize);}); // We must call that twice to force all geom. updates
 	connect(&StelApp::getInstance(), SIGNAL(fontChanged(QFont)), this, SLOT(setFont(QFont)));
 	connect(StelApp::getInstance().getCore(), &StelCore::flagUseTopocentricCoordinatesChanged, this, [=](bool){updateText(false, true);});
 
@@ -556,10 +556,9 @@ BottomStelBar::BottomStelBar(QGraphicsItem* parent,
 //! connect from StelApp to resize fonts on the fly.
 void BottomStelBar::setFontSizeFromApp(int size)
 {
-	// Font size was developed based on base font size 13, i.e. 12
-	int screenFontSize = size-1;
 	QFont font=QGuiApplication::font();
-	font.setPixelSize(screenFontSize);
+	// Font size was developed based on base font size 13, i.e. 12
+	font.setPixelSize(size-1);
 	datetime->setFont(font);
 	location->setFont(font);
 	fov->setFont(font);
@@ -571,7 +570,10 @@ void BottomStelBar::setFontSizeFromApp(int size)
 		// to avoid crash
 		SkyGui* skyGui=gui->getSkyGui();
 		if (skyGui)
+		{
 			skyGui->updateBarsPos();
+			updateButtonsGroups(); // Make sure bounding boxes are readjusted.
+		}
 	}
 }
 
@@ -716,7 +718,7 @@ QRectF BottomStelBar::getButtonsBoundingRect() const
 	}
 
 	if (hasBtn)
-		return QRectF(0, 0, childRect.width()-1, childRect.height()-1);
+		return QRectF(0, 0, childRect.width(), childRect.height());
 	else
 		return QRectF();
 }
@@ -724,7 +726,8 @@ QRectF BottomStelBar::getButtonsBoundingRect() const
 void BottomStelBar::updateButtonsGroups()
 {
 	double x = 0;
-	const double y = datetime->boundingRect().height() + 3;
+	QFontMetrics statusFM(datetime->font());
+	const double y = statusFM.lineSpacing()+gap; // Take natural font geometry into account
 	for (auto& group : buttonGroups)
 	{
 		QList<StelButton*>& buttons = group.elems;
@@ -986,6 +989,20 @@ void BottomStelBar::updateText(bool updatePos, bool updateTopocentric)
 		updatePos = true;
 		if (getFlagShowFov())
 		{
+			// DEBUG: SHOW DIFFERENT VALUES...
+//			SkyGui * skyGui= static_cast<StelGui *>(StelApp::getInstance().getGui())->getSkyGui();
+//			QFontMetrics locationMetrics(location->font());
+//			QRectF buttonBoundingRect=getButtonsBoundingRect();
+//			QString bbbr=QString("BBX: %1 ww: %2 hh: %3 h: %4,  %5 ch: %6x%7 bb: %8x%9").arg(QString::number(boundingRectNoHelpLabel().height(), 'f', 3),
+//										QString::number(skyGui->getSkyGuiWidth()),
+//										QString::number(skyGui->getSkyGuiHeight()),
+//										QString::number(locationMetrics.boundingRect("M").height()), // h: height
+//										QString::number(childItems().count()),                       // NN ch.
+//										QString::number(childrenBoundingRect().width()),
+//										QString::number(childrenBoundingRect().height()),
+//										QString::number(buttonBoundingRect.width()),
+//										QString::number(buttonBoundingRect.height()));
+//			fov->setText(bbbr);
 			fov->setText(str);
 			fov->setToolTip(QString("%1: %2").arg(q_("Field of view"), fovdms));
 			if (qApp->property("text_texture")==true) // CLI option -t given?
@@ -1041,15 +1058,15 @@ void BottomStelBar::updateText(bool updatePos, bool updateTopocentric)
 			fovShift += fovMetrics.boundingRect("MM'SS\"").width();
 
 		QRectF rectCh = getButtonsBoundingRect();
+		QFontMetrics locationMetrics(location->font());
+		int locationWidth=locationMetrics.boundingRect(location->text() + "MMM").width();
 		location->setPos(0, 0);
-		QFontMetrics locationMetrics(fov->font());
-		int locationWidth=locationMetrics.boundingRect(location->text()).width() + locationMetrics.boundingRect("MMM").width();
 
 		int dateTimePos = static_cast<int>(rectCh.right()-datetime->boundingRect().width())-5;
 		if ((dateTimePos%2) == 1) dateTimePos--; // make even pixel
 
 		const int rightPush=qMax(0, locationWidth-(dateTimePos-fovShift));
-		datetime->setPos(dateTimePos+rightPush,0);
+		datetime->setPos(dateTimePos+rightPush, 0);
 		fov->setPos(datetime->x()-fovShift, 0);
 		fps->setPos(datetime->x()-fpsShift, 0);
 		if (qApp->property("text_texture")==true) // CLI option -t given?
@@ -1057,10 +1074,30 @@ void BottomStelBar::updateText(bool updatePos, bool updateTopocentric)
 			locationPixmap->setPos(0,0);
 			int dateTimePos = static_cast<int>(rectCh.right()-datetimePixmap->boundingRect().width())-5;
 			if ((dateTimePos%2) == 1) dateTimePos--; // make even pixel
-			datetimePixmap->setPos(dateTimePos,0);
+			datetimePixmap->setPos(dateTimePos, 0);
 			fovPixmap->setPos(datetimePixmap->x()-fovShift, 0);
 			fpsPixmap->setPos(datetimePixmap->x()-fpsShift, 0);
 		}
+
+//		// TEST
+//		QRectF br=boundingRect();            // Same size as childrenBoundingRect, just at offset 0/0.
+//		QRectF chBR=childrenBoundingRect();  // Same as boundingRectNoHelpLabel unless helpItem is shown.
+//		QRectF bbnhl=boundingRectNoHelpLabel();
+//		QString brStr=QString("BR: %1x%2+%3+%4 CBR: %5x%6+%7+%8 BBNHL: %9x%10+%11+%12").arg(QString::number(br.width(), 'f', 2),
+//									      QString::number(br.height(), 'f', 2),
+//									      QString::number(br.left(), 'f', 2),
+//									      QString::number(br.top(), 'f', 2),
+//									      QString::number(chBR.width(), 'f', 2),
+//									      QString::number(chBR.height(), 'f', 2),
+//									      QString::number(chBR.left(), 'f', 2),
+//									      QString::number(chBR.top(), 'f', 2)
+//									      ).arg(
+//									      QString::number(bbnhl.width(), 'f', 2),
+//									      QString::number(bbnhl.height(), 'f', 2),
+//									      QString::number(bbnhl.left(), 'f', 2),
+//									      QString::number(bbnhl.top(), 'f', 2)
+//									      );
+//		datetime->setText(brStr);
 	}
 }
 
@@ -1073,8 +1110,9 @@ QRectF BottomStelBar::boundingRect() const
 {
 	if (QGraphicsItem::childItems().size()==0)
 		return QRectF();
-	const QRectF& r = childrenBoundingRect();
-	return QRectF(0, 0, r.width()-1, r.height()-1);
+	const QRectF& r = childrenBoundingRect(); // BBX of status text (Location/FoV/FPS/Time) and buttons
+	//return QRectF(0, 0, r.width()-1, r.height()-1); // Why return a smaller BR than children?
+	return QRectF(0, 0, r.width(), r.height());
 }
 
 QRectF BottomStelBar::boundingRectNoHelpLabel() const
@@ -1092,7 +1130,7 @@ QRectF BottomStelBar::boundingRectNoHelpLabel() const
 	return childRect;
 }
 
-// Set the pen for all the sub elements
+// Set the brush for all the sub elements
 void BottomStelBar::setColor(const QColor& c)
 {
 	datetime->setBrush(c);
@@ -1146,15 +1184,15 @@ void BottomStelBar::buttonHoverChanged(bool b)
 
 StelBarsPath::StelBarsPath(QGraphicsItem* parent) : QGraphicsPathItem(parent), roundSize(6)
 {
-	QPen aPen(QColor::fromRgbF(0.7,0.7,0.7,0.5));
-	aPen.setWidthF(1.);
 	setBrush(QBrush(QColor::fromRgbF(0.22, 0.22, 0.23, 0.2)));
+	QPen aPen(QColor::fromRgbF(0.7,0.7,0.7,0.5));
+	// aPen.setWidthF(1.); // 1=default!
 	setPen(aPen);
 }
 
 void StelBarsPath::updatePath(BottomStelBar* bottom, LeftStelBar* left)
 {
-	const QPointF l = left->pos() + QPointF(-0.5,0.5);   // pos() seems to be the top-left point.
+	const QPointF l = left->pos() + QPointF(-0.5,0.5);   // pos() is the top-left point in the parent's coordinate system.
 	const QRectF lB = left->boundingRectNoHelpLabel();
 	const QPointF b = bottom->pos() + QPointF(-0.5,0.5);
 	const QRectF bB = bottom->boundingRectNoHelpLabel();

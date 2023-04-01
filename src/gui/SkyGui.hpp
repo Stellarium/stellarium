@@ -20,7 +20,6 @@
 #ifndef SKYGUI_HPP
 #define SKYGUI_HPP
 
-#include "StelStyle.hpp"
 #include "StelObject.hpp"
 
 #include <QDebug>
@@ -62,17 +61,20 @@ public:
 	SkyGui(QGraphicsItem * parent=Q_NULLPTR);
 	//! Add a new progress bar in the lower right corner of the screen.
 	//! When the progress bar is deleted with removeProgressBar() the layout is automatically rearranged.
-	//! @return a pointer to the progress bar
 	void addProgressBar(StelProgressController*);
 	
 	void init(class StelGui* stelGui);
 	
 	virtual void paint(QPainter*, const QStyleOptionGraphicsItem*, QWidget* = Q_NULLPTR) Q_DECL_OVERRIDE;
 
+	//! actually returns window width
 	int getSkyGuiWidth() const;
+	//! actually returns window height
 	int getSkyGuiHeight() const;
-	qreal getBottomBarHeight() const; //!< return height of bottom Bar when fully shown
-	qreal getLeftBarWidth() const;    //!< return width of left Bar when fully shown
+	//! return height of bottom Bar when fully shown
+	qreal getBottomBarHeight() const;
+	//! return width of left Bar when fully shown
+	qreal getLeftBarWidth() const;
 	
 protected:
 	virtual void resizeEvent(QGraphicsSceneResizeEvent* event) Q_DECL_OVERRIDE;
