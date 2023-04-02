@@ -1049,19 +1049,13 @@ void BottomStelBar::updateText(bool updatePos, bool updateTopocentric)
 	{
 		// The location string starts at left, dateTime ends at right. FoV and FPS come ahead of dateTime.
 		// In case the strings are wider than available button space, they are now pushed to the right.
-		QFontMetrics fpsMetrics(fps->font());
-		int fpsShift = fpsMetrics.boundingRect(fpsstr).width() + fpsMetrics.boundingRect("MMMM").width();
-
-		QFontMetrics fovMetrics(fov->font());
-		int fovShift = fpsShift + fovMetrics.boundingRect(fovstr).width() + fovMetrics.boundingRect("MMMM").width();
-		if (getFlagFovDms())
-			fovShift += fovMetrics.boundingRect("MM'SS\"").width();
-
-		QRectF rectCh = getButtonsBoundingRect();
-		QFontMetrics locationMetrics(location->font());
-		int locationWidth=locationMetrics.boundingRect(location->text() + "MMM").width();
+		QFontMetrics fontMetrics(location->font());
+		int fpsShift     = fontMetrics.boundingRect(fps->text()+"MMM").width();
+		int fovShift     = fontMetrics.boundingRect(fov->text()+"MMM").width() + fpsShift;
+		int locationWidth= fontMetrics.boundingRect(location->text() + "MMM").width();
 		location->setPos(0, 0);
 
+		QRectF rectCh = getButtonsBoundingRect();
 		int dateTimePos = static_cast<int>(rectCh.right()-datetime->boundingRect().width())-5;
 		if ((dateTimePos%2) == 1) dateTimePos--; // make even pixel
 
