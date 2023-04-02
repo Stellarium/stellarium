@@ -845,7 +845,7 @@ QLineEdit[collision="true"] {
 #dateTimeDialogForm QDoubleSpinBox::up-button {
 	subcontrol-origin: border;
 	subcontrol-position: top center;
-	margin: 0 14px 8px 12px;
+	margin: 0 2px 8px 0;
 	width: 32px;
 	border: none;
 	background: none;
@@ -864,7 +864,7 @@ QLineEdit[collision="true"] {
 #dateTimeDialogForm QDoubleSpinBox::down-button {
 	subcontrol-origin: border;
 	subcontrol-position: bottom center;
-	margin: 8px 14px 0 12px;
+	margin: 8px 2px 0 0;
 	border: none;
 	width: 32px;
 	background: none;
