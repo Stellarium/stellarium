@@ -39,7 +39,7 @@ class InfoPanel : public QGraphicsTextItem
 	public:
 		//! Reads "gui/selected_object_info", etc from the configuration file.
 		InfoPanel(QGraphicsItem* parent);
-		~InfoPanel() Q_DECL_OVERRIDE;
+		~InfoPanel() override;
 		void setInfoTextFilters(const StelObject::InfoStringGroup& aflags) {infoTextFilters=aflags;}
 		const StelObject::InfoStringGroup& getInfoTextFilters(void) const {return infoTextFilters;}
 		void setTextFromObjects(const QList<StelObjectP>&);
@@ -58,14 +58,14 @@ class SkyGui: public QGraphicsWidget
 public:
 	friend class StelGui;
 	
-	SkyGui(QGraphicsItem * parent=Q_NULLPTR);
+	SkyGui(QGraphicsItem * parent=nullptr);
 	//! Add a new progress bar in the lower right corner of the screen.
 	//! When the progress bar is deleted with removeProgressBar() the layout is automatically rearranged.
 	void addProgressBar(StelProgressController*);
 	
 	void init(class StelGui* stelGui);
 	
-	virtual void paint(QPainter*, const QStyleOptionGraphicsItem*, QWidget* = Q_NULLPTR) Q_DECL_OVERRIDE;
+	void paint(QPainter*, const QStyleOptionGraphicsItem*, QWidget* = nullptr) override;
 
 	//! actually returns window width
 	int getSkyGuiWidth() const;
@@ -77,9 +77,9 @@ public:
 	qreal getLeftBarWidth() const;
 	
 protected:
-	virtual void resizeEvent(QGraphicsSceneResizeEvent* event) Q_DECL_OVERRIDE;
-	virtual void hoverMoveEvent(QGraphicsSceneHoverEvent* event) Q_DECL_OVERRIDE;
-	virtual QVariant itemChange(GraphicsItemChange change, const QVariant & value) Q_DECL_OVERRIDE;
+	void resizeEvent(QGraphicsSceneResizeEvent* event) override;
+	void hoverMoveEvent(QGraphicsSceneHoverEvent* event) override;
+	QVariant itemChange(GraphicsItemChange change, const QVariant & value) override;
 
 private slots:
 	//! Load color scheme from the given ini file and section name
