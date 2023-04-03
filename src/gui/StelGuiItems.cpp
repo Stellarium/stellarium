@@ -1001,7 +1001,7 @@ void BottomStelBar::updateText(bool updatePos, bool updateTopocentric)
 	if (getFlagFovDms())
 		fovText=QString("%1 %2").arg(qc_("FOV", "abbreviation"), fovdms);
 	else
-		fovText=QString("%1 %2%3").arg(qc_("FOV", "abbreviation"), QString::number(core->getMovementMgr()->getCurrentFov(), 'f', 1), QChar(0x00B0));
+		fovText=QString("%1 %2%3").arg(qc_("FOV", "abbreviation"), QString::number(core->getMovementMgr()->getCurrentFov(), 'g', 3), QChar(0x00B0));
 
 	if (fov->text()!=fovText || (fovPixmap && fovPixmap->data(0).toBool()))
 	{
