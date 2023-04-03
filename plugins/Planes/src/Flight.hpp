@@ -40,7 +40,6 @@ class Flight : public StelObject
 	//Required for Q_FLAG macro, this requires this header to be MOC'ed
 	Q_GADGET
 public:
-
 	//! @enum PathColorMode
 	//! Determines how the flight paths are colored
 	enum PathColorMode
@@ -119,12 +118,12 @@ public:
 		return QStringLiteral("Flight");
 	}
 	//! Return object's type. It should be English lowercase name of the type of the object.
-	virtual QString getObjectType() const override
+	QString getObjectType() const override
 	{
 		return N_("plane");
 	}
 	//! Return object's type. It should be translated lowercase name of the type of the object.
-	virtual QString getObjectTypeI18n() const override
+	QString getObjectTypeI18n() const override
 	{
 		return q_(getObjectType());
 	}
@@ -140,7 +139,7 @@ public:
 
 	//! An object may have multiple IDs (different catalog numbers, etc). StelObjectMgr::searchByID()
 	//! should search through all ID variants, but this method only returns one of them.
-	virtual QString getID() const override
+	QString getID() const override
 	{
 		return getCallsign();
 	}
@@ -170,7 +169,7 @@ public:
 	}
 
 	//! Angular size of Flight objects
-	virtual double getAngularRadius(const StelCore *core) const override
+	double getAngularRadius(const StelCore *core) const override
 	{
 		return .05;
 	}

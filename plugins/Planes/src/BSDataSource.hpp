@@ -50,7 +50,6 @@ class BSDataSource : public FlightDataSource
 {
 	Q_OBJECT
 public:
-
 	//! @enum MsgMsgType
 	//! Encodes the types of message a line startin with "MSG" is
 	enum MsgMsgType

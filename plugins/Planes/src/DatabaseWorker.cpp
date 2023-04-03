@@ -23,9 +23,9 @@
 #include <QSqlError>
 
 DatabaseWorker::DatabaseWorker(QObject *parent) :
-	QObject(parent)
+	QObject(parent),
+	dbConnected(false)
 {
-	dbConnected = false;
 }
 
 void DatabaseWorker::connectDB(DBCredentials creds)

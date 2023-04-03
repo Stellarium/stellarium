@@ -91,7 +91,6 @@ private:
 	QSharedPointer<Planet> earth; //!< Reference to planet earth, to check if we are on earth
 	double displayBrightness; //!< brightness for rendering / fading
 	FlightP lastSelectedObject; //!< the last selected Flight
-
 };
 
 #endif // FLIGHTMGR_HPP

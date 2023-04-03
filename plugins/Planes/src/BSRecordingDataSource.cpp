@@ -21,14 +21,13 @@
 #include "ADS-B.hpp"
 #include "StelApp.hpp"
 
-BSRecordingDataSource::BSRecordingDataSource() : FlightDataSource(1), workerRunning(false), workerThread(NULL), worker(NULL), progressBar(NULL)
+BSRecordingDataSource::BSRecordingDataSource() : FlightDataSource(1), workerRunning(false), workerThread(nullptr), worker(nullptr), progressBar(nullptr)
 {
 	qRegisterMetaType<QList<FlightP> >();
 }
 
 BSRecordingDataSource::~BSRecordingDataSource()
 {
-
 }
 
 QList<FlightP> *BSRecordingDataSource::getRelevantFlights()
@@ -72,7 +71,6 @@ void BSRecordingDataSource::updateRelevantFlights(double jd, double rate)
 
 void BSRecordingDataSource::init()
 {
-
 }
 
 void BSRecordingDataSource::deinit()
@@ -97,7 +95,7 @@ void BSRecordingDataSource::loadFile(QString filename)
 	workerThread->connect(workerThread, SIGNAL(finished()), SLOT(deleteLater()));
 
 	workerThread->start();
-	if (progressBar == NULL)
+	if (!progressBar)
 	{
 		progressBar = StelApp::getInstance().addProgressBar();
 	}
@@ -123,7 +121,7 @@ void BSRecordingDataSource::processResult(QList<FlightP> result)
 	if (progressBar)
 	{
 		StelApp::getInstance().removeProgressBar(progressBar);
-		progressBar = NULL;
+		progressBar = nullptr;
 	}
 }
 

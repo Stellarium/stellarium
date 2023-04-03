@@ -54,15 +54,15 @@ double Flight::heightRange = Flight::maxHeight - Flight::minHeight;
 std::vector<float> Flight::pathVert;
 std::vector<float> Flight::pathCol;
 
-Flight::Flight() : data(Q_NULLPTR), flightSelected(false), currentFrame(Q_NULLPTR), position(0, 0, 0), inTimeRange(false)
+Flight::Flight() : data(nullptr), flightSelected(false), currentFrame(nullptr), position(0, 0, 0), inTimeRange(false)
 {}
 
-Flight::Flight(QStringList &data) : flightSelected(false), currentFrame(Q_NULLPTR), position(0, 0, 0), inTimeRange(false)
+Flight::Flight(QStringList &data) : flightSelected(false), currentFrame(nullptr), position(0, 0, 0), inTimeRange(false)
 {
 	this->data = new ADSBData(data);
 }
 
-Flight::Flight(QList<ADSBFrame> &data, QString &modeS, QString &modeSHex, QString &callsign, QString &country) : flightSelected(false), currentFrame(Q_NULLPTR), position(0, 0, 0), inTimeRange(false)
+Flight::Flight(QList<ADSBFrame> &data, QString &modeS, QString &modeSHex, QString &callsign, QString &country) : flightSelected(false), currentFrame(nullptr), position(0, 0, 0), inTimeRange(false)
 {
 	this->data = new ADSBData(data, modeS, modeSHex, callsign, country);
 }
@@ -375,7 +375,6 @@ void Flight::updateObserverPos(StelLocation pos)
 	ECEFtoAzAl[2][0] = cla * clo;
 	ECEFtoAzAl[2][1] = cla * slo;
 	ECEFtoAzAl[2][2] = sla;
-
 }
 
 Vec3d Flight::getAzAl(const Vec3d &v)

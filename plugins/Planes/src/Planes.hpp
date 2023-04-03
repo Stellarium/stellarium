@@ -54,7 +54,7 @@ class Planes : public StelObjectModule
 	friend class FlightMgr;
 public:
 	Planes();
-	virtual ~Planes();
+	~Planes() override;
 
 	///////////////////////////////////////////////////////////////////////////
 	//!@{
@@ -92,7 +92,7 @@ public:
 	//! Return the StelObject with the given ID if exists or the empty StelObject if not found
 	//! @param name the english object name
 	//! @todo for now this is equal to searchByName(). Maybe this is wrong.
-	virtual StelObjectP searchByID(const QString& id) const override
+	StelObjectP searchByID(const QString& id) const override
 	{
 		return searchByName(id);
 	}
@@ -120,7 +120,7 @@ public:
 		return QStringLiteral("Planes");
 	}
 	//! Returns the name that will be returned by StelObject::getType() for the objects this module manages
-	virtual QString getStelObjectType() const override
+	QString getStelObjectType() const override
 	{
 		return QStringLiteral("Flight");
 	}
@@ -343,9 +343,9 @@ class PlanesStelPluginInterface : public QObject, public StelPluginInterface
 	Q_PLUGIN_METADATA(IID StelPluginInterface_iid)
 	Q_INTERFACES(StelPluginInterface)
 public:
-	virtual StelModule* getStelModule()    const override;
-	virtual StelPluginInfo getPluginInfo() const override;
-	virtual QObjectList getExtensionList() const override { return QObjectList(); }
+	StelModule* getStelModule()    const override;
+	StelPluginInfo getPluginInfo() const override;
+	QObjectList getExtensionList() const override { return QObjectList(); }
 };
 
 #endif /*PLANES_HPP_*/
