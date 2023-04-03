@@ -34,7 +34,7 @@
 #include <QRegularExpression>
 
 InfoPanel::InfoPanel(QGraphicsItem* parent) : QGraphicsTextItem("", parent),
-	infoPixmap(Q_NULLPTR)
+	infoPixmap(nullptr)
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
@@ -70,7 +70,7 @@ InfoPanel::~InfoPanel()
 	if (infoPixmap)
 	{
 		delete infoPixmap;
-		infoPixmap=Q_NULLPTR;
+		infoPixmap=nullptr;
 	}
 }
 
@@ -177,12 +177,12 @@ const QString InfoPanel::getSelectedText(void) const
 SkyGui::SkyGui(QGraphicsItem * parent)
 	: QGraphicsWidget(parent)
 	, lastBottomBarWidth(0)
-	, btHorizAutoHide(Q_NULLPTR)
-	, btVertAutoHide(Q_NULLPTR)
-	, autoHidebts(Q_NULLPTR)
+	, btHorizAutoHide(nullptr)
+	, btVertAutoHide(nullptr)
+	, autoHidebts(nullptr)
 	, autoHideBottomBar(true)
 	, autoHideLeftBar(true)
-	, stelGui(Q_NULLPTR)
+	, stelGui(nullptr)
 {
 	setObjectName("StelSkyGui");
 

@@ -53,9 +53,9 @@ class CornerButtons : public QObject, public QGraphicsItem
 	Q_OBJECT
 	Q_INTERFACES(QGraphicsItem)
 public:
-	CornerButtons(QGraphicsItem* parent=Q_NULLPTR);
-	virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = Q_NULLPTR) Q_DECL_OVERRIDE;
-	virtual QRectF boundingRect() const Q_DECL_OVERRIDE;
+	CornerButtons(QGraphicsItem* parent=nullptr);
+	void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
+	QRectF boundingRect() const override;
 	void setOpacity(double opacity);
 private:
 	mutable double lastOpacity;
@@ -77,9 +77,9 @@ public:
 	//! @param noBackground define whether the button background image have to be used
 	StelButton(QGraphicsItem* parent, const QPixmap& pixOn, const QPixmap& pixOff,
 		   const QPixmap& pixHover=QPixmap(),
-		   class StelAction* action=Q_NULLPTR,
+		   class StelAction* action=nullptr,
 		   bool noBackground=false,
-		   StelAction *otherAction=Q_NULLPTR);
+		   StelAction *otherAction=nullptr);
 	
 	//! Constructor
 	//! @param parent the parent item
@@ -154,10 +154,10 @@ public slots:
 	void setChecked(bool b) { setChecked(static_cast<int>(b)); }
 
 protected:
-	virtual void hoverEnterEvent(QGraphicsSceneHoverEvent* event) Q_DECL_OVERRIDE;
-	virtual void hoverLeaveEvent(QGraphicsSceneHoverEvent* event) Q_DECL_OVERRIDE;
-	virtual void mousePressEvent(QGraphicsSceneMouseEvent* event) Q_DECL_OVERRIDE;
-	virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent* event) Q_DECL_OVERRIDE;
+	void hoverEnterEvent(QGraphicsSceneHoverEvent* event) override;
+	void hoverLeaveEvent(QGraphicsSceneHoverEvent* event) override;
+	void mousePressEvent(QGraphicsSceneMouseEvent* event) override;
+	void mouseReleaseEvent(QGraphicsSceneMouseEvent* event) override;
 	void paint(QPainter*, const QStyleOptionGraphicsItem*, QWidget*) override;
 private slots:
 	void animValueChanged(qreal value);
@@ -205,9 +205,9 @@ class LeftStelBar : public QObject, public QGraphicsItem
 	Q_INTERFACES(QGraphicsItem)
 public:
 	LeftStelBar(QGraphicsItem* parent);
-	~LeftStelBar() Q_DECL_OVERRIDE;
-	virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = Q_NULLPTR) Q_DECL_OVERRIDE;
-	virtual QRectF boundingRect() const Q_DECL_OVERRIDE;
+	~LeftStelBar() override;
+	virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
+	virtual QRectF boundingRect() const override;
 	void addButton(StelButton* button);
 	QRectF boundingRectNoHelpLabel() const;
 	//! Set the color for all the sub elements
@@ -233,9 +233,9 @@ class BottomStelBar : public QObject, public QGraphicsItem
 	Q_INTERFACES(QGraphicsItem)
 public:
 	BottomStelBar(QGraphicsItem* parent, const QPixmap& pixLeft=QPixmap(), const QPixmap& pixRight=QPixmap(), const QPixmap& pixMiddle=QPixmap(), const QPixmap& pixSingle=QPixmap());
-	virtual ~BottomStelBar() Q_DECL_OVERRIDE;
-	virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = Q_NULLPTR) Q_DECL_OVERRIDE;
-	virtual QRectF boundingRect() const Q_DECL_OVERRIDE;
+	~BottomStelBar() override;
+	void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
+	QRectF boundingRect() const override;
 	QRectF boundingRectNoHelpLabel() const;
 
 	//! Add a button in a group in the button bar. Group are displayed in alphabetic order.
@@ -317,8 +317,8 @@ private:
 	struct ButtonGroup
 	{
 		ButtonGroup() : leftMargin(0), rightMargin(0),
-						pixBackgroundLeft(Q_NULLPTR), pixBackgroundRight(Q_NULLPTR),
-						pixBackgroundMiddle(Q_NULLPTR), pixBackgroundSingle(Q_NULLPTR) {}
+						pixBackgroundLeft(nullptr), pixBackgroundRight(nullptr),
+						pixBackgroundMiddle(nullptr), pixBackgroundSingle(nullptr) {}
 		//! Elements of the group
 		QList<StelButton*> elems;
 		//! Left margin size in pixel

@@ -135,7 +135,7 @@ void StelButton::initCtor(const QPixmap& apixOn,
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	connect(gui, SIGNAL(flagUseButtonsBackgroundChanged(bool)), this, SLOT(updateIcon()));
 
-	if (action!=Q_NULLPTR)
+	if (action!=nullptr)
 	{
 		if (action->isCheckable())
 		{
@@ -148,7 +148,7 @@ void StelButton::initCtor(const QPixmap& apixOn,
 			QObject::connect(this, SIGNAL(triggered()), action, SLOT(trigger()));
 		}
 	}
-	if (secondAction!=Q_NULLPTR)
+	if (secondAction!=nullptr)
 	{
 			QObject::connect(this, SIGNAL(triggeredRight()), secondAction, SLOT(trigger()));
 	}
@@ -180,7 +180,7 @@ StelButton::StelButton(QGraphicsItem* parent,
 	: QGraphicsPixmapItem(pixOff, parent)
 {
 	StelAction *action = StelApp::getInstance().getStelActionManager()->findAction(actionId);
-	initCtor(pixOn, pixOff, pixNoChange, pixHover, action, Q_NULLPTR, noBackground, isTristate);
+	initCtor(pixOn, pixOff, pixNoChange, pixHover, action, nullptr, noBackground, isTristate);
 }
 
 StelButton::StelButton(QGraphicsItem* parent,
@@ -193,7 +193,7 @@ StelButton::StelButton(QGraphicsItem* parent,
 	: QGraphicsPixmapItem(pixOff, parent)
 {
 	StelAction *action = StelApp::getInstance().getStelActionManager()->findAction(actionId);
-	StelAction *otherAction=Q_NULLPTR;
+	StelAction *otherAction=nullptr;
 	if (!otherActionId.isEmpty())
 		otherAction = StelApp::getInstance().getStelActionManager()->findAction(otherActionId);
 
@@ -260,7 +260,7 @@ void StelButton::mouseReleaseEvent(QGraphicsSceneMouseEvent* event)
 {
 	if (event->button()==Qt::LeftButton)
 	{
-		if (action!=Q_NULLPTR && !action->isCheckable())
+		if (action!=nullptr && !action->isCheckable())
 			setChecked(toggleChecked(checked));
 
 		if (flagChangeFocus) // true if button is on bottom bar
@@ -363,8 +363,8 @@ void StelButton::paint(QPainter* painter, const QStyleOptionGraphicsItem*, QWidg
 
 LeftStelBar::LeftStelBar(QGraphicsItem* parent)
 	: QGraphicsItem(parent)
-	, hideTimeLine(Q_NULLPTR)
-	, helpLabelPixmap(Q_NULLPTR)
+	, hideTimeLine(nullptr)
+	, helpLabelPixmap(nullptr)
 {
 	// Create the help label
 	helpLabel = new QGraphicsSimpleTextItem("", this);
@@ -379,7 +379,7 @@ LeftStelBar::LeftStelBar(QGraphicsItem* parent)
 
 LeftStelBar::~LeftStelBar()
 {
-	if (helpLabelPixmap) { delete helpLabelPixmap; helpLabelPixmap=Q_NULLPTR; }
+	if (helpLabelPixmap) { delete helpLabelPixmap; helpLabelPixmap=nullptr; }
 }
 
 void LeftStelBar::addButton(StelButton* button)
@@ -508,16 +508,16 @@ BottomStelBar::BottomStelBar(QGraphicsItem* parent,
                              const QPixmap& pixMiddle,
                              const QPixmap& pixSingle) :
 	QGraphicsItem(parent),
-	locationPixmap(Q_NULLPTR),
-	datetimePixmap(Q_NULLPTR),
-	fovPixmap(Q_NULLPTR),
-	fpsPixmap(Q_NULLPTR),
+	locationPixmap(nullptr),
+	datetimePixmap(nullptr),
+	fovPixmap(nullptr),
+	fpsPixmap(nullptr),
 	gap(2),
 	pixBackgroundLeft(pixLeft),
 	pixBackgroundRight(pixRight),
 	pixBackgroundMiddle(pixMiddle),
 	pixBackgroundSingle(pixSingle),
-	helpLabelPixmap(Q_NULLPTR)
+	helpLabelPixmap(nullptr)
 {
 	// The text is dummy just for testing
 	datetime = new QGraphicsSimpleTextItem("2008-02-06  17:33", this);
@@ -612,18 +612,18 @@ BottomStelBar::~BottomStelBar()
 	{
 		for (auto* b : qAsConst(group.elems))
 		{
-			if (b->parentItem()==Q_NULLPTR)
+			if (b->parentItem()==nullptr)
 			{
 				delete b;
-				b=Q_NULLPTR;
+				b=nullptr;
 			}
 		}
 	}
-	if (datetimePixmap) { delete datetimePixmap; datetimePixmap=Q_NULLPTR; }
-	if (locationPixmap) { delete locationPixmap; locationPixmap=Q_NULLPTR; }
-	if (fovPixmap) { delete fovPixmap; fovPixmap=Q_NULLPTR; }
-	if (fpsPixmap) { delete fpsPixmap; fpsPixmap=Q_NULLPTR; }
-	if (helpLabelPixmap) { delete helpLabelPixmap; helpLabelPixmap=Q_NULLPTR; }
+	if (datetimePixmap) { delete datetimePixmap; datetimePixmap=nullptr; }
+	if (locationPixmap) { delete locationPixmap; locationPixmap=nullptr; }
+	if (fovPixmap) { delete fovPixmap; fovPixmap=nullptr; }
+	if (fpsPixmap) { delete fpsPixmap; fpsPixmap=nullptr; }
+	if (helpLabelPixmap) { delete helpLabelPixmap; helpLabelPixmap=nullptr; }
 }
 
 void BottomStelBar::addButton(StelButton* button, const QString& groupName, const QString& beforeActionName)
@@ -654,7 +654,7 @@ void BottomStelBar::addButton(StelButton* button, const QString& groupName, cons
 StelButton* BottomStelBar::hideButton(const QString& actionName)
 {
 	QString gName;
-	StelButton* bToRemove = Q_NULLPTR;
+	StelButton* bToRemove = nullptr;
 	for (auto iter = buttonGroups.begin(); iter != buttonGroups.end(); ++iter)
 	{
 		int i=0;
@@ -670,15 +670,15 @@ StelButton* BottomStelBar::hideButton(const QString& actionName)
 			++i;
 		}
 	}
-	if (bToRemove == Q_NULLPTR)
-		return Q_NULLPTR;
+	if (bToRemove == nullptr)
+		return nullptr;
 	if (buttonGroups[gName].elems.size() == 0)
 	{
 		buttonGroups.remove(gName);
 	}
 	// Cannot really delete because some part of the GUI depend on the presence of some buttons
 	// so just make invisible
-	bToRemove->setParentItem(Q_NULLPTR);
+	bToRemove->setParentItem(nullptr);
 	bToRemove->setVisible(false);
 	updateButtonsGroups();
 	emit sizeChanged();
@@ -767,14 +767,14 @@ void BottomStelBar::updateButtonsGroups()
 			{
 				if (buttons.size() == 1)
 				{
-					if (group.pixBackgroundSingle == Q_NULLPTR)
+					if (group.pixBackgroundSingle == nullptr)
 						b->setBackgroundPixmap(pixBackgroundSingle);
 					else
 						b->setBackgroundPixmap(*group.pixBackgroundSingle);
 				}
 				else
 				{
-					if (group.pixBackgroundLeft == Q_NULLPTR)
+					if (group.pixBackgroundLeft == nullptr)
 						b->setBackgroundPixmap(pixBackgroundLeft);
 					else
 						b->setBackgroundPixmap(*group.pixBackgroundLeft);
@@ -784,19 +784,19 @@ void BottomStelBar::updateButtonsGroups()
 			{
 				if (buttons.size() != 1)
 				{
-					if (group.pixBackgroundSingle == Q_NULLPTR)
+					if (group.pixBackgroundSingle == nullptr)
 						b->setBackgroundPixmap(pixBackgroundSingle);
 					else
 						b->setBackgroundPixmap(*group.pixBackgroundSingle);
 				}
-				if (group.pixBackgroundRight == Q_NULLPTR)
+				if (group.pixBackgroundRight == nullptr)
 					b->setBackgroundPixmap(pixBackgroundRight);
 				else
 					b->setBackgroundPixmap(*group.pixBackgroundRight);
 			}
 			else
 			{
-				if (group.pixBackgroundMiddle == Q_NULLPTR)
+				if (group.pixBackgroundMiddle == nullptr)
 					b->setBackgroundPixmap(pixBackgroundMiddle);
 				else
 					b->setBackgroundPixmap(*group.pixBackgroundMiddle);
@@ -1251,7 +1251,7 @@ void StelProgressBarMgr::addProgressBar(const StelProgressController* p)
 	pb->setMinimum(p->getMin());
 	pb->setMaximum(p->getMax());
 	pb->setFormat(p->getFormat());
-	if (gui!=Q_NULLPTR)
+	if (gui!=nullptr)
 		pb->setStyleSheet(gui->getStelStyle().qtStyleSheet);
 	QGraphicsProxyWidget* pbProxy = new QGraphicsProxyWidget();
 	pbProxy->setWidget(pb);
@@ -1310,7 +1310,7 @@ void CornerButtons::setOpacity(double opacity)
 	for (auto* child : QGraphicsItem::childItems())
 	{
 		StelButton* sb = qgraphicsitem_cast<StelButton*>(child);
-		Q_ASSERT(sb!=Q_NULLPTR);
+		Q_ASSERT(sb!=nullptr);
 		sb->setOpacity(opacity);
 	}
 }
