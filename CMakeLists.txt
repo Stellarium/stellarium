@@ -693,16 +693,6 @@ IF(WIN32)
                SET(ISS_OPENSSL_LIBS "; OpenSSL libraries not found")
           ENDIF()
     ENDIF()
-
-    GET_FILENAME_COMPONENT(QT_LIBS ${QtCore_location} PATH)
-    IF (USE_PLUGIN_PLANES)
-	SET(ISS_SQLDRIVERS "Source: \"${QT_LIBS}/../plugins/sqldrivers/*\"; Excludes: \"*d.dll,*psql*\"; DestDir: \"{app}/sqldrivers/\";")
-	SET(ISS_LIBMYSQL "Source: \"libmysql.dll\"; DestDir: \"{app}\";")
-    ELSEIF()
-	SET(ISS_SQLDRIVERS "; Sql drivers not used")
-	SET(ISS_LIBMYSQL "; libmysql.dll unused")
-    ENDIF()
-
 ENDIF()
 
 IF(APPLE)
