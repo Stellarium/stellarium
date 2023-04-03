@@ -1110,6 +1110,7 @@ void BottomStelBar::updateText(bool updatePos, bool updateTopocentric)
 //									      QString::number(bbnhl.top(), 'f', 2)
 //									      );
 //		datetime->setText(brStr);
+		emit sizeChanged();
 	}
 }
 
