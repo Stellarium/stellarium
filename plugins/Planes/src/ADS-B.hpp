@@ -66,7 +66,7 @@ public:
 	//! Query data for the given point in time.
 	//! Uses interpolation between closest points if interpolation is enabled.
 	//! @param jd the jdate to get the data for
-	//! @returns an ADSBFrame if found or NULL
+	//! @returns an ADSBFrame if found or nullptr
 	const ADSBFrame *getData(double jd);
 
 	//! Append a list of ADSBFrame structs to this object.

@@ -79,7 +79,6 @@ public slots:
 
 private:
 	bool dbConnected;
-
 };
 
 #endif // DATABASEWORKER_HPP

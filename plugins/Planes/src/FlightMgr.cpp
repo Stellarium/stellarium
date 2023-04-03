@@ -28,13 +28,12 @@
 #include "StelUtils.hpp"
 
 FlightMgr::FlightMgr(QObject *parent) :
-	QObject(parent), displayBrightness(0), lastSelectedObject(NULL)
+	QObject(parent), dataSource(nullptr), displayBrightness(0), lastSelectedObject(nullptr)
 {
-	earth = GETSTELMODULE(SolarSystem)->getEarth();
 	texPointer = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/pointeur5.png");
+	earth = GETSTELMODULE(SolarSystem)->getEarth();
 	Flight::updateObserverPos(StelApp::getInstance().getCore()->getCurrentLocation());
 	this->connect(GETSTELMODULE(StelObjectMgr), SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)), SLOT(updateSelectedObject()));
-	dataSource = NULL;
 }
 
 FlightMgr::~FlightMgr()
@@ -177,13 +176,13 @@ StelObjectP FlightMgr::searchByName(const QString &name) const
 {
 	if (!GETSTELMODULE(Planes)->isEnabled() || StelApp::getInstance().getCore()->getCurrentLocation().planetName != earth->getEnglishName() || !dataSource)
 	{
-		return NULL;
+		return nullptr;
 	}
 
 	QList<FlightP> *l = dataSource->getRelevantFlights();
 	if (!l)
 	{
-		return NULL;
+		return nullptr;
 	}
 	for (int i = 0; i < l->size(); ++i)
 	{
@@ -194,7 +193,7 @@ StelObjectP FlightMgr::searchByName(const QString &name) const
 			return qSharedPointerCast<StelObject>(f);
 		}
 	}
-	return NULL;
+	return nullptr;
 }
 
 QStringList FlightMgr::listMatchingObjectsI18n(const QString &objPrefix, int maxNbItem, bool useStartOfWords) const
@@ -308,7 +307,7 @@ void FlightMgr::updateSelectedObject()
 			{
 				lastSelectedObject->setFlightSelected(false);
 			}
-			lastSelectedObject = FlightP(NULL);
+			lastSelectedObject = FlightP(nullptr);
 		}
 	}
 }

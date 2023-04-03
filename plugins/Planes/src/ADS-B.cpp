@@ -58,48 +58,43 @@ ADSBData::ADSBData(QStringList &data)
 	lastUpdate = QDateTime::currentDateTime();
 }
 
-ADSBData::ADSBData(QList<ADSBFrame> &data, QString &modeS, QString &modeSHex, QString &callsign, QString &country)
+ADSBData::ADSBData(QList<ADSBFrame> &data, QString &modeS, QString &modeSHex, QString &callsign, QString &country) :
+	modeSAddress(modeS),
+	modeSAddressHex(modeSHex),
+	callsign(callsign),
+	country(country),
+	lastRequestedJd(0.),
+	lastIndex(0),
+	surfPosTime(0.),
+	surfPosAlt(0.),
+	surfPosSpd(0.),
+	surfPosTrack(0.),
+	surfPosLat(0.),
+	surfPosLon(0.),
+	airPosTime(0.),
+	airPosAlt(0.),
+	airPosLat(0.),
+	airPosLon(0.),
+	airPosOnGround(false),
+	airVelTime(0.),
+	airVelSpd(0.),
+	airVelTrack(0.),
+	airVelRate(0.),
+	lastUpdate(QDateTime::currentDateTime())
 {
 	this->data.append(data);
-	this->modeSAddress = modeS;
-	this->modeSAddressHex = modeSHex;
-	this->callsign = callsign;
-	this->country = country;
-	lastIndex = 0;
-	lastRequestedJd = 0;
 	initialised = true;
-
-	surfPosTime = 0;
-	surfPosAlt = 0;
-	surfPosSpd = 0;
-	surfPosTrack = 0;
-	surfPosLat = 0;
-	surfPosLon = 0;
-
-	airPosTime = 0;
-	airPosAlt = 0;
-	airPosLat = 0;
-	airPosLon = 0;
-	airPosOnGround = false;
-
-	airVelTime = 0;
-	airVelSpd = 0;
-	airVelTrack = 0;
-	airVelRate = 0;
-
-	lastUpdate = QDateTime::currentDateTime();
 }
 
 ADSBData::~ADSBData()
 {
-
 }
 
 ADSBFrame const *ADSBData::getData(double jd)
 {
 	if (data.size() == 0 || jd < data.first().time || jd > (data.last().time + MAX_TIME_OVER_END))
 	{
-		return NULL;
+		return nullptr;
 	}
 
 	// fwd search
@@ -172,7 +167,7 @@ ADSBFrame const *ADSBData::getData(double jd)
 	}
 	//qDebug() << "didn't find " << lastIndex << " lastRequestedJd " << lastRequestedJd;
 	lastRequestedJd = jd;
-	return Q_NULLPTR;
+	return nullptr;
 }
 
 bool ADSBData::append(QList<ADSBFrame> &newdata)

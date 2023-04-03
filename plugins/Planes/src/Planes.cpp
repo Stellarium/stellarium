@@ -72,9 +72,9 @@ void Planes::init()
 	try
 	{
 		StelGui *gui = dynamic_cast<StelGui *>(StelApp::getInstance().getGui());
-		if (gui!=Q_NULLPTR)
+		if (gui)
 		{
-			toolbarButton = new StelButton(Q_NULLPTR,
+			toolbarButton = new StelButton(nullptr,
 						      QPixmap(":/planes/planes_on_160.png"),
 						      QPixmap(":/planes/planes_off_160.png"),
 						      QPixmap(":/graphicGui/miscGlow32x32.png"),

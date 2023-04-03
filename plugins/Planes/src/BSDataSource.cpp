@@ -60,22 +60,22 @@ const double MAX_JD_DIFF = 10.0 / (24.0 * 60); //!< Remove database flights from
 #endif
 
 
-BSDataSource::BSDataSource() : FlightDataSource(10)
+BSDataSource::BSDataSource() : FlightDataSource(10),
+	useDatabase(false),
+	useSocket(false),
+	isDbConnected(false),
+	isSocketConnected(false),
+	connectionAttemptInProgress(false),
+	reconnectOnConnectionLoss(false),
+	isUserDisconnect(false),
+	dbWorkerThread(nullptr),
+	dbWorker(nullptr)
 {
 	qRegisterMetaType<FlightP>();
-	useDatabase = false;
-	useSocket = false;
 	this->connect(&socket, SIGNAL(readyRead()), SLOT(readData()));
 	this->connect(&socket, SIGNAL(connected()), SLOT(setSocketConnected()));
 	this->connect(&socket, SIGNAL(disconnected()), SLOT(setSocketDisconnected()));
 	this->connect(&socket, SIGNAL(error(QAbstractSocket::SocketError)), SLOT(handleSocketError()));
-	isSocketConnected = false;
-	isDbConnected = false;
-	connectionAttemptInProgress = false;
-	reconnectOnConnectionLoss = false;
-	isUserDisconnect = false;
-	dbWorker = NULL;
-	dbWorkerThread = NULL;
 	timer = new QTimer();
 	this->connect(timer, SIGNAL(timeout()), SLOT(reconnect()));
 }
@@ -156,7 +156,6 @@ void BSDataSource::updateRelevantFlights(double jd, double rate)
 
 void BSDataSource::init()
 {
-
 }
 
 void BSDataSource::deinit()
@@ -494,7 +493,6 @@ void BSDataSource::parseMsg(QByteArray &buf, int start, int end)
 				QString id = QString::number(hexid.toInt(&ok, 16));
 				flights.insert(flightId, FlightP(new Flight(emptyFrameList, id, hexid, callsign, n_a)));
 			}
-
 		}
 		else if (msgType == SurfacePositionMessage)
 		{
@@ -535,7 +533,6 @@ void BSDataSource::parseMsg(QByteArray &buf, int start, int end)
 			qDebug() << "SurveilAlt";
 #endif
 			// SurveillanceAltMessage: Altitude, Alert, SPI
-
 		}
 		else if (msgType == SurveillanceIDMessage)
 		{
@@ -543,7 +540,6 @@ void BSDataSource::parseMsg(QByteArray &buf, int start, int end)
 			qDebug() << "SurveilId";
 #endif
 			// SurveillanceIDMessage: Altitude, Squawk, Alert, Emergency, SPI
-
 		}
 		else if (msgType == AirToAirMessage)
 		{
@@ -551,7 +547,6 @@ void BSDataSource::parseMsg(QByteArray &buf, int start, int end)
 			qDebug() << "AirToAir";
 #endif
 			// AirToAirMessage: Altitude
-
 		}
 		else if (msgType == AllCallReply)
 		{
@@ -559,10 +554,8 @@ void BSDataSource::parseMsg(QByteArray &buf, int start, int end)
 			qDebug() << "AllCallReply";
 #endif
 			// AllCallReply: None at the moment (need to do a further check).
-
 		}
 	}
-
 }
 
 bool BSDataSource::isDumpOldFlightsEnabled() const
