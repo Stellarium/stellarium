@@ -251,6 +251,9 @@ void SkyGui::init(StelGui* astelGui)
 	updateBarsPos();
 	connect(&StelApp::getInstance(), SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
 	connect(bottomBar, SIGNAL(sizeChanged()), this, SLOT(updateBarsPos()));
+	// The first draw of path may show overshooting date line if there are too few buttons in the bottom bar.
+	// Correct this by a redraw 1/2s after startup
+	QTimer::singleShot(500, this, [=](){buttonBarsPath->updatePath(bottomBar, leftBar);});
 }
 
 void SkyGui::resizeEvent(QGraphicsSceneResizeEvent* event)
