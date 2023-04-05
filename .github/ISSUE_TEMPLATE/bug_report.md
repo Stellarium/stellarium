@@ -23,7 +23,7 @@ and check if you are attempting to report a known issue. Don't report in this ca
 
 Also look into the User Guide before reporting unexpected but correct behaviour. Don't report in this case.
 
-If you miss translations, please help us with your language and join our translators at Transifex: https://www.transifex.com/stellarium/stellarium/dashboard/
+If you miss translations, please help us with your language and join our translators at Transifex: https://app.transifex.com/stellarium/stellarium/dashboard/
 
 If you want to report a feature wish, delete these template lines above and below, and fill in. 
 
