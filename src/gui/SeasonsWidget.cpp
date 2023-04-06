@@ -78,8 +78,8 @@ void SeasonsWidget::populate()
 
 void SeasonsWidget::setSeasonLabels()
 {
-	const double latitide = StelApp::getInstance().getCore()->getCurrentLocation().getLatitude();
-	if (latitide >= 0.)
+	const float latitide = StelApp::getInstance().getCore()->getCurrentLocation().getLatitude();
+	if (latitide >= 0.f)
 	{
 		// Northern Hemisphere
 		// TRANSLATORS: The name of season
@@ -94,9 +94,13 @@ void SeasonsWidget::setSeasonLabels()
 	else
 	{
 		// Southern Hemisphere
+		// TRANSLATORS: The name of season
 		ui->labelMarchEquinox->setText(qc_("Fall","season"));
+		// TRANSLATORS: The name of season
 		ui->labelJuneSolstice->setText(qc_("Winter","season"));
+		// TRANSLATORS: The name of season
 		ui->labelSeptemberEquinox->setText(qc_("Spring","season"));
+		// TRANSLATORS: The name of season
 		ui->labelDecemberSolstice->setText(qc_("Summer","season"));
 	}
 }
