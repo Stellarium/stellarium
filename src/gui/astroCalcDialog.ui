@@ -331,6 +331,17 @@
           </iconset>
          </property>
         </item>
+        <item>
+         <property name="text">
+          <string>Almanac</string>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normalon>:/graphicGui/tabSky.png</normalon>
+           <selectedon>:/graphicGui/tabSky-selected.png</selectedon>
+          </iconset>
+         </property>
+        </item>
        </widget>
       </item>
       <item row="1" column="0">
@@ -3087,6 +3098,79 @@
           </item>
          </layout>
         </widget>
+        <widget class="QWidget" name="stackedWidhetPage9">
+         <layout class="QGridLayout" name="gridLayout_27">
+          <item row="0" column="0">
+           <widget class="QTabWidget" name="tabWidget">
+            <property name="tabPosition">
+             <enum>QTabWidget::South</enum>
+            </property>
+            <widget class="QWidget" name="tabTime">
+             <attribute name="title">
+              <string>Time</string>
+             </attribute>
+             <layout class="QGridLayout" name="gridLayout_28">
+              <property name="leftMargin">
+               <number>0</number>
+              </property>
+              <property name="topMargin">
+               <number>0</number>
+              </property>
+              <property name="rightMargin">
+               <number>0</number>
+              </property>
+              <property name="bottomMargin">
+               <number>0</number>
+              </property>
+              <item row="0" column="0">
+               <widget class="QGroupBox" name="seasonsGroupBox">
+                <property name="title">
+                 <string>Seasons</string>
+                </property>
+                <layout class="QGridLayout" name="gridLayout_29">
+                 <property name="leftMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="topMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="rightMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="bottomMargin">
+                  <number>0</number>
+                 </property>
+                 <item row="0" column="0">
+                  <widget class="SeasonsWidget" name="seasonsWidget" native="true">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QGroupBox" name="todayGroupBox">
+                <property name="title">
+                 <string>Today</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+            <widget class="QWidget" name="tab_2">
+             <attribute name="title">
+              <string>Tab 2</string>
+             </attribute>
+            </widget>
+           </widget>
+          </item>
+         </layout>
+        </widget>
        </widget>
       </item>
      </layout>
@@ -3115,6 +3199,12 @@
    <class>QChartView</class>
    <extends>QGraphicsView</extends>
    <header>QtCharts/qchartview.h</header>
+  </customwidget>
+  <customwidget>
+   <class>SeasonsWidget</class>
+   <extends>QWidget</extends>
+   <header>SeasonsWidget.hpp</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources>

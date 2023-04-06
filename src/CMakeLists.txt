@@ -11,7 +11,7 @@ ENDIF()
 
 SET(stellarium_lib_SRCS
      core/BlueNoiseTriangleRemapped.hpp
-	 core/StelSRGB.hpp
+     core/StelSRGB.hpp
      core/Dithering.hpp
      core/Dithering.cpp
      core/SaturationShader.hpp
@@ -370,6 +370,8 @@ IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
           gui/StelCloseButton.hpp
           gui/StelCloseButton.cpp
           gui/ExternalStepSpinBox.hpp
+          gui/SeasonsWidget.hpp
+          gui/SeasonsWidget.cpp
      )
 
      ################# compiles .ui files ############
@@ -395,6 +397,7 @@ IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
           gui/orbitColorsDialog.ui
           gui/tonemappingDialog.ui
           gui/skylightDialog.ui
+          gui/seasonsWidget.ui
      )
 
      IF(ENABLE_SCRIPTING)

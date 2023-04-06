@@ -61,6 +61,7 @@ src/gui/ConfigureDSOColorsDialog.cpp
 src/gui/ConfigureOrbitColorsDialog.cpp
 src/gui/DateTimeDialog.cpp
 src/gui/LightPollutionWidget.cpp
+src/gui/SeasonsWidget.cpp
 src/scripting/StelScriptMgr.cpp
 src/main.cpp
 src/StelMainView.cpp
@@ -92,6 +93,7 @@ src/ui_skylightDialog.h
 src/ui_tonemappingDialog.h
 src/ui_lightPollutionWidget.h
 src/ui_configureScreenshotsDialog.h
+src/ui_seasonsWidget.h
 
 # Plug-in translations
 # NOTE: Plugins should be enabled for building
