@@ -221,6 +221,10 @@ void NavStarsWindow::populateToday()
 	ui->labelCivilTwilight->setToolTip(QString("6° %1").arg(belowHorizon));
 	ui->labelNauticalTwilight->setToolTip(QString("12° %1").arg(belowHorizon));
 	ui->labelAstronomicalTwilight->setToolTip(QString("18° %1").arg(belowHorizon));
+	QString twilights = q_("The sum of the daytime duration and duration of morning and evening twilights");
+	ui->labelCivilTwilightDuration->setToolTip(twilights);
+	ui->labelNauticalTwilightDuration->setToolTip(twilights);
+	ui->labelAstronomicalTwilightDuration->setToolTip(twilights);
 }
 
 void NavStarsWindow::populateNavigationalStarsSets()
