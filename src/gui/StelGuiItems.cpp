@@ -1008,20 +1008,6 @@ void BottomStelBar::updateText(bool updatePos, bool updateTopocentric)
 		updatePos = true;
 		if (getFlagShowFov())
 		{
-			// DEBUG: SHOW DIFFERENT VALUES...
-//			SkyGui * skyGui= static_cast<StelGui *>(StelApp::getInstance().getGui())->getSkyGui();
-//			QFontMetrics locationMetrics(location->font());
-//			QRectF buttonBoundingRect=getButtonsBoundingRect();
-//			QString bbbr=QString("BBX: %1 ww: %2 hh: %3 h: %4,  %5 ch: %6x%7 bb: %8x%9").arg(QString::number(boundingRectNoHelpLabel().height(), 'f', 3),
-//										QString::number(skyGui->getSkyGuiWidth()),
-//										QString::number(skyGui->getSkyGuiHeight()),
-//										QString::number(locationMetrics.boundingRect("M").height()), // h: height
-//										QString::number(childItems().count()),                       // NN ch.
-//										QString::number(childrenBoundingRect().width()),
-//										QString::number(childrenBoundingRect().height()),
-//										QString::number(buttonBoundingRect.width()),
-//										QString::number(buttonBoundingRect.height()));
-//			fov->setText(bbbr);
 			fov->setText(fovText);
 			fov->setToolTip(QString("%1: %2").arg(q_("Field of view"), fovdms));
 			if (qApp->property("text_texture")==true) // CLI option -t given?
@@ -1090,26 +1076,6 @@ void BottomStelBar::updateText(bool updatePos, bool updateTopocentric)
 			fovPixmap->setPos(datetimePixmap->x()-fovShift, yPos);
 			fpsPixmap->setPos(datetimePixmap->x()-fpsShift, yPos);
 		}
-
-//		// TEST
-//		QRectF br=boundingRect();            // Same size as childrenBoundingRect, just at offset 0/0.
-//		QRectF chBR=childrenBoundingRect();  // Same as boundingRectNoHelpLabel unless helpItem is shown.
-//		QRectF bbnhl=boundingRectNoHelpLabel();
-//		QString brStr=QString("BR: %1x%2+%3+%4 CBR: %5x%6+%7+%8 BBNHL: %9x%10+%11+%12").arg(QString::number(br.width(), 'f', 2),
-//									      QString::number(br.height(), 'f', 2),
-//									      QString::number(br.left(), 'f', 2),
-//									      QString::number(br.top(), 'f', 2),
-//									      QString::number(chBR.width(), 'f', 2),
-//									      QString::number(chBR.height(), 'f', 2),
-//									      QString::number(chBR.left(), 'f', 2),
-//									      QString::number(chBR.top(), 'f', 2)
-//									      ).arg(
-//									      QString::number(bbnhl.width(), 'f', 2),
-//									      QString::number(bbnhl.height(), 'f', 2),
-//									      QString::number(bbnhl.left(), 'f', 2),
-//									      QString::number(bbnhl.top(), 'f', 2)
-//									      );
-//		datetime->setText(brStr);
 		emit sizeChanged();
 	}
 }
