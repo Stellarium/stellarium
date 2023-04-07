@@ -3078,7 +3078,7 @@ msgstr "Alustaa tietyn ajan..."
 
 #: src/core/StelApp.cpp:638
 msgid "Initializing scripting..."
-msgstr "Alustetetaan komentosarjat..."
+msgstr "Alustetetaan skriptejä..."
 
 #: src/core/StelApp.cpp:643
 msgid "Initializing color scheme..."
@@ -4854,11 +4854,11 @@ msgstr "tuntematon"
 
 #: src/gui/ConfigurationDialog.cpp:1429
 msgid "Running script: "
-msgstr "Suorittaa komentosarjaa: "
+msgstr "Suorittaa skriptiä: "
 
 #: src/gui/ConfigurationDialog.cpp:1436
 msgid "Running script: [none]"
-msgstr "Suorittaa komentosarjaa: [ei mitään]"
+msgstr "Suorittaa skriptiä: [ei mitään]"
 
 #: src/gui/ConfigurationDialog.cpp:1501
 msgid ""
@@ -5370,7 +5370,7 @@ msgstr "{Maisemat} - käyttäjien lähettämiä maisemia Stellariumiin."
 #: src/gui/HelpDialog.cpp:458
 msgid "{The scripts} - user-contributed and official scripts for Stellarium."
 msgstr ""
-"{Komentosarjat} - käyttäjien lähettämiä ja virallisia komentosarjoja "
+"{Skriptit} - käyttäjien lähettämiä ja virallisia komentosarjoja "
 "Stellariumiin."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
@@ -5548,31 +5548,31 @@ msgstr "Lopeta"
 
 #: src/gui/StelGui.cpp:226
 msgid "Speed up the script execution rate"
-msgstr "Nopeuta komentosarjan suoritusnopeutta"
+msgstr "Nopeuta skriptin suoritusnopeutta"
 
 #: src/gui/StelGui.cpp:227
 msgid "Slow down the script execution rate"
-msgstr "Hidasta komentosarjan suoritusnopeutta"
+msgstr "Hidasta skriptin suoritusnopeutta"
 
 #: src/gui/StelGui.cpp:228
 msgid "Set the normal script execution rate"
-msgstr "Aseta komentosarjan suoritusnopeus normaaliksi"
+msgstr "Aseta skriptin suoritusnopeus normaaliksi"
 
 #: src/gui/StelGui.cpp:229
 msgid "Stop script execution"
-msgstr "Lopeta komentosarjan suoritus"
+msgstr "Lopeta skriptin suoritus"
 
 #: src/gui/StelGui.cpp:231
 msgid "Pause script execution"
-msgstr "Pysäytä komentosarjan suoritus"
+msgstr "Pysäytä skriptin suoritus"
 
 #: src/gui/StelGui.cpp:232
 msgid "Resume script execution"
-msgstr "Jatka komentosarjan suoritusta"
+msgstr "Jatka skriptin suoritusta"
 
 #: src/gui/StelGui.cpp:236
 msgid "Script console window"
-msgstr "Komentosarjan hallintaikkuna"
+msgstr "Skriptin hallintaikkuna"
 
 #: src/gui/StelGui.cpp:239
 msgid "Help window"
@@ -6093,27 +6093,27 @@ msgstr "Varoitus!"
 
 #: src/gui/ScriptConsole.cpp:188
 msgid "Are you sure you want to load script without saving changes?"
-msgstr "Haluatko todella ladata komentosarjan tallentamatta muutoksia?"
+msgstr "Haluatko todella ladata skriptin tallentamatta muutoksia?"
 
 #: src/gui/ScriptConsole.cpp:202
 msgid "Stellarium Script Files"
-msgstr "Stellariumin komentosarjatiedostot"
+msgstr "Stellariumin skriptitiedostot"
 
 #: src/gui/ScriptConsole.cpp:205
 msgid "Load Script"
-msgstr "Lataa komentosarja"
+msgstr "Lataa skripti"
 
 #: src/gui/ScriptConsole.cpp:226 src/gui/ScriptConsole.cpp:425
 msgid "Stellarium Script"
-msgstr "Stellarium-komentosarja"
+msgstr "Stellarium-skripti"
 
 #: src/gui/ScriptConsole.cpp:231
 msgid "Save Script"
-msgstr "Tallenna komentosarja"
+msgstr "Tallenna skripti"
 
 #: src/gui/ScriptConsole.cpp:263
 msgid "Are you sure you want to clear script?"
-msgstr "Haluatko varmasti tyhjentää komentosarjan?"
+msgstr "Haluatko varmasti tyhjentää skriptin?"
 
 #: src/gui/ScriptConsole.cpp:373
 msgid "Select Script Include Directory"
@@ -8204,7 +8204,7 @@ msgstr ""
 #: src/scripting/StelScriptMgr.cpp:521 src/ui_configurationDialog.h:1767
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:533
 msgid "Scripts"
-msgstr "Komentosarjat"
+msgstr "Skriptit"
 
 #: src/scripting/StelScriptMgr.cpp:662
 msgid "Shortcut"
@@ -9630,8 +9630,8 @@ msgid ""
 "binoculars. The data for the script are taken from the eponymous book by "
 "Gary Seronik."
 msgstr ""
-"Matka kiinnostaviin kiikarikohteisiin. Komentosarjan tiedot ovat peräisin "
-"Gary Seronikin Binocular Highlights -kirjasta."
+"Matka kiinnostaviin kiikarikohteisiin. Skriptin tiedot ovat peräisin Gary "
+"Seronikin Binocular Highlights -kirjasta."
 
 #: src/translations.h:598
 msgid ""
@@ -9659,7 +9659,7 @@ msgid ""
 "Right Ascension (2000.0)."
 msgstr ""
 "Ben Crowell on luonut Binoskyn, kiikareilla havaittavien syvän taivaan "
-"kohteiden luettelon. Komentosarjassa esittelemme näistä kohteista 31, "
+"kohteiden luettelon. Skriptissä esittelemme näistä kohteista 31, "
 "rektaskension (J2000.0) mukaisessa järjestyksessä."
 
 #: src/translations.h:602
@@ -14331,15 +14331,15 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:2155 src/ui_scriptConsole.h:429
 msgid "Close window when script runs"
-msgstr "Sulje ikkuna komentosarjaa suoritettaessa"
+msgstr "Sulje ikkuna skriptiä suoritettaessa"
 
 #: src/ui_configurationDialog.h:2157
 msgid "Run the selected script"
-msgstr "Suorita valittu komentosarja"
+msgstr "Suorita valittu skripti"
 
 #: src/ui_configurationDialog.h:2161
 msgid "Stop a running script"
-msgstr "Pysäytä suoritettava komentosarja"
+msgstr "Pysäytä suoritettava skripti"
 
 #: src/ui_configurationDialog.h:2165
 msgid "Load at startup"
@@ -14557,7 +14557,7 @@ msgstr "Pysäytä skripti"
 
 #: src/ui_scriptConsole.h:425
 msgid "Script"
-msgstr "Komentosarja"
+msgstr "Skripti"
 
 #: src/ui_scriptConsole.h:427
 msgid "Output"
@@ -14569,7 +14569,7 @@ msgstr "Lataa skriptit käyttäjän kansiosta automaattisesti"
 
 #: src/ui_scriptConsole.h:430
 msgid "Clear output before script runs"
-msgstr "Tyhjennä tulokset ennen komentosarjan suorittamista"
+msgstr "Tyhjennä näyttö/tulokset ennen skriptin suorittamista"
 
 #: src/ui_scriptConsole.h:432
 msgid ""
@@ -15856,7 +15856,7 @@ msgstr "Palauta hyödylliset oletusasetukset"
 
 #: src/ui_tonemappingDialog.h:191
 msgid "Reset"
-msgstr "Nollaa"
+msgstr "Palauta oletukset"
 
 #: src/ui_tonemappingDialog.h:193
 msgid "Relates to brightness surrounding the display. Default 50cd/m²"
@@ -15908,7 +15908,7 @@ msgstr "automaattisesti sijaintitietokannasta"
 
 #: src/ui_lightPollutionWidget.h:105
 msgid "manual"
-msgstr "ohje"
+msgstr "käsin"
 
 #: src/ui_lightPollutionWidget.h:106
 msgid "manual from SQM"
@@ -21084,11 +21084,11 @@ msgstr "Eläinratavalon kirkkaus:"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:537
 msgid "Run local script"
-msgstr "Suorita paikallinen komentosarja"
+msgstr "Suorita paikallinen skripti"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:543
 msgid "Stop running script"
-msgstr "Keskeytä suoritettava komentosarja"
+msgstr "Keskeytä suoritettava skripti"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:554
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:558
