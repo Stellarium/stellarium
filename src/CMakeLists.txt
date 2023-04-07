@@ -370,8 +370,8 @@ IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
           gui/StelCloseButton.hpp
           gui/StelCloseButton.cpp
           gui/ExternalStepSpinBox.hpp
-          gui/SeasonsWidget.hpp
-          gui/SeasonsWidget.cpp
+          gui/SpecificTimeWidget.hpp
+          gui/SpecificTimeWidget.cpp
      )
 
      ################# compiles .ui files ############
@@ -397,7 +397,7 @@ IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
           gui/orbitColorsDialog.ui
           gui/tonemappingDialog.ui
           gui/skylightDialog.ui
-          gui/seasonsWidget.ui
+          gui/specificTimeWidget.ui
      )
 
      IF(ENABLE_SCRIPTING)

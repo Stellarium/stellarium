@@ -1073,10 +1073,10 @@ QColorDialog {
 }
 
 /*************************************************************************
- * Seasons Widget
+ * SpecificTime Widget
  *************************************************************************/
 
-SeasonsWidget QFrame[frameShape="4"],   /* QFrame::HLine == 0x0004 */
-SeasonsWidget QFrame[frameShape="5"] {  /* QFrame::VLine == 0x0005 */
+SpecificTimeWidget QFrame[frameShape="4"],   /* QFrame::HLine == 0x0004 */
+SpecificTimeWidget QFrame[frameShape="5"] {  /* QFrame::VLine == 0x0005 */
 	border: 1px solid rgb(238, 238, 238);
 }

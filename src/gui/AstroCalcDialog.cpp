@@ -198,8 +198,8 @@ void AstroCalcDialog::retranslate()
 		// by causing the list items to be laid out again.
 		updateTabBarListWidgetWidth();
 		populateToolTips();
-
-		ui->seasonsWidget->retranslate();
+		// Alamac
+		ui->specificTimeWidget->retranslate();
 	}
 }
 
@@ -249,8 +249,8 @@ void AstroCalcDialog::createDialogContent()
 	populateTimeIntervalsList();
 	populateWutGroups();
 	populateToolTips();
-
-	ui->seasonsWidget->setup();
+	// Almanac
+	ui->specificTimeWidget->setup();
 
 	// Default buttons state
 	bool buttonState = false;

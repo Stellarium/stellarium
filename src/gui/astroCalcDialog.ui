@@ -3105,37 +3105,16 @@
             <property name="tabPosition">
              <enum>QTabWidget::South</enum>
             </property>
-            <widget class="QWidget" name="tabTime">
+            <property name="currentIndex">
+             <number>0</number>
+            </property>
+            <widget class="QWidget" name="tabSpecificTime">
              <attribute name="title">
-              <string>Time</string>
+              <string>Specific Time</string>
              </attribute>
              <layout class="QGridLayout" name="gridLayout_28">
-              <item row="0" column="2">
-               <widget class="QLabel" name="labelToday">
-                <property name="font">
-                 <font>
-                  <bold>true</bold>
-                 </font>
-                </property>
-                <property name="text">
-                 <string>Today</string>
-                </property>
-               </widget>
-              </item>
               <item row="0" column="0">
-               <widget class="QLabel" name="labelSeasons">
-                <property name="font">
-                 <font>
-                  <bold>true</bold>
-                 </font>
-                </property>
-                <property name="text">
-                 <string>Seasons</string>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="0">
-               <widget class="SeasonsWidget" name="seasonsWidget" native="true">
+               <widget class="SpecificTimeWidget" name="specificTimeWidget" native="true">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                   <horstretch>0</horstretch>
@@ -3144,30 +3123,11 @@
                 </property>
                </widget>
               </item>
-              <item row="0" column="1" rowspan="2">
-               <widget class="Line" name="line">
-                <property name="minimumSize">
-                 <size>
-                  <width>1</width>
-                  <height>0</height>
-                 </size>
-                </property>
-                <property name="maximumSize">
-                 <size>
-                  <width>1</width>
-                  <height>16777208</height>
-                 </size>
-                </property>
-                <property name="orientation">
-                 <enum>Qt::Vertical</enum>
-                </property>
-               </widget>
-              </item>
              </layout>
             </widget>
-            <widget class="QWidget" name="tab_2">
+            <widget class="QWidget" name="tabMoonPhases">
              <attribute name="title">
-              <string>Tab 2</string>
+              <string>Moon Phases</string>
              </attribute>
             </widget>
            </widget>
@@ -3204,9 +3164,9 @@
    <header>QtCharts/qchartview.h</header>
   </customwidget>
   <customwidget>
-   <class>SeasonsWidget</class>
+   <class>SpecificTimeWidget</class>
    <extends>QWidget</extends>
-   <header>SeasonsWidget.hpp</header>
+   <header>SpecificTimeWidget.hpp</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

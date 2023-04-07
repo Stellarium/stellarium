@@ -17,33 +17,34 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef SEASONS_WIDGET
-#define SEASONS_WIDGET
+#ifndef SPECIFIC_TIME_WIDGET
+#define SPECIFIC_TIME_WIDGET
 
 #include <memory>
 #include <QWidget>
-#include "ui_seasonsWidget.h"
+#include "ui_specificTimeWidget.h"
 
-class SeasonsWidget : public QWidget
+class SpecificTimeWidget : public QWidget
 {
     Q_OBJECT
 public:
-    SeasonsWidget(QWidget* parent = nullptr);
+    SpecificTimeWidget(QWidget* parent = nullptr);
     void setup();
     void retranslate();
 
 private slots:
     void setSeasonLabels();
     void setSeasonTimes();
+    void setTodayTimes();
 
 private:
     class StelCore* core;
     class SpecificTimeMgr* specMgr;
     class StelLocaleMgr* localeMgr;
 
-    void populate();
+    void populateData();
 
-    std::unique_ptr<Ui_seasonsWidget> ui;
+    std::unique_ptr<Ui_specificTimeWidget> ui;
 };
 
 #endif
