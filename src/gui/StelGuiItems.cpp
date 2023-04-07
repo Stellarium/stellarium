@@ -1067,7 +1067,7 @@ void BottomStelBar::updateText(bool updatePos, bool updateTopocentric)
 		// The location string starts at left, dateTime ends at right. FoV and FPS come ahead of dateTime.
 		// In case the strings are wider than available button space, they are now pushed to the right.
 		QFontMetrics fontMetrics(location->font());
-		int fpsShift     = qMax(fontMetrics.boundingRect(fps->text()+"MMM").width(), fontMetrics.boundingRect(qc_("FPS", "abbreviation")+"12.3 MMM").width());
+		int fpsShift     = qMax(fontMetrics.boundingRect(fps->text()+"MMM").width(), fontMetrics.boundingRect(qc_("FPS", "abbreviation")+"MM.M MMM").width());
 		int fovShift     = fontMetrics.boundingRect(fov->text()+"MMM").width() + fpsShift;
 		int locationWidth= fontMetrics.boundingRect(location->text() + "MMM").width();
 		location->setPos(0, 0);
