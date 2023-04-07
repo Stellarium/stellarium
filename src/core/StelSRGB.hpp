@@ -32,6 +32,15 @@ F srgbToLinear(const F c)
 }
 
 template<typename F>
+Vector4<F> srgbToLinear(const Vector4<F>& srgba)
+{
+	return {srgbToLinear(srgba[0]),
+			srgbToLinear(srgba[1]),
+			srgbToLinear(srgba[2]),
+			srgba[3]};
+}
+
+template<typename F>
 Vector3<F> srgbToLinear(const Vector3<F>& srgb)
 {
 	return {srgbToLinear(srgb[0]), srgbToLinear(srgb[1]), srgbToLinear(srgb[2])};
