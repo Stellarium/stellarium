@@ -61,7 +61,7 @@ QPixmap getTextPixmap(const QString& str, QFont font)
 {
 	// Render the text str into a QPixmap.
 	QRect strRect = QFontMetrics(font).boundingRect(str);
-	qDebug() << "getTextPixMap " << str << strRect;
+	//qDebug() << "getTextPixMap " << str << strRect;
 	int w = static_cast<int>(1.02f*static_cast<float>(strRect.width()))+1;
 	int h = strRect.height();
 
@@ -1070,7 +1070,7 @@ void BottomStelBar::updateText(bool updatePos, bool updateTopocentric)
 		{
 			const qreal yPos = -fontMetrics.descent();
 			locationPixmap->setPos(0,yPos);
-			int dateTimePos = static_cast<int>(rectCh.right()-datetimePixmap->boundingRect().width())-5;
+			dateTimePos = static_cast<int>(rectCh.right()-datetimePixmap->boundingRect().width())-5;
 			if ((dateTimePos%2) == 1) dateTimePos--; // make even pixel
 			datetimePixmap->setPos(dateTimePos+rightPush, yPos);
 			fovPixmap->setPos(datetimePixmap->x()-fovShift, yPos);
