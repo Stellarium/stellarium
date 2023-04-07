@@ -206,8 +206,8 @@ class LeftStelBar : public QObject, public QGraphicsItem
 public:
 	LeftStelBar(QGraphicsItem* parent);
 	~LeftStelBar() override;
-	virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
-	virtual QRectF boundingRect() const override;
+	void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
+	QRectF boundingRect() const override;
 	void addButton(StelButton* button);
 	QRectF boundingRectNoHelpLabel() const;
 	//! Set the color for all the sub elements
