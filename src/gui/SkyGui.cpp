@@ -346,8 +346,7 @@ void SkyGui::updateBarsPos()
 
 	if (!qFuzzyCompare(bottomBar->pos().x(), newBottomBarX) || !qFuzzyCompare(bottomBar->pos().y(), newBottomBarY))
 	{
-		//bottomBar->setPos(qRound(newBottomBarX), qRound(newBottomBarY)); // GZ: why qRound???
-		bottomBar->setPos(newBottomBarX, newBottomBarY);
+		bottomBar->setPos(qRound(newBottomBarX), qRound(newBottomBarY));
 		updatePath = true;
 	}
 
