@@ -207,6 +207,7 @@ void SpecificTimeWidget::setTodayTimes()
 	else
 	{
 		sunrise = sunset = dash;
+		// polar day/night
 		duration = (day[3]>99.) ? 24. : 0.;
 	}
 	dayDuration = StelUtils::hoursToHmsStr(duration, true);
