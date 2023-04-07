@@ -177,7 +177,8 @@ void SpecificTimeWidget::setSeasonTimes()
 
 void SpecificTimeWidget::setTodayTimes()
 {
-	const double utcShift = core->getUTCOffset(core->getJD()) / 24.; // Fix DST shift...
+	const double JD = core->getJD();
+	const double utcShift = core->getUTCOffset(JD) / 24.; // Fix DST shift...
 	PlanetP sun = GETSTELMODULE(SolarSystem)->getSun();
 	double duration, duration1, duration2;
 	QString moonrise, moonset, sunrise, sunset, civilTwilightBegin, civilTwilightEnd, nauticalTwilightBegin,
@@ -293,7 +294,7 @@ void SpecificTimeWidget::setTodayTimes()
 	civilTwilightDuration = StelUtils::hoursToHmsStr(duration, true);
 
 	// fill the data
-	ui->labelToday->setText(QString("%1 (%2)").arg(q_("Today"), localeMgr->getPrintableDateLocal(core->getJD())));
+	ui->labelToday->setText(QString("%1 (%2)").arg(q_("Today"), localeMgr->getPrintableDateLocal(JD)));
 
 	ui->labelDayDuration->setText(dayDuration);
 	ui->labelCivilTwilightBegin->setText(civilTwilightBegin);
