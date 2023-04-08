@@ -99,6 +99,7 @@ private:
 	decltype(::ShowMySky_AtmosphereRenderer_create)* ShowMySky_AtmosphereRenderer_create=nullptr;
 
 	struct {
+		int doSRGB;
 		int rgbMaxValue;
 		int ditherPattern;
 		int oneOverGamma;
