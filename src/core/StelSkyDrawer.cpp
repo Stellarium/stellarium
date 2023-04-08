@@ -25,6 +25,7 @@
 #include "StelToneReproducer.hpp"
 #include "StelTextureMgr.hpp"
 #include "StelApp.hpp"
+#include "StelSRGB.hpp"
 #include "StelCore.hpp"
 #include "StelMovementMgr.hpp"
 #include "StelPainter.hpp"
@@ -496,14 +497,16 @@ bool StelSkyDrawer::drawPointSource(StelPainter* sPainter, const Vec3d& v, const
 
 		texBigHalo->bind();
 		sPainter->setBlending(true, GL_ONE, GL_ONE);
-		sPainter->setColor(color*cmag);
+		sPainter->setColor(srgbToLinear(color*cmag));
 		sPainter->drawSprite2dModeNoDeviceScale(win[0], win[1], rmag);
 	}
 
-	unsigned char starColor[3] = {0, 0, 0};
-	starColor[0] = static_cast<unsigned char>(std::min(static_cast<int>(color[0]*tw*255+0.5f), 255));
-	starColor[1] = static_cast<unsigned char>(std::min(static_cast<int>(color[1]*tw*255+0.5f), 255));
-	starColor[2] = static_cast<unsigned char>(std::min(static_cast<int>(color[2]*tw*255+0.5f), 255));
+	const auto starColorVec = srgbToLinear(color*tw+Vec3f(0.5/255))*255;
+	const uint8_t starColor[3] = {
+		static_cast<uint8_t>(std::min(starColorVec[0], 255.f)),
+		static_cast<uint8_t>(std::min(starColorVec[1], 255.f)),
+		static_cast<uint8_t>(std::min(starColorVec[2], 255.f)),
+	};
 	
 	// Store the drawing instructions in the vertex arrays
 	StarVertex* vx = &(vertexArray[nbPointSources*6]);
