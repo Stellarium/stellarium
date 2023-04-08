@@ -874,6 +874,7 @@ void ObsListDialog::newListButtonPressed()
 {
 	selectedOlud=QUuid::createUuid().toString();
 	itemModel->removeRows(0, itemModel->rowCount()); // don't use clear() here!
+	currentItemCollection.clear();
 
 	//ui->treeView->clearSelection(); ???
 	switchEditMode(true, true);
