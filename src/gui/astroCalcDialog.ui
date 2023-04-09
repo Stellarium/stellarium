@@ -3136,6 +3136,16 @@
                 </property>
                </spacer>
               </item>
+              <item row="2" column="0">
+               <widget class="QLabel" name="labelNote">
+                <property name="text">
+                 <string>Note: This tool works on Earth only!</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignCenter</set>
+                </property>
+               </widget>
+              </item>
              </layout>
             </widget>
             <widget class="QWidget" name="tabMoonPhases">
