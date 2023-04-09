@@ -777,7 +777,11 @@ QSurfaceFormat StelMainView::getDesiredGLFormat(QSettings* configuration)
 
 	//if on an GLES build, do not set the format
 	const auto openGLModuleType = QOpenGLContext::openGLModuleType();
-	qDebug() << "OpenGL module type:" << openGLModuleType;
+	qDebug() << "OpenGL module type:" << (openGLModuleType==QOpenGLContext::LibGL
+										  ? "desktop OpenGL"
+										  : openGLModuleType==QOpenGLContext::LibGL
+											? "OpenGL ES 2 or higher"
+											: std::to_string(openGLModuleType).c_str());
 	if (openGLModuleType==QOpenGLContext::LibGL)
 	{
 		fmt.setRenderableType(QSurfaceFormat::OpenGL);
