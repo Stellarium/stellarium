@@ -1001,6 +1001,7 @@ void AstroCalcDialog::populateCelestialCategoryList()
 	category->addItem(q_("Solar system objects: comets"), "201");
 	category->addItem(q_("Solar system objects: minor bodies"), "202");
 	category->addItem(q_("Solar system objects: planets"), "203");
+	category->addItem(q_("Almanac: Sun, Moon and naked-eye planets"), "204");
 
 	index = category->findData(selectedCategoryId, Qt::UserRole, Qt::MatchCaseSensitive);
 	if (index < 0) // read config data
@@ -1181,7 +1182,7 @@ void AstroCalcDialog::currentCelestialPositions()
 			}
 		}
 	}
-	else if (celTypeId >= 200 && celTypeId <= 203)
+	else if (celTypeId >= 200 && celTypeId <= 204)
 	{
 		QString distanceInfo = q_("Planetocentric distance");
 		if (core->getUseTopocentricCoordinates())
@@ -1202,6 +1203,12 @@ void AstroCalcDialog::currentCelestialPositions()
 			case 201:
 			case 202:
 				planets = solarSystem->getAllMinorBodies();
+				break;
+			case 204:
+				const QStringList NEP = { "Moon", "Mercury", "Venus", "Mars", "Jupiter", "Saturn" };
+				planets.append(sun);
+				for (auto &planet: NEP)
+					planets.append(solarSystem->searchByEnglishName(planet));
 				break;
 		}
 
@@ -1229,6 +1236,9 @@ void AstroCalcDialog::currentCelestialPositions()
 				case 203:
 					if (planet->getPlanetType() == Planet::isPlanet)
 						passByType = true;
+					break;
+				case 204:
+					passByType = true;
 					break;
 			}
 
