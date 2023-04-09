@@ -2443,6 +2443,10 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool do
 
 		verticesVBO->allocate(projectedVertexArray.pointer, projectedVertexArray.vertexSizeInBytes()*numberOfVerticesToCopy);
 
+#ifdef GL_MULTISAMPLE
+		if(multisamplingEnabled && glState.lineSmooth)
+			glEnable(GL_MULTISAMPLE);
+#endif
 		if(wideLineMode)
 		{
 			pr->setAttributeBuffer(wideLineShaderVars.vertex, projectedVertexArray.type, 0, projectedVertexArray.size);
@@ -2453,10 +2457,6 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool do
 			GLint viewport[4] = {};
 			glGetIntegerv(GL_VIEWPORT, viewport);
 			pr->setUniformValue(wideLineShaderVars.viewportSize, QVector2D(viewport[2], viewport[3]));
-#ifdef GL_MULTISAMPLE
-			if(multisamplingEnabled && glState.lineSmooth)
-				glEnable(GL_MULTISAMPLE);
-#endif
 		}
 		else
 		{
@@ -2555,10 +2555,6 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool do
 			GLint viewport[4] = {};
 			glGetIntegerv(GL_VIEWPORT, viewport);
 			pr->setUniformValue(colorfulWideLineShaderVars.viewportSize, QVector2D(viewport[2], viewport[3]));
-#ifdef GL_MULTISAMPLE
-			if(multisamplingEnabled && glState.lineSmooth)
-				glEnable(GL_MULTISAMPLE);
-#endif
 		}
 		else
 		{
@@ -2568,6 +2564,10 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool do
 			pr->setAttributeBuffer(colorShaderVars.color, colorArray.type, colorDataOffset, colorArray.size);
 			pr->enableAttributeArray(colorShaderVars.color);
 		}
+#ifdef GL_MULTISAMPLE
+		if(multisamplingEnabled && glState.lineSmooth)
+			glEnable(GL_MULTISAMPLE);
+#endif
 	}
 	else
 	{
