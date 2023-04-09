@@ -437,6 +437,8 @@ private slots:
 	void showExtraEphemerisDialog();
 	void showCustomStepsDialog();
 
+	void updateAlmanacWidgetsVisibility();
+
 	void saveGraph(QChartView *graph);
 
 private:

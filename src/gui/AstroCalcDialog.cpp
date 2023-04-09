@@ -249,8 +249,6 @@ void AstroCalcDialog::createDialogContent()
 	populateTimeIntervalsList();
 	populateWutGroups();
 	populateToolTips();
-	// Almanac
-	ui->specificTimeWidget->setup();
 
 	// Default buttons state
 	bool buttonState = false;
@@ -586,6 +584,11 @@ void AstroCalcDialog::createDialogContent()
 	connect(ui->pushButtonExtraEphemerisDialog, SIGNAL(clicked()), this, SLOT(showExtraEphemerisDialog()));
 	connect(ui->pushButtonCustomStepsDialog, SIGNAL(clicked()), this, SLOT(showCustomStepsDialog()));
 
+	// Tab: Almanac
+	ui->specificTimeWidget->setup();
+	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(updateAlmanacWidgetsVisibility()));
+	updateAlmanacWidgetsVisibility();
+
 	updateTabBarListWidgetWidth();
 
 	ui->celestialPositionsUpdateButton->setShortcut(QKeySequence("Shift+F10"));
@@ -606,6 +609,12 @@ void AstroCalcDialog::createDialogContent()
 	connect(ui->exportGraphsPushButton, &QPushButton::clicked, this, [=]{ saveGraph(ui->twoGraphsChartView); });
 	connect(ui->exportLunarElongationPushButton, &QPushButton::clicked, this, [=]{ saveGraph(ui->lunarElongationChartView); });
 	connect(ui->exportPCPushButton, &QPushButton::clicked, this, [=]{ saveGraph(ui->pcChartView); });
+}
+
+void AstroCalcDialog::updateAlmanacWidgetsVisibility()
+{
+	const bool onEarth = core->getCurrentPlanet()==solarSystem->getEarth();
+	ui->specificTimeWidget->setVisible(onEarth);
 }
 
 void AstroCalcDialog::populateToolTips()

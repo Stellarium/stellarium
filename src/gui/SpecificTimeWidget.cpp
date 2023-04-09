@@ -177,6 +177,9 @@ void SpecificTimeWidget::setSeasonTimes()
 
 void SpecificTimeWidget::setTodayTimes()
 {
+	if (core->getCurrentPlanet()!=GETSTELMODULE(SolarSystem)->getEarth())
+		return;
+
 	const double JD = core->getJD();
 	const double utcShift = core->getUTCOffset(JD) / 24.; // Fix DST shift...
 	PlanetP sun = GETSTELMODULE(SolarSystem)->getSun();
