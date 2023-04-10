@@ -908,6 +908,11 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints, StelCore *core)
 		scaledSize = static_cast<float>(getAngularRadius(Q_NULLPTR)) *(M_PI_180f*2.f)*static_cast<float>(sPainter.getProjector()->getPixelPerRadAtCenter());
 	float finalSize=qMax(size, scaledSize);
 
+	float lum = 1.f;
+	Vec3f col(color*lum*hintsBrightness);
+	if (!objectInDisplayedType())
+		col.set(0.f,0.f,0.f);
+
 	switch (nType)
 	{
 		case NebGx:
@@ -951,7 +956,7 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints, StelCore *core)
 		case NebEn:
 		case NebSNC:
 		case NebSNRC:
-			renderMarkerRoundedRect(sPainter, XY[0], XY[1], finalSize, color);
+			renderMarkerRoundedRect(sPainter, XY[0], XY[1], finalSize, col);
 			return;
 		case NebPn:
 		case NebPossPN:
@@ -959,7 +964,7 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints, StelCore *core)
 			Nebula::texPlanetaryNebula->bind();
 			break;
 		case NebDn:
-			renderDarkNebulaMarker(sPainter, XY[0], XY[1], finalSize, color);
+			renderDarkNebulaMarker(sPainter, XY[0], XY[1], finalSize, col);
 			return;
 		case NebCn:
 			if (finalSize > 35.f)
@@ -981,11 +986,6 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints, StelCore *core)
 			else
 				Nebula::texCircle->bind();
 	}
-
-	float lum = 1.f;
-	Vec3f col(color*lum*hintsBrightness);
-	if (!objectInDisplayedType())
-		col.set(0.f,0.f,0.f);
 
 	sPainter.setColor(col, 1);
 	sPainter.setBlending(true, GL_ONE, GL_ONE);
