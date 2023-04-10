@@ -62,6 +62,7 @@ src/gui/ConfigureOrbitColorsDialog.cpp
 src/gui/DateTimeDialog.cpp
 src/gui/LightPollutionWidget.cpp
 src/gui/SpecificTimeWidget.cpp
+src/gui/MoonPhasesWidget.cpp
 src/scripting/StelScriptMgr.cpp
 src/main.cpp
 src/StelMainView.cpp
@@ -94,6 +95,7 @@ src/ui_tonemappingDialog.h
 src/ui_lightPollutionWidget.h
 src/ui_configureScreenshotsDialog.h
 src/ui_specificTimeWidget.h
+src/ui_moonPhasesWidget.h
 
 # Plug-in translations
 # NOTE: Plugins should be enabled for building

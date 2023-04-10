@@ -198,8 +198,9 @@ void AstroCalcDialog::retranslate()
 		// by causing the list items to be laid out again.
 		updateTabBarListWidgetWidth();
 		populateToolTips();
-		// Alamac
+		// Almanac
 		ui->specificTimeWidget->retranslate();
+		ui->moonPhasesWidget->retranslate();
 	}
 }
 
@@ -586,6 +587,7 @@ void AstroCalcDialog::createDialogContent()
 
 	// Tab: Almanac
 	ui->specificTimeWidget->setup();
+	ui->moonPhasesWidget->setup();
 	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(updateAlmanacWidgetsVisibility()));
 	updateAlmanacWidgetsVisibility();
 
@@ -615,6 +617,7 @@ void AstroCalcDialog::updateAlmanacWidgetsVisibility()
 {
 	const bool onEarth = core->getCurrentPlanet()==solarSystem->getEarth();
 	ui->specificTimeWidget->setVisible(onEarth);
+	ui->moonPhasesWidget->setVisible(onEarth);
 }
 
 void AstroCalcDialog::populateToolTips()

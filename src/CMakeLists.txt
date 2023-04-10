@@ -372,6 +372,8 @@ IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
           gui/ExternalStepSpinBox.hpp
           gui/SpecificTimeWidget.hpp
           gui/SpecificTimeWidget.cpp
+          gui/MoonPhasesWidget.hpp
+          gui/MoonPhasesWidget.cpp
      )
 
      ################# compiles .ui files ############
@@ -398,6 +400,7 @@ IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
           gui/tonemappingDialog.ui
           gui/skylightDialog.ui
           gui/specificTimeWidget.ui
+          gui/moonPhasesWidget.ui
      )
 
      IF(ENABLE_SCRIPTING)
