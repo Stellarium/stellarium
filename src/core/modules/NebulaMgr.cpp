@@ -153,9 +153,7 @@ NebulaMgr::~NebulaMgr()
 	Nebula::texRegion = StelTextureSP();
 	Nebula::texGalaxy = StelTextureSP();
 	Nebula::texGalaxyLarge = StelTextureSP();
-	Nebula::texOpenCluster = StelTextureSP();
-	Nebula::texOpenClusterLarge = StelTextureSP();
-	Nebula::texOpenClusterXLarge = StelTextureSP();
+	Nebula::texPointElement = StelTextureSP();
 	Nebula::texGlobularCluster = StelTextureSP();
 	Nebula::texGlobularClusterLarge = StelTextureSP();
 	Nebula::texPlanetaryNebula = StelTextureSP();
@@ -193,11 +191,7 @@ void NebulaMgr::init()
 	// Load ellipse texture for large galaxies
 	Nebula::texGalaxyLarge		= texMan.createTexture(StelFileMgr::getInstallationDir()+"/textures/neb_gal_lrg.png");
 	// Load open cluster marker texture
-	Nebula::texOpenCluster		= texMan.createTexture(StelFileMgr::getInstallationDir()+"/textures/neb_ocl.png");
-	// Load open cluster marker texture for large objects
-	Nebula::texOpenClusterLarge	= texMan.createTexture(StelFileMgr::getInstallationDir()+"/textures/neb_ocl_lrg.png");
-	// Load open cluster marker texture for extra large objects
-	Nebula::texOpenClusterXLarge	= texMan.createTexture(StelFileMgr::getInstallationDir()+"/textures/neb_ocl_xlrg.png");
+	Nebula::texPointElement		= texMan.createTexture(StelFileMgr::getInstallationDir()+"/textures/neb_point_elem.png");
 	// Load globular cluster marker texture
 	Nebula::texGlobularCluster	= texMan.createTexture(StelFileMgr::getInstallationDir()+"/textures/neb_gcl.png");
 	// Load globular cluster marker texture for large GCls
