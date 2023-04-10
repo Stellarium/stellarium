@@ -159,11 +159,6 @@ NebulaMgr::~NebulaMgr()
 	Nebula::texGlobularCluster = StelTextureSP();
 	Nebula::texGlobularClusterLarge = StelTextureSP();
 	Nebula::texPlanetaryNebula = StelTextureSP();
-	Nebula::texDiffuseNebula = StelTextureSP();
-	Nebula::texDiffuseNebulaLarge = StelTextureSP();
-	Nebula::texDiffuseNebulaXLarge = StelTextureSP();
-	Nebula::texDarkNebula = StelTextureSP();
-	Nebula::texDarkNebulaLarge = StelTextureSP();
 	Nebula::texOpenClusterWithNebulosity = StelTextureSP();
 	Nebula::texOpenClusterWithNebulosityLarge = StelTextureSP();
 }
@@ -209,16 +204,6 @@ void NebulaMgr::init()
 	Nebula::texGlobularClusterLarge	= texMan.createTexture(StelFileMgr::getInstallationDir()+"/textures/neb_gcl_lrg.png");
 	// Load planetary nebula marker texture
 	Nebula::texPlanetaryNebula	= texMan.createTexture(StelFileMgr::getInstallationDir()+"/textures/neb_pnb.png");
-	// Load diffuse nebula marker texture
-	Nebula::texDiffuseNebula	= texMan.createTexture(StelFileMgr::getInstallationDir()+"/textures/neb_dif.png");
-	// Load diffuse nebula marker texture for large DSO
-	Nebula::texDiffuseNebulaLarge	= texMan.createTexture(StelFileMgr::getInstallationDir()+"/textures/neb_dif_lrg.png");
-	// Load diffuse nebula marker texture for extra large DSO
-	Nebula::texDiffuseNebulaXLarge	= texMan.createTexture(StelFileMgr::getInstallationDir()+"/textures/neb_dif_xlrg.png");
-	// Load dark nebula marker texture
-	Nebula::texDarkNebula		= texMan.createTexture(StelFileMgr::getInstallationDir()+"/textures/neb_drk.png");
-	// Load dark nebula marker texture for large DSO
-	Nebula::texDarkNebulaLarge	= texMan.createTexture(StelFileMgr::getInstallationDir()+"/textures/neb_drk_lrg.png");
 	// Load Ocl/Nebula marker texture
 	Nebula::texOpenClusterWithNebulosity = texMan.createTexture(StelFileMgr::getInstallationDir()+"/textures/neb_ocln.png");
 	// Load Ocl/Nebula marker texture for large objects

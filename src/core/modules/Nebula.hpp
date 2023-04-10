@@ -337,11 +337,6 @@ private:
 	static StelTextureSP texGlobularCluster;		// Type 2
 	static StelTextureSP texGlobularClusterLarge;		// Type 2_large
 	static StelTextureSP texPlanetaryNebula;		// Type 3
-	static StelTextureSP texDiffuseNebula;			// Type 4
-	static StelTextureSP texDiffuseNebulaLarge;		// Type 4_large
-	static StelTextureSP texDiffuseNebulaXLarge;		// Type 4_extralarge
-	static StelTextureSP texDarkNebula;			// Type 5
-	static StelTextureSP texDarkNebulaLarge;		// Type 5_large
 	static StelTextureSP texOpenClusterWithNebulosity;	// Type 6
 	static StelTextureSP texOpenClusterWithNebulosityLarge;	// Type 6_large
 	static float hintsBrightness;
