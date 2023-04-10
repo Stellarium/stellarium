@@ -742,6 +742,151 @@ void Nebula::drawOutlines(StelPainter &sPainter, float maxMagHints) const
 	}
 }
 
+void Nebula::renderDarkNebulaMarker(StelPainter& sPainter, const float x, const float y,
+									float size, const Vec3f color) const
+{
+	// Take into account device pixel density and global scale ratio, as we are drawing 2D stuff.
+	const auto pixelRatio = sPainter.getProjector()->getDevicePixelsPerPixel();
+	const auto scale = pixelRatio * StelApp::getInstance().getGlobalScalingRatio();
+	size *= scale;
+
+	const float roundRadius = 0.35 * size;
+	const int numPointsInArc = std::lround(std::clamp(5*size/35, 5.f, 16.f));
+	std::vector<float> vertexData;
+	vertexData.reserve(numPointsInArc*2*4);
+	const float leftOuterX = x - size;
+	const float leftInnerX = leftOuterX + roundRadius;
+	const float bottomOuterY = y - size;
+	const float bottomInnerY = bottomOuterY + roundRadius;
+	const float rightOuterX = x + size;
+	const float rightInnerX = rightOuterX - roundRadius;
+	const float topOuterY = y + size;
+	const float topInnerY = topOuterY - roundRadius;
+	const float gap = 0.15*size;
+	const float*const cossin = StelUtils::ComputeCosSinRhoZone((M_PIf/2)/(numPointsInArc-1),
+															   numPointsInArc-1, 0);
+	sPainter.setLineSmooth(true);
+	sPainter.setLineWidth(scale * std::clamp(2*size/35, 1.f, 2.5f));
+	sPainter.setColor(color);
+	sPainter.enableClientStates(true);
+
+	vertexData.clear();
+	vertexData.push_back(x-gap);
+	vertexData.push_back(bottomOuterY);
+	for(int n = 0; n < numPointsInArc; ++n)
+	{
+		const auto cosa = cossin[2*n], sina = cossin[2*n+1];
+		vertexData.push_back(leftInnerX   - roundRadius*sina);
+		vertexData.push_back(bottomInnerY - roundRadius*cosa);
+	}
+	vertexData.push_back(leftOuterX);
+	vertexData.push_back(y-gap);
+	sPainter.setVertexPointer(2, GL_FLOAT, vertexData.data());
+	sPainter.drawFromArray(StelPainter::LineStrip, vertexData.size() / 2, 0, false);
+
+	vertexData.clear();
+	vertexData.push_back(leftOuterX);
+	vertexData.push_back(y+gap);
+	for(int n = 0; n < numPointsInArc; ++n)
+	{
+		const auto cosa = cossin[2*n], sina = cossin[2*n+1];
+		vertexData.push_back(leftInnerX - roundRadius*cosa);
+		vertexData.push_back(topInnerY  + roundRadius*sina);
+	}
+	vertexData.push_back(x-gap);
+	vertexData.push_back(topOuterY);
+	sPainter.setVertexPointer(2, GL_FLOAT, vertexData.data());
+	sPainter.drawFromArray(StelPainter::LineStrip, vertexData.size() / 2, 0, false);
+
+	vertexData.clear();
+	vertexData.push_back(x+gap);
+	vertexData.push_back(topOuterY);
+	for(int n = 0; n < numPointsInArc; ++n)
+	{
+		const auto cosa = cossin[2*n], sina = cossin[2*n+1];
+		vertexData.push_back(rightInnerX + roundRadius*sina);
+		vertexData.push_back(topInnerY   + roundRadius*cosa);
+	}
+	vertexData.push_back(rightOuterX);
+	vertexData.push_back(y+gap);
+	sPainter.setVertexPointer(2, GL_FLOAT, vertexData.data());
+	sPainter.drawFromArray(StelPainter::LineStrip, vertexData.size() / 2, 0, false);
+
+	vertexData.clear();
+	vertexData.push_back(rightOuterX);
+	vertexData.push_back(y-gap);
+	for(int n = 0; n < numPointsInArc; ++n)
+	{
+		const auto cosa = cossin[2*n], sina = cossin[2*n+1];
+		vertexData.push_back(rightInnerX  + roundRadius*cosa);
+		vertexData.push_back(bottomInnerY - roundRadius*sina);
+	}
+	vertexData.push_back(x+gap);
+	vertexData.push_back(bottomOuterY);
+	sPainter.setVertexPointer(2, GL_FLOAT, vertexData.data());
+	sPainter.drawFromArray(StelPainter::LineStrip, vertexData.size() / 2, 0, false);
+
+	sPainter.enableClientStates(false);
+}
+
+void Nebula::renderMarkerRoundedRect(StelPainter& sPainter, const float x, const float y,
+									 float size, const Vec3f color) const
+{
+	// Take into account device pixel density and global scale ratio, as we are drawing 2D stuff.
+	const auto pixelRatio = sPainter.getProjector()->getDevicePixelsPerPixel();
+	const auto scale = pixelRatio * StelApp::getInstance().getGlobalScalingRatio();
+	size *= scale;
+
+	const float roundRadius = 0.35 * size;
+	const int numPointsInArc = std::lround(std::clamp(5*size/35, 5.f, 16.f));
+	std::vector<float> vertexData;
+	vertexData.reserve(numPointsInArc*2*4);
+	const float leftOuterX = x - size;
+	const float leftInnerX = leftOuterX + roundRadius;
+	const float bottomOuterY = y - size;
+	const float bottomInnerY = bottomOuterY + roundRadius;
+	const float rightOuterX = x + size;
+	const float rightInnerX = rightOuterX - roundRadius;
+	const float topOuterY = y + size;
+	const float topInnerY = topOuterY - roundRadius;
+	const float*const cossin = StelUtils::ComputeCosSinRhoZone((M_PIf/2)/(numPointsInArc-1),
+															   numPointsInArc-1, 0);
+	for(int n = 0; n < numPointsInArc; ++n)
+	{
+		const auto cosa = cossin[2*n], sina = cossin[2*n+1];
+		vertexData.push_back(leftInnerX   - roundRadius*sina);
+		vertexData.push_back(bottomInnerY - roundRadius*cosa);
+	}
+	for(int n = 0; n < numPointsInArc; ++n)
+	{
+		const auto cosa = cossin[2*n], sina = cossin[2*n+1];
+		vertexData.push_back(leftInnerX - roundRadius*cosa);
+		vertexData.push_back(topInnerY  + roundRadius*sina);
+	}
+	for(int n = 0; n < numPointsInArc; ++n)
+	{
+		const auto cosa = cossin[2*n], sina = cossin[2*n+1];
+		vertexData.push_back(rightInnerX + roundRadius*sina);
+		vertexData.push_back(topInnerY   + roundRadius*cosa);
+	}
+	for(int n = 0; n < numPointsInArc; ++n)
+	{
+		const auto cosa = cossin[2*n], sina = cossin[2*n+1];
+		vertexData.push_back(rightInnerX  + roundRadius*cosa);
+		vertexData.push_back(bottomInnerY - roundRadius*sina);
+	}
+	vertexData.push_back(leftInnerX);
+	vertexData.push_back(bottomOuterY);
+	const auto vertCount = vertexData.size() / 2;
+	sPainter.setLineSmooth(true);
+	sPainter.setLineWidth(scale * std::clamp(2*size/35, 1.f, 2.5f));
+	sPainter.setColor(color);
+	sPainter.enableClientStates(true);
+	sPainter.setVertexPointer(2, GL_FLOAT, vertexData.data());
+	sPainter.drawFromArray(StelPainter::LineStrip, vertCount, 0, false);
+	sPainter.enableClientStates(false);
+}
+
 void Nebula::drawHints(StelPainter& sPainter, float maxMagHints, StelCore *core) const
 {
 	size_t segments = outlineSegments.size();
@@ -806,157 +951,16 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints, StelCore *core)
 		case NebEn:
 		case NebSNC:
 		case NebSNRC:
-		{
-			// Take into account device pixel density and global scale ratio, as we are drawing 2D stuff.
-			const auto pixelRatio = sPainter.getProjector()->getDevicePixelsPerPixel();
-			const auto scale = pixelRatio * StelApp::getInstance().getGlobalScalingRatio();
-			finalSize *= scale;
-
-			const float x = XY[0];
-			const float y = XY[1];
-			const float roundRadius = 0.35 * finalSize;
-			const int numPointsInArc = std::lround(std::clamp(5*finalSize/35, 5.f, 16.f));
-			std::vector<float> vertexData;
-			vertexData.reserve(numPointsInArc*2*4);
-			const float leftOuterX = x - finalSize;
-			const float leftInnerX = leftOuterX + roundRadius;
-			const float bottomOuterY = y - finalSize;
-			const float bottomInnerY = bottomOuterY + roundRadius;
-			const float rightOuterX = x + finalSize;
-			const float rightInnerX = rightOuterX - roundRadius;
-			const float topOuterY = y + finalSize;
-			const float topInnerY = topOuterY - roundRadius;
-			const float*const cossin = StelUtils::ComputeCosSinRhoZone((M_PIf/2)/(numPointsInArc-1),
-																	   numPointsInArc-1, 0);
-			for(int n = 0; n < numPointsInArc; ++n)
-			{
-				const auto cosa = cossin[2*n], sina = cossin[2*n+1];
-				vertexData.push_back(leftInnerX   - roundRadius*sina);
-				vertexData.push_back(bottomInnerY - roundRadius*cosa);
-			}
-			for(int n = 0; n < numPointsInArc; ++n)
-			{
-				const auto cosa = cossin[2*n], sina = cossin[2*n+1];
-				vertexData.push_back(leftInnerX - roundRadius*cosa);
-				vertexData.push_back(topInnerY  + roundRadius*sina);
-			}
-			for(int n = 0; n < numPointsInArc; ++n)
-			{
-				const auto cosa = cossin[2*n], sina = cossin[2*n+1];
-				vertexData.push_back(rightInnerX + roundRadius*sina);
-				vertexData.push_back(topInnerY   + roundRadius*cosa);
-			}
-			for(int n = 0; n < numPointsInArc; ++n)
-			{
-				const auto cosa = cossin[2*n], sina = cossin[2*n+1];
-				vertexData.push_back(rightInnerX  + roundRadius*cosa);
-				vertexData.push_back(bottomInnerY - roundRadius*sina);
-			}
-			vertexData.push_back(leftInnerX);
-			vertexData.push_back(bottomOuterY);
-			const auto vertCount = vertexData.size() / 2;
-			sPainter.setLineSmooth(true);
-			sPainter.setLineWidth(scale * std::clamp(2*finalSize/35, 1.f, 2.5f));
-			sPainter.setColor(color);
-			sPainter.enableClientStates(true);
-			sPainter.setVertexPointer(2, GL_FLOAT, vertexData.data());
-			sPainter.drawFromArray(StelPainter::LineStrip, vertCount, 0, false);
-			sPainter.enableClientStates(false);
+			renderMarkerRoundedRect(sPainter, XY[0], XY[1], finalSize, color);
 			return;
-		}
 		case NebPn:
 		case NebPossPN:
 		case NebPPN:
 			Nebula::texPlanetaryNebula->bind();
 			break;
 		case NebDn:
-		{
-			// Take into account device pixel density and global scale ratio, as we are drawing 2D stuff.
-			const auto pixelRatio = sPainter.getProjector()->getDevicePixelsPerPixel();
-			const auto scale = pixelRatio * StelApp::getInstance().getGlobalScalingRatio();
-			finalSize *= scale;
-
-			const float x = XY[0];
-			const float y = XY[1];
-			const float roundRadius = 0.35 * finalSize;
-			const int numPointsInArc = std::lround(std::clamp(5*finalSize/35, 5.f, 16.f));
-			std::vector<float> vertexData;
-			vertexData.reserve(numPointsInArc*2*4);
-			const float leftOuterX = x - finalSize;
-			const float leftInnerX = leftOuterX + roundRadius;
-			const float bottomOuterY = y - finalSize;
-			const float bottomInnerY = bottomOuterY + roundRadius;
-			const float rightOuterX = x + finalSize;
-			const float rightInnerX = rightOuterX - roundRadius;
-			const float topOuterY = y + finalSize;
-			const float topInnerY = topOuterY - roundRadius;
-			const float gap = 0.15*finalSize;
-			const float*const cossin = StelUtils::ComputeCosSinRhoZone((M_PIf/2)/(numPointsInArc-1),
-																	   numPointsInArc-1, 0);
-			sPainter.setLineSmooth(true);
-			sPainter.setLineWidth(scale * std::clamp(2*finalSize/35, 1.f, 2.5f));
-			sPainter.setColor(color);
-			sPainter.enableClientStates(true);
-
-			vertexData.clear();
-			vertexData.push_back(x-gap);
-			vertexData.push_back(bottomOuterY);
-			for(int n = 0; n < numPointsInArc; ++n)
-			{
-				const auto cosa = cossin[2*n], sina = cossin[2*n+1];
-				vertexData.push_back(leftInnerX   - roundRadius*sina);
-				vertexData.push_back(bottomInnerY - roundRadius*cosa);
-			}
-			vertexData.push_back(leftOuterX);
-			vertexData.push_back(y-gap);
-			sPainter.setVertexPointer(2, GL_FLOAT, vertexData.data());
-			sPainter.drawFromArray(StelPainter::LineStrip, vertexData.size() / 2, 0, false);
-
-			vertexData.clear();
-			vertexData.push_back(leftOuterX);
-			vertexData.push_back(y+gap);
-			for(int n = 0; n < numPointsInArc; ++n)
-			{
-				const auto cosa = cossin[2*n], sina = cossin[2*n+1];
-				vertexData.push_back(leftInnerX - roundRadius*cosa);
-				vertexData.push_back(topInnerY  + roundRadius*sina);
-			}
-			vertexData.push_back(x-gap);
-			vertexData.push_back(topOuterY);
-			sPainter.setVertexPointer(2, GL_FLOAT, vertexData.data());
-			sPainter.drawFromArray(StelPainter::LineStrip, vertexData.size() / 2, 0, false);
-
-			vertexData.clear();
-			vertexData.push_back(x+gap);
-			vertexData.push_back(topOuterY);
-			for(int n = 0; n < numPointsInArc; ++n)
-			{
-				const auto cosa = cossin[2*n], sina = cossin[2*n+1];
-				vertexData.push_back(rightInnerX + roundRadius*sina);
-				vertexData.push_back(topInnerY   + roundRadius*cosa);
-			}
-			vertexData.push_back(rightOuterX);
-			vertexData.push_back(y+gap);
-			sPainter.setVertexPointer(2, GL_FLOAT, vertexData.data());
-			sPainter.drawFromArray(StelPainter::LineStrip, vertexData.size() / 2, 0, false);
-
-			vertexData.clear();
-			vertexData.push_back(rightOuterX);
-			vertexData.push_back(y-gap);
-			for(int n = 0; n < numPointsInArc; ++n)
-			{
-				const auto cosa = cossin[2*n], sina = cossin[2*n+1];
-				vertexData.push_back(rightInnerX  + roundRadius*cosa);
-				vertexData.push_back(bottomInnerY - roundRadius*sina);
-			}
-			vertexData.push_back(x+gap);
-			vertexData.push_back(bottomOuterY);
-			sPainter.setVertexPointer(2, GL_FLOAT, vertexData.data());
-			sPainter.drawFromArray(StelPainter::LineStrip, vertexData.size() / 2, 0, false);
-
-			sPainter.enableClientStates(false);
+			renderDarkNebulaMarker(sPainter, XY[0], XY[1], finalSize, color);
 			return;
-		}
 		case NebCn:
 			if (finalSize > 35.f)
 				Nebula::texOpenClusterWithNebulosityLarge->bind();
