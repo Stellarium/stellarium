@@ -262,7 +262,7 @@ private:
 	void drawOutlines(StelPainter& sPainter, float maxMagHints) const;
 	void renderDarkNebulaMarker(StelPainter& sPainter, float x, float y, float size, Vec3f color) const;
 	void renderMarkerRoundedRect(StelPainter& sPainter, float x, float y, float size, Vec3f color) const;
-	void renderMarkerPointedCircle(StelPainter& sPainter, float x, float y, float size, Vec3f color) const;
+	void renderMarkerPointedCircle(StelPainter& sPainter, float x, float y, float size, Vec3f color, bool insideRect) const;
 
 	bool objectInDisplayedType() const;
 
@@ -338,8 +338,6 @@ private:
 	static StelTextureSP texGlobularCluster;		// Type 2
 	static StelTextureSP texGlobularClusterLarge;		// Type 2_large
 	static StelTextureSP texPlanetaryNebula;		// Type 3
-	static StelTextureSP texOpenClusterWithNebulosity;	// Type 6
-	static StelTextureSP texOpenClusterWithNebulosityLarge;	// Type 6_large
 	static float hintsBrightness;
 
 	static Vec3f labelColor;				// The color of labels
