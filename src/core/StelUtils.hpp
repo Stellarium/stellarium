@@ -368,6 +368,9 @@ namespace StelUtils
 	//! Return the smallest power of two greater than or equal to the given value.
 	int getBiggerPowerOfTwo(int value);
 
+	//! Return the largest power of two smaller than or equal to the given value
+	int getSmallerPowerOfTwo(const int value);
+
 	//! Return the inverse sinus hyperbolic of z.
 	inline double asinh(const double z){
 		return (z>0 ? std::log(z + std::sqrt(z*z+1)) :
