@@ -365,7 +365,7 @@ namespace StelUtils
 		return (value & -value) == value;
 	}
 
-	//! Return the first power of two bigger than the given value.
+	//! Return the smallest power of two greater than or equal to the given value.
 	int getBiggerPowerOfTwo(int value);
 
 	//! Return the inverse sinus hyperbolic of z.
