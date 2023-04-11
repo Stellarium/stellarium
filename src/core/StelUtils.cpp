@@ -662,6 +662,17 @@ int getBiggerPowerOfTwo(int value)
 	return p;
 }
 
+// Return the first power of two smaller than or equal to the given value
+int getSmallerPowerOfTwo(const int value)
+{
+	if (value==0) return 1;
+	const auto bigger = getBiggerPowerOfTwo(value);
+	// Leave exact power of two unchanged
+	if (bigger == value) return value;
+
+	return bigger >> 1;
+}
+
 /*************************************************************************
  Convert a Qt QDateTime class to Julian Day
 *************************************************************************/

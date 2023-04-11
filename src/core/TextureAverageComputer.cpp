@@ -18,24 +18,11 @@
  */
 
 #include "TextureAverageComputer.hpp"
+#include "StelUtils.hpp"
 
 #if !QT_CONFIG(opengles2) // This class uses glGetTexImage(), which is not supported in GLES2
 
 #include <QOpenGLFunctions_3_3_Core>
-
-namespace
-{
-
-int roundDownToClosestPowerOfTwo(const int x)
-{
-	if(x==0) return 1;
-	int shift=0;
-	for(auto v=x;v;v>>=1)
-		++shift;
-	return 1<<(shift-1);
-}
-
-}
 
 Vec4f TextureAverageComputer::getTextureAverageSimple(const GLuint texture, const int width, const int height)
 {
@@ -70,8 +57,8 @@ Vec4f TextureAverageComputer::getTextureAverageWithWorkaround(const GLuint textu
 {
 	// Play it safe: we don't want to make the GPU struggle with very large textures
 	// if we happen to make them ~4 times larger. Instead round the dimensions down.
-	const auto potWidth  = roundDownToClosestPowerOfTwo(npotWidth);
-	const auto potHeight = roundDownToClosestPowerOfTwo(npotHeight);
+	const auto potWidth  = StelUtils::getSmallerPowerOfTwo(npotWidth);
+	const auto potHeight = StelUtils::getSmallerPowerOfTwo(npotHeight);
 
 	gl.glActiveTexture(GL_TEXTURE0);
 	gl.glBindTexture(GL_TEXTURE_2D, texture);
@@ -180,8 +167,8 @@ TextureAverageComputer::TextureAverageComputer(QOpenGLFunctions_3_3_Core& gl, co
 	gl.glGenFramebuffers(1, &potFBO);
 	gl.glGenTextures(1, &potTex);
 	gl.glBindTexture(GL_TEXTURE_2D, potTex);
-	const auto potWidth  = roundDownToClosestPowerOfTwo(npotWidth);
-	const auto potHeight = roundDownToClosestPowerOfTwo(npotHeight);
+	const auto potWidth  = StelUtils::getSmallerPowerOfTwo(npotWidth);
+	const auto potHeight = StelUtils::getSmallerPowerOfTwo(npotHeight);
 	gl.glTexImage2D(GL_TEXTURE_2D,0,internalFormat,potWidth,potHeight,0,GL_RGBA,GL_UNSIGNED_BYTE,nullptr);
 	gl.glBindTexture(GL_TEXTURE_2D,0);
 	gl.glBindFramebuffer(GL_DRAW_FRAMEBUFFER,potFBO);
