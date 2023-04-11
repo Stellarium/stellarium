@@ -2587,6 +2587,8 @@ float* ComputeCosSinRho(const unsigned int segments)
 //! @param minAngle start angle inside the half-circle. maxAngle=minAngle+segments*phi
 float *ComputeCosSinRhoZone(const float dRho, const unsigned int segments, const float minAngle)
 {
+	Q_ASSERT(segments<=MAX_STACKS);
+
 	float *cos_sin = cos_sin_rho;
 	const float c = cosf(dRho);
 	const float s = sinf(dRho);
