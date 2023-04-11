@@ -260,6 +260,8 @@ private:
 	void drawLabel(StelPainter& sPainter, float maxMagLabel) const;
 	void drawHints(StelPainter& sPainter, float maxMagHints, StelCore *core) const;
 	void drawOutlines(StelPainter& sPainter, float maxMagHints) const;
+	void renderDarkNebulaMarker(StelPainter& sPainter, float x, float y, float size, Vec3f color) const;
+	void renderMarkerRoundedRect(StelPainter& sPainter, float x, float y, float size, Vec3f color) const;
 
 	bool objectInDisplayedType() const;
 
