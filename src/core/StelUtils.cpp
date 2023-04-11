@@ -654,7 +654,6 @@ double getDecAngle(const QString& str)
 	return -0.0;
 }
 
-// Return the first power of two bigger than the given value
 int getBiggerPowerOfTwo(int value)
 {
 	int p=1;
