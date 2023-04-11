@@ -50,8 +50,6 @@ StelTextureSP Nebula::texPointElement;
 StelTextureSP Nebula::texGlobularCluster;
 StelTextureSP Nebula::texGlobularClusterLarge;
 StelTextureSP Nebula::texPlanetaryNebula;
-StelTextureSP Nebula::texOpenClusterWithNebulosity;
-StelTextureSP Nebula::texOpenClusterWithNebulosityLarge;
 bool  Nebula::drawHintProportional = false;
 bool  Nebula::surfaceBrightnessUsage = false;
 bool  Nebula::designationUsage = false;
@@ -886,7 +884,7 @@ void Nebula::renderMarkerRoundedRect(StelPainter& sPainter, const float x, const
 }
 
 void Nebula::renderMarkerPointedCircle(StelPainter& sPainter, const float x, const float y,
-									   float size, const Vec3f color) const
+									   float size, const Vec3f color, const bool insideRect) const
 {
 	// Take into account device pixel density and global scale ratio, as we are drawing 2D stuff.
 	const auto pixelRatio = sPainter.getProjector()->getDevicePixelsPerPixel();
@@ -898,6 +896,8 @@ void Nebula::renderMarkerPointedCircle(StelPainter& sPainter, const float x, con
 	sPainter.setBlending(true, GL_ONE, GL_ONE);
 	const auto numPoints = StelUtils::getSmallerPowerOfTwo(std::clamp(int(0.4f*size), 8, 4096));
 	const auto spriteSize = std::min(0.25f * 2*M_PIf*size / numPoints, 5.f);
+	if(insideRect)
+		size -= spriteSize*2;
 	const float*const cossin = StelUtils::ComputeCosSinRhoZone((2*M_PIf)/numPoints, numPoints, 0);
 	for(int n = 0; n < numPoints; ++n)
 	{
@@ -952,7 +952,7 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints, StelCore *core)
 		case NebSA:
 		case NebSC:
 		case NebCl:
-			renderMarkerPointedCircle(sPainter, XY[0], XY[1], finalSize, col);
+			renderMarkerPointedCircle(sPainter, XY[0], XY[1], finalSize, col, false);
 			return;
 		case NebGc:
 			if (finalSize > 35.f)
@@ -981,11 +981,12 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints, StelCore *core)
 			renderDarkNebulaMarker(sPainter, XY[0], XY[1], finalSize, col);
 			return;
 		case NebCn:
-			if (finalSize > 35.f)
-				Nebula::texOpenClusterWithNebulosityLarge->bind();
-			else
-				Nebula::texOpenClusterWithNebulosity->bind();
-			break;
+		{
+			renderMarkerRoundedRect(sPainter, XY[0], XY[1], finalSize, col);
+			col = getHintColor(NebCl)*lum*hintsBrightness;
+			renderMarkerPointedCircle(sPainter, XY[0], XY[1], finalSize, col, true);
+			return;
+		}
 		case NebRegion:
 			finalSize = size*2.f;
 			Nebula::texRegion->bind();

@@ -157,8 +157,6 @@ NebulaMgr::~NebulaMgr()
 	Nebula::texGlobularCluster = StelTextureSP();
 	Nebula::texGlobularClusterLarge = StelTextureSP();
 	Nebula::texPlanetaryNebula = StelTextureSP();
-	Nebula::texOpenClusterWithNebulosity = StelTextureSP();
-	Nebula::texOpenClusterWithNebulosityLarge = StelTextureSP();
 }
 
 /*************************************************************************
@@ -198,10 +196,6 @@ void NebulaMgr::init()
 	Nebula::texGlobularClusterLarge	= texMan.createTexture(StelFileMgr::getInstallationDir()+"/textures/neb_gcl_lrg.png");
 	// Load planetary nebula marker texture
 	Nebula::texPlanetaryNebula	= texMan.createTexture(StelFileMgr::getInstallationDir()+"/textures/neb_pnb.png");
-	// Load Ocl/Nebula marker texture
-	Nebula::texOpenClusterWithNebulosity = texMan.createTexture(StelFileMgr::getInstallationDir()+"/textures/neb_ocln.png");
-	// Load Ocl/Nebula marker texture for large objects
-	Nebula::texOpenClusterWithNebulosityLarge = texMan.createTexture(StelFileMgr::getInstallationDir()+"/textures/neb_ocln_lrg.png");
 	// Load pointer texture
 	texPointer = texMan.createTexture(StelFileMgr::getInstallationDir()+"/textures/pointeur5.png");
 
