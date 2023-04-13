@@ -911,7 +911,7 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints, StelCore *core)
 	float lum = 1.f;
 	Vec3f col(color*lum*hintsBrightness);
 	if (!objectInDisplayedType())
-		col.set(0.f,0.f,0.f);
+		return;
 
 	switch (nType)
 	{
