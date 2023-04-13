@@ -3184,7 +3184,7 @@
                  <item>
                   <widget class="QCheckBox" name="showUmbraCheckBox">
                    <property name="toolTip">
-                    <string>This circle represents the size of Earth's central, deep shadow in the distance of the Moon.</string>
+                    <string>This circle represents the size of Earth's central, deep shadow in the distance of the Moon. Will not show when Moon scaling is enabled!</string>
                    </property>
                    <property name="text">
                     <string>Earth umbra</string>
@@ -4236,7 +4236,7 @@
                <item row="11" column="8">
                 <widget class="QCheckBox" name="showPenumbraCheckBox">
                  <property name="toolTip">
-                  <string>This circle represents the outermost rim of Earth's shadow in the distance of the Moon.</string>
+                  <string>This circle represents the outermost rim of Earth's shadow in the distance of the Moon. Will not show when Moon scaling is enabled!</string>
                  </property>
                  <property name="text">
                   <string>Earth penumbra</string>
