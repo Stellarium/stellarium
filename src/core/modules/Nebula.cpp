@@ -982,6 +982,7 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints, StelCore *core)
 			return;
 		case NebCn:
 		{
+			col = getHintColor(NebN)*lum*hintsBrightness;
 			renderMarkerRoundedRect(sPainter, XY[0], XY[1], finalSize, col);
 			col = getHintColor(NebCl)*lum*hintsBrightness;
 			renderMarkerPointedCircle(sPainter, XY[0], XY[1], finalSize, col, true);
