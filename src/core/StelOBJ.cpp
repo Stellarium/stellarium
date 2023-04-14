@@ -18,9 +18,9 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#include "StelApp.hpp"
+//#include "StelApp.hpp"
 #include "StelOBJ.hpp"
-#include "StelTextureMgr.hpp"
+//#include "StelTextureMgr.hpp"
 #include "StelUtils.hpp"
 
 #include <QBuffer>
@@ -48,7 +48,7 @@ void StelOBJ::clear()
 	*this = StelOBJ();
 }
 
-bool StelOBJ::load(const QString& filename, const VertexOrder vertexOrder)
+bool StelOBJ::load(const QString& filename, const VertexOrder vertexOrder, const bool forceCreateNormals)
 {
 	qCDebug(stelOBJ)<<"Loading"<<filename;
 
@@ -87,11 +87,11 @@ bool StelOBJ::load(const QString& filename, const VertexOrder vertexOrder)
 		buf.open(QIODevice::ReadOnly);
 
 		//perform actual load
-		return load(buf,fi.canonicalPath(),vertexOrder);
+		return load(buf,fi.canonicalPath(),vertexOrder, forceCreateNormals);
 	}
 
 	//perform actual load
-	return load(file,fi.canonicalPath(),vertexOrder);
+	return load(file,fi.canonicalPath(),vertexOrder, forceCreateNormals);
 }
 
 //macro to test out different ways of comparison and their performance
@@ -723,7 +723,7 @@ void StelOBJ::addObject(const QString &name, CurrentParserState &state)
 	state.currentMaterialGroup = Q_NULLPTR;
 }
 
-bool StelOBJ::load(QIODevice& device, const QString &basePath, const VertexOrder vertexOrder)
+bool StelOBJ::load(QIODevice& device, const QString &basePath, const VertexOrder vertexOrder, const bool forceCreateNormals)
 {
 	clear();
 
@@ -969,7 +969,7 @@ bool StelOBJ::load(QIODevice& device, const QString &basePath, const VertexOrder
 	qCDebug(stelOBJ, "Created %d vertices, %d faces, %d objects", int(m_vertices.size()), getFaceCount(), int(m_objects.size()));
 
 	//perform post processing
-	performPostProcessing(normalList.isEmpty());
+	performPostProcessing(normalList.isEmpty() || forceCreateNormals);
 	m_isLoaded = true;
 	return true;
 }
@@ -1285,7 +1285,7 @@ void StelOBJ::performPostProcessing(bool genNormals)
 	QElapsedTimer timer;
 	timer.start();
 
-	//if no normals have been read at all, generate them (we do not support smoothing groups at the time, so this is quite simple)
+	//if no normals have been read at all, or if normals are broken in the OBJ file and flagged as such in the scenery3d.ini, (re-)generate them (we do not support smoothing groups at the time, so this is quite simple)
 	if(genNormals)
 	{
 		generateNormals();

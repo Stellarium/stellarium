@@ -464,7 +464,7 @@ S3DScene* Scenery3d::loadSceneBackground(const SceneInfo& scene) const
 	StelOBJ modelOBJ;
 	QString modelFile = StelFileMgr::findFile( scene.fullPath+ "/" + scene.modelScenery);
 	qCDebug(scenery3d)<<"Loading scene from "<<modelFile;
-	if(!modelOBJ.load(modelFile, scene.vertexOrderEnum))
+	if(!modelOBJ.load(modelFile, scene.vertexOrderEnum, scene.sceneryGenerateNormals))
 	{
 	    qCCritical(scenery3d)<<"Failed to load OBJ file"<<modelFile;
 	    return Q_NULLPTR;
@@ -491,7 +491,7 @@ S3DScene* Scenery3d::loadSceneBackground(const SceneInfo& scene) const
 		StelOBJ groundOBJ;
 		modelFile = StelFileMgr::findFile(scene.fullPath + "/" + scene.modelGround);
 		qCDebug(scenery3d)<<"Loading ground from"<<modelFile;
-		if(!groundOBJ.load(modelFile, scene.vertexOrderEnum))
+		if(!groundOBJ.load(modelFile, scene.vertexOrderEnum, scene.groundGenerateNormals))
 		{
 			qCCritical(scenery3d)<<"Failed to load ground model"<<modelFile;
 			return Q_NULLPTR;

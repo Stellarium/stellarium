@@ -245,13 +245,14 @@ public:
 	//! Loads an .obj file by name. Supports .gz decompression, and
 	//! then calls load(QIODevice) for the actual loading.
 	//! @return true if load was successful
-	bool load(const QString& filename, const VertexOrder vertexOrder = VertexOrder::XYZ);
+	bool load(const QString& filename, const VertexOrder vertexOrder = VertexOrder::XYZ, const bool forceCreateNormals=false);
 	//! Loads an .obj file from the specified device.
 	//! @param device The device to load OBJ data from
 	//! @param basePath The path to use to find additional files (like material definitions)
 	//! @param vertexOrder The order to use for vertex positions
+	//! @param forceCreateNormals set true to force creation of normals even if they exist
 	//! @return true if load was successful
-	bool load(QIODevice& device, const QString& basePath, const VertexOrder vertexOrder = VertexOrder::XYZ);
+	bool load(QIODevice& device, const QString& basePath, const VertexOrder vertexOrder = VertexOrder::XYZ, const bool forceCreateNormals=false);
 
 	//! Returns true if this object contains valid data from a load() method
 	bool isLoaded() const { return m_isLoaded; }
