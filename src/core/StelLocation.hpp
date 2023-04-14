@@ -35,16 +35,16 @@ public:
 	//! @arg lName location name
 	//! @arg lState may be usedful if region has more than one such name
 	//! @arg lRegion must be the long name of UN UM49 only! (E.g., "Western Europe")
-	//! @arg lng geographical longitude, east-positive
-	//! @arg lat geographical latitude, north-positive
+	//! @arg lng geographical longitude, east-positive, degrees
+	//! @arg lat geographical latitude, north-positive, degrees
 	//! @arg alt altitude above mean sea level
 	//! @arg populationK population in thousands
 	//! @arg timeZone IANA timezone string like "Europe/Vienna" or "UT-7"
 	//! @arg bortleIndex light pollution hint
 	//! @arg roleKey code for location role.
 	//! @arg landscapeID a fitting landscape
-	StelLocation(QString lName, QString lState, QString lRegion, float lng, float lat, int alt,
-				 int populationK, QString timeZone, int bortleIndex, QChar roleKey='X', QString landscapeID="");
+	StelLocation(const QString &lName, const QString &lState, const QString &lRegion, const float lng, const float lat, const int alt,
+				 const int populationK, const QString &timeZone, const int bortleIndex, const QChar roleKey='X', const QString &landscapeID=QString());
 
 	//! Return a short string which can be used in a list view.
 	QString getID() const;
