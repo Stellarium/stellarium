@@ -302,15 +302,6 @@ void LocationDialog::setLocationUIvisible(bool visible)
 	ui->labelName->setVisible(visible);
 	ui->frame_citylist->setVisible(visible);
 	ui->mapWidget->setMarkerVisible(visible);
-
-	if(visible)
-	{
-		connect(ui->mapWidget, SIGNAL(positionChanged(double, double)), this, SLOT(setLocationFromMap(double, double)));
-	}
-	else
-	{
-		disconnect(ui->mapWidget, SIGNAL(positionChanged(double, double)), this, SLOT(setLocationFromMap(double, double)));
-	}
 	ui->addLocationToListPushButton->setVisible(visible);
 	ui->deleteLocationFromListPushButton->setVisible(visible);
 }

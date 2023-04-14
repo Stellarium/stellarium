@@ -91,8 +91,6 @@ void NebulaMgr::setSupernovaRemnantCandidateColor(const Vec3f& c) {Nebula::hintC
 const Vec3f NebulaMgr::getSupernovaRemnantCandidateColor(void) const {return Nebula::hintColorMap.value(Nebula::NebSNRC);}
 void NebulaMgr::setInterstellarMatterColor(const Vec3f& c) {Nebula::hintColorMap.insert(Nebula::NebISM, c); emit interstellarMatterColorChanged(c);}
 const Vec3f NebulaMgr::getInterstellarMatterColor(void) const {return Nebula::hintColorMap.value(Nebula::NebISM);}
-void NebulaMgr::setClusterWithNebulosityColor(const Vec3f& c) {Nebula::hintColorMap.insert(Nebula::NebCn, c); emit clusterWithNebulosityColorChanged(c);}
-const Vec3f NebulaMgr::getClusterWithNebulosityColor(void) const {return Nebula::hintColorMap.value(Nebula::NebCn);}
 void NebulaMgr::setClusterColor(const Vec3f& c) {Nebula::hintColorMap.insert(Nebula::NebCl, c); emit clustersColorChanged(c);}
 const Vec3f NebulaMgr::getClusterColor(void) const {return Nebula::hintColorMap.value(Nebula::NebCl);}
 void NebulaMgr::setOpenClusterColor(const Vec3f& c) {Nebula::hintColorMap.insert(Nebula::NebOc, c); emit openClustersColorChanged(c);}
@@ -153,14 +151,10 @@ NebulaMgr::~NebulaMgr()
 	Nebula::texRegion = StelTextureSP();
 	Nebula::texGalaxy = StelTextureSP();
 	Nebula::texGalaxyLarge = StelTextureSP();
-	Nebula::texOpenCluster = StelTextureSP();
-	Nebula::texOpenClusterLarge = StelTextureSP();
-	Nebula::texOpenClusterXLarge = StelTextureSP();
+	Nebula::texPointElement = StelTextureSP();
 	Nebula::texGlobularCluster = StelTextureSP();
 	Nebula::texGlobularClusterLarge = StelTextureSP();
 	Nebula::texPlanetaryNebula = StelTextureSP();
-	Nebula::texOpenClusterWithNebulosity = StelTextureSP();
-	Nebula::texOpenClusterWithNebulosityLarge = StelTextureSP();
 }
 
 /*************************************************************************
@@ -193,21 +187,13 @@ void NebulaMgr::init()
 	// Load ellipse texture for large galaxies
 	Nebula::texGalaxyLarge		= texMan.createTexture(StelFileMgr::getInstallationDir()+"/textures/neb_gal_lrg.png");
 	// Load open cluster marker texture
-	Nebula::texOpenCluster		= texMan.createTexture(StelFileMgr::getInstallationDir()+"/textures/neb_ocl.png");
-	// Load open cluster marker texture for large objects
-	Nebula::texOpenClusterLarge	= texMan.createTexture(StelFileMgr::getInstallationDir()+"/textures/neb_ocl_lrg.png");
-	// Load open cluster marker texture for extra large objects
-	Nebula::texOpenClusterXLarge	= texMan.createTexture(StelFileMgr::getInstallationDir()+"/textures/neb_ocl_xlrg.png");
+	Nebula::texPointElement		= texMan.createTexture(StelFileMgr::getInstallationDir()+"/textures/neb_point_elem.png");
 	// Load globular cluster marker texture
 	Nebula::texGlobularCluster	= texMan.createTexture(StelFileMgr::getInstallationDir()+"/textures/neb_gcl.png");
 	// Load globular cluster marker texture for large GCls
 	Nebula::texGlobularClusterLarge	= texMan.createTexture(StelFileMgr::getInstallationDir()+"/textures/neb_gcl_lrg.png");
 	// Load planetary nebula marker texture
 	Nebula::texPlanetaryNebula	= texMan.createTexture(StelFileMgr::getInstallationDir()+"/textures/neb_pnb.png");
-	// Load Ocl/Nebula marker texture
-	Nebula::texOpenClusterWithNebulosity = texMan.createTexture(StelFileMgr::getInstallationDir()+"/textures/neb_ocln.png");
-	// Load Ocl/Nebula marker texture for large objects
-	Nebula::texOpenClusterWithNebulosityLarge = texMan.createTexture(StelFileMgr::getInstallationDir()+"/textures/neb_ocln_lrg.png");
 	// Load pointer texture
 	texPointer = texMan.createTexture(StelFileMgr::getInstallationDir()+"/textures/pointeur5.png");
 
@@ -313,7 +299,6 @@ void NebulaMgr::init()
 	setSupernovaCandidateColor(       Vec3f(conf->value("color/dso_supernova_candidate_color", defaultNebulaColor).toString()));
 	setSupernovaRemnantCandidateColor(Vec3f(conf->value("color/dso_supernova_remnant_cand_color", defaultNebulaColor).toString()));
 	setInterstellarMatterColor(       Vec3f(conf->value("color/dso_interstellar_matter_color", defaultNebulaColor).toString()));
-	setClusterWithNebulosityColor(    Vec3f(conf->value("color/dso_cluster_with_nebulosity_color", defaultNebulaColor).toString()));
 	setMolecularCloudColor(           Vec3f(conf->value("color/dso_molecular_cloud_color", defaultNebulaColor).toString()));
 	setPossiblePlanetaryNebulaColor(  Vec3f(conf->value("color/dso_possible_planetary_nebula_color", defaultNebulaColor).toString()));
 	setProtoplanetaryNebulaColor(     Vec3f(conf->value("color/dso_protoplanetary_nebula_color", defaultNebulaColor).toString()));

@@ -76,7 +76,6 @@ void ConfigureDSOColorsDialog::createDialogContent()
 	connectColorButton(ui->colorDSOReflectionNebulae,          "NebulaMgr.reflectionNebulaeColor",          "color/dso_reflection_nebula_color");
 	connectColorButton(ui->colorDSOBipolarNebulae,             "NebulaMgr.bipolarNebulaeColor",             "color/dso_bipolar_nebula_color");
 	connectColorButton(ui->colorDSOEmissionNebulae,            "NebulaMgr.emissionNebulaeColor",            "color/dso_emission_nebula_color");
-	connectColorButton(ui->colorDSONebulosityClusters,         "NebulaMgr.clusterWithNebulosityColor",      "color/dso_cluster_with_nebulosity_color");
 	connectColorButton(ui->colorDSOPossiblePlanetaryNebulae,   "NebulaMgr.possiblePlanetaryNebulaeColor",   "color/dso_possible_planetary_nebula_color");
 	connectColorButton(ui->colorDSOProtoplanetaryNebulae,      "NebulaMgr.protoplanetaryNebulaeColor",      "color/dso_protoplanetary_nebula_color");
 	connectColorButton(ui->colorDSOHydrogenRegions,            "NebulaMgr.hydrogenRegionsColor",            "color/dso_hydrogen_region_color");
