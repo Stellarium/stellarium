@@ -146,14 +146,10 @@ NebulaMgr::NebulaMgr(void) : StelObjectModule()
 
 NebulaMgr::~NebulaMgr()
 {
-	Nebula::texCircle = StelTextureSP();
-	Nebula::texCircleLarge = StelTextureSP();
 	Nebula::texRegion = StelTextureSP();
 	Nebula::texGalaxy = StelTextureSP();
 	Nebula::texGalaxyLarge = StelTextureSP();
 	Nebula::texPointElement = StelTextureSP();
-	Nebula::texGlobularCluster = StelTextureSP();
-	Nebula::texGlobularClusterLarge = StelTextureSP();
 	Nebula::texPlanetaryNebula = StelTextureSP();
 }
 
@@ -176,10 +172,6 @@ void NebulaMgr::init()
 	nebulaFont.setPixelSize(StelApp::getInstance().getScreenFontSize());
 	connect(&StelApp::getInstance(), SIGNAL(screenFontSizeChanged(int)), SLOT(setFontSizeFromApp(int)));
     auto& texMan = StelApp::getInstance().getTextureManager();
-	// Load circle texture
-	Nebula::texCircle		= texMan.createTexture(StelFileMgr::getInstallationDir()+"/textures/neb.png");
-	// Load circle texture for large DSO
-	Nebula::texCircleLarge	= texMan.createTexture(StelFileMgr::getInstallationDir()+"/textures/neb_lrg.png");
 	// Load dashed shape texture
 	Nebula::texRegion		= texMan.createTexture(StelFileMgr::getInstallationDir()+"/textures/neb_reg.png");
 	// Load ellipse texture
@@ -188,10 +180,6 @@ void NebulaMgr::init()
 	Nebula::texGalaxyLarge		= texMan.createTexture(StelFileMgr::getInstallationDir()+"/textures/neb_gal_lrg.png");
 	// Load open cluster marker texture
 	Nebula::texPointElement		= texMan.createTexture(StelFileMgr::getInstallationDir()+"/textures/neb_point_elem.png");
-	// Load globular cluster marker texture
-	Nebula::texGlobularCluster	= texMan.createTexture(StelFileMgr::getInstallationDir()+"/textures/neb_gcl.png");
-	// Load globular cluster marker texture for large GCls
-	Nebula::texGlobularClusterLarge	= texMan.createTexture(StelFileMgr::getInstallationDir()+"/textures/neb_gcl_lrg.png");
 	// Load planetary nebula marker texture
 	Nebula::texPlanetaryNebula	= texMan.createTexture(StelFileMgr::getInstallationDir()+"/textures/neb_pnb.png");
 	// Load pointer texture

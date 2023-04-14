@@ -47,8 +47,6 @@ StelTextureSP Nebula::texRegion;
 StelTextureSP Nebula::texGalaxy;
 StelTextureSP Nebula::texGalaxyLarge;
 StelTextureSP Nebula::texPointElement;
-StelTextureSP Nebula::texGlobularCluster;
-StelTextureSP Nebula::texGlobularClusterLarge;
 StelTextureSP Nebula::texPlanetaryNebula;
 bool  Nebula::drawHintProportional = false;
 bool  Nebula::surfaceBrightnessUsage = false;
@@ -881,6 +879,32 @@ void Nebula::renderMarkerRoundedRect(StelPainter& sPainter, const float x, const
 	sPainter.enableClientStates(false);
 }
 
+void Nebula::renderRoundMarker(StelPainter& sPainter, const float x, const float y,
+							   float size, const Vec3f color, const bool crossed) const
+{
+	// Take into account device pixel density and global scale ratio, as we are drawing 2D stuff.
+	const auto pixelRatio = sPainter.getProjector()->getDevicePixelsPerPixel();
+	const auto scale = pixelRatio * StelApp::getInstance().getGlobalScalingRatio();
+	size *= scale;
+
+	sPainter.setLineSmooth(true);
+	sPainter.setLineWidth(scale * std::clamp(size/7, 1.f, 2.5f));
+	sPainter.setColor(color);
+
+	sPainter.drawCircle(x, y, size);
+	if(!crossed) return;
+
+	sPainter.enableClientStates(true);
+	const float vertexData[] = {x-size, y,
+								x+size, y,
+								x, y-size,
+								x, y+size};
+	const auto vertCount = std::size(vertexData) / 2;
+	sPainter.setVertexPointer(2, GL_FLOAT, vertexData);
+	sPainter.drawFromArray(StelPainter::Lines, vertCount, 0, false);
+	sPainter.enableClientStates(false);
+}
+
 void Nebula::renderMarkerPointedCircle(StelPainter& sPainter, const float x, const float y,
 									   float size, const Vec3f color, const bool insideRect) const
 {
@@ -953,11 +977,8 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints, StelCore *core)
 			renderMarkerPointedCircle(sPainter, XY[0], XY[1], finalSize, col, false);
 			return;
 		case NebGc:
-			if (finalSize > 35.f)
-				Nebula::texGlobularClusterLarge->bind();
-			else
-				Nebula::texGlobularCluster->bind();
-			break;
+			renderRoundMarker(sPainter, XY[0], XY[1], finalSize, col, true);
+			return;
 		case NebN:
 		case NebHII:
 		case NebMolCld:
@@ -995,10 +1016,8 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints, StelCore *core)
 		//case NebSymbioticStar:
 		//case NebEmissionLineStar:
 		default:
-			if (finalSize > 35.f)
-				Nebula::texCircleLarge->bind();
-			else
-				Nebula::texCircle->bind();
+			renderRoundMarker(sPainter, XY[0], XY[1], finalSize, col, false);
+			return;
 	}
 
 	sPainter.setColor(col, 1);
