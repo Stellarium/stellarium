@@ -3927,8 +3927,7 @@ void AstroCalcDialog::selectCurrentSolarEclipseContact(const QModelIndex& modelI
 	loc.name = q_("Eclipse’s contact point");
 	loc.planetName = "Earth";
 	loc.ianaTimeZone = "LMST";
-	// NOTE: A small time is needed to update the GUI after change the coordinates without changing the name of location
-	core->moveObserverTo(loc, 0.1);
+	core->moveObserverTo(loc, 0.);
 
 	if (objectMgr->findAndSelectI18n("Sun") || objectMgr->findAndSelect("Sun"))
 	{
@@ -3981,8 +3980,7 @@ void AstroCalcDialog::selectCurrentSolarEclipseDate(const QModelIndex& modelInde
 	loc.name = q_("Greatest eclipse’s point");
 	loc.planetName = "Earth";
 	loc.ianaTimeZone = "LMST";
-	// NOTE: A small time is needed to update the GUI after change the coordinates without changing the name of location
-	core->moveObserverTo(loc, 0.1);
+	core->moveObserverTo(loc, 0.);
 	if (objectMgr->findAndSelectI18n("Sun") || objectMgr->findAndSelect("Sun"))
 	{
 		core->setJD(JD);
