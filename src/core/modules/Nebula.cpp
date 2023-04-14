@@ -871,15 +871,13 @@ void Nebula::renderMarkerRoundedRect(StelPainter& sPainter, const float x, const
 		vertexData.push_back(rightInnerX  + roundRadius*cosa);
 		vertexData.push_back(bottomInnerY - roundRadius*sina);
 	}
-	vertexData.push_back(leftInnerX);
-	vertexData.push_back(bottomOuterY);
 	const auto vertCount = vertexData.size() / 2;
 	sPainter.setLineSmooth(true);
 	sPainter.setLineWidth(scale * std::clamp(2*size/35, 1.f, 2.5f));
 	sPainter.setColor(color);
 	sPainter.enableClientStates(true);
 	sPainter.setVertexPointer(2, GL_FLOAT, vertexData.data());
-	sPainter.drawFromArray(StelPainter::LineStrip, vertCount, 0, false);
+	sPainter.drawFromArray(StelPainter::LineLoop, vertCount, 0, false);
 	sPainter.enableClientStates(false);
 }
 
