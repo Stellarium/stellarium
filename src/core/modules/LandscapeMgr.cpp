@@ -1142,7 +1142,7 @@ void LandscapeMgr::onLocationChanged(const StelLocation &loc)
 
 void LandscapeMgr::onTargetLocationChanged(const StelLocation &loc, const QString& landscapeID)
 {
-	if (loc.planetName != currentPlanetName)
+//	if (loc.planetName != currentPlanetName)
 	{
 		if (landscapeID.length()>0)
 			setCurrentLandscapeID(landscapeID);
