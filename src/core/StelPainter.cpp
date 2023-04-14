@@ -2429,7 +2429,7 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool do
 		numberOfVerticesToCopy = 1 + *std::max_element(indices + offset, indices + offset + count);
 	}
 
-	const bool wideLineMode = (mode==LineStrip || mode==LineLoop) && StelMainView::getInstance().getGLInformation().isCoreProfile;
+	const bool wideLineMode = (mode==LineStrip || mode==LineLoop || mode==Lines) && StelMainView::getInstance().getGLInformation().isCoreProfile;
 #ifdef GL_MULTISAMPLE
 	const bool multisampleWasOn = multisamplingEnabled && glIsEnabled(GL_MULTISAMPLE);
 #endif
