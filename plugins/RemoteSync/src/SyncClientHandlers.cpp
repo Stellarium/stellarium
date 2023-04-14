@@ -208,7 +208,7 @@ bool ClientLocationHandler::handleMessage(QDataStream &stream, SyncProtocol::tPa
 		//create a normal observer
 		core->setObserver(new StelObserver(msg.stelLocation));
 	}
-	emit core->targetLocationChanged(msg.stelLocation);
+	emit core->targetLocationChanged(msg.stelLocation, QString());
 	emit core->locationChanged(core->getCurrentLocation());
 
 

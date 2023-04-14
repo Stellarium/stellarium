@@ -1322,7 +1322,7 @@ void StelCore::moveObserverTo(const StelLocation& target, double duration, doubl
 		}
 	}
 	emit targetLocationChanged(target, landscapeID);
-	emit locationChanged(getCurrentLocation());
+	//emit locationChanged(getCurrentLocation());
 }
 
 double StelCore::getUTCOffset(const double JD) const
