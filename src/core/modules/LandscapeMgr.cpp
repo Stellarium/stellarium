@@ -1154,10 +1154,16 @@ void LandscapeMgr::onLocationChanged(const StelLocation &loc)
 
 void LandscapeMgr::onTargetLocationChanged(const StelLocation &loc, const QString& landscapeID)
 {
+	qDebug() << "LandscapeMgr::onTargetLocationChanged:" << loc.serializeToLine() << "Landscape requested:" << landscapeID;
 //	if (loc.planetName != currentPlanetName)
 	{
 		if (!landscapeID.isEmpty())
+		{
+			const bool landscapeSetsLocation = getFlagLandscapeSetsLocation();
+			setFlagLandscapeSetsLocation(false);
 			setCurrentLandscapeID(landscapeID);
+			setFlagLandscapeSetsLocation(landscapeSetsLocation);
+		}
 		else if (flagLandscapeAutoSelection)
 		{
 			// If we have a landscape for selected planet then set it, otherwise use zero horizon landscape
@@ -1178,9 +1184,7 @@ void LandscapeMgr::onTargetLocationChanged(const StelLocation &loc, const QStrin
 				setFlagAtmosphere(false);
 				setFlagFog(false);
 				setFlagLandscape(false);
-				setFlagCardinalPoints(false);
-				//setFlagOrdinalsPoints(false);
-				//setFlagOrdinals16WRPoints(false);
+				setFlagCardinalPoints(false); // suppresses all
 			}
 		}
 		else
@@ -1192,7 +1196,7 @@ void LandscapeMgr::onTargetLocationChanged(const StelLocation &loc, const QStrin
 				QSettings* conf = StelApp::getInstance().getSettings();
 				setFlagAtmosphere(pl->hasAtmosphere() && conf->value("landscape/flag_atmosphere", true).toBool());
 				setFlagFog(pl->hasAtmosphere() && conf->value("landscape/flag_fog", true).toBool());
-				setFlagLandscape(true);
+				//setFlagLandscape(true); // Don't mess with the users' wishes...
 				setFlagCardinalPoints(conf->value("viewing/flag_cardinal_points", true).toBool());
 				setFlagOrdinalPoints(conf->value("viewing/flag_ordinal_points", true).toBool());
 				setFlagOrdinal16WRPoints(conf->value("viewing/flag_16wcr_points", false).toBool());
@@ -1200,6 +1204,7 @@ void LandscapeMgr::onTargetLocationChanged(const StelLocation &loc, const QStrin
 			}
 		}
 	}
+	qDebug() << "LandscapeMgr::onTargetLocationChanged done" ;
 }
 
 void LandscapeMgr::setFlagFog(const bool displayed)
