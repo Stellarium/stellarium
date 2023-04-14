@@ -3806,18 +3806,23 @@ void AstroCalcDialog::selectCurrentSolarEclipse(const QModelIndex& modelIndex)
 			{
 				case 0:
 					treeItem->setText(SolarEclipseContact, QString(q_("Eclipse begins; first contact with Earth")));
+					treeItem->setData(SolarEclipseContact, Qt::UserRole, false);
 					break;
 				case 1:
 					treeItem->setText(SolarEclipseContact, QString(q_("Beginning of center line; central eclipse begins")));
+					treeItem->setData(SolarEclipseContact, Qt::UserRole, false);
 					break;
 				case 2:
 					treeItem->setText(SolarEclipseContact, QString(q_("Greatest eclipse")));
+					treeItem->setData(SolarEclipseContact, Qt::UserRole, true);
 					break;
 				case 3:
 					treeItem->setText(SolarEclipseContact, QString(q_("End of center line; central eclipse ends")));
+					treeItem->setData(SolarEclipseContact, Qt::UserRole, false);
 					break;
 				case 4:
 					treeItem->setText(SolarEclipseContact, QString(q_("Eclipse ends; last contact with Earth")));
+					treeItem->setData(SolarEclipseContact, Qt::UserRole, false);
 					break;
 			}
 			treeItem->setText(SolarEclipseContactDate, QString("%1 %2").arg(localeMgr->getPrintableDateLocal(JD), localeMgr->getPrintableTimeLocal(JD)));
@@ -3919,12 +3924,13 @@ void AstroCalcDialog::selectCurrentSolarEclipseContact(const QModelIndex& modelI
 	double JD = modelIndex.sibling(modelIndex.row(), SolarEclipseContactDate).data(Qt::UserRole).toDouble();
 	float lat = modelIndex.sibling(modelIndex.row(), SolarEclipseContactLatitude).data(Qt::UserRole).toFloat();
 	float lon = modelIndex.sibling(modelIndex.row(), SolarEclipseContactLongitude).data(Qt::UserRole).toFloat();
+	bool greatest = modelIndex.sibling(modelIndex.row(), SolarEclipseContact).data(Qt::UserRole).toBool();
 
 	StelLocation loc;
 	loc.setLatitude(lat);
 	loc.setLongitude(lon);
 	loc.altitude = 10; // 10 meters above sea level
-	loc.name = q_("Eclipse’s contact point");
+	loc.name = greatest ? q_("Greatest eclipse’s point") : q_("Eclipse’s contact point");
 	loc.planetName = "Earth";
 	loc.ianaTimeZone = "LMST";
 	core->moveObserverTo(loc, 0.);
