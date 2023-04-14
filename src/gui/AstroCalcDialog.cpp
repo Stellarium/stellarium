@@ -3921,21 +3921,15 @@ void AstroCalcDialog::selectCurrentSolarEclipse(const QModelIndex& modelIndex)
 
 void AstroCalcDialog::selectCurrentSolarEclipseContact(const QModelIndex& modelIndex)
 {
-	double JD = modelIndex.sibling(modelIndex.row(), SolarEclipseContactDate).data(Qt::UserRole).toDouble();
-	float lat = modelIndex.sibling(modelIndex.row(), SolarEclipseContactLatitude).data(Qt::UserRole).toFloat();
-	float lon = modelIndex.sibling(modelIndex.row(), SolarEclipseContactLongitude).data(Qt::UserRole).toFloat();
-	bool greatest = modelIndex.sibling(modelIndex.row(), SolarEclipseContact).data(Qt::UserRole).toBool();
+	const double JD = modelIndex.sibling(modelIndex.row(), SolarEclipseContactDate).data(Qt::UserRole).toDouble();
+	const float lat = modelIndex.sibling(modelIndex.row(), SolarEclipseContactLatitude).data(Qt::UserRole).toFloat();
+	const float lon = modelIndex.sibling(modelIndex.row(), SolarEclipseContactLongitude).data(Qt::UserRole).toFloat();
+	const bool greatest = modelIndex.sibling(modelIndex.row(), SolarEclipseContact).data(Qt::UserRole).toBool();
 
-	StelLocation loc;
-	loc.setLatitude(lat);
-	loc.setLongitude(lon);
-	loc.altitude = 10; // 10 meters above sea level
-	loc.name = greatest ? q_("Greatest eclipse’s point") : q_("Eclipse’s contact point");
-	loc.planetName = "Earth";
-	loc.ianaTimeZone = "LMST";
-	core->moveObserverTo(loc, 0.);
+	StelLocation contactLoc(greatest ? q_("Greatest eclipse’s point") : q_("Eclipse’s contact point"), "", "", lon, lat, 10, 0, "LMST", 1, 'X');
+	core->moveObserverTo(contactLoc, 0., 0., "zero"); // use a neutral horizon to avoid confusion.
 
-	if (objectMgr->findAndSelectI18n("Sun") || objectMgr->findAndSelect("Sun"))
+	if (objectMgr->findAndSelectI18n(q_("Sun")) || objectMgr->findAndSelect("Sun"))
 	{
 		core->setJD(JD);
 		const QList<StelObjectP> newSelected = objectMgr->getSelectedObject();
@@ -3975,19 +3969,13 @@ void AstroCalcDialog::saveSolarEclipseCircumstances()
 
 void AstroCalcDialog::selectCurrentSolarEclipseDate(const QModelIndex& modelIndex)
 {
-	double JD = modelIndex.sibling(modelIndex.row(), SolarEclipseDate).data(Qt::UserRole).toDouble();
-	float lat = modelIndex.sibling(modelIndex.row(), SolarEclipseLatitude).data(Qt::UserRole).toFloat();
-	float lon = modelIndex.sibling(modelIndex.row(), SolarEclipseLongitude).data(Qt::UserRole).toFloat();
+	const double JD = modelIndex.sibling(modelIndex.row(), SolarEclipseDate).data(Qt::UserRole).toDouble();
+	const float lat = modelIndex.sibling(modelIndex.row(), SolarEclipseLatitude).data(Qt::UserRole).toFloat();
+	const float lon = modelIndex.sibling(modelIndex.row(), SolarEclipseLongitude).data(Qt::UserRole).toFloat();
 
-	StelLocation loc;
-	loc.setLatitude(lat);
-	loc.setLongitude(lon);
-	loc.altitude = 10; // 10 meters above sea level
-	loc.name = q_("Greatest eclipse’s point");
-	loc.planetName = "Earth";
-	loc.ianaTimeZone = "LMST";
-	core->moveObserverTo(loc, 0.);
-	if (objectMgr->findAndSelectI18n("Sun") || objectMgr->findAndSelect("Sun"))
+	StelLocation maxLoc(q_("Greatest eclipse’s point"), "", "", lon, lat, 10, 0, "LMST", 1, 'X');
+	core->moveObserverTo(maxLoc, 0., 0., "zero"); // use a neutral horizon to avoid confusion.
+	if (objectMgr->findAndSelectI18n(q_("Sun")) || objectMgr->findAndSelect("Sun"))
 	{
 		core->setJD(JD);
 		const QList<StelObjectP> newSelected = objectMgr->getSelectedObject();

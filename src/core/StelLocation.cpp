@@ -39,11 +39,12 @@ int StelLocation::initMetaType()
 	return id;
 }
 
-StelLocation::StelLocation(QString lName, QString lState, QString lRegion, float lng, float lat, int alt,
-						   int populationK, QString timeZone, int bortleIndex, QChar roleKey, QString landscapeID)
+StelLocation::StelLocation(const QString &lName, const QString &lState, const QString &lRegion, const float lng, const float lat, const int alt,
+						   const int populationK, const QString &timeZone, const int bortleIndex, const QChar roleKey, const QString &landscapeID)
 	: name(lName)
 	, region(lRegion)
 	, state(lState)
+	, planetName("Earth")
 	, altitude(alt)
 	, lightPollutionLuminance(StelCore::bortleScaleIndexToLuminance(bortleIndex))
 	, landscapeKey(landscapeID)
