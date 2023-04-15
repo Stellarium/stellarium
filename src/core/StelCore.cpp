@@ -1231,7 +1231,7 @@ void StelCore::moveObserverToSelected()
 				if (!results.isEmpty())
 					loc = results.value(results.firstKey()); // ...and use it!
 
-				moveObserverTo(loc);
+				moveObserverTo(loc, 1, 1, pl->getEnglishName());
 			}
 		}
 		else
@@ -1240,15 +1240,10 @@ void StelCore::moveObserverToSelected()
 			if (ni)
 			{
 				// We need to move to the nomenclature item's host planet.
-				StelLocation loc; //  = getCurrentLocation();
-				loc.planetName = ni->getPlanet()->getEnglishName();
-				loc.name=ni->getEnglishName();
-				loc.state = "";
-				loc.setLongitude(ni->getLongitude());
-				loc.setLatitude(ni->getLatitude());
-				loc.lightPollutionLuminance = 0;
+				StelLocation loc(ni->getEnglishName(), "", "", ni->getPlanet()->getEnglishName(), ni->getLongitude(), ni->getLatitude(), 0, 0, getCurrentTimeZone(), 1, 'X', ni->getPlanet()->getEnglishName());
+				loc.lightPollutionLuminance = 0; // be dead sure it's zero!
 
-				moveObserverTo(loc);
+				moveObserverTo(loc, 1, 1, pl->getEnglishName());
 				objmgr->unSelect(); // no use to keep it: Marker will flicker around the screen.
 			}
 		}
@@ -1321,8 +1316,8 @@ void StelCore::moveObserverTo(const StelLocation& target, double duration, doubl
 			}
 		}
 	}
-	emit targetLocationChanged(target, landscapeID);
-	//emit locationChanged(getCurrentLocation());
+	emit targetLocationChanged(target, landscapeID); // inform others about our next location. LandscapeMgr can load a new landscape.
+	emit locationChanged(getCurrentLocation()); // This may either be the first or the only notice that currentLocation has changed.
 }
 
 double StelCore::getUTCOffset(const double JD) const
