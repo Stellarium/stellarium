@@ -1894,4 +1894,25 @@ inline Mat4d toMat4d(const Mat4f& md)
 	return out;
 }
 
+template<typename T> Vector2<T> normalize(const Vector2<T>& v)
+{
+	auto vn = v;
+	vn.normalize();
+	return vn;
+}
+
+template<typename T> Vector3<T> normalize(const Vector3<T>& v)
+{
+	auto vn = v;
+	vn.normalize();
+	return vn;
+}
+
+template<typename T> Vector4<T> normalize(const Vector4<T>& v)
+{
+	auto vn = v;
+	vn.normalize();
+	return vn;
+}
+
 #endif // VECMATH_HPP
