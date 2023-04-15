@@ -2685,7 +2685,7 @@ QString Satellites::getSatIdFromLine2(const QString& line)
 	if (!id.isEmpty())
 	{
 		// Strip any leading zeros as they should be unique ints as strings.
-		static const QRegularExpression re("^[0]*");
+		static const QRegularExpression re("^[0]*\\B");
 		id.remove(re);
 	}
 	return id;
