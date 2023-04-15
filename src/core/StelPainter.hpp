@@ -374,6 +374,8 @@ private:
 	//! @return a descriptor of the new array
 	ArrayDesc projectArray(const ArrayDesc& array, int offset, int count, const unsigned short *indices=Q_NULLPTR);
 
+	void drawFixedColorWideLinesAsQuads(const ArrayDesc& vertexArray, int count, int offset, const Mat4f& projMat, DrawingMode mode);
+
 	//! Project the passed triangle on the screen ensuring that it will look smooth, even for non linear distortion
 	//! by splitting it into subtriangles. The resulting vertex arrays are appended to the passed out* ones.
 	//! The size of each edge must be < 180 deg.
