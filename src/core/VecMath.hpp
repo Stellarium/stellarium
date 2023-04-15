@@ -374,6 +374,8 @@ public:
 	QString toStr() const;
 	//! Convert to a QColor.
 	QColor toQColor() const;
+	//! Convert to a QVector4D.
+	QVector4D toQVector() const;
 
 	T v[4];		// The 4 values
 };
