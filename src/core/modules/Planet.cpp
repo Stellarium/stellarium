@@ -3623,7 +3623,7 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 				float atmScaling=1.0f - (qMax(1000.0f, atmLum)-1000.0f)*0.001f; // full impact when atmLum<1000.
 				float ashenFactor=(1.0f-getPhase(ssm->getEarth()->getHeliocentricEclipticPos())); // We really mean the Earth for this! (Try observing from Mars ;-)
 				ashenFactor*=ashenFactor*0.15f*atmScaling;
-				light.ambient = Vec4f(ashenFactor, magFactorGreen*ashenFactor, magFactorBlue*ashenFactor);
+				light.ambient = Vec3f(ashenFactor, magFactorGreen*ashenFactor, magFactorBlue*ashenFactor);
 			}
 			const float fov=core->getProjection(transfo)->getFov();
 			float fovFactor=1.3f;

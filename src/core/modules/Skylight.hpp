@@ -152,7 +152,7 @@ public:
 			      float& aterm_x, float& aAx, float& aBx, float& aCx, float& aDx, float& aEx,
 			      float& aterm_y, float& aAy, float& aBy, float& aCy, float& aDy, float& aEy) const
 	{
-		asunPos=sunPos;
+		asunPos=Vec3f(sunPos);
 		aterm_x=static_cast<float>(term_x);aAx=static_cast<float>(Ax);aBx=static_cast<float>(Bx);
 		aCx=static_cast<float>(Cx);aDx=static_cast<float>(Dx);aEx=static_cast<float>(Ex);
 		aterm_y=static_cast<float>(term_y);aAy=static_cast<float>(Ay);aBy=static_cast<float>(By);
