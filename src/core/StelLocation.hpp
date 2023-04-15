@@ -31,10 +31,11 @@ class StelLocation
 {
 public:
 	StelLocation() : altitude(0), population(0), role('X'), isUserLocation(true), longitude(0.f), latitude(0.f) {}
-	//! constructor for ad-hoc locations.
+	//! constructors for ad-hoc locations. The first, shorter version is only for earth locations
 	//! @arg lName location name
 	//! @arg lState may be usedful if region has more than one such name
 	//! @arg lRegion must be the long name of UN UM49 only! (E.g., "Western Europe")
+	//! @arg plName planetName. This must be identical to the englishName of a solar system object.
 	//! @arg lng geographical longitude, east-positive, degrees
 	//! @arg lat geographical latitude, north-positive, degrees
 	//! @arg alt altitude above mean sea level
@@ -45,6 +46,8 @@ public:
 	//! @arg landscapeID a fitting landscape
 	StelLocation(const QString &lName, const QString &lState, const QString &lRegion, const float lng, const float lat, const int alt,
 				 const int populationK, const QString &timeZone, const int bortleIndex, const QChar roleKey='X', const QString &landscapeID=QString());
+	StelLocation(const QString &lName, const QString &lState, const QString &lRegion, const QString &plName, const float lng, const float lat, const int alt,
+							   const int populationK, const QString &timeZone, const int bortleIndex, const QChar roleKey, const QString &landscapeID);
 
 	//! Return a short string which can be used in a list view.
 	QString getID() const;
