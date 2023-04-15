@@ -30,6 +30,7 @@ private slots:
     void testCelestrackFormattedLine2();
     void testSpaceTrackFormattedLine2();
     void testNoSatDuplication();
+    void testSatZero();
 };
 
 #endif // TESTSATELLITES_HPP
