@@ -2400,6 +2400,128 @@ void StelPainter::enableClientStates(bool vertex, bool texture, bool color, bool
 	normalArray.enabled = normal;
 }
 
+void StelPainter::drawFixedColorWideLinesAsQuads(const ArrayDesc& vertexArray, int count, int offset,
+													 const Mat4f& projMat, const DrawingMode mode)
+{
+	if(count < 2) return;
+
+	GLint viewport[4] = {};
+	glGetIntegerv(GL_VIEWPORT, viewport);
+	const auto viewportSize = Vec2f(viewport[2], viewport[3]);
+
+	std::vector<Vec4f> newVertices;
+	if(mode == LineStrip)
+		newVertices.reserve((count-1)*6);
+	else
+		newVertices.reserve(count*6);
+	newVertices.resize((count-1)*6);
+	assert(vertexArray.type == GL_FLOAT);
+	const auto lineVertData = static_cast<const float*>(vertexArray.pointer) + vertexArray.size*offset;
+	const int step = mode==Lines ? 2 : 1;
+	for(int n = 0; n < count-1; n += step)
+	{
+		Vec4f in0;
+		Vec4f in1;
+		switch(vertexArray.size)
+		{
+		case 4:
+			in0 = Vec4f(lineVertData+4*(n+0));
+			in1 = Vec4f(lineVertData+4*(n+1));
+			break;
+		case 3:
+			in0 = Vec4f(lineVertData[3*(n+0)], lineVertData[3*(n+0)+1], lineVertData[3*(n+0)+2], 1);
+			in1 = Vec4f(lineVertData[3*(n+1)], lineVertData[3*(n+1)+1], lineVertData[3*(n+1)+2], 1);
+			break;
+		case 2:
+			in0 = Vec4f(lineVertData[2*(n+0)], lineVertData[2*(n+0)+1], 0, 1);
+			in1 = Vec4f(lineVertData[2*(n+1)], lineVertData[2*(n+1)+1], 0, 1);
+			break;
+		case 1:
+			in0 = Vec4f(lineVertData[n+0], 0,0,1);
+			in1 = Vec4f(lineVertData[n+1], 0,0,1);
+			break;
+		default:
+			in0 = Vec4f(0.f);
+			in1 = Vec4f(0.f);
+			assert(!"Bad number of elements in vertex array");
+		}
+
+		const Vec4f clip0 = projMat * Vec4f(in0);
+		const Vec4f clip1 = projMat * Vec4f(in1);
+
+		const Vec3f ndc0 = Vec3f(clip0.v) / clip0[3];
+		const Vec3f ndc1 = Vec3f(clip1.v) / clip1[3];
+
+		const Vec2f lineDir2d = normalize((Vec2f(ndc1.v) - Vec2f(ndc0.v)) * viewportSize);
+		const Vec2f perpendicularDir2d = Vec2f(-lineDir2d[1], lineDir2d[0]);
+
+		const Vec2f offset2d = (Vec2f(glState.lineWidth) / viewportSize) * perpendicularDir2d;
+
+		// 2D screen coordinates of the new pairs (a,b) of vertices for each input vertex (0,1)
+		const Vec2f v0a_xy = Vec2f(clip0.v) + offset2d*clip0[3];
+		const Vec2f v0b_xy = Vec2f(clip0.v) - offset2d*clip0[3];
+		const Vec2f v1a_xy = Vec2f(clip1.v) + offset2d*clip1[3];
+		const Vec2f v1b_xy = Vec2f(clip1.v) - offset2d*clip1[3];
+
+		// Final 4D coordinates of the new vertices
+		const auto v0a = Vec4f(v0a_xy[0], v0a_xy[1], clip0[2], clip0[3]);
+		const auto v0b = Vec4f(v0b_xy[0], v0b_xy[1], clip0[2], clip0[3]);
+		const auto v1a = Vec4f(v1a_xy[0], v1a_xy[1], clip1[2], clip1[3]);
+		const auto v1b = Vec4f(v1b_xy[0], v1b_xy[1], clip1[2], clip1[3]);
+
+		newVertices[6*n+0] = v0a;
+		newVertices[6*n+1] = v0b;
+		newVertices[6*n+2] = v1a;
+
+		newVertices[6*n+3] = v1a;
+		newVertices[6*n+4] = v0b;
+		newVertices[6*n+5] = v1b;
+	}
+	if(mode == LineLoop)
+	{
+		// Connect the ends
+		const auto lastN = newVertices.size()-1;
+		assert(lastN >= 2);
+		newVertices.push_back(newVertices[lastN-2]);
+		newVertices.push_back(newVertices[lastN]);
+		newVertices.push_back(newVertices[0]);
+
+		newVertices.push_back(newVertices[0]);
+		newVertices.push_back(newVertices[lastN]);
+		newVertices.push_back(newVertices[1]);
+	}
+	vao->bind();
+	verticesVBO->bind();
+
+	verticesVBO->allocate(newVertices.data(), newVertices.size() * sizeof newVertices[0]);
+
+	const auto& pr = basicShaderProgram;
+	pr->bind();
+	pr->setAttributeBuffer(basicShaderVars.vertex, vertexArray.type, 0, 4);
+	pr->enableAttributeArray(basicShaderVars.vertex);
+	pr->setUniformValue(basicShaderVars.projectionMatrix, QMatrix4x4{});
+	pr->setUniformValue(basicShaderVars.color, currentColor.toQVector());
+
+#ifdef GL_MULTISAMPLE
+	const bool multisampleWasOn = multisamplingEnabled && glIsEnabled(GL_MULTISAMPLE);
+	if(multisamplingEnabled && glState.lineSmooth)
+		glEnable(GL_MULTISAMPLE);
+#endif
+
+	// TODO: convert this to a triangle strip, but mind the overlaps and gaps of non-parallel lines' corners
+	glDrawArrays(GL_TRIANGLES, 0, newVertices.size());
+
+	verticesVBO->release();
+	vao->release();
+
+	if (pr) pr->release();
+
+#ifdef GL_MULTISAMPLE
+	if(multisamplingEnabled && !multisampleWasOn && glState.lineSmooth)
+		glDisable(GL_MULTISAMPLE);
+#endif
+}
+
 void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool doProj, const unsigned short* indices)
 {
 	if(!count) return;
@@ -2419,6 +2541,24 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool do
 	const Mat4f& m = getProjector()->getProjectionMatrix();
 	const QMatrix4x4 qMat(m[0], m[4], m[8], m[12], m[1], m[5], m[9], m[13], m[2], m[6], m[10], m[14], m[3], m[7], m[11], m[15]);
 
+	const bool lineMode = mode==LineStrip || mode==LineLoop || mode==Lines;
+	const bool isCoreProfile = StelMainView::getInstance().getGLInformation().isCoreProfile;
+	const bool isGLES = StelMainView::getInstance().getGLInformation().isGLES;
+	const bool wideLineMode = lineMode && glState.lineWidth>1;
+	if(wideLineMode && (isCoreProfile || isGLES) && projectedVertexArray.type == GL_FLOAT)
+	{
+		const bool fixedColor = !texCoordArray.enabled && !colorArray.enabled && !normalArray.enabled;
+		if(fixedColor && !indices)
+		{
+			// Optimized version that doesn't use geometry shader, which appears to be slow on some GPUs.
+			// Ideally, we'd like to get rid of the geometry shader completely,
+			// but this will result in more code for small performance gain.
+			drawFixedColorWideLinesAsQuads(projectedVertexArray, count, offset, m, mode);
+			return;
+		}
+	}
+	const bool coreProfileWideLineMode = wideLineMode && isCoreProfile;
+
 	vao->bind();
 	verticesVBO->bind();
 	GLsizeiptr numberOfVerticesToCopy = count + offset;
@@ -2429,7 +2569,6 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool do
 		numberOfVerticesToCopy = 1 + *std::max_element(indices + offset, indices + offset + count);
 	}
 
-	const bool wideLineMode = (mode==LineStrip || mode==LineLoop || mode==Lines) && StelMainView::getInstance().getGLInformation().isCoreProfile;
 #ifdef GL_MULTISAMPLE
 	const bool multisampleWasOn = multisamplingEnabled && glIsEnabled(GL_MULTISAMPLE);
 #endif
@@ -2438,7 +2577,7 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool do
 	const auto rgbMaxValue=calcRGBMaxValue(core->getDitheringMode());
 	if (!texCoordArray.enabled && !colorArray.enabled && !normalArray.enabled)
 	{
-		pr = wideLineMode ? wideLineShaderProgram : basicShaderProgram;
+		pr = coreProfileWideLineMode ? wideLineShaderProgram : basicShaderProgram;
 		pr->bind();
 
 		verticesVBO->allocate(projectedVertexArray.pointer, projectedVertexArray.vertexSizeInBytes()*numberOfVerticesToCopy);
@@ -2447,7 +2586,7 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool do
 		if(multisamplingEnabled && glState.lineSmooth)
 			glEnable(GL_MULTISAMPLE);
 #endif
-		if(wideLineMode)
+		if(coreProfileWideLineMode)
 		{
 			pr->setAttributeBuffer(wideLineShaderVars.vertex, projectedVertexArray.type, 0, projectedVertexArray.size);
 			pr->enableAttributeArray(wideLineShaderVars.vertex);
@@ -2532,7 +2671,7 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool do
 	}
 	else if (!texCoordArray.enabled && colorArray.enabled && !normalArray.enabled)
 	{
-		pr = wideLineMode ? colorfulWideLineShaderProgram : colorShaderProgram;
+		pr = coreProfileWideLineMode ? colorfulWideLineShaderProgram : colorShaderProgram;
 		pr->bind();
 
 		const auto bufferSize = projectedVertexArray.vertexSizeInBytes()*numberOfVerticesToCopy +
@@ -2544,7 +2683,7 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool do
 		const auto colorDataSize = colorArray.vertexSizeInBytes()*numberOfVerticesToCopy;
 		verticesVBO->write(colorDataOffset, colorArray.pointer, colorDataSize);
 
-		if(wideLineMode)
+		if(coreProfileWideLineMode)
 		{
 			pr->setAttributeBuffer(colorfulWideLineShaderVars.vertex, projectedVertexArray.type, 0, projectedVertexArray.size);
 			pr->enableAttributeArray(colorfulWideLineShaderVars.vertex);
