@@ -2231,7 +2231,7 @@ void main()
 	vec3 ndc0 = clip0.xyz / clip0.w;
 	vec3 ndc1 = clip1.xyz / clip1.w;
 
-	vec2 lineDir2d = normalize(ndc1.xy - ndc0.xy);
+	vec2 lineDir2d = normalize((ndc1.xy - ndc0.xy) * viewportSize);
 	vec2 perpendicularDir2d = vec2(-lineDir2d.y, lineDir2d.x);
 
 	vec2 offset2d = (lineWidth / viewportSize) * perpendicularDir2d;
