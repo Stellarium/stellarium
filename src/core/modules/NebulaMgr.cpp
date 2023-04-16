@@ -147,8 +147,6 @@ NebulaMgr::NebulaMgr(void) : StelObjectModule()
 NebulaMgr::~NebulaMgr()
 {
 	Nebula::texRegion = StelTextureSP();
-	Nebula::texGalaxy = StelTextureSP();
-	Nebula::texGalaxyLarge = StelTextureSP();
 	Nebula::texPointElement = StelTextureSP();
 	Nebula::texPlanetaryNebula = StelTextureSP();
 }
@@ -174,10 +172,6 @@ void NebulaMgr::init()
     auto& texMan = StelApp::getInstance().getTextureManager();
 	// Load dashed shape texture
 	Nebula::texRegion		= texMan.createTexture(StelFileMgr::getInstallationDir()+"/textures/neb_reg.png");
-	// Load ellipse texture
-	Nebula::texGalaxy		= texMan.createTexture(StelFileMgr::getInstallationDir()+"/textures/neb_gal.png");
-	// Load ellipse texture for large galaxies
-	Nebula::texGalaxyLarge		= texMan.createTexture(StelFileMgr::getInstallationDir()+"/textures/neb_gal_lrg.png");
 	// Load open cluster marker texture
 	Nebula::texPointElement		= texMan.createTexture(StelFileMgr::getInstallationDir()+"/textures/neb_point_elem.png");
 	// Load planetary nebula marker texture
