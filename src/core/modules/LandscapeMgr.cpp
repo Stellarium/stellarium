@@ -1140,14 +1140,14 @@ void LandscapeMgr::onLocationChanged(const StelLocation &loc)
 	{
 		//this was previously logic in ViewDialog, but should really be on a non-GUI layer
 		StelCore* core = StelApp::getInstance().getCore();
-		float lum;
-		if (!loc.planetName.contains("Earth")) // location not on Earth...
-			lum = 0;
-		else if(loc.lightPollutionLuminance.isValid())
-			lum = loc.lightPollutionLuminance.toFloat();
-		else // ...or it is an observatory, or it is an unknown location
-			lum = loc.DEFAULT_LIGHT_POLLUTION_LUMINANCE;
-
+		float lum=0.; // location not on Earth...
+		if (loc.planetName.contains("Earth"))
+		{
+			if(loc.lightPollutionLuminance.isValid())
+				lum = loc.lightPollutionLuminance.toFloat();
+			else // ...or it is an observatory, or it is an unknown location
+				lum = loc.DEFAULT_LIGHT_POLLUTION_LUMINANCE;
+		}
 		core->getSkyDrawer()->setLightPollutionLuminance(lum);
 	}
 }
