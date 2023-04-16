@@ -363,7 +363,7 @@ void AstroCalcDialog::createDialogContent()
 
 	// Tab: Eclipses
 	ui->eclipseYearsSpinBox->setValue(conf->value("astrocalc/eclipse_future_years", 10).toInt());
-	connect(ui->eclipseYearsSpinBox, &QSpinBox::valueChanged, this, [=](int val){conf->setValue("astrocalc/eclipse_future_years", val);}); // Make that a permanent decision.
+	connect(ui->eclipseYearsSpinBox, QOverload<int>::of(&QSpinBox::valueChanged), this, [=](int val){conf->setValue("astrocalc/eclipse_future_years", val);}); // Make that a permanent decision.
 	initListLunarEclipse();
 	enableLunarEclipsesButtons(buttonState);
 	connect(ui->lunareclipsesCalculateButton, SIGNAL(clicked()), this, SLOT(generateLunarEclipses()));
