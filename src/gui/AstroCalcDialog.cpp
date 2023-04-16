@@ -3905,7 +3905,7 @@ void AstroCalcDialog::selectCurrentSolarEclipseContact(const QModelIndex& modelI
 	const bool greatest = modelIndex.sibling(modelIndex.row(), SolarEclipseContact).data(Qt::UserRole).toBool();
 
 	StelLocation contactLoc(greatest ? q_("Greatest eclipse’s point") : q_("Eclipse’s contact point"), "", "", lon, lat, 10, 0, "LMST", 1, 'X');
-	core->moveObserverTo(contactLoc, 2., 2., "zero"); // use a neutral horizon to avoid confusion.
+	core->moveObserverTo(contactLoc, 10., 10., "zero"); // use a neutral horizon to avoid confusion.
 
 	if (objectMgr->findAndSelectI18n(q_("Sun")) || objectMgr->findAndSelect("Sun"))
 	{
@@ -3952,7 +3952,9 @@ void AstroCalcDialog::selectCurrentSolarEclipseDate(const QModelIndex& modelInde
 	const float lon = modelIndex.sibling(modelIndex.row(), SolarEclipseLongitude).data(Qt::UserRole).toFloat();
 
 	StelLocation maxLoc(q_("Greatest eclipse’s point"), "", "", lon, lat, 10, 0, "LMST", 1, 'X');
-	core->moveObserverTo(maxLoc, 2., 2., "zero"); // use a neutral horizon to avoid confusion.
+	qDebug() << "AstroCalcDialog::selectCurrentSolarEclipseDate(" << modelIndex;
+	qDebug() << "Moving to MaxLoc ...";
+	core->moveObserverTo(maxLoc, 10., 10., "zero"); // use a neutral horizon to avoid confusion.
 	if (objectMgr->findAndSelectI18n(q_("Sun")) || objectMgr->findAndSelect("Sun"))
 	{
 		core->setJD(JD);
@@ -3971,6 +3973,7 @@ void AstroCalcDialog::selectCurrentSolarEclipseDate(const QModelIndex& modelInde
 			}
 		}
 	}
+	qDebug() << "Moving to MaxLoc ... done";
 }
 
 QPair<double, double> AstroCalcDialog::getRiseSetLineCoordinates(bool first, double x,double y,double d,double L,double mu)

@@ -1281,6 +1281,7 @@ void StelCore::setObserver(StelObserver *obs)
 void StelCore::moveObserverTo(const StelLocation& target, double duration, double durationIfPlanetChange, const QString &landscapeID)
 {
 	double d = (getCurrentLocation().planetName==target.planetName) ? duration : durationIfPlanetChange;
+	qDebug() << "StelCore::moveObserverTo" << target.name << "in" << d << "seconds with Landscape" << landscapeID ;
 	if (d>0.)
 	{
 		StelLocation curLoc = getCurrentLocation();
@@ -1316,8 +1317,11 @@ void StelCore::moveObserverTo(const StelLocation& target, double duration, doubl
 			}
 		}
 	}
+	qDebug() << "StelCore::moveObserverTo" << target.name << "in" << d << "seconds with Landscape" << landscapeID << "emit targetLocationChanged";
 	emit targetLocationChanged(target, landscapeID); // inform others about our next location. LandscapeMgr can load a new landscape.
+	qDebug() << "StelCore::moveObserverTo" << target.name << "in" << d << "seconds with Landscape" << landscapeID << "emit locationChanged";
 	emit locationChanged(getCurrentLocation()); // This may either be the first or the only notice that currentLocation has changed.
+	qDebug() << "StelCore::moveObserverTo" << target.name << "in" << d << "seconds with Landscape" << landscapeID << "... done";
 }
 
 double StelCore::getUTCOffset(const double JD) const
@@ -2016,7 +2020,11 @@ void StelCore::updateTime(double deltaTime)
 		position = newObs;
 	}
 	if (position->update(deltaTime))
+	{
+		qDebug() << "StelCore::updateTime() updated for position update with deltaTime " << deltaTime;
 		emit locationChanged(getCurrentLocation());
+		qDebug() << "StelCore::updateTime() updated for position update with deltaTime ... done";
+	}
 
 	// Position of sun and all the satellites (ie planets)
 	// GZ maybe setting this static can speedup a bit?
