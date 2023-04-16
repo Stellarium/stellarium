@@ -42,8 +42,6 @@
 const QString Nebula::NEBULA_TYPE = QStringLiteral("Nebula");
 
 StelTextureSP Nebula::texRegion;
-StelTextureSP Nebula::texGalaxy;
-StelTextureSP Nebula::texGalaxyLarge;
 StelTextureSP Nebula::texPointElement;
 StelTextureSP Nebula::texPlanetaryNebula;
 bool  Nebula::drawHintProportional = false;
@@ -903,6 +901,40 @@ void Nebula::renderRoundMarker(StelPainter& sPainter, const float x, const float
 	sPainter.enableClientStates(false);
 }
 
+void Nebula::renderEllipticMarker(StelPainter& sPainter, const float x, const float y, float size,
+								  const float aspectRatio, const float angle, const Vec3f color) const
+{
+	// Take into account device pixel density and global scale ratio, as we are drawing 2D stuff.
+	const auto pixelRatio = sPainter.getProjector()->getDevicePixelsPerPixel();
+	const auto scale = pixelRatio * StelApp::getInstance().getGlobalScalingRatio();
+	size *= scale;
+
+	const float radiusY = 0.35 * size;
+	const float radiusX = aspectRatio * radiusY;
+	const int numPoints = std::lround(std::clamp(size/3, 32.f, 4096.f));
+	std::vector<float> vertexData;
+	vertexData.reserve(numPoints*2);
+	const float*const cossin = StelUtils::ComputeCosSinTheta(numPoints);
+	const auto cosa = std::cos(angle);
+	const auto sina = std::sin(angle);
+	for(int n = 0; n < numPoints; ++n)
+	{
+		const auto cosb = cossin[2*n], sinb = cossin[2*n+1];
+		const auto pointX = radiusX*sinb;
+		const auto pointY = radiusY*cosb;
+		vertexData.push_back(x + pointX*cosa - pointY*sina);
+		vertexData.push_back(y + pointY*cosa + pointX*sina);
+	}
+	const auto vertCount = vertexData.size() / 2;
+	sPainter.setLineSmooth(true);
+	sPainter.setLineWidth(scale * std::clamp(size/40, 1.f, 2.f));
+	sPainter.setColor(color);
+	sPainter.enableClientStates(true);
+	sPainter.setVertexPointer(2, GL_FLOAT, vertexData.data());
+	sPainter.drawFromArray(StelPainter::LineLoop, vertCount, 0, false);
+	sPainter.enableClientStates(false);
+}
+
 void Nebula::renderMarkerPointedCircle(StelPainter& sPainter, const float x, const float y,
 									   float size, const Vec3f color, const bool insideRect) const
 {
@@ -962,12 +994,18 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints, StelCore *core)
 		case NebBLL:
 		case NebBLA:
 		case NebRGx:
-		case NebGxCl:			
-			if (finalSize > 35.f)
-				Nebula::texGalaxyLarge->bind();
-			else
-				Nebula::texGalaxy->bind();
-			break;
+		case NebGxCl:
+		{
+			// The rotation angle in renderEllipticMarker() is relative to screen. Make sure to compute correct angle from 90+orientationAngle.
+			// Find an on-screen direction vector from a point offset somewhat in declination from our object.
+			Vec3d XYZrel(getJ2000EquatorialPos(core));
+			XYZrel[2]*=0.95; XYZrel.normalize();
+			Vec3d XYrel;
+			sPainter.getProjector()->project(XYZrel, XYrel);
+			const auto screenAngle = atan2(XYrel[1]-XY[1], XYrel[0]-XY[0]);
+			renderEllipticMarker(sPainter, XY[0], XY[1], finalSize, 2, screenAngle + orientationAngle*M_PI_180f, col);
+			return;
+		}
 		case NebOc:
 		case NebSA:
 		case NebSC:
@@ -1021,20 +1059,7 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints, StelCore *core)
 	sPainter.setColor(col, 1);
 	sPainter.setBlending(true, GL_ONE, GL_ONE);
 
-	// Rotation looks good only for galaxies.
-	if ((nType <=NebQSO) || (nType==NebBLA) || (nType==NebBLL) )
-	{
-		// The rotation angle in drawSprite2dMode() is relative to screen. Make sure to compute correct angle from 90+orientationAngle.
-		// Find an on-screen direction vector from a point offset somewhat in declination from our object.
-		Vec3d XYZrel(getJ2000EquatorialPos(core));
-		XYZrel[2]*=0.95; XYZrel.normalize();
-		Vec3d XYrel;
-		sPainter.getProjector()->project(XYZrel, XYrel);
-		float screenAngle = static_cast<float>(atan2(XYrel[1]-XY[1], XYrel[0]-XY[0]));
-		sPainter.drawSprite2dMode(static_cast<float>(XY[0]), static_cast<float>(XY[1]), finalSize, screenAngle*M_180_PIf + orientationAngle);
-	}
-	else	// no galaxy
-		sPainter.drawSprite2dMode(static_cast<float>(XY[0]), static_cast<float>(XY[1]), finalSize);
+	sPainter.drawSprite2dMode(static_cast<float>(XY[0]), static_cast<float>(XY[1]), finalSize);
 }
 
 void Nebula::drawLabel(StelPainter& sPainter, float maxMagLabel) const

@@ -262,6 +262,7 @@ private:
 	void drawOutlines(StelPainter& sPainter, float maxMagHints) const;
 	void renderDarkNebulaMarker(StelPainter& sPainter, float x, float y, float size, Vec3f color) const;
 	void renderRoundMarker(StelPainter& sPainter, float x, float y, float size, Vec3f color, bool crossed) const;
+	void renderEllipticMarker(StelPainter& sPainter, float x, float y, float size, float aspectRatio, float angle, Vec3f color) const;
 	void renderMarkerRoundedRect(StelPainter& sPainter, float x, float y, float size, Vec3f color) const;
 	void renderMarkerPointedCircle(StelPainter& sPainter, float x, float y, float size, Vec3f color, bool insideRect) const;
 
@@ -331,8 +332,6 @@ private:
 	QStringList designations;       // List of Catalog number entries
 
 	static StelTextureSP texRegion;				// The symbolic dashed shape texture
-	static StelTextureSP texGalaxy;				// Type 0
-	static StelTextureSP texGalaxyLarge;			// Type 0_large
 	static StelTextureSP texPointElement;
 	static StelTextureSP texPlanetaryNebula;		// Type 3
 	static float hintsBrightness;
