@@ -330,8 +330,6 @@ private:
 	SphericalRegionP pointRegion;
 	QStringList designations;       // List of Catalog number entries
 
-	static StelTextureSP texCircle;				// The symbolic circle texture
-	static StelTextureSP texCircleLarge;			// The symbolic circle texture for large objects
 	static StelTextureSP texRegion;				// The symbolic dashed shape texture
 	static StelTextureSP texGalaxy;				// Type 0
 	static StelTextureSP texGalaxyLarge;			// Type 0_large
