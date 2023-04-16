@@ -166,6 +166,8 @@ int main(int argc, char **argv)
 	QCoreApplication::setOrganizationDomain("stellarium.org");
 	QCoreApplication::setOrganizationName("stellarium");
 
+	QCoreApplication::setAttribute(Qt::AA_CompressHighFrequencyEvents);
+	QCoreApplication::setAttribute(Qt::AA_CompressTabletEvents);
 	// Support high DPI pixmaps and fonts
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 	QCoreApplication::setAttribute(Qt::AA_UseHighDpiPixmaps, true);
@@ -189,7 +191,6 @@ int main(int argc, char **argv)
 	// This must be run before QGuiApplication, otherwise it'll have no effect.
 	CLIProcessor::parseCLIArgsPreQApp(argList);
 
-	QCoreApplication::setAttribute(Qt::AA_CompressHighFrequencyEvents);
 #ifndef USE_QUICKVIEW
 	QApplication::setStyle(QStyleFactory::create("Fusion"));
 	// The QApplication MUST be created before the StelFileMgr is initialized.

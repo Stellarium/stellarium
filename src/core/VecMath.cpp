@@ -383,6 +383,19 @@ template<> QColor Vec4d::toQColor() const
 	return QColor::fromRgbF(v[0], v[1], v[2], v[3]);
 }
 
+template<> QVector4D Vec4f::toQVector() const
+{
+	return QVector4D(v[0], v[1], v[2], v[3]);
+}
+
+template<> QVector4D Vec4d::toQVector() const
+{
+	return QVector4D(static_cast<float>(v[0]),
+					 static_cast<float>(v[1]),
+					 static_cast<float>(v[2]),
+					 static_cast<float>(v[3]));
+}
+
 template<> Vec4i Vec4i::fromBracketedString(QString s)
 {
 	static const QRegularExpression re("\\[\\s*([0-9]*)\\s*,\\s*([0-9]*)\\s*,\\s*([0-9]*)\\s*,\\s*([0-9]*)\\s*\\]");

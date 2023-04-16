@@ -337,8 +337,6 @@ void StelApp::setupNetworkProxy()
 	QString proxyPass = confSettings->value("proxy/password").toString();
 	QString proxyType = confSettings->value("proxy/type").toString();
 
-	bool useSocksProxy = proxyType.contains("socks", Qt::CaseInsensitive);
-
 	// If proxy settings not found in config, use environment variable
 	// if it is defined.  (Config file over-rides environment).
 	if (proxyHost.isEmpty() && proxyUser.isEmpty() && proxyPass.isEmpty() && proxyPort.isEmpty())
@@ -365,6 +363,7 @@ void StelApp::setupNetworkProxy()
 				QRegularExpressionMatch preMatch=pre.match(proxyString);
 				if (proxyString.indexOf(pre) >= 0)
 				{
+					proxyType = preMatch.captured(1);
 					proxyUser = preMatch.captured(2);
 					proxyPass = preMatch.captured(3);
 					proxyHost = preMatch.captured(4);
@@ -378,6 +377,8 @@ void StelApp::setupNetworkProxy()
 			}
 		}
 	}
+
+	bool useSocksProxy = proxyType.contains("socks", Qt::CaseInsensitive);
 
 	if (!proxyHost.isEmpty())
 	{

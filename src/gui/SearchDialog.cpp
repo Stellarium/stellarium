@@ -1273,6 +1273,7 @@ void SearchDialog::gotoObjectWithType(const QModelIndex &modelIndex)
 	objType.replace("Nomenclature","NomenclatureItem");
 	// plug-ins
 	objType.replace("Supernovae","Supernova");
+	objType.replace("Satellites","Satellite");
 	objType.replace("Novae","Nova");
 	objType.replace("Exoplanets","Exoplanet");
 	objType.replace("Pulsars","Pulsar");

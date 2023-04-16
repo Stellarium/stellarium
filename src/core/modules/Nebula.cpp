@@ -41,8 +41,6 @@
 
 const QString Nebula::NEBULA_TYPE = QStringLiteral("Nebula");
 
-StelTextureSP Nebula::texCircle;
-StelTextureSP Nebula::texCircleLarge;
 StelTextureSP Nebula::texRegion;
 StelTextureSP Nebula::texGalaxy;
 StelTextureSP Nebula::texGalaxyLarge;

@@ -2452,7 +2452,7 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool do
 			pr->setAttributeBuffer(wideLineShaderVars.vertex, projectedVertexArray.type, 0, projectedVertexArray.size);
 			pr->enableAttributeArray(wideLineShaderVars.vertex);
 			pr->setUniformValue(wideLineShaderVars.projectionMatrix, qMat);
-			pr->setUniformValue(wideLineShaderVars.color, currentColor[0], currentColor[1], currentColor[2], currentColor[3]);
+			pr->setUniformValue(wideLineShaderVars.color, currentColor.toQVector());
 			pr->setUniformValue(wideLineShaderVars.lineWidth, glState.lineWidth);
 			GLint viewport[4] = {};
 			glGetIntegerv(GL_VIEWPORT, viewport);
@@ -2463,7 +2463,7 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool do
 			pr->setAttributeBuffer(basicShaderVars.vertex, projectedVertexArray.type, 0, projectedVertexArray.size);
 			pr->enableAttributeArray(basicShaderVars.vertex);
 			pr->setUniformValue(basicShaderVars.projectionMatrix, qMat);
-			pr->setUniformValue(basicShaderVars.color, currentColor[0], currentColor[1], currentColor[2], currentColor[3]);
+			pr->setUniformValue(basicShaderVars.color, currentColor.toQVector());
 		}
 	}
 	else if (texCoordArray.enabled && !colorArray.enabled && !normalArray.enabled && !wideLineMode)
@@ -2483,7 +2483,7 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool do
 		pr->setAttributeBuffer(texturesShaderVars.vertex, projectedVertexArray.type, 0, projectedVertexArray.size);
 		pr->enableAttributeArray(texturesShaderVars.vertex);
 		pr->setUniformValue(texturesShaderVars.projectionMatrix, qMat);
-		pr->setUniformValue(texturesShaderVars.texColor, currentColor[0], currentColor[1], currentColor[2], currentColor[3]);
+		pr->setUniformValue(texturesShaderVars.texColor, currentColor.toQVector());
 		pr->setAttributeBuffer(texturesShaderVars.texCoord, texCoordArray.type, texCoordDataOffset, texCoordArray.size);
 		pr->enableAttributeArray(texturesShaderVars.texCoord);
 		//pr->setUniformValue(texturesShaderVars.texture, 0);    // use texture unit 0
