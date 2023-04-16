@@ -786,8 +786,7 @@ QSurfaceFormat StelMainView::getDesiredGLFormat(QSettings* configuration)
 	if (openGLModuleType==QOpenGLContext::LibGL)
 	{
 		fmt.setRenderableType(QSurfaceFormat::OpenGL);
-		fmt.setMajorVersion(4);
-		fmt.setMinorVersion(6);
+		fmt.setVersion(4, 6);
 		fmt.setProfile(QSurfaceFormat::CoreProfile);
 
 		if (qApp && qApp->property("onetime_opengl_compat").toBool())
@@ -796,6 +795,7 @@ QSurfaceFormat StelMainView::getDesiredGLFormat(QSettings* configuration)
 			fmt.setMajorVersion(2);
 			fmt.setMinorVersion(1);
 			fmt.setProfile(QSurfaceFormat::CompatibilityProfile);
+			fmt.setOption(QSurfaceFormat::DeprecatedFunctions);
 		}
 		// FIXME: temporary hook for Qt5-based macOS bundles
 		#if defined(Q_OS_MACOS) && (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
