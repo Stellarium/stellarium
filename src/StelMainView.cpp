@@ -785,8 +785,7 @@ QSurfaceFormat StelMainView::getDesiredGLFormat(QSettings* configuration)
 	if (openGLModuleType==QOpenGLContext::LibGL)
 	{
 		fmt.setRenderableType(QSurfaceFormat::OpenGL);
-		fmt.setMajorVersion(3);
-		fmt.setMinorVersion(3);
+		fmt.setVersion(3, 3);
 		fmt.setProfile(QSurfaceFormat::CoreProfile);
 
 		if (qApp && qApp->property("onetime_opengl_compat").toBool())
