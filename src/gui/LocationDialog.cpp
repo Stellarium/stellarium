@@ -132,7 +132,7 @@ void LocationDialog::createDialogContent()
 	// Connect all the QT signals
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
-	connect(ui->mapWidget, SIGNAL(positionChanged(double, double)), this, SLOT(setLocationFromMap(double, double)));
+	connect(ui->mapWidget, SIGNAL(positionChanged(double, double)), this, SLOT(setLocationFromMap(double, double)), Qt::UniqueConnection);
 
 	connect(ui->addLocationToListPushButton, SIGNAL(clicked()), this, SLOT(addCurrentLocationToList()));
 	connect(ui->deleteLocationFromListPushButton, SIGNAL(clicked()), this, SLOT(deleteCurrentLocationFromList()));
@@ -303,6 +303,14 @@ void LocationDialog::setLocationUIvisible(bool visible)
 	ui->labelName->setVisible(visible);
 	ui->frame_citylist->setVisible(visible);
 	ui->mapWidget->setMarkerVisible(visible);
+	if(visible)
+	{
+		connect(ui->mapWidget, SIGNAL(positionChanged(double, double)), this, SLOT(setLocationFromMap(double, double)), Qt::UniqueConnection);
+	}
+	else
+	{
+		disconnect(ui->mapWidget, SIGNAL(positionChanged(double, double)), this, SLOT(setLocationFromMap(double, double)));
+	}
 	ui->addLocationToListPushButton->setVisible(visible);
 	ui->deleteLocationFromListPushButton->setVisible(visible);
 }
