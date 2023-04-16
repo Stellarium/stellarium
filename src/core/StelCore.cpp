@@ -1062,6 +1062,7 @@ void StelCore::updateTransformMatrices()
 // This avoids calling a costly operation every frame.
 void StelCore::updateFixedEquatorialTransformMatrices()
 {
+	qDebug() << "Location has changed:" << getCurrentLocation().serializeToLine();
 	matAltAzToFixedEquatorial = Mat4d::yrotation(M_PI_2-static_cast<double>(getCurrentLocation().getLatitude())*M_PI_180);
 	matFixedEquatorialToAltAz = matAltAzToFixedEquatorial.transpose();
 }
