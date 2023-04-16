@@ -1939,6 +1939,20 @@ QVector<const Planet*> Planet::getCandidatesForShadow() const
 
 void Planet::computePosition(const double dateJDE, const Vec3d &aberrationPush)
 {
+	// Having hundreds of Minor Planets makes this very slow. Especially on transitions between locations (StelCore::moveObserverTo())
+	// it seems acceptable to disable position updates for minor bodies.
+	// TODO: Maybe test for target location and allow updates in this case.
+	StelCore *core=StelApp::getInstance().getCore();
+	bool isTransitioning=false;
+	if (core)
+	{
+		const StelObserver *obs=core->getCurrentObserver();
+		if (obs)
+			isTransitioning=obs->isTraveling();
+	}
+	if (isTransitioning && orbitPtr)
+		return;
+
 	if (fabs(lastJDE-dateJDE)>deltaJDE)
 	{
 		coordFunc(dateJDE, eclipticPos, eclipticVelocity, orbitPtr);
