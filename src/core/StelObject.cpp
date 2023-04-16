@@ -27,6 +27,7 @@
 #include "StelSkyDrawer.hpp"
 #include "RefractionExtinction.hpp"
 #include "StelLocation.hpp"
+#include "StelObserver.hpp"
 #include "SolarSystem.hpp"
 #include "StelModuleMgr.hpp"
 #include "LandscapeMgr.hpp"
@@ -360,6 +361,8 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 {
 	StelApp& app = StelApp::getInstance();
 	StelObjectMgr* omgr=GETSTELMODULE(StelObjectMgr);
+	const StelLocation currentLocation=core->getCurrentLocation();
+	const bool onTransitionToNewLocation=core->getCurrentObserver()->isTraveling();
 	const bool withAtmosphere = core->getSkyDrawer()->getFlagHasAtmosphere();
 	const bool withDecimalDegree = app.getFlagShowDecimalDegrees();
 	const bool useSouthAzimuth = app.getFlagSouthAzimuthUsage();
@@ -702,12 +705,13 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 		}
 		res += getExtraInfoStrings(flags&SiderealTime).join("");
 		res += omgr->getExtraInfoStrings(flags&SiderealTime).join("");
-		if (withTables && !(flags&RTSTime && getType()!=QStringLiteral("Satellite")))
+		if (withTables && !(flags&RTSTime && !onTransitionToNewLocation && getType()!=QStringLiteral("Satellite") && currentLocation.role!='o'))
 			res += "</table>";
 	}
 
-	if (flags&RTSTime && getType()!=QStringLiteral("Satellite") && !currentPlanet.contains("observer", Qt::CaseInsensitive) && !(core->getCurrentLocation().name.contains("->")))
+	if (flags&RTSTime && getType()!=QStringLiteral("Satellite") && currentLocation.role!='o' && !onTransitionToNewLocation)
 	{
+		const bool isSun = (getEnglishName()=="Sun");
 		const double currentJD = core->getJD();
 		const double utcShift = core->getUTCOffset(currentJD) / 24.; // Fix DST shift...
 		Vec4d rts = getRTSTime(core);
@@ -717,7 +721,6 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 		const QString dash = QChar(0x2014);
 		double sunrise = 0.;
 		double sunset = 24.;
-		const bool isSun = (getEnglishName()=="Sun");
 		double hour(0);
 
 		int year, month, day, currentdate;
