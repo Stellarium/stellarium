@@ -238,6 +238,7 @@ Mat4d StelObserver::getRotEquatorialToVsop87(void) const
 SpaceShipObserver::SpaceShipObserver(const StelLocation& startLoc, const StelLocation& target, double atransitSeconds, double atimeToGo) : StelObserver(startLoc),
 		moveStartLocation(startLoc), moveTargetLocation(target), artificialPlanet(Q_NULLPTR), timeToGo(atimeToGo), transitSeconds(atransitSeconds)
 {
+	qDebug() << "SpaceshipObserver() from " << startLoc.serializeToLine() << "to" << target.serializeToLine();
 	Q_ASSERT((atimeToGo<0) || (atimeToGo>=0 && atimeToGo<=atransitSeconds));
 	if(timeToGo<0.0)
 		timeToGo = transitSeconds;
@@ -264,6 +265,13 @@ SpaceShipObserver::SpaceShipObserver(const StelLocation& startLoc, const StelLoc
 		artificialPlanet = QSharedPointer<Planet>(artPlanet);
 	}
 	planet = targetPlanet;
+	// avoid confusion with debug messages...
+	currentLocation.region=QString();
+	currentLocation.state=QString();
+	currentLocation.isUserLocation=true;
+	currentLocation.role='X';
+	currentLocation.landscapeKey=moveTargetLocation.landscapeKey;
+	currentLocation.ianaTimeZone=moveTargetLocation.ianaTimeZone;
 }
 
 SpaceShipObserver::~SpaceShipObserver()
@@ -307,7 +315,7 @@ bool SpaceShipObserver::update(double deltaTime)
 	{
 		currentLocation.name = ss->searchByEnglishName(moveStartLocation.planetName)->getNameI18n() + " -> " +
 						      ss->searchByEnglishName(moveTargetLocation.planetName)->getNameI18n();
-		qDebug() << "timeToGo:" << timeToGo << ": " << currentLocation.name;
+		qDebug() << "timeToGo:" << timeToGo << ": " << currentLocation.name << "Full location:" << currentLocation.serializeToLine();
 		if (artificialPlanet)
 		{
 			// Update SpaceShip position
