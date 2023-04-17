@@ -1390,7 +1390,7 @@ QVariantMap ObsListDialog::prepareCurrentList(QHash<QString, observingListItem> 
 
 	// List of objects
 	QVariantList listOfObjects;
-	QHashIterator<QString, observingListItem> i(currentItemCollection);
+	QHashIterator<QString, observingListItem> i(itemHash);
 	while (i.hasNext())
 	{
 		i.next();
