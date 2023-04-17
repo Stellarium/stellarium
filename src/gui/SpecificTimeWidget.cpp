@@ -59,7 +59,11 @@ void SpecificTimeWidget::setup()
 
 	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(setSeasonLabels()));
 	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(setTodayTimes()));
-	connect(core, SIGNAL(dateChangedByYear(const int)), this, SLOT(setSeasonTimes()));	
+	// update the seasons data when year is changed
+	//connect(core, SIGNAL(dateChangedByYear(const int)), this, SLOT(setSeasonTimes()));
+	// update the seasons data when "Now" button is pressed or date is changed
+	// TODO: need a better solution here to avoid extra computations
+	connect(core, SIGNAL(dateChanged()), this, SLOT(setSeasonTimes()));
 	connect(core, SIGNAL(dateChanged()), this, SLOT(setTodayTimes()));
 	connect(specMgr, SIGNAL(eventYearChanged()), this, SLOT(setSeasonTimes()));
 	connect(specMgr, SIGNAL(eventYearChanged()), this, SLOT(setTodayTimes()));
