@@ -42,6 +42,8 @@ private:
     class SpecificTimeMgr* specMgr;
     class StelLocaleMgr* localeMgr;
 
+    double sunriseJD, sunsetJD, moonriseJD, moonsetJD, civilDawnJD, civilDuskJD, nauticalDawnJD, nauticalDuskJD, astronomicalDawnJD, astronomicalDuskJD;
+
     void populateData();
 
     std::unique_ptr<Ui_specificTimeWidget> ui;

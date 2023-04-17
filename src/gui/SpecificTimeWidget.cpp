@@ -32,6 +32,16 @@
 
 SpecificTimeWidget::SpecificTimeWidget(QWidget* parent)
 	: QWidget(parent)
+	, sunriseJD(0.)
+	, sunsetJD(0.)
+	, moonriseJD(0.)
+	, moonsetJD(0.)
+	, civilDawnJD(0.)
+	, civilDuskJD(0.)
+	, nauticalDawnJD(0.)
+	, nauticalDuskJD(0.)
+	, astronomicalDawnJD(0.)
+	, astronomicalDuskJD(0.)
 	, ui(new Ui_specificTimeWidget)
 {
 }
@@ -44,6 +54,8 @@ void SpecificTimeWidget::setup()
 	core = StelApp::getInstance().getCore();
 	specMgr = GETSTELMODULE(SpecificTimeMgr);
 	localeMgr = &StelApp::getInstance().getLocaleMgr();
+
+	populateData();
 
 	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(setSeasonLabels()));
 	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(setTodayTimes()));
@@ -74,7 +86,17 @@ void SpecificTimeWidget::setup()
 	connect(ui->buttonJuneSolsticeCurrent, &QPushButton::clicked, this, [=](){setTodayTimes();});
 	connect(ui->buttonDecemberSolsticeCurrent, &QPushButton::clicked, this, [=](){setTodayTimes();});
 
-	populateData();
+	// handling special times
+	connect(ui->buttonSunrise, &QPushButton::clicked, this, [=](){core->setJD(sunriseJD);});
+	connect(ui->buttonSunset, &QPushButton::clicked, this, [=](){core->setJD(sunsetJD);});
+	connect(ui->buttonMoonrise, &QPushButton::clicked, this, [=](){core->setJD(moonriseJD);});
+	connect(ui->buttonMoonset, &QPushButton::clicked, this, [=](){core->setJD(moonsetJD);});
+	connect(ui->buttonCivilDawn, &QPushButton::clicked, this, [=](){core->setJD(civilDawnJD);});
+	connect(ui->buttonCivilDusk, &QPushButton::clicked, this, [=](){core->setJD(civilDuskJD);});
+	connect(ui->buttonNauticalDawn, &QPushButton::clicked, this, [=](){core->setJD(nauticalDawnJD);});
+	connect(ui->buttonNauticalDusk, &QPushButton::clicked, this, [=](){core->setJD(nauticalDuskJD);});
+	connect(ui->buttonAstronomicalDawn, &QPushButton::clicked, this, [=](){core->setJD(astronomicalDawnJD);});
+	connect(ui->buttonAstronomicalDusk, &QPushButton::clicked, this, [=](){core->setJD(astronomicalDuskJD);});
 
 	QSize button = QSize(24, 24);
 	ui->buttonMarchEquinoxCurrent->setFixedSize(button);
@@ -89,6 +111,16 @@ void SpecificTimeWidget::setup()
 	ui->buttonDecemberSolsticeCurrent->setFixedSize(button);
 	ui->buttonDecemberSolsticeNext->setFixedSize(button);
 	ui->buttonDecemberSolsticePrevious->setFixedSize(button);
+	ui->buttonCivilDawn->setFixedSize(button);
+	ui->buttonCivilDusk->setFixedSize(button);
+	ui->buttonNauticalDawn->setFixedSize(button);
+	ui->buttonNauticalDusk->setFixedSize(button);
+	ui->buttonAstronomicalDawn->setFixedSize(button);
+	ui->buttonAstronomicalDusk->setFixedSize(button);
+	ui->buttonSunrise->setFixedSize(button);
+	ui->buttonSunset->setFixedSize(button);
+	ui->buttonMoonrise->setFixedSize(button);
+	ui->buttonMoonset->setFixedSize(button);
 }
 
 void SpecificTimeWidget::retranslate()
@@ -184,6 +216,7 @@ void SpecificTimeWidget::setTodayTimes()
 	const double utcShift = core->getUTCOffset(JD) / 24.; // Fix DST shift...
 	PlanetP sun = GETSTELMODULE(SolarSystem)->getSun();
 	double duration, duration1, duration2;
+	bool astronomicalTwilightBtn, nauticalTwilightBtn, civilTwilightBtn, sunBtn;
 	QString moonrise, moonset, sunrise, sunset, civilTwilightBegin, civilTwilightEnd, nauticalTwilightBegin,
 		nauticalTwilightEnd, astronomicalTwilightBegin, astronomicalTwilightEnd, dayDuration, nightDuration,
 		civilTwilightDuration, nauticalTwilightDuration, astronomicalTwilightDuration, dash = QChar(0x2014);
@@ -191,28 +224,46 @@ void SpecificTimeWidget::setTodayTimes()
 	// Moon
 	Vec4d moon = GETSTELMODULE(SolarSystem)->getMoon()->getRTSTime(core, 0.);
 	if (moon[3]==30 || moon[3]<0 || moon[3]>50) // no moonrise on current date
+	{
 		moonrise = dash;
+		ui->buttonMoonrise->setEnabled(false);
+	}
 	else
-		moonrise = StelUtils::hoursToHmsStr(StelUtils::getHoursFromJulianDay(moon[0]+utcShift), true);
+	{
+		moonriseJD = moon[0];
+		moonrise = StelUtils::hoursToHmsStr(StelUtils::getHoursFromJulianDay(moonriseJD+utcShift), true);
+		ui->buttonMoonrise->setEnabled(true);
+	}
 
 	if (moon[3]==40 || moon[3]<0 || moon[3]>50) // no moonset on current date
+	{
 		moonset = dash;
+		ui->buttonMoonset->setEnabled(false);
+	}
 	else
-		moonset = StelUtils::hoursToHmsStr(StelUtils::getHoursFromJulianDay(moon[2]+utcShift), true);
+	{
+		moonsetJD = moon[2];
+		moonset = StelUtils::hoursToHmsStr(StelUtils::getHoursFromJulianDay(moonsetJD+utcShift), true);
+		ui->buttonMoonset->setEnabled(true);
+	}
 
 	// Sun
 	Vec4d day = sun->getRTSTime(core, 0.);
 	if (day[3]==0.)
 	{
-		sunrise = StelUtils::hoursToHmsStr(StelUtils::getHoursFromJulianDay(day[0]+utcShift), true);
-		sunset = StelUtils::hoursToHmsStr(StelUtils::getHoursFromJulianDay(day[2]+utcShift), true);
+		sunriseJD = day[0];
+		sunsetJD = day[2];
+		sunrise = StelUtils::hoursToHmsStr(StelUtils::getHoursFromJulianDay(sunriseJD+utcShift), true);
+		sunset = StelUtils::hoursToHmsStr(StelUtils::getHoursFromJulianDay(sunsetJD+utcShift), true);
 		duration = qAbs(day[2]-day[0])*24.;
+		sunBtn = true;
 	}
 	else
 	{
 		sunrise = sunset = dash;
 		// polar day/night
 		duration = (day[3]>99.) ? 24. : 0.;
+		sunBtn = false;
 	}
 	dayDuration = StelUtils::hoursToHmsStr(duration, true);
 
@@ -235,8 +286,10 @@ void SpecificTimeWidget::setTodayTimes()
 
 	if (astronomicalTwilight[3]==0.)
 	{
-		astronomicalTwilightBegin = StelUtils::hoursToHmsStr(StelUtils::getHoursFromJulianDay(astronomicalTwilight[0]+utcShift), true);
-		astronomicalTwilightEnd = StelUtils::hoursToHmsStr(StelUtils::getHoursFromJulianDay(astronomicalTwilight[2]+utcShift), true);
+		astronomicalDawnJD = astronomicalTwilight[0];
+		astronomicalDuskJD = astronomicalTwilight[2];
+		astronomicalTwilightBegin = StelUtils::hoursToHmsStr(StelUtils::getHoursFromJulianDay(astronomicalDawnJD+utcShift), true);
+		astronomicalTwilightEnd = StelUtils::hoursToHmsStr(StelUtils::getHoursFromJulianDay(astronomicalDuskJD+utcShift), true);
 		duration1 = (nauticalTwilight[2]-astronomicalTwilight[2])*24.;
 		if (duration1 > 0.)
 			duration1 -= 24.;
@@ -245,6 +298,7 @@ void SpecificTimeWidget::setTodayTimes()
 			duration2 -= 24.;
 		duration = qAbs(duration1) + qAbs(duration2);
 		nightDuration = StelUtils::hoursToHmsStr(24.0 - qAbs(astronomicalTwilight[2]-astronomicalTwilight[0])*24., true);
+		astronomicalTwilightBtn = true;
 	}
 	else
 	{
@@ -254,14 +308,17 @@ void SpecificTimeWidget::setTodayTimes()
 		if (day[3]<-99.)
 			nightDuration = StelUtils::hoursToHmsStr(24., true);
 		else
-			nightDuration = StelUtils::hoursToHmsStr(duration, true);
+			nightDuration = StelUtils::hoursToHmsStr(duration, true);		
+		astronomicalTwilightBtn = false;
 	}
 	astronomicalTwilightDuration = StelUtils::hoursToHmsStr(duration, true);
 
 	if (nauticalTwilight[3]==0.)
 	{
-		nauticalTwilightBegin = StelUtils::hoursToHmsStr(StelUtils::getHoursFromJulianDay(nauticalTwilight[0]+utcShift), true);
-		nauticalTwilightEnd = StelUtils::hoursToHmsStr(StelUtils::getHoursFromJulianDay(nauticalTwilight[2]+utcShift), true);
+		nauticalDawnJD = nauticalTwilight[0];
+		nauticalDuskJD = nauticalTwilight[2];
+		nauticalTwilightBegin = StelUtils::hoursToHmsStr(StelUtils::getHoursFromJulianDay(nauticalDawnJD+utcShift), true);
+		nauticalTwilightEnd = StelUtils::hoursToHmsStr(StelUtils::getHoursFromJulianDay(nauticalDuskJD+utcShift), true);
 		duration1 = (civilTwilight[2]-nauticalTwilight[2])*24.;
 		if (duration1 > 0.)
 			duration1 -= 24.;
@@ -269,18 +326,22 @@ void SpecificTimeWidget::setTodayTimes()
 		if (duration2 > 0.)
 			duration2 -= 24.;
 		duration = qAbs(duration1) + qAbs(duration2);
+		nauticalTwilightBtn = true;
 	}
 	else
 	{
 		nauticalTwilightBegin = nauticalTwilightEnd = dash;
 		duration = 0.;
+		nauticalTwilightBtn = false;
 	}
 	nauticalTwilightDuration = StelUtils::hoursToHmsStr(duration, true);
 
 	if (civilTwilight[3]==0.)
 	{
-		civilTwilightBegin = StelUtils::hoursToHmsStr(StelUtils::getHoursFromJulianDay(civilTwilight[0]+utcShift), true);
-		civilTwilightEnd = StelUtils::hoursToHmsStr(StelUtils::getHoursFromJulianDay(civilTwilight[2]+utcShift), true);
+		civilDawnJD = civilTwilight[0];
+		civilDuskJD = civilTwilight[2];
+		civilTwilightBegin = StelUtils::hoursToHmsStr(StelUtils::getHoursFromJulianDay(civilDawnJD+utcShift), true);
+		civilTwilightEnd = StelUtils::hoursToHmsStr(StelUtils::getHoursFromJulianDay(civilDuskJD+utcShift), true);
 		duration1 = (day[2]-civilTwilight[2])*24.;
 		if (duration1 > 0.)
 			duration1 -= 24.;
@@ -288,11 +349,13 @@ void SpecificTimeWidget::setTodayTimes()
 		if (duration2 > 0.)
 			duration2 -= 24.;
 		duration = qAbs(duration1) + qAbs(duration2);
+		civilTwilightBtn = true;
 	}
 	else
 	{
 		civilTwilightBegin = civilTwilightEnd = dash;
 		duration = 0.;
+		civilTwilightBtn = false;
 	}
 	civilTwilightDuration = StelUtils::hoursToHmsStr(duration, true);
 
@@ -315,4 +378,14 @@ void SpecificTimeWidget::setTodayTimes()
 	ui->labelSunset->setText(sunset);
 	ui->labelMoonRise->setText(moonrise);
 	ui->labelMoonSet->setText(moonset);
+
+	// buttons
+	ui->buttonSunrise->setEnabled(sunBtn);
+	ui->buttonSunset->setEnabled(sunBtn);
+	ui->buttonAstronomicalDawn->setEnabled(astronomicalTwilightBtn);
+	ui->buttonAstronomicalDusk->setEnabled(astronomicalTwilightBtn);
+	ui->buttonNauticalDawn->setEnabled(nauticalTwilightBtn);
+	ui->buttonNauticalDusk->setEnabled(nauticalTwilightBtn);
+	ui->buttonCivilDawn->setEnabled(civilTwilightBtn);
+	ui->buttonCivilDusk->setEnabled(civilTwilightBtn);
 }
