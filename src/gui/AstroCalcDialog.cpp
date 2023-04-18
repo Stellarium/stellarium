@@ -1719,25 +1719,7 @@ void AstroCalcDialog::selectCurrentEphemeride(const QModelIndex& modelIndex)
 	// Find the object
 	const QString name = modelIndex.sibling(modelIndex.row(), EphemerisCOName).data(Qt::UserRole).toString();
 	const double JD = modelIndex.sibling(modelIndex.row(), EphemerisDate).data(Qt::UserRole).toDouble();
-
-	if (objectMgr->findAndSelectI18n(name) || objectMgr->findAndSelect(name))
-	{
-		core->setJD(JD);
-		const QList<StelObjectP> newSelected = objectMgr->getSelectedObject();
-		if (!newSelected.empty())
-		{
-			// Can't point to home planet
-			if (newSelected[0]->getEnglishName() != core->getCurrentLocation().planetName)
-			{
-				mvMgr->moveToObject(newSelected[0], mvMgr->getAutoMoveDuration());
-				mvMgr->setFlagTracking(true);
-			}
-			else
-			{
-				GETSTELMODULE(StelObjectMgr)->unSelect();
-			}
-		}
-	}
+	goToObject(name, JD);
 }
 
 void AstroCalcDialog::setEphemerisHeaderNames()
@@ -2274,27 +2256,9 @@ void AstroCalcDialog::cleanupRTS()
 void AstroCalcDialog::selectCurrentRTS(const QModelIndex& modelIndex)
 {
 	// Find the object
-	QString name = modelIndex.sibling(modelIndex.row(), RTSCOName).data(Qt::UserRole).toString();
-	double JD = modelIndex.sibling(modelIndex.row(), RTSTransitDate).data(Qt::UserRole).toDouble();
-
-	if (objectMgr->findAndSelectI18n(name) || objectMgr->findAndSelect(name))
-	{
-		core->setJD(JD);
-		const QList<StelObjectP> newSelected = objectMgr->getSelectedObject();
-		if (!newSelected.empty())
-		{
-			// Can't point to home planet
-			if (newSelected[0]->getEnglishName() != core->getCurrentLocation().planetName)
-			{
-				mvMgr->moveToObject(newSelected[0], mvMgr->getAutoMoveDuration());
-				mvMgr->setFlagTracking(true);
-			}
-			else
-			{
-				GETSTELMODULE(StelObjectMgr)->unSelect();
-			}
-		}
-	}
+	const QString name = modelIndex.sibling(modelIndex.row(), RTSCOName).data(Qt::UserRole).toString();
+	const double JD = modelIndex.sibling(modelIndex.row(), RTSTransitDate).data(Qt::UserRole).toDouble();
+	goToObject(name, JD);
 }
 
 void AstroCalcDialog::setRTSCelestialBodyName()
@@ -2734,25 +2698,8 @@ LunarEclipseIteration::LunarEclipseIteration(double &JD, double &positionAngle, 
 
 void AstroCalcDialog::selectCurrentLunarEclipseDate(const QModelIndex& modelIndex)
 {
-	double JDMid = modelIndex.sibling(modelIndex.row(), LunarEclipseDate).data(Qt::UserRole).toDouble();
-	if (objectMgr->findAndSelectI18n(q_("Moon")) || objectMgr->findAndSelect("Moon"))
-	{
-		core->setJD(JDMid);
-		const QList<StelObjectP> newSelected = objectMgr->getSelectedObject();
-		if (!newSelected.empty())
-		{
-			// Can't point to home planet
-			if (newSelected[0]->getEnglishName() != core->getCurrentLocation().planetName)
-			{
-				mvMgr->moveToObject(newSelected[0], mvMgr->getAutoMoveDuration());
-				mvMgr->setFlagTracking(true);
-			}
-			else
-			{
-				GETSTELMODULE(StelObjectMgr)->unSelect();
-			}
-		}
-	}
+	const double JDMid = modelIndex.sibling(modelIndex.row(), LunarEclipseDate).data(Qt::UserRole).toDouble();
+	goToObject("Moon", JDMid);
 }
 
 void AstroCalcDialog::selectCurrentLunarEclipse(const QModelIndex& modelIndex)
@@ -2898,28 +2845,9 @@ void AstroCalcDialog::selectCurrentLunarEclipse(const QModelIndex& modelIndex)
 
 void AstroCalcDialog::selectCurrentLunarEclipseContact(const QModelIndex& modelIndex)
 {
-	double JD = modelIndex.sibling(modelIndex.row(), LunarEclipseContactDate).data(Qt::UserRole).toDouble();
-	if (objectMgr->findAndSelectI18n(q_("Moon")) || objectMgr->findAndSelect("Moon"))
-	{
-		if (JD!=0)
-		{
-			core->setJD(JD);
-			const QList<StelObjectP> newSelected = objectMgr->getSelectedObject();
-			if (!newSelected.empty())
-			{
-				// Can't point to home planet
-				if (newSelected[0]->getEnglishName() != core->getCurrentLocation().planetName)
-				{
-					mvMgr->moveToObject(newSelected[0], mvMgr->getAutoMoveDuration());
-					mvMgr->setFlagTracking(true);
-				}
-				else
-				{
-					GETSTELMODULE(StelObjectMgr)->unSelect();
-				}
-			}
-		}
-	}
+	const double JD = modelIndex.sibling(modelIndex.row(), LunarEclipseContactDate).data(Qt::UserRole).toDouble();
+	if (JD!=0)
+		goToObject("Moon", JD);
 }
 
 void AstroCalcDialog::saveLunarEclipses()
@@ -3906,25 +3834,7 @@ void AstroCalcDialog::selectCurrentSolarEclipseContact(const QModelIndex& modelI
 
 	StelLocation contactLoc(greatest ? q_("Greatest eclipse’s point") : q_("Eclipse’s contact point"), "", "", lon, lat, 10, 0, "LMST", 1, 'X');
 	core->moveObserverTo(contactLoc, 2., 2., "zero"); // use a neutral horizon to avoid confusion.
-
-	if (objectMgr->findAndSelectI18n(q_("Sun")) || objectMgr->findAndSelect("Sun"))
-	{
-		core->setJD(JD);
-		const QList<StelObjectP> newSelected = objectMgr->getSelectedObject();
-		if (!newSelected.empty())
-		{
-			// Can't point to home planet
-			if (newSelected[0]->getEnglishName() != core->getCurrentLocation().planetName)
-			{
-				mvMgr->moveToObject(newSelected[0], mvMgr->getAutoMoveDuration());
-				mvMgr->setFlagTracking(true);
-			}
-			else
-			{
-				GETSTELMODULE(StelObjectMgr)->unSelect();
-			}
-		}
-	}
+	goToObject("Sun", JD);
 }
 
 void AstroCalcDialog::saveSolarEclipses()
@@ -3955,24 +3865,7 @@ void AstroCalcDialog::selectCurrentSolarEclipseDate(const QModelIndex& modelInde
 	qDebug() << "AstroCalcDialog::selectCurrentSolarEclipseDate(" << modelIndex;
 	qDebug() << "Moving to MaxLoc ...";
 	core->moveObserverTo(maxLoc, 2., 2., "zero"); // use a neutral horizon to avoid confusion.
-	if (objectMgr->findAndSelectI18n(q_("Sun")) || objectMgr->findAndSelect("Sun"))
-	{
-		core->setJD(JD);
-		const QList<StelObjectP> newSelected = objectMgr->getSelectedObject();
-		if (!newSelected.empty())
-		{
-			// Can't point to home planet
-			if (newSelected[0]->getEnglishName() != core->getCurrentLocation().planetName)
-			{
-				mvMgr->moveToObject(newSelected[0], mvMgr->getAutoMoveDuration());
-				mvMgr->setFlagTracking(true);
-			}
-			else
-			{
-				GETSTELMODULE(StelObjectMgr)->unSelect();
-			}
-		}
-	}
+	goToObject("Sun", JD);
 	qDebug() << "Moving to MaxLoc ... done";
 }
 
@@ -4911,26 +4804,8 @@ void AstroCalcDialog::enableSolarEclipsesLocalButtons(bool enable)
 void AstroCalcDialog::selectCurrentSolarEclipseLocal(const QModelIndex& modelIndex)
 {
 	// Find the Sun
-	double JD = modelIndex.sibling(modelIndex.row(), SolarEclipseLocalDate).data(Qt::UserRole).toDouble();
-
-	if (objectMgr->findAndSelectI18n(q_("Sun")) || objectMgr->findAndSelect("Sun"))
-	{
-		core->setJD(JD);
-		const QList<StelObjectP> newSelected = objectMgr->getSelectedObject();
-		if (!newSelected.empty())
-		{
-			// Can't point to home planet
-			if (newSelected[0]->getEnglishName() != core->getCurrentLocation().planetName)
-			{
-				mvMgr->moveToObject(newSelected[0], mvMgr->getAutoMoveDuration());
-				mvMgr->setFlagTracking(true);
-			}
-			else
-			{
-				GETSTELMODULE(StelObjectMgr)->unSelect();
-			}
-		}
-	}
+	const double JD = modelIndex.sibling(modelIndex.row(), SolarEclipseLocalDate).data(Qt::UserRole).toDouble();
+	goToObject("Sun", JD);
 }
 
 void AstroCalcDialog::saveSolarEclipsesLocal()
@@ -5601,27 +5476,9 @@ void AstroCalcDialog::enableTransitsButtons(bool enable)
 void AstroCalcDialog::selectCurrentTransit(const QModelIndex& modelIndex)
 {
 	// Find the planet
-	QString name = modelIndex.sibling(modelIndex.row(), TransitPlanet).data(Qt::UserRole).toString();
-	double JD = modelIndex.sibling(modelIndex.row(), TransitDate).data(Qt::UserRole).toDouble();
-
-	if (objectMgr->findAndSelectI18n(name) || objectMgr->findAndSelect(name))
-	{
-		core->setJD(JD);
-		const QList<StelObjectP> newSelected = objectMgr->getSelectedObject();
-		if (!newSelected.empty())
-		{
-			// Can't point to home planet
-			if (newSelected[0]->getEnglishName() != core->getCurrentLocation().planetName)
-			{
-				mvMgr->moveToObject(newSelected[0], mvMgr->getAutoMoveDuration());
-				mvMgr->setFlagTracking(true);
-			}
-			else
-			{
-				GETSTELMODULE(StelObjectMgr)->unSelect();
-			}
-		}
-	}
+	const QString name = modelIndex.sibling(modelIndex.row(), TransitPlanet).data(Qt::UserRole).toString();
+	const double JD = modelIndex.sibling(modelIndex.row(), TransitDate).data(Qt::UserRole).toDouble();
+	goToObject(name, JD);
 }
 
 void AstroCalcDialog::saveTransits()
@@ -6603,18 +6460,8 @@ void AstroCalcDialog::selectCurrentPhenomen(const QModelIndex& modelIndex)
 	QString name = ui->object1ComboBox->currentData().toString();
 	if (modelIndex.sibling(modelIndex.row(), PhenomenaType).data().toString().contains(q_("Opposition"), Qt::CaseInsensitive))
 		name = modelIndex.sibling(modelIndex.row(), PhenomenaObject2).data().toString();
-	double JD = modelIndex.sibling(modelIndex.row(), PhenomenaDate).data(Qt::UserRole).toDouble();
-
-	if (objectMgr->findAndSelectI18n(name) || objectMgr->findAndSelect(name))
-	{
-		core->setJD(JD);
-		const QList<StelObjectP> newSelected = objectMgr->getSelectedObject();
-		if (!newSelected.empty())
-		{
-			mvMgr->moveToObject(newSelected[0], mvMgr->getAutoMoveDuration());
-			mvMgr->setFlagTracking(true);
-		}
-	}
+	const double JD = modelIndex.sibling(modelIndex.row(), PhenomenaDate).data(Qt::UserRole).toDouble();
+	goToObject(name, JD);
 }
 
 void AstroCalcDialog::calculatePhenomena()
@@ -9102,8 +8949,8 @@ void AstroCalcDialog::selectWutObject(const QModelIndex &index)
 	if (index.isValid())
 	{
 		// Find the object
-		QString wutObjectEnglishName = index.sibling(index.row(),WUTObjectName).data(Qt::UserRole).toString();
-		if (objectMgr->findAndSelectI18n(wutObjectEnglishName) || objectMgr->findAndSelect(wutObjectEnglishName))
+		QString wutObjectEnglishName = index.sibling(index.row(), WUTObjectName).data(Qt::UserRole).toString();
+		if (objectMgr->findAndSelect(wutObjectEnglishName))
 		{
 			const QList<StelObjectP> newSelected = objectMgr->getSelectedObject();
 			if (!newSelected.empty())
@@ -9623,4 +9470,26 @@ QList<PlanetP> AstroCalcDialog::getSelectedMinorPlanets()
 	}
 
 	return planets;
+}
+
+void AstroCalcDialog::goToObject(const QString name, const double JD)
+{
+	if (objectMgr->findAndSelectI18n(name) || objectMgr->findAndSelect(name))
+	{
+		core->setJD(JD);
+		const QList<StelObjectP> newSelected = objectMgr->getSelectedObject();
+		if (!newSelected.empty())
+		{
+			// Can't point to home planet
+			if (newSelected[0]->getEnglishName() != core->getCurrentLocation().planetName)
+			{
+				mvMgr->moveToObject(newSelected[0], mvMgr->getAutoMoveDuration());
+				mvMgr->setFlagTracking(true);
+			}
+			else
+			{
+				GETSTELMODULE(StelObjectMgr)->unSelect();
+			}
+		}
+	}
 }
