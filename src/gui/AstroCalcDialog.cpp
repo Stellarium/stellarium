@@ -8262,35 +8262,32 @@ void AstroCalcDialog::populateWutGroups()
 	QListWidget* category = ui->wutCategoryListWidget;
 	category->blockSignals(true);
 
+	const QMap<QString, WUTCategory> wutCatsMap = {
+		{ q_("Planets"), EWPlanets }, { q_("Bright stars"), EWBrightStars }, { q_("Bright nebulae"), EWBrightNebulae },
+		{ q_("Dark nebulae"), EWDarkNebulae }, { q_("Galaxies"), EWGalaxies }, { q_("Open star clusters"), EWOpenStarClusters },
+		{ q_("Asteroids"), EWAsteroids }, { q_("Comets"), EWComets }, { q_("Plutinos"),	EWPlutinos }, { q_("Dwarf planets"), EWDwarfPlanets },
+		{ q_("Cubewanos"), EWCubewanos }, { q_("Scattered disc objects"), EWScatteredDiscObjects }, { q_("Oort cloud objects"), EWOortCloudObjects },
+		{ q_("Sednoids"), EWSednoids }, { q_("Planetary nebulae"), EWPlanetaryNebulae }, { q_("Bright double stars"), EWBrightDoubleStars },
+		{ q_("Bright variable stars"), EWBrightVariableStars }, { q_("Bright stars with high proper motion"), EWBrightStarsWithHighProperMotion },
+		{ q_("Symbiotic stars"), EWSymbioticStars }, { q_("Emission-line stars"), EWEmissionLineStars }, { q_("Supernova candidates"), EWSupernovaeCandidates },
+		{ q_("Supernova remnant candidates"), EWSupernovaeRemnantCandidates }, { q_("Supernova remnants"), EWSupernovaeRemnants },
+		{ q_("Clusters of galaxies"), EWClustersOfGalaxies }, { q_("Interstellar objects"), EWInterstellarObjects },
+		{ q_("Globular star clusters"), EWGlobularStarClusters }, { q_("Regions of the sky"), EWRegionsOfTheSky }, { q_("Active galaxies"), EWActiveGalaxies },
+		{ q_("Interacting galaxies"), EWInteractingGalaxies }, { q_("Deep-sky objects"), EWDeepSkyObjects }, { q_("Messier objects"), EWMessierObjects },
+		{ q_("NGC/IC objects"), EWNGCICObjects }, { q_("Caldwell objects"), EWCaldwellObjects }, { q_("Herschel 400 objects"), EWHerschel400Objects },
+		{ q_("Algol-type eclipsing systems"), EWAlgolTypeVariableStars }, { q_("The classical cepheids"), EWClassicalCepheidsTypeVariableStars },
+		{ q_("Bright carbon stars"), EWCarbonStars }, { q_("Bright barium stars"), EWBariumStars }
+	};
+	QMapIterator<QString, WUTCategory> i(wutCatsMap);
 	wutCategories.clear();
-	wutCategories.insert(q_("Planets"),				EWPlanets);
-	wutCategories.insert(q_("Bright stars"),			EWBrightStars);
-	wutCategories.insert(q_("Bright nebulae"),			EWBrightNebulae);
-	wutCategories.insert(q_("Dark nebulae"),			EWDarkNebulae);
-	wutCategories.insert(q_("Galaxies"),				EWGalaxies);
-	wutCategories.insert(q_("Open star clusters"),		EWOpenStarClusters);
-	wutCategories.insert(q_("Asteroids"),				EWAsteroids);
-	wutCategories.insert(q_("Comets"),				EWComets);
-	wutCategories.insert(q_("Plutinos"),				EWPlutinos);
-	wutCategories.insert(q_("Dwarf planets"),			EWDwarfPlanets);
-	wutCategories.insert(q_("Cubewanos"),			EWCubewanos);
-	wutCategories.insert(q_("Scattered disc objects"), 	EWScatteredDiscObjects);
-	wutCategories.insert(q_("Oort cloud objects"),		EWOortCloudObjects);
-	wutCategories.insert(q_("Sednoids"),				EWSednoids);
-	wutCategories.insert(q_("Planetary nebulae"),		EWPlanetaryNebulae);
-	wutCategories.insert(q_("Bright double stars"),		EWBrightDoubleStars);
-	wutCategories.insert(q_("Bright variable stars"),	EWBrightVariableStars);
-	wutCategories.insert(q_("Bright stars with high proper motion"),	EWBrightStarsWithHighProperMotion);
-	wutCategories.insert(q_("Symbiotic stars"),			EWSymbioticStars);
-	wutCategories.insert(q_("Emission-line stars"),		EWEmissionLineStars);
-	wutCategories.insert(q_("Supernova candidates"),	EWSupernovaeCandidates);
-	wutCategories.insert(q_("Supernova remnant candidates"), EWSupernovaeRemnantCandidates);
-	wutCategories.insert(q_("Supernova remnants"),	EWSupernovaeRemnants);
-	wutCategories.insert(q_("Clusters of galaxies"), 		EWClustersOfGalaxies);
-	wutCategories.insert(q_("Interstellar objects"),		EWInterstellarObjects);
-	wutCategories.insert(q_("Globular star clusters"),	EWGlobularStarClusters);
-	wutCategories.insert(q_("Regions of the sky"), 		EWRegionsOfTheSky);
-	wutCategories.insert(q_("Active galaxies"), 			EWActiveGalaxies);
+	// generic categories
+	while (i.hasNext())
+	{
+		i.next();
+		wutCategories.insert(i.key(), i.value());
+	}
+
+	// specific categories
 	if (moduleMgr.isPluginLoaded("Pulsars"))
 	{
 		// Add the category when pulsars is visible
@@ -8306,17 +8303,7 @@ void AstroCalcDialog::populateWutGroups()
 	if (moduleMgr.isPluginLoaded("Novae"))
 		wutCategories.insert(q_("Bright nova stars"), EWBrightNovaStars);
 	if (moduleMgr.isPluginLoaded("Supernovae"))
-		wutCategories.insert(q_("Bright supernova stars"), 	EWBrightSupernovaStars);
-	wutCategories.insert(q_("Interacting galaxies"), 	EWInteractingGalaxies);
-	wutCategories.insert(q_("Deep-sky objects"), 		EWDeepSkyObjects);
-	wutCategories.insert(q_("Messier objects"), 		EWMessierObjects);
-	wutCategories.insert(q_("NGC/IC objects"), 		EWNGCICObjects);
-	wutCategories.insert(q_("Caldwell objects"), 		EWCaldwellObjects);
-	wutCategories.insert(q_("Herschel 400 objects"), 	EWHerschel400Objects);
-	wutCategories.insert(q_("Algol-type eclipsing systems"),	EWAlgolTypeVariableStars);
-	wutCategories.insert(q_("The classical cepheids"),	EWClassicalCepheidsTypeVariableStars);
-	wutCategories.insert(q_("Bright carbon stars"),		EWCarbonStars);
-	wutCategories.insert(q_("Bright barium stars"),		EWBariumStars);
+		wutCategories.insert(q_("Bright supernova stars"), EWBrightSupernovaStars);
 
 	category->clear();
 	category->addItems(wutCategories.keys());
