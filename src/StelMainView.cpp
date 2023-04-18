@@ -792,7 +792,6 @@ QSurfaceFormat StelMainView::getDesiredGLFormat(QSettings* configuration)
 		if (qApp && qApp->property("onetime_opengl_compat").toBool())
 		{
 			qDebug() << "Setting OpenGL Compatibility profile from command line...";
-			fmt.setVersion(2, 1);
 			fmt.setProfile(QSurfaceFormat::CompatibilityProfile);
 			fmt.setOption(QSurfaceFormat::DeprecatedFunctions);
 		}
