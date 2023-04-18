@@ -836,9 +836,6 @@ QSurfaceFormat StelMainView::getDesiredGLFormat(QSettings* configuration)
 	fmt.setOption(QSurfaceFormat::DebugContext);
 #endif
 
-	// shorter blinking backlight on exclusive fullscreen
-	fmt.setColorSpace(QSurfaceFormat::sRGBColorSpace);
-
 	return fmt;
 }
 
