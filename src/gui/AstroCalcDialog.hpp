@@ -584,6 +584,9 @@ private:
 	double getCustomTimeStep();
 	void reGenerateEphemeris(bool withSelection);
 
+	//! Finding and selecting an object by its name in specific JD
+	void goToObject(const QString name, const double JD);
+
 	//! Format RA/Dec or Az/Alt coordinates into nice strings.
 	//! @arg horizontal coord are horizontal (alt-azimuthal). Use degrees/degrees. Else use Hours/degrees.
 	//! @arg southAzimuth (relevant only for horizontal=true) count azimuth from south.
