@@ -6,30 +6,6 @@ on: [push]
 
 jobs:
   #
-  # Codiga
-  # See https://github.com/marketplace/actions/codiga-github-action
-  #
-  check-quality:
-    runs-on: ubuntu-latest
-    if: "!contains(github.actor, 'transifex')"
-    name: "Codiga"
-    steps:
-    - name: Check code meets quality standards
-      id: codiga
-      uses: codiga/github-action@v1
-      with:
-        repo_token: ${{ secrets.GITHUB_TOKEN }}
-        codiga_api_token: ${{ secrets.CODIGA_API_TOKEN }}
-        force_ref: 'none'
-        min_quality_grade: 'WARNING'
-        min_quality_score: '50'
-        max_defects_rate: '0.01'
-        max_complex_functions_rate: '0.5'
-        max_long_functions_rate: '0.5'
-        max_timeout_sec: '3600'
-        project_name: 'stellarium'
-
-  #
   # Coveralls
   #
   coveralls:
