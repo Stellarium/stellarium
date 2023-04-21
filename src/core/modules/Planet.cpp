@@ -2540,7 +2540,7 @@ float Planet::getVMagnitude(const StelCore* core) const
 		static const double lunarMeanDistSq=lunarMeanDist*lunarMeanDist;
 		fluxIll *= (lunarMeanDistSq/observerPlanetRq);
 
-		// compute flux of ashen light: Agrawal 2016.
+		// compute flux of earthshine: Agrawal 2016.
 		const double beta=parent->equatorialRadius*parent->equatorialRadius/eclipticPos.normSquared();
 		const double gamma=equatorialRadius*equatorialRadius/eclipticPos.normSquared();
 
@@ -3610,20 +3610,20 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 
 		if (isMoon)
 		{
-			// ambient for the moon can provide the Ashen light!
+			// ambient for the moon can provide the earthshine!
 			// during daylight, this still should not make moon visible. We grab sky brightness and dim the moon.
 			// This approach here is again pretty ad-hoc.
 			// We have 5000cd/m^2 at sunset returned (Note this may be unnaturally much. Should be rather 10, but the 5000 may include the sun).
-			// When atm.brightness has fallen to 2000cd/m^2, we allow ashen light to appear visible. Its impact is full when atm.brightness is below 1000.
+			// When atm.brightness has fallen to 2000cd/m^2, we allow earthshine to appear visible. Its impact is full when atm.brightness is below 1000.
 			LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
 			Q_ASSERT(lmgr);
 			const float atmLum=(lmgr->getFlagAtmosphere() ? lmgr->getAtmosphereAverageLuminance() : 0.0f);
 			if (atmLum<2000.0f)
 			{
 				float atmScaling=1.0f - (qMax(1000.0f, atmLum)-1000.0f)*0.001f; // full impact when atmLum<1000.
-				float ashenFactor=(1.0f-getPhase(ssm->getEarth()->getHeliocentricEclipticPos())); // We really mean the Earth for this! (Try observing from Mars ;-)
-				ashenFactor*=ashenFactor*0.15f*atmScaling;
-				light.ambient = Vec3f(ashenFactor, magFactorGreen*ashenFactor, magFactorBlue*ashenFactor);
+				float earthshineFactor=(1.0f-getPhase(ssm->getEarth()->getHeliocentricEclipticPos())); // We really mean the Earth for this! (Try observing from Mars ;-)
+				earthshineFactor*=earthshineFactor*0.15f*atmScaling;
+				light.ambient = Vec3f(earthshineFactor, magFactorGreen*earthshineFactor, magFactorBlue*earthshineFactor);
 			}
 			const float fov=core->getProjection(transfo)->getFov();
 			float fovFactor=1.3f;
