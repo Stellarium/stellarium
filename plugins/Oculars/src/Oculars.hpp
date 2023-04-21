@@ -24,6 +24,7 @@
 #include "CCD.hpp"
 #include "Lens.hpp"
 #include "Ocular.hpp"
+#include "Finder.hpp"
 #include "OcularDialog.hpp"
 #include "SolarSystem.hpp"
 #include "StelModule.hpp"
@@ -34,7 +35,7 @@
 #include <QFont>
 #include <QSettings>
 
-#define MIN_OCULARS_INI_VERSION 3.1f
+#define MIN_OCULARS_INI_VERSION 3.2f
 #define DEFAULT_CCD_CROP_OVERLAY_SIZE 250
 
 QT_BEGIN_NAMESPACE
@@ -78,10 +79,27 @@ class Oculars : public StelModule
 {
 	Q_OBJECT
 
-	Q_PROPERTY(bool enableOcular     READ getEnableOcular     WRITE enableOcular     NOTIFY enableOcularChanged)
-	Q_PROPERTY(bool enableCrosshairs READ getEnableCrosshairs WRITE toggleCrosshairs NOTIFY enableCrosshairsChanged)
-	Q_PROPERTY(bool enableCCD        READ getEnableCCD        WRITE toggleCCD        NOTIFY enableCCDChanged)
-	Q_PROPERTY(bool enableTelrad     READ getEnableTelrad     WRITE toggleTelrad     NOTIFY enableTelradChanged)
+	Q_ENUMS(PluginMode)
+public:
+	enum PluginMode
+	{
+		OcNone,     //!< disabled
+		OcTelrad,   //!< showing Telrad mode: naked eye view, just a Telrad overlay
+		OcFinder,   //!< showing Finderscope mode: slightly magnified by a compact instrument
+		OcOcular,   //!< central circle, magnified, different skyDrawer settings
+		OcSensor    //!< central box, magnified, different skyDrawer settings
+	};
+
+	// We use one master mode property for mutually exclusive operation
+	Q_PROPERTY(PluginMode pluginMode READ getPluginMode       WRITE setPluginMode    NOTIFY pluginModeChanged)
+	// While the switching StelActions could work with Lambda functions, the GUI panel in the screen corner still needs Boolean properties to highlight the buttons.
+	// TODO 2021: Try to make them or the slots private.
+	Q_PROPERTY(bool flagModeOcular        READ getFlagModeOcular         WRITE setFlagModeOcular      NOTIFY flagModeOcularChanged)
+	Q_PROPERTY(bool flagModeSensor        READ getFlagModeSensor         WRITE setFlagModeSensor      NOTIFY flagModeSensorChanged)
+	Q_PROPERTY(bool flagModeTelrad        READ getFlagModeTelrad         WRITE setFlagModeTelrad      NOTIFY flagModeTelradChanged)
+	Q_PROPERTY(bool flagModeFinder        READ getFlagModeFinder         WRITE setFlagModeFinder      NOTIFY flagModeFinderChanged)
+	// This is another property for an Action. Switching it has no side effects, though, therefore it is not in the PluginMode enum.
+	Q_PROPERTY(bool enableCrosshairs      READ getEnableCrosshairs       WRITE toggleCrosshairs NOTIFY enableCrosshairsChanged)
 
 	Q_PROPERTY(int selectedCCDIndex       READ getSelectedCCDIndex       WRITE selectCCDAtIndex       NOTIFY selectedCCDChanged)
 	Q_PROPERTY(int selectedOcularIndex    READ getSelectedOcularIndex    WRITE selectOcularAtIndex    NOTIFY selectedOcularChanged)
@@ -162,15 +180,18 @@ public slots:
 	void prismPositionAngleReset();
 	void decrementCCDIndex();
 	void decrementOcularIndex();
+	void decrementFinderIndex();
 	void decrementTelescopeIndex();
 	void decrementLensIndex();
 	void displayPopupMenu();
-	//! This method is called with we detect that our hot key is pressed.  It handles
-	//! determining if we should do anything - based on a selected object.
-	void enableOcular(bool b);
-	bool getEnableOcular() const { return flagShowOculars; }
+	//! Just return current mode of operation
+	PluginMode getPluginMode() const { return pluginMode; }
+	//! Master switch. Must handle mode transitions cleanly: Disable mode specific settings/restore main app settings, change mode, enable possible new mode specific settings
+	void setPluginMode(PluginMode mode);
+
 	void incrementCCDIndex();
 	void incrementOcularIndex();
+	void incrementFinderIndex();
 	void incrementTelescopeIndex();
 	void incrementLensIndex();
 	void disableLens();
@@ -198,19 +219,18 @@ public slots:
 	void selectLensAtIndex(int index);           //!< index in the range -1:lenses.count(), else call is ignored
 	int getSelectedLensIndex() const {return selectedLensIndex; }
 
-	//! Toggles the sensor frame overlay.
-	void toggleCCD(bool show);
-	//! Toggles the sensor frame overlay (overloaded for blind switching).
+	void selectFinderAtIndex(int index);           //!< index in the range 0:finders.count(), else call is ignored
+	int getSelectedFinderIndex() const {return selectedFinderIndex; }
+
+	//! Toggles the sensor frame overlay //(overloaded for blind switching).
 	void toggleCCD();
-	bool getEnableCCD() const { return flagShowCCD; }
 	void toggleCrosshairs(bool show = true);
 	bool getEnableCrosshairs() const { return flagShowCrosshairs; }
-	//! Toggles the Telrad sight overlay.
-	void toggleTelrad(bool show);
-	bool getEnableTelrad() const { return flagShowTelrad; }
-	//! Toggles the Telrad sight overlay (overloaded for blind switching).
+
+	//! Toggles the Telrad sight overlay //(overloaded for blind switching).
 	void toggleTelrad();
-	
+	void toggleFinder();
+
 	void enableGuiPanel(bool enable = true);
 	bool getFlagGuiPanelEnabled(void) const {return flagGuiPanelEnabled;}
 	void setGuiPanelFontSize(int size);
@@ -242,6 +262,12 @@ public slots:
 
 	void setMagLimitStarsOcularsManual(double mag);
 	double getMagLimitStarsOcularsManual() const;
+
+	void setMagLimitPlanetsOcularsManual(double mag);
+	double getMagLimitPlanetsOcularsManual() const;
+
+	void setMagLimitDSOsOcularsManual(double mag);
+	double getMagLimitDSOsOcularsManual() const;
 
 	void setFlagInitFovUsage(const bool b);
 	bool getFlagInitFovUsage(void) const;
@@ -320,15 +346,42 @@ public slots:
 	void setFlagUseLargeFocuserOverlay(const bool b);
 	bool getFlagUseLargeFocuserOverlay(void) const;
 
+private slots:
+	// Switching or retrieving these 3 properties should not be done normally. We need those only for the Actions linked to the GUI buttons.
+	//! Indicates the ocular view overlay. Activating this also triggers setPluginMode()
+	void setFlagModeOcular(bool show);
+	//! Indicates the ocular view overlay.
+	bool getFlagModeOcular() { return flagModeOcular; }
+
+	//! Indicates the sensor frame overlay. Activating this also triggers setPluginMode()
+	void setFlagModeSensor(bool show);
+	//! Indicates the sensor frame overlay.
+	bool getFlagModeSensor() { return flagModeSensor; }
+
+	//! Indicates the Telrad sight overlay. Activating this also triggers setPluginMode()
+	void setFlagModeTelrad(bool show);
+	//! Indicates the Telrad sight overlay.
+	bool getFlagModeTelrad() const { return flagModeTelrad; }
+
+	//! Indicates the Finder overlay. Activating this also triggers setPluginMode()
+	void setFlagModeFinder(bool show);
+	//! Indicates the Finder overlay.
+	bool getFlagModeFinder() const { return flagModeFinder; }
+
 signals:
-	void enableOcularChanged(bool value);
+	void pluginModeChanged(PluginMode mode);
+	void flagModeOcularChanged(bool value);
+	void flagModeSensorChanged(bool value);
+	void flagModeTelradChanged(bool value);
+	void flagModeFinderChanged(bool value);
 	void enableCrosshairsChanged(bool value);
-	void enableCCDChanged(bool value);
-	void enableTelradChanged(bool value);
+	//void enableCCDChanged(bool value);
+	//void enableTelradChanged(bool value);
 	void selectedCCDChanged(int value);
 	void selectedOcularChanged(int value);
 	void selectedTelescopeChanged(int value);
 	void selectedLensChanged(int value);
+	void selectedFinderChanged(int value);
 	void selectedCCDRotationAngleChanged(double value);
 	void selectedCCDPrismPositionAngleChanged(double value);
 
@@ -382,8 +435,8 @@ private slots:
 	void updateLatestSelectedSSO();
 
 private:
-	//! Compute the limiting magnitude for a telescope
-	static double computeLimitMagnitude(Ocular *ocular, Telescope *telescope);
+	//! Compute the limiting magnitude for a telescope with aperture given in mm
+	static double computeLimitMagnitude(double aperture);
 
 	//! Set up the Qt actions needed to activate the plugin.
 	void initializeActivationActions();
@@ -404,9 +457,6 @@ private:
 	//! Should only be called from a 'ready' state; currently from the draw() method.
 	void paintText(const StelCore * core);
 
-	//! This method is called by the zoom() method, when this plugin is toggled off; it resets to the default view.
-	void unzoomOcular();
-
 	//! This method is responsible for ensuring a valid ini file for the plugin exists.  It first checks to see
 	//! if one exists in the expected location.  If it does not, a default one is copied into place, and the process
 	//! ends.  However, if one does exist, it opens it, and looks for the oculars_version key.  The value (or even
@@ -415,13 +465,22 @@ private:
 	//! Once there is a valid ini file, it is loaded into the settings attribute.
 	void validateAndLoadIniFile();
 
-	void toggleLines(bool visible);
+	//! Switch state of line displays for the Main application. Should be called when entering or leaving oculars view or when toggling the respective switch.
+	void handleLines(bool visibleMain);
+	//! Inhibit scaling up planets that may be active in the Main application.  Should be called when entering or leaving oculars, finder and sensors mode or when toggling the respective switch.
+	//! Set scaleMain to true to set the scale as given in the main program, false to store status and scale to 1.
+	void handlePlanetScaling(bool scaleMain);
+
+	//! adjust star, planet and nebula limiting magnitudes as required for Oculars and Finder views
+	//! set mode to the requested PluginMode.
+	//! @note: Currently it is recommended to first switch to OcNone, then OcOcular or OcFinder, and not switch between the two modes directly.
+	void handleMagnitudeLimits(PluginMode mode);
 
 	//! toggles the actual ocular view.
 	//! Record the state of the GridLinesMgr and other settings beforehand, so that they can be reset afterwards.
 	//! @param zoomedIn if true, this zoom operation is starting from an already zoomed state.
 	//!		False for the original state.
-	void zoom(bool zoomedIn);
+	//void zoom(bool zoomedIn);
 
 	//! This method is called by the zoom() method, when this plugin is toggled on; it resets the zoomed view.
 	void zoomOcular();
@@ -437,57 +496,111 @@ private:
 	//! Returns selected lens,or Q_NULLPTR if no lens is selected
 	Lens* selectedLens();
 
+	//! Store state of line displays from the Main application. The Oculars view may disable them.
+	void storeLineStateMain();
+	//! Restore state of line displays for the Main application. May be called when leaving oculars view or when toggling the respective switch.
+	void restoreLineStateMain();
+
+
 	//! A list of all the oculars defined in the ini file.  Must have at least one, or module will not run.
 	QList<CCD *> ccds;
 	QList<Ocular *> oculars;
 	QList<Telescope *> telescopes;
 	QList<Lens *> lenses;
+	QList<Finder *> finders;
 
 	int selectedCCDIndex;           //!< index of the current CCD, in the range of -1:ccds.count().  -1 means no CCD is selected.
 	int selectedOcularIndex;        //!< index of the current ocular, in the range of -1:oculars.count().  -1 means no ocular is selected.
 	int selectedTelescopeIndex;     //!< index of the current telescope, in the range of -1:telescopes.count(). -1 means none is selected.
-	int selectedLensIndex;          //!< index of the current lens, in the range of -1:lense.count(). -1 means no lens is selected
+	int selectedLensIndex;          //!< index of the current lens, in the range of -1:lenses.count(). -1 means no lens is selected.
+	int selectedFinderIndex;        //!< index of the current finder, in the range of -1:finders.count(). -1 means no finder is selected.
 	double selectedCCDRotationAngle;//!< allows rotating via property/remotecontrol API
 	double selectedCCDPrismPositionAngle;//!< allows rotating via property/remotecontrol API
 	int arrowButtonScale;           //!< allows scaling of the GUI "previous/next" Ocular/CCD/Telescope etc. buttons
 
 	QFont font;			//!< The font used for drawing labels.
-	bool flagShowCCD;		//!< flag used to track if we are in CCD mode.
-	bool flagShowOculars;		//!< flag used to track if we are in ocular mode.
+	PluginMode pluginMode;          //!< Current operational mode
+	// The next 4 are mutually exclusive "slave mode" flags to keep the buttons in the GUI showing active/inactive highlight state.
+	bool flagModeOcular;		//!< flag used to track if we are in ocular mode.
+	bool flagModeSensor;		//!< flag used to track if we are in CCD mode.
+	bool flagModeTelrad;		//!< flag used to track if we are in Telrad mode.
+	bool flagModeFinder;		//!< flag used to track if we are in Finder mode.
+
 	bool flagShowCrosshairs;	//!< flag used to track in crosshairs should be rendered in the ocular view.
-	bool flagShowTelrad;		//!< If true, display the Telrad overlay.
 	int usageMessageLabelID;	//!< the id of the label showing the usage message. -1 means it's not displayed.
 
 	bool flagCardinalPointsMain;	//!< Flag to track if CardinalPoints was displayed at activation.
 	bool flagAdaptationMain;	//!< Flag to track if adaptationCheckbox was enabled at activation.
 
+	// allow tracking of settings for manually configured magnitude limits for ocular and finder modes. See handleMagnitudeLimits().
 	bool flagLimitStarsMain;        //!< Flag to track limitation of stellar magnitude in the main program
 	double magLimitStarsMain;       //!< Value of limited stellar magnitude in the main program
+	bool flagLimitPlanetsMain;      //!< Flag to track limit magnitude for planets, asteroids, comets etc.
+	double magLimitPlanetsMain;     //!< Value of limited magnitude for planets, asteroids, comets etc.
+	bool flagLimitDSOsMain;		//!< Flag to track limit magnitude for DSOs
+	double magLimitDSOsMain;	//!< Value of limited magnitude for DSOs
+
 	bool flagLimitStarsOculars;	//!< Track whether a stellar magnitude limit should be activated when Oculars view is selected.
 					//!< This flag is not a StelProperty, but linked to SkyDrawer.flagStarMagnitudeLimit while oculars view is active.
 					//!< This is required to set the manual limitation flag in SkyDrawer.
 	double magLimitStarsOculars;    //!< Value of limited magnitude for stars in oculars mode, when not auto-defined with flagAutoLimitMagnitude.
 					//!< This value is not a StelProperty, but linked to SkyDrawer.customStarMagLimit while oculars view is active and automatic setting of magnitude is not active.
 					//!< If user modifies the magnitude while flagAutoLimitMagnitude is true, the value will not be stored permanently. [FIXME: Recheck this sentence.]
-	bool flagAutoLimitMagnitude;    //!< Decide whether stellar magnitudes should be auto-limited based on telescope/ocular combination.
-					//!< If false, the manual limitation value magLimitStarsOculars takes over, and limitation is decided by flagLimitStarsOculars.
-					//!< If true, flagLimitStarsOculars is set true when activating Oculars view, and will remain true.
-	bool flagLimitDSOsMain;		//!< Flag to track limit magnitude for DSOs
-	double magLimitDSOsMain;	//!< Value of limited magnitude for DSOs
-	bool flagLimitPlanetsMain;      //!< Flag to track limit magnitude for planets, asteroids, comets etc.
-	double magLimitPlanetsMain;     //!< Value of limited magnitude for planets, asteroids, comets etc.
+	bool flagLimitPlanetsOculars;	//!< Track whether a planet magnitude limit should be activated when Oculars view is selected.
+					//!< This flag is not a StelProperty, but linked to SkyDrawer.flagPlanetMagnitudeLimit while oculars view is active.
+					//!< This is required to set the manual limitation flag in SkyDrawer.
+	double magLimitPlanetsOculars;  //!< Value of limited magnitude for planets in oculars mode, when not auto-defined with flagAutoLimitMagnitude.
+					//!< This value is not a StelProperty, but linked to SkyDrawer.customPlanetMagLimit while oculars view is active and automatic setting of magnitude is not active.
+					//!< If user modifies the magnitude while flagAutoLimitMagnitude is true, the value will not be stored permanently. [FIXME: Recheck this sentence.]
+	bool flagLimitDSOsOculars;	//!< Track whether a nebula magnitude limit should be activated when Oculars view is selected.
+					//!< This flag is not a StelProperty, but linked to SkyDrawer.flagNebulaMagnitudeLimit while oculars view is active.
+					//!< This is required to set the manual limitation flag in SkyDrawer.
+	double magLimitDSOsOculars;     //!< Value of limited magnitude for nebula in oculars mode, when not auto-defined with flagAutoLimitMagnitude.
+					//!< This value is not a StelProperty, but linked to SkyDrawer.customNebulaMagLimit while oculars view is active and automatic setting of magnitude is not active.
+					//!< If user modifies the magnitude while flagAutoLimitMagnitude is true, the value will not be stored permanently. [FIXME: Recheck this sentence.]
+
+	bool flagLimitStarsFinder; 	//!< Track whether a stellar magnitude limit should be activated when Finder view is selected.
+					//!< This flag is not a StelProperty, but linked to SkyDrawer.flagStarMagnitudeLimit while finder view is active.
+					//!< This is required to set the manual limitation flag in SkyDrawer.
+	double magLimitStarsFinder;     //!< Value of limited magnitude for stars in finder mode, when not auto-defined with flagAutoLimitMagnitude.
+					//!< This value is not a StelProperty, but linked to SkyDrawer.customStarMagLimit while finder view is active and automatic setting of magnitude is not active.
+					//!< If user modifies the magnitude while flagAutoLimitMagnitude is true, the value will not be stored permanently. [FIXME: Recheck this sentence.]
+	bool flagLimitPlanetsFinder;	//!< Track whether a planet magnitude limit should be activated when Finder view is selected.
+					//!< This flag is not a StelProperty, but linked to SkyDrawer.flagPlanetMagnitudeLimit while finderview is active.
+					//!< This is required to set the manual limitation flag in SkyDrawer.
+	double magLimitPlanetsFinder;   //!< Value of limited magnitude for planets in finder mode, when not auto-defined with flagAutoLimitMagnitude.
+					//!< This value is not a StelProperty, but linked to SkyDrawer.customPlanetMagLimit while finder view is active and automatic setting of magnitude is not active.
+					//!< If user modifies the magnitude while flagAutoLimitMagnitude is true, the value will not be stored permanently. [FIXME: Recheck this sentence.]
+	bool flagLimitDSOsFinder;	//!< Track whether a nebula magnitude limit should be activated when finder view is selected.
+					//!< This flag is not a StelProperty, but linked to SkyDrawer.flagNebulaMagnitudeLimit while finder view is active.
+					//!< This is required to set the manual limitation flag in SkyDrawer.
+	double magLimitDSOsFinder;      //!< Value of limited magnitude for nebula in finder mode, when not auto-defined with flagAutoLimitMagnitude.
+					//!< This value is not a StelProperty, but linked to SkyDrawer.customNebulaMagLimit while finder view is active and automatic setting of magnitude is not active.
+					//!< If user modifies the magnitude while flagAutoLimitMagnitude is true, the value will not be stored permanently. [FIXME: Recheck this sentence.]
+
+	bool flagAutoLimitMagnitude;    //!< Decide whether stellar and other magnitudes should be auto-limited based on telescope/ocular combination.
+					//!< If false, the manual limitation value magLimit(Stars|Planets|Nebula)(Oculars|Finder) takes over, and limitation is decided by flagLimit(Stars|Planets|Nebula)(Oculars|Finder).
+					//!< If true, flagLimit(Stars|Planets|Nebula)(Oculars|Finder) is set true when activating Oculars view, and will remain true.
+					//!
+
+	// allow tracking and restoring star scales between various modes
 	double relativeStarScaleMain;   //!< Value to store the usual relative star scale when activating ocular or CCD view
 	double absoluteStarScaleMain;   //!< Value to store the usual absolute star scale when activating ocular or CCD view
 	double relativeStarScaleOculars;	//!< Value to store the relative star scale when switching off ocular view
 	double absoluteStarScaleOculars;	//!< Value to store the absolute star scale when switching off ocular view
 	double relativeStarScaleCCD;    //!< Value to store the relative star scale when switching off CCD view
 	double absoluteStarScaleCCD;    //!< Value to store the absolute star scale when switching off CCD view
-	bool flagMoonScaleMain;	        //!< Flag to track of usage zooming of the Moon
-	bool flagMinorBodiesScaleMain;  //!< Flag to track of usage zooming of minor bodies
-	bool flagSunScaleMain;	        //!< Flag to track of usage zooming of the Sun
-	bool flagPlanetsScaleMain;	//!< Flag to track of usage zooming of major planets
+	double relativeStarScaleFinder; //!< Value to store the relative star scale when switching off finder view
+	double absoluteStarScaleFinder; //!< Value to store the absolute star scale when switching off finder view
+
+	// variables for handlePlanetScaling()
+	bool flagMoonScaleMain;	        //!< Flag to track of usage of artificial scaling of the Moon
+	bool flagMinorBodiesScaleMain;  //!< Flag to track of usage of artificial scaling of minor bodies
+	bool flagPlanetScaleMain;       //!< Flag to track of usage of artificial scaling of planets
+	bool flagSunScaleMain;          //!< Flag to track of usage of artificial scaling of the Sun
 	bool flagDSOPropHintMain;	//!< Flag to track of usage proportional hints for DSO
-	double milkyWaySaturation;
+
+	double milkyWaySaturationMain;
 
 	double maxEyepieceAngle;        //!< The maximum aFOV of any eyepiece.
 	bool flagRequireSelection;      //!< Decide whether an object is required to be selected to zoom in.
@@ -498,12 +611,15 @@ private:
 	bool flagHorizontalCoordinates;  //!< Use horizontal coordinates instead equatorial coordinates for cross of center CCD
 	bool flagSemiTransparency;       //!< Draw the area outside the ocular circle not black but let some stars through.
 	int transparencyMask;		 //!< Value of transparency for semi-transparent mask
+
+	// variables for handleLines()
 	bool flagHideGridsLines;         //!< Switch off all grids and lines of GridMgr while in Ocular view
 	bool flagGridLinesDisplayedMain; //!< keep track of gridline display while possibly suppressing their display.
 	bool flagConstellationLinesMain; //!< keep track of constellation display while possibly suppressing their display.
 	bool flagConstellationBoundariesMain; //!< keep track of constellation display while possibly suppressing their display.
 	bool flagAsterismLinesMain;      //!< keep track of asterism display while possibly suppressing their display.
 	bool flagRayHelpersLinesMain;      //!< keep track of ray helpers display while possibly suppressing their display.
+
 	bool flipVertMain;               //!< keep track of screen flip in main program
 	bool flipHorzMain;               //!< keep track of screen flip in main program
 
@@ -521,6 +637,7 @@ private:
 	StelAction * actionShowCrosshairs;
 	StelAction * actionShowSensor;
 	StelAction * actionShowTelrad;
+	StelAction * actionShowFinder;
 	StelAction * actionConfiguration;
 	StelAction * actionMenu;
 	StelAction * actionTelescopeIncrement;

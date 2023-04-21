@@ -44,13 +44,13 @@ Telescope::~Telescope()
 {
 }
 
-const QMap<int, QString> Telescope::mapping = {
-	{0, "name"},
-	{1, "diameter"},
-	{2, "focalLength"},
-	{3, "hFlipped"},
-	{4, "vFlipped"},
-	{5, "equatorial"}};
+const QMap<int, QString> Telescope::mapping={
+	{0, "name"        },
+	{1, "diameter"    },
+	{2, "focalLength" },
+	{3, "hFlipped"	  },
+	{4, "vFlipped"	  },
+	{5, "equatorial"  }};
 
 QMap<int, QString> Telescope::propertyMap()
 {

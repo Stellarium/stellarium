@@ -45,7 +45,11 @@ public:
 	static Ocular * ocularFromSettings(const QSettings * theSettings, const int ocularIndex);
 	void writeToSettings(QSettings * settings, const int index);
 	static Ocular * ocularModel(void);
+	double actualFOV(const Telescope * telescope, const Lens *lens) const;
+	double magnification(const Telescope * telescope, const Lens *lens) const;
+	QMap<int, QString> propertyMap(void);
 
+public slots:
 	bool isBinoculars(void) const;
 	void setBinoculars(const bool flag);
 	bool hasPermanentCrosshair(void) const;
@@ -60,10 +64,6 @@ public:
 	void setName(const QString aName);
 	QString reticlePath(void) const;
 	void setReticlePath(const QString path);
-
-	double actualFOV(const Telescope * telescope, const Lens *lens) const;
-	double magnification(const Telescope * telescope, const Lens *lens) const;
-	QMap<int, QString> propertyMap(void);
 
 private:
 	bool m_binoculars;

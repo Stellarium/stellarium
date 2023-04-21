@@ -13,6 +13,8 @@ SET(Oculars_SRCS
      Lens.cpp
      Ocular.hpp
      Ocular.cpp
+     Finder.hpp
+     Finder.cpp
      Oculars.hpp
      Oculars.cpp
      Telescope.hpp

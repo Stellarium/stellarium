@@ -47,6 +47,8 @@ public slots:
 	void showOcularGui();
 	//! Show only the controls used with a CCD overlay.
 	void showCcdGui();
+	//! Show only the controls used with a finder overlay.
+	void showFinderGui();
 	//! Hide the controls, leaving only the button bar.
 	void foldGui();
 
@@ -55,15 +57,17 @@ private slots:
 	//! Tied to the parent's geometryChanged() signal.
 	void updatePosition();
 
-	//! Updates the information shown when an ocular overlay is displayed
+	//! Updates the information shown when an ocular overlay is displayed. Hides CCD/Finder controls.
 	void updateOcularControls();
-	//! Updates the information shown when a sensor overlay is displayed
+	//! Updates the information shown when a sensor overlay is displayed. Hides Ocular/Finder controls.
 	void updateCcdControls();
 	//! Updates the information that depends on the current telescope.
 	//! Called in both updateOcularControls() and updateCcdControls().
 	void updateTelescopeControls();
-	//! Updates the information that depends on the current lens
+	//! Updates the information that depends on the current lens.
 	void updateLensControls();
+	//! Updates the information that depends on the current finder. Hides Ocular/Lens/Telescope.
+	void updateFinderControls();
 	//! Sets the color scheme (day/night mode)
 	void setColorScheme(const QString& schemeName);
 
@@ -83,12 +87,14 @@ private:
 	QGraphicsWidget* lensControls;
 	QGraphicsWidget* ccdControls;
 	QGraphicsWidget* telescopeControls;
+	QGraphicsWidget* finderControls;
 
 	//Mini-toolbar
 	StelButton* buttonOcular;
 	StelButton* buttonCrosshairs;
 	StelButton* buttonCcd;
 	StelButton* buttonTelrad;
+	StelButton* buttonFinder;
 	StelButton* buttonConfiguration;
 
 	//Information display
@@ -96,6 +102,8 @@ private:
 	StelButton* nextOcularButton;
 	StelButton* prevTelescopeButton;
 	StelButton* nextTelescopeButton;
+	StelButton* prevFinderButton;
+	StelButton* nextFinderButton;
 	StelButton* prevCcdButton;
 	StelButton* nextCcdButton;
 	StelButton* prevLensButton;
@@ -105,6 +113,10 @@ private:
 	QGraphicsTextItem* fieldOcularName;
 	QGraphicsTextItem* fieldOcularFl;
 	QGraphicsTextItem* fieldOcularAfov;
+	QGraphicsTextItem* fieldFinderName;
+	QGraphicsTextItem* fieldFinderTfov;
+	QGraphicsTextItem* fieldFinderAperture;
+	QGraphicsTextItem* fieldFinderExitPupil;
 	QGraphicsTextItem* fieldCcdName;
 	QGraphicsTextItem* fieldCcdDimensions;
 	QGraphicsTextItem* fieldCcdBinning;
@@ -143,6 +155,7 @@ private:
 	void setCcdControlsVisible(bool show);
 	void setTelescopeControlsVisible(bool show);
 	void setLensControlsVisible(bool show);
+	void setFinderControlsVisible(bool show);
 	//! Updates the positions of the buttons inside the button bar.
 	void updateMainButtonsPositions();
 

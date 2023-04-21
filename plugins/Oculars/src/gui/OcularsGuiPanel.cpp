@@ -80,6 +80,15 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 				   true);
 	buttonCcd->setToolTip(ocularsPlugin->actionShowSensor->getText());
 
+	Q_ASSERT(ocularsPlugin->actionShowFinder);
+	buttonFinder = new StelButton(buttonBar,
+				      QPixmap(":/ocular/bt_binocular_on.png"),
+				      QPixmap(":/ocular/bt_binocular_off.png"),
+				      QPixmap(),
+				      ocularsPlugin->actionShowFinder,
+				      true);
+	buttonFinder->setToolTip(ocularsPlugin->actionShowFinder->getText());
+
 	Q_ASSERT(ocularsPlugin->actionShowTelrad);
 	buttonTelrad = new StelButton(buttonBar,
 				      QPixmap(":/ocular/bt_telrad_on.png"),
@@ -113,10 +122,15 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	ccdControls->setVisible(false);
 	telescopeControls = new QGraphicsWidget(this);
 	telescopeControls->setVisible(false);
+	finderControls = new QGraphicsWidget(this);
+	finderControls->setVisible(false);
 
 	fieldOcularName = new QGraphicsTextItem(ocularControls);
 	fieldOcularFl = new QGraphicsTextItem(ocularControls);
 	fieldOcularAfov = new QGraphicsTextItem(ocularControls);
+	fieldFinderName = new QGraphicsTextItem(ocularControls);
+	fieldFinderTfov = new QGraphicsTextItem(ocularControls);
+	fieldFinderAperture = new QGraphicsTextItem(ocularControls);
 	fieldCcdName = new QGraphicsTextItem(ccdControls);
 	fieldCcdDimensions = new QGraphicsTextItem(ccdControls);
 	fieldCcdBinning = new QGraphicsTextItem(ccdControls);
@@ -149,6 +163,9 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	fieldOcularName->setTextWidth(maxWidth);
 	fieldOcularFl->setTextWidth(maxWidth);
 	fieldOcularAfov->setTextWidth(maxWidth);
+	fieldFinderName->setTextWidth(maxWidth);
+	fieldFinderTfov->setTextWidth(maxWidth);
+	fieldFinderAperture->setTextWidth(maxWidth);
 	fieldCcdName->setTextWidth(maxWidth);
 	fieldCcdDimensions->setTextWidth(maxWidth);
 	fieldCcdBinning->setTextWidth(maxWidth);
@@ -185,6 +202,8 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	QString ocularsGroup = N_("Oculars"); // Possible group name: Oculars on-screen control panel
 	actionMgr->addAction("actionToggle_Oculars_Previous_Ocular", ocularsGroup, N_("Previous ocular"), this, "updateOcularControls()", "", "");
 	actionMgr->addAction("actionToggle_Oculars_Next_Ocular", ocularsGroup, N_("Next ocular"), this, "updateOcularControls()", "", "");
+	actionMgr->addAction("actionToggle_Oculars_Previous_Finder", ocularsGroup, N_("Previous finder"), this, "updateFinderControls()", "", "");
+	actionMgr->addAction("actionToggle_Oculars_Next_Finder", ocularsGroup, N_("Next finder"), this, "updateFinderControls()", "", "");
 	actionMgr->addAction("actionToggle_Oculars_Previous_Lens", ocularsGroup, N_("Previous lens"), this, "updateLensControls()", "", "");
 	actionMgr->addAction("actionToggle_Oculars_Next_Lens", ocularsGroup, N_("Next lens"), this, "updateLensControls()", "", "");
 	actionMgr->addAction("actionToggle_Oculars_Previous_CCD", ocularsGroup, N_("Previous CCD frame"), this, "updateCcdControls()", "", "");
@@ -212,6 +231,10 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	prevOcularButton->setToolTip(q_("Previous ocular"));
 	nextOcularButton = new StelButton(ocularControls, nextArrow, nextArrowOff, QPixmap(), "actionToggle_Oculars_Next_Ocular");
 	nextOcularButton->setToolTip(q_("Next ocular"));
+	prevFinderButton = new StelButton(finderControls, prevArrow, prevArrowOff, QPixmap(), "actionToggle_Oculars_Previous_Finder");
+	prevFinderButton->setToolTip(q_("Previous finder"));
+	nextFinderButton = new StelButton(finderControls, nextArrow, nextArrowOff, QPixmap(), "actionToggle_Oculars_Next_Finder");
+	nextFinderButton->setToolTip(q_("Next finder"));
 	prevLensButton = new StelButton(lensControls, prevArrow, prevArrowOff, QPixmap(), "actionToggle_Oculars_Previous_Lens");
 	prevLensButton->setToolTip(q_("Previous lens"));
 	nextLensButton = new StelButton(lensControls, nextArrow, nextArrowOff, QPixmap(), "actionToggle_Oculars_Next_Lens");
@@ -227,6 +250,8 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 
 	connect(prevOcularButton,    SIGNAL(triggered()), ocularsPlugin, SLOT(decrementOcularIndex()));
 	connect(nextOcularButton,    SIGNAL(triggered()), ocularsPlugin, SLOT(incrementOcularIndex()));
+	connect(prevFinderButton,    SIGNAL(triggered()), ocularsPlugin, SLOT(decrementFinderIndex()));
+	connect(nextFinderButton,    SIGNAL(triggered()), ocularsPlugin, SLOT(incrementFinderIndex()));
 	connect(prevTelescopeButton, SIGNAL(triggered()), ocularsPlugin, SLOT(decrementTelescopeIndex()));
 	connect(nextTelescopeButton, SIGNAL(triggered()), ocularsPlugin, SLOT(incrementTelescopeIndex()));
 	connect(prevCcdButton,       SIGNAL(triggered()), ocularsPlugin, SLOT(decrementCCDIndex()));
@@ -234,9 +259,9 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	connect(nextLensButton,      SIGNAL(triggered()), ocularsPlugin, SLOT(incrementLensIndex()));
 	connect(prevLensButton,      SIGNAL(triggered()), ocularsPlugin, SLOT(decrementLensIndex()));
 
-	QColor cOn(255, 255, 255);
-	QColor cOff(102, 102, 102);
-	QColor cHover(162, 162, 162);
+	const QColor cOn(255, 255, 255);
+	const QColor cOff(102, 102, 102);
+	const QColor cHover(162, 162, 162);
 	QString degrees = QString("-15%1").arg(QChar(0x00B0));
 	int degreesW = fm.boundingRect(degrees).width();
 	QPixmap pOn    = createPixmapFromText(degrees, degreesW, lineHeight, newFont, cOn);
@@ -347,6 +372,7 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	ccdControls->setMaximumWidth(width);
 	telescopeControls->setMaximumWidth(width);
 	lensControls->setMaximumWidth(width);
+	finderControls->setMaximumWidth(width);
 	resize(width + left + right, 10);
 	buttonBar->resize(width, size().height());
 	updateMainButtonsPositions();
@@ -383,10 +409,14 @@ OcularsGuiPanel::~OcularsGuiPanel()
 
 	delete buttonCrosshairs; buttonCrosshairs = Q_NULLPTR;
 	delete buttonCcd; buttonCcd = Q_NULLPTR;
+	delete buttonFinder;	buttonFinder= Q_NULLPTR;
 	delete buttonTelrad;	buttonTelrad = Q_NULLPTR;
 	delete buttonConfiguration; buttonConfiguration = Q_NULLPTR;
 	delete fieldOcularFl; fieldOcularFl = Q_NULLPTR;
 	delete fieldOcularAfov; fieldOcularAfov = Q_NULLPTR;
+	delete fieldFinderName; fieldFinderName = Q_NULLPTR;
+	delete fieldFinderTfov; fieldFinderTfov = Q_NULLPTR;
+	delete fieldFinderAperture; fieldFinderAperture = Q_NULLPTR;
 	delete fieldCcdName; fieldCcdName = Q_NULLPTR;
 	delete fieldCcdDimensions; fieldCcdDimensions = Q_NULLPTR;
 	delete fieldCcdBinning; fieldCcdBinning = Q_NULLPTR;
@@ -410,7 +440,7 @@ OcularsGuiPanel::~OcularsGuiPanel()
 void OcularsGuiPanel::showOcularGui()
 {
 	setPreferredHeight(0);//WTF?
-	if (ocularsPlugin->flagShowOculars)
+	if (ocularsPlugin->getPluginMode()==Oculars::OcOcular)
 	{
 		updateOcularControls();
 	}
@@ -425,16 +455,41 @@ void OcularsGuiPanel::showOcularGui()
 
 void OcularsGuiPanel::showCcdGui()
 {
+	Q_ASSERT(ocularsPlugin->getPluginMode()==Oculars::OcSensor);
+	// GZ: I moved that here from updateCCDControls() because oculars should not be visible when able to call updateCCDControls by GUI buttons, and for clearer reading.
+	setOcularControlsVisible(false);
+
+	setFinderControlsVisible(false);
 	updateCcdControls();
+}
+
+void OcularsGuiPanel::showFinderGui()
+{
+	setPreferredHeight(0);//WTF?
+	if (ocularsPlugin->getPluginMode()==Oculars::OcFinder)
+	{
+		setOcularControlsVisible(false);
+		setTelescopeControlsVisible(false);
+		setLensControlsVisible(false);
+		setCcdControlsVisible(false);
+		setFinderControlsVisible(true);
+		updatePosition();
+	}
+	else
+	{
+		setFinderControlsVisible(false);
+		updatePosition();
+	}
 }
 
 void OcularsGuiPanel::foldGui()
 {
-	//qDebug() << "hidePanel()";
+	//qDebug() << "foldGui()";
 	setOcularControlsVisible(false);
 	setCcdControlsVisible(false);
 	setTelescopeControlsVisible(false);
 	setLensControlsVisible(false);
+	setFinderControlsVisible(false);
 	updatePosition();
 }
 
@@ -469,6 +524,7 @@ void OcularsGuiPanel::updatePosition()
 void OcularsGuiPanel::updateOcularControls()
 {
 	setCcdControlsVisible(false);
+	setFinderControlsVisible(false);
 
 	//Get the name
 	int index = ocularsPlugin->selectedOcularIndex;
@@ -543,10 +599,91 @@ void OcularsGuiPanel::updateOcularControls()
 
 	ocularControls->setMinimumSize(widgetWidth, widgetHeight);
 	ocularControls->resize(widgetWidth, widgetHeight);
-	setOcularControlsVisible(ocularsPlugin->getEnableOcular());
+	setOcularControlsVisible(ocularsPlugin->getPluginMode()==Oculars::OcOcular);
 
 	updateTelescopeControls();//Contains a call to updatePosition()
 }
+
+void OcularsGuiPanel::updateFinderControls()
+{
+	qDebug() << "updateFinderControls()...";
+	setCcdControlsVisible(false);
+	setOcularControlsVisible(false);
+	setLensControlsVisible(false);
+
+	//Get the name
+	int index = ocularsPlugin->selectedFinderIndex;
+	Finder* finder = ocularsPlugin->finders[index];
+	Q_ASSERT(finder);
+	QString name = finder->name();
+	QString fullName;
+	const QString finderI18n = q_("Finder");
+	if (name.isEmpty())
+	{
+		fullName = QString("%1 #%2").arg(finderI18n).arg(index);
+	}
+	else
+	{
+		fullName = QString("%1 #%2: %3").arg(finderI18n).arg(index).arg(name);
+	}
+	fieldFinderName->setPlainText(fullName);
+
+	qreal posX = 0.;
+	qreal posY = 0.;
+	qreal widgetWidth = 0.;
+	qreal widgetHeight = 0.;
+
+	//Prev button
+	qreal heightAdjustment = (fieldFinderName->boundingRect().height() - prevFinderButton->boundingRect().height()) / 2.;
+	prevFinderButton->setPos(posX, qRound(posY + heightAdjustment));
+	posX += prevFinderButton->boundingRect().width();
+	widgetWidth += prevFinderButton->boundingRect().width();
+
+	//Name field
+	fieldFinderName->setPos(posX, posY);
+	posX += fieldFinderName->boundingRect().width();
+	widgetWidth += fieldFinderName->boundingRect().width();
+
+	//Next button
+	nextFinderButton->setPos(posX, posY + heightAdjustment);
+	widgetWidth += nextFinderButton->boundingRect().width();
+
+	posX = prevFinderButton->boundingRect().width();
+	posY += fieldFinderName->boundingRect().height();
+	widgetHeight += fieldFinderName->boundingRect().height();
+
+	buttonCrosshairs->setEnabled(!finder->hasPermanentCrosshair());
+	QString apertureString = QString(q_("Finder Ap: %1 mm")).arg(QString::number(finder->aperture(), 'f', 1));
+	fieldFinderAperture->setPlainText(apertureString);
+	fieldFinderAperture->setToolTip(q_("Finder aperture"));
+	fieldFinderAperture->setPos(posX, posY);
+	posY += fieldFinderAperture->boundingRect().height();
+	widgetHeight += fieldFinderAperture->boundingRect().height();
+
+	QString trueFovLabel = QString("%1: %2°").arg(q_("Finder tFOV")).arg(QString::number(finder->apparentFOV(), 'f', 2));
+	fieldFinderTfov->setPlainText(trueFovLabel);
+	fieldFinderTfov->setToolTip(q_("True field of view of the finder"));
+	fieldFinderTfov->setPos(posX, posY);
+	widgetHeight += fieldFinderTfov->boundingRect().height();
+
+	QString exitPupilLabel = QString("%1: %2 mm").arg(q_("Finder exit pupil")).arg(QString::number(finder->aperture()/finder->magnification(), 'f', 2));
+	fieldFinderExitPupil->setPlainText(exitPupilLabel);
+	fieldFinderExitPupil->setToolTip(q_("Exit pupil diameter of the finder"));
+	fieldFinderExitPupil->setPos(posX, posY);
+	widgetHeight += fieldFinderExitPupil->boundingRect().height();
+
+	//fieldFinderAperture->setVisible(true);
+	//fieldFinderTfov->setVisible(true);
+
+	finderControls->setMinimumSize(widgetWidth, widgetHeight);
+	finderControls->resize(widgetWidth, widgetHeight);
+	setFinderControlsVisible(true);
+
+	updateTelescopeControls();//Contains a call to updatePosition()
+	qDebug() << "updateFinderControls()...done";
+
+}
+
 
 void OcularsGuiPanel::updateLensControls()
 {
@@ -609,20 +746,16 @@ void OcularsGuiPanel::updateLensControls()
 
 	int oindex = ocularsPlugin->selectedOcularIndex;
 	Ocular* ocular = ocularsPlugin->oculars[oindex];
-	if (ocularsPlugin->getEnableCCD() || ocularsPlugin->getEnableOcular())
-	{
-		if (ocular->isBinoculars() && ocularsPlugin->getEnableOcular()) // Hide the lens info for binoculars in eyepiece mode only
-			setLensControlsVisible(false);
-		else
-			setLensControlsVisible(true);
-	}
+	if (ocular->isBinoculars() && (ocularsPlugin->getPluginMode()==Oculars::OcOcular)) // Hide the lens info for binoculars in eyepiece mode only
+		setLensControlsVisible(false);
 	else
 		setLensControlsVisible(false);
 }
 
 void OcularsGuiPanel::updateCcdControls()
 {
-	setOcularControlsVisible(false);
+	Q_ASSERT(! ocularControls->isVisible());
+	Q_ASSERT(ocularsPlugin->getPluginMode()==Oculars::OcSensor);
 
 	//Get the name
 	int index = ocularsPlugin->selectedCCDIndex;
@@ -791,7 +924,7 @@ void OcularsGuiPanel::updateCcdControls()
 
 	ccdControls->setMinimumSize(widgetWidth, widgetHeight);
 	ccdControls->resize(widgetWidth, widgetHeight);
-	setCcdControlsVisible(ocularsPlugin->getEnableCCD());
+	setCcdControlsVisible(ocularsPlugin->getPluginMode()==Oculars::OcSensor);
 
 	updateTelescopeControls();//Contains a call to updatePosition()
 }
@@ -842,7 +975,7 @@ void OcularsGuiPanel::updateTelescopeControls()
 
 	double mag = 0.0;
 
-	if (ocularsPlugin->flagShowCCD)
+	if (ocularsPlugin->getPluginMode()==Oculars::OcSensor)
 	{
 		int index = ocularsPlugin->selectedCCDIndex;
 		CCD* ccd = ocularsPlugin->ccds[index];
@@ -873,7 +1006,7 @@ void OcularsGuiPanel::updateTelescopeControls()
 		fieldFov->setVisible(false);
 	}
 
-	if (ocularsPlugin->flagShowOculars)
+	if (ocularsPlugin->getPluginMode()==Oculars::OcOcular)
 	{
 		//We need the current ocular
 		int index = ocularsPlugin->selectedOcularIndex;
@@ -972,7 +1105,6 @@ void OcularsGuiPanel::updateTelescopeControls()
 		posY += fieldSparrowCriterion->boundingRect().height();
 		widgetHeight += fieldSparrowCriterion->boundingRect().height();
 
-
 		fieldRayleighCriterion->setVisible(true);
 		fieldDawesCriterion->setVisible(true);
 		fieldAbbeyCriterion->setVisible(true);
@@ -987,12 +1119,10 @@ void OcularsGuiPanel::updateTelescopeControls()
 	}
 
 	// Visual resolution
-	if (ocularsPlugin->flagShowOculars && ocularsPlugin->getFlagShowResolutionCriteria() && diameter>0.0)
+	if (ocularsPlugin->getPluginMode()==Oculars::OcOcular && ocularsPlugin->getFlagShowResolutionCriteria() && diameter>0.0)
 	{
-		double rayleigh = 138/diameter;
-		double vres = 60/mag;
-		if (vres<rayleigh)
-			vres = rayleigh;
+		const double rayleigh = 138/diameter;
+		const double vres = qMax(60/mag, rayleigh);
 		QString visualResolutionLabel = QString("%1: %2\"").arg(q_("Visual resolution"), QString::number(vres, 'f', 2));
 		fieldVisualResolution->setPlainText(visualResolutionLabel);
 		fieldVisualResolution->setToolTip(q_("Visual resolution is based on eye properties and magnification"));
@@ -1007,7 +1137,7 @@ void OcularsGuiPanel::updateTelescopeControls()
 
 	telescopeControls->setMinimumSize(widgetWidth, widgetHeight);
 	telescopeControls->resize(widgetWidth, widgetHeight);
-	if (ocularsPlugin->getEnableCCD() || ocularsPlugin->getEnableOcular())
+	if (ocularsPlugin->getPluginMode()==Oculars::OcSensor || ocularsPlugin->getPluginMode()==Oculars::OcOcular)
 		setTelescopeControlsVisible(true);
 	else
 		setTelescopeControlsVisible(false);
@@ -1055,6 +1185,28 @@ void OcularsGuiPanel::setOcularControlsVisible(bool show)
 		{
 			mainLayout->removeItem(ocularControls);
 			ocularControls->setVisible(false);
+		}
+	}
+	buttonCrosshairs->setVisible(show);
+	updateMainButtonsPositions();
+}
+
+void OcularsGuiPanel::setFinderControlsVisible(bool show)
+{
+	if (show)
+	{
+		if (!finderControls->isVisible())
+		{
+			finderControls->setVisible(true);
+			mainLayout->insertItem(1, finderControls);
+		}
+	}
+	else
+	{
+		if (finderControls->isVisible())
+		{
+			mainLayout->removeItem(finderControls);
+			finderControls->setVisible(false);
 		}
 	}
 	buttonCrosshairs->setVisible(show);
@@ -1110,9 +1262,10 @@ void OcularsGuiPanel::updateMainButtonsPositions()
 	Q_ASSERT(buttonCrosshairs);
 	Q_ASSERT(buttonCcd);
 	Q_ASSERT(buttonTelrad);
+	Q_ASSERT(buttonFinder);
 	Q_ASSERT(buttonConfiguration);
 
-	int n = buttonCrosshairs->isVisible() ? 5 : 4;
+	const int n = buttonCrosshairs->isVisible() ? 6 : 5;
 	qreal width = n * buttonOcular->getButtonPixmapWidth();
 
 	//Relative position inside the parent widget
@@ -1139,6 +1292,8 @@ void OcularsGuiPanel::updateMainButtonsPositions()
 	}
 	buttonCcd->setPos(posX, posY);
 	posX += buttonCcd->getButtonPixmapWidth()  + spacing;
+	buttonFinder->setPos(posX, posY);
+	posX += buttonFinder->getButtonPixmapWidth() + spacing;
 	buttonTelrad->setPos(posX, posY);
 	posX += buttonTelrad->getButtonPixmapWidth() + spacing;
 	buttonConfiguration->setPos(posX, posY);
@@ -1149,6 +1304,9 @@ void OcularsGuiPanel::setControlsColor(const QColor& color)
 	Q_ASSERT(fieldOcularName);
 	Q_ASSERT(fieldOcularFl);
 	Q_ASSERT(fieldOcularAfov);
+	Q_ASSERT(fieldFinderName);
+	Q_ASSERT(fieldFinderTfov);
+	Q_ASSERT(fieldFinderAperture);
 	Q_ASSERT(fieldCcdName);
 	Q_ASSERT(fieldCcdDimensions);
 	Q_ASSERT(fieldCcdBinning);
@@ -1171,6 +1329,9 @@ void OcularsGuiPanel::setControlsColor(const QColor& color)
 	fieldOcularName->setDefaultTextColor(color);
 	fieldOcularFl->setDefaultTextColor(color);
 	fieldOcularAfov->setDefaultTextColor(color);
+	fieldFinderName->setDefaultTextColor(color);
+	fieldFinderTfov->setDefaultTextColor(color);
+	fieldFinderAperture->setDefaultTextColor(color);
 	fieldCcdName->setDefaultTextColor(color);
 	fieldCcdDimensions->setDefaultTextColor(color);
 	fieldCcdBinning->setDefaultTextColor(color);
@@ -1196,6 +1357,9 @@ void OcularsGuiPanel::setControlsFont(const QFont& font)
 	Q_ASSERT(fieldOcularName);
 	Q_ASSERT(fieldOcularFl);
 	Q_ASSERT(fieldOcularAfov);
+	Q_ASSERT(fieldFinderName);
+	Q_ASSERT(fieldFinderTfov);
+	Q_ASSERT(fieldFinderAperture);
 	Q_ASSERT(fieldCcdName);
 	Q_ASSERT(fieldCcdDimensions);
 	Q_ASSERT(fieldCcdBinning);
@@ -1218,6 +1382,9 @@ void OcularsGuiPanel::setControlsFont(const QFont& font)
 	fieldOcularName->setFont(font);
 	fieldOcularFl->setFont(font);
 	fieldOcularAfov->setFont(font);
+	fieldFinderName->setFont(font);
+	fieldFinderTfov->setFont(font);
+	fieldFinderAperture->setFont(font);
 	fieldCcdName->setFont(font);
 	fieldCcdDimensions->setFont(font);
 	fieldCcdBinning->setFont(font);
