@@ -111,7 +111,7 @@ see [Linux with outdated Qt](#linux-with-outdated-qt).
 
 ```
 sudo dnf install cmake gcc graphviz doxygen gettext git \
-                 qt5-qtbase-devel qt5-qttools-devel qt5-qtscript-devel qt5-qtsvg-devel qt5-qtmultimedia-devel \
+                 qt5-qtbase-devel qt5-qtbase-private-devel qt5-qttools-devel qt5-qtscript-devel qt5-qtsvg-devel qt5-qtmultimedia-devel \
                  qt5-qtserialport-devel qt5-qtlocation-devel qt5-qtcharts-devel qt5-qtwebengine-devel
 ```
 
