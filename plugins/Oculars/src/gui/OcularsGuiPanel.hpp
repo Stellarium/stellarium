@@ -123,6 +123,7 @@ private:
 	QGraphicsTextItem* fieldVisualResolution;
 
 	//Sensor frame rotation controls
+	StelButton* rotateCcdMinus90Button;
 	StelButton* rotateCcdMinus15Button;
 	StelButton* rotateCcdMinus5Button;
 	StelButton* rotateCcdMinus1Button;
@@ -130,6 +131,8 @@ private:
 	StelButton* rotateCcdPlus1Button;
 	StelButton* rotateCcdPlus5Button;
 	StelButton* rotateCcdPlus15Button;
+	StelButton* rotateCcdPlus90Button;
+	StelButton* rotatePrismMinus90Button;
 	StelButton* rotatePrismMinus15Button;
 	StelButton* rotatePrismMinus5Button;
 	StelButton* rotatePrismMinus1Button;
@@ -137,6 +140,7 @@ private:
 	StelButton* rotatePrismPlus1Button;
 	StelButton* rotatePrismPlus5Button;
 	StelButton* rotatePrismPlus15Button;
+	StelButton* rotatePrismPlus90Button;
 
 	//! Sets the visibility of the ocular name label and the associated buttons.
 	void setOcularControlsVisible(bool show);
