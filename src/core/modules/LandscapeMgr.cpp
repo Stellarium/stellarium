@@ -1152,6 +1152,8 @@ void LandscapeMgr::onLocationChanged(const StelLocation &loc)
 	}
 }
 
+// Load landscapeID, but do not load its associated location.
+// If landscapeID is empty but flagLandscapeAutoSelection is true, load a location fitting to loc's planet.
 void LandscapeMgr::onTargetLocationChanged(const StelLocation &loc, const QString& landscapeID)
 {
 	qDebug() << "LandscapeMgr::onTargetLocationChanged:" << loc.serializeToLine() << "Landscape requested:" << landscapeID;
@@ -1196,7 +1198,7 @@ void LandscapeMgr::onTargetLocationChanged(const StelLocation &loc, const QStrin
 				QSettings* conf = StelApp::getInstance().getSettings();
 				setFlagAtmosphere(pl->hasAtmosphere() && conf->value("landscape/flag_atmosphere", true).toBool());
 				setFlagFog(pl->hasAtmosphere() && conf->value("landscape/flag_fog", true).toBool());
-				//setFlagLandscape(true); // Don't mess with the users' wishes...
+				setFlagLandscape(conf->value("landscape/flag_landscape", true).toBool());
 				setFlagCardinalPoints(conf->value("viewing/flag_cardinal_points", true).toBool());
 				setFlagOrdinalPoints(conf->value("viewing/flag_ordinal_points", true).toBool());
 				setFlagOrdinal16WRPoints(conf->value("viewing/flag_16wcr_points", false).toBool());
