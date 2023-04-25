@@ -19,6 +19,7 @@
 */
 
 #include "Dialog.hpp"
+#include "StelModuleMgr.hpp"
 #include "LandscapeMgr.hpp"
 #include "LocationDialog.hpp"
 #include "StelLocationMgr.hpp"
@@ -649,19 +650,20 @@ void LocationDialog::moveToAnotherPlanet()
 	reportEdit();
 	StelLocation loc = locationFromFields();
 	StelCore* stelCore = StelApp::getInstance().getCore();
-	StelModule* lMgr = StelApp::getInstance().getModule("LandscapeMgr");
+	LandscapeMgr *lMgr = GETSTELMODULE(LandscapeMgr);
 	populateRegionList(loc.planetName);
 	if (loc.planetName != stelCore->getCurrentLocation().planetName)
 	{
 		setFieldsFromLocation(loc);
-		if (lMgr->property("flagLandscapeAutoSelection").toBool())
+		if (lMgr->getFlagLandscapeAutoSelection())
 		{
-			// If we have a landscape for selected planet then set it, otherwise use default landscape
+			// If we have a landscape for selected planet then set it, otherwise use zero landscape
 			// Details: https://bugs.launchpad.net/stellarium/+bug/1173254
-			if (lMgr->property("allLandscapeNames").toStringList().indexOf(loc.planetName)>0)
-				lMgr->setProperty("currentLandscapeName", loc.planetName);
+			if (lMgr->getAllLandscapeNames().indexOf(loc.planetName)>0)
+				lMgr->setCurrentLandscapeName(loc.planetName); // TODO: Why not setCurrentLandscapeID?
 			else
-				lMgr->setProperty("currentLandscapeID", lMgr->property("defaultLandscapeID"));
+				//lMgr->setProperty("currentLandscapeID", lMgr->property("defaultLandscapeID"));
+				lMgr->setCurrentLandscapeID("zero"); // harmonize with LandscapeMgr::onTargetLocationChanged()
 		}
 
 		// populate site list with sites only from that planet, or full list for Earth (faster than removing the ~50 non-Earth positions...).

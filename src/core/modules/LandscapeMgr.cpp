@@ -1157,6 +1157,8 @@ void LandscapeMgr::onLocationChanged(const StelLocation &loc)
 void LandscapeMgr::onTargetLocationChanged(const StelLocation &loc, const QString& landscapeID)
 {
 	qDebug() << "LandscapeMgr::onTargetLocationChanged:" << loc.serializeToLine() << "Landscape requested:" << landscapeID;
+	if (landscapeID.length()==0)
+		qDebug() << "by" << sender()->objectName();
 //	if (loc.planetName != currentPlanetName)
 	{
 		if (!landscapeID.isEmpty())
@@ -1166,13 +1168,14 @@ void LandscapeMgr::onTargetLocationChanged(const StelLocation &loc, const QStrin
 			setCurrentLandscapeID(landscapeID);
 			setFlagLandscapeSetsLocation(landscapeSetsLocation);
 		}
-		else if (flagLandscapeAutoSelection)
+		else if (flagLandscapeAutoSelection && (loc.planetName != currentPlanetName))
 		{
+			qDebug() << "landscapeID empty. Try planet name" << loc.planetName << "or zero";
 			// If we have a landscape for selected planet then set it, otherwise use zero horizon landscape
 			const bool landscapeSetsLocation = getFlagLandscapeSetsLocation();
 			setFlagLandscapeSetsLocation(false);
 			if (getAllLandscapeNames().indexOf(loc.planetName)>0)
-				setCurrentLandscapeName(loc.planetName);
+				setCurrentLandscapeName(loc.planetName); // TODO: Why not setCurrentLandscapeID?
 			else
 				setCurrentLandscapeID("zero");
 			setFlagLandscapeSetsLocation(landscapeSetsLocation);
