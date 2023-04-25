@@ -410,8 +410,10 @@ StelLocationMgr::StelLocationMgr()
 {
 	// initialize the static QMap first if necessary.
 	// The first entry is the DB name, the second is as we display it in the program.
-	if (locationDBToIANAtranslations.count()==0)
+	if (locationDBToIANAtranslations.isEmpty())
 	{
+		// Reported April 25, 2023. (#3200)
+		locationDBToIANAtranslations.insert("America/Yellowknife","America/Edmonton");
 		// Seen February 06, 2023.
 		locationDBToIANAtranslations.insert("America/Ciudad_Juarez","America/Ojinaga");
 		// Seen November 11, 2022.
