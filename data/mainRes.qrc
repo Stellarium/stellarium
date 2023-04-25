@@ -2,6 +2,9 @@
     <qresource prefix="/mainWindow">
         <file>icon.bmp</file>
     </qresource>
+    <qresource prefix="/data">
+        <file>timezone.tab</file>
+    </qresource>
     <qresource prefix="/">
         <file>shaders/xyYToRGB.glsl</file>
         <file>shaders/preethamAtmosphere.vert</file>
