@@ -926,8 +926,9 @@ void ObsListDialog::exportListButtonPressed()
 		{KEY_VERSION, FILE_VERSION}};
 
 	QVariantMap currentListMap={{selectedOlud, observingLists.value(selectedOlud).toMap()}};
-	QVariantMap oneListMap={{KEY_OBSERVING_LISTS, currentListMap}};
-	exportJsonMap.insert(KEY_OBSERVING_LISTS, oneListMap);
+	//QVariantMap oneListMap={{KEY_OBSERVING_LISTS, currentListMap}};
+	//exportJsonMap.insert(KEY_OBSERVING_LISTS, oneListMap);
+	exportJsonMap.insert(KEY_OBSERVING_LISTS, currentListMap);
 
 	jsonFile.resize(0);
 	StelJsonParser::write(exportJsonMap, &jsonFile);
@@ -979,9 +980,10 @@ void ObsListDialog::importListButtonPressed()
 							bool overwrite=true;
 							if (observingLists.contains(it.key()))
 							{
-								QVariantMap importedMap=it.value().toMap();
+								QVariantMap importedMap=it.value().toMap(); // This is a map of {{UUID, QMap},...}
 								QString importedName=importedMap.value(KEY_NAME).toString();
 								QString importedDate=importedMap.value(KEY_CREATION_DATE).toString();
+								qDebug() << "Imported Map named:" << importedName << "date" << importedDate << ":" << importedMap;
 								QVariantMap existingMap=observingLists.value(it.key()).toMap();
 								QString existingName=existingMap.value(KEY_NAME).toString();
 								QString existingDate=existingMap.value(KEY_CREATION_DATE).toString();

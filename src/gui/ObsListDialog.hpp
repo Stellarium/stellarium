@@ -113,7 +113,7 @@
 //! Fix a confusion introduced in the 1.* series:
 //! The ObsList has entries
 //! - "designation": The catalog number (DSO), HIP number (star), or canonical name (planet).
-//! - "nameI18n": translated name for display. Actually this is bad in case of list exchange.
+//! - "nameI18n": translated name for display. Actually this is bad design in case of list exchange.
 //! - "type": As given by ObjectP->getType() or getObjectType()? This was inconsistent.
 //! FIXES:
 //! - "designation" used in combination with type as real unique object ID. For DSO, getDSODesignationWIC() must be used.
