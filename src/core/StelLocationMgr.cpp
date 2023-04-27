@@ -42,7 +42,7 @@
 #include <QRegularExpression>
 
 TimezoneNameMap StelLocationMgr::locationDBToIANAtranslations;
-
+QString StelLocationMgr::tzfFileName = "data/timezone.tab";
 QList<GeoRegion> StelLocationMgr::regions;
 QMap<QString, QString> StelLocationMgr::countryCodeToRegionMap;
 QMap<QString, QString> StelLocationMgr::countryNameToCodeMap;
@@ -1184,35 +1184,46 @@ void StelLocationMgr::loadCountries()
 
 void StelLocationMgr::loadTimeZones()
 {
-	QFile tzFile(":/data/timezone.tab");
+	QString tzFilePath = StelFileMgr::findFile(tzfFileName, StelFileMgr::File);
+	if (tzFilePath.isEmpty())
+	{
+		tzFilePath = StelFileMgr::findFile(tzfFileName, StelFileMgr::New);
+		// Create a default TZF (time zone fixes) file
+		QFile tzSrc(":/data/timezone.tab");
+		if (!tzSrc.copy(tzFilePath))
+		{
+			qWarning() << "Cannot copy time zones file to " + QDir::toNativeSeparators(tzFilePath);
+			return;
+		}
+	}
+	QFile tzFile(tzFilePath);
+
 	if(tzFile.open(QFile::ReadOnly | QFile::Text))
 	{
-		if (locationDBToIANAtranslations.isEmpty())
+		locationDBToIANAtranslations.clear();
+		QString line;
+		int readOk=0;
+		locationDBToIANAtranslations.insert("", "UTC");
+		while(!tzFile.atEnd())
 		{
-			QString line;
-			int readOk=0;
-			locationDBToIANAtranslations.insert("", "UTC");
-			while(!tzFile.atEnd())
+			line = QString::fromUtf8(tzFile.readLine());
+			if (line.startsWith("//") || line.startsWith("#") || line.isEmpty())
+				continue;
+
+			if (!line.isEmpty())
 			{
-				line = QString::fromUtf8(tzFile.readLine());
-				if (line.startsWith("//") || line.startsWith("#") || line.isEmpty())
-					continue;
+				#if (QT_VERSION>=QT_VERSION_CHECK(5, 14, 0))
+				QStringList list=line.split("\t", Qt::KeepEmptyParts);
+				#else
+				QStringList list=line.split("\t", QString::KeepEmptyParts);
+				#endif
 
-				if (!line.isEmpty())
-				{
-					#if (QT_VERSION>=QT_VERSION_CHECK(5, 14, 0))
-					QStringList list=line.split("\t", Qt::KeepEmptyParts);
-					#else
-					QStringList list=line.split("\t", QString::KeepEmptyParts);
-					#endif
-
-					// The first entry is the DB name, the second is as we display it in the program.
-					locationDBToIANAtranslations.insert(list.at(0).trimmed().toLocal8Bit(), list.at(1).trimmed().toLocal8Bit());
-					readOk++;
-				}
+				// The first entry is the DB name, the second is as we display it in the program.
+				locationDBToIANAtranslations.insert(list.at(0).trimmed().toLocal8Bit(), list.at(1).trimmed().toLocal8Bit());
+				readOk++;
 			}
-			qDebug() << "Loaded" << readOk << "fixes for time zones";
 		}
+		qDebug() << "Loaded" << readOk << "fixes for time zones";
 		tzFile.close();
 	}
 }
