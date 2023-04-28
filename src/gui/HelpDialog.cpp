@@ -220,13 +220,10 @@ void HelpDialog::downloadComplete(QNetworkReply *reply)
 	QString latestVersion = map["name"].toString();
 	latestVersion.replace("v","", Qt::CaseInsensitive);
 	QStringList v = latestVersion.split(".");
+	if (v.count()==2)
+		v.append("0");
 
-	QString appVersion;
-	if (v.count()==3)
-		appVersion = StelUtils::getApplicationVersion();
-	else
-		appVersion = StelUtils::getApplicationPublicVersion();
-
+	QString appVersion = StelUtils::getApplicationVersion();
 	QStringList c = appVersion.split(".");
 	int r = StelUtils::compareVersions(latestVersion, appVersion);
 	if (r==-1 || c.count()>v.count() || c.last().contains("-"))
