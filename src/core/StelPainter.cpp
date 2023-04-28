@@ -704,7 +704,7 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 		Q_ASSERT(tex);
 		if (!noGravity)
 			angleDeg += prj->defaultAngleForGravityText;
-		tex->texture->bind();
+		tex->texture->bind(0);
 
 		static float vertexData[8];
 		// compute the vertex coordinates applying the translation and the rotation
