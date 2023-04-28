@@ -1195,6 +1195,9 @@ void StelLocationMgr::loadTimeZoneFixes()
 			qWarning() << "Cannot copy timezone fixes to " + QDir::toNativeSeparators(tzFilePath);
 			return;
 		}
+		QFile dest(tzFilePath);
+		// fix file permissions
+		dest.setPermissions(dest.permissions() | QFile::WriteOwner);
 	}
 	QFile tzFile(tzFilePath);
 
@@ -1204,6 +1207,7 @@ void StelLocationMgr::loadTimeZoneFixes()
 		QString line;
 		locationDBToIANAtranslations.insert("", "UTC"); // a first fix
 		int readOk = 1;
+		static const QRegularExpression dataRx("^([\\w\\/]+)\\t([\\w\\/\\+\\-:]+)\\s*(.*)$");
 		while(!tzFile.atEnd())
 		{
 			line = QString::fromUtf8(tzFile.readLine());
@@ -1212,16 +1216,11 @@ void StelLocationMgr::loadTimeZoneFixes()
 
 			if (!line.isEmpty())
 			{
-				#if (QT_VERSION>=QT_VERSION_CHECK(5, 14, 0))
-				QStringList list=line.split("\t", Qt::KeepEmptyParts);
-				#else
-				QStringList list=line.split("\t", QString::KeepEmptyParts);
-				#endif
-
-				// The first entry is the DB name, the second is as we display it in the program.
-				if (list.count()==2) // to avoid crashes
+				QRegularExpressionMatch dataMatch=dataRx.match(line);
+				if (dataMatch.hasMatch())
 				{
-					locationDBToIANAtranslations.insert(list.at(0).trimmed().toUtf8(), list.at(1).trimmed().toUtf8());
+					// The first entry is the DB name, the second is as we display it in the program.
+					locationDBToIANAtranslations.insert(dataMatch.captured(1).trimmed().toUtf8(), dataMatch.captured(2).trimmed().toUtf8());
 					readOk++;
 				}
 			}
