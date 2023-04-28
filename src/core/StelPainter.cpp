@@ -732,7 +732,7 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 			}
 		}
 
-		float* texCoords = new float[8];
+		float texCoords[8];
 		for (int i=0;i<4;i++)
 		{
 			texCoords[i*2+0] = static_cast<float>(tex->getTexSize().width()) * (i % 2);
@@ -750,7 +750,6 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 		setBlending(oldBlending, oldSrc, oldDst);
 		enableClientStates(false, false);
 		tex->texture->release();
-		delete[] texCoords;
 	}
 	else
 	{
