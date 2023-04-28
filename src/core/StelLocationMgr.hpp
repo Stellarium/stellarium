@@ -104,6 +104,8 @@ public:
 	//! Pick region name from region code
 	static QString pickRegionFromCode(int regionCode);
 
+	static QString getTZFFileName() { return tzfFileName; }
+
 public slots:
 	//! Return the StelLocation for a given string
 	//! Can match location name, or coordinates

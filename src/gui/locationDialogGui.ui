@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>630</width>
+    <width>641</width>
     <height>542</height>
    </rect>
   </property>
@@ -693,6 +693,44 @@
             <property name="bottomMargin">
              <number>0</number>
             </property>
+            <item row="5" column="0" colspan="2">
+             <widget class="QCheckBox" name="dstCheckBox">
+              <property name="toolTip">
+               <string/>
+              </property>
+              <property name="text">
+               <string>Enable daylight saving time</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="0">
+             <widget class="QLabel" name="labelPlanet">
+              <property name="text">
+               <string>Planet:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QLabel" name="labelRegion">
+              <property name="text">
+               <string>Region:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="0" colspan="2">
+             <widget class="QCheckBox" name="useCustomTimeZoneCheckBox">
+              <property name="text">
+               <string>Use custom time zone</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="0">
+             <widget class="QLabel" name="labelName">
+              <property name="text">
+               <string>Name/City:</string>
+              </property>
+             </widget>
+            </item>
             <item row="1" column="1">
              <widget class="QComboBox" name="regionNameComboBox">
               <property name="sizePolicy">
@@ -712,54 +750,6 @@
                 <width>16777215</width>
                 <height>24</height>
                </size>
-              </property>
-              <property name="editable">
-               <bool>true</bool>
-              </property>
-              <property name="insertPolicy">
-               <enum>QComboBox::NoInsert</enum>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="1">
-             <widget class="QLineEdit" name="cityNameLineEdit">
-              <property name="placeholderText">
-               <string>New Location</string>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="0">
-             <widget class="QLabel" name="labelPlanet">
-              <property name="text">
-               <string>Planet:</string>
-              </property>
-             </widget>
-            </item>
-            <item row="4" column="0" colspan="2">
-             <widget class="QCheckBox" name="useCustomTimeZoneCheckBox">
-              <property name="text">
-               <string>Use custom time zone</string>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="0">
-             <widget class="QLabel" name="labelTimeZone">
-              <property name="text">
-               <string>Time zone:</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="0">
-             <widget class="QLabel" name="labelName">
-              <property name="text">
-               <string>Name/City:</string>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="1">
-             <widget class="QComboBox" name="timeZoneNameComboBox">
-              <property name="enabled">
-               <bool>true</bool>
               </property>
               <property name="editable">
                <bool>true</bool>
@@ -797,20 +787,37 @@
               </property>
              </widget>
             </item>
-            <item row="1" column="0">
-             <widget class="QLabel" name="labelRegion">
-              <property name="text">
-               <string>Region:</string>
+            <item row="3" column="1">
+             <widget class="QComboBox" name="timeZoneNameComboBox">
+              <property name="enabled">
+               <bool>true</bool>
+              </property>
+              <property name="editable">
+               <bool>true</bool>
+              </property>
+              <property name="insertPolicy">
+               <enum>QComboBox::NoInsert</enum>
               </property>
              </widget>
             </item>
-            <item row="5" column="0" colspan="2">
-             <widget class="QCheckBox" name="dstCheckBox">
-              <property name="toolTip">
-               <string/>
+            <item row="0" column="1">
+             <widget class="QLineEdit" name="cityNameLineEdit">
+              <property name="placeholderText">
+               <string>New Location</string>
               </property>
+             </widget>
+            </item>
+            <item row="3" column="0">
+             <widget class="QLabel" name="labelTimeZone">
               <property name="text">
-               <string>Enable daylight saving time</string>
+               <string>Time zone:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="6" column="0" colspan="2">
+             <widget class="QPushButton" name="updateTZFButton">
+              <property name="text">
+               <string>Update time zones</string>
               </property>
              </widget>
             </item>
@@ -833,6 +840,11 @@
    <container>1</container>
   </customwidget>
   <customwidget>
+   <class>StelCloseButton</class>
+   <extends>QPushButton</extends>
+   <header>gui/StelCloseButton.hpp</header>
+  </customwidget>
+  <customwidget>
    <class>AngleSpinBox</class>
    <extends>QSpinBox</extends>
    <header>AngleSpinBox.hpp</header>
@@ -841,11 +853,6 @@
    <class>MapWidget</class>
    <extends>QWidget</extends>
    <header>MapWidget.hpp</header>
-  </customwidget>
-  <customwidget>
-   <class>StelCloseButton</class>
-   <extends>QPushButton</extends>
-   <header>gui/StelCloseButton.hpp</header>
   </customwidget>
  </customwidgets>
  <tabstops>
