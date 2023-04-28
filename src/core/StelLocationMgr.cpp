@@ -1214,15 +1214,12 @@ void StelLocationMgr::loadTimeZoneFixes()
 			if (line.startsWith("//") || line.startsWith("#") || line.isEmpty())
 				continue;
 
-			if (!line.isEmpty())
+			QRegularExpressionMatch dataMatch = dataRx.match(line);
+			if (dataMatch.hasMatch())
 			{
-				QRegularExpressionMatch dataMatch=dataRx.match(line);
-				if (dataMatch.hasMatch())
-				{
-					// The first entry is the DB name, the second is as we display it in the program.
-					locationDBToIANAtranslations.insert(dataMatch.captured(1).trimmed().toUtf8(), dataMatch.captured(2).trimmed().toUtf8());
-					readOk++;
-				}
+				// The first entry is the DB name, the second is as we display it in the program.
+				locationDBToIANAtranslations.insert(dataMatch.captured(1).trimmed().toUtf8(), dataMatch.captured(2).trimmed().toUtf8());
+				readOk++;
 			}
 		}
 		qDebug() << "Loaded" << readOk << "fixes for time zones";
