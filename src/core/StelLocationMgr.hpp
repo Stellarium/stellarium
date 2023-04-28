@@ -160,7 +160,7 @@ private slots:
 private:
 	void loadRegions();
 	void loadCountries();
-	void loadTimeZones();
+	void loadTimeZoneFixes();
 	void generateBinaryLocationFile(const QString& txtFile, bool isUserLocation, const QString& binFile) const;
 
 	//! Load cities from a file

@@ -411,7 +411,7 @@ StelLocationMgr::StelLocationMgr()
 	QSettings* conf = StelApp::getInstance().getSettings();
 
 	// N.B. Further missing TZ names will be printed out in the log.txt. Resolve these by adding into data/timezone.tab file.
-	loadTimeZones();
+	loadTimeZoneFixes();
 
 	loadCountries();
 	loadRegions();
@@ -1182,17 +1182,17 @@ void StelLocationMgr::loadCountries()
 	countryNameToCodeMap.insert("Taiwan (Provice of China)", "tw");
 }
 
-void StelLocationMgr::loadTimeZones()
+void StelLocationMgr::loadTimeZoneFixes()
 {
-	QString tzFilePath = StelFileMgr::findFile(tzfFileName, StelFileMgr::File);
+	QString tzFilePath = StelFileMgr::findFile(tzfFileName);
 	if (tzFilePath.isEmpty())
 	{
 		tzFilePath = StelFileMgr::findFile(tzfFileName, StelFileMgr::New);
-		// Create a default TZF (time zone fixes) file
+		// Create a default TZF (timezone fixes) file
 		QFile tzSrc(":/data/timezone.tab");
 		if (!tzSrc.copy(tzFilePath))
 		{
-			qWarning() << "Cannot copy time zones file to " + QDir::toNativeSeparators(tzFilePath);
+			qWarning() << "Cannot copy timezone fixes to " + QDir::toNativeSeparators(tzFilePath);
 			return;
 		}
 	}
@@ -1202,8 +1202,8 @@ void StelLocationMgr::loadTimeZones()
 	{
 		locationDBToIANAtranslations.clear();
 		QString line;
-		int readOk=0;
-		locationDBToIANAtranslations.insert("", "UTC");
+		locationDBToIANAtranslations.insert("", "UTC"); // a first fix
+		int readOk = 1;
 		while(!tzFile.atEnd())
 		{
 			line = QString::fromUtf8(tzFile.readLine());
@@ -1219,8 +1219,11 @@ void StelLocationMgr::loadTimeZones()
 				#endif
 
 				// The first entry is the DB name, the second is as we display it in the program.
-				locationDBToIANAtranslations.insert(list.at(0).trimmed().toLocal8Bit(), list.at(1).trimmed().toLocal8Bit());
-				readOk++;
+				if (list.count()==2) // to avoid crashes
+				{
+					locationDBToIANAtranslations.insert(list.at(0).trimmed().toUtf8(), list.at(1).trimmed().toUtf8());
+					readOk++;
+				}
 			}
 		}
 		qDebug() << "Loaded" << readOk << "fixes for time zones";
