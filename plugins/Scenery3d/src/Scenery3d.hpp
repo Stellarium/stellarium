@@ -87,6 +87,7 @@ class Scenery3d : public StelModule
 	Q_PROPERTY(bool enableTorchLight             READ getEnableTorchLight       WRITE setEnableTorchLight      NOTIFY enableTorchLightChanged)
 	Q_PROPERTY(float torchStrength               READ getTorchStrength          WRITE setTorchStrength         NOTIFY torchStrengthChanged)
 	Q_PROPERTY(float torchRange                  READ getTorchRange             WRITE setTorchRange            NOTIFY torchRangeChanged)
+	Q_PROPERTY(float directionalLightPush        READ getDirectionalLightPush   WRITE setDirectionalLightPush  NOTIFY directionalLightPushChanged)
 	Q_PROPERTY(bool enableLazyDrawing            READ getEnableLazyDrawing      WRITE setEnableLazyDrawing     NOTIFY enableLazyDrawingChanged)
 	Q_PROPERTY(double lazyDrawingInterval        READ getLazyDrawingInterval    WRITE setLazyDrawingInterval   NOTIFY lazyDrawingIntervalChanged)
 	Q_PROPERTY(bool onlyDominantFaceWhenMoving   READ getOnlyDominantFaceWhenMoving    WRITE setOnlyDominantFaceWhenMoving   NOTIFY onlyDominantFaceWhenMovingChanged)
@@ -97,28 +98,28 @@ class Scenery3d : public StelModule
 	Q_PROPERTY(QString loadingSceneID            READ getLoadingSceneID         NOTIFY loadingSceneIDChanged STORED false)
 
 	//these properties are only valid after init() has been called
-	Q_PROPERTY(bool isGeometryShaderSupported    READ getIsGeometryShaderSupported)
-	Q_PROPERTY(bool areShadowsSupported          READ getAreShadowsSupported)
-	Q_PROPERTY(bool isShadowFilteringSupported   READ getIsShadowFilteringSupported)
-	Q_PROPERTY(bool isANGLE                      READ getIsANGLE)
-	Q_PROPERTY(uint maximumFramebufferSize       READ getMaximumFramebufferSize)
+	Q_PROPERTY(bool isGeometryShaderSupported    READ getIsGeometryShaderSupported  CONSTANT)
+	Q_PROPERTY(bool areShadowsSupported          READ getAreShadowsSupported        CONSTANT)
+	Q_PROPERTY(bool isShadowFilteringSupported   READ getIsShadowFilteringSupported CONSTANT)
+	Q_PROPERTY(bool isANGLE                      READ getIsANGLE                    CONSTANT)
+	Q_PROPERTY(uint maximumFramebufferSize       READ getMaximumFramebufferSize     CONSTANT)
 
 public:
     Scenery3d();
-    virtual ~Scenery3d() Q_DECL_OVERRIDE;
+    ~Scenery3d() override;
 
     //StelModule members
-    virtual void init() Q_DECL_OVERRIDE;
-    virtual void deinit() Q_DECL_OVERRIDE;
-    virtual void draw(StelCore* core) Q_DECL_OVERRIDE;
-    virtual void update(double deltaTime) Q_DECL_OVERRIDE;
-    virtual double getCallOrder(StelModuleActionName actionName) const Q_DECL_OVERRIDE;
-    virtual bool configureGui(bool show) Q_DECL_OVERRIDE;
+    void init() override;
+    void deinit() override;
+    void draw(StelCore* core) override;
+    void update(double deltaTime) override;
+    double getCallOrder(StelModuleActionName actionName) const override;
+    bool configureGui(bool show) override;
     //! Walk/Fly Navigation with Ctrl+Cursor and Ctrl+PgUp/Dn keys.
     //! Pressing Ctrl-Alt: 5x, Ctrl-Shift: 10x speedup; Ctrl-Shift-Alt: 50x!
     //! To allow fine control, zoom in.
     //! If you release Ctrl key while pressing cursor key, movement will continue.
-    virtual void handleKeys(QKeyEvent* e) Q_DECL_OVERRIDE;
+    void handleKeys(QKeyEvent* e) override;
 
     //! Sends the progressReport() signal, which eventually updates the progress bar. Can be called from another thread.
     void updateProgress(const QString& str, int val, int min, int max) const;
@@ -138,6 +139,7 @@ signals:
     void enableTorchLightChanged(const bool val);
     void torchStrengthChanged(const float val);
     void torchRangeChanged(const float val);
+    void directionalLightPushChanged(const float val);
     void enableLazyDrawingChanged(const bool val);
     void lazyDrawingIntervalChanged(const double val);
     void onlyDominantFaceWhenMovingChanged(const bool val);
@@ -234,6 +236,12 @@ public slots:
     //! Sets the range of the torchlight.
     void setTorchRange(const float torchRange);
     float getTorchRange() const;
+
+    //! Sets the exaggeration strength for directional light (default: 1).
+    //! Going over 1 can be useful for very tiny holes casting important specks of light into dark interiors.
+    //! Example: meridiana "sundials" in Italian churches.
+    void setDirectionalLightPush(const float push);
+    float getDirectionalLightPush() const;
 
     //! Sets the state of the cubemap lazy-drawing mode
     void setEnableLazyDrawing(const bool val);
@@ -361,9 +369,9 @@ class Scenery3dStelPluginInterface : public QObject, public StelPluginInterface
 	Q_PLUGIN_METADATA(IID StelPluginInterface_iid)
 	Q_INTERFACES(StelPluginInterface)
 public:
-	virtual StelModule* getStelModule() const Q_DECL_OVERRIDE;
-	virtual StelPluginInfo getPluginInfo() const Q_DECL_OVERRIDE;
-	virtual QObjectList getExtensionList() const Q_DECL_OVERRIDE;
+	StelModule* getStelModule() const override;
+	StelPluginInfo getPluginInfo() const override;
+	QObjectList getExtensionList() const override;
 };
 
 

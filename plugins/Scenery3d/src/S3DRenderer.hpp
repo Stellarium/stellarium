@@ -21,19 +21,15 @@
 #ifndef S3DRENDERER_HPP
 #define S3DRENDERER_HPP
 
-#include "StelGui.hpp"
 #include "StelModule.hpp"
 #include "StelPainter.hpp"
 #include "Landscape.hpp"
 #include "SolarSystem.hpp"
 
 #include "StelOBJ.hpp"
-#include "StelOpenGLArray.hpp"
-#include "Heightmap.hpp"
 #include "Frustum.hpp"
 #include "Polyhedron.hpp"
 #include "S3DEnum.hpp"
-#include "SceneInfo.hpp"
 #include "ShaderManager.hpp"
 
 #include <QMatrix4x4>
@@ -51,8 +47,8 @@ class S3DRenderer : public QObject, protected QOpenGLFunctions
 	Q_OBJECT
 public:
 	//! Initializes an empty Scenery3d object.
-	S3DRenderer(QObject* parent = Q_NULLPTR);
-	virtual ~S3DRenderer() Q_DECL_OVERRIDE;
+	S3DRenderer(QObject* parent = nullptr);
+	~S3DRenderer() override;
 
 	//! Draw scenery, called by Scenery3dMgr.
 	void draw(StelCore* core, S3DScene &scene);
@@ -121,6 +117,11 @@ public:
 	void setTorchBrightness(float brightness) { torchBrightness = brightness; invalidateCubemap(); }
 	float getTorchRange() const { return torchRange; }
 	void setTorchRange(float range) { torchRange = range; invalidateCubemap(); }
+	//! Sets the exaggeration strength for directional light (default: 1).
+	//! Going over 1 can be useful for very tiny holes casting important specks of light into dark interiors.
+	//! Example: meridiana "sundials" in Italian churches.
+	void setDirectionalLightPush(const float push) {directionalLightPush = push;}
+	float getDirectionalLightPush() const { return directionalLightPush;}
 
 	//Debugging method, save the Frustum to be able to move away from it and analyze it
 	void saveFrusts();
@@ -154,6 +155,7 @@ private:
 
 	float torchBrightness; // toggle light brightness
 	float torchRange; // used to calculate attenuation like in the second form at http://framebunker.com/blog/lighting-2-attenuation/
+	float directionalLightPush; // used to give extra power to the directional light, e.g. to enhance dim light patches shining through small holes. Default: 1.
 
 	bool textEnabled;           // switchable value: display coordinates on screen. THIS IS NOT FOR DEBUGGING, BUT A PROGRAM FEATURE!
 	bool debugEnabled;          // switchable value: display debug graphics and debug texts on screen

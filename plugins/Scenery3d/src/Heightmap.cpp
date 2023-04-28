@@ -29,7 +29,7 @@
 #define INF (std::numeric_limits<float>::max())
 #define NO_HEIGHT (-INF)
 
-Heightmap::Heightmap() : rootNode(Q_NULLPTR), grid(Q_NULLPTR), nullHeight(0.0)
+Heightmap::Heightmap() : rootNode(nullptr), grid(nullptr), nullHeight(0.0)
 {
 }
 
@@ -94,7 +94,7 @@ float Heightmap::getHeight(const float x, const float y) const
 	timer.start();*/
 
 	Heightmap::GridSpace* space = getSpace(x, y);
-	if (space == Q_NULLPTR)
+	if (space == nullptr)
 	{
 		return nullHeight;
 	}
@@ -221,7 +221,7 @@ Heightmap::GridSpace* Heightmap::getSpace(const float x, const float y) const
 
 	if ((ix < 0) || (ix >= GRID_LENGTH) || (iy < 0) || (iy >= GRID_LENGTH))
 	{
-		return Q_NULLPTR;
+		return nullptr;
 	}
 	else
 	{
@@ -323,13 +323,13 @@ bool Heightmap::line_intersects_triangle(const Vec2f &t0, const Vec2f &t1, const
 }
 
 Heightmap::QuadTreeNode::QuadTreeNode(const Vec2f &min, const Vec2f &max)
-	: parent(Q_NULLPTR), children(Q_NULLPTR), level(-1), depth(-1), nodecount(-1)
+	: parent(nullptr), children(nullptr), level(-1), depth(-1), nodecount(-1)
 {
-	init(Q_NULLPTR,min,max);
+	init(nullptr,min,max);
 }
 
 Heightmap::QuadTreeNode::QuadTreeNode()
-	: parent(Q_NULLPTR), children(Q_NULLPTR), level(-1), depth(-1), nodecount(-1)
+	: parent(nullptr), children(nullptr), level(-1), depth(-1), nodecount(-1)
 {
 }
 
@@ -474,7 +474,7 @@ void Heightmap::QuadTreeNode::subdivide()
 		curNode->nodecount+=4;
 		//continue upwards to root
 		curNode=curNode->parent;
-	} while(curNode!=Q_NULLPTR);
+	} while(curNode!=nullptr);
 }
 
 Heightmap::QuadTreeNode::Quadrant Heightmap::QuadTreeNode::getQuadrantForPoint(const Vec2f &point) const
