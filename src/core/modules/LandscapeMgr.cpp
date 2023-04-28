@@ -895,6 +895,12 @@ bool LandscapeMgr::setCurrentLandscapeID(const QString& id, const double changeL
 	if(id==currentLandscapeID)
 		return false;
 
+	if (getAllLandscapeNames().indexOf(id)>0)
+	{
+		qDebug() << "LandscapeMgr::setCurrentLandscapeID: unknown landscape" << id << ", using 'zero'";
+		return setCurrentLandscapeID("zero", changeLocationDuration);
+	}
+
 	Landscape* newLandscape;
 
 	// There is a slight chance that we switch back to oldLandscape while oldLandscape is still fading away.
@@ -1161,7 +1167,7 @@ void LandscapeMgr::onTargetLocationChanged(const StelLocation &loc, const QStrin
 		qDebug() << "by" << sender()->objectName();
 //	if (loc.planetName != currentPlanetName)
 	{
-		if (!landscapeID.isEmpty())
+		if (!landscapeID.isEmpty() && getAllLandscapeNames().indexOf(landscapeID)>0)
 		{
 			const bool landscapeSetsLocation = getFlagLandscapeSetsLocation();
 			setFlagLandscapeSetsLocation(false);
