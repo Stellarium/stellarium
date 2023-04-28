@@ -119,10 +119,12 @@ void ShaderMgr::clearCache()
 
 	//iterate over the shaderContentCache - this contains the same amount of shaders as actually exist!
 	//the shaderCache could contain duplicate entries
-	for (auto* shader : m_shaderContentCache)
+	QHashIterator<QByteArray, QOpenGLShaderProgram*>it(m_shaderContentCache);
+	while (it.hasNext())
 	{
-		if (shader)
-			delete shader;
+		it.next();
+		if (it.value())
+			delete it.value();
 	}
 
 	m_shaderCache.clear();
@@ -134,7 +136,7 @@ QOpenGLShaderProgram* ShaderMgr::findOrLoadShader(uint flags)
 {
 	auto it = m_shaderCache.find(flags);
 
-	// This may also return Q_NULLPTR if the load failed.
+	// This may also return nullptr if the load failed.
 	//We wait until user explicitly forces shader reload until we try again to avoid spamming errors.
 	if(it!=m_shaderCache.end())
 		return *it;
@@ -148,7 +150,7 @@ QOpenGLShaderProgram* ShaderMgr::findOrLoadShader(uint flags)
 	//load shader files & preprocess
 	QByteArray vShader,gShader,fShader;
 
-	QOpenGLShaderProgram *prog = Q_NULLPTR;
+	QOpenGLShaderProgram *prog = nullptr;
 
 	if(preprocessShader(vShaderFile,flags,vShader) &&
 			preprocessShader(gShaderFile,flags,gShader) &&
@@ -178,7 +180,7 @@ QOpenGLShaderProgram* ShaderMgr::findOrLoadShader(uint flags)
 			if(!loadShader(*prog,vShader,gShader,fShader))
 			{
 				delete prog;
-				prog = Q_NULLPTR;
+				prog = nullptr;
 				qCCritical(shaderMgr)<<"ERROR: Shader '"<<flags<<"' could not be compiled. Fix errors and reload shaders or restart program.";
 			}
 #ifndef NDEBUG
@@ -403,13 +405,15 @@ bool ShaderMgr::loadShader(QOpenGLShaderProgram& program, const QByteArray& vSha
 		QByteArray finalShader = fShader;
 		if(shaderHasVersion)
 		{
-			const auto shaderVersionString = QString(fShader.simplified()).replace(QRegularExpression("^#version ([0-9]+)\\b.*"), "\\1");
+			static const QRegularExpression versionRE("^#version ([0-9]+)\\b.*");
+			static const QRegularExpression versionRE2("(^|\n)(#version[ \t]+)([0-9]+)\\b");
+			const QString shaderVersionString = QString(fShader.simplified()).replace(versionRE, "\\1");
 			bool svOK = false;
-			const auto shaderVersion = shaderVersionString.toInt(&svOK);
+			const int shaderVersion = shaderVersionString.toInt(&svOK);
 
-			const auto prefixVersionString = QString(globalPrefix.simplified()).replace(QRegularExpression("^#version ([0-9]+)\\b.*"), "\\1");
+			const QString prefixVersionString = QString(globalPrefix.simplified()).replace(versionRE, "\\1");
 			bool pvOK = false;
-			const auto prefixVersion = prefixVersionString.toInt(&pvOK);
+			const int prefixVersion = prefixVersionString.toInt(&pvOK);
 
 			bool failed = false;
 			if(!svOK)
@@ -432,14 +436,13 @@ bool ShaderMgr::loadShader(QOpenGLShaderProgram& program, const QByteArray& vSha
 			}
 			else if(shaderVersion > prefixVersion)
 			{
-				prefix = QString(globalPrefix).replace(QRegularExpression("(^|\n)(#version[ \t]+)([0-9]+)\\b"),
-													   QString("\\1\\2%1").arg(shaderVersion)).toUtf8();
+				prefix = QString(globalPrefix).replace(versionRE2, QString("\\1\\2%1").arg(shaderVersion)).toUtf8();
 			}
 			else
 			{
 				prefix = globalPrefix;
 			}
-			finalShader = QString(fShader).replace(QRegularExpression("(^|\n)(#version[ \t]+)([0-9]+)\\b"), "//\\1\\2\\3").toUtf8();
+			finalShader = QString(fShader).replace(versionRE2, "//\\1\\2\\3").toUtf8();
 		}
 		else
 		{
@@ -513,7 +516,7 @@ void ShaderMgr::buildUniformCache(QOpenGLShaderProgram &program)
 
 		auto it = uniformStrings.find(str);
 
-		// This may also return Q_NULLPTR if the load failed.
+		// This may also return nullptr if the load failed.
 		//We wait until user explicitly forces shader reload until we try again to avoid spamming errors.
 		if(it!=uniformStrings.end())
 		{

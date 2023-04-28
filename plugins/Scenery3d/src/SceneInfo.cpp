@@ -40,7 +40,7 @@ Q_LOGGING_CATEGORY(storedView,"stel.plugin.scenery3d.storedview")
 
 const QString SceneInfo::SCENES_PATH("scenery3d/");
 const QString StoredView::USERVIEWS_FILE = SceneInfo::SCENES_PATH + "userviews.ini";
-QSettings* StoredView::userviews = Q_NULLPTR;
+QSettings* StoredView::userviews = nullptr;
 
 int SceneInfo::metaTypeId = qRegisterMetaType<SceneInfo>();
 

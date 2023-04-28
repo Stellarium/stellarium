@@ -103,7 +103,7 @@
               <blue>195</blue>
              </color>
             </brush>
-           </colorrole>           
+           </colorrole>
           </active>
           <inactive>
            <colorrole role="WindowText">
@@ -123,7 +123,7 @@
               <blue>195</blue>
              </color>
             </brush>
-           </colorrole>           
+           </colorrole>
           </inactive>
           <disabled>
            <colorrole role="WindowText">
@@ -143,13 +143,12 @@
               <blue>195</blue>
              </color>
             </brush>
-           </colorrole>           
+           </colorrole>
           </disabled>
          </palette>
         </property>
         <property name="font">
          <font>
-          <weight>75</weight>
           <italic>false</italic>
           <bold>true</bold>
          </font>
@@ -284,10 +283,13 @@
              </property>
              <property name="html">
               <string notr="true">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta charset=&quot;utf-8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'.AppleSystemUIFont'; font-size:13pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Sans Serif'; font-size:9pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+hr { height: 1px; border-width: 0; }
+li.unchecked::marker { content: &quot;\2610&quot;; }
+li.checked::marker { content: &quot;\2612&quot;; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Segoe UI'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Sans Serif';&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
              </property>
              <property name="openExternalLinks">
               <bool>true</bool>
@@ -399,7 +401,14 @@ p, li { white-space: pre-wrap; }
                  <property name="fieldGrowthPolicy">
                   <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
                  </property>
-                 <item row="1" column="0">
+                 <item row="0" column="0" colspan="2">
+                  <widget class="QCheckBox" name="checkBoxTorchlight">
+                   <property name="text">
+                    <string>Torchlight (%1)</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="2" column="0">
                   <widget class="QLabel" name="labelTorchStrength">
                    <property name="text">
                     <string>Torch strength:</string>
@@ -409,7 +418,7 @@ p, li { white-space: pre-wrap; }
                    </property>
                   </widget>
                  </item>
-                 <item row="1" column="1">
+                 <item row="2" column="1">
                   <widget class="QSlider" name="sliderTorchStrength">
                    <property name="maximum">
                     <number>100</number>
@@ -419,8 +428,8 @@ p, li { white-space: pre-wrap; }
                    </property>
                   </widget>
                  </item>
-                 <item row="2" column="0">
-                  <widget class="QLabel" name="label_4">
+                 <item row="3" column="0">
+                  <widget class="QLabel" name="labelTorchRange">
                    <property name="text">
                     <string>Torch range:</string>
                    </property>
@@ -429,7 +438,7 @@ p, li { white-space: pre-wrap; }
                    </property>
                   </widget>
                  </item>
-                 <item row="2" column="1">
+                 <item row="3" column="1">
                   <widget class="QSlider" name="sliderTorchRange">
                    <property name="maximum">
                     <number>10000</number>
@@ -445,27 +454,46 @@ p, li { white-space: pre-wrap; }
                    </property>
                   </widget>
                  </item>
-                 <item row="0" column="0" colspan="2">
-                  <widget class="QCheckBox" name="checkBoxTorchlight">
-                   <property name="text">
-                    <string>Torchlight (%1)</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="3" column="0" colspan="2">
+                 <item row="6" column="0" colspan="2">
                   <widget class="QCheckBox" name="checkBoxShowGridCoordinates">
                    <property name="text">
                     <string>Show grid coordinates (%1)</string>
                    </property>
                   </widget>
                  </item>
-                 <item row="4" column="0">
+                 <item row="7" column="0">
                   <widget class="QCheckBox" name="overdrawLandscapePolylineCheckBox">
                    <property name="toolTip">
                     <string>Overdraw horizon polygon defined in your landscape. This displays the inaccuracies in a very large planar model compared to Earth curvature, of course only for a single point of observation.</string>
                    </property>
                    <property name="text">
                     <string>Draw horizon polyline in foreground</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="4" column="0">
+                  <widget class="QLabel" name="labelDirectionalLightPush">
+                   <property name="text">
+                    <string>Directional light enhancement</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="4" column="1">
+                  <widget class="QDoubleSpinBox" name="directionalLightPushSpinBox">
+                   <property name="toolTip">
+                    <string>Increase the power of directional light, e.g. to enhance contrast for patches of light cast through small holes.</string>
+                   </property>
+                   <property name="minimum">
+                    <double>0.200000000000000</double>
+                   </property>
+                   <property name="maximum">
+                    <double>20.000000000000000</double>
+                   </property>
+                   <property name="singleStep">
+                    <double>0.050000000000000</double>
+                   </property>
+                   <property name="value">
+                    <double>1.000000000000000</double>
                    </property>
                   </widget>
                  </item>

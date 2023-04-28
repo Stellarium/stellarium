@@ -22,6 +22,7 @@
 #include <QObject>
 #include <QSet>
 #include <QMetaProperty>
+#include "StelApp.hpp"
 
 class StelProperty;
 
@@ -194,6 +195,8 @@ signals:
 //!
 //!	//alternatively, use this to skip having to get the StelProperty instance:
 //!	//StelApp::getInstance().getStelPropertyManager()->setStelPropertyValue("MyCustomModule.awesomeProperty", 123);
+//!     // or even, much shorter, assuming awesomeProperty is an int,
+//!     // GETSTELPROPERTYVALUE("MyCustomModule.awesomeProperty").toInt();
 //!
 //!	//to see the effect
 //!	MyCustomModule *module = GETSTELMODULE(MyCustomModule);
@@ -336,5 +339,7 @@ private:
 	QMap<QString,QObject*> registeredObjects;
 	StelPropertyMap propMap;
 };
+
+#define GETSTELPROPERTYVALUE(pName) StelApp::getInstance().getStelPropertyManager()->getStelPropertyValue(pName, false)
 
 #endif

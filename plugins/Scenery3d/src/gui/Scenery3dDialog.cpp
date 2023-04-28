@@ -34,7 +34,7 @@
 #include <QStandardItemModel>
 #include <QTimer>
 
-Scenery3dDialog::Scenery3dDialog(QObject* parent) : StelDialog("Scenery3d", parent), mgr(Q_NULLPTR)
+Scenery3dDialog::Scenery3dDialog(QObject* parent) : StelDialog("Scenery3d", parent), mgr(nullptr)
 {
 	ui = new Ui_scenery3dDialogForm;
 }
@@ -150,6 +150,7 @@ void Scenery3dDialog::createDialogContent()
 
 	connect(ui->sliderTorchStrength,  &QSlider::valueChanged, this, &Scenery3dDialog::on_sliderTorchStrength_valueChanged);
 	connect(ui->sliderTorchRange,     &QSlider::valueChanged, this, &Scenery3dDialog::on_sliderTorchRange_valueChanged);
+	connectDoubleProperty(ui->directionalLightPushSpinBox, "Scenery3d.directionalLightPush");
 	connect(ui->checkBoxDefaultScene, &QCheckBox::stateChanged, this, &Scenery3dDialog::on_checkBoxDefaultScene_stateChanged);
 
 	connect(ui->pushButtonOpenStoredViewDialog, &QPushButton::clicked, mgr, &Scenery3d::showStoredViewDialog);
