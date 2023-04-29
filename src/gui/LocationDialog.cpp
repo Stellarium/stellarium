@@ -659,7 +659,7 @@ void LocationDialog::moveToAnotherPlanet()
 		{
 			// If we have a landscape for selected planet then set it, otherwise use zero landscape
 			// Details: https://bugs.launchpad.net/stellarium/+bug/1173254
-			if (lMgr->getAllLandscapeNames().indexOf(loc.planetName)>0)
+			if (lMgr->getAllLandscapeNames().contains(loc.planetName))
 				lMgr->setCurrentLandscapeName(loc.planetName); // TODO: Why not setCurrentLandscapeID?
 			else
 				//lMgr->setProperty("currentLandscapeID", lMgr->property("defaultLandscapeID"));
@@ -687,6 +687,7 @@ void LocationDialog::moveToAnotherPlanet()
 		ui->citySearchLineEdit->setFocus();
 
 		// If we change to an Observer "planet", auto-select and focus on the observed object.
+		StelObjectMgr *soMgr=GETSTELMODULE(StelObjectMgr);
 		SolarSystem *ss=GETSTELMODULE(SolarSystem);
 		PlanetP planet=nullptr;
 		if (ss)
@@ -696,7 +697,6 @@ void LocationDialog::moveToAnotherPlanet()
 			setLocationUIvisible(false);
 
 			loc.role=QChar('o'); // Mark this ad-hoc location as "observer".
-			StelObjectMgr *soMgr=GETSTELMODULE(StelObjectMgr);
 			if (soMgr)
 			{
 				soMgr->findAndSelect(planet->getParent()->getEnglishName());
@@ -708,6 +708,13 @@ void LocationDialog::moveToAnotherPlanet()
 			GETSTELMODULE(StelMovementMgr)->setFlagTracking(false);
 			setLocationUIvisible(true);
 			GETSTELMODULE(StelMovementMgr)->resetInitViewPos();
+			// Get rid of selection if we are standing on it...
+			if (soMgr)
+			{
+				const QList<StelObjectP>& selection=soMgr->getSelectedObject();
+				if (!selection.isEmpty() && selection[0]->getEnglishName()==loc.planetName)
+						soMgr->unSelect();
+			}
 		}
 
 		stelCore->moveObserverTo(loc, 0., 0.);
