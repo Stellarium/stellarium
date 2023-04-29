@@ -182,7 +182,7 @@ void Landscape::loadCommon(const QSettings& landscapeIni, const QString& landsca
 		location.landscapeKey = name;
 
 		QString tzString=landscapeIni.value("location/timezone", "").toString();
-		if ((tzString.length() > 0))
+		if (!tzString.isEmpty())
 			location.ianaTimeZone=StelLocationMgr::sanitizeTimezoneStringFromLocationDB(tzString);
 
 		auto defaultBortleIndex = landscapeIni.value("location/light_pollution", -1).toInt();
@@ -471,7 +471,7 @@ LandscapeOldStyle::~LandscapeOldStyle()
 	}
 
 	if (sides) delete [] sides;
-	if (sidesImages.size()>0)
+	if (!sidesImages.isEmpty())
 	{
 		qDeleteAll(sidesImages);
 		sidesImages.clear();

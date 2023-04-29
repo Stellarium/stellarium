@@ -448,7 +448,7 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 		//Visibility: Full text		
 		oss << q_(visibilityDescription.value(visibility, "")) << "<br />";
 
-		if (comms.size() > 0)
+		if (!comms.isEmpty())
 		{
 			oss << q_("Radio communication") << ":<br/>";
 			for (const auto& c : comms)

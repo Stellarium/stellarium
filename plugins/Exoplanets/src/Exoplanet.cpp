@@ -352,7 +352,7 @@ QString Exoplanet::getInfoString(const StelCore* core, const InfoStringGroup& fl
 		{
 			oss << QString("%1: %2 %3").arg(q_("Effective temperature")).arg(effectiveTemp).arg(qc_("K", "temperature")) << "<br />";
 		}
-		if (exoplanets.size() > 0)
+		if (!exoplanets.isEmpty())
 		{
 			QString qss = "padding: 0 2px 0 0;";
 			QString planetNameLabel = QString("<td style=\"%2\">%1</td>").arg(q_("Exoplanet"), qss);

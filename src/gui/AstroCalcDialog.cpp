@@ -1795,7 +1795,7 @@ void AstroCalcDialog::saveIgnoreDateTestFlag(bool b)
 
 void AstroCalcDialog::reGenerateEphemeris(bool withSelection)
 {
-	if (EphemerisList.size() > 0)
+	if (!EphemerisList.isEmpty())
 	{
 		int row = ui->ephemerisTreeWidget->currentIndex().row();
 		generateEphemeris(); // Update list of ephemeris
@@ -9122,7 +9122,7 @@ void AstroCalcDialog::calculateWutObjects()
 		enableAngularLimits(enableAngular);
 		core->setJD(JD);
 		adjustWUTColumns();
-		if (objectsList.size()>0)
+		if (!objectsList.isEmpty())
 			ui->saveObjectsButton->setEnabled(true);
 		else
 			ui->saveObjectsButton->setEnabled(false);

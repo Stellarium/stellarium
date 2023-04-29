@@ -1238,7 +1238,7 @@ void SkyLine::draw(StelCore *core) const
 				const QString &label=it.value();
 				// draw and labels: derive the irregular tick lengths from labeling
 				Vec3d start=fpt;
-				Vec3d end= (label.length()>0) ? part10 : part1;
+				Vec3d end= label.isEmpty() ? part1 : part10;
 				if (label.contains("5"))
 					end=part5;
 				Vec3d end10=part10;
@@ -1250,7 +1250,7 @@ void SkyLine::draw(StelCore *core) const
 
 				sPainter.drawGreatCircleArc(start, end, Q_NULLPTR, Q_NULLPTR, Q_NULLPTR);
 
-				if (label.length()>0 && (
+				if (!label.isEmpty() && (
 					currentFoV<60. // all labels
 					|| (currentFoV<=180. && !label.contains("5")) // 1.MM/10.MM/20.MM
 					|| label.startsWith("1.") // in any case

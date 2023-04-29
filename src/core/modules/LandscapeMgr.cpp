@@ -1144,7 +1144,7 @@ void LandscapeMgr::onTargetLocationChanged(const StelLocation &loc, const QStrin
 {
 //	if (loc.planetName != currentPlanetName)
 	{
-		if (landscapeID.length()>0)
+		if (!landscapeID.isEmpty())
 			setCurrentLandscapeID(landscapeID);
 		else if (flagLandscapeAutoSelection)
 		{
@@ -1361,7 +1361,7 @@ QString LandscapeMgr::getCurrentLandscapeHtmlDescription() const
 		if (extcoeff>-1.0)
 			atmosphere.append(QString("%1: %2").arg(q_("extinction coefficient"), QString::number(extcoeff, 'f', 2)));
 
-		if (atmosphere.size()>0)
+		if (!atmosphere.isEmpty())
 			desc += QString("<b>%1</b>: %2<br />").arg(q_("Atmospheric conditions"), atmosphere.join(", "));
 
 		const auto lightPollutionLum = landscape->getDefaultLightPollutionLuminance();

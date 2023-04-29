@@ -281,7 +281,7 @@ void RequestHandler::refreshTemplates()
 				Template tmp(f);
 				tmp.translate(*transProv);
 				//check if the file was correctly loaded
-				if(tmp.size()>0)
+				if(!tmp.isEmpty())
 				{
 					templateMap.insert('/'+line.toUtf8(),tmp);
 				}

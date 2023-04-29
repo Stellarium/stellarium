@@ -194,7 +194,7 @@ StelButton::StelButton(QGraphicsItem* parent,
 {
 	StelAction *action = StelApp::getInstance().getStelActionManager()->findAction(actionId);
 	StelAction *otherAction=Q_NULLPTR;
-	if (otherActionId.length()>0)
+	if (!otherActionId.isEmpty())
 		otherAction = StelApp::getInstance().getStelActionManager()->findAction(otherActionId);
 
 	initCtor(pixOn, pixOff, QPixmap(), pixHover, action, otherAction, noBackground, false);

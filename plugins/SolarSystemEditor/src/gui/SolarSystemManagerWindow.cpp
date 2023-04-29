@@ -186,7 +186,7 @@ void SolarSystemManagerWindow::populateSolarSystemList()
 
 void SolarSystemManagerWindow::removeObjects()
 {
-	if (ui->listWidgetObjects->selectedItems().length()>0)
+	if (!ui->listWidgetObjects->selectedItems().isEmpty())
 	{
 		// we must disconnect the signal or else the list will be rebuilt after the first deletion.
 		disconnect(ssEditor, SIGNAL(solarSystemChanged()), this, SLOT(populateSolarSystemList()));

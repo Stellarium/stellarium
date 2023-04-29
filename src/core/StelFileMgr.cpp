@@ -71,7 +71,7 @@ void StelFileMgr::init()
 	}
 #else
 	QByteArray userDirCand=qgetenv("STEL_USERDIR");
-	if (userDirCand.length()>0)
+	if (!userDirCand.isEmpty())
 	{
 		userDir=QString::fromLocal8Bit(userDirCand);
 	}

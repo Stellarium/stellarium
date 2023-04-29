@@ -1228,7 +1228,7 @@ void StelCore::moveObserverToSelected()
 
 				// Let's try guess name of location...
 				LocationMap results = StelApp::getInstance().getLocationMgr().pickLocationsNearby(loc.planetName, loc.getLongitude(), loc.getLatitude(), 1.0f);
-				if (results.size()>0)
+				if (!results.isEmpty())
 					loc = results.value(results.firstKey()); // ...and use it!
 
 				moveObserverTo(loc);
@@ -1278,7 +1278,7 @@ void StelCore::setObserver(StelObserver *obs)
 {
 	delete position;
 	position = obs;
-	if (!getUseCustomTimeZone() && obs->getCurrentLocation().ianaTimeZone.length()>0)
+	if (!getUseCustomTimeZone() && !obs->getCurrentLocation().ianaTimeZone.isEmpty())
 		setCurrentTimeZone(obs->getCurrentLocation().ianaTimeZone);
 }
 

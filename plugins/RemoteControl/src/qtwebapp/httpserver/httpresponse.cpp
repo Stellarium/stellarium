@@ -132,11 +132,11 @@ void HttpResponse::write(QByteArray data, bool lastPart)
     }
 
     // Send data
-    if (data.size()>0)
+    if (!data.isEmpty())
     {
         if (chunkedMode)
         {
-            if (data.size()>0)
+	    if (!data.isEmpty())
             {
                 QByteArray size=QByteArray::number(data.size(),16);
                 writeToSocket(size);
