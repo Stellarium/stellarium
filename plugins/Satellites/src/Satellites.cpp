@@ -1676,7 +1676,7 @@ QStringList Satellites::guessGroups(const TleData& tleData)
 
 		// add "supergroups", based on CelesTrak's groups
 		QStringList superGroup = satSuperGroupsMap.values(groupName);
-		if (superGroup.size()>0)
+		if (!superGroup.isEmpty())
 		{
 			for (int i=0; i<superGroup.size(); i++)
 			{
@@ -2392,7 +2392,7 @@ void Satellites::saveDownloadedUpdate(QNetworkReply* reply)
 		}
 	}
 	updateSources.clear();
-	if (newData.size()>0)
+	if (!newData.isEmpty())
 		updateSatellites(newData);
 	else
 		emit updateStateChanged(OtherError);

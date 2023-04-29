@@ -1160,7 +1160,7 @@ QVariantMap StelObject::getInfoMap(const StelCore *core) const
 void StelObject::setExtraInfoString(const InfoStringGroup& flags, const QString &str)
 {
 	extraInfoStrings.remove(flags); // delete all entries with these flags
-	if (str.length()>0)
+	if (!str.isEmpty())
 		extraInfoStrings.insert(flags, str);
 }
 void StelObject::addToExtraInfoString(const StelObject::InfoStringGroup &flags, const QString &str)

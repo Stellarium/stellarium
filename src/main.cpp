@@ -224,7 +224,7 @@ int main(int argc, char **argv)
 
 	// add contents of STEL_OPTS environment variable.
 	QString envStelOpts(qgetenv("STEL_OPTS").constData());
-	if (envStelOpts.length()>0)
+	if (!envStelOpts.isEmpty())
 	{
 		argList+= envStelOpts.split(" ");
 		argStr += " " + envStelOpts;

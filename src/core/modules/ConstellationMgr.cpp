@@ -292,7 +292,7 @@ void ConstellationMgr::deselectConstellations(void)
 		}
 
 		// If any constellation is selected at the moment, then let's do not touch to it!
-		if (omgr->getWasSelected() && selected.size()>0)
+		if (omgr->getWasSelected() && !selected.empty())
 			selected.pop_back();
 
 		// Let's hide all previously selected constellations

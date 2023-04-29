@@ -380,7 +380,7 @@ void Scenery3dDialog::updateCurrentScene(const SceneInfo &sceneInfo)
 	{
 		ui->scenery3dListWidget->blockSignals(true);
 		QList<QListWidgetItem*> currentItems = ui->scenery3dListWidget->findItems(sceneInfo.name, Qt::MatchExactly);
-		if(currentItems.size()>0)
+		if(!currentItems.isEmpty())
 		{
 			ui->scenery3dListWidget->setCurrentItem(currentItems.at(0));
 		}

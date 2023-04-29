@@ -350,7 +350,7 @@ bool S3DRenderer::drawArrays(bool shading, bool blendAlphaAdditive)
 	}
 
 	//sort and render transparent objects
-	if(transparentGroups.size()>0)
+	if(!transparentGroups.isEmpty())
 	{
 		zSortValue = currentScene->getEyePosition().toVec3f();
 		std::sort(transparentGroups.begin(),transparentGroups.end(),zSortFunction);
@@ -2155,7 +2155,7 @@ bool S3DRenderer::initCubemapping()
 
 void S3DRenderer::deleteShadowmapping()
 {
-	if(shadowFBOs.size()>0) //kinda hack that finds out if shadowmap related objects have been created
+	if(!shadowFBOs.isEmpty()) //kinda hack that finds out if shadowmap related objects have been created
 	{
 		//we can delete them all at once then
 		glDeleteFramebuffers(shadowFBOs.size(),shadowFBOs.constData());

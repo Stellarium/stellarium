@@ -355,10 +355,10 @@ void StelMainScriptAPI::screenshot(const QString& prefix, bool invert, const QSt
 
 	const bool oldInvertSetting = StelMainView::getInstance().getFlagInvertScreenShotColors();
 	const QString oldFormat=StelMainView::getInstance().getScreenshotFormat();
-	if ((format.length()>0) && (format.length()<=4))
+	if ((!format.isEmpty()) && (format.length()<=4))
 		StelMainView::getInstance().setScreenshotFormat(format);
 	// Check requested against set image format.
-	if ((format.length()>0) && (StelMainView::getInstance().getScreenshotFormat() != format))
+	if ((!format.isEmpty()) && (StelMainView::getInstance().getScreenshotFormat() != format))
 	{
 		qWarning() << "Screenshot format" << format << "not supported. Not saving screenshot.";
 		return;

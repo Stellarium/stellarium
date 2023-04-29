@@ -298,7 +298,7 @@ void RemoteSyncDialog::populateExclusionLists()
 void RemoteSyncDialog::addPropertiesForExclusion()
 {
 	QStringList strings;
-	if (ui->listWidgetAllProperties->selectedItems().length()>0)
+	if (!ui->listWidgetAllProperties->selectedItems().isEmpty())
 	{
 		for (const auto* item : ui->listWidgetAllProperties->selectedItems())
 		{
@@ -321,7 +321,7 @@ void RemoteSyncDialog::addPropertiesForExclusion()
 void RemoteSyncDialog::removePropertiesForExclusion()
 {
 	QStringList strings;
-	if (ui->listWidgetSelectedProperties->selectedItems().length()>0)
+	if (!ui->listWidgetSelectedProperties->selectedItems().isEmpty())
 	{
 		for (const auto* item : ui->listWidgetSelectedProperties->selectedItems())
 		{

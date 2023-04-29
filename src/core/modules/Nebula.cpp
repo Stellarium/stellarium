@@ -232,13 +232,13 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 	if (flags&Name)
 	{
 		QStringList extraNames=getExtraInfoStrings(Name);
-		if (extraNames.length()>0)
+		if (!extraNames.isEmpty())
 			oss << q_("Additional names: ") << extraNames.join(", ") << "<br/>";
 	}
 	if (flags&CatalogNumber)
 	{
 		QStringList extraCat=getExtraInfoStrings(CatalogNumber);
-		if (extraCat.length()>0)
+		if (!extraCat.isEmpty())
 			oss << q_("Additional catalog numbers: ") << extraCat.join(", ") << "<br/>";
 	}
 
@@ -571,7 +571,7 @@ float Nebula::getSelectPriority(const StelCore* core) const
 	else if (nType==NebHII) // Sharpless and LBN
 		lim=10.0f - 2.0f*qMin(1.5f, majorAxisSize); // Unfortunately, in Sh catalog, we always have mag=99=unknown!
 
-	if (std::min(mLim, lim)<=maxMagHint || outlineSegments.size()>0 || nType==NebRegion) // High priority for big DSO (with outlines) or regions
+	if (std::min(mLim, lim)<=maxMagHint || !outlineSegments.empty() || nType==NebRegion) // High priority for big DSO (with outlines) or regions
 		selectPriority = -10.f;
 	else
 		selectPriority -= 5.f;
