@@ -124,7 +124,7 @@ public:
 	//! Get the list of objects which was recently selected by the user.
 	const QList<StelObjectP>& getSelectedObject() const {return lastSelectedObjects;}
 
-	//! Return the list objects of type "withType" which was recently selected by the user.
+	//! Return the list objects of type "type" which was recently selected by the user.
 	//! @param type return only objects of the given type
 	QList<StelObjectP> getSelectedObject(const QString& type) const;
 
