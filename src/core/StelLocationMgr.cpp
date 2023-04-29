@@ -527,7 +527,7 @@ LocationMap StelLocationMgr::loadCitiesBin(const QString& fileName)
 			}
 		}
 	}
-	if (unknownTZlist.length()>0)
+	if (!unknownTZlist.isEmpty())
 	{
 		unknownTZlist.removeDuplicates();
 		qDebug() << "StelLocationMgr::loadCitiesBin(): Summary of unknown TimeZones:";
