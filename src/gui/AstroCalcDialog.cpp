@@ -1043,10 +1043,10 @@ void AstroCalcDialog::saveCelestialPositionsCategory(int index)
 	currentCelestialPositions();
 }
 
-void AstroCalcDialog::fillCelestialPositionTable(QString objectName, QString RA, QString Dec, double magnitude,
-						 QString angularSize, QString angularSizeToolTip, QString extraData,
-						 QString extraDataToolTip, QString transitTime, QString maxElevation,
-						 QString sElongation, QString objectType)
+void AstroCalcDialog::fillCelestialPositionTable(const QString &objectName, const QString &RA, const QString &Dec, double magnitude,
+						 const QString &angularSize, const QString &angularSizeToolTip, const QString &extraData,
+						 const QString &extraDataToolTip, const QString &transitTime, const QString &maxElevation,
+						  QString &sElongation, const QString &objectType)
 {
 	ACCelPosTreeWidgetItem* treeItem = new ACCelPosTreeWidgetItem(ui->celestialPositionsTreeWidget);
 	treeItem->setText(CColumnName, objectName);
@@ -1470,7 +1470,7 @@ QString AstroCalcDialog::getSelectedObjectNameI18n(StelObjectP selectedObject)
 	return name;
 }
 
-void AstroCalcDialog::fillHECPositionTable(QString objectName, QChar objectSymbol, QString latitude, QString longitude, double distance)
+void AstroCalcDialog::fillHECPositionTable(const QString &objectName, const QChar objectSymbol, const QString &latitude, const QString &longitude, const double distance)
 {
 	AHECPosTreeWidgetItem* treeItem = new AHECPosTreeWidgetItem(ui->hecPositionsTreeWidget);
 	treeItem->setText(HECColumnName, objectName);
@@ -1578,7 +1578,7 @@ void AstroCalcDialog::currentHECPositions()
 	drawHECGraph();
 }
 
-void AstroCalcDialog::drawHECGraph(QString selectedObject)
+void AstroCalcDialog::drawHECGraph(const QString &selectedObject)
 {
 	QScatterSeries *seriesPlanets = new QScatterSeries();
 	QScatterSeries *seriesSelectedPlanet = new QScatterSeries();
@@ -6800,9 +6800,9 @@ void AstroCalcDialog::savePhenomena()
 		saveTableAsXLSX(fileData.first, ui->phenomenaTreeWidget, phenomenaHeader, q_("Phenomena"), q_("Phenomena"));
 }
 
-void AstroCalcDialog::fillPhenomenaTableVis(QString phenomenType, double JD, QString firstObjectName, float firstObjectMagnitude,
-					    QString secondObjectName, float secondObjectMagnitude, QString separation, QString elevation,
-					    QString elongation, QString angularDistance, QString elongTooltip, QString angDistTooltip)
+void AstroCalcDialog::fillPhenomenaTableVis(const QString &phenomenType, double JD, const QString &firstObjectName, float firstObjectMagnitude,
+					    const QString &secondObjectName, float secondObjectMagnitude, const QString &separation, const QString &elevation,
+					    QString &elongation, const QString &angularDistance, const QString &elongTooltip, const QString &angDistTooltip)
 {
 	ACPhenTreeWidgetItem* treeItem = new ACPhenTreeWidgetItem(ui->phenomenaTreeWidget);
 	treeItem->setText(PhenomenaType, phenomenType);
@@ -7201,11 +7201,9 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 	}
 }
 
-double AstroCalcDialog::findInitialStep(double startJD, double stopJD, QStringList objects)
+double AstroCalcDialog::findInitialStep(double startJD, double stopJD, QStringList &objects)
 {
-	double limit, step = (stopJD - startJD) / 16.0;
 	static const QRegularExpression mp("^[(](\\d+)[)]\\s(.+)$");
-
 	static const QMap<QString, double> steps = {
 		{ "Moon",     0.25 },
 		{ "C/",       0.5  },
@@ -7222,9 +7220,8 @@ double AstroCalcDialog::findInitialStep(double startJD, double stopJD, QStringLi
 		{ "Pluto",   20.0  },
 	};
 
-	if (objects.indexOf(mp)>=0)
-		limit = 10.;
-	else
+	double limit=10.;
+	if (objects.contains(mp))
 	{
 		limit = 24.8 * 365.25;
 		QMap<QString, double>::const_iterator it=steps.constBegin();
@@ -7236,6 +7233,7 @@ double AstroCalcDialog::findInitialStep(double startJD, double stopJD, QStringLi
 		}
 	}
 
+	double step = (stopJD - startJD) / 16.0;
 	if (step > limit)
 		step = limit;
 
@@ -8231,7 +8229,7 @@ void AstroCalcDialog::enableAngularLimits(bool enable)
 		ui->wutMatchingObjectsTreeWidget->hideColumn(WUTAngularSize); // special case!
 }
 
-void AstroCalcDialog::fillWUTTable(QString objectName, QString designation, float magnitude, Vec4d RTSTime, double maxElevation, double angularSize, QString constellation, QString otype, bool decimalDegrees)
+void AstroCalcDialog::fillWUTTable(const QString &objectName, const QString &designation, float magnitude, const Vec4d &RTSTime, double maxElevation, double angularSize, const QString &constellation, const QString &otype, bool decimalDegrees)
 {
 	QString sAngularSize = dash;
 	QString sRise = dash;
@@ -9472,7 +9470,7 @@ QList<PlanetP> AstroCalcDialog::getSelectedMinorPlanets()
 	return planets;
 }
 
-void AstroCalcDialog::goToObject(const QString name, const double JD)
+void AstroCalcDialog::goToObject(const QString &name, const double JD)
 {
 	if (objectMgr->findAndSelectI18n(name) || objectMgr->findAndSelect(name))
 	{
