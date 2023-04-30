@@ -238,7 +238,7 @@ Mat4d StelObserver::getRotEquatorialToVsop87(void) const
 SpaceShipObserver::SpaceShipObserver(const StelLocation& startLoc, const StelLocation& target, double atransitSeconds, double atimeToGo) : StelObserver(startLoc),
 		moveStartLocation(startLoc), moveTargetLocation(target), artificialPlanet(Q_NULLPTR), timeToGo(atimeToGo), transitSeconds(atransitSeconds)
 {
-	qDebug() << "SpaceshipObserver() from " << startLoc.serializeToLine() << "to" << target.serializeToLine();
+	qDebug() << "SpaceshipObserver() from " << startLoc.serializeToLine().replace('\t', '|') << "to" << target.serializeToLine().replace('\t', '|');
 	Q_ASSERT((atimeToGo<0) || (atimeToGo>=0 && atimeToGo<=atransitSeconds));
 	if(timeToGo<0.0)
 		timeToGo = transitSeconds;
@@ -315,7 +315,7 @@ bool SpaceShipObserver::update(double deltaTime)
 	{
 		currentLocation.name = ss->searchByEnglishName(moveStartLocation.planetName)->getNameI18n() + " -> " +
 						      ss->searchByEnglishName(moveTargetLocation.planetName)->getNameI18n();
-		qDebug() << "timeToGo:" << timeToGo << ": " << currentLocation.name << "Full location:" << currentLocation.serializeToLine();
+		qDebug() << "timeToGo:" << timeToGo << ": " << currentLocation.name << "Full location:" << currentLocation.serializeToLine().replace('\t', '|');
 		if (artificialPlanet)
 		{
 			// Update SpaceShip position

@@ -502,7 +502,7 @@ void LocationDialog::populateTimeZonesList()
 
 	// Special sort for UTC+XX:YY time zones: we want them
 	// to go from the most negative to the most positive.
-	const auto utcRegEx = QRegularExpression("^UTC([+-])(\\d\\d):(\\d\\d)$");
+	static const QRegularExpression utcRegEx("^UTC([+-])(\\d\\d):(\\d\\d)$");
 	std::vector<int> utcOffsets;
 	for(int n = 0; n < tzNames.size();)
 	{

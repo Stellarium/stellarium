@@ -1162,7 +1162,7 @@ void LandscapeMgr::onLocationChanged(const StelLocation &loc)
 // If landscapeID is empty but flagLandscapeAutoSelection is true, load a location fitting to loc's planet.
 void LandscapeMgr::onTargetLocationChanged(const StelLocation &loc, const QString& landscapeID)
 {
-	qDebug() << "LandscapeMgr::onTargetLocationChanged:" << loc.serializeToLine() << "Landscape requested:" << landscapeID;
+	qDebug() << "LandscapeMgr::onTargetLocationChanged:" << loc.serializeToLine().replace('\t', '|') << "Landscape requested:" << landscapeID;
 	if (landscapeID.length()==0)
 		qDebug() << "by" << sender()->objectName();
 //	if (loc.planetName != currentPlanetName)
