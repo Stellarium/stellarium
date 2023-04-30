@@ -3507,9 +3507,7 @@ void AstroCalcDialog::generateSolarEclipsesLocal()
 								if (eclipseData.L2 < 0.)
 								{
 									eclipseTypeStr = qc_("Total", "eclipse type");
-									JD = JD3;
-									JD3 = JD2;
-									JD2 = JD;
+									qSwap(JD2, JD3);
 								}
 								else
 									eclipseTypeStr = qc_("Annular", "eclipse type");
@@ -7221,7 +7219,11 @@ double AstroCalcDialog::findInitialStep(double startJD, double stopJD, QStringLi
 	};
 
 	double limit=10.;
+#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
 	if (objects.contains(mp))
+#else
+	if (objects.indexOf(mp)>0)
+#endif
 	{
 		limit = 24.8 * 365.25;
 		QMap<QString, double>::const_iterator it=steps.constBegin();
@@ -8886,7 +8888,7 @@ void AstroCalcDialog::calculateWutObjects()
 							break;
 					}
 
-					for (const auto& object : catDSO)
+					for (const auto& object : qAsConst(catDSO))
 					{
 						mag = object->getVMagnitude(core);
 						if (mag <= magLimit && object->isAboveRealHorizon(core))
