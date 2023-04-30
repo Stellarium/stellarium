@@ -1140,11 +1140,6 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 	QDataStream dsoOutStream(&dsoOut);
 	dsoOutStream.setVersion(QDataStream::Qt_5_2);
 
-	int	id, orientationAngle, NGC, IC, M, C, B, Sh2, VdB, RCW, LDN, LBN, Cr, Mel, PGC, UGC, Arp, VV, DWB, Tr, St, Ru, VdBHa;
-	float	raRad, decRad, bMag, vMag, majorAxisSize, minorAxisSize, dist, distErr, z, zErr, plx, plxErr;
-	QString oType, mType, Ced, PK, PNG, SNRG, ACO, HCG, ESO, VdBH, ra, dec;
-	Nebula::NebulaType nType;
-
 	int readOk = 0;				// how many records were read without problems
 	while (!dsoIn.atEnd())
 	{
@@ -1171,55 +1166,56 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 			QStringList list=record.split("\t", QString::KeepEmptyParts);
 			#endif
 
-			id				= list.at(0).toInt();		// ID (inner identification number)
-			ra				= list.at(1).trimmed();
-			dec				= list.at(2).trimmed();
-			bMag			= list.at(3).toFloat();		// B magnitude
-			vMag			= list.at(4).toFloat();		// V magnitude
-			oType			= list.at(5).trimmed();		// Object type
-			mType			= list.at(6).trimmed();		// Morphological type of object
-			majorAxisSize		= list.at(7).toFloat();		// major axis size (arcmin)
-			minorAxisSize		= list.at(8).toFloat();		// minor axis size (arcmin)
-			orientationAngle	= list.at(9).toInt();		// orientation angle (degrees)
-			z				= list.at(10).toFloat();	// redshift
-			zErr				= list.at(11).toFloat();	// error of redshift
-			plx				= list.at(12).toFloat();	// parallax (mas)
-			plxErr			= list.at(13).toFloat();	// error of parallax (mas)
-			dist				= list.at(14).toFloat();	// distance (Mpc for galaxies, kpc for other objects)
-			distErr			= list.at(15).toFloat();	// distance error (Mpc for galaxies, kpc for other objects)
+			int id                 = list.at(0).toInt();    // ID (inner identification number)
+			QString ra             = list.at(1).trimmed();
+			QString dec            = list.at(2).trimmed();
+			float bMag             = list.at(3).toFloat();  // B magnitude
+			float vMag             = list.at(4).toFloat();  // V magnitude
+			QString oType          = list.at(5).trimmed();  // Object type
+			QString mType          = list.at(6).trimmed();  // Morphological type of object
+			float majorAxisSize    = list.at(7).toFloat();  // major axis size (arcmin)
+			float minorAxisSize    = list.at(8).toFloat();  // minor axis size (arcmin)
+			int orientationAngle   = list.at(9).toInt();    // orientation angle (degrees)
+			float z                = list.at(10).toFloat(); // redshift
+			float zErr             = list.at(11).toFloat(); // error of redshift
+			float plx              = list.at(12).toFloat(); // parallax (mas)
+			float plxErr           = list.at(13).toFloat(); // error of parallax (mas)
+			float dist             = list.at(14).toFloat(); // distance (Mpc for galaxies, kpc for other objects)
+			float distErr          = list.at(15).toFloat(); // distance error (Mpc for galaxies, kpc for other objects)
 			// -----------------------------------------------
 			// cross-identification data
 			// -----------------------------------------------
-			NGC				= list.at(16).toInt();		// NGC number
-			IC				= list.at(17).toInt();		// IC number
-			M				= list.at(18).toInt();		// M number
-			C				= list.at(19).toInt();		// C number
-			B				= list.at(20).toInt();		// B number
-			Sh2				= list.at(21).toInt();		// Sh2 number
-			VdB				= list.at(22).toInt();		// VdB number
-			RCW				= list.at(23).toInt();		// RCW number
-			LDN				= list.at(24).toInt();		// LDN number
-			LBN				= list.at(25).toInt();		// LBN number
-			Cr				= list.at(26).toInt();		// Cr number (alias: Col)
-			Mel				= list.at(27).toInt();		// Mel number
-			PGC				= list.at(28).toInt();		// PGC number (subset)
-			UGC				= list.at(29).toInt();		// UGC number (subset)
-			Ced				= list.at(30).trimmed();	// Ced number
-			Arp				= list.at(31).toInt();		// Arp number
-			VV				= list.at(32).toInt();		// VV number
-			PK				= list.at(33).trimmed();	// PK number
-			PNG				= list.at(34).trimmed();	// PN G number
-			SNRG			= list.at(35).trimmed();	// SNR G number
-			ACO				= list.at(36).trimmed();	// ACO number
-			HCG				= list.at(37).trimmed();	// HCG number
-			ESO				= list.at(38).trimmed();	// ESO number
-			VdBH			= list.at(39).trimmed();	// VdBH number
-			DWB				= list.at(40).toInt();		// DWB number
-			Tr				= list.at(41).toInt();		// Tr number
-			St				= list.at(42).toInt();		// St number
-			Ru				= list.at(43).toInt();		// Ru number
-			VdBHa			= list.at(44).toInt();		// VdB-Ha number
+			int NGC                = list.at(16).toInt();   // NGC number
+			int IC                 = list.at(17).toInt();   // IC number
+			int M                  = list.at(18).toInt();   // M number
+			int C                  = list.at(19).toInt();   // C number
+			int B                  = list.at(20).toInt();   // B number
+			int Sh2                = list.at(21).toInt();   // Sh2 number
+			int VdB                = list.at(22).toInt();   // VdB number
+			int RCW                = list.at(23).toInt();   // RCW number
+			int LDN                = list.at(24).toInt();   // LDN number
+			int LBN                = list.at(25).toInt();   // LBN number
+			int Cr                 = list.at(26).toInt();   // Cr number (alias: Col)
+			int Mel                = list.at(27).toInt();   // Mel number
+			int PGC                = list.at(28).toInt();   // PGC number (subset)
+			int UGC                = list.at(29).toInt();   // UGC number (subset)
+			QString Ced            = list.at(30).trimmed();	// Ced number
+			int Arp                = list.at(31).toInt();   // Arp number
+			int VV                 = list.at(32).toInt();   // VV number
+			QString PK             = list.at(33).trimmed(); // PK number
+			QString PNG            = list.at(34).trimmed(); // PN G number
+			QString SNRG           = list.at(35).trimmed(); // SNR G number
+			QString ACO            = list.at(36).trimmed(); // ACO number
+			QString HCG            = list.at(37).trimmed(); // HCG number
+			QString ESO            = list.at(38).trimmed(); // ESO number
+			QString VdBH           = list.at(39).trimmed(); // VdBH number
+			int DWB                = list.at(40).toInt();   // DWB number
+			int Tr                 = list.at(41).toInt();   // Tr number
+			int St                 = list.at(42).toInt();   // St number
+			int Ru                 = list.at(43).toInt();   // Ru number
+			int VdBHa              = list.at(44).toInt();   // VdB-Ha number
 
+			float raRad, decRad;
 			if (decimal)
 			{
 				// Convert from deg to rad
@@ -1254,8 +1250,7 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 			// Warning: Hyades and LMC has visual magnitude less than 1.0 (0.5^m and 0.9^m)
 			if (bMag <= 0.f) bMag = 99.f;
 			if (vMag <= 0.f) vMag = 99.f;
-			// TODO: The map could be sorted by probability (number of total objects). More common objects at start...
-			static const QMap<QString, Nebula::NebulaType> oTypesMap = {
+			static const QHash<QString, Nebula::NebulaType> oTypesHash({
 				{ "G"   , Nebula::NebGx  },
 				{ "GX"  , Nebula::NebGx  },
 				{ "GC"  , Nebula::NebGc  },
@@ -1337,8 +1332,8 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 				{ "PSR" , Nebula::NebSNR  },
 				{ "HH"  , Nebula::NebISM  },
 				{ "V*"  , Nebula::NebStar },
-				{ "*IN"  , Nebula::NebCn },
-				{ "SN*"  , Nebula::NebStar },
+				{ "*IN" , Nebula::NebCn   },
+				{ "SN*" , Nebula::NebStar },
 				{ "PA?" , Nebula::NebPPN  },
 				{ "BUB" , Nebula::NebISM  },
 				{ "CLG" , Nebula::NebGxCl },
@@ -1347,9 +1342,9 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 				{ "SCG" , Nebula::NebGxCl },
 				{ "REG" , Nebula::NebRegion },
 				{ "?" , Nebula::NebUnknown }
-			};
+			});
 
-			nType=oTypesMap.value(oType.toUpper(), Nebula::NebUnknown);
+			Nebula::NebulaType nType=oTypesHash.value(oType.toUpper(), Nebula::NebUnknown);
 			if (nType == Nebula::NebUnknown)
 				qDebug() << "Record with ID" << id <<"has unknown type of object:" << oType;
 
