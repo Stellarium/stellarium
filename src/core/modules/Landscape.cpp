@@ -1486,6 +1486,11 @@ float LandscapePolygonal::getOpacity(Vec3d azalt) const
 	if (horizonPolygon->contains(azalt)) return 1.0f; else return 0.0f;
 }
 
+void LandscapePolygonal::setGroundColor(const Vec3f &color)
+{
+	groundColor=color;
+}
+
 ////////////////////////////////////////////////////////////////////////////////////////
 // LandscapeFisheye
 //

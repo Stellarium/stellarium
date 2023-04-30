@@ -1092,7 +1092,7 @@ void StelCore::returnToDefaultLocation()
 	StelLocationMgr& locationMgr = StelApp::getInstance().getLocationMgr();
 	StelLocation loc = locationMgr.locationForString(defaultLocationID);
 	if (loc.isValid())
-		moveObserverTo(loc, 0.);
+		moveObserverTo(loc, 1., 2.);
 	else
 		qDebug() << "StelCore::returnToDefaultLocation: Location " << loc.serializeToLine().replace('\t', '|') << "is invalid. Store an entry from the locations list as default location.";
 }
