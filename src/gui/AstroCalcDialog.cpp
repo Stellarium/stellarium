@@ -7222,7 +7222,7 @@ double AstroCalcDialog::findInitialStep(double startJD, double stopJD, QStringLi
 #if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
 	if (objects.contains(mp))
 #else
-	if (objects.indexOf(mp)>0)
+	if (objects.indexOf(mp)>=0)
 #endif
 	{
 		limit = 24.8 * 365.25;
