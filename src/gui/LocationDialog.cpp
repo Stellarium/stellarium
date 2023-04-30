@@ -133,7 +133,7 @@ void LocationDialog::createDialogContent()
 	// Connect all the QT signals
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
-	connect(ui->mapWidget, SIGNAL(positionChanged(double, double)), this, SLOT(setLocationFromMap(double, double)), Qt::UniqueConnection);
+	connect(ui->mapWidget, SIGNAL(positionChanged(double, double, const QColor&)), this, SLOT(setLocationFromMap(double, double, const QColor&)), Qt::UniqueConnection);
 
 	connect(ui->addLocationToListPushButton, SIGNAL(clicked()), this, SLOT(addCurrentLocationToList()));
 	connect(ui->deleteLocationFromListPushButton, SIGNAL(clicked()), this, SLOT(deleteCurrentLocationFromList()));
@@ -207,7 +207,7 @@ void LocationDialog::createDialogContent()
 		this->setLocationUIvisible(true);  // restore UI
 		core->returnToDefaultLocation();
 		mMgr->resetInitViewPos();
-		lMgr->setCurrentLandscapeID(lMgr->getDefaultLandscapeID(), 0.);
+		lMgr->setCurrentLandscapeID(lMgr->getDefaultLandscapeID(), 1.);
 	});
 
 	ui->citySearchLineEdit->setFocus();
@@ -306,11 +306,11 @@ void LocationDialog::setLocationUIvisible(bool visible)
 	ui->mapWidget->setMarkerVisible(visible);
 	if(visible)
 	{
-		connect(ui->mapWidget, SIGNAL(positionChanged(double, double)), this, SLOT(setLocationFromMap(double, double)), Qt::UniqueConnection);
+		connect(ui->mapWidget, SIGNAL(positionChanged(double, double, const QColor&)), this, SLOT(setLocationFromMap(double, double, const QColor&)), Qt::UniqueConnection);
 	}
 	else
 	{
-		disconnect(ui->mapWidget, SIGNAL(positionChanged(double, double)), this, SLOT(setLocationFromMap(double, double)));
+		disconnect(ui->mapWidget, SIGNAL(positionChanged(double, double, const QColor&)), this, SLOT(setLocationFromMap(double, double, const QColor&)));
 	}
 	ui->addLocationToListPushButton->setVisible(visible);
 	ui->deleteLocationFromListPushButton->setVisible(visible);
@@ -616,7 +616,7 @@ void LocationDialog::setLocationFromList(const QModelIndex& index)
 	// This calls indirectly updateFromProgram()
 }
 
-void LocationDialog::setLocationFromMap(double longitude, double latitude)
+void LocationDialog::setLocationFromMap(double longitude, double latitude, const QColor &color)
 {
 	StelCore *core = StelApp::getInstance().getCore();
 	if (core->getUseCustomTimeZone())
@@ -627,7 +627,11 @@ void LocationDialog::setLocationFromMap(double longitude, double latitude)
 	loc.setLongitude(longitude);
 	loc.name= QString("%1, %2").arg(loc.getLatitude()).arg(loc.getLongitude()); // Force a preliminary name
 	setFieldsFromLocation(loc);
-	core->moveObserverTo(loc, 0.);
+	if (loc.planetName=="Earth")
+		core->moveObserverTo(loc, 0., 1., QString("ZeroColor(%1)").arg(Vec3f(color).toStr()));
+	else
+		core->moveObserverTo(loc, 0., 1., QString()); // Loads a default landscape for the planet.
+
 	// Only for locations on Earth: set zone to LMST.
 	// TODO: Find a way to lookup (lon,lat)->country->timezone.
 

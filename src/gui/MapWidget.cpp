@@ -58,7 +58,16 @@ void MapWidget::mousePressEvent(QMouseEvent* event)
 
 	const auto lat = (pos.y() - mapRect.center().y()) / mapRect.height() * -180;
 	const auto lon = (pos.x() - mapRect.center().x()) / mapRect.width()  * 360;
-	emit positionChanged(lon, lat);
+
+	// rescale pos to original map
+	QPoint imgPoint((static_cast<float>(pos.x() - mapRect.center().x()) / static_cast<float>(mapRect.width())  +0.5) * map.width(),
+			(static_cast<float>(pos.y() - mapRect.center().y()) / static_cast<float>(mapRect.height()) +0.5) * map.height());
+
+	// Sample the map pixel color. Use a small box to avoid 1-pixel surprises.
+	QImage sampledPix=map.copy(QRect(imgPoint-QPoint(4,4), QSize(8,8))).toImage().scaled(1,1);
+	QColor color=sampledPix.pixelColor(0,0);
+
+	emit positionChanged(lon, lat, color);
 }
 
 void MapWidget::setMap(const QPixmap &map)

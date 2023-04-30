@@ -393,6 +393,8 @@ public:
 	virtual void load(const QSettings& landscapeIni, const QString& landscapeId) Q_DECL_OVERRIDE;
 	virtual void draw(StelCore* core, bool onlyPolygon) Q_DECL_OVERRIDE;
 	virtual float getOpacity(Vec3d azalt) const Q_DECL_OVERRIDE;
+	// To allow ad-hoc "zero" landscapes with color from map
+	void setGroundColor(const Vec3f &color);
 private:
 	// we have inherited: horizonFileName, horizonPolygon, horizonPolygonLineColor
 	Vec3f groundColor; //! specified in landscape.ini[landscape]ground_color.

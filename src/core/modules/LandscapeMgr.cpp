@@ -1163,15 +1163,32 @@ void LandscapeMgr::onLocationChanged(const StelLocation &loc)
 void LandscapeMgr::onTargetLocationChanged(const StelLocation &loc, const QString& landscapeID)
 {
 	qDebug() << "LandscapeMgr::onTargetLocationChanged:" << loc.serializeToLine().replace('\t', '|') << "Landscape requested:" << landscapeID;
-	if (landscapeID.length()==0)
-		qDebug() << "by" << sender()->objectName();
 //	if (loc.planetName != currentPlanetName)
 	{
-		if (!landscapeID.isEmpty() && getAllLandscapeNames().indexOf(landscapeID)>0)
+		if (!landscapeID.isEmpty() && getAllLandscapeNames().contains(landscapeID))
 		{
 			const bool landscapeSetsLocation = getFlagLandscapeSetsLocation();
 			setFlagLandscapeSetsLocation(false);
 			setCurrentLandscapeID(landscapeID);
+			setFlagLandscapeSetsLocation(landscapeSetsLocation);
+		}
+		else if(landscapeID.startsWith("ZeroColor("))
+		{
+			// New feature: Load a zero landscape and recolor it.
+			// This can happen when clicking on the map. The point on the mapcan be sampled for color (e.g., desert, greengrass, ocean blue, polar white, ...)
+			qDebug() << "Attempt to construct zero landscape with new color";
+			const bool landscapeSetsLocation = getFlagLandscapeSetsLocation();
+			setFlagLandscapeSetsLocation(false);
+			setCurrentLandscapeID("zero");
+			Vec3f color(0.3);
+			static const QRegularExpression zeroColor("^ZeroColor\\(([0-9].[0-9]+,[0-9].[0-9]+,[0-9].[0-9]+)\\)$");
+			QRegularExpressionMatch match=zeroColor.match(landscapeID);
+			if (match.hasMatch())
+				color=Vec3f(match.captured(1));
+			else
+				qDebug() << "Cannot extract color from landscapeID" << landscapeID;
+			LandscapePolygonal *l=static_cast<LandscapePolygonal*>(landscape);
+			l->setGroundColor(color);
 			setFlagLandscapeSetsLocation(landscapeSetsLocation);
 		}
 		else if (flagLandscapeAutoSelection && (loc.planetName != currentPlanetName))
