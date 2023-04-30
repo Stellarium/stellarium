@@ -1062,7 +1062,7 @@ void StelCore::updateTransformMatrices()
 // This avoids calling a costly operation every frame.
 void StelCore::updateFixedEquatorialTransformMatrices()
 {
-	qDebug() << "Location has changed:" << getCurrentLocation().serializeToLine();
+	qDebug() << "Location has changed:" << getCurrentLocation().serializeToLine().replace('\t', '|');
 	matAltAzToFixedEquatorial = Mat4d::yrotation(M_PI_2-static_cast<double>(getCurrentLocation().getLatitude())*M_PI_180);
 	matFixedEquatorialToAltAz = matAltAzToFixedEquatorial.transpose();
 }
@@ -1093,6 +1093,8 @@ void StelCore::returnToDefaultLocation()
 	StelLocation loc = locationMgr.locationForString(defaultLocationID);
 	if (loc.isValid())
 		moveObserverTo(loc, 0.);
+	else
+		qDebug() << "StelCore::returnToDefaultLocation: Location " << loc.serializeToLine().replace('\t', '|') << "is invalid. Store an entry from the locations list as default location.";
 }
 
 void StelCore::returnToHome()
