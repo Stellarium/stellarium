@@ -2414,7 +2414,7 @@ void StelPainter::drawFixedColorWideLinesAsQuads(const ArrayDesc& vertexArray, i
 	else
 		newVertices.reserve(count*6);
 	newVertices.resize((count-1)*6);
-	assert(vertexArray.type == GL_FLOAT);
+	Q_ASSERT(vertexArray.type == GL_FLOAT);
 	const auto lineVertData = static_cast<const float*>(vertexArray.pointer) + vertexArray.size*offset;
 	const int step = mode==Lines ? 2 : 1;
 	for(int n = 0; n < count-1; n += step)
@@ -2442,7 +2442,7 @@ void StelPainter::drawFixedColorWideLinesAsQuads(const ArrayDesc& vertexArray, i
 		default:
 			in0 = Vec4f(0.f);
 			in1 = Vec4f(0.f);
-			assert(!"Bad number of elements in vertex array");
+			qCritical("Bad number of elements in vertex array"); // or qFatal()?
 		}
 
 		const Vec4f clip0 = projMat * Vec4f(in0);
@@ -2480,7 +2480,7 @@ void StelPainter::drawFixedColorWideLinesAsQuads(const ArrayDesc& vertexArray, i
 	{
 		// Connect the ends
 		const auto lastN = newVertices.size()-1;
-		assert(lastN >= 2);
+		Q_ASSERT(lastN >= 2);
 		newVertices.push_back(newVertices[lastN-2]);
 		newVertices.push_back(newVertices[lastN]);
 		newVertices.push_back(newVertices[0]);

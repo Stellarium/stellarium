@@ -97,7 +97,7 @@ void TextureAverageComputer::init()
 {
 	GLuint texture = -1;
 	gl.glGenTextures(1, &texture);
-	assert(texture>0);
+	Q_ASSERT(texture>0);
 	gl.glActiveTexture(GL_TEXTURE0);
 	gl.glBindTexture(GL_TEXTURE_2D, texture);
 
@@ -174,7 +174,7 @@ TextureAverageComputer::TextureAverageComputer(QOpenGLFunctions_3_3_Core& gl, co
 	gl.glBindFramebuffer(GL_DRAW_FRAMEBUFFER,potFBO);
 	gl.glFramebufferTexture2D(GL_DRAW_FRAMEBUFFER,GL_COLOR_ATTACHMENT0,GL_TEXTURE_2D,potTex,0);
 	[[maybe_unused]] const auto status=gl.glCheckFramebufferStatus(GL_DRAW_FRAMEBUFFER);
-	assert(status==GL_FRAMEBUFFER_COMPLETE);
+	Q_ASSERT(status==GL_FRAMEBUFFER_COMPLETE);
 	gl.glBindFramebuffer(GL_DRAW_FRAMEBUFFER,0);
 
 	gl.glGenVertexArrays(1, &vao);
