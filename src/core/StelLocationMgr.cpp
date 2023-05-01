@@ -46,6 +46,7 @@ QString StelLocationMgr::tzfFileName = "data/timezone.tab";
 QList<GeoRegion> StelLocationMgr::regions;
 QMap<QString, QString> StelLocationMgr::countryCodeToRegionMap;
 QMap<QString, QString> StelLocationMgr::countryNameToCodeMap;
+bool StelLocationMgr::unknownTZ = false;
 
 #ifdef ENABLE_GPS
 #ifdef ENABLE_LIBGPS
@@ -530,6 +531,7 @@ LocationMap StelLocationMgr::loadCitiesBin(const QString& fileName)
 	if (!unknownTZlist.isEmpty())
 	{
 		unknownTZlist.removeDuplicates();
+		unknownTZ = true;
 		qDebug() << "StelLocationMgr::loadCitiesBin(): Summary of unknown TimeZones:";
 		for (const auto& tz : unknownTZlist)
 		{

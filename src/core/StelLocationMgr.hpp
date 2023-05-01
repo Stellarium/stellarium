@@ -105,6 +105,7 @@ public:
 	static QString pickRegionFromCode(int regionCode);
 
 	static QString getTZFFileName() { return tzfFileName; }
+	static bool unknownTimezonesDetected() { return unknownTZ; }
 
 public slots:
 	//! Return the StelLocation for a given string
@@ -186,6 +187,7 @@ private:
 	static QMap<QString, QString> countryCodeToRegionMap;
 	static QMap<QString, QString> countryNameToCodeMap;
 	static QString tzfFileName;
+	static bool unknownTZ;
 	
 	StelLocation lastResortLocation;
 

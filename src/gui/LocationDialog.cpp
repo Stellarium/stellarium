@@ -219,6 +219,7 @@ void LocationDialog::createDialogContent()
 	//networkManager = StelApp::getInstance().getNetworkAccessManager();
 	networkManager = new QNetworkAccessManager(this);
 	updateState = CompleteNoUpdates;
+	ui->updateTZFButton->setVisible(locMgr->unknownTimezonesDetected());
 	connect(ui->updateTZFButton, SIGNAL(clicked()), this, SLOT(updateTZF()));
 }
 
