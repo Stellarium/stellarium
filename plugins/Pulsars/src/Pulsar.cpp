@@ -293,7 +293,7 @@ QString Pulsar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		if (s1400>0)
 			oss << QString("%1 %2%3: %4 %5<br />").arg(flux, QString::number(1400), freq, QString::number(s1400, 'f', 2), sfd);
 
-		if (notes.length()>0)
+		if (!notes.isEmpty())
 			oss << QString("<br />%1: %2<br />").arg(q_("Notes"), getPulsarTypeInfoString(notes));
 	}
 

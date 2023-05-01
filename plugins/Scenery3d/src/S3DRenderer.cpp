@@ -65,16 +65,16 @@ GLExtFuncs* glExtFuncs;
 S3DRenderer::S3DRenderer(QObject *parent)
     :
       QObject(parent),
-      sun(Q_NULLPTR), moon(Q_NULLPTR), venus(Q_NULLPTR),
-      currentScene(Q_NULLPTR),
+      sun(nullptr), moon(nullptr), venus(nullptr),
+      currentScene(nullptr),
       supportsGSCubemapping(false), supportsShadows(false), supportsShadowFiltering(false), isANGLE(false), maximumFramebufferSize(0),
       defaultFBO(0),
-      torchBrightness(0.5f), torchRange(5.0f), textEnabled(false), debugEnabled(false), fixShadowData(false),
+      torchBrightness(0.5f), torchRange(5.0f), directionalLightPush(1.0f), textEnabled(false), debugEnabled(false), fixShadowData(false),
       simpleShadows(false), fullCubemapShadows(false), cubemappingMode(S3DEnum::CM_TEXTURES), //set it to 6 textures as a safe default (Cubemap should work on ANGLE, but does not...)
       reinitCubemapping(true), reinitShadowmapping(true),
       cubemapSize(1024),shadowmapSize(1024),wasMovedInLastDrawCall(false),
-      core(Q_NULLPTR), landscapeMgr(Q_NULLPTR),
-      backfaceCullState(true), blendEnabled(false), lastMaterial(Q_NULLPTR), curShader(Q_NULLPTR),
+      core(nullptr), landscapeMgr(nullptr),
+      backfaceCullState(true), blendEnabled(false), lastMaterial(nullptr), curShader(nullptr),
       drawnTriangles(0), drawnModels(0), materialSwitches(0), shaderSwitches(0),
       requiresCubemap(false), cubemappingUsedLastFrame(false),
       lazyDrawing(false), updateOnlyDominantOnMoving(true), updateSecondDominantOnMoving(true), needsMovementEndUpdate(false),
@@ -304,8 +304,8 @@ bool S3DRenderer::drawArrays(bool shading, bool blendAlphaAdditive)
 	//assume backfaceculling is on, and blending turned off
 	backfaceCullState = true;
 	blendEnabled = false;
-	lastMaterial = Q_NULLPTR;
-	curShader = Q_NULLPTR;
+	lastMaterial = nullptr;
+	curShader = nullptr;
 	initializedShaders.clear();
 	transparentGroups.clear();
 	bool success = true;
@@ -350,7 +350,7 @@ bool S3DRenderer::drawArrays(bool shading, bool blendAlphaAdditive)
 	}
 
 	//sort and render transparent objects
-	if(transparentGroups.size()>0)
+	if(!transparentGroups.isEmpty())
 	{
 		zSortValue = currentScene->getEyePosition().toVec3f();
 		std::sort(transparentGroups.begin(),transparentGroups.end(),zSortFunction);
@@ -811,7 +811,7 @@ void S3DRenderer::calculateLighting()
 {
 	//calculate which light source we need + intensity
 	float ambientBrightness=0.0f, directionalBrightness=0.0f, emissiveFactor;
-	float eclipseFactor=static_cast<float>(GETSTELMODULE(SolarSystem)->getSolarEclipseFactor(StelApp::getInstance().getCore()).first);
+	const float eclipseFactor=static_cast<float>(GETSTELMODULE(SolarSystem)->getSolarEclipseFactor(StelApp::getInstance().getCore()).first);
 
 	Vec3d sunPosition = sun->getAltAzPosAuto(core);
 	sunPosition.normalize();
@@ -861,7 +861,7 @@ void S3DRenderer::calculateLighting()
 	lightInfo.directionalSource = LightParameters::DS_Sun_Horiz;
 
 	//calculate emissive factor
-	if(l!=Q_NULLPTR)
+	if(l!=nullptr)
 	{
 		if(requiresCubemap && lazyDrawing)
 		{
@@ -947,6 +947,10 @@ void S3DRenderer::calculateLighting()
 	lightInfo.lightDirectionWorld = lightPosition.toQVector();
 
 	lightInfo.landscapeOpacity = 0.0f;
+
+	// Apply an artificial push to directionalBrightness.
+	// This may be useful to enhance light patches cast through very tiny holes, e.g. meridiana constructions in Italian churches.
+	directionalBrightness *= directionalLightPush;
 
 	//check landscape occlusion, modify directional if needed
 	if(directionalBrightness>0)
@@ -1243,7 +1247,7 @@ void S3DRenderer::drawFromCubeMap()
 	{
 		//can render in a single draw call
 		glBindTexture(GL_TEXTURE_CUBE_MAP,cubeMapCubeTex);
-		glDrawElements(GL_TRIANGLES,cubeIndexCount,GL_UNSIGNED_SHORT, Q_NULLPTR);
+		glDrawElements(GL_TRIANGLES,cubeIndexCount,GL_UNSIGNED_SHORT, nullptr);
 	}
 	else
 	{
@@ -1820,7 +1824,7 @@ bool S3DRenderer::initCubemapping()
 		for (uint i=0;i<6;++i)
 		{
 			glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X+i,0,colorFormat,
-				     cubemapSize,cubemapSize,0,GL_RGBA,GL_UNSIGNED_BYTE,Q_NULLPTR);
+				     cubemapSize,cubemapSize,0,GL_RGBA,GL_UNSIGNED_BYTE,nullptr);
 			GET_GLERROR()
 		}
 		glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
@@ -1843,7 +1847,7 @@ bool S3DRenderer::initCubemapping()
 			GET_GLERROR()
 
 			glTexImage2D(GL_TEXTURE_2D,0,colorFormat,
-				     cubemapSize,cubemapSize,0,GL_RGBA,GL_UNSIGNED_BYTE,Q_NULLPTR);
+				     cubemapSize,cubemapSize,0,GL_RGBA,GL_UNSIGNED_BYTE,nullptr);
 
 			GET_GLERROR()
 		}
@@ -1868,7 +1872,7 @@ bool S3DRenderer::initCubemapping()
 		for (uint i=0;i<6;++i)
 		{
 			glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X+i,0,depthFormat,
-				     cubemapSize,cubemapSize,0,GL_DEPTH_COMPONENT,GL_UNSIGNED_BYTE,Q_NULLPTR);
+				     cubemapSize,cubemapSize,0,GL_DEPTH_COMPONENT,GL_UNSIGNED_BYTE,nullptr);
 
 			GET_GLERROR()
 		}
@@ -2151,7 +2155,7 @@ bool S3DRenderer::initCubemapping()
 
 void S3DRenderer::deleteShadowmapping()
 {
-	if(shadowFBOs.size()>0) //kinda hack that finds out if shadowmap related objects have been created
+	if(!shadowFBOs.isEmpty()) //kinda hack that finds out if shadowmap related objects have been created
 	{
 		//we can delete them all at once then
 		glDeleteFramebuffers(shadowFBOs.size(),shadowFBOs.constData());
@@ -2231,7 +2235,7 @@ bool S3DRenderer::initShadowmapping()
 			bool pcssEnabled = shaderParameters.pcss && (shaderParameters.shadowFilterQuality == S3DEnum::SFQ_LOW || shaderParameters.shadowFilterQuality == S3DEnum::SFQ_HIGH);
 
 			//for OpenGL ES2, type has to be UNSIGNED_SHORT or UNSIGNED_INT for depth textures, desktop does probably not care
-			glTexImage2D(GL_TEXTURE_2D, 0, static_cast<GLint>(pcssEnabled ? depthPcss : depthNormal), shadowmapSize, shadowmapSize, 0, GL_DEPTH_COMPONENT, GL_UNSIGNED_SHORT, Q_NULLPTR);
+			glTexImage2D(GL_TEXTURE_2D, 0, static_cast<GLint>(pcssEnabled ? depthPcss : depthNormal), shadowmapSize, shadowmapSize, 0, GL_DEPTH_COMPONENT, GL_UNSIGNED_SHORT, nullptr);
 
 			//we use hardware-accelerated depth compare mode, unless pcss is used
 			shaderParameters.hwShadowSamplers = false;
@@ -2462,7 +2466,7 @@ void S3DRenderer::draw(StelCore* core, S3DScene &scene)
 
 	lastDrawnPosition = currentScene->getEyePosition();
 	cubemappingUsedLastFrame = requiresCubemap;
-	currentScene = Q_NULLPTR;
+	currentScene = nullptr;
 }
 
 void S3DRenderer::rendererMessage(const QString &msg) const

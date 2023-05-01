@@ -167,7 +167,9 @@ int main(int argc, char **argv)
 	QCoreApplication::setOrganizationName("stellarium");
 
 	QCoreApplication::setAttribute(Qt::AA_CompressHighFrequencyEvents);
+#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
 	QCoreApplication::setAttribute(Qt::AA_CompressTabletEvents);
+#endif
 	// Support high DPI pixmaps and fonts
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 	QCoreApplication::setAttribute(Qt::AA_UseHighDpiPixmaps, true);
@@ -224,7 +226,7 @@ int main(int argc, char **argv)
 
 	// add contents of STEL_OPTS environment variable.
 	QString envStelOpts(qgetenv("STEL_OPTS").constData());
-	if (envStelOpts.length()>0)
+	if (!envStelOpts.isEmpty())
 	{
 		argList+= envStelOpts.split(" ");
 		argStr += " " + envStelOpts;

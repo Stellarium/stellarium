@@ -683,7 +683,7 @@ QVariantMap StelObjectMgr::getObjectInfo(const StelObjectP obj)
 void StelObjectMgr::setExtraInfoString(const StelObject::InfoStringGroup& flags, const QString &str)
 {
 	extraInfoStrings.remove(flags); // delete all entries with these flags
-	if (str.length()>0)
+	if (!str.isEmpty())
 		extraInfoStrings.insert(flags, str);
 }
 void StelObjectMgr::addToExtraInfoString(const StelObject::InfoStringGroup &flags, const QString &str)

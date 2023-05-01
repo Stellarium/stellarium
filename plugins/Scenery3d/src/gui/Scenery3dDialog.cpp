@@ -34,7 +34,7 @@
 #include <QStandardItemModel>
 #include <QTimer>
 
-Scenery3dDialog::Scenery3dDialog(QObject* parent) : StelDialog("Scenery3d", parent), mgr(Q_NULLPTR)
+Scenery3dDialog::Scenery3dDialog(QObject* parent) : StelDialog("Scenery3d", parent), mgr(nullptr)
 {
 	ui = new Ui_scenery3dDialogForm;
 }
@@ -150,6 +150,7 @@ void Scenery3dDialog::createDialogContent()
 
 	connect(ui->sliderTorchStrength,  &QSlider::valueChanged, this, &Scenery3dDialog::on_sliderTorchStrength_valueChanged);
 	connect(ui->sliderTorchRange,     &QSlider::valueChanged, this, &Scenery3dDialog::on_sliderTorchRange_valueChanged);
+	connectDoubleProperty(ui->directionalLightPushSpinBox, "Scenery3d.directionalLightPush");
 	connect(ui->checkBoxDefaultScene, &QCheckBox::stateChanged, this, &Scenery3dDialog::on_checkBoxDefaultScene_stateChanged);
 
 	connect(ui->pushButtonOpenStoredViewDialog, &QPushButton::clicked, mgr, &Scenery3d::showStoredViewDialog);
@@ -379,7 +380,7 @@ void Scenery3dDialog::updateCurrentScene(const SceneInfo &sceneInfo)
 	{
 		ui->scenery3dListWidget->blockSignals(true);
 		QList<QListWidgetItem*> currentItems = ui->scenery3dListWidget->findItems(sceneInfo.name, Qt::MatchExactly);
-		if(currentItems.size()>0)
+		if(!currentItems.isEmpty())
 		{
 			ui->scenery3dListWidget->setCurrentItem(currentItems.at(0));
 		}

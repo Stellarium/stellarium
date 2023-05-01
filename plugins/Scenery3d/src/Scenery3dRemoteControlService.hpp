@@ -36,11 +36,11 @@ public:
 	Scenery3dRemoteControlService();
 
 	// RemoteControlServiceInterface interface
-	virtual QLatin1String getPath() const Q_DECL_OVERRIDE;
-	virtual bool isThreadSafe() const Q_DECL_OVERRIDE;
-	virtual void get(const QByteArray &operation, const APIParameters &parameters, APIServiceResponse &response) Q_DECL_OVERRIDE;
-	virtual void post(const QByteArray &operation, const APIParameters &parameters, const QByteArray &data, APIServiceResponse &response) Q_DECL_OVERRIDE;
-	virtual void update(double deltaTime) Q_DECL_OVERRIDE;
+	QLatin1String getPath() const override;
+	bool isThreadSafe() const override;
+	void get(const QByteArray &operation, const APIParameters &parameters, APIServiceResponse &response) override;
+	void post(const QByteArray &operation, const APIParameters &parameters, const QByteArray &data, APIServiceResponse &response) override;
+	void update(double deltaTime) override;
 protected:
 	void performMove(double x,double y, double z);
 private:

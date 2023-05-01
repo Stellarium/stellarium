@@ -550,14 +550,14 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		oss << getInfoStringName(core, flags);
 
 		QStringList extraNames=getExtraInfoStrings(Name);
-		if (extraNames.length()>0)
+		if (!extraNames.isEmpty())
 			oss << q_("Additional names: ") << extraNames.join(", ") << "<br/>";
 	}
 
 	if (flags&CatalogNumber)
 	{
 		QStringList extraCat=getExtraInfoStrings(CatalogNumber);
-		if (extraCat.length()>0)
+		if (!extraCat.isEmpty())
 			oss << q_("Additional catalog numbers: ") << extraCat.join(", ") << "<br/>";
 	}
 
@@ -2357,7 +2357,7 @@ QPair<Vec4d, Vec3d> Planet::getSubSolarObserverPoints(const StelCore *core, bool
 //		       ));
 //
 //	StelObjectMgr& objMgr = StelApp::getInstance().getStelObjectMgr();
-//		if (objMgr.getSelectedObject().length()>0)
+//		if (!objMgr.getSelectedObject().isEmpty())
 //			objMgr.getSelectedObject()[0]->addToExtraInfoString(StelObject::DebugAid, debugAid);
 	return ret;
 }

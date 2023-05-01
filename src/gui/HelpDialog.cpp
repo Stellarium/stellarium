@@ -220,8 +220,7 @@ void HelpDialog::downloadComplete(QNetworkReply *reply)
 	QString latestVersion = map["name"].toString();
 	latestVersion.replace("v","", Qt::CaseInsensitive);
 	QStringList v = latestVersion.split(".");
-	if (v.count()==2)
-		v.append("0");
+	v.append("0"); // the latest number (PATCH) is always 0 for releases
 
 	QString appVersion = StelUtils::getApplicationVersion();
 	QStringList c = appVersion.split(".");

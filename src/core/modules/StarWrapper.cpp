@@ -272,13 +272,13 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 	if (flags&Name)
 	{
 		QStringList extraNames=getExtraInfoStrings(Name);
-		if (extraNames.length()>0)
+		if (!extraNames.isEmpty())
 			oss << q_("Additional names: ") << extraNames.join(", ") << "<br/>";
 	}
 	if (flags&CatalogNumber)
 	{
 		QStringList extraCat=getExtraInfoStrings(CatalogNumber);
-		if (extraCat.length()>0)
+		if (!extraCat.isEmpty())
 			oss << q_("Additional catalog numbers: ") << extraCat.join(", ") << "<br/>";
 	}
 

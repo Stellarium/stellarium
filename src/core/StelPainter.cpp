@@ -661,7 +661,7 @@ struct StringTexture
 	~StringTexture() {delete texture;}
 };
 
-StringTexture* StelPainter::getTexTexture(const QString& str, int pixelSize) const
+StringTexture* StelPainter::getTextTexture(const QString& str, int pixelSize) const
 {
 	// Render first the text into a QPixmap, then create a QOpenGLTexture
 	// from it.  We could optimize by directly using a QImage, but for some
@@ -700,11 +700,11 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 	{
 		//qDebug() <<  "Text texture" << str;
 		// This is taken from branch text-use-opengl-buffer. This is essential on devices like Raspberry Pi (2016-03).
-		StringTexture* tex = getTexTexture(str, currentFont.pixelSize());
+		StringTexture* tex = getTextTexture(str, currentFont.pixelSize());
 		Q_ASSERT(tex);
 		if (!noGravity)
 			angleDeg += prj->defaultAngleForGravityText;
-		tex->texture->bind();
+		tex->texture->bind(0);
 
 		static float vertexData[8];
 		// compute the vertex coordinates applying the translation and the rotation
@@ -732,11 +732,11 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 			}
 		}
 
-		float* texCoords = new float[8];
+		float texCoords[8];
 		for (int i=0;i<4;i++)
 		{
 			texCoords[i*2+0] = static_cast<float>(tex->getTexSize().width()) * (i % 2);
-			texCoords[i*2+1] = static_cast<float>(tex->getTexSize().height()) * (1 - static_cast<float>(i) / 2);
+			texCoords[i*2+1] = static_cast<float>(tex->getTexSize().height()) * (1 - i / 2);
 		}
 		setTexCoordPointer(2, GL_FLOAT, texCoords);
 
@@ -750,7 +750,6 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 		setBlending(oldBlending, oldSrc, oldDst);
 		enableClientStates(false, false);
 		tex->texture->release();
-		delete[] texCoords;
 	}
 	else
 	{
@@ -2415,7 +2414,7 @@ void StelPainter::drawFixedColorWideLinesAsQuads(const ArrayDesc& vertexArray, i
 	else
 		newVertices.reserve(count*6);
 	newVertices.resize((count-1)*6);
-	assert(vertexArray.type == GL_FLOAT);
+	Q_ASSERT(vertexArray.type == GL_FLOAT);
 	const auto lineVertData = static_cast<const float*>(vertexArray.pointer) + vertexArray.size*offset;
 	const int step = mode==Lines ? 2 : 1;
 	for(int n = 0; n < count-1; n += step)
@@ -2443,7 +2442,7 @@ void StelPainter::drawFixedColorWideLinesAsQuads(const ArrayDesc& vertexArray, i
 		default:
 			in0 = Vec4f(0.f);
 			in1 = Vec4f(0.f);
-			assert(!"Bad number of elements in vertex array");
+			qCritical("Bad number of elements in vertex array"); // or qFatal()?
 		}
 
 		const Vec4f clip0 = projMat * Vec4f(in0);
@@ -2481,7 +2480,7 @@ void StelPainter::drawFixedColorWideLinesAsQuads(const ArrayDesc& vertexArray, i
 	{
 		// Connect the ends
 		const auto lastN = newVertices.size()-1;
-		assert(lastN >= 2);
+		Q_ASSERT(lastN >= 2);
 		newVertices.push_back(newVertices[lastN-2]);
 		newVertices.push_back(newVertices[lastN]);
 		newVertices.push_back(newVertices[0]);

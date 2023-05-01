@@ -1795,7 +1795,7 @@ void AstroCalcDialog::saveIgnoreDateTestFlag(bool b)
 
 void AstroCalcDialog::reGenerateEphemeris(bool withSelection)
 {
-	if (EphemerisList.size() > 0)
+	if (!EphemerisList.isEmpty())
 	{
 		int row = ui->ephemerisTreeWidget->currentIndex().row();
 		generateEphemeris(); // Update list of ephemeris
@@ -9122,7 +9122,7 @@ void AstroCalcDialog::calculateWutObjects()
 		enableAngularLimits(enableAngular);
 		core->setJD(JD);
 		adjustWUTColumns();
-		if (objectsList.size()>0)
+		if (!objectsList.isEmpty())
 			ui->saveObjectsButton->setEnabled(true);
 		else
 			ui->saveObjectsButton->setEnabled(false);
@@ -9594,18 +9594,17 @@ void AstroCalcDialog::saveTableAsXLSX(const QString& fileName, QTreeWidget* tWid
 QPair<QString, QString> AstroCalcDialog::askTableFilePath(const QString &caption, const QString& fileName)
 {
 	QString csv  = QString("%1 (*.csv)").arg(q_("CSV (Comma delimited)"));
-	QString xlsx = QString("%1 (*.xlsx)").arg(q_("Microsoft Excel Open XML Spreadsheet"));
-	QString filter, defaultExtension;
 
 	#ifdef ENABLE_XLSX
-	defaultExtension = "xlsx";
-	filter = QString("%1;;%2").arg(xlsx, csv);
+	QString xlsx = QString("%1 (*.xlsx)").arg(q_("Microsoft Excel Open XML Spreadsheet"));
+	QString defaultExtension = "xlsx";
+	QString filter = QString("%1;;%2").arg(xlsx, csv);
 	#else
-	defaultExtension = "csv";
-	filter = csv;
+	QString defaultExtension = "csv";
+	QString filter = csv;
 	#endif
 
-	QString dir  = QString("%1/%2.%3").arg(QDir::homePath(), fileName, defaultExtension);
+	QString dir = QString("%1/%2.%3").arg(QDir::homePath(), fileName, defaultExtension);
 	QString defaultFilter = QString("(*.%1)").arg(defaultExtension);
 	QString filePath = QFileDialog::getSaveFileName(nullptr, caption, dir, filter, &defaultFilter);
 
