@@ -216,7 +216,8 @@ void LocationDialog::createDialogContent()
 	ui->citySearchLineEdit->setFocus();
 
 	// Set up download manager for checker of updates
-	networkManager = StelApp::getInstance().getNetworkAccessManager();
+	//networkManager = StelApp::getInstance().getNetworkAccessManager();
+	networkManager = new QNetworkAccessManager(this);
 	updateState = CompleteNoUpdates;
 	connect(ui->updateTZFButton, SIGNAL(clicked()), this, SLOT(updateTZF()));
 }
@@ -1028,7 +1029,6 @@ void LocationDialog::downloadComplete(QNetworkReply *reply)
 		return;
 
 	disconnect(networkManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(downloadComplete(QNetworkReply*)));
-	deleteDownloadProgressBar();
 
 	if (reply->error() || reply->bytesAvailable()==0)
 	{
@@ -1037,13 +1037,9 @@ void LocationDialog::downloadComplete(QNetworkReply *reply)
 			   << "the following error occurred:"
 			   << reply->errorString();
 
-		reply->deleteLater();
-		downloadReply = nullptr;
 		updateState = LocationDialog::DownloadError;
-		return;
 	}
-
-	try
+	else
 	{
 		QByteArray data = reply->readAll();
 		if (QString(data).endsWith(":EOF")) // Qt5-compatible check
@@ -1067,15 +1063,11 @@ void LocationDialog::downloadComplete(QNetworkReply *reply)
 			updateState = LocationDialog::OtherError;
 		}
 	}
-	catch (std::runtime_error &e)
-	{
-		qDebug() << "Cannot write timezone fixes to file:" << e.what();
-		return;
-	}
+
+	deleteDownloadProgressBar();
 
 	reply->deleteLater();
 	downloadReply = nullptr;
-
 	emit updateTZFComplete();
 }
 
@@ -1092,8 +1084,8 @@ void LocationDialog::updateDownloadProgress(qint64 bytesReceived, qint64 bytesTo
 		//Round to the greatest possible derived unit
 		while (bytesTotal > 1024)
 		{
-			bytesReceived = static_cast<qint64>(std::floor(static_cast<double>(bytesReceived) / 1024.));
-			bytesTotal    = static_cast<qint64>(std::floor(static_cast<double>(bytesTotal) / 1024.));
+			bytesReceived /= 1024;
+			bytesTotal    /= 1024;
 		}
 		currentValue = static_cast<int>(bytesReceived);
 		endValue = static_cast<int>(bytesTotal);
