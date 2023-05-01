@@ -661,7 +661,7 @@ struct StringTexture
 	~StringTexture() {delete texture;}
 };
 
-StringTexture* StelPainter::getTexTexture(const QString& str, int pixelSize) const
+StringTexture* StelPainter::getTextTexture(const QString& str, int pixelSize) const
 {
 	// Render first the text into a QPixmap, then create a QOpenGLTexture
 	// from it.  We could optimize by directly using a QImage, but for some
@@ -700,7 +700,7 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 	{
 		//qDebug() <<  "Text texture" << str;
 		// This is taken from branch text-use-opengl-buffer. This is essential on devices like Raspberry Pi (2016-03).
-		StringTexture* tex = getTexTexture(str, currentFont.pixelSize());
+		StringTexture* tex = getTextTexture(str, currentFont.pixelSize());
 		Q_ASSERT(tex);
 		if (!noGravity)
 			angleDeg += prj->defaultAngleForGravityText;
