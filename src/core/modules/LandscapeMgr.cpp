@@ -1165,7 +1165,7 @@ void LandscapeMgr::onTargetLocationChanged(const StelLocation &loc, const QStrin
 	qDebug() << "LandscapeMgr::onTargetLocationChanged:" << loc.serializeToLine().replace('\t', '|') << "Landscape requested:" << landscapeID;
 //	if (loc.planetName != currentPlanetName)
 	{
-		if (!landscapeID.isEmpty() && getAllLandscapeNames().contains(landscapeID))
+		if (!landscapeID.isEmpty() && getAllLandscapeIDs().contains(landscapeID))
 		{
 			const bool landscapeSetsLocation = getFlagLandscapeSetsLocation();
 			setFlagLandscapeSetsLocation(false);
