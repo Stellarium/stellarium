@@ -651,13 +651,14 @@ struct StringTexture
 {
 	QOpenGLTexture* texture;
 	QSize size;
+	QPoint baselineShift;
 	QSizeF getTexSize() const {
 		return QSizeF(static_cast<qreal>(size.width())  / static_cast<qreal>(texture->width()),
 			      static_cast<qreal>(size.height()) / static_cast<qreal>(texture->height()));
 	}
 
-	StringTexture(QOpenGLTexture* tex, const QSize& size) :
-	     texture(tex), size(size) {}
+	StringTexture(QOpenGLTexture* tex, const QSize& size, const QPoint& baselineShift) :
+	     texture(tex), size(size), baselineShift(baselineShift) {}
 	~StringTexture() {delete texture;}
 };
 
@@ -684,7 +685,7 @@ StringTexture* StelPainter::getTextTexture(const QString& str, int pixelSize) co
 	//painter.setRenderHints(QPainter::TextAntialiasing);
 	painter.setPen(Qt::white);
 	painter.drawText(-strRect.x(), -strRect.y(), str);
-	StringTexture* newTex = new StringTexture(new QOpenGLTexture(strImage.toImage()), QSize(w, h));
+	StringTexture* newTex = new StringTexture(new QOpenGLTexture(strImage.toImage()), QSize(w, h), QPoint(strRect.x(), -(strRect.y()+h)));
 	texCache.insert(hash, newTex, 3*w*h);
 	// simply returning newTex is dangerous as the object is owned by the cache now. (Coverity Scan barks.)
 	return texCache.object(hash);
@@ -705,6 +706,8 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 		if (!noGravity)
 			angleDeg += prj->defaultAngleForGravityText;
 		tex->texture->bind(0);
+		x += tex->baselineShift.x();
+		y += tex->baselineShift.y();
 
 		static float vertexData[8];
 		// compute the vertex coordinates applying the translation and the rotation
