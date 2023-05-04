@@ -688,6 +688,7 @@ private:
 		PHCMoonsFirstBody           = 25,
 		PHCBrightCarbonStars        = 26,
 		PHCBrightBariumStars        = 27,
+		PHCSunPlanetsTheirMoons     = 28,
 		PHCNone	// stop gapper for syntax reasons
 	};
 

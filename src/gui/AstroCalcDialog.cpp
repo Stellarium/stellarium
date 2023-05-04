@@ -5999,17 +5999,21 @@ void AstroCalcDialog::populateGroupCelestialBodyList()
 
 	QString brLimit = QString::number(brightLimit, 'f', 1);
 	const QMap<QString, int>itemsMap={
-		{q_("Latest selected object"), PHCLatestSelectedObject}, {q_("Solar system"), PHCSolarSystem}, {q_("Planets"), PHCPlanets}, {q_("Asteroids"), PHCAsteroids},
-		{q_("Plutinos"), PHCPlutinos}, {q_("Comets"), PHCComets},	{q_("Dwarf planets"), PHCDwarfPlanets},{q_("Cubewanos"), PHCCubewanos},
-		{q_("Scattered disc objects"), PHCScatteredDiscObjects},{q_("Oort cloud objects"), PHCOortCloudObjects},{q_("Sednoids"), PHCSednoids},
-		{q_("Bright stars (<%1 mag)").arg(QString::number(brightLimit - 5.0, 'f', 1)), PHCBrightStars},{q_("Bright double stars (<%1 mag)").arg(QString::number(brightLimit - 5.0, 'f', 1)), PHCBrightDoubleStars},
-		{q_("Bright variable stars (<%1 mag)").arg(QString::number(brightLimit - 5.0, 'f', 1)), PHCBrightVariableStars},{q_("Bright star clusters (<%1 mag)").arg(brLimit), PHCBrightStarClusters},
-		{q_("Planetary nebulae (<%1 mag)").arg(brLimit), PHCPlanetaryNebulae},{q_("Bright nebulae (<%1 mag)").arg(brLimit), PHCBrightNebulae},{q_("Dark nebulae"), PHCDarkNebulae},
-		{q_("Bright galaxies (<%1 mag)").arg(brLimit), PHCBrightGalaxies},{q_("Symbiotic stars"), PHCSymbioticStars},{q_("Emission-line stars"), PHCEmissionLineStars},
-		{q_("Interstellar objects"), PHCInterstellarObjects},{q_("Planets and Sun"), PHCPlanetsSun},{q_("Sun, planets and moons of observer location"), PHCSunPlanetsMoons},
+		{q_("Latest selected object"), PHCLatestSelectedObject}, {q_("Solar system"), PHCSolarSystem}, {q_("Planets"), PHCPlanets},
+		{q_("Asteroids"), PHCAsteroids}, {q_("Plutinos"), PHCPlutinos}, {q_("Comets"), PHCComets}, {q_("Dwarf planets"), PHCDwarfPlanets},
+		{q_("Cubewanos"), PHCCubewanos}, {q_("Scattered disc objects"), PHCScatteredDiscObjects}, {q_("Oort cloud objects"), PHCOortCloudObjects},
+		{q_("Sednoids"), PHCSednoids}, {q_("Bright stars (<%1 mag)").arg(QString::number(brightLimit - 5.0, 'f', 1)), PHCBrightStars},
+		{q_("Bright double stars (<%1 mag)").arg(QString::number(brightLimit - 5.0, 'f', 1)), PHCBrightDoubleStars},
+		{q_("Bright variable stars (<%1 mag)").arg(QString::number(brightLimit - 5.0, 'f', 1)), PHCBrightVariableStars},
+		{q_("Bright star clusters (<%1 mag)").arg(brLimit), PHCBrightStarClusters}, {q_("Planetary nebulae (<%1 mag)").arg(brLimit), PHCPlanetaryNebulae},
+		{q_("Bright nebulae (<%1 mag)").arg(brLimit), PHCBrightNebulae}, {q_("Dark nebulae"), PHCDarkNebulae},
+		{q_("Bright galaxies (<%1 mag)").arg(brLimit), PHCBrightGalaxies}, {q_("Symbiotic stars"), PHCSymbioticStars},
+		{q_("Emission-line stars"), PHCEmissionLineStars}, {q_("Interstellar objects"), PHCInterstellarObjects},
+		{q_("Planets and Sun"), PHCPlanetsSun}, {q_("Sun, planets and moons of observer's planet"), PHCSunPlanetsMoons},
 		{q_("Bright Solar system objects (<%1 mag)").arg(QString::number(brightLimit + 2.0, 'f', 1)), PHCBrightSolarSystemObjects},
-		{q_("Solar system objects: minor bodies"), PHCSolarSystemMinorBodies},{q_("Moons of first body"), PHCMoonsFirstBody},
-		{q_("Bright carbon stars"), PHCBrightCarbonStars},{q_("Bright barium stars"), PHCBrightBariumStars}
+		{q_("Solar system objects: minor bodies"), PHCSolarSystemMinorBodies}, {q_("Moons of first body"), PHCMoonsFirstBody},
+		{q_("Bright carbon stars"), PHCBrightCarbonStars}, {q_("Bright barium stars"), PHCBrightBariumStars},
+		{q_("Sun, planets and moons of first body and observer's planet"), PHCSunPlanetsTheirMoons}
 	};
 	QMapIterator<QString, int> i(itemsMap);
 	groups->clear();
@@ -6844,7 +6848,7 @@ void AstroCalcDialog::calculatePhenomena()
 					objects.append(object);
 			}
 			break;
-		case PHCSunPlanetsMoons: // Sun, planets and moons of observer location
+		case PHCSunPlanetsMoons: // Sun, planets and moons of observer's planet
 		{
 			PlanetP cp = core->getCurrentPlanet();
 			for (const auto& object : allObjects)
@@ -6869,13 +6873,34 @@ void AstroCalcDialog::calculatePhenomena()
 			}
 			break;
 		case PHCMoonsFirstBody: // Moons of first body
-			PlanetP firstPplanet = solarSystem->searchByEnglishName(currentPlanet);
+		{
+			PlanetP firstPlanet = solarSystem->searchByEnglishName(currentPlanet);
 			for (const auto& object : allObjects)
 			{
-				if (object->getParent()==firstPplanet && object->getPlanetType() == Planet::isMoon)
+				if (object->getParent()==firstPlanet && object->getPlanetType() == Planet::isMoon)
 					objects.append(object);
 			}
 			break;
+		}
+		case PHCSunPlanetsTheirMoons: // Sun, planets and moons of first body and observer's planet
+		{
+			PlanetP firstPlanet = solarSystem->searchByEnglishName(currentPlanet);
+			PlanetP cp = core->getCurrentPlanet();
+			for (const auto& object : allObjects)
+			{
+				if (object->getEnglishName() != cp->getEnglishName() && object->getEnglishName() != currentPlanet)
+				{
+					// planets and stars
+					if (object->getPlanetType() == Planet::isPlanet || object->getPlanetType() == Planet::isStar)
+						objects.append(object);
+					// moons of first body and observer's planet
+					if ((object->getParent()==cp || object->getParent()==firstPlanet) && object->getPlanetType()==Planet::isMoon)
+						objects.append(object);
+
+				}
+			}
+			break;
+		}
 	}
 
 	PlanetP planet = solarSystem->searchByEnglishName(currentPlanet);
@@ -6902,7 +6927,7 @@ void AstroCalcDialog::calculatePhenomena()
 				}
 			}
 		}
-		else if ((obj2Type >= PHCSolarSystem && obj2Type < PHCBrightStars) || (obj2Type >= PHCInterstellarObjects && obj2Type <= PHCMoonsFirstBody))
+		else if ((obj2Type >= PHCSolarSystem && obj2Type < PHCBrightStars) || (obj2Type >= PHCInterstellarObjects && obj2Type <= PHCMoonsFirstBody) || (obj2Type==PHCSunPlanetsTheirMoons))
 		{
 			// Solar system objects
 			for (auto& obj : objects)
@@ -6914,7 +6939,7 @@ void AstroCalcDialog::calculatePhenomena()
 				if (opposition)
 					fillPhenomenaTable(findClosestApproach(planet, mObj, startJD, stopJD, separation, PhenomenaTypeIndex::Opposition), planet, obj, PhenomenaTypeIndex::Opposition);
 				// shadows from moons
-				if (obj2Type==PHCMoonsFirstBody || obj2Type==PHCSolarSystem || obj2Type==PHCBrightSolarSystemObjects)
+				if (obj2Type==PHCMoonsFirstBody || obj2Type==PHCSolarSystem || obj2Type==PHCBrightSolarSystemObjects || obj2Type==PHCSunPlanetsTheirMoons)
 					fillPhenomenaTable(findClosestApproach(planet, mObj, startJD, stopJD, separation, PhenomenaTypeIndex::Shadows), planet, obj, PhenomenaTypeIndex::Shadows);
 			}
 		}
