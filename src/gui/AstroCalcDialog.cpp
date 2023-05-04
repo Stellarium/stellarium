@@ -855,8 +855,17 @@ void AstroCalcDialog::setCelestialPositionsHeaderNames()
 		// TRANSLATORS: magnitude
 		positionsHeader << q_("Mag.");
 	}
-	// TRANSLATORS: angular size, arc-minutes
-	positionsHeader << QString("%1, '").arg(q_("A.S."));
+	if (celType >= 200)
+	{
+		// TRANSLATORS: angular size, arc-seconds
+		positionsHeader << QString("%1, \"").arg(q_("A.S."));
+	}
+	else
+	{
+		// TRANSLATORS: angular size, arc-minutes
+		positionsHeader << QString("%1, '").arg(q_("A.S."));
+	}
+
 	if (celType == 170)
 	{
 		// TRANSLATORS: separation, arc-seconds
@@ -1183,7 +1192,7 @@ void AstroCalcDialog::currentCelestialPositions()
 			distanceInfo = q_("Topocentric distance");
 		QString distanceUM = qc_("AU", "distance, astronomical unit");
 		QString sToolTip = QString("%1, %2").arg(distanceInfo, distanceUM);
-		QString asToolTip = QString("%1, %2").arg(q_("Angular size (with rings, if any)"), q_("arc-min"));
+		QString asToolTip = QString("%1, %2").arg(q_("Angular size (with rings, if any)"), q_("arc-sec"));
 		Vec3d pos;
 		bool passByType;
 
@@ -1242,7 +1251,7 @@ void AstroCalcDialog::currentCelestialPositions()
 				QString extra = QString::number(pos.norm(), 'f', 5); // A.U.
 
 				// Convert to arc-seconds the angular size of Solar system object (with rings, if any)
-				QString angularSize = QString::number(planet->getAngularRadius(core) * 120., 'f', 4);
+				QString angularSize = QString::number(planet->getAngularRadius(core) * 7200., 'f', 2);
 				if (angularSize.toFloat() < 1e-4f || planet->getPlanetType() == Planet::isComet)
 					angularSize = dash;
 
