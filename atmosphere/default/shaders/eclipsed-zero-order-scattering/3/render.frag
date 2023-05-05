@@ -202,7 +202,7 @@ layout(location=1) out vec4 radianceOutput;
 
 vec4 solarRadiance()
 {
-    return solarIrradianceAtTOA/(PI*sqr(sunAngularRadius));
+    return solarIrradianceAtTOA*solarIrradianceFixup/(PI*sqr(sunAngularRadius));
 }
 
 void main()

@@ -159,7 +159,7 @@ vec2 lightPollutionTexVarsToTexCoords(const float altitude, const float cosViewZ
 #endif
 #line 13 0 // render.frag
 #line 1 6 // radiance-to-luminance.h.glsl
-const mat4 radianceToLuminance=mat4(21296.1113,10585.7773,6.80903196,807.40564,  8819.19727,3416.5498,0.346691847,67.973465,  1511.18506,551.902527,0,6.17586422,  177.630722,64.1456985,0,0.693584085);
+const mat4 radianceToLuminance=mat4(21296.1113,10585.7764,6.80903196,807.40564,  8819.19727,3416.5498,0.346691847,67.973465,  1511.18506,551.902527,0,6.17586422,  177.630707,64.1456985,0,0.693584085);
 #line 14 0 // render.frag
 #line 1 7 // texture-sampling-functions.h.glsl
 #ifndef INCLUDE_ONCE_AF5AE9F4_8A9A_4521_838A_F8281B8FEB53
@@ -195,7 +195,7 @@ layout(location=1) out vec4 radianceOutput;
 
 vec4 solarRadiance()
 {
-    return solarIrradianceAtTOA/(PI*sqr(sunAngularRadius));
+    return solarIrradianceAtTOA*solarIrradianceFixup/(PI*sqr(sunAngularRadius));
 }
 
 void main()
