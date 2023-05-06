@@ -328,6 +328,24 @@ void Landscape::createPolygonalHorizon(const QString& lineFileName, const float 
 	}
 }
 
+void Landscape::drawHorizonLine(StelCore* core, StelPainter& painter)
+{
+	if (!horizonPolygon || horizonPolygonLineColor == Vec3f(-1.f,0.f,0.f))
+		return;
+
+	StelProjector::ModelViewTranformP transfo = core->getAltAzModelViewTransform(StelCore::RefractionOff);
+	transfo->combine(Mat4d::zrotation(static_cast<double>(-angleRotateZOffset)));
+	const StelProjectorP prj = core->getProjection(transfo);
+	painter.setProjector(prj);
+	painter.setBlending(true);
+	painter.setColor(horizonPolygonLineColor, landFader.getInterstate());
+	const float lineWidth=painter.getLineWidth();
+	const float ppx = static_cast<float>(prj->getDevicePixelsPerPixel());
+	painter.setLineWidth(GETSTELMODULE(LandscapeMgr)->getPolyLineThickness()*ppx);
+	painter.drawSphericalRegion(horizonPolygon.data(), StelPainter::SphericalPolygonDrawModeBoundary);
+	painter.setLineWidth(lineWidth);
+}
+
 #include <iostream>
 const QString Landscape::getTexturePath(const QString& basename, const QString& landscapeId)
 {
@@ -1019,26 +1037,8 @@ void main(void)
 		gl.glDisable(GL_BLEND);
 		renderProgram->release();
 	}
-
 	StelPainter painter(prj);
-	// If a horizon line also has been defined, draw it.
-	if (horizonPolygon && (horizonPolygonLineColor != Vec3f(-1.f,0.f,0.f)))
-	{
-		//qDebug() << "drawing line";
-		StelProjector::ModelViewTranformP transfo = core->getAltAzModelViewTransform(StelCore::RefractionOff);
-		transfo->combine(Mat4d::zrotation(static_cast<double>(-angleRotateZOffset)));
-		const StelProjectorP prj = core->getProjection(transfo);
-		painter.setProjector(prj);
-		painter.setCullFace(true);
-		painter.setBlending(true, GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		painter.setColor(horizonPolygonLineColor, landFader.getInterstate());
-		const float lineWidth=painter.getLineWidth();
-		const float ppx = static_cast<float>(prj->getDevicePixelsPerPixel());
-		painter.setLineWidth(GETSTELMODULE(LandscapeMgr)->getPolyLineThickness()*ppx);
-		painter.drawSphericalRegion(horizonPolygon.data(), StelPainter::SphericalPolygonDrawModeBoundary);
-		painter.setLineWidth(lineWidth);
-	}
-	painter.setCullFace(false);
+	drawHorizonLine(core, painter);
 }
 
 
@@ -1239,23 +1239,7 @@ void LandscapeOldStyle::drawLowGL(StelCore* core, bool onlyPolygon)
 			gl->glDisable(GL_MULTISAMPLE);
 #endif
 	}
-	// If a horizon line also has been defined, draw it.
-	if (horizonPolygon && (horizonPolygonLineColor != Vec3f(-1.f,0.f,0.f)))
-	{
-		//qDebug() << "drawing line";
-		StelProjector::ModelViewTranformP transfo = core->getAltAzModelViewTransform(StelCore::RefractionOff);
-		transfo->combine(Mat4d::zrotation(static_cast<double>(-angleRotateZOffset)));
-		const StelProjectorP prj = core->getProjection(transfo);
-		painter.setProjector(prj);
-		painter.setBlending(true, GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		painter.setColor(horizonPolygonLineColor, landFader.getInterstate());
-		const float lineWidth=painter.getLineWidth();
-		painter.setLineWidth(GETSTELMODULE(LandscapeMgr)->getPolyLineThickness()*ppx);
-		painter.drawSphericalRegion(horizonPolygon.data(), StelPainter::SphericalPolygonDrawModeBoundary);
-		painter.setLineWidth(lineWidth);
-	}
-	//else qDebug() << "no polygon defined";
-
+	drawHorizonLine(core, painter);
 	drawLabels(core, &painter);
 }
 
@@ -1737,24 +1721,7 @@ void main(void)
 	}
 
 	StelPainter painter(prj);
-	// If a horizon line also has been defined, draw it.
-	if (horizonPolygon && (horizonPolygonLineColor != Vec3f(-1.f,0.f,0.f)))
-	{
-		//qDebug() << "drawing line";
-		StelProjector::ModelViewTranformP transfo = core->getAltAzModelViewTransform(StelCore::RefractionOff);
-		transfo->combine(Mat4d::zrotation(static_cast<double>(-angleRotateZOffset)));
-		const StelProjectorP prj = core->getProjection(transfo);
-		painter.setProjector(prj);
-		painter.setCullFace(true);
-		painter.setBlending(true, GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		painter.setColor(horizonPolygonLineColor, landFader.getInterstate());
-		const float lineWidth=painter.getLineWidth();
-		const float ppx = static_cast<float>(prj->getDevicePixelsPerPixel());
-		painter.setLineWidth(GETSTELMODULE(LandscapeMgr)->getPolyLineThickness()*ppx);
-		painter.drawSphericalRegion(horizonPolygon.data(), StelPainter::SphericalPolygonDrawModeBoundary);
-		painter.setLineWidth(lineWidth);
-	}
-	painter.setCullFace(false);
+	drawHorizonLine(core, painter);
 	drawLabels(core, &painter);
 }
 
@@ -2129,25 +2096,7 @@ void main(void)
 	}
 
 	StelPainter sPainter(prj);
-	// If a horizon line also has been defined, draw it.
-	if (horizonPolygon && (horizonPolygonLineColor != Vec3f(-1.f,0.f,0.f)))
-	{
-		//qDebug() << "drawing line";
-		transfo = core->getAltAzModelViewTransform(StelCore::RefractionOff);
-		transfo->combine(Mat4d::zrotation(-static_cast<double>(angleRotateZOffset)));
-		const StelProjectorP prj = core->getProjection(transfo);
-		sPainter.setProjector(prj);
-		sPainter.setCullFace(true);
-		sPainter.setBlending(true);
-		sPainter.setColor(horizonPolygonLineColor, landFader.getInterstate());
-		const float lineWidth=sPainter.getLineWidth();
-		const float ppx = static_cast<float>(prj->getDevicePixelsPerPixel());
-		sPainter.setLineWidth(GETSTELMODULE(LandscapeMgr)->getPolyLineThickness()*ppx);
-		sPainter.drawSphericalRegion(horizonPolygon.data(), StelPainter::SphericalPolygonDrawModeBoundary);
-		sPainter.setLineWidth(lineWidth);
-	}
-	//else qDebug() << "no polygon defined";
-	sPainter.setCullFace(false);
+	drawHorizonLine(core, sPainter);
 	drawLabels(core, &sPainter);
 }
 
