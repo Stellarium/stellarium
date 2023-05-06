@@ -195,7 +195,7 @@ layout(location=1) out vec4 radianceOutput;
 
 vec4 solarRadiance()
 {
-    return solarIrradianceAtTOA/(PI*sqr(sunAngularRadius));
+    return solarIrradianceAtTOA*solarIrradianceFixup/(PI*sqr(sunAngularRadius));
 }
 
 void main()
@@ -426,7 +426,7 @@ void main()
         scattering = sample3DTexture(scatteringTexture, cosSunZenithAngle, cosViewZenithAngle,
                                      dotViewSun, altitude, viewRayIntersectsGround);
     }
-    luminance=scattering * (bool(1) ? vec4(1) : currentPhaseFunction(dotViewSun));
+    luminance=scattering * (bool(0) ? vec4(1) : currentPhaseFunction(dotViewSun));
 #elif 0 /*RENDERING_MULTIPLE_SCATTERING_LUMINANCE*/
     luminance=sample3DTexture(scatteringTexture, cosSunZenithAngle, cosViewZenithAngle, dotViewSun, altitude, viewRayIntersectsGround);
 #elif 0 /*RENDERING_MULTIPLE_SCATTERING_RADIANCE*/
