@@ -46,7 +46,7 @@ class TextureAverageComputer;
 class AtmosphereShowMySky : public Atmosphere, public QObject
 {
 public:
-	AtmosphereShowMySky();
+	AtmosphereShowMySky(double initialAltitude);
 	~AtmosphereShowMySky();
 
 	void computeColor(StelCore* core, double JD, const Planet& currentPlanet, const Planet& sun, const Planet* moon,

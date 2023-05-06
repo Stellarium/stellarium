@@ -732,7 +732,8 @@ void LandscapeMgr::createAtmosphere()
 			setAtmosphereShowMySkyStatusText("");
 			setAtmosphereShowMySkyStoppedWithError(false);
 
-			loadingAtmosphere.reset(new AtmosphereShowMySky());
+			const auto core = StelApp::getInstance().getCore();
+			loadingAtmosphere.reset(new AtmosphereShowMySky(core->getCurrentLocation().altitude));
 			if(!atmosphere)
 			{
 				// We're just loading the first atmosphere in the run of Stellarium. Initialize it synchronously.
