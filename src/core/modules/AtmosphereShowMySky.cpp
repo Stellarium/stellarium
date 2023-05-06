@@ -405,7 +405,7 @@ void AtmosphereShowMySky::resolveFunctions()
 		                  .arg(*abi).arg(ShowMySky_ABI_version));
 }
 
-AtmosphereShowMySky::AtmosphereShowMySky()
+AtmosphereShowMySky::AtmosphereShowMySky(const double initialAltitude)
 #ifdef SHOWMYSKY_LIB_NAME
 	: showMySkyLib(SHOWMYSKY_LIB_NAME, ShowMySky_ABI_version)
 #else // for compatibility with legacy unversioned naming
@@ -439,6 +439,8 @@ AtmosphereShowMySky::AtmosphereShowMySky()
 
 		qDebug() << "Will load CalcMySky atmosphere model from" << pathToData;
 		skySettings_.reset(new SkySettings);
+		auto& settings = *static_cast<SkySettings*>(skySettings_.get());
+		settings.altitude_ = initialAltitude;
 		renderSurfaceFunc_=[this](QOpenGLShaderProgram& prog)
 		{
 			const auto& settings = *static_cast<SkySettings*>(skySettings_.get());
