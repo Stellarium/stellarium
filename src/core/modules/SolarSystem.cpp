@@ -1244,7 +1244,13 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 
 	// special case: load earth shadow texture
 	if (!Planet::texEarthShadow)
-		Planet::texEarthShadow = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/earth-shadow.png");
+	{
+		auto& texMan = StelApp::getInstance().getTextureManager();
+		const auto path = StelFileMgr::getInstallationDir()+"/textures/earth-shadow.png";
+		const StelTexture::StelTextureParams params(false, GL_LINEAR, GL_CLAMP_TO_EDGE, false,
+													StelTexture::ColorSpace::LinearSRGB);
+		Planet::texEarthShadow = texMan.createTexture(path, params);
+	}
 
 	// Also comets just have static textures.
 	if (!Comet::comaTexture)

@@ -422,6 +422,7 @@ void main()
 		// FIXME: this should be calculated properly in linear space as
 		// extinction of sunlight, and with subsequent tone mapping.
 		// Current implementation is a legacy from older times.
+		// shadowColor is passed as a GL_RGBA texture, so the sample is sRGB-encoded
 		lowp vec4 color = vec4(linearToSRGB(finalColor.rgb), finalColor.a);
 		lowp float alpha = clamp(shadowColor.a, 0.0, 0.7); // clamp alpha to allow some maria detail
         finalColor = eclipsePush * (1.0-0.75*shadowColor.a) * mix(color, shadowColor, alpha);
