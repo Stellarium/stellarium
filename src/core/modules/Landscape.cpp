@@ -337,6 +337,7 @@ void Landscape::drawHorizonLine(StelCore* core, StelPainter& painter)
 	transfo->combine(Mat4d::zrotation(static_cast<double>(-angleRotateZOffset)));
 	const StelProjectorP prj = core->getProjection(transfo);
 	painter.setProjector(prj);
+	painter.setLineSmooth(true);
 	painter.setBlending(true);
 	painter.setColor(horizonPolygonLineColor, landFader.getInterstate());
 	const float lineWidth=painter.getLineWidth();
@@ -344,6 +345,7 @@ void Landscape::drawHorizonLine(StelCore* core, StelPainter& painter)
 	painter.setLineWidth(GETSTELMODULE(LandscapeMgr)->getPolyLineThickness()*ppx);
 	painter.drawSphericalRegion(horizonPolygon.data(), StelPainter::SphericalPolygonDrawModeBoundary);
 	painter.setLineWidth(lineWidth);
+	painter.setLineSmooth(false);
 }
 
 #include <iostream>
@@ -1473,17 +1475,7 @@ void LandscapePolygonal::draw(StelCore* core, bool onlyPolygon)
 #endif
 	}
 
-	if (horizonPolygonLineColor != Vec3f(-1.f,0.f,0.f))
-	{
-		sPainter.setLineSmooth(true);
-		sPainter.setColor(horizonPolygonLineColor, landFader.getInterstate());
-		const float lineWidth=sPainter.getLineWidth();
-		sPainter.setLineWidth(GETSTELMODULE(LandscapeMgr)->getPolyLineThickness()*ppx);
-		sPainter.drawSphericalRegion(horizonPolygon.data(), StelPainter::SphericalPolygonDrawModeBoundary);
-		sPainter.setLineWidth(lineWidth);
-		sPainter.setLineSmooth(false);
-	}
-	sPainter.setCullFace(false);
+	drawHorizonLine(core, sPainter);
 	drawLabels(core, &sPainter);
 }
 
