@@ -1099,10 +1099,13 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			// Moon designation (planet index + IAU moon number)
 			QString moonDesignation = pd.value(secname+"/iau_moon_number", "").toString();
 			if (!moonDesignation.isEmpty())
-			{
 				newP->setIAUMoonNumber(moonDesignation);
-			}
 			newP->setColorIndexBV(static_cast<float>(bV));
+			// Discovery circumstances
+			QString discovererName = pd.value(secname+"/discoverer", "").toString();
+			QString discoveryDate = pd.value(secname+"/discovery", "").toString();
+			if (!discovererName.isEmpty() && !discoveryDate.isEmpty())
+				newP->setDiscoveryData(discovererName, discoveryDate);
 		}
 
 		if (!parent.isNull())

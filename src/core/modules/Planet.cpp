@@ -38,6 +38,7 @@
 #include "StelMovementMgr.hpp"
 #include "StelPainter.hpp"
 #include "StelTranslator.hpp"
+#include "StelLocaleMgr.hpp"
 #include "StelUtils.hpp"
 #include "StelOpenGL.hpp"
 #include "StelMainView.hpp"
@@ -265,6 +266,8 @@ Planet::Planet(const QString& englishName,
 	  gl(Q_NULLPTR),
 	  iauMoonNumber(""),
 	  b_v(99.f),
+	  discoverer(""),
+	  discoveryDate(""),
 	  orbitPositionsCache(ORBIT_SEGMENTS * 2)
 {
 	// Initialize pType with the key found in pTypeMap, or mark planet type as undefined.
@@ -424,6 +427,17 @@ QString Planet::getNameI18n() const
 		return QString("%1 (%2)").arg(nameI18, iauMoonNumber);
 	else
 		return nameI18;
+}
+
+QString Planet::getDiscoveryCircumstances() const
+{
+	QString ddate = discoveryDate; // YYYY
+	QStringList date = discoveryDate.split("-");
+	if (date.count()==3) // YYYY-MM-DD
+		ddate = QString("%1 %2 %3").arg(QString::number(date.at(2).toInt()), StelLocaleMgr::longGenitiveMonthName(date.at(1).toInt()), date.at(0));
+	if (date.count()==2) // YYYY-MM
+		ddate = QString("%1 %2").arg(StelLocaleMgr::longMonthName(date.at(1).toInt()), date.at(0));
+	return QString("%1 (%2)").arg(discoverer, ddate);
 }
 
 const QString Planet::getContextString() const
@@ -1519,6 +1533,9 @@ QString Planet::getInfoStringExtra(const StelCore *core, const InfoStringGroup& 
 		// Not sure if albedo is at all interesting?
 		if (englishName != "Sun")
 			oss << QString("%1: %2<br/>").arg(q_("Albedo"), QString::number(getAlbedo(), 'f', 2));
+
+		if (!discoverer.isEmpty() && !discoveryDate.isEmpty())
+			oss << QString("%1: %2<br/>").arg(q_("Discoverer"), getDiscoveryCircumstances());
 	}
 	return str;
 }

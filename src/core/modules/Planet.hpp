@@ -332,6 +332,9 @@ public:
 	//! set value for color index B-V
 	void setColorIndexBV(float bv=99.f);
 
+	//! set the discovery circumstances of celestial body
+	void setDiscoveryData(QString name, QString date) { discoverer = name; discoveryDate = date; }
+
 	//! Return the absolute magnitude (read from file ssystem.ini)
 	float getAbsoluteMagnitude() const {return absoluteMagnitude;}
 	//! Return the mean opposition magnitude, defined as V(1,0)+5log10(a(a-1))
@@ -822,6 +825,9 @@ private:
 	class StelPropertyMgr* propMgr;
 	QString iauMoonNumber;
 	float b_v;
+	// Discovery data
+	QString discoverer;
+	QString discoveryDate;
 	// File path for texture and normal map; both variables used for saving original names of files
 	QString texMapFileOrig;
 	QString normalMapFileOrig;
@@ -837,6 +843,7 @@ private:
 
 	const QString getContextString() const;
 	QPair<double, double> getLunarEclipseMagnitudes() const;
+	QString getDiscoveryCircumstances() const;
 
 	// Shader-related variables
 	struct PlanetShaderVars {
