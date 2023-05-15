@@ -23,6 +23,7 @@
 #include "Orbit.hpp"
 #include "StelCore.hpp"
 #include "StelTranslator.hpp"
+#include "StelLocaleMgr.hpp"
 
 #include <QRegularExpression>
 #include <QDebug>
@@ -68,7 +69,9 @@ MinorPlanet::MinorPlanet(const QString& englishName,
 	properName(englishName),
 	b_v(99.f),
 	specT(""),
-	specB("")
+	specB(""),
+	discoverer(""),
+	discoveryDate("")
 {
 	//Try to handle an occasional naming conflict between a moon and asteroid. Conflicting names are also shown with appended *.
 	if (englishName.endsWith('*'))
@@ -97,6 +100,17 @@ void MinorPlanet::setSpectralType(QString sT, QString sB)
 void MinorPlanet::setColorIndexBV(float bv)
 {
 	b_v = bv;
+}
+
+QString MinorPlanet::getDiscoveryCircumstances() const
+{
+	QString ddate = discoveryDate; // YYYY
+	QStringList date = discoveryDate.split("-");
+	if (date.count()==3) // YYYY-MM-DD
+		ddate = QString("%1 %2 %3").arg(QString::number(date.at(2).toInt()), StelLocaleMgr::longGenitiveMonthName(date.at(1).toInt()), date.at(0));
+	if (date.count()==2) // YYYY-MM
+		ddate = QString("%1 %2").arg(StelLocaleMgr::longMonthName(date.at(1).toInt()), date.at(0));
+	return QString("%1 (%2)").arg(discoverer, ddate);
 }
 
 void MinorPlanet::setMinorPlanetNumber(int number)
@@ -193,7 +207,11 @@ QString MinorPlanet::getInfoStringExtra(const StelCore *core, const InfoStringGr
 		{
 			// TRANSLATORS: SMASSII spectral taxonomic classification of asteroids
 			oss << QString("%1: %2<br/>").arg(q_("SMASSII spectral type"), specB);
-		}
+		}		
+
+		if (!discoverer.isEmpty() && !discoveryDate.isEmpty())
+			oss << QString("%1: %2<br/>").arg(q_("Discoverer"), getDiscoveryCircumstances());
+
 	}
 	return str;
 }

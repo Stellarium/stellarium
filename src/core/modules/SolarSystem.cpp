@@ -1026,6 +1026,13 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 
 			mp->setColorIndexBV(static_cast<float>(bV));
 			mp->setSpectralType(pd.value(secname+"/spec_t", "").toString(), pd.value(secname+"/spec_b", "").toString());
+
+			// Discovery circumstances
+			QString discovererName = pd.value(secname+"/discoverer", "").toString();
+			QString discoveryDate = pd.value(secname+"/discovery", "").toString();
+			if (!discovererName.isEmpty() && !discoveryDate.isEmpty())
+				mp->setDiscoveryData(discovererName, discoveryDate);
+
 			if (semi_major_axis>0)
 				mp->deltaJDE = 2.0*semi_major_axis*StelCore::JD_SECOND;
 			 else if ((semi_major_axis<=0.0) && (type!="interstellar object"))

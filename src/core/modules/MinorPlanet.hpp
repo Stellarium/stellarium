@@ -101,6 +101,9 @@ public:
 	//! set value for color index B-V
 	void setColorIndexBV(float bv=99.f);
 
+	//! set the discovery circumstances of celestial body
+	void setDiscoveryData(QString name, QString date) { discoverer = name; discoveryDate = date; }
+
 	//! get sidereal period for minor planet
 	virtual double getSiderealPeriod() const Q_DECL_OVERRIDE;
 
@@ -121,6 +124,11 @@ private:
 
 	float b_v;
 	QString specT, specB;
+	// Discovery data
+	QString discoverer;
+	QString discoveryDate;
+
+	QString getDiscoveryCircumstances() const;
 };
 
 #endif // MINORPLANET_HPP
