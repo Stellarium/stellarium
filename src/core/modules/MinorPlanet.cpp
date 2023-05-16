@@ -123,7 +123,7 @@ void MinorPlanet::setMinorPlanetNumber(int number)
 
 void MinorPlanet::setAbsoluteMagnitudeAndSlope(const float magnitude, const float slope)
 {
-	if (slope < -1.0f || slope > 2.0f)
+	if ((slope < -1.0f) || (slope > 2.0f))
 	{
 		// G "should" be between 0 and 1, but may be somewhat outside.
 		qDebug() << "MinorPlanet::setAbsoluteMagnitudeAndSlope(): Invalid slope parameter value (must be between -1 and 2, mostly [0..1])";
@@ -168,16 +168,15 @@ QString MinorPlanet::getInfoStringName(const StelCore *core, const InfoStringGro
 	}
 	else
 		oss << getNameI18n();  // UI translation can differ from sky translation
+	if (!nameIsProvisionalDesignation && !provisionalDesignationHtml.isEmpty())
+		oss << QString(" - %1").arg(provisionalDesignationHtml);
+
 	oss.setRealNumberNotation(QTextStream::FixedNotation);
 	oss.setRealNumberPrecision(1);
 	if (sphereScale != 1.)
 		oss << QString::fromUtf8(" (\xC3\x97") << sphereScale << ")";
 	oss << "</h2>";
-	if (!nameIsProvisionalDesignation && !provisionalDesignationHtml.isEmpty())
-	{
-		oss << QString(q_("Provisional designation: %1")).arg(provisionalDesignationHtml);
-		oss << "<br>";
-	}
+
 	return str;
 }
 

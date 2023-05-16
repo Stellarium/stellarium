@@ -1069,9 +1069,11 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			const float magnitude = pd.value(secname+"/absolute_magnitude", -99).toFloat();
 			const float slope = qBound(-5.0f, pd.value(secname+"/slope_parameter", 4.0f).toFloat(), 30.0f);
 			if (magnitude > -99)
-			{
 					mp->setAbsoluteMagnitudeAndSlope(magnitude, slope);
-			}
+
+			QString provisionalDesignation = pd.value(secname+"/provisional_designation", "").toString();
+			if (!provisionalDesignation.isEmpty())
+				mp->setProvisionalDesignation(provisionalDesignation);
 
 			systemMinorBodies.push_back(newP);
 		}

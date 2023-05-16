@@ -85,6 +85,12 @@ public:
 	//! as the same parameters in MinorPlanet.
 	void setAbsoluteMagnitudeAndSlope(const float magnitude, const float slope);
 
+	//! sets a provisional designation.
+	//! At the moment, the only role is for it to be displayed in the info
+	//! field.
+	//! \todo Include them in the search lists.
+	void setProvisionalDesignation(QString designation) { provisionalDesignation = designation; }
+
 	//! get sidereal period for comet, days, or returns 0 if not possible (parabolic, hyperbolic orbit)
 	virtual double getSiderealPeriod() const Q_DECL_OVERRIDE;
 
@@ -96,6 +102,7 @@ public:
 
 protected:
 	// components for Planet::getInfoString() that are overridden here:
+	virtual QString getInfoStringName(const StelCore *core, const InfoStringGroup& flags) const Q_DECL_OVERRIDE;
 	virtual QString getInfoStringAbsoluteMagnitude(const StelCore *core, const InfoStringGroup& flags) const Q_DECL_OVERRIDE;
 	//! Any flag=Size information to be displayed
 	virtual QString getInfoStringSize(const StelCore *core, const InfoStringGroup& flags) const Q_DECL_OVERRIDE;
@@ -127,7 +134,8 @@ private:
 
 	float slopeParameter;
 	bool isCometFragment;
-	bool nameIsProvisionalDesignation;
+	//bool nameIsProvisionalDesignation;
+	QString provisionalDesignation;
 
 	//GZ Tail additions
 	Vec2f tailFactors; // result of latest call to getComaDiameterAndTailLengthAU(); Results cached here for infostring. [0]=Coma diameter, [1] gas tail length.

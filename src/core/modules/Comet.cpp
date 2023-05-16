@@ -87,7 +87,8 @@ Comet::Comet(const QString& englishName,
 		  pTypeStr),
 	  slopeParameter(-10.f), // -10 == uninitialized: used in getVMagnitude()
 	  isCometFragment(false),
-	  nameIsProvisionalDesignation(false),
+	  //nameIsProvisionalDesignation(false),
+	  provisionalDesignation(""),
 	  tailFactors(-1., -1.), // mark "invalid"
 	  tailActive(false),
 	  tailBright(false),
@@ -131,6 +132,26 @@ void Comet::setAbsoluteMagnitudeAndSlope(const float magnitude, const float slop
 void Comet::translateName(const StelTranslator &translator)
 {
 	nameI18 = translator.qtranslate(englishName, "comet");
+}
+
+QString Comet::getInfoStringName(const StelCore *core, const InfoStringGroup& flags) const
+{
+	Q_UNUSED(core) Q_UNUSED(flags)
+	QString str;
+	QTextStream oss(&str);
+
+	oss << "<h2>";
+	oss << getNameI18n(); // UI translation can differ from sky translation
+	if (!provisionalDesignation.isEmpty())
+		oss << QString(" - %1").arg(provisionalDesignation);
+
+	oss.setRealNumberNotation(QTextStream::FixedNotation);
+	oss.setRealNumberPrecision(1);
+	if (sphereScale != 1.)
+		oss << QString::fromUtf8(" (\xC3\x97") << sphereScale << ")";
+	oss << "</h2>";
+
+	return str;
 }
 
 QString Comet::getInfoStringAbsoluteMagnitude(const StelCore *core, const InfoStringGroup& flags) const

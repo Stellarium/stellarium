@@ -458,7 +458,7 @@ void MpcImportWindow::enableInterface(bool enable)
 	ui->pushButtonAcquire->setEnabled(enable);
 }
 
-SsoElements MpcImportWindow::readElementsFromString (QString elements)
+SsoElements MpcImportWindow::readElementsFromString(QString elements)
 {
 	Q_ASSERT(ssoManager);
 
