@@ -188,7 +188,7 @@ QString MinorPlanet::getInfoStringExtraMag(const StelCore *core, const InfoStrin
 	if (flags&Extra && b_v<99.f)
 		return QString("%1: <b>%2</b><br/>").arg(q_("Color Index (B-V)"), QString::number(b_v, 'f', 2));
 	else
-		return "";
+		return QString();
 }
 
 QString MinorPlanet::getInfoStringExtra(const StelCore *core, const InfoStringGroup& flags) const
@@ -212,7 +212,6 @@ QString MinorPlanet::getInfoStringExtra(const StelCore *core, const InfoStringGr
 
 		if (!discoverer.isEmpty() && !discoveryDate.isEmpty())
 			oss << QString("%1: %2<br/>").arg(q_("Discoverer"), getDiscoveryCircumstances());
-
 	}
 	return str;
 }
@@ -259,9 +258,7 @@ void MinorPlanet::translateName(const StelTranslator &translator)
 {
 	nameI18 = translator.qtranslate(properName, "minor planet");
 	if (englishName.endsWith('*'))
-	{
 		nameI18.append('*');
-	}
 }
 
 QString MinorPlanet::renderProvisionalDesignationinHtml(QString plainTextName)
@@ -273,17 +270,11 @@ QString MinorPlanet::renderProvisionalDesignationinHtml(QString plainTextName)
 		QString main = match.captured(1);
 		QString suffix = match.captured(2);
 		if (!suffix.isEmpty())
-		{
 			return (QString("%1<sub>%2</sub>").arg(main, suffix));
-		}
 		else
-		{
 			return main;
-		}
 	}
 	else
-	{
 		return plainTextName;
-	}
 }
 

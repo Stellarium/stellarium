@@ -155,7 +155,6 @@ private:
 	float intensityMinFov;
 	float intensityMaxFov;
 
-
 	// These are static to avoid having index arrays for each comet when all are equal.
 	static bool createTailIndices;
 	static bool createTailTextureCoords;
