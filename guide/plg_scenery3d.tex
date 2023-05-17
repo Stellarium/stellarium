@@ -482,13 +482,13 @@ language code.
 \end{tabularx}
 
 \noindent Optional section to specify geographic longitude $\lambda$, latitude $\varphi$,
-and altitude. The section is required if \verb|coord/convergence_angle=from_grid|, else
+and altitude. The section is required if \verb:coord/convergence_angle={from_grid|from_utm}:, else
 location is inherited from landscape.
 
 \noindent%
 \begin{tabularx}{\textwidth}{lX} 
 \multicolumn{2}{l}{\texttt{planet = Earth}}\\
-\texttt{latitude = +48d31'30.4"}      & Required if \texttt{coord/convergence\_angle=from\_grid}\\
+\texttt{latitude = +48d31'30.4"}      & Required if \texttt{coord/convergence\_angle=from\_\{grid|utm\}}\\
 \texttt{longitude = +16d12'25.5"}     & "--"\\
 \texttt{altitude =from\_model|<int>}   &  altitude (for astronomical computations) can be computed from the model:  if
                                            \texttt{from\_model}, it is computed as $(z_{min}+z_{max})/2+\mathtt{orig\_H}$, 
@@ -534,7 +534,8 @@ those are survey-grid aligned, so true geographical north for a place
 with geographical longitude $\lambda$ and latitude $\varphi$ will in
 general not coincide with grid north, the difference is known as
 \indexterm{meridian convergence}\footnote{%
-  \url{https://en.wikipedia.org/wiki/Transverse_Mercator_projection}}.
+  \url{https://en.wikipedia.org/wiki/Transverse_Mercator_projection}} 
+and, on a spherical globe, amounts to:
 \begin{equation}
 \gamma(\lambda, \varphi)=\arctan(\tan(\lambda-\lambda_0)\sin\varphi)
 \end{equation}
@@ -545,14 +546,15 @@ vertical axis to be aligned with True North\footnote{Note that
   entry, which is $360-\mathtt{convergence\_angle}$.}.
 
 \begin{configfile}
-convergence_angle=from_grid|<double> 
+convergence_angle=from_grid|from_utm|<double> 
 grid_meridian=<double>|+<int>d<int>'<float>"      
 \end{configfile}
 
-\noindent \texttt{grid\_meridian} is the central meridian $\lambda_0$ of grid
-zone, e.g.\ for UTM or Gauss-Kr\"uger, and is only required to compute
-convergence angle if \texttt{convergence\_angle=from\_grid}.
-
+\noindent \texttt{grid\_meridian} is the central meridian $\lambda_0$ of the grid
+zone, e.g.\ for Gauss-Kr\"uger, and is only required to compute
+convergence angle if \texttt{convergence\_angle=from\_grid}. 
+If your model coordinates is based on UTM, you can use 
+\texttt{coord/convergence\_angle=from\_utm} for a more accurate computation.
 
 
 \begin{configfile}

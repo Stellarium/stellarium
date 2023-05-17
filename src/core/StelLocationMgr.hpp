@@ -27,6 +27,7 @@
 #ifdef Q_OS_WIN
 #include <QtPositioning/QGeoPositionInfoSource>
 #endif
+#include "VecMath.hpp"
 
 typedef QList<StelLocation> LocationList;
 typedef QMap<QString,StelLocation> LocationMap;
@@ -103,6 +104,26 @@ public:
 	static QString pickRegionFromCountry(const QString country);
 	//! Pick region name from region code
 	static QString pickRegionFromCode(int regionCode);
+
+	//! Compute UTM coordinates including convergence angle from geographic coordinates (WGS84).
+	//! https://en.wikipedia.org/wiki/Universal_Transverse_Mercator_coordinate_system
+	//! @arg longitude geographic longitude from Greenwich, degrees [-180...+180]
+	//! @arg latitude geographic latitude from equator, degrees. UTM defined for [-80...+84]
+	//! @arg zone UTM zone. If 0, compute best-fit zone.
+	//! @return {{E[m], N[m], zone}, {gamma[rad], k}}
+	//! The returned zone contains the input or, if input was 0 (or missing), the best-fitting zone. North or South is not returned but is trivially found from latitude.
+	static QPair<Vec3d,Vec2d> geo2utm(const double longitude, const double latitude, const int zone=0);
+	//! Compute geographical coordinates (WGS84) from UTM
+	//! https://en.wikipedia.org/wiki/Universal_Transverse_Mercator_coordinate_system
+	//! @arg easting (metres). False Easting of Zone meridian = 500000
+	//! @arg northing (metres). For southern latitudes, equator = 10000000
+	//! @arg zone UTM zone (longitudinal).
+	//! @arg north true for N, false for S latitude zones.
+	//! @return {{longitude[deg], latitude[deg], refLong[deg]}, {gamma[rad], k}}
+	static QPair<Vec3d,Vec2d> utm2geo(const double easting, const double northing, const int zone, const bool north);
+	//! Find UTM zone designation. The letters are usually not important for finding the coordinates.
+	//! This works for the whole globe, even for polar zones, and observes the adjusted zones of Svalbard and Norway.
+	static QPair<int, QChar>utmZone(const double longitude, const double latitude);
 
 public slots:
 	//! Return the StelLocation for a given string
