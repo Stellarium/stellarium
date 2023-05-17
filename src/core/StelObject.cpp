@@ -653,7 +653,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 		if (withTables)
 		{
 			res += "<table style='margin:0em 0em 0em -0.125em;border-spacing:0px;border:0px;'>";
-			res += QString("<tr><td>%1 (%4):</td><td>%2</td></tr>").arg(eqlObl, firstCoordinate, cepoch);
+			res += QString("<tr><td>%1 (%3):</td><td>%2</td></tr>").arg(eqlObl, firstCoordinate, cepoch);
 		}
 		else
 			res += QString("%1 (%3): %2<br/>").arg(eqlObl, firstCoordinate, cepoch);

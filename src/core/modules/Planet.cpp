@@ -1256,7 +1256,7 @@ QString Planet::getInfoStringExtra(const StelCore *core, const InfoStringGroup& 
 			core1->update(0); // enforce update cache to avoid odd selection of Moon details!
 			const double deltaLong = StelUtils::fmodpos((lambdaMoon-lambdaSun)*M_180_PI, 360.);
 			QString moonPhase = "";
-			if (deltaLong<0.5 || deltaLong>359.5)
+			if ((deltaLong<0.5) || (deltaLong>359.5))
 				moonPhase = qc_("New Moon", "Moon phase");
 			else if (deltaLong<89.5)
 				moonPhase = qc_("Waxing Crescent", "Moon phase");
@@ -1458,7 +1458,7 @@ QString Planet::getInfoStringExtra(const StelCore *core, const InfoStringGroup& 
 				StelUtils::rectToSphe(&raMoon, &deMoon, ssystem->getMoon()->getEquinoxEquatorialPos(core1));
 
 				double raDiff = StelUtils::fmodpos((raMoon - raSun)/M_PI_180, 360.0);
-				if (raDiff < 3. || raDiff > 357.)
+				if ((raDiff < 3.) || (raDiff > 357.))
 				{
 					double JD = core1->getJD();
 					double dRatio,latDeg,lngDeg,altitude,pathWidth,duration,magnitude;
@@ -1649,7 +1649,7 @@ QVariantMap Planet::getInfoMap(const StelCore *core) const
 				core1->update(0); // enforce update cache to avoid odd selection of Moon details!
 				const double deltaLong = StelUtils::fmodpos((lambdaMoon-lambdaSun)*M_180_PI, 360.);
 				QString moonPhase = "";
-				if (deltaLong<0.5 || deltaLong>359.5)
+				if ((deltaLong<0.5) || (deltaLong>359.5))
 					moonPhase = qc_("New Moon", "Moon phase");
 				else if (deltaLong<89.5)
 					moonPhase = qc_("Waxing Crescent", "Moon phase");
@@ -1700,7 +1700,7 @@ QPair<double,double> Planet::getLunarEclipseMagnitudes() const
 	const double deShadow = -(deSun);
 	const double raDiff = StelUtils::fmodpos(raMoon - raShadow, 2.*M_PI);
 
-	if (raDiff < 3.*M_PI_180 || raDiff > 357.*M_PI_180)
+	if ((raDiff < 3.*M_PI_180) || (raDiff > 357.*M_PI_180))
 	{
 		// Moon's semi-diameter
 		const double mSD=atan(getEquatorialRadius()/eclipticPos.norm()) * M_180_PI*3600.; // arcsec
