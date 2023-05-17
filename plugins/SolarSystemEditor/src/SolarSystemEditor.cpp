@@ -36,6 +36,7 @@
 #include <QFile>
 #include <QSettings>
 #include <QString>
+#include <QBuffer>
 #include <QRegularExpression>
 #if (QT_VERSION < QT_VERSION_CHECK(6,0,0))
 #include <QTextCodec>
@@ -52,7 +53,8 @@ StelModule* SolarSystemEditorStelPluginInterface::getStelModule() const
 
 StelPluginInfo SolarSystemEditorStelPluginInterface::getPluginInfo() const
 {
-	//Q_INIT_RESOURCE(solarSystemEditor);
+	// Allow to load the resources when used as a static plugin
+	Q_INIT_RESOURCE(SolarSystemEditor);
 	
 	StelPluginInfo info;
 	info.id = "SolarSystemEditor";
@@ -132,6 +134,9 @@ void SolarSystemEditor::init()
 		qWarning() << "init() error: " << e.what();
 		return;
 	}
+
+	loadPeriodicCometDesignators();
+	loadDiscoveryCircumstances();
 
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(updateI18n()));
 	isInitialized = true;
@@ -461,6 +466,76 @@ QHash<QString,QString> SolarSystemEditor::listAllLoadedObjectsInFile(QString fil
 	return loadedObjects;
 }
 
+void SolarSystemEditor::loadPeriodicCometDesignators()
+{
+	periodicCometsIdentifiers.clear();
+
+	QFile codes(":/SolarSystemEditor/periodic_comet_codes.fab");
+	if(codes.open(QFile::ReadOnly | QFile::Text))
+	{
+		// regular expression to find the comments and empty lines
+		static const QRegularExpression commentRx("^(\\s*#.*|\\s*)$");
+
+		while(!codes.atEnd())
+		{
+			QString line = QString::fromUtf8(codes.readLine());
+
+			// Skip comments
+			if (commentRx.match(line).hasMatch() || line.startsWith("//"))
+				continue;
+
+			if (!line.isEmpty())
+			{
+				QStringList list=line.split("\t");
+				// The first entry is the old-style designation, the second is as the new-style designation
+				periodicCometsIdentifiers.insert(list.at(0).trimmed().toLocal8Bit(), list.at(1).trimmed().toLocal8Bit());
+			}
+		}
+		codes.close();
+	}
+}
+
+void SolarSystemEditor::loadDiscoveryCircumstances()
+{
+	numberedMinorPlanets.clear();
+
+	QFile dcdata(":/SolarSystemEditor/discovery_circumstances.dat");
+	// Open file
+	if (dcdata.open(QIODevice::ReadOnly))
+	{
+		QByteArray data = StelUtils::uncompress(dcdata);
+		dcdata.close();
+
+		//check if decompressing was successful
+		if(data.isEmpty())
+			return;
+
+		//create and open a QBuffer for reading
+		QBuffer buf(&data);
+		buf.open(QIODevice::ReadOnly);
+
+		// regular expression to find the comments and empty lines
+		static const QRegularExpression commentRx("^(\\s*#.*|\\s*)$");
+
+		while (!buf.atEnd())
+		{
+			QString line = QString::fromUtf8(buf.readLine());
+
+			// Skip comments
+			if (commentRx.match(line).hasMatch() || line.startsWith("//"))
+				continue;
+
+			QStringList list=line.split("\t");
+			int number = list.at(0).trimmed().toInt();
+			// The first entry is the date of discovery, the second is the name of discoverer
+			DiscoveryCircumstances discovery(list.at(1).trimmed(), list.at(2).trimmed());
+
+			numberedMinorPlanets.insert(number, discovery);
+		}
+		buf.close();
+	}
+}
+
 QHash<QString,QString> SolarSystemEditor::listAllLoadedSsoIdentifiers() const
 {
 	if (QFile::exists(customSolarSystemFilePath))
@@ -590,9 +665,8 @@ SsoElements SolarSystemEditor::readMpcOneLineCometElements(QString oneLineElemen
 		return result;
 	}
 	if (name.isEmpty())
-	{
-	    return result;
-	}
+		return result;
+
 	//Fragment suffix
 	if (provisionalDesignation.length() == 1)
 	{
@@ -601,6 +675,9 @@ SsoElements SolarSystemEditor::readMpcOneLineCometElements(QString oneLineElemen
 		name.append(fragmentIndex); // .toUpper()); // TBD: really toUpper?
 	}
 	result.insert("name", name);
+	QString pd = periodicCometsIdentifiers.value(name.split("/").at(0).trimmed(), "");
+	if (!pd.isEmpty()) // add new-style designation as provisional designation in addition to the old-style designation
+		result.insert("provisional_designation", pd);
 
 	QString sectionName = convertToGroupName(name);
 	if (sectionName.isEmpty())
@@ -958,6 +1035,14 @@ SsoElements SolarSystemEditor::readMpcOneLineMinorPlanetElements(QString oneLine
 	double radius = std::ceil(0.5*(1329 / std::sqrt(albedo)) * std::pow(10, -0.2 * absoluteMagnitude)); // Original formula is for diameter!
 	result.insert("albedo", albedo);
 	result.insert("radius", radius);
+
+	DiscoveryCircumstances dc = numberedMinorPlanets.value(minorPlanetNumber, DiscoveryCircumstances("",""));
+	if (!dc.first.isEmpty() && !dc.second.isEmpty())
+	{
+		result.insert("discovery", dc.first);
+		result.insert("discoverer", dc.second);
+	}
+
 	result.insert("type", objectType);
 
 	return result;
@@ -1279,6 +1364,10 @@ bool SolarSystemEditor::updateSolarSystemConfigurationFile(QList<SsoElements> ob
 		{
 			updateSsoProperty(solarSystem, object, "name");
 			updateSsoProperty(solarSystem, object, "minor_planet_number");
+			updateSsoProperty(solarSystem, object, "provisional_designation");
+			// Discovery Circumstances
+			updateSsoProperty(solarSystem, object, "discovery");
+			updateSsoProperty(solarSystem, object, "discoverer");
 		}
 
 		if (flags.testFlag(UpdateType))
@@ -1376,7 +1465,7 @@ int SolarSystemEditor::unpackDayOrMonthNumber(QChar digit)
 	if (digit.isUpper())
 	{
 		char letter = digit.toLatin1();
-		if (letter < 'A' || letter > 'V')
+		if ((letter < 'A') || (letter > 'V'))
 			return 0;
 		return (10 + (letter - 'A'));
 	}

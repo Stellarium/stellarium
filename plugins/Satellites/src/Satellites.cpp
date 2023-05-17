@@ -722,7 +722,7 @@ void Satellites::restoreDefaultSettings()
 
 void Satellites::restoreDefaultCatalog()
 {
-    if (QFileInfo::exists(catalogPath))
+	if (QFileInfo::exists(catalogPath))
 		backupCatalog(true);
 
 	QFile src(":/satellites/satellites.json");

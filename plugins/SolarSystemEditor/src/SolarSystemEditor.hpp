@@ -46,6 +46,8 @@ class QSettings;
 //! \todo Better name.
 typedef QHash<QString, QVariant> SsoElements;
 
+typedef QPair<QString, QString> DiscoveryCircumstances;
+
 /*!
  \class SolarSystemEditor
  \brief Main class of the Solar System Editor plug-in which allows editing (add, delete, update) of the minor bodies.
@@ -226,9 +228,14 @@ private:
 	//! in the configuration file.
 
 	//! The names and group names of all objects in the default ssystem_major.ini.
-	//! The keys are the names, the values are the group names.
-	//! Initialized in init().
+	//! The keys are the names, the values are the group names.	
 	QHash<QString,QString> defaultSsoIdentifiers;
+
+	//! The list of associations old-style and new-style designations of periodic comets
+	QHash<QString,QString> periodicCometsIdentifiers;
+
+	//! The list of discovery circumstances for numbered minor planets
+	QHash<int, DiscoveryCircumstances> numberedMinorPlanets;
 
 	//! Gets the names of the minor planet objects listed in a ssystem.ini-formatted file.
 	//! Used internally in readAllCurrentSsoNames() and in init() to initialize
@@ -247,6 +254,12 @@ private:
 
 	//! Check encoding of the file
 	bool isFileEncodingValid(QString filePath) const;
+
+	//! Load old-style and new-style designations for periodic comets
+	void loadPeriodicCometDesignators();
+
+	//! Load the list of discovery circumstances for numbered minor planets
+	void loadDiscoveryCircumstances();
 
 	//! Converts an alphanumeric digit as used in MPC packed dates to an integer.
 	//! See http://www.minorplanetcenter.org/iau/info/PackedDates.html
