@@ -66,6 +66,7 @@ MinorPlanet::MinorPlanet(const QString& englishName,
 	minorPlanetNumber(0),
 	slopeParameter(-10.0f), // -10 == mark as uninitialized: used in getVMagnitude()
 	nameIsProvisionalDesignation(false),
+	provisionalDesignationText(""),
 	properName(englishName),
 	b_v(99.f),
 	specT(""),
@@ -139,6 +140,7 @@ void MinorPlanet::setProvisionalDesignation(QString designation)
 	if (!designation.isEmpty())
 	{
 		provisionalDesignationHtml = renderProvisionalDesignationinHtml(designation);
+		provisionalDesignationText = designation;
 		nameIsProvisionalDesignation = false;
 	}
 }
@@ -281,7 +283,7 @@ QString MinorPlanet::renderProvisionalDesignationinHtml(QString plainTextName)
 	}
 	else
 	{
-		return QString();
+		return plainTextName;
 	}
 }
 

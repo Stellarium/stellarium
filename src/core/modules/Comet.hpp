@@ -86,10 +86,10 @@ public:
 	void setAbsoluteMagnitudeAndSlope(const float magnitude, const float slope);
 
 	//! sets a provisional designation.
-	//! At the moment, the only role is for it to be displayed in the info
-	//! field.
-	//! \todo Include them in the search lists.
 	void setProvisionalDesignation(QString designation) { provisionalDesignation = designation; }
+
+	//! gets a provisional designation.
+	QString getProvisionalDesignation() { return provisionalDesignation; }
 
 	//! get sidereal period for comet, days, or returns 0 if not possible (parabolic, hyperbolic orbit)
 	virtual double getSiderealPeriod() const Q_DECL_OVERRIDE;

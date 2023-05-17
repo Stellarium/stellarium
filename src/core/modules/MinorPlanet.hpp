@@ -76,11 +76,10 @@ public:
 	void setMinorPlanetNumber(int number);
 
 	//! sets a provisional designation.
-	//! At the moment, the only role is for it to be displayed in the info
-	//! field.
-	//! \todo Support more than one provisional designations.
-	//! \todo Include them in the search lists.
 	void setProvisionalDesignation(QString designation);
+
+	//! gets a provisional designation.
+	QString getProvisionalDesignation() { return provisionalDesignationText; }
 
 	//! sets absolute magnitude (H) and slope parameter (G).
 	//! These are the parameters in the IAU's two-parameter magnitude system
@@ -91,8 +90,6 @@ public:
 	void setAbsoluteMagnitudeAndSlope(const float magnitude, const float slope);
 
 	//! renders the subscript in a minor planet provisional designation with HTML.
-	//! \returns an empty string if the source string is not a provisional
-	//! designation.
 	static QString renderProvisionalDesignationinHtml(QString plainText);
 
 	//! set values for spectral types
@@ -120,6 +117,7 @@ private:
 
 	bool nameIsProvisionalDesignation;
 	QString provisionalDesignationHtml;
+	QString provisionalDesignationText;
 	QString properName;
 
 	float b_v;

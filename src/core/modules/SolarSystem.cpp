@@ -1640,14 +1640,46 @@ PlanetP SolarSystem::searchByEnglishName(QString planetEnglishName) const
 		if (p->getEnglishName().toUpper() == planetEnglishName.toUpper() || p->getCommonEnglishName().toUpper() == planetEnglishName.toUpper())
 			return p;
 	}
+	// provisional designation?
+	QString pd;
+	for (const auto& p : systemMinorBodies)
+	{
+		if (p->getPlanetType()==Planet::isComet)
+		{
+			QSharedPointer<Comet> mp = p.dynamicCast<Comet>();
+			pd = mp->getProvisionalDesignation();
+		}
+		else
+		{
+			QSharedPointer<MinorPlanet> mp = p.dynamicCast<MinorPlanet>();
+			pd = mp->getProvisionalDesignation();
+		}
+		if (!pd.isEmpty() && pd.toUpper()==planetEnglishName.toUpper())
+			return p;
+	}
 	return PlanetP();
 }
 
 PlanetP SolarSystem::searchMinorPlanetByEnglishName(QString planetEnglishName) const
 {
+	QString pd;
 	for (const auto& p : systemMinorBodies)
 	{
 		if (p->getCommonEnglishName().toUpper() == planetEnglishName.toUpper() || p->getEnglishName().toUpper() == planetEnglishName.toUpper())
+			return p;
+
+		// provisional designations
+		if (p->getPlanetType()==Planet::isComet)
+		{
+			QSharedPointer<Comet> mp = p.dynamicCast<Comet>();
+			pd = mp->getProvisionalDesignation();
+		}
+		else
+		{
+			QSharedPointer<MinorPlanet> mp = p.dynamicCast<MinorPlanet>();
+			pd = mp->getProvisionalDesignation();
+		}
+		if (!pd.isEmpty() && pd.toUpper()==planetEnglishName.toUpper())
 			return p;
 	}
 	return PlanetP();
@@ -1672,6 +1704,23 @@ StelObjectP SolarSystem::searchByName(const QString& name) const
 	{
 		QString nativeName = p->getNativeName().toUpper();
 		if (p->getEnglishName().toUpper() == name.toUpper() || (!nativeName.isEmpty() && nativeName == name.toUpper()))
+			return qSharedPointerCast<StelObject>(p);
+	}
+	// provisional designation?
+	QString pd;
+	for (const auto& p : systemMinorBodies)
+	{
+		if (p->getPlanetType()==Planet::isComet)
+		{
+			QSharedPointer<Comet> mp = p.dynamicCast<Comet>();
+			pd = mp->getProvisionalDesignation();
+		}
+		else
+		{
+			QSharedPointer<MinorPlanet> mp = p.dynamicCast<MinorPlanet>();
+			pd = mp->getProvisionalDesignation();
+		}
+		if (!pd.isEmpty() && pd.toUpper()==name.toUpper())
 			return qSharedPointerCast<StelObject>(p);
 	}
 	return StelObjectP();
@@ -2081,6 +2130,23 @@ QStringList SolarSystem::listAllObjects(bool inEnglish) const
 				result << p->getNativeNameI18n() << p->getNativeName();
 		}
 	}
+	// provisional designations
+	QString pd;
+	for (const auto& p : systemMinorBodies)
+	{
+		if (p->getPlanetType()==Planet::isComet)
+		{
+			QSharedPointer<Comet> mp = p.dynamicCast<Comet>();
+			pd = mp->getProvisionalDesignation();
+		}
+		else
+		{
+			QSharedPointer<MinorPlanet> mp = p.dynamicCast<MinorPlanet>();
+			pd = mp->getProvisionalDesignation();
+		}
+		if (!pd.isEmpty())
+			result << pd;
+	}
 	return result;
 }
 
@@ -2101,6 +2167,26 @@ QStringList SolarSystem::listAllObjectsByType(const QString &objType, bool inEng
 		{
 			if (p->getObjectType()==objType)
 				result << p->getNameI18n();
+		}
+	}
+	// provisional designations
+	QString pd;
+	for (const auto& p : systemMinorBodies)
+	{
+		if (p->getObjectType()==objType)
+		{
+			if (p->getPlanetType()==Planet::isComet)
+			{
+				QSharedPointer<Comet> mp = p.dynamicCast<Comet>();
+				pd = mp->getProvisionalDesignation();
+			}
+			else
+			{
+				QSharedPointer<MinorPlanet> mp = p.dynamicCast<MinorPlanet>();
+				pd = mp->getProvisionalDesignation();
+			}
+			if (!pd.isEmpty())
+				result << pd;
 		}
 	}
 	return result;
