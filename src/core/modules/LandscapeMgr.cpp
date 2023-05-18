@@ -895,7 +895,7 @@ bool LandscapeMgr::setCurrentLandscapeID(const QString& id, const double changeL
 	if(id==currentLandscapeID)
 		return false;
 
-	if (getAllLandscapeNames().indexOf(id)>0)
+	if (!getAllLandscapeIDs().contains(id))
 	{
 		qDebug() << "LandscapeMgr::setCurrentLandscapeID: unknown landscape" << id << ", using 'zero'";
 		return setCurrentLandscapeID("zero", changeLocationDuration);
