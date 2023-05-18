@@ -33,6 +33,7 @@
 #include "StelFileMgr.hpp"
 #include "StelGui.hpp"
 #include "StelSkyCultureMgr.hpp"
+#include "StelProgressController.hpp"
 
 #include <QSettings>
 #include <QDebug>
@@ -45,6 +46,10 @@
 LocationDialog::LocationDialog(QObject* parent)
 	: StelDialog("Location", parent)
 	, isEditingNew(false)
+	, updateState(CompleteNoUpdates)
+	, networkManager(nullptr)
+	, downloadReply(nullptr)
+	, progressBar(nullptr)
 	, allModel(nullptr)
 	, pickedModel(nullptr)
 	, proxyModel(nullptr)
@@ -209,6 +214,13 @@ void LocationDialog::createDialogContent()
 	});
 
 	ui->citySearchLineEdit->setFocus();
+
+	// Set up download manager for checker of updates
+	//networkManager = StelApp::getInstance().getNetworkAccessManager();
+	networkManager = new QNetworkAccessManager(this);
+	updateState = CompleteNoUpdates;
+	ui->updateTZFButton->setVisible(locMgr->unknownTimezonesDetected());
+	connect(ui->updateTZFButton, SIGNAL(clicked()), this, SLOT(updateTZF()));
 }
 
 void LocationDialog::setDisplayFormatForSpins(bool flagDecimalDegrees)
@@ -980,4 +992,117 @@ void LocationDialog::filterSitesByRegion()
 	proxyModel->sort(0, Qt::AscendingOrder);
 	ui->citySearchLineEdit->setText(""); // https://wiki.qt.io/Technical_FAQ#Why_does_the_memory_keep_increasing_when_repeatedly_pasting_text_and_calling_clear.28.29_in_a_QLineEdit.3F
 	ui->citySearchLineEdit->setFocus();
+}
+
+void LocationDialog::updateTZF()
+{
+	if (updateState==LocationDialog::Updating)
+	{
+		qWarning() << "Already updating...  will not start again until current update is complete.";
+		return;
+	}
+
+	if (progressBar == Q_NULLPTR)
+		progressBar = StelApp::getInstance().addProgressBar();
+	progressBar->setValue(0);
+	progressBar->setRange(0, 0);
+
+	qDebug() << "Updating timezone fixes...";
+
+	QSettings* conf = StelApp::getInstance().getSettings();
+	QUrl URL(conf->value("main/timezone_url", "https://www.stellarium.org/files/timezone.tab").toString());
+	connect(networkManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(downloadComplete(QNetworkReply*)));
+	QNetworkRequest request;
+	request.setUrl(URL);
+	request.setRawHeader("User-Agent", StelUtils::getUserAgentString().toUtf8());
+#if (QT_VERSION<QT_VERSION_CHECK(6,0,0))
+	request.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);
+#endif
+	downloadReply = networkManager->get(request);
+	connect(downloadReply, SIGNAL(downloadProgress(qint64,qint64)), this, SLOT(updateDownloadProgress(qint64,qint64)));
+
+	updateState = LocationDialog::Updating;
+}
+
+void LocationDialog::downloadComplete(QNetworkReply *reply)
+{
+	if (reply == nullptr)
+		return;
+
+	disconnect(networkManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(downloadComplete(QNetworkReply*)));
+
+	if (reply->error() || reply->bytesAvailable()==0)
+	{
+		qWarning() << "Error: While trying to access"
+			   << reply->url().toString()
+			   << "the following error occurred:"
+			   << reply->errorString();
+
+		updateState = LocationDialog::DownloadError;
+	}
+	else
+	{
+		QByteArray data = reply->readAll();
+		if (QString(data).endsWith(":EOF")) // Qt5-compatible check
+		{
+			QString tzfFilePath = StelFileMgr::findFile(StelLocationMgr::getTZFFileName());
+			QFile tzfFile(tzfFilePath);
+			if (tzfFile.exists())
+				tzfFile.remove();
+
+			if (tzfFile.open(QIODevice::WriteOnly | QIODevice::Text))
+			{
+				tzfFile.write(data);
+				tzfFile.close();
+			}
+			qWarning() << "Updating timezone fixes are complete... The new data will be apply on next startup.";
+			updateState = LocationDialog::CompleteUpdates;
+		}
+		else
+		{
+			qWarning() << "Downloaded timezone fixes are not completed, restore the data!";
+			updateState = LocationDialog::OtherError;
+		}
+	}
+
+	deleteDownloadProgressBar();
+
+	reply->deleteLater();
+	downloadReply = nullptr;
+	emit updateTZFComplete();
+}
+
+void LocationDialog::updateDownloadProgress(qint64 bytesReceived, qint64 bytesTotal)
+{
+	if (progressBar == Q_NULLPTR)
+		return;
+
+	int currentValue = 0;
+	int endValue = 0;
+
+	if (bytesTotal > -1 && bytesReceived <= bytesTotal)
+	{
+		//Round to the greatest possible derived unit
+		while (bytesTotal > 1024)
+		{
+			bytesReceived /= 1024;
+			bytesTotal    /= 1024;
+		}
+		currentValue = static_cast<int>(bytesReceived);
+		endValue = static_cast<int>(bytesTotal);
+	}
+
+	progressBar->setValue(currentValue);
+	progressBar->setRange(0, endValue);
+}
+
+void LocationDialog::deleteDownloadProgressBar()
+{
+	disconnect(this, SLOT(updateDownloadProgress(qint64,qint64)));
+
+	if (progressBar)
+	{
+		StelApp::getInstance().removeProgressBar(progressBar);
+		progressBar = Q_NULLPTR;
+	}
 }

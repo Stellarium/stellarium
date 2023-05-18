@@ -1,0 +1,79 @@
+# Missing and wrong time zones
+#
+# This file contains a table of missing and/or wrong time zones.  
+# Columns are separated by a single tab.  Lines beginning with '#' are comments.
+# All text uses UTF-8 encoding.  The columns of the table are as follows:
+#
+# 1.  DB name
+# 2.  Name as we display it in the program
+#
+# This file is automatically retrieved on demand. Do not edit! 
+
+# Reported April 25, 2023. (#3200)
+America/Yellowknife	America/Edmonton
+# Seen February 06, 2023.
+America/Ciudad_Juarez	America/Ojinaga
+# Seen November 11, 2022.
+America/Thunder_Bay	America/Toronto
+Europe/Uzhgorod	Europe/Kyiv
+# Seen on October 27, 2022. TZ Removed?
+Europe/Zaporozhye	Europe/Kyiv
+# Seen on September 26, 2022. Officially renamed.
+Europe/Kyiv	Europe/Kiev
+Europe/Kiev	Europe/Kyiv
+# Seen in an unrelated bug report, 2022-08-30
+Asia/Pyongyang	UTC+09:00
+# reported in SF forum on 2017-03-27
+Europe/Minsk	UTC+03:00
+Europe/Samara	UTC+04:00
+America/Cancun	UTC-05:00
+Asia/Kamchatka	UTC+12:00
+# Missing on Qt5.7/Win10 as of 2017-03-18.
+Europe/Astrakhan	UTC+04:00
+Europe/Ulyanovsk	UTC+04:00
+Europe/Kirov	UTC+03:00
+Asia/Hebron	Asia/Jerusalem
+# or use UTC+2:00? (political issue...)
+Asia/Gaza	Asia/Jerusalem
+Asia/Kolkata	Asia/Calcutta
+Asia/Kathmandu	Asia/Katmandu
+Asia/Tomsk	Asia/Novosibirsk
+Asia/Barnaul	UTC+07:00
+Asia/Ho_Chi_Minh	Asia/Saigon
+Asia/Hovd	UTC+07:00
+America/Argentina/Buenos_Aires	America/Buenos_Aires
+America/Argentina/Jujuy	America/Jujuy
+America/Argentina/Mendoza	America/Mendoza
+America/Argentina/Catamarca	America/Catamarca
+America/Argentina/Cordoba	America/Cordoba
+America/Indiana/Indianapolis	America/Indianapolis
+America/Kentucky/Louisville	America/Louisville
+# Small Canadian island.
+America/Miquelon	UTC-03:00
+Africa/Asmara	Africa/Asmera
+Atlantic/Faroe	Atlantic/Faeroe
+Pacific/Pohnpei	Pacific/Ponape
+Pacific/Norfolk	UTC+11:00
+Pacific/Pitcairn	UTC-08:00
+# Missing on Qt5.5.1/Ubuntu 16.04.1 LTE as of 2017-03-18:
+# NOTE: We must add these following zones for lookup in both ways: When the binary file is being created for publication on Linux, Rangoon/Yangon is being translated.
+# UTC+6:30 Yangon missing on Ubuntu/Qt5.5.1.
+Asia/Rangoon	Asia/Yangon
+# This can translate from the binary location file back to the zone name as known on Windows.
+Asia/Yangon	Asia/Rangoon
+# Missing on Qt5.9.5/Ubuntu 18.04.4
+America/Godthab	UTC-03:00
+# Missing on Qt5.12.10/Win7
+# no DST; https://www.zeitverschiebung.net/en/timezone/asia--qostanay
+Asia/Qostanay	UTC+06:00
+# no DST; https://www.zeitverschiebung.net/en/timezone/europe--saratov
+Europe/Saratov	UTC+04:00
+# no DST; https://www.zeitverschiebung.net/en/timezone/asia--atyrau
+Asia/Atyrau	UTC+05:00
+# Asia/Nicosia has no DST, but Asia/Famagusta has DST!
+Asia/Famagusta	Asia/Nicosia
+# no DST; https://www.zeitverschiebung.net/en/timezone/america--punta_arenas
+America/Punta_Arenas	UTC-03:00
+# Missing on Qt5.15.2/Win10
+America/Nuuk	America/Godthab
+#:EOF

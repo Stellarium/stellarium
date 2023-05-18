@@ -42,10 +42,11 @@
 #include <QRegularExpression>
 
 TimezoneNameMap StelLocationMgr::locationDBToIANAtranslations;
-
+QString StelLocationMgr::tzfFileName = "data/timezone.tab";
 QList<GeoRegion> StelLocationMgr::regions;
 QMap<QString, QString> StelLocationMgr::countryCodeToRegionMap;
 QMap<QString, QString> StelLocationMgr::countryNameToCodeMap;
+bool StelLocationMgr::unknownTZ = false;
 
 #ifdef ENABLE_GPS
 #ifdef ENABLE_LIBGPS
@@ -408,74 +409,10 @@ void NMEALookupHelper::nmeaTimeout()
 StelLocationMgr::StelLocationMgr()
 	: nmeaHelper(Q_NULLPTR), libGpsHelper(Q_NULLPTR)
 {
-	// initialize the static QMap first if necessary.
-	// The first entry is the DB name, the second is as we display it in the program.
-	if (locationDBToIANAtranslations.isEmpty())
-	{
-		// Reported April 25, 2023. (#3200)
-		locationDBToIANAtranslations.insert("America/Yellowknife","America/Edmonton");
-		// Seen February 06, 2023.
-		locationDBToIANAtranslations.insert("America/Ciudad_Juarez","America/Ojinaga");
-		// Seen November 11, 2022.
-		locationDBToIANAtranslations.insert("America/Thunder_Bay","America/Toronto");
-		locationDBToIANAtranslations.insert("Europe/Uzhgorod",  "Europe/Kyiv");
-		// Seen on October 27, 2022. TZ Removed?
-		locationDBToIANAtranslations.insert("Europe/Zaporozhye","Europe/Kyiv");
-		// Seen on September 26, 2022. Officially renamed.
-		locationDBToIANAtranslations.insert("Europe/Kyiv",      "Europe/Kiev");
-		locationDBToIANAtranslations.insert("Europe/Kiev",      "Europe/Kyiv");
-		// Seen in an unrelated bug report, 2022-08-30
-		locationDBToIANAtranslations.insert("Asia/Pyongyang",   "UTC+09:00");
-		// reported in SF forum on 2017-03-27
-		locationDBToIANAtranslations.insert("Europe/Minsk",     "UTC+03:00");
-		locationDBToIANAtranslations.insert("Europe/Samara",    "UTC+04:00");
-		locationDBToIANAtranslations.insert("America/Cancun",   "UTC-05:00");
-		locationDBToIANAtranslations.insert("Asia/Kamchatka",   "UTC+12:00");
-		// Missing on Qt5.7/Win10 as of 2017-03-18.
-		locationDBToIANAtranslations.insert("Europe/Astrakhan", "UTC+04:00");
-		locationDBToIANAtranslations.insert("Europe/Ulyanovsk", "UTC+04:00");
-		locationDBToIANAtranslations.insert("Europe/Kirov",     "UTC+03:00");
-		locationDBToIANAtranslations.insert("Asia/Hebron",      "Asia/Jerusalem");
-		locationDBToIANAtranslations.insert("Asia/Gaza",        "Asia/Jerusalem"); // or use UTC+2:00? (political issue...)
-		locationDBToIANAtranslations.insert("Asia/Kolkata",     "Asia/Calcutta");
-		locationDBToIANAtranslations.insert("Asia/Kathmandu",   "Asia/Katmandu");
-		locationDBToIANAtranslations.insert("Asia/Tomsk",       "Asia/Novosibirsk");
-		locationDBToIANAtranslations.insert("Asia/Barnaul",     "UTC+07:00");
-		locationDBToIANAtranslations.insert("Asia/Ho_Chi_Minh", "Asia/Saigon");
-		locationDBToIANAtranslations.insert("Asia/Hovd",        "UTC+07:00");
-		locationDBToIANAtranslations.insert("America/Argentina/Buenos_Aires", "America/Buenos_Aires");
-		locationDBToIANAtranslations.insert("America/Argentina/Jujuy",        "America/Jujuy");
-		locationDBToIANAtranslations.insert("America/Argentina/Mendoza",      "America/Mendoza");
-		locationDBToIANAtranslations.insert("America/Argentina/Catamarca",    "America/Catamarca");
-		locationDBToIANAtranslations.insert("America/Argentina/Cordoba",      "America/Cordoba");
-		locationDBToIANAtranslations.insert("America/Indiana/Indianapolis",   "America/Indianapolis");
-		locationDBToIANAtranslations.insert("America/Kentucky/Louisville",    "America/Louisville");
-		locationDBToIANAtranslations.insert("America/Miquelon",               "UTC-03:00");  // Small Canadian island.
-		locationDBToIANAtranslations.insert("Africa/Asmara",     "Africa/Asmera");
-		locationDBToIANAtranslations.insert("Atlantic/Faroe",    "Atlantic/Faeroe");
-		locationDBToIANAtranslations.insert("Pacific/Pohnpei",   "Pacific/Ponape");
-		locationDBToIANAtranslations.insert("Pacific/Norfolk",   "UTC+11:00");
-		locationDBToIANAtranslations.insert("Pacific/Pitcairn",  "UTC-08:00");
-		// Missing on Qt5.5.1/Ubuntu 16.04.1 LTE as of 2017-03-18:
-		// NOTE: We must add these following zones for lookup in both ways: When the binary file is being created for publication on Linux, Rangoon/Yangon is being translated.
-		locationDBToIANAtranslations.insert("Asia/Rangoon",      "Asia/Yangon");  // UTC+6:30 Yangon missing on Ubuntu/Qt5.5.1.
-		locationDBToIANAtranslations.insert("Asia/Yangon",       "Asia/Rangoon"); // This can translate from the binary location file back to the zone name as known on Windows.
-		locationDBToIANAtranslations.insert( "", "UTC");
-		// Missing on Qt5.9.5/Ubuntu 18.04.4
-		locationDBToIANAtranslations.insert("America/Godthab",   "UTC-03:00");
-		// Missing on Qt5.12.10/Win7
-		locationDBToIANAtranslations.insert("Asia/Qostanay",   "UTC+06:00"); // no DST; https://www.zeitverschiebung.net/en/timezone/asia--qostanay
-		locationDBToIANAtranslations.insert("Europe/Saratov",  "UTC+04:00"); // no DST; https://www.zeitverschiebung.net/en/timezone/europe--saratov
-		locationDBToIANAtranslations.insert("Asia/Atyrau",     "UTC+05:00"); // no DST; https://www.zeitverschiebung.net/en/timezone/asia--atyrau
-		locationDBToIANAtranslations.insert("Asia/Famagusta",  "Asia/Nicosia"); // Asia/Nicosia has no DST, but Asia/Famagusta has DST!
-		locationDBToIANAtranslations.insert("America/Punta_Arenas",  "UTC-03:00"); // no DST; https://www.zeitverschiebung.net/en/timezone/america--punta_arenas
-		// Missing on Qt5.15.2/Win10
-		locationDBToIANAtranslations.insert("America/Nuuk",      "America/Godthab");
-		// N.B. Further missing TZ names will be printed out in the log.txt. Resolve these by adding into this list.
-		// TODO later: create a text file in user data directory, and auto-update it weekly.
-	}
-
 	QSettings* conf = StelApp::getInstance().getSettings();
+
+	// N.B. Further missing TZ names will be printed out in the log.txt. Resolve these by adding into data/timezone.tab file.
+	loadTimeZoneFixes();
 
 	loadCountries();
 	loadRegions();
@@ -591,9 +528,10 @@ LocationMap StelLocationMgr::loadCitiesBin(const QString& fileName)
 			}
 		}
 	}
-	if (unknownTZlist.length()>0)
+	if (!unknownTZlist.isEmpty())
 	{
 		unknownTZlist.removeDuplicates();
+		unknownTZ = true;
 		qDebug() << "StelLocationMgr::loadCitiesBin(): Summary of unknown TimeZones:";
 		for (const auto& tz : unknownTZlist)
 		{
@@ -1244,6 +1182,51 @@ void StelLocationMgr::loadCountries()
 	// aliases for some countries to backward compatibility
 	countryNameToCodeMap.insert("Russian Federation", "ru");
 	countryNameToCodeMap.insert("Taiwan (Provice of China)", "tw");
+}
+
+void StelLocationMgr::loadTimeZoneFixes()
+{
+	QString tzFilePath = StelFileMgr::findFile(tzfFileName);
+	if (tzFilePath.isEmpty())
+	{
+		tzFilePath = StelFileMgr::findFile(tzfFileName, StelFileMgr::New);
+		// Create a default TZF (timezone fixes) file
+		QFile tzSrc(":/data/timezone.tab");
+		if (!tzSrc.copy(tzFilePath))
+		{
+			qWarning() << "Cannot copy timezone fixes to " + QDir::toNativeSeparators(tzFilePath);
+			return;
+		}
+		QFile dest(tzFilePath);
+		// fix file permissions
+		dest.setPermissions(dest.permissions() | QFile::WriteOwner);
+	}
+	QFile tzFile(tzFilePath);
+
+	if(tzFile.open(QFile::ReadOnly | QFile::Text))
+	{
+		locationDBToIANAtranslations.clear();
+		QString line;
+		locationDBToIANAtranslations.insert("", "UTC"); // a first fix
+		int readOk = 1;
+		static const QRegularExpression dataRx("^([\\w\\/]+)\\t([\\w\\/\\+\\-:]+)\\s*(.*)$");
+		while(!tzFile.atEnd())
+		{
+			line = QString::fromUtf8(tzFile.readLine());
+			if (line.startsWith("//") || line.startsWith("#") || line.isEmpty())
+				continue;
+
+			QRegularExpressionMatch dataMatch = dataRx.match(line);
+			if (dataMatch.hasMatch())
+			{
+				// The first entry is the DB name, the second is as we display it in the program.
+				locationDBToIANAtranslations.insert(dataMatch.captured(1).trimmed().toUtf8(), dataMatch.captured(2).trimmed().toUtf8());
+				readOk++;
+			}
+		}
+		qDebug() << "Loaded" << readOk << "fixes for time zones";
+		tzFile.close();
+	}
 }
 
 void StelLocationMgr::loadRegions()

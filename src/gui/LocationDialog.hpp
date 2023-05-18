@@ -22,6 +22,8 @@
 
 #include <QObject>
 #include "StelDialog.hpp"
+#include <QNetworkAccessManager>
+#include <QNetworkReply>
 
 class Ui_locationDialogForm;
 class QModelIndex;
@@ -33,6 +35,16 @@ class LocationDialog : public StelDialog
 {
 	Q_OBJECT
 public:
+	//! @enum UpdateState
+	//! Used for keeping for track of the download/update status
+	enum UpdateState {
+		Updating,		//!< Update in progress
+		CompleteNoUpdates,	//!< Update completed, there we no updates
+		CompleteUpdates,	//!< Update completed, there were updates
+		DownloadError,		//!< Error during download phase
+		OtherError		//!< Other error
+	};
+
 	LocationDialog(QObject* parent);
 	~LocationDialog() override;
 
@@ -86,7 +98,17 @@ private:
 
 	//! Populates tooltips for GUI elements.
 	void populateTooltips();
-	
+
+	// variables and functions for the updater
+	UpdateState updateState;
+	QNetworkAccessManager * networkManager;
+	QNetworkReply * downloadReply;
+	class StelProgressController* progressBar;
+	void deleteDownloadProgressBar();
+
+signals:
+	void updateTZFComplete(void);
+
 private slots:
 	//! Called whenever the StelLocationMgr is updated
 	void reloadLocations();
@@ -162,6 +184,10 @@ private slots:
 
 	//! Updates the check state and the enabled/disabled status.
 	void updateTimeZoneControls(bool useCustomTimeZone);
+
+	void updateTZF(void);
+	void downloadComplete(QNetworkReply * reply);
+	void updateDownloadProgress(qint64 bytesReceived, qint64 bytesTotal);
 
 private:
 	QString lastPlanet; // for caching when switching map

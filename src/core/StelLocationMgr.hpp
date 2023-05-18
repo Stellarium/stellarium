@@ -104,6 +104,9 @@ public:
 	//! Pick region name from region code
 	static QString pickRegionFromCode(int regionCode);
 
+	static QString getTZFFileName() { return tzfFileName; }
+	static bool unknownTimezonesDetected() { return unknownTZ; }
+
 public slots:
 	//! Return the StelLocation for a given string
 	//! Can match location name, or coordinates
@@ -160,6 +163,7 @@ private slots:
 private:
 	void loadRegions();
 	void loadCountries();
+	void loadTimeZoneFixes();
 	void generateBinaryLocationFile(const QString& txtFile, bool isUserLocation, const QString& binFile) const;
 
 	//! Load cities from a file
@@ -182,6 +186,8 @@ private:
 	static QList<GeoRegion> regions;
 	static QMap<QString, QString> countryCodeToRegionMap;
 	static QMap<QString, QString> countryNameToCodeMap;
+	static QString tzfFileName;
+	static bool unknownTZ;
 	
 	StelLocation lastResortLocation;
 
