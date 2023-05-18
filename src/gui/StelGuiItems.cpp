@@ -384,6 +384,7 @@ LeftStelBar::~LeftStelBar()
 
 void LeftStelBar::addButton(StelButton* button)
 {
+	prepareGeometryChange();
 	double posY = 0;
 	if (QGraphicsItem::childItems().size()!=0)
 	{
@@ -392,7 +393,7 @@ void LeftStelBar::addButton(StelButton* button)
 	}
 	button->setParentItem(this);
 	button->setFocusOnSky(false);
-	button->prepareGeometryChange(); // could possibly be removed when qt 4.6 become stable
+	//button->prepareGeometryChange(); // could possibly be removed when qt 4.6 become stable
 	button->setPos(0., qRound(posY+10.5));
 
 	connect(button, SIGNAL(hoverChanged(bool)), this, SLOT(buttonHoverChanged(bool)));
@@ -557,6 +558,7 @@ BottomStelBar::BottomStelBar(QGraphicsItem* parent,
 //! connect from StelApp to resize fonts on the fly.
 void BottomStelBar::setFontSizeFromApp(int size)
 {
+	prepareGeometryChange();
 	QFont font=QGuiApplication::font();
 	// Font size was developed based on base font size 13, i.e. 12
 	font.setPixelSize(size-1);
@@ -628,6 +630,7 @@ BottomStelBar::~BottomStelBar()
 
 void BottomStelBar::addButton(StelButton* button, const QString& groupName, const QString& beforeActionName)
 {
+	prepareGeometryChange();
 	QList<StelButton*>& g = buttonGroups[groupName].elems;
 	bool done = false;
 	for (int i=0; i<g.size(); ++i)
@@ -1264,7 +1267,7 @@ QRectF CornerButtons::boundingRect() const
 	if (QGraphicsItem::childItems().size()==0)
 		return QRectF();
 	const QRectF& r = childrenBoundingRect();
-	return QRectF(0, 0, r.width()-1, r.height()-1);
+	return QRectF(0, 0, r.width(), r.height());
 }
 
 void CornerButtons::setOpacity(double opacity)
