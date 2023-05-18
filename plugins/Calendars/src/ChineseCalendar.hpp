@@ -193,7 +193,6 @@ protected:
 	constexpr static const int bright=2; //! CC:UE 19.31
 	constexpr static const int blind=1; //! CC:UE 19.32
 	constexpr static const int widow=0; //! CC:UE 19.33
-
 };
 
 #endif
