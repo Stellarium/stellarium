@@ -814,6 +814,26 @@
               </property>
              </widget>
             </item>
+			<item row="6" column="0">
+              <widget class="QCheckBox" name="autoChangeLandscapesCheckBox">
+               <property name="toolTip">
+                <string>Automatic change of landscape when planet or location is changed</string>
+               </property>
+               <property name="text">
+                <string>Auto-select landscapes</string>
+               </property>
+              </widget>
+             </item>
+			 <item row="6" column="1">
+              <widget class="QCheckBox" name="autoEnableEnvironmentCheckBox">
+               <property name="toolTip">
+                <string>Auto-enable atmosphere when planet is changed</string>
+               </property>
+               <property name="text">
+                <string>Auto-enable atmosphere</string>
+               </property>
+              </widget>
+             </item>
            </layout>
           </widget>
          </item>

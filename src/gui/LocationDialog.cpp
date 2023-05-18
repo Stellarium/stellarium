@@ -190,6 +190,8 @@ void LocationDialog::createDialogContent()
 	ui->timeZoneNameComboBox->setEnabled(core->getUseCustomTimeZone());
 	connect(ui->useCustomTimeZoneCheckBox, SIGNAL(clicked(bool)), this, SLOT(updateTimeZoneControls(bool)));
 	connect(core, SIGNAL(currentTimeZoneChanged(QString)), this, SLOT(setTimezone(QString)));
+	connectBoolProperty(ui->autoEnableEnvironmentCheckBox, "LandscapeMgr.flagEnvironmentAutoEnabling");
+	connectBoolProperty(ui->autoChangeLandscapesCheckBox,  "LandscapeMgr.flagLandscapeAutoSelection");
 
 	connectEditSignals();
 
@@ -986,11 +988,26 @@ void LocationDialog::resetLocationList()
 	//reset search before setting model, prevents unnecessary search in full list
 	ui->citySearchLineEdit->setText(""); // https://wiki.qt.io/Technical_FAQ#Why_does_the_memory_keep_increasing_when_repeatedly_pasting_text_and_calling_clear.28.29_in_a_QLineEdit.3F
 	ui->citySearchLineEdit->setFocus();
-	proxyModel->setSourceModel(allModel);
+
+	// populate site list with sites only from that planet, or full list for Earth (faster than removing the ~50 non-Earth positions...).
+	StelLocationMgr &locMgr=StelApp::getInstance().getLocationMgr();
+	StelLocation loc = locationFromFields();
+	if (loc.planetName == "Earth")
+	{
+		proxyModel->setSourceModel(allModel);
+	}
+	else
+	{
+		LocationMap results = locMgr.pickLocationsNearby(loc.planetName, 0.0f, 0.0f, 180.0f);
+		pickedModel->setStringList(results.keys());
+		proxyModel->setSourceModel(pickedModel);
+		ui->regionNameComboBox->setCurrentIndex(ui->regionNameComboBox->findData("", Qt::UserRole, Qt::MatchCaseSensitive));
+	}
+
 	proxyModel->sort(0, Qt::AscendingOrder);
 }
 
-// called when user clicks in the country combobox and selects a country. The locations in the list are updated to select only sites in that country.
+// called when user clicks in the region combobox and selects a region. The locations in the list are updated to select only sites in that region.
 void LocationDialog::filterSitesByRegion()
 {
 	QString region=ui->regionNameComboBox->currentData(Qt::UserRole).toString();
