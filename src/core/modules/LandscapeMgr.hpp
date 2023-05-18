@@ -106,9 +106,8 @@ private:
 	class StelPropertyMgr* propMgr;
 	QFont font4WCR, font8WCR, font16WCR, font32WCR;
 	Vec3f color;
-	static constexpr float cp = static_cast<float>(1./(1.+M_SQRT2)); // dimension for secondary intercardinals
-	static constexpr float qp = static_cast<float>(0.5f*cp);
-	static constexpr float tqp = static_cast<float>(1.5f*cp);
+	static constexpr float q8 = M_SQRT2*0.5f; // dimension for intercardinals
+	static const float sp8, cp8, s1p16, c1p16, s3p16, c3p16; // dimensions for 2nd/3rd intercardinals
 	static const QMap<Cardinals::CompassDirection, Vec3f> rose4winds, rose8winds, rose16winds, rose32winds;
 	QMap<Cardinals::CompassDirection, QString> labels;
 	LinearFader fader4WCR, fader8WCR, fader16WCR, fader32WCR;
