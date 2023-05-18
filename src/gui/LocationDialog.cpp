@@ -630,7 +630,7 @@ void LocationDialog::setLocationFromMap(double longitude, double latitude, const
 	if (loc.planetName=="Earth")
 		core->moveObserverTo(loc, 0., 1., QString("ZeroColor(%1)").arg(Vec3f(color).toStr()));
 	else
-		core->moveObserverTo(loc, 0., 1., QString()); // Loads a default landscape for the planet.
+		core->moveObserverTo(loc, 0., 1., loc.planetName); // Loads a default landscape for the planet.
 
 	// Only for locations on Earth: set zone to LMST.
 	// TODO: Find a way to lookup (lon,lat)->country->timezone.
