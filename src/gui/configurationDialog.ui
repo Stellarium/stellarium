@@ -2037,16 +2037,6 @@
                </item>
               </layout>
              </item>
-             <item row="9" column="1">
-              <widget class="QCheckBox" name="autoEnableEnvironmentCheckBox">
-               <property name="toolTip">
-                <string>Auto-enable atmosphere and landscape when selecting a celestial body in the location window.</string>
-               </property>
-               <property name="text">
-                <string>Auto-enabling for the environment</string>
-               </property>
-              </widget>
-             </item>
              <item row="5" column="1">
               <widget class="QCheckBox" name="autoZoomResetsDirectionCheckbox">
                <property name="toolTip">
@@ -2122,16 +2112,6 @@
                </property>
                <property name="text">
                 <string>Select single constellation</string>
-               </property>
-              </widget>
-             </item>
-             <item row="9" column="3">
-              <widget class="QCheckBox" name="autoChangeLandscapesCheckBox">
-               <property name="toolTip">
-                <string>Automatic change of landscape when planet is changed</string>
-               </property>
-               <property name="text">
-                <string>Auto select landscapes</string>
                </property>
               </widget>
              </item>
