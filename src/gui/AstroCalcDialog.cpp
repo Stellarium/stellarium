@@ -6896,7 +6896,6 @@ void AstroCalcDialog::calculatePhenomena()
 					// moons of first body and observer's planet
 					if ((object->getParent()==cp || object->getParent()==firstPlanet) && object->getPlanetType()==Planet::isMoon)
 						objects.append(object);
-
 				}
 			}
 			break;

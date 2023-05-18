@@ -322,7 +322,6 @@ bool Satellites::backupCatalog(bool deleteOriginal)
 			   << QDir::toNativeSeparators(backupPath);
 		return false;
 	}
-
 	return true;
 }
 
