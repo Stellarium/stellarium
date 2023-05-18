@@ -322,7 +322,6 @@ void SatellitesDialog::createDialogContent()
 	connect(ui->predictedIridiumFlaresSaveButton, SIGNAL(clicked()), this, SLOT(savePredictedIridiumFlares()));
 	connect(ui->iridiumFlaresTreeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentIridiumFlare(QModelIndex)));
 #endif
-
 }
 
 void SatellitesDialog::enableMinMaxAltitude(bool state)

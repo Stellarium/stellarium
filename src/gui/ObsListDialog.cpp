@@ -1423,8 +1423,8 @@ void ObsListDialog::headerClicked(int index)
 }
 
 // Get the magnitude from selected object (or a dash if unavailable)
-QString ObsListDialog::getMagnitude(const QList<StelObjectP> &selectedObject, StelCore *core) {
-
+QString ObsListDialog::getMagnitude(const QList<StelObjectP> &selectedObject, StelCore *core)
+{
 	if (!core)
 		return DASH;
 
