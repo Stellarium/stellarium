@@ -491,6 +491,10 @@ StelLocationMgr::StelLocationMgr()
 #endif
 	// Init to Paris France because it's the center of the world.
 	lastResortLocation = locationForString(conf->value("init_location/last_location", "Paris, Western Europe").toString());
+
+	planetName="Earth";
+	planetSurfaceMap.load(StelFileMgr::findFile("data/gui/miscWorldMap.jpg", StelFileMgr::File));
+	connect(StelApp::getInstance().getCore(), SIGNAL(StelCore::locationChanged(StelLocation)), this, SLOT(changePlanetMapForLocation(StelLocation)));
 }
 
 StelLocationMgr::~StelLocationMgr()
@@ -1173,7 +1177,7 @@ void StelLocationMgr::changeLocationFromNetworkLookup()
 	networkReply->deleteLater();
 }
 
-LocationMap StelLocationMgr::pickLocationsNearby(const QString planetName, const float longitude, const float latitude, const float radiusDegrees)
+LocationMap StelLocationMgr::pickLocationsNearby(const QString &planetName, const float longitude, const float latitude, const float radiusDegrees)
 {
 	QMap<QString, StelLocation> results;
 	QMapIterator<QString, StelLocation> iter(locations);
@@ -1190,7 +1194,7 @@ LocationMap StelLocationMgr::pickLocationsNearby(const QString planetName, const
 	return results;
 }
 
-LocationMap StelLocationMgr::pickLocationsInRegion(const QString region)
+LocationMap StelLocationMgr::pickLocationsInRegion(const QString &region)
 {
 	QMap<QString, StelLocation> results;
 	QMapIterator<QString, StelLocation> iter(locations);
@@ -1324,13 +1328,13 @@ QStringList StelLocationMgr::getRegionNames(const QString& planet) const
 	return allregions;
 }
 
-QString StelLocationMgr::pickRegionFromCountryCode(const QString countryCode)
+QString StelLocationMgr::pickRegionFromCountryCode(const QString &countryCode)
 {
 	QMap<QString, QString>::ConstIterator i = countryCodeToRegionMap.find(countryCode);
 	return (i!=countryCodeToRegionMap.constEnd()) ? i.value() : QString();
 }
 
-QString StelLocationMgr::pickRegionFromCountry(const QString country)
+QString StelLocationMgr::pickRegionFromCountry(const QString &country)
 {
 	QMap<QString, QString>::ConstIterator i = countryNameToCodeMap.find(country);
 	QString code = (i!=countryNameToCodeMap.constEnd()) ? i.value() : QString();
@@ -1555,4 +1559,36 @@ QStringList StelLocationMgr::getAllTimezoneNames() const
 	ret.append("system_default");
 	ret.sort();
 	return ret;
+}
+
+// To be connected from StelCore::locationChanged(loc)
+void StelLocationMgr::changePlanetMapForLocation(StelLocation loc)
+{
+	if (loc.planetName==planetName)
+		return;
+
+	QString mapName;
+	if (loc.planetName=="Earth")
+		mapName="data/gui/miscWorldMap.jpg";
+	else
+		mapName="textures/" + loc.planetName + ".png";
+	planetName=loc.planetName;
+
+	if (!planetSurfaceMap.load(StelFileMgr::findFile(mapName, StelFileMgr::File)))
+	{
+		// texture not found. Use a gray pixel.
+		planetSurfaceMap=QImage(16,16,QImage::Format_RGB32);
+		planetSurfaceMap.fill(QColor(64, 64, 64));
+	}
+}
+
+QColor StelLocationMgr::getColorForCoordinates(const double lng, const double lat) const
+{
+	QPoint imgPoint( (lng+180.)/ 360. * planetSurfaceMap.width(),
+			 (90.-lat) / 180. * planetSurfaceMap.height());
+
+	// Sample the map pixel color. Use a small box to avoid 1-pixel surprises.
+	QImage sampledPix=planetSurfaceMap.copy(QRect(imgPoint-QPoint(1,1), QSize(2,2))).scaled(1,1);
+	return sampledPix.pixelColor(0,0);
+
 }

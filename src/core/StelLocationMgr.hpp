@@ -24,6 +24,7 @@
 #include <QObject>
 #include <QMetaType>
 #include <QMap>
+#include <QImage>
 #ifdef Q_OS_WIN
 #include <QtPositioning/QGeoPositionInfoSource>
 #endif
@@ -91,17 +92,17 @@ public:
 	bool deleteUserLocation(const QString& id);
 
 	//! Find list of locations within @param radiusDegrees of selected (usually screen-clicked) coordinates.
-	LocationMap pickLocationsNearby(const QString planetName, const float longitude, const float latitude, const float radiusDegrees);
+	LocationMap pickLocationsNearby(const QString& planetName, const float longitude, const float latitude, const float radiusDegrees);
 	//! Find list of locations in a particular region only.
-	LocationMap pickLocationsInRegion(const QString region);
+	LocationMap pickLocationsInRegion(const QString& region);
 
 	//! return a QStringList of region names by planet (return all list of regions if planet name is empty)
 	QStringList getRegionNames(const QString& planet = "") const;
 
 	//! Pick region name from ISO 3166-1 two-letter country codes
-	static QString pickRegionFromCountryCode(const QString countryCode);
+	static QString pickRegionFromCountryCode(const QString& countryCode);
 	//! Pick region name from country English name
-	static QString pickRegionFromCountry(const QString country);
+	static QString pickRegionFromCountry(const QString& country);
 	//! Pick region name from region code
 	static QString pickRegionFromCode(int regionCode);
 
@@ -135,6 +136,9 @@ public slots:
 
 	//! return a QStringList of valid timezone names in Stellarium's location database.
 	QStringList getAllTimezoneNames() const;
+
+	//! Retrieve a color from coordinate lookup into the current planet texture (or specialized earth map)
+	QColor getColorForCoordinates(const double lng, const double lat) const;
 
 #ifdef ENABLE_GPS
 	//! Try to get a location from GPS lookup.
@@ -171,6 +175,8 @@ signals:
 private slots:
 	//! Process answer from online lookup of IP address
 	void changeLocationFromNetworkLookup();
+	//! To be connected from StelCore::locationChanged(loc)
+	void changePlanetMapForLocation(StelLocation loc);
 #ifdef ENABLE_GPS
 	void changeLocationFromGPSQuery(const StelLocation& loc);
 	void gpsQueryError(const QString& err);
@@ -205,6 +211,12 @@ private:
 	static QMap<QString, QString> countryNameToCodeMap;
 	
 	StelLocation lastResortLocation;
+
+	//! Used to sample a color from our current planet's surface map.
+	//! This must be kept in-sync with the map shown in the LocationDialog.
+	QImage planetSurfaceMap;
+	//! Auxiliary to the surface map. This tracks whether we actually have to load a new image.
+	QString planetName;
 
 	GPSLookupHelper *nmeaHelper,*libGpsHelper;
 #ifdef Q_OS_WIN

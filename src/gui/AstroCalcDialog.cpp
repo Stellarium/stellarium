@@ -28,6 +28,7 @@
 #include "StelUtils.hpp"
 #include "StelTranslator.hpp"
 #include "StelLocaleMgr.hpp"
+#include "StelLocationMgr.hpp"
 #include "StelFileMgr.hpp"
 #include "AngleSpinBox.hpp"
 #include "SolarSystem.hpp"
@@ -3831,7 +3832,10 @@ void AstroCalcDialog::selectCurrentSolarEclipseContact(const QModelIndex& modelI
 	const bool greatest = modelIndex.sibling(modelIndex.row(), SolarEclipseContact).data(Qt::UserRole).toBool();
 
 	StelLocation contactLoc(greatest ? q_("Greatest eclipse’s point") : q_("Eclipse’s contact point"), "", "", lon, lat, 10, 0, "LMST", 1, 'X');
-	core->moveObserverTo(contactLoc, 2., 2., "zero"); // use a neutral horizon to avoid confusion.
+	// Find landscape color at the spot
+	StelLocationMgr* locationMgr = &StelApp::getInstance().getLocationMgr();
+	QColor color=locationMgr->getColorForCoordinates(lon, lat);
+	core->moveObserverTo(contactLoc, 2., 2., QString("ZeroColor(%1)").arg(Vec3f(color).toStr())); // use a neutral horizon but environmental color to avoid confusion.
 	goToObject("Sun", JD);
 }
 
@@ -3862,7 +3866,10 @@ void AstroCalcDialog::selectCurrentSolarEclipseDate(const QModelIndex& modelInde
 	StelLocation maxLoc(q_("Greatest eclipse’s point"), "", "", lon, lat, 10, 0, "LMST", 1, 'X');
 	qDebug() << "AstroCalcDialog::selectCurrentSolarEclipseDate(" << modelIndex;
 	qDebug() << "Moving to MaxLoc ...";
-	core->moveObserverTo(maxLoc, 2., 2., "zero"); // use a neutral horizon to avoid confusion.
+	// Find landscape color at the spot
+	StelLocationMgr* locationMgr = &StelApp::getInstance().getLocationMgr();
+	QColor color=locationMgr->getColorForCoordinates(lon, lat);
+	core->moveObserverTo(maxLoc, 2., 2., QString("ZeroColor(%1)").arg(Vec3f(color).toStr())); // use a neutral horizon but environmental color to avoid confusion.
 	goToObject("Sun", JD);
 	qDebug() << "Moving to MaxLoc ... done";
 }
