@@ -61,7 +61,6 @@ QPixmap getTextPixmap(const QString& str, QFont font)
 {
 	// Render the text str into a QPixmap.
 	QRect strRect = QFontMetrics(font).boundingRect(str);
-	//qDebug() << "getTextPixMap " << str << strRect;
 	int w = static_cast<int>(1.02f*static_cast<float>(strRect.width()))+1;
 	int h = strRect.height();
 
@@ -1093,7 +1092,6 @@ QRectF BottomStelBar::boundingRect() const
 	if (QGraphicsItem::childItems().size()==0)
 		return QRectF();
 	const QRectF& r = childrenBoundingRect(); // BBX of status text (Location/FoV/FPS/Time) and buttons
-	//return QRectF(0, 0, r.width()-1, r.height()-1); // Why return a smaller BR than children?
 	return QRectF(0, 0, r.width(), r.height());
 }
 
