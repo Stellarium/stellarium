@@ -54,6 +54,7 @@ public:
 	bool isLoading() const override { return false; }
 	bool isReadyToRender() const override { return true; }
 	LoadingStatus stepDataLoading() override { return {0,0}; }
+
 private:
 	Vec4i viewport;
 	Skylight& sky;
