@@ -1012,7 +1012,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 						    hidden,
 						    type));
 			QSharedPointer<MinorPlanet> mp =  newP.dynamicCast<MinorPlanet>();
-			//Number, Provisional designation
+			//Number, IAU provisional designation
 			mp->setMinorPlanetNumber(pd.value(secname+"/minor_planet_number", 0).toInt());
 			mp->setIAUDesignation(pd.value(secname+"/iau_designation", "").toString());
 

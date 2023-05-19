@@ -661,7 +661,7 @@ SsoElements SolarSystemEditor::readMpcOneLineCometElements(QString oneLineElemen
 
 	if (periodicNumberString.isEmpty() && iauDesignation.isEmpty())
 	{
-		qWarning() << "Comet" << name << "is missing both comet number AND provisional designation.";
+		qWarning() << "Comet" << name << "is missing both comet number AND IAU designation.";
 		return result;
 	}
 	if (name.isEmpty())
