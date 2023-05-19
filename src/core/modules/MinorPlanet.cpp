@@ -65,8 +65,8 @@ MinorPlanet::MinorPlanet(const QString& englishName,
 		  pTypeStr),
 	minorPlanetNumber(0),
 	slopeParameter(-10.0f), // -10 == mark as uninitialized: used in getVMagnitude()
-	nameIsProvisionalDesignation(false),
-	provisionalDesignationText(""),
+	nameIsIAUDesignation(false),
+	iauDesignationText(""),
 	properName(englishName),
 	b_v(99.f),
 	specT(""),
@@ -78,12 +78,12 @@ MinorPlanet::MinorPlanet(const QString& englishName,
 	if (englishName.endsWith('*'))
 		properName = englishName.left(englishName.length() - 1);
 
-	//Try to detect provisional designation	
-	QString provisionalDesignation = renderProvisionalDesignationinHtml(englishName);
-	if (!provisionalDesignation.isEmpty())
+	//Try to detect IAU provisional designation
+	QString iauDesignation = renderIAUDesignationinHtml(englishName);
+	if (!iauDesignation.isEmpty())
 	{
-		nameIsProvisionalDesignation = true;
-		provisionalDesignationHtml = provisionalDesignation;
+		nameIsIAUDesignation = true;
+		iauDesignationHtml = iauDesignation;
 	}
 }
 
@@ -134,14 +134,14 @@ void MinorPlanet::setAbsoluteMagnitudeAndSlope(const float magnitude, const floa
 	slopeParameter = slope;
 }
 
-void MinorPlanet::setProvisionalDesignation(QString designation)
+void MinorPlanet::setIAUDesignation(QString designation)
 {
 	//TODO: This feature has to be implemented better, anyway.
 	if (!designation.isEmpty())
 	{
-		provisionalDesignationHtml = renderProvisionalDesignationinHtml(designation);
-		provisionalDesignationText = designation;
-		nameIsProvisionalDesignation = false;
+		iauDesignationHtml = renderIAUDesignationinHtml(designation);
+		iauDesignationText = designation;
+		nameIsIAUDesignation = false;
 	}
 }
 
@@ -162,16 +162,16 @@ QString MinorPlanet::getInfoStringName(const StelCore *core, const InfoStringGro
 	QTextStream oss(&str);
 
 	oss << "<h2>";
-	if (nameIsProvisionalDesignation)
+	if (nameIsIAUDesignation)
 	{
 		if (minorPlanetNumber)
 			oss << QString("(%1) ").arg(minorPlanetNumber);
-		oss << provisionalDesignationHtml;
+		oss << iauDesignationHtml;
 	}
 	else
 		oss << getNameI18n();  // UI translation can differ from sky translation
-	if (!nameIsProvisionalDesignation && !provisionalDesignationHtml.isEmpty())
-		oss << QString(" - %1").arg(provisionalDesignationHtml);
+	if (!nameIsIAUDesignation && !iauDesignationHtml.isEmpty())
+		oss << QString(" - %1").arg(iauDesignationHtml);
 
 	oss.setRealNumberNotation(QTextStream::FixedNotation);
 	oss.setRealNumberPrecision(1);
@@ -261,7 +261,7 @@ void MinorPlanet::translateName(const StelTranslator &translator)
 		nameI18.append('*');
 }
 
-QString MinorPlanet::renderProvisionalDesignationinHtml(QString plainTextName)
+QString MinorPlanet::renderIAUDesignationinHtml(QString plainTextName)
 {
 	static const QRegularExpression provisionalDesignationPattern("^(\\d{4}\\s[A-Z]{2})(\\d*)$");
 	QRegularExpressionMatch match=provisionalDesignationPattern.match(plainTextName);

@@ -31,7 +31,7 @@
 	There are two main reasons for having a separate class from Planet:
 	 - visual magnitude calculation (asteroids use the H,G system;
        Stellarium's default algorithm is not easily applied to asteroids);
-	 - support for minor planet numbers and provisional designations.
+	 - support for minor planet numbers and IAU designations.
 
 	Some of the code in this class is re-used from the parent Planet class.
   */
@@ -75,11 +75,11 @@ public:
 	//! have no result.
 	void setMinorPlanetNumber(int number);
 
-	//! sets a provisional designation.
-	void setProvisionalDesignation(QString designation);
+	//! sets an IAU provisional designation.
+	void setIAUDesignation(QString designation);
 
-	//! gets a provisional designation.
-	QString getProvisionalDesignation() { return provisionalDesignationText; }
+	//! gets an IAU provisional designation.
+	QString getIAUDesignation() { return iauDesignationText; }
 
 	//! sets absolute magnitude (H) and slope parameter (G).
 	//! These are the parameters in the IAU's two-parameter magnitude system
@@ -89,8 +89,8 @@ public:
 	//! @param slope Slope parameter G. This is usually [0..1], sometimes slightly outside. Allowed here [-1..2].
 	void setAbsoluteMagnitudeAndSlope(const float magnitude, const float slope);
 
-	//! renders the subscript in a minor planet provisional designation with HTML.
-	static QString renderProvisionalDesignationinHtml(QString plainText);
+	//! renders the subscript in a minor planet IAU provisional designation with HTML.
+	static QString renderIAUDesignationinHtml(QString plainText);
 
 	//! set values for spectral types
 	void setSpectralType(QString sT="", QString sB="");
@@ -115,9 +115,9 @@ private:
 	int minorPlanetNumber;
 	float  slopeParameter; // This is G from the H, G system for computation of apparent magnitude.
 
-	bool nameIsProvisionalDesignation;
-	QString provisionalDesignationHtml;
-	QString provisionalDesignationText;
+	bool nameIsIAUDesignation;
+	QString iauDesignationHtml;
+	QString iauDesignationText;
 	QString properName;
 
 	float b_v;

@@ -271,21 +271,21 @@ private:
 
 	//! Converts an alphanumeric year number as used in MPC packed dates to an integer.
 	//! See http://www.minorplanetcenter.org/iau/info/PackedDates.html
-	//! Also used in packed provisional designations, see
+	//! Also used in packed IAU designations, see
 	//! http://www.minorplanetcenter.org/iau/info/PackedDes.html
 	static int unpackYearNumber (QChar prefix, int lastTwoDigits);
 
-	//! Converts a two-character number used in MPC packed provisional designations.
+	//! Converts a two-character number used in MPC packed IAU designations.
 	//! See http://www.minorplanetcenter.org/iau/info/PackedDes.html
 	//! This function is used for both asteroid and comet designations.
 	static int unpackAlphanumericNumber (QChar prefix, int lastDigit);
 
 	//TODO: This should be public, perhaps?
-	//! Unpacks an MPC packed minor planet provisional designation.
+	//! Unpacks an MPC packed minor planet IAU designation.
 	//! See http://www.minorplanetcenter.org/iau/info/PackedDes.html
 	//! \returns an empty string if the argument is not a valid packed
-	//! provisional designation.
-	static QString unpackMinorPlanetProvisionalDesignation(QString packedDesignation);
+	//! IAU designation.
+	static QString unpackMinorPlanetIAUDesignation(QString packedDesignation);
 
 	//! Updates a value in a configuration file with a value with the same key in a SsoElements hash.
 	static void updateSsoProperty(QSettings& configuration, SsoElements& properties, QString key);

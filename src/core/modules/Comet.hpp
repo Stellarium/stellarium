@@ -85,11 +85,11 @@ public:
 	//! as the same parameters in MinorPlanet.
 	void setAbsoluteMagnitudeAndSlope(const float magnitude, const float slope);
 
-	//! sets a provisional designation.
-	void setProvisionalDesignation(QString designation) { provisionalDesignation = designation; }
+	//! sets an IAU designation.
+	void setIAUDesignation(QString designation) { iauDesignation = designation; }
 
-	//! gets a provisional designation.
-	QString getProvisionalDesignation() { return provisionalDesignation; }
+	//! gets an IAU designation.
+	QString getIAUDesignation() { return iauDesignation; }
 
 	//! get sidereal period for comet, days, or returns 0 if not possible (parabolic, hyperbolic orbit)
 	virtual double getSiderealPeriod() const Q_DECL_OVERRIDE;
@@ -134,8 +134,7 @@ private:
 
 	float slopeParameter;
 	bool isCometFragment;
-	//bool nameIsProvisionalDesignation;
-	QString provisionalDesignation;
+	QString iauDesignation;
 
 	//GZ Tail additions
 	Vec2f tailFactors; // result of latest call to getComaDiameterAndTailLengthAU(); Results cached here for infostring. [0]=Coma diameter, [1] gas tail length.

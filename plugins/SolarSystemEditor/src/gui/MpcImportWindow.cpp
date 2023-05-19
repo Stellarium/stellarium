@@ -149,7 +149,7 @@ void MpcImportWindow::updateTexts()
 	ui->labelQueryLink->setText(QString(queryString).arg(linkText));
 	
 	QString firstLine(q_("Only one result will be returned if the query is successful."));
-	QString secondLine(q_("Both comets and asteroids can be identified with their number, name (in English) or provisional designation."));
+	QString secondLine(q_("Both comets and asteroids can be identified with their number, name (in English) or IAU designation."));
 	QString cPrefix("<b>C/</b>");
 	QString pPrefix("<b>P/</b>");
 	QString cometQuery("<tt>C/Halley</tt>");
@@ -876,11 +876,11 @@ void MpcImportWindow::readQueryReply(QNetworkReply * reply)
 		file.write(reply->readAll());		
 		file.close();
 
-		QRegularExpression cometProvisionalDesignation("[PCDXI]/");
+		QRegularExpression cometIAUDesignation("[PCDXI]/");
 		QRegularExpression cometDesignation("(\\d)+[PCDXI]/");
 		QString queryData = ui->lineEditQuery->text().trimmed();
 
-		if (queryData.indexOf(cometDesignation) == 0 || queryData.indexOf(cometProvisionalDesignation) == 0)
+		if (queryData.indexOf(cometDesignation) == 0 || queryData.indexOf(cometIAUDesignation) == 0)
 			objects = readElementsFromFile(MpcComets, file.fileName());
 		else
 			objects = readElementsFromFile(MpcMinorPlanets, file.fileName());

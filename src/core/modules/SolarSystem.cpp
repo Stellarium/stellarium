@@ -1014,7 +1014,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			QSharedPointer<MinorPlanet> mp =  newP.dynamicCast<MinorPlanet>();
 			//Number, Provisional designation
 			mp->setMinorPlanetNumber(pd.value(secname+"/minor_planet_number", 0).toInt());
-			mp->setProvisionalDesignation(pd.value(secname+"/provisional_designation", "").toString());
+			mp->setIAUDesignation(pd.value(secname+"/iau_designation", "").toString());
 
 			//H-G magnitude system
 			const float magnitude = pd.value(secname+"/absolute_magnitude", -99.f).toFloat();
@@ -1071,9 +1071,9 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			if (magnitude > -99)
 					mp->setAbsoluteMagnitudeAndSlope(magnitude, slope);
 
-			QString provisionalDesignation = pd.value(secname+"/provisional_designation", "").toString();
-			if (!provisionalDesignation.isEmpty())
-				mp->setProvisionalDesignation(provisionalDesignation);
+			QString iauDesignation = pd.value(secname+"/iau_designation", "").toString();
+			if (!iauDesignation.isEmpty())
+				mp->setIAUDesignation(iauDesignation);
 
 			systemMinorBodies.push_back(newP);
 		}
@@ -1633,21 +1633,21 @@ void SolarSystem::fillEphemerisDates()
 	}
 }
 
-// a wrapper for getting an IAU provisional designations of minor bodies
-QString SolarSystem::getProvisionalDesignation(PlanetP minorBody) const
+// a wrapper for getting an IAU designations of minor bodies
+QString SolarSystem::getIAUDesignation(PlanetP minorBody) const
 {
-	QString pd;
+	QString iau;
 	if (minorBody->getPlanetType()==Planet::isComet)
 	{
 		QSharedPointer<Comet> mp = minorBody.dynamicCast<Comet>();
-		pd = mp->getProvisionalDesignation();
+		iau = mp->getIAUDesignation();
 	}
 	else
 	{
 		QSharedPointer<MinorPlanet> mp = minorBody.dynamicCast<MinorPlanet>();
-		pd = mp->getProvisionalDesignation();
+		iau = mp->getIAUDesignation();
 	}
-	return pd;
+	return iau;
 }
 
 PlanetP SolarSystem::searchByEnglishName(QString planetEnglishName) const
@@ -1657,10 +1657,10 @@ PlanetP SolarSystem::searchByEnglishName(QString planetEnglishName) const
 		if (p->getEnglishName().toUpper() == planetEnglishName.toUpper() || p->getCommonEnglishName().toUpper() == planetEnglishName.toUpper())
 			return p;
 	}
-	// IAU provisional designation?
+	// IAU designation?
 	for (const auto& p : systemMinorBodies)
 	{
-		QString pd = getProvisionalDesignation(p);
+		QString pd = getIAUDesignation(p);
 		if (!pd.isEmpty() && pd.toUpper()==planetEnglishName.toUpper())
 			return p;
 	}
@@ -1675,8 +1675,8 @@ PlanetP SolarSystem::searchMinorPlanetByEnglishName(QString planetEnglishName) c
 		if (p->getCommonEnglishName().toUpper() == planetEnglishName.toUpper() || p->getEnglishName().toUpper() == planetEnglishName.toUpper())
 			return p;
 
-		// IAU provisional designations
-		pd = getProvisionalDesignation(p);
+		// IAU designations
+		pd = getIAUDesignation(p);
 		if (!pd.isEmpty() && pd.toUpper()==planetEnglishName.toUpper())
 			return p;
 	}
@@ -1704,10 +1704,10 @@ StelObjectP SolarSystem::searchByName(const QString& name) const
 		if (p->getEnglishName().toUpper() == name.toUpper() || (!nativeName.isEmpty() && nativeName == name.toUpper()))
 			return qSharedPointerCast<StelObject>(p);
 	}
-	// IAU provisional designation?
+	// IAU designation?
 	for (const auto& p : systemMinorBodies)
 	{
-		QString pd = getProvisionalDesignation(p);
+		QString pd = getIAUDesignation(p);
 		if (!pd.isEmpty() && pd.toUpper()==name.toUpper())
 			return qSharedPointerCast<StelObject>(p);
 	}
@@ -2118,11 +2118,11 @@ QStringList SolarSystem::listAllObjects(bool inEnglish) const
 				result << p->getNativeNameI18n() << p->getNativeName();
 		}
 	}
-	// IAU provisional designations
+	// IAU designations
 	QString pd;
 	for (const auto& p : systemMinorBodies)
 	{
-		pd = getProvisionalDesignation(p);
+		pd = getIAUDesignation(p);
 		if (!pd.isEmpty())
 			result << pd;
 	}
@@ -2148,13 +2148,13 @@ QStringList SolarSystem::listAllObjectsByType(const QString &objType, bool inEng
 				result << p->getNameI18n();
 		}
 	}
-	// IAU provisional designations
+	// IAU designations
 	QString pd;
 	for (const auto& p : systemMinorBodies)
 	{
 		if (p->getObjectType()==objType)
 		{
-			pd = getProvisionalDesignation(p);
+			pd = getIAUDesignation(p);
 			if (!pd.isEmpty())
 				result << pd;
 		}

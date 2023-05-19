@@ -1024,8 +1024,8 @@ private:
 	//! Load planet data from the given file
 	bool loadPlanets(const QString& filePath);
 
-	//! Get an IAU provisional designation of minor body
-	QString getProvisionalDesignation(PlanetP minorBody) const;
+	//! Get an IAU designation of minor body
+	QString getIAUDesignation(PlanetP minorBody) const;
 
 	Vec3f getEphemerisMarkerColor(int index) const;
 

@@ -622,7 +622,7 @@ SsoElements SolarSystemEditor::readMpcOneLineCometElements(QString oneLineElemen
 	 * Wrong regexp; GH: #2281
 	QRegularExpression mpcParser("^([[:print:]]{4})"      //    1 -   4  i4     1. Periodic comet number
 				    "([CPDIA])"               //    5        a1     2. Orbit type (generally `C', `P' or `D') -- A=reclassified as Asteroid? I=Interstellar.
-				    "([[:print:]]{7}).{2}"    //    6 -  12  a7     3. Provisional designation (in packed form)
+				    "([[:print:]]{7}).{2}"    //    6 -  12  a7     3. IAU designation (in packed form)
 				    "([[:print:]]{4})."       //   15 -  18  i4     4. Year of perihelion passage
 				    "([[:print:]]{2})."       //   20 -  21  i2     5. Month of perihelion passage
 				    "([[:print:]]{7})."       //   23 -  29  f7.4   6. Day of perihelion passage (TT)
@@ -656,10 +656,10 @@ SsoElements SolarSystemEditor::readMpcOneLineCometElements(QString oneLineElemen
 
 	QString periodicNumberString = mpcMatch.captured(1).trimmed();
 	//QChar orbitType = mpcMatch.captured(2).at(0);
-	QString provisionalDesignation = mpcMatch.captured(3).trimmed();
+	QString iauDesignation = mpcMatch.captured(3).trimmed();
 	QString name = mpcMatch.captured(17).trimmed();
 
-	if (periodicNumberString.isEmpty() && provisionalDesignation.isEmpty())
+	if (periodicNumberString.isEmpty() && iauDesignation.isEmpty())
 	{
 		qWarning() << "Comet" << name << "is missing both comet number AND provisional designation.";
 		return result;
@@ -668,16 +668,16 @@ SsoElements SolarSystemEditor::readMpcOneLineCometElements(QString oneLineElemen
 		return result;
 
 	//Fragment suffix
-	if (provisionalDesignation.length() == 1)
+	if (iauDesignation.length() == 1)
 	{
-		QChar fragmentIndex = provisionalDesignation.at(0);
+		QChar fragmentIndex = iauDesignation.at(0);
 		name.append(' ');
 		name.append(fragmentIndex); // .toUpper()); // TBD: really toUpper?
 	}
 	result.insert("name", name);
 	QString pd = periodicCometsIdentifiers.value(name.split("/").at(0).trimmed(), "");
-	if (!pd.isEmpty()) // add new-style designation as provisional designation in addition to the old-style designation
-		result.insert("provisional_designation", pd);
+	if (!pd.isEmpty()) // add IAU designation in addition to the old-style designation
+		result.insert("iau_designation", pd);
 
 	QString sectionName = convertToGroupName(name);
 	if (sectionName.isEmpty())
@@ -814,14 +814,14 @@ SsoElements SolarSystemEditor::readMpcOneLineMinorPlanetElements(QString oneLine
 	bool ok = false;
 	//bool isLongForm = (oneLineElements.length() > 160) ? true : false;
 
-	//Minor planet number or provisional designation
+	//Minor planet number or IAU designation
 	column = oneLineElements.mid(0, 7).trimmed();
 	if (column.isEmpty())
 	{
 		return result;
 	}
 	int minorPlanetNumber = 0;
-	QString provisionalDesignation;
+	QString iauDesignation;
 	QString name;
 	if (column.toInt(&ok) || ok)
 	{
@@ -849,7 +849,7 @@ SsoElements SolarSystemEditor::readMpcOneLineMinorPlanetElements(QString oneLine
 		}
 		else
 		{
-			provisionalDesignation = unpackMinorPlanetProvisionalDesignation(column);
+			iauDesignation = unpackMinorPlanetIAUDesignation(column);
 		}
 	}
 
@@ -857,16 +857,16 @@ SsoElements SolarSystemEditor::readMpcOneLineMinorPlanetElements(QString oneLine
 	{
 		name = QString::number(minorPlanetNumber);
 	}
-	else if(provisionalDesignation.isEmpty())
+	else if(iauDesignation.isEmpty())
 	{
 		qDebug() << "readMpcOneLineMinorPlanetElements():"
 		         << column
-		         << "is not a valid number or packed provisional designation";
+			 << "is not a valid number or packed IAU designation";
 		return SsoElements();
 	}
 	else
 	{
-		name = provisionalDesignation;
+		name = iauDesignation;
 	}
 
 	//In case the longer format is used, extract the human-readable name
@@ -888,7 +888,7 @@ SsoElements SolarSystemEditor::readMpcOneLineMinorPlanetElements(QString oneLine
 				name = column;
 			}
 		}
-		//In the other case, the name is already the provisional designation
+		//In the other case, the name is already the IAU designation
 	}
 	if (name.isEmpty())
 	{
@@ -1364,7 +1364,7 @@ bool SolarSystemEditor::updateSolarSystemConfigurationFile(QList<SsoElements> ob
 		{
 			updateSsoProperty(solarSystem, object, "name");
 			updateSsoProperty(solarSystem, object, "minor_planet_number");
-			updateSsoProperty(solarSystem, object, "provisional_designation");
+			updateSsoProperty(solarSystem, object, "iau_designation");
 			// Discovery Circumstances
 			updateSsoProperty(solarSystem, object, "discovery");
 			updateSsoProperty(solarSystem, object, "discoverer");
@@ -1510,7 +1510,7 @@ int SolarSystemEditor::unpackAlphanumericNumber (QChar prefix, int lastDigit)
 	return cycleCount;
 }
 
-QString SolarSystemEditor::unpackMinorPlanetProvisionalDesignation (QString packedDesignation)
+QString SolarSystemEditor::unpackMinorPlanetIAUDesignation (QString packedDesignation)
 {
 	QRegularExpression packedFormat("^([IJK])(\\d\\d)([A-Z])([\\dA-Za-z])(\\d)([A-Z])$");
 	QRegularExpressionMatch pfMatch;
@@ -1559,7 +1559,7 @@ QString SolarSystemEditor::unpackMinorPlanetProvisionalDesignation (QString pack
 	int cycleCountLastDigit = pfMatch.captured(5).toInt();
 	int cycleCount = unpackAlphanumericNumber(cycleCountPrefix, cycleCountLastDigit);
 
-	//Assemble the unpacked provisional designation
+	//Assemble the unpacked IAU designation
 	QString result = QString("%1 %2%3").arg(year).arg(halfMonthLetter, secondLetter);
 	if (cycleCount != 0)
 	{
