@@ -1633,6 +1633,23 @@ void SolarSystem::fillEphemerisDates()
 	}
 }
 
+// a wrapper for getting an IAU provisional designations of minor bodies
+QString SolarSystem::getProvisionalDesignation(PlanetP minorBody) const
+{
+	QString pd;
+	if (minorBody->getPlanetType()==Planet::isComet)
+	{
+		QSharedPointer<Comet> mp = minorBody.dynamicCast<Comet>();
+		pd = mp->getProvisionalDesignation();
+	}
+	else
+	{
+		QSharedPointer<MinorPlanet> mp = minorBody.dynamicCast<MinorPlanet>();
+		pd = mp->getProvisionalDesignation();
+	}
+	return pd;
+}
+
 PlanetP SolarSystem::searchByEnglishName(QString planetEnglishName) const
 {
 	for (const auto& p : systemPlanets)
@@ -1640,20 +1657,10 @@ PlanetP SolarSystem::searchByEnglishName(QString planetEnglishName) const
 		if (p->getEnglishName().toUpper() == planetEnglishName.toUpper() || p->getCommonEnglishName().toUpper() == planetEnglishName.toUpper())
 			return p;
 	}
-	// provisional designation?
-	QString pd;
+	// IAU provisional designation?
 	for (const auto& p : systemMinorBodies)
 	{
-		if (p->getPlanetType()==Planet::isComet)
-		{
-			QSharedPointer<Comet> mp = p.dynamicCast<Comet>();
-			pd = mp->getProvisionalDesignation();
-		}
-		else
-		{
-			QSharedPointer<MinorPlanet> mp = p.dynamicCast<MinorPlanet>();
-			pd = mp->getProvisionalDesignation();
-		}
+		QString pd = getProvisionalDesignation(p);
 		if (!pd.isEmpty() && pd.toUpper()==planetEnglishName.toUpper())
 			return p;
 	}
@@ -1668,17 +1675,8 @@ PlanetP SolarSystem::searchMinorPlanetByEnglishName(QString planetEnglishName) c
 		if (p->getCommonEnglishName().toUpper() == planetEnglishName.toUpper() || p->getEnglishName().toUpper() == planetEnglishName.toUpper())
 			return p;
 
-		// provisional designations
-		if (p->getPlanetType()==Planet::isComet)
-		{
-			QSharedPointer<Comet> mp = p.dynamicCast<Comet>();
-			pd = mp->getProvisionalDesignation();
-		}
-		else
-		{
-			QSharedPointer<MinorPlanet> mp = p.dynamicCast<MinorPlanet>();
-			pd = mp->getProvisionalDesignation();
-		}
+		// IAU provisional designations
+		pd = getProvisionalDesignation(p);
 		if (!pd.isEmpty() && pd.toUpper()==planetEnglishName.toUpper())
 			return p;
 	}
@@ -1706,20 +1704,10 @@ StelObjectP SolarSystem::searchByName(const QString& name) const
 		if (p->getEnglishName().toUpper() == name.toUpper() || (!nativeName.isEmpty() && nativeName == name.toUpper()))
 			return qSharedPointerCast<StelObject>(p);
 	}
-	// provisional designation?
-	QString pd;
+	// IAU provisional designation?
 	for (const auto& p : systemMinorBodies)
 	{
-		if (p->getPlanetType()==Planet::isComet)
-		{
-			QSharedPointer<Comet> mp = p.dynamicCast<Comet>();
-			pd = mp->getProvisionalDesignation();
-		}
-		else
-		{
-			QSharedPointer<MinorPlanet> mp = p.dynamicCast<MinorPlanet>();
-			pd = mp->getProvisionalDesignation();
-		}
+		QString pd = getProvisionalDesignation(p);
 		if (!pd.isEmpty() && pd.toUpper()==name.toUpper())
 			return qSharedPointerCast<StelObject>(p);
 	}
@@ -2130,20 +2118,11 @@ QStringList SolarSystem::listAllObjects(bool inEnglish) const
 				result << p->getNativeNameI18n() << p->getNativeName();
 		}
 	}
-	// provisional designations
+	// IAU provisional designations
 	QString pd;
 	for (const auto& p : systemMinorBodies)
 	{
-		if (p->getPlanetType()==Planet::isComet)
-		{
-			QSharedPointer<Comet> mp = p.dynamicCast<Comet>();
-			pd = mp->getProvisionalDesignation();
-		}
-		else
-		{
-			QSharedPointer<MinorPlanet> mp = p.dynamicCast<MinorPlanet>();
-			pd = mp->getProvisionalDesignation();
-		}
+		pd = getProvisionalDesignation(p);
 		if (!pd.isEmpty())
 			result << pd;
 	}
@@ -2169,22 +2148,13 @@ QStringList SolarSystem::listAllObjectsByType(const QString &objType, bool inEng
 				result << p->getNameI18n();
 		}
 	}
-	// provisional designations
+	// IAU provisional designations
 	QString pd;
 	for (const auto& p : systemMinorBodies)
 	{
 		if (p->getObjectType()==objType)
 		{
-			if (p->getPlanetType()==Planet::isComet)
-			{
-				QSharedPointer<Comet> mp = p.dynamicCast<Comet>();
-				pd = mp->getProvisionalDesignation();
-			}
-			else
-			{
-				QSharedPointer<MinorPlanet> mp = p.dynamicCast<MinorPlanet>();
-				pd = mp->getProvisionalDesignation();
-			}
+			pd = getProvisionalDesignation(p);
 			if (!pd.isEmpty())
 				result << pd;
 		}
