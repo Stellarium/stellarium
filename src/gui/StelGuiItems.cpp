@@ -61,7 +61,7 @@ QPixmap getTextPixmap(const QString& str, QFont font)
 {
 	// Render the text str into a QPixmap.
 	QRect strRect = QFontMetrics(font).boundingRect(str);
-	int w = strRect.width()+1+static_cast<int>(0.02f*static_cast<float>(strRect.width()));
+	int w = static_cast<int>(1.02f*static_cast<float>(strRect.width()))+1;
 	int h = strRect.height();
 
 	QPixmap strPixmap(w, h);
@@ -130,13 +130,12 @@ void StelButton::initCtor(const QPixmap& apixOn,
 	setAcceptHoverEvents(true);
 	timeLine = new QTimeLine(250, this);
 	timeLine->setEasingCurve(QEasingCurve(QEasingCurve::OutCurve));
-	connect(timeLine, SIGNAL(valueChanged(qreal)),
-	        this, SLOT(animValueChanged(qreal)));
+	connect(timeLine, SIGNAL(valueChanged(qreal)), this, SLOT(animValueChanged(qreal)));
 	connect(&StelMainView::getInstance(), SIGNAL(updateIconsRequested()), this, SLOT(updateIcon()));  // Not sure if this is ever called?
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	connect(gui, SIGNAL(flagUseButtonsBackgroundChanged(bool)), this, SLOT(updateIcon()));
 
-	if (action!=Q_NULLPTR)
+	if (action!=nullptr)
 	{
 		if (action->isCheckable())
 		{
@@ -149,7 +148,7 @@ void StelButton::initCtor(const QPixmap& apixOn,
 			QObject::connect(this, SIGNAL(triggered()), action, SLOT(trigger()));
 		}
 	}
-	if (secondAction!=Q_NULLPTR)
+	if (secondAction!=nullptr)
 	{
 			QObject::connect(this, SIGNAL(triggeredRight()), secondAction, SLOT(trigger()));
 	}
@@ -199,7 +198,7 @@ StelButton::StelButton(QGraphicsItem* parent,
 	: QGraphicsPixmapItem(pixOff, parent)
 {
 	StelAction *action = StelApp::getInstance().getStelActionManager()->findAction(actionId);
-	StelAction *otherAction=Q_NULLPTR;
+	StelAction *otherAction=nullptr;
 	if (!otherActionId.isEmpty())
 		otherAction = StelApp::getInstance().getStelActionManager()->findAction(otherActionId);
 
@@ -266,7 +265,7 @@ void StelButton::mouseReleaseEvent(QGraphicsSceneMouseEvent* event)
 {
 	if (event->button()==Qt::LeftButton)
 	{
-		if (action!=Q_NULLPTR && !action->isCheckable())
+		if (action!=nullptr && !action->isCheckable())
 			setChecked(toggleChecked(checked));
 
 		if (flagChangeFocus) // true if button is on bottom bar
@@ -370,23 +369,28 @@ void StelButton::paint(QPainter* painter, const QStyleOptionGraphicsItem*, QWidg
 
 LeftStelBar::LeftStelBar(QGraphicsItem* parent)
 	: QGraphicsItem(parent)
-	, hideTimeLine(Q_NULLPTR)
-	, helpLabelPixmap(Q_NULLPTR)
+	, hideTimeLine(nullptr)
+	, helpLabelPixmap(nullptr)
 {
 	// Create the help label
 	helpLabel = new QGraphicsSimpleTextItem("", this);
 	helpLabel->setBrush(QBrush(QColor::fromRgbF(1,1,1,1)));
 	if (qApp->property("text_texture")==true) // CLI option -t given?
 		helpLabelPixmap=new QGraphicsPixmapItem(this);
+
+	setFontSizeFromApp(StelApp::getInstance().getScreenFontSize());
+	connect(&StelApp::getInstance(), SIGNAL(screenFontSizeChanged(int)), this, SLOT(setFontSizeFromApp(int)));
+	connect(&StelApp::getInstance(), SIGNAL(fontChanged(QFont)), this, SLOT(setFont(QFont)));
 }
 
 LeftStelBar::~LeftStelBar()
 {
-	if (helpLabelPixmap) { delete helpLabelPixmap; helpLabelPixmap=Q_NULLPTR; }
+	if (helpLabelPixmap) { delete helpLabelPixmap; helpLabelPixmap=nullptr; }
 }
 
 void LeftStelBar::addButton(StelButton* button)
 {
+	prepareGeometryChange();
 	double posY = 0;
 	if (QGraphicsItem::childItems().size()!=0)
 	{
@@ -395,7 +399,7 @@ void LeftStelBar::addButton(StelButton* button)
 	}
 	button->setParentItem(this);
 	button->setFocusOnSky(false);
-	button->prepareGeometryChange(); // could possibly be removed when qt 4.6 become stable
+	//button->prepareGeometryChange(); // could possibly be removed when qt 4.6 become stable
 	button->setPos(0., qRound(posY+10.5));
 
 	connect(button, SIGNAL(hoverChanged(bool)), this, SLOT(buttonHoverChanged(bool)));
@@ -471,21 +475,56 @@ void LeftStelBar::setColor(const QColor& c)
 	helpLabel->setBrush(c);
 }
 
+//! connect from StelApp to resize fonts on the fly.
+void LeftStelBar::setFontSizeFromApp(int size)
+{
+	// Font size was developed based on base font size 13, i.e. 12
+	int screenFontSize = size-1;
+	QFont font=QGuiApplication::font();
+	font.setPixelSize(screenFontSize);
+	helpLabel->setFont(font);
+	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+	if (gui)
+	{
+		// to avoid crash
+		SkyGui* skyGui=gui->getSkyGui();
+		if (skyGui)
+			skyGui->updateBarsPos();
+	}
+}
+
+//! connect from StelApp to resize fonts on the fly.
+void LeftStelBar::setFont(QFont font)
+{
+	font.setPixelSize(StelApp::getInstance().getScreenFontSize()-1);
+	helpLabel->setFont(font);
+	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+	if (gui)
+	{
+		// to avoid crash
+		SkyGui* skyGui=gui->getSkyGui();
+		if (skyGui)
+			skyGui->updateBarsPos();
+	}
+}
+
+
 BottomStelBar::BottomStelBar(QGraphicsItem* parent,
                              const QPixmap& pixLeft,
                              const QPixmap& pixRight,
                              const QPixmap& pixMiddle,
                              const QPixmap& pixSingle) :
 	QGraphicsItem(parent),
-	locationPixmap(Q_NULLPTR),
-	datetimePixmap(Q_NULLPTR),
-	fovPixmap(Q_NULLPTR),
-	fpsPixmap(Q_NULLPTR),
+	locationPixmap(nullptr),
+	datetimePixmap(nullptr),
+	fovPixmap(nullptr),
+	fpsPixmap(nullptr),
+	gap(2),
 	pixBackgroundLeft(pixLeft),
 	pixBackgroundRight(pixRight),
 	pixBackgroundMiddle(pixMiddle),
 	pixBackgroundSingle(pixSingle),
-	helpLabelPixmap(Q_NULLPTR)
+	helpLabelPixmap(nullptr)
 {
 	// The text is dummy just for testing
 	datetime = new QGraphicsSimpleTextItem("2008-02-06  17:33", this);
@@ -508,8 +547,9 @@ BottomStelBar::BottomStelBar(QGraphicsItem* parent,
 	setColor(QColor::fromRgbF(1,1,1,1));
 
 	setFontSizeFromApp(StelApp::getInstance().getScreenFontSize());
-	connect(&StelApp::getInstance(), SIGNAL(screenFontSizeChanged(int)), this, SLOT(setFontSizeFromApp(int)));
+	connect(&StelApp::getInstance(), &StelApp::screenFontSizeChanged, this, [=](int fontsize){setFontSizeFromApp(fontsize); setFontSizeFromApp(fontsize);}); // We must call that twice to force all geom. updates
 	connect(&StelApp::getInstance(), SIGNAL(fontChanged(QFont)), this, SLOT(setFont(QFont)));
+	connect(StelApp::getInstance().getCore(), &StelCore::flagUseTopocentricCoordinatesChanged, this, [=](bool){updateText(false, true);});
 
 	QSettings* confSettings = StelApp::getInstance().getSettings();
 	setFlagShowTime(confSettings->value("gui/flag_show_datetime", true).toBool());
@@ -524,21 +564,34 @@ BottomStelBar::BottomStelBar(QGraphicsItem* parent,
 //! connect from StelApp to resize fonts on the fly.
 void BottomStelBar::setFontSizeFromApp(int size)
 {
-	// Font size was developed based on base font size 13, i.e. 12
-	int screenFontSize = size-1;
+	prepareGeometryChange();
 	QFont font=QGuiApplication::font();
-	font.setPixelSize(screenFontSize);
+	// Font size was developed based on base font size 13, i.e. 12
+	font.setPixelSize(size-1);
 	datetime->setFont(font);
 	location->setFont(font);
 	fov->setFont(font);
 	fps->setFont(font);
+	helpLabel->setFont(font);
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	if (gui)
 	{
 		// to avoid crash
 		SkyGui* skyGui=gui->getSkyGui();
 		if (skyGui)
+		{
 			skyGui->updateBarsPos();
+			updateButtonsGroups(); // Make sure bounding boxes are readjusted.
+		}
+	}
+	if (qApp->property("text_texture")==true) // CLI option -t given?
+	{
+		// We must do something to rebuild the pixmaps if fontsize changes. We solve this with setting custom data item 0 to true
+		datetimePixmap->setData(0, true);
+		locationPixmap->setData(0, true);
+		fovPixmap->setData(0, true);
+		fpsPixmap->setData(0, true);
+		helpLabelPixmap->setData(0, true);
 	}
 }
 
@@ -567,22 +620,23 @@ BottomStelBar::~BottomStelBar()
 	{
 		for (auto* b : qAsConst(group.elems))
 		{
-			if (b->parentItem()==Q_NULLPTR)
+			if (b->parentItem()==nullptr)
 			{
 				delete b;
-				b=Q_NULLPTR;
+				b=nullptr;
 			}
 		}
 	}
-	if (datetimePixmap) { delete datetimePixmap; datetimePixmap=Q_NULLPTR; }
-	if (locationPixmap) { delete locationPixmap; locationPixmap=Q_NULLPTR; }
-	if (fovPixmap) { delete fovPixmap; fovPixmap=Q_NULLPTR; }
-	if (fpsPixmap) { delete fpsPixmap; fpsPixmap=Q_NULLPTR; }
-	if (helpLabelPixmap) { delete helpLabelPixmap; helpLabelPixmap=Q_NULLPTR; }
+	if (datetimePixmap) { delete datetimePixmap; datetimePixmap=nullptr; }
+	if (locationPixmap) { delete locationPixmap; locationPixmap=nullptr; }
+	if (fovPixmap) { delete fovPixmap; fovPixmap=nullptr; }
+	if (fpsPixmap) { delete fpsPixmap; fpsPixmap=nullptr; }
+	if (helpLabelPixmap) { delete helpLabelPixmap; helpLabelPixmap=nullptr; }
 }
 
 void BottomStelBar::addButton(StelButton* button, const QString& groupName, const QString& beforeActionName)
 {
+	prepareGeometryChange();
 	QList<StelButton*>& g = buttonGroups[groupName].elems;
 	bool done = false;
 	for (int i=0; i<g.size(); ++i)
@@ -609,7 +663,7 @@ void BottomStelBar::addButton(StelButton* button, const QString& groupName, cons
 StelButton* BottomStelBar::hideButton(const QString& actionName)
 {
 	QString gName;
-	StelButton* bToRemove = Q_NULLPTR;
+	StelButton* bToRemove = nullptr;
 	for (auto iter = buttonGroups.begin(); iter != buttonGroups.end(); ++iter)
 	{
 		int i=0;
@@ -625,15 +679,15 @@ StelButton* BottomStelBar::hideButton(const QString& actionName)
 			++i;
 		}
 	}
-	if (bToRemove == Q_NULLPTR)
-		return Q_NULLPTR;
+	if (bToRemove == nullptr)
+		return nullptr;
 	if (buttonGroups[gName].elems.size() == 0)
 	{
 		buttonGroups.remove(gName);
 	}
 	// Cannot really delete because some part of the GUI depend on the presence of some buttons
 	// so just make invisible
-	bToRemove->setParentItem(Q_NULLPTR);
+	bToRemove->setParentItem(nullptr);
 	bToRemove->setVisible(false);
 	updateButtonsGroups();
 	emit sizeChanged();
@@ -669,21 +723,35 @@ void BottomStelBar::setGroupBackground(const QString& groupName,
 
 QRectF BottomStelBar::getButtonsBoundingRect() const
 {
-	// Re-use original Qt code, just remove the help label
 	QRectF childRect;
 	bool hasBtn = false;
-	for (auto* child : QGraphicsItem::childItems())
+	if (qApp->property("text_texture")==true) // CLI option -t given?
 	{
-		if (qgraphicsitem_cast<StelButton*>(child)==Q_NULLPTR)
-			continue;
-		hasBtn = true;
-		QPointF childPos = child->pos();
-		QTransform matrix = child->transform() * QTransform().translate(childPos.x(), childPos.y());
-		childRect |= matrix.mapRect(child->boundingRect() | child->childrenBoundingRect());
+		// For unknown reasons the matrix operation is not needed and even wrong here.
+		for (auto* child : QGraphicsItem::childItems())
+		{
+			if (qgraphicsitem_cast<StelButton*>(child)==nullptr)
+				continue;
+			hasBtn = true;
+			childRect |= child->boundingRect();
+		}
+	}
+	else
+	{
+		for (auto* child : QGraphicsItem::childItems())
+		{
+			if (qgraphicsitem_cast<StelButton*>(child)==nullptr)
+				continue;
+			hasBtn = true;
+			QPointF childPos = child->pos();
+			//qDebug() << "childPos" << childPos;
+			QTransform matrix = child->transform() * QTransform().translate(childPos.x(), childPos.y());
+			childRect |= matrix.mapRect(child->boundingRect() | child->childrenBoundingRect());
+		}
 	}
 
 	if (hasBtn)
-		return QRectF(0, 0, childRect.width()-1, childRect.height()-1);
+		return QRectF(0, 0, childRect.width(), childRect.height());
 	else
 		return QRectF();
 }
@@ -691,7 +759,8 @@ QRectF BottomStelBar::getButtonsBoundingRect() const
 void BottomStelBar::updateButtonsGroups()
 {
 	double x = 0;
-	double y = datetime->boundingRect().height() + 3;
+	QFontMetrics statusFM(datetime->font());
+	const double y = statusFM.lineSpacing()+gap; // Take natural font geometry into account
 	for (auto& group : buttonGroups)
 	{
 		QList<StelButton*>& buttons = group.elems;
@@ -707,14 +776,14 @@ void BottomStelBar::updateButtonsGroups()
 			{
 				if (buttons.size() == 1)
 				{
-					if (group.pixBackgroundSingle == Q_NULLPTR)
+					if (group.pixBackgroundSingle == nullptr)
 						b->setBackgroundPixmap(pixBackgroundSingle);
 					else
 						b->setBackgroundPixmap(*group.pixBackgroundSingle);
 				}
 				else
 				{
-					if (group.pixBackgroundLeft == Q_NULLPTR)
+					if (group.pixBackgroundLeft == nullptr)
 						b->setBackgroundPixmap(pixBackgroundLeft);
 					else
 						b->setBackgroundPixmap(*group.pixBackgroundLeft);
@@ -724,19 +793,19 @@ void BottomStelBar::updateButtonsGroups()
 			{
 				if (buttons.size() != 1)
 				{
-					if (group.pixBackgroundSingle == Q_NULLPTR)
+					if (group.pixBackgroundSingle == nullptr)
 						b->setBackgroundPixmap(pixBackgroundSingle);
 					else
 						b->setBackgroundPixmap(*group.pixBackgroundSingle);
 				}
-				if (group.pixBackgroundRight == Q_NULLPTR)
+				if (group.pixBackgroundRight == nullptr)
 					b->setBackgroundPixmap(pixBackgroundRight);
 				else
 					b->setBackgroundPixmap(*group.pixBackgroundRight);
 			}
 			else
 			{
-				if (group.pixBackgroundMiddle == Q_NULLPTR)
+				if (group.pixBackgroundMiddle == nullptr)
 					b->setBackgroundPixmap(pixBackgroundMiddle);
 				else
 					b->setBackgroundPixmap(*group.pixBackgroundMiddle);
@@ -754,13 +823,13 @@ void BottomStelBar::updateButtonsGroups()
 
 // create text elements and tooltips in bottom toolbar.
 // Make sure to avoid any change if not necessary to avoid triggering useless redraw
-void BottomStelBar::updateText(bool updatePos)
+// This is also called when button groups have been updated.
+void BottomStelBar::updateText(bool updatePos, bool updateTopocentric)
 {
 	StelCore* core = StelApp::getInstance().getCore();
 	const double jd = core->getJD();
 	const double deltaT = core->getDeltaT();
 	const double sigma = StelUtils::getDeltaTStandardError(jd);
-	QString sigmaInfo = "";
 	QString validRangeMarker = "";
 	core->getCurrentDeltaTAlgorithmValidRangeDescription(jd, &validRangeMarker);
 
@@ -830,7 +899,7 @@ void BottomStelBar::updateText(bool updatePos)
 	if (timeRate>60.)
 		timeRateInfo = QString("%1: x%2 (%3 %4)").arg(q_("Simulation speed"), QString::number(timeRate, 'f', 0), QString::number(timeSpeed, 'f', 2), timeRateMU);
 
-	if (datetime->text()!=newDateInfo)
+	if (datetime->text()!=newDateInfo || (datetimePixmap && datetimePixmap->data(0).toBool()))
 	{
 		updatePos = true;
 		datetime->setText(newDateInfo);
@@ -838,10 +907,11 @@ void BottomStelBar::updateText(bool updatePos)
 
 	if (core->getCurrentDeltaTAlgorithm()!=StelCore::WithoutCorrection)
 	{
+		QString sigmaInfo("");
 		if (sigma>0)
 			sigmaInfo = QString("; %1(%2T) = %3s").arg(QChar(0x03c3)).arg(QChar(0x0394)).arg(sigma, 3, 'f', 1);
 
-		QString deltaTInfo = "";
+		QString deltaTInfo;
 		if (qAbs(deltaT)>60.)
 			deltaTInfo = QString("%1 (%2s)%3").arg(StelUtils::hoursToHmsStr(deltaT/3600.)).arg(deltaT, 5, 'f', 2).arg(validRangeMarker);
 		else
@@ -861,10 +931,11 @@ void BottomStelBar::updateText(bool updatePos)
 	{
 		datetime->setVisible(false); // hide normal thingy.
 		datetimePixmap->setPixmap(getTextPixmap(newDateInfo, datetime->font()));
+		datetimePixmap->setData(0, false);
 	}
 
 	// build location tooltip
-	QString newLocation = "";
+	QString newLocation("");
 	if (getFlagShowLocation())
 	{
 		const StelLocation* loc = &core->getCurrentLocation();
@@ -878,8 +949,8 @@ void BottomStelBar::updateText(bool updatePos)
 			//TRANSLATORS: Unit of measure for distance - meter
 			newLocation = planetNameI18n +", "+q_(loc->name) + ", "+ QString("%1 %2").arg(loc->altitude).arg(qc_("m", "distance"));
 	}
-	// TODO: When topocentric switch is toggled, this must be redrawn!
-	if (location->text()!=newLocation)
+	// When topocentric switch is toggled, this must be redrawn!
+	if (location->text()!=newLocation || updateTopocentric || (locationPixmap && locationPixmap->data(0).toBool()))
 	{
 		updatePos = true;
 		location->setText(newLocation);
@@ -927,36 +998,31 @@ void BottomStelBar::updateText(bool updatePos)
 		if (qApp->property("text_texture")==true) // CLI option -t given?
 		{
 			locationPixmap->setPixmap(getTextPixmap(newLocation, location->font()));
+			locationPixmap->setData(0, false);
 			location->setVisible(false);
 		}
 	}
 
-	QString str;
-
 	// build fov tooltip
-	QTextStream wos(&str);
 	// TRANSLATORS: Field of view. Please use abbreviation.
-	QString fovstr = QString("%1 ").arg(qc_("FOV", "abbreviation"));
 	QString fovdms = StelUtils::decDegToDmsStr(core->getMovementMgr()->getCurrentFov());
+	QString fovText;
 	if (getFlagFovDms())
-	{
-		wos << fovstr << fovdms;
-	}
+		fovText=QString("%1 %2").arg(qc_("FOV", "abbreviation"), fovdms);
 	else
-	{
-		wos << fovstr << qSetRealNumberPrecision(3) << core->getMovementMgr()->getCurrentFov() << QChar(0x00B0);
-	}
+		fovText=QString("%1 %2%3").arg(qc_("FOV", "abbreviation"), QString::number(core->getMovementMgr()->getCurrentFov(), 'g', 3), QChar(0x00B0));
 
-	if (fov->text()!=str)
+	if (fov->text()!=fovText || (fovPixmap && fovPixmap->data(0).toBool()))
 	{
 		updatePos = true;
 		if (getFlagShowFov())
 		{
-			fov->setText(str);
+			fov->setText(fovText);
 			fov->setToolTip(QString("%1: %2").arg(q_("Field of view"), fovdms));
 			if (qApp->property("text_texture")==true) // CLI option -t given?
 			{
-				fovPixmap->setPixmap(getTextPixmap(str, fov->font()));
+				fovPixmap->setPixmap(getTextPixmap(fovText, fov->font()));
+				fovPixmap->setData(0, false);
 				fov->setVisible(false);
 			}
 		}
@@ -967,23 +1033,20 @@ void BottomStelBar::updateText(bool updatePos)
 		}
 	}
 
-	str="";
-
 	// build fps tooltip
-	QTextStream wos2(&str);
 	// TRANSLATORS: Frames per second. Please use abbreviation.
-	QString fpsstr = QString(" %1").arg(qc_("FPS", "abbreviation"));
-	wos2 << qSetRealNumberPrecision(3) << StelApp::getInstance().getFps() << fpsstr;
-	if (fps->text()!=str)
+	QString fpsText = QString("%1 %2").arg(QString::number(StelApp::getInstance().getFps(), 'g', 3), qc_("FPS", "abbreviation"));;
+	if (fps->text()!=fpsText || (fpsPixmap && fpsPixmap->data(0).toBool()))
 	{
 		updatePos = true;
 		if (getFlagShowFps())
 		{
-			fps->setText(str);
+			fps->setText(fpsText);
 			fps->setToolTip(q_("Frames per second"));
 			if (qApp->property("text_texture")==true) // CLI option -t given?
 			{
-				fpsPixmap->setPixmap(getTextPixmap(str, fps->font()));
+				fpsPixmap->setPixmap(getTextPixmap(fpsText, fps->font()));
+				fpsPixmap->setData(0, false);
 				fps->setVisible(false);
 			}
 		}
@@ -996,30 +1059,33 @@ void BottomStelBar::updateText(bool updatePos)
 
 	if (updatePos)
 	{
-		QFontMetrics fpsMetrics(fps->font());
-		int fpsShift = fpsMetrics.boundingRect(fpsstr).width() + 50;
-
-		QFontMetrics fovMetrics(fov->font());
-		int fovShift = fpsShift + fovMetrics.boundingRect(fovstr).width() + 80;
-		if (getFlagFovDms())
-			fovShift += 25;
+		// The location string starts at left, dateTime ends at right. FoV and FPS come ahead of dateTime.
+		// In case the strings are wider than available button space, they are now pushed to the right.
+		QFontMetrics fontMetrics(location->font());
+		int fpsShift     = qMax(fontMetrics.boundingRect(fps->text()+"MMM").width(), fontMetrics.boundingRect(qc_("FPS", "abbreviation")+"MM.M MMM").width());
+		int fovShift     = fontMetrics.boundingRect(fov->text()+"MMM").width() + fpsShift;
+		int locationWidth= fontMetrics.boundingRect(location->text() + "MMM").width();
+		location->setPos(0, 0);
 
 		QRectF rectCh = getButtonsBoundingRect();
-		location->setPos(0, 0);		
-		int dtp = static_cast<int>(rectCh.right()-datetime->boundingRect().width())-5;
-		if ((dtp%2) == 1) dtp--; // make even pixel
-		datetime->setPos(dtp,0);
+		int dateTimePos = static_cast<int>(rectCh.right()-datetime->boundingRect().width())-5;
+		if ((dateTimePos%2) == 1) dateTimePos--; // make even pixel
+
+		const int rightPush=qMax(0, locationWidth-(dateTimePos-fovShift));
+		datetime->setPos(dateTimePos+rightPush, 0);
 		fov->setPos(datetime->x()-fovShift, 0);
 		fps->setPos(datetime->x()-fpsShift, 0);
 		if (qApp->property("text_texture")==true) // CLI option -t given?
 		{
-			locationPixmap->setPos(0,0);
-			int dtp = static_cast<int>(rectCh.right()-datetimePixmap->boundingRect().width())-5;
-			if ((dtp%2) == 1) dtp--; // make even pixel
-			datetimePixmap->setPos(dtp,0);
-			fovPixmap->setPos(datetime->x()-fovShift, 0);
-			fpsPixmap->setPos(datetime->x()-fpsShift, 0);
+			const qreal yPos = -fontMetrics.descent();
+			locationPixmap->setPos(0,yPos);
+			dateTimePos = static_cast<int>(rectCh.right()-datetimePixmap->boundingRect().width())-5;
+			if ((dateTimePos%2) == 1) dateTimePos--; // make even pixel
+			datetimePixmap->setPos(dateTimePos+rightPush, yPos);
+			fovPixmap->setPos(datetimePixmap->x()-fovShift, yPos);
+			fpsPixmap->setPos(datetimePixmap->x()-fpsShift, yPos);
 		}
+		emit sizeChanged();
 	}
 }
 
@@ -1032,8 +1098,8 @@ QRectF BottomStelBar::boundingRect() const
 {
 	if (QGraphicsItem::childItems().size()==0)
 		return QRectF();
-	const QRectF& r = childrenBoundingRect();
-	return QRectF(0, 0, r.width()-1, r.height()-1);
+	const QRectF& r = childrenBoundingRect(); // BBX of status text (Location/FoV/FPS/Time) and buttons
+	return QRectF(0, 0, r.width(), r.height());
 }
 
 QRectF BottomStelBar::boundingRectNoHelpLabel() const
@@ -1051,7 +1117,7 @@ QRectF BottomStelBar::boundingRectNoHelpLabel() const
 	return childRect;
 }
 
-// Set the pen for all the sub elements
+// Set the brush for all the sub elements
 void BottomStelBar::setColor(const QColor& c)
 {
 	datetime->setBrush(c);
@@ -1082,7 +1148,8 @@ void BottomStelBar::buttonHoverChanged(bool b)
 			}
 			helpLabel->setText(tip);
 			//helpLabel->setPos(button->pos().x()+button->pixmap().size().width()/2,-27);
-			helpLabel->setPos(20,-27);
+			helpLabel->setPos(20,-10-location->font().pixelSize()); // Set help text XY position. Y adjusted for font size!
+
 			if (qApp->property("text_texture")==true)
 			{
 				helpLabel->setVisible(false);
@@ -1104,29 +1171,29 @@ void BottomStelBar::buttonHoverChanged(bool b)
 
 StelBarsPath::StelBarsPath(QGraphicsItem* parent) : QGraphicsPathItem(parent), roundSize(6)
 {
-	QPen aPen(QColor::fromRgbF(0.7,0.7,0.7,0.5));
-	aPen.setWidthF(1.);
 	setBrush(QBrush(QColor::fromRgbF(0.22, 0.22, 0.23, 0.2)));
+	QPen aPen(QColor::fromRgbF(0.7,0.7,0.7,0.5));
+	// aPen.setWidthF(1.); // 1=default!
 	setPen(aPen);
 }
 
-void StelBarsPath::updatePath(BottomStelBar* bot, LeftStelBar* lef)
+void StelBarsPath::updatePath(BottomStelBar* bottom, LeftStelBar* left)
 {
-	QPainterPath newPath;
-	QPointF p = lef->pos() + QPointF(-0.5,0.5);
-	QRectF r = lef->boundingRectNoHelpLabel();
-	QPointF p2 = bot->pos() + QPointF(-0.5,0.5);
-	QRectF r2 = bot->boundingRectNoHelpLabel();
+	const QPointF l = left->pos() + QPointF(-0.5,0.5);   // pos() is the top-left point in the parent's coordinate system.
+	const QRectF lB = left->boundingRectNoHelpLabel();
+	const QPointF b = bottom->pos() + QPointF(-0.5,0.5);
+	const QRectF bB = bottom->boundingRectNoHelpLabel();
 
-	newPath.moveTo(p.x()-roundSize, p.y()-roundSize);
-	newPath.lineTo(p.x()+r.width(),p.y()-roundSize);
-	newPath.arcTo(p.x()+r.width()-roundSize, p.y()-roundSize, 2.*roundSize, 2.*roundSize, 90, -90);
-	newPath.lineTo(p.x()+r.width()+roundSize, p2.y()-roundSize);
-	newPath.lineTo(p2.x()+r2.width(),p2.y()-roundSize);
-	newPath.arcTo(p2.x()+r2.width()-roundSize, p2.y()-roundSize, 2.*roundSize, 2.*roundSize, 90, -90);
-	newPath.lineTo(p2.x()+r2.width()+roundSize, p2.y()+r2.height()+roundSize);
-	newPath.lineTo(p.x()-roundSize, p2.y()+r2.height()+roundSize);
-	setPath(newPath);
+	QPainterPath path(QPointF(l.x()-roundSize, l.y()-roundSize));                                 // top left point
+	//path.lineTo(l.x()+lB.width()-roundSize,l.y()-roundSize);                                    // top edge. Not needed because the arc connects anyhow!
+	path.arcTo(l.x()+lB.width()-roundSize, l.y()-roundSize, 2.*roundSize, 2.*roundSize, 90, -90); // top-right curve of left bar
+	path.lineTo(l.x()+lB.width()+roundSize, b.y()-roundSize);                                     // vertical to inside sharp edge
+	//path.lineTo(b.x()+bB.width(),b.y()-roundSize);                                              // Top edge of bottom bar. Not needed because the arc connects anyhow!
+	path.arcTo(b.x()+bB.width()-roundSize, b.y()-roundSize, 2.*roundSize, 2.*roundSize, 90, -90); // top right curved edge of bottom bar (just connects.)
+	path.lineTo(b.x()+bB.width()+roundSize, b.y()+bB.height()+roundSize);
+	path.lineTo(l.x()-roundSize, b.y()+bB.height()+roundSize);                                    // bottom line (outside screen area!)
+	path.closeSubpath();                                                                          // vertical line up left outside screen
+	setPath(path);
 }
 
 void StelBarsPath::setBackgroundOpacity(double opacity)
@@ -1159,7 +1226,7 @@ void StelProgressBarMgr::addProgressBar(const StelProgressController* p)
 	pb->setMinimum(p->getMin());
 	pb->setMaximum(p->getMax());
 	pb->setFormat(p->getFormat());
-	if (gui!=Q_NULLPTR)
+	if (gui!=nullptr)
 		pb->setStyleSheet(gui->getStelStyle().qtStyleSheet);
 	QGraphicsProxyWidget* pbProxy = new QGraphicsProxyWidget();
 	pbProxy->setWidget(pb);
@@ -1205,7 +1272,7 @@ QRectF CornerButtons::boundingRect() const
 	if (QGraphicsItem::childItems().size()==0)
 		return QRectF();
 	const QRectF& r = childrenBoundingRect();
-	return QRectF(0, 0, r.width()-1, r.height()-1);
+	return QRectF(0, 0, r.width(), r.height());
 }
 
 void CornerButtons::setOpacity(double opacity)
@@ -1218,7 +1285,7 @@ void CornerButtons::setOpacity(double opacity)
 	for (auto* child : QGraphicsItem::childItems())
 	{
 		StelButton* sb = qgraphicsitem_cast<StelButton*>(child);
-		Q_ASSERT(sb!=Q_NULLPTR);
+		Q_ASSERT(sb!=nullptr);
 		sb->setOpacity(opacity);
 	}
 }

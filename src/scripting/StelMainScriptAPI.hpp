@@ -445,6 +445,21 @@ public slots:
 	//! Return an array of all timezone names valid for setTimezone(tzName)
 	static QStringList getAllTimezoneNames();
 
+	//! Coordinate conversion: geographic (WGS84)-->UTM
+	//! @arg longitude geographic longitude from Greenwich, degrees
+	//! @arg latitude geographic latitude from equator, degrees
+	//! @arg zone UTM zone [1...60]. If 0, compute best-fit zone.
+	//! @return {{E[m], N[m], zone, gamma[rad], k}}
+	//! The returned zone contains the input or, if input was 0 (or missing), the most appropriate zone. North or South is not returned but is trivially fround from latitude.
+	static QList<double> geo2utm(const double longitude, const double latitude, const int zone=0);
+	//! Coordinate conversion: UTM->geographic (WGS84)
+	//! @arg easting (metres). False Easting of Zone meridian = 500000
+	//! @arg northing (metres). For southern latitudes, equator = 10000000
+	//! @arg zone UTM zone (longitudinal) [1...60].
+	//! @arg north true for N, false for S latitude zones.
+	//! @return {{longitude[deg], latitude[deg], refLong[deg], gamma[rad], k}}
+	static QList<double> utm2geo(const double easting, const double northing, const int zone, const bool north);
+
 	//! Save a screenshot.
 	//! @param prefix the prefix for the file name to use
 	//! @param dir the path of the directory to save the screenshot in.  If

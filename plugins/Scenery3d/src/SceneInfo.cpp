@@ -187,9 +187,27 @@ bool SceneInfo::loadByID(const QString &id,SceneInfo& info)
 	// Find a rotation around vertical axis, most likely required by meridian convergence.
 	double rot_z=0.0;
 	QVariant convAngle = ini.value("convergence_angle",0.0);
-	if (!convAngle.toString().compare("from_grid"))
+	if (convAngle.toString().startsWith("from_"))
 	{ // compute rot_z from grid_meridian and location. Check their existence!
-		if (ini.contains("grid_meridian"))
+		if (convAngle.toString()=="from_utm")
+		{
+			if (!info.location.isNull())
+			{
+				QPair<int, QChar>utmZone=StelLocationMgr::utmZone(info.location->getLongitude(), info.location->getLatitude());
+				QPair<Vec3d,Vec2d> utm= StelLocationMgr::geo2utm(info.location->getLongitude(), info.location->getLatitude());
+				rot_z = utm.second[0];
+
+				qCDebug(sceneInfo) << "With Longitude " << info.location->getLongitude()
+					 << ", Latitude " << info.location->getLatitude() << " and CM="
+					 << utm.first[2] << " of UTM zone" << utmZone.first << utmZone.second << ", ";
+				qCDebug(sceneInfo) << "setting meridian convergence to " << rot_z*M_180_PI << "degrees";
+			}
+			else
+			{
+				qCWarning(sceneInfo) << "scenery3d.ini: Convergence angle \"from_utm\" requires location section!";
+			}
+		}
+		else if (ini.contains("grid_meridian"))
 		{
 			double gridCentralMeridian=StelUtils::getDecAngle(ini.value("grid_meridian").toString())*M_180_PI;
 			if (!info.location.isNull())

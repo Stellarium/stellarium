@@ -34,7 +34,7 @@
 #include <QRegularExpression>
 
 InfoPanel::InfoPanel(QGraphicsItem* parent) : QGraphicsTextItem("", parent),
-	infoPixmap(Q_NULLPTR)
+	infoPixmap(nullptr)
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
@@ -70,7 +70,7 @@ InfoPanel::~InfoPanel()
 	if (infoPixmap)
 	{
 		delete infoPixmap;
-		infoPixmap=Q_NULLPTR;
+		infoPixmap=nullptr;
 	}
 }
 
@@ -176,20 +176,20 @@ const QString InfoPanel::getSelectedText(void) const
 
 SkyGui::SkyGui(QGraphicsItem * parent)
 	: QGraphicsWidget(parent)
-	, lastButtonbarWidth(0)
-	, btHorizAutoHide(Q_NULLPTR)
-	, btVertAutoHide(Q_NULLPTR)
-	, autoHidebts(Q_NULLPTR)
-	, autoHideHorizontalButtonBar(true)
-	, autoHideVerticalButtonBar(true)
-	, stelGui(Q_NULLPTR)
+	, lastBottomBarWidth(0)
+	, btHorizAutoHide(nullptr)
+	, btVertAutoHide(nullptr)
+	, autoHidebts(nullptr)
+	, autoHideBottomBar(true)
+	, autoHideLeftBar(true)
+	, stelGui(nullptr)
 {
 	setObjectName("StelSkyGui");
 
 	// Construct the Windows buttons bar
-	winBar = new LeftStelBar(this);
+	leftBar = new LeftStelBar(this);
 	// Construct the bottom buttons bar
-	buttonBar = new BottomStelBar(this,
+	bottomBar = new BottomStelBar(this,
 				      QPixmap(":/graphicGui/btbgLeft.png"),
 				      QPixmap(":/graphicGui/btbgRight.png"),
 				      QPixmap(":/graphicGui/btbgMiddle.png"),
@@ -202,7 +202,7 @@ SkyGui::SkyGui(QGraphicsItem * parent)
 	connect(&StelApp::getInstance(), SIGNAL(progressBarRemoved(const StelProgressController*)), progressBarMgr, SLOT(removeProgressBar(const StelProgressController*)));
 
 	// The path drawn around the button bars
-	buttonBarPath = new StelBarsPath(this);
+	buttonBarsPath = new StelBarsPath(this);
 
 	animLeftBarTimeLine = new QTimeLine(200, this);
 	animLeftBarTimeLine->setEasingCurve(QEasingCurve(QEasingCurve::InOutSine));
@@ -235,22 +235,22 @@ void SkyGui::init(StelGui* astelGui)
 	infoPanel->setPos(8,8);
 
 	// If auto hide is off, show the relevant toolbars
-	if (!autoHideHorizontalButtonBar)
+	if (!autoHideBottomBar)
 	{
 		animBottomBarTimeLine->setDirection(QTimeLine::Forward);
 		animBottomBarTimeLine->start();
 	}
 
-	if (!autoHideVerticalButtonBar)
+	if (!autoHideLeftBar)
 	{
 		animLeftBarTimeLine->setDirection(QTimeLine::Forward);
 		animLeftBarTimeLine->start();
 	}
 
-	buttonBarPath->setZValue(-0.1);
+	buttonBarsPath->setZValue(-0.1);
 	updateBarsPos();
 	connect(&StelApp::getInstance(), SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
-	connect(buttonBar, SIGNAL(sizeChanged()), this, SLOT(updateBarsPos()));
+	connect(bottomBar, SIGNAL(sizeChanged()), this, SLOT(updateBarsPos()));
 }
 
 void SkyGui::resizeEvent(QGraphicsSceneResizeEvent* event)
@@ -263,31 +263,31 @@ void SkyGui::hoverMoveEvent(QGraphicsSceneHoverEvent* event)
 {
 	const int hh = getSkyGuiHeight();
 
-	double x = event->pos().x();
-	double y = event->pos().y();
-	double maxX = winBar->boundingRect().width()+2.*buttonBarPath->getRoundSize();
-	double maxY = hh-(winBar->boundingRect().height()+buttonBar->boundingRect().height()+2.*buttonBarPath->getRoundSize());
-	double minX = 0;
+	const double x = event->pos().x();
+	const double y = event->pos().y();
+	double maxX = leftBar->boundingRect().width()+2.*buttonBarsPath->getRoundSize();
+	double maxY = hh-(leftBar->boundingRect().height()+bottomBar->boundingRect().height()+2.*buttonBarsPath->getRoundSize());
+	const double minX = 0;
 
-	if (x<=maxX && y>=maxY && animLeftBarTimeLine->state()==QTimeLine::NotRunning && winBar->pos().x()<minX)
+	if (x<=maxX && y>=maxY && animLeftBarTimeLine->state()==QTimeLine::NotRunning && leftBar->pos().x()<minX)
 	{
 		animLeftBarTimeLine->setDirection(QTimeLine::Forward);
 		animLeftBarTimeLine->start();
 	}
-	if (autoHideVerticalButtonBar && (x>maxX+30 || y<maxY-30) && animLeftBarTimeLine->state()==QTimeLine::NotRunning && winBar->pos().x()>=minX)
+	if (autoHideLeftBar && (x>maxX+30 || y<maxY-30) && animLeftBarTimeLine->state()==QTimeLine::NotRunning && leftBar->pos().x()>=minX)
 	{
 		animLeftBarTimeLine->setDirection(QTimeLine::Backward);
 		animLeftBarTimeLine->start();
 	}
 
-	maxX = winBar->boundingRect().width()+buttonBar->boundingRect().width()+2.*buttonBarPath->getRoundSize();
-	maxY = hh-buttonBar->boundingRect().height()+2.*buttonBarPath->getRoundSize();
+	maxX = leftBar->boundingRect().width()+bottomBar->boundingRect().width()+2.*buttonBarsPath->getRoundSize();
+	maxY = hh-bottomBar->boundingRect().height()+2.*buttonBarsPath->getRoundSize();
 	if (x<=maxX && y>=maxY && animBottomBarTimeLine->state()==QTimeLine::NotRunning && animBottomBarTimeLine->currentValue()<1.)
 	{
 		animBottomBarTimeLine->setDirection(QTimeLine::Forward);
 		animBottomBarTimeLine->start();
 	}
-	if (autoHideHorizontalButtonBar && (x>maxX+30 || y<maxY-30) && animBottomBarTimeLine->state()==QTimeLine::NotRunning && animBottomBarTimeLine->currentValue()>=0.9999999)
+	if (autoHideBottomBar && (x>maxX+30 || y<maxY-30) && animBottomBarTimeLine->state()==QTimeLine::NotRunning && animBottomBarTimeLine->currentValue()>=0.9999999)
 	{
 		animBottomBarTimeLine->setDirection(QTimeLine::Backward);
 		animBottomBarTimeLine->start();
@@ -315,48 +315,49 @@ int SkyGui::getSkyGuiHeight() const
 
 qreal SkyGui::getBottomBarHeight() const
 {
-	return buttonBar->boundingRect().height();
+	return bottomBar->boundingRect().height();
 }
 
 qreal SkyGui::getLeftBarWidth() const
 {
-	return winBar->boundingRect().width();
+	return leftBar->boundingRect().width();
 }
 
 //! Update the position of the button bars in the main window
 void SkyGui::updateBarsPos()
 {
-	const int ww = getSkyGuiWidth();
-	const int hh = getSkyGuiHeight();
+	const int ww = getSkyGuiWidth();  // actually: window width
+	const int hh = getSkyGuiHeight(); // actually: window height
 	bool updatePath = false;
 
 	// Use a position cache to avoid useless redraw triggered by the position set if the bars don't move
-	double rangeX = winBar->boundingRectNoHelpLabel().width()+2.*buttonBarPath->getRoundSize()+1.;
-	const qreal newWinBarX = buttonBarPath->getRoundSize()-(1.-animLeftBarTimeLine->currentValue())*rangeX-0.5;
-	const qreal newWinBarY = hh-winBar->boundingRectNoHelpLabel().height()-buttonBar->boundingRectNoHelpLabel().height()-20;
-	if (!qFuzzyCompare(winBar->pos().x(), newWinBarX) || !qFuzzyCompare(winBar->pos().y(), newWinBarY))
+	const double rangeX = leftBar->boundingRectNoHelpLabel().width()+2.*buttonBarsPath->getRoundSize()+1.;
+	const qreal newLeftBarX = buttonBarsPath->getRoundSize()-(1.-animLeftBarTimeLine->currentValue())*rangeX-0.5;
+	const qreal newLeftBarY = hh-leftBar->boundingRectNoHelpLabel().height()-bottomBar->boundingRectNoHelpLabel().height()-20;
+	if (!qFuzzyCompare(leftBar->pos().x(), newLeftBarX) || !qFuzzyCompare(leftBar->pos().y(), newLeftBarY))
 	{
-		winBar->setPos(qRound(newWinBarX), qRound(newWinBarY));
+		leftBar->setPos(qRound(newLeftBarX), qRound(newLeftBarY));
 		updatePath = true;
 	}
 
-	double rangeY = buttonBar->boundingRectNoHelpLabel().height()+0.5-7.-buttonBarPath->getRoundSize();
-	const qreal newButtonBarX = winBar->boundingRectNoHelpLabel().right()+buttonBarPath->getRoundSize();
-	const qreal newButtonBarY = hh-buttonBar->boundingRectNoHelpLabel().height()-buttonBarPath->getRoundSize()+0.5+(1.-animBottomBarTimeLine->currentValue())*rangeY;
-	if (!qFuzzyCompare(buttonBar->pos().x(), newButtonBarX) || !qFuzzyCompare(buttonBar->pos().y(), newButtonBarY))
+	const double rangeY = bottomBar->getButtonsBoundingRect().height()+1.5+bottomBar->getGap();
+	const qreal newBottomBarX = leftBar->boundingRectNoHelpLabel().right()+buttonBarsPath->getRoundSize();
+	const qreal newBottomBarY = hh-bottomBar->boundingRectNoHelpLabel().height()+bottomBar->getGap()-buttonBarsPath->getRoundSize()+0.5+(1.-animBottomBarTimeLine->currentValue())*rangeY;
+
+	if (!qFuzzyCompare(bottomBar->pos().x(), newBottomBarX) || !qFuzzyCompare(bottomBar->pos().y(), newBottomBarY))
 	{
-		buttonBar->setPos(qRound(newButtonBarX), qRound(newButtonBarY));
+		bottomBar->setPos(qRound(newBottomBarX), qRound(newBottomBarY));
 		updatePath = true;
 	}
 
-	if (lastButtonbarWidth != static_cast<int>(buttonBar->boundingRectNoHelpLabel().width()))
+	if (lastBottomBarWidth != static_cast<int>(bottomBar->boundingRectNoHelpLabel().width()))
 	{
+		lastBottomBarWidth = static_cast<int>(bottomBar->boundingRectNoHelpLabel().width());
 		updatePath = true;
-		lastButtonbarWidth = static_cast<int>(buttonBar->boundingRectNoHelpLabel().width());
 	}
 
 	if (updatePath)
-		buttonBarPath->updatePath(buttonBar, winBar);
+		buttonBarsPath->updatePath(bottomBar, leftBar);
 
 	const qreal newProgressBarX = ww-progressBarMgr->boundingRect().width()-20;
 	const qreal newProgressBarY = hh-progressBarMgr->boundingRect().height()+7;	
@@ -366,7 +367,7 @@ void SkyGui::updateBarsPos()
 	// Update position of the auto-hide buttons
 	autoHidebts->setPos(0, hh-autoHidebts->childrenBoundingRect().height()+1);
 	double opacity = qMax(animLeftBarTimeLine->currentValue(), animBottomBarTimeLine->currentValue());
-	autoHidebts->setOpacity(opacity < 0.01 ? 0.01 : opacity);	// Work around a qt bug
+	autoHidebts->setOpacity(qMax(0.01, opacity));	// Work around a qt bug
 
 	// Update the screen as soon as possible.
 	StelMainView::getInstance().thereWasAnEvent();
@@ -375,16 +376,16 @@ void SkyGui::updateBarsPos()
 void SkyGui::setStelStyle(const QString& style)
 {
 	Q_UNUSED(style)
-	buttonBarPath->setPen(QColor::fromRgbF(0.7,0.7,0.7,0.5));
-	buttonBarPath->setBrush(QColor::fromRgbF(0.15, 0.16, 0.19, 0.2));
-	buttonBar->setColor(QColor::fromRgbF(0.9, 0.91, 0.95, 0.9));
-	winBar->setColor(QColor::fromRgbF(0.9, 0.91, 0.95, 0.9));
+	buttonBarsPath->setPen(QColor::fromRgbF(0.7,0.7,0.7,0.5));
+	buttonBarsPath->setBrush(QColor::fromRgbF(0.15, 0.16, 0.19, 0.2));
+	bottomBar->setColor(QColor::fromRgbF(0.9, 0.91, 0.95, 0.9));
+	leftBar->setColor(QColor::fromRgbF(0.9, 0.91, 0.95, 0.9));
 }
 
 // Add a new progress bar in the lower right corner of the screen.
 void SkyGui::addProgressBar(StelProgressController* p)
 {
-	return progressBarMgr->addProgressBar(p);
+	progressBarMgr->addProgressBar(p);
 }
 
 void SkyGui::paint(QPainter*, const QStyleOptionGraphicsItem*, QWidget*)

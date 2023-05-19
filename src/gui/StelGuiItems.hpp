@@ -53,9 +53,9 @@ class CornerButtons : public QObject, public QGraphicsItem
 	Q_OBJECT
 	Q_INTERFACES(QGraphicsItem)
 public:
-	CornerButtons(QGraphicsItem* parent=Q_NULLPTR);
-	virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = Q_NULLPTR) Q_DECL_OVERRIDE;
-	virtual QRectF boundingRect() const Q_DECL_OVERRIDE;
+	CornerButtons(QGraphicsItem* parent=nullptr);
+	void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
+	QRectF boundingRect() const override;
 	void setOpacity(double opacity);
 private:
 	mutable double lastOpacity;
@@ -78,9 +78,9 @@ public:
 	//! @param noBackground define whether the button background image have to be used
 	StelButton(QGraphicsItem* parent, const QPixmap& pixOn, const QPixmap& pixOff,
 		   const QPixmap& pixHover=QPixmap(),
-		   class StelAction* action=Q_NULLPTR,
+		   class StelAction* action=nullptr,
 		   bool noBackground=false,
-		   StelAction *otherAction=Q_NULLPTR);
+		   StelAction *otherAction=nullptr);
 	
 	//! Constructor
 	//! @param parent the parent item
@@ -156,10 +156,10 @@ public slots:
 	void setChecked(bool b) { setChecked(static_cast<int>(b)); }
 
 protected:
-	virtual void hoverEnterEvent(QGraphicsSceneHoverEvent* event) Q_DECL_OVERRIDE;
-	virtual void hoverLeaveEvent(QGraphicsSceneHoverEvent* event) Q_DECL_OVERRIDE;
-	virtual void mousePressEvent(QGraphicsSceneMouseEvent* event) Q_DECL_OVERRIDE;
-	virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent* event) Q_DECL_OVERRIDE;
+	void hoverEnterEvent(QGraphicsSceneHoverEvent* event) override;
+	void hoverLeaveEvent(QGraphicsSceneHoverEvent* event) override;
+	void mousePressEvent(QGraphicsSceneMouseEvent* event) override;
+	void mouseReleaseEvent(QGraphicsSceneMouseEvent* event) override;
 	void paint(QPainter*, const QStyleOptionGraphicsItem*, QWidget*) override;
 private slots:
 	void animValueChanged(qreal value);
@@ -208,9 +208,9 @@ class LeftStelBar : public QObject, public QGraphicsItem
 	Q_INTERFACES(QGraphicsItem)
 public:
 	LeftStelBar(QGraphicsItem* parent);
-	~LeftStelBar() Q_DECL_OVERRIDE;
-	virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = Q_NULLPTR) Q_DECL_OVERRIDE;
-	virtual QRectF boundingRect() const Q_DECL_OVERRIDE;
+	~LeftStelBar() override;
+	void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
+	QRectF boundingRect() const override;
 	void addButton(StelButton* button);
 	QRectF boundingRectNoHelpLabel() const;
 	//! Set the color for all the sub elements
@@ -218,6 +218,11 @@ public:
 private slots:
 	//! Update the help label when a button is hovered
 	void buttonHoverChanged(bool b);
+
+	//! connect from StelApp to resize fonts on the fly.
+	void setFontSizeFromApp(int size);
+	//! connect from StelApp to set font on the fly.
+	void setFont(QFont font);
 private:
 	QTimeLine* hideTimeLine;
 	QGraphicsSimpleTextItem* helpLabel;
@@ -231,9 +236,9 @@ class BottomStelBar : public QObject, public QGraphicsItem
 	Q_INTERFACES(QGraphicsItem)
 public:
 	BottomStelBar(QGraphicsItem* parent, const QPixmap& pixLeft=QPixmap(), const QPixmap& pixRight=QPixmap(), const QPixmap& pixMiddle=QPixmap(), const QPixmap& pixSingle=QPixmap());
-	virtual ~BottomStelBar() Q_DECL_OVERRIDE;
-	virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = Q_NULLPTR) Q_DECL_OVERRIDE;
-	virtual QRectF boundingRect() const Q_DECL_OVERRIDE;
+	~BottomStelBar() override;
+	void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
+	QRectF boundingRect() const override;
 	QRectF boundingRectNoHelpLabel() const;
 
 	//! Add a button in a group in the button bar. Group are displayed in alphabetic order.
@@ -252,7 +257,7 @@ public:
 							const QPixmap& pixRight=QPixmap(), const QPixmap& pixMiddle=QPixmap(),
 							const QPixmap& pixSingle=QPixmap());
 
-	//! Set the color for all the sub elements
+	//! Set the brush color for all the sub elements (Seems not to do anything, in fact!)
 	void setColor(const QColor& c);
 
 	//! Set whether time must be displayed in the bottom bar
@@ -277,6 +282,10 @@ public:
 	void setFlagShowTz(bool b) { flagShowTZ=b; }
 	bool getFlagShowTz() const { return flagShowTZ; }
 
+	//! @return boundingRect of the buttons only
+	QRectF getButtonsBoundingRect() const;
+	//! @return height of vertical gap (pixels)
+	int getGap() const {return gap;}
 signals:
 	void sizeChanged();
 
@@ -290,9 +299,9 @@ private slots:
 	void setFont(QFont font);
 
 private:
-	void updateText(bool forceUpdatePos=false);
+	// updateTopocentric: regardless of topocentric setting, reformat the string if true
+	void updateText(bool forceUpdatePos=false, bool updateTopocentric=false);
 	void updateButtonsGroups();
-	QRectF getButtonsBoundingRect() const;
 	// Elements which get displayed above the buttons:
 	QGraphicsSimpleTextItem* location;
 	QGraphicsSimpleTextItem* datetime;
@@ -304,14 +313,15 @@ private:
 	QGraphicsPixmapItem* datetimePixmap;
 	QGraphicsPixmapItem* fovPixmap;
 	QGraphicsPixmapItem* fpsPixmap;
+	int gap; // a pixel distance between status line and buttons. May have fixed size or could depend on status element font size QFontMetrics::descent()
 
 
 
 	struct ButtonGroup
 	{
 		ButtonGroup() : leftMargin(0), rightMargin(0),
-						pixBackgroundLeft(Q_NULLPTR), pixBackgroundRight(Q_NULLPTR),
-						pixBackgroundMiddle(Q_NULLPTR), pixBackgroundSingle(Q_NULLPTR) {}
+						pixBackgroundLeft(nullptr), pixBackgroundRight(nullptr),
+						pixBackgroundMiddle(nullptr), pixBackgroundSingle(nullptr) {}
 		//! Elements of the group
 		QList<StelButton*> elems;
 		//! Left margin size in pixel
@@ -343,12 +353,13 @@ private:
 	QGraphicsPixmapItem* helpLabelPixmap; // bad-graphics replacement.
 };
 
-// The path around the bottom left button bars
+//! @class StelBarsPath: The path around the bottom and left button bars
 class StelBarsPath : public QGraphicsPathItem
 {
 	public:
 		StelBarsPath(QGraphicsItem* parent);
-		void updatePath(BottomStelBar* bot, LeftStelBar* lef);
+		//! defines a line around the two button bars
+		void updatePath(BottomStelBar* bottom, LeftStelBar* left);
 		//! return radius of corner arc
 		double getRoundSize() const {return roundSize;}
 		void setBackgroundOpacity(double opacity);

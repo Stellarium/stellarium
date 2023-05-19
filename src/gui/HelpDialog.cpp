@@ -174,7 +174,7 @@ void HelpDialog::checkUpdates()
 		request.setUrl(API);
 		request.setRawHeader("User-Agent", StelUtils::getUserAgentString().toUtf8());
 #if (QT_VERSION<QT_VERSION_CHECK(6,0,0))
-		request.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);
+		request.setAttribute(QNetworkRequest::RedirectPolicyAttribute, true);
 #endif
 		downloadReply = networkManager->get(request);
 

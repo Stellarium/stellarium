@@ -316,44 +316,44 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 	pxmapOn = QPixmap(":/graphicGui/btGotoSelectedObject-on.png");
 	pxmapOff = QPixmap(":/graphicGui/btGotoSelectedObject-off.png");
 	buttonGotoSelectedObject = new StelButton(nullptr, pxmapOn, pxmapOff, pxmapGlow32x32, "actionGoto_Selected_Object");
-	skyGui->buttonBar->addButton(buttonGotoSelectedObject, "060-othersGroup");
+	skyGui->bottomBar->addButton(buttonGotoSelectedObject, "060-othersGroup");
 
 	pxmapOn = QPixmap(":/graphicGui/btNightView-on.png");
 	pxmapOff = QPixmap(":/graphicGui/btNightView-off.png");
 	buttonNightmode = new StelButton(nullptr, pxmapOn, pxmapOff, pxmapGlow32x32, "actionShow_Night_Mode");
-	skyGui->buttonBar->addButton(buttonNightmode, "060-othersGroup");
+	skyGui->bottomBar->addButton(buttonNightmode, "060-othersGroup");
 
 	pxmapOn = QPixmap(":/graphicGui/btFullScreen-on.png");
 	pxmapOff = QPixmap(":/graphicGui/btFullScreen-off.png");
 	pxmapDefault = QPixmap(":/graphicGui/btFullScreen-exclusive.png");
 	buttonFullscreen = new StelButton(nullptr, pxmapOn, pxmapOff, pxmapDefault, pxmapGlow32x32, "actionSet_Full_Screen_Global", false, false, "actionSet_Full_Screen_Exclusive");
 	buttonFullscreen->setTriggerOnRelease(true);
-	skyGui->buttonBar->addButton(buttonFullscreen, "060-othersGroup");
+	skyGui->bottomBar->addButton(buttonFullscreen, "060-othersGroup");
 
 	pxmapOn = QPixmap(":/graphicGui/btTimeRewind-on.png");
 	pxmapOff = QPixmap(":/graphicGui/btTimeRewind-off.png");
 	buttonTimeRewind = new StelButton(nullptr, pxmapOn, pxmapOff, pxmapGlow32x32, "actionDecrease_Time_Speed");
-	skyGui->buttonBar->addButton(buttonTimeRewind, "070-timeGroup");
+	skyGui->bottomBar->addButton(buttonTimeRewind, "070-timeGroup");
 
 	pxmapOn = QPixmap(":/graphicGui/btTimeRealtime-on.png");
 	pxmapOff = QPixmap(":/graphicGui/btTimeRealtime-off.png");
 	pxmapDefault = QPixmap(":/graphicGui/btTimePause-on.png");
 	buttonTimeRealTimeSpeed = new StelButton(nullptr, pxmapOn, pxmapOff, pxmapDefault, pxmapGlow32x32, "actionSet_Real_Time_Speed");
-	skyGui->buttonBar->addButton(buttonTimeRealTimeSpeed, "070-timeGroup");
+	skyGui->bottomBar->addButton(buttonTimeRealTimeSpeed, "070-timeGroup");
 
 	pxmapOn = QPixmap(":/graphicGui/btTimeNow-on.png");
 	pxmapOff = QPixmap(":/graphicGui/btTimeNow-off.png");
 	buttonTimeCurrent = new StelButton(nullptr, pxmapOn, pxmapOff, pxmapGlow32x32, "actionReturn_To_Current_Time");
-	skyGui->buttonBar->addButton(buttonTimeCurrent, "070-timeGroup");
+	skyGui->bottomBar->addButton(buttonTimeCurrent, "070-timeGroup");
 
 	pxmapOn = QPixmap(":/graphicGui/btTimeForward-on.png");
 	pxmapOff = QPixmap(":/graphicGui/btTimeForward-off.png");
 	buttonTimeForward = new StelButton(nullptr, pxmapOn, pxmapOff, pxmapGlow32x32, "actionIncrease_Time_Speed");
-	skyGui->buttonBar->addButton(buttonTimeForward, "070-timeGroup");
+	skyGui->bottomBar->addButton(buttonTimeForward, "070-timeGroup");
 
 	pxmapOn = QPixmap(":/graphicGui/btQuit.png");	
 	buttonQuit = new StelButton(nullptr, pxmapOn, pxmapOn, pxmapGlow32x32, "actionQuit_Global");
-	skyGui->buttonBar->addButton(buttonQuit, "080-quitGroup");
+	skyGui->bottomBar->addButton(buttonQuit, "080-quitGroup");
 
 	// add the flip and other buttons if requested in the config
 	setFlagShowFlipButtons(conf->value("gui/flag_show_flip_buttons", false).toBool());
@@ -388,12 +388,12 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 	setStelStyle(StelApp::getInstance().getCurrentStelStyle());
 
 	int margin = conf->value("gui/space_between_groups", 5).toInt();
-	skyGui->buttonBar->setGroupMargin("020-gridsGroup", margin, 0);
-	skyGui->buttonBar->setGroupMargin("030-landscapeGroup", margin, 0);
-	skyGui->buttonBar->setGroupMargin("040-nebulaeGroup", margin, 0);
-	skyGui->buttonBar->setGroupMargin("060-othersGroup", margin, margin);
-	skyGui->buttonBar->setGroupMargin("070-timeGroup", margin, 0);
-	skyGui->buttonBar->setGroupMargin("080-quitGroup", margin, 0);
+	skyGui->bottomBar->setGroupMargin("020-gridsGroup", margin, 0);
+	skyGui->bottomBar->setGroupMargin("030-landscapeGroup", margin, 0);
+	skyGui->bottomBar->setGroupMargin("040-nebulaeGroup", margin, 0);
+	skyGui->bottomBar->setGroupMargin("060-othersGroup", margin, margin);
+	skyGui->bottomBar->setGroupMargin("070-timeGroup", margin, 0);
+	skyGui->bottomBar->setGroupMargin("080-quitGroup", margin, 0);
 
 	skyGui->setGeometry(atopLevelGraphicsWidget->geometry());
 	skyGui->updateBarsPos();
@@ -423,7 +423,7 @@ void StelGui::addButtonOnBottomBar(QString buttonName, QString actionName, QStri
 	QPixmap pxmapOn = QPixmap(QString(":/graphicGui/%1-on.png").arg(buttonName));
 	QPixmap pxmapOff = QPixmap(QString(":/graphicGui/%1-off.png").arg(buttonName));
 	StelButton* b = new StelButton(nullptr, pxmapOn, pxmapOff, pxmapGlow, actionName);
-	skyGui->buttonBar->addButton(b, groupName);
+	skyGui->bottomBar->addButton(b, groupName);
 }
 
 void StelGui::addButtonOnLeftBar(QString buttonName, QString actionName)
@@ -432,7 +432,7 @@ void StelGui::addButtonOnLeftBar(QString buttonName, QString actionName)
 	QPixmap pxmapOn = QPixmap(QString(":/graphicGui/%1-on.png").arg(buttonName));
 	QPixmap pxmapOff = QPixmap(QString(":/graphicGui/%1-off.png").arg(buttonName));
 	StelButton* b = new StelButton(nullptr, pxmapOn, pxmapOff, pxmapGlow, actionName);
-	skyGui->winBar->addButton(b);
+	skyGui->leftBar->addButton(b);
 }
 
 void StelGui::quit()
@@ -1288,7 +1288,7 @@ bool StelGui::getVisible() const
 
 bool StelGui::isCurrentlyUsed() const
 {
-	return skyGui->buttonBar->isUnderMouse() || skyGui->winBar->isUnderMouse();
+	return skyGui->bottomBar->isUnderMouse() || skyGui->leftBar->isUnderMouse();
 }
 
 void StelGui::setInfoTextFilters(const StelObject::InfoStringGroup& aflags)
@@ -1303,12 +1303,12 @@ const StelObject::InfoStringGroup& StelGui::getInfoTextFilters() const
 
 BottomStelBar* StelGui::getButtonBar() const
 {
-	return skyGui->buttonBar;
+	return skyGui->bottomBar;
 }
 
 LeftStelBar* StelGui::getWindowsButtonBar() const
 {
-	return skyGui->winBar;
+	return skyGui->leftBar;
 }
 
 SkyGui* StelGui::getSkyGui() const
@@ -1318,28 +1318,28 @@ SkyGui* StelGui::getSkyGui() const
 
 bool StelGui::getAutoHideHorizontalButtonBar() const
 {
-	return skyGui->autoHideHorizontalButtonBar;
+	return skyGui->autoHideBottomBar;
 }
 
 void StelGui::setAutoHideHorizontalButtonBar(bool b)
 {
-	if (skyGui->autoHideHorizontalButtonBar!=b)
+	if (skyGui->autoHideBottomBar!=b)
 	{
-		skyGui->autoHideHorizontalButtonBar=b;
+		skyGui->autoHideBottomBar=b;
 		emit autoHideHorizontalButtonBarChanged(b);
 	}
 }
 
 bool StelGui::getAutoHideVerticalButtonBar() const
 {
-	return skyGui->autoHideVerticalButtonBar;
+	return skyGui->autoHideLeftBar;
 }
 
 void StelGui::setAutoHideVerticalButtonBar(bool b)
 {
-	if (skyGui->autoHideVerticalButtonBar!=b)
+	if (skyGui->autoHideLeftBar!=b)
 	{
-		skyGui->autoHideVerticalButtonBar=b;
+		skyGui->autoHideLeftBar=b;
 		emit autoHideVerticalButtonBarChanged(b);
 	}
 }

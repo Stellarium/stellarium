@@ -340,6 +340,23 @@ QStringList StelMainScriptAPI::getAllTimezoneNames()
 	return StelApp::getInstance().getLocationMgr().getAllTimezoneNames();
 }
 
+// Coordinate conversion: geographic (WGS84)-->UTM
+QList<double> StelMainScriptAPI::geo2utm(const double longitude, const double latitude, const int zone)
+{
+	QPair<Vec3d, Vec2d> utm=StelLocationMgr::geo2utm(longitude, latitude, zone);
+	Vec3d pos=utm.first;
+	Vec2d ang=utm.second;
+	return QList<double>({pos[0], pos[1], pos[2], ang[0]*M_180_PI, ang[1]});
+}
+// Coordinate conversion: UTM->geographic (WGS84)
+QList<double> StelMainScriptAPI::utm2geo(const double easting, const double northing, const int zone, const bool north)
+{
+	QPair<Vec3d, Vec2d> geo=StelLocationMgr::utm2geo(easting, northing, zone, north);
+	Vec3d pos=geo.first;
+	Vec2d ang=geo.second;
+	return QList<double>({pos[0], pos[1], pos[2], ang[0]*M_180_PI, ang[1]});
+}
+
 void StelMainScriptAPI::screenshot(const QString& prefix, bool invert, const QString& dir, const bool overwrite, const QString &format)
 {
 	QString realDir("");

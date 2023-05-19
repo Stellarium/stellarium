@@ -1348,6 +1348,149 @@ QString StelLocationMgr::pickRegionFromCode(int regionCode)
 	return region;
 }
 
+// https://en.wikipedia.org/wiki/Universal_Transverse_Mercator_coordinate_system
+QPair<Vec3d,Vec2d> StelLocationMgr::geo2utm(const double longitude, const double latitude, const int zone)
+{
+	Q_ASSERT(zone<=60);
+	if ((latitude>84) || (latitude<-80))
+	{
+		qCritical() << "UTM Polar area not implemented. Returning zero result.";
+		return {Vec3d(0.), Vec2d(0.)};
+	}
+	static const double a=6378.137; // earth radius
+	static const double f=1./298.257223563;
+	static const double k0=0.9996;
+	static const double E0=500;
+	const double N0=latitude > 0 ? 0. : 10000.;
+	// preliminaries
+	static const double n = f/(2.-f);
+	static const double n2 = n*n;
+	static const double n3 = n2*n;
+	static const double n4 = n3*n;
+	static const double A = a/(1.+n) * (1.+n2/4. + n4/64.);
+	static const double k0A=k0*A;
+	static const Vec3d alpha = {n/2.-2./3.*n2+ 5./16.*n3, 13./48.*n2-3./5.*n3, 61./240.*n3};
+	const double utmZne= (zone!=0) ? zone : utmZone(longitude, latitude).first;
+	const double refLongitude=utmZne*6.-183.;
+	const double sinPhi=sin(latitude*M_PI_180);
+	const double dLong=(longitude-refLongitude)*M_PI_180;
+	const double cosDLong=cos(dLong);
+	const double tanDLong=tan(dLong);
+	const double tFac=2.*sqrt(n)/(1.+n);
+	const double t    = sinh(atanh(sinPhi)-tFac*atanh(tFac*sinPhi));
+	const double xiP  = atan(t/cosDLong);
+	const double etaP = atanh(sin(dLong)/sqrt(1.+t*t));
+	double sigma=1.;
+	for (int j=1; j<=3; ++j)
+		sigma += 2.*j*alpha[j-1]*cos(2.*j*xiP)*cosh(2.*j*etaP);
+	double tau=0.;
+	for (int j=1; j<=3; ++j)
+		tau   += 2.*j*alpha[j-1]*sin(2.*j*xiP)*sinh(2.*j*etaP);
+	double E=etaP;
+	for (int j=1; j<=3; ++j)
+		E += alpha[j-1]*cos(2.*j*xiP)*sinh(2.*j*etaP);
+	E *= k0A;
+	E += E0;
+	double N=xiP;
+	for (int j=1; j<=3; ++j)
+		N += alpha[j-1]*sin(2.*j*xiP)*cosh(2.*j*etaP);
+	N *= k0A;
+	N += N0;
+	const double kFac=(1.-n)/(1.+n)*tan(latitude*M_PI_180);
+	const double k=k0A/a * sqrt((1.+kFac*kFac) * (sigma*sigma+tau*tau) / (t*t + cosDLong*cosDLong));
+	const double gamma = atan((tau*sqrt(1.+t*t)+sigma*t*tanDLong)/(sigma*sqrt(1.+t*t)-tau*t*tanDLong));
+	return {Vec3d(E*1000., N*1000., refLongitude), Vec2d(gamma, k)};
+}
+
+// https://en.wikipedia.org/wiki/Universal_Transverse_Mercator_coordinate_system
+QPair<Vec3d,Vec2d> StelLocationMgr::utm2geo(const double easting, const double northing, const int zone, const bool north)
+{
+	Q_ASSERT(zone<=60);
+	static const double a=6378.137; // earth radius
+	static const double f=1./298.257223563;
+	static const double k0=0.9996;
+	static const double E0=500;
+	const double N0=north ? 0. : 10000.;
+	const double Hemi=north ? 1. : -1.;
+	// preliminaries
+	static const double n = f/(2.-f);
+	static const double n2 = n*n;
+	static const double n3 = n2*n;
+	static const double n4 = n3*n;
+	static const double A = a/(1.+n) * (1.+n2/4. + n4/64.);
+	static const double k0A=k0*A;
+	static const Vec3d beta  = {n/2.-2./3.*n2+37./96.*n3,  1./48.*n2+1./15.*n3, 17./480.*n3};
+	static const Vec3d delta = {2.*n-2./3.*n2-2.*n3,       7./3. *n2-8./ 5.*n3, 56./15. *n3};
+	const double xi=(northing*0.001-N0)/k0A;
+	const double eta=(easting*0.001-E0)/k0A;
+	double xiP=xi;
+	for (int j=1; j<=3; ++j)
+		xiP -= beta[j-1]*sin(2.*j*xi)*cosh(2.*j*eta);
+	double etaP=eta;
+	for (int j=1; j<=3; ++j)
+		etaP   -= beta[j-1]*cos(2.*j*xi)*sinh(2.*j*eta);
+	double sigmaP=1.;
+	for (int j=1; j<=3; ++j)
+		sigmaP -= 2.*j*beta[j-1]*cos(2.*j*xi)*cosh(2.*j*eta);
+	double tauP=0.;
+	for (int j=1; j<=3; ++j)
+		tauP   += 2.*j*beta[j-1]*sin(2.*j*xi)*sinh(2.*j*eta);
+	const double chi=asin(sin(xiP)/cosh(etaP));
+	double phi=chi;
+	for (int j=1; j<=3; ++j)
+		phi += delta[j-1]*sin(2.*j*chi);
+	const double refLongitude=zone*6.-183.;
+	const double sinhEtaP=sinh(etaP);
+	const double cosXiP=cos(xiP);
+	const double lng=refLongitude+atan(sinhEtaP/cosXiP)*M_180_PI;
+	const double kFac=(1.-n)/(1.+n)*tan(phi);
+	const double k=k0A/a * sqrt((1.+kFac*kFac) * (cosXiP*cosXiP+sinhEtaP*sinhEtaP) / (sigmaP*sigmaP + tauP*tauP));
+	const double tanXiPtanhEtaP=tan(xiP)*tanh(etaP);
+	const double gamma = Hemi * atan((tauP+sigmaP*tanXiPtanhEtaP)/(sigmaP-tauP*tanXiPtanhEtaP));
+	return {Vec3d(lng, phi*M_180_PI, refLongitude), Vec2d(gamma, k)};
+}
+
+// https://stackoverflow.com/questions/9186496/determining-utm-zone-to-convert-from-longitude-latitude
+QPair<int, QChar> StelLocationMgr::utmZone(const double longitude, const double latitude)
+{
+	QChar letter='I'; // I does not exist as letter code. It signifies "invalid".
+	int zone=0; // remains 0 for polar zones
+	// Special zones for Svalbard
+	if (latitude >= 72.0 && latitude <= 84.0 ) {
+		if (longitude >= 0.0  && longitude <  9.0)
+			zone=31;
+		if (longitude >= 9.0  && longitude < 21.0)
+			zone=33;
+		if (longitude >= 21.0 && longitude < 33.0)
+			zone=35;
+		if (longitude >= 33.0 && longitude < 42.0)
+			zone=37;
+		letter='X';
+	}
+	// Special zones for Norway
+	else if (latitude >= 56.0 && latitude < 64.0 ) {
+		if (longitude >= 0.0  && longitude <  3.0)
+			zone=31;
+		if (longitude >= 3.0  && longitude < 12.0)
+			zone=32;
+		letter='V';
+	}
+	// Everything in the middle
+	else if ( (latitude>-80.0) && (latitude<=84.0) ){
+		static const QString mid_zones("CDEFGHJKLMNPQRSTUVWX"); // C to X, skip I and O
+		letter = mid_zones[ qMin((int(floor(latitude)) + 80) / 8 , 19) ];
+		zone   = StelUtils::amod((int(floor(longitude)) + 180) / 6 , 60) + 1; // modulo in case longitude is 0 to 360 instead of -180 to 180
+	}
+	// North + South Poles
+	else if (latitude > 84.0)
+		letter = StelUtils::fmodpos(longitude + 180, 360) < 180 ? 'Y' : 'Z';
+	else if (latitude < -80.0)
+		letter = StelUtils::fmodpos(longitude + 180, 360) < 180 ? 'A' : 'B';
+	else
+		qCritical() << "Cannot determine UTM zone for long" << longitude << "/ lat" << latitude;
+	return QPair<int, QChar>(zone, letter);
+}
+
 // Check timezone string and return either the same or the corresponding string that we use in the Stellarium location database.
 // If timezone name starts with "UTC", always return unchanged.
 // This is required to store timezone names exactly as we know them, and not mix ours and current-iana spelling flavour.

@@ -96,29 +96,36 @@ Cardinals::~Cardinals()
 {
 }
 
+const float Cardinals::sp8 = sin(M_PIf/8.f); // dimension for intercardinals
+const float Cardinals::cp8 = cos(M_PIf/8.f); // dimension for intercardinals
+const float Cardinals::s1p16 = sin(M_PIf/16.f);     // dimension for rose32
+const float Cardinals::c1p16 = cos(M_PIf/16.f);     // dimension for rose32
+const float Cardinals::s3p16 = sin(3.f*M_PIf/16.f); // dimension for rose32
+const float Cardinals::c3p16 = cos(3.f*M_PIf/16.f); // dimension for rose32
+
 const QMap<Cardinals::CompassDirection, Vec3f> Cardinals::rose4winds = {
 	{ Cardinals::dN, Vec3f(-1.f, 0.f, 0.f) }, { Cardinals::dS, Vec3f(1.f,  0.f, 0.f) },
 	{ Cardinals::dE, Vec3f( 0.f, 1.f, 0.f) }, { Cardinals::dW, Vec3f(0.f, -1.f, 0.f) }
 };
 const QMap<Cardinals::CompassDirection, Vec3f> Cardinals::rose8winds = {
-	{ Cardinals::dNE, Vec3f(-1.f,  1.f, 0.f) }, { Cardinals::dSE, Vec3f( 1.f,  1.f, 0.f) },
-	{ Cardinals::dSW, Vec3f( 1.f, -1.f, 0.f) }, { Cardinals::dNW, Vec3f(-1.f, -1.f, 0.f) }
+	{ Cardinals::dNE, Vec3f(-q8,  q8, 0.f) }, { Cardinals::dSE, Vec3f( q8,  q8, 0.f) },
+	{ Cardinals::dSW, Vec3f( q8, -q8, 0.f) }, { Cardinals::dNW, Vec3f(-q8, -q8, 0.f) }
 };
 const QMap<Cardinals::CompassDirection, Vec3f> Cardinals::rose16winds = {
-	{ Cardinals::dNNE, Vec3f(-1.f,   cp, 0.f) }, { Cardinals::dENE, Vec3f( -cp,  1.f, 0.f) },
-	{ Cardinals::dESE, Vec3f(  cp,  1.f, 0.f) }, { Cardinals::dSSE, Vec3f( 1.f,   cp, 0.f) },
-	{ Cardinals::dSSW, Vec3f( 1.f,  -cp, 0.f) }, { Cardinals::dWSW, Vec3f(  cp, -1.f, 0.f) },
-	{ Cardinals::dWNW, Vec3f( -cp, -1.f, 0.f) }, { Cardinals::dNNW, Vec3f(-1.f,  -cp, 0.f) }
+	{ Cardinals::dNNE, Vec3f(-cp8,  sp8, 0.f) }, { Cardinals::dENE, Vec3f(-sp8,  cp8, 0.f) },
+	{ Cardinals::dESE, Vec3f( sp8,  cp8, 0.f) }, { Cardinals::dSSE, Vec3f( cp8,  sp8, 0.f) },
+	{ Cardinals::dSSW, Vec3f( cp8, -sp8, 0.f) }, { Cardinals::dWSW, Vec3f( sp8, -cp8, 0.f) },
+	{ Cardinals::dWNW, Vec3f(-sp8, -cp8, 0.f) }, { Cardinals::dNNW, Vec3f(-cp8, -sp8, 0.f) }
 };
 const QMap<Cardinals::CompassDirection, Vec3f> Cardinals::rose32winds = {
-	{ Cardinals::dNbE,  Vec3f(-1.f,   qp, 0.f) }, { Cardinals::dNbW,  Vec3f(-1.f,  -qp, 0.f) },
-	{ Cardinals::dSbE,  Vec3f( 1.f,   qp, 0.f) }, { Cardinals::dSbW,  Vec3f( 1.f,  -qp, 0.f) },
-	{ Cardinals::dEbS,  Vec3f(  qp,  1.f, 0.f) }, { Cardinals::dEbN,  Vec3f( -qp,  1.f, 0.f) },
-	{ Cardinals::dWbN,  Vec3f( -qp, -1.f, 0.f) }, { Cardinals::dWbS,  Vec3f(  qp, -1.f, 0.f) },
-	{ Cardinals::dNEbN, Vec3f(-1.f,  tqp, 0.f) }, { Cardinals::dNWbN, Vec3f(-1.f, -tqp, 0.f) },
-	{ Cardinals::dSEbS, Vec3f( 1.f,  tqp, 0.f) }, { Cardinals::dSWbS, Vec3f( 1.f, -tqp, 0.f) },
-	{ Cardinals::dSEbE, Vec3f( tqp,  1.f, 0.f) }, { Cardinals::dNEbE, Vec3f(-tqp,  1.f, 0.f) },
-	{ Cardinals::dNWbW, Vec3f(-tqp, -1.f, 0.f) }, { Cardinals::dSWbW, Vec3f( tqp, -1.f, 0.f) }
+	{ Cardinals::dNbE,  Vec3f(-c1p16, s1p16, 0.f) }, { Cardinals::dNbW,  Vec3f(-c1p16, -s1p16, 0.f) },
+	{ Cardinals::dSbE,  Vec3f( c1p16, s1p16, 0.f) }, { Cardinals::dSbW,  Vec3f( c1p16, -s1p16, 0.f) },
+	{ Cardinals::dEbS,  Vec3f( s1p16, c1p16, 0.f) }, { Cardinals::dEbN,  Vec3f(-s1p16,  c1p16, 0.f) },
+	{ Cardinals::dWbN,  Vec3f(-s1p16,-c1p16, 0.f) }, { Cardinals::dWbS,  Vec3f( s1p16, -c1p16, 0.f) },
+	{ Cardinals::dNEbN, Vec3f(-c3p16, s3p16, 0.f) }, { Cardinals::dNWbN, Vec3f(-c3p16, -s3p16, 0.f) },
+	{ Cardinals::dSEbS, Vec3f( c3p16, s3p16, 0.f) }, { Cardinals::dSWbS, Vec3f( c3p16, -s3p16, 0.f) },
+	{ Cardinals::dSEbE, Vec3f( s3p16, c3p16, 0.f) }, { Cardinals::dNEbE, Vec3f(-s3p16,  c3p16, 0.f) },
+	{ Cardinals::dNWbW, Vec3f(-s3p16,-c3p16, 0.f) }, { Cardinals::dSWbW, Vec3f( s3p16, -c3p16, 0.f) }
 };
 
 void Cardinals::update(double deltaTime)
