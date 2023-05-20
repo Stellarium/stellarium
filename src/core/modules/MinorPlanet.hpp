@@ -97,8 +97,10 @@ public:
 	//! set value for color index B-V
 	void setColorIndexBV(float bv=99.f);
 
-	//! set the discovery circumstances of celestial body
-	void setDiscoveryData(QString name, QString date) { discoverer = name; discoveryDate = date; }
+	//! set the discovery circumstances of minor body
+	//! @param date of discovery
+	//! @param name of discoverer
+	void setDiscoveryData(QString date, QString name) { discoveryDate = date; discoverer = name; }
 
 	//! get sidereal period for minor planet
 	virtual double getSiderealPeriod() const Q_DECL_OVERRIDE;

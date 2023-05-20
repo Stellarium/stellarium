@@ -32,6 +32,7 @@
 #include "StelMovementMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "LandscapeMgr.hpp"
+#include "StelLocaleMgr.hpp"
 
 #include <QDebug>
 #include <QElapsedTimer>
@@ -89,6 +90,8 @@ Comet::Comet(const QString& englishName,
 	  isCometFragment(false),
 	  iauDesignation(""),
 	  cometCodes(),
+	  discoverer(""),
+	  discoveryDate(""),
 	  tailFactors(-1., -1.), // mark "invalid"
 	  tailActive(false),
 	  tailBright(false),
@@ -225,9 +228,15 @@ QString Comet::getInfoStringSize(const StelCore *core, const InfoStringGroup &fl
 // Nothing interesting?
 QString Comet::getInfoStringExtra(const StelCore *core, const InfoStringGroup &flags) const
 {
-	Q_UNUSED(core) Q_UNUSED(flags)
-
-	return QString();
+	Q_UNUSED(core)
+	QString str;
+	QTextStream oss(&str);
+	if (flags&Extra)
+	{
+		if (!discoveryDate.isEmpty())
+			oss << QString("%1: %2<br/>").arg(q_("Discovered"), getDiscoveryCircumstances());
+	}
+	return str;
 }
 
 QVariantMap Comet::getInfoMap(const StelCore *core) const
@@ -237,6 +246,20 @@ QVariantMap Comet::getInfoMap(const StelCore *core) const
 	map.insert("coma-diameter-km", tailFactors[0]*AUf);
 
 	return map;
+}
+
+QString Comet::getDiscoveryCircumstances() const
+{
+	QString ddate = discoveryDate; // YYYY
+	QStringList date = discoveryDate.split("-");
+	if (date.count()==3) // YYYY-MM-DD
+		ddate = QString("%1 %2 %3").arg(QString::number(date.at(2).toInt()), StelLocaleMgr::longGenitiveMonthName(date.at(1).toInt()), date.at(0));
+	if (date.count()==2) // YYYY-MM
+		ddate = QString("%1 %2").arg(StelLocaleMgr::longMonthName(date.at(1).toInt()), date.at(0));
+	if (discoverer.isEmpty())
+		return ddate;
+	else
+		return QString("%1 (%2)").arg(ddate, discoverer);
 }
 
 double Comet::getSiderealPeriod() const

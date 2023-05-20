@@ -1030,8 +1030,8 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			// Discovery circumstances
 			QString discovererName = pd.value(secname+"/discoverer", "").toString();
 			QString discoveryDate = pd.value(secname+"/discovery", "").toString();
-			if (!discovererName.isEmpty() && !discoveryDate.isEmpty())
-				mp->setDiscoveryData(discovererName, discoveryDate);
+			if (!discoveryDate.isEmpty())
+				mp->setDiscoveryData(discoveryDate, discovererName);
 
 			if (semi_major_axis>0)
 				mp->deltaJDE = 2.0*semi_major_axis*StelCore::JD_SECOND;
@@ -1087,6 +1087,12 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			if (codes.count()>0)
 				mp->setCometCodes(codes);
 
+			// Discovery circumstances
+			QString discovererName = pd.value(secname+"/discoverer", "").toString();
+			QString discoveryDate = pd.value(secname+"/discovery", "").toString();
+			if (!discoveryDate.isEmpty())
+				mp->setDiscoveryData(discoveryDate, discovererName);
+
 			systemMinorBodies.push_back(newP);
 		}
 		else // type==star|planet|moon|dwarf planet|observer|artificial
@@ -1125,8 +1131,8 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			// Discovery circumstances
 			QString discovererName = pd.value(secname+"/discoverer", "").toString();
 			QString discoveryDate = pd.value(secname+"/discovery", "").toString();
-			if (!discovererName.isEmpty() && !discoveryDate.isEmpty())
-				newP->setDiscoveryData(discovererName, discoveryDate);
+			if (!discoveryDate.isEmpty())
+				newP->setDiscoveryData(discoveryDate, discovererName);
 		}
 
 		if (!parent.isNull())

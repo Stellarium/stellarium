@@ -93,6 +93,11 @@ public:
 	//! sets a date, discovery and perihelion codes of the comet.
 	void setCometCodes(QStringList codes) { cometCodes = codes; }
 
+	//! set the discovery circumstances of comet
+	//! @param date of discovery
+	//! @param name of discoverer
+	void setDiscoveryData(QString date, QString name) { discoveryDate = date; discoverer = name; }
+
 	//! get list of comet codes
 	QStringList getCometCodes() const { return cometCodes; }
 
@@ -113,6 +118,8 @@ protected:
 	virtual QString getInfoStringSize(const StelCore *core, const InfoStringGroup& flags) const Q_DECL_OVERRIDE;
 	//! Any flag=Extra information to be displayed at the end
 	virtual QString getInfoStringExtra(const StelCore *core, const InfoStringGroup& flags) const Q_DECL_OVERRIDE;
+
+	virtual QString getDiscoveryCircumstances() const Q_DECL_OVERRIDE;
 
 private:
 	//! @returns estimates for (Coma diameter [AU], gas tail length [AU]).
@@ -141,6 +148,9 @@ private:
 	bool isCometFragment;
 	QString iauDesignation;
 	QStringList cometCodes;
+	// Discovery data
+	QString discoverer;
+	QString discoveryDate;
 
 	//GZ Tail additions
 	Vec2f tailFactors; // result of latest call to getComaDiameterAndTailLengthAU(); Results cached here for infostring. [0]=Coma diameter, [1] gas tail length.

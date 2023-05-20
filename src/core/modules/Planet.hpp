@@ -334,7 +334,9 @@ public:
 	void setColorIndexBV(float bv=99.f);
 
 	//! set the discovery circumstances of celestial body
-	void setDiscoveryData(QString name, QString date) { discoverer = name; discoveryDate = date; }
+	//! @param date of discovery
+	//! @param name of discoverer
+	void setDiscoveryData(QString date, QString name) { discoveryDate = date; discoverer = name; }
 
 	//! Return the absolute magnitude (read from file ssystem.ini)
 	float getAbsoluteMagnitude() const {return absoluteMagnitude;}
