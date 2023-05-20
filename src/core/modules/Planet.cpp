@@ -460,7 +460,10 @@ QString Planet::getDiscoveryCircumstances() const
 		ddate = QString("%1 %2 %3").arg(QString::number(date.at(2).toInt()), StelLocaleMgr::longGenitiveMonthName(date.at(1).toInt()), date.at(0));
 	if (date.count()==2) // YYYY-MM
 		ddate = QString("%1 %2").arg(StelLocaleMgr::longMonthName(date.at(1).toInt()), date.at(0));
-	return QString("%1 (%2)").arg(discoverer, ddate);
+	if (discoverer.isEmpty())
+		return ddate;
+	else
+		return QString("%1 (%2)").arg(ddate, discoverer);
 }
 
 const QString Planet::getContextString() const
@@ -1563,8 +1566,8 @@ QString Planet::getInfoStringExtra(const StelCore *core, const InfoStringGroup& 
 		if (englishName != "Sun")
 			oss << QString("%1: %2<br/>").arg(q_("Albedo"), QString::number(getAlbedo(), 'f', 2));
 
-		if (!discoverer.isEmpty() && !discoveryDate.isEmpty())
-			oss << QString("%1: %2<br/>").arg(q_("Discoverer"), getDiscoveryCircumstances());
+		if (!discoveryDate.isEmpty())
+			oss << QString("%1: %2<br/>").arg(q_("Discovered"), getDiscoveryCircumstances());
 	}
 	return str;
 }

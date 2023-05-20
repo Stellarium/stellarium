@@ -110,6 +110,8 @@ protected:
 	//! Any flag=Extra information to be displayed at the end
 	virtual QString getInfoStringExtra(const StelCore *core, const InfoStringGroup& flags) const Q_DECL_OVERRIDE;
 
+	virtual QString getDiscoveryCircumstances() const Q_DECL_OVERRIDE;
+
 private:
 	int minorPlanetNumber;
 	float  slopeParameter; // This is G from the H, G system for computation of apparent magnitude.
@@ -124,8 +126,6 @@ private:
 	// Discovery data
 	QString discoverer;
 	QString discoveryDate;
-
-	QString getDiscoveryCircumstances() const;
 };
 
 #endif // MINORPLANET_HPP

@@ -103,17 +103,6 @@ void MinorPlanet::setColorIndexBV(float bv)
 	b_v = bv;
 }
 
-QString MinorPlanet::getDiscoveryCircumstances() const
-{
-	QString ddate = discoveryDate; // YYYY
-	QStringList date = discoveryDate.split("-");
-	if (date.count()==3) // YYYY-MM-DD
-		ddate = QString("%1 %2 %3").arg(QString::number(date.at(2).toInt()), StelLocaleMgr::longGenitiveMonthName(date.at(1).toInt()), date.at(0));
-	if (date.count()==2) // YYYY-MM
-		ddate = QString("%1 %2").arg(StelLocaleMgr::longMonthName(date.at(1).toInt()), date.at(0));
-	return QString("%1 (%2)").arg(discoverer, ddate);
-}
-
 void MinorPlanet::setMinorPlanetNumber(int number)
 {
 	if (minorPlanetNumber)
@@ -210,10 +199,24 @@ QString MinorPlanet::getInfoStringExtra(const StelCore *core, const InfoStringGr
 			oss << QString("%1: %2<br/>").arg(q_("SMASSII spectral type"), specB);
 		}		
 
-		if (!discoverer.isEmpty() && !discoveryDate.isEmpty())
-			oss << QString("%1: %2<br/>").arg(q_("Discoverer"), getDiscoveryCircumstances());
+		if (!discoveryDate.isEmpty())
+			oss << QString("%1: %2<br/>").arg(q_("Discovered"), getDiscoveryCircumstances());
 	}
 	return str;
+}
+
+QString MinorPlanet::getDiscoveryCircumstances() const
+{
+	QString ddate = discoveryDate; // YYYY
+	QStringList date = discoveryDate.split("-");
+	if (date.count()==3) // YYYY-MM-DD
+		ddate = QString("%1 %2 %3").arg(QString::number(date.at(2).toInt()), StelLocaleMgr::longGenitiveMonthName(date.at(1).toInt()), date.at(0));
+	if (date.count()==2) // YYYY-MM
+		ddate = QString("%1 %2").arg(StelLocaleMgr::longMonthName(date.at(1).toInt()), date.at(0));
+	if (discoverer.isEmpty())
+		return ddate;
+	else
+		return QString("%1 (%2)").arg(ddate, discoverer);
 }
 
 double MinorPlanet::getSiderealPeriod() const

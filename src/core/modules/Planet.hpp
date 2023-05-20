@@ -662,6 +662,8 @@ protected:
 	//! Any flag=Extra information to be displayed at the end
 	virtual QString getInfoStringExtra(const StelCore *core, const InfoStringGroup& flags) const;
 
+	virtual QString getDiscoveryCircumstances() const;
+
 protected:
 	struct PlanetOBJModel
 	{
@@ -845,7 +847,6 @@ private:
 
 	const QString getContextString() const;
 	QPair<double, double> getLunarEclipseMagnitudes() const;
-	QString getDiscoveryCircumstances() const;
 
 	// Shader-related variables
 	struct PlanetShaderVars {
