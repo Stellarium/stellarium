@@ -142,6 +142,13 @@ const QMap<Planet::PlanetType, QString> Planet::pTypeMap = // Maps type to engli
 	{ Planet::isUNDEFINED,	"UNDEFINED" } // something must be broken before we ever see this!
 };
 
+const QMap<QString, QString> Planet::nPlanetMap =
+{
+	{ "E", "Earth" },	{ "M", "Mars" },	{ "J", "Jupiter" },
+	{ "S", "Saturn" },	{ "U", "Uranus" },	{ "N", "Neptune" },
+	{ "P", "(134340) Pluto" }
+};
+
 const QMap<Planet::ApparentMagnitudeAlgorithm, QString> Planet::vMagAlgorithmMap =
 {
 	{Planet::MallamaHilton_2018,	        "Mallama2018"},
@@ -416,15 +423,26 @@ void Planet::setIAUMoonNumber(QString designation)
 QString Planet::getEnglishName() const
 {
 	if (!iauMoonNumber.isEmpty())
-		return QString("%1 (%2)").arg(englishName, iauMoonNumber);
+		return QString("(%1) %2").arg(iauMoonNumber, englishName);
 	else
 		return englishName;
+}
+
+QString Planet::getIAUDesignation() const
+{
+	if (iauMoonNumber.isEmpty())
+		return QString();
+	else
+	{
+		QString prefix = iauMoonNumber.mid(0, 1).trimmed();
+		return QString("%1 %2").arg(nPlanetMap.value(prefix), iauMoonNumber.mid(1).trimmed());
+	}
 }
 
 QString Planet::getNameI18n() const
 {
 	if (!iauMoonNumber.isEmpty())
-		return QString("%1 (%2)").arg(nameI18, iauMoonNumber);
+		return QString("(%1) %2").arg(iauMoonNumber, nameI18);
 	else
 		return nameI18;
 }
@@ -519,11 +537,6 @@ QString Planet::getPlanetLabel() const
 		}
 	}
 
-	oss.setRealNumberNotation(QTextStream::FixedNotation);
-	oss.setRealNumberPrecision(1);
-	if (sphereScale != 1.)
-		oss << QString::fromUtf8(" (\xC3\x97") << sphereScale << ")";
-
 	return str;
 }
 
@@ -532,7 +545,18 @@ QString Planet::getInfoStringName(const StelCore *core, const InfoStringGroup& f
 	Q_UNUSED(core) Q_UNUSED(flags)
 	QString str;
 	QTextStream oss(&str);
-	oss << "<h2>" << getPlanetLabel() << "</h2>";
+	oss << "<h2>" << getPlanetLabel();
+
+	QString iau = getIAUDesignation();
+	if (!iau.isEmpty())
+		oss << QString(" (%1)").arg(iau);
+
+	oss.setRealNumberNotation(QTextStream::FixedNotation);
+	oss.setRealNumberPrecision(1);
+	if (sphereScale != 1.)
+		oss << QString::fromUtf8(" (\xC3\x97") << sphereScale << ")";
+
+	oss << "</h2>";
 	return str;
 }
 

@@ -67,6 +67,8 @@ public:
 	virtual void translateName(const StelTranslator& trans) Q_DECL_OVERRIDE;
 	virtual QString getEnglishName(void) const Q_DECL_OVERRIDE;
 	virtual QString getNameI18n(void) const Q_DECL_OVERRIDE;
+	//! gets an IAU provisional designation.
+	virtual QString getIAUDesignation() const { return iauDesignationText; }
 
 	//! set the minor planet's number, if any.
 	//! The number should be specified as an additional parameter, as
@@ -77,9 +79,6 @@ public:
 
 	//! sets an IAU provisional designation.
 	void setIAUDesignation(QString designation);
-
-	//! gets an IAU provisional designation.
-	QString getIAUDesignation() { return iauDesignationText; }
 
 	//! sets absolute magnitude (H) and slope parameter (G).
 	//! These are the parameters in the IAU's two-parameter magnitude system

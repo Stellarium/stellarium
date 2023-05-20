@@ -1074,6 +1074,12 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			QString iauDesignation = pd.value(secname+"/iau_designation", "").toString();
 			if (!iauDesignation.isEmpty())
 				mp->setIAUDesignation(iauDesignation);
+			QString discoveryCode = pd.value(secname+"/discovery_code", "").toString();
+			if (!discoveryCode.isEmpty())
+				mp->setDiscoveryCode(discoveryCode);
+			QString perihelionCode = pd.value(secname+"/perihelion_code", "").toString();
+			if (!perihelionCode.isEmpty())
+				mp->setPerihelionCode(perihelionCode);
 
 			systemMinorBodies.push_back(newP);
 		}
@@ -1633,35 +1639,16 @@ void SolarSystem::fillEphemerisDates()
 	}
 }
 
-// a wrapper for getting an IAU designations of minor bodies
-QString SolarSystem::getIAUDesignation(PlanetP minorBody) const
-{
-	QString iau;
-	if (minorBody->getPlanetType()==Planet::isComet)
-	{
-		QSharedPointer<Comet> mp = minorBody.dynamicCast<Comet>();
-		iau = mp->getIAUDesignation();
-	}
-	else
-	{
-		QSharedPointer<MinorPlanet> mp = minorBody.dynamicCast<MinorPlanet>();
-		iau = mp->getIAUDesignation();
-	}
-	return iau;
-}
-
 PlanetP SolarSystem::searchByEnglishName(QString planetEnglishName) const
 {
 	for (const auto& p : systemPlanets)
 	{
 		if (p->getEnglishName().toUpper() == planetEnglishName.toUpper() || p->getCommonEnglishName().toUpper() == planetEnglishName.toUpper())
 			return p;
-	}
-	// IAU designation?
-	for (const auto& p : systemMinorBodies)
-	{
-		QString pd = getIAUDesignation(p);
-		if (!pd.isEmpty() && pd.toUpper()==planetEnglishName.toUpper())
+
+		// IAU designation?
+		QString iau = p->getIAUDesignation();
+		if (!iau.isEmpty() && iau.toUpper()==planetEnglishName.toUpper())
 			return p;
 	}
 	return PlanetP();
@@ -1669,15 +1656,14 @@ PlanetP SolarSystem::searchByEnglishName(QString planetEnglishName) const
 
 PlanetP SolarSystem::searchMinorPlanetByEnglishName(QString planetEnglishName) const
 {
-	QString pd;
 	for (const auto& p : systemMinorBodies)
 	{
 		if (p->getCommonEnglishName().toUpper() == planetEnglishName.toUpper() || p->getEnglishName().toUpper() == planetEnglishName.toUpper())
 			return p;
 
-		// IAU designations
-		pd = getIAUDesignation(p);
-		if (!pd.isEmpty() && pd.toUpper()==planetEnglishName.toUpper())
+		// IAU designation?
+		QString iau = p->getIAUDesignation();
+		if (!iau.isEmpty() && iau.toUpper()==planetEnglishName.toUpper())
 			return p;
 	}
 	return PlanetP();
@@ -1703,12 +1689,10 @@ StelObjectP SolarSystem::searchByName(const QString& name) const
 		QString nativeName = p->getNativeName().toUpper();
 		if (p->getEnglishName().toUpper() == name.toUpper() || (!nativeName.isEmpty() && nativeName == name.toUpper()))
 			return qSharedPointerCast<StelObject>(p);
-	}
-	// IAU designation?
-	for (const auto& p : systemMinorBodies)
-	{
-		QString pd = getIAUDesignation(p);
-		if (!pd.isEmpty() && pd.toUpper()==name.toUpper())
+
+		// IAU designation?
+		QString iau = p->getIAUDesignation();
+		if (!iau.isEmpty() && iau.toUpper()==name.toUpper())
 			return qSharedPointerCast<StelObject>(p);
 	}
 	return StelObjectP();
@@ -2107,6 +2091,8 @@ QStringList SolarSystem::listAllObjects(bool inEnglish) const
 		for (const auto& p : systemPlanets)
 		{
 			result << p->getEnglishName();
+			if (!p->getIAUDesignation().isEmpty())
+				result << p->getIAUDesignation();
 		}
 	}
 	else
@@ -2116,15 +2102,9 @@ QStringList SolarSystem::listAllObjects(bool inEnglish) const
 			result << p->getNameI18n();
 			if (!p->getNativeNameI18n().isEmpty())
 				result << p->getNativeNameI18n() << p->getNativeName();
+			if (!p->getIAUDesignation().isEmpty())
+				result << p->getIAUDesignation();
 		}
-	}
-	// IAU designations
-	QString pd;
-	for (const auto& p : systemMinorBodies)
-	{
-		pd = getIAUDesignation(p);
-		if (!pd.isEmpty())
-			result << pd;
 	}
 	return result;
 }
@@ -2137,7 +2117,11 @@ QStringList SolarSystem::listAllObjectsByType(const QString &objType, bool inEng
 		for (const auto& p : systemPlanets)
 		{
 			if (p->getObjectType()==objType)
+			{
 				result << p->getEnglishName();
+				if (!p->getIAUDesignation().isEmpty())
+					result << p->getIAUDesignation();
+			}
 		}
 	}
 	else
@@ -2145,18 +2129,11 @@ QStringList SolarSystem::listAllObjectsByType(const QString &objType, bool inEng
 		for (const auto& p : systemPlanets)
 		{
 			if (p->getObjectType()==objType)
+			{
 				result << p->getNameI18n();
-		}
-	}
-	// IAU designations
-	QString pd;
-	for (const auto& p : systemMinorBodies)
-	{
-		if (p->getObjectType()==objType)
-		{
-			pd = getIAUDesignation(p);
-			if (!pd.isEmpty())
-				result << pd;
+				if (!p->getIAUDesignation().isEmpty())
+					result << p->getIAUDesignation();
+			}
 		}
 	}
 	return result;

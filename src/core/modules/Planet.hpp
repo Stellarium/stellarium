@@ -263,6 +263,7 @@ public:
 	virtual Vec3d getJ2000EquatorialPos(const StelCore *core) const Q_DECL_OVERRIDE;
 	virtual QString getEnglishName(void) const Q_DECL_OVERRIDE;
 	virtual QString getNameI18n(void) const Q_DECL_OVERRIDE;
+	virtual QString getIAUDesignation(void) const;
 	QString getNativeName(void) const { return nativeName; }
 	QString getNativeNameI18n(void) const { return nativeNameMeaningI18n; }
 	QString getCommonEnglishName(void) const {return englishName;}
@@ -814,6 +815,7 @@ protected:
 	static Vec3f labelColor;
 	static StelTextureSP hintCircleTex;
 	static const QMap<PlanetType, QString> pTypeMap; // Maps fast type to english name.
+	static const QMap<QString, QString> nPlanetMap; // Maps fast IAU number to IAU designation.
 	static const QMap<ApparentMagnitudeAlgorithm, QString> vMagAlgorithmMap;
 	static bool drawMoonHalo;
 	static bool drawSunHalo;

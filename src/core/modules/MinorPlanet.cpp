@@ -171,7 +171,7 @@ QString MinorPlanet::getInfoStringName(const StelCore *core, const InfoStringGro
 	else
 		oss << getNameI18n();  // UI translation can differ from sky translation
 	if (!nameIsIAUDesignation && !iauDesignationHtml.isEmpty())
-		oss << QString(" - %1").arg(iauDesignationHtml);
+		oss << QString(" (%1)").arg(iauDesignationHtml);
 
 	oss.setRealNumberNotation(QTextStream::FixedNotation);
 	oss.setRealNumberPrecision(1);

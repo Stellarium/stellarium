@@ -1024,9 +1024,6 @@ private:
 	//! Load planet data from the given file
 	bool loadPlanets(const QString& filePath);
 
-	//! Get an IAU designation of minor body
-	QString getIAUDesignation(PlanetP minorBody) const;
-
 	Vec3f getEphemerisMarkerColor(int index) const;
 
 	//! Calculate a color of Solar system bodies

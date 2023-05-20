@@ -88,6 +88,8 @@ Comet::Comet(const QString& englishName,
 	  slopeParameter(-10.f), // -10 == uninitialized: used in getVMagnitude()
 	  isCometFragment(false),
 	  iauDesignation(""),
+	  discoveryCode(""),
+	  perihelionCode(""),
 	  tailFactors(-1., -1.), // mark "invalid"
 	  tailActive(false),
 	  tailBright(false),
@@ -141,8 +143,15 @@ QString Comet::getInfoStringName(const StelCore *core, const InfoStringGroup& fl
 
 	oss << "<h2>";
 	oss << getNameI18n(); // UI translation can differ from sky translation
+
+	QStringList designations;
 	if (!iauDesignation.isEmpty())
-		oss << QString(" - %1").arg(iauDesignation);
+		designations << iauDesignation;
+	if (!perihelionCode.isEmpty())
+		designations << perihelionCode;
+	if (!discoveryCode.isEmpty())
+		designations << discoveryCode;
+	oss << QString(" (%1)").arg(designations.join(" - "));
 
 	oss.setRealNumberNotation(QTextStream::FixedNotation);
 	oss.setRealNumberPrecision(1);
