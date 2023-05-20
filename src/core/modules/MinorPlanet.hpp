@@ -68,7 +68,7 @@ public:
 	virtual QString getEnglishName(void) const Q_DECL_OVERRIDE;
 	virtual QString getNameI18n(void) const Q_DECL_OVERRIDE;
 	//! gets an IAU provisional designation.
-	virtual QString getIAUDesignation() const { return iauDesignationText; }
+	virtual QString getIAUDesignation() const Q_DECL_OVERRIDE { return iauDesignationText; }
 
 	//! set the minor planet's number, if any.
 	//! The number should be specified as an additional parameter, as

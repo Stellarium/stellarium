@@ -78,7 +78,7 @@ public:
 	virtual QString getEnglishName(void) const Q_DECL_OVERRIDE {return englishName;}
 	virtual QString getNameI18n(void) const Q_DECL_OVERRIDE {return nameI18;}
 	//! gets an IAU designation.
-	virtual QString getIAUDesignation() const { return iauDesignation; }
+	virtual QString getIAUDesignation() const Q_DECL_OVERRIDE { return iauDesignation; }
 
 	//! \brief sets absolute magnitude and slope parameter.
 	//! These are the parameters in the IAU's two-parameter magnitude system
@@ -90,11 +90,11 @@ public:
 	//! sets an IAU designation.
 	void setIAUDesignation(QString designation) { iauDesignation = designation; }
 
-	//! sets a discovery code of the comet.
-	void setDiscoveryCode(QString code) { discoveryCode = code; }
+	//! sets a date, discovery and perihelion codes of the comet.
+	void setCometCodes(QStringList codes) { cometCodes = codes; }
 
-	//! sets a perihelion code of the comet.
-	void setPerihelionCode(QString code) { perihelionCode = code; }
+	//! get list of comet codes
+	QStringList getCometCodes() const { return cometCodes; }
 
 	//! get sidereal period for comet, days, or returns 0 if not possible (parabolic, hyperbolic orbit)
 	virtual double getSiderealPeriod() const Q_DECL_OVERRIDE;
@@ -140,8 +140,7 @@ private:
 	float slopeParameter;
 	bool isCometFragment;
 	QString iauDesignation;
-	QString discoveryCode;
-	QString perihelionCode;
+	QStringList cometCodes;
 
 	//GZ Tail additions
 	Vec2f tailFactors; // result of latest call to getComaDiameterAndTailLengthAU(); Results cached here for infostring. [0]=Coma diameter, [1] gas tail length.

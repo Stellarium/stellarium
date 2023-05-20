@@ -1366,6 +1366,7 @@ bool SolarSystemEditor::updateSolarSystemConfigurationFile(QList<SsoElements> ob
 			updateSsoProperty(solarSystem, object, "minor_planet_number");
 			updateSsoProperty(solarSystem, object, "iau_designation");
 			// Comet codes
+			updateSsoProperty(solarSystem, object, "date_code");
 			updateSsoProperty(solarSystem, object, "discovery_code");
 			updateSsoProperty(solarSystem, object, "perihelion_code");
 			// Discovery Circumstances
