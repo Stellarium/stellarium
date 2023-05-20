@@ -1066,24 +1066,19 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			QSharedPointer<Comet> mp = newP.dynamicCast<Comet>();
 
 			//g,k magnitude system
-			const float magnitude = pd.value(secname+"/absolute_magnitude", -99).toFloat();
+			const float magnitude = pd.value(secname+"/absolute_magnitude", -99.f).toFloat();
 			const float slope = qBound(-5.0f, pd.value(secname+"/slope_parameter", 4.0f).toFloat(), 30.0f);
-			if (magnitude > -99)
+			if (magnitude > -99.f)
 					mp->setAbsoluteMagnitudeAndSlope(magnitude, slope);
 
 			QString iauDesignation = pd.value(secname+"/iau_designation", "").toString();
 			if (!iauDesignation.isEmpty())
 				mp->setIAUDesignation(iauDesignation);
-			QStringList codes; // order of codes: date_code [P/1982 U1] - perihelion_code [1986 III] - discovery_code [1982i]
-			QString code = pd.value(secname+"/date_code", "").toString();
-			if (!code.isEmpty())
-				codes << code;
-			code = pd.value(secname+"/perihelion_code", "").toString();
-			if (!code.isEmpty())
-				codes << code;
-			code = pd.value(secname+"/discovery_code", "").toString();
-			if (!code.isEmpty())
-				codes << code;
+			// order of codes: date_code [P/1982 U1] - perihelion_code [1986 III] - discovery_code [1982i]
+			QStringList codes = { pd.value(secname+"/date_code", "").toString(),
+					      pd.value(secname+"/perihelion_code", "").toString(),
+					      pd.value(secname+"/discovery_code", "").toString() };
+			codes.removeAll("");
 			if (codes.count()>0)
 				mp->setCometCodes(codes);
 
