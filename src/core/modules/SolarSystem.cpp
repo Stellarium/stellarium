@@ -1074,14 +1074,14 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			QString iauDesignation = pd.value(secname+"/iau_designation", "").toString();
 			if (!iauDesignation.isEmpty())
 				mp->setIAUDesignation(iauDesignation);
-			QStringList codes;
+			QStringList codes; // order of codes: date_code [P/1982 U1] - perihelion_code [1986 III] - discovery_code [1982i]
 			QString code = pd.value(secname+"/date_code", "").toString();
 			if (!code.isEmpty())
 				codes << code;
-			code = pd.value(secname+"/discovery_code", "").toString();
+			code = pd.value(secname+"/perihelion_code", "").toString();
 			if (!code.isEmpty())
 				codes << code;
-			code = pd.value(secname+"/perihelion_code", "").toString();
+			code = pd.value(secname+"/discovery_code", "").toString();
 			if (!code.isEmpty())
 				codes << code;
 			if (codes.count()>0)
