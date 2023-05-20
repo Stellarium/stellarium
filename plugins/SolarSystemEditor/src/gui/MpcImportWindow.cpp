@@ -157,9 +157,7 @@ void MpcImportWindow::updateTexts()
 	QString asteroidQuery("<tt>Halley</tt>");
 	QString asteroidName("(2688) Halley");
 	QString nameWarning(q_("Comet <i>names</i> need to be prefixed with %1 or %2. If more than one comet matches a name, only the first result will be returned. For example, searching for \"%3\" will return %4, Halley's Comet, but a search for \"%5\" will return the asteroid %6."));
-	QString thirdLine = QString(nameWarning).arg(cPrefix, pPrefix, cometQuery,
-	                                             cometName, asteroidQuery,
-	                                             asteroidName);
+	QString thirdLine = QString(nameWarning).arg(cPrefix, pPrefix, cometQuery, cometName, asteroidQuery, asteroidName);
 	ui->labelQueryInstructions->setText(QString("%1<br/>%2<br/>%3").arg(firstLine, secondLine, thirdLine));
 }
 

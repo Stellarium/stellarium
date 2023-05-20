@@ -1037,7 +1037,7 @@ SsoElements SolarSystemEditor::readMpcOneLineMinorPlanetElements(QString oneLine
 	result.insert("radius", radius);
 
 	DiscoveryCircumstances dc = numberedMinorPlanets.value(minorPlanetNumber, DiscoveryCircumstances("",""));
-	if (!dc.first.isEmpty() && !dc.second.isEmpty())
+	if (!dc.first.isEmpty())
 	{
 		result.insert("discovery", dc.first);
 		result.insert("discoverer", dc.second);
@@ -1367,8 +1367,8 @@ bool SolarSystemEditor::updateSolarSystemConfigurationFile(QList<SsoElements> ob
 			updateSsoProperty(solarSystem, object, "iau_designation");
 			// Comet codes
 			updateSsoProperty(solarSystem, object, "date_code");
-			updateSsoProperty(solarSystem, object, "discovery_code");
 			updateSsoProperty(solarSystem, object, "perihelion_code");
+			updateSsoProperty(solarSystem, object, "discovery_code");
 			// Discovery Circumstances
 			updateSsoProperty(solarSystem, object, "discovery");
 			updateSsoProperty(solarSystem, object, "discoverer");
