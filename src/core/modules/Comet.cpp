@@ -151,7 +151,8 @@ QString Comet::getInfoStringName(const StelCore *core, const InfoStringGroup& fl
 		designations << iauDesignation;
 	if (getCometCodes().count()>0)
 		designations << getCometCodes();
-	oss << QString(" (%1)").arg(designations.join(" - "));
+	if (designations.count()>0)
+		oss << QString(" (%1)").arg(designations.join(" - "));
 
 	oss.setRealNumberNotation(QTextStream::FixedNotation);
 	oss.setRealNumberPrecision(1);

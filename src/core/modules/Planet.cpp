@@ -555,9 +555,8 @@ QString Planet::getInfoStringName(const StelCore *core, const InfoStringGroup& f
 	QTextStream oss(&str);
 	oss << "<h2>" << getPlanetLabel();
 
-	QString iau = getIAUDesignation();
-	if (!iau.isEmpty())
-		oss << QString(" (%1)").arg(iau);
+	if (!iauMoonNumber.isEmpty())
+		oss << QString(" (%1)").arg(getIAUDesignation());
 
 	oss.setRealNumberNotation(QTextStream::FixedNotation);
 	oss.setRealNumberPrecision(1);
