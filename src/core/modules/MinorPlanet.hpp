@@ -78,7 +78,7 @@ public:
 	void setMinorPlanetNumber(int number);
 
 	//! sets an IAU provisional designation.
-	void setIAUDesignation(QString designation);
+	void setIAUDesignation(const QString& designation);
 
 	//! sets absolute magnitude (H) and slope parameter (G).
 	//! These are the parameters in the IAU's two-parameter magnitude system
@@ -92,7 +92,7 @@ public:
 	static QString renderIAUDesignationinHtml(const QString& plainText);
 
 	//! set values for spectral types
-	void setSpectralType(QString sT="", QString sB="");
+	void setSpectralType(const QString& sT, const QString& sB);
 
 	//! set value for color index B-V
 	void setColorIndexBV(float bv=99.f);
@@ -100,7 +100,7 @@ public:
 	//! set the discovery circumstances of minor body
 	//! @param date of discovery
 	//! @param name of discoverer
-	void setDiscoveryData(QString date, QString name) { discoveryDate = date; discoverer = name; }
+	void setDiscoveryData(const QString& date, const QString& name) { discoveryDate = date; discoverer = name; }
 
 	//! get sidereal period for minor planet
 	virtual double getSiderealPeriod() const Q_DECL_OVERRIDE;

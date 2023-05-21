@@ -412,7 +412,7 @@ void Planet::translateName(const StelTranslator& trans)
 	nativeNameMeaningI18n = (!nativeNameMeaning.isEmpty() ? trans.qtranslate(nativeNameMeaning) : "");
 }
 
-void Planet::setIAUMoonNumber(QString designation)
+void Planet::setIAUMoonNumber(const QString &designation)
 {
 	if (!iauMoonNumber.isEmpty())
 		return;

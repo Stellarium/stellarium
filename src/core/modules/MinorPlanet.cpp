@@ -92,7 +92,7 @@ MinorPlanet::~MinorPlanet()
 	//Do nothing for the moment
 }
 
-void MinorPlanet::setSpectralType(QString sT, QString sB)
+void MinorPlanet::setSpectralType(const QString &sT, const QString &sB)
 {
 	specT = sT;
 	specB = sB;
@@ -123,7 +123,7 @@ void MinorPlanet::setAbsoluteMagnitudeAndSlope(const float magnitude, const floa
 	slopeParameter = slope;
 }
 
-void MinorPlanet::setIAUDesignation(QString designation)
+void MinorPlanet::setIAUDesignation(const QString &designation)
 {
 	//TODO: This feature has to be implemented better, anyway.
 	if (!designation.isEmpty())

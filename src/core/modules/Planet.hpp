@@ -328,7 +328,7 @@ public:
 	void setNativeNameMeaning(QString planet) { nativeNameMeaning = planet; }
 
 	//! set the IAU moon number (designation of the moon), if any.
-	void setIAUMoonNumber(QString designation);
+	void setIAUMoonNumber(const QString& designation);
 
 	//! set value for color index B-V
 	void setColorIndexBV(float bv=99.f);
@@ -336,7 +336,7 @@ public:
 	//! set the discovery circumstances of celestial body
 	//! @param date of discovery
 	//! @param name of discoverer
-	void setDiscoveryData(QString date, QString name) { discoveryDate = date; discoverer = name; }
+	void setDiscoveryData(const QString& date, const QString& name) { discoveryDate = date; discoverer = name; }
 
 	//! Return the absolute magnitude (read from file ssystem.ini)
 	float getAbsoluteMagnitude() const {return absoluteMagnitude;}

@@ -88,7 +88,7 @@ public:
 	void setAbsoluteMagnitudeAndSlope(const float magnitude, const float slope);
 
 	//! sets an IAU designation.
-	void setIAUDesignation(QString designation) { iauDesignation = designation; }
+	void setIAUDesignation(const QString& designation) { iauDesignation = designation; }
 
 	//! sets a date, discovery and perihelion codes of the comet.
 	void setCometCodes(QStringList codes) { cometCodes = codes; }
@@ -96,7 +96,7 @@ public:
 	//! set the discovery circumstances of comet
 	//! @param date of discovery
 	//! @param name of discoverer
-	void setDiscoveryData(QString date, QString name) { discoveryDate = date; discoverer = name; }
+	void setDiscoveryData(const QString& date, const QString& name) { discoveryDate = date; discoverer = name; }
 
 	//! get list of comet codes
 	QStringList getCometCodes() const { return cometCodes; }
