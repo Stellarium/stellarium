@@ -89,7 +89,7 @@ public:
 	void setAbsoluteMagnitudeAndSlope(const float magnitude, const float slope);
 
 	//! renders the subscript in a minor planet IAU provisional designation with HTML.
-	static QString renderIAUDesignationinHtml(QString plainText);
+	static QString renderIAUDesignationinHtml(const QString& plainText);
 
 	//! set values for spectral types
 	void setSpectralType(QString sT="", QString sB="");
