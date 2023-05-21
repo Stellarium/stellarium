@@ -430,17 +430,12 @@ QString Planet::getEnglishName() const
 
 QString Planet::getIAUDesignation() const
 {
-	if (pType==Planet::isPlanet)
-		return getCommonEnglishName();
+	if (iauMoonNumber.isEmpty())
+		return QString();
 	else
 	{
-		if (iauMoonNumber.isEmpty())
-			return QString();
-		else
-		{
-			QString prefix = iauMoonNumber.mid(0, 1).trimmed();
-			return QString("%1 %2").arg(nPlanetMap.value(prefix), iauMoonNumber.mid(1).trimmed());
-		}
+		QString prefix = iauMoonNumber.mid(0, 1).trimmed();
+		return QString("%1 %2").arg(nPlanetMap.value(prefix), iauMoonNumber.mid(1).trimmed());
 	}
 }
 
@@ -555,8 +550,10 @@ QString Planet::getInfoStringName(const StelCore *core, const InfoStringGroup& f
 	QTextStream oss(&str);
 	oss << "<h2>" << getPlanetLabel();
 
-	if (!iauMoonNumber.isEmpty())
-		oss << QString(" (%1)").arg(getIAUDesignation());
+	// NOTE: currently only moons have an IAU designation
+	QString iau = getIAUDesignation();
+	if (!iau.isEmpty())
+		oss << QString(" (%1)").arg(iau);
 
 	oss.setRealNumberNotation(QTextStream::FixedNotation);
 	oss.setRealNumberPrecision(1);
