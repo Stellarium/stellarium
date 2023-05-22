@@ -89,7 +89,7 @@ Comet::Comet(const QString& englishName,
 	  slopeParameter(-10.f), // -10 == uninitialized: used in getVMagnitude()
 	  isCometFragment(false),
 	  iauDesignation(""),
-	  cometCodes(),
+	  extraDesignations(),
 	  discoverer(""),
 	  discoveryDate(""),
 	  tailFactors(-1., -1.), // mark "invalid"
@@ -149,8 +149,8 @@ QString Comet::getInfoStringName(const StelCore *core, const InfoStringGroup& fl
 	QStringList designations;
 	if (!iauDesignation.isEmpty())
 		designations << iauDesignation;
-	if (getCometCodes().count()>0)
-		designations << getCometCodes();
+	if (getExtraDesignations().count()>0)
+		designations << getExtraDesignations();
 	if (designations.count()>0)
 		oss << QString(" (%1)").arg(designations.join(" - "));
 

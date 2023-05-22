@@ -91,7 +91,7 @@ public:
 	void setIAUDesignation(const QString& designation) { iauDesignation = designation; }
 
 	//! sets a date, discovery and perihelion codes of the comet.
-	void setCometCodes(QStringList codes) { cometCodes = codes; }
+	void setExtraDesignations(QStringList codes) { extraDesignations = codes; }
 
 	//! set the discovery circumstances of comet
 	//! @param date of discovery
@@ -99,7 +99,7 @@ public:
 	void setDiscoveryData(const QString& date, const QString& name) { discoveryDate = date; discoverer = name; }
 
 	//! get list of comet codes
-	QStringList getCometCodes() const { return cometCodes; }
+	QStringList getExtraDesignations() const { return extraDesignations; }
 
 	//! get sidereal period for comet, days, or returns 0 if not possible (parabolic, hyperbolic orbit)
 	virtual double getSiderealPeriod() const Q_DECL_OVERRIDE;
@@ -147,7 +147,7 @@ private:
 	float slopeParameter;
 	bool isCometFragment;
 	QString iauDesignation;
-	QStringList cometCodes;
+	QStringList extraDesignations;
 	// Discovery data
 	QString discoverer;
 	QString discoveryDate;

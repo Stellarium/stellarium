@@ -102,6 +102,12 @@ public:
 	//! @param name of discoverer
 	void setDiscoveryData(const QString& date, const QString& name) { discoveryDate = date; discoverer = name; }
 
+	//! sets a possible date, discovery and perihelion codes of the minor planets (A/ and I/ objects).
+	void setExtraDesignations(QStringList codes) { extraDesignations = codes; }
+
+	//! get list of comet codes
+	QStringList getExtraDesignations() const { return extraDesignations; }
+
 	//! get sidereal period for minor planet
 	virtual double getSiderealPeriod() const Q_DECL_OVERRIDE;
 
@@ -121,6 +127,7 @@ private:
 	bool nameIsIAUDesignation;
 	QString iauDesignationHtml;
 	QString iauDesignationText;
+	QStringList extraDesignations;
 	QString properName;
 
 	float b_v;

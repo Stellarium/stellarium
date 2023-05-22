@@ -1033,6 +1033,14 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			if (!discoveryDate.isEmpty())
 				mp->setDiscoveryData(discoveryDate, discovererName);
 
+			// order of codes: date_code [P/1982 U1] - perihelion_code [1986 III] - discovery_code [1982i]
+			QStringList codes = { pd.value(secname+"/date_code", "").toString(),
+					      pd.value(secname+"/perihelion_code", "").toString(),
+					      pd.value(secname+"/discovery_code", "").toString() };
+			codes.removeAll("");
+			if (codes.count()>0)
+				mp->setExtraDesignations(codes);
+
 			if (semi_major_axis>0)
 				mp->deltaJDE = 2.0*semi_major_axis*StelCore::JD_SECOND;
 			 else if ((semi_major_axis<=0.0) && (type!="interstellar object"))
@@ -1080,7 +1088,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 					      pd.value(secname+"/discovery_code", "").toString() };
 			codes.removeAll("");
 			if (codes.count()>0)
-				mp->setCometCodes(codes);
+				mp->setExtraDesignations(codes);
 
 			// Discovery circumstances
 			QString discovererName = pd.value(secname+"/discoverer", "").toString();
@@ -1657,17 +1665,23 @@ PlanetP SolarSystem::searchByEnglishName(QString planetEnglishName) const
 		QString iau = p->getIAUDesignation();
 		if (!iau.isEmpty() && iau.toUpper()==planetEnglishName.toUpper())
 			return p;
-
+	}
+	for (const auto& p : systemMinorBodies)
+	{
+		QStringList c;
 		// other comet designations?
 		if (p->getPlanetType()==Planet::isComet)
 		{
 			QSharedPointer<Comet> mp = p.dynamicCast<Comet>();
-			QStringList c = mp->getCometCodes();
-			for (const auto& d : c)
-			{
-				if (d.toUpper()==planetEnglishName.toUpper())
-					return p;
-			}
+			c = mp->getExtraDesignations();
+		} else {
+			QSharedPointer<MinorPlanet> mp = p.dynamicCast<MinorPlanet>();
+			c = mp->getExtraDesignations();
+		}
+		for (const auto& d : c)
+		{
+			if (d.toUpper()==planetEnglishName.toUpper())
+				return p;
 		}
 	}
 	return PlanetP();
@@ -1685,16 +1699,22 @@ PlanetP SolarSystem::searchMinorPlanetByEnglishName(QString planetEnglishName) c
 		if (!iau.isEmpty() && iau.toUpper()==planetEnglishName.toUpper())
 			return p;
 
+		QStringList c;
 		// other comet designations?
 		if (p->getPlanetType()==Planet::isComet)
 		{
 			QSharedPointer<Comet> mp = p.dynamicCast<Comet>();
-			QStringList c = mp->getCometCodes();
-			for (const auto& d : c)
-			{
-				if (d.toUpper()==planetEnglishName.toUpper())
-					return p;
-			}
+			c = mp->getExtraDesignations();
+		}
+		else
+		{
+			QSharedPointer<MinorPlanet> mp = p.dynamicCast<MinorPlanet>();
+			c = mp->getExtraDesignations();
+		}
+		for (const auto& d : c)
+		{
+			if (d.toUpper()==planetEnglishName.toUpper())
+				return p;
 		}
 	}
 	return PlanetP();
@@ -1725,18 +1745,28 @@ StelObjectP SolarSystem::searchByName(const QString& name) const
 		QString iau = p->getIAUDesignation();
 		if (!iau.isEmpty() && iau.toUpper()==name.toUpper())
 			return qSharedPointerCast<StelObject>(p);
+	}
+	for (const auto& p : systemMinorBodies)
+	{
+		QStringList c;
 		// other comet designations?
 		if (p->getPlanetType()==Planet::isComet)
 		{
 			QSharedPointer<Comet> mp = p.dynamicCast<Comet>();
-			QStringList c = mp->getCometCodes();
-			for (const auto& d : c)
-			{
-				if (d.toUpper()==name.toUpper())
-					return qSharedPointerCast<StelObject>(p);
-			}
+			c = mp->getExtraDesignations();
+		}
+		else
+		{
+			QSharedPointer<MinorPlanet> mp = p.dynamicCast<MinorPlanet>();
+			c = mp->getExtraDesignations();
+		}
+		for (const auto& d : c)
+		{
+			if (d.toUpper()==name.toUpper())
+				return qSharedPointerCast<StelObject>(p);
 		}
 	}
+
 	return StelObjectP();
 }
 
@@ -2135,13 +2165,6 @@ QStringList SolarSystem::listAllObjects(bool inEnglish) const
 			result << p->getEnglishName();
 			if (!p->getIAUDesignation().isEmpty())
 				result << p->getIAUDesignation();
-			if (p->getPlanetType()==Planet::isComet)
-			{
-				QSharedPointer<Comet> mp = p.dynamicCast<Comet>();
-				QStringList c = mp->getCometCodes();
-				if (c.count()>0)
-					result << c;
-			}
 		}
 	}
 	else
@@ -2153,14 +2176,22 @@ QStringList SolarSystem::listAllObjects(bool inEnglish) const
 				result << p->getNativeNameI18n() << p->getNativeName();
 			if (!p->getIAUDesignation().isEmpty())
 				result << p->getIAUDesignation();
-			if (p->getPlanetType()==Planet::isComet)
-			{
-				QSharedPointer<Comet> mp = p.dynamicCast<Comet>();
-				QStringList c = mp->getCometCodes();
-				if (c.count()>0)
-					result << c;
-			}
 		}
+	}
+	for (const auto& p : systemMinorBodies)
+	{
+		QStringList c;
+		// other comet designations?
+		if (p->getPlanetType()==Planet::isComet)
+		{
+			QSharedPointer<Comet> mp = p.dynamicCast<Comet>();
+			c = mp->getExtraDesignations();
+		} else {
+			QSharedPointer<MinorPlanet> mp = p.dynamicCast<MinorPlanet>();
+			c = mp->getExtraDesignations();
+		}
+		if (c.count()>0)
+			result << c;
 	}
 	return result;
 }
@@ -2177,13 +2208,6 @@ QStringList SolarSystem::listAllObjectsByType(const QString &objType, bool inEng
 				result << p->getEnglishName();
 				if (!p->getIAUDesignation().isEmpty())
 					result << p->getIAUDesignation();
-				if (p->getPlanetType()==Planet::isComet)
-				{
-					QSharedPointer<Comet> mp = p.dynamicCast<Comet>();
-					QStringList c = mp->getCometCodes();
-					if (c.count()>0)
-						result << c;
-				}
 			}
 		}
 	}
@@ -2196,14 +2220,25 @@ QStringList SolarSystem::listAllObjectsByType(const QString &objType, bool inEng
 				result << p->getNameI18n();
 				if (!p->getIAUDesignation().isEmpty())
 					result << p->getIAUDesignation();
-				if (p->getPlanetType()==Planet::isComet)
-				{
-					QSharedPointer<Comet> mp = p.dynamicCast<Comet>();
-					QStringList c = mp->getCometCodes();
-					if (c.count()>0)
-						result << c;
-				}
 			}
+		}
+	}
+	for (const auto& p : systemMinorBodies)
+	{
+		if (p->getObjectType()==objType)
+		{
+			QStringList c;
+			// other comet designations?
+			if (p->getPlanetType()==Planet::isComet)
+			{
+				QSharedPointer<Comet> mp = p.dynamicCast<Comet>();
+				c = mp->getExtraDesignations();
+			} else {
+				QSharedPointer<MinorPlanet> mp = p.dynamicCast<MinorPlanet>();
+				c = mp->getExtraDesignations();
+			}
+			if (c.count()>0)
+				result << c;
 		}
 	}
 	return result;

@@ -67,6 +67,7 @@ MinorPlanet::MinorPlanet(const QString& englishName,
 	slopeParameter(-10.0f), // -10 == mark as uninitialized: used in getVMagnitude()
 	nameIsIAUDesignation(false),
 	iauDesignationText(""),
+	extraDesignations(),
 	properName(englishName),
 	b_v(99.f),
 	specT(""),
@@ -159,8 +160,14 @@ QString MinorPlanet::getInfoStringName(const StelCore *core, const InfoStringGro
 	}
 	else
 		oss << getNameI18n();  // UI translation can differ from sky translation
+
+	QStringList designations;
 	if (!nameIsIAUDesignation && !iauDesignationHtml.isEmpty())
-		oss << QString(" (%1)").arg(iauDesignationHtml);
+		designations << iauDesignationHtml;
+	if (getExtraDesignations().count()>0)
+		designations << getExtraDesignations();
+	if (designations.count()>0)
+		oss << QString(" (%1)").arg(designations.join(" - "));
 
 	oss.setRealNumberNotation(QTextStream::FixedNotation);
 	oss.setRealNumberPrecision(1);
