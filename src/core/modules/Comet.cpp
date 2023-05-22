@@ -90,6 +90,7 @@ Comet::Comet(const QString& englishName,
 	  isCometFragment(false),
 	  iauDesignation(""),
 	  extraDesignations(),
+	  extraDesignationsHtml(),
 	  discoverer(""),
 	  discoveryDate(""),
 	  tailFactors(-1., -1.), // mark "invalid"
@@ -150,7 +151,7 @@ QString Comet::getInfoStringName(const StelCore *core, const InfoStringGroup& fl
 	if (!iauDesignation.isEmpty())
 		designations << iauDesignation;
 	if (getExtraDesignations().count()>0)
-		designations << getExtraDesignations();
+		designations << extraDesignationsHtml;
 	if (designations.count()>0)
 		oss << QString(" (%1)").arg(designations.join(" - "));
 
@@ -648,4 +649,27 @@ void Comet::computeParabola(const float parameter, const float radius, const flo
 	}
 	createTailIndices=false;
 	createTailTextureCoords=false;
+}
+
+void Comet::setExtraDesignations(QStringList codes)
+{
+	extraDesignations = codes;
+	for (const auto& c : codes)
+	{
+		extraDesignationsHtml << renderDiscoveryDesignationinHtml(c);
+	}
+}
+
+QString Comet::renderDiscoveryDesignationinHtml(const QString &plainTextName)
+{
+	static const QRegularExpression discoveryDesignationPattern("^(\\d{4}[a-z]{1})(\\d+)$");
+	QRegularExpressionMatch match=discoveryDesignationPattern.match(plainTextName);
+	if (plainTextName.indexOf(discoveryDesignationPattern) == 0)
+	{
+		QString main = match.captured(1);
+		QString suffix = match.captured(2);
+		return (QString("%1<sub>%2</sub>").arg(main, suffix));
+	}
+	else
+		return plainTextName;
 }

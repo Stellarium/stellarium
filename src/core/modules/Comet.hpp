@@ -91,7 +91,7 @@ public:
 	void setIAUDesignation(const QString& designation) { iauDesignation = designation; }
 
 	//! sets a date, discovery and perihelion codes of the comet.
-	void setExtraDesignations(QStringList codes) { extraDesignations = codes; }
+	void setExtraDesignations(QStringList codes);
 
 	//! set the discovery circumstances of comet
 	//! @param date of discovery
@@ -144,10 +144,14 @@ private:
 	//! @param xOffset for the dust tail, this may introduce a bend. Units are x per sqrt(z).
 	void computeParabola(const float parameter, const float topradius, const float zshift, QVector<Vec3d>& vertexArr, QVector<Vec2f>& texCoordArr, QVector<unsigned short>& indices, const float xOffset=0.0f);
 
+	//! renders the subscript in a comet discovery designation with HTML.
+	QString renderDiscoveryDesignationinHtml(const QString& plainText);
+
 	float slopeParameter;
 	bool isCometFragment;
 	QString iauDesignation;
 	QStringList extraDesignations;
+	QStringList extraDesignationsHtml;
 	// Discovery data
 	QString discoverer;
 	QString discoveryDate;
