@@ -137,6 +137,7 @@ void SolarSystemEditor::init()
 
 	loadPeriodicCometDesignators();
 	loadDiscoveryCircumstances();
+	loadCometData();
 
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(updateI18n()));
 	isInitialized = true;
@@ -466,6 +467,57 @@ QHash<QString,QString> SolarSystemEditor::listAllLoadedObjectsInFile(QString fil
 	return loadedObjects;
 }
 
+void SolarSystemEditor::loadCometData()
+{
+	cometsData.clear();
+
+	QFile cdata(":/SolarSystemEditor/comet_discovery.fab");
+	if(cdata.open(QFile::ReadOnly | QFile::Text))
+	{
+		// regular expression to find the comments and empty lines
+		static const QRegularExpression commentRx("^(\\s*#.*|\\s*)$");
+		static const QRegularExpression spacesRx("\\s+");
+		CometData comet;
+
+		while(!cdata.atEnd())
+		{
+			QString line = QString::fromUtf8(cdata.readLine());
+
+			// Skip comments
+			if (commentRx.match(line).hasMatch() || line.startsWith("//"))
+				continue;
+
+			// Find data
+			if (!line.isEmpty())
+			{
+				QStringList columns = line.split("|");
+				// [1] IAU designation or standard designation for periodic comets
+				QString designation = columns.at(0).trimmed();
+				// [2] IAU designation or date code for comets
+				QString date_code = columns.at(1).trimmed();
+				date_code.replace(spacesRx, " "); // remove extra spaces
+				// [3] perihelion code for comets
+				QString perihelion_code = columns.at(2).trimmed();
+				perihelion_code.replace(spacesRx, " "); // remove extra spaces
+				// [4] discovery code for comets
+				QString discovery_code = columns.at(3).trimmed();
+				// [5] discovery date for comets
+				QString discovery_date = columns.at(4).trimmed();
+				// [6] discoverer of comets
+				QString discoverer = columns.at(5).trimmed();
+
+				comet.date_code       = date_code;
+				comet.perihelion_code = perihelion_code;
+				comet.discovery_code  = discovery_code;
+				comet.discovery_date  = discovery_date;
+				comet.discoverer      = discoverer;
+				cometsData.insert(designation, comet);
+			}
+		}
+		cdata.close();
+	}
+}
+
 void SolarSystemEditor::loadPeriodicCometDesignators()
 {
 	periodicCometsIdentifiers.clear();
@@ -675,9 +727,34 @@ SsoElements SolarSystemEditor::readMpcOneLineCometElements(QString oneLineElemen
 		name.append(fragmentIndex); // .toUpper()); // TBD: really toUpper?
 	}
 	result.insert("name", name);
-	QString pd = periodicCometsIdentifiers.value(name.split("/").at(0).trimmed(), "");
-	if (!pd.isEmpty()) // add IAU designation in addition to the old-style designation
-		result.insert("iau_designation", pd);
+	QString key = name.split("/").at(0).trimmed();
+	CometData comet;
+	if (cometsData.contains(key))
+	{
+		// standard designation [1P]
+		comet = cometsData.value(key);
+		// add IAU designation in addition to the old-style designation
+		if (!comet.date_code.isEmpty())
+			result.insert("iau_designation", comet.date_code);
+		else
+		{
+			// comet_discovery.fab contains data not for all periodical comets
+			QString pd = periodicCometsIdentifiers.value(key, "");
+			if (!pd.isEmpty())
+				result.insert("iau_designation", pd);
+		}
+	}
+	else
+		comet = cometsData.value(name.split("(").at(0).trimmed()); // IAU designation [P/1682 Q1]
+
+	if (!comet.perihelion_code.isEmpty())
+		result.insert("perihelion_code", comet.perihelion_code);
+	if (!comet.discovery_code.isEmpty())
+		result.insert("discovery_code", comet.discovery_code);
+	if (!comet.discovery_date.isEmpty())
+		result.insert("discovery", comet.discovery_date);
+	if (!comet.discoverer.isEmpty())
+		result.insert("discoverer", comet.discoverer);
 
 	QString sectionName = convertToGroupName(name);
 	if (sectionName.isEmpty())

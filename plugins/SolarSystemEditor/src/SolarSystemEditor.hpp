@@ -48,6 +48,15 @@ typedef QHash<QString, QVariant> SsoElements;
 
 typedef QPair<QString, QString> DiscoveryCircumstances;
 
+typedef struct
+{
+	QString date_code;       //! date designation
+	QString perihelion_code; //! perihelion designation
+	QString discovery_code;  //! discovery designation
+	QString discovery_date;  //! date of discovery (format: YYYY-MM-DD)
+	QString discoverer;      //! name of discoverer
+} CometData;
+
 /*!
  \class SolarSystemEditor
  \brief Main class of the Solar System Editor plug-in which allows editing (add, delete, update) of the minor bodies.
@@ -229,10 +238,12 @@ private:
 
 	//! The names and group names of all objects in the default ssystem_major.ini.
 	//! The keys are the names, the values are the group names.	
-	QHash<QString,QString> defaultSsoIdentifiers;
+	QHash<QString, QString> defaultSsoIdentifiers;
 
 	//! The list of associations old-style and new-style designations of periodic comets
-	QHash<QString,QString> periodicCometsIdentifiers;
+	QHash<QString, QString> periodicCometsIdentifiers;
+
+	QHash<QString, CometData> cometsData;
 
 	//! The list of discovery circumstances for numbered minor planets
 	QHash<int, DiscoveryCircumstances> numberedMinorPlanets;
@@ -257,6 +268,9 @@ private:
 
 	//! Load old-style and new-style designations for periodic comets
 	void loadPeriodicCometDesignators();
+
+	//! Load data for comets: designations and discovery circumstances
+	void loadCometData();
 
 	//! Load the list of discovery circumstances for numbered minor planets
 	void loadDiscoveryCircumstances();
