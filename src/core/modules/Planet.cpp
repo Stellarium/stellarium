@@ -757,7 +757,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 	    oss << q_("NOTE: orbital elements outdated -- consider updating!") << "<br/>";
 	    Vec2d range = getValidPositionalDataRange(PositionQuality::Position);
 	    StelLocaleMgr* localeMgr = &StelApp::getInstance().getLocaleMgr();
-	    oss << QString("%1: %2..%3<br/>").arg(q_("Valid range"), localeMgr->getPrintableDateLocal(range[0]), localeMgr->getPrintableDateLocal(range[1]));
+	    oss << QString("%1: %2..%3<br/>").arg(q_("Range of good enough accuracy"), localeMgr->getPrintableDateLocal(range[0]), localeMgr->getPrintableDateLocal(range[1]));
 	}
 	postProcessInfoString(str, flags);
 	return str;
