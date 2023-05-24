@@ -164,9 +164,9 @@ QString MinorPlanet::getInfoStringName(const StelCore *core, const InfoStringGro
 	QStringList designations;
 	if (!nameIsIAUDesignation && !iauDesignationHtml.isEmpty())
 		designations << iauDesignationHtml;
-	if (getExtraDesignations().count()>0)
+	if (!getExtraDesignations().isEmpty())
 		designations << getExtraDesignations();
-	if (designations.count()>0)
+	if (!designations.isEmpty())
 		oss << QString(" (%1)").arg(designations.join(" - "));
 
 	oss.setRealNumberNotation(QTextStream::FixedNotation);

@@ -150,9 +150,9 @@ QString Comet::getInfoStringName(const StelCore *core, const InfoStringGroup& fl
 	QStringList designations;
 	if (!iauDesignation.isEmpty())
 		designations << iauDesignation;
-	if (getExtraDesignations().count()>0)
+	if (!getExtraDesignations().isEmpty())
 		designations << extraDesignationsHtml;
-	if (designations.count()>0)
+	if (!designations.isEmpty())
 		oss << QString(" (%1)").arg(designations.join(" - "));
 
 	oss.setRealNumberNotation(QTextStream::FixedNotation);
