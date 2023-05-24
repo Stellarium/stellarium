@@ -550,15 +550,15 @@ QString Planet::getInfoStringName(const StelCore *core, const InfoStringGroup& f
 	QTextStream oss(&str);
 	oss << "<h2>" << getPlanetLabel();
 
+	// NOTE: currently only moons have an IAU designation
+	QString iau = getIAUDesignation();
+	if (!iau.isEmpty())
+		oss << QString(" (%1)").arg(iau);
+
 	oss.setRealNumberNotation(QTextStream::FixedNotation);
 	oss.setRealNumberPrecision(1);
 	if (sphereScale != 1.)
 		oss << QString::fromUtf8(" (\xC3\x97") << sphereScale << ")";
-
-	// NOTE: currently only moons have an IAU designation
-	QString iau = getIAUDesignation();
-	if (!iau.isEmpty())
-		oss << QString("<br/>%1").arg(iau);
 
 	oss << "</h2>";
 	return str;
@@ -754,10 +754,12 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 	oss << getSolarLunarInfoString(core, flags);
 	if (!hasValidPositionalData(core->getJDE(), PositionQuality::Position))
 	{
-	    oss << q_("NOTE: orbital elements outdated -- consider updating!") << "<br/>";
-	    Vec2d range = getValidPositionalDataRange(PositionQuality::Position);
-	    StelLocaleMgr* localeMgr = &StelApp::getInstance().getLocaleMgr();
-	    oss << QString("%1: %2..%3<br/>").arg(q_("Range of good enough accuracy"), localeMgr->getPrintableDateLocal(range[0]), localeMgr->getPrintableDateLocal(range[1]));
+		if (orbitPtr && pType>=isArtificial)
+		{
+			StelLocaleMgr* localeMgr = &StelApp::getInstance().getLocaleMgr();
+			double JDE = static_cast<KeplerOrbit*>(orbitPtr)->getEpochJDE();
+			oss << q_("NOTE: elements for epoch %1 probably outdated. Consider updating data!").arg(localeMgr->getPrintableDateLocal(JDE)) << "<br/>";
+		}
 	}
 	postProcessInfoString(str, flags);
 	return str;
@@ -4963,19 +4965,19 @@ void Planet::drawOrbit(const StelCore* core)
 
 bool Planet::hasValidPositionalData(const double JDE, const PositionQuality purpose) const
 {
-    if ((pType<=isObserver) || (englishName=="Pluto"))
-	    return true;
-    else if (orbitPtr && pType>=isArtificial)
-    {
-	    switch (purpose)
-	    {
-		    case Position:
-			    return static_cast<KeplerOrbit*>(orbitPtr)->objectDateValid(JDE);
-		    case OrbitPlotting:
-			    return static_cast<KeplerOrbit*>(orbitPtr)->objectDateGoodEnoughForOrbits(JDE);
-	    }
-    }
-    return false;
+	if ((pType<=isObserver) || (englishName=="Pluto"))
+		return true;
+	else if (orbitPtr && pType>=isArtificial)
+	{
+		switch (purpose)
+		{
+			case Position:
+				return static_cast<KeplerOrbit*>(orbitPtr)->objectDateValid(JDE);
+			case OrbitPlotting:
+				return static_cast<KeplerOrbit*>(orbitPtr)->objectDateGoodEnoughForOrbits(JDE);
+		}
+	}
+	return false;
 }
 
 Vec2d Planet::getValidPositionalDataRange(const PositionQuality purpose) const

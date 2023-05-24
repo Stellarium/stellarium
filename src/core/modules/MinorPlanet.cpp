@@ -161,18 +161,18 @@ QString MinorPlanet::getInfoStringName(const StelCore *core, const InfoStringGro
 	else
 		oss << getNameI18n();  // UI translation can differ from sky translation
 
-	oss.setRealNumberNotation(QTextStream::FixedNotation);
-	oss.setRealNumberPrecision(1);
-	if (sphereScale != 1.)
-		oss << QString::fromUtf8(" (\xC3\x97") << sphereScale << ")";
-
 	QStringList designations;
 	if (!nameIsIAUDesignation && !iauDesignationHtml.isEmpty())
 		designations << iauDesignationHtml;
 	if (getExtraDesignations().count()>0)
 		designations << getExtraDesignations();
 	if (designations.count()>0)
-		oss << QString("<br/>%1").arg(designations.join(" - "));
+		oss << QString(" (%1)").arg(designations.join(" - "));
+
+	oss.setRealNumberNotation(QTextStream::FixedNotation);
+	oss.setRealNumberPrecision(1);
+	if (sphereScale != 1.)
+		oss << QString::fromUtf8(" (\xC3\x97") << sphereScale << ")";
 
 	oss << "</h2>";
 
