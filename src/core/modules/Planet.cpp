@@ -550,15 +550,15 @@ QString Planet::getInfoStringName(const StelCore *core, const InfoStringGroup& f
 	QTextStream oss(&str);
 	oss << "<h2>" << getPlanetLabel();
 
-	// NOTE: currently only moons have an IAU designation
-	QString iau = getIAUDesignation();
-	if (!iau.isEmpty())
-		oss << QString(" (%1)").arg(iau);
-
 	oss.setRealNumberNotation(QTextStream::FixedNotation);
 	oss.setRealNumberPrecision(1);
 	if (sphereScale != 1.)
 		oss << QString::fromUtf8(" (\xC3\x97") << sphereScale << ")";
+
+	// NOTE: currently only moons have an IAU designation
+	QString iau = getIAUDesignation();
+	if (!iau.isEmpty())
+		oss << QString("<br/>%1").arg(iau);
 
 	oss << "</h2>";
 	return str;

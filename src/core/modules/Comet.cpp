@@ -147,18 +147,19 @@ QString Comet::getInfoStringName(const StelCore *core, const InfoStringGroup& fl
 	oss << "<h2>";
 	oss << getNameI18n(); // UI translation can differ from sky translation
 
+	oss.setRealNumberNotation(QTextStream::FixedNotation);
+	oss.setRealNumberPrecision(1);
+	if (sphereScale != 1.)
+		oss << QString::fromUtf8(" (\xC3\x97") << sphereScale << ")";
+
 	QStringList designations;
 	if (!iauDesignation.isEmpty())
 		designations << iauDesignation;
 	if (getExtraDesignations().count()>0)
 		designations << extraDesignationsHtml;
 	if (designations.count()>0)
-		oss << QString(" (%1)").arg(designations.join(" - "));
+		oss << QString("<br/>%1").arg(designations.join(" - "));
 
-	oss.setRealNumberNotation(QTextStream::FixedNotation);
-	oss.setRealNumberPrecision(1);
-	if (sphereScale != 1.)
-		oss << QString::fromUtf8(" (\xC3\x97") << sphereScale << ")";
 	oss << "</h2>";
 
 	return str;
