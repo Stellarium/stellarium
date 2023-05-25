@@ -159,8 +159,7 @@ begin
   case CurUninstallStep of
     usPostUninstall:
       begin
-        mres := SuppressibleMsgBox(ExpandConstant('{cm:DeleteUserData}'), mbConfirmation, MB_YESNO, IDNO)
-        if mres = IDYES then
+        if SuppressibleMsgBox(ExpandConstant('{cm:DeleteUserData}'), mbConfirmation, MB_YESNO, IDNO) = IDYES then
           DelTree(ExpandConstant('{userappdata}\Stellarium'), True, True, True);
           DelTree(ExpandConstant('{userdocs}\Stellarium'), True, True, True);
           DelTree(ExpandConstant('{localappdata}\stellarium'), True, True, True);
