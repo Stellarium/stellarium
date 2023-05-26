@@ -248,6 +248,9 @@ private:
 	//! The list of discovery circumstances for numbered minor planets
 	QHash<int, DiscoveryCircumstances> numberedMinorPlanets;
 
+	//! The list of periodic comet number for comet-like asteroids
+	QHash<int, QString> cometLikeAsteroids;
+
 	//! Gets the names of the minor planet objects listed in a ssystem.ini-formatted file.
 	//! Used internally in readAllCurrentSsoNames() and in init() to initialize
 	//! defaultSsoNames.

@@ -135,6 +135,13 @@ void SolarSystemEditor::init()
 		return;
 	}
 
+	cometLikeAsteroids.clear();
+	cometLikeAsteroids = {
+		{   2060,  "95P" }, {   4015, "107P" }, {   7968, "133P" }, {  60558, "174P" },
+		{ 118401, "176P" }, { 248370, "433P" }, { 300163, "288P" }, { 323137, "282P" },
+		{ 457175, "362P" }
+	};
+
 	loadPeriodicCometDesignators();
 	loadDiscoveryCircumstances();
 	loadCometData();
@@ -989,6 +996,10 @@ SsoElements SolarSystemEditor::readMpcOneLineMinorPlanetElements(QString oneLine
 				//Use the whole string, just in case
 				name = column;
 			}
+			// Add Periodic Comet Number for comet-like asteroids
+			QString dateCode = cometLikeAsteroids.value(minorPlanetNumber, "");
+			if (!dateCode.isEmpty())
+				result.insert("date_code", QString("%1/(%2) %3").arg(dateCode, QString::number(minorPlanetNumber), name));
 		}
 		//In the other case, the name is already the IAU designation
 	}
