@@ -145,7 +145,7 @@ private:
 	void computeParabola(const float parameter, const float topradius, const float zshift, QVector<Vec3d>& vertexArr, QVector<Vec2f>& texCoordArr, QVector<unsigned short>& indices, const float xOffset=0.0f);
 
 	//! renders the subscript in a comet discovery designation with HTML.
-	QString renderDiscoveryDesignationinHtml(const QString& plainText);
+	QString renderDiscoveryDesignationHtml(const QString& plainText);
 
 	float slopeParameter;
 	bool isCometFragment;

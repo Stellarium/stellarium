@@ -657,11 +657,11 @@ void Comet::setExtraDesignations(QStringList codes)
 	extraDesignations = codes;
 	for (const auto& c : codes)
 	{
-		extraDesignationsHtml << renderDiscoveryDesignationinHtml(c);
+		extraDesignationsHtml << renderDiscoveryDesignationHtml(c);
 	}
 }
 
-QString Comet::renderDiscoveryDesignationinHtml(const QString &plainTextName)
+QString Comet::renderDiscoveryDesignationHtml(const QString &plainTextName)
 {
 	static const QRegularExpression discoveryDesignationPattern("^(\\d{4}[a-z]{1})(\\d+)$");
 	QRegularExpressionMatch match=discoveryDesignationPattern.match(plainTextName);

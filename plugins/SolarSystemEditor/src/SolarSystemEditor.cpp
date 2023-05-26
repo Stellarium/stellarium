@@ -477,6 +477,7 @@ void SolarSystemEditor::loadCometData()
 		// regular expression to find the comments and empty lines
 		static const QRegularExpression commentRx("^(\\s*#.*|\\s*)$");
 		static const QRegularExpression spacesRx("\\s+");
+		static const QRegularExpression periodicCometNumberRx("^([\\dP]+)$");
 		CometData comet;
 
 		while(!cdata.atEnd())
@@ -491,7 +492,27 @@ void SolarSystemEditor::loadCometData()
 			if (!line.isEmpty())
 			{
 				QStringList columns = line.split("|");
-				// [1] IAU designation or standard designation for periodic comets
+				// New IAU Designation ("1994 V1", "1995 Q3", etc.)
+				//    A year followed by an upper-case letter indicating the half-month of discovery,
+				//    followed by a number indicating the order of discovery. This may, in turn, be
+				//    followed by a dash and another capital letter indicating one part of a fragmented comet.
+				// Old IAU Permanent Designation ("1378","1759 I", "1993 XIII", ...)
+				//    A year usually followed by a Roman numeral (which must be in upper-case) indicating
+				//    the order of perihelion passage of the comet in that year. When there was only one
+				//    comet passing perihelion in a year, then just the year number is used for this designation.
+				// Old IAU Provisional Designation ("1982i", "1887a", "1991a1" ...)
+				//    A year followed by a single lower-case letter, optionally followed by a single digit.
+				// Periodic Comet Number ("1P", "2P", ... )
+				//    1-3 digits followed by an upper-case "P", indicating one of the multiple-apparition
+				//    objects in the file. This is part of the new designation system.
+				//
+				// Source: https://pds-smallbodies.astro.umd.edu/data_sb/resources/designation_formats.shtml
+				//
+				// New IAU Designation is equal to the date code
+				// Old IAU Permanent Designation is equal to the perihelion code
+				// Old IAU Provisional Designation is equal to discovery code
+
+				// [1] IAU designation or standard designation (Periodic Comet Number) for periodic comets
 				QString designation = columns.at(0).trimmed();
 				// [2] IAU designation or date code for comets
 				QString date_code = columns.at(1).trimmed();
@@ -505,6 +526,10 @@ void SolarSystemEditor::loadCometData()
 				QString discovery_date = columns.at(4).trimmed();
 				// [6] discoverer of comets
 				QString discoverer = columns.at(5).trimmed();
+
+				// Let's use Periodic Comet Number as part of date code for comets who have it
+				if (periodicCometNumberRx.match(designation).hasMatch())
+					date_code.replace("P", designation);
 
 				comet.date_code       = date_code;
 				comet.perihelion_code = perihelion_code;
