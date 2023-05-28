@@ -136,6 +136,7 @@ void SolarSystemEditor::init()
 	}
 
 	cometLikeAsteroids.clear();
+	// { Asteroid Number, "Periodic Comet Number"}
 	cometLikeAsteroids = {
 		{   2060,  "95P" }, {   4015, "107P" }, {   7968, "133P" }, {  60558, "174P" },
 		{ 118401, "176P" }, { 248370, "433P" }, { 300163, "288P" }, { 323137, "282P" },
