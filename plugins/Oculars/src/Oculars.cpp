@@ -1549,6 +1549,7 @@ void Oculars::paintCCDBounds()
 
 	// draw sensor rectangle
 	StelPainter painter(projector);
+	painter.setLineSmooth(true);
 	painter.setColor(lineColor);
 	painter.setFont(font);
 	Telescope *telescope = telescopes[selectedTelescopeIndex];
@@ -1606,43 +1607,44 @@ void Oculars::paintCCDBounds()
 	if (width <= 0.0f || height <= 0.0f)
 		return;
 
-	QPoint a, b;
+	using std::floor;
+	QPointF a, b;
 	QTransform transform = QTransform().translate(centerScreen[0], centerScreen[1]).rotate(-(ccd->chipRotAngle() + polarAngle));
 	// bottom line
-	a = transform.map(QPoint(static_cast<int>(-width*0.5f), static_cast<int>(-height*0.5f)));
-	b = transform.map(QPoint(static_cast<int>(width*0.5f), static_cast<int>(-height*0.5f)));
+	a = transform.map(QPointF(floor(-width*0.5f), floor(-height*0.5f))) + QPointF(0.5,0.5);
+	b = transform.map(QPointF(floor( width*0.5f), floor(-height*0.5f))) + QPointF(0.5,0.5);
 	painter.drawLine2d(a.x(), a.y(), b.x(), b.y());
 	// top line
-	a = transform.map(QPoint(static_cast<int>(-width*0.5f), static_cast<int>(height*0.5f)));
-	b = transform.map(QPoint(static_cast<int>(width*0.5f), static_cast<int>(height*0.5f)));
+	a = transform.map(QPointF(floor(-width*0.5f), floor(height*0.5f))) + QPointF(0.5,0.5);
+	b = transform.map(QPointF(floor( width*0.5f), floor(height*0.5f))) + QPointF(0.5,0.5);
 	painter.drawLine2d(a.x(), a.y(), b.x(), b.y());
 	// left line
-	a = transform.map(QPoint(static_cast<int>(-width*0.5f), static_cast<int>(-height*0.5f)));
-	b = transform.map(QPoint(static_cast<int>(-width*0.5f), static_cast<int>(height*0.5f)));
+	a = transform.map(QPointF(floor(-width*0.5f), floor(-height*0.5f))) + QPointF(0.5,0.5);
+	b = transform.map(QPointF(floor(-width*0.5f), floor( height*0.5f))) + QPointF(0.5,0.5);
 	painter.drawLine2d(a.x(), a.y(), b.x(), b.y());
 	// right line
-	a = transform.map(QPoint(static_cast<int>(width*0.5f), static_cast<int>(height*0.50f)));
-	b = transform.map(QPoint(static_cast<int>(width*0.5f), static_cast<int>(-height*0.5f)));
+	a = transform.map(QPointF(floor(width*0.5f), floor( height*0.5f))) + QPointF(0.5,0.5);
+	b = transform.map(QPointF(floor(width*0.5f), floor(-height*0.5f))) + QPointF(0.5,0.5);
 	painter.drawLine2d(a.x(), a.y(), b.x(), b.y());
 
 	// Tool for showing a resolution box overlay
 	if (flagShowCcdCropOverlay)
 	{
 		// bottom line
-		a = transform.map(QPoint(static_cast<int>(-overlayWidth*0.5f), static_cast<int>(-overlayHeight*0.5f)));
-		b = transform.map(QPoint(static_cast<int>(overlayWidth*0.5f), static_cast<int>(-overlayHeight*0.5f)));
+		a = transform.map(QPointF(floor(-overlayWidth*0.5f), floor(-overlayHeight*0.5f))) + QPointF(0.5,0.5);
+		b = transform.map(QPointF(floor( overlayWidth*0.5f), floor(-overlayHeight*0.5f))) + QPointF(0.5,0.5);
 		painter.drawLine2d(a.x(), a.y(), b.x(), b.y());
 		// top line
-		a = transform.map(QPoint(static_cast<int>(-overlayWidth*0.5f), static_cast<int>(overlayHeight*0.5f)));
-		b = transform.map(QPoint(static_cast<int>(overlayWidth*0.5f), static_cast<int>(overlayHeight*0.5f)));
+		a = transform.map(QPointF(floor(-overlayWidth*0.5f), floor(overlayHeight*0.5f))) + QPointF(0.5,0.5);
+		b = transform.map(QPointF(floor( overlayWidth*0.5f), floor(overlayHeight*0.5f))) + QPointF(0.5,0.5);
 		painter.drawLine2d(a.x(), a.y(), b.x(), b.y());
 		// left line
-		a = transform.map(QPoint(static_cast<int>(-overlayWidth*0.5f), static_cast<int>(-overlayHeight*0.5f)));
-		b = transform.map(QPoint(static_cast<int>(-overlayWidth*0.5f), static_cast<int>(overlayHeight*0.5f)));
+		a = transform.map(QPointF(floor(-overlayWidth*0.5f), floor(-overlayHeight*0.5f))) + QPointF(0.5,0.5);
+		b = transform.map(QPointF(floor(-overlayWidth*0.5f), floor( overlayHeight*0.5f))) + QPointF(0.5,0.5);
 		painter.drawLine2d(a.x(), a.y(), b.x(), b.y());
 		// right line
-		a = transform.map(QPoint(static_cast<int>(overlayWidth*0.5f), static_cast<int>(overlayHeight*0.5f)));
-		b = transform.map(QPoint(static_cast<int>(overlayWidth*0.5f), static_cast<int>(-overlayHeight*0.5f)));
+		a = transform.map(QPointF(floor(overlayWidth*0.5f), floor( overlayHeight*0.5f))) + QPointF(0.5,0.5);
+		b = transform.map(QPointF(floor(overlayWidth*0.5f), floor(-overlayHeight*0.5f))) + QPointF(0.5,0.5);
 		painter.drawLine2d(a.x(), a.y(), b.x(), b.y());
 
 		// Tool to show full CCD grid overlay
@@ -1651,15 +1653,19 @@ void Oculars::paintCCDBounds()
 			// vertical lines
 			for (int l =1 ; l< actualCropOverlayX/ccd->binningX(); l++ )
 			{
-				a = transform.map(QPoint(static_cast<int>(overlayWidth*0.5f- l*pixelProjectedWidth), static_cast<int>(-overlayHeight*0.5f)));
-				b = transform.map(QPoint(static_cast<int>(overlayWidth*0.5f- l*pixelProjectedWidth), static_cast<int>(overlayHeight*0.5f)));
+				a = transform.map(QPointF(floor(overlayWidth*0.5f-l*pixelProjectedWidth), floor(-overlayHeight*0.5f)));
+				b = transform.map(QPointF(floor(overlayWidth*0.5f-l*pixelProjectedWidth), floor( overlayHeight*0.5f)));
+				a += QPointF(0.5,0.5);
+				b += QPointF(0.5,0.5);
 				painter.drawLine2d(a.x(), a.y(), b.x(), b.y());
 			}
 			// horizontal lines
 			for (int l =1 ; l< actualCropOverlayY/ccd->binningY(); l++ )
 			{
-				a = transform.map(QPoint(static_cast<int>(-overlayWidth*0.5f), static_cast<int>(overlayHeight*0.5f - l*pixelProjectedHeight)));
-				b = transform.map(QPoint(static_cast<int>(overlayWidth*0.5f), static_cast<int>(overlayHeight*0.5f - l*pixelProjectedHeight)));
+				a = transform.map(QPointF(floor(-overlayWidth*0.5f), floor(overlayHeight*0.5f - l*pixelProjectedHeight)));
+				b = transform.map(QPointF(floor( overlayWidth*0.5f), floor(overlayHeight*0.5f - l*pixelProjectedHeight)));
+				a += QPointF(0.5,0.5);
+				b += QPointF(0.5,0.5);
 				painter.drawLine2d(a.x(), a.y(), b.x(), b.y());
 			}
 		}
@@ -1679,20 +1685,20 @@ void Oculars::paintCCDBounds()
 		QTransform oag_transform = QTransform().translate(centerScreen[0], centerScreen[1]).rotate(-(ccd->chipRotAngle() + polarAngle + ccd->prismPosAngle()));
 
 		// bottom line
-		a = oag_transform.map(QPoint(-h_width, in_oag_r));
-		b = oag_transform.map(QPoint(h_width, in_oag_r));
+		a = oag_transform.map(QPointF(-h_width, in_oag_r)) + QPointF(0.5,0.5);
+		b = oag_transform.map(QPointF( h_width, in_oag_r)) + QPointF(0.5,0.5);
 		painter.drawLine2d(a.x(),a.y(), b.x(), b.y());
 		// top line
-		a = oag_transform.map(QPoint(-h_width, out_oag_r));
-		b = oag_transform.map(QPoint(h_width, out_oag_r));
+		a = oag_transform.map(QPointF(-h_width, out_oag_r)) + QPointF(0.5,0.5);
+		b = oag_transform.map(QPointF( h_width, out_oag_r)) + QPointF(0.5,0.5);
 		painter.drawLine2d(a.x(),a.y(), b.x(), b.y());
 		// left line
-		a = oag_transform.map(QPoint(-h_width, out_oag_r));
-		b = oag_transform.map(QPoint(-h_width, in_oag_r));
+		a = oag_transform.map(QPointF(-h_width, out_oag_r)) + QPointF(0.5,0.5);
+		b = oag_transform.map(QPointF(-h_width, in_oag_r)) + QPointF(0.5,0.5);
 		painter.drawLine2d(a.x(),a.y(), b.x(), b.y());
 		// right line
-		a = oag_transform.map(QPoint(h_width, out_oag_r));
-		b = oag_transform.map(QPoint(h_width, in_oag_r));
+		a = oag_transform.map(QPointF(h_width, out_oag_r)) + QPointF(0.5,0.5);
+		b = oag_transform.map(QPointF(h_width, in_oag_r)) + QPointF(0.5,0.5);
 		painter.drawLine2d(a.x(),a.y(), b.x(), b.y());
 	}
 
