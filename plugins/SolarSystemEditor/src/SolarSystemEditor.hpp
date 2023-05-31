@@ -276,7 +276,7 @@ private:
 	void loadCometData();
 
 	//! Load the list of discovery circumstances for numbered minor planets
-	void loadDiscoveryCircumstances();
+	void loadMinorPlanetData();
 
 	//! Converts an alphanumeric digit as used in MPC packed dates to an integer.
 	//! See http://www.minorplanetcenter.org/iau/info/PackedDates.html

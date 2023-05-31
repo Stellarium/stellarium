@@ -144,7 +144,7 @@ void SolarSystemEditor::init()
 	};
 
 	loadPeriodicCometDesignators();
-	loadDiscoveryCircumstances();
+	loadMinorPlanetData();
 	loadCometData();
 
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(updateI18n()));
@@ -580,7 +580,7 @@ void SolarSystemEditor::loadPeriodicCometDesignators()
 	}
 }
 
-void SolarSystemEditor::loadDiscoveryCircumstances()
+void SolarSystemEditor::loadMinorPlanetData()
 {
 	numberedMinorPlanets.clear();
 
@@ -1000,14 +1000,18 @@ SsoElements SolarSystemEditor::readMpcOneLineMinorPlanetElements(QString oneLine
 			// Add Periodic Comet Number for comet-like asteroids
 			QString dateCode = cometLikeAsteroids.value(minorPlanetNumber, "");
 			if (!dateCode.isEmpty())
-				result.insert("date_code", QString("%1/(%2) %3").arg(dateCode, QString::number(minorPlanetNumber), name));
+			{
+				if (name==QString("(%1)").arg(QString::number(minorPlanetNumber)))
+					result.insert("date_code", QString("%1/%2").arg(dateCode, name));
+				else
+					result.insert("date_code", QString("%1/(%2) %3").arg(dateCode, QString::number(minorPlanetNumber), name));
+			}
 		}
 		//In the other case, the name is already the IAU designation
 	}
 	if (name.isEmpty())
-	{
 		return SsoElements();
-	}
+
 	result.insert("name", name);
 
 	//Section name
