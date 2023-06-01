@@ -250,6 +250,22 @@ double CCD::getActualFOVy(const Telescope *telescope, const Lens *lens) const
 	return fovY;
 }
 
+double CCD::getCentralAngularResolutionX(const Telescope *telescope, const Lens *lens) const
+{
+	const auto lensMultipler = lens ? lens->getMultipler() : 1.0;
+	const auto pixelSize = chipWidth() * binningX() / resolutionX();
+	const auto focalLen = telescope->focalLength() * lensMultipler;
+	return RADIAN_TO_DEGREES * 2 * std::atan(pixelSize / (2 * focalLen));
+}
+
+double CCD::getCentralAngularResolutionY(const Telescope *telescope, const Lens *lens) const
+{
+	const auto lensMultipler = lens ? lens->getMultipler() : 1.0;
+	const auto pixelSize = chipHeight() * binningY() / resolutionY();
+	const auto focalLength = telescope->focalLength() * lensMultipler;
+	return RADIAN_TO_DEGREES * 2 * std::atan(pixelSize / (2 * focalLength));
+}
+
 double CCD::getFocuserFOV(const Telescope *telescope, const Lens *lens, double focuserSize) const
 {
 	// note: focuser size in inches
