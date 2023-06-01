@@ -1908,7 +1908,10 @@ void Oculars::paintCCDBounds()
 		// Horizontal and vertical scales of visible field of view for CCD (red rectangle)
 		//TRANSLATORS: Unit of measure for scale - arc-seconds per pixel
 		QString unit = q_("\"/px");
-		QString scales = QString("%1%3 %4 %2%3").arg(QString::number(fovX*3600*ccd->binningX()/ccd->resolutionX(), 'f', 4), QString::number(fovY*3600*ccd->binningY()/ccd->resolutionY(), 'f', 4), unit, QChar(0x00D7));
+		QString scales = QString("%1%3 %4 %2%3")
+							.arg(QString::number(3600*ccd->getCentralAngularResolutionX(telescope, lens), 'f', 4),
+								 QString::number(3600*ccd->getCentralAngularResolutionY(telescope, lens), 'f', 4),
+								 unit, QChar(0x00D7));
 		a = transform.map(QPoint(qRound(width*0.5f - painter.getFontMetrics().boundingRect(scales).width()*params.devicePixelsPerPixel), qRound(-height*0.5f - fontSize*scaleFactor)));
 		painter.drawText(a.x(), a.y(), scales, static_cast<float>(-(ccd->chipRotAngle() + polarAngle)));
 		// Rotation angle of visible field of view for CCD (red rectangle)
@@ -1931,7 +1934,8 @@ void Oculars::paintCCDBounds()
 			double properMotion = StelUtils::fmodpos(selectedSSO->getHourlyProperMotion(core)[0], 2.0*M_PI) * M_180_PI;
 			if (properMotion>0.)
 			{
-				double sqf = qMin(fovX*3600*ccd->binningX()/ccd->resolutionX(), fovY*3600*ccd->binningY()/ccd->resolutionY());
+				const double sqf = qMin(3600*ccd->getCentralAngularResolutionX(telescope, lens),
+										3600*ccd->getCentralAngularResolutionY(telescope, lens));
 				double exposure = 3600.*sqf/qRound(3600.*properMotion);
 				if (exposure>0.)
 				{
