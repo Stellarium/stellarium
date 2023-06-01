@@ -1529,7 +1529,7 @@ bool Oculars::isBinocularDefined()
 	return binocularFound;
 }
 
-void Oculars::drawSensorFrameAndOverlay(const StelProjectorP& altAzProj, const Mat4f& derotate,
+QRect Oculars::drawSensorFrameAndOverlay(const StelProjectorP& altAzProj, const Mat4f& derotate,
 										const CCD& ccd, const Lens& lens,
 										const QSize& overlaySize)
 {
@@ -1553,6 +1553,16 @@ void Oculars::drawSensorFrameAndOverlay(const StelProjectorP& altAzProj, const M
 
 	const int numPointsPerLine = 30;
 
+	// Compute vectors corresponding to up and right direction of the frame, they will be used to find its bounding rect
+	Vec3f frameUp3d, frameCenter3d, frameRight3d;
+	altAzProj->project(derotate * Vec3f(1,0,1), frameUp3d);
+	altAzProj->project(derotate * Vec3f(1,0,0), frameCenter3d);
+	altAzProj->project(derotate * Vec3f(1,-1,0), frameRight3d);
+	const auto frameUpDir = normalize(Vec2f(frameUp3d[0] - frameCenter3d[0], frameUp3d[1] - frameCenter3d[1]));
+	const auto frameRightDir = normalize(Vec2f(frameRight3d[0] - frameCenter3d[0], frameRight3d[1] - frameCenter3d[1]));
+	const auto frameCenter = Vec2f(frameCenter3d[0], frameCenter3d[1]);
+
+	int minX = INT_MAX, maxX = INT_MIN, minY = INT_MAX, maxY = INT_MIN;
 	sPainter.enableClientStates(true);
 	for(const auto [cropFactorX, cropFactorY] : cropFactors)
 	{
@@ -1600,12 +1610,23 @@ void Oculars::drawSensorFrameAndOverlay(const StelProjectorP& altAzProj, const M
 			altAzProj->project(derotate * Vec3f(x,y,z), win);
 			lineLoopPoints.push_back(Vec2f(win[0], win[1]));
 		}
+		for(const auto& p : lineLoopPoints)
+		{
+			const float x = (p-frameCenter).dot(frameRightDir);
+			const float y = (p-frameCenter).dot(frameUpDir);
+			if(x > maxX) maxX = x;
+			if(x < minX) minX = x;
+			if(y > maxY) maxY = y;
+			if(y < minY) minY = y;
+		}
 		sPainter.setVertexPointer(2, GL_FLOAT, lineLoopPoints.data());
 		sPainter.drawFromArray(StelPainter::LineLoop, lineLoopPoints.size(), 0, false);
 	}
 
+	const QRect boundingRect(QPoint(minX, minY), QSize(maxX-minX, maxY-minY));
+
 	if (!(flagShowCcdCropOverlay && flagShowCcdCropOverlayPixelGrid))
-		return;
+		return boundingRect;
 
 	std::vector<Vec2f> lineStripPoints;
 	const float cropTanFovX = cropFactorX * tanFovX;
@@ -1647,6 +1668,8 @@ void Oculars::drawSensorFrameAndOverlay(const StelProjectorP& altAzProj, const M
 		sPainter.drawFromArray(StelPainter::LineStrip, lineStripPoints.size(), 0, false);
 		lineStripPoints.clear();
 	}
+
+	return boundingRect;
 }
 
 void Oculars::drawCirclesOfConstantAngularRadii(StelPainter& sPainter, const Mat4f& derotate, const std::vector<float>& angularRadii)
@@ -1824,7 +1847,7 @@ void Oculars::paintCCDBounds()
 						  Mat4f::rotation(Vec3f(0,1,0), -elevation) *
 						  Mat4f::rotation(Vec3f(1,0,0), polarAngle * (M_PI/180));
 
-	drawSensorFrameAndOverlay(altAzProj, derotate, *ccd, *lens, overlaySize);
+	const auto boundingRect = drawSensorFrameAndOverlay(altAzProj, derotate, *ccd, *lens, overlaySize);
 
 	StelPainter painter(projector);
 	painter.setLineSmooth(true);
@@ -1895,28 +1918,44 @@ void Oculars::paintCCDBounds()
 			}
 		}
 
+		const auto fm = painter.getFontMetrics();
 		float scaleFactor = static_cast<float>(1.2 * params.devicePixelsPerPixel);
-		// Coordinates of center of visible field of view for CCD (red rectangle)
-		a = transform.map(QPoint(qRound(-width*0.5f), qRound(height*0.5f + 5.f + fontSize*scaleFactor)));
+
+		const auto topY = boundingRect.bottom();
+		const auto leftX = boundingRect.left();
+		const auto bottomY = boundingRect.top();
+		const auto rightX = boundingRect.right();
+
+		// Coordinates of center of visible field of view for CCD (red rectangle); above top-left corner
+		const auto coordsBR = fm.boundingRect(coords);
+		a = transform.map(QPoint(leftX, topY + std::lround(1.5*coordsBR.height())));
 		painter.drawText(a.x(), a.y(), coords, static_cast<float>(-(ccd->chipRotAngle() + polarAngle)));
 		coords = QString("%1/%2").arg(cxt.simplified(), cyt);
-		a = transform.map(QPoint(qRound(-width*0.5f), qRound(height*0.5f + 5.f)));
+		a = transform.map(QPoint(leftX, topY + std::lround(0.5*coordsBR.height())));
 		painter.drawText(a.x(), a.y(), coords, static_cast<float>(-(ccd->chipRotAngle() + polarAngle)));
-		// Dimensions of visible field of view for CCD (red rectangle)
-		a = transform.map(QPoint(qRound(-width*0.5f), qRound(-height*0.5f - fontSize*scaleFactor)));
-		painter.drawText(a.x(), a.y(), getDimensionsString(fovX, fovY), static_cast<float>(-(ccd->chipRotAngle() + polarAngle)));
-		// Horizontal and vertical scales of visible field of view for CCD (red rectangle)
+
+		// Dimensions of visible field of view for CCD (red rectangle); below bottom-left corner
+		const auto dims = getDimensionsString(fovX, fovY);
+		a = transform.map(QPoint(leftX, bottomY - std::lround(fm.boundingRect(dims).height())));
+		painter.drawText(a.x(), a.y(), dims, static_cast<float>(-(ccd->chipRotAngle() + polarAngle)));
+
+		// Horizontal and vertical scales of visible field of view for CCD (red rectangle); below bottom-right corner
 		//TRANSLATORS: Unit of measure for scale - arc-seconds per pixel
 		QString unit = q_("\"/px");
 		QString scales = QString("%1%3 %4 %2%3")
 							.arg(QString::number(3600*ccd->getCentralAngularResolutionX(telescope, lens), 'f', 4),
 								 QString::number(3600*ccd->getCentralAngularResolutionY(telescope, lens), 'f', 4),
 								 unit, QChar(0x00D7));
-		a = transform.map(QPoint(qRound(width*0.5f - painter.getFontMetrics().boundingRect(scales).width()*params.devicePixelsPerPixel), qRound(-height*0.5f - fontSize*scaleFactor)));
+		const auto scalesBR = fm.boundingRect(scales);
+		a = transform.map(QPoint(rightX - std::lround(scalesBR.width()),
+								 bottomY - std::lround(scalesBR.height())));
 		painter.drawText(a.x(), a.y(), scales, static_cast<float>(-(ccd->chipRotAngle() + polarAngle)));
-		// Rotation angle of visible field of view for CCD (red rectangle)
+
+		// Rotation angle of visible field of view for CCD (red rectangle); above top-right corner
 		QString angle = QString("%1%2").arg(QString::number(ccd->chipRotAngle(), 'f', 1)).arg(QChar(0x00B0));
-		a = transform.map(QPoint(qRound(width*0.5f - painter.getFontMetrics().boundingRect(angle).width()*params.devicePixelsPerPixel), qRound(height*0.5f + 5.f)));
+		const auto angleBR = fm.boundingRect(angle);
+		a = transform.map(QPoint(rightX - std::lround(angleBR.width()),
+								 topY + std::lround(0.5*angleBR.height())));
 		painter.drawText(a.x(), a.y(), angle, static_cast<float>(-(ccd->chipRotAngle() + polarAngle)));
 
 		if(flagShowCcdCropOverlay && (ccdXRatio>=ratioLimitCrop || ccdYRatio>=ratioLimitCrop))
@@ -1925,7 +1964,7 @@ void Oculars::paintCCDBounds()
 			QString resolutionOverlayText = QString("%1%3 %4 %2%3").arg(QString::number(actualCropOverlayX, 'd', 0), QString::number(actualCropOverlayY, 'd', 0), qc_("px", "pixels"), QChar(0x00D7));
 			if(actualCropOverlayX!=ccdCropOverlayHSize || actualCropOverlayY!=ccdCropOverlayVSize)
 				resolutionOverlayText.append(" [*]");
-			a = transform.map(QPoint(qRound(overlayWidth*0.5f - painter.getFontMetrics().boundingRect(resolutionOverlayText).width()*params.devicePixelsPerPixel), qRound(-overlayHeight*0.5f - fontSize*scaleFactor)));
+			a = transform.map(QPoint(qRound(overlayWidth*0.5f - painter.getFontMetrics().boundingRect(resolutionOverlayText).width()), qRound(-overlayHeight*0.5f - fontSize*scaleFactor)));
 			painter.drawText(a.x(), a.y(), resolutionOverlayText, static_cast<float>(-(ccd->chipRotAngle() + polarAngle)));
 		}
 
@@ -1941,7 +1980,9 @@ void Oculars::paintCCDBounds()
 				{
 					// TRANSLATORS: "Max exposure" is short version of phrase "Max time of exposure"
 					QString exposureTime = QString("%1: %2 %3").arg(q_("Max exposure"), QString::number(qRound(exposure*10.)/10., 'd', 1), qc_("s", "time"));
-					a = transform.map(QPoint(qRound(width*0.5f - painter.getFontMetrics().boundingRect(exposureTime).width()*params.devicePixelsPerPixel), qRound(-height*0.5f - 2.0f*fontSize*scaleFactor)));
+					const auto expoBR = fm.boundingRect(exposureTime);
+					a = transform.map(QPoint(rightX - std::lround(expoBR.width()),
+											 topY + std::lround(1.5*expoBR.height())));
 					painter.drawText(a.x(), a.y(), exposureTime, static_cast<float>(-(ccd->chipRotAngle() + polarAngle)));
 				}
 			}
