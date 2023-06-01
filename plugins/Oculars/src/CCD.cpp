@@ -218,14 +218,14 @@ void CCD::setBinningY(int binning)
 double CCD::getInnerOAGRadius(const Telescope *telescope, const Lens *lens) const
 {
 	const double lens_multipler = (lens != Q_NULLPTR ? lens->getMultipler() : 1.0);
-	double radius = RADIAN_TO_DEGREES * 2 * qAtan(this->prismDistance() /(2.0 * telescope->focalLength() * lens_multipler));
+	double radius = RADIAN_TO_DEGREES * qAtan((prismDistance() - prismHeight() / 2) / (telescope->focalLength() * lens_multipler));
 	return radius;
 }
 
 double CCD::getOuterOAGRadius(const Telescope *telescope, const Lens *lens) const
 {
 	const double lens_multipler = (lens != Q_NULLPTR ? lens->getMultipler() : 1.0);
-	double radius = RADIAN_TO_DEGREES * 2 * qAtan((this->prismDistance() + this->prismHeight()) /(2.0 * telescope->focalLength() * lens_multipler));
+	double radius = RADIAN_TO_DEGREES * qAtan((prismDistance() + prismHeight() / 2) / (telescope->focalLength() * lens_multipler));
 	return radius;
 }
 
