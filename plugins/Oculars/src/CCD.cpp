@@ -215,42 +215,42 @@ void CCD::setBinningY(int binning)
 	m_binningY = binning;
 }
 
-double CCD::getInnerOAGRadius(Telescope *telescope, Lens *lens) const
+double CCD::getInnerOAGRadius(const Telescope *telescope, const Lens *lens) const
 {
 	const double lens_multipler = (lens != Q_NULLPTR ? lens->getMultipler() : 1.0);
 	double radius = RADIAN_TO_DEGREES * 2 * qAtan(this->prismDistance() /(2.0 * telescope->focalLength() * lens_multipler));
 	return radius;
 }
 
-double CCD::getOuterOAGRadius(Telescope *telescope, Lens *lens) const
+double CCD::getOuterOAGRadius(const Telescope *telescope, const Lens *lens) const
 {
 	const double lens_multipler = (lens != Q_NULLPTR ? lens->getMultipler() : 1.0);
 	double radius = RADIAN_TO_DEGREES * 2 * qAtan((this->prismDistance() + this->prismHeight()) /(2.0 * telescope->focalLength() * lens_multipler));
 	return radius;
 }
 
-double CCD::getOAGActualFOVx(Telescope *telescope, Lens *lens) const
+double CCD::getOAGActualFOVx(const Telescope *telescope, const Lens *lens) const
 {
 	const double lens_multipler = (lens != Q_NULLPTR ? lens->getMultipler() : 1.0);
 	double fovX = RADIAN_TO_DEGREES * 2 * qAtan(this->prismWidth() /(2.0 * telescope->focalLength() * lens_multipler));
 	return fovX;
 }
 
-double CCD::getActualFOVx(Telescope *telescope, Lens *lens) const
+double CCD::getActualFOVx(const Telescope *telescope, const Lens *lens) const
 {
 	const double lens_multipler = (lens != Q_NULLPTR ? lens->getMultipler() : 1.0);
 	double fovX = RADIAN_TO_DEGREES * 2 * qAtan(this->chipWidth() /(2.0 * telescope->focalLength() * lens_multipler));
 	return fovX;
 }
 
-double CCD::getActualFOVy(Telescope *telescope, Lens *lens) const
+double CCD::getActualFOVy(const Telescope *telescope, const Lens *lens) const
 {
 	const double lens_multipler = (lens != Q_NULLPTR ? lens->getMultipler() : 1.0);
 	double fovY = RADIAN_TO_DEGREES * 2 * qAtan(this->chipHeight() /(2.0 * telescope->focalLength() * lens_multipler));
 	return fovY;
 }
 
-double CCD::getFocuserFOV(Telescope *telescope, Lens *lens, double focuserSize) const
+double CCD::getFocuserFOV(const Telescope *telescope, const Lens *lens, double focuserSize) const
 {
 	// note: focuser size in inches
 	const double lens_multipler = (lens != Q_NULLPTR ? lens->getMultipler() : 1.0);
