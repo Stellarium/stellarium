@@ -243,7 +243,11 @@ The options are grouped by areas of usage: \emph{Interface}, \emph{Ocular view},
  \end{description}
 \item[Sensor view] is group of options allows to change behavior of the plugin for photographic observations mode.
   \begin{description}
+  \item[Enable autozoom when switching CCD]  
   \item[Use degrees and minutes for FOV of CCD] -- for many cases the use of decimal degrees for the value of the field of view is not comfortable, and this option allows to use the more human readable format for FOV.
+  \item[Use horizontal coordinates instead of equatorial (J2000.0) coordinates] in the top left frame corner.
+  \item[Show max exposure time for moving objects] For solar system objects, the top right edge can indicate the maximum exposure time so 
+         that the object moves less than a pixel against the stars.  
   \item[Enable automatic switch of mount type] allows to store the CCD frame orientation when the type of telescope mount is changed.
   \item[Show sensor crop overlay]\newFeature{0.19.0} toggles drawing a crop box within the CCD frame.
     In addition,\newFeature{0.20.3} a pixel grid can be drawn within the crop overlay especially for astrophotographers.
