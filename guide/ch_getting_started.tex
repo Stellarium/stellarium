@@ -80,13 +80,16 @@ An archive of all available versions is available at our GitHub page --- \url{ht
 \item Follow the on-screen instructions.
 \end{enumerate}
 
-\subsubsection{Uninstalling}
+\subsubsection{Unattended Install/Uninstall}
+The installation program allows for unattended installation (e.g., for lab setups) 
+following official documentation\footnote{\url{https://documentation.help/Inno-Setup/topic_setupcmdline.htm}}.
+
 You can uninstall the program like any other program from the Applications list in the system control panel. 
 The uninstaller asks if you want to remove (delete) all your Stellarium user data. Be sure to answer NO when you plan to re-use landscapes, 3D sceneries and the like. 
-For purposes like automated uninstallation in larger setups, the uninstaller can be called with additional options, which will keep the user data.
-\begin{commands}
-"C:\Program Files (x86)\Stellarium\unins000.exe" /VERYSILENT /SUPPRESSMSGBOXES
-\end{commands}
+For unattended uninstallation in larger setups, also the uninstaller can be called with additional options, which will keep the user data.
+\begin{commandsScr}
+"C:\Program Files[ (x86)]\Stellarium\unins000.exe" /VERYSILENT /SUPPRESSMSGBOXES
+\end{commandsScr}
 
 \subsection{macOS}
 \label{sec:GettingStarted:Installation:macOS}
