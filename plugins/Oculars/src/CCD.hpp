@@ -94,6 +94,10 @@ public:
 	  */
 	double getActualFOVx(const Telescope *telescope, const Lens *lens) const;
 	double getActualFOVy(const Telescope *telescope, const Lens *lens) const;
+	//! Horizontal angular resolution in degrees per pixel in the middle of the field of view
+	double getCentralAngularResolutionX(const Telescope *telescope, const Lens *lens) const;
+	//! Vertical angular resolution in degrees per pixel in the middle of the field of view
+	double getCentralAngularResolutionY(const Telescope *telescope, const Lens *lens) const;
 	//! focuser size in inches
 	double getFocuserFOV(const Telescope *telescope, const Lens *lens, double focuserSize) const;
 	double getInnerOAGRadius(const Telescope *telescope, const Lens *lens) const;

@@ -719,12 +719,12 @@ void OcularsGuiPanel::updateCcdControls()
 	widgetHeight += fieldCcdBinning->boundingRect().height();
 	//TRANSLATORS: Unit of measure for scale - arc-seconds per pixel
 	QString unit = q_("\"/px");
-	fieldCcdHScale->setPlainText(QString("%1: %2%3").arg(q_("X scale"), QString::number(fovX*3600*ccd->binningX()/ccd->resolutionX(), 'f', 4), unit));
+	fieldCcdHScale->setPlainText(QString("%1: %2%3").arg(q_("X scale"), QString::number(3600*ccd->getCentralAngularResolutionX(telescope, lens), 'f', 4), unit));
 	fieldCcdHScale->setToolTip(q_("Horizontal scale"));
 	fieldCcdHScale->setPos(posX, posY);
 	posY += fieldCcdHScale->boundingRect().height();
 	widgetHeight += fieldCcdHScale->boundingRect().height();
-	fieldCcdVScale->setPlainText(QString("%1: %2%3").arg(q_("Y scale"), QString::number(fovY*3600*ccd->binningY()/ccd->resolutionY(), 'f', 4), unit));
+	fieldCcdVScale->setPlainText(QString("%1: %2%3").arg(q_("Y scale"), QString::number(3600*ccd->getCentralAngularResolutionY(telescope, lens), 'f', 4), unit));
 	fieldCcdVScale->setToolTip(q_("Vertical scale"));
 	fieldCcdVScale->setPos(posX, posY);
 	posY += fieldCcdVScale->boundingRect().height();
@@ -907,9 +907,9 @@ void OcularsGuiPanel::updateTelescopeControls()
 
 		//TRANSLATORS: Unit of measure for scale - arc-seconds per pixel
 		QString unit = q_("\"/px");
-		fieldCcdHScale->setPlainText(QString("%1: %2%3").arg(q_("X scale"), QString::number(fovX*3600*ccd->binningX()/ccd->resolutionX(), 'f', 4), unit));
+		fieldCcdHScale->setPlainText(QString("%1: %2%3").arg(q_("X scale"), QString::number(3600*ccd->getCentralAngularResolutionX(telescope, lens), 'f', 4), unit));
 		fieldCcdHScale->setToolTip(q_("Horizontal scale"));
-		fieldCcdVScale->setPlainText(QString("%1: %2%3").arg(q_("Y scale"), QString::number(fovY*3600*ccd->binningY()/ccd->resolutionY(), 'f', 4), unit));
+		fieldCcdVScale->setPlainText(QString("%1: %2%3").arg(q_("Y scale"), QString::number(3600*ccd->getCentralAngularResolutionY(telescope, lens), 'f', 4), unit));
 		fieldCcdVScale->setToolTip(q_("Vertical scale"));
 
 		prevTelescopeButton->setVisible(true);

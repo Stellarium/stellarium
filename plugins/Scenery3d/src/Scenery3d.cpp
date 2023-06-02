@@ -548,7 +548,7 @@ void Scenery3d::loadSceneCompleted()
 	if (info.hasLocation())
 	{
 		qCDebug(scenery3d) << "Setting location to given coordinates";
-		StelApp::getInstance().getCore()->moveObserverTo(*info.location, 0., 0.);
+		StelApp::getInstance().getCore()->moveObserverTo(*info.location, 0., 0., info.landscapeName);
 	}
 	else qCDebug(scenery3d) << "No coordinates given in scenery3d.ini";
 

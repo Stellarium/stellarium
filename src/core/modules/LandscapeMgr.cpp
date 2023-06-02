@@ -1013,13 +1013,17 @@ bool LandscapeMgr::setCurrentLandscapeName(const QString& name, const double cha
 	QMap<QString,QString> nameToDirMap = getNameToDirMap();
 	if (nameToDirMap.find(name)!=nameToDirMap.end())
 	{
+		//qDebug() << "Resolving " << name << "as" << nameToDirMap[name];
 		return setCurrentLandscapeID(nameToDirMap[name], changeLocationDuration);
 	}
-	else
+	// Legacy mess-up: e.g. Scenery3D calls name but should mean ID.
+	else if (!setCurrentLandscapeID(name, changeLocationDuration))
 	{
 		qWarning() << "Can't find a landscape with name=" << name << StelUtils::getEndLineChar();
 		return false;
 	}
+	qDebug() << "Loading landscapeID" << name;
+	return true;
 }
 
 // Load a landscape into cache.
