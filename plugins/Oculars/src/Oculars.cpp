@@ -399,8 +399,9 @@ void Oculars::handleMouseClicks(class QMouseEvent* event)
 
 	if (guiPanel)
 	{
+		const auto ratio = core->getCurrentStelProjectorParams().devicePixelsPerPixel;
 		// Remove all events on the sky within Ocular GUI Panel.
-		if (eventPosX > guiPanel->pos().x() && eventPosY > (prj->getViewportHeight() - guiPanel->size().height()))
+		if (eventPosX > guiPanel->pos().x()*ratio && eventPosY > prj->getViewportHeight() - ratio*guiPanel->size().height())
 		{
 			event->setAccepted(true);
 			return;
