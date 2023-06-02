@@ -497,7 +497,7 @@ void HelpDialog::updateAboutText(void) const
 		{ "Marla Pinaire", 320 }, { "Satish Mallesh", 260 }, { "Vlad Magdalin", 250  }, { "Philippe Renoux", 250 },
 		{ "Fito Martin", 250 },
 		// Organizations
-		{ "Astronomie-Werkstatt \"Sterne ohne Grenzen\"", 580 }, { "Triplebyte", 280 }
+		{ "Astronomie-Werkstatt \"Sterne ohne Grenzen\"", 580 }, { "BairesDev", 500 }, { "Triplebyte", 280 }
 	};
 	std::sort(financialContributors.begin(), financialContributors.end(), [](donator i, donator j){ return i.second > j.second; });
 	QStringList bestFinancialContributors;

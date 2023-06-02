@@ -389,14 +389,19 @@ void Oculars::handleMouseClicks(class QMouseEvent* event)
 	StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
 	qreal ppx = params.devicePixelsPerPixel;
 	
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+	const auto eventPosX = event->position().x();
+	const auto eventPosY = event->position().y();
+#else
+	const auto eventPosX = event->x();
+	const auto eventPosY = event->y();
+#endif
+
 	if (guiPanel)
 	{
+		const auto ratio = core->getCurrentStelProjectorParams().devicePixelsPerPixel;
 		// Remove all events on the sky within Ocular GUI Panel.
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-		if (event->position().x()>guiPanel->pos().x() && event->position().y()>(prj->getViewportHeight()-guiPanel->size().height()))
-#else
-		if (event->x()>guiPanel->pos().x() && event->y()>(prj->getViewportHeight()-guiPanel->size().height()))
-#endif
+		if (eventPosX > guiPanel->pos().x()*ratio && eventPosY > prj->getViewportHeight() - ratio*guiPanel->size().height())
 		{
 			event->setAccepted(true);
 			return;
@@ -409,13 +414,8 @@ void Oculars::handleMouseClicks(class QMouseEvent* event)
 	{
 		float wh = prj->getViewportWidth()*0.5f; // get half of width of the screen
 		float hh = prj->getViewportHeight()*0.5f; // get half of height of the screen
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-		float mx = event->position().x()-wh; // point 0 in center of the screen, axis X directed to right
-		float my = event->position().y()-hh; // point 0 in center of the screen, axis Y directed to bottom
-#else
-		float mx = event->x()-wh; // point 0 in center of the screen, axis X directed to right
-		float my = event->y()-hh; // point 0 in center of the screen, axis Y directed to bottom
-#endif
+		float mx = eventPosX-wh; // point 0 in center of the screen, axis X directed to right
+		float my = eventPosY-hh; // point 0 in center of the screen, axis Y directed to bottom
 
 		double inner = 0.5 * params.viewportFovDiameter * ppx;
 		// See if we need to scale the mask
@@ -1845,7 +1845,7 @@ void Oculars::paintCCDBounds()
 	StelUtils::rectToSphe(&azimuth, &elevation, centerPos3d);
 	const auto derotate = Mat4f::rotation(Vec3f(0,0,1), azimuth) *
 						  Mat4f::rotation(Vec3f(0,1,0), -elevation) *
-						  Mat4f::rotation(Vec3f(1,0,0), polarAngle * (M_PI/180));
+						  Mat4f::rotation(Vec3f(1,0,0), (ccd->chipRotAngle() + polarAngle) * (M_PI/180));
 
 	const auto boundingRect = drawSensorFrameAndOverlay(altAzProj, derotate, *ccd, *lens, overlaySize);
 

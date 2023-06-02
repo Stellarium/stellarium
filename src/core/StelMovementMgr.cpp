@@ -599,6 +599,13 @@ bool StelMovementMgr::handlePinch(qreal scale, bool started)
 
 void StelMovementMgr::handleMouseClicks(QMouseEvent* event)
 {
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+	const auto eventPosX = event->position().x();
+	const auto eventPosY = event->position().y();
+#else
+	const auto eventPosX = event->x();
+	const auto eventPosY = event->y();
+#endif
 	switch (event->button())
 	{
 		case Qt::RightButton:
@@ -630,21 +637,12 @@ void StelMovementMgr::handleMouseClicks(QMouseEvent* event)
 					dragTimeMode=true;
 					beforeTimeDragTimeRate=core->getTimeRate();
 					timeDragHistory.clear();
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-					addTimeDragPoint(event->position().x(), event->position().y());
-#else
-					addTimeDragPoint(event->x(), event->y());
-#endif
+					addTimeDragPoint(eventPosX, eventPosY);
 				}
 				isDragging = true;
 				hasDragged = false;
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-				previousX = event->position().x();
-				previousY = event->position().y();
-#else
-				previousX = event->x();
-				previousY = event->y();
-#endif
+				previousX = eventPosX;
+				previousY = eventPosY;
 				event->accept();
 				return;
 			}
@@ -698,17 +696,9 @@ void StelMovementMgr::handleMouseClicks(QMouseEvent* event)
 					}
 
 					// Try to select object at that position
-				#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-					objectMgr->findAndSelect(core, event->position().x(), event->position().y(), event->modifiers().testFlag(Qt::MetaModifier) ? StelModule::AddToSelection : StelModule::ReplaceSelection);
-				#else
-					objectMgr->findAndSelect(core, event->x(), event->y(), event->modifiers().testFlag(Qt::MetaModifier) ? StelModule::AddToSelection : StelModule::ReplaceSelection);
-				#endif
+					objectMgr->findAndSelect(core, eventPosX, eventPosY, event->modifiers().testFlag(Qt::MetaModifier) ? StelModule::AddToSelection : StelModule::ReplaceSelection);
 			#else
-				#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-					objectMgr->findAndSelect(core, event->position().x(), event->position().y(), event->modifiers().testFlag(Qt::ControlModifier) ? StelModule::AddToSelection : StelModule::ReplaceSelection);
-				#else
-					objectMgr->findAndSelect(core, event->x(), event->y(), event->modifiers().testFlag(Qt::ControlModifier) ? StelModule::AddToSelection : StelModule::ReplaceSelection);
-				#endif
+					objectMgr->findAndSelect(core, eventPosX, eventPosY, event->modifiers().testFlag(Qt::ControlModifier) ? StelModule::AddToSelection : StelModule::ReplaceSelection);
 			#endif
 					if (objectMgr->getWasSelected())
 						setFlagTracking(false);

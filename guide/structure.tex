@@ -158,6 +158,39 @@
 \newcommand{\cy}{\ensuremath{\,\mathrm{cy}}} % century
 \newcommand{\cdpmQ}{\ensuremath{\,\mathrm{cd}/\mathrm{m}^2}} % candela
 
+
+% Define JavaScript for script listings
+% Taken from https://tex.stackexchange.com/questions/89574/language-option-supported-in-listings
+%\definecolor{lightgray}{rgb}{.9,.9,.9}
+\definecolor{darkgray}{rgb}{.4,.4,.4}
+%\definecolor{purple}{rgb}{0.65, 0.12, 0.82}
+\lstdefinelanguage{JavaScript}{
+   basicstyle=\fontfamily{pcr}\selectfont,
+%  keywords={break, case, catch, continue, debugger, default, delete, do, else, false, finally, for, function, if, in, instanceof, new, null, return, switch, this, throw, true, try, typeof, var, void, while, with},
+% The following includes TypeScript
+  keywords={abstract, any, as, boolean, break, case, catch, class, console, 
+    const, continue, debugger, declare, default, delete, do, else, enum, export, 
+    extends, false, finally, for, from, function, get, if, implements, import, in, 
+    infer, instanceof, interface, keyof, let, module, namespace, never, new, null, 
+    number, object, package, private, protected, public, readonly, require, return, 
+    set, static, string, super, switch, symbol, this, throw, true, try, type, typeof, 
+    undefined, unique, unknown, var, void, while, with, yield},
+  morecomment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  morestring=[b]',
+  morestring=[b]",
+  keepspaces=true,%
+  showstringspaces=false,
+  escapeinside={(*}{*)},%
+  keywords=[2]{class, export, boolean, throw, implements, import, this},
+  keywordstyle=\color{green!40!black}\bfseries, % or blue in the example.
+  keywordstyle=[2]\color{darkgray}\bfseries,
+  identifierstyle=\color{blue},
+  commentstyle=\color{purple!40!black}\ttfamily,
+  stringstyle=\color{orange}\ttfamily,
+  sensitive=true
+}
+
 % It seems the lstenvironments are much too complicated or need big efforts for decorating in HTML/CSS. Just replace by something simpler.
 % We must repeat the same definitions with small and scriptsize (executed in PDF only), and later remove the optional size argument. 							 
 \ifhtlatex
@@ -167,30 +200,22 @@
 \DefineVerbatimEnvironment{configfileScr}{Verbatim}{frame=single}
 \DefineVerbatimEnvironment{script}{Verbatim}{numbers=left,frame=single}
 \else
-\lstnewenvironment{commands}[1][\small]{\lstset{language=sh,basicstyle=\ttfamily#1,%
+\lstnewenvironment{commands}[1][\small]{\lstset{language=sh,basicstyle=\ttfamily#1,showstringspaces=false,%
                                      backgroundcolor=\color{black!5},frame=leftline,rulecolor=\color{blue},framerule=1pt}%
                              }{}%
-\lstnewenvironment{commandsScr}[1][\scriptsize]{\lstset{language=sh,basicstyle=\ttfamily#1,%
+\lstnewenvironment{commandsScr}[1][\scriptsize]{\lstset{language=sh,basicstyle=\ttfamily#1,showstringspaces=false,%
                                      backgroundcolor=\color{black!5},frame=leftline,rulecolor=\color{blue},framerule=1pt}%
                              }{}%
-\lstnewenvironment{configfile}[1][\small]{\lstset{language=sh,basicstyle=\ttfamily#1,%
+\lstnewenvironment{configfile}[1][\small]{\lstset{language=sh,basicstyle=\ttfamily#1,showstringspaces=false,%
                                    backgroundcolor=\color{black!5},frame=shadowbox,rulecolor=\color{blue},framerule=1pt}%
                              }{}%
-\lstnewenvironment{configfileScr}[1][\scriptsize]{\lstset{language=sh,basicstyle=\ttfamily#1,%
+\lstnewenvironment{configfileScr}[1][\scriptsize]{\lstset{language=sh,basicstyle=\ttfamily#1,showstringspaces=false,%
                                    backgroundcolor=\color{black!5},frame=shadowbox,rulecolor=\color{blue},framerule=1pt}%
                              }{}%
-\lstnewenvironment{script}{\lstset{language=VBScript,%                                    
-                               basicstyle=\fontfamily{pcr}\selectfont,%
+\lstnewenvironment{script}{\lstset{language=JavaScript,                   
                                backgroundcolor=\color{black!5},%
                                frame=leftline,%
-                               keepspaces=true,%
                                rulecolor=\color{blue},%
-                               showstringspaces=false,
-                               keywordstyle=\bfseries\color{green!40!black},%
-                               commentstyle=\itshape\color{purple!40!black},%
-                               identifierstyle=\color{blue},%
-                               stringstyle=\color{orange},%
-                               escapeinside={(*}{*)},%
                                framerule=1pt}%
                          }{}%
 \fi
