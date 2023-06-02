@@ -1845,7 +1845,7 @@ void Oculars::paintCCDBounds()
 	StelUtils::rectToSphe(&azimuth, &elevation, centerPos3d);
 	const auto derotate = Mat4f::rotation(Vec3f(0,0,1), azimuth) *
 						  Mat4f::rotation(Vec3f(0,1,0), -elevation) *
-						  Mat4f::rotation(Vec3f(1,0,0), polarAngle * (M_PI/180));
+						  Mat4f::rotation(Vec3f(1,0,0), (ccd->chipRotAngle() + polarAngle) * (M_PI/180));
 
 	const auto boundingRect = drawSensorFrameAndOverlay(altAzProj, derotate, *ccd, *lens, overlaySize);
 
