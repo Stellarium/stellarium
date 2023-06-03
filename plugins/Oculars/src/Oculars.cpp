@@ -1840,17 +1840,18 @@ void Oculars::paintCCDBounds()
 						  Mat4f::rotation(Vec3f(1,0,0), (ccd->chipRotAngle() + polarAngle) * (M_PI/180));
 
 	// Compute vectors corresponding to up and right direction of the frame, they will be used to find its bounding rect
-	Vec3f frameUp3d, frameCenter3d, frameRight3d;
-	altAzProj->project(derotate * Vec3f(1,0,1), frameUp3d);
-	altAzProj->project(derotate * Vec3f(1,0,0), frameCenter3d);
-	altAzProj->project(derotate * Vec3f(1,-1,0), frameRight3d);
-	const auto frameUpDir = normalize(Vec2f(frameUp3d[0] - frameCenter3d[0], frameUp3d[1] - frameCenter3d[1]));
-	const auto frameRightDir = normalize(Vec2f(frameRight3d[0] - frameCenter3d[0], frameRight3d[1] - frameCenter3d[1]));
-	const auto frameCenter = Vec2f(frameCenter3d[0], frameCenter3d[1]);
+	Vec3f frameUpWin, frameCenterWin, frameRightWin;
+	altAzProj->project(derotate * Vec3f(1,0,1), frameUpWin);
+	altAzProj->project(derotate * Vec3f(1,0,0), frameCenterWin);
+	altAzProj->project(derotate * Vec3f(1,-1,0), frameRightWin);
+	const auto frameUpWinDir = normalize(Vec2f(frameUpWin[0] - frameCenterWin[0],
+											   frameUpWin[1] - frameCenterWin[1]));
+	const auto frameRightWinDir = normalize(Vec2f(frameRightWin[0] - frameCenterWin[0],
+											   frameRightWin[1] - frameCenterWin[1]));
+	const auto frameCenterWin2d = Vec2f(frameCenterWin[0], frameCenterWin[1]);
 
-	const auto boundingRect = drawSensorFrameAndOverlay(altAzProj, derotate, frameUpDir, frameRightDir,
-														frameCenter, *ccd, *lens, overlaySize);
-
+	const auto boundingRect = drawSensorFrameAndOverlay(altAzProj, derotate, frameUpWinDir, frameRightWinDir,
+														frameCenterWin2d, *ccd, *lens, overlaySize);
 	StelPainter painter(projector);
 	painter.setLineSmooth(true);
 	painter.setColor(lineColor);
@@ -1867,7 +1868,7 @@ void Oculars::paintCCDBounds()
 	const double ratioLimitCrop = 0.75;
 	if (ccdXRatio>=ratioLimit || ccdYRatio>=ratioLimit)
 	{
-		const double textRotationAngle = 180/M_PI * std::atan2(frameRightDir[1], frameRightDir[0]);
+		const double textRotationAngle = 180/M_PI * std::atan2(frameRightWinDir[1], frameRightWinDir[0]);
 		QTransform transform = QTransform().translate(centerScreen[0], centerScreen[1]).rotate(textRotationAngle);
 		QPoint a, b;
 		// draw cross at center
