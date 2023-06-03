@@ -400,8 +400,12 @@ private:
 	//! Renders off-axis guider frame and its inner and outer circles
 	void drawOAG(const StelProjectorP& altAzProj, const Mat4f& derotate, const CCD& ccd, const Lens& lens);
 	//! Renders the actual rectangles corresponding to the CCD frame and the crop overlay with its grid.
+	//! \param frameUpDir window-space vector pointing in the "up" direction of the sensor frame
+	//! \param frameRightDir window-space vector pointing in the "right" direction of the sensor frame
+	//! \param frameCenter window-space position of the center of the sensor frame
 	//! \return bounding rect of the main sensor frame, relative to the center of the sensor, without rotation.
-	QRect drawSensorFrameAndOverlay(const StelProjectorP& altAzProj, const Mat4f& derotate, const CCD& ccd, const Lens& lens,
+	QRect drawSensorFrameAndOverlay(const StelProjectorP& altAzProj, const Mat4f& derotate, const Vec2f& frameUpDir,
+									const Vec2f& frameRightDir, const Vec2f& frameCenter, const CCD& ccd, const Lens& lens,
 									const QSize& overlaySize);
 	//! Renders the CCD bounding box on-screen.  A telescope must be selected, or this call does nothing.
 	void paintCCDBounds();
