@@ -1529,12 +1529,12 @@ bool Oculars::isBinocularDefined()
 	return binocularFound;
 }
 
-QRect Oculars::drawSensorFrameAndOverlay(const StelProjectorP& altAzProj, const Mat4f& derotate,
+QRect Oculars::drawSensorFrameAndOverlay(const StelProjectorP& projector, const Mat4f& derotate,
 										 const Vec2f& frameUpDir, const Vec2f& frameRightDir,
 										 const Vec2f& frameCenter, const CCD& ccd, const Lens& lens,
 										 const QSize& overlaySize)
 {
-	StelPainter sPainter(altAzProj);
+	StelPainter sPainter(projector);
 	sPainter.setLineSmooth(true);
 	sPainter.setColor(lineColor);
 	Telescope *telescope = telescopes[selectedTelescopeIndex];
@@ -1569,7 +1569,7 @@ QRect Oculars::drawSensorFrameAndOverlay(const StelProjectorP& altAzProj, const 
 			const auto y = cropTanFovX;
 			const auto z = cropTanFovY * (2.f / (numPointsPerLine - 1) * n - 1);
 			Vec3f win;
-			altAzProj->project(derotate * Vec3f(x,y,z), win);
+			projector->project(derotate * Vec3f(x,y,z), win);
 			lineLoopPoints.push_back(Vec2f(win[0], win[1]));
 		}
 		// Top line
@@ -1579,7 +1579,7 @@ QRect Oculars::drawSensorFrameAndOverlay(const StelProjectorP& altAzProj, const 
 			const auto y = -cropTanFovX * (2.f / (numPointsPerLine - 1) * n - 1);
 			const auto z = cropTanFovY;
 			Vec3f win;
-			altAzProj->project(derotate * Vec3f(x,y,z), win);
+			projector->project(derotate * Vec3f(x,y,z), win);
 			lineLoopPoints.push_back(Vec2f(win[0], win[1]));
 		}
 		// Right line
@@ -1589,7 +1589,7 @@ QRect Oculars::drawSensorFrameAndOverlay(const StelProjectorP& altAzProj, const 
 			const auto y = -cropTanFovX;
 			const auto z = cropTanFovY * (1 - 2.f / (numPointsPerLine - 1) * n);
 			Vec3f win;
-			altAzProj->project(derotate * Vec3f(x,y,z), win);
+			projector->project(derotate * Vec3f(x,y,z), win);
 			lineLoopPoints.push_back(Vec2f(win[0], win[1]));
 		}
 		// Bottom line
@@ -1599,7 +1599,7 @@ QRect Oculars::drawSensorFrameAndOverlay(const StelProjectorP& altAzProj, const 
 			const auto y = -cropTanFovX * (1 - 2.f / (numPointsPerLine - 1) * n);
 			const auto z = -cropTanFovY;
 			Vec3f win;
-			altAzProj->project(derotate * Vec3f(x,y,z), win);
+			projector->project(derotate * Vec3f(x,y,z), win);
 			lineLoopPoints.push_back(Vec2f(win[0], win[1]));
 		}
 		for(const auto& p : lineLoopPoints)
@@ -1636,7 +1636,7 @@ QRect Oculars::drawSensorFrameAndOverlay(const StelProjectorP& altAzProj, const 
 			const auto y = cropTanFovX * (1 - 2 * line / numOverlayPixelsX);
 			const auto z = cropTanFovY * (2.f / (numPointsPerLine - 1) * p - 1);
 			Vec3f win;
-			altAzProj->project(derotate * Vec3f(x,y,z), win);
+			projector->project(derotate * Vec3f(x,y,z), win);
 			lineStripPoints.push_back(Vec2f(win[0], win[1]));
 		}
 		sPainter.setVertexPointer(2, GL_FLOAT, lineStripPoints.data());
@@ -1653,7 +1653,7 @@ QRect Oculars::drawSensorFrameAndOverlay(const StelProjectorP& altAzProj, const 
 			const auto y = -cropTanFovX * (2.f / (numPointsPerLine - 1) * p - 1);
 			const auto z = cropTanFovY * (1 - 2 * line / numOverlayPixelsX);
 			Vec3f win;
-			altAzProj->project(derotate * Vec3f(x,y,z), win);
+			projector->project(derotate * Vec3f(x,y,z), win);
 			lineStripPoints.push_back(Vec2f(win[0], win[1]));
 		}
 		sPainter.setVertexPointer(2, GL_FLOAT, lineStripPoints.data());
@@ -1693,10 +1693,10 @@ void Oculars::drawCirclesOfConstantAngularRadii(StelPainter& sPainter, const Mat
 	sPainter.enableClientStates(false);
 }
 
-void Oculars::drawOAG(const StelProjectorP& altAzProj, const Mat4f& derotate,
+void Oculars::drawOAG(const StelProjectorP& projector, const Mat4f& derotate,
 					  const CCD& ccd, const Lens& lens)
 {
-	StelPainter sPainter(altAzProj);
+	StelPainter sPainter(projector);
 	sPainter.setLineSmooth(true);
 	sPainter.setColor(lineColor);
 
@@ -1722,7 +1722,7 @@ void Oculars::drawOAG(const StelProjectorP& altAzProj, const Mat4f& derotate,
 		const auto y = tanFovX;
 		const auto z = (tanOuterRadius-tanInnerRadius) * n / (numPointsPerLine-1) + tanInnerRadius;
 		Vec3f win;
-		altAzProj->project(derotate * Vec3f(x,y,z), win);
+		projector->project(derotate * Vec3f(x,y,z), win);
 		lineLoopPoints.push_back(Vec2f(win[0], win[1]));
 	}
 	// Top line
@@ -1732,7 +1732,7 @@ void Oculars::drawOAG(const StelProjectorP& altAzProj, const Mat4f& derotate,
 		const auto y = -tanFovX * (2.f / (numPointsPerLine - 1) * n - 1);
 		const auto z = tanOuterRadius;
 		Vec3f win;
-		altAzProj->project(derotate * Vec3f(x,y,z), win);
+		projector->project(derotate * Vec3f(x,y,z), win);
 		lineLoopPoints.push_back(Vec2f(win[0], win[1]));
 	}
 	// Right line
@@ -1742,7 +1742,7 @@ void Oculars::drawOAG(const StelProjectorP& altAzProj, const Mat4f& derotate,
 		const auto y = -tanFovX;
 		const auto z = (tanInnerRadius-tanOuterRadius) * n / (numPointsPerLine-1) + tanOuterRadius;
 		Vec3f win;
-		altAzProj->project(derotate * Vec3f(x,y,z), win);
+		projector->project(derotate * Vec3f(x,y,z), win);
 		lineLoopPoints.push_back(Vec2f(win[0], win[1]));
 	}
 	// Bottom line
@@ -1752,7 +1752,7 @@ void Oculars::drawOAG(const StelProjectorP& altAzProj, const Mat4f& derotate,
 		const auto y = -tanFovX * (1 - 2.f / (numPointsPerLine - 1) * n);
 		const auto z = tanInnerRadius;
 		Vec3f win;
-		altAzProj->project(derotate * Vec3f(x,y,z), win);
+		projector->project(derotate * Vec3f(x,y,z), win);
 		lineLoopPoints.push_back(Vec2f(win[0], win[1]));
 	}
 	sPainter.enableClientStates(true);
@@ -1767,11 +1767,8 @@ void Oculars::paintCCDBounds()
 	StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
 	Lens *lens = selectedLensIndex >=0  ? lenses[selectedLensIndex] : Q_NULLPTR;
 
-	const StelProjectorP projector = core->getProjection(StelCore::FrameEquinoxEqu);
-	double screenFOV = static_cast<double>(params.fov);
-	Vec2i centerScreen(projector->getViewportPosX() + projector->getViewportWidth() / 2,
-			   projector->getViewportPosY() + projector->getViewportHeight() / 2);
-
+	const auto equatProj = core->getProjection(StelCore::FrameEquinoxEqu, StelCore::RefractionMode::RefractionOff);
+	const auto altAzProj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionMode::RefractionOff);
 	if (selectedCCDIndex < 0 || selectedTelescopeIndex < 0)
 		return;
 
@@ -1779,6 +1776,11 @@ void Oculars::paintCCDBounds()
 	if (!ccd) return;
 
 	Telescope *telescope = telescopes[selectedTelescopeIndex];
+	const auto projector = telescope->isEquatorial() ? equatProj : altAzProj;
+
+	double screenFOV = static_cast<double>(params.fov);
+	Vec2i centerScreen(projector->getViewportPosX() + projector->getViewportWidth() / 2,
+			   projector->getViewportPosY() + projector->getViewportHeight() / 2);
 
 	const double ccdXRatio = ccd->getActualFOVx(telescope, lens) / screenFOV;
 	const double ccdYRatio = ccd->getActualFOVy(telescope, lens) / screenFOV;
@@ -1804,60 +1806,42 @@ void Oculars::paintCCDBounds()
 	const float overlayWidth = width * actualCropOverlayX / ccd->resolutionX();
 	const float overlayHeight = height * actualCropOverlayY / ccd->resolutionY();
 
-	double polarAngle = 0;
-	// if the telescope is Equatorial derotate the field
-	if (telescope->isEquatorial())
-	{
-		Vec3d CPos;
-		Vector2<qreal> cpos = projector->getViewportCenter();
-		projector->unProject(cpos[0], cpos[1], CPos);
-		Vec3d CPrel(CPos);
-		CPrel[2]*=0.2;
-		Vec3d crel;
-		projector->project(CPrel, crel);
-		polarAngle = atan2(cpos[1] - crel[1], cpos[0] - crel[0]) * (-180.0)/M_PI; // convert to degrees
-		if (CPos[2] > 0) polarAngle += 90.0;
-		else polarAngle -= 90.0;
-	}
+	Vec3d centerPos3d;
+	projector->unProject(centerScreen[0], centerScreen[1], centerPos3d);
+	double azimuth, elevation;
+	StelUtils::rectToSphe(&azimuth, &elevation, centerPos3d);
+	const auto derotate = Mat4f::rotation(Vec3f(0,0,1), azimuth) *
+						  Mat4f::rotation(Vec3f(0,1,0), -elevation) *
+						  Mat4f::rotation(Vec3f(1,0,0), ccd->chipRotAngle() * (M_PI/180));
 
 	if (getFlagAutosetMountForCCD())
 	{
 		StelPropertyMgr* propMgr=StelApp::getInstance().getStelPropertyManager();
 		propMgr->setStelPropertyValue("actionSwitch_Equatorial_Mount", telescope->isEquatorial());
-		polarAngle = 0;
 	}
 
 	const QSize overlaySize(actualCropOverlayX, actualCropOverlayY);
 
-	const StelProjectorP altAzProj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionMode::RefractionOff);
-	Vec3d centerPos3d;
-	const auto centerPos2d = altAzProj->getViewportCenter();
-	altAzProj->unProject(centerPos2d[0], centerPos2d[1], centerPos3d);
-	double azimuth, elevation;
-	StelUtils::rectToSphe(&azimuth, &elevation, centerPos3d);
-	const auto derotate = Mat4f::rotation(Vec3f(0,0,1), azimuth) *
-						  Mat4f::rotation(Vec3f(0,1,0), -elevation) *
-						  Mat4f::rotation(Vec3f(1,0,0), (ccd->chipRotAngle() + polarAngle) * (M_PI/180));
-
 	// Compute vectors corresponding to up and right direction of the frame, they will be used to find its bounding rect
-	Vec3f frameUp3d, frameCenter3d, frameRight3d;
-	altAzProj->project(derotate * Vec3f(1,0,1), frameUp3d);
-	altAzProj->project(derotate * Vec3f(1,0,0), frameCenter3d);
-	altAzProj->project(derotate * Vec3f(1,-1,0), frameRight3d);
-	const auto frameUpDir = normalize(Vec2f(frameUp3d[0] - frameCenter3d[0], frameUp3d[1] - frameCenter3d[1]));
-	const auto frameRightDir = normalize(Vec2f(frameRight3d[0] - frameCenter3d[0], frameRight3d[1] - frameCenter3d[1]));
-	const auto frameCenter = Vec2f(frameCenter3d[0], frameCenter3d[1]);
+	Vec3f frameUpWin, frameCenterWin, frameRightWin;
+	projector->project(derotate * Vec3f(1,0,1), frameUpWin);
+	projector->project(derotate * Vec3f(1,0,0), frameCenterWin);
+	projector->project(derotate * Vec3f(1,-1,0), frameRightWin);
+	const auto frameUpWinDir = normalize(Vec2f(frameUpWin[0] - frameCenterWin[0],
+											   frameUpWin[1] - frameCenterWin[1]));
+	const auto frameRightWinDir = normalize(Vec2f(frameRightWin[0] - frameCenterWin[0],
+											   frameRightWin[1] - frameCenterWin[1]));
+	const auto frameCenterWin2d = Vec2f(frameCenterWin[0], frameCenterWin[1]);
 
-	const auto boundingRect = drawSensorFrameAndOverlay(altAzProj, derotate, frameUpDir, frameRightDir,
-														frameCenter, *ccd, *lens, overlaySize);
-
+	const auto boundingRect = drawSensorFrameAndOverlay(projector, derotate, frameUpWinDir, frameRightWinDir,
+														frameCenterWin2d, *ccd, *lens, overlaySize);
 	StelPainter painter(projector);
 	painter.setLineSmooth(true);
 	painter.setColor(lineColor);
 	painter.setFont(font);
 
 	if(ccd->hasOAG())
-		drawOAG(altAzProj, derotate, *ccd, *lens);
+		drawOAG(projector, derotate, *ccd, *lens);
 
 	// Tool for planning a mosaic astrophotography: shows a small cross at center of CCD's
 	// frame and equatorial coordinates for epoch J2000.0 of that center.
@@ -1867,7 +1851,7 @@ void Oculars::paintCCDBounds()
 	const double ratioLimitCrop = 0.75;
 	if (ccdXRatio>=ratioLimit || ccdYRatio>=ratioLimit)
 	{
-		const double textRotationAngle = 180/M_PI * std::atan2(frameRightDir[1], frameRightDir[0]);
+		const double textRotationAngle = 180/M_PI * std::atan2(frameRightWinDir[1], frameRightWinDir[0]);
 		QTransform transform = QTransform().translate(centerScreen[0], centerScreen[1]).rotate(textRotationAngle);
 		QPoint a, b;
 		// draw cross at center
@@ -1880,7 +1864,7 @@ void Oculars::paintCCDBounds()
 		painter.drawLine2d(a.x(), a.y(), b.x(), b.y());
 		// calculate coordinates of the center and show it
 		Vec3d centerPosition;
-		projector->unProject(centerScreen[0], centerScreen[1], centerPosition);
+		equatProj->unProject(centerScreen[0], centerScreen[1], centerPosition);
 		double cx, cy;
 		QString cxt, cyt, coords;
 		bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
@@ -1994,7 +1978,7 @@ void Oculars::paintCCDBounds()
 
 	if (getFlagShowFocuserOverlay())
 	{
-		painter.setProjector(altAzProj);
+		painter.setProjector(projector);
 		painter.setColor(focuserColor);
 
 		std::vector<float> radii;
