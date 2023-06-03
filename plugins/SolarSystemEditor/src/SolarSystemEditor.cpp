@@ -143,7 +143,6 @@ void SolarSystemEditor::init()
 		{ 457175, "362P" }
 	};
 
-	loadPeriodicCometDesignators();
 	loadMinorPlanetData();
 	loadCometData();
 
@@ -551,35 +550,6 @@ void SolarSystemEditor::loadCometData()
 	}
 }
 
-void SolarSystemEditor::loadPeriodicCometDesignators()
-{
-	periodicCometsIdentifiers.clear();
-
-	QFile codes(":/SolarSystemEditor/periodic_comet_codes.fab");
-	if(codes.open(QFile::ReadOnly | QFile::Text))
-	{
-		// regular expression to find the comments and empty lines
-		static const QRegularExpression commentRx("^(\\s*#.*|\\s*)$");
-
-		while(!codes.atEnd())
-		{
-			QString line = QString::fromUtf8(codes.readLine());
-
-			// Skip comments
-			if (commentRx.match(line).hasMatch() || line.startsWith("//"))
-				continue;
-
-			if (!line.isEmpty())
-			{
-				QStringList list=line.split("\t");
-				// The first entry is the old-style designation, the second is as the new-style designation
-				periodicCometsIdentifiers.insert(list.at(0).trimmed().toLocal8Bit(), list.at(1).trimmed().toLocal8Bit());
-			}
-		}
-		codes.close();
-	}
-}
-
 void SolarSystemEditor::loadMinorPlanetData()
 {
 	numberedMinorPlanets.clear();
@@ -769,13 +739,6 @@ SsoElements SolarSystemEditor::readMpcOneLineCometElements(QString oneLineElemen
 		// add IAU designation in addition to the old-style designation
 		if (!comet.date_code.isEmpty())
 			result.insert("iau_designation", comet.date_code);
-		else
-		{
-			// comet_discovery.fab contains data not for all periodical comets
-			QString pd = periodicCometsIdentifiers.value(key, "");
-			if (!pd.isEmpty())
-				result.insert("iau_designation", pd);
-		}
 	}
 	else
 		comet = cometsData.value(name.split("(").at(0).trimmed()); // IAU designation [P/1682 Q1]

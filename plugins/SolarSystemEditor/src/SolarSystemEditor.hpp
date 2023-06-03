@@ -240,9 +240,6 @@ private:
 	//! The keys are the names, the values are the group names.	
 	QHash<QString, QString> defaultSsoIdentifiers;
 
-	//! The list of associations old-style and new-style designations of periodic comets
-	QHash<QString, QString> periodicCometsIdentifiers;
-
 	QHash<QString, CometData> cometsData;
 
 	//! The list of discovery circumstances for numbered minor planets
@@ -268,9 +265,6 @@ private:
 
 	//! Check encoding of the file
 	bool isFileEncodingValid(QString filePath) const;
-
-	//! Load old-style and new-style designations for periodic comets
-	void loadPeriodicCometDesignators();
 
 	//! Load data for comets: designations and discovery circumstances
 	void loadCometData();

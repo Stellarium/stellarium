@@ -9,6 +9,8 @@
 # - Gary W. Kronk. Cometography: A Catalog of Comets. Vol. 1-6
 # - Comet Catalog in order of Number of Periodic Comets: http://www.aerith.net/comet/catalog/index-periodic.html
 # - Comet Catalog in order of Designation: http://www.aerith.net/comet/catalog/index-code.html
+# - Small-Body Database Lookup at NASA JPL: https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html
+# - Small Bodies Data Ferret: https://sbnapps.psi.edu/ferret/SimpleSearch/form.action
 #
 # Columns:
 # - IAU designation
@@ -184,7 +186,7 @@
    C/1817 Y1|C/1817    Y1|1818     II|      |1817-12-26|J.L. Pons
           2P|P/1818    W1|1819      I|      |1818-11-26|J.L. Pons
    C/1818 W2|C/1818    W2|1818    III|      |1818-11-28|J.L. Pons
-   D/1819 W1|D/1819    W1|1819     IV|      |1819-11-28|J.J. Blanpain
+        289P|P/1819    W1|1819     IV|      |1819-11-28|J.J. Blanpain
    C/1821 B1|C/1821    B1|1821       |      |1821-01-21|J.N. Nicollet, J.L. Pons
    C/1822 J1|C/1822    J1|1822      I|      |1822-05-12|J.F.A. Gambart
    C/1822 K1|C/1822    K1|1822    III|      |1822-05-31|J.L. Pons
@@ -199,7 +201,7 @@
           3D|D/1826    D1|1826      I|      |1826-02-27|W. von Biela
    C/1826 U1|C/1826    U1|1826      V|      |1826-10-22|J.L. Pons
    C/1826 Y1|C/1826    Y1|1827      I|      |1826-12-26|J.L. Pons
-   D/1827 M1|D/1827    M1|1827     II|      |1827-06-21|J.L. Pons, J.F.A. Gambart
+        273P|P/1827    M1|1827     II|      |1827-06-21|J.L. Pons, J.F.A. Gambart
 # Great Comet
    C/1830 F1|C/1830    F1|1830      I|      |1830-03-16|Faraguet
 # Great Comet
@@ -210,6 +212,7 @@
    С/1839 X1|С/1839    X1|1840      I|      |1839-12-03|J.G. Galle
    С/1840 B1|С/1840    B1|1840     II|      |1840-01-25|J.G. Galle
    С/1842 U1|С/1842    U1|1842     II|      |1842-10-28|P.A.E. Laugier
+          4P|P/1843    W1|1843    III|      |1843-11-23|H. Faye
 # Great March Comet
    С/1843 D1|С/1843    D1|1843      I|      |1843-02-06|
    С/1844 N1|С/1844    N1|1844     II|      |1844-07-08|F.V. Mauvais
@@ -225,7 +228,67 @@
    С/1847 Q1|С/1847    Q1|1847     IV|      |1847-08-31|K.G. Schwaizer
    С/1847 T1|С/1847    T1|1847     VI|      |1847-10-02|M. Mitchell
    С/1848 U1|С/1848    U1|1849      I|      |1848-10-26|A.C. Petersen
+          6P|P/1851    M1|1851     II|      |1851-06-28|H.L. d'Arrest
+         20D|D/1852    O1|1852     IV|      |1852-07-24|J.G. Westphal
+# P.F.A. Méchain discovered this comet in the evening sky near Omicron Piscium on 1790
+# January 9.75. H.P. Tuttle discovered this comet on 1858 January 5.01. Ch. W. Tuttle
+# used three positions obtained between January 5 and 13, and computed a parabolic orbit
+# with a perihelion date of 1858 February 20.48 and a perihelion distance of 1.070 AU.
+# He noted "so strong a resemblance to [the orbit] of the second comet of 1790, that
+# there would seem to be small reason for doubt of the identity of the comet."
+          8P|P/1858    A1|1858      I|      |1858-01-05|H.P. Tuttle
+# Pons discovered this comet on 1819 June 12. Winnecke accidentally rediscovered this
+# comet on 1858 March 9.06.
+          7P|P/1858    E1|1858     II|      |1858-03-09|J.L. Pons, F.A.Th. Winnecke
+        109P|P/1862    O1|1862    III|      |1862-07-16|L. Swift
+         55P|P/1865    Y1|1866      I|      |1865-12-19|W. Tempel, H.P. Tuttle
+          9P|P/1867    G1|1867     II|      |1867-04-03|W. Tempel
+         10P|P/1873    N1|1873     II| 1873b|1873-07-03|W. Tempel
+# E.W.L. Tempel discovered this comet on 1869 November 27 in Pegasus. L. Swift discovered
+# a diffuse, circular comet in Pegasus on 1880 October 11. By mid-November, astronomers
+# realized Swift's comet was a return of Tempel's 1869 comet.
+         11P|P/1880    T1|1880     IV| 1880e|1880-10-11|L. Swift
+         72P|P/1881    T1|1881      V| 1881f|1881-10-04|W.F. Denning
+         14P|P/1884    S1|1884    III| 1884c|1884-09-17|M. Wolf
+         15P|P/1886    S1|1886    VII| 1886e|1886-09-26|W.H. Finlay
+        177P|P/1889    M1|1889    III| 1889c|1889-06-24|E.E. Barnard
+         16P|P/1889    N1|1889      V| 1889d|1889-07-07|W.R. Brooks
+         64P|P/1889    W1|1889     VI| 1889f|1889-11-16|L. Swift
+        113P|P/1890    W1|1890    VII| 1890f|1890-11-17|R. Spitaler
+         17P|P/1892    V1|1892    III| 1892f|1892-11-07|E. Holmes
+# This comet marked the beginning of a new era in cometary astronomy, as it was the first
+# to be discovered by photography.
+        206P|P/1892    T1|1892      V| 1892e|1892-10-13|E.E. Barnard
+        205P|P/1896    R2|1896      V| 1896d|1896-09   |M. Giacobini
+         18D|D/1896    X1|1896    VII| 1896g|1896-12-09|Ch.D. Perrine
 # Volume 3, 1900-1932
+         21P|P/1900    Y1|1900    III| 1900c|1900-12-20|M. Giacobini
+         19P|P/1904    Y2|1905     II| 1904e|1904-12-28|A. Borrelly
+         22P|P/1906    Q1|1906     IV| 1906e|1906-08-22|A. Kopff
+         97P|P/1906    V2|1906     VI| 1906h|1906-11-15|J.H. Metcalf
+         33P|P/1909    X1|1909     IV| 1909e|1909-12-07|Z. Daniel
+         24P|P/1911    X1|           |      |1911-12-01|M.A. Schaumasse
+         28P|P/1913    R2|1913    III| 1913c|1913-09-04|G.N. Neujmin
+         69P|P/1915    W1|1916      I| 1915e|1915-11-24|C.J. Taylor
+         25D|D/1916    D1|1916     II| 1916a|1916-02-24|G.N. Neujmin
+# The comet was discovered in 1902 by John Grigg of New Zealand, and rediscovered in its
+# next appearance in 1922 by John Francis Skjellerup, an Australian then living and
+# working for about two decades in South Africa where he was a founder member of the
+# Astronomical Society of Southern Africa.
+         26P|P/1922    K1|           |      |1902-07-23|J. Grigg, J.F. Skjellerup
+         43P|P/1924    Y1|1924      I|      |1924-12-22|M. Wolf
+         32P|P/1926    V1|1927    III| 1926f|1926-11-06|J. Comas Solà
+         34D|D/1927    L1|1927      I|      |1927-06-07|W.F. Gale
+         29P|P/1927    V1|1927     II|      |1927-11-15|A. Schwassmann, A.A. Wachmann
+         30P|P/1928    D1|           |      |1928-02-22|K. Reinmuth
+# Comet Crommelin, is a periodic comet with an orbital period of almost 28 years. It fits
+# the classical definition of a Halley-type comet with (20 years < period < 200 years).
+# It is named after the British astronomer A.C.D. Crommelin who calculated its orbit in 1930.
+         27P|P/1928    W1|           |      |1818-02-23|J.L. Pons
+         31P|P/1929    B1|1929      I| 1929a|1929-01-17|A. Schwassmann, A.A. Wachmann
+         37P|P/1929    P1|1929     II| 1929c|1929-08-01|A.F.I. Forbes
+         42P|P/1929    P2|1929    III| 1929b|1929-08-02|G.N. Neujmin
+         73P|P/1930    J1|1930     VI| 1930d|1930-05-02|A. Schwassmann, A.A. Wachmann
 # Volume 4, 1933-1959
    C/1933 D1|C/1933    D1|1933      I| 1933a|1933-02-16|L.C. Peltier
          36P|P/1933    U1|1933     IV| 1933f|1933-10-15|F.L. Whipple
@@ -340,6 +403,7 @@
    C/1960 B1|C/1960    B1|1959    VII| 1960a|1960-01-21|R. Burnham Jr.
          63P|P/1960    G1|1960      I| 1960b|1960-03-26|P. Wild
    C/1960 M1|C/1960    M1|1959      X| 1960e|1960-06-18|M.L. Humanson
+        271P|P/1960    S1|1961      X|      |1966      |C.J. van Houten, I. van Houten-Groeneveld
    C/1961 O1|C/1961    O1|1961      V| 1961d|1961-07-23|A.S. Wilson
    C/1962 C1|C/1962    C1|1962    III| 1962c|1962-02-04|R.D. Lines, T. Seki
    C/1962 H1|C/1962    H1|1962     IV| 1962d|1962-04-28|M. Honda
@@ -347,6 +411,36 @@
          59P|P/1963    Q1|1963   VIII| 1963d|1963-08-17|C.E. Kearns, K.K. Kwee
    C/1963 R1|C/1963    R1|1963      V| 1963e|1963-09-14|Z.M. Pereyra
         148P|P/1963    W1|1963     IX|      |1963-11-22|W.J. Luyten, J.H. Anderson
+         62P|P/1965    A1|           |      |1965-01-01|
+         60P|P/1965    A2|           |      |1965-01-11|
+         68P|P/1965    U1|           |      |1965-11   |A.R. Klemola
+         67P|P/1969    R1|1969     IV| 1969h|1969-09-20|K.I. Churyumov, S.I. Gerasimenko
+         65P|P/1970    U2|1969     II|      |1970-10-27|J.E. Gunn
+         70P|P/1970    Y1|           |      |1970-12-27|N. Kojima
+         90P|P/1972    T1|           |      |1972-10-11|T. Gehrels
+         71P|P/1973    L1|1973      V|      |1973-06-09|M. Clark
+         78P|P/1973    S1|1973     XI|      |1973-09-29|T. Gehrels
+         85D|D/1975    A1|1975      I| 1975a|1975-01-04|L. Boethin
+         75D|D/1975    C1|           |      |1975-02   |L. Kohoutek
+         76P|P/1975    D1|           |      |1975-01   |R.M. West
+         74P|P/1975    E2|           |      |1975-03   |T.M. Smirnova
+         77P|P/1975    L1|1974    XIV|      |1975-06-10|A.J. Longmore
+         82P|P/1975    U1|           |      |1975-10-27|T. Gehrels
+         99P|P/1977    H2|1977    III|      |1977-04-24|Ch.T. Kowal
+        101P|P/1977    Q1|1978     IV|      |1977-08-19|N.S. Chernykh
+        106P|P/1977    T1|           |      |1977-10-09|H.-E. Schuster
+         92P|P/1977    T2|           |      |1977-10-15|J.G. Sanguin
+         81P|P/1978    A2|1978     XI|      |1978-01-06|P. Wild
+        157P|P/1978    C2|1977   XIII|      |1978-02-11|K. Tritton
+         84P|P/1978    R2|1978   XXII| 1978k|1978-09-08|H.L. Giclas
+        104P|P/1979    B1|           |      |1979-01-27|Ch.T. Kowal
+         83D|D/1979    M2|           |      |1979-06-16|K.S. Russell
+         86P|P/1980    G1|           |      |1980-05-11|P. Wild
+         89P|P/1980    S1|           |      |1980-09-28|K.S. Russell
+         93P|P/1980    X1|1980      V| 1980s|1980-12-05|M. Lovas
+         87P|P/1981    E1|1981     XI| 1981b|1981-03-02|S.J. Bus
+         88P|P/1981    Q1|1981      X|      |1981-08-29|E. Howell
+         80P|P/1982    N1|1982    III| 1982h|1846-06-26|C.H.F. Peters
 # Volume 6, 1983-1993
         140P|P/1983    C1|1983     II| 1983c|1983-02-11|E.L.G. Bowell, B.A. Skiff
    C/1983 H1|C/1983    H1|1983    VII| 1983d|1983-04-25|
@@ -497,6 +591,11 @@
         173P|P/1993    W1|1994    XXV| 1993s|1993-11-20|J.E. Mueller
         147P|P/1993    X1|1993    XIX| 1993t|1993-12-08|Y. Kushida, O. Muramatsu
    C/1993 Y1|C/1993    Y1|1994     XI| 1993v|1993-12-17|R.H. McNaught, K.S. Russell
+        144P|P/1994    A1|           |      |1994-01-08|Y. Kushida
+        199P|P/1994    J3|           |      |1994-05   |C.S. Shoemaker, E.M. Shoemaker
+        318P|P/1994    N2|           |      |1994-07   |R.H. McNaught, M. Hartley
+        141P|P/1994    P1|           |      |1994-08   |D. Machholz
+        262P|P/1994    X1|           |      |1994-12   |R.H. McNaught, K.S. Russell
 #
 # The data from website http://www.aerith.net
 #
@@ -556,6 +655,7 @@
    C/1997 T4|C/1997    T4|           |      |1997-10-06|
    C/1997 T5|C/1997    T5|           |      |1997-10-07|
    C/1997 U1|C/1997    U1|           |      |1997-10-28|
+        200P|P/1997    V1|           |      |1997-11   |J.A. Larsen
    C/1997 V2|C/1997    V2|           |      |1997-11-08|
    C/1997 W1|C/1997    W1|           |      |1997-11-21|
    C/1997 W2|C/1997    W2|           |      |1997-11-19|
@@ -622,6 +722,7 @@
    C/1999 J2|C/1999    J2|           |      |1999-05-13|B.A. Skiff
    C/1999 J3|C/1999    J3|           |      |1999-05-12|
    C/1999 J4|C/1999    J4|           |      |1999-05-15|
+        187P|P/1999    J5|           |      |1999-05   |
    C/1999 K1|C/1999    K1|           |      |1999-05-20|
    C/1999 K2|C/1999    K2|           |      |1999-05-19|W.D. Ferris
    C/1999 K3|C/1999    K3|           |      |1999-05-20|
@@ -707,6 +808,7 @@ P/1999 XN120|P/1999 XN120|           |      |1999-12-05|
    C/2000 Y1|C/2000    Y1|           |      |2000-12-16|A.F. Tubbiolo
    C/2000 Y2|C/2000    Y2|           |      |2000-12-27|B. Skiff
         244P|P/2000    Y3|           |      |2000-12-30|J.V. Scotti
+        212P|P/2000  YN30|           |      |2000-12   |
    C/2001 A1|C/2001    A1|           |      |2001-01-07|
    C/2001 A2|C/2001    A2|           |      |2001-01-03|
    C/2001 B1|C/2001    B1|           |      |2001-01-22|
@@ -764,6 +866,7 @@ C/2001 OG108|C/2001 OG108|           |      |2001-07-28|M.E. Van Ness
    C/2002 C2|C/2002    C2|           |      |2002-02-01|
  C/2002 CE10|C/2002  CE10|           |      |2002-02-06|
         234P|P/2002 CF140|           |      |2002-02-08|
+        214P|P/2002 CW134|           |      |2002-02   |
    C/2002 E2|C/2002    E2|           |      |2002-03-11|D. Snyder, Sh. Murakami
  P/2002 EJ57|P/2002  EJ57|           |      |2002-03-13|
         169P|P/2002  EX12|           |      |2002-03-15|
@@ -784,6 +887,7 @@ C/2001 OG108|C/2001 OG108|           |      |2001-07-28|M.E. Van Ness
         189P|P/2002    O5|           |      |2002-07-30|
    C/2002 O6|C/2002    O6|           |      |2002-07-25|M. Suzuki
    C/2002 O7|C/2002    O7|           |      |2002-07-29|
+        215P|P/2002    O8|           |      |2002-07   |
    C/2002 P1|C/2002    P1|           |      |2002-08-07|
         327P|P/2002    Q1|           |      |2002-08-17|M.E. Van Ness
    C/2002 Q2|C/2002    Q2|           |      |2002-08-26|
@@ -816,6 +920,7 @@ C/2001 OG108|C/2001 OG108|           |      |2001-07-28|M.E. Van Ness
    C/2003 H1|C/2003    H1|           |      |2003-04-24|
    C/2003 H2|C/2003    H2|           |      |2003-04-24|
    C/2003 H3|C/2003    H3|           |      |2003-04-30|
+        218P|P/2003    H4|           |      |2003-04   |
         256P|P/2003  HT15|           |      |2003-04-26|
    C/2003 J1|C/2003    J1|           |      |2003-05-13|
    C/2003 K1|C/2003    K1|           |      |2003-05-23|J.A. Larsen
@@ -929,6 +1034,7 @@ C/2005 EL173|C/2005 EL173|           |      |2005-03-08|
    C/2005 Q1|C/2005    Q1|           |      |2005-08-27|
         309P|P/2005    Q4|           |      |2005-08-31|
         368P|P/2005    R1|           |      |2005-09-02|
+        213P|P/2005    R2|           |      |2005-09   |M.E. Van Ness
    C/2005 R4|C/2005    R4|           |      |2005-09-13|
         316P|P/2005  RV25|           |      |2005-09-11|E. Christensen
    P/2005 S2|P/2005    S2|           |      |2005-09-29|B. Skiff
