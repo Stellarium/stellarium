@@ -1913,17 +1913,24 @@ void Oculars::paintCCDBounds()
 		const auto bottomY = boundingRect.top();
 		const auto rightX = boundingRect.right();
 
+		// FIXME: this is a workaround for a strange behavior of QFontMetrics.
+		// Without this rounding we get wrong results for fractional scaling
+		// factors: the labels on the right are shifted too far from the right
+		// border, and the interval between the lines is too large.
+		const auto fmPixelRatio = std::floor(params.devicePixelsPerPixel);
+
 		// Coordinates of center of visible field of view for CCD (red rectangle); above top-left corner
-		const auto coordsBR = fm.boundingRect(coords);
-		a = transform.map(QPoint(leftX, topY + std::lround(1.5*coordsBR.height())));
+		const auto coordsHeight = fm.boundingRect(coords).height() * fmPixelRatio;
+		a = transform.map(QPoint(leftX, topY + std::lround(1.5*coordsHeight)));
 		painter.drawText(a.x(), a.y(), coords, textRotationAngle);
 		coords = QString("%1/%2").arg(cxt.simplified(), cyt);
-		a = transform.map(QPoint(leftX, topY + std::lround(0.5*coordsBR.height())));
+		a = transform.map(QPoint(leftX, topY + std::lround(0.5*coordsHeight)));
 		painter.drawText(a.x(), a.y(), coords, textRotationAngle);
 
 		// Dimensions of visible field of view for CCD (red rectangle); below bottom-left corner
 		const auto dims = getDimensionsString(fovX, fovY);
-		a = transform.map(QPoint(leftX, bottomY - std::lround(fm.boundingRect(dims).height())));
+		const auto dimsHeight = fm.boundingRect(dims).height() * fmPixelRatio;
+		a = transform.map(QPoint(leftX, bottomY - std::lround(dimsHeight)));
 		painter.drawText(a.x(), a.y(), dims, textRotationAngle);
 
 		// Horizontal and vertical scales of visible field of view for CCD (red rectangle); below bottom-right corner
@@ -1934,15 +1941,15 @@ void Oculars::paintCCDBounds()
 								 QString::number(3600*ccd->getCentralAngularResolutionY(telescope, lens), 'f', 4),
 								 unit, QChar(0x00D7));
 		const auto scalesBR = fm.boundingRect(scales);
-		a = transform.map(QPoint(rightX - std::lround(scalesBR.width()),
-								 bottomY - std::lround(scalesBR.height())));
+		a = transform.map(QPoint(rightX - std::lround(scalesBR.width() * fmPixelRatio),
+								 bottomY - std::lround(scalesBR.height() * fmPixelRatio)));
 		painter.drawText(a.x(), a.y(), scales, textRotationAngle);
 
 		// Rotation angle of visible field of view for CCD (red rectangle); above top-right corner
 		QString angle = QString("%1%2").arg(QString::number(ccd->chipRotAngle(), 'f', 1)).arg(QChar(0x00B0));
 		const auto angleBR = fm.boundingRect(angle);
-		a = transform.map(QPoint(rightX - std::lround(angleBR.width()),
-								 topY + std::lround(0.5*angleBR.height())));
+		a = transform.map(QPoint(rightX - std::lround(angleBR.width() * fmPixelRatio),
+								 topY + std::lround(0.5*angleBR.height() * fmPixelRatio)));
 		painter.drawText(a.x(), a.y(), angle, textRotationAngle);
 
 		if(flagShowCcdCropOverlay && (ccdXRatio>=ratioLimitCrop || ccdYRatio>=ratioLimitCrop))
@@ -1968,8 +1975,8 @@ void Oculars::paintCCDBounds()
 					// TRANSLATORS: "Max exposure" is short version of phrase "Max time of exposure"
 					QString exposureTime = QString("%1: %2 %3").arg(q_("Max exposure"), QString::number(qRound(exposure*10.)/10., 'd', 1), qc_("s", "time"));
 					const auto expoBR = fm.boundingRect(exposureTime);
-					a = transform.map(QPoint(rightX - std::lround(expoBR.width()),
-											 topY + std::lround(1.5*expoBR.height())));
+					a = transform.map(QPoint(rightX - std::lround(expoBR.width() * fmPixelRatio),
+											 topY + std::lround(1.5*expoBR.height() * fmPixelRatio)));
 					painter.drawText(a.x(), a.y(), exposureTime, textRotationAngle);
 				}
 			}
