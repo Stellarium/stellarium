@@ -80,7 +80,7 @@ void ManualImportWindow::retranslate()
 
 void ManualImportWindow::selectColor()
 {
-    QColor color = QColorDialog::getColor(objectColor,&StelMainView::getInstance());
+	QColor color = QColorDialog::getColor(objectColor,&StelMainView::getInstance());
 	objectColor =  color;
 	ui->lineEditColor->setText(QString("%1, %2, %3").arg(color.redF()).arg(color.greenF()).arg(color.blueF()));
 	setColorButtonColor(color);
@@ -90,18 +90,18 @@ void ManualImportWindow::parseColorString(QString colorCode)
 {
 	QStringList colorComponents = colorCode.split(QChar(','));
 	int count = colorComponents.count();
-	if (count < 3 || count > 4)
+	if ((count < 3) || (count > 4))
 		return;
 
 	bool ok;
 	double red = colorComponents.at(0).toDouble(&ok);
-	if (!ok || red < 0.0 || red > 1.0)
+	if (!ok || (red < 0.0) || (red > 1.0))
 		return;
 	double green = colorComponents.at(1).toDouble(&ok);
-	if (!ok || green < 0.0 || green > 1.0)
+	if (!ok || (green < 0.0) || (green > 1.0))
 		return;
 	double blue = colorComponents.at(2).toDouble(&ok);
-	if (!ok || blue < 0.0 || blue > 1.0)
+	if (!ok || (blue < 0.0) || (blue > 1.0))
 		return;
 
 	QColor color;
@@ -112,7 +112,7 @@ void ManualImportWindow::parseColorString(QString colorCode)
 	if (count == 4)
 	{
 		double alpha = colorComponents.at(3).toDouble(&ok);
-		if (!ok || alpha < 0.0 || alpha > 1.0)
+		if (!ok || (alpha < 0.0) || (alpha > 1.0))
 			return;
 		color.setAlphaF(alpha);
 	}

@@ -263,6 +263,7 @@ public:
 	virtual Vec3d getJ2000EquatorialPos(const StelCore *core) const Q_DECL_OVERRIDE;
 	virtual QString getEnglishName(void) const Q_DECL_OVERRIDE;
 	virtual QString getNameI18n(void) const Q_DECL_OVERRIDE;
+	virtual QString getIAUDesignation(void) const;
 	QString getNativeName(void) const { return nativeName; }
 	QString getNativeNameI18n(void) const { return nativeNameMeaningI18n; }
 	QString getCommonEnglishName(void) const {return englishName;}
@@ -327,10 +328,15 @@ public:
 	void setNativeNameMeaning(QString planet) { nativeNameMeaning = planet; }
 
 	//! set the IAU moon number (designation of the moon), if any.
-	void setIAUMoonNumber(QString designation);
+	void setIAUMoonNumber(const QString& designation);
 
 	//! set value for color index B-V
 	void setColorIndexBV(float bv=99.f);
+
+	//! set the discovery circumstances of celestial body
+	//! @param date of discovery
+	//! @param name of discoverer
+	void setDiscoveryData(const QString& date, const QString& name) { discoveryDate = date; discoverer = name; }
 
 	//! Return the absolute magnitude (read from file ssystem.ini)
 	float getAbsoluteMagnitude() const {return absoluteMagnitude;}
@@ -658,6 +664,8 @@ protected:
 	//! Any flag=Extra information to be displayed at the end
 	virtual QString getInfoStringExtra(const StelCore *core, const InfoStringGroup& flags) const;
 
+	virtual QString getDiscoveryCircumstances() const;
+
 protected:
 	struct PlanetOBJModel
 	{
@@ -811,6 +819,7 @@ protected:
 	static Vec3f labelColor;
 	static StelTextureSP hintCircleTex;
 	static const QMap<PlanetType, QString> pTypeMap; // Maps fast type to english name.
+	static const QMap<QString, QString> nPlanetMap; // Maps fast IAU number to IAU designation.
 	static const QMap<ApparentMagnitudeAlgorithm, QString> vMagAlgorithmMap;
 	static bool drawMoonHalo;
 	static bool drawSunHalo;
@@ -822,6 +831,9 @@ private:
 	class StelPropertyMgr* propMgr;
 	QString iauMoonNumber;
 	float b_v;
+	// Discovery data
+	QString discoverer;
+	QString discoveryDate;
 	// File path for texture and normal map; both variables used for saving original names of files
 	QString texMapFileOrig;
 	QString normalMapFileOrig;
