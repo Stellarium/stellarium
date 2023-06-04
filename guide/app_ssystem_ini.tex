@@ -432,7 +432,34 @@ major planets cause fast changes in their orbital elements, so that
 each apparition should be specified with a dedicated section in
 \file{ssystem\_minor.ini}.
 
-Most elements are similar to minor planets. But note the specification of
+\paragraph{Naming schemes}
+Over just the past decades, the naming of comets has changed considerably. 
+Starting in the 19th century, comets are usually named after their discoverer(s). 
+In addition, they are given a catalog number. 
+Traditionally, comets observations published by scientific organisations were sorted and labelled with Roman numerals after date of perihelion. 
+When scientific communication became faster, comet discoveries were circulated by telegraphs, and a preliminary immediate labelling by sequence of discovery was used. 
+After the year was over, the comet received again the Roman number indicating the position in the sequence of perihelon dates in that year. 
+
+In 1994, a new scheme has been introduced\footnote{\url{https://minorplanetcenter.net/iau/lists/CometResolution.html}}: 
+When a comets is discovered, the discovery date governs a unique label: 
+The 12 months of the year are split into half-months, for which 24 of the 26 letters of the alphabet are used (I and Z are omitted). 
+After the letter, discoveries are enumerated in sequence. 
+A letter before this number indicates what kind of comet the element set describes: \textbf{C} indicates a regular comet, 
+\textbf{P} a periodic (recurring) comet, \textbf{D} is defunct (lost). \textbf{X} is one for which no reliable orbital elements can be given. 
+\textbf{I} labels an interstellar object (an object on an orbit which seems not to be permanently attached to the sun).
+After a return, periodic comets receive a serial number before the P.
+
+This new scheme is also applied for old comets. However, for the sake of compatibility with older literature, 
+Stellarium can use several optional entries in addition to the name, for example:\newFeature{23.2}
+\begin{description}
+\item[name] 1P/Halley (First periodic comet, named after \name[Edmund]{Halley}, the astronomer who determined its orbit)
+\item[iau\_designation] 1982 U1 (First comet discovered in 2nd half of October 1982)
+\item[discovery\_code] 1982i (9th comet discovered in 1982)
+\item[perihelion\_code] 1986 III (Third comet to go through perihelion in 1986)
+\end{description}
+
+
+Most other elements are similar to minor planets. But note the specification of
 \begin{description}
 \item[orbit\_PericenterDistance] $q$ [AU]
 \item[orbit\_TimeAtPericenter] $T$  JDE of closest approach to the Sun
@@ -485,6 +512,9 @@ orbital elements for different epochs of one apparition.
 [1phalley]
 type=comet  
 name=1P/Halley
+iau_designation=1982 U1
+discovery_code=1982i
+perihelion_code=1986 III
 
 coord_func=comet_orbit [can be omitted]
 parent=Sun [can be omitted]
@@ -509,8 +539,7 @@ tex_map=nomap.png
 model=1682q1halley_MLfix.obj [optional]
 \end{configfile}
 
-You may want to e.g.\ change the name in this entry to
-\texttt{name=1P/Halley (1982i)}. Note a rather short duration of
+Note a rather short duration of
 \texttt{orbit\_good}, which means the comet is only displayed 780 days
 before and after perihelion. (Actually, before and after
 \texttt{orbit\_Epoch}, but this is not given explicitly, so it
@@ -525,7 +554,8 @@ may be available and can be configured with a \texttt{model} entry.\newFeature{0
 \begin{configfile}
 [c2013us10%28catalina%29]
 type=comet
-name=C/2013 US10 (Catalina)
+name=Catalina
+iau_designation=C/2013 US10
 
 coord_func=comet_orbit [can be omitted]
 parent=Sun [can be omitted]

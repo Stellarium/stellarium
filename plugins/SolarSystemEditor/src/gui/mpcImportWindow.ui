@@ -510,7 +510,7 @@
               <item>
                <widget class="QLabel" name="labelQueryInstructions">
                 <property name="text">
-                 <string notr="true">Only one result will be returned if the query is successful.&lt;br&gt;Both comets and asteroids can be identified with their number, name or provisional designation.&lt;br&gt;Comet &lt;i&gt;names&lt;/i&gt; need to be prefixed with &lt;b&gt;C/&lt;/b&gt; or &lt;b&gt;P/&lt;/b&gt;. If more than one comet matches a name, only the first result will be returned. For example, &quot;C/Halley&quot; will return 1P/Halley, Halley's Comet, but &quot;Halley&quot; will return the asteroid (2688) Halley.</string>
+                 <string notr="true">Only one result will be returned if the query is successful.&lt;br&gt;Both comets and asteroids can be identified with their number, name or IAU designation.&lt;br&gt;Comet &lt;i&gt;names&lt;/i&gt; need to be prefixed with &lt;b&gt;C/&lt;/b&gt; or &lt;b&gt;P/&lt;/b&gt;. If more than one comet matches a name, only the first result will be returned. For example, &quot;C/Halley&quot; will return 1P/Halley, Halley's Comet, but &quot;Halley&quot; will return the asteroid (2688) Halley.</string>
                 </property>
                 <property name="wordWrap">
                  <bool>true</bool>

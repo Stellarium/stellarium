@@ -128,6 +128,7 @@ public:
 	//! @param semiMajorAxis in AU. If SMA<=0 (hyperbolic orbit), return 0.
 	//! @param centralMass in units of Solar masses
 	static double calculateSiderealPeriod(const double semiMajorAxis, const double centralMass);
+	double getEpochJDE() const { return epochJDE; }
 
 private:
 	const double epochJDE; //!< epoch (date of validity) of the elements.

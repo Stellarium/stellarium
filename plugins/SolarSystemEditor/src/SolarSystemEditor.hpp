@@ -46,6 +46,17 @@ class QSettings;
 //! \todo Better name.
 typedef QHash<QString, QVariant> SsoElements;
 
+typedef QPair<QString, QString> DiscoveryCircumstances;
+
+typedef struct
+{
+	QString date_code;       //! date designation
+	QString perihelion_code; //! perihelion designation
+	QString discovery_code;  //! discovery designation
+	QString discovery_date;  //! date of discovery (format: YYYY-MM-DD)
+	QString discoverer;      //! name of discoverer
+} CometData;
+
 /*!
  \class SolarSystemEditor
  \brief Main class of the Solar System Editor plug-in which allows editing (add, delete, update) of the minor bodies.
@@ -226,9 +237,16 @@ private:
 	//! in the configuration file.
 
 	//! The names and group names of all objects in the default ssystem_major.ini.
-	//! The keys are the names, the values are the group names.
-	//! Initialized in init().
-	QHash<QString,QString> defaultSsoIdentifiers;
+	//! The keys are the names, the values are the group names.	
+	QHash<QString, QString> defaultSsoIdentifiers;
+
+	QHash<QString, CometData> cometsData;
+
+	//! The list of discovery circumstances for numbered minor planets
+	QHash<int, DiscoveryCircumstances> numberedMinorPlanets;
+
+	//! The list of periodic comet number for comet-like asteroids
+	QHash<int, QString> cometLikeAsteroids;
 
 	//! Gets the names of the minor planet objects listed in a ssystem.ini-formatted file.
 	//! Used internally in readAllCurrentSsoNames() and in init() to initialize
@@ -248,6 +266,12 @@ private:
 	//! Check encoding of the file
 	bool isFileEncodingValid(QString filePath) const;
 
+	//! Load data for comets: designations and discovery circumstances
+	void loadCometData();
+
+	//! Load the list of discovery circumstances for numbered minor planets
+	void loadMinorPlanetData();
+
 	//! Converts an alphanumeric digit as used in MPC packed dates to an integer.
 	//! See http://www.minorplanetcenter.org/iau/info/PackedDates.html
 	//! Interprets the digits from 0 to 9 normally, and the capital letters
@@ -258,21 +282,21 @@ private:
 
 	//! Converts an alphanumeric year number as used in MPC packed dates to an integer.
 	//! See http://www.minorplanetcenter.org/iau/info/PackedDates.html
-	//! Also used in packed provisional designations, see
+	//! Also used in packed IAU designations, see
 	//! http://www.minorplanetcenter.org/iau/info/PackedDes.html
 	static int unpackYearNumber (QChar prefix, int lastTwoDigits);
 
-	//! Converts a two-character number used in MPC packed provisional designations.
+	//! Converts a two-character number used in MPC packed IAU designations.
 	//! See http://www.minorplanetcenter.org/iau/info/PackedDes.html
 	//! This function is used for both asteroid and comet designations.
 	static int unpackAlphanumericNumber (QChar prefix, int lastDigit);
 
 	//TODO: This should be public, perhaps?
-	//! Unpacks an MPC packed minor planet provisional designation.
+	//! Unpacks an MPC packed minor planet IAU designation.
 	//! See http://www.minorplanetcenter.org/iau/info/PackedDes.html
 	//! \returns an empty string if the argument is not a valid packed
-	//! provisional designation.
-	static QString unpackMinorPlanetProvisionalDesignation(QString packedDesignation);
+	//! IAU designation.
+	static QString unpackMinorPlanetIAUDesignation(QString packedDesignation);
 
 	//! Updates a value in a configuration file with a value with the same key in a SsoElements hash.
 	static void updateSsoProperty(QSettings& configuration, SsoElements& properties, QString key);

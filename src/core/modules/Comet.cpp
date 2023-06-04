@@ -32,6 +32,7 @@
 #include "StelMovementMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "LandscapeMgr.hpp"
+#include "StelLocaleMgr.hpp"
 
 #include <QDebug>
 #include <QElapsedTimer>
@@ -87,7 +88,11 @@ Comet::Comet(const QString& englishName,
 		  pTypeStr),
 	  slopeParameter(-10.f), // -10 == uninitialized: used in getVMagnitude()
 	  isCometFragment(false),
-	  nameIsProvisionalDesignation(false),
+	  iauDesignation(""),
+	  extraDesignations(),
+	  extraDesignationsHtml(),
+	  discoverer(""),
+	  discoveryDate(""),
 	  tailFactors(-1., -1.), // mark "invalid"
 	  tailActive(false),
 	  tailBright(false),
@@ -131,6 +136,33 @@ void Comet::setAbsoluteMagnitudeAndSlope(const float magnitude, const float slop
 void Comet::translateName(const StelTranslator &translator)
 {
 	nameI18 = translator.qtranslate(englishName, "comet");
+}
+
+QString Comet::getInfoStringName(const StelCore *core, const InfoStringGroup& flags) const
+{
+	Q_UNUSED(core) Q_UNUSED(flags)
+	QString str;
+	QTextStream oss(&str);
+
+	oss << "<h2>";
+	oss << getNameI18n(); // UI translation can differ from sky translation
+
+	QStringList designations;
+	if (!iauDesignation.isEmpty())
+		designations << iauDesignation;
+	if (!getExtraDesignations().isEmpty())
+		designations << extraDesignationsHtml;
+	if (!designations.isEmpty())
+		oss << QString(" (%1)").arg(designations.join(" - "));
+
+	oss.setRealNumberNotation(QTextStream::FixedNotation);
+	oss.setRealNumberPrecision(1);
+	if (sphereScale != 1.)
+		oss << QString::fromUtf8(" (\xC3\x97") << sphereScale << ")";
+
+	oss << "</h2>";
+
+	return str;
 }
 
 QString Comet::getInfoStringAbsoluteMagnitude(const StelCore *core, const InfoStringGroup& flags) const
@@ -199,9 +231,15 @@ QString Comet::getInfoStringSize(const StelCore *core, const InfoStringGroup &fl
 // Nothing interesting?
 QString Comet::getInfoStringExtra(const StelCore *core, const InfoStringGroup &flags) const
 {
-	Q_UNUSED(core) Q_UNUSED(flags)
-
-	return QString();
+	Q_UNUSED(core)
+	QString str;
+	QTextStream oss(&str);
+	if (flags&Extra)
+	{
+		if (!discoveryDate.isEmpty())
+			oss << QString("%1: %2<br/>").arg(q_("Discovered"), getDiscoveryCircumstances());
+	}
+	return str;
 }
 
 QVariantMap Comet::getInfoMap(const StelCore *core) const
@@ -211,6 +249,20 @@ QVariantMap Comet::getInfoMap(const StelCore *core) const
 	map.insert("coma-diameter-km", tailFactors[0]*AUf);
 
 	return map;
+}
+
+QString Comet::getDiscoveryCircumstances() const
+{
+	QString ddate = discoveryDate; // YYYY
+	QStringList date = discoveryDate.split("-");
+	if (date.count()==3) // YYYY-MM-DD
+		ddate = QString("%1 %2 %3").arg(QString::number(date.at(2).toInt()), StelLocaleMgr::longGenitiveMonthName(date.at(1).toInt()), date.at(0));
+	if (date.count()==2) // YYYY-MM
+		ddate = QString("%1 %2").arg(StelLocaleMgr::longMonthName(date.at(1).toInt()), date.at(0));
+	if (discoverer.isEmpty())
+		return ddate;
+	else
+		return QString("%1 (%2)").arg(ddate, discoverer);
 }
 
 double Comet::getSiderealPeriod() const
@@ -598,4 +650,27 @@ void Comet::computeParabola(const float parameter, const float radius, const flo
 	}
 	createTailIndices=false;
 	createTailTextureCoords=false;
+}
+
+void Comet::setExtraDesignations(QStringList codes)
+{
+	extraDesignations = codes;
+	for (const auto& c : codes)
+	{
+		extraDesignationsHtml << renderDiscoveryDesignationHtml(c);
+	}
+}
+
+QString Comet::renderDiscoveryDesignationHtml(const QString &plainTextName)
+{
+	static const QRegularExpression discoveryDesignationPattern("^(\\d{4}[a-z]{1})(\\d+)$");
+	QRegularExpressionMatch match=discoveryDesignationPattern.match(plainTextName);
+	if (plainTextName.indexOf(discoveryDesignationPattern) == 0)
+	{
+		QString main = match.captured(1);
+		QString suffix = match.captured(2);
+		return (QString("%1<sub>%2</sub>").arg(main, suffix));
+	}
+	else
+		return plainTextName;
 }
