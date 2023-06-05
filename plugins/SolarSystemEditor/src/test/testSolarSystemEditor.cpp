@@ -26,6 +26,7 @@ QTEST_GUILESS_MAIN(TestSolarSystemEditor)
 void TestSolarSystemEditor::testUnpackingAsteroids()
 {
 	//Examples from http://www.minorplanetcenter.org/iau/info/PackedDes.html
+	QCOMPARE(SolarSystemEditor::unpackMinorPlanetIAUDesignation("I95X00A"), QString("1895 XA"));
 	QCOMPARE(SolarSystemEditor::unpackMinorPlanetIAUDesignation("J95X00A"), QString("1995 XA"));
 	QCOMPARE(SolarSystemEditor::unpackMinorPlanetIAUDesignation("J95X01L"), QString("1995 XL1"));
 	QCOMPARE(SolarSystemEditor::unpackMinorPlanetIAUDesignation("J95F13B"), QString("1995 FB13"));
@@ -35,6 +36,10 @@ void TestSolarSystemEditor::testUnpackingAsteroids()
 	QCOMPARE(SolarSystemEditor::unpackMinorPlanetIAUDesignation("K99AJ3Z"), QString("2099 AZ193"));
 	QCOMPARE(SolarSystemEditor::unpackMinorPlanetIAUDesignation("K08Aa0A"), QString("2008 AA360"));
 	QCOMPARE(SolarSystemEditor::unpackMinorPlanetIAUDesignation("K07Tf8A"), QString("2007 TA418"));
+	QCOMPARE(SolarSystemEditor::unpackMinorPlanetIAUDesignation("PLS2040"), QString("2040 P-L"));
+	QCOMPARE(SolarSystemEditor::unpackMinorPlanetIAUDesignation("T1S3138"), QString("3138 T-1"));
+	QCOMPARE(SolarSystemEditor::unpackMinorPlanetIAUDesignation("T2S1010"), QString("1010 T-2"));
+	QCOMPARE(SolarSystemEditor::unpackMinorPlanetIAUDesignation("T3S4101"), QString("4101 T-3"));
 }
 
 
