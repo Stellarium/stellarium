@@ -37,6 +37,7 @@ This is checklist for maintainer of Stellarium (a release master)
 - [ ] Actualize the default list of satellites
 - [ ] Actualize the default catalog of pulsars
 - [ ] Actualize the default catalog of exoplanets
+- [ ] Actualize the default list of comets (`data\ssystem_minor.ini`)
 
 ### Environment
 - [ ] Actualize the Stellarium User Guide
@@ -55,6 +56,8 @@ This is checklist for maintainer of Stellarium (a release master)
 - [ ] Actualize the default list of satellites
 - [ ] Actualize the default catalog of pulsars
 - [ ] Actualize the default catalog of exoplanets
+- [ ] Actualize the discovery circumstances for minor planets (Solar System Editor)
+- [ ] Actualize the discovery circumstances for comets (Solar System Editor)
 
 ### Environment
 - [ ] Actualize the ChangeLog file
