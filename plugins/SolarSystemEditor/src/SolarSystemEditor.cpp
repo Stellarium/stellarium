@@ -1602,32 +1602,22 @@ QString SolarSystemEditor::unpackMinorPlanetIAUDesignation (QString packedDesign
 	if (packedDesignation.indexOf(packedFormat, 0, &pfMatch) != 0)
 	{
 		QRegularExpression packedSurveyDesignation("^(PL|T1|T2|T3)S(\\d+)$");
-		QRegularExpressionMatch psMatch;
-		if (packedDesignation.indexOf(packedSurveyDesignation) == 0)
+		QRegularExpressionMatch psMatch = packedSurveyDesignation.match(packedDesignation);
+		if (psMatch.hasMatch())
 		{
 			int number = psMatch.captured(2).toInt();
 			if (psMatch.captured(1) == "PL")
-			{
 				return QString("%1 P-L").arg(number);
-			}
 			else if (psMatch.captured(1) == "T1")
-			{
 				return QString("%1 T-1").arg(number);
-			}
 			else if (psMatch.captured(1) == "T2")
-			{
 				return QString("%1 T-2").arg(number);
-			}
 			else
-			{
 				return QString("%1 T-3").arg(number);
-			}
 			//TODO: Are there any other surveys?
 		}
 		else
-		{
 			return QString();
-		}
 	}
 
 	//Year
