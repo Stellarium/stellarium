@@ -98,6 +98,9 @@ public:
 	//! @param name of discoverer
 	void setDiscoveryData(const QString& date, const QString& name) { discoveryDate = date; discoverer = name; }
 
+	//! renders the subscript in a comet discovery designation with HTML.
+	static QString renderDiscoveryDesignationHtml(const QString& plainText);
+
 	//! get list of comet codes
 	QStringList getExtraDesignations() const { return extraDesignations; }
 
@@ -143,9 +146,6 @@ private:
 	//! @param indices into the former arrays (zero-starting), triplets forming triangles: t0,0, t0,1, t0,2, t1,0, t1,1, t1,2, ...
 	//! @param xOffset for the dust tail, this may introduce a bend. Units are x per sqrt(z).
 	void computeParabola(const float parameter, const float topradius, const float zshift, QVector<Vec3d>& vertexArr, QVector<Vec2f>& texCoordArr, QVector<unsigned short>& indices, const float xOffset=0.0f);
-
-	//! renders the subscript in a comet discovery designation with HTML.
-	QString renderDiscoveryDesignationHtml(const QString& plainText);
 
 	float slopeParameter;
 	bool isCometFragment;

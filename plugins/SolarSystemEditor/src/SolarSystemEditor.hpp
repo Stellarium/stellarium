@@ -207,7 +207,13 @@ public:
 
 	//! returns the path
 	QString getCustomSolarSystemFilePath() const {return customSolarSystemFilePath;}
-	
+
+	//! Unpacks an MPC packed minor planet IAU designation.
+	//! See http://www.minorplanetcenter.org/iau/info/PackedDes.html
+	//! \returns an empty string if the argument is not a valid packed
+	//! IAU designation.
+	static QString unpackMinorPlanetIAUDesignation(QString packedDesignation);
+
 public slots:
 	//! Resets the Solar System configuration file and reloads the Solar System.
 	//! \todo Return a bool and make the GUI display a message if it was not successful.
@@ -290,13 +296,6 @@ private:
 	//! See http://www.minorplanetcenter.org/iau/info/PackedDes.html
 	//! This function is used for both asteroid and comet designations.
 	static int unpackAlphanumericNumber (QChar prefix, int lastDigit);
-
-	//TODO: This should be public, perhaps?
-	//! Unpacks an MPC packed minor planet IAU designation.
-	//! See http://www.minorplanetcenter.org/iau/info/PackedDes.html
-	//! \returns an empty string if the argument is not a valid packed
-	//! IAU designation.
-	static QString unpackMinorPlanetIAUDesignation(QString packedDesignation);
 
 	//! Updates a value in a configuration file with a value with the same key in a SsoElements hash.
 	static void updateSsoProperty(QSettings& configuration, SsoElements& properties, QString key);
