@@ -12,7 +12,7 @@ The Stellarium team gives a huge thanks to our backers:
 
 ## Silver Sonsor:
 
-None yet!
+ - [![BairesDev](https://www.stellarium.org/img/logos/BairesDev.png)](https://www.bairesdev.com/sponsoring-open-source-projects/)
 
 ## Gold sponsors:
 
