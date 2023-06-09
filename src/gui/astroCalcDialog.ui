@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>851</width>
+    <width>890</width>
     <height>467</height>
    </rect>
   </property>
@@ -3098,7 +3098,7 @@
           </item>
          </layout>
         </widget>
-        <widget class="QWidget" name="stackedWidhetPage9">
+        <widget class="QWidget" name="stackedWidgetPage9">
          <layout class="QGridLayout" name="gridLayout_27">
           <item row="0" column="0">
            <widget class="QTabWidget" name="tabWidget">
@@ -3136,16 +3136,6 @@
                 </property>
                </spacer>
               </item>
-              <item row="2" column="0">
-               <widget class="QLabel" name="labelNoteST">
-                <property name="text">
-                 <string>Note: This tool works on Earth only!</string>
-                </property>
-                <property name="alignment">
-                 <set>Qt::AlignCenter</set>
-                </property>
-               </widget>
-              </item>
              </layout>
             </widget>
             <widget class="QWidget" name="tabMoonPhases">
@@ -3153,16 +3143,6 @@
               <string>Moon Phases</string>
              </attribute>
              <layout class="QGridLayout" name="gridLayout_26">
-              <item row="2" column="0">
-               <widget class="QLabel" name="labelNoteMPh">
-                <property name="text">
-                 <string>Note: This tool works on Earth only!</string>
-                </property>
-                <property name="alignment">
-                 <set>Qt::AlignCenter</set>
-                </property>
-               </widget>
-              </item>
               <item row="0" column="0">
                <widget class="MoonPhasesWidget" name="moonPhasesWidget" native="true">
                 <property name="sizePolicy">

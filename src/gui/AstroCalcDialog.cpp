@@ -615,9 +615,20 @@ void AstroCalcDialog::createDialogContent()
 
 void AstroCalcDialog::updateAlmanacWidgetsVisibility()
 {
+	const int almanacTabIndex = 8;
 	const bool onEarth = core->getCurrentPlanet()==solarSystem->getEarth();
-	ui->specificTimeWidget->setVisible(onEarth);
-	ui->moonPhasesWidget->setVisible(onEarth);
+	//ui->specificTimeWidget->setVisible(onEarth);
+	//ui->moonPhasesWidget->setVisible(onEarth);
+
+	// hide Almanac tab or not
+	ui->stackListWidget->item(almanacTabIndex)->setHidden(!onEarth);
+	ui->stackedWidgetPage9->setVisible(onEarth);
+
+	// move to first tab if Alamac was visible when user are moved to non-terrestial location
+	if (!onEarth && ui->stackListWidget->currentRow()==almanacTabIndex)
+		ui->stackListWidget->setCurrentRow(0);
+
+	//dialog->repaint();
 }
 
 void AstroCalcDialog::populateToolTips()
