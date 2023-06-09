@@ -88,6 +88,7 @@ class Scenery3d : public StelModule
 	Q_PROPERTY(float torchStrength               READ getTorchStrength          WRITE setTorchStrength         NOTIFY torchStrengthChanged)
 	Q_PROPERTY(float torchRange                  READ getTorchRange             WRITE setTorchRange            NOTIFY torchRangeChanged)
 	Q_PROPERTY(float directionalLightPush        READ getDirectionalLightPush   WRITE setDirectionalLightPush  NOTIFY directionalLightPushChanged)
+	Q_PROPERTY(bool ignoreInitialView            READ getIgnoreInitialView      WRITE setIgnoreInitialView     NOTIFY ignoreInitialViewChanged)
 	Q_PROPERTY(bool enableLazyDrawing            READ getEnableLazyDrawing      WRITE setEnableLazyDrawing     NOTIFY enableLazyDrawingChanged)
 	Q_PROPERTY(double lazyDrawingInterval        READ getLazyDrawingInterval    WRITE setLazyDrawingInterval   NOTIFY lazyDrawingIntervalChanged)
 	Q_PROPERTY(bool onlyDominantFaceWhenMoving   READ getOnlyDominantFaceWhenMoving    WRITE setOnlyDominantFaceWhenMoving   NOTIFY onlyDominantFaceWhenMovingChanged)
@@ -140,6 +141,7 @@ signals:
     void torchStrengthChanged(const float val);
     void torchRangeChanged(const float val);
     void directionalLightPushChanged(const float val);
+    void ignoreInitialViewChanged(const bool ignore);
     void enableLazyDrawingChanged(const bool val);
     void lazyDrawingIntervalChanged(const double val);
     void onlyDominantFaceWhenMovingChanged(const bool val);
@@ -243,6 +245,11 @@ public slots:
     void setDirectionalLightPush(const float push);
     float getDirectionalLightPush() const;
 
+    //! Allow ignoring the configured start_az_alt_fov.
+    //! This may be helpful in a digital planetarium where fov should stay at ~180...200° and view direction is usually close to zenith.
+    void setIgnoreInitialView(const bool ignore);
+    bool getIgnoreInitialView() const;
+
     //! Sets the state of the cubemap lazy-drawing mode
     void setEnableLazyDrawing(const bool val);
     bool getEnableLazyDrawing() const;
@@ -308,7 +315,7 @@ public slots:
     void setView(const StoredView& view, const bool setDate);
     //! Returns a StoredView that represents the current observer position + view direction.
     //! Label and description are empty.
-    StoredView getCurrentView();
+    StoredView getCurrentView() const;
 
 private slots:
     void clearMessage();
@@ -350,6 +357,7 @@ private:
     QFont font;
     QString currentMessage;
     bool forceHorizonPolyline; // if true, the LandscapeMgr is called after scene rendering to repeat rendering the landscape polygon, if one has been defined in the current Landscape.
+    bool ignoreInitialViewSettings; // if true, don't use start_az_alt_fov from the scenery3d.ini.
 
     volatile bool loadCancel;
     StelProgressController* progressBar;

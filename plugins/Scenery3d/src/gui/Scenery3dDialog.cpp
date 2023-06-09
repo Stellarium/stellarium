@@ -104,6 +104,9 @@ void Scenery3dDialog::createDialogContent()
 	//connect(ui->checkBoxCubemapShadows,     &QCheckBox::clicked, mgr, &Scenery3d::setUseFullCubemapShadows);
 	//connect(ui->spinLazyDrawingInterval, static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged), mgr, &Scenery3d::setLazyDrawingInterval);
 
+
+	connectBoolProperty(ui->ignoreInitialViewCheckBox,         "Scenery3d.ignoreInitialView");
+
 	connectBoolProperty(ui->checkBoxEnablePixelLight,          "Scenery3d.enablePixelLighting");
 	connectBoolProperty(ui->checkBoxEnableShadows,             "Scenery3d.enableShadows");
 	connectBoolProperty(ui->checkBoxEnableBump,                "Scenery3d.enableBumps");

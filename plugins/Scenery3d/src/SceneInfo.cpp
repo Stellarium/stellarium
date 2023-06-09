@@ -276,7 +276,7 @@ bool SceneInfo::loadByID(const QString &id,SceneInfo& info)
 		info.groundNullHeight=0.;
 	}
 
-	if (ini.contains("start_az_alt_fov"))
+	if (ini.contains("start_az_alt_fov") && !(GETSTELPROPERTYVALUE("Scenery3d.ignoreInitialView").toBool()))
 	{
 		qCDebug(sceneInfo) << "scenery3d.ini: setting initial dir/fov.";
 		info.lookAt_fov=Vec3f(ini.value("start_az_alt_fov").toString());
@@ -285,7 +285,7 @@ bool SceneInfo::loadByID(const QString &id,SceneInfo& info)
 	else
 	{
 		info.lookAt_fov=Vec3f(0.f, 0.f, -1000.f);
-		qCDebug(sceneInfo) << "scenery3d.ini: No initial dir/fov given.";
+		qCDebug(sceneInfo) << "scenery3d.ini: No start view direction/fov given, or ignoring initial view setting.";
 	}
 	ini.endGroup();
 
