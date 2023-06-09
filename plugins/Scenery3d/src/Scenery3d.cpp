@@ -923,6 +923,24 @@ void Scenery3d::setDirectionalLightPush(const float push)
 	emit directionalLightPushChanged(push);
 }
 
+// Allow ignoring the configured start_az_alt_fov.
+// This may be helpful in a digital planetarium where fov should stay at ~180...200° and view direction is usually close to zenith.
+bool Scenery3d::getIgnoreInitialView() const
+{
+	return ignoreInitialViewSettings;
+}
+
+void Scenery3d::setIgnoreInitialView(const bool ignore)
+{
+	if (ignoreInitialViewSettings != ignore)
+	{
+		ignoreInitialViewSettings=ignore;
+		conf->setValue(S3D_CONFIG_PREFIX + "/ignore_start_az_alt_fov",ignore);
+
+		emit ignoreInitialViewChanged(ignore);
+	}
+}
+
 
 bool Scenery3d::getEnableLazyDrawing() const
 {
@@ -1090,7 +1108,7 @@ void Scenery3d::setView(const StoredView &view, const bool setDate)
 	mvMgr->zoomTo(view.view_fov[2]);
 }
 
-StoredView Scenery3d::getCurrentView()
+StoredView Scenery3d::getCurrentView() const
 {
 	if(!currentScene)
 	{

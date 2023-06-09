@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>831</width>
+    <width>861</width>
     <height>550</height>
    </rect>
   </property>
@@ -454,23 +454,6 @@ li.checked::marker { content: &quot;\2612&quot;; }
                    </property>
                   </widget>
                  </item>
-                 <item row="6" column="0" colspan="2">
-                  <widget class="QCheckBox" name="checkBoxShowGridCoordinates">
-                   <property name="text">
-                    <string>Show grid coordinates (%1)</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="7" column="0">
-                  <widget class="QCheckBox" name="overdrawLandscapePolylineCheckBox">
-                   <property name="toolTip">
-                    <string>Overdraw horizon polygon defined in your landscape. This displays the inaccuracies in a very large planar model compared to Earth curvature, of course only for a single point of observation.</string>
-                   </property>
-                   <property name="text">
-                    <string>Draw horizon polyline in foreground</string>
-                   </property>
-                  </widget>
-                 </item>
                  <item row="4" column="0">
                   <widget class="QLabel" name="labelDirectionalLightPush">
                    <property name="text">
@@ -494,6 +477,33 @@ li.checked::marker { content: &quot;\2612&quot;; }
                    </property>
                    <property name="value">
                     <double>1.000000000000000</double>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="5" column="0">
+                  <widget class="QCheckBox" name="checkBoxShowGridCoordinates">
+                   <property name="text">
+                    <string>Show grid coordinates (%1)</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="6" column="0">
+                  <widget class="QCheckBox" name="overdrawLandscapePolylineCheckBox">
+                   <property name="toolTip">
+                    <string>Overdraw horizon polygon defined in your landscape. This displays the inaccuracies in a very large planar model compared to Earth curvature, of course only for a single point of observation.</string>
+                   </property>
+                   <property name="text">
+                    <string>Draw horizon polyline in foreground</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="7" column="0">
+                  <widget class="QCheckBox" name="ignoreInitialViewCheckBox">
+                   <property name="toolTip">
+                    <string>Do no use the configured direction and field of view. This may be helpful in a planetarium environment.</string>
+                   </property>
+                   <property name="text">
+                    <string>Ignore initial view settings</string>
                    </property>
                   </widget>
                  </item>

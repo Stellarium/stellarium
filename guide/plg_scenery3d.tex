@@ -581,8 +581,12 @@ Defaults to center of model boundingbox.
 
 It is advisable to use the grid coordinates of the location of the panoramic
 photo (landscape) as \texttt{start\_...} coordinates, or the correct coordinates
-and some carefully selected \texttt{start\_az\_alt\_fov} in case of certain view
-corridors (temple axes, \ldots).
+and some carefully selected \texttt{start\_az\_alt\_fov} in case you want to highlight 
+a certain view corridor (temple axis, \ldots).
+
+In some setups like digital full-dome planetaria \newFeature{23.2}
+it is advisable to disable the use of the \texttt{start\_az\_alt\_fov}. 
+You can do that in the Scenery3D configuration dialog or by the entry \texttt{ignore\_start\_az\_alt\_fov} in \file{config.ini}.
 
 \subsection{Concatenating OBJ files}
 \label{sec:scenery3d:concatenating}
