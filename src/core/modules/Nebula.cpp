@@ -417,7 +417,7 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 			oss << QString("%1: %2 %3").arg(q_("Parallax"), px, qc_("mas", "parallax")) << "<br />";
 		}
 		if (!discoverer.isEmpty())
-			oss << QString("%1: %2 (%3)").arg(q_("Discoverer"), discoverer, discoveryYear) << "<br />";
+			oss << QString("%1: %2 (%3)").arg(q_("Discoverer"), discoverer, StelUtils::localeDiscoveryDateString(discoveryYear)) << "<br />";
 		if (!getMorphologicalTypeDescription().isEmpty())
 			oss << QString("%1: %2.").arg(q_("Morphological description"), getMorphologicalTypeDescription()) << "<br />";
 	}

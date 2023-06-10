@@ -957,6 +957,18 @@ QString localeDateString(const int year, const int month, const int day, const i
 	}
 }
 
+QString localeDiscoveryDateString(const QString& discovery)
+{
+	QString ddate = discovery; // YYYY
+	QStringList date = discovery.split("-");
+	if (date.count()==3) // YYYY-MM-DD
+		ddate = QString("%1 %2 %3").arg(QString::number(date.at(2).toInt()), StelLocaleMgr::longGenitiveMonthName(date.at(1).toInt()), date.at(0));
+	if (date.count()==2) // YYYY-MM
+		ddate = QString("%1 %2").arg(StelLocaleMgr::longMonthName(date.at(1).toInt()), date.at(0));
+
+	return ddate;
+}
+
 int getDayOfWeek(int year, int month, int day)
 {
 	double JD;
