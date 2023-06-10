@@ -215,12 +215,7 @@ QString MinorPlanet::getInfoStringExtra(const StelCore *core, const InfoStringGr
 
 QString MinorPlanet::getDiscoveryCircumstances() const
 {
-	QString ddate = discoveryDate; // YYYY
-	QStringList date = discoveryDate.split("-");
-	if (date.count()==3) // YYYY-MM-DD
-		ddate = QString("%1 %2 %3").arg(QString::number(date.at(2).toInt()), StelLocaleMgr::longGenitiveMonthName(date.at(1).toInt()), date.at(0));
-	if (date.count()==2) // YYYY-MM
-		ddate = QString("%1 %2").arg(StelLocaleMgr::longMonthName(date.at(1).toInt()), date.at(0));
+	QString ddate = StelUtils::localeDiscoveryDateString(discoveryDate);
 	if (discoverer.isEmpty())
 		return ddate;
 	else

@@ -487,9 +487,15 @@ namespace StelUtils
 	//! Return a day number of week for date
 	//! @return number of day: 0 - sunday, 1 - monday,..
 	int getDayOfWeek(int year, int month, int day);
-	inline int getDayOfWeek(double JD){ double d= fmodpos(JD+1.5, 7);
+	inline int getDayOfWeek(double JD)
+	{
+		double d= fmodpos(JD+1.5, 7);
 		return std::lround(floor(d));
 	}
+
+	//! Format the discovery date
+	//! @return QString representing the formatted date
+	QString localeDiscoveryDateString(const QString& discovery);
 
 	//! Get the current Julian Date from system time.
 	//! @return the current Julian Date
