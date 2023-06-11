@@ -213,7 +213,7 @@ void StelSkyImageTile::getTilesToDraw(QMultiMap<double, StelSkyImageTile*>& resu
 			// The tile has an associated texture, but it is not yet loaded: load it now
 			StelTextureMgr& texMgr=StelApp::getInstance().getTextureManager();
 			const auto params = StelTexture::StelTextureParams(true, GL_LINEAR, GL_CLAMP_TO_EDGE, false,
-															   StelTexture::ColorSpace::LinearSRGB, decimation);
+															   StelTexture::ColorSpace::sRGB, decimation);
 			tex = texMgr.createTextureThread(absoluteImageURI, params);
 			if (!tex)
 			{

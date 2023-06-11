@@ -19,6 +19,8 @@
 
 #include "StelApp.hpp"
 
+#include "StelSRGB.hpp"
+#include "Dithering.hpp"
 #include "StelCore.hpp"
 #include "StelMainView.hpp"
 #include "StelSplashScreen.hpp"
@@ -79,7 +81,10 @@
 #include <QNetworkDiskCache>
 #include <QNetworkProxy>
 #include <QNetworkReply>
+#include <QOpenGLBuffer>
 #include <QOpenGLContext>
+#include <QOpenGLShaderProgram>
+#include <QOpenGLVertexArrayObject>
 #include <QOpenGLFramebufferObject>
 #include <QString>
 #include <QStringList>
@@ -101,6 +106,10 @@
 #ifdef ENABLE_SPOUT
 #include <QMessageBox>
 #include "SpoutSender.hpp"
+#endif
+
+#ifndef GL_RGBA16
+# define GL_RGBA16 0x805B
 #endif
 
 #ifdef USE_STATIC_PLUGIN_HELLOSTELMODULE
@@ -665,6 +674,9 @@ void StelApp::init(QSettings* conf)
 
 	// Animation
 	animationScale = confSettings->value("gui/pointer_animation_speed", 1.).toDouble();
+
+	ditherPatternTex = StelApp::getInstance().getTextureManager().getDitheringTexture(0);
+	setupLinearToSRGBBlitter();
 	
 #ifdef ENABLE_SPOUT
 	//qDebug() << "Property spout is" << qApp->property("spout").toString();
@@ -811,6 +823,62 @@ void StelApp::applyRenderBuffer(GLuint drawFbo)
 	viewportEffect->paintViewportBuffer(renderBuffer);
 }
 
+void StelApp::setupLinearToSRGBBlitter()
+{
+	linearToSRGB_VBO.reset(new QOpenGLBuffer(QOpenGLBuffer::VertexBuffer));
+	linearToSRGB_VBO->create();
+	linearToSRGB_VBO->bind();
+	const GLfloat vertices[]=
+	{
+		// full screen quad
+		-1, -1,
+		 1, -1,
+		-1,  1,
+		 1,  1,
+	};
+	GL(gl->glBufferData(GL_ARRAY_BUFFER, sizeof vertices, vertices, GL_STATIC_DRAW));
+
+	linearToSRGB_VAO.reset(new QOpenGLVertexArrayObject);
+	linearToSRGB_VAO->create();
+	linearToSRGB_VAO->bind();
+	gl->glVertexAttribPointer(0, 2, GL_FLOAT, false, 0, 0);
+	linearToSRGB_VBO->release();
+	gl->glEnableVertexAttribArray(0);
+	linearToSRGB_VAO->release();
+
+	linearToSRGB_Program.reset(new QOpenGLShaderProgram);
+	linearToSRGB_Program->addShaderFromSourceCode(QOpenGLShader::Vertex,
+		StelOpenGL::globalShaderPrefix(StelOpenGL::VERTEX_SHADER) + R"(
+ATTRIBUTE vec3 vertex;
+VARYING vec2 texcoord;
+void main()
+{
+	gl_Position = vec4(vertex, 1.);
+	texcoord = 0.5*vertex.xy+0.5;
+}
+)");
+	linearToSRGB_Program->addShaderFromSourceCode(QOpenGLShader::Fragment,
+		StelOpenGL::globalShaderPrefix(StelOpenGL::FRAGMENT_SHADER) + R"(
+VARYING vec2 texcoord;
+uniform sampler2D tex;
+
+)" + makeDitheringShader() + makeSRGBUtilsShader() + R"(
+
+void main()
+{
+	vec4 rgba = texture2D(tex, texcoord);
+	vec3 srgb = linearToSRGB(clamp(rgba.rgb, vec3(0), vec3(1)));
+	FRAG_COLOR = vec4(dither(srgb), rgba.a);
+}
+)");
+	StelPainter::linkProg(linearToSRGB_Program.get(), "Linear RGB to sRGB conversion program");
+	linearToSRGB_Program->bind();
+	linearToSRGBUniformLocations.tex           = linearToSRGB_Program->uniformLocation("tex");
+	linearToSRGBUniformLocations.ditherPattern = linearToSRGB_Program->uniformLocation("ditherPattern");
+	linearToSRGBUniformLocations.rgbMaxValue   = linearToSRGB_Program->uniformLocation("rgbMaxValue");
+	linearToSRGB_Program->release();
+}
+
 //! Main drawing function called at each frame
 void StelApp::draw()
 {
@@ -828,10 +896,77 @@ void StelApp::draw()
 	core->preDraw();
 
 	const QList<StelModule*> modules = moduleMgr->getCallOrders(StelModule::ActionDraw);
-	for (auto* module : modules)
+
+	const auto srgbFBO = currentFbo;
+	StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
+	const auto w = params.viewportXywh[2] * params.devicePixelsPerPixel;
+	const auto h = params.viewportXywh[3] * params.devicePixelsPerPixel;
+	StelOpenGL::checkGLErrors(__FILE__, __LINE__);
+	if(!linearLightTexFBO || linearLightTexFBO->size() != QSize(w,h))
 	{
-		module->draw(core);
+		qDebug().nospace() << "Creating linear-light FBO with size " << w << "x" << h;
+		QOpenGLFramebufferObjectFormat format;
+		format.setAttachment(QOpenGLFramebufferObject::CombinedDepthStencil);
+		format.setInternalTextureFormat(GL_RGBA16);
+		const auto samples = confSettings->value("video/multisampling", 0).toInt();
+		if(samples > 1)
+		{
+			linearLightTexFBO.reset(new QOpenGLFramebufferObject(w, h, format));
+			format.setSamples(samples);
+			linearLightMultisampledFBO.reset(new QOpenGLFramebufferObject(w, h, format));
+		}
+		else
+		{
+			linearLightTexFBO.reset(new QOpenGLFramebufferObject(w, h, format));
+			linearLightMultisampledFBO.reset();
+		}
 	}
+
+	if(linearLightMultisampledFBO)
+	{
+		linearLightMultisampledFBO->bind();
+		currentFbo = linearLightMultisampledFBO->handle();
+	}
+	else
+	{
+		linearLightTexFBO->bind();
+		currentFbo = linearLightTexFBO->handle();
+	}
+	StelOpenGL::checkGLErrors(__FILE__, __LINE__);
+
+	GL(gl->glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT));
+
+	for(auto* module : modules)
+		module->draw(core);
+
+	if(linearLightMultisampledFBO)
+	{
+		// Resolve multisamples into the texture
+		QOpenGLFramebufferObject::blitFramebuffer(linearLightTexFBO.get(), linearLightMultisampledFBO.get(),
+												  GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
+	}
+
+	GL(gl->glBindFramebuffer(GL_FRAMEBUFFER, srgbFBO));
+	linearToSRGB_Program->bind();
+
+	const int linearTexSampler = 0;
+	GL(gl->glActiveTexture(GL_TEXTURE0 + linearTexSampler));
+	GL(gl->glBindTexture(GL_TEXTURE_2D, linearLightTexFBO->texture()));
+	linearToSRGB_Program->setUniformValue(linearToSRGBUniformLocations.tex, linearTexSampler);
+
+	const int ditherTexSampler = 1;
+	ditherPatternTex->bind(ditherTexSampler);
+	linearToSRGB_Program->setUniformValue(linearToSRGBUniformLocations.ditherPattern, ditherTexSampler);
+	const auto rgbMaxValue=calcRGBMaxValue(core->getDitheringMode());
+	linearToSRGB_Program->setUniformValue(linearToSRGBUniformLocations.rgbMaxValue, rgbMaxValue[0], rgbMaxValue[1], rgbMaxValue[2]);
+
+	linearToSRGB_VAO->bind();
+	GL(gl->glEnable(GL_BLEND));
+	GL(gl->glBlendFunc(GL_ONE,GL_ONE));
+	GL(gl->glDrawArrays(GL_TRIANGLE_STRIP, 0, 4));
+	GL(gl->glDisable(GL_BLEND));
+	linearToSRGB_VAO->release();
+
 	core->postDraw();
 #ifdef ENABLE_SPOUT
 	// At this point, the sky scene has been drawn, but no GUI panels.

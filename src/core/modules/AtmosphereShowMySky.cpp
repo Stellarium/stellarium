@@ -20,6 +20,7 @@
 #ifdef ENABLE_SHOWMYSKY
 
 #include "AtmosphereShowMySky.hpp"
+#include "StelSRGB.hpp"
 #include "StelUtils.hpp"
 #include "Planet.hpp"
 #include "StelApp.hpp"
@@ -28,7 +29,6 @@
 #include "StelTextureMgr.hpp"
 #include "StelCore.hpp"
 #include "StelPainter.hpp"
-#include "Dithering.hpp"
 #include "StelTranslator.hpp"
 #include "TextureAverageComputer.hpp"
 
@@ -282,14 +282,13 @@ uniform sampler2D luminanceXYZW;
 in vec2 texCoord;
 out vec4 color;
 
-vec3 dither(vec3);
 vec3 xyYToRGB(float x, float y, float Y);
 
 void main()
 {
 	vec3 XYZ=texture(luminanceXYZW, texCoord).xyz;
 	vec3 srgb=xyYToRGB(XYZ.x/(XYZ.x+XYZ.y+XYZ.z), XYZ.y/(XYZ.x+XYZ.y+XYZ.z), XYZ.y);
-	color=vec4(dither(srgb),1);
+	color=vec4(srgb,1);
 }
 )";
 
@@ -298,18 +297,14 @@ void main()
 							"ShowMySky atmosphere luminance-to-screen vertex shader");
 		luminanceToScreenProgram_->addShader(&vShader);
 
-		QOpenGLShader ditherShader(QOpenGLShader::Fragment);
-		const auto fPrefix = StelOpenGL::globalShaderPrefix(StelOpenGL::FRAGMENT_SHADER);
-		handleCompileStatus(ditherShader.compileSourceCode(fPrefix + makeDitheringShader()),
-							ditherShader, "ShowMySky atmosphere dithering shader");
-		luminanceToScreenProgram_->addShader(&ditherShader);
-
 		QOpenGLShader toneReproducerShader(QOpenGLShader::Fragment);
 		auto xyYToRGBFile = QFile(":/shaders/xyYToRGB.glsl");
 		if(!xyYToRGBFile.open(QFile::ReadOnly))
 			throw InitFailure("Failed to open atmosphere tone reproducer fragment shader file");
 		const auto xyYToRGBShader = xyYToRGBFile.readAll();
-		handleCompileStatus(toneReproducerShader.compileSourceCode(fPrefix + xyYToRGBShader),
+		const auto fPrefix = StelOpenGL::globalShaderPrefix(StelOpenGL::FRAGMENT_SHADER);
+		const auto srgbPrefix = makeSRGBUtilsShader();
+		handleCompileStatus(toneReproducerShader.compileSourceCode(fPrefix + srgbPrefix + xyYToRGBShader),
 							toneReproducerShader, "ShowMySky atmosphere tone reproducer fragment shader");
 		luminanceToScreenProgram_->addShader(&toneReproducerShader);
 
@@ -472,8 +467,6 @@ AtmosphereShowMySky::AtmosphereShowMySky(const double initialAltitude)
 		prog.bind();
 
 		shaderAttribLocations.doSRGB                 = prog.uniformLocation("doSRGB");
-		shaderAttribLocations.rgbMaxValue            = prog.uniformLocation("rgbMaxValue");
-		shaderAttribLocations.ditherPattern          = prog.uniformLocation("ditherPattern");
 		shaderAttribLocations.oneOverGamma           = prog.uniformLocation("oneOverGamma");
 		shaderAttribLocations.brightnessScale        = prog.uniformLocation("brightnessScale");
 		shaderAttribLocations.luminanceTexture       = prog.uniformLocation("luminance");
@@ -833,21 +826,11 @@ void AtmosphereShowMySky::draw(StelCore* core)
 	StelPainter sPainter(core->getProjection2d());
 	sPainter.setBlending(true, GL_ONE, GL_ONE);
 
-	const auto rgbMaxValue=calcRGBMaxValue(core->getDitheringMode());
-	GL(luminanceToScreenProgram_->setUniformValue(shaderAttribLocations.rgbMaxValue, rgbMaxValue[0], rgbMaxValue[1], rgbMaxValue[2]));
-
 	auto& gl = *glfuncs();
 	GL(gl.glActiveTexture(GL_TEXTURE0));
 	GL(gl.glBindTexture(GL_TEXTURE_2D, renderer_->getLuminanceTexture()));
 	GL(gl.glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR));
 	GL(luminanceToScreenProgram_->setUniformValue(shaderAttribLocations.luminanceTexture, 0));
-
-	const int ditherTexSampler = 1;
-	if(!ditherPatternTex_)
-		ditherPatternTex_ = StelApp::getInstance().getTextureManager().getDitheringTexture(ditherTexSampler);
-	else
-		GL(ditherPatternTex_->bind(ditherTexSampler));
-	GL(luminanceToScreenProgram_->setUniformValue(shaderAttribLocations.ditherPattern, ditherTexSampler));
 
 	GL(gl.glBindVertexArray(mainVAO_));
 	GL(gl.glDrawArrays(GL_TRIANGLE_STRIP, 0, 4));

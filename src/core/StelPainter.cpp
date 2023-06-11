@@ -2132,13 +2132,12 @@ void StelPainter::initGLShaders()
 	QOpenGLShader fshader2(QOpenGLShader::Fragment);
 	const auto fsrc2 =
 		StelOpenGL::globalShaderPrefix(StelOpenGL::FRAGMENT_SHADER) +
-		makeDitheringShader()+
 		"VARYING mediump vec2 texc;\n"
 		"uniform sampler2D tex;\n"
 		"uniform mediump vec4 texColor;\n"
 		"void main(void)\n"
 		"{\n"
-		"    FRAG_COLOR = dither(texture2D(tex, texc)*texColor);\n"
+		"    FRAG_COLOR = texture2D(tex, texc)*texColor;\n"
 		"}\n";
 	fshader2.compileSourceCode(fsrc2);
 	if (!fshader2.log().isEmpty())
@@ -2153,8 +2152,6 @@ void StelPainter::initGLShaders()
 	texturesShaderVars.vertex = texturesShaderProgram->attributeLocation("vertex");
 	texturesShaderVars.texColor = texturesShaderProgram->uniformLocation("texColor");
 	texturesShaderVars.texture = texturesShaderProgram->uniformLocation("tex");
-	texturesShaderVars.ditherPattern = texturesShaderProgram->uniformLocation("ditherPattern");
-	texturesShaderVars.rgbMaxValue = texturesShaderProgram->uniformLocation("rgbMaxValue");
 
 	// Texture shader program + interpolated color per vertex
 	QOpenGLShader vshader4(QOpenGLShader::Vertex);
@@ -2179,7 +2176,6 @@ void StelPainter::initGLShaders()
 	QOpenGLShader fshader4(QOpenGLShader::Fragment);
 	const auto fsrc4 =
 		StelOpenGL::globalShaderPrefix(StelOpenGL::FRAGMENT_SHADER) +
-		makeDitheringShader()+
 		makeSaturationShader()+
 		"VARYING mediump vec2 texc;\n"
 		"VARYING mediump vec4 outColor;\n"
@@ -2187,7 +2183,7 @@ void StelPainter::initGLShaders()
 		"uniform lowp float saturation;\n"
 		"void main(void)\n"
 		"{\n"
-		"    FRAG_COLOR = dither(texture2D(tex, texc)*outColor);\n"
+		"    FRAG_COLOR = texture2D(tex, texc)*outColor;\n"
 		"    if (saturation != 1.0)\n"
 		"        FRAG_COLOR.rgb = saturate(FRAG_COLOR.rgb, saturation);\n"
 		"}\n";
@@ -2204,8 +2200,6 @@ void StelPainter::initGLShaders()
 	texturesColorShaderVars.vertex = texturesColorShaderProgram->attributeLocation("vertex");
 	texturesColorShaderVars.color = texturesColorShaderProgram->attributeLocation("color");
 	texturesColorShaderVars.texture = texturesColorShaderProgram->uniformLocation("tex");
-	texturesColorShaderVars.ditherPattern = texturesColorShaderProgram->uniformLocation("ditherPattern");
-	texturesColorShaderVars.rgbMaxValue = texturesColorShaderProgram->uniformLocation("rgbMaxValue");
 	texturesColorShaderVars.saturation = texturesColorShaderProgram->uniformLocation("saturation");
 
 	if(StelMainView::getInstance().getGLInformation().isCoreProfile)
@@ -2575,8 +2569,6 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool do
 	const bool multisampleWasOn = multisamplingEnabled && glIsEnabled(GL_MULTISAMPLE);
 #endif
 
-	const auto core = StelApp::getInstance().getCore();
-	const auto rgbMaxValue=calcRGBMaxValue(core->getDitheringMode());
 	if (!texCoordArray.enabled && !colorArray.enabled && !normalArray.enabled)
 	{
 		pr = coreProfileWideLineMode ? wideLineShaderProgram : basicShaderProgram;
@@ -2628,13 +2620,6 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool do
 		pr->setAttributeBuffer(texturesShaderVars.texCoord, texCoordArray.type, texCoordDataOffset, texCoordArray.size);
 		pr->enableAttributeArray(texturesShaderVars.texCoord);
 		//pr->setUniformValue(texturesShaderVars.texture, 0);    // use texture unit 0
-		const int ditherTexSampler = 1;
-		if(!ditherPatternTex)
-			ditherPatternTex = StelApp::getInstance().getTextureManager().getDitheringTexture(ditherTexSampler);
-		else
-			ditherPatternTex->bind(ditherTexSampler);
-		pr->setUniformValue(texturesShaderVars.ditherPattern, ditherTexSampler);
-		pr->setUniformValue(texturesShaderVars.rgbMaxValue, rgbMaxValue[0], rgbMaxValue[1], rgbMaxValue[2]);
 	}
 	else if (texCoordArray.enabled && colorArray.enabled && !normalArray.enabled && !wideLineMode)
 	{
@@ -2662,13 +2647,6 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool do
 		pr->setAttributeBuffer(texturesColorShaderVars.color, colorArray.type, colorDataOffset, colorArray.size);
 		pr->enableAttributeArray(texturesColorShaderVars.color);
 		//pr->setUniformValue(texturesShaderVars.texture, 0);    // use texture unit 0
-		const int ditherTexSampler = 1;
-		if(!ditherPatternTex)
-			ditherPatternTex = StelApp::getInstance().getTextureManager().getDitheringTexture(ditherTexSampler);
-		else
-			ditherPatternTex->bind(ditherTexSampler);
-		pr->setUniformValue(texturesColorShaderVars.ditherPattern, ditherTexSampler);
-		pr->setUniformValue(texturesColorShaderVars.rgbMaxValue, rgbMaxValue[0], rgbMaxValue[1], rgbMaxValue[2]);
 		pr->setUniformValue(texturesColorShaderVars.saturation, saturation);
 	}
 	else if (!texCoordArray.enabled && colorArray.enabled && !normalArray.enabled)

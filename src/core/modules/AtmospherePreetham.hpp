@@ -71,8 +71,6 @@ private:
 	//! Vertex shader used for xyYToRGB computation
 	class QOpenGLShaderProgram* atmoShaderProgram;
 	struct {
-		int ditherPattern;
-		int rgbMaxValue;
 		int alphaWaOverAlphaDa;
 		int oneOverGamma;
 		int term2TimesOneOverMaxdLpOneOverGamma; // original
@@ -87,8 +85,6 @@ private:
 		int skyColor;
 		int doSRGB;
 	} shaderAttribLocations;
-
-	StelTextureSP ditherPatternTex;
 
 	//! Binds actual VAO if it's supported, sets up the relevant state manually otherwise.
 	void bindVAO();

@@ -174,7 +174,7 @@ void main()
 	{
 		// We are drawing the Sun
 		vec4 texColor = texture2D(tex, texc);
-		texColor.rgb = srgbToLinear(texColor.rgb * sunInfo.rgb);
+		texColor.rgb = texColor.rgb * srgbToLinear(sunInfo.rgb);
 		// Reference: chapter 14.7 "Limb Darkening" in "Allen’s Astrophysical Quantities",
 		//            A.N.Cox (ed.), 4th edition, New York: Springer-Verlag, 2002.
 		//            DOI 10.1007/978-1-4612-1186-0
@@ -189,7 +189,7 @@ void main()
 		float cosTheta2 = cosTheta*cosTheta;
 		vec3 limbDarkeningCoef = a0 + a1*cosTheta + a2*cosTheta2;
 		vec3 color = texColor.rgb * limbDarkeningCoef;
-		FRAG_COLOR = vec4(linearToSRGB(color), texColor.a);
+		FRAG_COLOR = vec4(color, texColor.a);
 		return;
 	}
 #endif
@@ -398,8 +398,6 @@ void main()
         texColor = texture2D(tex, texc);
     }
 
-    texColor.rgb = srgbToLinear(texColor.rgb);
-
     mediump vec4 finalColor = texColor;
 	// apply (currently only Martian) pole caps. texc.t=0 at south pole, 1 at north pole. 
 	if (texc.t>poleLat.x-0.01+0.001*sin(texc.s*18.*M_PI)) {	// North pole near t=1
@@ -434,7 +432,5 @@ void main()
     //apply white rimlight
     finalColor.xyz = clamp( finalColor.xyz + vec3(outgas), 0.0, 1.0);
 
-    FRAG_COLOR = vec4(linearToSRGB(finalColor.rgb), finalColor.a);
-    //to debug texture issues, uncomment and reload shader
-    //FRAG_COLOR = texColor;
+    FRAG_COLOR = finalColor;
 }

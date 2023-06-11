@@ -311,7 +311,8 @@ Planet::Planet(const QString& englishName,
 		QString normalMapFile = StelFileMgr::findFile("textures/"+normalMapName, StelFileMgr::File);
 		if (!normalMapFile.isEmpty())
 		{
-			normalMap = texMan.createTextureThread(normalMapFile, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT), false);
+			const StelTexture::StelTextureParams params(true, GL_LINEAR, GL_REPEAT, false, StelTexture::ColorSpace::LinearSRGB);
+			normalMap = texMan.createTextureThread(normalMapFile, params, false);
 			normalMapFileOrig = normalMapFile;
 		}
 	}
@@ -321,7 +322,8 @@ Planet::Planet(const QString& englishName,
 		QString horizonMapFile = StelFileMgr::findFile("textures/"+horizonMapName, StelFileMgr::File);
 		if (!horizonMapFile.isEmpty())
 		{
-			horizonMap = texMan.createTextureThread(horizonMapFile, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT), false);
+			const StelTexture::StelTextureParams params(true, GL_LINEAR, GL_REPEAT, false, StelTexture::ColorSpace::LinearSRGB);
+			horizonMap = texMan.createTextureThread(horizonMapFile, params, false);
 			horizonMapFileOrig = horizonMapFile;
 		}
 	}
