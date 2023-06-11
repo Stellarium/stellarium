@@ -77,6 +77,11 @@ public:
 		PFNGLMINSAMPLESHADINGPROC glMinSampleShading = nullptr;
 		GLint maxAnisotropy = 0;
 		GLint maxTextureSize = 2048;
+		GLenum srgbTextureFormatRGB = GL_RGB;
+		GLenum srgbTextureFormatRGBA = GL_RGBA;
+		GLenum srgbTextureInternalFormatRGB = GL_SRGB8;
+		GLenum srgbTextureInternalFormatRGBA = GL_SRGB8_ALPHA8;
+		bool supportsGenerateMipmapSRGB = true;
 		bool isCoreProfile = false;
 		bool isGLES = false;
 	};

@@ -307,7 +307,7 @@ QByteArray StelTexture::convertToGLFormat(QImage image, GLint& format, GLint& ty
 	else
 		format = GL_RGB;
 	type = GL_UNSIGNED_BYTE;
-	int bpp = format == format == GL_RGBA ? 4 : 3;
+	int bpp = format == GL_RGBA ? 4 : 3;
 
 	ret.reserve(width * height * bpp);
 	QImage tmp = image.convertToFormat(QImage::Format_ARGB32);
@@ -391,8 +391,27 @@ bool StelTexture::glLoad(const GLData& data)
 	}
 
 	//do pixel transfer
-	gl->glTexImage2D(GL_TEXTURE_2D, 0, data.format, width, height, 0, static_cast<GLenum>(data.format),
-			 static_cast<GLenum>(data.type), data.data.constData());
+
+	const auto& glInfo = StelMainView::getInstance().getGLInformation();
+	GLenum format = data.format;
+	GLenum internalFormat = data.format;
+	if(loadParams.colorSpace==ColorSpace::sRGB)
+	{
+		if(data.format == GL_RGB)
+		{
+			format = glInfo.srgbTextureFormatRGB;
+			internalFormat = glInfo.srgbTextureInternalFormatRGB;
+		}
+		else if(data.format == GL_RGBA)
+		{
+			format = glInfo.srgbTextureFormatRGBA;
+			internalFormat = glInfo.srgbTextureInternalFormatRGBA;
+		}
+	}
+	StelOpenGL::checkGLErrors(__FILE__, __LINE__);
+	gl->glTexImage2D(GL_TEXTURE_2D, 0, internalFormat, width, height, 0, format,
+					 static_cast<GLenum>(data.type), data.data.constData());
+	StelOpenGL::checkGLErrors(__FILE__, __LINE__);
 
 	//for now, assume full sized 8 bit GL formats used internally
 	glSize = static_cast<uint>(data.data.size());
@@ -429,7 +448,32 @@ bool StelTexture::glLoad(const GLData& data)
 		{
 			glSize = glSize + glSize/3; //mipmaps require 1/3 more mem
 		}
-		gl->glGenerateMipmap(GL_TEXTURE_2D);
+
+		if(loadParams.colorSpace==ColorSpace::LinearSRGB || glInfo.supportsGenerateMipmapSRGB)
+		{
+			StelOpenGL::checkGLErrors(__FILE__, __LINE__);
+			gl->glGenerateMipmap(GL_TEXTURE_2D);
+			StelOpenGL::checkGLErrors(__FILE__, __LINE__);
+		}
+		else
+		{
+			const bool rgba = data.format == GL_RGBA;
+			// Formula from the glspec, "Mipmapping" subsection in section 3.8.11 Texture Minification
+			const int totalMipmapLevels = 1+std::floor(std::log2(std::max(width,height)));
+			qDebug().nospace() << "Making a mipmap pyramid for a " << width << "x" << height
+							   << (rgba ? " RGBA" : " RGB") << " texture";
+			QImage img(reinterpret_cast<const uchar*>(data.data.constData()), width, height,
+					   rgba ? QImage::Format_RGBA8888 : QImage::Format_RGB888);
+			for(int level=1; level<totalMipmapLevels; ++level)
+			{
+				img = img.scaled(std::max(1, img.width()/2), std::max(1, img.height()/2),
+								 Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+				GLint dummyFormat, dummyType, dummyWidth, dummyHeight;
+				const auto bits = convertToGLFormat(img.mirrored(), dummyFormat, dummyType, 1, dummyWidth, dummyHeight);
+				gl->glTexImage2D(GL_TEXTURE_2D, level, internalFormat, img.width(), img.height(), 0,
+								 format, static_cast<GLenum>(data.type), bits.data());
+			}
+		}
 	}
 
 	//register ID with textureMgr and increment size

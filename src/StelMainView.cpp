@@ -913,6 +913,46 @@ void StelMainView::init()
 	gl.glGetIntegerv(GL_MAX_TEXTURE_SIZE, &glInfo.maxTextureSize);
 	qDebug() << "Maximum 2D texture size:" << glInfo.maxTextureSize;
 
+	// sRGB support in GLES is a mess
+	if(glInfo.isGLES)
+	{
+		if(format.majorVersion() >= 3 || glInfo.mainContext->hasExtension("GL_EXT_texture_sRGB"))
+		{
+			glInfo.srgbTextureFormatRGB = GL_RGB;
+			glInfo.srgbTextureFormatRGBA = GL_RGBA;
+			glInfo.srgbTextureInternalFormatRGB = GL_SRGB8;
+			glInfo.srgbTextureInternalFormatRGBA = GL_SRGB8_ALPHA8;
+			glInfo.supportsGenerateMipmapSRGB = false;
+		}
+		else if(glInfo.mainContext->hasExtension("GL_EXT_sRGB"))
+		{
+			glInfo.srgbTextureFormatRGB = GL_SRGB;
+			glInfo.srgbTextureFormatRGBA = GL_SRGB_ALPHA_EXT;
+			glInfo.srgbTextureInternalFormatRGB = GL_SRGB;
+			glInfo.srgbTextureInternalFormatRGBA = GL_SRGB_ALPHA_EXT;
+			glInfo.supportsGenerateMipmapSRGB = false;
+		}
+		else
+		{
+			qCritical() << "No support for sRGB textures found, expect rendering problems!";
+			// Let the user still have gamma-incorrect rendering if possible (though
+			// configurations without sRGB support would likely have other problems).
+			glInfo.srgbTextureFormatRGB = GL_RGB;
+			glInfo.srgbTextureFormatRGBA = GL_RGBA;
+			glInfo.srgbTextureInternalFormatRGB = GL_RGB;
+			glInfo.srgbTextureInternalFormatRGBA = GL_RGBA;
+			glInfo.supportsGenerateMipmapSRGB = true;
+		}
+	}
+	else
+	{
+		glInfo.srgbTextureFormatRGB = GL_RGB;
+		glInfo.srgbTextureFormatRGBA = GL_RGBA;
+		glInfo.srgbTextureInternalFormatRGB = GL_SRGB8;
+		glInfo.srgbTextureInternalFormatRGBA = GL_SRGB8_ALPHA8;
+		glInfo.supportsGenerateMipmapSRGB = true;
+	}
+
 	gui = new StelGui();
 
 	// Should be check of requirements disabled? -- NO! This is intentional here, and does no harm.
