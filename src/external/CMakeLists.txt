@@ -81,21 +81,43 @@ IF(USE_PLUGIN_TELESCOPECONTROL)
         set_target_properties(indiclient PROPERTIES
             IMPORTED_LOCATION "${INDICLIENT_LIB}")
     else()
+        include(CheckSymbolExists)
+        check_symbol_exists(mremap sys/mman.h HAVE_MREMAP)
+        check_symbol_exists(timespec_get time.h HAVE_TIMESPEC_GET)
+        check_symbol_exists(clock_gettime time.h HAVE_CLOCK_GETTIME)
+
         # Git repo is large, limit download to archive
         # Included CMakeLists.txt contains unrelated targets and dependencies of
         # them, therefore DOWNLOAD_ONLY and all the code below
         CPMAddPackage(NAME indiclient
-            URL https://github.com/indilib/indi/archive/v1.8.5.zip
-            URL_HASH SHA256=57b78afe6d338533e35725e94cf6a9e302e22348ab418811bd41997cddf13fd6
-            VERSION 1.8.5
+            URL https://github.com/indilib/indi/archive/v2.0.2.zip
+            URL_HASH SHA256=3278ab38cc751ae262d6808808dd38124879a9b1270edd7351f866abe9d2fd45
+            VERSION 2.0.2
             DOWNLOAD_ONLY YES)
 
-        # Installed version has /usr/include/libindi, move these headers to
-        # such directory for a consistent #include
-        file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/libindi)
-        file(GLOB INDI_HEADERS "${indiclient_SOURCE_DIR}/libs/indibase/*.h")
-        file(COPY ${INDI_HEADERS}
-            DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/libindi)
+        # First, fix a missing include
+        file(READ
+                ${indiclient_SOURCE_DIR}/libs/indicore/indidevapi.h
+                INDIDEVAPI_H)
+        string(REGEX REPLACE "#include .lilxml.h."
+                "#include \"lilxml.h\"\n#include <stdarg.h>"
+                INDIDEVAPI_H "${INDIDEVAPI_H}")
+        file(WRITE
+                ${indiclient_SOURCE_DIR}/libs/indicore/indidevapi.h.new
+                "${INDIDEVAPI_H}")
+        configure_file(${indiclient_SOURCE_DIR}/libs/indicore/indidevapi.h.new
+                ${indiclient_SOURCE_DIR}/libs/indicore/indidevapi.h COPYONLY)
+
+        # libastro.h doesn't need libnova/utility.h
+        file(READ
+                ${indiclient_SOURCE_DIR}/libs/indicore/libastro.h
+                LIBASTRO_H)
+        string(REGEX REPLACE "#include <libnova/utility.h>" "" LIBASTRO_H "${LIBASTRO_H}")
+        file(WRITE
+                ${indiclient_SOURCE_DIR}/libs/indicore/libastro.h.new
+                "${LIBASTRO_H}")
+        configure_file(${indiclient_SOURCE_DIR}/libs/indicore/libastro.h.new
+                ${indiclient_SOURCE_DIR}/libs/indicore/libastro.h COPYONLY)
 
         # Avoid bundling libnova too
         file(READ
@@ -107,10 +129,10 @@ IF(USE_PLUGIN_TELESCOPECONTROL)
         string(REGEX REPLACE
             "ln_lnlat_posn lnobserver { 0, 0 };" ""
             INDITELESCOPE_H "${INDITELESCOPE_H}")
-        file(WRITE ${CMAKE_CURRENT_BINARY_DIR}/libindi/inditelescope.h.new
+        file(WRITE ${indiclient_SOURCE_DIR}/inditelescope.h.new
             "${INDITELESCOPE_H}")
-        configure_file(${CMAKE_CURRENT_BINARY_DIR}/libindi/inditelescope.h.new
-            ${CMAKE_CURRENT_BINARY_DIR}/libindi/inditelescope.h COPYONLY)
+        configure_file(${indiclient_SOURCE_DIR}/inditelescope.h.new
+            ${indiclient_SOURCE_DIR}/libs/indibase/inditelescope.h COPYONLY)
 
         # Fix build in windows
         file(READ
@@ -119,51 +141,78 @@ IF(USE_PLUGIN_TELESCOPECONTROL)
         string(REGEX REPLACE "#include <sys/time.h>"
             "#ifdef Q_OS_WIN\n#include <windows.h>\n#else\n#include <sys/time.h>\n#endif"
             INDILOGGER_H "${INDILOGGER_H}")
-        file(WRITE ${CMAKE_CURRENT_BINARY_DIR}/libindi/indilogger.h.new
+        file(WRITE ${indiclient_SOURCE_DIR}/indilogger.h.new
             "${INDILOGGER_H}")
-        configure_file(${CMAKE_CURRENT_BINARY_DIR}/libindi/indilogger.h.new
-            ${CMAKE_CURRENT_BINARY_DIR}/libindi/indilogger.h COPYONLY)
+        configure_file(${indiclient_SOURCE_DIR}/indilogger.h.new
+            ${indiclient_SOURCE_DIR}/libs/indibase/indilogger.h COPYONLY)
 
-        # https://devblogs.microsoft.com/cppblog/msvc-preprocessor-progress-towards-conformance/
-        # This patch is upstreamed at
-        # https://github.com/indilib/indi/pull/1728 so after version 1.9.8
-        # shouldn't be needed
-        file(GLOB INDILOCALE_H ${indiclient_SOURCE_DIR}/libs/locale_compat.h)
-        if (INDILOCALE_H)
-            file(READ ${indiclient_SOURCE_DIR}/libs/locale_compat.h INDILOCALE_H)
-            string(REGEX REPLACE "L#s" "L\"\"#s" INDILOCALE_H "${INDILOCALE_H}")
-            file(WRITE ${CMAKE_CURRENT_BINARY_DIR}/libindi/locale_compat.h.new
-                "${INDILOCALE_H}")
-            configure_file(${CMAKE_CURRENT_BINARY_DIR}/libindi/locale_compat.h.new
-                ${CMAKE_CURRENT_BINARY_DIR}/libindi/locale_compat.h COPYONLY)
-            file(RENAME ${indiclient_SOURCE_DIR}/libs/locale_compat.h
-                ${indiclient_SOURCE_DIR}/libs/locale_compat.h.bak)
-        endif()
-
-        set(INDI_SOVERSION "1")
-        set(CMAKE_INDI_VERSION_MAJOR 1)
-        set(CMAKE_INDI_VERSION_MINOR 8)
-        set(CMAKE_INDI_VERSION_RELEASE 5)
+        set(INDI_SOVERSION "2")
+        set(CMAKE_INDI_VERSION_MAJOR 2)
+        set(CMAKE_INDI_VERSION_MINOR 0)
+        set(CMAKE_INDI_VERSION_RELEASE 2)
         set(CMAKE_INDI_VERSION_STRING "${CMAKE_INDI_VERSION_MAJOR}.${CMAKE_INDI_VERSION_MINOR}.${CMAKE_INDI_VERSION_RELEASE}")
         set(INDI_VERSION ${CMAKE_INDI_VERSION_MAJOR}.${CMAKE_INDI_VERSION_MINOR}.${CMAKE_INDI_VERSION_RELEASE})
         set(DATA_INSTALL_DIR "${CMAKE_INSTALL_PREFIX}/share/indi/")
         configure_file(${indiclient_SOURCE_DIR}/config.h.cmake
-            ${CMAKE_CURRENT_BINARY_DIR}/libindi/config.h )
-        add_library(indiclient STATIC
-            ${indiclient_SOURCE_DIR}/libs/lilxml.c
-            ${indiclient_SOURCE_DIR}/base64.c
-            ${indiclient_SOURCE_DIR}/libs/indibase/basedevice.cpp
-            ${indiclient_SOURCE_DIR}/libs/indibase/baseclient.cpp
-            ${indiclient_SOURCE_DIR}/libs/indibase/indiproperty.cpp
-            ${indiclient_SOURCE_DIR}/libs/indibase/indistandardproperty.cpp
-            ${indiclient_SOURCE_DIR}/libs/indicom.c)
+            ${indiclient_SOURCE_DIR}/config.h )
+
+        configure_file(${indiclient_SOURCE_DIR}/libs/indicore/indiapi.h.in
+                ${indiclient_SOURCE_DIR}/libs/indiapi.h)
+        list(APPEND INDILIB_SOURCES
+                ${indiclient_SOURCE_DIR}/libs/indicore/lilxml.cpp
+                ${indiclient_SOURCE_DIR}/libs/indicore/base64.c
+                ${indiclient_SOURCE_DIR}/libs/indicore/indidevapi.c
+                ${indiclient_SOURCE_DIR}/libs/indicore/indicom.c
+                ${indiclient_SOURCE_DIR}/libs/indicore/userio.c
+                ${indiclient_SOURCE_DIR}/libs/indicore/indiuserio.c
+                ${indiclient_SOURCE_DIR}/libs/indiabstractclient/abstractbaseclient.cpp
+                ${indiclient_SOURCE_DIR}/libs/indiclient/baseclient.cpp
+                ${indiclient_SOURCE_DIR}/libs/indidevice/basedevice.cpp
+                ${indiclient_SOURCE_DIR}/libs/indidevice/indibase.cpp
+                ${indiclient_SOURCE_DIR}/libs/indidevice/indistandardproperty.cpp
+                ${indiclient_SOURCE_DIR}/libs/indidevice/parentdevice.cpp
+                ${indiclient_SOURCE_DIR}/libs/indidevice/watchdeviceproperty.cpp
+                ${indiclient_SOURCE_DIR}/libs/indidevice/property/indiproperties.cpp
+                ${indiclient_SOURCE_DIR}/libs/indidevice/property/indipropertybasic.cpp
+                ${indiclient_SOURCE_DIR}/libs/indidevice/property/indipropertyblob.cpp
+                ${indiclient_SOURCE_DIR}/libs/indidevice/property/indiproperty.cpp
+                ${indiclient_SOURCE_DIR}/libs/indidevice/property/indipropertylight.cpp
+                ${indiclient_SOURCE_DIR}/libs/indidevice/property/indipropertynumber.cpp
+                ${indiclient_SOURCE_DIR}/libs/indidevice/property/indipropertyswitch.cpp
+                ${indiclient_SOURCE_DIR}/libs/indidevice/property/indipropertytext.cpp
+                ${indiclient_SOURCE_DIR}/libs/indidevice/property/indipropertyview.cpp
+                ${indiclient_SOURCE_DIR}/libs/sockets/tcpsocket.cpp
+                )
+        if(WIN32)
+            list(APPEND INDILIB_SOURCES ${indiclient_SOURCE_DIR}/libs/sockets/tcpsocket_win.cpp)
+        else()
+            list(APPEND INDILIB_SOURCES ${indiclient_SOURCE_DIR}/libs/sockets/tcpsocket_unix.cpp)
+        endif()
+
+        add_library(indiclient STATIC ${INDILIB_SOURCES})
+
+        target_compile_definitions(indiclient
+          PUBLIC
+            $<$<BOOL:${HAVE_TIMESPEC_GET}>:HAVE_TIMESPEC_GET>
+            $<$<BOOL:${HAVE_CLOCK_GETTIME}>:HAVE_CLOCK_GETTIME>
+        )
+
         target_include_directories(indiclient
-            PRIVATE
-            ${CMAKE_CURRENT_BINARY_DIR}/libindi
-            PUBLIC
-            ${CMAKE_CURRENT_BINARY_DIR}
-            ${indiclient_SOURCE_DIR}
-            ${indiclient_SOURCE_DIR}/libs)
+                PRIVATE
+                ${CMAKE_CURRENT_BINARY_DIR}/libindi
+                ${indiclient_SOURCE_DIR}/libindi
+                ${indiclient_SOURCE_DIR}/libs
+                PUBLIC
+                ${CMAKE_CURRENT_BINARY_DIR}
+                ${indiclient_SOURCE_DIR}
+                ${indiclient_SOURCE_DIR}/libs/sockets
+                ${indiclient_SOURCE_DIR}/libs/indiabstractclient
+                ${indiclient_SOURCE_DIR}/libs/indibase
+                ${indiclient_SOURCE_DIR}/libs/indicore
+                ${indiclient_SOURCE_DIR}/libs/indiclient
+                ${indiclient_SOURCE_DIR}/libs/indidevice
+                ${indiclient_SOURCE_DIR}/libs/indidevice/property
+                ${indiclient_SOURCE_DIR}/libs)
         target_link_libraries(indiclient ${ZLIB_LIBRARIES})
     endif()
 ENDIF()
