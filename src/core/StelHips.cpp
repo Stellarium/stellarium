@@ -52,6 +52,7 @@ static QString getExt(const QString& format)
 	{
 		if (ext == "jpeg") return "jpg";
 		if (ext == "png") return "png";
+		if (ext == "webp") return "webp";
 	}
 	return QString();
 }
