@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2023-06-04 14:58+0700\n"
+"POT-Creation-Date: 2023-06-15 18:06+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Víctor Vega <vegadark@protonmail.com>, 2023\n"
 "Language-Team: Spanish (https://app.transifex.com/stellarium/teams/80998/es/)\n"
@@ -28,8 +28,8 @@ msgstr ""
 #: src/core/modules/CustomObject.cpp:81 src/core/modules/Asterism.cpp:194
 #: src/core/modules/Constellation.cpp:290
 #: src/core/modules/NomenclatureItem.cpp:224 src/core/modules/Nebula.cpp:249
-#: src/core/modules/Nebula.cpp:251 src/core/modules/Planet.cpp:613
-#: src/core/modules/Planet.cpp:616 src/core/modules/StarWrapper.cpp:49
+#: src/core/modules/Nebula.cpp:251 src/core/modules/Planet.cpp:608
+#: src/core/modules/Planet.cpp:611 src/core/modules/StarWrapper.cpp:49
 #: src/core/modules/StarWrapper.cpp:290 src/core/modules/StarWrapper.cpp:292
 #: src/gui/AstroCalcDialog.cpp:901 src/gui/AstroCalcDialog.cpp:2338
 #: src/gui/AstroCalcDialog.cpp:2975 src/gui/AstroCalcDialog.cpp:3007
@@ -330,8 +330,8 @@ msgid "Antapex"
 msgstr "Antapex"
 
 #. TRANSLATORS: Unit of measure for speed - kilometers per second
-#: src/core/modules/GridLinesMgr.cpp:1630 src/core/modules/Planet.cpp:737
-#: src/core/modules/Planet.cpp:1228 src/gui/AstroCalcDialog.cpp:9309
+#: src/core/modules/GridLinesMgr.cpp:1630 src/core/modules/Planet.cpp:732
+#: src/core/modules/Planet.cpp:1223 src/gui/AstroCalcDialog.cpp:9309
 #: plugins/Satellites/src/Satellite.cpp:360
 #: plugins/Satellites/src/Satellite.cpp:403
 #: plugins/MeteorShowers/src/MeteorShower.cpp:564
@@ -539,97 +539,97 @@ msgid "Compass marks"
 msgstr "Marcas de brújula"
 
 #. TRANSLATORS: North
-#: src/core/modules/LandscapeMgr.cpp:279 src/core/modules/Planet.cpp:1350
+#: src/core/modules/LandscapeMgr.cpp:279 src/core/modules/Planet.cpp:1345
 msgctxt "compass direction"
 msgid "N"
 msgstr "N"
 
 #. TRANSLATORS: South
-#: src/core/modules/LandscapeMgr.cpp:281 src/core/modules/Planet.cpp:1342
+#: src/core/modules/LandscapeMgr.cpp:281 src/core/modules/Planet.cpp:1337
 msgctxt "compass direction"
 msgid "S"
 msgstr "S"
 
 #. TRANSLATORS: East
-#: src/core/modules/LandscapeMgr.cpp:283 src/core/modules/Planet.cpp:1354
+#: src/core/modules/LandscapeMgr.cpp:283 src/core/modules/Planet.cpp:1349
 msgctxt "compass direction"
 msgid "E"
 msgstr "E"
 
 #. TRANSLATORS: West
-#: src/core/modules/LandscapeMgr.cpp:285 src/core/modules/Planet.cpp:1346
+#: src/core/modules/LandscapeMgr.cpp:285 src/core/modules/Planet.cpp:1341
 msgctxt "compass direction"
 msgid "W"
 msgstr "O"
 
 #. TRANSLATORS: Northeast
-#: src/core/modules/LandscapeMgr.cpp:287 src/core/modules/Planet.cpp:1352
+#: src/core/modules/LandscapeMgr.cpp:287 src/core/modules/Planet.cpp:1347
 msgctxt "compass direction"
 msgid "NE"
 msgstr "NE"
 
 #. TRANSLATORS: Southeast
-#: src/core/modules/LandscapeMgr.cpp:289 src/core/modules/Planet.cpp:1356
+#: src/core/modules/LandscapeMgr.cpp:289 src/core/modules/Planet.cpp:1351
 msgctxt "compass direction"
 msgid "SE"
 msgstr "SE"
 
 #. TRANSLATORS: Southwest
-#: src/core/modules/LandscapeMgr.cpp:291 src/core/modules/Planet.cpp:1344
+#: src/core/modules/LandscapeMgr.cpp:291 src/core/modules/Planet.cpp:1339
 msgctxt "compass direction"
 msgid "SW"
 msgstr "SO"
 
 #. TRANSLATORS: Northwest
-#: src/core/modules/LandscapeMgr.cpp:293 src/core/modules/Planet.cpp:1348
+#: src/core/modules/LandscapeMgr.cpp:293 src/core/modules/Planet.cpp:1343
 msgctxt "compass direction"
 msgid "NW"
 msgstr "NO"
 
 #. TRANSLATORS: North-northeast
-#: src/core/modules/LandscapeMgr.cpp:295 src/core/modules/Planet.cpp:1351
+#: src/core/modules/LandscapeMgr.cpp:295 src/core/modules/Planet.cpp:1346
 msgctxt "compass direction"
 msgid "NNE"
 msgstr "NNE"
 
 #. TRANSLATORS: East-northeast
-#: src/core/modules/LandscapeMgr.cpp:297 src/core/modules/Planet.cpp:1353
+#: src/core/modules/LandscapeMgr.cpp:297 src/core/modules/Planet.cpp:1348
 msgctxt "compass direction"
 msgid "ENE"
 msgstr "ENE"
 
 #. TRANSLATORS: East-southeast
-#: src/core/modules/LandscapeMgr.cpp:299 src/core/modules/Planet.cpp:1355
+#: src/core/modules/LandscapeMgr.cpp:299 src/core/modules/Planet.cpp:1350
 msgctxt "compass direction"
 msgid "ESE"
 msgstr "ESE"
 
 #. TRANSLATORS: South-southeast
-#: src/core/modules/LandscapeMgr.cpp:301 src/core/modules/Planet.cpp:1357
+#: src/core/modules/LandscapeMgr.cpp:301 src/core/modules/Planet.cpp:1352
 msgctxt "compass direction"
 msgid "SSE"
 msgstr "SSE"
 
 #. TRANSLATORS: South-southwest
-#: src/core/modules/LandscapeMgr.cpp:303 src/core/modules/Planet.cpp:1343
+#: src/core/modules/LandscapeMgr.cpp:303 src/core/modules/Planet.cpp:1338
 msgctxt "compass direction"
 msgid "SSW"
 msgstr "SSO"
 
 #. TRANSLATORS: West-southwest
-#: src/core/modules/LandscapeMgr.cpp:305 src/core/modules/Planet.cpp:1345
+#: src/core/modules/LandscapeMgr.cpp:305 src/core/modules/Planet.cpp:1340
 msgctxt "compass direction"
 msgid "WSW"
 msgstr "OSO"
 
 #. TRANSLATORS: West-northwest
-#: src/core/modules/LandscapeMgr.cpp:307 src/core/modules/Planet.cpp:1347
+#: src/core/modules/LandscapeMgr.cpp:307 src/core/modules/Planet.cpp:1342
 msgctxt "compass direction"
 msgid "WNW"
 msgstr "ONO"
 
 #. TRANSLATORS: North-northwest
-#: src/core/modules/LandscapeMgr.cpp:309 src/core/modules/Planet.cpp:1349
+#: src/core/modules/LandscapeMgr.cpp:309 src/core/modules/Planet.cpp:1344
 msgctxt "compass direction"
 msgid "NNW"
 msgstr "NNO"
@@ -823,7 +823,7 @@ msgstr "Cambio cíclico de contaminación lumínica"
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:88
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:196
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:120
-#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:456
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:459
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:215
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:187
 #: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:182
@@ -921,14 +921,14 @@ msgstr "término geológico"
 msgid "Linear size"
 msgstr "Tamaño linear"
 
-#: src/core/modules/NomenclatureItem.cpp:239 src/core/modules/Planet.cpp:825
+#: src/core/modules/NomenclatureItem.cpp:239 src/core/modules/Planet.cpp:820
 msgid "Diameter"
 msgstr "Diámetro"
 
 #. TRANSLATORS: Unit of measure for distance - kilometers
-#: src/core/modules/NomenclatureItem.cpp:240 src/core/modules/Planet.cpp:693
-#: src/core/modules/Planet.cpp:718 src/core/modules/Planet.cpp:826
-#: src/core/modules/Planet.cpp:1544 src/core/modules/Comet.cpp:189
+#: src/core/modules/NomenclatureItem.cpp:240 src/core/modules/Planet.cpp:688
+#: src/core/modules/Planet.cpp:713 src/core/modules/Planet.cpp:821
+#: src/core/modules/Planet.cpp:1539 src/core/modules/Comet.cpp:189
 #: src/core/modules/Comet.cpp:199 src/gui/StelGuiItems.cpp:971
 #: src/gui/AstroCalcDialog.cpp:3211 src/gui/AstroCalcDialog.cpp:3726
 #: src/gui/AstroCalcDialog.cpp:9244 plugins/Satellites/src/Satellites.cpp:2913
@@ -1837,17 +1837,17 @@ msgstr "por"
 msgid "Airmasses"
 msgstr "Masas de aire"
 
-#: src/core/modules/Nebula.cpp:236 src/core/modules/Planet.cpp:596
+#: src/core/modules/Nebula.cpp:236 src/core/modules/Planet.cpp:591
 #: src/core/modules/StarWrapper.cpp:276
 msgid "Additional names: "
 msgstr "Nombres adicionales:"
 
-#: src/core/modules/Nebula.cpp:242 src/core/modules/Planet.cpp:603
+#: src/core/modules/Nebula.cpp:242 src/core/modules/Planet.cpp:598
 #: src/core/modules/StarWrapper.cpp:282
 msgid "Additional catalog numbers: "
 msgstr "Números de catálogo adicionales:"
 
-#: src/core/modules/Nebula.cpp:260 src/core/modules/Planet.cpp:836
+#: src/core/modules/Nebula.cpp:260 src/core/modules/Planet.cpp:831
 #: src/core/modules/MinorPlanet.cpp:186 src/core/modules/StarWrapper.cpp:54
 #: src/core/modules/StarWrapper.cpp:306 plugins/Quasars/src/Quasar.cpp:134
 msgid "Color Index (B-V)"
@@ -1902,7 +1902,7 @@ msgstr "Año Luz"
 
 #. TRANSLATORS: distance
 #: src/core/modules/Nebula.cpp:346 src/core/modules/Nebula.cpp:392
-#: src/core/modules/Planet.cpp:728 src/core/modules/StarWrapper.cpp:341
+#: src/core/modules/Planet.cpp:723 src/core/modules/StarWrapper.cpp:341
 #: src/core/modules/StarWrapper.cpp:343 src/gui/AstroCalcDialog.cpp:936
 #: src/gui/AstroCalcChart.cpp:92 src/gui/AstroCalcChart.cpp:102
 #: src/gui/AstroCalcChart.cpp:427 src/gui/AstroCalcChart.cpp:453
@@ -2331,44 +2331,44 @@ msgstr "sednoide"
 msgid "interstellar object"
 msgstr "Objeto interestelar"
 
-#: src/core/modules/Planet.cpp:574 src/core/modules/Comet.cpp:180
+#: src/core/modules/Planet.cpp:569 src/core/modules/Comet.cpp:180
 #: src/core/modules/StarWrapper.cpp:300 plugins/Quasars/src/Quasar.cpp:131
 msgid "Absolute Magnitude"
 msgstr "Magnitud absoluta"
 
-#: src/core/modules/Planet.cpp:577
+#: src/core/modules/Planet.cpp:572
 msgid "Mean Opposition Magnitude"
 msgstr "Magnitud media de oposición"
 
-#: src/core/modules/Planet.cpp:611
+#: src/core/modules/Planet.cpp:606
 msgctxt "type of comet"
 msgid "periodic"
 msgstr "periódico"
 
-#: src/core/modules/Planet.cpp:612
+#: src/core/modules/Planet.cpp:607
 msgctxt "type of comet"
 msgid "non-periodic"
 msgstr "no periódico"
 
 #. TRANSLATORS: Ecliptical rectangular coordinates
-#: src/core/modules/Planet.cpp:668 src/core/modules/Planet.cpp:670
+#: src/core/modules/Planet.cpp:663 src/core/modules/Planet.cpp:665
 msgctxt "coordinates"
 msgid "Ecliptical"
 msgstr "Eclíptico"
 
-#: src/core/modules/Planet.cpp:679 src/core/modules/Planet.cpp:680
+#: src/core/modules/Planet.cpp:674 src/core/modules/Planet.cpp:675
 msgid "Hourly motion"
 msgstr "Movimiento por hora"
 
-#: src/core/modules/Planet.cpp:679 src/core/modules/Planet.cpp:1403
-#: src/core/modules/Planet.cpp:1412 src/core/modules/StarWrapper.cpp:358
+#: src/core/modules/Planet.cpp:674 src/core/modules/Planet.cpp:1398
+#: src/core/modules/Planet.cpp:1407 src/core/modules/StarWrapper.cpp:358
 #: plugins/Pulsars/src/Pulsar.cpp:204
 msgctxt "into the direction of"
 msgid "towards"
 msgstr "hacia"
 
 #. TRANSLATORS: Unit of measure for distance - astronomical unit
-#: src/core/modules/Planet.cpp:691 src/gui/AstroCalcDialog.cpp:882
+#: src/core/modules/Planet.cpp:686 src/gui/AstroCalcDialog.cpp:882
 #: src/gui/AstroCalcDialog.cpp:1193 src/gui/AstroCalcDialog.cpp:1482
 #: src/gui/AstroCalcDialog.cpp:1767 src/gui/AstroCalcDialog.cpp:1826
 #: src/gui/AstroCalcDialog.cpp:9269 src/gui/AstroCalcChart.cpp:427
@@ -2383,264 +2383,264 @@ msgstr "UA"
 #. TRANSLATORS: Unit of measure for distance - millions of kilometers
 #. TRANSLATORS: Unit of measure for distance - milliones kilometers
 #. TRANSLATORS: Unit of measure for distance - millions kilometers
-#: src/core/modules/Planet.cpp:707 src/core/modules/Planet.cpp:725
+#: src/core/modules/Planet.cpp:702 src/core/modules/Planet.cpp:720
 #: src/core/modules/Comet.cpp:191 src/gui/AstroCalcDialog.cpp:9246
 msgctxt "distance"
 msgid "M km"
 msgstr "M km"
 
-#: src/core/modules/Planet.cpp:710
+#: src/core/modules/Planet.cpp:705
 msgid "Distance from Sun"
 msgstr "Distancia desde el sol"
 
 #. TRANSLATORS: Distance measured in terms of the speed of light
-#: src/core/modules/Planet.cpp:730
+#: src/core/modules/Planet.cpp:725
 msgid "Light time"
 msgstr "Tiempo de luz"
 
-#: src/core/modules/Planet.cpp:744
+#: src/core/modules/Planet.cpp:739
 msgid "Orbital velocity"
 msgstr "Velocidad orbital"
 
-#: src/core/modules/Planet.cpp:747
+#: src/core/modules/Planet.cpp:742
 msgid "Heliocentric velocity"
 msgstr "Velocidad heliocéntrica"
 
-#: src/core/modules/Planet.cpp:761
+#: src/core/modules/Planet.cpp:756
 #, qt-format
 msgid "NOTE: elements for epoch %1 probably outdated. Consider updating data!"
 msgstr ""
 "NOTA: elementos para la época %1 probablemente desactualizados. ¡Considere "
 "actualizar los datos!"
 
-#: src/core/modules/Planet.cpp:793
+#: src/core/modules/Planet.cpp:788
 msgid "with rings"
 msgstr "con anillos"
 
-#: src/core/modules/Planet.cpp:810
+#: src/core/modules/Planet.cpp:805
 msgid "scaled up to"
 msgstr "Escalado a"
 
-#: src/core/modules/Planet.cpp:820
+#: src/core/modules/Planet.cpp:815
 msgid "Apparent diameter"
 msgstr "Diámetro aparente"
 
-#: src/core/modules/Planet.cpp:825
+#: src/core/modules/Planet.cpp:820
 msgid "Equatorial diameter"
 msgstr "Diámetro ecuatorial"
 
-#: src/core/modules/Planet.cpp:889 src/core/modules/Planet.cpp:890
-#: src/core/modules/Planet.cpp:898 src/gui/AstroCalcChart.cpp:93
+#: src/core/modules/Planet.cpp:884 src/core/modules/Planet.cpp:885
+#: src/core/modules/Planet.cpp:893 src/gui/AstroCalcChart.cpp:93
 #: src/gui/AstroCalcChart.cpp:103 src/gui/AstroCalcChart.cpp:429
 #: src/gui/AstroCalcChart.cpp:455 src/ui_configurationDialog.h:1899
 msgid "Elongation"
 msgstr "Elongación"
 
-#: src/core/modules/Planet.cpp:891 src/core/modules/Planet.cpp:900
+#: src/core/modules/Planet.cpp:886 src/core/modules/Planet.cpp:895
 #: src/gui/AstroCalcChart.cpp:96 src/gui/AstroCalcChart.cpp:106
 #: src/gui/AstroCalcChart.cpp:438 src/gui/AstroCalcChart.cpp:464
 #: plugins/Satellites/src/Satellite.cpp:408
 msgid "Phase angle"
 msgstr "Ángulo de fase"
 
-#: src/core/modules/Planet.cpp:893 src/core/modules/Planet.cpp:902
+#: src/core/modules/Planet.cpp:888 src/core/modules/Planet.cpp:897
 msgid "Illuminated"
 msgstr "Iluminado"
 
-#: src/core/modules/Planet.cpp:899
+#: src/core/modules/Planet.cpp:894
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:323
 msgid "Elong. in Ecl.Long."
 msgstr "Elong. en Ecl.Long."
 
-#: src/core/modules/Planet.cpp:914 src/gui/AstroCalcDialog.cpp:9479
+#: src/core/modules/Planet.cpp:909 src/gui/AstroCalcDialog.cpp:9479
 #: src/gui/AstroCalcChart.cpp:472
 msgid "Angular distance"
 msgstr "Distancia angular"
 
 #. TRANSLATORS: Unit of measure for period - days
-#: src/core/modules/Planet.cpp:932 src/core/modules/StarWrapper.cpp:382
+#: src/core/modules/Planet.cpp:927 src/core/modules/StarWrapper.cpp:382
 #: src/gui/AstroCalcDialog.cpp:9280
 msgctxt "duration"
 msgid "days"
 msgstr "días"
 
-#: src/core/modules/Planet.cpp:941
+#: src/core/modules/Planet.cpp:936
 msgid "Sidereal period"
 msgstr "Período sidéreo"
 
-#: src/core/modules/Planet.cpp:950
+#: src/core/modules/Planet.cpp:945
 msgid "Synodic period"
 msgstr "Periodo Sinódico"
 
 #. TRANSLATORS: Unit of measure for speed - meters per second
-#: src/core/modules/Planet.cpp:1230
+#: src/core/modules/Planet.cpp:1225
 msgctxt "speed"
 msgid "m/s"
 msgstr "m/s"
 
-#: src/core/modules/Planet.cpp:1245
+#: src/core/modules/Planet.cpp:1240
 msgid "Sidereal day"
 msgstr "Día sidéreo"
 
-#: src/core/modules/Planet.cpp:1247
+#: src/core/modules/Planet.cpp:1242
 msgid "Mean solar day"
 msgstr "Día solar medio"
 
-#: src/core/modules/Planet.cpp:1253
+#: src/core/modules/Planet.cpp:1248
 msgid "The period of rotation is chaotic"
 msgstr "El período de rotación es caótico"
 
-#: src/core/modules/Planet.cpp:1259 src/core/modules/Planet.cpp:1261
-#: src/core/modules/Planet.cpp:1267 src/core/modules/Planet.cpp:1269
+#: src/core/modules/Planet.cpp:1254 src/core/modules/Planet.cpp:1256
+#: src/core/modules/Planet.cpp:1262 src/core/modules/Planet.cpp:1264
 msgid "Equatorial rotation velocity"
 msgstr "Velocidad de rotación ecuatorial"
 
-#: src/core/modules/Planet.cpp:1293 src/core/modules/Planet.cpp:1686
+#: src/core/modules/Planet.cpp:1288 src/core/modules/Planet.cpp:1681
 msgctxt "Moon phase"
 msgid "New Moon"
 msgstr "Luna nueva"
 
-#: src/core/modules/Planet.cpp:1295 src/core/modules/Planet.cpp:1688
+#: src/core/modules/Planet.cpp:1290 src/core/modules/Planet.cpp:1683
 msgctxt "Moon phase"
 msgid "Waxing Crescent"
 msgstr "Luna creciente"
 
-#: src/core/modules/Planet.cpp:1297 src/core/modules/Planet.cpp:1690
+#: src/core/modules/Planet.cpp:1292 src/core/modules/Planet.cpp:1685
 msgctxt "Moon phase"
 msgid "First Quarter"
 msgstr "Primer cuarto"
 
-#: src/core/modules/Planet.cpp:1299 src/core/modules/Planet.cpp:1692
+#: src/core/modules/Planet.cpp:1294 src/core/modules/Planet.cpp:1687
 msgctxt "Moon phase"
 msgid "Waxing Gibbous"
 msgstr "Cuarto creciente"
 
-#: src/core/modules/Planet.cpp:1301 src/core/modules/Planet.cpp:1694
+#: src/core/modules/Planet.cpp:1296 src/core/modules/Planet.cpp:1689
 msgctxt "Moon phase"
 msgid "Full Moon"
 msgstr "Luna llena"
 
-#: src/core/modules/Planet.cpp:1303 src/core/modules/Planet.cpp:1696
+#: src/core/modules/Planet.cpp:1298 src/core/modules/Planet.cpp:1691
 msgctxt "Moon phase"
 msgid "Waning Gibbous"
 msgstr "Cuarto Menguante"
 
-#: src/core/modules/Planet.cpp:1305 src/core/modules/Planet.cpp:1698
+#: src/core/modules/Planet.cpp:1300 src/core/modules/Planet.cpp:1693
 msgctxt "Moon phase"
 msgid "Third Quarter"
 msgstr "Tercer cuarto"
 
-#: src/core/modules/Planet.cpp:1307 src/core/modules/Planet.cpp:1700
+#: src/core/modules/Planet.cpp:1302 src/core/modules/Planet.cpp:1695
 msgctxt "Moon phase"
 msgid "Waning Crescent"
 msgstr "Luna menguante"
 
-#: src/core/modules/Planet.cpp:1315
+#: src/core/modules/Planet.cpp:1310
 msgid "Moon age"
 msgstr "Edad lunar"
 
-#: src/core/modules/Planet.cpp:1315
+#: src/core/modules/Planet.cpp:1310
 msgid "days old"
 msgstr "días de edad"
 
-#: src/core/modules/Planet.cpp:1335 src/core/modules/Planet.cpp:1338
+#: src/core/modules/Planet.cpp:1330 src/core/modules/Planet.cpp:1333
 msgid "Position angle of bright limb"
 msgstr "Ángulo de posición del miembro brillante"
 
-#: src/core/modules/Planet.cpp:1402 src/core/modules/Planet.cpp:1411
-#: src/core/modules/Planet.cpp:1447 src/core/modules/Planet.cpp:1454
+#: src/core/modules/Planet.cpp:1397 src/core/modules/Planet.cpp:1406
+#: src/core/modules/Planet.cpp:1442 src/core/modules/Planet.cpp:1449
 msgid "Position Angle of axis"
 msgstr "Posición de ángulo del eje"
 
-#: src/core/modules/Planet.cpp:1403 src/core/modules/Planet.cpp:1404
-#: src/core/modules/Planet.cpp:1412 src/core/modules/Planet.cpp:1413
+#: src/core/modules/Planet.cpp:1398 src/core/modules/Planet.cpp:1399
+#: src/core/modules/Planet.cpp:1407 src/core/modules/Planet.cpp:1408
 msgid "Libration"
 msgstr "Libración"
 
-#: src/core/modules/Planet.cpp:1405 src/core/modules/Planet.cpp:1414
-#: src/core/modules/Planet.cpp:1449 src/core/modules/Planet.cpp:1456
+#: src/core/modules/Planet.cpp:1400 src/core/modules/Planet.cpp:1409
+#: src/core/modules/Planet.cpp:1444 src/core/modules/Planet.cpp:1451
 msgid "Subsolar point"
 msgstr "Punto subsolar"
 
-#: src/core/modules/Planet.cpp:1406 src/core/modules/Planet.cpp:1415
+#: src/core/modules/Planet.cpp:1401 src/core/modules/Planet.cpp:1410
 msgid "Colongitude"
 msgstr "Colongitud"
 
-#: src/core/modules/Planet.cpp:1448 src/core/modules/Planet.cpp:1455
+#: src/core/modules/Planet.cpp:1443 src/core/modules/Planet.cpp:1450
 msgid "Center point"
 msgstr "Punto central"
 
-#: src/core/modules/Planet.cpp:1475
+#: src/core/modules/Planet.cpp:1470
 msgid "Eclipse magnitude"
 msgstr "Magnitud del eclipse"
 
-#: src/core/modules/Planet.cpp:1477
+#: src/core/modules/Planet.cpp:1472
 msgid "Eclipse obscuration"
 msgstr "Oscurecimiento del eclipse"
 
-#: src/core/modules/Planet.cpp:1503
+#: src/core/modules/Planet.cpp:1498
 msgid "Moon/Sun diameter ratio"
 msgstr "Relación de diámetro Luna/Sol"
 
-#: src/core/modules/Planet.cpp:1506
+#: src/core/modules/Planet.cpp:1501
 msgctxt "type of solar eclipse"
 msgid "(annular)"
 msgstr "(anular)"
 
-#: src/core/modules/Planet.cpp:1508
+#: src/core/modules/Planet.cpp:1503
 msgctxt "type of solar eclipse"
 msgid "(total)"
 msgstr "(total)"
 
-#: src/core/modules/Planet.cpp:1519
+#: src/core/modules/Planet.cpp:1514
 msgid "Central eclipse duration"
 msgstr "Duración del eclipse central"
 
 #. TRANSLATORS: Short for "minutes".
-#: src/core/modules/Planet.cpp:1521
+#: src/core/modules/Planet.cpp:1516
 #: plugins/Observability/src/Observability.cpp:153
 msgid "m"
 msgstr "m"
 
 #. TRANSLATORS: Short for "seconds".
-#: src/core/modules/Planet.cpp:1523
+#: src/core/modules/Planet.cpp:1518
 #: plugins/Observability/src/Observability.cpp:155
 msgid "s"
 msgstr "s"
 
-#: src/core/modules/Planet.cpp:1524
+#: src/core/modules/Planet.cpp:1519
 msgid "Center of solar eclipse (Lat./Long.)"
 msgstr "Centro del eclipse solar (Lat./Long.)"
 
-#: src/core/modules/Planet.cpp:1534
+#: src/core/modules/Planet.cpp:1529
 msgid "Shadow center point is"
 msgstr "El punto central de la sombra es"
 
-#: src/core/modules/Planet.cpp:1536
+#: src/core/modules/Planet.cpp:1531
 msgid "km towards azimuth"
 msgstr "km hacia el acimut"
 
-#: src/core/modules/Planet.cpp:1539
+#: src/core/modules/Planet.cpp:1534
 msgid "Width of antumbra"
 msgstr "Ancho de la antumbra"
 
-#: src/core/modules/Planet.cpp:1541
+#: src/core/modules/Planet.cpp:1536
 msgid "Width of umbra"
 msgstr "Ancho de la umbra"
 
-#: src/core/modules/Planet.cpp:1558
+#: src/core/modules/Planet.cpp:1553
 msgid "Penumbral eclipse magnitude"
 msgstr "Magnitud de eclipse penumbral"
 
-#: src/core/modules/Planet.cpp:1561
+#: src/core/modules/Planet.cpp:1556
 msgid "Umbral eclipse magnitude"
 msgstr "Magnitud de eclipse umbral"
 
-#: src/core/modules/Planet.cpp:1568
+#: src/core/modules/Planet.cpp:1563
 msgid "Albedo"
 msgstr "Albedo"
 
-#: src/core/modules/Planet.cpp:1571 src/core/modules/MinorPlanet.cpp:211
+#: src/core/modules/Planet.cpp:1566 src/core/modules/MinorPlanet.cpp:211
 #: src/core/modules/Comet.cpp:240
 msgid "Discovered"
 msgstr "Descubierto"
@@ -2667,7 +2667,7 @@ msgstr "Diámetro de coma (estimación)"
 msgid "Gas tail length (estimate)"
 msgstr "Longitud de la estela de gas (estimación)"
 
-#: src/core/modules/Comet.cpp:501 src/core/StelProjectorClasses.cpp:729
+#: src/core/modules/Comet.cpp:496 src/core/StelProjectorClasses.cpp:729
 msgid "Orthographic"
 msgstr "Ortográfica"
 
@@ -21288,7 +21288,7 @@ msgid "On"
 msgstr "Activado"
 
 #: plugins/TextUserInterface/src/TuiNodeBool.cpp:73
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:520
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:530
 msgid "Off"
 msgstr "Desactivado"
 
@@ -26295,8 +26295,8 @@ msgid "This plugin shows the value of the equation of time."
 msgstr "Este plugin muestra el valor de la ecuación de tiempo."
 
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:91
-msgid "Show solution for Equation of Time"
-msgstr "Mostrar solución para la ecuación del tiempo"
+msgid "Show value of the equation of time"
+msgstr "Mostrar valor de la ecuación del tiempo"
 
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:85
 msgid "Equation of Time plug-in"
@@ -27625,42 +27625,42 @@ msgstr "Protuberancias superficiales %1."
 msgid "Selected cubemap mode not supported, falling back to '6 Textures'"
 msgstr "El modo cubemap no está soportado, regresando a \"6 Texturas\""
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:934
+#: plugins/Scenery3d/src/Scenery3d.cpp:952
 #, qt-format
 msgid "Lazy cubemapping: %1"
 msgstr "cubemapping lento: %1"
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:934
+#: plugins/Scenery3d/src/Scenery3d.cpp:952
 msgid "enabled"
 msgstr "habilitado"
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:934
+#: plugins/Scenery3d/src/Scenery3d.cpp:952
 msgid "disabled"
 msgstr "deshabilitado"
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:1007
+#: plugins/Scenery3d/src/Scenery3d.cpp:1025
 msgid "Cubemap size changed"
 msgstr "El tamaño de Cubemap cambió"
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:1009
+#: plugins/Scenery3d/src/Scenery3d.cpp:1027
 #, qt-format
 msgid "Cubemap size not supported, set to %1"
 msgstr "El tamaño del Cubemap no esta soportado, configurar en %1"
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:1030
+#: plugins/Scenery3d/src/Scenery3d.cpp:1048
 msgid "Shadowmap size changed"
 msgstr "El tamaño del mapa de sombra fue cambiado"
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:1032
+#: plugins/Scenery3d/src/Scenery3d.cpp:1050
 #, qt-format
 msgid "Shadowmap size not supported, set to %1"
 msgstr "Tamaño del mapa de la sombra no esta soportado, configurar en %1"
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:1156
+#: plugins/Scenery3d/src/Scenery3d.cpp:1174
 msgid "3D Sceneries"
 msgstr "Escenarios 3D"
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:1159
+#: plugins/Scenery3d/src/Scenery3d.cpp:1177
 msgid ""
 "<p>3D foreground renderer. Walk around, find and avoid obstructions in your "
 "garden, find and demonstrate possible astronomical alignments in temples, "
@@ -27677,7 +27677,7 @@ msgstr ""
 "visión (es decir, acercar para ajustes finos). Incluso puede seguir "
 "moviéndose soltando Ctrl antes de la tecla del cursor.</p>"
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:1164
+#: plugins/Scenery3d/src/Scenery3d.cpp:1182
 msgid ""
 "Development of this plugin was in parts supported by the Austrian Science "
 "Fund (FWF) project ASTROSIM (P 21208-G19; https://astrosim.univie.ac.at/). "
@@ -27722,7 +27722,7 @@ msgstr ""
 "En este equipo no se puede utilizar la asignación de sombras. Consulte el "
 "registro para obtener mas detalles"
 
-#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:254
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:257
 msgid ""
 "Provides more accurate lighting by calculating it per-pixel instead of per-"
 "vertex."
@@ -27730,15 +27730,15 @@ msgstr ""
 "Proporciona una iluminación más precisa mediante el cálculo por píxel en "
 "lugar de por vértice."
 
-#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:255
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:258
 msgid "Required for bump mapping and shadows!"
 msgstr "Requerido para mapeado de relieves y sombras!"
 
-#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:257
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:260
 msgid "Uses only a single shadow cascade instead of up to four."
 msgstr "Utiliza una única cascada de sombra en lugar de cuatro."
 
-#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:258
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:261
 msgid ""
 "Provides a speedup in exchange for shadow quality, especially in large "
 "scenes."
@@ -27746,7 +27746,7 @@ msgstr ""
 "Proporciona un aumento de velocidad a cambio de la calidad de la sombra, "
 "especialmente en escenas grandes."
 
-#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:260
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:263
 msgid ""
 "Determines how the shadows are filtered, in increasing quality from top to "
 "bottom."
@@ -27754,11 +27754,11 @@ msgstr ""
 "Determina como  filtrar  las sombras, aumento de la calidad de arriba a "
 "abajo."
 
-#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:261
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:264
 msgid "PCSS requires the quality set to LOW or HIGH."
 msgstr "PCSS requiere que se establezca la calidad a BAJA o ALTA"
 
-#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:263
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:266
 msgid ""
 "Approximate calculation of shadow penumbras (sharper shadows near contact "
 "points, blurred shadows further away)."
@@ -27767,18 +27767,18 @@ msgstr ""
 "perspectiva, el cálculo aproximado de penumbras (sombras nítidas cerca de "
 "los puntos de contacto, sombras borrosas más lejos)."
 
-#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:264
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:267
 msgid ""
 "Requires <b>LOW</b> or <b>HIGH</b> shadow filtering (without "
 "<b>Hardware</b>)."
 msgstr ""
 "Requiere filtro de sombras <b>BAJO</b> o <b>ALTO</b> (sin <b>Hardware</b>"
 
-#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:265
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:268
 msgid "Causes a performance hit."
 msgstr "Causa un impacto en el rendimiento."
 
-#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:267
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:270
 msgid ""
 "This determines the way the scene is rendered when Stellarium uses a "
 "projection other than &quot;Perspective&quot;. The scene is always rendered "
@@ -27791,7 +27791,7 @@ msgstr ""
 "proyección. El cubo es descrito usando una imagen llamado "
 "&quot;cubemap&quot;."
 
-#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:268
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:271
 msgid ""
 "<b>6 Textures</b> uses 6 single textures, one for each cube side. This is "
 "the most compatible method, but may be slower than the others."
@@ -27800,14 +27800,14 @@ msgstr ""
 "cubo. Este es el método más compatible, pero podría ser más lento que los "
 "otros."
 
-#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:269
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:272
 msgid ""
 "<b>Cubemap</b> uses a single GL_TEXTURE_CUBEMAP. Recommended for most users."
 msgstr ""
 "<b>Cubemap</b> usa una única GL_TEXTURE_CUBEMAP. Recomendado para la mayoría"
 " de los usuarios."
 
-#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:270
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:273
 msgid ""
 "<b>Geometry shader</b> uses a modern GPU feature to render all 6 sides of "
 "the cube at once. It may be the fastest method depending on the scene and "
@@ -27818,11 +27818,11 @@ msgstr ""
 "dependiendo de la escena y el hardware de su GPU. Si no se admite, no se "
 "puede seleccionar."
 
-#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:272
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:275
 msgid "Calculates shadows for each cubemap face separately."
 msgstr "Calcular sombras separadamente para cada lado del mapa cúbico."
 
-#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:273
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:276
 msgid ""
 "If disabled, the shadowed area is calculated using a perspective projection,"
 " which may cause missing shadows with high FOV values, but is quite a bit "
@@ -27832,14 +27832,14 @@ msgstr ""
 "perspectiva, lo que puede causar que falten sombras con altos valores FOV, "
 "¡pero es un poco más rápido!"
 
-#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:274
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:277
 msgid ""
 "This does not work when using the <b>Geometry shader</b> cubemapping mode!"
 msgstr ""
 "¡Esto no funciona cuando se está utulizando el modo de mapeo de sombras "
 "<b>Sombreador geométrico</b>!"
 
-#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:276
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:279
 msgid ""
 "When checked, the cubemap is only recreated in specific time intervals, "
 "instead of each frame."
@@ -27847,18 +27847,18 @@ msgstr ""
 "Cuando se marca, el mapa cúbico solamente es recreado en intervalos de "
 "tiempo específicos, en lugar de cada cuadro."
 
-#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:277
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:280
 msgid "Saves energy and may increase subjective application performance."
 msgstr "Ahorra energía y puede incrementar el rendimiento de la aplicación."
 
-#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:278
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:281
 msgid ""
 "Note that the cubemap is always re-rendered when the view position changes."
 msgstr ""
 "Tenga en cuenta que el cubemap siempre se vuelve a renderizar cuando cambia "
 "la posición de la vista."
 
-#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:280
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:283
 msgid ""
 "When checked, only the face that corresponds to your viewing direction is "
 "updated on movement."
@@ -27866,7 +27866,7 @@ msgstr ""
 "Cuando chequeas, solo se actualiza la cara que corresponde con tu dirección "
 "de vista que está en movimiento."
 
-#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:281
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:284
 msgid ""
 "This will speed up rendering, but the appearance will look "
 "&quot;broken&quot; until you stop moving."
@@ -27874,14 +27874,14 @@ msgstr ""
 "Esto acelerará el rederizado, pero la apariencia se verá &quot;broken&quot; "
 "Hasta que deje de moverse."
 
-#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:282
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:285
 msgid ""
 "This does NOT work with the &quot;Geometry-Shader&quot; cubemapping mode!"
 msgstr ""
 "Esto NO funciona con el modo de &quot;Sombreador-Geométrico&quot; mapeo de "
 "cubo!"
 
-#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:284
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:287
 msgid ""
 "This updates a second face, so that the visual appearance seems less "
 "&quot;broken&quot;."
@@ -27889,7 +27889,7 @@ msgstr ""
 "Esto actualiza una segunda cara, de modo que la apariencia visual parece "
 "menos &quot;rota&quot;."
 
-#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:293
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:296
 msgid "The interval (in timeline seconds) in which no redraw is performed"
 msgstr ""
 "El intervalo (en segundos de línea de tiempo) en el que no se realiza el "
@@ -27912,37 +27912,49 @@ msgstr "Geometría de sombreado"
 msgid "Grid coordinates (%1): %2m, %3m, %4m"
 msgstr "Coordenadas de cuadrícula (%1): %2m, %3m, %4m"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:496
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:502
 msgid "3D Scenery"
 msgstr "Escenario 3D"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:498
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:504
 msgid "Set as default scene"
 msgstr "Establecer como escena predeterminada"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:499
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:505
 msgid "Load/save viewpoints"
 msgstr "Cargar/guardar puntos de vista"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:500
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:506
 #, qt-format
 msgid "Torchlight (%1)"
 msgstr "Intensidad  (%1)"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:501
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:507
 msgid "Torch strength:"
 msgstr "Fuerza de intensidad:"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:502
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:508
 msgid "Torch range:"
 msgstr "Rango de intensidad:"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:503
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:509
+msgid "Directional light enhancement"
+msgstr "Mejora de la luz direccional"
+
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:511
+msgid ""
+"Increase the power of directional light, e.g. to enhance contrast for "
+"patches of light cast through small holes."
+msgstr ""
+"Aumenta la potencia de la luz direccional, p. ej., para mejorar el contraste"
+" de los parches de luz emitidos a través de pequeños agujeros."
+
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:513
 #, qt-format
 msgid "Show grid coordinates (%1)"
 msgstr "Mostrar coordenadas cuadrícula (%1)"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:505
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:515
 msgid ""
 "Overdraw horizon polygon defined in your landscape. This displays the "
 "inaccuracies in a very large planar model compared to Earth curvature, of "
@@ -27952,103 +27964,103 @@ msgstr ""
 " inexactitudes en un modelo plano muy grande en comparación con la curvatura"
 " de la Tierra, por supuesto, solo para un único punto de observación."
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:507
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:517
 msgid "Draw horizon polyline in foreground"
 msgstr "Dibujar polilínea de horizonte en primer plano"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:508
-msgid "Directional light enhancement"
-msgstr "Mejora de la luz direccional"
-
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:510
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:519
 msgid ""
-"Increase the power of directional light, e.g. to enhance contrast for "
-"patches of light cast through small holes."
+"Do no use the configured direction and field of view. This may be helpful in"
+" a planetarium environment."
 msgstr ""
-"Aumenta la potencia de la luz direccional, p. ej., para mejorar el contraste"
-" de los parches de luz emitidos a través de pequeños agujeros."
+"No usar la dirección configurada y campo de visión. Esto podría ser de ayuda"
+" en un entorno planetario."
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:512
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:521
+msgid "Ignore initial view settings"
+msgstr "Ignorar la configuración de vista inicial"
+
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:522
 msgid "Visual options"
 msgstr "Opciones visuales"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:513
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:523
 msgid "Per-Pixel lighting"
 msgstr "Iluminación por píxel"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:514
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:524
 msgid "Shadows"
 msgstr "Sombras"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:515
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:525
 msgid "Simple shadows"
 msgstr "Sombras simples"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:516
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:526
 msgid "Bump mapping"
 msgstr "Bump mapping"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:517
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:527
 msgid "Cubemap size:"
 msgstr "Tamaño del mapa cúbico:"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:518
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:528
 msgid "Shadowmap size:"
 msgstr "Tamaño del mapa de sombras:"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:519
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:529
 msgid "Filtering Quality:"
 msgstr "Calidad de filtrado:"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:521
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:531
 msgid "Hardware"
 msgstr "Hardware"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:522
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:532
 msgid "Low"
 msgstr "Bajo"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:523
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:533
 msgid "Low + Hardware"
 msgstr "Bajo + Hardware"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:524
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:534
 msgid "High (slow)"
 msgstr "Alta (lenta)"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:525
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:535
 msgid "High + Hardware (slow)"
 msgstr "Alto + Hardware (lento)"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:527
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:537
 msgid "PCSS"
 msgstr "PCSS"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:528
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:538
 msgid "Cubemapping mode:"
 msgstr "Modo de Mapeo de Cubo"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:529
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:539
 msgid "Full cubemap shadows"
 msgstr "Sombras cubemap completas"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:530
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:540
 msgid "Lazy cubemap re-rendering"
 msgstr "vaga re-visualisacion cubemap"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:531
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:541
 msgid "Interval:"
 msgstr "Intervalo:"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:532
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:542
 msgid "Only update dominant face when moving"
 msgstr "Actualizar cara dominante solo cuando se mueve."
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:533
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:543
 msgid "Also update second-most dominant face"
 msgstr "Actualiza también la segunda cara más dominante"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:534
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:544
 msgid "Quality/Performance settings"
 msgstr "Ajustes de Calidad/Rendimiento"
 
