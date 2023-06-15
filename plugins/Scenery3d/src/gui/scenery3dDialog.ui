@@ -393,7 +393,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
                <property name="currentIndex">
                 <number>0</number>
                </property>
-               <widget class="QWidget" name="tab">
+               <widget class="QWidget" name="tab_VisualOptions">
                 <attribute name="title">
                  <string>Visual options</string>
                 </attribute>
@@ -415,16 +415,6 @@ li.checked::marker { content: &quot;\2612&quot;; }
                    </property>
                    <property name="buddy">
                     <cstring>sliderTorchStrength</cstring>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="2" column="1">
-                  <widget class="QSlider" name="sliderTorchStrength">
-                   <property name="maximum">
-                    <number>100</number>
-                   </property>
-                   <property name="orientation">
-                    <enum>Qt::Horizontal</enum>
                    </property>
                   </widget>
                  </item>
@@ -480,14 +470,52 @@ li.checked::marker { content: &quot;\2612&quot;; }
                    </property>
                   </widget>
                  </item>
-                 <item row="5" column="0">
-                  <widget class="QCheckBox" name="checkBoxShowGridCoordinates">
-                   <property name="text">
-                    <string>Show grid coordinates (%1)</string>
+                 <item row="2" column="1">
+                  <widget class="QSlider" name="sliderTorchStrength">
+                   <property name="maximum">
+                    <number>100</number>
+                   </property>
+                   <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
                    </property>
                   </widget>
                  </item>
-                 <item row="6" column="0">
+                 <item row="5" column="1">
+                  <widget class="QGroupBox" name="gridCoordinatesGroupBox">
+                   <property name="title">
+                    <string>Show grid coordinates (%1)</string>
+                   </property>
+                   <property name="checkable">
+                    <bool>true</bool>
+                   </property>
+                   <property name="checked">
+                    <bool>true</bool>
+                   </property>
+                   <layout class="QHBoxLayout" name="horizontalLayout_4">
+                    <item>
+                     <widget class="QRadioButton" name="radioButton_GCTopRight">
+                      <property name="toolTip">
+                       <string>Show coordinates in the top right screen corner</string>
+                      </property>
+                      <property name="text">
+                       <string>Top Right</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QRadioButton" name="radioButton_GCBottom">
+                      <property name="toolTip">
+                       <string>Show coordinates centered in the bottom of the screen</string>
+                      </property>
+                      <property name="text">
+                       <string>Bottom Center</string>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
+                  </widget>
+                 </item>
+                 <item row="5" column="0">
                   <widget class="QCheckBox" name="overdrawLandscapePolylineCheckBox">
                    <property name="toolTip">
                     <string>Overdraw horizon polygon defined in your landscape. This displays the inaccuracies in a very large planar model compared to Earth curvature, of course only for a single point of observation.</string>
@@ -509,7 +537,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
                  </item>
                 </layout>
                </widget>
-               <widget class="QWidget" name="tab_2">
+               <widget class="QWidget" name="tab_QualityPerformanceOptions">
                 <attribute name="title">
                  <string>Quality/Performance settings</string>
                 </attribute>

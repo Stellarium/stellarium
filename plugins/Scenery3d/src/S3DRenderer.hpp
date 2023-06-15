@@ -46,6 +46,12 @@ class S3DRenderer : public QObject, protected QOpenGLFunctions
 {
 	Q_OBJECT
 public:
+	enum LocationInfoStyle {
+		LocationInfoTopRight,      // default for rectangular views
+		LocationInfoBottomCenter   // centered in the bottom. This will also obey gravity labels for a planetarium.
+	};
+	Q_ENUM(LocationInfoStyle)
+
 	//! Initializes an empty Scenery3d object.
 	S3DRenderer(QObject* parent = nullptr);
 	~S3DRenderer() override;
@@ -73,6 +79,8 @@ public:
 	void setPCSS(bool val) { shaderParameters.pcss = val; reinitShadowmapping = true; invalidateCubemap(); }
 	bool getLocationInfoEnabled(void) const { return textEnabled; }
 	void setLocationInfoEnabled(bool locationinfoenabled) { this->textEnabled = locationinfoenabled; }
+	S3DRenderer::LocationInfoStyle getLocationInfoStyle() const {return locationInfoStyle;}
+	void setLocationInfoStyle(S3DRenderer::LocationInfoStyle style) {locationInfoStyle=style;}
 
 	bool getLazyCubemapEnabled() const { return lazyDrawing; }
 	void setLazyCubemapEnabled(bool val) { lazyDrawing = val; }
@@ -158,6 +166,8 @@ private:
 	float directionalLightPush; // used to give extra power to the directional light, e.g. to enhance dim light patches shining through small holes. Default: 1.
 
 	bool textEnabled;           // switchable value: display coordinates on screen. THIS IS NOT FOR DEBUGGING, BUT A PROGRAM FEATURE!
+	LocationInfoStyle locationInfoStyle; // Finetuning.
+
 	bool debugEnabled;          // switchable value: display debug graphics and debug texts on screen
 	bool fixShadowData; //for debugging, fixes all shadow mapping related data (shadowmap contents, matrices, frustums, focus bodies...) at their current values
 	bool simpleShadows;

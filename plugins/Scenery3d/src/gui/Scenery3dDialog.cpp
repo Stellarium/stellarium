@@ -61,7 +61,13 @@ void Scenery3dDialog::retranslate()
 		for (auto* but : qAsConst(shortcutButtons))
 		{
 			//replace stored text with re-translated one
-			but->setProperty("stelOriginalText",but->text());
+			const QString btClassName=but->metaObject()->className();
+			if (btClassName == "QGroupBox")
+				dynamic_cast<QGroupBox*>(but)->setProperty("stelOriginalText",dynamic_cast<QGroupBox*>(but)->title());
+			else if (btClassName == "QCheckBox")
+				dynamic_cast<QCheckBox*>(but)->setProperty("stelOriginalText",dynamic_cast<QCheckBox*>(but)->text());
+			else
+				qCritical() << "Scenery3dDialog: UNKNOWN WIDGET TYPE: " << but->metaObject()->className();
 		}
 
 		updateShortcutStrings();
@@ -135,13 +141,15 @@ void Scenery3dDialog::createDialogContent()
 	ac = acMgr->findAction("actionShow_Scenery3d_locationinfo");
 	if(ac)
 	{
-		ui->checkBoxShowGridCoordinates->setProperty("stelActionKey",ac->getId());
-		ui->checkBoxShowGridCoordinates->setProperty("stelOriginalText",ui->checkBoxShowGridCoordinates->text());
-		ui->checkBoxShowGridCoordinates->setChecked(ac->isChecked());
-		connect(ac,&StelAction::toggled,ui->checkBoxShowGridCoordinates, &QCheckBox::setChecked);
-		connect(ui->checkBoxShowGridCoordinates,&QCheckBox::toggled,ac, &StelAction::setChecked);
+		connectBoolProperty(ui->gridCoordinatesGroupBox, "Scenery3d.enableLocationInfo");
+		ui->gridCoordinatesGroupBox->setProperty("stelActionKey",ac->getId());
+		ui->gridCoordinatesGroupBox->setProperty("stelOriginalText",ui->gridCoordinatesGroupBox->title());
 		connect(ac,&StelAction::changed,this,&Scenery3dDialog::updateShortcutStrings);
-		shortcutButtons.append(ui->checkBoxShowGridCoordinates);
+		shortcutButtons.append(ui->gridCoordinatesGroupBox);
+		ui->radioButton_GCTopRight->setChecked(mgr->getLocationInfoStyle()==S3DRenderer::LocationInfoTopRight);
+		ui->radioButton_GCBottom->setChecked(mgr->getLocationInfoStyle()==S3DRenderer::LocationInfoBottomCenter);
+		connect(ui->radioButton_GCTopRight, SIGNAL(toggled(bool)), this, SLOT(setCoordinateTextStyle()));
+		connect(ui->radioButton_GCBottom, SIGNAL(toggled(bool)), this, SLOT(setCoordinateTextStyle()));
 	}
 
 	//connectSlotsByName does not work in our case (because this class does not "own" the GUI in the Qt sense)
@@ -304,6 +312,7 @@ void Scenery3dDialog::updateShortcutStrings()
 
 	for (auto* bt : shortcutButtons)
 	{
+		const QString btClassName=bt->metaObject()->className();
 		QVariant v = bt->property("stelActionKey");
 		QVariant t = bt->property("stelOriginalText");
 		if(v.isValid() && t.isValid())
@@ -313,7 +322,12 @@ void Scenery3dDialog::updateShortcutStrings()
 			StelAction* ac = acMgr->findAction(s);
 			if(ac)
 			{
-				bt->setText(text.arg(ac->getShortcut().toString(QKeySequence::NativeText)));
+				if (btClassName == "QGroupBox")
+					dynamic_cast<QGroupBox*>(bt)->setTitle(text.arg(ac->getShortcut().toString(QKeySequence::NativeText)));
+				else if (btClassName == "QCheckBox")
+					dynamic_cast<QCheckBox*>(bt)->setText(text.arg(ac->getShortcut().toString(QKeySequence::NativeText)));
+				else
+					qCritical() << "Scenery3dDialog: UNKNOWN WIDGET TYPE: " << bt->metaObject()->className();
 			}
 		}
 	}
@@ -572,4 +586,15 @@ void Scenery3dDialog::setToInitialValues()
 		ui->checkBoxCubemapShadows->setVisible(false);
 		ui->checkBoxSimpleShadows->setVisible(false);
 	}
+}
+
+// Connect to the RadioButtons to set coordinate text output
+void Scenery3dDialog::setCoordinateTextStyle()
+{
+	if (ui->radioButton_GCTopRight->isChecked())
+		mgr->setLocationInfoStyle(S3DRenderer::LocationInfoTopRight);
+	else if (ui->radioButton_GCBottom->isChecked())
+		mgr->setLocationInfoStyle(S3DRenderer::LocationInfoBottomCenter);
+	else
+		qCritical() << "Scenery3dDialog: Problem with determining coordinate output!";
 }

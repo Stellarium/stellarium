@@ -34,8 +34,8 @@
 
 #include "SceneInfo.hpp"
 #include "S3DEnum.hpp"
+#include "S3DRenderer.hpp"
 
-class S3DRenderer;
 class Scenery3dDialog;
 class StoredViewDialog;
 class QSettings;
@@ -83,6 +83,7 @@ class Scenery3d : public StelModule
 	Q_PROPERTY(bool useFullCubemapShadows        READ getUseFullCubemapShadows  WRITE setUseFullCubemapShadows NOTIFY useFullCubemapShadowsChanged)
 	Q_PROPERTY(bool enableDebugInfo              READ getEnableDebugInfo        WRITE setEnableDebugInfo       NOTIFY enableDebugInfoChanged)
 	Q_PROPERTY(bool enableLocationInfo           READ getEnableLocationInfo     WRITE setEnableLocationInfo    NOTIFY enableLocationInfoChanged)
+	Q_PROPERTY(S3DRenderer::LocationInfoStyle locationInfoStyle READ getLocationInfoStyle    WRITE setLocationInfoStyle     NOTIFY locationInfoStyleChanged)
 	Q_PROPERTY(bool forceHorizonPolyline         READ getForceHorizonPolyline   WRITE setForceHorizonPolyline  NOTIFY forceHorizonPolylineChanged)
 	Q_PROPERTY(bool enableTorchLight             READ getEnableTorchLight       WRITE setEnableTorchLight      NOTIFY enableTorchLightChanged)
 	Q_PROPERTY(float torchStrength               READ getTorchStrength          WRITE setTorchStrength         NOTIFY torchStrengthChanged)
@@ -136,6 +137,7 @@ signals:
     void useFullCubemapShadowsChanged(const bool val);
     void enableDebugInfoChanged(const bool val);
     void enableLocationInfoChanged(const bool val);
+    void locationInfoStyleChanged(S3DRenderer::LocationInfoStyle style);
     void forceHorizonPolylineChanged(const bool val);
     void enableTorchLightChanged(const bool val);
     void torchStrengthChanged(const float val);
@@ -217,9 +219,13 @@ public slots:
     void setEnableDebugInfo(const bool debugEnabled);
     bool getEnableDebugInfo() const;
 
-    //! Set to true to show the current standing positin as text on screen.
+    //! Set to true to show the current standing position as text on screen.
     void setEnableLocationInfo(const bool enableLocationInfo);
     bool getEnableLocationInfo() const;
+
+    //! Set location info style
+    void setLocationInfoStyle(const S3DRenderer::LocationInfoStyle style);
+    S3DRenderer::LocationInfoStyle getLocationInfoStyle() const;
 
     //! Set the overdrawing of a landscape (horizon) polygon after the 3D scenery.
     //! This shows the difference (error) between our planar (tangential plane) modelling and effects of earth curvature.
