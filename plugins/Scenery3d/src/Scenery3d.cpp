@@ -314,6 +314,7 @@ void Scenery3d::loadConfig()
 	renderer->setLazyCubemapInterval(conf->value("cubemap_lazy_interval",1.0).toDouble());
 	renderer->setPixelLightingEnabled(conf->value("flag_pixel_lighting", false).toBool());
 	renderer->setLocationInfoEnabled(conf->value("flag_location_info", false).toBool());
+	renderer->setLocationInfoStyle(static_cast<S3DRenderer::LocationInfoStyle>(conf->value("location_info_style", 0).toInt()));
 
 	forceHorizonPolyline = conf->value("force_landscape_polyline", false).toBool();
 
@@ -844,6 +845,23 @@ void Scenery3d::setEnableLocationInfo(const bool enableLocationInfo)
 		conf->setValue(S3D_CONFIG_PREFIX + "/flag_location_info",enableLocationInfo);
 
 		emit enableLocationInfoChanged(enableLocationInfo);
+	}
+}
+
+S3DRenderer::LocationInfoStyle Scenery3d::getLocationInfoStyle() const
+{
+	return renderer->getLocationInfoStyle();
+}
+
+void Scenery3d::setLocationInfoStyle(const S3DRenderer::LocationInfoStyle style)
+{
+	if(style != renderer->getLocationInfoStyle())
+	{
+		renderer->setLocationInfoStyle(style);
+
+		conf->setValue(S3D_CONFIG_PREFIX + "/location_info_style", style);
+
+		emit locationInfoStyleChanged(style);
 	}
 }
 

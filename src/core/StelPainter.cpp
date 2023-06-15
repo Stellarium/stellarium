@@ -558,31 +558,31 @@ void StelPainter::sSphereMap(double radius, unsigned int slices, unsigned int st
 
 void StelPainter::drawTextGravity180(float x, float y, const QString& ws, float xshift, float yshift)
 {
-	float dx, dy, d, theta, theta_o, psi, width;
-	dx = x - static_cast<float>(prj->viewportCenter[0]);
-	dy = y - static_cast<float>(prj->viewportCenter[1]);
-	d = std::sqrt(dx*dx + dy*dy);
-	float limit = 120.;
+	const float dx = x - static_cast<float>(prj->viewportCenter[0]);
+	const float dy = y - static_cast<float>(prj->viewportCenter[1]);
+	const float d = std::sqrt(dx*dx + dy*dy);
+	const float limit = 120.;
 
 	// If the text is too far away to be visible in the screen return
 	if (d>qMax(prj->viewportXywh[3], prj->viewportXywh[2])*2 || ws.isEmpty())
 		return;
 
-	float ppx = static_cast<float>(prj->getDevicePixelsPerPixel());
-	float cWidth = static_cast<float>(getFontMetrics().boundingRect(ws).width())/ws.length();
-	float stdWidth = static_cast<float>(getFontMetrics().boundingRect("a").width());
-	theta = std::atan2(dy - 1, dx);
-	theta_o = M_PIf + std::atan2(dx, dy - 1);	
-	psi = std::atan2(ppx*cWidth, d + 1) * M_180_PIf;
+	const float ppx = static_cast<float>(prj->getDevicePixelsPerPixel());
+	const float cWidth = static_cast<float>(getFontMetrics().boundingRect(ws).width())/ws.length(); // average character width
+	const float stdWidth = static_cast<float>(getFontMetrics().boundingRect("m").width());
+	const float theta_o = M_PIf + std::atan2(dx, dy - 1);
+	float theta = std::atan2(dy - 1, dx);
+	float psi = std::atan2(ppx*cWidth*1.2, d + 1) * M_180_PIf; // Factor 1.2 is empirical.
 	if (psi>5)
 		psi = 5;
 
-	float xVc = static_cast<float>(prj->viewportCenter[0]) + xshift;
-	float yVc = static_cast<float>(prj->viewportCenter[1]) + yshift;
+	const float xVc = static_cast<float>(prj->viewportCenter[0]) + xshift;
+	const float yVc = static_cast<float>(prj->viewportCenter[1]) + yshift;
 	const float cosr = std::cos(-theta_o * M_PI_180f);
 	const float sinr = std::sin(-theta_o * M_PI_180f);
 	float xom = x + xshift*cosr - yshift*sinr;
-	float yom = y + yshift*sinr + yshift*cosr;
+	float yom = y + yshift*sinr + xshift*cosr;
+	float width;
 
 	if (!StelApp::getInstance().getLocaleMgr().isAppRTL())
 	{

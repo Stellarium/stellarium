@@ -69,7 +69,7 @@ S3DRenderer::S3DRenderer(QObject *parent)
       currentScene(nullptr),
       supportsGSCubemapping(false), supportsShadows(false), supportsShadowFiltering(false), isANGLE(false), maximumFramebufferSize(0),
       defaultFBO(0),
-      torchBrightness(0.5f), torchRange(5.0f), directionalLightPush(1.0f), textEnabled(false), debugEnabled(false), fixShadowData(false),
+      torchBrightness(0.5f), torchRange(5.0f), directionalLightPush(1.0f), textEnabled(false), locationInfoStyle(S3DRenderer::LocationInfoTopRight), debugEnabled(false), fixShadowData(false),
       simpleShadows(false), fullCubemapShadows(false), cubemappingMode(S3DEnum::CM_TEXTURES), //set it to 6 textures as a safe default (Cubemap should work on ANGLE, but does not...)
       reinitCubemapping(true), reinitShadowmapping(true),
       cubemapSize(1024),shadowmapSize(1024),wasMovedInLastDrawCall(false),
@@ -1358,50 +1358,75 @@ void S3DRenderer::drawCoordinatesText()
 	painter.setFont(debugTextFont);
 	painter.setColor(1.0f,0.5f,1.0f);
 
-	// Attempt at better font scaling for Macs and HiDPI.
-	int fontSize=debugTextFont.pixelSize();
+	const Vec3d &gridPos = currentScene->getGridPosition();
+	const QString& gridName = currentScene->getSceneInfo().gridName;
 
-	float devicePixelscaling = static_cast<float>(altAzProjector->getDevicePixelsPerPixel())*StelApp::getInstance().getGlobalScalingRatio();
-	float screen_x = altAzProjector->getViewportWidth()  - 240.0f*devicePixelscaling;
+	// Attempt at better font scaling for Macs and HiDPI.
+	const int fontSize=debugTextFont.pixelSize();
+	const QFontMetrics fm(debugTextFont);
+
+	const float devicePixelscaling = static_cast<float>(altAzProjector->getDevicePixelsPerPixel())*StelApp::getInstance().getGlobalScalingRatio();
+	float screen_x = altAzProjector->getViewportWidth()  -  240.0f*devicePixelscaling;
+	float screen_x_cs=altAzProjector->getViewportWidth()-10.f-devicePixelscaling*qMax(240, painter.getFontMetrics().boundingRect(gridName).width());
 	float screen_y = altAzProjector->getViewportHeight() -  60.0f*devicePixelscaling;
+	if (locationInfoStyle!=LocationInfoTopRight)
+	{
+		screen_x = altAzProjector->getViewportWidth()*0.5  - fm.boundingRect("MMMMMMMMMM").width()*devicePixelscaling;
+		screen_x_cs = screen_x;
+		screen_y =  5*fontSize * devicePixelscaling;		// just allow 5 lines
+	}
 	QString str;
 
-	Vec3d gridPos = currentScene->getGridPosition();
+//	if (locationInfoStyle==LocationInfoBottomCenterCurved)
+//	{
+//		painter.drawText(screen_x_cs, screen_y, gridName, 0, 0, 0, false);
+//		screen_y -= (fontSize+1)*devicePixelscaling;
+//		str = QString("Easting:  %1m").arg(gridPos[0], 10, 'f', 2);
+//		painter.drawText(screen_x, screen_y, str, 0, 0, 0, false);
+//		screen_y -= (fontSize-1)*devicePixelscaling;
+//		str = QString("Northing: %1m").arg(gridPos[1], 10, 'f', 2);
+//		painter.drawText(screen_x, screen_y, str, 0, 0, 0, false);
+//		screen_y -= (fontSize-1)*devicePixelscaling;
+//		str = QString("Height: %1m").arg(gridPos[2], 10, 'f', 2);
+//		painter.drawText(screen_x, screen_y, str, 0, 0, 0, false);
+//		screen_y -= (fontSize-1)*devicePixelscaling;
+//		str = QString("Eye:   %1m").arg(currentScene->getEyeHeight(), 10, 'f', 2);
+//		painter.drawText(screen_x, screen_y, str, 0, 0, 0, false);
+//	}
+//	else
+//	{
+		// problem: long grid names!
+		painter.drawText(screen_x_cs, screen_y, gridName, 0, 0, 0, locationInfoStyle==LocationInfoTopRight);
+		screen_y -= (fontSize+1)*devicePixelscaling;
+		str = QString("Easting:  %1m").arg(gridPos[0], 10, 'f', 2);
+		painter.drawText(screen_x, screen_y, str, 0, 0, 0, locationInfoStyle==LocationInfoTopRight);
+		screen_y -= (fontSize-1)*devicePixelscaling;
+		str = QString("Northing: %1m").arg(gridPos[1], 10, 'f', 2);
+		painter.drawText(screen_x, screen_y, str, 0, 0, 0, locationInfoStyle==LocationInfoTopRight);
+		screen_y -= (fontSize-1)*devicePixelscaling;
+		str = QString("Height:   %1m").arg(gridPos[2], 10, 'f', 2);
+		painter.drawText(screen_x, screen_y, str, 0, 0, 0, locationInfoStyle==LocationInfoTopRight);
+		screen_y -= (fontSize-1)*devicePixelscaling;
+		str = QString("Eye:      %1m").arg(currentScene->getEyeHeight(), 10, 'f', 2);
+		painter.drawText(screen_x, screen_y, str, 0, 0, 0, locationInfoStyle==LocationInfoTopRight);
 
-	const SceneInfo& info = currentScene->getSceneInfo();
-
-	// problem: long grid names!
-	painter.drawText(altAzProjector->getViewportWidth()-10.f-devicePixelscaling*qMax(240, painter.getFontMetrics().boundingRect(info.gridName).width()),
-			 screen_y, info.gridName);
-	screen_y -= (fontSize+1)*devicePixelscaling;
-	str = QString("East:   %1m").arg(gridPos[0], 10, 'f', 2);
-	painter.drawText(screen_x, screen_y, str);
-	screen_y -= (fontSize-1)*devicePixelscaling;
-	str = QString("North:  %1m").arg(gridPos[1], 10, 'f', 2);
-	painter.drawText(screen_x, screen_y, str);
-	screen_y -= (fontSize-1)*devicePixelscaling;
-	str = QString("Height: %1m").arg(gridPos[2], 10, 'f', 2);
-	painter.drawText(screen_x, screen_y, str);
-	screen_y -= (fontSize-1)*devicePixelscaling;
-	str = QString("Eye:    %1m").arg(currentScene->getEyeHeight(), 10, 'f', 2);
-	painter.drawText(screen_x, screen_y, str);
-
-//	DEBUG AIDS:
-//	screen_y -= 15.0f;
-//	str = QString("model_X:%1m").arg(model_pos[0], 10, 'f', 2);
-//	painter.drawText(screen_x, screen_y, str);screen_y -= 15.0f;
-//	str = QString("model_Y:%1m").arg(model_pos[1], 10, 'f', 2);
-//	painter.drawText(screen_x, screen_y, str);screen_y -= 15.0f;
-//	str = QString("model_Z:%1m").arg(model_pos[2], 10, 'f', 2);
-//	painter.drawText(screen_x, screen_y, str);screen_y -= 15.0f;
-//	str = QString("abs_X:  %1m").arg(absolutePosition.v[0], 10, 'f', 2);
-//	painter.drawText(screen_x, screen_y, str);screen_y -= 15.0f;
-//	str = QString("abs_Y:  %1m").arg(absolutePosition.v[1], 10, 'f', 2);
-//	painter.drawText(screen_x, screen_y, str);screen_y -= 15.0f;
-//	str = QString("abs_Z:  %1m").arg(absolutePosition.v[2], 10, 'f', 2);
-//	painter.drawText(screen_x, screen_y, str);screen_y -= 15.0f;
-//	str = QString("groundNullHeight: %1m").arg(groundNullHeight, 7, 'f', 2);
-//	painter.drawText(screen_x, screen_y, str);
+		//DEBUG AIDS (only usable in top/right):
+		//screen_y -= 15.0f;
+		//str = QString("model_X:%1m").arg(model_pos[0], 10, 'f', 2);
+		//painter.drawText(screen_x, screen_y, str);screen_y -= 15.0f;
+		//str = QString("model_Y:%1m").arg(model_pos[1], 10, 'f', 2);
+		//painter.drawText(screen_x, screen_y, str);screen_y -= 15.0f;
+		//str = QString("model_Z:%1m").arg(model_pos[2], 10, 'f', 2);
+		//painter.drawText(screen_x, screen_y, str);screen_y -= 15.0f;
+		//str = QString("abs_X:  %1m").arg(absolutePosition.v[0], 10, 'f', 2);
+		//painter.drawText(screen_x, screen_y, str);screen_y -= 15.0f;
+		//str = QString("abs_Y:  %1m").arg(absolutePosition.v[1], 10, 'f', 2);
+		//painter.drawText(screen_x, screen_y, str);screen_y -= 15.0f;
+		//str = QString("abs_Z:  %1m").arg(absolutePosition.v[2], 10, 'f', 2);
+		//painter.drawText(screen_x, screen_y, str);screen_y -= 15.0f;
+		//str = QString("groundNullHeight: %1m").arg(groundNullHeight, 7, 'f', 2);
+		//painter.drawText(screen_x, screen_y, str);
+//	}
 }
 
 void S3DRenderer::drawDebug()
