@@ -1062,7 +1062,6 @@ void StelCore::updateTransformMatrices()
 // This avoids calling a costly operation every frame.
 void StelCore::updateFixedEquatorialTransformMatrices()
 {
-	qDebug() << "Location has changed:" << getCurrentLocation().serializeToLine().replace('\t', '|');
 	matAltAzToFixedEquatorial = Mat4d::yrotation(M_PI_2-static_cast<double>(getCurrentLocation().getLatitude())*M_PI_180);
 	matFixedEquatorialToAltAz = matAltAzToFixedEquatorial.transpose();
 }
@@ -1283,8 +1282,8 @@ void StelCore::setObserver(StelObserver *obs)
 // Smoothly move the observer to the given location
 void StelCore::moveObserverTo(const StelLocation& target, double duration, double durationIfPlanetChange, const QString &landscapeID)
 {
-	double d = (getCurrentLocation().planetName==target.planetName) ? duration : durationIfPlanetChange;
-	qDebug() << "StelCore::moveObserverTo" << target.name << "in" << d << "seconds with Landscape" << landscapeID ;
+	const double d = (getCurrentLocation().planetName==target.planetName) ? duration : durationIfPlanetChange;
+	//qDebug() << "StelCore::moveObserverTo" << target.name << "in" << d << "seconds with Landscape" << landscapeID ;
 	if (d>0.)
 	{
 		StelLocation curLoc = getCurrentLocation();
@@ -1320,11 +1319,8 @@ void StelCore::moveObserverTo(const StelLocation& target, double duration, doubl
 			}
 		}
 	}
-	qDebug() << "StelCore::moveObserverTo" << target.name << "in" << d << "seconds with Landscape" << landscapeID << "emit targetLocationChanged";
-	emit targetLocationChanged(target, landscapeID); // inform others about our next location. LandscapeMgr can load a new landscape.
-	qDebug() << "StelCore::moveObserverTo" << target.name << "in" << d << "seconds with Landscape" << landscapeID << "emit locationChanged";
-	emit locationChanged(getCurrentLocation()); // This may either be the first or the only notice that currentLocation has changed.
-	qDebug() << "StelCore::moveObserverTo" << target.name << "in" << d << "seconds with Landscape" << landscapeID << "... done";
+	emit targetLocationChanged(target, landscapeID); // inform others about our next location. E.g., let LandscapeMgr load a new landscape.
+	emit locationChanged(getCurrentLocation());
 }
 
 double StelCore::getUTCOffset(const double JD) const
@@ -2024,9 +2020,7 @@ void StelCore::updateTime(double deltaTime)
 	}
 	if (position->update(deltaTime))
 	{
-		qDebug() << "StelCore::updateTime() updated for position update with deltaTime " << deltaTime;
 		emit locationChanged(getCurrentLocation());
-		qDebug() << "StelCore::updateTime() updated for position update with deltaTime ... done";
 	}
 
 	// Position of sun and all the satellites (ie planets)

@@ -1162,77 +1162,73 @@ void LandscapeMgr::onLocationChanged(const StelLocation &loc)
 // If landscapeID is empty but flagLandscapeAutoSelection is true, load a location fitting to loc's planet.
 void LandscapeMgr::onTargetLocationChanged(const StelLocation &loc, const QString& landscapeID)
 {
-	qDebug() << "LandscapeMgr::onTargetLocationChanged:" << loc.serializeToLine().replace('\t', '|') << "Landscape requested:" << landscapeID;
-//	if (loc.planetName != currentPlanetName)
+	//qDebug() << "LandscapeMgr::onTargetLocationChanged:" << loc.serializeToLine().replace('\t', '|') << "Landscape requested:" << landscapeID;
+	if (!landscapeID.isEmpty() && getAllLandscapeIDs().contains(landscapeID))
 	{
-		if (!landscapeID.isEmpty() && getAllLandscapeIDs().contains(landscapeID))
-		{
-			const bool landscapeSetsLocation = getFlagLandscapeSetsLocation();
-			setFlagLandscapeSetsLocation(false);
-			setCurrentLandscapeID(landscapeID);
-			setFlagLandscapeSetsLocation(landscapeSetsLocation);
-		}
-		else if(landscapeID.startsWith("ZeroColor("))
-		{
-			// New feature: Load a zero landscape and recolor it.
-			// This can happen when clicking on the map. The point on the mapcan be sampled for color (e.g., desert, greengrass, ocean blue, polar white, ...)
-			qDebug() << "Attempt to construct zero landscape with new color";
-			const bool landscapeSetsLocation = getFlagLandscapeSetsLocation();
-			setFlagLandscapeSetsLocation(false);
-			setCurrentLandscapeID("zero");
-			Vec3f color(0.3);
-			static const QRegularExpression zeroColor("^ZeroColor\\(([0-9].[0-9]+,[0-9].[0-9]+,[0-9].[0-9]+)\\)$");
-			QRegularExpressionMatch match=zeroColor.match(landscapeID);
-			if (match.hasMatch())
-				color=Vec3f(match.captured(1));
-			else
-				qDebug() << "Cannot extract color from landscapeID" << landscapeID;
-			LandscapePolygonal *l=static_cast<LandscapePolygonal*>(landscape);
-			l->setGroundColor(color);
-			setFlagLandscapeSetsLocation(landscapeSetsLocation);
-		}
-		else if (flagLandscapeAutoSelection && (loc.planetName != currentPlanetName))
-		{
-			qDebug() << "landscapeID empty. Try planet name" << loc.planetName << "or zero";
-			// If we have a landscape for selected planet then set it, otherwise use zero horizon landscape
-			const bool landscapeSetsLocation = getFlagLandscapeSetsLocation();
-			setFlagLandscapeSetsLocation(false);
-			if (getAllLandscapeNames().indexOf(loc.planetName)>0)
-				setCurrentLandscapeName(loc.planetName); // TODO: Why not setCurrentLandscapeID?
-			else
-				setCurrentLandscapeID("zero");
-			setFlagLandscapeSetsLocation(landscapeSetsLocation);
-		}
-
-		if (loc.role==QChar('o')) // observer?
-		{
-			if (flagEnvironmentAutoEnabling)
-			{
-				setFlagAtmosphere(false);
-				setFlagFog(false);
-				setFlagLandscape(false);
-				setFlagCardinalPoints(false); // suppresses all
-			}
-		}
-		else
-		{
-			SolarSystem* ssystem = static_cast<SolarSystem*>(StelApp::getInstance().getModuleMgr().getModule("SolarSystem"));
-			PlanetP pl = ssystem->searchByEnglishName(loc.planetName);
-			if (pl && flagEnvironmentAutoEnabling && currentPlanetName!=loc.planetName)
-			{
-				QSettings* conf = StelApp::getInstance().getSettings();
-				setFlagAtmosphere(pl->hasAtmosphere() && conf->value("landscape/flag_atmosphere", true).toBool());
-				setFlagFog(pl->hasAtmosphere() && conf->value("landscape/flag_fog", true).toBool());
-				setFlagLandscape(conf->value("landscape/flag_landscape", true).toBool());
-				setFlagCardinalPoints(conf->value("viewing/flag_cardinal_points", true).toBool());
-				setFlagOrdinalPoints(conf->value("viewing/flag_ordinal_points", true).toBool());
-				setFlagOrdinal16WRPoints(conf->value("viewing/flag_16wcr_points", false).toBool());
-				setFlagOrdinal32WRPoints(conf->value("viewing/flag_32wcr_points", false).toBool());
-			}
-		}
-		currentPlanetName = loc.planetName;
+		const bool landscapeSetsLocation = getFlagLandscapeSetsLocation();
+		setFlagLandscapeSetsLocation(false);
+		setCurrentLandscapeID(landscapeID);
+		setFlagLandscapeSetsLocation(landscapeSetsLocation);
 	}
-	qDebug() << "LandscapeMgr::onTargetLocationChanged done" ;
+	else if(landscapeID.startsWith("ZeroColor("))
+	{
+		// Load a zero landscape and recolor it.
+		// This can happen when clicking on the map. The point on the map can be sampled for color (e.g., desert, greengrass, ocean blue, polar white, ...)
+		const bool landscapeSetsLocation = getFlagLandscapeSetsLocation();
+		setFlagLandscapeSetsLocation(false);
+		setCurrentLandscapeID("zero");
+		Vec3f color(0.3);
+		static const QRegularExpression zeroColor("^ZeroColor\\(([0-9].[0-9]+,[0-9].[0-9]+,[0-9].[0-9]+)\\)$");
+		QRegularExpressionMatch match=zeroColor.match(landscapeID);
+		if (match.hasMatch())
+			color=Vec3f(match.captured(1));
+		else
+			qDebug() << "Cannot extract color from landscapeID" << landscapeID;
+		LandscapePolygonal *l=static_cast<LandscapePolygonal*>(landscape);
+		l->setGroundColor(color);
+		setFlagLandscapeSetsLocation(landscapeSetsLocation);
+	}
+	else if (flagLandscapeAutoSelection && (loc.planetName != currentPlanetName))
+	{
+		//qDebug() << "landscapeID empty. Try planet name" << loc.planetName << "or zero";
+		// If we have a landscape for selected planet then set it, otherwise use zero horizon landscape
+		const bool landscapeSetsLocation = getFlagLandscapeSetsLocation();
+		setFlagLandscapeSetsLocation(false);
+		if (getAllLandscapeNames().indexOf(loc.planetName)>0)
+			setCurrentLandscapeName(loc.planetName);
+		else
+			setCurrentLandscapeID("zero");
+		setFlagLandscapeSetsLocation(landscapeSetsLocation);
+	}
+
+	if (loc.role==QChar('o')) // observer?
+	{
+		if (flagEnvironmentAutoEnabling)
+		{
+			setFlagAtmosphere(false);
+			setFlagFog(false);
+			setFlagLandscape(false);
+			setFlagCardinalPoints(false); // suppresses all
+		}
+	}
+	else
+	{
+		SolarSystem* ssystem = static_cast<SolarSystem*>(StelApp::getInstance().getModuleMgr().getModule("SolarSystem"));
+		PlanetP pl = ssystem->searchByEnglishName(loc.planetName);
+		if (pl && flagEnvironmentAutoEnabling && currentPlanetName!=loc.planetName)
+		{
+			QSettings* conf = StelApp::getInstance().getSettings();
+			setFlagAtmosphere(pl->hasAtmosphere() && conf->value("landscape/flag_atmosphere", true).toBool());
+			setFlagFog(pl->hasAtmosphere() && conf->value("landscape/flag_fog", true).toBool());
+			setFlagLandscape(conf->value("landscape/flag_landscape", true).toBool());
+			setFlagCardinalPoints(conf->value("viewing/flag_cardinal_points", true).toBool());
+			setFlagOrdinalPoints(conf->value("viewing/flag_ordinal_points", true).toBool());
+			setFlagOrdinal16WRPoints(conf->value("viewing/flag_16wcr_points", false).toBool());
+			setFlagOrdinal32WRPoints(conf->value("viewing/flag_32wcr_points", false).toBool());
+		}
+	}
+	currentPlanetName = loc.planetName;
+	//qDebug() << "LandscapeMgr::onTargetLocationChanged done" ;
 }
 
 void LandscapeMgr::setFlagFog(const bool displayed)

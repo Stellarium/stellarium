@@ -238,7 +238,6 @@ Mat4d StelObserver::getRotEquatorialToVsop87(void) const
 SpaceShipObserver::SpaceShipObserver(const StelLocation& startLoc, const StelLocation& target, double atransitSeconds, double atimeToGo) : StelObserver(startLoc),
 		moveStartLocation(startLoc), moveTargetLocation(target), artificialPlanet(Q_NULLPTR), timeToGo(atimeToGo), transitSeconds(atransitSeconds)
 {
-	qDebug() << "SpaceshipObserver() from " << startLoc.serializeToLine().replace('\t', '|') << "to" << target.serializeToLine().replace('\t', '|');
 	Q_ASSERT((atimeToGo<0) || (atimeToGo>=0 && atimeToGo<=atransitSeconds));
 	if(timeToGo<0.0)
 		timeToGo = transitSeconds;
@@ -292,47 +291,25 @@ bool SpaceShipObserver::update(double deltaTime)
 	{
 		timeToGo = 0.;
 		currentLocation = moveTargetLocation;
-		qDebug() << "timeToGo:" << timeToGo << ": " << currentLocation.name << "on" << currentLocation.planetName;
-		// Landscape changes should be done when the target location is signalled by StelCore.
-		// Maybe some of the logic here most be moved to StelCore
-		//LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
-
-		//// we have to avoid auto-select landscape in case the selected new landscape is on our target planet (true if landscape sets location). (LP:#1700199)
-		//if ( (lmgr->getFlagLandscapeAutoSelection()) && !(lmgr->getFlagLandscapeSetsLocation()) )
-		//{
-		//	QString pType = ss->getPlanetType(currentLocation.planetName);
-		//	// If we have a landscape for target planet then set it or check and use
-		//	// landscape type of target planet, otherwise use default landscape
-		//	if (lmgr->getAllLandscapeNames().indexOf(currentLocation.planetName)>0)
-		//		lmgr->setCurrentLandscapeName(currentLocation.planetName);
-		//	else if (lmgr->getAllLandscapeIDs().indexOf(pType)>0)
-		//		lmgr->setCurrentLandscapeID(pType);
-		//	else
-		//		lmgr->setCurrentLandscapeID(lmgr->getDefaultLandscapeID());
-		//}
 	}
 	else
 	{
 		currentLocation.name = ss->searchByEnglishName(moveStartLocation.planetName)->getNameI18n() + " -> " +
 						      ss->searchByEnglishName(moveTargetLocation.planetName)->getNameI18n();
-		qDebug() << "timeToGo:" << timeToGo << ": " << currentLocation.name << "Full location:" << currentLocation.serializeToLine().replace('\t', '|');
 		if (artificialPlanet)
 		{
 			// Update SpaceShip position
-			qDebug() << "Updating spaceship position at timeToGo:" << timeToGo << "with deltaTime" << deltaTime << ": timeToGo/(timeToGo + deltaTime)=" << timeToGo/(timeToGo + deltaTime);
 			static_cast<ArtificialPlanet*>(artificialPlanet.data())->computeAverage(timeToGo/(timeToGo + deltaTime));			
 			currentLocation.planetName = "SpaceShip";			
 		}
 		else
 			currentLocation.planetName = moveTargetLocation.planetName;
-		qDebug() << "Just updated currentLocation.planetName" << currentLocation.planetName << "at timeToGo:" << timeToGo << "with deltaTime" << deltaTime << ": timeToGo/(timeToGo + deltaTime)=" << timeToGo/(timeToGo + deltaTime);
 
 		// Move the lon/lat/alt on the planet
 		const float moveToMult = 1.f-static_cast<float>(timeToGo/transitSeconds);
 		currentLocation.setLatitude( moveStartLocation.getLatitude() - moveToMult*(moveStartLocation.getLatitude()-moveTargetLocation.getLatitude()));
 		currentLocation.setLongitude(moveStartLocation.getLongitude() - moveToMult*(moveStartLocation.getLongitude()-moveTargetLocation.getLongitude()));
 		currentLocation.altitude = int(moveStartLocation.altitude - moveToMult*(moveStartLocation.altitude-moveTargetLocation.altitude));
-		qDebug() << "currentLocation (" << moveToMult << "): " << currentLocation.getLongitude() << currentLocation.getLatitude() << currentLocation.altitude;
 	}
 	return true;
 }

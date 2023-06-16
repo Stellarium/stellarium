@@ -630,7 +630,7 @@ void LocationDialog::setLocationFromMap(double longitude, double latitude, const
 	loc.name= QString("%1, %2").arg(loc.getLatitude()).arg(loc.getLongitude()); // Force a preliminary name
 	setFieldsFromLocation(loc);
 	if (loc.planetName=="Earth")
-		core->moveObserverTo(loc, 0., 1., QString("ZeroColor(%1)").arg(Vec3f(color).toStr()));
+		core->moveObserverTo(loc, 0., 1., GETSTELMODULE(LandscapeMgr)->getFlagLandscapeAutoSelection() ? QString("ZeroColor(%1)").arg(Vec3f(color).toStr()) : QString());
 	else
 		core->moveObserverTo(loc, 0., 1., loc.planetName); // Loads a default landscape for the planet.
 
