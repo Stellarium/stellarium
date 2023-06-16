@@ -150,6 +150,7 @@ QString Quasar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 			oss << QString("%1: %2 %3").arg(q_("Radio flux density around 1.4GHz (21cm)"), QString::number(f20, 'f', 3), sfd) << "<br />";
 	}
 
+	oss << getSolarLunarInfoString(core, flags);
 	postProcessInfoString(str, flags);
 	return str;
 }

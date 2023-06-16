@@ -742,6 +742,7 @@ QString MeteorShower::getInfoString(const StelCore* core, const InfoStringGroup&
 		}
 	}
 
+	oss << getSolarLunarInfoString(core, flags);
 	postProcessInfoString(str, flags);
 	return str;
 }

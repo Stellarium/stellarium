@@ -338,7 +338,7 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 	if (flags & ObjectType)
 		oss << QString("%1: <b>%2</b>").arg(q_("Type"), getObjectTypeI18n())  << "<br/>";
 	
-	if ((flags & Magnitude) && (stdMag<99. || RCS>0.) && (visibility==gSatWrapper::VISIBLE))
+	if ((flags & Magnitude) && ((stdMag<99.) || (RCS>0.)) && (visibility==gSatWrapper::VISIBLE))
 	{
 		const int decimals = 2;
 		const float airmass = getAirmass(core);
@@ -461,6 +461,7 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 		//oss << QString("%1: %2 km, %3: %4 km").arg(q_("Penumbra distance"), QString::number(penumbraDistance, 'f', 3), q_("Radius"), QString::number(penumbraRadius, 'f', 3)) << "<br/>";
 	}
 
+	oss << getSolarLunarInfoString(core, flags);
 	postProcessInfoString(str, flags);
 	return str;
 }
