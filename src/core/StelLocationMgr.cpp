@@ -1079,8 +1079,8 @@ void StelLocationMgr::changeLocationFromGPSQuery(const StelLocation &locin)
 	loc.name=QString("GPS %1%2 %3%4")
 		.arg(loc.getLatitude()<0?"S":"N").arg(qRound(abs(loc.getLatitude())))
 		.arg(loc.getLongitude()<0?"W":"E").arg(qRound(abs(loc.getLongitude())));
-
-	core->moveObserverTo(loc, 0.0, 0.0);
+	QColor color=getColorForCoordinates(loc.getLongitude(), loc.getLatitude());
+	core->moveObserverTo(loc, 0.0, 0.0, QString("ZeroColor(%1)").arg(Vec3f(color).toStr()));
 	if (nmeaHelper)
 	{
 		if (verbose)
@@ -1158,7 +1158,9 @@ void StelLocationMgr::changeLocationFromNetworkLookup()
 			// Ensure that ipTimeZone is a valid IANA timezone name!
 			QTimeZone ipTZ(ipTimeZone.toUtf8());
 			core->setCurrentTimeZone( !ipTZ.isValid() || ipTimeZone.isEmpty() ? "LMST" : ipTimeZone);
-			core->moveObserverTo(loc, 0.0, 0.0);
+			QColor color=getColorForCoordinates(loc.getLongitude(), loc.getLatitude());
+			core->moveObserverTo(loc, 0.0, 0.0, QString("ZeroColor(%1)").arg(Vec3f(color).toStr()));
+
 			QSettings* conf = StelApp::getInstance().getSettings();
 			conf->setValue("init_location/last_location", QString("%1, %2").arg(latitude).arg(longitude));
 		}
@@ -1166,7 +1168,7 @@ void StelLocationMgr::changeLocationFromNetworkLookup()
 		{
 			qDebug() << "Failure getting IP-based location: answer is in not acceptable format! Error: " << e.what()
 					<< "\nLet's use Paris, France as default location...";
-			core->moveObserverTo(getLastResortLocation(), 0.0, 0.0); // Answer is not in JSON format! A possible block by DNS server or firewall
+			core->moveObserverTo(getLastResortLocation(), 0.0, 0.0, "guereins"); // Answer is not in JSON format! A possible block by DNS server or firewall
 		}
 	}
 	else

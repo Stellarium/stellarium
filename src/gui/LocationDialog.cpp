@@ -723,7 +723,7 @@ void LocationDialog::moveToAnotherPlanet()
 			}
 		}
 
-		stelCore->moveObserverTo(loc, 0., 0.);
+		stelCore->moveObserverTo(loc, 0., 0., loc.planetName);
 	}
 	// Planet transition time also set to null to prevent ugliness when
 	// "use landscape location" is enabled for that planet's landscape. --BM
@@ -735,7 +735,7 @@ void LocationDialog::setLocationFromCoords(int i)
 	Q_UNUSED(i)
 	reportEdit();
 	StelLocation loc = locationFromFields();
-	StelApp::getInstance().getCore()->moveObserverTo(loc, 0.);
+	StelApp::getInstance().getCore()->moveObserverTo(loc, 0.); // No landscape update: This may be used for finetuning within a landscape
 	//Update the position of the map pointer
 	ui->mapWidget->setMarkerPos(loc.getLongitude(), loc.getLatitude());
 }
