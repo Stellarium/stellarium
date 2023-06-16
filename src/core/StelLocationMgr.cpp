@@ -493,7 +493,7 @@ StelLocationMgr::StelLocationMgr()
 	lastResortLocation = locationForString(conf->value("init_location/last_location", "Paris, Western Europe").toString());
 
 	planetName="Earth";
-	planetSurfaceMap.load(StelFileMgr::findFile("data/gui/miscWorldMap.jpg", StelFileMgr::File));
+	planetSurfaceMap=QImage(":/graphicGui/miscWorldMap.jpg");
 	connect(StelApp::getInstance().getCore(), SIGNAL(StelCore::locationChanged(StelLocation)), this, SLOT(changePlanetMapForLocation(StelLocation)));
 }
 
@@ -1569,18 +1569,19 @@ void StelLocationMgr::changePlanetMapForLocation(StelLocation loc)
 	if (loc.planetName==planetName)
 		return;
 
-	QString mapName;
-	if (loc.planetName=="Earth")
-		mapName="data/gui/miscWorldMap.jpg";
-	else
-		mapName="textures/" + loc.planetName + ".png";
 	planetName=loc.planetName;
-
-	if (!planetSurfaceMap.load(StelFileMgr::findFile(mapName, StelFileMgr::File)))
+	if (planetName=="Earth")
+		planetSurfaceMap=QImage(":/graphicGui/miscWorldMap.jpg");
+	else
 	{
-		// texture not found. Use a gray pixel.
-		planetSurfaceMap=QImage(16,16,QImage::Format_RGB32);
-		planetSurfaceMap.fill(QColor(64, 64, 64));
+		QString mapName="textures/" + planetName + ".png";
+
+		if (!planetSurfaceMap.load(StelFileMgr::findFile(mapName, StelFileMgr::File)))
+		{
+			// texture not found. Use a gray pixel.
+			planetSurfaceMap=QImage(16,16,QImage::Format_RGB32);
+			planetSurfaceMap.fill(QColor(64, 64, 64));
+		}
 	}
 }
 
