@@ -166,6 +166,7 @@ QString Nova::getInfoString(const StelCore* core, const InfoStringGroup& flags) 
 		}
 	}
 
+	oss << getSolarLunarInfoString(core, flags);
 	postProcessInfoString(str, flags);
 	return str;
 }

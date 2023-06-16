@@ -160,6 +160,7 @@ QString Supernova::getInfoString(const StelCore* core, const InfoStringGroup& fl
 		}
 	}
 
+	oss << getSolarLunarInfoString(core, flags);
 	postProcessInfoString(str, flags);
 	return str;
 }
