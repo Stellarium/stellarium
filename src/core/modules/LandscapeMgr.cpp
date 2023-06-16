@@ -1203,7 +1203,6 @@ void LandscapeMgr::onTargetLocationChanged(const StelLocation &loc, const QStrin
 				setCurrentLandscapeID("zero");
 			setFlagLandscapeSetsLocation(landscapeSetsLocation);
 		}
-		currentPlanetName = loc.planetName;
 
 		if (loc.role==QChar('o')) // observer?
 		{
@@ -1219,7 +1218,7 @@ void LandscapeMgr::onTargetLocationChanged(const StelLocation &loc, const QStrin
 		{
 			SolarSystem* ssystem = static_cast<SolarSystem*>(StelApp::getInstance().getModuleMgr().getModule("SolarSystem"));
 			PlanetP pl = ssystem->searchByEnglishName(loc.planetName);
-			if (pl && flagEnvironmentAutoEnabling)
+			if (pl && flagEnvironmentAutoEnabling && currentPlanetName!=loc.planetName)
 			{
 				QSettings* conf = StelApp::getInstance().getSettings();
 				setFlagAtmosphere(pl->hasAtmosphere() && conf->value("landscape/flag_atmosphere", true).toBool());
@@ -1231,6 +1230,7 @@ void LandscapeMgr::onTargetLocationChanged(const StelLocation &loc, const QStrin
 				setFlagOrdinal32WRPoints(conf->value("viewing/flag_32wcr_points", false).toBool());
 			}
 		}
+		currentPlanetName = loc.planetName;
 	}
 	qDebug() << "LandscapeMgr::onTargetLocationChanged done" ;
 }
