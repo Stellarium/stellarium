@@ -17,6 +17,7 @@
  */
 
 #include "StelLocationMgr.hpp"
+#include "SolarSystem.hpp"
 #include "StelLocationMgr_p.hpp"
 
 #include "StelApp.hpp"
@@ -1574,7 +1575,9 @@ void StelLocationMgr::changePlanetMapForLocation(StelLocation loc)
 		planetSurfaceMap=QImage(":/graphicGui/miscWorldMap.jpg");
 	else
 	{
-		QString mapName="textures/" + planetName + ".png";
+		SolarSystem *ssm=GETSTELMODULE(SolarSystem);
+		PlanetP p=ssm->searchByEnglishName(loc.planetName); // nullptr for "SpaceShip" transitions
+		QString mapName="textures/" + (p ? p->getTextMapName() : planetName) + ".png";
 
 		if (!planetSurfaceMap.load(StelFileMgr::findFile(mapName, StelFileMgr::File)))
 		{
