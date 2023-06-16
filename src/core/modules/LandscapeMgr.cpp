@@ -422,7 +422,7 @@ void LandscapeMgr::update(double deltaTime)
 			// Use no more than 1/60th of a second for this batch of loading
 			QElapsedTimer timer;
 			timer.start();
-			Atmosphere::LoadingStatus status;
+			Atmosphere::LoadingStatus status={1,1};
 			while(loadingAtmosphere->isLoading() && timer.elapsed() < 1000/60)
 				status = loadingAtmosphere->stepDataLoading();
 			if(loadingAtmosphere->isLoading())
