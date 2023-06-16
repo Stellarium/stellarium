@@ -494,7 +494,7 @@ StelLocationMgr::StelLocationMgr()
 
 	planetName="Earth";
 	planetSurfaceMap=QImage(":/graphicGui/miscWorldMap.jpg");
-	connect(StelApp::getInstance().getCore(), SIGNAL(StelCore::locationChanged(StelLocation)), this, SLOT(changePlanetMapForLocation(StelLocation)));
+	connect(StelApp::getInstance().getCore(), SIGNAL(locationChanged(StelLocation)), this, SLOT(changePlanetMapForLocation(StelLocation)));
 }
 
 StelLocationMgr::~StelLocationMgr()
