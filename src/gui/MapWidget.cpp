@@ -23,6 +23,7 @@
 #include <QPainter>
 #include <QMouseEvent>
 #include "StelLocationMgr.hpp"
+#include "StelApp.hpp"
 
 namespace
 {
