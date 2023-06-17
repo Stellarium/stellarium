@@ -23,6 +23,7 @@
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelFileMgr.hpp"
+#include "StelModuleMgr.hpp"
 #include "StelUtils.hpp"
 #include "StelJsonParser.hpp"
 
