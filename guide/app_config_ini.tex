@@ -629,7 +629,7 @@ startup\_time\_mode             & string & Set the start-up time mode, can be \e
                                            or \emph{Preset} (start at time defined by preset\_sky\_time)\\%\midrule
 flag\_enable\_zoom\_keys        & bool   & Set to \emph{false} if you want to disable the zoom\\%\midrule
 flag\_manual\_zoom              & bool   & Set to \emph{false} for normal zoom behaviour as described in this guide. 
-                                           When set to true, the auto zoom feature only moves in a small amount and must be pressed many times\\%\midrule
+                                           When set to \emph{true}, the auto zoom feature only moves in a small amount and must be pressed many times\\%\midrule
 flag\_enable\_move\_keys        & bool   & Set to \emph{false} if you want to disable the arrow keys\\%\midrule
 flag\_enable\_mouse\_navigation & bool   & Set to \emph{false} if you want to disable the mouse pan (drag).\\%\midrule
 flag\_enable\_mouse\_zooming & bool   & Set to \emph{false} if you want to disable the mouse zooming (mousewheel).\\%\midrule
@@ -646,7 +646,6 @@ move\_speed                     & float  & Sets the speed of movement\\%\midrule
 zoom\_speed                     & float  & Sets the zoom speed\\%\midrule
 viewing\_mode                   & string & If set to \emph{horizon}, the viewing mode simulate an alt/azi mount, 
                                            if set to \emph{equator}, the viewing mode simulates an equatorial mount\\%\midrule
-flag\_manual\_zoom              & bool   & Set to \emph{true} if you want to auto-zoom in incrementally.\\%\midrule
 auto\_zoom\_out\_resets\_direction & bool & Set to \emph{true} if you want to auto-zoom restoring direction.\\%\midrule
 time\_correction\_algorithm     & string & Algorithm of DeltaT correction.\\\bottomrule %% TODO: list values! And write ref. chapter!
 \end{longtable}
@@ -952,7 +951,9 @@ rayhelper\_line\_thickness         & int   & thickness of the ray helper lines [
 flag\_night                        & bool  & Enable night mode (red-only mode) on startup\\\midrule
 light\_pollution\_luminance        & float & Sets the level of the light pollution simulation\\\midrule %% TODO: WHAT IS THIS?
 use\_luminance\_adaptation         & bool  & Enable dynamic eye adaptation\\\midrule %% TODO: DESCRIBE!
-sky\_brightness\_label\_threshold  & float & Sky brightness [$cd/m^2$] to show infotext in black \\ %% 
+sky\_brightness\_label\_threshold  & float & Sky brightness [$cd/m^2$] to show infotext in black \\\midrule  %% 
+flag\_landscape\_autoselection     & bool  & load fitting landscape after changing planet (use \emph{zero} landscape when no fitting found).\\
+flag\_environment\_auto\_enable    & bool  & Enable/disable atmosphere, fog and cardinals for observer location when switching planet.\\
 \bottomrule
 \end{longtable}
 

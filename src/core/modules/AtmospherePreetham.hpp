@@ -53,7 +53,7 @@ public:
 	void update(double deltaTime) {fader.update(static_cast<int>(deltaTime*1000));}
 	bool isLoading() const override { return false; }
 	bool isReadyToRender() const override { return true; }
-	LoadingStatus stepDataLoading() override { return {0,0}; }
+	LoadingStatus stepDataLoading() override { return {1,1}; }
 
 private:
 	Vec4i viewport;

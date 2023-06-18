@@ -1091,7 +1091,9 @@ void StelCore::returnToDefaultLocation()
 	StelLocationMgr& locationMgr = StelApp::getInstance().getLocationMgr();
 	StelLocation loc = locationMgr.locationForString(defaultLocationID);
 	if (loc.isValid())
-		moveObserverTo(loc, 0.);
+		moveObserverTo(loc, 1., 2.);
+	else
+		qDebug() << "StelCore::returnToDefaultLocation: Location " << loc.serializeToLine().replace('\t', '|') << "is invalid. Store an entry from the locations list as default location.";
 }
 
 void StelCore::returnToHome()
@@ -1231,7 +1233,7 @@ void StelCore::moveObserverToSelected()
 				if (!results.isEmpty())
 					loc = results.value(results.firstKey()); // ...and use it!
 
-				moveObserverTo(loc);
+				moveObserverTo(loc, 1, 1, pl->getEnglishName());
 			}
 		}
 		else
@@ -1240,15 +1242,10 @@ void StelCore::moveObserverToSelected()
 			if (ni)
 			{
 				// We need to move to the nomenclature item's host planet.
-				StelLocation loc; //  = getCurrentLocation();
-				loc.planetName = ni->getPlanet()->getEnglishName();
-				loc.name=ni->getEnglishName();
-				loc.state = "";
-				loc.setLongitude(ni->getLongitude());
-				loc.setLatitude(ni->getLatitude());
-				loc.lightPollutionLuminance = 0;
+				StelLocation loc(ni->getEnglishName(), "", "", ni->getPlanet()->getEnglishName(), ni->getLongitude(), ni->getLatitude(), 0, 0, getCurrentTimeZone(), 1, 'X', ni->getPlanet()->getEnglishName());
+				loc.lightPollutionLuminance = 0; // be dead sure it's zero!
 
-				moveObserverTo(loc);
+				moveObserverTo(loc, 1, 1, pl->getEnglishName());
 				objmgr->unSelect(); // no use to keep it: Marker will flicker around the screen.
 			}
 		}
@@ -1285,7 +1282,8 @@ void StelCore::setObserver(StelObserver *obs)
 // Smoothly move the observer to the given location
 void StelCore::moveObserverTo(const StelLocation& target, double duration, double durationIfPlanetChange, const QString &landscapeID)
 {
-	double d = (getCurrentLocation().planetName==target.planetName) ? duration : durationIfPlanetChange;
+	const double d = (getCurrentLocation().planetName==target.planetName) ? duration : durationIfPlanetChange;
+	//qDebug() << "StelCore::moveObserverTo" << target.name << "in" << d << "seconds with Landscape" << landscapeID ;
 	if (d>0.)
 	{
 		StelLocation curLoc = getCurrentLocation();
@@ -1321,7 +1319,7 @@ void StelCore::moveObserverTo(const StelLocation& target, double duration, doubl
 			}
 		}
 	}
-	emit targetLocationChanged(target, landscapeID);
+	emit targetLocationChanged(target, landscapeID); // inform others about our next location. E.g., let LandscapeMgr load a new landscape.
 	emit locationChanged(getCurrentLocation());
 }
 
@@ -2021,7 +2019,9 @@ void StelCore::updateTime(double deltaTime)
 		position = newObs;
 	}
 	if (position->update(deltaTime))
+	{
 		emit locationChanged(getCurrentLocation());
+	}
 
 	// Position of sun and all the satellites (ie planets)
 	// GZ maybe setting this static can speedup a bit?

@@ -149,7 +149,9 @@ class LandscapeMgr : public StelModule
 		   WRITE setAtmosphereModelPath
 		   NOTIFY atmosphereModelPathChanged)
 	Q_PROPERTY(QString defaultAtmosphereModelPath
-		   READ getDefaultAtmosphereModelPath)
+		   READ getDefaultAtmosphereModelPath
+		   SCRIPTABLE false
+		   CONSTANT)
 	Q_PROPERTY(bool atmosphereShowMySkyStoppedWithError
 		   READ getAtmosphereShowMySkyStoppedWithError
 		   WRITE setAtmosphereShowMySkyStoppedWithError
@@ -251,7 +253,8 @@ class LandscapeMgr : public StelModule
 		   WRITE setCurrentLandscapeID
 		   NOTIFY currentLandscapeChanged)
 	Q_PROPERTY(QStringList allLandscapeNames
-		   READ getAllLandscapeNames)
+		   READ getAllLandscapeNames
+		   NOTIFY landscapesChanged)
 	Q_PROPERTY(QString currentLandscapeName
 		   READ getCurrentLandscapeName
 		   WRITE setCurrentLandscapeName
@@ -736,8 +739,13 @@ signals:
 
 private slots:
 	//! Reacts to StelCore::locationChanged.
+	//! If flagLightPollutionFromDatabase is active,
+	//! this applies light pollution information from the new location
 	void onLocationChanged(const StelLocation &loc);
-	//! To be connected to StelCore::targetLocationChanged
+	//! To be connected to StelCore::targetLocationChanged.
+	//! This sets landscape with landscapeID.
+	//! If that is empty and flagLandscapeAutoSelection==true, set a landscape fitting to loc's planet.
+	//! Does not set loc itself!
 	void onTargetLocationChanged(const StelLocation &loc, const QString &landscapeID);
 
 	//! Translate labels to new language settings.
@@ -779,13 +787,14 @@ private:
 	QString messageToShow;
 	QTimer* messageTimer = nullptr;
 
-	// Define whether the observer location is to be updated when the landscape is updated.
+	//! Define whether the observer location is to be updated when the landscape is updated and includes location info.
 	bool flagLandscapeSetsLocation;
 
+	//! Define whether on location change onto another planet a landscape for the new planet shall be loaded.
 	bool flagLandscapeAutoSelection;
 
 	bool flagLightPollutionFromDatabase;
-	bool atmosphereNoScatter; // true to suppress actual blue-sky rendering but keep refraction & extinction
+	bool atmosphereNoScatter; //!< true to suppress actual blue-sky rendering but keep refraction & extinction
 
 	//! control drawing of a Polygonal line, if one is defined.
 	bool flagPolyLineDisplayedOnly;

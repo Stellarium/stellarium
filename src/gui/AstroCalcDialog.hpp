@@ -286,7 +286,7 @@ private slots:
 	void selectCurrentCelestialPosition(const QModelIndex &modelIndex);
 
 	void currentHECPositions();
-	void drawHECGraph(QString selectedObject = "");
+	void drawHECGraph(const QString &selectedObject = "");
 	void saveHECPositions();
 	void selectCurrentHECPosition(const QModelIndex &modelIndex);
 	void markCurrentHECPosition(const QModelIndex &modelIndex);
@@ -584,19 +584,22 @@ private:
 	double getCustomTimeStep();
 	void reGenerateEphemeris(bool withSelection);
 
+	//! Finding and selecting an object by its name in specific JD
+	void goToObject(const QString &name, const double JD);
+
 	//! Format RA/Dec or Az/Alt coordinates into nice strings.
 	//! @arg horizontal coord are horizontal (alt-azimuthal). Use degrees/degrees. Else use Hours/degrees.
 	//! @arg southAzimuth (relevant only for horizontal=true) count azimuth from south.
 	//! @arg decimalDegrees use decimal format, not DMS/HMS
 	//! @return QPair(lngStr, latStr) formatted output strings
 	static QPair<QString, QString> getStringCoordinates(const Vec3d &coord, const bool horizontal, const bool southAzimuth, const bool decimalDegrees);
-	void fillWUTTable(QString objectName, QString designation, float magnitude, Vec4d RTSTime, double maxElevation,
-			  double angularSize, QString constellation, QString otype, bool decimalDegrees = false);
-	void fillCelestialPositionTable(QString objectName, QString RA, QString Dec, double magnitude,
-					QString angularSize, QString angularSizeToolTip, QString extraData,
-					QString extraDataToolTip, QString transitTime, QString maxElevation,
-					QString sElongation, QString objectType);
-	void fillHECPositionTable(QString objectName, QChar objectSymbol, QString latitude, QString longitude, double distance);
+	void fillWUTTable(const QString &objectName, const QString &designation, float magnitude, const Vec4d &RTSTime, double maxElevation,
+			  double angularSize, const QString &constellation, const QString &otype, bool decimalDegrees = false);
+	void fillCelestialPositionTable(const QString &objectName, const QString &RA, const QString &Dec, double magnitude,
+					const QString &angularSize, const QString &angularSizeToolTip, const QString &extraData,
+					const QString &extraDataToolTip, const QString &transitTime, const QString &maxElevation,
+					QString &sElongation, const QString &objectType);
+	void fillHECPositionTable(const QString &objectName, const QChar objectSymbol, const QString &latitude, const QString &longitude, const double distance);
 
 	//! Calculation conjunctions and oppositions.
 	//! @note Ported from KStars, should be improved, because this feature calculates
@@ -607,7 +610,7 @@ private:
 	//! Finding the angular distance between two celestial bodies at some Julian date
 	double findDistance(double JD, PlanetP object1, StelObjectP object2, int mode);
 	//! Finding the initial time steps for interactions
-	double findInitialStep(double startJD, double stopJD, QStringList objects);
+	double findInitialStep(double startJD, double stopJD, QStringList &objects);
 	//! Finding the celestial event
 	bool findPrecise(QPair<double, double>* out, PlanetP object1, StelObjectP object2, double JD, double step, int prevSign, int mode);
 	//! Wrapper for filling the table of phenomena between planet and star
@@ -618,9 +621,9 @@ private:
 	//! @note modes: 0 - conjunction, 1 - opposition, 2 - greatest elongation
 	void fillPhenomenaTable(const QMap<double, double> list, const PlanetP object1, const PlanetP object2, int mode);
 	//! Filling the table of phenomena
-	void fillPhenomenaTableVis(QString phenomenType, double JD, QString firstObjectName, float firstObjectMagnitude,
-				   QString secondObjectName, float secondObjectMagnitude, QString separation, QString elevation,
-				   QString elongation, QString angularDistance, QString elongTooltip="", QString angDistTooltip="");
+	void fillPhenomenaTableVis(const QString &phenomenType, double JD, const QString &firstObjectName, float firstObjectMagnitude,
+				   const QString &secondObjectName, float secondObjectMagnitude, const QString &separation, const QString &elevation,
+				   QString &elongation, const QString &angularDistance, const QString &elongTooltip="", const QString &angDistTooltip="");
 	//! Calculation of greatest elongations
 	QMap<double, double> findGreatestElongationApproach(PlanetP& object1, StelObjectP& object2, double startJD, double stopJD);
 	bool findPreciseGreatestElongation(QPair<double, double>* out, PlanetP object1, StelObjectP object2, double JD, double stopJD, double step);

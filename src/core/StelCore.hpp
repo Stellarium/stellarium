@@ -793,8 +793,9 @@ public slots:
 signals:
 	//! This signal is emitted when the observer location has changed.
 	void locationChanged(const StelLocation&);
-	//! This signal is emitted whenever the targeted location changes. The second parameter can transmit a landscapeID.
-	void targetLocationChanged(const StelLocation&, const QString& = QString());
+	//! This signal is emitted whenever the targeted location changes, i.e., at the onset of location transitions.
+	//! The second parameter can transmit a landscapeID or should be QString().
+	void targetLocationChanged(const StelLocation& loc, const QString& id);
 	//! This signal is emitted when the current timezone name is changed.
 	void currentTimeZoneChanged(const QString& tz);
 	//! This signal is emitted when custom timezone use is activated (true) or deactivated (false).

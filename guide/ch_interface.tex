@@ -61,7 +61,7 @@ The other tab in this window allows you to see or set
 \label{sec:gui:location}
 
 \begin{figure}[htbp]
-\centering\includegraphics[width=0.75\textwidth]{location_dialog.png}
+\centering\includegraphics[width=0.85\textwidth]{location_dialog.png}
 \caption{Location window}
 \label{fig:gui:location}
 \end{figure}
@@ -112,6 +112,16 @@ There are a few ways you can set your location:
 \noindent If you want to use the current location permanently, click on the
 ``use as default'' checkbox, disable ``Get location from Network'',
 and close the location window.
+
+Two settings may influence the Landscape when changing locations:
+\begin{description}
+\item[Auto select landscapes] When changing the planet, 
+a fitting landscape panorama will be shown when available. 
+Also, \newFeature{23.2} when clicking on the earth map, 
+a zero-altitude landscape is displayed in the approximate color of that location (taken from the map).
+\item[Auto-enable atmosphere] When changing planet during
+  location change, the atmosphere will be switched as required.
+\end{description}
 
 \subsection{Time Zones}
 \label{sec:gui:location:timezones}
@@ -337,8 +347,6 @@ and options for screenshots.
 \item[Select single constellation] When active, clicking on a star
   that is member in the constellation lines will make the
   constellation stand out. See section~\ref{sec:starlore:singleConstellations} for details.
-\item[Auto-enabling for the environment] When changing planet during
-  location change, atmosphere will be switched as required.
 \item[Dithering] options to allow select better simulation of sky on different hardware.
 \item[Auto zoom out returns to initial direction of view] When enabled,
   this option changes the behavior of the zoom out key
@@ -363,8 +371,6 @@ and options for screenshots.
   Usually it should be enabled. (See~\ref{sec:Concepts:Parallax:Topocentric})
 \item[Include nutation] Compute the slight wobble of earth's
   axis. This feature is active only about 500 years around J2000.0.
-\item[Auto select landscapes] When changing the planet in the location
-  panel, a fitting landscape panorama will be shown when available.
 \item[Indication for mount mode] You can activate the short display of a message when switching type of used mount.
 \item[Edit keyboard shortcuts\ldots] See section~\ref{sec:gui:help:hotkeys}.
 \item[Mouse cursor timeout] You can decide whether, and when, the

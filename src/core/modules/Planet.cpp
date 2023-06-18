@@ -952,7 +952,7 @@ QString Planet::getInfoStringPeriods(const StelCore *core, const InfoStringGroup
 
 Vec4d Planet::getHourlyProperMotion(const StelCore *core) const
 {
-	if (core->getCurrentObserver()->isObserverLifeOver())
+	if (core->getCurrentObserver()->isTraveling())
 		return Vec4d(0.);
 	else
 	{
@@ -1184,6 +1184,9 @@ SolarEclipseData::SolarEclipseData(double JD, double &dRatio, double &latDeg,
 
 QString Planet::getInfoStringExtra(const StelCore *core, const InfoStringGroup& flags) const
 {
+	if (core->getCurrentObserver()->isTraveling()) // transition to elsewhere: report nothing.
+		return QString();
+
 	QString str;
 	QTextStream oss(&str);
 
@@ -1936,6 +1939,20 @@ QVector<const Planet*> Planet::getCandidatesForShadow() const
 
 void Planet::computePosition(const double dateJDE, const Vec3d &aberrationPush)
 {
+	// Having hundreds of Minor Planets makes this very slow. Especially on transitions between locations (StelCore::moveObserverTo())
+	// it seems acceptable to disable position updates for minor bodies.
+	// TODO: Maybe test for target location and allow updates in this case.
+	StelCore *core=StelApp::getInstance().getCore();
+	bool isTransitioning=false;
+	if (core)
+	{
+		const StelObserver *obs=core->getCurrentObserver();
+		if (obs)
+			isTransitioning=obs->isTraveling();
+	}
+	if (isTransitioning && orbitPtr)
+		return;
+
 	if (fabs(lastJDE-dateJDE)>deltaJDE)
 	{
 		coordFunc(dateJDE, eclipticPos, eclipticVelocity, orbitPtr);
@@ -5006,11 +5023,11 @@ void Planet::setApparentMagnitudeAlgorithm(QString algorithm)
 // NOTE: Limitation for efficiency: If this is a planet moon from another planet, we compute RTS for the parent planet instead!
 Vec4d Planet::getClosestRTSTime(const StelCore *core, const double altitude) const
 {
-	const StelLocation loc=core->getCurrentLocation();
-	if (loc.name.contains("->")) // a spaceship
+	if (core->getCurrentObserver()->isTraveling()) // transition to elsewhere
 		return Vec4d(0., 0., 0., -1000.);
 
 	// Keep time in sync (method from line 592) to fix slow down of time when the moon is selected
+	const StelLocation loc=core->getCurrentLocation();
 	const double currentJD = core->getJDOfLastJDUpdate();
 	const qint64 millis = core->getMilliSecondsOfLastJDUpdate();
 	const double currentJDE = core->getJDE();
@@ -5338,6 +5355,10 @@ Vec4d Planet::getClosestRTSTime(const StelCore *core, const double altitude) con
 
 Vec4d Planet::getRTSTime(const StelCore *core, const double altitude) const
 {
+	// During transitions, return invalid results and save lots of time.
+	if (core->getCurrentObserver()->isTraveling())
+		return Vec4d(0., 0., 0., -1000.);
+
 	// Keep time in sync (method from line 592) to fix slow down of time when the moon is selected
 	const double currentJD = core->getJDOfLastJDUpdate();
 	const qint64 millis = core->getMilliSecondsOfLastJDUpdate();

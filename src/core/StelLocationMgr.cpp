@@ -17,11 +17,13 @@
  */
 
 #include "StelLocationMgr.hpp"
+#include "SolarSystem.hpp"
 #include "StelLocationMgr_p.hpp"
 
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelFileMgr.hpp"
+#include "StelModuleMgr.hpp"
 #include "StelUtils.hpp"
 #include "StelJsonParser.hpp"
 
@@ -491,6 +493,10 @@ StelLocationMgr::StelLocationMgr()
 #endif
 	// Init to Paris France because it's the center of the world.
 	lastResortLocation = locationForString(conf->value("init_location/last_location", "Paris, Western Europe").toString());
+
+	planetName="Earth";
+	planetSurfaceMap=QImage(":/graphicGui/miscWorldMap.jpg");
+	connect(StelApp::getInstance().getCore(), SIGNAL(locationChanged(StelLocation)), this, SLOT(changePlanetMapForLocation(StelLocation)));
 }
 
 StelLocationMgr::~StelLocationMgr()
@@ -1075,8 +1081,8 @@ void StelLocationMgr::changeLocationFromGPSQuery(const StelLocation &locin)
 	loc.name=QString("GPS %1%2 %3%4")
 		.arg(loc.getLatitude()<0?"S":"N").arg(qRound(abs(loc.getLatitude())))
 		.arg(loc.getLongitude()<0?"W":"E").arg(qRound(abs(loc.getLongitude())));
-
-	core->moveObserverTo(loc, 0.0, 0.0);
+	QColor color=getColorForCoordinates(loc.getLongitude(), loc.getLatitude());
+	core->moveObserverTo(loc, 0.0, 0.0, QString("ZeroColor(%1)").arg(Vec3f(color).toStr()));
 	if (nmeaHelper)
 	{
 		if (verbose)
@@ -1154,7 +1160,9 @@ void StelLocationMgr::changeLocationFromNetworkLookup()
 			// Ensure that ipTimeZone is a valid IANA timezone name!
 			QTimeZone ipTZ(ipTimeZone.toUtf8());
 			core->setCurrentTimeZone( !ipTZ.isValid() || ipTimeZone.isEmpty() ? "LMST" : ipTimeZone);
-			core->moveObserverTo(loc, 0.0, 0.0);
+			QColor color=getColorForCoordinates(loc.getLongitude(), loc.getLatitude());
+			core->moveObserverTo(loc, 0.0, 0.0, QString("ZeroColor(%1)").arg(Vec3f(color).toStr()));
+
 			QSettings* conf = StelApp::getInstance().getSettings();
 			conf->setValue("init_location/last_location", QString("%1, %2").arg(latitude).arg(longitude));
 		}
@@ -1162,7 +1170,7 @@ void StelLocationMgr::changeLocationFromNetworkLookup()
 		{
 			qDebug() << "Failure getting IP-based location: answer is in not acceptable format! Error: " << e.what()
 					<< "\nLet's use Paris, France as default location...";
-			core->moveObserverTo(getLastResortLocation(), 0.0, 0.0); // Answer is not in JSON format! A possible block by DNS server or firewall
+			core->moveObserverTo(getLastResortLocation(), 0.0, 0.0, "guereins"); // Answer is not in JSON format! A possible block by DNS server or firewall
 		}
 	}
 	else
@@ -1173,7 +1181,7 @@ void StelLocationMgr::changeLocationFromNetworkLookup()
 	networkReply->deleteLater();
 }
 
-LocationMap StelLocationMgr::pickLocationsNearby(const QString planetName, const float longitude, const float latitude, const float radiusDegrees)
+LocationMap StelLocationMgr::pickLocationsNearby(const QString &planetName, const float longitude, const float latitude, const float radiusDegrees)
 {
 	QMap<QString, StelLocation> results;
 	QMapIterator<QString, StelLocation> iter(locations);
@@ -1190,7 +1198,7 @@ LocationMap StelLocationMgr::pickLocationsNearby(const QString planetName, const
 	return results;
 }
 
-LocationMap StelLocationMgr::pickLocationsInRegion(const QString region)
+LocationMap StelLocationMgr::pickLocationsInRegion(const QString &region)
 {
 	QMap<QString, StelLocation> results;
 	QMapIterator<QString, StelLocation> iter(locations);
@@ -1324,13 +1332,13 @@ QStringList StelLocationMgr::getRegionNames(const QString& planet) const
 	return allregions;
 }
 
-QString StelLocationMgr::pickRegionFromCountryCode(const QString countryCode)
+QString StelLocationMgr::pickRegionFromCountryCode(const QString &countryCode)
 {
 	QMap<QString, QString>::ConstIterator i = countryCodeToRegionMap.find(countryCode);
 	return (i!=countryCodeToRegionMap.constEnd()) ? i.value() : QString();
 }
 
-QString StelLocationMgr::pickRegionFromCountry(const QString country)
+QString StelLocationMgr::pickRegionFromCountry(const QString &country)
 {
 	QMap<QString, QString>::ConstIterator i = countryNameToCodeMap.find(country);
 	QString code = (i!=countryNameToCodeMap.constEnd()) ? i.value() : QString();
@@ -1555,4 +1563,39 @@ QStringList StelLocationMgr::getAllTimezoneNames() const
 	ret.append("system_default");
 	ret.sort();
 	return ret;
+}
+
+// To be connected from StelCore::locationChanged(loc)
+void StelLocationMgr::changePlanetMapForLocation(StelLocation loc)
+{
+	if (loc.planetName==planetName)
+		return;
+
+	planetName=loc.planetName;
+	if (planetName=="Earth")
+		planetSurfaceMap=QImage(":/graphicGui/miscWorldMap.jpg");
+	else
+	{
+		SolarSystem *ssm=GETSTELMODULE(SolarSystem);
+		PlanetP p=ssm->searchByEnglishName(loc.planetName); // nullptr for "SpaceShip" transitions
+		QString mapName="textures/" + (p ? p->getTextMapName() : planetName) + ".png";
+
+		if (!planetSurfaceMap.load(StelFileMgr::findFile(mapName, StelFileMgr::File)))
+		{
+			// texture not found. Use a gray pixel.
+			planetSurfaceMap=QImage(16,16,QImage::Format_RGB32);
+			planetSurfaceMap.fill(QColor(64, 64, 64));
+		}
+	}
+}
+
+QColor StelLocationMgr::getColorForCoordinates(const double lng, const double lat) const
+{
+	QPoint imgPoint( (lng+180.)/ 360. * planetSurfaceMap.width(),
+			 (90.-lat) / 180. * planetSurfaceMap.height());
+
+	// Sample the map pixel color. Use a small box to avoid 1-pixel surprises.
+	QImage sampledPix=planetSurfaceMap.copy(QRect(imgPoint-QPoint(1,1), QSize(2,2))).scaled(1,1);
+	return sampledPix.pixelColor(0,0);
+
 }

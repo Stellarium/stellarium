@@ -59,7 +59,8 @@ Time TimeEventSender::constructMessage()
 
 LocationEventSender::LocationEventSender()
 {
-	connect(core,SIGNAL(targetLocationChanged(StelLocation)), this, SLOT(reactToStellariumEvent()));
+	//connect(core,&StelCore::targetLocationChanged, this, &LocationEventSender::reactToStellariumEvent);
+	connect(core,&StelCore::locationChanged, this, &LocationEventSender::reactToStellariumEvent);
 }
 
 Location LocationEventSender::constructMessage()
