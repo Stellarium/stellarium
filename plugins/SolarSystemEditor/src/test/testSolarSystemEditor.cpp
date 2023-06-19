@@ -45,7 +45,6 @@ void TestSolarSystemEditor::testUnpackingAsteroids()
 
 void TestSolarSystemEditor::testUnpackingAsteroidsHTML()
 {
-
 	QCOMPARE(MinorPlanet::renderIAUDesignationinHtml(SolarSystemEditor::unpackMinorPlanetIAUDesignation("J95X01L")), QString("1995 XL<sub>1</sub>"));
 	QCOMPARE(MinorPlanet::renderIAUDesignationinHtml(SolarSystemEditor::unpackMinorPlanetIAUDesignation("J95F13B")), QString("1995 FB<sub>13</sub>"));
 	QCOMPARE(MinorPlanet::renderIAUDesignationinHtml(SolarSystemEditor::unpackMinorPlanetIAUDesignation("J98SA8Q")), QString("1998 SQ<sub>108</sub>"));

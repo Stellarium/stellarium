@@ -1597,5 +1597,4 @@ QColor StelLocationMgr::getColorForCoordinates(const double lng, const double la
 	// Sample the map pixel color. Use a small box to avoid 1-pixel surprises.
 	QImage sampledPix=planetSurfaceMap.copy(QRect(imgPoint-QPoint(1,1), QSize(2,2))).scaled(1,1);
 	return sampledPix.pixelColor(0,0);
-
 }
