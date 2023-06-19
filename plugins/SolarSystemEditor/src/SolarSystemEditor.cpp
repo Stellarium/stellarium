@@ -1284,6 +1284,8 @@ bool SolarSystemEditor::appendToSolarSystemConfigurationFile(QList<SsoElements> 
 	delete solarSystemSettings;
 	solarSystemSettings = Q_NULLPTR;
 
+	const int width = -30;
+
 	//Write to file. (Handle as regular text file, not QSettings.)
 	//TODO: The usual validation
 	qDebug() << "Appending to file...";
@@ -1310,8 +1312,48 @@ bool SolarSystemEditor::appendToSolarSystemConfigurationFile(QList<SsoElements> 
 			output << StelUtils::getEndLineChar() << QString("[%1]").arg(sectionName) << StelUtils::getEndLineChar();
 			for (const auto &key : object.keys())
 			{
-				output << QString("%1 = %2").arg(key, object.value(key).toString()) << StelUtils::getEndLineChar();
+				// formatting strings
+				output << QString("%1 = %2").arg(key, width).arg(object.value(key).toString()) << StelUtils::getEndLineChar();
 			}
+
+			const int mpn = object.value("minor_planet_number").toInt();
+			if (mpn==0)
+			{
+				// this is a minor planet
+				DiscoveryCircumstances dc = numberedMinorPlanets.value(mpn, DiscoveryCircumstances("",""));
+				if (!dc.first.isEmpty())
+				{
+					output << QString("%1 = %2").arg("discovery", width).arg(dc.first) << StelUtils::getEndLineChar();
+					output << QString("%1 = %2").arg("discoverer", width).arg(dc.second) << StelUtils::getEndLineChar();
+				}
+			}
+			else
+			{
+				// this is a comet
+				QString ckey = name.split("/").at(0).trimmed();
+				CometData comet;
+				if (cometsData.contains(ckey))
+				{
+					// standard designation [1P]
+					comet = cometsData.value(ckey);
+					// add IAU designation in addition to the old-style designation
+					if (!comet.date_code.isEmpty())
+						output << QString("%1 = %2").arg("iau_designation", width).arg(comet.date_code) << StelUtils::getEndLineChar();
+				}
+				else
+					comet = cometsData.value(name.split("(").at(0).trimmed()); // IAU designation [P/1682 Q1]
+
+				if (!comet.perihelion_code.isEmpty())
+					output << QString("%1 = %2").arg("perihelion_code", width).arg(comet.perihelion_code) << StelUtils::getEndLineChar();
+				if (!comet.discovery_code.isEmpty())
+					output << QString("%1 = %2").arg("discovery_code", width).arg(comet.discovery_code) << StelUtils::getEndLineChar();
+				if (!comet.discovery_date.isEmpty())
+					output << QString("%1 = %2").arg("discovery", width).arg(comet.discovery_date) << StelUtils::getEndLineChar();
+				if (!comet.discoverer.isEmpty())
+					output << QString("%1 = %2").arg("discoverer", width).arg(comet.discoverer) << StelUtils::getEndLineChar();
+
+			}
+
 			output.flush();
 			qDebug() << "Appended successfully" << sectionName;
 			appendedAtLeastOne = true;
