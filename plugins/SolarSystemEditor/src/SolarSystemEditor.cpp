@@ -1285,6 +1285,7 @@ bool SolarSystemEditor::appendToSolarSystemConfigurationFile(QList<SsoElements> 
 	solarSystemSettings = Q_NULLPTR;
 
 	const int width = -30;
+	QList<DiscoveryCircumstances> extraData;
 
 	//Write to file. (Handle as regular text file, not QSettings.)
 	//TODO: The usual validation
@@ -1316,6 +1317,7 @@ bool SolarSystemEditor::appendToSolarSystemConfigurationFile(QList<SsoElements> 
 				output << QString("%1 = %2").arg(key, width).arg(object.value(key).toString()) << StelUtils::getEndLineChar();
 			}
 
+			extraData.clear();
 			const int mpn = object.value("minor_planet_number").toInt();
 			if (mpn==0)
 			{
@@ -1323,8 +1325,8 @@ bool SolarSystemEditor::appendToSolarSystemConfigurationFile(QList<SsoElements> 
 				DiscoveryCircumstances dc = numberedMinorPlanets.value(mpn, DiscoveryCircumstances("",""));
 				if (!dc.first.isEmpty())
 				{
-					output << QString("%1 = %2").arg("discovery", width).arg(dc.first) << StelUtils::getEndLineChar();
-					output << QString("%1 = %2").arg("discoverer", width).arg(dc.second) << StelUtils::getEndLineChar();
+					extraData.append(DiscoveryCircumstances("discovery", dc.first));
+					extraData.append(DiscoveryCircumstances("discoverer", dc.second));
 				}
 			}
 			else
@@ -1338,20 +1340,24 @@ bool SolarSystemEditor::appendToSolarSystemConfigurationFile(QList<SsoElements> 
 					comet = cometsData.value(ckey);
 					// add IAU designation in addition to the old-style designation
 					if (!comet.date_code.isEmpty())
-						output << QString("%1 = %2").arg("iau_designation", width).arg(comet.date_code) << StelUtils::getEndLineChar();
+						extraData.append(DiscoveryCircumstances("iau_designation", comet.date_code));
 				}
 				else
 					comet = cometsData.value(name.split("(").at(0).trimmed()); // IAU designation [P/1682 Q1]
 
 				if (!comet.perihelion_code.isEmpty())
-					output << QString("%1 = %2").arg("perihelion_code", width).arg(comet.perihelion_code) << StelUtils::getEndLineChar();
+					extraData.append(DiscoveryCircumstances("perihelion_code", comet.perihelion_code));
 				if (!comet.discovery_code.isEmpty())
-					output << QString("%1 = %2").arg("discovery_code", width).arg(comet.discovery_code) << StelUtils::getEndLineChar();
+					extraData.append(DiscoveryCircumstances("discovery_code", comet.discovery_code));
 				if (!comet.discovery_date.isEmpty())
-					output << QString("%1 = %2").arg("discovery", width).arg(comet.discovery_date) << StelUtils::getEndLineChar();
+					extraData.append(DiscoveryCircumstances("discovery", comet.discovery_date));
 				if (!comet.discoverer.isEmpty())
-					output << QString("%1 = %2").arg("discoverer", width).arg(comet.discoverer) << StelUtils::getEndLineChar();
-
+					extraData.append(DiscoveryCircumstances("discoverer", comet.discoverer));
+			}
+			for (const auto &ed : extraData)
+			{
+				// formatting strings
+				output << QString("%1 = %2").arg(ed.first, width).arg(ed.second) << StelUtils::getEndLineChar();
 			}
 
 			output.flush();
