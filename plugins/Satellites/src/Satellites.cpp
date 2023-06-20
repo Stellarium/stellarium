@@ -655,8 +655,7 @@ void Satellites::restoreDefaultTleSources()
 	}
 	// Other sources and supplemental data from Celestrack
 	urls << "1,https://celestrak.org/NORAD/elements/supplemental/starlink.txt"
-	     << "https://www.amsat.org/amsat/ftp/keps/current/nasabare.txt"
-	     << "https://www.prismnet.com/~mmccants/tles/classfd.zip";
+	     << "https://www.amsat.org/amsat/ftp/keps/current/nasabare.txt";
 
 	saveTleSources(urls);
 }
