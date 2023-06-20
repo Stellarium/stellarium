@@ -1284,6 +1284,9 @@ bool SolarSystemEditor::appendToSolarSystemConfigurationFile(QList<SsoElements> 
 	delete solarSystemSettings;
 	solarSystemSettings = Q_NULLPTR;
 
+	const int width = -30;
+	QList<DiscoveryCircumstances> extraData;
+
 	//Write to file. (Handle as regular text file, not QSettings.)
 	//TODO: The usual validation
 	qDebug() << "Appending to file...";
@@ -1310,8 +1313,53 @@ bool SolarSystemEditor::appendToSolarSystemConfigurationFile(QList<SsoElements> 
 			output << StelUtils::getEndLineChar() << QString("[%1]").arg(sectionName) << StelUtils::getEndLineChar();
 			for (const auto &key : object.keys())
 			{
-				output << QString("%1 = %2").arg(key, object.value(key).toString()) << StelUtils::getEndLineChar();
+				// formatting strings
+				output << QString("%1 = %2").arg(key, width).arg(object.value(key).toString()) << StelUtils::getEndLineChar();
 			}
+
+			extraData.clear();
+			const int mpn = object.value("minor_planet_number").toInt();
+			if (mpn==0)
+			{
+				// this is a minor planet
+				DiscoveryCircumstances dc = numberedMinorPlanets.value(mpn, DiscoveryCircumstances("",""));
+				if (!dc.first.isEmpty())
+				{
+					extraData.append(DiscoveryCircumstances("discovery", dc.first));
+					extraData.append(DiscoveryCircumstances("discoverer", dc.second));
+				}
+			}
+			else
+			{
+				// this is a comet
+				QString ckey = name.split("/").at(0).trimmed();
+				CometData comet;
+				if (cometsData.contains(ckey))
+				{
+					// standard designation [1P]
+					comet = cometsData.value(ckey);
+					// add IAU designation in addition to the old-style designation
+					if (!comet.date_code.isEmpty())
+						extraData.append(DiscoveryCircumstances("iau_designation", comet.date_code));
+				}
+				else
+					comet = cometsData.value(name.split("(").at(0).trimmed()); // IAU designation [P/1682 Q1]
+
+				if (!comet.perihelion_code.isEmpty())
+					extraData.append(DiscoveryCircumstances("perihelion_code", comet.perihelion_code));
+				if (!comet.discovery_code.isEmpty())
+					extraData.append(DiscoveryCircumstances("discovery_code", comet.discovery_code));
+				if (!comet.discovery_date.isEmpty())
+					extraData.append(DiscoveryCircumstances("discovery", comet.discovery_date));
+				if (!comet.discoverer.isEmpty())
+					extraData.append(DiscoveryCircumstances("discoverer", comet.discoverer));
+			}
+			for (const auto &ed : extraData)
+			{
+				// formatting strings
+				output << QString("%1 = %2").arg(ed.first, width).arg(ed.second) << StelUtils::getEndLineChar();
+			}
+
 			output.flush();
 			qDebug() << "Appended successfully" << sectionName;
 			appendedAtLeastOne = true;
