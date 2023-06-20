@@ -61,6 +61,7 @@ MpcImportWindow::MpcImportWindow()
 	, downloadProgressBar(Q_NULLPTR)
 	, queryProgressBar(Q_NULLPTR)
 	, countdown(0)
+	, filterProxyModel(nullptr)
 {
 	ui = new Ui_mpcImportWindow();
 	ssoManager = GETSTELMODULE(SolarSystemEditor);
@@ -127,7 +128,7 @@ void MpcImportWindow::createDialogContent()
 	//connect(ui->lineEditQuery,         SIGNAL(editingFinished()),   this, SLOT(sendQuery()));
 	connect(countdownTimer,              SIGNAL(timeout()),           this, SLOT(updateCountdown()));
 
-	QSortFilterProxyModel * filterProxyModel = new QSortFilterProxyModel(this);
+	filterProxyModel = new QSortFilterProxyModel(this);
 	filterProxyModel->setSourceModel(candidateObjectsModel);
 	filterProxyModel->setFilterCaseSensitivity(Qt::CaseInsensitive);
 	ui->listViewObjects->setModel(filterProxyModel);
@@ -506,36 +507,30 @@ void MpcImportWindow::switchImportType(bool)
 	ui->groupBoxSource->setVisible(true);
 }
 
-void MpcImportWindow::markAll()
+void MpcImportWindow::setCheckState(Qt::CheckState state)
 {
-	int rowCount = candidateObjectsModel->rowCount();
+	int rowCount = filterProxyModel->rowCount();
 	if (rowCount < 1)
 		return;
 
 	for (int row = 0; row < rowCount; row++)
 	{
-		QStandardItem * item = candidateObjectsModel->item(row);
+		QModelIndex proxyIndex = filterProxyModel->index(row, 0);
+		QModelIndex index = filterProxyModel->mapToSource(proxyIndex);
+		QStandardItem * item = candidateObjectsModel->itemFromIndex(index);
 		if (item)
-		{
-			item->setCheckState(Qt::Checked);
-		}
+			item->setCheckState(state);
 	}
+}
+
+void MpcImportWindow::markAll()
+{
+	setCheckState(Qt::Checked);
 }
 
 void MpcImportWindow::unmarkAll()
 {
-	int rowCount = candidateObjectsModel->rowCount();
-	if (rowCount < 1)
-		return;
-
-	for (int row = 0; row < rowCount; row++)
-	{
-		QStandardItem * item = candidateObjectsModel->item(row);
-		if (item)
-		{
-			item->setCheckState(Qt::Unchecked);
-		}
-	}
+	setCheckState(Qt::Unchecked);
 }
 
 void MpcImportWindow::updateDownloadProgress(qint64 bytesReceived, qint64 bytesTotal)
