@@ -25,6 +25,7 @@
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QStandardItemModel>
+#include <QSortFilterProxyModel>
 #include "StelDialog.hpp"
 
 #include "SolarSystemEditor.hpp"
@@ -98,6 +99,7 @@ private:
 	QList<SsoElements> candidatesForAddition;
 	QList<SsoElements> candidatesForUpdate;
 	QStandardItemModel * candidateObjectsModel;
+	QSortFilterProxyModel * filterProxyModel;
 
 	ImportType importType;
 	
@@ -137,6 +139,11 @@ private:
 	QTimer * countdownTimer;
 	void startCountdown();
 	void resetCountdown();
+
+	//! Set the check state of the currently displayed items.
+	//! Note that depending on the search/filter string, these may be
+	//! not all available items.
+	void setCheckState(Qt::CheckState state);
 
 protected:
 	virtual void createDialogContent() Q_DECL_OVERRIDE;
