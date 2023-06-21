@@ -647,6 +647,21 @@ void Comet::computeParabola(const float parameter, const float radius, const flo
 	createTailTextureCoords=false;
 }
 
+void Comet::setIAUDesignation(const QString& designation)
+{
+	static const QRegularExpression periodicDesignationPattern("^(\\d+)P/");
+	static const QRegularExpression periodicCometPattern("^P/([\\w\\s]+)$");
+	QRegularExpressionMatch matchPeriodicNumber = periodicDesignationPattern.match(englishName);
+	QRegularExpressionMatch matchPeriodicComet  = periodicCometPattern.match(designation);
+	if (matchPeriodicNumber.hasMatch() && matchPeriodicComet.hasMatch())
+	{
+		// combined designation for numbered periodic comets - 1P/1982 U1 or 146P/1984 W1
+		iauDesignation = QString("%1P/%2").arg(matchPeriodicNumber.captured(1), matchPeriodicComet.captured(1));
+	}
+	else
+		iauDesignation = designation;
+}
+
 void Comet::setExtraDesignations(QStringList codes)
 {
 	extraDesignations = codes;
@@ -660,7 +675,7 @@ QString Comet::renderDiscoveryDesignationHtml(const QString &plainTextName)
 {
 	static const QRegularExpression discoveryDesignationPattern("^(\\d{4}[a-z]{1})(\\d+)$");
 	QRegularExpressionMatch match=discoveryDesignationPattern.match(plainTextName);
-	if (plainTextName.indexOf(discoveryDesignationPattern) == 0)
+	if (match.hasMatch())
 	{
 		QString main = match.captured(1);
 		QString suffix = match.captured(2);
