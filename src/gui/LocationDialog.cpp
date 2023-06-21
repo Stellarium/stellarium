@@ -200,7 +200,7 @@ void LocationDialog::createDialogContent()
 	// In case this dialog is called up before going to an "observer", we need to update a few UI elements:
 	updateFromProgram(core->getCurrentLocation());
 	// This connection only updates the dialog with new coordinates, not the landscape
-	connect(core, &StelCore::targetLocationChanged, this, [=](const StelLocation &loc, const QString &id){updateFromProgram(loc);}); // Fill with actually selected location!
+	connect(core, &StelCore::targetLocationChanged, this, [=](const StelLocation &loc, const QString &id){ updateFromProgram(loc); Q_UNUSED(id); }); // Fill with actually selected location!
 
 	connect(ui->pushButtonReturnToDefault, &QPushButton::clicked, this, [=]{
 		static StelMovementMgr *mMgr=GETSTELMODULE(StelMovementMgr);
