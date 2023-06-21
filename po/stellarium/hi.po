@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2023-06-18 17:19+0700\n"
+"POT-Creation-Date: 2023-06-19 23:47+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: राजಐயர், 2023\n"
 "Language-Team: Hindi (https://app.transifex.com/stellarium/teams/80998/hi/)\n"
@@ -7577,7 +7577,7 @@ msgstr "सूर्य से अधिकतम दूरी"
 #: src/gui/AstroCalcDialog.cpp:6920 src/gui/AstroCalcDialog.cpp:7127
 msgctxt "passage of a celestial body in front of another"
 msgid "Transit"
-msgstr ""
+msgstr "पारगमन"
 
 #: src/gui/AstroCalcDialog.cpp:6923 src/gui/AstroCalcDialog.cpp:7036
 #: src/gui/AstroCalcDialog.cpp:7130
@@ -11810,11 +11810,11 @@ msgstr "ऊँचाई : "
 
 #: src/ui_locationDialogGui.h:517
 msgid "Automatic change of landscape when planet or location is changed"
-msgstr ""
+msgstr "भूदृश्य का स्वचलित परिवर्तन जब ग्रह अथवा स्थान परिवर्तित हो जाए"
 
 #: src/ui_locationDialogGui.h:519
 msgid "Auto-select landscapes"
-msgstr ""
+msgstr "भूदृश्यों का स्वचलित चयन करें"
 
 #: src/ui_locationDialogGui.h:520
 msgid "New Location"
@@ -11842,11 +11842,11 @@ msgstr "दिन प्रकाश बचाव समय सक्षम क�
 
 #: src/ui_locationDialogGui.h:531
 msgid "Auto-enable atmosphere when planet is changed"
-msgstr ""
+msgstr "वायुमण्डल को स्वचलितः सक्रिय करें जब ग्रह परिवर्तित किया जाए"
 
 #: src/ui_locationDialogGui.h:533
 msgid "Auto-enable atmosphere"
-msgstr ""
+msgstr "वायुमण्डल को स्वचलितः सक्रिय करें"
 
 #: src/ui_searchDialogGui.h:833
 msgid "Find Object"
@@ -26061,7 +26061,7 @@ msgstr "उपलग्न दिखाता है समय का समी�
 
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:91
 msgid "Show value of the equation of time"
-msgstr ""
+msgstr "समय का समीकरण का मूल्य दिखाएँ"
 
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:85
 msgid "Equation of Time plug-in"
@@ -27707,19 +27707,19 @@ msgstr "दिखाएँ रेखाजाल निर्देशांक 
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:534
 msgid "Show coordinates in the top right screen corner"
-msgstr ""
+msgstr "निर्देशांकों को पटल के ऊपर दाएँ के अस्र में दिखाएँ"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:536
 msgid "Top Right"
-msgstr ""
+msgstr "ऊपर दाएँ"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:538
 msgid "Show coordinates centered in the bottom of the screen"
-msgstr ""
+msgstr "निर्देशांकों को पटल के नीचे मध्यतः दिखाएँ"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:540
 msgid "Bottom Center"
-msgstr ""
+msgstr "नीचे मध्य"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:542
 msgid ""
@@ -27740,10 +27740,12 @@ msgid ""
 "Do no use the configured direction and field of view. This may be helpful in"
 " a planetarium environment."
 msgstr ""
+"समाकृत दिशा तथा दृश्यक्षेत्र का प्रयोग ना करें। सम्भवतः यह सहायक होगा "
+"ग्रहालय पर्यावरण में।"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:548
 msgid "Ignore initial view settings"
-msgstr ""
+msgstr "प्राथमिक दृश्य प्रबन्धों की उपेक्षा करें"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:549
 msgid "Visual options"
