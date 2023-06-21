@@ -538,7 +538,8 @@ ADD_PLUGIN(Satellites 1)
 ADD_PLUGIN(Scenery3d 1)
 ADD_PLUGIN(SolarSystemEditor 1)
 ADD_PLUGIN(Supernovae 1)
-ADD_PLUGIN(TextUserInterface 1)
+# Candidate to removing as an archaic plugin
+ADD_PLUGIN(TextUserInterface 0)
 ADD_PLUGIN(TelescopeControl 1)
 ADD_PLUGIN(Vts 0)
 
