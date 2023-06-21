@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2023-06-18 17:19+0700\n"
+"POT-Creation-Date: 2023-06-19 23:47+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Lubomir Hambalek <lubomir.hambalek@gmail.com>, 2023\n"
 "Language-Team: Slovak (https://app.transifex.com/stellarium/teams/80998/sk/)\n"
@@ -2395,6 +2395,7 @@ msgstr "Heliocentrická rýchlosť"
 #, qt-format
 msgid "NOTE: elements for epoch %1 probably outdated. Consider updating data!"
 msgstr ""
+"POZN.: elementy pre epochu %1 sú asi zastaralé. Zvážte aktualizáciu dát!"
 
 #: src/core/modules/Planet.cpp:788
 msgid "with rings"
@@ -2626,7 +2627,7 @@ msgstr "Albedo"
 #: src/core/modules/Planet.cpp:1569 src/core/modules/MinorPlanet.cpp:211
 #: src/core/modules/Comet.cpp:240
 msgid "Discovered"
-msgstr ""
+msgstr "Objavená"
 
 #. TRANSLATORS: Tholen spectral taxonomic classification of asteroids
 #: src/core/modules/MinorPlanet.cpp:201
@@ -7557,7 +7558,7 @@ msgstr "Afélium"
 #: src/gui/AstroCalcDialog.cpp:6920 src/gui/AstroCalcDialog.cpp:7127
 msgctxt "passage of a celestial body in front of another"
 msgid "Transit"
-msgstr ""
+msgstr "Prechod"
 
 #: src/gui/AstroCalcDialog.cpp:6923 src/gui/AstroCalcDialog.cpp:7036
 #: src/gui/AstroCalcDialog.cpp:7130
@@ -11778,11 +11779,11 @@ msgstr "Nadmorská výška:"
 
 #: src/ui_locationDialogGui.h:517
 msgid "Automatic change of landscape when planet or location is changed"
-msgstr ""
+msgstr "Automatická zmena terénu pri zmene planéty alebo polohy"
 
 #: src/ui_locationDialogGui.h:519
 msgid "Auto-select landscapes"
-msgstr ""
+msgstr "Automatický výber terénu"
 
 #: src/ui_locationDialogGui.h:520
 msgid "New Location"
@@ -11810,11 +11811,11 @@ msgstr "Povoliť letný čas"
 
 #: src/ui_locationDialogGui.h:531
 msgid "Auto-enable atmosphere when planet is changed"
-msgstr ""
+msgstr "Automatické zapnutie atmosféry pri zmene planéty"
 
 #: src/ui_locationDialogGui.h:533
 msgid "Auto-enable atmosphere"
-msgstr ""
+msgstr "Automaticky zapínať atmosféru"
 
 #: src/ui_searchDialogGui.h:833
 msgid "Find Object"
@@ -21093,6 +21094,8 @@ msgid ""
 "Both comets and asteroids can be identified with their number, name (in "
 "English) or IAU designation."
 msgstr ""
+"Kométy ako aj planétky môžu byť identifikované podľa ich čísla, názvu (v "
+"angličtine) alebo označenia IAU."
 
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:159
 #, qt-format
@@ -25892,7 +25895,7 @@ msgstr "Tento modul zobrazuje hodnotu časovej rovnice."
 
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:91
 msgid "Show value of the equation of time"
-msgstr ""
+msgstr "Zobraziť hodnotu časovej rovnice"
 
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:85
 msgid "Equation of Time plug-in"
@@ -27523,19 +27526,19 @@ msgstr "Zobraziť súradnice mriežky (%1)"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:534
 msgid "Show coordinates in the top right screen corner"
-msgstr ""
+msgstr "Zobraziť súradnice v pravom hornom rohu obrazovky"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:536
 msgid "Top Right"
-msgstr ""
+msgstr "Vpravo hore"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:538
 msgid "Show coordinates centered in the bottom of the screen"
-msgstr ""
+msgstr "Zobraziť súradnice naspodku v strede obrazovky"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:540
 msgid "Bottom Center"
-msgstr ""
+msgstr "Vstrede dole"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:542
 msgid ""
@@ -27556,10 +27559,12 @@ msgid ""
 "Do no use the configured direction and field of view. This may be helpful in"
 " a planetarium environment."
 msgstr ""
+"Nepoužiť nastavený smer a zorné pole. To môže byť užitočné v prostredí "
+"planetária."
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:548
 msgid "Ignore initial view settings"
-msgstr ""
+msgstr "Ignorovať prvotné nastavenie pohľadu"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:549
 msgid "Visual options"
