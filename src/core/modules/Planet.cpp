@@ -602,9 +602,16 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 	{
 		if (getPlanetType()==isComet)
 		{
-			const QString cometType = (static_cast<KeplerOrbit*>(orbitPtr)->getEccentricity() < 1.0) ?
-						qc_("periodic", "type of comet") :
-						qc_("non-periodic", "type of comet");
+			QString cometType = qc_("non-periodic", "type of comet");
+			if (static_cast<KeplerOrbit*>(orbitPtr)->getEccentricity() < 1.0)
+			{
+				const double siderealPeriod = getSiderealPeriod(); // days required for revolution around parent.
+				if (siderealPeriod>0. && siderealPeriod<73050.) // period limit: 200a (200 years = 73050 days)
+					cometType = qc_("short-period", "type of comet");
+				else
+					cometType = qc_("periodic", "type of comet");
+
+			}
 			oss << QString("%1: <b>%2</b> (%3)<br/>").arg(q_("Type"), getObjectTypeI18n(), cometType);
 		}
 		else		
