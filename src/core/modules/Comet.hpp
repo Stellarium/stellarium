@@ -88,7 +88,7 @@ public:
 	void setAbsoluteMagnitudeAndSlope(const float magnitude, const float slope);
 
 	//! sets an IAU designation.
-	void setIAUDesignation(const QString& designation) { iauDesignation = designation; }
+	void setIAUDesignation(const QString& designation);
 
 	//! sets a date, discovery and perihelion codes of the comet.
 	void setExtraDesignations(QStringList codes);
