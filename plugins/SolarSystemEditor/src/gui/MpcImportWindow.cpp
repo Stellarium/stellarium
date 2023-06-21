@@ -55,13 +55,13 @@
 
 MpcImportWindow::MpcImportWindow()
 	: StelDialog("SolarSystemEditorMPCimport")
+	, filterProxyModel(nullptr)
 	, importType(ImportType())
 	, downloadReply(Q_NULLPTR)
 	, queryReply(Q_NULLPTR)
 	, downloadProgressBar(Q_NULLPTR)
 	, queryProgressBar(Q_NULLPTR)
 	, countdown(0)
-	, filterProxyModel(nullptr)
 {
 	ui = new Ui_mpcImportWindow();
 	ssoManager = GETSTELMODULE(SolarSystemEditor);
