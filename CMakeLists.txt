@@ -279,8 +279,8 @@ ADD_DEFINITIONS(-D_USE_MATH_DEFINES)
 
 # flags shared for gcc-like compilers (also MinGW/Clang)
 # Qt 5.7 requires C++11 support
-SET(STEL_GCC_C_FLAGS "-Wall -Wextra -Wno-unused-parameter -Wno-unknown-pragmas -Wno-string-plus-int")
-SET(STEL_GCC_CXX_FLAGS "-Wall -Wextra -Wno-unused-parameter -Wno-unknown-pragmas -Wno-string-plus-int")
+SET(STEL_GCC_C_FLAGS "-Wall -Wextra -Wno-unused-parameter -Wno-unknown-pragmas")
+SET(STEL_GCC_CXX_FLAGS "-Wall -Wextra -Wno-unused-parameter -Wno-unknown-pragmas")
 # Intel C/C++ compilers do not have an option -Wno-unused-results
 IF(NOT "${CMAKE_CXX_COMPILER_ID}" MATCHES "Intel")
      SET(STEL_GCC_C_FLAGS "${STEL_GCC_C_FLAGS} -Wno-unused-result")
@@ -354,8 +354,8 @@ IF("${CMAKE_CXX_COMPILER_ID}" MATCHES "Clang")
           SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-unused-const-variable -Wno-unused-result")
      ENDIF()
      IF(APPLE)
-          SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fno-common -Wall -Wextra -Wno-unused-parameter")
-          SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-common -Wall -Wextra -Wno-unknown-warning-option")
+	  SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fno-common -Wall -Wextra -Wno-unused-parameter -Wno-string-plus-int")
+	  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-common -Wall -Wextra -Wno-unknown-warning-option -Wno-string-plus-int")
      ENDIF()
 ENDIF()
 
