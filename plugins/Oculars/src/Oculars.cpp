@@ -1556,7 +1556,7 @@ QRect Oculars::drawSensorFrameAndOverlay(const StelProjectorP& projector, const 
 
 	int minX = INT_MAX, maxX = INT_MIN, minY = INT_MAX, maxY = INT_MIN;
 	sPainter.enableClientStates(true);
-	for(const auto [cropFactorX, cropFactorY] : cropFactors)
+	for(const auto& [cropFactorX, cropFactorY] : cropFactors)
 	{
 		const float cropTanFovX = cropFactorX * tanFovX;
 		const float cropTanFovY = cropFactorY * tanFovY;
