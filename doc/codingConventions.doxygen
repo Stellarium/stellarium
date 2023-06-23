@@ -59,8 +59,7 @@ Settings for <a href="http://doc.qt.io/qtcreator/index.html">QtCreator</a> IDE y
 #define MIN_WIDTH 3
 static const QString VERSION = "0.10.1";
  @endcode
- - Indentation should be done with tabs, not spaces. This allows developers
- to use their favorite indent size without changing the code. 
+ - Indentation should be done with tabs, not spaces. Tab size is 8 characters.
  - When wrapping lines from long function calls, where the wrapped line does not start at the same level of indentation as the start of the function call, tab up to the start of the function call, and then use spaces to the opening parenthesis.
  @verbatim
  [--tab-][--tab-][--tab-]someFunction(param, ...
