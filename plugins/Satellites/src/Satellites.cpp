@@ -655,7 +655,8 @@ void Satellites::restoreDefaultTleSources()
 	}
 	// Other sources and supplemental data from Celestrack
 	urls << "1,https://celestrak.org/NORAD/elements/supplemental/starlink.txt"
-	     << "https://www.amsat.org/amsat/ftp/keps/current/nasabare.txt";
+	     << "https://www.amsat.org/amsat/ftp/keps/current/nasabare.txt"
+	     << "https://mmccants.org/tles/classfd.zip";
 
 	saveTleSources(urls);
 }
@@ -2692,8 +2693,8 @@ QString Satellites::getSatIdFromLine2(const QString& line)
 void Satellites::loadExtraData()
 {
 	// Description of file and some additional information you can find here:
-	// 1) http://www.prismnet.com/~mmccants/tles/mccdesc.html
-	// 2) http://www.prismnet.com/~mmccants/tles/intrmagdef.html
+	// 1) https://mmccants.org/tles/mccdesc.html
+	// 2) https://mmccants.org/tles/intrmagdef.html
 	QFile qsmFile(":/satellites/qs.mag");	
 	qsMagList.clear();	
 	if (qsmFile.open(QFile::ReadOnly))
