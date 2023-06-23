@@ -835,7 +835,7 @@ void SatellitesDialog::populateAboutPage()
 	html += "<p>" + q_("Positions are calculated using the SGP4 & SDP4 methods, using NORAD TLE data as the input.") + " ";
 	html +=               q_("The orbital calculation code is written by Jose Luis Canales according to the revised Spacetrack Report #3 (including Spacetrack Report #6)") + " <a href=\"https://celestrak.org/publications/AIAA/2006-6753\">[*]</a>. ";
 	html +=               q_("To calculate an approximate visual magnitude of satellites we use data from Mike McCants' database (with permissions) of the radar cross-section (RCS) and standard magnitudes.") + " ";
-	html +=               q_("Formula to calculate an approximate visual magnitude of satellites from the standard magnitude may be found at Mike McCants website") + " <a href=\"https://www.prismnet.com/~mmccants/tles/mccdesc.html\">[**]</a>. ";
+	html +=               q_("Formula to calculate an approximate visual magnitude of satellites from the standard magnitude may be found at Mike McCants website") + " <a href=\"https://mmccants.org/tles/mccdesc.html\">[**]</a>. ";
 	html +=               q_("We use a spherical shape of satellite to calculate an approximate visual magnitude from RCS values.") + " ";
 	html +=               q_("For modelling Starlink magnitudes we use Anthony Mallama's formula") + " <a href=\"http://www.satobs.org/seesat/Aug-2020/0079.html\">[***]</a>.</p>";
 

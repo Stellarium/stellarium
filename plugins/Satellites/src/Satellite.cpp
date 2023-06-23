@@ -644,7 +644,7 @@ float Satellite::getVMagnitude(const StelCore* core) const
 			// fracil = fraction of satellite illuminated,
 			//	    [ 0 <= fracil <= 1 ]
 			//
-			// Original description: http://www.prismnet.com/~mmccants/tles/mccdesc.html
+			// Original description: http://mmccants.org/tles/mccdesc.html
 
 			double fracil = qMax(0.000001, static_cast<double>(calculateIlluminatedFraction()));
 
