@@ -229,15 +229,6 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	nextTelescopeButton = new StelButton(telescopeControls, nextArrow, nextArrowOff, QPixmap(), "actionToggle_Oculars_Next_Telescope");
 	nextTelescopeButton->setToolTip(q_("Next telescope"));
 
-	//connect(prevOcularButton,    SIGNAL(triggered()), ocularsPlugin, SLOT(decrementOcularIndex()));
-	//connect(nextOcularButton,    SIGNAL(triggered()), ocularsPlugin, SLOT(incrementOcularIndex()));
-	//connect(prevTelescopeButton, SIGNAL(triggered()), ocularsPlugin, SLOT(decrementTelescopeIndex()));
-	//connect(nextTelescopeButton, SIGNAL(triggered()), ocularsPlugin, SLOT(incrementTelescopeIndex()));
-	//connect(prevCcdButton,       SIGNAL(triggered()), ocularsPlugin, SLOT(decrementCCDIndex()));
-	//connect(nextCcdButton,       SIGNAL(triggered()), ocularsPlugin, SLOT(incrementCCDIndex()));
-	//connect(nextLensButton,      SIGNAL(triggered()), ocularsPlugin, SLOT(incrementLensIndex()));
-	//connect(prevLensButton,      SIGNAL(triggered()), ocularsPlugin, SLOT(decrementLensIndex()));
-
 	QColor cOn(255, 255, 255);
 	QColor cOff(102, 102, 102);
 	QColor cHover(162, 162, 162);
@@ -331,46 +322,6 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	rotatePrismPlus90Button = new StelButton(ccdControls, pOn, pOff, pHover, "actionToggle_Oculars_Rotate_Prism_90_Clockwise", true);
 	rotatePrismPlus90Button->setToolTip(q_("Rotate the prism 90 degrees clockwise"));
 
-	//connect(rotateCcdMinus90Button, &StelButton::triggered, this, [=](){ocularsPlugin->rotateCCD(-90);});
-	//connect(rotateCcdMinus15Button, &StelButton::triggered, this, [=](){ocularsPlugin->rotateCCD(-15);});
-	//connect(rotateCcdMinus5Button,  &StelButton::triggered, this, [=](){ocularsPlugin->rotateCCD(-5);});
-	//connect(rotateCcdMinus1Button,  &StelButton::triggered, this, [=](){ocularsPlugin->rotateCCD(-1);});
-	//connect(rotateCcdPlus1Button,   &StelButton::triggered, this, [=](){ocularsPlugin->rotateCCD(1);});
-	//connect(rotateCcdPlus5Button,   &StelButton::triggered, this, [=](){ocularsPlugin->rotateCCD(5);});
-	//connect(rotateCcdPlus15Button,  &StelButton::triggered, this, [=](){ocularsPlugin->rotateCCD(15);});
-	//connect(rotateCcdPlus90Button,  &StelButton::triggered, this, [=](){ocularsPlugin->rotateCCD(90);});
-	//connect(resetCcdRotationButton, SIGNAL(triggered()),ocularsPlugin, SLOT(ccdRotationReset()));
-
-	//connect(rotateCcdMinus90Button, SIGNAL(triggered()), this, SLOT(rotateCCDMinus90()));
-	//connect(rotateCcdMinus15Button, SIGNAL(triggered()), this, SLOT(rotateCCDMinus15()));
-	//connect(rotateCcdMinus5Button,  SIGNAL(triggered()), this, SLOT(rotateCCDMinus5()));
-	//connect(rotateCcdMinus1Button,  SIGNAL(triggered()), this, SLOT(rotateCCDMinus1()));
-	//connect(rotateCcdPlus1Button,   SIGNAL(triggered()), this, SLOT(rotateCCDPlus1()));
-	//connect(rotateCcdPlus5Button,   SIGNAL(triggered()), this, SLOT(rotateCCDPlus5()));
-	//connect(rotateCcdPlus15Button,  SIGNAL(triggered()), this, SLOT(rotateCCDPlus15()));
-	//connect(rotateCcdPlus90Button,  SIGNAL(triggered()), this, SLOT(rotateCCDPlus90()));
-	//connect(resetCcdRotationButton, SIGNAL(triggered()), this, SLOT(updateCcdControls()));
-
-	//connect(rotatePrismMinus90Button, &StelButton::triggered, this, [=](){ocularsPlugin->rotatePrism(-90);});
-	//connect(rotatePrismMinus15Button, &StelButton::triggered, this, [=](){ocularsPlugin->rotatePrism(-15);});
-	//connect(rotatePrismMinus5Button,  &StelButton::triggered, this, [=](){ocularsPlugin->rotatePrism(-5);});
-	//connect(rotatePrismMinus1Button,  &StelButton::triggered, this, [=](){ocularsPlugin->rotatePrism(-1);});
-	//connect(rotatePrismPlus1Button,   &StelButton::triggered, this, [=](){ocularsPlugin->rotatePrism(1);});
-	//connect(rotatePrismPlus5Button,   &StelButton::triggered, this, [=](){ocularsPlugin->rotatePrism(5);});
-	//connect(rotatePrismPlus15Button,  &StelButton::triggered, this, [=](){ocularsPlugin->rotatePrism(15);});
-	//connect(rotatePrismPlus90Button,  &StelButton::triggered, this, [=](){ocularsPlugin->rotatePrism(90);});
-	//connect(resetPrismRotationButton, SIGNAL(triggered()),ocularsPlugin, SLOT(prismPositionAngleReset()));
-
-	//connect(rotatePrismMinus90Button, SIGNAL(triggered()), this, SLOT(updateCcdControls()));
-	//connect(rotatePrismMinus15Button, SIGNAL(triggered()), this, SLOT(updateCcdControls()));
-	//connect(rotatePrismMinus5Button,  SIGNAL(triggered()), this, SLOT(updateCcdControls()));
-	//connect(rotatePrismMinus1Button,  SIGNAL(triggered()), this, SLOT(updateCcdControls()));
-	//connect(rotatePrismPlus1Button,   SIGNAL(triggered()), this, SLOT(updateCcdControls()));
-	//connect(rotatePrismPlus5Button,   SIGNAL(triggered()), this, SLOT(updateCcdControls()));
-	//connect(rotatePrismPlus15Button,  SIGNAL(triggered()), this, SLOT(updateCcdControls()));
-	//connect(rotatePrismPlus90Button,  SIGNAL(triggered()), this, SLOT(updateCcdControls()));
-	//connect(resetPrismRotationButton, SIGNAL(triggered()), this, SLOT(updateCcdControls()));
-
 	//Set the layout and update the size
 	qreal width = 2*prevOcularButton->boundingRect().width() + maxWidth;
 	qreal left, right, top, bottom;
@@ -382,7 +333,6 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	resize(width + left + right, 10);
 	buttonBar->resize(width, size().height());
 	updateMainButtonsPositions();
-
 
 	//Border/background for the widget
 	borderPath = new QGraphicsPathItem();
