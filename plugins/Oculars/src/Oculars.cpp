@@ -1811,8 +1811,8 @@ void Oculars::paintCCDBounds()
 	double azimuth, elevation;
 	StelUtils::rectToSphe(&azimuth, &elevation, centerPos3d);
 	const auto derotate = Mat4f::rotation(Vec3f(0,0,1), azimuth) *
-			      Mat4f::rotation(Vec3f(0,1,0), -elevation) *
-			      Mat4f::rotation(Vec3f(1,0,0), ccd->chipRotAngle() * (M_PI/180));
+						  Mat4f::rotation(Vec3f(0,1,0), -elevation) *
+						  Mat4f::rotation(Vec3f(1,0,0), ccd->chipRotAngle() * (M_PI/180));
 
 	if (getFlagAutosetMountForCCD())
 	{
@@ -1828,13 +1828,13 @@ void Oculars::paintCCDBounds()
 	projector->project(derotate * Vec3f(1,0,0), frameCenterWin);
 	projector->project(derotate * Vec3f(1,-1,0), frameRightWin);
 	const auto frameUpWinDir = normalize(Vec2f(frameUpWin[0] - frameCenterWin[0],
-						   frameUpWin[1] - frameCenterWin[1]));
+											   frameUpWin[1] - frameCenterWin[1]));
 	const auto frameRightWinDir = normalize(Vec2f(frameRightWin[0] - frameCenterWin[0],
-						      frameRightWin[1] - frameCenterWin[1]));
+											   frameRightWin[1] - frameCenterWin[1]));
 	const auto frameCenterWin2d = Vec2f(frameCenterWin[0], frameCenterWin[1]);
 
 	const auto boundingRect = drawSensorFrameAndOverlay(projector, derotate, frameUpWinDir, frameRightWinDir,
-							    frameCenterWin2d, *ccd, *lens, overlaySize);
+														frameCenterWin2d, *ccd, *lens, overlaySize);
 	StelPainter painter(projector);
 	painter.setLineSmooth(true);
 	painter.setColor(lineColor);
@@ -1941,19 +1941,20 @@ void Oculars::paintCCDBounds()
 		// Horizontal and vertical scales of visible field of view for CCD (red rectangle); below bottom-right corner
 		//TRANSLATORS: Unit of measure for scale - arc-seconds per pixel
 		QString unit = q_("\"/px");
-		QString scales = QString("%1%3 %4 %2%3").arg(QString::number(3600*ccd->getCentralAngularResolutionX(telescope, lens), 'f', 4),
-							     QString::number(3600*ccd->getCentralAngularResolutionY(telescope, lens), 'f', 4),
-							     unit, QChar(0x00D7));
+		QString scales = QString("%1%3 %4 %2%3")
+							.arg(QString::number(3600*ccd->getCentralAngularResolutionX(telescope, lens), 'f', 4),
+								 QString::number(3600*ccd->getCentralAngularResolutionY(telescope, lens), 'f', 4),
+								 unit, QChar(0x00D7));
 		const auto scalesBR = fm.boundingRect(scales);
 		a = transform.map(QPoint(rightX - std::lround(scalesBR.width() * fmPixelRatio),
-					 bottomY - std::lround(scalesBR.height() * fmPixelRatio)));
+								 bottomY - std::lround(scalesBR.height() * fmPixelRatio)));
 		painter.drawText(a.x(), a.y(), scales, textRotationAngle);
 
 		// Rotation angle of visible field of view for CCD (red rectangle); above top-right corner
 		QString angle = QString("%1%2").arg(QString::number(ccd->chipRotAngle(), 'f', 1)).arg(QChar(0x00B0));
 		const auto angleBR = fm.boundingRect(angle);
 		a = transform.map(QPoint(rightX - std::lround(angleBR.width() * fmPixelRatio),
-					 topY + std::lround(0.5*angleBR.height() * fmPixelRatio)));
+								 topY + std::lround(0.5*angleBR.height() * fmPixelRatio)));
 		painter.drawText(a.x(), a.y(), angle, textRotationAngle);
 
 		if(flagShowCcdCropOverlay && (ccdXRatio>=ratioLimitCrop || ccdYRatio>=ratioLimitCrop))
@@ -1972,7 +1973,7 @@ void Oculars::paintCCDBounds()
 			if (properMotion>0.)
 			{
 				const double sqf = qMin(3600*ccd->getCentralAngularResolutionX(telescope, lens),
-							3600*ccd->getCentralAngularResolutionY(telescope, lens));
+										3600*ccd->getCentralAngularResolutionY(telescope, lens));
 				double exposure = 3600.*sqf/qRound(3600.*properMotion);
 				if (exposure>0.)
 				{
@@ -1980,7 +1981,7 @@ void Oculars::paintCCDBounds()
 					QString exposureTime = QString("%1: %2 %3").arg(q_("Max exposure"), QString::number(qRound(exposure*10.)/10., 'd', 1), qc_("s", "time"));
 					const auto expoBR = fm.boundingRect(exposureTime);
 					a = transform.map(QPoint(rightX - std::lround(expoBR.width() * fmPixelRatio),
-								 topY + std::lround(1.5*expoBR.height() * fmPixelRatio)));
+											 topY + std::lround(1.5*expoBR.height() * fmPixelRatio)));
 					painter.drawText(a.x(), a.y(), exposureTime, textRotationAngle);
 				}
 			}
