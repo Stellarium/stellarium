@@ -183,34 +183,34 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 
 	StelActionMgr* actionMgr = StelApp::getInstance().getStelActionManager();
 	QString ocularsGroup = N_("Oculars"); // Possible group name: Oculars on-screen control panel
-	actionMgr->addAction("actionToggle_Oculars_Previous_Ocular", ocularsGroup, N_("Previous ocular"), this, "updateOcularControls()", "", "");
-	actionMgr->addAction("actionToggle_Oculars_Next_Ocular", ocularsGroup, N_("Next ocular"), this, "updateOcularControls()", "", "");
-	actionMgr->addAction("actionToggle_Oculars_Previous_Lens", ocularsGroup, N_("Previous lens"), this, "updateLensControls()", "", "");
-	actionMgr->addAction("actionToggle_Oculars_Next_Lens", ocularsGroup, N_("Next lens"), this, "updateLensControls()", "", "");
-	actionMgr->addAction("actionToggle_Oculars_Previous_CCD", ocularsGroup, N_("Previous CCD frame"), this, "updateCcdControls()", "", "");
-	actionMgr->addAction("actionToggle_Oculars_Next_CCD", ocularsGroup, N_("Next CCD frame"), this, "updateCcdControls()", "", "");
-	actionMgr->addAction("actionToggle_Oculars_Previous_Telescope", ocularsGroup, N_("Previous telescope"), this, "updateTelescopeControls()", "", "");
-	actionMgr->addAction("actionToggle_Oculars_Next_Telescope", ocularsGroup, N_("Next telescope"), this, "updateTelescopeControls()", "", "");
+	actionMgr->addAction("actionToggle_Oculars_Previous_Ocular", ocularsGroup, N_("Previous ocular"), this, "previousOcular()", "", "");
+	actionMgr->addAction("actionToggle_Oculars_Next_Ocular", ocularsGroup, N_("Next ocular"), this, "nextOcular()", "", "");
+	actionMgr->addAction("actionToggle_Oculars_Previous_Lens", ocularsGroup, N_("Previous lens"), this, "previousLens()", "", "");
+	actionMgr->addAction("actionToggle_Oculars_Next_Lens", ocularsGroup, N_("Next lens"), this, "nextLens()", "", "");
+	actionMgr->addAction("actionToggle_Oculars_Previous_CCD", ocularsGroup, N_("Previous CCD frame"), this, "previousCCD()", "", "");
+	actionMgr->addAction("actionToggle_Oculars_Next_CCD", ocularsGroup, N_("Next CCD frame"), this, "nextCCD()", "", "");
+	actionMgr->addAction("actionToggle_Oculars_Previous_Telescope", ocularsGroup, N_("Previous telescope"), this, "previousTelescope()", "", "");
+	actionMgr->addAction("actionToggle_Oculars_Next_Telescope", ocularsGroup, N_("Next telescope"), this, "nextTelescope()", "", "");
 
-	actionMgr->addAction("actionToggle_Oculars_Rotate_Frame_Reset", ocularsGroup, N_("Reset the sensor frame rotation"), this, "updateCcdControls()", "", "");
-	actionMgr->addAction("actionToggle_Oculars_Rotate_Frame_90_Counterclockwise", ocularsGroup, N_("Rotate the sensor frame 90 degrees counterclockwise"), this, "updateCcdControls()", "", "");
-	actionMgr->addAction("actionToggle_Oculars_Rotate_Frame_15_Counterclockwise", ocularsGroup, N_("Rotate the sensor frame 15 degrees counterclockwise"), this, "updateCcdControls()", "", "");
-	actionMgr->addAction("actionToggle_Oculars_Rotate_Frame_5_Counterclockwise", ocularsGroup, N_("Rotate the sensor frame 5 degrees counterclockwise"), this, "updateCcdControls()", "", "");
-	actionMgr->addAction("actionToggle_Oculars_Rotate_Frame_1_Counterclockwise", ocularsGroup, N_("Rotate the sensor frame 1 degree counterclockwise"), this, "updateCcdControls()", "", "");
-	actionMgr->addAction("actionToggle_Oculars_Rotate_Frame_90_Clockwise", ocularsGroup, N_("Rotate the sensor frame 90 degrees clockwise"), this, "updateCcdControls()", "", "");
-	actionMgr->addAction("actionToggle_Oculars_Rotate_Frame_15_Clockwise", ocularsGroup, N_("Rotate the sensor frame 15 degrees clockwise"), this, "updateCcdControls()", "", "");
-	actionMgr->addAction("actionToggle_Oculars_Rotate_Frame_5_Clockwise", ocularsGroup, N_("Rotate the sensor frame 5 degrees clockwise"), this, "updateCcdControls()", "", "");
-	actionMgr->addAction("actionToggle_Oculars_Rotate_Frame_1_Clockwise", ocularsGroup, N_("Rotate the sensor frame 1 degree clockwise"), this, "updateCcdControls()", "", "");
+	actionMgr->addAction("actionToggle_Oculars_Rotate_Frame_Reset", ocularsGroup, N_("Reset the sensor frame rotation"), this, "resetCCDRotation()", "", "");
+	actionMgr->addAction("actionToggle_Oculars_Rotate_Frame_90_Counterclockwise", ocularsGroup, N_("Rotate the sensor frame 90 degrees counterclockwise"), this, "rotateCCDMinus90()", "", "");
+	actionMgr->addAction("actionToggle_Oculars_Rotate_Frame_15_Counterclockwise", ocularsGroup, N_("Rotate the sensor frame 15 degrees counterclockwise"), this, "rotateCCDMinus15()", "", "");
+	actionMgr->addAction("actionToggle_Oculars_Rotate_Frame_5_Counterclockwise", ocularsGroup, N_("Rotate the sensor frame 5 degrees counterclockwise"), this, "rotateCCDMinus5()", "", "");
+	actionMgr->addAction("actionToggle_Oculars_Rotate_Frame_1_Counterclockwise", ocularsGroup, N_("Rotate the sensor frame 1 degree counterclockwise"), this, "rotateCCDMinus1()", "", "");
+	actionMgr->addAction("actionToggle_Oculars_Rotate_Frame_90_Clockwise", ocularsGroup, N_("Rotate the sensor frame 90 degrees clockwise"), this, "rotateCCDPlus90()", "", "");
+	actionMgr->addAction("actionToggle_Oculars_Rotate_Frame_15_Clockwise", ocularsGroup, N_("Rotate the sensor frame 15 degrees clockwise"), this, "rotateCCDPlus15()", "", "");
+	actionMgr->addAction("actionToggle_Oculars_Rotate_Frame_5_Clockwise", ocularsGroup, N_("Rotate the sensor frame 5 degrees clockwise"), this, "rotateCCDPlus5()", "", "");
+	actionMgr->addAction("actionToggle_Oculars_Rotate_Frame_1_Clockwise", ocularsGroup, N_("Rotate the sensor frame 1 degree clockwise"), this, "rotateCCDPlus1()", "", "");
 
-	actionMgr->addAction("actionToggle_Oculars_Rotate_Prism_Reset", ocularsGroup, N_("Reset the prism rotation"), this, "updateCcdControls()", "", "");
-	actionMgr->addAction("actionToggle_Oculars_Rotate_Prism_90_Counterclockwise", ocularsGroup, N_("Rotate the prism 90 degrees counterclockwise"), this, "updateCcdControls()", "", "");
-	actionMgr->addAction("actionToggle_Oculars_Rotate_Prism_15_Counterclockwise", ocularsGroup, N_("Rotate the prism 15 degrees counterclockwise"), this, "updateCcdControls()", "", "");
-	actionMgr->addAction("actionToggle_Oculars_Rotate_Prism_5_Counterclockwise", ocularsGroup, N_("Rotate the prism 5 degrees counterclockwise"), this, "updateCcdControls()", "", "");
-	actionMgr->addAction("actionToggle_Oculars_Rotate_Prism_1_Counterclockwise", ocularsGroup, N_("Rotate the prism 1 degree counterclockwise"), this, "updateCcdControls()", "", "");
-	actionMgr->addAction("actionToggle_Oculars_Rotate_Prism_90_Clockwise", ocularsGroup, N_("Rotate the prism 90 degrees clockwise"), this, "updateCcdControls()", "", "");
-	actionMgr->addAction("actionToggle_Oculars_Rotate_Prism_15_Clockwise", ocularsGroup, N_("Rotate the prism 15 degrees clockwise"), this, "updateCcdControls()", "", "");
-	actionMgr->addAction("actionToggle_Oculars_Rotate_Prism_5_Clockwise", ocularsGroup, N_("Rotate the prism 5 degrees clockwise"), this, "updateCcdControls()", "", "");
-	actionMgr->addAction("actionToggle_Oculars_Rotate_Prism_1_Clockwise", ocularsGroup, N_("Rotate the prism 1 degree clockwise"), this, "updateCcdControls()", "", "");
+	actionMgr->addAction("actionToggle_Oculars_Rotate_Prism_Reset", ocularsGroup, N_("Reset the prism rotation"), this, "resetPrismRotation()", "", "");
+	actionMgr->addAction("actionToggle_Oculars_Rotate_Prism_90_Counterclockwise", ocularsGroup, N_("Rotate the prism 90 degrees counterclockwise"), this, "rotatePrismMinus90()", "", "");
+	actionMgr->addAction("actionToggle_Oculars_Rotate_Prism_15_Counterclockwise", ocularsGroup, N_("Rotate the prism 15 degrees counterclockwise"), this, "rotatePrismMinus15()", "", "");
+	actionMgr->addAction("actionToggle_Oculars_Rotate_Prism_5_Counterclockwise", ocularsGroup, N_("Rotate the prism 5 degrees counterclockwise"), this, "rotatePrismMinus5()", "", "");
+	actionMgr->addAction("actionToggle_Oculars_Rotate_Prism_1_Counterclockwise", ocularsGroup, N_("Rotate the prism 1 degree counterclockwise"), this, "rotatePrismMinus1()", "", "");
+	actionMgr->addAction("actionToggle_Oculars_Rotate_Prism_90_Clockwise", ocularsGroup, N_("Rotate the prism 90 degrees clockwise"), this, "rotatePrismPlus90()", "", "");
+	actionMgr->addAction("actionToggle_Oculars_Rotate_Prism_15_Clockwise", ocularsGroup, N_("Rotate the prism 15 degrees clockwise"), this, "rotatePrismPlus15()", "", "");
+	actionMgr->addAction("actionToggle_Oculars_Rotate_Prism_5_Clockwise", ocularsGroup, N_("Rotate the prism 5 degrees clockwise"), this, "rotatePrismPlus5()", "", "");
+	actionMgr->addAction("actionToggle_Oculars_Rotate_Prism_1_Clockwise", ocularsGroup, N_("Rotate the prism 1 degree clockwise"), this, "rotatePrismPlus1()", "", "");
 
 	prevOcularButton = new StelButton(ocularControls, prevArrow, prevArrowOff, QPixmap(), "actionToggle_Oculars_Previous_Ocular");
 	prevOcularButton->setToolTip(q_("Previous ocular"));
@@ -229,14 +229,14 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	nextTelescopeButton = new StelButton(telescopeControls, nextArrow, nextArrowOff, QPixmap(), "actionToggle_Oculars_Next_Telescope");
 	nextTelescopeButton->setToolTip(q_("Next telescope"));
 
-	connect(prevOcularButton,    SIGNAL(triggered()), ocularsPlugin, SLOT(decrementOcularIndex()));
-	connect(nextOcularButton,    SIGNAL(triggered()), ocularsPlugin, SLOT(incrementOcularIndex()));
-	connect(prevTelescopeButton, SIGNAL(triggered()), ocularsPlugin, SLOT(decrementTelescopeIndex()));
-	connect(nextTelescopeButton, SIGNAL(triggered()), ocularsPlugin, SLOT(incrementTelescopeIndex()));
-	connect(prevCcdButton,       SIGNAL(triggered()), ocularsPlugin, SLOT(decrementCCDIndex()));
-	connect(nextCcdButton,       SIGNAL(triggered()), ocularsPlugin, SLOT(incrementCCDIndex()));
-	connect(nextLensButton,      SIGNAL(triggered()), ocularsPlugin, SLOT(incrementLensIndex()));
-	connect(prevLensButton,      SIGNAL(triggered()), ocularsPlugin, SLOT(decrementLensIndex()));
+	//connect(prevOcularButton,    SIGNAL(triggered()), ocularsPlugin, SLOT(decrementOcularIndex()));
+	//connect(nextOcularButton,    SIGNAL(triggered()), ocularsPlugin, SLOT(incrementOcularIndex()));
+	//connect(prevTelescopeButton, SIGNAL(triggered()), ocularsPlugin, SLOT(decrementTelescopeIndex()));
+	//connect(nextTelescopeButton, SIGNAL(triggered()), ocularsPlugin, SLOT(incrementTelescopeIndex()));
+	//connect(prevCcdButton,       SIGNAL(triggered()), ocularsPlugin, SLOT(decrementCCDIndex()));
+	//connect(nextCcdButton,       SIGNAL(triggered()), ocularsPlugin, SLOT(incrementCCDIndex()));
+	//connect(nextLensButton,      SIGNAL(triggered()), ocularsPlugin, SLOT(incrementLensIndex()));
+	//connect(prevLensButton,      SIGNAL(triggered()), ocularsPlugin, SLOT(decrementLensIndex()));
 
 	QColor cOn(255, 255, 255);
 	QColor cOff(102, 102, 102);
@@ -331,45 +331,45 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	rotatePrismPlus90Button = new StelButton(ccdControls, pOn, pOff, pHover, "actionToggle_Oculars_Rotate_Prism_90_Clockwise", true);
 	rotatePrismPlus90Button->setToolTip(q_("Rotate the prism 90 degrees clockwise"));
 
-	connect(rotateCcdMinus90Button, &StelButton::triggered, this, [=](){ocularsPlugin->rotateCCD(-90);});
-	connect(rotateCcdMinus15Button, &StelButton::triggered, this, [=](){ocularsPlugin->rotateCCD(-15);});
-	connect(rotateCcdMinus5Button,  &StelButton::triggered, this, [=](){ocularsPlugin->rotateCCD(-5);});
-	connect(rotateCcdMinus1Button,  &StelButton::triggered, this, [=](){ocularsPlugin->rotateCCD(-1);});
-	connect(rotateCcdPlus1Button,   &StelButton::triggered, this, [=](){ocularsPlugin->rotateCCD(1);});
-	connect(rotateCcdPlus5Button,   &StelButton::triggered, this, [=](){ocularsPlugin->rotateCCD(5);});
-	connect(rotateCcdPlus15Button,  &StelButton::triggered, this, [=](){ocularsPlugin->rotateCCD(15);});
-	connect(rotateCcdPlus90Button,  &StelButton::triggered, this, [=](){ocularsPlugin->rotateCCD(90);});
-	connect(resetCcdRotationButton, SIGNAL(triggered()),ocularsPlugin, SLOT(ccdRotationReset()));
+	//connect(rotateCcdMinus90Button, &StelButton::triggered, this, [=](){ocularsPlugin->rotateCCD(-90);});
+	//connect(rotateCcdMinus15Button, &StelButton::triggered, this, [=](){ocularsPlugin->rotateCCD(-15);});
+	//connect(rotateCcdMinus5Button,  &StelButton::triggered, this, [=](){ocularsPlugin->rotateCCD(-5);});
+	//connect(rotateCcdMinus1Button,  &StelButton::triggered, this, [=](){ocularsPlugin->rotateCCD(-1);});
+	//connect(rotateCcdPlus1Button,   &StelButton::triggered, this, [=](){ocularsPlugin->rotateCCD(1);});
+	//connect(rotateCcdPlus5Button,   &StelButton::triggered, this, [=](){ocularsPlugin->rotateCCD(5);});
+	//connect(rotateCcdPlus15Button,  &StelButton::triggered, this, [=](){ocularsPlugin->rotateCCD(15);});
+	//connect(rotateCcdPlus90Button,  &StelButton::triggered, this, [=](){ocularsPlugin->rotateCCD(90);});
+	//connect(resetCcdRotationButton, SIGNAL(triggered()),ocularsPlugin, SLOT(ccdRotationReset()));
 
-	connect(rotateCcdMinus90Button, SIGNAL(triggered()), this, SLOT(updateCcdControls()));
-	connect(rotateCcdMinus15Button, SIGNAL(triggered()), this, SLOT(updateCcdControls()));
-	connect(rotateCcdMinus5Button,  SIGNAL(triggered()), this, SLOT(updateCcdControls()));
-	connect(rotateCcdMinus1Button,  SIGNAL(triggered()), this, SLOT(updateCcdControls()));
-	connect(rotateCcdPlus1Button,   SIGNAL(triggered()), this, SLOT(updateCcdControls()));
-	connect(rotateCcdPlus5Button,   SIGNAL(triggered()), this, SLOT(updateCcdControls()));
-	connect(rotateCcdPlus15Button,  SIGNAL(triggered()), this, SLOT(updateCcdControls()));
-	connect(rotateCcdPlus90Button,  SIGNAL(triggered()), this, SLOT(updateCcdControls()));
-	connect(resetCcdRotationButton, SIGNAL(triggered()), this, SLOT(updateCcdControls()));
+	//connect(rotateCcdMinus90Button, SIGNAL(triggered()), this, SLOT(rotateCCDMinus90()));
+	//connect(rotateCcdMinus15Button, SIGNAL(triggered()), this, SLOT(rotateCCDMinus15()));
+	//connect(rotateCcdMinus5Button,  SIGNAL(triggered()), this, SLOT(rotateCCDMinus5()));
+	//connect(rotateCcdMinus1Button,  SIGNAL(triggered()), this, SLOT(rotateCCDMinus1()));
+	//connect(rotateCcdPlus1Button,   SIGNAL(triggered()), this, SLOT(rotateCCDPlus1()));
+	//connect(rotateCcdPlus5Button,   SIGNAL(triggered()), this, SLOT(rotateCCDPlus5()));
+	//connect(rotateCcdPlus15Button,  SIGNAL(triggered()), this, SLOT(rotateCCDPlus15()));
+	//connect(rotateCcdPlus90Button,  SIGNAL(triggered()), this, SLOT(rotateCCDPlus90()));
+	//connect(resetCcdRotationButton, SIGNAL(triggered()), this, SLOT(updateCcdControls()));
 
-	connect(rotatePrismMinus90Button, &StelButton::triggered, this, [=](){ocularsPlugin->rotatePrism(-90);});
-	connect(rotatePrismMinus15Button, &StelButton::triggered, this, [=](){ocularsPlugin->rotatePrism(-15);});
-	connect(rotatePrismMinus5Button,  &StelButton::triggered, this, [=](){ocularsPlugin->rotatePrism(-5);});
-	connect(rotatePrismMinus1Button,  &StelButton::triggered, this, [=](){ocularsPlugin->rotatePrism(-1);});
-	connect(rotatePrismPlus1Button,   &StelButton::triggered, this, [=](){ocularsPlugin->rotatePrism(1);});
-	connect(rotatePrismPlus5Button,   &StelButton::triggered, this, [=](){ocularsPlugin->rotatePrism(5);});
-	connect(rotatePrismPlus15Button,  &StelButton::triggered, this, [=](){ocularsPlugin->rotatePrism(15);});
-	connect(rotatePrismPlus90Button,  &StelButton::triggered, this, [=](){ocularsPlugin->rotatePrism(90);});
-	connect(resetPrismRotationButton, SIGNAL(triggered()),ocularsPlugin, SLOT(prismPositionAngleReset()));
+	//connect(rotatePrismMinus90Button, &StelButton::triggered, this, [=](){ocularsPlugin->rotatePrism(-90);});
+	//connect(rotatePrismMinus15Button, &StelButton::triggered, this, [=](){ocularsPlugin->rotatePrism(-15);});
+	//connect(rotatePrismMinus5Button,  &StelButton::triggered, this, [=](){ocularsPlugin->rotatePrism(-5);});
+	//connect(rotatePrismMinus1Button,  &StelButton::triggered, this, [=](){ocularsPlugin->rotatePrism(-1);});
+	//connect(rotatePrismPlus1Button,   &StelButton::triggered, this, [=](){ocularsPlugin->rotatePrism(1);});
+	//connect(rotatePrismPlus5Button,   &StelButton::triggered, this, [=](){ocularsPlugin->rotatePrism(5);});
+	//connect(rotatePrismPlus15Button,  &StelButton::triggered, this, [=](){ocularsPlugin->rotatePrism(15);});
+	//connect(rotatePrismPlus90Button,  &StelButton::triggered, this, [=](){ocularsPlugin->rotatePrism(90);});
+	//connect(resetPrismRotationButton, SIGNAL(triggered()),ocularsPlugin, SLOT(prismPositionAngleReset()));
 
-	connect(rotatePrismMinus90Button, SIGNAL(triggered()), this, SLOT(updateCcdControls()));
-	connect(rotatePrismMinus15Button, SIGNAL(triggered()), this, SLOT(updateCcdControls()));
-	connect(rotatePrismMinus5Button,  SIGNAL(triggered()), this, SLOT(updateCcdControls()));
-	connect(rotatePrismMinus1Button,  SIGNAL(triggered()), this, SLOT(updateCcdControls()));
-	connect(rotatePrismPlus1Button,   SIGNAL(triggered()), this, SLOT(updateCcdControls()));
-	connect(rotatePrismPlus5Button,   SIGNAL(triggered()), this, SLOT(updateCcdControls()));
-	connect(rotatePrismPlus15Button,  SIGNAL(triggered()), this, SLOT(updateCcdControls()));
-	connect(rotatePrismPlus90Button,  SIGNAL(triggered()), this, SLOT(updateCcdControls()));
-	connect(resetPrismRotationButton, SIGNAL(triggered()), this, SLOT(updateCcdControls()));
+	//connect(rotatePrismMinus90Button, SIGNAL(triggered()), this, SLOT(updateCcdControls()));
+	//connect(rotatePrismMinus15Button, SIGNAL(triggered()), this, SLOT(updateCcdControls()));
+	//connect(rotatePrismMinus5Button,  SIGNAL(triggered()), this, SLOT(updateCcdControls()));
+	//connect(rotatePrismMinus1Button,  SIGNAL(triggered()), this, SLOT(updateCcdControls()));
+	//connect(rotatePrismPlus1Button,   SIGNAL(triggered()), this, SLOT(updateCcdControls()));
+	//connect(rotatePrismPlus5Button,   SIGNAL(triggered()), this, SLOT(updateCcdControls()));
+	//connect(rotatePrismPlus15Button,  SIGNAL(triggered()), this, SLOT(updateCcdControls()));
+	//connect(rotatePrismPlus90Button,  SIGNAL(triggered()), this, SLOT(updateCcdControls()));
+	//connect(resetPrismRotationButton, SIGNAL(triggered()), this, SLOT(updateCcdControls()));
 
 	//Set the layout and update the size
 	qreal width = 2*prevOcularButton->boundingRect().width() + maxWidth;
@@ -457,6 +457,162 @@ void OcularsGuiPanel::showOcularGui()
 
 void OcularsGuiPanel::showCcdGui()
 {
+	updateCcdControls();
+}
+
+void OcularsGuiPanel::previousLens()
+{
+	ocularsPlugin->decrementLensIndex();
+	updateLensControls();
+}
+
+void OcularsGuiPanel::nextLens()
+{
+	ocularsPlugin->incrementLensIndex();
+	updateLensControls();
+}
+
+void OcularsGuiPanel::previousOcular()
+{
+	ocularsPlugin->decrementOcularIndex();
+	updateOcularControls();
+}
+
+void OcularsGuiPanel::nextOcular()
+{
+	ocularsPlugin->incrementOcularIndex();
+	updateOcularControls();
+}
+
+void OcularsGuiPanel::previousTelescope()
+{
+	ocularsPlugin->decrementTelescopeIndex();
+	updateTelescopeControls();
+}
+
+void OcularsGuiPanel::nextTelescope()
+{
+	ocularsPlugin->incrementTelescopeIndex();
+	updateTelescopeControls();
+}
+
+void OcularsGuiPanel::rotateCCDPlus1()
+{
+	ocularsPlugin->rotateCCD(1);
+	updateCcdControls();
+}
+
+void OcularsGuiPanel::rotateCCDPlus5()
+{
+	ocularsPlugin->rotateCCD(5);
+	updateCcdControls();
+}
+
+void OcularsGuiPanel::rotateCCDPlus15()
+{
+	ocularsPlugin->rotateCCD(15);
+	updateCcdControls();
+}
+
+void OcularsGuiPanel::rotateCCDPlus90()
+{
+	ocularsPlugin->rotateCCD(90);
+	updateCcdControls();
+}
+
+void OcularsGuiPanel::rotateCCDMinus1()
+{
+	ocularsPlugin->rotateCCD(-1);
+	updateCcdControls();
+}
+
+void OcularsGuiPanel::rotateCCDMinus5()
+{
+	ocularsPlugin->rotateCCD(-5);
+	updateCcdControls();
+}
+
+void OcularsGuiPanel::rotateCCDMinus15()
+{
+	ocularsPlugin->rotateCCD(-15);
+	updateCcdControls();
+}
+
+void OcularsGuiPanel::rotateCCDMinus90()
+{
+	ocularsPlugin->rotateCCD(-90);
+	updateCcdControls();
+}
+
+void OcularsGuiPanel::resetCCDRotation()
+{
+	ocularsPlugin->ccdRotationReset();
+	updateCcdControls();
+}
+
+void OcularsGuiPanel::previousCCD()
+{
+	ocularsPlugin->decrementCCDIndex();
+	updateCcdControls();
+}
+
+void OcularsGuiPanel::nextCCD()
+{
+	ocularsPlugin->incrementCCDIndex();
+	updateCcdControls();
+}
+
+void OcularsGuiPanel::rotatePrismPlus1()
+{
+	ocularsPlugin->rotatePrism(1);
+	updateCcdControls();
+}
+
+void OcularsGuiPanel::rotatePrismPlus5()
+{
+	ocularsPlugin->rotatePrism(5);
+	updateCcdControls();
+}
+
+void OcularsGuiPanel::rotatePrismPlus15()
+{
+	ocularsPlugin->rotatePrism(15);
+	updateCcdControls();
+}
+
+void OcularsGuiPanel::rotatePrismPlus90()
+{
+	ocularsPlugin->rotatePrism(90);
+	updateCcdControls();
+}
+
+void OcularsGuiPanel::rotatePrismMinus1()
+{
+	ocularsPlugin->rotatePrism(-1);
+	updateCcdControls();
+}
+
+void OcularsGuiPanel::rotatePrismMinus5()
+{
+	ocularsPlugin->rotatePrism(-5);
+	updateCcdControls();
+}
+
+void OcularsGuiPanel::rotatePrismMinus15()
+{
+	ocularsPlugin->rotatePrism(-15);
+	updateCcdControls();
+}
+
+void OcularsGuiPanel::rotatePrismMinus90()
+{
+	ocularsPlugin->rotatePrism(-90);
+	updateCcdControls();
+}
+
+void OcularsGuiPanel::resetPrismRotation()
+{
+	ocularsPlugin->prismPositionAngleReset();
 	updateCcdControls();
 }
 
