@@ -1503,6 +1503,14 @@ void Oculars::initializeActivationActions()
 	addAction("actionShow_Ocular_Increment", ocularsGroup, N_("Select next eyepiece"), "incrementOcularIndex()");
 	// Select previous eyepiece via keyboard
 	addAction("actionShow_Ocular_Decrement", ocularsGroup, N_("Select previous eyepiece"), "decrementOcularIndex()");
+	// Select next lens via keyboard
+	addAction("actionShow_Lens_Increment", ocularsGroup, N_("Select next lens"), "incrementLensIndex()");
+	// Select previous lens via keyboard
+	addAction("actionShow_Lens_Decrement", ocularsGroup, N_("Select previous lens"), "decrementLensIndex()");
+	// Select next CCD via keyboard
+	addAction("actionShow_CCD_Increment", ocularsGroup, N_("Select next CCD frame"), "incrementCCDIndex()");
+	// Select previous CCD via keyboard
+	addAction("actionShow_CCD_Decrement", ocularsGroup, N_("Select previous CCD frame"), "decrementCCDIndex()");
 	addAction("actionShow_Ocular_Rotate_Reticle_Clockwise", ocularsGroup, N_("Rotate reticle pattern of the eyepiece clockwise"), "rotateReticleClockwise()", "Alt+M");
 	addAction("actionShow_Ocular_Rotate_Reticle_Counterclockwise", ocularsGroup, N_("Rotate reticle pattern of the eyepiece counterclockwise"), "rotateReticleCounterclockwise()", "Shift+Alt+M");
 	addAction("actionShow_Sensor_Crop_Overlay", ocularsGroup, N_("Toggle sensor crop overlay"), "toggleCropOverlay()");

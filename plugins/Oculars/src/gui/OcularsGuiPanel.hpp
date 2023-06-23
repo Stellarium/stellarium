@@ -73,10 +73,6 @@ private slots:
 	void rotateCCDMinus90();
 	//! Reset the sensor frame rotation
 	void resetCCDRotation();
-	//! Next CCD frame
-	void nextCCD();
-	//! Previous CCD frame
-	void previousCCD();
 
 	//! Rotate the prism 1 degree clockwise
 	void rotatePrismPlus1();
@@ -96,21 +92,6 @@ private slots:
 	void rotatePrismMinus90();
 	//! Reset the prism rotation
 	void resetPrismRotation();
-
-	//! Next lens
-	void nextLens();
-	//! Previous lens
-	void previousLens();
-
-	//! Next ocular
-	void nextOcular();
-	//! Previous ocular
-	void previousOcular();
-
-	//! Next telescope
-	void nextTelescope();
-	//! Previous telescope
-	void previousTelescope();
 
 	//! Updates the information shown when a sensor overlay is displayed
 	void updateCcdControls();

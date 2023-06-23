@@ -183,15 +183,6 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 
 	StelActionMgr* actionMgr = StelApp::getInstance().getStelActionManager();
 	QString ocularsGroup = N_("Oculars"); // Possible group name: Oculars on-screen control panel
-	actionMgr->addAction("actionToggle_Oculars_Previous_Ocular", ocularsGroup, N_("Previous ocular"), this, "previousOcular()", "", "");
-	actionMgr->addAction("actionToggle_Oculars_Next_Ocular", ocularsGroup, N_("Next ocular"), this, "nextOcular()", "", "");
-	actionMgr->addAction("actionToggle_Oculars_Previous_Lens", ocularsGroup, N_("Previous lens"), this, "previousLens()", "", "");
-	actionMgr->addAction("actionToggle_Oculars_Next_Lens", ocularsGroup, N_("Next lens"), this, "nextLens()", "", "");
-	actionMgr->addAction("actionToggle_Oculars_Previous_CCD", ocularsGroup, N_("Previous CCD frame"), this, "previousCCD()", "", "");
-	actionMgr->addAction("actionToggle_Oculars_Next_CCD", ocularsGroup, N_("Next CCD frame"), this, "nextCCD()", "", "");
-	actionMgr->addAction("actionToggle_Oculars_Previous_Telescope", ocularsGroup, N_("Previous telescope"), this, "previousTelescope()", "", "");
-	actionMgr->addAction("actionToggle_Oculars_Next_Telescope", ocularsGroup, N_("Next telescope"), this, "nextTelescope()", "", "");
-
 	actionMgr->addAction("actionToggle_Oculars_Rotate_Frame_Reset", ocularsGroup, N_("Reset the sensor frame rotation"), this, "resetCCDRotation()", "", "");
 	actionMgr->addAction("actionToggle_Oculars_Rotate_Frame_90_Counterclockwise", ocularsGroup, N_("Rotate the sensor frame 90 degrees counterclockwise"), this, "rotateCCDMinus90()", "", "");
 	actionMgr->addAction("actionToggle_Oculars_Rotate_Frame_15_Counterclockwise", ocularsGroup, N_("Rotate the sensor frame 15 degrees counterclockwise"), this, "rotateCCDMinus15()", "", "");
@@ -212,22 +203,22 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	actionMgr->addAction("actionToggle_Oculars_Rotate_Prism_5_Clockwise", ocularsGroup, N_("Rotate the prism 5 degrees clockwise"), this, "rotatePrismPlus5()", "", "");
 	actionMgr->addAction("actionToggle_Oculars_Rotate_Prism_1_Clockwise", ocularsGroup, N_("Rotate the prism 1 degree clockwise"), this, "rotatePrismPlus1()", "", "");
 
-	prevOcularButton = new StelButton(ocularControls, prevArrow, prevArrowOff, QPixmap(), "actionToggle_Oculars_Previous_Ocular");
-	prevOcularButton->setToolTip(q_("Previous ocular"));
-	nextOcularButton = new StelButton(ocularControls, nextArrow, nextArrowOff, QPixmap(), "actionToggle_Oculars_Next_Ocular");
-	nextOcularButton->setToolTip(q_("Next ocular"));
-	prevLensButton = new StelButton(lensControls, prevArrow, prevArrowOff, QPixmap(), "actionToggle_Oculars_Previous_Lens");
-	prevLensButton->setToolTip(q_("Previous lens"));
-	nextLensButton = new StelButton(lensControls, nextArrow, nextArrowOff, QPixmap(), "actionToggle_Oculars_Next_Lens");
-	nextLensButton->setToolTip(q_("Next lens"));
-	prevCcdButton = new StelButton(ccdControls, prevArrow, prevArrowOff, QPixmap(), "actionToggle_Oculars_Previous_CCD");
-	prevCcdButton->setToolTip(q_("Previous CCD frame"));
-	nextCcdButton = new StelButton(ccdControls, nextArrow, nextArrowOff, QPixmap(), "actionToggle_Oculars_Next_CCD");
-	nextCcdButton->setToolTip(q_("Next CCD frame"));
-	prevTelescopeButton = new StelButton(telescopeControls, prevArrow, prevArrowOff, QPixmap(), "actionToggle_Oculars_Previous_Telescope");
-	prevTelescopeButton->setToolTip(q_("Previous telescope"));
-	nextTelescopeButton = new StelButton(telescopeControls, nextArrow, nextArrowOff, QPixmap(), "actionToggle_Oculars_Next_Telescope");
-	nextTelescopeButton->setToolTip(q_("Next telescope"));
+	prevOcularButton = new StelButton(ocularControls, prevArrow, prevArrowOff, QPixmap(), "actionShow_Ocular_Decrement");
+	prevOcularButton->setToolTip(q_("Select previous eyepiece"));
+	nextOcularButton = new StelButton(ocularControls, nextArrow, nextArrowOff, QPixmap(), "actionShow_Ocular_Increment");
+	nextOcularButton->setToolTip(q_("Select next eyepiece"));
+	prevLensButton = new StelButton(lensControls, prevArrow, prevArrowOff, QPixmap(), "actionShow_Lens_Decrement");
+	prevLensButton->setToolTip(q_("Select previous lens"));
+	nextLensButton = new StelButton(lensControls, nextArrow, nextArrowOff, QPixmap(), "actionShow_Lens_Increment");
+	nextLensButton->setToolTip(q_("Select next lens"));
+	prevCcdButton = new StelButton(ccdControls, prevArrow, prevArrowOff, QPixmap(), "actionShow_CCD_Decrement");
+	prevCcdButton->setToolTip(q_("Select previous CCD frame"));
+	nextCcdButton = new StelButton(ccdControls, nextArrow, nextArrowOff, QPixmap(), "actionShow_CCD_Increment");
+	nextCcdButton->setToolTip(q_("Select next CCD frame"));
+	prevTelescopeButton = new StelButton(telescopeControls, prevArrow, prevArrowOff, QPixmap(), "actionShow_Telescope_Decrement");
+	prevTelescopeButton->setToolTip(q_("Select previous telescope"));
+	nextTelescopeButton = new StelButton(telescopeControls, nextArrow, nextArrowOff, QPixmap(), "actionShow_Telescope_Increment");
+	nextTelescopeButton->setToolTip(q_("Select next telescope"));
 
 	QColor cOn(255, 255, 255);
 	QColor cOff(102, 102, 102);
@@ -410,42 +401,6 @@ void OcularsGuiPanel::showCcdGui()
 	updateCcdControls();
 }
 
-void OcularsGuiPanel::previousLens()
-{
-	ocularsPlugin->decrementLensIndex();
-	updateLensControls();
-}
-
-void OcularsGuiPanel::nextLens()
-{
-	ocularsPlugin->incrementLensIndex();
-	updateLensControls();
-}
-
-void OcularsGuiPanel::previousOcular()
-{
-	ocularsPlugin->decrementOcularIndex();
-	updateOcularControls();
-}
-
-void OcularsGuiPanel::nextOcular()
-{
-	ocularsPlugin->incrementOcularIndex();
-	updateOcularControls();
-}
-
-void OcularsGuiPanel::previousTelescope()
-{
-	ocularsPlugin->decrementTelescopeIndex();
-	updateTelescopeControls();
-}
-
-void OcularsGuiPanel::nextTelescope()
-{
-	ocularsPlugin->incrementTelescopeIndex();
-	updateTelescopeControls();
-}
-
 void OcularsGuiPanel::rotateCCDPlus1()
 {
 	ocularsPlugin->rotateCCD(1);
@@ -497,18 +452,6 @@ void OcularsGuiPanel::rotateCCDMinus90()
 void OcularsGuiPanel::resetCCDRotation()
 {
 	ocularsPlugin->ccdRotationReset();
-	updateCcdControls();
-}
-
-void OcularsGuiPanel::previousCCD()
-{
-	ocularsPlugin->decrementCCDIndex();
-	updateCcdControls();
-}
-
-void OcularsGuiPanel::nextCCD()
-{
-	ocularsPlugin->incrementCCDIndex();
 	updateCcdControls();
 }
 
