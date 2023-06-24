@@ -437,7 +437,7 @@ QString Planet::getIAUDesignation() const
 		if (!iauMoonNumber.contains(" ")) // We use short designations for moons of major planets, so, no space char in this case!
 			return QString("%1 %2").arg(nPlanetMap.value(iauMoonNumber.mid(0, 1).trimmed()), iauMoonNumber.mid(1).trimmed());
 		else
-			return iauMoonNumber;
+			return QString();
 	}
 }
 
