@@ -1841,7 +1841,12 @@ void Oculars::paintCCDBounds()
 	painter.setFont(font);
 
 	if(ccd->hasOAG())
-		drawOAG(projector, derotate, *ccd, *lens);
+	{
+		const auto derotateOAG = Mat4f::rotation(Vec3f(0,0,1), azimuth) *
+					 Mat4f::rotation(Vec3f(0,1,0), -elevation) *
+					 Mat4f::rotation(Vec3f(1,0,0), (ccd->prismPosAngle() + ccd->chipRotAngle()) * (M_PI/180));
+		drawOAG(projector, derotateOAG, *ccd, *lens);
+	}
 
 	// Tool for planning a mosaic astrophotography: shows a small cross at center of CCD's
 	// frame and equatorial coordinates for epoch J2000.0 of that center.
