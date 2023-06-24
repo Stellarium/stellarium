@@ -184,24 +184,29 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	StelActionMgr* actionMgr = StelApp::getInstance().getStelActionManager();
 	QString ocularsGroup = N_("Oculars"); // Possible group name: Oculars on-screen control panel
 	actionMgr->addAction("actionToggle_Oculars_Rotate_Frame_Reset", ocularsGroup, N_("Reset the sensor frame rotation"), this, "resetCCDRotation()", "", "");
-	actionMgr->addAction("actionToggle_Oculars_Rotate_Frame_90_Counterclockwise", ocularsGroup, N_("Rotate the sensor frame 90 degrees counterclockwise"), this, "rotateCCDMinus90()", "", "");
-	actionMgr->addAction("actionToggle_Oculars_Rotate_Frame_15_Counterclockwise", ocularsGroup, N_("Rotate the sensor frame 15 degrees counterclockwise"), this, "rotateCCDMinus15()", "", "");
-	actionMgr->addAction("actionToggle_Oculars_Rotate_Frame_5_Counterclockwise", ocularsGroup, N_("Rotate the sensor frame 5 degrees counterclockwise"), this, "rotateCCDMinus5()", "", "");
-	actionMgr->addAction("actionToggle_Oculars_Rotate_Frame_1_Counterclockwise", ocularsGroup, N_("Rotate the sensor frame 1 degree counterclockwise"), this, "rotateCCDMinus1()", "", "");
-	actionMgr->addAction("actionToggle_Oculars_Rotate_Frame_90_Clockwise", ocularsGroup, N_("Rotate the sensor frame 90 degrees clockwise"), this, "rotateCCDPlus90()", "", "");
-	actionMgr->addAction("actionToggle_Oculars_Rotate_Frame_15_Clockwise", ocularsGroup, N_("Rotate the sensor frame 15 degrees clockwise"), this, "rotateCCDPlus15()", "", "");
-	actionMgr->addAction("actionToggle_Oculars_Rotate_Frame_5_Clockwise", ocularsGroup, N_("Rotate the sensor frame 5 degrees clockwise"), this, "rotateCCDPlus5()", "", "");
-	actionMgr->addAction("actionToggle_Oculars_Rotate_Frame_1_Clockwise", ocularsGroup, N_("Rotate the sensor frame 1 degree clockwise"), this, "rotateCCDPlus1()", "", "");
-
 	actionMgr->addAction("actionToggle_Oculars_Rotate_Prism_Reset", ocularsGroup, N_("Reset the prism rotation"), this, "resetPrismRotation()", "", "");
-	actionMgr->addAction("actionToggle_Oculars_Rotate_Prism_90_Counterclockwise", ocularsGroup, N_("Rotate the prism 90 degrees counterclockwise"), this, "rotatePrismMinus90()", "", "");
-	actionMgr->addAction("actionToggle_Oculars_Rotate_Prism_15_Counterclockwise", ocularsGroup, N_("Rotate the prism 15 degrees counterclockwise"), this, "rotatePrismMinus15()", "", "");
-	actionMgr->addAction("actionToggle_Oculars_Rotate_Prism_5_Counterclockwise", ocularsGroup, N_("Rotate the prism 5 degrees counterclockwise"), this, "rotatePrismMinus5()", "", "");
-	actionMgr->addAction("actionToggle_Oculars_Rotate_Prism_1_Counterclockwise", ocularsGroup, N_("Rotate the prism 1 degree counterclockwise"), this, "rotatePrismMinus1()", "", "");
-	actionMgr->addAction("actionToggle_Oculars_Rotate_Prism_90_Clockwise", ocularsGroup, N_("Rotate the prism 90 degrees clockwise"), this, "rotatePrismPlus90()", "", "");
-	actionMgr->addAction("actionToggle_Oculars_Rotate_Prism_15_Clockwise", ocularsGroup, N_("Rotate the prism 15 degrees clockwise"), this, "rotatePrismPlus15()", "", "");
-	actionMgr->addAction("actionToggle_Oculars_Rotate_Prism_5_Clockwise", ocularsGroup, N_("Rotate the prism 5 degrees clockwise"), this, "rotatePrismPlus5()", "", "");
-	actionMgr->addAction("actionToggle_Oculars_Rotate_Prism_1_Clockwise", ocularsGroup, N_("Rotate the prism 1 degree clockwise"), this, "rotatePrismPlus1()", "", "");
+	QList<int> angles = { 1, 5, 15, 90 };
+	for (int i = 0; i < angles.size(); ++i)
+	{
+		QString angle = QString::number(angles.at(i));
+		QString degree = (angles.at(i)==1 ? "degree" : "degrees");
+
+		QString actionCounterclockwiseCCDName = QString("actionToggle_Oculars_Rotate_Frame_%1_Counterclockwise").arg(angle);
+		QString actionCounterclockwiseCCDDescription = QString("Rotate the sensor frame %1 %2 counterclockwise").arg(angle, degree);
+		actionMgr->addAction(actionCounterclockwiseCCDName, ocularsGroup, actionCounterclockwiseCCDDescription, this, [=](){rotateCCD(-1*angles.at(i));}, "");
+
+		QString actionClockwiseCCDName = QString("actionToggle_Oculars_Rotate_Frame_%1_Clockwise").arg(angle);
+		QString actionClockwiseCCDDescription = QString("Rotate the sensor frame %1 %2 clockwise").arg(angle, degree);
+		actionMgr->addAction(actionClockwiseCCDName, ocularsGroup, actionClockwiseCCDDescription, this, [=](){rotateCCD(angles.at(i));}, "");
+
+		QString actionCounterclockwisePrismName = QString("actionToggle_Oculars_Rotate_Prism_%1_Counterclockwise").arg(angle);
+		QString actionCounterclockwisePrismDescription = QString("Rotate the prism %1 %2 counterclockwise").arg(angle, degree);
+		actionMgr->addAction(actionCounterclockwisePrismName, ocularsGroup, actionCounterclockwisePrismDescription, this, [=](){rotatePrism(-1*angles.at(i));}, "");
+
+		QString actionClockwisePrismName = QString("actionToggle_Oculars_Rotate_Prism_%1_Clockwise").arg(angle);
+		QString actionClockwisePrismDescription = QString("Rotate the prism %1 %2 clockwise").arg(angle, degree);
+		actionMgr->addAction(actionClockwisePrismName, ocularsGroup, actionClockwisePrismDescription, this, [=](){rotatePrism(angles.at(i));}, "");
+	}
 
 	prevOcularButton = new StelButton(ocularControls, prevArrow, prevArrowOff, QPixmap(), "actionShow_Ocular_Decrement");
 	prevOcularButton->setToolTip(q_("Select previous eyepiece"));
@@ -401,105 +406,21 @@ void OcularsGuiPanel::showCcdGui()
 	updateCcdControls();
 }
 
-void OcularsGuiPanel::rotateCCDPlus1()
+void OcularsGuiPanel::rotateCCD(int angle)
 {
-	ocularsPlugin->rotateCCD(1);
+	ocularsPlugin->rotateCCD(angle);
 	updateCcdControls();
 }
 
-void OcularsGuiPanel::rotateCCDPlus5()
+void OcularsGuiPanel::rotatePrism(int angle)
 {
-	ocularsPlugin->rotateCCD(5);
-	updateCcdControls();
-}
-
-void OcularsGuiPanel::rotateCCDPlus15()
-{
-	ocularsPlugin->rotateCCD(15);
-	updateCcdControls();
-}
-
-void OcularsGuiPanel::rotateCCDPlus90()
-{
-	ocularsPlugin->rotateCCD(90);
-	updateCcdControls();
-}
-
-void OcularsGuiPanel::rotateCCDMinus1()
-{
-	ocularsPlugin->rotateCCD(-1);
-	updateCcdControls();
-}
-
-void OcularsGuiPanel::rotateCCDMinus5()
-{
-	ocularsPlugin->rotateCCD(-5);
-	updateCcdControls();
-}
-
-void OcularsGuiPanel::rotateCCDMinus15()
-{
-	ocularsPlugin->rotateCCD(-15);
-	updateCcdControls();
-}
-
-void OcularsGuiPanel::rotateCCDMinus90()
-{
-	ocularsPlugin->rotateCCD(-90);
+	ocularsPlugin->rotatePrism(angle);
 	updateCcdControls();
 }
 
 void OcularsGuiPanel::resetCCDRotation()
 {
 	ocularsPlugin->ccdRotationReset();
-	updateCcdControls();
-}
-
-void OcularsGuiPanel::rotatePrismPlus1()
-{
-	ocularsPlugin->rotatePrism(1);
-	updateCcdControls();
-}
-
-void OcularsGuiPanel::rotatePrismPlus5()
-{
-	ocularsPlugin->rotatePrism(5);
-	updateCcdControls();
-}
-
-void OcularsGuiPanel::rotatePrismPlus15()
-{
-	ocularsPlugin->rotatePrism(15);
-	updateCcdControls();
-}
-
-void OcularsGuiPanel::rotatePrismPlus90()
-{
-	ocularsPlugin->rotatePrism(90);
-	updateCcdControls();
-}
-
-void OcularsGuiPanel::rotatePrismMinus1()
-{
-	ocularsPlugin->rotatePrism(-1);
-	updateCcdControls();
-}
-
-void OcularsGuiPanel::rotatePrismMinus5()
-{
-	ocularsPlugin->rotatePrism(-5);
-	updateCcdControls();
-}
-
-void OcularsGuiPanel::rotatePrismMinus15()
-{
-	ocularsPlugin->rotatePrism(-15);
-	updateCcdControls();
-}
-
-void OcularsGuiPanel::rotatePrismMinus90()
-{
-	ocularsPlugin->rotatePrism(-90);
 	updateCcdControls();
 }
 

@@ -55,41 +55,12 @@ private slots:
 	//! Tied to the parent's geometryChanged() signal.
 	void updatePosition();
 
-	//! Rotate the sensor frame 1 degree clockwise
-	void rotateCCDPlus1();
-	//! Rotate the sensor frame 5 degrees clockwise
-	void rotateCCDPlus5();
-	//! Rotate the sensor frame 15 degrees clockwise
-	void rotateCCDPlus15();
-	//! Rotate the sensor frame 90 degrees clockwise
-	void rotateCCDPlus90();
-	//! Rotate the sensor frame 1 degree counterclockwise
-	void rotateCCDMinus1();
-	//! Rotate the sensor frame 5 degrees counterclockwise
-	void rotateCCDMinus5();
-	//! Rotate the sensor frame 15 degrees counterclockwise
-	void rotateCCDMinus15();
-	//! Rotate the sensor frame 90 degrees counterclockwise
-	void rotateCCDMinus90();
-	//! Reset the sensor frame rotation
+	//! Rotate the sensor frame X degrees clockwise or counterclockwise
+	void rotateCCD(int angle);
+	//! Rotate the prism X degrees clockwise
+	void rotatePrism(int angle);
+	//! Reset the sensor frame rotation or counterclockwise
 	void resetCCDRotation();
-
-	//! Rotate the prism 1 degree clockwise
-	void rotatePrismPlus1();
-	//! Rotate the prism 5 degrees clockwise
-	void rotatePrismPlus5();
-	//! Rotate the prism 15 degrees clockwise
-	void rotatePrismPlus15();
-	//! Rotate the prism 90 degrees clockwise
-	void rotatePrismPlus90();
-	//! Rotate the prism 1 degree counterclockwise
-	void rotatePrismMinus1();
-	//! Rotate the prism 5 degrees counterclockwise
-	void rotatePrismMinus5();
-	//! Rotate the prism 15 degrees counterclockwise
-	void rotatePrismMinus15();
-	//! Rotate the prism 90 degrees counterclockwise
-	void rotatePrismMinus90();
 	//! Reset the prism rotation
 	void resetPrismRotation();
 
