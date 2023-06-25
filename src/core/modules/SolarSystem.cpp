@@ -733,7 +733,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			// Look in the other planets the one named with strParent
 			for (const auto& p : qAsConst(systemPlanets))
 			{
-				if (p->getEnglishName()==strParent)
+				if (p->getCommonEnglishName()==strParent)
 				{
 					parent = p;
 					break;
@@ -741,7 +741,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			}
 			if (parent.isNull())
 			{
-				qWarning() << "ERROR : can't find parent solar system body for " << englishName << ". Skipping.";
+				qWarning().noquote() << "ERROR : can't find parent solar system body for " << englishName << ". Skipping.";
 				//abort();
 				continue;
 			}

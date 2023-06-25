@@ -55,15 +55,25 @@ private slots:
 	//! Tied to the parent's geometryChanged() signal.
 	void updatePosition();
 
-	//! Updates the information shown when an ocular overlay is displayed
-	void updateOcularControls();
+	//! Rotate the sensor frame X degrees clockwise or counterclockwise
+	void rotateCCD(int angle);
+	//! Rotate the prism X degrees clockwise
+	void rotatePrism(int angle);
+	//! Reset the sensor frame rotation or counterclockwise
+	void resetCCDRotation();
+	//! Reset the prism rotation
+	void resetPrismRotation();
+
 	//! Updates the information shown when a sensor overlay is displayed
 	void updateCcdControls();
+	//! Updates the information that depends on the current lens
+	void updateLensControls();
+	//! Updates the information shown when an ocular overlay is displayed
+	void updateOcularControls();
 	//! Updates the information that depends on the current telescope.
 	//! Called in both updateOcularControls() and updateCcdControls().
 	void updateTelescopeControls();
-	//! Updates the information that depends on the current lens
-	void updateLensControls();
+
 	//! Sets the color scheme (day/night mode)
 	void setColorScheme(const QString& schemeName);
 

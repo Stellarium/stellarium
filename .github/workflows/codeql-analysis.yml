@@ -62,7 +62,7 @@ jobs:
       run: |
         mkdir -p build
         cd build
-        cmake -DCMAKE_BUILD_TYPE=Release ${{ github.workspace }}
+        cmake -DCMAKE_BUILD_TYPE=Release -DENABLE_NLS=Off ${{ github.workspace }}
         make
 
     # ℹ️ Command-line programs to run using the OS shell.
@@ -91,6 +91,6 @@ jobs:
           -**/_deps/**
 
     - name: Upload SARIF
-      uses: github/codeql-action/upload-sarif@v1
+      uses: github/codeql-action/upload-sarif@v2
       with:
         sarif_file: sarif-results/${{ matrix.language }}.sarif
