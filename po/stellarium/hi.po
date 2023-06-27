@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2023-06-19 23:47+0700\n"
+"POT-Creation-Date: 2023-06-25 13:17+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: राजಐயர், 2023\n"
 "Language-Team: Hindi (https://app.transifex.com/stellarium/teams/80998/hi/)\n"
@@ -28,8 +28,8 @@ msgstr ""
 #: src/core/modules/CustomObject.cpp:81 src/core/modules/Asterism.cpp:194
 #: src/core/modules/Constellation.cpp:290
 #: src/core/modules/NomenclatureItem.cpp:224 src/core/modules/Nebula.cpp:249
-#: src/core/modules/Nebula.cpp:251 src/core/modules/Planet.cpp:608
-#: src/core/modules/Planet.cpp:611 src/core/modules/StarWrapper.cpp:49
+#: src/core/modules/Nebula.cpp:251 src/core/modules/Planet.cpp:617
+#: src/core/modules/Planet.cpp:620 src/core/modules/StarWrapper.cpp:49
 #: src/core/modules/StarWrapper.cpp:290 src/core/modules/StarWrapper.cpp:292
 #: src/gui/AstroCalcDialog.cpp:904 src/gui/AstroCalcDialog.cpp:2305
 #: src/gui/AstroCalcDialog.cpp:2877 src/gui/AstroCalcDialog.cpp:2909
@@ -330,8 +330,8 @@ msgid "Antapex"
 msgstr "प्रतिशिखर"
 
 #. TRANSLATORS: Unit of measure for speed - kilometers per second
-#: src/core/modules/GridLinesMgr.cpp:1630 src/core/modules/Planet.cpp:732
-#: src/core/modules/Planet.cpp:1226 src/gui/AstroCalcDialog.cpp:9095
+#: src/core/modules/GridLinesMgr.cpp:1630 src/core/modules/Planet.cpp:741
+#: src/core/modules/Planet.cpp:1235 src/gui/AstroCalcDialog.cpp:9095
 #: plugins/Satellites/src/Satellite.cpp:360
 #: plugins/Satellites/src/Satellite.cpp:403
 #: plugins/MeteorShowers/src/MeteorShower.cpp:564
@@ -539,97 +539,97 @@ msgid "Compass marks"
 msgstr "दिशा सूचक चिह्न"
 
 #. TRANSLATORS: North
-#: src/core/modules/LandscapeMgr.cpp:279 src/core/modules/Planet.cpp:1348
+#: src/core/modules/LandscapeMgr.cpp:279 src/core/modules/Planet.cpp:1357
 msgctxt "compass direction"
 msgid "N"
 msgstr "उ॰"
 
 #. TRANSLATORS: South
-#: src/core/modules/LandscapeMgr.cpp:281 src/core/modules/Planet.cpp:1340
+#: src/core/modules/LandscapeMgr.cpp:281 src/core/modules/Planet.cpp:1349
 msgctxt "compass direction"
 msgid "S"
 msgstr "द॰"
 
 #. TRANSLATORS: East
-#: src/core/modules/LandscapeMgr.cpp:283 src/core/modules/Planet.cpp:1352
+#: src/core/modules/LandscapeMgr.cpp:283 src/core/modules/Planet.cpp:1361
 msgctxt "compass direction"
 msgid "E"
 msgstr "पू॰"
 
 #. TRANSLATORS: West
-#: src/core/modules/LandscapeMgr.cpp:285 src/core/modules/Planet.cpp:1344
+#: src/core/modules/LandscapeMgr.cpp:285 src/core/modules/Planet.cpp:1353
 msgctxt "compass direction"
 msgid "W"
 msgstr "प॰"
 
 #. TRANSLATORS: Northeast
-#: src/core/modules/LandscapeMgr.cpp:287 src/core/modules/Planet.cpp:1350
+#: src/core/modules/LandscapeMgr.cpp:287 src/core/modules/Planet.cpp:1359
 msgctxt "compass direction"
 msgid "NE"
 msgstr "उ॰पू॰"
 
 #. TRANSLATORS: Southeast
-#: src/core/modules/LandscapeMgr.cpp:289 src/core/modules/Planet.cpp:1354
+#: src/core/modules/LandscapeMgr.cpp:289 src/core/modules/Planet.cpp:1363
 msgctxt "compass direction"
 msgid "SE"
 msgstr "द॰पू॰"
 
 #. TRANSLATORS: Southwest
-#: src/core/modules/LandscapeMgr.cpp:291 src/core/modules/Planet.cpp:1342
+#: src/core/modules/LandscapeMgr.cpp:291 src/core/modules/Planet.cpp:1351
 msgctxt "compass direction"
 msgid "SW"
 msgstr "द॰प॰"
 
 #. TRANSLATORS: Northwest
-#: src/core/modules/LandscapeMgr.cpp:293 src/core/modules/Planet.cpp:1346
+#: src/core/modules/LandscapeMgr.cpp:293 src/core/modules/Planet.cpp:1355
 msgctxt "compass direction"
 msgid "NW"
 msgstr "उ॰प॰"
 
 #. TRANSLATORS: North-northeast
-#: src/core/modules/LandscapeMgr.cpp:295 src/core/modules/Planet.cpp:1349
+#: src/core/modules/LandscapeMgr.cpp:295 src/core/modules/Planet.cpp:1358
 msgctxt "compass direction"
 msgid "NNE"
 msgstr "उ॰उ॰पू॰"
 
 #. TRANSLATORS: East-northeast
-#: src/core/modules/LandscapeMgr.cpp:297 src/core/modules/Planet.cpp:1351
+#: src/core/modules/LandscapeMgr.cpp:297 src/core/modules/Planet.cpp:1360
 msgctxt "compass direction"
 msgid "ENE"
 msgstr "पू॰उ॰पू॰"
 
 #. TRANSLATORS: East-southeast
-#: src/core/modules/LandscapeMgr.cpp:299 src/core/modules/Planet.cpp:1353
+#: src/core/modules/LandscapeMgr.cpp:299 src/core/modules/Planet.cpp:1362
 msgctxt "compass direction"
 msgid "ESE"
 msgstr "पू॰द॰पू॰"
 
 #. TRANSLATORS: South-southeast
-#: src/core/modules/LandscapeMgr.cpp:301 src/core/modules/Planet.cpp:1355
+#: src/core/modules/LandscapeMgr.cpp:301 src/core/modules/Planet.cpp:1364
 msgctxt "compass direction"
 msgid "SSE"
 msgstr "द॰द॰पू॰"
 
 #. TRANSLATORS: South-southwest
-#: src/core/modules/LandscapeMgr.cpp:303 src/core/modules/Planet.cpp:1341
+#: src/core/modules/LandscapeMgr.cpp:303 src/core/modules/Planet.cpp:1350
 msgctxt "compass direction"
 msgid "SSW"
 msgstr "द॰द॰प॰"
 
 #. TRANSLATORS: West-southwest
-#: src/core/modules/LandscapeMgr.cpp:305 src/core/modules/Planet.cpp:1343
+#: src/core/modules/LandscapeMgr.cpp:305 src/core/modules/Planet.cpp:1352
 msgctxt "compass direction"
 msgid "WSW"
 msgstr "प॰द॰प॰"
 
 #. TRANSLATORS: West-northwest
-#: src/core/modules/LandscapeMgr.cpp:307 src/core/modules/Planet.cpp:1345
+#: src/core/modules/LandscapeMgr.cpp:307 src/core/modules/Planet.cpp:1354
 msgctxt "compass direction"
 msgid "WNW"
 msgstr "प॰उ॰प॰"
 
 #. TRANSLATORS: North-northwest
-#: src/core/modules/LandscapeMgr.cpp:309 src/core/modules/Planet.cpp:1347
+#: src/core/modules/LandscapeMgr.cpp:309 src/core/modules/Planet.cpp:1356
 msgctxt "compass direction"
 msgid "NNW"
 msgstr "उ॰उ॰प॰"
@@ -841,7 +841,7 @@ msgstr "मी॰"
 #: src/core/modules/LandscapeMgr.cpp:1371 src/gui/ObsListDialog.cpp:266
 #: src/ui_locationDialogGui.h:486 src/ui_obsListDialog.h:414
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:144
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:490
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:489
 msgid "Location"
 msgstr "स्थान"
 
@@ -920,14 +920,14 @@ msgstr "भौगोलिक नाम"
 msgid "Linear size"
 msgstr "रेखीय आकार"
 
-#: src/core/modules/NomenclatureItem.cpp:239 src/core/modules/Planet.cpp:820
+#: src/core/modules/NomenclatureItem.cpp:239 src/core/modules/Planet.cpp:829
 msgid "Diameter"
 msgstr "व्यास"
 
 #. TRANSLATORS: Unit of measure for distance - kilometers
-#: src/core/modules/NomenclatureItem.cpp:240 src/core/modules/Planet.cpp:688
-#: src/core/modules/Planet.cpp:713 src/core/modules/Planet.cpp:821
-#: src/core/modules/Planet.cpp:1542 src/core/modules/Comet.cpp:189
+#: src/core/modules/NomenclatureItem.cpp:240 src/core/modules/Planet.cpp:697
+#: src/core/modules/Planet.cpp:722 src/core/modules/Planet.cpp:830
+#: src/core/modules/Planet.cpp:1551 src/core/modules/Comet.cpp:189
 #: src/core/modules/Comet.cpp:199 src/gui/StelGuiItems.cpp:971
 #: src/gui/AstroCalcDialog.cpp:3110 src/gui/AstroCalcDialog.cpp:3623
 #: src/gui/AstroCalcDialog.cpp:9030 plugins/Satellites/src/Satellites.cpp:2913
@@ -1828,17 +1828,17 @@ msgstr "द्वारा"
 msgid "Airmasses"
 msgstr "वायुखण्ड"
 
-#: src/core/modules/Nebula.cpp:236 src/core/modules/Planet.cpp:591
+#: src/core/modules/Nebula.cpp:236 src/core/modules/Planet.cpp:593
 #: src/core/modules/StarWrapper.cpp:276
 msgid "Additional names: "
 msgstr "अतिरिक्त नाम : "
 
-#: src/core/modules/Nebula.cpp:242 src/core/modules/Planet.cpp:598
+#: src/core/modules/Nebula.cpp:242 src/core/modules/Planet.cpp:600
 #: src/core/modules/StarWrapper.cpp:282
 msgid "Additional catalog numbers: "
 msgstr "अतिरिक्त सूचीपत्र संख्या : "
 
-#: src/core/modules/Nebula.cpp:260 src/core/modules/Planet.cpp:831
+#: src/core/modules/Nebula.cpp:260 src/core/modules/Planet.cpp:840
 #: src/core/modules/MinorPlanet.cpp:186 src/core/modules/StarWrapper.cpp:54
 #: src/core/modules/StarWrapper.cpp:306 plugins/Quasars/src/Quasar.cpp:134
 msgid "Color Index (B-V)"
@@ -1893,7 +1893,7 @@ msgstr "प्र॰व॰"
 
 #. TRANSLATORS: distance
 #: src/core/modules/Nebula.cpp:346 src/core/modules/Nebula.cpp:392
-#: src/core/modules/Planet.cpp:723 src/core/modules/StarWrapper.cpp:341
+#: src/core/modules/Planet.cpp:732 src/core/modules/StarWrapper.cpp:341
 #: src/core/modules/StarWrapper.cpp:343 src/gui/AstroCalcDialog.cpp:939
 #: src/gui/AstroCalcChart.cpp:92 src/gui/AstroCalcChart.cpp:102
 #: src/gui/AstroCalcChart.cpp:427 src/gui/AstroCalcChart.cpp:453
@@ -2318,44 +2318,49 @@ msgstr "सेडनामय ग्रहखण्ड"
 msgid "interstellar object"
 msgstr "तारान्तर वस्तु"
 
-#: src/core/modules/Planet.cpp:569 src/core/modules/Comet.cpp:180
+#: src/core/modules/Planet.cpp:571 src/core/modules/Comet.cpp:180
 #: src/core/modules/StarWrapper.cpp:300 plugins/Quasars/src/Quasar.cpp:131
 msgid "Absolute Magnitude"
 msgstr "निरपेक्ष मात्रा"
 
-#: src/core/modules/Planet.cpp:572
+#: src/core/modules/Planet.cpp:574
 msgid "Mean Opposition Magnitude"
 msgstr "मध्यमान विपक्षता मात्रा"
-
-#: src/core/modules/Planet.cpp:606
-msgctxt "type of comet"
-msgid "periodic"
-msgstr "आवधिक"
 
 #: src/core/modules/Planet.cpp:607
 msgctxt "type of comet"
 msgid "non-periodic"
 msgstr "अनावधिक"
 
+#: src/core/modules/Planet.cpp:612
+msgctxt "type of comet"
+msgid "short-period"
+msgstr "अल्पावधि"
+
+#: src/core/modules/Planet.cpp:614
+msgctxt "type of comet"
+msgid "periodic"
+msgstr "आवधिक"
+
 #. TRANSLATORS: Ecliptical rectangular coordinates
-#: src/core/modules/Planet.cpp:663 src/core/modules/Planet.cpp:665
+#: src/core/modules/Planet.cpp:672 src/core/modules/Planet.cpp:674
 msgctxt "coordinates"
 msgid "Ecliptical"
 msgstr "क्रान्तिवृत्त"
 
-#: src/core/modules/Planet.cpp:674 src/core/modules/Planet.cpp:675
+#: src/core/modules/Planet.cpp:683 src/core/modules/Planet.cpp:684
 msgid "Hourly motion"
 msgstr "घण्टेवार गति"
 
-#: src/core/modules/Planet.cpp:674 src/core/modules/Planet.cpp:1401
-#: src/core/modules/Planet.cpp:1410 src/core/modules/StarWrapper.cpp:358
+#: src/core/modules/Planet.cpp:683 src/core/modules/Planet.cpp:1410
+#: src/core/modules/Planet.cpp:1419 src/core/modules/StarWrapper.cpp:358
 #: plugins/Pulsars/src/Pulsar.cpp:204
 msgctxt "into the direction of"
 msgid "towards"
 msgstr "की ओर"
 
 #. TRANSLATORS: Unit of measure for distance - astronomical unit
-#: src/core/modules/Planet.cpp:686 src/gui/AstroCalcDialog.cpp:885
+#: src/core/modules/Planet.cpp:695 src/gui/AstroCalcDialog.cpp:885
 #: src/gui/AstroCalcDialog.cpp:1196 src/gui/AstroCalcDialog.cpp:1485
 #: src/gui/AstroCalcDialog.cpp:1752 src/gui/AstroCalcDialog.cpp:1811
 #: src/gui/AstroCalcDialog.cpp:9055 src/gui/AstroCalcChart.cpp:427
@@ -2370,264 +2375,264 @@ msgstr "ज्यो॰मा॰"
 #. TRANSLATORS: Unit of measure for distance - millions of kilometers
 #. TRANSLATORS: Unit of measure for distance - milliones kilometers
 #. TRANSLATORS: Unit of measure for distance - millions kilometers
-#: src/core/modules/Planet.cpp:702 src/core/modules/Planet.cpp:720
+#: src/core/modules/Planet.cpp:711 src/core/modules/Planet.cpp:729
 #: src/core/modules/Comet.cpp:191 src/gui/AstroCalcDialog.cpp:9032
 msgctxt "distance"
 msgid "M km"
 msgstr "प्र॰स॰मे॰"
 
-#: src/core/modules/Planet.cpp:705
+#: src/core/modules/Planet.cpp:714
 msgid "Distance from Sun"
 msgstr "सूर्य से दूरी"
 
 #. TRANSLATORS: Distance measured in terms of the speed of light
-#: src/core/modules/Planet.cpp:725
+#: src/core/modules/Planet.cpp:734
 msgid "Light time"
 msgstr "प्रकाश यात्रासमय"
 
-#: src/core/modules/Planet.cpp:739
+#: src/core/modules/Planet.cpp:748
 msgid "Orbital velocity"
 msgstr "कक्षीय वेग"
 
-#: src/core/modules/Planet.cpp:742
+#: src/core/modules/Planet.cpp:751
 msgid "Heliocentric velocity"
 msgstr "सूर्यमध्यमान वेग"
 
-#: src/core/modules/Planet.cpp:756
+#: src/core/modules/Planet.cpp:765
 #, qt-format
 msgid "NOTE: elements for epoch %1 probably outdated. Consider updating data!"
 msgstr ""
 "ध्यातव्य। कालावधि %1 के लिए तत्व सम्भवतः पुराने हो चुके। तथ्यों का नवीकरण "
 "उचित।"
 
-#: src/core/modules/Planet.cpp:788
+#: src/core/modules/Planet.cpp:797
 msgid "with rings"
 msgstr "वलय युक्त"
 
-#: src/core/modules/Planet.cpp:805
+#: src/core/modules/Planet.cpp:814
 msgid "scaled up to"
 msgstr "मापदण्ड गुणांक"
 
-#: src/core/modules/Planet.cpp:815
+#: src/core/modules/Planet.cpp:824
 msgid "Apparent diameter"
 msgstr "प्रतीयमान व्यास"
 
-#: src/core/modules/Planet.cpp:820
+#: src/core/modules/Planet.cpp:829
 msgid "Equatorial diameter"
 msgstr "भूमध्यरेखा व्यास"
 
-#: src/core/modules/Planet.cpp:884 src/core/modules/Planet.cpp:885
-#: src/core/modules/Planet.cpp:893 src/gui/AstroCalcChart.cpp:93
+#: src/core/modules/Planet.cpp:893 src/core/modules/Planet.cpp:894
+#: src/core/modules/Planet.cpp:902 src/gui/AstroCalcChart.cpp:93
 #: src/gui/AstroCalcChart.cpp:103 src/gui/AstroCalcChart.cpp:429
 #: src/gui/AstroCalcChart.cpp:455 src/ui_configurationDialog.h:1887
 msgid "Elongation"
 msgstr "दीर्घकरण"
 
-#: src/core/modules/Planet.cpp:886 src/core/modules/Planet.cpp:895
+#: src/core/modules/Planet.cpp:895 src/core/modules/Planet.cpp:904
 #: src/gui/AstroCalcChart.cpp:96 src/gui/AstroCalcChart.cpp:106
 #: src/gui/AstroCalcChart.cpp:438 src/gui/AstroCalcChart.cpp:464
 #: plugins/Satellites/src/Satellite.cpp:408
 msgid "Phase angle"
 msgstr "चरण अस्र"
 
-#: src/core/modules/Planet.cpp:888 src/core/modules/Planet.cpp:897
+#: src/core/modules/Planet.cpp:897 src/core/modules/Planet.cpp:906
 msgid "Illuminated"
 msgstr "प्रकाशित"
 
-#: src/core/modules/Planet.cpp:894
+#: src/core/modules/Planet.cpp:903
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:323
 msgid "Elong. in Ecl.Long."
 msgstr "दी॰क्रा॰दे॰"
 
-#: src/core/modules/Planet.cpp:909 src/gui/AstroCalcDialog.cpp:9265
+#: src/core/modules/Planet.cpp:918 src/gui/AstroCalcDialog.cpp:9265
 #: src/gui/AstroCalcChart.cpp:472
 msgid "Angular distance"
 msgstr "अस्रीय दूरी"
 
 #. TRANSLATORS: Unit of measure for period - days
-#: src/core/modules/Planet.cpp:927 src/core/modules/StarWrapper.cpp:382
+#: src/core/modules/Planet.cpp:936 src/core/modules/StarWrapper.cpp:382
 #: src/gui/AstroCalcDialog.cpp:9066
 msgctxt "duration"
 msgid "days"
 msgstr "दिन"
 
-#: src/core/modules/Planet.cpp:936
+#: src/core/modules/Planet.cpp:945
 msgid "Sidereal period"
 msgstr "नक्षत्रमान अवधि"
 
-#: src/core/modules/Planet.cpp:945
+#: src/core/modules/Planet.cpp:954
 msgid "Synodic period"
 msgstr "चन्द्रकला अवधि"
 
 #. TRANSLATORS: Unit of measure for speed - meters per second
-#: src/core/modules/Planet.cpp:1228
+#: src/core/modules/Planet.cpp:1237
 msgctxt "speed"
 msgid "m/s"
 msgstr "मे॰प्र॰से॰"
 
-#: src/core/modules/Planet.cpp:1243
+#: src/core/modules/Planet.cpp:1252
 msgid "Sidereal day"
 msgstr "नक्षत्रमान दिन"
 
-#: src/core/modules/Planet.cpp:1245
+#: src/core/modules/Planet.cpp:1254
 msgid "Mean solar day"
 msgstr "मध्यमान सौर दिन"
 
-#: src/core/modules/Planet.cpp:1251
+#: src/core/modules/Planet.cpp:1260
 msgid "The period of rotation is chaotic"
 msgstr "घुमाव की अवधि अनियमित"
 
-#: src/core/modules/Planet.cpp:1257 src/core/modules/Planet.cpp:1259
-#: src/core/modules/Planet.cpp:1265 src/core/modules/Planet.cpp:1267
+#: src/core/modules/Planet.cpp:1266 src/core/modules/Planet.cpp:1268
+#: src/core/modules/Planet.cpp:1274 src/core/modules/Planet.cpp:1276
 msgid "Equatorial rotation velocity"
 msgstr "भूमध्यरेखा घुमाव वेग"
 
-#: src/core/modules/Planet.cpp:1291 src/core/modules/Planet.cpp:1684
+#: src/core/modules/Planet.cpp:1300 src/core/modules/Planet.cpp:1693
 msgctxt "Moon phase"
 msgid "New Moon"
 msgstr "अमावस्या"
 
-#: src/core/modules/Planet.cpp:1293 src/core/modules/Planet.cpp:1686
+#: src/core/modules/Planet.cpp:1302 src/core/modules/Planet.cpp:1695
 msgctxt "Moon phase"
 msgid "Waxing Crescent"
 msgstr "शुक्लपक्ष पूर्वार्द्ध"
 
-#: src/core/modules/Planet.cpp:1295 src/core/modules/Planet.cpp:1688
+#: src/core/modules/Planet.cpp:1304 src/core/modules/Planet.cpp:1697
 msgctxt "Moon phase"
 msgid "First Quarter"
 msgstr "प्रथम चौथाई"
 
-#: src/core/modules/Planet.cpp:1297 src/core/modules/Planet.cpp:1690
+#: src/core/modules/Planet.cpp:1306 src/core/modules/Planet.cpp:1699
 msgctxt "Moon phase"
 msgid "Waxing Gibbous"
 msgstr "शुक्लपक्ष परार्द्ध"
 
-#: src/core/modules/Planet.cpp:1299 src/core/modules/Planet.cpp:1692
+#: src/core/modules/Planet.cpp:1308 src/core/modules/Planet.cpp:1701
 msgctxt "Moon phase"
 msgid "Full Moon"
 msgstr "पूर्णिमा"
 
-#: src/core/modules/Planet.cpp:1301 src/core/modules/Planet.cpp:1694
+#: src/core/modules/Planet.cpp:1310 src/core/modules/Planet.cpp:1703
 msgctxt "Moon phase"
 msgid "Waning Gibbous"
 msgstr "कृष्णपक्ष पूर्वार्द्ध"
 
-#: src/core/modules/Planet.cpp:1303 src/core/modules/Planet.cpp:1696
+#: src/core/modules/Planet.cpp:1312 src/core/modules/Planet.cpp:1705
 msgctxt "Moon phase"
 msgid "Third Quarter"
 msgstr "तृतीय चौथाई"
 
-#: src/core/modules/Planet.cpp:1305 src/core/modules/Planet.cpp:1698
+#: src/core/modules/Planet.cpp:1314 src/core/modules/Planet.cpp:1707
 msgctxt "Moon phase"
 msgid "Waning Crescent"
 msgstr "कृष्णपक्ष परार्द्ध"
 
-#: src/core/modules/Planet.cpp:1313
+#: src/core/modules/Planet.cpp:1322
 msgid "Moon age"
 msgstr "चन्द्रमा आयु"
 
-#: src/core/modules/Planet.cpp:1313
+#: src/core/modules/Planet.cpp:1322
 msgid "days old"
 msgstr "दिन पुराना"
 
-#: src/core/modules/Planet.cpp:1333 src/core/modules/Planet.cpp:1336
+#: src/core/modules/Planet.cpp:1342 src/core/modules/Planet.cpp:1345
 msgid "Position angle of bright limb"
 msgstr "स्थान अस्र उज्ज्वल अंग का"
 
-#: src/core/modules/Planet.cpp:1400 src/core/modules/Planet.cpp:1409
-#: src/core/modules/Planet.cpp:1445 src/core/modules/Planet.cpp:1452
+#: src/core/modules/Planet.cpp:1409 src/core/modules/Planet.cpp:1418
+#: src/core/modules/Planet.cpp:1454 src/core/modules/Planet.cpp:1461
 msgid "Position Angle of axis"
 msgstr "स्थान अस्र अक्ष का"
 
-#: src/core/modules/Planet.cpp:1401 src/core/modules/Planet.cpp:1402
 #: src/core/modules/Planet.cpp:1410 src/core/modules/Planet.cpp:1411
+#: src/core/modules/Planet.cpp:1419 src/core/modules/Planet.cpp:1420
 msgid "Libration"
 msgstr "लडखडाना"
 
-#: src/core/modules/Planet.cpp:1403 src/core/modules/Planet.cpp:1412
-#: src/core/modules/Planet.cpp:1447 src/core/modules/Planet.cpp:1454
+#: src/core/modules/Planet.cpp:1412 src/core/modules/Planet.cpp:1421
+#: src/core/modules/Planet.cpp:1456 src/core/modules/Planet.cpp:1463
 msgid "Subsolar point"
 msgstr "उपसौर बिन्दु"
 
-#: src/core/modules/Planet.cpp:1404 src/core/modules/Planet.cpp:1413
+#: src/core/modules/Planet.cpp:1413 src/core/modules/Planet.cpp:1422
 msgid "Colongitude"
 msgstr "सदेशान्तर"
 
-#: src/core/modules/Planet.cpp:1446 src/core/modules/Planet.cpp:1453
+#: src/core/modules/Planet.cpp:1455 src/core/modules/Planet.cpp:1462
 msgid "Center point"
 msgstr "मध्य बिन्दु"
 
-#: src/core/modules/Planet.cpp:1473
+#: src/core/modules/Planet.cpp:1482
 msgid "Eclipse magnitude"
 msgstr "ग्रहण अम्श मात्रा"
 
-#: src/core/modules/Planet.cpp:1475
+#: src/core/modules/Planet.cpp:1484
 msgid "Eclipse obscuration"
 msgstr "ग्रहण आवृत"
 
-#: src/core/modules/Planet.cpp:1501
+#: src/core/modules/Planet.cpp:1510
 msgid "Moon/Sun diameter ratio"
 msgstr "चन्द्र सूर्य व्यास अनुपात"
 
-#: src/core/modules/Planet.cpp:1504
+#: src/core/modules/Planet.cpp:1513
 msgctxt "type of solar eclipse"
 msgid "(annular)"
 msgstr "( वलयाकार )"
 
-#: src/core/modules/Planet.cpp:1506
+#: src/core/modules/Planet.cpp:1515
 msgctxt "type of solar eclipse"
 msgid "(total)"
 msgstr "( पूर्ण )"
 
-#: src/core/modules/Planet.cpp:1517
+#: src/core/modules/Planet.cpp:1526
 msgid "Central eclipse duration"
 msgstr "मध्य ग्रहण अवधि"
 
 #. TRANSLATORS: Short for "minutes".
-#: src/core/modules/Planet.cpp:1519
+#: src/core/modules/Planet.cpp:1528
 #: plugins/Observability/src/Observability.cpp:153
 msgid "m"
 msgstr "मि॰"
 
 #. TRANSLATORS: Short for "seconds".
-#: src/core/modules/Planet.cpp:1521
+#: src/core/modules/Planet.cpp:1530
 #: plugins/Observability/src/Observability.cpp:155
 msgid "s"
 msgstr "से॰"
 
-#: src/core/modules/Planet.cpp:1522
+#: src/core/modules/Planet.cpp:1531
 msgid "Center of solar eclipse (Lat./Long.)"
 msgstr "सूर्यग्रहण मध्य ( अक्ष॰/देश॰ )"
 
-#: src/core/modules/Planet.cpp:1532
+#: src/core/modules/Planet.cpp:1541
 msgid "Shadow center point is"
 msgstr "छाया मध्य बिन्दु यह है"
 
-#: src/core/modules/Planet.cpp:1534
+#: src/core/modules/Planet.cpp:1543
 msgid "km towards azimuth"
 msgstr "स॰मे॰ दिगम्श की ओर"
 
-#: src/core/modules/Planet.cpp:1537
+#: src/core/modules/Planet.cpp:1546
 msgid "Width of antumbra"
 msgstr "चौडाई अन्तःछाया की"
 
-#: src/core/modules/Planet.cpp:1539
+#: src/core/modules/Planet.cpp:1548
 msgid "Width of umbra"
 msgstr "चौडाई छाया की"
 
-#: src/core/modules/Planet.cpp:1556
+#: src/core/modules/Planet.cpp:1565
 msgid "Penumbral eclipse magnitude"
 msgstr "अम्शछाया ग्रहण मात्रा"
 
-#: src/core/modules/Planet.cpp:1559
+#: src/core/modules/Planet.cpp:1568
 msgid "Umbral eclipse magnitude"
 msgstr "छाया ग्रहण मात्रा"
 
-#: src/core/modules/Planet.cpp:1566
+#: src/core/modules/Planet.cpp:1575
 msgid "Albedo"
 msgstr "प्रतिबिम्बन"
 
-#: src/core/modules/Planet.cpp:1569 src/core/modules/MinorPlanet.cpp:211
+#: src/core/modules/Planet.cpp:1578 src/core/modules/MinorPlanet.cpp:211
 #: src/core/modules/Comet.cpp:240
 msgid "Discovered"
 msgstr "खोजा गया।"
@@ -4056,23 +4061,23 @@ msgid "IAU Constellation"
 msgstr "एै॰ए॰यु॰ तारामण्डल"
 
 #. TRANSLATORS: Azimuth/Altitude
-#: src/core/StelObject.cpp:1239
+#: src/core/StelObject.cpp:1240
 msgctxt "celestial coordinate system"
 msgid "Solar A/a"
 msgstr "सौर दि॰/ऊँ॰"
 
-#: src/core/StelObject.cpp:1239
+#: src/core/StelObject.cpp:1240
 msgctxt "celestial coordinate system"
 msgid "Solar Az./Alt."
 msgstr "सौर दि॰/ऊँ॰"
 
 #. TRANSLATORS: Azimuth/Altitude
-#: src/core/StelObject.cpp:1257
+#: src/core/StelObject.cpp:1258
 msgctxt "celestial coordinate system"
 msgid "Lunar A/a"
 msgstr "चन्द्र दि॰/ऊँ॰"
 
-#: src/core/StelObject.cpp:1257
+#: src/core/StelObject.cpp:1258
 msgctxt "celestial coordinate system"
 msgid "Lunar Az./Alt."
 msgstr "चन्द्र दि॰/ऊँ॰"
@@ -5533,7 +5538,7 @@ msgstr "विभिन्न खिड़कियाँ"
 msgid "Selected object information"
 msgstr "चुनी वस्तु की जानकारी देखें"
 
-#: src/gui/StelGui.cpp:222 plugins/RemoteSync/src/ui_remoteSyncDialog.h:482
+#: src/gui/StelGui.cpp:222 plugins/RemoteSync/src/ui_remoteSyncDialog.h:481
 msgid "Quit"
 msgstr "निष्क्रिय करें"
 
@@ -5712,7 +5717,7 @@ msgid "FOV"
 msgstr "दृ॰क्षे॰"
 
 #: src/gui/StelGuiItems.cpp:1014
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:492
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:491
 msgid "Field of view"
 msgstr "दृश्यक्षेत्र"
 
@@ -11744,8 +11749,8 @@ msgid "Refresh"
 msgstr "नवीकरण करें"
 
 #: src/ui_locationDialogGui.h:489 src/ui_locationDialogGui.h:492
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialogLocations.h:156
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialogLocations.h:159
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialogLocations.h:155
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialogLocations.h:158
 msgid ""
 "Standard list of locations contains only English names (without diacritics!)"
 msgstr "सामान्य स्थल सूची में केवल आंग्ल नाम हैं ( बिना रोमक अक्षर विशेषक )"
@@ -13506,7 +13511,7 @@ msgstr "अतिरिक्त प्रबन्ध चित्रीय उ
 
 #: src/ui_configurationDialog.h:1757
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1502
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:489
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:488
 msgid "Time"
 msgstr "समय"
 
@@ -13607,7 +13612,7 @@ msgstr ""
 #: plugins/Quasars/src/ui_quasarsDialog.h:314
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:355
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:272
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:507
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:506
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:601
 #: plugins/Observability/src/ui_ObservabilityDialog.h:346
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:261
@@ -13629,7 +13634,7 @@ msgstr "स्टेलारियम के साथ आये मूलव�
 #: plugins/Quasars/src/ui_quasarsDialog.h:313
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:354
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:271
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:506
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:505
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:600
 #: plugins/Observability/src/ui_ObservabilityDialog.h:345
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:260
@@ -15166,7 +15171,7 @@ msgid "Ephemeris line thickness:"
 msgstr "ग्रहपत्री रेखा मोटापन : "
 
 #: src/ui_astroCalcExtraEphemerisDialog.h:204
-#: plugins/Oculars/src/Oculars.cpp:1958
+#: plugins/Oculars/src/Oculars.cpp:1971
 #: plugins/Oculars/src/gui/OcularDialog.cpp:598
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1160
 #: plugins/Satellites/src/ui_satellitesDialog.h:1285
@@ -15204,7 +15209,7 @@ msgstr "सूची अभिलिखित करें"
 
 #: src/ui_obsListDialog.h:365
 #: plugins/Satellites/src/ui_satellitesDialog.h:1385
-#: plugins/Scenery3d/src/ui_storedViewDialog.h:217
+#: plugins/Scenery3d/src/ui_storedViewDialog.h:216
 msgid "Description:"
 msgstr "विवरण : "
 
@@ -16068,7 +16073,7 @@ msgstr "अनुमति दें चयनित वस्तु के स�
 #: plugins/Quasars/src/ui_quasarsDialog.h:316
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:357
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:284
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:505
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:504
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:623
 #: plugins/Observability/src/ui_ObservabilityDialog.h:348
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:263
@@ -16206,452 +16211,420 @@ msgid "Toggle Oculars button bar"
 msgstr "उपनेत्र घुण्डी छड पलटें"
 
 #: plugins/Oculars/src/Oculars.cpp:1499
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:226
 msgid "Select next telescope"
 msgstr "अगला दूरदर्शक चयन करें"
 
 #: plugins/Oculars/src/Oculars.cpp:1501
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:224
 msgid "Select previous telescope"
 msgstr "पूर्व दूरदर्शक चयन करें"
 
 #: plugins/Oculars/src/Oculars.cpp:1503
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:214
 msgid "Select next eyepiece"
 msgstr "अगला उपनेत्र चयन करें"
 
 #: plugins/Oculars/src/Oculars.cpp:1505
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:212
 msgid "Select previous eyepiece"
 msgstr "पूर्व उपनेत्र चयन करें"
 
-#: plugins/Oculars/src/Oculars.cpp:1506
+#: plugins/Oculars/src/Oculars.cpp:1507
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:218
+msgid "Select next lens"
+msgstr "अगला ताल चुनें"
+
+#: plugins/Oculars/src/Oculars.cpp:1509
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:216
+msgid "Select previous lens"
+msgstr "पूर्व ताल चुनें"
+
+#: plugins/Oculars/src/Oculars.cpp:1511
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:222
+msgid "Select next CCD frame"
+msgstr "अगला वि॰सं॰य॰ चौखट चुनें"
+
+#: plugins/Oculars/src/Oculars.cpp:1513
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:220
+msgid "Select previous CCD frame"
+msgstr "पूर्व वि॰सं॰य चौखट चुनें"
+
+#: plugins/Oculars/src/Oculars.cpp:1514
 msgid "Rotate reticle pattern of the eyepiece clockwise"
 msgstr "उपनेत्र का जालीचिह्न‌ घुमाएँ दाएँ ओर"
 
-#: plugins/Oculars/src/Oculars.cpp:1507
+#: plugins/Oculars/src/Oculars.cpp:1515
 msgid "Rotate reticle pattern of the eyepiece counterclockwise"
 msgstr "उपनेत्र का जालीचिह्न‌ घुमाएँ बाएँ ओर"
 
-#: plugins/Oculars/src/Oculars.cpp:1508
+#: plugins/Oculars/src/Oculars.cpp:1516
 msgid "Toggle sensor crop overlay"
 msgstr "मापक पर कटाव अध्यारोपण पलटें"
 
-#: plugins/Oculars/src/Oculars.cpp:1509
+#: plugins/Oculars/src/Oculars.cpp:1517
 msgid "Toggle sensor pixel grid"
 msgstr "मापक वर्णबिन्दु रेखाजाल पलटें"
 
-#: plugins/Oculars/src/Oculars.cpp:1510
+#: plugins/Oculars/src/Oculars.cpp:1518
 msgid "Toggle focuser overlay"
 msgstr "दृश्य तीक्ष्णकर्ता अध्यारोपण पलटें"
 
-#: plugins/Oculars/src/Oculars.cpp:1874
+#: plugins/Oculars/src/Oculars.cpp:1887
 msgctxt "abbreviated in the plugin"
 msgid "Az/Alt of cross"
 msgstr "दि॰/ऊँ॰ जालीचिह्न का"
 
-#: plugins/Oculars/src/Oculars.cpp:1894
+#: plugins/Oculars/src/Oculars.cpp:1907
 msgctxt "abbreviated in the plugin"
 msgid "RA/Dec (J2000.0) of cross"
 msgstr "दा॰आ॰/झु॰ ( जू॰2000.0 ) जालीचिह्न का"
 
 #. TRANSLATORS: Unit of measure for scale - arc-seconds per pixel
-#: plugins/Oculars/src/Oculars.cpp:1938
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:721
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:909
+#: plugins/Oculars/src/Oculars.cpp:1951
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:691
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:879
 msgid "\"/px"
 msgstr "चा॰वि॰प्र॰व॰"
 
 #. TRANSLATORS: "Max exposure" is short version of phrase "Max time of
 #. exposure"
-#: plugins/Oculars/src/Oculars.cpp:1976
+#: plugins/Oculars/src/Oculars.cpp:1989
 msgid "Max exposure"
 msgstr "अधिकतम अनावृत"
 
 #. TRANSLATORS: duration
 #. TRANSLATORS: seconds.
-#: plugins/Oculars/src/Oculars.cpp:1976
+#: plugins/Oculars/src/Oculars.cpp:1989
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1154
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:223
 msgctxt "time"
 msgid "s"
 msgstr "से॰"
 
-#: plugins/Oculars/src/Oculars.cpp:2221
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:513
+#: plugins/Oculars/src/Oculars.cpp:2234
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:483
 msgid "Binocular"
 msgstr "द्वयोपनेत्र"
 
-#: plugins/Oculars/src/Oculars.cpp:2221
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:511
+#: plugins/Oculars/src/Oculars.cpp:2234
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:481
 msgid "Ocular"
 msgstr "उपनेत्र"
 
 #. TRANSLATORS: FL = Focal length
-#: plugins/Oculars/src/Oculars.cpp:2241
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:556
+#: plugins/Oculars/src/Oculars.cpp:2254
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:526
 #, qt-format
 msgid "Ocular FL: %1 mm"
 msgstr "उपनेत्र ती॰दू॰ : %1 श॰तम मे॰"
 
 #. TRANSLATORS: aFOV = apparent field of view
-#: plugins/Oculars/src/Oculars.cpp:2248
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:565
+#: plugins/Oculars/src/Oculars.cpp:2261
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:535
 #, qt-format
 msgid "Ocular aFOV: %1"
 msgstr "उपनेत्र स्प॰दृ॰क्षे॰ : %1"
 
-#: plugins/Oculars/src/Oculars.cpp:2259
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:595
+#: plugins/Oculars/src/Oculars.cpp:2272
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:565
 #, qt-format
 msgid "Lens #%1"
 msgstr "ताल #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:2263
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:599
+#: plugins/Oculars/src/Oculars.cpp:2276
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:569
 #, qt-format
 msgid "Lens #%1: %2"
 msgstr "ताल #%1 : %2"
 
-#: plugins/Oculars/src/Oculars.cpp:2268
+#: plugins/Oculars/src/Oculars.cpp:2281
 msgid "Lens: none"
 msgstr "ताल : कुछ नही"
 
-#: plugins/Oculars/src/Oculars.cpp:2283 plugins/Oculars/src/Oculars.cpp:2344
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:857
+#: plugins/Oculars/src/Oculars.cpp:2296 plugins/Oculars/src/Oculars.cpp:2357
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:827
 #, qt-format
 msgid "Telescope #%1"
 msgstr "दूरदर्शक #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:2292
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:959
+#: plugins/Oculars/src/Oculars.cpp:2305
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:929
 #, qt-format
 msgid "Magnification: %1"
 msgstr "बृहत्तरकरण : %1"
 
-#: plugins/Oculars/src/Oculars.cpp:2299
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:970
+#: plugins/Oculars/src/Oculars.cpp:2312
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:940
 #, qt-format
 msgid "Exit pupil: %1 mm"
 msgstr "निकास पुतली : %1 श॰तम मे॰"
 
-#: plugins/Oculars/src/Oculars.cpp:2306
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:978
+#: plugins/Oculars/src/Oculars.cpp:2319
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:948
 #, qt-format
 msgid "FOV: %1"
 msgstr "दृ॰क्षे॰ : %1"
 
-#: plugins/Oculars/src/Oculars.cpp:2327
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:709
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:901
+#: plugins/Oculars/src/Oculars.cpp:2340
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:679
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:871
 #, qt-format
 msgid "Dimensions: %1"
 msgstr "मात्राएँ : %1"
 
-#: plugins/Oculars/src/Oculars.cpp:2328
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:715
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:905
+#: plugins/Oculars/src/Oculars.cpp:2341
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:685
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:875
 msgid "Binning"
 msgstr "वर्गीकरण"
 
-#: plugins/Oculars/src/Oculars.cpp:2332
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:669
+#: plugins/Oculars/src/Oculars.cpp:2345
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:639
 #, qt-format
 msgid "Sensor #%1"
 msgstr "मापक #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:2336
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:673
+#: plugins/Oculars/src/Oculars.cpp:2349
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:643
 #, qt-format
 msgid "Sensor #%1: %2"
 msgstr "मापक #%1 : %2"
 
-#: plugins/Oculars/src/Oculars.cpp:2349
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:861
+#: plugins/Oculars/src/Oculars.cpp:2362
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:831
 #, qt-format
 msgid "Telescope #%1: %2"
 msgstr "दूरदर्शक #%1 : %2"
 
-#: plugins/Oculars/src/Oculars.cpp:2688
+#: plugins/Oculars/src/Oculars.cpp:2701
 msgid "&Lens"
 msgstr "ताल"
 
-#: plugins/Oculars/src/Oculars.cpp:2689
+#: plugins/Oculars/src/Oculars.cpp:2702
 msgid "&Previous lens"
 msgstr "पूर्व ताल"
 
-#: plugins/Oculars/src/Oculars.cpp:2690
+#: plugins/Oculars/src/Oculars.cpp:2703
 msgid "&Next lens"
 msgstr "अगला ताल"
 
-#: plugins/Oculars/src/Oculars.cpp:2692
+#: plugins/Oculars/src/Oculars.cpp:2705
 msgid "None"
 msgstr "कुछ नही"
 
-#: plugins/Oculars/src/Oculars.cpp:2719
+#: plugins/Oculars/src/Oculars.cpp:2732
 msgid "&Telescope"
 msgstr "दूरदर्शक"
 
-#: plugins/Oculars/src/Oculars.cpp:2720
+#: plugins/Oculars/src/Oculars.cpp:2733
 msgid "&Previous telescope"
 msgstr "पूर्व दूरदर्शक"
 
-#: plugins/Oculars/src/Oculars.cpp:2721
+#: plugins/Oculars/src/Oculars.cpp:2734
 msgid "&Next telescope"
 msgstr "अगला दूरदर्शक"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:186
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:216
-msgid "Previous ocular"
-msgstr "पूर्व उपनेत्र"
-
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:187
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:218
-msgid "Next ocular"
-msgstr "अगला उपनेत्र"
-
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:188
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:220
-msgid "Previous lens"
-msgstr "पूर्व ताल"
-
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:189
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:222
-msgid "Next lens"
-msgstr "अगला ताल"
-
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:190
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:224
-msgid "Previous CCD frame"
-msgstr "पूर्व वि॰सं॰य॰ चौखट"
-
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:191
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:226
-msgid "Next CCD frame"
-msgstr "अगला वि॰सं॰य॰ चौखट"
-
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:192
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:228
-msgid "Previous telescope"
-msgstr "पूर्व दूरदर्शक"
-
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:193
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:230
-msgid "Next telescope"
-msgstr "अगला दूरदर्शक"
-
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:195
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:290
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:277
 msgid "Reset the sensor frame rotation"
 msgstr "मापक चौखट घुमाव पुनर्स्थापित करें"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:196
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:250
-msgid "Rotate the sensor frame 90 degrees counterclockwise"
-msgstr "मापक चौखट को घुमाएँ 90 अम्श बाएँ ओर"
-
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:197
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:260
-msgid "Rotate the sensor frame 15 degrees counterclockwise"
-msgstr "मापक चौखट को घुमाएँ 15 अम्श बाएँ ओर"
-
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:198
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:270
-msgid "Rotate the sensor frame 5 degrees counterclockwise"
-msgstr "मापक चौखट को घुमाएँ 5 अम्श बाएँ ओर"
-
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:199
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:280
-msgid "Rotate the sensor frame 1 degree counterclockwise"
-msgstr "मापक चौखट को घुमाएँ 1 अम्श बाएँ ओर"
-
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:200
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:330
-msgid "Rotate the sensor frame 90 degrees clockwise"
-msgstr "मापक चौखट को घुमाएँ 90 अम्श दाएँ ओर"
-
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:201
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:320
-msgid "Rotate the sensor frame 15 degrees clockwise"
-msgstr "मापक चौखट को घुमाएँ 15 अम्श दाएँ ओर"
-
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:202
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:310
-msgid "Rotate the sensor frame 5 degrees clockwise"
-msgstr "मापक चौखट को घुमाएँ 5 अम्श दाएँ ओर"
-
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:203
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:300
-msgid "Rotate the sensor frame 1 degree clockwise"
-msgstr "मापक चौखट को घुमाएँ 1 अम्श दाएँ ओर"
-
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:205
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:292
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:187
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:279
 msgid "Reset the prism rotation"
 msgstr "वर्णविभाजक का घुमाव पुनर्स्थापित करें"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:206
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:252
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:237
+msgid "Rotate the sensor frame 90 degrees counterclockwise"
+msgstr "मापक चौखट को घुमाएँ 90 अम्श बाएँ ओर"
+
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:239
 msgid "Rotate the prism 90 degrees counterclockwise"
 msgstr "वर्णविभाजक को घुमाएँ 90 अम्श बाएँ ओर"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:207
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:262
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:247
+msgid "Rotate the sensor frame 15 degrees counterclockwise"
+msgstr "मापक चौखट को घुमाएँ 15 अम्श बाएँ ओर"
+
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:249
 msgid "Rotate the prism 15 degrees counterclockwise"
 msgstr "वर्णविभाजक को घुमाएँ 15 अम्श बाएँ ओर"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:208
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:272
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:257
+msgid "Rotate the sensor frame 5 degrees counterclockwise"
+msgstr "मापक चौखट को घुमाएँ 5 अम्श बाएँ ओर"
+
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:259
 msgid "Rotate the prism 5 degrees counterclockwise"
 msgstr "वर्णविभाजक को घुमाएँ 5 अम्श बाएँ ओर"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:209
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:282
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:267
+msgid "Rotate the sensor frame 1 degree counterclockwise"
+msgstr "मापक चौखट को घुमाएँ 1 अम्श बाएँ ओर"
+
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:269
 msgid "Rotate the prism 1 degree counterclockwise"
 msgstr "वर्णविभाजक को घुमाएँ 1 अम्श बाएँ ओर"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:210
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:332
-msgid "Rotate the prism 90 degrees clockwise"
-msgstr "वर्णविभाजक को घुमाएँ 90 अम्श दाएँ ओर"
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:287
+msgid "Rotate the sensor frame 1 degree clockwise"
+msgstr "मापक चौखट को घुमाएँ 1 अम्श दाएँ ओर"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:211
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:322
-msgid "Rotate the prism 15 degrees clockwise"
-msgstr "वर्णविभाजक को घुमाएँ 15 अम्श दाएँ ओर"
-
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:212
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:312
-msgid "Rotate the prism 5 degrees clockwise"
-msgstr "वर्णविभाजक को घुमाएँ 5 अम्श दाएँ ओर"
-
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:213
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:302
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:289
 msgid "Rotate the prism 1 degree clockwise"
 msgstr "वर्णविभाजक को घुमाएँ 1 अम्श दाएँ ओर"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:558
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:297
+msgid "Rotate the sensor frame 5 degrees clockwise"
+msgstr "मापक चौखट को घुमाएँ 5 अम्श दाएँ ओर"
+
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:299
+msgid "Rotate the prism 5 degrees clockwise"
+msgstr "वर्णविभाजक को घुमाएँ 5 अम्श दाएँ ओर"
+
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:307
+msgid "Rotate the sensor frame 15 degrees clockwise"
+msgstr "मापक चौखट को घुमाएँ 15 अम्श दाएँ ओर"
+
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:309
+msgid "Rotate the prism 15 degrees clockwise"
+msgstr "वर्णविभाजक को घुमाएँ 15 अम्श दाएँ ओर"
+
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:317
+msgid "Rotate the sensor frame 90 degrees clockwise"
+msgstr "मापक चौखट को घुमाएँ 90 अम्श दाएँ ओर"
+
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:319
+msgid "Rotate the prism 90 degrees clockwise"
+msgstr "वर्णविभाजक को घुमाएँ 90 अम्श दाएँ ओर"
+
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:528
 msgid "Effective focal length of the ocular"
 msgstr "प्रभावी दृश्य तीक्ष्णता दूरी उपनेत्र का"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:568
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:538
 msgid "Apparent field of view of the ocular"
 msgstr "प्रतीयमान दृश्यक्षेत्र उपनेत्र का"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:601
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:571
 #, qt-format
 msgid "Multiplicity: %1"
 msgstr "बहुलता : %1"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:606
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:576
 msgid "Lens: None"
 msgstr "ताल : कुछ नही"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:607
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:577
 msgid "Multiplicity: N/A"
 msgstr "बहुलता : अनुपलब्ध"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:611
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:581
 msgid "Focal length of eyepiece"
 msgstr "दृश्य तीक्ष्णता दूरी उपनेत्र की"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:711
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:903
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:681
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:873
 msgid "Dimensions field of view"
 msgstr "मात्राएँ दृश्यक्षेत्र"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:722
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:910
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:692
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:880
 msgid "X scale"
 msgstr "एक्स॰ मापदण्ड"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:723
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:911
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:693
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:881
 msgid "Horizontal scale"
 msgstr "क्षितिजवत मापदण्ड"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:727
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:912
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:697
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:882
 msgid "Y scale"
 msgstr "वै॰ मापदण्ड"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:728
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:913
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:698
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:883
 msgid "Vertical scale"
 msgstr "लम्बवत मापदण्ड"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:734
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:704
 #, qt-format
 msgid "Rotation: %1"
 msgstr "घुमाव : %1"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:778
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:748
 #, qt-format
 msgid "PA of prism: %1"
 msgstr "स्था॰अ॰ वर्णविभाजक का : %1"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:781
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:751
 msgid "Position angle of the off-axis guider' prism"
 msgstr "स्थान अस्र अतिरिक्त अक्ष मार्गदर्शक वर्णविभाजक का"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:940
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:910
 msgid "Magnification provided by these binoculars"
 msgstr "बृहत्तरकरण उपलब्ध इन द्वयोपनेत्रों से"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:941
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:911
 msgid "Actual field of view provided by these binoculars"
 msgstr "वास्तविक दृश्यक्षेत्र उपलब्ध इन द्वयोपनेत्रों से"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:942
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:912
 msgid "Exit pupil provided by these binoculars"
 msgstr "निकास पुतली उपलब्ध इन द्वयोपनेत्रों से"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:950
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:920
 msgid "Magnification provided by this ocular/lens/telescope combination"
 msgstr "बृहत्तरकरण उपलब्ध इस उपनेत्र/ताल/दूरदर्शक संयोजन से"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:951
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:921
 msgid ""
 "Actual field of view provided by this ocular/lens/telescope combination"
 msgstr "वास्तविक दृश्यक्षेत्र उपलब्ध इस उपनेत्र/ताल/दूरदर्शक संयोजन से"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:952
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:922
 msgid "Exit pupil provided by this ocular/lens/telescope combination"
 msgstr "निकास पुतली उपलब्ध इस उपनेत्र/ताल/दूरदर्शक संयोजन से"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:995
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:965
 msgid "Rayleigh criterion"
 msgstr "रेयलिय्घ मानदण्ड"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:997
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:967
 msgid "The Rayleigh resolution criterion"
 msgstr "रेयलिय्घ सुलझाव मानदण्ड"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1002
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:972
 msgid "Dawes' limit"
 msgstr "डाव्स सीमा"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1004
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:974
 msgid "Dawes' resolution criterion"
 msgstr "डाव्स सुलझाव मानदण्ड"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1009
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:979
 msgid "Abbe's limit"
 msgstr "आब्बे सीमा"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1011
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:981
 msgid "Abbe’s diffraction resolution limit"
 msgstr "आब्बे वक्रकरण सुलझाव सीमा"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1016
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:986
 msgid "Sparrow's limit"
 msgstr "स्पार्रौव सीमा"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1018
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:988
 msgid "Sparrow's resolution limit"
 msgstr "स्पार्रौव सुलझाव सीमा"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1044
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1014
 msgid "Visual resolution"
 msgstr "दृश्य सुलझाव"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1046
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1016
 msgid "Visual resolution is based on eye properties and magnification"
 msgstr "दृश्य सुलझाव आधारित है आँख के लक्षण तथा बृहत्तरकरण पर"
 
@@ -21162,16 +21135,16 @@ msgstr "ग्रहपथीय तत्त्वों का आयात �
 
 #. TRANSLATORS: A link showing the text "Minor Planet & Comet Ephemeris
 #. Service" is inserted.
-#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:148
+#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:149
 #, qt-format
 msgid "Query the MPC's %1:"
 msgstr "पूछें एम॰पी॰सी॰ के %1 : "
 
-#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:151
+#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:152
 msgid "Only one result will be returned if the query is successful."
 msgstr "केवल एक ही फल लौटाया जाएगा यदि प्रश्न सफल हो तो।"
 
-#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:152
+#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:153
 msgid ""
 "Both comets and asteroids can be identified with their number, name (in "
 "English) or IAU designation."
@@ -21179,7 +21152,7 @@ msgstr ""
 "धूमकेतु तथा ग्रहखण्ड दोनों अपने संख्या नाम ( आंग्लभाषा में ) अथवा एै॰ए॰यू॰ "
 "उपाधि द्वारा परिज्ञात किये जा सकते हैं।"
 
-#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:159
+#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:160
 #, qt-format
 msgid ""
 "Comet <i>names</i> need to be prefixed with %1 or %2. If more than one comet"
@@ -21192,23 +21165,23 @@ msgstr ""
 "\"%3\" ढूँढने से \"%4\" प्राप्त होगा हेय्ली का धूमकेतु परन्तु \"%5\" ढूँढने "
 "से ग्रहखण्ड \"%6\" प्राप्त होगा।"
 
-#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:198
+#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:199
 msgid "Select bookmark..."
 msgstr "स्मरणचिह्न चुनें।"
 
-#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:335
+#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:336
 msgid "Plain Text File"
 msgstr "साधारण लेख का अभिलेख"
 
-#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:337
+#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:338
 msgid "All Files"
 msgstr "सभी अभिलेख"
 
-#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:339
+#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:340
 msgid "Select a file"
 msgstr "एक अभिलेख चुनें"
 
-#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:728
+#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:723
 msgid "Searching..."
 msgstr "खोज चालू।"
 
@@ -22463,7 +22436,7 @@ msgid "Not active."
 msgstr "सक्रिय नही।"
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:267
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:466
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:465
 msgid "Remote Control Configuration"
 msgstr "दूरस्थ नियन्त्रण समाकृति"
 
@@ -22531,7 +22504,7 @@ msgstr ""
 "एएए.बीबीबी.सीसीसी.डीडीडी।"
 
 #: plugins/RemoteSync/src/RemoteSync.cpp:51
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:485
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:484
 msgid "Remote Sync"
 msgstr "दूरस्थ समचरण॰"
 
@@ -22557,12 +22530,12 @@ msgid "ERROR: %1"
 msgstr "अपक्रम : %1"
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:146
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:472
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:471
 msgid "Start server"
 msgstr "सेवाकर्ता आरम्भ करें"
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:151
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:475
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:474
 msgid "Connect to server"
 msgstr "सेवाकर्ता से जोडें"
 
@@ -22654,97 +22627,97 @@ msgstr "सेवाकर्ता नाम"
 msgid "Server not active."
 msgstr "सेवाकर्ता सक्रिय नही।"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:467
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:466
 msgid "Remote Sync Plug-in Configuration"
 msgstr "दूरस्थ समचरण॰ उपलग्न समाकृति"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:469
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:468
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:469
 msgid "Status:"
 msgstr "स्थिति : "
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:471
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:470
 msgid "Server mode"
 msgstr "सेवाकर्ता कार्यशैली"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:473
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:478
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:472
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:477
 msgid "Server port"
 msgstr "सेवाकर्ता द्वार"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:474
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:473
 msgid "Client mode"
 msgstr "ग्राहक कार्यशैली"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:476
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:475
 msgid "Server host address/name"
 msgstr "सेवाकर्ता जालावास पता / नाम"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:477
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:476
 msgid "127.0.0.1"
 msgstr "127.0.0.1"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:479
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:478
 msgid "When connection is lost"
 msgstr "जब जोड कट गया हो"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:480
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:479
 msgid "Do nothing"
 msgstr "कुछ ना करें"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:481
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:480
 msgid "Try reconnecting"
 msgstr "फिर से जोडने का प्रयास करें"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:484
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:483
 msgid "When server quits"
 msgstr "जब सेवाकर्ता निष्क्रिय हो जाता है"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:486
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:485
 msgid "Changes on this page require a re-connection to the server"
 msgstr "इस पृष्ठ में परिवर्तनों के लिए सेवाकर्ता से पुनः जोडने की आवश्यकता है"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:487
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:486
 msgid "Settings applied on this client"
 msgstr "इस ग्राहक पर लागू विकल्प"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:488
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:487
 msgid "Selection"
 msgstr "चयन"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:491
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:490
 msgid "View direction"
 msgstr "दृश्य दिशा"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:493
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:492
 msgid "Property filters"
 msgstr "लक्षण छलनियाँ"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:494
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:493
 msgid "Exclude GUI-related properties"
 msgstr "अपवर्जित करें चि॰उ॰मा॰ सम्बन्धित लक्षणों को"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:496
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:495
 msgid "These are all available properties."
 msgstr "ये सभी उपलब्ध लक्षण हैं।"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:499
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:498
 msgid "These are the properties currently excluded from synchronisation."
 msgstr "ये लक्षण वर्तमानतः अपवर्जित किये गये हैं समचरणीकरण से।"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:501
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:500
 msgid "Excluded Properties"
 msgstr "अपवर्जित लक्षण"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:502
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:501
 msgid "Synchronized Properties"
 msgstr "समचरणकृत लक्षण"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:503
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:502
 msgid "Additional excluded properties:"
 msgstr "अतिरिक्त अपवर्जित लक्षण : "
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:504
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:503
 msgid "Client settings"
 msgstr "ग्राहक प्रबन्ध"
 
@@ -27831,27 +27804,27 @@ msgstr "दूसरे बहुप्रभावी मुख का नव�
 msgid "Quality/Performance settings"
 msgstr "गुणवत्ता / कार्यान्वयन लक्षण प्रबन्ध"
 
-#: plugins/Scenery3d/src/ui_storedViewDialog.h:210
+#: plugins/Scenery3d/src/ui_storedViewDialog.h:209
 msgid "Stored views"
 msgstr "अभिलिखित दृश्य"
 
-#: plugins/Scenery3d/src/ui_storedViewDialog.h:212
+#: plugins/Scenery3d/src/ui_storedViewDialog.h:211
 msgid "Load view"
 msgstr "दृश्य भरण करें"
 
-#: plugins/Scenery3d/src/ui_storedViewDialog.h:213
+#: plugins/Scenery3d/src/ui_storedViewDialog.h:212
 msgid "Delete view"
 msgstr "दृश्य मिटाएँ"
 
-#: plugins/Scenery3d/src/ui_storedViewDialog.h:214
+#: plugins/Scenery3d/src/ui_storedViewDialog.h:213
 msgid "Add current view"
 msgstr "वर्तमान दृश्य जोडें"
 
-#: plugins/Scenery3d/src/ui_storedViewDialog.h:215
+#: plugins/Scenery3d/src/ui_storedViewDialog.h:214
 msgid "Load/store with date"
 msgstr "भरण / अभिलेखन करें दिनांक के साथ"
 
-#: plugins/Scenery3d/src/ui_storedViewDialog.h:216
+#: plugins/Scenery3d/src/ui_storedViewDialog.h:215
 msgid "Title:"
 msgstr "शीर्षक : "
 
@@ -28257,7 +28230,7 @@ msgstr "मूलविकल्प प्रबन्धों को पुन
 msgid "Custom Lines"
 msgstr "वैयक्तीकृत रेखाएँ"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialogLocations.h:153
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialogLocations.h:152
 msgid "Locations"
 msgstr "स्थान"
 

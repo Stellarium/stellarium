@@ -133,6 +133,7 @@ public:
 	//! - glat : galactic latitude in decimal degrees
 	//! - sglong : supergalactic longitude in decimal degrees
 	//! - sglat : supergalactic latitude in decimal degrees
+	//! - ecliptic-obliquity : mean ecliptic obliquity of date in decimal degrees
 	//! - elong : ecliptic longitude in decimal degrees (on Earth only!)
 	//! - elat : ecliptic latitude in decimal degrees (on Earth only!)
 	//! - elongJ2000 : ecliptic longitude (Earth's J2000 frame) in decimal degrees
