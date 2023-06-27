@@ -1538,9 +1538,9 @@ bool Oculars::isBinocularDefined()
 }
 
 QRect Oculars::drawSensorFrameAndOverlay(const StelProjectorP& projector, const Mat4f& derotate,
-										 const Vec2f& frameUpDir, const Vec2f& frameRightDir,
-										 const Vec2f& frameCenter, const CCD& ccd, const Lens& lens,
-										 const QSize& overlaySize)
+					 const Vec2f& frameUpDir, const Vec2f& frameRightDir,
+					 const Vec2f& frameCenter, const CCD& ccd, const Lens& lens,
+					 const QSize& overlaySize)
 {
 	StelPainter sPainter(projector);
 	sPainter.setLineSmooth(true);
@@ -1702,7 +1702,7 @@ void Oculars::drawCirclesOfConstantAngularRadii(StelPainter& sPainter, const Mat
 }
 
 void Oculars::drawOAG(const StelProjectorP& projector, const Mat4f& derotate,
-					  const CCD& ccd, const Lens& lens)
+		      const CCD& ccd, const Lens& lens)
 {
 	StelPainter sPainter(projector);
 	sPainter.setLineSmooth(true);
@@ -1819,8 +1819,8 @@ void Oculars::paintCCDBounds()
 	double azimuth, elevation;
 	StelUtils::rectToSphe(&azimuth, &elevation, centerPos3d);
 	const auto derotate = Mat4f::rotation(Vec3f(0,0,1), azimuth) *
-						  Mat4f::rotation(Vec3f(0,1,0), -elevation) *
-						  Mat4f::rotation(Vec3f(1,0,0), ccd->chipRotAngle() * (M_PI/180));
+			      Mat4f::rotation(Vec3f(0,1,0), -elevation) *
+			      Mat4f::rotation(Vec3f(1,0,0), ccd->chipRotAngle() * (M_PI/180));
 
 	if (getFlagAutosetMountForCCD())
 	{
@@ -1836,13 +1836,13 @@ void Oculars::paintCCDBounds()
 	projector->project(derotate * Vec3f(1,0,0), frameCenterWin);
 	projector->project(derotate * Vec3f(1,-1,0), frameRightWin);
 	const auto frameUpWinDir = normalize(Vec2f(frameUpWin[0] - frameCenterWin[0],
-											   frameUpWin[1] - frameCenterWin[1]));
+						   frameUpWin[1] - frameCenterWin[1]));
 	const auto frameRightWinDir = normalize(Vec2f(frameRightWin[0] - frameCenterWin[0],
-											   frameRightWin[1] - frameCenterWin[1]));
+						      frameRightWin[1] - frameCenterWin[1]));
 	const auto frameCenterWin2d = Vec2f(frameCenterWin[0], frameCenterWin[1]);
 
 	const auto boundingRect = drawSensorFrameAndOverlay(projector, derotate, frameUpWinDir, frameRightWinDir,
-														frameCenterWin2d, *ccd, *lens, overlaySize);
+							    frameCenterWin2d, *ccd, *lens, overlaySize);
 	StelPainter painter(projector);
 	painter.setLineSmooth(true);
 	painter.setColor(lineColor);
@@ -1949,10 +1949,9 @@ void Oculars::paintCCDBounds()
 		// Horizontal and vertical scales of visible field of view for CCD (red rectangle); below bottom-right corner
 		//TRANSLATORS: Unit of measure for scale - arc-seconds per pixel
 		QString unit = q_("\"/px");
-		QString scales = QString("%1%3 %4 %2%3")
-							.arg(QString::number(3600*ccd->getCentralAngularResolutionX(telescope, lens), 'f', 4),
-								 QString::number(3600*ccd->getCentralAngularResolutionY(telescope, lens), 'f', 4),
-								 unit, QChar(0x00D7));
+		QString scales = QString("%1%3 %4 %2%3").arg(QString::number(3600*ccd->getCentralAngularResolutionX(telescope, lens), 'f', 4),
+							     QString::number(3600*ccd->getCentralAngularResolutionY(telescope, lens), 'f', 4),
+							     unit, QChar(0x00D7));
 		const auto scalesBR = fm.boundingRect(scales);
 		a = transform.map(QPoint(rightX - std::lround(scalesBR.width() * fmPixelRatio),
 								 bottomY - std::lround(scalesBR.height() * fmPixelRatio)));
