@@ -1120,7 +1120,10 @@ bool LandscapeMgr::getIsLandscapeFullyVisible() const
 
 double LandscapeMgr::getLandscapeSinMinAltitudeLimit() const
 {
-	return landscape->getSinMinAltitudeLimit();
+	if (flagLandscapeUseTransparency && landscapeTransparency>0.)
+		return -1.;
+	else
+		return landscape->getSinMinAltitudeLimit();
 }
 
 bool LandscapeMgr::getFlagUseLightPollutionFromDatabase() const
