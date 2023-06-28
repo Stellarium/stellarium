@@ -359,6 +359,8 @@ LandscapeMgr::LandscapeMgr()
 	, defaultMinimalBrightness(0.01)
 	, flagLandscapeSetsMinimalBrightness(false)
 	, flagEnvironmentAutoEnabling(false)
+	, flagLandscapeUseTransparency(false)
+	, landscapeTransparency(0.)
 {
 	setObjectName("LandscapeMgr"); // should be done by StelModule's constructor.
 
@@ -647,6 +649,8 @@ void LandscapeMgr::update(double deltaTime)
 	}
 
 	landscape->setBrightness(landscapeBrightness, lightscapeBrightness);
+	if (getFlagLandscapeUseTransparency())
+		landscape->setTransparency(landscapeTransparency);
 
 	messageFader.update(static_cast<int>(deltaTime*1000));
 }
@@ -849,6 +853,9 @@ void LandscapeMgr::init()
 	setPolyLineThickness(conf->value("landscape/polyline_thickness", 1).toInt());
 	setLabelFontSize(conf->value("landscape/label_font_size", 18).toInt());
 	setLabelColor(Vec3f(conf->value("landscape/label_color", "0.2,0.8,0.2").toString()));
+
+	setFlagLandscapeUseTransparency(conf->value("landscape/flag_transparency", false).toBool());
+	setLandscapeTransparency(conf->value("landscape/transparency", 0.).toDouble());
 
 	cardinalPoints = new Cardinals();
 	cardinalPoints->setFlagShow4WCRLabels(conf->value("viewing/flag_cardinal_points", true).toBool());
@@ -1255,6 +1262,17 @@ void LandscapeMgr::setFlagIllumination(const bool displayed)
 bool LandscapeMgr::getFlagIllumination() const
 {
 	return landscape->getFlagShowIllumination();
+}
+
+void LandscapeMgr::setLandscapeTransparency(const double f)
+{
+	landscapeTransparency = f;
+	emit landscapeDisplayedChanged(f);
+}
+
+double LandscapeMgr::getLandscapeTransparency() const
+{
+	return landscapeTransparency;
 }
 
 void LandscapeMgr::setFlagLabels(const bool displayed)
