@@ -1969,6 +1969,7 @@ void AstroCalcDialog::generateEphemeris()
 			item.objDate = JD;
 			item.magnitude = obj->getVMagnitudeWithExtinction(core);
 			item.isComet = obj->getPlanetType()==Planet::isComet;
+			item.sso = obj;
 			EphemerisList.append(item);
 
 			Vec3d observerHelioPos = core->getObserverHeliocentricEclipticPos();
