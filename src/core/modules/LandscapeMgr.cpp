@@ -855,7 +855,7 @@ void LandscapeMgr::init()
 	setLabelColor(Vec3f(conf->value("landscape/label_color", "0.2,0.8,0.2").toString()));
 
 	setFlagLandscapeUseTransparency(conf->value("landscape/flag_transparency", false).toBool());
-	setLandscapeTransparency(conf->value("landscape/transparency", 0.).toDouble());
+	setLandscapeTransparency(conf->value("landscape/transparency", 0.5).toDouble());
 
 	cardinalPoints = new Cardinals();
 	cardinalPoints->setFlagShow4WCRLabels(conf->value("viewing/flag_cardinal_points", true).toBool());
