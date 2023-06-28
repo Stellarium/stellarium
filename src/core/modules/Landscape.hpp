@@ -395,11 +395,9 @@ public:
 	virtual float getOpacity(Vec3d azalt) const Q_DECL_OVERRIDE;
 	// To allow ad-hoc "zero" landscapes with color from map
 	void setGroundColor(const Vec3f &color);
-	void setGroundOpacity(const float &opacity);
 private:
 	// we have inherited: horizonFileName, horizonPolygon, horizonPolygonLineColor
 	Vec3f groundColor; //! specified in landscape.ini[landscape]ground_color.
-	float groundOpacity; //! specified in landscape.ini[landscape]ground_opacity.
 };
 
 ///////////////////////////////////////////////////////////////

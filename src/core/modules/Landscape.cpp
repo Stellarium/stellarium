@@ -1437,7 +1437,6 @@ void LandscapePolygonal::load(const QSettings& landscapeIni, const QString& land
 		return;
 	}
 	groundColor=Vec3f( landscapeIni.value("landscape/ground_color", "0,0,0" ).toString() );
-	groundOpacity = landscapeIni.value("landscape/ground_opacity", 1.f).toFloat();
 	//flagDrawInFront=landscapeIni.value("landscape/draw_in_foreground", false).toBool(); // manually configured override for a polygonal line plotted into the foreground.
 	validLandscape = true;  // assume ok...
 	//qDebug() << "PolygonalLandscape" << landscapeId << "loaded, mem size:" << getMemorySize();
@@ -1459,7 +1458,7 @@ void LandscapePolygonal::draw(StelCore* core, bool onlyPolygon)
 
 	if (!onlyPolygon) // The only useful application of the onlyPolygon is a demo which does not fill the polygon
 	{
-		sPainter.setColor(landscapeBrightness*groundColor, groundOpacity*landFader.getInterstate());
+		sPainter.setColor(landscapeBrightness*groundColor, landFader.getInterstate());
 #ifdef GL_MULTISAMPLE
 		const auto gl = sPainter.glFuncs();
 		if (multisamplingEnabled_)
@@ -1484,17 +1483,12 @@ float LandscapePolygonal::getOpacity(Vec3d azalt) const
 	if (angleRotateZOffset!=0.0f)
 		azalt.transfo4d(Mat4d::zrotation(static_cast<double>(angleRotateZOffset)));
 
-	if (horizonPolygon->contains(azalt)) return groundOpacity; else return 0.0f;
+	if (horizonPolygon->contains(azalt)) return 1.0f; else return 0.0f;
 }
 
 void LandscapePolygonal::setGroundColor(const Vec3f &color)
 {
 	groundColor=color;
-}
-
-void LandscapePolygonal::setGroundOpacity(const float &opacity)
-{
-	groundOpacity=opacity;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////
