@@ -1587,7 +1587,7 @@ void SolarSystem::fillEphemerisDates()
 
 	int fYear, fMonth, fDay, sYear, sMonth, sDay, h, m, s;
 	QString info;
-	const double shift = StelApp::getInstance().getCore()->getUTCOffset(JD)*0.041666666666;
+	const double shift = StelApp::getInstance().getCore()->getUTCOffset(JD)*StelCore::JD_HOUR;
 	StelUtils::getDateFromJulianDay(JD+shift, &fYear, &fMonth, &fDay);
 	bool sFlag = true;
 	sYear = fYear;

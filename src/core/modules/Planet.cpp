@@ -553,7 +553,7 @@ QString Planet::getInfoStringName(const StelCore *core, const InfoStringGroup& f
 		oss << QString(" (%1)").arg(iau);
 
 	oss.setRealNumberNotation(QTextStream::FixedNotation);
-	oss.setRealNumberPrecision(1);
+	oss.setRealNumberPrecision(2);
 	if (sphereScale != 1.)
 		oss << QString::fromUtf8(" (\xC3\x97") << sphereScale << ")";
 
@@ -4826,7 +4826,8 @@ void Planet::drawHints(const StelCore* core, const QFont& planetNameFont)
 	// Draw nameI18 + scaling if it's not == 1.
 	float tmp = (hintFader.getInterstate()<=0.f ? 7.f : 10.f) + static_cast<float>(getAngularRadius(core)*M_PI/180.)*prj->getPixelPerRadAtCenter()/1.44f; // Shift for nameI18 printing
 	sPainter.setColor(labelColor,labelsFader.getInterstate());
-	sPainter.drawText(static_cast<float>(screenPos[0]),static_cast<float>(screenPos[1]), getPlanetLabel(), 0, tmp, tmp, false);
+	const QString label = (sphereScale != 1.) ? QString("%1 (\xC3\x97%2)").arg(getPlanetLabel(), QString::number(sphereScale, 'f', 2)) : getPlanetLabel();
+	sPainter.drawText(static_cast<float>(screenPos[0]),static_cast<float>(screenPos[1]), label, 0, tmp, tmp, false);
 
 	// hint disappears smoothly on close view
 	if (hintFader.getInterstate()<=0)
