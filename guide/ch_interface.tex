@@ -113,7 +113,7 @@ There are a few ways you can set your location:
 ``use as default'' checkbox, disable ``Get location from Network'',
 and close the location window.
 
-Two settings may influence the Landscape when changing locations:
+Two settings may influence the landscape when changing locations:
 \begin{description}
 \item[Auto select landscapes] When changing the planet, 
 a fitting landscape panorama will be shown when available. 
@@ -776,18 +776,11 @@ that selection of a new landscape will alter the location for you.
 The controls at the bottom right of the window operate as follows:
 
 \begin{description}
-\item[Show ground] This turns on and off landscape rendering (same
-  as the button \guibutton{0.6}{bt_ground.png} in the main tool bar).
 \item[Use this landscape as default] Selecting this option will save
   the landscape into the program configuration file so that the current
   landscape will be the one used when Stellarium starts.
-\item[Use associated planet and position] When enabled, selecting a
-  new landscape will automatically update the observer location.
-  Use this if the landscape is not just decoration, but a true
-  representation of a particular site you wish to visit in the simulation.
-\item[Show landscape labels] Landscapes can be configured with a
-  gazetteer of interesting points, e.g., mountain peaks, which can be
-  labeled with this option.
+\item[Show ground] This turns on and off landscape rendering (same
+  as the button \guibutton{0.6}{bt_ground.png} in the main tool bar).
 \item[Show fog] This turns on and off rendering of a band of
   fog/haze along the horizon, when available in this landscape.
 \item[Show illumination] to reflect the ugly developments of our
@@ -795,16 +788,23 @@ The controls at the bottom right of the window operate as follows:
   pollution, e.g., streetlamps, bright windows, or the sky glow of a
   nearby city. This layer, if present, will be mixed in when it is
   dark enough.
-\item[Minimal brightness] Use some minimal brightness
-  setting. Moonless night on very dark locations may appear too dark
-  on your screen. You may want to configure some minimal brightness
-  here.
+\item[Show landscape labels] Landscapes can be configured with a
+  gazetteer of interesting points, e.g., mountain peaks, which can be
+  labeled with this option. Color and font size can also be configured.
+\item[Position from landscape] When enabled, selecting a
+  new landscape will automatically update the observer location.
+  Use this if the landscape is not just decoration, but a true
+  representation of a particular site you wish to visit in the simulation.
+\item[Minimal brightness] Moonless night on very dark locations may appear too dark
+  on your screen. You may want to configure some minimal brightness here.
+  \begin{description}
 \item[from landscape, if given] Landscape authors may decide to
   provide such a minimal brightness value in the \file{landscape.ini}
   file. 
+  \end{description}
 \item[Draw only polygon]\newFeature{0.20.2} If a polygonal horizon line has been
-  defined for the landscape, only draw this. 
-\item[Polygonal line thickness]\newFeature{0.20.2} Set line width for the polygonal line.
+  defined for the landscape, only draw this with the given thickness.
+\item[Transparency] Allow peeking below the horizon. \newFeature{23.3} Note that this may show graphical errors. 
 \end{description}
 
 \noindent Using the button \menu{Add/remove landscapes\ldots}, you can also
