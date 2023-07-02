@@ -139,6 +139,7 @@ AstroCalcDialog::AstroCalcDialog(QObject* parent)
 
 AstroCalcDialog::~AstroCalcDialog()
 {
+	EphemerisList.clear();
 	if (currentTimeLine)
 	{
 		currentTimeLine->stop();
