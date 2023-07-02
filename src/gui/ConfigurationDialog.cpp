@@ -1085,6 +1085,8 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("landscape/flag_minimal_brightness",                propMgr->getStelPropertyValue("LandscapeMgr.flagLandscapeUseMinimalBrightness").toBool());
 	conf->setValue("landscape/flag_landscape_sets_minimal_brightness", propMgr->getStelPropertyValue("LandscapeMgr.flagLandscapeSetsMinimalBrightness").toBool());
 	conf->setValue("landscape/minimal_brightness",                     propMgr->getStelPropertyValue("LandscapeMgr.defaultMinimalBrightness").toFloat());
+	conf->setValue("landscape/flag_transparency",                      propMgr->getStelPropertyValue("LandscapeMgr.flagLandscapeUseTransparency").toBool());
+	conf->setValue("landscape/transparency",                           propMgr->getStelPropertyValue("LandscapeMgr.landscapeTransparency").toFloat());
 	conf->setValue("landscape/flag_polyline_only",                     propMgr->getStelPropertyValue("LandscapeMgr.flagPolyLineDisplayedOnly").toBool());
 	conf->setValue("landscape/polyline_thickness",                     propMgr->getStelPropertyValue("LandscapeMgr.polyLineThickness").toInt());
 	conf->setValue("stars/init_light_pollution_luminance",             propMgr->getStelPropertyValue("StelSkyDrawer.lightPollutionLuminance").toFloat());

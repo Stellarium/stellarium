@@ -347,6 +347,8 @@ void ViewDialog::createDialogContent()
 	ui->localLandscapeBrightnessCheckBox->setEnabled(lmgr->property("flagLandscapeUseMinimalBrightness").toBool());
 	ui->landscapeBrightnessSpinBox->setEnabled(lmgr->property("flagLandscapeUseMinimalBrightness").toBool());
 	connectDoubleProperty(ui->landscapeBrightnessSpinBox,"LandscapeMgr.defaultMinimalBrightness");
+	connectBoolProperty(ui->landscapeTransparencyCheckBox,"LandscapeMgr.flagLandscapeUseTransparency");
+	connectDoubleProperty(ui->landscapeTransparencySpinBox,"LandscapeMgr.landscapeTransparency");
 	connectBoolProperty(ui->localLandscapeBrightnessCheckBox,"LandscapeMgr.flagLandscapeSetsMinimalBrightness");
 	connectBoolProperty(ui->landscapePolylineCheckBox, "LandscapeMgr.flagPolyLineDisplayedOnly");
 	connectIntProperty(ui->landscapePolylineThicknessSpinBox, "LandscapeMgr.polyLineThickness");

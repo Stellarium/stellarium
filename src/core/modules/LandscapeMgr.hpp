@@ -274,6 +274,14 @@ class LandscapeMgr : public StelModule
 		   READ getLabelColor
 		   WRITE setLabelColor
 		   NOTIFY labelColorChanged)
+	Q_PROPERTY(double landscapeTransparency
+		   READ getLandscapeTransparency
+		   WRITE setLandscapeTransparency
+		   NOTIFY landscapeTransparencyChanged)
+	Q_PROPERTY(bool flagLandscapeUseTransparency
+		   READ getFlagLandscapeUseTransparency
+		   WRITE setFlagLandscapeUseTransparency
+		   NOTIFY flagLandscapeUseTransparencyChanged)
 
 public:
 	LandscapeMgr();
@@ -556,6 +564,23 @@ public slots:
 	//! Set atmosphere fade duration in s.
 	void setAtmosphereFadeDuration(const float f);
 
+	double getLandscapeTransparency() const;
+	void setLandscapeTransparency(const double f);
+	//! Return the value of the flag determining if a transparency should be used.
+	bool getFlagLandscapeUseTransparency() const {return flagLandscapeUseTransparency; }
+	//! Set the value of the flag determining if a transparency should be used.
+	void setFlagLandscapeUseTransparency(bool b)
+	{
+		if (b!=flagLandscapeUseTransparency)
+		{
+			flagLandscapeUseTransparency=b;
+			emit flagLandscapeUseTransparencyChanged(b);
+		}
+		if (b==false)
+			landscape->setTransparency(0.0);
+	}
+
+
 	/*
 	//This method has been removed, use StelSkyDrawer::getBortleScaleIndex instead, or StelMainScriptAPI::getBortleScaleIndex in scripts
 	//Also, if required, please use StelSkyDrawer::setBortleScaleIndex or StelMainScriptAPI::setBortleScaleIndex instead of LandscapeMgr::setAtmosphereBortleLightPollution
@@ -702,6 +727,8 @@ signals:
 	void flagLandscapeSetsMinimalBrightnessChanged(const bool value);
 	void defaultMinimalBrightnessChanged(const double value);
 	void setFlagEnvironmentAutoEnableChanged(const bool enabled);
+	void landscapeTransparencyChanged(const double value);
+	void flagLandscapeUseTransparencyChanged(const bool value);
 
 	//! Emitted whenever the default landscape is changed
 	//! @param id the landscape id of the new default landscape
@@ -809,6 +836,11 @@ private:
 	bool flagLandscapeSetsMinimalBrightness;
 	//! Indicate auto-enable atmosphere and landscape for planets with atmospheres in location window
 	bool flagEnvironmentAutoEnabling;
+
+	//! Indicate use of the default transparency value specified in config.ini.
+	bool flagLandscapeUseTransparency;
+	//! A transparency value
+	double landscapeTransparency;
 
 	//! The ID of the currently loaded landscape
 	QString currentLandscapeID;
