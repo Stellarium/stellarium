@@ -74,7 +74,7 @@ public:
 	enum FrameType
 	{
 		FrameUninitialized,			//!< Reference frame is not set (FMajerech: Added to avoid condition on uninitialized value in StelSkyLayerMgr::draw())
-		FrameAltAz,				//!< Altazimuthal reference frame centered on observer.
+		FrameAltAz,				//!< Altazimuthal reference frame centered on observer: +x=south, +y=east, +z=zenith.
 		FrameHeliocentricEclipticJ2000,		//!< Fixed-ecliptic reference frame centered on the Sun. This is J2000 ecliptical / almost VSOP87.
 		FrameObservercentricEclipticJ2000,	//!< Fixed-ecliptic reference frame centered on the Observer. Was ObservercentricEcliptic, but renamed because it is Ecliptic of J2000!
 		FrameObservercentricEclipticOfDate,	//!< Moving ecliptic reference frame centered on the Observer. Ecliptic of date, i.e. includes the precession of the ecliptic.
