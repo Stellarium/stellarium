@@ -31,14 +31,14 @@
 
 RemoteSyncDialog::RemoteSyncDialog()
 	: StelDialog("RemoteSync")
-	, rs(Q_NULLPTR)
+	, rs(nullptr)
 {
 	ui = new Ui_remoteSyncDialog();
 }
 
 RemoteSyncDialog::~RemoteSyncDialog()
 {
-	delete ui; ui=Q_NULLPTR;
+	delete ui; ui=nullptr;
 }
 
 void RemoteSyncDialog::retranslate()
@@ -135,8 +135,8 @@ void RemoteSyncDialog::updateState()
 	RemoteSync::SyncState state = rs->getState();
 
 	//disconnect the click signals from whatever is connected
-	disconnect(ui->serverButton, SIGNAL(clicked(bool)), Q_NULLPTR, Q_NULLPTR);
-	disconnect(ui->clientButton, SIGNAL(clicked(bool)), Q_NULLPTR, Q_NULLPTR);
+	disconnect(ui->serverButton, SIGNAL(clicked(bool)), nullptr, nullptr);
+	disconnect(ui->clientButton, SIGNAL(clicked(bool)), nullptr, nullptr);
 	ui->statusLabel->setStyleSheet("");
 
 	if(state == RemoteSync::IDLE)
@@ -219,7 +219,7 @@ void RemoteSyncDialog::setAboutHtml(void)
 	html += "</body></html>";
 
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-	if(gui!=Q_NULLPTR)
+	if(gui!=nullptr)
 	{
 		QString htmlStyleSheet(gui->getStelStyle().htmlStyleSheet);
 		ui->aboutTextBrowser->document()->setDefaultStyleSheet(htmlStyleSheet);

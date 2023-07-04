@@ -32,7 +32,7 @@ using namespace SyncProtocol;
 
 SyncServerEventSender::SyncServerEventSender()
 	: isDirty(false)
-	, server(Q_NULLPTR)
+	, server(nullptr)
 {
 	core = StelApp::getInstance().getCore();
 }

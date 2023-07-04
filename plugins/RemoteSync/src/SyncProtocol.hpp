@@ -169,7 +169,7 @@ class SyncRemotePeer : public QObject
 	Q_OBJECT
 public:
 	SyncRemotePeer(QAbstractSocket* socket, bool isServer, const QVector<SyncMessageHandler*>& handlerList);
-	~SyncRemotePeer() Q_DECL_OVERRIDE;
+	~SyncRemotePeer() override;
 
 
 
@@ -239,7 +239,7 @@ public:
 class DummyMessageHandler : public SyncMessageHandler
 {
 public:
-	virtual bool handleMessage(QDataStream &stream, SyncProtocol::tPayloadSize dataSize, SyncRemotePeer &peer) Q_DECL_OVERRIDE
+	bool handleMessage(QDataStream &stream, SyncProtocol::tPayloadSize dataSize, SyncRemotePeer &peer) override
 	{
 		Q_UNUSED(peer)
 		stream.skipRawData(dataSize);

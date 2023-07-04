@@ -51,8 +51,8 @@ public:
 	Q_DECLARE_FLAGS(SyncOptions, SyncOption)
 	Q_FLAG(SyncOptions)
 
-	SyncClient(SyncOptions options, const QStringList& excludeProperties, QObject* parent = Q_NULLPTR);
-	virtual ~SyncClient() Q_DECL_OVERRIDE;
+	SyncClient(SyncOptions options, const QStringList& excludeProperties, QObject* parent = nullptr);
+	~SyncClient() override;
 
 	QString errorString() const { return errorStr; }
 
@@ -61,7 +61,7 @@ public slots:
 	void disconnectFromServer();
 
 protected:
-	void timerEvent(QTimerEvent* evt) Q_DECL_OVERRIDE;
+	void timerEvent(QTimerEvent* evt) override;
 signals:
 	void connected();
 	void disconnected(bool cleanExit);

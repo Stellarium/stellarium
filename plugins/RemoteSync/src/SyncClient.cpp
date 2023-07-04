@@ -33,7 +33,7 @@ SyncClient::SyncClient(SyncOptions options, const QStringList &excludeProperties
 	  options(options),
 	  stelPropFilter(excludeProperties),
 	  isConnecting(false),
-	  server(Q_NULLPTR),
+	  server(nullptr),
 	  timeoutTimerId(-1)
 {
 	handlerList.resize(MSGTYPE_SIZE);
@@ -128,7 +128,7 @@ void SyncClient::serverDisconnected(bool clean)
 	if(!clean)
 		errorStr = server->getError();
 	server->deleteLater();
-	server = Q_NULLPTR;
+	server = nullptr;
 	emit disconnected(errorStr.isEmpty());
 }
 

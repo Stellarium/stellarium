@@ -31,7 +31,7 @@
 using namespace SyncProtocol;
 
 ClientHandler::ClientHandler()
-	: client(Q_NULLPTR)
+	: client(nullptr)
 {
 	core = StelApp::getInstance().getCore();
 }

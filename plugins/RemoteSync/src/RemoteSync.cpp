@@ -70,8 +70,8 @@ RemoteSync::RemoteSync()
 	, connectionLostBehavior(ClientBehavior::RECONNECT)
 	, quitBehavior(ClientBehavior::NONE)
 	, state(IDLE)
-	, server(Q_NULLPTR)
-	, client(Q_NULLPTR)
+	, server(nullptr)
+	, client(nullptr)
 	, allowVersionMismatch(false)
 {
 	setObjectName("RemoteSync");
@@ -282,7 +282,7 @@ void RemoteSync::startServer()
 		{
 			setError(server->errorString());
 			delete server;
-			server = Q_NULLPTR;
+			server = nullptr;
 		}
 	}
 	else
@@ -295,7 +295,7 @@ void RemoteSync::stopServer()
 	{
 		connect(server, SIGNAL(serverStopped()), server, SLOT(deleteLater()));
 		server->stop();
-		server = Q_NULLPTR;
+		server = nullptr;
 		setState(IDLE);
 	}
 	else
@@ -326,7 +326,7 @@ void RemoteSync::clientDisconnected(bool clean)
 {
 	QString errStr = client->errorString();
 	client->deleteLater();
-	client = Q_NULLPTR;
+	client = nullptr;
 
 	if(!clean)
 	{

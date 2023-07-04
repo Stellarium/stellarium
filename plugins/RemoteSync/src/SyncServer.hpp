@@ -38,8 +38,8 @@ class SyncServer : public QObject
 	Q_OBJECT
 
 public:
-	SyncServer(QObject* parent = Q_NULLPTR, bool allowVersionMismatch=false);
-	virtual ~SyncServer() Q_DECL_OVERRIDE;
+	SyncServer(QObject* parent = nullptr, bool allowVersionMismatch=false);
+	~SyncServer() override;
 
 	//! This should be called in the StelModule::update function
 	void update();
@@ -59,7 +59,7 @@ signals:
 	void serverStopped();
 
 protected:
-	void timerEvent(QTimerEvent* evt) Q_DECL_OVERRIDE;
+	void timerEvent(QTimerEvent* evt) override;
 private slots:
 	void handleNewConnection();
 	void connectionError(QAbstractSocket::SocketError err);
