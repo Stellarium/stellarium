@@ -387,6 +387,7 @@ public:
 	inline void set(T,T,T,T,T,T,T,T,T);
 
 	inline T& operator[](int);
+	inline T operator[](int) const;
 	inline operator T*();
 	inline operator const T*() const;
 
@@ -436,6 +437,7 @@ public:
 	inline void set(T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T);
 
 	inline T& operator[](int);
+	inline T operator[](int) const;
 	inline operator T*();
 	inline operator const T*() const;
 
@@ -1109,6 +1111,11 @@ template<class T> T& Matrix3<T>::operator[](int n)
 	return r[n];
 }
 
+template<class T> T Matrix3<T>::operator[](int n) const
+{
+	return r[n];
+}
+
 template<class T> Matrix3<T>::operator T*()
 {
 	return r;
@@ -1333,6 +1340,11 @@ template<class T> void Matrix4<T>::set(T a, T b, T c, T d, T e, T f, T g, T h, T
 }
 
 template<class T> T& Matrix4<T>::operator[](int n)
+{
+	return r[n];
+}
+
+template<class T> T Matrix4<T>::operator[](int n) const
 {
 	return r[n];
 }
