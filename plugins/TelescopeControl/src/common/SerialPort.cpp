@@ -32,6 +32,10 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 
 #include <cstring> // memset
 
+#ifdef UNICODE
+#include <codecvt> // for std::wstring_convert
+#endif
+
 SerialPort::SerialPort(Server &server, const char *serial_device)
 	: Connection(server, INVALID_SOCKET)
 	#ifndef Q_OS_WIN
@@ -40,7 +44,13 @@ SerialPort::SerialPort(Server &server, const char *serial_device)
 {
 #ifdef Q_OS_WIN
 #if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
-	handle = CreateFile(LPCWSTR(serial_device), GENERIC_READ|GENERIC_WRITE, 0, nullptr, OPEN_EXISTING, 0, nullptr);
+#ifdef UNICODE
+	std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> wconverter;
+	std::wstring wdevice = wconverter.from_bytes(std::string(serial_device));
+	handle = CreateFile(wdevice.c_str(), GENERIC_READ | GENERIC_WRITE, 0, nullptr, OPEN_EXISTING, 0, nullptr);
+#else
+	handle = CreateFile(LPCWSTR(serial_device), GENERIC_READ | GENERIC_WRITE, 0, nullptr, OPEN_EXISTING, 0, nullptr);
+#endif // UNICODE
 #else
 	handle = CreateFile(serial_device, GENERIC_READ|GENERIC_WRITE, 0, nullptr, OPEN_EXISTING, 0, nullptr);
 #endif
@@ -75,7 +85,12 @@ SerialPort::SerialPort(Server &server, const char *serial_device)
 				memset(&dcb, 0, sizeof(dcb));
 				dcb.DCBlength = sizeof(dcb);
 #if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+#ifdef UNICODE
+				std::wstring wbaud = wconverter.from_bytes(std::string("9600,n,8,1"));
+				if (!BuildCommDCB(wbaud.c_str(), &dcb))
+#else
 				if (!BuildCommDCB(LPCWSTR("9600,n,8,1"), &dcb))
+#endif // UNICODE
 #else
 				if (!BuildCommDCB("9600,n,8,1", &dcb))
 #endif
