@@ -479,11 +479,7 @@ bool StelSkyDrawer::drawPointSource(StelPainter* sPainter, const Vec3d& v, const
 		return false;
 
 	const float radius = rcMag.radius * static_cast<float>(sPainter->getProjector()->getDevicePixelsPerPixel());
-#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
 	const float frand=StelApp::getInstance().getRandF();
-#else
-	const float frand=static_cast<float>(qrand())/static_cast<float>(RAND_MAX);
-#endif
 
 	// Random coef for star twinkling. twinkleFactor can introduce height-dependent twinkling.
 	const float tw = ((flagStarTwinkle && (flagHasAtmosphere || flagForcedTwinkle))) ? (1.f-twinkleFactor*static_cast<float>(twinkleAmount)*frand)*rcMag.luminance : rcMag.luminance;

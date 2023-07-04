@@ -543,11 +543,7 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 		if ( (!horizonPolygon) && calibrated ) { // for uncalibrated landscapes the texture is currently never queried, so no need to store.
 			QImage *image = new QImage(texturePath);
 			sidesImages.append(image); // indices identical to those in sideTexs
-#if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
 			memorySize+=(image->sizeInBytes());
-#else
-			memorySize+=static_cast<uint>(image->byteCount());
-#endif
 		}
 		// Also allow light textures. The light textures must cover the same geometry as the sides. It is allowed that not all or even any light textures are present!
 		textureKey = QString("landscape/light%1").arg(i);
@@ -1545,11 +1541,7 @@ void LandscapeFisheye::create(const QString _name, float _texturefov, const QStr
 	if (!horizonPolygon)
 	{
 		mapImage = new QImage(_maptex);
-#if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
 		memorySize+=(mapImage->sizeInBytes());
-#else
-		memorySize+=static_cast<uint>(mapImage->byteCount());
-#endif
 	}
 	mapTex = StelApp::getInstance().getTextureManager().createTexture(_maptex, StelTexture::StelTextureParams(true));
 	memorySize+=mapTex->getGlSize();
@@ -1841,11 +1833,7 @@ void LandscapeSpherical::create(const QString _name, const QString& _maptex, con
 	if (!horizonPolygon)
 	{
 		mapImage = new QImage(_maptex);
-#if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
 		memorySize+=(mapImage->sizeInBytes());
-#else
-		memorySize+=static_cast<uint>(mapImage->byteCount());
-#endif
 	}
 
 	auto& gl = *QOpenGLContext::currentContext()->functions();

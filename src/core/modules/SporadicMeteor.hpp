@@ -34,11 +34,6 @@ public:
 
 private:
 	static QList<ColorPair> getRandColor();
-#if QT_VERSION < QT_VERSION_CHECK(5, 10, 0)
-	static const float _RAND_MAX;
-	static const double _RAND_MAX_P1;
-	static const float _RAND_MAX_P1_f;
-#endif
 };
 
 

@@ -157,19 +157,12 @@ int main(int argc, char **argv)
 	}
 #endif
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 10, 0)
-	// Seed the PRNG. Later Qt versions use qApp->randomGenerator
-	qsrand(QDateTime::currentMSecsSinceEpoch());
-#endif
 	QCoreApplication::setApplicationName("stellarium");
 	QCoreApplication::setApplicationVersion(StelUtils::getApplicationPublicVersion());
 	QCoreApplication::setOrganizationDomain("stellarium.org");
 	QCoreApplication::setOrganizationName("stellarium");
 
 	QCoreApplication::setAttribute(Qt::AA_CompressHighFrequencyEvents);
-#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
-	QCoreApplication::setAttribute(Qt::AA_CompressTabletEvents);
-#endif
 	// Support high DPI pixmaps and fonts
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 	QCoreApplication::setAttribute(Qt::AA_UseHighDpiPixmaps, true);

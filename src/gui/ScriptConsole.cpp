@@ -125,11 +125,7 @@ void ScriptConsole::createDialogContent()
 	QFont font = ui->scriptEdit->font();
 	QFontMetrics fontMetrics = QFontMetrics(font);
 	int width = fontMetrics.boundingRect("0").width();
-#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
 	ui->scriptEdit->setTabStopDistance(4*width); // 4 characters
-#else
-	ui->scriptEdit->setTabStopWidth(4*width); // 4 characters
-#endif
 	ui->scriptEdit->setFocus();
 
 	QSettings* conf = StelApp::getInstance().getSettings();
