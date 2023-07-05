@@ -74,7 +74,7 @@ bool ServerChallenge::deserialize(QDataStream &stream, tPayloadSize dataSize)
 	//check if magic value matches
 	if(data!=SYNC_MAGIC_VALUE)
 	{
-		qWarning()<<"[ServerHello] invalid magic value";
+		qCWarning(syncProtocol)<<"[ServerHello] invalid magic value";
 		return false;
 	}
 

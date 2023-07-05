@@ -92,7 +92,7 @@ void SyncServer::addSender(SyncServerEventSender *snd)
 
 void SyncServer::broadcastMessage(const SyncMessage &msg)
 {
-	qCDebug(syncServer)<<"Broadcast message"<<msg;
+	qCDebug(syncServer)<<"Broadcast message"<<msg.toString();
 	qint64 size = msg.createFullMessage(broadcastBuffer);
 
 	if(!size)

@@ -196,9 +196,6 @@ private:
 
 Q_DECLARE_METATYPE(RemoteSync::SyncState)
 
-//! Stream overload for debugging
-QDebug operator<<(QDebug, RemoteSync::SyncState);
-
 #include "StelPluginInterface.hpp"
 
 //! This class is used by Qt to manage a plug-in interface

@@ -24,6 +24,8 @@
 #include <QHostAddress>
 #include <QVector>
 
+Q_LOGGING_CATEGORY(syncProtocol,"stel.plugin.remoteSync.protocol")
+
 using namespace SyncProtocol;
 
 namespace SyncProtocol
@@ -132,7 +134,8 @@ SyncRemotePeer::SyncRemotePeer(QAbstractSocket *socket, bool isServer, const QHa
 
 SyncRemotePeer::~SyncRemotePeer()
 {
-	peerLog()<<"Destroyed";
+	peerLog("Destroyed");
+	//qCDebug(syncProtocol) << "Destroyed";
 	delete sock;
 }
 
@@ -155,7 +158,8 @@ void SyncRemotePeer::checkTimeout()
 	if(readDiff > 15000)
 	{
 		//no data received for some time, assume client timed out
-		peerLog(QString("No data received for %1ms, timing out").arg(readDiff));
+		//peerLog(QString("No data received for %1ms, timing out").arg(readDiff));
+		qCWarning(syncProtocol) << QString("No data received for %1ms, timing out").arg(readDiff);
 		errorString = "Connection timed out";
 
 		if(sock->state()==QAbstractSocket::ConnectedState)
@@ -182,14 +186,16 @@ void SyncRemotePeer::disconnectPeer()
 
 void SyncRemotePeer::sockDisconnected()
 {
-	peerLog()<<"Socket disconnected";
+	peerLog("Socket disconnected");
+	//qCDebug(syncProtocol)<<"Socket disconnected";
 	emit disconnected(expectDisconnect);
 }
 
 void SyncRemotePeer::sockError(QAbstractSocket::SocketError err)
 {
 	errorString = sock->errorString();
-	peerLog()<<"Socket error:"<<errorString;
+	//peerLog()<<"Socket error:"<<errorString;
+	qCWarning(syncProtocol)<<"Socket error:"<<errorString;
 
 	if(err == QAbstractSocket::RemoteHostClosedError) //handle remote close as normal disconnect
 		expectDisconnect = true;
@@ -202,7 +208,8 @@ void SyncRemotePeer::sockError(QAbstractSocket::SocketError err)
 
 void SyncRemotePeer::sockStateChanged(QAbstractSocket::SocketState state)
 {
-	peerLog()<<"Socket state:"<<state;
+	peerLog("Socket state:" + QVariant::fromValue(state).toString());
+	//qCDebug(syncProtocol)<<"Socket state:"<<state;
 }
 
 void SyncRemotePeer::receiveMessage()
@@ -235,7 +242,8 @@ void SyncRemotePeer::receiveMessage()
 				return;
 			}
 
-			peerLog()<<"received header for"<<SyncMessageType(msgHeader.msgType);
+			peerLog("received header for" + SyncMessage::toString(SyncMessageType(msgHeader.msgType)));
+			//qCDebug(syncProtocol)<<"received header for"<<SyncMessageType(msgHeader.msgType);
 		}
 
 		if(sock->bytesAvailable() < msgHeader.dataSize)
@@ -246,7 +254,8 @@ void SyncRemotePeer::receiveMessage()
 		else
 		{
 			waitingForBody = false;
-			peerLog()<<"received body, processing";
+			peerLog("received body, processing");
+			//qCDebug(syncProtocol)<<"received body, processing";
 
 			//full packet available, pass to handler
 			SyncMessageHandler* handler = handlerHash[static_cast<SyncMessageType>(msgHeader.msgType)];
@@ -266,25 +275,21 @@ void SyncRemotePeer::receiveMessage()
 
 void SyncRemotePeer::peerLog(const QString &msg) const
 {
-	peerLog()<<msg;
-}
-
-QDebug SyncRemotePeer::peerLog() const
-{
-	return qDebug()<<"[Sync][Peer"<<(sock->peerAddress().toString() + ":" + QString::number(sock->peerPort()))<<"]:";
+	qCDebug(syncProtocol)<<"[Peer"<<(sock->peerAddress().toString() + ":" + QString::number(sock->peerPort()))<<"]:" << msg;
 }
 
 void SyncRemotePeer::writeMessage(const SyncMessage &msg)
 {
 	qint64 size = msg.createFullMessage(msgWriteBuffer);
-	peerLog()<<"Send message"<<msg;
+	//qCDebug(syncProtocol)<<"Send message" + msg.toString();
+	peerLog("Send message" + msg.toString());
 
 	if(!size)
 	{
 		//crash here when message is too large in debugging
 		Q_ASSERT(true);
-		qCritical()<<"[SyncPlugin] A message is too large for sending! Message buffer contents follow...";
-		qCritical()<<msgWriteBuffer.toHex();
+		qCCritical(syncProtocol)<<"A message is too large for sending! Message buffer contents follow...";
+		qCCritical(syncProtocol)<<msgWriteBuffer.toHex();
 		//disconnect the client
 		writeError("next pending message too large");
 	}
@@ -303,13 +308,57 @@ void SyncRemotePeer::writeData(const QByteArray &data, qint64 size)
 		lastSendTime = QDateTime::currentMSecsSinceEpoch();
 	}
 	else
-		peerLog("Can't write message, not connected");
+		qCWarning(syncProtocol) << "Can't write message, not connected";
 }
 
 void SyncRemotePeer::writeError(const QString &err)
 {
-	qWarning()<<"[SyncPlugin] Disconnecting with error:"<<err;
+	qCWarning(syncProtocol)<<"Disconnecting with error:"<<err;
 	writeMessage(ErrorMessage(err));
 	errorString = err;
 	sock->disconnectFromHost();
+}
+
+QString SyncMessage::toString() const
+{
+	SyncProtocol::SyncMessageType type=getMessageType();
+	return toString(type);
+}
+QString SyncMessage::toString(SyncProtocol::SyncMessageType type)
+{
+	switch (type) {
+		case SyncProtocol::ERROR:
+			return "ERROR";
+			break;
+		case SyncProtocol::SERVER_CHALLENGE:
+			return"SERVER_CHALLENGE";
+			break;
+		case SyncProtocol::CLIENT_CHALLENGE_RESPONSE:
+			return"CLIENT_CHALLENGE_RESPONSE";
+			break;
+		case SyncProtocol::SERVER_CHALLENGERESPONSEVALID:
+			return"SERVER_CHALLENGERESPONSEVALID";
+			break;
+		case SyncProtocol::TIME:
+			return"TIME";
+			break;
+		case SyncProtocol::LOCATION:
+			return"LOCATION";
+			break;
+		case SyncProtocol::SELECTION:
+			return"SELECTION";
+			break;
+		case SyncProtocol::STELPROPERTY:
+			return"STELPROPERTY";
+			break;
+		case SyncProtocol::VIEW:
+			return "VIEW";
+			break;
+		case SyncProtocol::ALIVE:
+			return "ALIVE";
+			break;
+		default:
+			return QString("UNKNOWN(%1").arg(int(type));
+			break;
+	}
 }
