@@ -44,7 +44,7 @@ your distribution. Here's a list.
 - A C++ compiler able to compile C++17 code ([GCC](https://gcc.gnu.org/) 7 or later, 
   Clang 6 or later, MSVC 2017 (15.7) or later; MSVC2019 required for Qt6)
 - [CMake](https://www.cmake.org/) 3.16.0 or later - buildsystem used by many open source projects
-- [Qt Framework](https://www.qt.io/) 5.9.0 or later. We recommend 5.15.2 for Stellarium 0.*, or Qt6.2 or later for Stellarium 1.*.
+- [Qt Framework](https://www.qt.io/) 5.12.0/6.2.0 or later. We recommend 5.15.2 or 6.5.1
 - [OpenGL](https://www.opengl.org/) - graphics library
 - [Zlib](https://www.zlib.net) - compression library
 
@@ -124,7 +124,7 @@ Here's how.
 
 The Qt development team provides binary installers. If you want to build Qt yourself from source, this is 
 fine but it will take a ''long'' time. We recommend the following procedure for manually installing the 
-latest Qt (required: 5.9 or above at the moment):
+latest Qt (required: 5.12 or above at the moment):
 - Download the Linux/X11 package from [Qt Company](http://www.qt.io/download-open-source/). Choose 32/64 bit 
   as appropriate.
 - Install it to `/opt/Qt5`
@@ -278,9 +278,9 @@ https://github.com/Stellarium/stellarium/releases
 Do this command in a terminal (if you prefer, you might use arK or some other graphical archive tool): 
 
 ```
-$ tar zxf stellarium-0.21.3.tar.gz
+$ tar zxf stellarium-23.2.tar.gz
 ```
-You should now have a directory `stellarium-0.21.3` with the source code in it.
+You should now have a directory `stellarium-23.2` with the source code in it.
 
 
 ### Clone project from GitHub
@@ -311,7 +311,7 @@ GitHub by web.
 
 #### Windows specifics
 
-On Windows save the file (`master.zip` or `stellarium-0.21.3.tar.gz`) to the `C:/Devel` directory as 
+On Windows save the file (`master.zip` or `stellarium-23.2.tar.gz`) to the `C:/Devel` directory as 
 example. You will need a decompression program installed in Windows, for example [7-Zip](http://www.7-zip.org/). 
 The root of the source tree will be `C:/Devel/stellarium` for simplicity.
 
@@ -471,7 +471,7 @@ $ sudo make install
 
 ### Linux specifics
 
-To create a source package (TGZ) on linux you need run:
+To create a source packages on linux you need run:
 ```
 $ make package_source
 ```
