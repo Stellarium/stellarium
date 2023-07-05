@@ -1598,6 +1598,8 @@ QVariantMap Planet::getInfoMap(const StelCore *core) const
 		map.insert("phase-angle", phaseAngle);
 		map.insert("phase-angle-dms", StelUtils::radToDmsStr(phaseAngle));
 		map.insert("phase-angle-deg", StelUtils::radToDecDegStr(phaseAngle));
+		const bool waning = isWaning(observerHelioPos, core->getObserverHeliocentricEclipticVelocity());
+		map.insert("is-waning", waning);
 		double elongation = getElongation(observerHelioPos);
 		map.insert("elongation", elongation);
 		map.insert("elongation-dms", StelUtils::radToDmsStr(elongation));
