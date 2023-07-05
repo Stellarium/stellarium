@@ -624,7 +624,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 	QSettings pd(filePath, StelIniFormat);
 	if (pd.status() != QSettings::NoError)
 	{
-		qWarning() << "ERROR while parsing" << QDir::toNativeSeparators(filePath);
+		qWarning().noquote() << "ERROR while parsing" << QDir::toNativeSeparators(filePath);
 		return false;
 	}
 
@@ -741,7 +741,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			}
 			if (parent.isNull())
 			{
-				qWarning().noquote() << "ERROR : can't find parent solar system body for " << englishName << ". Skipping.";
+				qWarning().noquote().nospace() << "ERROR: can't find parent solar system body for " << englishName << ". Skipping.";
 				//abort();
 				continue;
 			}
@@ -811,7 +811,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 				const double period = pd.value(secname+"/orbit_Period",-1e100).toDouble();
 				if (period <= -1e100) {
 					if (parent->getParent()) {
-						qWarning() << "ERROR: " << englishName
+						qWarning().noquote() << "ERROR: " << englishName
 							   << ": when the parent body is not the sun, you must provide "
 							   << "either orbit_MeanMotion or orbit_Period";
 					} else {
@@ -848,7 +848,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 				if (mean_anomaly <= -1e10) {
 					double mean_longitude = pd.value(secname+"/orbit_MeanLongitude",-1e100).toDouble()*(M_PI/180.0);
 					if (mean_longitude <= -1e10) {
-						qWarning() << "ERROR: " << englishName
+						qWarning().noquote() << "ERROR: " << englishName
 							   << ": when you do not provide orbit_TimeAtPericenter, you must provide orbit_Epoch"
 							   << "and either one of orbit_MeanAnomaly or orbit_MeanLongitude. Skipping this object.";
 						//abort();
@@ -1044,7 +1044,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			if (semi_major_axis>0)
 				mp->deltaJDE = 2.0*semi_major_axis*StelCore::JD_SECOND;
 			 else if ((semi_major_axis<=0.0) && (type!="interstellar object"))
-				qWarning() << "WARNING: Minor Body" << englishName << "has no semimajor axis!";
+				qWarning().noquote() << "WARNING: Minor body" << englishName << "has no semimajor axis!";
 
 			systemMinorBodies.push_back(newP);
 		}
@@ -1237,10 +1237,11 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 
 	if (systemPlanets.isEmpty())
 	{
-		qWarning() << "No Solar System objects loaded from" << QDir::toNativeSeparators(filePath);
+		qWarning().noquote() << "No Solar System objects loaded from" << QDir::toNativeSeparators(filePath);
 		return false;
 	}
-	else qDebug() << "SolarSystem has" << systemPlanets.count() << "entries.";
+	else
+		qDebug() << "Solar System has" << systemPlanets.count() << "entries.";
 
 	// special case: load earth shadow texture
 	if (!Planet::texEarthShadow)
