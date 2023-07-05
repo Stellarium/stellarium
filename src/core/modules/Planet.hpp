@@ -433,6 +433,8 @@ public:
 
 	//! Get the phase angle (radians) for an observer at pos obsPos in heliocentric coordinates (in AU)
 	double getPhaseAngle(const Vec3d& obsPos) const;
+	//! Check whether the planet is in a waning phase, i.e. its phase angle is increasing
+	bool isWaning(const Vec3d& observerPosition, const Vec3d& observerVelocity) const;
 	//! Get the elongation angle (radians) for an observer at pos obsPos in heliocentric coordinates (in AU)
 	double getElongation(const Vec3d& obsPos) const;
 	//! Get the angular radius (degrees) of the planet spheroid (i.e. without the rings)

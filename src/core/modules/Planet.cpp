@@ -2311,6 +2311,37 @@ double Planet::getPhaseAngle(const Vec3d& obsPos) const
 	return std::acos((observerPlanetRq + planetRq - observerRq)/(2.0*std::sqrt(observerPlanetRq*planetRq)));
 }
 
+bool Planet::isWaning(const Vec3d& observerPosition, const Vec3d& observerVelocity) const
+{
+	using namespace std;
+
+	// The computation here aims at finding whether the time derivative of
+	// the expression used in getPhaseAngle() is positive or negative.
+	const Vec3d planetPosition = getHeliocentricEclipticPos();
+	const Vec3d planetVelocity = getHeliocentricEclipticVelocity();
+
+	const double sunPlanetDistSqr = planetPosition.normSquared();
+	const double sunPlanetDist = sqrt(sunPlanetDistSqr);
+	const double planetRadialSpeed = planetPosition.dot(planetVelocity) / sunPlanetDist;
+
+	const double sunObserverDistSqr = observerPosition.normSquared();
+	const double sunObserverDist = sqrt(sunObserverDistSqr);
+	const double observerRadialSpeed = observerPosition.dot(observerVelocity) / sunObserverDist;
+
+	const Vec3d planetToObserverVec = observerPosition - planetPosition;
+	const Vec3d planetToObserverRelVelocity = observerVelocity - planetVelocity;
+	const double planetObserverDistSqr = planetToObserverVec.normSquared();
+	const double planetObserverDist = sqrt(planetObserverDistSqr);
+	const double planetObserverRelSpeed = planetToObserverVec.dot(planetToObserverRelVelocity) / planetObserverDist;
+
+	// The time derivative of the phase angle is a ratio, whose denominator is a product of two lengths
+	// and a square root. So, to determine whether it's positive it's sufficient to check the numerator.
+	const double numerator = sunPlanetDist * (2 * sunObserverDist * observerRadialSpeed * planetObserverDist -
+						  planetObserverRelSpeed * (planetObserverDistSqr + sunObserverDistSqr - sunPlanetDistSqr)) +
+				 planetObserverDist * planetRadialSpeed * (planetObserverDistSqr - sunObserverDistSqr - sunPlanetDistSqr);
+	return numerator > 0;
+}
+
 // Get the planet phase ([0..1] illuminated fraction of the planet disk) for an observer at pos obsPos in heliocentric coordinates (in AU)
 float Planet::getPhase(const Vec3d& obsPos) const
 {
@@ -2588,13 +2619,13 @@ float Planet::getVMagnitude(const StelCore* core) const
 	if ((core->getCurrentLocation().planetName=="Earth") && (englishName=="Moon"))
 	{
 		const Vec3d solarAberrationPush=GETSTELMODULE(SolarSystem)->getSun()->getAberrationPush();
-		double lEarth, bEarth, lMoon, bMoon;
-		StelUtils::rectToSphe(&lEarth, &bEarth, observerHelioPos-solarAberrationPush);
-		StelUtils::rectToSphe(&lMoon, &bMoon, eclipticPos);
-		double dLong=StelUtils::fmodpos(lMoon-lEarth, 2.*M_PI); if (dLong>M_PI) dLong-=2.*M_PI; // now dLong<0 for waxing phases.
-		const double p=dLong*M_180_PI;
-		// main magnitude term from Russell 1916. Polynomes from Excel fitting with mag(dLong=180)=0.
-		// Measurements support only dLong -150...150, and the New Moon area is mere guesswork.
+
+		const auto observerHelioVelocity = core->getObserverHeliocentricEclipticVelocity();
+		const double signedPhaseAngle = isWaning(observerHelioPos, observerHelioVelocity) ? phaseAngle : -phaseAngle;
+
+		const double p = signedPhaseAngle*M_180_PI;
+		// main magnitude term from Russell 1916. Polynomes from Excel fitting with mag(signedPhaseAngle=180)=0.
+		// Measurements support only signedPhaseAngle -150...150, and the New Moon area is mere guesswork.
 		double magIll=(p<0 ?
 				(((((4.208547E-12*p + 1.754857E-09)*p + 2.749700E-07)*p + 1.860811E-05)*p + 5.590310E-04)*p - 1.628691E-02)*p + 4.807056E-03 :
 				(((((4.609790E-12*p - 1.977692E-09)*p + 3.305454E-07)*p - 2.582825E-05)*p + 9.593360E-04)*p + 1.213761E-02)*p + 7.710015E-03);
@@ -2603,8 +2634,7 @@ float Planet::getVMagnitude(const StelCore* core) const
 		double fluxIll=rf*pow(10., -0.4*magIll);
 
 		// apply opposition surge where needed
-		const double psi=getPhaseAngle(observerHelioPos);
-		const double surge=qMax(1., 1.35-2.865*abs(psi));
+		const double surge=qMax(1., 1.35-2.865*abs(phaseAngle));
 		fluxIll *= surge; // This is now shape of Russell's magnitude curve with peak brightness matched with Krisciunas-Schaefer
 		// apply distance factor
 		static const double lunarMeanDist=384399./AU;
@@ -2619,7 +2649,7 @@ float Planet::getVMagnitude(const StelCore* core) const
 		const double LumEarth=slfoe * static_cast<double>(core->getCurrentObserver()->getHomePlanet()->albedo);
 		const double elfom=LumEarth*beta;
 		const double elfoe=elfom*static_cast<double>(albedo)*gamma; // brightness of full earthshine.
-		const double pfac=1.-(0.5*(1.+cos(dLong))); // diminishing earthshine with phase angle
+		const double pfac=1.-(0.5*(1.+cos(signedPhaseAngle))); // diminishing earthshine with phase angle
 		const double fluxTotal=fluxIll + elfoe*pfac;
 		return -2.5f*static_cast<float>(log10(fluxTotal*shadowFactor/rf));
 	}
