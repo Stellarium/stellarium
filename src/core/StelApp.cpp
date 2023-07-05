@@ -465,7 +465,7 @@ void StelApp::init(QSettings* conf)
 	cache->setMaximumCacheSize(confSettings->value("main/network_cache_size",300).toInt() * 1024 * 1024);
 	QString cachePath = StelFileMgr::getCacheDir();
 
-	qDebug() << "Cache directory is: " << QDir::toNativeSeparators(cachePath);
+	qDebug().noquote() << "Cache directory:" << QDir::toNativeSeparators(cachePath);
 	cache->setCacheDirectory(cachePath);
 	networkAccessManager->setCache(cache);	
 	connect(networkAccessManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(reportFileDownloadFinished(QNetworkReply*)));

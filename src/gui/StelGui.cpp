@@ -461,17 +461,17 @@ void StelGui::setStelStyle(const QString& style)
 	QFile styleFile(qtStyleFileName);
 	if(styleFile.open(QIODevice::ReadOnly))
 	{
-		qDebug() << "Loading Style file" << styleFile.fileName();
+		qDebug().noquote() << "Loading style file:" << styleFile.fileName();
 		currentStelStyle.qtStyleSheet = styleFile.readAll();
 		styleFile.close();
 	}
 	else
-		qDebug() << "Cannot find style file" << qtStyleFileName;
+		qDebug().noquote() << "Cannot find style file:" << qtStyleFileName;
 
 	QString htmlStyleFileName = (style=="default" ? ":/graphicGui/normalHtml.css" : StelFileMgr::findFile(style+"Html.css"));
 	if (htmlStyleFileName.isEmpty())
 	{
-		qWarning() << "Cannot find " << style << "Html.css. Loading default HTML style.";
+		qWarning().noquote() << "Cannot find" << style << "Html.css. Loading default HTML style.";
 		htmlStyleFileName = ":/graphicGui/normalHtml.css";
 	}
 
@@ -482,7 +482,7 @@ void StelGui::setStelStyle(const QString& style)
 		htmlStyleFile.close();
 	}
 	else
-		qDebug() << "Cannot find HTML style file" << htmlStyleFileName;
+		qDebug().noquote() << "Cannot find HTML style file:" << htmlStyleFileName;
 
 	emit guiStyleChanged(currentStelStyle.qtStyleSheet);
 	emit htmlStyleChanged(currentStelStyle.htmlStyleSheet);

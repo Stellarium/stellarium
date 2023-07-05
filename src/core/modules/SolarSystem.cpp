@@ -543,21 +543,21 @@ void SolarSystem::loadPlanets()
 	QString solarSystemFile = StelFileMgr::findFile("data/ssystem_major.ini");
 	if (solarSystemFile.isEmpty())
 	{
-		qWarning() << "ERROR while loading ssystem_major.ini (unable to find data/ssystem_major.ini): " << StelUtils::getEndLineChar();
+		qWarning() << "ERROR while loading ssystem_major.ini (unable to find data/ssystem_major.ini):" << StelUtils::getEndLineChar();
 		return;
 	}
 
 	if (!loadPlanets(solarSystemFile))
 	{
-		qWarning() << "ERROR while loading ssystem_major.ini: " << StelUtils::getEndLineChar();
+		qWarning() << "ERROR while loading ssystem_major.ini:" << StelUtils::getEndLineChar();
 		return;
 	}
 
-	qDebug() << "Loading Solar System data (2: minor bodies)...";
+	qDebug() << "Loading Solar System data (2: minor bodies) ...";
 	QStringList solarSystemFiles = StelFileMgr::findFileInAllPaths("data/ssystem_minor.ini");
 	if (solarSystemFiles.isEmpty())
 	{
-		qWarning() << "ERROR while loading ssystem_minor.ini (unable to find data/ssystem_minor.ini): " << StelUtils::getEndLineChar();
+		qWarning() << "ERROR while loading ssystem_minor.ini (unable to find data/ssystem_minor.ini):" << StelUtils::getEndLineChar();
 		return;
 	}
 
@@ -620,7 +620,7 @@ unsigned char SolarSystem::BvToColorIndex(double bV)
 bool SolarSystem::loadPlanets(const QString& filePath)
 {
 	StelSkyDrawer* skyDrawer = StelApp::getInstance().getCore()->getSkyDrawer();
-	qDebug() << "Loading from :"  << filePath;
+	qDebug().noquote() << "Loading from:"  << filePath;
 	QSettings pd(filePath, StelIniFormat);
 	if (pd.status() != QSettings::NoError)
 	{
@@ -1240,7 +1240,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		qWarning() << "No Solar System objects loaded from" << QDir::toNativeSeparators(filePath);
 		return false;
 	}
-	else qDebug() << "SolarSystem has " << systemPlanets.count() << "entries.";
+	else qDebug() << "SolarSystem has" << systemPlanets.count() << "entries.";
 
 	// special case: load earth shadow texture
 	if (!Planet::texEarthShadow)

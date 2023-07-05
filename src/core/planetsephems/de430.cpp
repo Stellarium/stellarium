@@ -59,7 +59,7 @@ void InitDE430(const char* filepath)
 		#ifndef UNIT_TEST
 		StelApp::getInstance().getCore()->setDe430Active(false);
 		#endif
-		qDebug() << "Error "<< jpl_init_error_code() << "at DE430 init:" << jpl_init_error_message();
+		qDebug().noquote() << "Error"<< jpl_init_error_code() << "at DE430 init:" << jpl_init_error_message();
 	}
 	else
 	{
@@ -67,7 +67,7 @@ void InitDE430(const char* filepath)
 		double jd1, jd2;
 		jd1=jpl_get_double(ephem, JPL_EPHEM_START_JD);
 		jd2=jpl_get_double(ephem, JPL_EPHEM_END_JD);
-		qDebug() << "DE430 init successful. startJD=" << QString::number(jd1, 'f', 4) << "endJD=" << QString::number(jd2, 'f', 4);
+		qDebug().noquote().nospace() << "DE430 init successful. JD range " << QString::number(jd1, 'f', 4) << ".." << QString::number(jd2, 'f', 4);
 	}
 }
 
@@ -88,22 +88,22 @@ bool GetDe430Coor(const double jde, const int planet_id, double * xyz, const int
 		case 0: // all OK.
 			break;
 		case JPL_EPH_OUTSIDE_RANGE:
-			qDebug() << "GetDe430Coor: JPL_EPH_OUTSIDE_RANGE at jde" << jde << "for planet" << planet_id;
+			qDebug().noquote() << "GetDe430Coor: JPL_EPH_OUTSIDE_RANGE at jde" << jde << "for planet" << planet_id;
 			return false;
 		case JPL_EPH_READ_ERROR:
-			qDebug() << "GetDe430Coor: JPL_EPH_READ_ERROR at jde" << jde << "for planet" << planet_id;
+			qDebug().noquote() << "GetDe430Coor: JPL_EPH_READ_ERROR at jde" << jde << "for planet" << planet_id;
 			return false;
 		case JPL_EPH_QUANTITY_NOT_IN_EPHEMERIS:
-			qDebug() << "GetDe430Coor: JPL_EPH_QUANTITY_NOT_IN_EPHEMERIS at jde" << jde << "for planet" << planet_id;
+			qDebug().noquote() << "GetDe430Coor: JPL_EPH_QUANTITY_NOT_IN_EPHEMERIS at jde" << jde << "for planet" << planet_id;
 			return false;
 		case JPL_EPH_INVALID_INDEX:
-			qDebug() << "GetDe430Coor: JPL_EPH_INVALID_INDEX at jde" << jde << "for planet" << planet_id;
+			qDebug().noquote() << "GetDe430Coor: JPL_EPH_INVALID_INDEX at jde" << jde << "for planet" << planet_id;
 			return false;
 		case JPL_EPH_FSEEK_ERROR:
-			qDebug() << "GetDe430Coor: JPL_EPH_FSEEK_ERROR at jde" << jde << "for planet" << planet_id;
+			qDebug().noquote() << "GetDe430Coor: JPL_EPH_FSEEK_ERROR at jde" << jde << "for planet" << planet_id;
 			return false;
 		default: // Should never happen...
-			qDebug() << "GetDe430Coor: unknown error" << jplresult << "at jde" << jde << "for planet" << planet_id;
+			qDebug().noquote() << "GetDe430Coor: unknown error" << jplresult << "at jde" << jde << "for planet" << planet_id;
 			return false;
 	}
 
