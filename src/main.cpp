@@ -232,7 +232,20 @@ int main(int argc, char **argv)
 	CLIProcessor::parseCLIArgsPreConfig(argList);
 
 	// Start logging.
-	StelLogger::init(StelFileMgr::getUserDir()+"/log.txt");
+	QString logName("log.txt");
+	try
+	{
+		logName = CLIProcessor::argsGetOptionWithArg(argList, "-l", "--log-file", "log.txt").toString();
+		// Strip external paths!
+		QFileInfo fi(logName);
+		logName=fi.fileName();
+	}
+	catch (std::runtime_error& e)
+	{
+		qWarning() << "WARNING: while processing --log-file option: " << e.what() << ". Using \"log.txt\"";
+		logName = "log.txt";
+	}
+	StelLogger::init(StelFileMgr::getUserDir()+"/"+logName);
 	StelLogger::writeLog(argStr);
 
 	// OK we start the full program.
@@ -353,10 +366,9 @@ int main(int argc, char **argv)
 
 	// Add the Noto & DejaVu fonts that we use everywhere in the program
 	const QStringList customFonts = { "NotoSans-Regular.ttf", "NotoSansMono-Regular.ttf", "NotoSansSC-Regular.otf", "DejaVuSans.ttf", "DejaVuSansMono.ttf" };
-	QString customFont;
-	for (auto font: qAsConst(customFonts))
+	for (auto &font: qAsConst(customFonts))
 	{
-		customFont = StelFileMgr::findFile(QString("data/%1").arg(font));
+		QString customFont = StelFileMgr::findFile(QString("data/%1").arg(font));
 		if (!customFont.isEmpty())
 			QFontDatabase::addApplicationFont(customFont);
 	}
@@ -407,8 +419,7 @@ int main(int argc, char **argv)
 	if (fullscreen)
 	{
 		// The "+1" below is to work around Linux/Gnome problem with mouse focus.
-		mainWin.move(screenGeom.x()+1,
-					 screenGeom.y()+1);
+		mainWin.move(screenGeom.x()+1, screenGeom.y()+1);
 		// The fullscreen window appears on screen where is the majority of
 		// the normal window. Therefore we crop the normal window to the
 		// screen area to ensure that the majority is not on another screen.
@@ -420,7 +431,7 @@ int main(int argc, char **argv)
 		const int x = confSettings->value("video/screen_x", 0).toInt();
 		const int y = confSettings->value("video/screen_y", 0).toInt();
 		mainWin.move(screenGeom.x() + x/pixelRatio,
-					 screenGeom.y() + y/pixelRatio);
+			     screenGeom.y() + y/pixelRatio);
 	}
 
 	mainWin.show();
