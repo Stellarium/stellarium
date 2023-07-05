@@ -71,9 +71,8 @@ enum SyncMessageType
 	SELECTION, //current selection changed
 	STELPROPERTY, //stelproperty updates
 	VIEW, //view change
-	FOV, //fov change
 
-	MSGTYPE_MAX = FOV,
+	MSGTYPE_MAX = VIEW,
 	MSGTYPE_SIZE = MSGTYPE_MAX+1
 };
 
@@ -106,9 +105,6 @@ inline QDebug& operator<<(QDebug& deb, SyncMessageType msg)
 			break;
 		case SyncProtocol::VIEW:
 			deb<<"VIEW";
-			break;
-		case SyncProtocol::FOV:
-			deb<<"FOV";
 			break;
 		case SyncProtocol::ALIVE:
 			deb<<"ALIVE";
@@ -168,10 +164,8 @@ class SyncRemotePeer : public QObject
 {
 	Q_OBJECT
 public:
-	SyncRemotePeer(QAbstractSocket* socket, bool isServer, const QVector<SyncMessageHandler*>& handlerList);
-	~SyncRemotePeer() Q_DECL_OVERRIDE;
-
-
+	SyncRemotePeer(QAbstractSocket* socket, bool isServer, const QHash<SyncProtocol::SyncMessageType, SyncMessageHandler*> &handlerHash);
+	~SyncRemotePeer() override;
 
 	//! Sends a message to this peer
 	void writeMessage(const SyncProtocol::SyncMessage& msg);
@@ -214,7 +208,8 @@ private:
 	SyncProtocol::SyncHeader msgHeader; //the last message header read/currently being processed
 	qint64 lastReceiveTime; // The time the last data of this peer was received
 	qint64 lastSendTime; //The time the last data was written to this peer
-	QVector<SyncMessageHandler*> handlerList;
+	QHash<SyncProtocol::SyncMessageType, SyncMessageHandler*> handlerHash;
+
 	QByteArray msgWriteBuffer; //Byte array used to construct messages before writing them
 
 	friend class ServerAuthHandler;
@@ -239,7 +234,7 @@ public:
 class DummyMessageHandler : public SyncMessageHandler
 {
 public:
-	virtual bool handleMessage(QDataStream &stream, SyncProtocol::tPayloadSize dataSize, SyncRemotePeer &peer) Q_DECL_OVERRIDE
+	bool handleMessage(QDataStream &stream, SyncProtocol::tPayloadSize dataSize, SyncRemotePeer &peer) override
 	{
 		Q_UNUSED(peer)
 		stream.skipRawData(dataSize);

@@ -259,7 +259,7 @@ void NomenclatureMgr::loadNomenclature()
 		faultPlanets.removeDuplicates();
 		int err = faultPlanets.size();
 		if (err>0)
-			qDebug() << "WARNING - These planets to assign nomenclature items were not found:" << faultPlanets.join(", ");
+			qDebug().noquote() << "WARNING - These planets to assign nomenclature items were not found:" << faultPlanets.join(", ");
 	}
 }
 

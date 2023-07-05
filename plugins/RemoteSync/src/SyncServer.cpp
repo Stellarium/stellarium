@@ -39,10 +39,10 @@ SyncServer::SyncServer(QObject* parent, bool allowVersionMismatch)
 	connect(qserver,SIGNAL(acceptError(QAbstractSocket::SocketError)),this,SLOT(connectionError(QAbstractSocket::SocketError)));
 
 	//create message handlers
-	handlerList.resize(MSGTYPE_SIZE);
-	handlerList[ERROR] =  new ServerErrorHandler();
-	handlerList[CLIENT_CHALLENGE_RESPONSE] = new ServerAuthHandler(this, allowVersionMismatch);
-	handlerList[ALIVE] = new ServerAliveHandler();
+	handlerHash.clear();
+	handlerHash[ERROR] =  new ServerErrorHandler();
+	handlerHash[CLIENT_CHALLENGE_RESPONSE] = new ServerAuthHandler(this, allowVersionMismatch);
+	handlerHash[ALIVE] = new ServerAliveHandler();
 }
 
 SyncServer::~SyncServer()
@@ -50,12 +50,12 @@ SyncServer::~SyncServer()
 	stop();
 
 	//delete handlers
-	for (auto* h : qAsConst(handlerList))
+	for (auto* h : qAsConst(handlerHash))
 	{
 		if(h)
 			delete h;
 	}
-	handlerList.clear();
+	handlerHash.clear();
 
 	qCDebug(syncServer)<<"Destroyed";
 }
@@ -78,7 +78,6 @@ bool SyncServer::start(quint16 port)
 		addSender(new SelectionEventSender());
 		addSender(new StelPropertyEventSender());
 		addSender(new ViewEventSender());
-		addSender(new FovEventSender());
 	}
 	else
 		qCCritical(syncServer)<<"Error while starting:"<<qserver->errorString();
@@ -194,7 +193,7 @@ void SyncServer::handleNewConnection()
 {
 	QTcpSocket* newConn = qserver->nextPendingConnection();
 
-	SyncRemotePeer* newClient = new SyncRemotePeer(newConn,false,handlerList);
+	SyncRemotePeer* newClient = new SyncRemotePeer(newConn,false,handlerHash);
 	newClient->peerLog("New client connection");
 	//add to client list
 	clients.append(newClient);

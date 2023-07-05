@@ -474,7 +474,11 @@ program when it is called via the command line. See table for a full list:
 For example, using the option \texttt{-c\ my\_config.ini} would resolve to the file 
 \file{\textless{}user\ directory\textgreater{}/my\_config.ini} whereas 
 \file{-c\ ./my\_config.ini} can be used to explicitly say the file
-\file{my\_config.ini} in the current working directory.\\\midrule
+\file{my\_config.ini} in the current working directory.\\
+-\/-log-file or -l   & log file name     & Specify the log file name. The default value is \file{log.txt}.
+
+Any path is stripped from the filename. When a path is specified like \texttt{-l\ /mypath/my\_log.txt}, 
+the file will be written to \file{\textless{}user\ directory\textgreater{}/my\_log.txt}\\\midrule
 -\/-restore-defaults &  [none]    & Stellarium will start with the default configuration. 
                                     Note: The old configuration file will be overwritten. \\\midrule
 -\/-user-dir         & path       & Specify the user data directory. \\

@@ -33,7 +33,7 @@ This plugin serves several purposes:
   one eyepiece may be better suited to observe a particular target than another. 
   This can also be very useful for deciding what telescope is best suited to a style of viewing. 
   And with the support for binoculars, you also have the ability to understand just about any type of optics-enhanced visual observing.
-\item to show what a particular combination of camera and lens or telescope would be able to photograph of the sky. 
+\item to show what a particular combination of camera and telescope (or photographic lens) would be able to photograph of the sky. 
 \item lastly, with the help of the Telrad sight, understand where object in the sky are in relation to each other. 
 %This can be very useful if you have a non-GOTO telescope, and to get an idea of how to star-hop from a known location to an area of interest.
 This can be helpful for star-hopping with a non-GOTO telescope. 
@@ -298,7 +298,8 @@ When Binoculars are described, the relevant fields change to
 
 \paragraph{Lenses}
 
-This is the tab used to enter your own lenses (see figure \ref{fig:plugins:Oculars:Gui:Lenses}). By default, a few sample ones have been added; feel free to delete them once you've entered your own.
+This is the tab used to enter your own focal extender or reducer lenses (see figure \ref{fig:plugins:Oculars:Gui:Lenses}). 
+By default, a few sample ones have been added; feel free to delete them once you've entered your own.
 
 \begin{figure}[ht]\centering
 \includegraphics[trim=0 350 0 0,clip,width=.75\textwidth]{oculars_gui_lenses.png}
@@ -349,7 +350,7 @@ Some cameras may have unsquare pixels.
 
 \paragraph{Telescopes}
 
-This is the tab used to enter your own telescopes (see fig.~\ref{fig:plugins:Oculars:Gui:Telescopes}). The fields on this tab are:
+This is the tab used to enter your own telescopes and photographic objectives (see fig.~\ref{fig:plugins:Oculars:Gui:Telescopes}). The fields on this tab are:
 
 \begin{figure}[ht]\centering
 \includegraphics[trim=0 325 0 0,clip,width=.75\textwidth]{oculars_gui_telescopes.png}
@@ -360,8 +361,10 @@ This is the tab used to enter your own telescopes (see fig.~\ref{fig:plugins:Ocu
 
 \begin{description}
 \item[Name] -- A free-text description of the telescope. 
-\item[Focal Length] -- telescope focal length in \mm.
-\item[Diameter] -- telescope diameter (aperture) in \mm.
+\item[Focal Length] -- telescope focal length $f$ in \mm.
+\item[Diameter] -- telescope diameter (aperture $\diameter$) in \mm. If you add a photographic objective 
+that does not provide this information but provides a largest f stop like ``100\mm~f/2.8'', you can estimate from $\diameter=f/s$, 
+where $s=2.8$ and thus $\diameter=100/2.8=35.7\mm$ in this example.
 \item[Horizontal flip] -- if the view through this telescope should flip horizontally.
 \item[Vertical flip] -- if the view through this telescope should flip vertically.
 \item[Equatorial Mount] -- select it if this telescope has an equatorial mount.

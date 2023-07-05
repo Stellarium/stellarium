@@ -194,11 +194,11 @@ void Quasars::init()
 	}
 	else
 	{
-		qDebug() << "[Quasars] quasars.json does not exist - copying default file to" << QDir::toNativeSeparators(catalogJsonPath);
+		qDebug().noquote() << "[Quasars] quasars.json does not exist - copying default file to" << QDir::toNativeSeparators(catalogJsonPath);
 		restoreDefaultJsonFile();
 	}
 
-	qDebug() << "[Quasars] Loading catalog file:" << QDir::toNativeSeparators(catalogJsonPath);
+	qDebug().noquote() << "[Quasars] Loading catalog file:" << QDir::toNativeSeparators(catalogJsonPath);
 
 	readJsonFile();
 

@@ -31,7 +31,7 @@
 using namespace SyncProtocol;
 
 ClientHandler::ClientHandler()
-	: client(Q_NULLPTR)
+	: client(nullptr)
 {
 	core = StelApp::getInstance().getCore();
 }
@@ -335,21 +335,5 @@ bool ClientViewHandler::handleMessage(QDataStream &stream, SyncProtocol::tPayloa
 	if(!ok) return false;
 
 	mvMgr->setViewDirectionJ2000(core->altAzToJ2000(msg.viewAltAz, StelCore::RefractionOff));
-	return true;
-}
-
-ClientFovHandler::ClientFovHandler()
-{
-	mvMgr = core->getMovementMgr();
-}
-
-bool ClientFovHandler::handleMessage(QDataStream &stream, SyncProtocol::tPayloadSize dataSize, SyncRemotePeer &peer)
-{
-	Q_UNUSED(peer)
-	Fov msg;
-	bool ok = msg.deserialize(stream, dataSize);
-	if(!ok) return false;
-
-	mvMgr->zoomTo(msg.fov, 0.0f);
 	return true;
 }

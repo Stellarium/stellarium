@@ -73,12 +73,12 @@ void StelLocaleMgr::setAppLanguage(const QString& newAppLanguageName, bool refre
 	Q_ASSERT(StelTranslator::globalTranslator);
 	delete StelTranslator::globalTranslator;
 	StelTranslator::globalTranslator = new StelTranslator("stellarium", newAppLanguageName);
-	qDebug() << "Application language is " << StelTranslator::globalTranslator->getTrueLocaleName();
+	qDebug().noquote() << "Application language:" << StelTranslator::globalTranslator->getTrueLocaleName();
 
 	delete scriptsTranslator;
 	// Update the translator with new locale name
 	scriptsTranslator = new StelTranslator("stellarium-scripts", newAppLanguageName);
-	qDebug() << "Scripts language is " << scriptsTranslator->getTrueLocaleName();
+	qDebug().noquote() << "Scripts language:" << scriptsTranslator->getTrueLocaleName();
 
 	createNameLists();
 	if (refreshAll)
@@ -98,12 +98,12 @@ void StelLocaleMgr::setSkyLanguage(const QString& newSkyLanguageName, bool refre
 	delete skyTranslator;
 	// Update the translator with new locale name
 	skyTranslator = new StelTranslator("stellarium-skycultures", newSkyLanguageName);
-	qDebug() << "Sky language is " << skyTranslator->getTrueLocaleName();
+	qDebug().noquote() << "Sky language:" << skyTranslator->getTrueLocaleName();
 
 	delete planetaryFeaturesTranslator;
 	// Update the translator with new locale name
 	planetaryFeaturesTranslator = new StelTranslator("stellarium-planetary-features", newSkyLanguageName);
-	qDebug() << "Planetary features language is " << planetaryFeaturesTranslator->getTrueLocaleName();
+	qDebug().noquote() << "Planetary features language:" << planetaryFeaturesTranslator->getTrueLocaleName();
 
 	if (refreshAll)
 		StelApp::getInstance().updateI18n();

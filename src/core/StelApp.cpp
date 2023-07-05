@@ -92,9 +92,7 @@
 #include <QScreen>
 #include <QDateTime>
 #include <QRegularExpression>
-#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
 #include <QRandomGenerator>
-#endif
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 #include <QImageReader>
 #endif
@@ -227,9 +225,7 @@ void StelApp::deinitStatic()
 *************************************************************************/
 StelApp::StelApp(StelMainView *parent)
 	: QObject(parent)
-#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
 	, randomGenerator(Q_NULLPTR)
-#endif
 	, mainWin(parent)
 	, core(Q_NULLPTR)
 	, moduleMgr(Q_NULLPTR)
@@ -286,9 +282,7 @@ StelApp::StelApp(StelMainView *parent)
 	singleton = this;
 
 	moduleMgr = new StelModuleMgr();
-#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
 	randomGenerator = new QRandomGenerator(static_cast<quint32>(QDateTime::currentMSecsSinceEpoch()));
-#endif
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 	// QImageReader has a new limitation. For super-large landscapes or other textures, we need to circumvent this.
 	QImageReader::setAllocationLimit(1024); // Allow max texture size 16k x 16k
@@ -322,9 +316,7 @@ StelApp::~StelApp()
 	delete actionMgr; actionMgr = Q_NULLPTR;
 	delete propMgr; propMgr = Q_NULLPTR;
 	delete renderBuffer; renderBuffer = Q_NULLPTR;
-#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
 	delete randomGenerator; randomGenerator=Q_NULLPTR;
-#endif
 	Q_ASSERT(singleton);
 	singleton = Q_NULLPTR;
 }
@@ -473,7 +465,7 @@ void StelApp::init(QSettings* conf)
 	cache->setMaximumCacheSize(confSettings->value("main/network_cache_size",300).toInt() * 1024 * 1024);
 	QString cachePath = StelFileMgr::getCacheDir();
 
-	qDebug() << "Cache directory is: " << QDir::toNativeSeparators(cachePath);
+	qDebug().noquote() << "Cache directory:" << QDir::toNativeSeparators(cachePath);
 	cache->setCacheDirectory(cachePath);
 	networkAccessManager->setCache(cache);	
 	connect(networkAccessManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(reportFileDownloadFinished(QNetworkReply*)));

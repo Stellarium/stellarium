@@ -100,6 +100,7 @@ void CLIProcessor::parseCLIArgsPreConfig(const QStringList& argList)
 			  << "--version (or -v)       : Print program name and version and exit.\n"
 			  << "--help (or -h)          : This cruft.\n"
 			  << "--config-file (or -c)   : Use an alternative name for the config file\n"
+			  << "--log-file (or -l)      : Use an alternative name for the log file\n"
 			  << "--user-dir (or -u)      : Use an alternative user data directory\n"
 			  << "--verbose               : Even more diagnostic output in logfile \n"
 			  << "                          (esp. multimedia handling)\n"

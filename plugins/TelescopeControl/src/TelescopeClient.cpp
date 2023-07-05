@@ -237,7 +237,11 @@ TelescopeTCP::TelescopeTCP(const QString &name, const QString &params, Telescope
 	interpolatedPosition.reset();
 	
 	connect(tcpSocket, SIGNAL(connected()), this, SLOT(socketConnected()));
+#if (QT_VERSION>=QT_VERSION_CHECK(5,15,0))
+	connect(tcpSocket, SIGNAL(errorOccurred(QAbstractSocket::SocketError)), this, SLOT(socketFailed(QAbstractSocket::SocketError)));
+#else
 	connect(tcpSocket, SIGNAL(error(QAbstractSocket::SocketError)), this, SLOT(socketFailed(QAbstractSocket::SocketError)));
+#endif
 }
 
 void TelescopeTCP::hangup(void)

@@ -201,7 +201,7 @@ void MeteorShowersMgr::loadTextures()
 
 bool MeteorShowersMgr::loadCatalog(const QString& jsonPath)
 {
-	qDebug() << "[MeteorShowersMgr] Loading catalog file:"
+	qDebug().noquote() << "[MeteorShowersMgr] Loading catalog file:"
 		 << QDir::toNativeSeparators(jsonPath);
 
 	QFile jsonFile(jsonPath);

@@ -164,11 +164,11 @@ void Supernovae::init()
 	}
 	else
 	{
-		qDebug() << "[Supernovae] supernovae.json does not exist - copying default file to" << QDir::toNativeSeparators(sneJsonPath);
+		qDebug().noquote() << "[Supernovae] supernovae.json does not exist - copying default file to" << QDir::toNativeSeparators(sneJsonPath);
 		restoreDefaultJsonFile();
 	}
 
-	qDebug() << "[Supernovae] loading catalog file:" << QDir::toNativeSeparators(sneJsonPath);
+	qDebug().noquote() << "[Supernovae] Loading catalog file:" << QDir::toNativeSeparators(sneJsonPath);
 
 	readJsonFile();
 

@@ -517,7 +517,7 @@ bool StarMgr::checkAndLoadCatalog(const QVariantMap& catDesc)
 	if (!checked)
 	{
 		// The file is not checked but we found it, maybe from a previous download/version
-		qWarning() << "Found file " << QDir::toNativeSeparators(catalogFilePath) << ", checking md5sum..";
+		qWarning().noquote() << "Found file" << QDir::toNativeSeparators(catalogFilePath) << ", checking md5sum...";
 
 		QFile file(catalogFilePath);
 		if(file.open(QIODevice::ReadOnly | QIODevice::Unbuffered))
@@ -547,7 +547,7 @@ bool StarMgr::checkAndLoadCatalog(const QVariantMap& catDesc)
 			file.close();
 			if (md5Hash.result().toHex()!=catDesc.value("checksum").toByteArray())
 			{
-				qWarning() << "Error: File " << QDir::toNativeSeparators(catalogFileName) << " is corrupt, MD5 mismatch! Found " << md5Hash.result().toHex() << " expected " << catDesc.value("checksum").toByteArray();
+				qWarning().noquote() << "Error: File" << QDir::toNativeSeparators(catalogFileName) << "is corrupt, MD5 mismatch! Found" << md5Hash.result().toHex() << "expected" << catDesc.value("checksum").toByteArray();
 				file.remove();
 				return false;
 			}
@@ -561,7 +561,7 @@ bool StarMgr::checkAndLoadCatalog(const QVariantMap& catDesc)
 	{
 		if (z->level<gridLevels.size())
 		{
-			qWarning() << QDir::toNativeSeparators(catalogFileName) << ", " << z->level << ": duplicate level";
+			qWarning().noquote() << QDir::toNativeSeparators(catalogFileName) << ", " << z->level << ": duplicate level";
 			delete z;
 			return true;
 		}
@@ -630,7 +630,7 @@ void StarMgr::loadData(QVariantMap starsConfig)
 	{
 		QString tmpFic = StelFileMgr::findFile("stars/default/" + cat_hip_sp_file_name);
 		if (tmpFic.isEmpty())
-			qWarning() << "ERROR while loading data from " << QDir::toNativeSeparators(("stars/default/" + cat_hip_sp_file_name));
+			qWarning() << "ERROR while loading data from" << QDir::toNativeSeparators(("stars/default/" + cat_hip_sp_file_name));
 		else
 			spectral_array = initStringListFromFile(tmpFic);
 	}
@@ -650,7 +650,7 @@ void StarMgr::loadData(QVariantMap starsConfig)
 	}
 
 	lastMaxSearchLevel = maxGeodesicGridLevel;
-	qDebug() << "Finished loading star catalogue data, max_geodesic_level: " << maxGeodesicGridLevel;	
+	qDebug() << "Finished loading star catalogue data, max_geodesic_level:" << maxGeodesicGridLevel;
 }
 
 void StarMgr::populateHipparcosLists()

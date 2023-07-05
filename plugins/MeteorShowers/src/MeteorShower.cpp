@@ -311,11 +311,7 @@ void MeteorShower::update(StelCore* core, double deltaTime)
 	float rate = mpf / static_cast<float>(maxMpf);
 	for (int i = 0; i < maxMpf; ++i)
 	{
-		#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
 		float prob = StelApp::getInstance().getRandF();
-		#else
-		float prob = static_cast<float>(qrand()) / static_cast<float>(RAND_MAX);
-		#endif
 		if (prob < rate)
 		{
 			MeteorObj *m = new MeteorObj(core, m_speed, static_cast<float>(m_radiantAlpha), static_cast<float>(m_radiantDelta),
@@ -353,11 +349,7 @@ void MeteorShower::drawRadiant(StelCore *core)
 	painter.setBlending(true, GL_SRC_ALPHA, GL_ONE);
 
 	Vec3f rgb;
-#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
 	float alpha = 0.85f + StelApp::getInstance().getRandF() / 10.f;
-#else
-	float alpha = 0.85f + (static_cast<float>(qrand()) / static_cast<float>(RAND_MAX)) / 10.f;
-#endif
 	switch(m_status)
 	{
 		case ACTIVE_CONFIRMED: //Active, confirmed data

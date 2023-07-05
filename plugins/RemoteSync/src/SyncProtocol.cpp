@@ -101,9 +101,9 @@ QString SyncMessage::readString(QDataStream &stream)
 	return QString::fromUtf8(arr);
 }
 
-SyncRemotePeer::SyncRemotePeer(QAbstractSocket *socket, bool isServer, const QVector<SyncMessageHandler *> &handlerList)
+SyncRemotePeer::SyncRemotePeer(QAbstractSocket *socket, bool isServer, const QHash<SyncMessageType, SyncMessageHandler *> &handlerHash)
 	: sock(socket), stream(sock), expectDisconnect(false), isPeerAServer(isServer), authenticated(false), authResponseSent(false), waitingForBody(false),
-	  handlerList(handlerList)
+	  handlerHash(handlerHash)
 {
 	Q_ASSERT(sock);
 	sock->setParent(this); //reparent
@@ -111,7 +111,11 @@ SyncRemotePeer::SyncRemotePeer(QAbstractSocket *socket, bool isServer, const QVe
 	stream.setVersion(SYNC_DATASTREAM_VERSION);
 	connect(sock, SIGNAL(readyRead()), this, SLOT(receiveMessage()));
 	connect(sock, SIGNAL(disconnected()), this, SLOT(sockDisconnected()));
+#if (QT_VERSION>=QT_VERSION_CHECK(5,15,0))
+	connect(sock, SIGNAL(errorOccurred(QAbstractSocket::SocketError)), this, SLOT(sockError(QAbstractSocket::SocketError)));
+#else
 	connect(sock, SIGNAL(error(QAbstractSocket::SocketError)), this, SLOT(sockError(QAbstractSocket::SocketError)));
+#endif
 	connect(sock, SIGNAL(stateChanged(QAbstractSocket::SocketState)), this, SLOT(sockStateChanged(QAbstractSocket::SocketState)));
 
 	// silence CoverityScan...
@@ -245,14 +249,14 @@ void SyncRemotePeer::receiveMessage()
 			peerLog()<<"received body, processing";
 
 			//full packet available, pass to handler
-			SyncMessageHandler* handler = handlerList[msgHeader.msgType];
+			SyncMessageHandler* handler = handlerHash[static_cast<SyncMessageType>(msgHeader.msgType)];
 			if(!handler)
 			{
 				//no handler registered on this end for this msgtype
 				writeError("unregistered message type " + QString::number(msgHeader.msgType));
 				return;
 			}
-			if(!handlerList[msgHeader.msgType]->handleMessage(stream, msgHeader.dataSize, *this))
+			if(!handlerHash[static_cast<SyncMessageType>(msgHeader.msgType)]->handleMessage(stream, msgHeader.dataSize, *this))
 			{
 				writeError("last message of type " + QString::number(msgHeader.msgType) + " was rejected");
 			}

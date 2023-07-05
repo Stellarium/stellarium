@@ -31,14 +31,14 @@
 
 RemoteSyncDialog::RemoteSyncDialog()
 	: StelDialog("RemoteSync")
-	, rs(Q_NULLPTR)
+	, rs(nullptr)
 {
 	ui = new Ui_remoteSyncDialog();
 }
 
 RemoteSyncDialog::~RemoteSyncDialog()
 {
-	delete ui; ui=Q_NULLPTR;
+	delete ui; ui=nullptr;
 }
 
 void RemoteSyncDialog::retranslate()
@@ -97,11 +97,14 @@ void RemoteSyncDialog::createDialogContent()
 	ui->buttonGroupSyncOptions->setId(ui->checkBoxOptionSelection, SyncClient::SyncSelection);
 	ui->buttonGroupSyncOptions->setId(ui->checkBoxOptionStelProperty, SyncClient::SyncStelProperty);
 	ui->buttonGroupSyncOptions->setId(ui->checkBoxOptionView, SyncClient::SyncView);
-	ui->buttonGroupSyncOptions->setId(ui->checkBoxOptionFov, SyncClient::SyncFov);
 	ui->buttonGroupSyncOptions->setId(ui->checkBoxExcludeGUIProps, SyncClient::SkipGUIProps);
 	updateCheckboxesFromSyncOptions();
 	connect(rs, SIGNAL(clientSyncOptionsChanged(SyncClient::SyncOptions)), this, SLOT(updateCheckboxesFromSyncOptions()));
+#if (QT_VERSION>=QT_VERSION_CHECK(5,15,0))
+	connect(ui->buttonGroupSyncOptions, SIGNAL(idToggled(int,bool)), this, SLOT(checkboxToggled(int,bool)));
+#else
 	connect(ui->buttonGroupSyncOptions, SIGNAL(buttonToggled(int,bool)), this, SLOT(checkboxToggled(int,bool)));
+#endif
 
 	connect(ui->saveSettingsButton, SIGNAL(clicked()), rs, SLOT(saveSettings()));	
 	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), this, SLOT(restoreDefaults()));
@@ -135,8 +138,8 @@ void RemoteSyncDialog::updateState()
 	RemoteSync::SyncState state = rs->getState();
 
 	//disconnect the click signals from whatever is connected
-	disconnect(ui->serverButton, SIGNAL(clicked(bool)), Q_NULLPTR, Q_NULLPTR);
-	disconnect(ui->clientButton, SIGNAL(clicked(bool)), Q_NULLPTR, Q_NULLPTR);
+	disconnect(ui->serverButton, SIGNAL(clicked(bool)), nullptr, nullptr);
+	disconnect(ui->clientButton, SIGNAL(clicked(bool)), nullptr, nullptr);
 	ui->statusLabel->setStyleSheet("");
 
 	if(state == RemoteSync::IDLE)
@@ -219,7 +222,7 @@ void RemoteSyncDialog::setAboutHtml(void)
 	html += "</body></html>";
 
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-	if(gui!=Q_NULLPTR)
+	if(gui!=nullptr)
 	{
 		QString htmlStyleSheet(gui->getStelStyle().htmlStyleSheet);
 		ui->aboutTextBrowser->document()->setDefaultStyleSheet(htmlStyleSheet);

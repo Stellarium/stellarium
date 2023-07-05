@@ -39,9 +39,6 @@
 #include <QDir>
 #include <QOpenGLWidget>
 #include <QApplication>
-#if (QT_VERSION<QT_VERSION_CHECK(5,12,0))
-#include <QDesktopWidget>
-#endif
 #include <QGuiApplication>
 #include <QGraphicsSceneMouseEvent>
 #include <QGraphicsAnchorLayout>
@@ -866,7 +863,7 @@ void StelMainView::init()
 	}
 #endif
 
-	qDebug()<<"StelMainView::init";
+	qDebug() << "Initialization StelMainView";
 
 	glInfo.mainContext = QOpenGLContext::currentContext();
 	glInfo.surface = glInfo.mainContext->surface();
@@ -1092,7 +1089,7 @@ void StelMainView::processOpenGLdiagnosticsAndWarnings(QSettings *conf, QOpenGLC
 	bool openGLerror=false;
 	if (format.renderableType()==QSurfaceFormat::OpenGL || format.renderableType()==QSurfaceFormat::OpenGLES)
 	{
-		qDebug() << "Detected:" << (format.renderableType()==QSurfaceFormat::OpenGL  ? "OpenGL" : "OpenGL ES" ) << QString("%1.%2").arg(format.majorVersion()).arg(format.minorVersion());
+		qDebug().noquote() << "Detected:" << (format.renderableType()==QSurfaceFormat::OpenGL  ? "OpenGL" : "OpenGL ES" ) << QString("%1.%2").arg(format.majorVersion()).arg(format.minorVersion());
 	}
 	else
 	{
@@ -1103,10 +1100,10 @@ void StelMainView::processOpenGLdiagnosticsAndWarnings(QSettings *conf, QOpenGLC
 	QOpenGLFunctions* gl = context->functions();
 
 	QString glDriver(reinterpret_cast<const char*>(gl->glGetString(GL_VERSION)));
-	qDebug() << "Driver version string:" << glDriver;
-	qDebug() << "GL vendor is" << QString(reinterpret_cast<const char*>(gl->glGetString(GL_VENDOR)));
+	qDebug().noquote() << "Driver version string:" << glDriver;
+	qDebug().noquote() << "GL vendor:" << QString(reinterpret_cast<const char*>(gl->glGetString(GL_VENDOR)));
 	QString glRenderer(reinterpret_cast<const char*>(gl->glGetString(GL_RENDERER)));
-	qDebug() << "GL renderer is" << glRenderer;
+	qDebug().noquote() << "GL renderer:" << glRenderer;
 
 	// Minimal required version of OpenGL for Qt5 is 2.1 and OpenGL Shading Language may be 1.20 (or OpenGL ES is 2.0 and GLSL ES is 1.0).
 	// As of V0.13.0..1, we use GLSL 1.10/GLSL ES 1.00 (implicitly, by omitting a #version line), but in case of using ANGLE we need hardware
@@ -1150,7 +1147,7 @@ void StelMainView::processOpenGLdiagnosticsAndWarnings(QSettings *conf, QOpenGLC
 #endif
 	// This call requires OpenGL2+.
 	QString glslString(reinterpret_cast<const char*>(gl->glGetString(GL_SHADING_LANGUAGE_VERSION)));
-	qDebug() << "GL Shading Language version is" << glslString;
+	qDebug().noquote() << "GL Shading Language version:" << glslString;
 
 	// Only give extended info if called on command line, for diagnostic.
 	if (qApp->property("dump_OpenGL_details").toBool())
@@ -1168,8 +1165,8 @@ void StelMainView::processOpenGLdiagnosticsAndWarnings(QSettings *conf, QOpenGLC
 			QRegularExpressionMatch match=angleVsPsRegExp.match(glRenderer);
 			float vsVersion=match.captured(1).toFloat() + 0.1f*match.captured(2).toFloat();
 			float psVersion=match.captured(3).toFloat() + 0.1f*match.captured(4).toFloat();
-			qDebug() << "VS Version Number detected: " << vsVersion;
-			qDebug() << "PS Version Number detected: " << psVersion;
+			qDebug() << "VS Version Number detected:" << vsVersion;
+			qDebug() << "PS Version Number detected:" << psVersion;
 			if ((vsVersion<2.0f) || (psVersion<3.0f))
 			{
 				openGLerror=true;
@@ -1220,7 +1217,7 @@ void StelMainView::processOpenGLdiagnosticsAndWarnings(QSettings *conf, QOpenGLC
 		if (mesaPos >-1)
 		{
 			float mesaVersion=mesaRegExp.match(glDriver).captured(1).toFloat();
-			qDebug() << "MESA Version Number detected: " << mesaVersion;
+			qDebug() << "MESA Version Number detected:" << mesaVersion;
 			if ((mesaVersion<10.0f))
 			{
 				openGLerror=true;
@@ -1276,7 +1273,7 @@ void StelMainView::processOpenGLdiagnosticsAndWarnings(QSettings *conf, QOpenGLC
 	if (pos >-1)
 	{
 		float glslVersion=glslRegExp.match(glslString).captured(1).toFloat();
-		qDebug() << "GLSL Version Number detected: " << glslVersion;
+		qDebug() << "GLSL Version Number detected:" << glslVersion;
 		if (glslVersion<1.3f)
 		{
 			openGLerror=true;
@@ -1317,7 +1314,7 @@ void StelMainView::processOpenGLdiagnosticsAndWarnings(QSettings *conf, QOpenGLC
 	else if (posES >-1)
 	{
 		float glslesVersion=glslesRegExp.match(glslString).captured(1).toFloat();
-		qDebug() << "GLSL ES Version Number detected: " << glslesVersion;
+		qDebug() << "GLSL ES Version Number detected:" << glslesVersion;
 		if (glslesVersion<1.0f) // TBD: is this possible at all?
 		{
 			openGLerror=true;
@@ -1735,11 +1732,7 @@ void StelMainView::doScreenshot(void)
 	sParams.viewportXywh[3] = virtImgHeight;
 
 	// Configure a helper value to allow some modules to tweak their output sizes. Currently used by StarMgr, maybe solve font issues?
-#if (QT_VERSION>=QT_VERSION_CHECK(5,12,0))
 	customScreenshotMagnification=static_cast<float>(virtImgHeight)/static_cast<float>(qApp->screenAt(QPoint(stelScene->width()*0.5, stelScene->height()*0.5))->geometry().height());
-#else
-	customScreenshotMagnification=static_cast<float>(virtImgHeight)/static_cast<float>(qApp->screens().at(qApp->desktop()->screenNumber())->geometry().height());
-#endif
 	sParams.viewportCenter.set(0.0+(0.5+pParams.viewportCenterOffset.v[0])*virtImgWidth,
 							   0.0+(0.5+pParams.viewportCenterOffset.v[1])*virtImgHeight);
 	sParams.viewportFovDiameter = qMin(virtImgWidth,virtImgHeight);

@@ -2400,15 +2400,15 @@ void Oculars::validateAndLoadIniFile()
 	}
 	else
 	{
-		qDebug() << "Oculars::validateAndLoadIniFile() ocular.ini exists at: " << QDir::toNativeSeparators(ocularIniPath) << ". Checking version...";
+		qDebug().noquote() << "Oculars::validateAndLoadIniFile() ocular.ini exists at:" << QDir::toNativeSeparators(ocularIniPath) << ". Checking version...";
 		QSettings mySettings(ocularIniPath, QSettings::IniFormat);
 		const float ocularsVersion = mySettings.value("oculars_version", 0.0).toFloat();
-		qWarning() << "Oculars::validateAndLoadIniFile() found existing ini file version " << ocularsVersion;
+		qWarning() << "Oculars::validateAndLoadIniFile() found existing ini file version" << ocularsVersion;
 
 		if (ocularsVersion < MIN_OCULARS_INI_VERSION)
 		{
-			qWarning() << "Oculars::validateAndLoadIniFile() existing ini file version " << ocularsVersion
-				   << " too old to use; required version is " << MIN_OCULARS_INI_VERSION << ". Copying over new one.";
+			qWarning() << "Oculars::validateAndLoadIniFile() existing ini file version" << ocularsVersion
+				   << "too old to use; required version is" << MIN_OCULARS_INI_VERSION << ". Copying over new one.";
 			// delete last "old" file, if it exists
 			QFile deleteFile(ocularIniPath + ".old");
 			deleteFile.remove();
@@ -2417,19 +2417,19 @@ void Oculars::validateAndLoadIniFile()
 			QFile oldFile(ocularIniPath);
 			if (!oldFile.rename(ocularIniPath + ".old"))
 			{
-				qWarning() << "Oculars::validateAndLoadIniFile() cannot move ocular.ini resource to ocular.ini.old at path  " + QDir::toNativeSeparators(ocularIniPath);
+				qWarning() << "Oculars::validateAndLoadIniFile() cannot move ocular.ini resource to ocular.ini.old at path" + QDir::toNativeSeparators(ocularIniPath);
 			}
 			else
 			{
-				qWarning() << "Oculars::validateAndLoadIniFile() ocular.ini resource renamed to ocular.ini.old at path  " + QDir::toNativeSeparators(ocularIniPath);
+				qWarning() << "Oculars::validateAndLoadIniFile() ocular.ini resource renamed to ocular.ini.old at path" + QDir::toNativeSeparators(ocularIniPath);
 				QFile src(":/ocular/default_ocular.ini");
 				if (!src.copy(ocularIniPath))
 				{
-					qWarning() << "Oculars::validateIniFile cannot copy default_ocular.ini resource to [non-existing] " + QDir::toNativeSeparators(ocularIniPath);
+					qWarning() << "Oculars::validateIniFile cannot copy default_ocular.ini resource to [non-existing]" + QDir::toNativeSeparators(ocularIniPath);
 				}
 				else
 				{
-					qDebug() << "Oculars::validateAndLoadIniFile() copied default_ocular.ini to " << QDir::toNativeSeparators(ocularIniPath);
+					qDebug() << "Oculars::validateAndLoadIniFile() copied default_ocular.ini to" << QDir::toNativeSeparators(ocularIniPath);
 					// The resource is read only, and the new file inherits this...  make sure the new file
 					// is writable by the Stellarium process so that updates can be done.
 					QFile dest(ocularIniPath);

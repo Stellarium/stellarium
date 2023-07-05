@@ -195,18 +195,3 @@ bool View::deserialize(QDataStream &stream, tPayloadSize dataSize)
 
 	return !stream.status();
 }
-
-void Fov::serialize(QDataStream &stream) const
-{
-	stream<<fov;
-}
-
-bool Fov::deserialize(QDataStream &stream, tPayloadSize dataSize)
-{
-	if(dataSize != sizeof(double))
-		return false;
-
-	stream>>fov;
-
-	return !stream.status();
-}

@@ -192,11 +192,11 @@ void Pulsars::init()
 	}
 	else
 	{
-		qDebug() << "[Pulsars] pulsars.json does not exist - copying default file to" << QDir::toNativeSeparators(jsonCatalogPath);
+		qDebug().noquote() << "[Pulsars] pulsars.json does not exist - copying default file to" << QDir::toNativeSeparators(jsonCatalogPath);
 		restoreDefaultJsonFile();
 	}
 
-	qDebug() << "[Pulsars] Loading catalog file:" << QDir::toNativeSeparators(jsonCatalogPath);
+	qDebug().noquote() << "[Pulsars] Loading catalog file:" << QDir::toNativeSeparators(jsonCatalogPath);
 
 	readJsonFile();
 
