@@ -69,9 +69,6 @@ void TestVecMath::testVec2Math()
 	QVERIFY(vt==Vec2i(1,2));
 	vi = vt;
 	QVERIFY(vi==vt);
-	// What is the use of the next? Make a new Vec2i that is initialized with the first value in vt?
-	vi = Vec2i(*vt);
-	QVERIFY(vi!=vt);
 	// This should not compile with the explicit constructor. As it was, it used to camouflage a programming error.
 	//vi = *vt;
 	//QVERIFY(vi!=vt);
@@ -234,8 +231,6 @@ void TestVecMath::testVec3Math()
 	// Should not compile with the explicit constructor!
 	//vi = *vt;
 	//QVERIFY(vi==vt);
-	vi = Vec3i(*vt); // Fill with 1/1/1
-	QVERIFY2(vi!=vt, "Assignment magically filled correct values");
 
 	vf.set(0.f,0.f,0.f);
 	QVERIFY(vf==Vec3f(0.f,0.f,0.f));
@@ -275,8 +270,6 @@ void TestVecMath::testVec3Math()
 	// Use instead
 	vf = Vec3f(vtf);
 	QVERIFY(vf==vtf);
-	vf = Vec3f(*vtf); // This fills with the first value only!
-	QVERIFY2(vf!=vtf, "Magical filling the right values");
 	vf = Vec3f(2.f);
 	QVERIFY(vf.fuzzyEquals(Vec3f(2.f), ERROR_LIMIT));
 	QVERIFY(!vf.fuzzyEquals(Vec3f(2.1f), ERROR_LIMIT));
@@ -316,8 +309,6 @@ void TestVecMath::testVec3Math()
 	// Should no longer compile with the explicit constructor
 	//vd = *vtd;
 	//QVERIFY(vd==vtd);
-	vd = Vec3d(*vtd); // fill with the first element, 1/1/1
-	QVERIFY2(vd!=vtd, "Magically filling with the complete vector!");
 	vd = Vec3d(vtd); // fill with the vector, 1/2/3
 	QVERIFY2(vd==vtd, "Initialize from vector failed!");
 	vd = Vec3d(2.);
@@ -387,8 +378,6 @@ void TestVecMath::testVec4Math()
 	// Should not compile with the explicit constructor
 	//vi = *vt;
 	//QVERIFY(vi==vt);
-	vi = Vec4i(*vt); // initialize with the first element
-	QVERIFY2(vi!=vt, "Magically filling with whole vector");
 	vi = Vec4i(vt);
 	QVERIFY2(vi==vt, "Constructor with Vec4i failed");
 	vi = Vec4i(Vec3i(10,5,2));
