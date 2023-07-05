@@ -146,6 +146,7 @@ void Satellites::init()
 		{
 			//qDebug() << "Satellites: created section in config file.";
 			restoreDefaultSettings();
+			restoreDefaultTleSources();
 		}
 
 		// populate settings from main config file.
