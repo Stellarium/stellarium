@@ -173,27 +173,3 @@ void ViewEventSender::update()
 		broadcastMessage(constructMessage());
 	}
 }
-
-FovEventSender::FovEventSender()
-	: lastFov(0.0)
-{
-	mvMgr = core->getMovementMgr();
-}
-
-
-SyncProtocol::Fov FovEventSender::constructMessage()
-{
-	Fov msg;
-	msg.fov = mvMgr->getCurrentFov();
-	return msg;
-}
-
-void FovEventSender::update()
-{
-	double curFov = mvMgr->getCurrentFov();
-	if(curFov-lastFov != 0.0)
-	{
-		lastFov = curFov;
-		broadcastMessage(constructMessage());
-	}
-}

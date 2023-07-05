@@ -74,7 +74,7 @@ private:
 	//use composition instead of inheritance, cleaner interface this way
 	//for now, we use TCP, but will test multicast UDP later if the basic setup is working
 	QTcpServer* qserver;
-	QVector<SyncMessageHandler*> handlerList;
+	QHash<SyncProtocol::SyncMessageType, SyncMessageHandler*> handlerHash;
 	QVector<SyncServerEventSender*> senderList;
 
 	bool stopping;

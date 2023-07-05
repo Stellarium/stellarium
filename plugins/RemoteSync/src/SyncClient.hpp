@@ -23,6 +23,7 @@
 #include <QLoggingCategory>
 #include <QObject>
 #include <QTcpSocket>
+#include "SyncProtocol.hpp"
 
 Q_DECLARE_LOGGING_CATEGORY(syncClient)
 
@@ -44,7 +45,7 @@ public:
 		SyncSelection	= 0x0004,
 		SyncStelProperty= 0x0008,
 		SyncView	= 0x0010,
-		SyncFov		= 0x0020,
+		//SyncFov	= 0x0020, // This used to be a special case. Keep the number for legacy connections.
 		SkipGUIProps	= 0x0040,
 		ALL		= 0xFFFF
 	};
@@ -79,7 +80,7 @@ private:
 	bool isConnecting;
 	SyncRemotePeer* server;
 	int timeoutTimerId;
-	QVector<SyncMessageHandler*> handlerList;
+	QHash<SyncProtocol::SyncMessageType, SyncMessageHandler*> handlerHash;
 
 	friend class ClientErrorHandler;
 };

@@ -108,13 +108,4 @@ private:
 	StelMovementMgr* mvMgr;
 };
 
-class ClientFovHandler : public ClientHandler
-{
-public:
-	ClientFovHandler();
-	bool handleMessage(QDataStream &stream, SyncProtocol::tPayloadSize dataSize, SyncRemotePeer &peer) override;
-private:
-	StelMovementMgr* mvMgr;
-};
-
 #endif

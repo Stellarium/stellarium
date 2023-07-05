@@ -158,18 +158,4 @@ private:
 	Vec3d lastView;
 };
 
-class FovEventSender : public TypedSyncServerEventSender<SyncProtocol::Fov>
-{
-	Q_OBJECT
-public:
-	FovEventSender();
-protected:
-	SyncProtocol::Fov constructMessage() override;
-
-	void update() override;
-private:
-	StelMovementMgr* mvMgr;
-	double lastFov;
-};
-
 #endif

@@ -160,17 +160,6 @@ public:
 	Vec3d viewAltAz;
 };
 
-class Fov : public SyncMessage
-{
-public:
-	SyncMessageType getMessageType() const override { return SyncProtocol::FOV; }
-
-	void serialize(QDataStream& stream) const override;
-	bool deserialize(QDataStream &stream, tPayloadSize dataSize) override;
-
-	double fov;
-};
-
 }
 
 #endif

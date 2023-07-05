@@ -97,11 +97,14 @@ void RemoteSyncDialog::createDialogContent()
 	ui->buttonGroupSyncOptions->setId(ui->checkBoxOptionSelection, SyncClient::SyncSelection);
 	ui->buttonGroupSyncOptions->setId(ui->checkBoxOptionStelProperty, SyncClient::SyncStelProperty);
 	ui->buttonGroupSyncOptions->setId(ui->checkBoxOptionView, SyncClient::SyncView);
-	ui->buttonGroupSyncOptions->setId(ui->checkBoxOptionFov, SyncClient::SyncFov);
 	ui->buttonGroupSyncOptions->setId(ui->checkBoxExcludeGUIProps, SyncClient::SkipGUIProps);
 	updateCheckboxesFromSyncOptions();
 	connect(rs, SIGNAL(clientSyncOptionsChanged(SyncClient::SyncOptions)), this, SLOT(updateCheckboxesFromSyncOptions()));
+#if (QT_VERSION>=QT_VERSION_CHECK(5,15,0))
+	connect(ui->buttonGroupSyncOptions, SIGNAL(idToggled(int,bool)), this, SLOT(checkboxToggled(int,bool)));
+#else
 	connect(ui->buttonGroupSyncOptions, SIGNAL(buttonToggled(int,bool)), this, SLOT(checkboxToggled(int,bool)));
+#endif
 
 	connect(ui->saveSettingsButton, SIGNAL(clicked()), rs, SLOT(saveSettings()));	
 	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), this, SLOT(restoreDefaults()));
