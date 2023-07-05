@@ -197,10 +197,10 @@ bool SceneInfo::loadByID(const QString &id,SceneInfo& info)
 				QPair<Vec3d,Vec2d> utm= StelLocationMgr::geo2utm(info.location->getLongitude(), info.location->getLatitude());
 				rot_z = utm.second[0];
 
-				qCDebug(sceneInfo) << "With Longitude " << info.location->getLongitude()
+				qCInfo(sceneInfo) << "With Longitude " << info.location->getLongitude()
 					 << ", Latitude " << info.location->getLatitude() << " and CM="
 					 << utm.first[2] << " of UTM zone" << utmZone.first << utmZone.second << ", ";
-				qCDebug(sceneInfo) << "setting meridian convergence to " << rot_z*M_180_PI << "degrees";
+				qCInfo(sceneInfo) << "setting meridian convergence to " << rot_z*M_180_PI << "degrees";
 			}
 			else
 			{
@@ -217,10 +217,10 @@ bool SceneInfo::loadByID(const QString &id,SceneInfo& info)
 				// or from http://de.wikipedia.org/wiki/Meridiankonvergenz
 				rot_z=(info.location->getLongitude() - gridCentralMeridian)*M_PI_180*std::sin(info.location->getLatitude()*M_PI_180);
 
-				qCDebug(sceneInfo) << "With Longitude " << info.location->getLongitude()
+				qCInfo(sceneInfo) << "With Longitude " << info.location->getLongitude()
 					 << ", Latitude " << info.location->getLatitude() << " and CM="
 					 << gridCentralMeridian << ", ";
-				qCDebug(sceneInfo) << "setting meridian convergence to " << rot_z*M_180_PI << "degrees";
+				qCInfo(sceneInfo) << "setting meridian convergence to " << rot_z*M_180_PI << "degrees";
 			}
 			else
 			{
