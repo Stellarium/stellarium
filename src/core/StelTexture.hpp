@@ -21,6 +21,7 @@
 #define STELTEXTURE_HPP
 
 #include <QOpenGLFunctions>
+#include <QSharedPointer>
 #include <QObject>
 #include <QImage>
 
