@@ -114,8 +114,8 @@ public:
 
 	inline const T& operator[](int x) const;
 	inline T& operator[](int);
-	inline operator const T*() const;
-	inline operator T*();
+	explicit inline operator const T*() const;
+	explicit inline operator T*();
 
 	inline Vector2<T>& operator+=(const Vector2<T>&);
 	inline Vector2<T>& operator-=(const Vector2<T>&);
@@ -214,8 +214,8 @@ public:
 
 	inline T& operator[](int);
 	inline const T& operator[](int) const;
-	inline operator const T*() const;
-	inline operator T*();
+	explicit inline operator const T*() const;
+	explicit inline operator T*();
 	inline const T* data() const {return v;}
 	inline T* data() {return v;}
 
@@ -323,8 +323,8 @@ public:
 
 	inline T& operator[](int);
 	inline const T& operator[](int) const;
-	inline operator T*();
-	inline operator const T*() const;
+	explicit inline operator T*();
+	explicit inline operator const T*() const;
 
 	inline void operator+=(const Vector4<T>&);
 	inline void operator-=(const Vector4<T>&);
@@ -388,8 +388,8 @@ public:
 
 	inline T& operator[](int);
 	inline T operator[](int) const;
-	inline operator T*();
-	inline operator const T*() const;
+	explicit inline operator T*();
+	explicit inline operator const T*() const;
 
 	inline Matrix3 operator-(const Matrix3<T>&) const;
 	inline Matrix3 operator+(const Matrix3<T>&) const;
@@ -438,8 +438,8 @@ public:
 
 	inline T& operator[](int);
 	inline T operator[](int) const;
-	inline operator T*();
-	inline operator const T*() const;
+	explicit inline operator T*();
+	explicit inline operator const T*() const;
 
 	inline Matrix4 operator-(const Matrix4<T>&) const;
 	inline Matrix4 operator+(const Matrix4<T>&) const;

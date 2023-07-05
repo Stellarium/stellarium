@@ -1964,7 +1964,7 @@ void Planet::computePosition(const double dateJDE, const Vec3d &aberrationPush)
 
 	if (fabs(lastJDE-dateJDE)>deltaJDE)
 	{
-		coordFunc(dateJDE, eclipticPos, eclipticVelocity, orbitPtr);
+		coordFunc(dateJDE, &eclipticPos[0], &eclipticVelocity[0], orbitPtr);
 		lastJDE = dateJDE;
 	}
 	this->aberrationPush=aberrationPush;
@@ -1972,7 +1972,7 @@ void Planet::computePosition(const double dateJDE, const Vec3d &aberrationPush)
 
 void Planet::computePosition(const double dateJDE, Vec3d &eclPosition, Vec3d &eclVelocity) const
 {
-		coordFunc(dateJDE, eclPosition, eclVelocity, orbitPtr);
+		coordFunc(dateJDE, &eclPosition[0], &eclVelocity[0], orbitPtr);
 }
 
 // Compute the transformation matrix from the local Planet coordinate system to the parent Planet coordinate system.
@@ -2222,7 +2222,7 @@ Vec3d Planet::getEclipticPos(double dateJDE) const
 	{
 		pos = new Vec3d;
 		Vec3d velDummy;
-		coordFunc(dateJDE, *pos, velDummy, orbitPtr);
+		coordFunc(dateJDE, &(*pos)[0], &velDummy[0], orbitPtr);
 		orbitPositionsCache.insert(dateJDE, pos);
 	}
 	return *pos;
