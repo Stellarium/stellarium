@@ -305,6 +305,9 @@ public:
 
 	//! Return the observer heliocentric ecliptic position (GZ: presumably J2000)
 	Vec3d getObserverHeliocentricEclipticPos() const;
+	//! Return the observer heliocentric ecliptic velocity. This includes orbital and diurnal motion;
+	// diurnal motion is omitted if planetocentric coordinates are in use.
+	Vec3d getObserverHeliocentricEclipticVelocity() const;
 
 	//! Get the information on the current location
 	const StelLocation& getCurrentLocation() const;
