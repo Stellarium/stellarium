@@ -37,6 +37,17 @@ enum class DitheringMode
 	Color888,    //!< 24-bit color (AKA True color)
 	Color101010, //!< 30-bit color (AKA Deep color)
 };
+#if QT_VERSION < QT_VERSION_CHECK(5,14,0)
+// A similar pair of methods but templated for arbitrary enum first appears in Qt 5.14
+inline QDataStream& operator>>(QDataStream& s, DitheringMode& m)
+{
+	return s >> reinterpret_cast<std::underlying_type<DitheringMode>::type&>(m);
+}
+inline QDataStream& operator<<(QDataStream &s, const DitheringMode &m)
+{
+	return s << static_cast<typename std::underlying_type<DitheringMode>::type>(m);
+}
+#endif
 
 Vec3f calcRGBMaxValue(DitheringMode mode);
 
