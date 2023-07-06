@@ -98,7 +98,7 @@ ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap)
 		qWarning().noquote() << "Error while loading" << QDir::toNativeSeparators(catalogFilePath) << ": failed to open file.";
 		return Q_NULLPTR;
 	}
-	dbStr = "Loading" + QDir::toNativeSeparators(catalogFilePath) + ": ";
+	dbStr = "Loading star catalog: " + QDir::toNativeSeparators(catalogFilePath) + " - ";
 	unsigned int magic,major,minor,type,level,mag_min,mag_range,mag_steps;
 	if (ReadInt(*file,magic) < 0 ||
 			ReadInt(*file,type) < 0 ||
@@ -203,7 +203,7 @@ ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap)
 	}
 	if (rval && rval->isInitialized())
 	{
-		dbStr += QString("%1").arg(rval->getNrOfStars());
+		dbStr += QString("%1 entries").arg(rval->getNrOfStars());
 		qDebug().noquote() << dbStr;
 	}
 	else

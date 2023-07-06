@@ -2056,6 +2056,7 @@ void StelCore::registerMathMetaTypes()
 	qRegisterMetaType<Mat4f>();
 	qRegisterMetaType<Mat3d>();
 	qRegisterMetaType<Mat3f>();
+	qRegisterMetaType<DitheringMode>();
 
 #if (QT_VERSION<QT_VERSION_CHECK(6,0,0))
 	//registers the QDataStream operators, so that QVariants with these types can be saved
@@ -2072,6 +2073,7 @@ void StelCore::registerMathMetaTypes()
 	qRegisterMetaTypeStreamOperators<Mat4f>();
 	qRegisterMetaTypeStreamOperators<Mat3d>();
 	qRegisterMetaTypeStreamOperators<Mat3f>();
+	qRegisterMetaTypeStreamOperators<DitheringMode>();
 #endif
 	//for debugging QVariants with these types, it helps if we register the string converters
 	// This is also required for QJSEngine.
