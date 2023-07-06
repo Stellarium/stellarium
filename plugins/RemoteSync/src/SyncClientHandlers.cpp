@@ -307,8 +307,10 @@ bool ClientStelPropertyUpdateHandler::handleMessage(QDataStream &stream, SyncPro
 	bool ok = msg.deserialize(stream, dataSize);
 
 	if(!ok)
+	{
+		qWarning() << "Problem deserializing " << msg.propId;
 		return false;
-
+	}
 	qDebug()<<msg;
 
 	QRegularExpressionMatch match = filter.match(msg.propId);
