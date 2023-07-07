@@ -53,7 +53,7 @@ bool ClientErrorHandler::handleMessage(QDataStream &stream, SyncProtocol::tPaylo
 {
 	ErrorMessage msg;
 	bool ok = msg.deserialize(stream,dataSize);
-	peer.peerLog("Received error message from server: " + msg.message);
+	peer.peerLog(QtWarningMsg, "Received error message from server: " + msg.message);
 
 	client->emitServerError(msg.message);
 

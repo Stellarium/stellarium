@@ -38,6 +38,14 @@ Q_DECLARE_LOGGING_CATEGORY(remoteSync)
 Provides state synchronization for multiple Stellarium instances
 running in a network. See manual for detailed description.
 
+This plugin makes use of the QLoggingCategory infrastructure. By default it is very verbose.
+To reduce verbosity, configure an environment variable with these entries (Note the closing semicolon!):
+QT_LOGGING_RULES="stel.plugin.remoteSync.debug=false;
+		  stel.plugin.remoteSync.client.debug=false;
+		  stel.plugin.remoteSync.protocol.debug=true;"
+
+The final parts may be debug|info|warning|critical = true|false. Default=true.
+
 @}
 */
 

@@ -134,8 +134,7 @@ SyncRemotePeer::SyncRemotePeer(QAbstractSocket *socket, bool isServer, const QHa
 
 SyncRemotePeer::~SyncRemotePeer()
 {
-	peerLog("Destroyed");
-	//qCDebug(syncProtocol) << "Destroyed";
+	peerLog(QtDebugMsg, "Destroyed");
 	delete sock;
 }
 
@@ -158,8 +157,7 @@ void SyncRemotePeer::checkTimeout()
 	if(readDiff > 15000)
 	{
 		//no data received for some time, assume client timed out
-		//peerLog(QString("No data received for %1ms, timing out").arg(readDiff));
-		qCWarning(syncProtocol) << QString("No data received for %1ms, timing out").arg(readDiff);
+		peerLog(QtWarningMsg, QString("No data received for %1ms, timing out").arg(readDiff));
 		errorString = "Connection timed out";
 
 		if(sock->state()==QAbstractSocket::ConnectedState)
@@ -186,16 +184,14 @@ void SyncRemotePeer::disconnectPeer()
 
 void SyncRemotePeer::sockDisconnected()
 {
-	peerLog("Socket disconnected");
-	//qCDebug(syncProtocol)<<"Socket disconnected";
+	peerLog(QtDebugMsg, "Socket disconnected");
 	emit disconnected(expectDisconnect);
 }
 
 void SyncRemotePeer::sockError(QAbstractSocket::SocketError err)
 {
 	errorString = sock->errorString();
-	//peerLog()<<"Socket error:"<<errorString;
-	qCWarning(syncProtocol)<<"Socket error:"<<errorString;
+	peerLog(QtWarningMsg, "Socket error:" + errorString);
 
 	if(err == QAbstractSocket::RemoteHostClosedError) //handle remote close as normal disconnect
 		expectDisconnect = true;
@@ -208,8 +204,7 @@ void SyncRemotePeer::sockError(QAbstractSocket::SocketError err)
 
 void SyncRemotePeer::sockStateChanged(QAbstractSocket::SocketState state)
 {
-	peerLog("Socket state:" + QVariant::fromValue(state).toString());
-	//qCDebug(syncProtocol)<<"Socket state:"<<state;
+	peerLog(QtDebugMsg, "Socket state:" + QVariant::fromValue(state).toString());
 }
 
 void SyncRemotePeer::receiveMessage()
@@ -242,8 +237,7 @@ void SyncRemotePeer::receiveMessage()
 				return;
 			}
 
-			peerLog("received header for" + SyncMessage::toString(SyncMessageType(msgHeader.msgType)));
-			//qCDebug(syncProtocol)<<"received header for"<<SyncMessageType(msgHeader.msgType);
+			peerLog(QtDebugMsg, "received header for " + SyncMessage::toString(SyncMessageType(msgHeader.msgType)));
 		}
 
 		if(sock->bytesAvailable() < msgHeader.dataSize)
@@ -254,8 +248,7 @@ void SyncRemotePeer::receiveMessage()
 		else
 		{
 			waitingForBody = false;
-			peerLog("received body, processing");
-			//qCDebug(syncProtocol)<<"received body, processing";
+			peerLog(QtDebugMsg, "received body, processing");
 
 			//full packet available, pass to handler
 			SyncMessageHandler* handler = handlerHash[static_cast<SyncMessageType>(msgHeader.msgType)];
@@ -273,16 +266,33 @@ void SyncRemotePeer::receiveMessage()
 	}
 }
 
-void SyncRemotePeer::peerLog(const QString &msg) const
+void SyncRemotePeer::peerLog(const QtMsgType type, const QString &msg) const
 {
-	qCDebug(syncProtocol)<<"[Peer"<<(sock->peerAddress().toString() + ":" + QString::number(sock->peerPort()))<<"]:" << msg;
+	switch (type)
+	{
+		case QtInfoMsg:
+			qCInfo(syncProtocol)<<"[Peer"<<(sock->peerAddress().toString() + ":" + QString::number(sock->peerPort()))<<"]:" << msg;
+			break;
+		case QtWarningMsg:
+			qCWarning(syncProtocol)<<"[Peer"<<(sock->peerAddress().toString() + ":" + QString::number(sock->peerPort()))<<"]:" << msg;
+			break;
+		case QtCriticalMsg:
+			qCCritical(syncProtocol)<<"[Peer"<<(sock->peerAddress().toString() + ":" + QString::number(sock->peerPort()))<<"]:" << msg;
+			break;
+		case QtFatalMsg:
+			qCFatal(syncProtocol)<<"[Peer"<<(sock->peerAddress().toString() + ":" + QString::number(sock->peerPort()))<<"]:" << msg;
+			break;
+		case QtDebugMsg:
+		default:
+			qCDebug(syncProtocol)<<"[Peer"<<(sock->peerAddress().toString() + ":" + QString::number(sock->peerPort()))<<"]:" << msg;
+			break;
+	}
 }
 
 void SyncRemotePeer::writeMessage(const SyncMessage &msg)
 {
 	qint64 size = msg.createFullMessage(msgWriteBuffer);
-	//qCDebug(syncProtocol)<<"Send message" + msg.toString();
-	peerLog("Send message" + msg.toString());
+	peerLog(QtDebugMsg, "Send message" + msg.toString());
 
 	if(!size)
 	{

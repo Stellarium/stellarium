@@ -194,7 +194,7 @@ void SyncServer::handleNewConnection()
 	QTcpSocket* newConn = qserver->nextPendingConnection();
 
 	SyncRemotePeer* newClient = new SyncRemotePeer(newConn,false,handlerHash);
-	newClient->peerLog("New client connection");
+	newClient->peerLog(QtDebugMsg, "New client connection");
 	//add to client list
 	clients.append(newClient);
 

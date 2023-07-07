@@ -565,7 +565,7 @@ If all your Stellarium instances run on the same device, this is of course not
 necessary.
 
 \begin{figure}[ht]
-	\centering\includegraphics[width=\columnwidth]{remotesync_client.png}
+	\centering\includegraphics[width=0.8\columnwidth]{remotesync_client.png}
 	\caption{RemoteSync client settings window}
 	\label{fig:plugins:RemoteSync:client}
 \end{figure}
@@ -613,10 +613,23 @@ versions of Stellarium. You can override this behaviour
 \newFeature{0.21.2} with an entry in the respective section of
 \file{config.ini}:
 
-\begin{configfile}
+\begin{configfile}[\scriptsize]
   [RemoteSync]
   allowVersionMismatch = true
 \end{configfile}
+
+\subsection{Finetuning}
+
+This plugin makes use of the QLoggingCategory infrastructure. By default it is very verbose and prints each transmitted property to the logfile.
+To reduce verbosity when it works, configure an environment variable with these entries (Note the closing semicolon!):
+\begin{commands}[\scriptsize]
+QT_LOGGING_RULES="stel.plugin.remoteSync.debug=true;
+		  stel.plugin.remoteSync.client.debug=false;
+		  stel.plugin.remoteSync.protocol.debug=false;"
+\end{commands}
+
+The final parts may be \texttt{debug|info|warning|critical = true|false}. Default: \texttt{true}.
+
 
 \subsection*{Author and Acknowledgements}
 

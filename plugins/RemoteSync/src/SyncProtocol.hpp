@@ -129,8 +129,10 @@ public:
 	//! Can be used to write an error message to the peer and drop the connection
 	void writeError(const QString& err);
 
-	//! Log a message for this peer via qCDebug
-	void peerLog(const QString& msg) const;
+	//! Log a message for this peer via qCDebug or the respective other messages
+	//! type={QtDebugMsg|QtInfoMsg|QtWarningMsg|QtCriticalMsg|QtFatalMsg}
+	//! If in doubt, use QtDebugMsg
+	void peerLog(const QtMsgType type, const QString& msg) const;
 
 	bool isAuthenticated() const { return authenticated; }
 	QUuid getID() const { return id; }
