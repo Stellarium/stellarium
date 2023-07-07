@@ -414,6 +414,8 @@ StelLocationMgr::StelLocationMgr()
 	// The first entry is the DB name, the second is as we display it in the program.
 	if (locationDBToIANAtranslations.isEmpty())
 	{
+		// Reported July 7, 2023 (#3316)
+		locationDBToIANAtranslations.insert("Asia/Calcutta", "Asia/Kolkata");
 		// Reported April 25, 2023. (#3200)
 		locationDBToIANAtranslations.insert("America/Yellowknife","America/Edmonton");
 		// Seen February 06, 2023.
