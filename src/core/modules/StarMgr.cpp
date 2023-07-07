@@ -1516,8 +1516,8 @@ StelObjectP StarMgr::searchByName(const QString& name) const
 {
 	QString objw = name.toUpper();
 
-	// Search by HP number if it's an HP formatted number
-	static const QRegularExpression rx("^\\s*(HP|HIP)\\s*(\\d+)\\s*$", QRegularExpression::CaseInsensitiveOption);
+	// Search by HP number if it's an HP formatted number. The final part (A/B/...) is ignored
+	static const QRegularExpression rx("^\\s*(HP|HIP)\\s*(\\d+)\\s*.*$", QRegularExpression::CaseInsensitiveOption);
 	QRegularExpressionMatch match=rx.match(objw);
 	if (match.hasMatch())
 		return searchHP(match.captured(2).toInt());
@@ -1844,8 +1844,8 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 			break;
 	}
 
-	// Add exact Hp catalogue numbers
-	static const QRegularExpression hpRx("^(HIP|HP)\\s*(\\d+)\\s*$", QRegularExpression::CaseInsensitiveOption);
+	// Add exact Hp catalogue numbers. The final part (A/B/...) is ignored
+	static const QRegularExpression hpRx("^(HIP|HP)\\s*(\\d+)\\s*.*$", QRegularExpression::CaseInsensitiveOption);
 	QRegularExpressionMatch match=hpRx.match(objw);
 	if (match.hasMatch())
 	{
