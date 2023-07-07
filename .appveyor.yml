@@ -16,12 +16,12 @@ skip_commits:
   files:
     - guide/*
 # Maximum number of concurrent jobs for the project
-max_jobs: 4
+max_jobs: 5
 # environment variables
 environment:
   matrix:
   - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
-    qtver: 6.4
+    qtver: 6.5
     qtbin: msvc2019_64
     msvcname: Visual Studio 16 2019
   - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
