@@ -45,15 +45,19 @@ public:
 	//! Contains the parameters defining how a texture is created.
 	struct StelTextureParams
 	{
-		StelTextureParams(bool qgenerateMipmaps=false, GLint afiltering=GL_LINEAR, GLint awrapMode=GL_CLAMP_TO_EDGE, bool qfilterMipmaps=false, int decimateBy=1) :
-				generateMipmaps(qgenerateMipmaps),
-				filterMipmaps(qfilterMipmaps),
-				filtering(afiltering),
-				wrapMode(awrapMode),
-				decimation(decimateBy){;}
+		StelTextureParams(bool qgenerateMipmaps=false, GLint afiltering=GL_LINEAR,
+				  GLint awrapMode=GL_CLAMP_TO_EDGE, bool qfilterMipmaps=false, int decimateBy=1)
+			: generateMipmaps(qgenerateMipmaps)
+			, filterMipmaps(qfilterMipmaps)
+			, filtering(afiltering)
+			, wrapMode(awrapMode)
+			, decimation(decimateBy)
+		{
+		}
 		//! Define if mipmaps must be created.
 		bool generateMipmaps;
-		//! If true, mipmapped textures are filtered with GL_LINEAR_MIPMAP_LINEAR instead of GL_LINEAR_MIPMAP_NEAREST (i.e. enabling "trilinear" filtering)
+		//! If true, mipmapped textures are filtered with GL_LINEAR_MIPMAP_LINEAR instead
+		//! of GL_LINEAR_MIPMAP_NEAREST (i.e. enabling "trilinear" filtering)
 		bool filterMipmaps;
 		//! Define the scaling filter to use. Must be one of GL_NEAREST or GL_LINEAR
 		GLint filtering;
@@ -132,7 +136,8 @@ private:
 		GLint type = 0;
 	};
 	//! Those static methods can be called by QtConcurrent::run
-	//! @param decimateBy: On limited platforms we must be able to reduce texture sizes. Divide texture size in both dimensions by this number.
+	//! @param decimateBy: On limited platforms we must be able to reduce texture sizes. Divide
+	//! texture size in both dimensions by this number.
 	static GLData imageToGLData(const QImage    &image, const int decimateBy);
 	static GLData loadFromPath( const QString    &path, const int decimateBy);
 	static GLData loadFromData( const QByteArray &data, const int decimateBy);
@@ -145,7 +150,8 @@ private:
 
 	//! Convert a QImage into OpenGL compatible format.
 	//! The texture will be at most as large as GL_MAX_TEXTURE_SIZE
-	//! @param decimate divide image size by this factor: reduce texture sizes to conserve texture memory (required on e.g. Raspberry Pi 3).
+	//! @param decimate divide image size by this factor: reduce texture sizes to conserve
+	//! texture memory (required on e.g. Raspberry Pi 3).
 	static QByteArray convertToGLFormat(QImage image, GLint& format, GLint& type, int decimate, int& width, int& height);
 
 	//! This method should be called if the texture loading failed for any reasons
