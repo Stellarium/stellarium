@@ -294,9 +294,9 @@ QByteArray StelTexture::convertToGLFormat(QImage image, GLint& format, GLint& ty
 	{
 		if ((decimate==1) || (image.width()/decimate>glInfo.maxTextureSize) || (image.height()/decimate>glInfo.maxTextureSize))
 			qWarning().nospace() << "Got a texture with too large dimensions: "
-							 << image.width() << "x" << image.height()
-							 << ", while maximum size is " << glInfo.maxTextureSize
-							 << ". Shrinking to fit in the limit.";
+					     << image.width() << "x" << image.height()
+					     << ", while maximum size is " << glInfo.maxTextureSize
+					     << ". Shrinking to fit in the limit.";
 		image = image.scaled(width, height, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
 	}
 
