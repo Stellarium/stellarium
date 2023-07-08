@@ -46,6 +46,11 @@ class StelTexture: public QObject, public QEnableSharedFromThis<StelTexture>
 	Q_OBJECT
 
 public:
+	enum class ColorSpace
+	{
+		sRGB,
+		LinearSRGB,
+	};
 	//! Contains the parameters defining how a texture is created.
 	struct Params
 	{
@@ -57,6 +62,7 @@ public:
 		constexpr Params& setWrapMode(GLint newWrapMode) { wrapMode = newWrapMode; return *this; }
 		constexpr Params& setDecimation(int newDecim) { decimation = newDecim; return *this; }
 		constexpr Params& disallowHttp2() { allowHttp2 = false; return *this; }
+		constexpr Params& useSRGB() { colorSpace = ColorSpace::sRGB; return *this; }
 
 		//! Define if mipmaps must be created.
 		bool generateMipmaps = false;
@@ -70,6 +76,10 @@ public:
 		//! Allow a reduction of the size of the texture image (useful for very limited hardware)
 		//! The image size will be divided by this factor (e.g. 2, 3, 4, ...)
 		int decimation = 1;
+		//! If set to ColorSpace::sRGB, the texture samples will automatically convert
+		//! the values sampled to linear color. This is intended only for high graphics mode,
+		//! it must be set to LinearSRGB in legacy mode.
+		ColorSpace colorSpace = ColorSpace::LinearSRGB;
 		//! Allow the use of HTTP/2 when loading this texture. If set to \p false, HTTP/1.1 will
 		//! be used by Qt, limiting maximum concurrency of downloads to 6 and avoiding HTTP 420
 		//! error when we abort many downloads at once. The error is due to CVE-2023-44487, but
