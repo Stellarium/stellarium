@@ -438,32 +438,6 @@ void RemoteSync::setError(const QString &errorString)
 	emit errorOccurred(errorString);
 }
 
-QDebug operator<<(QDebug deb, RemoteSync::SyncState state)
-{
-	switch (state) {
-		case RemoteSync::IDLE:
-			deb<<"IDLE";
-			break;
-		case RemoteSync::SERVER:
-			deb<<"SERVER";
-			break;
-		case RemoteSync::CLIENT:
-			deb<<"CLIENT";
-			break;
-		case RemoteSync::CLIENT_CONNECTING:
-			deb<<"CLIENT_CONNECTING";
-			break;
-		case RemoteSync::CLIENT_WAIT_RECONNECT:
-			deb<<"CLIENT_WAIT_RECONNECT";
-			break;
-		default:
-			deb<<"RemoteSync::SyncState(" <<int(state)<<')';
-			break;
-	}
-
-	return deb;
-}
-
 bool RemoteSync::isPropertyBlacklisted(const QString &name)
 {
 	return propertyBlacklist.contains(name);

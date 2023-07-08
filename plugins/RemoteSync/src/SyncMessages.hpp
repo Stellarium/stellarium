@@ -117,9 +117,16 @@ public:
 	void serialize(QDataStream &stream) const override;
 	bool deserialize(QDataStream &stream, SyncProtocol::tPayloadSize dataSize) override;
 
-	QDebug debugOutput(QDebug dbg) const override
+	QString toString() const override
 	{
-		return dbg<<selectedObjects;
+		QString s("{");
+		foreach (auto &o, selectedObjects)
+		{
+			s.append(QString("[%1, %2], ").arg(o.first, o.second));
+		}
+		s.chop(2); // remove last comma/space
+		s.append("}");
+		return s;
 	}
 
 	//list of type/ID pairs
@@ -140,11 +147,10 @@ public:
 	void serialize(QDataStream &stream) const override;
 	bool deserialize(QDataStream &stream, SyncProtocol::tPayloadSize dataSize) override;
 
-	QDebug debugOutput(QDebug dbg) const override
+	QString toString() const override
 	{
-		return dbg<<propId<<value;
+		return 	QString("[%1, %2]").arg(propId, value.toString());
 	}
-
 	QString propId;
 	QVariant value;
 };

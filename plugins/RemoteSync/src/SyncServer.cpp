@@ -92,7 +92,7 @@ void SyncServer::addSender(SyncServerEventSender *snd)
 
 void SyncServer::broadcastMessage(const SyncMessage &msg)
 {
-	qCDebug(syncServer)<<"Broadcast message"<<msg;
+	qCDebug(syncServer)<<"Broadcast message"<<msg.toString();
 	qint64 size = msg.createFullMessage(broadcastBuffer);
 
 	if(!size)
@@ -194,7 +194,7 @@ void SyncServer::handleNewConnection()
 	QTcpSocket* newConn = qserver->nextPendingConnection();
 
 	SyncRemotePeer* newClient = new SyncRemotePeer(newConn,false,handlerHash);
-	newClient->peerLog("New client connection");
+	newClient->peerLog(QtDebugMsg, "New client connection");
 	//add to client list
 	clients.append(newClient);
 

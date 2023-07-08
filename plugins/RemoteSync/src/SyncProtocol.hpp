@@ -20,10 +20,13 @@
 #ifndef SYNCPROTOCOL_HPP
 #define SYNCPROTOCOL_HPP
 
+#include <QLoggingCategory>
 #include <QByteArray>
 #include <QDataStream>
 #include <QAbstractSocket>
 #include <QUuid>
+
+Q_DECLARE_LOGGING_CATEGORY(syncProtocol)
 
 //! Contains sync protocol data definitions shared between client and server
 namespace SyncProtocol
@@ -76,46 +79,6 @@ enum SyncMessageType
 	MSGTYPE_SIZE = MSGTYPE_MAX+1
 };
 
-inline QDebug& operator<<(QDebug& deb, SyncMessageType msg)
-{
-	switch (msg) {
-		case SyncProtocol::ERROR:
-			deb<<"ERROR";
-			break;
-		case SyncProtocol::SERVER_CHALLENGE:
-			deb<<"SERVER_CHALLENGE";
-			break;
-		case SyncProtocol::CLIENT_CHALLENGE_RESPONSE:
-			deb<<"CLIENT_CHALLENGE_RESPONSE";
-			break;
-		case SyncProtocol::SERVER_CHALLENGERESPONSEVALID:
-			deb<<"SERVER_CHALLENGERESPONSEVALID";
-			break;
-		case SyncProtocol::TIME:
-			deb<<"TIME";
-			break;
-		case SyncProtocol::LOCATION:
-			deb<<"LOCATION";
-			break;
-		case SyncProtocol::SELECTION:
-			deb<<"SELECTION";
-			break;
-		case SyncProtocol::STELPROPERTY:
-			deb<<"STELPROPERTY";
-			break;
-		case SyncProtocol::VIEW:
-			deb<<"VIEW";
-			break;
-		case SyncProtocol::ALIVE:
-			deb<<"ALIVE";
-			break;
-		default:
-			deb<<"UNKNOWN("<<int(msg)<<')';
-			break;
-	}
-	return deb;
-}
-
 //! Base interface for the messages themselves, allowing to serialize/deserialize them
 class SyncMessage
 {
@@ -138,17 +101,9 @@ public:
 
 	//! Subclasses can override this to provide proper debug output.
 	//! The default just prints the message type.
-	virtual QDebug debugOutput(QDebug dbg) const
-	{
-		return dbg;
-	}
-
-	friend QDebug operator<<(QDebug dbg, const SyncMessage& msg)
-	{
-		dbg = dbg<<msg.getMessageType()<<'[';
-		dbg = msg.debugOutput(dbg);
-		return dbg<<']';
-	}
+	virtual QString toString() const;
+	//! Print enum name for SyncMessageType type.
+	static QString toString(SyncMessageType type);
 
 protected:
 	static void writeString(QDataStream& stream, const QString& str);
@@ -174,9 +129,10 @@ public:
 	//! Can be used to write an error message to the peer and drop the connection
 	void writeError(const QString& err);
 
-	//! Log a message for this peer
-	void peerLog(const QString& msg) const;
-	QDebug peerLog() const;
+	//! Log a message for this peer via qCDebug or the respective other messages
+	//! type={QtDebugMsg|QtInfoMsg|QtWarningMsg|QtCriticalMsg|QtFatalMsg}
+	//! If in doubt, use QtDebugMsg
+	void peerLog(const QtMsgType type, const QString& msg) const;
 
 	bool isAuthenticated() const { return authenticated; }
 	QUuid getID() const { return id; }

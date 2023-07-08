@@ -59,7 +59,7 @@ SyncClient::SyncClient(SyncOptions options, const QStringList &excludeProperties
 	{
 		if(!handlerHash.value(static_cast<SyncMessageType>(t)))
 		{
-			qDebug() << "RemoteSyncClient: Adding dummy for message " << t;
+			qCDebug(syncClient) << "RemoteSyncClient: Adding dummy for message " << SyncMessage::toString(static_cast<SyncMessageType>(t));
 			handlerHash[static_cast<SyncMessageType>(t)] = new DummyMessageHandler();
 		}
 	}
