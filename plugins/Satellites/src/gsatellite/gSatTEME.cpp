@@ -41,7 +41,6 @@
 #include <math.h>
 
 #include "mathUtils.hpp"
-#include "sgp4io.h"
 
 #define CONSTANTS_SET wgs84
 #define TYPERUN_SET   'c'
@@ -56,30 +55,20 @@
 gSatTEME::gSatTEME(const char *pstrName, char *pstrTleLine1, char *pstrTleLine2)
 {
 	double startmfe, stopmfe, deltamin;
-
 	m_SatName = pstrName;
-
-	//set gravitational constants
-	getgravconst(CONSTANTS_SET, tumin, mu, radiusearthkm, xke, j2, j3, j4, j3oj2);
-
-	//Parsing TLE_Files and sat variables setting
-	twoline2rv(pstrTleLine1, pstrTleLine2, TYPERUN_SET, TYPEINPUT_SET, OPSMODE_SET, CONSTANTS_SET,
+	SGP4Funcs::twoline2rv(pstrTleLine1, pstrTleLine2, TYPERUN_SET, TYPEINPUT_SET, OPSMODE_SET, CONSTANTS_SET,
 	           startmfe, stopmfe, deltamin, satrec);
-
-	// call the propagator to get the initial state vector value
-	sgp4(CONSTANTS_SET, satrec,  0.0, m_Position.v,  m_Vel.v);
+	SGP4Funcs::sgp4(satrec, 0.0, m_Position.v, m_Vel.v);
 }
 
 void gSatTEME::setEpoch(gTime ai_time)
 {
-	gTime     kepEpoch(satrec.jdsatepoch);
+	gTime kepEpoch(satrec.jdsatepoch + satrec.jdsatepochF);
 	gTimeSpan tSince = ai_time - kepEpoch;
-
 	double dtsince = tSince.getDblSeconds()/KSEC_PER_MIN;
 	// call the propagator to get the initial state vector value
-	sgp4(CONSTANTS_SET, satrec,  dtsince, m_Position.v,  m_Vel.v);
-
-	m_SubPoint    = computeSubPoint( ai_time);
+	SGP4Funcs::sgp4(satrec, dtsince, m_Position.v, m_Vel.v);
+	m_SubPoint = computeSubPoint(ai_time);
 }
 
 void gSatTEME::setMinSinceKepEpoch(double ai_minSinceKepEpoch)
@@ -88,9 +77,8 @@ void gSatTEME::setMinSinceKepEpoch(double ai_minSinceKepEpoch)
 	gTime     Epoch(satrec.jdsatepoch);
 	Epoch += tSince;
 	// call the propagator to get the initial state vector value
-	sgp4(CONSTANTS_SET, satrec,  ai_minSinceKepEpoch, m_Position.v,  m_Vel.v);
-
-	m_SubPoint    = computeSubPoint( Epoch);
+	SGP4Funcs::sgp4(satrec, ai_minSinceKepEpoch, m_Position.v, m_Vel.v);
+	m_SubPoint = computeSubPoint( Epoch);
 }
 
 Vec3d gSatTEME::computeSubPoint(gTime ai_Time)

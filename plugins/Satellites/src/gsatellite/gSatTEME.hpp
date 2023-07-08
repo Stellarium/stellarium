@@ -41,7 +41,8 @@
 #include "VecMath.hpp"
 #include "StelUtils.hpp"
 
-#include "sgp4unit.h"
+#include "SGP4.h" // Upgraded to SGP4 Version 2020-07-13
+
 #include "stdsat.h"
 
 //! @class gSatTEME
@@ -128,9 +129,10 @@ public:
 	double getPeriod() const
 	{
 		// Get orbital period from mean motion (rad/min)
-		double mm = satrec.no;
-		if (mm > 0.0)
-			return 2*M_PI/mm;
+		double mm = satrec.no_kozai;
+		if (mm > 0.0) {
+			return 2 * M_PI / mm;
+		}
 
 		return 0.0;
 	}
@@ -143,7 +145,7 @@ public:
 
 	Vec2d getPerigeeApogee() const
 	{
-		double semiMajorAxis = std::cbrt((xke/satrec.no)*(xke/satrec.no));
+		double semiMajorAxis = std::cbrt((xke/satrec.no_kozai)*(xke/satrec.no_kozai));
 		return Vec2d((semiMajorAxis*(1.0 - satrec.ecco) - 1.0)*EARTH_RADIUS, (semiMajorAxis*(1.0 + satrec.ecco) - 1.0)*EARTH_RADIUS);
 	}
 
