@@ -279,9 +279,13 @@ void SyncRemotePeer::peerLog(const QtMsgType type, const QString &msg) const
 		case QtCriticalMsg:
 			qCCritical(syncProtocol)<<"[Peer"<<(sock->peerAddress().toString() + ":" + QString::number(sock->peerPort()))<<"]:" << msg;
 			break;
+#if (QT_VERSION>=QT_VERSION_CHECK(6,5,0))
 		case QtFatalMsg:
 			qCFatal(syncProtocol)<<"[Peer"<<(sock->peerAddress().toString() + ":" + QString::number(sock->peerPort()))<<"]:" << msg;
 			break;
+#else
+		case QtFatalMsg:
+#endif
 		case QtDebugMsg:
 		default:
 			qCDebug(syncProtocol)<<"[Peer"<<(sock->peerAddress().toString() + ":" + QString::number(sock->peerPort()))<<"]:" << msg;
