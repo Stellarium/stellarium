@@ -16,12 +16,6 @@ SET(Satellites_SRCS
      gsatellite/gTime.cpp
      gsatellite/gTime.hpp
      gsatellite/gTimeSpan.cpp
-     #gsatellite/sgp4ext.cpp
-     #gsatellite/sgp4ext.h
-     #gsatellite/sgp4io.cpp
-     #gsatellite/sgp4io.h
-     #gsatellite/sgp4unit.cpp
-     #gsatellite/sgp4unit.h
      gsatellite/stdsat.h
 	 gsatellite/SGP4.h
 	 gsatellite/SGP4.cpp
