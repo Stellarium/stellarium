@@ -39,8 +39,8 @@
 # define GL_TEXTURE_MAX_ANISOTROPY 0x84FE
 #endif
 
-StelTexture::StelTexture(StelTextureMgr *mgr) : textureMgr(mgr), gl(Q_NULLPTR), networkReply(Q_NULLPTR), loader(Q_NULLPTR), errorOccured(false), alphaChannel(false), id(0),
-	width(-1), height(-1), glSize(0)
+StelTexture::StelTexture(StelTextureMgr *mgr)
+	: textureMgr(mgr)
 {
 }
 

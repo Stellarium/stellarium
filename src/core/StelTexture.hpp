@@ -124,13 +124,12 @@ private:
 	//! data and information to create the OpenGL texture.
 	struct GLData
 	{
-		GLData() : width(0), height(0), format(0), type(0) {}
 		QString loaderError; //! can contain an error message if data is null
 		QByteArray data;
-		int width;
-		int height;
-		GLint format;
-		GLint type;
+		int width = 0;
+		int height = 0;
+		GLint format = 0;
+		GLint type = 0;
 	};
 	//! Those static methods can be called by QtConcurrent::run
 	//! @param decimateBy: On limited platforms we must be able to reduce texture sizes. Divide texture size in both dimensions by this number.
@@ -168,37 +167,37 @@ private:
 	void startAsyncLoader(T (*functionPointer)(Params...), Args&&...args);
 
 	//! The parent texture manager
-	StelTextureMgr* textureMgr;
+	StelTextureMgr* textureMgr = nullptr;
 
-	QOpenGLFunctions* gl;
+	QOpenGLFunctions* gl = nullptr;
 	StelTextureParams loadParams;
 
 	//! Used to handle the connection for remote textures.
-	QNetworkReply *networkReply;
+	QNetworkReply *networkReply = nullptr;
 
 	//! The loader object
-	QFuture<GLData>* loader;
+	QFuture<GLData>* loader = nullptr;
 
 	//! The URL where to download the file
 	QString fullPath;
 
 	//! True when something when wrong in the loading process
-	bool errorOccured;
+	bool errorOccured = false;
 
 	//! True if this texture contains an alpha channel
-	bool alphaChannel;
+	bool alphaChannel = false;
 
 	//! Human friendly error message if loading failed
 	QString errorMessage;
 
 	//! OpenGL id
-	GLuint id;
+	GLuint id = 0;
 
-	GLsizei width;	//! Texture image width
-	GLsizei height;	//! Texture image height
+	GLsizei width = -1;	//! Texture image width
+	GLsizei height = -1;	//! Texture image height
 
 	//! Size in GL memory
-	unsigned int glSize;
+	unsigned int glSize = 0;
 };
 
 
