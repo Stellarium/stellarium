@@ -17,9 +17,11 @@ SET(Satellites_SRCS
      gsatellite/gTime.hpp
      gsatellite/gTimeSpan.cpp
      gsatellite/stdsat.h
-	 gsatellite/SGP4.h
-	 gsatellite/SGP4.cpp
+     gsatellite/SGP4.h
+     gsatellite/SGP4.cpp
 
+     omm.hpp
+     omm.cpp
      gSatWrapper.hpp
      gSatWrapper.cpp
      Satellite.hpp
