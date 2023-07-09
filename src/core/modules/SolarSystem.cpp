@@ -94,6 +94,7 @@ SolarSystem::SolarSystem() : StelObjectModule()
 	, ephemerisHorizontalCoordinates(false)
 	, ephemerisLineDisplayed(false)
 	, ephemerisAlwaysOn(false)
+	, ephemerisNow(false)
 	, ephemerisLineThickness(1)
 	, ephemerisSkipDataDisplayed(false)
 	, ephemerisSkipMarkersDisplayed(false)
@@ -140,6 +141,7 @@ SolarSystem::~SolarSystem()
 
 	texEphemerisMarker.clear();
 	texEphemerisCometMarker.clear();
+	texEphemerisNowMarker.clear();
 	texPointer.clear();
 
 	delete allTrails;
@@ -252,6 +254,7 @@ void SolarSystem::init()
 	// Ephemeris stuff
 	setFlagEphemerisMarkers(conf->value("astrocalc/flag_ephemeris_markers", true).toBool());
 	setFlagEphemerisAlwaysOn(conf->value("astrocalc/flag_ephemeris_alwayson", true).toBool());
+	setFlagEphemerisNow(conf->value("astrocalc/flag_ephemeris_now", false).toBool());
 	setFlagEphemerisDates(conf->value("astrocalc/flag_ephemeris_dates", false).toBool());
 	setFlagEphemerisMagnitudes(conf->value("astrocalc/flag_ephemeris_magnitudes", false).toBool());
 	setFlagEphemerisHorizontalCoordinates(conf->value("astrocalc/flag_ephemeris_horizontal", false).toBool());
@@ -283,6 +286,7 @@ void SolarSystem::init()
 
 	texPointer = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/pointeur4.png");
 	texEphemerisMarker = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/disk.png");
+	texEphemerisNowMarker = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/gear.png");
 	texEphemerisCometMarker = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/cometIcon.png");
 	Planet::hintCircleTex = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/planet-indicator.png");
 	
@@ -1454,6 +1458,7 @@ void SolarSystem::drawEphemerisMarkers(const StelCore *core)
 	const bool showMagnitudes = getFlagEphemerisMagnitudes();
 	const bool showSkippedData = getFlagEphemerisSkipData();
 	const bool skipMarkers = getFlagEphemerisSkipMarkers();
+	const bool isNowVisible = getFlagEphemerisNow();
 	const int dataStep = getEphemerisDataStep();
 	const int sizeCoeff = getEphemerisLineThickness() - 1;
 	QString info = "";
@@ -1463,6 +1468,26 @@ void SolarSystem::drawEphemerisMarkers(const StelCore *core)
 
 	if (getFlagEphemerisLine() && getFlagEphemerisScaleMarkers())
 		baseSize = 3.f; // The line lies through center of marker
+
+	if (isNowVisible)
+	{
+		const int limit = getEphemerisDataLimit();
+		const int nsize = static_cast<int>(fsize/limit);
+		sPainter.setBlending(true, GL_ONE, GL_ONE);
+		texEphemerisNowMarker->bind();
+		Vec3d pos;
+		Vec3f win;
+		for (int i =0; i < limit; i++)
+		{
+			sPainter.setColor(getEphemerisMarkerColor(AstroCalcDialog::EphemerisList[i*nsize].colorIndex));
+			if (getFlagEphemerisHorizontalCoordinates())
+				pos = AstroCalcDialog::EphemerisList[i*nsize].sso->getAltAzPosAuto(core);
+			else
+				pos = AstroCalcDialog::EphemerisList[i*nsize].sso->getJ2000EquatorialPos(core);
+			if (prj->project(pos, win))
+				sPainter.drawSprite2dMode(static_cast<float>(win[0]), static_cast<float>(win[1]), 6.f, 0.f);
+		}
+	}
 
 	for (int i =0; i < fsize; i++)
 	{
@@ -2315,6 +2340,21 @@ void SolarSystem::setFlagEphemerisAlwaysOn(bool b)
 		ephemerisAlwaysOn = b;
 		conf->setValue("astrocalc/flag_ephemeris_alwayson", b); // Immediate saving of state
 		emit ephemerisAlwaysOnChanged(b);
+	}
+}
+
+bool SolarSystem::getFlagEphemerisNow() const
+{
+	return ephemerisNow;
+}
+
+void SolarSystem::setFlagEphemerisNow(bool b)
+{
+	if (b != ephemerisNow)
+	{
+		ephemerisNow = b;
+		conf->setValue("astrocalc/flag_ephemeris_now", b); // Immediate saving of state
+		emit ephemerisNowChanged(b);
 	}
 }
 

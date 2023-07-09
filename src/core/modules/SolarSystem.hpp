@@ -98,6 +98,7 @@ class SolarSystem : public StelObjectModule
 	Q_PROPERTY(bool ephemerisSmartDates		READ getFlagEphemerisSmartDates		WRITE setFlagEphemerisSmartDates	NOTIFY ephemerisSmartDatesChanged)
 	Q_PROPERTY(bool ephemerisScaleMarkersDisplayed	READ getFlagEphemerisScaleMarkers	WRITE setFlagEphemerisScaleMarkers	NOTIFY ephemerisScaleMarkersChanged)
 	Q_PROPERTY(bool ephemerisAlwaysOn		READ getFlagEphemerisAlwaysOn		WRITE setFlagEphemerisAlwaysOn		NOTIFY ephemerisAlwaysOnChanged)
+	Q_PROPERTY(bool ephemerisNow			READ getFlagEphemerisNow		WRITE setFlagEphemerisNow		NOTIFY ephemerisNowChanged)
 	// Great Red Spot (GRS) properties
 	Q_PROPERTY(int grsLongitude			READ getGrsLongitude			WRITE setGrsLongitude			NOTIFY grsLongitudeChanged)
 	Q_PROPERTY(double grsDrift			READ getGrsDrift			WRITE setGrsDrift			NOTIFY grsDriftChanged)
@@ -771,6 +772,7 @@ signals:
 	void ephemerisMagnitudesChanged(bool b);
 	void ephemerisLineChanged(bool b);
 	void ephemerisAlwaysOnChanged(bool b);
+	void ephemerisNowChanged(bool b);
 	void ephemerisLineThicknessChanged(int v);
 	void ephemerisSkipDataChanged(bool b);
 	void ephemerisSkipMarkersChanged(bool b);
@@ -910,6 +912,11 @@ private slots:
 	void setFlagEphemerisAlwaysOn(bool b);
 	//! Get the current value of the flag which makes ephemeris lines and marks always on
 	bool getFlagEphemerisAlwaysOn() const;
+
+	//! Set flag, which enables ephemeris marks on position "now"
+	void setFlagEphemerisNow(bool b);
+	//! Get the current value of the flag which makes ephemeris marks on position "now"
+	bool getFlagEphemerisNow() const;
 
 	//! Set the thickness of ephemeris line
 	void setEphemerisLineThickness(int v);
@@ -1083,6 +1090,7 @@ private:
 	StelTextureSP texPointer;
 	StelTextureSP texEphemerisMarker;
 	StelTextureSP texEphemerisCometMarker;
+	StelTextureSP texEphemerisNowMarker;
 
 	bool flagShow;
 	bool flagPointer;                           // show red cross selection pointer?
@@ -1100,6 +1108,7 @@ private:
 	bool ephemerisHorizontalCoordinates;
 	bool ephemerisLineDisplayed;
 	bool ephemerisAlwaysOn;
+	bool ephemerisNow;
 	int ephemerisLineThickness;
 	bool ephemerisSkipDataDisplayed;
 	bool ephemerisSkipMarkersDisplayed;

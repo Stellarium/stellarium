@@ -59,6 +59,7 @@ struct Ephemeris
 	QString objDateStr;
 	float magnitude;
 	bool isComet;
+	PlanetP sso;
 };
 Q_DECLARE_METATYPE(Ephemeris)
 
