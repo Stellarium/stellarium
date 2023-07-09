@@ -33,7 +33,6 @@ private:
 	omm(); // Make default constructor unavailable.
 
 public:
-
 	enum class SourceType {
 		Invalid,
 		LegacyTle,
