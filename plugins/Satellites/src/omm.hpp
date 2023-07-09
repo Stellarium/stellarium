@@ -62,6 +62,8 @@ public:
 
 	virtual SourceType getSourceType() { return m_source_type; }
 
+	virtual QDateTime getEpoch() { return m_epoch; }
+	virtual const QString& getEpochStr() { return m_epoch_str; }
 	virtual double getMeanMotion() { return m_mean_motion; }
 	virtual double getEccentricity() { return m_eccentricity; }
 	virtual double getInclination() { return m_inclination; }
@@ -112,6 +114,9 @@ private:
 	// Metadata
 	QString m_object_name{};
 	QString m_object_id{};
+
+	// Misc data.
+	QString m_epoch_str;
 };
 
 } // end namespace PluginSatellites

@@ -10,5 +10,6 @@ SET_TARGET_PROPERTIES(testSatellites PROPERTIES FOLDER "plugins/Satellites/test"
 
 ADD_EXECUTABLE(testOMM testOMM.cpp testOMM.hpp)
 TARGET_LINK_LIBRARIES(testOMM Qt${QT_VERSION_MAJOR}::Test Satellites-static stelMain)
-ADD_TEST(testOMM testOMM)
+ADD_TEST(NAME OMM COMMAND testOMM)
 SET_TARGET_PROPERTIES(testOMM PROPERTIES FOLDER "plugins/Satellites/test")
+FILE(COPY "${CMAKE_SOURCE_DIR}/plugins/satellites/src/test/test_data.xml" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}")
