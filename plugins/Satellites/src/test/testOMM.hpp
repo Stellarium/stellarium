@@ -28,6 +28,7 @@ class TestOMM : public QObject
 Q_OBJECT
 private slots:
 	void testLegacyTle();
+	void testXMLread();
 };
 
 #endif // TESTOMM_HPP

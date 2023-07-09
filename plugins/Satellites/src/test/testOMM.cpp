@@ -16,13 +16,17 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
+#include <QDir>
+#include <QDebug>
+#include <QVector>
+#include <QDateTime>
 #include "testOMM.hpp"
 
 QTEST_GUILESS_MAIN(TestOMM)
 
 void TestOMM::testLegacyTle()
 {
-	QString l0("ISS");
+	QString l0("ISS (ZARYA)");
 	QString l1("1 25544U 98067A   23190.18395514  .00010525  00000-0  19463-3 0  9990");
 	QString l2("2 25544  51.6405 219.5048 0000226  85.5338  22.9089 15.49626907405204");
 	PluginSatellites::omm dut(l0, l1, l2);
@@ -33,35 +37,43 @@ void TestOMM::testLegacyTle()
 	QVERIFY(dut.getLine2() == l2);
 }
 
-#if 0
-void TestOMM::testSpaceTrackFormattedLine2()
+void TestOMM::testXMLread()
 {
-    QString Line = "2  7530 101.7765 338.2965 0012116 317.3609 153.9519 12.53641545 65932";
-    QString dut = Satellites::getSatIdFromLine2(Line);
-    QVERIFY(!dut.isEmpty());
-    QVERIFY("7530" == dut);
+	QVector<QString> expectOjectId = { 
+		QString("1998-067A"), 
+		QString("2018-046D"), 
+		QString("1998-067RZ")
+	};
+	QVector<int> expectNorad = { 
+		25544, 43557, 47853
+	};
+	QVector<QString> expectEpoch = {
+		QString("2023-07-06T08:17:36.314016"),
+		QString("2023-07-06T01:58:30.910944"),
+		QString("2023-07-04T18:34:04.881504")
+	};
+	int idx = 0;
+	bool testContinue = true;
+	bool chkTestDataFileOpened = false;
+	QFile file("test_data.xml");
+	chkTestDataFileOpened = file.open(QFile::ReadOnly | QFile::Text);
+	QVERIFY(true == chkTestDataFileOpened);
+	if (!chkTestDataFileOpened) return;
+
+	QXmlStreamReader r(&file);
+
+	while (testContinue  && !r.atEnd()) {
+		QString tag = r.name().toString();
+		if (r.isStartElement() && tag.toLower() == "omm") {
+			PluginSatellites::omm dut(r);
+			QVERIFY(dut.getObjectId() == expectOjectId[idx]);
+			QVERIFY(dut.getNoradcatId() == expectNorad[idx]);
+			QVERIFY(dut.getEpochStr() == expectEpoch[idx]);
+			QDateTime ep = QDateTime::fromString(expectEpoch[idx]);
+			QVERIFY(dut.getEpoch() == ep);
+			idx++;
+		}
+		r.readNext();
+	}
+	file.close();
 }
-
-void TestOMM::testNoSatDuplication()
-{
-    QString LineA = "2 07530 101.7770 337.7317 0012122 318.4445 104.4962 12.53641440 65623";
-    QString LineB = "2  7530 101.7765 338.2965 0012116 317.3609 153.9519 12.53641545 65932";
-    QString dutA = Satellites::getSatIdFromLine2(LineA);
-    QString dutB = Satellites::getSatIdFromLine2(LineB);
-    QVERIFY(dutA == dutB);
-}
-
-void TestOMM::testSatZero()
-{
-    QString LineA = "2 00000 101.7770 337.7317 0012122 318.4445 104.4962 12.53641440 65623";
-    QString LineB = "2     0 101.7765 338.2965 0012116 317.3609 153.9519 12.53641545 65932";
-    QString dutA = Satellites::getSatIdFromLine2(LineA);
-    QString dutB = Satellites::getSatIdFromLine2(LineB);
-    QVERIFY(!dutA.isEmpty());
-    QVERIFY(!dutB.isEmpty());
-    QVERIFY("0" == dutA);
-    QVERIFY("0" == dutB);
-}
-
-#endif
-

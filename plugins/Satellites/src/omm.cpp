@@ -22,7 +22,7 @@
 
 namespace PluginSatellites {
 
-   omm::omm()
+omm::omm()
 {
 	m_source_type = SourceType::Invalid;
 }
@@ -108,6 +108,7 @@ void omm::processXmlElement(const QString & tag, const QString & val)
 		m_object_id = val;
 	}
 	else if (tag == "EPOCH") {
+		m_epoch_str = val;
 		m_epoch = QDateTime::fromString(val, "yyyy-MM-ddThh:mm:ss.zzzzzz");
 	}
 	else if (tag == "MEAN_MOTION") {
