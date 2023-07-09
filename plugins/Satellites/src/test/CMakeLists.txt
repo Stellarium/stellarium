@@ -8,3 +8,7 @@ TARGET_LINK_LIBRARIES(testSatellites Qt${QT_VERSION_MAJOR}::Test Satellites-stat
 ADD_TEST(testSatellites testSatellites)
 SET_TARGET_PROPERTIES(testSatellites PROPERTIES FOLDER "plugins/Satellites/test")
 
+ADD_EXECUTABLE(testOMM testOMM.cpp testOMM.hpp)
+TARGET_LINK_LIBRARIES(testOMM Qt${QT_VERSION_MAJOR}::Test Satellites-static stelMain)
+ADD_TEST(testOMM testOMM)
+SET_TARGET_PROPERTIES(testOMM PROPERTIES FOLDER "plugins/Satellites/test")
