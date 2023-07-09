@@ -212,7 +212,7 @@ void StelTexture::startAsyncLoader(T (*functionPointer)(Params...), Args&&...arg
 	Q_ASSERT(loader==Q_NULLPTR);
 	//own thread pool supported with Qt 5.4+
 	loader = new QFuture<GLData>(QtConcurrent::run(textureMgr->loaderThreadPool,
-	                             functionPointer, std::forward<Args>(args)...));
+	                                               functionPointer, std::forward<Args>(args)...));
 }
 
 bool StelTexture::load()
