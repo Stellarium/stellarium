@@ -1,4 +1,5 @@
 /*
+ * Stellarium
  * Copyright (C) 2023 Andy Kirkham
  *
  * This program is free software; you can redistribute it and/or
@@ -29,7 +30,9 @@ class TestOMM : public QObject
 private slots:
 	void testLegacyTle();
 	void testXMLread();
-	void testProcessTleLegacy();
+	void testProcessTleLegacyLine0();
+	void testProcessTleLegacyLine1();
+	void testProcessTleLegacyLine2();
 };
 
 #endif // TESTOMM_HPP

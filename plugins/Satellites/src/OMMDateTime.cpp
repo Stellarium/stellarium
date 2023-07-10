@@ -28,7 +28,7 @@ OMMDateTime::OMMDateTime()
 OMMDateTime::~OMMDateTime() 
 {}
 
-OMMDateTime::OMMDateTime(QString & s, Type t) 
+OMMDateTime::OMMDateTime(const QString & s, Type t) 
 {
 	switch(t) {
 		case STR_TLE:

@@ -1,4 +1,5 @@
 /*
+ * Stellarium
  * Copyright (C) 2023 Andy Kirkham
  *
  * This program is free software; you can redistribute it and/or
@@ -27,28 +28,65 @@ QTEST_GUILESS_MAIN(TestOMM)
 void TestOMM::testLegacyTle()
 {
 	QString l0("ISS (ZARYA)");
-	QString l1("1 25544U 98067A   23187.34555919  .00007611  00000+0  14335-3 0  9995");
+	//                    1         2         3         4         5         6         7
+	//          01234567890123456789012345678901234567890123456789012345678901234567890
+	QString l1("1 25544U 98067A   23191.40640406  .00007611  00000+0  14335-3 0  9995");
 	QString l2("2 25544  51.6398 233.5611 0000373  12.3897  91.4664 15.49560249404764");
-	PluginSatellites::OMM::ShPtr dut(new PluginSatellites::OMM(l0, l1, l2));
-	QVERIFY(dut->getSourceType() == PluginSatellites::OMM::SourceType::LegacyTle);
+	OMM::ShPtr dut(new OMM(l0, l1, l2));
+	QVERIFY(dut->getSourceType() == OMM::SourceType::LegacyTle);
 	QVERIFY(dut->hasValidLegacyTleData() == true);
 	QVERIFY(dut->getLine0() == l0);
 	QVERIFY(dut->getLine1() == l1);
 	QVERIFY(dut->getLine2() == l2);
 }
 
-void TestOMM::testProcessTleLegacy()
+void TestOMM::testProcessTleLegacyLine0()
 {
 	QString l0("ISS (ZARYA)");
-	QString l1("1 25544U 98067A   23187.34555919  .00007611  00000+0  14335-3 0  9995");
+	//                    1         2         3         4         5         6         7
+	//          01234567890123456789012345678901234567890123456789012345678901234567890
+	QString l1("1 25544U 98067A   23191.40640406  .00007611  00000+0  14335-3 0  9995");
 	QString l2("2 25544  51.6398 233.5611 0000373  12.3897  91.4664 15.49560249404764");
-	PluginSatellites::OMM::ShPtr dut(new PluginSatellites::OMM(l0, l1, l2));
+	OMM::ShPtr dut(new OMM(l0, l1, l2));
+	QCOMPARE(dut->getObjectName(), "ISS (ZARYA)");
+}
+
+void TestOMM::testProcessTleLegacyLine1()
+{
+	QString l0("ISS (ZARYA)");
+	//                    1         2         3         4         5         6         7
+	//          01234567890123456789012345678901234567890123456789012345678901234567890
+	QString l1("1 25544U 98067A   23191.40640406  .00007611  00000+0  14335-3 0  9995");
+	QString l2("2 25544  51.6398 233.5611 0000373  12.3897  91.4664 15.49560249404764");
+	OMM::ShPtr dut(new OMM(l0, l1, l2));
 	QVERIFY(dut->getNoradcatId() == 25544);
 	QVERIFY(dut->getClassification() == 'U');
 	QCOMPARE(dut->getObjectId(), QString("98067A"));
-	// ToDo, Epoch
 	QCOMPARE(dut->getMeanMotionDot(), 0.00007611);
 	QCOMPARE(dut->getMeanMotionDDot(), 0.0);
+	
+	auto jd_of_epoch = dut->getEpoch()->getJulian();
+	QCOMPARE(jd_of_epoch, 2460135.906404059846);
+	QCOMPARE(dut->getBstar(), 0.00014334999999999998785);
+	QVERIFY(dut->getEphermisType() == 0);
+	QVERIFY(dut->getElementNumber() == 999);
+}
+
+void TestOMM::testProcessTleLegacyLine2()
+{
+	QString    l0("ISS (ZARYA)");
+	//                       1         2         3         4         5         6         7
+	//             01234567890123456789012345678901234567890123456789012345678901234567890
+	QString    l1("1 25544U 98067A   23191.40640406  .00007611  00000+0  14335-3 0  9995");
+	QString    l2("2 25544  51.6398 233.5611 0000373  12.3897  91.4664 15.49560249404764");
+	OMM::ShPtr dut(new OMM(l0, l1, l2));
+	QCOMPARE(dut->getInclination(),  51.6398);
+	QCOMPARE(dut->getAscendingNode(), 233.5611);
+	QCOMPARE(dut->getArgumentOfPerigee(), 12.3897);
+	QCOMPARE(dut->getEccentricity(), 0.0000373);
+	QCOMPARE(dut->getMeanAnomoly(), 91.4664);
+	QCOMPARE(dut->getMeanMotion(), 15.49560249);
+	QCOMPARE(dut->getRevAtEpoch(), 40476);
 }
 
 void TestOMM::testXMLread()
@@ -61,10 +99,10 @@ void TestOMM::testXMLread()
 	QVector<int> expectNorad = { 
 		25544, 43557, 47853
 	};
-	QVector<QString> expectEpoch = {
-		QString("2023-07-06T08:17:36.314016"),
-		QString("2023-07-06T01:58:30.910944"),
-		QString("2023-07-04T18:34:04.881504")
+	QVector<double> expectEpoch = { 
+		2460135.906404059846, 
+		2460135.906404059846, 
+		2460135.906404059846
 	};
 	int idx = 0;
 	bool testContinue = true;
@@ -79,12 +117,11 @@ void TestOMM::testXMLread()
 	while (testContinue  && !r.atEnd()) {
 		QString tag = r.name().toString();
 		if (r.isStartElement() && tag.toLower() == "omm") {
-			PluginSatellites::OMM::ShPtr dut(new PluginSatellites::OMM(r));
+			OMM::ShPtr dut(new OMM(r));
 			QVERIFY(dut->getObjectId() == expectOjectId[idx]);
 			QVERIFY(dut->getNoradcatId() == expectNorad[idx]);
-			QVERIFY(dut->getEpochStr() == expectEpoch[idx]);
-			QDateTime ep = QDateTime::fromString(expectEpoch[idx]);
-			QVERIFY(dut->getEpoch() == ep);
+			auto jd_of_epoch = dut->getEpoch()->getJulian();
+			QCOMPARE(jd_of_epoch, expectEpoch[idx]);
 			idx++;
 		}
 		r.readNext();

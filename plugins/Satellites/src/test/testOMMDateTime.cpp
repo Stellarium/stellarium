@@ -1,4 +1,5 @@
 /*
+ * Stellarium
  * Copyright (C) 2023 Andy Kirkham
  *
  * This program is free software; you can redistribute it and/or
@@ -28,9 +29,9 @@ void TestOMMDateTime::testEpoch_DEFAULT()
 	OMMDateTime dut(epoch); // Assume TLE formatted string for ctor.
 #ifdef _DEBUG
 	qDebug() << "2023-07-10T09:45:13.310784";
-	qDebug() << std::fixed << qSetRealNumberPrecision(16) << dut.getJulian();
+	qDebug() << std::fixed << qSetRealNumberPrecision(20) << dut.getJulian();
 #endif	
-	QVERIFY(dut.getJulian() == 2460135.90640406);
+	QCOMPARE(dut.getJulian(), 2460135.906404059846);
 }
 
 void TestOMMDateTime::testEpoch_TLE()
@@ -39,9 +40,9 @@ void TestOMMDateTime::testEpoch_TLE()
 	OMMDateTime dut(epoch, OMMDateTime::STR_TLE);
 #ifdef _DEBUG
 	qDebug() << "2023-07-10T09:45:13.310784";
-	qDebug() << std::fixed << qSetRealNumberPrecision(16) << dut.getJulian();
+	qDebug() << std::fixed << qSetRealNumberPrecision(20) << dut.getJulian();
 #endif
-	QVERIFY(dut.getJulian() == 2460135.90640406);
+	QCOMPARE(dut.getJulian(), 2460135.906404059846);
 }
 
 void TestOMMDateTime::testEpoch_ISO()
@@ -50,8 +51,8 @@ void TestOMMDateTime::testEpoch_ISO()
 	OMMDateTime dut(epoch, OMMDateTime::STR_ISO8601);
 #ifdef _DEBUG
 	qDebug() << "2023-07-10T09:45:13.310784";
-	qDebug() << std::fixed << qSetRealNumberPrecision(16) << dut.getJulian();
+	qDebug() << std::fixed << qSetRealNumberPrecision(20) << dut.getJulian();
 #endif
-	QVERIFY(dut.getJulian() == 2460135.90640406);
+	QCOMPARE(dut.getJulian(), 2460135.906404059846);
 }
 
