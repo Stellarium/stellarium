@@ -20,8 +20,10 @@ SET(Satellites_SRCS
      gsatellite/SGP4.h
      gsatellite/SGP4.cpp
 
-     omm.hpp
-     omm.cpp
+     OMM.hpp
+     OMM.cpp
+     OMMDateTime.hpp
+     OMMDateTime.cpp
      gSatWrapper.hpp
      gSatWrapper.cpp
      Satellite.hpp

@@ -16,20 +16,20 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef TESTOMM_HPP
-#define TESTOMM_HPP
+#ifndef TESTOMMDATETIME_HPP
+#define TESTOMMDATETIME_HPP
 
 #include <QtTest>
 
-#include "OMM.hpp"
+#include "OMMDateTime.hpp"
 
-class TestOMM : public QObject
+class TestOMMDateTime : public QObject
 {
 	Q_OBJECT
 private slots:
-	void testLegacyTle();
-	void testXMLread();
-	void testProcessTleLegacy();
+	void testEpoch_DEFAULT();
+	void testEpoch_TLE();
+	void testEpoch_ISO();
 };
 
-#endif // TESTOMM_HPP
+#endif // TESTDATETIME_HPP
