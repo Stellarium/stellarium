@@ -34,10 +34,13 @@
 
 #include <QString>
 #include <QDateTime>
+#include <QSharedPointer>
 
 class OMMDateTime
 {
 public:
+	typedef QSharedPointer<OMMDateTime> ShPtr;
+
 	enum Type {
 		STR_TLE,
 		STR_ISO8601
@@ -46,7 +49,7 @@ public:
 	OMMDateTime();
 	~OMMDateTime();
 
-	OMMDateTime(QString& s, Type t = STR_TLE);
+	OMMDateTime(const QString& s, Type t = STR_TLE);
 
 	double getJulianDay() { return m_epoch_jd; }
 

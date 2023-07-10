@@ -26,7 +26,7 @@
 #include <QSharedPointer>
 #include <QXmlStreamReader>
 
-namespace PluginSatellites {
+#include "OMMDateTime.hpp"
 
 class OMM
 {
@@ -61,18 +61,18 @@ public:
 
 	virtual SourceType getSourceType() { return m_source_type; }
 
-	virtual QDateTime getEpoch() { return m_epoch; }
-	virtual const QString& getEpochStr() { return m_epoch_str; }
+	virtual OMMDateTime::ShPtr getEpoch() { return m_sp_epoch; }
 	virtual double getMeanMotion() { return m_mean_motion; }
 	virtual double getEccentricity() { return m_eccentricity; }
 	virtual double getInclination() { return m_inclination; }
 	virtual double getAscendingNode() { return m_ascending_node; }
 	virtual double getArgumentOfPerigee() { return m_argument_perigee; }
 	virtual double getMeanAnomoly() { return m_mean_anomoly; }
+	virtual int getEphermisType() { return m_ephermeris_type; }
+	virtual int getElementNumber() { return m_element_number; }
 
 	virtual QChar getClassification() { return m_classification; }
 	virtual int getNoradcatId() { return m_norad_cat_id; }
-	virtual int getElementSetNo() { return m_element_set_no; }
 	virtual int getRevAtEpoch() { return m_rev_at_epoch; }
 	virtual double getBstar() { return m_bstar; }
 	virtual double getMeanMotionDot() { return m_mean_motion_dot; }
@@ -82,7 +82,9 @@ public:
 	virtual const QString& getObjectId() { return m_object_id; }
 
 private:
-	void processTleLegacy(void);
+	void processTleLegacyLine0(void);
+	void processTleLegacyLine1(void);
+	void processTleLegacyLine2(void);
 	void processXmlElement(const QString& tag, const QString& val);
 
 	SourceType m_source_type;
@@ -93,7 +95,7 @@ private:
 	QString m_line2{};
 
 	// Mean elements.
-	QDateTime m_epoch{};
+	OMMDateTime::ShPtr m_sp_epoch{};
 	double m_mean_motion{};
 	double m_eccentricity{};
 	double m_inclination{};
@@ -104,20 +106,16 @@ private:
 	// TLE parameters.
 	QChar m_classification{};
 	int m_norad_cat_id{};
-	int m_element_set_no{};
 	int m_rev_at_epoch{};
 	double m_bstar{};
 	double m_mean_motion_dot{};
 	double m_mean_motion_ddot{};
+	int m_ephermeris_type{};
+	int m_element_number{};
 
 	// Metadata
 	QString m_object_name{};
 	QString m_object_id{};
-
-	// Misc data.
-	QString m_epoch_str;
 };
-
-} // end namespace PluginSatellites
 
 #endif
