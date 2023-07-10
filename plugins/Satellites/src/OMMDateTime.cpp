@@ -16,6 +16,7 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
+#include <cmath>
 #include <QChar>
 #include <QDate>
 #include <QDebug>
@@ -45,11 +46,11 @@ OMMDateTime::OMMDateTime(const QString & s, Type t)
 // From SGP4.cpp
 static void jday_SGP4(int year, int mon, int day, int hr, int minute, double sec, double & jd, double & jdFrac)
 {
-	jd = 367.0 * year - floor((7 * (year + floor((mon + 9) / 12.0))) * 0.25) + floor(275 * mon / 9.0) + day +
+	jd = 367.0 * year - std::floor((7 * (year + std::floor((mon + 9) / 12.0))) * 0.25) + std::floor(275 * mon / 9.0) + day +
 	            1721013.5; // use - 678987.0 to go to mjd directly
 	jdFrac = (sec + minute * 60.0 + hr * 3600.0) / 86400.0;
-	if (fabs(jdFrac) > 1.0) {
-		double dtt = floor(jdFrac);
+	if (std::fabs(jdFrac) > 1.0) {
+		double dtt = std::floor(jdFrac);
 		jd = jd + dtt;
 		jdFrac = jdFrac - dtt;
 	}
