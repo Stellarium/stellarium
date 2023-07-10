@@ -27,14 +27,28 @@ QTEST_GUILESS_MAIN(TestOMM)
 void TestOMM::testLegacyTle()
 {
 	QString l0("ISS (ZARYA)");
-	QString l1("1 25544U 98067A   23190.18395514  .00010525  00000-0  19463-3 0  9990");
-	QString l2("2 25544  51.6405 219.5048 0000226  85.5338  22.9089 15.49626907405204");
-	PluginSatellites::omm dut(l0, l1, l2);
-	QVERIFY(dut.getSourceType() == PluginSatellites::omm::SourceType::LegacyTle);
-	QVERIFY(dut.hasValidLegacyTleData() == true);
-	QVERIFY(dut.getLine0() == l0);
-	QVERIFY(dut.getLine1() == l1);
-	QVERIFY(dut.getLine2() == l2);
+	QString l1("1 25544U 98067A   23187.34555919  .00007611  00000+0  14335-3 0  9995");
+	QString l2("2 25544  51.6398 233.5611 0000373  12.3897  91.4664 15.49560249404764");
+	PluginSatellites::OMM::ShPtr dut(new PluginSatellites::OMM(l0, l1, l2));
+	QVERIFY(dut->getSourceType() == PluginSatellites::OMM::SourceType::LegacyTle);
+	QVERIFY(dut->hasValidLegacyTleData() == true);
+	QVERIFY(dut->getLine0() == l0);
+	QVERIFY(dut->getLine1() == l1);
+	QVERIFY(dut->getLine2() == l2);
+}
+
+void TestOMM::testProcessTleLegacy()
+{
+	QString l0("ISS (ZARYA)");
+	QString l1("1 25544U 98067A   23187.34555919  .00007611  00000+0  14335-3 0  9995");
+	QString l2("2 25544  51.6398 233.5611 0000373  12.3897  91.4664 15.49560249404764");
+	PluginSatellites::OMM::ShPtr dut(new PluginSatellites::OMM(l0, l1, l2));
+	QVERIFY(dut->getNoradcatId() == 25544);
+	QVERIFY(dut->getClassification() == 'U');
+	QCOMPARE(dut->getObjectId(), QString("98067A"));
+	// ToDo, Epoch
+	QCOMPARE(dut->getMeanMotionDot(), 0.00007611);
+	QCOMPARE(dut->getMeanMotionDDot(), 0.0);
 }
 
 void TestOMM::testXMLread()
@@ -65,12 +79,12 @@ void TestOMM::testXMLread()
 	while (testContinue  && !r.atEnd()) {
 		QString tag = r.name().toString();
 		if (r.isStartElement() && tag.toLower() == "omm") {
-			PluginSatellites::omm dut(r);
-			QVERIFY(dut.getObjectId() == expectOjectId[idx]);
-			QVERIFY(dut.getNoradcatId() == expectNorad[idx]);
-			QVERIFY(dut.getEpochStr() == expectEpoch[idx]);
+			PluginSatellites::OMM::ShPtr dut(new PluginSatellites::OMM(r));
+			QVERIFY(dut->getObjectId() == expectOjectId[idx]);
+			QVERIFY(dut->getNoradcatId() == expectNorad[idx]);
+			QVERIFY(dut->getEpochStr() == expectEpoch[idx]);
 			QDateTime ep = QDateTime::fromString(expectEpoch[idx]);
-			QVERIFY(dut.getEpoch() == ep);
+			QVERIFY(dut->getEpoch() == ep);
 			idx++;
 		}
 		r.readNext();

@@ -23,33 +23,33 @@
 #include <QChar>
 #include <QString>
 #include <QDateTime>
+#include <QSharedPointer>
 #include <QXmlStreamReader>
 
 namespace PluginSatellites {
 
-class omm
+class OMM
 {
-private:
-	omm(); // Make default constructor unavailable.
-
 public:
+	typedef QSharedPointer<OMM> ShPtr;
+
 	enum class SourceType {
 		Invalid,
 		LegacyTle,
 		Xml
 	};
 
-	// Allowed constructors.
-	omm(QXmlStreamReader& r);
-	omm(QString &, QString &);
-	omm(QString&, QString&, QString&);
+	OMM();
+	OMM(QXmlStreamReader& r);
+	OMM(QString&, QString&);
+	OMM(QString&, QString&, QString&);
 
 	// Destructor.
-	virtual ~omm();
+	virtual ~OMM();
 
-	//virtual omm& setLine0(const QString& s) { m_line0 = s; return *this; }
-	//virtual omm& setLine1(const QString& s) { m_line1 = s; return *this; }
-	//virtual omm& setLine2(const QString& s) { m_line2 = s; return *this; }
+	virtual OMM& setLine0(const QString& s) { m_line0 = s; return *this; }
+	virtual OMM& setLine1(const QString& s) { m_line1 = s; return *this; }
+	virtual OMM& setLine2(const QString& s) { m_line2 = s; return *this; }
 
 	virtual const QString& getLine0() { return m_line0; }
 	virtual const QString& getLine1() { return m_line1; }
@@ -82,7 +82,7 @@ public:
 	virtual const QString& getObjectId() { return m_object_id; }
 
 private:
-
+	void processTleLegacy(void);
 	void processXmlElement(const QString& tag, const QString& val);
 
 	SourceType m_source_type;
