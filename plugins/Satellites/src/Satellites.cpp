@@ -40,6 +40,7 @@
 #include "StelProgressController.hpp"
 #include "StelUtils.hpp"
 #include "StelActionMgr.hpp"
+#include "OMM.hpp"
 
 #include <private/qzipreader_p.h>
 
@@ -1290,20 +1291,20 @@ QStringList Satellites::listAllIds() const
 bool Satellites::add(const TleData& tleData)
 {
 	// More validation?
-	if (tleData.id.isEmpty() || tleData.name.isEmpty() || tleData.first.isEmpty() || tleData.second.isEmpty())
+	if (tleData.omm.getObjectId().isEmpty() || tleData.omm.getObjectName().isEmpty() || tleData.omm.getLine1().isEmpty() || tleData.omm.getLine2().isEmpty())
 		return false;
 
 	// Duplicates check
-	if (searchByID(getSatIdFromLine2(tleData.second.trimmed()))!=nullptr)
+	if (searchByID(getSatIdFromLine2(tleData.omm.getLine2().trimmed()))!=nullptr)
 		return false;
 
 	QVariantList hintColor;
 	hintColor << defaultHintColor[0] << defaultHintColor[1] << defaultHintColor[2];
 	
 	QVariantMap satProperties;
-	satProperties.insert("name", tleData.name);
-	satProperties.insert("tle1", tleData.first);
-	satProperties.insert("tle2", tleData.second);
+	satProperties.insert("name", tleData.omm.getObjectName());
+	satProperties.insert("tle1", tleData.omm.getLine1());
+	satProperties.insert("tle2", tleData.omm.getLine2());
 	satProperties.insert("hintColor", hintColor);	
 	//TODO: Decide if newly added satellites are visible by default --BM
 	satProperties.insert("visible", true);
@@ -1319,7 +1320,7 @@ bool Satellites::add(const TleData& tleData)
 		satProperties.insert("status", tleData.status);
 
 	// Add the description for newly added satellites	
-	QString description = getSatelliteDescription(tleData.id.toInt());
+	QString description = getSatelliteDescription(tleData.omm.getObjectId().toInt());
 	if (!satProperties.contains("description") && !description.isEmpty())
 		satProperties.insert("description", description);
 
@@ -1356,10 +1357,10 @@ bool Satellites::add(const TleData& tleData)
 		satProperties.insert("comms", communications);
 	}
 	
-	SatelliteP sat(new Satellite(tleData.id, satProperties));
+	SatelliteP sat(new Satellite(tleData.omm.getObjectId(), satProperties));
 	if (sat->initialized)
 	{
-		qDebug() << "[Satellites] satellite added:" << tleData.id << tleData.name;
+		qDebug() << "[Satellites] satellite added:" << tleData.omm.getObjectId() << tleData.omm.getObjectName();
 		satellites.append(sat);
 		sat->setNew();		
 		return true;
@@ -1431,7 +1432,7 @@ QPair<double, double> Satellites::getStdMagRCS(const TleData& tleData)
 {
 	QPair<double, double> result;
 	double stdMag = 99., RCS = -1.;
-	int sid = tleData.id.toInt();
+	int sid = tleData.omm.getObjectId().toInt();
 	if (qsMagList.contains(sid))
 		stdMag = qsMagList[sid];
 	if (rcsList.contains(sid))
@@ -1442,11 +1443,11 @@ QPair<double, double> Satellites::getStdMagRCS(const TleData& tleData)
 		stdMag = 0.87; // see details: http://www.satobs.org/seesat/Aug-2022/0030.html
 
 	// special case: starlink satellites; details: http://satobs.org/seesat/Apr-2020/0174.html
-	if (!rcsList.contains(sid) && tleData.name.startsWith("STARLINK"))
+	if (!rcsList.contains(sid) && tleData.omm.getObjectName().startsWith("STARLINK"))
 	{
 		RCS = 22.68; // Starlink's solar array is 8.1 x 2.8 metres.
 		// Source: Anthony Mallama. Starlink Satellite Brightness -- Characterized From 100,000 Visible Light Magnitudes; https://arxiv.org/abs/2111.09735
-		if (tleData.name.contains("VISORSAT", Qt::CaseInsensitive))
+		if (tleData.omm.getObjectName().contains("VISORSAT", Qt::CaseInsensitive))
 			stdMag = 7.21; // stdMag=6.84 previously: https://arxiv.org/abs/2109.07345
 		else
 			stdMag = 5.89;
@@ -1454,7 +1455,7 @@ QPair<double, double> Satellites::getStdMagRCS(const TleData& tleData)
 
 	// special case: oneweb satellites
 	// Source: Anthony Mallama. OneWeb Satellite Brightness -- Characterized From 80,000 Visible Light Magnitudes; https://arxiv.org/pdf/2203.05513.pdf
-	if (!qsMagList.contains(sid) && tleData.name.startsWith("ONEWEB"))
+	if (!qsMagList.contains(sid) && tleData.omm.getObjectName().startsWith("ONEWEB"))
 		stdMag = 7.05;
 
 	result.first	= stdMag;
@@ -1480,7 +1481,7 @@ QList<CommLink> Satellites::getCommunicationData(const TleData& tleData)
 	QList<CommLink> comms;
 
 	// Communication data for individual satellites
-	QVariantMap communications = satComms.value(tleData.id.toInt(), QVariantMap());
+	QVariantMap communications = satComms.value(tleData.omm.getObjectId().toInt(), QVariantMap());
 	if (!communications.isEmpty())
 	{
 		for (const auto& comm : communications.value("comms").toList())
@@ -1522,14 +1523,14 @@ QList<CommLink> Satellites::getCommunicationData(const TleData& tleData)
 	QStringList groups;
 	for (auto& satgr: startsWith.keys())
 	{
-		if (tleData.name.startsWith(satgr))
+		if (tleData.omm.getObjectName().startsWith(satgr))
 			groups << startsWith.value(satgr);
 	}
 
-	if (tleData.name.startsWith("COSMOS") && tleData.name.contains("("))
+	if (tleData.omm.getObjectName().startsWith("COSMOS") && tleData.omm.getObjectName().contains("("))
 		groups << "glonass";
 
-	if (tleData.name.startsWith("GSAT") && (tleData.name.contains("PRN") || tleData.name.contains("GALILEO")))
+	if (tleData.omm.getObjectName().startsWith("GSAT") && (tleData.omm.getObjectName().contains("PRN") || tleData.omm.getObjectName().contains("GALILEO")))
 		groups << "galileo";
 
 	for (const auto& name : qAsConst(groups))
@@ -1558,7 +1559,7 @@ QStringList Satellites::guessGroups(const TleData& tleData)
 {
 	QStringList satGroups;
 	// Special case: ISS
-	if (tleData.id == "25544" || tleData.id == "49044")
+	if (tleData.omm.getObjectId() == "25544" || tleData.omm.getObjectId() == "49044")
 	{
 		satGroups.append("stations");
 		satGroups.append("scientific");
@@ -1568,78 +1569,82 @@ QStringList Satellites::guessGroups(const TleData& tleData)
 	}
 
 	// Guessing the groups from the names of satellites
-	if (tleData.name.startsWith("STARLINK"))
+	if (tleData.omm.getObjectName().startsWith("STARLINK"))
 	{
 		satGroups.append("starlink");
 		satGroups.append("communications");
 	}
-	if (tleData.name.startsWith("IRIDIUM"))
+	if (tleData.omm.getObjectName().startsWith("IRIDIUM"))
 	{
-		QStringList d = tleData.name.split(" ");
+		QStringList d = tleData.omm.getObjectName().split(" ");
 		if (d.at(1).toInt()>=100)
 			satGroups.append("iridium-NEXT");
 		else
 			satGroups.append("iridium");
 		satGroups.append("communications");
 	}
-	if (tleData.name.startsWith("FLOCK") || tleData.name.startsWith("SKYSAT"))
+	if (tleData.omm.getObjectName().startsWith("FLOCK") || tleData.omm.getObjectName().startsWith("SKYSAT"))
 		satGroups.append("earth resources");
-	if (tleData.name.startsWith("ONEWEB"))
+	if (tleData.omm.getObjectName().startsWith("ONEWEB"))
 	{
 		satGroups.append("oneweb");
 		satGroups.append("communications");
 	}
-	if (tleData.name.startsWith("LEMUR"))
+	if (tleData.omm.getObjectName().startsWith("LEMUR"))
 	{
 		satGroups.append("spire");
 		satGroups.append("earth resources");
 	}
-	if (tleData.name.startsWith("GPS"))
+	if (tleData.omm.getObjectName().startsWith("GPS"))
 	{
 		satGroups.append("gps");
 		satGroups.append("gnss");
 		satGroups.append("navigation");
 	}
-	if (tleData.name.startsWith("IRNSS"))
+	if (tleData.omm.getObjectName().startsWith("IRNSS"))
 	{
 		satGroups.append("irnss");
 		satGroups.append("navigation");
 	}
-	if (tleData.name.startsWith("QZS"))
+	if (tleData.omm.getObjectName().startsWith("QZS"))
 	{
 		satGroups.append("qzss");
 	}
-	if (tleData.name.startsWith("TDRS"))
+	if (tleData.omm.getObjectName().startsWith("TDRS"))
 	{
 		satGroups.append("tdrss");
 		satGroups.append("communications");
 		satGroups.append("geostationary");
 	}
-	if (tleData.name.startsWith("BEIDOU"))
+	if (tleData.omm.getObjectName().startsWith("BEIDOU"))
 	{
 		satGroups.append("beidou");
 		satGroups.append("gnss");
 		satGroups.append("navigation");
 	}
-	if (tleData.name.startsWith("COSMOS"))
+	if (tleData.omm.getObjectName().startsWith("COSMOS"))
 	{
 		satGroups.append("cosmos");
-		if (tleData.name.contains("("))
+		if (tleData.omm.getObjectName().contains("("))
 		{
 			satGroups.append("glonass");
 			satGroups.append("gnss");
 			satGroups.append("navigation");
 		}
 	}
-	if (tleData.name.startsWith("GSAT") && (tleData.name.contains("PRN") || tleData.name.contains("GALILEO")))
+	if (tleData.omm.getObjectName().startsWith("GSAT") && (tleData.omm.getObjectName().contains("PRN") || tleData.omm.getObjectName().contains("GALILEO")))
 	{
 		satGroups.append("galileo");
 		satGroups.append("gnss");
 		satGroups.append("navigation");
 	}
-	if (tleData.name.startsWith("GONETS-M") || tleData.name.startsWith("INTELSAT") || tleData.name.startsWith("GLOBALSTAR") || tleData.name.startsWith("ORBCOMM") || tleData.name.startsWith("GORIZONT") || tleData.name.startsWith("RADUGA") || tleData.name.startsWith("MOLNIYA") || tleData.name.startsWith("DIRECTV") || tleData.name.startsWith("CHINASAT") || tleData.name.startsWith("YAMAL"))
+	if (tleData.omm.getObjectName().startsWith("GONETS-M") || tleData.omm.getObjectName().startsWith("INTELSAT") ||
+		tleData.omm.getObjectName().startsWith("GLOBALSTAR") || tleData.omm.getObjectName().startsWith("ORBCOMM") ||
+		tleData.omm.getObjectName().startsWith("GORIZONT") || tleData.omm.getObjectName().startsWith("RADUGA") ||
+		tleData.omm.getObjectName().startsWith("MOLNIYA") || tleData.omm.getObjectName().startsWith("DIRECTV") ||
+		tleData.omm.getObjectName().startsWith("CHINASAT") || tleData.omm.getObjectName().startsWith("YAMAL"))
 	{
-		QString satName = tleData.name.split(" ").at(0).toLower();
+		QString satName = tleData.omm.getObjectName().split(" ").at(0).toLower();
 		if (satName.contains("-"))
 			satName = satName.split("-").at(0);
 		satGroups.append(satName);
@@ -1649,11 +1654,11 @@ QStringList Satellites::guessGroups(const TleData& tleData)
 		if (satName.startsWith("INTELSAT") || satName.startsWith("DIRECTV") || satName.startsWith("YAMAL"))
 			satGroups.append("tv");
 	}
-	if (tleData.name.contains(" DEB"))
+	if (tleData.omm.getObjectName().contains(" DEB"))
 		satGroups.append("debris");
-	if (tleData.name.startsWith("SOYUZ-MS"))
+	if (tleData.omm.getObjectName().startsWith("SOYUZ-MS"))
 		satGroups.append("crewed");
-	if (tleData.name.startsWith("PROGRESS-MS") || tleData.name.startsWith("CYGNUS NG"))
+	if (tleData.omm.getObjectName().startsWith("PROGRESS-MS") || tleData.omm.getObjectName().startsWith("CYGNUS NG"))
 		satGroups.append("resupply");
 	if (tleData.status==Satellite::StatusNonoperational)
 		satGroups.append("non-operational");
@@ -1698,7 +1703,7 @@ void Satellites::add(const TleDataList& newSatellites)
 	int numAdded = 0;
 	for (const auto& tleSet : newSatellites)
 	{
-		if (add(tleSet))
+		if (add(*tleSet))
 		{
 			numAdded++;
 		}
@@ -2492,32 +2497,32 @@ void Satellites::updateSatellites(TleDataHash& newTleSets)
 		}
 		
 		QString id = sat->id;
-		TleData newTle = newTleSets.take(id);
-		if (!newTle.name.isEmpty())
+		TleDataShPtr newTle = newTleSets.take(id);
+		if (!newTle->omm.getObjectName().isEmpty())
 		{
-			if (sat->tleElements.first != newTle.first ||
-			    sat->tleElements.second != newTle.second ||
-			    sat->name != newTle.name)
+			if (sat->tleElements.first != newTle->omm.getLine1() ||
+			    sat->tleElements.second != newTle->omm.getLine2() ||
+			    sat->name != newTle->omm.getObjectName())
 			{
 				// We have updated TLE elements for this satellite
-				sat->setNewTleElements(newTle.first, newTle.second);
+				sat->setNewTleElements(newTle->omm.getLine1(), newTle->omm.getLine2());
 				
 				// Update the name if it has been changed in the source list
-				sat->name = newTle.name;
+				sat->name = newTle->omm.getObjectName();
 
 				// Update operational status
-				sat->status = newTle.status;
+				sat->status = newTle->status;
 
 				// we reset this to "now" when we started the update.
 				sat->lastUpdated = lastUpdate;
 
-				QPair<double, double> stdMagRCS = getStdMagRCS(newTle);
+				QPair<double, double> stdMagRCS = getStdMagRCS(*newTle);
 				if (stdMagRCS.first < 99.)
 					sat->stdMag = stdMagRCS.first;
 				if (stdMagRCS.second > 0.)
 					sat->RCS = stdMagRCS.second;
 
-				QList<CommLink> comms = getCommunicationData(newTle);
+				QList<CommLink> comms = getCommunicationData(*newTle);
 				if (!comms.isEmpty())
 					sat->comms = comms;
 
@@ -2552,10 +2557,10 @@ void Satellites::updateSatellites(TleDataHash& newTleSets)
 	// (autoAddEnabled is not checked, because it's already in the flags)
 	for (const auto& tleData : newTleSets)
 	{
-		if (tleData.addThis)
+		if (tleData->addThis)
 		{
 			// Add the satellite...
-			if (add(tleData))
+			if (add(*tleData))
 				addedCount++;
 		}
 	}
@@ -2597,7 +2602,6 @@ void Satellites::parseTleFile(QFile& openFile, TleDataHash& tleList, bool addFla
 	
 	// Code mostly re-used from updateFromFiles()
 	int lineNumber = 0;
-	TleData lastData;
 
 	// Celestrak's "status code" list
 	const QMap<QString, Satellite::OptStatus> satOpStatusMap = {
@@ -2610,6 +2614,8 @@ void Satellites::parseTleFile(QFile& openFile, TleDataHash& tleList, bool addFla
 		{ "D", Satellite::StatusDecayed },
 		{ "?", Satellite::StatusUnknown }
 	};
+
+	TleDataShPtr lastData;
 	
 	while (!openFile.atEnd())
 	{
@@ -2617,22 +2623,23 @@ void Satellites::parseTleFile(QFile& openFile, TleDataHash& tleList, bool addFla
 		if (line.length() < 65) // this is title line
 		{
 			// New entry in the list, so reset all fields
-			lastData = TleData();
-			lastData.addThis = addFlagValue;
-			lastData.sourceURL = tleURL;
+			lastData = TleDataShPtr(new TleData);
+			lastData->addThis = addFlagValue;
+			lastData->sourceURL = tleURL;
 			
 			// The thing in square brackets after the name is actually
 			// Celestrak's "status code". Parse it!
 			static const QRegularExpression statusRx("\\s*\\[(\\D{1})\\]\\s*$", QRegularExpression::InvertedGreedinessOption );
 			QRegularExpressionMatch match;
 			if (line.indexOf(statusRx, 0, &match)>-1)
-				lastData.status = satOpStatusMap.value(match.captured(1).toUpper(), Satellite::StatusUnknown);
+				lastData->status = satOpStatusMap.value(match.captured(1).toUpper(), Satellite::StatusUnknown);
 
 			//TODO: We need to think of some kind of escaping these
 			//characters in the JSON parser. --BM
 			static const QRegularExpression statusCodeRx("\\s*\\[([^\\]])*\\]\\s*$");
 			line.replace(statusCodeRx,"");  // remove "status code" from name
-			lastData.name = line;
+			lastData->omm.setObjectName(line);
+			lastData->omm.setLine0(line);
 		}
 		else
 		{
@@ -2640,10 +2647,10 @@ void Satellites::parseTleFile(QFile& openFile, TleDataHash& tleList, bool addFla
 			static const QRegularExpression reL1("^1 .*");
 			static const QRegularExpression reL2("^2 .*");
 			if (reL1.match(line).hasMatch())
-				lastData.first = line;
+				lastData->omm.setLine1(line); //.first = line;
 			else if (reL2.match(line).hasMatch())
 			{
-				lastData.second = line;
+				lastData->omm.setLine2(line); //.second = line;
 				// The Satellite Catalogue Number is the second number
 				// on the second line.
 				QString id = getSatIdFromLine2(line);
@@ -2652,11 +2659,11 @@ void Satellites::parseTleFile(QFile& openFile, TleDataHash& tleList, bool addFla
 					qDebug() << "[Satellites] failed to extract SatId from \"" << line << "\"";
 					continue;
 				}
-				lastData.id = id;
+				lastData->omm.setObjectId(id); //.id = id;
 				
 				// This is the second line and there will be no more,
 				// so if everything is OK, save the elements.
-				if (!lastData.name.isEmpty() && !lastData.first.isEmpty())
+				if (!lastData->omm.getObjectName().isEmpty() && !lastData->omm.getLine1().isEmpty())
 				{
 					// Some satellites can be listed in multiple files,
 					// and only some of those files may be marked for adding,
@@ -2664,7 +2671,7 @@ void Satellites::parseTleFile(QFile& openFile, TleDataHash& tleList, bool addFla
 					// feel free to overwrite the existing value.
 					// If not, overwrite only if it's not in the list already.
 					// NOTE: Second case overwrite may need to check which TLE set is newer. 
-					if (lastData.addThis || !tleList.contains(id))
+					if (lastData->addThis || !tleList.contains(id))
 						tleList.insert(id, lastData); // Overwrite if necessary
 				}
 				//TODO: Error warnings? --BM

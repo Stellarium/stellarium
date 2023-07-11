@@ -20,6 +20,7 @@
 #ifndef SATELLITES_OMM_HPP
 #define SATELLITES_OMM_HPP
 
+#include <QMap>
 #include <QChar>
 #include <QString>
 #include <QDateTime>
@@ -33,7 +34,34 @@ class OMM
 public:
 	typedef QSharedPointer<OMM> ShPtr;
 
-	enum class SourceType {
+	//! @enum OptStatus operational statuses
+	enum class OptStatus
+	{
+		StatusUnknown = 0,
+		StatusOperational          = 1,
+		StatusNonoperational       = 2,
+		StatusPartiallyOperational = 3,
+		StatusStandby              = 4,
+		StatusSpare                = 5,
+		StatusExtendedMission      = 6,
+		StatusDecayed              = 7
+	};
+
+	// Celestrak's "status code" list
+	const QMap<QString, OptStatus> satOpStatusMap = 
+	{ 
+		{ "+", OptStatus::StatusOperational },
+		{ "-", OptStatus::StatusNonoperational },
+		{ "P", OptStatus::StatusPartiallyOperational },
+		{ "B", OptStatus::StatusStandby },
+		{ "S", OptStatus::StatusSpare },
+		{ "X", OptStatus::StatusExtendedMission },
+		{ "D", OptStatus::StatusDecayed },
+		{ "?", OptStatus::StatusUnknown } 
+	};
+
+	enum class SourceType 
+	{
 		Invalid,
 		LegacyTle,
 		Xml
@@ -51,9 +79,9 @@ public:
 	virtual OMM& setLine1(const QString& s) { m_line1 = s; return *this; }
 	virtual OMM& setLine2(const QString& s) { m_line2 = s; return *this; }
 
-	virtual const QString& getLine0() { return m_line0; }
-	virtual const QString& getLine1() { return m_line1; }
-	virtual const QString& getLine2() { return m_line2; }
+	virtual const QString& getLine0() const { return m_line0; }
+	virtual const QString& getLine1() const { return m_line1; }
+	virtual const QString& getLine2() const { return m_line2; }
 
 	bool hasValidEpoch() { return m_sp_epoch.isNull() == false; }
 
@@ -73,15 +101,17 @@ public:
 	virtual int getEphermisType() { return m_ephermeris_type; }
 	virtual int getElementNumber() { return m_element_number; }
 
-	virtual QChar getClassification() { return m_classification; }
+	virtual QChar getClassification() const { return m_classification; }
 	virtual int getNoradcatId() { return m_norad_cat_id; }
 	virtual int getRevAtEpoch() { return m_rev_at_epoch; }
 	virtual double getBstar() { return m_bstar; }
 	virtual double getMeanMotionDot() { return m_mean_motion_dot; }
 	virtual double getMeanMotionDDot() { return m_mean_motion_ddot; }
 
-	virtual const QString& getObjectName() { return m_object_name; }
-	virtual const QString& getObjectId() { return m_object_id; }
+	virtual const QString& getObjectName() const { return m_object_name; }
+	virtual const QString& getObjectId() const { return m_object_id; }
+
+	virtual OptStatus getStatus() { return m_status; }
 
 	// Setter functions
 	bool setEpoch(const QString & val, const QString & tag = "");
@@ -101,6 +131,8 @@ public:
 	bool setMeanMotionDot(const QString & val, const QString & tag = "");
 	bool setMeanMotionDDot(const QString & val, const QString & tag = "");
 
+	OMM &setStatus(OptStatus s) { m_status = s; return *this; } 
+
 private:
 	void processTleLegacyLine0(void);
 	void processTleLegacyLine1(void);
@@ -109,8 +141,6 @@ private:
 
 	SourceType m_source_type;
 	
-
-
 	// Legacy TLE data.
 	QString m_line0{};
 	QString m_line1{};
@@ -138,6 +168,9 @@ private:
 	// Metadata
 	QString m_object_name{};
 	QString m_object_id{};
+
+	// Celestrak status
+	OptStatus m_status{};
 };
 
 #endif

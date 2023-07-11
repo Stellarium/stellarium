@@ -1269,8 +1269,9 @@ void SatellitesDialog::addSatellites(const TleDataList& newSatellites)
 	selectionModel->clearSelection();
 	QModelIndex firstSelectedIndex;
 	QSet<QString> newIds;
-	for (const auto& sat : newSatellites)
-		newIds.insert(sat.id);
+	for (const auto& sat : newSatellites) {
+		newIds.insert(sat->omm.getObjectId());
+	}
 	for (int row = 0; row < ui->satellitesList->model()->rowCount(); row++)
 	{
 		QModelIndex index = ui->satellitesList->model()->index(row, 0);
