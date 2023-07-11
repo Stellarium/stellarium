@@ -17,23 +17,30 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef TESTOMM_HPP
-#define TESTOMM_HPP
+#include <ios>
+#include <string.h>
+#include <stdlib.h>
 
-#include <QtTest>
+#include "VecMath.hpp"
+#include "testSGP4.hpp"
 
-#include "OMM.hpp"
+QTEST_GUILESS_MAIN(TestSGP4)
 
-class TestOMM : public QObject
+void TestSGP4::testSGP4()
 {
-	Q_OBJECT
-private slots:
-	void testLegacyTle();
-	void testXMLread();
-	void testProcessTleLegacyLine0();
-	void testProcessTleLegacyLine1();
-	void testProcessTleLegacyLine2();
-	void testLegacyTleVsXML();
-};
+	const char *l0 = "ISS (ZARYA)";
+	const char *l1 = "1 25544U 98067A   23191.40640406  .00007611  00000+0  14335-3 0  9995";
+	const char *l2 = "2 25544  51.6398 233.5611 0000373  12.3897  91.4664 15.49560249404764";
+	char *l1c, *l2c;
+	l1c = strdup(l1);
+	l2c = strdup(l2);
+	gSatTEME sat(l0, l1c, l2c);
+	Vec3d pos = sat.getPos();
+	Vec3d vel = sat.getVel();
 
-#endif // TESTOMM_HPP
+	QCOMPARE(pos.toString(), "[4259.68, -1120.18, 5166.77]");
+	QCOMPARE(vel.toString(), "[3.50308, 6.662, -1.43989]");
+
+	free(l1c);
+	free(l2c);
+}
