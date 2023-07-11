@@ -133,6 +133,12 @@ public:
 
 	OMM &setStatus(OptStatus s) { m_status = s; return *this; } 
 
+	virtual void processTleLegacy() {
+		processTleLegacyLine0();
+		processTleLegacyLine1();
+		processTleLegacyLine2();
+	}
+
 private:
 	void processTleLegacyLine0(void);
 	void processTleLegacyLine1(void);

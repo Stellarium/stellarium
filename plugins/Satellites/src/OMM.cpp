@@ -139,7 +139,7 @@ void OMM::processTleLegacyLine1(void)
 	if (!m_line1.isEmpty() && m_line1.at(0) == '1') {
 		auto epoch_str    = m_line1.mid(EPOCH.first, EPOCH.second).trimmed();
 		m_sp_epoch        = OMMDateTime::ShPtr(new OMMDateTime(epoch_str));
-		m_norad_cat_id    = m_line1.mid(NORAD_CAT_ID.first, NORAD_CAT_ID.second).toInt();
+ 		m_norad_cat_id    = m_line1.mid(NORAD_CAT_ID.first, NORAD_CAT_ID.second).toInt();
 		m_classification  = m_line1.at(CLASSIFICATION_TYPE.first);
 		m_object_id       = m_line1.mid(OBJECT_ID.first, OBJECT_ID.second).trimmed();
 		m_mean_motion_dot = m_line1.mid(33, 10).toDouble();

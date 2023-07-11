@@ -2498,7 +2498,7 @@ void Satellites::updateSatellites(TleDataHash& newTleSets)
 		
 		QString id = sat->id;
 		TleDataShPtr newTle = newTleSets.take(id);
-		if (!newTle->omm.getObjectName().isEmpty())
+		if (!newTle.isNull() && !newTle->omm.getObjectName().isEmpty())
 		{
 			if (sat->tleElements.first != newTle->omm.getLine1() ||
 			    sat->tleElements.second != newTle->omm.getLine2() ||
@@ -2557,7 +2557,7 @@ void Satellites::updateSatellites(TleDataHash& newTleSets)
 	// (autoAddEnabled is not checked, because it's already in the flags)
 	for (const auto& tleData : newTleSets)
 	{
-		if (tleData->addThis)
+		if (!tleData.isNull() && tleData->addThis)
 		{
 			// Add the satellite...
 			if (add(*tleData))
@@ -2671,8 +2671,10 @@ void Satellites::parseTleFile(QFile& openFile, TleDataHash& tleList, bool addFla
 					// feel free to overwrite the existing value.
 					// If not, overwrite only if it's not in the list already.
 					// NOTE: Second case overwrite may need to check which TLE set is newer. 
-					if (lastData->addThis || !tleList.contains(id))
+					if (lastData->addThis || !tleList.contains(id)) {
+						lastData->omm.processTleLegacy();
 						tleList.insert(id, lastData); // Overwrite if necessary
+					}
 				}
 				//TODO: Error warnings? --BM
 			}
