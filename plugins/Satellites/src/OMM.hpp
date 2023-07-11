@@ -81,14 +81,34 @@ public:
 	virtual const QString& getObjectName() { return m_object_name; }
 	virtual const QString& getObjectId() { return m_object_id; }
 
+	// Setter functions
+	bool setEpoch(const QString & val, const QString & tag = "");
+	bool setObjectName(const QString & val, const QString & tag = "");
+	bool setObjectId(const QString& val, const QString& tag = "");
+	bool setMeanMotion(const QString & val, const QString & tag = "");
+	bool setEccentricity(const QString & val, const QString & tag = "");
+	bool setInclination(const QString & val, const QString & tag = "");
+	bool setAscendingNode(const QString & val, const QString & tag = "");
+	bool setArgumentOfPerigee(const QString & val, const QString & tag = "");
+	bool setMeanAnomoly(const QString & val, const QString & tag = "");
+	bool setClassification(const QString & val, const QString & tag = "");
+	bool setNoradcatId(const QString & val, const QString & tag = "");
+	bool setRevAtEpoch(const QString & val, const QString & tag = "");
+	bool setElementNumber(const QString & val, const QString & tag = "");
+	bool setBstar(const QString & val, const QString & tag = "");
+	bool setMeanMotionDot(const QString & val, const QString & tag = "");
+	bool setMeanMotionDDot(const QString & val, const QString & tag = "");
+
 private:
 	void processTleLegacyLine0(void);
 	void processTleLegacyLine1(void);
 	void processTleLegacyLine2(void);
-	void processXmlElement(const QString& tag, const QString& val);
+	void processTagElement(const QString& tag, const QString& val);
 
 	SourceType m_source_type;
 	
+
+
 	// Legacy TLE data.
 	QString m_line0{};
 	QString m_line1{};

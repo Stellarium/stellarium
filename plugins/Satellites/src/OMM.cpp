@@ -92,7 +92,7 @@ bool OMM::setFromXML(QXmlStreamReader & r)
 					savedVal += r.text();
 				} 
 				else if (r.isEndElement()) {
-					processXmlElement(savedTag, savedVal);
+					processTagElement(savedTag, savedVal);
 					collectChars = false;
 					savedVal = "";
 				}
@@ -108,25 +108,7 @@ bool OMM::setFromXML(QXmlStreamReader & r)
 	return false;
 }
 
-void OMM::processXmlElement(const QString & tag, const QString & val)
-{
-	if (tag == "EPOCH")                     m_sp_epoch = OMMDateTime::ShPtr(new OMMDateTime(val, OMMDateTime::STR_ISO8601));
-	else if (tag == "OBJECT_NAME")          m_object_name = val;
-	else if (tag == "OBJECT_ID")            m_object_id = val;
-	else if (tag == "MEAN_MOTION")          m_mean_motion = val.toDouble();
-	else if (tag == "ECCENTRICITY")         m_eccentricity = val.toDouble();
-	else if (tag == "INCLINATION")          m_inclination = val.toDouble();
-	else if (tag == "RA_OF_ASC_NODE")       m_ascending_node = val.toDouble();
-	else if (tag == "ARG_OF_PERICENTER")    m_argument_perigee = val.toDouble();
-	else if (tag == "MEAN_ANOMALY")         m_mean_anomoly = val.toDouble();
-	else if (tag == "CLASSIFICATION_TYPE")  m_classification = val.at(0).toUpper();
-	else if (tag == "NORAD_CAT_ID")         m_norad_cat_id = val.toInt();
-	else if (tag == "ELEMENT_SET_NO")       m_element_number = val.toInt();
-	else if (tag == "REV_AT_EPOCH")         m_rev_at_epoch = val.toInt();
-	else if (tag == "BSTAR")                m_bstar = val.toDouble();
-	else if (tag == "MEAN_MOTION_DOT")      m_mean_motion_dot = val.toDouble();
-	else if (tag == "MEAN_MOTION_DDOT")     m_mean_motion_ddot = val.toDouble();
-}
+
 
 // Everything below here is for extracting the data from the legacy two line TLE format.
 
@@ -193,6 +175,199 @@ void OMM::processTleLegacyLine2(void)
 		m_mean_anomoly = m_line2.mid(MEAN_ANOMALY.first, MEAN_ANOMALY.second).trimmed().toDouble();
 		m_mean_motion = m_line2.mid(MEAN_MOTION.first, MEAN_MOTION.second).trimmed().toDouble();
 		m_rev_at_epoch = m_line2.mid(REV_AT_EPOCH.first, REV_AT_EPOCH.second).trimmed().toInt();
-		
+	}
+}
+
+// The following function fails CodeFcator Complexity rules on Github.
+// Replace it with a ton of helper functions.
+
+bool OMM::setEpoch(const QString& val, const QString& tag)
+{
+	if(tag.isEmpty() || tag == "EPOCH") {
+		m_sp_epoch = OMMDateTime::ShPtr(new OMMDateTime(val, OMMDateTime::STR_ISO8601));
+		return true;
+	}
+	return false;
+}
+
+bool OMM::setObjectName(const QString& val, const QString& tag)
+{
+	if(tag.isEmpty() || tag == "OBJECT_NAME") {
+		m_object_name = val;
+		return true;
+	}
+	return false;
+}
+
+bool OMM::setObjectId(const QString & val, const QString & tag)
+{
+	if (tag.isEmpty() || tag == "OBJECT_ID") {
+		m_object_id = val;
+		return true;
+	}
+	return false;
+}
+
+bool OMM::setMeanMotion(const QString& val, const QString& tag)
+{
+	if(tag.isEmpty() || tag == "MEAN_MOTION") {
+		m_mean_motion = val.toDouble();
+		return true;
+	}
+	return false;
+}
+
+bool OMM::setEccentricity(const QString & val, const QString & tag)
+{
+	if (tag.isEmpty() || tag == "ECCENTRICITY") {
+		m_eccentricity = val.toDouble();
+		return true;
+	}
+	return false;
+}
+
+bool OMM::setInclination(const QString & val, const QString & tag)
+{
+	if (tag.isEmpty() || tag == "INCLINATION") {
+		m_inclination = val.toDouble();
+		return true;
+	}
+	return false;
+}
+
+bool OMM::setAscendingNode(const QString & val, const QString & tag)
+{
+	if (tag.isEmpty() || tag == "RA_OF_ASC_NODE") {
+		m_ascending_node = val.toDouble();
+		return true;
+	}
+	return false;
+}
+
+bool OMM::setArgumentOfPerigee(const QString & val, const QString & tag)
+{
+	if (tag.isEmpty() || tag == "ARG_OF_PERICENTER") {
+		m_argument_perigee = val.toDouble();
+		return true;
+	}
+	return false;
+}
+
+bool OMM::setMeanAnomoly(const QString & val, const QString & tag)
+{
+	if (tag.isEmpty() || tag == "MEAN_ANOMALY") {
+		m_mean_anomoly = val.toDouble();
+		return true;
+	}
+	return false;
+}
+
+bool OMM::setClassification(const QString & val, const QString & tag)
+{
+	if (tag.isEmpty() || tag == "CLASSIFICATION_TYPE") {
+		m_classification = val.at(0).toUpper();
+		return true;
+	}
+	return false;
+}
+
+bool OMM::setNoradcatId(const QString & val, const QString & tag)
+{
+	if (tag.isEmpty() || tag == "NORAD_CAT_ID") {
+		m_norad_cat_id = val.toInt();
+		return true;
+	}
+	return false;
+}
+
+bool OMM::setRevAtEpoch(const QString & val, const QString & tag)
+{
+	if (tag.isEmpty() || tag == "REV_AT_EPOCH") {
+		m_rev_at_epoch = val.toInt();
+		return true;
+	}
+	return false;
+}
+
+bool OMM::setElementNumber(const QString & val, const QString & tag)
+{
+	if (tag.isEmpty() || tag == "ELEMENT_SET_NO") {
+		m_element_number = val.toInt();
+		return true;
+	}
+	return false;
+}
+
+bool OMM::setBstar(const QString & val, const QString & tag)
+{
+	if (tag.isEmpty() || tag == "BSTAR") {
+		m_bstar = val.toDouble();
+		return true;
+	}
+	return false;
+}
+
+bool OMM::setMeanMotionDot(const QString & val, const QString & tag)
+{
+	if (tag.isEmpty() || tag == "MEAN_MOTION_DOT") {
+		m_mean_motion_dot = val.toDouble();
+		return true;
+	}
+	return false;
+}
+
+bool OMM::setMeanMotionDDot(const QString & val, const QString & tag)
+{
+	if (tag.isEmpty() || tag == "MEAN_MOTION_DDOT") {
+		m_mean_motion_ddot = val.toDouble();
+		return true;
+	}
+	return false;
+}
+
+/*
+* Create a table of setter methods to loop over
+* to allow setting properties via tag name.
+*/
+
+// Function/method pointer type.
+typedef bool (OMM::*setter)(const QString&, const QString&);
+
+// Table of function/method pointers
+static setter setFuncs[] 
+{ 
+	&OMM::setEpoch,
+	&OMM::setObjectName,
+	&OMM::setObjectId,
+	&OMM::setMeanMotion,
+	&OMM::setEccentricity, 
+	&OMM::setInclination, 
+	&OMM::setAscendingNode,
+	&OMM::setArgumentOfPerigee,
+	&OMM::setMeanAnomoly,
+	&OMM::setClassification, 
+	&OMM::setRevAtEpoch,
+	&OMM::setElementNumber,
+	&OMM::setBstar,
+	&OMM::setMeanMotionDot,
+	&OMM::setMeanMotionDDot,
+	&OMM::setNoradcatId, // Keep last in table.
+	nullptr
+};
+
+// Number of entries in table.
+#define TABLEN ((sizeof(setFuncs)/sizeof(setter))-1)
+
+// Looped setter from tag.
+void OMM::processTagElement(const QString& tag, const QString& val)
+{
+	if(!tag.isEmpty() && tag.size() > 0) {
+		int idx = 0;
+		setter set;
+		while (idx < TABLEN) {
+			set = setFuncs[idx++];
+			if (set == nullptr) return;
+			if ((this->*set)(val, tag) == true) return;
+		}
 	}
 }
