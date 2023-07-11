@@ -109,7 +109,6 @@ typedef struct elsetrec
   unsigned char active; // "Active S/C" flag (0=n, 1=y) 
   unsigned char not_orbital; // "Orbiting S/C" flag (0=n, 1=y)  
   double rcs_m2; // "RCS (m^2)" storage  
-
 } elsetrec;
 
 

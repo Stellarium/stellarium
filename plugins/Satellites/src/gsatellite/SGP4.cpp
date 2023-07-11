@@ -2085,7 +2085,6 @@ namespace SGP4Funcs
 		double& j3oj2
 		)
 	{
-
 		switch (whichconst)
 		{
 			// -- wgs-72 low precision str#3 constants --
@@ -2125,7 +2124,6 @@ namespace SGP4Funcs
 			fprintf(stderr, "unknown gravity option (%d)\n", whichconst);
 			break;
 		}
-
 	}   // getgravconst
 
 	// older sgp4io methods
@@ -2501,7 +2499,6 @@ namespace SGP4Funcs
 		{
 			return 1.0;
 		}
-
 	}  // sgn
 
 	/* -----------------------------------------------------------------------------
