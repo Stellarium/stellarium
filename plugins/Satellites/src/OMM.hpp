@@ -55,6 +55,8 @@ public:
 	virtual const QString& getLine1() { return m_line1; }
 	virtual const QString& getLine2() { return m_line2; }
 
+	bool hasValidEpoch() { return m_sp_epoch.isNull() == false; }
+
 	bool hasValidLegacyTleData();
 
 	bool setFromXML(QXmlStreamReader& r);

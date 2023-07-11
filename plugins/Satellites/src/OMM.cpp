@@ -92,7 +92,9 @@ bool OMM::setFromXML(QXmlStreamReader & r)
 					savedVal += r.text();
 				} 
 				else if (r.isEndElement()) {
-					processTagElement(savedTag, savedVal);
+					if(!savedTag.isEmpty() && savedTag.size() > 0) {
+						processTagElement(savedTag, savedVal);
+					}
 					collectChars = false;
 					savedVal = "";
 				}
