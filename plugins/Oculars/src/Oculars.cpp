@@ -1538,17 +1538,17 @@ bool Oculars::isBinocularDefined()
 }
 
 QRect Oculars::drawSensorFrameAndOverlay(const StelProjectorP& projector, const Mat4f& derotate,
-					 const Vec2f& frameUpDir, const Vec2f& frameRightDir,
-					 const Vec2f& frameCenter, const CCD& ccd, const Lens& lens,
-					 const QSize& overlaySize)
+                                         const Vec2f& frameUpDir, const Vec2f& frameRightDir,
+                                         const Vec2f& frameCenter, const CCD& ccd, const Lens* lens,
+                                         const QSize& overlaySize)
 {
 	StelPainter sPainter(projector);
 	sPainter.setLineSmooth(true);
 	sPainter.setColor(lineColor);
 	Telescope *telescope = telescopes[selectedTelescopeIndex];
 
-	const double fovX = ccd.getActualFOVx(telescope, &lens) * (M_PI/180);
-	const double fovY = ccd.getActualFOVy(telescope, &lens) * (M_PI/180);
+	const double fovX = ccd.getActualFOVx(telescope, lens) * (M_PI/180);
+	const double fovY = ccd.getActualFOVy(telescope, lens) * (M_PI/180);
 
 	const float tanFovX = std::tan(fovX/2);
 	const float tanFovY = std::tan(fovY/2);
@@ -1702,21 +1702,21 @@ void Oculars::drawCirclesOfConstantAngularRadii(StelPainter& sPainter, const Mat
 }
 
 void Oculars::drawOAG(const StelProjectorP& projector, const Mat4f& derotate,
-		      const CCD& ccd, const Lens& lens)
+                      const CCD& ccd, const Lens* lens)
 {
 	StelPainter sPainter(projector);
 	sPainter.setLineSmooth(true);
 	sPainter.setColor(lineColor);
 
 	Telescope *telescope = telescopes[selectedTelescopeIndex];
-	const float innerRadius = ccd.getInnerOAGRadius(telescope, &lens) * (M_PI/180);
-	const float outerRadius = ccd.getOuterOAGRadius(telescope, &lens) * (M_PI/180);
+	const float innerRadius = ccd.getInnerOAGRadius(telescope, lens) * (M_PI/180);
+	const float outerRadius = ccd.getOuterOAGRadius(telescope, lens) * (M_PI/180);
 
 	drawCirclesOfConstantAngularRadii(sPainter, derotate, {innerRadius,outerRadius});
 
 	const int numPointsPerLine = 30;
 
-	const float prismFovX = ccd.getOAGActualFOVx(telescope, &lens) * (M_PI/180);
+	const float prismFovX = ccd.getOAGActualFOVx(telescope, lens) * (M_PI/180);
 	const float tanFovX = std::tan(prismFovX/2);
 
 	const auto tanInnerRadius = std::tan(innerRadius);
@@ -1842,7 +1842,7 @@ void Oculars::paintCCDBounds()
 	const auto frameCenterWin2d = Vec2f(frameCenterWin[0], frameCenterWin[1]);
 
 	const auto boundingRect = drawSensorFrameAndOverlay(projector, derotate, frameUpWinDir, frameRightWinDir,
-							    frameCenterWin2d, *ccd, *lens, overlaySize);
+	                                                    frameCenterWin2d, *ccd, lens, overlaySize);
 	StelPainter painter(projector);
 	painter.setLineSmooth(true);
 	painter.setColor(lineColor);
@@ -1853,7 +1853,7 @@ void Oculars::paintCCDBounds()
 		const auto derotateOAG = Mat4f::rotation(Vec3f(0,0,1), azimuth) *
 					 Mat4f::rotation(Vec3f(0,1,0), -elevation) *
 					 Mat4f::rotation(Vec3f(1,0,0), (ccd->prismPosAngle() + ccd->chipRotAngle()) * (M_PI/180));
-		drawOAG(projector, derotateOAG, *ccd, *lens);
+		drawOAG(projector, derotateOAG, *ccd, lens);
 	}
 
 	// Tool for planning a mosaic astrophotography: shows a small cross at center of CCD's
