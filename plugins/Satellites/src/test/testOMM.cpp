@@ -128,3 +128,42 @@ void TestOMM::testXMLread()
 	}
 	file.close();
 }
+
+void TestOMM::testLegacyTleVsXML()
+{
+	OMM::ShPtr dut_xml;
+	bool  flag = false;
+	QFile file("test_data.xml");
+	flag = file.open(QFile::ReadOnly | QFile::Text);
+	QVERIFY(true == flag);
+	if (!flag)
+		return;
+	QXmlStreamReader r(&file);
+	flag = true;
+	while (flag && !r.atEnd()) {
+		QString tag = r.name().toString();
+		if (r.isStartElement() && tag.toLower() == "omm") {
+			dut_xml = OMM::ShPtr(new OMM(r));
+			QVERIFY(dut_xml->getObjectId() == "1998-067A");
+			flag = false;
+		}
+		r.readNext();
+	}
+	file.close();
+
+	QString    l0("ISS (ZARYA)");
+	//                       1         2         3         4         5         6         7
+	//             01234567890123456789012345678901234567890123456789012345678901234567890
+	QString    l1("1 25544U 98067A   23191.40640406  .00007611  00000+0  14335-3 0  9995");
+	QString    l2("2 25544  51.6398 233.5611 0000373  12.3897  91.4664 15.49560249404764");
+	OMM::ShPtr dut_tle(new OMM(l0, l1, l2));
+	QVERIFY(dut_tle->getObjectName() == "ISS (ZARYA)");
+	QCOMPARE(dut_xml->getInclination(), dut_tle->getInclination());
+	QCOMPARE(dut_xml->getAscendingNode(), dut_tle->getAscendingNode());
+	QCOMPARE(dut_xml->getArgumentOfPerigee(), dut_tle->getArgumentOfPerigee());
+	QCOMPARE(dut_xml->getEccentricity(), dut_tle->getEccentricity());
+	QCOMPARE(dut_xml->getMeanAnomoly(), dut_tle->getMeanAnomoly());
+	QCOMPARE(dut_xml->getMeanMotion(), dut_tle->getMeanMotion());
+	QCOMPARE(dut_xml->getRevAtEpoch(), dut_tle->getRevAtEpoch());
+	QCOMPARE(dut_xml->getEpoch()->getJulian(), dut_tle->getEpoch()->getJulian());
+}

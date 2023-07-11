@@ -18,3 +18,8 @@ ADD_EXECUTABLE(testOMMDateTime testOMMDateTime.cpp testOMMDateTime.hpp)
 TARGET_LINK_LIBRARIES(testOMMDateTime Qt${QT_VERSION_MAJOR}::Test Satellites-static stelMain)
 ADD_TEST(testOMMDateTime testOMMDateTime)
 SET_TARGET_PROPERTIES(testOMMDateTime PROPERTIES FOLDER "plugins/Satellites/test")
+
+ADD_EXECUTABLE(testSGP4 testSGP4.cpp testSGP4.hpp)
+TARGET_LINK_LIBRARIES(testSGP4 Qt${QT_VERSION_MAJOR}::Test Satellites-static stelMain)
+ADD_TEST(testSGP4 testSGP4)
+SET_TARGET_PROPERTIES(testSGP4 PROPERTIES FOLDER "plugins/Satellites/test")

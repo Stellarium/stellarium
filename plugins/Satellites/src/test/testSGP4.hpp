@@ -1,5 +1,4 @@
 /*
- * Stellarium
  * Copyright (C) 2023 Andy Kirkham
  *
  * This program is free software; you can redistribute it and/or
@@ -17,23 +16,18 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef TESTOMM_HPP
-#define TESTOMM_HPP
+#ifndef TESTSGP4_HPP
+#define TESTSGP4_HPP
 
 #include <QtTest>
 
-#include "OMM.hpp"
+#include "gSatTEME.hpp"
 
-class TestOMM : public QObject
+class TestSGP4 : public QObject
 {
 	Q_OBJECT
 private slots:
-	void testLegacyTle();
-	void testXMLread();
-	void testProcessTleLegacyLine0();
-	void testProcessTleLegacyLine1();
-	void testProcessTleLegacyLine2();
-	void testLegacyTleVsXML();
+	void testSGP4();
 };
 
-#endif // TESTOMM_HPP
+#endif // TESTSGP4_HPP
