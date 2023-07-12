@@ -25,7 +25,6 @@
 #include "StelFader.hpp"
 #include "StelLocation.hpp"
 #include "OMM.hpp"
-#include "helpers/SatellitesNAM_impl.hpp"
 
 #include <QDateTime>
 #include <QFile>
