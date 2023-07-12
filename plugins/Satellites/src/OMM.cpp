@@ -65,6 +65,11 @@ OMM::OMM(QString& l0, QString& l1, QString& l2)
 	processTleLegacyLine2();
 }
 
+OMM::OMM(const OMM& other)
+{
+	*this = other;
+}
+
 OMM& OMM::operator=(const OMM &o)
 {
 	if(this == &o) {

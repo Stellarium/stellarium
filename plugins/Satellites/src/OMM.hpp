@@ -75,6 +75,7 @@ public:
 	OMM(QString&, QString&);
 	OMM(QString&, QString&, QString&);
 
+	OMM(const OMM&);
 	OMM& operator=(const OMM&);
 
 	// Destructor.

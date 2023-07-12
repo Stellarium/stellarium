@@ -24,3 +24,8 @@ ADD_EXECUTABLE(testSGP4 testSGP4.cpp testSGP4.hpp)
 TARGET_LINK_LIBRARIES(testSGP4 Qt${QT_VERSION_MAJOR}::Test Satellites-static stelMain)
 ADD_TEST(testSGP4 testSGP4)
 SET_TARGET_PROPERTIES(testSGP4 PROPERTIES FOLDER "plugins/Satellites/test")
+
+ADD_EXECUTABLE(testOMMDownload testOMMDownload.cpp testOMMDownload.hpp)
+TARGET_LINK_LIBRARIES(testOMMDownload Qt${QT_VERSION_MAJOR}::Test Satellites-static stelMain)
+ADD_TEST(testOMMDownload testOMMDownload)
+SET_TARGET_PROPERTIES(testOMMDownload PROPERTIES FOLDER "plugins/Satellites/test")

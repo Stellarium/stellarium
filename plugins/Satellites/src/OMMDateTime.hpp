@@ -47,6 +47,8 @@ public:
 	OMMDateTime();
 	~OMMDateTime();
 
+	OMMDateTime(const OMMDateTime& other) { *this = other; }
+
 	OMMDateTime & operator=(const OMMDateTime &);
 
 	OMMDateTime(const QString& s, Type t = STR_TLE);
