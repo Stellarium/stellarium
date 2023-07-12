@@ -18,6 +18,7 @@
  */
 
 #include <cmath>
+#include <limits>
 
 #include <QPair>
 #include <QDebug>
@@ -31,6 +32,12 @@ OMM::OMM()
 
 OMM::~OMM()
 {}
+
+OMM::OMM(QJsonObject& o)
+{
+	m_source_type = SourceType::Json;
+	setFromJsonObj(o);
+}
 
 OMM::OMM(QXmlStreamReader& r)
 {
@@ -58,6 +65,35 @@ OMM::OMM(QString& l0, QString& l1, QString& l2)
 	processTleLegacyLine2();
 }
 
+OMM& OMM::operator=(const OMM &o)
+{
+	if(this == &o) {
+		return *this;
+	}
+	m_source_type = o.m_source_type;
+	m_line0 = o.m_line0;
+	m_line1 = o.m_line1;
+	m_line2 = o.m_line2;
+	m_sp_epoch = o.m_sp_epoch;
+	m_mean_motion = o.m_mean_motion;
+	m_eccentricity = o.m_eccentricity;
+	m_inclination = o.m_inclination;
+	m_ascending_node = o.m_ascending_node;
+	m_argument_perigee = o.m_argument_perigee;
+	m_mean_anomoly = o.m_mean_anomoly;
+	m_classification = o.m_classification;
+	m_norad_cat_id = o.m_norad_cat_id;
+	m_rev_at_epoch = o.m_rev_at_epoch;
+	m_bstar = o.m_bstar;
+	m_mean_motion_dot = o.m_mean_motion_dot;
+	m_mean_motion_ddot = o.m_mean_motion_ddot;
+	m_ephermeris_type = o.m_ephermeris_type;
+	m_element_number = o.m_element_number;
+	m_object_name = o.m_object_name;
+	m_object_id = o.m_object_id;
+	m_status = o.m_status;
+}
+
 bool OMM::hasValidLegacyTleData()
 {
 	if(m_source_type == SourceType::LegacyTle) {
@@ -66,6 +102,28 @@ bool OMM::hasValidLegacyTleData()
 		}
 	}
 	return false;
+}
+
+double OMM::getEpochJD()
+{
+	if(!m_sp_epoch.isNull()) {
+		return m_sp_epoch->getJulianDay() + m_sp_epoch->getJulianFrac();
+	}
+	return std::numeric_limits<double>::quiet_NaN();
+}
+
+bool OMM::setFromJsonObj(const QJsonObject & obj)
+{
+	foreach (const QString& key, obj.keys()) {
+		QJsonValue val = obj.value(key);
+		if(val.isUndefined() || val.isNull()) {
+			qDebug() << "Undefined value for key: " << key;
+		}
+		else {
+			processTagElement(key, val);
+		}
+	}
+	return true;
 }
 
 bool OMM::setFromXML(QXmlStreamReader & r)
@@ -93,7 +151,8 @@ bool OMM::setFromXML(QXmlStreamReader & r)
 				} 
 				else if (r.isEndElement()) {
 					if(!savedTag.isEmpty() && savedTag.size() > 0) {
-						processTagElement(savedTag, savedVal);
+						QJsonValue val(savedVal);
+						processTagElement(savedTag, val);
 					}
 					collectChars = false;
 					savedVal = "";
@@ -180,148 +239,162 @@ void OMM::processTleLegacyLine2(void)
 	}
 }
 
-// The following function fails CodeFcator Complexity rules on Github.
-// Replace it with a ton of helper functions.
+// OMM JSON come with "real" type information but in OMM XML everything is a string.
+// Each setter must check for unexpected string typing from XML and convert accordingly.
+// It's a shame that QJsonValue that is a string the toInt() and toDouble() do not 
+// work as you might think. Hence the toString().toInt/Double() shinanigans.
 
-bool OMM::setEpoch(const QString& val, const QString& tag)
+bool OMM::setEpoch(const QJsonValue& val, const QString& tag)
 {
 	if(tag.isEmpty() || tag == "EPOCH") {
-		m_sp_epoch = OMMDateTime::ShPtr(new OMMDateTime(val, OMMDateTime::STR_ISO8601));
+		m_sp_epoch = OMMDateTime::ShPtr(new OMMDateTime(val.toString(), OMMDateTime::STR_ISO8601));
 		return true;
 	}
 	return false;
 }
 
-bool OMM::setObjectName(const QString& val, const QString& tag)
+bool OMM::setObjectName(const QJsonValue& val, const QString& tag)
 {
 	if(tag.isEmpty() || tag == "OBJECT_NAME") {
-		m_object_name = val;
+		m_object_name = val.toString();
 		return true;
 	}
 	return false;
 }
 
-bool OMM::setObjectId(const QString & val, const QString & tag)
+bool OMM::setObjectId(const QJsonValue & val, const QString & tag)
 {
 	if (tag.isEmpty() || tag == "OBJECT_ID") {
-		m_object_id = val;
+		m_object_id = val.toString();
 		return true;
 	}
 	return false;
 }
 
-bool OMM::setMeanMotion(const QString& val, const QString& tag)
+bool OMM::setMeanMotion(const QJsonValue& val, const QString& tag)
 {
 	if(tag.isEmpty() || tag == "MEAN_MOTION") {
-		m_mean_motion = val.toDouble();
+		m_mean_motion = val.isString() ?
+			val.toString().toDouble() : val.toDouble();
 		return true;
 	}
 	return false;
 }
 
-bool OMM::setEccentricity(const QString & val, const QString & tag)
+bool OMM::setEccentricity(const QJsonValue & val, const QString & tag)
 {
 	if (tag.isEmpty() || tag == "ECCENTRICITY") {
-		m_eccentricity = val.toDouble();
+		m_eccentricity = val.isString() ?
+			val.toString().toDouble() : val.toDouble();
 		return true;
 	}
 	return false;
 }
 
-bool OMM::setInclination(const QString & val, const QString & tag)
+bool OMM::setInclination(const QJsonValue & val, const QString & tag)
 {
 	if (tag.isEmpty() || tag == "INCLINATION") {
-		m_inclination = val.toDouble();
+		m_inclination = val.isString() ?
+			val.toString().toDouble() : val.toDouble();
 		return true;
 	}
 	return false;
 }
 
-bool OMM::setAscendingNode(const QString & val, const QString & tag)
+bool OMM::setAscendingNode(const QJsonValue & val, const QString & tag)
 {
 	if (tag.isEmpty() || tag == "RA_OF_ASC_NODE") {
-		m_ascending_node = val.toDouble();
+		m_ascending_node = val.isString() ?
+			val.toString().toDouble() : val.toDouble();
 		return true;
 	}
 	return false;
 }
 
-bool OMM::setArgumentOfPerigee(const QString & val, const QString & tag)
+bool OMM::setArgumentOfPerigee(const QJsonValue & val, const QString & tag)
 {
 	if (tag.isEmpty() || tag == "ARG_OF_PERICENTER") {
-		m_argument_perigee = val.toDouble();
+		m_argument_perigee = val.isString() ?
+			val.toString().toDouble() : val.toDouble();
 		return true;
 	}
 	return false;
 }
 
-bool OMM::setMeanAnomoly(const QString & val, const QString & tag)
+bool OMM::setMeanAnomoly(const QJsonValue & val, const QString & tag)
 {
 	if (tag.isEmpty() || tag == "MEAN_ANOMALY") {
-		m_mean_anomoly = val.toDouble();
+		m_mean_anomoly = val.isString() ?
+			val.toString().toDouble() : val.toDouble();
 		return true;
 	}
 	return false;
 }
 
-bool OMM::setClassification(const QString & val, const QString & tag)
+bool OMM::setClassification(const QJsonValue & val, const QString & tag)
 {
 	if (tag.isEmpty() || tag == "CLASSIFICATION_TYPE") {
-		m_classification = val.at(0).toUpper();
+		m_classification = val.toString().at(0).toUpper();
 		return true;
 	}
 	return false;
 }
 
-bool OMM::setNoradcatId(const QString & val, const QString & tag)
+bool OMM::setNoradcatId(const QJsonValue & val, const QString & tag)
 {
 	if (tag.isEmpty() || tag == "NORAD_CAT_ID") {
-		m_norad_cat_id = val.toInt();
+		m_norad_cat_id = val.isString() ?
+			val.toString().toInt() : val.toInt();
 		return true;
 	}
 	return false;
 }
 
-bool OMM::setRevAtEpoch(const QString & val, const QString & tag)
+bool OMM::setRevAtEpoch(const QJsonValue & val, const QString & tag)
 {
 	if (tag.isEmpty() || tag == "REV_AT_EPOCH") {
-		m_rev_at_epoch = val.toInt();
+		m_rev_at_epoch = val.isString() ?
+			val.toString().toInt() : val.toInt();
 		return true;
 	}
 	return false;
 }
 
-bool OMM::setElementNumber(const QString & val, const QString & tag)
+bool OMM::setElementNumber(const QJsonValue & val, const QString & tag)
 {
 	if (tag.isEmpty() || tag == "ELEMENT_SET_NO") {
-		m_element_number = val.toInt();
+		m_element_number = val.isString() ?
+			val.toString().toInt() : val.toInt();
 		return true;
 	}
 	return false;
 }
 
-bool OMM::setBstar(const QString & val, const QString & tag)
+bool OMM::setBstar(const QJsonValue & val, const QString & tag)
 {
 	if (tag.isEmpty() || tag == "BSTAR") {
-		m_bstar = val.toDouble();
+		m_bstar = val.isString() ?
+			val.toString().toDouble() : val.toDouble();
 		return true;
 	}
 	return false;
 }
 
-bool OMM::setMeanMotionDot(const QString & val, const QString & tag)
+bool OMM::setMeanMotionDot(const QJsonValue & val, const QString & tag)
 {
 	if (tag.isEmpty() || tag == "MEAN_MOTION_DOT") {
-		m_mean_motion_dot = val.toDouble();
+		m_mean_motion_dot = val.isString() ?
+			val.toString().toDouble() : val.toDouble();
 		return true;
 	}
 	return false;
 }
 
-bool OMM::setMeanMotionDDot(const QString & val, const QString & tag)
+bool OMM::setMeanMotionDDot(const QJsonValue & val, const QString & tag)
 {
 	if (tag.isEmpty() || tag == "MEAN_MOTION_DDOT") {
-		m_mean_motion_ddot = val.toDouble();
+		m_mean_motion_ddot = val.isString() ?
+			val.toString().toDouble() : val.toDouble();
 		return true;
 	}
 	return false;
@@ -333,7 +406,7 @@ bool OMM::setMeanMotionDDot(const QString & val, const QString & tag)
 */
 
 // Function/method pointer type.
-typedef bool (OMM::*setter)(const QString&, const QString&);
+typedef bool (OMM::*setter)(const QJsonValue&, const QString&);
 
 // Table of function/method pointers
 static setter setFuncs[] 
@@ -361,7 +434,7 @@ static setter setFuncs[]
 #define TABLEN ((sizeof(setFuncs)/sizeof(setter))-1)
 
 // Looped setter from tag.
-void OMM::processTagElement(const QString& tag, const QString& val)
+void OMM::processTagElement(const QString& tag, const QJsonValue& val)
 {
 	if(!tag.isEmpty() && tag.size() > 0) {
 		int idx = 0;

@@ -13,6 +13,7 @@ TARGET_LINK_LIBRARIES(testOMM Qt${QT_VERSION_MAJOR}::Test Satellites-static stel
 ADD_TEST(testOMM testOMM)
 SET_TARGET_PROPERTIES(testOMM PROPERTIES FOLDER "plugins/Satellites/test")
 FILE(COPY "${CMAKE_SOURCE_DIR}/plugins/Satellites/src/test/test_data.xml" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}")
+FILE(COPY "${CMAKE_SOURCE_DIR}/plugins/Satellites/src/test/test_data.json" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}")
 
 ADD_EXECUTABLE(testOMMDateTime testOMMDateTime.cpp testOMMDateTime.hpp)
 TARGET_LINK_LIBRARIES(testOMMDateTime Qt${QT_VERSION_MAJOR}::Test Satellites-static stelMain)

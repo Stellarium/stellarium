@@ -24,6 +24,9 @@
 #include <QChar>
 #include <QString>
 #include <QDateTime>
+#include <QJsonValue>
+#include <QJsonArray>
+#include <QJsonObject>
 #include <QSharedPointer>
 #include <QXmlStreamReader>
 
@@ -64,13 +67,17 @@ public:
 	{
 		Invalid,
 		LegacyTle,
-		Xml
+		Xml,
+		Json
 	};
 
 	OMM();
+	OMM(QJsonObject&);
 	OMM(QXmlStreamReader& r);
 	OMM(QString&, QString&);
 	OMM(QString&, QString&, QString&);
+
+	OMM& operator=(const OMM&);
 
 	// Destructor.
 	virtual ~OMM();
@@ -88,9 +95,11 @@ public:
 	bool hasValidLegacyTleData();
 
 	bool setFromXML(QXmlStreamReader& r);
+	bool setFromJsonObj(const QJsonObject& obj);
 
 	virtual SourceType getSourceType() { return m_source_type; }
 
+	virtual double getEpochJD();
 	virtual OMMDateTime::ShPtr getEpoch() { return m_sp_epoch; }
 	virtual double getMeanMotion() { return m_mean_motion; }
 	virtual double getEccentricity() { return m_eccentricity; }
@@ -114,22 +123,22 @@ public:
 	virtual OptStatus getStatus() { return m_status; }
 
 	// Setter functions
-	bool setEpoch(const QString & val, const QString & tag = "");
-	bool setObjectName(const QString & val, const QString & tag = "");
-	bool setObjectId(const QString& val, const QString& tag = "");
-	bool setMeanMotion(const QString & val, const QString & tag = "");
-	bool setEccentricity(const QString & val, const QString & tag = "");
-	bool setInclination(const QString & val, const QString & tag = "");
-	bool setAscendingNode(const QString & val, const QString & tag = "");
-	bool setArgumentOfPerigee(const QString & val, const QString & tag = "");
-	bool setMeanAnomoly(const QString & val, const QString & tag = "");
-	bool setClassification(const QString & val, const QString & tag = "");
-	bool setNoradcatId(const QString & val, const QString & tag = "");
-	bool setRevAtEpoch(const QString & val, const QString & tag = "");
-	bool setElementNumber(const QString & val, const QString & tag = "");
-	bool setBstar(const QString & val, const QString & tag = "");
-	bool setMeanMotionDot(const QString & val, const QString & tag = "");
-	bool setMeanMotionDDot(const QString & val, const QString & tag = "");
+	bool setEpoch(const QJsonValue & val, const QString & tag = "");
+	bool setObjectName(const QJsonValue & val, const QString & tag = "");
+	bool setObjectId(const QJsonValue& val, const QString& tag = "");
+	bool setMeanMotion(const QJsonValue & val, const QString & tag = "");
+	bool setEccentricity(const QJsonValue & val, const QString & tag = "");
+	bool setInclination(const QJsonValue & val, const QString & tag = "");
+	bool setAscendingNode(const QJsonValue & val, const QString & tag = "");
+	bool setArgumentOfPerigee(const QJsonValue & val, const QString & tag = "");
+	bool setMeanAnomoly(const QJsonValue & val, const QString & tag = "");
+	bool setClassification(const QJsonValue & val, const QString & tag = "");
+	bool setNoradcatId(const QJsonValue & val, const QString & tag = "");
+	bool setRevAtEpoch(const QJsonValue & val, const QString & tag = "");
+	bool setElementNumber(const QJsonValue & val, const QString & tag = "");
+	bool setBstar(const QJsonValue & val, const QString & tag = "");
+	bool setMeanMotionDot(const QJsonValue & val, const QString & tag = "");
+	bool setMeanMotionDDot(const QJsonValue & val, const QString & tag = "");
 
 	OMM &setStatus(OptStatus s) { m_status = s; return *this; } 
 
@@ -143,7 +152,7 @@ private:
 	void processTleLegacyLine0(void);
 	void processTleLegacyLine1(void);
 	void processTleLegacyLine2(void);
-	void processTagElement(const QString& tag, const QString& val);
+	void processTagElement(const QString& tag, const QJsonValue& val);
 
 	SourceType m_source_type;
 	

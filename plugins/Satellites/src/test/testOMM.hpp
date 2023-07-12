@@ -34,6 +34,8 @@ private slots:
 	void testProcessTleLegacyLine1();
 	void testProcessTleLegacyLine2();
 	void testLegacyTleVsXML();
+	void testLegacyTleVsJSON();
+	void testCopyCTOR();
 };
 
 #endif // TESTOMM_HPP

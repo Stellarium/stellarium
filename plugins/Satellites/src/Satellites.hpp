@@ -25,6 +25,7 @@
 #include "StelFader.hpp"
 #include "StelLocation.hpp"
 #include "OMM.hpp"
+#include "helpers/SatellitesNAM_impl.hpp"
 
 #include <QDateTime>
 #include <QFile>
@@ -93,13 +94,6 @@ struct TleData
 {
 	//! OMM satellite details.
 	OMM omm;
-
-	//! NORAD catalog number, as extracted from the TLE set.
-	//QString id;
-	//! Human readable name, as extracted from the TLE title line.
-	//QString name;
-	//QString first;
-	//QString second;
 	int status;
 	//! Flag indicating whether this satellite should be added.
 	//! See Satellites::autoAddEnabled.

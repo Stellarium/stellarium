@@ -4,6 +4,7 @@ INCLUDE_DIRECTORIES(
      gui
      ${CMAKE_BINARY_DIR}/plugins/Satellites/src
      ${CMAKE_BINARY_DIR}/plugins/Satellites/src/gui
+     ${CMAKE_BINARY_DIR}/plugins/Satellites/src/helpers
 )
 
 LINK_DIRECTORIES(${CMAKE_BINARY_DIR}/src)

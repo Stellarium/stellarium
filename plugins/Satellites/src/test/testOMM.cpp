@@ -21,6 +21,7 @@
 #include <QDebug>
 #include <QVector>
 #include <QDateTime>
+#include <QByteArray>
 #include "testOMM.hpp"
 
 QTEST_GUILESS_MAIN(TestOMM)
@@ -151,6 +152,7 @@ void TestOMM::testLegacyTleVsXML()
 	}
 	file.close();
 
+	// Load the TLE version of the OMM and compare with the XML version.
 	QString    l0("ISS (ZARYA)");
 	//                       1         2         3         4         5         6         7
 	//             01234567890123456789012345678901234567890123456789012345678901234567890
@@ -158,6 +160,7 @@ void TestOMM::testLegacyTleVsXML()
 	QString    l2("2 25544  51.6398 233.5611 0000373  12.3897  91.4664 15.49560249404764");
 	OMM::ShPtr dut_tle(new OMM(l0, l1, l2));
 	QVERIFY(dut_tle->getObjectName() == "ISS (ZARYA)");
+	
 	QCOMPARE(dut_xml->getInclination(), dut_tle->getInclination());
 	QCOMPARE(dut_xml->getAscendingNode(), dut_tle->getAscendingNode());
 	QCOMPARE(dut_xml->getArgumentOfPerigee(), dut_tle->getArgumentOfPerigee());
@@ -167,3 +170,76 @@ void TestOMM::testLegacyTleVsXML()
 	QCOMPARE(dut_xml->getRevAtEpoch(), dut_tle->getRevAtEpoch());
 	QCOMPARE(dut_xml->getEpoch()->getJulian(), dut_tle->getEpoch()->getJulian());
 }
+
+void TestOMM::testLegacyTleVsJSON()
+{
+	OMM::ShPtr dut_json;
+	bool flag = false;
+	QFile file("test_data.json");
+	flag = file.open(QFile::ReadOnly | QFile::Text);
+	QVERIFY(true == flag);
+	if (!flag)
+		return;
+
+	QByteArray data = file.readAll();
+	file.close();
+	QJsonDocument doc(QJsonDocument::fromJson(data));
+	QJsonArray arr = doc.array();
+	for (const auto & item : arr) {
+		QJsonObject obj = item.toObject();
+		dut_json = OMM::ShPtr(new OMM(obj));
+		QVERIFY(dut_json->getObjectId() == "1998-067A");
+		if (dut_json->getObjectId() == "1998-067A")
+			break;
+	}
+
+	// Load the TLE version of the OMM and compare with the JSON version.
+	QString    l0("ISS (ZARYA)");
+	//                       1         2         3         4         5         6         7
+	//             01234567890123456789012345678901234567890123456789012345678901234567890
+	QString    l1("1 25544U 98067A   23191.40640406  .00007611  00000+0  14335-3 0  9995");
+	QString    l2("2 25544  51.6398 233.5611 0000373  12.3897  91.4664 15.49560249404764");
+	OMM::ShPtr dut_tle(new OMM(l0, l1, l2));
+	QVERIFY(dut_tle->getObjectName() == "ISS (ZARYA)");
+
+	QCOMPARE(dut_json->getInclination(), dut_tle->getInclination());
+	QCOMPARE(dut_json->getAscendingNode(), dut_tle->getAscendingNode());
+	QCOMPARE(dut_json->getArgumentOfPerigee(), dut_tle->getArgumentOfPerigee());
+	QCOMPARE(dut_json->getEccentricity(), dut_tle->getEccentricity());
+	QCOMPARE(dut_json->getMeanAnomoly(), dut_tle->getMeanAnomoly());
+	QCOMPARE(dut_json->getMeanMotion(), dut_tle->getMeanMotion());
+	QCOMPARE(dut_json->getRevAtEpoch(), dut_tle->getRevAtEpoch());
+	QCOMPARE(dut_json->getEpoch()->getJulian(), dut_tle->getEpoch()->getJulian());
+}
+
+void TestOMM::testCopyCTOR()
+{
+	QString    l0("ISS (ZARYA)");
+	//                    1         2         3         4         5         6         7
+	//          01234567890123456789012345678901234567890123456789012345678901234567890
+	QString    l1("1 25544U 98067A   23191.40640406  .00007611  00000+0  14335-3 0  9995");
+	QString    l2("2 25544  51.6398 233.5611 0000373  12.3897  91.4664 15.49560249404764");
+	OMM dut(l0, l1, l2);
+	QVERIFY(dut.getSourceType() == OMM::SourceType::LegacyTle);
+	QVERIFY(dut.hasValidLegacyTleData() == true);
+	QVERIFY(dut.getLine0() == l0);
+	QVERIFY(dut.getLine1() == l1);
+	QVERIFY(dut.getLine2() == l2);
+
+	OMM dut2(dut);
+	QVERIFY(dut2.getSourceType() == OMM::SourceType::LegacyTle);
+	QVERIFY(dut2.hasValidLegacyTleData() == true);
+	QVERIFY(dut2.getLine0() == l0);
+	QVERIFY(dut2.getLine1() == l1);
+	QVERIFY(dut2.getLine2() == l2);
+
+	OMM dut3;
+	dut3 = dut;
+	QVERIFY(dut3.getSourceType() == OMM::SourceType::LegacyTle);
+	QVERIFY(dut3.hasValidLegacyTleData() == true);
+	QVERIFY(dut3.getLine0() == l0);
+	QVERIFY(dut3.getLine1() == l1);
+	QVERIFY(dut3.getLine2() == l2);
+}
+
+
