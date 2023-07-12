@@ -56,3 +56,23 @@ void TestOMMDateTime::testEpoch_ISO()
 	QCOMPARE(dut.getJulian(), 2460135.906404059846);
 }
 
+void TestOMMDateTime::testOperatorEquals()
+{
+	QString epoch("23191.40640406"); // 2023-07-10T09:45:13.310784 :: JD 2460135.90640406
+	OMMDateTime dut1(epoch, OMMDateTime::STR_TLE);
+	QCOMPARE(dut1.getJulian(), 2460135.906404059846);
+	
+	OMMDateTime dut2;
+	dut2 = dut1;
+	QCOMPARE(dut1.getJulian(), dut2.getJulian());
+}
+
+void TestOMMDateTime::testCopyCTOR()
+{
+	QString     epoch("23191.40640406"); // 2023-07-10T09:45:13.310784 :: JD 2460135.90640406
+	OMMDateTime dut1(epoch, OMMDateTime::STR_TLE);
+	QCOMPARE(dut1.getJulian(), 2460135.906404059846);
+
+	OMMDateTime dut2(dut1);
+	QCOMPARE(dut1.getJulian(), dut2.getJulian());
+}

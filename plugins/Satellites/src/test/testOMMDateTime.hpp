@@ -30,6 +30,8 @@ private slots:
 	void testEpoch_DEFAULT();
 	void testEpoch_TLE();
 	void testEpoch_ISO();
+	void testOperatorEquals();
+	void testCopyCTOR();
 };
 
 #endif // TESTDATETIME_HPP

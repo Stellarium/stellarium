@@ -36,6 +36,7 @@ private slots:
 	void testLegacyTleVsXML();
 	void testLegacyTleVsJSON();
 	void testCopyCTOR();
+	void testOperatorEquals();
 };
 
 #endif // TESTOMM_HPP

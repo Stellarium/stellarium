@@ -43,6 +43,14 @@ OMMDateTime::OMMDateTime(const QString & s, Type t)
 	}
 }
 
+OMMDateTime& 
+OMMDateTime::operator=(const OMMDateTime &other)
+{
+	m_epoch_jd = other.m_epoch_jd;
+	m_epoch_jd_frac = other.m_epoch_jd_frac;
+	return *this;
+}
+
 // From SGP4.cpp
 static void jday_SGP4(int year, int mon, int day, int hr, int minute, double sec, double & jd, double & jdFrac)
 {

@@ -39,8 +39,6 @@
 class OMMDateTime
 {
 public:
-	typedef QSharedPointer<OMMDateTime> ShPtr;
-
 	enum Type {
 		STR_TLE,
 		STR_ISO8601
@@ -48,6 +46,8 @@ public:
 
 	OMMDateTime();
 	~OMMDateTime();
+
+	OMMDateTime & operator=(const OMMDateTime &);
 
 	OMMDateTime(const QString& s, Type t = STR_TLE);
 

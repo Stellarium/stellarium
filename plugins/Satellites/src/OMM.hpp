@@ -35,8 +35,6 @@
 class OMM
 {
 public:
-	typedef QSharedPointer<OMM> ShPtr;
-
 	//! @enum OptStatus operational statuses
 	enum class OptStatus
 	{
@@ -90,7 +88,7 @@ public:
 	virtual const QString& getLine1() const { return m_line1; }
 	virtual const QString& getLine2() const { return m_line2; }
 
-	bool hasValidEpoch() { return m_sp_epoch.isNull() == false; }
+	bool hasValidEpoch() { return m_epoch.getJulian() > 0.0; }
 
 	bool hasValidLegacyTleData();
 
@@ -100,7 +98,7 @@ public:
 	virtual SourceType getSourceType() { return m_source_type; }
 
 	virtual double getEpochJD();
-	virtual OMMDateTime::ShPtr getEpoch() { return m_sp_epoch; }
+	virtual OMMDateTime getEpoch() { return m_epoch; }
 	virtual double getMeanMotion() { return m_mean_motion; }
 	virtual double getEccentricity() { return m_eccentricity; }
 	virtual double getInclination() { return m_inclination; }
@@ -162,7 +160,7 @@ private:
 	QString m_line2{};
 
 	// Mean elements.
-	OMMDateTime::ShPtr m_sp_epoch{};
+	OMMDateTime m_epoch{};
 	double m_mean_motion{};
 	double m_eccentricity{};
 	double m_inclination{};

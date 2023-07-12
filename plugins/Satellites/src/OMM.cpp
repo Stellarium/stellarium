@@ -70,11 +70,12 @@ OMM& OMM::operator=(const OMM &o)
 	if(this == &o) {
 		return *this;
 	}
+	
 	m_source_type = o.m_source_type;
 	m_line0 = o.m_line0;
 	m_line1 = o.m_line1;
 	m_line2 = o.m_line2;
-	m_sp_epoch = o.m_sp_epoch;
+	m_epoch = o.m_epoch;
 	m_mean_motion = o.m_mean_motion;
 	m_eccentricity = o.m_eccentricity;
 	m_inclination = o.m_inclination;
@@ -92,6 +93,7 @@ OMM& OMM::operator=(const OMM &o)
 	m_object_name = o.m_object_name;
 	m_object_id = o.m_object_id;
 	m_status = o.m_status;
+	return *this;
 }
 
 bool OMM::hasValidLegacyTleData()
@@ -106,10 +108,7 @@ bool OMM::hasValidLegacyTleData()
 
 double OMM::getEpochJD()
 {
-	if(!m_sp_epoch.isNull()) {
-		return m_sp_epoch->getJulianDay() + m_sp_epoch->getJulianFrac();
-	}
-	return std::numeric_limits<double>::quiet_NaN();
+	return m_epoch.getJulian();
 }
 
 bool OMM::setFromJsonObj(const QJsonObject & obj)
@@ -197,7 +196,7 @@ void OMM::processTleLegacyLine1(void)
 {
 	if (!m_line1.isEmpty() && m_line1.at(0) == '1') {
 		auto epoch_str    = m_line1.mid(EPOCH.first, EPOCH.second).trimmed();
-		m_sp_epoch        = OMMDateTime::ShPtr(new OMMDateTime(epoch_str));
+		m_epoch           = OMMDateTime(epoch_str);
  		m_norad_cat_id    = m_line1.mid(NORAD_CAT_ID.first, NORAD_CAT_ID.second).toInt();
 		m_classification  = m_line1.at(CLASSIFICATION_TYPE.first);
 		m_object_id       = m_line1.mid(OBJECT_ID.first, OBJECT_ID.second).trimmed();
@@ -247,7 +246,7 @@ void OMM::processTleLegacyLine2(void)
 bool OMM::setEpoch(const QJsonValue& val, const QString& tag)
 {
 	if(tag.isEmpty() || tag == "EPOCH") {
-		m_sp_epoch = OMMDateTime::ShPtr(new OMMDateTime(val.toString(), OMMDateTime::STR_ISO8601));
+		m_epoch = OMMDateTime(val.toString(), OMMDateTime::STR_ISO8601);
 		return true;
 	}
 	return false;
