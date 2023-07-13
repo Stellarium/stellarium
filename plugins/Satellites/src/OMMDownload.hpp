@@ -46,6 +46,13 @@
 //! Auxiliary class for the %Satellites plugin.
 //! @author Andy Kirkham
 //! @ingroup satellites
+//! 
+//! Used to abstract the QNetworkAccessManager from the
+//! main classes as that particular class makes writing
+//! unit tests almost impossible. This class wrapps the
+//! QNAM and provides a simulatot that can be enabled
+//! for unit tests to hook into using QSignalSpy without
+//! any network calls being made.
 class OMMDownload : public QObject
 {
 	Q_OBJECT
