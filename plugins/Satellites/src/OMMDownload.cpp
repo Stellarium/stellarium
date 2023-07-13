@@ -19,56 +19,102 @@
 
 #include "OMMDownload.hpp"
 
-OMMDownload::OMMDownload()
-{}
+OMMDownload::OMMDownload() :
+	m_sim(sim_t::SIM_REMOTE),
+	m_ptim(new QTimer(this)),
+	m_nam(new QNetworkAccessManager(this))
+{
+	connect(m_nam, SIGNAL(finished(QNetworkReply*)), this, SLOT(slotDownloadComplete(QNetworkReply*)));
+}
 
 OMMDownload::~OMMDownload()
-{
-	if(m_ptim != nullptr) {
-		delete m_ptim;
-	}
-}
+{}
+
+OMMDownload::OMMDownload(sim_t s) :
+	m_sim(s),
+	m_ptim(new QTimer(this))
+{}
 
 void OMMDownload::execute(void)
 {
 	if (m_sim == sim_t::SIM_REMOTE) {
-		executeSim();
+		executeRemote();
 	}
 	else {
-		executeSim();
 		// Simulators.
-/*
 		switch(m_sim) {
 			default:
-			case sim_t::SIM_LOCAL_INLINE:
 				executeSim();
 				break;
 		}
-*/
 	}
+}
+
+void OMMDownload::executeRemote(void)
+{
+	if (!m_req_list.isEmpty()) {
+		m_curr_req = m_req_list.takeFirst();
+		if(!m_curr_req.isNull()) {
+			m_nam->get(*(m_curr_req.data()));
+		}
+	}
+	else {
+		emit executeComplete();
+	}
+}
+
+void OMMDownload::slotDownloadComplete(QNetworkReply* p_reply) 
+{
+	emit fileDownloadComplete(p_reply);
+	executeRemote();
 }
 
 void OMMDownload::executeSim(void)
 {
-	m_current_itor = m_uriMap.begin();
-	m_current_key = m_current_itor.key();
-	m_current_val = m_current_itor.value();
-	m_ptim = new QTimer;
-	m_ptim->setInterval(100);
-	connect(m_ptim, &QTimer::timeout, this, &OMMDownload::slotSimulateEnd);
-	m_ptim->start();
+	if (m_req_list.isEmpty()) {
+		//qDebug() << "Emitting 'executeComplete' signal";
+		emit executeComplete();
+	}
+	else {
+		m_curr_req = m_req_list.takeFirst();
+		m_ptim->setInterval(20);
+		connect(m_ptim, &QTimer::timeout, this, &OMMDownload::slotSimulateEnd);
+		m_ptim->start();
+	}
 }
+
+static char testdata[] = "TESTDATA";
 
 void OMMDownload::slotSimulateEnd(void)
 {
-	emit fileDownloadComplete(m_current_key);
-	m_current_itor++;
-	if(m_current_itor != m_uriMap.end()) {
-		m_current_key = m_current_itor.key();
-		m_current_val = m_current_itor.value();
+	m_ptim->stop();
+	char* p_test = testdata;
+	QNetworkReply* p = reinterpret_cast<QNetworkReply*>(p_test);
+	emit fileDownloadComplete(p);
+	executeSim();
+}
+
+
+#if 0
+void OMMDownload::handleDownloadedData(QNetworkReply* p_reply)
+{
+	QByteArray data = p_reply->readAll();
+	qDebug() << "URL: " << p_reply->url().toString(QUrl::RemoveUserInfo);
+	QString path;
+
+	//path.append(m_pluginDataDir.dirName());
+	//path.append(QDir::separator());
+	path.append(m_current_key);
+	qDebug() << path;
+
+	QFile * tmpFile = new QFile(path, this);
+	if (tmpFile->exists()) {
+		tmpFile->remove();
 	}
-	else {
-		m_ptim->stop();
-		emit executeComplete();
+	if (tmpFile->open(QIODevice::WriteOnly | QIODevice::Text)) {
+		tmpFile->write(data);
+		tmpFile->close();
 	}
 }
+#endif
+

@@ -20,6 +20,13 @@
 #ifndef TESTDOWNLOAD_HPP
 #define TESTDOWNLOAD_HPP
 
+// **********************************************************
+// * Warning, enabling this UT will cause a Network GET     *
+// * of the stations.txt data from Celestrak. Do not commit *
+// * this UT enabled! This UT only exists for testing.      *
+// **********************************************************
+/*              #define GET_REAL_CELESTRAK                  */
+
 #include <QtTest>
 
 #include "OMMDownload.hpp"
@@ -30,6 +37,12 @@ class TestOMMDownload : public QObject
 private slots:
 	void testUT();
 	void testSim();
+#ifdef GET_REAL_CELESTRAK
+	// Warning, enabling this UT will cause a Network GET
+	// of the stations data from Celestrak. Do not commit 
+	// this UT enabled!
+	void testStations();
+#endif
 };
 
 #endif // TESTDOWNLOAD_HPP

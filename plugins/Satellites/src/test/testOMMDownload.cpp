@@ -35,33 +35,80 @@ static void delay(int d)
 
 void TestOMMDownload::testUT()
 {
-	OMMDownload dut;
-	QVERIFY(dut.getSim() == OMMDownload::sim_t::SIM_REMOTE);
+	OMMDownload dut(OMMDownload::sim_t::SIM_LOCAL_INLINE);
+	QVERIFY(dut.getSim() == OMMDownload::sim_t::SIM_LOCAL_INLINE);
 	dut.setSim(OMMDownload::sim_t::SIM_LOCAL_TLE);
 	QVERIFY(dut.getSim() != OMMDownload::sim_t::SIM_REMOTE);
 	QVERIFY(dut.getSim() == OMMDownload::sim_t::SIM_LOCAL_TLE);
 }
 
-static QPair<QString, QString> fakes[2] =
-{
-	{ "key1", "val1" },
-	{ "key2", "val2" }
-};
-
 void TestOMMDownload::testSim()
 {
-	int sig_count = 0;
-	OMMDownload dut;
-	dut.setSim(OMMDownload::sim_t::SIM_LOCAL_INLINE);
-	for(int i = 0; i < 2; i++) {
-		dut.addURI(fakes[i]);
-	}
-	QSignalSpy spy(&dut, &OMMDownload::fileDownloadComplete);
+	bool spy_result = false;
+	
+	OMMDownload dut(OMMDownload::sim_t::SIM_LOCAL_INLINE);
+
+	OMMDownload::ReqShPtr req(new QNetworkRequest);
+	
+	dut.addReqShPtr(req);
+
+	// Setup the signal spy to capture the emit
+	qRegisterMetaType<QNetworkReply*>();
+	QSignalSpy spy(&dut, SIGNAL(fileDownloadComplete(QNetworkReply*)));
+	
+	// Run the test.
 	dut.execute();
-	while(spy.wait(1) && sig_count < 2) {
-		QVERIFY(spy.isEmpty() == false);
-		QList<QVariant> rxed = spy.takeFirst();
-		QCOMPARE(rxed.at(0).toString(), fakes[sig_count].first);
-		sig_count++;
+
+	while(spy.wait(50)) {
+		if(spy.count() > 0) {
+			spy_result = true;
+		}
 	}
+	QVERIFY(spy_result == true);
 }
+
+#ifdef GET_REAL_CELESTRAK
+
+//! Demonstrates the usage of OMMDownload object for real.
+//! Never allow this UT to be commited to GH enabled!
+
+#include <iostream>
+
+void TestOMMDownload::testStations()
+{
+	bool spy_result = false;
+
+	// Prepare a "real" OMMDownload instance (will make a network call!)
+	OMMDownload dut;
+
+	// Creape a request to make, here it's to Celestrak for stations.txt
+	OMMDownload::ReqShPtr sp_req(new QNetworkRequest);
+	sp_req->setUrl(QUrl("https://celestrak.org/NORAD/elements/gp.php?GROUP=stations&FORMAT=tle"));
+
+	// Queue it up for download.
+	dut.addReqShPtr(sp_req);
+
+	// Prepare a signal spy to capture the emitted signal when download complete.
+	QSignalSpy spy(&dut, SIGNAL(fileDownloadComplete(QNetworkReply*)));
+	QVERIFY(spy.isValid());
+
+	// Begin downloads.
+	dut.execute();
+
+	// Give the download a chance to complete.
+	spy.wait();
+
+	// Check we captured one emitted signal.
+	QVERIFY(spy.count(), 1);
+
+	// Get a hold of the QNetworkReply* instance and peek inside.
+	QList<QVariant> firstSignalArgs = spy.takeFirst();
+	QNetworkReply* pr = firstSignalArgs.at(0).value<QNetworkReply*>();
+
+	QVERIFY(pr != nullptr);
+	if (pr != nullptr) {
+		QByteArray payload = pr->readAll();
+		std::cout << payload.toStdString();
+	}	
+}
+#endif

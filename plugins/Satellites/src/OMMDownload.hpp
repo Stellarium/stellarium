@@ -17,23 +17,44 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
+/*
+ * When writing Unit Tests one problem stands out and that is the inability
+ * of creating Mock Class Types from Q classes that derive from QObject and
+ * which emit signals.
+ * This is most notable for the QNetworkAccessManager that would actually make
+ * network calls when Unit Tests run. This class is used to perform any network
+ * access requests. It has a buit in simulator and can be configured to make
+ * mock network requests and emit fake signals that can be captured in Unit Tests
+ * using the QSignalSpy system.
+ * This allows the use of Dependancy Injection to setup Unit Tests that are self
+ * contained and make no network calls during the Unit Test run at build time.
+ */
+
 #ifndef SATELLITES_OMMDOWNLOAD_HPP
 #define SATELLITES_OMMDOWNLOAD_HPP
 
-#include <QDir>
-#include <QPair>
-#include <QHash>
+#include <QList>
 #include <QDebug>
 #include <QTimer>
-#include <QString>
 #include <QObject>
 #include <QSharedPointer>
+#include <QNetworkReply>
+#include <QNetworkRequest>
+#include <QNetworkAccessManager>
 
 class OMMDownload : public QObject
 {
 	Q_OBJECT
 
 public:
+	typedef QSharedPointer<QNetworkRequest> ReqShPtr;
+
+	union Response {
+		void* m_fake_reply;
+		QNetworkReply* m_reply;
+	};
+	typedef QSharedPointer<Response> ResponseShPtr;
+	
 	enum class sim_t
 	{
 		SIM_REMOTE = 0,
@@ -46,25 +67,10 @@ public:
 	OMMDownload();
 	virtual ~OMMDownload();
 
-	OMMDownload(sim_t s) : m_sim(s) {}
+	OMMDownload(sim_t s);
 
-	virtual OMMDownload & setPluginDataDir(const QDir & d) {
-		m_pluginDataDir = d;
-		return *this;
-	}
-
-	virtual OMMDownload& clrURIS(void) {
-		m_uriMap.clear();
-		return *this;
-	}
-
-	virtual OMMDownload& setURIs(const QHash<QString, QString> & m) { 
-		m_uriMap = m;
-		return *this;
-	}
-
-	virtual OMMDownload& addURI(const QPair<QString,QString>& pair) { 
-		m_uriMap.insert(pair.first, pair.second);
+	virtual OMMDownload& addReqShPtr(const ReqShPtr req) {
+		m_req_list.append(req);
 		return *this;
 	}
 
@@ -78,14 +84,24 @@ public:
 
 public slots:
 	void slotSimulateEnd(void);
+	void slotDownloadComplete(QNetworkReply *);
 
 signals:
-	void fileDownloadComplete(const QString& filename);
+	void fileDownloadComplete(QNetworkReply*);
+	void fileDownloadFailed(QNetworkReply*);
 	void executeComplete(void);
 
 private:
 
+	//! executeSim()
+	//! Used to begin a simulated run of network requests
 	virtual void executeSim(void);
+
+	//! executeRemote()
+	//!	Used to begin a requested run of network requests.
+	virtual void executeRemote(void);
+
+	QNetworkAccessManager *m_nam{nullptr};
 
 	sim_t m_sim{sim_t::SIM_REMOTE};
 
@@ -93,22 +109,11 @@ private:
 	//! In sim mode it's used to create a delay in simulation.
 	QTimer* m_ptim{nullptr};
 
-	//! The directory to store downloads in.
-	QDir m_pluginDataDir;
+	//! The current request in operation.
+	ReqShPtr m_curr_req{};
 
-	//! When a download is requested the current QHash key is placed here.
-	QString m_current_key;
-	//! When a download is requested the current QHash val is placed here.
-	QString m_current_val;
-
-	//! m_uriMap
-	//! A key value map of Internet downloads to make.
-	//! The key (dst) is the filename to store locally in m_pluginDataDir
-	//! The value (src) is the URI to fetch from the Internet.
-	QHash<QString, QString> m_uriMap;
-
-	//! The currently downloading file
-	QHash<QString, QString>::iterator m_current_itor;
+	//! The list of requests waiting.
+	QList<ReqShPtr> m_req_list{};
 };
 
 #endif
