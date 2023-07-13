@@ -110,6 +110,8 @@ public:
 
 	bool hasValidLegacyTleData();
 
+	void toJsonObj(QJsonObject&);
+
 	bool setFromXML(QXmlStreamReader& r);
 	bool setFromJsonObj(const QJsonObject& obj);
 

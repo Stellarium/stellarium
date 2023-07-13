@@ -37,6 +37,7 @@ private slots:
 	void testLegacyTleVsJSON();
 	void testCopyCTOR();
 	void testOperatorEquals();
+	void testFetchJSONObj();
 };
 
 #endif // TESTOMM_HPP

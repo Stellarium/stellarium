@@ -54,6 +54,7 @@ OMMDateTime::operator=(const OMMDateTime &other)
 {
 	m_epoch_jd = other.m_epoch_jd;
 	m_epoch_jd_frac = other.m_epoch_jd_frac;
+	m_epoch_str = other.m_epoch_str;
 	return *this;
 }
 

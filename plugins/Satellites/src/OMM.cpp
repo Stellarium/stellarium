@@ -101,6 +101,27 @@ OMM& OMM::operator=(const OMM &o)
 	return *this;
 }
 
+void OMM::toJsonObj(QJsonObject& rval) 
+{
+	rval.insert("OBJECT_NAME", QJsonValue(m_object_name));
+	rval.insert("NORAD_CAT_ID", QJsonValue(m_norad_cat_id));
+	rval.insert("CLASSIFICATION_TYPE", QJsonValue(m_classification));
+	rval.insert("OBJECT_ID", QJsonValue(m_object_id));
+	rval.insert("EPOCH", QJsonValue(m_epoch.toISO8601String()));
+	rval.insert("MEAN_MOTION_DOT", QJsonValue(m_mean_motion_dot));
+	rval.insert("MEAN_MOTION_DDOT", QJsonValue(m_mean_motion_ddot));
+	rval.insert("BSTAR", QJsonValue(m_bstar));
+	rval.insert("EPHEMERIS_TYPE", QJsonValue(m_ephermeris_type));
+	rval.insert("ELEMENT_NUMBER", QJsonValue(m_element_number));
+	rval.insert("INCLINATION", QJsonValue(m_inclination));
+	rval.insert("RA_OF_ASC_NODE", QJsonValue(m_ascending_node));
+	rval.insert("ECCENTRICITY", QJsonValue(m_eccentricity));
+	rval.insert("ARG_OF_PERICENTER", QJsonValue(m_argument_perigee));
+	rval.insert("MEAN_ANOMALY", QJsonValue(m_mean_anomoly));
+	rval.insert("MEAN_MOTION", QJsonValue(m_mean_motion));
+	rval.insert("REV_AT_EPOCH", QJsonValue(m_rev_at_epoch));
+}
+
 bool OMM::hasValidLegacyTleData()
 {
 	if(m_source_type == SourceType::LegacyTle) {

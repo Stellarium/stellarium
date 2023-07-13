@@ -22,6 +22,9 @@
 #include <QVector>
 #include <QDateTime>
 #include <QByteArray>
+#include <QJsonObject>
+#include <QJsonValue>
+
 #include "testOMM.hpp"
 
 QTEST_GUILESS_MAIN(TestOMM)
@@ -257,3 +260,47 @@ void TestOMM::testOperatorEquals()
 	QVERIFY(dut2.getLine1() == l1);
 	QVERIFY(dut2.getLine2() == l2);
 }
+
+void TestOMM::testFetchJSONObj() 
+{
+	QString l0("ISS (ZARYA)");
+	//                    1         2         3         4         5         6         7
+	//          01234567890123456789012345678901234567890123456789012345678901234567890
+	QString l1("1 25544U 98067A   23191.40640406  .00007611  00000+0  14335-3 0  9995");
+	QString l2("2 25544  51.6398 233.5611 0000373  12.3897  91.4664 15.49560249404764");
+	OMM     src(l0, l1, l2);
+
+	QJsonObject dut;
+	src.toJsonObj(dut);
+
+	//qDebug() << "Count: " << dut.count();
+	//qDebug() << dut;
+
+	QJsonValue value;
+
+	value = dut.take("OBJECT_NAME");
+	QVERIFY(value != QJsonValue::Undefined);
+	QCOMPARE(value.toString(), "ISS (ZARYA)");
+
+	value = dut.take("EPOCH");
+	QVERIFY(value != QJsonValue::Undefined);
+	QCOMPARE(value.toString(), "2023-07-10T09:45:13.3108");
+
+	value = dut.take("ARG_OF_PERICENTER");
+	QVERIFY(value != QJsonValue::Undefined);
+	QCOMPARE(value.toDouble(), 12.3897);
+
+	value = dut.take("BSTAR");
+	QVERIFY(value != QJsonValue::Undefined);
+	QCOMPARE(value.toDouble(), 0.00014335);
+
+	value = dut.take("CLASSIFICATION_TYPE");
+	QVERIFY(value != QJsonValue::Undefined);
+	QCOMPARE(value.toString(), "U");
+
+	value = dut.take("RA_OF_ASC_NODE");
+	QVERIFY(value != QJsonValue::Undefined);
+	QCOMPARE(value.toDouble(), 233.5611);
+}
+
+
