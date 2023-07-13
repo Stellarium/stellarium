@@ -1085,7 +1085,7 @@ void BottomStelBar::updateText(bool updatePos, bool updateTopocentric)
 			fovPixmap->setPos(datetimePixmap->x()-fovShift, yPos);
 			fpsPixmap->setPos(datetimePixmap->x()-fpsShift, yPos);
 		}
-		emit sizeChanged();
+		// emit sizeChanged();
 	}
 }
 
