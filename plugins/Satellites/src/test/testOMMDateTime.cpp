@@ -76,3 +76,13 @@ void TestOMMDateTime::testCopyCTOR()
 	OMMDateTime dut2(dut1);
 	QCOMPARE(dut1.getJulian(), dut2.getJulian());
 }
+
+void TestOMMDateTime::testToISO8601()
+{
+	QString epoch("23194.57613635"); // 2023-07-13T13:49:38.180640
+	OMMDateTime dut(epoch, OMMDateTime::STR_TLE);
+    QString s = dut.toISO8601String();
+
+	// TLE dates are only accurate to 1/10 of a millisecond.
+	QCOMPARE(s, "2023-07-13T13:49:38.1806");
+}

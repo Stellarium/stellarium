@@ -17,9 +17,15 @@
  */
 
 #include <cmath>
+#include <chrono>
+#include <string>
+#include <iomanip>
+#include <sstream>
+
 #include <QChar>
 #include <QDate>
 #include <QDebug>
+#include <QString>
 
 #include "OMMDateTime.hpp"
 
@@ -77,18 +83,28 @@ void OMMDateTime::ctorTle(const QString & s)
 	d = d.addDays(whole_day - 1); // Minus 1 because we start on 1st Jan.
 
 	// Create the time.
-	double seconds = (24 * 60 * 60) * frac_day;
+	double seconds = (24. * 60. * 60.) * frac_day;
 	int whole_hours = std::floor(seconds / 3600);
-	seconds -= whole_hours * 3600;
-	int whole_mins = std::floor(seconds / 60);
-	seconds -= whole_mins * 60;
+	seconds -= whole_hours * 3600.;
+	int whole_mins = std::floor(seconds / 60.);
+	seconds -= whole_mins * 60.;
 
 	jday_SGP4(d.year(), d.month(), d.day(), whole_hours, whole_mins, seconds, m_epoch_jd, m_epoch_jd_frac);
+	
+	std::stringstream oss;
+	oss << std::setw(4) << d.year() << "-";
+	oss << std::setw(2) << std::setfill('0') << d.month() << "-";
+	oss << std::setw(2) << std::setfill('0') << d.day() << "T";
+	oss << std::setw(2) << std::setfill('0') << whole_hours << ":";
+	oss << std::setw(2) << std::setfill('0') << whole_mins << ":"; 
+	oss << std::setw(2) << std::setfill('0') << seconds;
+	m_epoch_str = QString(oss.str().c_str());
 }
 
 void OMMDateTime::ctorISO(const QString & s)
 {
 	QDateTime d = QDateTime::fromString(s, Qt::ISODate);
+	m_epoch_str = s;
 	int year = d.date().year();
 	int mon = d.date().month();
 	int day = d.date().day();

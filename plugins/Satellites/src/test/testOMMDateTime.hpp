@@ -32,6 +32,7 @@ private slots:
 	void testEpoch_ISO();
 	void testOperatorEquals();
 	void testCopyCTOR();
+	void testToISO8601();
 };
 
 #endif // TESTDATETIME_HPP

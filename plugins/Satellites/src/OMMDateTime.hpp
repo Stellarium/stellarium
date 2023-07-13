@@ -74,12 +74,15 @@ public:
 
 	double getJulian() { return m_epoch_jd + m_epoch_jd_frac; }
 
+	QString toISO8601String() { return m_epoch_str; };
+
 private:
 	void ctorTle(const QString & s);
 	void ctorISO(const QString & s);
 
 	double m_epoch_jd{};
 	double m_epoch_jd_frac{};
+	QString m_epoch_str{};
 };
 
 #endif
