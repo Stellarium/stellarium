@@ -247,6 +247,8 @@ void NavStarsWindow::populateNavigationalStarsSets()
 	nsSets->addItem("Meade LX200", "MeadeLX200");
 	nsSets->addItem("Meade ETX", "MeadeETX");
 	nsSets->addItem("Celestron", "Celestron");
+	// TRANSLATORS: Part of full phrase: Apollo space program set of navigational stars
+	nsSets->addItem(q_("Apollo space program"), "Apollo");
 
 	//Restore the selection
 	index = nsSets->findData(selectedNsSetId, Qt::UserRole, Qt::MatchCaseSensitive);

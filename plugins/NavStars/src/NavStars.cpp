@@ -435,6 +435,11 @@ QString NavStars::getCurrentNavigationalStarsSetDescription() const
 			txt = q_("Even though there are about 250 named stars in the hand control database, only 82 (stars brighter than or equal to magnitude 2.5) can be used for alignment and related tasks.");
 			break;
 		}
+		case Apollo:
+		{
+			txt = q_("These 37 stars were used by the Apollo space program to navigate to the Moon from 1969-1972, Apollo 11 through Apollo 17.");
+			break;
+		}
 	}
 
 	return txt;
@@ -592,6 +597,20 @@ void NavStars::populateNavigationalStarsSet(void)
 				     <<  87833 << 100453 <<    746 <<   9640 <<  66811 <<  80404 <<  65378
 				     <<  78401 <<   2081 <<  53910 <<  58001 <<  84012 << 105199 << 107315
 				     << 113881 <<   4427 <<  14135 <<  35904 << 113963;
+			break;
+		}
+		case Apollo:
+		{
+			// Apollo Alignment Star List (37 stars)
+			// Sources: https://history.nasa.gov/alsj/alsj-AOTNavStarsDetents.html
+			//          https://www.spaceartifactsarchive.com/2013/05/the-star-chart-of-apollo.html
+			starNumbers  <<    677 <<   3419 <<   4427 <<   7588 <<  11767 <<  13847 <<  13954
+				     <<      0 <<      0 <<  15863 <<  21421 <<  24436 <<  24608 <<  30438
+				     <<  32349 <<  37279 <<  39953 <<      0 <<      0 <<  44127 <<  46390
+				     <<  49669 <<  57632 <<  59803 <<  60718 <<  65474 <<  67301 <<      0
+				     <<      0 <<  68933 <<  69673 <<  76267 <<  80763 <<  82273 <<  86032
+				     <<  91262 <<  92855 <<      0 <<      0 <<  97649 << 100345 << 100751
+				     << 102098 << 107315 << 113368;
 			break;
 		}
 	}
