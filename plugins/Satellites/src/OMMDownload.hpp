@@ -42,6 +42,10 @@
 #include <QNetworkRequest>
 #include <QNetworkAccessManager>
 
+//! @class OMMDownload
+//! Auxiliary class for the %Satellites plugin.
+//! @author Andy Kirkham
+//! @ingroup satellites
 class OMMDownload : public QObject
 {
 	Q_OBJECT

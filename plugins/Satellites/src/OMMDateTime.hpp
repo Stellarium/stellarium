@@ -36,9 +36,24 @@
 #include <QDateTime>
 #include <QSharedPointer>
 
+//! @class OMMDateTime
+//! Auxiliary class for the %Satellites plugin.
+//! @author Andy Kirkham
+//! @ingroup satellites
+//!
+//! The legacy TLE format held the elements epoch in the
+//! format YYDDDdddddddd hereas the newer XML and JSON
+//! formats use extended ISO8601. Since the QDateTime 
+//! objects can only hold millisecond timing (and legacy 
+//! TLE use microsecond) this new class exists to hold
+//! the epoch. It's stored internally as a Julian DAY/time
+//! record and can decode the TLE format and the extended
+//! ISO8601 format.
 class OMMDateTime
 {
 public:
+
+	//! The type this Epoch was decoded from.
 	enum Type {
 		STR_TLE,
 		STR_ISO8601

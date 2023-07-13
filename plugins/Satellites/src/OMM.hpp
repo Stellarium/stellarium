@@ -32,6 +32,23 @@
 
 #include "OMMDateTime.hpp"
 
+//! @class OMM
+//! Auxiliary class for the %Satellites plugin.
+//! @author Andy Kirkham
+//! @ingroup satellites
+//! 
+//! The OMM (Orbit Mean-Elements Message) class provides an interface
+//! to Earth orbiting satellite orbital elements. For many years these
+//! have been transferred using a format known as TLE (two-line element).
+//! However, newer formats are available, notably the standard OMM/XML
+//! standard as well as JSON, CSV and others.
+//! Since the legacy TLE format is restricted in Norad catalogue ID numbers
+//! OMM/XML will become teh defacto standard at some point.
+//! 
+//! This class holds a single satellite elements and can decode from:-
+//!     1. TLE
+//!     2. XML OMM
+//!     3. JSON OMM
 class OMM
 {
 public:
