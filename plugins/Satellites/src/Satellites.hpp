@@ -25,6 +25,7 @@
 #include "StelFader.hpp"
 #include "StelLocation.hpp"
 #include "OMM.hpp"
+#include "OMMDownload.hpp"
 
 #include <QDateTime>
 #include <QFile>
@@ -882,7 +883,7 @@ private:
 	//! @name Updater module
 	//@{
 	UpdateState updateState;
-	QNetworkAccessManager* downloadMgr;
+	OMMDownload ommDownload;
 	//! List of TLE source lists for automatic updates.
 	//! Use getTleSources() to get the value, setTleSources() to set it (and
 	//! save it to configuration).

@@ -89,7 +89,6 @@ Satellites::Satellites()
 	, earth(nullptr)
 	, defaultHintColor(0.7f, 0.7f, 0.7f)
 	, updateState(CompleteNoUpdates)
-	, downloadMgr(nullptr)
 	, progressBar(nullptr)
 	, numberDownloadsComplete(0)
 	, updateTimer(nullptr)
@@ -210,8 +209,7 @@ void Satellites::init()
 	createSuperGroupsList();
 
 	// Set up download manager and the update schedule
-	downloadMgr = new QNetworkAccessManager(this);
-	connect(downloadMgr, SIGNAL(finished(QNetworkReply*)), this, SLOT(saveDownloadedUpdate(QNetworkReply*)));
+	connect(&ommDownload, SIGNAL(fileDownloadComplete(QNetworkReply*)), this, SLOT(saveDownloadedUpdate(QNetworkReply*)));
 	updateState = CompleteNoUpdates;
 	updateTimer = new QTimer(this);
 	updateTimer->setSingleShot(false);   // recurring check for update
@@ -2284,7 +2282,11 @@ void Satellites::updateFromOnlineSources()
 		if (source.url.isValid())
 		{
 			updateSources.append(source);
-			downloadMgr->get(QNetworkRequest(source.url));
+			//downloadMgr->get(QNetworkRequest(source.url));
+			OMMDownload::ReqShPtr sp_req(new QNetworkRequest);
+			sp_req->setUrl(QUrl(source.url));
+			ommDownload.addReqShPtr(sp_req);
+			ommDownload.execute();
 		}
 	}
 }
