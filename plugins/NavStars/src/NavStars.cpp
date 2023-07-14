@@ -450,6 +450,10 @@ QString NavStars::getCurrentNavigationalStarsSetDescription() const
 			txt = q_("These 37 stars were used by the Apollo space program to navigate to the Moon from 1969-1972, Apollo 11 through Apollo 17.");
 			break;
 		}
+		case Skywatcher:
+		{
+			txt = q_("This list contains all the alignment stars for the Skywatch SynScan hand controller and SynScan Pro App.");
+		}
 	}
 
 	return txt;
@@ -658,6 +662,26 @@ void NavStars::populateNavigationalStarsSet(void)
 				     <<      0 <<  68933 <<  69673 <<  76267 <<  80763 <<  82273 <<  86032
 				     <<  91262 <<  92855 <<      0 <<      0 <<  97649 << 100345 << 100751
 				     << 102098 << 107315 << 113368;
+			break;
+		}
+		case Skywatcher:
+		{
+			// Skywatcher SynScan Hand Held Controller and SynScan Pro mobile and desktop App
+			// Sources: https://www.iceinspace.com.au/63-501-0-0-1-0.html
+			//          https://www.iceinspace.com.au/download.php?10d72300ac5d3762f0529eb11977fb68
+			starNumbers << 13847 <<  33579 <<  95947 <<  67301 <<  17702 <<  21421 << 105199
+				     <<  15863 <<  50583 <<  14576 <<  31681 <<  62956 <<  62956 <<   9640
+				     <<  25428 <<  26311 <<  26727 <<  81266 <<  46390 <<  76267 <<    677
+				     <<  97649 <<  35904 <<   2081 <<  80763 <<  69673 <<  25985 <<  23015
+				     <<  25336 <<  27989 <<  28380 <<  24608 <<    746 <<  36850 << 102098
+				     <<  57632 <<   3419 <<  78401 <<  54061 << 107315 <<  87833 <<  81377
+				     << 113368 <<  78159 << 102488 <<  36188 <<   9884 <<  23015 <<  72105
+				     <<  90185 <<  72607 <<   4427 << 113963 <<  32246 <<  59774 <<  28360
+				     <<  14135 <<  53910 <<  59316 <<  25930 <<  10826 <<   5447 <<  15863
+				     <<  65378 <<  30324 <<  39429 <<  92855 <<  58001 <<  11767 <<  37826
+				     <<  37279 <<  28437 <<  84345 <<  47908 <<  86032 <<  49669 <<  24436
+				     << 109074 <<  27366 <<  86228 << 113881 <<   8903 <<  85927 <<   3179
+				     <<  32349 <<  65474 <<  97278 <<  77070 <<  91262 <<  34444 <<  79593;
 			break;
 		}
 	}

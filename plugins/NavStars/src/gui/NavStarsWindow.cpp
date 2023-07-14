@@ -251,6 +251,7 @@ void NavStarsWindow::populateNavigationalStarsSets()
 	nsSets->addItem("Celestron", "Celestron");
 	// TRANSLATORS: Part of full phrase: Apollo space program set of navigational stars
 	nsSets->addItem(q_("Apollo space program"), "Apollo");
+	nsSets->addItem("Skywatcher", "Skywatcher");
 
 	//Restore the selection
 	index = nsSets->findData(selectedNsSetId, Qt::UserRole, Qt::MatchCaseSensitive);
