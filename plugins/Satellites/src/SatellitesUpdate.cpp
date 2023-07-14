@@ -1,5 +1,4 @@
 /*
- * Stellarium
  * Copyright (C) 2023 Andy Kirkham
  *
  * This program is free software; you can redistribute it and/or
@@ -17,29 +16,9 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef TESTOMM_HPP
-#define TESTOMM_HPP
+#include <cmath>
+#include <QChar>
+#include <QDate>
+#include <QDebug>
 
-#include <QtTest>
-
-#include "OMM.hpp"
-
-class TestOMM : public QObject
-{
-	Q_OBJECT
-private slots:
-	void testLegacyTle();
-	void testXMLread();
-	void testCtorMap();
-	void testProcessTleLegacyLine0();
-	void testProcessTleLegacyLine1();
-	void testProcessTleLegacyLine2();
-	void testLegacyTleVsXML();
-	void testLegacyTleVsJSON();
-	void testCopyCTOR();
-	void testOperatorEquals();
-	void testFetchJSONObj();
-	void testToVariantMap();
-};
-
-#endif // TESTOMM_HPP
+#include "SatellitesUpdate.hpp"

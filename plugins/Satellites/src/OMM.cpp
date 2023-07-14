@@ -70,6 +70,27 @@ OMM::OMM(const OMM& other)
 	*this = other;
 }
 
+OMM::OMM(const QVariantMap& m) 
+{
+	m_object_name = m.value("OBJECT_NAME").toString();
+	m_norad_cat_id = m.value("NORAD_CAT_ID").toInt();
+	m_classification = m.value("CLASSIFICATION_TYPE").toString().front().toUpper();
+	m_object_id = m.value("OBJECT_ID").toString();
+	m_mean_motion_dot = m.value("MEAN_MOTION_DOT").toDouble();
+	m_mean_motion_ddot = m.value("MEAN_MOTION_DDOT").toDouble();
+	m_bstar = m.value("BSTAR").toDouble();
+	m_ephermeris_type = m.value("EPHEMERIS_TYPE").toDouble();
+	m_element_number = m.value("ELEMENT_NUMBER").toDouble();
+	m_inclination = m.value("INCLINATION").toDouble();
+	m_ascending_node = m.value("RA_OF_ASC_NODE").toDouble();
+	m_eccentricity = m.value("ECCENTRICITY").toDouble();
+	m_argument_perigee = m.value("ARG_OF_PERICENTER").toDouble();
+	m_mean_anomoly = m.value("MEAN_ANOMALY").toDouble();
+	m_mean_motion = m.value("MEAN_MOTION").toDouble();
+	m_rev_at_epoch = m.value("REV_AT_EPOCH").toDouble();
+	m_epoch = OMMDateTime(m.value("EPOCH").toString());
+}
+
 OMM& OMM::operator=(const OMM &o)
 {
 	if(this == &o) {

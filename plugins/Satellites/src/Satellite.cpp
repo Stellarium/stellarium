@@ -124,15 +124,24 @@ Satellite::Satellite(const QString& identifier, const QVariantMap& map)
 	, epochTime(0.)
 {
 	// return initialized if the mandatory fields are not present
-	if (identifier.isEmpty())
+	if (identifier.isEmpty()) {
 		return;
-	if (!map.contains("name") || !map.contains("tle1") || !map.contains("tle2"))
-		return;
+	}
+
+	if (!map.contains("omm")) {
+		if (!map.contains("name") || !map.contains("tle1") || !map.contains("tle2")) {
+			return;
+		}
+	}
 
 	id = identifier;
 	name  = map.value("name").toString();
 	if (name.isEmpty())
 		return;
+
+	QString tle1 = map.value("tle1").toString();
+	QString tle2 = map.value("tle2").toString();
+	m_omm = OMM(name, tle1, tle2);
 	
 	// If there are no such keys, these will be initialized with the default
 	// values given them above.
@@ -255,6 +264,10 @@ QVariantMap Satellite::getMap(void)
 	map["status"] = status;
 	map["tle1"] = tleElements.first;
 	map["tle2"] = tleElements.second;
+
+	QVariantMap ommMap ;
+	m_omm.toVariantMap(ommMap);
+	map["omm"] = ommMap;
 
 	if (!description.isEmpty())
 		map["description"] = description;

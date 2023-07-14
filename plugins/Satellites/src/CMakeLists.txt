@@ -33,6 +33,8 @@ SET(Satellites_SRCS
      Satellite.cpp
      Satellites.hpp
      Satellites.cpp
+     SatellitesUpdate.hpp
+     SatellitesUpdate.cpp
      SatellitesListModel.hpp
      SatellitesListModel.cpp
      SatellitesListFilterModel.hpp

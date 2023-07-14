@@ -89,6 +89,7 @@ public:
 
 	OMM();
 	OMM(QJsonObject&);
+	OMM(const QVariantMap&);
 	OMM(QXmlStreamReader& r);
 	OMM(QString&, QString&);
 	OMM(QString&, QString&, QString&);

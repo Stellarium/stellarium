@@ -339,4 +339,34 @@ void TestOMM::testToVariantMap()
 	QCOMPARE(value.toDouble(), 233.5611);
 }
 
+void TestOMM::testCtorMap()
+{
+		QString l0("ISS (ZARYA)");
+	//                    1         2         3         4         5         6         7
+	//          01234567890123456789012345678901234567890123456789012345678901234567890
+	QString l1("1 25544U 98067A   23191.40640406  .00007611  00000+0  14335-3 0  9995");
+	QString l2("2 25544  51.6398 233.5611 0000373  12.3897  91.4664 15.49560249404764");
+	OMM     src(l0, l1, l2);
+
+	QVariantMap map;
+	src.toVariantMap(map);
+
+	OMM dut(map);
+
+	QVERIFY(dut.getNoradcatId() == 25544);
+	QVERIFY(dut.getClassification() == 'U');
+	QCOMPARE(dut.getObjectId(), QString("98067A"));
+	QCOMPARE(dut.getMeanMotionDot(), 0.00007611);
+	QCOMPARE(dut.getMeanMotionDDot(), 0.0);
+	
+	auto jd_of_epoch = dut.getEpoch().getJulian();
+	QCOMPARE(jd_of_epoch, 2458848.5); // ????????????
+	QCOMPARE(dut.getBstar(), 0.00014334999999999998785);
+	QVERIFY(dut.getEphermisType() == 0);
+	QVERIFY(dut.getElementNumber() == 999);
+
+
+	QVERIFY(true);
+}
+
 
