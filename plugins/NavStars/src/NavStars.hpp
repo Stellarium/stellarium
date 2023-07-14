@@ -83,6 +83,8 @@ public:
 		GeminiAPS,	//!< Gemini APS Alignment Star List
 		MeadeLX200,	//!< Meade LX200 Alignment Star Library
 		MeadeETX,	//!< Meade ETX Alignment Star Library
+		MeadeAS494,	//!< Meade Autostar #494 Alignment Stars
+		MeadeAS497,	//!< Meade Autostar #497 Alignment Stars
 		Celestron,	//!< Celestron Alignment Star List
 		Apollo		//!< Apollo Alignment Star List
 	};
