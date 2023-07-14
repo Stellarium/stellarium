@@ -453,6 +453,7 @@ QString NavStars::getCurrentNavigationalStarsSetDescription() const
 		case Skywatcher:
 		{
 			txt = q_("This list contains all the alignment stars for the Skywatch SynScan hand controller and SynScan Pro App.");
+			break;
 		}
 	}
 
