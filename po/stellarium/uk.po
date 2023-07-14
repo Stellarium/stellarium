@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2023-07-13 18:58+0700\n"
+"POT-Creation-Date: 2023-07-14 21:54+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>, 2023\n"
 "Language-Team: Ukrainian (https://app.transifex.com/stellarium/teams/80998/uk/)\n"
@@ -69,7 +69,7 @@ msgstr "астеризм"
 #: src/core/modules/NebulaMgr.cpp:358 src/core/modules/SolarSystem.cpp:301
 #: src/core/modules/MilkyWay.cpp:110 src/core/modules/ZodiacalLight.cpp:114
 #: src/core/modules/ToastMgr.cpp:62 src/core/modules/HipsMgr.cpp:156
-#: src/core/StelApp.cpp:648 src/core/StelCore.cpp:295
+#: src/core/StelApp.cpp:648 src/core/StelCore.cpp:296
 #: src/core/StelSkyLayerMgr.cpp:83 src/core/StelSkyLayerMgr.cpp:84
 #: src/StelMainView.cpp:940
 msgid "Display Options"
@@ -3103,7 +3103,7 @@ msgstr "Не вдалося створити надсилання Spout. Док�
 msgid "Loading plugin"
 msgstr "Завантажуємо додаток"
 
-#: src/core/StelCore.cpp:293 src/gui/StelGui.cpp:225
+#: src/core/StelCore.cpp:294 src/gui/StelGui.cpp:225
 #: src/gui/AstroCalcDialog.cpp:1733 src/gui/AstroCalcDialog.cpp:2305
 #: src/gui/AstroCalcDialog.cpp:2329 src/gui/AstroCalcDialog.cpp:2877
 #: src/gui/AstroCalcDialog.cpp:2906 src/gui/AstroCalcDialog.cpp:6431
@@ -3112,249 +3112,249 @@ msgstr "Завантажуємо додаток"
 msgid "Date and Time"
 msgstr "Дата і час"
 
-#: src/core/StelCore.cpp:294 src/core/StelMovementMgr.cpp:193
+#: src/core/StelCore.cpp:295 src/core/StelMovementMgr.cpp:193
 msgid "Movement and Selection"
 msgstr "Пересування і вибір"
 
-#: src/core/StelCore.cpp:297
+#: src/core/StelCore.cpp:298
 msgid "Increase time speed"
 msgstr "Збільшити швидкість часу"
 
-#: src/core/StelCore.cpp:298
+#: src/core/StelCore.cpp:299
 msgid "Decrease time speed"
 msgstr "Зменшити швидкість часу"
 
-#: src/core/StelCore.cpp:299
+#: src/core/StelCore.cpp:300
 msgid "Increase time speed (a little)"
 msgstr "Пришвидшити плин часу (трошки)"
 
-#: src/core/StelCore.cpp:300
+#: src/core/StelCore.cpp:301
 msgid "Decrease time speed (a little)"
 msgstr "Сповільнити плин часу (трошки)"
 
-#: src/core/StelCore.cpp:301
+#: src/core/StelCore.cpp:302
 msgid "Set normal time rate"
 msgstr "Встановити нормальну швидкість часу"
 
-#: src/core/StelCore.cpp:302
+#: src/core/StelCore.cpp:303
 msgid "Set time rate to zero"
 msgstr "Призупинення часу"
 
-#: src/core/StelCore.cpp:303
+#: src/core/StelCore.cpp:304
 msgid "Set reverse time direction"
 msgstr "Встановити зворотний відлік часу"
 
-#: src/core/StelCore.cpp:304
+#: src/core/StelCore.cpp:305
 msgid "Set time to now"
 msgstr "Встановити поточний час"
 
-#: src/core/StelCore.cpp:305
+#: src/core/StelCore.cpp:306
 msgid "Add 1 solar minute"
 msgstr "Додати 1 солярну хвилину"
 
-#: src/core/StelCore.cpp:306
+#: src/core/StelCore.cpp:307
 msgid "Add 1 solar hour"
 msgstr "Додати 1 сонячну годину"
 
-#: src/core/StelCore.cpp:307
+#: src/core/StelCore.cpp:308
 msgid "Add 1 solar day"
 msgstr "Додати 1 сонячний день"
 
-#: src/core/StelCore.cpp:308
+#: src/core/StelCore.cpp:309
 msgid "Add 7 solar days"
 msgstr "Додати 7 солярних днів"
 
-#: src/core/StelCore.cpp:309
+#: src/core/StelCore.cpp:310
 msgid "Subtract 1 solar minute"
 msgstr "Відняти 1 солярну хвилину"
 
-#: src/core/StelCore.cpp:310
+#: src/core/StelCore.cpp:311
 msgid "Subtract 1 solar hour"
 msgstr "Відняти 1 сонячну годину"
 
-#: src/core/StelCore.cpp:311
+#: src/core/StelCore.cpp:312
 msgid "Subtract 1 solar day"
 msgstr "Відняти 1 сонячний день"
 
-#: src/core/StelCore.cpp:312
+#: src/core/StelCore.cpp:313
 msgid "Subtract 7 solar days"
 msgstr "Відняти 7 солярних днів"
 
-#: src/core/StelCore.cpp:313
+#: src/core/StelCore.cpp:314
 msgid "Add 1 sidereal day"
 msgstr "Додати 1 зірковий день"
 
-#: src/core/StelCore.cpp:314
+#: src/core/StelCore.cpp:315
 msgid "Add 7 sidereal days"
 msgstr "Додати 7 сидеричних днів"
 
-#: src/core/StelCore.cpp:315
+#: src/core/StelCore.cpp:316
 msgid "Add 1 sidereal year"
 msgstr "Додати 1 сидеричний рік"
 
-#: src/core/StelCore.cpp:316
+#: src/core/StelCore.cpp:317
 msgid "Add 100 sidereal years"
 msgstr "Додати 100 сидеричних років"
 
-#: src/core/StelCore.cpp:317
+#: src/core/StelCore.cpp:318
 msgid "Add 1 synodic month"
 msgstr "Додати один синодичний місяць"
 
-#: src/core/StelCore.cpp:318
+#: src/core/StelCore.cpp:319
 msgid "Add 1 saros"
 msgstr "Додати 1 сарос"
 
-#: src/core/StelCore.cpp:319
+#: src/core/StelCore.cpp:320
 msgid "Add 1 draconic month"
 msgstr "Додати один драконічний місяць"
 
-#: src/core/StelCore.cpp:320
+#: src/core/StelCore.cpp:321
 msgid "Add 1 draconic year"
 msgstr "Додати один драконічний рік"
 
-#: src/core/StelCore.cpp:321
+#: src/core/StelCore.cpp:322
 msgid "Add 1 anomalistic month"
 msgstr "Додати один аномалістичний місяць"
 
-#: src/core/StelCore.cpp:322
+#: src/core/StelCore.cpp:323
 msgid "Add 1 anomalistic year"
 msgstr "Додати 1 аномалістичний рік"
 
-#: src/core/StelCore.cpp:323
+#: src/core/StelCore.cpp:324
 msgid "Add 100 anomalistic years"
 msgstr "Додати 100 аномалістичних років"
 
-#: src/core/StelCore.cpp:324
+#: src/core/StelCore.cpp:325
 msgid "Add 1 mean tropical month"
 msgstr "Додати один середній тропічний місяць"
 
-#: src/core/StelCore.cpp:325
+#: src/core/StelCore.cpp:326
 msgid "Add 1 mean tropical year"
 msgstr "Додати один середній тропічний рік"
 
-#: src/core/StelCore.cpp:326
+#: src/core/StelCore.cpp:327
 msgid "Add 100 mean tropical years"
 msgstr "Додати 100 середніх тропічних років"
 
-#: src/core/StelCore.cpp:327
+#: src/core/StelCore.cpp:328
 msgid "Add 1 tropical year"
 msgstr "Додати 1 тропічний рік"
 
-#: src/core/StelCore.cpp:328
+#: src/core/StelCore.cpp:329
 msgid "Add 1 Julian year"
 msgstr "Додати 1 юліанський рік"
 
-#: src/core/StelCore.cpp:329
+#: src/core/StelCore.cpp:330
 msgid "Add 1 Julian century"
 msgstr "Додати 1 юліанське сторіччя"
 
-#: src/core/StelCore.cpp:330
+#: src/core/StelCore.cpp:331
 msgid "Add 1 Gaussian year"
 msgstr "Додати 1 гаусовий рік"
 
-#: src/core/StelCore.cpp:331
+#: src/core/StelCore.cpp:332
 msgid "Add 1 calendric month"
 msgstr "Додати 1 календарний місяць"
 
-#: src/core/StelCore.cpp:332
+#: src/core/StelCore.cpp:333
 msgid "Subtract 1 sidereal day"
 msgstr "Відняти 1 зірковий день"
 
-#: src/core/StelCore.cpp:333
+#: src/core/StelCore.cpp:334
 msgid "Subtract 7 sidereal days"
 msgstr "Відняти 7 сидеричних днів"
 
-#: src/core/StelCore.cpp:334
+#: src/core/StelCore.cpp:335
 msgid "Subtract 1 sidereal year"
 msgstr "Відняти 1 сидеричний рік"
 
-#: src/core/StelCore.cpp:335
+#: src/core/StelCore.cpp:336
 msgid "Subtract 100 sidereal years"
 msgstr "Відняти 100 сидеричних років"
 
-#: src/core/StelCore.cpp:336
+#: src/core/StelCore.cpp:337
 msgid "Subtract 1 synodic month"
 msgstr "Відняти один синодичний рік"
 
-#: src/core/StelCore.cpp:337
+#: src/core/StelCore.cpp:338
 msgid "Subtract 1 saros"
 msgstr "Відняти 1 сарос"
 
-#: src/core/StelCore.cpp:338
+#: src/core/StelCore.cpp:339
 msgid "Subtract 1 draconic month"
 msgstr "Відняти один драконічний місяць"
 
-#: src/core/StelCore.cpp:339
+#: src/core/StelCore.cpp:340
 msgid "Subtract 1 draconic year"
 msgstr "Відняти один драконічний рік"
 
-#: src/core/StelCore.cpp:340
+#: src/core/StelCore.cpp:341
 msgid "Subtract 1 anomalistic month"
 msgstr "Відняти один аномалістичний місяць"
 
-#: src/core/StelCore.cpp:341
+#: src/core/StelCore.cpp:342
 msgid "Subtract 1 anomalistic year"
 msgstr "Відняти 1 аномалістичний рік"
 
-#: src/core/StelCore.cpp:342
+#: src/core/StelCore.cpp:343
 msgid "Subtract 100 anomalistic years"
 msgstr "Відняти 100 аномалістичних років"
 
-#: src/core/StelCore.cpp:343
+#: src/core/StelCore.cpp:344
 msgid "Subtract 1 mean tropical month"
 msgstr "Відняти один середній тропічний місяць"
 
-#: src/core/StelCore.cpp:344
+#: src/core/StelCore.cpp:345
 msgid "Subtract 1 mean tropical year"
 msgstr "Відняти один середній тропічний рік"
 
-#: src/core/StelCore.cpp:345
+#: src/core/StelCore.cpp:346
 msgid "Subtract 100 mean tropical years"
 msgstr "Відняти 100 середніх тропічних років"
 
-#: src/core/StelCore.cpp:346
+#: src/core/StelCore.cpp:347
 msgid "Subtract 1 tropical year"
 msgstr "Відняти 1 тропічний рік"
 
-#: src/core/StelCore.cpp:347
+#: src/core/StelCore.cpp:348
 msgid "Subtract 1 Julian year"
 msgstr "Відняти 1 юліанський рік"
 
-#: src/core/StelCore.cpp:348
+#: src/core/StelCore.cpp:349
 msgid "Subtract 1 Julian century"
 msgstr "Відняти 1 юліанське сторіччя"
 
-#: src/core/StelCore.cpp:349
+#: src/core/StelCore.cpp:350
 msgid "Subtract 1 Gaussian year"
 msgstr "Відняти 1 гаусовий рік"
 
-#: src/core/StelCore.cpp:350
+#: src/core/StelCore.cpp:351
 msgid "Subtract 1 calendric month"
 msgstr "Відняти 1 календарний місяць"
 
-#: src/core/StelCore.cpp:352
+#: src/core/StelCore.cpp:353
 msgid "Set home planet to selected planet"
 msgstr "Встановити позначену планету як домашню"
 
-#: src/core/StelCore.cpp:353
+#: src/core/StelCore.cpp:354
 msgid "Go to home"
 msgstr "Домівка"
 
-#: src/core/StelCore.cpp:355
+#: src/core/StelCore.cpp:356
 msgid "Flip scene horizontally"
 msgstr "Повернути горизонтально"
 
-#: src/core/StelCore.cpp:356
+#: src/core/StelCore.cpp:357
 msgid "Flip scene vertically"
 msgstr "Повернути вертикально"
 
-#: src/core/StelCore.cpp:2449
+#: src/core/StelCore.cpp:2450
 msgid "Correction is disabled. Use only if you know what you are doing!"
 msgstr ""
 "Виправлення вимкнено! Користуйтеся ним, лише якщо вам добре відомі наслідки "
 "ваших дій!"
 
-#: src/core/StelCore.cpp:2452
+#: src/core/StelCore.cpp:2453
 #, qt-format
 msgid ""
 "This historical formula was obtained by C. Schoch in 1931 and was used by G."
@@ -3367,7 +3367,7 @@ msgstr ""
 "Айнштайна підтверджено на основі даних про сонячні затемнення, відомих з "
 "історії</em>). Докладніші відомості можна знайти %2тут%3."
 
-#: src/core/StelCore.cpp:2455
+#: src/core/StelCore.cpp:2456
 #, qt-format
 msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
@@ -3377,7 +3377,7 @@ msgstr ""
 "system of astronomical constants</em> (%1) (<em>Про систему астрономічних "
 "сталих</em>)."
 
-#: src/core/StelCore.cpp:2458
+#: src/core/StelCore.cpp:2459
 #, qt-format
 msgid ""
 "This formula is based on a study of post-1650 observations of the Sun, the "
@@ -3391,7 +3391,7 @@ msgstr ""
 "(<em>Астрономічні формули для обчислень</em>). Також цю формулу реалізовано "
 "у комп’ютерній програмі SunTracker Pro."
 
-#: src/core/StelCore.cpp:2462
+#: src/core/StelCore.cpp:2463
 msgid ""
 "This is a slightly modified version of the IAU (1952) formula which was "
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar"
@@ -3402,7 +3402,7 @@ msgstr ""
 "у книзі <em>Canon of Solar Eclipses</em> (<em>Закони сонячних "
 "затемнень</em>), авторами якої є Mucke та Meeus (1983)."
 
-#: src/core/StelCore.cpp:2466
+#: src/core/StelCore.cpp:2467
 msgid ""
 "The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon"
 " and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The "
@@ -3414,7 +3414,7 @@ msgstr ""
 "1649 р. н.е. Те саме співвідношення також неявно використано у таблицях "
 "Goldstine (1973)."
 
-#: src/core/StelCore.cpp:2470
+#: src/core/StelCore.cpp:2471
 #, qt-format
 msgid ""
 "This equation was published by P. M. Muller and F. R. Stephenson in the "
@@ -3426,7 +3426,7 @@ msgstr ""
 "observations</em> (%1) (<em>Прискорення Землі та Місяця на основі нещодавніх"
 " астрономічних спостережень</em>)."
 
-#: src/core/StelCore.cpp:2473
+#: src/core/StelCore.cpp:2474
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
@@ -3436,7 +3436,7 @@ msgstr ""
 "Astronomical Observations</em> (%1) (<em>Астрономічні спостереження до появи"
 " телескопів</em>)."
 
-#: src/core/StelCore.cpp:2476
+#: src/core/StelCore.cpp:2477
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation (outdated and superseded by Schmadel & "
@@ -3450,7 +3450,7 @@ msgstr ""
 "in the period 1800-1975</em> (%1) як апроксимацію даних, опублікованих "
 "Brouwer (1952)."
 
-#: src/core/StelCore.cpp:2479
+#: src/core/StelCore.cpp:2480
 msgid ""
 "This algorithm was adopted in P. Bretagnon & L. Simon's <em>Planetary "
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
@@ -3460,7 +3460,7 @@ msgstr ""
 " Programs and Tables from -4000 to +2800</em> (1986), а також у комп’ютерній"
 " програмі RedShift."
 
-#: src/core/StelCore.cpp:2482
+#: src/core/StelCore.cpp:2483
 #, qt-format
 msgid ""
 "This formula was published by F. R. Stephenson and L. V. Morrison in the "
@@ -3472,7 +3472,7 @@ msgstr ""
 "1980</em> (%1) (<em>Довготривалі зміни у обертанні Землі — від 700 р. до "
 "н.е. до 1980 р. н.е.</em>)."
 
-#: src/core/StelCore.cpp:2485
+#: src/core/StelCore.cpp:2486
 #, qt-format
 msgid ""
 "This algorithm was published by F. R. Stephenson and M. A. Houlden in the "
@@ -3483,7 +3483,7 @@ msgstr ""
 "<em>Atlas of Historical Eclipse Maps</em> (%1). Алгоритм використано у "
 "програмі-планетарії для персональних комп'ютерів Guide 7."
 
-#: src/core/StelCore.cpp:2488
+#: src/core/StelCore.cpp:2489
 msgid ""
 "This algorithm was given by F. Espenak in his <em>Fifty Year Canon of Solar "
 "Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar "
@@ -3493,7 +3493,7 @@ msgstr ""
 "Eclipses: 1986-2035</em> (1987) і <em>Fifty Year Canon of Lunar Eclipses: "
 "1986-2035</em> (1989)."
 
-#: src/core/StelCore.cpp:2491
+#: src/core/StelCore.cpp:2492
 #, qt-format
 msgid ""
 "This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 "
@@ -3502,7 +3502,7 @@ msgstr ""
 "Цю формулу було отримано K.M. Borkowski (%1) на основі аналізу записів щодо "
 "31 сонячного затемнення від 2137 р. до н.е. до 1715 р. н.е."
 
-#: src/core/StelCore.cpp:2494
+#: src/core/StelCore.cpp:2495
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation was published by L. D. Schmadel and G. "
@@ -3515,7 +3515,7 @@ msgstr ""
 "1800-1988</em> (%1) як апроксимацію за даними, наведеними Stephenson і "
 "Morrison (1984)."
 
-#: src/core/StelCore.cpp:2497
+#: src/core/StelCore.cpp:2498
 msgid ""
 "This formula was adopted by M. Chapront-Touze & J. Chapront in the shortened"
 " version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and "
@@ -3525,7 +3525,7 @@ msgstr ""
 "версії надточної теорії місячного руху у період 2000-85 у праці <em>Lunar "
 "Tables and Programs from 4000 B.C. to A.D. 8000</em> (1991)."
 
-#: src/core/StelCore.cpp:2500
+#: src/core/StelCore.cpp:2501
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson and L. V. Morrison in the "
@@ -3537,7 +3537,7 @@ msgstr ""
 "(%1) (<em>Довготривалі зміни у обертанні Землі — від 700 р. до н.е. до 1990 "
 "р. н.е.</em>)."
 
-#: src/core/StelCore.cpp:2503
+#: src/core/StelCore.cpp:2504
 #, qt-format
 msgid ""
 "F. R. Stephenson published this formula in his book <em>Historical Eclipses "
@@ -3547,7 +3547,7 @@ msgstr ""
 "Earth's Rotation</em> (%1) (<em>Історичні затемнення та обертання "
 "Землі</em>)."
 
-#: src/core/StelCore.cpp:2506
+#: src/core/StelCore.cpp:2507
 msgid ""
 "From J. Meeus, <em>Astronomical Algorithms</em> (2nd ed., 1998), and widely "
 "used. Table for 1620..2000, and includes a variant of Chapront, Chapront-"
@@ -3558,7 +3558,7 @@ msgstr ""
 "Chapront, Chapront-Touze та Francou (1997) для дат поза діапазоном "
 "1620–2000."
 
-#: src/core/StelCore.cpp:2509
+#: src/core/StelCore.cpp:2510
 #, qt-format
 msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
@@ -3568,7 +3568,7 @@ msgstr ""
 "реактивного руху NASA для показу даних на інтерактивному сайті %1JPL "
 "Horizons%2."
 
-#: src/core/StelCore.cpp:2512
+#: src/core/StelCore.cpp:2513
 #, qt-format
 msgid ""
 "This polynome was published by J. Meeus and L. Simons in article "
@@ -3577,7 +3577,7 @@ msgstr ""
 "Цей поліному було опубліковано J. Meeus і L. Simons у статті <em>Polynomial "
 "approximations to Delta T, 1620-2000 AD</em> (%1)."
 
-#: src/core/StelCore.cpp:2515
+#: src/core/StelCore.cpp:2516
 msgid ""
 "The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the "
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits"
@@ -3588,7 +3588,7 @@ msgstr ""
 "комп’ютері</em>) наведено просте поліноміальне наближення 3-го порядку "
 "точності лише для нещодавніх дат у минулому."
 
-#: src/core/StelCore.cpp:2518
+#: src/core/StelCore.cpp:2519
 msgid ""
 "E. M. Reingold & N. Dershowitz present this polynomial data fit in "
 "<em>Calendrical Calculations</em> (4th ed. 2018) and in their "
@@ -3600,7 +3600,7 @@ msgstr ""
 "<em>Calendrical Tabulations</em> (2002). Її засновано на даних книги Jean "
 "Meeus <em>Astronomical Algorithms</em> (1991)."
 
-#: src/core/StelCore.cpp:2521
+#: src/core/StelCore.cpp:2522
 #, qt-format
 msgid ""
 "This important solution was published by L. V. Morrison and F. R. Stephenson"
@@ -3611,7 +3611,7 @@ msgstr ""
 " статті <em>Historical values of the Earth's clock error %1T and the "
 "calculation of eclipses</em> (%2) з додатковими даними у (%3)."
 
-#: src/core/StelCore.cpp:2524
+#: src/core/StelCore.cpp:2525
 #, qt-format
 msgid ""
 "From the Length of Day (LOD; as determined by Stephenson & Morrison (%2)), "
@@ -3625,7 +3625,7 @@ msgstr ""
 "можливій періодичності, описаній Stephenson (%2). Докладніші дані можна "
 "знайти %3тут%4."
 
-#: src/core/StelCore.cpp:2527
+#: src/core/StelCore.cpp:2528
 #, qt-format
 msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
@@ -3642,7 +3642,7 @@ msgstr ""
 "використано у програмі для обчислення ефемерид Сонця, Місяця та планет "
 "SOLEX."
 
-#: src/core/StelCore.cpp:2530
+#: src/core/StelCore.cpp:2531
 msgid ""
 "This solution is modified from F. Espenak and J. Meeus, based on Morrison & "
 "Stephenson (2004) and a polynomial fit through tabulated values for "
@@ -3654,15 +3654,15 @@ msgstr ""
 "1600-2000 років. Формулу для 2005-2050 років було видозмінено так, щоб вона "
 "краще відповідала спостережуваним даним та короткостроковим прогнозам."
 
-#: src/core/StelCore.cpp:2530
+#: src/core/StelCore.cpp:2531
 msgid "Used by default."
 msgstr "Використовується типово."
 
-#: src/core/StelCore.cpp:2533
+#: src/core/StelCore.cpp:2534
 msgid "PATCHED VERSION WITHOUT ADDITIONAL LUNAR ACCELERATION."
 msgstr "ЛАТАНА ВЕРСІЯ БЕЗ ДОДАТКОВОГО ПРИСКОРЕННЯ МІСЯЦЯ"
 
-#: src/core/StelCore.cpp:2533
+#: src/core/StelCore.cpp:2534
 msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
 "(2004) and a polynomial fit through tabulated values for 1600-2000."
@@ -3671,7 +3671,7 @@ msgstr ""
 "Morrison і Stephenson (2004) та поліноміальній апроксимації табличних даних "
 "за 1600-2000 роки."
 
-#: src/core/StelCore.cpp:2536
+#: src/core/StelCore.cpp:2537
 #, qt-format
 msgid ""
 "This solution by B. Banjevic, based on Stephenson & Morrison (1984), was "
@@ -3683,7 +3683,7 @@ msgstr ""
 "eclipses and dating the fall of Babylon</em> (затемнення у давнину та "
 "датування падіння Вавилона) (%1)."
 
-#: src/core/StelCore.cpp:2539
+#: src/core/StelCore.cpp:2540
 #, qt-format
 msgid ""
 "This solution by S. Islam, M. Sadiq and M. S. Qureshi, based on Meeus & "
@@ -3695,7 +3695,7 @@ msgstr ""
 "Polynomial Approximation of DeltaT</em> (%1), а потім уточнено Sana Islam у "
 "2013 році."
 
-#: src/core/StelCore.cpp:2542
+#: src/core/StelCore.cpp:2543
 #, qt-format
 msgid ""
 "This polynomial approximation with 0.6 seconds of accuracy by M. Khalid, "
@@ -3706,7 +3706,7 @@ msgstr ""
 "Khalid, Mariam Sultana та Faheem Zaidi у роботі <em>Delta T: Polynomial "
 "Approximation of Time Period 1620-2013</em> (%1)."
 
-#: src/core/StelCore.cpp:2545
+#: src/core/StelCore.cpp:2546
 #, qt-format
 msgid ""
 "This solution by F. R. Stephenson, L. V. Morrison and C. Y. Hohenkerk (2016)"
@@ -3725,7 +3725,7 @@ msgstr ""
 "діапазоном (моделювання за допомогою сплайнового наближення) він дає "
 "значення параболічного наближення."
 
-#: src/core/StelCore.cpp:2548
+#: src/core/StelCore.cpp:2549
 #, qt-format
 msgid ""
 "This solution by G. Henriksson was published in the article <em>The "
@@ -3736,7 +3736,7 @@ msgstr ""
 "<em>The Acceleration of the Moon and the Universe - the Mass of the "
 "Graviton</em> (%1), його засновано на формулі К. Шоха (C. Schoch) (1931)."
 
-#: src/core/StelCore.cpp:2551
+#: src/core/StelCore.cpp:2552
 #, qt-format
 msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined"
@@ -3745,7 +3745,7 @@ msgstr ""
 "Це квадратична формула для обчислення %1T з коефіцієнтами, визначеними "
 "користувачем."
 
-#: src/core/StelCore.cpp:2554 src/core/SimbadSearcher.cpp:173
+#: src/core/StelCore.cpp:2555 src/core/SimbadSearcher.cpp:173
 #: src/gui/ObsListDialog.cpp:83 src/gui/ObsListDialog.cpp:901
 #: src/gui/ObsListDialog.cpp:919 src/gui/ObsListDialog.cpp:953
 #: src/gui/ObsListDialog.cpp:969 src/gui/ObsListDialog.cpp:1004
@@ -3756,7 +3756,7 @@ msgstr ""
 msgid "Error"
 msgstr "Помилка"
 
-#: src/core/StelCore.cpp:2562
+#: src/core/StelCore.cpp:2563
 #, qt-format
 msgid ""
 "The solution's value of %1 for %2 (secular acceleration of the Moon) "
@@ -3765,16 +3765,16 @@ msgstr ""
 "Значення розв’язку %1 для %2 (секулярне прискорення Місяця) потребує "
 "адаптації, див. підручник, щоб дізнатися більше."
 
-#: src/core/StelCore.cpp:2606
+#: src/core/StelCore.cpp:2607
 msgid "with zero values outside this range"
 msgstr "з нульовими значеннями поза цим діапазоном"
 
-#: src/core/StelCore.cpp:2609
+#: src/core/StelCore.cpp:2610
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr ""
 "з типовою односекундною точністю та нульовими значеннями поза цим діапазоном"
 
-#: src/core/StelCore.cpp:2612
+#: src/core/StelCore.cpp:2613
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and values for "
 "the limit years outside this range"
@@ -3782,16 +3782,16 @@ msgstr ""
 "із середньою похибкою у менше за одну секунду, макс. похибка 1.9 с, і "
 "значеннями років обмеження поза цим діапазоном"
 
-#: src/core/StelCore.cpp:2619
+#: src/core/StelCore.cpp:2620
 msgid "with values for the limit years outside this range"
 msgstr "із значеннями років обмеження поза цим діапазоном"
 
-#: src/core/StelCore.cpp:2629
+#: src/core/StelCore.cpp:2630
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
 msgstr "Коректний діапазон використання: від %1 до %2 року, %3."
 
-#: src/core/StelCore.cpp:2631
+#: src/core/StelCore.cpp:2632
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
 msgstr "Коректний діапазон використання: від %1 до %2 року."
@@ -4367,7 +4367,7 @@ msgstr ""
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:257
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:237
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:116
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:274
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:278
 #: plugins/Novae/src/gui/NovaeDialog.cpp:115
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:119
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:132
@@ -4843,7 +4843,7 @@ msgstr "Подяки"
 #: src/gui/ConfigurationDialog.cpp:1314
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:784
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:258
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:275
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:279
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:138
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:210
 msgid "Authors"
@@ -4861,7 +4861,7 @@ msgstr "Контакти"
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:256
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:236
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:115
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:273
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:277
 #: plugins/Novae/src/gui/NovaeDialog.cpp:114
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:118
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:131
@@ -11810,8 +11810,8 @@ msgid "Refresh"
 msgstr "Оновити"
 
 #: src/ui_locationDialogGui.h:489 src/ui_locationDialogGui.h:492
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialogLocations.h:156
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialogLocations.h:159
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialogLocations.h:155
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialogLocations.h:158
 msgid ""
 "Standard list of locations contains only English names (without diacritics!)"
 msgstr ""
@@ -15306,7 +15306,7 @@ msgstr "Зберегти список"
 
 #: src/ui_obsListDialog.h:365
 #: plugins/Satellites/src/ui_satellitesDialog.h:1385
-#: plugins/Scenery3d/src/ui_storedViewDialog.h:217
+#: plugins/Scenery3d/src/ui_storedViewDialog.h:216
 msgid "Description:"
 msgstr "Опис:"
 
@@ -21668,7 +21668,7 @@ msgid "Navigational Stars"
 msgstr "Навігаційна зірка"
 
 #: plugins/NavStars/src/NavStars.cpp:59
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:279
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:283
 msgid "This plugin marks navigational stars from a selected set."
 msgstr "Цей додаток позначає навігаційні зірки із вибраного вами набору."
 
@@ -21755,6 +21755,22 @@ msgstr ""
 
 #: plugins/NavStars/src/NavStars.cpp:435
 msgid ""
+"This list contains all the alignment stars for the Meade Autostar #494 "
+"handset (ETX60AT)."
+msgstr ""
+"У цьому списку містяться усі зірки для вирівнювання з апаратури Meade "
+"Autostar #494 (ETX60AT)."
+
+#: plugins/NavStars/src/NavStars.cpp:440
+msgid ""
+"This list contains all the alignment stars for the Meade Autostar #497 "
+"handset."
+msgstr ""
+"У цьому списку містяться усі зірки для вирівнювання з апаратури Meade "
+"Autostar #497."
+
+#: plugins/NavStars/src/NavStars.cpp:445
+msgid ""
 "Even though there are about 250 named stars in the hand control database, "
 "only 82 (stars brighter than or equal to magnitude 2.5) can be used for "
 "alignment and related tasks."
@@ -21763,89 +21779,97 @@ msgstr ""
 "які мають зоряну величину 2,5 та яскравіші) може бути використано для "
 "вирівнювання та пов'язаних із ним завдань."
 
-#: plugins/NavStars/src/NavStars.cpp:679
+#: plugins/NavStars/src/NavStars.cpp:450
+msgid ""
+"These 37 stars were used by the Apollo space program to navigate to the Moon"
+" from 1969-1972, Apollo 11 through Apollo 17."
+msgstr ""
+"Ці 37 зірок було використано у космічній програмі «Аполлон» для навігації до"
+" Місяця у 1969-1972 роках, від «Аполлона 11» до «Аполлона 17»."
+
+#: plugins/NavStars/src/NavStars.cpp:745
 msgctxt "the highest part of the Sun or Moon"
 msgid "upper limb"
 msgstr "верхній лімб"
 
-#: plugins/NavStars/src/NavStars.cpp:680
+#: plugins/NavStars/src/NavStars.cpp:746
 msgctxt "the lowest part of the Sun or Moon"
 msgid "lower limb"
 msgstr "нижній лімб"
 
-#: plugins/NavStars/src/NavStars.cpp:695 plugins/NavStars/src/NavStars.cpp:723
-#: plugins/NavStars/src/NavStars.cpp:729
+#: plugins/NavStars/src/NavStars.cpp:761 plugins/NavStars/src/NavStars.cpp:789
+#: plugins/NavStars/src/NavStars.cpp:795
 msgctxt "Greenwich Hour Angle"
 msgid "GHA"
 msgstr "ГГК"
 
-#: plugins/NavStars/src/NavStars.cpp:697 plugins/NavStars/src/NavStars.cpp:727
+#: plugins/NavStars/src/NavStars.cpp:763 plugins/NavStars/src/NavStars.cpp:793
 msgctxt "object Sidereal Hour Angle (ERA, Earth rotation angle)"
 msgid "SHA"
 msgstr "СГК"
 
-#: plugins/NavStars/src/NavStars.cpp:699 plugins/NavStars/src/NavStars.cpp:733
+#: plugins/NavStars/src/NavStars.cpp:765 plugins/NavStars/src/NavStars.cpp:799
 msgctxt "Local Hour Angle"
 msgid "LHA"
 msgstr "ЛГК"
 
-#: plugins/NavStars/src/NavStars.cpp:702
+#: plugins/NavStars/src/NavStars.cpp:768
 msgctxt "Ground Position of object"
 msgid "GP: GHA/DEC"
 msgstr "ОП: ГГК/Схил"
 
-#: plugins/NavStars/src/NavStars.cpp:705
+#: plugins/NavStars/src/NavStars.cpp:771
 msgctxt "geodetic coordinate system, latitude and longitude of ground point"
 msgid "GP: LAT/LON"
 msgstr "ОП: Шир/Довг"
 
-#: plugins/NavStars/src/NavStars.cpp:708
+#: plugins/NavStars/src/NavStars.cpp:774
 msgctxt "geodetic coordinate system, assumed latitude and longitude of user"
 msgid "AP: LAT/LON"
 msgstr "ГП: Шир/Довг"
 
-#: plugins/NavStars/src/NavStars.cpp:711
+#: plugins/NavStars/src/NavStars.cpp:777
 msgctxt ""
 "Navigation/horizontal coordinate system, calculated altitude and azimuth"
 msgid "Hc/Zn"
 msgstr "Гк/Зн"
 
-#: plugins/NavStars/src/NavStars.cpp:718
+#: plugins/NavStars/src/NavStars.cpp:784
 msgctxt "Universal Time Coordinated"
 msgid "UTC"
 msgstr "ВЧ"
 
-#: plugins/NavStars/src/NavStars.cpp:721
+#: plugins/NavStars/src/NavStars.cpp:787
 msgctxt "Navigation/horizontal coordinate system, sextant measured altitude"
 msgid "Ho"
 msgstr "Го"
 
-#: plugins/NavStars/src/NavStars.cpp:725
+#: plugins/NavStars/src/NavStars.cpp:791
 msgctxt "Local Hour Angle"
 msgid "LMST"
 msgstr "МССЧ"
 
-#: plugins/NavStars/src/NavStars.cpp:731
+#: plugins/NavStars/src/NavStars.cpp:797
 msgctxt "Declination"
 msgid "DEC"
 msgstr "Схил"
 
-#: plugins/NavStars/src/NavStars.cpp:735
+#: plugins/NavStars/src/NavStars.cpp:801
 msgctxt "geodetic coordinate system, latitude"
 msgid "LAT"
 msgstr "Шир"
 
-#: plugins/NavStars/src/NavStars.cpp:737
+#: plugins/NavStars/src/NavStars.cpp:803
 msgctxt "geodetic coordinate system, longitude"
 msgid "LON"
 msgstr "Довг"
 
-#: plugins/NavStars/src/NavStars.cpp:739
+#: plugins/NavStars/src/NavStars.cpp:805
 msgctxt "Navigation/horizontal coordinate system, calculated altitude"
 msgid "Hc"
 msgstr "Гк"
 
-#: plugins/NavStars/src/NavStars.cpp:741
+#: plugins/NavStars/src/NavStars.cpp:807
 msgctxt "Navigation/horizontal coordinate system, calculated azimuth"
 msgid "Zn"
 msgstr "Zn"
@@ -21875,11 +21899,17 @@ msgstr "російський"
 msgid "German"
 msgstr "Німецький"
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:272
+#. TRANSLATORS: Part of full phrase: Apollo space program set of navigational
+#. stars
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:253
+msgid "Apollo space program"
+msgstr "Космічна програма «Аполлон»"
+
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:276
 msgid "Navigational Stars Plug-in"
 msgstr "Додаток навігаційних зірок"
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:283
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:287
 msgid ""
 "Additional information fields can be displayed by selecting \"Information "
 "&gt; Additional coordinates (from plugins)\""
@@ -21887,29 +21917,29 @@ msgstr ""
 "Додаткові поля відомостей може бути показано, якщо буде виборано «Відомості "
 "&gt; Додаткові координати (з додатків)»"
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:287
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:291
 msgid "These fields are:"
 msgstr "Цими полями є:"
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:289
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:310
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:293
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:314
 #, qt-format
 msgid "GHA%1: The Greenwich Hour Angle of the first point of Aries."
 msgstr "ГГК%1: гринвічський годинний кут для першої точки у Овні."
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:290
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:294
 msgid "SHA: Sidereal Hour Angle of the navigation star."
 msgstr "СГК: сидеричний годинник кут навігаційної зірки."
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:291
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:316
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:295
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:320
 msgid "LHA: The observer's Local Hour Angle to the navigation star."
 msgstr "ЛГК: локальний годинний кут спостерігача до навігаційної зірки."
 
 #. TRANSLATORS: In Celestial Navigation "GP" is Ground Point, astronomers
 #. often use "sub-point" which is the geodetic location of a point where the
 #. star is at zenith.
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:293
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:297
 msgid ""
 "GP: GHA/DEC: The navigation star's ground point as Greenwich Hour Angle and "
 "Declination."
@@ -21920,7 +21950,7 @@ msgstr ""
 #. TRANSLATORS: In Celestial Navigation "AP" is Assumed Position, a point
 #. close by where the observer knows themselves to be. For example, from dead
 #. reckoning.
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:295
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:299
 msgid ""
 "AP: LAT/LON: The observer's Assumed Position as geodetic latitude and "
 "longitude."
@@ -21931,14 +21961,14 @@ msgstr ""
 #. TRANSLATORS: In Celestial Navigation Hc is "computed height" from the
 #. Nautical Almanac where "height" is altitude. Likewise, Zn is computed
 #. azimuth, as seen from the AP.
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:297
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:301
 msgid ""
 "Hc/Zn: The calculated height (altitude) and computed azimuth of navigation "
 "star, seen from AP."
 msgstr ""
 "Hc/Zn: обчислена висота (висота) та обчислений азимут навігаційної зірки."
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:301
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:305
 msgid ""
 "The user has two different view options selected by \"Show information as a "
 "tabulated list\"."
@@ -21946,7 +21976,7 @@ msgstr ""
 "Користувач може вибрати один з двох варіантів для пункту «Показати дані у "
 "форматі табличного списку»."
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:305
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:309
 msgid ""
 "When 'tabulated list' is selected the fields more closely follow the <em>The"
 " Nautical Almanac</em> format:"
@@ -21956,51 +21986,51 @@ msgstr ""
 
 #. TRANSLATORS: In Celestial Navigation "height" is used where astronomers
 #. would use "altitude", Ho Height Observed
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:309
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:313
 msgid "Ho: Simulated observed altitude of navigation star using a sextant."
 msgstr ""
 "Го: імітація спостережної висоти навігаційної зірки за допомогою секстанта."
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:311
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:315
 msgid "LMST: Local mean sidereal time."
 msgstr "ЛССЧ: локальний середній сидеричний час."
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:312
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:316
 msgid "SHA: Sidereal Hour Angle of navigation star."
 msgstr "СГК: сидеричний годинник кут навігаційної зірки."
 
 #. TRANSLATORS: celestial coordinate system, declination.
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:314
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:318
 msgid "DEC: The navigation star's declination."
 msgstr "Схил: схилення навігаційної зірки."
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:315
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:319
 msgid "GHA: The navigation star's Greenwich Hour Angle."
 msgstr "ГГК: гринвічський годинний кут навігаційної зірки."
 
 #. TRANSLATORS: Geodetic coordinate system, latitude.
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:318
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:322
 msgid "LAT: The observer's geodetic latitude."
 msgstr "Шир: геодезична широта спостерігача."
 
 #. TRANSLATORS: Geodetic coordinate system, longitude.
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:320
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:324
 msgid "LON: The observer's geodetic longitude."
 msgstr "Довг: геодезична довгота спостерігача."
 
 #. TRANSLATORS: The process of Sight Reduction outputs computed values. Hc
 #. computed height (altitude) for the AP
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:322
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:326
 msgid "Hc: The AP calculated height (altitude) of navigation star."
 msgstr "Hc: обчислена висота навігаційної зірки."
 
 #. TRANSLATORS: The process of Sight Reduction outputs computed values. Zn
 #. computed azimuth
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:324
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:328
 msgid "Zn: The AP calculated azimuth of navigation star."
 msgstr "Zn: обчислений азимут навігаційної зірки."
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:328
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:332
 msgid "For further information please refer to the Stellarium User Guide."
 msgstr ""
 "Докладніші відомості можна знайти у підручнику користувача Stellarium."
@@ -27963,27 +27993,27 @@ msgstr "Також оновлювати другу основну поверхн
 msgid "Quality/Performance settings"
 msgstr "Параметри якості і швидкодії"
 
-#: plugins/Scenery3d/src/ui_storedViewDialog.h:210
+#: plugins/Scenery3d/src/ui_storedViewDialog.h:209
 msgid "Stored views"
 msgstr "Збережені перегляди"
 
-#: plugins/Scenery3d/src/ui_storedViewDialog.h:212
+#: plugins/Scenery3d/src/ui_storedViewDialog.h:211
 msgid "Load view"
 msgstr "Завантажити перегляд"
 
-#: plugins/Scenery3d/src/ui_storedViewDialog.h:213
+#: plugins/Scenery3d/src/ui_storedViewDialog.h:212
 msgid "Delete view"
 msgstr "Вилучити перегляд"
 
-#: plugins/Scenery3d/src/ui_storedViewDialog.h:214
+#: plugins/Scenery3d/src/ui_storedViewDialog.h:213
 msgid "Add current view"
 msgstr "Додати поточний перегляд"
 
-#: plugins/Scenery3d/src/ui_storedViewDialog.h:215
+#: plugins/Scenery3d/src/ui_storedViewDialog.h:214
 msgid "Load/store with date"
 msgstr "Завантажити або зберегти з датою"
 
-#: plugins/Scenery3d/src/ui_storedViewDialog.h:216
+#: plugins/Scenery3d/src/ui_storedViewDialog.h:215
 msgid "Title:"
 msgstr "Назва:"
 
@@ -28391,7 +28421,7 @@ msgstr "Відновити параметри"
 msgid "Custom Lines"
 msgstr "Нетипові лінії"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialogLocations.h:153
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialogLocations.h:152
 msgid "Locations"
 msgstr "Місця"
 
