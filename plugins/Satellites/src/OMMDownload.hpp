@@ -103,7 +103,6 @@ signals:
 	void executeComplete(void);
 
 private:
-
 	//! executeSim()
 	//! Used to begin a simulated run of network requests
 	virtual void executeSim(void);

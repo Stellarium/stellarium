@@ -52,7 +52,6 @@
 class OMMDateTime
 {
 public:
-
 	//! The type this Epoch was decoded from.
 	enum Type {
 		STR_TLE,
