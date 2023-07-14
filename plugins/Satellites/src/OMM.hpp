@@ -27,6 +27,7 @@
 #include <QJsonValue>
 #include <QJsonArray>
 #include <QJsonObject>
+#include <QVariantMap>
 #include <QSharedPointer>
 #include <QXmlStreamReader>
 
@@ -111,6 +112,8 @@ public:
 	bool hasValidLegacyTleData();
 
 	void toJsonObj(QJsonObject&);
+
+	void toVariantMap(QVariantMap& outmap);
 
 	bool setFromXML(QXmlStreamReader& r);
 	bool setFromJsonObj(const QJsonObject& obj);

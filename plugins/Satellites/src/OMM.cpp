@@ -101,7 +101,7 @@ OMM& OMM::operator=(const OMM &o)
 	return *this;
 }
 
-void OMM::toJsonObj(QJsonObject& rval) 
+void OMM::toJsonObj(QJsonObject& rval)
 {
 	rval.insert("OBJECT_NAME", QJsonValue(m_object_name));
 	rval.insert("NORAD_CAT_ID", QJsonValue(m_norad_cat_id));
@@ -120,6 +120,27 @@ void OMM::toJsonObj(QJsonObject& rval)
 	rval.insert("MEAN_ANOMALY", QJsonValue(m_mean_anomoly));
 	rval.insert("MEAN_MOTION", QJsonValue(m_mean_motion));
 	rval.insert("REV_AT_EPOCH", QJsonValue(m_rev_at_epoch));
+}
+
+void OMM::toVariantMap(QVariantMap & outmap)
+{
+	outmap.insert("OBJECT_NAME", QVariant(m_object_name));
+	outmap.insert("NORAD_CAT_ID", QVariant(m_norad_cat_id));
+	outmap.insert("CLASSIFICATION_TYPE", QVariant(m_classification));
+	outmap.insert("OBJECT_ID", QVariant(m_object_id));
+	outmap.insert("EPOCH", QVariant(m_epoch.toISO8601String()));
+	outmap.insert("MEAN_MOTION_DOT", QVariant(m_mean_motion_dot));
+	outmap.insert("MEAN_MOTION_DDOT", QVariant(m_mean_motion_ddot));
+	outmap.insert("BSTAR", QVariant(m_bstar));
+	outmap.insert("EPHEMERIS_TYPE", QVariant(m_ephermeris_type));
+	outmap.insert("ELEMENT_NUMBER", QVariant(m_element_number));
+	outmap.insert("INCLINATION", QVariant(m_inclination));
+	outmap.insert("RA_OF_ASC_NODE", QVariant(m_ascending_node));
+	outmap.insert("ECCENTRICITY", QVariant(m_eccentricity));
+	outmap.insert("ARG_OF_PERICENTER", QVariant(m_argument_perigee));
+	outmap.insert("MEAN_ANOMALY", QVariant(m_mean_anomoly));
+	outmap.insert("MEAN_MOTION", QVariant(m_mean_motion));
+	outmap.insert("REV_AT_EPOCH", QVariant(m_rev_at_epoch));
 }
 
 bool OMM::hasValidLegacyTleData()

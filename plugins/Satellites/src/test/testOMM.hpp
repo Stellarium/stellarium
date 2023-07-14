@@ -38,6 +38,7 @@ private slots:
 	void testCopyCTOR();
 	void testOperatorEquals();
 	void testFetchJSONObj();
+	void testToVariantMap();
 };
 
 #endif // TESTOMM_HPP

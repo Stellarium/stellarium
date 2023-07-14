@@ -273,9 +273,6 @@ void TestOMM::testFetchJSONObj()
 	QJsonObject dut;
 	src.toJsonObj(dut);
 
-	//qDebug() << "Count: " << dut.count();
-	//qDebug() << dut;
-
 	QJsonValue value;
 
 	value = dut.take("OBJECT_NAME");
@@ -300,6 +297,45 @@ void TestOMM::testFetchJSONObj()
 
 	value = dut.take("RA_OF_ASC_NODE");
 	QVERIFY(value != QJsonValue::Undefined);
+	QCOMPARE(value.toDouble(), 233.5611);
+}
+
+void TestOMM::testToVariantMap() 
+{
+	QString l0("ISS (ZARYA)");
+	//                    1         2         3         4         5         6         7
+	//          01234567890123456789012345678901234567890123456789012345678901234567890
+	QString l1("1 25544U 98067A   23191.40640406  .00007611  00000+0  14335-3 0  9995");
+	QString l2("2 25544  51.6398 233.5611 0000373  12.3897  91.4664 15.49560249404764");
+	OMM     src(l0, l1, l2);
+
+	QVariantMap dut;
+	src.toVariantMap(dut);
+
+	QVariant value;
+
+	value = dut.value("OBJECT_NAME");
+	QVERIFY(value.isValid());
+	QCOMPARE(value.toString(), "ISS (ZARYA)");
+
+	value = dut.value("EPOCH");
+	QVERIFY(value.isValid());
+	QCOMPARE(value.toString(), "2023-07-10T09:45:13.3108");
+
+	value = dut.value("ARG_OF_PERICENTER");
+	QVERIFY(value.isValid());
+	QCOMPARE(value.toDouble(), 12.3897);
+
+	value = dut.value("BSTAR");
+	QVERIFY(value.isValid());
+	QCOMPARE(value.toDouble(), 0.00014335);
+
+	value = dut.value("CLASSIFICATION_TYPE");
+	QVERIFY(value.isValid());
+	QCOMPARE(value.toString(), "U");
+
+	value = dut.value("RA_OF_ASC_NODE");
+	QVERIFY(value.isValid());
 	QCOMPARE(value.toDouble(), 233.5611);
 }
 
