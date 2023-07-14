@@ -391,70 +391,47 @@ QString NavStars::getCurrentNavigationalStarsSetDescription() const
 
 	switch(getCurrentNavigationalStarsSet())
 	{
+		default:
 		case AngloAmerican:
-		{
 			// TRANSLATORS: The emphasis tags mark a title.
 			txt = q_("The 57 \"selected stars\" that are listed in <em>The Nautical Almanac</em> jointly published by Her Majesty's Nautical Almanac Office and the US Naval Observatory since 1958; consequently, these stars are also used in navigational aids such as the <em>2102D Star Finder</em> and <em>Identifier</em>.");
 			break;
-		}
 		case French:
-		{
 			// TRANSLATORS: The emphasis tags mark a book title.
 			txt = q_("The 81 stars that are listed in the French Nautical Almanac (The original French title is <em>%1</em>) published by the French Bureau des Longitudes.").arg("Ephémérides Nautiques");
 			break;
-		}
 		case Russian:
-		{
 			// TRANSLATORS: The emphasis tags mark a book title.
 			txt = q_("The 160 stars that are listed in the Russian Nautical Almanac (The original Russian title is <em>%1</em>).").arg("Морской астрономический ежегодник");
 			break;
-		}
 		case German:
-		{
 			// TRANSLATORS: The emphasis tags mark a book title.
 			txt = q_("The 80 stars that are listed in the German Nautical Almanac (The original German title is <em>%1</em>) published by the Federal Maritime and Hydrographic Agency of Germany.").arg("Nautisches Jahrbuch");
 			break;
-		}
 		case GeminiAPS:
-		{
 			txt = q_("Alignment Star List from the Gemini Astronomical Positioning System. The Gemini Astronomical Positioning System is a professional level computerized device for controlling small to medium German equatorial telescope mounts.");
 			break;
-		}
 		case MeadeLX200:
-		{
 			txt = q_("The Meade LX200 utilizes 33 bright and well known stars to calibrate the telescope’s Object Library in the ALTAZ and POLAR alignments. These stars were selected to allow observers from anywhere in the world on any given night, to be able to easily and quickly make precision alignments.");
 			break;
-		}
 		case MeadeETX:
-		{
 			txt = q_("This list from Meade ETX mount will aid the observer to find alignment stars at various times of the year.");
 			break;
-		}
 		case MeadeAS494:
-		{
 			txt = q_("This list contains all the alignment stars for the Meade Autostar #494 handset (ETX60AT).");
 			break;
-		}
 		case MeadeAS497:
-		{
 			txt = q_("This list contains all the alignment stars for the Meade Autostar #497 handset.");
 			break;
-		}
 		case Celestron:
-		{
 			txt = q_("Even though there are about 250 named stars in the hand control database, only 82 (stars brighter than or equal to magnitude 2.5) can be used for alignment and related tasks.");
 			break;
-		}
 		case Apollo:
-		{
 			txt = q_("These 37 stars were used by the Apollo space program to navigate to the Moon from 1969-1972, Apollo 11 through Apollo 17.");
 			break;
-		}
 		case Skywatcher:
-		{
 			txt = q_("This list contains all the alignment stars for the Skywatch SynScan hand controller and SynScan Pro App.");
 			break;
-		}
 	}
 
 	return txt;
