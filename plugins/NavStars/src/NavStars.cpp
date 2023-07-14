@@ -593,8 +593,9 @@ void NavStars::populateNavigationalStarsSet(void)
 		}
 		case MeadeAS494:
 		{
-			// Meade Autostar #494 handsets
+			// Meade Autostar #494 Alignment Stars
 			// Source:
+			//    http://www.weasner.com/etx/autostar/as_494align_stars.html
 			starNumbers  <<  13847 <<   7588 <<  60718 <<  33579 <<  95947 <<  65477 <<  17702
 				     <<  21421 << 105199 <<   1067 <<  50583 <<  14576 <<  31681 <<  62956
 				     <<  67301 <<   9640 << 109268 <<  25428 <<  26311 <<  26727 <<  46390
@@ -610,8 +611,9 @@ void NavStars::populateNavigationalStarsSet(void)
 		}
 		case MeadeAS497:
 		{
-			// Meade Autostar #497 handsets
+			// Meade Autostar #497 Alignment Stars
 			// Source:
+			//    http://www.weasner.com/etx/autostar/as_497align_stars.html
 			starNumbers  <<  13847 <<   7588 <<  60718 <<  33579 <<  95947 <<  65477 <<  17702
 				     <<  21421 << 105199 <<   1067 <<  50583 <<  14576 <<  31681 <<  62956
 				     <<  67301 <<   9640 << 109268 <<  25428 <<  26311 <<  26727 <<  46390
