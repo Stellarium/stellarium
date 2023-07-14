@@ -430,6 +430,16 @@ QString NavStars::getCurrentNavigationalStarsSetDescription() const
 			txt = q_("This list from Meade ETX mount will aid the observer to find alignment stars at various times of the year.");
 			break;
 		}
+		case MeadeAS494:
+		{
+			txt = q_("This list contains all the alignment stars for the Meade Autostar #494 handset (ETX60AT).");
+			break;
+		}
+		case MeadeAS497:
+		{
+			txt = q_("This list contains all the alignment stars for the Meade Autostar #497 handset.");
+			break;
+		}
 		case Celestron:
 		{
 			txt = q_("Even though there are about 250 named stars in the hand control database, only 82 (stars brighter than or equal to magnitude 2.5) can be used for alignment and related tasks.");
@@ -579,6 +589,43 @@ void NavStars::populateNavigationalStarsSet(void)
 			//    ETX-125EC Astro Telescope
 			starNumbers  << 69673 << 49669 << 65474 << 91262 << 102098 << 97649 << 80763
 				     << 113963 << 113368 << 10826 << 24436 << 27989 << 32349 << 21421;
+			break;
+		}
+		case MeadeAS494:
+		{
+			// Meade Autostar #494 Alignment Stars
+			// Source:
+			//    http://www.weasner.com/etx/autostar/as_494align_stars.html
+			starNumbers  <<  13847 <<   7588 <<  60718 <<  33579 <<  95947 <<  65477 <<  17702
+				     <<  21421 << 105199 <<   1067 <<  50583 <<  14576 <<  31681 <<  62956
+				     <<  67301 <<   9640 << 109268 <<  25428 <<  26311 <<  26727 <<  46390
+				     <<  76267 <<    677 <<  98036 <<  97649 <<   2081 <<  80763 <<  69673
+				     <<  25985 <<  25336 <<  27989 <<  30438 <<  24608 <<  36850 <<  63125
+				     << 102098 <<  57632 <<   3419 <<  54061 << 107315 <<  87833 << 113368
+				     <<  68702 <<   9884 <<  72105 <<  90185 <<  72607 << 113963 <<  59774
+				     <<  13954 <<  53910 <<  25930 <<  10826 <<   5447 <<  15863 <<  65378
+				     <<  25606 <<  92855 <<  58001 <<  37826 <<  37279 <<  84345 <<  86032
+				     <<  49669 <<  24436 << 109074 <<  27366 << 113881 <<  85927 <<   3179
+				     <<  32349 <<  65474 <<  97278 <<  68756 <<  77070 <<  91262 <<  63608;
+			break;
+		}
+		case MeadeAS497:
+		{
+			// Meade Autostar #497 Alignment Stars
+			// Source:
+			//    http://www.weasner.com/etx/autostar/as_497align_stars.html
+			starNumbers  <<  13847 <<   7588 <<  60718 <<  33579 <<  95947 <<  65477 <<  17702
+				     <<  21421 << 105199 <<   1067 <<  50583 <<  14576 <<  31681 <<  62956
+				     <<  67301 <<   9640 << 109268 <<  25428 <<  26311 <<  26727 <<  46390
+				     <<  76267 <<    677 <<  98036 <<  97649 <<   2081 <<  80763 <<  69673
+				     <<  25985 <<  25336 <<  27989 <<  30438 <<  24608 <<  36850 <<  63125
+				     << 102098 <<  57632 <<   3419 <<  54061 << 107315 <<  87833 << 113368
+				     <<  68702 <<   9884 <<  72105 <<  90185 <<  72607 << 113963 <<  59774
+				     <<  13954 <<  53910 <<  25930 <<  10826 <<   5447 <<  15863 <<  65378
+				     <<  25606 <<  92855 <<  58001 <<  11767 <<  37826 <<  37279 <<  84345
+				     <<  86032 <<  49669 <<  24436 << 109074 <<  27366 << 113881 <<  85927
+				     <<   3179 <<  32349 <<  65474 <<  97278 <<  68756 <<  77070 <<  91262
+				     <<  63608;
 			break;
 		}
 		case Celestron:
