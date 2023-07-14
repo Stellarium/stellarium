@@ -83,7 +83,8 @@ public:
 		GeminiAPS,	//!< Gemini APS Alignment Star List
 		MeadeLX200,	//!< Meade LX200 Alignment Star Library
 		MeadeETX,	//!< Meade ETX Alignment Star Library
-		Celestron	//!< Celestron Alignment Star List
+		Celestron,	//!< Celestron Alignment Star List
+		Apollo		//!< Apollo Alignment Star List
 	};
 	Q_ENUM(NavigationalStarsSet)
 

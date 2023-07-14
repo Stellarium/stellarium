@@ -164,12 +164,13 @@ StelCore::~StelCore()
 DitheringMode StelCore::parseDitheringMode(const QString& str)
 {
 	const auto s=str.trimmed().toLower();
-	if(s=="disabled"   ) return DitheringMode::Disabled;
-	if(s=="color565"   ) return DitheringMode::Color565;
-	if(s=="color666"   ) return DitheringMode::Color666;
-	if(s=="color888"   ) return DitheringMode::Color888;
-	if(s=="color101010") return DitheringMode::Color101010;
-	return DitheringMode::Disabled;
+	static const QMap<QString, DitheringMode>dMap={
+		{"disabled"   , DitheringMode::Disabled},
+		{"color565"   , DitheringMode::Color565},
+		{"color666"   , DitheringMode::Color666},
+		{"color888"   , DitheringMode::Color888},
+		{"color101010", DitheringMode::Color101010}};
+	return dMap.value(s, DitheringMode::Disabled);
 }
 
 /*************************************************************************
