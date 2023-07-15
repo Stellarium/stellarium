@@ -243,14 +243,18 @@ void NavStarsWindow::populateNavigationalStarsSets()
 	nsSets->addItem(q_("Russian"), "Russian");
 	// TRANSLATORS: Part of full phrase: German set of navigational stars
 	nsSets->addItem(q_("German"), "German");
+
+	// TRANSLATORS: Part of full phrase: Apollo space program set of navigational stars
+	nsSets->addItem(q_("Apollo space program"), "Apollo");
+	
+	// Telescope alignment stars
 	nsSets->addItem("Gemini APS", "GeminiAPS");
 	nsSets->addItem("Meade LX200", "MeadeLX200");
 	nsSets->addItem("Meade ETX", "MeadeETX");
 	nsSets->addItem("Meade Autostar #494", "MeadeAS494");
 	nsSets->addItem("Meade Autostar #497", "MeadeAS497");
 	nsSets->addItem("Celestron", "Celestron");
-	// TRANSLATORS: Part of full phrase: Apollo space program set of navigational stars
-	nsSets->addItem(q_("Apollo space program"), "Apollo");
+	nsSets->addItem("Skywatcher", "Skywatcher");
 
 	//Restore the selection
 	index = nsSets->findData(selectedNsSetId, Qt::UserRole, Qt::MatchCaseSensitive);
