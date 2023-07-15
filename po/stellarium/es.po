@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2023-07-14 21:54+0700\n"
+"POT-Creation-Date: 2023-07-15 15:33+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Víctor Vega <vegadark@protonmail.com>, 2023\n"
 "Language-Team: Spanish (https://app.transifex.com/stellarium/teams/80998/es/)\n"
@@ -4360,7 +4360,7 @@ msgstr ""
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:257
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:237
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:116
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:278
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:282
 #: plugins/Novae/src/gui/NovaeDialog.cpp:115
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:119
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:132
@@ -4836,7 +4836,7 @@ msgstr "Agradecimientos"
 #: src/gui/ConfigurationDialog.cpp:1314
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:784
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:258
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:279
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:283
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:138
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:210
 msgid "Authors"
@@ -4854,7 +4854,7 @@ msgstr "Contacto"
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:256
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:236
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:115
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:277
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:281
 #: plugins/Novae/src/gui/NovaeDialog.cpp:114
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:118
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:131
@@ -11806,8 +11806,8 @@ msgid "Refresh"
 msgstr "Actualizar"
 
 #: src/ui_locationDialogGui.h:489 src/ui_locationDialogGui.h:492
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialogLocations.h:155
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialogLocations.h:158
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialogLocations.h:156
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialogLocations.h:159
 msgid ""
 "Standard list of locations contains only English names (without diacritics!)"
 msgstr ""
@@ -15322,7 +15322,7 @@ msgstr "Guardar lista"
 
 #: src/ui_obsListDialog.h:365
 #: plugins/Satellites/src/ui_satellitesDialog.h:1385
-#: plugins/Scenery3d/src/ui_storedViewDialog.h:216
+#: plugins/Scenery3d/src/ui_storedViewDialog.h:217
 msgid "Description:"
 msgstr "Descripción:"
 
@@ -21686,7 +21686,7 @@ msgid "Navigational Stars"
 msgstr "Estrellas Náuticas"
 
 #: plugins/NavStars/src/NavStars.cpp:59
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:283
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:287
 msgid "This plugin marks navigational stars from a selected set."
 msgstr ""
 "Este plugin marca estrellas de navegación desde un conjunto seleccionado."
@@ -21696,7 +21696,7 @@ msgid "Mark the navigational stars"
 msgstr "Marcar las estrellas náuticas"
 
 #. TRANSLATORS: The emphasis tags mark a title.
-#: plugins/NavStars/src/NavStars.cpp:397
+#: plugins/NavStars/src/NavStars.cpp:396
 msgid ""
 "The 57 \"selected stars\" that are listed in <em>The Nautical Almanac</em> "
 "jointly published by Her Majesty's Nautical Almanac Office and the US Naval "
@@ -21712,7 +21712,7 @@ msgstr ""
 " em>."
 
 #. TRANSLATORS: The emphasis tags mark a book title.
-#: plugins/NavStars/src/NavStars.cpp:403
+#: plugins/NavStars/src/NavStars.cpp:400
 #, qt-format
 msgid ""
 "The 81 stars that are listed in the French Nautical Almanac (The original "
@@ -21723,7 +21723,7 @@ msgstr ""
 "de Francia."
 
 #. TRANSLATORS: The emphasis tags mark a book title.
-#: plugins/NavStars/src/NavStars.cpp:409
+#: plugins/NavStars/src/NavStars.cpp:404
 #, qt-format
 msgid ""
 "The 160 stars that are listed in the Russian Nautical Almanac (The original "
@@ -21733,7 +21733,7 @@ msgstr ""
 "original ruso es <em>%1</ em>)."
 
 #. TRANSLATORS: The emphasis tags mark a book title.
-#: plugins/NavStars/src/NavStars.cpp:415
+#: plugins/NavStars/src/NavStars.cpp:408
 #, qt-format
 msgid ""
 "The 80 stars that are listed in the German Nautical Almanac (The original "
@@ -21744,7 +21744,7 @@ msgstr ""
 "original en alemán es <em>%1</em>) publicado por la Agencia Federal Marítima"
 " e Hidrográfica de Alemania."
 
-#: plugins/NavStars/src/NavStars.cpp:420
+#: plugins/NavStars/src/NavStars.cpp:411
 msgid ""
 "Alignment Star List from the Gemini Astronomical Positioning System. The "
 "Gemini Astronomical Positioning System is a professional level computerized "
@@ -21755,7 +21755,7 @@ msgstr ""
 "computarizado de nivel profesional para controlar monturas de telescopios "
 "ecuatoriales alemanes pequeños y medianos."
 
-#: plugins/NavStars/src/NavStars.cpp:425
+#: plugins/NavStars/src/NavStars.cpp:414
 msgid ""
 "The Meade LX200 utilizes 33 bright and well known stars to calibrate the "
 "telescope’s Object Library in the ALTAZ and POLAR alignments. These stars "
@@ -21768,7 +21768,7 @@ msgstr ""
 "observadores de cualquier parte del mundo en cualquier noche puedan realizar"
 " alineaciones de precisión de manera fácil y rápida."
 
-#: plugins/NavStars/src/NavStars.cpp:430
+#: plugins/NavStars/src/NavStars.cpp:417
 msgid ""
 "This list from Meade ETX mount will aid the observer to find alignment stars"
 " at various times of the year."
@@ -21776,7 +21776,7 @@ msgstr ""
 "Esta lista de la montura Meade ETX ayudará al observador a encontrar "
 "estrellas de alineación en varias épocas del año."
 
-#: plugins/NavStars/src/NavStars.cpp:435
+#: plugins/NavStars/src/NavStars.cpp:420
 msgid ""
 "This list contains all the alignment stars for the Meade Autostar #494 "
 "handset (ETX60AT)."
@@ -21784,7 +21784,7 @@ msgstr ""
 "Esta lista contiene todas las estrellas de alineación para el teléfono Meade"
 " Autostar #494 (ETX60AT)."
 
-#: plugins/NavStars/src/NavStars.cpp:440
+#: plugins/NavStars/src/NavStars.cpp:423
 msgid ""
 "This list contains all the alignment stars for the Meade Autostar #497 "
 "handset."
@@ -21792,7 +21792,7 @@ msgstr ""
 "Esta lista contiene todas las estrellas de alineación para el teléfono Meade"
 " Autostar #497."
 
-#: plugins/NavStars/src/NavStars.cpp:445
+#: plugins/NavStars/src/NavStars.cpp:426
 msgid ""
 "Even though there are about 250 named stars in the hand control database, "
 "only 82 (stars brighter than or equal to magnitude 2.5) can be used for "
@@ -21802,7 +21802,7 @@ msgstr ""
 "control manual, solo 82 (estrellas con un brillo igual o superior a 2,5) se "
 "pueden usar para la alineación y tareas relacionadas."
 
-#: plugins/NavStars/src/NavStars.cpp:450
+#: plugins/NavStars/src/NavStars.cpp:429
 msgid ""
 "These 37 stars were used by the Apollo space program to navigate to the Moon"
 " from 1969-1972, Apollo 11 through Apollo 17."
@@ -21810,89 +21810,97 @@ msgstr ""
 "Estas 37 estrellas fueron usadas por el programa espacial Apolo para navegar"
 " a la Luna entre 1969-1972, del Apolo 11 al Apolo 17."
 
-#: plugins/NavStars/src/NavStars.cpp:745
+#: plugins/NavStars/src/NavStars.cpp:432
+msgid ""
+"This list contains all the alignment stars for the Skywatch SynScan hand "
+"controller and SynScan Pro App."
+msgstr ""
+"La lista contiene todas las estrellas de alineación para el control manual "
+"Skywatch SynScan y SynScan Pro App."
+
+#: plugins/NavStars/src/NavStars.cpp:770
 msgctxt "the highest part of the Sun or Moon"
 msgid "upper limb"
 msgstr "miembro superior"
 
-#: plugins/NavStars/src/NavStars.cpp:746
+#: plugins/NavStars/src/NavStars.cpp:771
 msgctxt "the lowest part of the Sun or Moon"
 msgid "lower limb"
 msgstr "miembro inferior"
 
-#: plugins/NavStars/src/NavStars.cpp:761 plugins/NavStars/src/NavStars.cpp:789
-#: plugins/NavStars/src/NavStars.cpp:795
+#: plugins/NavStars/src/NavStars.cpp:786 plugins/NavStars/src/NavStars.cpp:814
+#: plugins/NavStars/src/NavStars.cpp:820
 msgctxt "Greenwich Hour Angle"
 msgid "GHA"
 msgstr "GHA"
 
-#: plugins/NavStars/src/NavStars.cpp:763 plugins/NavStars/src/NavStars.cpp:793
+#: plugins/NavStars/src/NavStars.cpp:788 plugins/NavStars/src/NavStars.cpp:818
 msgctxt "object Sidereal Hour Angle (ERA, Earth rotation angle)"
 msgid "SHA"
 msgstr "SHA"
 
-#: plugins/NavStars/src/NavStars.cpp:765 plugins/NavStars/src/NavStars.cpp:799
+#: plugins/NavStars/src/NavStars.cpp:790 plugins/NavStars/src/NavStars.cpp:824
 msgctxt "Local Hour Angle"
 msgid "LHA"
 msgstr "LHA"
 
-#: plugins/NavStars/src/NavStars.cpp:768
+#: plugins/NavStars/src/NavStars.cpp:793
 msgctxt "Ground Position of object"
 msgid "GP: GHA/DEC"
 msgstr "GP: GHA/DEC"
 
-#: plugins/NavStars/src/NavStars.cpp:771
+#: plugins/NavStars/src/NavStars.cpp:796
 msgctxt "geodetic coordinate system, latitude and longitude of ground point"
 msgid "GP: LAT/LON"
 msgstr "GP: LAT/LON"
 
-#: plugins/NavStars/src/NavStars.cpp:774
+#: plugins/NavStars/src/NavStars.cpp:799
 msgctxt "geodetic coordinate system, assumed latitude and longitude of user"
 msgid "AP: LAT/LON"
 msgstr "AP: LAT/LON"
 
-#: plugins/NavStars/src/NavStars.cpp:777
+#: plugins/NavStars/src/NavStars.cpp:802
 msgctxt ""
 "Navigation/horizontal coordinate system, calculated altitude and azimuth"
 msgid "Hc/Zn"
 msgstr "Hc/Zn"
 
-#: plugins/NavStars/src/NavStars.cpp:784
+#: plugins/NavStars/src/NavStars.cpp:809
 msgctxt "Universal Time Coordinated"
 msgid "UTC"
 msgstr "UTC"
 
-#: plugins/NavStars/src/NavStars.cpp:787
+#: plugins/NavStars/src/NavStars.cpp:812
 msgctxt "Navigation/horizontal coordinate system, sextant measured altitude"
 msgid "Ho"
 msgstr "Ho"
 
-#: plugins/NavStars/src/NavStars.cpp:791
+#: plugins/NavStars/src/NavStars.cpp:816
 msgctxt "Local Hour Angle"
 msgid "LMST"
 msgstr "LMST"
 
-#: plugins/NavStars/src/NavStars.cpp:797
+#: plugins/NavStars/src/NavStars.cpp:822
 msgctxt "Declination"
 msgid "DEC"
 msgstr "DEC"
 
-#: plugins/NavStars/src/NavStars.cpp:801
+#: plugins/NavStars/src/NavStars.cpp:826
 msgctxt "geodetic coordinate system, latitude"
 msgid "LAT"
 msgstr "LAT"
 
-#: plugins/NavStars/src/NavStars.cpp:803
+#: plugins/NavStars/src/NavStars.cpp:828
 msgctxt "geodetic coordinate system, longitude"
 msgid "LON"
 msgstr "LON"
 
-#: plugins/NavStars/src/NavStars.cpp:805
+#: plugins/NavStars/src/NavStars.cpp:830
 msgctxt "Navigation/horizontal coordinate system, calculated altitude"
 msgid "Hc"
 msgstr "Hc"
 
-#: plugins/NavStars/src/NavStars.cpp:807
+#: plugins/NavStars/src/NavStars.cpp:832
 msgctxt "Navigation/horizontal coordinate system, calculated azimuth"
 msgid "Zn"
 msgstr "Zn"
@@ -21924,15 +21932,15 @@ msgstr "Alemán"
 
 #. TRANSLATORS: Part of full phrase: Apollo space program set of navigational
 #. stars
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:253
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:248
 msgid "Apollo space program"
 msgstr "Programa espacial Apolo"
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:276
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:280
 msgid "Navigational Stars Plug-in"
 msgstr "Plug-in de  estrellas de navegación"
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:287
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:291
 msgid ""
 "Additional information fields can be displayed by selecting \"Information "
 "&gt; Additional coordinates (from plugins)\""
@@ -21940,22 +21948,22 @@ msgstr ""
 "Se pueden mostrar campos de información adicionales seleccionando "
 "\"Información &gt; Coordenadas adicionales (desde complementos)\""
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:291
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:295
 msgid "These fields are:"
 msgstr "Estos campos son:"
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:293
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:314
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:297
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:318
 #, qt-format
 msgid "GHA%1: The Greenwich Hour Angle of the first point of Aries."
 msgstr "GHA%1: El ángulo horario de Greenwich del primer punto de Aries."
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:294
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:298
 msgid "SHA: Sidereal Hour Angle of the navigation star."
 msgstr "SHA: Ángulo Horario Sidéreo de la estrella de navegación."
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:295
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:320
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:299
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:324
 msgid "LHA: The observer's Local Hour Angle to the navigation star."
 msgstr ""
 "LHA: Ángulo Horario Local del observador hacia la estrella de navegación."
@@ -21963,7 +21971,7 @@ msgstr ""
 #. TRANSLATORS: In Celestial Navigation "GP" is Ground Point, astronomers
 #. often use "sub-point" which is the geodetic location of a point where the
 #. star is at zenith.
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:297
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:301
 msgid ""
 "GP: GHA/DEC: The navigation star's ground point as Greenwich Hour Angle and "
 "Declination."
@@ -21974,7 +21982,7 @@ msgstr ""
 #. TRANSLATORS: In Celestial Navigation "AP" is Assumed Position, a point
 #. close by where the observer knows themselves to be. For example, from dead
 #. reckoning.
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:299
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:303
 msgid ""
 "AP: LAT/LON: The observer's Assumed Position as geodetic latitude and "
 "longitude."
@@ -21985,7 +21993,7 @@ msgstr ""
 #. TRANSLATORS: In Celestial Navigation Hc is "computed height" from the
 #. Nautical Almanac where "height" is altitude. Likewise, Zn is computed
 #. azimuth, as seen from the AP.
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:301
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:305
 msgid ""
 "Hc/Zn: The calculated height (altitude) and computed azimuth of navigation "
 "star, seen from AP."
@@ -21993,7 +22001,7 @@ msgstr ""
 "Hc/Zn: La altura calculada (altitud) y acimut calculado de la estrella de "
 "navegación, vista desde AP."
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:305
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:309
 msgid ""
 "The user has two different view options selected by \"Show information as a "
 "tabulated list\"."
@@ -22001,7 +22009,7 @@ msgstr ""
 "El usuario tiene dos opciones de vista diferentes seleccionadas en \"Mostrar"
 " información como una lista tabulada\"."
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:309
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:313
 msgid ""
 "When 'tabulated list' is selected the fields more closely follow the <em>The"
 " Nautical Almanac</em> format:"
@@ -22011,52 +22019,52 @@ msgstr ""
 
 #. TRANSLATORS: In Celestial Navigation "height" is used where astronomers
 #. would use "altitude", Ho Height Observed
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:313
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:317
 msgid "Ho: Simulated observed altitude of navigation star using a sextant."
 msgstr ""
 "Ho: altitud observada simulada de la estrella de navegación usando un "
 "sextante."
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:315
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:319
 msgid "LMST: Local mean sidereal time."
 msgstr "LMST: Tiempo sideral medio local."
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:316
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:320
 msgid "SHA: Sidereal Hour Angle of navigation star."
 msgstr "SHA: Ángulo horario sidéreo de la estrella de navegación."
 
 #. TRANSLATORS: celestial coordinate system, declination.
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:318
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:322
 msgid "DEC: The navigation star's declination."
 msgstr "DEC: La declinación de la estrella de navegación."
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:319
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:323
 msgid "GHA: The navigation star's Greenwich Hour Angle."
 msgstr "GHA: El ángulo horario de Greenwich de la estrella de navegación."
 
 #. TRANSLATORS: Geodetic coordinate system, latitude.
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:322
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:326
 msgid "LAT: The observer's geodetic latitude."
 msgstr "LAT: La latitud geodésica del observador."
 
 #. TRANSLATORS: Geodetic coordinate system, longitude.
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:324
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:328
 msgid "LON: The observer's geodetic longitude."
 msgstr "LON: La longitud geodésica del observador."
 
 #. TRANSLATORS: The process of Sight Reduction outputs computed values. Hc
 #. computed height (altitude) for the AP
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:326
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:330
 msgid "Hc: The AP calculated height (altitude) of navigation star."
 msgstr "Hc: La altura (altitud) calculada de AP de la estrella de navegación."
 
 #. TRANSLATORS: The process of Sight Reduction outputs computed values. Zn
 #. computed azimuth
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:328
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:332
 msgid "Zn: The AP calculated azimuth of navigation star."
 msgstr "Zn: El acimut calculado de AP de la estrella de navegación."
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:332
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:336
 msgid "For further information please refer to the Stellarium User Guide."
 msgstr ""
 "Para obtener más información, consulte la Guía del usuario de Stellarium."
@@ -28087,27 +28095,27 @@ msgstr "Actualiza también la segunda cara más dominante"
 msgid "Quality/Performance settings"
 msgstr "Ajustes de Calidad/Rendimiento"
 
-#: plugins/Scenery3d/src/ui_storedViewDialog.h:209
+#: plugins/Scenery3d/src/ui_storedViewDialog.h:210
 msgid "Stored views"
 msgstr "Vistas almacenados"
 
-#: plugins/Scenery3d/src/ui_storedViewDialog.h:211
+#: plugins/Scenery3d/src/ui_storedViewDialog.h:212
 msgid "Load view"
 msgstr "Cargar vista"
 
-#: plugins/Scenery3d/src/ui_storedViewDialog.h:212
+#: plugins/Scenery3d/src/ui_storedViewDialog.h:213
 msgid "Delete view"
 msgstr "Eliminar vista"
 
-#: plugins/Scenery3d/src/ui_storedViewDialog.h:213
+#: plugins/Scenery3d/src/ui_storedViewDialog.h:214
 msgid "Add current view"
 msgstr "Agregar vista actual"
 
-#: plugins/Scenery3d/src/ui_storedViewDialog.h:214
+#: plugins/Scenery3d/src/ui_storedViewDialog.h:215
 msgid "Load/store with date"
 msgstr "Cargar/guardar con fecha"
 
-#: plugins/Scenery3d/src/ui_storedViewDialog.h:215
+#: plugins/Scenery3d/src/ui_storedViewDialog.h:216
 msgid "Title:"
 msgstr "Título"
 
@@ -28517,7 +28525,7 @@ msgstr "Reestablecer configuración por defecto"
 msgid "Custom Lines"
 msgstr "Líneas personalizadas"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialogLocations.h:152
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialogLocations.h:153
 msgid "Locations"
 msgstr "Ubicaciones"
 
