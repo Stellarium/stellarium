@@ -86,7 +86,8 @@ public:
 		MeadeAS494,	//!< Meade Autostar #494 Alignment Stars
 		MeadeAS497,	//!< Meade Autostar #497 Alignment Stars
 		Celestron,	//!< Celestron Alignment Star List
-		Apollo		//!< Apollo Alignment Star List
+		Apollo,		//!< Apollo Alignment Star List
+		Skywatcher	//!< Skywatcher Synscan Hand Controller and SynScan Pro App
 	};
 	Q_ENUM(NavigationalStarsSet)
 
