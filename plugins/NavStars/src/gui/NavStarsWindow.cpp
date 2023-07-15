@@ -254,7 +254,7 @@ void NavStarsWindow::populateNavigationalStarsSets()
 	nsSets->addItem("Meade Autostar #494", "MeadeAS494");
 	nsSets->addItem("Meade Autostar #497", "MeadeAS497");
 	nsSets->addItem("Celestron", "Celestron");
-	nsSets->addItem("Skywatcher", "Skywatcher");
+	nsSets->addItem("Skywatcher SynScan", "SkywatcherSS");
 
 	//Restore the selection
 	index = nsSets->findData(selectedNsSetId, Qt::UserRole, Qt::MatchCaseSensitive);
