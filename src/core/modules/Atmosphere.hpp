@@ -36,11 +36,18 @@ class Planet;
 class Atmosphere
 {
 public:
-    struct LoadingStatus
-    {
-        int stepsDone;
-        int stepsToDo;
-    };
+	struct LoadingStatus
+	{
+		int stepsDone;
+		int stepsToDo;
+	};
+
+	struct InitFailure : std::runtime_error
+	{
+		using std::runtime_error::runtime_error;
+		InitFailure(QString const& what) : std::runtime_error(what.toStdString()) {}
+	};
+
 public:
 	virtual ~Atmosphere() = default;
 	//! Compute sky brightness values and average luminance.

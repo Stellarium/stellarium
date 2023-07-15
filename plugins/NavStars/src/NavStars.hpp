@@ -87,7 +87,11 @@ public:
 		MeadeAS497,	//!< Meade Autostar #497 Alignment Stars
 		Celestron,	//!< Celestron Alignment Star List
 		Apollo,		//!< Apollo Alignment Star List
-		SkywatcherSS	//!< Skywatcher Synscan Hand Controller and SynScan Pro App
+		SkywatcherSS,	//!< Skywatcher Synscan Hand Controller and SynScan Pro App
+		VixenSB,	//!< Vixen Starbook Alignment Stars
+		ArgoNavis,	//!< Alignment stars for Argo Navis digital setting circles
+		OrionIS,	//!< Alignment stars for Orion Intelliscope mounts
+		SkyCommander	//!< Alignment stars for Sky Commander DSCs
 	};
 	Q_ENUM(NavigationalStarsSet)
 

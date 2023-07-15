@@ -439,7 +439,7 @@ void LandscapeMgr::update(double deltaTime)
 				setAtmosphereShowMySkyStatusText(q_("Switching models..."));
 			}
 		}
-		catch(AtmosphereShowMySky::InitFailure const& error)
+		catch(Atmosphere::InitFailure const& error)
 		{
 			qWarning() << "ERROR: Failed to load atmosphere model data:" << error.what();
 			qWarning() << "WARNING: Falling back to the Preetham's model";
@@ -524,7 +524,7 @@ void LandscapeMgr::update(double deltaTime)
 								 currentIsEarth ? moon.data() : nullptr, core->getCurrentLocation(),
 								 15.f, 40.f, static_cast<float>(drawer->getExtinctionCoefficient()), atmosphereNoScatter);
 	}
-	catch(AtmosphereShowMySky::InitFailure const& error)
+	catch(Atmosphere::InitFailure const& error)
 	{
 		qWarning().noquote() << "ShowMySky atmosphere model crashed:" << error.what();
 		qWarning() << "Loading Preetham model";
@@ -760,7 +760,7 @@ void LandscapeMgr::createAtmosphere()
 				setAtmosphereShowMySkyStatusText(QString("%1 0% %2").arg(q_("Loading..."), qc_("done","percentage of done")));
 			}
 		}
-		catch(AtmosphereShowMySky::InitFailure const& error)
+		catch(Atmosphere::InitFailure const& error)
 		{
 			qWarning() << "ERROR: Failed to initialize ShowMySky atmosphere model:" << error.what();
 			qWarning() << "WARNING: Falling back to the Preetham's model";

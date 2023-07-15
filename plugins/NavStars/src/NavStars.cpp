@@ -431,6 +431,18 @@ QString NavStars::getCurrentNavigationalStarsSetDescription() const
 		case SkywatcherSS:
 			txt = q_("This list contains all the alignment stars for the Skywatch SynScan hand controller and SynScan Pro App.");
 			break;
+		case VixenSB:
+			txt = q_("Alignment stars for Vixen Starbook mounts.");
+			break;
+		case ArgoNavis:
+			txt = q_("Alignment stars for Argo Navis digital setting circles.");
+			break;
+		case OrionIS:
+			txt = q_("Alignment stars for Orion Intelliscope mounts.");
+			break;
+		case SkyCommander:
+			txt = q_("Alignment stars for Sky Commander DSCs.");
+			break;
 	}
 
 	return txt;
@@ -682,6 +694,56 @@ void NavStars::populateNavigationalStarsSet(void)
 					 37279,  28437,  84345,  47908,  86032,  49669,  24436,
 					109074,  27366,  86228, 113881,   8903,  85927,   3179,
 					 32349,  65474,  97278,  77070,  91262,  34444,  79593
+			};
+			break;
+		}
+		case VixenSB:
+		{
+			// Vixen Starbook mounts
+			// Source: https://www.skysafariastronomy.com/repositories/skylist/Alignment%20Star%20Lists/Vixen%20Starbook%20Alignment%20Stars.skylist
+			starNumbers  = {
+				  7588,  60718,  95947,  21421, 100027, 109268,  46390,    677,
+				 97649,  80763,  69673, 100345,  27989,  30438,  24608, 102098,
+				 57632,   3419,  54061, 113368,   9884, 113963,   8832,  10826,
+				 15863,  65378,  92855,  11767,  37826,  37279,  84345,  86032,
+				 49669,  71683,   3179,  65474,  44816,  91262
+			};
+			break;
+		}
+		case ArgoNavis:
+		{
+			// Argo Navis digital setting circles
+			// Source: https://www.skysafariastronomy.com/repositories/skylist/Alignment%20Star%20Lists/Argo%20Alignment%20Stars.skylist
+			starNumbers  = {
+				   677,  97649,  24608,  69673,  32349,  37279,  30438,   4427,
+				 68702,  60718,  62434,  95947,   7588,  36850,  37826, 109268,
+				 46390,  49669,  57632,  91262,  86032,  27989,  24436,  15863,
+				113368,  80763,  21421,  54061,  65378,  11767,  44816,  65474,
+				102098,  90185,  71683
+			};
+			break;
+		}
+		case OrionIS:
+		{
+			// Orion Intelliscope mounts
+			// Source: https://www.skysafariastronomy.com/repositories/skylist/Alignment%20Star%20Lists/Orion%20Intelliscope%20Alignment%20Stars.skylist
+			starNumbers  = {
+				 95947,  21421,  46390,    677,  97649,  80763,  69673,  27989,
+				 24608,  36850, 102098,  57632, 113368,  15863,  65378,  11767,
+				 37279,  86032,  49669,  24436,  32349,  65474,  91262
+			};
+			break;
+		}
+		case SkyCommander:
+		{
+			// Sky Commander DSCs
+			// Source: https://www.skysafariastronomy.com/repositories/skylist/Alignment%20Star%20Lists/Sky%20Commander%20Alignment%20Stars.skylist
+			starNumbers  = {
+				 11767,   3179,   3419,   5447,   9884,  14576,  15863,  18543,
+				 21421,  24436,  24608,  27989,  32349,  37279,  37826,  44127,
+				 46390,  49669,  50372,  54872,  58001,  63125,  65474,  67301,
+				 69673,  73555,  74785,  80763,  81693,  86032,  91262,  97649,
+				100453, 102098, 107315, 112158, 113368
 			};
 			break;
 		}

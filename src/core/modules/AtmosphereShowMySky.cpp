@@ -476,7 +476,7 @@ AtmosphereShowMySky::AtmosphereShowMySky(const double initialAltitude)
 		shaderAttribLocations.ditherPattern          = prog.uniformLocation("ditherPattern");
 		shaderAttribLocations.oneOverGamma           = prog.uniformLocation("oneOverGamma");
 		shaderAttribLocations.brightnessScale        = prog.uniformLocation("brightnessScale");
-		shaderAttribLocations.luminanceTexture       = prog.uniformLocation("luminance");
+		shaderAttribLocations.luminanceTexture       = prog.uniformLocation("luminanceXYZW");
 		shaderAttribLocations.alphaWaOverAlphaDa     = prog.uniformLocation("alphaWaOverAlphaDa");
 		shaderAttribLocations.term2TimesOneOverMaxdL = prog.uniformLocation("term2TimesOneOverMaxdL");
 		shaderAttribLocations.term2TimesOneOverMaxdLpOneOverGamma
