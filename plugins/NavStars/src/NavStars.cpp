@@ -428,7 +428,7 @@ QString NavStars::getCurrentNavigationalStarsSetDescription() const
 		case Apollo:
 			txt = q_("These 37 stars were used by the Apollo space program to navigate to the Moon from 1969-1972, Apollo 11 through Apollo 17.");
 			break;
-		case Skywatcher:
+		case SkywatcherSS:
 			txt = q_("This list contains all the alignment stars for the Skywatch SynScan hand controller and SynScan Pro App.");
 			break;
 	}
@@ -663,7 +663,7 @@ void NavStars::populateNavigationalStarsSet(void)
 			};
 			break;
 		}
-		case Skywatcher:
+		case SkywatcherSS:
 		{
 			// Skywatcher SynScan Hand Held Controller and SynScan Pro mobile and desktop App
 			// Sources: https://www.iceinspace.com.au/63-501-0-0-1-0.html
