@@ -57,12 +57,6 @@ public:
 	bool isReadyToRender() const override;
 	LoadingStatus stepDataLoading() override;
 
-	struct InitFailure : std::runtime_error
-	{
-		using std::runtime_error::runtime_error;
-		InitFailure(QString const& what) : std::runtime_error(what.toStdString()) {}
-	};
-
 private:
 #ifdef ENABLE_SHOWMYSKY
 	QLibrary showMySkyLib;
