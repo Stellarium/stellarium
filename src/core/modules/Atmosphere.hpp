@@ -36,11 +36,11 @@ class Planet;
 class Atmosphere
 {
 public:
-    struct LoadingStatus
-    {
-        int stepsDone;
-        int stepsToDo;
-    };
+	struct LoadingStatus
+	{
+		int stepsDone;
+		int stepsToDo;
+	};
 public:
 	virtual ~Atmosphere() = default;
 	//! Compute sky brightness values and average luminance.
