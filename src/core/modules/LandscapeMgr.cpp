@@ -697,15 +697,6 @@ void LandscapeMgr::draw(StelCore* core)
 		painter.setColor(1, 0, 0, messageFader.getInterstate());
 		painter.drawText(83, 70, messageToShow);
 	}
-
-	// Workaround for a bug with spherical mirror mode when we don't show the cardinal points.
-	// I am not really sure why this seems to fix the problem.  If you want to
-	// remove this, make sure the spherical mirror mode with cardinal points
-	// toggled off works properly!
-	const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
-	QOpenGLPaintDevice device;
-	device.setSize(QSize(prj->getViewportWidth(), prj->getViewportHeight()));
-	QPainter painter(&device);
 }
 
 // Some element in drawing order behind LandscapeMgr can call this at the end of its own draw() to overdraw with the polygon line and gazetteer.
