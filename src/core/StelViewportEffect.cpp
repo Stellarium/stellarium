@@ -325,6 +325,7 @@ void StelViewportDistorterFisheyeToSphericMirror::paintViewportBuffer(const QOpe
 {
 	StelPainter sPainter(StelApp::getInstance().getCore()->getProjection2d());
 	QOpenGLFunctions* gl = sPainter.glFuncs();
+	GL(gl->glActiveTexture(GL_TEXTURE0));
 	GL(gl->glBindTexture(GL_TEXTURE_2D, buf->texture()));
 	GL(gl->glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR));
 	GL(gl->glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR));
