@@ -406,7 +406,7 @@ QString NavStars::getCurrentNavigationalStarsSetDescription() const
 		{       VixenSB, N_("Alignment stars for Vixen Starbook mounts.") },
 		{     ArgoNavis, N_("Alignment stars for Argo Navis digital setting circles.") },
 		{       OrionIS, N_("Alignment stars for Orion Intelliscope mounts.") },
-		{  SkyCommander, N_("Alignment stars for Sky Commander DSCs.")}
+		{  SkyCommander, N_("Alignment stars for Sky Commander digital setting circles.")}
 	};
 
 	// Original titles of almanacs
