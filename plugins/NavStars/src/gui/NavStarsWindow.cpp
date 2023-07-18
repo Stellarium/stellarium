@@ -241,6 +241,8 @@ void NavStarsWindow::populateNavigationalStarsSets()
 	nsSets->addItem(q_("French"), "French");
 	// TRANSLATORS: Part of full phrase: Russian set of navigational stars
 	nsSets->addItem(q_("Russian"), "Russian");
+	// TRANSLATORS: Part of full phrase: Soviet aviation set of navigational stars
+	nsSets->addItem(q_("Soviet aviation"), "USSRAvia");
 	// TRANSLATORS: Part of full phrase: German set of navigational stars
 	nsSets->addItem(q_("German"), "German");
 
@@ -253,7 +255,7 @@ void NavStarsWindow::populateNavigationalStarsSets()
 	nsSets->addItem("Meade ETX", "MeadeETX");
 	nsSets->addItem("Meade Autostar #494", "MeadeAS494");
 	nsSets->addItem("Meade Autostar #497", "MeadeAS497");
-	nsSets->addItem("Celestron", "Celestron");
+	nsSets->addItem("Celestron NexStar", "CelestronNS");
 	nsSets->addItem("Skywatcher SynScan", "SkywatcherSS");
 	nsSets->addItem("Vixen Starbook", "VixenSB");
 	nsSets->addItem("Argo Navis", "ArgoNavis");

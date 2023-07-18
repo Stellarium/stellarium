@@ -392,6 +392,8 @@ QString NavStars::getCurrentNavigationalStarsSetDescription() const
 		{ AngloAmerican, N_("The 57 \"selected stars\" that are listed in <em>The Nautical Almanac</em> jointly published by Her Majesty's Nautical Almanac Office and the US Naval Observatory since 1958; consequently, these stars are also used in navigational aids such as the <em>2102D Star Finder</em> and <em>Identifier</em>.") },
 		{        French, N_("The 81 stars that are listed in the French Nautical Almanac published by the French Bureau des Longitudes.") },
 		{       Russian, N_("The 160 stars that are listed in the Russian Nautical Almanac.") },
+		// TRANSLATORS: The emphasis tags mark a title.
+		{      USSRAvia, N_("The typical set of navigational stars, which was used by aviation of the Soviet Union. These stars you can found in the books like <em>Aviation Astronomy</em> or <em>Aviation handbook</em>.") },
 		{        German, N_("The 80 stars that are listed in the German Nautical Almanac published by the Federal Maritime and Hydrographic Agency of Germany.") },
 		{        Apollo, N_("These 37 stars were used by the Apollo space program to navigate to the Moon from 1969-1972, Apollo 11 through Apollo 17.") },
 		{     GeminiAPS, N_("Alignment Star List from the Gemini Astronomical Positioning System. The Gemini Astronomical Positioning System is a professional level computerized device for controlling small to medium German equatorial telescope mounts.") },
@@ -399,7 +401,7 @@ QString NavStars::getCurrentNavigationalStarsSetDescription() const
 		{      MeadeETX, N_("This list from Meade ETX mount will aid the observer to find alignment stars at various times of the year.") },
 		{    MeadeAS494, N_("This list contains all the alignment stars for the Meade Autostar #494 handset (ETX60AT).") },
 		{    MeadeAS497, N_("This list contains all the alignment stars for the Meade Autostar #497 handset.") },
-		{     Celestron, N_("Even though there are about 250 named stars in the hand control database, only 82 (stars brighter than or equal to magnitude 2.5) can be used for alignment and related tasks.") },
+		{   CelestronNS, N_("Even though there are about 250 named stars in the hand control database, only 82 (stars brighter than or equal to magnitude 2.5) can be used for alignment and related tasks.") },
 		{  SkywatcherSS, N_("This list contains all the alignment stars for the Skywatch SynScan hand controller and SynScan Pro App.") },
 		{       VixenSB, N_("Alignment stars for Vixen Starbook mounts.") },
 		{     ArgoNavis, N_("Alignment stars for Argo Navis digital setting circles.") },
@@ -497,6 +499,17 @@ void NavStars::populateNavigationalStarsSet(void)
 				 90185,  90496,  91262,  95347,	 93506,  93747,  94141,  97165,
 				 97278,  97649, 100453,	100751, 102098, 102488, 105199, 107315,
 				107556, 109268,	110130, 112122, 113368, 113881, 113963,  11767
+			};
+			break;
+		}
+		case USSRAvia:
+		{
+			// The typical set of soviet aviation navigational stars
+			starNumbers = {
+				   677,  11767,  62956,  49669, 102098, 113368,  80763,	 37826,
+				 65474,  27989,  21421,  97649,  37279,  24436,  69673,  24608,
+				 91262,  32349,  30438,   7588,  71683,  62434,  82273,  90185,
+				100751,   9884
 			};
 			break;
 		}
@@ -603,9 +616,9 @@ void NavStars::populateNavigationalStarsSet(void)
 			};
 			break;
 		}
-		case Celestron:
+		case CelestronNS:
 		{
-			// Celestron Alignment Star List
+			// Celestron NexStar Alignment Star List
 			// Source: https://www.celestron.com/blogs/knowledgebase/can-all-named-stars-listed-in-the-hand-control-be-used-for-alignment
 			starNumbers = {
 				 32349,  30438,  69673,  91262,  24608,  24436,  37279,   7588,
