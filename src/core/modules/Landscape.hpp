@@ -231,7 +231,6 @@ protected:
 	std::unique_ptr<QOpenGLVertexArrayObject> vao;
 	std::unique_ptr<QOpenGLBuffer> vbo;
 	StelProjectorP prevProjector;
-	StelTextureSP ditherPatternTex;
 	std::unique_ptr<QOpenGLShaderProgram> renderProgram;
 
 	double radius;
@@ -363,9 +362,7 @@ private:
 		int tanMode;
 		int calibrated;
 		int brightness;
-		int rgbMaxValue;
 		int whatToRender;
-		int ditherPattern;
 		int decorAngleShift;
 		int firstSideInBatch;
 		int sidePresenceMask;
@@ -442,8 +439,6 @@ private:
 		int texFov;
 		int mapTex;
 		int brightness;
-		int rgbMaxValue;
-		int ditherPattern;
 		int projectionMatrixInverse;
 	} shaderVars;
 };
@@ -508,9 +503,7 @@ private:
 		int mapTex;
 		int mapTexTop;
 		int brightness;
-		int rgbMaxValue;
 		int mapTexBottom;
-		int ditherPattern;
 		int bottomCapColor;
 		int projectionMatrixInverse;
 	} shaderVars;

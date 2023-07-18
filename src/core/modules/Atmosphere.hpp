@@ -22,6 +22,7 @@
 #ifndef ATMOSPHERE_HPP
 #define ATMOSPHERE_HPP
 
+#include <stdexcept>
 #include "StelCore.hpp"
 #include "StelFader.hpp"
 
