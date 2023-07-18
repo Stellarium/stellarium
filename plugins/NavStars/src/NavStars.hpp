@@ -79,13 +79,14 @@ public:
 		AngloAmerican,	//!< Anglo-American set (The Nautical Almanac)
 		French,		//!< French set (Ephémérides Nautiques)
 		Russian,	//!< Russian set (Морской астрономический ежегодник)
+		USSRAvia,	//!< The set of navigational stars which was used for soviet aviation
 		German,		//!< German set (Nautisches Jahrbuch)
 		GeminiAPS,	//!< Gemini APS Alignment Star List
 		MeadeLX200,	//!< Meade LX200 Alignment Star Library
 		MeadeETX,	//!< Meade ETX Alignment Star Library
 		MeadeAS494,	//!< Meade Autostar #494 Alignment Stars
 		MeadeAS497,	//!< Meade Autostar #497 Alignment Stars
-		Celestron,	//!< Celestron Alignment Star List
+		CelestronNS,	//!< Celestron NexStar Alignment Star List
 		Apollo,		//!< Apollo Alignment Star List
 		SkywatcherSS,	//!< Skywatcher Synscan Hand Controller and SynScan Pro App
 		VixenSB,	//!< Vixen Starbook Alignment Stars
