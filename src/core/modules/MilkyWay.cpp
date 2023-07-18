@@ -28,7 +28,6 @@
 #include "StelProjector.hpp"
 #include "StelToneReproducer.hpp"
 #include "StelApp.hpp"
-#include "Dithering.hpp"
 #include "StelOpenGLArray.hpp"
 #include "SaturationShader.hpp"
 #include "StelTextureMgr.hpp"
@@ -104,8 +103,6 @@ void MilkyWay::init()
 	bindVAO();
 	setupCurrentVAO();
 	releaseVAO();
-
-	ditherPatternTex = StelApp::getInstance().getTextureManager().getDitheringTexture(0);
 
 	QString displayGroup = N_("Display Options");
 	addAction("actionShow_MilkyWay", displayGroup, N_("Milky Way"), "flagMilkyWayDisplayed", "M");
@@ -206,7 +203,6 @@ void main()
 			projector->getUnProjectShader() +
 			core->getAberrationShader() +
 			extinction.getForwardTransformShader() +
-			makeDitheringShader()+
 			makeSaturationShader()+
 			R"(
 VARYING highp vec3 ndcPos;
@@ -249,7 +245,7 @@ void main(void)
     vec4 color = texture2D(mainTex, texc)*vec4(brightness,1)*extinctionFactor;
 	if(saturation != 1.0)
 		color.rgb = saturate(color.rgb, saturation);
-	FRAG_COLOR = dither(color);
+	FRAG_COLOR = color;
 }
 )";
 		ok = renderProgram->addShaderFromSourceCode(QOpenGLShader::Fragment, frag);
@@ -267,8 +263,6 @@ void main(void)
 		shaderVars.mainTex          = renderProgram->uniformLocation("mainTex");
 		shaderVars.saturation       = renderProgram->uniformLocation("saturation");
 		shaderVars.brightness       = renderProgram->uniformLocation("brightness");
-		shaderVars.rgbMaxValue      = renderProgram->uniformLocation("rgbMaxValue");
-		shaderVars.ditherPattern    = renderProgram->uniformLocation("ditherPattern");
 		shaderVars.bortleIntensity  = renderProgram->uniformLocation("bortleIntensity");
 		shaderVars.extinctionEnabled= renderProgram->uniformLocation("extinctionEnabled");
 		shaderVars.projectionMatrixInverse = renderProgram->uniformLocation("projectionMatrixInverse");
@@ -342,14 +336,9 @@ void main(void)
 	mainTex->bind(mainTexSampler);
 	renderProgram->setUniformValue(shaderVars.mainTex, mainTexSampler);
 
-	const int ditherTexSampler = 1;
-	ditherPatternTex->bind(ditherTexSampler);
-	renderProgram->setUniformValue(shaderVars.ditherPattern, ditherTexSampler);
-
 	renderProgram->setUniformValue(shaderVars.projectionMatrixInverse, projector->getProjectionMatrix().toQMatrix().inverted());
 	renderProgram->setUniformValue(shaderVars.brightness, c.toQVector());
 	renderProgram->setUniformValue(shaderVars.saturation, GLfloat(saturation));
-	renderProgram->setUniformValue(shaderVars.rgbMaxValue, calcRGBMaxValue(core->getDitheringMode()).toQVector());
 
 	core->setAberrationUniforms(*renderProgram);
 	projector->setUnProjectUniforms(*renderProgram);

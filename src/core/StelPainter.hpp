@@ -429,8 +429,6 @@ private:
 		int vertex;
 		int texColor;
 		int texture;
-		int ditherPattern;
-		int rgbMaxValue;
 	};
 	static TexturesShaderVars texturesShaderVars;
 	static QOpenGLShaderProgram* texturesColorShaderProgram;
@@ -440,8 +438,6 @@ private:
 		int vertex;
 		int color;
 		int texture;
-		int ditherPattern;
-		int rgbMaxValue;
 		int saturation;
 	};
 	static TexturesColorShaderVars texturesColorShaderVars;
@@ -465,8 +461,6 @@ private:
 		int vertex;
 	};
 	static ColorfulWideLineShaderVars colorfulWideLineShaderVars;
-
-	StelTextureSP ditherPatternTex;
 
 	static bool multisamplingEnabled;
 

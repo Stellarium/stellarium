@@ -797,8 +797,7 @@ QSurfaceFormat StelMainView::getDesiredGLFormat(QSettings* configuration)
 		#endif
 	}
 
-	// Note: this only works if --mesa-mode was given on the command line. Auto-switch to Mesa or the driver name apparently cannot be detected at this early stage.
-	const bool isMesa = QString(getenv("QT_OPENGL"))=="software";
+	// NOTE: multisampling is implemented via FBO now, so it's not requested here.
 
 	//request some sane buffer formats
 	fmt.setRedBufferSize(8);
@@ -808,10 +807,6 @@ QSurfaceFormat StelMainView::getDesiredGLFormat(QSettings* configuration)
 
 	if(qApp && qApp->property("onetime_single_buffer").toBool())
 		fmt.setSwapBehavior(QSurfaceFormat::SingleBuffer);
-
-	const int multisamplingLevel = configuration ? configuration->value("video/multisampling", 0).toInt() : 0;
-	if(multisamplingLevel && qApp && qApp->property("spout").toString() == "none" && !isMesa)
-		fmt.setSamples(multisamplingLevel);
 
 	// VSync control. NOTE: it must be applied to the default format (QSurfaceFormat::setDefaultFormat) to take effect.
 #ifdef Q_OS_MACOS
@@ -1693,8 +1688,6 @@ void StelMainView::doScreenshot(void)
 	QOpenGLFramebufferObjectFormat fbFormat;
 	fbFormat.setAttachment(QOpenGLFramebufferObject::CombinedDepthStencil);
 	fbFormat.setInternalTextureFormat(isGLES ? GL_RGBA : GL_RGB); // try to avoid transparent background!
-	if(const auto multisamplingLevel = configuration->value("video/multisampling", 0).toInt())
-        fbFormat.setSamples(multisamplingLevel);
 	QOpenGLFramebufferObject * fbObj = new QOpenGLFramebufferObject(physImgWidth, physImgHeight, fbFormat);
 	fbObj->bind();
 	// Now the painter has to be convinced to paint to the potentially larger image frame.

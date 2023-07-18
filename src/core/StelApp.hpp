@@ -20,10 +20,13 @@
 #ifndef STELAPP_HPP
 #define STELAPP_HPP
 
+#include <memory>
+#include <qopengl.h>
 #include <qguiapplication.h>
 #include <QString>
 #include <QObject>
 #include <QRandomGenerator>
+#include "StelTextureTypes.hpp"
 #include "StelModule.hpp"
 #include "VecMath.hpp"
 
@@ -37,6 +40,9 @@ class StelMainView;
 class StelSkyCultureMgr;
 class StelViewportEffect;
 class QOpenGLFramebufferObject;
+class QOpenGLVertexArrayObject;
+class QOpenGLShaderProgram;
+class QOpenGLBuffer;
 class QOpenGLFunctions;
 class QSettings;
 class QNetworkAccessManager;
@@ -368,6 +374,9 @@ private:
 	//! @param drawFbo the OpenGL fbo we need to render into.
 	void applyRenderBuffer(quint32 drawFbo=0);
 
+	void setupPostProcessor();
+	void highGraphicsModeDraw();
+
 	QString getVersion() const;
 
 	// The StelApp singleton
@@ -470,9 +479,32 @@ private:
 	QList<StelProgressController*> progressControllers;
 
 	int screenFontSize;
+	int numMultiSamples = 1;
 
 	// Framebuffer object used for viewport effects.
 	QOpenGLFramebufferObject* renderBuffer;
+	std::unique_ptr<QOpenGLBuffer> postProcessorVBO;
+	std::unique_ptr<QOpenGLVertexArrayObject> postProcessorVAO;
+	std::unique_ptr<QOpenGLShaderProgram> postProcessorProgram;
+	std::unique_ptr<QOpenGLShaderProgram> postProcessorProgramMS; // multisampled
+	std::unique_ptr<QOpenGLFramebufferObject> sceneFBO;
+	GLuint sceneMultisampledFBO = 0;
+	GLuint sceneMultisampledTex = 0;
+	GLuint sceneMultisampledRenderbuffer = 0;
+	StelTextureSP ditherPatternTex;
+	struct PostProcessorUniformLocations
+	{
+		int tex;
+		int ditherPattern;
+		int rgbMaxValue;
+	} postProcessorUniformLocations;
+	struct PostProcessorUniformLocationsMS
+	{
+		int tex;
+		int ditherPattern;
+		int rgbMaxValue;
+		int numMultiSamples;
+	} postProcessorUniformLocationsMS;
 	StelViewportEffect* viewportEffect;
 	QOpenGLFunctions* gl;
 	
