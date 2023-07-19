@@ -1074,6 +1074,8 @@ Vec3d StelCore::getObserverHeliocentricEclipticPos() const
 
 Vec3d StelCore::getObserverHeliocentricEclipticVelocity() const
 {
+	if (!position) return Vec3d(0,0,0);
+
 	const auto& planet = *position->getHomePlanet();
 	const Vec3d planetVelocity = planet.getHeliocentricEclipticVelocity();
 	if (!flagUseTopocentricCoordinates)
