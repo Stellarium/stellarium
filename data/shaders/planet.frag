@@ -186,6 +186,7 @@ void main()
 		const vec3 a1 = vec3(0.848380336865573, 0.937696820066542, 0.981762186155682);
 		const vec3 a0 = vec3(1) - a1 - a2;
 		float cosTheta = dot(eyeDirection, normalize(normalVS));
+		cosTheta = max(0., cosTheta); // Rounding errors sometimes lead to negative value
 		float cosTheta2 = cosTheta*cosTheta;
 		vec3 limbDarkeningCoef = a0 + a1*cosTheta + a2*cosTheta2;
 		vec3 color = texColor.rgb * limbDarkeningCoef;
