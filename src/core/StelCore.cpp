@@ -1072,6 +1072,23 @@ Vec3d StelCore::getObserverHeliocentricEclipticPos() const
 	return Vec3d(matAltAzToHeliocentricEclipticJ2000[12], matAltAzToHeliocentricEclipticJ2000[13], matAltAzToHeliocentricEclipticJ2000[14]);
 }
 
+Vec3d StelCore::getObserverHeliocentricEclipticVelocity() const
+{
+	const auto& planet = *position->getHomePlanet();
+	const Vec3d planetVelocity = planet.getHeliocentricEclipticVelocity();
+	if (!flagUseTopocentricCoordinates)
+		return planetVelocity;
+
+	const auto off = position->getTopographicOffsetFromCenter();
+	const auto rotRadius = off.v[0];
+	const auto rotPeriod = planet.getSiderealDay();
+	const auto linearSpeed = 2 * M_PI * rotRadius / rotPeriod; // AU/day
+	const auto toJ2000 = matAltAzToHeliocentricEclipticJ2000.upper3x3();
+	const auto eastwardVelocity = Vec3d(0,linearSpeed,0);
+	const auto velocity = toJ2000 * eastwardVelocity;
+	return planetVelocity + velocity;
+}
+
 // Set the location to use by default at startup
 void StelCore::setDefaultLocationID(const QString& id)
 {
