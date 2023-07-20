@@ -1278,15 +1278,17 @@ void SolarSystem::computePositions(double dateJDE, PlanetP observerPlanet)
 		}
 		const Vec3d obsPosJDE=observerPlanet->getHeliocentricEclipticPos();
 
-		// For higher accuracy, we now make two iterations of light time and aberration correction. In the final round, we also compute rotation data.
-		// May fix sub-arcsecond inaccuracies, and optionally apply aberration in the way described in Explanatory Supplement (2013), 7.55.
-		// For reasons unknown (See discussion in GH:#1626) we do not add anything for the Moon when observed from Earth!
-		// Presumably the used ephemerides already provide aberration-corrected positions for the Moon?
+		// For higher accuracy, we now make two iterations of light time and aberration correction. In the final
+		// round, we also compute rotation data.  May fix sub-arcsecond inaccuracies, and optionally apply
+		// aberration in the way described in Explanatory Supplement (2013), 7.55.  For reasons unknown (See
+		// discussion in GH:#1626) we do not add anything for the Moon when observed from Earth!  Presumably the
+		// used ephemerides already provide aberration-corrected positions for the Moon?
 		const Vec3d aberrationPushSpeed=observerPlanet->getHeliocentricEclipticVelocity() * core->getAberrationFactor();
 		for (const auto& p : qAsConst(systemPlanets))
 		{
 			//p->setExtraInfoString(StelObject::DebugAid, "");
-			const double lightTimeDays = (p->getHeliocentricEclipticPos()-obsPosJDE).norm() * (AU / (SPEED_OF_LIGHT * 86400.));
+			const auto planetPos = p->getHeliocentricEclipticPos();
+			const double lightTimeDays = (planetPos-obsPosJDE).norm() * (AU / (SPEED_OF_LIGHT * 86400.));
 			Vec3d aberrationPush(0.);
 			if (withAberration && (observerPlanet->englishName!="Earth" || p->englishName!="Moon"))
 				aberrationPush=lightTimeDays*aberrationPushSpeed;
@@ -1296,7 +1298,8 @@ void SolarSystem::computePositions(double dateJDE, PlanetP observerPlanet)
 		for (const auto& p : qAsConst(systemPlanets))
 		{
 			//p->setExtraInfoString(StelObject::DebugAid, "");
-			const double lightTimeDays = (p->getHeliocentricEclipticPos()-obsPosJDE).norm() * (AU / (SPEED_OF_LIGHT * 86400.));
+			const auto planetPos = p->getHeliocentricEclipticPos();
+			const double lightTimeDays = (planetPos-obsPosJDE).norm() * (AU / (SPEED_OF_LIGHT * 86400.));
 			Vec3d aberrationPush(0.);
 			if (withAberration && (observerPlanet->englishName!="Earth" || p->englishName!="Moon"))
 				aberrationPush=lightTimeDays*aberrationPushSpeed;
@@ -1308,12 +1311,13 @@ void SolarSystem::computePositions(double dateJDE, PlanetP observerPlanet)
 //					      .arg(QString::number(aberrationPushSpeed[0], 'f', 3))
 //					      .arg(QString::number(aberrationPushSpeed[0], 'f', 3)));
 
-			if      (p->englishName=="Moon")    RotationElements::updatePlanetCorrections(dateJDE-lightTimeDays, RotationElements::EarthMoon);
-			else if (p->englishName=="Mars")    RotationElements::updatePlanetCorrections(dateJDE-lightTimeDays, RotationElements::Mars);
-			else if (p->englishName=="Jupiter") RotationElements::updatePlanetCorrections(dateJDE-lightTimeDays, RotationElements::Jupiter);
-			else if (p->englishName=="Saturn")  RotationElements::updatePlanetCorrections(dateJDE-lightTimeDays, RotationElements::Saturn);
-			else if (p->englishName=="Uranus")  RotationElements::updatePlanetCorrections(dateJDE-lightTimeDays, RotationElements::Uranus);
-			else if (p->englishName=="Neptune") RotationElements::updatePlanetCorrections(dateJDE-lightTimeDays, RotationElements::Neptune);
+			const auto update = &RotationElements::updatePlanetCorrections;
+			if      (p->englishName=="Moon")    update(dateJDE-lightTimeDays, RotationElements::EarthMoon);
+			else if (p->englishName=="Mars")    update(dateJDE-lightTimeDays, RotationElements::Mars);
+			else if (p->englishName=="Jupiter") update(dateJDE-lightTimeDays, RotationElements::Jupiter);
+			else if (p->englishName=="Saturn")  update(dateJDE-lightTimeDays, RotationElements::Saturn);
+			else if (p->englishName=="Uranus")  update(dateJDE-lightTimeDays, RotationElements::Uranus);
+			else if (p->englishName=="Neptune") update(dateJDE-lightTimeDays, RotationElements::Neptune);
 		}
 	}
 	else
@@ -1322,12 +1326,13 @@ void SolarSystem::computePositions(double dateJDE, PlanetP observerPlanet)
 		{
 			p->setExtraInfoString(StelObject::DebugAid, "");
 			p->computePosition(dateJDE, Vec3d(0.));
-			if      (p->englishName=="Moon")    RotationElements::updatePlanetCorrections(dateJDE, RotationElements::EarthMoon);
-			else if (p->englishName=="Mars")    RotationElements::updatePlanetCorrections(dateJDE, RotationElements::Mars);
-			else if (p->englishName=="Jupiter") RotationElements::updatePlanetCorrections(dateJDE, RotationElements::Jupiter);
-			else if (p->englishName=="Saturn")  RotationElements::updatePlanetCorrections(dateJDE, RotationElements::Saturn);
-			else if (p->englishName=="Uranus")  RotationElements::updatePlanetCorrections(dateJDE, RotationElements::Uranus);
-			else if (p->englishName=="Neptune") RotationElements::updatePlanetCorrections(dateJDE, RotationElements::Neptune);
+			const auto update = &RotationElements::updatePlanetCorrections;
+			if      (p->englishName=="Moon")    update(dateJDE, RotationElements::EarthMoon);
+			else if (p->englishName=="Mars")    update(dateJDE, RotationElements::Mars);
+			else if (p->englishName=="Jupiter") update(dateJDE, RotationElements::Jupiter);
+			else if (p->englishName=="Saturn")  update(dateJDE, RotationElements::Saturn);
+			else if (p->englishName=="Uranus")  update(dateJDE, RotationElements::Uranus);
+			else if (p->englishName=="Neptune") update(dateJDE, RotationElements::Neptune);
 		}
 	}
 	computeTransMatrices(dateJDE, observerPlanet->getHeliocentricEclipticPos());
