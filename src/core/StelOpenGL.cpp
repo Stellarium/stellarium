@@ -19,6 +19,10 @@
 #include "StelOpenGL.hpp"
 #include <QDebug>
 #include "StelMainView.hpp"
+#include <QOpenGLFunctions_3_3_Core>
+#if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
+# include <QOpenGLVersionFunctionsFactory>
+#endif
 
 QOpenGLContext* StelOpenGL::mainContext = Q_NULLPTR;
 
@@ -132,4 +136,13 @@ out vec4 FRAG_COLOR;
 			return "precision mediump float;\n" + prefix;
 		return prefix;
 	}
+}
+
+QOpenGLFunctions_3_3_Core* StelOpenGL::highGraphicsFunctions()
+{
+#if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
+	return QOpenGLVersionFunctionsFactory::get<QOpenGLFunctions_3_3_Core>(QOpenGLContext::currentContext());
+#else
+	return QOpenGLContext::currentContext()->versionFunctions<QOpenGLFunctions_3_3_Core>();
+#endif
 }
