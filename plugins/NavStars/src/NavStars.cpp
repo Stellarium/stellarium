@@ -395,6 +395,7 @@ QString NavStars::getCurrentNavigationalStarsSetDescription() const
 		// TRANSLATORS: The emphasis tags mark a title.
 		{      USSRAvia, N_("The typical set of navigational stars, which was used by aviation of the Soviet Union. These stars you can found in the books like <em>Aviation Astronomy</em> or <em>Aviation handbook</em>.") },
 		{        German, N_("The 80 stars that are listed in the German Nautical Almanac published by the Federal Maritime and Hydrographic Agency of Germany.") },
+		{     USSRSpace, N_("These 151 stars were used by the Voskhod (Soviet) and Soyuz (Soviet and Russian) manned space programs to navigate in the space.") },
 		{        Apollo, N_("These 37 stars were used by the Apollo space program to navigate to the Moon from 1969-1972, Apollo 11 through Apollo 17.") },
 		{     GeminiAPS, N_("Alignment Star List from the Gemini Astronomical Positioning System. The Gemini Astronomical Positioning System is a professional level computerized device for controlling small to medium German equatorial telescope mounts.") },
 		{    MeadeLX200, N_("The Meade LX200 utilizes 33 bright and well known stars to calibrate the telescope’s Object Library in the ALTAZ and POLAR alignments. These stars were selected to allow observers from anywhere in the world on any given night, to be able to easily and quickly make precision alignments.") },
@@ -504,12 +505,38 @@ void NavStars::populateNavigationalStarsSet(void)
 		}
 		case USSRAvia:
 		{
-			// The typical set of soviet aviation navigational stars
+			// The typical set of Soviet aviation navigational stars
 			starNumbers = {
 				   677,  11767,  62956,  49669, 102098, 113368,  80763,	 37826,
 				 65474,  27989,  21421,  97649,  37279,  24436,  69673,  24608,
 				 91262,  32349,  30438,   7588,  71683,  62434,  82273,  90185,
 				100751,   9884
+			};
+			break;
+		}
+		case USSRSpace:
+		{
+			// The set of navigational stars from Soviet and Russian manned space programs
+			starNumbers = {
+				   677,    746,   1067,   2021,   2081,   3179,   3419,   4427,
+				  5447,   7588,   8903,   6686,  11767,   9640,   9884,  10826,
+				 14135,  14576,  15863,  17702,  18246,  18532,  21421,  23015,
+				 23875,  24436,  24608,  25336,  25428,  25606,  25930,  25985,
+				 26241,  26311,  26451,  26634,  26727,  27366,  27989,  28360,
+				 28380,  30324,  30438,  31681,  32349,  32768,  33579,  34444,
+				 35264,  35904,  36850,  37279,  37826,  39429,  39757,  39953,
+				 41037,  42913,  44816,  45238,  45941,  45556,  46390,  49669,
+				 50583,  52727,  53910,  54061,  54872,  57632,  57757,  58001,
+				 59196,  59774,  59803,  60718,  61084,  61359,  61585,  61932,
+				 62434,  62956,  63125,  63608,  65109,  65378,  65474,  66657,
+				 67301,  67927,  68702,  68756,  68933,  69673,  71075,  71352,
+				 71683,  71860,  72105,  72622,  73273,  72607,  74785,  76297,
+				 76267,  77070,  78265,  78401,  78820,  80112,  80331,  80763,
+				 80816,  81266,  81693,  82273,  82396,  84012,  84345,  85258,
+				 85792,  85670,  85927,  86032,  86228,  86670,  86742,  87833,
+				 89931,  90185,  90496,  91262,  92855,  93506,  95947,  97165,
+				 97278,  97649, 100453, 100751, 102098, 102488, 105199, 107315,
+				107556, 109268, 110130, 112122, 113368, 113881, 113963
 			};
 			break;
 		}
