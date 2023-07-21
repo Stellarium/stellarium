@@ -395,7 +395,7 @@ QString NavStars::getCurrentNavigationalStarsSetDescription() const
 		// TRANSLATORS: The emphasis tags mark a title.
 		{      USSRAvia, N_("The typical set of navigational stars, which was used by aviation of the Soviet Union. These stars you can found in the books like <em>Aviation Astronomy</em> or <em>Aviation handbook</em>.") },
 		{        German, N_("The 80 stars that are listed in the German Nautical Almanac published by the Federal Maritime and Hydrographic Agency of Germany.") },
-		{     USSRSpace, N_("These 151 stars were used by the Voskhod (Soviet) and Soyuz (Soviet and Russian) manned space programs to navigate in the space.") },
+		{     USSRSpace, N_("These 151 stars were used in the Voskhod (Soviet) and Soyuz (Soviet and Russian) manned space programs to navigate in the space.") },
 		{        Apollo, N_("These 37 stars were used by the Apollo space program to navigate to the Moon from 1969-1972, Apollo 11 through Apollo 17.") },
 		{     GeminiAPS, N_("Alignment Star List from the Gemini Astronomical Positioning System. The Gemini Astronomical Positioning System is a professional level computerized device for controlling small to medium German equatorial telescope mounts.") },
 		{    MeadeLX200, N_("The Meade LX200 utilizes 33 bright and well known stars to calibrate the telescope’s Object Library in the ALTAZ and POLAR alignments. These stars were selected to allow observers from anywhere in the world on any given night, to be able to easily and quickly make precision alignments.") },
