@@ -79,7 +79,8 @@ public:
 		AngloAmerican,	//!< Anglo-American set (The Nautical Almanac)
 		French,		//!< French set (Ephémérides Nautiques)
 		Russian,	//!< Russian set (Морской астрономический ежегодник)
-		USSRAvia,	//!< The set of navigational stars which was used for soviet aviation
+		USSRAvia,	//!< The set of navigational stars which was used for Soviet aviation
+		USSRSpace,	//!< The set of navigational stars for Soviet and Russian manned space programs Voskhod and Soyuz
 		German,		//!< German set (Nautisches Jahrbuch)
 		GeminiAPS,	//!< Gemini APS Alignment Star List
 		MeadeLX200,	//!< Meade LX200 Alignment Star Library

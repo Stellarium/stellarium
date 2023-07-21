@@ -242,10 +242,12 @@ void NavStarsWindow::populateNavigationalStarsSets()
 	// TRANSLATORS: Part of full phrase: Russian set of navigational stars
 	nsSets->addItem(q_("Russian"), "Russian");
 	// TRANSLATORS: Part of full phrase: Soviet aviation set of navigational stars
-	nsSets->addItem(q_("Soviet aviation"), "USSRAvia");
+	nsSets->addItem(q_("Soviet aviation"), "USSRAvia");	
 	// TRANSLATORS: Part of full phrase: German set of navigational stars
 	nsSets->addItem(q_("German"), "German");
 
+	// TRANSLATORS: Part of full phrase: Voskhod and Soyuz manned space programs set of navigational stars
+	nsSets->addItem(q_("Voskhod and Soyuz manned space programs"), "USSRSpace");
 	// TRANSLATORS: Part of full phrase: Apollo space program set of navigational stars
 	nsSets->addItem(q_("Apollo space program"), "Apollo");
 	
