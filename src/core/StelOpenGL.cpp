@@ -140,9 +140,13 @@ out vec4 FRAG_COLOR;
 
 QOpenGLFunctions_3_3_Core* StelOpenGL::highGraphicsFunctions()
 {
-#if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
+#if !QT_CONFIG(opengles2)
+# if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
 	return QOpenGLVersionFunctionsFactory::get<QOpenGLFunctions_3_3_Core>(QOpenGLContext::currentContext());
-#else
+# else
 	return QOpenGLContext::currentContext()->versionFunctions<QOpenGLFunctions_3_3_Core>();
+# endif
+#else
+	return nullptr;
 #endif
 }
