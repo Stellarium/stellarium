@@ -65,7 +65,7 @@ QByteArray StelOpenGL::globalShaderPrefix(const ShaderType type)
 {
 	const auto& glInfo = StelMainView::getInstance().getGLInformation();
 
-	if(glInfo.isCoreProfile)
+	if(glInfo.isHighGraphicsMode)
 	{
 		if(type == VERTEX_SHADER)
 		{
