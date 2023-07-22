@@ -2620,8 +2620,6 @@ float Planet::getVMagnitude(const StelCore* core) const
 	// Lunar Magnitude from Earth: This is a combination of Russell 1916 (!) with its albedo dysbalance, Krisciunas-Schaefer (1991) for the opposition surge, and Agrawal (2016) for the contribution of earthshine.
 	if ((core->getCurrentLocation().planetName=="Earth") && (englishName=="Moon"))
 	{
-		const Vec3d solarAberrationPush=GETSTELMODULE(SolarSystem)->getSun()->getAberrationPush();
-
 		const auto observerHelioVelocity = core->getObserverHeliocentricEclipticVelocity();
 		const double signedPhaseAngle = isWaning(observerHelioPos, observerHelioVelocity) ? phaseAngle : -phaseAngle;
 
