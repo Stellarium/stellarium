@@ -92,6 +92,7 @@ void StelPainter::GLState::apply()
 		gl->glEnable(GL_CULL_FACE);
 	else
 		gl->glDisable(GL_CULL_FACE);
+	gl->glLineWidth(lineWidth);
 #ifdef GL_LINE_SMOOTH
 	if(!QOpenGLContext::currentContext()->isOpenGLES())
 	{
