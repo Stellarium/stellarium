@@ -61,12 +61,50 @@ gSatTEME::gSatTEME(const char *pstrName, char *pstrTleLine1, char *pstrTleLine2)
 	SGP4Funcs::sgp4(satrec, 0.0, m_Position.v, m_Vel.v);
 }
 
+gSatTEME::gSatTEME(const OMM& omm)
+{
+	// No use is made of the satnum within the SGP4 propergator
+	// so we just fake it here.
+	char objectId[] = "ABCDE";
+	
+	// The newer interface to sgp4() without using a TLE but
+	// instead using direct element placement within the elsetrec
+	// is done in this constructor (because XML and JSON do not
+	// have two lines :)
+	// Because we do not call twoline2rv() we must convert the 
+	// SGP4 parameters when calling sgp4init() to ensure the 
+	// terms are in their correct base units, (radians, etc).
+	// The comments to the right are the parameter names for
+	// the sgp4init() function call.
+	SGP4Funcs::sgp4init(wgs84, 'c',                         // sgp4init(args) below
+		objectId,                                           // satn[5]
+		omm.getEpochJD() - 2433281.5,                       // epoch
+		omm.getBstar(),                                     // xbstar
+		omm.getMeanMotionDot() / (XPDOTP * 1440.0),         // xndot
+		omm.getMeanMotionDDot() / (XPDOTP * 1440.0 * 1440), // xnndot
+		omm.getEccentricity(),                              // xecco
+		omm.getArgumentOfPerigee() * KDEG2RAD,              // xargpo
+		omm.getInclination() * KDEG2RAD,                    // xinclo
+		omm.getMeanAnomoly() * KDEG2RAD,                    // xmo
+		omm.getMeanMotion() / XPDOTP,                       // xno_kozai
+		omm.getAscendingNode() * KDEG2RAD,                  // xnodeo
+		satrec);
+
+	// Despite passing EpochJD to the sgp4init() function 
+	// is does not setup the following like twoline2rv() does.
+	satrec.jdsatepoch  = omm.getEpochJDW();
+	satrec.jdsatepochF = omm.getEpochJDF();
+
+	// Call the propagator to get the initial state vector value.
+	SGP4Funcs::sgp4(satrec, 0.0, m_Position.v, m_Vel.v);
+	m_SubPoint = computeSubPoint(omm.getEpochJD());
+}
+
 void gSatTEME::setEpoch(gTime ai_time)
 {
 	gTime kepEpoch(satrec.jdsatepoch + satrec.jdsatepochF);
 	gTimeSpan tSince = ai_time - kepEpoch;
 	double dtsince = tSince.getDblSeconds()/KSEC_PER_MIN;
-	// call the propagator to get the initial state vector value
 	SGP4Funcs::sgp4(satrec, dtsince, m_Position.v, m_Vel.v);
 	m_SubPoint = computeSubPoint(ai_time);
 }

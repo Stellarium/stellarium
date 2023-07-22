@@ -40,6 +40,12 @@
 #include <QDebug>
 #include <QByteArray>
 
+gSatWrapper::gSatWrapper(const OMM& omm) 
+{
+	pSatellite = new gSatTEME(omm);
+	setEpoch(StelApp::getInstance().getCore()->getJD());
+}
+
 gSatWrapper::gSatWrapper(QString designation, QString tle1,QString tle2)
 {
 	// The TLE library actually modifies the TLE strings, which is annoying (because

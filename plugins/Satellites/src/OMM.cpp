@@ -19,9 +19,15 @@
 
 #include <cmath>
 #include <limits>
+#include <string>
+#include <iomanip>
+#include <sstream>
 
 #include <QPair>
 #include <QDebug>
+#include <QDate>
+#include <QTime>
+#include <QDateTime>
 
 #include "OMM.hpp"
 
@@ -72,23 +78,30 @@ OMM::OMM(const OMM& other)
 
 OMM::OMM(const QVariantMap& m) 
 {
-	m_object_name = m.value("OBJECT_NAME").toString();
-	m_norad_cat_id = m.value("NORAD_CAT_ID").toInt();
-	m_classification = m.value("CLASSIFICATION_TYPE").toString().front().toUpper();
-	m_object_id = m.value("OBJECT_ID").toString();
-	m_mean_motion_dot = m.value("MEAN_MOTION_DOT").toDouble();
+	if(m.contains("tle1")) {
+		m_line1 = m.value("tle1").toString();
+	}
+	if(m.contains("tle2")) {
+		m_line2 = m.value("tle2").toString();
+	}
+	m_object_name      = m.value("OBJECT_NAME").toString();
+	m_norad_cat_id     = m.value("NORAD_CAT_ID").toInt();
+	m_classification   = m.value("CLASSIFICATION_TYPE").toString().front().toUpper();
+	m_object_id        = m.value("OBJECT_ID").toString();
+	m_mean_motion_dot  = m.value("MEAN_MOTION_DOT").toDouble();
 	m_mean_motion_ddot = m.value("MEAN_MOTION_DDOT").toDouble();
-	m_bstar = m.value("BSTAR").toDouble();
-	m_ephermeris_type = m.value("EPHEMERIS_TYPE").toDouble();
-	m_element_number = m.value("ELEMENT_NUMBER").toDouble();
-	m_inclination = m.value("INCLINATION").toDouble();
-	m_ascending_node = m.value("RA_OF_ASC_NODE").toDouble();
-	m_eccentricity = m.value("ECCENTRICITY").toDouble();
+	m_bstar            = m.value("BSTAR").toDouble();
+	m_ephermeris_type  = m.value("EPHEMERIS_TYPE").toDouble();
+	m_element_number   = m.value("ELEMENT_NUMBER").toDouble();
+	m_inclination      = m.value("INCLINATION").toDouble();
+	m_ascending_node   = m.value("RA_OF_ASC_NODE").toDouble();
+	m_eccentricity     = m.value("ECCENTRICITY").toDouble();
 	m_argument_perigee = m.value("ARG_OF_PERICENTER").toDouble();
-	m_mean_anomoly = m.value("MEAN_ANOMALY").toDouble();
-	m_mean_motion = m.value("MEAN_MOTION").toDouble();
-	m_rev_at_epoch = m.value("REV_AT_EPOCH").toDouble();
-	m_epoch = OMMDateTime(m.value("EPOCH").toString());
+	m_mean_anomoly     = m.value("MEAN_ANOMALY").toDouble();
+	m_mean_motion      = m.value("MEAN_MOTION").toDouble();
+	m_rev_at_epoch     = m.value("REV_AT_EPOCH").toDouble();
+	m_epoch            = m.value("EPOCH").toString();
+	m_epoch_jd         = epochToJD();
 }
 
 OMM& OMM::operator=(const OMM &o)
@@ -96,29 +109,31 @@ OMM& OMM::operator=(const OMM &o)
 	if(this == &o) {
 		return *this;
 	}
-	
 	m_source_type = o.m_source_type;
-	m_line0 = o.m_line0;
-	m_line1 = o.m_line1;
-	m_line2 = o.m_line2;
-	m_epoch = o.m_epoch;
-	m_mean_motion = o.m_mean_motion;
-	m_eccentricity = o.m_eccentricity;
-	m_inclination = o.m_inclination;
-	m_ascending_node = o.m_ascending_node;
+	m_line0            = o.m_line0;
+	m_line1            = o.m_line1;
+	m_line2            = o.m_line2;
+	m_epoch            = o.m_epoch;
+	m_epoch_jd         = o.m_epoch_jd;
+	m_mean_motion      = o.m_mean_motion;
+	m_eccentricity     = o.m_eccentricity;
+	m_inclination      = o.m_inclination;
+	m_ascending_node   = o.m_ascending_node;
 	m_argument_perigee = o.m_argument_perigee;
-	m_mean_anomoly = o.m_mean_anomoly;
-	m_classification = o.m_classification;
-	m_norad_cat_id = o.m_norad_cat_id;
-	m_rev_at_epoch = o.m_rev_at_epoch;
-	m_bstar = o.m_bstar;
-	m_mean_motion_dot = o.m_mean_motion_dot;
+	m_mean_anomoly     = o.m_mean_anomoly;
+	m_classification   = o.m_classification;
+	m_norad_cat_id     = o.m_norad_cat_id;
+	m_rev_at_epoch     = o.m_rev_at_epoch;
+	m_bstar            = o.m_bstar;
+	m_mean_motion_dot  = o.m_mean_motion_dot;
 	m_mean_motion_ddot = o.m_mean_motion_ddot;
-	m_ephermeris_type = o.m_ephermeris_type;
-	m_element_number = o.m_element_number;
-	m_object_name = o.m_object_name;
-	m_object_id = o.m_object_id;
-	m_status = o.m_status;
+	m_ephermeris_type  = o.m_ephermeris_type;
+	m_element_number   = o.m_element_number;
+	m_object_name      = o.m_object_name;
+	m_object_id        = o.m_object_id;
+	m_status           = o.m_status;
+	m_epoch_jd_frac    = o.m_epoch_jd_frac;
+	m_epoch_jd_whole   = o.m_epoch_jd_whole;
 	return *this;
 }
 
@@ -128,7 +143,7 @@ void OMM::toJsonObj(QJsonObject& rval)
 	rval.insert("NORAD_CAT_ID", QJsonValue(m_norad_cat_id));
 	rval.insert("CLASSIFICATION_TYPE", QJsonValue(m_classification));
 	rval.insert("OBJECT_ID", QJsonValue(m_object_id));
-	rval.insert("EPOCH", QJsonValue(m_epoch.toISO8601String()));
+	rval.insert("EPOCH", QJsonValue(m_epoch));
 	rval.insert("MEAN_MOTION_DOT", QJsonValue(m_mean_motion_dot));
 	rval.insert("MEAN_MOTION_DDOT", QJsonValue(m_mean_motion_ddot));
 	rval.insert("BSTAR", QJsonValue(m_bstar));
@@ -149,7 +164,7 @@ void OMM::toVariantMap(QVariantMap & outmap)
 	outmap.insert("NORAD_CAT_ID", QVariant(m_norad_cat_id));
 	outmap.insert("CLASSIFICATION_TYPE", QVariant(m_classification));
 	outmap.insert("OBJECT_ID", QVariant(m_object_id));
-	outmap.insert("EPOCH", QVariant(m_epoch.toISO8601String()));
+	outmap.insert("EPOCH", QVariant(m_epoch));
 	outmap.insert("MEAN_MOTION_DOT", QVariant(m_mean_motion_dot));
 	outmap.insert("MEAN_MOTION_DDOT", QVariant(m_mean_motion_ddot));
 	outmap.insert("BSTAR", QVariant(m_bstar));
@@ -174,9 +189,12 @@ bool OMM::hasValidLegacyTleData()
 	return false;
 }
 
-double OMM::getEpochJD()
+double OMM::getLaunchYearJD()
 {
-	return m_epoch.getJulian();
+	double jd{}, jdf{};
+	int twoyear = m_object_id.mid(0, 2).toInt();
+	jday_SGP4(twoyear, 1, 1, 0, 0, 0.0, jd, jdf);
+	return jd + jdf;
 }
 
 bool OMM::setFromJsonObj(const QJsonObject & obj)
@@ -236,8 +254,6 @@ bool OMM::setFromXML(QXmlStreamReader & r)
 	return false;
 }
 
-
-
 // Everything below here is for extracting the data from the legacy two line TLE format.
 
 void OMM::processTleLegacyLine0(void)
@@ -248,24 +264,24 @@ void OMM::processTleLegacyLine0(void)
 }
 
 // TLE Line1 field positions and lengths.
-static QPair<int, int> NORAD_CAT_ID(2,5);
-static QPair<int, int> CLASSIFICATION_TYPE(7,1);
-static QPair<int, int> OBJECT_ID(9, 8);
-static QPair<int, int> EPOCH(18, 14);
-static QPair<int, int> EPOCH_YEAR(18, 2);
-static QPair<int, int> EPOCH_DAY(20, 12);
-static QPair<int, int> MEAN_MOTION_DOT(33, 10);
-static QPair<int, int> MEAN_MOTION_DDOT(44, 8);
-static QPair<int, int> BSTAR(53, 8);
-static QPair<int, int> EPHEMERIS_TYPE(62, 1);
-static QPair<int, int> ELEMENT_NUMBER(64, 4);
+static const QPair<int, int> NORAD_CAT_ID(2,5);
+static const QPair<int, int> CLASSIFICATION_TYPE(7,1);
+static const QPair<int, int> OBJECT_ID(9, 8);
+static const QPair<int, int> EPOCH(18, 14);
+static const QPair<int, int> EPOCH_YEAR(18, 2);
+static const QPair<int, int> EPOCH_DAY(20, 12);
+static const QPair<int, int> MEAN_MOTION_DOT(33, 10);
+static const QPair<int, int> MEAN_MOTION_DDOT(44, 8);
+static const QPair<int, int> BSTAR(53, 8);
+static const QPair<int, int> EPHEMERIS_TYPE(62, 1);
+static const QPair<int, int> ELEMENT_NUMBER(64, 4);
 
 void OMM::processTleLegacyLine1(void)
 {
 	if (!m_line1.isEmpty() && m_line1.at(0) == '1') {
 		auto epoch_str    = m_line1.mid(EPOCH.first, EPOCH.second).trimmed();
-		m_epoch           = OMMDateTime(epoch_str);
- 		m_norad_cat_id    = m_line1.mid(NORAD_CAT_ID.first, NORAD_CAT_ID.second).toInt();
+		tleEpochtoISO8601(epoch_str);
+		m_norad_cat_id    = m_line1.mid(NORAD_CAT_ID.first, NORAD_CAT_ID.second).toInt();
 		m_classification  = m_line1.at(CLASSIFICATION_TYPE.first);
 		m_object_id       = m_line1.mid(OBJECT_ID.first, OBJECT_ID.second).trimmed();
 		m_mean_motion_dot = m_line1.mid(33, 10).toDouble();
@@ -283,13 +299,13 @@ void OMM::processTleLegacyLine1(void)
 }
 
 // TLE Line2 field positions and lengths.
-static QPair<int, int> INCLINATION(8, 8);
-static QPair<int, int> RA_OF_ASC_NODE(17, 8);
-static QPair<int, int> ECCENTRICITY(26, 7);
-static QPair<int, int> ARG_OF_PERICENTER(34, 8);
-static QPair<int, int> MEAN_ANOMALY(43, 8);
-static QPair<int, int> MEAN_MOTION(52, 11);
-static QPair<int, int> REV_AT_EPOCH(63, 5);
+static const QPair<int, int> INCLINATION(8, 8);
+static const QPair<int, int> RA_OF_ASC_NODE(17, 8);
+static const QPair<int, int> ECCENTRICITY(26, 7);
+static const QPair<int, int> ARG_OF_PERICENTER(34, 8);
+static const QPair<int, int> MEAN_ANOMALY(43, 8);
+static const QPair<int, int> MEAN_MOTION(52, 11);
+static const QPair<int, int> REV_AT_EPOCH(63, 5);
 
 void OMM::processTleLegacyLine2(void)
 {
@@ -314,7 +330,8 @@ void OMM::processTleLegacyLine2(void)
 bool OMM::setEpoch(const QJsonValue& val, const QString& tag)
 {
 	if(tag.isEmpty() || tag == "EPOCH") {
-		m_epoch = OMMDateTime(val.toString(), OMMDateTime::STR_ISO8601);
+		m_epoch = val.toString();
+		epochToJD();
 		return true;
 	}
 	return false;
@@ -511,5 +528,68 @@ void OMM::processTagElement(const QString& tag, const QJsonValue& val)
 			if (set == nullptr) return;
 			if ((this->*set)(val, tag) == true) return;
 		}
+	}
+}
+
+void OMM::tleEpochtoISO8601(const QString &s) 
+{
+	int    year      = s.mid(0, 2).toInt();
+	double day       = s.mid(2).toDouble();
+	int    whole_day = std::floor(day);
+	double frac_day  = day - whole_day;
+
+	// Create a QDate.
+	year += (year < 57) ? 2000 : 1900;
+	QDate d(year, 1, 1);
+	d = d.addDays(whole_day - 1); // Minus 1 because we start on 1st Jan.
+
+	// Create the time.
+	double seconds     = (24. * 60. * 60.) * frac_day;
+	int whole_hours = std::floor(seconds / 3600);
+	seconds -= whole_hours * 3600.;
+	int whole_mins = std::floor(seconds / 60.);
+	seconds -= whole_mins * 60.;
+	int whole_seconds = (int)seconds;
+	double frac = seconds - whole_seconds;
+	int whole_frac = (int)(frac * 10000);
+
+	QString construct = QString("%1-%2-%3T%4:%5:%6.%7")
+		.arg(d.year(), 4, 10, QChar('0'))
+		.arg(d.month(), 2, 10, QChar('0'))
+		.arg(d.day(), 2, 10, QChar('0'))
+		.arg(whole_hours, 2, 10, QChar('0'))
+		.arg(whole_mins, 2, 10, QChar('0'))
+		.arg(whole_seconds, 2, 10, QChar('0'))
+		.arg(whole_frac, 4, 10, QChar('0'));
+
+	m_epoch = construct;
+	m_epoch_jd = epochToJD();
+}
+
+double OMM::epochToJD() 
+{
+	double jd, jd_frac;
+	QDateTime dt = QDateTime::fromString(m_epoch, Qt::ISODateWithMs);
+	QDate d = dt.date();
+	QTime t = dt.time();
+	double seconds = t.second() + (t.msec()/1000.);
+	jday_SGP4(d.year(), d.month(), d.day(), t.hour(), t.minute(), seconds, jd, jd_frac);
+	m_epoch_jd = jd + jd_frac;
+	// Whole day and fraction are required by the SGP4 elsetrec structure init.
+	m_epoch_jd_whole = jd;
+	m_epoch_jd_frac  = jd_frac;
+	return m_epoch_jd;
+}
+
+// Copied from SGP4.cpp
+void OMM::jday_SGP4(int year, int mon, int day, int hr, int minute, double sec, double & jd, double & jdFrac)
+{
+	jd = 367.0 * year - std::floor((7 * (year + std::floor((mon + 9) / 12.0))) * 0.25) 
+             + std::floor(275 * mon / 9.0) + day + 1721013.5; // use - 678987.0 to go to mjd directly
+	jdFrac = (sec + minute * 60.0 + hr * 3600.0) / 86400.0;
+	if (std::fabs(jdFrac) > 1.0) {
+		double dtt = std::floor(jdFrac);
+		jd         = jd + dtt;
+		jdFrac     = jdFrac - dtt;
 	}
 }

@@ -31,8 +31,6 @@
 #include <QSharedPointer>
 #include <QXmlStreamReader>
 
-#include "OMMDateTime.hpp"
-
 //! @class OMM
 //! Auxiliary class for the %Satellites plugin.
 //! @author Andy Kirkham
@@ -53,6 +51,10 @@
 class OMM
 {
 public:
+	typedef QSharedPointer<OMM> ShPtr;
+
+	const double xpdotp = 1440.0 / (2.0 * M_PI);
+
 	//! @enum OptStatus operational statuses
 	enum class OptStatus
 	{
@@ -108,7 +110,7 @@ public:
 	virtual const QString& getLine1() const { return m_line1; }
 	virtual const QString& getLine2() const { return m_line2; }
 
-	bool hasValidEpoch() { return m_epoch.getJulian() > 0.0; }
+	bool hasValidEpoch() { return m_epoch_jd > 0.0; }
 
 	bool hasValidLegacyTleData();
 
@@ -121,28 +123,32 @@ public:
 
 	virtual SourceType getSourceType() { return m_source_type; }
 
-	virtual double getEpochJD();
-	virtual OMMDateTime getEpoch() { return m_epoch; }
-	virtual double getMeanMotion() { return m_mean_motion; }
-	virtual double getEccentricity() { return m_eccentricity; }
-	virtual double getInclination() { return m_inclination; }
-	virtual double getAscendingNode() { return m_ascending_node; }
-	virtual double getArgumentOfPerigee() { return m_argument_perigee; }
-	virtual double getMeanAnomoly() { return m_mean_anomoly; }
-	virtual int getEphermisType() { return m_ephermeris_type; }
-	virtual int getElementNumber() { return m_element_number; }
+	virtual double getEpochJD() const { return m_epoch_jd; }
+	virtual QString getEpoch() const { return m_epoch; }
+	virtual double getEpochJDW() const { return m_epoch_jd_whole; }
+	virtual double getEpochJDF() const { return m_epoch_jd_frac; }
+	virtual double getMeanMotion() const { return m_mean_motion; }
+	virtual double getEccentricity() const { return m_eccentricity; }
+	virtual double getInclination() const { return m_inclination; }
+	virtual double getAscendingNode() const { return m_ascending_node; }
+	virtual double getArgumentOfPerigee() const { return m_argument_perigee; }
+	virtual double getMeanAnomoly() const { return m_mean_anomoly; }
+	virtual int getEphermisType() const { return m_ephermeris_type; }
+	virtual int getElementNumber() const { return m_element_number; }
 
 	virtual QChar getClassification() const { return m_classification; }
-	virtual int getNoradcatId() { return m_norad_cat_id; }
-	virtual int getRevAtEpoch() { return m_rev_at_epoch; }
-	virtual double getBstar() { return m_bstar; }
-	virtual double getMeanMotionDot() { return m_mean_motion_dot; }
-	virtual double getMeanMotionDDot() { return m_mean_motion_ddot; }
+	virtual int getNoradcatId() const { return m_norad_cat_id; }
+	virtual int getRevAtEpoch() const { return m_rev_at_epoch; }
+	virtual double getBstar() const { return m_bstar; }
+	virtual double getMeanMotionDot() const { return m_mean_motion_dot; }
+	virtual double getMeanMotionDDot() const { return m_mean_motion_ddot; }
 
 	virtual const QString& getObjectName() const { return m_object_name; }
 	virtual const QString& getObjectId() const { return m_object_id; }
 
-	virtual OptStatus getStatus() { return m_status; }
+	virtual OptStatus getStatus() const { return m_status; }
+
+	virtual double getLaunchYearJD();
 
 	// Setter functions
 	bool setEpoch(const QJsonValue & val, const QString & tag = "");
@@ -176,6 +182,10 @@ private:
 	void processTleLegacyLine2(void);
 	void processTagElement(const QString& tag, const QJsonValue& val);
 
+	double epochToJD();
+	void tleEpochtoISO8601(const QString&);
+	void jday_SGP4(int year, int mon, int day, int hr, int minute, double sec, double & jd, double & jdFrac);
+
 	SourceType m_source_type;
 	
 	// Legacy TLE data.
@@ -184,13 +194,13 @@ private:
 	QString m_line2{};
 
 	// Mean elements.
-	OMMDateTime m_epoch{};
-	double m_mean_motion{};
-	double m_eccentricity{};
-	double m_inclination{};
-	double m_ascending_node{};
-	double m_argument_perigee{};
-	double m_mean_anomoly{};
+	QString m_epoch{};
+	double  m_mean_motion{};
+	double  m_eccentricity{};
+	double  m_inclination{};
+	double  m_ascending_node{};
+	double  m_argument_perigee{};
+	double  m_mean_anomoly{};
 
 	// TLE parameters.
 	QChar m_classification{};
@@ -201,6 +211,7 @@ private:
 	double m_mean_motion_ddot{};
 	int m_ephermeris_type{};
 	int m_element_number{};
+	double m_epoch_jd{};
 
 	// Metadata
 	QString m_object_name{};
@@ -208,6 +219,12 @@ private:
 
 	// Celestrak status
 	OptStatus m_status{};
+
+	// The following exist only to make 
+	// elsetrec conversions simpler for 
+	// the SGP4.cpp library
+	double m_epoch_jd_whole;
+	double m_epoch_jd_frac;
 };
 
 #endif

@@ -41,9 +41,41 @@
 #include "VecMath.hpp"
 #include "StelUtils.hpp"
 
+#include "OMM.hpp"
 #include "SGP4.h" // Upgraded to SGP4 Version 2020-07-13
 
 #include "stdsat.h"
+
+struct elsetrec_data
+{
+	double epoch;
+	double bstar;
+	double ndot;
+	double nndot;
+	double ecco;
+	double argpo;
+	double inclo;
+	double mo;
+	double no_kozai;
+	double nodeo;
+	double jdsatepoch;
+	double jdsatepochF;
+
+	void set(elsetrec* p) {
+		epoch = p->epochdays;
+		bstar = p->bstar;
+		ndot = p->ndot;
+		nndot = p->nddot;
+		ecco = p->ecco;
+		argpo = p->argpo;
+		inclo = p->inclo;
+		mo = p->mo;
+		no_kozai = p->no_kozai;
+		nodeo = p->nodeo;
+		jdsatepoch = p->jdsatepoch;
+		jdsatepochF = p->jdsatepochF;
+	}
+};
 
 //! @class gSatTEME
 //! @brief Sat position and velocity predictions over TEME reference system.
@@ -63,6 +95,8 @@ public:
 	//! @param[in] 	pstrTleLine2 Pointer to a null end string with the
 	//!             second TLE Kep. data line
 	gSatTEME(const char *pstrName, char *pstrTleLine1, char *pstrTleLine2);
+
+	gSatTEME(const OMM& omm);
 
 	// Operation: setEpoch( gTime ai_time)
 	//! @brief Set compute epoch for prediction
@@ -164,13 +198,14 @@ private:
 	Vec3d computeSubPoint(gTime ai_time);
 
 	// sgp4 processes variables
-	double tumin, mu, radiusearthkm, xke, j2, j3, j4, j3oj2;
-	elsetrec satrec;
+	double tumin{}, mu{}, radiusearthkm{}, xke{}, j2{}, j3{}, j4{}, j3oj2{};
+	elsetrec satrec{};
+	elsetrec_data debug_data;
 
-	std::string  m_SatName;
-	Vec3d m_Position;
-	Vec3d m_Vel;
-	Vec3d m_SubPoint;
+	std::string  m_SatName{};
+	Vec3d m_Position{};
+	Vec3d m_Vel{};
+	Vec3d m_SubPoint{};
 };
 
 #endif // GSATTEME_HPP

@@ -15,15 +15,15 @@ SET_TARGET_PROPERTIES(testOMM PROPERTIES FOLDER "plugins/Satellites/test")
 FILE(COPY "${CMAKE_SOURCE_DIR}/plugins/Satellites/src/test/test_data.xml" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}")
 FILE(COPY "${CMAKE_SOURCE_DIR}/plugins/Satellites/src/test/test_data.json" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}")
 
-ADD_EXECUTABLE(testOMMDateTime testOMMDateTime.cpp testOMMDateTime.hpp)
-TARGET_LINK_LIBRARIES(testOMMDateTime Qt${QT_VERSION_MAJOR}::Test Satellites-static stelMain)
-ADD_TEST(testOMMDateTime testOMMDateTime)
-SET_TARGET_PROPERTIES(testOMMDateTime PROPERTIES FOLDER "plugins/Satellites/test")
-
 ADD_EXECUTABLE(testSGP4 testSGP4.cpp testSGP4.hpp)
 TARGET_LINK_LIBRARIES(testSGP4 Qt${QT_VERSION_MAJOR}::Test Satellites-static stelMain)
 ADD_TEST(testSGP4 testSGP4)
 SET_TARGET_PROPERTIES(testSGP4 PROPERTIES FOLDER "plugins/Satellites/test")
+
+ADD_EXECUTABLE(testSatTEME testSatTEME.cpp testSatTEME.hpp)
+TARGET_LINK_LIBRARIES(testSatTEME Qt${QT_VERSION_MAJOR}::Test Satellites-static stelMain)
+ADD_TEST(testSatTEME testSatTEME)
+SET_TARGET_PROPERTIES(testSatTEME PROPERTIES FOLDER "plugins/Satellites/test")
 
 ADD_EXECUTABLE(testOMMDownload testOMMDownload.cpp testOMMDownload.hpp)
 TARGET_LINK_LIBRARIES(testOMMDownload Qt${QT_VERSION_MAJOR}::Test Satellites-static stelMain)

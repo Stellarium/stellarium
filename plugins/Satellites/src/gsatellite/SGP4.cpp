@@ -1,4 +1,4 @@
-/*     ----------------------------------------------------------------
+ï»¿/*     ----------------------------------------------------------------
 *
 *                               sgp4unit.cpp
 *
@@ -2085,6 +2085,7 @@ namespace SGP4Funcs
 		double& j3oj2
 		)
 	{
+		// mus is GravConst (6.674eâˆ’11) * Earth Mass (5.972e15) in km3/s2
 		switch (whichconst)
 		{
 			// -- wgs-72 low precision str#3 constants --
@@ -2678,7 +2679,7 @@ namespace SGP4Funcs
 	*
 	*  this function solves keplers equation when the true anomaly is known.
 	*    the mean and eccentric, parabolic, or hyperbolic anomaly is also found.
-	*    the parabolic limit at 168ø is arbitrary. the hyperbolic anomaly is also
+	*    the parabolic limit at 168Ã¸ is arbitrary. the hyperbolic anomaly is also
 	*    limited. the hyperbolic sine is used because it's not double valued.
 	*
 	*  author        : david vallado                  719-573-2600   27 may 2002
@@ -2691,8 +2692,8 @@ namespace SGP4Funcs
 	*    nu          - true anomaly                   -2pi to 2pi rad
 	*
 	*  outputs       :
-	*    e0          - eccentric anomaly              0.0  to 2pi rad       153.02 ø
-	*    m           - mean anomaly                   0.0  to 2pi rad       151.7425 ø
+	*    e0          - eccentric anomaly              0.0  to 2pi rad       153.02 Ã¸
+	*    m           - mean anomaly                   0.0  to 2pi rad       151.7425 Ã¸
 	*
 	*  locals        :
 	*    e1          - eccentric anomaly, next value  rad

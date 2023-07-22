@@ -25,8 +25,6 @@ SET(Satellites_SRCS
      OMM.cpp
      OMMDownload.hpp
      OMMDownload.cpp
-     OMMDateTime.hpp
-     OMMDateTime.cpp
      gSatWrapper.hpp
      gSatWrapper.cpp
      Satellite.hpp

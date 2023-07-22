@@ -135,13 +135,14 @@ Satellite::Satellite(const QString& identifier, const QVariantMap& map)
 	}
 
 	id = identifier;
-	name  = map.value("name").toString();
+	name = map.value("name").toString();
 	if (name.isEmpty())
 		return;
 
 	QString tle1 = map.value("tle1").toString();
 	QString tle2 = map.value("tle2").toString();
 	m_omm = OMM(name, tle1, tle2);
+	jdLaunchYearJan1  = m_omm.getLaunchYearJD();
 	
 	// If there are no such keys, these will be initialized with the default
 	// values given them above.
@@ -526,15 +527,19 @@ void Satellite::calculateSatDataFromLine2(QString tle)
 	const double k = 8681663.653;
 	const double meanMotion = tle.left(63).right(11).toDouble();
 	const double semiMajorAxis = std::cbrt((k/meanMotion)*(k/meanMotion));
-	eccentricity = QString("0.%1").arg(tle.left(33).right(7)).toDouble();
+	//AJK eccentricity = QString("0.%1").arg(tle.left(33).right(7)).toDouble();
+	eccentricity = m_omm.getEccentricity();
 	perigee = semiMajorAxis*(1.0 - eccentricity) - EARTH_RADIUS;
 	apogee = semiMajorAxis*(1.0 + eccentricity) - EARTH_RADIUS;
-	inclination = QString(tle.left(16).right(8)).toDouble();
+	//AJK inclination = QString(tle.left(16).right(8)).toDouble();
+	inclination = m_omm.getInclination();
 }
 
 // Calculate epoch of TLE
 void Satellite::calculateEpochFromLine1(QString tle)
 {
+#if 0
+	//AJK
 	QString epochStr;
 	// Details: https://celestrak.org/columns/v04n03/ or https://en.wikipedia.org/wiki/Two-line_element_set
 	int year = tle.left(20).right(2).toInt();
@@ -553,6 +558,9 @@ void Satellite::calculateEpochFromLine1(QString tle)
 
 	tleEpoch = epochStr;
 	tleEpochJD = epoch.toJulianDay();
+#endif
+	tleEpoch = m_omm.getEpoch();
+	tleEpochJD = m_omm.getEpochJD();
 }
 
 QVariantMap Satellite::getInfoMap(const StelCore *core) const
@@ -798,6 +806,8 @@ double Satellite::getAngularRadius(const StelCore*) const
 
 void Satellite::setNewTleElements(const QString& tle1, const QString& tle2)
 {
+	bool breakp = false;
+
 	if (pSatWrapper)
 	{
 		gSatWrapper *old = pSatWrapper;
@@ -808,7 +818,14 @@ void Satellite::setNewTleElements(const QString& tle1, const QString& tle2)
 	tleElements.first = tle1;
 	tleElements.second = tle2;
 
-	pSatWrapper = new gSatWrapper(id, tle1, tle2);
+	// Create SatWrapper from OMM.
+	QString name = m_omm.getObjectName();
+	m_omm = OMM(name, tleElements.first, tleElements.second);
+	pSatWrapper = new gSatWrapper(m_omm);
+
+	// Old method of creating a SatWrapper from TLEs.
+	//pSatWrapper = new gSatWrapper(id, tle1, tle2);
+
 	orbitPoints.clear();
 	visibilityPoints.clear();
 	
@@ -819,6 +836,8 @@ void Satellite::setNewTleElements(const QString& tle1, const QString& tle2)
 
 void Satellite::recomputeSatData()
 {
+	QString name = m_omm.getObjectName();
+	m_omm = OMM(name, tleElements.first, tleElements.second);
 	calculateEpochFromLine1(tleElements.first);
 	calculateSatDataFromLine2(tleElements.second);
 }
@@ -835,11 +854,7 @@ void Satellite::update(double)
 		velocity                 = pSatWrapper->getTEMEVel();
 		latLongSubPointPosition  = pSatWrapper->getSubPoint();
 		height                   = latLongSubPointPosition[2]; // km
-		/*
-		Vec2d pa                 = pSatWrapper->getPerigeeApogeeAltitudes();
-		perigee                  = pa[0];
-		apogee                   = pa[1];
-		*/
+
 		if (height < 0.1)
 		{
 			// The orbit is no longer valid.  Causes include very out of date
