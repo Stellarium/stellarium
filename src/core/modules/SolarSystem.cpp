@@ -3358,20 +3358,12 @@ void SolarSystem::setOrbitColorStyle(QString style)
 
 QString SolarSystem::getOrbitColorStyle() const
 {
-	QString r = "one_color";
-	switch (Planet::orbitColorStyle)
-	{
-		case Planet::ocsOneColor:
-			r = "one_color";
-			break;
-		case Planet::ocsGroups:
-			r = "groups";
-			break;
-		case Planet::ocsMajorPlanets:
-			r = "major_planets";
-			break;
-	}
-	return r;
+	static const QMap<Planet::PlanetOrbitColorStyle, QString>map={
+		{ Planet::ocsOneColor,     "one_color"},
+		{ Planet::ocsGroups,       "groups"},
+		{ Planet::ocsMajorPlanets, "major_planets"}
+	};
+	return map.value(Planet::orbitColorStyle, "one_color");
 }
 
 // TODO: To make the code better understandable, get rid of planet->computeModelMatrix(trans, true) here.

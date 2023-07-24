@@ -94,8 +94,6 @@ private:
 
 	struct {
 		int doSRGB;
-		int rgbMaxValue;
-		int ditherPattern;
 		int oneOverGamma;
 		int brightnessScale;
 		int luminanceTexture;
@@ -105,7 +103,6 @@ private:
 		int flagUseTmGamma;                      // switch between their use, true to use the first expression.
 	} shaderAttribLocations;
 
-	StelTextureSP ditherPatternTex_;
 	StelProjectorP prevProjector_;
 	std::unique_ptr<TextureAverageComputer> textureAverager_;
 

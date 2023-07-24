@@ -19,6 +19,7 @@
 
 #include "StelApp.hpp"
 
+#include "Dithering.hpp"
 #include "StelCore.hpp"
 #include "StelMainView.hpp"
 #include "StelSplashScreen.hpp"
@@ -79,8 +80,12 @@
 #include <QNetworkDiskCache>
 #include <QNetworkProxy>
 #include <QNetworkReply>
+#include <QOpenGLBuffer>
 #include <QOpenGLContext>
+#include <QOpenGLShaderProgram>
+#include <QOpenGLVertexArrayObject>
 #include <QOpenGLFramebufferObject>
+#include <QOpenGLFunctions_3_3_Core>
 #include <QString>
 #include <QStringList>
 #include <QSysInfo>
@@ -657,6 +662,9 @@ void StelApp::init(QSettings* conf)
 
 	// Animation
 	animationScale = confSettings->value("gui/pointer_animation_speed", 1.).toDouble();
+
+	ditherPatternTex = StelApp::getInstance().getTextureManager().getDitheringTexture(0);
+	setupPostProcessor();
 	
 #ifdef ENABLE_SPOUT
 	//qDebug() << "Property spout is" << qApp->property("spout").toString();
@@ -803,6 +811,218 @@ void StelApp::applyRenderBuffer(GLuint drawFbo)
 	viewportEffect->paintViewportBuffer(renderBuffer);
 }
 
+void StelApp::setupPostProcessor()
+{
+	postProcessorVBO.reset(new QOpenGLBuffer(QOpenGLBuffer::VertexBuffer));
+	postProcessorVBO->create();
+	postProcessorVBO->bind();
+	const GLfloat vertices[]=
+	{
+		// full screen quad
+		-1, -1,
+		 1, -1,
+		-1,  1,
+		 1,  1,
+	};
+	GL(gl->glBufferData(GL_ARRAY_BUFFER, sizeof vertices, vertices, GL_STATIC_DRAW));
+
+	postProcessorVAO.reset(new QOpenGLVertexArrayObject);
+	postProcessorVAO->create();
+	postProcessorVAO->bind();
+	gl->glVertexAttribPointer(0, 2, GL_FLOAT, false, 0, 0);
+	postProcessorVBO->release();
+	gl->glEnableVertexAttribArray(0);
+	postProcessorVAO->release();
+
+	postProcessorProgram.reset(new QOpenGLShaderProgram);
+	postProcessorProgram->addShaderFromSourceCode(QOpenGLShader::Vertex,
+		StelOpenGL::globalShaderPrefix(StelOpenGL::VERTEX_SHADER) + R"(
+ATTRIBUTE vec3 vertex;
+VARYING vec2 texcoord;
+void main()
+{
+	gl_Position = vec4(vertex, 1.);
+	texcoord = 0.5*vertex.xy+0.5;
+}
+)");
+	postProcessorProgram->addShaderFromSourceCode(QOpenGLShader::Fragment,
+		StelOpenGL::globalShaderPrefix(StelOpenGL::FRAGMENT_SHADER) +
+		makeDitheringShader() + R"(
+VARYING vec2 texcoord;
+uniform sampler2D tex;
+
+void main()
+{
+	vec4 rgba = texture2D(tex, texcoord);
+	FRAG_COLOR = vec4(dither(rgba.rgb), rgba.a);
+}
+)");
+	StelPainter::linkProg(postProcessorProgram.get(), "Post-processing program");
+	postProcessorProgram->bind();
+	postProcessorUniformLocations.tex           = postProcessorProgram->uniformLocation("tex");
+	postProcessorUniformLocations.rgbMaxValue   = postProcessorProgram->uniformLocation("rgbMaxValue");
+	postProcessorUniformLocations.ditherPattern = postProcessorProgram->uniformLocation("ditherPattern");
+	postProcessorProgram->release();
+
+	if(StelMainView::getInstance().getGLInformation().isHighGraphicsMode)
+	{
+		postProcessorProgramMS.reset(new QOpenGLShaderProgram);
+		postProcessorProgramMS->addShaderFromSourceCode(QOpenGLShader::Vertex,
+			StelOpenGL::globalShaderPrefix(StelOpenGL::VERTEX_SHADER) + R"(
+ATTRIBUTE vec3 vertex;
+void main()
+{
+	gl_Position = vec4(vertex, 1.);
+}
+)");
+		postProcessorProgramMS->addShaderFromSourceCode(QOpenGLShader::Fragment,
+			StelOpenGL::globalShaderPrefix(StelOpenGL::FRAGMENT_SHADER) +
+			makeDitheringShader() + R"(
+uniform sampler2DMS tex;
+uniform int numMultiSamples;
+
+void main()
+{
+	vec4 rgba = vec4(0);
+	for(int n = 0; n < numMultiSamples; ++n)
+		rgba += texelFetch(tex, ivec2(gl_FragCoord.xy), n);
+	rgba /= float(numMultiSamples);
+	FRAG_COLOR = vec4(dither(rgba.rgb), rgba.a);
+}
+)");
+		StelPainter::linkProg(postProcessorProgramMS.get(), "Multisampled post-processing program");
+		postProcessorProgramMS->bind();
+		postProcessorUniformLocationsMS.tex               = postProcessorProgramMS->uniformLocation("tex");
+		postProcessorUniformLocationsMS.rgbMaxValue       = postProcessorProgramMS->uniformLocation("rgbMaxValue");
+		postProcessorUniformLocationsMS.ditherPattern     = postProcessorProgramMS->uniformLocation("ditherPattern");
+		postProcessorUniformLocationsMS.numMultiSamples   = postProcessorProgramMS->uniformLocation("numMultiSamples");
+		postProcessorProgramMS->release();
+	}
+}
+
+void StelApp::highGraphicsModeDraw()
+{
+#if !QT_CONFIG(opengles2)
+	const auto targetFBO = currentFbo;
+	StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
+	const auto w = params.viewportXywh[2] * params.devicePixelsPerPixel;
+	const auto h = params.viewportXywh[3] * params.devicePixelsPerPixel;
+	StelOpenGL::checkGLErrors(__FILE__, __LINE__);
+	if(!sceneFBO || sceneFBO->size() != QSize(w,h))
+	{
+		qDebug().nospace() << "Creating scene FBO with size " << w << "x" << h;
+		const auto internalFormat = GL_RGBA16;
+		QOpenGLFramebufferObjectFormat format;
+		format.setAttachment(QOpenGLFramebufferObject::CombinedDepthStencil);
+		format.setInternalTextureFormat(internalFormat);
+		sceneFBO.reset(new QOpenGLFramebufferObject(w, h, format));
+		GLint maxSamples = 1;
+		GL(gl->glGetIntegerv(GL_MAX_SAMPLES, &maxSamples));
+		const auto samples = confSettings->value("video/multisampling", 0).toInt();
+		numMultiSamples = std::min(samples, maxSamples);
+		if(numMultiSamples > 1)
+		{
+			const auto gl = StelOpenGL::highGraphicsFunctions();
+			if(sceneMultisampledFBO)
+			{
+				GL(gl->glDeleteFramebuffers(1, &sceneMultisampledFBO));
+				GL(gl->glDeleteTextures(1, &sceneMultisampledTex));
+				GL(gl->glDeleteRenderbuffers(1, &sceneMultisampledRenderbuffer));
+			}
+			GL(gl->glGenFramebuffers(1, &sceneMultisampledFBO));
+			GL(gl->glGenTextures(1, &sceneMultisampledTex));
+			GL(gl->glGenRenderbuffers(1, &sceneMultisampledRenderbuffer));
+
+			GL(gl->glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, sceneMultisampledTex));
+			GL(gl->glTexImage2DMultisample(GL_TEXTURE_2D_MULTISAMPLE, numMultiSamples,
+			                                        internalFormat, w, h, true));
+
+			GL(gl->glBindRenderbuffer(GL_RENDERBUFFER, sceneMultisampledRenderbuffer));
+			GL(gl->glRenderbufferStorageMultisample(GL_RENDERBUFFER, numMultiSamples,
+			                                                 GL_DEPTH24_STENCIL8, w, h));
+
+			GL(gl->glBindFramebuffer(GL_FRAMEBUFFER, sceneMultisampledFBO));
+			GL(gl->glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0,
+			                              GL_TEXTURE_2D_MULTISAMPLE, sceneMultisampledTex, 0));
+			GL(gl->glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT,
+			                                 GL_RENDERBUFFER, sceneMultisampledRenderbuffer));
+			const auto status = gl->glCheckFramebufferStatus(GL_FRAMEBUFFER);
+			if(status != GL_FRAMEBUFFER_COMPLETE)
+			{
+				qCritical().nospace() << __FILE__ << ":" << __LINE__
+				                      << ": warning: framebuffer incomplete, status: "
+				                      << status;
+			}
+		}
+	}
+
+	if(sceneMultisampledFBO)
+	{
+		GL(gl->glBindFramebuffer(GL_FRAMEBUFFER, sceneMultisampledFBO));
+		currentFbo = sceneMultisampledFBO;
+	}
+	else
+	{
+		sceneFBO->bind();
+		currentFbo = sceneFBO->handle();
+	}
+	StelOpenGL::checkGLErrors(__FILE__, __LINE__);
+
+	GL(gl->glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT));
+
+	const QList<StelModule*> modules = moduleMgr->getCallOrders(StelModule::ActionDraw);
+
+	for(auto* module : modules)
+	{
+		module->draw(core);
+	}
+
+	if(sceneMultisampledFBO)
+	{
+		GL(gl->glBindFramebuffer(GL_FRAMEBUFFER, targetFBO));
+		postProcessorProgramMS->bind();
+
+		const int sceneTexSampler = 0;
+		GL(gl->glActiveTexture(GL_TEXTURE0 + sceneTexSampler));
+		GL(gl->glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, sceneMultisampledTex));
+		postProcessorProgramMS->setUniformValue(postProcessorUniformLocationsMS.tex, sceneTexSampler);
+
+		const int ditherTexSampler = 1;
+		ditherPatternTex->bind(ditherTexSampler);
+		postProcessorProgramMS->setUniformValue(postProcessorUniformLocationsMS.ditherPattern, ditherTexSampler);
+		const auto rgbMaxValue=calcRGBMaxValue(core->getDitheringMode());
+		postProcessorProgramMS->setUniformValue(postProcessorUniformLocationsMS.rgbMaxValue,
+		                                        rgbMaxValue[0], rgbMaxValue[1], rgbMaxValue[2]);
+		postProcessorProgramMS->setUniformValue(postProcessorUniformLocationsMS.numMultiSamples, numMultiSamples);
+	}
+	else
+	{
+		GL(gl->glBindFramebuffer(GL_FRAMEBUFFER, targetFBO));
+		postProcessorProgram->bind();
+
+		const int sceneTexSampler = 0;
+		GL(gl->glActiveTexture(GL_TEXTURE0 + sceneTexSampler));
+		GL(gl->glBindTexture(GL_TEXTURE_2D, sceneFBO->texture()));
+		postProcessorProgram->setUniformValue(postProcessorUniformLocations.tex, sceneTexSampler);
+
+		const int ditherTexSampler = 1;
+		ditherPatternTex->bind(ditherTexSampler);
+		postProcessorProgram->setUniformValue(postProcessorUniformLocations.ditherPattern, ditherTexSampler);
+		const auto rgbMaxValue=calcRGBMaxValue(core->getDitheringMode());
+		postProcessorProgram->setUniformValue(postProcessorUniformLocations.rgbMaxValue,
+		                                      rgbMaxValue[0], rgbMaxValue[1], rgbMaxValue[2]);
+
+	}
+
+	postProcessorVAO->bind();
+	GL(gl->glEnable(GL_BLEND));
+	GL(gl->glBlendFunc(GL_ONE,GL_ONE));
+	GL(gl->glDrawArrays(GL_TRIANGLE_STRIP, 0, 4));
+	GL(gl->glDisable(GL_BLEND));
+	postProcessorVAO->release();
+#endif
+}
+
 //! Main drawing function called at each frame
 void StelApp::draw()
 {
@@ -819,13 +1039,19 @@ void StelApp::draw()
 
 	core->preDraw();
 
-	const QList<StelModule*> modules = moduleMgr->getCallOrders(StelModule::ActionDraw);
-	for (auto* module : modules)
+	if(StelMainView::getInstance().getGLInformation().isHighGraphicsMode)
 	{
-		module->draw(core);
-		if (StelOpenGL::checkGLErrors(__FILE__,__LINE__))
-			qDebug() << module;
+		highGraphicsModeDraw();
 	}
+	else
+	{
+		const QList<StelModule*> modules = moduleMgr->getCallOrders(StelModule::ActionDraw);
+		for (auto* module : modules)
+		{
+			module->draw(core);
+		}
+	}
+
 	core->postDraw();
 #ifdef ENABLE_SPOUT
 	// At this point, the sky scene has been drawn, but no GUI panels.
