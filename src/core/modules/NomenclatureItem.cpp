@@ -28,6 +28,7 @@
 
 const QString NomenclatureItem::NOMENCLATURE_TYPE = QStringLiteral("NomenclatureItem");
 Vec3f NomenclatureItem::color = Vec3f(0.1f,1.0f,0.1f);
+bool NomenclatureItem::flagOutlineCraters = false;
 bool NomenclatureItem::hideLocalNomenclature = false;
 bool NomenclatureItem::showTerminatorZoneOnly = false;
 int NomenclatureItem::terminatorMinAltitude=-2;
@@ -355,23 +356,23 @@ float NomenclatureItem::getAngularDiameterRatio(const StelCore *core) const
 
 void NomenclatureItem::draw(StelCore* core, StelPainter *painter)
 {
+	// show special points only?
+	if (getFlagShowSpecialNomenclatureOnly() && nType<NomenclatureItem::niSpecialPointPole)
+		return;
+
+	if (getFlagHideLocalNomenclature() && planet==core->getCurrentPlanet())
+		return;
+
 	// Called by NomenclatureMgr, so we don't need to check if labelsFader is true.
 	// The painter has been set to enable blending.
 	const Vec3d equPos = planet->getJ2000EquatorialPos(core);
-	Vec3d XYZ = getJ2000EquatorialPos(core);
+	const Vec3d XYZ = getJ2000EquatorialPos(core);
 
 	// In case we are located at a labeled site, don't show this label or any labels within 150 km. Else we have bad flicker...
 	if (XYZ.normSquared() < 150.*150.*AU_KM*AU_KM )
 		return;
 
-	if (getFlagHideLocalNomenclature())
-	{
-		// Check the state when needed only!
-		if (planet==core->getCurrentPlanet())
-			return;
-	}
-
-	const double screenSize = 2.*getAngularRadius(core)*M_PI_180*static_cast<double>(painter->getProjector()->getPixelPerRadAtCenter());
+	const double screenRadius = getAngularRadius(core)*M_PI_180*static_cast<double>(painter->getProjector()->getPixelPerRadAtCenter());
 
 	// We can use ratio of angular size to the FOV to checking visibility of features also!
 	// double scale = getAngularSize(core)/painter->getProjector()->getFov();
@@ -380,29 +381,34 @@ void NomenclatureItem::draw(StelCore* core, StelPainter *painter)
 	// check visibility of feature
 	Vec3d srcPos;
 	const float scale = getAngularDiameterRatio(core);
-	NomenclatureItem::NomenclatureItemType niType = getNomenclatureType();
-
-	if (getFlagShowSpecialNomenclatureOnly())
-	{
-		// show special points only
-		if (niType<NomenclatureItem::niSpecialPointPole)
-			return;
-	}
 
 	if (painter->getProjector()->projectCheck(XYZ, srcPos) && (equPos.normSquared() >= XYZ.normSquared())
-	    && (scale>0.04f && (scale<0.5f || niType>=NomenclatureItem::niSpecialPointPole )))
+	    && (scale>0.04f && (scale<0.5f || nType>=NomenclatureItem::niSpecialPointPole )))
 	{
 		const float solarAltitude=getSolarAltitude(core);
 		// Throw out real items if not along the terminator?
-		if ( (niType<NomenclatureItem::niSpecialPointPole) && showTerminatorZoneOnly && (solarAltitude > terminatorMaxAltitude || solarAltitude < terminatorMinAltitude) )
+		if ( (nType<NomenclatureItem::niSpecialPointPole) && showTerminatorZoneOnly && (solarAltitude > terminatorMaxAltitude || solarAltitude < terminatorMinAltitude) )
 			return;
-		float brightness=(solarAltitude<0. ? 0.25f : 1.0f);
-		if (niType>=NomenclatureItem::niSpecialPointPole)
-			brightness = 0.5f;
+		const float brightness=(nType>=NomenclatureItem::niSpecialPointPole ? 0.5f : (solarAltitude<0. ? 0.25f : 1.0f));
 		painter->setColor(color*brightness, labelsFader.getInterstate());
 		painter->drawCircle(static_cast<float>(srcPos[0]), static_cast<float>(srcPos[1]), 2.f);
-		if (nType==niCrater || nType==niSatelliteFeature) // probably all satellite features are satellite craters
-			painter->drawCircle(static_cast<float>(srcPos[0]), static_cast<float>(srcPos[1]), screenSize/2.);
+		if (flagOutlineCraters && (nType==niCrater || nType==niSatelliteFeature)) // probably all satellite features are satellite craters
+		{
+			// Compute aspectRatio and angle from position of planet and own position, parallactic angle, ...
+			double ra, de, raPl, dePl;
+			StelUtils::rectToSphe(&ra, &de, XYZ);
+			StelUtils::rectToSphe(&raPl, &dePl, equPos);
+			const double distDegrees=StelLocation::distanceDegrees(raPl*M_180_PIf, dePl*M_180_PIf, ra*M_180_PIf, de*M_180_PIf);
+			const double plRadiusDeg=planet->getAngularRadius(core);
+			const double sinDistCenter=distDegrees/plRadiusDeg; // 0...1
+			if (sinDistCenter>1.f)
+				qWarning() << "Distance greater 1";
+			const double angleDistCenterRad=asin(sinDistCenter); // 0..pi/2 on the lunar/planet sphere
+			const double aspectRatio=cos(angleDistCenterRad);
+			const double angle=atan2(ra-raPl, de-dePl);
+			const double par = static_cast<double>(getParallacticAngle(core));
+			painter->drawEllipse(static_cast<float>(srcPos[0]), static_cast<float>(srcPos[1]), screenRadius, screenRadius*aspectRatio, angle-par );
+		}
 		painter->drawText(static_cast<float>(srcPos[0]), static_cast<float>(srcPos[1]), nameI18n, 0, 5.f, 5.f, false);
 	}
 }

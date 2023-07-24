@@ -2034,11 +2034,22 @@
                 </layout>
                </item>
                <item>
-                <widget class="QCheckBox" name="showSpecialNomenclatureOnlyCheckBox">
-                 <property name="text">
-                  <string>Show special nomenclature points only</string>
-                 </property>
-                </widget>
+                <layout class="QHBoxLayout" name="horizontalLayout_Nomenclature">
+                 <item>
+                  <widget class="QCheckBox" name="outlineCratersCheckBox">
+                   <property name="text">
+                    <string>Outline craters</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QCheckBox" name="showSpecialNomenclatureOnlyCheckBox">
+                   <property name="text">
+                    <string>Show special nomenclature points only</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
                </item>
               </layout>
              </item>

@@ -71,6 +71,7 @@ void NomenclatureMgr::init()
 	setFlagShowTerminatorZoneOnly(conf->value("astro/flag_planets_nomenclature_terminator_only", false).toBool());
 	setTerminatorMinAltitude(conf->value("astro/planet_nomenclature_solar_altitude_min", -5).toInt());
 	setTerminatorMaxAltitude(conf->value("astro/planet_nomenclature_solar_altitude_max", 40).toInt());
+	setFlagOutlineCraters(conf->value("astro/flag_planets_nomenclature_outline_craters", false).toBool());
 	setFlagHideLocalNomenclature(conf->value("astro/flag_hide_local_nomenclature", true).toBool());
 	setFlagShowSpecialNomenclatureOnly(conf->value("astro/flag_special_nomenclature_only", false).toBool());
 
@@ -551,6 +552,17 @@ void NomenclatureMgr::setTerminatorMaxAltitude(int deg)
 int NomenclatureMgr::getTerminatorMaxAltitude() const
 {
 	return NomenclatureItem::terminatorMaxAltitude;
+}
+
+void NomenclatureMgr::setFlagOutlineCraters(bool b)
+{
+	NomenclatureItem::flagOutlineCraters = b;
+	emit flagOutlineCratersChanged(b);
+}
+
+bool NomenclatureMgr::getFlagOutlineCraters() const
+{
+	return NomenclatureItem::flagOutlineCraters;
 }
 
 void NomenclatureMgr::setFlagHideLocalNomenclature(bool b)

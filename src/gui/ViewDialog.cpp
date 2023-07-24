@@ -250,6 +250,7 @@ void ViewDialog::createDialogContent()
 	connectDoubleProperty(ui->planetsLabelsHorizontalSlider, "SolarSystem.labelsAmount",0.0,10.0);	
 	connectCheckBox(ui->planetNomenclatureCheckBox, "actionShow_Planets_Nomenclature");
 	connectColorButton(ui->planetNomenclatureColor, "NomenclatureMgr.nomenclatureColor", "color/planet_nomenclature_color");
+	connectBoolProperty(ui->outlineCratersCheckBox, "NomenclatureMgr.flagOutlineCraters");
 	connectColorButton(ui->planetLabelColor, "SolarSystem.labelsColor", "color/planet_names_color");
 	connectColorButton(ui->planetTrailsColor, "SolarSystem.trailsColor", "color/object_trails_color");
 	connectBoolProperty(ui->planetTrailsCheckBox, "SolarSystem.trailsDisplayed");
