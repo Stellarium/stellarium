@@ -371,6 +371,12 @@ void NomenclatureItem::draw(StelCore* core, StelPainter *painter)
 			return;
 	}
 
+	const double screenSize = 2.*getAngularRadius(core)*M_PI_180*static_cast<double>(painter->getProjector()->getPixelPerRadAtCenter());
+
+	// We can use ratio of angular size to the FOV to checking visibility of features also!
+	// double scale = getAngularSize(core)/painter->getProjector()->getFov();
+	// if (painter->getProjector()->projectCheck(XYZ, srcPos) && (dist >= XYZ.length()) && (scale>0.04 && scale<0.5))
+
 	// check visibility of feature
 	Vec3d srcPos;
 	const float scale = getAngularDiameterRatio(core);
@@ -395,6 +401,8 @@ void NomenclatureItem::draw(StelCore* core, StelPainter *painter)
 			brightness = 0.5f;
 		painter->setColor(color*brightness, labelsFader.getInterstate());
 		painter->drawCircle(static_cast<float>(srcPos[0]), static_cast<float>(srcPos[1]), 2.f);
+		if (nType==niCrater || nType==niSatelliteFeature) // probably all satellite features are satellite craters
+			painter->drawCircle(static_cast<float>(srcPos[0]), static_cast<float>(srcPos[1]), screenSize/2.);
 		painter->drawText(static_cast<float>(srcPos[0]), static_cast<float>(srcPos[1]), nameI18n, 0, 5.f, 5.f, false);
 	}
 }

@@ -205,11 +205,9 @@ void NomenclatureMgr::loadNomenclature()
 				qWarning() << "ERROR - cannot parse record at line" << lineNumber << "in surface nomenclature file" << QDir::toNativeSeparators(surfNamesFile);
 			else
 			{
-				// Read the planet name
+				// Read planet name, feature ID, context
 				planet	= recMatch.captured(1).trimmed();
-				// Read the ID of feature
 				featureId	= recMatch.captured(2).toInt();
-				// Read the name of feature and context
 				QString ctxt	= recMatch.captured(3).trimmed();
 				QRegularExpressionMatch ctxMatch=ctxRx.match(ctxt);
 				if (ctxMatch.hasMatch())
@@ -225,11 +223,9 @@ void NomenclatureMgr::loadNomenclature()
 				// Read the type of feature
 				QString ntypecode	= recMatch.captured(4).trimmed();
 				ntype = NomenclatureItem::getNomenclatureItemType(ntypecode.toUpper());
-				// Read the latitude of feature
+				// Read lat/long/size of feature
 				latitude	= recMatch.captured(5).toDouble();
-				// Read the longitude of feature
 				longitude	= recMatch.captured(6).toDouble();
-				// Read the size of feature
 				size		= recMatch.captured(7).toDouble();
 
 				if (planetName.isEmpty() || planet!=planetName)
@@ -257,9 +253,8 @@ void NomenclatureMgr::loadNomenclature()
 		qDebug() << "Loaded" << readOk << "/" << totalRecords << "items of planetary surface nomenclature";
 
 		faultPlanets.removeDuplicates();
-		int err = faultPlanets.size();
-		if (err>0)
-			qDebug().noquote() << "WARNING - These planets to assign nomenclature items were not found:" << faultPlanets.join(", ");
+		if (faultPlanets.size()>0)
+			qDebug() << "WARNING - Cannot find these planets to assign nomenclature items:" << faultPlanets.join(", ");
 	}
 }
 
