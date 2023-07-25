@@ -1690,8 +1690,8 @@ void StelPainter::drawEllipse(float x, float y, float rX, float rY, float angle)
 		return;
 	// Taken largely from Nebula::renderEllipticMarker()
 	// Take into account device pixel density and global scale ratio, as we are drawing 2D stuff.
-	const auto pixelRatio = getProjector()->getDevicePixelsPerPixel();
-	const auto scale = pixelRatio * StelApp::getInstance().getGlobalScalingRatio();
+	//const auto pixelRatio = getProjector()->getDevicePixelsPerPixel();
+	const auto scale = StelApp::getInstance().getGlobalScalingRatio();
 	rX *= scale;
 	rY *= scale;
 
