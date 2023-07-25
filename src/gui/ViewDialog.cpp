@@ -615,6 +615,7 @@ void ViewDialog::populateNomenclatureControls(bool flag)
 {
 	ui->hidePlanetNomenclatureCheckBox->setEnabled(flag);
 	ui->showSpecialNomenclatureOnlyCheckBox->setEnabled(flag);
+	ui->outlineCratersCheckBox->setEnabled(flag);
 	ui->showTerminatorNomenclatureOnlyCheckBox->setEnabled(flag);
 	ui->terminatorMinAltSpinbox->setEnabled(flag);
 	ui->terminatorMaxAltSpinbox->setEnabled(flag);
