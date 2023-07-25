@@ -768,13 +768,14 @@ void NavStars::addExtraInfo(StelCore *core)
 		if (limitInfoToNavStars) 
 		{
 			doExtraInfo = false;
-			if(selectedObject->getType() == QStringLiteral("Star")) {
+			if(selectedObject->getType() == QStringLiteral("Star"))
+			{
 				for (QVector<StelObjectP>::const_iterator itor = stars.constBegin();
 					itor != stars.constEnd();
 					itor++)
 				{
 					StelObjectP p = *itor;
-					if (p->getEnglishName() == selectedObject->getEnglishName())
+					if (!p.isNull() && p->getEnglishName() == selectedObject->getEnglishName())
 					{
 						doExtraInfo = true;
 						break;
