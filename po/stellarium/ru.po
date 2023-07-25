@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2023-07-21 22:30+0700\n"
+"POT-Creation-Date: 2023-07-25 17:32+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Alexander V. Wolf <alex.v.wolf@gmail.com>, 2023\n"
 "Language-Team: Russian (https://app.transifex.com/stellarium/teams/80998/ru/)\n"
@@ -67,11 +67,11 @@ msgstr "астеризм"
 #: src/core/modules/LandscapeMgr.cpp:870
 #: src/core/modules/NomenclatureMgr.cpp:83 src/core/modules/NebulaMgr.cpp:357
 #: src/core/modules/NebulaMgr.cpp:358 src/core/modules/SolarSystem.cpp:301
-#: src/core/modules/MilkyWay.cpp:110 src/core/modules/ZodiacalLight.cpp:114
+#: src/core/modules/MilkyWay.cpp:107 src/core/modules/ZodiacalLight.cpp:112
 #: src/core/modules/ToastMgr.cpp:62 src/core/modules/HipsMgr.cpp:156
-#: src/core/StelApp.cpp:648 src/core/StelCore.cpp:296
+#: src/core/StelApp.cpp:653 src/core/StelCore.cpp:296
 #: src/core/StelSkyLayerMgr.cpp:83 src/core/StelSkyLayerMgr.cpp:84
-#: src/StelMainView.cpp:940
+#: src/StelMainView.cpp:936
 msgid "Display Options"
 msgstr "Параметры отображения"
 
@@ -2242,7 +2242,7 @@ msgid "Toggle DSO type filter"
 msgstr "Переключить фильтр типа ОГК"
 
 #: src/core/modules/NebulaMgr.cpp:1395 src/gui/StelDialog.cpp:336
-#: src/StelMainView.cpp:1036
+#: src/StelMainView.cpp:1032
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:773
 msgid "Attention!"
 msgstr "Внимание!"
@@ -2810,11 +2810,11 @@ msgstr "Позиционный угол"
 msgid "Separation"
 msgstr "Разделение"
 
-#: src/core/modules/MilkyWay.cpp:111
+#: src/core/modules/MilkyWay.cpp:108
 msgid "Milky Way"
 msgstr "Млечный Путь"
 
-#: src/core/modules/ZodiacalLight.cpp:115
+#: src/core/modules/ZodiacalLight.cpp:113
 msgid "Zodiacal Light"
 msgstr "Зодиакальный свет"
 
@@ -2962,143 +2962,143 @@ msgstr "Декабрьское солнцестояние в следующем 
 msgid "December solstice at previous year"
 msgstr "Декабрьское солнцестояние в предыдущем году"
 
-#: src/core/StelApp.cpp:453
+#: src/core/StelApp.cpp:458
 msgid "Initializing textures..."
 msgstr "Инициализация текстур..."
 
-#: src/core/StelApp.cpp:457
+#: src/core/StelApp.cpp:462
 msgid "Initializing network access..."
 msgstr "Инициализация сетевого доступа..."
 
-#: src/core/StelApp.cpp:460
+#: src/core/StelApp.cpp:465
 msgid "Initializing network disk cache..."
 msgstr "Инициализация сетевого дискового кэша..."
 
-#: src/core/StelApp.cpp:474
+#: src/core/StelApp.cpp:479
 msgid "Initializing network proxy..."
 msgstr "Инициализация сетевого прокси..."
 
-#: src/core/StelApp.cpp:489
+#: src/core/StelApp.cpp:494
 msgid "Initializing Object Database..."
 msgstr "Инициализация базы объектов..."
 
-#: src/core/StelApp.cpp:495
+#: src/core/StelApp.cpp:500
 msgid "Initializing HiPS survey..."
 msgstr "Инициализация обзоров HiPS..."
 
-#: src/core/StelApp.cpp:501
+#: src/core/StelApp.cpp:506
 msgid "Initializing Solar System objects..."
 msgstr "Инициализация объектов Солнечной системы..."
 
-#: src/core/StelApp.cpp:507
+#: src/core/StelApp.cpp:512
 msgid "Initializing planetary nomenclature..."
 msgstr "Инициализация планетной номенклатуры..."
 
-#: src/core/StelApp.cpp:513
+#: src/core/StelApp.cpp:518
 msgid "Initializing stars..."
 msgstr "Инициализация звёзд..."
 
-#: src/core/StelApp.cpp:518
+#: src/core/StelApp.cpp:523
 msgid "Initializing core..."
 msgstr "Инициализация ядра..."
 
-#: src/core/StelApp.cpp:522
+#: src/core/StelApp.cpp:527
 msgid "Initializing deep-sky objects..."
 msgstr "Инициализация объектов глубокого космоса..."
 
-#: src/core/StelApp.cpp:528
+#: src/core/StelApp.cpp:533
 msgid "Initializing Milky Way..."
 msgstr "Инициализация Млечного пути..."
 
-#: src/core/StelApp.cpp:534
+#: src/core/StelApp.cpp:539
 msgid "Initializing zodiacal light..."
 msgstr "Инициализация зодиакального света..."
 
-#: src/core/StelApp.cpp:540
+#: src/core/StelApp.cpp:545
 msgid "Initializing sky image layer..."
 msgstr "Инициализация слоя изображений..."
 
-#: src/core/StelApp.cpp:546
+#: src/core/StelApp.cpp:551
 msgid "Initializing TOAST surveys..."
 msgstr "Инициализация обзоров TOAST..."
 
-#: src/core/StelApp.cpp:552
+#: src/core/StelApp.cpp:557
 msgid "Initializing audio..."
 msgstr "Инициализация звука..."
 
-#: src/core/StelApp.cpp:556
+#: src/core/StelApp.cpp:561
 msgid "Initializing video..."
 msgstr "Инициализация видео..."
 
-#: src/core/StelApp.cpp:562
+#: src/core/StelApp.cpp:567
 msgid "Initializing constellations..."
 msgstr "Инициализация созвездий..."
 
-#: src/core/StelApp.cpp:568
+#: src/core/StelApp.cpp:573
 msgid "Initializing asterisms..."
 msgstr "Инициализация астеризмов..."
 
-#: src/core/StelApp.cpp:574
+#: src/core/StelApp.cpp:579
 msgid "Initializing landscape..."
 msgstr "Инициализация ландшафта..."
 
-#: src/core/StelApp.cpp:579
+#: src/core/StelApp.cpp:584
 msgid "Initializing grid lines..."
 msgstr "Инициализация сеток..."
 
-#: src/core/StelApp.cpp:584
+#: src/core/StelApp.cpp:589
 msgid "Initializing special markers..."
 msgstr "Инициализация специальных маркеров..."
 
-#: src/core/StelApp.cpp:590
+#: src/core/StelApp.cpp:595
 msgid "Initializing sporadic meteors..."
 msgstr "Инициализация спорадических метеоров..."
 
-#: src/core/StelApp.cpp:596
+#: src/core/StelApp.cpp:601
 msgid "Initializing user labels..."
 msgstr "Инициализация пользовательских меток..."
 
-#: src/core/StelApp.cpp:601
+#: src/core/StelApp.cpp:606
 msgid "Initializing sky cultures..."
 msgstr "Инициализация культур неба..."
 
-#: src/core/StelApp.cpp:605
+#: src/core/StelApp.cpp:610
 msgid "Initializing user markers..."
 msgstr "Инициализация пользовательских маркеров..."
 
-#: src/core/StelApp.cpp:611
+#: src/core/StelApp.cpp:616
 msgid "Initializing custom objects..."
 msgstr "Инициализация пользовательских объектов..."
 
-#: src/core/StelApp.cpp:617
+#: src/core/StelApp.cpp:622
 msgid "Initializing highlights..."
 msgstr "Инициализация подсветок..."
 
-#: src/core/StelApp.cpp:623
+#: src/core/StelApp.cpp:628
 msgid "Initializing specific time..."
 msgstr "Инициализация определенных моментов..."
 
-#: src/core/StelApp.cpp:631
+#: src/core/StelApp.cpp:636
 msgid "Initializing scripting..."
 msgstr "Инициализация движка сценариев..."
 
-#: src/core/StelApp.cpp:636
+#: src/core/StelApp.cpp:641
 msgid "Initializing color scheme..."
 msgstr "Инициализация схемы цветов..."
 
-#: src/core/StelApp.cpp:648 src/ui_configurationDialog.h:1955
+#: src/core/StelApp.cpp:653 src/ui_configurationDialog.h:1955
 msgid "Night mode"
 msgstr "Ночной режим"
 
-#: src/core/StelApp.cpp:675
+#: src/core/StelApp.cpp:683
 msgid "Initializing SPOUT sender..."
 msgstr "Инициализация отправителя SPOUT..."
 
-#: src/core/StelApp.cpp:685
+#: src/core/StelApp.cpp:693
 msgid "Cannot create Spout sender. See log for details."
 msgstr "Не могу создать отправитель Spout. Смотри подробности в журнале."
 
-#: src/core/StelApp.cpp:712
+#: src/core/StelApp.cpp:720
 msgid "Loading plugin"
 msgstr "Загрузка плагина"
 
@@ -4394,7 +4394,7 @@ msgid "References / Further Reading"
 msgstr "Ссылки / Дополнительная литература"
 
 #: src/core/StelMovementMgr.cpp:194 src/gui/StelGui.cpp:220
-#: src/StelMainView.cpp:938 src/StelMainView.cpp:939
+#: src/StelMainView.cpp:934 src/StelMainView.cpp:935
 msgid "Miscellaneous"
 msgstr "Разное"
 
@@ -5128,26 +5128,34 @@ msgstr "12-часовой формат"
 msgid "24-hour format"
 msgstr "24-часовой формат"
 
-#: src/gui/ConfigurationDialog.cpp:2024
+#: src/gui/ConfigurationDialog.cpp:2026
 msgctxt "disabled"
 msgid "None"
 msgstr "Отключено"
 
-#: src/gui/ConfigurationDialog.cpp:2025
+#: src/gui/ConfigurationDialog.cpp:2027
 msgid "5/6/5 bits"
 msgstr "5/6/5 бит"
 
-#: src/gui/ConfigurationDialog.cpp:2026
+#: src/gui/ConfigurationDialog.cpp:2028
 msgid "6/6/6 bits"
 msgstr "6/6/6 бит"
 
-#: src/gui/ConfigurationDialog.cpp:2027
+#: src/gui/ConfigurationDialog.cpp:2029
 msgid "8/8/8 bits"
 msgstr "8/8/8 бит"
 
-#: src/gui/ConfigurationDialog.cpp:2028
+#: src/gui/ConfigurationDialog.cpp:2030
 msgid "10/10/10 bits"
 msgstr "10/10/10 бит"
+
+#: src/gui/ConfigurationDialog.cpp:2042
+msgid "Unsupported"
+msgstr "Не поддерживается"
+
+#: src/gui/ConfigurationDialog.cpp:2044
+msgid "Unsupported in low-graphics mode"
+msgstr "Не поддерживается в скромном графическом режиме"
 
 #: src/gui/HelpDialog.cpp:202 src/gui/HelpDialog.cpp:214
 msgid "Cannot check updates..."
@@ -8219,19 +8227,19 @@ msgstr "Сценарии"
 msgid "Shortcut"
 msgstr "Сочетание клавиш"
 
-#: src/StelMainView.cpp:938
+#: src/StelMainView.cpp:934
 msgid "Save screenshot"
 msgstr "Сохранить снимок экрана"
 
-#: src/StelMainView.cpp:939
+#: src/StelMainView.cpp:935
 msgid "Reload shaders (for development)"
 msgstr "Перезагрузить шейдеры (для разработки)"
 
-#: src/StelMainView.cpp:940
+#: src/StelMainView.cpp:936
 msgid "Full-screen mode"
 msgstr "Полноэкранный режим"
 
-#: src/StelMainView.cpp:1036
+#: src/StelMainView.cpp:1032
 msgid ""
 "Shortcuts have conflicts! Please press F7 after program startup and check "
 "following multiple assignments"
@@ -8239,7 +8247,7 @@ msgstr ""
 "Клавиатурные сокращения конфликтуют! Нажмите F7 после запуска программы и "
 "проверьте следующие клавиатурные сокращения"
 
-#: src/StelMainView.cpp:1119
+#: src/StelMainView.cpp:1115
 msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use --angle-mode (or --mesa-mode) option."
@@ -8248,7 +8256,7 @@ msgstr ""
 "оборудование или используйте режим запуска с --angle-mode (или с --mesa-"
 "mode)."
 
-#: src/StelMainView.cpp:1121
+#: src/StelMainView.cpp:1117
 msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use --mesa-mode option."
@@ -8256,14 +8264,14 @@ msgstr ""
 "Недостаточная версия OpenGL. Пожалуйста, обновите драйвер, графическое "
 "оборудование или используйте режим запуска с --mesa-mode."
 
-#: src/StelMainView.cpp:1125
+#: src/StelMainView.cpp:1121
 msgid ""
 "Insufficient OpenGL version. Please update drivers, or graphics hardware."
 msgstr ""
 "Недостаточная версия OpenGL. Пожалуйста, обновите драйверы или графическое "
 "оборудование."
 
-#: src/StelMainView.cpp:1168
+#: src/StelMainView.cpp:1164
 msgid ""
 "Your DirectX/OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -8271,7 +8279,7 @@ msgstr ""
 "Ваша подсистема DirectX/OpenGL ES имеет проблемы. См. подробности в журнале.\n"
 "Игнорировать и не показывать это уведомление в будущем, и попытаться продолжить в ограниченном режиме в любом случае?"
 
-#: src/StelMainView.cpp:1219
+#: src/StelMainView.cpp:1215
 msgid ""
 "Your OpenGL/Mesa subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -8279,7 +8287,7 @@ msgstr ""
 "Ваша подсистема OpenGL/Mesa имеет проблемы. См. подробности в журнале.\n"
 "Игнорировать и не показывать это уведомление в будущем, и попытаться продолжить в ограниченном режиме в любом случае?"
 
-#: src/StelMainView.cpp:1279
+#: src/StelMainView.cpp:1275
 msgid ""
 "Your OpenGL subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -8287,7 +8295,7 @@ msgstr ""
 "Ваша подсистема OpenGL имеет проблемы. См. подробности в журнале.\n"
 "Игнорировать и не показывать это уведомление в будущем, и попытаться продолжить в ограниченном режиме в любом случае?"
 
-#: src/StelMainView.cpp:1320
+#: src/StelMainView.cpp:1316
 msgid ""
 "Your OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -16254,7 +16262,7 @@ msgstr "Поле зрения Telrad"
 #: plugins/Oculars/src/Oculars.cpp:1496
 #: plugins/Satellites/src/Satellites.cpp:167
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:205
-#: plugins/NavStars/src/NavStars.cpp:127 plugins/Quasars/src/Quasars.cpp:172
+#: plugins/NavStars/src/NavStars.cpp:120 plugins/Quasars/src/Quasars.cpp:172
 #: plugins/Pulsars/src/Pulsars.cpp:170
 #: plugins/Exoplanets/src/Exoplanets.cpp:174
 #: plugins/Observability/src/Observability.cpp:198
@@ -21585,22 +21593,22 @@ msgstr "Частота обновлений (в днях):"
 msgid "[next update info]"
 msgstr "[следующее обновление]"
 
-#: plugins/NavStars/src/NavStars.cpp:56 plugins/NavStars/src/NavStars.cpp:126
-#: plugins/NavStars/src/NavStars.cpp:127
+#: plugins/NavStars/src/NavStars.cpp:55 plugins/NavStars/src/NavStars.cpp:119
+#: plugins/NavStars/src/NavStars.cpp:120
 msgid "Navigational Stars"
 msgstr "Навигационные звёзды"
 
-#: plugins/NavStars/src/NavStars.cpp:59
+#: plugins/NavStars/src/NavStars.cpp:58
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:294
 msgid "This plugin marks navigational stars from a selected set."
 msgstr "Этот плагин отмечает навигационные звёзды из выбранного набора."
 
-#: plugins/NavStars/src/NavStars.cpp:126
+#: plugins/NavStars/src/NavStars.cpp:119
 msgid "Mark the navigational stars"
 msgstr "Отметить навигационные звёзды"
 
 #. TRANSLATORS: The emphasis tags mark a title.
-#: plugins/NavStars/src/NavStars.cpp:392
+#: plugins/NavStars/src/NavStars.cpp:385
 msgid ""
 "The 57 \"selected stars\" that are listed in <em>The Nautical Almanac</em> "
 "jointly published by Her Majesty's Nautical Almanac Office and the US Naval "
@@ -21614,7 +21622,7 @@ msgstr ""
 " в навигационных средствах, таких как <em>2102D Star Finder</em> и "
 "<em>Identifier</em>."
 
-#: plugins/NavStars/src/NavStars.cpp:393
+#: plugins/NavStars/src/NavStars.cpp:386
 msgid ""
 "The 81 stars that are listed in the French Nautical Almanac published by the"
 " French Bureau des Longitudes."
@@ -21622,22 +21630,7 @@ msgstr ""
 "Это 81 звезда, которая перечислена во французском морском альманахе "
 "издаваемого французским Бюро долгот."
 
-#: plugins/NavStars/src/NavStars.cpp:394
-msgid "The 160 stars that are listed in the Russian Nautical Almanac."
-msgstr "Это 160 звёзд, перечисленных в русском морском альманахе."
-
-#. TRANSLATORS: The emphasis tags mark a title.
-#: plugins/NavStars/src/NavStars.cpp:396
-msgid ""
-"The typical set of navigational stars, which was used by aviation of the "
-"Soviet Union. These stars you can found in the books like <em>Aviation "
-"Astronomy</em> or <em>Aviation handbook</em>."
-msgstr ""
-"Типичный набор навигационных звёзд, который использовался авиацией "
-"Советского Союза. Эти звезды вы можете найти в таких книгах, как "
-"<em>Авиационная астрономия</em> или <em>Авиационный справочник</em>."
-
-#: plugins/NavStars/src/NavStars.cpp:397
+#: plugins/NavStars/src/NavStars.cpp:387
 msgid ""
 "The 80 stars that are listed in the German Nautical Almanac published by the"
 " Federal Maritime and Hydrographic Agency of Germany."
@@ -21645,15 +21638,30 @@ msgstr ""
 "Это 80 звёзд, которые перечислены в немецком морском альманахе издаваемого "
 "Федеральным морским и гидрографическим агентством Германии."
 
-#: plugins/NavStars/src/NavStars.cpp:398
+#: plugins/NavStars/src/NavStars.cpp:388
+msgid "The 160 stars that are listed in the Russian Nautical Almanac."
+msgstr "Это 160 звёзд, перечисленных в русском морском альманахе."
+
+#. TRANSLATORS: The emphasis tags mark a title.
+#: plugins/NavStars/src/NavStars.cpp:390
 msgid ""
-"These 151 stars were used by the Voskhod (Soviet) and Soyuz (Soviet and "
-"Russian) manned space programs to navigate in the space."
+"The typical set of navigational stars which was used by aviation of the "
+"Soviet Union. These stars can be found in books like <em>Aviation "
+"Astronomy</em> or <em>Aviation handbook</em>."
+msgstr ""
+"Типичный набор навигационных звёзд, который использовался авиацией "
+"Советского Союза. Эти звезды вы можете найти в таких книгах, как "
+"<em>Авиационная астрономия</em> или <em>Авиационный справочник</em>."
+
+#: plugins/NavStars/src/NavStars.cpp:391
+msgid ""
+"These 151 stars were used in the Voskhod (Soviet) and Soyuz (Soviet and "
+"Russian) manned space programs to navigate in space."
 msgstr ""
 "Эти 151 звёзд использовались в пилотируемых космических программах «Восход» "
 "(советская) и «Союз» (советская и российская) для навигации в космосе."
 
-#: plugins/NavStars/src/NavStars.cpp:399
+#: plugins/NavStars/src/NavStars.cpp:392
 msgid ""
 "These 37 stars were used by the Apollo space program to navigate to the Moon"
 " from 1969-1972, Apollo 11 through Apollo 17."
@@ -21661,18 +21669,18 @@ msgstr ""
 "Эти 37 звезд использовались космической программой «Аполлон» для навигации к"
 " Луне с 1969 по 1972 год, с «Аполлона-11» по «Аполлон-17»."
 
-#: plugins/NavStars/src/NavStars.cpp:400
+#: plugins/NavStars/src/NavStars.cpp:393
 msgid ""
-"Alignment Star List from the Gemini Astronomical Positioning System. The "
-"Gemini Astronomical Positioning System is a professional level computerized "
-"device for controlling small to medium German equatorial telescope mounts."
+"Alignment stars from the Gemini Astronomical Positioning System, a "
+"professional level computerized device for controlling small to medium "
+"German equatorial telescope mounts."
 msgstr ""
-"Список звезд выравнивания из системы астрономического позиционирования "
-"Gemini. Система астрономического позиционирования Gemini — это "
-"компьютеризированное устройство профессионального уровня для управления "
-"малыми и средними немецкими экваториальными монтировками."
+"Звёзды для выравнивания из системы астрономического позиционирования Gemini."
+" Система астрономического позиционирования Gemini — это компьютеризированное"
+" устройство профессионального уровня для управления малыми и средними "
+"немецкими экваториальными монтировками."
 
-#: plugins/NavStars/src/NavStars.cpp:401
+#: plugins/NavStars/src/NavStars.cpp:394
 msgid ""
 "The Meade LX200 utilizes 33 bright and well known stars to calibrate the "
 "telescope’s Object Library in the ALTAZ and POLAR alignments. These stars "
@@ -21684,7 +21692,7 @@ msgstr ""
 " выбраны для того, чтобы наблюдатели из любой точки мира в любую ночь могли "
 "легко и быстро выполнить точное выравнивание."
 
-#: plugins/NavStars/src/NavStars.cpp:402
+#: plugins/NavStars/src/NavStars.cpp:395
 msgid ""
 "This list from Meade ETX mount will aid the observer to find alignment stars"
 " at various times of the year."
@@ -21692,23 +21700,16 @@ msgstr ""
 "Этот список с монтировки Meade ETX поможет наблюдателю найти звезды "
 "выравнивания в разное время года."
 
-#: plugins/NavStars/src/NavStars.cpp:403
-msgid ""
-"This list contains all the alignment stars for the Meade Autostar #494 "
-"handset (ETX60AT)."
+#: plugins/NavStars/src/NavStars.cpp:396
+msgid "Alignment stars for the Meade Autostar #494 handset (ETX60AT)."
 msgstr ""
-"Этот список содержит все звезды для выравнивания из пульта управления Meade "
-"Autostar #494 (ETX60AT)."
+"Звёзды для выравнивания из пульта управления Meade Autostar #494 (ETX60AT)."
 
-#: plugins/NavStars/src/NavStars.cpp:404
-msgid ""
-"This list contains all the alignment stars for the Meade Autostar #497 "
-"handset."
-msgstr ""
-"Этот список содержит все звезды для выравнивания из пульта управления Meade "
-"Autostar #497."
+#: plugins/NavStars/src/NavStars.cpp:397
+msgid "Alignment stars for the Meade Autostar #497 handset."
+msgstr "Звёзды для выравнивания из пульта управления Meade Autostar #497."
 
-#: plugins/NavStars/src/NavStars.cpp:405
+#: plugins/NavStars/src/NavStars.cpp:398
 msgid ""
 "Even though there are about 250 named stars in the hand control database, "
 "only 82 (stars brighter than or equal to magnitude 2.5) can be used for "
@@ -21718,119 +21719,118 @@ msgstr ""
 "названных звезд, только 82 (звезды ярче или равные звездной величине 2,5) "
 "можно использовать для выравнивания и связанных с этим задач."
 
-#: plugins/NavStars/src/NavStars.cpp:406
+#: plugins/NavStars/src/NavStars.cpp:399
 msgid ""
-"This list contains all the alignment stars for the Skywatch SynScan hand "
-"controller and SynScan Pro App."
+"Alignment stars for the Skywatcher SynScan hand controller and SynScan Pro "
+"App."
 msgstr ""
-"Этот список содержит все звезды выравнивания для пульта Skywatch SynScan и "
-"приложения SynScan Pro."
+"Звёзды выравнивания для пульта Skywatch SynScan и приложения SynScan Pro."
 
-#: plugins/NavStars/src/NavStars.cpp:407
+#: plugins/NavStars/src/NavStars.cpp:400
 msgid "Alignment stars for Vixen Starbook mounts."
 msgstr "Звезды выравнивания для монтировок Vixen Starbook."
 
-#: plugins/NavStars/src/NavStars.cpp:408
+#: plugins/NavStars/src/NavStars.cpp:401
 msgid "Alignment stars for Argo Navis digital setting circles."
 msgstr "Звезды выравнивания для цифровых кругов настройки Argo Navis."
 
-#: plugins/NavStars/src/NavStars.cpp:409
+#: plugins/NavStars/src/NavStars.cpp:402
 msgid "Alignment stars for Orion Intelliscope mounts."
 msgstr "Звезды выравнивания для монтировок Orion Intelliscope."
 
-#: plugins/NavStars/src/NavStars.cpp:410
+#: plugins/NavStars/src/NavStars.cpp:403
 msgid "Alignment stars for Sky Commander digital setting circles."
 msgstr "Звезды выравнивания для цифровых кругов настройки Sky Commander."
 
 #. TRANSLATORS: The full phrase: The original almanac title is
 #. NAME_OF_THE_ALMANAC
-#: plugins/NavStars/src/NavStars.cpp:429
+#: plugins/NavStars/src/NavStars.cpp:422
 msgid "The original almanac title is"
 msgstr "Оригинальное название аьманаха"
 
-#: plugins/NavStars/src/NavStars.cpp:833
+#: plugins/NavStars/src/NavStars.cpp:827
 msgctxt "the highest part of the Sun or Moon"
 msgid "upper limb"
 msgstr "верхний лимб"
 
-#: plugins/NavStars/src/NavStars.cpp:834
+#: plugins/NavStars/src/NavStars.cpp:828
 msgctxt "the lowest part of the Sun or Moon"
 msgid "lower limb"
 msgstr "нижний лимб"
 
-#: plugins/NavStars/src/NavStars.cpp:849 plugins/NavStars/src/NavStars.cpp:877
-#: plugins/NavStars/src/NavStars.cpp:883
+#: plugins/NavStars/src/NavStars.cpp:843 plugins/NavStars/src/NavStars.cpp:871
+#: plugins/NavStars/src/NavStars.cpp:877
 msgctxt "Greenwich Hour Angle"
 msgid "GHA"
 msgstr "Г.Ч.У."
 
-#: plugins/NavStars/src/NavStars.cpp:851 plugins/NavStars/src/NavStars.cpp:881
+#: plugins/NavStars/src/NavStars.cpp:845 plugins/NavStars/src/NavStars.cpp:875
 msgctxt "object Sidereal Hour Angle (ERA, Earth rotation angle)"
 msgid "SHA"
 msgstr "З.Ч.У."
 
-#: plugins/NavStars/src/NavStars.cpp:853 plugins/NavStars/src/NavStars.cpp:887
+#: plugins/NavStars/src/NavStars.cpp:847 plugins/NavStars/src/NavStars.cpp:881
 msgctxt "Local Hour Angle"
 msgid "LHA"
 msgstr "М.Ч.У."
 
-#: plugins/NavStars/src/NavStars.cpp:856
+#: plugins/NavStars/src/NavStars.cpp:850
 msgctxt "Ground Position of object"
 msgid "GP: GHA/DEC"
 msgstr "Н.П.: Г.Ч.У./Скл."
 
-#: plugins/NavStars/src/NavStars.cpp:859
+#: plugins/NavStars/src/NavStars.cpp:853
 msgctxt "geodetic coordinate system, latitude and longitude of ground point"
 msgid "GP: LAT/LON"
 msgstr "Н.П.: Шир./Долг."
 
-#: plugins/NavStars/src/NavStars.cpp:862
+#: plugins/NavStars/src/NavStars.cpp:856
 msgctxt "geodetic coordinate system, assumed latitude and longitude of user"
 msgid "AP: LAT/LON"
 msgstr "П.М.: Шир./Долг."
 
-#: plugins/NavStars/src/NavStars.cpp:865
+#: plugins/NavStars/src/NavStars.cpp:859
 msgctxt ""
 "Navigation/horizontal coordinate system, calculated altitude and azimuth"
 msgid "Hc/Zn"
 msgstr "Hc/Zn"
 
-#: plugins/NavStars/src/NavStars.cpp:872
+#: plugins/NavStars/src/NavStars.cpp:866
 msgctxt "Universal Time Coordinated"
 msgid "UTC"
 msgstr "UTC"
 
-#: plugins/NavStars/src/NavStars.cpp:875
+#: plugins/NavStars/src/NavStars.cpp:869
 msgctxt "Navigation/horizontal coordinate system, sextant measured altitude"
 msgid "Ho"
 msgstr "Ho"
 
-#: plugins/NavStars/src/NavStars.cpp:879
+#: plugins/NavStars/src/NavStars.cpp:873
 msgctxt "Local Hour Angle"
 msgid "LMST"
 msgstr "М.С.З.В."
 
-#: plugins/NavStars/src/NavStars.cpp:885
+#: plugins/NavStars/src/NavStars.cpp:879
 msgctxt "Declination"
 msgid "DEC"
 msgstr "Скл."
 
-#: plugins/NavStars/src/NavStars.cpp:889
+#: plugins/NavStars/src/NavStars.cpp:883
 msgctxt "geodetic coordinate system, latitude"
 msgid "LAT"
 msgstr "Шир."
 
-#: plugins/NavStars/src/NavStars.cpp:891
+#: plugins/NavStars/src/NavStars.cpp:885
 msgctxt "geodetic coordinate system, longitude"
 msgid "LON"
 msgstr "Долг."
 
-#: plugins/NavStars/src/NavStars.cpp:893
+#: plugins/NavStars/src/NavStars.cpp:887
 msgctxt "Navigation/horizontal coordinate system, calculated altitude"
 msgid "Hc"
 msgstr "Hc"
 
-#: plugins/NavStars/src/NavStars.cpp:895
+#: plugins/NavStars/src/NavStars.cpp:889
 msgctxt "Navigation/horizontal coordinate system, calculated azimuth"
 msgid "Zn"
 msgstr "Zn"
