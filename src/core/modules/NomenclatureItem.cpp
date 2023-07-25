@@ -401,13 +401,16 @@ void NomenclatureItem::draw(StelCore* core, StelPainter *painter)
 			const double distDegrees=StelLocation::distanceDegrees(raPl*M_180_PIf, dePl*M_180_PIf, ra*M_180_PIf, de*M_180_PIf);
 			const double plRadiusDeg=planet->getAngularRadius(core);
 			const double sinDistCenter=distDegrees/plRadiusDeg; // 0...1
-			if (sinDistCenter>1.f)
-				qWarning() << "Distance greater 1";
-			const double angleDistCenterRad=asin(sinDistCenter); // 0..pi/2 on the lunar/planet sphere
-			const double aspectRatio=cos(angleDistCenterRad);
-			const double angle=atan2(ra-raPl, de-dePl);
-			const double par = static_cast<double>(getParallacticAngle(core));
-			painter->drawEllipse(static_cast<float>(srcPos[0]), static_cast<float>(srcPos[1]), screenRadius, screenRadius*aspectRatio, angle-par );
+			if (sinDistCenter<1.f)
+			{
+				const double angleDistCenterRad=asin(sinDistCenter); // 0..pi/2 on the lunar/planet sphere
+				const double aspectRatio=cos(angleDistCenterRad);
+				const double angle=atan2(ra-raPl, de-dePl);
+				const double par = static_cast<double>(getParallacticAngle(core));
+				painter->drawEllipse(static_cast<float>(srcPos[0]), static_cast<float>(srcPos[1]), screenRadius, screenRadius*aspectRatio, angle-par );
+			}
+			//else
+			//	qWarning() << "Distance greater 1 encountered for crater " << englishName << "at " << longitude << "/" << latitude;
 		}
 		painter->drawText(static_cast<float>(srcPos[0]), static_cast<float>(srcPos[1]), nameI18n, 0, 5.f, 5.f, false);
 	}
