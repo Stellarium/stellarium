@@ -3431,14 +3431,7 @@ bool Planet::initShader()
 		transformFShader = "void main()\n{ }\n";
 	}
 #endif
-	const QMap<QByteArray,int> transformAttrLoc{
-		{"unprojectedVertex", StelOpenGLArray::ATTLOC_VERTEX},
-#ifdef DEBUG_SHADOWMAP
-		{"texCoord", StelOpenGLArray::ATTLOC_TEXCOORD},
-#endif
-	};
-	GL(transformShaderProgram = createShader("transformShaderProgram", transformShaderVars, transformVShader, transformFShader,QByteArray(),transformAttrLoc));
-
+	GL(transformShaderProgram = createShader("transformShaderProgram", transformShaderVars, transformVShader, transformFShader,QByteArray(),attrLoc));
 
 	//check if ALL shaders have been created correctly
 	shaderError = !(planetShaderProgram&&
