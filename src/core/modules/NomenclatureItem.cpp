@@ -406,9 +406,11 @@ void NomenclatureItem::draw(StelCore* core, StelPainter *painter)
 			{
 				const double angleDistCenterRad=asin(qMin(0.9999, sinDistCenter)); // 0..pi/2 on the lunar/planet sphere
 				const double aspectRatio=cos(angleDistCenterRad);
+				const Vec3d equPosNow = planet->getEquinoxEquatorialPos(core);
+				const Vec3d XYZNow = getEquinoxEquatorialPos(core);
 				double ra, de, raPl, dePl;
-				StelUtils::rectToSphe(&ra, &de, XYZ);
-				StelUtils::rectToSphe(&raPl, &dePl, equPos);
+				StelUtils::rectToSphe(&ra, &de, XYZNow);
+				StelUtils::rectToSphe(&raPl, &dePl, equPosNow);
 				const double angle=atan2(ra-raPl, de-dePl);
 				const double par = static_cast<double>(getParallacticAngle(core));
 				painter->drawEllipse(srcPos[0], srcPos[1], screenRadius, screenRadius*qMax(0.0001,aspectRatio), angle-par );
