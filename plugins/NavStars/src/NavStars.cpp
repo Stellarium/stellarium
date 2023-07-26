@@ -28,7 +28,6 @@
 #include "StelTranslator.hpp"
 #include "StelFileMgr.hpp"
 #include "StelObjectMgr.hpp"
-#include "StarMgr.hpp"
 #include "StelPropertyMgr.hpp"
 #include "StelUtils.hpp"
 #include "NavStars.hpp"
@@ -77,12 +76,6 @@ NavStars::NavStars()
 	conf = StelApp::getInstance().getSettings();
 	propMgr = StelApp::getInstance().getStelPropertyManager();
 	mainWindow = new NavStarsWindow();
-	permittedObjects.push_back(QStringLiteral("Sun"));
-	permittedObjects.push_back(QStringLiteral("Moon"));
-	permittedObjects.push_back(QStringLiteral("Venus"));
-	permittedObjects.push_back(QStringLiteral("Mars"));
-	permittedObjects.push_back(QStringLiteral("Jupiter"));
-	permittedObjects.push_back(QStringLiteral("Saturn"));
 }
 
 NavStars::~NavStars()
@@ -391,19 +384,19 @@ QString NavStars::getCurrentNavigationalStarsSetDescription() const
 		// TRANSLATORS: The emphasis tags mark a title.
 		{ AngloAmerican, N_("The 57 \"selected stars\" that are listed in <em>The Nautical Almanac</em> jointly published by Her Majesty's Nautical Almanac Office and the US Naval Observatory since 1958; consequently, these stars are also used in navigational aids such as the <em>2102D Star Finder</em> and <em>Identifier</em>.") },
 		{        French, N_("The 81 stars that are listed in the French Nautical Almanac published by the French Bureau des Longitudes.") },
+		{        German, N_("The 80 stars that are listed in the German Nautical Almanac published by the Federal Maritime and Hydrographic Agency of Germany.") },
 		{       Russian, N_("The 160 stars that are listed in the Russian Nautical Almanac.") },
 		// TRANSLATORS: The emphasis tags mark a title.
-		{      USSRAvia, N_("The typical set of navigational stars, which was used by aviation of the Soviet Union. These stars you can found in the books like <em>Aviation Astronomy</em> or <em>Aviation handbook</em>.") },
-		{        German, N_("The 80 stars that are listed in the German Nautical Almanac published by the Federal Maritime and Hydrographic Agency of Germany.") },
-		{     USSRSpace, N_("These 151 stars were used in the Voskhod (Soviet) and Soyuz (Soviet and Russian) manned space programs to navigate in the space.") },
+		{      USSRAvia, N_("The typical set of navigational stars which was used by aviation of the Soviet Union. These stars can be found in books like <em>Aviation Astronomy</em> or <em>Aviation handbook</em>.") },
+		{     USSRSpace, N_("These 151 stars were used in the Voskhod (Soviet) and Soyuz (Soviet and Russian) manned space programs to navigate in space.") },
 		{        Apollo, N_("These 37 stars were used by the Apollo space program to navigate to the Moon from 1969-1972, Apollo 11 through Apollo 17.") },
-		{     GeminiAPS, N_("Alignment Star List from the Gemini Astronomical Positioning System. The Gemini Astronomical Positioning System is a professional level computerized device for controlling small to medium German equatorial telescope mounts.") },
+		{     GeminiAPS, N_("Alignment stars from the Gemini Astronomical Positioning System, a professional level computerized device for controlling small to medium German equatorial telescope mounts.") },
 		{    MeadeLX200, N_("The Meade LX200 utilizes 33 bright and well known stars to calibrate the telescope’s Object Library in the ALTAZ and POLAR alignments. These stars were selected to allow observers from anywhere in the world on any given night, to be able to easily and quickly make precision alignments.") },
 		{      MeadeETX, N_("This list from Meade ETX mount will aid the observer to find alignment stars at various times of the year.") },
-		{    MeadeAS494, N_("This list contains all the alignment stars for the Meade Autostar #494 handset (ETX60AT).") },
-		{    MeadeAS497, N_("This list contains all the alignment stars for the Meade Autostar #497 handset.") },
+		{    MeadeAS494, N_("Alignment stars for the Meade Autostar #494 handset (ETX60AT).") },
+		{    MeadeAS497, N_("Alignment stars for the Meade Autostar #497 handset.") },
 		{   CelestronNS, N_("Even though there are about 250 named stars in the hand control database, only 82 (stars brighter than or equal to magnitude 2.5) can be used for alignment and related tasks.") },
-		{  SkywatcherSS, N_("This list contains all the alignment stars for the Skywatch SynScan hand controller and SynScan Pro App.") },
+		{  SkywatcherSS, N_("Alignment stars for the Skywatcher SynScan hand controller and SynScan Pro App.") },
 		{       VixenSB, N_("Alignment stars for Vixen Starbook mounts.") },
 		{     ArgoNavis, N_("Alignment stars for Argo Navis digital setting circles.") },
 		{       OrionIS, N_("Alignment stars for Orion Intelliscope mounts.") },
@@ -768,13 +761,14 @@ void NavStars::addExtraInfo(StelCore *core)
 		if (limitInfoToNavStars) 
 		{
 			doExtraInfo = false;
-			if(selectedObject->getType() == QStringLiteral("Star")) {
+			if(selectedObject->getType() == QStringLiteral("Star"))
+			{
 				for (QVector<StelObjectP>::const_iterator itor = stars.constBegin();
 					itor != stars.constEnd();
 					itor++)
 				{
 					StelObjectP p = *itor;
-					if (p->getEnglishName() == selectedObject->getEnglishName())
+					if (!p.isNull() && p->getEnglishName() == selectedObject->getEnglishName())
 					{
 						doExtraInfo = true;
 						break;
@@ -908,12 +902,6 @@ QString NavStars::oneRowTwoCells(const QString& a, const QString& b, const QStri
 
 bool NavStars::isPermittedObject(const QString& s)
 {
-	QVector<QString>::const_iterator itor = permittedObjects.constBegin();
-	while (itor != permittedObjects.constEnd())
-	{
-		if (*itor == s)
-			return true;
-		++itor;
-	}
-	return false;
+	static const QStringList permittedObjects= {"Sun", "Moon", "Venus", "Mars", "Jupiter", "Saturn"};
+	return permittedObjects.contains(s);
 }

@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2023-07-15 15:33+0700\n"
+"POT-Creation-Date: 2023-07-21 22:30+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Ilpo Kantonen, 2023\n"
 "Language-Team: Finnish (https://app.transifex.com/stellarium/teams/80998/fi/)\n"
@@ -68,7 +68,7 @@ msgstr "asterismi"
 #: src/core/modules/ConstellationMgr.cpp:131 src/core/modules/StarMgr.cpp:461
 #: src/core/modules/GridLinesMgr.cpp:2033
 #: src/core/modules/SpecialMarkersMgr.cpp:310
-#: src/core/modules/LandscapeMgr.cpp:879
+#: src/core/modules/LandscapeMgr.cpp:870
 #: src/core/modules/NomenclatureMgr.cpp:83 src/core/modules/NebulaMgr.cpp:357
 #: src/core/modules/NebulaMgr.cpp:358 src/core/modules/SolarSystem.cpp:301
 #: src/core/modules/MilkyWay.cpp:110 src/core/modules/ZodiacalLight.cpp:114
@@ -733,12 +733,12 @@ msgctxt "compass direction"
 msgid "NbW"
 msgstr "P-L"
 
-#: src/core/modules/LandscapeMgr.cpp:434 src/core/modules/LandscapeMgr.cpp:760
+#: src/core/modules/LandscapeMgr.cpp:434 src/core/modules/LandscapeMgr.cpp:751
 #: src/gui/ViewDialog.cpp:651
 msgid "Loading..."
 msgstr "Lataa..."
 
-#: src/core/modules/LandscapeMgr.cpp:434 src/core/modules/LandscapeMgr.cpp:760
+#: src/core/modules/LandscapeMgr.cpp:434 src/core/modules/LandscapeMgr.cpp:751
 msgctxt "percentage of done"
 msgid "done"
 msgstr "valmis"
@@ -747,7 +747,7 @@ msgstr "valmis"
 msgid "Switching models..."
 msgstr "Vaihdetaan mallia..."
 
-#: src/core/modules/LandscapeMgr.cpp:480 src/core/modules/LandscapeMgr.cpp:755
+#: src/core/modules/LandscapeMgr.cpp:480 src/core/modules/LandscapeMgr.cpp:746
 msgid "Loaded successfully"
 msgstr "Ladattu onnistuneesti"
 
@@ -757,61 +757,61 @@ msgid ""
 msgstr ""
 "ShowMySky-ilmakehämalli kaatui. Ladataan Preetham-mallia varavaihtoehtona."
 
-#: src/core/modules/LandscapeMgr.cpp:880
+#: src/core/modules/LandscapeMgr.cpp:871
 msgid "Atmosphere"
 msgstr "Ilmakehä"
 
-#: src/core/modules/LandscapeMgr.cpp:881
+#: src/core/modules/LandscapeMgr.cpp:872
 msgid "Fog"
 msgstr "Sumu"
 
-#: src/core/modules/LandscapeMgr.cpp:882 src/ui_viewDialog.h:4176
+#: src/core/modules/LandscapeMgr.cpp:873 src/ui_viewDialog.h:4176
 #: src/ui_configurationDialog.h:1943
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:343
 msgid "Cardinal points"
 msgstr "Ilmansuunnat"
 
-#: src/core/modules/LandscapeMgr.cpp:883
+#: src/core/modules/LandscapeMgr.cpp:874
 msgid "Ordinal (Intercardinal) points"
 msgstr "Väli-ilmansuunnat"
 
-#: src/core/modules/LandscapeMgr.cpp:884
+#: src/core/modules/LandscapeMgr.cpp:875
 msgid "Secondary Intercardinal points"
 msgstr "Väli-väli-ilmansuunnat"
 
-#: src/core/modules/LandscapeMgr.cpp:885
+#: src/core/modules/LandscapeMgr.cpp:876
 msgid "Tertiary Intercardinal points"
 msgstr "Tertiääriset interkardiaaliset pisteet"
 
-#: src/core/modules/LandscapeMgr.cpp:886
+#: src/core/modules/LandscapeMgr.cpp:877
 msgid "Ground"
 msgstr "Maan pinta"
 
-#: src/core/modules/LandscapeMgr.cpp:887
+#: src/core/modules/LandscapeMgr.cpp:878
 msgid "Landscape illumination"
 msgstr "Maiseman valaistus"
 
-#: src/core/modules/LandscapeMgr.cpp:888
+#: src/core/modules/LandscapeMgr.cpp:879
 msgid "Landscape labels"
 msgstr "Maiseman tekstit"
 
-#: src/core/modules/LandscapeMgr.cpp:889
+#: src/core/modules/LandscapeMgr.cpp:880
 msgid "Light pollution data from locations database"
 msgstr "Valosaastetiedot paikkakuntatietokannasta"
 
-#: src/core/modules/LandscapeMgr.cpp:891
+#: src/core/modules/LandscapeMgr.cpp:882
 msgid "Increase light pollution"
 msgstr "Lisää valosaastetta"
 
-#: src/core/modules/LandscapeMgr.cpp:892
+#: src/core/modules/LandscapeMgr.cpp:883
 msgid "Reduce light pollution"
 msgstr "Vähennä valosaastetta"
 
-#: src/core/modules/LandscapeMgr.cpp:893
+#: src/core/modules/LandscapeMgr.cpp:884
 msgid "Cyclic change in light pollution"
 msgstr "Valosaasteen jaksollinen muutos"
 
-#: src/core/modules/LandscapeMgr.cpp:1383 src/scripting/StelScriptMgr.cpp:647
+#: src/core/modules/LandscapeMgr.cpp:1374 src/scripting/StelScriptMgr.cpp:647
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:101
 #: plugins/Oculars/src/gui/OcularDialog.cpp:627
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:238
@@ -832,7 +832,7 @@ msgid "Author"
 msgstr "Tekijä"
 
 #. TRANSLATORS: Unit of measure for distance - meter
-#: src/core/modules/LandscapeMgr.cpp:1389 src/gui/StelGuiItems.cpp:943
+#: src/core/modules/LandscapeMgr.cpp:1380 src/gui/StelGuiItems.cpp:943
 #: plugins/Satellites/src/Satellite.cpp:433
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1150
 #: plugins/Satellites/src/gui/SatellitesFilterDialog.cpp:134
@@ -840,7 +840,7 @@ msgctxt "distance"
 msgid "m"
 msgstr "m"
 
-#: src/core/modules/LandscapeMgr.cpp:1392 src/gui/ObsListDialog.cpp:266
+#: src/core/modules/LandscapeMgr.cpp:1383 src/gui/ObsListDialog.cpp:266
 #: src/ui_locationDialogGui.h:486 src/ui_obsListDialog.h:414
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:144
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:482
@@ -848,36 +848,36 @@ msgid "Location"
 msgstr "Paikkakunta"
 
 #. TRANSLATORS: Unit of measure for pressure - hectopascals
-#: src/core/modules/LandscapeMgr.cpp:1414
+#: src/core/modules/LandscapeMgr.cpp:1405
 msgctxt "pressure"
 msgid "hPa"
 msgstr "hPa"
 
-#: src/core/modules/LandscapeMgr.cpp:1424
+#: src/core/modules/LandscapeMgr.cpp:1415
 msgid "extinction coefficient"
 msgstr "ekstinktiokerroin"
 
-#: src/core/modules/LandscapeMgr.cpp:1427
+#: src/core/modules/LandscapeMgr.cpp:1418
 msgid "Atmospheric conditions"
 msgstr "Ilmakehän olosuhteet"
 
-#: src/core/modules/LandscapeMgr.cpp:1434
+#: src/core/modules/LandscapeMgr.cpp:1425
 msgid "cd/m<sup>2</sup>"
 msgstr "cd/m<sup>2</sup>"
 
-#: src/core/modules/LandscapeMgr.cpp:1438
+#: src/core/modules/LandscapeMgr.cpp:1429
 msgid "ncd/m<sup>2</sup>"
 msgstr "ncd/m<sup>2</sup>"
 
-#: src/core/modules/LandscapeMgr.cpp:1443
+#: src/core/modules/LandscapeMgr.cpp:1434
 msgid "&mu;cd/m<sup>2</sup>"
 msgstr "&mu;cd/m<sup>2</sup>"
 
-#: src/core/modules/LandscapeMgr.cpp:1448
+#: src/core/modules/LandscapeMgr.cpp:1439
 msgid "mcd/m<sup>2</sup>"
 msgstr "mcd/m<sup>2</sup>"
 
-#: src/core/modules/LandscapeMgr.cpp:1450
+#: src/core/modules/LandscapeMgr.cpp:1441
 #, qt-format
 msgid "<b>Light pollution</b>: %1 %2 (NELM: %3; Bortle class: %4)"
 msgstr "<b>Valosaaste</b>: %1 %2 (NELM: %3; Bortle-luokka: %4)"
@@ -2501,42 +2501,42 @@ msgstr "Pyörähdysaika on kaoottinen"
 msgid "Equatorial rotation velocity"
 msgstr "Pyörimisnopeus ekvaattorilla"
 
-#: src/core/modules/Planet.cpp:1300 src/core/modules/Planet.cpp:1693
+#: src/core/modules/Planet.cpp:1300 src/core/modules/Planet.cpp:1695
 msgctxt "Moon phase"
 msgid "New Moon"
 msgstr "uusikuu"
 
-#: src/core/modules/Planet.cpp:1302 src/core/modules/Planet.cpp:1695
+#: src/core/modules/Planet.cpp:1302 src/core/modules/Planet.cpp:1697
 msgctxt "Moon phase"
 msgid "Waxing Crescent"
 msgstr "kasvava sirppi"
 
-#: src/core/modules/Planet.cpp:1304 src/core/modules/Planet.cpp:1697
+#: src/core/modules/Planet.cpp:1304 src/core/modules/Planet.cpp:1699
 msgctxt "Moon phase"
 msgid "First Quarter"
 msgstr "ensimmäinen neljännes"
 
-#: src/core/modules/Planet.cpp:1306 src/core/modules/Planet.cpp:1699
+#: src/core/modules/Planet.cpp:1306 src/core/modules/Planet.cpp:1701
 msgctxt "Moon phase"
 msgid "Waxing Gibbous"
 msgstr "kasvava kuperakuu"
 
-#: src/core/modules/Planet.cpp:1308 src/core/modules/Planet.cpp:1701
+#: src/core/modules/Planet.cpp:1308 src/core/modules/Planet.cpp:1703
 msgctxt "Moon phase"
 msgid "Full Moon"
 msgstr "täysikuu"
 
-#: src/core/modules/Planet.cpp:1310 src/core/modules/Planet.cpp:1703
+#: src/core/modules/Planet.cpp:1310 src/core/modules/Planet.cpp:1705
 msgctxt "Moon phase"
 msgid "Waning Gibbous"
 msgstr "vähenevä kuperakuu"
 
-#: src/core/modules/Planet.cpp:1312 src/core/modules/Planet.cpp:1705
+#: src/core/modules/Planet.cpp:1312 src/core/modules/Planet.cpp:1707
 msgctxt "Moon phase"
 msgid "Third Quarter"
 msgstr "viimeinen neljännes"
 
-#: src/core/modules/Planet.cpp:1314 src/core/modules/Planet.cpp:1707
+#: src/core/modules/Planet.cpp:1314 src/core/modules/Planet.cpp:1709
 msgctxt "Moon phase"
 msgid "Waning Crescent"
 msgstr "vähenevä sirppi"
@@ -3355,12 +3355,12 @@ msgstr "Peilaa vaakasuunnassa"
 msgid "Flip scene vertically"
 msgstr "Peilaa pystysuunnassa"
 
-#: src/core/StelCore.cpp:2450
+#: src/core/StelCore.cpp:2469
 msgid "Correction is disabled. Use only if you know what you are doing!"
 msgstr ""
 "Korjaus on poistettu käytöstä. Käytä vain, jos tiedät mitä olet tekemässä!"
 
-#: src/core/StelCore.cpp:2453
+#: src/core/StelCore.cpp:2472
 #, qt-format
 msgid ""
 "This historical formula was obtained by C. Schoch in 1931 and was used by G."
@@ -3371,7 +3371,7 @@ msgstr ""
 "artikkelissaan <em>Einstein's Theory of Relativity Confirmed by Ancient "
 "Solar Eclipses</em> (%1). Katso lisätietoa %2täältä%3."
 
-#: src/core/StelCore.cpp:2456
+#: src/core/StelCore.cpp:2475
 #, qt-format
 msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
@@ -3380,7 +3380,7 @@ msgstr ""
 "Tämän empiirisen yhtälön julkaisi G. M. Clemence artikkelissaan <em>On the "
 "system of astronomical constants</em> (%1)."
 
-#: src/core/StelCore.cpp:2459
+#: src/core/StelCore.cpp:2478
 #, qt-format
 msgid ""
 "This formula is based on a study of post-1650 observations of the Sun, the "
@@ -3393,7 +3393,7 @@ msgstr ""
 "teoksessaan <em>Astronomical Formulae for Calculators</em>. Se otettiin "
 "käyttöön myös SunTracker Pro -ohjelmistoon."
 
-#: src/core/StelCore.cpp:2463
+#: src/core/StelCore.cpp:2482
 msgid ""
 "This is a slightly modified version of the IAU (1952) formula which was "
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar"
@@ -3403,7 +3403,7 @@ msgstr ""
 "<em>Astronomical Ephemeris</em> -almanakkaan, sekä Mucken ja Meeuksen (1983)"
 " <em>Canon of Solar Eclipses</em> -teokseen."
 
-#: src/core/StelCore.cpp:2467
+#: src/core/StelCore.cpp:2486
 msgid ""
 "The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon"
 " and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The "
@@ -3416,7 +3416,7 @@ msgstr ""
 "aikaa eli 16.00 GMT. Sama suhde otettiin epäsuorasti käyttöön myös "
 "Goldstinen (1973) syzygitaulukoihin."
 
-#: src/core/StelCore.cpp:2471
+#: src/core/StelCore.cpp:2490
 #, qt-format
 msgid ""
 "This equation was published by P. M. Muller and F. R. Stephenson in the "
@@ -3427,7 +3427,7 @@ msgstr ""
 "<em>The accelerations of the earth and moon from early astronomical "
 "observations</em> (%1)."
 
-#: src/core/StelCore.cpp:2474
+#: src/core/StelCore.cpp:2493
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
@@ -3436,7 +3436,7 @@ msgstr ""
 "Tämän yhtälön julkaisi F. R. Stephenson artikkelissaan <em>Pre-Telescopic "
 "Astronomical Observations</em> (%1)."
 
-#: src/core/StelCore.cpp:2477
+#: src/core/StelCore.cpp:2496
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation (outdated and superseded by Schmadel & "
@@ -3449,7 +3449,7 @@ msgstr ""
 "E.T.-U.T. in the period 1800-1975</em> (%1). Schmadel ja Zech korvasivat "
 "tämän yhtälön uudella vuonna 1988."
 
-#: src/core/StelCore.cpp:2480
+#: src/core/StelCore.cpp:2499
 msgid ""
 "This algorithm was adopted in P. Bretagnon & L. Simon's <em>Planetary "
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
@@ -3459,7 +3459,7 @@ msgstr ""
 "<em>Planetary Programs and Tables from -4000 to +2800</em> (1986). Sen "
 "otettiin käyttöön myös RedShift-planetaario-ohjelmaan."
 
-#: src/core/StelCore.cpp:2483
+#: src/core/StelCore.cpp:2502
 #, qt-format
 msgid ""
 "This formula was published by F. R. Stephenson and L. V. Morrison in the "
@@ -3470,7 +3470,7 @@ msgstr ""
 "<em>Long-term changes in the rotation of the earth - 700 B.C. to A.D. "
 "1980</em> (%1)."
 
-#: src/core/StelCore.cpp:2486
+#: src/core/StelCore.cpp:2505
 #, qt-format
 msgid ""
 "This algorithm was published by F. R. Stephenson and M. A. Houlden in the "
@@ -3481,7 +3481,7 @@ msgstr ""
 "<em>Atlas of Historical Eclipse Maps</em> (%1). Tätä algoritmia käytetään "
 "PC-planetaario-ohjelman oppaassa 7."
 
-#: src/core/StelCore.cpp:2489
+#: src/core/StelCore.cpp:2508
 msgid ""
 "This algorithm was given by F. Espenak in his <em>Fifty Year Canon of Solar "
 "Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar "
@@ -3491,7 +3491,7 @@ msgstr ""
 "Solar Eclipses: 1986-2035</em> (1987) ja <em>Fifty Year Canon of Lunar "
 "Eclipses: 1986-2035</em> (1989)."
 
-#: src/core/StelCore.cpp:2492
+#: src/core/StelCore.cpp:2511
 #, qt-format
 msgid ""
 "This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 "
@@ -3500,7 +3500,7 @@ msgstr ""
 "Tämän kaavan laski K. M. Borkowski (%1) analysoimalla 31:tä vuosien 2173 "
 "eKr.–1715 jKr. välillä tapahtunutta auringonpimennystä."
 
-#: src/core/StelCore.cpp:2495
+#: src/core/StelCore.cpp:2514
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation was published by L. D. Schmadel and G. "
@@ -3512,7 +3512,7 @@ msgstr ""
 "artikkelissaan <em>Empirical Transformations from U.T. to E.T. for the "
 "Period 1800-1988</em> (%1)."
 
-#: src/core/StelCore.cpp:2498
+#: src/core/StelCore.cpp:2517
 msgid ""
 "This formula was adopted by M. Chapront-Touze & J. Chapront in the shortened"
 " version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and "
@@ -3522,7 +3522,7 @@ msgstr ""
 "ELP 2000-85 -kuuteoriaan teoksessaan <em>Lunar Tables and Programs from 4000"
 " B.C. to A.D. 8000</em> (1991)."
 
-#: src/core/StelCore.cpp:2501
+#: src/core/StelCore.cpp:2520
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson and L. V. Morrison in the "
@@ -3533,7 +3533,7 @@ msgstr ""
 "<em>Long-Term Fluctuations in the Earth's Rotation: 700 BC to AD 1990</em> "
 "(%1)."
 
-#: src/core/StelCore.cpp:2504
+#: src/core/StelCore.cpp:2523
 #, qt-format
 msgid ""
 "F. R. Stephenson published this formula in his book <em>Historical Eclipses "
@@ -3542,7 +3542,7 @@ msgstr ""
 "F. R. Stephenson julkaisi tämän kaavan kirjassaan <em>Historical Eclipses "
 "and Earth's Rotation</em> (%1)."
 
-#: src/core/StelCore.cpp:2507
+#: src/core/StelCore.cpp:2526
 msgid ""
 "From J. Meeus, <em>Astronomical Algorithms</em> (2nd ed., 1998), and widely "
 "used. Table for 1620..2000, and includes a variant of Chapront, Chapront-"
@@ -3552,7 +3552,7 @@ msgstr ""
 "laajasti käytetty. Taulukko vuosille 1620–2000, sisältää myös Chaprontin, "
 "Chapront-Touzen ja Francoun variantin tämän aikavälin ulkopuolelle."
 
-#: src/core/StelCore.cpp:2510
+#: src/core/StelCore.cpp:2529
 #, qt-format
 msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
@@ -3561,7 +3561,7 @@ msgstr ""
 "JPL:n Solar System Dynamics -ryhmä käyttää tätä kaavaa interaktiivisella "
 "%1JPL Horizons%2 -sivustollaan."
 
-#: src/core/StelCore.cpp:2513
+#: src/core/StelCore.cpp:2532
 #, qt-format
 msgid ""
 "This polynome was published by J. Meeus and L. Simons in article "
@@ -3570,7 +3570,7 @@ msgstr ""
 "Tämän polynomin julkaisivat J. Meeus ja L. Simons artikkelissaan "
 "<em>Polynomial approximations to Delta T, 1620-2000 AD</em> (%1)."
 
-#: src/core/StelCore.cpp:2516
+#: src/core/StelCore.cpp:2535
 msgid ""
 "The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the "
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits"
@@ -3580,7 +3580,7 @@ msgstr ""
 "Computer</em> neljäs painos (2000) tarjoaa kolmannen asteen polynomeja "
 "lähimenneisyydelle."
 
-#: src/core/StelCore.cpp:2519
+#: src/core/StelCore.cpp:2538
 msgid ""
 "E. M. Reingold & N. Dershowitz present this polynomial data fit in "
 "<em>Calendrical Calculations</em> (4th ed. 2018) and in their "
@@ -3592,7 +3592,7 @@ msgstr ""
 "julkaisussaan <em>Calendrical Tabulations</em> (2002).  Se perustuu Jean "
 "Meeuksen julkaisuun<em>Astronomical Algorithms</em> (1991)."
 
-#: src/core/StelCore.cpp:2522
+#: src/core/StelCore.cpp:2541
 #, qt-format
 msgid ""
 "This important solution was published by L. V. Morrison and F. R. Stephenson"
@@ -3603,7 +3603,7 @@ msgstr ""
 "artikkelissaan <em>Historical values of the Earth's clock error %1T and the "
 "calculation of eclipses</em> (%2), seuraavin lisäyksin (%3)."
 
-#: src/core/StelCore.cpp:2525
+#: src/core/StelCore.cpp:2544
 #, qt-format
 msgid ""
 "From the Length of Day (LOD; as determined by Stephenson & Morrison (%2)), "
@@ -3616,7 +3616,7 @@ msgstr ""
 "neliöfunktion kanssa. Tämä perustuu Stephensonin kuvailemaan mahdolliseen "
 "jaksollisuuteen (%2). Lisätietoa %3täällä%4."
 
-#: src/core/StelCore.cpp:2528
+#: src/core/StelCore.cpp:2547
 #, qt-format
 msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
@@ -3631,7 +3631,7 @@ msgstr ""
 "käytössä %1NASA:n pimennyssivustolla%2. Käytössä myös aurinko-, kuu-, ja "
 "planeettaefemeridiohjelma SOLEXissa."
 
-#: src/core/StelCore.cpp:2531
+#: src/core/StelCore.cpp:2550
 msgid ""
 "This solution is modified from F. Espenak and J. Meeus, based on Morrison & "
 "Stephenson (2004) and a polynomial fit through tabulated values for "
@@ -3643,15 +3643,15 @@ msgstr ""
 "1600-2000 kautta. Kaavaa vuosille 2005-2050 on muutettu vastaamaan "
 "havaittuja arvoja ja lähiajan ennusteita."
 
-#: src/core/StelCore.cpp:2531
+#: src/core/StelCore.cpp:2550
 msgid "Used by default."
 msgstr "Käytössä oletuksena."
 
-#: src/core/StelCore.cpp:2534
+#: src/core/StelCore.cpp:2553
 msgid "PATCHED VERSION WITHOUT ADDITIONAL LUNAR ACCELERATION."
 msgstr "Päivitetty versio ilman erillistä Kuun kiihtyvyyttä"
 
-#: src/core/StelCore.cpp:2534
+#: src/core/StelCore.cpp:2553
 msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
 "(2004) and a polynomial fit through tabulated values for 1600-2000."
@@ -3659,7 +3659,7 @@ msgstr ""
 "Tämä F. Espenakin ja J. Meeuksen ratkaisu perustuu Morrison & Stephensoniin "
 "(2004) ja polynomin sovitukseen taulukoitujen arvojen välillä 1600-2000."
 
-#: src/core/StelCore.cpp:2537
+#: src/core/StelCore.cpp:2556
 #, qt-format
 msgid ""
 "This solution by B. Banjevic, based on Stephenson & Morrison (1984), was "
@@ -3670,7 +3670,7 @@ msgstr ""
 "julkaistiin artikkelissa <em>Ancient eclipses and dating the fall of "
 "Babylon</em> (%1)."
 
-#: src/core/StelCore.cpp:2540
+#: src/core/StelCore.cpp:2559
 #, qt-format
 msgid ""
 "This solution by S. Islam, M. Sadiq and M. S. Qureshi, based on Meeus & "
@@ -3682,7 +3682,7 @@ msgstr ""
 "Polynomial Approximation of DeltaT</em> (%1), ja Sana Islam tarkisti sen "
 "2013."
 
-#: src/core/StelCore.cpp:2543
+#: src/core/StelCore.cpp:2562
 #, qt-format
 msgid ""
 "This polynomial approximation with 0.6 seconds of accuracy by M. Khalid, "
@@ -3693,7 +3693,7 @@ msgstr ""
 " M. Khalid, Mariam Sultana ja Faheem Zaidi <em>Delta T: Polynomial "
 "Approximation of Time Period 1620-2013</em> (%1)."
 
-#: src/core/StelCore.cpp:2546
+#: src/core/StelCore.cpp:2565
 #, qt-format
 msgid ""
 "This solution by F. R. Stephenson, L. V. Morrison and C. Y. Hohenkerk (2016)"
@@ -3712,7 +3712,7 @@ msgstr ""
 "ulkopuolella (mallinnettu spline-sovituksella) se tarjoaa arvot "
 "likimääräisestä paraabelista."
 
-#: src/core/StelCore.cpp:2549
+#: src/core/StelCore.cpp:2568
 #, qt-format
 msgid ""
 "This solution by G. Henriksson was published in the article <em>The "
@@ -3723,7 +3723,7 @@ msgstr ""
 " of the Moon and the Universe - the Mass of the Graviton</em> (%1) ja "
 "perustuu C. Schochin kaavaan (1931)."
 
-#: src/core/StelCore.cpp:2552
+#: src/core/StelCore.cpp:2571
 #, qt-format
 msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined"
@@ -3732,7 +3732,7 @@ msgstr ""
 "Tämä on toisen asteen kaava %1T:n laskemiseksi käyttäjän määrittelemillä "
 "arvoilla."
 
-#: src/core/StelCore.cpp:2555 src/core/SimbadSearcher.cpp:173
+#: src/core/StelCore.cpp:2574 src/core/SimbadSearcher.cpp:173
 #: src/gui/ObsListDialog.cpp:83 src/gui/ObsListDialog.cpp:901
 #: src/gui/ObsListDialog.cpp:919 src/gui/ObsListDialog.cpp:953
 #: src/gui/ObsListDialog.cpp:969 src/gui/ObsListDialog.cpp:1004
@@ -3743,7 +3743,7 @@ msgstr ""
 msgid "Error"
 msgstr "Virhe"
 
-#: src/core/StelCore.cpp:2563
+#: src/core/StelCore.cpp:2582
 #, qt-format
 msgid ""
 "The solution's value of %1 for %2 (secular acceleration of the Moon) "
@@ -3752,15 +3752,15 @@ msgstr ""
 "Ratkaisun arvo %1 arvolle %2 (Kuun sekulaarikiihtyvyys) vaatii "
 "mukauttamista, katso lisätietoja käyttöohjeesta."
 
-#: src/core/StelCore.cpp:2607
+#: src/core/StelCore.cpp:2626
 msgid "with zero values outside this range"
 msgstr "nolla-arvo alueen ulkopuolella"
 
-#: src/core/StelCore.cpp:2610
+#: src/core/StelCore.cpp:2629
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr "tyypillinen yhden sekunnin tarkkuus, nolla-arvo alueen ulkopuolella"
 
-#: src/core/StelCore.cpp:2613
+#: src/core/StelCore.cpp:2632
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and values for "
 "the limit years outside this range"
@@ -3768,16 +3768,16 @@ msgstr ""
 "alle sekunnin keskivirheellä, maksimivirheenä 1,9 s, ja arvot tämän "
 "aikavälin ulkopuolisten vuosien rajoittamiseen"
 
-#: src/core/StelCore.cpp:2620
+#: src/core/StelCore.cpp:2639
 msgid "with values for the limit years outside this range"
 msgstr "tämän aikavälin ulkopuolisten vuosien raja-arvoilla"
 
-#: src/core/StelCore.cpp:2630
+#: src/core/StelCore.cpp:2649
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
 msgstr "Käyttökelpoinen aikaväli: vuodesta %1 vuoteen %2, %3."
 
-#: src/core/StelCore.cpp:2632
+#: src/core/StelCore.cpp:2651
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
 msgstr "Käyttökelpoinen aikaväli: vuodesta %1 vuoteen %2."
@@ -4349,7 +4349,7 @@ msgstr ""
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:257
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:237
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:116
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:282
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:289
 #: plugins/Novae/src/gui/NovaeDialog.cpp:115
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:119
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:132
@@ -4822,7 +4822,7 @@ msgstr "Kiitokset"
 #: src/gui/ConfigurationDialog.cpp:1314
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:784
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:258
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:283
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:290
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:138
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:210
 msgid "Authors"
@@ -4840,7 +4840,7 @@ msgstr "Yhteystieto"
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:256
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:236
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:115
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:281
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:288
 #: plugins/Novae/src/gui/NovaeDialog.cpp:114
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:118
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:131
@@ -21537,7 +21537,7 @@ msgid "Navigational Stars"
 msgstr "Navigointitähdet"
 
 #: plugins/NavStars/src/NavStars.cpp:59
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:287
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:294
 msgid "This plugin marks navigational stars from a selected set."
 msgstr "Tämä laajennus näyttää valitun luettelon mukaiset navigointitähdet."
 
@@ -21546,7 +21546,7 @@ msgid "Mark the navigational stars"
 msgstr "Näytä navigointitähdet"
 
 #. TRANSLATORS: The emphasis tags mark a title.
-#: plugins/NavStars/src/NavStars.cpp:396
+#: plugins/NavStars/src/NavStars.cpp:392
 msgid ""
 "The 57 \"selected stars\" that are listed in <em>The Nautical Almanac</em> "
 "jointly published by Her Majesty's Nautical Almanac Office and the US Naval "
@@ -21561,38 +21561,55 @@ msgstr ""
 "navigointiapuvälineissä, kuten <em>2102D-tähdenetsijässä</em> ja "
 "<em>-tunnistajassa</em>."
 
-#. TRANSLATORS: The emphasis tags mark a book title.
+#: plugins/NavStars/src/NavStars.cpp:393
+msgid ""
+"The 81 stars that are listed in the French Nautical Almanac published by the"
+" French Bureau des Longitudes."
+msgstr ""
+"81 tähteä, jotka on lueteltu Ranskan Bureau des Longitudesin julkaisemassa "
+"French Nautical Almanakassa."
+
+#: plugins/NavStars/src/NavStars.cpp:394
+msgid "The 160 stars that are listed in the Russian Nautical Almanac."
+msgstr "160 tähteä, jotka on lueteltu Venäjän merenkulkualmanakassa."
+
+#. TRANSLATORS: The emphasis tags mark a title.
+#: plugins/NavStars/src/NavStars.cpp:396
+msgid ""
+"The typical set of navigational stars, which was used by aviation of the "
+"Soviet Union. These stars you can found in the books like <em>Aviation "
+"Astronomy</em> or <em>Aviation handbook</em>."
+msgstr ""
+"Tyypillinen navigointitähtien joukko, jota käytettiin Neuvostoliiton "
+"ilmailussa. Nämä tähdet löydät kirjoista, kuten <em>Aviation Astronomy</em> "
+"tai <em>Aviation handbook</em>."
+
+#: plugins/NavStars/src/NavStars.cpp:397
+msgid ""
+"The 80 stars that are listed in the German Nautical Almanac published by the"
+" Federal Maritime and Hydrographic Agency of Germany."
+msgstr ""
+"80 tähteä, jotka on lueteltu Saksan liittovaltion merenkulku- ja "
+"vesiviraston julkaisemassa German Nautical Almanakassa."
+
+#: plugins/NavStars/src/NavStars.cpp:398
+msgid ""
+"These 151 stars were used by the Voskhod (Soviet) and Soyuz (Soviet and "
+"Russian) manned space programs to navigate in the space."
+msgstr ""
+"Voskhod (neuvostoliittolainen) ja Sojuz (neuvostoliittolainen ja venäläinen)"
+" miehitetyt avaruusohjelmat käyttivät näitä 151 tähteä navigoidakseen "
+"avaruudessa."
+
+#: plugins/NavStars/src/NavStars.cpp:399
+msgid ""
+"These 37 stars were used by the Apollo space program to navigate to the Moon"
+" from 1969-1972, Apollo 11 through Apollo 17."
+msgstr ""
+"Apollo-avaruusohjelma käytti näitä 37 tähteä navigoidakseen Kuuhun vuosina "
+"1969-1972, Apollo 11 - Apollo 17."
+
 #: plugins/NavStars/src/NavStars.cpp:400
-#, qt-format
-msgid ""
-"The 81 stars that are listed in the French Nautical Almanac (The original "
-"French title is <em>%1</em>) published by the French Bureau des Longitudes."
-msgstr ""
-"81 tähteä, jotka on lueteltu Ranskan Bureau des Longitudes -toimiston "
-"julkaisemassa French Nautical Almanakissa (alkuperäinen ranskalainen otsikko"
-" on <em>%1</em>)."
-
-#. TRANSLATORS: The emphasis tags mark a book title.
-#: plugins/NavStars/src/NavStars.cpp:404
-#, qt-format
-msgid ""
-"The 160 stars that are listed in the Russian Nautical Almanac (The original "
-"Russian title is <em>%1</em>)."
-msgstr "Venäjän merenkulkualmanakassa (<em>%1</em>) listatut 160 tähteä."
-
-#. TRANSLATORS: The emphasis tags mark a book title.
-#: plugins/NavStars/src/NavStars.cpp:408
-#, qt-format
-msgid ""
-"The 80 stars that are listed in the German Nautical Almanac (The original "
-"German title is <em>%1</em>) published by the Federal Maritime and "
-"Hydrographic Agency of Germany."
-msgstr ""
-"80 tähteä, jotka on lueteltu Saksan merenkulkualan almanakissa (alkuperäinen"
-" saksalainen nimi on <em>%1</em>), jonka on julkaissut Saksan liittovaltion "
-"merenkulku- ja vesivirasto."
-
-#: plugins/NavStars/src/NavStars.cpp:411
 msgid ""
 "Alignment Star List from the Gemini Astronomical Positioning System. The "
 "Gemini Astronomical Positioning System is a professional level computerized "
@@ -21603,7 +21620,7 @@ msgstr ""
 "laite pienten ja keskisuurten saksalaisten "
 "päiväntasaajateleskooppikiinnikkeiden ohjaamiseen."
 
-#: plugins/NavStars/src/NavStars.cpp:414
+#: plugins/NavStars/src/NavStars.cpp:401
 msgid ""
 "The Meade LX200 utilizes 33 bright and well known stars to calibrate the "
 "telescope’s Object Library in the ALTAZ and POLAR alignments. These stars "
@@ -21615,7 +21632,7 @@ msgstr ""
 "valittiin, jotta tarkkailijat kaikkialta maailmasta minä yönä pystyisivät "
 "helposti ja nopeasti tekemään tarkkoja kohdistuksia."
 
-#: plugins/NavStars/src/NavStars.cpp:417
+#: plugins/NavStars/src/NavStars.cpp:402
 msgid ""
 "This list from Meade ETX mount will aid the observer to find alignment stars"
 " at various times of the year."
@@ -21623,7 +21640,7 @@ msgstr ""
 "Tämä Meade ETX -kiinnityksen luettelo auttaa tarkkailijaa löytämään "
 "kohdistustahdet eri vuodenaikoina."
 
-#: plugins/NavStars/src/NavStars.cpp:420
+#: plugins/NavStars/src/NavStars.cpp:403
 msgid ""
 "This list contains all the alignment stars for the Meade Autostar #494 "
 "handset (ETX60AT)."
@@ -21631,7 +21648,7 @@ msgstr ""
 "Tämä luettelo sisältää kaikki Meade Autostar #494 -luurin (ETX60AT) "
 "kohdistustähdet."
 
-#: plugins/NavStars/src/NavStars.cpp:423
+#: plugins/NavStars/src/NavStars.cpp:404
 msgid ""
 "This list contains all the alignment stars for the Meade Autostar #497 "
 "handset."
@@ -21639,7 +21656,7 @@ msgstr ""
 "Tämä luettelo sisältää kaikki Meade Autostar #497 -puhelimen "
 "kohdistustahdet."
 
-#: plugins/NavStars/src/NavStars.cpp:426
+#: plugins/NavStars/src/NavStars.cpp:405
 msgid ""
 "Even though there are about 250 named stars in the hand control database, "
 "only 82 (stars brighter than or equal to magnitude 2.5) can be used for "
@@ -21649,15 +21666,7 @@ msgstr ""
 "kirkkaampi tai yhtä suuri kuin 2,5) voidaan käyttää kohdistukseen ja siihen "
 "liittyviin tehtäviin."
 
-#: plugins/NavStars/src/NavStars.cpp:429
-msgid ""
-"These 37 stars were used by the Apollo space program to navigate to the Moon"
-" from 1969-1972, Apollo 11 through Apollo 17."
-msgstr ""
-"Apollo-avaruusohjelma käytti näitä 37 tähteä navigoidakseen Kuuhun vuosina "
-"1969-1972, Apollo 11 - Apollo 17."
-
-#: plugins/NavStars/src/NavStars.cpp:432
+#: plugins/NavStars/src/NavStars.cpp:406
 msgid ""
 "This list contains all the alignment stars for the Skywatch SynScan hand "
 "controller and SynScan Pro App."
@@ -21665,89 +21674,111 @@ msgstr ""
 "Tämä luettelo sisältää kaikki Skywatch SynScan -käsiohjaimen ja SynScan Pro "
 "-sovelluksen kohdistustähdet."
 
-#: plugins/NavStars/src/NavStars.cpp:770
+#: plugins/NavStars/src/NavStars.cpp:407
+msgid "Alignment stars for Vixen Starbook mounts."
+msgstr "Kohdistustähdet Vixen Starbook -liitoksiin."
+
+#: plugins/NavStars/src/NavStars.cpp:408
+msgid "Alignment stars for Argo Navis digital setting circles."
+msgstr "Kohdistus tähdet Argo Navis digitaalisiin asetusympyröihin."
+
+#: plugins/NavStars/src/NavStars.cpp:409
+msgid "Alignment stars for Orion Intelliscope mounts."
+msgstr "Orion Intelliscope -liitosten kohdistustähdet."
+
+#: plugins/NavStars/src/NavStars.cpp:410
+msgid "Alignment stars for Sky Commander digital setting circles."
+msgstr "Kohdista tähdet Sky Commanderin digitaalisille asetuksille."
+
+#. TRANSLATORS: The full phrase: The original almanac title is
+#. NAME_OF_THE_ALMANAC
+#: plugins/NavStars/src/NavStars.cpp:429
+msgid "The original almanac title is"
+msgstr "Alkuperäinen almanakan otsikko on"
+
+#: plugins/NavStars/src/NavStars.cpp:833
 msgctxt "the highest part of the Sun or Moon"
 msgid "upper limb"
 msgstr "yläreuna"
 
-#: plugins/NavStars/src/NavStars.cpp:771
+#: plugins/NavStars/src/NavStars.cpp:834
 msgctxt "the lowest part of the Sun or Moon"
 msgid "lower limb"
 msgstr "alareuna"
 
-#: plugins/NavStars/src/NavStars.cpp:786 plugins/NavStars/src/NavStars.cpp:814
-#: plugins/NavStars/src/NavStars.cpp:820
+#: plugins/NavStars/src/NavStars.cpp:849 plugins/NavStars/src/NavStars.cpp:877
+#: plugins/NavStars/src/NavStars.cpp:883
 msgctxt "Greenwich Hour Angle"
 msgid "GHA"
 msgstr "GHA"
 
-#: plugins/NavStars/src/NavStars.cpp:788 plugins/NavStars/src/NavStars.cpp:818
+#: plugins/NavStars/src/NavStars.cpp:851 plugins/NavStars/src/NavStars.cpp:881
 msgctxt "object Sidereal Hour Angle (ERA, Earth rotation angle)"
 msgid "SHA"
 msgstr "SHA"
 
-#: plugins/NavStars/src/NavStars.cpp:790 plugins/NavStars/src/NavStars.cpp:824
+#: plugins/NavStars/src/NavStars.cpp:853 plugins/NavStars/src/NavStars.cpp:887
 msgctxt "Local Hour Angle"
 msgid "LHA"
 msgstr "LHA"
 
-#: plugins/NavStars/src/NavStars.cpp:793
+#: plugins/NavStars/src/NavStars.cpp:856
 msgctxt "Ground Position of object"
 msgid "GP: GHA/DEC"
 msgstr "GP: GHA/DEC"
 
-#: plugins/NavStars/src/NavStars.cpp:796
+#: plugins/NavStars/src/NavStars.cpp:859
 msgctxt "geodetic coordinate system, latitude and longitude of ground point"
 msgid "GP: LAT/LON"
 msgstr "GP: LAT/LON"
 
-#: plugins/NavStars/src/NavStars.cpp:799
+#: plugins/NavStars/src/NavStars.cpp:862
 msgctxt "geodetic coordinate system, assumed latitude and longitude of user"
 msgid "AP: LAT/LON"
 msgstr "AP: LAT/LON"
 
-#: plugins/NavStars/src/NavStars.cpp:802
+#: plugins/NavStars/src/NavStars.cpp:865
 msgctxt ""
 "Navigation/horizontal coordinate system, calculated altitude and azimuth"
 msgid "Hc/Zn"
 msgstr "Hc/Zn"
 
-#: plugins/NavStars/src/NavStars.cpp:809
+#: plugins/NavStars/src/NavStars.cpp:872
 msgctxt "Universal Time Coordinated"
 msgid "UTC"
 msgstr "UTC"
 
-#: plugins/NavStars/src/NavStars.cpp:812
+#: plugins/NavStars/src/NavStars.cpp:875
 msgctxt "Navigation/horizontal coordinate system, sextant measured altitude"
 msgid "Ho"
 msgstr "Ho"
 
-#: plugins/NavStars/src/NavStars.cpp:816
+#: plugins/NavStars/src/NavStars.cpp:879
 msgctxt "Local Hour Angle"
 msgid "LMST"
 msgstr "LMST"
 
-#: plugins/NavStars/src/NavStars.cpp:822
+#: plugins/NavStars/src/NavStars.cpp:885
 msgctxt "Declination"
 msgid "DEC"
 msgstr "DEC"
 
-#: plugins/NavStars/src/NavStars.cpp:826
+#: plugins/NavStars/src/NavStars.cpp:889
 msgctxt "geodetic coordinate system, latitude"
 msgid "LAT"
 msgstr "LAT"
 
-#: plugins/NavStars/src/NavStars.cpp:828
+#: plugins/NavStars/src/NavStars.cpp:891
 msgctxt "geodetic coordinate system, longitude"
 msgid "LON"
 msgstr "LON"
 
-#: plugins/NavStars/src/NavStars.cpp:830
+#: plugins/NavStars/src/NavStars.cpp:893
 msgctxt "Navigation/horizontal coordinate system, calculated altitude"
 msgid "Hc"
 msgstr "Hc"
 
-#: plugins/NavStars/src/NavStars.cpp:832
+#: plugins/NavStars/src/NavStars.cpp:895
 msgctxt "Navigation/horizontal coordinate system, calculated azimuth"
 msgid "Zn"
 msgstr "Zn"
@@ -21772,22 +21803,33 @@ msgstr "Ranskalaiset"
 msgid "Russian"
 msgstr "Venäläiset"
 
-#. TRANSLATORS: Part of full phrase: German set of navigational stars
+#. TRANSLATORS: Part of full phrase: Soviet aviation set of navigational stars
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:245
+msgid "Soviet aviation"
+msgstr "Neuvostoliiton ilmailu"
+
+#. TRANSLATORS: Part of full phrase: German set of navigational stars
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:247
 msgid "German"
 msgstr "Saksalainen"
 
+#. TRANSLATORS: Part of full phrase: Voskhod and Soyuz manned space programs
+#. set of navigational stars
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:250
+msgid "Voskhod and Soyuz manned space programs"
+msgstr "Voskhod ja Sojuz miehitetyt avaruusohjelmat"
+
 #. TRANSLATORS: Part of full phrase: Apollo space program set of navigational
 #. stars
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:248
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:252
 msgid "Apollo space program"
 msgstr "Apollo-avaruusohjelma"
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:280
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:287
 msgid "Navigational Stars Plug-in"
 msgstr "Navigointitähdet-laajennus"
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:291
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:298
 msgid ""
 "Additional information fields can be displayed by selecting \"Information "
 "&gt; Additional coordinates (from plugins)\""
@@ -21795,29 +21837,29 @@ msgstr ""
 "Lisätietokentät voidaan näyttää valitsemalla \"Tiedot &gt; Lisäkoordinaatit "
 "(laajennuksista)\""
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:295
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:302
 msgid "These fields are:"
 msgstr "Nämä kentät ovat:"
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:297
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:318
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:304
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:325
 #, qt-format
 msgid "GHA%1: The Greenwich Hour Angle of the first point of Aries."
 msgstr "GHA%1: TOinaan ensimmäisen pisteen Greenwichin tuntikulma."
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:298
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:305
 msgid "SHA: Sidereal Hour Angle of the navigation star."
 msgstr "SHA: Navigointitähden sivutuntikulma."
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:299
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:324
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:306
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:331
 msgid "LHA: The observer's Local Hour Angle to the navigation star."
 msgstr "LHA: Tarkkailijan paikallinen tuntikulma navigointitähteen nähden."
 
 #. TRANSLATORS: In Celestial Navigation "GP" is Ground Point, astronomers
 #. often use "sub-point" which is the geodetic location of a point where the
 #. star is at zenith.
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:301
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:308
 msgid ""
 "GP: GHA/DEC: The navigation star's ground point as Greenwich Hour Angle and "
 "Declination."
@@ -21828,7 +21870,7 @@ msgstr ""
 #. TRANSLATORS: In Celestial Navigation "AP" is Assumed Position, a point
 #. close by where the observer knows themselves to be. For example, from dead
 #. reckoning.
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:303
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:310
 msgid ""
 "AP: LAT/LON: The observer's Assumed Position as geodetic latitude and "
 "longitude."
@@ -21839,7 +21881,7 @@ msgstr ""
 #. TRANSLATORS: In Celestial Navigation Hc is "computed height" from the
 #. Nautical Almanac where "height" is altitude. Likewise, Zn is computed
 #. azimuth, as seen from the AP.
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:305
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:312
 msgid ""
 "Hc/Zn: The calculated height (altitude) and computed azimuth of navigation "
 "star, seen from AP."
@@ -21847,7 +21889,7 @@ msgstr ""
 "Hc/Zn: Navigointitähden laskettu korkeus (korkeus) ja laskettu atsimuutti "
 "AP:sta katsottuna."
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:309
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:316
 msgid ""
 "The user has two different view options selected by \"Show information as a "
 "tabulated list\"."
@@ -21855,7 +21897,7 @@ msgstr ""
 "Käyttäjällä on kaksi erilaista näkymävaihtoehtoa, jotka on valittu \"Näytä "
 "tiedot taulukkoluettelona\"."
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:313
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:320
 msgid ""
 "When 'tabulated list' is selected the fields more closely follow the <em>The"
 " Nautical Almanac</em> format:"
@@ -21865,50 +21907,50 @@ msgstr ""
 
 #. TRANSLATORS: In Celestial Navigation "height" is used where astronomers
 #. would use "altitude", Ho Height Observed
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:317
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:324
 msgid "Ho: Simulated observed altitude of navigation star using a sextant."
 msgstr "Ho: Simuloitu navigointitähden havaittu korkeus sekstantin avulla."
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:319
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:326
 msgid "LMST: Local mean sidereal time."
 msgstr "LMST: Paikallinen keskimääräinen reaaliaika."
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:320
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:327
 msgid "SHA: Sidereal Hour Angle of navigation star."
 msgstr "SHA: Navigointitähden sivutuntikulma."
 
 #. TRANSLATORS: celestial coordinate system, declination.
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:322
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:329
 msgid "DEC: The navigation star's declination."
 msgstr "DEC: Navigointitähden deklinaatio."
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:323
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:330
 msgid "GHA: The navigation star's Greenwich Hour Angle."
 msgstr "GHA: Navigointitähden Greenwich Hour Angle."
 
 #. TRANSLATORS: Geodetic coordinate system, latitude.
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:326
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:333
 msgid "LAT: The observer's geodetic latitude."
 msgstr "LAT: Havaitsijan geodeettinen leveysaste."
 
 #. TRANSLATORS: Geodetic coordinate system, longitude.
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:328
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:335
 msgid "LON: The observer's geodetic longitude."
 msgstr "LON: Tarkkailijan geodeettinen pituusaste."
 
 #. TRANSLATORS: The process of Sight Reduction outputs computed values. Hc
 #. computed height (altitude) for the AP
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:330
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:337
 msgid "Hc: The AP calculated height (altitude) of navigation star."
 msgstr "Hc: AP:n laskema navigointitähden korkeus (korkeus)."
 
 #. TRANSLATORS: The process of Sight Reduction outputs computed values. Zn
 #. computed azimuth
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:332
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:339
 msgid "Zn: The AP calculated azimuth of navigation star."
 msgstr "Zn: AP laski navigointitähden atsimuutin."
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:336
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:343
 msgid "For further information please refer to the Stellarium User Guide."
 msgstr "Katso lisätietoja Stellariumin käyttöoppaasta."
 

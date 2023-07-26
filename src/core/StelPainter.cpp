@@ -2570,7 +2570,6 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool do
 	const bool multisampleWasOn = multisamplingEnabled && glIsEnabled(GL_MULTISAMPLE);
 #endif
 
-	const auto core = StelApp::getInstance().getCore();
 	if (!texCoordArray.enabled && !colorArray.enabled && !normalArray.enabled)
 	{
 		pr = coreProfileWideLineMode ? wideLineShaderProgram : basicShaderProgram;

@@ -89,7 +89,7 @@ public:
 		MeadeAS497,	//!< Meade Autostar #497 Alignment Stars
 		CelestronNS,	//!< Celestron NexStar Alignment Star List
 		Apollo,		//!< Apollo Alignment Star List
-		SkywatcherSS,	//!< Skywatcher Synscan Hand Controller and SynScan Pro App
+		SkywatcherSS,	//!< Skywatcher SynScan Hand Controller and SynScan Pro App
 		VixenSB,	//!< Vixen Starbook Alignment Stars
 		ArgoNavis,	//!< Alignment stars for Argo Navis digital setting circles
 		OrionIS,	//!< Alignment stars for Orion Intelliscope mounts
@@ -193,6 +193,8 @@ public slots:
 	//! @return QString The representation of the extraString info.
 	QString oneRowTwoCells(const QString& a, const QString& b, const QString& extra, bool tabulatedView);
 
+	//! If information output is limited to the currently active navigational stars (getLimitInfoToNavStars()),
+	//! check a dedicated list of exceptions (Sun, Moon, planets apart from Mercury) to also add information.
 	bool isPermittedObject(const QString& s);
 
 private slots:
@@ -228,7 +230,6 @@ private:
 	bool useUTCTime;
 
 	QString timeZone;
-	QVector<QString> permittedObjects;
 
 	//! List of the navigational stars' HIP numbers.
 	QList<int> starNumbers;
