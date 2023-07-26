@@ -18,7 +18,10 @@
  */
 
 #include "NomenclatureItem.hpp"
+#include "StelModuleMgr.hpp"
+#include "StelMovementMgr.hpp"
 #include "StelObject.hpp"
+#include "StelObserver.hpp"
 #include "StelPainter.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
@@ -343,7 +346,7 @@ Vec3d NomenclatureItem::getJ2000EquatorialPos(const StelCore* core) const
 	return XYZ;
 }
 
-// Return apparent semidiameter
+// Return apparent semidiameter in degrees
 double NomenclatureItem::getAngularRadius(const StelCore* core) const
 {
 	return std::atan2(0.5*size*planet->getSphereScale()/AU, getJ2000EquatorialPos(core).norm()) * M_180_PI;
@@ -395,25 +398,33 @@ void NomenclatureItem::draw(StelCore* core, StelPainter *painter)
 		// Highlight a few mostly circular classes with ellipses:
 		// - Craters
 		// - Satellite features (presumably all of these are satellite craters)
-		// - Lunar Maria. Mare Frigoris is elongated, and an ellipse would extend over the Lunar rim.
+		// - Lunar Maria. Mare Frigoris is elongated, and an ellipse would look stupid.
 		if (flagOutlineCraters && (nType==niCrater || nType==niSatelliteFeature || (nType==niMare && englishName!="Mare Frigoris")))
 		{
 			// Compute aspectRatio and angle from position of planet and own position, parallactic angle, ...
-			const double distDegrees=equPos.angle(XYZ)*M_180_PI;
+			const double distDegrees=equPos.angle(XYZ)*M_180_PI; // angular distance from planet centre position
 			const double plRadiusDeg=planet->getAngularRadius(core);
-			const double sinDistCenter= distDegrees/plRadiusDeg; // should be 0...1, but 1 causes a flicker
-			if (sinDistCenter<0.9999)
+			const double sinDistCenter= distDegrees/plRadiusDeg; // should be 0...1
+			if (sinDistCenter<0.9999) // exclude any edge ellipses which would be hanging over the limb.
 			{
 				const double angleDistCenterRad=asin(qMin(0.9999, sinDistCenter)); // 0..pi/2 on the lunar/planet sphere
 				const double aspectRatio=cos(angleDistCenterRad);
-				const Vec3d equPosNow = planet->getEquinoxEquatorialPos(core);
-				const Vec3d XYZNow = getEquinoxEquatorialPos(core);
-				double ra, de, raPl, dePl;
-				StelUtils::rectToSphe(&ra, &de, XYZNow);
-				StelUtils::rectToSphe(&raPl, &dePl, equPosNow);
-				const double angle=atan2(ra-raPl, de-dePl);
-				const double par = static_cast<double>(getParallacticAngle(core));
-				painter->drawEllipse(srcPos[0], srcPos[1], screenRadius, screenRadius*qMax(0.0001,aspectRatio), angle-par );
+				// Exclude further ellipses which would overshoot limb.
+				if (getAngularRadius(core)*qMax(0.0001,aspectRatio)+distDegrees < plRadiusDeg )
+				{
+					const Vec3d equPosNow = planet->getEquinoxEquatorialPos(core);
+					const Vec3d XYZNow = getEquinoxEquatorialPos(core);
+					double ra, de, raPl, dePl;
+					StelUtils::rectToSphe(&ra, &de, XYZNow);
+					StelUtils::rectToSphe(&raPl, &dePl, equPosNow);
+					double dRA=StelUtils::fmodpos(ra-raPl, 2.*M_PI);
+					if(dRA>M_PI)
+						dRA-=2.*M_PI;
+					const double angle=atan2(dRA, de-dePl);
+					StelMovementMgr::MountMode mountMode=GETSTELMODULE(StelMovementMgr)->getMountMode();
+					const double par = mountMode==StelMovementMgr::MountAltAzimuthal ? static_cast<double>(getParallacticAngle(core)) : 0.;
+					painter->drawEllipse(srcPos[0], srcPos[1], screenRadius, screenRadius*qMax(0.0001,aspectRatio), angle-par );
+				}
 			}
 			//else
 			//	qWarning() << "Sine of Distance" << sinDistCenter << ">0.99975 encountered for crater " << englishName << "at " << longitude << "/" << latitude;
