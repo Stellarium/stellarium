@@ -1684,20 +1684,18 @@ void StelPainter::drawCircle(float x, float y, float r)
 // rx: radius in x axis
 // ry: radius in y axis
 // angle rotation (counterclockwise), radians [0..2pi]
-void StelPainter::drawEllipse(float x, float y, float rX, float rY, float angle)
+void StelPainter::drawEllipse(double x, double y, double rX, double rY, double angle)
 {
-	if (rX <= 1.0f || rY <= 1.0f)
+	if (rX <= 1.0 || rY <= 1.0)
 		return;
 	// Taken largely from Nebula::renderEllipticMarker()
-	// Take into account device pixel density and global scale ratio, as we are drawing 2D stuff.
-	//const auto pixelRatio = getProjector()->getDevicePixelsPerPixel();
-	const auto scale = StelApp::getInstance().getGlobalScalingRatio();
+	const double scale = StelApp::getInstance().getGlobalScalingRatio();
 	rX *= scale;
 	rY *= scale;
 
 	//const float radiusY = 0.35 * size;
 	//const float radiusX = aspectRatio * radiusY;
-	const int numPoints = std::lround(std::clamp(qMax(rX, rY)/3, 32.f, 1024.f));
+	const int numPoints = std::lround(std::clamp(qMax(rX, rY)/3, 32., 1024.));
 	std::vector<float> vertexData;
 	vertexData.reserve(numPoints*2);
 	const float*const cossin = StelUtils::ComputeCosSinTheta(numPoints);
@@ -1713,7 +1711,7 @@ void StelPainter::drawEllipse(float x, float y, float rX, float rY, float angle)
 	}
 	const auto vertCount = vertexData.size() / 2;
 	setLineSmooth(true);
-	setLineWidth(scale * std::clamp(qMax(rX, rY)/40, 1.f, 2.f));
+	setLineWidth(scale * std::clamp(qMax(rX, rY)/40, 1., 2.));
 	enableClientStates(true);
 	setVertexPointer(2, GL_FLOAT, vertexData.data());
 	drawFromArray(StelPainter::LineLoop, vertCount, 0, false);

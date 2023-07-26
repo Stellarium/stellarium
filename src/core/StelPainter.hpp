@@ -139,7 +139,7 @@ public:
 	//! @param rx: radius in x axis
 	//! @param ry: radius in y axis
 	//! @param angle: rotation (counterclockwise), radians [0..2pi]
-	void drawEllipse(float x, float y, float rx, float ry, float angle);
+	void drawEllipse(double x, double y, double rx, double ry, double angle);
 
 	//! Draw a square using the current texture at the given projected 2d position.
 	//! This method is not thread safe.

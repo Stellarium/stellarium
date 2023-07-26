@@ -557,6 +557,7 @@ int NomenclatureMgr::getTerminatorMaxAltitude() const
 void NomenclatureMgr::setFlagOutlineCraters(bool b)
 {
 	NomenclatureItem::flagOutlineCraters = b;
+	conf->setValue("astro/flag_planets_nomenclature_outline_craters", b);
 	emit flagOutlineCratersChanged(b);
 }
 

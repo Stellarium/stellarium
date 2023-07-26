@@ -392,25 +392,29 @@ void NomenclatureItem::draw(StelCore* core, StelPainter *painter)
 		const float brightness=(nType>=NomenclatureItem::niSpecialPointPole ? 0.5f : (solarAltitude<0. ? 0.25f : 1.0f));
 		painter->setColor(color*brightness, labelsFader.getInterstate());
 		painter->drawCircle(static_cast<float>(srcPos[0]), static_cast<float>(srcPos[1]), 2.f);
-		if (flagOutlineCraters && (nType==niCrater || nType==niSatelliteFeature)) // probably all satellite features are satellite craters
+		// Highlight a few mostly circular classes with ellipses:
+		// - Craters
+		// - Satellite features (presumably all of these are satellite craters)
+		// - Lunar Maria. Mare Frigoris is elongated, and an ellipse would extend over the Lunar rim.
+		if (flagOutlineCraters && (nType==niCrater || nType==niSatelliteFeature || (nType==niMare && englishName!="Mare Frigoris")))
 		{
 			// Compute aspectRatio and angle from position of planet and own position, parallactic angle, ...
-			double ra, de, raPl, dePl;
-			StelUtils::rectToSphe(&ra, &de, XYZ);
-			StelUtils::rectToSphe(&raPl, &dePl, equPos);
-			const double distDegrees=StelLocation::distanceDegrees(raPl*M_180_PIf, dePl*M_180_PIf, ra*M_180_PIf, de*M_180_PIf);
+			const double distDegrees=equPos.angle(XYZ)*M_180_PI;
 			const double plRadiusDeg=planet->getAngularRadius(core);
-			const double sinDistCenter=distDegrees/plRadiusDeg; // 0...1
-			if (sinDistCenter<1.f)
+			const double sinDistCenter= distDegrees/plRadiusDeg; // should be 0...1, but 1 causes a flicker
+			if (sinDistCenter<0.9999)
 			{
-				const double angleDistCenterRad=asin(sinDistCenter); // 0..pi/2 on the lunar/planet sphere
+				const double angleDistCenterRad=asin(qMin(0.9999, sinDistCenter)); // 0..pi/2 on the lunar/planet sphere
 				const double aspectRatio=cos(angleDistCenterRad);
+				double ra, de, raPl, dePl;
+				StelUtils::rectToSphe(&ra, &de, XYZ);
+				StelUtils::rectToSphe(&raPl, &dePl, equPos);
 				const double angle=atan2(ra-raPl, de-dePl);
 				const double par = static_cast<double>(getParallacticAngle(core));
-				painter->drawEllipse(static_cast<float>(srcPos[0]), static_cast<float>(srcPos[1]), screenRadius, screenRadius*aspectRatio, angle-par );
+				painter->drawEllipse(srcPos[0], srcPos[1], screenRadius, screenRadius*qMax(0.0001,aspectRatio), angle-par );
 			}
 			//else
-			//	qWarning() << "Distance greater 1 encountered for crater " << englishName << "at " << longitude << "/" << latitude;
+			//	qWarning() << "Sine of Distance" << sinDistCenter << ">0.99975 encountered for crater " << englishName << "at " << longitude << "/" << latitude;
 		}
 		painter->drawText(static_cast<float>(srcPos[0]), static_cast<float>(srcPos[1]), nameI18n, 0, 5.f, 5.f, false);
 	}
