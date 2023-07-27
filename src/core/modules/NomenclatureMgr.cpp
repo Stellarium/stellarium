@@ -569,6 +569,7 @@ bool NomenclatureMgr::getFlagOutlineCraters() const
 void NomenclatureMgr::setFlagHideLocalNomenclature(bool b)
 {
 	NomenclatureItem::hideLocalNomenclature = b;
+	conf->setValue("astro/flag_hide_local_nomenclature", b);
 	emit localNomenclatureHidingChanged(b);
 }
 
@@ -580,6 +581,7 @@ bool NomenclatureMgr::getFlagHideLocalNomenclature() const
 void NomenclatureMgr::setFlagShowSpecialNomenclatureOnly(bool b)
 {
 	NomenclatureItem::showSpecialNomenclatureOnly = b;
+	conf->setValue("astro/flag_special_nomenclature_only", b);
 	emit specialNomenclatureOnlyDisplayingChanged(b);
 }
 
