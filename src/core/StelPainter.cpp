@@ -674,6 +674,7 @@ StringTexture* StelPainter::getTextTexture(const QString& str, int pixelSize) co
 		return cachedTex;
 	QFont tmpFont = currentFont;
 	tmpFont.setPixelSize(currentFont.pixelSize()*static_cast<int>(static_cast<float>(prj->getDevicePixelsPerPixel())*StelApp::getInstance().getGlobalScalingRatio()));
+	tmpFont.setStyleStrategy(QFont::NoSubpixelAntialias); // The text may rotate, which would break subpixel AA
 	QRect strRect = QFontMetrics(tmpFont).boundingRect(str);
 	int w = strRect.width()+1+static_cast<int>(0.02f*strRect.width());
 	int h = strRect.height();
@@ -681,12 +682,20 @@ StringTexture* StelPainter::getTextTexture(const QString& str, int pixelSize) co
 	QPixmap strImage = QPixmap(StelUtils::getBiggerPowerOfTwo(w), StelUtils::getBiggerPowerOfTwo(h));
 	strImage.fill(Qt::transparent);
 	QPainter painter(&strImage);
-	tmpFont.setStyleStrategy(QFont::NoAntialias);
+	if (qApp->property("text_texture").toBool()) // CLI option -t given?
+	{
+		// This is essential on devices like Raspberry Pi (2016-03).
+		tmpFont.setStyleStrategy(QFont::NoAntialias);
+	}
+	else
+	{
+		painter.setRenderHints(QPainter::TextAntialiasing);
+	}
 	painter.setFont(tmpFont);
-	//painter.setRenderHints(QPainter::TextAntialiasing);
 	painter.setPen(Qt::white);
 	painter.drawText(-strRect.x(), -strRect.y(), str);
 	StringTexture* newTex = new StringTexture(new QOpenGLTexture(strImage.toImage()), QSize(w, h), QPoint(strRect.x(), -(strRect.y()+h)));
+	newTex->texture->setMinMagFilters(QOpenGLTexture::Linear, QOpenGLTexture::Linear);
 	texCache.insert(hash, newTex, 3*w*h);
 	// simply returning newTex is dangerous as the object is owned by the cache now. (Coverity Scan barks.)
 	return texCache.object(hash);
@@ -698,10 +707,8 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 	{
 		drawTextGravity180(x, y, str, xshift, yshift);
 	}
-	else if (qApp->property("text_texture")==true) // CLI option -t given?
+	else
 	{
-		//qDebug() <<  "Text texture" << str;
-		// This is taken from branch text-use-opengl-buffer. This is essential on devices like Raspberry Pi (2016-03).
 		StringTexture* tex = getTextTexture(str, currentFont.pixelSize());
 		Q_ASSERT(tex);
 		if (!noGravity)
@@ -715,8 +722,6 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 		static const float vertexBase[] = {0., 0., 1., 0., 0., 1., 1., 1.};
 		if (std::fabs(angleDeg)>1.f*M_PI_180f)
 		{
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 			const float cosr = std::cos(angleDeg * M_PI_180f);
 			const float sinr = std::sin(angleDeg * M_PI_180f);
 			for (int i = 0; i < 8; i+=2)
@@ -727,8 +732,6 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 		}
 		else
 		{
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 			for (int i = 0; i < 8; i+=2)
 			{
 				vertexData[i]   = int(x + tex->size.width()*vertexBase[i]+xshift);
@@ -754,57 +757,6 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 		setBlending(oldBlending, oldSrc, oldDst);
 		enableClientStates(false, false);
 		tex->texture->release();
-	}
-	else
-	{
-		QOpenGLPaintDevice device;
-		device.setSize(QSize(prj->getViewportWidth(), prj->getViewportHeight()));
-		// This doesn't seem to work correctly, so implement the hack below instead.
-		// Maybe check again later, or check on mac with retina..
-		// device.setDevicePixelRatio(prj->getDevicePixelsPerPixel());
-		// painter.setFont(currentFont);
-		
-		QPainter painter(&device);
-		
-		QFont tmpFont = currentFont;
-		tmpFont.setPixelSize(currentFont.pixelSize()*static_cast<int>(static_cast<float>(prj->getDevicePixelsPerPixel())*StelApp::getInstance().getGlobalScalingRatio()));
-		painter.setFont(tmpFont);
-		painter.setPen(currentColor.toQColor());
-		
-		float scaleRatio = StelApp::getInstance().getGlobalScalingRatio();
-		xshift*=scaleRatio;
-		yshift*=scaleRatio;
-		
-		y = prj->getViewportHeight()-y;
-		yshift = -yshift;
-
-		// Translate/rotate
-		if (!noGravity)
-			angleDeg += prj->defaultAngleForGravityText;
-
-		if (std::fabs(angleDeg)>1.f)
-		{
-			QTransform m;
-			m.translate(static_cast<qreal>(x), static_cast<qreal>(y));
-			m.rotate(static_cast<qreal>(-angleDeg));
-			painter.setTransform(m);
-			painter.drawText(qRound(xshift), qRound(yshift), str);
-		}
-		else
-		{
-			painter.drawText(qRound(x+xshift), qRound(y+yshift), str);
-		}
-		
-		//important to call this before GL state restore
-		painter.end();
-
-		//fix for bug 1628072 caused by QTBUG-56798
-#ifndef QT_NO_DEBUG
-		StelOpenGL::clearGLErrors();
-#endif
-
-		//QPainter messes up some GL state, begin/endNativePainting or save/restore does not help
-		glState.apply();
 	}
 }
 

@@ -805,6 +805,9 @@ QSurfaceFormat StelMainView::getDesiredGLFormat(QSettings* configuration)
 	fmt.setGreenBufferSize(8);
 	fmt.setBlueBufferSize(8);
 	fmt.setDepthBufferSize(24);
+	// Without stencil buffer the debug versions of Qt will repeatedly emit warnings like:
+	// "OpenGL paint engine: attempted to use stencil test without requesting a stencil buffer."
+	fmt.setStencilBufferSize(8);
 
 	if(qApp && qApp->property("onetime_single_buffer").toBool())
 		fmt.setSwapBehavior(QSurfaceFormat::SingleBuffer);
