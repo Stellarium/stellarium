@@ -682,15 +682,7 @@ StringTexture* StelPainter::getTextTexture(const QString& str, int pixelSize) co
 	QPixmap strImage = QPixmap(StelUtils::getBiggerPowerOfTwo(w), StelUtils::getBiggerPowerOfTwo(h));
 	strImage.fill(Qt::transparent);
 	QPainter painter(&strImage);
-	if (qApp->property("text_texture").toBool()) // CLI option -t given?
-	{
-		// This is essential on devices like Raspberry Pi (2016-03).
-		tmpFont.setStyleStrategy(QFont::NoAntialias);
-	}
-	else
-	{
-		painter.setRenderHints(QPainter::TextAntialiasing);
-	}
+	painter.setRenderHints(QPainter::TextAntialiasing);
 	painter.setFont(tmpFont);
 	painter.setPen(Qt::white);
 	painter.drawText(-strRect.x(), -strRect.y(), str);
