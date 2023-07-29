@@ -281,7 +281,7 @@ void main()
 
 		QOpenGLShader vShader(QOpenGLShader::Vertex);
 		handleCompileStatus(vShader.compileSourceCode(vShaderSrc), vShader,
-							"ShowMySky atmosphere luminance-to-screen vertex shader");
+		                    "ShowMySky atmosphere luminance-to-screen vertex shader");
 		luminanceToScreenProgram_->addShader(&vShader);
 
 		QOpenGLShader toneReproducerShader(QOpenGLShader::Fragment);
@@ -291,12 +291,12 @@ void main()
 		const auto xyYToRGBShader = xyYToRGBFile.readAll();
 		const auto fPrefix = StelOpenGL::globalShaderPrefix(StelOpenGL::FRAGMENT_SHADER);
 		handleCompileStatus(toneReproducerShader.compileSourceCode(fPrefix + xyYToRGBShader),
-							toneReproducerShader, "ShowMySky atmosphere tone reproducer fragment shader");
+		                    toneReproducerShader, "ShowMySky atmosphere tone reproducer fragment shader");
 		luminanceToScreenProgram_->addShader(&toneReproducerShader);
 
 		QOpenGLShader luminanceToScreenShader(QOpenGLShader::Fragment);
 		handleCompileStatus(luminanceToScreenShader.compileSourceCode(fShaderSrc), luminanceToScreenShader,
-							"ShowMySky atmosphere luminance-to-screen fragment shader");
+		                    "ShowMySky atmosphere luminance-to-screen fragment shader");
 		luminanceToScreenProgram_->addShader(&luminanceToScreenShader);
 
 		if(!StelPainter::linkProg(luminanceToScreenProgram_.get(), "atmosphere luminance-to-screen"))
@@ -306,7 +306,7 @@ void main()
 	const auto projector = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
 	const auto shaderSources = getViewDirShaderSources(*projector);
 	renderer_->initDataLoading(shaderSources.first, shaderSources.second,
-							   {std::pair<std::string,GLuint>{"vertex", SKY_VERTEX_ATTRIB_INDEX}});
+	                           {std::pair<std::string,GLuint>{"vertex", SKY_VERTEX_ATTRIB_INDEX}});
 }
 
 void AtmosphereShowMySky::resizeRenderTarget(int width, int height)
@@ -355,14 +355,14 @@ void AtmosphereShowMySky::setupBuffers()
 		GL(gl.glGenVertexArrays(1, &mainVAO_));
 		GL(gl.glBindVertexArray(mainVAO_));
 		GL(gl.glVertexAttribPointer(0, FS_QUAD_COORDS_PER_VERTEX, GL_FLOAT, false, 0,
-									reinterpret_cast<const void*>(FS_QUAD_OFFSET_IN_VBO)));
+		                            reinterpret_cast<const void*>(FS_QUAD_OFFSET_IN_VBO)));
 		GL(gl.glEnableVertexAttribArray(SKY_VERTEX_ATTRIB_INDEX));
 	}
 	{
 		GL(gl.glGenVertexArrays(1, &zenithProbeVAO_));
 		GL(gl.glBindVertexArray(zenithProbeVAO_));
 		GL(gl.glVertexAttribPointer(SKY_VERTEX_ATTRIB_INDEX, FS_QUAD_COORDS_PER_VERTEX, GL_FLOAT, false, 0,
-									reinterpret_cast<const void*>(FS_QUAD_OFFSET_IN_VBO)));
+		                            reinterpret_cast<const void*>(FS_QUAD_OFFSET_IN_VBO)));
 		GL(gl.glEnableVertexAttribArray(SKY_VERTEX_ATTRIB_INDEX));
 	}
 
@@ -375,7 +375,7 @@ void AtmosphereShowMySky::resolveFunctions()
 	if(!showMySkyLib.load())
 		throw InitFailure(q_("Failed to load ShowMySky library: %1").arg(showMySkyLib.errorString()));
 	ShowMySky_AtmosphereRenderer_create=reinterpret_cast<decltype(ShowMySky_AtmosphereRenderer_create)>(
-												showMySkyLib.resolve("ShowMySky_AtmosphereRenderer_create"));
+	                                            showMySkyLib.resolve("ShowMySky_AtmosphereRenderer_create"));
 	if(!ShowMySky_AtmosphereRenderer_create)
 		throw InitFailure(q_("Failed to resolve the function to create AtmosphereRenderer"));
 
@@ -630,20 +630,20 @@ bool AtmosphereShowMySky::dynamicResolution(StelProjectorP prj, Vec3d &currPos, 
 	const auto currFov=prj->getFov(), currFad=fader.getInterstate();
 	Vec3d currSun;
 	prj->project(currPos,currSun);
-	const auto dFad=1e3*(currFad-prevFad);				// per thousand of the fader
-	const auto dFov=2e3*(currFov-prevFov)/(currFov+prevFov);	// per thousand of the field of view
-	const auto dPos=1e3*(currPos-prevPos).norm();			// milli-AU :)
-	const auto dSun=(currSun-prevSun).norm();			// pixel
+	const auto dFad=1e3*(currFad-prevFad);                          // per thousand of the fader
+	const auto dFov=2e3*(currFov-prevFov)/(currFov+prevFov);        // per thousand of the field of view
+	const auto dPos=1e3*(currPos-prevPos).norm();                   // milli-AU :)
+	const auto dSun=(currSun-prevSun).norm();                       // pixel
 	const auto changeOfView=Vec4d(dFad,dFov,dPos,dSun);
-	const auto allowedChange=eclipseFactor<1?10e-3:1;		// for solar eclipses, prioritize speed over resolution
-	const auto hysteresis=atmoRes==1?1:200e-3;			// hysteresis avoids frequent changing of the resolution
+	const auto allowedChange=eclipseFactor<1?10e-3:1;               // for solar eclipses, prioritize speed over resolution
+	const auto hysteresis=atmoRes==1?1:200e-3;                      // hysteresis avoids frequent changing of the resolution
 	const auto allowedChangeOfView=allowedChange*hysteresis;
-	const auto changed=changeOfView.norm()>allowedChangeOfView;	// change is too big
-	const auto timeout=dynResTimer<=0;				// do we have a timeout?
+	const auto changed=changeOfView.norm()>allowedChangeOfView;     // change is too big
+	const auto timeout=dynResTimer<=0;                              // do we have a timeout?
 	// if we don't have a timeout or too much change, we skip the frame
 	if (!changed && !timeout)
 	{
-		dynResTimer--;						// count down to redraw
+		dynResTimer--;                                              // count down to redraw
 		return true;
 	}
 	// if the change is too big, we draw with reduced resolution, otherwise with full resolution
@@ -666,8 +666,8 @@ bool AtmosphereShowMySky::dynamicResolution(StelProjectorP prj, Vec3d &currPos, 
 }
 
 void AtmosphereShowMySky::computeColor(StelCore* core, const double JD, const Planet& currentPlanet, const Planet& sun,
-				       const Planet*const moon, const StelLocation& location, const float temperature,
-				       const float relativeHumidity, const float extinctionCoefficient, const bool noScatter)
+                                       const Planet*const moon, const StelLocation& location, const float temperature,
+                                       const float relativeHumidity, const float extinctionCoefficient, const bool noScatter)
 {
 	StelOpenGL::checkGLErrors(__FILE__,__LINE__);
 	try
@@ -684,7 +684,7 @@ void AtmosphereShowMySky::computeColor(StelCore* core, const double JD, const Pl
 		{
 			const auto shaderSources = getViewDirShaderSources(*prj);
 			renderer_->setViewDirShaders(shaderSources.first, shaderSources.second,
-										 {std::pair<std::string,GLuint>{"vertex", SKY_VERTEX_ATTRIB_INDEX}});
+			                             {std::pair<std::string,GLuint>{"vertex", SKY_VERTEX_ATTRIB_INDEX}});
 			prevProjector_ = prj;
 		}
 
@@ -762,8 +762,8 @@ void AtmosphereShowMySky::computeColor(StelCore* core, const double JD, const Pl
 		const auto airglowRelativeBrightness = 1.f;
 		const auto sunRelativeBrightness = noScatter ? 0.f : 1.f;
 		drawAtmosphere(prj->getProjectionMatrix(), sunAzimuth, sunZenithAngle, sunAngularRadius, moonAzimuth, moonZenithAngle, earthMoonDistance,
-					   location.altitude, sunRelativeBrightness, lightPollutionRelativeBrightness, airglowRelativeBrightness,
-					   eclipseFactor < 1, true);
+		               location.altitude, sunRelativeBrightness, lightPollutionRelativeBrightness, airglowRelativeBrightness,
+		               eclipseFactor < 1, true);
 		const auto nonExtLunarMagnitude = moon ? moon->getVMagnitude(core) : 100.f;
 		const auto moonRelativeBrightness = noScatter ? 0.f : std::pow(10.f, 0.4f*(nonExtinctedSolarMagnitude-nonExtLunarMagnitude));
 		drawAtmosphere(prj->getProjectionMatrix(), moonAzimuth, moonZenithAngle, 0, 0, M_PI, 0, location.altitude,
