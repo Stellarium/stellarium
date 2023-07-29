@@ -226,7 +226,6 @@ private slots:
 private:
 	QTimeLine* hideTimeLine;
 	QGraphicsSimpleTextItem* helpLabel;
-	QGraphicsPixmapItem* helpLabelPixmap; // bad-graphics replacement.
 };
 
 // The button bar on the bottom containing actions toggle buttons
@@ -307,12 +306,6 @@ private:
 	QGraphicsSimpleTextItem* datetime;
 	QGraphicsSimpleTextItem* fov;
 	QGraphicsSimpleTextItem* fps;
-	// For bad graphics, show these instead. We can use location etc for font info.
-	// We use ad-hoc pixmaps instead if command-line arg. -t (--text-fix) is given.
-	QGraphicsPixmapItem* locationPixmap;
-	QGraphicsPixmapItem* datetimePixmap;
-	QGraphicsPixmapItem* fovPixmap;
-	QGraphicsPixmapItem* fpsPixmap;
 	int gap; // a pixel distance between status line and buttons. May have fixed size or could depend on status element font size QFontMetrics::descent()
 
 
@@ -350,7 +343,6 @@ private:
 	bool flagShowTZ;
 
 	QGraphicsSimpleTextItem* helpLabel;
-	QGraphicsPixmapItem* helpLabelPixmap; // bad-graphics replacement.
 };
 
 //! @class StelBarsPath: The path around the bottom and left button bars
