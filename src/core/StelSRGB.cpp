@@ -24,6 +24,22 @@ QByteArray makeSRGBUtilsShader()
 {
 	static const QByteArray src = 1+R"(
 #line 1 108
+float srgbToLinear(float srgb)
+{
+	float s = step(float(0.04045), srgb);
+	float d = 1. - s;
+	return s * pow((srgb+0.055)/1.055, float(2.4)) +
+	       d * srgb/12.92;
+}
+
+float linearToSRGB(float lin)
+{
+	float s = step(float(0.0031308), lin);
+	float d = 1. - s;
+	return s * (1.055*pow(lin, float(1./2.4))-0.055) +
+	       d *  12.92*lin;
+}
+
 vec3 srgbToLinear(vec3 srgb)
 {
 	vec3 s = step(vec3(0.04045), srgb);
