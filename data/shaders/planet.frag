@@ -28,8 +28,8 @@ const highp float PI = 3.14159265;
 
 uniform sampler2D tex;
 uniform mediump vec2 poleLat; //latitudes of pole caps, in terms of texture coordinate. x>0...north, y<1...south. 
-uniform mediump vec3 ambientLight;
-uniform mediump vec3 diffuseLight;
+uniform mediump vec3 ambientLight; // Must be in linear sRGB, without OETF application
+uniform mediump vec3 diffuseLight; // Must be in linear sRGB, without OETF application
 uniform highp vec4 sunInfo;
 uniform mediump float skyBrightness;
 uniform bool hasAtmosphere;
@@ -373,10 +373,8 @@ void main()
 		// TODO: replace it with the correct BRDF (possibly different for different planets).
 		lum *= lum;
 	}
-	mediump vec3 ambientLightToUse = srgbToLinear(ambientLight); // FIXME: this should be supplied as linear
-	mediump vec3 diffuseLightToUse = srgbToLinear(diffuseLight); // FIXME: this should be supplied as linear
     //final lighting color
-    mediump vec4 litColor = vec4(lum * final_illumination * diffuseLightToUse + ambientLightToUse, 1.0);
+    mediump vec4 litColor = vec4(lum * final_illumination * diffuseLight + ambientLight, 1.0);
 
     //apply texture-colored rimlight
     //litColor.xyz = clamp( litColor.xyz + vec3(outgas), 0.0, 1.0);

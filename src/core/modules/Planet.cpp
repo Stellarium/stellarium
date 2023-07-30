@@ -4025,8 +4025,8 @@ Planet::RenderData Planet::setCommonShaderUniforms(const StelPainter& painter, Q
 	GL(shader->setUniformValue(shaderVars.eyeDirection, static_cast<GLfloat>(data.eyePos[0]),
 	                                                    static_cast<GLfloat>(data.eyePos[1]),
 	                                                    static_cast<GLfloat>(data.eyePos[2])));
-	GL(shader->setUniformValue(shaderVars.diffuseLight, light.diffuse[0], light.diffuse[1], light.diffuse[2]));
-	GL(shader->setUniformValue(shaderVars.ambientLight, light.ambient[0], light.ambient[1], light.ambient[2]));
+	GL(shader->setUniformValue(shaderVars.diffuseLight, srgbToLinear(light.diffuse).toQVector()));
+	GL(shader->setUniformValue(shaderVars.ambientLight, srgbToLinear(light.ambient).toQVector()));
 	GL(shader->setUniformValue(shaderVars.tex, 0));
 	GL(shader->setUniformValue(shaderVars.shadowCount, static_cast<GLint>(data.shadowCandidates.size())));
 	GL(shader->setUniformValue(shaderVars.shadowData, data.shadowCandidatesData));
