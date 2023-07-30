@@ -11,7 +11,8 @@ ENDIF()
 
 SET(stellarium_lib_SRCS
      core/BlueNoiseTriangleRemapped.hpp
-	 core/StelSRGB.hpp
+     core/StelSRGB.hpp
+     core/StelSRGB.cpp
      core/Dithering.hpp
      core/Dithering.cpp
      core/SaturationShader.hpp
