@@ -211,23 +211,23 @@ void Planet::PlanetOBJModel::performScaling(double scale)
 }
 
 Planet::Planet(const QString& englishName,
-	       double radius,
-	       double oblateness,
-	       Vec3f halocolor,
-	       float albedo,
-	       float roughness,
-	       const QString& atexMapName,
-	       const QString& anormalMapName,
-		   const QString& ahorizonMapName,
-	       const QString& aobjModelName,
-	       posFuncType coordFunc,
-	       Orbit* anOrbitPtr,
-	       OsculatingFunctType *osculatingFunc,
-	       bool acloseOrbit,
-	       bool hidden,
-	       bool hasAtmosphere,
-	       bool hasHalo,
-	       const QString& pTypeStr)
+               double radius,
+               double oblateness,
+               Vec3f halocolor,
+               float albedo,
+               float roughness,
+               const QString& atexMapName,
+               const QString& anormalMapName,
+               const QString& ahorizonMapName,
+               const QString& aobjModelName,
+               posFuncType coordFunc,
+               Orbit* anOrbitPtr,
+               OsculatingFunctType *osculatingFunc,
+               bool acloseOrbit,
+               bool hidden,
+               bool hasAtmosphere,
+               bool hasHalo,
+               const QString& pTypeStr)
 	: flagNativeName(true),
 	  deltaJDE(StelCore::JD_SECOND),
 	  deltaOrbitJDE(0.0),
@@ -616,7 +616,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 			}
 			oss << QString("%1: <b>%2</b> (%3)<br/>").arg(q_("Type"), getObjectTypeI18n(), cometType);
 		}
-		else		
+		else
 			oss << QString("%1: <b>%2</b><br/>").arg(q_("Type"), getObjectTypeI18n());
 	}
 
@@ -1608,7 +1608,7 @@ QVariantMap Planet::getInfoMap(const StelCore *core) const
 		map.insert("velocity-kms", QString::number(getEclipticVelocity().norm()* AU/86400., 'f', 5));
 		map.insert("heliocentric-velocity", getHeliocentricEclipticVelocity().toString());
 		map.insert("heliocentric-velocity-kms", QString::number(getHeliocentricEclipticVelocity().norm()* AU/86400., 'f', 5));
-		map.insert("scale", sphereScale);		
+		map.insert("scale", sphereScale);
 		map.insert("albedo", getAlbedo());
 	}
 	else
@@ -1815,8 +1815,8 @@ double Planet::getParentSatellitesFov(const StelCore* core) const
 
 // Set the rotational elements of the planet body.
 void Planet::setRotationElements(const QString name,
-				 const double _period, const double _offset, const double _epoch, const double _obliquity, const double _ascendingNode,
-				 const double _ra0, const double _ra1, const double _de0, const double _de1, const double _w0, const double _w1)
+                                 const double _period, const double _offset, const double _epoch, const double _obliquity, const double _ascendingNode,
+                                 const double _ra0, const double _ra1, const double _de0, const double _de1, const double _w0, const double _w1)
 {
 	re.period = _period;
 	re.offset = _offset;
@@ -1868,8 +1868,8 @@ Vec3d Planet::getJ2000EquatorialPos(const StelCore *core) const
 {
 	const bool withAberration=core->getUseAberration();
 	return StelCore::matVsop87ToJ2000.multiplyWithoutTranslation(getHeliocentricEclipticPos()
-								    - core->getObserverHeliocentricEclipticPos()
-								    + (withAberration ? aberrationPush : Vec3d(0.)));
+	                                                             - core->getObserverHeliocentricEclipticPos()
+	                                                             + (withAberration ? aberrationPush : Vec3d(0.)));
 }
 
 // return value in radians!
@@ -1974,7 +1974,7 @@ void Planet::computePosition(const double dateJDE, const Vec3d &aberrationPush)
 
 void Planet::computePosition(const double dateJDE, Vec3d &eclPosition, Vec3d &eclVelocity) const
 {
-		coordFunc(dateJDE, &eclPosition[0], &eclVelocity[0], orbitPtr);
+	coordFunc(dateJDE, &eclPosition[0], &eclVelocity[0], orbitPtr);
 }
 
 // Compute the transformation matrix from the local Planet coordinate system to the parent Planet coordinate system.
@@ -2036,9 +2036,9 @@ void Planet::computeTransMatrix(double JD, double JDE)
 
 		// The next call ONLY sets rotLocalToParent
 		setRotEquatorialToVsop87(StelCore::matJ2000ToVsop87              // From VSOP87 into ICRS
-					 * Mat4d::zrotation(J2000NPoleRA+M_PI_2) // rotate along ICRS EQUATOR to ascending node
-					 * Mat4d::xrotation(M_PI_2-J2000NPoleDE) // node angle
-					 );
+		                         * Mat4d::zrotation(J2000NPoleRA+M_PI_2) // rotate along ICRS EQUATOR to ascending node
+		                         * Mat4d::xrotation(M_PI_2-J2000NPoleDE) // node angle
+		                         );
 		//debugAid=QString("Axis in ICRF: &alpha;: %1 &delta;: %2, W: %3<br/>").arg(StelUtils::radToDecDegStr(J2000NPoleRA), StelUtils::radToDecDegStr(J2000NPoleDE), QString::number(re.currentAxisW, 'f', 3));
 	}
 	else //	RotationElements::Traditional
@@ -2076,11 +2076,11 @@ Vec4d Planet::getRectangularCoordinates(const double longDeg, const double latDe
 	//qDebug() << "getTopographicOffsetFromCenter: a=" << a*AU << "b/a=" << bByA << "b=" << bByA*a *AU  << "latRad=" << latRad << "u=" << u;
 	// There seem to be numerical issues around tan/atan. Relieve the test a bit.
 	Q_ASSERT_X( fabs(u)-fabs(latRad) <= 1e-10, "Planet.cpp", QString("u: %1 latRad: %2 bByA: %3 latRad-u: %4 (%5)")
-								      .arg(QString::number(u))
-								      .arg(QString::number(latRad))
-								      .arg(QString::number(bByA, 'f', 10))
-								      .arg(QString::number(latRad-u))
-								      .arg(englishName).toLatin1() );
+	                                                              .arg(QString::number(u))
+	                                                              .arg(QString::number(latRad))
+	                                                              .arg(QString::number(bByA, 'f', 10))
+	                                                              .arg(QString::number(latRad-u))
+	                                                              .arg(englishName).toLatin1() );
 	const double altFix = altMetres/(1000.0*AU*a);
 
 	const double rhoSinPhiPrime= bByA * sin(u) + altFix*sin(latRad);
@@ -2174,7 +2174,7 @@ double Planet::getSiderealTime(double JD, double JDE) const
 	const double t = JDE - re.epoch;
 	// avoid division by zero (typical case for moons with chaotic period of rotation)
 	double rotations = (re.period==0. ? 1.  // moon with chaotic period of rotation
-					  : t / static_cast<double>(re.period));
+	                                  : t / static_cast<double>(re.period));
 	rotations = remainder(rotations, 1.0); // remove full rotations to limit angle.
 	return rotations * 360. + static_cast<double>(re.offset);
 }
@@ -2339,8 +2339,8 @@ bool Planet::isWaning(const Vec3d& observerPosition, const Vec3d& observerVeloci
 	// The time derivative of the phase angle is a ratio, whose denominator is a product of two lengths
 	// and a square root. So, to determine whether it's positive it's sufficient to check the numerator.
 	const double numerator = sunPlanetDist * (2 * sunObserverDist * observerRadialSpeed * planetObserverDist -
-						  planetObserverRelSpeed * (planetObserverDistSqr + sunObserverDistSqr - sunPlanetDistSqr)) +
-				 planetObserverDist * planetRadialSpeed * (planetObserverDistSqr - sunObserverDistSqr - sunPlanetDistSqr);
+	                                          planetObserverRelSpeed * (planetObserverDistSqr + sunObserverDistSqr - sunPlanetDistSqr)) +
+		planetObserverDist * planetRadialSpeed * (planetObserverDistSqr - sunObserverDistSqr - sunPlanetDistSqr);
 	return numerator > 0;
 }
 
@@ -3295,13 +3295,13 @@ bool Planet::initShader()
 
 	// Default planet shader program
 	planetShaderProgram = createShader("planetShaderProgram",planetShaderVars,vsrc,
-									   makeSRGBUtilsShader()+fsrc);
+	                                   makeSRGBUtilsShader()+fsrc);
 	// Planet with ring shader program
 	ringPlanetShaderProgram = createShader("ringPlanetShaderProgram",ringPlanetShaderVars,vsrc,
-										   makeSRGBUtilsShader()+fsrc,"#define RINGS_SUPPORT\n\n");
+	                                       makeSRGBUtilsShader()+fsrc,"#define RINGS_SUPPORT\n\n");
 	// Moon shader program
 	moonShaderProgram = createShader("moonShaderProgram",moonShaderVars,vsrc,
-									 makeSRGBUtilsShader()+fsrc,"#define IS_MOON\n\n");
+	                                 makeSRGBUtilsShader()+fsrc,"#define IS_MOON\n\n");
 	// OBJ model shader program
 	// we REQUIRE some fixed attribute locations here
 	QMap<QByteArray,int> attrLoc;
@@ -3309,13 +3309,13 @@ bool Planet::initShader()
 	attrLoc.insert("texCoord", StelOpenGLArray::ATTLOC_TEXCOORD);
 	attrLoc.insert("normalIn", StelOpenGLArray::ATTLOC_NORMAL);
 	objShaderProgram = createShader("objShaderProgram",objShaderVars,vsrc,
-									makeSRGBUtilsShader()+fsrc,"#define IS_OBJ\n\n",attrLoc);
+	                                makeSRGBUtilsShader()+fsrc,"#define IS_OBJ\n\n",attrLoc);
 	//OBJ shader with shadowmap support
 	objShadowShaderProgram = createShader("objShadowShaderProgram",objShadowShaderVars,vsrc,makeSRGBUtilsShader()+fsrc,
-					      "#define IS_OBJ\n"
-					      "#define SHADOWMAP\n"
-					      "#define SM_SIZE " STRINGIFY(SM_SIZE) "\n"
-										    "\n",attrLoc);
+	                                      "#define IS_OBJ\n"
+	                                      "#define SHADOWMAP\n"
+	                                      "#define SM_SIZE " STRINGIFY(SM_SIZE) "\n"
+	                                                                            "\n",attrLoc);
 
 	//set the poisson disk as uniform, this seems to be the only way to get an (const) array into GLSL 110 on all drivers
 	if(objShadowShaderProgram)
@@ -3435,11 +3435,11 @@ bool Planet::initShader()
 
 	//check if ALL shaders have been created correctly
 	shaderError = !(planetShaderProgram&&
-			ringPlanetShaderProgram&&
-			moonShaderProgram&&
-			objShaderProgram&&
-			objShadowShaderProgram&&
-			transformShaderProgram);
+	                ringPlanetShaderProgram&&
+	                moonShaderProgram&&
+	                objShaderProgram&&
+	                objShadowShaderProgram&&
+	                transformShaderProgram);
 	return true;
 }
 
@@ -4023,8 +4023,8 @@ Planet::RenderData Planet::setCommonShaderUniforms(const StelPainter& painter, Q
 	GL(shader->setUniformValue(shaderVars.hasAtmosphere, GLint(atmosphere)));
 	GL(shader->setUniformValue(shaderVars.lightDirection, lightPos3[0], lightPos3[1], lightPos3[2]));
 	GL(shader->setUniformValue(shaderVars.eyeDirection, static_cast<GLfloat>(data.eyePos[0]),
-														static_cast<GLfloat>(data.eyePos[1]),
-														static_cast<GLfloat>(data.eyePos[2])));
+	                                                    static_cast<GLfloat>(data.eyePos[1]),
+	                                                    static_cast<GLfloat>(data.eyePos[2])));
 	GL(shader->setUniformValue(shaderVars.diffuseLight, light.diffuse[0], light.diffuse[1], light.diffuse[2]));
 	GL(shader->setUniformValue(shaderVars.ambientLight, light.ambient[0], light.ambient[1], light.ambient[2]));
 	GL(shader->setUniformValue(shaderVars.tex, 0));
@@ -4033,9 +4033,9 @@ Planet::RenderData Planet::setCommonShaderUniforms(const StelPainter& painter, Q
 	if(this!=sun)
 	{
 		GL(shader->setUniformValue(shaderVars.sunInfo, static_cast<GLfloat>(data.mTarget[12]),
-													   static_cast<GLfloat>(data.mTarget[13]),
-													   static_cast<GLfloat>(data.mTarget[14]),
-													   static_cast<GLfloat>(sun->getEquatorialRadius())));
+		                                               static_cast<GLfloat>(data.mTarget[13]),
+		                                               static_cast<GLfloat>(data.mTarget[14]),
+		                                               static_cast<GLfloat>(sun->getEquatorialRadius())));
 	}
 	GL(shader->setUniformValue(shaderVars.skyBrightness, lmgr->getAtmosphereAverageLuminance()));
 	GL(shader->setUniformValue(shaderVars.poleLat, 1.1f, -0.1f)); // Avoid white objects. poleLat is only used for Mars.
@@ -4045,10 +4045,10 @@ Planet::RenderData Planet::setCommonShaderUniforms(const StelPainter& painter, Q
 		//calculate and set oren-nayar parameters. The 75 in the scaling computation is arbitrary, to make the terminator visible.
 		const float roughnessSq = roughness * roughness;
 		QVector4D vec(
-					1.0f - 0.5f * roughnessSq / (roughnessSq + 0.33f), // 0.57f), //x = A. If interreflection term is removed from shader, use 0.57 instead of 0.33.
-					0.45f * roughnessSq / (roughnessSq + 0.09f),	//y = B
-					50.0f * albedo/M_PIf, // was: 1.85f, but unclear why. //z = scale factor=rho/pi*Eo. rho=albedo=0.12, Eo~50? Higher Eo looks better!
-					roughnessSq);
+		              1.0f - 0.5f * roughnessSq / (roughnessSq + 0.33f), // 0.57f), //x = A. If interreflection term is removed from shader, use 0.57 instead of 0.33.
+		              0.45f * roughnessSq / (roughnessSq + 0.09f),	//y = B
+		              50.0f * albedo/M_PIf, // was: 1.85f, but unclear why. //z = scale factor=rho/pi*Eo. rho=albedo=0.12, Eo~50? Higher Eo looks better!
+		              roughnessSq);
 		GL(shader->setUniformValue(shaderVars.orenNayarParameters, vec));
 	}
 
@@ -4779,9 +4779,9 @@ bool Planet::drawObjShadowMap(StelPainter *painter, QMatrix4x4& shadowMatrix)
 
 	//bias matrix for lookup
 	static const QMatrix4x4 biasMatrix(0.5f, 0.0f, 0.0f, 0.5f,
-					   0.0f, 0.5f, 0.0f, 0.5f,
-					   0.0f, 0.0f, 0.5f, 0.5f,
-					   0.0f, 0.0f, 0.0f, 1.0f);
+	                                   0.0f, 0.5f, 0.0f, 0.5f,
+	                                   0.0f, 0.0f, 0.5f, 0.5f,
+	                                   0.0f, 0.0f, 0.0f, 1.0f);
 	shadowMatrix = biasMatrix * mvp;
 
 	painter->setDepthTest(true);
@@ -4877,7 +4877,7 @@ Ring::Ring(float radiusMin, float radiusMax, const QString &texname)
 {
 	auto& texMan = StelApp::getInstance().getTextureManager();
 	tex = texMan.createTexture(StelFileMgr::getInstallationDir()+"/textures/"+texname,
-							   StelTexture::StelTextureParams(true, GL_LINEAR, GL_CLAMP_TO_EDGE, true));
+	                           StelTexture::StelTextureParams(true, GL_LINEAR, GL_CLAMP_TO_EDGE, true));
 }
 
 Vec3f Planet::getCurrentOrbitColor() const
