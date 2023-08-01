@@ -1685,6 +1685,9 @@
                </property>
                <item>
                 <widget class="QCheckBox" name="planetOrbitOnlyCheckBox">
+                 <property name="toolTip">
+                  <string>Hide orbits of minor bodies.</string>
+                 </property>
                  <property name="text">
                   <string>Only orbits of major planets</string>
                  </property>
@@ -1693,7 +1696,7 @@
                <item>
                 <widget class="QCheckBox" name="planetIsolatedOrbitCheckBox">
                  <property name="toolTip">
-                  <string>Deactivate this option if you want to see orbit for selected planet and its moons.</string>
+                  <string>Activate this option if you want to see orbit for selected planet and its moons.</string>
                  </property>
                  <property name="text">
                   <string>Only orbit for selected object</string>
@@ -5690,12 +5693,12 @@
  </resources>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroupDisplayedDSOCatalogs">
+  <buttongroup name="buttonGroupDisplayedDSOTypes">
    <property name="exclusive">
     <bool>false</bool>
    </property>
   </buttongroup>
-  <buttongroup name="buttonGroupDisplayedDSOTypes">
+  <buttongroup name="buttonGroupDisplayedDSOCatalogs">
    <property name="exclusive">
     <bool>false</bool>
    </property>
