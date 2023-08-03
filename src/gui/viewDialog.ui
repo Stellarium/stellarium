@@ -1550,7 +1550,7 @@
                <item>
                 <widget class="QCheckBox" name="planetOrbitPermanentCheckBox">
                  <property name="toolTip">
-                  <string>Show orbit even if planet is off screen</string>
+                  <string>Show orbit even if object is off screen</string>
                  </property>
                  <property name="text">
                   <string>permanently</string>
@@ -1689,17 +1689,27 @@
                   <string>Hide orbits of minor bodies.</string>
                  </property>
                  <property name="text">
-                  <string>Only orbits of major planets</string>
+                  <string>Only orbits of major planets...</string>
                  </property>
                 </widget>
                </item>
                <item>
                 <widget class="QCheckBox" name="planetIsolatedOrbitCheckBox">
                  <property name="toolTip">
-                  <string>Activate this option if you want to see orbit for selected planet and its moons.</string>
+                  <string>Show orbit only for selected SSO</string>
                  </property>
                  <property name="text">
-                  <string>Only orbit for selected object</string>
+                  <string>Only orbit for selected object...</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="planetOrbitsMoonCheckBox">
+                 <property name="toolTip">
+                  <string>Also show moons of selected object or planets.</string>
+                 </property>
+                 <property name="text">
+                  <string>... and moons</string>
                  </property>
                 </widget>
                </item>

@@ -66,6 +66,7 @@ class SolarSystem : public StelObjectModule
 	Q_PROPERTY(bool flagPlanetsOrbitsOnly		READ getFlagPlanetsOrbitsOnly		WRITE setFlagPlanetsOrbitsOnly		NOTIFY flagPlanetsOrbitsOnlyChanged)
 	Q_PROPERTY(bool flagPermanentOrbits		READ getFlagPermanentOrbits		WRITE setFlagPermanentOrbits		NOTIFY flagPermanentOrbitsChanged)
 	Q_PROPERTY(bool flagIsolatedOrbits		READ getFlagIsolatedOrbits		WRITE setFlagIsolatedOrbits		NOTIFY flagIsolatedOrbitsChanged)
+	Q_PROPERTY(bool flagOrbitsWithMoons		READ getFlagOrbitsWithMoons		WRITE setFlagOrbitsWithMoons		NOTIFY flagOrbitsWithMoonsChanged)
 	Q_PROPERTY(bool flagIsolatedTrails		READ getFlagIsolatedTrails		WRITE setFlagIsolatedTrails		NOTIFY flagIsolatedTrailsChanged)
 	Q_PROPERTY(int numberIsolatedTrails		READ getNumberIsolatedTrails		WRITE setNumberIsolatedTrails		NOTIFY numberIsolatedTrailsChanged)
 	Q_PROPERTY(bool flagLightTravelTime		READ getFlagLightTravelTime		WRITE setFlagLightTravelTime		NOTIFY flagLightTravelTimeChanged)
@@ -667,6 +668,11 @@ public slots:
 	//! Get the current value of the flag which enables showing of planets orbits only or not.
 	bool getFlagPlanetsOrbitsOnly(void) const;
 
+	//! Set flag which enables showing of planets orbits together mith orbits of their moons.
+	void setFlagOrbitsWithMoons(bool b);
+	//! Get the current value of the flag for showing of planets orbits together mith orbits of their moons.
+	bool getFlagOrbitsWithMoons(void) const;
+
 	//! Set flag which enabled the showing of solar corona when atmosphere is disabled (true) of draw the corona when total solar eclipses is happened only (false)
 	void setFlagPermanentSolarCorona(bool b) {	if (flagPermanentSolarCorona!=b)	{ flagPermanentSolarCorona = b; emit flagPermanentSolarCoronaChanged(b); } }
 	//! Get the current value of the flag which enables showing of solar corona when atmosphere is disabled or when total solar eclipses is happened only.
@@ -749,6 +755,7 @@ signals:
 	void flagPlanetsOrbitsOnlyChanged(bool b);
 	void flagPermanentOrbitsChanged(bool b);
 	void flagIsolatedOrbitsChanged(bool b);
+	void flagOrbitsWithMoonsChanged(bool b);
 	void flagIsolatedTrailsChanged(bool b);
 	void numberIsolatedTrailsChanged(int n);
 	void flagLightTravelTimeChanged(bool b);
@@ -1101,6 +1108,7 @@ private:
 	int trailsThickness;
 	bool flagIsolatedOrbits;
 	bool flagPlanetsOrbitsOnly;
+	bool flagOrbitsWithMoons;
 	bool ephemerisMarkersDisplayed;
 	bool ephemerisDatesDisplayed;
 	bool ephemerisMagnitudesDisplayed;

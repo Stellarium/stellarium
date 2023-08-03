@@ -88,6 +88,7 @@ SolarSystem::SolarSystem() : StelObjectModule()
 	, trailsThickness(1)
 	, flagIsolatedOrbits(true)
 	, flagPlanetsOrbitsOnly(false)
+	, flagOrbitsWithMoons(false)
 	, ephemerisMarkersDisplayed(true)
 	, ephemerisDatesDisplayed(false)
 	, ephemerisMagnitudesDisplayed(false)
@@ -119,6 +120,7 @@ SolarSystem::SolarSystem() : StelObjectModule()
 	connect(this, SIGNAL(flagOrbitsChanged(bool)),            this, SLOT(reconfigureOrbits()));
 	connect(this, SIGNAL(flagPlanetsOrbitsOnlyChanged(bool)), this, SLOT(reconfigureOrbits()));
 	connect(this, SIGNAL(flagIsolatedOrbitsChanged(bool)),    this, SLOT(reconfigureOrbits()));
+	connect(this, SIGNAL(flagOrbitsWithMoonsChanged(bool)),   this, SLOT(reconfigureOrbits()));
 }
 
 void SolarSystem::setFontSize(int newFontSize)
@@ -217,6 +219,7 @@ void SolarSystem::init()
 	setMaxTrailTimeExtent(conf->value("viewing/max_trail_time_extent", 1).toInt());
 	setFlagIsolatedOrbits(conf->value("viewing/flag_isolated_orbits", true).toBool());
 	setFlagPlanetsOrbitsOnly(conf->value("viewing/flag_planets_orbits_only", false).toBool());
+	setFlagOrbitsWithMoons(conf->value("viewing/flag_orbits_with_moons", false).toBool());
 	setFlagPermanentOrbits(conf->value("astro/flag_permanent_orbits", false).toBool());
 	setOrbitColorStyle(conf->value("astro/planets_orbits_color_style", "one_color").toString());
 
@@ -2624,16 +2627,19 @@ void SolarSystem::setFlagOrbits(bool b)
 // This method goes through all planets and sets orbit drawing as configured by several flags
 void SolarSystem::reconfigureOrbits()
 {
-	// we have: flagOrbits O, flagIsolatedOrbits I, flagPlanetsOrbitsOnly P, flagPermanentOrbits and a possibly selected planet S
+	// we have: flagOrbits O, flagIsolatedOrbits I, flagPlanetsOrbitsOnly P, flagOrbitsWithMoons M, flagPermanentOrbits and a possibly selected planet S
 	// permanentOrbits only influences local drawing of a single planet and can be ignored here.
-	// O S I P
-	// 0 X X X   NONE
-	// 1 0 1 X   NONE
-	// 1 X 0 0   ALL
-	// 1 X 0 1   all planets only
+	// O S I P M
+	// 0 X X X X  NONE
+	// 1 0 1 X X  NONE
+	// 1 X 0 0 X  ALL
+	// 1 X 0 1 0  all planets only
+	// 1 X 0 1 1  all planets with their moons only
 
-	// 1 1 1 0   only selected planet and orbits of its moon system
-	// 1 1 1 1   only selected SSO if it is a major planet
+	// 1 1 1 0 0  only selected SSO
+	// 1 1 1 0 1  only selected SSO and orbits of its moon system
+	// 1 1 1 1 0  only selected SSO if it is a major planet
+	// 1 1 1 1 1  only selected SSO if it is a major planet, plus its system of moons
 
 	if (!flagOrbits || (/* flagOrbits && */ flagIsolatedOrbits&&(!selected || selected==sun)))
 	{
@@ -2645,7 +2651,7 @@ void SolarSystem::reconfigureOrbits()
 	if (!flagIsolatedOrbits)
 	{
 		for (const auto& p : qAsConst(systemPlanets))
-			p->setFlagOrbits(!flagPlanetsOrbitsOnly || (p->getPlanetType()==Planet::isPlanet || (p->parent && p->parent->getPlanetType()==Planet::isPlanet) ));
+			p->setFlagOrbits(!flagPlanetsOrbitsOnly || (p->getPlanetType()==Planet::isPlanet || (flagOrbitsWithMoons && p->parent && p->parent->getPlanetType()==Planet::isPlanet) ));
 		return;
 	}
 	else // flagIsolatedOrbits && selected
@@ -2653,7 +2659,7 @@ void SolarSystem::reconfigureOrbits()
 		// Display only orbit for selected planet and its moons.
 		for (const auto& p : qAsConst(systemPlanets))
 			p->setFlagOrbits(   (p==selected && (  !flagPlanetsOrbitsOnly ||  p->getPlanetType()==Planet::isPlanet )
-					 || (p->getPlanetType()==Planet::isMoon && p->parent==selected ) ));
+					 || (flagOrbitsWithMoons && p->getPlanetType()==Planet::isMoon && p->parent==selected ) ));
 		return;
 	}
 }
@@ -2686,6 +2692,21 @@ void SolarSystem::setFlagPlanetsOrbitsOnly(bool b)
 bool SolarSystem::getFlagPlanetsOrbitsOnly() const
 {
 	return flagPlanetsOrbitsOnly;
+}
+
+void SolarSystem::setFlagOrbitsWithMoons(bool b)
+{
+	if(b!=flagOrbitsWithMoons)
+	{
+		flagOrbitsWithMoons = b;
+		StelApp::immediateSave("viewing/flag_orbits_with_moons", b);
+		emit flagOrbitsWithMoonsChanged(b);
+	}
+}
+
+bool SolarSystem::getFlagOrbitsWithMoons() const
+{
+	return flagOrbitsWithMoons;
 }
 
 // Set/Get planets names color
