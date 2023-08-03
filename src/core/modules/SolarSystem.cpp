@@ -2635,7 +2635,7 @@ void SolarSystem::reconfigureOrbits()
 	// 1 1 1 0   only selected planet and orbits of its moon system
 	// 1 1 1 1   only selected SSO if it is a major planet
 
-	if (!flagOrbits || (flagOrbits&&flagIsolatedOrbits&&(!selected || selected==sun)))
+	if (!flagOrbits || (/* flagOrbits && */ flagIsolatedOrbits&&(!selected || selected==sun)))
 	{
 		for (const auto& p : qAsConst(systemPlanets))
 			p->setFlagOrbits(false);
@@ -2645,73 +2645,17 @@ void SolarSystem::reconfigureOrbits()
 	if (!flagIsolatedOrbits)
 	{
 		for (const auto& p : qAsConst(systemPlanets))
-			if (!flagPlanetsOrbitsOnly || (flagPlanetsOrbitsOnly && (p->getPlanetType()==Planet::isPlanet || (p->parent && p->parent->getPlanetType()==Planet::isPlanet) )))
-				p->setFlagOrbits(true);
-			else
-				p->setFlagOrbits(false);
+			p->setFlagOrbits(!flagPlanetsOrbitsOnly || (p->getPlanetType()==Planet::isPlanet || (p->parent && p->parent->getPlanetType()==Planet::isPlanet) ));
 		return;
 	}
 	else // flagIsolatedOrbits && selected
 	{
 		// Display only orbit for selected planet and its moons.
 		for (const auto& p : qAsConst(systemPlanets))
-			if (   (p==selected && (  !flagPlanetsOrbitsOnly || (flagPlanetsOrbitsOnly && p->getPlanetType()==Planet::isPlanet ) )
-				|| (p->getPlanetType()==Planet::isMoon && p->parent==selected ) ))
-				p->setFlagOrbits(true);
-			else
-				p->setFlagOrbits(false);
+			p->setFlagOrbits(   (p==selected && (  !flagPlanetsOrbitsOnly ||  p->getPlanetType()==Planet::isPlanet )
+					 || (p->getPlanetType()==Planet::isMoon && p->parent==selected ) ));
 		return;
 	}
-
-/*
-	if (!selected || selected==sun)
-	{
-		if (flagPlanetsOrbitsOnly)
-		{
-			for (const auto& p : qAsConst(systemPlanets))
-			{
-				if (p->getPlanetType()==Planet::isPlanet)
-					p->setFlagOrbits(true);
-				else
-					p->setFlagOrbits(false);
-			}
-		}
-	}
-	else if (getFlagIsolatedOrbits()) // If a Planet is selected and orbits are on, fade out non-selected ones
-	{
-		if (flagPlanetsOrbitsOnly)
-		{
-			for (const auto& p : qAsConst(systemPlanets))
-			{
-				if (selected == p && p->getPlanetType()==Planet::isPlanet)
-					p->setFlagOrbits(b);
-				else
-					p->setFlagOrbits(false);
-			}
-		}
-		else
-		{
-			for (const auto& p : qAsConst(systemPlanets))
-			{
-				if (selected == p)
-					p->setFlagOrbits(b);
-				else
-					p->setFlagOrbits(false);
-			}
-		}
-	}
-	else
-	{
-		// A planet is selected and orbits are on - draw orbits for the planet and their moons
-		for (const auto& p : qAsConst(systemPlanets))
-		{
-			if (selected == p || selected == p->parent)
-				p->setFlagOrbits(b);
-			else
-				p->setFlagOrbits(false);
-		}
-	}
-	*/
 }
 
 void SolarSystem::setFlagIsolatedOrbits(bool b)
@@ -2719,12 +2663,8 @@ void SolarSystem::setFlagIsolatedOrbits(bool b)
 	if(b!=flagIsolatedOrbits)
 	{
 		flagIsolatedOrbits = b;
-		if (StelApp::getInstance().getFlagImmediateSave())
-			conf->setValue("viewing/flag_isolated_orbits", b);
-
+		StelApp::immediateSave("viewing/flag_isolated_orbits", b);
 		emit flagIsolatedOrbitsChanged(b);
-		// Reinstall flag for orbits to renew visibility of orbits
-		//setFlagOrbits(getFlagOrbits());
 	}
 }
 
@@ -2738,11 +2678,8 @@ void SolarSystem::setFlagPlanetsOrbitsOnly(bool b)
 	if(b!=flagPlanetsOrbitsOnly)
 	{
 		flagPlanetsOrbitsOnly = b;
-		if (StelApp::getInstance().getFlagImmediateSave())
-			conf->setValue("viewing/flag_planets_orbits_only", b);
+		StelApp::immediateSave("viewing/flag_planets_orbits_only", b);
 		emit flagPlanetsOrbitsOnlyChanged(b);
-		// Reinstall flag for orbits to renew visibility of orbits
-		//setFlagOrbits(getFlagOrbits());
 	}
 }
 
@@ -3330,8 +3267,7 @@ void SolarSystem::setFlagPermanentOrbits(bool b)
 	if (Planet::permanentDrawingOrbits!=b)
 	{
 		Planet::permanentDrawingOrbits=b;
-		if (StelApp::getInstance().getFlagImmediateSave())
-			conf->setValue("astro/flag_permanent_orbits", b);
+		StelApp::immediateSave("astro/flag_permanent_orbits", b);
 		emit flagPermanentOrbitsChanged(b);
 	}
 }
@@ -3346,8 +3282,7 @@ void SolarSystem::setOrbitsThickness(int v)
 	if (v!=Planet::orbitsThickness)
 	{
 		Planet::orbitsThickness=v;
-		if (StelApp::getInstance().getFlagImmediateSave())
-			conf->setValue("astro/object_orbits_thickness", v);
+		StelApp::immediateSave("astro/object_orbits_thickness", v);
 		emit orbitsThicknessChanged(v);
 	}
 }
