@@ -1266,6 +1266,13 @@ void StelApp::setFlagImmediateSave(bool b)
 	}
 }
 
+void StelApp::immediateSave(const QString &key, const QVariant &value)
+{
+	if (getInstance().getFlagImmediateSave())
+		getInstance().getSettings()->setValue(key, value);
+}
+
+
 // Update translations and font for sky everywhere in the program
 void StelApp::updateI18n()
 {

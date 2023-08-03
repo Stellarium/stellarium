@@ -242,6 +242,10 @@ public:
 	static void initStatic();
 	static void deinitStatic();
 
+	//! Allow immediate storing of config.ini entries.
+	//! Storing only takes place if property StelApp.flagImmediateSave is set.
+	static void immediateSave(const QString &key, const QVariant &value);
+
 	//! Add a progression indicator to the GUI (if applicable).
 	//! @return a controller which can be used to indicate the current status.
 	//! The StelApp instance remains the owner of the controller.
