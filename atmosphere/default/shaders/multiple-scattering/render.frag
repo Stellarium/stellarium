@@ -274,8 +274,10 @@ void main()
         // The first factor here, with dot(view,sun), results in removal of the
         // forward scattering peak. The second factor, with tanh, makes the
         // transition near sunset from a bit above horizon to a bit below smoother.
+        // We limit the argument of tanh, because some GLSL implementations (e.g.
+        // AMD Radeon RX 5700 XT) overflow when computing it and yield NaN.
         pseudoMirrorDepth = sqr(max(0, dot(viewDir, sunDirection))) *
-                               tanh(150 * (newViewElev - horizElev) / (PI/2 - horizElev));
+                               tanh(min(10, 150 * (newViewElev - horizElev) / (PI/2 - horizElev)));
     }
 
     CONST float cosSunZenithAngle =dot(zenith,sunDirection);
