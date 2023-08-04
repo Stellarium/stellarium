@@ -2087,7 +2087,6 @@ void SolarSystem::setSelected(PlanetP obj)
 		selected.clear();
 	// Undraw other objects hints, orbit, trails etc..
 	setFlagHints(getFlagHints());
-	//setFlagOrbits(getFlagOrbits());
 	reconfigureOrbits();
 }
 
@@ -2641,7 +2640,7 @@ void SolarSystem::reconfigureOrbits()
 	// 1 1 1 1 0  only selected SSO if it is a major planet
 	// 1 1 1 1 1  only selected SSO if it is a major planet, plus its system of moons
 
-	if (!flagOrbits || (/* flagOrbits && */ flagIsolatedOrbits&&(!selected || selected==sun)))
+	if (!flagOrbits || (flagIsolatedOrbits && (!selected || selected==sun)))
 	{
 		for (const auto& p : qAsConst(systemPlanets))
 			p->setFlagOrbits(false);
@@ -2656,7 +2655,7 @@ void SolarSystem::reconfigureOrbits()
 	}
 	else // flagIsolatedOrbits && selected
 	{
-		// Display only orbit for selected planet and its moons.
+		// Display only orbit for selected planet and, if requested, its moons.
 		for (const auto& p : qAsConst(systemPlanets))
 			p->setFlagOrbits(   (p==selected && (  !flagPlanetsOrbitsOnly ||  p->getPlanetType()==Planet::isPlanet )
 					 || (flagOrbitsWithMoons && p->getPlanetType()==Planet::isMoon && p->parent==selected ) ));
