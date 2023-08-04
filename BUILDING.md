@@ -212,8 +212,8 @@ Stellarium will build without QtWebEngine support. The result is shown in the sy
 - To get the source code of Stellarium you need to install some git environment. 
   [Git for Windows](https://git-scm.com/download/win) seems ok, or the Git Bash and Git GUI, whatever 
   seems suitable for you. But it is not necessary.
-- Get the [latest version of Qt5 from Qt Company](http://www.qt.io/download-open-source/). We recommend 
-  to use Qt 5.15 or, better, Qt6. For Qt5 you must select Qt Script and msvc2019 among so many checkboxes.
+- Get the [latest version of Qt from Qt Company](http://www.qt.io/download-open-source/). We recommend 
+  to use Qt 5.15.2 or, better, Qt6. For Qt5 you must select Qt Script and msvc2019 among so many checkboxes.
 
 After installing all required libraries and tools you should configure the build environment.
 
@@ -221,6 +221,9 @@ Add `C:\Qt\Qt5.15.2` to your `PATH` variable - you should add string `C:\Qt\Qt5.
 for 32-bit or `C:\Qt\Qt5.15.2\msvc2019_64;C:\Qt\Qt5.15.2\msvc2019_64\bin` for 64-bit to `PATH` variable.
 (Replace the version numbers of Qt and the version of Visual Studio (2017/2019) with the version that you 
 have installed)
+If you also want to run the ShowMySky sky model, add another directory to the PATH variable. This depends on your build environment. 
+If builds are made into `D:\StelDev\GIT\build-stellarium-Desktop_Qt_6_5_1_MSVC2019_64bit-Release\`, this would be 
+`D:\StelDev\GIT\build-stellarium-Desktop_Qt_6_5_1_MSVC2019_64bit-Release\_deps\showmysky-qt6-build\ShowMySky`
 
 **ANGLE issues:**
 
