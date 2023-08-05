@@ -2657,8 +2657,8 @@ void SolarSystem::reconfigureOrbits()
 	{
 		// Display only orbit for selected planet and, if requested, its moons.
 		for (const auto& p : qAsConst(systemPlanets))
-			p->setFlagOrbits(   (p==selected && (  !flagPlanetsOrbitsOnly ||  p->getPlanetType()==Planet::isPlanet )
-					 || (flagOrbitsWithMoons && p->getPlanetType()==Planet::isMoon && p->parent==selected ) ));
+			p->setFlagOrbits(   (p==selected && (  !flagPlanetsOrbitsOnly ||  p->getPlanetType()==Planet::isPlanet ) )
+					 || (flagOrbitsWithMoons && p->getPlanetType()==Planet::isMoon && p->parent==selected ) );
 		return;
 	}
 }
