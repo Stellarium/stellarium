@@ -445,6 +445,7 @@ void StelApp::init(QSettings* conf)
 
 	setScreenFontSize(confSettings->value("gui/screen_font_size", 13).toInt());
 	setGuiFontSize(confSettings->value("gui/gui_font_size", 13).toInt());
+	setFlagImmediateSave(confSettings->value("gui/immediate_save_details", false).toBool());
 
 	core = new StelCore();
 	if (!fuzzyEquals(saveProjW, -1.) && !fuzzyEquals(saveProjH, -1.))
@@ -1255,6 +1256,22 @@ Vec3f StelApp::getDaylightInfoColor() const
 {
 	return daylightInfoColor;
 }
+
+void StelApp::setFlagImmediateSave(bool b)
+{
+	if (flagImmediateSave!=b)
+	{
+		flagImmediateSave = b;
+		emit flagImmediateSaveChanged(b);
+	}
+}
+
+void StelApp::immediateSave(const QString &key, const QVariant &value)
+{
+	if (getInstance().getFlagImmediateSave())
+		getInstance().getSettings()->setValue(key, value);
+}
+
 
 // Update translations and font for sky everywhere in the program
 void StelApp::updateI18n()
