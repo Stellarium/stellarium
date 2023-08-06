@@ -40,6 +40,7 @@ class NomenclatureMgr : public StelObjectModule
 	Q_PROPERTY(bool flagShowTerminatorZoneOnly       READ getFlagShowTerminatorZoneOnly      WRITE setFlagShowTerminatorZoneOnly      NOTIFY flagShowTerminatorZoneOnlyChanged)
 	Q_PROPERTY(int terminatorMinAltitude             READ getTerminatorMinAltitude           WRITE setTerminatorMinAltitude           NOTIFY terminatorMinAltitudeChanged)
 	Q_PROPERTY(int terminatorMaxAltitude             READ getTerminatorMaxAltitude           WRITE setTerminatorMaxAltitude           NOTIFY terminatorMaxAltitudeChanged)
+	Q_PROPERTY(bool flagOutlineCraters               READ getFlagOutlineCraters              WRITE setFlagOutlineCraters              NOTIFY flagOutlineCratersChanged)
 	Q_PROPERTY(bool flagHideLocalNomenclature        READ getFlagHideLocalNomenclature       WRITE setFlagHideLocalNomenclature       NOTIFY localNomenclatureHidingChanged)
 	Q_PROPERTY(bool specialNomenclatureOnlyDisplayed READ getFlagShowSpecialNomenclatureOnly WRITE setFlagShowSpecialNomenclatureOnly NOTIFY specialNomenclatureOnlyDisplayingChanged)
 	Q_PROPERTY(Vec3f nomenclatureColor               READ getColor WRITE setColor NOTIFY nomenclatureColorChanged)
@@ -119,6 +120,11 @@ public slots:
 	//! Get maximum solar altitude (degrees) to draw only nomenclature along the terminator.
 	int getTerminatorMaxAltitude() const;
 
+	//! Set flag which determines if craters and satellite features (which are usually also craters) are outlined as ellipses.
+	void setFlagOutlineCraters(bool b);
+	//! Get the current value of the flag which determines if craters and satellite features (which are usually also craters) are outlined as ellipses.
+	bool getFlagOutlineCraters() const;
+
 	//! Set flag which determines if nomenclature labels are drawn or hidden on the celestial body of observer.
 	void setFlagHideLocalNomenclature(bool b);
 	//! Get the current value of the flag which determines if nomenclature labels are drawn or hidden on the celestial body of observer.
@@ -139,6 +145,7 @@ signals:
 	void flagShowTerminatorZoneOnlyChanged(bool b);
 	void terminatorMinAltitudeChanged(int deg);
 	void terminatorMaxAltitudeChanged(int deg);
+	void flagOutlineCratersChanged(bool b);
 	void localNomenclatureHidingChanged(bool b);
 	void specialNomenclatureOnlyDisplayingChanged(bool b);
 	void nomenclatureColorChanged(const Vec3f & color) const;
@@ -157,7 +164,6 @@ private:
 
 	// Font used for displaying our text
 	QFont font;
-	QSettings* conf;
 	StelTextureSP texPointer;	
 	QMultiHash<PlanetP, NomenclatureItemP> nomenclatureItems;
 };

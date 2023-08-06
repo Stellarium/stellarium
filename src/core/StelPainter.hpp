@@ -135,6 +135,12 @@ public:
 	//! Draw a simple circle, 2d viewport coordinates in pixel
 	void drawCircle(float x, float y, float r);
 
+	//! Draw a simple ellipse, 2d viewport coordinates in pixel
+	//! @param rx: radius in x axis
+	//! @param ry: radius in y axis
+	//! @param angle: rotation (counterclockwise), radians [0..2pi]
+	void drawEllipse(double x, double y, double rx, double ry, double angle);
+
 	//! Draw a square using the current texture at the given projected 2d position.
 	//! This method is not thread safe.
 	//! @param x x position in the viewport in pixel.

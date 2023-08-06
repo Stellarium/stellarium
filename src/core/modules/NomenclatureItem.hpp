@@ -212,6 +212,7 @@ private:
 	mutable Vec3d XYZ;     // holds J2000 position in space (i.e. including planet position, offset from planetocenter)
 	mutable double jde;    // jde time of XYZ value
 	static Vec3f color;
+	static bool flagOutlineCraters; // draw craters and satellite features as ellipses?
 	static bool hideLocalNomenclature;
 	static bool showTerminatorZoneOnly;
 	static int terminatorMinAltitude;

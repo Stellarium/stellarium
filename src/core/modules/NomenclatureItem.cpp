@@ -18,7 +18,10 @@
  */
 
 #include "NomenclatureItem.hpp"
+#include "StelModuleMgr.hpp"
+#include "StelMovementMgr.hpp"
 #include "StelObject.hpp"
+#include "StelObserver.hpp"
 #include "StelPainter.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
@@ -28,6 +31,7 @@
 
 const QString NomenclatureItem::NOMENCLATURE_TYPE = QStringLiteral("NomenclatureItem");
 Vec3f NomenclatureItem::color = Vec3f(0.1f,1.0f,0.1f);
+bool NomenclatureItem::flagOutlineCraters = false;
 bool NomenclatureItem::hideLocalNomenclature = false;
 bool NomenclatureItem::showTerminatorZoneOnly = false;
 int NomenclatureItem::terminatorMinAltitude=-2;
@@ -342,7 +346,7 @@ Vec3d NomenclatureItem::getJ2000EquatorialPos(const StelCore* core) const
 	return XYZ;
 }
 
-// Return apparent semidiameter
+// Return apparent semidiameter in degrees
 double NomenclatureItem::getAngularRadius(const StelCore* core) const
 {
 	return std::atan2(0.5*size*planet->getSphereScale()/AU, getJ2000EquatorialPos(core).norm()) * M_180_PI;
@@ -355,46 +359,76 @@ float NomenclatureItem::getAngularDiameterRatio(const StelCore *core) const
 
 void NomenclatureItem::draw(StelCore* core, StelPainter *painter)
 {
+	// show special points only?
+	if (getFlagShowSpecialNomenclatureOnly() && nType<NomenclatureItem::niSpecialPointPole)
+		return;
+
+	if (getFlagHideLocalNomenclature() && planet==core->getCurrentPlanet())
+		return;
+
 	// Called by NomenclatureMgr, so we don't need to check if labelsFader is true.
 	// The painter has been set to enable blending.
 	const Vec3d equPos = planet->getJ2000EquatorialPos(core);
-	Vec3d XYZ = getJ2000EquatorialPos(core);
+	const Vec3d XYZ = getJ2000EquatorialPos(core);
 
 	// In case we are located at a labeled site, don't show this label or any labels within 150 km. Else we have bad flicker...
 	if (XYZ.normSquared() < 150.*150.*AU_KM*AU_KM )
 		return;
 
-	if (getFlagHideLocalNomenclature())
-	{
-		// Check the state when needed only!
-		if (planet==core->getCurrentPlanet())
-			return;
-	}
+	const double screenRadius = getAngularRadius(core)*M_PI_180*static_cast<double>(painter->getProjector()->getPixelPerRadAtCenter());
+
+	// We can use ratio of angular size to the FOV to checking visibility of features also!
+	// double scale = getAngularSize(core)/painter->getProjector()->getFov();
+	// if (painter->getProjector()->projectCheck(XYZ, srcPos) && (dist >= XYZ.length()) && (scale>0.04 && scale<0.5))
 
 	// check visibility of feature
 	Vec3d srcPos;
 	const float scale = getAngularDiameterRatio(core);
-	NomenclatureItem::NomenclatureItemType niType = getNomenclatureType();
-
-	if (getFlagShowSpecialNomenclatureOnly())
-	{
-		// show special points only
-		if (niType<NomenclatureItem::niSpecialPointPole)
-			return;
-	}
 
 	if (painter->getProjector()->projectCheck(XYZ, srcPos) && (equPos.normSquared() >= XYZ.normSquared())
-	    && (scale>0.04f && (scale<0.5f || niType>=NomenclatureItem::niSpecialPointPole )))
+	    && (scale>0.04f && (scale<0.5f || nType>=NomenclatureItem::niSpecialPointPole )))
 	{
 		const float solarAltitude=getSolarAltitude(core);
 		// Throw out real items if not along the terminator?
-		if ( (niType<NomenclatureItem::niSpecialPointPole) && showTerminatorZoneOnly && (solarAltitude > terminatorMaxAltitude || solarAltitude < terminatorMinAltitude) )
+		if ( (nType<NomenclatureItem::niSpecialPointPole) && showTerminatorZoneOnly && (solarAltitude > terminatorMaxAltitude || solarAltitude < terminatorMinAltitude) )
 			return;
-		float brightness=(solarAltitude<0. ? 0.25f : 1.0f);
-		if (niType>=NomenclatureItem::niSpecialPointPole)
-			brightness = 0.5f;
+		const float brightness=(nType>=NomenclatureItem::niSpecialPointPole ? 0.5f : (solarAltitude<0. ? 0.25f : 1.0f));
 		painter->setColor(color*brightness, labelsFader.getInterstate());
 		painter->drawCircle(static_cast<float>(srcPos[0]), static_cast<float>(srcPos[1]), 2.f);
+		// Highlight a few mostly circular classes with ellipses:
+		// - Craters
+		// - Satellite features (presumably all of these are satellite craters)
+		// - Lunar Maria. Mare Frigoris is elongated, and an ellipse would look stupid.
+		if (flagOutlineCraters && (nType==niCrater || nType==niSatelliteFeature || (nType==niMare && englishName!="Mare Frigoris")))
+		{
+			// Compute aspectRatio and angle from position of planet and own position, parallactic angle, ...
+			const double distDegrees=equPos.angle(XYZ)*M_180_PI; // angular distance from planet centre position
+			const double plRadiusDeg=planet->getAngularRadius(core);
+			const double sinDistCenter= distDegrees/plRadiusDeg; // should be 0...1
+			if (sinDistCenter<0.9999) // exclude any edge ellipses which would be hanging over the limb.
+			{
+				const double angleDistCenterRad=asin(qMin(0.9999, sinDistCenter)); // 0..pi/2 on the lunar/planet sphere
+				const double aspectRatio=cos(angleDistCenterRad);
+				// Exclude further ellipses which would overshoot limb.
+				if (getAngularRadius(core)*qMax(0.0001,aspectRatio)+distDegrees < plRadiusDeg )
+				{
+					const Vec3d equPosNow = planet->getEquinoxEquatorialPos(core);
+					const Vec3d XYZNow = getEquinoxEquatorialPos(core);
+					double ra, de, raPl, dePl;
+					StelUtils::rectToSphe(&ra, &de, XYZNow);
+					StelUtils::rectToSphe(&raPl, &dePl, equPosNow);
+					double dRA=StelUtils::fmodpos(ra-raPl, 2.*M_PI);
+					if(dRA>M_PI)
+						dRA-=2.*M_PI;
+					const double angle=atan2(dRA, de-dePl);
+					StelMovementMgr::MountMode mountMode=GETSTELMODULE(StelMovementMgr)->getMountMode();
+					const double par = mountMode==StelMovementMgr::MountAltAzimuthal ? static_cast<double>(getParallacticAngle(core)) : 0.;
+					painter->drawEllipse(srcPos[0], srcPos[1], screenRadius, screenRadius*qMax(0.0001,aspectRatio), angle-par );
+				}
+			}
+			//else
+			//	qWarning() << "Sine of Distance" << sinDistCenter << ">0.99975 encountered for crater " << englishName << "at " << longitude << "/" << latitude;
+		}
 		painter->drawText(static_cast<float>(srcPos[0]), static_cast<float>(srcPos[1]), nameI18n, 0, 5.f, 5.f, false);
 	}
 }
