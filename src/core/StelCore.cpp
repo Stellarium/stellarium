@@ -1265,7 +1265,7 @@ void StelCore::moveObserverToSelected()
 				StelLocation loc(ni->getEnglishName(), "", "", ni->getPlanet()->getEnglishName(), ni->getLongitude(), ni->getLatitude(), 0, 0, getCurrentTimeZone(), 1, 'X', ni->getPlanet()->getEnglishName());
 				loc.lightPollutionLuminance = 0; // be dead sure it's zero!
 
-				moveObserverTo(loc, 1, 1, pl->getEnglishName());
+				moveObserverTo(loc, 1, 1, ni->getPlanet()->getEnglishName());
 				objmgr->unSelect(); // no use to keep it: Marker will flicker around the screen.
 			}
 		}
