@@ -189,7 +189,7 @@ void NomenclatureMgr::loadNomenclature()
 		QString name, planet = "", planetName = "", context = "";
 		NomenclatureItem::NomenclatureItemType ntype;
 		double latitude, longitude, size;
-		QStringList faultPlanets;
+		QStringList missingPlanets;
 
 		while (!buf.atEnd())
 		{
@@ -246,16 +246,17 @@ void NomenclatureMgr::loadNomenclature()
 					readOk++;
 				}
 				else
-					faultPlanets << planet;
+					missingPlanets.append(planet);
 			}
 		}
 
 		buf.close();
 		qDebug() << "Loaded" << readOk << "/" << totalRecords << "items of planetary surface nomenclature";
 
-		faultPlanets.removeDuplicates();
-		if (faultPlanets.size()>0)
-			qDebug() << "WARNING - Cannot find these planets to assign nomenclature items:" << faultPlanets.join(", ");
+		missingPlanets.removeDuplicates();
+		if (!missingPlanets.isEmpty())
+			// Nothing to worry about - We still don't include all objects.
+			qInfo() << "INFO: Cannot find these planetary objects to assign nomenclature items:" << missingPlanets.join(", ");
 	}
 }
 
