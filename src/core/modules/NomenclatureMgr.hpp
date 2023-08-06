@@ -164,7 +164,6 @@ private:
 
 	// Font used for displaying our text
 	QFont font;
-	QSettings* conf;
 	StelTextureSP texPointer;	
 	QMultiHash<PlanetP, NomenclatureItemP> nomenclatureItems;
 };
