@@ -428,6 +428,16 @@ private:
 	static QOpenGLShaderProgram* colorShaderProgram;
 	static BasicShaderVars colorShaderVars;
 
+	static QOpenGLShaderProgram* textShaderProgram;
+	struct TextShaderVars {
+		int projectionMatrix;
+		int texCoord;
+		int vertex;
+		int textColor;
+		int texture;
+	};
+	static TextShaderVars textShaderVars;
+
 	static QOpenGLShaderProgram* texturesShaderProgram;
 	struct TexturesShaderVars {
 		int projectionMatrix;

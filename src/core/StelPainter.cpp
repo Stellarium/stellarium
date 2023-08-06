@@ -51,6 +51,7 @@ QMutex* StelPainter::globalMutex = new QMutex();
 
 QCache<QByteArray, StringTexture> StelPainter::texCache(TEX_CACHE_LIMIT);
 QOpenGLShaderProgram* StelPainter::texturesShaderProgram=Q_NULLPTR;
+QOpenGLShaderProgram* StelPainter::textShaderProgram=Q_NULLPTR;
 QOpenGLShaderProgram* StelPainter::basicShaderProgram=Q_NULLPTR;
 QOpenGLShaderProgram* StelPainter::colorShaderProgram=Q_NULLPTR;
 QOpenGLShaderProgram* StelPainter::texturesColorShaderProgram=Q_NULLPTR;
@@ -58,6 +59,7 @@ QOpenGLShaderProgram* StelPainter::wideLineShaderProgram=Q_NULLPTR;
 QOpenGLShaderProgram* StelPainter::colorfulWideLineShaderProgram=Q_NULLPTR;
 StelPainter::BasicShaderVars StelPainter::basicShaderVars;
 StelPainter::TexturesShaderVars StelPainter::texturesShaderVars;
+StelPainter::TextShaderVars StelPainter::textShaderVars;
 StelPainter::BasicShaderVars StelPainter::colorShaderVars;
 StelPainter::TexturesColorShaderVars StelPainter::texturesColorShaderVars;
 StelPainter::WideLineShaderVars StelPainter::wideLineShaderVars;
@@ -665,9 +667,6 @@ struct StringTexture
 
 StringTexture* StelPainter::getTextTexture(const QString& str, int pixelSize) const
 {
-	// Render first the text into a QPixmap, then create a QOpenGLTexture
-	// from it.  We could optimize by directly using a QImage, but for some
-	// reason the result is not exactly the same than with a QPixmap.
 	QByteArray hash = str.toUtf8() + QByteArray::number(pixelSize);
 	StringTexture* cachedTex = texCache.object(hash);
 	if (cachedTex)
@@ -679,14 +678,15 @@ StringTexture* StelPainter::getTextTexture(const QString& str, int pixelSize) co
 	int w = strRect.width()+1+static_cast<int>(0.02f*strRect.width());
 	int h = strRect.height();
 
-	QPixmap strImage = QPixmap(StelUtils::getBiggerPowerOfTwo(w), StelUtils::getBiggerPowerOfTwo(h));
-	strImage.fill(Qt::transparent);
+	QImage strImage(StelUtils::getBiggerPowerOfTwo(w), StelUtils::getBiggerPowerOfTwo(h),
+	                QImage::Format_RGBX8888);
+	strImage.fill(Qt::black);
 	QPainter painter(&strImage);
 	painter.setRenderHints(QPainter::TextAntialiasing);
 	painter.setFont(tmpFont);
 	painter.setPen(Qt::white);
 	painter.drawText(-strRect.x(), -strRect.y(), str);
-	StringTexture* newTex = new StringTexture(new QOpenGLTexture(strImage.toImage()), QSize(w, h), QPoint(strRect.x(), -(strRect.y()+h)));
+	StringTexture* newTex = new StringTexture(new QOpenGLTexture(strImage), QSize(w, h), QPoint(strRect.x(), -(strRect.y()+h)));
 	newTex->texture->setMinMagFilters(QOpenGLTexture::Linear, QOpenGLTexture::Linear);
 	texCache.insert(hash, newTex, 3*w*h);
 	// simply returning newTex is dangerous as the object is owned by the cache now. (Coverity Scan barks.)
@@ -745,7 +745,44 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 		setBlending(true);
 		enableClientStates(true, true);
 		setVertexPointer(2, GL_FLOAT, vertexData);
-		drawFromArray(TriangleStrip, 4, 0, false);
+
+		const Mat4f& m = getProjector()->getProjectionMatrix();
+		const QMatrix4x4 qMat(m[0], m[4], m[8], m[12],
+		                      m[1], m[5], m[9], m[13],
+		                      m[2], m[6], m[10], m[14],
+		                      m[3], m[7], m[11], m[15]);
+
+		vao->bind();
+		verticesVBO->bind();
+		const GLsizeiptr vertexCount = 4;
+
+		auto& pr = *textShaderProgram;
+		pr.bind();
+
+		const auto bufferSize = vertexArray.vertexSizeInBytes()*vertexCount +
+		                        texCoordArray.vertexSizeInBytes()*vertexCount;
+		verticesVBO->allocate(bufferSize);
+		const auto vertexDataSize = vertexArray.vertexSizeInBytes()*vertexCount;
+		verticesVBO->write(0, vertexArray.pointer, vertexDataSize);
+		const auto texCoordDataOffset = vertexDataSize;
+		const auto texCoordDataSize = texCoordArray.vertexSizeInBytes()*vertexCount;
+		verticesVBO->write(texCoordDataOffset, texCoordArray.pointer, texCoordDataSize);
+
+		pr.setAttributeBuffer(textShaderVars.vertex, vertexArray.type, 0, vertexArray.size);
+		pr.enableAttributeArray(textShaderVars.vertex);
+		pr.setUniformValue(textShaderVars.projectionMatrix, qMat);
+		pr.setUniformValue(textShaderVars.textColor, currentColor.toQVector());
+		pr.setAttributeBuffer(textShaderVars.texCoord, texCoordArray.type,
+		                      texCoordDataOffset, texCoordArray.size);
+		pr.enableAttributeArray(textShaderVars.texCoord);
+
+		glDrawArrays(TriangleStrip, 0, vertexCount);
+
+		verticesVBO->release();
+		vao->release();
+
+		pr.release();
+
 		setBlending(oldBlending, oldSrc, oldDst);
 		enableClientStates(false, false);
 		tex->texture->release();
@@ -2094,6 +2131,48 @@ void StelPainter::initGLShaders()
 	colorShaderVars.color = colorShaderProgram->attributeLocation("color");
 	colorShaderVars.vertex = colorShaderProgram->attributeLocation("vertex");
 	
+	// Text shader program
+	QOpenGLShader textVShader(QOpenGLShader::Vertex);
+	const auto textVSrc =
+		StelOpenGL::globalShaderPrefix(StelOpenGL::VERTEX_SHADER) + R"(
+ATTRIBUTE highp vec3 vertex;
+ATTRIBUTE mediump vec2 texCoord;
+uniform mediump mat4 projectionMatrix;
+VARYING mediump vec2 texc;
+void main()
+{
+	gl_Position = projectionMatrix * vec4(vertex, 1.);
+	texc = texCoord;
+})";
+	textVShader.compileSourceCode(textVSrc);
+	if (!textVShader.log().isEmpty())
+		qWarning().noquote() << "StelPainter: Warnings while compiling text vertex shader: " << textVShader.log();
+
+	QOpenGLShader textFShader(QOpenGLShader::Fragment);
+	const auto textFSrc =
+		StelOpenGL::globalShaderPrefix(StelOpenGL::FRAGMENT_SHADER) + R"(
+VARYING mediump vec2 texc;
+uniform sampler2D tex;
+uniform mediump vec4 textColor;
+void main()
+{
+	float mask = texture2D(tex, texc).r;
+	FRAG_COLOR = vec4(textColor.rgb, textColor.a*mask);
+})";
+	textFShader.compileSourceCode(textFSrc);
+	if (!textFShader.log().isEmpty())
+		qWarning().noquote() << "StelPainter: Warnings while compiling text fragment shader: " << textFShader.log();
+
+	textShaderProgram = new QOpenGLShaderProgram(QOpenGLContext::currentContext());
+	textShaderProgram->addShader(&textVShader);
+	textShaderProgram->addShader(&textFShader);
+	linkProg(textShaderProgram, "textShaderProgram");
+	textShaderVars.projectionMatrix = textShaderProgram->uniformLocation("projectionMatrix");
+	textShaderVars.texCoord = textShaderProgram->attributeLocation("texCoord");
+	textShaderVars.vertex = textShaderProgram->attributeLocation("vertex");
+	textShaderVars.textColor = textShaderProgram->uniformLocation("textColor");
+	textShaderVars.texture = textShaderProgram->uniformLocation("tex");
+
 	// Basic texture shader program
 	QOpenGLShader vshader2(QOpenGLShader::Vertex);
 	const auto vsrc2 =
