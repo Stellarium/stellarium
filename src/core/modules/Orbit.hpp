@@ -129,6 +129,7 @@ public:
 	//! @param centralMass in units of Solar masses
 	static double calculateSiderealPeriod(const double semiMajorAxis, const double centralMass);
 	double getEpochJDE() const { return epochJDE; }
+	double getOrbitGood() const {return orbitGood; }
 
 private:
 	const double epochJDE; //!< epoch (date of validity) of the elements.

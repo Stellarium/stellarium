@@ -1843,9 +1843,10 @@ void Planet::setSiderealPeriod(const double siderealPeriod)
 	this->siderealPeriod = siderealPeriod;
 	if (orbitPtr && pType!=isObserver)
 	{
-		const double semiMajorAxis=static_cast<KeplerOrbit*>(orbitPtr)->getSemimajorAxis();
-		const double eccentricity=static_cast<KeplerOrbit*>(orbitPtr)->getEccentricity();
-		if (semiMajorAxis>0 && eccentricity<0.9)
+		const KeplerOrbit *orbit=static_cast<KeplerOrbit*>(orbitPtr);
+		const double semiMajorAxis=orbit->getSemimajorAxis();
+		const double eccentricity=orbit->getEccentricity();
+		if (semiMajorAxis>0 && eccentricity<0.99)
 		{
 			//qDebug() << "Planet " << englishName << "replace siderealPeriod " << re.siderealPeriod << "by";
 			this->siderealPeriod=static_cast<KeplerOrbit*>(orbitPtr)->calculateSiderealPeriod();
@@ -1853,9 +1854,14 @@ void Planet::setSiderealPeriod(const double siderealPeriod)
 			closeOrbit=true;
 		}
 		else
+		{
 			closeOrbit=false;
+			deltaOrbitJDE = orbit->getOrbitGood()/ORBIT_SEGMENTS;
+		}
 	}
-	deltaOrbitJDE = siderealPeriod/ORBIT_SEGMENTS;
+	// For non-periodic comets, we have already set this to use orbit_good! This will then show an open segment.
+	if (siderealPeriod>0.)
+		deltaOrbitJDE = siderealPeriod/ORBIT_SEGMENTS;
 }
 
 // A Planet's own eclipticPos is in VSOP87 ref. frame (practically equal to ecliptic of J2000 for us) coordinates relative to the parent body (sun, planet).
@@ -4930,6 +4936,10 @@ Vec3f Planet::getCurrentOrbitColor() const
 void Planet::computeOrbit()
 {
 	double dateJDE = lastJDE;
+	// For open Kepler orbits, compute only the static segment around epoch which was defined by orbit_good!
+	KeplerOrbit *keplerOrbit=static_cast<KeplerOrbit*>(orbitPtr);
+	if (keplerOrbit && !closeOrbit)
+		dateJDE = keplerOrbit->getEpochJDE();
 	double calc_date;
 	Vec3d parentPos;
 	if (parent)
@@ -4947,12 +4957,10 @@ void Planet::computeOrbit()
 	}
 }
 
-// draw orbital path of Planet
+// draw orbital path of Planet. For objects on open Kepler orbits, draw orbital segment of orbit_good days around epoch.
 void Planet::drawOrbit(const StelCore* core)
 {
 	if (!static_cast<bool>(orbitFader.getInterstate()))
-		return;
-	if (!static_cast<bool>(siderealPeriod))
 		return;
 	if (hidden || (pType==isObserver)) return;
 	if (orbitPtr && pType>=isArtificial)
@@ -4974,11 +4982,14 @@ void Planet::drawOrbit(const StelCore* core)
 
 	sPainter.setColor(getCurrentOrbitColor(), orbitFader.getInterstate());
 	Vec3d onscreen;
-	// special case - use current Planet position as center vertex so that draws
-	// on its orbit all the time (since segmented rather than smooth curve)
-	Vec3d savePos = orbit[ORBIT_SEGMENTS/2];
-	orbit[ORBIT_SEGMENTS/2]=getHeliocentricEclipticPos()+aberrationPush;
-	orbit[ORBIT_SEGMENTS]=orbit[0];
+	const Vec3d savePos = orbit[ORBIT_SEGMENTS/2];
+	if (closeOrbit)
+	{
+		// special case - use current Planet position as center vertex so that draws
+		// on its orbit all the time (since orbit is shown as segmented rather than smooth curve)
+		orbit[ORBIT_SEGMENTS/2]=getHeliocentricEclipticPos()+aberrationPush;
+		orbit[ORBIT_SEGMENTS]=orbit[0];
+	}
 	int nbIter = closeOrbit ? ORBIT_SEGMENTS : ORBIT_SEGMENTS-1;
 	QVarLengthArray<float, 1024> vertexArray;
 
