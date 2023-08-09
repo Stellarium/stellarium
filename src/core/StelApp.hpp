@@ -20,10 +20,13 @@
 #ifndef STELAPP_HPP
 #define STELAPP_HPP
 
+#include <memory>
+#include <qopengl.h>
 #include <qguiapplication.h>
 #include <QString>
 #include <QObject>
 #include <QRandomGenerator>
+#include "StelTextureTypes.hpp"
 #include "StelModule.hpp"
 #include "VecMath.hpp"
 
@@ -37,6 +40,9 @@ class StelMainView;
 class StelSkyCultureMgr;
 class StelViewportEffect;
 class QOpenGLFramebufferObject;
+class QOpenGLVertexArrayObject;
+class QOpenGLShaderProgram;
+class QOpenGLBuffer;
 class QOpenGLFunctions;
 class QSettings;
 class QNetworkAccessManager;
@@ -81,6 +87,7 @@ class StelApp : public QObject
 	Q_PROPERTY(Vec3f daylightInfoColor	READ getDaylightInfoColor	WRITE setDaylightInfoColor	 NOTIFY daylightInfoColorChanged)
 	Q_PROPERTY(int  screenFontSize          READ getScreenFontSize          WRITE setScreenFontSize          NOTIFY screenFontSizeChanged)
 	Q_PROPERTY(int  guiFontSize             READ getGuiFontSize             WRITE setGuiFontSize             NOTIFY guiFontSizeChanged)
+	Q_PROPERTY(bool flagImmediateSave       READ getFlagImmediateSave       WRITE setFlagImmediateSave       NOTIFY flagImmediateSaveChanged)
 
 	Q_PROPERTY(QString version READ getVersion CONSTANT)
 
@@ -235,6 +242,10 @@ public:
 	static void initStatic();
 	static void deinitStatic();
 
+	//! Allow immediate storing of config.ini entries.
+	//! Storing only takes place if property StelApp.flagImmediateSave is set.
+	static void immediateSave(const QString &key, const QVariant &value);
+
 	//! Add a progression indicator to the GUI (if applicable).
 	//! @return a controller which can be used to indicate the current status.
 	//! The StelApp instance remains the owner of the controller.
@@ -296,6 +307,11 @@ public slots:
 	//! Get info text color
 	Vec3f getDaylightInfoColor() const;
 
+	//! Set flag for storing some settings immediately
+	void setFlagImmediateSave(bool b);
+	//! Get flag about storing some settings immediately
+	bool getFlagImmediateSave() const {return flagImmediateSave;}
+
 	//! Get the current number of frame per second.
 	//! @return the FPS averaged on the last second
 	float getFps() const {return fps;}
@@ -342,6 +358,7 @@ signals:
 	void fontChanged(QFont);
 	void overwriteInfoColorChanged(const Vec3f & color);
 	void daylightInfoColorChanged(const Vec3f & color);
+	void flagImmediateSaveChanged(bool);
 
 	//! Called just after a progress bar is added.
 	void progressBarAdded(const StelProgressController*);
@@ -367,6 +384,9 @@ private:
 	//! Used internally to set the viewport effects.
 	//! @param drawFbo the OpenGL fbo we need to render into.
 	void applyRenderBuffer(quint32 drawFbo=0);
+
+	void setupPostProcessor();
+	void highGraphicsModeDraw();
 
 	QString getVersion() const;
 
@@ -470,9 +490,32 @@ private:
 	QList<StelProgressController*> progressControllers;
 
 	int screenFontSize;
+	int numMultiSamples = 1;
 
 	// Framebuffer object used for viewport effects.
 	QOpenGLFramebufferObject* renderBuffer;
+	std::unique_ptr<QOpenGLBuffer> postProcessorVBO;
+	std::unique_ptr<QOpenGLVertexArrayObject> postProcessorVAO;
+	std::unique_ptr<QOpenGLShaderProgram> postProcessorProgram;
+	std::unique_ptr<QOpenGLShaderProgram> postProcessorProgramMS; // multisampled
+	std::unique_ptr<QOpenGLFramebufferObject> sceneFBO;
+	GLuint sceneMultisampledFBO = 0;
+	GLuint sceneMultisampledTex = 0;
+	GLuint sceneMultisampledRenderbuffer = 0;
+	StelTextureSP ditherPatternTex;
+	struct PostProcessorUniformLocations
+	{
+		int tex;
+		int ditherPattern;
+		int rgbMaxValue;
+	} postProcessorUniformLocations;
+	struct PostProcessorUniformLocationsMS
+	{
+		int tex;
+		int ditherPattern;
+		int rgbMaxValue;
+		int numMultiSamples;
+	} postProcessorUniformLocationsMS;
 	StelViewportEffect* viewportEffect;
 	QOpenGLFunctions* gl;
 	
@@ -483,6 +526,7 @@ private:
 	bool flagOverwriteInfoColor; // Overwrite and use color for text in info panel
 	Vec3f overwriteInfoColor;
 	Vec3f daylightInfoColor;
+	bool flagImmediateSave;       // set true to allow more immediate-mode settings. For now this is limited to detail settings, e.g. orbit or nomenclature details, DSO filter types, ...
 #ifdef 	ENABLE_SPOUT
 	SpoutSender* spoutSender;
 #endif

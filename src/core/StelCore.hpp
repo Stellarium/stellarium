@@ -74,7 +74,7 @@ public:
 	enum FrameType
 	{
 		FrameUninitialized,			//!< Reference frame is not set (FMajerech: Added to avoid condition on uninitialized value in StelSkyLayerMgr::draw())
-		FrameAltAz,				//!< Altazimuthal reference frame centered on observer.
+		FrameAltAz,				//!< Altazimuthal reference frame centered on observer: +x=south, +y=east, +z=zenith.
 		FrameHeliocentricEclipticJ2000,		//!< Fixed-ecliptic reference frame centered on the Sun. This is J2000 ecliptical / almost VSOP87.
 		FrameObservercentricEclipticJ2000,	//!< Fixed-ecliptic reference frame centered on the Observer. Was ObservercentricEcliptic, but renamed because it is Ecliptic of J2000!
 		FrameObservercentricEclipticOfDate,	//!< Moving ecliptic reference frame centered on the Observer. Ecliptic of date, i.e. includes the precession of the ecliptic.
@@ -305,6 +305,9 @@ public:
 
 	//! Return the observer heliocentric ecliptic position (GZ: presumably J2000)
 	Vec3d getObserverHeliocentricEclipticPos() const;
+	//! Return the observer heliocentric ecliptic velocity. This includes orbital and diurnal motion;
+	// diurnal motion is omitted if planetocentric coordinates are in use.
+	Vec3d getObserverHeliocentricEclipticVelocity() const;
 
 	//! Get the information on the current location
 	const StelLocation& getCurrentLocation() const;

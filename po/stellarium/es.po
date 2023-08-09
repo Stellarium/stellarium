@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2023-07-13 18:58+0700\n"
+"POT-Creation-Date: 2023-07-25 17:32+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Víctor Vega <vegadark@protonmail.com>, 2023\n"
 "Language-Team: Spanish (https://app.transifex.com/stellarium/teams/80998/es/)\n"
@@ -65,14 +65,14 @@ msgstr "asterismo"
 #: src/core/modules/ConstellationMgr.cpp:131 src/core/modules/StarMgr.cpp:461
 #: src/core/modules/GridLinesMgr.cpp:2033
 #: src/core/modules/SpecialMarkersMgr.cpp:310
-#: src/core/modules/LandscapeMgr.cpp:879
+#: src/core/modules/LandscapeMgr.cpp:870
 #: src/core/modules/NomenclatureMgr.cpp:83 src/core/modules/NebulaMgr.cpp:357
 #: src/core/modules/NebulaMgr.cpp:358 src/core/modules/SolarSystem.cpp:301
-#: src/core/modules/MilkyWay.cpp:110 src/core/modules/ZodiacalLight.cpp:114
+#: src/core/modules/MilkyWay.cpp:107 src/core/modules/ZodiacalLight.cpp:112
 #: src/core/modules/ToastMgr.cpp:62 src/core/modules/HipsMgr.cpp:156
-#: src/core/StelApp.cpp:648 src/core/StelCore.cpp:295
+#: src/core/StelApp.cpp:653 src/core/StelCore.cpp:296
 #: src/core/StelSkyLayerMgr.cpp:83 src/core/StelSkyLayerMgr.cpp:84
-#: src/StelMainView.cpp:940
+#: src/StelMainView.cpp:936
 msgid "Display Options"
 msgstr "Opciones de pantalla"
 
@@ -730,12 +730,12 @@ msgctxt "compass direction"
 msgid "NbW"
 msgstr "NpO"
 
-#: src/core/modules/LandscapeMgr.cpp:434 src/core/modules/LandscapeMgr.cpp:760
+#: src/core/modules/LandscapeMgr.cpp:434 src/core/modules/LandscapeMgr.cpp:751
 #: src/gui/ViewDialog.cpp:651
 msgid "Loading..."
 msgstr "Cargando..."
 
-#: src/core/modules/LandscapeMgr.cpp:434 src/core/modules/LandscapeMgr.cpp:760
+#: src/core/modules/LandscapeMgr.cpp:434 src/core/modules/LandscapeMgr.cpp:751
 msgctxt "percentage of done"
 msgid "done"
 msgstr "hecho"
@@ -744,7 +744,7 @@ msgstr "hecho"
 msgid "Switching models..."
 msgstr "Cambiando modelos..."
 
-#: src/core/modules/LandscapeMgr.cpp:480 src/core/modules/LandscapeMgr.cpp:755
+#: src/core/modules/LandscapeMgr.cpp:480 src/core/modules/LandscapeMgr.cpp:746
 msgid "Loaded successfully"
 msgstr "Carga exitosa"
 
@@ -755,62 +755,62 @@ msgstr ""
 "Falló el modelo de atmósfera ShowMySky. Cargando el modelo de Preetham como "
 "reserva."
 
-#: src/core/modules/LandscapeMgr.cpp:880
+#: src/core/modules/LandscapeMgr.cpp:871
 msgid "Atmosphere"
 msgstr "Atmósfera"
 
-#: src/core/modules/LandscapeMgr.cpp:881
+#: src/core/modules/LandscapeMgr.cpp:872
 msgid "Fog"
 msgstr "Niebla"
 
-#: src/core/modules/LandscapeMgr.cpp:882 src/ui_viewDialog.h:4176
+#: src/core/modules/LandscapeMgr.cpp:873 src/ui_viewDialog.h:4176
 #: src/ui_configurationDialog.h:1943
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:343
 msgid "Cardinal points"
 msgstr "Puntos cardinales"
 
-#: src/core/modules/LandscapeMgr.cpp:883
+#: src/core/modules/LandscapeMgr.cpp:874
 msgid "Ordinal (Intercardinal) points"
 msgstr "Puntos ordinales (intercardinal)"
 
-#: src/core/modules/LandscapeMgr.cpp:884
+#: src/core/modules/LandscapeMgr.cpp:875
 msgid "Secondary Intercardinal points"
 msgstr "Puntos secundarios intercardinales"
 
-#: src/core/modules/LandscapeMgr.cpp:885
+#: src/core/modules/LandscapeMgr.cpp:876
 msgid "Tertiary Intercardinal points"
 msgstr "Puntos cardinales terciarios"
 
-#: src/core/modules/LandscapeMgr.cpp:886
+#: src/core/modules/LandscapeMgr.cpp:877
 msgid "Ground"
 msgstr "Suelo"
 
-#: src/core/modules/LandscapeMgr.cpp:887
+#: src/core/modules/LandscapeMgr.cpp:878
 msgid "Landscape illumination"
 msgstr "Iluminación del paisaje"
 
-#: src/core/modules/LandscapeMgr.cpp:888
+#: src/core/modules/LandscapeMgr.cpp:879
 msgid "Landscape labels"
 msgstr "Nombres del paisaje"
 
-#: src/core/modules/LandscapeMgr.cpp:889
+#: src/core/modules/LandscapeMgr.cpp:880
 msgid "Light pollution data from locations database"
 msgstr ""
 "Datos de la contaminación lumínica desde la base de datos de las ubicaciones"
 
-#: src/core/modules/LandscapeMgr.cpp:891
+#: src/core/modules/LandscapeMgr.cpp:882
 msgid "Increase light pollution"
 msgstr "Aumentar contaminación lumínica"
 
-#: src/core/modules/LandscapeMgr.cpp:892
+#: src/core/modules/LandscapeMgr.cpp:883
 msgid "Reduce light pollution"
 msgstr "Reducir contaminación lumínica"
 
-#: src/core/modules/LandscapeMgr.cpp:893
+#: src/core/modules/LandscapeMgr.cpp:884
 msgid "Cyclic change in light pollution"
 msgstr "Cambio cíclico de contaminación lumínica"
 
-#: src/core/modules/LandscapeMgr.cpp:1383 src/scripting/StelScriptMgr.cpp:647
+#: src/core/modules/LandscapeMgr.cpp:1374 src/scripting/StelScriptMgr.cpp:647
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:101
 #: plugins/Oculars/src/gui/OcularDialog.cpp:627
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:238
@@ -831,7 +831,7 @@ msgid "Author"
 msgstr "Autor"
 
 #. TRANSLATORS: Unit of measure for distance - meter
-#: src/core/modules/LandscapeMgr.cpp:1389 src/gui/StelGuiItems.cpp:943
+#: src/core/modules/LandscapeMgr.cpp:1380 src/gui/StelGuiItems.cpp:943
 #: plugins/Satellites/src/Satellite.cpp:433
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1150
 #: plugins/Satellites/src/gui/SatellitesFilterDialog.cpp:134
@@ -839,7 +839,7 @@ msgctxt "distance"
 msgid "m"
 msgstr "m"
 
-#: src/core/modules/LandscapeMgr.cpp:1392 src/gui/ObsListDialog.cpp:266
+#: src/core/modules/LandscapeMgr.cpp:1383 src/gui/ObsListDialog.cpp:266
 #: src/ui_locationDialogGui.h:486 src/ui_obsListDialog.h:414
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:144
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:482
@@ -847,36 +847,36 @@ msgid "Location"
 msgstr "Ubicación"
 
 #. TRANSLATORS: Unit of measure for pressure - hectopascals
-#: src/core/modules/LandscapeMgr.cpp:1414
+#: src/core/modules/LandscapeMgr.cpp:1405
 msgctxt "pressure"
 msgid "hPa"
 msgstr "hPa"
 
-#: src/core/modules/LandscapeMgr.cpp:1424
+#: src/core/modules/LandscapeMgr.cpp:1415
 msgid "extinction coefficient"
 msgstr "coeficiente de extinción"
 
-#: src/core/modules/LandscapeMgr.cpp:1427
+#: src/core/modules/LandscapeMgr.cpp:1418
 msgid "Atmospheric conditions"
 msgstr "Condiciones atmosféricas"
 
-#: src/core/modules/LandscapeMgr.cpp:1434
+#: src/core/modules/LandscapeMgr.cpp:1425
 msgid "cd/m<sup>2</sup>"
 msgstr "cd/m<sup>2</sup>"
 
-#: src/core/modules/LandscapeMgr.cpp:1438
+#: src/core/modules/LandscapeMgr.cpp:1429
 msgid "ncd/m<sup>2</sup>"
 msgstr "ncd/m<sup>2</sup>"
 
-#: src/core/modules/LandscapeMgr.cpp:1443
+#: src/core/modules/LandscapeMgr.cpp:1434
 msgid "&mu;cd/m<sup>2</sup>"
 msgstr "&mu;cd/m<sup>2</sup>"
 
-#: src/core/modules/LandscapeMgr.cpp:1448
+#: src/core/modules/LandscapeMgr.cpp:1439
 msgid "mcd/m<sup>2</sup>"
 msgstr "mcd/m<sup>2</sup>"
 
-#: src/core/modules/LandscapeMgr.cpp:1450
+#: src/core/modules/LandscapeMgr.cpp:1441
 #, qt-format
 msgid "<b>Light pollution</b>: %1 %2 (NELM: %3; Bortle class: %4)"
 msgstr "<b>Contaminación lumínica</b>: %1 %2 (NELM: %3; clase Bortle: %4)"
@@ -2249,7 +2249,7 @@ msgid "Toggle DSO type filter"
 msgstr "Conmutar tipo de filtro para OEP"
 
 #: src/core/modules/NebulaMgr.cpp:1395 src/gui/StelDialog.cpp:336
-#: src/StelMainView.cpp:1036
+#: src/StelMainView.cpp:1032
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:773
 msgid "Attention!"
 msgstr "¡Atención!"
@@ -2500,42 +2500,42 @@ msgstr "El período de rotación es caótico"
 msgid "Equatorial rotation velocity"
 msgstr "Velocidad de rotación ecuatorial"
 
-#: src/core/modules/Planet.cpp:1300 src/core/modules/Planet.cpp:1693
+#: src/core/modules/Planet.cpp:1300 src/core/modules/Planet.cpp:1695
 msgctxt "Moon phase"
 msgid "New Moon"
 msgstr "Luna nueva"
 
-#: src/core/modules/Planet.cpp:1302 src/core/modules/Planet.cpp:1695
+#: src/core/modules/Planet.cpp:1302 src/core/modules/Planet.cpp:1697
 msgctxt "Moon phase"
 msgid "Waxing Crescent"
 msgstr "Luna creciente"
 
-#: src/core/modules/Planet.cpp:1304 src/core/modules/Planet.cpp:1697
+#: src/core/modules/Planet.cpp:1304 src/core/modules/Planet.cpp:1699
 msgctxt "Moon phase"
 msgid "First Quarter"
 msgstr "Primer cuarto"
 
-#: src/core/modules/Planet.cpp:1306 src/core/modules/Planet.cpp:1699
+#: src/core/modules/Planet.cpp:1306 src/core/modules/Planet.cpp:1701
 msgctxt "Moon phase"
 msgid "Waxing Gibbous"
 msgstr "Cuarto creciente"
 
-#: src/core/modules/Planet.cpp:1308 src/core/modules/Planet.cpp:1701
+#: src/core/modules/Planet.cpp:1308 src/core/modules/Planet.cpp:1703
 msgctxt "Moon phase"
 msgid "Full Moon"
 msgstr "Luna llena"
 
-#: src/core/modules/Planet.cpp:1310 src/core/modules/Planet.cpp:1703
+#: src/core/modules/Planet.cpp:1310 src/core/modules/Planet.cpp:1705
 msgctxt "Moon phase"
 msgid "Waning Gibbous"
 msgstr "Cuarto Menguante"
 
-#: src/core/modules/Planet.cpp:1312 src/core/modules/Planet.cpp:1705
+#: src/core/modules/Planet.cpp:1312 src/core/modules/Planet.cpp:1707
 msgctxt "Moon phase"
 msgid "Third Quarter"
 msgstr "Tercer cuarto"
 
-#: src/core/modules/Planet.cpp:1314 src/core/modules/Planet.cpp:1707
+#: src/core/modules/Planet.cpp:1314 src/core/modules/Planet.cpp:1709
 msgctxt "Moon phase"
 msgid "Waning Crescent"
 msgstr "Luna menguante"
@@ -2817,11 +2817,11 @@ msgstr "Ángulo de posición"
 msgid "Separation"
 msgstr "Separación"
 
-#: src/core/modules/MilkyWay.cpp:111
+#: src/core/modules/MilkyWay.cpp:108
 msgid "Milky Way"
 msgstr "Vía Láctea"
 
-#: src/core/modules/ZodiacalLight.cpp:115
+#: src/core/modules/ZodiacalLight.cpp:113
 msgid "Zodiacal Light"
 msgstr "Luz zodiacal"
 
@@ -2969,148 +2969,148 @@ msgstr "Solsticio de diciembre en el año siguiente"
 msgid "December solstice at previous year"
 msgstr "Solsticio de diciembre en el año anterior"
 
-#: src/core/StelApp.cpp:453
+#: src/core/StelApp.cpp:458
 msgid "Initializing textures..."
 msgstr "Inicializando texturas..."
 
-#: src/core/StelApp.cpp:457
+#: src/core/StelApp.cpp:462
 msgid "Initializing network access..."
 msgstr "Inicializando acceso a la red..."
 
-#: src/core/StelApp.cpp:460
+#: src/core/StelApp.cpp:465
 msgid "Initializing network disk cache..."
 msgstr "Inicializando caché de disco de red..."
 
-#: src/core/StelApp.cpp:474
+#: src/core/StelApp.cpp:479
 msgid "Initializing network proxy..."
 msgstr "Inicializando proxy de red..."
 
-#: src/core/StelApp.cpp:489
+#: src/core/StelApp.cpp:494
 msgid "Initializing Object Database..."
 msgstr "Inicializando base de datos de objetos..."
 
-#: src/core/StelApp.cpp:495
+#: src/core/StelApp.cpp:500
 msgid "Initializing HiPS survey..."
 msgstr "Inicializando encuestas HiPS..."
 
-#: src/core/StelApp.cpp:501
+#: src/core/StelApp.cpp:506
 msgid "Initializing Solar System objects..."
 msgstr "Inicializando objetos del Sistema Solar..."
 
-#: src/core/StelApp.cpp:507
+#: src/core/StelApp.cpp:512
 msgid "Initializing planetary nomenclature..."
 msgstr "Inicializando nomenclatura planetaria..."
 
-#: src/core/StelApp.cpp:513
+#: src/core/StelApp.cpp:518
 msgid "Initializing stars..."
 msgstr "Inicializando estrellas..."
 
-#: src/core/StelApp.cpp:518
+#: src/core/StelApp.cpp:523
 msgid "Initializing core..."
 msgstr "Inicializando núcleo..."
 
-#: src/core/StelApp.cpp:522
+#: src/core/StelApp.cpp:527
 msgid "Initializing deep-sky objects..."
 msgstr "Inicializando objetos del espacio profundo..."
 
-#: src/core/StelApp.cpp:528
+#: src/core/StelApp.cpp:533
 msgid "Initializing Milky Way..."
 msgstr "Inicializando Vía Láctea..."
 
-#: src/core/StelApp.cpp:534
+#: src/core/StelApp.cpp:539
 msgid "Initializing zodiacal light..."
 msgstr "Inicializando luz zodiacal..."
 
-#: src/core/StelApp.cpp:540
+#: src/core/StelApp.cpp:545
 msgid "Initializing sky image layer..."
 msgstr "Inicializando capa de imagen del cielo..."
 
-#: src/core/StelApp.cpp:546
+#: src/core/StelApp.cpp:551
 msgid "Initializing TOAST surveys..."
 msgstr "Inicializando encuestas TOAST..."
 
-#: src/core/StelApp.cpp:552
+#: src/core/StelApp.cpp:557
 msgid "Initializing audio..."
 msgstr "Inicializando audio..."
 
-#: src/core/StelApp.cpp:556
+#: src/core/StelApp.cpp:561
 msgid "Initializing video..."
 msgstr "Inicializando video..."
 
-#: src/core/StelApp.cpp:562
+#: src/core/StelApp.cpp:567
 msgid "Initializing constellations..."
 msgstr "Inicializando constelaciones..."
 
-#: src/core/StelApp.cpp:568
+#: src/core/StelApp.cpp:573
 msgid "Initializing asterisms..."
 msgstr "Inicializando asterismos..."
 
-#: src/core/StelApp.cpp:574
+#: src/core/StelApp.cpp:579
 msgid "Initializing landscape..."
 msgstr "Inicializando paisaje..."
 
-#: src/core/StelApp.cpp:579
+#: src/core/StelApp.cpp:584
 msgid "Initializing grid lines..."
 msgstr "Inicializando líneas de cuadrícula..."
 
-#: src/core/StelApp.cpp:584
+#: src/core/StelApp.cpp:589
 msgid "Initializing special markers..."
 msgstr "Inicializando marcadores especiales..."
 
-#: src/core/StelApp.cpp:590
+#: src/core/StelApp.cpp:595
 msgid "Initializing sporadic meteors..."
 msgstr "Inicializando meteoros esporádicos..."
 
-#: src/core/StelApp.cpp:596
+#: src/core/StelApp.cpp:601
 msgid "Initializing user labels..."
 msgstr "Inicializando etiquetas de usuario..."
 
-#: src/core/StelApp.cpp:601
+#: src/core/StelApp.cpp:606
 msgid "Initializing sky cultures..."
 msgstr "Inicializando culturas del cielo..."
 
-#: src/core/StelApp.cpp:605
+#: src/core/StelApp.cpp:610
 msgid "Initializing user markers..."
 msgstr "Inicializando marcadores de usuario..."
 
-#: src/core/StelApp.cpp:611
+#: src/core/StelApp.cpp:616
 msgid "Initializing custom objects..."
 msgstr "Inicializando objetos personalizados..."
 
-#: src/core/StelApp.cpp:617
+#: src/core/StelApp.cpp:622
 msgid "Initializing highlights..."
 msgstr "Inicializando  destacados..."
 
-#: src/core/StelApp.cpp:623
+#: src/core/StelApp.cpp:628
 msgid "Initializing specific time..."
 msgstr "Inicializando tiempo específico"
 
-#: src/core/StelApp.cpp:631
+#: src/core/StelApp.cpp:636
 msgid "Initializing scripting..."
 msgstr "Inicializando scripting..."
 
-#: src/core/StelApp.cpp:636
+#: src/core/StelApp.cpp:641
 msgid "Initializing color scheme..."
 msgstr "Inicializando esquema de color..."
 
-#: src/core/StelApp.cpp:648 src/ui_configurationDialog.h:1955
+#: src/core/StelApp.cpp:653 src/ui_configurationDialog.h:1955
 msgid "Night mode"
 msgstr "Modo nocturno"
 
-#: src/core/StelApp.cpp:675
+#: src/core/StelApp.cpp:683
 msgid "Initializing SPOUT sender..."
 msgstr "Inicializando transmisor SPOUT..."
 
-#: src/core/StelApp.cpp:685
+#: src/core/StelApp.cpp:693
 msgid "Cannot create Spout sender. See log for details."
 msgstr ""
 "No se puede crear el emisor de Spout. Ver el registro para más detalles."
 
-#: src/core/StelApp.cpp:712
+#: src/core/StelApp.cpp:720
 msgid "Loading plugin"
 msgstr "Cargando complemento"
 
-#: src/core/StelCore.cpp:293 src/gui/StelGui.cpp:225
+#: src/core/StelCore.cpp:294 src/gui/StelGui.cpp:225
 #: src/gui/AstroCalcDialog.cpp:1733 src/gui/AstroCalcDialog.cpp:2305
 #: src/gui/AstroCalcDialog.cpp:2329 src/gui/AstroCalcDialog.cpp:2877
 #: src/gui/AstroCalcDialog.cpp:2906 src/gui/AstroCalcDialog.cpp:6431
@@ -3119,248 +3119,248 @@ msgstr "Cargando complemento"
 msgid "Date and Time"
 msgstr "Fecha y hora"
 
-#: src/core/StelCore.cpp:294 src/core/StelMovementMgr.cpp:193
+#: src/core/StelCore.cpp:295 src/core/StelMovementMgr.cpp:193
 msgid "Movement and Selection"
 msgstr "Movimiento y selección"
 
-#: src/core/StelCore.cpp:297
+#: src/core/StelCore.cpp:298
 msgid "Increase time speed"
 msgstr "Aumentar velocidad del tiempo"
 
-#: src/core/StelCore.cpp:298
+#: src/core/StelCore.cpp:299
 msgid "Decrease time speed"
 msgstr "Disminuir velocidad del tiempo"
 
-#: src/core/StelCore.cpp:299
+#: src/core/StelCore.cpp:300
 msgid "Increase time speed (a little)"
 msgstr "Aumentar velocidad del tiempo (un poco)"
 
-#: src/core/StelCore.cpp:300
+#: src/core/StelCore.cpp:301
 msgid "Decrease time speed (a little)"
 msgstr "Disminuir la velocidad del tiempo (un poco)"
 
-#: src/core/StelCore.cpp:301
+#: src/core/StelCore.cpp:302
 msgid "Set normal time rate"
 msgstr "Establecer ritmo normal de tiempo"
 
-#: src/core/StelCore.cpp:302
+#: src/core/StelCore.cpp:303
 msgid "Set time rate to zero"
 msgstr "Establecer ritmo de tiempo a cero"
 
-#: src/core/StelCore.cpp:303
+#: src/core/StelCore.cpp:304
 msgid "Set reverse time direction"
 msgstr "Establecer dirección inversa del tiempo"
 
-#: src/core/StelCore.cpp:304
+#: src/core/StelCore.cpp:305
 msgid "Set time to now"
 msgstr "Establecer tiempo en ahora"
 
-#: src/core/StelCore.cpp:305
+#: src/core/StelCore.cpp:306
 msgid "Add 1 solar minute"
 msgstr "Agregar 1 minuto solar"
 
-#: src/core/StelCore.cpp:306
+#: src/core/StelCore.cpp:307
 msgid "Add 1 solar hour"
 msgstr "Agregar 1 hora solar"
 
-#: src/core/StelCore.cpp:307
+#: src/core/StelCore.cpp:308
 msgid "Add 1 solar day"
 msgstr "Agregar 1 día solar"
 
-#: src/core/StelCore.cpp:308
+#: src/core/StelCore.cpp:309
 msgid "Add 7 solar days"
 msgstr "Agregar 7 días solares"
 
-#: src/core/StelCore.cpp:309
+#: src/core/StelCore.cpp:310
 msgid "Subtract 1 solar minute"
 msgstr "Substraer 1 minuto solar"
 
-#: src/core/StelCore.cpp:310
+#: src/core/StelCore.cpp:311
 msgid "Subtract 1 solar hour"
 msgstr "restar 1 hora solar"
 
-#: src/core/StelCore.cpp:311
+#: src/core/StelCore.cpp:312
 msgid "Subtract 1 solar day"
 msgstr "restar 1 día solar"
 
-#: src/core/StelCore.cpp:312
+#: src/core/StelCore.cpp:313
 msgid "Subtract 7 solar days"
 msgstr "restar 7 días solares"
 
-#: src/core/StelCore.cpp:313
+#: src/core/StelCore.cpp:314
 msgid "Add 1 sidereal day"
 msgstr "Agregar 1 día sidéreo"
 
-#: src/core/StelCore.cpp:314
+#: src/core/StelCore.cpp:315
 msgid "Add 7 sidereal days"
 msgstr "Agregar 7 días sidéreos"
 
-#: src/core/StelCore.cpp:315
+#: src/core/StelCore.cpp:316
 msgid "Add 1 sidereal year"
 msgstr "Agregar 1 año sidéreo"
 
-#: src/core/StelCore.cpp:316
+#: src/core/StelCore.cpp:317
 msgid "Add 100 sidereal years"
 msgstr "Agregar 100 años sidéreos"
 
-#: src/core/StelCore.cpp:317
+#: src/core/StelCore.cpp:318
 msgid "Add 1 synodic month"
 msgstr "Añadir 1 mes sinodico"
 
-#: src/core/StelCore.cpp:318
+#: src/core/StelCore.cpp:319
 msgid "Add 1 saros"
 msgstr "Agregar 1 saros"
 
-#: src/core/StelCore.cpp:319
+#: src/core/StelCore.cpp:320
 msgid "Add 1 draconic month"
 msgstr "Añadir 1 mes draconico"
 
-#: src/core/StelCore.cpp:320
+#: src/core/StelCore.cpp:321
 msgid "Add 1 draconic year"
 msgstr "Añadir 1 año dracónico"
 
-#: src/core/StelCore.cpp:321
+#: src/core/StelCore.cpp:322
 msgid "Add 1 anomalistic month"
 msgstr "Añadir 1 mes anómalo"
 
-#: src/core/StelCore.cpp:322
+#: src/core/StelCore.cpp:323
 msgid "Add 1 anomalistic year"
 msgstr "Añadir 1 año anómalo"
 
-#: src/core/StelCore.cpp:323
+#: src/core/StelCore.cpp:324
 msgid "Add 100 anomalistic years"
 msgstr "Añadir 100 años anómalos"
 
-#: src/core/StelCore.cpp:324
+#: src/core/StelCore.cpp:325
 msgid "Add 1 mean tropical month"
 msgstr "Agregar 1 mes tropical medio"
 
-#: src/core/StelCore.cpp:325
+#: src/core/StelCore.cpp:326
 msgid "Add 1 mean tropical year"
 msgstr "Agregar 1 año tropical medio"
 
-#: src/core/StelCore.cpp:326
+#: src/core/StelCore.cpp:327
 msgid "Add 100 mean tropical years"
 msgstr "Añadir 100 años tropicales medios"
 
-#: src/core/StelCore.cpp:327
+#: src/core/StelCore.cpp:328
 msgid "Add 1 tropical year"
 msgstr "Añadir 1 año tropical"
 
-#: src/core/StelCore.cpp:328
+#: src/core/StelCore.cpp:329
 msgid "Add 1 Julian year"
 msgstr "Agregar 1 año juliano"
 
-#: src/core/StelCore.cpp:329
+#: src/core/StelCore.cpp:330
 msgid "Add 1 Julian century"
 msgstr "Agregar 1 centuria juliana"
 
-#: src/core/StelCore.cpp:330
+#: src/core/StelCore.cpp:331
 msgid "Add 1 Gaussian year"
 msgstr "Agregar 1 año gaussiano"
 
-#: src/core/StelCore.cpp:331
+#: src/core/StelCore.cpp:332
 msgid "Add 1 calendric month"
 msgstr "Añadir 1 mes calendario"
 
-#: src/core/StelCore.cpp:332
+#: src/core/StelCore.cpp:333
 msgid "Subtract 1 sidereal day"
 msgstr "Substraer 1 día sidéreo"
 
-#: src/core/StelCore.cpp:333
+#: src/core/StelCore.cpp:334
 msgid "Subtract 7 sidereal days"
 msgstr "Substraer 7 días sidéreos"
 
-#: src/core/StelCore.cpp:334
+#: src/core/StelCore.cpp:335
 msgid "Subtract 1 sidereal year"
 msgstr "Restar 1 año sidéreo"
 
-#: src/core/StelCore.cpp:335
+#: src/core/StelCore.cpp:336
 msgid "Subtract 100 sidereal years"
 msgstr "Restar 100 años sidéreos"
 
-#: src/core/StelCore.cpp:336
+#: src/core/StelCore.cpp:337
 msgid "Subtract 1 synodic month"
 msgstr "Substraer 1 mes sinódico"
 
-#: src/core/StelCore.cpp:337
+#: src/core/StelCore.cpp:338
 msgid "Subtract 1 saros"
 msgstr "Substraer 1 saros"
 
-#: src/core/StelCore.cpp:338
+#: src/core/StelCore.cpp:339
 msgid "Subtract 1 draconic month"
 msgstr "Substraer 1 mes dracónico"
 
-#: src/core/StelCore.cpp:339
+#: src/core/StelCore.cpp:340
 msgid "Subtract 1 draconic year"
 msgstr "Restar 1 año dracónico"
 
-#: src/core/StelCore.cpp:340
+#: src/core/StelCore.cpp:341
 msgid "Subtract 1 anomalistic month"
 msgstr "Substraer 1 mes anómalo"
 
-#: src/core/StelCore.cpp:341
+#: src/core/StelCore.cpp:342
 msgid "Subtract 1 anomalistic year"
 msgstr "Restar 1 año anómalo"
 
-#: src/core/StelCore.cpp:342
+#: src/core/StelCore.cpp:343
 msgid "Subtract 100 anomalistic years"
 msgstr "Restar 100 años anómalos"
 
-#: src/core/StelCore.cpp:343
+#: src/core/StelCore.cpp:344
 msgid "Subtract 1 mean tropical month"
 msgstr "Substraer 1 mes tropical medio"
 
-#: src/core/StelCore.cpp:344
+#: src/core/StelCore.cpp:345
 msgid "Subtract 1 mean tropical year"
 msgstr "Restar 1 año tropical medio"
 
-#: src/core/StelCore.cpp:345
+#: src/core/StelCore.cpp:346
 msgid "Subtract 100 mean tropical years"
 msgstr "Restar 100 años tropicales medios"
 
-#: src/core/StelCore.cpp:346
+#: src/core/StelCore.cpp:347
 msgid "Subtract 1 tropical year"
 msgstr "Restar 1 año tropical"
 
-#: src/core/StelCore.cpp:347
+#: src/core/StelCore.cpp:348
 msgid "Subtract 1 Julian year"
 msgstr "Restar 1 año juliano"
 
-#: src/core/StelCore.cpp:348
+#: src/core/StelCore.cpp:349
 msgid "Subtract 1 Julian century"
 msgstr "Substraer 1 centuria juliana"
 
-#: src/core/StelCore.cpp:349
+#: src/core/StelCore.cpp:350
 msgid "Subtract 1 Gaussian year"
 msgstr "Restar 1 año gaussiano"
 
-#: src/core/StelCore.cpp:350
+#: src/core/StelCore.cpp:351
 msgid "Subtract 1 calendric month"
 msgstr "Restar 1 mes calendario"
 
-#: src/core/StelCore.cpp:352
+#: src/core/StelCore.cpp:353
 msgid "Set home planet to selected planet"
 msgstr "Establecer el planeta seleccionado como el inicial"
 
-#: src/core/StelCore.cpp:353
+#: src/core/StelCore.cpp:354
 msgid "Go to home"
 msgstr "Ir al inicio"
 
-#: src/core/StelCore.cpp:355
+#: src/core/StelCore.cpp:356
 msgid "Flip scene horizontally"
 msgstr "Voltear vista horizontalmente"
 
-#: src/core/StelCore.cpp:356
+#: src/core/StelCore.cpp:357
 msgid "Flip scene vertically"
 msgstr "Voltear vista verticalmente"
 
-#: src/core/StelCore.cpp:2449
+#: src/core/StelCore.cpp:2469
 msgid "Correction is disabled. Use only if you know what you are doing!"
 msgstr ""
 "La corrección está deshabilitada. ¡Úsela sólo si sabe lo que está haciendo!"
 
-#: src/core/StelCore.cpp:2452
+#: src/core/StelCore.cpp:2472
 #, qt-format
 msgid ""
 "This historical formula was obtained by C. Schoch in 1931 and was used by G."
@@ -3372,7 +3372,7 @@ msgstr ""
 "Confirmada por Antiguos Eclipses Solares</em> (%1). Vea más información "
 "%2aquí%3."
 
-#: src/core/StelCore.cpp:2455
+#: src/core/StelCore.cpp:2475
 #, qt-format
 msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
@@ -3381,7 +3381,7 @@ msgstr ""
 "Esta ecuación empírica fue publicada por G. M. Clemence en el artículo "
 "<em>En el Sistema de las Constantes Astronómicas</em> (%1)."
 
-#: src/core/StelCore.cpp:2458
+#: src/core/StelCore.cpp:2478
 #, qt-format
 msgid ""
 "This formula is based on a study of post-1650 observations of the Sun, the "
@@ -3394,7 +3394,7 @@ msgstr ""
 "su <em> Fórmulas Astronómicas para Calculadoras </em>. También fue adoptado "
 "en el programa de PC SunTracker Pro."
 
-#: src/core/StelCore.cpp:2462
+#: src/core/StelCore.cpp:2482
 msgid ""
 "This is a slightly modified version of the IAU (1952) formula which was "
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar"
@@ -3404,7 +3404,7 @@ msgstr ""
 "fue adoptada en la <em>Efemérides Astronómicas</em> y en el <em> Canon de "
 "los Eclipses Solares</em> por Mucke & Meeus (1983)."
 
-#: src/core/StelCore.cpp:2466
+#: src/core/StelCore.cpp:2486
 msgid ""
 "The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon"
 " and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The "
@@ -3416,7 +3416,7 @@ msgstr ""
 "EC. La misma relación también se adoptó implícitamente en las tablas de "
 "syzygy de Goldstine (1973)."
 
-#: src/core/StelCore.cpp:2470
+#: src/core/StelCore.cpp:2490
 #, qt-format
 msgid ""
 "This equation was published by P. M. Muller and F. R. Stephenson in the "
@@ -3427,7 +3427,7 @@ msgstr ""
 "artículo <em>Las aceleraciones de la Tierra y la luna desde observaciones "
 "astronómicas anteriores</em> (%1)."
 
-#: src/core/StelCore.cpp:2473
+#: src/core/StelCore.cpp:2493
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
@@ -3436,7 +3436,7 @@ msgstr ""
 "Esta ecuación fue publicada por F. R. Stephenson en el artículo "
 "<em>Observaciones Astronómicas Pre-Telescópicas</em> (%1)."
 
-#: src/core/StelCore.cpp:2476
+#: src/core/StelCore.cpp:2496
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation (outdated and superseded by Schmadel & "
@@ -3450,7 +3450,7 @@ msgstr ""
 "período 1800-1975</em> (%1) como adaptación a través de datos publicados por"
 " Brouwer (1952)."
 
-#: src/core/StelCore.cpp:2479
+#: src/core/StelCore.cpp:2499
 msgid ""
 "This algorithm was adopted in P. Bretagnon & L. Simon's <em>Planetary "
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
@@ -3460,7 +3460,7 @@ msgstr ""
 " +2800 </ em> (1986) de P. Bretagnon & L. Simon y en el programa de "
 "planetario de PC RedShift."
 
-#: src/core/StelCore.cpp:2482
+#: src/core/StelCore.cpp:2502
 #, qt-format
 msgid ""
 "This formula was published by F. R. Stephenson and L. V. Morrison in the "
@@ -3471,7 +3471,7 @@ msgstr ""
 "artículo <em>Cambios a largo plazo en la rotación de la tierra - 700 a. C. a"
 " 1980 d. C.</em> (%1)."
 
-#: src/core/StelCore.cpp:2485
+#: src/core/StelCore.cpp:2505
 #, qt-format
 msgid ""
 "This algorithm was published by F. R. Stephenson and M. A. Houlden in the "
@@ -3482,7 +3482,7 @@ msgstr ""
 "libro <em>Atlas of Historical Eclipse Maps</em> (%1). Este algoritmo se "
 "utiliza en la Guía 7 del programa Planetario para PC."
 
-#: src/core/StelCore.cpp:2488
+#: src/core/StelCore.cpp:2508
 msgid ""
 "This algorithm was given by F. Espenak in his <em>Fifty Year Canon of Solar "
 "Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar "
@@ -3492,7 +3492,7 @@ msgstr ""
 "eclipses solares: 1986-2035 </em> (1987) y en su <em> cincuenta años Canon "
 "de eclipses lunares: 1986-2035 </em> (1989)."
 
-#: src/core/StelCore.cpp:2491
+#: src/core/StelCore.cpp:2511
 #, qt-format
 msgid ""
 "This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 "
@@ -3501,7 +3501,7 @@ msgstr ""
 "Esta fórmula fue obtenida por K.M. Borkowski (%1) a partir de un análisis de"
 " 31 registros de eclipses solares que datan entre 2137 BCE y 1715 CE."
 
-#: src/core/StelCore.cpp:2494
+#: src/core/StelCore.cpp:2514
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation was published by L. D. Schmadel and G. "
@@ -3514,7 +3514,7 @@ msgstr ""
 "Período 1800-1988</em> (%1) como los datos dados por Stephenson y Morrison "
 "(1984)."
 
-#: src/core/StelCore.cpp:2497
+#: src/core/StelCore.cpp:2517
 msgid ""
 "This formula was adopted by M. Chapront-Touze & J. Chapront in the shortened"
 " version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and "
@@ -3524,7 +3524,7 @@ msgstr ""
 "abreviada de la teoría lunar del ELP 2000-85 en sus <em> Tablas Lunares y "
 "Programas de 4000 a. A A.D. 8000 </em> (1991)."
 
-#: src/core/StelCore.cpp:2500
+#: src/core/StelCore.cpp:2520
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson and L. V. Morrison in the "
@@ -3535,7 +3535,7 @@ msgstr ""
 "artículo <em>Fluctuaciones a Largo Plazo en la Rotación de la Tierra: 700 a."
 " C. a 1990 d. C.</em> (%1)."
 
-#: src/core/StelCore.cpp:2503
+#: src/core/StelCore.cpp:2523
 #, qt-format
 msgid ""
 "F. R. Stephenson published this formula in his book <em>Historical Eclipses "
@@ -3544,7 +3544,7 @@ msgstr ""
 "F. R. Stephenson publicó esta fórmula en su libro <em>Eclipses Históricos y "
 "Rotación de la Tierra</em> (%1)."
 
-#: src/core/StelCore.cpp:2506
+#: src/core/StelCore.cpp:2526
 msgid ""
 "From J. Meeus, <em>Astronomical Algorithms</em> (2nd ed., 1998), and widely "
 "used. Table for 1620..2000, and includes a variant of Chapront, Chapront-"
@@ -3555,7 +3555,7 @@ msgstr ""
 "Chapront, Chapront-Touze & Francou (1997) para las fechas fuera de "
 "1620..2000."
 
-#: src/core/StelCore.cpp:2509
+#: src/core/StelCore.cpp:2529
 #, qt-format
 msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
@@ -3565,7 +3565,7 @@ msgstr ""
 "Chorro de la NASA usa esta fórmula en su sitio interactivo %1JPL  "
 "Horizons%2."
 
-#: src/core/StelCore.cpp:2512
+#: src/core/StelCore.cpp:2532
 #, qt-format
 msgid ""
 "This polynome was published by J. Meeus and L. Simons in article "
@@ -3574,7 +3574,7 @@ msgstr ""
 "Este polinomio fue publicado por J. Meeus y L. Simmons en el artículo "
 "<em>Aproximaciones polinomiales a Delta T, 1620-2000 d. C.</em> (%1)."
 
-#: src/core/StelCore.cpp:2515
+#: src/core/StelCore.cpp:2535
 msgid ""
 "The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the "
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits"
@@ -3584,7 +3584,7 @@ msgstr ""
 "por O. Montebruck y T. Pfleger provee datos simples de 3er orden polinomial "
 "que encajan para el pasado reciente."
 
-#: src/core/StelCore.cpp:2518
+#: src/core/StelCore.cpp:2538
 msgid ""
 "E. M. Reingold & N. Dershowitz present this polynomial data fit in "
 "<em>Calendrical Calculations</em> (4th ed. 2018) and in their "
@@ -3596,7 +3596,7 @@ msgstr ""
 "Calendáricas</em> (2002). Está basado en los <em>Algoritmos "
 "Astronómicos</em> de Jean Meeus (1991)."
 
-#: src/core/StelCore.cpp:2521
+#: src/core/StelCore.cpp:2541
 #, qt-format
 msgid ""
 "This important solution was published by L. V. Morrison and F. R. Stephenson"
@@ -3607,7 +3607,7 @@ msgstr ""
 " en el artículo <em> Valores históricos del error de reloj de la Tierra%1T y"
 " el cálculo de eclipses </em> (%2) con adición en (%3)."
 
-#: src/core/StelCore.cpp:2524
+#: src/core/StelCore.cpp:2544
 #, qt-format
 msgid ""
 "From the Length of Day (LOD; as determined by Stephenson & Morrison (%2)), "
@@ -3621,7 +3621,7 @@ msgstr ""
 "periodicidad descrita por Stephenson (%2). Vea para más información "
 "%3aqui%4."
 
-#: src/core/StelCore.cpp:2527
+#: src/core/StelCore.cpp:2547
 #, qt-format
 msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
@@ -3637,7 +3637,7 @@ msgstr ""
 "se usa en el programa solar, lunar y planetario de efemérides del programa "
 "SOLEX."
 
-#: src/core/StelCore.cpp:2530
+#: src/core/StelCore.cpp:2550
 msgid ""
 "This solution is modified from F. Espenak and J. Meeus, based on Morrison & "
 "Stephenson (2004) and a polynomial fit through tabulated values for "
@@ -3649,15 +3649,15 @@ msgstr ""
 "tabulados para 1600-2000. La fórmula para 2005-2050 se modifica para que "
 "coincida con los valores observados y las predicciones a corto plazo."
 
-#: src/core/StelCore.cpp:2530
+#: src/core/StelCore.cpp:2550
 msgid "Used by default."
 msgstr "Usar por defecto."
 
-#: src/core/StelCore.cpp:2533
+#: src/core/StelCore.cpp:2553
 msgid "PATCHED VERSION WITHOUT ADDITIONAL LUNAR ACCELERATION."
 msgstr "VERSION PARCHADA SIN ACELERACIÓN LUNAR ADICIONAL"
 
-#: src/core/StelCore.cpp:2533
+#: src/core/StelCore.cpp:2553
 msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
 "(2004) and a polynomial fit through tabulated values for 1600-2000."
@@ -3665,7 +3665,7 @@ msgstr ""
 "Esta solución de F. Espenak y J. Meeus, basada en Morrison & Stephenson "
 "(2004) y un ajuste polinomial a través de valores tabulados para 1600-2000."
 
-#: src/core/StelCore.cpp:2536
+#: src/core/StelCore.cpp:2556
 #, qt-format
 msgid ""
 "This solution by B. Banjevic, based on Stephenson & Morrison (1984), was "
@@ -3676,7 +3676,7 @@ msgstr ""
 "publicada en el artículo <em> Eclipses antiguos y datación de la caída de "
 "Babilonia </em> (%1)."
 
-#: src/core/StelCore.cpp:2539
+#: src/core/StelCore.cpp:2559
 #, qt-format
 msgid ""
 "This solution by S. Islam, M. Sadiq and M. S. Qureshi, based on Meeus & "
@@ -3688,7 +3688,7 @@ msgstr ""
 "Aproximación polinomial de DeltaT</em> (%1) y revisado por Sana Islam en "
 "2013."
 
-#: src/core/StelCore.cpp:2542
+#: src/core/StelCore.cpp:2562
 #, qt-format
 msgid ""
 "This polynomial approximation with 0.6 seconds of accuracy by M. Khalid, "
@@ -3699,7 +3699,7 @@ msgstr ""
 "Mariam Sultana y Faheem Zaidi se publicó en <em> Delta T: Aproximación "
 "polinomial del período de tiempo 1620-2013 </ em> (%1)."
 
-#: src/core/StelCore.cpp:2545
+#: src/core/StelCore.cpp:2565
 #, qt-format
 msgid ""
 "This solution by F. R. Stephenson, L. V. Morrison and C. Y. Hohenkerk (2016)"
@@ -3717,7 +3717,7 @@ msgstr ""
 "Hohenkerk, CY y Zawilski, M.; %2). Fuera del rango mencionado (modelado con "
 "un ajuste spline) proporciona valores de una parábola aproximada."
 
-#: src/core/StelCore.cpp:2548
+#: src/core/StelCore.cpp:2568
 #, qt-format
 msgid ""
 "This solution by G. Henriksson was published in the article <em>The "
@@ -3728,7 +3728,7 @@ msgstr ""
 "aceleración de la Luna y del Universo - la masa del gravitón</em> (%1) y "
 "basaso en la fórmula de C. Schoch (1931)."
 
-#: src/core/StelCore.cpp:2551
+#: src/core/StelCore.cpp:2571
 #, qt-format
 msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined"
@@ -3737,7 +3737,7 @@ msgstr ""
 "Esta es una fórmula cuadrática para el cálculo de %1T con coeficientes "
 "definidos por el usuario."
 
-#: src/core/StelCore.cpp:2554 src/core/SimbadSearcher.cpp:173
+#: src/core/StelCore.cpp:2574 src/core/SimbadSearcher.cpp:173
 #: src/gui/ObsListDialog.cpp:83 src/gui/ObsListDialog.cpp:901
 #: src/gui/ObsListDialog.cpp:919 src/gui/ObsListDialog.cpp:953
 #: src/gui/ObsListDialog.cpp:969 src/gui/ObsListDialog.cpp:1004
@@ -3748,7 +3748,7 @@ msgstr ""
 msgid "Error"
 msgstr "Error"
 
-#: src/core/StelCore.cpp:2562
+#: src/core/StelCore.cpp:2582
 #, qt-format
 msgid ""
 "The solution's value of %1 for %2 (secular acceleration of the Moon) "
@@ -3757,16 +3757,16 @@ msgstr ""
 "El valor de la solución de %1 para %2 (aceleración secular de la Luna) "
 "requiere una adaptación, vea la Guía para más detalles."
 
-#: src/core/StelCore.cpp:2606
+#: src/core/StelCore.cpp:2626
 msgid "with zero values outside this range"
 msgstr "con valores cero fuera de este rango"
 
-#: src/core/StelCore.cpp:2609
+#: src/core/StelCore.cpp:2629
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr ""
 "con una precisión típica de 1 segundo y valores cero fuera de este rango"
 
-#: src/core/StelCore.cpp:2612
+#: src/core/StelCore.cpp:2632
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and values for "
 "the limit years outside this range"
@@ -3774,16 +3774,16 @@ msgstr ""
 "Con un error medio de menos de un segundo, máx. Error 1.9s y valores para "
 "los años límites fuera de este rango"
 
-#: src/core/StelCore.cpp:2619
+#: src/core/StelCore.cpp:2639
 msgid "with values for the limit years outside this range"
 msgstr "Con valores para los años límites fuera de este rango"
 
-#: src/core/StelCore.cpp:2629
+#: src/core/StelCore.cpp:2649
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
 msgstr "Rango válido de uso: entre los años %1 y %2, %3."
 
-#: src/core/StelCore.cpp:2631
+#: src/core/StelCore.cpp:2651
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
 msgstr "Rango válido de uso: entre los años %1 y %2."
@@ -4360,7 +4360,7 @@ msgstr ""
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:257
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:237
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:116
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:274
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:289
 #: plugins/Novae/src/gui/NovaeDialog.cpp:115
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:119
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:132
@@ -4411,7 +4411,7 @@ msgid "References / Further Reading"
 msgstr "Referencias / Otras lecturas"
 
 #: src/core/StelMovementMgr.cpp:194 src/gui/StelGui.cpp:220
-#: src/StelMainView.cpp:938 src/StelMainView.cpp:939
+#: src/StelMainView.cpp:934 src/StelMainView.cpp:935
 msgid "Miscellaneous"
 msgstr "Miscelánea"
 
@@ -4836,7 +4836,7 @@ msgstr "Agradecimientos"
 #: src/gui/ConfigurationDialog.cpp:1314
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:784
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:258
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:275
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:290
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:138
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:210
 msgid "Authors"
@@ -4854,7 +4854,7 @@ msgstr "Contacto"
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:256
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:236
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:115
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:273
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:288
 #: plugins/Novae/src/gui/NovaeDialog.cpp:114
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:118
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:131
@@ -5147,26 +5147,34 @@ msgstr "Formato 12 horas"
 msgid "24-hour format"
 msgstr "Formato 24 horas"
 
-#: src/gui/ConfigurationDialog.cpp:2024
+#: src/gui/ConfigurationDialog.cpp:2026
 msgctxt "disabled"
 msgid "None"
 msgstr "Ninguno"
 
-#: src/gui/ConfigurationDialog.cpp:2025
+#: src/gui/ConfigurationDialog.cpp:2027
 msgid "5/6/5 bits"
 msgstr "5/6/5 bits"
 
-#: src/gui/ConfigurationDialog.cpp:2026
+#: src/gui/ConfigurationDialog.cpp:2028
 msgid "6/6/6 bits"
 msgstr "6/6/6 bits"
 
-#: src/gui/ConfigurationDialog.cpp:2027
+#: src/gui/ConfigurationDialog.cpp:2029
 msgid "8/8/8 bits"
 msgstr "8/8/8 bits"
 
-#: src/gui/ConfigurationDialog.cpp:2028
+#: src/gui/ConfigurationDialog.cpp:2030
 msgid "10/10/10 bits"
 msgstr "10/10/10 bits"
+
+#: src/gui/ConfigurationDialog.cpp:2042
+msgid "Unsupported"
+msgstr "No soportado"
+
+#: src/gui/ConfigurationDialog.cpp:2044
+msgid "Unsupported in low-graphics mode"
+msgstr "No soportado en modo gráficos bajos"
 
 #: src/gui/HelpDialog.cpp:202 src/gui/HelpDialog.cpp:214
 msgid "Cannot check updates..."
@@ -8247,19 +8255,19 @@ msgstr "Scripts"
 msgid "Shortcut"
 msgstr "Atajo"
 
-#: src/StelMainView.cpp:938
+#: src/StelMainView.cpp:934
 msgid "Save screenshot"
 msgstr "Guardar captura de pantalla"
 
-#: src/StelMainView.cpp:939
+#: src/StelMainView.cpp:935
 msgid "Reload shaders (for development)"
 msgstr "Recargar sombras (para desarrollo)"
 
-#: src/StelMainView.cpp:940
+#: src/StelMainView.cpp:936
 msgid "Full-screen mode"
 msgstr "Modo pantalla completa"
 
-#: src/StelMainView.cpp:1036
+#: src/StelMainView.cpp:1032
 msgid ""
 "Shortcuts have conflicts! Please press F7 after program startup and check "
 "following multiple assignments"
@@ -8267,7 +8275,7 @@ msgstr ""
 "¡Los atajos tienen conflicto! Presione F7 luego de iniciar el programa y "
 "verifique las siguientes asignaciones múltiples"
 
-#: src/StelMainView.cpp:1119
+#: src/StelMainView.cpp:1115
 msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use --angle-mode (or --mesa-mode) option."
@@ -8276,7 +8284,7 @@ msgstr ""
 "hardware de gráficos, o utilizar la opción --modo de ángulo (o modo --mesa-)"
 " ."
 
-#: src/StelMainView.cpp:1121
+#: src/StelMainView.cpp:1117
 msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use --mesa-mode option."
@@ -8284,14 +8292,14 @@ msgstr ""
 "Versión de OpenGL insuficiente. Actualice los controladores, gráficos de "
 "hardware o use la opción --modo-mesa."
 
-#: src/StelMainView.cpp:1125
+#: src/StelMainView.cpp:1121
 msgid ""
 "Insufficient OpenGL version. Please update drivers, or graphics hardware."
 msgstr ""
 "Versión OpenGL insuficiente. Actualice los controladores o el hardware de "
 "gráficos."
 
-#: src/StelMainView.cpp:1168
+#: src/StelMainView.cpp:1164
 msgid ""
 "Your DirectX/OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -8299,7 +8307,7 @@ msgstr ""
 "Su subsistema DirectX/OpenGL ES tienen problemas. Vea el registro para detalles.\n"
 "¿Ignorar y suprimir este aviso en el futuro, y tratar de continuar de todas formas en el modo degradado?"
 
-#: src/StelMainView.cpp:1219
+#: src/StelMainView.cpp:1215
 msgid ""
 "Your OpenGL/Mesa subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -8307,7 +8315,7 @@ msgstr ""
 "Su subsistema OpenGL/Mesa tienen problemas. Vea el registro para detalles.\n"
 "¿Ignorar y suprimir este aviso en el futuro, y tratar de continuar de todas formas en el modo degradado?"
 
-#: src/StelMainView.cpp:1279
+#: src/StelMainView.cpp:1275
 msgid ""
 "Your OpenGL subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -8315,7 +8323,7 @@ msgstr ""
 "Su subsistema OpenGL tiene problemas. Vea el registro para detalles.\n"
 "¿Ignorar y suprimir este aviso en el futuro, y tratar de continuar de todas formas en el modo degradado?"
 
-#: src/StelMainView.cpp:1320
+#: src/StelMainView.cpp:1316
 msgid ""
 "Your OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -16315,7 +16323,7 @@ msgstr "Mira telrad"
 #: plugins/Oculars/src/Oculars.cpp:1496
 #: plugins/Satellites/src/Satellites.cpp:167
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:205
-#: plugins/NavStars/src/NavStars.cpp:127 plugins/Quasars/src/Quasars.cpp:172
+#: plugins/NavStars/src/NavStars.cpp:120 plugins/Quasars/src/Quasars.cpp:172
 #: plugins/Pulsars/src/Pulsars.cpp:170
 #: plugins/Exoplanets/src/Exoplanets.cpp:174
 #: plugins/Observability/src/Observability.cpp:198
@@ -21680,23 +21688,23 @@ msgstr "Frecuencia de actualización (días):"
 msgid "[next update info]"
 msgstr "[información de la siguiente actualización]"
 
-#: plugins/NavStars/src/NavStars.cpp:56 plugins/NavStars/src/NavStars.cpp:126
-#: plugins/NavStars/src/NavStars.cpp:127
+#: plugins/NavStars/src/NavStars.cpp:55 plugins/NavStars/src/NavStars.cpp:119
+#: plugins/NavStars/src/NavStars.cpp:120
 msgid "Navigational Stars"
 msgstr "Estrellas Náuticas"
 
-#: plugins/NavStars/src/NavStars.cpp:59
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:279
+#: plugins/NavStars/src/NavStars.cpp:58
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:294
 msgid "This plugin marks navigational stars from a selected set."
 msgstr ""
 "Este plugin marca estrellas de navegación desde un conjunto seleccionado."
 
-#: plugins/NavStars/src/NavStars.cpp:126
+#: plugins/NavStars/src/NavStars.cpp:119
 msgid "Mark the navigational stars"
 msgstr "Marcar las estrellas náuticas"
 
 #. TRANSLATORS: The emphasis tags mark a title.
-#: plugins/NavStars/src/NavStars.cpp:397
+#: plugins/NavStars/src/NavStars.cpp:385
 msgid ""
 "The 57 \"selected stars\" that are listed in <em>The Nautical Almanac</em> "
 "jointly published by Her Majesty's Nautical Almanac Office and the US Naval "
@@ -21711,51 +21719,65 @@ msgstr ""
 "como el <em> localizador de estrellas 2102D </em> y el <em> identificador </"
 " em>."
 
-#. TRANSLATORS: The emphasis tags mark a book title.
-#: plugins/NavStars/src/NavStars.cpp:403
-#, qt-format
+#: plugins/NavStars/src/NavStars.cpp:386
 msgid ""
-"The 81 stars that are listed in the French Nautical Almanac (The original "
-"French title is <em>%1</em>) published by the French Bureau des Longitudes."
+"The 81 stars that are listed in the French Nautical Almanac published by the"
+" French Bureau des Longitudes."
 msgstr ""
-"Las 81 estrellas que figuran en el Almanaque Náutico Francés (El título "
-"original en francés es <em>%1</em>) publicado por la Oficina de Longitudes "
-"de Francia."
+"Las 81 estrellas que figuran en el Almanaque Náutico Francés publicado por "
+"la Oficina de Longitudes francesa."
 
-#. TRANSLATORS: The emphasis tags mark a book title.
-#: plugins/NavStars/src/NavStars.cpp:409
-#, qt-format
+#: plugins/NavStars/src/NavStars.cpp:387
 msgid ""
-"The 160 stars that are listed in the Russian Nautical Almanac (The original "
-"Russian title is <em>%1</em>)."
+"The 80 stars that are listed in the German Nautical Almanac published by the"
+" Federal Maritime and Hydrographic Agency of Germany."
 msgstr ""
-"Las 160 estrellas que aparecen en el Almanaque Náutico Ruso (El título "
-"original ruso es <em>%1</ em>)."
+"Las 80 estrellas que figuran en el Almanaque Náutico Alemán publicado por la"
+" Agencia Federal Marítima e Hidrográfica de Alemania."
 
-#. TRANSLATORS: The emphasis tags mark a book title.
-#: plugins/NavStars/src/NavStars.cpp:415
-#, qt-format
+#: plugins/NavStars/src/NavStars.cpp:388
+msgid "The 160 stars that are listed in the Russian Nautical Almanac."
+msgstr "Las 160 estrellas que figuran en el Almanaque Náutico Ruso."
+
+#. TRANSLATORS: The emphasis tags mark a title.
+#: plugins/NavStars/src/NavStars.cpp:390
 msgid ""
-"The 80 stars that are listed in the German Nautical Almanac (The original "
-"German title is <em>%1</em>) published by the Federal Maritime and "
-"Hydrographic Agency of Germany."
+"The typical set of navigational stars which was used by aviation of the "
+"Soviet Union. These stars can be found in books like <em>Aviation "
+"Astronomy</em> or <em>Aviation handbook</em>."
 msgstr ""
-"Las 80 estrellas que figuran en el Almanaque Náutico Alemán (El título "
-"original en alemán es <em>%1</em>) publicado por la Agencia Federal Marítima"
-" e Hidrográfica de Alemania."
+"El conjunto típico de estrellas de navegación, que fue usado por la aviación"
+" de la Unión Soviética. Estas estrellas se pueden encontrar en libros como "
+"<em>Aviation Astronomy</em> o <em>Aviation handbook</em>."
 
-#: plugins/NavStars/src/NavStars.cpp:420
+#: plugins/NavStars/src/NavStars.cpp:391
 msgid ""
-"Alignment Star List from the Gemini Astronomical Positioning System. The "
-"Gemini Astronomical Positioning System is a professional level computerized "
-"device for controlling small to medium German equatorial telescope mounts."
+"These 151 stars were used in the Voskhod (Soviet) and Soyuz (Soviet and "
+"Russian) manned space programs to navigate in space."
+msgstr ""
+"Estas 151 estrellas fueron usadas en los programas espaciales tripulados "
+"Voskhod (soviético) y Soyuz (soviético y ruso) para navegar en el espacio."
+
+#: plugins/NavStars/src/NavStars.cpp:392
+msgid ""
+"These 37 stars were used by the Apollo space program to navigate to the Moon"
+" from 1969-1972, Apollo 11 through Apollo 17."
+msgstr ""
+"Estas 37 estrellas fueron usadas por el programa espacial Apolo para navegar"
+" a la Luna entre 1969-1972, del Apolo 11 al Apolo 17."
+
+#: plugins/NavStars/src/NavStars.cpp:393
+msgid ""
+"Alignment stars from the Gemini Astronomical Positioning System, a "
+"professional level computerized device for controlling small to medium "
+"German equatorial telescope mounts."
 msgstr ""
 "Lista de estrellas de alineación del sistema de posicionamiento astronómico "
 "Gemini. El sistema de posicionamiento astronómico Gemini es un dispositivo "
 "computarizado de nivel profesional para controlar monturas de telescopios "
 "ecuatoriales alemanes pequeños y medianos."
 
-#: plugins/NavStars/src/NavStars.cpp:425
+#: plugins/NavStars/src/NavStars.cpp:394
 msgid ""
 "The Meade LX200 utilizes 33 bright and well known stars to calibrate the "
 "telescope’s Object Library in the ALTAZ and POLAR alignments. These stars "
@@ -21768,7 +21790,7 @@ msgstr ""
 "observadores de cualquier parte del mundo en cualquier noche puedan realizar"
 " alineaciones de precisión de manera fácil y rápida."
 
-#: plugins/NavStars/src/NavStars.cpp:430
+#: plugins/NavStars/src/NavStars.cpp:395
 msgid ""
 "This list from Meade ETX mount will aid the observer to find alignment stars"
 " at various times of the year."
@@ -21776,7 +21798,16 @@ msgstr ""
 "Esta lista de la montura Meade ETX ayudará al observador a encontrar "
 "estrellas de alineación en varias épocas del año."
 
-#: plugins/NavStars/src/NavStars.cpp:435
+#: plugins/NavStars/src/NavStars.cpp:396
+msgid "Alignment stars for the Meade Autostar #494 handset (ETX60AT)."
+msgstr ""
+"Estrellas de alineación para el teléfono Meade Autostar #494 (ETX60AT)."
+
+#: plugins/NavStars/src/NavStars.cpp:397
+msgid "Alignment stars for the Meade Autostar #497 handset."
+msgstr "Estrellas de alineación para el teléfono Meade Autostar #497."
+
+#: plugins/NavStars/src/NavStars.cpp:398
 msgid ""
 "Even though there are about 250 named stars in the hand control database, "
 "only 82 (stars brighter than or equal to magnitude 2.5) can be used for "
@@ -21786,89 +21817,122 @@ msgstr ""
 "control manual, solo 82 (estrellas con un brillo igual o superior a 2,5) se "
 "pueden usar para la alineación y tareas relacionadas."
 
-#: plugins/NavStars/src/NavStars.cpp:679
+#: plugins/NavStars/src/NavStars.cpp:399
+msgid ""
+"Alignment stars for the Skywatcher SynScan hand controller and SynScan Pro "
+"App."
+msgstr ""
+"Estrellas de alineación para el control manual Skywatcher SynScan y SynScan "
+"Pro App."
+
+#: plugins/NavStars/src/NavStars.cpp:400
+msgid "Alignment stars for Vixen Starbook mounts."
+msgstr "Estrellas de alineación para monturas Vixen Starbook."
+
+#: plugins/NavStars/src/NavStars.cpp:401
+msgid "Alignment stars for Argo Navis digital setting circles."
+msgstr ""
+"Estrellas de alineación para los círculos de ajuste digitales de Argo Navis."
+
+#: plugins/NavStars/src/NavStars.cpp:402
+msgid "Alignment stars for Orion Intelliscope mounts."
+msgstr "Estrellas de alineación para monturas Orion Intelliscope."
+
+#: plugins/NavStars/src/NavStars.cpp:403
+msgid "Alignment stars for Sky Commander digital setting circles."
+msgstr ""
+"Estrellas de alineación para los círculos de configuración digital de Sky "
+"Commander."
+
+#. TRANSLATORS: The full phrase: The original almanac title is
+#. NAME_OF_THE_ALMANAC
+#: plugins/NavStars/src/NavStars.cpp:422
+msgid "The original almanac title is"
+msgstr "El título original del almanaque es"
+
+#: plugins/NavStars/src/NavStars.cpp:827
 msgctxt "the highest part of the Sun or Moon"
 msgid "upper limb"
 msgstr "miembro superior"
 
-#: plugins/NavStars/src/NavStars.cpp:680
+#: plugins/NavStars/src/NavStars.cpp:828
 msgctxt "the lowest part of the Sun or Moon"
 msgid "lower limb"
 msgstr "miembro inferior"
 
-#: plugins/NavStars/src/NavStars.cpp:695 plugins/NavStars/src/NavStars.cpp:723
-#: plugins/NavStars/src/NavStars.cpp:729
+#: plugins/NavStars/src/NavStars.cpp:843 plugins/NavStars/src/NavStars.cpp:871
+#: plugins/NavStars/src/NavStars.cpp:877
 msgctxt "Greenwich Hour Angle"
 msgid "GHA"
 msgstr "GHA"
 
-#: plugins/NavStars/src/NavStars.cpp:697 plugins/NavStars/src/NavStars.cpp:727
+#: plugins/NavStars/src/NavStars.cpp:845 plugins/NavStars/src/NavStars.cpp:875
 msgctxt "object Sidereal Hour Angle (ERA, Earth rotation angle)"
 msgid "SHA"
 msgstr "SHA"
 
-#: plugins/NavStars/src/NavStars.cpp:699 plugins/NavStars/src/NavStars.cpp:733
+#: plugins/NavStars/src/NavStars.cpp:847 plugins/NavStars/src/NavStars.cpp:881
 msgctxt "Local Hour Angle"
 msgid "LHA"
 msgstr "LHA"
 
-#: plugins/NavStars/src/NavStars.cpp:702
+#: plugins/NavStars/src/NavStars.cpp:850
 msgctxt "Ground Position of object"
 msgid "GP: GHA/DEC"
 msgstr "GP: GHA/DEC"
 
-#: plugins/NavStars/src/NavStars.cpp:705
+#: plugins/NavStars/src/NavStars.cpp:853
 msgctxt "geodetic coordinate system, latitude and longitude of ground point"
 msgid "GP: LAT/LON"
 msgstr "GP: LAT/LON"
 
-#: plugins/NavStars/src/NavStars.cpp:708
+#: plugins/NavStars/src/NavStars.cpp:856
 msgctxt "geodetic coordinate system, assumed latitude and longitude of user"
 msgid "AP: LAT/LON"
 msgstr "AP: LAT/LON"
 
-#: plugins/NavStars/src/NavStars.cpp:711
+#: plugins/NavStars/src/NavStars.cpp:859
 msgctxt ""
 "Navigation/horizontal coordinate system, calculated altitude and azimuth"
 msgid "Hc/Zn"
 msgstr "Hc/Zn"
 
-#: plugins/NavStars/src/NavStars.cpp:718
+#: plugins/NavStars/src/NavStars.cpp:866
 msgctxt "Universal Time Coordinated"
 msgid "UTC"
 msgstr "UTC"
 
-#: plugins/NavStars/src/NavStars.cpp:721
+#: plugins/NavStars/src/NavStars.cpp:869
 msgctxt "Navigation/horizontal coordinate system, sextant measured altitude"
 msgid "Ho"
 msgstr "Ho"
 
-#: plugins/NavStars/src/NavStars.cpp:725
+#: plugins/NavStars/src/NavStars.cpp:873
 msgctxt "Local Hour Angle"
 msgid "LMST"
 msgstr "LMST"
 
-#: plugins/NavStars/src/NavStars.cpp:731
+#: plugins/NavStars/src/NavStars.cpp:879
 msgctxt "Declination"
 msgid "DEC"
 msgstr "DEC"
 
-#: plugins/NavStars/src/NavStars.cpp:735
+#: plugins/NavStars/src/NavStars.cpp:883
 msgctxt "geodetic coordinate system, latitude"
 msgid "LAT"
 msgstr "LAT"
 
-#: plugins/NavStars/src/NavStars.cpp:737
+#: plugins/NavStars/src/NavStars.cpp:885
 msgctxt "geodetic coordinate system, longitude"
 msgid "LON"
 msgstr "LON"
 
-#: plugins/NavStars/src/NavStars.cpp:739
+#: plugins/NavStars/src/NavStars.cpp:887
 msgctxt "Navigation/horizontal coordinate system, calculated altitude"
 msgid "Hc"
 msgstr "Hc"
 
-#: plugins/NavStars/src/NavStars.cpp:741
+#: plugins/NavStars/src/NavStars.cpp:889
 msgctxt "Navigation/horizontal coordinate system, calculated azimuth"
 msgid "Zn"
 msgstr "Zn"
@@ -21893,16 +21957,33 @@ msgstr "francés"
 msgid "Russian"
 msgstr "ruso"
 
-#. TRANSLATORS: Part of full phrase: German set of navigational stars
+#. TRANSLATORS: Part of full phrase: Soviet aviation set of navigational stars
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:245
+msgid "Soviet aviation"
+msgstr "Aviación soviética"
+
+#. TRANSLATORS: Part of full phrase: German set of navigational stars
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:247
 msgid "German"
 msgstr "Alemán"
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:272
+#. TRANSLATORS: Part of full phrase: Voskhod and Soyuz manned space programs
+#. set of navigational stars
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:250
+msgid "Voskhod and Soyuz manned space programs"
+msgstr "Programas espaciales tripulados Voskhod y Soyuz"
+
+#. TRANSLATORS: Part of full phrase: Apollo space program set of navigational
+#. stars
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:252
+msgid "Apollo space program"
+msgstr "Programa espacial Apolo"
+
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:287
 msgid "Navigational Stars Plug-in"
 msgstr "Plug-in de  estrellas de navegación"
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:283
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:298
 msgid ""
 "Additional information fields can be displayed by selecting \"Information "
 "&gt; Additional coordinates (from plugins)\""
@@ -21910,22 +21991,22 @@ msgstr ""
 "Se pueden mostrar campos de información adicionales seleccionando "
 "\"Información &gt; Coordenadas adicionales (desde complementos)\""
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:287
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:302
 msgid "These fields are:"
 msgstr "Estos campos son:"
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:289
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:310
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:304
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:325
 #, qt-format
 msgid "GHA%1: The Greenwich Hour Angle of the first point of Aries."
 msgstr "GHA%1: El ángulo horario de Greenwich del primer punto de Aries."
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:290
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:305
 msgid "SHA: Sidereal Hour Angle of the navigation star."
 msgstr "SHA: Ángulo Horario Sidéreo de la estrella de navegación."
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:291
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:316
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:306
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:331
 msgid "LHA: The observer's Local Hour Angle to the navigation star."
 msgstr ""
 "LHA: Ángulo Horario Local del observador hacia la estrella de navegación."
@@ -21933,7 +22014,7 @@ msgstr ""
 #. TRANSLATORS: In Celestial Navigation "GP" is Ground Point, astronomers
 #. often use "sub-point" which is the geodetic location of a point where the
 #. star is at zenith.
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:293
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:308
 msgid ""
 "GP: GHA/DEC: The navigation star's ground point as Greenwich Hour Angle and "
 "Declination."
@@ -21944,7 +22025,7 @@ msgstr ""
 #. TRANSLATORS: In Celestial Navigation "AP" is Assumed Position, a point
 #. close by where the observer knows themselves to be. For example, from dead
 #. reckoning.
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:295
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:310
 msgid ""
 "AP: LAT/LON: The observer's Assumed Position as geodetic latitude and "
 "longitude."
@@ -21955,7 +22036,7 @@ msgstr ""
 #. TRANSLATORS: In Celestial Navigation Hc is "computed height" from the
 #. Nautical Almanac where "height" is altitude. Likewise, Zn is computed
 #. azimuth, as seen from the AP.
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:297
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:312
 msgid ""
 "Hc/Zn: The calculated height (altitude) and computed azimuth of navigation "
 "star, seen from AP."
@@ -21963,7 +22044,7 @@ msgstr ""
 "Hc/Zn: La altura calculada (altitud) y acimut calculado de la estrella de "
 "navegación, vista desde AP."
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:301
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:316
 msgid ""
 "The user has two different view options selected by \"Show information as a "
 "tabulated list\"."
@@ -21971,7 +22052,7 @@ msgstr ""
 "El usuario tiene dos opciones de vista diferentes seleccionadas en \"Mostrar"
 " información como una lista tabulada\"."
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:305
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:320
 msgid ""
 "When 'tabulated list' is selected the fields more closely follow the <em>The"
 " Nautical Almanac</em> format:"
@@ -21981,52 +22062,52 @@ msgstr ""
 
 #. TRANSLATORS: In Celestial Navigation "height" is used where astronomers
 #. would use "altitude", Ho Height Observed
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:309
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:324
 msgid "Ho: Simulated observed altitude of navigation star using a sextant."
 msgstr ""
 "Ho: altitud observada simulada de la estrella de navegación usando un "
 "sextante."
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:311
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:326
 msgid "LMST: Local mean sidereal time."
 msgstr "LMST: Tiempo sideral medio local."
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:312
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:327
 msgid "SHA: Sidereal Hour Angle of navigation star."
 msgstr "SHA: Ángulo horario sidéreo de la estrella de navegación."
 
 #. TRANSLATORS: celestial coordinate system, declination.
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:314
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:329
 msgid "DEC: The navigation star's declination."
 msgstr "DEC: La declinación de la estrella de navegación."
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:315
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:330
 msgid "GHA: The navigation star's Greenwich Hour Angle."
 msgstr "GHA: El ángulo horario de Greenwich de la estrella de navegación."
 
 #. TRANSLATORS: Geodetic coordinate system, latitude.
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:318
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:333
 msgid "LAT: The observer's geodetic latitude."
 msgstr "LAT: La latitud geodésica del observador."
 
 #. TRANSLATORS: Geodetic coordinate system, longitude.
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:320
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:335
 msgid "LON: The observer's geodetic longitude."
 msgstr "LON: La longitud geodésica del observador."
 
 #. TRANSLATORS: The process of Sight Reduction outputs computed values. Hc
 #. computed height (altitude) for the AP
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:322
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:337
 msgid "Hc: The AP calculated height (altitude) of navigation star."
 msgstr "Hc: La altura (altitud) calculada de AP de la estrella de navegación."
 
 #. TRANSLATORS: The process of Sight Reduction outputs computed values. Zn
 #. computed azimuth
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:324
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:339
 msgid "Zn: The AP calculated azimuth of navigation star."
 msgstr "Zn: El acimut calculado de AP de la estrella de navegación."
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:328
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:343
 msgid "For further information please refer to the Stellarium User Guide."
 msgstr ""
 "Para obtener más información, consulte la Guía del usuario de Stellarium."

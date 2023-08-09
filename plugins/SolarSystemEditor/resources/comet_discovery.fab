@@ -5,18 +5,19 @@
 # when comet was officially discovered, e.g. first determination of the 
 # orbit from the observations
 #
-# Source: 
+# Sources: 
 # - Gary W. Kronk. Cometography: A Catalog of Comets. Vol. 1-6
 # - Comet Catalog in order of Number of Periodic Comets: http://www.aerith.net/comet/catalog/index-periodic.html
 # - Comet Catalog in order of Designation: http://www.aerith.net/comet/catalog/index-code.html
 # - Small-Body Database Lookup at NASA JPL: https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html
 # - Small Bodies Data Ferret: https://sbnapps.psi.edu/ferret/SimpleSearch/form.action
+# - Всехсвятский, С.К. - Физические характеристики комет (1958) = Vsekhsvjatskij, S.K. - Fizicheskie kharakteristiki komet (1958)
 #
 # Columns:
 # - IAU designation
 # - Date designation
-# - Perihelion designation
-# - Discovery designation
+# - Perihelion designation (COMET PERIHELION NUMBER)
+# - Discovery designation (COMET PROVISIONAL NUMBER)
 # - Date of discovery
 # - Discoverer
 #
@@ -122,7 +123,7 @@
    C/1733 K1|C/1733    K1|1733       |      |1733-05-17|
    C/1737 C1|C/1737    C1|1737      I|      |1737-02-06|R. Fuller
    C/1739 K1|C/1739    K1|1739       |      |1739-05-27|E. Zanotti
-   C/1742 C1|C/1742    C1|1742       |      |1743-02   |
+   C/1742 C1|C/1742    C1|1742       |      |1743-02-05|*Grant
    C/1743 C1|C/1743    C1|1743      I|      |1743-02-10|A. Grischow
    C/1743 Q1|C/1743    Q1|1743     II|      |1743-08-18|D. Klinkenberg
    C/1743 X1|C/1743    X1|1744       |      |1743-11-29|D. Klinkenberg, J.Ph.L. de Cheseaux
@@ -131,7 +132,7 @@
    C/1748 K1|C/1748    K1|1748     II|      |1748-05-19|D. Klinkenberg
    C/1750 C1|C/1750    C1|1750       |      |1750-02-01|P.W. Wargentin
    C/1757 R1|C/1757    R1|1757       |      |1757-09-11|Ch. Gartner
-   C/1758 K1|C/1758    K1|1758       |      |1758-05-26|De la Nux
+   C/1758 K1|C/1758    K1|1758       |      |1758-05-26|P.V. de la Nux
 # Great Comet
    C/1760 A1|C/1760    A1|1759    III|      |1760-01-07|J. Chevalier
    C/1760 B1|C/1760    B1|1759     II|      |1760-01-26|Ch. Messier
@@ -141,95 +142,142 @@
    C/1766 E1|C/1766    E1|1766      I|      |1766-03-08|Ch. Messier
    C/1766 G1|C/1766    G1|1766     II|      |1766-04-01|J.E. Helfenzrieder
    C/1769 P1|C/1769    P1|1769       |      |1769-08-08|Ch. Messier
-   C/1770 L1|C/1770    L1|1770      I|      |1770-06-14|
+   C/1770 L1|C/1770    L1|1770      I|      |1770-06-14|A. Lexell
 # Great Comet
-   C/1771 A1|C/1771    A1|1770     II|      |1771-01-08|
+   C/1771 A1|C/1771    A1|1770     II|      |1771-01-08|P.V. de la Nux
    C/1771 G1|C/1771    G1|1771       |      |1771-04-01|Ch. Messier
    C/1773 T1|C/1773    T1|1773       |      |1773-10-13|Ch. Messier
    C/1774 P1|C/1774    P1|1774       |      |1774-08-11|J.L. Montaigne
    C/1779 A1|C/1779    A1|1779       |      |1779-01-06|J.E. Bode
-   C/1780 U1|C/1780    U1|1780     II|      |1780-10-18|J.L. Montaigne, H.W.M. Olbers
-   C/1780 U2|C/1780    U2|1780      I|      |1780-10-27|Ch. Messier
-   C/1781 T1|C/1781    T1|1781     II|      |1781-10-09|P.F.A. Mechain
-   C/1783 W1|C/1783    W1|1783       |      |1783-11-19|E. Pigott
+   C/1780 U1|C/1780    U1|1780     II| 1780a|1780-10-18|J.L. Montaigne, H.W.M. Olbers
+   C/1780 U2|C/1780    U2|1780      I| 1780b|1780-10-27|Ch. Messier
+   C/1781 M1|C/1781    M1|1781      I| 1781a|1781-06-28|P.F.A. Mechain
+   C/1781 T1|C/1781    T1|1781     II| 1781b|1781-10-09|P.F.A. Mechain
+   C/1783 W1|C/1783    W1|1783       | 1783a|1783-11-19|E. Pigott
 # Great Comet
-   C/1783 X1|C/1783    X1|1784       |      |1783-12-15|De la Nux
-   C/1785 A1|C/1785    A1|1785      I|      |1785-01-07|Ch. Messier, P.F.A. Mechain
-   C/1785 E1|C/1785    E1|1785     II|      |1785-03-11|P.F.A. Mechain
-   C/1786 P1|C/1786    P1|1796     II|      |1786-08-01|C. Herschel
+   C/1783 X1|C/1783    X1|1784       | 1783b|1783-12-15|P.V. de la Nux
+   C/1785 A1|C/1785    A1|1785      I| 1785a|1785-01-07|Ch. Messier, P.F.A. Mechain
+   C/1785 E1|C/1785    E1|1785     II| 1785b|1785-03-11|P.F.A. Mechain
+   C/1786 P1|C/1786    P1|1786     II| 1786b|1786-08-01|C. Herschel
    C/1787 G1|C/1787    G1|1787       |      |1787-04-10|P.F.A. Mechain
-   C/1788 W1|C/1788    W1|1788      I|      |1788-11-26|Ch. Messier
-   C/1790 A1|C/1790    A1|1790      I|      |1790-01-07|C. Herschel
-   C/1790 H1|C/1790    H1|1790    III|      |1790-04-18|C. Herschel
-   C/1791 X1|C/1791    X1|1792      I|      |1791-12-15|C. Herschel
-   C/1793 A1|C/1793    A1|1792     II|      |1793-01-08|E. Gregory
-   C/1793 S1|C/1793    S1|1793      I|      |1793-09-24|J. Perny
-   C/1793 S2|C/1793    S2|1793      I|      |1793-09-27|Ch. Messier
-   C/1796 F1|C/1796    F1|1796       |      |1796-03-31|H.W.M. Olbers
-   C/1797 P1|C/1797    P1|1797       |      |1797-08-14|A. Bouvard, C. Herschel
-   C/1798 G1|C/1798    G1|1798      I|      |1798-04-12|Ch. Messier
-   C/1798 X1|C/1798    X1|1798     II|      |1798-12-07|A. Bouvard
-   C/1799 P1|C/1799    P1|1799      I|      |1799-08-07|P.F.A. Mechain
-   C/1799 Y1|C/1799    Y1|1799     II|      |1799-12-26|P.F.A. Mechain
+   C/1788 W1|C/1788    W1|1788      I| 1788a|1788-11-26|Ch. Messier
+   C/1790 A1|C/1790    A1|1790      I| 1790a|1790-01-07|C. Herschel
+   C/1790 H1|C/1790    H1|1790    III| 1790c|1790-04-18|C. Herschel
+   C/1791 X1|C/1791    X1|1792      I| 1791a|1791-12-15|C. Herschel
+   C/1793 A1|C/1793    A1|1792     II| 1793a|1793-01-08|E. Gregory
+   C/1793 S1|C/1793    S1|1793     II| 1793c|1793-09-24|J. Perny
+   C/1793 S2|C/1793    S2|1793      I| 1793b|1793-09-26|Ch. Messier
+   C/1796 F1|C/1796    F1|1796       | 1796a|1796-03-31|H.W.M. Olbers
+   C/1797 P1|C/1797    P1|1797       | 1797a|1797-08-14|A. Bouvard, C. Herschel
+   C/1798 G1|C/1798    G1|1798      I| 1798b|1798-04-12|Ch. Messier
+   C/1798 X1|C/1798    X1|1798     II| 1798c|1798-12-07|A. Bouvard
+   C/1799 P1|C/1799    P1|1799      I| 1799a|1799-08-07|P.F.A. Mechain
+   C/1799 Y1|C/1799    Y1|1799     II| 1799b|1799-12-26|P.F.A. Mechain
 # Volume 2, 1800-1899
    C/1801 N1|C/1801    N1|1801       |      |1801-07-11|J.L. Pons
    C/1802 Q1|C/1802    Q1|1802       |      |1802-08-26|J.L. Pons
    C/1804 E1|C/1804    E1|1804       |      |1804-03-07|J.L. Pons
    C/1806 V1|C/1806    V1|1806     II|      |1806-11-10|J.L. Pons
-   C/1808 F1|C/1808    F1|1808      I|      |1808-03-25|J.L. Pons
+   C/1807 R1|C/1807    R1|1807       |      |1807-09-09|
+   C/1808 F1|C/1808    F1|1808      I| 1808b|1808-03-25|J.L. Pons
+   C/1808 M1|C/1808    M1|1808     II| 1808c|1808-06-24|J.L. Pons
    C/1810 Q1|C/1810    Q1|1810       |      |1810-08-23|J.L. Pons
-   C/1811 W1|C/1811    W1|1811     II|      |1811-11-16|J.L. Pons
+   C/1811 F1|C/1811    F1|1811      I| 1811a|1811-03-25|H. Flaugergues
+   C/1811 W1|C/1811    W1|1811     II| 1811b|1811-11-16|J.L. Pons
          12P|P/1812    O1|1812       |      |1812-07-21|J.L. Pons
-   C/1813 C1|C/1813    C1|1813      I|      |1813-02-04|J.L. Pons
-   C/1813 G1|C/1813    G1|1813     II|      |1813-04-03|J.L. Pons
+   C/1813 C1|C/1813    C1|1813      I| 1813a|1813-02-04|J.L. Pons
+   C/1813 G1|C/1813    G1|1813     II| 1813c|1813-04-03|J.L. Pons
          13P|P/1815    E1|1815       |      |1815-03-06|H.W.M. Olbers
-   C/1817 Y1|C/1817    Y1|1818     II|      |1817-12-26|J.L. Pons
+   C/1816 B1|C/1816    B1|1816       |      |1816-01-22|J.L. Pons
+   C/1817 Y1|C/1817    Y1|1818     II| 1817b|1817-12-26|J.L. Pons
           2P|P/1818    W1|1819      I|      |1818-11-26|J.L. Pons
-   C/1818 W2|C/1818    W2|1818    III|      |1818-11-28|J.L. Pons
-        289P|P/1819    W1|1819     IV|      |1819-11-28|J.J. Blanpain
+   C/1818 W2|C/1818    W2|1818    III| 1818c|1818-11-28|J.L. Pons
+# Great Comet
+   C/1819 N1|C/1819    N1|1819     II| 1819c|1819-07-01|J.G. Tralles
+        289P|P/1819    W1|1819     IV| 1819d|1819-11-28|J.J. Blanpain
    C/1821 B1|C/1821    B1|1821       |      |1821-01-21|J.N. Nicollet, J.L. Pons
-   C/1822 J1|C/1822    J1|1822      I|      |1822-05-12|J.F.A. Gambart
-   C/1822 K1|C/1822    K1|1822    III|      |1822-05-31|J.L. Pons
-   C/1822 N1|C/1822    N1|1822     IV|      |1822-07-13|J.L. Pons
+   C/1822 J1|C/1822    J1|1822      I| 1822a|1822-05-12|J.F.A. Gambart
+   C/1822 K1|C/1822    K1|1822    III| 1822b|1822-05-31|J.L. Pons
+   C/1822 N1|C/1822    N1|1822     IV| 1822d|1822-07-13|J.L. Pons
 # Great Comet
    C/1823 Y1|C/1823    Y1|1823       |      |1823-12-29|N. de Breaute
-   C/1824 O1|C/1824    O1|1824     II|      |1824-07-23|C.F. Scheithauer
-   C/1825 K1|C/1825    K1|1825      I|      |1825-05-19|J.F.A. Gambart
-   C/1825 N1|C/1825    N1|1825     IV|      |1825-07-15|J.L. Pons
-   C/1825 P1|C/1825    P1|1825     II|      |1825-08-09|J.L. Pons
-   C/1825 V1|C/1825    V1|1826     II|      |1825-11-07|J.L. Pons
-          3D|D/1826    D1|1826      I|      |1826-02-27|W. von Biela
-   C/1826 U1|C/1826    U1|1826      V|      |1826-10-22|J.L. Pons
-   C/1826 Y1|C/1826    Y1|1827      I|      |1826-12-26|J.L. Pons
-        273P|P/1827    M1|1827     II|      |1827-06-21|J.L. Pons, J.F.A. Gambart
-# Great Comet
-   C/1830 F1|C/1830    F1|1830      I|      |1830-03-16|Faraguet
-# Great Comet
-   C/1831 A1|C/1831    A1|1830     II|      |1831-01-07|J. Herapath
-   C/1832 O1|C/1831    O1|1832     II|      |1832-07-19|J.F.A. Gambart
-   С/1834 E1|С/1834    E1|1834       |      |1834-03-08|J.F.A. Gambart
-   С/1835 H1|С/1835    H1|1835      I|      |1835-04-20|P.H.L. von Boguslawski
-   С/1839 X1|С/1839    X1|1840      I|      |1839-12-03|J.G. Galle
-   С/1840 B1|С/1840    B1|1840     II|      |1840-01-25|J.G. Galle
-   С/1842 U1|С/1842    U1|1842     II|      |1842-10-28|P.A.E. Laugier
-          4P|P/1843    W1|1843    III|      |1843-11-23|H. Faye
+   C/1824 N1|C/1824    N1|1824      I| 1824a|1824-07-14|Ch. Rumker
+   C/1824 O1|C/1824    O1|1824     II| 1824b|1824-07-23|C.F. Scheithauer
+   C/1825 K1|C/1825    K1|1825      I| 1825a|1825-05-19|J.F.A. Gambart
+   C/1825 N1|C/1825    N1|1825     IV| 1825c|1825-07-15|J.L. Pons
+   C/1825 P1|C/1825    P1|1825     II| 1825d|1825-08-09|J.L. Pons
+   C/1825 V1|C/1825    V1|1826     II| 1825e|1825-11-07|J.L. Pons
+          3D|D/1826    D1|1826      I| 1826a|1826-02-27|W. von Biela
+   C/1826 P1|C/1826    P1|1826     IV| 1826c|1826-08-07|J.L. Pons
+   C/1826 U1|C/1826    U1|1826      V| 1826d|1826-10-22|J.L. Pons
+   C/1826 Y1|C/1826    Y1|1827      I| 1826e|1826-12-26|J.L. Pons
+        273P|P/1827    M1|1827     II| 1827a|1827-06-21|J.L. Pons, J.F.A. Gambart
+   C/1827 P1|C/1827    P1|1827    III| 1827b|1827-08-03|J.L. Pons
 # Great March Comet
-   С/1843 D1|С/1843    D1|1843      I|      |1843-02-06|
-   С/1844 N1|С/1844    N1|1844     II|      |1844-07-08|F.V. Mauvais
-         54P|P/1844    Q1|1844      I|      |1844-08-23|F. de Vico
-   С/1844 Y2|С/1844    Y2|1845      I|      |1844-12-28|H.L. d'Arrest
-   С/1846 B1|С/1846    B1|1846      I|      |1846-01-24|F. de Vico
-        122P|P/1846    D1|1846     IV|      |1846-02-20|F. de Vico
-          5D|D/1846    D2|1846    III|      |1846-02-26|T. Brorsen
-   С/1846 O1|С/1846    O1|1846      V|      |1846-07-29|F. de Vico, J.R. Hind
-   С/1847 J1|С/1847    J1|1847     II|      |1847-05-07|A. Colla
-   С/1847 N1|С/1847    N1|1847    III|      |1847-07-04|F.V. Mauvais
-         23P|P/1847    O1|1847      V|      |1847-07-20|T. Brorsen
-   С/1847 Q1|С/1847    Q1|1847     IV|      |1847-08-31|K.G. Schwaizer
-   С/1847 T1|С/1847    T1|1847     VI|      |1847-10-02|M. Mitchell
-   С/1848 U1|С/1848    U1|1849      I|      |1848-10-26|A.C. Petersen
-          6P|P/1851    M1|1851     II|      |1851-06-28|H.L. d'Arrest
-         20D|D/1852    O1|1852     IV|      |1852-07-24|J.G. Westphal
+   C/1830 F1|C/1830    F1|1830      I|      |1830-03-16|H.A. Faraguet
+# Great Comet
+   C/1831 A1|C/1831    A1|1830     II| 1831a|1831-01-07|J. Herapath
+   C/1832 O1|C/1831    O1|1832     II| 1832b|1832-07-19|J.F.A. Gambart
+   C/1833 S1|C/1833    S1|1833       |      |1833-09-30|J. Dunlop
+   С/1834 E1|С/1834    E1|1834       |      |1834-03-08|J.F.A. Gambart
+   С/1835 H1|С/1835    H1|1835      I| 1835a|1835-04-20|P.H.L. von Boguslawski
+   С/1839 X1|С/1839    X1|1840      I| 1839b|1839-12-03|J.G. Galle
+   С/1840 B1|С/1840    B1|1840     II| 1840a|1840-01-25|J.G. Galle
+   C/1840 E1|C/1840    E1|1840    III| 1840b|1840-03-06|J.G. Galle
+   C/1840 U1|C/1840    U1|1840     IV| 1840c|1840-10-26|C. Bremiker
+   С/1842 U1|С/1842    U1|1842     II| 1842b|1842-10-28|P.A.E. Laugier
+# Great March Comet
+   С/1843 D1|С/1843    D1|1843      I| 1843a|1843-02-06|
+   C/1843 J1|C/1843    J1|1843     II| 1843b|1843-05-02|F.V. Mauvais
+          4P|P/1843    W1|1843    III| 1843c|1843-11-23|H. Faye
+   С/1844 N1|С/1844    N1|1844     II| 1844a|1844-07-07|F.V. Mauvais
+         54P|P/1844    Q1|1844      I| 1844b|1844-08-22|F. de Vico
+   С/1844 Y1|C/1844    Y1|1844    III| 1844c|1844-12-06|
+   С/1844 Y2|С/1844    Y2|1845      I| 1844d|1844-12-28|H.L. d'Arrest
+   C/1845 D1|C/1845    D1|1845     II| 1845a|1845-02-25|F. de Vico
+# Great June comet
+   C/1845 L1|C/1845    L1|1845    III| 1845b|1845-06-02|A. Colla
+   С/1846 B1|С/1846    B1|1846      I| 1846a|1846-01-24|F. de Vico
+        122P|P/1846    D1|1846     IV| 1846b|1846-02-20|F. de Vico
+          5D|D/1846    D2|1846    III| 1846c|1846-02-26|T. Brorsen
+   С/1846 O1|С/1846    O1|1846      V| 1846f|1846-07-29|F. de Vico, J.R. Hind
+   C/1846 J1|C/1846    J1|1846    VII| 1846d|1846-05-01|T. Brorsen
+   C/1846 S1|C/1846    S1|1846   VIII| 1846g|1846-09-23|F. de Vico
+   C/1847 C1|C/1847    C1|1847      I| 1847a|1847-02-06|J.R. Hind
+   С/1847 J1|С/1847    J1|1847     II| 1847b|1847-05-07|A. Colla
+   С/1847 N1|С/1847    N1|1847    III| 1847c|1847-07-04|F.V. Mauvais
+         23P|P/1847    O1|1847      V| 1847d|1847-07-20|T. Brorsen
+   С/1847 Q1|С/1847    Q1|1847     IV| 1847e|1847-08-31|K.G. Schwaizer
+   С/1847 T1|С/1847    T1|1847     VI| 1847f|1847-10-02|M. Mitchell
+   C/1848 P1|C/1848    P1|1848      I| 1848a|1949-08-07|A.C. Petersen
+   С/1848 U1|С/1848    U1|1849      I| 1848c|1848-10-26|A.C. Petersen
+   C/1849 G1|C/1849    G1|1849    III| 1849a|1849-04-11|K.G. Schweizer
+   C/1849 G2|C/1849    G2|1849     II| 1849b|1849-04-15|M. Goujon
+   C/1850 J1|C/1850    J1|1850      I| 1850a|1850-05-01|A.C. Petersen
+   C/1850 Q1|C/1850    Q1|1850     II| 1850b|1850-08-29|G. Bond
+          6P|P/1851    M1|1851     II| 1851a|1851-06-28|H.L. d'Arrest
+   C/1851 P1|C/1851    P1|1851    III| 1851b|1851-08-01|T. Brorsen
+   C/1851 U1|C/1851    U1|1851     IV| 1851c|1851-10-22|T. Brorsen
+   C/1852 K1|C/1852    K1|1852     II| 1852b|1852-05-15|J. Chacornac
+         20D|D/1852    O1|1852     IV| 1852c|1852-07-24|J.G. Westphal
+   C/1853 E1|C/1853    E1|1853      I| 1853a|1853-03-06|A. Secchi
+   C/1853 G1|C/1853    G1|1853     II| 1853b|1853-03-04|K.G. Schweizer
+   C/1853 L1|C/1853    L1|1853    III| 1853e|1853-06-11|W. Klinkerfues
+   C/1853 R1|C/1853    R1|1853     IV| 1853d|1853-09-11|M. Brühns
+   C/1853 W1|C/1853    W1|1854      I| 1853e|1853-11-25|R. van Arsdale
+# Great comet
+   C/1854 F1|C/1854    F1|1854     II| 1854b|1854-03-23|A. de Menciaux
+   C/1854 L1|C/1854    L1|1854    III| 1854c|1854-06-06|W. Klinkerfues
+   C/1854 R1|C/1854    R1|1854     IV| 1854d|1854-09-11|W. Klinkerfues, M. Brühns
+   C/1854 Y1|C/1854    Y1|1854      V| 1854a|1855-01-14|F.A.Th. Winnecke, Ch. Dien
+   C/1855 G1|C/1855    G1|1855      I| 1855b|1855-04-11|K.G. Schweizer
+   C/1855 L1|C/1855    L1|1855     II| 1855d|1855-06-03|G.B. Donati
+   C/1855 V1|C/1855    V1|1855     IV| 1855d|1855-06-03|K.Ch. Bruhns
+   C/1857 D1|C/1857    D1|1857      I| 1857a|1857-02-22|H.L. d'Arrest
+   C/1857 M1|C/1857    M1|1857    III| 1857c|1857-06-22|W. Klinkerfues
+   C/1857 O1|C/1857    O1|1857     IV| 1857d|1857-07-25|Ch.H.F. Peters
+   C/1857 Q1|C/1857    Q1|1857      V| 1857e|1857-08-20|W. Klinkerfues
+   C/1857 V1|C/1857    V1|1857     VI| 1857f|1857-11-10|G.B. Donati, R. van Arsdale
 # P.F.A. Méchain discovered this comet in the evening sky near Omicron Piscium on 1790
 # January 9.75. H.P. Tuttle discovered this comet on 1858 January 5.01. Ch. W. Tuttle
 # used three positions obtained between January 5 and 13, and computed a parabolic orbit
@@ -240,34 +288,193 @@
 # Pons discovered this comet on 1819 June 12. Winnecke accidentally rediscovered this
 # comet on 1858 March 9.06.
           7P|P/1858    E1|1858     II|      |1858-03-09|J.L. Pons, F.A.Th. Winnecke
-        109P|P/1862    O1|1862    III|      |1862-07-16|L. Swift
-         55P|P/1865    Y1|1866      I|      |1865-12-19|W. Tempel, H.P. Tuttle
-          9P|P/1867    G1|1867     II|      |1867-04-03|W. Tempel
+   C/1858 K1|C/1858    K1|1858     IV| 1858d|1858-05-21|K.Ch. Bruhns
+   C/1858 L1|C/1858    L1|1858     VI| 1858a|1858-06-02|G.B. Donati
+   C/1858 R1|C/1858    R1|1858    VII| 1858a|1858-09-05|H.P. Tuttle
+   C/1859 G1|C/1859    G1|1859       | 1859b|1859-04-02|W. Tempel
+# Double Comet
+   C/1860 D1|C/1860    D1|1860      I| 1860a|1860-02-26|E. Liais
+   C/1860 H1|C/1860    H1|1860     II| 1860c|1860-04-17|Ch. Rumker
+# Great Comet
+   C/1860 M1|C/1860    M1|1860    III| 1860c|1860-06-18|
+   C/1860 U1|C/1860    U1|1860     IV| 1860d|1860-10-23|W. Tempel
+   C/1861 G1|C/1861    G1|1861      I| 1861a|1861-04-04|A.E. Thatcher
+# Great Comet
+   C/1861 J1|C/1861    J1|1861     II| 1861b|1861-05-13|J. Tebbutt
+   C/1861 Y1|C/1861    Y1|1861    III| 1861d|1861-12-28|H.P. Tuttle
+   C/1862 N1|C/1862    N1|1862     II| 1862a|1862-07-02|*Schmidt, W. Tempel
+        109P|P/1862    O1|1862    III| 1862b|1862-07-16|L. Swift
+   C/1862 W1|C/1862    W1|1862     IV| 1862c|1862-11-28|L. Respighi
+   C/1862 X1|C/1862    X1|1863      I| 1862d|1862-11-30|K.Ch. Bruhns
+   C/1863 G1|C/1863    G1|1863     II| 1863a|1863-04-11|W. Klinkerfues
+   C/1863 G2|C/1863    G2|1863    III| 1863b|1863-04-12|L. Respighi
+   C/1863 T1|C/1863    T1|1863     VI| 1863c|1863-10-09|C.W. Baeker
+   C/1863 V1|C/1863    V1|1863     IV| 1863d|1863-11-04|W. Tempel
+   C/1863 Y1|C/1863    Y1|1863      V| 1863e|1863-12-28|L. Respighi
+   C/1864 N1|C/1864    N1|1864     II| 1864a|1864-07-04|W. Tempel
+   C/1864 O1|C/1864    O1|1864    III| 1864b|1864-07-23|G.B. Donati, C. Toussaint
+   C/1864 R1|C/1864    R1|1864      I| 1864c|1864-09-09|G.B. Donati
+   C/1864 X1|C/1864    X1|1864     IV| 1864c|1864-12-15|C.W. Baeker
+   C/1864 Y1|C/1864    Y1|1864      V| 1864e|1864-12-30|K.Ch. Bruhns
+# Great Southern Comet
+   C/1865 B1|C/1865    B1|1865      I| 1865a|1865-01-17|F. Abbott
+         55P|P/1865    Y1|1866      I| 1865f|1865-12-19|W. Tempel, H.P. Tuttle
+          9P|P/1867    G1|1867     II| 1867b|1867-04-03|W. Tempel
+   C/1867 S1|C/1867    S1|1867    III| 1867c|1867-09-26|C.W. Baeker, F.A.Th. Winnecke
+   C/1868 L1|C/1868    L1|1868     II| 1868b|1868-06-13|F.A.Th. Winnecke
+   C/1869 T1|C/1869    T1|1869     II| 1869b|1869-10-11|W. Tempel
+   C/1870 K1|C/1870    K1|1870      I| 1870a|1870-05-29|W. Tempel, F.A.Th. Winnecke
+   C/1870 Q1|C/1870    Q1|1870     II| 1870b|1870-08-28|J.E. Coggia
+   C/1870 W1|C/1870    W1|1870     IV| 1870d|1870-11-23|F.A.Th. Winnecke
+   C/1871 G1|C/1871    G1|1871      I| 1871a|1871-04-07|F.A.Th. Winnecke
+   C/1871 L1|C/1871    L1|1871     II| 1871b|1871-06-14|W. Tempel
+   C/1871 V1|C/1871    V1|1871     IV| 1871e|1871-11-03|W. Tempel
+   X/1872 X1|X/1872    X1|1872      I|      |1872-12-03|N.R. Pogson
          10P|P/1873    N1|1873     II| 1873b|1873-07-03|W. Tempel
-# E.W.L. Tempel discovered this comet on 1869 November 27 in Pegasus. L. Swift discovered
+   C/1873 Q1|C/1873    Q1|1873     IV| 1873c|1873-08-20|A. Borrelly
+   C/1873 Q2|C/1873    Q2|1873      V| 1873d|1873-08-23|P. Henry
+   C/1874 D1|C/1874    D1|1874      I| 1874a|1874-02-20|F.A.Th. Winnecke
+   C/1874 G1|C/1874    G1|1874     II| 1874b|1874-04-11|F.A.Th. Winnecke
+   C/1874 H1|C/1874    H1|1874    III| 1874c|1874-04-17|J.E. Coggia
+   C/1874 O1|C/1874    O1|1874      V| 1874d|1874-07-25|A. Borrelly
+   C/1874 Q1|C/1874    Q1|1874     IV| 1874e|1874-08-19|J.E. Coggia
+   C/1874 X1|C/1874    X1|1874     VI| 1874f|1874-12-06|A. Borrelly
+   C/1877 C1|C/1877    C1|1877      I| 1877a|1877-02-08|A. Borrelly
+   C/1877 G1|C/1877    G1|1877     II| 1877b|1877-04-05|F.A.Th. Winnecke
+   C/1877 G2|C/1877    G2|1877    III| 1877c|1877-04-10|E. Block, L. Swift, A. Borrelly
+   C/1877 R1|C/1877    R1|1877     VI| 1877e|1877-09-13|J.E. Coggia
+   C/1877 T1|C/1877    T1|1877      V| 1877f|1877-10-02|W. Tempel
+   C/1878 N1|C/1878    N1|1878      I| 1878a|1878-07-06|L. Swift
+   C/1879 M1|C/1879    M1|1879     II| 1879c|1879-06-16|L. Swift
+   C/1879 Q1|C/1879    Q1|1879      V| 1879d|1879-08-21|J. Palisa
+   C/1879 Q2|C/1879    Q2|1879     IV| 1879e|1879-08-24|E. Hartwig
+# Great Southern Comet
+   C/1880 C1|C/1880    C1|1880      I| 1880a|1880-01-31|
+   C/1880 G1|C/1880    G1|1880     II| 1880b|1880-04-06|J.M. Schaeberle
+   C/1880 S1|C/1880    S1|1880    III| 1880c|1880-09-29|E. Hartwig
+# W. Tempel discovered this comet on 1869 November 27 in Pegasus. L. Swift discovered
 # a diffuse, circular comet in Pegasus on 1880 October 11. By mid-November, astronomers
 # realized Swift's comet was a return of Tempel's 1869 comet.
          11P|P/1880    T1|1880     IV| 1880e|1880-10-11|L. Swift
+   C/1880 Y1|C/1880    Y1|1880      V| 1880f|1880-12-16|*Pechule
+   C/1881 J1|C/1881    J1|1881     II| 1881a|1881-04-30|L. Swift
+# Great Comet
+   C/1881 K1|C/1881    K1|1881    III| 1881b|1881-05-22|J. Tebbutt
+   C/1881 N1|C/1881    N1|1881     IV| 1881c|1881-07-12|J.M. Schaeberle
          72P|P/1881    T1|1881      V| 1881f|1881-10-04|W.F. Denning
+   C/1881 S1|C/1881    S1|1881     VI| 1881e|1881-09-17|E.E. Barnard
+   C/1881 W1|C/1881    W1|1881   VIII| 1881g|1881-11-16|L. Swift
+   C/1882 F1|C/1882    F1|1882      I| 1882a|1882-03-17|Ch.S. Wells
+# Great September Comet
+   C/1882 R1|C/1882    R1|1882     II| 1882b|1882-09-01|
+   C/1882 R2|C/1882    R2|1882    III| 1882c|1882-09-14|E.E. Barnard
+   C/1883 D1|C/1883    D1|1883      I| 1883a|1883-02-23|W.R. Brooks, L. Swift
+   C/1884 A1|C/1884    A1|1883     II| 1884a|1884-01-07|*Ross
+   C/1884 O1|C/1884    O1|1884     II| 1884b|1884-07-16|E.E. Barnard
          14P|P/1884    S1|1884    III| 1884c|1884-09-17|M. Wolf
+   C/1885 N1|C/1885    N1|1885     II| 1885a|1884-07-07|E.E. Barnard
+   C/1885 R1|C/1885    R1|1885    III| 1885c|1885-08-31|W.R. Brooks
+   C/1885 X1|C/1885    X1|1886      I| 1885d|1885-12-01|L. Fabry
+   C/1885 X2|C/1885    X2|1886     II| 1885e|1885-12-03|E.E. Barnard
+   C/1885 Y1|C/1885    Y1|1885      V| 1885f|1885-12-26|W.R. Brooks
+   C/1886 J1|C/1886    J1|1886    III| 1886b|1886-04-30|W.R. Brooks
+   C/1886 H1|C/1886    H1|1886      V| 1886a|1886-04-27|W.R. Brooks
+   C/1886 K1|C/1886    K1|1886     IV| 1886c|1886-05-22|W.R. Brooks
          15P|P/1886    S1|1886    VII| 1886e|1886-09-26|W.H. Finlay
+   C/1886 T1|C/1886    T1|1886     IX| 1886f|1886-10-04|E.E. Barnard, E. Hartwig
+# Great Southern Comet
+   C/1887 B1|C/1887    B1|1887      I| 1887a|1887-01-18|J.M. Thome
+   C/1887 B2|C/1887    B2|1887     II| 1887b|1887-01-22|W.R. Brooks
+   C/1887 B3|C/1887    B3|1886   VIII| 1887c|1887-01-23|E.E. Barnard
+   C/1887 D1|C/1887    D1|1887    III| 1887d|1887-02-16|E.E. Barnard
+   C/1887 J1|C/1887    J1|1887     IV| 1887e|1887-05-12|E.E. Barnard
+   C/1888 D1|C/1888    D1|1888      I| 1888a|1888-02-18|*Sawerthal
+   C/1888 P1|C/1888    P1|1888    III| 1888c|1888-08-07|W.R. Brooks
+   C/1888 R1|C/1888    R1|1889      I| 1888e|1888-09-02|E.E. Barnard
+   C/1888 U1|C/1888    U1|1888      V| 1888f|1888-10-31|E.E. Barnard
+   C/1889 G1|C/1889    G1|1889     II| 1889b|1889-03-31|E.E. Barnard
         177P|P/1889    M1|1889    III| 1889c|1889-06-24|E.E. Barnard
          16P|P/1889    N1|1889      V| 1889d|1889-07-07|W.R. Brooks
+   C/1889 O1|C/1889    O1|1889     IV| 1889e|1889-07-19|J.E. Davidson
          64P|P/1889    W1|1889     VI| 1889f|1889-11-16|L. Swift
+   C/1889 X1|C/1889    X1|1890      I| 1889g|1889-12-12|A. Borrelly
+   C/1890 F1|C/1890    F1|1890     II| 1890a|1890-03-19|W.R. Brooks
+   C/1890 O1|C/1890    O1|1890    III| 1890b|1890-07-18|J.E. Coggia
+   C/1890 O2|C/1890    O2|1890     VI| 1890c|1890-07-23|W.F. Denning
+   C/1890 V1|C/1890    V1|1890     IV| 1890e|1890-11-05|T. Zona
         113P|P/1890    W1|1890    VII| 1890f|1890-11-17|R. Spitaler
+   C/1891 F1|C/1891    F1|1891      I| 1891a|1891-03-29|E.E. Barnard, W.F. Denning
+   C/1891 T1|C/1891    T1|1891     IV| 1891e|1891-10-02|E.E. Barnard
+   C/1892 E1|C/1892    E1|1892      I| 1892a|1892-03-06|L. Swift
+   C/1892 F1|C/1892    F1|1892     II| 1892b|1892-03-18|W.F. Denning
          17P|P/1892    V1|1892    III| 1892f|1892-11-07|E. Holmes
 # This comet marked the beginning of a new era in cometary astronomy, as it was the first
 # to be discovered by photography.
         206P|P/1892    T1|1892      V| 1892e|1892-10-13|E.E. Barnard
-        205P|P/1896    R2|1896      V| 1896d|1896-09   |M. Giacobini
+   C/1892 Q1|C/1892    Q1|1892     VI| 1892d|1892-08-28|W.R. Brooks
+   C/1892 W1|C/1892    W1|1893      I| 1892g|1892-11-19|W.R. Brooks
+   C/1893 N1|C/1893    N1|1893     II| 1893b|1893-07-08|A. Rordame, F. Quénisset
+   C/1893 U1|C/1893    U1|1893     IV| 1893c|1893-10-16|W.R. Brooks
+   C/1894 F1|C/1894    F1|1894      I| 1894a|1894-03-24|W.F. Denning
+   C/1894 G1|C/1894    G1|1894     II| 1894b|1894-04-01|W.F. Gale
+   C/1895 Q1|C/1895    Q1|1895     II| 1895a|1895-08-20|E. Swift
+   C/1895 W1|C/1895    W1|1895     IV| 1895c|1895-11-16|Ch.D. Perrine
+   C/1895 W2|C/1895    W2|1895    III| 1895d|1895-11-21|W.R. Brooks
+   C/1896 C1|C/1896    C1|1896      I| 1896a|1896-02-14|Ch.D. Perrine, E. Lamp
+   C/1896 G1|C/1896    G1|1896    III| 1896b|1896-04-13|E. Swift
+   C/1896 R1|C/1896    R1|1896     IV| 1896e|1896-08-31|W.E. Sperra, W.R. Brooks
+        205P|P/1896    R2|1896      V| 1896d|1896-09-04|M. Giacobini
          18D|D/1896    X1|1896    VII| 1896g|1896-12-09|Ch.D. Perrine
+   C/1896 V1|C/1896    V1|1897      I| 1896f|1896-11-02|Ch.D. Perrine
+   C/1898 F1|C/1898    F1|1898      I| 1898b|1898-03-19|Ch.D. Perrine
+   C/1898 L1|C/1898    L1|1898    VII| 1898c|1898-06-11|E.F. Coddington, W. Pauly
+   C/1898 L2|C/1898    L2|1898     VI| 1898e|1898-06-14|Ch.D. Perrine
+   C/1898 M1|C/1898    M1|1898      V| 1898g|1898-06-18|M. Giacobini
+   C/1898 R1|C/1898    R1|1898     IX| 1898h|1898-09-12|Ch.D. Perrine
+   C/1898 U1|C/1898    U1|1898      X| 1898i|1898-10-20|W.R. Brooks
+   C/1898 V1|C/1898    V1|1898   VIII| 1898j|1898-11-21|*Chase
+   C/1899 E1|C/1899    E1|1899      I| 1899a|1899-03-03|L. Swift
+   C/1899 S1|C/1899    S1|1899      V| 1899e|1899-09-20|M. Giacobini
 # Volume 3, 1900-1932
+   C/1900 B1|C/1900    B1|1900      I| 1900a|1900-01-31|M. Giacobini
+   C/1900 O1|C/1900    O1|1900     II| 1900b|1900-07-23|A. Borrelly
          21P|P/1900    Y1|1900    III| 1900c|1900-12-20|M. Giacobini
+# Great Comet
+   C/1901 G1|C/1901    G1|1901      I| 1901a|1901-04-12|H. Viscara
+   C/1902 G1|C/1902    G1|1902      I| 1902a|1902-04-14|W.R. Brooks
+   C/1902 R1|C/1902    R1|1902    III| 1902b|1902-08-31|Ch.D. Perrine
+   C/1902 X1|C/1902    X1|1903     II| 1903d|1902-12-02|M. Giacobini
+   C/1903 A1|C/1903    A1|1903      I| 1903a|1903-01-15|M. Giacobini
+   C/1903 H1|C/1903    H1|1903    III| 1903b|1903-04-17|J. Grigg
+   C/1903 M1|C/1903    M1|1903     IV| 1903c|1903-06-21|A. Borrelly
+   C/1904 H1|C/1904    H1|1904      I| 1904a|1904-04-16|W.R. Brooks
+   C/1904 Y1|C/1904    Y1|1904     II| 1904d|1904-12-17|M. Giacobini
          19P|P/1904    Y2|1905     II| 1904e|1904-12-28|A. Borrelly
+   C/1905 F1|C/1905    F1|1905    III| 1905a|1905-03-25|M. Giacobini
+   C/1905 W1|C/1905    W1|1905      V| 1905b|1905-11-17|*Schaer
+   C/1905 X1|C/1905    X1|1906      I| 1905c|1905-12-06|M. Giacobini
+   C/1906 B1|C/1906    B1|1905     VI| 1906a|1906-01-26|W.R. Brooks
+   C/1906 E1|C/1906    E1|1905     IV| 1906b|1906-03-03|A. Kopff
+   C/1906 F1|C/1906    F1|1906     II| 1906c|1906-03-18|*Ross
          22P|P/1906    Q1|1906     IV| 1906e|1906-08-22|A. Kopff
+   C/1906 V1|C/1906    V1|1906    VII| 1906g|1906-11-10|H. Thiele
          97P|P/1906    V2|1906     VI| 1906h|1906-11-15|J.H. Metcalf
+   C/1907 E1|C/1907    E1|1907      I| 1907a|1907-03-10|M. Giacobini
+   C/1907 G1|C/1907    G1|1907     II| 1907b|1907-04-08|J. Grigg, J.E. Mellish
+   C/1907 L2|C/1907    L2|1907     IV| 1907d|1907-06-09|Z. Daniel
+   C/1907 T1|C/1907    T1|1907      V| 1907e|1907-10-13|J.E. Mellish
+   C/1908 R1|C/1908    R1|1908    III| 1908c|1908-09-01|D.W. Morehouse
+   C/1909 L1|C/1909    L1|1909      I| 1909a|1909-06-14|A. Borrelly, Z. Daniel
          33P|P/1909    X1|1909     IV| 1909e|1909-12-07|Z. Daniel
+# Great January Comet
+   C/1910 A1|C/1910    A1|1910      I| 1910a|1910-01-12|
+   C/1911 N1|C/1911    N1|1911     II| 1911b|1911-07-06|C.C. Kiess
+   C/1911 O1|C/1911    O1|1911      V| 1911c|1911-07-20|W.R. Brooks
+   C/1911 S2|C/1911    S2|1911     VI| 1911f|1911-09-23|F. Quénisset
+   C/1911 S3|C/1911    S3|1911     IV| 1911g|1911-09-28|S.I. Beljawsky
          24P|P/1911    X1|1911    VII| 1911h|1911-12-01|M.A. Schaumasse
+   C/1912 R1|C/1912    R1|1912     II| 1912a|1912-09-08|W.F. Gale
+   C/1912 V1|C/1912    V1|1912    III| 1912c|1912-11-02|A. Borrelly
          28P|P/1913    R2|1913    III| 1913c|1913-09-04|G.N. Neujmin
          69P|P/1915    W1|1916      I| 1915e|1915-11-24|C.J. Taylor
          25D|D/1916    D1|1916     II| 1916a|1916-02-24|G.N. Neujmin
@@ -278,6 +485,7 @@
          26P|P/1922    K1|1922      I| 1922b|1902-07-23|J. Grigg, J.F. Skjellerup
          43P|P/1924    Y1|1924     IV| 1924d|1924-12-22|M. Wolf
          32P|P/1926    V1|1927    III| 1926f|1926-11-06|J. Comas Solà
+   C/1927 E1|C/1927    E1|1927     IV| 1927d|1927-03-10|C.L. Stearns
          34D|D/1927    L1|1927     VI| 1927f|1927-06-07|W.F. Gale
          29P|P/1927    V1|1925     II| 1927i|1927-11-15|A. Schwassmann, A.A. Wachmann
          30P|P/1928    D1|1928      I| 1928a|1928-02-22|K. Reinmuth

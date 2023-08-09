@@ -1072,6 +1072,25 @@ Vec3d StelCore::getObserverHeliocentricEclipticPos() const
 	return Vec3d(matAltAzToHeliocentricEclipticJ2000[12], matAltAzToHeliocentricEclipticJ2000[13], matAltAzToHeliocentricEclipticJ2000[14]);
 }
 
+Vec3d StelCore::getObserverHeliocentricEclipticVelocity() const
+{
+	if (!position) return Vec3d(0,0,0);
+
+	const auto& planet = *position->getHomePlanet();
+	const Vec3d planetVelocity = planet.getHeliocentricEclipticVelocity();
+	if (!flagUseTopocentricCoordinates)
+		return planetVelocity;
+
+	const auto off = position->getTopographicOffsetFromCenter();
+	const auto rotRadius = off.v[0];
+	const auto rotPeriod = planet.getSiderealDay();
+	const auto linearSpeed = 2 * M_PI * rotRadius / rotPeriod; // AU/day
+	const auto toJ2000 = matAltAzToHeliocentricEclipticJ2000.upper3x3();
+	const auto eastwardVelocity = Vec3d(0,linearSpeed,0);
+	const auto velocity = toJ2000 * eastwardVelocity;
+	return planetVelocity + velocity;
+}
+
 // Set the location to use by default at startup
 void StelCore::setDefaultLocationID(const QString& id)
 {
@@ -1246,7 +1265,7 @@ void StelCore::moveObserverToSelected()
 				StelLocation loc(ni->getEnglishName(), "", "", ni->getPlanet()->getEnglishName(), ni->getLongitude(), ni->getLatitude(), 0, 0, getCurrentTimeZone(), 1, 'X', ni->getPlanet()->getEnglishName());
 				loc.lightPollutionLuminance = 0; // be dead sure it's zero!
 
-				moveObserverTo(loc, 1, 1, pl->getEnglishName());
+				moveObserverTo(loc, 1, 1, ni->getPlanet()->getEnglishName());
 				objmgr->unSelect(); // no use to keep it: Marker will flicker around the screen.
 			}
 		}

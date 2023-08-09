@@ -241,16 +241,27 @@ void NavStarsWindow::populateNavigationalStarsSets()
 	nsSets->addItem(q_("French"), "French");
 	// TRANSLATORS: Part of full phrase: Russian set of navigational stars
 	nsSets->addItem(q_("Russian"), "Russian");
+	// TRANSLATORS: Part of full phrase: Soviet aviation set of navigational stars
+	nsSets->addItem(q_("Soviet aviation"), "USSRAvia");	
 	// TRANSLATORS: Part of full phrase: German set of navigational stars
 	nsSets->addItem(q_("German"), "German");
+
+	// TRANSLATORS: Part of full phrase: Voskhod and Soyuz manned space programs set of navigational stars
+	nsSets->addItem(q_("Voskhod and Soyuz manned space programs"), "USSRSpace");
+	// TRANSLATORS: Part of full phrase: Apollo space program set of navigational stars
+	nsSets->addItem(q_("Apollo space program"), "Apollo");
+	
+	// Telescope alignment stars
 	nsSets->addItem("Gemini APS", "GeminiAPS");
 	nsSets->addItem("Meade LX200", "MeadeLX200");
 	nsSets->addItem("Meade ETX", "MeadeETX");
 	nsSets->addItem("Meade Autostar #494", "MeadeAS494");
 	nsSets->addItem("Meade Autostar #497", "MeadeAS497");
-	nsSets->addItem("Celestron", "Celestron");
-	// TRANSLATORS: Part of full phrase: Apollo space program set of navigational stars
-	nsSets->addItem(q_("Apollo space program"), "Apollo");
+	nsSets->addItem("Celestron NexStar", "CelestronNS");
+	nsSets->addItem("Skywatcher SynScan", "SkywatcherSS");
+	nsSets->addItem("Vixen Starbook", "VixenSB");
+	nsSets->addItem("Argo Navis", "ArgoNavis");
+	nsSets->addItem("Sky Commander DSC", "SkyCommander");
 
 	//Restore the selection
 	index = nsSets->findData(selectedNsSetId, Qt::UserRole, Qt::MatchCaseSensitive);

@@ -797,21 +797,19 @@ QSurfaceFormat StelMainView::getDesiredGLFormat(QSettings* configuration)
 		#endif
 	}
 
-	// Note: this only works if --mesa-mode was given on the command line. Auto-switch to Mesa or the driver name apparently cannot be detected at this early stage.
-	const bool isMesa = QString(getenv("QT_OPENGL"))=="software";
+	// NOTE: multisampling is implemented via FBO now, so it's not requested here.
 
 	//request some sane buffer formats
 	fmt.setRedBufferSize(8);
 	fmt.setGreenBufferSize(8);
 	fmt.setBlueBufferSize(8);
 	fmt.setDepthBufferSize(24);
+	// Without stencil buffer the debug versions of Qt will repeatedly emit warnings like:
+	// "OpenGL paint engine: attempted to use stencil test without requesting a stencil buffer."
+	fmt.setStencilBufferSize(8);
 
 	if(qApp && qApp->property("onetime_single_buffer").toBool())
 		fmt.setSwapBehavior(QSurfaceFormat::SingleBuffer);
-
-	const int multisamplingLevel = configuration ? configuration->value("video/multisampling", 0).toInt() : 0;
-	if(multisamplingLevel && qApp && qApp->property("spout").toString() == "none" && !isMesa)
-		fmt.setSamples(multisamplingLevel);
 
 	// VSync control. NOTE: it must be applied to the default format (QSurfaceFormat::setDefaultFormat) to take effect.
 #ifdef Q_OS_MACOS
@@ -875,6 +873,7 @@ void StelMainView::init()
 	glInfo.isGLES = format.renderableType()==QSurfaceFormat::OpenGLES;
 	qDebug().nospace() << "Luminance textures are " << (glInfo.supportsLuminanceTextures ? "" : "not ") << "supported";
 	glInfo.isCoreProfile = format.profile() == QSurfaceFormat::CoreProfile;
+	glInfo.isHighGraphicsMode = !!StelOpenGL::highGraphicsFunctions();
 
 	auto& gl = *QOpenGLContext::currentContext()->functions();
 	if(format.majorVersion() * 1000 + format.minorVersion() >= 4006 ||
@@ -1692,8 +1691,6 @@ void StelMainView::doScreenshot(void)
 	QOpenGLFramebufferObjectFormat fbFormat;
 	fbFormat.setAttachment(QOpenGLFramebufferObject::CombinedDepthStencil);
 	fbFormat.setInternalTextureFormat(isGLES ? GL_RGBA : GL_RGB); // try to avoid transparent background!
-	if(const auto multisamplingLevel = configuration->value("video/multisampling", 0).toInt())
-        fbFormat.setSamples(multisamplingLevel);
 	QOpenGLFramebufferObject * fbObj = new QOpenGLFramebufferObject(physImgWidth, physImgHeight, fbFormat);
 	fbObj->bind();
 	// Now the painter has to be convinced to paint to the potentially larger image frame.

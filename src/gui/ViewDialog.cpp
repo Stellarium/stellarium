@@ -224,6 +224,7 @@ void ViewDialog::createDialogContent()
 	connectCheckBox(ui->planetOrbitCheckBox, "actionShow_Planets_Orbits");
 	connectBoolProperty(ui->planetIsolatedOrbitCheckBox, "SolarSystem.flagIsolatedOrbits");
 	connectBoolProperty(ui->planetOrbitOnlyCheckBox, "SolarSystem.flagPlanetsOrbitsOnly");
+	connectBoolProperty(ui->planetOrbitsMoonCheckBox, "SolarSystem.flagOrbitsWithMoons");
 	connectBoolProperty(ui->planetOrbitPermanentCheckBox, "SolarSystem.flagPermanentOrbits");
 	connectIntProperty(ui->planetOrbitsThicknessSpinBox, "SolarSystem.orbitsThickness");
 	connect(ui->pushButtonOrbitColors, SIGNAL(clicked(bool)), this, SLOT(showConfigureOrbitColorsDialog()));
@@ -249,6 +250,7 @@ void ViewDialog::createDialogContent()
 	connectDoubleProperty(ui->planetsLabelsHorizontalSlider, "SolarSystem.labelsAmount",0.0,10.0);	
 	connectCheckBox(ui->planetNomenclatureCheckBox, "actionShow_Planets_Nomenclature");
 	connectColorButton(ui->planetNomenclatureColor, "NomenclatureMgr.nomenclatureColor", "color/planet_nomenclature_color");
+	connectBoolProperty(ui->outlineCratersCheckBox, "NomenclatureMgr.flagOutlineCraters");
 	connectColorButton(ui->planetLabelColor, "SolarSystem.labelsColor", "color/planet_names_color");
 	connectColorButton(ui->planetTrailsColor, "SolarSystem.trailsColor", "color/object_trails_color");
 	connectBoolProperty(ui->planetTrailsCheckBox, "SolarSystem.trailsDisplayed");
@@ -613,6 +615,7 @@ void ViewDialog::populateNomenclatureControls(bool flag)
 {
 	ui->hidePlanetNomenclatureCheckBox->setEnabled(flag);
 	ui->showSpecialNomenclatureOnlyCheckBox->setEnabled(flag);
+	ui->outlineCratersCheckBox->setEnabled(flag);
 	ui->showTerminatorNomenclatureOnlyCheckBox->setEnabled(flag);
 	ui->terminatorMinAltSpinbox->setEnabled(flag);
 	ui->terminatorMaxAltSpinbox->setEnabled(flag);

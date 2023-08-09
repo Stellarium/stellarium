@@ -88,6 +88,7 @@ SolarSystem::SolarSystem() : StelObjectModule()
 	, trailsThickness(1)
 	, flagIsolatedOrbits(true)
 	, flagPlanetsOrbitsOnly(false)
+	, flagOrbitsWithMoons(false)
 	, ephemerisMarkersDisplayed(true)
 	, ephemerisDatesDisplayed(false)
 	, ephemerisMagnitudesDisplayed(false)
@@ -116,6 +117,10 @@ SolarSystem::SolarSystem() : StelObjectModule()
 	planetNameFont.setPixelSize(StelApp::getInstance().getScreenFontSize());
 	connect(&StelApp::getInstance(), SIGNAL(screenFontSizeChanged(int)), this, SLOT(setFontSize(int)));
 	setObjectName("SolarSystem");
+	connect(this, SIGNAL(flagOrbitsChanged(bool)),            this, SLOT(reconfigureOrbits()));
+	connect(this, SIGNAL(flagPlanetsOrbitsOnlyChanged(bool)), this, SLOT(reconfigureOrbits()));
+	connect(this, SIGNAL(flagIsolatedOrbitsChanged(bool)),    this, SLOT(reconfigureOrbits()));
+	connect(this, SIGNAL(flagOrbitsWithMoonsChanged(bool)),   this, SLOT(reconfigureOrbits()));
 }
 
 void SolarSystem::setFontSize(int newFontSize)
@@ -214,6 +219,7 @@ void SolarSystem::init()
 	setMaxTrailTimeExtent(conf->value("viewing/max_trail_time_extent", 1).toInt());
 	setFlagIsolatedOrbits(conf->value("viewing/flag_isolated_orbits", true).toBool());
 	setFlagPlanetsOrbitsOnly(conf->value("viewing/flag_planets_orbits_only", false).toBool());
+	setFlagOrbitsWithMoons(conf->value("viewing/flag_orbits_with_moons", false).toBool());
 	setFlagPermanentOrbits(conf->value("astro/flag_permanent_orbits", false).toBool());
 	setOrbitColorStyle(conf->value("astro/planets_orbits_color_style", "one_color").toString());
 
@@ -274,8 +280,8 @@ void SolarSystem::init()
 	setEphemerisJupiterMarkerColor( Vec3f(conf->value("color/ephemeris_jupiter_marker_color", "0.3,1.0,1.0").toString()));
 	setEphemerisSaturnMarkerColor(  Vec3f(conf->value("color/ephemeris_saturn_marker_color", "0.0,1.0,0.0").toString()));
 
-	setOrbitsThickness(conf->value("astro/object_orbits_thickness", 1).toBool());
-	setTrailsThickness(conf->value("astro/object_trails_thickness", 1).toBool());
+	setOrbitsThickness(conf->value("astro/object_orbits_thickness", 1).toInt());
+	setTrailsThickness(conf->value("astro/object_trails_thickness", 1).toInt());
 	recreateTrails();
 	setFlagTrails(conf->value("astro/flag_object_trails", false).toBool());
 
@@ -1278,15 +1284,17 @@ void SolarSystem::computePositions(double dateJDE, PlanetP observerPlanet)
 		}
 		const Vec3d obsPosJDE=observerPlanet->getHeliocentricEclipticPos();
 
-		// For higher accuracy, we now make two iterations of light time and aberration correction. In the final round, we also compute rotation data.
-		// May fix sub-arcsecond inaccuracies, and optionally apply aberration in the way described in Explanatory Supplement (2013), 7.55.
-		// For reasons unknown (See discussion in GH:#1626) we do not add anything for the Moon when observed from Earth!
-		// Presumably the used ephemerides already provide aberration-corrected positions for the Moon?
+		// For higher accuracy, we now make two iterations of light time and aberration correction. In the final
+		// round, we also compute rotation data.  May fix sub-arcsecond inaccuracies, and optionally apply
+		// aberration in the way described in Explanatory Supplement (2013), 7.55.  For reasons unknown (See
+		// discussion in GH:#1626) we do not add anything for the Moon when observed from Earth!  Presumably the
+		// used ephemerides already provide aberration-corrected positions for the Moon?
 		const Vec3d aberrationPushSpeed=observerPlanet->getHeliocentricEclipticVelocity() * core->getAberrationFactor();
 		for (const auto& p : qAsConst(systemPlanets))
 		{
 			//p->setExtraInfoString(StelObject::DebugAid, "");
-			const double lightTimeDays = (p->getHeliocentricEclipticPos()-obsPosJDE).norm() * (AU / (SPEED_OF_LIGHT * 86400.));
+			const auto planetPos = p->getHeliocentricEclipticPos();
+			const double lightTimeDays = (planetPos-obsPosJDE).norm() * (AU / (SPEED_OF_LIGHT * 86400.));
 			Vec3d aberrationPush(0.);
 			if (withAberration && (observerPlanet->englishName!="Earth" || p->englishName!="Moon"))
 				aberrationPush=lightTimeDays*aberrationPushSpeed;
@@ -1296,7 +1304,8 @@ void SolarSystem::computePositions(double dateJDE, PlanetP observerPlanet)
 		for (const auto& p : qAsConst(systemPlanets))
 		{
 			//p->setExtraInfoString(StelObject::DebugAid, "");
-			const double lightTimeDays = (p->getHeliocentricEclipticPos()-obsPosJDE).norm() * (AU / (SPEED_OF_LIGHT * 86400.));
+			const auto planetPos = p->getHeliocentricEclipticPos();
+			const double lightTimeDays = (planetPos-obsPosJDE).norm() * (AU / (SPEED_OF_LIGHT * 86400.));
 			Vec3d aberrationPush(0.);
 			if (withAberration && (observerPlanet->englishName!="Earth" || p->englishName!="Moon"))
 				aberrationPush=lightTimeDays*aberrationPushSpeed;
@@ -1308,12 +1317,13 @@ void SolarSystem::computePositions(double dateJDE, PlanetP observerPlanet)
 //					      .arg(QString::number(aberrationPushSpeed[0], 'f', 3))
 //					      .arg(QString::number(aberrationPushSpeed[0], 'f', 3)));
 
-			if      (p->englishName=="Moon")    RotationElements::updatePlanetCorrections(dateJDE-lightTimeDays, RotationElements::EarthMoon);
-			else if (p->englishName=="Mars")    RotationElements::updatePlanetCorrections(dateJDE-lightTimeDays, RotationElements::Mars);
-			else if (p->englishName=="Jupiter") RotationElements::updatePlanetCorrections(dateJDE-lightTimeDays, RotationElements::Jupiter);
-			else if (p->englishName=="Saturn")  RotationElements::updatePlanetCorrections(dateJDE-lightTimeDays, RotationElements::Saturn);
-			else if (p->englishName=="Uranus")  RotationElements::updatePlanetCorrections(dateJDE-lightTimeDays, RotationElements::Uranus);
-			else if (p->englishName=="Neptune") RotationElements::updatePlanetCorrections(dateJDE-lightTimeDays, RotationElements::Neptune);
+			const auto update = &RotationElements::updatePlanetCorrections;
+			if      (p->englishName=="Moon")    update(dateJDE-lightTimeDays, RotationElements::EarthMoon);
+			else if (p->englishName=="Mars")    update(dateJDE-lightTimeDays, RotationElements::Mars);
+			else if (p->englishName=="Jupiter") update(dateJDE-lightTimeDays, RotationElements::Jupiter);
+			else if (p->englishName=="Saturn")  update(dateJDE-lightTimeDays, RotationElements::Saturn);
+			else if (p->englishName=="Uranus")  update(dateJDE-lightTimeDays, RotationElements::Uranus);
+			else if (p->englishName=="Neptune") update(dateJDE-lightTimeDays, RotationElements::Neptune);
 		}
 	}
 	else
@@ -1322,12 +1332,13 @@ void SolarSystem::computePositions(double dateJDE, PlanetP observerPlanet)
 		{
 			p->setExtraInfoString(StelObject::DebugAid, "");
 			p->computePosition(dateJDE, Vec3d(0.));
-			if      (p->englishName=="Moon")    RotationElements::updatePlanetCorrections(dateJDE, RotationElements::EarthMoon);
-			else if (p->englishName=="Mars")    RotationElements::updatePlanetCorrections(dateJDE, RotationElements::Mars);
-			else if (p->englishName=="Jupiter") RotationElements::updatePlanetCorrections(dateJDE, RotationElements::Jupiter);
-			else if (p->englishName=="Saturn")  RotationElements::updatePlanetCorrections(dateJDE, RotationElements::Saturn);
-			else if (p->englishName=="Uranus")  RotationElements::updatePlanetCorrections(dateJDE, RotationElements::Uranus);
-			else if (p->englishName=="Neptune") RotationElements::updatePlanetCorrections(dateJDE, RotationElements::Neptune);
+			const auto update = &RotationElements::updatePlanetCorrections;
+			if      (p->englishName=="Moon")    update(dateJDE, RotationElements::EarthMoon);
+			else if (p->englishName=="Mars")    update(dateJDE, RotationElements::Mars);
+			else if (p->englishName=="Jupiter") update(dateJDE, RotationElements::Jupiter);
+			else if (p->englishName=="Saturn")  update(dateJDE, RotationElements::Saturn);
+			else if (p->englishName=="Uranus")  update(dateJDE, RotationElements::Uranus);
+			else if (p->englishName=="Neptune") update(dateJDE, RotationElements::Neptune);
 		}
 	}
 	computeTransMatrices(dateJDE, observerPlanet->getHeliocentricEclipticPos());
@@ -2045,67 +2056,6 @@ bool SolarSystem::getFlagLabels() const
 	return false;
 }
 
-void SolarSystem::setFlagOrbits(bool b)
-{
-	bool old = flagOrbits;
-	flagOrbits = b;
-	bool flagPlanetsOnly = getFlagPlanetsOrbitsOnly();
-	if (!b || !selected || selected==sun)
-	{
-		if (flagPlanetsOnly)
-		{
-			for (const auto& p : qAsConst(systemPlanets))
-			{
-				if (p->getPlanetType()==Planet::isPlanet)
-					p->setFlagOrbits(b);
-				else
-					p->setFlagOrbits(false);
-			}
-		}
-		else
-		{
-			for (const auto& p : qAsConst(systemPlanets))
-				p->setFlagOrbits(b);
-		}
-	}
-	else if (getFlagIsolatedOrbits()) // If a Planet is selected and orbits are on, fade out non-selected ones
-	{
-		if (flagPlanetsOnly)
-		{
-			for (const auto& p : qAsConst(systemPlanets))
-			{
-				if (selected == p && p->getPlanetType()==Planet::isPlanet)
-					p->setFlagOrbits(b);
-				else
-					p->setFlagOrbits(false);
-			}
-		}
-		else
-		{
-			for (const auto& p : qAsConst(systemPlanets))
-			{
-				if (selected == p)
-					p->setFlagOrbits(b);
-				else
-					p->setFlagOrbits(false);
-			}
-		}
-	}
-	else
-	{
-		// A planet is selected and orbits are on - draw orbits for the planet and their moons
-		for (const auto& p : qAsConst(systemPlanets))
-		{
-			if (selected == p || selected == p->parent)
-				p->setFlagOrbits(b);
-			else
-				p->setFlagOrbits(false);
-		}
-	}
-	if(old != flagOrbits)
-		emit flagOrbitsChanged(flagOrbits);
-}
-
 void SolarSystem::setFlagLightTravelTime(bool b)
 {
 	if(b!=flagLightTravelTime)
@@ -2137,7 +2087,7 @@ void SolarSystem::setSelected(PlanetP obj)
 		selected.clear();
 	// Undraw other objects hints, orbit, trails etc..
 	setFlagHints(getFlagHints());
-	setFlagOrbits(getFlagOrbits());
+	reconfigureOrbits();
 }
 
 
@@ -2663,14 +2613,63 @@ void SolarSystem::setNumberIsolatedTrails(int n)
 	emit numberIsolatedTrailsChanged(numberIsolatedTrails);
 }
 
+void SolarSystem::setFlagOrbits(bool b)
+{
+	if(b!=getFlagOrbits())
+	{
+		flagOrbits = b;
+		emit flagOrbitsChanged(b);
+	}
+}
+
+// Connect this to all signals when orbit selection or selected object has changed.
+// This method goes through all planets and sets orbit drawing as configured by several flags
+void SolarSystem::reconfigureOrbits()
+{
+	// we have: flagOrbits O, flagIsolatedOrbits I, flagPlanetsOrbitsOnly P, flagOrbitsWithMoons M, flagPermanentOrbits and a possibly selected planet S
+	// permanentOrbits only influences local drawing of a single planet and can be ignored here.
+	// O S I P M
+	// 0 X X X X  NONE
+	// 1 0 1 X X  NONE
+	// 1 X 0 0 X  ALL
+	// 1 X 0 1 0  all planets only
+	// 1 X 0 1 1  all planets with their moons only
+
+	// 1 1 1 0 0  only selected SSO
+	// 1 1 1 0 1  only selected SSO and orbits of its moon system
+	// 1 1 1 1 0  only selected SSO if it is a major planet
+	// 1 1 1 1 1  only selected SSO if it is a major planet, plus its system of moons
+
+	if (!flagOrbits || (flagIsolatedOrbits && (!selected || selected==sun)))
+	{
+		for (const auto& p : qAsConst(systemPlanets))
+			p->setFlagOrbits(false);
+		return;
+	}
+	// from here, flagOrbits is certainly on
+	if (!flagIsolatedOrbits)
+	{
+		for (const auto& p : qAsConst(systemPlanets))
+			p->setFlagOrbits(!flagPlanetsOrbitsOnly || (p->getPlanetType()==Planet::isPlanet || (flagOrbitsWithMoons && p->parent && p->parent->getPlanetType()==Planet::isPlanet) ));
+		return;
+	}
+	else // flagIsolatedOrbits && selected
+	{
+		// Display only orbit for selected planet and, if requested, its moons.
+		for (const auto& p : qAsConst(systemPlanets))
+			p->setFlagOrbits(   (p==selected && (  !flagPlanetsOrbitsOnly ||  p->getPlanetType()==Planet::isPlanet ) )
+					 || (flagOrbitsWithMoons && p->getPlanetType()==Planet::isMoon && p->parent==selected ) );
+		return;
+	}
+}
+
 void SolarSystem::setFlagIsolatedOrbits(bool b)
 {
 	if(b!=flagIsolatedOrbits)
 	{
 		flagIsolatedOrbits = b;
+		StelApp::immediateSave("viewing/flag_isolated_orbits", b);
 		emit flagIsolatedOrbitsChanged(b);
-		// Reinstall flag for orbits to renew visibility of orbits
-		setFlagOrbits(getFlagOrbits());
 	}
 }
 
@@ -2684,15 +2683,29 @@ void SolarSystem::setFlagPlanetsOrbitsOnly(bool b)
 	if(b!=flagPlanetsOrbitsOnly)
 	{
 		flagPlanetsOrbitsOnly = b;
+		StelApp::immediateSave("viewing/flag_planets_orbits_only", b);
 		emit flagPlanetsOrbitsOnlyChanged(b);
-		// Reinstall flag for orbits to renew visibility of orbits
-		setFlagOrbits(getFlagOrbits());
 	}
 }
 
 bool SolarSystem::getFlagPlanetsOrbitsOnly() const
 {
 	return flagPlanetsOrbitsOnly;
+}
+
+void SolarSystem::setFlagOrbitsWithMoons(bool b)
+{
+	if(b!=flagOrbitsWithMoons)
+	{
+		flagOrbitsWithMoons = b;
+		StelApp::immediateSave("viewing/flag_orbits_with_moons", b);
+		emit flagOrbitsWithMoonsChanged(b);
+	}
+}
+
+bool SolarSystem::getFlagOrbitsWithMoons() const
+{
+	return flagOrbitsWithMoons;
 }
 
 // Set/Get planets names color
@@ -3271,8 +3284,12 @@ bool SolarSystem::getFlagDrawSunHalo() const
 
 void SolarSystem::setFlagPermanentOrbits(bool b)
 {
-	Planet::permanentDrawingOrbits=b;
-	emit flagPermanentOrbitsChanged(b);
+	if (Planet::permanentDrawingOrbits!=b)
+	{
+		Planet::permanentDrawingOrbits=b;
+		StelApp::immediateSave("astro/flag_permanent_orbits", b);
+		emit flagPermanentOrbitsChanged(b);
+	}
 }
 
 bool SolarSystem::getFlagPermanentOrbits() const
@@ -3282,8 +3299,12 @@ bool SolarSystem::getFlagPermanentOrbits() const
 
 void SolarSystem::setOrbitsThickness(int v)
 {
-	Planet::orbitsThickness=v;
-	emit orbitsThicknessChanged(v);
+	if (v!=Planet::orbitsThickness)
+	{
+		Planet::orbitsThickness=v;
+		StelApp::immediateSave("astro/object_orbits_thickness", v);
+		emit orbitsThicknessChanged(v);
+	}
 }
 
 int SolarSystem::getOrbitsThickness() const
@@ -3353,20 +3374,12 @@ void SolarSystem::setOrbitColorStyle(QString style)
 
 QString SolarSystem::getOrbitColorStyle() const
 {
-	QString r = "one_color";
-	switch (Planet::orbitColorStyle)
-	{
-		case Planet::ocsOneColor:
-			r = "one_color";
-			break;
-		case Planet::ocsGroups:
-			r = "groups";
-			break;
-		case Planet::ocsMajorPlanets:
-			r = "major_planets";
-			break;
-	}
-	return r;
+	static const QMap<Planet::PlanetOrbitColorStyle, QString>map={
+		{ Planet::ocsOneColor,     "one_color"},
+		{ Planet::ocsGroups,       "groups"},
+		{ Planet::ocsMajorPlanets, "major_planets"}
+	};
+	return map.value(Planet::orbitColorStyle, "one_color");
 }
 
 // TODO: To make the code better understandable, get rid of planet->computeModelMatrix(trans, true) here.

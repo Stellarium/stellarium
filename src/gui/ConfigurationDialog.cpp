@@ -875,6 +875,7 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("viewing/max_trail_time_extent",			propMgr->getStelPropertyValue("SolarSystem.maxTrailTimeExtent").toInt());
 	conf->setValue("viewing/flag_isolated_orbits",			propMgr->getStelPropertyValue("SolarSystem.flagIsolatedOrbits").toBool());
 	conf->setValue("viewing/flag_planets_orbits_only",		propMgr->getStelPropertyValue("SolarSystem.flagPlanetsOrbitsOnly").toBool());
+	conf->setValue("viewing/flag_orbits_with_moons",		propMgr->getStelPropertyValue("SolarSystem.flagOrbitsWithMoons").toBool());
 	conf->setValue("astro/flag_light_travel_time",			propMgr->getStelPropertyValue("SolarSystem.flagLightTravelTime").toBool());
 	conf->setValue("viewing/flag_draw_moon_halo",			propMgr->getStelPropertyValue("SolarSystem.flagDrawMoonHalo").toBool());
 	conf->setValue("viewing/flag_draw_sun_halo",			propMgr->getStelPropertyValue("SolarSystem.flagDrawSunHalo").toBool());
@@ -904,6 +905,7 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("astro/flag_show_obj_self_shadows",		propMgr->getStelPropertyValue("SolarSystem.flagShowObjSelfShadows").toBool());
 	conf->setValue("astro/apparent_magnitude_algorithm",		Planet::getApparentMagnitudeAlgorithmString());
 	conf->setValue("astro/flag_planets_nomenclature",		propMgr->getStelPropertyValue("NomenclatureMgr.flagShowNomenclature").toBool());
+	conf->setValue("astro/flag_planets_nomenclature_outline_craters",propMgr->getStelPropertyValue("NomenclatureMgr.flagOutlineCraters").toBool());
 	conf->setValue("astro/flag_hide_local_nomenclature",		propMgr->getStelPropertyValue("NomenclatureMgr.flagHideLocalNomenclature").toBool());
 	conf->setValue("astro/flag_special_nomenclature_only",		propMgr->getStelPropertyValue("NomenclatureMgr.specialNomenclatureOnlyDisplayed").toBool());
 	conf->setValue("astro/flag_planets_nomenclature_terminator_only",propMgr->getStelPropertyValue("NomenclatureMgr.flagShowTerminatorZoneOnly").toBool());
@@ -2021,19 +2023,28 @@ void ConfigurationDialog::populateDitherList()
 
 	ditherCombo->blockSignals(true);
 	ditherCombo->clear();
-	ditherCombo->addItem(qc_("None","disabled"), "disabled");
-	ditherCombo->addItem(q_("5/6/5 bits"), "color565");
-	ditherCombo->addItem(q_("6/6/6 bits"), "color666");
-	ditherCombo->addItem(q_("8/8/8 bits"), "color888");
-	ditherCombo->addItem(q_("10/10/10 bits"), "color101010");
+	if(StelMainView::getInstance().getGLInformation().isHighGraphicsMode)
+	{
+		ditherCombo->addItem(qc_("None","disabled"), "disabled");
+		ditherCombo->addItem(q_("5/6/5 bits"), "color565");
+		ditherCombo->addItem(q_("6/6/6 bits"), "color666");
+		ditherCombo->addItem(q_("8/8/8 bits"), "color888");
+		ditherCombo->addItem(q_("10/10/10 bits"), "color101010");
 
-	// show current setting
-	QSettings* conf = StelApp::getInstance().getSettings();
-	Q_ASSERT(conf);
-	QVariant selectedDitherFormat = conf->value("video/dithering_mode", "disabled");
+		// show current setting
+		QSettings* conf = StelApp::getInstance().getSettings();
+		Q_ASSERT(conf);
+		QVariant selectedDitherFormat = conf->value("video/dithering_mode", "disabled");
 
-	int index = ditherCombo->findData(selectedDitherFormat, Qt::UserRole, Qt::MatchCaseSensitive);
-	ditherCombo->setCurrentIndex(index);
+		int index = ditherCombo->findData(selectedDitherFormat, Qt::UserRole, Qt::MatchCaseSensitive);
+		ditherCombo->setCurrentIndex(index);
+	}
+	else
+	{
+		ditherCombo->addItem(q_("Unsupported"), "disabled");
+		ditherCombo->setDisabled(true);
+		ditherCombo->setToolTip(q_("Unsupported in low-graphics mode"));
+	}
 	ditherCombo->blockSignals(false);
 }
 

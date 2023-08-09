@@ -97,8 +97,6 @@ void Landscape::initGL()
 	setupCurrentVAO();
 	releaseVAO();
 
-	ditherPatternTex = StelApp::getInstance().getTextureManager().getDitheringTexture(0);
-
 	initialized = true;
 }
 
@@ -793,7 +791,6 @@ void main()
 		const auto frag =
 			StelOpenGL::globalShaderPrefix(StelOpenGL::FRAGMENT_SHADER) +
 			prj->getUnProjectShader() +
-			makeDitheringShader()+
 			R"(
 VARYING highp vec3 ndcPos;
 uniform int whatToRender;
@@ -976,7 +973,7 @@ void main(void)
 		color = sampleSideTexture(currentSide, vec2(s,t), texDx, texDy);
 	}
 
-	FRAG_COLOR = dither(color * brightness);
+	FRAG_COLOR = color * brightness;
 }
 )";
 		ok = renderProgram->addShaderFromSourceCode(QOpenGLShader::Fragment, frag);
@@ -997,9 +994,7 @@ void main(void)
 		shaderVars.tanMode                 = renderProgram->uniformLocation("tanMode");
 		shaderVars.calibrated              = renderProgram->uniformLocation("calibrated");
 		shaderVars.brightness              = renderProgram->uniformLocation("brightness");
-		shaderVars.rgbMaxValue             = renderProgram->uniformLocation("rgbMaxValue");
 		shaderVars.whatToRender            = renderProgram->uniformLocation("whatToRender");
-		shaderVars.ditherPattern           = renderProgram->uniformLocation("ditherPattern");
 		shaderVars.decorAngleShift         = renderProgram->uniformLocation("decorAngleShift");
 		shaderVars.firstSideInBatch        = renderProgram->uniformLocation("firstSideInBatch");
 		shaderVars.sidePresenceMask        = renderProgram->uniformLocation("sidePresenceMask");
@@ -1024,15 +1019,9 @@ void main(void)
 	if (!onlyPolygon || !horizonPolygon) // Make sure to draw the regular pano when there is no polygon
 	{
 		renderProgram->bind();
-		const int ditherTexSampler = 0;
-		ditherPatternTex->bind(ditherTexSampler);
-		renderProgram->setUniformValue(shaderVars.ditherPattern, ditherTexSampler);
-		const int firstFreeTexSampler = ditherTexSampler+1;
-
-		renderProgram->setUniformValue(shaderVars.rgbMaxValue,
-					       calcRGBMaxValue(core->getDitheringMode()).toQVector());
-
 		bindVAO();
+
+		const int firstFreeTexSampler = 0;
 
 		gl.glEnable(GL_BLEND);
 		gl.glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -1632,7 +1621,6 @@ void main()
 		const auto frag =
 			StelOpenGL::globalShaderPrefix(StelOpenGL::FRAGMENT_SHADER) +
 			prj->getUnProjectShader() +
-			makeDitheringShader()+
 			R"(
 VARYING highp vec3 ndcPos;
 uniform sampler2D mapTex;
@@ -1664,7 +1652,7 @@ void main(void)
 		FRAG_COLOR = vec4(0);
 		return;
 	}
-	FRAG_COLOR = dither(color * brightness);
+	FRAG_COLOR = color * brightness;
 }
 )";
 		ok = renderProgram->addShaderFromSourceCode(QOpenGLShader::Fragment, frag);
@@ -1682,8 +1670,6 @@ void main(void)
 		shaderVars.texFov           = renderProgram->uniformLocation("texFov");
 		shaderVars.mapTex           = renderProgram->uniformLocation("mapTex");
 		shaderVars.brightness       = renderProgram->uniformLocation("brightness");
-		shaderVars.rgbMaxValue      = renderProgram->uniformLocation("rgbMaxValue");
-		shaderVars.ditherPattern    = renderProgram->uniformLocation("ditherPattern");
 		shaderVars.projectionMatrixInverse = renderProgram->uniformLocation("projectionMatrixInverse");
 		renderProgram->release();
 	}
@@ -1701,12 +1687,6 @@ void main(void)
 		const int mainTexSampler = 0;
 		mapTex->bind(mainTexSampler);
 		renderProgram->setUniformValue(shaderVars.mapTex, mainTexSampler);
-		renderProgram->setUniformValue(shaderVars.rgbMaxValue, calcRGBMaxValue(core->getDitheringMode()).toQVector());
-
-		const int ditherTexSampler = 1;
-		ditherPatternTex->bind(ditherTexSampler);
-		renderProgram->setUniformValue(shaderVars.ditherPattern, ditherTexSampler);
-
 		renderProgram->setUniformValue(shaderVars.texFov, texFov);
 		renderProgram->setUniformValue(shaderVars.projectionMatrixInverse,
 					       prj->getProjectionMatrix().toQMatrix().inverted());
@@ -1957,7 +1937,6 @@ void main()
 		const auto frag =
 			StelOpenGL::globalShaderPrefix(StelOpenGL::FRAGMENT_SHADER) +
 			prj->getUnProjectShader() +
-			makeDitheringShader()+
 			R"(
 VARYING highp vec3 ndcPos;
 uniform sampler2D mapTex;
@@ -2012,7 +1991,7 @@ void main(void)
 	}
 	if(modelZenithAngle > mapTexBottom)
 	{
-		FRAG_COLOR = dither(bottomCapColor);
+		FRAG_COLOR = bottomCapColor;
 		return;
 	}
 	if(modelZenithAngle < mapTexTop)
@@ -2021,7 +2000,7 @@ void main(void)
 		return;
 	}
 
-	FRAG_COLOR = dither(color * brightness);
+	FRAG_COLOR = color * brightness;
 }
 )";
 		ok = renderProgram->addShaderFromSourceCode(QOpenGLShader::Fragment, frag);
@@ -2040,9 +2019,7 @@ void main(void)
 		shaderVars.mapTex           = renderProgram->uniformLocation("mapTex");
 		shaderVars.mapTexTop        = renderProgram->uniformLocation("mapTexTop");
 		shaderVars.brightness       = renderProgram->uniformLocation("brightness");
-		shaderVars.rgbMaxValue      = renderProgram->uniformLocation("rgbMaxValue");
 		shaderVars.mapTexBottom     = renderProgram->uniformLocation("mapTexBottom");
-		shaderVars.ditherPattern    = renderProgram->uniformLocation("ditherPattern");
 		shaderVars.bottomCapColor   = renderProgram->uniformLocation("bottomCapColor");
 		shaderVars.projectionMatrixInverse = renderProgram->uniformLocation("projectionMatrixInverse");
 		renderProgram->release();
@@ -2067,12 +2044,6 @@ void main(void)
 		const int mainTexSampler = 0;
 		mapTex->bind(mainTexSampler);
 		renderProgram->setUniformValue(shaderVars.mapTex, mainTexSampler);
-		renderProgram->setUniformValue(shaderVars.rgbMaxValue, calcRGBMaxValue(core->getDitheringMode()).toQVector());
-
-		const int ditherTexSampler = 1;
-		ditherPatternTex->bind(ditherTexSampler);
-		renderProgram->setUniformValue(shaderVars.ditherPattern, ditherTexSampler);
-
 		renderProgram->setUniformValue(shaderVars.mapTexTop, mapTexTop);
 		renderProgram->setUniformValue(shaderVars.mapTexBottom, mapTexBottom);
 

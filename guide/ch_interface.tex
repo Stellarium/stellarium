@@ -676,15 +676,21 @@ for changing the general appearance of the view of Solar system objects. Some hi
   \item[Planets] will increase the apparent size of major planets.
   \end{description}
 \item[Show orbits] adds a rendition of the orbit or trajectory of an SSO. 
+For efficiency, orbits are not displayed when the object is not inside the screen, 
+unless you set the ``permanently'' option. You can further fine-tune the selection 
+and appearance (width and colors) of orbits with the additional settings. 
 \item[Show trails] plots the apparent path of SSO among the stars as
   seen from the current planet.
 \item[Show planetary nomenclature] displays positions and names of
   surface features officially named by the IAU (See
   Appendix~\ref{ch:Nomenclature}). When the sun is below the horizon
-  at the location of the feature, the label is attenuated. Features like
-  craters are best visible when they are illuminated by a low sun. 
+  at the location of the feature, the label is attenuated. A few special markers 
+  show Centre, North and South poles, east and west points along the equator, 
+  and the subsolar point (where the sun is at the zenith as seen from that feature). 
+  Features like craters are best visible when they are illuminated by a low sun. 
   You can therefore limit the display\newFeature{1.2} to items along the
   \indexterm{terminator} (the border between light and dark on the surface).
+  You can also\newFeature{23.3} mark craters and lunar \emph{maria} (the dark ``seas'') with circles. 
 \item[GRS details\ldots]: The Great Red Spot (GRS) is slowly
   drifting along Jupiter's System~II coordinate system. This button 
   opens a new dialog in which you can adjust the longitude (Jupiter system~II) 

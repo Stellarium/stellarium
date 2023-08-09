@@ -124,8 +124,6 @@ private:
 		int mainTex;
 		int brightness;
 		int saturation;
-		int rgbMaxValue;
-		int ditherPattern;
 		int bortleIntensity;
 		int extinctionEnabled;
 		int projectionMatrixInverse;
@@ -133,7 +131,6 @@ private:
 
 	std::unique_ptr<QOpenGLVertexArrayObject> vao;
 	std::unique_ptr<QOpenGLBuffer> vbo;
-	StelTextureSP ditherPatternTex;
 	StelProjectorP prevProjector;
 	std::unique_ptr<QOpenGLShaderProgram> renderProgram;
 };

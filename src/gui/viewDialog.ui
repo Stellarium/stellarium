@@ -318,7 +318,7 @@
       <item row="1" column="0">
        <widget class="QStackedWidget" name="stackedWidget">
         <property name="currentIndex">
-         <number>0</number>
+         <number>1</number>
         </property>
         <widget class="QWidget" name="page_sky">
          <layout class="QGridLayout" name="gridLayout">
@@ -1550,7 +1550,7 @@
                <item>
                 <widget class="QCheckBox" name="planetOrbitPermanentCheckBox">
                  <property name="toolTip">
-                  <string>Show orbit even if planet is off screen</string>
+                  <string>Show orbit even if object is off screen</string>
                  </property>
                  <property name="text">
                   <string>permanently</string>
@@ -1685,18 +1685,31 @@
                </property>
                <item>
                 <widget class="QCheckBox" name="planetOrbitOnlyCheckBox">
+                 <property name="toolTip">
+                  <string>Hide orbits of minor bodies.</string>
+                 </property>
                  <property name="text">
-                  <string>Only orbits of major planets</string>
+                  <string>Only orbits of major planets...</string>
                  </property>
                 </widget>
                </item>
                <item>
                 <widget class="QCheckBox" name="planetIsolatedOrbitCheckBox">
                  <property name="toolTip">
-                  <string>Deactivate this option if you want to see orbit for selected planet and its moons.</string>
+                  <string>Show orbit only for selected SSO</string>
                  </property>
                  <property name="text">
-                  <string>Only orbit for selected object</string>
+                  <string>Only orbit for selected object...</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="planetOrbitsMoonCheckBox">
+                 <property name="toolTip">
+                  <string>Also show moons of selected object or planets.</string>
+                 </property>
+                 <property name="text">
+                  <string>... and moons</string>
                  </property>
                 </widget>
                </item>
@@ -2021,11 +2034,25 @@
                 </layout>
                </item>
                <item>
-                <widget class="QCheckBox" name="showSpecialNomenclatureOnlyCheckBox">
-                 <property name="text">
-                  <string>Show special nomenclature points only</string>
-                 </property>
-                </widget>
+                <layout class="QHBoxLayout" name="horizontalLayout_Nomenclature">
+                 <item>
+                  <widget class="QCheckBox" name="outlineCratersCheckBox">
+                   <property name="toolTip">
+                    <string>Mark impact features with ellipses</string>
+                   </property>
+                   <property name="text">
+                    <string>Outline craters</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QCheckBox" name="showSpecialNomenclatureOnlyCheckBox">
+                   <property name="text">
+                    <string>Show special nomenclature points only</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
                </item>
               </layout>
              </item>
@@ -5690,12 +5717,12 @@
  </resources>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroupDisplayedDSOCatalogs">
+  <buttongroup name="buttonGroupDisplayedDSOTypes">
    <property name="exclusive">
     <bool>false</bool>
    </property>
   </buttongroup>
-  <buttongroup name="buttonGroupDisplayedDSOTypes">
+  <buttongroup name="buttonGroupDisplayedDSOCatalogs">
    <property name="exclusive">
     <bool>false</bool>
    </property>
