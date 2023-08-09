@@ -1849,14 +1849,14 @@ void Planet::setSiderealPeriod(const double siderealPeriod)
 		if (semiMajorAxis>0 && eccentricity<0.99)
 		{
 			//qDebug() << "Planet " << englishName << "replace siderealPeriod " << re.siderealPeriod << "by";
-			this->siderealPeriod=static_cast<KeplerOrbit*>(orbitPtr)->calculateSiderealPeriod();
+			this->siderealPeriod=orbit->calculateSiderealPeriod();
 			//qDebug() << re.siderealPeriod;
 			closeOrbit=true;
 		}
 		else
 		{
 			closeOrbit=false;
-			deltaOrbitJDE = orbit->getOrbitGood()/ORBIT_SEGMENTS;
+			deltaOrbitJDE = 2.*orbit->getOrbitGood()/ORBIT_SEGMENTS;
 		}
 	}
 	// For non-periodic comets, we have already set this to use orbit_good! This will then show an open segment.
