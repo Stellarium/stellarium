@@ -1860,8 +1860,8 @@ void Planet::setSiderealPeriod(const double siderealPeriod)
 		}
 	}
 	// For non-periodic comets, we have already set this to use orbit_good! This will then show an open segment.
-	if (siderealPeriod>0.)
-		deltaOrbitJDE = siderealPeriod/ORBIT_SEGMENTS;
+	if (this->siderealPeriod>0.)
+		deltaOrbitJDE = this->siderealPeriod/ORBIT_SEGMENTS;
 }
 
 // A Planet's own eclipticPos is in VSOP87 ref. frame (practically equal to ecliptic of J2000 for us) coordinates relative to the parent body (sun, planet).
@@ -5045,8 +5045,8 @@ bool Planet::hasValidPositionalData(const double JDE, const PositionQuality purp
 
 Vec2d Planet::getValidPositionalDataRange(const PositionQuality purpose) const
 {
-	double min=std::numeric_limits<double>::min();
-	double max=std::numeric_limits<double>::max();
+	static const double min=std::numeric_limits<double>::min();
+	static const double max=std::numeric_limits<double>::max();
 
 	if (orbitPtr && pType>=isArtificial)
 	{

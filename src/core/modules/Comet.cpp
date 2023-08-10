@@ -501,7 +501,7 @@ void Comet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont
 
 	// If comet is too faint to be seen, don't bother rendering. (Massive speedup if people have hundreds of comets!)
 	// This test moved here so that hints are still drawn.
-	if ((getVMagnitude(core)-3.0f) > core->getSkyDrawer()->getLimitMagnitude())
+	if ((getVMagnitude(core)-5.0f) > core->getSkyDrawer()->getLimitMagnitude())
 	{
 		return;
 	}
