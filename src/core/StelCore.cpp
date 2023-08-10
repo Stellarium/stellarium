@@ -529,7 +529,7 @@ void StelCore::preDraw()
 	// applications. Astronomical sky should be 0/0/0/0)
 	Vec3f backColor = StelMainView::getInstance().getSkyBackgroundColor();
 	QOpenGLFunctions* gl = QOpenGLContext::currentContext()->functions();
-	gl->glClearColor(backColor[0], backColor[1], backColor[2], 0.f);
+	gl->glClearColor(backColor[0], backColor[1], backColor[2], 1.f);
 	gl->glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
 	skyDrawer->preDraw();
