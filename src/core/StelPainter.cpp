@@ -705,6 +705,9 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 		Q_ASSERT(tex);
 		if (!noGravity)
 			angleDeg += prj->defaultAngleForGravityText;
+		GLint oldTex = 0;
+		glActiveTexture(GL_TEXTURE0);
+		glGetIntegerv(GL_TEXTURE_BINDING_2D, &oldTex);
 		tex->texture->bind(0);
 		x += tex->baselineShift.x();
 		y += tex->baselineShift.y();
@@ -785,7 +788,7 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 
 		setBlending(oldBlending, oldSrc, oldDst);
 		enableClientStates(false, false);
-		tex->texture->release();
+		glBindTexture(GL_TEXTURE_2D, oldTex);
 	}
 }
 
