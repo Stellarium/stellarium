@@ -431,13 +431,13 @@ bool SolarSystemEditor::addFromSolarSystemConfigurationFile(QString filePath)
 		}
 		minorBodies.sync();
 		qDebug() << "Minor groups now: " << minorBodies.childGroups();
-		qDebug() << "Checking for stupid General group.";
+		//qDebug() << "Checking for stupid General group.";
 		// There may be a generic group "General" in the updated file, created from comments. We must remove it.
 		if (minorBodies.childGroups().contains("General"))
 		{
 			minorBodies.remove("General");
+			qDebug() << "Minor groups after fix now: " << minorBodies.childGroups();
 		}
-		qDebug() << "Minor groups after fix now: " << minorBodies.childGroups();
 		minorBodies.sync();
 
 		solarSystem->reloadPlanets();
