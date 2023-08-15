@@ -1086,10 +1086,6 @@ SsoElements SolarSystemEditor::readMpcOneLineMinorPlanetElements(QString oneLine
 	    result.insert("orbit_good", 1000); // default validity for osculating elements for parabolic/hyperbolic comets, days
 	}
 
-	// add period for visualization of orbit
-	if (semiMajorAxis>0)
-		result.insert("orbit_visualization_period", KeplerOrbit::calculateSiderealPeriod(semiMajorAxis, 1.));
-
 	// 2:3 resonance to Neptune [https://en.wikipedia.org/wiki/Plutino]
 	if (static_cast<int>(semiMajorAxis) == 39)
 		objectType = "plutino";

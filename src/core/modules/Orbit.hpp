@@ -114,12 +114,12 @@ public:
 	//! If orbitGood is zero, this is always true.
 	//! @note This will still return false positives after close encounters with major masses which change orbital parameters.
 	//! However, it should catch the usual case of outdated orbital elements which should be updated at least yearly.
-	bool objectDateValid(const double JDE) const { return ((orbitGood==0.) || (fabs(epochJDE-JDE)<qMin(orbitGood, 365.0))); }
+	bool objectDateValid(const double JDE) const { return ((orbitGood==0.) || (fabs(JDE-epochJDE)<qMin(orbitGood, 365.0))); }
 	//! return whether a position returned for JDE would be good enough for at least plotting the orbit.
 	//! This is true for dates within orbitGood around epoch.
 	//! If orbitGood is zero, this is always true.
 	//! @note This relieves conditions of objectDateValid(JDE) somewhat, for the sake of illustratory completeness.
-	bool objectDateGoodEnoughForOrbits(const double JDE) const { return ((orbitGood==0.) || (fabs(epochJDE-JDE)<orbitGood)); }
+	bool objectDateGoodEnoughForOrbits(const double JDE) const { return ((orbitGood==0.) || (fabs(JDE-epochJDE)<orbitGood)); }
 	//! Return minimal and maximal JDE values where this orbit should be used.
 	//! @returns the limits where objectDateValid returns true
 	Vec2d objectDateValidRange(const bool strict) const;
@@ -129,6 +129,7 @@ public:
 	//! @param centralMass in units of Solar masses
 	static double calculateSiderealPeriod(const double semiMajorAxis, const double centralMass);
 	double getEpochJDE() const { return epochJDE; }
+	double getOrbitGood() const {return orbitGood; }
 
 private:
 	const double epochJDE; //!< epoch (date of validity) of the elements.
