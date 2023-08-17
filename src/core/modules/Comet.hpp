@@ -90,7 +90,7 @@ public:
 	//! sets an IAU designation.
 	void setIAUDesignation(const QString& designation);
 
-	//! sets a date, discovery and perihelion codes of the comet.
+	//! set date, discovery and perihelion codes of the comet.
 	void setExtraDesignations(QStringList codes);
 
 	//! set the discovery circumstances of comet
@@ -99,6 +99,7 @@ public:
 	void setDiscoveryData(const QString& date, const QString& name) { discoveryDate = date; discoverer = name; }
 
 	//! renders the subscript in a comet discovery designation with HTML.
+	//! This subscript only ever appears in the super rare case when a comet is first labeled as asteroid.
 	static QString renderDiscoveryDesignationHtml(const QString& plainText);
 
 	//! get list of comet codes

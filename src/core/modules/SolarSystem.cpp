@@ -678,13 +678,27 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 	for (int i=0; i<sections.size(); ++i)
 	{
 		const QString secname = sections.at(i);
-		const QString englishName = pd.value(secname+"/name").toString();
+		const QString englishName = pd.value(secname+"/name", pd.value(secname+"/iau_designation")).toString();
+		if (englishName.isEmpty())
+			qWarning() << "SSO without proper name found in" << filePath << "section" << secname;
 		const QString strParent = pd.value(secname+"/parent", "Sun").toString();
-		secNameMap[englishName] = secname;
+		// Only for sorting here we must find our own temporary object name. This is similar but not equal to IAU practice, and must be exactly repeated in the next loop in Stage 2a.
+		QString obName=englishName;
+		const bool isMinor=QStringList({"asteroid", "plutino", "comet", "dwarf planet", "cubewano", "scattered disc object", "oco", "sednoid", "interstellar object"}).contains(pd.value(secname+"/type").toString());
+		if (isMinor && englishName!="Pluto")
+		{
+			const QString designation = pd.value(secname+"/iau_designation", pd.value(secname+"/minor_planet_number")).toString();
+			if (designation.isEmpty())
+				qWarning() << "Minor body " << englishName << "has incomplete data (missing iau_designation or minor_planet_number) in" << filePath << "section" << secname;
+			obName=(QString("%1 (%2)").arg(designation, englishName));
+		}
+		if (secNameMap.contains(obName))
+			qWarning() << "secNameMap already contains " << obName << ". Overwriting data.";
+		secNameMap[obName] = secname;
 		if (strParent!="none" && !strParent.isEmpty() && !englishName.isEmpty())
 		{
-			parentMap[englishName] = strParent;
-			// qDebug() << "parentmap[" << englishName << "] = " << strParent;
+			parentMap[obName] = strParent;
+			// qDebug() << "parentmap[" << obName << "] = " << strParent;
 		}
 	}
 
@@ -692,11 +706,17 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 	QMultiMap<int, QString> depLevelMap;
 	for (int i=0; i<sections.size(); ++i)
 	{
-		const QString englishName = pd.value(sections.at(i)+"/name").toString();
-
-		// follow dependencies, incrementing level when we have one
-		// till we run out.
-		QString p=englishName;
+		const QString secname = sections.at(i);
+		const QString englishName = pd.value(secname+"/name", pd.value(secname+"/iau_designation")).toString();
+		QString obName=englishName;
+		const bool isMinor=QStringList({"asteroid", "plutino", "comet", "dwarf planet", "cubewano", "scattered disc object", "oco", "sednoid", "interstellar object"}).contains(pd.value(secname+"/type").toString());
+		if (isMinor && englishName!="Pluto")
+		{
+			const QString designation = pd.value(secname+"/iau_designation", pd.value(secname+"/minor_planet_number")).toString();
+			obName=(QString("%1 (%2)").arg(designation, englishName));
+		}
+		// follow dependencies, incrementing level when we have one till we run out.
+		QString p=obName;
 		int level = 0;
 		while(parentMap.contains(p) && parentMap[p]!="none")
 		{
@@ -704,8 +724,8 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			p = parentMap[p];
 		}
 
-		depLevelMap.insert(level, secNameMap[englishName]);
-		// qDebug() << "2a: Level" << level << "secNameMap[" << englishName << "]="<< secNameMap[englishName];
+		depLevelMap.insert(level, secNameMap[obName]);
+		// qDebug() << "2a: Level" << level << "secNameMap[" << obName << "]="<< secNameMap[obName];
 	}
 
 	// Stage 2b (as described above).
@@ -734,7 +754,85 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 
 		//totalPlanets++;
 		const QString secname = orderedSections.at(i);
-		const QString englishName = pd.value(secname+"/name").toString().simplified();
+		const QString type = pd.value(secname+"/type").toString();
+		QString englishName = pd.value(secname+"/name").toString().simplified();
+		// englishName alone may be a combination of several elements...
+		if (type=="comet" || type == "interstellar object")
+		{
+			const int cometNumber= pd.value(secname+"/comet_number").toInt();
+			const QString iauDesignation = pd.value(secname+"/iau_designation", "").toString();
+			if (iauDesignation.isEmpty())
+				qWarning() << "Comet " << englishName << "has no IAU code in section " << secname;
+			// order of codes: date_code [P/1982 U1] - perihelion_code [1986 III] - discovery_code [1982i]
+			const QString dateCode =      pd.value(secname+"/date_code").toString();
+			const QString perihelCode =   pd.value(secname+"/perihelion_code").toString();
+			const QString discoveryCode = pd.value(secname+"/discovery_code").toString();
+
+			// The test here can be improved, e.g. with a regexp. In case the name is already reasonably complete, we do not re-build it from the available elements for now. However, the ini file should provide the elements separated!
+			if (iauDesignation.isEmpty() && !englishName.contains("("))
+				englishName.append(QString(" (%1)").arg(discoveryCode));
+			if (!englishName.contains("("))
+			{
+				QString name;
+				if (cometNumber>0)
+					name=QString::number(cometNumber);
+				if (!iauDesignation.isEmpty())
+				{
+					name.append(iauDesignation);
+					if (!englishName.isEmpty())
+						name.append(QString(" (%1)").arg(englishName));
+				}
+				else if (!dateCode.isEmpty())
+				{
+					name.append(dateCode);
+					if (!englishName.isEmpty())
+						name.append(QString(" (%1)").arg(englishName));
+				}
+				else if (!discoveryCode.isEmpty())
+				{
+					name.append(discoveryCode);
+					name.append(QString(" (%1)").arg(englishName));
+				}
+				else if (!perihelCode.isEmpty())
+				{
+					name.append(QString("C/%1").arg(perihelCode)); // This is not classic, but a final fallback before warning
+					name.append(QString(" (%1)").arg(englishName));
+				}
+				else if (!englishName.isEmpty())
+				{
+					name.append(englishName);
+				}
+				else
+					qWarning() << "Comet " << englishName << "has no proper name elements in section " << secname;
+				englishName=name;
+			}
+		}
+		else if ((type == "asteroid" || type == "dwarf planet" || type == "cubewano" || type=="sednoid" || type == "plutino" || type == "scattered disc object" || type == "Oort cloud object" ) && !englishName.contains("Pluto"))
+		{
+			const int minorPlanetNumber= pd.value(secname+"/minor_planet_number").toInt();
+			const QString iauDesignation = pd.value(secname+"/iau_designation", "").toString();
+			if (iauDesignation.isEmpty() && minorPlanetNumber==0)
+				qWarning() << "minor body " << englishName << "has no IAU code in section " << secname;
+			const QString discoveryCode = pd.value(secname+"/discovery_code").toString();
+
+			// The test here can be improved, e.g. with a regexp. In case the name is already reasonably complete, we do not re-build it from the available elements
+			if (englishName.isEmpty())
+			{
+				//if (minorPlanetNumber>0)
+				//	englishName=QString("(%1) ").arg(minorPlanetNumber);
+				if (!iauDesignation.isEmpty())
+				{
+					englishName.append(iauDesignation);
+				}
+				else if (!discoveryCode.isEmpty())
+				{
+					englishName.append(discoveryCode);
+				}
+				else
+					qWarning() << "Minor body in section" << secname << "has no proper name elements";
+			}
+		}
+
 		const double bV = pd.value(secname+"/color_index_bv", 99.).toDouble();
 		const QString strParent = pd.value(secname+"/parent", "Sun").toString(); // Obvious default, keep file entries simple.
 		PlanetP parent;
@@ -765,7 +863,6 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		OsculatingFunctType *osculatingFunc = Q_NULLPTR;
 		bool closeOrbit = true;
 		double semi_major_axis=0; // used again below.
-		const QString type = pd.value(secname+"/type").toString();
 
 
 #ifdef USE_GIMBAL_ORBIT
@@ -793,15 +890,17 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 #endif
 		if ((coordFuncName=="kepler_orbit") || (coordFuncName=="comet_orbit") || (coordFuncName=="ell_orbit")) // ell_orbit used for planet moons. TBD in V1.0: remove non-kepler_orbit!
 		{
+			if (coordFuncName!="kepler_orbit")
+				qDebug() << "Old-fashioned entry" << coordFuncName << "found. Please delete line from " << filePath << "section" << secname;
 			// ell_orbit was used for planet moons, comet_orbit for minor bodies. The only difference is that pericenter distance for moons is given in km, not AU.
 			// Read the orbital elements			
 			const double eccentricity = pd.value(secname+"/orbit_Eccentricity", 0.0).toDouble();
 			if (eccentricity >= 1.0) closeOrbit = false;
-			double pericenterDistance = pd.value(secname+"/orbit_PericenterDistance",-1e100).toDouble(); // AU, or km for ell_orbit!
+			double pericenterDistance = pd.value(secname+"/orbit_PericenterDistance",-1e100).toDouble(); // AU, or km for Moons (those where parent!=sun)!
 			if (pericenterDistance <= 0.0) {
 				semi_major_axis = pd.value(secname+"/orbit_SemiMajorAxis",-1e100).toDouble();
 				if (semi_major_axis <= -1e100) {
-					qDebug() << "ERROR loading " << englishName
+					qDebug() << "ERROR loading " << englishName << "from section" << secname
 						 << ": you must provide orbit_PericenterDistance or orbit_SemiMajorAxis. Skipping " << englishName;
 					continue;
 				} else {
