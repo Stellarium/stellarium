@@ -147,13 +147,8 @@ QString Comet::getInfoStringName(const StelCore *core, const InfoStringGroup& fl
 	oss << "<h2>";
 	oss << getNameI18n(); // UI translation can differ from sky translation
 
-	QStringList designations;
-	if (!iauDesignation.isEmpty())
-		designations << iauDesignation;
 	if (!getExtraDesignations().isEmpty())
-		designations << extraDesignationsHtml;
-	if (!designations.isEmpty())
-		oss << QString(" (%1)").arg(designations.join(" - "));
+		oss << QString(" - %1").arg(extraDesignationsHtml.join(" - "));
 
 	if (sphereScale != 1.)
 	{
