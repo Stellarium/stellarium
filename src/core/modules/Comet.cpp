@@ -126,7 +126,7 @@ void Comet::setAbsoluteMagnitudeAndSlope(const float magnitude, const float slop
 	if ((slope < -2.5f) || (slope > 25.0f))
 	{
 		// Slope G can become slightly smaller than 0. -10 is mark of invalidity.
-		qDebug() << "Warning: Suspect slope parameter value" << slope << "for comet" << englishName << "(rarely exceeding -1...20)";
+		qDebug() << "Warning: Suspect slope parameter value" << slope << "for comet" << getEnglishName() << "(rarely exceeding -1...20)";
 		return;
 	}
 	absoluteMagnitude = magnitude;
@@ -155,11 +155,12 @@ QString Comet::getInfoStringName(const StelCore *core, const InfoStringGroup& fl
 	if (!designations.isEmpty())
 		oss << QString(" (%1)").arg(designations.join(" - "));
 
-	oss.setRealNumberNotation(QTextStream::FixedNotation);
-	oss.setRealNumberPrecision(1);
 	if (sphereScale != 1.)
+	{
+		oss.setRealNumberNotation(QTextStream::FixedNotation);
+		oss.setRealNumberPrecision(1);
 		oss << QString::fromUtf8(" (\xC3\x97") << sphereScale << ")";
-
+	}
 	oss << "</h2>";
 
 	return str;
