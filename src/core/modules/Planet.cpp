@@ -460,41 +460,16 @@ QString Planet::getDiscoveryCircumstances() const
 
 const QString Planet::getContextString() const
 {
-	QString context = "";
-	switch (getPlanetType())
-	{
-		case isStar:
-			context = "star";
-			break;
-		case isPlanet:
-			context = "major planet";
-			break;
-		case isMoon:
-			context = "moon";
-			break;
-		case isObserver:
-		case isArtificial:
-			context = "special celestial body";
-			break;
-		case isAsteroid:
-		case isPlutino:
-		case isDwarfPlanet:
-		case isCubewano:
-		case isSDO:
-		case isOCO:
-		case isSednoid:
-		case isInterstellar:
-			context = "minor planet";
-			break;
-		case isComet:
-			context = "comet";
-			break;
-		default:
-			context = "";
-			break;
-	}
+	static const QMap<PlanetType, QString>map={
+		{isStar,       "star"},
+		{isPlanet,     "major planet"},
+		{isMoon,       "moon"},
+		{isObserver,   "special celestial body"},
+		{isArtificial, "special celestial body"},
+		{isComet,      "comet"},
+		{isUNDEFINED,  ""}}; // should not happen, though
 
-	return context;
+	return map.value(getPlanetType(), "minor planet");
 }
 
 QString Planet::getPlanetLabel() const
@@ -1846,7 +1821,7 @@ void Planet::setSiderealPeriod(const double siderealPeriod)
 		const KeplerOrbit *orbit=static_cast<KeplerOrbit*>(orbitPtr);
 		const double semiMajorAxis=orbit->getSemimajorAxis();
 		const double eccentricity=orbit->getEccentricity();
-		if (semiMajorAxis>0 && eccentricity<0.99)
+		if (semiMajorAxis>0 && eccentricity<0.999)
 		{
 			//qDebug() << "Planet " << englishName << "replace siderealPeriod " << re.siderealPeriod << "by";
 			this->siderealPeriod=orbit->calculateSiderealPeriod();
@@ -4945,16 +4920,38 @@ void Planet::computeOrbit()
 	if (parent)
 		parentPos = parent->getHeliocentricEclipticPos(dateJDE)+ parent->getAberrationPush(); // aberrationPush is not strictly correct, but helps a lot...
 
-	for(int d = 0; d < ORBIT_SEGMENTS; d++)
+	if (keplerOrbit && keplerOrbit->getEccentricity()>0.3)
 	{
-		calc_date = dateJDE + (d-ORBIT_SEGMENTS/2)*deltaOrbitJDE;
-		// Round to a number of deltaOrbitJDE to improve caching.
-		if (d != ORBIT_SEGMENTS / 2)
+		// TODO: compute Mstart, Mend, Estart, Eend (or nuStart, nuEnd?), compute vertices from loop over M, E or nu.
+		double Estart = keplerOrbit->eccentricAnomaly(keplerOrbit->meanAnomaly(dateJDE + (-ORBIT_SEGMENTS/2)*deltaOrbitJDE));
+		double Eend   = keplerOrbit->eccentricAnomaly(keplerOrbit->meanAnomaly(dateJDE + ( ORBIT_SEGMENTS/2)*deltaOrbitJDE));
+		if (closeOrbit && Estart<0. && Eend<0.)
+			Eend+=2.*M_PI;
+		if (closeOrbit && Estart>0. && Eend>0.)
+			Estart-=2.*M_PI;
+		if (Estart>Eend)
+			Estart-=2.*M_PI;
+		const double Eincr=(Eend-Estart)/ORBIT_SEGMENTS; // TODO: probably MOD(2pi)?
+		double E=Estart;
+		for (int d=0; d<ORBIT_SEGMENTS; d++)
 		{
-			calc_date = nearbyint(calc_date / deltaOrbitJDE) * deltaOrbitJDE;
+			Vec3d v;
+			keplerOrbit->positionAtEccentricAnomalyInVSOP87Coordinates(E, v.v);
+			orbit[d]=v+parentPos;
+			E += Eincr;
 		}
-		orbit[d] = getEclipticPos(calc_date) + parentPos;
 	}
+	else
+		for(int d = 0; d < ORBIT_SEGMENTS; d++)
+		{
+			calc_date = dateJDE + (d-ORBIT_SEGMENTS/2)*deltaOrbitJDE;
+			// Round to a number of deltaOrbitJDE to improve caching.
+			if (d != ORBIT_SEGMENTS / 2)
+			{
+				calc_date = nearbyint(calc_date / deltaOrbitJDE) * deltaOrbitJDE;
+			}
+			orbit[d] = getEclipticPos(calc_date) + parentPos;
+		}
 }
 
 // draw orbital path of Planet. For objects on open Kepler orbits, draw orbital segment of orbit_good days around epoch.
@@ -4973,7 +4970,7 @@ void Planet::drawOrbit(const StelCore* core)
 	computeOrbit();
 
 	const StelProjectorP prj = core->getProjection(StelCore::FrameHeliocentricEclipticJ2000);
-
+	KeplerOrbit *keplerOrbit=static_cast<KeplerOrbit*>(orbitPtr);
 	StelPainter sPainter(prj);
 	const float ppx = static_cast<float>(sPainter.getProjector()->getDevicePixelsPerPixel());
 
@@ -4985,9 +4982,10 @@ void Planet::drawOrbit(const StelCore* core)
 	const Vec3d savePos = orbit[ORBIT_SEGMENTS/2];
 	if (closeOrbit)
 	{
-		// special case - use current Planet position as center vertex so that draws
-		// on its orbit all the time (since orbit is shown as segmented rather than smooth curve)
-		orbit[ORBIT_SEGMENTS/2]=getHeliocentricEclipticPos()+aberrationPush;
+		if (!keplerOrbit || keplerOrbit->getEccentricity()<=0.3)
+			// special case - use current Planet position as center vertex so that draws
+			// on its orbit all the time (since orbit is shown as segmented rather than smooth curve)
+			orbit[ORBIT_SEGMENTS/2]=getHeliocentricEclipticPos()+aberrationPush;
 		orbit[ORBIT_SEGMENTS]=orbit[0];
 	}
 	int nbIter = closeOrbit ? ORBIT_SEGMENTS : ORBIT_SEGMENTS-1;
