@@ -135,7 +135,12 @@ void Comet::setAbsoluteMagnitudeAndSlope(const float magnitude, const float slop
 
 void Comet::translateName(const StelTranslator &translator)
 {
-	nameI18 = translator.qtranslate(englishName, "comet");
+	static const QRegularExpression cometNamePattern("^(.+)[(](.+)[)]\\s*$");
+	QRegularExpressionMatch matchCometName = cometNamePattern.match(englishName);
+	if (matchCometName.hasMatch())
+		nameI18 = QString("%1(%2)").arg(matchCometName.captured(1),translator.qtranslate(matchCometName.captured(2), "comet"));
+	else
+		nameI18 = translator.qtranslate(englishName, "comet");
 }
 
 QString Comet::getInfoStringName(const StelCore *core, const InfoStringGroup& flags) const
