@@ -57,10 +57,10 @@ MpcImportWindow::MpcImportWindow()
 	: StelDialog("SolarSystemEditorMPCimport")
 	, filterProxyModel(nullptr)
 	, importType(ImportType())
-	, downloadReply(Q_NULLPTR)
-	, queryReply(Q_NULLPTR)
-	, downloadProgressBar(Q_NULLPTR)
-	, queryProgressBar(Q_NULLPTR)
+	, downloadReply(nullptr)
+	, queryReply(nullptr)
+	, downloadProgressBar(nullptr)
+	, queryProgressBar(nullptr)
 	, countdown(0)
 {
 	ui = new Ui_mpcImportWindow();
@@ -337,7 +337,7 @@ void MpcImportWindow::selectFile()
 	filter.append(" (*.txt);;");
 	filter.append(q_("All Files"));
 	filter.append(" (*.*)");
-	QString filePath = QFileDialog::getOpenFileName(Q_NULLPTR, q_("Select a file"), QDir::homePath(), filter);
+	QString filePath = QFileDialog::getOpenFileName(nullptr, q_("Select a file"), QDir::homePath(), filter);
 	ui->lineEditFilePath->setText(filePath);
 }
 
@@ -535,7 +535,7 @@ void MpcImportWindow::unmarkAll()
 
 void MpcImportWindow::updateDownloadProgress(qint64 bytesReceived, qint64 bytesTotal)
 {
-	if (downloadProgressBar == Q_NULLPTR)
+	if (downloadProgressBar == nullptr)
 		return;
 
 	int currentValue = 0;
@@ -559,7 +559,7 @@ void MpcImportWindow::updateDownloadProgress(qint64 bytesReceived, qint64 bytesT
 
 void MpcImportWindow::updateQueryProgress(qint64, qint64)
 {
-	if (queryProgressBar == Q_NULLPTR)
+	if (queryProgressBar == nullptr)
 		return;
 
 	//Just show activity
@@ -608,7 +608,7 @@ void MpcImportWindow::startDownload(QString urlString)
 
 void MpcImportWindow::abortDownload()
 {
-	if (downloadReply == Q_NULLPTR || downloadReply->isFinished())
+	if (downloadReply == nullptr || downloadReply->isFinished())
 		return;
 
 	qDebug() << "Aborting download...";
@@ -618,7 +618,7 @@ void MpcImportWindow::abortDownload()
 
 	downloadReply->abort();
 	downloadReply->deleteLater();
-	downloadReply = Q_NULLPTR;
+	downloadReply = nullptr;
 
 	enableInterface(true);
 	ui->pushButtonAbortDownload->setVisible(false);
@@ -644,7 +644,7 @@ void MpcImportWindow::downloadComplete(QNetworkReply *reply)
 				   << reply->errorString();
 		enableInterface(true);
 		reply->deleteLater();
-		downloadReply = Q_NULLPTR;
+		downloadReply = nullptr;
 		return;
 	}
 
@@ -686,7 +686,7 @@ void MpcImportWindow::downloadComplete(QNetworkReply *reply)
 	}
 
 	reply->deleteLater();
-	downloadReply = Q_NULLPTR;
+	downloadReply = nullptr;
 
 	//Temporary, until the slot/socket mechanism is ready
 	populateCandidateObjects(objects);
@@ -703,13 +703,13 @@ void MpcImportWindow::deleteDownloadProgressBar()
 	if (downloadProgressBar)
 	{
 		StelApp::getInstance().removeProgressBar(downloadProgressBar);
-		downloadProgressBar = Q_NULLPTR;
+		downloadProgressBar = nullptr;
 	}
 }
 
 void MpcImportWindow::sendQuery()
 {
-	if (queryReply != Q_NULLPTR)
+	if (queryReply != nullptr)
 		return;
 
 	query = ui->lineEditQuery->text().trimmed();
@@ -783,7 +783,7 @@ void MpcImportWindow::sendQueryToUrl(QUrl url)
 
 void MpcImportWindow::abortQuery()
 {
-	if (queryReply == Q_NULLPTR)
+	if (queryReply == nullptr)
 		return;
 
 	disconnect(networkManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(receiveQueryReply(QNetworkReply*)));
@@ -791,7 +791,7 @@ void MpcImportWindow::abortQuery()
 
 	queryReply->abort();
 	queryReply->deleteLater();
-	queryReply = Q_NULLPTR;
+	queryReply = nullptr;
 
 	//resetCountdown();
 	enableInterface(true);
@@ -800,7 +800,7 @@ void MpcImportWindow::abortQuery()
 
 void MpcImportWindow::receiveQueryReply(QNetworkReply *reply)
 {
-	if (reply == Q_NULLPTR)
+	if (reply == nullptr)
 		return;
 
 	disconnect(networkManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(receiveQueryReply(QNetworkReply*)));
@@ -815,7 +815,7 @@ void MpcImportWindow::receiveQueryReply(QNetworkReply *reply)
 		//TODO: Add counter and cycle check.
 
 		reply->deleteLater();
-		queryReply = Q_NULLPTR;
+		queryReply = nullptr;
 		sendQueryToUrl(redirectUrl);
 		return;
 	}
@@ -836,7 +836,7 @@ void MpcImportWindow::receiveQueryReply(QNetworkReply *reply)
 		enableInterface(true);
 
 		reply->deleteLater();
-		queryReply = Q_NULLPTR;
+		queryReply = nullptr;
 		return;
 	}
 
@@ -855,7 +855,7 @@ void MpcImportWindow::receiveQueryReply(QNetworkReply *reply)
 	}
 
 	reply->deleteLater();
-	queryReply = Q_NULLPTR;
+	queryReply = nullptr;
 }
 
 void MpcImportWindow::readQueryReply(QNetworkReply * reply)
@@ -869,8 +869,8 @@ void MpcImportWindow::readQueryReply(QNetworkReply * reply)
 		file.write(reply->readAll());		
 		file.close();
 
-		QRegularExpression cometIAUDesignation("[PCDXI]/");
-		QRegularExpression cometDesignation("(\\d)+[PCDXI]/");
+		static const QRegularExpression cometIAUDesignation("[PCDXI]/");
+		static const QRegularExpression cometDesignation("(\\d)+[PCDXI]/");
 		QString queryData = ui->lineEditQuery->text().trimmed();
 
 		if (queryData.indexOf(cometDesignation) == 0 || queryData.indexOf(cometIAUDesignation) == 0)
@@ -922,7 +922,7 @@ void MpcImportWindow::deleteQueryProgressBar()
 	if (queryProgressBar)
 	{
 		StelApp::getInstance().removeProgressBar(queryProgressBar);
-		queryProgressBar = Q_NULLPTR;
+		queryProgressBar = nullptr;
 	}
 }
 
@@ -944,7 +944,7 @@ void MpcImportWindow::resetCountdown()
 		countdownTimer->stop();
 
 		//If the query is still active, kill it
-		if (queryReply != Q_NULLPTR && queryReply->isRunning())
+		if (queryReply != nullptr && queryReply->isRunning())
 		{
 			abortQuery();
                         ui->labelQueryMessage->setText("The query timed out. You can try again, now or later.");
@@ -968,7 +968,7 @@ void MpcImportWindow::updateCountdown()
 		resetCountdown();
 	}
 	//If there has been an answer
-	else if (countdown > 50 && queryReply == Q_NULLPTR)
+	else if (countdown > 50 && queryReply == nullptr)
 	{
 		resetCountdown();
 	}
