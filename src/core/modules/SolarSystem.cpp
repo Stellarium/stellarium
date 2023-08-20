@@ -688,7 +688,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		if (isMinor && englishName!="Pluto")
 		{
 			const QString designation = pd.value(secname+"/iau_designation", pd.value(secname+"/minor_planet_number")).toString();
-			if (designation.isEmpty())
+			if (designation.isEmpty() && (pd.value(secname+"/type") != "comet"))
 				qWarning() << "Minor body " << englishName << "has incomplete data (missing iau_designation or minor_planet_number) in" << filePath << "section" << secname;
 			obName=(QString("%1 (%2)").arg(designation, englishName));
 		}
@@ -759,10 +759,14 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		// englishName alone may be a combination of several elements...
 		if (type=="comet" || type == "interstellar object")
 		{
-			const int cometNumber= pd.value(secname+"/comet_number").toInt();
-			const QString iauDesignation = pd.value(secname+"/iau_designation", "").toString();
-			if (iauDesignation.isEmpty())
-				qWarning() << "Comet " << englishName << "has no IAU code in section " << secname;
+			static const QRegularExpression periodicRe("^([1-9][0-9]*[PD](-\\w+)?)"); // No "/" at end, there are nameless numbered comets! (e.g. 362P, 396P)
+			QRegularExpressionMatch periodMatch=periodicRe.match(englishName);
+			// Our name rules for the final englishName, which must contain one element in brackets.
+			// Numbered periodic comets: "1P/Halley (1986)"
+			// All others: C-AX/2023 A2 (discoverer)". (with optional fragment code -AX)
+			const QString iauDesignation = pd.value(secname+"/iau_designation").toString();
+			if (iauDesignation.isEmpty() && !periodMatch.hasMatch())
+				qWarning() << "Comet " << englishName << "has no IAU code and seems not a numbered comet in section " << secname;
 			// order of codes: date_code [P/1982 U1] - perihelion_code [1986 III] - discovery_code [1982i]
 			const QString dateCode =      pd.value(secname+"/date_code").toString();
 			const QString perihelCode =   pd.value(secname+"/perihelion_code").toString();
@@ -771,43 +775,44 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			// The test here can be improved, e.g. with a regexp. In case the name is already reasonably complete, we do not re-build it from the available elements for now. However, the ini file should provide the elements separated!
 			if (iauDesignation.isEmpty() && !englishName.contains("("))
 				englishName.append(QString(" (%1)").arg(discoveryCode));
+			else if (!iauDesignation.isEmpty() && !englishName.contains("(") && !englishName.contains("/"))
+				englishName=QString("%1 (%2)").arg(iauDesignation, englishName); // recombine name and iau_designation if name is only the discoverer name.
+
 			if (!englishName.contains("("))
 			{
 				QString name;
-				if (cometNumber>0)
-					name=QString::number(cometNumber);
 				if (!iauDesignation.isEmpty())
 				{
-					name.append(iauDesignation);
+					name=iauDesignation;
 					if (!englishName.isEmpty())
 						name.append(QString(" (%1)").arg(englishName));
 				}
 				else if (!dateCode.isEmpty())
 				{
-					name.append(dateCode);
+					name=dateCode;
 					if (!englishName.isEmpty())
 						name.append(QString(" (%1)").arg(englishName));
 				}
 				else if (!discoveryCode.isEmpty())
 				{
-					name.append(discoveryCode);
-					name.append(QString(" (%1)").arg(englishName));
+					name=discoveryCode;
+					if (!englishName.isEmpty())
+						name.append(QString(" (%1)").arg(englishName));
 				}
 				else if (!perihelCode.isEmpty())
 				{
 					name.append(QString("C/%1").arg(perihelCode)); // This is not classic, but a final fallback before warning
-					name.append(QString(" (%1)").arg(englishName));
+					if (!englishName.isEmpty())
+						name.append(QString(" (%1)").arg(englishName));
 				}
-				else if (!englishName.isEmpty())
-				{
-					name.append(englishName);
-				}
+
+				if (name.contains("("))
+					englishName=name;
 				else
 					qWarning() << "Comet " << englishName << "has no proper name elements in section " << secname;
-				englishName=name;
 			}
 		}
-		else if ((type == "asteroid" || type == "dwarf planet" || type == "cubewano" || type=="sednoid" || type == "plutino" || type == "scattered disc object" || type == "Oort cloud object" ) && !englishName.contains("Pluto"))
+		else if (QStringList({"asteroid", "dwarf planet", "cubewano", "sednoid", "plutino", "scattered disc object", "Oort cloud object"}).contains(type) && !englishName.contains("Pluto"))
 		{
 			const int minorPlanetNumber= pd.value(secname+"/minor_planet_number").toInt();
 			const QString iauDesignation = pd.value(secname+"/iau_designation", "").toString();
