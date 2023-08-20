@@ -185,12 +185,12 @@ void ManualImportWindow::selectTextureFile(QLineEdit * filePathLineEdit)
 
 	//Select an existing file
 	QStringList supportedFormats;
-	for (auto format : QImageReader::supportedImageFormats())
+	for (const auto &format : QImageReader::supportedImageFormats())
 	{
 		supportedFormats.append(QString("*.%1").arg(QString(format)));//It's a wee bit long...
 	}
 	QString fileFilter = QString("Texture files (%1)").arg(supportedFormats.join(" "));
-	QString newFilePath = QFileDialog::getOpenFileName(Q_NULLPTR, QString(), texturesDirectoryPath, fileFilter);
+	QString newFilePath = QFileDialog::getOpenFileName(nullptr, QString(), texturesDirectoryPath, fileFilter);
 
 	//Is the file in one of the two "textures" directories?
 	if (newFilePath.isEmpty())
