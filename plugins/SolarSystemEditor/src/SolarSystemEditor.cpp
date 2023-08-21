@@ -409,14 +409,13 @@ bool SolarSystemEditor::addFromSolarSystemConfigurationFile(QString filePath)
 			QString fixedGroupName = fixGroupName(group);
 			newData.beginGroup(group);
 			qDebug() << "  Group: " << group << "for object " << newData.value("name");
-			qDebug() << "   ";
 			QStringList minorChildGroups = minorBodies.childGroups();
 			if (minorChildGroups.contains(fixedGroupName))
 			{
-				qDebug() << "This group " << fixedGroupName << "already exists. Updating values";
+				qDebug() << "   This group " << fixedGroupName << "already exists. Updating values";
 			}
 			else
-				qDebug() << "This group " << fixedGroupName << "does not yet exist. Adding values";
+				qDebug() << "   This group " << fixedGroupName << "does not yet exist. Adding values";
 
 			minorBodies.beginGroup(fixedGroupName);
 			QStringList newKeys = newData.allKeys(); // limited to the group!
@@ -429,10 +428,10 @@ bool SolarSystemEditor::addFromSolarSystemConfigurationFile(QString filePath)
 		}
 		minorBodies.sync();
 		qDebug() << "Minor groups now: " << minorBodies.childGroups();
-		//qDebug() << "Checking for stupid General group.";
 		// There may be a generic group "General" in the updated file, created from comments. We must remove it.
 		if (minorBodies.childGroups().contains("General"))
 		{
+			qDebug() << "Removing unwanted General group.";
 			minorBodies.remove("General");
 			qDebug() << "Minor groups after fix now: " << minorBodies.childGroups();
 		}
@@ -919,14 +918,14 @@ SsoElements SolarSystemEditor::readMpcOneLineCometElements(QString oneLineElemen
 	}
 
 	result.insert("ref", mpcMatch.captured(18).simplified());
-	if (orbitType!='A')
-	{
-		result.insert("radius", 5); //Fictitious default assumption
-		result.insert("albedo", 0.1); // GZ 2014-01-10: Comets are very dark, should even be 0.03!
+	//if (orbitType!='A')
+	//{
+		//result.insert("radius", 5); //Fictitious default assumption
+		//result.insert("albedo", 0.1); // GZ 2014-01-10: Comets are very dark, should even be 0.03!
 		//result.insert("dust_lengthfactor", 0.4); // dust tail length w.r.t. gas tail length
 		//result.insert("dust_brightnessfactor", 1.5); // dust tail brightness w.r.t. gas tail.
 		//result.insert("dust_widthfactor", 1.5); // opening w.r.t. gas tail opening width.
-	}
+	//}
 	//qDebug() << "readMpcOneLineCometElements done\n";
 	return result;
 }
