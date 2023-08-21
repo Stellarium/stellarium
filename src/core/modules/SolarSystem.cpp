@@ -761,16 +761,20 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		{
 			static const QRegularExpression periodicRe("^([1-9][0-9]*[PD](-\\w+)?)"); // No "/" at end, there are nameless numbered comets! (e.g. 362P, 396P)
 			QRegularExpressionMatch periodMatch=periodicRe.match(englishName);
+
+			static const QRegularExpression iauDesignationRe("^([1-9][0-9]*[PD](-\\w+)?)|([CA]/[-0-9]+\\s[A-Y])");
+			QRegularExpressionMatch iauDesignationMatch=iauDesignationRe.match(englishName);
+
 			// Our name rules for the final englishName, which must contain one element in brackets.
 			// Numbered periodic comets: "1P/Halley (1986)"
 			// All others: C-AX/2023 A2 (discoverer)". (with optional fragment code -AX)
 			const QString iauDesignation = pd.value(secname+"/iau_designation").toString();
-			if (iauDesignation.isEmpty() && !periodMatch.hasMatch())
-				qWarning() << "Comet " << englishName << "has no IAU code and seems not a numbered comet in section " << secname;
-			// order of codes: date_code [P/1982 U1] - perihelion_code [1986 III] - discovery_code [1982i]
 			const QString dateCode =      pd.value(secname+"/date_code").toString();
 			const QString perihelCode =   pd.value(secname+"/perihelion_code").toString();
 			const QString discoveryCode = pd.value(secname+"/discovery_code").toString();
+			if (iauDesignation.isEmpty() && perihelCode.isEmpty() && discoveryCode.isEmpty() && !periodMatch.hasMatch() && !iauDesignationMatch.hasMatch())
+				qWarning() << "Comet " << englishName << "has no IAU designation, no perihelion code, no discovery code and seems not a numbered comet in section " << secname;
+			// order of codes: date_code [P/1982 U1] - perihelion_code [1986 III] - discovery_code [1982i]
 
 			// The test here can be improved, e.g. with a regexp. In case the name is already reasonably complete, we do not re-build it from the available elements for now. However, the ini file should provide the elements separated!
 			if (iauDesignation.isEmpty() && !englishName.contains("("))
@@ -1166,7 +1170,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		{
 			minorBodies << englishName;
 			newP = PlanetP(new Comet(englishName,
-					      pd.value(secname+"/radius", 1.0).toDouble()/AU,
+					      pd.value(secname+"/radius", 5.0).toDouble()/AU,
 					      pd.value(secname+"/oblateness", 0.0).toDouble(),
 					      Vec3f(pd.value(secname+"/color", "1.0,1.0,1.0").toString()), // halo color
 					      pd.value(secname+"/albedo", 0.075f).toFloat(), // assume very dark surface
