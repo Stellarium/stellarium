@@ -431,13 +431,13 @@ bool SolarSystemEditor::addFromSolarSystemConfigurationFile(QString filePath)
 		}
 		minorBodies.sync();
 		qDebug() << "Minor groups now: " << minorBodies.childGroups();
-		qDebug() << "Checking for stupid General group.";
+		//qDebug() << "Checking for stupid General group.";
 		// There may be a generic group "General" in the updated file, created from comments. We must remove it.
 		if (minorBodies.childGroups().contains("General"))
 		{
 			minorBodies.remove("General");
+			qDebug() << "Minor groups after fix now: " << minorBodies.childGroups();
 		}
-		qDebug() << "Minor groups after fix now: " << minorBodies.childGroups();
 		minorBodies.sync();
 
 		solarSystem->reloadPlanets();
@@ -1085,10 +1085,6 @@ SsoElements SolarSystemEditor::readMpcOneLineMinorPlanetElements(QString oneLine
 	    qWarning() << "Strange eccentricity for " << name << ":" << eccentricity;
 	    result.insert("orbit_good", 1000); // default validity for osculating elements for parabolic/hyperbolic comets, days
 	}
-
-	// add period for visualization of orbit
-	if (semiMajorAxis>0)
-		result.insert("orbit_visualization_period", KeplerOrbit::calculateSiderealPeriod(semiMajorAxis, 1.));
 
 	// 2:3 resonance to Neptune [https://en.wikipedia.org/wiki/Plutino]
 	if (static_cast<int>(semiMajorAxis) == 39)

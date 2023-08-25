@@ -495,10 +495,13 @@ void Comet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont
 	else
 		if (!projectionValid && prj.data()->getNameI18() == q_("Orthographic"))
 			return; // End prematurely. This excludes bad "ghost" comet tail on the wrong hemisphere in ortho projection! Maybe also Fisheye, but it's less problematic.
+	else if (permanentDrawingOrbits) // A special case for demos
+			drawOrbit(core);
+
 
 	// If comet is too faint to be seen, don't bother rendering. (Massive speedup if people have hundreds of comets!)
 	// This test moved here so that hints are still drawn.
-	if ((getVMagnitude(core)-3.0f) > core->getSkyDrawer()->getLimitMagnitude())
+	if ((getVMagnitude(core)-5.0f) > core->getSkyDrawer()->getLimitMagnitude())
 	{
 		return;
 	}

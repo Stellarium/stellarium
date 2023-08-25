@@ -53,7 +53,7 @@ Example:
 name=Jupiter
 type=planet
 coord_func=jupiter_special
-orbit_visualization_period=4331.87
+orbit_Period=4331.87
 
 atmosphere=1
 albedo=0.51
@@ -87,7 +87,7 @@ where
 \item[type] Mandatory for planets: \value{planet}
 \item[parent]=Sun. The body which this object is running around. Default: \texttt{Sun}
 \item[coord\_func] The planet positions are all computed with a dedicated function (VSOP87 or DE43x). 
-\item[orbit\_visualization\_period] number of (earth) days for how
+\item[orbit\_Period] number of (earth) days for how
   long the orbit should be made visible. Typically Stellarium shows
   one orbit line. The orbit slowly drifts, however.
 
@@ -191,7 +191,6 @@ orbit_LongOfPericenter=245.4222355150120000
 orbit_MeanLongitude=224.7924893552550000
 orbit_Period=0.5016370462116355
 orbit_SemiMajorAxis=181994.8658358799
-# orbit_visualization_period=0.5016370462116355
 
 absolute_magnitude=7.4
 albedo=0.09
@@ -230,8 +229,6 @@ where
   \item[orbit\_MeanLongitude]
   \item[orbit\_Period] [days]
   \item[orbit\_SemiMajorAxis] $a$ [km]
-  \item[orbit\_visualization\_period] [days] Defaults to \texttt{orbit\_Period} to show orbit as closed line. 
-       This is in fact only useful in case of special functions for positioning where \texttt{orbit\_Period} is not given.
 
   \item[radius] Equator radius, km.
   \item[oblateness] Flattening of the polar
@@ -352,7 +349,6 @@ Stellarium.
 \item[orbit\_Eccentricity] $e=0$ circular, $0<e<1$ elliptic, $e=1$ parabolic, $e>1$ hyperbolic
 \item[orbit\_Inclination] $i$ [degrees] inclination against J2000 ecliptic
 \item[orbit\_SemiMajorAxis] $a$ [AU]
-\item[orbit\_visualization\_period] [days] %TODO does that default to sth meaningful? Do we need it at all?
 \end{description}
 The other parameters are like those for the major planets. 
 
@@ -376,7 +372,7 @@ orbit_AscendingNode=103.85141
 orbit_Eccentricity=0.0887401
 orbit_Inclination=7.14043
 orbit_SemiMajorAxis=2.3617933
-orbit_visualization_period=1325.46
+orbit_good=1325.46
 
 color=1., 1., 1.
 halo=true

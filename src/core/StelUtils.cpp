@@ -158,6 +158,9 @@ QString getCompilerInfo()
 		{1930, "MSVC++ 17.0 (Visual Studio 2022 RTW)"     },
 		{1931, "MSVC++ 17.1 (Visual Studio 2022)"         },
 		{1932, "MSVC++ 17.2 (Visual Studio 2022)"         },
+		{1933, "MSVC++ 17.3 (Visual Studio 2022)"         },
+		{1934, "MSVC++ 17.4 (Visual Studio 2022)"         },
+		{1935, "MSVC++ 17.5 (Visual Studio 2022)"         },
 	};
 	compilerInfo = map.value(_MSC_VER, "unknown MSVC++ version");
 	#endif

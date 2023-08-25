@@ -38,16 +38,15 @@
 #endif
 
 //! Solve true anomaly nu for hyperbolic "orbit" (better: trajectory) around the sun.
-//! @param dt: days from perihel
+//! @param M mean anomaly (meanMotion*daysFromPerihel) [radians]
 //! @param rCosNu: r*cos(nu)
 //! @param rSinNu: r*sin(nu)
-void KeplerOrbit::InitHyp(const double dt, double &rCosNu, double &rSinNu)
+void KeplerOrbit::InitHyp(const double M, double &rCosNu, double &rSinNu)
 {
 //	qDebug() << "InitHyp";
 	Q_ASSERT(e>1.0);
 	const double a = q/(e-1.0);
 	Q_ASSERT(a>0.0);
-	const double M = n * dt;
 //	Heafner, ch.5.4
 	double E=StelUtils::sign(M)*log(2.0*fabs(M)/e + 1.85);
 //	qDebug() << "InitHyp: E=" << E << " M=" << M ;
@@ -65,16 +64,15 @@ void KeplerOrbit::InitHyp(const double dt, double &rCosNu, double &rSinNu)
 }
 
 //! Solve true anomaly nu for parabolic orbit around the sun.
-//! @param dt: days from perihel
+//! @param W equivalent of mean anomaly (meanMotion*daysFromPerihel) [radians]
 //! @param rCosNu: r*cos(nu)
 //! @param rSinNu: r*sin(nu)
-void KeplerOrbit::InitPar(const double dt, double &rCosNu, double &rSinNu)
+void KeplerOrbit::InitPar(const double W, double &rCosNu, double &rSinNu)
 {
 //	qDebug() << "InitPar";
 	Q_ASSERT(e==1.0);
 //	const double M=dt*sqrt(GAUSS_GRAV_CONST/(2.0*q*q*q));
 //	const double W=1.5*M;
-	const double W=dt*n;
 	const double Y=cbrt(W+std::sqrt(W*W+1.));
 	const double tanNu2=Y-1.0/Y; // Heafner (5.5.8) has an error here, writes (Y-1)/Y.
 	rCosNu=q*(1.0-tanNu2*tanNu2);
@@ -83,15 +81,15 @@ void KeplerOrbit::InitPar(const double dt, double &rCosNu, double &rSinNu)
 
 
 //! Solve true anomaly nu for elliptical orbit with Laguerre-Conway's method. (May have high e)
-//! @param dt: days from perihel
+//! @param M mean anomaly (meanMotion*daysFromPerihel) [radians]
 //! @param rCosNu: r*cos(nu)
 //! @param rSinNu: r*sin(nu)
-void KeplerOrbit::InitEll(const double dt, double &rCosNu, double &rSinNu)
+void KeplerOrbit::InitEll(double M, double &rCosNu, double &rSinNu)
 {
 //	qDebug() << "InitEll";
 	Q_ASSERT(e<1.0);
 	const double a = q/(1.0-e); // semimajor axis
-	double M = fmod(n*dt,2*M_PI);  // Mean Anomaly
+	M = fmod(M,2*M_PI);  // Mean Anomaly [0...2pi]
 	if (M < 0.0) M += 2.0*M_PI;
 //	GZ: Comet orbits are quite often near-parabolic, where this may still only converge slowly.
 //	Better always use Laguerre-Conway. See Heafner, Ch. 5.3
@@ -195,16 +193,119 @@ void Orbit::setParentOrientation(const double parentRotObliquity, const double p
 
 void KeplerOrbit::positionAtTimevInVSOP87Coordinates(double JDE, double *v)
 {
-	JDE -= t0;
-	double rCosNu,rSinNu;
-	if (e < 1.0) InitEll(JDE,rCosNu,rSinNu); // Laguerre-Conway seems stable enough to go for <1.0.
+	positionAtMeanAnomalyInVSOP87Coordinates(n * (JDE - t0), v);
+	updateTails=true;
+}
+
+// Extracted from longer computation
+double KeplerOrbit::eccentricAnomaly(double M)
+{
+	if (e < 1.0)
+	{
+		//const double a = q/(1.0-e); // semimajor axis
+		M = StelUtils::fmodpos(M,2*M_PI);  // Mean Anomaly [0...2pi]
+		if (M > M_PI) M -= 2.0*M_PI;
+		//	GZ: Comet orbits are quite often near-parabolic, where this may still only converge slowly.
+		//	Better always use Laguerre-Conway. See Heafner, Ch. 5.3
+		//	Ouch! https://bugs.launchpad.net/stellarium/+bug/1465112 ==>It seems we still need an escape counter!
+		//      Debug line in test case fabs(E-Ep) indicates it usually takes 2-3, occasionally up to 6 cycles.
+		//	It seems safe to assume 10 should not be exceeded. N.B.: A GPU fixed-loopcount implementation could go for 8 passes.
+		double E=M+0.85*e*StelUtils::sign(sin(M));
+		int escape=0;
+		for (;;)
+		{
+			const double Ep=E;
+			const double f2=e*sin(E);
+			const double f=E-f2-M;
+			const double f1=1.0-e*cos(E);
+			E+= (-5.0*f)/(f1+StelUtils::sign(f1)*std::sqrt(fabs(16.0*f1*f1-20.0*f*f2)));
+			if (fabs(E-Ep) < EPSILON)
+			{
+				//qDebug() << "Ell. orbit with eccentricity " << e << "Escaping after" << escape << "loops at E-Ep=" << E-Ep;
+				break;
+			}
+			if (++escape>10)
+			{
+				qDebug() << "Ell. orbit with eccentricity " << e << "would have caused endless loop. Escaping after 10 runs at E-Ep=" << E-Ep;
+				break;
+			}
+		}
+		return E;
+	}
 	else if (e > 1.0)
 	{
-		// qDebug() << "Hyperbolic orbit for ecc=" << e << ", i=" << i << ", w=" << w << ", Mean Motion n=" << n;
-		InitHyp(JDE,rCosNu,rSinNu);
+		const double a = q/(e-1.0);
+		Q_ASSERT(a>0.0);
+		//	Heafner, ch.5.4
+		double E=StelUtils::sign(M)*log(2.0*fabs(M)/e + 1.85);
+		for (;;)
+		{
+			const double Ep=E;
+			const double f2=e*sinh(E);
+			const double f=f2-E-M;
+			const double f1=e*cosh(E)-1.0;
+			E+= (-5.0*f)/(f1+StelUtils::sign(f1)*std::sqrt(fabs(16.0*f1*f1-20.0*f*f2)));
+			if (fabs(E-Ep) < EPSILON) break;
+		}
+		return E;
 	}
-	else InitPar(JDE,rCosNu,rSinNu);
+	else
+	{
+		//const double M=dt*sqrt(GAUSS_GRAV_CONST/(2.0*q*q*q));
+		//const double W=1.5*M;
+		//const double W=dt*n; // Note: This M is usually called W in parabola case.
+		const double Y=cbrt(M+std::sqrt(M*M+1.));
+		return Y;
+	}
+}
 
+void KeplerOrbit::positionAtEccentricAnomalyInVSOP87Coordinates(const double E, double *v)
+{
+	double rCosNu,rSinNu;
+	if (e < 1.0)
+	{
+		const double a = q/(1.0-e); // semimajor axis
+		//Note: q=a*(1-e)
+		const double h1 = q*std::sqrt((1.0+e)/(1.0-e));  // elsewhere: a sqrt(1-e²)     ... q / (1-e) sqrt( (1+e)(1-e)) = q sqrt((1+e)/(1-e))
+		rCosNu = a*(cos(E)-e);
+		rSinNu = h1*sin(E);
+	}
+	else if (e > 1.0)
+	{
+		const double a = q/(e-1.0);
+		Q_ASSERT(a>0.0);
+		//const double M = n * dt;
+	//	Heafner, ch.5.4
+		rCosNu = a*(e-cosh(E));
+		rSinNu = a*std::sqrt(e*e-1.0)*sinh(E);
+	}
+	else //InitPar(meanAnomaly,rCosNu,rSinNu);
+	{
+		//const double W=dt*n;
+	//	const double Y=cbrt(W+std::sqrt(W*W+1.));
+	//	const double tanNu2=Y-1.0/Y; // Heafner (5.5.8) has an error here, writes (Y-1)/Y.
+		const double tanNu2=E-1.0/E; // I naively assume Y is similar to E here
+		rCosNu=q*(1.0-tanNu2*tanNu2);
+		rSinNu=2.0*q*tanNu2;
+	}
+	positionInVSOP87Coordinates(rCosNu, rSinNu, v, rdot);
+}
+
+void KeplerOrbit::positionAtMeanAnomalyInVSOP87Coordinates(const double meanAnomaly, double *v)
+{
+	double rCosNu,rSinNu;
+	if (e < 1.0)
+		InitEll(meanAnomaly,rCosNu,rSinNu); // Laguerre-Conway seems stable enough to go for <1.0.
+	else if (e > 1.0)
+		InitHyp(meanAnomaly,rCosNu,rSinNu);
+	else
+		InitPar(meanAnomaly,rCosNu,rSinNu);
+
+	positionInVSOP87Coordinates(rCosNu, rSinNu, v, rdot);
+}
+// Common part of position computation after doing the preliminary position computations.
+void KeplerOrbit::positionInVSOP87Coordinates(const double rCosNu, const double rSinNu, double *v, Vec3d &rdot)
+{
 	// Compute position vector and speed vector from orbital elements and true anomaly components. See e.g. Heafner, Fund.Eph.Comp.1999
 #ifdef _GNU_SOURCE
 	double cw, sw, cOm, sOm, ci, si;
@@ -241,13 +342,9 @@ void KeplerOrbit::positionAtTimevInVSOP87Coordinates(double JDE, double *v)
 	v[1] = rotateToVsop87[3]*p0 + rotateToVsop87[4]*p1 + rotateToVsop87[5]*p2;
 	v[2] = rotateToVsop87[6]*p0 + rotateToVsop87[7]*p1 + rotateToVsop87[8]*p2;
 
-	//rdot.set(s0, s1, s2); // FIXME: The speed also needs to be rotated. Correct?
-
 	rdot[0] = rotateToVsop87[0]*s0 + rotateToVsop87[1]*s1 + rotateToVsop87[2]*s2;
 	rdot[1] = rotateToVsop87[3]*s0 + rotateToVsop87[4]*s1 + rotateToVsop87[5]*s2;
 	rdot[2] = rotateToVsop87[6]*s0 + rotateToVsop87[7]*s1 + rotateToVsop87[8]*s2;
-
-	updateTails=true;
 }
 
 // Calculate sidereal period in days from semi-major axis.
