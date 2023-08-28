@@ -37,6 +37,10 @@ class StelCore;
 class StelObjectMgr : public StelModule
 {
 	Q_OBJECT
+	Q_PROPERTY(bool objectPointerVisibility
+		   READ getFlagSelectedObjectPointer
+		   WRITE setFlagSelectedObjectPointer
+		   NOTIFY flagSelectedObjectPointerChanged)
 
 public:
 	StelObjectMgr();
@@ -128,11 +132,6 @@ public:
 	//! @param type return only objects of the given type
 	QList<StelObjectP> getSelectedObject(const QString& type) const;
 
-	//! Set whether a pointer is to be drawn over selected object.
-	void setFlagSelectedObjectPointer(bool b) {objectPointerVisibility=b;}
-	//! Get whether a pointer is to be drawn over selected object.
-	bool getFlagSelectedObjectPointer(void) const {return objectPointerVisibility;}
-
 	//! Find any kind of object by its translated name.
 	StelObjectP searchByNameI18n(const QString &name) const;
 
@@ -198,10 +197,22 @@ public slots:
 	//! The behaviour of DebugAid texts depends on the use case.
 	void removeExtraInfoStrings(const StelObject::InfoStringGroup& flags);
 
+	//! Set whether a pointer is to be drawn over selected object.
+	void setFlagSelectedObjectPointer(bool b)
+	{
+		objectPointerVisibility=b;
+		emit flagSelectedObjectPointerChanged(b);
+
+	}
+	//! Get whether a pointer is to be drawn over selected object.
+	bool getFlagSelectedObjectPointer(void) { return objectPointerVisibility; }
+
 signals:
 	//! Indicate that the selected StelObjects has changed.
 	//! @param action define if the user requested that the objects are added to the selection or just replace it
 	void selectedObjectChanged(StelModule::StelModuleSelectAction);
+	//! Indicate that the visibility of pointer for selected StelObjects has changed.
+	void flagSelectedObjectPointerChanged(bool b);
 
 private:
 	// The list of StelObjectModule that are referenced in Stellarium

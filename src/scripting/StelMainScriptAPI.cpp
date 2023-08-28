@@ -393,6 +393,11 @@ void StelMainScriptAPI::setGuiVisible(bool b)
 	StelApp::getInstance().getGui()->setVisible(b);
 }
 
+void StelMainScriptAPI::setSelectedObjectMarkerVisible(bool b)
+{
+	GETSTELMODULE(StelObjectMgr)->setFlagSelectedObjectPointer(b);
+}
+
 void StelMainScriptAPI::setGuiStyle(const QString& cssStyle)
 {
 	emit StelApp::getInstance().colorSchemeChanged(cssStyle);

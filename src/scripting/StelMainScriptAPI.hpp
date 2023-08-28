@@ -475,6 +475,10 @@ public slots:
 	//! @param b if true, show the GUI, if false, hide the GUI.
 	static void setGuiVisible(bool b);
 
+	//! Show or hide the selection pointers/markers
+	//! @param b if true, show the pointer/marker around selected objects, if false, hide the pointer/marker.
+	static void setSelectedObjectMarkerVisible(bool b);
+
 	//! Use a custom CSS for the GUI. This is a very advanced feature, designing CSS is an art.
 	//! To use properly, place a private copy of normalStyle.css into your user data directory and edit style, but leave structure as-is.
 	//! @param cssStyle The file name without ".css"

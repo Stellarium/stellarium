@@ -27,6 +27,7 @@
 #include "StelMovementMgr.hpp"
 #include "StelSkyDrawer.hpp"
 #include "Planet.hpp"
+#include "StelActionMgr.hpp"
 
 #include <QMouseEvent>
 #include <QString>
@@ -48,6 +49,8 @@ void StelObjectMgr::init()
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
 	setFlagSelectedObjectPointer(conf->value("viewing/flag_show_selection_marker", true).toBool());
+
+	addAction("actionToggle_Selected_Object_Pointer", N_("Miscellaneous"), N_("Toggle visibility of pointers for selected objects"), "objectPointerVisibility", "");
 }
 
 StelObject::InfoStringGroup StelObjectMgr::getCustomInfoStrings()
