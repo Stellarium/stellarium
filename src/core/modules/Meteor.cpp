@@ -139,8 +139,8 @@ void Meteor::init(const float& radiantAlpha, const float& radiantDelta,
 		return;
 	}
 
-	// select random magnitude [-3; 4.5]
-	float Mag = StelApp::getInstance().getRandF() * 7.5f - 3.f;
+	// select random magnitude [-4.5; 4.5]
+	float Mag = StelApp::getInstance().getRandF() * 9.0f - 4.5f;
 	// compute RMag and CMag
 	RCMag rcMag;
 	m_core->getSkyDrawer()->computeRCMag(Mag, &rcMag);
