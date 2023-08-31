@@ -44,7 +44,7 @@ MeteorObj::MeteorObj(const StelCore* core, int speed, const float& radiantAlpha,
 		float prob = StelApp::getInstance().getRandF();
 		if (prob > 1.f / pidx)
 		{
-			// Increase the absolute magnitude ([-3; 4.5]) in 1.5!
+			// Increase the absolute magnitude ([-4.5; 4.5]) in 1.5!
 			// As we are working on a 0-1 scale (where 1 is brighter),
 			// more 1.5 means less 0.2!
 			setAbsMag(absMag() - 0.2f);
