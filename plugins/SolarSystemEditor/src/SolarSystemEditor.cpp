@@ -918,14 +918,16 @@ SsoElements SolarSystemEditor::readMpcOneLineCometElements(QString oneLineElemen
 	}
 
 	result.insert("ref", mpcMatch.captured(18).simplified());
-	//if (orbitType!='A')
-	//{
-		//result.insert("radius", 5); //Fictitious default assumption
-		//result.insert("albedo", 0.1); // GZ 2014-01-10: Comets are very dark, should even be 0.03!
-		//result.insert("dust_lengthfactor", 0.4); // dust tail length w.r.t. gas tail length
-		//result.insert("dust_brightnessfactor", 1.5); // dust tail brightness w.r.t. gas tail.
-		//result.insert("dust_widthfactor", 1.5); // opening w.r.t. gas tail opening width.
-	//}
+	if (orbitType=='A')
+	{
+		//result.insert("radius", 5); //Fictitious default assumption. Use default of 1 instead.
+		//result.insert("albedo", 0.1); // asteroid default
+		result.insert("dust_lengthfactor", 0.0); // dust tail length w.r.t. gas tail length
+		result.insert("dust_brightnessfactor", 0.0); // dust tail brightness w.r.t. gas tail.
+		result.insert("dust_widthfactor", 0.0); // opening w.r.t. gas tail opening width.
+		result.insert("outgas_intensity",0.0); // These are inactive objects!
+		result.insert("outgas_falloff", 0.0);
+	}
 	//qDebug() << "readMpcOneLineCometElements done\n";
 	return result;
 }
