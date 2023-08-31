@@ -1372,12 +1372,12 @@ bool SolarSystemEditor::appendToSolarSystemConfigurationFile(QList<SsoElements> 
 			if (name.isEmpty())
 				continue;
 
-			output << StelUtils::getEndLineChar() << QString("[%1]").arg(sectionName); // << StelUtils::getEndLineChar();
+			output << StelUtils::getEndLineChar() << QString("[%1]").arg(sectionName) << "\n"; // << StelUtils::getEndLineChar();
 			QHash<QString, QVariant>::const_iterator i=object.cbegin();
 			while (i != object.cend())
 			{
 				// formatting strings
-				output << QString("%1 = %2").arg(i.key(), width).arg(i.value().toString()); // << StelUtils::getEndLineChar();
+				output << QString("%1 = %2").arg(i.key(), width).arg(i.value().toString()) << "\n"; // << StelUtils::getEndLineChar();
 				++i;
 			}
 
