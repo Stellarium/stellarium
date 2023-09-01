@@ -1,6 +1,6 @@
 SET(stellarium_POT stellarium.pot)
 
-FILE(GLOB pofiles RELATIVE "${CMAKE_SOURCE_DIR}/po/stellarium/" "*.po")
+FILE(GLOB pofiles RELATIVE "${PROJECT_SOURCE_DIR}/po/stellarium/" "*.po")
 LIST(SORT pofiles)
 STRING(REGEX REPLACE ".po" "" outpofiles "${pofiles}")
 
@@ -22,7 +22,7 @@ IF(${XGETTEXT_FOUND})
                --keyword=translate:2,3c
                --add-comments=TRANSLATORS:
                --directory=${CMAKE_BINARY_DIR}
-               --directory=${CMAKE_SOURCE_DIR}
+               --directory=${PROJECT_SOURCE_DIR}
                --output-dir=${CMAKE_BINARY_DIR}
                --files-from=${CMAKE_CURRENT_SOURCE_DIR}/POTFILES.in
                --copyright-holder=Stellarium's\ team

@@ -389,7 +389,7 @@ private:
 	void highGraphicsModeDraw();
 
 	QString getVersion() const;
-
+public:
 	// The StelApp singleton
 	static StelApp* singleton;
 

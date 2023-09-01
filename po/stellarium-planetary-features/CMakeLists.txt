@@ -1,4 +1,4 @@
-FILE(GLOB poscfiles RELATIVE "${CMAKE_SOURCE_DIR}/po/stellarium-planetary-features/" "*.po")
+FILE(GLOB poscfiles RELATIVE "${PROJECT_SOURCE_DIR}/po/stellarium-planetary-features/" "*.po")
 LIST(SORT poscfiles)
 STRING(REGEX REPLACE ".po" "" outposcfiles "${poscfiles}")
 

@@ -7,8 +7,8 @@
 DisableStartupPrompt=yes
 DisableDirPage=no
 DisableProgramGroupPage=no
-WizardSmallImageFile=@CMAKE_SOURCE_DIR@\data\icon.bmp
-WizardImageFile=@CMAKE_SOURCE_DIR@\data\splash.bmp
+WizardSmallImageFile=@PROJECT_SOURCE_DIR@\data\icon.bmp
+WizardImageFile=@PROJECT_SOURCE_DIR@\data\splash.bmp
 WizardImageStretch=no
 WizardImageBackColor=clBlack
 AppName=Stellarium
@@ -21,13 +21,13 @@ AppSupportURL=@STELLARIUM_URL@
 AppUpdatesURL=@STELLARIUM_URL@
 VersionInfoVersion=@WINDOWS_PACKAGE_VERSION@
 MinVersion=0,@ISS_MIN_WIN_VERSION@
-SetupIconFile=@CMAKE_SOURCE_DIR@\data\@PACKAGE_ICON@.ico
+SetupIconFile=@PROJECT_SOURCE_DIR@\data\@PACKAGE_ICON@.ico
 OutputBaseFilename=stellarium-@ISS_PACKAGE_VERSION@-@ISS_PACKAGE_PLATFORM@
-OutputDir=@CMAKE_SOURCE_DIR@\installers
+OutputDir=@PROJECT_SOURCE_DIR@\installers
 DefaultDirName={pf}\Stellarium
 DefaultGroupName=Stellarium
 UninstallDisplayIcon={app}\data\stellarium.ico
-LicenseFile=@CMAKE_SOURCE_DIR@\COPYING
+LicenseFile=@PROJECT_SOURCE_DIR@\COPYING
 ChangesAssociations=yes
 ; LZMA2/ultra required 356 MB RAM for compression and 32 MB RAM for decompression
 Compression=lzma2/ultra
@@ -35,12 +35,12 @@ Compression=lzma2/ultra
 [Files]
 Source: "@CMAKE_INSTALL_PREFIX@\bin\stellarium.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "@CMAKE_INSTALL_PREFIX@\bin\*.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "@CMAKE_SOURCE_DIR@\data\stellarium.url"; DestDir: "{app}"; Flags: ignoreversion
-Source: "@CMAKE_SOURCE_DIR@\data\stellarium-devdocs.url"; DestDir: "{app}"; Flags: ignoreversion
-Source: "@CMAKE_SOURCE_DIR@\data\qt.conf"; DestDir: "{app}"; Flags: ignoreversion
-Source: "@CMAKE_SOURCE_DIR@\*.md"; DestDir: "{app}"; Flags: ignoreversion
-Source: "@CMAKE_SOURCE_DIR@\COPYING"; DestDir: "{app}"; Flags: ignoreversion; DestName: "GPL.txt"
-Source: "@CMAKE_SOURCE_DIR@\ChangeLog"; DestDir: "{app}"; Flags: ignoreversion; DestName: "ChangeLog.txt"
+Source: "@PROJECT_SOURCE_DIR@\data\stellarium.url"; DestDir: "{app}"; Flags: ignoreversion
+Source: "@PROJECT_SOURCE_DIR@\data\stellarium-devdocs.url"; DestDir: "{app}"; Flags: ignoreversion
+Source: "@PROJECT_SOURCE_DIR@\data\qt.conf"; DestDir: "{app}"; Flags: ignoreversion
+Source: "@PROJECT_SOURCE_DIR@\*.md"; DestDir: "{app}"; Flags: ignoreversion
+Source: "@PROJECT_SOURCE_DIR@\COPYING"; DestDir: "{app}"; Flags: ignoreversion; DestName: "GPL.txt"
+Source: "@PROJECT_SOURCE_DIR@\ChangeLog"; DestDir: "{app}"; Flags: ignoreversion; DestName: "ChangeLog.txt"
 ; Qt stuff
 Source: "@CMAKE_INSTALL_PREFIX@\qtstuff\*"; DestDir: "{app}\"; Flags: recursesubdirs ignoreversion
 ; Stellarium's stuff
@@ -121,35 +121,32 @@ Root: HKCR; Subkey: "Stellarium.Script\shell\open\command"; ValueType: string; V
 ; Recommended use Inno Setup 5.5.3+
 [Languages]
 ; Official translations of GUI of Inno Setup + translation Stellarium specific lines
-Name: "en"; MessagesFile: "compiler:Default.isl,@CMAKE_SOURCE_DIR@\util\ISL\EnglishCM.isl"
-Name: "ca"; MessagesFile: "compiler:Languages\Catalan.isl,@CMAKE_SOURCE_DIR@\util\ISL\CatalanCM.isl"
+Name: "en"; MessagesFile: "compiler:Default.isl,@PROJECT_SOURCE_DIR@\util\ISL\EnglishCM.isl"
+Name: "ca"; MessagesFile: "compiler:Languages\Catalan.isl,@PROJECT_SOURCE_DIR@\util\ISL\CatalanCM.isl"
 Name: "co"; MessagesFile: "compiler:Languages\Corsican.isl"
 Name: "cs"; MessagesFile: "compiler:Languages\Czech.isl"
 Name: "da"; MessagesFile: "compiler:Languages\Danish.isl"
 Name: "nl"; MessagesFile: "compiler:Languages\Dutch.isl"
 Name: "fi"; MessagesFile: "compiler:Languages\Finnish.isl"
-Name: "fr"; MessagesFile: "compiler:Languages\French.isl,@CMAKE_SOURCE_DIR@\util\ISL\FrenchCM.isl"
-Name: "de"; MessagesFile: "compiler:Languages\German.isl,@CMAKE_SOURCE_DIR@\util\ISL\GermanCM.isl"
+Name: "fr"; MessagesFile: "compiler:Languages\French.isl,@PROJECT_SOURCE_DIR@\util\ISL\FrenchCM.isl"
+Name: "de"; MessagesFile: "compiler:Languages\German.isl,@PROJECT_SOURCE_DIR@\util\ISL\GermanCM.isl"
 Name: "he"; MessagesFile: "compiler:Languages\Hebrew.isl"
 Name: "it"; MessagesFile: "compiler:Languages\Italian.isl"
 Name: "ja"; MessagesFile: "compiler:Languages\Japanese.isl"
-Name: "no"; MessagesFile: "compiler:Languages\Norwegian.isl,@CMAKE_SOURCE_DIR@\util\ISL\NorwegianCM.isl"
+Name: "no"; MessagesFile: "compiler:Languages\Norwegian.isl,@PROJECT_SOURCE_DIR@\util\ISL\NorwegianCM.isl"
 Name: "pl"; MessagesFile: "compiler:Languages\Polish.isl"
-Name: "pt_BR"; MessagesFile: "compiler:Languages\BrazilianPortuguese.isl,@CMAKE_SOURCE_DIR@\util\ISL\BrazilianPortugueseCM.isl"
+Name: "pt_BR"; MessagesFile: "compiler:Languages\BrazilianPortuguese.isl,@PROJECT_SOURCE_DIR@\util\ISL\BrazilianPortugueseCM.isl"
 Name: "pt"; MessagesFile: "compiler:Languages\Portuguese.isl"
-Name: "ru"; MessagesFile: "compiler:Languages\Russian.isl,@CMAKE_SOURCE_DIR@\util\ISL\RussianCM.isl"
+Name: "ru"; MessagesFile: "compiler:Languages\Russian.isl,@PROJECT_SOURCE_DIR@\util\ISL\RussianCM.isl"
 Name: "sl"; MessagesFile: "compiler:Languages\Slovenian.isl"
 Name: "es"; MessagesFile: "compiler:Languages\Spanish.isl"
-Name: "uk"; MessagesFile: "compiler:Languages\Ukrainian.isl,@CMAKE_SOURCE_DIR@\util\ISL\UkrainianCM.isl"
+Name: "uk"; MessagesFile: "compiler:Languages\Ukrainian.isl,@PROJECT_SOURCE_DIR@\util\ISL\UkrainianCM.isl"
 ; Unofficial translations of GUI of Inno Setup
-Name: "el"; MessagesFile: "@CMAKE_SOURCE_DIR@\util\ISL\Greek.isl"
-Name: "hu"; MessagesFile: "@CMAKE_SOURCE_DIR@\util\ISL\Hungarian.isl"
-Name: "sr"; MessagesFile: "@CMAKE_SOURCE_DIR@\util\ISL\SerbianCyrillic.isl"
-Name: "bg"; MessagesFile: "@CMAKE_SOURCE_DIR@\util\ISL\Bulgarian.isl,@CMAKE_SOURCE_DIR@\util\ISL\BulgarianCM.isl"
-Name: "bs"; MessagesFile: "@CMAKE_SOURCE_DIR@\util\ISL\Bosnian.isl,@CMAKE_SOURCE_DIR@\util\ISL\BosnianCM.isl"
-Name: "ko"; MessagesFile: "@CMAKE_SOURCE_DIR@\util\ISL\Korean.isl,@CMAKE_SOURCE_DIR@\util\ISL\KoreanCM.isl"
-Name: "zh_CN"; MessagesFile: "@CMAKE_SOURCE_DIR@\util\ISL\ChineseSimplified.isl,@CMAKE_SOURCE_DIR@\util\ISL\ChineseSimplifiedCM.isl"
-Name: "zh_TW"; MessagesFile: "@CMAKE_SOURCE_DIR@\util\ISL\ChineseTraditional.isl,@CMAKE_SOURCE_DIR@\util\ISL\ChineseTraditionalCM.isl"
+Name: "el"; MessagesFile: "@PROJECT_SOURCE_DIR@\util\ISL\Greek.isl"
+Name: "hu"; MessagesFile: "@PROJECT_SOURCE_DIR@\util\ISL\Hungarian.isl"
+Name: "sr"; MessagesFile: "@PROJECT_SOURCE_DIR@\util\ISL\SerbianCyrillic.isl"
+Name: "zh_CN"; MessagesFile: "@PROJECT_SOURCE_DIR@\util\ISL\ChineseSimplified.isl,@PROJECT_SOURCE_DIR@\util\ISL\ChineseSimplifiedCM.isl"
+Name: "zh_TW"; MessagesFile: "@PROJECT_SOURCE_DIR@\util\ISL\ChineseTraditional.isl,@PROJECT_SOURCE_DIR@\util\ISL\ChineseTraditionalCM.isl"
 
 [Code]
 procedure CurUninstallStepChanged (CurUninstallStep: TUninstallStep);

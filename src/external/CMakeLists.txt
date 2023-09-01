@@ -71,7 +71,7 @@ set_target_properties(zlib_stel PROPERTIES AUTOMOC 0)
 SET_TARGET_PROPERTIES(zlib_stel PROPERTIES FOLDER "src/external")
 
 ################################# INDI ################################
-IF(USE_PLUGIN_TELESCOPECONTROL)
+IF(USE_PLUGIN_TELESCOPECONTROL AND (NOT TARGET indiclient) )
     SET(PREFER_SYSTEM_INDILIB 1 CACHE BOOL
         "Use system-provided INDI instead of the bundled version")
     find_library(INDICLIENT_LIB indiclient)
@@ -128,17 +128,17 @@ IF(USE_PLUGIN_TELESCOPECONTROL)
         # This patch is upstreamed at
         # https://github.com/indilib/indi/pull/1728 so after version 1.9.8
         # shouldn't be needed
-        file(GLOB INDILOCALE_H ${indiclient_SOURCE_DIR}/libs/locale_compat.h)
-        if (INDILOCALE_H)
-            file(READ ${indiclient_SOURCE_DIR}/libs/locale_compat.h INDILOCALE_H)
-            string(REGEX REPLACE "L#s" "L\"\"#s" INDILOCALE_H "${INDILOCALE_H}")
-            file(WRITE ${CMAKE_CURRENT_BINARY_DIR}/libindi/locale_compat.h.new
-                "${INDILOCALE_H}")
-            configure_file(${CMAKE_CURRENT_BINARY_DIR}/libindi/locale_compat.h.new
-                ${CMAKE_CURRENT_BINARY_DIR}/libindi/locale_compat.h COPYONLY)
-            file(RENAME ${indiclient_SOURCE_DIR}/libs/locale_compat.h
-                ${indiclient_SOURCE_DIR}/libs/locale_compat.h.bak)
-        endif()
+#		file(GLOB INDILOCALE_H ${indiclient_SOURCE_DIR}/libs/locale_compat.h)
+#        if (INDILOCALE_H)
+#            file(READ ${indiclient_SOURCE_DIR}/libs/locale_compat.h INDILOCALE_H)
+#			string(REGEX REPLACE "L#s" "L\"\"#s" INDILOCALE_H "${INDILOCALE_H}")
+#            file(WRITE ${CMAKE_CURRENT_BINARY_DIR}/libindi/locale_compat.h.new
+#				"${INDILOCALE_H}")
+#            configure_file(${CMAKE_CURRENT_BINARY_DIR}/libindi/locale_compat.h.new
+#                ${CMAKE_CURRENT_BINARY_DIR}/libindi/locale_compat.h COPYONLY)
+#            file(RENAME ${indiclient_SOURCE_DIR}/libs/locale_compat.h
+#                ${indiclient_SOURCE_DIR}/libs/locale_compat.h.bak)
+#        endif()
 
         set(INDI_SOVERSION "1")
         set(CMAKE_INDI_VERSION_MAJOR 1)
