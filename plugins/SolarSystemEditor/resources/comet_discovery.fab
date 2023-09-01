@@ -12,7 +12,10 @@
 # - Small-Body Database Lookup at NASA JPL: https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html
 # - Small Bodies Data Ferret: https://sbnapps.psi.edu/ferret/SimpleSearch/form.action
 # - Всехсвятский, С.К. - Физические характеристики комет (1958) = Vsekhsvjatskij, S.K. - Fizicheskie kharakteristiki komet (1958)
+# - Всехсвятский, С.К. - Физические характеристики комет 1954-1960 гг (1966) = Vsekhsvjatskijj, S.K. - Fizicheskie kharakteristiki komet 1954-1960 gg (1966)
 # - Всехсвятский, С.К. - Кометы в 1961-65 гг (1967) = Vsekhsvjatskijj, S.K. - Komety v 1961-65 gg (1967)
+# - Всехсвятский, С.К. - Физические характеристики комет 1965-1970 гг (1974) = Vsekhsvjatskijj, S.K. - Fizicheskie kharakteristiki komet 1965-1970 gg (1974)
+# - Всехсвятский, С.К. - Физические характеристики комет 1971-1975 гг (1979) = Vsekhsvjatskijj, S.K. - Fizicheskie kharakteristiki komet 1971-1975 gg (1979)
 #
 # Columns:
 # - IAU designation
@@ -606,7 +609,9 @@
    C/1955 O1|C/1955    O1|1955      V| 1955g|1955-07-29|M. Honda
    C/1956 E1|C/1956    E1|1956    III| 1956b|1956-03-12|A. Mrkos
    C/1956 F1|C/1956    F1|1957     VI| 1956c|1956-03-16|C.A. Wirtanen
+# Great Comet
    C/1956 R1|C/1956    R1|1957    III| 1956h|1956-11-08|S.J.V. Arend, G. Roland
+# Great Comet
    C/1957 P1|C/1957    P1|1957      V| 1957d|1957-08-02|A. Mrkos
    C/1957 U1|C/1957    U1|1957     IX| 1957f|1957-10-16|I.N. Latyshev, P. Wild, R. Burnham Jr.
    C/1958 D1|C/1958    D1|1958    III| 1958a|1958-02-22|R. Burnham Jr.
@@ -641,20 +646,64 @@
    C/1965 S1|C/1965    S1|1965   VIII| 1965f|1965-09-18|K. Ikeya, T. Seki
    C/1965 S2|C/1965    S2|1965     IX| 1965h|1965-09-26|G.E.D. Alcock
          68P|P/1965    U1|1965     VI| 1965j|1965-11-02|A.R. Klemola
+   C/1966 P1|C/1966    P1|1966      V| 1966b|1966-08-07|S. Kilston
+   C/1966 P2|C/1966    P2|1966     II| 1966c|1966-08-15|R. Barbon
+   C/1966 R1|C/1966    R1|1966     IV| 1966d|1966-09-08|K. Ikeya, E. Everhart
+   C/1966 T1|C/1966    T1|1967     II| 1966e|1966-10-15|K. Rudnicki
+   C/1967 C1|C/1967    C1|1967     IV| 1967b|1967-02-04|T. Seki
+   C/1967 C2|C/1967    C2|1967    III| 1967c|1967-02-11|P. Wild
+   C/1967 M1|C/1967    M1|1967    VII| 1967f|1967-06-29|H.E. Mitchell, M.V. Jones, F.W. Gerber
+   C/1967 Y1|C/1967    Y1|1968      I| 1967n|1967-12-28|K. Ikeya, T. Seki
+   C/1968 H1|C/1968    H1|1968     IV| 1968a|1968-04-30|A. Tago, M. Honda, H. Yamamoto
+   C/1968 L1|C/1968    L1|1968      V| 1968b|1968-06-15|M. Whitaker, N. Thomas
+   C/1968 N1|C/1968    N1|1968     VI| 1968c|1968-07-06|M. Honda
+   C/1968 Q1|C/1968    Q1|1968    VII| 1968d|1968-08-24|D. Bally-Urban, P. Clayton
+   C/1968 Q2|C/1968    Q2|1968     IX| 1968e|1968-08-30|M. Honda
+   C/1968 U1|C/1968    U1|1968    III| 1968f|1968-10-17|P. Wild
+   C/1968 Y1|C/1968    Y1|1969      I| 1968j|1968-12-19|N. Thomas
+   C/1969 O1|C/1969    O1|1970    III| 1969b|1969-07-24|L. Kohoutek
+   C/1969 P1|C/1969    P1|1969    VII| 1969d|1969-08-12|Sh. Fujikawa
          67P|P/1969    R1|1969     IV| 1969h|1969-09-20|K.I. Churyumov, S.I. Gerasimenko
+   C/1969 T1|C/1969    T1|1969     IX| 1969g|1969-10-10|A. Tago, Y. Sato, K. Kosaka
    C/1969 Y1|C/1969    Y1|1970     II| 1969i|1969-12-28|J.C. Bennett
+   C/1970 B1|C/1970    B1|1970      I| 1970a|1970-01-27|T. Daido, Sh. Fujikawa
+   C/1970 K1|C/1970    K1|1970     VI| 1970f|1970-05-18|G. White, E. Ortiz, C. Bolelli
+   C/1970 U1|C/1970    U1|1970      X| 1970m|1970-10-19|Sh. Suzuki, Y. Sato, T. Seki
          65P|P/1970    U2|1969     II| 1970p|1970-10-27|J.E. Gunn
          70P|P/1970    Y1|1970    XII| 1970r|1970-12-27|N. Kojima
+   C/1971 E1|C/1971    E1|1971      V| 1971a|1971-03-07|K. Toba
+   C/1972 E1|C/1972    E1|1972    III| 1972f|1972-03-12||W.A. Bradfield
+   C/1972 F1|C/1972    F1|1971      I| 1972e|1072-03   |T. Gehrels
+   C/1972 L1|C/1972    L1|1972     IX| 1972h|1972-06-09|
          90P|P/1972    T1|1973      I| 1972k|1972-10-11|T. Gehrels
+   C/1972 U1|C/1972    U1|1973     II| 1972j|1972-10-31|N. Kojima
+   C/1972 X1|C/1972    X1|1972    XII| 1972l|1972-12-09|G. Araya
+   C/1973 A1|C/1973    A1|1972   VIII| 1973a|1973-01-11|A. Heck, G. Sause
+   C/1973 D1|C/1973    D1|1973    VII| 1973e|1973-02-28|L. Kohoutek
+   C/1973 E1|C/1973    E1|1973    XII| 1973f|1973-03-18|L. Kohoutek
+   C/1973 H1|C/1973    H1|1973    III| 1973h|1973-04-25|J. Huchra
          71P|P/1973    L1|1973      V| 1973i|1973-06-09|M. Clark
+   C/1973 N1|C/1973    N1|1973      X| 1973k|1973-07-04|A. Sandage
          78P|P/1973    S1|1973     XI| 1973n|1973-09-29|T. Gehrels
+   C/1973 W1|C/1973    W1|1973     IX| 1973o|1973-11-24|*Gibson
+   C/1974 C1|C/1974    C1|1974    III| 1974b|1974-02-12|W.A. Bradfield
+   C/1974 F1|C/1974    F1|1975   VIII| 1974c|1974-03-21|M. Lovas
+   C/1974 O1|C/1974    O1|1974   VIII| 1974e|1974-07-26|C. Cesco
+   C/1974 V1|C/1974    V1|1974    XII| 1974g|1974-11-12|S. van den Bergh
+   C/1974 V2|C/1974    V2|1974     XV| 1974h|1974-11-13|J. Bennett
          85D|D/1975    A1|1975      I| 1975a|1975-01-04|L. Boethin
-         75D|D/1975    C1|1975    III| 1975c|1975-02   |L. Kohoutek
-         76P|P/1975    D1|1975     IV| 1975b|1975-01   |R.M. West
-         74P|P/1975    E2|1975    VII| 1975e|1975-03   |T.M. Smirnova
+         75D|D/1975    C1|1975    III| 1975c|1975-02-09|L. Kohoutek
+         76P|P/1975    D1|1975     IV| 1975b|1975-01-24|R.M. West, L. Kohoutek, T. Ikemura
+   C/1975 E1|C/1975    E1|1975      V| 1975d|1975-03-12|W.A. Bradfield
+         74P|P/1975    E2|1975    VII| 1975e|1975-03-04|T.M. Smirnova, N.S. Chernykh
          77P|P/1975    L1|1974    XIV| 1975g|1975-06-10|A.J. Longmore
-   C/1975 V1|C/1975    V1|1976     VI| 1975n|1975-08-10|R.M. West
+   C/1975 N1|C/1975    N1|1975     IX| 1975h|1975-07-02|T. Kobayashi, D. Berger, D. Milon
+   C/1975 V1|C/1975    V1|1976     VI| 1975n|1975-09-24|R.M. West
+   C/1975 V2|C/1975    V2|1975     XI| 1975p|1975-11-11|W.A. Bradfield
+   C/1975 T1|C/1975    T1|1975    XII| 1975j|1975-10-05|H. Mori, Y. Sato, Sh. Fujikawa
+   C/1975 T2|C/1975    T2|1975      X| 1975k|1975-10-05|Sh. Suzuki, Y. Saigusa, H. Mori
          82P|P/1975    U1|1977    VII| 1975o|1975-10-27|T. Gehrels
+   C/1976 D2|C/1976    D2|1975     II| 1976c|1976-02-25|H.E. Schuster
          99P|P/1977    H2|1977    III| 1977f|1977-04-24|Ch.T. Kowal
         101P|P/1977    Q1|1978     IV| 1977l|1977-08-19|N.S. Chernykh
         106P|P/1977    T1|1978      I| 1977o|1977-10-09|H.-E. Schuster
