@@ -81,7 +81,7 @@ public:
 	//! All initializations should be done here.
 	void init() override;
 
-	double getCallOrder(StelModuleActionName actionName) const override;
+	//double getCallOrder(StelModuleActionName actionName) const override;
 
 	//! called when the "configure" button in the "Plugins" tab is pressed
 	bool configureGui(bool show) override;

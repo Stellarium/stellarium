@@ -151,10 +151,10 @@ void SolarSystemEditor::init()
 	addAction("actionShow_MPC_Import", N_("Solar System Editor"), N_("Import orbital elements in MPC format..."), mainWindow, "newImportMPC()", "Ctrl+Alt+S");
 }
 
-double SolarSystemEditor::getCallOrder(StelModuleActionName) const// actionName
-{
-	return 0.;
-}
+//double SolarSystemEditor::getCallOrder(StelModuleActionName) const// actionName
+//{
+//	return 0.;
+//}
 
 bool SolarSystemEditor::configureGui(bool show)
 {
@@ -480,7 +480,6 @@ void SolarSystemEditor::initCometCrossref()
 	{
 		// regular expression to find the comments and empty lines
 		static const QRegularExpression commentRx("^(\\s*#.*|\\s*)$");
-		static const QRegularExpression periodicCometNumberRx("^(\\d+)([PD])$");
 
 		while(!cdata.atEnd())
 		{
@@ -685,28 +684,29 @@ SsoElements SolarSystemEditor::readMpcOneLineCometElements(QString oneLineElemen
 				    "([[:print:]]{1,9}).*$"   //  160 - 168  a9    18. Reference
 	    );
 	*/
-	static const QRegularExpression mpcParser("^\\s*(\\d{4})?"                        //    1 -   4  i4     1. Periodic comet number
-						  "([CPDIA])"                             //    5        a1     2. Orbit type (generally `C', `P' or `D') -- A=reclassified as Asteroid? I=Interstellar.
-						  "((?:\\w{6}|\\s{6})?[0a-zA-Z])?\\s+"    //    6 -  12  a7     3. IAU designation (in packed form)
-						  "(\\d{4})\\s+"                          //   15 -  18  i4     4. Year of perihelion passage
-						  "(\\d{2})\\s+"                          //   20 -  21  i2     5. Month of perihelion passage
-						  "(\\d{1,2}\\.\\d{3,4})\\s+"             //   23 -  29  f7.4   6. Day of perihelion passage (TT)
-						  "(\\d{1,2}\\.\\d{5,6})\\s+"             //   31 -  39  f9.6   7. Perihelion distance (AU)
-						  "(\\d\\.\\d{5,6})\\s+"                  //   42 -  49  f8.6   8. Orbital eccentricity
-						  "(\\d{1,3}\\.\\d{3,4})\\s+"             //   52 -  59  f8.4   9. Argument of perihelion, J2000.0 (degrees)
-						  "(\\d{1,3}\\.\\d{3,4})\\s+"             //   62 -  69  f8.4  10. Longitude of the ascending node, J2000.0 (degrees)
-						  "(\\d{1,3}\\.\\d{3,4})\\s+"             //   72 -  79  f8.4  11. Inclination in degrees, J2000.0 (degrees)
-						  "(?:(\\d{4})"                           //   82 -  85  i4    12. Year of epoch for perturbed solutions
-						  "(\\d\\d)"                              //   86 -  87  i2    13. Month of epoch for perturbed solutions
-						  "(\\d\\d))?\\s+"                        //   88 -  89  i2    14. Day of epoch for perturbed solutions
-						  "(\\-?\\d{1,2}\\.\\d)\\s+"              //   92 -  95  f4.1  15. Absolute magnitude
-						  "(\\d{1,2}\\.\\d)\\s+"                  //   97 - 100  f4.0  16. Slope parameter
-						  "(\\S.{1,54}\\S)"                       //  103 - 158  a56   17. Designation and Name
-						  "(?:\\s+(\\S.*))?$");                   //  160 - 168  a9    18. Reference
+
+	static const QRegularExpression mpcParser("^\\s*(\\d{4})?"                                 //    1 -   4  i4     1. Periodic comet number
+						  "([CPDIA])"                                      //    5        a1     2. Orbit type (generally `C', `P' or `D') -- A=reclassified as Asteroid? I=Interstellar.
+						  "((?:\\w|\\s|\\.|/)(?:\\w{4,5}|\\s{4,5})?[0a-zA-Z]{1,2})?\\s+"    //    6 -  12  a7     3. IAU designation (in packed form) [last group is 2 long if first is 4 long.]
+						  "(\\d{4}|\\*{4})\\s+"                            //   15 -  18  i4     4. Year of perihelion passage (or **** for negative years!)
+						  "(\\d{2})\\s+"                                   //   20 -  21  i2     5. Month of perihelion passage
+						  "(\\d{1,2}(?:\\.\\d{1,4})?)\\s+"                 //   23 -  29  f7.4   6. Day of perihelion passage (TT)
+						  "(\\d{1,2}\\.\\d{2,6})\\s+"                      //   31 -  39  f9.6   7. Perihelion distance (AU)
+						  "(\\d\\.\\d{2,6})\\s+"                           //   42 -  49  f8.6   8. Orbital eccentricity
+						  "(\\d{1,3}(?:\\.\\d{1,4})?)\\s+"                 //   52 -  59  f8.4   9. Argument of perihelion, J2000.0 (degrees)
+						  "(\\d{1,3}(?:\\.\\d{1,4})?)\\s+"                 //   62 -  69  f8.4  10. Longitude of the ascending node, J2000.0 (degrees)
+						  "(\\d{1,3}(?:\\.\\d{1,4})?)\\s+"                 //   72 -  79  f8.4  11. Inclination in degrees, J2000.0 (degrees)
+						  "(?:(\\d{4})"                                    //   82 -  85  i4    12. Year of epoch for perturbed solutions
+						  "(\\d\\d)"                                       //   86 -  87  i2    13. Month of epoch for perturbed solutions
+						  "(\\d\\d))?\\s+"                                 //   88 -  89  i2    14. Day of epoch for perturbed solutions
+						  "(\\-?\\d{1,2}\\.\\d)\\s+"                       //   92 -  95  f4.1  15. Absolute magnitude
+						  "(\\d{1,2}\\.\\d)\\s+"                           //   97 - 100  f4.0  16. Slope parameter
+						  "(\\S.{1,54}\\S)"                                //  103 - 158  a56   17. Designation and Name
+						  "(?:\\s+(\\S.*))?$");                            //  160 - 168  a9    18. Reference
 	if (!mpcParser.isValid())
 	{
-		qWarning() << "Bad Regular Expression:" << mpcParser.errorString();
-		qWarning() << "Error offset:" << mpcParser.patternErrorOffset();
+		qCritical() << "Bad Regular Expression:" << mpcParser.errorString();
+		qCritical() << "Error offset:" << mpcParser.patternErrorOffset();
 	}
 	QRegularExpressionMatch mpcMatch=mpcParser.match(oneLineElements);
 	//qDebug() << "RegExp captured:" << mpcMatch.capturedTexts();
@@ -759,6 +759,11 @@ SsoElements SolarSystemEditor::readMpcOneLineCometElements(QString oneLineElemen
 		if ((iauDesignation.length()>0) && (!mpcName.startsWith(iauDesignation)))
 			qCritical() << "Parsed designation '" << iauDesignation <<  "' does not fit number in name! Line " << oneLineElements;
 		name=mpcName;
+	}
+	else if (mpcName.length()==9) // anonymous?
+	{
+		QStringList nameList=mpcName.split('/');
+		name=QString("%1/%2 (%3)").arg(orbitType, nameList.at(1).trimmed(), q_("Anonymous")); // "C/1500 H1 (Anonymous)"
 	}
 	else // "332P-C/Ikeya-Murakami" style
 	{
@@ -842,6 +847,11 @@ SsoElements SolarSystemEditor::readMpcOneLineCometElements(QString oneLineElemen
 	bool ok1=false, ok2=false, ok3=false, ok4=false, ok5=false;
 
 	int year	= mpcMatch.captured(4).toInt(&ok1);
+	if (!ok1) // seen "****"?
+	{
+		QString iauStr=unpackCometIAUDesignation(packedIauDesignation);
+		year=iauStr.split(' ').at(0).toInt(&ok1);
+	}
 	int month	= mpcMatch.captured(5).toInt(&ok2);
 	double dayFraction	= mpcMatch.captured(6).toDouble(&ok3);
 
@@ -970,7 +980,7 @@ SsoElements SolarSystemEditor::readMpcOneLineMinorPlanetElements(QString oneLine
 	{
 		//See if it is a number, but packed
 		//I hope the format is right (I've seen prefixes only between A and P)
-		QRegularExpression packedMinorPlanetNumber("^([A-Za-z])(\\d+)$");
+		static const QRegularExpression packedMinorPlanetNumber("^([A-Za-z])(\\d+)$");
 		QRegularExpressionMatch mpMatch;
 		if (column.indexOf(packedMinorPlanetNumber, 0, &mpMatch) == 0)
 		{
@@ -1014,7 +1024,7 @@ SsoElements SolarSystemEditor::readMpcOneLineMinorPlanetElements(QString oneLine
 	{
 		if (minorPlanetNumber)
 		{
-			QRegularExpression asteroidName("^\\((\\d+)\\)\\s+(\\S.+)$");
+			static const QRegularExpression asteroidName("^\\((\\d+)\\)\\s+(\\S.+)$");
 			QRegularExpressionMatch astMatch;
 			if (column.indexOf(asteroidName, 0, &astMatch) == 0)
 			{
@@ -1111,7 +1121,7 @@ SsoElements SolarSystemEditor::readMpcOneLineMinorPlanetElements(QString oneLine
 	result.insert("orbit_SemiMajorAxis", semiMajorAxis);
 
 	column = oneLineElements.mid(20, 5).trimmed();//Epoch, in packed form
-	QRegularExpression packedDateFormat("^([IJK])(\\d\\d)([1-9A-C])([1-9A-V])$");
+	static const QRegularExpression packedDateFormat("^([IJK])(\\d\\d)([1-9A-C])([1-9A-V])$");
 	QRegularExpressionMatch dateMatch;
 	if (column.indexOf(packedDateFormat, 0, &dateMatch) != 0)
 	{
@@ -1676,20 +1686,26 @@ int SolarSystemEditor::unpackDayOrMonthNumber(QChar digit)
 
 int SolarSystemEditor::unpackYearNumber (QChar prefix, int lastTwoDigits)
 {
-	int year = lastTwoDigits;
-	switch (prefix.toLatin1())
-	{
-		case 'I':
-			year += 1800;
-			break;
-		case 'J':
-			year += 1900;
-			break;
-		case 'K':
-		default:
-			year += 2000;
-	}
-	return year;
+	// Prefix codes as used in https://www.minorplanetcenter.net/iau/MPCORB/AllCometEls.txt
+	static const QMap<QChar, int>centuryMap={
+		{'.', -2},
+		{'/', -1},
+		{'A', 10},
+		{'B', 11},
+		{'C', 12},
+		{'D', 13},
+		{'E', 14},
+		{'F', 15},
+		{'G', 16},
+		{'H', 17},
+		{'I', 18},
+		{'J', 19},
+		{'K', 20},
+		{'L', 21},
+		{'M', 22}
+	};
+	int century=centuryMap.value(prefix, prefix.digitValue()); // CAVEAT: May return -1 for unknown prefix code!
+	return 100*century+lastTwoDigits;
 }
 
 //Can be used both for minor planets and comets with no additional modification,
@@ -1762,7 +1778,7 @@ QString SolarSystemEditor::unpackMinorPlanetIAUDesignation (const QString &packe
 QString SolarSystemEditor::unpackCometIAUDesignation (const QString &packedDesignation)
 {
 	Q_ASSERT(packedDesignation.length()==7);
-	static const QRegularExpression packedFormat("^([IJK])(\\d\\d)([A-Z])([\\dA-Za-z])(\\d)([A-Za-z0])$");
+	static const QRegularExpression packedFormat("^([0-9A-M/.])(\\d\\d)([A-Z])([\\dA-Za-z])(\\d)([A-Za-z0])$");
 	QRegularExpressionMatch pfMatch = packedFormat.match(packedDesignation);
 
 	//Year
@@ -1785,5 +1801,6 @@ QString SolarSystemEditor::unpackCometIAUDesignation (const QString &packedDesig
 		result.append(QString("-%1").arg(fragmentLetter.toUpper()));
 	}
 
+	//qDebug() << "Decoded" << packedDesignation << "as" << result;
 	return result;
 }
