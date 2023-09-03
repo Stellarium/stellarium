@@ -760,7 +760,7 @@ SsoElements SolarSystemEditor::readMpcOneLineCometElements(QString oneLineElemen
 			qCritical() << "Parsed designation '" << iauDesignation <<  "' does not fit number in name! Line " << oneLineElements;
 		name=mpcName;
 	}
-	else if (mpcName.length()==9) // anonymous?
+	else if (mpcName.length()==9 && !mpcName.startsWith("A/") && periodicNumberString.isNull()) // anonymous?
 	{
 		QStringList nameList=mpcName.split('/');
 		name=QString("%1/%2 (%3)").arg(orbitType, nameList.at(1).trimmed(), q_("Anonymous")); // "C/1500 H1 (Anonymous)"
