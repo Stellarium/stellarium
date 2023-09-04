@@ -765,8 +765,9 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			static const QRegularExpression iauDesignationRe("^([1-9][0-9]*[PD](-\\w+)?)|([CA]/[-0-9]+\\s[A-Y])");
 			QRegularExpressionMatch iauDesignationMatch=iauDesignationRe.match(englishName);
 
-			// Our name rules for the final englishName, which must contain one element in brackets.
+			// Our name rules for the final englishName, which must contain one element in brackets unless it starts with "A/".
 			// Numbered periodic comets: "1P/Halley (1986)"
+			// Reclassified Asteroid like "A/2022 B3"
 			// All others: C-AX/2023 A2 (discoverer)". (with optional fragment code -AX)
 			const QString iauDesignation = pd.value(secname+"/iau_designation").toString();
 			const QString dateCode =      pd.value(secname+"/date_code").toString();
@@ -779,10 +780,10 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			// The test here can be improved, e.g. with a regexp. In case the name is already reasonably complete, we do not re-build it from the available elements for now. However, the ini file should provide the elements separated!
 			if (iauDesignation.isEmpty() && !englishName.contains("("))
 				englishName.append(QString(" (%1)").arg(discoveryCode));
-			else if (!iauDesignation.isEmpty() && !englishName.contains("(") && !englishName.contains("/"))
+			else if (!iauDesignation.isEmpty() && !englishName.contains("(") && !englishName.contains("/") && !englishName.startsWith("A/"))
 				englishName=QString("%1 (%2)").arg(iauDesignation, englishName); // recombine name and iau_designation if name is only the discoverer name.
 
-			if (!englishName.contains("("))
+			if (!englishName.contains("(") && !englishName.startsWith("A/"))
 			{
 				QString name;
 				if (!iauDesignation.isEmpty())
