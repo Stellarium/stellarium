@@ -756,11 +756,11 @@ SsoElements SolarSystemEditor::readMpcOneLineCometElements(QString oneLineElemen
 	if (mpcName.contains("(")) // "C/2023 P1 (Nishimura)" style
 	{
 		// Sanity check: Just make sure it matches!
-		if ((iauDesignation.length()>0) && (!mpcName.startsWith(iauDesignation)))
+		if ((!iauDesignation.isEmpty()) && (!mpcName.startsWith(iauDesignation)))
 			qCritical() << "Parsed designation '" << iauDesignation <<  "' does not fit number in name! Line " << oneLineElements;
 		name=mpcName;
 	}
-	else if (mpcName.length()==9 && !mpcName.startsWith("A/") && periodicNumberString.isNull()) // anonymous?
+	else if (mpcName.length()==9 && !mpcName.startsWith("A/") && periodicNumberString.isEmpty()) // anonymous?
 	{
 		QStringList nameList=mpcName.split('/');
 		name=QString("%1/%2 (%3)").arg(orbitType, nameList.at(1).trimmed(), q_("Anonymous")); // "C/1500 H1 (Anonymous)"
@@ -769,7 +769,7 @@ SsoElements SolarSystemEditor::readMpcOneLineCometElements(QString oneLineElemen
 	{
 		QStringList nameList=mpcName.split('/');
 		QString fragmentPostfix;
-		if (fragment.length()>0)
+		if (!fragment.isEmpty())
 			fragmentPostfix=QString("-%1").arg(fragment);
 		if (nameList.count()!=2)
 		{
