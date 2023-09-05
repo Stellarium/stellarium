@@ -47,6 +47,7 @@ MissingStar::MissingStar(const QVariantMap& map)
 	, pmDEC(0.f)
 	, bMag(-99.f)
 	, vMag(-99.f)
+	, colorIndex(0)
 {
 	if (!map.contains("designation") || !map.contains("RA") || !map.contains("DEC") || !map.contains("vMag"))
 	{
@@ -62,6 +63,17 @@ MissingStar::MissingStar(const QVariantMap& map)
 	pmDEC       = map.value("pmDEC", 0.f).toFloat();
 	bMag        = map.value("bMag", -99.f).toFloat();
 	vMag        = map.value("vMag", -99.f).toFloat();
+
+	if (bMag>-99.f && vMag>-99.f)
+	{
+		double b_v = (bMag-vMag)*1000.0;
+		if (b_v < -500.) {
+			b_v = -500.;
+		} else if (b_v > 3499.) {
+			b_v = 3499.;
+		}
+		colorIndex = (unsigned int)floor(0.5+127.0*((500.0+b_v)/4000.0));
+	}
 
 	initialized = true;
 }
@@ -129,7 +141,7 @@ float MissingStar::getVMagnitude(const StelCore* core) const
 
 Vec3f MissingStar::getInfoColor(void) const
 {
-	return Vec3f(1.f, 1.f, 1.f);
+	return StelSkyDrawer::indexToColor(colorIndex);
 }
 
 void MissingStar::update(double deltaTime)
@@ -146,15 +158,7 @@ void MissingStar::draw(StelCore* core, StelPainter& painter)
 	
 	if (mag <= mlimit)
 	{
-		double b_v = (bMag-vMag)*1000.0;
-		if (b_v < -500.) {
-			b_v = -500.;
-		} else if (b_v > 3499.) {
-			b_v = 3499.;
-		}
-		int colorIndex = (unsigned int)floor(0.5+127.0*((500.0+b_v)/4000.0));
-
-		const Vec3f color = StelSkyDrawer::indexToColor(colorIndex);
+		const Vec3f color = getInfoColor();
 		Vec3f vf(getJ2000EquatorialPos(core).toVec3f());
 		Vec3f altAz(vf);
 		altAz.normalize();

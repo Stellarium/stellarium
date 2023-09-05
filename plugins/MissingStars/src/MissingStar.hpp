@@ -113,6 +113,7 @@ private:
 	float pmDEC;			   //! proper motion in Dec. for the missing star (mas/yr)
 	float bMag;			   //! B magnitude for the missing star
 	float vMag;			   //! V magnitude for the missing star
+	int colorIndex;
 
 	LinearFader labelsFader;
 };
