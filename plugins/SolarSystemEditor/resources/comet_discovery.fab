@@ -12,6 +12,11 @@
 # - Small-Body Database Lookup at NASA JPL: https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html
 # - Small Bodies Data Ferret: https://sbnapps.psi.edu/ferret/SimpleSearch/form.action
 # - Всехсвятский, С.К. - Физические характеристики комет (1958) = Vsekhsvjatskij, S.K. - Fizicheskie kharakteristiki komet (1958)
+# - Всехсвятский, С.К. - Физические характеристики комет 1954-1960 гг (1966) = Vsekhsvjatskijj, S.K. - Fizicheskie kharakteristiki komet 1954-1960 gg (1966)
+# - Всехсвятский, С.К. - Кометы в 1961-65 гг (1967) = Vsekhsvjatskijj, S.K. - Komety v 1961-65 gg (1967)
+# - Всехсвятский, С.К. - Физические характеристики комет 1965-1970 гг (1974) = Vsekhsvjatskijj, S.K. - Fizicheskie kharakteristiki komet 1965-1970 gg (1974)
+# - Всехсвятский, С.К. - Физические характеристики комет 1971-1975 гг (1979) = Vsekhsvjatskijj, S.K. - Fizicheskie kharakteristiki komet 1971-1975 gg (1979)
+# - Андриенко, Д.А. - Физические характеристики комет 1976-1980 гг (1987) = Andrienko, D.A. - Fizicheskie kharakteristiki komet 1976-1980 gg (1987)
 #
 # Columns:
 # - IAU designation
@@ -475,18 +480,54 @@
          24P|P/1911    X1|1911    VII| 1911h|1911-12-01|M.A. Schaumasse
    C/1912 R1|C/1912    R1|1912     II| 1912a|1912-09-08|W.F. Gale
    C/1912 V1|C/1912    V1|1912    III| 1912c|1912-11-02|A. Borrelly
+   C/1913 J1|C/1913    J1|1913     II| 1913a|1913-05-06|A. Schaumasse
+   C/1913 R1|C/1913    R1|1913     IV| 1913b|1913-09-01|J.H. Metcalf
          28P|P/1913    R2|1913    III| 1913c|1913-09-04|G.N. Neujmin
+   C/1913 Y1|C/1913    Y1|1914      V| 1913f|1913-12-17|P. Delavan
+   C/1914 F1|C/1914    F1|1914     II| 1914a|1914-03-29|*Kritzinger
+   C/1914 J1|C/1914    J1|1914      I| 1914b|1914-05-15|V. Zlatinsky
+   C/1914 M1|C/1914    M1|1914    III| 1914c|1914-06-24|G.N. Neujmin
+   C/1914 S1|C/1914    S1|1914     IV| 1914e|1914-09-17|L. Campbell
+   C/1915 C1|C/1915    C1|1915     II| 1915a|1915-02-09|J.E. Mellish
+   C/1915 R1|C/1915    R1|1915     IV| 1915d|1915-09-13|J.E. Mellish
          69P|P/1915    W1|1916      I| 1915e|1915-11-24|C.J. Taylor
          25D|D/1916    D1|1916     II| 1916a|1916-02-24|G.N. Neujmin
+   D/1917 F1|D/1917    F1|1917      I| 1917a|1917-03-19|J.E. Mellish
+   C/1916 G1|C/1916    G1|1917    III| 1916b|1917-04-03|M. Wolf
+   C/1917 H1|C/1917    H1|1917     II| 1917b|1917-04-25|A. Schaumasse
+   C/1918 L1|C/1918    L1|1918     II| 1918a|1918-06-12|*Reid
+   D/1918 W1|D/1918    W1|1918    III| 1918d|1918-11-23|R.R.E. Schorr
+   C/1919 Q2|C/1919    Q2|1919      V| 1919c|1919-08-22|J.H. Metcalf, A. Borrelly
+   C/1919 Y1|C/1919    Y1|1920      I| 1919g|1919-12-18|J.F. Skjellerup
+   C/1920 X1|C/1920    X1|1920    III| 1920c|1920-12-08|J.F. Skjellerup
+   C/1921 E1|C/1921    E1|1921     II| 1921a|1921-03-13|*Reid
+   D/1921 H1|D/1921    H1|1921      I| 1921c|1921-04-24|A.D. Dubiago
+   C/1922 B1|C/1922    B1|1921      V| 1922a|1922-01-20|*Reid
+   C/1922 U1|C/1922    U1|1922     II| 1922c|1922-10-19|W.H.W. Baade
+   C/1922 W1|C/1922    W1|1923      I| 1922d|1922-11-26|J.F. Skjellerup
 # The comet was discovered in 1902 by John Grigg of New Zealand, and rediscovered in its
 # next appearance in 1922 by John Francis Skjellerup, an Australian then living and
 # working for about two decades in South Africa where he was a founder member of the
 # Astronomical Society of Southern Africa.
          26P|P/1922    K1|1922      I| 1922b|1902-07-23|J. Grigg, J.F. Skjellerup
+   C/1923 T1|C/1923    T1|1923    III| 1923a|1923-10-11|A. Bernard, A.D. Dubiago
+   C/1924 F1|C/1924    F1|1924      I| 1924a|1923-03-25|*Reid
+   C/1924 R1|C/1924    R1|1924     II| 1924c|1924-09-19|P. Finsler
          43P|P/1924    Y1|1924     IV| 1924d|1924-12-22|M. Wolf
+   C/1925 F1|C/1925    F1|1925     VI| 1925a|1925-03-22|G.A. Shajn, J. Comas Solà
+   C/1925 F2|C/1925    F2|1925    III| 1925b|1925-03-24|*Reid
+   C/1925 G1|C/1925    G1|1925      I| 1925c|1925-04-03|L. Orkisz
+   C/1925 V1|C/1925    V1|1925     XI| 1925k|1925-11-13|A. Wilk, L.C. Peltier
+   C/1925 W1|C/1925    W1|1925    VII| 1925i|1925-11-17|G. van Biesbroeck
+   C/1925 X1|C/1925    X1|1926    III| 1925l|1925-12-13|*Ensor
+   C/1926 B1|C/1926    B1|1926      I| 1926b|1926-01-16|Th.B. Blathwayt
+   C/1927 A1|C/1927    A1|1927     II| 1927a|1927-01-11|Th.B. Blathwayt
+   C/1927 B1|C/1927    B1|1926    VII| 1927b|1927-01-25|*Reid
          32P|P/1926    V1|1927    III| 1926f|1926-11-06|J. Comas Solà
    C/1927 E1|C/1927    E1|1927     IV| 1927d|1927-03-10|C.L. Stearns
          34D|D/1927    L1|1927     VI| 1927f|1927-06-07|W.F. Gale
+# Great Comet
+   C/1927 X1|C/1927    X1|1927     IX| 1927k|1927-11-28|J.F. Skjellerup, E. Maristany
          29P|P/1927    V1|1925     II| 1927i|1927-11-15|A. Schwassmann, A.A. Wachmann
          30P|P/1928    D1|1928      I| 1928a|1928-02-22|K. Reinmuth
 # Comet Crommelin, is a periodic comet with an orbital period of almost 28 years. It fits
@@ -496,7 +537,20 @@
          31P|P/1929    B1|1929      I| 1929a|1929-01-17|A. Schwassmann, A.A. Wachmann
          37P|P/1929    P1|1929     II| 1929c|1929-08-01|A.F.I. Forbes
          42P|P/1929    P2|1929    III| 1929b|1929-08-02|G.N. Neujmin
+   C/1929 Y1|C/1929    Y1|1930     II| 1929d|1929-12-20|A. Wilk
+   C/1930 D1|C/1930    D1|1930      I| 1930a|1930-02-18|A. Schwassmann, A.A. Wachmann, L.C. Peltier
+   C/1930 E1|C/1930    E1|1930     IV| 1930b|1930-03-04|*Beyer
+   C/1930 F1|C/1930    F1|1930    III| 1930c|1930-03-21|A. Wilk
          73P|P/1930    J1|1930     VI| 1930d|1930-05-02|A. Schwassmann, A.A. Wachmann
+   C/1930 L1|C/1930    L1|1930      V| 1930e|1930-05-31|A.F.I. Forbes
+   C/1931 O1|C/1931    O1|1931    III| 1931b|1931-07-15|M. Nagata
+   C/1931 P1|C/1931    P1|1931     IV| 1931c|1931-08-10|P.M. Ryves
+   C/1932 G1|C/1932    G1|1932      I| 1932b|1932-04-01|*Houghton, *Ensor 
+   C/1932 H1|C/1932    H1|1931      V| 1932c|1932-04-22|*Carrasco
+   C/1932 M1|C/1932    M1|1932    VII| 1932f|1932-06-01|*Newman
+   C/1932 M2|C/1932    M2|1932     VI| 1932g|1932-06-22|*Geddes
+   C/1932 P1|C/1932    P1|1932      V| 1932k|1932-08-08|L.C. Peltier, F.L. Whipple
+   C/1932 Y1|C/1932    Y1|1932      X| 1932n|1932-12-15|A.F.I. Forbes, G.F. Dodwell
 # Volume 4, 1933-1959
    C/1933 D1|C/1933    D1|1933      I| 1933a|1933-02-16|L.C. Peltier
          36P|P/1933    U1|1933     IV| 1933f|1933-10-15|F.L. Whipple
@@ -507,16 +561,16 @@
    C/1936 O1|C/1936    O1|1936    III| 1936b|1936-07-17|S. Kaho, S. Kozik, W. Lis
          58P|P/1936    S1|1936     IV| 1936c|1936-09-15|C.V. Jackson, G.N. Neujmin
    C/1937 C1|C/1937    C1|1937     IV| 1937b|1937-02-07|F.L. Whipple
-   C/1937 D1|C/1937    D1|1937     II| 1937c|1937-02-27|A. Wilk
+   D/1937 D1|D/1937    D1|1937     II| 1937c|1937-02-27|A. Wilk
    C/1937 N1|C/1937    N1|1937      V| 1937f|1937-07-04|P. Finsler
    C/1937 P1|C/1937    P1|1936     VI| 1937g|1937-08-04|E.P. Hubble
    C/1939 B1|C/1939    B1|1939      I| 1939a|1939-01-17|S. Kozik, L.C. Peltier
          40P|P/1939    CB|1939     IV| 1939b|1939-02-08|Y. Väisälä
-   C/1939 H1|C/1939    H1|1939    III| 1939d|1939-04-15|
+   C/1939 H1|C/1939    H1|1939    III| 1939d|1939-04-15|S.N. Jurlov, I.V. Achmarov, O. Hassel
          35P|P/1939    O1|1939     VI| 1939h|1939-07-28|R. Rigollet
         139P|P/1939    TN|           |      |1939-10-07|Y. Väisälä, L. Oterma
    C/1939 V1|C/1939    V1|1939     IX| 1939n|1939-11-02|C.L. Friend
-   C/1940 O1|C/1940    O1|1940     IV| 1940d|1940-08-08|F.L. Whipple
+   C/1940 O1|C/1940    O1|1940     IV| 1940d|1940-08-08|F.L. Whipple, J.S. Paraskevopoulos
    C/1940 R2|C/1940    R2|1941      I| 1940c|1940-09-05|L.E. Cunningham
    C/1940 S1|C/1940    S1|1940    III| 1940e|1940-09-30|S. Okabayasi, M. Honda
    C/1941 B1|C/1941    B1|1941     II| 1941a|1941-01-17|C.L. Friend, E.J. Reese, M. Honda
@@ -559,7 +613,7 @@
          47P|P/1948    Q1|1948     IX| 1948i|1948-08-26|J. Ashbrook, C.V. Jackson
    C/1948 R1|C/1948    R1|1948    III| 1948j|1948-09-01|E.L. Johnson
    C/1948 T1|C/1948    T1|1947   VIII| 1948k|1948-10-07|C.A. Wirtanen
-# Eclipse Comet
+# Eclipse Comet / Southern Comet
    C/1948 V1|C/1948    V1|1948     XI| 1948l|1948-11-01|
    C/1948 W1|C/1948    W1|1948      X| 1948m|1948-11-24|M.J. Bester
          45P|P/1948    X1|1948    XII| 1948n|1948-12-03|M. Honda, L. Pajdusakova, A. Mrkos
@@ -596,7 +650,9 @@
    C/1955 O1|C/1955    O1|1955      V| 1955g|1955-07-29|M. Honda
    C/1956 E1|C/1956    E1|1956    III| 1956b|1956-03-12|A. Mrkos
    C/1956 F1|C/1956    F1|1957     VI| 1956c|1956-03-16|C.A. Wirtanen
+# Great Comet
    C/1956 R1|C/1956    R1|1957    III| 1956h|1956-11-08|S.J.V. Arend, G. Roland
+# Great Comet
    C/1957 P1|C/1957    P1|1957      V| 1957d|1957-08-02|A. Mrkos
    C/1957 U1|C/1957    U1|1957     IX| 1957f|1957-10-16|I.N. Latyshev, P. Wild, R. Burnham Jr.
    C/1958 D1|C/1958    D1|1958    III| 1958a|1958-02-22|R. Burnham Jr.
@@ -611,44 +667,121 @@
    C/1960 B1|C/1960    B1|1959    VII| 1960a|1960-01-21|R. Burnham Jr.
          63P|P/1960    G1|1960      I| 1960b|1960-03-26|P. Wild
    C/1960 M1|C/1960    M1|1959      X| 1960e|1960-06-18|M.L. Humanson
+   C/1960 Y1|C/1960    Y1|1961     II| 1960n|1960-12-26|M. Candy
         271P|P/1960    S1|1961      X|      |1966      |C.J. van Houten, I. van Houten-Groeneveld
    C/1961 O1|C/1961    O1|1961      V| 1961d|1961-07-23|A.S. Wilson
+   C/1961 R1|C/1961    R1|1962   VIII| 1961e|1961-09-01|M.L. Humason
+   C/1961 T1|C/1961    T1|1961   VIII| 1961f|1961-10-10|T. Seki
    C/1962 C1|C/1962    C1|1962    III| 1962c|1962-02-04|R.D. Lines, T. Seki
    C/1962 H1|C/1962    H1|1962     IV| 1962d|1962-04-28|M. Honda
    C/1963 A1|C/1963    A1|1963      I| 1963a|1963-01-02|K. Ikeya
+   C/1963 F1|C/1963    F1|1963    III| 1963b|1963-03-19|G.E.D. Alcock
          59P|P/1963    Q1|1963   VIII| 1963d|1963-08-17|C.E. Kearns, K.K. Kwee
    C/1963 R1|C/1963    R1|1963      V| 1963e|1963-09-14|Z.M. Pereyra
         148P|P/1963    W1|1963     IX|      |1963-11-22|W.J. Luyten, J.H. Anderson
-         62P|P/1965    A1|1965      I| 1965b|1965-01-01|
+   C/1964 L1|C/1964    L1|1964     VI| 1964c|1964-06-05|K. Tomita, F.W. Gerber, M. Honda
+   C/1964 N1|C/1964    N1|1964   VIII| 1964f|1964-07-03|K. Ikeya
+   C/1964 P1|C/1964    P1|1964     IX| 1964h|1964-08-01|E. Everhart
+         62P|P/1965    A1|1965      I| 1965b|1965-01-01|L.A. Swift, T. Gehrels
          60P|P/1965    A2|1965     II| 1965c|1965-01-11|
    C/1965 S1|C/1965    S1|1965   VIII| 1965f|1965-09-18|K. Ikeya, T. Seki
-         68P|P/1965    U1|1965     VI| 1965j|1965-11   |A.R. Klemola
+   C/1965 S2|C/1965    S2|1965     IX| 1965h|1965-09-26|G.E.D. Alcock
+         68P|P/1965    U1|1965     VI| 1965j|1965-11-02|A.R. Klemola
+   C/1966 P1|C/1966    P1|1966      V| 1966b|1966-08-07|S. Kilston
+   C/1966 P2|C/1966    P2|1966     II| 1966c|1966-08-15|R. Barbon
+   C/1966 R1|C/1966    R1|1966     IV| 1966d|1966-09-08|K. Ikeya, E. Everhart
+   C/1966 T1|C/1966    T1|1967     II| 1966e|1966-10-15|K. Rudnicki
+   C/1967 C1|C/1967    C1|1967     IV| 1967b|1967-02-04|T. Seki
+   C/1967 C2|C/1967    C2|1967    III| 1967c|1967-02-11|P. Wild
+   C/1967 M1|C/1967    M1|1967    VII| 1967f|1967-06-29|H.E. Mitchell, M.V. Jones, F.W. Gerber
+   C/1967 Y1|C/1967    Y1|1968      I| 1967n|1967-12-28|K. Ikeya, T. Seki
+   C/1968 H1|C/1968    H1|1968     IV| 1968a|1968-04-30|A. Tago, M. Honda, H. Yamamoto
+   C/1968 L1|C/1968    L1|1968      V| 1968b|1968-06-15|M. Whitaker, N. Thomas
+   C/1968 N1|C/1968    N1|1968     VI| 1968c|1968-07-06|M. Honda
+   C/1968 Q1|C/1968    Q1|1968    VII| 1968d|1968-08-24|D. Bally-Urban, P. Clayton
+   C/1968 Q2|C/1968    Q2|1968     IX| 1968e|1968-08-30|M. Honda
+   C/1968 U1|C/1968    U1|1968    III| 1968f|1968-10-17|P. Wild
+   C/1968 Y1|C/1968    Y1|1969      I| 1968j|1968-12-19|N. Thomas
+   C/1969 O1|C/1969    O1|1970    III| 1969b|1969-07-24|L. Kohoutek
+   C/1969 P1|C/1969    P1|1969    VII| 1969d|1969-08-12|Sh. Fujikawa
          67P|P/1969    R1|1969     IV| 1969h|1969-09-20|K.I. Churyumov, S.I. Gerasimenko
+   C/1969 T1|C/1969    T1|1969     IX| 1969g|1969-10-10|A. Tago, Y. Sato, K. Kosaka
    C/1969 Y1|C/1969    Y1|1970     II| 1969i|1969-12-28|J.C. Bennett
+   C/1970 B1|C/1970    B1|1970      I| 1970a|1970-01-27|T. Daido, Sh. Fujikawa
+   C/1970 K1|C/1970    K1|1970     VI| 1970f|1970-05-18|G. White, E. Ortiz, C. Bolelli
+   C/1970 U1|C/1970    U1|1970      X| 1970m|1970-10-19|Sh. Suzuki, Y. Sato, T. Seki
          65P|P/1970    U2|1969     II| 1970p|1970-10-27|J.E. Gunn
          70P|P/1970    Y1|1970    XII| 1970r|1970-12-27|N. Kojima
+   C/1971 E1|C/1971    E1|1971      V| 1971a|1971-03-07|K. Toba
+   C/1972 E1|C/1972    E1|1972    III| 1972f|1972-03-12||W.A. Bradfield
+   C/1972 F1|C/1972    F1|1971      I| 1972e|1072-03   |T. Gehrels
+   C/1972 L1|C/1972    L1|1972     IX| 1972h|1972-06-09|
          90P|P/1972    T1|1973      I| 1972k|1972-10-11|T. Gehrels
+   C/1972 U1|C/1972    U1|1973     II| 1972j|1972-10-31|N. Kojima
+   C/1972 X1|C/1972    X1|1972    XII| 1972l|1972-12-09|G. Araya
+   C/1973 A1|C/1973    A1|1972   VIII| 1973a|1973-01-11|A. Heck, G. Sause
+   C/1973 D1|C/1973    D1|1973    VII| 1973e|1973-02-28|L. Kohoutek
+   C/1973 E1|C/1973    E1|1973    XII| 1973f|1973-03-18|L. Kohoutek
+   C/1973 H1|C/1973    H1|1973    III| 1973h|1973-04-25|J. Huchra
          71P|P/1973    L1|1973      V| 1973i|1973-06-09|M. Clark
+   C/1973 N1|C/1973    N1|1973      X| 1973k|1973-07-04|A. Sandage
          78P|P/1973    S1|1973     XI| 1973n|1973-09-29|T. Gehrels
+   C/1973 W1|C/1973    W1|1973     IX| 1973o|1973-11-24|*Gibson
+   C/1974 C1|C/1974    C1|1974    III| 1974b|1974-02-12|W.A. Bradfield
+   C/1974 F1|C/1974    F1|1975   VIII| 1974c|1974-03-21|M. Lovas
+   C/1974 O1|C/1974    O1|1974   VIII| 1974e|1974-07-26|C. Cesco
+   C/1974 V1|C/1974    V1|1974    XII| 1974g|1974-11-12|S. van den Bergh
+   C/1974 V2|C/1974    V2|1974     XV| 1974h|1974-11-13|J. Bennett
          85D|D/1975    A1|1975      I| 1975a|1975-01-04|L. Boethin
-         75D|D/1975    C1|1975    III| 1975c|1975-02   |L. Kohoutek
-         76P|P/1975    D1|1975     IV| 1975b|1975-01   |R.M. West
-         74P|P/1975    E2|1975    VII| 1975e|1975-03   |T.M. Smirnova
+         75D|D/1975    C1|1975    III| 1975c|1975-02-09|L. Kohoutek
+         76P|P/1975    D1|1975     IV| 1975b|1975-01-24|R.M. West, L. Kohoutek, T. Ikemura
+   C/1975 E1|C/1975    E1|1975      V| 1975d|1975-03-12|W.A. Bradfield
+         74P|P/1975    E2|1975    VII| 1975e|1975-03-04|T.M. Smirnova, N.S. Chernykh
          77P|P/1975    L1|1974    XIV| 1975g|1975-06-10|A.J. Longmore
-   C/1975 V1|C/1975    V1|1976     VI| 1975n|1975-08-10|R.M. West
+   C/1975 N1|C/1975    N1|1975     IX| 1975h|1975-07-02|T. Kobayashi, D. Berger, D. Milon
+   C/1975 V1|C/1975    V1|1976     VI| 1975n|1975-09-24|R.M. West
+   C/1975 V2|C/1975    V2|1975     XI| 1975p|1975-11-11|W.A. Bradfield
+   C/1975 T1|C/1975    T1|1975    XII| 1975j|1975-10-05|H. Mori, Y. Sato, Sh. Fujikawa
+   C/1975 T2|C/1975    T2|1975      X| 1975k|1975-10-05|Sh. Suzuki, Y. Saigusa, H. Mori
          82P|P/1975    U1|1977    VII| 1975o|1975-10-27|T. Gehrels
+   C/1975 X1|C/1975    X1|1976      I| 1975q|1975-12-05|Y. Sato
+   C/1976 D1|C/1976    D1|1976     IV| 1976a|1976-02-16|W.A. Bradfield
+   C/1976 D2|C/1976    D2|1975     II| 1976c|1976-02-25|H.E. Schuster
+   C/1976 E1|C/1976    E1|1976      V| 1976d|1976-03-03|W.A. Bradfield
+   C/1976 J1|C/1976    J1|1976   XIII| 1976g|1976-05-03|E. Harlan
+   C/1976 U1|C/1976    U1|1976     IX| 1976k|1976-10-27|M. Lovas
+   C/1977 D1|C/1977    D1|1976    XII| 1977c|1977-02-17|M. Lovas
+   C/1977 H1|C/1977    H1|1977   VIII| 1977e|1977-04-16|E. Helin
          99P|P/1977    H2|1977    III| 1977f|1977-04-24|Ch.T. Kowal
         101P|P/1977    Q1|1978     IV| 1977l|1977-08-19|N.S. Chernykh
+   C/1977 R1|C/1977    R1|1977    XIV| 1977m|1977-09-04|M. Kohler
         106P|P/1977    T1|1978      I| 1977o|1977-10-09|H.-E. Schuster
          92P|P/1977    T2|1977    XII| 1977p|1977-10-15|J.G. Sanguin
+   C/1977 V1|C/1977    V1|1977      X| 1977q|1977-11-03|
+   C/1978 A1|C/1978    A1|1977     IX| 1978a|1978-01-12|R. West
          81P|P/1978    A2|1978     XI| 1978b|1978-01-06|P. Wild
+   C/1978 C1|C/1978    C1|1978    VII| 1978c|1978-02-04|W.A. Bradfield
         157P|P/1978    C2|1977   XIII| 1978d|1978-02-11|K. Tritton
+   C/1978 H1|C/1978    H1|1978    XXI| 1978f|1978-04-26|R. Meier
+   D/1978 R1|D/1978    R1|1978     XX| 1978j|1978-09-01|T. Haneda, J.A.d.S. Campos
          84P|P/1978    R2|1978   XXII| 1978k|1978-09-08|H.L. Giclas
+   C/1978 R3|C/1978    R3|1978   XIII| 1978l|1978-09-12|D. Machholz
+   C/1978 T1|C/1978    T1|1978     XV| 1978m|1978-10-01|D. Seargent
+   C/1978 T3|C/1978    T3|1978  XVIII| 1978o|1978-10-10|W.A. Bradfield
         104P|P/1979    B1|1979     II| 1979a|1979-01-27|Ch.T. Kowal
+   C/1979 M1|C/1979    M1|1979    VII| 1979c|1979-06-24|W.A. Bradfield
          83D|D/1979    M2|1979      V| 1979d|1979-06-16|K.S. Russell
+   C/1979 M3|C/1979    M3|1979     VI| 1979e|1979-06-26|K. Torres
+   C/1979 Q1|C/1979    Q1|1979     XI|      |1979-08-30|R.A. Howard, M.J. Koomen, D.J. Michels
+   C/1979 S1|C/1979    S1|1979     IX| 1979i|1979-09-20|R. Meier
+   C/1979 Y1|C/1979    Y1|1979      X| 1979l|1979-12-24|W.A. Bradfield
          86P|P/1980    G1|1980    VII| 1980d|1980-05-11|P. Wild
+   C/1980 L1|C/1980    L1|1980     II| 1980e|1980-06-13|K. Torres
          89P|P/1980    S1|1980    III| 1980o|1980-09-28|K.S. Russell
+   C/1980 O1|C/1980    O1|1980     IV| 1980k|1980-07-30|K.T. Cernis, Y.Z. Petrauskas
+   C/1980 V1|C/1980    V1|1980    XII| 1980q|1980-11-06|R. Meier
          93P|P/1980    X1|1980      V| 1980s|1980-12-05|M. Lovas
+   C/1980 Y1|C/1980    Y1|1980     XV| 1980t|1980-12-17|W.A. Bradfield
          87P|P/1981    E1|1981     XI| 1981b|1981-03-02|S.J. Bus
          88P|P/1981    Q1|1981      X| 1981k|1981-08-29|E. Howell
          80P|P/1982    N1|1982    III| 1982h|1846-06-26|C.H.F. Peters
@@ -1001,7 +1134,7 @@ P/1999 XN120|P/1999 XN120|           |      |1999-12-05|
    C/2000 O1|C/2000    O1|           |      |2000-07-20|B.W. Koehn
         342P|P/2000    O3|           |      |2000-07-30|R. Kracht
   C/2000 OF8|C/2000   OF8|           |      |2000-07-24|
- P/2000 OZ21|P/2000  OZ21|           |      |2000-07-29|
+        462P|P/2000  OZ21|           |      |2000-07-29|
    C/2000 Q1|C/2000    Q1|           |      |2000-08-28|J. Danaher
         307P|P/2000  QJ46|           |      |2000-08-24|
         156P|P/2000 QD181|           |      |2000-08-31|
@@ -1390,7 +1523,7 @@ P/2005 SB216|P/2005 SB216|           |      |2005-09-30|
    C/2008 J4|C/2008    J4|           |      |2008-05-10|R.H. McNaught
    C/2008 J5|C/2008    J5|           |      |2008-05-13|G.J. Garradd
    C/2008 J6|C/2008    J6|           |      |2008-05-14|R.E. Hill
-   P/2008 L2|P/2008    L2|           |      |2008-06-12|R.E. Hill
+        465P|P/2008    L2|           |      |2008-06-12|R.E. Hill
    C/2008 L3|C/2008    L3|           |      |2008-06-13|R.E. Hill
    C/2008 N1|C/2008    N1|           |      |2008-07-01|R.E. Holmes Jr.
         372P|P/2008    O2|           |      |2008-07-28|R.H. McNaught
@@ -1465,6 +1598,7 @@ P/2005 SB216|P/2005 SB216|           |      |2005-09-30|
         418P|P/2010    A5|           |      |2010-01-14|
    C/2010 B1|C/2010    B1|           |      |2010-01-19|R.D. Cardinal
         412P|P/2010    B2|           |      |2010-01-22|
+        453P|P/2010 BN109|           |      |2010-01-28|
    P/2010 C1|P/2010    C1|           |      |2010-02-09|J.V. Scotti
         356P|P/2010    D1|           |      |2010-02-17|
    P/2010 D2|P/2010    D2|           |      |2010-02-25|
@@ -1500,7 +1634,7 @@ P/2005 SB216|P/2005 SB216|           |      |2005-09-30|
    C/2010 L5|C/2010    L5|           |      |2010-06-14|
    C/2010 M1|C/2010    M1|           |      |2010-06-22|A.R. Gibbs
         337P|P/2010    N1|           |      |2010-07-05|
-P/2010 OE101|P/2010 OE101|           |      |2010-07-25|
+        461P|P/2010 OE101|           |      |2010-07-25|
         360P|P/2010    P4|           |      |2010-08-06|
    C/2010 R1|C/2010    R1|           |      |2010-09-04|
         324P|P/2010    R2|           |      |2010-09-14|J. Nomen
@@ -1513,6 +1647,7 @@ P/2010 OE101|P/2010 OE101|           |      |2010-07-25|
    C/2010 U3|C/2010    U3|           |      |2010-10-31|A. Boattini
  P/2010 UH55|P/2010  UH55|           |      |2010-10-29|
         332P|P/2010    V1|           |      |2010-11-02|K. Ikeya, Sh. Murakami
+        459P|P/2010  VH95|           |      |2010-11-07|
         248P|P/2010    W1|           |      |2010-11-27|A.R. Gibbs
    P/2010 WK|P/2010    WK|           |      |2010-11-17|
    C/2010 X1|C/2010    X1|           |      |2010-12-10|L. Elenin
@@ -1724,7 +1859,7 @@ C/2014 HU195|C/2014 HU195|           |      |2014-04-21|F. Valdes
    P/2014 O3|P/2014    O3|           |      |2014-07-30|
   C/2014 OE4|C/2014   OE4|           |      |2014-07-26|
 C/2014 OG392|C/2014 OG392|           |      |2014-07-28|
-P/2014 OL465|P/2014 OL465|           |      |2014-07-25|
+        464P|P/2014 OL465|           |      |2014-07-25|
    C/2014 Q1|C/2014    Q1|           |      |2014-08-16|
    C/2014 Q2|C/2014    Q2|           |      |2014-08-17|T. Lovejoy
    C/2014 Q3|C/2014    Q3|           |      |2014-08-22|G. Borisov
@@ -1805,7 +1940,7 @@ P/2015 PD229|P/2015 PD229|           |      |2015-08-15|D.A. Cameron
    P/2015 R2|P/2015    R2|           |      |2015-09-09|
    C/2015 R3|C/2015    R3|           |      |2015-09-12|
    C/2015 T2|C/2015    T2|           |      |2015-10-09|
-   P/2015 T3|P/2015    T3|           |      |2015-10-13|
+        466P|P/2015    T3|           |      |2015-10-13|
    C/2015 T4|C/2015    T4|           |      |2015-10-14|
    C/2015 T5|C/2015    T5|           |      |2015-10-13|S. Sheppard, D.J. Tholen, C. Trujillo
  P/2015 TO19|P/2015  TO19|           |      |2015-10-13|D.C. Fuls
@@ -1945,7 +2080,7 @@ C/2015 TQ209|C/2015 TQ209|           |      |2015-10-10|
    C/2018 F3|C/2018    F3|           |      |2018-03-20|J.A. Johnson
    C/2018 F4|C/2018    F4|           |      |2018-03-17|
    P/2018 H2|P/2018    H2|           |      |2018-04-16|
-  P/2018 HT3|P/2018   HT3|           |      |2018-04-22|
+        463P|P/2018   HT3|           |      |2018-04-22|
    C/2018 K1|C/2018    K1|           |      |2018-05-25|H. Weiland
   C/2018 KJ3|C/2018   KJ3|           |      |2018-05-17|H. Groeller, G.J. Leonard
    P/2018 L1|P/2018    L1|           |      |2018-06-03|
@@ -2057,6 +2192,7 @@ C/2015 TQ209|C/2015 TQ209|           |      |2015-10-10|
    C/2020 B2|C/2020    B2|           |      |2020-01-19|R.A. Kowalski
    C/2020 B3|C/2020    B3|           |      |2020-01-29|D. Rankin
    P/2020 B4|P/2020    B4|           |      |2020-01-26|S.S. Sheppard
+        396P|P/2020    F1|           |      |2020-03-16|G.J. Leonard
    C/2020 F2|C/2020    F2|           |      |2020-03-21|
    C/2020 F3|C/2020    F3|           |      |2020-03-27|
         394P|P/2020    F4|           |      |2020-03-24|
@@ -2287,3 +2423,7 @@ C/2015 TQ209|C/2015 TQ209|           |      |2015-10-10|
    A/2023 H4|A/2023    H4|           |      |2023-04-23|
    C/2023 K1|C/2023    K1|           |      |2023-05-27|
    P/2023 M1|P/2023    M1|           |      |2023-06-16|
+   P/2023 M2|P/2023    M2|           |      |2023-06-22|
+   P/2023 M4|P/2023    M4|           |      |2023-06-21|
+   P/2023 O1|P/2023    O1|           |      |2023-07-18|M. Masek
+   C/2023 P1|C/2023    P1|           |      |2023-08-12|H. Nishimura
