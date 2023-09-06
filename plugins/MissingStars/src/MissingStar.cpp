@@ -50,7 +50,6 @@ MissingStar::MissingStar(const QVariantMap& map)
 	, parallax(0.f)
 	, parallaxErr(0.f)
 	, spType("")
-	, colorIndex(0)
 	, bvFlag(false)
 {
 	if (!map.contains("designation") || !map.contains("RA") || !map.contains("DEC") || !map.contains("vMag"))
