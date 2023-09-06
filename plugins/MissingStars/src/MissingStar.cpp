@@ -211,30 +211,36 @@ void MissingStar::update(double deltaTime)
 	labelsFader.update(static_cast<int>(deltaTime*1000));
 }
 
-void MissingStar::draw(StelCore* core, StelPainter& painter)
+void MissingStar::draw(StelCore* core, StelPainter *painter)
 {
 	StelSkyDrawer* sd = core->getSkyDrawer();
 	const float mlimit = sd->getLimitMagnitude();
 	const float mag = getVMagnitudeWithExtinction(core);
 	const float shift = 8.f;
+
+   Vec3d pos = getJ2000EquatorialPos(core);
+   Vec3d win;
+   // Check visibility of missing star
+   if(!(painter->getProjector()->projectCheck(pos, win)))
+      return;
 	
 	if (mag <= mlimit)
-	{
-		const Vec3f color = getInfoColor();
-		Vec3f vf(getJ2000EquatorialPos(core).toVec3f());
+   {
+      const Vec3f color = getInfoColor();
+      Vec3f vf(pos.toVec3f());
 		Vec3f altAz(vf);
 		altAz.normalize();
 		core->j2000ToAltAzInPlaceNoRefraction(&altAz);
 		RCMag rcMag;
 		sd->computeRCMag(mag, &rcMag);
-		sd->preDrawPointSource(&painter);
+      sd->preDrawPointSource(painter);
 		// allow height-dependent twinkle and suppress twinkling in higher altitudes. Keep 0.1 twinkle amount in zenith.
-		sd->drawPointSource(&painter, vf.toVec3d(), rcMag, color, true, qMin(1.0f, 1.0f-0.9f*altAz[2]));
-		sd->postDrawPointSource(&painter);
-		painter.setColor(color, 1.f);
+      sd->drawPointSource(painter, vf.toVec3d(), rcMag, color, true, qMin(1.0f, 1.0f-0.9f*altAz[2]));
+      sd->postDrawPointSource(painter);
+      painter->setColor(color, 1.f);
 		StarMgr* smgr = GETSTELMODULE(StarMgr); // It's need for checking displaying of labels for stars
 		if (labelsFader.getInterstate()<=0.f && (mag+5.f)<mlimit && smgr->getFlagLabels())
-			painter.drawText(getJ2000EquatorialPos(core), designation, 0, shift, shift, false);
+         painter->drawText(pos, designation, 0, shift, shift, false);
 	}	
 }
 

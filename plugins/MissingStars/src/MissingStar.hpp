@@ -100,7 +100,7 @@ private:
 
 	static StelTextureSP hintTexture;
 
-	void draw(StelCore* core, StelPainter& painter);
+   void draw(StelCore* core, StelPainter *painter);
 
 	// Missing Star
 	QString designation; //! The ID of the missing star

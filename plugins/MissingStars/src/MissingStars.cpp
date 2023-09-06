@@ -133,7 +133,7 @@ void MissingStars::draw(StelCore* core)
 	for (const auto& ms : qAsConst(missingstars))
 	{
 		if (ms && ms->initialized)
-			ms->draw(core, painter);
+         ms->draw(core, &painter);
 	}
 
 	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer())
