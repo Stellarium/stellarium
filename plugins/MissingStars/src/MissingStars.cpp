@@ -113,30 +113,10 @@ double MissingStars::getCallOrder(StelModuleActionName actionName) const
 */
 void MissingStars::init()
 {
-	try
-	{
-//		StelFileMgr::makeSureDirExistsAndIsWritable(StelFileMgr::getUserDir()+"/modules/MissingStars");
+	texPointer = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/pointeur2.png");
 
-		// If no settings in the main config file, create with defaults
-		if (!conf->childGroups().contains("MissingStars"))
-		{
-			qDebug() << "[MissingStars] no MissingStars section exists in main config file - creating with defaults";
-//			restoreDefaultConfigIni();
-		}
-
-		// populate settings from main config file.
-//		readSettingsFromConfig();
-
-		texPointer = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/pointeur2.png");
-
-		// key bindings and other actions
-		addAction("actionShow_MissingStars_ConfigDialog", N_("Missing Stars"), N_("Missing Stars configuration window"), configDialog, "visible", ""); // Allow assign shortkey
-	}
-	catch (std::runtime_error &e)
-	{
-		qWarning() << "MissingStars: init error:" << e.what();
-		return;
-	}
+	// key bindings and other actions
+	addAction("actionShow_MissingStars_ConfigDialog", N_("Missing Stars"), N_("Missing Stars configuration window"), configDialog, "visible", ""); // Allow assign shortkey
 
 	readJsonFile();
 
@@ -183,7 +163,7 @@ void MissingStars::drawPointer(StelCore* core, StelPainter& painter)
 	}
 }
 
-QList<StelObjectP> MissingStars::searchAround(const Vec3d& av, double limitFov, const StelCore*) const
+QList<StelObjectP> MissingStars::searchAround(const Vec3d& av, double limitFov, const StelCore* core) const
 {
 	QList<StelObjectP> result;
 
@@ -265,19 +245,10 @@ QVariantMap MissingStars::loadMissingStarsMap()
 {
 	QVariantMap map;
 	QFile jsonFile(":/MissingStars/missingstars.json");
-	qWarning() << "MissingStars::loadMissingStarsMap()";
 	if (jsonFile.open(QIODevice::ReadOnly))
 	{
-		try
-		{
-			map = StelJsonParser::parse(jsonFile.readAll()).toMap();
-			jsonFile.close();
-		}
-		catch (std::runtime_error &e)
-		{
-			qDebug() << "[MissingStars] File format is wrong! Error: " << e.what();
-			return QVariantMap();
-		}
+		map = StelJsonParser::parse(jsonFile.readAll()).toMap();
+		jsonFile.close();
 	}
 	return map;
 }
@@ -288,6 +259,7 @@ QVariantMap MissingStars::loadMissingStarsMap()
 void MissingStars::setMissingStarsMap(const QVariantMap& map)
 {
 	missingstars.clear();
+	designations.clear();
 	QVariantMap msMap = map.value("catalog").toMap();
 	for (auto &msKey : msMap.keys())
 	{
@@ -296,7 +268,10 @@ void MissingStars::setMissingStarsMap(const QVariantMap& map)
 
 		MissingStarP ms(new MissingStar(msData));
 		if (ms->initialized)
+		{
 			missingstars.append(ms);
+			designations.append(ms->getID());
+		}
 	}
 }
 
@@ -315,5 +290,10 @@ bool MissingStars::configureGui(bool show)
 	if (show)
 		configDialog->setVisible(true);
 	return true;
+}
+
+QString MissingStars::getMissingStarsList() const
+{
+	return designations.join(", ");
 }
 

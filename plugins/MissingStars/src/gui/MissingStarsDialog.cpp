@@ -32,6 +32,7 @@
 
 MissingStarsDialog::MissingStarsDialog()
 	: StelDialog("MissingStars")
+	, msm(Q_NULLPTR)
 {
 	ui = new Ui_missingStarsDialog;
 }
@@ -53,6 +54,7 @@ void MissingStarsDialog::retranslate()
 // Initialize the dialog widgets and connect the signals/slots
 void MissingStarsDialog::createDialogContent()
 {
+	msm = GETSTELMODULE(MissingStars);
 	ui->setupUi(dialog);
 	ui->tabs->setCurrentIndex(0);	
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()),
@@ -86,7 +88,7 @@ void MissingStarsDialog::setAboutHtml(void)
 	html += "</table>";
 
 	html += "<p>" + q_("This plugin allows you to see some missing stars: ");
-//	html += sn->getSupernovaeList();
+	html += msm->getMissingStarsList();
 	html += "</p>";
 
 	html += StelApp::getInstance().getModuleMgr().getStandardSupportLinksInfo("Missing Stars plugin");

@@ -106,6 +106,9 @@ public:
 	//! get a star object by identifier
 	MissingStarP getByID(const QString& id) const;
 
+	//! Get list of designations for missing stars
+	QString getMissingStarsList() const;
+
 	//! Implement this to tell the main Stellarium GUI that there is a GUI element to configure this
 	//! plugin.
 	virtual bool configureGui(bool show=true) Q_DECL_OVERRIDE;
@@ -128,6 +131,7 @@ private:
 
 	StelTextureSP texPointer;
 	QList<MissingStarP> missingstars;
+	QStringList designations;
 
 	QSettings* conf;
 

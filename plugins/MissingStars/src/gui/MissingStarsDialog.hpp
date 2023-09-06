@@ -46,6 +46,7 @@ public slots:
 	void retranslate() Q_DECL_OVERRIDE;
 
 private:
+	MissingStars* msm;
 	Ui_missingStarsDialog* ui;
 	void setAboutHtml(void);
 };
