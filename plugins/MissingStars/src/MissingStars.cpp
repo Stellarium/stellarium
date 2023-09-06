@@ -196,7 +196,7 @@ QList<StelObjectP> MissingStars::searchAround(const Vec3d& av, double limitFov, 
 	{
 		if (ms->initialized)
 		{
-			equPos = ms->XYZ;
+			equPos = ms->getJ2000EquatorialPos(core);
 			equPos.normalize();
 			if (equPos.dot(v) >= cosLimFov)
 			{
