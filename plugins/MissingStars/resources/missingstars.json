@@ -9,7 +9,9 @@
 			"pmRA": 1.595,
 			"pmDEC": -1.389,
                         "bMag": 11.5,
-                        "vMag": 11.3
+                        "vMag": 11.3,
+                        "parallax": 0.3988,
+                        "parallaxErr": 0.0214
 		},
                 "σ Ori C":
 		{
@@ -18,7 +20,10 @@
 			"pmRA": 0.358,
 			"pmDEC": -1.064,
                         "bMag": 8.77,
-                        "vMag": 8.79
+                        "vMag": 8.79,
+                        "parallax": 2.472,
+                        "parallaxErr": 0.0293,
+                        "SpType": "A2Vn C"
 		},
                 "Gaia DR2 3030024282585867776":
 		{
@@ -27,8 +32,31 @@
 			"pmRA": 5.942,
 			"pmDEC": 5.275,
                         "bMag": 13.273,
-                        "vMag": 12.634
+                        "vMag": 12.634,
+                        "parallax": 1.317,
+                        "parallaxErr": 0.0126
+		},
+                "α CMa B":
+		{
+			"RA": "06h45m09.3041925037s",
+			"DEC": "-16d43m00.724740067s",
+			"pmRA": -461.571,
+			"pmDEC": -914.520,
+                        "bMag": 8.41,
+                        "vMag": 8.44,
+                        "parallax": 374.4896,
+                        "parallaxErr": 0.2313,
+                        "SpType": "DA1.9 C"
+		},
+                "α CMi B":
+		{
+			"RA": "07h39m17.8800s",
+			"DEC": "+05d13m26.800s",
+			"pmRA": -709.0,
+			"pmDEC": -1024.0,
+                        "bMag": 10.7,
+                        "vMag": 10.92,
+                        "SpType": "DQZ D"
 		}
-
 	}
 }

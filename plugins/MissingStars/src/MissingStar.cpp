@@ -47,6 +47,9 @@ MissingStar::MissingStar(const QVariantMap& map)
 	, pmDEC(0.f)
 	, bMag(-99.f)
 	, vMag(-99.f)
+	, parallax(0.f)
+	, parallaxErr(0.f)
+	, spType("")
 	, colorIndex(0)
 {
 	if (!map.contains("designation") || !map.contains("RA") || !map.contains("DEC") || !map.contains("vMag"))
@@ -58,11 +61,13 @@ MissingStar::MissingStar(const QVariantMap& map)
 	designation = map.value("designation").toString();
 	RA          = StelUtils::getDecAngle(map.value("RA").toString());
 	DEC         = StelUtils::getDecAngle(map.value("DEC").toString());
-	StelUtils::spheToRect(RA, DEC, XYZ);
 	pmRA        = map.value("pmRA", 0.f).toFloat();
 	pmDEC       = map.value("pmDEC", 0.f).toFloat();
 	bMag        = map.value("bMag", -99.f).toFloat();
 	vMag        = map.value("vMag", -99.f).toFloat();
+	parallax    = map.value("parallax", 0.f).toFloat();
+	parallaxErr = map.value("parallaxErr", 0.f).toFloat();
+	spType      = map.value("SpType", "").toString();
 
 	if (bMag>-99.f && vMag>-99.f)
 	{
@@ -92,7 +97,10 @@ QVariantMap MissingStar::getMap(void) const
 		{"pmRA", pmRA},
 		{"pmDEC", pmDEC},
 		{"bMag", bMag},
-		{"vMag", vMag}
+		{"vMag", vMag},
+		{"parallax", parallax},
+		{"parallaxErr", parallaxErr},
+		{"SpType", spType}
 	};
 
 	return map;
@@ -122,11 +130,62 @@ QString MissingStar::getInfoString(const StelCore* core, const InfoStringGroup& 
 	if (flags&Magnitude)
 		oss << getMagnitudeInfoString(core, flags, 2);
 
+	if (flags&AbsoluteMagnitude)
+	{
+		if (parallax>0.f)
+			oss << QString("%1: %2").arg(q_("Absolute Magnitude")).arg(getVMagnitude(core)+5.*(1.+std::log10(0.001*parallax)), 0, 'f', 2) << "<br />";
+		oss << getExtraInfoStrings(AbsoluteMagnitude).join("");
+	}
+
 	if (flags&Extra)
 		oss << QString("%1: <b>%2</b>").arg(q_("Color Index (B-V)"), QString::number(bMag-vMag, 'f', 2)) << "<br />";
 
 	// Ra/Dec etc.
 	oss << getCommonInfoString(core, flags);
+
+	if (flags&Distance)
+	{
+		if (parallax>0.f)
+		{
+			//TRANSLATORS: Unit of measure for distance - Light Years
+			QString ly = qc_("ly", "distance");
+			double k = AU/(SPEED_OF_LIGHT*86400*365.25);
+			double d = ((0.001/3600.)*(M_PI/180));
+			double distance = k/(parallax*d);
+			if (parallaxErr>0.f && parallax>parallaxErr) // No distance when error of parallax is bigger than parallax!
+				oss << QString("%1: %2%3%4 %5").arg(q_("Distance"), QString::number(distance, 'f', 2), QChar(0x00B1), QString::number(qAbs(k/((parallaxErr + parallax)*d) - distance), 'f', 2), ly) << "<br />";
+			else
+				oss << QString("%1: %2 %3").arg(q_("Distance"), QString::number(distance, 'f', 2), ly) << "<br />";
+		}
+		oss << getExtraInfoStrings(Distance).join("");
+	}
+
+	if (flags&ProperMotion && (pmRA!=0.0 && pmDEC!=0.0))
+	{
+		double pa = std::atan2(pmRA, pmDEC)*M_180_PI;
+		if (pa<0)
+			pa += 360.;
+		oss << QString("%1: %2 %3 %4 %5&deg;<br />").arg(q_("Proper motion"),
+			       QString::number(std::sqrt(pmRA*pmRA + pmDEC*pmDEC), 'f', 1), qc_("mas/yr", "milliarc second per year"),
+			       qc_("towards", "into the direction of"), QString::number(pa, 'f', 1));
+		oss << QString("%1: %2 %3 (%4)<br />").arg(q_("Proper motions by axes"), QString::number(pmRA, 'f', 1), QString::number(pmDEC, 'f', 1), qc_("mas/yr", "milliarc second per year"));
+	}
+
+	if (flags&Extra)
+	{
+		if (parallax>0.f)
+		{
+			QString plx = q_("Parallax");
+			if (parallaxErr>0.f)
+				oss <<  QString("%1: %2%3%4 ").arg(plx, QString::number(parallax, 'f', 3), QChar(0x00B1), QString::number(parallaxErr, 'f', 3));
+			else
+				oss << QString("%1: %2 ").arg(plx, QString::number(parallax, 'f', 3));
+			oss  << qc_("mas", "parallax") << "<br />";
+		}
+
+		if (!spType.isEmpty())
+			oss << QString("%1: %2").arg(q_("Spectral Type"), spType) << "<br />";
+	}
 
 	oss << getSolarLunarInfoString(core, flags);
 	postProcessInfoString(str, flags);
@@ -178,16 +237,23 @@ void MissingStar::draw(StelCore* core, StelPainter& painter)
 
 Vec3d MissingStar::getJ2000EquatorialPos(const StelCore* core) const
 {
+	Vec3d v;
+	static const double d2000 = 2451545.0;
+	const double movementFactor = (M_PI/180.)*(0.0001/3600.) * (core->getJDE()-d2000)/365.25;
+	const double cRA = RA + movementFactor*pmRA;
+	const double cDE = DEC + movementFactor*pmDEC;
+	StelUtils::spheToRect(cRA, cDE, v);
+
+	//StelUtils::spheToRect(RA, DEC, v);
+
 	if ((core) && (core->getUseAberration()) && (core->getCurrentPlanet()))
 	{
 		Vec3d vel=core->getCurrentPlanet()->getHeliocentricEclipticVelocity();
 		vel=StelCore::matVsop87ToJ2000*vel*core->getAberrationFactor()*(AU/(86400.0*SPEED_OF_LIGHT));
-		Vec3d pos=XYZ+vel;
+		Vec3d pos=v+vel;
 		pos.normalize();
 		return pos;
 	}
 	else
-	{
-		return XYZ;
-	}
+		return v;
 }

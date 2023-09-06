@@ -51,13 +51,15 @@ public:
 
 	//! Get a QVariantMap which describes the missing star. Could be used to create a duplicate.
 	//! - designation
-	//! - RA
-	//! - DEC
-	//! - pmRA
-	//! - pmDEC
+	//! - RA (J2000.0)
+	//! - DEC (J2000.0)
+	//! - pmRA [mas/yr]
+	//! - pmDEC [mas/yr]
 	//! - bMag
 	//! - vMag
-	//! - parallax
+	//! - parallax [mas]
+	//! - parallaxErr [mas]
+	//! - SpType
 	QVariantMap getMap(void) const;
 
 	virtual QString getType(void) const Q_DECL_OVERRIDE
@@ -93,26 +95,24 @@ public:
 
 	void update(double deltaTime);
 
-//protected:
-//	virtual QString getMagnitudeInfoString(const StelCore *core, const InfoStringGroup& flags, const int decimals=1) const Q_DECL_OVERRIDE;
-
 private:
 	bool initialized;
-
-	Vec3d XYZ;                         // holds J2000 position
 
 	static StelTextureSP hintTexture;
 
 	void draw(StelCore* core, StelPainter& painter);
 
 	// Missing Star
-	QString designation;               //! The ID of the missing star
-	double RA;			   //! R.A. for the missing star
-	double DEC;			   //! Dec. for the missing star
-	float pmRA;			   //! proper motion in R.A. for the missing star (mas/yr)
-	float pmDEC;			   //! proper motion in Dec. for the missing star (mas/yr)
-	float bMag;			   //! B magnitude for the missing star
-	float vMag;			   //! V magnitude for the missing star
+	QString designation; //! The ID of the missing star
+	double RA;	     //! R.A. (J2000.0) for the missing star
+	double DEC;	     //! Dec. (J2000.0) for the missing star
+	float pmRA;	     //! proper motion in R.A. for the missing star [mas/yr]
+	float pmDEC;	     //! proper motion in Dec. for the missing star [mas/yr]
+	float bMag;	     //! B magnitude for the missing star
+	float vMag;	     //! V magnitude for the missing star
+	float parallax;      //! parallax for the missing star [mas]
+	float parallaxErr;   //! parallax error for the missing star [mas]
+	QString spType;      //! spectral type for the missing star
 	int colorIndex;
 
 	LinearFader labelsFader;
