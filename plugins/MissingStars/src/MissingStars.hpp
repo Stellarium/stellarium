@@ -133,7 +133,7 @@ private:
 	QList<MissingStarP> missingstars;
 	QStringList designations;
 
-	QSettings* conf;
+	//QSettings* conf;
 
 	// GUI
 	MissingStarsDialog* configDialog;	

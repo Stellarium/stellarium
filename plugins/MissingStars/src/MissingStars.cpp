@@ -46,8 +46,6 @@
 #include <QSettings>
 #include <stdexcept>
 
-#define CATALOG_FORMAT_VERSION 1 /* Version of format of catalog */
-
 /*
  This method is the one called automatically by the StelModuleMgr just 
  after loading the dynamic library
@@ -79,7 +77,7 @@ MissingStars::MissingStars()
 {
 	setObjectName("MissingStars");
 	configDialog = new MissingStarsDialog();
-	conf = StelApp::getInstance().getSettings();
+	//conf = StelApp::getInstance().getSettings();
 	setFontSize(StelApp::getInstance().getScreenFontSize());
 	connect(&StelApp::getInstance(), SIGNAL(screenFontSizeChanged(int)), this, SLOT(setFontSize(int)));
 }
@@ -260,6 +258,7 @@ void MissingStars::setMissingStarsMap(const QVariantMap& map)
 {
 	missingstars.clear();
 	designations.clear();
+	int mscount = 0;
 	QVariantMap msMap = map.value("catalog").toMap();
 	for (auto &msKey : msMap.keys())
 	{
@@ -271,8 +270,10 @@ void MissingStars::setMissingStarsMap(const QVariantMap& map)
 		{
 			missingstars.append(ms);
 			designations.append(ms->getID());
+			mscount++;
 		}
 	}
+	qWarning().noquote() << "[MissingStars] Loaded" << mscount << "extra stars (missing in main catalogs)";
 }
 
 MissingStarP MissingStars::getByID(const QString& id) const

@@ -51,6 +51,7 @@ MissingStar::MissingStar(const QVariantMap& map)
 	, parallaxErr(0.f)
 	, spType("")
 	, colorIndex(0)
+	, bvFlag(false)
 {
 	if (!map.contains("designation") || !map.contains("RA") || !map.contains("DEC") || !map.contains("vMag"))
 	{
@@ -69,16 +70,18 @@ MissingStar::MissingStar(const QVariantMap& map)
 	parallaxErr = map.value("parallaxErr", 0.f).toFloat();
 	spType      = map.value("SpType", "").toString();
 
+	double b_v = 0.;
 	if (bMag>-99.f && vMag>-99.f)
 	{
-		double b_v = (bMag-vMag)*1000.0;
+		b_v = (bMag-vMag)*1000.0;
 		if (b_v < -500.) {
 			b_v = -500.;
 		} else if (b_v > 3499.) {
 			b_v = 3499.;
 		}
-		colorIndex = (unsigned int)floor(0.5+127.0*((500.0+b_v)/4000.0));
+		bvFlag = true;
 	}
+	colorIndex = (unsigned int)floor(0.5+127.0*((500.0+b_v)/4000.0));
 
 	initialized = true;
 }
@@ -137,7 +140,7 @@ QString MissingStar::getInfoString(const StelCore* core, const InfoStringGroup& 
 		oss << getExtraInfoStrings(AbsoluteMagnitude).join("");
 	}
 
-	if (flags&Extra)
+	if (flags&Extra && bvFlag)
 		oss << QString("%1: <b>%2</b>").arg(q_("Color Index (B-V)"), QString::number(bMag-vMag, 'f', 2)) << "<br />";
 
 	// Ra/Dec etc.

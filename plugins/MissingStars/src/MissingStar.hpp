@@ -113,7 +113,9 @@ private:
 	float parallax;      //! parallax for the missing star [mas]
 	float parallaxErr;   //! parallax error for the missing star [mas]
 	QString spType;      //! spectral type for the missing star
+
 	int colorIndex;
+	bool bvFlag;
 
 	LinearFader labelsFader;
 };
