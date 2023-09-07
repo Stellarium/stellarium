@@ -253,7 +253,7 @@ Vec3d MissingStar::getJ2000EquatorialPos(const StelCore* core) const
 	Vec3d v;
 	static const double d2000 = 2451545.0;
 	const double movementFactor = (M_PI/180.)*(0.0001/3600.) * (core->getJDE()-d2000)/365.25;
-	const double cRA = RA + movementFactor*pmRA;
+	const double cRA = RA + movementFactor*pmRA/::cos(DEC*M_180_PI);
 	const double cDE = DEC + movementFactor*pmDEC;
 	StelUtils::spheToRect(cRA, cDE, v);
 
