@@ -264,6 +264,8 @@ private slots:
 
 	//! Call when button "Save settings" in main GUI are pressed
 	void saveSettings() { saveSettingsToConfig(); }
+
+	void setFlagSyncShowLabels(bool b) { Nova::syncShowLabels = b; }
 };
 
 #include <QObject>

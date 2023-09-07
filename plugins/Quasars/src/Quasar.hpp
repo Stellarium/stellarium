@@ -28,7 +28,6 @@
 
 #include "StelObject.hpp"
 #include "StelTextureTypes.hpp"
-#include "StelFader.hpp"
 #include "StelTranslator.hpp"
 
 class StelPainter;
@@ -105,8 +104,6 @@ public:
 		return designation;
 	}
 
-	void update(double deltaTime);
-
 private:
 	bool initialized;
 	float shiftVisibility;
@@ -135,8 +132,6 @@ private:
 	float f6;			//! Radio flux density around 5GHz (6cm)
 	float f20;			//! Radio flux density around 1.4GHz (21cm)
 	QString sclass;			//! Spectrum classification
-
-	LinearFader labelsFader;
 };
 
 #endif // QUASAR_HPP

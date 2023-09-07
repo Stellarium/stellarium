@@ -33,6 +33,7 @@
 #include "Novae.hpp"
 #include "NovaeDialog.hpp"
 #include "StelProgressController.hpp"
+#include "StarMgr.hpp"
 
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
@@ -178,6 +179,8 @@ void Novae::init()
 
 	connect(this, SIGNAL(jsonUpdateComplete(void)), this, SLOT(reloadCatalog()));
 	connect(StelApp::getInstance().getCore(), SIGNAL(configurationDataSaved()), this, SLOT(saveSettings()));
+	StarMgr* smgr = GETSTELMODULE(StarMgr);
+	connect(smgr, SIGNAL(starLabelsDisplayedChanged(bool)), this, SLOT(setFlagSyncShowLabels(bool)));
 
 	GETSTELMODULE(StelObjectMgr)->registerStelObjectMgr(this);
 }

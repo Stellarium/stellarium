@@ -27,7 +27,6 @@
 #include "StelModuleMgr.hpp"
 #include "StelSkyDrawer.hpp"
 #include "StelLocaleMgr.hpp"
-#include "StarMgr.hpp"
 #include "Planet.hpp"
 
 #include <QTextStream>
@@ -48,6 +47,8 @@ bool Exoplanet::showNumbers = false;
 Vec3f Exoplanet::exoplanetMarkerColor = Vec3f(0.4f,0.9f,0.5f);
 Vec3f Exoplanet::habitableExoplanetMarkerColor = Vec3f(1.f,0.5f,0.f);
 int Exoplanet::temperatureScaleID = 1;
+// It's needed for checking displaying of labels for stars
+bool Exoplanet::syncShowLabels = true;
 
 Exoplanet::Exoplanet(const QVariantMap& map)
 	: initialized(false)
@@ -620,11 +621,6 @@ bool Exoplanet::isDiscovered(const StelCore *core)
 	return false;
 }
 
-void Exoplanet::update(double deltaTime)
-{
-	labelsFader.update(static_cast<int>(deltaTime*1000));
-}
-
 void Exoplanet::draw(StelCore* core, StelPainter *painter)
 {
 	if ((habitableMode) &&  (!hasHabitableExoplanets)) {return;}
@@ -650,8 +646,7 @@ void Exoplanet::draw(StelCore* core, StelPainter *painter)
 		painter->drawSprite2dMode(getJ2000EquatorialPos(core), distributionMode ? 4.f : 5.f);
 
 		float coeff = 4.5f + std::log10(static_cast<float>(sradius) + 0.1f);
-		StarMgr* smgr = GETSTELMODULE(StarMgr); // It's needed for checking displaying of labels for stars
-		if (labelsFader.getInterstate()<=0.f && !distributionMode && (mag+coeff)<mlimit && smgr->getFlagLabels())
+		if (!distributionMode && (mag+coeff)<mlimit && syncShowLabels)
 		{
 			if (showDesignations)
 				text = getNameI18n();

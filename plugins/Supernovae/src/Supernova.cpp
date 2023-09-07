@@ -26,7 +26,6 @@
 #include "StelModuleMgr.hpp"
 #include "StelSkyDrawer.hpp"
 #include "StelLocaleMgr.hpp"
-#include "StarMgr.hpp"
 #include "Planet.hpp"
 
 #include <QTextStream>
@@ -37,6 +36,8 @@
 #include <QList>
 
 const QString Supernova::SUPERNOVA_TYPE = QStringLiteral("Supernova");
+// It's need for checking displaying of labels for stars
+bool Supernova::syncShowLabels = true;
 
 Supernova::Supernova(const QVariantMap& map)
 	: initialized(false)
@@ -241,11 +242,6 @@ float Supernova::getVMagnitude(const StelCore* core) const
 	return static_cast<float>(vmag);
 }
 
-void Supernova::update(double deltaTime)
-{
-	labelsFader.update(static_cast<int>(deltaTime*1000));
-}
-
 void Supernova::draw(StelCore* core, StelPainter& painter)
 {
 	StelSkyDrawer* sd = core->getSkyDrawer();
@@ -267,8 +263,7 @@ void Supernova::draw(StelCore* core, StelPainter& painter)
 		sd->drawPointSource(&painter, vf.toVec3d(), rcMag, color, true, qMin(1.0f, 1.0f-0.9f*altAz[2]));
 		sd->postDrawPointSource(&painter);
 		painter.setColor(color, 1.f);
-		StarMgr* smgr = GETSTELMODULE(StarMgr); // It's need for checking displaying of labels for stars
-		if (labelsFader.getInterstate()<=0.f && (mag+5.f)<mlimit && smgr->getFlagLabels())
+		if ((mag+5.f)<mlimit && syncShowLabels)
 			painter.drawText(getJ2000EquatorialPos(core), designation, 0, shift, shift, false);
 	}	
 }
