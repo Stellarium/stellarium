@@ -29,6 +29,7 @@
 #include "StelUtils.hpp"
 #include "StelTranslator.hpp"
 #include "LabelMgr.hpp"
+#include "StarMgr.hpp"
 #include "MissingStar.hpp"
 #include "MissingStars.hpp"
 #include "MissingStarsDialog.hpp"
@@ -113,12 +114,18 @@ void MissingStars::init()
 {
 	texPointer = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/pointeur2.png");
 
-	// key bindings and other actions
-	addAction("actionShow_MissingStars_ConfigDialog", N_("Missing Stars"), N_("Missing Stars configuration window"), configDialog, "visible", ""); // Allow assign shortkey
-
 	readJsonFile();
 
+	StarMgr* smgr = GETSTELMODULE(StarMgr);
+	connect(smgr, SIGNAL(starsDisplayedChanged(bool)),      this, SLOT(setFlagShowStars(bool)));
+	connect(smgr, SIGNAL(starLabelsDisplayedChanged(bool)), this, SLOT(setFlagShowLabels(bool)));
+
+	setFlagShowStars(true);
+
 	GETSTELMODULE(StelObjectMgr)->registerStelObjectMgr(this);
+
+	// key bindings and other actions
+	addAction("actionShow_MissingStars_ConfigDialog", N_("Missing Stars"), N_("Missing Stars configuration window"), configDialog, "visible", ""); // Allow assign shortkey
 }
 
 /*
@@ -126,6 +133,9 @@ void MissingStars::init()
 */
 void MissingStars::draw(StelCore* core)
 {
+	if (!flagShowStars)
+		return;
+
 	StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 	StelPainter painter(prj);
 	painter.setFont(font);

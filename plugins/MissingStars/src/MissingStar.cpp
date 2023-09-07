@@ -26,7 +26,6 @@
 #include "StelModuleMgr.hpp"
 #include "StelSkyDrawer.hpp"
 #include "StelLocaleMgr.hpp"
-#include "StarMgr.hpp"
 #include "Planet.hpp"
 
 #include <QTextStream>
@@ -37,6 +36,7 @@
 #include <QList>
 
 const QString MissingStar::MISSINGSTAR_TYPE = QStringLiteral("MissingStar");
+bool MissingStar::flagShowLabels = true;
 
 MissingStar::MissingStar(const QVariantMap& map)
 	: initialized(false)
@@ -205,11 +205,6 @@ Vec3f MissingStar::getInfoColor(void) const
 	return StelSkyDrawer::indexToColor(colorIndex);
 }
 
-void MissingStar::update(double deltaTime)
-{
-	labelsFader.update(static_cast<int>(deltaTime*1000));
-}
-
 void MissingStar::draw(StelCore* core, StelPainter *painter)
 {
 	StelSkyDrawer* sd = core->getSkyDrawer();
@@ -237,8 +232,7 @@ void MissingStar::draw(StelCore* core, StelPainter *painter)
 		sd->drawPointSource(painter, vf.toVec3d(), rcMag, color, true, qMin(1.0f, 1.0f-0.9f*altAz[2]));
 		sd->postDrawPointSource(painter);
 		painter->setColor(color, 1.f);
-		StarMgr* smgr = GETSTELMODULE(StarMgr); // It's need for checking displaying of labels for stars
-		if (labelsFader.getInterstate()<=0.f && (mag+5.f)<mlimit && smgr->getFlagLabels())
+		if (flagShowLabels && (mag+5.f)<mlimit)
 			painter->drawText(pos, designation, 0, shift, shift, false);
 	}	
 }

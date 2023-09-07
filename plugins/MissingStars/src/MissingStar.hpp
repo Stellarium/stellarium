@@ -28,7 +28,6 @@
 
 #include "StelObject.hpp"
 #include "StelTextureTypes.hpp"
-#include "StelFader.hpp"
 #include "StelTranslator.hpp"
 
 class StelPainter;
@@ -93,8 +92,6 @@ public:
 	virtual QString getNameI18n(void) const Q_DECL_OVERRIDE;
 	virtual QString getEnglishName(void) const Q_DECL_OVERRIDE;
 
-	void update(double deltaTime);
-
 private:
 	bool initialized;
 
@@ -117,7 +114,7 @@ private:
 	int colorIndex;
 	bool bvFlag;
 
-	LinearFader labelsFader;
+	static bool flagShowLabels;
 };
 
 #endif // MISSINGSTAR_HPP

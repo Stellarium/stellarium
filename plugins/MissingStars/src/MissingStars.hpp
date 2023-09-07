@@ -116,6 +116,11 @@ public:
 public slots:
 	//! Connect this to StelApp font size.
 	void setFontSize(int s){font.setPixelSize(s);}
+
+private slots:
+	void setFlagShowStars(const bool b) { flagShowStars = b; }
+	void setFlagShowLabels(const bool b) { MissingStar::flagShowLabels = b; }
+
 private:
 	// Font used for displaying our text
 	QFont font;
@@ -134,6 +139,8 @@ private:
 	QStringList designations;
 
 	//QSettings* conf;
+
+	bool flagShowStars;
 
 	// GUI
 	MissingStarsDialog* configDialog;	
