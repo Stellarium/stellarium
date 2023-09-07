@@ -207,18 +207,29 @@ Vec3f MissingStar::getInfoColor(void) const
 
 void MissingStar::draw(StelCore* core, StelPainter *painter)
 {
-	StelSkyDrawer* sd = core->getSkyDrawer();
-	const float mlimit = sd->getLimitMagnitude();
-	const float mag = getVMagnitudeWithExtinction(core);
-	const float shift = 8.f;
-
 	Vec3d pos = getJ2000EquatorialPos(core);
 	Vec3d win;
 	// Check visibility of missing star
 	if(!(painter->getProjector()->projectCheck(pos, win)))
 		return;
+
+	StelSkyDrawer* sd = core->getSkyDrawer();
+	const float mlimit = sd->getLimitMagnitude();
+	const bool mflag = sd->getFlagStarMagnitudeLimit();
+	const float mag = getVMagnitudeWithExtinction(core);
+	const float shift = 8.f;
+
+	bool visibleStar = (mag <= mlimit);
+	bool visibleHint = ((mag+5.f)<mlimit);
+	if (mflag)
+	{
+		// custom magnitude limit for stars
+		const double hmlimit = sd->getCustomStarMagnitudeLimit();
+		visibleStar = (mag <= hmlimit);
+		visibleHint = ((mag+5.f)<hmlimit);
+	}
 	
-	if (mag <= mlimit)
+	if (visibleStar)
 	{
 		const Vec3f color = getInfoColor();
 		Vec3f vf(pos.toVec3f());
@@ -232,7 +243,7 @@ void MissingStar::draw(StelCore* core, StelPainter *painter)
 		sd->drawPointSource(painter, vf.toVec3d(), rcMag, color, true, qMin(1.0f, 1.0f-0.9f*altAz[2]));
 		sd->postDrawPointSource(painter);
 		painter->setColor(color, 1.f);
-		if (flagShowLabels && (mag+5.f)<mlimit)
+		if (flagShowLabels && visibleHint)
 			painter->drawText(pos, designation, 0, shift, shift, false);
 	}	
 }
