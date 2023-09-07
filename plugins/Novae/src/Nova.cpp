@@ -24,7 +24,6 @@
 #include "StelTranslator.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelSkyDrawer.hpp"
-#include "StarMgr.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelPainter.hpp"
 #include "Planet.hpp"
@@ -38,6 +37,7 @@
 #include <QRegularExpression>
 
 const QString Nova::NOVA_TYPE = QStringLiteral("Nova");
+bool Nova::syncShowLabels = true;
 
 Nova::Nova(const QVariantMap& map)
 	: initialized(false)
@@ -310,11 +310,6 @@ float Nova::getVMagnitude(const StelCore* core) const
 	return vmag;
 }
 
-void Nova::update(double deltaTime)
-{
-	labelsFader.update(static_cast<int>(deltaTime*1000));
-}
-
 void Nova::draw(StelCore* core, StelPainter* painter)
 {
 	StelSkyDrawer* sd = core->getSkyDrawer();
@@ -336,8 +331,7 @@ void Nova::draw(StelCore* core, StelPainter* painter)
 		sd->drawPointSource(painter, vf.toVec3d(), rcMag, color, true, qMin(1.0f, 1.0f-0.9f*altAz[2]));
 		sd->postDrawPointSource(painter);
 		painter->setColor(color, 1.f);
-		StarMgr* smgr = GETSTELMODULE(StarMgr); // It's need for checking displaying of labels for stars
-		if (labelsFader.getInterstate()<=0.f && (mag+5.f)<mlimit && smgr->getFlagLabels())
+		if ((mag+5.f)<mlimit && syncShowLabels)
 		{
 			QString name = novaName.isEmpty() ? designation : novaName;
 			painter->drawText(getJ2000EquatorialPos(core), name, 0, shift, shift, false);

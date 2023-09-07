@@ -419,11 +419,6 @@ QString Pulsar::getPulsarTypeInfoString(QString pcode) const
 	return out.join(",<br />");
 }
 
-void Pulsar::update(double deltaTime)
-{
-	labelsFader.update(static_cast<int>(deltaTime*1000));
-}
-
 void Pulsar::draw(StelCore* core, StelPainter *painter)
 {
 	Vec3d win, coord = getJ2000EquatorialPos(core);
@@ -449,7 +444,7 @@ void Pulsar::draw(StelCore* core, StelPainter *painter)
 		painter->setBlending(true, GL_ONE, GL_ONE);
 		painter->drawSprite2dMode(coord, distributionMode ? 4.f : 5.f);
 
-		if (labelsFader.getInterstate()<=0.f && !distributionMode && (mag+2.f)<mlimit)
+		if (!distributionMode && (mag+2.f)<mlimit)
 		{
 			QString name = getDesignation();
 			if (!getNameI18n().isEmpty())

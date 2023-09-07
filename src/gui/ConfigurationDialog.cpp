@@ -1590,7 +1590,11 @@ void ConfigurationDialog::downloadStars()
 	starCatalogDownloadReply->setReadBufferSize(1024*1024*2);	
 	connect(starCatalogDownloadReply, SIGNAL(readyRead()), this, SLOT(newStarCatalogData()));
 	connect(starCatalogDownloadReply, SIGNAL(finished()), this, SLOT(downloadFinished()));
+	#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+	connect(starCatalogDownloadReply, SIGNAL(errorOccurred(QNetworkReply::NetworkError)), this, SLOT(downloadError(QNetworkReply::NetworkError)));
+	#else
 	connect(starCatalogDownloadReply, SIGNAL(error(QNetworkReply::NetworkError)), this, SLOT(downloadError(QNetworkReply::NetworkError)));
+	#endif
 
 	progressBar = StelApp::getInstance().addProgressBar();
 	progressBar->setValue(0);
