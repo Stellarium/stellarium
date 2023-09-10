@@ -5,17 +5,17 @@
 # 
 # Translators:
 # cardinot <mcardinot@gmail.com>, 2022
-# Alexander V. Wolf <alex.v.wolf@gmail.com>, 2022
 # Zdeněk Moravec <moravec@hapteplice.cz>, 2023
+# Alexander V. Wolf <alex.v.wolf@gmail.com>, 2023
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2022-12-18 15:53+0700\n"
+"POT-Creation-Date: 2023-07-15 15:32+0700\n"
 "PO-Revision-Date: 2022-10-05 17:12+0000\n"
-"Last-Translator: Zdeněk Moravec <moravec@hapteplice.cz>, 2023\n"
+"Last-Translator: Alexander V. Wolf <alex.v.wolf@gmail.com>, 2023\n"
 "Language-Team: Czech (https://app.transifex.com/stellarium/teams/80998/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -439,7 +439,7 @@ msgstr "Venuše(?)"
 
 #. type: Content of: <h2>
 #: ../../skycultures/anutan/description.en.utf8:37
-#: ../../skycultures/greek_dante/description.en.utf8:9
+#: ../../skycultures/greek_dante/description.en.utf8:20
 #: ../../skycultures/greek_leidenAratea/description.en.utf8:275
 #: ../../skycultures/indian/description.en.utf8:35
 #: ../../skycultures/lokono/description.en.utf8:381
@@ -478,7 +478,7 @@ msgstr ""
 #: ../../skycultures/babylonian_seleucid/description.en.utf8:473
 #: ../../skycultures/chinese_medieval/description.en.utf8:49
 #: ../../skycultures/egyptian/description.en.utf8:17
-#: ../../skycultures/greek_dante/description.en.utf8:15
+#: ../../skycultures/greek_dante/description.en.utf8:26
 #: ../../skycultures/greek_farnese/description.en.utf8:297
 #: ../../skycultures/greek_leidenAratea/description.en.utf8:291
 #: ../../skycultures/korean/description.en.utf8:12
@@ -499,10 +499,10 @@ msgstr "Autor"
 #: ../../skycultures/anutan/description.en.utf8:46
 msgid ""
 "This sky culture was contributed to Stellarium by <i>Dan Smale</i>, "
-"d.smale(at)niwa.co.nz"
+"smaledaniel(at)outlook.com"
 msgstr ""
 "Tuto nebeskou kulturu pro Stellarium vytvořil <i>Dan Smale</i>, "
-"d.smale(at)niwa.co.nz"
+"smaledaniel(at)outlook.com"
 
 #. type: Content of: <h1>
 #: ../../skycultures/arabic_al-sufi/description.en.utf8:1
@@ -809,7 +809,7 @@ msgstr ""
 #: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:149
 #: ../../skycultures/arabic_lunar_mansions/description.en.utf8:75
 #: ../../skycultures/chinese/description.en.utf8:2960
-#: ../../skycultures/greek_dante/description.en.utf8:18
+#: ../../skycultures/greek_dante/description.en.utf8:29
 #: ../../skycultures/sami/description.en.utf8:57
 msgid "Notes"
 msgstr "Poznámky"
@@ -2303,8 +2303,8 @@ msgid ""
 " Arabs living in the Arabian Peninsula prior to the Greek astronomy "
 "influence in the ninth century."
 msgstr ""
-"Arabská kultura oblohy obsahuje původní znalosti o hvězdách od starodávných "
-"Arabů žijících na Arabském poloostrově před jejich ovlivněním řeckou "
+"Arabská nebeská kultura obsahuje původní znalosti o hvězdách od starodávných"
+" Arabů žijících na Arabském poloostrově před jejich ovlivněním řeckou "
 "astronomií v devátém století."
 
 #. type: Content of: <p>
@@ -3597,7 +3597,7 @@ msgid ""
 "later Greek <em>hypsomata</em> - but Greek astrology provided two "
 "<em>hypsomata</em> per planet while Babylonian had only one)."
 msgstr ""
-"Tato kultura oblohy byla vytvořena víceméně pouze s prvním seznamem "
+"Tato nebeská kultura byla vytvořena víceméně pouze s prvním seznamem "
 "kompendia, tzv. „hvězdným katalogem“. Není to skutečný katalog hvězd, "
 "protože neuvádí jedinou souřadnici a většina jmen, která jsou tam uvedena, "
 "jsou názvy asterismů nebo souhvězdí (a ne bodových objektů, jako jsou "
@@ -3799,7 +3799,7 @@ msgstr "<sup>HVĚZDA</sup><i>ALLUTTU</i>(Krab)"
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:101
 msgid "seat of <sup>GOD</sup>Anu"
-msgstr "křeslo <sup>BOHA</sup>Anu"
+msgstr "trůn <sup>BOHA</sup>Anu"
 
 #. type: Content of: <p><table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:106
@@ -3909,7 +3909,7 @@ msgstr "15"
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:148
 msgid "STAR by the pole of <sup>STAR</sup><i>EREQQU</i>"
-msgstr "HVĚZDA u pólu <sup>HVĚZDY</sup><i>EREQQU</i>"
+msgstr "HVĚZDA u tyče <sup>HVĚZDY</sup><i>EREQQU</i>"
 
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:149
@@ -3917,8 +3917,8 @@ msgid ""
 "<sup>STAR</sup><i>&Scaron;&#274;LEBU</i>(Fox), <sup>GOD</sup>Erra, the "
 "strong of the gods"
 msgstr ""
-"<sup>HVĚZDA</sup><i>&Scaron;&#274;LEBU</i>(Fox), <sup>GOD</sup>Erra, the "
-"strong of the gods"
+"<sup>HVĚZDA</sup><i>&Scaron;&#274;LEBU</i>(Liška), <sup>GOD</sup>Erra, silný"
+" z bohů"
 
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:150
@@ -3928,27 +3928,27 @@ msgstr "Alcor (80 UMa)"
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:154
 msgid "STAR on the forehead of <sup>STAR</sup><i>EREQQU</i>"
-msgstr "HVĚZDA on the forehead of <sup>HVĚZDA</sup><i>EREQQU</i>"
+msgstr "HVĚZDA na čele <sup>HVĚZDY</sup><i>EREQQU</i>"
 
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:155
 msgid "<sup>STAR</sup><i>LA&#7722;RU</i>(Ewe), <sup>GOD</sup>Aya"
-msgstr "<sup>HVĚZDA</sup><i>LA&#7722;RU</i>(Ewe), <sup>BŮH</sup>Aya"
+msgstr "<sup>HVĚZDA</sup><i>LA&#7722;RU</i>(Ovce), <sup>BŮH</sup>Aya"
 
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:160
 msgid "<sup>STAR</sup>MU.BU.K&Eacute;&Scaron;.DA(Hitched yoke?)"
-msgstr "<sup>HVĚZDA</sup>MU.BU.K&Eacute;&Scaron;.DA(Hitched yoke?)"
+msgstr "<sup>HVĚZDA</sup>MU.BU.K&Eacute;&Scaron;.DA (Zapřažené jho?)"
 
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:161
 msgid "<sup>GOD</sup><i>Anu-rab&ucirc;</i> of heaven"
-msgstr "<sup>BŮH</sup><i>Anu-rab&ucirc;</i> of heaven"
+msgstr "<sup>BŮH</sup><i>Anu-rab&ucirc;</i> nebes"
 
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:166
 msgid "<sup>STAR</sup>MAR.G&Iacute;D.DA.AN.NA(Wagon of heaven)"
-msgstr "<sup>HVĚZDA</sup>MAR.G&Iacute;D.DA.AN.NA(Wagon of heaven)"
+msgstr "<sup>HVĚZDA</sup>MAR.G&Iacute;D.DA.AN.NA (Nebeský vůz)"
 
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:167
@@ -3964,7 +3964,7 @@ msgstr "někde mezi UMi a Vegou?"
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:172
 msgid "STAR in its bond"
-msgstr "HVĚZDA in its bond"
+msgstr "HVĚZDA ve svém poutu"
 
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:173
@@ -3972,8 +3972,8 @@ msgid ""
 "<sup>STAR</sup><i>APIL-EMA&#7722;</i>(Heir of the Ema&#7723;-temple), "
 "foremost son of <sup>GOD</sup>Anu"
 msgstr ""
-"<sup>HVĚZDA</sup><i>APIL-EMA&#7722;</i>(Heir of the Ema&#7723;-temple), "
-"foremost son of <sup>BŮH</sup>Anu"
+"<sup>HVĚZDA</sup><i>APIL-EMA&#7722;</i>(dědic Emy&#7723;-chrám), "
+"nejpřednější syn <sup>BOHA</sup>Anu"
 
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:179
@@ -3989,7 +3989,7 @@ msgstr "Hvězdy Sedících bohů chrámu Ekur"
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:188
 #: ../../skycultures/babylonian_seleucid/description.en.utf8:147
 msgid "<sup>STAR</sup><i>ENZU</i>(She-Goat)"
-msgstr "<sup>HVĚZDA</sup><i>ENZU</i>(She-Goat)"
+msgstr "<sup>HVĚZDA</sup><i>ENZU</i>(Koza)"
 
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:189
@@ -3999,18 +3999,18 @@ msgstr "<sup>BŮH</sup>Gula"
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:194
 msgid "STAR in front of <sup>STAR</sup><i>ENZU</i>"
-msgstr "HVĚZDA in front of <sup>HVĚZDA</sup><i>ENZU</i>"
+msgstr "HVĚZDA před <sup>HVĚZDOU</sup><i>ENZU</i>"
 
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:195
 msgid "<sup>STAR</sup><i>KALBU</i>(Dog) (of <sup>GOD</sup>Gula)"
-msgstr "<sup>HVĚZDA</sup><i>KALBU</i>(Dog) (of <sup>BŮH</sup>Gula)"
+msgstr "<sup>HVĚZDA</sup><i>KALBU</i>(Pes) (<sup>BOHA</sup>Gula)"
 
 #. type: Content of: <p><table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:200
 #: ../../skycultures/babylonian_seleucid/description.en.utf8:159
 msgid "bright STAR of <sup>STAR</sup><i>ENZU</i>"
-msgstr "bright HVĚZDA of <sup>HVĚZDA</sup><i>ENZU</i>"
+msgstr "jasná HVĚZDA <sup>HVĚZDY</sup><i>ENZU</i>"
 
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:201
@@ -4018,19 +4018,18 @@ msgid ""
 "<sup>GOD</sup>Lamassatu, vizier of <sup>GOD</sup>Baba (= <sup>GOD</sup>Gu-"
 "la)"
 msgstr ""
-"<sup>BŮH</sup>Lamassatu, vizier of <sup>BŮH</sup>Baba (= <sup>BŮH</sup>Gu-"
-"la)"
+"<sup>BŮH</sup>Lamassatu, vezír <sup>BOHA</sup>Baba (= <sup>BŮH</sup>Gu-la)"
 
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:206
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:450
 msgid "2 STAR<sup>s</sup> behind it"
-msgstr "2 HVĚZDA<sup>s</sup> behind it"
+msgstr "2 HVĚZDY za ním"
 
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:207
 msgid "<sup>GOD</sup>Nin-SAR and <sup>GOD</sup>Errakal"
-msgstr "<sup>BŮH</sup>Nin-SAR and <sup>BŮH</sup>Errakal"
+msgstr "<sup>BŮH</sup>Nin-SAR a <sup>BŮH</sup>Errakal"
 
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:212
@@ -4040,40 +4039,40 @@ msgstr "<sup>HVĚZDA</sup>U<sub>4</sub>.KA.DU<sub>8</sub>.A"
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:213
 msgid "<sup>GOD</sup>U.GUR(Nergal)"
-msgstr "<sup>BŮH</sup>U.GUR(Nergal)"
+msgstr "<sup>BŮH</sup>U.GUR (Nergal)"
 
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:218
 msgid "STAR to the right of it"
-msgstr "HVĚZDA to the right of it"
+msgstr "HVĚZDA napravo od něj"
 
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:219
 msgid "<sup>STAR</sup>&Scaron;<i>A&#7722;&Ucirc;</i>(Pig), <sup>GOD</sup>Damu"
 msgstr ""
-"<sup>HVĚZDA</sup>&Scaron;<i>A&#7722;&Ucirc;</i>(Pig), <sup>BŮH</sup>Damu"
+"<sup>HVĚZDA</sup>&Scaron;<i>A&#7722;&Ucirc;</i>(Prase), <sup>BŮH</sup>Damu"
 
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:224
 msgid "STAR to the left of it"
-msgstr "HVĚZDA to the left of it"
+msgstr "HVĚZDA nalevo od něj"
 
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:225
 msgid "<sup>STARS</sup><i>SIS&Ucirc;</i>(Horse)"
-msgstr "<sup>STARS</sup><i>SIS&Ucirc;</i>(Horse)"
+msgstr "<sup>HVĚZDY</sup><i>SIS&Ucirc;</i>(Kůň)"
 
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:231
 msgid "<sup>STAR</sup><i>LULIMMU</i>, vizier of STAR.STAR (Pleiades)"
-msgstr "<sup>HVĚZDA</sup><i>LULIMMU</i>, vizier of HVĚZDA.HVĚZDA (Pleiades)"
+msgstr "<sup>HVĚZDA</sup><i>LULIMMU</i>, vezír HVĚZDY.HVĚZDA (Plejády)"
 
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:236
 msgid ""
 "twinkling STAR<sup>s</sup> opposite <sup>STAR</sup><i>LULIMMU</i>(Stag)"
 msgstr ""
-"twinkling HVĚZDA<sup>s</sup> opposite <sup>HVĚZDA</sup><i>LULIMMU</i>(Stag)"
+"blikající HVĚZD<sup>y</sup> naproti <sup>HVĚZDĚ</sup><i>LULIMMU</i>(Jelen)"
 
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:237
@@ -4081,13 +4080,12 @@ msgid ""
 "<sup>GOD</sup>&#7722;arriru (Field Mouse), "
 "<sup>GOD</sup>Manz&acirc;t(Rainbow)"
 msgstr ""
-"<sup>BŮH</sup>&#7722;arriru (Field Mouse), "
-"<sup>BŮH</sup>Manz&acirc;t(Rainbow)"
+"<sup>BŮH</sup>&#7722;arriru (Polní myš), <sup>BŮH</sup>Manz&acirc;t (Duha)"
 
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:242
 msgid "red bright STAR in the kidney of <sup>STAR</sup><i>LULIMMU</i>"
-msgstr "red bright HVĚZDA in the kidney of <sup>HVĚZDA</sup><i>LULIMMU</i>"
+msgstr "červená jasná HVĚZDA v ledvinách <sup>HVĚZDY</sup><i>LULIMMU</i>"
 
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:243
@@ -4097,18 +4095,18 @@ msgstr "<sup>HVĚZDA</sup><i>P&#256;&Scaron;ITTU</i>(Deleter)"
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:248
 msgid "When the STAR<sup>s</sup> of <sup>GOD</sup>Enlil are completed:"
-msgstr "When the HVĚZDA<sup>s</sup> of <sup>BŮH</sup>Enlil are completed:"
+msgstr "Když HVĚZD<sup>y</sup> <sup>BOHA</sup>Enlil jsou kompletní:"
 
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:252
 msgid "big STAR, its &quot;light&quot; is dim, it divides the sky and stands"
 msgstr ""
-"big HVĚZDA, its &quot;light&quot; is dim, it divides the sky and stands"
+"velká HVĚZDA, její &quot;světlo&quot; je slabé, rozděluje oblohu a stojí"
 
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:253
 msgid "STAR (of) <sup>GOD</sup>Marduk, <sup>GOD</sup>N&#275;beru(Ford)"
-msgstr "HVĚZDA (of) <sup>BŮH</sup>Marduk, <sup>BŮH</sup>N&#275;beru(Ford)"
+msgstr "HVĚZDA <sup>BOHA</sup>Marduk, <sup>BŮH</sup>N&#275;beru (Brod)"
 
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:254
@@ -4120,8 +4118,7 @@ msgstr "Mléčná dráha???"
 msgid ""
 "<sup>STAR</sup>SAG.ME.GAR(Jupiter), it changes its place and crosses the sky"
 msgstr ""
-"<sup>HVĚZDA</sup>SAG.ME.GAR(Jupiter), it changes its place and crosses the "
-"sky"
+"<sup>HVĚZDA</sup>SAG.ME.GAR (Jupiter), mění své místo a křižuje oblohu"
 
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:259
@@ -4131,7 +4128,7 @@ msgstr "Jupiter [hypsoma]"
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:263
 msgid "33 STAR<sup>s</sup> of <sup>GOD</sup>Enlil"
-msgstr "33 HVĚZDA<sup>s</sup> of <sup>BŮH</sup>Enlil"
+msgstr "33 HVĚZD <sup>BOHA</sup>Enlil"
 
 #. type: Content of: <p>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:267
@@ -4141,6 +4138,10 @@ msgid ""
 " which summarizes the text before as a sort of (sub)section or chapter. The "
 "planets, we highlighted in blue.</i>"
 msgstr ""
+"<b>Poznámka 1</b>: <i>Babylonské seznamy nemají titulky, ale jakési popisky."
+" Řádky psané červeně [námi] označují tento řádek jako jakési zápatí, které "
+"shrnuje předchozí text jako jakýsi (pod)oddíl nebo kapitolu. Planety jsme "
+"zvýraznili modře.</i>"
 
 #. type: Content of: <p>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:268
@@ -4154,36 +4155,41 @@ msgid ""
 "here. We are not sure, if there is any common sense about that in the "
 "scientific community.</i>"
 msgstr ""
+"<b>Poznámka 2</b>: <i>Na tomto řádku nám text říká, že před tímto řádkem "
+"bylo uvedeno 33 asterismů. Na původní hliněné desce (tabulkách) však bylo "
+"pouze 31 řádků. Proto je počítání asterismů autory MUL.APIN v této "
+"souvislosti často diskutovaným tématem. Existuje několik různých návrhů a "
+"dokonce jsme vytvořili jeden vlastní, ale protože všechny verze jsou "
+"nejisté, nejsme dostatečně odvážní, abychom některý z nich zde zveřejnili. "
+"Nejsme si jisti, zda na to ve vědecké komunitě existuje konsensus.</i>"
 
 #. type: Content of: <p><table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:280
 #: ../../skycultures/babylonian_seleucid/description.en.utf8:217
 msgid "<sup>STAR</sup>ONE&middot;&quot;FIELD&quot;(area measure)"
-msgstr "<sup>HVĚZDA</sup>ONE&middot;&quot;FIELD&quot;(area measure)"
+msgstr "<sup>HVĚZDA</sup>JEDNO&middot;&quot;POLE&quot; (plošná míra)"
 
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:281
 msgid ""
 "seat of <sup>GOD</sup>Ea who goes in front of the STAR<sup>s</sup> of "
 "<sup>GOD</sup>Anu"
-msgstr ""
-"seat of <sup>BŮH</sup>Ea who goes in front of the HVĚZDA<sup>s</sup> of "
-"<sup>BŮH</sup>Anu"
+msgstr "trůn <sup>BOHA</sup>Ea, který chodí před HVĚZDAMI <sup>BOHA</sup>Anu"
 
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:286
 msgid "STAR opposite <sup>STAR</sup>ONE&middot;'FIELD'"
-msgstr "HVĚZDA opposite <sup>HVĚZDA</sup>ONE&middot;'FIELD'"
+msgstr "HVĚZDA proti <sup>HVĚZDĚ</sup>JEDNO&middot;'POLE'"
 
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:287
 msgid "<sup>STAR</sup><i>&Scaron;IN&#362;NUTU</i>(Swallow)"
-msgstr "<sup>HVĚZDA</sup><i>&Scaron;IN&#362;NUTU</i>(Swallow)"
+msgstr "<sup>HVĚZDA</sup><i>&Scaron;IN&#362;NUTU</i>(Vlaštovka)"
 
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:292
 msgid "STAR behind <sup>STAR</sup>ONE&middot;'FIELD'"
-msgstr "HVĚZDA behind <sup>HVĚZDA</sup>ONE&middot;'FIELD'"
+msgstr "HVĚZDA za <sup>HVĚZDOU</sup>JEDNO&middot;'POLE'"
 
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:293
@@ -4193,22 +4199,22 @@ msgstr "<sup>HVĚZDA</sup><i>ANUNN&#298;TU</i>"
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:299
 msgid "<sup>STAR</sup><i>AGRU</i>(Hired Worker), <sup>GOD</sup>Tammuz"
-msgstr "<sup>HVĚZDA</sup><i>AGRU</i>(Hired Worker), <sup>BŮH</sup>Tammuz"
+msgstr "<sup>HVĚZDA</sup><i>AGRU</i>(Najatý dělník), <sup>BŮH</sup>Tammuz"
 
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:304
 msgid "STAR.STAR(<i>ZAPPU</i>, Bristle)"
-msgstr "HVĚZDA.HVĚZDA(<i>ZAPPU</i>, Bristle)"
+msgstr "HVĚZDA.HVĚZDA(<i>ZAPPU</i>, Štětina)"
 
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:305
 msgid "<sup>GOD</sup>Sebettu, the great gods"
-msgstr ""
+msgstr "<sup>BŮH</sup>Sebettu, velcí bohové"
 
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:310
 msgid "<sup>STAR</sup>BULL&middot;OF&middot;HEAVEN(<i>AL&Ucirc;</i>)"
-msgstr "<sup>HVĚZDA</sup>BULL&middot;OF&middot;HEAVEN(<i>AL&Ucirc;</i>)"
+msgstr "<sup>HVĚZDA</sup>NEBESKÝ&middot;BÝK (<i>AL&Ucirc;</i>)"
 
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:311
@@ -4216,8 +4222,8 @@ msgid ""
 "<sup>GOD</sup><i>Is-l&ecirc;</i> (Jaw of the Wild Bull), crown of "
 "<sup>GOD</sup>Anu"
 msgstr ""
-"<sup>BŮH</sup><i>Is-l&ecirc;</i> (Jaw of the Wild Bull), crown of "
-"<sup>BŮH</sup>Anu"
+"<sup>BŮH</sup><i>Is-l&ecirc;</i> (Čelist divokého býka), koruna "
+"<sup>BOHA</sup>Anu"
 
 #. type: Content of: <p><table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:316
@@ -4226,24 +4232,24 @@ msgid ""
 "<sup>STAR</sup>TRUE&middot;SHEPHERD&middot;OF&middot;HEAVEN "
 "(<i>&Scaron;ITADDALLU</i>, Orion)"
 msgstr ""
-"<sup>HVĚZDA</sup>TRUE&middot;SHEPHERD&middot;OF&middot;HEAVEN "
+"<sup>HVĚZDA</sup>SKUTEČNÝ&middot;PASTÝŘ&middot;NEBE "
 "(<i>&Scaron;ITADDALLU</i>, Orion)"
 
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:317
 msgid "<sup>GOD</sup>Papsukkal, vizier of <sup>GOD</sup>Anu"
-msgstr "<sup>BŮH</sup>Papsukkal, vizier of <sup>BŮH</sup>Anu"
+msgstr "<sup>BŮH</sup>Papsukkal, vezír <sup>BOHA</sup>Anu"
 
 #. type: Content of: <p><table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:322
 #: ../../skycultures/babylonian_seleucid/description.en.utf8:270
 msgid "Twin STARs opposite <sup>STAR</sup><i>&Scaron;ITADDALLU</i>"
-msgstr "Twin STARs opposite <sup>HVĚZDA</sup><i>&Scaron;ITADDALLU</i>"
+msgstr "Dvojitá HVĚZDA naproti <sup>HVĚZDĚ</sup><i>&Scaron;ITADDALLU</i>"
 
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:323
 msgid "<sup>GOD</sup>Lulal and <sup>GOD</sup>Latarak"
-msgstr "<sup>BŮH</sup>Lulal and <sup>BŮH</sup>Latarak"
+msgstr "<sup>BŮH</sup>Lulal a <sup>BŮH</sup>Latarak"
 
 #. type: Content of: <p><table><tbody><tr><td><notr><sub>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:324
@@ -4260,12 +4266,12 @@ msgstr "4"
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:329
 msgid "<sup>STAR</sup><i>TARLUGALLU</i> (Cock)"
-msgstr "<sup>HVĚZDA</sup><i>TARLUGALLU</i> (Cock)"
+msgstr "<sup>HVĚZDA</sup><i>TARLUGALLU</i> (Kohout)"
 
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:334
 msgid "<sup>STAR</sup>GAG.SI.S&Aacute;(Arrow)"
-msgstr "<sup>HVĚZDA</sup>GAG.SI.S&Aacute;(Arrow)"
+msgstr "<sup>HVĚZDA</sup>GAG.SI.S&Aacute; (Šíp)"
 
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:335
@@ -4273,8 +4279,7 @@ msgid ""
 "<i>&Scaron;ilt&#257;&#7723;u</i> (Arrow), great hero (of) "
 "<sup>GOD</sup>Ninurta"
 msgstr ""
-"<i>&Scaron;ilt&#257;&#7723;u</i> (Arrow), great hero (of) "
-"<sup>BŮH</sup>Ninurta"
+"<i>&Scaron;ilt&#257;&#7723;u</i> (Šíp), velký hrdina <sup>BOHA</sup>Ninurta"
 
 #. type: Content of: <p><table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:336
@@ -4285,53 +4290,53 @@ msgstr "Sirius +"
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:340
 msgid "<sup>STAR</sup><i>QA&Scaron;TU</i>(Bow)"
-msgstr "<sup>HVĚZDA</sup><i>QA&Scaron;TU</i>(Bow)"
+msgstr "<sup>HVĚZDA</sup><i>QA&Scaron;TU</i>(Luk)"
 
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:341
 msgid "<sup>GOD</sup>I&scaron;tar-of-Elam, daughter of <sup>GOD</sup>Enlil"
-msgstr "<sup>BŮH</sup>I&scaron;tar-of-Elam, daughter of <sup>BŮH</sup>Enlil"
+msgstr "<sup>BŮH</sup>I&scaron;tar-of-Elam, dcera <sup>BOHA</sup>Enlil"
 
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:346
 msgid "STAR (of) <sup>GOD</sup>NIRA&#7722;(Snake-god)"
-msgstr "HVĚZDA (of) <sup>BŮH</sup>NIRA&#7722;(Snake-god)"
+msgstr "HVĚZDA <sup>BOHA</sup>NIRA&#7722; (Had-bůh)"
 
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:347
 msgid "<sup>GOD</sup>Ningi&scaron;zida, lord of the 'Earth' (= netherworld)"
-msgstr "<sup>BŮH</sup>Ningi&scaron;zida, lord of the 'Earth' (= netherworld)"
+msgstr "<sup>BŮH</sup>Ningi&scaron;zida, pán 'Země' (= podsvětí)"
 
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:352
 msgid "<sup>STAR</sup><i>&#256;RIBU</i>(Raven)"
-msgstr "<sup>HVĚZDA</sup><i>&#256;RIBU</i>(Raven)"
+msgstr "<sup>HVĚZDA</sup><i>&#256;RIBU</i>(Havran)"
 
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:353
 msgid "Raven, STAR of <sup>GOD</sup>Adad"
-msgstr "Raven, HVĚZDA of <sup>BŮH</sup>Adad"
+msgstr "Havran, HVĚZDA <sup>BOHA</sup>Adad"
 
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:358
 msgid "<sup>STAR</sup><i>&Scaron;ER&#702;U</i>(Furrow)"
-msgstr "<sup>HVĚZDA</sup><i>&Scaron;ER&#702;U</i>(Furrow)"
+msgstr "<sup>HVĚZDA</sup><i>&Scaron;ER&#702;U</i>(Brázda)"
 
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:359
 msgid "<sup>GOD</sup>&Scaron;ala, ear of grain"
-msgstr "<sup>BŮH</sup>&Scaron;ala, ear of grain"
+msgstr "<sup>BŮH</sup>&Scaron;ala, klas obilí"
 
 #. type: Content of: <p><table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:364
 #: ../../skycultures/babylonian_seleucid/description.en.utf8:319
 msgid "<sup>STAR</sup><i>ZIB&#256;N&#298;TU</i>(Scales)"
-msgstr "<sup>HVĚZDA</sup><i>ZIB&#256;N&#298;TU</i>(Scales)"
+msgstr "<sup>HVĚZDA</sup><i>ZIB&#256;N&#298;TU</i>(Váhy)"
 
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:365
 msgid "Horns of <sup>STAR</sup><i>ZUQAQ&#298;PU</i>(Scorpion)"
-msgstr "Horns of <sup>HVĚZDA</sup><i>ZUQAQ&#298;PU</i>(Scorpion)"
+msgstr "Rohy <sup>HVĚZDY</sup><i>ZUQAQ&#298;PU</i>(Štír)"
 
 #. type: Content of: <p><table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:366
@@ -4343,7 +4348,7 @@ msgstr "přibližně Lib"
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:370
 #: ../../skycultures/babylonian_seleucid/description.en.utf8:326
 msgid "STAR (of) <sup>GOD</sup>Zababa"
-msgstr "HVĚZDA (of) <sup>BŮH</sup>Zababa"
+msgstr "HVĚZDA <sup>BOHA</sup>Zababa"
 
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:371
@@ -4351,8 +4356,8 @@ msgid ""
 "<sup>STAR</sup><i>ER&Ucirc;</i>(Eagle) and "
 "<sup>STAR</sup><i>PAGRU</i>(Corpse)"
 msgstr ""
-"<sup>HVĚZDA</sup><i>ER&Ucirc;</i>(Eagle) and "
-"<sup>HVĚZDA</sup><i>PAGRU</i>(Corpse)"
+"<sup>HVĚZDA</sup><i>ER&Ucirc;</i>(Orel) a "
+"<sup>HVĚZDA</sup><i>PAGRU</i>(Mrtvola)"
 
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:376
@@ -4360,8 +4365,7 @@ msgid ""
 "<sup>STAR</sup><i>DILPAT</i>(Venus), it changes its place and crosses the "
 "sky"
 msgstr ""
-"<sup>HVĚZDA</sup><i>DILPAT</i>(Venus), it changes its place and crosses the "
-"sky"
+"<sup>HVĚZDA</sup><i>DILPAT</i>(Venuše), mění své místo a křižuje oblohu"
 
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:381
@@ -4369,8 +4373,8 @@ msgid ""
 "<sup>STAR</sup><i>&#7778;ALBAT&#256;NU</i>(Mars), it changes its place and "
 "crosses the sky"
 msgstr ""
-"<sup>HVĚZDA</sup><i>&#7778;ALBAT&#256;NU</i>(Mars), it changes its place and"
-" crosses the sky"
+"<sup>HVĚZDA</sup><i>&#7778;ALBAT&#256;NU</i>(Mars), mění své místo a křižuje"
+" oblohu"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:382
@@ -4385,8 +4389,8 @@ msgid ""
 "<sup>STAR</sup>STEADY&middot;&quot;WILD&middot;SHEEP&quot;(<i>KAJJAM&#256;NU</i>,"
 " Saturn), it changes its place and crosses the sky"
 msgstr ""
-"<sup>HVĚZDA</sup>STEADY&middot;&quot;WILD&middot;SHEEP&quot;(<i>KAJJAM&#256;NU</i>,"
-" Saturn), it changes its place and crosses the sky"
+"<sup>HVĚZDA</sup>STÁLE&middot;&quot;DIVOKÁ&middot;OVCE&quot; "
+"(<i>KAJJAM&#256;NU</i>, Saturn), mění své místo a křižuje oblohu"
 
 #. type: Content of: <p><table><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:387
@@ -4402,10 +4406,10 @@ msgid ""
 " West, where ever in the month it appears, where ever in the month it "
 "disappears"
 msgstr ""
-"<sup>HVĚZDA</sup>DANCING&middot;&quot;WILD&middot;SHEEP&quot;(<i>&Scaron;I&#7722;&#7788;U</i>,"
-" Mercury), whose name is <sup>BŮH</sup>Ninurta, either in the East or in the"
-" West, where ever in the month it appears, where ever in the month it "
-"disappears"
+"<sup>HVĚZDA</sup>TANČÍCÍ&middot;&quot;DIVOKÁ&middot;OVCE&quot; "
+"(<i>&Scaron;I&#7722;&#7788;U</i>, Merkur), jejíž jméno je "
+"<sup>BŮH</sup>Ninurta, buď na východě, nebo na západě, kdekoli v měsíci se "
+"objeví, kdekoli v měsíci zmizí"
 
 #. type: Content of: <p><table><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:393
@@ -4416,7 +4420,7 @@ msgstr "Merkur"
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:397
 msgid "23 STAR<sup>s</sup> of Anum"
-msgstr "23 HVĚZDA<sup>s</sup> of Anum"
+msgstr "23 HVĚZD Anum"
 
 #. type: Content of: <p>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:402
@@ -4431,26 +4435,32 @@ msgid ""
 "\"Eagle with Antinuos\" but it can also be independent - that is why, we "
 "give \"Aql+\".</i>"
 msgstr ""
+"<b>Poznámka 3:</b> <i>Znaménkem „+“ ve sloupci moderního protějšku "
+"naznačujeme, že (pravděpodobně/možná) tomuto babylonskému asterismu náleží "
+"více hvězd. Například v případě Šípu je jisté, že Sirius do tohoto souhvězdí"
+" patří, ale moderní autoři zveřejnili minimálně tři verze, ke kterým je "
+"třeba přidat další hvězdy. Dalším případem je Orel vedle jiného souhvězdí "
+"jménem \"Mrtvola\". To by mohlo být předchůdcem nově přidaného Ptolemaiova "
+"dvojitého souhvězdí \"Orel s Antinoem\", ale může být také nezávislé - proto"
+" dáváme \"Aql+\".</i>"
 
 #. type: Content of: <p><table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:414
 #: ../../skycultures/babylonian_seleucid/description.en.utf8:355
 msgid "<sup>STAR</sup><i>N&#362;NU</i>(Fish)"
-msgstr "<sup>HVĚZDA</sup><i>N&#362;NU</i>(Fish)"
+msgstr "<sup>HVĚZDA</sup><i>N&#362;NU</i>(Ryba)"
 
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:415
 msgid ""
 "<sup>GOD</sup>Ea who goes in front of the STAR<sup>s</sup> of "
 "<sup>GOD</sup>Ea"
-msgstr ""
-"<sup>BŮH</sup>Ea who goes in front of the HVĚZDA<sup>s</sup> of "
-"<sup>BŮH</sup>Ea"
+msgstr "<sup>BŮH</sup>Ea, který chodí před HVĚZDAMI <sup>BOHA</sup>Ea"
 
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:420
 msgid "GREAT&middot;STAR"
-msgstr "GREAT&middot;HVĚZDA"
+msgstr "VELKÁ&middot;HVĚZDA"
 
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:421
@@ -4462,18 +4472,18 @@ msgstr "<sup>BŮH</sup>Ea"
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:426
 #: ../../skycultures/babylonian_seleucid/description.en.utf8:370
 msgid "STAR of (the city of) Eridu"
-msgstr "HVĚZDA of (the city of) Eridu"
+msgstr "HVĚZDA (města) Eridu"
 
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:432
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:444
 msgid "STAR to its right"
-msgstr "HVĚZDA to its right"
+msgstr "HVĚZDA napravo od něj"
 
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:433
 msgid "STAR (of) <sup>&lt;GOD&gt;</sup>Ninma&#7723;"
-msgstr "HVĚZDA (of) <sup>&lt;BŮH&gt;</sup>Ninma&#7723;"
+msgstr "HVĚZDA <sup>&lt;BOHA&gt;</sup>Ninma&#7723;"
 
 #. type: Content of: <p><table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:438
@@ -4493,9 +4503,9 @@ msgid ""
 "<sup>GOD</sup>M&#257;r-b&#299;ti, in the centre of which the Aps&ucirc; is "
 "visible"
 msgstr ""
-"<sup>HVĚZDA</sup><i>MA&Scaron;KAK&#256;TU</i>(Harrow), weapon of "
-"<sup>BŮH</sup>M&#257;r-b&#299;ti, in the centre of which the Aps&ucirc; is "
-"visible"
+"<sup>HVĚZDA</sup><i>MA&Scaron;KAK&#256;TU</i>(Brány, zemědělský nástroj), "
+"zbraň <sup>BOHA</sup>M&#257;r-b&#299;ti, v jejímž středu je vidět Aps&ucirc;"
+" "
 
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:451
@@ -4503,25 +4513,25 @@ msgid ""
 "<sup>GOD</sup>&Scaron;ullat and <sup>GOD</sup>&#7722;ani&scaron;, "
 "<sup>GOD</sup>&Scaron;ama&scaron; and <sup>GOD</sup>Adad"
 msgstr ""
-"<sup>BŮH</sup>&Scaron;ullat and <sup>BŮH</sup>&#7722;ani&scaron;, "
-"<sup>BŮH</sup>&Scaron;ama&scaron; and <sup>BŮH</sup>Adad"
+"<sup>BŮH</sup>&Scaron;ullat a <sup>BŮH</sup>&#7722;ani&scaron;, "
+"<sup>BŮH</sup>&Scaron;ama&scaron; a <sup>BŮH</sup>Adad"
 
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:456
 msgid ""
 "STAR behind it which lights up like <sup>GOD</sup>Ea (and) sets like Ea"
 msgstr ""
-"HVĚZDA behind it which lights up like <sup>BŮH</sup>Ea (and) sets like Ea"
+"HVĚZDA za ní, která se rozsvítí jako <sup>BŮH</sup>Ea (a) zapadá jako Ea"
 
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:457
 msgid "STAR (of) <sup>GOD</sup>Numu&scaron;da, <sup>GOD</sup>Adad"
-msgstr "HVĚZDA (of) <sup>BŮH</sup>Numu&scaron;da, <sup>BŮH</sup>Adad"
+msgstr "HVĚZDA <sup>BOHA</sup>Numu&scaron;da, <sup>BŮH</sup>Adad"
 
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:462
 msgid "STAR to the left of <sup>STAR</sup><i>ZUQAQ&#298;PU</i>(Scorpion)"
-msgstr "HVĚZDA to the left of <sup>HVĚZDA</sup><i>ZUQAQ&#298;PU</i>(Scorpion)"
+msgstr "HVĚZDA nalevo od <sup>HVĚZDY</sup><i>ZUQAQ&#298;PU</i>(Štír)"
 
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:463
@@ -4537,7 +4547,7 @@ msgstr "<sup>HVĚZDA</sup><i>ZUQAQ&#298;PU</i>"
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:469
 msgid "<sup>GOD</sup>I&scaron;&#7723;ara, lady of the inhabited world"
-msgstr "<sup>BŮH</sup>I&scaron;&#7723;ara, lady of the inhabited world"
+msgstr "<sup>BŮH</sup>I&scaron;&#7723;ara, dáma obydleného světa"
 
 #. type: Content of: <p><table><tbody><tr><td><i>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:474
@@ -4548,7 +4558,7 @@ msgstr "<sup>HVĚZDA</sup><i>IRAT&middot;ZUQAQ&#298;PI"
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:474
 msgid "</i>(Breast of the Scorpion)"
-msgstr ""
+msgstr "</i>(Prsa Štíra)"
 
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:475
@@ -4568,18 +4578,17 @@ msgid ""
 "2 STAR<sup>s</sup> on the sting (<i>ZIQTU</i>) of "
 "<sup>STAR</sup><i>ZUQAQ&#298;PU</i>"
 msgstr ""
-"2 HVĚZDA<sup>s</sup> on the sting (<i>ZIQTU</i>) of "
-"<sup>HVĚZDA</sup><i>ZUQAQ&#298;PU</i>"
+"2 HVĚZDY na ostnu (<i>ZIQTU</i>) <sup>HVĚZDY</sup><i>ZUQAQ&#298;PU</i>"
 
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:481
 msgid "<sup>GOD</sup>&Scaron;arur and <sup>GOD</sup>&Scaron;argaz"
-msgstr "<sup>BŮH</sup>&Scaron;arur and <sup>BŮH</sup>&Scaron;argaz"
+msgstr "<sup>BŮH</sup>&Scaron;arur a <sup>BŮH</sup>&Scaron;argaz"
 
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:486
 msgid "STAR behind them"
-msgstr "HVĚZDA behind them"
+msgstr "HVĚZDA za nimi"
 
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:487
@@ -4589,17 +4598,17 @@ msgstr "<sup>BŮH</sup>Pabilsa&#285;"
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:492
 msgid "<sup>STAR</sup><i>MAKURRU</i>(Bark) &lt;&lt;and&gt;&gt;"
-msgstr "<sup>HVĚZDA</sup><i>MAKURRU</i>(Bark) &lt;&lt;and&gt;&gt;"
+msgstr "<sup>HVĚZDA</sup><i>MAKURRU</i>(Kůra) &lt;&lt;a&gt;&gt;"
 
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:493
 msgid "<sup>STAR</sup><i>SU&#7722;URM&#256;&Scaron;U</i>(Goat-fish)"
-msgstr "<sup>HVĚZDA</sup><i>SU&#7722;URM&#256;&Scaron;U</i>(Goat-fish)"
+msgstr "<sup>HVĚZDA</sup><i>SU&#7722;URM&#256;&Scaron;U</i>(Kozo-ryba)"
 
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:498
 msgid "15 STAR<sup>s</sup> of <sup>GOD</sup>Ea"
-msgstr "15 HVĚZDA<sup>s</sup> of <sup>BŮH</sup>Ea"
+msgstr "15 HVĚZD <sup>BOHA</sup>Ea"
 
 #. type: Content of: <h2>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:503
@@ -4626,6 +4635,20 @@ msgid ""
 "together with M. Krebernik for the proceedings of the Rencontre "
 "Assyriologique Internationale 2018). See chapter \"Further Reading\" below."
 msgstr ""
+"Kresby postaviček jsou interpretace Susanne M. Hoffmann na základě několika "
+"let jejího doktorandského a postdoktorského výzkumu. V některých případech "
+"se odchylují od běžných identifikací kopírovaných Pingreem, Hungerem a "
+"dalšími učenci od roku 1950 nebo dříve. Nové Hungerovo vydání MUL.APIN "
+"(2018) umožnilo nový pohled. Některé obrázky byly odvozeny v Hoffmannově "
+"disertační práci (v kapitolách o babylonských kořenech řecké kultury: "
+"Hipparchs Himmelsglobus, Springer, 2017) a některé další byly vyvinuty během"
+" jejího působení ve funkci ředitelky planetária Königsleiten spolu s "
+"dalšími, především německými planetárii. První vědecký článek o vizualizaci "
+"dvou verzí babylonského zvěrokruhu vyšel v Wolfschmidt, Gudrun [ed.]: "
+"Popularisierung der Astronomie, Nuncius Hamburgensis, Hamburg, 2017. Další "
+"publikace se připravují (např. společně s M. Krebernikem do sborníku "
+"Rencontre Assyriologique Internationale 2018). Viz kapitola „Další čtení“ "
+"níže."
 
 #. type: Content of: <h2>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:513
@@ -4639,6 +4662,9 @@ msgid ""
 "href=\"https://www.britishmuseum.org/collection/image/152339001\">Image "
 "Tablet No 152339001</a>"
 msgstr ""
+"Britské muzeum <a "
+"href=\"https://www.britishmuseum.org/collection/image/152339001\">Image "
+"Tablet No 152339001</a>"
 
 #. type: Attribute 'lang' of: <ul><li>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:516
@@ -4656,6 +4682,8 @@ msgid ""
 "Hermann Hunger and John Steele, The Babylonian astronomical compendium "
 "MUL.APIN, Routledge, London/New York 2018."
 msgstr ""
+"Hermann Hunger a John Steele: The Babylonian astronomical compendium "
+"MUL.APIN, Routledge, London/New York 2018."
 
 #. type: Content of: <ul><li>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:517
@@ -4664,6 +4692,9 @@ msgid ""
 "href=\"https://www.springer.com/de/book/9783658186821\">Hipparchs "
 "Himmelsglobus</a>, Springer, Wiesbaden, New York, 2017."
 msgstr ""
+"Susanne M. Hoffmann: <a "
+"href=\"https://www.springer.com/de/book/9783658186821\">Hipparchs "
+"Himmelsglobus</a>, Springer, Wiesbaden, New York, 2017."
 
 #. type: Content of: <ul><li>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:518
@@ -4676,6 +4707,13 @@ msgid ""
 "bochum-2016-hardcover-91756/\">Popularisierung der Astronomie</a>, Nuncius "
 "Hamburgensis, Bd. 41, Hamburg, 2017."
 msgstr ""
+"Susanne M. Hoffmann: <em>History of Constellations as popularization of "
+"uranometry</em> v: Wolfschmidt, Gudrun [ed.]: <a "
+"href=\"https://tredition.de/autoren/gudrun-wolfschmidt-1029/popularisierung-"
+"der-astronomie-proceedings-der-tagung-des-arbeitskreises-"
+"astronomiegeschichte-in-der-astronomischen-gesellschaft-in-"
+"bochum-2016-hardcover-91756/\">Popularisierung der Astronomie</a>, Nuncius "
+"Hamburgensis, Bd. 41, Hamburg, 2017."
 
 #. type: Content of: <ul><li>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:519
@@ -4684,12 +4722,15 @@ msgid ""
 "celestial positioning system?</em> in: Proceedings of the Rencontre "
 "Assyriologique Internationale 2018 (In preparation)."
 msgstr ""
+"Susanne M. Hoffmann and M. Krebernik: <em>What do deities tell us about the "
+"celestial positioning system?</em> v: Proceedings of the Rencontre "
+"Assyriologique Internationale 2018 (v přípravě)."
 
 #. type: Content of: <h2>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:522
 #: ../../skycultures/egyptian_dendera/description.en.utf8:222
 #: ../../skycultures/greek_almagest/description.en.utf8:489
-#: ../../skycultures/greek_dante/description.en.utf8:11
+#: ../../skycultures/greek_dante/description.en.utf8:22
 #: ../../skycultures/greek_farnese/description.en.utf8:294
 #: ../../skycultures/greek_leidenAratea/description.en.utf8:288
 msgid "Fair Use"
@@ -4702,6 +4743,9 @@ msgid ""
 " We provide this for free but authors of contributions certainly deserve to "
 "be cited according to the common rules. Thank you!"
 msgstr ""
+"Tato nebeská kultura pochází z mnoha let výzkumu několika vědců. Poskytujeme"
+" zdarma, ale její autoři si určitě zaslouží být citováni podle obvyklých "
+"pravidel. Děkujeme!"
 
 #. type: Content of: <p>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:526
@@ -4711,16 +4755,20 @@ msgid ""
 "astronomer she thanks for the help of several philologists and the some very"
 " enthusiastic planetarium managers for some developments in their domes."
 msgstr ""
+"Umístění babylonských termínů na obloze a nakreslení postaviček pro "
+"Stellarium provedla Susanne M. Hoffmannová. Jako astronomka děkuje za pomoc "
+"několika filologům a některým velmi nadšeným manažerům planetárií za "
+"umožnění vývoje v jejich planetáriích."
 
 #. type: Content of: <p><ul><li>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:529
 msgid "Prof. i.R. Dr. Hermann Hunger (Assyriology, Vienna)"
-msgstr ""
+msgstr "Prof. i.R. Dr. Hermann Hunger (Asyriologie, Vídeň)"
 
 #. type: Content of: <p><ul><li>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:530
 msgid "Prof. Dr. Manfred Krebernik (Assyriology, Jena)"
-msgstr ""
+msgstr "Prof. Dr. Manfred Krebernik (Asyriologie, Jena)"
 
 #. type: Content of: <p><ul><li>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:531
@@ -4729,17 +4777,19 @@ msgid ""
 "Dr. Björn Voss (Manager of LWL Planetarium Münster and head of Society of "
 "German-speaking Planetariums)"
 msgstr ""
+"Dr. Björn Voss (Manažer LWL Planetaria v Münsteru a ředitel Společnosti "
+"německy mluvících planetárií)"
 
 #. type: Content of: <p><ul><li>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:532
 msgid "Dr. Monika Staesche (Manager of Planetarium am Insulaner, Berlin)"
-msgstr ""
+msgstr "Dr. Monika Staesche (Manažer Planetarium am Insulaner, Berlín)"
 
 #. type: Content of: <p><ul><li>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:533
 #: ../../skycultures/babylonian_seleucid/description.en.utf8:469
 msgid "Stefan Harnisch (Manager of Planetarium Jena)"
-msgstr ""
+msgstr "Stefan Harnisch (Manažer Planetaria v Jeně)"
 
 #. type: Content of: <p>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:538
@@ -4747,12 +4797,14 @@ msgid ""
 "The Babylonian star names and constellation lines were compiled and added to"
 " Stellarium:"
 msgstr ""
+"Babylonská jména hvězd a spojnice souhvězdí sestavili a přidali do "
+"Stellaria:"
 
 #. type: Content of: <p>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:539
 #: ../../skycultures/egyptian_dendera/description.en.utf8:227
 msgid "<em>Susanne M. Hoffmann: service@uhura-uraniae.com </em>"
-msgstr ""
+msgstr "<em>Susanne M. Hoffmann: service@uhura-uraniae.com </em>"
 
 #. type: Content of: <p>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:540
@@ -4760,11 +4812,13 @@ msgid ""
 "Paintings by: <em>Jessica Gullberg </em> (consulted by Steven Gullberg and "
 "Susanne M Hoffmann)"
 msgstr ""
+"Obrazy od: <em>Jessica Gullberg </em> (konzultováno se Stevenem Gullbergem a"
+" Susanne M. Hoffmann)"
 
 #. type: Content of: <h5>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:541
 #: ../../skycultures/egyptian_dendera/description.en.utf8:228
-#: ../../skycultures/greek_dante/description.en.utf8:20
+#: ../../skycultures/greek_dante/description.en.utf8:31
 #: ../../skycultures/greek_farnese/description.en.utf8:300
 #: ../../skycultures/greek_leidenAratea/description.en.utf8:294
 msgid "written in English:"
@@ -4773,9 +4827,9 @@ msgstr "v angličtině napsala:"
 #. type: Content of: <h5>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:541
 #: ../../skycultures/egyptian_dendera/description.en.utf8:228
-#: ../../skycultures/greek_dante/description.en.utf8:20
+#: ../../skycultures/greek_dante/description.en.utf8:31
 msgid "SMH"
-msgstr "Susanne M Hoffmann"
+msgstr "Susanne M. Hoffmann"
 
 #. type: Content of: <h1>
 #: ../../skycultures/babylonian_seleucid/description.en.utf8:1
@@ -4866,7 +4920,7 @@ msgstr "asterismus"
 #: ../../skycultures/babylonian_seleucid/description.en.utf8:211
 #: ../../skycultures/babylonian_seleucid/description.en.utf8:349
 msgid "our commentary"
-msgstr ""
+msgstr "náš komentář"
 
 #. type: Content of: <p><table><tbody><tr><td>
 #: ../../skycultures/babylonian_seleucid/description.en.utf8:35
@@ -5118,7 +5172,7 @@ msgstr ""
 #. type: Content of: <p><table><tbody><tr><td>
 #: ../../skycultures/babylonian_seleucid/description.en.utf8:258
 msgid "and Hyades"
-msgstr ""
+msgstr "a Hyády"
 
 #. type: Content of: <p><table><tbody><tr><td>
 #: ../../skycultures/babylonian_seleucid/description.en.utf8:277
@@ -9614,8 +9668,8 @@ msgid ""
 "common today) and we made use of computer readable tables prepared by Ernie "
 "Wright."
 msgstr ""
-"Tato starověká řecká kultura nebe je shrnuta v knize, která je dnes známá "
-"pod svým arabským názvem „Almagest“. Tato kniha byla napsána v římských "
+"Tato starověká řecká nebeská kultura je shrnuta v knize, která je dnes známá"
+" pod svým arabským názvem „Almagest“. Tato kniha byla napsána v římských "
 "dobách (za vlády římského císaře Hadriána) v Alexandrii (Afrika) v řeckém "
 "jazyce, s daty uvedenými v egyptských názvech měsíců a roky počítanými po "
 "babylonském králi, takže jde jednoznačně o multikulturní kompendium vědění. "
@@ -9626,7 +9680,7 @@ msgstr ""
 "následujících 1500 let. Původně byl napsán ve staré řečtině pod názvem "
 "<i>Mathematike Syntaxis</i>.  Název <i>Almagest</i>, což znamená "
 "&ldquo;Největší [kniha]&rdquo;, pochází z arabských překladů. K vytvoření "
-"této kultury oblohy jsme použili anglický překlad od Toomera (1984), v "
+"této nebeské kultury jsme použili anglický překlad od Toomera (1984), v "
 "některých detailech jej přepracovali (např. pomocí doslovnějších překladů z "
 "řečtiny místo latinských termínů, které jsou dnes běžné) a použili jsme "
 "počítačem zpracované tabulky připravené Erniem Wrightem."
@@ -10463,7 +10517,7 @@ msgid ""
 "this for free but authors of contributions certainly deserve to be cited "
 "according to the common rules. Thank you!"
 msgstr ""
-"Tato kultura oblohy pochází z ročního studentského výzkumu. Poskytujeme ji "
+"Tato nebeská kultura pochází z ročního studentského výzkumu. Poskytujeme ji "
 "zdarma, ale autoři si určitě zaslouží být citováni podle obvyklých pravidel."
 " Děkujeme!"
 
@@ -10488,7 +10542,7 @@ msgid ""
 "Jabschinski, Marie von Seggern and Susanne M. Hoffmann: service@uhura-"
 "uraniae.com"
 msgstr ""
-"Tuto kulturu oblohy sestavily a přidaly do Stellaria Alina Schmidt, Lea "
+"Tuto nebeskou kulturu sestavily a přidaly do Stellaria Alina Schmidt, Lea "
 "Jabschinski, Marie von Seggern a Susanne M. Hoffmann: service@uhura-"
 "uraniae.com"
 
@@ -10506,82 +10560,56 @@ msgstr "Dantova Božská komedie"
 #: ../../skycultures/greek_dante/description.en.utf8:2
 msgid ""
 "Dante Alighieri mentions several stars and a few constellations: "
-"predominantly, the zodiacal constellation of Gemini. The Twins occurs in his"
-" texts (in the comedia as well as his poems). As Dante is not an astronomer "
-"but a person with broad knowledge, his view of the constellations is highly "
-"like not based upon observations of the sky but on manuscripts that he read."
-" Therefore, we chose to take the zodiacal constellation images from Michael "
-"Scotus whose manuscript was very popular in Dante's time."
+"predominantly, the zodiacal constellation of Gemini.  The Twins occurs in "
+"his texts (in the comedia as well as his poems).  As Dante is not an "
+"astronomer but a person with broad knowledge, his view of the constellations"
+" is highly like not based upon observations of the sky but on manuscripts "
+"that he read. Therefore, we chose to take the zodiacal constellation images "
+"from Michael Scotus whose manuscript was very popular in Dante's time."
 msgstr ""
-"Dante Alighieri zmiňuje několik hvězd a několik souhvězdí: převážně "
-"zvířetníkové souhvězdí Blíženců. Dvojčata se vyskytují v jeho textech (v "
-"komediích i básních). Vzhledem k tomu, že Dante není astronom, ale člověk s "
-"širokými znalostmi, jeho pohled na souhvězdí je velmi podobný tomu, jako by "
-"nebyl založen na sledování oblohy, ale na rukopisech, které četl. Proto jsme"
-" se rozhodli vzít obrázky souhvězdí zvěrokruhu od Michaela Scota, jehož "
-"rukopis byl v Dantově době velmi populární."
 
 #. type: Content of: <p>
-#: ../../skycultures/greek_dante/description.en.utf8:3
+#: ../../skycultures/greek_dante/description.en.utf8:6
 msgid ""
 "Dante Alighieri was a citizen of Florence, Italy, who was later banned and "
-"lived at several places in Northern Italy. The comedia was written around "
-"1300 but finished only short before his death in 1321. It is commonly "
+"lived at several places in Northern Italy.  The comedia was written around "
+"1300 but finished only short before his death in 1321.  It is commonly "
 "assumed that the story plays in around the Christian festival of Easter in "
 "1300 CE."
 msgstr ""
-"Dante Alighieri byl občanem itelské Florencie, který byl později zakázán a "
-"žil na několika místech v severní Itálii. Komedie byla napsána kolem roku "
-"1300, ale dokončena byla až krátce před jeho smrtí v roce 1321. Vesměs se "
-"předpokládá, že příběh se odehrává kolem křesťanského svátku Velikonoc v "
-"roce 1300 n.l."
 
 #. type: Content of: <h2>
-#: ../../skycultures/greek_dante/description.en.utf8:5
+#: ../../skycultures/greek_dante/description.en.utf8:10
 #: ../../skycultures/greek_leidenAratea/description.en.utf8:8
 msgid "How this Sky Culture was made"
 msgstr "Jak vznikla tato nebeská kultura"
 
 #. type: Content of: <p>
-#: ../../skycultures/greek_dante/description.en.utf8:6
+#: ../../skycultures/greek_dante/description.en.utf8:11
 msgid ""
-"The Dante-experts of the German Dante Society selected some text passages "
+"The Dante experts of the German Dante Society selected some text passages "
 "with astronomical references in order to present them at Planetarium Jena in"
-" the dome. Professor Blume'ODs suggestion that Dante likely had Michael "
-"Scotus's drawings of the constellations in mind was accepted. Therefore, we "
-"copied these drawings and mapped them onto the stars. The \"16\" bright "
+" the dome.  Professor Blume's suggestion that Dante likely had Michael "
+"Scotus's drawings of the constellations in mind was accepted.  Therefore, we"
+" copied these drawings and mapped them onto the stars.  The \"16\" bright "
 "stars that are mentioned by Dante are usually interpreted by romanists as "
-"the stars of first magnitude in the Almagest. Therefore, these stars where "
+"the stars of first magnitude in the Almagest.  Therefore, these stars where "
 "highlighted with the \"star\"-symbol in Stellarium. Additionally, we painted"
 " a chariot (wagon) and a horn."
 msgstr ""
-"Experti na dílo Danteho z Německé Danteho společnosti vybrali některé "
-"textové pasáže s astronomickými odkazy, aby je mohli prezentovat v kopuli "
-"planetária v Jeně. Návrh profesora Blumeho, že Dante měl pravděpodobně na "
-"mysli kresby souhvězdí od Michaela Scota, byl přijat. Proto jsme tyto kresby"
-" zkopírovali a namapovali na hvězdy. „16“ jasných hvězd, které zmiňuje "
-"Dante, jsou obvykle interpretovány romanisty jako hvězdy první velikosti v "
-"Almagestu. Proto jsou tyto hvězdy ve Stellariu zvýrazněny symbolem "
-"\"hvězdy\". Dodatečně jsme namalovali chariot (válečný dvoukolový vůz) a "
-"roh."
 
 #. type: Content of: <p>
-#: ../../skycultures/greek_dante/description.en.utf8:7
+#: ../../skycultures/greek_dante/description.en.utf8:16
 msgid ""
 "Dante calls the seven bright stars of Ursa Major \"The Chariot\", the "
 "constellation of Ursa Minor \"The Horn\", and possibly refers to Corona "
-"Borealis when he mentions a ring of stars. The latter interpretation is in "
+"Borealis when he mentions a ring of stars.  The latter interpretation is in "
 "our view unlikely but is discussed among researchers which is why we marked "
 "the stars of Corona Borealis as it is described in the Almagest."
 msgstr ""
-"Dante nazývá sedm jasných hvězd Velké medvědice „Vůz“, souhvězdí Malého "
-"medvěda „Roh“ a možná odkazuje na Severní korunu, když zmiňuje prstenec "
-"hvězd. Druhá interpretace je podle našeho názoru nepravděpodobná, ale je "
-"mezi výzkumníky diskutována, a proto jsme označili hvězdy Severní koruny "
-"tak, jak jsou popsány v Almagestu."
 
 #. type: Content of: <p>
-#: ../../skycultures/greek_dante/description.en.utf8:10
+#: ../../skycultures/greek_dante/description.en.utf8:21
 msgid ""
 "The Italian Dante Society (Societá Dantesca Italiana) provides Dante's work "
 "online: <a href=\"https://danteonline.it/opere/index.php\">Dante_Online</a>."
@@ -10591,7 +10619,7 @@ msgstr ""
 "href=\"https://danteonline.it/opere/index.php\">Dante_Online</a>."
 
 #. type: Content of: <p>
-#: ../../skycultures/greek_dante/description.en.utf8:12
+#: ../../skycultures/greek_dante/description.en.utf8:23
 #: ../../skycultures/greek_farnese/description.en.utf8:295
 #: ../../skycultures/greek_leidenAratea/description.en.utf8:289
 msgid ""
@@ -10602,7 +10630,7 @@ msgstr ""
 "citováni podle obvyklých pravidel. Děkujeme!"
 
 #. type: Content of: <p>
-#: ../../skycultures/greek_dante/description.en.utf8:13
+#: ../../skycultures/greek_dante/description.en.utf8:24
 msgid ""
 "Susanne M Hoffmann, Dieter Blume, Karl Ph. Ellerbrock, Eduardo Castadura, "
 "Bodo Zöll (2022)"
@@ -10611,20 +10639,20 @@ msgstr ""
 "Bodo Zöll (2022)"
 
 #. type: Content of: <p>
-#: ../../skycultures/greek_dante/description.en.utf8:16
+#: ../../skycultures/greek_dante/description.en.utf8:27
 msgid ""
 "This sky culture was added to Stellarium by Susanne M. Hoffmann "
 "(service@uhura-uraniae.com) as a byproduct of a collaboration with Prof. Dr."
 " Dieter Blume (Art History, FSU Jena, Germany), The German Dante Society "
 "(Deutsche Dante Gesellschaft) and Planetarium Jena."
 msgstr ""
-"Tuto kulturu oblohy přidala do Stellaria Susanne M. Hoffmann (service@uhura-"
-"uraniae.com) jako vedlejší produkt spolupráce s Prof. Dr. Dieterem Blumem "
-"(Dějiny umění, FSU Jena, Německo), Německá Danteho společnost (Deutsche "
-"Dante Gesellschaft) a Planetárium Jena."
+"Tuto nebeskou kulturu přidala do Stellaria Susanne M. Hoffmann "
+"(service@uhura-uraniae.com) jako vedlejší produkt spolupráce s Prof. Dr. "
+"Dieterem Blumem (Dějiny umění, FSU Jena, Německo), Německá Danteho "
+"společnost (Deutsche Dante Gesellschaft) a Planetárium Jena."
 
 #. type: Content of: <p>
-#: ../../skycultures/greek_dante/description.en.utf8:19
+#: ../../skycultures/greek_dante/description.en.utf8:30
 msgid ""
 "region of origin: Florence, Italy; this single sky culture was made for use "
 "in research"
@@ -11462,9 +11490,9 @@ msgid ""
 "Prof. Dr. Dieter Blume (Art History, FSU Jena, Germany) for Planetarium "
 "Jena."
 msgstr ""
-"Tuto kulturu oblohy přidala do Stellarium Susanne M. Hoffmann "
-"(service@uhura-uraniae.com) a původně ji vytvořila ve spolupráci s prof. dr."
-" Dieterem Blumem (Institut für Kunstgeschichte und Fimwissenschaft, "
+"Tuto nebeskou kulturu přidala do Stellaria Susanne M. Hoffmann "
+"(service@uhura-uraniae.com). Původně ji vytvořila ve spolupráci s prof. dr. "
+"Dieterem Blumem (Institut für Kunstgeschichte und Fimwissenschaft, "
 "Friedrich-Schiller-Universität Jena, Německo) pro Planetárium v Jeně."
 
 #. type: Content of: <h5>
@@ -14873,7 +14901,7 @@ msgstr ""
 #: ../../skycultures/tongan/description.en.utf8:86
 msgid ""
 "This sky culture was contributed by Stellarium user <i>Dan Smale</i>, "
-"d.smale(at)niwa.co.nz"
+"smaledaniel(at)outlook.com"
 msgstr ""
 
 #. type: Content of: <h1>
