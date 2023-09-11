@@ -214,33 +214,23 @@ void MissingStar::draw(StelCore* core, StelPainter *painter)
 		return;
 
 	StelSkyDrawer* sd = core->getSkyDrawer();
-	const float mlimit = sd->getLimitMagnitude();
-	const bool mflag = sd->getFlagStarMagnitudeLimit();
+	const float mlimit = sd->getFlagStarMagnitudeLimit() ? sd->getCustomStarMagnitudeLimit() : sd->getLimitMagnitude();
 	const float mag = getVMagnitudeWithExtinction(core);
-	const float shift = 8.f;
-
-	bool visibleStar = (mag <= mlimit);
-	bool visibleHint = ((mag+5.f)<mlimit);
-	if (mflag)
-	{
-		// custom magnitude limit for stars
-		const double hmlimit = sd->getCustomStarMagnitudeLimit();
-		visibleStar = (mag <= hmlimit);
-		visibleHint = ((mag+5.f)<hmlimit);
-	}
+	const bool visibleStar = (mag <= mlimit);
+	const bool visibleHint = ((mag+5.f)<mlimit);
 	
 	if (visibleStar)
 	{
+		static const float shift = 8.f;
 		const Vec3f color = getInfoColor();
-		Vec3f vf(pos.toVec3f());
-		Vec3f altAz(vf);
+		Vec3d altAz(pos);
 		altAz.normalize();
 		core->j2000ToAltAzInPlaceNoRefraction(&altAz);
 		RCMag rcMag;
 		sd->computeRCMag(mag, &rcMag);
 		sd->preDrawPointSource(painter);
 		// allow height-dependent twinkle and suppress twinkling in higher altitudes. Keep 0.1 twinkle amount in zenith.
-		sd->drawPointSource(painter, vf.toVec3d(), rcMag, color, true, qMin(1.0f, 1.0f-0.9f*altAz[2]));
+		sd->drawPointSource(painter, pos, rcMag, color, true, qMin(1.0f, 1.0f-0.9f*altAz[2]));
 		sd->postDrawPointSource(painter);
 		painter->setColor(color, 1.f);
 		if (flagShowLabels && visibleHint)
@@ -256,8 +246,6 @@ Vec3d MissingStar::getJ2000EquatorialPos(const StelCore* core) const
 	const double cRA = RA + movementFactor*pmRA/::cos(DEC*M_180_PI);
 	const double cDE = DEC + movementFactor*pmDEC;
 	StelUtils::spheToRect(cRA, cDE, v);
-
-	//StelUtils::spheToRect(RA, DEC, v);
 
 	if ((core) && (core->getUseAberration()) && (core->getCurrentPlanet()))
 	{

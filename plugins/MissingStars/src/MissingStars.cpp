@@ -20,15 +20,12 @@
 #include "StelPainter.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
-#include "StelLocaleMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelObjectMgr.hpp"
 #include "StelTextureMgr.hpp"
 #include "StelJsonParser.hpp"
 #include "StelFileMgr.hpp"
-#include "StelUtils.hpp"
 #include "StelTranslator.hpp"
-#include "LabelMgr.hpp"
 #include "StarMgr.hpp"
 #include "MissingStar.hpp"
 #include "MissingStars.hpp"
@@ -163,8 +160,7 @@ void MissingStars::drawPointer(StelCore* core, StelPainter& painter)
 		if (!painter.getProjector()->project(pos, screenpos))
 			return;
 
-		const Vec3f& c(obj->getInfoColor());
-		painter.setColor(c[0],c[1],c[2]);
+		painter.setColor(obj->getInfoColor());
 		texPointer->bind();
 		painter.setBlending(true);
 		painter.drawSprite2dMode(static_cast<float>(screenpos[0]), static_cast<float>(screenpos[1]), 13.f, static_cast<float>(StelApp::getInstance().getTotalRunTime())*40.f);
@@ -204,7 +200,7 @@ StelObjectP MissingStars::searchByName(const QString& englishName) const
 			return qSharedPointerCast<StelObject>(msn);
 	}
 
-	return Q_NULLPTR;
+	return nullptr;
 }
 
 StelObjectP MissingStars::searchByNameI18n(const QString& nameI18n) const
@@ -215,7 +211,7 @@ StelObjectP MissingStars::searchByNameI18n(const QString& nameI18n) const
 			return qSharedPointerCast<StelObject>(msn);
 	}
 
-	return Q_NULLPTR;
+	return nullptr;
 }
 
 QStringList MissingStars::listAllObjects(bool inEnglish) const
@@ -270,10 +266,10 @@ void MissingStars::setMissingStarsMap(const QVariantMap& map)
 	designations.clear();
 	int mscount = 0;
 	QVariantMap msMap = map.value("catalog").toMap();
-	for (auto &msKey : msMap.keys())
+	for (auto &msEntry : msMap)
 	{
-		QVariantMap msData = msMap.value(msKey).toMap();
-		msData["designation"] = QString("%1").arg(msKey);
+		QVariantMap msData = msEntry.toMap();
+		msData["designation"] = msMap.key(msEntry);
 
 		MissingStarP ms(new MissingStar(msData));
 		if (ms->initialized)
@@ -283,7 +279,7 @@ void MissingStars::setMissingStarsMap(const QVariantMap& map)
 			mscount++;
 		}
 	}
-	qWarning().noquote() << "[MissingStars] Loaded" << mscount << "extra stars (missing in main catalogs)";
+	qInfo().noquote() << "[MissingStars] Loaded" << mscount << "extra stars (missing in main catalogs)";
 }
 
 MissingStarP MissingStars::getByID(const QString& id) const

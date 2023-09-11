@@ -32,7 +32,7 @@
 
 MissingStarsDialog::MissingStarsDialog()
 	: StelDialog("MissingStars")
-	, msm(Q_NULLPTR)
+	, msm(nullptr)
 {
 	ui = new Ui_missingStarsDialog;
 }
@@ -74,7 +74,7 @@ void MissingStarsDialog::createDialogContent()
 
 	// About tab
 	setAboutHtml();
-	if(gui!=Q_NULLPTR)
+	if(gui!=nullptr)
 		ui->aboutTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
 }
 
@@ -95,7 +95,7 @@ void MissingStarsDialog::setAboutHtml(void)
 	html += "</body></html>";
 
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-	if(gui!=Q_NULLPTR)
+	if(gui!=nullptr)
 	{
 		QString htmlStyleSheet(gui->getStelStyle().htmlStyleSheet);
 		ui->aboutTextBrowser->document()->setDefaultStyleSheet(htmlStyleSheet);

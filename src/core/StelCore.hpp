@@ -236,6 +236,7 @@ public:
 	Vec3d altAzToJ2000(const Vec3d& v, RefractionMode refMode=RefractionAuto) const;
 	Vec3d j2000ToAltAz(const Vec3d& v, RefractionMode refMode=RefractionAuto) const;
 	void j2000ToAltAzInPlaceNoRefraction(Vec3f* v) const {v->transfo4d(matJ2000ToAltAz);}
+	void j2000ToAltAzInPlaceNoRefraction(Vec3d* v) const {v->transfo4d(matJ2000ToAltAz);}
 	Vec3d galacticToJ2000(const Vec3d& v) const;
 	Vec3d supergalacticToJ2000(const Vec3d& v) const;
 	//! Transform position vector v from equatorial coordinates of date (which may also include atmospheric refraction) to those of J2000.

@@ -64,15 +64,15 @@ class MissingStars : public StelObjectModule
 	Q_OBJECT
 public:	
 	MissingStars();
-	virtual ~MissingStars() Q_DECL_OVERRIDE;
+	virtual ~MissingStars() override;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
-	virtual void init() Q_DECL_OVERRIDE;
-	virtual void deinit() Q_DECL_OVERRIDE;
-	virtual void draw(StelCore* core) Q_DECL_OVERRIDE;
+	void init() override;
+	void deinit() override;
+	void draw(StelCore* core) override;
 	virtual void drawPointer(StelCore* core, StelPainter& painter);
-	virtual double getCallOrder(StelModuleActionName actionName) const Q_DECL_OVERRIDE;
+	double getCallOrder(StelModuleActionName actionName) const override;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in StelObjectModule class
@@ -81,27 +81,27 @@ public:
 	//! @param limitFov the field of view around the position v in which to search for missing stars.
 	//! @param core the StelCore to use for computations.
 	//! @return a list containing the missing stars located inside the limitFov circle around position v.
-	virtual QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const Q_DECL_OVERRIDE;
+	QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const override;
 
-	//! Return the matching missing stars object's pointer if exists or Q_NULLPTR.
+	//! Return the matching missing stars object's pointer if exists or nullptr.
 	//! @param nameI18n The case in-sensitive localized star name
-	virtual StelObjectP searchByNameI18n(const QString& nameI18n) const Q_DECL_OVERRIDE;
+	StelObjectP searchByNameI18n(const QString& nameI18n) const override;
 
-	//! Return the matching missing star if exists or Q_NULLPTR.
+	//! Return the matching missing star if exists or nullptr.
 	//! @param name The case in-sensitive english star name
-	virtual StelObjectP searchByName(const QString& name) const Q_DECL_OVERRIDE;
+	StelObjectP searchByName(const QString& name) const override;
 
 	//! Return the matching missing star if exists, or an "empty" pointer.
 	//! @param id The missing star id
-	virtual StelObjectP searchByID(const QString &id) const Q_DECL_OVERRIDE
+	StelObjectP searchByID(const QString &id) const override
 	{
 		return qSharedPointerCast<StelObject>(getByID(id));
 	}
 
-	virtual QStringList listAllObjects(bool inEnglish) const Q_DECL_OVERRIDE;
+	QStringList listAllObjects(bool inEnglish) const override;
 
-	virtual QString getName() const Q_DECL_OVERRIDE { return "Missing Stars"; }
-	virtual QString getStelObjectType() const Q_DECL_OVERRIDE { return MissingStar::MISSINGSTAR_TYPE; }
+	QString getName() const override { return "Missing Stars"; }
+	QString getStelObjectType() const override { return MissingStar::MISSINGSTAR_TYPE; }
 
 	//! get a star object by identifier
 	MissingStarP getByID(const QString& id) const;
@@ -111,7 +111,7 @@ public:
 
 	//! Implement this to tell the main Stellarium GUI that there is a GUI element to configure this
 	//! plugin.
-	virtual bool configureGui(bool show=true) Q_DECL_OVERRIDE;
+	bool configureGui(bool show=true) override;
 
 public slots:
 	//! Connect this to StelApp font size.
@@ -156,9 +156,9 @@ class MissingStarsStelPluginInterface : public QObject, public StelPluginInterfa
 	Q_PLUGIN_METADATA(IID StelPluginInterface_iid)
 	Q_INTERFACES(StelPluginInterface)
 public:
-	virtual StelModule* getStelModule() const Q_DECL_OVERRIDE;
-	virtual StelPluginInfo getPluginInfo() const Q_DECL_OVERRIDE;
-	virtual QObjectList getExtensionList() const Q_DECL_OVERRIDE { return QObjectList(); }
+	virtual StelModule* getStelModule() const override;
+	virtual StelPluginInfo getPluginInfo() const override;
+	virtual QObjectList getExtensionList() const override { return QObjectList(); }
 };
 
 #endif /* MISSINGSTARS_HPP */
