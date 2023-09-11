@@ -126,7 +126,7 @@ void Comet::setAbsoluteMagnitudeAndSlope(const float magnitude, const float slop
 	if ((slope < -2.5f) || (slope > 25.0f))
 	{
 		// Slope G can become slightly smaller than 0. -10 is mark of invalidity.
-		qDebug() << "Warning: Suspect slope parameter value" << slope << "for comet" << englishName << "(rarely exceeding -1...20)";
+		qDebug() << "Warning: Suspect slope parameter value" << slope << "for comet" << getEnglishName() << "(rarely exceeding -1...20)";
 		return;
 	}
 	absoluteMagnitude = magnitude;
@@ -135,7 +135,12 @@ void Comet::setAbsoluteMagnitudeAndSlope(const float magnitude, const float slop
 
 void Comet::translateName(const StelTranslator &translator)
 {
-	nameI18 = translator.qtranslate(englishName, "comet");
+	static const QRegularExpression cometNamePattern("^(.+)[(](.+)[)]\\s*$");
+	QRegularExpressionMatch matchCometName = cometNamePattern.match(englishName);
+	if (matchCometName.hasMatch())
+		nameI18 = QString("%1(%2)").arg(matchCometName.captured(1),translator.qtranslate(matchCometName.captured(2), "comet"));
+	else
+		nameI18 = translator.qtranslate(englishName, "comet");
 }
 
 QString Comet::getInfoStringName(const StelCore *core, const InfoStringGroup& flags) const
@@ -147,19 +152,15 @@ QString Comet::getInfoStringName(const StelCore *core, const InfoStringGroup& fl
 	oss << "<h2>";
 	oss << getNameI18n(); // UI translation can differ from sky translation
 
-	QStringList designations;
-	if (!iauDesignation.isEmpty())
-		designations << iauDesignation;
 	if (!getExtraDesignations().isEmpty())
-		designations << extraDesignationsHtml;
-	if (!designations.isEmpty())
-		oss << QString(" (%1)").arg(designations.join(" - "));
+		oss << QString(" - %1").arg(extraDesignationsHtml.join(" - "));
 
-	oss.setRealNumberNotation(QTextStream::FixedNotation);
-	oss.setRealNumberPrecision(1);
 	if (sphereScale != 1.)
+	{
+		oss.setRealNumberNotation(QTextStream::FixedNotation);
+		oss.setRealNumberPrecision(1);
 		oss << QString::fromUtf8(" (\xC3\x97") << sphereScale << ")";
-
+	}
 	oss << "</h2>";
 
 	return str;

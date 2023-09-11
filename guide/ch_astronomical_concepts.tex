@@ -626,9 +626,9 @@ century. There have been many attempts to properly model $\Delta T$,
 and Stellarium offers several models you can choose from in the
 configuration dialog (see
 section~\ref{sec:gui:configuration:time}). ``Espenak and
-Meeus (2006)'', is a widely accepted standard. The default, ``Modified Espenak and
-Meeus (2006)'', is created to make $\Delta T$ closely in line with observed and predicted
-values between the years 2005-2050. But if you are a researcher and want to experiment
+Meeus (2006, 2014)'', is a widely accepted standard. The default, ``Modified Espenak and
+Meeus (2006, 2014, 2023)'', is created to make $\Delta T$ closely in line with observed and predicted
+values between the years 2015-2050. But if you are a researcher and want to experiment
 with alternative models, you will hopefully like this feature. you can even specify your own data for
 $a$, $b$, $c$, $y$ and the secular term for lunar acceleration $n$
 (actually $\dot{n}=dn/dt$ in units of
@@ -780,18 +780,19 @@ The following list describes sources and a few details about the models for $\De
   The solution was updated in \citetp{StephensonMorrisonHohenkerk:2021}.
   Recommended range of usage: between years -720.0 and 2019.0 $\dot{n}=-25.82''/\cy^2$.
   
-\item[Espenak \& Meeus (2006).] This solution by F. Espenak and J. Meeus, based on 
+\item[Espenak \& Meeus (2006, 2014).] This solution by F. Espenak and J. Meeus, based on 
 	\citet{2004JHA....35..327M} and a polynomial fit
   through tabulated values for 1600-2000, is used for the NASA Eclipse
   Web Site\footnote{\url{https://eclipse.gsfc.nasa.gov/eclipse.html}}
-  and in their \citetp{Espenak-Meeus:2006}. This formula is also used in the
+  , in their \citetp{Espenak-Meeus:2006} and \citetp{Espenak:2014}. This formula is also used in the
   solar, lunar and planetary ephemeris program \program{SOLEX}. Valid
   range of usage: between years -1999 and
   3000. $\dot{n}=-25.858''/\cy^2$.
 
-\item[Modified Espenak \& Meeus (2006).] This solution\footnote{This solution
-  is used by default.} is a modification from Espenak \& Meeus (2006). Two formulae are developed to make $\Delta T$
-  closely in line with observed and predicted values by IERS and also connected with original values.
+\item[Modified Espenak \& Meeus (2006, 2014, 2023).] This solution\footnote{This solution
+  is used by default.} is a modification from Espenak \& Meeus (2006, 2014). Values for 2015-2033 are
+  interpolated from observations and predictions by IERS Rapid Service/Prediction Center. A simple formula is
+  used to connect with F. Espenak's predicted value at year 2050.
   Valid range of usage: between years -1999 and 3000. $\dot{n}=-25.858''/\cy^2$.
 
 \item[Reijs (2006).] From the Length of Day (LOD; as determined by

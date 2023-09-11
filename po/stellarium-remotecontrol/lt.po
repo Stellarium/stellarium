@@ -1,0 +1,694 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Stellarium's team
+# This file is distributed under the same license as the stellarium-remotecontrol package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+# Translators:
+# Alexander V. Wolf <alex.v.wolf@gmail.com>, 2022
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: stellarium-remotecontrol\n"
+"Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
+"POT-Creation-Date: 2023-08-29 10:57+0700\n"
+"PO-Revision-Date: 2022-10-05 14:25+0000\n"
+"Last-Translator: Alexander V. Wolf <alex.v.wolf@gmail.com>, 2022\n"
+"Language-Team: Lithuanian (https://app.transifex.com/stellarium/teams/80998/lt/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: lt\n"
+"Plural-Forms: nplurals=4; plural=(n % 10 == 1 && (n % 100 > 19 || n % 100 < 11) ? 0 : (n % 10 >= 2 && n % 10 <=9) && (n % 100 > 19 || n % 100 < 11) ? 1 : n % 1 != 0 ? 2: 3);\n"
+
+#: plugins/RemoteControl/webroot/js/api/actions.js:60
+msgid "Could not retrieve action list"
+msgstr ""
+
+#: plugins/RemoteControl/webroot/js/api/actions.js:88
+msgid "Action '%1' not accepted by server: "
+msgstr ""
+
+#: plugins/RemoteControl/webroot/js/api/actions.js:95
+msgid "Error sending action '%1' to server: "
+msgstr ""
+
+#: plugins/RemoteControl/webroot/js/api/location.js:33
+#: plugins/RemoteControl/webroot/js/api/location.js:61
+#: plugins/RemoteControl/webroot/js/api/search.js:188
+msgid "Error performing search"
+msgstr ""
+
+#: plugins/RemoteControl/webroot/js/api/location.js:125
+msgid "Could not retrieve country list"
+msgstr ""
+
+#: plugins/RemoteControl/webroot/js/api/location.js:138
+msgid "Could not retrieve planet list"
+msgstr ""
+
+#: plugins/RemoteControl/webroot/js/api/properties.js:28
+msgid "Could not retrieve property list"
+msgstr ""
+
+#: plugins/RemoteControl/webroot/js/api/properties.js:89
+#: plugins/RemoteControl/webroot/js/api/properties.js:110
+msgid "Property '%1' not accepted by server: "
+msgstr ""
+
+#: plugins/RemoteControl/webroot/js/api/properties.js:96
+msgid "Error sending property '%1' to server: "
+msgstr ""
+
+#: plugins/RemoteControl/webroot/js/api/remotecontrol.js:197
+msgid "Error sending command to server: "
+msgstr ""
+
+#: plugins/RemoteControl/webroot/js/api/scripts.js:27
+msgid "Could not retrieve script list"
+msgstr ""
+
+#: plugins/RemoteControl/webroot/js/api/search.js:35
+msgid "querying"
+msgstr ""
+
+#: plugins/RemoteControl/webroot/js/api/search.js:44
+msgid "Error (%1)"
+msgstr ""
+
+#: plugins/RemoteControl/webroot/js/api/search.js:60
+msgid "Error performing Simbad lookup"
+msgstr ""
+
+#: plugins/RemoteControl/webroot/js/api/search.js:79 index.html:219
+#: tablet7in.html:235
+msgid "idle"
+msgstr ""
+
+#: plugins/RemoteControl/webroot/js/api/search.js:105
+msgid "Error loading object types"
+msgstr ""
+
+#: plugins/RemoteControl/webroot/js/api/search.js:138
+msgid "Error getting object list"
+msgstr ""
+
+#: plugins/RemoteControl/webroot/js/api/search.js:200
+msgid "waiting"
+msgstr ""
+
+#: plugins/RemoteControl/webroot/js/api/viewoptions.js:38
+msgid "Could not retrieve projection list"
+msgstr ""
+
+#: plugins/RemoteControl/webroot/js/api/viewoptions.js:51
+#: plugins/RemoteControl/webroot/js/api/viewoptions.js:64
+msgid "Could not retrieve landscape list"
+msgstr ""
+
+#: plugins/RemoteControl/webroot/js/plugins/scenery3d.js:22
+#: plugins/RemoteControl/webroot/js/ui/scripts.js:76 index.html:680
+#: index.html:742 tablet7in.html:738 tablet7in.html:798
+msgid "-none-"
+msgstr ""
+
+#: plugins/RemoteControl/webroot/js/plugins/scenery3d.js:28
+msgid "(Currently loading: %1)"
+msgstr ""
+
+#: plugins/RemoteControl/webroot/js/plugins/scenery3d.js:71
+msgid "Could not retrieve Scenery3d list"
+msgstr ""
+
+#: plugins/RemoteControl/webroot/js/ui/actions.js:44
+#: plugins/RemoteControl/webroot/js/ui/actions.js:77
+msgid "on"
+msgstr ""
+
+#: plugins/RemoteControl/webroot/js/ui/actions.js:44
+#: plugins/RemoteControl/webroot/js/ui/actions.js:77
+msgid "off"
+msgstr ""
+
+#: plugins/RemoteControl/webroot/js/ui/combobox.js:58
+msgid "Show All Items"
+msgstr ""
+
+#: plugins/RemoteControl/webroot/js/ui/combobox.js:124
+msgid "Input did not match any item"
+msgstr ""
+
+#: plugins/RemoteControl/webroot/js/ui/search.js:285
+msgid "No current selection"
+msgstr ""
+
+#: index.html:5 tablet7in.html:5
+msgid "Stellarium remote control plugin"
+msgstr ""
+
+#: index.html:17 tablet7in.html:18
+msgid "Please wait, loading"
+msgstr ""
+
+#: index.html:26 tablet7in.html:27
+msgid "Stellarium remote control"
+msgstr ""
+
+#: index.html:30 tablet7in.html:31
+msgid "Main controls"
+msgstr ""
+
+#: index.html:33 tablet7in.html:38
+msgid "DSO"
+msgstr ""
+
+#: index.html:36
+msgid "Actions and scripts"
+msgstr ""
+
+#: index.html:39 tablet7in.html:45
+msgid "Scenery3d"
+msgstr ""
+
+#: index.html:77
+msgid "Pause"
+msgstr ""
+
+#: index.html:82 tablet7in.html:183
+msgid "Time jumps"
+msgstr ""
+
+#: index.html:86 tablet7in.html:187
+msgid "Solar hour"
+msgstr ""
+
+#: index.html:87 tablet7in.html:188
+msgid "Solar day"
+msgstr ""
+
+#: index.html:88 tablet7in.html:189
+msgid "Solar week"
+msgstr ""
+
+#: index.html:91 tablet7in.html:192
+msgid "Sidereal year"
+msgstr ""
+
+#: index.html:92 tablet7in.html:193
+msgid "Sidereal century"
+msgstr ""
+
+#: index.html:94 tablet7in.html:195
+msgid "Synodic month"
+msgstr ""
+
+#: index.html:95 tablet7in.html:196
+msgid "Draconic month"
+msgstr ""
+
+#: index.html:96 tablet7in.html:197
+msgid "Draconic year"
+msgstr ""
+
+#: index.html:98 tablet7in.html:210
+msgid "Gaussian year"
+msgstr ""
+
+#: index.html:101 tablet7in.html:200
+msgid "Anomalistic month"
+msgstr ""
+
+#: index.html:102 tablet7in.html:201
+msgid "Anomalistic year"
+msgstr ""
+
+#: index.html:103 tablet7in.html:202
+msgid "Anomalistic century"
+msgstr ""
+
+#: index.html:105 tablet7in.html:204
+msgid "Mean tropical month"
+msgstr ""
+
+#: index.html:106 tablet7in.html:205
+msgid "Mean tropical year"
+msgstr ""
+
+#: index.html:107 tablet7in.html:206
+msgid "Mean tropical century"
+msgstr ""
+
+#: index.html:109 tablet7in.html:208
+msgid "Tropical year"
+msgstr ""
+
+#: index.html:110 tablet7in.html:209
+msgid "Julian year"
+msgstr ""
+
+#: index.html:111 tablet7in.html:211
+msgid "Julian century"
+msgstr ""
+
+#: index.html:123 tablet7in.html:101
+msgid "View towards horizon at Azimuth"
+msgstr ""
+
+#: index.html:144 tablet7in.html:123
+msgid "Vertical View offset"
+msgstr ""
+
+#: index.html:213 tablet7in.html:229
+msgid "Enter search term. Use TAB to navigate results."
+msgstr ""
+
+#: index.html:214 tablet7in.html:230
+msgid "Select and focus"
+msgstr ""
+
+#: index.html:240 tablet7in.html:259
+msgid "Selection mode"
+msgstr ""
+
+#: index.html:240 tablet7in.html:259
+msgid "Center on object"
+msgstr ""
+
+#: index.html:240 tablet7in.html:259
+msgid "Center and zoom to object"
+msgstr ""
+
+#: index.html:240 tablet7in.html:259
+msgid "Just mark the object"
+msgstr ""
+
+#: index.html:242 tablet7in.html:261
+msgid "Quick select"
+msgstr ""
+
+#: index.html:246 tablet7in.html:265
+msgid "Earth"
+msgstr ""
+
+#: index.html:246 tablet7in.html:265
+msgid "Pluto"
+msgstr ""
+
+#: index.html:252 tablet7in.html:294
+msgid "Current selection"
+msgstr ""
+
+#: index.html:269 tablet7in.html:321
+msgid "Milky Way brightness:"
+msgstr "Paukščių tako ryškumas:"
+
+#: index.html:274 tablet7in.html:333
+msgid "Digitized Sky Survey"
+msgstr ""
+
+#: index.html:275 tablet7in.html:334
+msgid "HiPS Survey"
+msgstr ""
+
+#: index.html:288 tablet7in.html:350
+msgid "Show planet markers"
+msgstr "Rodyti planetų užuominas"
+
+#: index.html:289 tablet7in.html:351
+msgid "Show planet orbits"
+msgstr "Rodyti planetų orbitas"
+
+#: index.html:290 tablet7in.html:352
+msgid "Show planet orbits only"
+msgstr ""
+
+#: index.html:291 tablet7in.html:353
+msgid "Show orbit for selected planet"
+msgstr ""
+
+#: index.html:292 tablet7in.html:354
+msgid "Show planet trails"
+msgstr ""
+
+#: index.html:293 tablet7in.html:355
+msgid "Show trail only for selected planet"
+msgstr ""
+
+#: index.html:298 tablet7in.html:359
+msgid "Scale Moon:"
+msgstr ""
+
+#: index.html:299
+msgid "Scale Sun:"
+msgstr ""
+
+#: index.html:300
+msgid "Scale Planets:"
+msgstr ""
+
+#: index.html:301 tablet7in.html:363
+msgid "Scale minor bodies:"
+msgstr ""
+
+#: index.html:332 tablet7in.html:409
+msgid "Extinction Coefficient:"
+msgstr "Ekstinkcijos koeficientas:"
+
+#: index.html:336 tablet7in.html:414
+msgid "Shooting Stars"
+msgstr ""
+
+#: index.html:337 tablet7in.html:415
+msgid "ZHR:"
+msgstr ""
+
+#: index.html:380 tablet7in.html:472
+msgid ""
+"Instantaneous circles of earth´s axis on its motion around ecliptical poles."
+" Displayed on Earth only."
+msgstr ""
+
+#: index.html:396
+msgid "Center"
+msgstr ""
+
+#: index.html:414 tablet7in.html:481
+msgid "Solstices"
+msgstr ""
+
+#: index.html:415 tablet7in.html:482
+msgid "Crossquarters"
+msgstr ""
+
+#: index.html:416 tablet7in.html:483
+msgid "Major Standstill"
+msgstr ""
+
+#: index.html:417 tablet7in.html:484
+msgid "Minor Standstill"
+msgstr ""
+
+#: index.html:427 tablet7in.html:493
+msgid "Current Planet:"
+msgstr ""
+
+#: index.html:465 tablet7in.html:529
+msgid "Catalogue of Reflection Nebulae (Van den Bergh, 1966)"
+msgstr ""
+
+#: index.html:512 tablet7in.html:547
+msgid ""
+"Catalogue of southern stars embedded in nebulosity (van den Bergh+, 1975)"
+msgstr ""
+
+#: index.html:550
+msgid "Objects without identifier"
+msgstr ""
+
+#: index.html:568
+msgid "Open Star clusters"
+msgstr ""
+
+#: index.html:569
+msgid "Globular Star clusters"
+msgstr ""
+
+#: index.html:576 tablet7in.html:621
+msgid "Bright Nebulae"
+msgstr ""
+
+#: index.html:577 tablet7in.html:622
+msgid "Dark Nebulae"
+msgstr ""
+
+#: index.html:578 tablet7in.html:623
+msgid "Planetary Nebulae"
+msgstr ""
+
+#: index.html:580
+msgid "Galaxy clusters"
+msgstr ""
+
+#: index.html:588 tablet7in.html:632
+msgid "Labels and markers"
+msgstr ""
+
+#: index.html:613 tablet7in.html:657
+msgid "Use associated planet and position"
+msgstr "Naudoti susijusią planetą ir poziciją"
+
+#: index.html:624 tablet7in.html:666
+msgid "Show illumination"
+msgstr ""
+
+#: index.html:629 tablet7in.html:672
+msgid "Current landscape"
+msgstr ""
+
+#: index.html:641 tablet7in.html:685
+msgid "Show lines with thickness"
+msgstr ""
+
+#: index.html:646 tablet7in.html:690
+msgid "Show asterisms with thickness"
+msgstr ""
+
+#: index.html:650 tablet7in.html:694
+msgid "Show ray helpers with thickness"
+msgstr ""
+
+#: index.html:658 tablet7in.html:704
+msgid "Show boundaries with thickness"
+msgstr ""
+
+#: index.html:663 tablet7in.html:709
+msgid "Constellation selection isolated"
+msgstr ""
+
+#: index.html:667 tablet7in.html:713
+msgid "Current sky culture"
+msgstr ""
+
+#: index.html:680 tablet7in.html:738
+msgid "Active script:"
+msgstr ""
+
+#: index.html:681 tablet7in.html:739
+msgid "Run selected script"
+msgstr ""
+
+#: index.html:681 tablet7in.html:739
+msgid "Stop current script"
+msgstr ""
+
+#: index.html:686 tablet7in.html:41 tablet7in.html:723
+msgid "Actions"
+msgstr ""
+
+#: index.html:690 tablet7in.html:727
+msgid "Run/toggle action"
+msgstr ""
+
+#: index.html:701 tablet7in.html:762
+msgid "Planet map"
+msgstr ""
+
+#: index.html:702 tablet7in.html:763
+msgid "Planet map pointer"
+msgstr ""
+
+#: index.html:706 tablet7in.html:767
+msgid "Type to search location"
+msgstr ""
+
+#: index.html:740 tablet7in.html:796
+msgid "Interaction"
+msgstr ""
+
+#: index.html:741 tablet7in.html:797
+msgid "Current scene:"
+msgstr ""
+
+#: index.html:744 tablet7in.html:800
+msgid "View controls"
+msgstr ""
+
+#: index.html:750 tablet7in.html:806
+msgid "Movement controls"
+msgstr ""
+
+#: index.html:762 tablet7in.html:818
+msgid "Torchlight"
+msgstr ""
+
+#: index.html:769 tablet7in.html:825
+msgid "Scene selection"
+msgstr ""
+
+#: index.html:773 tablet7in.html:829
+msgid "Load selected scene"
+msgstr ""
+
+#: index.html:797 tablet7in.html:854
+msgid "No response from server"
+msgstr ""
+
+#: index.html:798 tablet7in.html:855
+msgid "No response from server for %1 seconds. Is Stellarium still running?"
+msgstr ""
+
+#: tablet7in.html:32
+msgid "Time Jump"
+msgstr ""
+
+#: tablet7in.html:37
+msgid "Grids"
+msgstr ""
+
+#: tablet7in.html:97
+msgid "Up/Left"
+msgstr ""
+
+#: tablet7in.html:97
+msgid "Up"
+msgstr ""
+
+#: tablet7in.html:97
+msgid "Up/Right"
+msgstr ""
+
+#: tablet7in.html:97
+msgid "Left"
+msgstr ""
+
+#: tablet7in.html:97
+msgid "Focus on selected object"
+msgstr ""
+
+#: tablet7in.html:97
+msgid "Focus on selection"
+msgstr ""
+
+#: tablet7in.html:97
+msgid "Right"
+msgstr ""
+
+#: tablet7in.html:97
+msgid "Down/Left"
+msgstr ""
+
+#: tablet7in.html:97
+msgid "Down"
+msgstr ""
+
+#: tablet7in.html:97
+msgid "Down/Right"
+msgstr ""
+
+#: tablet7in.html:266
+msgid "Sirius"
+msgstr "Sirijus"
+
+#: tablet7in.html:267
+msgid "Arcturus"
+msgstr "Arktūras"
+
+#: tablet7in.html:268
+msgid "Capella"
+msgstr "Kapela"
+
+#: tablet7in.html:269
+msgid "Vega"
+msgstr "Vega"
+
+#: tablet7in.html:270
+msgid "Deneb"
+msgstr "Denebas"
+
+#: tablet7in.html:271
+msgid "Altair"
+msgstr "Altayras"
+
+#: tablet7in.html:272
+msgid "Andromeda Galaxy"
+msgstr "Andromedos galaktika"
+
+#: tablet7in.html:273
+msgid "Hercules Cluster"
+msgstr ""
+
+#: tablet7in.html:274
+msgid "Orion Nebula"
+msgstr "Oriono ūkas"
+
+#: tablet7in.html:275
+msgid "Eta Carinae Nebula"
+msgstr ""
+
+#: tablet7in.html:276
+msgid "47 Tucanae Cluster"
+msgstr ""
+
+#: tablet7in.html:277
+msgid "Aries"
+msgstr "Avinas"
+
+#: tablet7in.html:278
+msgid "Taurus"
+msgstr "Tauras"
+
+#: tablet7in.html:279
+msgid "Gemini"
+msgstr "Dvyniai"
+
+#: tablet7in.html:280
+msgid "Cancer"
+msgstr "Vėžys"
+
+#: tablet7in.html:281
+msgid "Leo"
+msgstr "Liūtas"
+
+#: tablet7in.html:282
+msgid "Virgo"
+msgstr "Mergelė"
+
+#: tablet7in.html:283
+msgid "Libra"
+msgstr "Svarstyklės"
+
+#: tablet7in.html:284
+msgid "Scorpius"
+msgstr "Skorpionas"
+
+#: tablet7in.html:285
+msgid "Sagittarius"
+msgstr "Šaulys"
+
+#: tablet7in.html:286
+msgid "Capricornus"
+msgstr "Ožiaragis"
+
+#: tablet7in.html:287
+msgid "Aquarius"
+msgstr "Vandenis"
+
+#: tablet7in.html:288
+msgid "Pisces"
+msgstr "Žuvys"
+
+#: tablet7in.html:747
+msgid "Favorites"
+msgstr ""
+
+#: tablet7in.html:749
+msgid "Show 1"
+msgstr ""
+
+#: tablet7in.html:750
+msgid "Remove Labels and Images"
+msgstr ""
+
+#: tablet7in.html:750
+msgid "Cleanup Screen"
+msgstr ""

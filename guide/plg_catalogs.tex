@@ -1179,91 +1179,6 @@ current\_ns\_set            & string & Current set of navigational stars. Possib
 
 
 \newpage
-\section{OnlineQueries Plugin}
-\label{sec:plugins:OnlineQueries}
-
-Stellarium includes and provides lots of information about many kinds
-of objects. However, there are scientific websites which provide even
-more specialized information about particular objects. This plugin
-\newFeature{0.21.1} allows online access to several websites on a
-variety of special topics. To retrieve information, select the
-respective tab and press \button{Query}. The result is displayed in a
-browser view\footnote{%
-  For technical reasons, on some platforms the
-  result is displayed in the system's default web browser.  On some
-  other platforms, e.g. Windows/WSL with Ubuntu or some ARM computers, the
-  web view fails to work properly.  On these platforms you should
-  manually edit \file{config.ini} and set the
-  \texttt{disable\_webview} entry in the config file.}.
-
-\begin{description}
-\item[Wikipedia] The free online encyclopedia provides information
-  about many bright stars, the planets, moons and many asteroids, as
-  well as many deep-sky objects. The lookup is based on the English
-  proper name.
-\item[AAVSO] The \indexterm{International Variable Star
-  Index}\footnote{\url{https://www.aavso.org/vsx/}} of the
-  \indexterm{American Association of Variable Star Observers} (AAVSO)
-  provides data about variable stars.
-\item[GCVS] The \indexterm{General Catalogue of Variable
-  Stars}\footnote{\url{http://www.sai.msu.su/gcvs/}} of the Sternberg
-  Astronomical Institute and the Institute of Astronomy of the Russian
-  Academy of Sciences in Moscow.
-\item[Ancient-Skies] A private project founded in preparation of the
-  \indexterm{International Year of Astronomy} 2009 which collects
-  information about star names and their mythologies
-  \citep{AncientSkies:2011}. The site is preparing a relaunch in 2022.
-\end{description}
-
-In addition, you can configure up to three further websites. These
-must provide some public website which takes a query for a Hipparcos
-star number or object name.  For example, the website
-\url{https://biblicalastronomy.co/playground/fetch.cfm?Hipp=n}
-provides various data and cross-references for a star with Hipparcos
-number \texttt{n}.
-
-Regardless of the current program language, the result is always
-presented in English or the language of the respective website.
-
-% \paragraph{Note:}
-
-\subsection{Section \big[OnlineQueries\big] in config.ini file}
-%\label{sec:plugins:OnlineQueries:configuration}
-
-You can edit the \file{config.ini} file to change settings of the
-OnlineQueries plugin.  The only strings you should need to touch are
-the \texttt{customN\_\ldots} entries ($\mathtt{N}\in \left\{ 1, 2,
-3\right\}$). The placeholder \texttt{\%1} will be filled by either the
-Hipparcos number (if the respective \texttt{customN\_use\_hip} is
-\texttt{true}) or by the first English name used in Stellarium. The
-\texttt{customN\_use\_hip} should be \texttt{true} to use a star's
-Hipparcos number, or \texttt{false} to use the English name as key.
-
-
-\begin{center}
-{\small
-\begin{tabular}{l|l|l}\toprule
-\emph{ID} & \emph{Type} & \emph{Default}\\\midrule
-ancientskies\_url    &string & (don't override)\\ % https://www.ancient-skies.org/api.php?apikey=fZdn9QsNdCAY4KggkV2T\&response=HTML\&entity=star\&catalog=HIPPARCOS\&id=\%1 \\
-aavso\_hip\_url      &string & (don't override)\\ % https://www.aavso.org/vsx/index.php?view=api.object\&ident=HIP\%1 \\
-aavso\_oid\_url      &string & (don't override)\\ % https://www.aavso.org/vsx/index.php?view=detail.top\&oid=\%1      \\
-gcvs\_url            &string & (don't override)\\ % http://www.sai.msu.su/gcvs/cgi-bin/ident.cgi?cat=Hip+\&num=\%1    \\
-wikipedia\_url       &string & (don't override)\\ % https://en.wikipedia.org/wiki/\%1 \\
-\midrule
-custom1\_url         &string & https://biblicalastronomy.co/playground/fetch.cfm?Hipp=\%1 \\
-custom2\_url         &string & \\
-custom3\_url         &string & \\
-custom1\_use\_hip    &boolean& true \\
-custom2\_use\_hip    &boolean& true \\
-custom3\_use\_hip    &boolean& true \\\midrule
-disable\_webview     &boolean&false \\
-\bottomrule
-\end{tabular}
-}
-\end{center}
-
-
-\newpage
 \section{Satellites Plugin}
 \label{sec:plugins:Satellites}
 
@@ -1516,6 +1431,52 @@ Use the bottom right button in the Sources tab (Figure~\ref{fig:plugins:Satellit
 %bright spectacles. \newFeature{0.20.2} A few defunct satellites are still in orbit, but
 %their orientations and flare events are no longer predictable, therefore the
 %``Iridium flares'' dialog has been removed.
+
+
+\newpage
+
+\section{Missing Stars Plugin}
+\label{sec:plugins:MissingStars}
+
+
+Over the years some users have reported that some stars, usually telescopic targets only, are missing from Stellarium's star catalogs. 
+This can be hardly avoided given selection criteria of catalogs (see Appendix~\ref{ch:Catalogues}). There are doubtlessly many more stars missing. 
+If you need to compare your own photographs or observations and check for stars that may be missing from Stellarium's catalog, 
+it is best to switch on the DSS layer (see section~\ref{sec:TOAST}). 
+
+This plugin \newFeature{23.3} is enabled by default and has no UI button. 
+If enabled (see section~\ref{sec:Plugins:EnablingPlugins}), it just draws the stars from its add-on catalog.
+
+\iffalse
+% GZ: I prepared this section for when this may become active one day.
+\subsection{Missing Stars Catalog}
+\label{sec:plugins:MissingStars:catalog}
+
+The catalog of missing stars is stored on disk in JSON\footnote{\url{https://www.json.org/}}
+format. A default copy is embedded in the plug-in at compile time. 
+A working copy can be used in the user data directory, in a file named \file{modules/MissingStars/MissingStars.json}
+
+\begin{configfileScr}
+{
+	"shortName": "Missing stars data",
+	"catalog":
+	{
+		"TYC 1309-1609-1":
+		{
+			"RA": "05h35m04.9551206928s",
+			"DEC": "+22d09m26.060109732s",
+			"pmRA": 1.595,
+			"pmDEC": -1.389,
+                        "bMag": 11.5,
+                        "vMag": 11.3,
+                        "parallax": 0.3988,
+                        "parallaxErr": 0.0214
+		},
+		...
+	}
+}
+\end{configfileScr}
+\fi
 
 %%% Local Variables: 
 %%% mode: latex

@@ -64,12 +64,12 @@ StelPluginInfo OnlineQueriesPluginInterface::getPluginInfo() const
 OnlineQueries::OnlineQueries() :
 	enabled(false),
 	disableWebView(false),
-	toolbarButton(Q_NULLPTR),
+	toolbarButton(nullptr),
 	custom1UseHip(false),
 	custom2UseHip(false),
 	custom3UseHip(false),
-	hipQuery(Q_NULLPTR),
-	hipOnlineReply(Q_NULLPTR)
+	hipQuery(nullptr),
+	hipOnlineReply(nullptr)
 {
 	setObjectName("OnlineQueries");
 	dialog = new OnlineQueriesDialog();
@@ -82,10 +82,10 @@ OnlineQueries::~OnlineQueries()
 	if (hipOnlineReply)
 	{
 		hipOnlineReply->deleteLater();
-		hipOnlineReply = Q_NULLPTR;
+		hipOnlineReply = nullptr;
 	}
 	delete hipQuery;
-	hipQuery=Q_NULLPTR;
+	hipQuery=nullptr;
 	delete dialog;
 }
 
@@ -103,7 +103,7 @@ void OnlineQueries::init()
 
 	connect(StelApp::getInstance().getCore(), SIGNAL(configurationDataSaved()), this, SLOT(saveConfiguration()));
 	addAction("actionShow_OnlineQueries",       N_("Online Queries"), N_("Show window for Online Queries"),           this, "enabled", "");
-	addAction("actionShow_OnlineQueries_AS",    N_("Online Queries"), N_("Call ancient-skies on current selection"),  this, "queryAncientSkies()", "");
+	//addAction("actionShow_OnlineQueries_AS",    N_("Online Queries"), N_("Call ancient-skies on current selection"),  this, "queryAncientSkies()", "");
 	addAction("actionShow_OnlineQueries_AAVSO", N_("Online Queries"), N_("Call AAVSO database on current selection"), this, "queryAAVSO()", "");
 	addAction("actionShow_OnlineQueries_GCVS",  N_("Online Queries"), N_("Call GCVS database on current selection"),  this, "queryGCVS()", "");
 	addAction("actionShow_OnlineQueries_WP",    N_("Online Queries"), N_("Call Wikipedia on current selection"),      this, "queryWikipedia()", "");
@@ -145,7 +145,7 @@ void OnlineQueries::loadConfiguration(void)
 	conf->beginGroup("OnlineQueries");
 
 	disableWebView =conf->value("disable_webview", false).toBool();
-	ancientSkiesUrl=conf->value("ancientskies_url", "https://www.ancient-skies.org/api.php?apikey=fZdn9QsNdCAY4KggkV2T&response=HTML&entity=star&catalog=HIPPARCOS&id=%1").toString();
+	//ancientSkiesUrl=conf->value("ancientskies_url", "https://www.ancient-skies.org/api.php?apikey=fZdn9QsNdCAY4KggkV2T&response=HTML&entity=star&catalog=HIPPARCOS&id=%1").toString();
 	aavsoHipUrl    =conf->value("aavso_hip_url",    "https://www.aavso.org/vsx/index.php?view=api.object&ident=HIP%1").toString();
 	aavsoOidUrl    =conf->value("aavso_oid_url",    "https://www.aavso.org/vsx/index.php?view=detail.top&oid=%1").toString();
 	gcvsUrl        =conf->value("gcvs_url",         "http://www.sai.msu.su/gcvs/cgi-bin/ident.cgi?cat=Hip+&num=%1").toString();
@@ -177,7 +177,7 @@ void OnlineQueries::loadConfiguration(void)
 void OnlineQueries::saveConfiguration(void)
 {
 	conf->beginGroup("OnlineQueries");
-	conf->setValue("ancientskies_url", ancientSkiesUrl);
+	//conf->setValue("ancientskies_url", ancientSkiesUrl);
 	conf->setValue("aavso_hip_url", aavsoHipUrl);
 	conf->setValue("aavso_oid_url", aavsoOidUrl);
 	conf->setValue("gcvs_url", gcvsUrl);
@@ -199,9 +199,9 @@ void OnlineQueries::createToolbarButton() const
 	{
 		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 
-		if (gui!=Q_NULLPTR)
+		if (gui!=nullptr)
 		{
-			StelButton* button =	new StelButton(Q_NULLPTR,
+			StelButton* button =	new StelButton(nullptr,
 							       QPixmap(":/OnlineQueries/bt_OnlineQueries_On.png"),
 							       QPixmap(":/OnlineQueries/bt_OnlineQueries_Off.png"),
 							       QPixmap(":/graphicGui/miscGlow32x32.png"),
@@ -252,11 +252,11 @@ void OnlineQueries::queryGCVS()
 	query(gcvsUrl, true);
 }
 
-void OnlineQueries::queryAncientSkies()
-{
-	setOutputHtml("<h1>Ancient-Skies</h1><p>querying...</p>");
-	query(ancientSkiesUrl, true);
-}
+//void OnlineQueries::queryAncientSkies()
+//{
+//	setOutputHtml("<h1>Ancient-Skies</h1><p>querying...</p>");
+//	query(ancientSkiesUrl, true);
+//}
 
 void OnlineQueries::queryCustomSite1()
 {
@@ -377,7 +377,7 @@ void OnlineQueries::onHipQueryStatusChanged()
 	{
 		disconnect(hipOnlineReply, SIGNAL(statusChanged()), this, SLOT(onHipQueryStatusChanged()));
 		delete hipOnlineReply;
-		hipOnlineReply=Q_NULLPTR;
+		hipOnlineReply=nullptr;
 	}
 }
 
@@ -425,7 +425,7 @@ void OnlineQueries::onAavsoHipQueryStatusChanged()
 	{
 		disconnect(hipOnlineReply, SIGNAL(statusChanged()), this, SLOT(onAavsoHipQueryStatusChanged()));
 		delete hipOnlineReply;
-		hipOnlineReply=Q_NULLPTR;
+		hipOnlineReply=nullptr;
 	}
 }
 

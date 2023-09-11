@@ -814,12 +814,12 @@ void SearchDialog::onSearchTextChanged(const QString& text)
 
 		QString greekText = substituteGreek(trimmedText);
 
-		int trimmedTextMaxNbItem = 13;
+		int trimmedTextMaxNbItem = 50;
 		int greekTextMaxMbItem = 0;
 
 		if(greekText != trimmedText)
 		{
-			trimmedTextMaxNbItem = 8;
+			trimmedTextMaxNbItem = 50;
 			greekTextMaxMbItem = 18;
 
 			// Get recent matches
@@ -836,7 +836,7 @@ void SearchDialog::onSearchTextChanged(const QString& text)
 		}
 		else
 		{
-			trimmedTextMaxNbItem = 13;
+			trimmedTextMaxNbItem = 50;
 
 			// Get recent matches
 			recentMatches = listMatchingRecentObjects(trimmedText, trimmedTextMaxNbItem, useStartOfWords);
@@ -1279,6 +1279,7 @@ void SearchDialog::gotoObjectWithType(const QModelIndex &modelIndex)
 	objType.replace("Pulsars","Pulsar");
 	objType.replace("Quasars","Quasar");
 	objType.replace("MeteorShowers","MeteorShower");
+	objType.replace("MissingStars","MissingStar");
 
 	gotoObject(modelIndex.model()->data(modelIndex, Qt::DisplayRole).toString(), objType);
 }

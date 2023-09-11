@@ -17,15 +17,25 @@
  */
 
 #include <QString>
+#include "SolarSystemEditor.hpp"
 #include "testSolarSystemEditor.hpp"
 #include "MinorPlanet.hpp"
 #include "Comet.hpp"
 
 QTEST_GUILESS_MAIN(TestSolarSystemEditor)
 
+void TestSolarSystemEditor::testUnpackingNumbers()
+{
+	QCOMPARE(SolarSystemEditor::unpackAlphanumericNumber('0', 1), 1);
+	QCOMPARE(SolarSystemEditor::unpackAlphanumericNumber('9', 1), 91);
+	QCOMPARE(SolarSystemEditor::unpackAlphanumericNumber('A', 1), 101);
+	QCOMPARE(SolarSystemEditor::unpackAlphanumericNumber('Z', 1), 351);
+}
+
+
 void TestSolarSystemEditor::testUnpackingAsteroids()
 {
-	//Examples from http://www.minorplanetcenter.org/iau/info/PackedDes.html
+	//Examples from https://www.minorplanetcenter.org/iau/info/PackedDes.html
 	QCOMPARE(SolarSystemEditor::unpackMinorPlanetIAUDesignation("I95X00A"), QString("1895 XA"));
 	QCOMPARE(SolarSystemEditor::unpackMinorPlanetIAUDesignation("J95X00A"), QString("1995 XA"));
 	QCOMPARE(SolarSystemEditor::unpackMinorPlanetIAUDesignation("J95X01L"), QString("1995 XL1"));
@@ -58,18 +68,21 @@ void TestSolarSystemEditor::testRenderAsteroidsHTML()
 	QCOMPARE(MinorPlanet::renderIAUDesignationinHtml("2000 WR106"), QString("2000 WR<sub>106</sub>"));
 }
 
-/*
+
 void TestSolarSystemEditor::testUnpackingComets()
 {
-	//Examples from http://www.minorplanetcenter.org/iau/info/PackedDes.html
-	QCOMPARE(SolarSystemEditor::unpackMinorPlanetIAUDesignation("J95A010"), QString("1995 A1"));
-	QCOMPARE(SolarSystemEditor::unpackMinorPlanetIAUDesignation("J94P01b"), QString("1994 P1-B"));
-	QCOMPARE(SolarSystemEditor::unpackMinorPlanetIAUDesignation("J94P010"), QString("1994 P1"));
-	QCOMPARE(SolarSystemEditor::unpackMinorPlanetIAUDesignation("K48X130"), QString("2048 X13"));
-	QCOMPARE(SolarSystemEditor::unpackMinorPlanetIAUDesignation("K33L89c"), QString("2033 L89-C"));
-	QCOMPARE(SolarSystemEditor::unpackMinorPlanetIAUDesignation("K88AA30"), QString("2088 A103"));
+	//Examples from http://www.minorplanetcenter.org/iau/info/PackedDes.html and an actual data file.
+	QCOMPARE(SolarSystemEditor::unpackCometIAUDesignation("J95A010"), QString("1995 A1"));
+	QCOMPARE(SolarSystemEditor::unpackCometIAUDesignation("J94P01b"), QString("1994 P1-B"));
+	QCOMPARE(SolarSystemEditor::unpackCometIAUDesignation("J94P010"), QString("1994 P1"));
+	QCOMPARE(SolarSystemEditor::unpackCometIAUDesignation("K48X130"), QString("2048 X13"));
+	QCOMPARE(SolarSystemEditor::unpackCometIAUDesignation("K33L89c"), QString("2033 L89-C"));
+	QCOMPARE(SolarSystemEditor::unpackCometIAUDesignation("K88AA30"), QString("2088 A103"));
+	QCOMPARE(SolarSystemEditor::unpackCometIAUDesignation("K10W00K"), QString("2010 WK"));
+	QCOMPARE(SolarSystemEditor::unpackCometIAUDesignation("K12N00J"), QString("2012 NJ"));
+	QCOMPARE(SolarSystemEditor::unpackCometIAUDesignation("K21H00S"), QString("2021 HS"));
 }
-*/
+
 
 void TestSolarSystemEditor::testRenderCometsHTML()
 {
