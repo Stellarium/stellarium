@@ -230,7 +230,7 @@ void MissingStar::draw(StelCore* core, StelPainter *painter)
 		sd->computeRCMag(mag, &rcMag);
 		sd->preDrawPointSource(painter);
 		// allow height-dependent twinkle and suppress twinkling in higher altitudes. Keep 0.1 twinkle amount in zenith.
-		sd->drawPointSource(painter, pos, rcMag, color, true, qMin(1.0f, 1.0f-0.9f*altAz[2]));
+		sd->drawPointSource(painter, pos, rcMag, color, true, qMin(1.0f, 1.0f-0.9f*static_cast<float>(altAz[2])));
 		sd->postDrawPointSource(painter);
 		painter->setColor(color, 1.f);
 		if (flagShowLabels && visibleHint)
