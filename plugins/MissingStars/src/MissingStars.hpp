@@ -158,7 +158,7 @@ class MissingStarsStelPluginInterface : public QObject, public StelPluginInterfa
 public:
 	virtual StelModule* getStelModule() const override;
 	virtual StelPluginInfo getPluginInfo() const override;
-	virtual QObjectList getExtensionList() const override { return QObjectList(); }
+	//virtual QObjectList getExtensionList() const override { return QObjectList(); }
 };
 
 #endif /* MISSINGSTARS_HPP */

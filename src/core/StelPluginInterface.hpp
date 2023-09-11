@@ -73,7 +73,7 @@ public:
 	//! The StelModuleMgr remembers all loaded extensions and provides
 	//! methods to access them. You should use qobject_cast to try to
 	//! cast each object to a specific interface in which you are interested in.
-	virtual QObjectList getExtensionList() const = 0;
+	virtual QObjectList getExtensionList() const { return QObjectList(); };
 };
 
 #define StelPluginInterface_iid "org.stellarium.StelPluginInterface/2.0"
