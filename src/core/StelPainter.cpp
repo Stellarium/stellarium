@@ -51,6 +51,7 @@ QMutex* StelPainter::globalMutex = new QMutex();
 
 QCache<QByteArray, StringTexture> StelPainter::texCache(TEX_CACHE_LIMIT);
 QOpenGLShaderProgram* StelPainter::texturesShaderProgram=Q_NULLPTR;
+QOpenGLShaderProgram* StelPainter::textShaderProgram=Q_NULLPTR;
 QOpenGLShaderProgram* StelPainter::basicShaderProgram=Q_NULLPTR;
 QOpenGLShaderProgram* StelPainter::colorShaderProgram=Q_NULLPTR;
 QOpenGLShaderProgram* StelPainter::texturesColorShaderProgram=Q_NULLPTR;
@@ -58,6 +59,7 @@ QOpenGLShaderProgram* StelPainter::wideLineShaderProgram=Q_NULLPTR;
 QOpenGLShaderProgram* StelPainter::colorfulWideLineShaderProgram=Q_NULLPTR;
 StelPainter::BasicShaderVars StelPainter::basicShaderVars;
 StelPainter::TexturesShaderVars StelPainter::texturesShaderVars;
+StelPainter::TextShaderVars StelPainter::textShaderVars;
 StelPainter::BasicShaderVars StelPainter::colorShaderVars;
 StelPainter::TexturesColorShaderVars StelPainter::texturesColorShaderVars;
 StelPainter::WideLineShaderVars StelPainter::wideLineShaderVars;
@@ -92,6 +94,7 @@ void StelPainter::GLState::apply()
 		gl->glEnable(GL_CULL_FACE);
 	else
 		gl->glDisable(GL_CULL_FACE);
+	gl->glLineWidth(lineWidth);
 #ifdef GL_LINE_SMOOTH
 	if(!QOpenGLContext::currentContext()->isOpenGLES())
 	{
@@ -558,31 +561,31 @@ void StelPainter::sSphereMap(double radius, unsigned int slices, unsigned int st
 
 void StelPainter::drawTextGravity180(float x, float y, const QString& ws, float xshift, float yshift)
 {
-	float dx, dy, d, theta, theta_o, psi, width;
-	dx = x - static_cast<float>(prj->viewportCenter[0]);
-	dy = y - static_cast<float>(prj->viewportCenter[1]);
-	d = std::sqrt(dx*dx + dy*dy);
-	float limit = 120.;
+	const float dx = x - static_cast<float>(prj->viewportCenter[0]);
+	const float dy = y - static_cast<float>(prj->viewportCenter[1]);
+	const float d = std::sqrt(dx*dx + dy*dy);
+	const float limit = 120.;
 
 	// If the text is too far away to be visible in the screen return
 	if (d>qMax(prj->viewportXywh[3], prj->viewportXywh[2])*2 || ws.isEmpty())
 		return;
 
-	float ppx = static_cast<float>(prj->getDevicePixelsPerPixel());
-	float cWidth = static_cast<float>(getFontMetrics().boundingRect(ws).width())/ws.length();
-	float stdWidth = static_cast<float>(getFontMetrics().boundingRect("a").width());
-	theta = std::atan2(dy - 1, dx);
-	theta_o = M_PIf + std::atan2(dx, dy - 1);	
-	psi = std::atan2(ppx*cWidth, d + 1) * M_180_PIf;
+	const float ppx = static_cast<float>(prj->getDevicePixelsPerPixel());
+	const float cWidth = static_cast<float>(getFontMetrics().boundingRect(ws).width())/ws.length(); // average character width
+	const float stdWidth = static_cast<float>(getFontMetrics().boundingRect("m").width());
+	const float theta_o = M_PIf + std::atan2(dx, dy - 1);
+	float theta = std::atan2(dy - 1, dx);
+	float psi = std::atan2(ppx*cWidth*1.2, d + 1) * M_180_PIf; // Factor 1.2 is empirical.
 	if (psi>5)
 		psi = 5;
 
-	float xVc = static_cast<float>(prj->viewportCenter[0]) + xshift;
-	float yVc = static_cast<float>(prj->viewportCenter[1]) + yshift;
+	const float xVc = static_cast<float>(prj->viewportCenter[0]) + xshift;
+	const float yVc = static_cast<float>(prj->viewportCenter[1]) + yshift;
 	const float cosr = std::cos(-theta_o * M_PI_180f);
 	const float sinr = std::sin(-theta_o * M_PI_180f);
 	float xom = x + xshift*cosr - yshift*sinr;
-	float yom = y + yshift*sinr + yshift*cosr;
+	float yom = y + yshift*sinr + xshift*cosr;
+	float width;
 
 	if (!StelApp::getInstance().getLocaleMgr().isAppRTL())
 	{
@@ -651,40 +654,40 @@ struct StringTexture
 {
 	QOpenGLTexture* texture;
 	QSize size;
+	QPoint baselineShift;
 	QSizeF getTexSize() const {
 		return QSizeF(static_cast<qreal>(size.width())  / static_cast<qreal>(texture->width()),
 			      static_cast<qreal>(size.height()) / static_cast<qreal>(texture->height()));
 	}
 
-	StringTexture(QOpenGLTexture* tex, const QSize& size) :
-	     texture(tex), size(size) {}
+	StringTexture(QOpenGLTexture* tex, const QSize& size, const QPoint& baselineShift) :
+	     texture(tex), size(size), baselineShift(baselineShift) {}
 	~StringTexture() {delete texture;}
 };
 
-StringTexture* StelPainter::getTexTexture(const QString& str, int pixelSize) const
+StringTexture* StelPainter::getTextTexture(const QString& str, int pixelSize) const
 {
-	// Render first the text into a QPixmap, then create a QOpenGLTexture
-	// from it.  We could optimize by directly using a QImage, but for some
-	// reason the result is not exactly the same than with a QPixmap.
 	QByteArray hash = str.toUtf8() + QByteArray::number(pixelSize);
 	StringTexture* cachedTex = texCache.object(hash);
 	if (cachedTex)
 		return cachedTex;
 	QFont tmpFont = currentFont;
 	tmpFont.setPixelSize(currentFont.pixelSize()*static_cast<int>(static_cast<float>(prj->getDevicePixelsPerPixel())*StelApp::getInstance().getGlobalScalingRatio()));
+	tmpFont.setStyleStrategy(QFont::NoSubpixelAntialias); // The text may rotate, which would break subpixel AA
 	QRect strRect = QFontMetrics(tmpFont).boundingRect(str);
 	int w = strRect.width()+1+static_cast<int>(0.02f*strRect.width());
 	int h = strRect.height();
 
-	QPixmap strImage = QPixmap(StelUtils::getBiggerPowerOfTwo(w), StelUtils::getBiggerPowerOfTwo(h));
-	strImage.fill(Qt::transparent);
+	QImage strImage(StelUtils::getBiggerPowerOfTwo(w), StelUtils::getBiggerPowerOfTwo(h),
+	                QImage::Format_RGBX8888);
+	strImage.fill(Qt::black);
 	QPainter painter(&strImage);
-	tmpFont.setStyleStrategy(QFont::NoAntialias);
+	painter.setRenderHints(QPainter::TextAntialiasing);
 	painter.setFont(tmpFont);
-	//painter.setRenderHints(QPainter::TextAntialiasing);
 	painter.setPen(Qt::white);
 	painter.drawText(-strRect.x(), -strRect.y(), str);
-	StringTexture* newTex = new StringTexture(new QOpenGLTexture(strImage.toImage()), QSize(w, h));
+	StringTexture* newTex = new StringTexture(new QOpenGLTexture(strImage), QSize(w, h), QPoint(strRect.x(), -(strRect.y()+h)));
+	newTex->texture->setMinMagFilters(QOpenGLTexture::Linear, QOpenGLTexture::Linear);
 	texCache.insert(hash, newTex, 3*w*h);
 	// simply returning newTex is dangerous as the object is owned by the cache now. (Coverity Scan barks.)
 	return texCache.object(hash);
@@ -696,23 +699,24 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 	{
 		drawTextGravity180(x, y, str, xshift, yshift);
 	}
-	else if (qApp->property("text_texture")==true) // CLI option -t given?
+	else
 	{
-		//qDebug() <<  "Text texture" << str;
-		// This is taken from branch text-use-opengl-buffer. This is essential on devices like Raspberry Pi (2016-03).
-		StringTexture* tex = getTexTexture(str, currentFont.pixelSize());
+		StringTexture* tex = getTextTexture(str, currentFont.pixelSize());
 		Q_ASSERT(tex);
 		if (!noGravity)
 			angleDeg += prj->defaultAngleForGravityText;
-		tex->texture->bind();
+		GLint oldTex = 0;
+		glActiveTexture(GL_TEXTURE0);
+		glGetIntegerv(GL_TEXTURE_BINDING_2D, &oldTex);
+		tex->texture->bind(0);
+		x += tex->baselineShift.x();
+		y += tex->baselineShift.y();
 
 		static float vertexData[8];
 		// compute the vertex coordinates applying the translation and the rotation
 		static const float vertexBase[] = {0., 0., 1., 0., 0., 1., 1., 1.};
 		if (std::fabs(angleDeg)>1.f*M_PI_180f)
 		{
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 			const float cosr = std::cos(angleDeg * M_PI_180f);
 			const float sinr = std::sin(angleDeg * M_PI_180f);
 			for (int i = 0; i < 8; i+=2)
@@ -723,8 +727,6 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 		}
 		else
 		{
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 			for (int i = 0; i < 8; i+=2)
 			{
 				vertexData[i]   = int(x + tex->size.width()*vertexBase[i]+xshift);
@@ -732,11 +734,11 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 			}
 		}
 
-		float* texCoords = new float[8];
+		float texCoords[8];
 		for (int i=0;i<4;i++)
 		{
 			texCoords[i*2+0] = static_cast<float>(tex->getTexSize().width()) * (i % 2);
-			texCoords[i*2+1] = static_cast<float>(tex->getTexSize().height()) * (1 - static_cast<float>(i) / 2);
+			texCoords[i*2+1] = static_cast<float>(tex->getTexSize().height()) * (1 - i / 2);
 		}
 		setTexCoordPointer(2, GL_FLOAT, texCoords);
 
@@ -746,62 +748,47 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 		setBlending(true);
 		enableClientStates(true, true);
 		setVertexPointer(2, GL_FLOAT, vertexData);
-		drawFromArray(TriangleStrip, 4, 0, false);
+
+		const Mat4f& m = getProjector()->getProjectionMatrix();
+		const QMatrix4x4 qMat(m[0], m[4], m[8], m[12],
+		                      m[1], m[5], m[9], m[13],
+		                      m[2], m[6], m[10], m[14],
+		                      m[3], m[7], m[11], m[15]);
+
+		vao->bind();
+		verticesVBO->bind();
+		const GLsizeiptr vertexCount = 4;
+
+		auto& pr = *textShaderProgram;
+		pr.bind();
+
+		const auto bufferSize = vertexArray.vertexSizeInBytes()*vertexCount +
+		                        texCoordArray.vertexSizeInBytes()*vertexCount;
+		verticesVBO->allocate(bufferSize);
+		const auto vertexDataSize = vertexArray.vertexSizeInBytes()*vertexCount;
+		verticesVBO->write(0, vertexArray.pointer, vertexDataSize);
+		const auto texCoordDataOffset = vertexDataSize;
+		const auto texCoordDataSize = texCoordArray.vertexSizeInBytes()*vertexCount;
+		verticesVBO->write(texCoordDataOffset, texCoordArray.pointer, texCoordDataSize);
+
+		pr.setAttributeBuffer(textShaderVars.vertex, vertexArray.type, 0, vertexArray.size);
+		pr.enableAttributeArray(textShaderVars.vertex);
+		pr.setUniformValue(textShaderVars.projectionMatrix, qMat);
+		pr.setUniformValue(textShaderVars.textColor, currentColor.toQVector());
+		pr.setAttributeBuffer(textShaderVars.texCoord, texCoordArray.type,
+		                      texCoordDataOffset, texCoordArray.size);
+		pr.enableAttributeArray(textShaderVars.texCoord);
+
+		glDrawArrays(TriangleStrip, 0, vertexCount);
+
+		verticesVBO->release();
+		vao->release();
+
+		pr.release();
+
 		setBlending(oldBlending, oldSrc, oldDst);
 		enableClientStates(false, false);
-		tex->texture->release();
-		delete[] texCoords;
-	}
-	else
-	{
-		QOpenGLPaintDevice device;
-		device.setSize(QSize(prj->getViewportWidth(), prj->getViewportHeight()));
-		// This doesn't seem to work correctly, so implement the hack below instead.
-		// Maybe check again later, or check on mac with retina..
-		// device.setDevicePixelRatio(prj->getDevicePixelsPerPixel());
-		// painter.setFont(currentFont);
-		
-		QPainter painter(&device);
-		
-		QFont tmpFont = currentFont;
-		tmpFont.setPixelSize(currentFont.pixelSize()*static_cast<int>(static_cast<float>(prj->getDevicePixelsPerPixel())*StelApp::getInstance().getGlobalScalingRatio()));
-		painter.setFont(tmpFont);
-		painter.setPen(currentColor.toQColor());
-		
-		float scaleRatio = StelApp::getInstance().getGlobalScalingRatio();
-		xshift*=scaleRatio;
-		yshift*=scaleRatio;
-		
-		y = prj->getViewportHeight()-y;
-		yshift = -yshift;
-
-		// Translate/rotate
-		if (!noGravity)
-			angleDeg += prj->defaultAngleForGravityText;
-
-		if (std::fabs(angleDeg)>1.f)
-		{
-			QTransform m;
-			m.translate(static_cast<qreal>(x), static_cast<qreal>(y));
-			m.rotate(static_cast<qreal>(-angleDeg));
-			painter.setTransform(m);
-			painter.drawText(qRound(xshift), qRound(yshift), str);
-		}
-		else
-		{
-			painter.drawText(qRound(x+xshift), qRound(y+yshift), str);
-		}
-		
-		//important to call this before GL state restore
-		painter.end();
-
-		//fix for bug 1628072 caused by QTBUG-56798
-#ifndef QT_NO_DEBUG
-		StelOpenGL::clearGLErrors();
-#endif
-
-		//QPainter messes up some GL state, begin/endNativePainting or save/restore does not help
-		glState.apply();
+		glBindTexture(GL_TEXTURE_2D, oldTex);
 	}
 }
 
@@ -1734,6 +1721,43 @@ void StelPainter::drawCircle(float x, float y, float r)
 	enableClientStates(false);
 }
 
+// rx: radius in x axis
+// ry: radius in y axis
+// angle rotation (counterclockwise), radians [0..2pi]
+void StelPainter::drawEllipse(double x, double y, double rX, double rY, double angle)
+{
+	if (rX <= 1.0 || rY <= 1.0)
+		return;
+	// Taken largely from Nebula::renderEllipticMarker()
+	const double scale = StelApp::getInstance().getGlobalScalingRatio();
+	rX *= scale;
+	rY *= scale;
+
+	//const float radiusY = 0.35 * size;
+	//const float radiusX = aspectRatio * radiusY;
+	const int numPoints = std::lround(std::clamp(qMax(rX, rY)/3, 32., 1024.));
+	std::vector<float> vertexData;
+	vertexData.reserve(numPoints*2);
+	const float*const cossin = StelUtils::ComputeCosSinTheta(numPoints);
+	const auto cosa = std::cos(angle);
+	const auto sina = std::sin(angle);
+	for(int n = 0; n < numPoints; ++n)
+	{
+		const auto cosb = cossin[2*n], sinb = cossin[2*n+1];
+		const auto pointX = rX*sinb;
+		const auto pointY = rY*cosb;
+		vertexData.push_back(x + pointX*cosa - pointY*sina);
+		vertexData.push_back(y + pointY*cosa + pointX*sina);
+	}
+	const auto vertCount = vertexData.size() / 2;
+	setLineSmooth(true);
+	setLineWidth(scale * std::clamp(qMax(rX, rY)/40, 1., 2.));
+	enableClientStates(true);
+	setVertexPointer(2, GL_FLOAT, vertexData.data());
+	drawFromArray(StelPainter::LineLoop, vertCount, 0, false);
+	enableClientStates(false);
+}
+
 void StelPainter::drawSprite2dMode(float x, float y, float radius)
 {
 	static float vertexData[] = {-10.,-10.,10.,-10., 10.,10., -10.,10.};
@@ -2110,6 +2134,48 @@ void StelPainter::initGLShaders()
 	colorShaderVars.color = colorShaderProgram->attributeLocation("color");
 	colorShaderVars.vertex = colorShaderProgram->attributeLocation("vertex");
 	
+	// Text shader program
+	QOpenGLShader textVShader(QOpenGLShader::Vertex);
+	const auto textVSrc =
+		StelOpenGL::globalShaderPrefix(StelOpenGL::VERTEX_SHADER) + R"(
+ATTRIBUTE highp vec3 vertex;
+ATTRIBUTE mediump vec2 texCoord;
+uniform mediump mat4 projectionMatrix;
+VARYING mediump vec2 texc;
+void main()
+{
+	gl_Position = projectionMatrix * vec4(vertex, 1.);
+	texc = texCoord;
+})";
+	textVShader.compileSourceCode(textVSrc);
+	if (!textVShader.log().isEmpty())
+		qWarning().noquote() << "StelPainter: Warnings while compiling text vertex shader: " << textVShader.log();
+
+	QOpenGLShader textFShader(QOpenGLShader::Fragment);
+	const auto textFSrc =
+		StelOpenGL::globalShaderPrefix(StelOpenGL::FRAGMENT_SHADER) + R"(
+VARYING mediump vec2 texc;
+uniform sampler2D tex;
+uniform mediump vec4 textColor;
+void main()
+{
+	float mask = texture2D(tex, texc).r;
+	FRAG_COLOR = vec4(textColor.rgb, textColor.a*mask);
+})";
+	textFShader.compileSourceCode(textFSrc);
+	if (!textFShader.log().isEmpty())
+		qWarning().noquote() << "StelPainter: Warnings while compiling text fragment shader: " << textFShader.log();
+
+	textShaderProgram = new QOpenGLShaderProgram(QOpenGLContext::currentContext());
+	textShaderProgram->addShader(&textVShader);
+	textShaderProgram->addShader(&textFShader);
+	linkProg(textShaderProgram, "textShaderProgram");
+	textShaderVars.projectionMatrix = textShaderProgram->uniformLocation("projectionMatrix");
+	textShaderVars.texCoord = textShaderProgram->attributeLocation("texCoord");
+	textShaderVars.vertex = textShaderProgram->attributeLocation("vertex");
+	textShaderVars.textColor = textShaderProgram->uniformLocation("textColor");
+	textShaderVars.texture = textShaderProgram->uniformLocation("tex");
+
 	// Basic texture shader program
 	QOpenGLShader vshader2(QOpenGLShader::Vertex);
 	const auto vsrc2 =
@@ -2130,13 +2196,12 @@ void StelPainter::initGLShaders()
 	QOpenGLShader fshader2(QOpenGLShader::Fragment);
 	const auto fsrc2 =
 		StelOpenGL::globalShaderPrefix(StelOpenGL::FRAGMENT_SHADER) +
-		makeDitheringShader()+
 		"VARYING mediump vec2 texc;\n"
 		"uniform sampler2D tex;\n"
 		"uniform mediump vec4 texColor;\n"
 		"void main(void)\n"
 		"{\n"
-		"    FRAG_COLOR = dither(texture2D(tex, texc)*texColor);\n"
+		"    FRAG_COLOR = texture2D(tex, texc)*texColor;\n"
 		"}\n";
 	fshader2.compileSourceCode(fsrc2);
 	if (!fshader2.log().isEmpty())
@@ -2151,8 +2216,6 @@ void StelPainter::initGLShaders()
 	texturesShaderVars.vertex = texturesShaderProgram->attributeLocation("vertex");
 	texturesShaderVars.texColor = texturesShaderProgram->uniformLocation("texColor");
 	texturesShaderVars.texture = texturesShaderProgram->uniformLocation("tex");
-	texturesShaderVars.ditherPattern = texturesShaderProgram->uniformLocation("ditherPattern");
-	texturesShaderVars.rgbMaxValue = texturesShaderProgram->uniformLocation("rgbMaxValue");
 
 	// Texture shader program + interpolated color per vertex
 	QOpenGLShader vshader4(QOpenGLShader::Vertex);
@@ -2177,7 +2240,6 @@ void StelPainter::initGLShaders()
 	QOpenGLShader fshader4(QOpenGLShader::Fragment);
 	const auto fsrc4 =
 		StelOpenGL::globalShaderPrefix(StelOpenGL::FRAGMENT_SHADER) +
-		makeDitheringShader()+
 		makeSaturationShader()+
 		"VARYING mediump vec2 texc;\n"
 		"VARYING mediump vec4 outColor;\n"
@@ -2185,7 +2247,7 @@ void StelPainter::initGLShaders()
 		"uniform lowp float saturation;\n"
 		"void main(void)\n"
 		"{\n"
-		"    FRAG_COLOR = dither(texture2D(tex, texc)*outColor);\n"
+		"    FRAG_COLOR = texture2D(tex, texc)*outColor;\n"
 		"    if (saturation != 1.0)\n"
 		"        FRAG_COLOR.rgb = saturate(FRAG_COLOR.rgb, saturation);\n"
 		"}\n";
@@ -2202,8 +2264,6 @@ void StelPainter::initGLShaders()
 	texturesColorShaderVars.vertex = texturesColorShaderProgram->attributeLocation("vertex");
 	texturesColorShaderVars.color = texturesColorShaderProgram->attributeLocation("color");
 	texturesColorShaderVars.texture = texturesColorShaderProgram->uniformLocation("tex");
-	texturesColorShaderVars.ditherPattern = texturesColorShaderProgram->uniformLocation("ditherPattern");
-	texturesColorShaderVars.rgbMaxValue = texturesColorShaderProgram->uniformLocation("rgbMaxValue");
 	texturesColorShaderVars.saturation = texturesColorShaderProgram->uniformLocation("saturation");
 
 	if(StelMainView::getInstance().getGLInformation().isCoreProfile)
@@ -2231,7 +2291,7 @@ void main()
 	vec3 ndc0 = clip0.xyz / clip0.w;
 	vec3 ndc1 = clip1.xyz / clip1.w;
 
-	vec2 lineDir2d = normalize(ndc1.xy - ndc0.xy);
+	vec2 lineDir2d = normalize((ndc1.xy - ndc0.xy) * viewportSize);
 	vec2 perpendicularDir2d = vec2(-lineDir2d.y, lineDir2d.x);
 
 	vec2 offset2d = (lineWidth / viewportSize) * perpendicularDir2d;
@@ -2400,6 +2460,128 @@ void StelPainter::enableClientStates(bool vertex, bool texture, bool color, bool
 	normalArray.enabled = normal;
 }
 
+void StelPainter::drawFixedColorWideLinesAsQuads(const ArrayDesc& vertexArray, int count, int offset,
+													 const Mat4f& projMat, const DrawingMode mode)
+{
+	if(count < 2) return;
+
+	GLint viewport[4] = {};
+	glGetIntegerv(GL_VIEWPORT, viewport);
+	const auto viewportSize = Vec2f(viewport[2], viewport[3]);
+
+	std::vector<Vec4f> newVertices;
+	if(mode == LineStrip)
+		newVertices.reserve((count-1)*6);
+	else
+		newVertices.reserve(count*6);
+	newVertices.resize((count-1)*6);
+	Q_ASSERT(vertexArray.type == GL_FLOAT);
+	const auto lineVertData = static_cast<const float*>(vertexArray.pointer) + vertexArray.size*offset;
+	const int step = mode==Lines ? 2 : 1;
+	for(int n = 0; n < count-1; n += step)
+	{
+		Vec4f in0;
+		Vec4f in1;
+		switch(vertexArray.size)
+		{
+		case 4:
+			in0 = Vec4f(lineVertData+4*(n+0));
+			in1 = Vec4f(lineVertData+4*(n+1));
+			break;
+		case 3:
+			in0 = Vec4f(lineVertData[3*(n+0)], lineVertData[3*(n+0)+1], lineVertData[3*(n+0)+2], 1);
+			in1 = Vec4f(lineVertData[3*(n+1)], lineVertData[3*(n+1)+1], lineVertData[3*(n+1)+2], 1);
+			break;
+		case 2:
+			in0 = Vec4f(lineVertData[2*(n+0)], lineVertData[2*(n+0)+1], 0, 1);
+			in1 = Vec4f(lineVertData[2*(n+1)], lineVertData[2*(n+1)+1], 0, 1);
+			break;
+		case 1:
+			in0 = Vec4f(lineVertData[n+0], 0,0,1);
+			in1 = Vec4f(lineVertData[n+1], 0,0,1);
+			break;
+		default:
+			in0 = Vec4f(0.f);
+			in1 = Vec4f(0.f);
+			qCritical("Bad number of elements in vertex array"); // or qFatal()?
+		}
+
+		const Vec4f clip0 = projMat * Vec4f(in0);
+		const Vec4f clip1 = projMat * Vec4f(in1);
+
+		const Vec3f ndc0 = Vec3f(clip0.v) / clip0[3];
+		const Vec3f ndc1 = Vec3f(clip1.v) / clip1[3];
+
+		const Vec2f lineDir2d = normalize((Vec2f(ndc1.v) - Vec2f(ndc0.v)) * viewportSize);
+		const Vec2f perpendicularDir2d = Vec2f(-lineDir2d[1], lineDir2d[0]);
+
+		const Vec2f offset2d = (Vec2f(glState.lineWidth) / viewportSize) * perpendicularDir2d;
+
+		// 2D screen coordinates of the new pairs (a,b) of vertices for each input vertex (0,1)
+		const Vec2f v0a_xy = Vec2f(clip0.v) + offset2d*clip0[3];
+		const Vec2f v0b_xy = Vec2f(clip0.v) - offset2d*clip0[3];
+		const Vec2f v1a_xy = Vec2f(clip1.v) + offset2d*clip1[3];
+		const Vec2f v1b_xy = Vec2f(clip1.v) - offset2d*clip1[3];
+
+		// Final 4D coordinates of the new vertices
+		const auto v0a = Vec4f(v0a_xy[0], v0a_xy[1], clip0[2], clip0[3]);
+		const auto v0b = Vec4f(v0b_xy[0], v0b_xy[1], clip0[2], clip0[3]);
+		const auto v1a = Vec4f(v1a_xy[0], v1a_xy[1], clip1[2], clip1[3]);
+		const auto v1b = Vec4f(v1b_xy[0], v1b_xy[1], clip1[2], clip1[3]);
+
+		newVertices[6*n+0] = v0a;
+		newVertices[6*n+1] = v0b;
+		newVertices[6*n+2] = v1a;
+
+		newVertices[6*n+3] = v1a;
+		newVertices[6*n+4] = v0b;
+		newVertices[6*n+5] = v1b;
+	}
+	if(mode == LineLoop)
+	{
+		// Connect the ends
+		const auto lastN = newVertices.size()-1;
+		Q_ASSERT(lastN >= 2);
+		newVertices.push_back(newVertices[lastN-2]);
+		newVertices.push_back(newVertices[lastN]);
+		newVertices.push_back(newVertices[0]);
+
+		newVertices.push_back(newVertices[0]);
+		newVertices.push_back(newVertices[lastN]);
+		newVertices.push_back(newVertices[1]);
+	}
+	vao->bind();
+	verticesVBO->bind();
+
+	verticesVBO->allocate(newVertices.data(), newVertices.size() * sizeof newVertices[0]);
+
+	const auto& pr = basicShaderProgram;
+	pr->bind();
+	pr->setAttributeBuffer(basicShaderVars.vertex, vertexArray.type, 0, 4);
+	pr->enableAttributeArray(basicShaderVars.vertex);
+	pr->setUniformValue(basicShaderVars.projectionMatrix, QMatrix4x4{});
+	pr->setUniformValue(basicShaderVars.color, currentColor.toQVector());
+
+#ifdef GL_MULTISAMPLE
+	const bool multisampleWasOn = multisamplingEnabled && glIsEnabled(GL_MULTISAMPLE);
+	if(multisamplingEnabled && glState.lineSmooth)
+		glEnable(GL_MULTISAMPLE);
+#endif
+
+	// TODO: convert this to a triangle strip, but mind the overlaps and gaps of non-parallel lines' corners
+	glDrawArrays(GL_TRIANGLES, 0, newVertices.size());
+
+	verticesVBO->release();
+	vao->release();
+
+	if (pr) pr->release();
+
+#ifdef GL_MULTISAMPLE
+	if(multisamplingEnabled && !multisampleWasOn && glState.lineSmooth)
+		glDisable(GL_MULTISAMPLE);
+#endif
+}
+
 void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool doProj, const unsigned short* indices)
 {
 	if(!count) return;
@@ -2419,6 +2601,24 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool do
 	const Mat4f& m = getProjector()->getProjectionMatrix();
 	const QMatrix4x4 qMat(m[0], m[4], m[8], m[12], m[1], m[5], m[9], m[13], m[2], m[6], m[10], m[14], m[3], m[7], m[11], m[15]);
 
+	const bool lineMode = mode==LineStrip || mode==LineLoop || mode==Lines;
+	const bool isCoreProfile = StelMainView::getInstance().getGLInformation().isCoreProfile;
+	const bool isGLES = StelMainView::getInstance().getGLInformation().isGLES;
+	const bool wideLineMode = lineMode && glState.lineWidth>1;
+	if(wideLineMode && (isCoreProfile || isGLES) && projectedVertexArray.type == GL_FLOAT)
+	{
+		const bool fixedColor = !texCoordArray.enabled && !colorArray.enabled && !normalArray.enabled;
+		if(fixedColor && !indices)
+		{
+			// Optimized version that doesn't use geometry shader, which appears to be slow on some GPUs.
+			// Ideally, we'd like to get rid of the geometry shader completely,
+			// but this will result in more code for small performance gain.
+			drawFixedColorWideLinesAsQuads(projectedVertexArray, count, offset, m, mode);
+			return;
+		}
+	}
+	const bool coreProfileWideLineMode = wideLineMode && isCoreProfile;
+
 	vao->bind();
 	verticesVBO->bind();
 	GLsizeiptr numberOfVerticesToCopy = count + offset;
@@ -2429,41 +2629,38 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool do
 		numberOfVerticesToCopy = 1 + *std::max_element(indices + offset, indices + offset + count);
 	}
 
-	const bool wideLineMode = (mode==LineStrip || mode==LineLoop) && StelMainView::getInstance().getGLInformation().isCoreProfile;
 #ifdef GL_MULTISAMPLE
 	const bool multisampleWasOn = multisamplingEnabled && glIsEnabled(GL_MULTISAMPLE);
 #endif
 
-	const auto core = StelApp::getInstance().getCore();
-	const auto rgbMaxValue=calcRGBMaxValue(core->getDitheringMode());
 	if (!texCoordArray.enabled && !colorArray.enabled && !normalArray.enabled)
 	{
-		pr = wideLineMode ? wideLineShaderProgram : basicShaderProgram;
+		pr = coreProfileWideLineMode ? wideLineShaderProgram : basicShaderProgram;
 		pr->bind();
 
 		verticesVBO->allocate(projectedVertexArray.pointer, projectedVertexArray.vertexSizeInBytes()*numberOfVerticesToCopy);
 
-		if(wideLineMode)
+#ifdef GL_MULTISAMPLE
+		if(multisamplingEnabled && glState.lineSmooth)
+			glEnable(GL_MULTISAMPLE);
+#endif
+		if(coreProfileWideLineMode)
 		{
 			pr->setAttributeBuffer(wideLineShaderVars.vertex, projectedVertexArray.type, 0, projectedVertexArray.size);
 			pr->enableAttributeArray(wideLineShaderVars.vertex);
 			pr->setUniformValue(wideLineShaderVars.projectionMatrix, qMat);
-			pr->setUniformValue(wideLineShaderVars.color, currentColor[0], currentColor[1], currentColor[2], currentColor[3]);
+			pr->setUniformValue(wideLineShaderVars.color, currentColor.toQVector());
 			pr->setUniformValue(wideLineShaderVars.lineWidth, glState.lineWidth);
 			GLint viewport[4] = {};
 			glGetIntegerv(GL_VIEWPORT, viewport);
 			pr->setUniformValue(wideLineShaderVars.viewportSize, QVector2D(viewport[2], viewport[3]));
-#ifdef GL_MULTISAMPLE
-			if(multisamplingEnabled && glState.lineSmooth)
-				glEnable(GL_MULTISAMPLE);
-#endif
 		}
 		else
 		{
 			pr->setAttributeBuffer(basicShaderVars.vertex, projectedVertexArray.type, 0, projectedVertexArray.size);
 			pr->enableAttributeArray(basicShaderVars.vertex);
 			pr->setUniformValue(basicShaderVars.projectionMatrix, qMat);
-			pr->setUniformValue(basicShaderVars.color, currentColor[0], currentColor[1], currentColor[2], currentColor[3]);
+			pr->setUniformValue(basicShaderVars.color, currentColor.toQVector());
 		}
 	}
 	else if (texCoordArray.enabled && !colorArray.enabled && !normalArray.enabled && !wideLineMode)
@@ -2483,17 +2680,10 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool do
 		pr->setAttributeBuffer(texturesShaderVars.vertex, projectedVertexArray.type, 0, projectedVertexArray.size);
 		pr->enableAttributeArray(texturesShaderVars.vertex);
 		pr->setUniformValue(texturesShaderVars.projectionMatrix, qMat);
-		pr->setUniformValue(texturesShaderVars.texColor, currentColor[0], currentColor[1], currentColor[2], currentColor[3]);
+		pr->setUniformValue(texturesShaderVars.texColor, currentColor.toQVector());
 		pr->setAttributeBuffer(texturesShaderVars.texCoord, texCoordArray.type, texCoordDataOffset, texCoordArray.size);
 		pr->enableAttributeArray(texturesShaderVars.texCoord);
 		//pr->setUniformValue(texturesShaderVars.texture, 0);    // use texture unit 0
-		const int ditherTexSampler = 1;
-		if(!ditherPatternTex)
-			ditherPatternTex = StelApp::getInstance().getTextureManager().getDitheringTexture(ditherTexSampler);
-		else
-			ditherPatternTex->bind(ditherTexSampler);
-		pr->setUniformValue(texturesShaderVars.ditherPattern, ditherTexSampler);
-		pr->setUniformValue(texturesShaderVars.rgbMaxValue, rgbMaxValue[0], rgbMaxValue[1], rgbMaxValue[2]);
 	}
 	else if (texCoordArray.enabled && colorArray.enabled && !normalArray.enabled && !wideLineMode)
 	{
@@ -2521,18 +2711,11 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool do
 		pr->setAttributeBuffer(texturesColorShaderVars.color, colorArray.type, colorDataOffset, colorArray.size);
 		pr->enableAttributeArray(texturesColorShaderVars.color);
 		//pr->setUniformValue(texturesShaderVars.texture, 0);    // use texture unit 0
-		const int ditherTexSampler = 1;
-		if(!ditherPatternTex)
-			ditherPatternTex = StelApp::getInstance().getTextureManager().getDitheringTexture(ditherTexSampler);
-		else
-			ditherPatternTex->bind(ditherTexSampler);
-		pr->setUniformValue(texturesColorShaderVars.ditherPattern, ditherTexSampler);
-		pr->setUniformValue(texturesColorShaderVars.rgbMaxValue, rgbMaxValue[0], rgbMaxValue[1], rgbMaxValue[2]);
 		pr->setUniformValue(texturesColorShaderVars.saturation, saturation);
 	}
 	else if (!texCoordArray.enabled && colorArray.enabled && !normalArray.enabled)
 	{
-		pr = wideLineMode ? colorfulWideLineShaderProgram : colorShaderProgram;
+		pr = coreProfileWideLineMode ? colorfulWideLineShaderProgram : colorShaderProgram;
 		pr->bind();
 
 		const auto bufferSize = projectedVertexArray.vertexSizeInBytes()*numberOfVerticesToCopy +
@@ -2544,7 +2727,7 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool do
 		const auto colorDataSize = colorArray.vertexSizeInBytes()*numberOfVerticesToCopy;
 		verticesVBO->write(colorDataOffset, colorArray.pointer, colorDataSize);
 
-		if(wideLineMode)
+		if(coreProfileWideLineMode)
 		{
 			pr->setAttributeBuffer(colorfulWideLineShaderVars.vertex, projectedVertexArray.type, 0, projectedVertexArray.size);
 			pr->enableAttributeArray(colorfulWideLineShaderVars.vertex);
@@ -2555,10 +2738,6 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool do
 			GLint viewport[4] = {};
 			glGetIntegerv(GL_VIEWPORT, viewport);
 			pr->setUniformValue(colorfulWideLineShaderVars.viewportSize, QVector2D(viewport[2], viewport[3]));
-#ifdef GL_MULTISAMPLE
-			if(multisamplingEnabled && glState.lineSmooth)
-				glEnable(GL_MULTISAMPLE);
-#endif
 		}
 		else
 		{
@@ -2568,6 +2747,10 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool do
 			pr->setAttributeBuffer(colorShaderVars.color, colorArray.type, colorDataOffset, colorArray.size);
 			pr->enableAttributeArray(colorShaderVars.color);
 		}
+#ifdef GL_MULTISAMPLE
+		if(multisamplingEnabled && glState.lineSmooth)
+			glEnable(GL_MULTISAMPLE);
+#endif
 	}
 	else
 	{

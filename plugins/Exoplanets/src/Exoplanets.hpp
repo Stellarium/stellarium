@@ -358,6 +358,7 @@ public slots:
 
 	//! Connect this to StelApp font size.
 	void setFontSize(int s){font.setPixelSize(s);}
+
 private:
 	// Font used for displaying our text
 	QFont font;
@@ -451,6 +452,8 @@ private slots:
 	void reloadCatalog(void);
 	//! Call when button "Save settings" in main GUI are pressed
 	void 	saveSettings() { saveConfiguration(); }
+
+	void setFlagSyncShowLabels(bool b) { Exoplanet::syncShowLabels = b; }
 };
 
 
@@ -467,7 +470,7 @@ class ExoplanetsStelPluginInterface : public QObject, public StelPluginInterface
 public:
 	virtual StelModule* getStelModule() const Q_DECL_OVERRIDE;
 	virtual StelPluginInfo getPluginInfo() const Q_DECL_OVERRIDE;
-	virtual QObjectList getExtensionList() const Q_DECL_OVERRIDE { return QObjectList(); }
+	//virtual QObjectList getExtensionList() const Q_DECL_OVERRIDE { return QObjectList(); }
 };
 
 #endif /* EXOPLANETS_HPP */

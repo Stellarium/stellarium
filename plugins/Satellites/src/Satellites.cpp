@@ -146,6 +146,7 @@ void Satellites::init()
 		{
 			//qDebug() << "Satellites: created section in config file.";
 			restoreDefaultSettings();
+			restoreDefaultTleSources();
 		}
 
 		// populate settings from main config file.
@@ -322,7 +323,6 @@ bool Satellites::backupCatalog(bool deleteOriginal)
 			   << QDir::toNativeSeparators(backupPath);
 		return false;
 	}
-
 	return true;
 }
 
@@ -655,9 +655,9 @@ void Satellites::restoreDefaultTleSources()
 			urls << url;
 	}
 	// Other sources and supplemental data from Celestrack
-	urls << "1,https://celestrak.org/NORAD/elements/supplemental/starlink.txt"
+	urls << "1,https://celestrak.org/NORAD/elements/supplemental/sup-gp.php?FILE=starlink&FORMAT=tle"
 	     << "https://www.amsat.org/amsat/ftp/keps/current/nasabare.txt"
-	     << "https://www.prismnet.com/~mmccants/tles/classfd.zip";
+	     << "https://mmccants.org/tles/classfd.zip";
 
 	saveTleSources(urls);
 }
@@ -722,7 +722,7 @@ void Satellites::restoreDefaultSettings()
 
 void Satellites::restoreDefaultCatalog()
 {
-    if (QFileInfo::exists(catalogPath))
+	if (QFileInfo::exists(catalogPath))
 		backupCatalog(true);
 
 	QFile src(":/satellites/satellites.json");
@@ -1676,7 +1676,7 @@ QStringList Satellites::guessGroups(const TleData& tleData)
 
 		// add "supergroups", based on CelesTrak's groups
 		QStringList superGroup = satSuperGroupsMap.values(groupName);
-		if (superGroup.size()>0)
+		if (!superGroup.isEmpty())
 		{
 			for (int i=0; i<superGroup.size(); i++)
 			{
@@ -2392,7 +2392,7 @@ void Satellites::saveDownloadedUpdate(QNetworkReply* reply)
 		}
 	}
 	updateSources.clear();
-	if (newData.size()>0)
+	if (!newData.isEmpty())
 		updateSatellites(newData);
 	else
 		emit updateStateChanged(OtherError);
@@ -2685,7 +2685,7 @@ QString Satellites::getSatIdFromLine2(const QString& line)
 	if (!id.isEmpty())
 	{
 		// Strip any leading zeros as they should be unique ints as strings.
-		static const QRegularExpression re("^[0]*");
+		static const QRegularExpression re("^[0]*\\B");
 		id.remove(re);
 	}
 	return id;
@@ -2694,8 +2694,8 @@ QString Satellites::getSatIdFromLine2(const QString& line)
 void Satellites::loadExtraData()
 {
 	// Description of file and some additional information you can find here:
-	// 1) http://www.prismnet.com/~mmccants/tles/mccdesc.html
-	// 2) http://www.prismnet.com/~mmccants/tles/intrmagdef.html
+	// 1) https://mmccants.org/tles/mccdesc.html
+	// 2) https://mmccants.org/tles/intrmagdef.html
 	QFile qsmFile(":/satellites/qs.mag");	
 	qsMagList.clear();	
 	if (qsmFile.open(QFile::ReadOnly))

@@ -38,8 +38,8 @@ class NavStarsWindow;
 @{
 The Navigational Stars plugin marks the 58 navigational stars of The
 Nautical Almanac and the 2102-D Rude Star Finder on the sky. Alternatively,
-the French, German, and Russian selection of navigational stars are also
-available.
+the French, German, and Russian selection of navigational stars or alignment
+stars for various telescopes are also available.
 
 The NavStars class is the main class of the plug-in. It manages the list of
 navigational stars and manipulate show/hide markers of them. Markers
@@ -79,11 +79,21 @@ public:
 		AngloAmerican,	//!< Anglo-American set (The Nautical Almanac)
 		French,		//!< French set (Ephémérides Nautiques)
 		Russian,	//!< Russian set (Морской астрономический ежегодник)
+		USSRAvia,	//!< The set of navigational stars which was used for Soviet aviation
+		USSRSpace,	//!< The set of navigational stars for Soviet and Russian manned space programs Voskhod and Soyuz
 		German,		//!< German set (Nautisches Jahrbuch)
 		GeminiAPS,	//!< Gemini APS Alignment Star List
 		MeadeLX200,	//!< Meade LX200 Alignment Star Library
 		MeadeETX,	//!< Meade ETX Alignment Star Library
-		Celestron	//!< Celestron Alignment Star List
+		MeadeAS494,	//!< Meade Autostar #494 Alignment Stars
+		MeadeAS497,	//!< Meade Autostar #497 Alignment Stars
+		CelestronNS,	//!< Celestron NexStar Alignment Star List
+		Apollo,		//!< Apollo Alignment Star List
+		SkywatcherSS,	//!< Skywatcher SynScan Hand Controller and SynScan Pro App
+		VixenSB,	//!< Vixen Starbook Alignment Stars
+		ArgoNavis,	//!< Alignment stars for Argo Navis digital setting circles
+		OrionIS,	//!< Alignment stars for Orion Intelliscope mounts
+		SkyCommander	//!< Alignment stars for Sky Commander DSCs
 	};
 	Q_ENUM(NavigationalStarsSet)
 
@@ -183,6 +193,8 @@ public slots:
 	//! @return QString The representation of the extraString info.
 	QString oneRowTwoCells(const QString& a, const QString& b, const QString& extra, bool tabulatedView);
 
+	//! If information output is limited to the currently active navigational stars (getLimitInfoToNavStars()),
+	//! check a dedicated list of exceptions (Sun, Moon, planets apart from Mercury) to also add information.
 	bool isPermittedObject(const QString& s);
 
 private slots:
@@ -218,7 +230,6 @@ private:
 	bool useUTCTime;
 
 	QString timeZone;
-	QVector<QString> permittedObjects;
 
 	//! List of the navigational stars' HIP numbers.
 	QList<int> starNumbers;
@@ -247,7 +258,7 @@ class NavStarsStelPluginInterface : public QObject, public StelPluginInterface
 public:
 	virtual StelModule* getStelModule() const Q_DECL_OVERRIDE;
 	virtual StelPluginInfo getPluginInfo() const Q_DECL_OVERRIDE;
-	virtual QObjectList getExtensionList() const Q_DECL_OVERRIDE { return QObjectList(); }
+	//virtual QObjectList getExtensionList() const Q_DECL_OVERRIDE { return QObjectList(); }
 };
 
 #endif // NAVSTARS_HPP

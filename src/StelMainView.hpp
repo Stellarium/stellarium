@@ -79,6 +79,7 @@ public:
 		GLint maxTextureSize = 2048;
 		bool supportsLuminanceTextures = false;
 		bool isCoreProfile = false;
+		bool isHighGraphicsMode = false;
 		bool isGLES = false;
 	};
 

@@ -136,7 +136,7 @@ public:
 	//! Get color for landscape labels
 	Vec3f getLabelColor() const { return labelColor; }
 	//! Set color for landscape labels
-	void setLabelColor(const Vec3f& c) { labelColor=c; };
+	void setLabelColor(const Vec3f& c) { labelColor=c; }
 
 	//! Get landscape name
 	QString getName() const {return name;}
@@ -179,6 +179,8 @@ public:
 	//! Get the sine of the limiting altitude (can be used to short-cut drawing below horizon, like star fields). There is no set here, value is only from landscape.ini
 	double getSinMinAltitudeLimit() const {return sinMinAltitudeLimit;}
 
+	void setTransparency(const double f) { landscapeTransparency=f; }
+
 	//! Find opacity in a certain direction. (New in V0.13 series)
 	//! can be used to find sunrise or visibility questions on the real-world landscape horizon.
 	//! Default implementation indicates the horizon equals math horizon.
@@ -218,6 +220,7 @@ protected:
 	//! @param polyAngleRotateZ possibility to set some final calibration offset like meridian convergence correction.
 	//! @param listMode keys which indicate angular units for the angles
 	void createPolygonalHorizon(const QString& lineFileName, const float polyAngleRotateZ=0.0f, const QString &listMode="azDeg_altDeg");
+	void drawHorizonLine(StelCore* core, StelPainter& painter);
 
 	//! search for a texture in landscape directory, else global textures directory
 	//! @param basename The name of a texture file, e.g. "fog.png"
@@ -228,7 +231,6 @@ protected:
 	std::unique_ptr<QOpenGLVertexArrayObject> vao;
 	std::unique_ptr<QOpenGLBuffer> vbo;
 	StelProjectorP prevProjector;
-	StelTextureSP ditherPatternTex;
 	std::unique_ptr<QOpenGLShaderProgram> renderProgram;
 
 	double radius;
@@ -252,6 +254,7 @@ protected:
 				  //! Not in landscape.ini: Used in special cases where the horizon may rotate, e.g. on a ship.
 
 	double sinMinAltitudeLimit; //! Minimal altitude of landscape cover. Can be used to construct bounding caps, so that e.g. no stars are drawn below this altitude. Default -0.035, i.e. sin(-2 degrees).
+	double landscapeTransparency;
 
 	StelLocation location; //! OPTIONAL. If present, can be used to set location.
 	/** May be given in landscape.ini:light_pollution_luminance in cd/m². Default: no change.
@@ -359,9 +362,7 @@ private:
 		int tanMode;
 		int calibrated;
 		int brightness;
-		int rgbMaxValue;
 		int whatToRender;
-		int ditherPattern;
 		int decorAngleShift;
 		int firstSideInBatch;
 		int sidePresenceMask;
@@ -392,6 +393,8 @@ public:
 	virtual void load(const QSettings& landscapeIni, const QString& landscapeId) Q_DECL_OVERRIDE;
 	virtual void draw(StelCore* core, bool onlyPolygon) Q_DECL_OVERRIDE;
 	virtual float getOpacity(Vec3d azalt) const Q_DECL_OVERRIDE;
+	// To allow ad-hoc "zero" landscapes with color from map
+	void setGroundColor(const Vec3f &color);
 private:
 	// we have inherited: horizonFileName, horizonPolygon, horizonPolygonLineColor
 	Vec3f groundColor; //! specified in landscape.ini[landscape]ground_color.
@@ -436,8 +439,6 @@ private:
 		int texFov;
 		int mapTex;
 		int brightness;
-		int rgbMaxValue;
-		int ditherPattern;
 		int projectionMatrixInverse;
 	} shaderVars;
 };
@@ -502,9 +503,7 @@ private:
 		int mapTex;
 		int mapTexTop;
 		int brightness;
-		int rgbMaxValue;
 		int mapTexBottom;
-		int ditherPattern;
 		int bottomCapColor;
 		int projectionMatrixInverse;
 	} shaderVars;

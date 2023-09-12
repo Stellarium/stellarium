@@ -36,6 +36,7 @@
 #include "precession.h"
 
 #include <set>
+#include <vector>
 #include <QSettings>
 #include <QDebug>
 #include <QFontMetrics>
@@ -185,7 +186,7 @@ private:
 	bool showPartitions;
 	bool showLabel;
 	static QMap<int, double> precessionPartitions;
-	static QMap<Vec3d, QString> eclipticOnDatePartitions; //!< Map of up to 366 entries double={eclLongitude, aberration, nutation}, QString label
+	static std::vector<QPair<Vec3d, QString>> eclipticOnDatePartitions; //!< Collection of up to 366 entries Vec3d={eclLongitude, aberration, nutation}, QString label
 };
 
 // rms added color as parameter
@@ -663,7 +664,7 @@ SkyLine::SkyLine(SKY_LINE_TYPE _line_type) : line_type(_line_type), color(0.f, 0
 // Contains ecliptic rotations from -13000, -12900, ... , +13000
 QMap<int, double> SkyLine::precessionPartitions;
 // Contains ecliptic partitions {eclLongitude, aberration, nutation} with labels for the current year
-QMap<Vec3d, QString> SkyLine::eclipticOnDatePartitions;
+std::vector<QPair<Vec3d, QString>> SkyLine::eclipticOnDatePartitions;
 QSharedPointer<Planet> SkyLine::earth, SkyLine::sun, SkyLine::moon;
 
 //! call once before creating the first line.
@@ -731,7 +732,7 @@ void SkyLine::computeEclipticDatePartitions(int year)
 			if (QList<int>{1, 5, 10, 15, 20, 25}.contains(date[2]))
 				label=QString("%1.%2").arg(QString::number(date[2]), StelLocaleMgr::romanMonthName(date[1]));
 		}
-		eclipticOnDatePartitions.insert(Vec3d(lng, aberration, deltaPsi), label);
+		eclipticOnDatePartitions.push_back({Vec3d(lng, aberration, deltaPsi), label});
 	}
 }
 
@@ -1225,20 +1226,19 @@ void SkyLine::draw(StelCore *core) const
 			const double currentFoV=core->getMovementMgr()->getCurrentFov();
 
 			// This special line type does not show the actual ecliptic line but only the partitions. These must be read from the precomputed static array eclipticOnDatePartitions
-			QMap<Vec3d, QString>::const_iterator it=eclipticOnDatePartitions.constBegin();
-			while (it != eclipticOnDatePartitions.constEnd())
+			for (const auto& v : eclipticOnDatePartitions)
 			{
-				double lng=it.key()[0]; // ecl. longitude, radians
-				const double nutation=it.key()[1]; // nutation in longitude, radians
-				const double aberration=it.key()[2]; // aberration, radians
+				double lng=v.first[0]; // ecl. longitude, radians
+				const double nutation=v.first[1]; // nutation in longitude, radians
+				const double aberration=v.first[2]; // aberration, radians
 				if (core->getUseNutation())
 					lng+=nutation;
 				if (core->getUseAberration())
 					lng+=aberration;
-				const QString &label=it.value();
+				const QString &label=v.second;
 				// draw and labels: derive the irregular tick lengths from labeling
 				Vec3d start=fpt;
-				Vec3d end= (label.length()>0) ? part10 : part1;
+				Vec3d end= label.isEmpty() ? part1 : part10;
 				if (label.contains("5"))
 					end=part5;
 				Vec3d end10=part10;
@@ -1250,7 +1250,7 @@ void SkyLine::draw(StelCore *core) const
 
 				sPainter.drawGreatCircleArc(start, end, Q_NULLPTR, Q_NULLPTR, Q_NULLPTR);
 
-				if (label.length()>0 && (
+				if (!label.isEmpty() && (
 					currentFoV<60. // all labels
 					|| (currentFoV<=180. && !label.contains("5")) // 1.MM/10.MM/20.MM
 					|| label.startsWith("1.") // in any case
@@ -1266,7 +1266,6 @@ void SkyLine::draw(StelCore *core) const
 					float shiftx = - static_cast<float>(sPainter.getFontMetrics().boundingRect(label).width()) * 0.5f;
 					sPainter.drawText(end10, label, textAngle*M_180_PIf, shiftx, shifty, true);
 				}
-				it++;
 			}
 		}
 		else for (int i=0; i<i_max; ++i)

@@ -874,6 +874,7 @@ void ObsListDialog::newListButtonPressed()
 {
 	selectedOlud=QUuid::createUuid().toString();
 	itemModel->removeRows(0, itemModel->rowCount()); // don't use clear() here!
+	currentItemCollection.clear();
 
 	//ui->treeView->clearSelection(); ???
 	switchEditMode(true, true);
@@ -1389,7 +1390,7 @@ QVariantMap ObsListDialog::prepareCurrentList(QHash<QString, observingListItem> 
 
 	// List of objects
 	QVariantList listOfObjects;
-	QHashIterator<QString, observingListItem> i(currentItemCollection);
+	QHashIterator<QString, observingListItem> i(itemHash);
 	while (i.hasNext())
 	{
 		i.next();
@@ -1422,8 +1423,8 @@ void ObsListDialog::headerClicked(int index)
 }
 
 // Get the magnitude from selected object (or a dash if unavailable)
-QString ObsListDialog::getMagnitude(const QList<StelObjectP> &selectedObject, StelCore *core) {
-
+QString ObsListDialog::getMagnitude(const QList<StelObjectP> &selectedObject, StelCore *core)
+{
 	if (!core)
 		return DASH;
 

@@ -106,9 +106,8 @@ private:
 	class StelPropertyMgr* propMgr;
 	QFont font4WCR, font8WCR, font16WCR, font32WCR;
 	Vec3f color;
-	static constexpr float cp = static_cast<float>(1./(1.+M_SQRT2)); // dimension for secondary intercardinals
-	static constexpr float qp = static_cast<float>(0.5f*cp);
-	static constexpr float tqp = static_cast<float>(1.5f*cp);
+	static constexpr float q8 = M_SQRT2*0.5f; // dimension for intercardinals
+	static const float sp8, cp8, s1p16, c1p16, s3p16, c3p16; // dimensions for 2nd/3rd intercardinals
 	static const QMap<Cardinals::CompassDirection, Vec3f> rose4winds, rose8winds, rose16winds, rose32winds;
 	QMap<Cardinals::CompassDirection, QString> labels;
 	LinearFader fader4WCR, fader8WCR, fader16WCR, fader32WCR;
@@ -150,7 +149,9 @@ class LandscapeMgr : public StelModule
 		   WRITE setAtmosphereModelPath
 		   NOTIFY atmosphereModelPathChanged)
 	Q_PROPERTY(QString defaultAtmosphereModelPath
-		   READ getDefaultAtmosphereModelPath)
+		   READ getDefaultAtmosphereModelPath
+		   SCRIPTABLE false
+		   CONSTANT)
 	Q_PROPERTY(bool atmosphereShowMySkyStoppedWithError
 		   READ getAtmosphereShowMySkyStoppedWithError
 		   WRITE setAtmosphereShowMySkyStoppedWithError
@@ -252,7 +253,8 @@ class LandscapeMgr : public StelModule
 		   WRITE setCurrentLandscapeID
 		   NOTIFY currentLandscapeChanged)
 	Q_PROPERTY(QStringList allLandscapeNames
-		   READ getAllLandscapeNames)
+		   READ getAllLandscapeNames
+		   NOTIFY landscapesChanged)
 	Q_PROPERTY(QString currentLandscapeName
 		   READ getCurrentLandscapeName
 		   WRITE setCurrentLandscapeName
@@ -272,6 +274,14 @@ class LandscapeMgr : public StelModule
 		   READ getLabelColor
 		   WRITE setLabelColor
 		   NOTIFY labelColorChanged)
+	Q_PROPERTY(double landscapeTransparency
+		   READ getLandscapeTransparency
+		   WRITE setLandscapeTransparency
+		   NOTIFY landscapeTransparencyChanged)
+	Q_PROPERTY(bool flagLandscapeUseTransparency
+		   READ getFlagLandscapeUseTransparency
+		   WRITE setFlagLandscapeUseTransparency
+		   NOTIFY flagLandscapeUseTransparencyChanged)
 
 public:
 	LandscapeMgr();
@@ -554,6 +564,23 @@ public slots:
 	//! Set atmosphere fade duration in s.
 	void setAtmosphereFadeDuration(const float f);
 
+	double getLandscapeTransparency() const;
+	void setLandscapeTransparency(const double f);
+	//! Return the value of the flag determining if a transparency should be used.
+	bool getFlagLandscapeUseTransparency() const {return flagLandscapeUseTransparency; }
+	//! Set the value of the flag determining if a transparency should be used.
+	void setFlagLandscapeUseTransparency(bool b)
+	{
+		if (b!=flagLandscapeUseTransparency)
+		{
+			flagLandscapeUseTransparency=b;
+			emit flagLandscapeUseTransparencyChanged(b);
+		}
+		if (b==false)
+			landscape->setTransparency(0.0);
+	}
+
+
 	/*
 	//This method has been removed, use StelSkyDrawer::getBortleScaleIndex instead, or StelMainScriptAPI::getBortleScaleIndex in scripts
 	//Also, if required, please use StelSkyDrawer::setBortleScaleIndex or StelMainScriptAPI::setBortleScaleIndex instead of LandscapeMgr::setAtmosphereBortleLightPollution
@@ -700,6 +727,8 @@ signals:
 	void flagLandscapeSetsMinimalBrightnessChanged(const bool value);
 	void defaultMinimalBrightnessChanged(const double value);
 	void setFlagEnvironmentAutoEnableChanged(const bool enabled);
+	void landscapeTransparencyChanged(const double value);
+	void flagLandscapeUseTransparencyChanged(const bool value);
 
 	//! Emitted whenever the default landscape is changed
 	//! @param id the landscape id of the new default landscape
@@ -737,8 +766,13 @@ signals:
 
 private slots:
 	//! Reacts to StelCore::locationChanged.
+	//! If flagLightPollutionFromDatabase is active,
+	//! this applies light pollution information from the new location
 	void onLocationChanged(const StelLocation &loc);
-	//! To be connected to StelCore::targetLocationChanged
+	//! To be connected to StelCore::targetLocationChanged.
+	//! This sets landscape with landscapeID.
+	//! If that is empty and flagLandscapeAutoSelection==true, set a landscape fitting to loc's planet.
+	//! Does not set loc itself!
 	void onTargetLocationChanged(const StelLocation &loc, const QString &landscapeID);
 
 	//! Translate labels to new language settings.
@@ -780,13 +814,14 @@ private:
 	QString messageToShow;
 	QTimer* messageTimer = nullptr;
 
-	// Define whether the observer location is to be updated when the landscape is updated.
+	//! Define whether the observer location is to be updated when the landscape is updated and includes location info.
 	bool flagLandscapeSetsLocation;
 
+	//! Define whether on location change onto another planet a landscape for the new planet shall be loaded.
 	bool flagLandscapeAutoSelection;
 
 	bool flagLightPollutionFromDatabase;
-	bool atmosphereNoScatter; // true to suppress actual blue-sky rendering but keep refraction & extinction
+	bool atmosphereNoScatter; //!< true to suppress actual blue-sky rendering but keep refraction & extinction
 
 	//! control drawing of a Polygonal line, if one is defined.
 	bool flagPolyLineDisplayedOnly;
@@ -801,6 +836,11 @@ private:
 	bool flagLandscapeSetsMinimalBrightness;
 	//! Indicate auto-enable atmosphere and landscape for planets with atmospheres in location window
 	bool flagEnvironmentAutoEnabling;
+
+	//! Indicate use of the default transparency value specified in config.ini.
+	bool flagLandscapeUseTransparency;
+	//! A transparency value
+	double landscapeTransparency;
 
 	//! The ID of the currently loaded landscape
 	QString currentLandscapeID;

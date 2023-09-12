@@ -22,6 +22,8 @@
 #include <cmath>
 #include <QPainter>
 #include <QMouseEvent>
+#include "StelLocationMgr.hpp"
+#include "StelApp.hpp"
 
 namespace
 {
@@ -58,7 +60,11 @@ void MapWidget::mousePressEvent(QMouseEvent* event)
 
 	const auto lat = (pos.y() - mapRect.center().y()) / mapRect.height() * -180;
 	const auto lon = (pos.x() - mapRect.center().x()) / mapRect.width()  * 360;
-	emit positionChanged(lon, lat);
+
+	StelLocationMgr* locationMgr = &StelApp::getInstance().getLocationMgr();
+	QColor color=locationMgr->getColorForCoordinates(lon, lat);
+
+	emit positionChanged(lon, lat, color);
 }
 
 void MapWidget::setMap(const QPixmap &map)

@@ -260,6 +260,8 @@ private slots:
 
 	void updateDownloadProgress(qint64 bytesReceived, qint64 bytesTotal);
 	void downloadComplete(QNetworkReply * reply);
+
+	void setFlagSyncShowLabels(bool b) { Supernova::syncShowLabels = b; }
 };
 
 #include <QObject>
@@ -274,7 +276,7 @@ class SupernovaeStelPluginInterface : public QObject, public StelPluginInterface
 public:
 	virtual StelModule* getStelModule() const Q_DECL_OVERRIDE;
 	virtual StelPluginInfo getPluginInfo() const Q_DECL_OVERRIDE;
-	virtual QObjectList getExtensionList() const Q_DECL_OVERRIDE { return QObjectList(); }
+	//virtual QObjectList getExtensionList() const Q_DECL_OVERRIDE { return QObjectList(); }
 };
 
 #endif /* SUPERNOVAE_HPP */

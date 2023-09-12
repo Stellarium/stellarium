@@ -100,12 +100,12 @@ void CLIProcessor::parseCLIArgsPreConfig(const QStringList& argList)
 			  << "--version (or -v)       : Print program name and version and exit.\n"
 			  << "--help (or -h)          : This cruft.\n"
 			  << "--config-file (or -c)   : Use an alternative name for the config file\n"
+			  << "--log-file (or -l)      : Use an alternative name for the log file\n"
 			  << "--user-dir (or -u)      : Use an alternative user data directory\n"
 			  << "--verbose               : Even more diagnostic output in logfile \n"
 			  << "                          (esp. multimedia handling)\n"
 			  << "--opengl-compat (or -C) : Request OpenGL Compatibility profile\n"
 			  << "                          May help for certain driver configurations.\n"
-			  << "--fix-text (or -t)      : May fix text rendering problems\n"
 			  << "--single-buffer         : Use single buffer swap (avoid screen blanking on Intel UHD)\n"
 			  << "--scale-gui  <scale factor>  : Scaling the GUI according to scale factor\n"
 			  << "--gui-css (or -G) <styleName> : Use customized <styleName>.css file for GUI colors\n"
@@ -151,9 +151,6 @@ void CLIProcessor::parseCLIArgsPreConfig(const QStringList& argList)
 
 	if (argsGetOption(argList, "-C", "--opengl-compat"))
 		qApp->setProperty("onetime_opengl_compat", true);
-
-	if (argsGetOption(argList, "-t", "--fix-text"))
-		qApp->setProperty("text_texture", true); // Will be observed in StelPainter::drawText()
 
 	if (argsGetOption(argList, "", "--single-buffer"))
 		qApp->setProperty("onetime_single_buffer", true);

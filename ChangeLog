@@ -1,3 +1,20 @@
+23.2 [2023-07-02]
+The Stellarium Team has released version 23.2.
+
+The major changes of this version:
+- vectorize marker of deep-sky objects
+- updated support locations
+- discovery circumstances for solar system objects
+
+Behind the scenes, many more minor issues were fixed.
+
+TELESCOPE USERS
+
+Like in the 1.* series, it seems the TelescopeControl plugin at least on
+Windows works better in the Qt5-based releases. Just install this if you
+are affected. We are looking for telescope users with programming skills
+to help us fixing this issue. Reward possible!
+
 23.1 [2023-03-27]
 The Stellarium Team has released version 23.1.
 

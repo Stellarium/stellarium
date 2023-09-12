@@ -23,6 +23,7 @@
 #include "Orbit.hpp"
 #include "StelCore.hpp"
 #include "StelTranslator.hpp"
+#include "StelLocaleMgr.hpp"
 
 #include <QRegularExpression>
 #include <QDebug>
@@ -64,22 +65,26 @@ MinorPlanet::MinorPlanet(const QString& englishName,
 		  pTypeStr),
 	minorPlanetNumber(0),
 	slopeParameter(-10.0f), // -10 == mark as uninitialized: used in getVMagnitude()
-	nameIsProvisionalDesignation(false),
+	nameIsIAUDesignation(false),
+	iauDesignationText(""),
+	extraDesignations(),
 	properName(englishName),
 	b_v(99.f),
 	specT(""),
-	specB("")
+	specB(""),
+	discoverer(""),
+	discoveryDate("")
 {
 	//Try to handle an occasional naming conflict between a moon and asteroid. Conflicting names are also shown with appended *.
 	if (englishName.endsWith('*'))
 		properName = englishName.left(englishName.length() - 1);
 
-	//Try to detect provisional designation	
-	QString provisionalDesignation = renderProvisionalDesignationinHtml(englishName);
-	if (!provisionalDesignation.isEmpty())
+	//Try to detect IAU provisional designation
+	QString iauDesignation = renderIAUDesignationinHtml(englishName);
+	if (!iauDesignation.isEmpty())
 	{
-		nameIsProvisionalDesignation = true;
-		provisionalDesignationHtml = provisionalDesignation;
+		nameIsIAUDesignation = true;
+		iauDesignationHtml = iauDesignation;
 	}
 }
 
@@ -88,7 +93,7 @@ MinorPlanet::~MinorPlanet()
 	//Do nothing for the moment
 }
 
-void MinorPlanet::setSpectralType(QString sT, QString sB)
+void MinorPlanet::setSpectralType(const QString &sT, const QString &sB)
 {
 	specT = sT;
 	specB = sB;
@@ -109,7 +114,7 @@ void MinorPlanet::setMinorPlanetNumber(int number)
 
 void MinorPlanet::setAbsoluteMagnitudeAndSlope(const float magnitude, const float slope)
 {
-	if (slope < -1.0f || slope > 2.0f)
+	if ((slope < -1.0f) || (slope > 2.0f))
 	{
 		// G "should" be between 0 and 1, but may be somewhat outside.
 		qDebug() << "MinorPlanet::setAbsoluteMagnitudeAndSlope(): Invalid slope parameter value (must be between -1 and 2, mostly [0..1])";
@@ -119,13 +124,14 @@ void MinorPlanet::setAbsoluteMagnitudeAndSlope(const float magnitude, const floa
 	slopeParameter = slope;
 }
 
-void MinorPlanet::setProvisionalDesignation(QString designation)
+void MinorPlanet::setIAUDesignation(const QString &designation)
 {
 	//TODO: This feature has to be implemented better, anyway.
 	if (!designation.isEmpty())
 	{
-		provisionalDesignationHtml = renderProvisionalDesignationinHtml(designation);
-		nameIsProvisionalDesignation = false;
+		iauDesignationHtml = renderIAUDesignationinHtml(designation);
+		iauDesignationText = designation;
+		nameIsIAUDesignation = false;
 	}
 }
 
@@ -146,24 +152,30 @@ QString MinorPlanet::getInfoStringName(const StelCore *core, const InfoStringGro
 	QTextStream oss(&str);
 
 	oss << "<h2>";
-	if (nameIsProvisionalDesignation)
+	if (nameIsIAUDesignation)
 	{
 		if (minorPlanetNumber)
 			oss << QString("(%1) ").arg(minorPlanetNumber);
-		oss << provisionalDesignationHtml;
+		oss << iauDesignationHtml;
 	}
 	else
 		oss << getNameI18n();  // UI translation can differ from sky translation
+
+	QStringList designations;
+	if (!nameIsIAUDesignation && !iauDesignationHtml.isEmpty())
+		designations << iauDesignationHtml;
+	if (!getExtraDesignations().isEmpty())
+		designations << getExtraDesignations();
+	if (!designations.isEmpty())
+		oss << QString(" (%1)").arg(designations.join(" - "));
+
 	oss.setRealNumberNotation(QTextStream::FixedNotation);
 	oss.setRealNumberPrecision(1);
 	if (sphereScale != 1.)
 		oss << QString::fromUtf8(" (\xC3\x97") << sphereScale << ")";
+
 	oss << "</h2>";
-	if (!nameIsProvisionalDesignation && !provisionalDesignationHtml.isEmpty())
-	{
-		oss << QString(q_("Provisional designation: %1")).arg(provisionalDesignationHtml);
-		oss << "<br>";
-	}
+
 	return str;
 }
 
@@ -173,7 +185,7 @@ QString MinorPlanet::getInfoStringExtraMag(const StelCore *core, const InfoStrin
 	if (flags&Extra && b_v<99.f)
 		return QString("%1: <b>%2</b><br/>").arg(q_("Color Index (B-V)"), QString::number(b_v, 'f', 2));
 	else
-		return "";
+		return QString();
 }
 
 QString MinorPlanet::getInfoStringExtra(const StelCore *core, const InfoStringGroup& flags) const
@@ -193,9 +205,21 @@ QString MinorPlanet::getInfoStringExtra(const StelCore *core, const InfoStringGr
 		{
 			// TRANSLATORS: SMASSII spectral taxonomic classification of asteroids
 			oss << QString("%1: %2<br/>").arg(q_("SMASSII spectral type"), specB);
-		}
+		}		
+
+		if (!discoveryDate.isEmpty())
+			oss << QString("%1: %2<br/>").arg(q_("Discovered"), getDiscoveryCircumstances());
 	}
 	return str;
+}
+
+QString MinorPlanet::getDiscoveryCircumstances() const
+{
+	QString ddate = StelUtils::localeDiscoveryDateString(discoveryDate);
+	if (discoverer.isEmpty())
+		return ddate;
+	else
+		return QString("%1 (%2)").arg(ddate, discoverer);
 }
 
 double MinorPlanet::getSiderealPeriod() const
@@ -240,12 +264,10 @@ void MinorPlanet::translateName(const StelTranslator &translator)
 {
 	nameI18 = translator.qtranslate(properName, "minor planet");
 	if (englishName.endsWith('*'))
-	{
 		nameI18.append('*');
-	}
 }
 
-QString MinorPlanet::renderProvisionalDesignationinHtml(QString plainTextName)
+QString MinorPlanet::renderIAUDesignationinHtml(const QString &plainTextName)
 {
 	static const QRegularExpression provisionalDesignationPattern("^(\\d{4}\\s[A-Z]{2})(\\d*)$");
 	QRegularExpressionMatch match=provisionalDesignationPattern.match(plainTextName);
@@ -254,17 +276,11 @@ QString MinorPlanet::renderProvisionalDesignationinHtml(QString plainTextName)
 		QString main = match.captured(1);
 		QString suffix = match.captured(2);
 		if (!suffix.isEmpty())
-		{
 			return (QString("%1<sub>%2</sub>").arg(main, suffix));
-		}
 		else
-		{
 			return main;
-		}
 	}
 	else
-	{
-		return QString();
-	}
+		return QString(); //plainTextName;
 }
 

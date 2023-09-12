@@ -20,31 +20,32 @@
 #ifndef INCLUDE_ONCE_E0C038F5_4B24_4B2C_9AFC_B1B8F0BC4BAF
 #define INCLUDE_ONCE_E0C038F5_4B24_4B2C_9AFC_B1B8F0BC4BAF
 
+#include <cmath>
 #include <QByteArray>
+#include "VecMath.hpp"
 
-inline QByteArray makeSRGBUtilsShader()
+template<typename F>
+F srgbToLinear(const F c)
 {
-	static const QByteArray src = 1+R"(
-#line 1 108
-vec3 srgbToLinear(vec3 srgb)
-{
-	vec3 s = step(vec3(0.04045), srgb);
-	vec3 d = vec3(1) - s;
-	return s * pow((srgb+0.055)/1.055, vec3(2.4)) +
-		   d * srgb/12.92;
+	return c > F(0.04045) ? std::pow((c+F(0.055))/F(1.055), F(2.4))
+	                      : c / F(12.92);
 }
 
-vec3 linearToSRGB(vec3 lin)
+template<typename F>
+Vector4<F> srgbToLinear(const Vector4<F>& srgba)
 {
-	vec3 s = step(vec3(0.0031308), lin);
-	vec3 d = vec3(1) - s;
-	return s * (1.055*pow(lin, vec3(1./2.4))-0.055) +
-		   d *  12.92*lin;
+	return {srgbToLinear(srgba[0]),
+	        srgbToLinear(srgba[1]),
+	        srgbToLinear(srgba[2]),
+	        srgba[3]};
 }
-#line 1 0
-)";
 
-	return src;
+template<typename F>
+Vector3<F> srgbToLinear(const Vector3<F>& srgb)
+{
+	return {srgbToLinear(srgb[0]), srgbToLinear(srgb[1]), srgbToLinear(srgb[2])};
 }
+
+QByteArray makeSRGBUtilsShader();
 
 #endif

@@ -34,8 +34,8 @@ StelTextureMgr::StelTextureMgr(QObject *parent)
 	: QObject(parent), glMemoryUsage(0), loaderThreadPool(new QThreadPool(this))
 {
 #ifdef Q_PROCESSOR_X86_64
-	//allow up to 16 textures to be loaded in parallel on 64 bit
-	loaderThreadPool->setMaxThreadCount(std::min(16,QThread::idealThreadCount()));
+	//allow up to 16 textures to be loaded in parallel. Do not use more than half of the cores, as this may cause issues (#3148)
+	loaderThreadPool->setMaxThreadCount(qBound(1,QThread::idealThreadCount()/2-1, 16));
 #else
 	//on other archs, for now ensure that just 1 texture is at once in background
 	//otherwise, for large textures loaded in parallel (some scenery3d scenes), the risk of an out-of-memory error is greater on 32bit systems

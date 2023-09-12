@@ -484,6 +484,18 @@
       </item>
       <item row="1" column="0" colspan="5">
        <widget class="Line" name="line1">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>1</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>1</height>
+         </size>
+        </property>
         <property name="frameShadow">
          <enum>QFrame::Plain</enum>
         </property>
@@ -494,6 +506,18 @@
       </item>
       <item row="8" column="0" colspan="5">
        <widget class="Line" name="line2">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>1</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>1</height>
+         </size>
+        </property>
         <property name="frameShadow">
          <enum>QFrame::Plain</enum>
         </property>

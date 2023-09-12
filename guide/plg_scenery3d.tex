@@ -60,6 +60,11 @@ will never see shadows cast by Venus in moonlight), so you could use
 it for examining sundials, or analyze and simulate light-and-shadow
 interactions in archaeological structures.
 
+Sometimes, \newFeature{23.2} light patches cast through small holes are important, e.g., 
+in churches with \emph{meridiana} ``sundial/calendar'' lines. If these patches 
+appear too dim, you can increase the power of the directional light using the 
+\menu{Directional light enhancement} switch. (Use value 1.0 to revert to normal.) 
+
 \section{Hardware Requirements \& Performance}
 \label{sec:scenery3d:HardwareRequirements}
 
@@ -477,13 +482,13 @@ language code.
 \end{tabularx}
 
 \noindent Optional section to specify geographic longitude $\lambda$, latitude $\varphi$,
-and altitude. The section is required if \verb|coord/convergence_angle=from_grid|, else
+and altitude. The section is required if \verb:coord/convergence_angle={from_grid|from_utm}:, else
 location is inherited from landscape.
 
 \noindent%
 \begin{tabularx}{\textwidth}{lX} 
 \multicolumn{2}{l}{\texttt{planet = Earth}}\\
-\texttt{latitude = +48d31'30.4"}      & Required if \texttt{coord/convergence\_angle=from\_grid}\\
+\texttt{latitude = +48d31'30.4"}      & Required if \texttt{coord/convergence\_angle=from\_\{grid|utm\}}\\
 \texttt{longitude = +16d12'25.5"}     & "--"\\
 \texttt{altitude =from\_model|<int>}   &  altitude (for astronomical computations) can be computed from the model:  if
                                            \texttt{from\_model}, it is computed as $(z_{min}+z_{max})/2+\mathtt{orig\_H}$, 
@@ -529,7 +534,8 @@ those are survey-grid aligned, so true geographical north for a place
 with geographical longitude $\lambda$ and latitude $\varphi$ will in
 general not coincide with grid north, the difference is known as
 \indexterm{meridian convergence}\footnote{%
-  \url{https://en.wikipedia.org/wiki/Transverse_Mercator_projection}}.
+  \url{https://en.wikipedia.org/wiki/Transverse_Mercator_projection}} 
+and, on a spherical globe, amounts to:
 \begin{equation}
 \gamma(\lambda, \varphi)=\arctan(\tan(\lambda-\lambda_0)\sin\varphi)
 \end{equation}
@@ -540,14 +546,15 @@ vertical axis to be aligned with True North\footnote{Note that
   entry, which is $360-\mathtt{convergence\_angle}$.}.
 
 \begin{configfile}
-convergence_angle=from_grid|<double> 
+convergence_angle=from_grid|from_utm|<double> 
 grid_meridian=<double>|+<int>d<int>'<float>"      
 \end{configfile}
 
-\noindent \texttt{grid\_meridian} is the central meridian $\lambda_0$ of grid
-zone, e.g.\ for UTM or Gauss-Kr\"uger, and is only required to compute
-convergence angle if \texttt{convergence\_angle=from\_grid}.
-
+\noindent \texttt{grid\_meridian} is the central meridian $\lambda_0$ of the grid
+zone, e.g.\ for Gauss-Kr\"uger, and is only required to compute
+convergence angle if \texttt{convergence\_angle=from\_grid}. 
+If your model coordinates is based on UTM, you can use 
+\texttt{coord/convergence\_angle=from\_utm} for a more accurate computation.
 
 
 \begin{configfile}
@@ -574,8 +581,12 @@ Defaults to center of model boundingbox.
 
 It is advisable to use the grid coordinates of the location of the panoramic
 photo (landscape) as \texttt{start\_...} coordinates, or the correct coordinates
-and some carefully selected \texttt{start\_az\_alt\_fov} in case of certain view
-corridors (temple axes, \ldots).
+and some carefully selected \texttt{start\_az\_alt\_fov} in case you want to highlight 
+a certain view corridor (temple axis, \ldots).
+
+In some setups like digital full-dome planetaria \newFeature{23.2}
+it is advisable to disable the use of the \texttt{start\_az\_alt\_fov}. 
+You can do that in the Scenery3D configuration dialog or by the entry \texttt{ignore\_start\_az\_alt\_fov} in \file{config.ini}.
 
 \subsection{Concatenating OBJ files}
 \label{sec:scenery3d:concatenating}
@@ -879,8 +890,8 @@ enhancements, and did some code cleanup. Both Andrei and Florian were again
 supervised by Michael Wimmer~\citep{Zotti:CHNT2015,Zotti:SEAC2015,Zotti:SEAC2017}.
 
 This work has been originally created during the ASTROSIM project supported 2008-2012 by
-the Austrian Science Fund (FWF) under grant number P~21208-G19. Further development is
-partially supported by the Ludwig Boltzmann Institute for Archaeological Prospection and Virtual Archaeology in Vienna, Austria\footnote{%
+the Austrian Science Fund (FWF) under grant number P~21208-G19. Further development has
+partially been supported by the Ludwig Boltzmann Institute for Archaeological Prospection and Virtual Archaeology in Vienna, Austria\footnote{%
   \url{https://archpro.lbg.ac.at}}.
 
 If you are using this plugin in scientific work, please cite: \citep{Zotti:CHNT2015,Zotti:SEAC2015,Zotti:SEAC2017,Zotti-etal:SIA2016,Zotti:TAG2016,Zotti-etal:JSA2020.6.2}.

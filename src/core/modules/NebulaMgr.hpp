@@ -256,11 +256,6 @@ class NebulaMgr : public StelObjectModule
 		   WRITE setProtoplanetaryNebulaColor
 		   NOTIFY protoplanetaryNebulaeColorChanged
 		   )
-	Q_PROPERTY(Vec3f clusterWithNebulosityColor
-		   READ getClusterWithNebulosityColor
-		   WRITE setClusterWithNebulosityColor
-		   NOTIFY clusterWithNebulosityColorChanged
-		   )
 	Q_PROPERTY(Vec3f hydrogenRegionsColor
 		   READ getHydrogenRegionColor
 		   WRITE setHydrogenRegionColor
@@ -591,16 +586,6 @@ public slots:
 	//! Get current value of the dark nebula color.
 	const Vec3f getDarkNebulaColor(void) const;
 
-	//! Set the color used to draw the cluster associated with nebulosity symbols.
-	//! @param c The color of the cluster associated with nebulosity symbols
-	//! @code
-	//! // example of usage in scripts
-	//! NebulaMgr.setClusterWithNebulosityColor(Vec3f(0.2,0.2,0.2));
-	//! @endcode
-	void setClusterWithNebulosityColor(const Vec3f& c);
-	//! Get current value of the cluster associated with nebulosity color.
-	const Vec3f getClusterWithNebulosityColor(void) const;
-
 	//! Set the color used to draw the star cluster symbols (Open/Globular).
 	//! @param c The color of the cluster symbols
 	//! @code
@@ -917,7 +902,6 @@ signals:
 	void emissionNebulaeColorChanged(const Vec3f & color) const;
 	void possiblePlanetaryNebulaeColorChanged(const Vec3f & color) const;
 	void protoplanetaryNebulaeColorChanged(const Vec3f & color) const;
-	void clusterWithNebulosityColorChanged(const Vec3f & color) const;
 	void hydrogenRegionsColorChanged(const Vec3f & color) const;
 	void interstellarMatterColorChanged(const Vec3f & color) const;
 	void emissionObjectsColorChanged(const Vec3f & color) const;

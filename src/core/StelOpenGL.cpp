@@ -19,6 +19,10 @@
 #include "StelOpenGL.hpp"
 #include <QDebug>
 #include "StelMainView.hpp"
+#include <QOpenGLFunctions_3_3_Core>
+#if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
+# include <QOpenGLVersionFunctionsFactory>
+#endif
 
 QOpenGLContext* StelOpenGL::mainContext = Q_NULLPTR;
 
@@ -61,7 +65,7 @@ QByteArray StelOpenGL::globalShaderPrefix(const ShaderType type)
 {
 	const auto& glInfo = StelMainView::getInstance().getGLInformation();
 
-	if(glInfo.isCoreProfile)
+	if(glInfo.isHighGraphicsMode)
 	{
 		if(type == VERTEX_SHADER)
 		{
@@ -132,4 +136,17 @@ out vec4 FRAG_COLOR;
 			return "precision mediump float;\n" + prefix;
 		return prefix;
 	}
+}
+
+QOpenGLFunctions_3_3_Core* StelOpenGL::highGraphicsFunctions()
+{
+#if !QT_CONFIG(opengles2)
+# if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
+	return QOpenGLVersionFunctionsFactory::get<QOpenGLFunctions_3_3_Core>(QOpenGLContext::currentContext());
+# else
+	return QOpenGLContext::currentContext()->versionFunctions<QOpenGLFunctions_3_3_Core>();
+# endif
+#else
+	return nullptr;
+#endif
 }

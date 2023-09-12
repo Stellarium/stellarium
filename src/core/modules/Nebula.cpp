@@ -41,24 +41,9 @@
 
 const QString Nebula::NEBULA_TYPE = QStringLiteral("Nebula");
 
-StelTextureSP Nebula::texCircle;
-StelTextureSP Nebula::texCircleLarge;
 StelTextureSP Nebula::texRegion;
-StelTextureSP Nebula::texGalaxy;
-StelTextureSP Nebula::texGalaxyLarge;
-StelTextureSP Nebula::texOpenCluster;
-StelTextureSP Nebula::texOpenClusterLarge;
-StelTextureSP Nebula::texOpenClusterXLarge;
-StelTextureSP Nebula::texGlobularCluster;
-StelTextureSP Nebula::texGlobularClusterLarge;
+StelTextureSP Nebula::texPointElement;
 StelTextureSP Nebula::texPlanetaryNebula;
-StelTextureSP Nebula::texDiffuseNebula;
-StelTextureSP Nebula::texDiffuseNebulaLarge;
-StelTextureSP Nebula::texDiffuseNebulaXLarge;
-StelTextureSP Nebula::texDarkNebula;
-StelTextureSP Nebula::texDarkNebulaLarge;
-StelTextureSP Nebula::texOpenClusterWithNebulosity;
-StelTextureSP Nebula::texOpenClusterWithNebulosityLarge;
 bool  Nebula::drawHintProportional = false;
 bool  Nebula::surfaceBrightnessUsage = false;
 bool  Nebula::designationUsage = false;
@@ -247,13 +232,13 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 	if (flags&Name)
 	{
 		QStringList extraNames=getExtraInfoStrings(Name);
-		if (extraNames.length()>0)
+		if (!extraNames.isEmpty())
 			oss << q_("Additional names: ") << extraNames.join(", ") << "<br/>";
 	}
 	if (flags&CatalogNumber)
 	{
 		QStringList extraCat=getExtraInfoStrings(CatalogNumber);
-		if (extraCat.length()>0)
+		if (!extraCat.isEmpty())
 			oss << q_("Additional catalog numbers: ") << extraCat.join(", ") << "<br/>";
 	}
 
@@ -432,7 +417,7 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 			oss << QString("%1: %2 %3").arg(q_("Parallax"), px, qc_("mas", "parallax")) << "<br />";
 		}
 		if (!discoverer.isEmpty())
-			oss << QString("%1: %2 (%3)").arg(q_("Discoverer"), discoverer, discoveryYear) << "<br />";
+			oss << QString("%1: %2 (%3)").arg(q_("Discoverer"), discoverer, StelUtils::localeDiscoveryDateString(discoveryYear)) << "<br />";
 		if (!getMorphologicalTypeDescription().isEmpty())
 			oss << QString("%1: %2.").arg(q_("Morphological description"), getMorphologicalTypeDescription()) << "<br />";
 	}
@@ -586,7 +571,7 @@ float Nebula::getSelectPriority(const StelCore* core) const
 	else if (nType==NebHII) // Sharpless and LBN
 		lim=10.0f - 2.0f*qMin(1.5f, majorAxisSize); // Unfortunately, in Sh catalog, we always have mag=99=unknown!
 
-	if (std::min(mLim, lim)<=maxMagHint || outlineSegments.size()>0 || nType==NebRegion) // High priority for big DSO (with outlines) or regions
+	if (std::min(mLim, lim)<=maxMagHint || !outlineSegments.empty() || nType==NebRegion) // High priority for big DSO (with outlines) or regions
 		selectPriority = -10.f;
 	else
 		selectPriority -= 5.f;
@@ -747,6 +732,232 @@ void Nebula::drawOutlines(StelPainter &sPainter, float maxMagHints) const
 	}
 }
 
+void Nebula::renderDarkNebulaMarker(StelPainter& sPainter, const float x, const float y,
+									float size, const Vec3f color) const
+{
+	// Take into account device pixel density and global scale ratio, as we are drawing 2D stuff.
+	const auto pixelRatio = sPainter.getProjector()->getDevicePixelsPerPixel();
+	const auto scale = pixelRatio * StelApp::getInstance().getGlobalScalingRatio();
+	size *= scale;
+
+	const float roundRadius = 0.35 * size;
+	const int numPointsInArc = std::lround(std::clamp(5*size/35, 5.f, 16.f));
+	std::vector<float> vertexData;
+	vertexData.reserve(numPointsInArc*2*4);
+	const float leftOuterX = x - size;
+	const float leftInnerX = leftOuterX + roundRadius;
+	const float bottomOuterY = y - size;
+	const float bottomInnerY = bottomOuterY + roundRadius;
+	const float rightOuterX = x + size;
+	const float rightInnerX = rightOuterX - roundRadius;
+	const float topOuterY = y + size;
+	const float topInnerY = topOuterY - roundRadius;
+	const float gap = 0.15*size;
+	const float*const cossin = StelUtils::ComputeCosSinRhoZone((M_PIf/2)/(numPointsInArc-1),
+															   numPointsInArc-1, 0);
+	sPainter.setLineSmooth(true);
+	sPainter.setLineWidth(scale * std::clamp(2*size/35, 1.f, 2.5f));
+	sPainter.setColor(color);
+	sPainter.enableClientStates(true);
+
+	vertexData.clear();
+	vertexData.push_back(x-gap);
+	vertexData.push_back(bottomOuterY);
+	for(int n = 0; n < numPointsInArc; ++n)
+	{
+		const auto cosa = cossin[2*n], sina = cossin[2*n+1];
+		vertexData.push_back(leftInnerX   - roundRadius*sina);
+		vertexData.push_back(bottomInnerY - roundRadius*cosa);
+	}
+	vertexData.push_back(leftOuterX);
+	vertexData.push_back(y-gap);
+	sPainter.setVertexPointer(2, GL_FLOAT, vertexData.data());
+	sPainter.drawFromArray(StelPainter::LineStrip, vertexData.size() / 2, 0, false);
+
+	vertexData.clear();
+	vertexData.push_back(leftOuterX);
+	vertexData.push_back(y+gap);
+	for(int n = 0; n < numPointsInArc; ++n)
+	{
+		const auto cosa = cossin[2*n], sina = cossin[2*n+1];
+		vertexData.push_back(leftInnerX - roundRadius*cosa);
+		vertexData.push_back(topInnerY  + roundRadius*sina);
+	}
+	vertexData.push_back(x-gap);
+	vertexData.push_back(topOuterY);
+	sPainter.setVertexPointer(2, GL_FLOAT, vertexData.data());
+	sPainter.drawFromArray(StelPainter::LineStrip, vertexData.size() / 2, 0, false);
+
+	vertexData.clear();
+	vertexData.push_back(x+gap);
+	vertexData.push_back(topOuterY);
+	for(int n = 0; n < numPointsInArc; ++n)
+	{
+		const auto cosa = cossin[2*n], sina = cossin[2*n+1];
+		vertexData.push_back(rightInnerX + roundRadius*sina);
+		vertexData.push_back(topInnerY   + roundRadius*cosa);
+	}
+	vertexData.push_back(rightOuterX);
+	vertexData.push_back(y+gap);
+	sPainter.setVertexPointer(2, GL_FLOAT, vertexData.data());
+	sPainter.drawFromArray(StelPainter::LineStrip, vertexData.size() / 2, 0, false);
+
+	vertexData.clear();
+	vertexData.push_back(rightOuterX);
+	vertexData.push_back(y-gap);
+	for(int n = 0; n < numPointsInArc; ++n)
+	{
+		const auto cosa = cossin[2*n], sina = cossin[2*n+1];
+		vertexData.push_back(rightInnerX  + roundRadius*cosa);
+		vertexData.push_back(bottomInnerY - roundRadius*sina);
+	}
+	vertexData.push_back(x+gap);
+	vertexData.push_back(bottomOuterY);
+	sPainter.setVertexPointer(2, GL_FLOAT, vertexData.data());
+	sPainter.drawFromArray(StelPainter::LineStrip, vertexData.size() / 2, 0, false);
+
+	sPainter.enableClientStates(false);
+}
+
+void Nebula::renderMarkerRoundedRect(StelPainter& sPainter, const float x, const float y,
+									 float size, const Vec3f color) const
+{
+	// Take into account device pixel density and global scale ratio, as we are drawing 2D stuff.
+	const auto pixelRatio = sPainter.getProjector()->getDevicePixelsPerPixel();
+	const auto scale = pixelRatio * StelApp::getInstance().getGlobalScalingRatio();
+	size *= scale;
+
+	const float roundRadius = 0.35 * size;
+	const int numPointsInArc = std::lround(std::clamp(5*size/35, 5.f, 16.f));
+	std::vector<float> vertexData;
+	vertexData.reserve(numPointsInArc*2*4);
+	const float leftOuterX = x - size;
+	const float leftInnerX = leftOuterX + roundRadius;
+	const float bottomOuterY = y - size;
+	const float bottomInnerY = bottomOuterY + roundRadius;
+	const float rightOuterX = x + size;
+	const float rightInnerX = rightOuterX - roundRadius;
+	const float topOuterY = y + size;
+	const float topInnerY = topOuterY - roundRadius;
+	const float*const cossin = StelUtils::ComputeCosSinRhoZone((M_PIf/2)/(numPointsInArc-1),
+															   numPointsInArc-1, 0);
+	for(int n = 0; n < numPointsInArc; ++n)
+	{
+		const auto cosa = cossin[2*n], sina = cossin[2*n+1];
+		vertexData.push_back(leftInnerX   - roundRadius*sina);
+		vertexData.push_back(bottomInnerY - roundRadius*cosa);
+	}
+	for(int n = 0; n < numPointsInArc; ++n)
+	{
+		const auto cosa = cossin[2*n], sina = cossin[2*n+1];
+		vertexData.push_back(leftInnerX - roundRadius*cosa);
+		vertexData.push_back(topInnerY  + roundRadius*sina);
+	}
+	for(int n = 0; n < numPointsInArc; ++n)
+	{
+		const auto cosa = cossin[2*n], sina = cossin[2*n+1];
+		vertexData.push_back(rightInnerX + roundRadius*sina);
+		vertexData.push_back(topInnerY   + roundRadius*cosa);
+	}
+	for(int n = 0; n < numPointsInArc; ++n)
+	{
+		const auto cosa = cossin[2*n], sina = cossin[2*n+1];
+		vertexData.push_back(rightInnerX  + roundRadius*cosa);
+		vertexData.push_back(bottomInnerY - roundRadius*sina);
+	}
+	const auto vertCount = vertexData.size() / 2;
+	sPainter.setLineSmooth(true);
+	sPainter.setLineWidth(scale * std::clamp(2*size/35, 1.f, 2.5f));
+	sPainter.setColor(color);
+	sPainter.enableClientStates(true);
+	sPainter.setVertexPointer(2, GL_FLOAT, vertexData.data());
+	sPainter.drawFromArray(StelPainter::LineLoop, vertCount, 0, false);
+	sPainter.enableClientStates(false);
+}
+
+void Nebula::renderRoundMarker(StelPainter& sPainter, const float x, const float y,
+							   float size, const Vec3f color, const bool crossed) const
+{
+	// Take into account device pixel density and global scale ratio, as we are drawing 2D stuff.
+	const auto pixelRatio = sPainter.getProjector()->getDevicePixelsPerPixel();
+	const auto scale = pixelRatio * StelApp::getInstance().getGlobalScalingRatio();
+	size *= scale;
+
+	sPainter.setLineSmooth(true);
+	sPainter.setLineWidth(scale * std::clamp(size/7, 1.f, 2.5f));
+	sPainter.setColor(color);
+
+	sPainter.drawCircle(x, y, size);
+	if(!crossed) return;
+
+	sPainter.enableClientStates(true);
+	const float vertexData[] = {x-size, y,
+								x+size, y,
+								x, y-size,
+								x, y+size};
+	const auto vertCount = std::size(vertexData) / 2;
+	sPainter.setVertexPointer(2, GL_FLOAT, vertexData);
+	sPainter.drawFromArray(StelPainter::Lines, vertCount, 0, false);
+	sPainter.enableClientStates(false);
+}
+
+void Nebula::renderEllipticMarker(StelPainter& sPainter, const float x, const float y, float size,
+								  const float aspectRatio, const float angle, const Vec3f color) const
+{
+	// Take into account device pixel density and global scale ratio, as we are drawing 2D stuff.
+	const auto pixelRatio = sPainter.getProjector()->getDevicePixelsPerPixel();
+	const auto scale = pixelRatio * StelApp::getInstance().getGlobalScalingRatio();
+	size *= scale;
+
+	const float radiusY = 0.35 * size;
+	const float radiusX = aspectRatio * radiusY;
+	const int numPoints = std::lround(std::clamp(size/3, 32.f, 4096.f));
+	std::vector<float> vertexData;
+	vertexData.reserve(numPoints*2);
+	const float*const cossin = StelUtils::ComputeCosSinTheta(numPoints);
+	const auto cosa = std::cos(angle);
+	const auto sina = std::sin(angle);
+	for(int n = 0; n < numPoints; ++n)
+	{
+		const auto cosb = cossin[2*n], sinb = cossin[2*n+1];
+		const auto pointX = radiusX*sinb;
+		const auto pointY = radiusY*cosb;
+		vertexData.push_back(x + pointX*cosa - pointY*sina);
+		vertexData.push_back(y + pointY*cosa + pointX*sina);
+	}
+	const auto vertCount = vertexData.size() / 2;
+	sPainter.setLineSmooth(true);
+	sPainter.setLineWidth(scale * std::clamp(size/40, 1.f, 2.f));
+	sPainter.setColor(color);
+	sPainter.enableClientStates(true);
+	sPainter.setVertexPointer(2, GL_FLOAT, vertexData.data());
+	sPainter.drawFromArray(StelPainter::LineLoop, vertCount, 0, false);
+	sPainter.enableClientStates(false);
+}
+
+void Nebula::renderMarkerPointedCircle(StelPainter& sPainter, const float x, const float y,
+									   float size, const Vec3f color, const bool insideRect) const
+{
+	// Take into account device pixel density and global scale ratio, as we are drawing 2D stuff.
+	const auto pixelRatio = sPainter.getProjector()->getDevicePixelsPerPixel();
+	const auto scale = pixelRatio * StelApp::getInstance().getGlobalScalingRatio();
+	size *= scale;
+
+	texPointElement->bind();
+	sPainter.setColor(color);
+	sPainter.setBlending(true, GL_ONE, GL_ONE);
+	const auto numPoints = StelUtils::getSmallerPowerOfTwo(std::clamp(int(0.4f*size), 8, 4096));
+	const auto spriteSize = std::min(0.25f * 2*M_PIf*size / numPoints, 5.f);
+	if(insideRect)
+		size -= spriteSize*2;
+	const float*const cossin = StelUtils::ComputeCosSinRhoZone((2*M_PIf)/numPoints, numPoints, 0);
+	for(int n = 0; n < numPoints; ++n)
+	{
+		const auto cosa = cossin[2*n], sina = cossin[2*n+1];
+		sPainter.drawSprite2dMode(x - size*sina, y - size*cosa, spriteSize);
+	}
+}
+
 void Nebula::drawHints(StelPainter& sPainter, float maxMagHints, StelCore *core) const
 {
 	size_t segments = outlineSegments.size();
@@ -768,6 +979,11 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints, StelCore *core)
 		scaledSize = static_cast<float>(getAngularRadius(Q_NULLPTR)) *(M_PI_180f*2.f)*static_cast<float>(sPainter.getProjector()->getPixelPerRadAtCenter());
 	float finalSize=qMax(size, scaledSize);
 
+	float lum = 1.f;
+	Vec3f col(color*lum*hintsBrightness);
+	if (!objectInDisplayedType())
+		return;
+
 	switch (nType)
 	{
 		case NebGx:
@@ -778,29 +994,27 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints, StelCore *core)
 		case NebBLL:
 		case NebBLA:
 		case NebRGx:
-		case NebGxCl:			
-			if (finalSize > 35.f)
-				Nebula::texGalaxyLarge->bind();
-			else
-				Nebula::texGalaxy->bind();
-			break;
+		case NebGxCl:
+		{
+			// The rotation angle in renderEllipticMarker() is relative to screen. Make sure to compute correct angle from 90+orientationAngle.
+			// Find an on-screen direction vector from a point offset somewhat in declination from our object.
+			Vec3d XYZrel(getJ2000EquatorialPos(core));
+			XYZrel[2]*=0.95; XYZrel.normalize();
+			Vec3d XYrel;
+			sPainter.getProjector()->project(XYZrel, XYrel);
+			const auto screenAngle = atan2(XYrel[1]-XY[1], XYrel[0]-XY[0]);
+			renderEllipticMarker(sPainter, XY[0], XY[1], finalSize, 2, screenAngle + orientationAngle*M_PI_180f, col);
+			return;
+		}
 		case NebOc:
 		case NebSA:
 		case NebSC:
 		case NebCl:
-			if (finalSize > 75.f)
-				Nebula::texOpenClusterXLarge->bind();
-			else if (finalSize > 35.f)
-				Nebula::texOpenClusterLarge->bind();
-			else
-				Nebula::texOpenCluster->bind();
-			break;
+			renderMarkerPointedCircle(sPainter, XY[0], XY[1], finalSize, col, false);
+			return;
 		case NebGc:
-			if (finalSize > 35.f)
-				Nebula::texGlobularClusterLarge->bind();
-			else
-				Nebula::texGlobularCluster->bind();
-			break;
+			renderRoundMarker(sPainter, XY[0], XY[1], finalSize, col, true);
+			return;
 		case NebN:
 		case NebHII:
 		case NebMolCld:
@@ -811,30 +1025,24 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints, StelCore *core)
 		case NebEn:
 		case NebSNC:
 		case NebSNRC:
-			if (finalSize > 75.f)
-				Nebula::texDiffuseNebulaXLarge->bind();
-			else if (finalSize > 35.f)
-				Nebula::texDiffuseNebulaLarge->bind();
-			else
-				Nebula::texDiffuseNebula->bind();
-			break;
+			renderMarkerRoundedRect(sPainter, XY[0], XY[1], finalSize, col);
+			return;
 		case NebPn:
 		case NebPossPN:
 		case NebPPN:
 			Nebula::texPlanetaryNebula->bind();
 			break;
 		case NebDn:
-			if (finalSize > 35.f)
-				Nebula::texDarkNebulaLarge->bind();
-			else
-				Nebula::texDarkNebula->bind();
-			break;
+			renderDarkNebulaMarker(sPainter, XY[0], XY[1], finalSize, col);
+			return;
 		case NebCn:
-			if (finalSize > 35.f)
-				Nebula::texOpenClusterWithNebulosityLarge->bind();
-			else
-				Nebula::texOpenClusterWithNebulosity->bind();
-			break;
+		{
+			col = getHintColor(NebN)*lum*hintsBrightness;
+			renderMarkerRoundedRect(sPainter, XY[0], XY[1], finalSize, col);
+			col = getHintColor(NebCl)*lum*hintsBrightness;
+			renderMarkerPointedCircle(sPainter, XY[0], XY[1], finalSize, col, true);
+			return;
+		}
 		case NebRegion:
 			finalSize = size*2.f;
 			Nebula::texRegion->bind();
@@ -844,34 +1052,14 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints, StelCore *core)
 		//case NebSymbioticStar:
 		//case NebEmissionLineStar:
 		default:
-			if (finalSize > 35.f)
-				Nebula::texCircleLarge->bind();
-			else
-				Nebula::texCircle->bind();
+			renderRoundMarker(sPainter, XY[0], XY[1], finalSize, col, false);
+			return;
 	}
-
-	float lum = 1.f;
-	Vec3f col(color*lum*hintsBrightness);
-	if (!objectInDisplayedType())
-		col.set(0.f,0.f,0.f);
 
 	sPainter.setColor(col, 1);
 	sPainter.setBlending(true, GL_ONE, GL_ONE);
 
-	// Rotation looks good only for galaxies.
-	if ((nType <=NebQSO) || (nType==NebBLA) || (nType==NebBLL) )
-	{
-		// The rotation angle in drawSprite2dMode() is relative to screen. Make sure to compute correct angle from 90+orientationAngle.
-		// Find an on-screen direction vector from a point offset somewhat in declination from our object.
-		Vec3d XYZrel(getJ2000EquatorialPos(core));
-		XYZrel[2]*=0.95; XYZrel.normalize();
-		Vec3d XYrel;
-		sPainter.getProjector()->project(XYZrel, XYrel);
-		float screenAngle = static_cast<float>(atan2(XYrel[1]-XY[1], XYrel[0]-XY[0]));
-		sPainter.drawSprite2dMode(static_cast<float>(XY[0]), static_cast<float>(XY[1]), finalSize, screenAngle*M_180_PIf + orientationAngle);
-	}
-	else	// no galaxy
-		sPainter.drawSprite2dMode(static_cast<float>(XY[0]), static_cast<float>(XY[1]), finalSize);
+	sPainter.drawSprite2dMode(static_cast<float>(XY[0]), static_cast<float>(XY[1]), finalSize);
 }
 
 void Nebula::drawLabel(StelPainter& sPainter, float maxMagLabel) const

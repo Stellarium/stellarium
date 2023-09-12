@@ -5,14 +5,14 @@ The money will be used transparently to pay for development, servers and other p
 
 The Stellarium team gives a huge thanks to our backers:
 
-## Bronze Sponsor:
+## Bronze Sponsors:
 
  - Raul Monraz
  - n8n GmbH
 
-## Silver Sonsor:
+## Silver Sponsors:
 
-None yet!
+[![BairesDev](https://www.stellarium.org/img/logos/BairesDev.png)](https://www.bairesdev.com/sponsoring-open-source-projects/)
 
 ## Gold sponsors:
 

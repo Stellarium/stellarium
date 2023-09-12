@@ -28,7 +28,6 @@
 
 #include "StelObject.hpp"
 #include "StelTextureTypes.hpp"
-#include "StelFader.hpp"
 #include "StelTranslator.hpp"
 
 class StelPainter;
@@ -96,8 +95,6 @@ public:
 	virtual QString getNameI18n(void) const Q_DECL_OVERRIDE;
 	virtual QString getEnglishName(void) const Q_DECL_OVERRIDE;
 
-	void update(double deltaTime);
-
 protected:
 	virtual QString getMagnitudeInfoString(const StelCore *core, const InfoStringGroup& flags, const int decimals=1) const Q_DECL_OVERRIDE;
 
@@ -120,7 +117,7 @@ private:
 	QString note;			   //! Notes for the supernova
 	double distance;		   //! Distance to supernova (10^3 ly)
 
-	LinearFader labelsFader;
+	static bool syncShowLabels;
 
 	QString getMaxBrightnessDate(const double JD) const;
 };

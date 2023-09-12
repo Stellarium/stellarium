@@ -33,12 +33,12 @@
 class StelWebEngineView: public QWebEngineView {
 	Q_OBJECT
 public:
-	StelWebEngineView(QWidget *parent=Q_NULLPTR);
+	StelWebEngineView(QWidget *parent=nullptr);
 protected:
 	//! override to catch mouse button events.
-	virtual bool eventFilter(QObject *object, QEvent *event) Q_DECL_OVERRIDE;
+	bool eventFilter(QObject *object, QEvent *event) override;
 	//! improves mouse button navigation in the Web View by using back/forward buttons.
-	virtual void mouseReleaseEvent(QMouseEvent *e) Q_DECL_OVERRIDE;
+	void mouseReleaseEvent(QMouseEvent *e) override;
 };
 
 #else
@@ -50,7 +50,7 @@ protected:
 class StelWebEngineView: public QTextBrowser {
 	Q_OBJECT
 public:
-	StelWebEngineView(QWidget *parent=Q_NULLPTR);
+	StelWebEngineView(QWidget *parent=nullptr);
 };
 #endif
 #endif

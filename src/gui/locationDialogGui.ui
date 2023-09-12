@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>630</width>
-    <height>542</height>
+    <width>699</width>
+    <height>511</height>
    </rect>
   </property>
   <property name="styleSheet">
@@ -518,78 +518,6 @@
             <property name="horizontalSpacing">
              <number>6</number>
             </property>
-            <item row="0" column="0">
-             <widget class="QLabel" name="labelLatitude">
-              <property name="text">
-               <string>Latitude:</string>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="1">
-             <widget class="QSpinBox" name="altitudeSpinBox">
-              <property name="minimumSize">
-               <size>
-                <width>100</width>
-                <height>24</height>
-               </size>
-              </property>
-              <property name="toolTip">
-               <string>Enter the elevation in meter</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-              </property>
-              <property name="suffix">
-               <string> m</string>
-              </property>
-              <property name="minimum">
-               <number>-2000</number>
-              </property>
-              <property name="maximum">
-               <number>200000</number>
-              </property>
-              <property name="singleStep">
-               <number>100</number>
-              </property>
-             </widget>
-            </item>
-            <item row="4" column="0" colspan="2">
-             <widget class="QCheckBox" name="useIpQueryCheckBox">
-              <property name="text">
-               <string>Get location from Network</string>
-              </property>
-             </widget>
-            </item>
-            <item row="5" column="0" colspan="2">
-             <widget class="QCheckBox" name="useAsDefaultLocationCheckBox">
-              <property name="text">
-               <string>Use current location as default</string>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="0">
-             <widget class="QLabel" name="labelElevation">
-              <property name="text">
-               <string>Elevation:</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="1">
-             <widget class="AngleSpinBox" name="longitudeSpinBox">
-              <property name="minimumSize">
-               <size>
-                <width>140</width>
-                <height>24</height>
-               </size>
-              </property>
-              <property name="toolTip">
-               <string>You can enter values in decimal degrees, or using dms format, for example: +1d 12m 8s</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-              </property>
-             </widget>
-            </item>
             <item row="1" column="0">
              <widget class="QLabel" name="labelLongitude">
               <property name="text">
@@ -610,6 +538,13 @@
               </property>
               <property name="alignment">
                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="5" column="0" colspan="2">
+             <widget class="QCheckBox" name="useAsDefaultLocationCheckBox">
+              <property name="text">
+               <string>Use current location as default</string>
               </property>
              </widget>
             </item>
@@ -641,6 +576,87 @@
               </property>
               <property name="autoRaise">
                <bool>false</bool>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="AngleSpinBox" name="longitudeSpinBox">
+              <property name="minimumSize">
+               <size>
+                <width>140</width>
+                <height>24</height>
+               </size>
+              </property>
+              <property name="toolTip">
+               <string>You can enter values in decimal degrees, or using dms format, for example: +1d 12m 8s</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="0">
+             <widget class="QLabel" name="labelLatitude">
+              <property name="text">
+               <string>Latitude:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="0" colspan="2">
+             <widget class="QCheckBox" name="useIpQueryCheckBox">
+              <property name="text">
+               <string>Get location from Network</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <widget class="QSpinBox" name="altitudeSpinBox">
+              <property name="minimumSize">
+               <size>
+                <width>100</width>
+                <height>24</height>
+               </size>
+              </property>
+              <property name="toolTip">
+               <string>Enter the elevation in meter</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+              <property name="suffix">
+               <string> m</string>
+              </property>
+              <property name="minimum">
+               <number>-2000</number>
+              </property>
+              <property name="maximum">
+               <number>200000</number>
+              </property>
+              <property name="singleStep">
+               <number>100</number>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="0">
+             <widget class="QLabel" name="labelElevation">
+              <property name="text">
+               <string>Elevation:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="6" column="0" colspan="2">
+             <widget class="QCheckBox" name="autoChangeLandscapesCheckBox">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="toolTip">
+               <string>Automatic change of landscape when planet or location is changed</string>
+              </property>
+              <property name="text">
+               <string>Auto-select landscapes</string>
               </property>
              </widget>
             </item>
@@ -696,7 +712,7 @@
             <item row="1" column="1">
              <widget class="QComboBox" name="regionNameComboBox">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+               <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
@@ -761,6 +777,12 @@
               <property name="enabled">
                <bool>true</bool>
               </property>
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="editable">
                <bool>true</bool>
               </property>
@@ -772,7 +794,7 @@
             <item row="2" column="1">
              <widget class="QComboBox" name="planetNameComboBox">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+               <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
@@ -811,6 +833,16 @@
               </property>
               <property name="text">
                <string>Enable daylight saving time</string>
+              </property>
+             </widget>
+            </item>
+            <item row="6" column="0" colspan="2">
+             <widget class="QCheckBox" name="autoEnableEnvironmentCheckBox">
+              <property name="toolTip">
+               <string>Auto-enable atmosphere when planet is changed</string>
+              </property>
+              <property name="text">
+               <string>Auto-enable atmosphere</string>
               </property>
              </widget>
             </item>

@@ -30,7 +30,6 @@
 #include "StelTranslator.hpp"
 #include "StelObject.hpp"
 #include "StelTextureTypes.hpp"
-#include "StelFader.hpp"
 
 class StelPainter;
 
@@ -117,8 +116,6 @@ public:
 	//! Get the designation of pulsar (based on B1950 coordinates)
 	QString getBDesignation(void) const { return bdesignation; }
 
-	void update(double deltaTime);
-
 private:
 	bool initialized;
 
@@ -156,8 +153,6 @@ private:
 	float distance;		//! Distance based on electron density model in kpc
 	int glitch;		//! Number of glitches
 	QString notes;		//! Notes to pulsar (Type of pulsar)
-
-	LinearFader labelsFader;
 
 	//! Calculate and get spin down energy loss rate (ergs/s)
 	//! @param p0 - barycentric period of the pulsar (s)

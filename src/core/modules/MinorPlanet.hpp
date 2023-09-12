@@ -31,7 +31,7 @@
 	There are two main reasons for having a separate class from Planet:
 	 - visual magnitude calculation (asteroids use the H,G system;
        Stellarium's default algorithm is not easily applied to asteroids);
-	 - support for minor planet numbers and provisional designations.
+	 - support for minor planet numbers and IAU designations.
 
 	Some of the code in this class is re-used from the parent Planet class.
   */
@@ -67,6 +67,8 @@ public:
 	virtual void translateName(const StelTranslator& trans) Q_DECL_OVERRIDE;
 	virtual QString getEnglishName(void) const Q_DECL_OVERRIDE;
 	virtual QString getNameI18n(void) const Q_DECL_OVERRIDE;
+	//! gets an IAU provisional designation.
+	virtual QString getIAUDesignation() const Q_DECL_OVERRIDE { return iauDesignationText; }
 
 	//! set the minor planet's number, if any.
 	//! The number should be specified as an additional parameter, as
@@ -75,12 +77,8 @@ public:
 	//! have no result.
 	void setMinorPlanetNumber(int number);
 
-	//! sets a provisional designation.
-	//! At the moment, the only role is for it to be displayed in the info
-	//! field.
-	//! \todo Support more than one provisional designations.
-	//! \todo Include them in the search lists.
-	void setProvisionalDesignation(QString designation);
+	//! sets an IAU provisional designation.
+	void setIAUDesignation(const QString& designation);
 
 	//! sets absolute magnitude (H) and slope parameter (G).
 	//! These are the parameters in the IAU's two-parameter magnitude system
@@ -90,16 +88,25 @@ public:
 	//! @param slope Slope parameter G. This is usually [0..1], sometimes slightly outside. Allowed here [-1..2].
 	void setAbsoluteMagnitudeAndSlope(const float magnitude, const float slope);
 
-	//! renders the subscript in a minor planet provisional designation with HTML.
-	//! \returns an empty string if the source string is not a provisional
-	//! designation.
-	static QString renderProvisionalDesignationinHtml(QString plainText);
+	//! renders the subscript in a minor planet IAU provisional designation with HTML.
+	static QString renderIAUDesignationinHtml(const QString& plainText);
 
 	//! set values for spectral types
-	void setSpectralType(QString sT="", QString sB="");
+	void setSpectralType(const QString& sT, const QString& sB);
 
 	//! set value for color index B-V
 	void setColorIndexBV(float bv=99.f);
+
+	//! set the discovery circumstances of minor body
+	//! @param date of discovery
+	//! @param name of discoverer
+	void setDiscoveryData(const QString& date, const QString& name) { discoveryDate = date; discoverer = name; }
+
+	//! sets a possible date, discovery and perihelion codes of the minor planets (A/ and I/ objects).
+	void setExtraDesignations(QStringList codes) { extraDesignations = codes; }
+
+	//! get list of comet codes
+	QStringList getExtraDesignations() const { return extraDesignations; }
 
 	//! get sidereal period for minor planet
 	virtual double getSiderealPeriod() const Q_DECL_OVERRIDE;
@@ -111,16 +118,23 @@ protected:
 	//! Any flag=Extra information to be displayed at the end
 	virtual QString getInfoStringExtra(const StelCore *core, const InfoStringGroup& flags) const Q_DECL_OVERRIDE;
 
+	virtual QString getDiscoveryCircumstances() const Q_DECL_OVERRIDE;
+
 private:
 	int minorPlanetNumber;
 	float  slopeParameter; // This is G from the H, G system for computation of apparent magnitude.
 
-	bool nameIsProvisionalDesignation;
-	QString provisionalDesignationHtml;
+	bool nameIsIAUDesignation;
+	QString iauDesignationHtml;
+	QString iauDesignationText;
+	QStringList extraDesignations;
 	QString properName;
 
 	float b_v;
 	QString specT, specB;
+	// Discovery data
+	QString discoverer;
+	QString discoveryDate;
 };
 
 #endif // MINORPLANET_HPP

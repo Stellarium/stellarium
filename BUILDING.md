@@ -44,7 +44,7 @@ your distribution. Here's a list.
 - A C++ compiler able to compile C++17 code ([GCC](https://gcc.gnu.org/) 7 or later, 
   Clang 6 or later, MSVC 2017 (15.7) or later; MSVC2019 required for Qt6)
 - [CMake](https://www.cmake.org/) 3.16.0 or later - buildsystem used by many open source projects
-- [Qt Framework](https://www.qt.io/) 5.9.0 or later. We recommend 5.15.2 for Stellarium 0.*, or Qt6.2 or later for Stellarium 1.*.
+- [Qt Framework](https://www.qt.io/) 5.12.0/6.2.0 or later. We recommend 5.15.2 or 6.5.1
 - [OpenGL](https://www.opengl.org/) - graphics library
 - [Zlib](https://www.zlib.net) - compression library
 
@@ -111,7 +111,7 @@ see [Linux with outdated Qt](#linux-with-outdated-qt).
 
 ```
 sudo dnf install cmake gcc graphviz doxygen gettext git \
-                 qt5-qtbase-devel qt5-qttools-devel qt5-qtscript-devel qt5-qtsvg-devel qt5-qtmultimedia-devel \
+                 qt5-qtbase-devel qt5-qtbase-private-devel qt5-qttools-devel qt5-qtscript-devel qt5-qtsvg-devel qt5-qtmultimedia-devel \
                  qt5-qtserialport-devel qt5-qtlocation-devel qt5-qtcharts-devel qt5-qtwebengine-devel
 ```
 
@@ -124,7 +124,7 @@ Here's how.
 
 The Qt development team provides binary installers. If you want to build Qt yourself from source, this is 
 fine but it will take a ''long'' time. We recommend the following procedure for manually installing the 
-latest Qt (required: 5.9 or above at the moment):
+latest Qt (required: 5.12 or above at the moment):
 - Download the Linux/X11 package from [Qt Company](http://www.qt.io/download-open-source/). Choose 32/64 bit 
   as appropriate.
 - Install it to `/opt/Qt5`
@@ -212,8 +212,8 @@ Stellarium will build without QtWebEngine support. The result is shown in the sy
 - To get the source code of Stellarium you need to install some git environment. 
   [Git for Windows](https://git-scm.com/download/win) seems ok, or the Git Bash and Git GUI, whatever 
   seems suitable for you. But it is not necessary.
-- Get the [latest version of Qt5 from Qt Company](http://www.qt.io/download-open-source/). We recommend 
-  to use Qt 5.15 or, better, Qt6. For Qt5 you must select Qt Script and msvc2019 among so many checkboxes.
+- Get the [latest version of Qt from Qt Company](http://www.qt.io/download-open-source/). We recommend 
+  to use Qt 5.15.2 or, better, Qt6. For Qt5 you must select Qt Script and msvc2019 among so many checkboxes.
 
 After installing all required libraries and tools you should configure the build environment.
 
@@ -221,6 +221,9 @@ Add `C:\Qt\Qt5.15.2` to your `PATH` variable - you should add string `C:\Qt\Qt5.
 for 32-bit or `C:\Qt\Qt5.15.2\msvc2019_64;C:\Qt\Qt5.15.2\msvc2019_64\bin` for 64-bit to `PATH` variable.
 (Replace the version numbers of Qt and the version of Visual Studio (2017/2019) with the version that you 
 have installed)
+If you also want to run the ShowMySky sky model, add another directory to the PATH variable. This depends on your build environment. 
+If builds are made into `D:\StelDev\GIT\build-stellarium-Desktop_Qt_6_5_1_MSVC2019_64bit-Release\`, this would be 
+`D:\StelDev\GIT\build-stellarium-Desktop_Qt_6_5_1_MSVC2019_64bit-Release\_deps\showmysky-qt6-build\ShowMySky`
 
 **ANGLE issues:**
 
@@ -278,9 +281,9 @@ https://github.com/Stellarium/stellarium/releases
 Do this command in a terminal (if you prefer, you might use arK or some other graphical archive tool): 
 
 ```
-$ tar zxf stellarium-0.21.3.tar.gz
+$ tar zxf stellarium-23.2.tar.gz
 ```
-You should now have a directory `stellarium-0.21.3` with the source code in it.
+You should now have a directory `stellarium-23.2` with the source code in it.
 
 
 ### Clone project from GitHub
@@ -311,7 +314,7 @@ GitHub by web.
 
 #### Windows specifics
 
-On Windows save the file (`master.zip` or `stellarium-0.21.3.tar.gz`) to the `C:/Devel` directory as 
+On Windows save the file (`master.zip` or `stellarium-23.2.tar.gz`) to the `C:/Devel` directory as 
 example. You will need a decompression program installed in Windows, for example [7-Zip](http://www.7-zip.org/). 
 The root of the source tree will be `C:/Devel/stellarium` for simplicity.
 
@@ -471,7 +474,7 @@ $ sudo make install
 
 ### Linux specifics
 
-To create a source package (TGZ) on linux you need run:
+To create a source packages on linux you need run:
 ```
 $ make package_source
 ```

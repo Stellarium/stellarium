@@ -84,7 +84,7 @@ bool Asterism::read(const QString& record, StarMgr *starMgr)
 				asterism[i]=starMgr->searchHP(static_cast<int>(HP));
 				if (!asterism[i])
 				{
-					qWarning() << "Error in Asterism " << abbreviation << ": can't find star HIP" << HP;
+					qWarning() << "Error in asterism" << abbreviation << "- can't find star HIP" << HP;
 					return false;
 				}
 				break;
@@ -111,7 +111,7 @@ bool Asterism::read(const QString& record, StarMgr *starMgr)
 				asterism[i] = s;
 				if (!asterism[i])
 				{
-					qWarning() << "Error in Asterism " << abbreviation << ": can't find star with coordinates" << RA << "/" << DE;
+					qWarning() << "Error in asterism" << abbreviation << "- can't find star with coordinates" << RA << "/" << DE;
 					return false;
 				}
 				break;

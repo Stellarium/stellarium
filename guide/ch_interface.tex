@@ -61,7 +61,7 @@ The other tab in this window allows you to see or set
 \label{sec:gui:location}
 
 \begin{figure}[htbp]
-\centering\includegraphics[width=0.75\textwidth]{location_dialog.png}
+\centering\includegraphics[width=0.85\textwidth]{location_dialog.png}
 \caption{Location window}
 \label{fig:gui:location}
 \end{figure}
@@ -113,14 +113,24 @@ There are a few ways you can set your location:
 ``use as default'' checkbox, disable ``Get location from Network'',
 and close the location window.
 
+Two settings may influence the landscape when changing locations:
+\begin{description}
+\item[Auto select landscapes] When changing the planet, 
+a fitting landscape panorama will be shown when available. 
+Also, \newFeature{23.2} when clicking on the earth map, 
+a zero-altitude landscape is displayed in the approximate color of that location (taken from the map).
+\item[Auto-enable atmosphere] When changing planet during
+  location change, the atmosphere will be switched as required.
+\end{description}
+
 \subsection{Time Zones}
 \label{sec:gui:location:timezones}
 Locations in Stellarium's location database include their respective
 time zone.\newFeature{0.15.1/0.19.0} When you click on a location in
 the list, the time should be shown in the respective time zone.  If
 daylight time rules exist and you have selected ``Enable daylight
-saving time'', also this civilisatory development is respected. Most
-users will want this setting active.
+saving time'', also this abomination of modern civilisation is respected. Most
+users will require to have this setting active.
 
 When you select ``Use custom time zone'', you can select other time zones.
 Those that start with UTC have no daylight time rules.
@@ -305,7 +315,7 @@ when the program starts:
 
 \noindent The lowest field allows selection of the correction model for the time
 correction $\Delta T$ (see section~\ref{sec:Concepts:DeltaT}). Default
-is ``Modified Espenak and Meeus (2006)''. Please use other values only if you
+is ``Modified Espenak and Meeus (2006, 2014, 2023)''. Please use other values only if you
 know what you are doing.
 
 \subsection{The Tools Tab}
@@ -337,8 +347,6 @@ and options for screenshots.
 \item[Select single constellation] When active, clicking on a star
   that is member in the constellation lines will make the
   constellation stand out. See section~\ref{sec:starlore:singleConstellations} for details.
-\item[Auto-enabling for the environment] When changing planet during
-  location change, atmosphere will be switched as required.
 \item[Dithering] options to allow select better simulation of sky on different hardware.
 \item[Auto zoom out returns to initial direction of view] When enabled,
   this option changes the behavior of the zoom out key
@@ -363,8 +371,9 @@ and options for screenshots.
   Usually it should be enabled. (See~\ref{sec:Concepts:Parallax:Topocentric})
 \item[Include nutation] Compute the slight wobble of earth's
   axis. This feature is active only about 500 years around J2000.0.
-\item[Auto select landscapes] When changing the planet in the location
-  panel, a fitting landscape panorama will be shown when available.
+\item[Include aberration] Add effect of annual \indexterm{aberration of light} to the object's position (see \ref{sec:Concepts:Aberration}). 
+     Note: This also influences the displayed position in the J2000 frame!
+	 For didactic purposes you can exaggerate the effect by up to $5\times$. 
 \item[Indication for mount mode] You can activate the short display of a message when switching type of used mount.
 \item[Edit keyboard shortcuts\ldots] See section~\ref{sec:gui:help:hotkeys}.
 \item[Mouse cursor timeout] You can decide whether, and when, the
@@ -667,15 +676,21 @@ for changing the general appearance of the view of Solar system objects. Some hi
   \item[Planets] will increase the apparent size of major planets.
   \end{description}
 \item[Show orbits] adds a rendition of the orbit or trajectory of an SSO. 
+For efficiency, orbits are not displayed when the object is not inside the screen, 
+unless you set the ``permanently'' option. You can further fine-tune the selection 
+and appearance (width and colors) of orbits with the additional settings. 
 \item[Show trails] plots the apparent path of SSO among the stars as
   seen from the current planet.
 \item[Show planetary nomenclature] displays positions and names of
   surface features officially named by the IAU (See
   Appendix~\ref{ch:Nomenclature}). When the sun is below the horizon
-  at the location of the feature, the label is attenuated. Features like
-  craters are best visible when they are illuminated by a low sun. 
+  at the location of the feature, the label is attenuated. A few special markers 
+  show Centre, North and South poles, east and west points along the equator, 
+  and the subsolar point (where the sun is at the zenith as seen from that feature). 
+  Features like craters are best visible when they are illuminated by a low sun. 
   You can therefore limit the display\newFeature{1.2} to items along the
   \indexterm{terminator} (the border between light and dark on the surface).
+  You can also\newFeature{23.3} mark craters and lunar \emph{maria} (the dark ``seas'') with circles. 
 \item[GRS details\ldots]: The Great Red Spot (GRS) is slowly
   drifting along Jupiter's System~II coordinate system. This button 
   opens a new dialog in which you can adjust the longitude (Jupiter system~II) 
@@ -770,18 +785,11 @@ that selection of a new landscape will alter the location for you.
 The controls at the bottom right of the window operate as follows:
 
 \begin{description}
-\item[Show ground] This turns on and off landscape rendering (same
-  as the button \guibutton{0.6}{bt_ground.png} in the main tool bar).
 \item[Use this landscape as default] Selecting this option will save
   the landscape into the program configuration file so that the current
   landscape will be the one used when Stellarium starts.
-\item[Use associated planet and position] When enabled, selecting a
-  new landscape will automatically update the observer location.
-  Use this if the landscape is not just decoration, but a true
-  representation of a particular site you wish to visit in the simulation.
-\item[Show landscape labels] Landscapes can be configured with a
-  gazetteer of interesting points, e.g., mountain peaks, which can be
-  labeled with this option.
+\item[Show ground] This turns on and off landscape rendering (same
+  as the button \guibutton{0.6}{bt_ground.png} in the main tool bar).
 \item[Show fog] This turns on and off rendering of a band of
   fog/haze along the horizon, when available in this landscape.
 \item[Show illumination] to reflect the ugly developments of our
@@ -789,16 +797,23 @@ The controls at the bottom right of the window operate as follows:
   pollution, e.g., streetlamps, bright windows, or the sky glow of a
   nearby city. This layer, if present, will be mixed in when it is
   dark enough.
-\item[Minimal brightness] Use some minimal brightness
-  setting. Moonless night on very dark locations may appear too dark
-  on your screen. You may want to configure some minimal brightness
-  here.
+\item[Show landscape labels] Landscapes can be configured with a
+  gazetteer of interesting points, e.g., mountain peaks, which can be
+  labeled with this option. Color and font size can also be configured.
+\item[Position from landscape] When enabled, selecting a
+  new landscape will automatically update the observer location.
+  Use this if the landscape is not just decoration, but a true
+  representation of a particular site you wish to visit in the simulation.
+\item[Minimal brightness] Moonless night on very dark locations may appear too dark
+  on your screen. You may want to configure some minimal brightness here.
+  \begin{description}
 \item[from landscape, if given] Landscape authors may decide to
   provide such a minimal brightness value in the \file{landscape.ini}
   file. 
+  \end{description}
 \item[Draw only polygon]\newFeature{0.20.2} If a polygonal horizon line has been
-  defined for the landscape, only draw this. 
-\item[Polygonal line thickness]\newFeature{0.20.2} Set line width for the polygonal line.
+  defined for the landscape, only draw this with the given thickness.
+\item[Transparency] Allow peeking below the horizon. \newFeature{23.3} Note that this may show graphical errors. 
 \end{description}
 
 \noindent Using the button \menu{Add/remove landscapes\ldots}, you can also

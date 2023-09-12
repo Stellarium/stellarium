@@ -7,8 +7,8 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/sw8j9l8q95ejkalo?svg=true)](https://ci.appveyor.com/project/alex-w/stellarium)
 [![Coverage Status](https://coveralls.io/repos/github/Stellarium/stellarium/badge.svg)](https://coveralls.io/github/Stellarium/stellarium)
 [![CodeFactor](https://www.codefactor.io/repository/github/stellarium/stellarium/badge)](https://www.codefactor.io/repository/github/stellarium/stellarium)
-[![Code Quality Score](https://api.codiga.io/project/33739/score/svg)](https://app.codiga.io/hub/project/33739/stellarium)
 [![DOI:10.1558/jsa.17822](http://img.shields.io/badge/DOI-10.1558/jsa.17822-blue.svg)](https://doi.org/10.1558/jsa.17822)
+[![DOI:10.5281/zenodo.8105939](http://img.shields.io/badge/DOI-10.5281/zenodo.8105939-blue.svg)](https://doi.org/10.5281/zenodo.8105939)
 
 Stellarium is a free open source planetarium for your computer. It shows a realistic sky
 in 3D, just like what you see with the naked eye, binoculars or a telescope.
@@ -17,7 +17,7 @@ If you are new to Stellarium, go to [www.stellarium.org](https://www.stellarium.
 
 ## Installation Instructions & Quick Start
 
-Please refer to the [User Guide, Getting Started section](https://github.com/Stellarium/stellarium/releases/download/v23.1/stellarium_user_guide-23.1-1.pdf).
+Please refer to the [User Guide, Getting Started section](https://github.com/Stellarium/stellarium/releases/download/v23.2/stellarium_user_guide-23.2-1.pdf).
 
 ## Get & build the code
 
@@ -38,3 +38,6 @@ This project exists thanks to all the people who contribute! List of contributor
 ## Our backers & sponsors
 
 Thank you to all [our backers and sponsors](BACKERS.md)!  Become a [backer](https://opencollective.com/stellarium#backer) or [sponsor](https://opencollective.com/stellarium#sponsor).
+
+## Code Signing
+Windows packages of this program uses free code signing provided by [SignPath.io](https://signpath.io?utm_source=foundation&utm_medium=github&utm_campaign=stellarium), and a free code signing certificate by the [SignPath Foundation](https://signpath.org?utm_source=foundation&utm_medium=github&utm_campaign=stellarium)

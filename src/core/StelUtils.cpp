@@ -158,6 +158,9 @@ QString getCompilerInfo()
 		{1930, "MSVC++ 17.0 (Visual Studio 2022 RTW)"     },
 		{1931, "MSVC++ 17.1 (Visual Studio 2022)"         },
 		{1932, "MSVC++ 17.2 (Visual Studio 2022)"         },
+		{1933, "MSVC++ 17.3 (Visual Studio 2022)"         },
+		{1934, "MSVC++ 17.4 (Visual Studio 2022)"         },
+		{1935, "MSVC++ 17.5 (Visual Studio 2022)"         },
 	};
 	compilerInfo = map.value(_MSC_VER, "unknown MSVC++ version");
 	#endif
@@ -654,13 +657,23 @@ double getDecAngle(const QString& str)
 	return -0.0;
 }
 
-// Return the first power of two bigger than the given value
 int getBiggerPowerOfTwo(int value)
 {
 	int p=1;
 	while (p<value)
 		p<<=1;
 	return p;
+}
+
+// Return the first power of two smaller than or equal to the given value
+int getSmallerPowerOfTwo(const int value)
+{
+	if (value==0) return 1;
+	const auto bigger = getBiggerPowerOfTwo(value);
+	// Leave exact power of two unchanged
+	if (bigger == value) return value;
+
+	return bigger >> 1;
 }
 
 /*************************************************************************
@@ -945,6 +958,18 @@ QString localeDateString(const int year, const int month, const int day, const i
 	{
 		return localeDateString(year,month,day,dayOfWeek,QLocale().dateFormat(QLocale::ShortFormat));
 	}
+}
+
+QString localeDiscoveryDateString(const QString& discovery)
+{
+	QString ddate = discovery; // YYYY
+	QStringList date = discovery.split("-");
+	if (date.count()==3) // YYYY-MM-DD
+		ddate = QString("%1 %2 %3").arg(QString::number(date.at(2).toInt()), StelLocaleMgr::longGenitiveMonthName(date.at(1).toInt()), date.at(0));
+	if (date.count()==2) // YYYY-MM
+		ddate = QString("%1 %2").arg(StelLocaleMgr::longMonthName(date.at(1).toInt()), date.at(0));
+
+	return ddate;
 }
 
 int getDayOfWeek(int year, int month, int day)
@@ -1401,7 +1426,7 @@ double getDeltaTwithoutCorrection(const double jDay)
 	return 0.;
 }
 
-// Implementation of algorithm by Espenak & Meeus (2006) for DeltaT computation
+// Implementation of algorithm by Espenak & Meeus (2006) and Espenak (2014) for DeltaT computation
 double getDeltaTByEspenakMeeus(const double jDay)
 {
 	int year, month, day;	
@@ -1410,7 +1435,10 @@ double getDeltaTByEspenakMeeus(const double jDay)
 	// Note: the method here is adapted from
 	// "Five Millennium Canon of Solar Eclipses" [Espenak and Meeus, 2006]
 	// A summary is described here:
-	// http://eclipse.gsfc.nasa.gov/SEhelp/deltatpoly2004.html
+	// https://eclipse.gsfc.nasa.gov/SEhelp/deltatpoly2004.html
+	// And updated version:
+	// "Thousand Year Canon of Solar Eclipses 1501 to 2500" [Espenak, 2014]
+	// https://eclipsewise.com/help/deltatpoly2014.html
 
 	double y = yearFraction(year, month, day);
 
@@ -1494,23 +1522,32 @@ double getDeltaTByEspenakMeeus(const double jDay)
 		//r = (63.86 + 0.3345 * t - 0.060374 * std::pow(t,2) + 0.0017275 * std::pow(t,3) + 0.000651814 * std::pow(t,4) + 0.00002373599 * std::pow(t,5));
 		r = ((((0.00002373599*t + 0.000651814)*t + 0.0017275)*t - 0.060374)*t + 0.3345)*t +63.86;
 	}
-	else if (y < 2050)
+	else if (y < 2015)
 	{
-		double t = y - 2000;
-		//r = (62.92 + 0.32217 * t + 0.005589 * std::pow(t,2));
-		r = (0.005589*t +0.32217)*t + 62.92;
+		double t = y - 2005;
+		r = 0.2930*t +64.69;
 	}
-	else if (y < 2150)
+	else if (y < 3000)
 	{
-		//r = (-20 + 32 * std::pow((y-1820)/100,2) - 0.5628 * (2150 - y));
-		// r has been precomputed before, just add the term patching the discontinuity
-		r -= 0.5628*(2150.0-y);
+		double t = y - 2015;
+		r = (0.0039755*t + 0.3645)*t +67.62;
+		// r = 4283.78 at year 3000
+	}
+	else if (y < 3100)
+	{
+		// Default value for Delta T gives r = 4435.68 at year 3000
+		// and r = 5222.88 at year 3100
+		// We introduce a simple method to patch the discontinuity
+		r = 4283.78+(y-3000)*9.391;
 	}
 
 	return r;
 }
 
-// Implementation of algorithm by Espenak & Meeus (2006) with modified formulae for DeltaT computation
+// Values in second for interpolation table 2015..2033.
+static const double IERSDeltaTTable[] = { 67.64, 68.10, 68.59, 68.97, 69.22, 69.36, 69.36, 69.29, 69.20, // observed values for 2015-2023
+ 69.11, 69.04, 69.05, 69.14, 69.34, 69.63, 69.97, 70.32, 70.62, 70.98}; // predicted values for 2024-2033
+// Implementation of algorithm by Espenak & Meeus (2006, 2014) with interpolation and modified formula for 2015-2050
 double getDeltaTByEspenakMeeusModified(const double jDay)
 {
 	int year, month, day;	
@@ -1519,7 +1556,10 @@ double getDeltaTByEspenakMeeusModified(const double jDay)
 	// Note: the method here is adapted from
 	// "Five Millennium Canon of Solar Eclipses" [Espenak and Meeus, 2006]
 	// A summary is described here:
-	// http://eclipse.gsfc.nasa.gov/SEhelp/deltatpoly2004.html
+	// https://eclipse.gsfc.nasa.gov/SEhelp/deltatpoly2004.html
+	// And updated version:
+	// "Thousand Year Canon of Solar Eclipses 1501 to 2500" [Espenak, 2014]
+	// https://eclipsewise.com/help/deltatpoly2014.html
 
 	double y = yearFraction(year, month, day);
 
@@ -1586,34 +1626,44 @@ double getDeltaTByEspenakMeeusModified(const double jDay)
 		double t = y - 2000;
 		r = ((((0.00002373599*t + 0.000651814)*t + 0.0017275)*t - 0.060374)*t + 0.3345)*t +63.86;
 	}
-	// WB: Polynomial data fit from IERS's DeltaT values during 2005-2021, including predicted values until 2032
-	// Data: https://cddis.nasa.gov/archive/products/iers/deltat.data & https://cddis.nasa.gov/archive/products/iers/deltat.preds
-	// Last updated: 2022 Mar 11
-	else if (y < 2032)
+	else if (y < 2015)
 	{
-		double t = y - 2000;
-		r = (-0.00331233402*t + 0.404229283)*t + 62.48;
+		double t = y - 2005;
+		r = 0.2930*t +64.69;
 	}
-	// WB: Formula to create reasonable curve between final predicted year and 2050
-	// 93 is the predicted deltaT for 2050 (Espenak/Meeus)
+	// WB: Interpolation from IERS's DeltaT values between 2015-2023, including predicted values between 2024-2033
+	// Data: https://maia.usno.navy.mil/ser7/deltat.data & https://maia.usno.navy.mil/ser7/deltat.preds
+	else if (y < 2033)
+	{
+		double yeardec = yearFraction(year, month, day);
+		int pos = (year-2015);
+		r = IERSDeltaTTable[pos]+(yeardec-(pos+2015))*(IERSDeltaTTable[pos+1]-IERSDeltaTTable[pos]);
+	}
+	// WB: Formula to connect final predicted year and 2050
+	// 85 is the predicted deltaT for 2050 (Espenak)
 	// It looks more likely that this value is too high
 	// But we will follow it for now until we have a better model
-	// Small corrections (<0.2 sec) related to secular acceleration of the Moon are neglected
-	// Last updated: 2022 Mar 11
+	// Last updated: 2023 Sep 9
 	else if (y < 2050)
 	{
-		double finalPredictedYear = 2032.;
-		double finalPredictedDeltaT = 72.07;
+		double finalPredictedYear = 2033.0;
+		double finalPredictedDeltaT = 70.98;
 		double t = y - finalPredictedYear;
-		double diff = 2050.-finalPredictedYear;
-		r = finalPredictedDeltaT + (93.-finalPredictedDeltaT) * t * t/(diff*diff);
+		r = finalPredictedDeltaT + (85.-finalPredictedDeltaT) * t/(2050.-finalPredictedYear);
 	}
-	else if (y < 2150)
+	else if (y < 3000)
 	{
-		// r has been precomputed before, just add the term patching the discontinuity
-		r -= 0.5628*(2150.0-y);
+		double t = y - 2015;
+		r = (0.0039755*t + 0.3645)*t +67.62;
+		// r = 4283.78 at year 3000
 	}
-
+	else if (y < 3100)
+	{
+		// Default value for Delta T gives r = 4435.68 at year 3000
+		// and r = 5222.88 at year 3100
+		// We introduce a simple method to patch the discontinuity
+		r = 4283.78+(y-3000)*9.391;
+	}
 	return r;
 }
 
@@ -2587,6 +2637,8 @@ float* ComputeCosSinRho(const unsigned int segments)
 //! @param minAngle start angle inside the half-circle. maxAngle=minAngle+segments*phi
 float *ComputeCosSinRhoZone(const float dRho, const unsigned int segments, const float minAngle)
 {
+	Q_ASSERT(segments<=MAX_STACKS);
+
 	float *cos_sin = cos_sin_rho;
 	const float c = cosf(dRho);
 	const float s = sinf(dRho);

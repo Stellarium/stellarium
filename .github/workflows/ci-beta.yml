@@ -48,7 +48,7 @@ jobs:
         run: ctest --output-on-failure
 
   # CI on macOS
-  cib-macos:
+  cib-macos12:
     name: "macOS"
     runs-on: macos-12
     if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.actor, 'transifex')"

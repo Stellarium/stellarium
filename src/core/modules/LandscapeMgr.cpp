@@ -96,29 +96,36 @@ Cardinals::~Cardinals()
 {
 }
 
+const float Cardinals::sp8 = sin(M_PIf/8.f); // dimension for intercardinals
+const float Cardinals::cp8 = cos(M_PIf/8.f); // dimension for intercardinals
+const float Cardinals::s1p16 = sin(M_PIf/16.f);     // dimension for rose32
+const float Cardinals::c1p16 = cos(M_PIf/16.f);     // dimension for rose32
+const float Cardinals::s3p16 = sin(3.f*M_PIf/16.f); // dimension for rose32
+const float Cardinals::c3p16 = cos(3.f*M_PIf/16.f); // dimension for rose32
+
 const QMap<Cardinals::CompassDirection, Vec3f> Cardinals::rose4winds = {
 	{ Cardinals::dN, Vec3f(-1.f, 0.f, 0.f) }, { Cardinals::dS, Vec3f(1.f,  0.f, 0.f) },
 	{ Cardinals::dE, Vec3f( 0.f, 1.f, 0.f) }, { Cardinals::dW, Vec3f(0.f, -1.f, 0.f) }
 };
 const QMap<Cardinals::CompassDirection, Vec3f> Cardinals::rose8winds = {
-	{ Cardinals::dNE, Vec3f(-1.f,  1.f, 0.f) }, { Cardinals::dSE, Vec3f( 1.f,  1.f, 0.f) },
-	{ Cardinals::dSW, Vec3f( 1.f, -1.f, 0.f) }, { Cardinals::dNW, Vec3f(-1.f, -1.f, 0.f) }
+	{ Cardinals::dNE, Vec3f(-q8,  q8, 0.f) }, { Cardinals::dSE, Vec3f( q8,  q8, 0.f) },
+	{ Cardinals::dSW, Vec3f( q8, -q8, 0.f) }, { Cardinals::dNW, Vec3f(-q8, -q8, 0.f) }
 };
 const QMap<Cardinals::CompassDirection, Vec3f> Cardinals::rose16winds = {
-	{ Cardinals::dNNE, Vec3f(-1.f,   cp, 0.f) }, { Cardinals::dENE, Vec3f( -cp,  1.f, 0.f) },
-	{ Cardinals::dESE, Vec3f(  cp,  1.f, 0.f) }, { Cardinals::dSSE, Vec3f( 1.f,   cp, 0.f) },
-	{ Cardinals::dSSW, Vec3f( 1.f,  -cp, 0.f) }, { Cardinals::dWSW, Vec3f(  cp, -1.f, 0.f) },
-	{ Cardinals::dWNW, Vec3f( -cp, -1.f, 0.f) }, { Cardinals::dNNW, Vec3f(-1.f,  -cp, 0.f) }
+	{ Cardinals::dNNE, Vec3f(-cp8,  sp8, 0.f) }, { Cardinals::dENE, Vec3f(-sp8,  cp8, 0.f) },
+	{ Cardinals::dESE, Vec3f( sp8,  cp8, 0.f) }, { Cardinals::dSSE, Vec3f( cp8,  sp8, 0.f) },
+	{ Cardinals::dSSW, Vec3f( cp8, -sp8, 0.f) }, { Cardinals::dWSW, Vec3f( sp8, -cp8, 0.f) },
+	{ Cardinals::dWNW, Vec3f(-sp8, -cp8, 0.f) }, { Cardinals::dNNW, Vec3f(-cp8, -sp8, 0.f) }
 };
 const QMap<Cardinals::CompassDirection, Vec3f> Cardinals::rose32winds = {
-	{ Cardinals::dNbE,  Vec3f(-1.f,   qp, 0.f) }, { Cardinals::dNbW,  Vec3f(-1.f,  -qp, 0.f) },
-	{ Cardinals::dSbE,  Vec3f( 1.f,   qp, 0.f) }, { Cardinals::dSbW,  Vec3f( 1.f,  -qp, 0.f) },
-	{ Cardinals::dEbS,  Vec3f(  qp,  1.f, 0.f) }, { Cardinals::dEbN,  Vec3f( -qp,  1.f, 0.f) },
-	{ Cardinals::dWbN,  Vec3f( -qp, -1.f, 0.f) }, { Cardinals::dWbS,  Vec3f(  qp, -1.f, 0.f) },
-	{ Cardinals::dNEbN, Vec3f(-1.f,  tqp, 0.f) }, { Cardinals::dNWbN, Vec3f(-1.f, -tqp, 0.f) },
-	{ Cardinals::dSEbS, Vec3f( 1.f,  tqp, 0.f) }, { Cardinals::dSWbS, Vec3f( 1.f, -tqp, 0.f) },
-	{ Cardinals::dSEbE, Vec3f( tqp,  1.f, 0.f) }, { Cardinals::dNEbE, Vec3f(-tqp,  1.f, 0.f) },
-	{ Cardinals::dNWbW, Vec3f(-tqp, -1.f, 0.f) }, { Cardinals::dSWbW, Vec3f( tqp, -1.f, 0.f) }
+	{ Cardinals::dNbE,  Vec3f(-c1p16, s1p16, 0.f) }, { Cardinals::dNbW,  Vec3f(-c1p16, -s1p16, 0.f) },
+	{ Cardinals::dSbE,  Vec3f( c1p16, s1p16, 0.f) }, { Cardinals::dSbW,  Vec3f( c1p16, -s1p16, 0.f) },
+	{ Cardinals::dEbS,  Vec3f( s1p16, c1p16, 0.f) }, { Cardinals::dEbN,  Vec3f(-s1p16,  c1p16, 0.f) },
+	{ Cardinals::dWbN,  Vec3f(-s1p16,-c1p16, 0.f) }, { Cardinals::dWbS,  Vec3f( s1p16, -c1p16, 0.f) },
+	{ Cardinals::dNEbN, Vec3f(-c3p16, s3p16, 0.f) }, { Cardinals::dNWbN, Vec3f(-c3p16, -s3p16, 0.f) },
+	{ Cardinals::dSEbS, Vec3f( c3p16, s3p16, 0.f) }, { Cardinals::dSWbS, Vec3f( c3p16, -s3p16, 0.f) },
+	{ Cardinals::dSEbE, Vec3f( s3p16, c3p16, 0.f) }, { Cardinals::dNEbE, Vec3f(-s3p16,  c3p16, 0.f) },
+	{ Cardinals::dNWbW, Vec3f(-s3p16,-c3p16, 0.f) }, { Cardinals::dSWbW, Vec3f( s3p16, -c3p16, 0.f) }
 };
 
 void Cardinals::update(double deltaTime)
@@ -352,6 +359,8 @@ LandscapeMgr::LandscapeMgr()
 	, defaultMinimalBrightness(0.01)
 	, flagLandscapeSetsMinimalBrightness(false)
 	, flagEnvironmentAutoEnabling(false)
+	, flagLandscapeUseTransparency(false)
+	, landscapeTransparency(0.)
 {
 	setObjectName("LandscapeMgr"); // should be done by StelModule's constructor.
 
@@ -415,7 +424,7 @@ void LandscapeMgr::update(double deltaTime)
 			// Use no more than 1/60th of a second for this batch of loading
 			QElapsedTimer timer;
 			timer.start();
-			Atmosphere::LoadingStatus status;
+			Atmosphere::LoadingStatus status={1,1};
 			while(loadingAtmosphere->isLoading() && timer.elapsed() < 1000/60)
 				status = loadingAtmosphere->stepDataLoading();
 			if(loadingAtmosphere->isLoading())
@@ -430,7 +439,7 @@ void LandscapeMgr::update(double deltaTime)
 				setAtmosphereShowMySkyStatusText(q_("Switching models..."));
 			}
 		}
-		catch(AtmosphereShowMySky::InitFailure const& error)
+		catch(Atmosphere::InitFailure const& error)
 		{
 			qWarning() << "ERROR: Failed to load atmosphere model data:" << error.what();
 			qWarning() << "WARNING: Falling back to the Preetham's model";
@@ -515,7 +524,7 @@ void LandscapeMgr::update(double deltaTime)
 								 currentIsEarth ? moon.data() : nullptr, core->getCurrentLocation(),
 								 15.f, 40.f, static_cast<float>(drawer->getExtinctionCoefficient()), atmosphereNoScatter);
 	}
-	catch(AtmosphereShowMySky::InitFailure const& error)
+	catch(Atmosphere::InitFailure const& error)
 	{
 		qWarning().noquote() << "ShowMySky atmosphere model crashed:" << error.what();
 		qWarning() << "Loading Preetham model";
@@ -640,6 +649,8 @@ void LandscapeMgr::update(double deltaTime)
 	}
 
 	landscape->setBrightness(landscapeBrightness, lightscapeBrightness);
+	if (getFlagLandscapeUseTransparency())
+		landscape->setTransparency(landscapeTransparency);
 
 	messageFader.update(static_cast<int>(deltaTime*1000));
 }
@@ -686,15 +697,6 @@ void LandscapeMgr::draw(StelCore* core)
 		painter.setColor(1, 0, 0, messageFader.getInterstate());
 		painter.drawText(83, 70, messageToShow);
 	}
-
-	// Workaround for a bug with spherical mirror mode when we don't show the cardinal points.
-	// I am not really sure why this seems to fix the problem.  If you want to
-	// remove this, make sure the spherical mirror mode with cardinal points
-	// toggled off works properly!
-	const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
-	QOpenGLPaintDevice device;
-	device.setSize(QSize(prj->getViewportWidth(), prj->getViewportHeight()));
-	QPainter painter(&device);
 }
 
 // Some element in drawing order behind LandscapeMgr can call this at the end of its own draw() to overdraw with the polygon line and gazetteer.
@@ -732,7 +734,8 @@ void LandscapeMgr::createAtmosphere()
 			setAtmosphereShowMySkyStatusText("");
 			setAtmosphereShowMySkyStoppedWithError(false);
 
-			loadingAtmosphere.reset(new AtmosphereShowMySky());
+			const auto core = StelApp::getInstance().getCore();
+			loadingAtmosphere.reset(new AtmosphereShowMySky(core->getCurrentLocation().altitude));
 			if(!atmosphere)
 			{
 				// We're just loading the first atmosphere in the run of Stellarium. Initialize it synchronously.
@@ -748,7 +751,7 @@ void LandscapeMgr::createAtmosphere()
 				setAtmosphereShowMySkyStatusText(QString("%1 0% %2").arg(q_("Loading..."), qc_("done","percentage of done")));
 			}
 		}
-		catch(AtmosphereShowMySky::InitFailure const& error)
+		catch(Atmosphere::InitFailure const& error)
 		{
 			qWarning() << "ERROR: Failed to initialize ShowMySky atmosphere model:" << error.what();
 			qWarning() << "WARNING: Falling back to the Preetham's model";
@@ -842,6 +845,9 @@ void LandscapeMgr::init()
 	setLabelFontSize(conf->value("landscape/label_font_size", 18).toInt());
 	setLabelColor(Vec3f(conf->value("landscape/label_color", "0.2,0.8,0.2").toString()));
 
+	setFlagLandscapeUseTransparency(conf->value("landscape/flag_transparency", false).toBool());
+	setLandscapeTransparency(conf->value("landscape/transparency", 0.5).toDouble());
+
 	cardinalPoints = new Cardinals();
 	cardinalPoints->setFlagShow4WCRLabels(conf->value("viewing/flag_cardinal_points", true).toBool());
 	cardinalPoints->setFlagShow8WCRLabels(conf->value("viewing/flag_ordinal_points", true).toBool());
@@ -886,6 +892,12 @@ bool LandscapeMgr::setCurrentLandscapeID(const QString& id, const double changeL
 	//prevent unnecessary changes/file access
 	if(id==currentLandscapeID)
 		return false;
+
+	if (!getAllLandscapeIDs().contains(id))
+	{
+		qDebug() << "LandscapeMgr::setCurrentLandscapeID: unknown landscape" << id << ", using 'zero'";
+		return setCurrentLandscapeID("zero", changeLocationDuration);
+	}
 
 	Landscape* newLandscape;
 
@@ -1005,13 +1017,17 @@ bool LandscapeMgr::setCurrentLandscapeName(const QString& name, const double cha
 	QMap<QString,QString> nameToDirMap = getNameToDirMap();
 	if (nameToDirMap.find(name)!=nameToDirMap.end())
 	{
+		//qDebug() << "Resolving " << name << "as" << nameToDirMap[name];
 		return setCurrentLandscapeID(nameToDirMap[name], changeLocationDuration);
 	}
-	else
+	// Legacy mess-up: e.g. Scenery3D calls name but should mean ID.
+	else if (!setCurrentLandscapeID(name, changeLocationDuration))
 	{
 		qWarning() << "Can't find a landscape with name=" << name << StelUtils::getEndLineChar();
 		return false;
 	}
+	qDebug() << "Loading landscapeID" << name;
+	return true;
 }
 
 // Load a landscape into cache.
@@ -1095,7 +1111,10 @@ bool LandscapeMgr::getIsLandscapeFullyVisible() const
 
 double LandscapeMgr::getLandscapeSinMinAltitudeLimit() const
 {
-	return landscape->getSinMinAltitudeLimit();
+	if (flagLandscapeUseTransparency && landscapeTransparency>0.)
+		return -1.;
+	else
+		return landscape->getSinMinAltitudeLimit();
 }
 
 bool LandscapeMgr::getFlagUseLightPollutionFromDatabase() const
@@ -1128,66 +1147,89 @@ void LandscapeMgr::onLocationChanged(const StelLocation &loc)
 	{
 		//this was previously logic in ViewDialog, but should really be on a non-GUI layer
 		StelCore* core = StelApp::getInstance().getCore();
-		float lum;
-		if (!loc.planetName.contains("Earth")) // location not on Earth...
-			lum = 0;
-		else if(loc.lightPollutionLuminance.isValid())
-			lum = loc.lightPollutionLuminance.toFloat();
-		else // ...or it is an observatory, or it is an unknown location
-			lum = loc.DEFAULT_LIGHT_POLLUTION_LUMINANCE;
-
+		float lum=0.; // location not on Earth...
+		if (loc.planetName.contains("Earth"))
+		{
+			if(loc.lightPollutionLuminance.isValid())
+				lum = loc.lightPollutionLuminance.toFloat();
+			else // ...or it is an observatory, or it is an unknown location
+				lum = loc.DEFAULT_LIGHT_POLLUTION_LUMINANCE;
+		}
 		core->getSkyDrawer()->setLightPollutionLuminance(lum);
 	}
 }
 
+// Load landscapeID, but do not load its associated location.
+// If landscapeID is empty but flagLandscapeAutoSelection is true, load a location fitting to loc's planet.
 void LandscapeMgr::onTargetLocationChanged(const StelLocation &loc, const QString& landscapeID)
 {
-	if (loc.planetName != currentPlanetName)
+	//qDebug() << "LandscapeMgr::onTargetLocationChanged:" << loc.serializeToLine().replace('\t', '|') << "Landscape requested:" << landscapeID;
+	if (!landscapeID.isEmpty() && getAllLandscapeIDs().contains(landscapeID))
 	{
-		if (landscapeID.length()>0)
-			setCurrentLandscapeID(landscapeID);
-		else if (flagLandscapeAutoSelection)
-		{
-			// If we have a landscape for selected planet then set it, otherwise use zero horizon landscape
-			const bool landscapeSetsLocation = getFlagLandscapeSetsLocation();
-			setFlagLandscapeSetsLocation(false);
-			if (getAllLandscapeNames().indexOf(loc.planetName)>0)
-				setCurrentLandscapeName(loc.planetName);
-			else
-				setCurrentLandscapeID("zero");
-			setFlagLandscapeSetsLocation(landscapeSetsLocation);
-		}
-		currentPlanetName = loc.planetName;
-
-		if (loc.role==QChar('o')) // observer?
-		{
-			if (flagEnvironmentAutoEnabling)
-			{
-				setFlagAtmosphere(false);
-				setFlagFog(false);
-				setFlagLandscape(false);
-				setFlagCardinalPoints(false);
-				//setFlagOrdinalsPoints(false);
-				//setFlagOrdinals16WRPoints(false);
-			}
-		}
+		const bool landscapeSetsLocation = getFlagLandscapeSetsLocation();
+		setFlagLandscapeSetsLocation(false);
+		setCurrentLandscapeID(landscapeID);
+		setFlagLandscapeSetsLocation(landscapeSetsLocation);
+	}
+	else if(landscapeID.startsWith("ZeroColor("))
+	{
+		// Load a zero landscape and recolor it.
+		// This can happen when clicking on the map. The point on the map can be sampled for color (e.g., desert, greengrass, ocean blue, polar white, ...)
+		const bool landscapeSetsLocation = getFlagLandscapeSetsLocation();
+		setFlagLandscapeSetsLocation(false);
+		setCurrentLandscapeID("zero");
+		Vec3f color(0.3);
+		static const QRegularExpression zeroColor("^ZeroColor\\(([0-9].[0-9]+,[0-9].[0-9]+,[0-9].[0-9]+)\\)$");
+		QRegularExpressionMatch match=zeroColor.match(landscapeID);
+		if (match.hasMatch())
+			color=Vec3f(match.captured(1));
 		else
+			qDebug() << "Cannot extract color from landscapeID" << landscapeID;
+		LandscapePolygonal *l=static_cast<LandscapePolygonal*>(landscape);
+		l->setGroundColor(color);
+		setFlagLandscapeSetsLocation(landscapeSetsLocation);
+	}
+	else if (flagLandscapeAutoSelection && (loc.planetName != currentPlanetName))
+	{
+		//qDebug() << "landscapeID empty. Try planet name" << loc.planetName << "or zero";
+		// If we have a landscape for selected planet then set it, otherwise use zero horizon landscape
+		const bool landscapeSetsLocation = getFlagLandscapeSetsLocation();
+		setFlagLandscapeSetsLocation(false);
+		if (getAllLandscapeNames().indexOf(loc.planetName)>0)
+			setCurrentLandscapeName(loc.planetName);
+		else
+			setCurrentLandscapeID("zero");
+		setFlagLandscapeSetsLocation(landscapeSetsLocation);
+	}
+
+	if (loc.role==QChar('o')) // observer?
+	{
+		if (flagEnvironmentAutoEnabling)
 		{
-			SolarSystem* ssystem = static_cast<SolarSystem*>(StelApp::getInstance().getModuleMgr().getModule("SolarSystem"));
-			PlanetP pl = ssystem->searchByEnglishName(loc.planetName);
-			if (pl && flagEnvironmentAutoEnabling)
-			{
-				QSettings* conf = StelApp::getInstance().getSettings();
-				setFlagAtmosphere(pl->hasAtmosphere() && conf->value("landscape/flag_atmosphere", true).toBool());
-				setFlagFog(pl->hasAtmosphere() && conf->value("landscape/flag_fog", true).toBool());
-				setFlagLandscape(true);
-				setFlagCardinalPoints(conf->value("viewing/flag_cardinal_points", true).toBool());
-				setFlagOrdinalPoints(conf->value("viewing/flag_ordinal_points", true).toBool());
-				setFlagOrdinal16WRPoints(conf->value("viewing/flag_16wcr_points", false).toBool());
-				setFlagOrdinal32WRPoints(conf->value("viewing/flag_32wcr_points", false).toBool());
-			}
+			setFlagAtmosphere(false);
+			setFlagFog(false);
+			setFlagLandscape(false);
+			setFlagCardinalPoints(false); // suppresses all
 		}
 	}
+	else
+	{
+		SolarSystem* ssystem = static_cast<SolarSystem*>(StelApp::getInstance().getModuleMgr().getModule("SolarSystem"));
+		PlanetP pl = ssystem->searchByEnglishName(loc.planetName);
+		if (pl && flagEnvironmentAutoEnabling && currentPlanetName!=loc.planetName)
+		{
+			QSettings* conf = StelApp::getInstance().getSettings();
+			setFlagAtmosphere(pl->hasAtmosphere() && conf->value("landscape/flag_atmosphere", true).toBool());
+			setFlagFog(pl->hasAtmosphere() && conf->value("landscape/flag_fog", true).toBool());
+			setFlagLandscape(conf->value("landscape/flag_landscape", true).toBool());
+			setFlagCardinalPoints(conf->value("viewing/flag_cardinal_points", true).toBool());
+			setFlagOrdinalPoints(conf->value("viewing/flag_ordinal_points", true).toBool());
+			setFlagOrdinal16WRPoints(conf->value("viewing/flag_16wcr_points", false).toBool());
+			setFlagOrdinal32WRPoints(conf->value("viewing/flag_32wcr_points", false).toBool());
+		}
+	}
+	currentPlanetName = loc.planetName;
+	//qDebug() << "LandscapeMgr::onTargetLocationChanged done" ;
 }
 
 void LandscapeMgr::setFlagFog(const bool displayed)
@@ -1214,6 +1256,17 @@ void LandscapeMgr::setFlagIllumination(const bool displayed)
 bool LandscapeMgr::getFlagIllumination() const
 {
 	return landscape->getFlagShowIllumination();
+}
+
+void LandscapeMgr::setLandscapeTransparency(const double f)
+{
+	landscapeTransparency = f;
+	emit landscapeDisplayedChanged(f);
+}
+
+double LandscapeMgr::getLandscapeTransparency() const
+{
+	return landscapeTransparency;
 }
 
 void LandscapeMgr::setFlagLabels(const bool displayed)
@@ -1361,7 +1414,7 @@ QString LandscapeMgr::getCurrentLandscapeHtmlDescription() const
 		if (extcoeff>-1.0)
 			atmosphere.append(QString("%1: %2").arg(q_("extinction coefficient"), QString::number(extcoeff, 'f', 2)));
 
-		if (atmosphere.size()>0)
+		if (!atmosphere.isEmpty())
 			desc += QString("<b>%1</b>: %2<br />").arg(q_("Atmospheric conditions"), atmosphere.join(", "));
 
 		const auto lightPollutionLum = landscape->getDefaultLightPollutionLuminance();

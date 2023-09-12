@@ -338,7 +338,7 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 	if (flags & ObjectType)
 		oss << QString("%1: <b>%2</b>").arg(q_("Type"), getObjectTypeI18n())  << "<br/>";
 	
-	if ((flags & Magnitude) && (stdMag<99. || RCS>0.) && (visibility==gSatWrapper::VISIBLE))
+	if ((flags & Magnitude) && ((stdMag<99.) || (RCS>0.)) && (visibility==gSatWrapper::VISIBLE))
 	{
 		const int decimals = 2;
 		const float airmass = getAirmass(core);
@@ -448,7 +448,7 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 		//Visibility: Full text		
 		oss << q_(visibilityDescription.value(visibility, "")) << "<br />";
 
-		if (comms.size() > 0)
+		if (!comms.isEmpty())
 		{
 			oss << q_("Radio communication") << ":<br/>";
 			for (const auto& c : comms)
@@ -461,6 +461,7 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 		//oss << QString("%1: %2 km, %3: %4 km").arg(q_("Penumbra distance"), QString::number(penumbraDistance, 'f', 3), q_("Radius"), QString::number(penumbraRadius, 'f', 3)) << "<br/>";
 	}
 
+	oss << getSolarLunarInfoString(core, flags);
 	postProcessInfoString(str, flags);
 	return str;
 }
@@ -643,7 +644,7 @@ float Satellite::getVMagnitude(const StelCore* core) const
 			// fracil = fraction of satellite illuminated,
 			//	    [ 0 <= fracil <= 1 ]
 			//
-			// Original description: http://www.prismnet.com/~mmccants/tles/mccdesc.html
+			// Original description: http://mmccants.org/tles/mccdesc.html
 
 			double fracil = qMax(0.000001, static_cast<double>(calculateIlluminatedFraction()));
 

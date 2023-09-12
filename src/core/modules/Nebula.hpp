@@ -260,6 +260,11 @@ private:
 	void drawLabel(StelPainter& sPainter, float maxMagLabel) const;
 	void drawHints(StelPainter& sPainter, float maxMagHints, StelCore *core) const;
 	void drawOutlines(StelPainter& sPainter, float maxMagHints) const;
+	void renderDarkNebulaMarker(StelPainter& sPainter, float x, float y, float size, Vec3f color) const;
+	void renderRoundMarker(StelPainter& sPainter, float x, float y, float size, Vec3f color, bool crossed) const;
+	void renderEllipticMarker(StelPainter& sPainter, float x, float y, float size, float aspectRatio, float angle, Vec3f color) const;
+	void renderMarkerRoundedRect(StelPainter& sPainter, float x, float y, float size, Vec3f color) const;
+	void renderMarkerPointedCircle(StelPainter& sPainter, float x, float y, float size, Vec3f color, bool insideRect) const;
 
 	bool objectInDisplayedType() const;
 
@@ -326,24 +331,9 @@ private:
 	SphericalRegionP pointRegion;
 	QStringList designations;       // List of Catalog number entries
 
-	static StelTextureSP texCircle;				// The symbolic circle texture
-	static StelTextureSP texCircleLarge;			// The symbolic circle texture for large objects
 	static StelTextureSP texRegion;				// The symbolic dashed shape texture
-	static StelTextureSP texGalaxy;				// Type 0
-	static StelTextureSP texGalaxyLarge;			// Type 0_large
-	static StelTextureSP texOpenCluster;			// Type 1
-	static StelTextureSP texOpenClusterLarge;		// Type 1_large
-	static StelTextureSP texOpenClusterXLarge;		// Type 1_extralarge
-	static StelTextureSP texGlobularCluster;		// Type 2
-	static StelTextureSP texGlobularClusterLarge;		// Type 2_large
+	static StelTextureSP texPointElement;
 	static StelTextureSP texPlanetaryNebula;		// Type 3
-	static StelTextureSP texDiffuseNebula;			// Type 4
-	static StelTextureSP texDiffuseNebulaLarge;		// Type 4_large
-	static StelTextureSP texDiffuseNebulaXLarge;		// Type 4_extralarge
-	static StelTextureSP texDarkNebula;			// Type 5
-	static StelTextureSP texDarkNebulaLarge;		// Type 5_large
-	static StelTextureSP texOpenClusterWithNebulosity;	// Type 6
-	static StelTextureSP texOpenClusterWithNebulosityLarge;	// Type 6_large
 	static float hintsBrightness;
 
 	static Vec3f labelColor;				// The color of labels

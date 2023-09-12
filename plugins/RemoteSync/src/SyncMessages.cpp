@@ -74,7 +74,7 @@ bool ServerChallenge::deserialize(QDataStream &stream, tPayloadSize dataSize)
 	//check if magic value matches
 	if(data!=SYNC_MAGIC_VALUE)
 	{
-		qWarning()<<"[ServerHello] invalid magic value";
+		qCWarning(syncProtocol)<<"[ServerHello] invalid magic value";
 		return false;
 	}
 
@@ -192,21 +192,6 @@ bool View::deserialize(QDataStream &stream, tPayloadSize dataSize)
 		return false;
 
 	stream>>viewAltAz;
-
-	return !stream.status();
-}
-
-void Fov::serialize(QDataStream &stream) const
-{
-	stream<<fov;
-}
-
-bool Fov::deserialize(QDataStream &stream, tPayloadSize dataSize)
-{
-	if(dataSize != sizeof(double))
-		return false;
-
-	stream>>fov;
 
 	return !stream.status();
 }

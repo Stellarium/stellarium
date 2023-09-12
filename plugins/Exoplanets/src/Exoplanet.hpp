@@ -28,7 +28,6 @@
 
 #include "StelObject.hpp"
 #include "StelTextureTypes.hpp"
-#include "StelFader.hpp"
 #include "StelTranslator.hpp"
 
 //! @ingroup exoplanets
@@ -131,8 +130,6 @@ public:
 	//! @returns whether system has been discovered by the current year.
 	bool isDiscovered(const StelCore* core);
 
-	void update(double deltaTime);
-
 	int getCountExoplanets(void) const
 	{
 		return EPCount;
@@ -178,6 +175,8 @@ private:
 	static bool showNumbers;
 	static int temperatureScaleID; //!< Magic number. 0: Kelvin; 1: Celsius; 2: Fahrenheit
 
+	static bool syncShowLabels;
+
 	void draw(StelCore* core, StelPainter *painter);
 
 	QString getTemperatureScaleUnit() const;
@@ -209,8 +208,6 @@ private:
 	QList<double> eccentricityList, semiAxisList, massList, radiusList, periodList, angleDistanceList,
 		      effectiveTempHostStarList, yearDiscoveryList, metallicityHostStarList, vMagHostStarList,
 		      raHostStarList, decHostStarList, distanceHostStarList, massHostStarList, radiusHostStarList;
-
-	LinearFader labelsFader;
 };
 
 #endif // EXOPLANET_HPP

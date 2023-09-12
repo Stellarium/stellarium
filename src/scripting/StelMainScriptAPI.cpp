@@ -340,6 +340,23 @@ QStringList StelMainScriptAPI::getAllTimezoneNames()
 	return StelApp::getInstance().getLocationMgr().getAllTimezoneNames();
 }
 
+// Coordinate conversion: geographic (WGS84)-->UTM
+QList<double> StelMainScriptAPI::geo2utm(const double longitude, const double latitude, const int zone)
+{
+	QPair<Vec3d, Vec2d> utm=StelLocationMgr::geo2utm(longitude, latitude, zone);
+	Vec3d pos=utm.first;
+	Vec2d ang=utm.second;
+	return QList<double>({pos[0], pos[1], pos[2], ang[0]*M_180_PI, ang[1]});
+}
+// Coordinate conversion: UTM->geographic (WGS84)
+QList<double> StelMainScriptAPI::utm2geo(const double easting, const double northing, const int zone, const bool north)
+{
+	QPair<Vec3d, Vec2d> geo=StelLocationMgr::utm2geo(easting, northing, zone, north);
+	Vec3d pos=geo.first;
+	Vec2d ang=geo.second;
+	return QList<double>({pos[0], pos[1], pos[2], ang[0]*M_180_PI, ang[1]});
+}
+
 void StelMainScriptAPI::screenshot(const QString& prefix, bool invert, const QString& dir, const bool overwrite, const QString &format)
 {
 	QString realDir("");
@@ -355,10 +372,10 @@ void StelMainScriptAPI::screenshot(const QString& prefix, bool invert, const QSt
 
 	const bool oldInvertSetting = StelMainView::getInstance().getFlagInvertScreenShotColors();
 	const QString oldFormat=StelMainView::getInstance().getScreenshotFormat();
-	if ((format.length()>0) && (format.length()<=4))
+	if ((!format.isEmpty()) && (format.length()<=4))
 		StelMainView::getInstance().setScreenshotFormat(format);
 	// Check requested against set image format.
-	if ((format.length()>0) && (StelMainView::getInstance().getScreenshotFormat() != format))
+	if ((!format.isEmpty()) && (StelMainView::getInstance().getScreenshotFormat() != format))
 	{
 		qWarning() << "Screenshot format" << format << "not supported. Not saving screenshot.";
 		return;
@@ -374,6 +391,11 @@ void StelMainScriptAPI::screenshot(const QString& prefix, bool invert, const QSt
 void StelMainScriptAPI::setGuiVisible(bool b)
 {
 	StelApp::getInstance().getGui()->setVisible(b);
+}
+
+void StelMainScriptAPI::setSelectedObjectMarkerVisible(bool b)
+{
+	GETSTELMODULE(StelObjectMgr)->setFlagSelectedObjectPointer(b);
 }
 
 void StelMainScriptAPI::setGuiStyle(const QString& cssStyle)
@@ -1452,11 +1474,7 @@ QVariantMap StelMainScriptAPI::getScreenXYFromAltAzi(const QString &alt, const Q
 
 QString StelMainScriptAPI::getEnv(const QString &var)
 {
-#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
 	return qEnvironmentVariable(var.toLocal8Bit().constData());
-#else
-	return QString::fromLocal8Bit(qgetenv(var.toLocal8Bit().constData()));
-#endif
 }
 
 // return whether a particular module has been loaded. Mostly useful to check whether a module available as plugin is active.

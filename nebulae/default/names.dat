@@ -25,6 +25,7 @@
 #   SIMBAD: 2000,A&AS,143,9, "The SIMBAD astronomical database", Wenger et al.; http://simbad.u-strasbg.fr/simbad/
 #   WP: Wikipedia entries for the respective objects
 #      - Snowglobe Nebula; https://de.wikipedia.org/wiki/Liste_planetarischer_Nebel
+#      - Sharpless catalog; https://en.wikipedia.org/wiki/Sharpless_catalog
 #   OGSC: Observer’s Guide to Star Clusters by Mike Inglis, Springer, 2013; https://books.google.ru/books?id=ewHABAAAQBAJ
 #   APOD: 
 #      - IC 4592: A Blue Horsehead; https://apod.nasa.gov/apod/ap090521.html
@@ -61,6 +62,9 @@
 #      - Sharpless 2-132: the Lion Nebula in Cepheus - a two-panel mosaic in 'Hubble Palette' (SHO); https://www.astrobin.com/356827/F/
 #      - Sharpless 2-170 in Cassiopeia - the 'Little Rosette' nebula; https://www.astrobin.com/373021/B/
 #      - NGC 6397 - Ara Globular Cluster; https://www.astrobin.com/357980/
+#      - StDr 17 (Strottner-Drechsler 17) / Sh2-123 (Sharpless 2-123) “Tick Nebula” Planetary Nebula in Cygnus; https://www.astrobin.com/lyukvj/
+#      - Sh2-123 Tick Nebula; https://www.astrobin.com/tllta5/
+#      - Sh2-123 The Tick Nebula "One Tough little Bug!"; https://www.astrobin.com/evgldr/C/
 #   AAPOD2:
 #      - Dolphin Head Nebula - Sh2-308; https://www.aapod2.com/blog/dolphin-head-nebula-sh2-308
 #      - Bubble Galaxy - NGC 3521; https://www.aapod2.com/blog/ngc-3521
@@ -231,7 +235,6 @@ NGC  1232            _("Eye of God Galaxy") # B500, HT
 NGC  1245            _("Patrick Starfish Cluster") # B500, SD
 NGC  1269            _("Snow Collar Galaxy") # SG, HT
 NGC  1275            _("Perseus A") # NED, SIMBAD, BCH, PAS, RNGCIC, RASC, U2K
-NGC  1276            _("Perseus A") # RASC
 NGC  1277            _("Relic Galaxy") # WP
 NGC  1313            _("Topsy Turvy Galaxy") # WP
 NGC  1316            _("Fornax A") # NED, SIMBAD, TSS, SG, HT, WSG, PSA, B500, RNGCIC, RASC, U2K
@@ -272,10 +275,8 @@ NGC  1545            _("Running Man Cluster") # HT
 NGC  1545            _("Magic Pentagram Cluster") # HT
 NGC  1554            _("Struve's Lost Nebula") # WSO, B500, RNGCIC
 NGC  1554            _("Struve's Nebula") # SIMBAD
-NGC  1554            _("Hind's Variable Nebula") # PSA, B500, U2K
 NGC  1555            _("Hind's Variable Nebula") # SIMBAD, BCH, DWH, WSO, PSA, B500, RNGCIC, U2K
 NGC  1555            _("Hind's Nebula") # SIMBAD
-NGC  1555            _("Struveis Lost Nebula") # U2K
 NGC  1566            _("Doradus Cluster") # SIMBAD
 NGC  1566            _("Spanish Dancer Galaxy") # NASA, CSOG-BCH
 NGC  1566            _("NGC 1566 Group") # SIMBAD
@@ -553,7 +554,6 @@ NGC  4147            _("Kick the Can Cluster") # SD
 NGC  4151            _("Eye of Sauron") # NASA
 NGC  4169            _("The Box") # DSW, WSO, WSG, RNGCIC, U2K
 NGC  4170            _("The Box") # DSW, WSO, WSG
-NGC  4173            _("The Box") # RNGCIC
 NGC  4174            _("The Box") # DSW, WSO, WSG, RNGCIC, U2K
 NGC  4175            _("The Box") # DSW, WSO, WSG, RNGCIC, U2K
 NGC  4194            _("Medusa Galaxy")
@@ -650,7 +650,6 @@ NGC  5128            _("Centaurus A") # NED, TSS, BCH, SG, WSO, WSG, PSA, DN, PA
 NGC  5128            _("The Hamburger Galaxy") # SG
 NGC  5139            _("ω Cen Cluster") # WK, OGSC, TSS, BCH, DWH, SG, PSA, DN, PAS, PGH, TLO, RNGCIC
 NGC  5139            _("Omega Centauri") # U2K
-NGC  5156            _("Centaurus A") # U2K
 NGC  5189            _("Spiral Planetary Nebula") # TSS, SG, TLO
 NGC  5194            _("Whirlpool Galaxy") # NED, DSW, BCH, DWH, SOG, WSO, WSG, PSA, CC, DN, B500, PAS, TLO, RNGCIC, SEDSM, U2K
 NGC  5194            _("Question Mark Galaxy") # NED, SEDSM
@@ -1119,6 +1118,8 @@ SH2  103             _("Veil Nebula")
 SH2  106             _("Celestial Snow Angel") # WP
 SH2  108             _("Sadr Region")
 SH2  114             _("Flying Dragon Nebula") # WK
+SH2  123             _("Tick Nebula") # ABIN
+SH2  123             _("Flea Nebula") # ABIN
 SH2  129             _("Flying Bat Nebula") # APOD
 SH2  132             _("Lion Nebula") # ABIN
 SH2  155             _("Cave Nebula") # PSA, PAS, U2K
@@ -1127,6 +1128,8 @@ SH2  157             _("Californietto Nebula") # DSW
 SH2  158             _("Dreyer's Object")
 SH2  170             _("Little Rosette Nebula") # ABIN
 SH2  199             _("Soul Nebula") # WP
+SH2  211             _("Tribble Nebulae") # WP
+SH2  212             _("Tribble Nebulae") # WP
 SH2  216             _("Second Closest Planetary")
 SH2  240             _("Spaghetti Nebula") # WP
 SH2  240             _("Simeis 147") # WP, PSA

@@ -174,7 +174,7 @@ void HelpDialog::checkUpdates()
 		request.setUrl(API);
 		request.setRawHeader("User-Agent", StelUtils::getUserAgentString().toUtf8());
 #if (QT_VERSION<QT_VERSION_CHECK(6,0,0))
-		request.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);
+		request.setAttribute(QNetworkRequest::RedirectPolicyAttribute, true);
 #endif
 		downloadReply = networkManager->get(request);
 
@@ -220,13 +220,9 @@ void HelpDialog::downloadComplete(QNetworkReply *reply)
 	QString latestVersion = map["name"].toString();
 	latestVersion.replace("v","", Qt::CaseInsensitive);
 	QStringList v = latestVersion.split(".");
+	v.append("0"); // the latest number (PATCH) is always 0 for releases
 
-	QString appVersion;
-	if (v.count()==3)
-		appVersion = StelUtils::getApplicationVersion();
-	else
-		appVersion = StelUtils::getApplicationPublicVersion();
-
+	QString appVersion = StelUtils::getApplicationVersion();
 	QStringList c = appVersion.split(".");
 	int r = StelUtils::compareVersions(latestVersion, appVersion);
 	if (r==-1 || c.count()>v.count() || c.last().contains("-"))
@@ -498,10 +494,10 @@ void HelpDialog::updateAboutText(void) const
 	QVector<donator> financialContributors = {
 		// Individuals
 		{ "Laurence Holt", 1000 }, { "John Bellora", 570 }, { "Jeff Moe (Spacecruft)", 512 }, { "Vernon Hermsen", 324 },
-		{ "Marla Pinaire", 320 }, { "Satish Mallesh", 260 }, { "Vlad Magdalin", 250  }, { "Philippe Renoux", 250 },
+		{ "Marla Pinaire", 350 }, { "Satish Mallesh", 260 }, { "Vlad Magdalin", 250  }, { "Philippe Renoux", 250 },
 		{ "Fito Martin", 250 },
 		// Organizations
-		{ "Astronomie-Werkstatt \"Sterne ohne Grenzen\"", 580 }, { "Triplebyte", 280 }
+		{ "Astronomie-Werkstatt \"Sterne ohne Grenzen\"", 610 }, { "BairesDev", 500 }, { "Triplebyte", 280 }
 	};
 	std::sort(financialContributors.begin(), financialContributors.end(), [](donator i, donator j){ return i.second > j.second; });
 	QStringList bestFinancialContributors;

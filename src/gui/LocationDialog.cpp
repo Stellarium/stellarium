@@ -19,6 +19,7 @@
 */
 
 #include "Dialog.hpp"
+#include "StelModuleMgr.hpp"
 #include "LandscapeMgr.hpp"
 #include "LocationDialog.hpp"
 #include "StelLocationMgr.hpp"
@@ -132,7 +133,7 @@ void LocationDialog::createDialogContent()
 	// Connect all the QT signals
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
-	connect(ui->mapWidget, SIGNAL(positionChanged(double, double)), this, SLOT(setLocationFromMap(double, double)));
+	connect(ui->mapWidget, SIGNAL(positionChanged(double, double, const QColor&)), this, SLOT(setLocationFromMap(double, double, const QColor&)), Qt::UniqueConnection);
 
 	connect(ui->addLocationToListPushButton, SIGNAL(clicked()), this, SLOT(addCurrentLocationToList()));
 	connect(ui->deleteLocationFromListPushButton, SIGNAL(clicked()), this, SLOT(deleteCurrentLocationFromList()));
@@ -189,6 +190,8 @@ void LocationDialog::createDialogContent()
 	ui->timeZoneNameComboBox->setEnabled(core->getUseCustomTimeZone());
 	connect(ui->useCustomTimeZoneCheckBox, SIGNAL(clicked(bool)), this, SLOT(updateTimeZoneControls(bool)));
 	connect(core, SIGNAL(currentTimeZoneChanged(QString)), this, SLOT(setTimezone(QString)));
+	connectBoolProperty(ui->autoEnableEnvironmentCheckBox, "LandscapeMgr.flagEnvironmentAutoEnabling");
+	connectBoolProperty(ui->autoChangeLandscapesCheckBox,  "LandscapeMgr.flagLandscapeAutoSelection");
 
 	connectEditSignals();
 
@@ -196,7 +199,8 @@ void LocationDialog::createDialogContent()
 
 	// In case this dialog is called up before going to an "observer", we need to update a few UI elements:
 	updateFromProgram(core->getCurrentLocation());
-	connect(core, SIGNAL(targetLocationChanged(StelLocation)), this, SLOT(updateFromProgram(StelLocation))); // Fill with actually selected location!
+	// This connection only updates the dialog with new coordinates, not the landscape
+	connect(core, &StelCore::targetLocationChanged, this, [=](const StelLocation &loc, const QString &id){ updateFromProgram(loc); Q_UNUSED(id); }); // Fill with actually selected location!
 
 	connect(ui->pushButtonReturnToDefault, &QPushButton::clicked, this, [=]{
 		static StelMovementMgr *mMgr=GETSTELMODULE(StelMovementMgr);
@@ -205,7 +209,7 @@ void LocationDialog::createDialogContent()
 		this->setLocationUIvisible(true);  // restore UI
 		core->returnToDefaultLocation();
 		mMgr->resetInitViewPos();
-		lMgr->setCurrentLandscapeID(lMgr->getDefaultLandscapeID(), 0.);
+		lMgr->setCurrentLandscapeID(lMgr->getDefaultLandscapeID(), 1.);
 	});
 
 	ui->citySearchLineEdit->setFocus();
@@ -265,15 +269,10 @@ void LocationDialog::updateFromProgram(const StelLocation& newLocation)
 		ui->pushButtonReturnToDefault->setEnabled(!b);
 	}
 
-	const QString& key1 = newLocation.getID();
-	const QString& key2 = locationFromFields().getID();
-	if (key1!=key2)
-	{
-		if (newLocation.role!='o')
-			GETSTELMODULE(StelMovementMgr)->setFlagTracking(false);
-		setFieldsFromLocation(newLocation);
-		setLocationUIvisible(newLocation.role!='o'); // hide various detail settings when changing to an "observer"
-	}
+	if (newLocation.role!='o')
+		GETSTELMODULE(StelMovementMgr)->setFlagTracking(false);
+	setFieldsFromLocation(newLocation);
+	setLocationUIvisible(newLocation.role!='o'); // hide various detail settings when changing to an "observer"
 }
 
 void LocationDialog::disconnectEditSignals()
@@ -307,14 +306,13 @@ void LocationDialog::setLocationUIvisible(bool visible)
 	ui->labelName->setVisible(visible);
 	ui->frame_citylist->setVisible(visible);
 	ui->mapWidget->setMarkerVisible(visible);
-
 	if(visible)
 	{
-		connect(ui->mapWidget, SIGNAL(positionChanged(double, double)), this, SLOT(setLocationFromMap(double, double)));
+		connect(ui->mapWidget, SIGNAL(positionChanged(double, double, const QColor&)), this, SLOT(setLocationFromMap(double, double, const QColor&)), Qt::UniqueConnection);
 	}
 	else
 	{
-		disconnect(ui->mapWidget, SIGNAL(positionChanged(double, double)), this, SLOT(setLocationFromMap(double, double)));
+		disconnect(ui->mapWidget, SIGNAL(positionChanged(double, double, const QColor&)), this, SLOT(setLocationFromMap(double, double, const QColor&)));
 	}
 	ui->addLocationToListPushButton->setVisible(visible);
 	ui->deleteLocationFromListPushButton->setVisible(visible);
@@ -506,7 +504,7 @@ void LocationDialog::populateTimeZonesList()
 
 	// Special sort for UTC+XX:YY time zones: we want them
 	// to go from the most negative to the most positive.
-	const auto utcRegEx = QRegularExpression("^UTC([+-])(\\d\\d):(\\d\\d)$");
+	static const QRegularExpression utcRegEx("^UTC([+-])(\\d\\d):(\\d\\d)$");
 	std::vector<int> utcOffsets;
 	for(int n = 0; n < tzNames.size();)
 	{
@@ -620,7 +618,7 @@ void LocationDialog::setLocationFromList(const QModelIndex& index)
 	// This calls indirectly updateFromProgram()
 }
 
-void LocationDialog::setLocationFromMap(double longitude, double latitude)
+void LocationDialog::setLocationFromMap(double longitude, double latitude, const QColor &color)
 {
 	StelCore *core = StelApp::getInstance().getCore();
 	if (core->getUseCustomTimeZone())
@@ -631,7 +629,11 @@ void LocationDialog::setLocationFromMap(double longitude, double latitude)
 	loc.setLongitude(longitude);
 	loc.name= QString("%1, %2").arg(loc.getLatitude()).arg(loc.getLongitude()); // Force a preliminary name
 	setFieldsFromLocation(loc);
-	core->moveObserverTo(loc, 0.);
+	if (loc.planetName=="Earth")
+		core->moveObserverTo(loc, 0., 1., GETSTELMODULE(LandscapeMgr)->getFlagLandscapeAutoSelection() ? QString("ZeroColor(%1)").arg(Vec3f(color).toStr()) : QString());
+	else
+		core->moveObserverTo(loc, 0., 1., loc.planetName); // Loads a default landscape for the planet.
+
 	// Only for locations on Earth: set zone to LMST.
 	// TODO: Find a way to lookup (lon,lat)->country->timezone.
 
@@ -654,19 +656,20 @@ void LocationDialog::moveToAnotherPlanet()
 	reportEdit();
 	StelLocation loc = locationFromFields();
 	StelCore* stelCore = StelApp::getInstance().getCore();
-	StelModule* lMgr = StelApp::getInstance().getModule("LandscapeMgr");
+	LandscapeMgr *lMgr = GETSTELMODULE(LandscapeMgr);
 	populateRegionList(loc.planetName);
 	if (loc.planetName != stelCore->getCurrentLocation().planetName)
 	{
 		setFieldsFromLocation(loc);
-		if (lMgr->property("flagLandscapeAutoSelection").toBool())
+		if (lMgr->getFlagLandscapeAutoSelection())
 		{
-			// If we have a landscape for selected planet then set it, otherwise use default landscape
+			// If we have a landscape for selected planet then set it, otherwise use zero landscape
 			// Details: https://bugs.launchpad.net/stellarium/+bug/1173254
-			if (lMgr->property("allLandscapeNames").toStringList().indexOf(loc.planetName)>0)
-				lMgr->setProperty("currentLandscapeName", loc.planetName);
+			if (lMgr->getAllLandscapeNames().contains(loc.planetName))
+				lMgr->setCurrentLandscapeName(loc.planetName); // TODO: Why not setCurrentLandscapeID?
 			else
-				lMgr->setProperty("currentLandscapeID", lMgr->property("defaultLandscapeID"));
+				//lMgr->setProperty("currentLandscapeID", lMgr->property("defaultLandscapeID"));
+				lMgr->setCurrentLandscapeID("zero"); // harmonize with LandscapeMgr::onTargetLocationChanged()
 		}
 
 		// populate site list with sites only from that planet, or full list for Earth (faster than removing the ~50 non-Earth positions...).
@@ -690,6 +693,7 @@ void LocationDialog::moveToAnotherPlanet()
 		ui->citySearchLineEdit->setFocus();
 
 		// If we change to an Observer "planet", auto-select and focus on the observed object.
+		StelObjectMgr *soMgr=GETSTELMODULE(StelObjectMgr);
 		SolarSystem *ss=GETSTELMODULE(SolarSystem);
 		PlanetP planet=nullptr;
 		if (ss)
@@ -699,7 +703,6 @@ void LocationDialog::moveToAnotherPlanet()
 			setLocationUIvisible(false);
 
 			loc.role=QChar('o'); // Mark this ad-hoc location as "observer".
-			StelObjectMgr *soMgr=GETSTELMODULE(StelObjectMgr);
 			if (soMgr)
 			{
 				soMgr->findAndSelect(planet->getParent()->getEnglishName());
@@ -711,9 +714,16 @@ void LocationDialog::moveToAnotherPlanet()
 			GETSTELMODULE(StelMovementMgr)->setFlagTracking(false);
 			setLocationUIvisible(true);
 			GETSTELMODULE(StelMovementMgr)->resetInitViewPos();
+			// Get rid of selection if we are standing on it...
+			if (soMgr)
+			{
+				const QList<StelObjectP>& selection=soMgr->getSelectedObject();
+				if (!selection.isEmpty() && selection[0]->getEnglishName()==loc.planetName)
+						soMgr->unSelect();
+			}
 		}
 
-		stelCore->moveObserverTo(loc, 0., 0.);
+		stelCore->moveObserverTo(loc, 0., 0., loc.planetName);
 	}
 	// Planet transition time also set to null to prevent ugliness when
 	// "use landscape location" is enabled for that planet's landscape. --BM
@@ -725,7 +735,7 @@ void LocationDialog::setLocationFromCoords(int i)
 	Q_UNUSED(i)
 	reportEdit();
 	StelLocation loc = locationFromFields();
-	StelApp::getInstance().getCore()->moveObserverTo(loc, 0.);
+	StelApp::getInstance().getCore()->moveObserverTo(loc, 0.); // No landscape update: This may be used for finetuning within a landscape
 	//Update the position of the map pointer
 	ui->mapWidget->setMarkerPos(loc.getLongitude(), loc.getLatitude());
 }
@@ -978,11 +988,26 @@ void LocationDialog::resetLocationList()
 	//reset search before setting model, prevents unnecessary search in full list
 	ui->citySearchLineEdit->setText(""); // https://wiki.qt.io/Technical_FAQ#Why_does_the_memory_keep_increasing_when_repeatedly_pasting_text_and_calling_clear.28.29_in_a_QLineEdit.3F
 	ui->citySearchLineEdit->setFocus();
-	proxyModel->setSourceModel(allModel);
+
+	// populate site list with sites only from that planet, or full list for Earth (faster than removing the ~50 non-Earth positions...).
+	StelLocationMgr &locMgr=StelApp::getInstance().getLocationMgr();
+	StelLocation loc = locationFromFields();
+	if (loc.planetName == "Earth")
+	{
+		proxyModel->setSourceModel(allModel);
+	}
+	else
+	{
+		LocationMap results = locMgr.pickLocationsNearby(loc.planetName, 0.0f, 0.0f, 180.0f);
+		pickedModel->setStringList(results.keys());
+		proxyModel->setSourceModel(pickedModel);
+		ui->regionNameComboBox->setCurrentIndex(ui->regionNameComboBox->findData("", Qt::UserRole, Qt::MatchCaseSensitive));
+	}
+
 	proxyModel->sort(0, Qt::AscendingOrder);
 }
 
-// called when user clicks in the country combobox and selects a country. The locations in the list are updated to select only sites in that country.
+// called when user clicks in the region combobox and selects a region. The locations in the list are updated to select only sites in that region.
 void LocationDialog::filterSitesByRegion()
 {
 	QString region=ui->regionNameComboBox->currentData(Qt::UserRole).toString();

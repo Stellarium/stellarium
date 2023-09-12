@@ -397,9 +397,6 @@ void ConfigurationDialog::createDialogContent()
 	connect(mainView, SIGNAL(sizeChanged(const QSize&)), this, SLOT(updateDpiTooltip()));
 	updateDpiTooltip();
 
-	connectBoolProperty(ui->autoEnableEnvironmentCheckBox, "LandscapeMgr.flagEnvironmentAutoEnabling");
-	connectBoolProperty(ui->autoChangeLandscapesCheckBox, "LandscapeMgr.flagLandscapeAutoSelection");
-
 	// script tab controls
 	#ifdef ENABLE_SCRIPTING
 	StelScriptMgr& scriptMgr = StelApp::getInstance().getScriptMgr();
@@ -878,6 +875,7 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("viewing/max_trail_time_extent",			propMgr->getStelPropertyValue("SolarSystem.maxTrailTimeExtent").toInt());
 	conf->setValue("viewing/flag_isolated_orbits",			propMgr->getStelPropertyValue("SolarSystem.flagIsolatedOrbits").toBool());
 	conf->setValue("viewing/flag_planets_orbits_only",		propMgr->getStelPropertyValue("SolarSystem.flagPlanetsOrbitsOnly").toBool());
+	conf->setValue("viewing/flag_orbits_with_moons",		propMgr->getStelPropertyValue("SolarSystem.flagOrbitsWithMoons").toBool());
 	conf->setValue("astro/flag_light_travel_time",			propMgr->getStelPropertyValue("SolarSystem.flagLightTravelTime").toBool());
 	conf->setValue("viewing/flag_draw_moon_halo",			propMgr->getStelPropertyValue("SolarSystem.flagDrawMoonHalo").toBool());
 	conf->setValue("viewing/flag_draw_sun_halo",			propMgr->getStelPropertyValue("SolarSystem.flagDrawSunHalo").toBool());
@@ -907,6 +905,7 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("astro/flag_show_obj_self_shadows",		propMgr->getStelPropertyValue("SolarSystem.flagShowObjSelfShadows").toBool());
 	conf->setValue("astro/apparent_magnitude_algorithm",		Planet::getApparentMagnitudeAlgorithmString());
 	conf->setValue("astro/flag_planets_nomenclature",		propMgr->getStelPropertyValue("NomenclatureMgr.flagShowNomenclature").toBool());
+	conf->setValue("astro/flag_planets_nomenclature_outline_craters",propMgr->getStelPropertyValue("NomenclatureMgr.flagOutlineCraters").toBool());
 	conf->setValue("astro/flag_hide_local_nomenclature",		propMgr->getStelPropertyValue("NomenclatureMgr.flagHideLocalNomenclature").toBool());
 	conf->setValue("astro/flag_special_nomenclature_only",		propMgr->getStelPropertyValue("NomenclatureMgr.specialNomenclatureOnlyDisplayed").toBool());
 	conf->setValue("astro/flag_planets_nomenclature_terminator_only",propMgr->getStelPropertyValue("NomenclatureMgr.flagShowTerminatorZoneOnly").toBool());
@@ -1088,6 +1087,8 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("landscape/flag_minimal_brightness",                propMgr->getStelPropertyValue("LandscapeMgr.flagLandscapeUseMinimalBrightness").toBool());
 	conf->setValue("landscape/flag_landscape_sets_minimal_brightness", propMgr->getStelPropertyValue("LandscapeMgr.flagLandscapeSetsMinimalBrightness").toBool());
 	conf->setValue("landscape/minimal_brightness",                     propMgr->getStelPropertyValue("LandscapeMgr.defaultMinimalBrightness").toFloat());
+	conf->setValue("landscape/flag_transparency",                      propMgr->getStelPropertyValue("LandscapeMgr.flagLandscapeUseTransparency").toBool());
+	conf->setValue("landscape/transparency",                           propMgr->getStelPropertyValue("LandscapeMgr.landscapeTransparency").toFloat());
 	conf->setValue("landscape/flag_polyline_only",                     propMgr->getStelPropertyValue("LandscapeMgr.flagPolyLineDisplayedOnly").toBool());
 	conf->setValue("landscape/polyline_thickness",                     propMgr->getStelPropertyValue("LandscapeMgr.polyLineThickness").toInt());
 	conf->setValue("stars/init_light_pollution_luminance",             propMgr->getStelPropertyValue("StelSkyDrawer.lightPollutionLuminance").toFloat());
@@ -1589,7 +1590,11 @@ void ConfigurationDialog::downloadStars()
 	starCatalogDownloadReply->setReadBufferSize(1024*1024*2);	
 	connect(starCatalogDownloadReply, SIGNAL(readyRead()), this, SLOT(newStarCatalogData()));
 	connect(starCatalogDownloadReply, SIGNAL(finished()), this, SLOT(downloadFinished()));
+	#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+	connect(starCatalogDownloadReply, SIGNAL(errorOccurred(QNetworkReply::NetworkError)), this, SLOT(downloadError(QNetworkReply::NetworkError)));
+	#else
 	connect(starCatalogDownloadReply, SIGNAL(error(QNetworkReply::NetworkError)), this, SLOT(downloadError(QNetworkReply::NetworkError)));
+	#endif
 
 	progressBar = StelApp::getInstance().addProgressBar();
 	progressBar->setValue(0);
@@ -1888,13 +1893,13 @@ void ConfigurationDialog::populateDeltaTAlgorithmsList()
 	algorithms->addItem(q_("Montenbruck & Pfleger (2000)"), "MontenbruckPfleger");
 	algorithms->addItem(q_("Reingold & Dershowitz (2002, 2007, 2018)"), "ReingoldDershowitz");
 	algorithms->addItem(q_("Morrison & Stephenson (2004, 2005)"), "MorrisonStephenson2004");
-	algorithms->addItem(q_("Espenak & Meeus (2006)"), "EspenakMeeus");
+	algorithms->addItem(q_("Espenak & Meeus (2006, 2014)"), "EspenakMeeus");
 	// GZ: I want to try out some things. Something is still wrong with eclipses, see lp:1275092.
 	#ifndef NDEBUG
-	algorithms->addItem(q_("Espenak & Meeus (2006) no extra moon acceleration"), "EspenakMeeusZeroMoonAccel");
+	algorithms->addItem(q_("Espenak & Meeus (2006, 2014) no extra moon acceleration"), "EspenakMeeusZeroMoonAccel");
 	#endif
 	// Modified Espenak & Meeus (2006) used by default
-	algorithms->addItem(q_("Modified Espenak & Meeus (2006, 2022)").append(" *"), "EspenakMeeusModified");
+	algorithms->addItem(q_("Modified Espenak & Meeus (2006, 2014, 2023)").append(" *"), "EspenakMeeusModified");
 	algorithms->addItem(q_("Reijs (2006)"), "Reijs");
 	algorithms->addItem(q_("Banjevic (2006)"), "Banjevic");
 	algorithms->addItem(q_("Islam, Sadiq & Qureshi (2008, 2013)"), "IslamSadiqQureshi");
@@ -2022,19 +2027,28 @@ void ConfigurationDialog::populateDitherList()
 
 	ditherCombo->blockSignals(true);
 	ditherCombo->clear();
-	ditherCombo->addItem(qc_("None","disabled"), "disabled");
-	ditherCombo->addItem(q_("5/6/5 bits"), "color565");
-	ditherCombo->addItem(q_("6/6/6 bits"), "color666");
-	ditherCombo->addItem(q_("8/8/8 bits"), "color888");
-	ditherCombo->addItem(q_("10/10/10 bits"), "color101010");
+	if(StelMainView::getInstance().getGLInformation().isHighGraphicsMode)
+	{
+		ditherCombo->addItem(qc_("None","disabled"), "disabled");
+		ditherCombo->addItem(q_("5/6/5 bits"), "color565");
+		ditherCombo->addItem(q_("6/6/6 bits"), "color666");
+		ditherCombo->addItem(q_("8/8/8 bits"), "color888");
+		ditherCombo->addItem(q_("10/10/10 bits"), "color101010");
 
-	// show current setting
-	QSettings* conf = StelApp::getInstance().getSettings();
-	Q_ASSERT(conf);
-	QVariant selectedDitherFormat = conf->value("video/dithering_mode", "disabled");
+		// show current setting
+		QSettings* conf = StelApp::getInstance().getSettings();
+		Q_ASSERT(conf);
+		QVariant selectedDitherFormat = conf->value("video/dithering_mode", "disabled");
 
-	int index = ditherCombo->findData(selectedDitherFormat, Qt::UserRole, Qt::MatchCaseSensitive);
-	ditherCombo->setCurrentIndex(index);
+		int index = ditherCombo->findData(selectedDitherFormat, Qt::UserRole, Qt::MatchCaseSensitive);
+		ditherCombo->setCurrentIndex(index);
+	}
+	else
+	{
+		ditherCombo->addItem(q_("Unsupported"), "disabled");
+		ditherCombo->setDisabled(true);
+		ditherCombo->setToolTip(q_("Unsupported in low-graphics mode"));
+	}
 	ditherCombo->blockSignals(false);
 }
 

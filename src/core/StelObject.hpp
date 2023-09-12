@@ -133,6 +133,7 @@ public:
 	//! - glat : galactic latitude in decimal degrees
 	//! - sglong : supergalactic longitude in decimal degrees
 	//! - sglat : supergalactic latitude in decimal degrees
+	//! - ecliptic-obliquity : mean ecliptic obliquity of date in decimal degrees
 	//! - elong : ecliptic longitude in decimal degrees (on Earth only!)
 	//! - elat : ecliptic latitude in decimal degrees (on Earth only!)
 	//! - elongJ2000 : ecliptic longitude (Earth's J2000 frame) in decimal degrees
@@ -187,7 +188,7 @@ public:
 	//! Return translated object's name
 	virtual QString getNameI18n() const = 0;
 
-	//! Get observer-centered equatorial coordinates at equinox J2000
+	//! Get observer-centered equatorial coordinates at equinox J2000, including aberration
 	virtual Vec3d getJ2000EquatorialPos(const StelCore* core) const = 0;
 
 	//! Get observer-centered equatorial coordinate at the current equinox

@@ -33,6 +33,7 @@
 #include "Novae.hpp"
 #include "NovaeDialog.hpp"
 #include "StelProgressController.hpp"
+#include "StarMgr.hpp"
 
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
@@ -158,11 +159,11 @@ void Novae::init()
 	}
 	else
 	{
-		qDebug() << "[Novae] novae.json does not exist - copying default file to" << QDir::toNativeSeparators(novaeJsonPath);
+		qDebug().noquote() << "[Novae] novae.json does not exist - copying default file to" << QDir::toNativeSeparators(novaeJsonPath);
 		restoreDefaultJsonFile();
 	}
 
-	qDebug() << "[Novae] loading catalog file:" << QDir::toNativeSeparators(novaeJsonPath);
+	qDebug().noquote() << "[Novae] Loading catalog file:" << QDir::toNativeSeparators(novaeJsonPath);
 
 	readJsonFile();
 
@@ -178,6 +179,8 @@ void Novae::init()
 
 	connect(this, SIGNAL(jsonUpdateComplete(void)), this, SLOT(reloadCatalog()));
 	connect(StelApp::getInstance().getCore(), SIGNAL(configurationDataSaved()), this, SLOT(saveSettings()));
+	StarMgr* smgr = GETSTELMODULE(StarMgr);
+	connect(smgr, SIGNAL(starLabelsDisplayedChanged(bool)), this, SLOT(setFlagSyncShowLabels(bool)));
 
 	GETSTELMODULE(StelObjectMgr)->registerStelObjectMgr(this);
 }
@@ -624,7 +627,7 @@ void Novae::startDownload(QString urlString)
 	request.setUrl(QUrl(updateUrl));
 	request.setRawHeader("User-Agent", StelUtils::getUserAgentString().toUtf8());
 #if (QT_VERSION<QT_VERSION_CHECK(6,0,0))
-	request.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);
+	request.setAttribute(QNetworkRequest::RedirectPolicyAttribute, true);
 #endif
 	downloadReply = networkManager->get(request);
 	connect(downloadReply, SIGNAL(downloadProgress(qint64,qint64)), this, SLOT(updateDownloadProgress(qint64,qint64)));

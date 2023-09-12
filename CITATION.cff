@@ -1,0 +1,59 @@
+# This CITATION.cff file was generated with cffinit.
+# Visit https://bit.ly/cffinit to generate yours today!
+
+cff-version: 1.2.0
+title: Stellarium
+message: >-
+  If you use this software, please cite it using the
+  metadata from this file.
+type: software
+authors:
+  - given-names: Fabien
+    family-names: Chéreau
+    affiliation: Stellarium Labs
+  - given-names: Alexander
+    family-names: Wolf
+    affiliation: Altai State Pedagogical University
+    orcid: 'https://orcid.org/0000-0002-2047-089X'
+  - family-names: Zotti
+    given-names: Georg
+    affiliation: >-
+      Ludwig Boltzmann Institute for Archaeological
+      Prospection and Virtual Archaeology
+    orcid: 'https://orcid.org/0000-0002-8152-0408'
+  - given-names: Susanne
+    family-names: Hoffmann
+    affiliation: >-
+      Friedrich Schiller University - Michael Stifel Center
+      Jena
+    orcid: 'https://orcid.org/0000-0001-5384-7545'
+  - given-names: Ruslan
+    family-names: Kabatsayev
+  - given-names: Worachate
+    family-names: Boonplod
+  - family-names: Chéreau
+    given-names: Guillaume
+    affiliation: Noctua Software
+  - family-names: Bernardi
+    given-names: Martín
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.8105939
+repository-code: 'https://github.com/Stellarium/stellarium'
+url: 'https://stellarium.org/'
+repository-artifact: >-
+  https://github.com/Stellarium/stellarium/releases/tag/v23.2
+abstract: >-
+  Stellarium is a free open source planetarium for your
+  computer. It shows a realistic sky in 3D, just like what
+  you see with the naked eye, binoculars or a telescope.
+keywords:
+  - stellarium
+  - astronomy
+  - planetarium
+  - universe
+  - sky
+license: GPL-2.0-or-later
+commit: 55c1d908cd0609d83e88e9c3754a1b63f2959ac0
+version: '23.2'
+date-released: '2023-07-02'

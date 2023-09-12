@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>305</width>
-    <height>155</height>
+    <height>209</height>
    </rect>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
@@ -223,6 +223,13 @@
        <widget class="QCheckBox" name="scaleMarkersCheckBox">
         <property name="text">
          <string>Use small markers, when line is enabled</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="currentLocationCheckBox">
+        <property name="text">
+         <string>Show marker for current location</string>
         </property>
        </widget>
       </item>

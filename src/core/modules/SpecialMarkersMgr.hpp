@@ -22,6 +22,7 @@
 
 #include "VecMath.hpp"
 #include "StelModule.hpp"
+#include "StelProjectorType.hpp"
 
 class SpecialSkyMarker;
 

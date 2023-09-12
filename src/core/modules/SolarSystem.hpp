@@ -53,22 +53,20 @@ class SolarSystem : public StelObjectModule
 	Q_OBJECT
 	// This is a "forwarding property" which sets labeling into all planets.
 	Q_PROPERTY(bool labelsDisplayed			READ getFlagLabels			WRITE setFlagLabels			NOTIFY labelsDisplayedChanged)
-	// was bool orbitsDisplayed
-	Q_PROPERTY(bool flagOrbits			READ getFlagOrbits			WRITE setFlagOrbits			NOTIFY flagOrbitsChanged)
 	Q_PROPERTY(bool trailsDisplayed			READ getFlagTrails			WRITE setFlagTrails			NOTIFY trailsDisplayedChanged)
 	Q_PROPERTY(int maxTrailPoints			READ getMaxTrailPoints			WRITE setMaxTrailPoints			NOTIFY maxTrailPointsChanged)
 	Q_PROPERTY(int maxTrailTimeExtent		READ getMaxTrailTimeExtent		WRITE setMaxTrailTimeExtent		NOTIFY maxTrailTimeExtentChanged)
 	Q_PROPERTY(int trailsThickness			READ getTrailsThickness			WRITE setTrailsThickness		NOTIFY trailsThicknessChanged)
-	// was bool hintsDisplayed. This is a "forwarding property" only, without own variable.
+	// This is a "forwarding property" only, without own variable.
 	Q_PROPERTY(bool flagHints			READ getFlagHints			WRITE setFlagHints			NOTIFY flagHintsChanged)
-	// was bool pointersDisplayed
 	Q_PROPERTY(bool flagPointer			READ getFlagPointer			WRITE setFlagPointer			NOTIFY flagPointerChanged)
-	// was bool nativeNamesDisplayed
 	Q_PROPERTY(bool flagNativePlanetNames		READ getFlagNativePlanetNames		WRITE setFlagNativePlanetNames		NOTIFY flagNativePlanetNamesChanged)
 	Q_PROPERTY(bool planetsDisplayed		READ getFlagPlanets			WRITE setFlagPlanets			NOTIFY flagPlanetsDisplayedChanged)
+	Q_PROPERTY(bool flagOrbits			READ getFlagOrbits			WRITE setFlagOrbits			NOTIFY flagOrbitsChanged)
 	Q_PROPERTY(bool flagPlanetsOrbitsOnly		READ getFlagPlanetsOrbitsOnly		WRITE setFlagPlanetsOrbitsOnly		NOTIFY flagPlanetsOrbitsOnlyChanged)
 	Q_PROPERTY(bool flagPermanentOrbits		READ getFlagPermanentOrbits		WRITE setFlagPermanentOrbits		NOTIFY flagPermanentOrbitsChanged)
 	Q_PROPERTY(bool flagIsolatedOrbits		READ getFlagIsolatedOrbits		WRITE setFlagIsolatedOrbits		NOTIFY flagIsolatedOrbitsChanged)
+	Q_PROPERTY(bool flagOrbitsWithMoons		READ getFlagOrbitsWithMoons		WRITE setFlagOrbitsWithMoons		NOTIFY flagOrbitsWithMoonsChanged)
 	Q_PROPERTY(bool flagIsolatedTrails		READ getFlagIsolatedTrails		WRITE setFlagIsolatedTrails		NOTIFY flagIsolatedTrailsChanged)
 	Q_PROPERTY(int numberIsolatedTrails		READ getNumberIsolatedTrails		WRITE setNumberIsolatedTrails		NOTIFY numberIsolatedTrailsChanged)
 	Q_PROPERTY(bool flagLightTravelTime		READ getFlagLightTravelTime		WRITE setFlagLightTravelTime		NOTIFY flagLightTravelTimeChanged)
@@ -98,6 +96,7 @@ class SolarSystem : public StelObjectModule
 	Q_PROPERTY(bool ephemerisSmartDates		READ getFlagEphemerisSmartDates		WRITE setFlagEphemerisSmartDates	NOTIFY ephemerisSmartDatesChanged)
 	Q_PROPERTY(bool ephemerisScaleMarkersDisplayed	READ getFlagEphemerisScaleMarkers	WRITE setFlagEphemerisScaleMarkers	NOTIFY ephemerisScaleMarkersChanged)
 	Q_PROPERTY(bool ephemerisAlwaysOn		READ getFlagEphemerisAlwaysOn		WRITE setFlagEphemerisAlwaysOn		NOTIFY ephemerisAlwaysOnChanged)
+	Q_PROPERTY(bool ephemerisNow			READ getFlagEphemerisNow		WRITE setFlagEphemerisNow		NOTIFY ephemerisNowChanged)
 	// Great Red Spot (GRS) properties
 	Q_PROPERTY(int grsLongitude			READ getGrsLongitude			WRITE setGrsLongitude			NOTIFY grsLongitudeChanged)
 	Q_PROPERTY(double grsDrift			READ getGrsDrift			WRITE setGrsDrift			NOTIFY grsDriftChanged)
@@ -669,6 +668,11 @@ public slots:
 	//! Get the current value of the flag which enables showing of planets orbits only or not.
 	bool getFlagPlanetsOrbitsOnly(void) const;
 
+	//! Set flag which enables showing of planets orbits together mith orbits of their moons.
+	void setFlagOrbitsWithMoons(bool b);
+	//! Get the current value of the flag for showing of planets orbits together mith orbits of their moons.
+	bool getFlagOrbitsWithMoons(void) const;
+
 	//! Set flag which enabled the showing of solar corona when atmosphere is disabled (true) of draw the corona when total solar eclipses is happened only (false)
 	void setFlagPermanentSolarCorona(bool b) {	if (flagPermanentSolarCorona!=b)	{ flagPermanentSolarCorona = b; emit flagPermanentSolarCoronaChanged(b); } }
 	//! Get the current value of the flag which enables showing of solar corona when atmosphere is disabled or when total solar eclipses is happened only.
@@ -751,6 +755,7 @@ signals:
 	void flagPlanetsOrbitsOnlyChanged(bool b);
 	void flagPermanentOrbitsChanged(bool b);
 	void flagIsolatedOrbitsChanged(bool b);
+	void flagOrbitsWithMoonsChanged(bool b);
 	void flagIsolatedTrailsChanged(bool b);
 	void numberIsolatedTrailsChanged(int n);
 	void flagLightTravelTimeChanged(bool b);
@@ -771,6 +776,7 @@ signals:
 	void ephemerisMagnitudesChanged(bool b);
 	void ephemerisLineChanged(bool b);
 	void ephemerisAlwaysOnChanged(bool b);
+	void ephemerisNowChanged(bool b);
 	void ephemerisLineThicknessChanged(int v);
 	void ephemerisSkipDataChanged(bool b);
 	void ephemerisSkipMarkersChanged(bool b);
@@ -911,6 +917,11 @@ private slots:
 	//! Get the current value of the flag which makes ephemeris lines and marks always on
 	bool getFlagEphemerisAlwaysOn() const;
 
+	//! Set flag, which enables ephemeris marks on position "now"
+	void setFlagEphemerisNow(bool b);
+	//! Get the current value of the flag which makes ephemeris marks on position "now"
+	bool getFlagEphemerisNow() const;
+
 	//! Set the thickness of ephemeris line
 	void setEphemerisLineThickness(int v);
 	//! Get the thickness of ephemeris line
@@ -991,6 +1002,8 @@ private slots:
 	//! Taking the JD dates for each ephemeride and preparation the human readable dates according to the settings for dates
 	void fillEphemerisDates();
 
+	//! When some aspect of orbit drawing changes, update their configuration
+	void reconfigureOrbits();
 private:
 	//! Search for SolarSystem objects which are close to the position given
 	//! in earth equatorial position.
@@ -1083,6 +1096,7 @@ private:
 	StelTextureSP texPointer;
 	StelTextureSP texEphemerisMarker;
 	StelTextureSP texEphemerisCometMarker;
+	StelTextureSP texEphemerisNowMarker;
 
 	bool flagShow;
 	bool flagPointer;                           // show red cross selection pointer?
@@ -1094,12 +1108,14 @@ private:
 	int trailsThickness;
 	bool flagIsolatedOrbits;
 	bool flagPlanetsOrbitsOnly;
+	bool flagOrbitsWithMoons;
 	bool ephemerisMarkersDisplayed;
 	bool ephemerisDatesDisplayed;
 	bool ephemerisMagnitudesDisplayed;
 	bool ephemerisHorizontalCoordinates;
 	bool ephemerisLineDisplayed;
 	bool ephemerisAlwaysOn;
+	bool ephemerisNow;
 	int ephemerisLineThickness;
 	bool ephemerisSkipDataDisplayed;
 	bool ephemerisSkipMarkersDisplayed;

@@ -37,7 +37,7 @@ public:
         virtual ~Heightmap();
 
 	//! Sets the mesh data to use. If the bbox is given, min/max calculation is skipped and its values are taken.
-	void setMeshData(const IdxList& indexList, const PosList& posList, const AABBox *bbox = Q_NULLPTR);
+	void setMeshData(const IdxList& indexList, const PosList& posList, const AABBox *bbox = nullptr);
 
         //! Get z Value at (x,y) coordinates.
         //! In case of ambiguities always returns the maximum height.
@@ -89,7 +89,7 @@ private:
 
 		//the parent node in case of a non-root node
 		QuadTreeNode* parent;
-		//either Q_NULLPTR in case of a leaf, or array of size 4
+		//either nullptr in case of a leaf, or array of size 4
 		QuadTreeNode* children;
 
 		//! The level of this node, starting with 0 for the root node

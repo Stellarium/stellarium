@@ -33,6 +33,7 @@
 #include "Supernovae.hpp"
 #include "SupernovaeDialog.hpp"
 #include "StelProgressController.hpp"
+#include "StarMgr.hpp"
 
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
@@ -164,11 +165,11 @@ void Supernovae::init()
 	}
 	else
 	{
-		qDebug() << "[Supernovae] supernovae.json does not exist - copying default file to" << QDir::toNativeSeparators(sneJsonPath);
+		qDebug().noquote() << "[Supernovae] supernovae.json does not exist - copying default file to" << QDir::toNativeSeparators(sneJsonPath);
 		restoreDefaultJsonFile();
 	}
 
-	qDebug() << "[Supernovae] loading catalog file:" << QDir::toNativeSeparators(sneJsonPath);
+	qDebug().noquote() << "[Supernovae] Loading catalog file:" << QDir::toNativeSeparators(sneJsonPath);
 
 	readJsonFile();
 
@@ -184,6 +185,8 @@ void Supernovae::init()
 
 	connect(this, SIGNAL(jsonUpdateComplete(void)), this, SLOT(reloadCatalog()));
 	connect(StelApp::getInstance().getCore(), SIGNAL(configurationDataSaved()), this, SLOT(saveSettings()));
+	StarMgr* smgr = GETSTELMODULE(StarMgr);
+	connect(smgr, SIGNAL(starLabelsDisplayedChanged(bool)), this, SLOT(setFlagSyncShowLabels(bool)));
 
 	GETSTELMODULE(StelObjectMgr)->registerStelObjectMgr(this);
 }
@@ -621,7 +624,7 @@ void Supernovae::startDownload(QString urlString)
 	request.setUrl(QUrl(updateUrl));
 	request.setRawHeader("User-Agent", StelUtils::getUserAgentString().toUtf8());
 #if (QT_VERSION<QT_VERSION_CHECK(6,0,0))
-	request.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);
+	request.setAttribute(QNetworkRequest::RedirectPolicyAttribute, true);
 #endif
 	downloadReply = networkManager->get(request);
 	connect(downloadReply, SIGNAL(downloadProgress(qint64,qint64)), this, SLOT(updateDownloadProgress(qint64,qint64)));

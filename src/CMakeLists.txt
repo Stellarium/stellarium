@@ -12,6 +12,7 @@ ENDIF()
 SET(stellarium_lib_SRCS
      core/BlueNoiseTriangleRemapped.hpp
      core/StelSRGB.hpp
+     core/StelSRGB.cpp
      core/Dithering.hpp
      core/Dithering.cpp
      core/SaturationShader.hpp
@@ -470,8 +471,11 @@ ENDIF()
 #############################################################################################
 
 IF(WIN32)
-    # This library is required for some native methods used in a fix in main.cpp
+     # This library is required for some native methods used in a fix in main.cpp
      SET(winMMLib winmm)
+     # This part is required to apply qt.conf for stellarium.exe when it's starting via QtCreator
+     SET(QT_CONF ${CMAKE_SOURCE_DIR}/data/qt.conf CACHE FILEPATH "The path to the qt.conf file")
+     CONFIGURE_FILE(${QT_CONF} ${CMAKE_CURRENT_BINARY_DIR} COPYONLY)
 ENDIF()
 
 IF(WIN32 AND ENABLE_WINDOWS_EXE_ICON)

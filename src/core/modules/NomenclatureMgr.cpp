@@ -39,7 +39,6 @@
 NomenclatureMgr::NomenclatureMgr() : StelObjectModule()
 {
 	setObjectName("NomenclatureMgr");
-	conf = StelApp::getInstance().getSettings();
 	font.setPixelSize(StelApp::getInstance().getScreenFontSize());
 	connect(&StelApp::getInstance(), SIGNAL(screenFontSizeChanged(int)), this, SLOT(setFontSize(int)));
 	ssystem = GETSTELMODULE(SolarSystem);
@@ -66,12 +65,14 @@ void NomenclatureMgr::init()
 	loadNomenclature();
 	loadSpecialNomenclature();
 
-	setColor(Vec3f(conf->value("color/planet_nomenclature_color", "0.1,1.0,0.1").toString()));
-	setFlagShowNomenclature(conf->value("astro/flag_planets_nomenclature", false).toBool());
-	setFlagShowTerminatorZoneOnly(conf->value("astro/flag_planets_nomenclature_terminator_only", false).toBool());
-	setTerminatorMinAltitude(conf->value("astro/planet_nomenclature_solar_altitude_min", -5).toInt());
-	setTerminatorMaxAltitude(conf->value("astro/planet_nomenclature_solar_altitude_max", 40).toInt());
-	setFlagHideLocalNomenclature(conf->value("astro/flag_hide_local_nomenclature", true).toBool());
+	QSettings *conf = StelApp::getInstance().getSettings();
+	setColor(Vec3f(                    conf->value("color/planet_nomenclature_color", "0.1,1.0,0.1").toString()));
+	setFlagShowNomenclature(           conf->value("astro/flag_planets_nomenclature", false).toBool());
+	setFlagShowTerminatorZoneOnly(     conf->value("astro/flag_planets_nomenclature_terminator_only", false).toBool());
+	setTerminatorMinAltitude(          conf->value("astro/planet_nomenclature_solar_altitude_min", -5).toInt());
+	setTerminatorMaxAltitude(          conf->value("astro/planet_nomenclature_solar_altitude_max", 40).toInt());
+	setFlagOutlineCraters(             conf->value("astro/flag_planets_nomenclature_outline_craters", false).toBool());
+	setFlagHideLocalNomenclature(      conf->value("astro/flag_hide_local_nomenclature", true).toBool());
 	setFlagShowSpecialNomenclatureOnly(conf->value("astro/flag_special_nomenclature_only", false).toBool());
 
 	GETSTELMODULE(StelObjectMgr)->registerStelObjectMgr(this);
@@ -188,7 +189,7 @@ void NomenclatureMgr::loadNomenclature()
 		QString name, planet = "", planetName = "", context = "";
 		NomenclatureItem::NomenclatureItemType ntype;
 		double latitude, longitude, size;
-		QStringList faultPlanets;
+		QStringList missingPlanets;
 
 		while (!buf.atEnd())
 		{
@@ -205,11 +206,9 @@ void NomenclatureMgr::loadNomenclature()
 				qWarning() << "ERROR - cannot parse record at line" << lineNumber << "in surface nomenclature file" << QDir::toNativeSeparators(surfNamesFile);
 			else
 			{
-				// Read the planet name
+				// Read planet name, feature ID, context
 				planet	= recMatch.captured(1).trimmed();
-				// Read the ID of feature
 				featureId	= recMatch.captured(2).toInt();
-				// Read the name of feature and context
 				QString ctxt	= recMatch.captured(3).trimmed();
 				QRegularExpressionMatch ctxMatch=ctxRx.match(ctxt);
 				if (ctxMatch.hasMatch())
@@ -225,11 +224,9 @@ void NomenclatureMgr::loadNomenclature()
 				// Read the type of feature
 				QString ntypecode	= recMatch.captured(4).trimmed();
 				ntype = NomenclatureItem::getNomenclatureItemType(ntypecode.toUpper());
-				// Read the latitude of feature
+				// Read lat/long/size of feature
 				latitude	= recMatch.captured(5).toDouble();
-				// Read the longitude of feature
 				longitude	= recMatch.captured(6).toDouble();
-				// Read the size of feature
 				size		= recMatch.captured(7).toDouble();
 
 				if (planetName.isEmpty() || planet!=planetName)
@@ -249,17 +246,17 @@ void NomenclatureMgr::loadNomenclature()
 					readOk++;
 				}
 				else
-					faultPlanets << planet;
+					missingPlanets.append(planet);
 			}
 		}
 
 		buf.close();
 		qDebug() << "Loaded" << readOk << "/" << totalRecords << "items of planetary surface nomenclature";
 
-		faultPlanets.removeDuplicates();
-		int err = faultPlanets.size();
-		if (err>0)
-			qDebug() << "WARNING - These planets to assign nomenclature items were not found:" << faultPlanets.join(", ");
+		missingPlanets.removeDuplicates();
+		if (!missingPlanets.isEmpty())
+			// Nothing to worry about - We still don't include all objects.
+			qInfo() << "INFO: Cannot find these planetary objects to assign nomenclature items:" << missingPlanets.join(", ");
 	}
 }
 
@@ -516,7 +513,7 @@ void NomenclatureMgr::setFlagShowTerminatorZoneOnly(bool b)
 	if (b!=NomenclatureItem::showTerminatorZoneOnly)
 	{
 		NomenclatureItem::showTerminatorZoneOnly=b;
-		conf->setValue("astro/flag_planets_nomenclature_terminator_only", b);
+		StelApp::immediateSave("astro/flag_planets_nomenclature_terminator_only", b);
 		emit flagShowTerminatorZoneOnlyChanged(b);
 	}
 }
@@ -532,7 +529,7 @@ void NomenclatureMgr::setTerminatorMinAltitude(int deg)
 	if (deg!=NomenclatureItem::terminatorMinAltitude)
 	{
 		NomenclatureItem::terminatorMinAltitude=qBound(-90, deg, 90);
-		conf->setValue("astro/planet_nomenclature_solar_altitude_min", NomenclatureItem::terminatorMinAltitude);
+		StelApp::immediateSave("astro/planet_nomenclature_solar_altitude_min", NomenclatureItem::terminatorMinAltitude);
 		emit terminatorMinAltitudeChanged(NomenclatureItem::terminatorMinAltitude);
 	}
 }
@@ -548,7 +545,7 @@ void NomenclatureMgr::setTerminatorMaxAltitude(int deg)
 	if (deg!=NomenclatureItem::terminatorMaxAltitude)
 	{
 		NomenclatureItem::terminatorMaxAltitude=qBound(-90, deg, 90);
-		conf->setValue("astro/planet_nomenclature_solar_altitude_max", NomenclatureItem::terminatorMaxAltitude);
+		StelApp::immediateSave("astro/planet_nomenclature_solar_altitude_max", NomenclatureItem::terminatorMaxAltitude);
 		emit terminatorMaxAltitudeChanged(NomenclatureItem::terminatorMaxAltitude);
 	}
 }
@@ -558,9 +555,22 @@ int NomenclatureMgr::getTerminatorMaxAltitude() const
 	return NomenclatureItem::terminatorMaxAltitude;
 }
 
+void NomenclatureMgr::setFlagOutlineCraters(bool b)
+{
+	NomenclatureItem::flagOutlineCraters = b;
+	StelApp::immediateSave("astro/flag_planets_nomenclature_outline_craters", b);
+	emit flagOutlineCratersChanged(b);
+}
+
+bool NomenclatureMgr::getFlagOutlineCraters() const
+{
+	return NomenclatureItem::flagOutlineCraters;
+}
+
 void NomenclatureMgr::setFlagHideLocalNomenclature(bool b)
 {
 	NomenclatureItem::hideLocalNomenclature = b;
+	StelApp::immediateSave("astro/flag_hide_local_nomenclature", b);
 	emit localNomenclatureHidingChanged(b);
 }
 
@@ -572,6 +582,7 @@ bool NomenclatureMgr::getFlagHideLocalNomenclature() const
 void NomenclatureMgr::setFlagShowSpecialNomenclatureOnly(bool b)
 {
 	NomenclatureItem::showSpecialNomenclatureOnly = b;
+	StelApp::immediateSave("astro/flag_special_nomenclature_only", b);
 	emit specialNomenclatureOnlyDisplayingChanged(b);
 }
 

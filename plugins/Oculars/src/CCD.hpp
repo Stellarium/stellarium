@@ -92,13 +92,17 @@ public:
 	  * The formula for this calculation comes from the Yerkes observatory.
 	  * fov degrees = 2PI/360degrees * chipDimension mm / telescope FL mm
 	  */
-	double getActualFOVx(Telescope *telescope, Lens *lens) const;
-	double getActualFOVy(Telescope *telescope, Lens *lens) const;
+	double getActualFOVx(const Telescope *telescope, const Lens *lens) const;
+	double getActualFOVy(const Telescope *telescope, const Lens *lens) const;
+	//! Horizontal angular resolution in degrees per pixel in the middle of the field of view
+	double getCentralAngularResolutionX(const Telescope *telescope, const Lens *lens) const;
+	//! Vertical angular resolution in degrees per pixel in the middle of the field of view
+	double getCentralAngularResolutionY(const Telescope *telescope, const Lens *lens) const;
 	//! focuser size in inches
-	double getFocuserFOV(Telescope *telescope, Lens *lens, double focuserSize) const;
-	double getInnerOAGRadius(Telescope *telescope, Lens *lens) const;
-	double getOuterOAGRadius(Telescope *telescope, Lens *lens) const;
-	double getOAGActualFOVx(Telescope *telescope, Lens *lens) const;
+	double getFocuserFOV(const Telescope *telescope, const Lens *lens, double focuserSize) const;
+	double getInnerOAGRadius(const Telescope *telescope, const Lens *lens) const;
+	double getOuterOAGRadius(const Telescope *telescope, const Lens *lens) const;
+	double getOAGActualFOVx(const Telescope *telescope, const Lens *lens) const;
 	QMap<int, QString> propertyMap();
 private:
 	QString m_name;

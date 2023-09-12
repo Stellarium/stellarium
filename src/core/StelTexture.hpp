@@ -21,6 +21,7 @@
 #define STELTEXTURE_HPP
 
 #include <QOpenGLFunctions>
+#include <QSharedPointer>
 #include <QObject>
 #include <QImage>
 
@@ -44,15 +45,19 @@ public:
 	//! Contains the parameters defining how a texture is created.
 	struct StelTextureParams
 	{
-		StelTextureParams(bool qgenerateMipmaps=false, GLint afiltering=GL_LINEAR, GLint awrapMode=GL_CLAMP_TO_EDGE, bool qfilterMipmaps=false, int decimateBy=1) :
-				generateMipmaps(qgenerateMipmaps),
-				filterMipmaps(qfilterMipmaps),
-				filtering(afiltering),
-				wrapMode(awrapMode),
-				decimation(decimateBy){;}
+		StelTextureParams(bool qgenerateMipmaps=false, GLint afiltering=GL_LINEAR,
+				  GLint awrapMode=GL_CLAMP_TO_EDGE, bool qfilterMipmaps=false, int decimateBy=1)
+			: generateMipmaps(qgenerateMipmaps)
+			, filterMipmaps(qfilterMipmaps)
+			, filtering(afiltering)
+			, wrapMode(awrapMode)
+			, decimation(decimateBy)
+		{
+		}
 		//! Define if mipmaps must be created.
 		bool generateMipmaps;
-		//! If true, mipmapped textures are filtered with GL_LINEAR_MIPMAP_LINEAR instead of GL_LINEAR_MIPMAP_NEAREST (i.e. enabling "trilinear" filtering)
+		//! If true, mipmapped textures are filtered with GL_LINEAR_MIPMAP_LINEAR instead
+		//! of GL_LINEAR_MIPMAP_NEAREST (i.e. enabling "trilinear" filtering)
 		bool filterMipmaps;
 		//! Define the scaling filter to use. Must be one of GL_NEAREST or GL_LINEAR
 		GLint filtering;
@@ -123,16 +128,16 @@ private:
 	//! data and information to create the OpenGL texture.
 	struct GLData
 	{
-		GLData() : width(0), height(0), format(0), type(0) {}
 		QString loaderError; //! can contain an error message if data is null
 		QByteArray data;
-		int width;
-		int height;
-		GLint format;
-		GLint type;
+		int width = 0;
+		int height = 0;
+		GLint format = 0;
+		GLint type = 0;
 	};
 	//! Those static methods can be called by QtConcurrent::run
-	//! @param decimateBy: On limited platforms we must be able to reduce texture sizes. Divide texture size in both dimensions by this number.
+	//! @param decimateBy: On limited platforms we must be able to reduce texture sizes. Divide
+	//! texture size in both dimensions by this number.
 	static GLData imageToGLData(const QImage    &image, const int decimateBy);
 	static GLData loadFromPath( const QString    &path, const int decimateBy);
 	static GLData loadFromData( const QByteArray &data, const int decimateBy);
@@ -145,7 +150,8 @@ private:
 
 	//! Convert a QImage into OpenGL compatible format.
 	//! The texture will be at most as large as GL_MAX_TEXTURE_SIZE
-	//! @param decimate divide image size by this factor: reduce texture sizes to conserve texture memory (required on e.g. Raspberry Pi 3).
+	//! @param decimate divide image size by this factor: reduce texture sizes to conserve
+	//! texture memory (required on e.g. Raspberry Pi 3).
 	static QByteArray convertToGLFormat(QImage image, GLint& format, GLint& type, int decimate, int& width, int& height);
 
 	//! This method should be called if the texture loading failed for any reasons
@@ -167,37 +173,37 @@ private:
 	void startAsyncLoader(T (*functionPointer)(Params...), Args&&...args);
 
 	//! The parent texture manager
-	StelTextureMgr* textureMgr;
+	StelTextureMgr* textureMgr = nullptr;
 
-	QOpenGLFunctions* gl;
+	QOpenGLFunctions* gl = nullptr;
 	StelTextureParams loadParams;
 
 	//! Used to handle the connection for remote textures.
-	QNetworkReply *networkReply;
+	QNetworkReply *networkReply = nullptr;
 
 	//! The loader object
-	QFuture<GLData>* loader;
+	QFuture<GLData>* loader = nullptr;
 
 	//! The URL where to download the file
 	QString fullPath;
 
 	//! True when something when wrong in the loading process
-	bool errorOccured;
+	bool errorOccured = false;
 
 	//! True if this texture contains an alpha channel
-	bool alphaChannel;
+	bool alphaChannel = false;
 
 	//! Human friendly error message if loading failed
 	QString errorMessage;
 
 	//! OpenGL id
-	GLuint id;
+	GLuint id = 0;
 
-	GLsizei width;	//! Texture image width
-	GLsizei height;	//! Texture image height
+	GLsizei width = -1;	//! Texture image width
+	GLsizei height = -1;	//! Texture image height
 
 	//! Size in GL memory
-	unsigned int glSize;
+	unsigned int glSize = 0;
 };
 
 

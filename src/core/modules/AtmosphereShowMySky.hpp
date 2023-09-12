@@ -46,7 +46,7 @@ class TextureAverageComputer;
 class AtmosphereShowMySky : public Atmosphere, public QObject
 {
 public:
-	AtmosphereShowMySky();
+	AtmosphereShowMySky(double initialAltitude);
 	~AtmosphereShowMySky();
 
 	void computeColor(StelCore* core, double JD, const Planet& currentPlanet, const Planet& sun, const Planet* moon,
@@ -56,12 +56,6 @@ public:
 	bool isLoading() const override;
 	bool isReadyToRender() const override;
 	LoadingStatus stepDataLoading() override;
-
-	struct InitFailure : std::runtime_error
-	{
-		using std::runtime_error::runtime_error;
-		InitFailure(QString const& what) : std::runtime_error(what.toStdString()) {}
-	};
 
 private:
 #ifdef ENABLE_SHOWMYSKY
@@ -99,8 +93,7 @@ private:
 	decltype(::ShowMySky_AtmosphereRenderer_create)* ShowMySky_AtmosphereRenderer_create=nullptr;
 
 	struct {
-		int rgbMaxValue;
-		int ditherPattern;
+		int doSRGB;
 		int oneOverGamma;
 		int brightnessScale;
 		int luminanceTexture;
@@ -110,7 +103,6 @@ private:
 		int flagUseTmGamma;                      // switch between their use, true to use the first expression.
 	} shaderAttribLocations;
 
-	StelTextureSP ditherPatternTex_;
 	StelProjectorP prevProjector_;
 	std::unique_ptr<TextureAverageComputer> textureAverager_;
 
@@ -145,7 +137,7 @@ private:
 	Vec4f getMeanPixelValue();
 	void resizeRenderTarget(int width, int height);
 	void drawAtmosphere(Mat4f const& projectionMatrix, float sunAzimuth, float sunZenithAngle, float sunAngularRadius,
-						float moonAzimuth, float moonZenithAngle, float earthMoonDistance, float altitude,
+	                    float moonAzimuth, float moonZenithAngle, float earthMoonDistance, float altitude,
 	                    float brightness, float lightPollutionGroundLuminance, float airglowRelativeBrightness,
 	                    bool drawAsEclipse, bool clearTarget);
 	bool dynamicResolution(StelProjectorP prj, Vec3d &sunPos, int width, int height);

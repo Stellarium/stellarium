@@ -178,7 +178,7 @@ void Exoplanets::init()
 	}
 	catch (std::runtime_error &e)
 	{
-		qWarning() << "[Exoplanets] init error: " << e.what();
+		qWarning() << "[Exoplanets] init error:" << e.what();
 		return;
 	}
 
@@ -192,11 +192,11 @@ void Exoplanets::init()
 	}
 	else
 	{
-		qDebug() << "[Exoplanets] exoplanets.json does not exist - copying default catalog to " << QDir::toNativeSeparators(jsonCatalogPath);
+		qDebug().noquote() << "[Exoplanets] exoplanets.json does not exist - copying default catalog to" << QDir::toNativeSeparators(jsonCatalogPath);
 		restoreDefaultJsonFile();
 	}
 
-	qDebug() << "[Exoplanets] loading catalog file:" << QDir::toNativeSeparators(jsonCatalogPath);
+	qDebug().noquote() << "[Exoplanets] loading catalog file:" << QDir::toNativeSeparators(jsonCatalogPath);
 
 	readJsonFile();
 
@@ -212,6 +212,8 @@ void Exoplanets::init()
 
 	connect(this, SIGNAL(jsonUpdateComplete(void)), this, SLOT(reloadCatalog()));
 	connect(StelApp::getInstance().getCore(), SIGNAL(configurationDataSaved()), this, SLOT(saveSettings()));
+	StarMgr* smgr = GETSTELMODULE(StarMgr);
+	connect(smgr, SIGNAL(starLabelsDisplayedChanged(bool)), this, SLOT(setFlagSyncShowLabels(bool)));
 
 	GETSTELMODULE(StelObjectMgr)->registerStelObjectMgr(this);
 }
@@ -416,11 +418,11 @@ void Exoplanets::restoreDefaultJsonFile(void)
 	QFile src(":/Exoplanets/exoplanets.json");
 	if (!src.copy(jsonCatalogPath))
 	{
-		qWarning() << "[Exoplanets] Cannot copy JSON resource to " + QDir::toNativeSeparators(jsonCatalogPath);
+		qWarning().noquote() << "[Exoplanets] Cannot copy JSON resource to" + QDir::toNativeSeparators(jsonCatalogPath);
 	}
 	else
 	{
-		qDebug() << "[Exoplanets] Default exoplanets.json to " << QDir::toNativeSeparators(jsonCatalogPath);
+		qDebug().noquote() << "[Exoplanets] Default exoplanets.json to" << QDir::toNativeSeparators(jsonCatalogPath);
 		// The resource is read only, and the new file inherits this...  make sure the new file
 		// is writable by the Stellarium process so that updates can be done.
 		QFile dest(jsonCatalogPath);
@@ -512,7 +514,7 @@ QVariantMap Exoplanets::loadEPMap(QString path)
 	QVariantMap map;
 	QFile jsonFile(path);
 	if (!jsonFile.open(QIODevice::ReadOnly))
-		qWarning() << "[Exoplanets] Cannot open " << QDir::toNativeSeparators(path);
+		qWarning().noquote() << "[Exoplanets] Cannot open" << QDir::toNativeSeparators(path);
 	else
 	{
 		try
@@ -522,7 +524,7 @@ QVariantMap Exoplanets::loadEPMap(QString path)
 		}
 		catch (std::runtime_error &e)
 		{
-			qDebug() << "[Exoplanets] File format is wrong! Error: " << e.what();
+			qDebug() << "[Exoplanets] File format is wrong! Error:" << e.what();
 			return QVariantMap();
 		}
 	}
@@ -610,7 +612,7 @@ int Exoplanets::getJsonFileFormatVersion(void) const
 	QFile jsonEPCatalogFile(jsonCatalogPath);
 	if (!jsonEPCatalogFile.open(QIODevice::ReadOnly))
 	{
-		qWarning() << "[Exoplanets] Cannot open " << QDir::toNativeSeparators(jsonCatalogPath);
+		qWarning().noquote() << "[Exoplanets] Cannot open" << QDir::toNativeSeparators(jsonCatalogPath);
 		return jsonVersion;
 	}
 
@@ -622,7 +624,7 @@ int Exoplanets::getJsonFileFormatVersion(void) const
 	}
 	catch (std::runtime_error &e)
 	{
-		qDebug() << "[Exoplanets] File format is wrong! Error: " << e.what();
+		qDebug() << "[Exoplanets] File format is wrong! Error:" << e.what();
 		return jsonVersion;
 	}
 	if (map.contains("version"))
@@ -639,7 +641,7 @@ bool Exoplanets::checkJsonFileFormat() const
 	QFile jsonEPCatalogFile(jsonCatalogPath);
 	if (!jsonEPCatalogFile.open(QIODevice::ReadOnly))
 	{
-		qWarning() << "[Exoplanets] Cannot open " << QDir::toNativeSeparators(jsonCatalogPath);
+		qWarning().noquote() << "[Exoplanets] Cannot open" << QDir::toNativeSeparators(jsonCatalogPath);
 		return false;
 	}
 
@@ -761,7 +763,7 @@ void Exoplanets::updateJSON(void)
 		qWarning() << "[Exoplanets] Already updating...  will not start again until current update is complete.";
 		return;
 	}
-	qDebug() << "[Exoplanets] Updating exoplanets catalog...";
+	qDebug() << "[Exoplanets] Updating exoplanets catalog ...";
 	startDownload(updateUrl);
 }
 
@@ -942,7 +944,7 @@ void Exoplanets::startDownload(QString urlString)
 	request.setUrl(QUrl(updateUrl));
 	request.setRawHeader("User-Agent", StelUtils::getUserAgentString().toUtf8());
 #if (QT_VERSION<QT_VERSION_CHECK(6,0,0))
-	request.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);
+	request.setAttribute(QNetworkRequest::RedirectPolicyAttribute, true);
 #endif
 	downloadReply = networkManager->get(request);
 	connect(downloadReply, SIGNAL(downloadProgress(qint64,qint64)), this, SLOT(updateDownloadProgress(qint64,qint64)));

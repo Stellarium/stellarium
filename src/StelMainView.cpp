@@ -39,9 +39,6 @@
 #include <QDir>
 #include <QOpenGLWidget>
 #include <QApplication>
-#if (QT_VERSION<QT_VERSION_CHECK(5,12,0))
-#include <QDesktopWidget>
-#endif
 #include <QGuiApplication>
 #include <QGraphicsSceneMouseEvent>
 #include <QGraphicsAnchorLayout>
@@ -777,18 +774,22 @@ QSurfaceFormat StelMainView::getDesiredGLFormat(QSettings* configuration)
 
 	//if on an GLES build, do not set the format
 	const auto openGLModuleType = QOpenGLContext::openGLModuleType();
-	qDebug() << "OpenGL module type:" << openGLModuleType;
+	qDebug() << "OpenGL module type:" << (openGLModuleType==QOpenGLContext::LibGL
+										  ? "desktop OpenGL"
+										  : openGLModuleType==QOpenGLContext::LibGL
+											? "OpenGL ES 2 or higher"
+											: std::to_string(openGLModuleType).c_str());
 	if (openGLModuleType==QOpenGLContext::LibGL)
 	{
 		fmt.setRenderableType(QSurfaceFormat::OpenGL);
-		fmt.setMajorVersion(3);
-		fmt.setMinorVersion(3);
+		fmt.setVersion(3, 3);
 		fmt.setProfile(QSurfaceFormat::CoreProfile);
 
 		if (qApp && qApp->property("onetime_opengl_compat").toBool())
 		{
 			qDebug() << "Setting OpenGL Compatibility profile from command line...";
 			fmt.setProfile(QSurfaceFormat::CompatibilityProfile);
+			fmt.setOption(QSurfaceFormat::DeprecatedFunctions);
 		}
 		// FIXME: temporary hook for Qt5-based macOS bundles
 		#if defined(Q_OS_MACOS) && (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
@@ -796,21 +797,19 @@ QSurfaceFormat StelMainView::getDesiredGLFormat(QSettings* configuration)
 		#endif
 	}
 
-	// Note: this only works if --mesa-mode was given on the command line. Auto-switch to Mesa or the driver name apparently cannot be detected at this early stage.
-	const bool isMesa = QString(getenv("QT_OPENGL"))=="software";
+	// NOTE: multisampling is implemented via FBO now, so it's not requested here.
 
 	//request some sane buffer formats
 	fmt.setRedBufferSize(8);
 	fmt.setGreenBufferSize(8);
 	fmt.setBlueBufferSize(8);
 	fmt.setDepthBufferSize(24);
+	// Without stencil buffer the debug versions of Qt will repeatedly emit warnings like:
+	// "OpenGL paint engine: attempted to use stencil test without requesting a stencil buffer."
+	fmt.setStencilBufferSize(8);
 
 	if(qApp && qApp->property("onetime_single_buffer").toBool())
 		fmt.setSwapBehavior(QSurfaceFormat::SingleBuffer);
-
-	const int multisamplingLevel = configuration ? configuration->value("video/multisampling", 0).toInt() : 0;
-	if(multisamplingLevel && qApp && qApp->property("spout").toString() == "none" && !isMesa)
-		fmt.setSamples(multisamplingLevel);
 
 	// VSync control. NOTE: it must be applied to the default format (QSurfaceFormat::setDefaultFormat) to take effect.
 #ifdef Q_OS_MACOS
@@ -861,7 +860,7 @@ void StelMainView::init()
 	}
 #endif
 
-	qDebug()<<"StelMainView::init";
+	qDebug() << "Initialization StelMainView";
 
 	glInfo.mainContext = QOpenGLContext::currentContext();
 	glInfo.surface = glInfo.mainContext->surface();
@@ -874,6 +873,7 @@ void StelMainView::init()
 	glInfo.isGLES = format.renderableType()==QSurfaceFormat::OpenGLES;
 	qDebug().nospace() << "Luminance textures are " << (glInfo.supportsLuminanceTextures ? "" : "not ") << "supported";
 	glInfo.isCoreProfile = format.profile() == QSurfaceFormat::CoreProfile;
+	glInfo.isHighGraphicsMode = !!StelOpenGL::highGraphicsFunctions();
 
 	auto& gl = *QOpenGLContext::currentContext()->functions();
 	if(format.majorVersion() * 1000 + format.minorVersion() >= 4006 ||
@@ -1070,7 +1070,7 @@ void StelMainView::processOpenGLdiagnosticsAndWarnings(QSettings *conf, QOpenGLC
 	bool openGLerror=false;
 	if (format.renderableType()==QSurfaceFormat::OpenGL || format.renderableType()==QSurfaceFormat::OpenGLES)
 	{
-		qDebug() << "Detected:" << (format.renderableType()==QSurfaceFormat::OpenGL  ? "OpenGL" : "OpenGL ES" ) << QString("%1.%2").arg(format.majorVersion()).arg(format.minorVersion());
+		qDebug().noquote() << "Detected:" << (format.renderableType()==QSurfaceFormat::OpenGL  ? "OpenGL" : "OpenGL ES" ) << QString("%1.%2").arg(format.majorVersion()).arg(format.minorVersion());
 	}
 	else
 	{
@@ -1081,10 +1081,10 @@ void StelMainView::processOpenGLdiagnosticsAndWarnings(QSettings *conf, QOpenGLC
 	QOpenGLFunctions* gl = context->functions();
 
 	QString glDriver(reinterpret_cast<const char*>(gl->glGetString(GL_VERSION)));
-	qDebug() << "Driver version string:" << glDriver;
-	qDebug() << "GL vendor is" << QString(reinterpret_cast<const char*>(gl->glGetString(GL_VENDOR)));
+	qDebug().noquote() << "Driver version string:" << glDriver;
+	qDebug().noquote() << "GL vendor:" << QString(reinterpret_cast<const char*>(gl->glGetString(GL_VENDOR)));
 	QString glRenderer(reinterpret_cast<const char*>(gl->glGetString(GL_RENDERER)));
-	qDebug() << "GL renderer is" << glRenderer;
+	qDebug().noquote() << "GL renderer:" << glRenderer;
 
 	// Minimal required version of OpenGL for Qt5 is 2.1 and OpenGL Shading Language may be 1.20 (or OpenGL ES is 2.0 and GLSL ES is 1.0).
 	// As of V0.13.0..1, we use GLSL 1.10/GLSL ES 1.00 (implicitly, by omitting a #version line), but in case of using ANGLE we need hardware
@@ -1128,7 +1128,7 @@ void StelMainView::processOpenGLdiagnosticsAndWarnings(QSettings *conf, QOpenGLC
 #endif
 	// This call requires OpenGL2+.
 	QString glslString(reinterpret_cast<const char*>(gl->glGetString(GL_SHADING_LANGUAGE_VERSION)));
-	qDebug() << "GL Shading Language version is" << glslString;
+	qDebug().noquote() << "GL Shading Language version:" << glslString;
 
 	// Only give extended info if called on command line, for diagnostic.
 	if (qApp->property("dump_OpenGL_details").toBool())
@@ -1146,8 +1146,8 @@ void StelMainView::processOpenGLdiagnosticsAndWarnings(QSettings *conf, QOpenGLC
 			QRegularExpressionMatch match=angleVsPsRegExp.match(glRenderer);
 			float vsVersion=match.captured(1).toFloat() + 0.1f*match.captured(2).toFloat();
 			float psVersion=match.captured(3).toFloat() + 0.1f*match.captured(4).toFloat();
-			qDebug() << "VS Version Number detected: " << vsVersion;
-			qDebug() << "PS Version Number detected: " << psVersion;
+			qDebug() << "VS Version Number detected:" << vsVersion;
+			qDebug() << "PS Version Number detected:" << psVersion;
 			if ((vsVersion<2.0f) || (psVersion<3.0f))
 			{
 				openGLerror=true;
@@ -1198,7 +1198,7 @@ void StelMainView::processOpenGLdiagnosticsAndWarnings(QSettings *conf, QOpenGLC
 		if (mesaPos >-1)
 		{
 			float mesaVersion=mesaRegExp.match(glDriver).captured(1).toFloat();
-			qDebug() << "MESA Version Number detected: " << mesaVersion;
+			qDebug() << "MESA Version Number detected:" << mesaVersion;
 			if ((mesaVersion<10.0f))
 			{
 				openGLerror=true;
@@ -1254,7 +1254,7 @@ void StelMainView::processOpenGLdiagnosticsAndWarnings(QSettings *conf, QOpenGLC
 	if (pos >-1)
 	{
 		float glslVersion=glslRegExp.match(glslString).captured(1).toFloat();
-		qDebug() << "GLSL Version Number detected: " << glslVersion;
+		qDebug() << "GLSL Version Number detected:" << glslVersion;
 		if (glslVersion<1.3f)
 		{
 			openGLerror=true;
@@ -1295,7 +1295,7 @@ void StelMainView::processOpenGLdiagnosticsAndWarnings(QSettings *conf, QOpenGLC
 	else if (posES >-1)
 	{
 		float glslesVersion=glslesRegExp.match(glslString).captured(1).toFloat();
-		qDebug() << "GLSL ES Version Number detected: " << glslesVersion;
+		qDebug() << "GLSL ES Version Number detected:" << glslesVersion;
 		if (glslesVersion<1.0f) // TBD: is this possible at all?
 		{
 			openGLerror=true;
@@ -1691,8 +1691,6 @@ void StelMainView::doScreenshot(void)
 	QOpenGLFramebufferObjectFormat fbFormat;
 	fbFormat.setAttachment(QOpenGLFramebufferObject::CombinedDepthStencil);
 	fbFormat.setInternalTextureFormat(isGLES ? GL_RGBA : GL_RGB); // try to avoid transparent background!
-	if(const auto multisamplingLevel = configuration->value("video/multisampling", 0).toInt())
-        fbFormat.setSamples(multisamplingLevel);
 	QOpenGLFramebufferObject * fbObj = new QOpenGLFramebufferObject(physImgWidth, physImgHeight, fbFormat);
 	fbObj->bind();
 	// Now the painter has to be convinced to paint to the potentially larger image frame.
@@ -1709,11 +1707,7 @@ void StelMainView::doScreenshot(void)
 	sParams.viewportXywh[3] = virtImgHeight;
 
 	// Configure a helper value to allow some modules to tweak their output sizes. Currently used by StarMgr, maybe solve font issues?
-#if (QT_VERSION>=QT_VERSION_CHECK(5,12,0))
 	customScreenshotMagnification=static_cast<float>(virtImgHeight)/static_cast<float>(qApp->screenAt(QPoint(stelScene->width()*0.5, stelScene->height()*0.5))->geometry().height());
-#else
-	customScreenshotMagnification=static_cast<float>(virtImgHeight)/static_cast<float>(qApp->screens().at(qApp->desktop()->screenNumber())->geometry().height());
-#endif
 	sParams.viewportCenter.set(0.0+(0.5+pParams.viewportCenterOffset.v[0])*virtImgWidth,
 							   0.0+(0.5+pParams.viewportCenterOffset.v[1])*virtImgHeight);
 	sParams.viewportFovDiameter = qMin(virtImgWidth,virtImgHeight);

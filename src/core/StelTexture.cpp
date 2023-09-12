@@ -39,8 +39,8 @@
 # define GL_TEXTURE_MAX_ANISOTROPY 0x84FE
 #endif
 
-StelTexture::StelTexture(StelTextureMgr *mgr) : textureMgr(mgr), gl(Q_NULLPTR), networkReply(Q_NULLPTR), loader(Q_NULLPTR), errorOccured(false), alphaChannel(false), id(0),
-	width(-1), height(-1), glSize(0)
+StelTexture::StelTexture(StelTextureMgr *mgr)
+	: textureMgr(mgr)
 {
 }
 
@@ -55,7 +55,8 @@ StelTexture::~StelTexture()
 		if (gl->glIsTexture(id)==GL_FALSE)
 		{
 			GLenum err = gl->glGetError();
-			qWarning() << "WARNING: in StelTexture::~StelTexture() tried to delete invalid texture with ID=" << id << "Current GL ERROR status is" << err << "(" << StelOpenGL::getGLErrorText(err) << ")";
+			qWarning() << "WARNING: in StelTexture::~StelTexture() tried to delete invalid texture with ID="
+			           << id << "Current GL ERROR status is" << err << "(" << StelOpenGL::getGLErrorText(err) << ")";
 		}
 		else
 		{
@@ -66,7 +67,8 @@ StelTexture::~StelTexture()
 		}
 #ifndef NDEBUG
 		if (qApp->property("verbose") == true)
-			qDebug()<<"Deleted StelTexture"<<id<<", total memory usage "<<textureMgr->glMemoryUsage / (1024.0 * 1024.0)<<"MB";
+			qDebug() << "Deleted StelTexture" << id << ", total memory usage "
+			         << textureMgr->glMemoryUsage / (1024.0 * 1024.0)<<"MB";
 #endif
 		id = 0;
 	}
@@ -209,14 +211,16 @@ void StelTexture::startAsyncLoader(T (*functionPointer)(Params...), Args&&...arg
 {
 	Q_ASSERT(loader==Q_NULLPTR);
 	//own thread pool supported with Qt 5.4+
-	loader = new QFuture<GLData>(QtConcurrent::run(textureMgr->loaderThreadPool, functionPointer, std::forward<Args>(args)...));
+	loader = new QFuture<GLData>(QtConcurrent::run(textureMgr->loaderThreadPool,
+	                                               functionPointer, std::forward<Args>(args)...));
 }
 
 bool StelTexture::load()
 {
 	// If the file is remote, start a network connection.
 	if (loader == Q_NULLPTR && networkReply == Q_NULLPTR &&
-			(fullPath.startsWith("http", Qt::CaseInsensitive) || fullPath.startsWith("file://", Qt::CaseInsensitive)))
+			(fullPath.startsWith("http", Qt::CaseInsensitive) ||
+			 fullPath.startsWith("file://", Qt::CaseInsensitive)))
 	{
 		QNetworkRequest req = QNetworkRequest(QUrl(fullPath));
 		// Define that preference should be given to cached files (no etag checks)
@@ -232,7 +236,8 @@ bool StelTexture::load()
 	// Not a remote file, start a loader from local file.
 	if (loader == Q_NULLPTR)
 	{
-		startAsyncLoader(static_cast<GLData(*)(const QString&, const int)>(loadFromPath), fullPath, loadParams.decimation);
+		startAsyncLoader(static_cast<GLData(*)(const QString&, const int)>(loadFromPath),
+		                 fullPath, loadParams.decimation);
 		return false;
 	}
 	// Wait until the loader finish.
@@ -248,7 +253,8 @@ void StelTexture::onNetworkReply()
 		if(data.isEmpty()) //prevent starting the loader when there is nothing to load
 			reportError(QString("Empty result received for URL: %1").arg(networkReply->url().toString()));
 		else
-			startAsyncLoader(static_cast<GLData(*)(const QByteArray&, const int)>(loadFromData), data, loadParams.decimation);
+			startAsyncLoader(static_cast<GLData(*)(const QByteArray&, const int)>(loadFromData),
+			                 data, loadParams.decimation);
 	}
 	else
 		reportError(networkReply->errorString());
@@ -292,11 +298,11 @@ QByteArray StelTexture::convertToGLFormat(QImage image, GLint& format, GLint& ty
 #endif
 	if(width != image.width() || height != image.height())
 	{
-		if ((decimate==1) || (image.width()/decimate>glInfo.maxTextureSize) || (image.height()/decimate>glInfo.maxTextureSize))
+		if (decimate == 1 || width > glInfo.maxTextureSize || height > glInfo.maxTextureSize)
 			qWarning().nospace() << "Got a texture with too large dimensions: "
-							 << image.width() << "x" << image.height()
-							 << ", while maximum size is " << glInfo.maxTextureSize
-							 << ". Shrinking to fit in the limit.";
+			                     << image.width() << "x" << image.height()
+			                     << ", while maximum size is " << glInfo.maxTextureSize
+			                     << ". Shrinking to fit in the limit.";
 		image = image.scaled(width, height, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
 	}
 
@@ -312,9 +318,9 @@ QByteArray StelTexture::convertToGLFormat(QImage image, GLint& format, GLint& ty
 		format = GL_RGB;
 	type = GL_UNSIGNED_BYTE;
 	int bpp = format == GL_LUMINANCE_ALPHA ? 2 :
-						  format == GL_LUMINANCE ? 1 :
-									    format == GL_RGBA ? 4 :
-												 3;
+	          format == GL_LUMINANCE ? 1 :
+	          format == GL_RGBA ? 4 :
+	                          3;
 
 	ret.reserve(width * height * bpp);
 	QImage tmp = image.convertToFormat(QImage::Format_ARGB32);
@@ -357,7 +363,7 @@ bool StelTexture::glLoad(const GLData& data)
 {
 	if (data.data.isEmpty())
 	{
-		reportError(data.loaderError.isEmpty()?"Unknown error":data.loaderError);
+		reportError(data.loaderError.isEmpty() ? "Unknown error" : data.loaderError);
 		return false;
 	}
 
@@ -374,7 +380,8 @@ bool StelTexture::glLoad(const GLData& data)
 	gl->glGetIntegerv(GL_MAX_TEXTURE_SIZE,&maxSize);
 	if(maxSize < width || maxSize < height)
 	{
-		reportError(QString("Texture size (%1/%2) is larger than GL_MAX_TEXTURE_SIZE (%3)!").arg(width).arg(height).arg(maxSize));
+		reportError(QString("Texture size (%1/%2) is larger than GL_MAX_TEXTURE_SIZE (%3)!")
+		                .arg(width).arg(height).arg(maxSize));
 		return false;
 	}
 
@@ -411,14 +418,15 @@ bool StelTexture::glLoad(const GLData& data)
 
 	//do pixel transfer
 	gl->glTexImage2D(GL_TEXTURE_2D, 0, data.format, width, height, 0, static_cast<GLenum>(data.format),
-			 static_cast<GLenum>(data.type), data.data.constData());
+	                 static_cast<GLenum>(data.type), data.data.constData());
 
 	//for now, assume full sized 8 bit GL formats used internally
 	glSize = static_cast<uint>(data.data.size());
 
 #ifndef NDEBUG
 	if (qApp->property("verbose") == true)
-		qDebug()<<"StelTexture"<<id<<"uploaded, total memory usage "<<textureMgr->glMemoryUsage / (1024.0 * 1024.0)<<"MB";
+		qDebug() << "StelTexture" << id << "uploaded, total memory usage "
+		         << textureMgr->glMemoryUsage / (1024.0 * 1024.0) << "MB";
 #endif
 
 	//restore old value
@@ -428,7 +436,8 @@ bool StelTexture::glLoad(const GLData& data)
 	gl->glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, loadParams.wrapMode);
 	if (loadParams.generateMipmaps)
 	{
-		gl->glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, loadParams.filterMipmaps ? GL_LINEAR_MIPMAP_LINEAR : GL_LINEAR_MIPMAP_NEAREST);
+		gl->glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER,
+		                    loadParams.filterMipmaps ? GL_LINEAR_MIPMAP_LINEAR : GL_LINEAR_MIPMAP_NEAREST);
 
 		const auto conf = StelApp::getInstance().getSettings();
 		const GLint desiredAnisotropyLevel = conf->value("video/anisotropic_filtering", 16).toUInt();

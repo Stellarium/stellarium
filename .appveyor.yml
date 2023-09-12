@@ -16,12 +16,12 @@ skip_commits:
   files:
     - guide/*
 # Maximum number of concurrent jobs for the project
-max_jobs: 4
+max_jobs: 5
 # environment variables
 environment:
   matrix:
   - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
-    qtver: 6.4
+    qtver: 6.5
     qtbin: msvc2019_64
     msvcname: Visual Studio 16 2019
   - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
@@ -36,6 +36,7 @@ environment:
 before_build:
   - ps: if($env:qtbin.contains('_64')) { $env:BITS=64 } else { $env:BITS=32 }
   - ps: if($env:qtbin.contains('_64')) { $env:cmake_args:="-A x64" }
+  - ps: if($env:qtver.contains('6.')) { $env:SSL="OpenSSL-" } else { $env:SSL="OpenSSL-1-" }
   - set PUBLISH_BINARY=false
   - set USE_EXT_LIBGLES=false
   - set SIGNING=false
@@ -52,7 +53,7 @@ before_build:
   - if [%PUBLISH_BINARY%]==[true] appveyor DownloadFile https://github.com/Stellarium/stellarium-data/releases/download/guide/guide.pdf -FileName c:\stellarium\guide\guide.pdf
   - if [%PUBLISH_BINARY%]==[true] mkdir c:\stellarium-OpenSSL
   - if [%PUBLISH_BINARY%]==[true] set PATH=C:\stellarium-OpenSSL;%PATH%
-  - if [%PUBLISH_BINARY%]==[true] appveyor DownloadFile https://github.com/Stellarium/stellarium-data/releases/download/qt-5.6/OpenSSL-Win%BITS%.zip -FileName c:\stellarium-OpenSSL.zip
+  - if [%PUBLISH_BINARY%]==[true] appveyor DownloadFile https://github.com/Stellarium/stellarium-data/releases/download/qt-5.6/%SSL%Win%BITS%.zip -FileName c:\stellarium-OpenSSL.zip
   - if [%PUBLISH_BINARY%]==[true] 7z e c:\stellarium-OpenSSL.zip -aoa -oc:\stellarium-OpenSSL
   - mkdir stellarium-%qtver%-%qtbin%
   - cd c:\stellarium

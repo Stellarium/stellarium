@@ -157,15 +157,12 @@ int main(int argc, char **argv)
 	}
 #endif
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 10, 0)
-	// Seed the PRNG. Later Qt versions use qApp->randomGenerator
-	qsrand(QDateTime::currentMSecsSinceEpoch());
-#endif
 	QCoreApplication::setApplicationName("stellarium");
 	QCoreApplication::setApplicationVersion(StelUtils::getApplicationPublicVersion());
 	QCoreApplication::setOrganizationDomain("stellarium.org");
 	QCoreApplication::setOrganizationName("stellarium");
 
+	QCoreApplication::setAttribute(Qt::AA_CompressHighFrequencyEvents);
 	// Support high DPI pixmaps and fonts
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 	QCoreApplication::setAttribute(Qt::AA_UseHighDpiPixmaps, true);
@@ -189,7 +186,6 @@ int main(int argc, char **argv)
 	// This must be run before QGuiApplication, otherwise it'll have no effect.
 	CLIProcessor::parseCLIArgsPreQApp(argList);
 
-	QCoreApplication::setAttribute(Qt::AA_CompressHighFrequencyEvents);
 #ifndef USE_QUICKVIEW
 	QApplication::setStyle(QStyleFactory::create("Fusion"));
 	// The QApplication MUST be created before the StelFileMgr is initialized.
@@ -223,7 +219,7 @@ int main(int argc, char **argv)
 
 	// add contents of STEL_OPTS environment variable.
 	QString envStelOpts(qgetenv("STEL_OPTS").constData());
-	if (envStelOpts.length()>0)
+	if (!envStelOpts.isEmpty())
 	{
 		argList+= envStelOpts.split(" ");
 		argStr += " " + envStelOpts;
@@ -236,7 +232,20 @@ int main(int argc, char **argv)
 	CLIProcessor::parseCLIArgsPreConfig(argList);
 
 	// Start logging.
-	StelLogger::init(StelFileMgr::getUserDir()+"/log.txt");
+	QString logName("log.txt");
+	try
+	{
+		logName = CLIProcessor::argsGetOptionWithArg(argList, "-l", "--log-file", "log.txt").toString();
+		// Strip external paths!
+		QFileInfo fi(logName);
+		logName=fi.fileName();
+	}
+	catch (std::runtime_error& e)
+	{
+		qWarning() << "WARNING: while processing --log-file option: " << e.what() << ". Using \"log.txt\"";
+		logName = "log.txt";
+	}
+	StelLogger::init(StelFileMgr::getUserDir()+"/"+logName);
 	StelLogger::writeLog(argStr);
 
 	// OK we start the full program.
@@ -248,12 +257,12 @@ int main(int argc, char **argv)
 	qDebug() << qPrintable(QString("[ %1 ]").arg(versionLine.leftJustified(maxLength, ' ')));
 	qDebug() << qPrintable(QString("[ %1 ]").arg(copyrightLine.leftJustified(maxLength, ' ')));
 	qDebug() << qPrintable(QString(" %1").arg(QString().fill('-', maxLength+2)));
-	qDebug() << "Writing log file to:" << QDir::toNativeSeparators(StelLogger::getLogFileName());
+	qDebug().noquote() << "Writing log file to:" << QDir::toNativeSeparators(StelLogger::getLogFileName());
 	qDebug() << "File search paths:";
 	int n=0;
 	for (const auto& i : StelFileMgr::getSearchPaths())
 	{
-		qDebug() << " " << n << ". " << QDir::toNativeSeparators(i);
+		qDebug().noquote().nospace() << " [" << n << "]: " << QDir::toNativeSeparators(i);
 		++n;
 	}
 
@@ -265,7 +274,7 @@ int main(int argc, char **argv)
 	}
 	catch (std::runtime_error& e)
 	{
-		qWarning() << "WARNING: while looking for --config-file option: " << e.what() << ". Using \"config.ini\"";
+		qWarning().noquote() << "WARNING: while looking for --config-file option:" << e.what() << ". Using \"config.ini\"";
 		configName = "config.ini";
 	}
 
@@ -302,7 +311,7 @@ int main(int argc, char **argv)
 				if (v1==0 && v2<6)
 				{
 					// The config file is too old to try an import
-					qDebug() << "The current config file is from a version too old for parameters to be imported ("
+					qDebug().noquote() << "The current config file is from a version too old for parameters to be imported ("
 							 << (version.isEmpty() ? "<0.6.0" : version) << ").\n"
 							 << "It will be replaced by the default config file.";
 					restoreDefaultConfigFile = true;
@@ -329,19 +338,19 @@ int main(int argc, char **argv)
 			QFile(configFileFullPath).rename(backupFile);
 			copyDefaultConfigFile(configFileFullPath);
 			confSettings = new QSettings(configFileFullPath, StelIniFormat);
-			qWarning() << "Resetting defaults config file. Previous config file was backed up in " << QDir::toNativeSeparators(backupFile);
+			qWarning().noquote() << "Resetting defaults config file. Previous config file was backed up in" << QDir::toNativeSeparators(backupFile);
 			clearCache();
 		}
 	}
 	else
 	{
-		qDebug() << "Config file " << QDir::toNativeSeparators(configFileFullPath) << " does not exist. Copying the default file.";
+		qDebug().noquote() << "Config file" << QDir::toNativeSeparators(configFileFullPath) << "does not exist. Copying the default file.";
 		copyDefaultConfigFile(configFileFullPath);
 		confSettings = new QSettings(configFileFullPath, StelIniFormat);
 	}
 
 	Q_ASSERT(confSettings);
-	qDebug() << "Config file is: " << QDir::toNativeSeparators(configFileFullPath);
+	qDebug().noquote() << "Config file:" << QDir::toNativeSeparators(configFileFullPath);
 
 	QSurfaceFormat::setDefaultFormat(StelMainView::getDesiredGLFormat(confSettings));
 
@@ -357,10 +366,9 @@ int main(int argc, char **argv)
 
 	// Add the Noto & DejaVu fonts that we use everywhere in the program
 	const QStringList customFonts = { "NotoSans-Regular.ttf", "NotoSansMono-Regular.ttf", "NotoSansSC-Regular.otf", "DejaVuSans.ttf", "DejaVuSansMono.ttf" };
-	QString customFont;
-	for (auto font: qAsConst(customFonts))
+	for (auto &font: qAsConst(customFonts))
 	{
-		customFont = StelFileMgr::findFile(QString("data/%1").arg(font));
+		QString customFont = StelFileMgr::findFile(QString("data/%1").arg(font));
 		if (!customFont.isEmpty())
 			QFontDatabase::addApplicationFont(customFont);
 	}
@@ -372,7 +380,7 @@ int main(int argc, char **argv)
 		if (!afName.isEmpty() && !afName.contains("file not found"))
 			QFontDatabase::addApplicationFont(afName);
 		else
-			qWarning() << "ERROR while loading custom font " << QDir::toNativeSeparators(fileFont);
+			qWarning().noquote() << "ERROR while loading custom font:" << QDir::toNativeSeparators(fileFont);
 	}
 
 	// Set the default application font and font size.
@@ -394,7 +402,7 @@ int main(int argc, char **argv)
 	int screen = confSettings->value("video/screen_number", 0).toInt();
 	if (screen < 0 || screen >= qApp->screens().count())
 	{
-		qWarning() << "WARNING: screen" << screen << "not found";
+		qWarning().noquote() << "WARNING: screen" << screen << "not found";
 		screen = 0;
 	}
 	const auto qscreen = qApp->screens().at(screen);
@@ -411,8 +419,7 @@ int main(int argc, char **argv)
 	if (fullscreen)
 	{
 		// The "+1" below is to work around Linux/Gnome problem with mouse focus.
-		mainWin.move(screenGeom.x()+1,
-					 screenGeom.y()+1);
+		mainWin.move(screenGeom.x()+1, screenGeom.y()+1);
 		// The fullscreen window appears on screen where is the majority of
 		// the normal window. Therefore we crop the normal window to the
 		// screen area to ensure that the majority is not on another screen.
@@ -424,7 +431,7 @@ int main(int argc, char **argv)
 		const int x = confSettings->value("video/screen_x", 0).toInt();
 		const int y = confSettings->value("video/screen_y", 0).toInt();
 		mainWin.move(screenGeom.x() + x/pixelRatio,
-					 screenGeom.y() + y/pixelRatio);
+			     screenGeom.y() + y/pixelRatio);
 	}
 
 	mainWin.show();

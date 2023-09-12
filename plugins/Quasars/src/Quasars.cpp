@@ -194,11 +194,11 @@ void Quasars::init()
 	}
 	else
 	{
-		qDebug() << "[Quasars] quasars.json does not exist - copying default file to" << QDir::toNativeSeparators(catalogJsonPath);
+		qDebug().noquote() << "[Quasars] quasars.json does not exist - copying default file to" << QDir::toNativeSeparators(catalogJsonPath);
 		restoreDefaultJsonFile();
 	}
 
-	qDebug() << "[Quasars] Loading catalog file:" << QDir::toNativeSeparators(catalogJsonPath);
+	qDebug().noquote() << "[Quasars] Loading catalog file:" << QDir::toNativeSeparators(catalogJsonPath);
 
 	readJsonFile();
 
@@ -659,7 +659,7 @@ void Quasars::startDownload(QString urlString)
 	request.setUrl(QUrl(updateUrl));
 	request.setRawHeader("User-Agent", StelUtils::getUserAgentString().toUtf8());
 #if (QT_VERSION<QT_VERSION_CHECK(6,0,0))
-	request.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);
+	request.setAttribute(QNetworkRequest::RedirectPolicyAttribute, true);
 #endif
 	downloadReply = networkManager->get(request);
 	connect(downloadReply, SIGNAL(downloadProgress(qint64,qint64)), this, SLOT(updateDownloadProgress(qint64,qint64)));

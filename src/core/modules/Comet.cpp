@@ -32,6 +32,7 @@
 #include "StelMovementMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "LandscapeMgr.hpp"
+#include "StelLocaleMgr.hpp"
 
 #include <QDebug>
 #include <QElapsedTimer>
@@ -87,7 +88,11 @@ Comet::Comet(const QString& englishName,
 		  pTypeStr),
 	  slopeParameter(-10.f), // -10 == uninitialized: used in getVMagnitude()
 	  isCometFragment(false),
-	  nameIsProvisionalDesignation(false),
+	  iauDesignation(""),
+	  extraDesignations(),
+	  extraDesignationsHtml(),
+	  discoverer(""),
+	  discoveryDate(""),
 	  tailFactors(-1., -1.), // mark "invalid"
 	  tailActive(false),
 	  tailBright(false),
@@ -121,7 +126,7 @@ void Comet::setAbsoluteMagnitudeAndSlope(const float magnitude, const float slop
 	if ((slope < -2.5f) || (slope > 25.0f))
 	{
 		// Slope G can become slightly smaller than 0. -10 is mark of invalidity.
-		qDebug() << "Warning: Suspect slope parameter value" << slope << "for comet" << englishName << "(rarely exceeding -1...20)";
+		qDebug() << "Warning: Suspect slope parameter value" << slope << "for comet" << getEnglishName() << "(rarely exceeding -1...20)";
 		return;
 	}
 	absoluteMagnitude = magnitude;
@@ -130,7 +135,35 @@ void Comet::setAbsoluteMagnitudeAndSlope(const float magnitude, const float slop
 
 void Comet::translateName(const StelTranslator &translator)
 {
-	nameI18 = translator.qtranslate(englishName, "comet");
+	static const QRegularExpression cometNamePattern("^(.+)[(](.+)[)]\\s*$");
+	QRegularExpressionMatch matchCometName = cometNamePattern.match(englishName);
+	if (matchCometName.hasMatch())
+		nameI18 = QString("%1(%2)").arg(matchCometName.captured(1),translator.qtranslate(matchCometName.captured(2), "comet"));
+	else
+		nameI18 = translator.qtranslate(englishName, "comet");
+}
+
+QString Comet::getInfoStringName(const StelCore *core, const InfoStringGroup& flags) const
+{
+	Q_UNUSED(core) Q_UNUSED(flags)
+	QString str;
+	QTextStream oss(&str);
+
+	oss << "<h2>";
+	oss << getNameI18n(); // UI translation can differ from sky translation
+
+	if (!getExtraDesignations().isEmpty())
+		oss << QString(" - %1").arg(extraDesignationsHtml.join(" - "));
+
+	if (sphereScale != 1.)
+	{
+		oss.setRealNumberNotation(QTextStream::FixedNotation);
+		oss.setRealNumberPrecision(1);
+		oss << QString::fromUtf8(" (\xC3\x97") << sphereScale << ")";
+	}
+	oss << "</h2>";
+
+	return str;
 }
 
 QString Comet::getInfoStringAbsoluteMagnitude(const StelCore *core, const InfoStringGroup& flags) const
@@ -199,9 +232,15 @@ QString Comet::getInfoStringSize(const StelCore *core, const InfoStringGroup &fl
 // Nothing interesting?
 QString Comet::getInfoStringExtra(const StelCore *core, const InfoStringGroup &flags) const
 {
-	Q_UNUSED(core) Q_UNUSED(flags)
-
-	return QString();
+	Q_UNUSED(core)
+	QString str;
+	QTextStream oss(&str);
+	if (flags&Extra)
+	{
+		if (!discoveryDate.isEmpty())
+			oss << QString("%1: %2<br/>").arg(q_("Discovered"), getDiscoveryCircumstances());
+	}
+	return str;
 }
 
 QVariantMap Comet::getInfoMap(const StelCore *core) const
@@ -211,6 +250,15 @@ QVariantMap Comet::getInfoMap(const StelCore *core) const
 	map.insert("coma-diameter-km", tailFactors[0]*AUf);
 
 	return map;
+}
+
+QString Comet::getDiscoveryCircumstances() const
+{
+	QString ddate = StelUtils::localeDiscoveryDateString(discoveryDate);
+	if (discoverer.isEmpty())
+		return ddate;
+	else
+		return QString("%1 (%2)").arg(ddate, discoverer);
 }
 
 double Comet::getSiderealPeriod() const
@@ -255,7 +303,7 @@ void Comet::update(int deltaTime)
 	StelCore* core=StelApp::getInstance().getCore();
 	double dateJDE=core->getJDE();
 
-	if (!static_cast<KeplerOrbit*>(orbitPtr)->objectDateValid(dateJDE)) return; // don't do anything if out of useful date range. This allows having hundreds of comet elements.
+	if (!static_cast<KeplerOrbit*>(orbitPtr)->objectDateGoodEnoughForOrbits(dateJDE)) return; // don't do anything if out of useful date range. This allows having hundreds of comet elements.
 
 	//GZ: I think we can make deltaJDtail adaptive, depending on distance to sun! For some reason though, this leads to a crash!
 	//deltaJDtail=StelCore::JD_SECOND * qBound(1.0, eclipticPos.length(), 20.0);
@@ -413,7 +461,7 @@ void Comet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont
 	{
 		return;
 	}
-	if (!static_cast<KeplerOrbit*>(orbitPtr)->objectDateValid(core->getJDE())) return; // don't draw at all if out of useful date range. This allows having hundreds of comet elements.
+	if (!static_cast<KeplerOrbit*>(orbitPtr)->objectDateGoodEnoughForOrbits(core->getJDE())) return; // don't draw at all if out of useful date range. This allows having hundreds of comet elements.
 
 	Mat4d mat = Mat4d::translation(eclipticPos+aberrationPush) * rotLocalToParent;
 	// This removed totally the Planet shaking bug!!!
@@ -448,10 +496,13 @@ void Comet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont
 	else
 		if (!projectionValid && prj.data()->getNameI18() == q_("Orthographic"))
 			return; // End prematurely. This excludes bad "ghost" comet tail on the wrong hemisphere in ortho projection! Maybe also Fisheye, but it's less problematic.
+	else if (permanentDrawingOrbits) // A special case for demos
+			drawOrbit(core);
+
 
 	// If comet is too faint to be seen, don't bother rendering. (Massive speedup if people have hundreds of comets!)
 	// This test moved here so that hints are still drawn.
-	if ((getVMagnitude(core)-3.0f) > core->getSkyDrawer()->getLimitMagnitude())
+	if ((getVMagnitude(core)-5.0f) > core->getSkyDrawer()->getLimitMagnitude())
 	{
 		return;
 	}
@@ -598,4 +649,42 @@ void Comet::computeParabola(const float parameter, const float radius, const flo
 	}
 	createTailIndices=false;
 	createTailTextureCoords=false;
+}
+
+void Comet::setIAUDesignation(const QString& designation)
+{
+	static const QRegularExpression periodicDesignationPattern("^(\\d+)P/");
+	static const QRegularExpression periodicCometPattern("^P/([\\w\\s]+)$");
+	QRegularExpressionMatch matchPeriodicNumber = periodicDesignationPattern.match(englishName);
+	QRegularExpressionMatch matchPeriodicComet  = periodicCometPattern.match(designation);
+	if (matchPeriodicNumber.hasMatch() && matchPeriodicComet.hasMatch())
+	{
+		// combined designation for numbered periodic comets - 1P/1982 U1 or 146P/1984 W1
+		iauDesignation = QString("%1P/%2").arg(matchPeriodicNumber.captured(1), matchPeriodicComet.captured(1));
+	}
+	else
+		iauDesignation = designation;
+}
+
+void Comet::setExtraDesignations(QStringList codes)
+{
+	extraDesignations = codes;
+	for (const auto& c : codes)
+	{
+		extraDesignationsHtml << renderDiscoveryDesignationHtml(c);
+	}
+}
+
+QString Comet::renderDiscoveryDesignationHtml(const QString &plainTextName)
+{
+	static const QRegularExpression discoveryDesignationPattern("^(\\d{4}[a-z]{1})(\\d+)$");
+	QRegularExpressionMatch match=discoveryDesignationPattern.match(plainTextName);
+	if (match.hasMatch())
+	{
+		QString main = match.captured(1);
+		QString suffix = match.captured(2);
+		return (QString("%1<sub>%2</sub>").arg(main, suffix));
+	}
+	else
+		return plainTextName;
 }

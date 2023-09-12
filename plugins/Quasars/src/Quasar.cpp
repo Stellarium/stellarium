@@ -150,6 +150,7 @@ QString Quasar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 			oss << QString("%1: %2 %3").arg(q_("Radio flux density around 1.4GHz (21cm)"), QString::number(f20, 'f', 3), sfd) << "<br />";
 	}
 
+	oss << getSolarLunarInfoString(core, flags);
 	postProcessInfoString(str, flags);
 	return str;
 }
@@ -189,11 +190,6 @@ float Quasar::getSelectPriority(const StelCore* core) const
 		mag = 4.f;
 
 	return mag;
-}
-
-void Quasar::update(double deltaTime)
-{
-	labelsFader.update(static_cast<int>(deltaTime*1000));
 }
 
 void Quasar::draw(StelCore* core, StelPainter& painter)
@@ -239,7 +235,7 @@ void Quasar::draw(StelCore* core, StelPainter& painter)
 			painter.setColor(color[0], color[1], color[2], 1);
 		}
 
-		if (labelsFader.getInterstate()<=0.f && !distributionMode && (mag+2.f)<mlimit)
+		if (!distributionMode && (mag+2.f)<mlimit)
 			painter.drawText(getJ2000EquatorialPos(core), designation, 0, shift, shift, false);
 	}
 }

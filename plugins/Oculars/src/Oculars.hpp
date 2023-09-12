@@ -28,6 +28,7 @@
 #include "SolarSystem.hpp"
 #include "StelModule.hpp"
 #include "StelTextureTypes.hpp"
+#include "StelProjectorType.hpp"
 #include "Telescope.hpp"
 #include "VecMath.hpp"
 
@@ -391,6 +392,20 @@ private:
 	//! Returns TRUE if at least one bincular is defined.
 	bool isBinocularDefined();
 
+	/*! \brief Renders circles of constant angular radii
+	 *  \param angularRadii angular radii of the circles in radians
+	 */
+	void drawCirclesOfConstantAngularRadii(StelPainter& sPainter, const Mat4f& derotate, const std::vector<float>& angularRadii);
+	//! Renders off-axis guider frame and its inner and outer circles
+	void drawOAG(const StelProjectorP& projector, const Mat4f& derotate, const CCD& ccd, const Lens* lens);
+	//! Renders the actual rectangles corresponding to the CCD frame and the crop overlay with its grid.
+	//! \param frameUpDir window-space vector pointing in the "up" direction of the sensor frame
+	//! \param frameRightDir window-space vector pointing in the "right" direction of the sensor frame
+	//! \param frameCenter window-space position of the center of the sensor frame
+	//! \return bounding rect of the main sensor frame, relative to the center of the sensor, without rotation.
+	QRect drawSensorFrameAndOverlay(const StelProjectorP& projector, const Mat4f& derotate, const Vec2f& frameUpDir,
+	                                const Vec2f& frameRightDir, const Vec2f& frameCenter, const CCD& ccd,
+	                                const Lens* lens, const QSize& overlaySize);
 	//! Renders the CCD bounding box on-screen.  A telescope must be selected, or this call does nothing.
 	void paintCCDBounds();
 	//! Renders crosshairs into the viewport.
@@ -581,7 +596,7 @@ class OcularsStelPluginInterface : public QObject, public StelPluginInterface
 public:
 	virtual StelModule* getStelModule() const Q_DECL_OVERRIDE;
 	virtual StelPluginInfo getPluginInfo() const Q_DECL_OVERRIDE;
-	virtual QObjectList getExtensionList() const Q_DECL_OVERRIDE { return QObjectList(); }
+	//virtual QObjectList getExtensionList() const Q_DECL_OVERRIDE { return QObjectList(); }
 };
 
 #endif /* OCULARS_HPP */

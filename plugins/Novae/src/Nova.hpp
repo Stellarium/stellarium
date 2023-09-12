@@ -27,7 +27,6 @@
 #include <QDateTime>
 
 #include "StelObject.hpp"
-#include "StelFader.hpp"
 #include "StelTranslator.hpp"
 
 class StelPainter;
@@ -95,8 +94,6 @@ public:
 	virtual QString getEnglishName(void) const Q_DECL_OVERRIDE;
 	QString getDesignation(void) const;
 
-	void update(double deltaTime);
-
 private:
 	bool initialized;
 
@@ -119,7 +116,7 @@ private:
 	double Dec;			//! Dec. for the nova
 	double distance;		//! Distance to nova (10^3 ly)
 
-	LinearFader labelsFader;
+	static bool syncShowLabels;
 
 	QString getMaxBrightnessDate(const double JD) const;
 };

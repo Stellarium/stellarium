@@ -107,9 +107,6 @@ public:
 	//! Constructor from a QStringList like { "2", "4" } or { "2.1", "4.2", "6.3" }
 	explicit Vector2(QStringList s);
 
-	//! Assignment from array
-	//! @warning Does not check array size, make sure it has at least 2 elements
-	inline Vector2<T>& operator=(const T*);
 	inline void set(T, T);
 
 	inline bool operator==(const Vector2<T>&) const;
@@ -117,8 +114,8 @@ public:
 
 	inline const T& operator[](int x) const;
 	inline T& operator[](int);
-	inline operator const T*() const;
-	inline operator T*();
+	explicit inline operator const T*() const;
+	explicit inline operator T*();
 
 	inline Vector2<T>& operator+=(const Vector2<T>&);
 	inline Vector2<T>& operator-=(const Vector2<T>&);
@@ -202,9 +199,6 @@ public:
 
 	//inline Vector3& operator=(const Vector3&);
 
-	//! Assignment from array
-	//! @warning Does not check array size, make sure it has at least 2 elements
-	inline Vector3& operator=(const T*);
 	//template <class T2> inline Vector3& operator=(const Vector3<T2>&);
 	inline void set(T, T, T);
 
@@ -220,8 +214,8 @@ public:
 
 	inline T& operator[](int);
 	inline const T& operator[](int) const;
-	inline operator const T*() const;
-	inline operator T*();
+	explicit inline operator const T*() const;
+	explicit inline operator T*();
 	inline const T* data() const {return v;}
 	inline T* data() {return v;}
 
@@ -322,8 +316,6 @@ public:
 	//! Constructor from a QColor
 	explicit Vector4(QColor c);
 
-	inline Vector4& operator=(const Vector3<T>&);
-	inline Vector4& operator=(const T*);
 	inline void set(T, T, T, T);
 
 	inline bool operator==(const Vector4<T>&) const;
@@ -331,8 +323,8 @@ public:
 
 	inline T& operator[](int);
 	inline const T& operator[](int) const;
-	inline operator T*();
-	inline operator const T*() const;
+	explicit inline operator T*();
+	explicit inline operator const T*() const;
 
 	inline void operator+=(const Vector4<T>&);
 	inline void operator-=(const Vector4<T>&);
@@ -374,6 +366,8 @@ public:
 	QString toStr() const;
 	//! Convert to a QColor.
 	QColor toQColor() const;
+	//! Convert to a QVector4D.
+	QVector4D toQVector() const;
 
 	T v[4];		// The 4 values
 };
@@ -393,8 +387,9 @@ public:
 	inline void set(T,T,T,T,T,T,T,T,T);
 
 	inline T& operator[](int);
-	inline operator T*();
-	inline operator const T*() const;
+	inline T operator[](int) const;
+	explicit inline operator T*();
+	explicit inline operator const T*() const;
 
 	inline Matrix3 operator-(const Matrix3<T>&) const;
 	inline Matrix3 operator+(const Matrix3<T>&) const;
@@ -442,8 +437,9 @@ public:
 	inline void set(T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T);
 
 	inline T& operator[](int);
-	inline operator T*();
-	inline operator const T*() const;
+	inline T operator[](int) const;
+	explicit inline operator T*();
+	explicit inline operator const T*() const;
 
 	inline Matrix4 operator-(const Matrix4<T>&) const;
 	inline Matrix4 operator+(const Matrix4<T>&) const;
@@ -544,12 +540,6 @@ template <class T> template <class T2> Vector2<T>::Vector2(const Vector2<T2>& ot
 template<class T> Vector2<T>::Vector2(T x, T y)
 {
 	v[0]=x; v[1]=y;
-}
-
-template<class T> Vector2<T>& Vector2<T>::operator=(const T* a)
-{
-	v[0]=a[0]; v[1]=a[1];
-	return *this;
 }
 
 template<class T> void Vector2<T>::set(T x, T y)
@@ -748,12 +738,6 @@ template<class T> Vector3<T>::Vector3(T x, T y, T z)
 //	v[0]=a.v[0]; v[1]=a.v[1]; v[2]=a.v[2];
 //	return *this;
 //}
-
-template<class T> Vector3<T>& Vector3<T>::operator=(const T* a)
-{
-	v[0]=a[0]; v[1]=a[1]; v[2]=a[2];
-	return *this;
-}
 
 template<class T> void Vector3<T>::set(T x, T y, T z)
 {
@@ -973,18 +957,6 @@ template<class T> Vector4<T>::Vector4(T x, T y, T z, T a)
 	v[0]=x; v[1]=y; v[2]=z; v[3]=a;
 }
 
-template<class T> Vector4<T>& Vector4<T>::operator=(const Vector3<T>& a)
-{
-	v[0]=a.v[0]; v[1]=a.v[1]; v[2]=a.v[2]; v[3]=1;
-	return *this;
-}
-
-template<class T> Vector4<T>& Vector4<T>::operator=(const T* a)
-{
-	v[0]=a[0]; v[1]=a[1]; v[2]=a[2]; v[3]=a[3];
-	return *this;
-}
-
 template<class T> void Vector4<T>::set(T x, T y, T z, T a)
 {
 	v[0]=x; v[1]=y; v[2]=z; v[3]=a;
@@ -1135,6 +1107,11 @@ template<class T> void Matrix3<T>::set(T a, T b, T c, T d, T e, T f, T g, T h, T
 }
 
 template<class T> T& Matrix3<T>::operator[](int n)
+{
+	return r[n];
+}
+
+template<class T> T Matrix3<T>::operator[](int n) const
 {
 	return r[n];
 }
@@ -1363,6 +1340,11 @@ template<class T> void Matrix4<T>::set(T a, T b, T c, T d, T e, T f, T g, T h, T
 }
 
 template<class T> T& Matrix4<T>::operator[](int n)
+{
+	return r[n];
+}
+
+template<class T> T Matrix4<T>::operator[](int n) const
 {
 	return r[n];
 }
@@ -1890,6 +1872,27 @@ inline Mat4d toMat4d(const Mat4f& md)
 	for(size_t n = 0; n < std::size(md.r); ++n)
 		out.r[n] = static_cast<double>(md.r[n]);
 	return out;
+}
+
+template<typename T> Vector2<T> normalize(const Vector2<T>& v)
+{
+	auto vn = v;
+	vn.normalize();
+	return vn;
+}
+
+template<typename T> Vector3<T> normalize(const Vector3<T>& v)
+{
+	auto vn = v;
+	vn.normalize();
+	return vn;
+}
+
+template<typename T> Vector4<T> normalize(const Vector4<T>& v)
+{
+	auto vn = v;
+	vn.normalize();
+	return vn;
 }
 
 #endif // VECMATH_HPP

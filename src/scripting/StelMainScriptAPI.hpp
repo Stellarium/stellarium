@@ -259,6 +259,7 @@ public slots:
 	//! - phase-angle : phase angle of object in radians (for Solar system objects only!)
 	//! - phase-angle-dms : phase angle of object in DMS (for Solar system objects only!)
 	//! - phase-angle-deg : phase angle of object in decimal degrees (for Solar system objects only!)
+	//! - is-waning : whether phase angle is increasing, signifying the waning phase (for Solar system objects only!)
 	//! - elongation : elongation of object in radians (for Solar system objects only!)
 	//! - elongation-dms : elongation of object in DMS (for Solar system objects only!)
 	//! - elongation-deg : elongation of object in decimal degrees (for Solar system objects only!)
@@ -445,6 +446,21 @@ public slots:
 	//! Return an array of all timezone names valid for setTimezone(tzName)
 	static QStringList getAllTimezoneNames();
 
+	//! Coordinate conversion: geographic (WGS84)-->UTM
+	//! @arg longitude geographic longitude from Greenwich, degrees
+	//! @arg latitude geographic latitude from equator, degrees
+	//! @arg zone UTM zone [1...60]. If 0, compute best-fit zone.
+	//! @return {{E[m], N[m], zone, gamma[deg], k}}
+	//! The returned zone contains the input or, if input was 0 (or missing), the most appropriate zone. North or South is not returned but is trivially fround from latitude.
+	static QList<double> geo2utm(const double longitude, const double latitude, const int zone=0);
+	//! Coordinate conversion: UTM->geographic (WGS84)
+	//! @arg easting (metres). False Easting of Zone meridian = 500000
+	//! @arg northing (metres). For southern latitudes, equator = 10000000
+	//! @arg zone UTM zone (longitudinal) [1...60].
+	//! @arg north true for N, false for S latitude zones.
+	//! @return {{longitude[deg], latitude[deg], refLong[deg], gamma[deg], k}}
+	static QList<double> utm2geo(const double easting, const double northing, const int zone, const bool north);
+
 	//! Save a screenshot.
 	//! @param prefix the prefix for the file name to use
 	//! @param dir the path of the directory to save the screenshot in.  If
@@ -458,6 +474,10 @@ public slots:
 	//! provide the public slot "setGuiVisible(bool)".
 	//! @param b if true, show the GUI, if false, hide the GUI.
 	static void setGuiVisible(bool b);
+
+	//! Show or hide the selection pointers/markers
+	//! @param b if true, show the pointer/marker around selected objects, if false, hide the pointer/marker.
+	static void setSelectedObjectMarkerVisible(bool b);
 
 	//! Use a custom CSS for the GUI. This is a very advanced feature, designing CSS is an art.
 	//! To use properly, place a private copy of normalStyle.css into your user data directory and edit style, but leave structure as-is.
