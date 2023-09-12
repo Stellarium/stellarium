@@ -903,9 +903,11 @@ void ObsListDialog::editListButtonPressed()
  */
 void ObsListDialog::exportListButtonPressed()
 {
-	static const QString filter = "Stellarium Observing List (*.sol)";
+	static const QString filter = "Stellarium Single Observing List (*.sol);;Stellarium Observing List (*.ol)";
+	QString selectedFilter = "Stellarium Single Observing List (*.sol)";
 	QString exportListJsonPath = QFileDialog::getSaveFileName(nullptr, q_("Export observing list as..."),
-							     QDir::homePath() + "/" + JSON_FILE_BASENAME + "_" + currentListName + ".sol", filter);
+							     QDir::homePath() + "/" + JSON_FILE_BASENAME + "_" + currentListName + ".sol", filter, &selectedFilter);
+
 	QFile jsonFile(exportListJsonPath);
 	if (!jsonFile.open(QIODevice::ReadWrite | QIODevice::Text))
 	{
@@ -915,19 +917,29 @@ void ObsListDialog::exportListButtonPressed()
 		messageBox(q_("Error"), q_("Cannot export. See logfile for details."));
 		return;
 	}
-	// Prepare a new json-able map
-	QVariantMap exportJsonMap={
-		{KEY_DEFAULT_LIST_OLUD, ""}, // Do not	set a default in this list!
-		{KEY_SHORT_NAME, SHORT_NAME_VALUE},
-		{KEY_VERSION, FILE_VERSION}};
-
-	QVariantMap currentListMap={{selectedOlud, observingLists.value(selectedOlud).toMap()}};
-	//QVariantMap oneListMap={{KEY_OBSERVING_LISTS, currentListMap}};
-	//exportJsonMap.insert(KEY_OBSERVING_LISTS, oneListMap);
-	exportJsonMap.insert(KEY_OBSERVING_LISTS, currentListMap);
 
 	jsonFile.resize(0);
-	StelJsonParser::write(exportJsonMap, &jsonFile);
+	QFileInfo fi(exportListJsonPath);
+	if (fi.suffix()=="sol")
+	{
+		// Prepare a new json-able map
+		QVariantMap exportJsonMap={
+			{KEY_DEFAULT_LIST_OLUD, ""}, // Do not set a default in this list!
+			{KEY_SHORT_NAME, SHORT_NAME_VALUE},
+			{KEY_VERSION, FILE_VERSION}};
+
+		QVariantMap currentListMap={{selectedOlud, observingLists.value(selectedOlud).toMap()}};
+		//QVariantMap oneListMap={{KEY_OBSERVING_LISTS, currentListMap}};
+		//exportJsonMap.insert(KEY_OBSERVING_LISTS, oneListMap);
+		exportJsonMap.insert(KEY_OBSERVING_LISTS, currentListMap);
+		StelJsonParser::write(exportJsonMap, &jsonFile);
+	}
+	else
+	{
+		// just export complete map.
+		StelJsonParser::write(jsonMap, &jsonFile);
+	}
+
 	jsonFile.flush();
 	jsonFile.close();
 }
@@ -937,7 +949,7 @@ void ObsListDialog::exportListButtonPressed()
  */
 void ObsListDialog::importListButtonPressed()
 {
-	static const QString filter = "Stellarium Observing List (*.sol)";
+	static const QString filter = "Stellarium Single Observing List (*.sol);;Stellarium Observing List (*.ol);;Stellarium Legacy JSON Observing List or Bookmarks (*.json)";
 	QString fileToImportJsonPath = QFileDialog::getOpenFileName(nullptr, q_("Import observing list"),
 								    QDir::homePath(),
 								    filter);
@@ -958,7 +970,7 @@ void ObsListDialog::importListButtonPressed()
 
 			if (map.contains(KEY_OBSERVING_LISTS))
 			{
-				// Case of observingList import: Import all lists from that file!
+				// Case of observingList import: Import all lists from that file! A .sol only has one list but is else structured identically.
 				const QVariantMap observingListMapToImport = map.value(KEY_OBSERVING_LISTS).toMap();
 				if (observingListMapToImport.isEmpty())
 				{
@@ -974,7 +986,7 @@ void ObsListDialog::importListButtonPressed()
 						{
 							// check here to avoid overwriting of existing lists
 							bool overwrite=true;
-							if (observingLists.contains(it.key()))
+							if (observingLists.contains(it.key())) // Same OLUD?
 							{
 								QVariantMap importedMap=it.value().toMap(); // This is a map of {{UUID, QMap},...}
 								QString importedName=importedMap.value(KEY_NAME).toString();
@@ -985,7 +997,7 @@ void ObsListDialog::importListButtonPressed()
 								QString existingName=existingMap.value(KEY_NAME).toString();
 								QString existingDate=existingMap.value(KEY_CREATION_DATE).toString();
 								QString existingLastEdit=existingMap.value(KEY_LAST_EDIT, existingMap.value(KEY_CREATION_DATE)).toString();
-								QString message=QString(q_("A list named '%1', created %2 and last modified %3 would overwrite your existing list '%4', dated %5/%6. Accept?")).arg(importedName, importedDate, importedLastEditDate, existingName, existingDate, existingLastEdit);
+								QString message=QString(q_("A list named '%1', created %2 and last modified %3 would overwrite your existing list '%4', dated %5 and last modified %6. Accept?")).arg(importedName, importedDate, importedLastEditDate, existingName, existingDate, existingLastEdit);
 								overwrite=askConfirmation(message);
 							}
 							if (overwrite)
