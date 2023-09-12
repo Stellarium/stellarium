@@ -298,9 +298,7 @@ also section~\ref{sec:gui:configuration:tools} for more screenshot options.
 \section{Observing Lists (Bookmarks)}
 \label{sec:tour:bookmarks}
 
-You can store your favourite objects or views in observing lists. This
-feature extends the earlier bookmarks feature.
-
+You can store your favourite objects or views in observing lists. 
 Press \key{Alt+B} or \guibutton[0.75]{2.5}{bt_bookmarks.png} to call
 up the dialog.  A bookmarks file from previous versions will be
 imported and converted to the new format. You can however create an
@@ -319,14 +317,17 @@ a particular location. Likewise, the displayed landscape may be nice
 to restore. Additionally, the field of view may be relevant. To store
 these data and later retrieve them, use the respective checkboxes.
 
-You can also export the current list with the according
-button, or import such an exported list on another system. Lists are identified with an 
+You can also export the current list or all lists with the according
+button, or import such an exported list on another system. 
+To export the current list, keep the default \texttt{.sol} file type in the filename dialog.
+To export all your lists, use the \texttt{.ol} file type in the filename dialog.
+Lists are identified with an 
 Universally Unique Identifier (UUID) which we call OLUD (Observing List Unique Identifier). 
 On importing a list, existing lists with the same OLUD may be replaced after a warning. 
 During editing, storing a list with an existing name is prevented. 
 The list import may however import a list with an existing name as long as the OLUD is different. 
-To transfer all your lists to another system, copy, rename and import 
-(or just copy, to replace the existing) the full file \file{observingLists.json} 
+To transfer all your lists to another system, export them as \texttt{.ol} file, or
+copy, rename and import (or just copy, to replace the existing) the full file \file{observingLists.json} 
 from the \file{data/} subdirectory of your user directory (see section~\ref{sec:Directories}).
 
 
