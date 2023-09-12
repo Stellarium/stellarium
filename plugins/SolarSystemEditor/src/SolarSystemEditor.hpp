@@ -332,7 +332,7 @@ class SolarSystemEditorStelPluginInterface : public QObject, public StelPluginIn
 public:
 	StelModule* getStelModule() const override;
 	StelPluginInfo getPluginInfo() const override;
-	QObjectList getExtensionList() const override { return QObjectList(); }
+	//QObjectList getExtensionList() const override { return QObjectList(); }
 };
 
 #endif // SOLARSYSTEMEDITOR_HPP

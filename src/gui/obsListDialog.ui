@@ -259,6 +259,16 @@
         <item>
          <widget class="QLineEdit" name="creationDateLineEdit"/>
         </item>
+        <item>
+         <widget class="QLabel" name="lastEditLabel">
+          <property name="text">
+           <string>Last edit:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="lastEditLineEdit"/>
+        </item>
        </layout>
       </item>
       <item row="3" column="0">

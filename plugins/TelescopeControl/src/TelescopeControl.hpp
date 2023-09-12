@@ -517,7 +517,7 @@ class TelescopeControlStelPluginInterface : public QObject, public StelPluginInt
 public:
 	StelModule* getStelModule() const override;
 	StelPluginInfo getPluginInfo() const override;
-	QObjectList getExtensionList() const override { return QObjectList(); }
+	//QObjectList getExtensionList() const override { return QObjectList(); }
 };
 
 #endif /* TELESCOPECONTROL_HPP */
