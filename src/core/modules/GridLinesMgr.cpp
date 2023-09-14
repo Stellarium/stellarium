@@ -688,7 +688,7 @@ void SkyLine::init()
 
 void SkyLine::computeEclipticDatePartitions(int year)
 {
-	static GridLinesMgr* gMgr=GETSTELMODULE_SILENT(GridLinesMgr);
+	GridLinesMgr* gMgr=GETSTELMODULE_SILENT(GridLinesMgr);
 	if (gMgr && (! gMgr->getFlagEclipticDatesLabeled()))
 		return;
 
