@@ -62,7 +62,7 @@ const qint64 SYNC_MAX_MESSAGE_SIZE = SYNC_HEADER_SIZE + SYNC_MAX_PAYLOAD_SIZE;
 //! The classes handling these messages are defined in SyncMessages.hpp
 enum SyncMessageType
 {
-	ERROR, //sent to the other party on protocol/auth error with a message, connection will be dropped afterwards
+	SYNC_ERROR, //sent to the other party on protocol/auth error with a message, connection will be dropped afterwards
 	SERVER_CHALLENGE, //sent as a challenge to the client on establishment of connection
 	CLIENT_CHALLENGE_RESPONSE, //sent as a reply to the challenge
 	SERVER_CHALLENGERESPONSEVALID, //sent from the server to the client after valid client hello was received.

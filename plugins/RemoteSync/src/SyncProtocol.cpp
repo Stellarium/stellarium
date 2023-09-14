@@ -121,7 +121,7 @@ SyncRemotePeer::SyncRemotePeer(QAbstractSocket *socket, bool isServer, const QHa
 	connect(sock, SIGNAL(stateChanged(QAbstractSocket::SocketState)), this, SLOT(sockStateChanged(QAbstractSocket::SocketState)));
 
 	// silence CoverityScan...
-	msgHeader.msgType=SyncProtocol::ERROR;
+        msgHeader.msgType=SyncProtocol::SYNC_ERROR;
 	msgHeader.dataSize=0;
 
 	lastReceiveTime = QDateTime::currentMSecsSinceEpoch();
@@ -341,7 +341,7 @@ QString SyncMessage::toString() const
 QString SyncMessage::toString(SyncProtocol::SyncMessageType type)
 {
 	switch (type) {
-		case SyncProtocol::ERROR:
+            case SyncProtocol::SYNC_ERROR:
 			return "ERROR";
 			break;
 		case SyncProtocol::SERVER_CHALLENGE:

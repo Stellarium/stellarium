@@ -18,6 +18,9 @@
  */
 
 #include "SyncClientHandlers.hpp"
+#include "LandscapeMgr.hpp"
+#include "StelLocationMgr.hpp"
+#include "StelModuleMgr.hpp"
 #include "SyncClient.hpp"
 
 #include "SyncMessages.hpp"
@@ -29,12 +32,6 @@
 #include "StelPropertyMgr.hpp"
 
 using namespace SyncProtocol;
-
-ClientHandler::ClientHandler()
-	: client(nullptr)
-{
-	core = StelApp::getInstance().getCore();
-}
 
 ClientHandler::ClientHandler(SyncClient *client)
 	: client(client)
@@ -186,8 +183,11 @@ bool ClientLocationHandler::handleMessage(QDataStream &stream, SyncProtocol::tPa
 	if(!ok)
 		return false;
 
+	const StelLocation &loc=msg.stelLocation;
+
 	//replicated from StelCore::moveObserverTo
-	if(msg.totalDuration>0.0)
+	// N.B. This message may apparently come several times. In case a transition is already under way (planetName==SpaceShip), this would fail, so exclude it.
+	if(msg.totalDuration>0.0 && core->getCurrentLocation().planetName!="SpaceShip")
 	{
 		//for optimal results, the network latency should be subtracted from the timeToGo...
 
@@ -198,24 +198,44 @@ bool ClientLocationHandler::handleMessage(QDataStream &stream, SyncProtocol::tPa
 			curLoc.name = ".";
 		}
 
+		//qDebug() << "Attempt to create Spaceship Observer from" << curLoc.planetName << "to" << msg.stelLocation.planetName ;
 		//create a spaceship observer
-		SpaceShipObserver* newObs = new SpaceShipObserver(curLoc, msg.stelLocation, msg.totalDuration,msg.timeToGo);
+		SpaceShipObserver* newObs = new SpaceShipObserver(curLoc, loc, msg.totalDuration,msg.timeToGo);
 		core->setObserver(newObs);
 		newObs->update(0);
 	}
-	else
+	else if(msg.totalDuration<=0.0)
 	{
 		//create a normal observer
-		core->setObserver(new StelObserver(msg.stelLocation));
+		//qDebug() << "Attempt to create Normal Observer at" << msg.stelLocation.planetName ;
+		core->setObserver(new StelObserver(loc));
 	}
-	emit core->targetLocationChanged(msg.stelLocation, QString());
-	emit core->locationChanged(core->getCurrentLocation());
 
+
+	// We run into a sync problem here:
+	// When attempting to e.g. return to default location, LocationDialog sets a new landscapeID (property message), then resets location (this locationHandler message) which overwrites the landscapeID.
+	// We must first find out whether currentLandscapeID is sync'ed, and if yes, just reset the just-set currentLandscapeID. And if that is zero, do the ZeroColor stuff.
+
+	const bool dontSyncLandscape= (client->isPropertyFilteredAway("LandscapeMgr.currentLandscapeID"));
+
+	QString landscapeID=dontSyncLandscape? QString() : GETSTELMODULE(LandscapeMgr)->getCurrentLandscapeID();
+
+	if (!dontSyncLandscape && landscapeID=="zero")
+	{
+		static const StelLocationMgr &locMgr=StelApp::getInstance().getLocationMgr();
+		QColor color=locMgr.getColorForCoordinates(loc.getLongitude(), loc.getLatitude());
+		landscapeID=QString("ZeroColor(%1)").arg(Vec3f(color).toStr());
+	}
+
+	if (loc.planetName=="Earth")
+		core->moveObserverTo(loc, 0., 1., GETSTELMODULE(LandscapeMgr)->getFlagLandscapeAutoSelection() ? landscapeID : QString());
+	else
+		core->moveObserverTo(loc, 0., 1., loc.planetName); // Loads a default landscape for the planet.
 
 	return true;
 }
 
-ClientSelectionHandler::ClientSelectionHandler()
+ClientSelectionHandler::ClientSelectionHandler(SyncClient *client): ClientHandler(client)
 {
 	objMgr = &StelApp::getInstance().getStelObjectMgr();
 }
@@ -255,7 +275,7 @@ bool ClientSelectionHandler::handleMessage(QDataStream &stream, SyncProtocol::tP
 	return true;
 }
 
-ClientStelPropertyUpdateHandler::ClientStelPropertyUpdateHandler(bool skipGuiProps, const QStringList &excludeProps)
+ClientStelPropertyUpdateHandler::ClientStelPropertyUpdateHandler(SyncClient *client, bool skipGuiProps, const QStringList &excludeProps): ClientHandler(client)
 {
 	propMgr = StelApp::getInstance().getStelPropertyManager();
 
@@ -325,7 +345,7 @@ bool ClientStelPropertyUpdateHandler::handleMessage(QDataStream &stream, SyncPro
 	return true;
 }
 
-ClientViewHandler::ClientViewHandler()
+ClientViewHandler::ClientViewHandler(SyncClient *client): ClientHandler(client)
 {
 	mvMgr = core->getMovementMgr();
 }

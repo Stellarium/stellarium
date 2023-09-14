@@ -33,7 +33,7 @@ public:
 	ErrorMessage();
 	ErrorMessage(const QString& msg);
 
-	SyncProtocol::SyncMessageType getMessageType() const override { return SyncProtocol::ERROR; }
+	SyncProtocol::SyncMessageType getMessageType() const override { return SyncProtocol::SYNC_ERROR; }
 	void serialize(QDataStream& stream) const override;
 	bool deserialize(QDataStream& stream, SyncProtocol::tPayloadSize dataSize) override;
 
