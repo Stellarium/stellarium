@@ -833,10 +833,7 @@ void LocationDialog::setDefaultLocation(bool state)
 	{
 		StelCore* core = StelApp::getInstance().getCore();
 		QString currentLocationId = core->getCurrentLocation().getID();
-		core->setDefaultLocationID(currentLocationId);
-
-		// Why this code even exists? After the previous code, this should always
-		// be true, except if setting the default location somehow fails. --BM
+		core->setDefaultLocationID(currentLocationId); // May fail for invalid locations. Therefore test:
 		bool isDefault = (currentLocationId == core->getDefaultLocationID());
 		disconnectEditSignals();
 		updateDefaultLocationControls(isDefault);
