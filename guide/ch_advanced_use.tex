@@ -559,8 +559,9 @@ In such cases, it may be useful to also have separate user data directories and 
 
 This mode does not work in ANGLE mode and requires modern graphics hardware with the \texttt{WGL\_NV\_DX\_interop} 
 driver extension running in OpenGL mode. Some Nvidia GPUs work without this extension listed explicitly. 
-On a notebook with Nvidia Optimus technology, make sure to launch Stellarium on the Nvidia hardware. 
-For permanent setting, use the Nvidia configuration dialog to configure Stellarium explicitly to run always on the Nvidia card.
+On a notebook with Nvidia Optimus technology, make sure to launch Stellarium \emph{and} \program{SpoutReceiver} 
+(or your target application) on the Nvidia hardware. 
+For permanent setting, use the Nvidia configuration dialog to configure Stellarium and the target application explicitly to run always on the Nvidia card.
 
 Note that Spout use disables any multisampling setting (see Appendix~\ref{sec:config.ini:video}). 
 
