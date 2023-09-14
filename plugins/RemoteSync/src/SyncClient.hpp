@@ -56,6 +56,8 @@ public:
 	~SyncClient() override;
 
 	QString errorString() const { return errorStr; }
+	//! Check whether this property (format: "StelModule.property") is filtered away in the Client settings.
+	bool isPropertyFilteredAway(QString property) const;
 
 public slots:
 	void connectToServer(const QString& host, const int port);

@@ -594,20 +594,22 @@ LocationMap StelLocationMgr::loadCitiesBin(const QString& fileName)
 			}
 			else
 			{
-				qDebug() << "StelLocationMgr::loadCitiesBin(): TimeZone for " << loc.name <<  " not found: " << loc.ianaTimeZone;
-				unknownTZlist.append(loc.ianaTimeZone);
+				if (!unknownTZlist.contains(loc.ianaTimeZone))
+				{
+					qDebug() << "StelLocationMgr::loadCitiesBin(): TimeZone for " << loc.name <<  " not found: " << loc.ianaTimeZone;
+					unknownTZlist.append(loc.ianaTimeZone);
+				}
 			}
 		}
 	}
 	if (unknownTZlist.length()>0)
 	{
-		unknownTZlist.removeDuplicates();
-		qDebug() << "StelLocationMgr::loadCitiesBin(): Summary of unknown TimeZones:";
+		qInfo() << "StelLocationMgr::loadCitiesBin(): Summary of unknown TimeZones:";
 		for (const auto& tz : unknownTZlist)
 		{
-			qDebug() << tz;
+			qInfo() << tz;
 		}
-		qDebug() << "Please report these timezone names (this logfile) to the Stellarium developers.";
+		qInfo() << "Please report these timezone names (this logfile) to the Stellarium developers.";
 		// Note to developers: Fill those names and replacements to the map above.
 	}
 

@@ -37,22 +37,22 @@ SyncClient::SyncClient(SyncOptions options, const QStringList &excludeProperties
 	  timeoutTimerId(-1)
 {
 	handlerHash.clear();
-	handlerHash.insert(ERROR,  new ClientErrorHandler(this));
+        handlerHash.insert(SYNC_ERROR,  new ClientErrorHandler(this));
 	handlerHash.insert(SERVER_CHALLENGE, new ClientAuthHandler(this));
 	handlerHash.insert(SERVER_CHALLENGERESPONSEVALID, new ClientAuthHandler(this));
 	handlerHash.insert(ALIVE, new ClientAliveHandler());
 
 	//these are the actual sync handlers
 	if(options.testFlag(SyncTime))
-		handlerHash[TIME] = new ClientTimeHandler();
+		handlerHash[TIME] = new ClientTimeHandler(this);
 	if(options.testFlag(SyncLocation))
-		handlerHash[LOCATION] = new ClientLocationHandler();
+		handlerHash[LOCATION] = new ClientLocationHandler(this);
 	if(options.testFlag(SyncSelection))
-		handlerHash[SELECTION] = new ClientSelectionHandler();
+		handlerHash[SELECTION] = new ClientSelectionHandler(this);
 	if(options.testFlag(SyncStelProperty))
-		handlerHash[STELPROPERTY] = new ClientStelPropertyUpdateHandler(options.testFlag(SkipGUIProps), stelPropFilter);
+		handlerHash[STELPROPERTY] = new ClientStelPropertyUpdateHandler(this, options.testFlag(SkipGUIProps), stelPropFilter);
 	if(options.testFlag(SyncView))
-		handlerHash[VIEW] = new ClientViewHandler();
+		handlerHash[VIEW] = new ClientViewHandler(this);
 
 	//fill unused handlers with dummies
 	for(int t = TIME;t<MSGTYPE_SIZE;++t)
@@ -142,4 +142,9 @@ void SyncClient::socketConnected()
 void SyncClient::emitServerError(const QString &errorStr)
 {
 	this->errorStr = errorStr;
+}
+
+bool SyncClient::isPropertyFilteredAway(QString property) const
+{
+	return stelPropFilter.contains(property);
 }

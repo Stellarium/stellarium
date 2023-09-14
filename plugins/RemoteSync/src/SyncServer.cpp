@@ -40,7 +40,7 @@ SyncServer::SyncServer(QObject* parent, bool allowVersionMismatch)
 
 	//create message handlers
 	handlerHash.clear();
-	handlerHash[ERROR] =  new ServerErrorHandler();
+	handlerHash[SYNC_ERROR] =  new ServerErrorHandler();
 	handlerHash[CLIENT_CHALLENGE_RESPONSE] = new ServerAuthHandler(this, allowVersionMismatch);
 	handlerHash[ALIVE] = new ServerAliveHandler();
 }

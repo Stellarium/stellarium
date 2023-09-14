@@ -33,7 +33,6 @@ class ClientHandler : public QObject, public SyncMessageHandler
 	Q_INTERFACES(SyncMessageHandler)
 
 public:
-	ClientHandler();
 	ClientHandler(SyncClient *client);
 protected:
 	SyncClient* client;
@@ -68,12 +67,14 @@ public:
 class ClientTimeHandler : public ClientHandler
 {
 public:
+	ClientTimeHandler(SyncClient *client): ClientHandler(client){};
 	bool handleMessage(QDataStream &stream, SyncProtocol::tPayloadSize dataSize, SyncRemotePeer &peer) override;
 };
 
 class ClientLocationHandler : public ClientHandler
 {
 public:
+	ClientLocationHandler(SyncClient *client): ClientHandler(client){};
 	bool handleMessage(QDataStream &stream, SyncProtocol::tPayloadSize dataSize, SyncRemotePeer &peer) override;
 };
 
@@ -81,7 +82,7 @@ class StelObjectMgr;
 class ClientSelectionHandler : public ClientHandler
 {
 public:
-	ClientSelectionHandler();
+	ClientSelectionHandler(SyncClient *client);
 	bool handleMessage(QDataStream &stream, SyncProtocol::tPayloadSize dataSize, SyncRemotePeer &peer) override;
 private:
 	StelObjectMgr* objMgr;
@@ -91,7 +92,7 @@ class StelPropertyMgr;
 class ClientStelPropertyUpdateHandler : public ClientHandler
 {
 public:
-	ClientStelPropertyUpdateHandler(bool skipGuiProps, const QStringList& excludeProps);
+	ClientStelPropertyUpdateHandler(SyncClient *client, bool skipGuiProps, const QStringList& excludeProps);
 	bool handleMessage(QDataStream &stream, SyncProtocol::tPayloadSize dataSize, SyncRemotePeer &peer) override;
 private:
 	StelPropertyMgr* propMgr;
@@ -102,7 +103,7 @@ class StelMovementMgr;
 class ClientViewHandler : public ClientHandler
 {
 public:
-	ClientViewHandler();
+	ClientViewHandler(SyncClient *client);
 	bool handleMessage(QDataStream &stream, SyncProtocol::tPayloadSize dataSize, SyncRemotePeer &peer) override;
 private:
 	StelMovementMgr* mvMgr;
