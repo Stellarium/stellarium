@@ -54,7 +54,7 @@ public:
 		double start;              //! Initial solar longitude (J2000) of activity
 		double finish;             //! Last solar longitude (J2000) of activity
 		double peak;               //! Peak solar longitude (J2000) of activity
-		int disttype;              //! Distribution type (0 for Guass, 1 for Lorentz)
+		int disttype;              //! Distribution type (0 for Gauss, 1 for Lorentz)
 		float b1;                  //! B slope before peak
 		float b2;                  //! B slope after peak
 	};

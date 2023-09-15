@@ -64,7 +64,7 @@ public:
 	//! of the specified path.  By specifying a flags parameter it is possible to constrain
 	//! the results to those matching various criteria.
 	//! If the path argument is a complete path (is a full path on single root OSes, or
-	//! unambigiously identifies one and only one file on multi-root OSes), it will
+	//! unambiguously identifies one and only one file on multi-root OSes), it will
 	//! be tested for compliance with other conditions - the regular search path will
 	//! not be tested.
 	//! If you wish to search for a non-existing file which is not in the search path

@@ -904,9 +904,10 @@ void ObsListDialog::editListButtonPressed()
 void ObsListDialog::exportListButtonPressed()
 {
 	static const QString filter = "Stellarium Single Observing List (*.sol);;Stellarium Observing List (*.ol)";
+	const QString destinationDir=StelApp::getInstance().getSettings()->value("main/observinglists_dir", QDir::homePath()).toString();
 	QString selectedFilter = "Stellarium Single Observing List (*.sol)";
 	QString exportListJsonPath = QFileDialog::getSaveFileName(nullptr, q_("Export observing list as..."),
-							     QDir::homePath() + "/" + JSON_FILE_BASENAME + "_" + currentListName + ".sol", filter, &selectedFilter);
+							      destinationDir + "/" + JSON_FILE_BASENAME + "_" + currentListName + ".sol", filter, &selectedFilter);
 
 	QFile jsonFile(exportListJsonPath);
 	if (!jsonFile.open(QIODevice::ReadWrite | QIODevice::Text))
@@ -950,8 +951,9 @@ void ObsListDialog::exportListButtonPressed()
 void ObsListDialog::importListButtonPressed()
 {
 	static const QString filter = "Stellarium Single Observing List (*.sol);;Stellarium Observing List (*.ol);;Stellarium Legacy JSON Observing List or Bookmarks (*.json)";
+	const QString destinationDir=StelApp::getInstance().getSettings()->value("main/observinglists_dir", QDir::homePath()).toString();
 	QString fileToImportJsonPath = QFileDialog::getOpenFileName(nullptr, q_("Import observing list"),
-								    QDir::homePath(),
+								    destinationDir,
 								    filter);
 	QVariantMap map;
 	QFile jsonFile(fileToImportJsonPath);

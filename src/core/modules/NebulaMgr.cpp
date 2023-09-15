@@ -299,7 +299,7 @@ void NebulaMgr::init()
 	setEmissionObjectColor(    Vec3f(conf->value("color/dso_emission_object_color", defaultStellarColor).toString()));
 	setYoungStellarObjectColor(Vec3f(conf->value("color/dso_young_stellar_object_color", defaultStellarColor).toString()));
 
-	// for DSO convertor (for developers!)
+	// for DSO converter (for developers!)
 	flagConverter = conf->value("devel/convert_dso_catalog", false).toBool();
 	flagDecimalCoordinates = conf->value("devel/convert_dso_decimal_coord", true).toBool();
 
