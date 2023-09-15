@@ -453,6 +453,38 @@ using the Windows location service. The result depends on available
 hardware and other settings, e.g. real GPS sensor or network and WiFi
 detection.\footnote{\url{https://support.microsoft.com/en-us/windows/windows-location-service-and-privacy-3a8eee0a-5b0b-dc07-eede-2a5ca1c49088}}
 
+
+\subsection{Modernized MESA3D libraries (Software OpenGL on Windows)}
+\label{sec:ExtraData:Mesa}
+
+Stellarium uses hardware-accelerated OpenGL for rendering. On very old Windows systems without dedicated hardware, 
+or in special circumstances like virtual machines, hardware accelerated graphics may not be available, 
+and the \program{Mesa3D} software implementation of OpenGL is used. This can also be forced by the command-line option \command{-\/-mesa-mode}. 
+Rendering the graphics without hardware acceleration is of course much slower than accelerated graphics, but it's surely better than nothing.
+
+Qt's default Mesa library (Mesa 11) provides support for OpenGL~3.0 only. This prevents users of Qt5-based versions from applying dithering. 
+On Qt6, also the \program{ShowMySky} skylight model (see section~\ref{sec:skylight:ShowMySky}) is then not available. 
+
+We have replaced this by a version of Mesa~20 compiled by Federico Dossena\footnote{\url{https://fdossena.com/?p=mesa/index.frag}} which appears to be even a bit faster.
+
+The \program{Mesa3D} project \footnote{\url{https://www.mesa3d.org/}} meanwhile (2023) provides at least OpenGL~4.5. 
+If you wish to use more ``up to date'' precompiled binaries and have Administrator privileges on your Windows system, \newFeature{23.3}
+you can replace this library using the following steps to install inofficial builds\footnote{\url{https://github.com/pal1000/mesa-dist-win/}}. 
+Note however that after this upgrade, the program runs with considerably ($\approx$35\%?) lower framerate. 
+You must decide whether this is really beneficial in your situation. The libraries don't provide and additional graphics features that Stellarium make use of.
+
+\begin{itemize}
+\item Download the latest ``release-msvc'' package as you need from \url{https://github.com/pal1000/mesa-dist-win/releases} and unpack it somewhere.
+\item Copy \file{(x86|x64)/{libglapi.dll,libgallium\_wgl.dll,opengl32.dll}} to where the executable \file{stellarium.exe} is.
+\item Delete the existing \file{opengl32sw.dll}
+\item Rename the just-copied \file{opengl32.dll} to \file{opengl32sw.dll}.
+\end{itemize}
+
+\noindent Now running Stellarium in Mesa mode (with link from program menu or command line) should report to provide OpenGL~4.5.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Command Line Options}
 %\label{command-line-options}
 \label{sec:CommandLineOptions}
@@ -474,7 +506,7 @@ program when it is called via the command line. See table for a full list:
 
 For example, using the option \texttt{-c\ my\_config.ini} would resolve to the file 
 \file{\textless{}user\ directory\textgreater{}/my\_config.ini} whereas 
-\file{-c\ ./my\_config.ini} can be used to explicitly say the file
+\file{-c\ ./my\_config.ini} can be used to explicitly point to the file
 \file{my\_config.ini} in the current working directory.\\
 -\/-log-file or -l   & log file name     & Specify the log file name. The default value is \file{log.txt}.
 
@@ -484,7 +516,7 @@ the file will be written to \file{\textless{}user\ directory\textgreater{}/my\_l
                                     Note: The old configuration file will be overwritten. \\\midrule
 -\/-user-dir         & path       & Specify the user data directory. \\
 -\/-screenshot-dir   & path       & Specify the directory to which screenshots will be saved. \\\midrule
--\/-full-screen      & yes or no  & Over-rides the full screen setting in the config file. \\\midrule
+-\/-full-screen      & yes or no  & Overrides the full screen setting in the config file. \\\midrule
 -\/-home-planet      & planet     & Specify observer planet (English name). \\
 -\/-longitude        & longitude  & Specify latitude, e.g. +53d58'16.65" \\
 -\/-latitude         & latitude   & Specify longitude, e.g. -1d4'27.48" \\
@@ -509,7 +541,6 @@ the file will be written to \file{\textless{}user\ directory\textgreater{}/my\_l
 -\/-angle-d3d11      & {[}none{]} & Force use Direct3D 11 for ANGLE OpenGL ES2 rendering engine.\footnotemark[1]\footnotemark[3]\\
 -\/-angle-warp       & {[}none{]} & Force use the Direct3D 11 software rasterizer for ANGLE OpenGL ES2 rendering engine.\footnotemark[1]\footnotemark[3]\\
 -\/-mesa-mode or -m  & {[}none{]} & Use MESA as software OpenGL rendering engine.\footnotemark[1]\\
--\/-safe-mode or -s  & {[}none{]} & Synonymous to -\/-mesa-mode.\footnotemark[1]\\
 -\/-single-buffer    & {[}none{]} & Use single-buffering. This reportedly avoids screen blanking problems with some Intel GPUs. \\
 -\/-opengl-compat or -C & {[}none{]} & Request OpenGL 3.3 Compatibility Profile. Might fix graphics problems in some driver configurations.\\
 \bottomrule

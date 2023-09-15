@@ -36,12 +36,7 @@
 void CLIProcessor::parseCLIArgsPreQApp(const QStringList argList)
 {
 #ifdef Q_OS_WIN
-	if (argsGetOption(argList, "-s", "--safe-mode"))
-	{
-		qDebug() << "DEPRECATION NOTE: --safe-mode given on command line. Use --mesa-mode instead!";
-		qputenv("QT_OPENGL", "software");
-	}
-
+    #if QT_VERSION < QT_VERSION_CHECK(6,0,0)
 	if (argsGetOption(argList, "-a", "--angle-mode"))
 		qputenv("QT_OPENGL", "angle");
 
@@ -60,8 +55,14 @@ void CLIProcessor::parseCLIArgsPreQApp(const QStringList argList)
 		qputenv("QT_OPENGL", "angle");
 		qputenv("QT_ANGLE_PLATFORM", "warp");
 	}
+    #endif
 	if (argsGetOption(argList, "-m", "--mesa-mode"))
+	{
 		qputenv("QT_OPENGL", "software");
+		// These prepare using current Mesa3D libraries, should the user install them. Else the vars are harmless.
+		qputenv("QT_OPENGL_DLL", "opengl32sw.dll");
+		qputenv("GALLIUM_DRIVER", "llvmpipe");
+	}
 #endif
 	// Override user dir. This must be made via environment variable, else an empty user dir is created before resetting (GH:#3079)
 	try
@@ -131,12 +132,13 @@ void CLIProcessor::parseCLIArgsPreConfig(const QStringList& argList)
 		          << "--multires-image        : With filename / URL argument, specify a\n"
 			  << "                          multi-resolution image to load\n"
 #ifdef Q_OS_WIN
+			  #if QT_VERSION < QT_VERSION_CHECK(6,0,0)
 			  << "--angle-mode (or -a)    : Use ANGLE as OpenGL ES2 rendering engine (autodetect driver)\n"
 			  << "--angle-d3d9 (or -9)    : Force use Direct3D 9 for ANGLE OpenGL ES2 rendering engine\n"
 			  << "--angle-d3d11           : Force use Direct3D 11 for ANGLE OpenGL ES2 rendering engine\n"
 			  << "--angle-warp            : Force use the Direct3D 11 software rasterizer for ANGLE OpenGL ES2 rendering engine\n"
+			  #endif
 			  << "--mesa-mode (or -m)     : Use MESA as software OpenGL rendering engine\n"
-			  << "--safe-mode (or -s)     : DEPRECATED! Synonymous to --mesa-mode \n"
 			  #ifdef ENABLE_SPOUT
 			  << "--spout (or -S) <sky|all> : Act as SPOUT sender (Sky only/including GUI)\n"
 			  << "--spout-name <name>     : Set particular name for SPOUT sender.\n"
