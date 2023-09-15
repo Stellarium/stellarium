@@ -860,7 +860,7 @@ namespace StelUtils
 	double getDeltaTByIslamSadiqQureshi(const double jDay);
 
 	//! Get Delta-T estimation for a given date.
-	//! Implementation of polinomial approximation of time period 1620-2013 for DeltaT by M. Khalid, Mariam Sultana and Faheem Zaidi (2014).
+	//! Implementation of polynomial approximation of time period 1620-2013 for DeltaT by M. Khalid, Mariam Sultana and Faheem Zaidi (2014).
 	//! Source: Delta T: Polynomial Approximation of Time Period 1620-2013
 	//! Journal of Astrophysics, Vol. 2014, Article ID 480964
 	//! https://doi.org/10.1155/2014/480964

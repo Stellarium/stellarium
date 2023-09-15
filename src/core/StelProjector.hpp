@@ -186,7 +186,7 @@ public:
 	virtual float viewScalingFactorToFov(float vsf) const { return vsf;}
 
 	//! Get the current state of the flag which decides whether to
-	//! arrage labels so that they are aligned with the bottom of a 2d
+	//! arrange labels so that they are aligned with the bottom of a 2d
 	//! screen, or a 3d dome.
 	bool getFlagGravityLabels() const;
 
