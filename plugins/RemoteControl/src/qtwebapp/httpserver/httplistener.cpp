@@ -15,7 +15,7 @@ HttpListener::HttpListener(const HttpListenerSettings &settings, HttpRequestHand
     pool=Q_NULLPTR;
     this->settings=settings;
     this->requestHandler=requestHandler;
-    // Reqister type of socketDescriptor for signal/slot handling
+    // Register type of socketDescriptor for signal/slot handling
     qRegisterMetaType<tSocketDescriptor>("tSocketDescriptor");
     // Start listening
     listen();

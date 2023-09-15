@@ -1297,7 +1297,7 @@ QVector<Vec3d> pathFromQVariantList(const QVariantList& l)
 			bool ok;
 			double angle = elemList.at(2).toDouble(&ok)*M_PI/180.;
 			if (!ok || std::fabs(angle)>2.*M_PI)
-				throw std::runtime_error(qPrintable(QString("invalid small circle rotation angle: \"%1\" (expect a double value in degree betwwen -2pi and 2pi)").arg(elemList.at(2).toString())));
+				throw std::runtime_error(qPrintable(QString("invalid small circle rotation angle: \"%1\" (expect a double value in degree between -2pi and 2pi)").arg(elemList.at(2).toString())));
 			int nbStep = 1+static_cast<int>(std::fabs(angle)/(2.*M_PI)*75);
 			Q_ASSERT(nbStep>0);
 			v = vertices.last();

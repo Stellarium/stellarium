@@ -1255,7 +1255,7 @@ void StelLocationMgr::loadCountries()
 	}
 	// aliases for some countries to backward compatibility
 	countryNameToCodeMap.insert("Russian Federation", "ru");
-	countryNameToCodeMap.insert("Taiwan (Provice of China)", "tw");
+	countryNameToCodeMap.insert("Taiwan (Province of China)", "tw");
 }
 
 void StelLocationMgr::loadRegions()

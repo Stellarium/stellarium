@@ -408,7 +408,7 @@ public slots:
 	//! Set the mask type.
 	void setMaskType(StelProjector::StelProjectorMaskType m);
 
-	//! Set the flag with decides whether to arrage labels so that
+	//! Set the flag with decides whether to arrange labels so that
 	//! they are aligned with the bottom of a 2d screen, or a 3d dome.
 	void setFlagGravityLabels(bool gravity);
 	//! return whether dome-aligned labels are in use

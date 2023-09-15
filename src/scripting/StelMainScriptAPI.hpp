@@ -565,7 +565,7 @@ public slots:
 
 	//! Find out the current sky culture
 	//! @return the ID of the current sky culture (i.e. the name of the directory in
-	//! which the curret sky cultures files are found, e.g. "western")
+	//! which the current sky cultures files are found, e.g. "western")
 	static QString getSkyCulture();
 
 	//! Set the current sky culture
