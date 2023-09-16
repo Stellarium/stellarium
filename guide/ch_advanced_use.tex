@@ -457,21 +457,21 @@ detection.\footnote{\url{https://support.microsoft.com/en-us/windows/windows-loc
 \subsection{Modernized MESA3D libraries (Software OpenGL on Windows)}
 \label{sec:ExtraData:Mesa}
 
-Stellarium uses hardware-accelerated OpenGL for rendering. On very old Windows systems without dedicated hardware, 
+Stellarium uses hardware-accelerated OpenGL for rendering. On very old Windows systems without dedicated graphics hardware, 
 or in special circumstances like virtual machines, hardware accelerated graphics may not be available, 
 and the \program{Mesa3D} software implementation of OpenGL is used. This can also be forced by the command-line option \command{-\/-mesa-mode}. 
 Rendering the graphics without hardware acceleration is of course much slower than accelerated graphics, but it's surely better than nothing.
 
-Qt's default Mesa library (Mesa 11) provides support for OpenGL~3.0 only. This prevents users of Qt5-based versions from applying dithering. 
-On Qt6, also the \program{ShowMySky} skylight model (see section~\ref{sec:skylight:ShowMySky}) is then not available. 
+Qt's default Mesa library (Mesa 11) provides support for OpenGL~3.0 only. This prevents users of all versions from applying dithering in Mesa mode. 
+Also the \program{ShowMySky} skylight model (see section~\ref{sec:skylight:ShowMySky}) is then not available.
 
-We have replaced this by a version of Mesa~20 compiled by Federico Dossena\footnote{\url{https://fdossena.com/?p=mesa/index.frag}} which appears to be even a bit faster.
+We have replaced\newFeature{23.4} this by a version of Mesa~20 compiled by Federico Dossena\footnote{\url{https://fdossena.com/?p=mesa/index.frag}} which appears to be even a bit faster.
 
 The \program{Mesa3D} project \footnote{\url{https://www.mesa3d.org/}} meanwhile (2023) provides at least OpenGL~4.5. 
-If you wish to use more ``up to date'' precompiled binaries and have Administrator privileges on your Windows system, \newFeature{23.3}
+If you wish to use more ``up to date'' precompiled binaries and have Administrator privileges on your Windows system, 
 you can replace this library using the following steps to install inofficial builds\footnote{\url{https://github.com/pal1000/mesa-dist-win/}}. 
 Note however that after this upgrade, the program runs with considerably ($\approx$35\%?) lower framerate. 
-You must decide whether this is really beneficial in your situation. The libraries don't provide and additional graphics features that Stellarium make use of.
+You must decide whether this is really beneficial in your situation. The libraries don't provide any additional graphics features that Stellarium makes use of.
 
 \begin{itemize}
 \item Download the latest ``release-msvc'' package as you need from \url{https://github.com/pal1000/mesa-dist-win/releases} and unpack it somewhere.
