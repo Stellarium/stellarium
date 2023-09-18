@@ -1066,7 +1066,7 @@ SsoElements SolarSystemEditor::readMpcOneLineMinorPlanetElements(QString oneLine
 	//"kepler_orbit" is used for all cases:
 	//"ell_orbit" interprets distances as kilometers, not AUs
 	//result.insert("coord_func","kepler_orbit"); // 0.20: omit default
-	result.insert("coord_func", "comet_orbit"); // 0.20: add this default for compatibility with earlier versions!
+	//result.insert("coord_func", "comet_orbit"); // 0.20: add this default for compatibility with earlier versions!
 
 	//result.insert("color", "1.0, 1.0, 1.0"); // 0.16: omit obvious default.
 	//result.insert("tex_map", "nomap.png");   // 0.16: omit obvious default.
