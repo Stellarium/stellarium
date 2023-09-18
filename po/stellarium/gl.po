@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2023-09-13 10:06+0700\n"
+"POT-Creation-Date: 2023-09-18 21:31+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Manuel Rosales <manuel.rosales.gr@gmail.com>, 2023\n"
 "Language-Team: Galician (https://app.transifex.com/stellarium/teams/80998/gl/)\n"
@@ -3739,11 +3739,11 @@ msgstr ""
 
 #: src/core/StelCore.cpp:2574 src/core/SimbadSearcher.cpp:173
 #: src/gui/ObsListDialog.cpp:83 src/gui/ObsListDialog.cpp:897
-#: src/gui/ObsListDialog.cpp:917 src/gui/ObsListDialog.cpp:962
-#: src/gui/ObsListDialog.cpp:978 src/gui/ObsListDialog.cpp:1019
-#: src/gui/ObsListDialog.cpp:1031 src/gui/ObsListDialog.cpp:1040
-#: src/gui/ObsListDialog.cpp:1056 src/gui/ObsListDialog.cpp:1073
-#: src/gui/ObsListDialog.cpp:1236 src/gui/ObsListDialog.cpp:1241
+#: src/gui/ObsListDialog.cpp:918 src/gui/ObsListDialog.cpp:964
+#: src/gui/ObsListDialog.cpp:980 src/gui/ObsListDialog.cpp:1021
+#: src/gui/ObsListDialog.cpp:1033 src/gui/ObsListDialog.cpp:1042
+#: src/gui/ObsListDialog.cpp:1058 src/gui/ObsListDialog.cpp:1075
+#: src/gui/ObsListDialog.cpp:1238 src/gui/ObsListDialog.cpp:1243
 #: plugins/OnlineQueries/src/HipOnlineQuery.cpp:91
 msgid "Error"
 msgstr "Erro"
@@ -5765,6 +5765,10 @@ msgstr "FPS"
 msgid "Frames per second"
 msgstr "Fotogramas por segundo"
 
+#: src/gui/StelDialog.hpp:218
+msgid "Are you sure? This will delete your customized data."
+msgstr "Seguro? Isto borrará os teus datos personalizados."
+
 #: src/gui/ViewDialog.cpp:707
 msgid "properties"
 msgstr "propiedades"
@@ -5931,11 +5935,11 @@ msgstr ""
 msgid "Visual magnitude based on phase angle and albedo."
 msgstr "Magnitude visual baseada no ángulo de fase e albedo"
 
-#: src/gui/LocationDialog.cpp:173 src/gui/LocationDialog.cpp:977
+#: src/gui/LocationDialog.cpp:173 src/gui/LocationDialog.cpp:974
 msgid "Get location from GPS or system service"
 msgstr "Obter localización do GPS ou do servizo do sistema"
 
-#: src/gui/LocationDialog.cpp:175 src/gui/LocationDialog.cpp:979
+#: src/gui/LocationDialog.cpp:175 src/gui/LocationDialog.cpp:976
 #: src/ui_locationDialogGui.h:505
 msgid "Get location from GPS"
 msgstr "Localización dende GPS"
@@ -5963,23 +5967,23 @@ msgstr ""
 "estea ó gusto, pódese desactivar para que outros programas accedan ó "
 "dispositivo GPS."
 
-#: src/gui/LocationDialog.cpp:921
+#: src/gui/LocationDialog.cpp:918
 msgid "GPS listening..."
 msgstr "Cargando GPS..."
 
-#: src/gui/LocationDialog.cpp:928
+#: src/gui/LocationDialog.cpp:925
 msgid "GPS disconnecting..."
 msgstr "Desconectando GPS..."
 
-#: src/gui/LocationDialog.cpp:950
+#: src/gui/LocationDialog.cpp:947
 msgid "2D location fix"
 msgstr "Corrección de localización 2D"
 
-#: src/gui/LocationDialog.cpp:955
+#: src/gui/LocationDialog.cpp:952
 msgid "3D location fix"
 msgstr "Corrección de localización 3D"
 
-#: src/gui/LocationDialog.cpp:964
+#: src/gui/LocationDialog.cpp:961
 msgid "GPS:FAILED"
 msgstr "GPS:ERRO"
 
@@ -8060,7 +8064,7 @@ msgctxt "unit of measurement"
 msgid "saros"
 msgstr "saros"
 
-#: src/gui/ObsListDialog.cpp:83 src/gui/ObsListDialog.cpp:1040
+#: src/gui/ObsListDialog.cpp:83 src/gui/ObsListDialog.cpp:1042
 msgid "Cannot open observingLists.json to write"
 msgstr "Non se pode abrir observingLists.json para escribir"
 
@@ -8103,27 +8107,27 @@ msgstr "Modo do editor de listaxe de observación"
 msgid "selectedOlud empty. This is a bug"
 msgstr "selectedOlud baleiro. Este é un erro"
 
-#: src/gui/ObsListDialog.cpp:908
+#: src/gui/ObsListDialog.cpp:909
 msgid "Export observing list as..."
 msgstr "Exportar a listaxe de observación como..."
 
-#: src/gui/ObsListDialog.cpp:917
+#: src/gui/ObsListDialog.cpp:918
 msgid "Cannot export. See logfile for details."
 msgstr "Non se pode exportar. Ver o arquivo log para detalles."
 
-#: src/gui/ObsListDialog.cpp:953
+#: src/gui/ObsListDialog.cpp:955
 msgid "Import observing list"
 msgstr "Importar listaxe de observación"
 
-#: src/gui/ObsListDialog.cpp:962
+#: src/gui/ObsListDialog.cpp:964
 msgid "Cannot open selected file for import"
 msgstr "Non se pode abrir o arquivo seleccionado para a importación"
 
-#: src/gui/ObsListDialog.cpp:978
+#: src/gui/ObsListDialog.cpp:980
 msgid "Empty list."
 msgstr "Listaxe baleira."
 
-#: src/gui/ObsListDialog.cpp:1000
+#: src/gui/ObsListDialog.cpp:1002
 #, qt-format
 msgid ""
 "A list named '%1', created %2 and last modified %3 would overwrite your "
@@ -8133,43 +8137,43 @@ msgstr ""
 "sobrescribiría a túa lista existente '%4', datada %5 e modificada por última"
 " vez %6. Aceptar?"
 
-#: src/gui/ObsListDialog.cpp:1019
+#: src/gui/ObsListDialog.cpp:1021
 msgid "The file is empty or doesn't contain legacy bookmarks."
 msgstr "O ficheiro está baleiro ou non contén marcadores herdados."
 
-#: src/gui/ObsListDialog.cpp:1031
+#: src/gui/ObsListDialog.cpp:1033
 msgid "File does not contain observing lists or legacy bookmarks"
 msgstr "O ficheiro non contén listaxes de observación nin marcadores herdados"
 
-#: src/gui/ObsListDialog.cpp:1056
+#: src/gui/ObsListDialog.cpp:1058
 msgid "File format is wrong!"
 msgstr "O formato do arquivo é incorrecto!"
 
-#: src/gui/ObsListDialog.cpp:1073
+#: src/gui/ObsListDialog.cpp:1075
 msgid "Cannot open JSON output file. Will not delete."
 msgstr "Non se pode abrir o ficheiro de saída JSON. Non se eliminará."
 
-#: src/gui/ObsListDialog.cpp:1097 src/ui_configurationDialog.h:1747
+#: src/gui/ObsListDialog.cpp:1099 src/ui_configurationDialog.h:1747
 msgid "Information"
 msgstr "Información"
 
-#: src/gui/ObsListDialog.cpp:1097
+#: src/gui/ObsListDialog.cpp:1099
 msgid "You cannot delete the default or the last list."
 msgstr "Non podes eliminar a listaxe predeterminada nin a última."
 
-#: src/gui/ObsListDialog.cpp:1153
+#: src/gui/ObsListDialog.cpp:1155
 msgid "Unnamed object"
 msgstr "Obxecto sen nome"
 
-#: src/gui/ObsListDialog.cpp:1236
+#: src/gui/ObsListDialog.cpp:1238
 msgid "Empty name"
 msgstr "Nome baleiro"
 
-#: src/gui/ObsListDialog.cpp:1241
+#: src/gui/ObsListDialog.cpp:1243
 msgid "List name already exists"
 msgstr "O nome da listaxe xa existe"
 
-#: src/gui/ObsListDialog.cpp:1306 src/ui_configurationDialog.h:1930
+#: src/gui/ObsListDialog.cpp:1308 src/ui_configurationDialog.h:1930
 #: src/ui_obsListDialog.h:365
 msgid "Observing lists"
 msgstr "Listaxes de observación"
