@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2023-09-13 10:06+0700\n"
+"POT-Creation-Date: 2023-09-18 21:31+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: freemanli <freeman.tam@gmail.com>, 2023\n"
 "Language-Team: Chinese (Taiwan) (https://app.transifex.com/stellarium/teams/80998/zh_TW/)\n"
@@ -3691,11 +3691,11 @@ msgstr "這是一個為計算 %1T 的二次項公式，係數由使用者決定�
 
 #: src/core/StelCore.cpp:2574 src/core/SimbadSearcher.cpp:173
 #: src/gui/ObsListDialog.cpp:83 src/gui/ObsListDialog.cpp:897
-#: src/gui/ObsListDialog.cpp:917 src/gui/ObsListDialog.cpp:962
-#: src/gui/ObsListDialog.cpp:978 src/gui/ObsListDialog.cpp:1019
-#: src/gui/ObsListDialog.cpp:1031 src/gui/ObsListDialog.cpp:1040
-#: src/gui/ObsListDialog.cpp:1056 src/gui/ObsListDialog.cpp:1073
-#: src/gui/ObsListDialog.cpp:1236 src/gui/ObsListDialog.cpp:1241
+#: src/gui/ObsListDialog.cpp:918 src/gui/ObsListDialog.cpp:964
+#: src/gui/ObsListDialog.cpp:980 src/gui/ObsListDialog.cpp:1021
+#: src/gui/ObsListDialog.cpp:1033 src/gui/ObsListDialog.cpp:1042
+#: src/gui/ObsListDialog.cpp:1058 src/gui/ObsListDialog.cpp:1075
+#: src/gui/ObsListDialog.cpp:1238 src/gui/ObsListDialog.cpp:1243
 #: plugins/OnlineQueries/src/HipOnlineQuery.cpp:91
 msgid "Error"
 msgstr "錯誤"
@@ -5612,6 +5612,10 @@ msgstr "FPS"
 msgid "Frames per second"
 msgstr "每秒禎數"
 
+#: src/gui/StelDialog.hpp:218
+msgid "Are you sure? This will delete your customized data."
+msgstr "您確定嗎？ 這將刪除您的自定義數據。"
+
 #: src/gui/ViewDialog.cpp:707
 msgid "properties"
 msgstr "屬性"
@@ -5770,11 +5774,11 @@ msgstr ""
 msgid "Visual magnitude based on phase angle and albedo."
 msgstr "目視星等是基於相位角度和反照率。"
 
-#: src/gui/LocationDialog.cpp:173 src/gui/LocationDialog.cpp:977
+#: src/gui/LocationDialog.cpp:173 src/gui/LocationDialog.cpp:974
 msgid "Get location from GPS or system service"
 msgstr "從 GPS 或系統服務取得位置"
 
-#: src/gui/LocationDialog.cpp:175 src/gui/LocationDialog.cpp:979
+#: src/gui/LocationDialog.cpp:175 src/gui/LocationDialog.cpp:976
 #: src/ui_locationDialogGui.h:505
 msgid "Get location from GPS"
 msgstr "自GPS取得位置"
@@ -5796,23 +5800,23 @@ msgid ""
 "toggle off to let other programs access the GPS device."
 msgstr "切換讀取GPS位置（不改變時區），取得位置資訊後關閉連線好讓其他程式連結GPS裝置。"
 
-#: src/gui/LocationDialog.cpp:921
+#: src/gui/LocationDialog.cpp:918
 msgid "GPS listening..."
 msgstr "GPS 讀取中..."
 
-#: src/gui/LocationDialog.cpp:928
+#: src/gui/LocationDialog.cpp:925
 msgid "GPS disconnecting..."
 msgstr "GPS 切斷連線..."
 
-#: src/gui/LocationDialog.cpp:950
+#: src/gui/LocationDialog.cpp:947
 msgid "2D location fix"
 msgstr "二維位置修正"
 
-#: src/gui/LocationDialog.cpp:955
+#: src/gui/LocationDialog.cpp:952
 msgid "3D location fix"
 msgstr "三維位置修正"
 
-#: src/gui/LocationDialog.cpp:964
+#: src/gui/LocationDialog.cpp:961
 msgid "GPS:FAILED"
 msgstr "GPS:失敗"
 
@@ -7858,7 +7862,7 @@ msgctxt "unit of measurement"
 msgid "saros"
 msgstr "沙羅(saros)周期"
 
-#: src/gui/ObsListDialog.cpp:83 src/gui/ObsListDialog.cpp:1040
+#: src/gui/ObsListDialog.cpp:83 src/gui/ObsListDialog.cpp:1042
 msgid "Cannot open observingLists.json to write"
 msgstr "無法寫入 observingLists.json 檔案"
 
@@ -7901,27 +7905,27 @@ msgstr "觀測列表編輯模式"
 msgid "selectedOlud empty. This is a bug"
 msgstr "未選取，這是錯誤"
 
-#: src/gui/ObsListDialog.cpp:908
+#: src/gui/ObsListDialog.cpp:909
 msgid "Export observing list as..."
 msgstr "匯出觀測列表為 ..."
 
-#: src/gui/ObsListDialog.cpp:917
+#: src/gui/ObsListDialog.cpp:918
 msgid "Cannot export. See logfile for details."
 msgstr "無法輸出，詳見紀錄檔案"
 
-#: src/gui/ObsListDialog.cpp:953
+#: src/gui/ObsListDialog.cpp:955
 msgid "Import observing list"
 msgstr "匯入觀測列表"
 
-#: src/gui/ObsListDialog.cpp:962
+#: src/gui/ObsListDialog.cpp:964
 msgid "Cannot open selected file for import"
 msgstr "無法開啟選取的檔案來匯入"
 
-#: src/gui/ObsListDialog.cpp:978
+#: src/gui/ObsListDialog.cpp:980
 msgid "Empty list."
 msgstr "空白列表"
 
-#: src/gui/ObsListDialog.cpp:1000
+#: src/gui/ObsListDialog.cpp:1002
 #, qt-format
 msgid ""
 "A list named '%1', created %2 and last modified %3 would overwrite your "
@@ -7929,43 +7933,43 @@ msgid ""
 msgstr ""
 "一個名為 '%1' 其建立日期為 %2 以及最近修正日期為 %3 的列表將覆寫您原已存在名為 '%4'  %5 建檔 %6 最近修正的列表，是否接受？"
 
-#: src/gui/ObsListDialog.cpp:1019
+#: src/gui/ObsListDialog.cpp:1021
 msgid "The file is empty or doesn't contain legacy bookmarks."
 msgstr "這個檔案是空的或不包含舊的書籤資料。"
 
-#: src/gui/ObsListDialog.cpp:1031
+#: src/gui/ObsListDialog.cpp:1033
 msgid "File does not contain observing lists or legacy bookmarks"
 msgstr "檔案並未包含觀測列表或是舊的書籤資料"
 
-#: src/gui/ObsListDialog.cpp:1056
+#: src/gui/ObsListDialog.cpp:1058
 msgid "File format is wrong!"
 msgstr "檔案格式是錯誤的！"
 
-#: src/gui/ObsListDialog.cpp:1073
+#: src/gui/ObsListDialog.cpp:1075
 msgid "Cannot open JSON output file. Will not delete."
 msgstr "無法開啟 JSON 輸出檔案，將不刪除。"
 
-#: src/gui/ObsListDialog.cpp:1097 src/ui_configurationDialog.h:1747
+#: src/gui/ObsListDialog.cpp:1099 src/ui_configurationDialog.h:1747
 msgid "Information"
 msgstr "軟體資訊"
 
-#: src/gui/ObsListDialog.cpp:1097
+#: src/gui/ObsListDialog.cpp:1099
 msgid "You cannot delete the default or the last list."
 msgstr "您不能刪除預設或最後列表。"
 
-#: src/gui/ObsListDialog.cpp:1153
+#: src/gui/ObsListDialog.cpp:1155
 msgid "Unnamed object"
 msgstr "未命名天體"
 
-#: src/gui/ObsListDialog.cpp:1236
+#: src/gui/ObsListDialog.cpp:1238
 msgid "Empty name"
 msgstr "空白名稱"
 
-#: src/gui/ObsListDialog.cpp:1241
+#: src/gui/ObsListDialog.cpp:1243
 msgid "List name already exists"
 msgstr "列表名稱已存在"
 
-#: src/gui/ObsListDialog.cpp:1306 src/ui_configurationDialog.h:1930
+#: src/gui/ObsListDialog.cpp:1308 src/ui_configurationDialog.h:1930
 #: src/ui_obsListDialog.h:365
 msgid "Observing lists"
 msgstr "觀測列表"
