@@ -32,13 +32,9 @@
 
 #include <QDebug>
 
-#ifndef USE_QUICKVIEW
-	#include <QApplication>
-	#include <QMessageBox>
-	#include <QStyleFactory>
-#else
-	#include <QGuiApplication>
-#endif
+#include <QApplication>
+#include <QMessageBox>
+#include <QStyleFactory>
 #include <QCoreApplication>
 #include <QDir>
 #include <QFile>
@@ -181,19 +177,14 @@ int main(int argc, char **argv)
 	QCoreApplication::addLibraryPath(appInfo.absolutePath());
 	#endif	
 
-	QGuiApplication::setDesktopSettingsAware(false);
+	QApplication::setDesktopSettingsAware(false);
 
 	// This must be run before QGuiApplication, otherwise it'll have no effect.
 	CLIProcessor::parseCLIArgsPreQApp(argList);
 
-#ifndef USE_QUICKVIEW
 	QApplication::setStyle(QStyleFactory::create("Fusion"));
 	// The QApplication MUST be created before the StelFileMgr is initialized.
 	QApplication app(argc, argv);
-#else
-	QGuiApplication::setDesktopSettingsAware(false);
-	QGuiApplication app(argc, argv);
-#endif
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 	// Follow vague hint from https://stackoverflow.com/questions/70152818/no-space-between-letters-in-text

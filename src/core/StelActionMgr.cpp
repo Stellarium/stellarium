@@ -28,10 +28,8 @@
 #include <QSettings>
 #include <QRegularExpression>
 
-#ifndef USE_QUICKVIEW
 #include <QAction>
 #include "StelMainView.hpp"
-#endif
 
 StelAction::StelAction(const QString& actionId,
 		       const QString& groupId,
@@ -49,9 +47,7 @@ StelAction::StelAction(const QString& actionId,
 	, defaultAltKeySequence(altKey)
 	, target(Q_NULLPTR)
 	, boolProperty(Q_NULLPTR)
-#ifndef USE_QUICKVIEW
 	, qAction(Q_NULLPTR)
-#endif
 {
 	setObjectName(actionId);
 	// Check the global conf for custom shortcuts.
@@ -67,23 +63,19 @@ StelAction::StelAction(const QString& actionId,
 		if (shortcuts.size() > 1)
 			setAltShortcut(shortcuts[1]);		
 	}
-#ifndef USE_QUICKVIEW
 	QWidget* mainView = &StelMainView::getInstance();
 	qAction = new QAction(this);
 	onChanged();
 	mainView->addAction(qAction);
 	connect(qAction, SIGNAL(triggered()), this, SLOT(trigger()));
-	connect(this, SIGNAL(changed()), this, SLOT(onChanged()));
-#endif
+	connect(this, SIGNAL(changed()), this, SLOT(onChanged()));	
 }
 
-#ifndef USE_QUICKVIEW
 void StelAction::onChanged()
 {
 	qAction->setShortcuts(QList<QKeySequence>() << keySequence << altKeySequence);
 	qAction->setShortcutContext(global ? Qt::ApplicationShortcut : Qt::WidgetShortcut);
 }
-#endif
 
 void StelAction::setShortcut(const QString& key)
 {

@@ -66,7 +66,7 @@ class StelMainView : public QGraphicsView
 	Q_PROPERTY(Vec3f skyBackgroundColor        READ getSkyBackgroundColor         WRITE setSkyBackgroundColor         NOTIFY skyBackgroundColorChanged)
 	Q_PROPERTY(int minFps	                   READ getMinFps                     WRITE setMinFps                     NOTIFY minFpsChanged)
 	Q_PROPERTY(int maxFps	                   READ getMaxFps                     WRITE setMaxFps                     NOTIFY maxFpsChanged)
-
+	Q_PROPERTY(int minTimeBetweenFrames        READ getMinTimeBetweenFrames       WRITE setMinTimeBetweenFrames       NOTIFY minTimeBetweenFramesChanged)
 public:
 	//! Contains some basic info about the OpenGL context used
 	struct GLInfo
@@ -209,6 +209,11 @@ public slots:
 	void setMaxFps(float m) {maxfps = qMax(m, minfps);  emit maxFpsChanged(maxfps);}
 	//! Get the current maximum frames per second.
 	float getMaxFps() const {return maxfps;}
+	//! Set the minimum time between frames (in milliseconds).
+	//! @param m the new setting.
+	void setMinTimeBetweenFrames(int m) {minTimeBetweenFrames = qMax(0, m);  emit minTimeBetweenFramesChanged(minTimeBetweenFrames);}
+	//! Get the current minimum time between frames.
+	int getMinTimeBetweenFrames() const {return minTimeBetweenFrames;}
 
 	//! Notify that an event was handled by the program and therefore the
 	//! FPS should be maximized for a couple of seconds.
@@ -269,6 +274,7 @@ signals:
 	void cursorTimeoutChanged(double t);
 	void minFpsChanged(int fps);
 	void maxFpsChanged(int fps);
+	void minTimeBetweenFramesChanged(int tbf);
 
 private slots:
 	// Do the actual screenshot generation in the main thread with this method.
@@ -339,6 +345,8 @@ private:
 	float minfps;
 	//! The maximum desired frame rate in frame per second.
 	float maxfps;
+	//! The minimum desired time between frames, in milliseconds.
+	int minTimeBetweenFrames;
 	QTimer* fpsTimer;
 	TopMost *topMost=Q_NULLPTR;
 
