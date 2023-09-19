@@ -50,6 +50,11 @@
 #include <QNetworkDiskCache>
 #include <QThread>
 
+#ifdef Q_OS_MACOS
+#include <QEvent>
+#include <QFileOpenEvent>
+#endif
+
 #include <clocale>
 
 #ifdef Q_OS_WIN
@@ -97,6 +102,30 @@ public:
 		Q_UNUSED(n)
 		return StelTranslator::globalTranslator->qtranslate(sourceText, disambiguation);
 	}
+};
+
+class StelApplication : public QApplication
+{
+public:
+	StelApplication(int &argc, char **argv)
+		: QApplication(argc, argv)
+	{
+	}
+
+	#ifdef Q_OS_MACOS
+	bool event(QEvent *event) override
+	{
+		if (event->type() == QEvent::FileOpen)
+		{
+			QFileOpenEvent *openEvent = static_cast<QFileOpenEvent *>(event);
+			QString script = openEvent->file();
+			if (script.endsWith(".ssc"))
+				qApp->setProperty("onetime_startup_script", script);
+		}
+
+		return QApplication::event(event);
+	}
+	#endif
 };
 
 
@@ -177,14 +206,14 @@ int main(int argc, char **argv)
 	QCoreApplication::addLibraryPath(appInfo.absolutePath());
 	#endif	
 
-	QApplication::setDesktopSettingsAware(false);
+	StelApplication::setDesktopSettingsAware(false);
 
 	// This must be run before QGuiApplication, otherwise it'll have no effect.
 	CLIProcessor::parseCLIArgsPreQApp(argList);
 
-	QApplication::setStyle(QStyleFactory::create("Fusion"));
+	StelApplication::setStyle(QStyleFactory::create("Fusion"));
 	// The QApplication MUST be created before the StelFileMgr is initialized.
-	QApplication app(argc, argv);
+	StelApplication app(argc, argv);
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 	// Follow vague hint from https://stackoverflow.com/questions/70152818/no-space-between-letters-in-text
