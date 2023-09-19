@@ -625,7 +625,8 @@ StelMainView::StelMainView(QSettings* settings)
 	  flagCursorTimeout(false),
 	  lastEventTimeSec(0.0),
 	  minfps(1.f),
-	  maxfps(10000.f)
+	  maxfps(10000.f),
+	  minTimeBetweenFrames(5)
 {
 	setAttribute(Qt::WA_OpaquePaintEvent);
 	setAttribute(Qt::WA_AcceptTouchEvents);
@@ -961,6 +962,7 @@ void StelMainView::init()
 	setCursorTimeout(configuration->value("gui/mouse_cursor_timeout", 10.f).toDouble());
 	setMaxFps(configuration->value("video/maximum_fps",10000.f).toFloat());
 	setMinFps(configuration->value("video/minimum_fps",10000.f).toFloat());
+        setMinTimeBetweenFrames(qMax(0, configuration->value("video/min_time_between_frames",5).toInt()));
 	setSkyBackgroundColor(Vec3f(configuration->value("color/sky_background_color", "0,0,0").toString()));
 
 	// XXX: This should be done in StelApp::init(), unfortunately for the moment we need to init the gui before the
@@ -1462,7 +1464,15 @@ void StelMainView::drawEnded()
 {
 	updateQueued = false;
 
+#ifndef Q_OS_MACOS
 	int requiredFpsInterval = qRound(needsMaxFPS()?1000.f/maxfps:1000.f/minfps);
+#else
+        // FIXME: workaround for https://github.com/Stellarium/stellarium/issues/2778, in which touchpad-based
+        // view manipulation can be very laggy on Macs in circumstances where frame rendering more time than
+        // the trackpad move update rate from the OS. This is perhaps a bug in Qt; see the discussion around
+        // https://github.com/Stellarium/stellarium/issues/2778#issuecomment-1722766935 and below for details.
+        int requiredFpsInterval = qMax(minTimeBetweenFrames, qRound(needsMaxFPS()?1000.f/maxfps:1000.f/minfps));
+#endif
 
 	if(fpsTimer->interval() != requiredFpsInterval)
 		fpsTimer->setInterval(requiredFpsInterval);
