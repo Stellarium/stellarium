@@ -1466,16 +1466,15 @@ void StelMainView::drawEnded()
 
 #ifndef Q_OS_MACOS
 	int requiredFpsInterval = qRound(needsMaxFPS()?1000.f/maxfps:1000.f/minfps);
-#else
-        // FIXME: workaround for https://github.com/Stellarium/stellarium/issues/2778, in which touchpad-based
-        // view manipulation can be very laggy on Macs in circumstances where frame rendering more time than
-        // the trackpad move update rate from the OS. This is perhaps a bug in Qt; see the discussion around
-        // https://github.com/Stellarium/stellarium/issues/2778#issuecomment-1722766935 and below for details.
-        int requiredFpsInterval = qMax(minTimeBetweenFrames, qRound(needsMaxFPS()?1000.f/maxfps:1000.f/minfps));
-#endif
-
 	if(fpsTimer->interval() != requiredFpsInterval)
 		fpsTimer->setInterval(requiredFpsInterval);
+#else
+	// FIXME: workaround for https://github.com/Stellarium/stellarium/issues/2778, in which touchpad-based
+	// view manipulation can be very laggy on Macs in circumstances where frame rendering more time than
+	// the trackpad move update rate from the OS. This is perhaps a bug in Qt; see the discussion around
+	// https://github.com/Stellarium/stellarium/issues/2778#issuecomment-1722766935 and below for details.
+	fpsTimer->setInterval(qMax(minTimeBetweenFrames, qRound(needsMaxFPS()?1000.f/maxfps:1000.f/minfps)));
+#endif
 
 	if(!fpsTimer->isActive())
 		fpsTimer->start();
