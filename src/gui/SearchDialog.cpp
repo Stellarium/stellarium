@@ -1053,6 +1053,9 @@ QStringList SearchDialog::listMatchingRecentObjects(const QString& objPrefix, in
 		if (result.size() >= maxNbItem)
 			break;
 	}
+	stringLengthCompare comparator;
+	std::sort(result.begin(), result.end(), comparator);
+
 	return result;
 }
 
