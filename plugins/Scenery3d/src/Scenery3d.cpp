@@ -235,7 +235,7 @@ void Scenery3d::draw(StelCore* core)
 		const StelProjectorP prj = core->getProjection(StelCore::FrameEquinoxEqu);
 		StelPainter painter(prj);
 		painter.setFont(font);
-		painter.setColor(textColor[0], textColor[1], textColor[2], messageFader.getInterstate());
+		painter.setColor(textColor, messageFader.getInterstate());
 		painter.drawText(83, 120, currentMessage);
 	}
 }
