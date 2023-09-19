@@ -230,7 +230,7 @@ void AngleMeasure::drawOne(StelCore *core, const StelCore::FrameType frameType, 
 		painter.setLineSmooth(true);
 
 		// main line is a great circle
-		painter.setColor(lineColor[0], lineColor[1], lineColor[2], lineVisible.getInterstate());
+		painter.setColor(lineColor, lineVisible.getInterstate());
 		if (frameType==StelCore::FrameEquinoxEqu)
 		{
 			painter.drawGreatCircleArc(startPoint, endPoint, Q_NULLPTR);
@@ -253,7 +253,7 @@ void AngleMeasure::drawOne(StelCore *core, const StelCore::FrameType frameType, 
 	if (messageFader.getInterstate() > 0.000001f)
 	{
 		// text block (bottom left)
-		painter.setColor(txtColor[0], txtColor[1], txtColor[2], messageFader.getInterstate());
+		painter.setColor(txtColor, messageFader.getInterstate());
 		const double ppx = core->getCurrentStelProjectorParams().devicePixelsPerPixel;
 		int x  = static_cast<int>(83*ppx);
 		int y  = static_cast<int>(120*ppx);

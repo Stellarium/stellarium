@@ -80,8 +80,7 @@ void MeteorShowers::drawPointer(StelCore* core)
 		return;
 	}
 
-	const Vec3f& c(obj->getInfoColor());
-	painter.setColor(c[0],c[1],c[2]);
+	painter.setColor(obj->getInfoColor());
 	m_mgr->getPointerTexture()->bind();
 
 	painter.setBlending(true);

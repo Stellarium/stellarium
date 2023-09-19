@@ -203,7 +203,7 @@ void NavStars::draw(StelCore* core)
 			if (!markerTexture.isNull())
 			{
 				painter.setBlending(true);
-				painter.setColor(markerColor[0], markerColor[1], markerColor[2], markerFader.getInterstate());
+				painter.setColor(markerColor, markerFader.getInterstate());
 				markerTexture->bind();
 				painter.drawSprite2dMode(static_cast<float>(pos[0]), static_cast<float>(pos[1]), 11.f);
 			}

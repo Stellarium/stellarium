@@ -270,6 +270,7 @@ private:
 
 	static Vec3f getHintColor(Nebula::NebulaType nType);
 	float getVisibilityLevelByMagnitude() const;
+	float getHintSize(StelPainter& sPainter) const;
 
 	//! Get the printable description of morphological nebula type.
 	//! @return the nebula morphological type string.
