@@ -40,19 +40,19 @@ class QToolButton;
 class AngleSpinBox;
 
 //! Base class for all the GUI windows in Stellarium.
-//! 
+//!
 //! Windows in Stellarium are actually basic QWidgets that have to be wrapped in
 //! a QGraphicsProxyWidget (CustomProxy) to be displayed by StelMainView
 //! (which is derived from QGraphicsView). See the %Qt documentation for details.
-//! 
+//!
 //! The base widget needs to be populated with controls in the implementation
 //! of the createDialogContent() function. This can be done either manually, or
 //! by using a .ui file. See the %Qt documentation on using %Qt Designer .ui files
 //! for details.
-//! 
+//!
 //! The createDialogContent() function itself is called automatically the first
 //! time setVisible() is called with "true".
-//! 
+//!
 //! Moving a window is done by dragging its title bar, defined in the BarFrame
 //! class. Every derived window class needs a BarFrame object - it
 //! has to be either included in a .ui file, or manually instantiated in
@@ -96,7 +96,7 @@ public slots:
 	//! based on a Qt Designer file (.ui)</a>, the implementation needs to call
 	//! the generated class' retranslateUi() method, like this:
 	//! \code
-	//! if (dialog) 
+	//! if (dialog)
 	//! 	ui->retranslateUi(dialog);
 	//! \endcode
 	virtual void retranslate() = 0;
@@ -253,28 +253,14 @@ class CustomProxy : public QGraphicsProxyWidget
 		bool event(QEvent* event) override
 		{
 			if (StelApp::getInstance().getSettings()->value("gui/flag_use_window_transparency", true).toBool())
-			{
-				switch (event->type())
-				{
-					case QEvent::WindowDeactivate:
-						widget()->setWindowOpacity(0.4);
-						break;
-					case QEvent::WindowActivate:
-					case QEvent::GrabMouse:
-						widget()->setWindowOpacity(0.9);
-						break;
-					default:
-						break;
-				}
-			}
+				widget()->setWindowOpacity(0.9);
+
 			return QGraphicsProxyWidget::event(event);
 		}
 		void resizeEvent(QGraphicsSceneResizeEvent *event) override
 		{
 			if (event->newSize() != event->oldSize())
-			{
 				emit sizeChanged(event->newSize());
-			}
 			QGraphicsProxyWidget::resizeEvent(event);
 		}
 };
