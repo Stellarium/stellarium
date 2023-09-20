@@ -750,6 +750,7 @@ void Nebula::renderDarkNebulaMarker(StelPainter& sPainter, const float x, const 
 	const float gap = 0.15*size;
 	const float*const cossin = StelUtils::ComputeCosSinRhoZone((M_PIf/2)/(numPointsInArc-1),
 								   numPointsInArc-1, 0);
+	sPainter.setBlending(true);
 	sPainter.setLineSmooth(true);
 	sPainter.setLineWidth(scale * std::clamp(2*size/35, 1.f, 2.5f));
 	sPainter.setColor(color, hintsBrightness);
@@ -861,6 +862,7 @@ void Nebula::renderMarkerRoundedRect(StelPainter& sPainter, const float x, const
 		vertexData.push_back(bottomInnerY - roundRadius*sina);
 	}
 	const auto vertCount = vertexData.size() / 2;
+	sPainter.setBlending(true);
 	sPainter.setLineSmooth(true);
 	sPainter.setLineWidth(scale * std::clamp(2*size/35, 1.f, 2.5f));
 	sPainter.setColor(color, hintsBrightness);
@@ -878,6 +880,7 @@ void Nebula::renderRoundMarker(StelPainter& sPainter, const float x, const float
 	const auto scale = pixelRatio * StelApp::getInstance().getGlobalScalingRatio();
 	size *= scale;
 
+	sPainter.setBlending(true);
 	sPainter.setLineSmooth(true);
 	sPainter.setLineWidth(scale * std::clamp(size/7, 1.f, 2.5f));
 	sPainter.setColor(color, hintsBrightness);
@@ -921,6 +924,7 @@ void Nebula::renderEllipticMarker(StelPainter& sPainter, const float x, const fl
 		vertexData.push_back(y + pointY*cosa + pointX*sina);
 	}
 	const auto vertCount = vertexData.size() / 2;
+	sPainter.setBlending(true);
 	sPainter.setLineSmooth(true);
 	sPainter.setLineWidth(scale * std::clamp(size/40, 1.f, 2.f));
 	sPainter.setColor(color, hintsBrightness);
@@ -940,7 +944,7 @@ void Nebula::renderMarkerPointedCircle(StelPainter& sPainter, const float x, con
 
 	texPointElement->bind();
 	sPainter.setColor(color, hintsBrightness);
-	sPainter.setBlending(true, GL_ONE, GL_ONE);
+	sPainter.setBlending(true);
 	const auto numPoints = StelUtils::getSmallerPowerOfTwo(std::clamp(int(0.4f*size), 8, 4096));
 	const auto spriteSize = std::min(0.25f * 2*M_PIf*size / numPoints, 5.f);
 	if(insideRect)
