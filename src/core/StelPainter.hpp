@@ -26,7 +26,6 @@
 #include "StelSphereGeometry.hpp"
 #include "StelProjectorType.hpp"
 #include "StelTextureTypes.hpp"
-#include "StelProjector.hpp"
 #include <QString>
 #include <QVarLengthArray>
 #include <QFontMetrics>
