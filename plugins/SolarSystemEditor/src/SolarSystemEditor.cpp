@@ -834,9 +834,8 @@ SsoElements SolarSystemEditor::readMpcOneLineCometElements(QString oneLineElemen
 	result.insert("section_name", sectionName);
 
 	//After a name has been determined, insert the essential keys
+	result.insert("type", orbitType == 'I' ? "interstellar object" : "comet"); // GZ: One could expect A=reclassified as asteroid, but eccentricity can be >1, so we leave A as comets.
 	//result.insert("parent", "Sun"); // 0.16: omit obvious default.
-	result.insert("type", "comet");
-	//result.insert("type", orbitType == 'A' ? "asteroid" : "comet"); // GZ: One could expect A=reclassified as asteroid, but eccentricity can be >1, so what is that?
 	//"kepler_orbit" could be used for all cases:
 	//"ell_orbit" interprets distances as kilometers, not AUs
 	// result.insert("coord_func", "kepler_orbit"); // 0.20: omit default
