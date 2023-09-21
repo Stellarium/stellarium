@@ -944,7 +944,7 @@ void Nebula::renderMarkerPointedCircle(StelPainter& sPainter, const float x, con
 
 	texPointElement->bind();
 	sPainter.setColor(color, hintsBrightness);
-	sPainter.setBlending(true);
+	sPainter.setBlending(true, GL_SRC_ALPHA, GL_ONE);
 	const auto numPoints = StelUtils::getSmallerPowerOfTwo(std::clamp(int(0.4f*size), 8, 4096));
 	const auto spriteSize = std::min(0.25f * 2*M_PIf*size / numPoints, 5.f);
 	if(insideRect)
