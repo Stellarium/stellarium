@@ -1059,7 +1059,7 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints, StelCore *core)
 	}
 
 	sPainter.setColor(color, hintsBrightness);
-	sPainter.setBlending(true);
+	sPainter.setBlending(true, GL_SRC_ALPHA, GL_ONE);
 
 	sPainter.drawSprite2dMode(static_cast<float>(XY[0]), static_cast<float>(XY[1]), finalSize);
 }
