@@ -698,8 +698,6 @@ void NebulaMgr::draw(StelCore* core)
 
 	Nebula::hintsBrightness = hintsFader.getInterstate()*flagShow.getInterstate();
 
-	sPainter.setBlending(true, GL_ONE, GL_ONE);
-
 	// Use a 4 degree margin (esp. for wide outlines)
 	const float margin = 4.f*M_PI_180f*prj->getPixelPerRadAtCenter();
 	const SphericalRegionP& p = prj->getViewportConvexPolygon(margin, margin);
