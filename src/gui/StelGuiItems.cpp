@@ -159,6 +159,8 @@ StelButton::StelButton(QGraphicsItem* parent,
 	: QGraphicsPixmapItem(pixOff, parent)
 {
 	StelAction *action = StelApp::getInstance().getStelActionManager()->findAction(actionId);
+	if (!actionId.isEmpty() && !action)
+		qWarning() << "Couldn't find action" << actionId;
 	initCtor(pixOn, pixOff, pixNoChange, pixHover, action, nullptr, noBackground, isTristate);
 }
 
@@ -172,6 +174,8 @@ StelButton::StelButton(QGraphicsItem* parent,
 	: QGraphicsPixmapItem(pixOff, parent)
 {
 	StelAction *action = StelApp::getInstance().getStelActionManager()->findAction(actionId);
+	if (!actionId.isEmpty() && !action)
+		qWarning() << "Couldn't find action" << actionId;
 	StelAction *otherAction=nullptr;
 	if (!otherActionId.isEmpty())
 		otherAction = StelApp::getInstance().getStelActionManager()->findAction(otherActionId);
