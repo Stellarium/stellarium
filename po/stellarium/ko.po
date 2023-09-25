@@ -18,15 +18,16 @@
 # Junghyeon Park <j824h@outlook.com>, 2022
 # David C Yang <nichthierwohne@gmail.com>, 2023
 # ysjbserver <ysjbserver@naver.com>, 2023
+# kse88824 <risesir824@naver.com>, 2023
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2023-08-29 10:57+0700\n"
+"POT-Creation-Date: 2023-09-18 21:31+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
-"Last-Translator: ysjbserver <ysjbserver@naver.com>, 2023\n"
+"Last-Translator: kse88824 <risesir824@naver.com>, 2023\n"
 "Language-Team: Korean (https://app.transifex.com/stellarium/teams/80998/ko/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -44,14 +45,15 @@ msgstr ""
 #: src/gui/AstroCalcDialog.cpp:905 src/gui/AstroCalcDialog.cpp:2307
 #: src/gui/AstroCalcDialog.cpp:2879 src/gui/AstroCalcDialog.cpp:2911
 #: src/gui/AstroCalcDialog.cpp:3295 src/gui/AstroCalcDialog.cpp:8210
-#: src/gui/ObsListDialog.cpp:260 src/ui_configurationDialog.h:1863
+#: src/gui/ObsListDialog.cpp:253 src/ui_configurationDialog.h:1863
 #: plugins/Satellites/src/Satellite.cpp:339
 #: plugins/TelescopeControl/src/TelescopeClient.cpp:136
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:515
-#: plugins/Supernovae/src/Supernova.cpp:143 plugins/Novae/src/Nova.cpp:150
+#: plugins/Supernovae/src/Supernova.cpp:144 plugins/Novae/src/Nova.cpp:150
 #: plugins/Quasars/src/Quasar.cpp:125 plugins/Pulsars/src/Pulsar.cpp:189
-#: plugins/Pulsars/src/Pulsar.cpp:191 plugins/Exoplanets/src/Exoplanet.cpp:319
+#: plugins/Pulsars/src/Pulsar.cpp:191 plugins/Exoplanets/src/Exoplanet.cpp:320
 #: plugins/MeteorShowers/src/MeteorShower.cpp:525
+#: plugins/MissingStars/src/MissingStar.cpp:130
 msgid "Type"
 msgstr "종류"
 
@@ -80,7 +82,7 @@ msgstr "성군"
 #: src/core/modules/NebulaMgr.cpp:358 src/core/modules/SolarSystem.cpp:307
 #: src/core/modules/MilkyWay.cpp:107 src/core/modules/ZodiacalLight.cpp:112
 #: src/core/modules/ToastMgr.cpp:62 src/core/modules/HipsMgr.cpp:156
-#: src/core/StelApp.cpp:654 src/core/StelCore.cpp:296
+#: src/core/StelApp.cpp:658 src/core/StelCore.cpp:296
 #: src/core/StelSkyLayerMgr.cpp:83 src/core/StelSkyLayerMgr.cpp:84
 #: src/StelMainView.cpp:939
 msgid "Display Options"
@@ -833,7 +835,8 @@ msgstr "광공해 주기적 변화"
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:473
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:215
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:187
-#: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:182
+#: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:184
+#: plugins/MissingStars/src/gui/MissingStarsDialog.cpp:87
 msgid "Author"
 msgstr "저자"
 
@@ -846,8 +849,8 @@ msgctxt "distance"
 msgid "m"
 msgstr "m"
 
-#: src/core/modules/LandscapeMgr.cpp:1383 src/gui/ObsListDialog.cpp:266
-#: src/ui_locationDialogGui.h:486 src/ui_obsListDialog.h:414
+#: src/core/modules/LandscapeMgr.cpp:1383 src/gui/ObsListDialog.cpp:259
+#: src/ui_locationDialogGui.h:486 src/ui_obsListDialog.h:427
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:144
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:482
 msgid "Location"
@@ -933,8 +936,8 @@ msgstr "지름"
 #. TRANSLATORS: Unit of measure for distance - kilometers
 #: src/core/modules/NomenclatureItem.cpp:244 src/core/modules/Planet.cpp:672
 #: src/core/modules/Planet.cpp:697 src/core/modules/Planet.cpp:805
-#: src/core/modules/Planet.cpp:1526 src/core/modules/Comet.cpp:189
-#: src/core/modules/Comet.cpp:199 src/gui/StelGuiItems.cpp:890
+#: src/core/modules/Planet.cpp:1526 src/core/modules/Comet.cpp:190
+#: src/core/modules/Comet.cpp:200 src/gui/StelGuiItems.cpp:890
 #: src/gui/AstroCalcDialog.cpp:3112 src/gui/AstroCalcDialog.cpp:3625
 #: src/gui/AstroCalcDialog.cpp:9032 plugins/Satellites/src/Satellites.cpp:2914
 #: plugins/Satellites/src/Satellite.cpp:356
@@ -1665,7 +1668,7 @@ msgstr "전파은하"
 msgid "interacting galaxy"
 msgstr "상호작용은하"
 
-#: src/core/modules/Nebula.cpp:70 plugins/Quasars/src/Quasar.hpp:72
+#: src/core/modules/Nebula.cpp:70 plugins/Quasars/src/Quasar.hpp:71
 msgid "quasar"
 msgstr "퀘이사"
 
@@ -1763,6 +1766,7 @@ msgstr "원시 행성상성운"
 
 #: src/core/modules/Nebula.cpp:94 src/core/modules/Planet.cpp:128
 #: src/core/modules/StarWrapper.cpp:90
+#: plugins/MissingStars/src/MissingStar.hpp:71
 msgid "star"
 msgstr "항성"
 
@@ -1801,7 +1805,7 @@ msgstr "알 수 없는 천체"
 #: src/core/modules/Nebula.cpp:175 src/core/StelObject.cpp:348
 #: src/gui/AstroCalcChart.cpp:95 src/gui/AstroCalcChart.cpp:105
 #: src/gui/AstroCalcChart.cpp:434 src/gui/AstroCalcChart.cpp:460
-#: src/gui/ObsListDialog.cpp:263 plugins/Supernovae/src/Supernova.cpp:127
+#: src/gui/ObsListDialog.cpp:256 plugins/Supernovae/src/Supernova.cpp:128
 msgid "Magnitude"
 msgstr "등급"
 
@@ -1841,6 +1845,7 @@ msgstr "추가 카탈로그 번호: "
 #: src/core/modules/Nebula.cpp:260 src/core/modules/Planet.cpp:815
 #: src/core/modules/MinorPlanet.cpp:186 src/core/modules/StarWrapper.cpp:54
 #: src/core/modules/StarWrapper.cpp:306 plugins/Quasars/src/Quasar.cpp:134
+#: plugins/MissingStars/src/MissingStar.cpp:143
 msgid "Color Index (B-V)"
 msgstr "색지수"
 
@@ -1885,8 +1890,9 @@ msgstr "배향각"
 #. TRANSLATORS: Unit of measure for distance - Light Years
 #: src/core/modules/Nebula.cpp:345 src/core/modules/Nebula.cpp:358
 #: src/core/modules/StarWrapper.cpp:336
-#: plugins/Supernovae/src/Supernova.cpp:158 plugins/Novae/src/Nova.cpp:164
-#: plugins/Pulsars/src/Pulsar.cpp:268 plugins/Exoplanets/src/Exoplanet.cpp:333
+#: plugins/Supernovae/src/Supernova.cpp:159 plugins/Novae/src/Nova.cpp:164
+#: plugins/Pulsars/src/Pulsar.cpp:268 plugins/Exoplanets/src/Exoplanet.cpp:334
+#: plugins/MissingStars/src/MissingStar.cpp:153
 msgctxt "distance"
 msgid "ly"
 msgstr "광년"
@@ -1897,8 +1903,10 @@ msgstr "광년"
 #: src/core/modules/StarWrapper.cpp:343 src/gui/AstroCalcDialog.cpp:940
 #: src/gui/AstroCalcChart.cpp:92 src/gui/AstroCalcChart.cpp:102
 #: src/gui/AstroCalcChart.cpp:427 src/gui/AstroCalcChart.cpp:453
-#: src/ui_configurationDialog.h:1848 plugins/Supernovae/src/Supernova.cpp:159
-#: plugins/Novae/src/Nova.cpp:165 plugins/Exoplanets/src/Exoplanet.cpp:334
+#: src/ui_configurationDialog.h:1848 plugins/Supernovae/src/Supernova.cpp:160
+#: plugins/Novae/src/Nova.cpp:165 plugins/Exoplanets/src/Exoplanet.cpp:335
+#: plugins/MissingStars/src/MissingStar.cpp:158
+#: plugins/MissingStars/src/MissingStar.cpp:160
 msgid "Distance"
 msgstr "거리"
 
@@ -1925,12 +1933,14 @@ msgid "Redshift"
 msgstr "적색편이"
 
 #: src/core/modules/Nebula.cpp:417 src/core/modules/StarWrapper.cpp:370
+#: plugins/MissingStars/src/MissingStar.cpp:180
 msgid "Parallax"
 msgstr "시차"
 
 #. TRANSLATORS: Unit of measure for annual parallax - milliarcseconds
 #: src/core/modules/Nebula.cpp:417 src/core/modules/StarWrapper.cpp:375
 #: plugins/Pulsars/src/Pulsar.cpp:257
+#: plugins/MissingStars/src/MissingStar.cpp:185
 msgctxt "parallax"
 msgid "mas"
 msgstr "mas"
@@ -2316,8 +2326,9 @@ msgstr "세드나족"
 msgid "interstellar object"
 msgstr "성간 천체"
 
-#: src/core/modules/Planet.cpp:546 src/core/modules/Comet.cpp:180
+#: src/core/modules/Planet.cpp:546 src/core/modules/Comet.cpp:181
 #: src/core/modules/StarWrapper.cpp:300 plugins/Quasars/src/Quasar.cpp:131
+#: plugins/MissingStars/src/MissingStar.cpp:138
 msgid "Absolute Magnitude"
 msgstr "절대등급"
 
@@ -2353,6 +2364,7 @@ msgstr "시간별 동작"
 #: src/core/modules/Planet.cpp:658 src/core/modules/Planet.cpp:1385
 #: src/core/modules/Planet.cpp:1394 src/core/modules/StarWrapper.cpp:358
 #: plugins/Pulsars/src/Pulsar.cpp:204
+#: plugins/MissingStars/src/MissingStar.cpp:172
 msgctxt "into the direction of"
 msgid "towards"
 msgstr "향하는 방향:"
@@ -2364,7 +2376,7 @@ msgstr "향하는 방향:"
 #: src/gui/AstroCalcDialog.cpp:9057 src/gui/AstroCalcChart.cpp:427
 #: src/gui/AstroCalcChart.cpp:431 src/gui/AstroCalcChart.cpp:446
 #: src/gui/AstroCalcChart.cpp:453 src/gui/AstroCalcChart.cpp:457
-#: plugins/Exoplanets/src/Exoplanet.cpp:363
+#: plugins/Exoplanets/src/Exoplanet.cpp:364
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:178
 msgctxt "distance, astronomical unit"
 msgid "AU"
@@ -2374,7 +2386,7 @@ msgstr "AU"
 #. TRANSLATORS: Unit of measure for distance - milliones kilometers
 #. TRANSLATORS: Unit of measure for distance - millions kilometers
 #: src/core/modules/Planet.cpp:686 src/core/modules/Planet.cpp:704
-#: src/core/modules/Comet.cpp:191 src/gui/AstroCalcDialog.cpp:9034
+#: src/core/modules/Comet.cpp:192 src/gui/AstroCalcDialog.cpp:9034
 msgctxt "distance"
 msgid "M km"
 msgstr "M km"
@@ -2629,7 +2641,7 @@ msgid "Albedo"
 msgstr "반사율"
 
 #: src/core/modules/Planet.cpp:1553 src/core/modules/MinorPlanet.cpp:211
-#: src/core/modules/Comet.cpp:240
+#: src/core/modules/Comet.cpp:241
 msgid "Discovered"
 msgstr ""
 
@@ -2643,19 +2655,19 @@ msgstr "톨른 분광형"
 msgid "SMASSII spectral type"
 msgstr "SMASSII 분광형"
 
-#: src/core/modules/Comet.cpp:199
+#: src/core/modules/Comet.cpp:200
 msgid "Core diameter"
 msgstr "중심 지름"
 
-#: src/core/modules/Comet.cpp:204
+#: src/core/modules/Comet.cpp:205
 msgid "Coma diameter (estimate)"
 msgstr "코마 지름 (추산)"
 
-#: src/core/modules/Comet.cpp:226
+#: src/core/modules/Comet.cpp:227
 msgid "Gas tail length (estimate)"
 msgstr "기체 꼬리 길이 (추산)"
 
-#: src/core/modules/Comet.cpp:496 src/core/StelProjectorClasses.cpp:729
+#: src/core/modules/Comet.cpp:497 src/core/StelProjectorClasses.cpp:729
 msgid "Orthographic"
 msgstr "정사도법"
 
@@ -2750,27 +2762,32 @@ msgid "Photometric system"
 msgstr "측광체계"
 
 #: src/core/modules/StarWrapper.cpp:355 plugins/Pulsars/src/Pulsar.cpp:202
+#: plugins/MissingStars/src/MissingStar.cpp:170
 msgid "Proper motion"
 msgstr "고유운동"
 
 #: src/core/modules/StarWrapper.cpp:357 src/core/modules/StarWrapper.cpp:363
 #: plugins/Pulsars/src/Pulsar.cpp:203 plugins/Pulsars/src/Pulsar.cpp:205
+#: plugins/MissingStars/src/MissingStar.cpp:171
+#: plugins/MissingStars/src/MissingStar.cpp:173
 msgctxt "milliarc second per year"
 msgid "mas/yr"
 msgstr "mas/yr"
 
 #: src/core/modules/StarWrapper.cpp:360 plugins/Pulsars/src/Pulsar.cpp:205
+#: plugins/MissingStars/src/MissingStar.cpp:173
 msgid "Proper motions by axes"
 msgstr "축별 고유운동"
 
 #: src/core/modules/StarWrapper.cpp:379 plugins/Quasars/src/Quasar.cpp:142
-#: plugins/Exoplanets/src/Exoplanet.cpp:328
+#: plugins/Exoplanets/src/Exoplanet.cpp:329
+#: plugins/MissingStars/src/MissingStar.cpp:189
 msgid "Spectral Type"
 msgstr "분광형"
 
 #: src/core/modules/StarWrapper.cpp:382
 #: plugins/Satellites/src/ui_satellitesFilterDialog.h:300
-#: plugins/Exoplanets/src/Exoplanet.cpp:360
+#: plugins/Exoplanets/src/Exoplanet.cpp:361
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:177
 msgid "Period"
 msgstr "공전 주기"
@@ -2952,143 +2969,143 @@ msgstr "다음 해의 동지"
 msgid "December solstice at previous year"
 msgstr "저번 해의 동지"
 
-#: src/core/StelApp.cpp:459
+#: src/core/StelApp.cpp:463
 msgid "Initializing textures..."
 msgstr "텍스쳐를 설정하는 중입니다..."
 
-#: src/core/StelApp.cpp:463
+#: src/core/StelApp.cpp:467
 msgid "Initializing network access..."
 msgstr "네트워크 접근을 설정하는 중입니다..."
 
-#: src/core/StelApp.cpp:466
+#: src/core/StelApp.cpp:470
 msgid "Initializing network disk cache..."
 msgstr "네트워크 디스크 캐시를 설정하는 중입니다..."
 
-#: src/core/StelApp.cpp:480
+#: src/core/StelApp.cpp:484
 msgid "Initializing network proxy..."
 msgstr "네트워크 프록시를 설정하는 중입니다..."
 
-#: src/core/StelApp.cpp:495
+#: src/core/StelApp.cpp:499
 msgid "Initializing Object Database..."
 msgstr "천체 데이터베이스를 설정하는 중입니다..."
 
-#: src/core/StelApp.cpp:501
+#: src/core/StelApp.cpp:505
 msgid "Initializing HiPS survey..."
 msgstr "HiPS 탐색을 설정하는 중입니다..."
 
-#: src/core/StelApp.cpp:507
+#: src/core/StelApp.cpp:511
 msgid "Initializing Solar System objects..."
 msgstr "태양계 천체를 설정하는 중입니다..."
 
-#: src/core/StelApp.cpp:513
+#: src/core/StelApp.cpp:517
 msgid "Initializing planetary nomenclature..."
 msgstr "행성 지형을 설정하는 중입니다..."
 
-#: src/core/StelApp.cpp:519
+#: src/core/StelApp.cpp:523
 msgid "Initializing stars..."
 msgstr "별 정보를 설정하는 중입니다..."
 
-#: src/core/StelApp.cpp:524
+#: src/core/StelApp.cpp:528
 msgid "Initializing core..."
 msgstr "코어 스크립트를 설정하는 중입니다..."
 
-#: src/core/StelApp.cpp:528
+#: src/core/StelApp.cpp:532
 msgid "Initializing deep-sky objects..."
 msgstr "심우주 천체들을 설정하는 중입니다..."
 
-#: src/core/StelApp.cpp:534
+#: src/core/StelApp.cpp:538
 msgid "Initializing Milky Way..."
 msgstr "은하수를 설정하는 중입니다..."
 
-#: src/core/StelApp.cpp:540
+#: src/core/StelApp.cpp:544
 msgid "Initializing zodiacal light..."
 msgstr "황도광을 설정하는 중입니다..."
 
-#: src/core/StelApp.cpp:546
+#: src/core/StelApp.cpp:550
 msgid "Initializing sky image layer..."
 msgstr "하늘 사진 레이어를 설정하는 중입니다..."
 
-#: src/core/StelApp.cpp:552
+#: src/core/StelApp.cpp:556
 msgid "Initializing TOAST surveys..."
 msgstr "TOAST 탐색을 설정하는 중입니다..."
 
-#: src/core/StelApp.cpp:558
+#: src/core/StelApp.cpp:562
 msgid "Initializing audio..."
 msgstr "소리를 설정하는 중입니다..."
 
-#: src/core/StelApp.cpp:562
+#: src/core/StelApp.cpp:566
 msgid "Initializing video..."
 msgstr "영상을 설정하는 중입니다..."
 
-#: src/core/StelApp.cpp:568
+#: src/core/StelApp.cpp:572
 msgid "Initializing constellations..."
 msgstr "별자리를 설정하는 중입니다..."
 
-#: src/core/StelApp.cpp:574
+#: src/core/StelApp.cpp:578
 msgid "Initializing asterisms..."
 msgstr "성군을 설정하는 중입니다..."
 
-#: src/core/StelApp.cpp:580
+#: src/core/StelApp.cpp:584
 msgid "Initializing landscape..."
 msgstr "풍경을 설정하는 중입니다..."
 
-#: src/core/StelApp.cpp:585
+#: src/core/StelApp.cpp:589
 msgid "Initializing grid lines..."
 msgstr "격자 선을 설정하는 중입니다..."
 
-#: src/core/StelApp.cpp:590
+#: src/core/StelApp.cpp:594
 msgid "Initializing special markers..."
 msgstr "특수 마커를 초기화하고 있습니다..."
 
-#: src/core/StelApp.cpp:596
+#: src/core/StelApp.cpp:600
 msgid "Initializing sporadic meteors..."
 msgstr "산발적인 유성을 설정하는 중입니다..."
 
-#: src/core/StelApp.cpp:602
+#: src/core/StelApp.cpp:606
 msgid "Initializing user labels..."
 msgstr "사용자 설정 이름표를 설정하는 중입니다..."
 
-#: src/core/StelApp.cpp:607
+#: src/core/StelApp.cpp:611
 msgid "Initializing sky cultures..."
 msgstr "하늘 문화를 설정하는 중입니다..."
 
-#: src/core/StelApp.cpp:611
+#: src/core/StelApp.cpp:615
 msgid "Initializing user markers..."
 msgstr "사용자 설정 표지를 설정하는 중입니다..."
 
-#: src/core/StelApp.cpp:617
+#: src/core/StelApp.cpp:621
 msgid "Initializing custom objects..."
 msgstr "사용자 천체를 설정하는 중입니다..."
 
-#: src/core/StelApp.cpp:623
+#: src/core/StelApp.cpp:627
 msgid "Initializing highlights..."
 msgstr "강조를 설정하는 중입니다..."
 
-#: src/core/StelApp.cpp:629
+#: src/core/StelApp.cpp:633
 msgid "Initializing specific time..."
 msgstr "고유 시간을 설정하는 중입니다..."
 
-#: src/core/StelApp.cpp:637
+#: src/core/StelApp.cpp:641
 msgid "Initializing scripting..."
 msgstr "스크립트를 설정하는 중입니다..."
 
-#: src/core/StelApp.cpp:642
+#: src/core/StelApp.cpp:646
 msgid "Initializing color scheme..."
 msgstr "색채를 설정하는 중입니다..."
 
-#: src/core/StelApp.cpp:654 src/ui_configurationDialog.h:1955
+#: src/core/StelApp.cpp:658 src/ui_configurationDialog.h:1955
 msgid "Night mode"
 msgstr "야간 모드"
 
-#: src/core/StelApp.cpp:684
+#: src/core/StelApp.cpp:688
 msgid "Initializing SPOUT sender..."
 msgstr "SPOUT sender를 설정하는 중입니다..."
 
-#: src/core/StelApp.cpp:694
+#: src/core/StelApp.cpp:698
 msgid "Cannot create Spout sender. See log for details."
 msgstr "Spout sender를 생성할 수 없습니다. 자세한 상황을 보려면 로그를 보십시오."
 
-#: src/core/StelApp.cpp:721
+#: src/core/StelApp.cpp:725
 msgid "Loading plugin"
 msgstr "플러그인 불러오기"
 
@@ -3585,25 +3602,19 @@ msgstr ""
 msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
 "(2004) and a polynomial fit through tabulated values for 1600-2000, is used "
-"for the %1NASA Eclipse Web Site%2 and in their <em>Five Millennium Canon of "
-"Solar Eclipses: -1900 to +3000</em> (2006). This formula is also used in the"
-" solar, lunar and planetary ephemeris program SOLEX."
+"for the %1NASA Eclipse Web Site%2, in their <em>Five Millennium Canon of "
+"Solar Eclipses: -1900 to +3000</em> (2006) and <em>Thousand Year Canon of "
+"Solar Eclipses 1501 to 2500</em> (2014). This formula is also used in the "
+"solar, lunar and planetary ephemeris program SOLEX."
 msgstr ""
-"이 공식은 F. Espenak와 J. Meeus이 Morrison & Stephenson (2004)을 기반으로 해 표로 정리된 "
-"1600-2000의 자료를 근사다항식으로 만든 것입니다. 이 식은 %1NASA 일식 웹 사이트%2와 <em>Five Millennium "
-"Canon of Solar Eclipses: -1900 to +3000</em> (2006)에 쓰였습니다. 이 공식은 또한 태양, 달, "
-"행성의 천문력 프로그램 SOLEX에도 쓰였습니다."
 
 #: src/core/StelCore.cpp:2550
 msgid ""
 "This solution is modified from F. Espenak and J. Meeus, based on Morrison & "
 "Stephenson (2004) and a polynomial fit through tabulated values for "
-"1600-2000. Formula for 2005-2050 is modified to match observed values and "
-"near-term predictions."
+"1600-2000. Values for 2015-2033 are interpolated from observations and "
+"predictions by IERS Rapid Service/Prediction Center."
 msgstr ""
-"이 공식은 F. Espenak와 J. Meeus이 Morrison & Stephenson (2004)을 기반으로 해 표로 정리된 "
-"1600-2000의 자료를 근사다항식으로 만든 것을 변형한 것입니다. 2005-2050 기간의 공식이 관측값과 근미래 예측값을 맞추기 "
-"위해 변형되었습니다."
 
 #: src/core/StelCore.cpp:2550
 msgid "Used by default."
@@ -3686,12 +3697,12 @@ msgid ""
 msgstr "이 공식은 사용자 정의 상수를 써서 계산하는 %1T의 2차 방정식입니다."
 
 #: src/core/StelCore.cpp:2574 src/core/SimbadSearcher.cpp:173
-#: src/gui/ObsListDialog.cpp:83 src/gui/ObsListDialog.cpp:901
-#: src/gui/ObsListDialog.cpp:919 src/gui/ObsListDialog.cpp:953
-#: src/gui/ObsListDialog.cpp:969 src/gui/ObsListDialog.cpp:1004
-#: src/gui/ObsListDialog.cpp:1016 src/gui/ObsListDialog.cpp:1025
-#: src/gui/ObsListDialog.cpp:1037 src/gui/ObsListDialog.cpp:1054
-#: src/gui/ObsListDialog.cpp:1217 src/gui/ObsListDialog.cpp:1222
+#: src/gui/ObsListDialog.cpp:83 src/gui/ObsListDialog.cpp:897
+#: src/gui/ObsListDialog.cpp:918 src/gui/ObsListDialog.cpp:964
+#: src/gui/ObsListDialog.cpp:980 src/gui/ObsListDialog.cpp:1021
+#: src/gui/ObsListDialog.cpp:1033 src/gui/ObsListDialog.cpp:1042
+#: src/gui/ObsListDialog.cpp:1058 src/gui/ObsListDialog.cpp:1075
+#: src/gui/ObsListDialog.cpp:1238 src/gui/ObsListDialog.cpp:1243
 #: plugins/OnlineQueries/src/HipOnlineQuery.cpp:91
 msgid "Error"
 msgstr "오류"
@@ -3869,160 +3880,160 @@ msgid "(apparent)"
 msgstr "(겉보기)"
 
 #. TRANSLATORS: Right ascension/Declination
-#: src/core/StelObject.cpp:383
+#: src/core/StelObject.cpp:390
 msgctxt "celestial coordinate system"
 msgid "RA/Dec"
 msgstr "적경/적위"
 
 #. TRANSLATORS: Hour angle/Declination
-#: src/core/StelObject.cpp:472
+#: src/core/StelObject.cpp:479
 msgctxt "celestial coordinate system"
 msgid "HA/Dec"
 msgstr "시간각/적위"
 
 #. TRANSLATORS: Azimuth/Altitude
-#: src/core/StelObject.cpp:521
+#: src/core/StelObject.cpp:528
 msgctxt "celestial coordinate system"
 msgid "Az./Alt."
 msgstr "방위각/고도"
 
 #. TRANSLATORS: Galactic longitude/latitude
-#: src/core/StelObject.cpp:547
+#: src/core/StelObject.cpp:554
 msgctxt "celestial coordinate system"
 msgid "Gal. long./lat."
 msgstr "은경/은위"
 
 #. TRANSLATORS: Supergalactic longitude/latitude
-#: src/core/StelObject.cpp:572
+#: src/core/StelObject.cpp:579
 msgctxt "celestial coordinate system"
 msgid "Supergal. long./lat."
 msgstr "초은하 경도/위도"
 
-#: src/core/StelObject.cpp:590
+#: src/core/StelObject.cpp:597
 msgctxt "celestial coordinate system"
 msgid "Ecl. long./lat."
 msgstr "황경/황위"
 
-#: src/core/StelObject.cpp:655
+#: src/core/StelObject.cpp:662
 msgid "Ecliptic obliquity"
 msgstr "황도 경사"
 
-#: src/core/StelObject.cpp:684
+#: src/core/StelObject.cpp:691
 msgid "Mean Sidereal Time"
 msgstr "평균 항성시"
 
-#: src/core/StelObject.cpp:699
+#: src/core/StelObject.cpp:706
 msgid "Apparent Sidereal Time"
 msgstr "겉보기 항성시"
 
 #. TRANSLATORS: time of transit
-#: src/core/StelObject.cpp:718 src/gui/AstroCalcDialog.cpp:899
+#: src/core/StelObject.cpp:727 src/gui/AstroCalcDialog.cpp:899
 #: src/gui/AstroCalcDialog.cpp:2081 src/gui/AstroCalcDialog.cpp:8194
 msgctxt "celestial event; passage across a meridian"
 msgid "Transit"
 msgstr "통과"
 
-#: src/core/StelObject.cpp:719 src/gui/AstroCalcDialog.cpp:2080
+#: src/core/StelObject.cpp:728 src/gui/AstroCalcDialog.cpp:2080
 #: src/gui/AstroCalcDialog.cpp:8193
 msgctxt "celestial event"
 msgid "Rise"
 msgstr "출"
 
-#: src/core/StelObject.cpp:720 src/gui/AstroCalcDialog.cpp:2082
+#: src/core/StelObject.cpp:729 src/gui/AstroCalcDialog.cpp:2082
 #: src/gui/AstroCalcDialog.cpp:8197
 msgctxt "celestial event"
 msgid "Set"
 msgstr "몰"
 
-#: src/core/StelObject.cpp:791
+#: src/core/StelObject.cpp:798
 msgctxt "celestial event"
 msgid "Morning twilight"
 msgstr "아침 노을"
 
-#: src/core/StelObject.cpp:792
+#: src/core/StelObject.cpp:799
 msgctxt "celestial event"
 msgid "Evening twilight"
 msgstr "저녁 노을"
 
-#: src/core/StelObject.cpp:813 plugins/NavStars/src/ui_navStarsWindow.h:576
+#: src/core/StelObject.cpp:820 plugins/NavStars/src/ui_navStarsWindow.h:576
 msgid "Daytime"
 msgstr "낮"
 
-#: src/core/StelObject.cpp:827
+#: src/core/StelObject.cpp:834
 msgid "Polar night"
 msgstr "극야"
 
-#: src/core/StelObject.cpp:829
+#: src/core/StelObject.cpp:836
 msgid "This object never rises"
 msgstr "이 천체는 떠오르지 않습니다"
 
-#: src/core/StelObject.cpp:834
+#: src/core/StelObject.cpp:841
 msgid "Polar day"
 msgstr "백야"
 
-#: src/core/StelObject.cpp:836
+#: src/core/StelObject.cpp:843
 msgid "Circumpolar (never sets)"
 msgstr "주극성 (절대 지지 않음)"
 
 #. TRANSLATORS: Greatest Eastern Digression is the maximum azimuth for stars
 #. with upper culmination between pole and zenith
-#: src/core/StelObject.cpp:854
+#: src/core/StelObject.cpp:861
 msgid "Max. E. Digression"
 msgstr "동방최대연장"
 
 #. TRANSLATORS: azimuth (abbrev.)
-#: src/core/StelObject.cpp:856
+#: src/core/StelObject.cpp:863
 msgctxt "celestial coordinate system"
 msgid "A"
 msgstr "방위각"
 
-#: src/core/StelObject.cpp:856
+#: src/core/StelObject.cpp:863
 msgctxt "celestial coordinate system"
 msgid "Az."
 msgstr "방위각"
 
-#: src/core/StelObject.cpp:858
+#: src/core/StelObject.cpp:865
 msgctxt "celestial coordinate system"
 msgid "h"
 msgstr "시"
 
-#: src/core/StelObject.cpp:858
+#: src/core/StelObject.cpp:865
 msgctxt "celestial coordinate system"
 msgid "HA"
 msgstr "시간각"
 
 #. TRANSLATORS: Greatest Western Digression is the maximum western azimuth for
 #. stars with upper culmination between pole and zenith
-#: src/core/StelObject.cpp:884
+#: src/core/StelObject.cpp:891
 msgid "Max. W. Digression"
 msgstr "서방최대연장"
 
-#: src/core/StelObject.cpp:919
+#: src/core/StelObject.cpp:926
 msgid "Parallactic Angle"
 msgstr "극정대각"
 
-#: src/core/StelObject.cpp:928 src/gui/AstroCalcDialog.cpp:8292
+#: src/core/StelObject.cpp:935 src/gui/AstroCalcDialog.cpp:8292
 msgid "IAU Constellation"
 msgstr "IAU 별자리"
 
 #. TRANSLATORS: Azimuth/Altitude
-#: src/core/StelObject.cpp:1240
+#: src/core/StelObject.cpp:1271
 msgctxt "celestial coordinate system"
 msgid "Solar A/a"
 msgstr "태양의 방위각/고도"
 
-#: src/core/StelObject.cpp:1240
+#: src/core/StelObject.cpp:1271
 msgctxt "celestial coordinate system"
 msgid "Solar Az./Alt."
 msgstr "태양의 방위각/고도"
 
 #. TRANSLATORS: Azimuth/Altitude
-#: src/core/StelObject.cpp:1258
+#: src/core/StelObject.cpp:1289
 msgctxt "celestial coordinate system"
 msgid "Lunar A/a"
 msgstr "달의 방위각/고도"
 
-#: src/core/StelObject.cpp:1258
+#: src/core/StelObject.cpp:1289
 msgctxt "celestial coordinate system"
 msgid "Lunar Az./Alt."
 msgstr "달의 방위각/고도"
@@ -4265,7 +4276,8 @@ msgstr "삽화는 자유로운 복사, 배포, 변형이 보장되는 프리 아
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:119
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:214
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:186
-#: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:181
+#: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:183
+#: plugins/MissingStars/src/gui/MissingStarsDialog.cpp:86
 msgid "License"
 msgstr "라이선스"
 
@@ -4747,7 +4759,8 @@ msgstr "연락처"
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:118
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:213
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:185
-#: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:180
+#: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:182
+#: plugins/MissingStars/src/gui/MissingStarsDialog.cpp:85
 msgid "Version"
 msgstr "버전"
 
@@ -4801,7 +4814,7 @@ msgstr ""
 "별 갯수: %2 백만\n"
 "등급 범위: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:1573 src/gui/ConfigurationDialog.cpp:1610
+#: src/gui/ConfigurationDialog.cpp:1573 src/gui/ConfigurationDialog.cpp:1614
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -4810,11 +4823,11 @@ msgstr ""
 "%1을 내려받는 중 오류 발생:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:1663
+#: src/gui/ConfigurationDialog.cpp:1667
 msgid "Verifying file integrity..."
 msgstr "파일 무결성 검사 중..."
 
-#: src/gui/ConfigurationDialog.cpp:1667
+#: src/gui/ConfigurationDialog.cpp:1671
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -4823,231 +4836,231 @@ msgstr ""
 "%1을 내려받는 중 오류 발생:\n"
 "파일이 손상되었습니다."
 
-#: src/gui/ConfigurationDialog.cpp:1747 src/gui/ConfigurationDialog.cpp:1756
-#: src/gui/ConfigurationDialog.cpp:1765 src/gui/ConfigurationDialog.cpp:1774
+#: src/gui/ConfigurationDialog.cpp:1751 src/gui/ConfigurationDialog.cpp:1760
+#: src/gui/ConfigurationDialog.cpp:1769 src/gui/ConfigurationDialog.cpp:1778
 msgid "Available"
 msgstr "사용 가능"
 
-#: src/gui/ConfigurationDialog.cpp:1749 src/gui/ConfigurationDialog.cpp:1758
-#: src/gui/ConfigurationDialog.cpp:1767 src/gui/ConfigurationDialog.cpp:1776
+#: src/gui/ConfigurationDialog.cpp:1753 src/gui/ConfigurationDialog.cpp:1762
+#: src/gui/ConfigurationDialog.cpp:1771 src/gui/ConfigurationDialog.cpp:1780
 msgid "Not Available"
 msgstr "사용 불가능"
 
-#: src/gui/ConfigurationDialog.cpp:1812
+#: src/gui/ConfigurationDialog.cpp:1816
 msgid "Annual proper motion (stars) or hourly motion (solar system objects)"
 msgstr "연간 고유운동 (항성) 및 시간당 운동 (태양계 천체)"
 
-#: src/gui/ConfigurationDialog.cpp:1813
+#: src/gui/ConfigurationDialog.cpp:1817
 msgid ""
 "Show time of rising, transit and setting of celestial object. The rising and"
 " setting events are defined with the upper limb of the celestial body."
 msgstr "천체의 출, 통과, 몰 시간을 보입니다. 출과 몰은 천체의 위쪽 끝을 기준으로 합니다."
 
 #. TRANSLATORS: Full phrase is "Algorithm of DeltaT"
-#: src/gui/ConfigurationDialog.cpp:1854
+#: src/gui/ConfigurationDialog.cpp:1858
 msgid "Algorithm of"
 msgstr "다음 저자의 알고리즘:"
 
-#: src/gui/ConfigurationDialog.cpp:1867
+#: src/gui/ConfigurationDialog.cpp:1871
 msgid "Without correction"
 msgstr "보정 없음"
 
-#: src/gui/ConfigurationDialog.cpp:1868
+#: src/gui/ConfigurationDialog.cpp:1872
 msgid "Schoch (1931)"
 msgstr "Schoch (1931)"
 
-#: src/gui/ConfigurationDialog.cpp:1869
+#: src/gui/ConfigurationDialog.cpp:1873
 msgid "Clemence (1948)"
 msgstr "Clemence (1948)"
 
-#: src/gui/ConfigurationDialog.cpp:1870
+#: src/gui/ConfigurationDialog.cpp:1874
 msgid "IAU (1952)"
 msgstr "IAU (1952)"
 
-#: src/gui/ConfigurationDialog.cpp:1871
+#: src/gui/ConfigurationDialog.cpp:1875
 msgid "Astronomical Ephemeris (1960)"
 msgstr "Astronomical Ephemeris (1960)"
 
-#: src/gui/ConfigurationDialog.cpp:1872
+#: src/gui/ConfigurationDialog.cpp:1876
 msgid "Tuckerman (1962, 1964) & Goldstine (1973)"
 msgstr "Tuckerman (1962, 1964) & Goldstine (1973)"
 
-#: src/gui/ConfigurationDialog.cpp:1873
+#: src/gui/ConfigurationDialog.cpp:1877
 msgid "Muller & Stephenson (1975)"
 msgstr "Muller & Stephenson (1975)"
 
-#: src/gui/ConfigurationDialog.cpp:1874
+#: src/gui/ConfigurationDialog.cpp:1878
 msgid "Stephenson (1978)"
 msgstr "Stephenson (1978)"
 
-#: src/gui/ConfigurationDialog.cpp:1875
+#: src/gui/ConfigurationDialog.cpp:1879
 msgid "Schmadel & Zech (1979)"
 msgstr "Schmadel & Zech (1979)"
 
-#: src/gui/ConfigurationDialog.cpp:1876
+#: src/gui/ConfigurationDialog.cpp:1880
 msgid "Morrison & Stephenson (1982)"
 msgstr "Morrison & Stephenson (1982)"
 
-#: src/gui/ConfigurationDialog.cpp:1877
+#: src/gui/ConfigurationDialog.cpp:1881
 msgid "Stephenson & Morrison (1984)"
 msgstr "Stephenson & Morrison (1984)"
 
-#: src/gui/ConfigurationDialog.cpp:1878
+#: src/gui/ConfigurationDialog.cpp:1882
 msgid "Stephenson & Houlden (1986)"
 msgstr "Stephenson & Houlden (1986)"
 
-#: src/gui/ConfigurationDialog.cpp:1879
+#: src/gui/ConfigurationDialog.cpp:1883
 msgid "Espenak (1987, 1989)"
 msgstr "Espenak (1987, 1989)"
 
-#: src/gui/ConfigurationDialog.cpp:1880
+#: src/gui/ConfigurationDialog.cpp:1884
 msgid "Borkowski (1988)"
 msgstr "Borkowski (1988)"
 
-#: src/gui/ConfigurationDialog.cpp:1881
+#: src/gui/ConfigurationDialog.cpp:1885
 msgid "Schmadel & Zech (1988)"
 msgstr "Schmadel & Zech (1988)"
 
-#: src/gui/ConfigurationDialog.cpp:1882
+#: src/gui/ConfigurationDialog.cpp:1886
 msgid "Chapront-Touze & Chapront (1991)"
 msgstr "Chapront-Touze & Chapront (1991)"
 
-#: src/gui/ConfigurationDialog.cpp:1883
+#: src/gui/ConfigurationDialog.cpp:1887
 msgid "Stephenson & Morrison (1995)"
 msgstr "Stephenson & Morrison (1995)"
 
-#: src/gui/ConfigurationDialog.cpp:1884
+#: src/gui/ConfigurationDialog.cpp:1888
 msgid "Stephenson (1997)"
 msgstr "Stephenson (1997)"
 
-#: src/gui/ConfigurationDialog.cpp:1886
+#: src/gui/ConfigurationDialog.cpp:1890
 msgid "Meeus (1998) (with Chapront, Chapront-Touze & Francou (1997))"
 msgstr "Meeus (1998) (with Chapront, Chapront-Touze & Francou (1997))"
 
-#: src/gui/ConfigurationDialog.cpp:1887
+#: src/gui/ConfigurationDialog.cpp:1891
 msgid "JPL Horizons"
 msgstr "JPL Horizons"
 
-#: src/gui/ConfigurationDialog.cpp:1888
+#: src/gui/ConfigurationDialog.cpp:1892
 msgid "Meeus & Simons (2000)"
 msgstr "Meeus & Simons (2000)"
 
-#: src/gui/ConfigurationDialog.cpp:1889
+#: src/gui/ConfigurationDialog.cpp:1893
 msgid "Montenbruck & Pfleger (2000)"
 msgstr "Montenbruck & Pfleger (2000)"
 
-#: src/gui/ConfigurationDialog.cpp:1890
+#: src/gui/ConfigurationDialog.cpp:1894
 msgid "Reingold & Dershowitz (2002, 2007, 2018)"
 msgstr "Reingold & Dershowitz (2002, 2007, 2018)"
 
-#: src/gui/ConfigurationDialog.cpp:1891
+#: src/gui/ConfigurationDialog.cpp:1895
 msgid "Morrison & Stephenson (2004, 2005)"
 msgstr "Morrison & Stephenson (2004, 2005)"
 
-#: src/gui/ConfigurationDialog.cpp:1892
-msgid "Espenak & Meeus (2006)"
-msgstr "Espenak & Meeus (2006)"
-
-#: src/gui/ConfigurationDialog.cpp:1895
-msgid "Espenak & Meeus (2006) no extra moon acceleration"
-msgstr "Espenak & Meeus (2006) no extra moon acceleration"
-
-#: src/gui/ConfigurationDialog.cpp:1898
-msgid "Modified Espenak & Meeus (2006, 2022)"
-msgstr "Modified Espenak & Meeus (2006, 2022)"
+#: src/gui/ConfigurationDialog.cpp:1896
+msgid "Espenak & Meeus (2006, 2014)"
+msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1899
+msgid "Espenak & Meeus (2006, 2014) no extra moon acceleration"
+msgstr ""
+
+#: src/gui/ConfigurationDialog.cpp:1902
+msgid "Modified Espenak & Meeus (2006, 2014, 2023)"
+msgstr ""
+
+#: src/gui/ConfigurationDialog.cpp:1903
 msgid "Reijs (2006)"
 msgstr "Reijs (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1900
+#: src/gui/ConfigurationDialog.cpp:1904
 msgid "Banjevic (2006)"
 msgstr "Banjevic (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1901
+#: src/gui/ConfigurationDialog.cpp:1905
 msgid "Islam, Sadiq & Qureshi (2008, 2013)"
 msgstr "Islam, Sadiq & Qureshi (2008, 2013)"
 
-#: src/gui/ConfigurationDialog.cpp:1902
+#: src/gui/ConfigurationDialog.cpp:1906
 msgid "Khalid, Sultana & Zaidi (2014)"
 msgstr "Khalid, Sultana & Zaidi (2014)"
 
-#: src/gui/ConfigurationDialog.cpp:1903
+#: src/gui/ConfigurationDialog.cpp:1907
 msgid "Stephenson, Morrison & Hohenkerk (2016, 2021)"
 msgstr "Stephenson, Morrison & Hohenkerk (2016, 2021)"
 
-#: src/gui/ConfigurationDialog.cpp:1904
+#: src/gui/ConfigurationDialog.cpp:1908
 msgid "Henriksson (2017)"
 msgstr "헨리크슨 (2017)"
 
-#: src/gui/ConfigurationDialog.cpp:1905
+#: src/gui/ConfigurationDialog.cpp:1909
 #, qt-format
 msgid "Custom equation of %1T"
 msgstr "사용자 정의 %1T 공식"
 
-#: src/gui/ConfigurationDialog.cpp:1961 src/gui/ConfigurationDialog.cpp:1998
+#: src/gui/ConfigurationDialog.cpp:1965 src/gui/ConfigurationDialog.cpp:2002
 #: src/gui/StelGuiItems.cpp:784 src/gui/LocationDialog.cpp:561
 msgid "System default"
 msgstr "시스템 기본 설정"
 
-#: src/gui/ConfigurationDialog.cpp:1962
+#: src/gui/ConfigurationDialog.cpp:1966
 msgid "yyyy-mm-dd (ISO 8601)"
 msgstr "년-월-일 (ISO 8601)"
 
-#: src/gui/ConfigurationDialog.cpp:1963
+#: src/gui/ConfigurationDialog.cpp:1967
 msgid "dd-mm-yyyy"
 msgstr "일-월-년"
 
-#: src/gui/ConfigurationDialog.cpp:1964
+#: src/gui/ConfigurationDialog.cpp:1968
 msgid "mm-dd-yyyy"
 msgstr "월-일-년"
 
-#: src/gui/ConfigurationDialog.cpp:1965
+#: src/gui/ConfigurationDialog.cpp:1969
 msgid "ww, yyyy-mm-dd"
 msgstr "요일, 년-월-일"
 
-#: src/gui/ConfigurationDialog.cpp:1966
+#: src/gui/ConfigurationDialog.cpp:1970
 msgid "ww, dd-mm-yyyy"
 msgstr "요일, 일-월-년"
 
-#: src/gui/ConfigurationDialog.cpp:1967
+#: src/gui/ConfigurationDialog.cpp:1971
 msgid "ww, mm-dd-yyyy"
 msgstr "요일, 월-일-년"
 
-#: src/gui/ConfigurationDialog.cpp:1999
+#: src/gui/ConfigurationDialog.cpp:2003
 msgid "12-hour format"
 msgstr "12시간 형식"
 
-#: src/gui/ConfigurationDialog.cpp:2000
+#: src/gui/ConfigurationDialog.cpp:2004
 msgid "24-hour format"
 msgstr "24시간 형식"
 
-#: src/gui/ConfigurationDialog.cpp:2028
+#: src/gui/ConfigurationDialog.cpp:2032
 msgctxt "disabled"
 msgid "None"
 msgstr "없음"
 
-#: src/gui/ConfigurationDialog.cpp:2029
+#: src/gui/ConfigurationDialog.cpp:2033
 msgid "5/6/5 bits"
 msgstr "5/6/5 비트"
 
-#: src/gui/ConfigurationDialog.cpp:2030
+#: src/gui/ConfigurationDialog.cpp:2034
 msgid "6/6/6 bits"
 msgstr "6/6/6 비트"
 
-#: src/gui/ConfigurationDialog.cpp:2031
+#: src/gui/ConfigurationDialog.cpp:2035
 msgid "8/8/8 bits"
 msgstr "8/8/8 비트"
 
-#: src/gui/ConfigurationDialog.cpp:2032
+#: src/gui/ConfigurationDialog.cpp:2036
 msgid "10/10/10 bits"
 msgstr "10/10/10 비트"
 
-#: src/gui/ConfigurationDialog.cpp:2044
+#: src/gui/ConfigurationDialog.cpp:2048
 msgid "Unsupported"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:2046
+#: src/gui/ConfigurationDialog.cpp:2050
 msgid "Unsupported in low-graphics mode"
 msgstr ""
 
@@ -5625,6 +5638,10 @@ msgstr "FPS"
 msgid "Frames per second"
 msgstr "초당 프레임 수"
 
+#: src/gui/StelDialog.hpp:218
+msgid "Are you sure? This will delete your customized data."
+msgstr "사용자의 데이터를 삭제합니다. 계속 하시겠습니까?"
+
 #: src/gui/ViewDialog.cpp:707
 msgid "properties"
 msgstr "설정"
@@ -5782,11 +5799,11 @@ msgstr ""
 msgid "Visual magnitude based on phase angle and albedo."
 msgstr "겉보기등급은 위상과 반사율에 따라 달라집니다."
 
-#: src/gui/LocationDialog.cpp:173 src/gui/LocationDialog.cpp:977
+#: src/gui/LocationDialog.cpp:173 src/gui/LocationDialog.cpp:974
 msgid "Get location from GPS or system service"
 msgstr "GPS나 시스템 서비스에서 위치 가져오기"
 
-#: src/gui/LocationDialog.cpp:175 src/gui/LocationDialog.cpp:979
+#: src/gui/LocationDialog.cpp:175 src/gui/LocationDialog.cpp:976
 #: src/ui_locationDialogGui.h:505
 msgid "Get location from GPS"
 msgstr "GPS에서 위치 받아오기"
@@ -5812,23 +5829,23 @@ msgstr ""
 "GPS 신호 감지를 켜고 끕니다. (시간대는 바꾸지 않습니다!) 위치가 결정되면 이 기능을 꺼 다른 ㅍ로그램들이 GPS를 사용하게끔 해 "
 "주세요."
 
-#: src/gui/LocationDialog.cpp:921
+#: src/gui/LocationDialog.cpp:918
 msgid "GPS listening..."
 msgstr "GPS 청취 중..."
 
-#: src/gui/LocationDialog.cpp:928
+#: src/gui/LocationDialog.cpp:925
 msgid "GPS disconnecting..."
 msgstr "GPS 연결 해제 중..."
 
-#: src/gui/LocationDialog.cpp:950
+#: src/gui/LocationDialog.cpp:947
 msgid "2D location fix"
 msgstr "2D 위치 고치기"
 
-#: src/gui/LocationDialog.cpp:955
+#: src/gui/LocationDialog.cpp:952
 msgid "3D location fix"
 msgstr "3D 위치 고치기"
 
-#: src/gui/LocationDialog.cpp:964
+#: src/gui/LocationDialog.cpp:961
 msgid "GPS:FAILED"
 msgstr "GPS:실패"
 
@@ -6047,13 +6064,13 @@ msgid "Ecliptic (J2000.0)"
 msgstr "황도좌표계 (J2000)"
 
 #: src/gui/SearchDialog.cpp:296 src/gui/AstroCalcChart.cpp:442
-#: src/gui/AstroCalcChart.cpp:468 src/gui/ObsListDialog.cpp:261
+#: src/gui/AstroCalcChart.cpp:468 src/gui/ObsListDialog.cpp:254
 msgid "Right ascension"
 msgstr "적경"
 
 #: src/gui/SearchDialog.cpp:299 src/gui/AstroCalcChart.cpp:91
 #: src/gui/AstroCalcChart.cpp:101 src/gui/AstroCalcChart.cpp:425
-#: src/gui/AstroCalcChart.cpp:451 src/gui/ObsListDialog.cpp:262
+#: src/gui/AstroCalcChart.cpp:451 src/gui/ObsListDialog.cpp:255
 msgid "Declination"
 msgstr "적위"
 
@@ -6112,15 +6129,15 @@ msgstr "Simbad 검색 오류"
 msgid "Simbad Lookup"
 msgstr "Simbad 검색"
 
-#: src/gui/SearchDialog.cpp:1392
+#: src/gui/SearchDialog.cpp:1393
 msgid "University of Strasbourg (France)"
 msgstr "스트라스부르 대학교 (프랑스)"
 
-#: src/gui/SearchDialog.cpp:1393
+#: src/gui/SearchDialog.cpp:1394
 msgid "Harvard University (USA)"
 msgstr "하버드 대학교 (미국)"
 
-#: src/gui/SearchDialog.cpp:1475
+#: src/gui/SearchDialog.cpp:1476
 msgid "Paste and Search"
 msgstr "붙여넣고 검색"
 
@@ -6203,7 +6220,7 @@ msgstr "'고도 vs 시간' 그래프를 그리기 위한 천체를 선택해 주
 #: src/gui/AstroCalcDialog.cpp:8182 src/ui_configurationDialog.h:1883
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:516
 #: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:103
-#: plugins/Exoplanets/src/Exoplanet.cpp:359
+#: plugins/Exoplanets/src/Exoplanet.cpp:360
 #: plugins/MeteorShowers/src/gui/MSSearchDialog.cpp:183
 msgid "Name"
 msgstr "이름"
@@ -6670,7 +6687,7 @@ msgid "Duration of total or annular phase at greatest eclipse"
 msgstr "일식 극대기에 개기 및 금환 일식의 지속 시간"
 
 #: src/gui/AstroCalcDialog.cpp:3294 src/gui/AstroCalcChart.cpp:378
-#: src/gui/ObsListDialog.cpp:265 src/ui_obsListDialog.h:410
+#: src/gui/ObsListDialog.cpp:258 src/ui_obsListDialog.h:423
 msgid "Date"
 msgstr "날짜"
 
@@ -7875,114 +7892,114 @@ msgctxt "unit of measurement"
 msgid "saros"
 msgstr "사로스"
 
-#: src/gui/ObsListDialog.cpp:83 src/gui/ObsListDialog.cpp:1025
+#: src/gui/ObsListDialog.cpp:83 src/gui/ObsListDialog.cpp:1042
 msgid "Cannot open observingLists.json to write"
 msgstr ""
 
-#: src/gui/ObsListDialog.cpp:184
+#: src/gui/ObsListDialog.cpp:176
 msgctxt "default name for observing list if none is available"
 msgid "new list"
 msgstr "새 목록"
 
-#: src/gui/ObsListDialog.cpp:258
+#: src/gui/ObsListDialog.cpp:251
 msgid "Object designation"
 msgstr "천체 식별자"
 
-#: src/gui/ObsListDialog.cpp:259
+#: src/gui/ObsListDialog.cpp:252
 msgid "Object name"
 msgstr "천체 이름"
 
-#: src/gui/ObsListDialog.cpp:264 src/ui_configurationDialog.h:1872
+#: src/gui/ObsListDialog.cpp:257 src/ui_configurationDialog.h:1872
 msgid "Constellation"
 msgstr "별자리"
 
-#: src/gui/ObsListDialog.cpp:267 src/ui_viewDialog.h:3585
-#: src/ui_obsListDialog.h:418
+#: src/gui/ObsListDialog.cpp:260 src/ui_viewDialog.h:3585
+#: src/ui_obsListDialog.h:431
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:480
 msgid "Landscape"
 msgstr "풍경"
 
-#: src/gui/ObsListDialog.cpp:882
+#: src/gui/ObsListDialog.cpp:878
 msgid "New Observation List"
 msgstr "새 관측 목록"
 
-#: src/gui/ObsListDialog.cpp:883
+#: src/gui/ObsListDialog.cpp:879
 msgid "Observing list creation mode"
 msgstr "관측 목록 생성 모드"
 
-#: src/gui/ObsListDialog.cpp:896
+#: src/gui/ObsListDialog.cpp:892
 msgid "Observing list editor mode"
 msgstr "관측 목록 편집 모드"
 
-#: src/gui/ObsListDialog.cpp:901
+#: src/gui/ObsListDialog.cpp:897
 msgid "selectedOlud empty. This is a bug"
 msgstr ""
 
-#: src/gui/ObsListDialog.cpp:911
+#: src/gui/ObsListDialog.cpp:909
 msgid "Export observing list as..."
 msgstr "관찰 목록을 다음으로 내보내기..."
 
-#: src/gui/ObsListDialog.cpp:919
+#: src/gui/ObsListDialog.cpp:918
 msgid "Cannot export. See logfile for details."
 msgstr ""
 
-#: src/gui/ObsListDialog.cpp:944
+#: src/gui/ObsListDialog.cpp:955
 msgid "Import observing list"
 msgstr "관찰 목록을 가져오기"
 
-#: src/gui/ObsListDialog.cpp:953
+#: src/gui/ObsListDialog.cpp:964
 msgid "Cannot open selected file for import"
 msgstr ""
 
-#: src/gui/ObsListDialog.cpp:969
+#: src/gui/ObsListDialog.cpp:980
 msgid "Empty list."
 msgstr ""
 
-#: src/gui/ObsListDialog.cpp:988
+#: src/gui/ObsListDialog.cpp:1002
 #, qt-format
 msgid ""
-"A list named '%1' and dated %2 would overwrite your existing list '%3', "
-"dated %4. Accept?"
+"A list named '%1', created %2 and last modified %3 would overwrite your "
+"existing list '%4', dated %5 and last modified %6. Accept?"
 msgstr ""
 
-#: src/gui/ObsListDialog.cpp:1004
+#: src/gui/ObsListDialog.cpp:1021
 msgid "The file is empty or doesn't contain legacy bookmarks."
 msgstr ""
 
-#: src/gui/ObsListDialog.cpp:1016
+#: src/gui/ObsListDialog.cpp:1033
 msgid "File does not contain observing lists or legacy bookmarks"
 msgstr ""
 
-#: src/gui/ObsListDialog.cpp:1037
+#: src/gui/ObsListDialog.cpp:1058
 msgid "File format is wrong!"
 msgstr "파일 형식이 잘못되었습니다!"
 
-#: src/gui/ObsListDialog.cpp:1054
+#: src/gui/ObsListDialog.cpp:1075
 msgid "Cannot open JSON output file. Will not delete."
 msgstr ""
 
-#: src/gui/ObsListDialog.cpp:1078 src/ui_configurationDialog.h:1747
+#: src/gui/ObsListDialog.cpp:1099 src/ui_configurationDialog.h:1747
 msgid "Information"
 msgstr "정보"
 
-#: src/gui/ObsListDialog.cpp:1078
+#: src/gui/ObsListDialog.cpp:1099
 msgid "You cannot delete the default or the last list."
 msgstr ""
 
-#: src/gui/ObsListDialog.cpp:1134
+#: src/gui/ObsListDialog.cpp:1155
 msgid "Unnamed object"
 msgstr "이름 없는 천체"
 
-#: src/gui/ObsListDialog.cpp:1217
+#: src/gui/ObsListDialog.cpp:1238
 msgid "Empty name"
 msgstr ""
 
-#: src/gui/ObsListDialog.cpp:1222
+#: src/gui/ObsListDialog.cpp:1243
 msgid "List name already exists"
 msgstr ""
 
-#: src/gui/ObsListDialog.cpp:1287 src/ui_configurationDialog.h:1930
-#: src/ui_obsListDialog.h:353
+#: src/gui/ObsListDialog.cpp:1308 src/ui_configurationDialog.h:1930
+#: src/ui_obsListDialog.h:365
 msgid "Observing lists"
 msgstr "관측 목록"
 
@@ -9622,7 +9639,7 @@ msgid "&Choose"
 msgstr "선택 (&C)"
 
 #: src/translations.h:630 src/ui_configurationDialog.h:1972
-#: src/ui_obsListDialog.h:364
+#: src/ui_obsListDialog.h:376
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:645
 msgid "Cancel"
 msgstr "취소"
@@ -14885,133 +14902,137 @@ msgstr "사용자 지정 간격"
 msgid "Unit of measurement:"
 msgstr "측정 단위:"
 
-#: src/ui_obsListDialog.h:356 src/ui_obsListDialog.h:374
+#: src/ui_obsListDialog.h:368 src/ui_obsListDialog.h:387
 msgid "Highlight all the objects of the selected list"
 msgstr "선택된 목록의 모든 천체 강조"
 
-#: src/ui_obsListDialog.h:358
+#: src/ui_obsListDialog.h:370
 msgid "Add object"
 msgstr "천체 추가"
 
-#: src/ui_obsListDialog.h:360 src/ui_obsListDialog.h:378
+#: src/ui_obsListDialog.h:372 src/ui_obsListDialog.h:391
 msgid "Clear all the highlight objects"
 msgstr "모든 강조된 천체 초기화"
 
-#: src/ui_obsListDialog.h:362
+#: src/ui_obsListDialog.h:374
 msgid "Remove object"
 msgstr "천체 삭제"
 
-#: src/ui_obsListDialog.h:363
+#: src/ui_obsListDialog.h:375
 msgid "Save list"
 msgstr ""
 
-#: src/ui_obsListDialog.h:365
+#: src/ui_obsListDialog.h:377
 #: plugins/Satellites/src/ui_satellitesDialog.h:1385
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:216
 msgid "Description:"
 msgstr "설명:"
 
-#: src/ui_obsListDialog.h:367
+#: src/ui_obsListDialog.h:379
 msgid "Activate to set list as default"
 msgstr ""
 
-#: src/ui_obsListDialog.h:369
+#: src/ui_obsListDialog.h:381
 msgid "Default list"
 msgstr ""
 
-#: src/ui_obsListDialog.h:370
+#: src/ui_obsListDialog.h:382
 msgid "Creation date:"
 msgstr "생성일:"
 
-#: src/ui_obsListDialog.h:371
+#: src/ui_obsListDialog.h:383
+msgid "Last edit:"
+msgstr ""
+
+#: src/ui_obsListDialog.h:384
 msgid "List name:"
 msgstr ""
 
-#: src/ui_obsListDialog.h:372
+#: src/ui_obsListDialog.h:385
 msgid "List:"
 msgstr "목록:"
 
-#: src/ui_obsListDialog.h:376
+#: src/ui_obsListDialog.h:389
 msgid "Highlight all"
 msgstr "모두 강조"
 
-#: src/ui_obsListDialog.h:380
+#: src/ui_obsListDialog.h:393
 msgid "Clear highlight(s)"
 msgstr "강조 초기화"
 
-#: src/ui_obsListDialog.h:382
+#: src/ui_obsListDialog.h:395
 msgid "Create a new observing list"
 msgstr "새 관측 목록 만들기"
 
-#: src/ui_obsListDialog.h:384
+#: src/ui_obsListDialog.h:397
 msgid "New list"
 msgstr "새 목록"
 
-#: src/ui_obsListDialog.h:386
+#: src/ui_obsListDialog.h:399
 msgid "Edit the selected list"
 msgstr "선택한 목록 편집"
 
-#: src/ui_obsListDialog.h:388
+#: src/ui_obsListDialog.h:401
 msgid "Edit list"
 msgstr "목록 편집"
 
-#: src/ui_obsListDialog.h:390
+#: src/ui_obsListDialog.h:403
 msgid "Export list"
 msgstr "목록 내보내기"
 
-#: src/ui_obsListDialog.h:392
+#: src/ui_obsListDialog.h:405
 msgid "Export list..."
 msgstr ""
 
-#: src/ui_obsListDialog.h:394
+#: src/ui_obsListDialog.h:407
 msgid "Import list"
 msgstr "목록 가져오기"
 
-#: src/ui_obsListDialog.h:396
+#: src/ui_obsListDialog.h:409
 msgid "Import list..."
 msgstr ""
 
-#: src/ui_obsListDialog.h:398
+#: src/ui_obsListDialog.h:411
 msgid "Delete the selected list"
 msgstr "선택한 목록 삭제"
 
-#: src/ui_obsListDialog.h:400
+#: src/ui_obsListDialog.h:413
 msgid "Delete list"
 msgstr "목록 삭제"
 
-#: src/ui_obsListDialog.h:401
+#: src/ui_obsListDialog.h:414
 msgid "Also load:"
 msgstr "다음 또한 불러오기:"
 
-#: src/ui_obsListDialog.h:402
+#: src/ui_obsListDialog.h:415
 msgid "Also store:"
 msgstr ""
 
-#: src/ui_obsListDialog.h:404
+#: src/ui_obsListDialog.h:417
 msgid "Store/load equatorial coordinates (J2000.0)"
 msgstr ""
 
-#: src/ui_obsListDialog.h:406
+#: src/ui_obsListDialog.h:419
 msgid "Coordinates (RA and DEC)"
 msgstr "좌표 (적경, 적위)"
 
-#: src/ui_obsListDialog.h:408
+#: src/ui_obsListDialog.h:421
 msgid "Store/load with date/time (JD)"
 msgstr ""
 
-#: src/ui_obsListDialog.h:412
+#: src/ui_obsListDialog.h:425
 msgid "Store/load with location"
 msgstr ""
 
-#: src/ui_obsListDialog.h:416
+#: src/ui_obsListDialog.h:429
 msgid "Store/load with landscape"
 msgstr ""
 
-#: src/ui_obsListDialog.h:420
+#: src/ui_obsListDialog.h:433
 msgid "Store/load with field of view"
 msgstr ""
 
-#: src/ui_obsListDialog.h:422
+#: src/ui_obsListDialog.h:435
 msgid "FOV"
 msgstr "시야"
 
@@ -15753,6 +15774,7 @@ msgstr "선택한 천체로의 전환 허용"
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:341
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:820
 #: plugins/Calendars/src/ui_calendarsDialog.h:1034
+#: plugins/MissingStars/src/ui_missingStarsDialog.h:120
 msgctxt "tab in plugin windows"
 msgid "About"
 msgstr "정보"
@@ -17773,7 +17795,7 @@ msgstr "공전 주기"
 
 #: plugins/Satellites/src/Satellite.cpp:392
 #: plugins/Satellites/src/ui_satellitesFilterDialog.h:295
-#: plugins/Exoplanets/src/Exoplanet.cpp:365
+#: plugins/Exoplanets/src/Exoplanet.cpp:366
 msgid "Inclination"
 msgstr "궤도 경사각"
 
@@ -18839,7 +18861,7 @@ msgid "Min."
 msgstr "최소"
 
 #: plugins/Satellites/src/ui_satellitesFilterDialog.h:299
-#: plugins/Pulsars/src/Pulsar.cpp:249 plugins/Exoplanets/src/Exoplanet.cpp:364
+#: plugins/Pulsars/src/Pulsar.cpp:249 plugins/Exoplanets/src/Exoplanet.cpp:365
 msgid "Eccentricity"
 msgstr "이심률"
 
@@ -20501,13 +20523,13 @@ msgstr "오류, 알려지지 않은 색 부분 \"%1\""
 msgid " [RETURN to activate]"
 msgstr " [돌아가서 활성화]"
 
-#: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:61
-#: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:153
+#: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:60
+#: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:151
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:235
 msgid "Solar System Editor"
 msgstr "태양계 편집기"
 
-#: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:64
+#: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:63
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:243
 msgid ""
 "An interface for adding asteroids and comets to Stellarium. It can download "
@@ -20517,10 +20539,14 @@ msgstr ""
 "스텔라리움에 소행성과 혜성을 추가하는 인터페이스입니다. 소행성체 센터(MPC)에서 천체 목록을 받아오며, 온라인 데이터베이스에서 검색할 "
 "수 있는 기능도 있습니다."
 
-#: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:153
+#: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:151
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:275
 msgid "Import orbital elements in MPC format..."
 msgstr "MPC 포맷 안의 궤도 요소 가져오기"
+
+#: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:766
+msgid "Anonymous"
+msgstr ""
 
 #. TRANSLATORS: A link showing the text "Minor Planet & Comet Ephemeris
 #. Service" is inserted.
@@ -20747,28 +20773,28 @@ msgstr "설정 파일"
 msgid "Add new Minor Solar System objects"
 msgstr "새로운 태양계 소천체 추가"
 
-#: plugins/Supernovae/src/Supernovae.cpp:70
-#: plugins/Supernovae/src/Supernovae.cpp:149
+#: plugins/Supernovae/src/Supernovae.cpp:71
+#: plugins/Supernovae/src/Supernovae.cpp:150
 msgid "Historical Supernovae"
 msgstr "역사적인 초신성"
 
-#: plugins/Supernovae/src/Supernovae.cpp:73
+#: plugins/Supernovae/src/Supernovae.cpp:74
 msgid "This plugin allows you to see some bright historical supernovae."
 msgstr "이 플러그인은 몇몇 역사적인 밝은 초신성을 보여줍니다."
 
-#: plugins/Supernovae/src/Supernovae.cpp:149
+#: plugins/Supernovae/src/Supernovae.cpp:150
 msgid "Historical Supernovae configuration window"
 msgstr "역사적인 초신성 설정 창"
 
-#: plugins/Supernovae/src/Supernova.cpp:153
+#: plugins/Supernovae/src/Supernova.cpp:154
 msgid "Type of supernova"
 msgstr "초신성의 종류"
 
-#: plugins/Supernovae/src/Supernova.cpp:154 plugins/Novae/src/Nova.cpp:160
+#: plugins/Supernovae/src/Supernova.cpp:155 plugins/Novae/src/Nova.cpp:160
 msgid "Maximum brightness"
 msgstr "최대 밝기"
 
-#: plugins/Supernovae/src/Supernova.hpp:70
+#: plugins/Supernovae/src/Supernova.hpp:69
 msgid "supernova"
 msgstr "초신성"
 
@@ -21352,19 +21378,19 @@ msgstr "시작"
 msgid "Today"
 msgstr "오늘"
 
-#: plugins/Novae/src/Novae.cpp:70 plugins/Novae/src/Novae.cpp:143
+#: plugins/Novae/src/Novae.cpp:71 plugins/Novae/src/Novae.cpp:144
 msgid "Bright Novae"
 msgstr "밝은 신성"
 
-#: plugins/Novae/src/Novae.cpp:73 plugins/Novae/src/gui/NovaeDialog.cpp:119
+#: plugins/Novae/src/Novae.cpp:74 plugins/Novae/src/gui/NovaeDialog.cpp:119
 msgid "A plugin that shows some bright novae in the Milky Way galaxy."
 msgstr "우리 은하의 몇몇 밝은 신성을 보여주는 플러그인."
 
-#: plugins/Novae/src/Novae.cpp:143
+#: plugins/Novae/src/Novae.cpp:144
 msgid "Bright Novae configuration window"
 msgstr "밝은 신성 설정 창"
 
-#: plugins/Novae/src/Nova.hpp:61
+#: plugins/Novae/src/Nova.hpp:60
 msgid "nova"
 msgstr "신성"
 
@@ -21565,7 +21591,7 @@ msgid "Binary period of pulsar"
 msgstr "펄서의 이원 주기"
 
 #. TRANSLATORS: Unit of measure for period - days
-#: plugins/Pulsars/src/Pulsar.cpp:246 plugins/Exoplanets/src/Exoplanet.cpp:360
+#: plugins/Pulsars/src/Pulsar.cpp:246 plugins/Exoplanets/src/Exoplanet.cpp:361
 msgctxt "period"
 msgid "days"
 msgstr "일"
@@ -21632,11 +21658,11 @@ msgid ""
 "radio emission"
 msgstr "엑스선 열복사 펄스를 내보내지만 전파 방출은 감지되지 않는 독립된 중성자별"
 
-#: plugins/Pulsars/src/Pulsar.hpp:86
+#: plugins/Pulsars/src/Pulsar.hpp:85
 msgid "pulsar"
 msgstr "펄서"
 
-#: plugins/Pulsars/src/Pulsar.hpp:86
+#: plugins/Pulsars/src/Pulsar.hpp:85
 msgid "pulsar with glitches"
 msgstr "글리치가 있는 펄서"
 
@@ -21788,14 +21814,14 @@ msgstr "이 플러그인은 스테판 프링스의 {QtWebApp HTTP server}를 사
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:160
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:243
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:229
-#: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:195
+#: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:198
 msgid "Publications"
 msgstr "출판물"
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:161
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:244
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:230
-#: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:196
+#: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:199
 msgid "If you use this plugin in your publications, please cite:"
 msgstr "이 플러그인을 출판물에 사용할 경우, 다음처럼 출처를 남겨주세요:"
 
@@ -22096,172 +22122,172 @@ msgid "Show exoplanets"
 msgstr "외계 행성 보기"
 
 #. TRANSLATORS: Habitable zone
-#: plugins/Exoplanets/src/Exoplanets.cpp:1036
+#: plugins/Exoplanets/src/Exoplanets.cpp:1038
 msgid "Hot"
 msgstr "뜨거움"
 
 #. TRANSLATORS: Habitable zone
-#: plugins/Exoplanets/src/Exoplanets.cpp:1038
+#: plugins/Exoplanets/src/Exoplanets.cpp:1040
 msgid "Warm"
 msgstr "따듯함"
 
 #. TRANSLATORS: Habitable zone
-#: plugins/Exoplanets/src/Exoplanets.cpp:1040
+#: plugins/Exoplanets/src/Exoplanets.cpp:1042
 msgid "Cold"
 msgstr "추움"
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:1043
+#: plugins/Exoplanets/src/Exoplanets.cpp:1045
 msgid "Miniterran"
 msgstr "초소형"
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:1045
+#: plugins/Exoplanets/src/Exoplanets.cpp:1047
 msgid "Subterran"
 msgstr "소형"
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:1047
+#: plugins/Exoplanets/src/Exoplanets.cpp:1049
 msgid "Terran"
 msgstr "대략 지구"
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:1049
+#: plugins/Exoplanets/src/Exoplanets.cpp:1051
 msgid "Superterran"
 msgstr "슈퍼 지구"
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:1051
+#: plugins/Exoplanets/src/Exoplanets.cpp:1053
 msgid "Jovian"
 msgstr "목성형"
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:1053
+#: plugins/Exoplanets/src/Exoplanets.cpp:1055
 msgid "Neptunian"
 msgstr "해왕성형"
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:1056
+#: plugins/Exoplanets/src/Exoplanets.cpp:1058
 msgid "Primary Transit"
 msgstr "1차 통과법"
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:1058
+#: plugins/Exoplanets/src/Exoplanets.cpp:1060
 msgid "Microlensing"
 msgstr "렌즈 효과법"
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:1060
+#: plugins/Exoplanets/src/Exoplanets.cpp:1062
 msgid "Radial Velocity"
 msgstr "상대속도법"
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:1062
+#: plugins/Exoplanets/src/Exoplanets.cpp:1064
 msgid "Imaging"
 msgstr "이미징법"
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:1064
+#: plugins/Exoplanets/src/Exoplanets.cpp:1066
 msgid "Astrometry"
 msgstr "위치천문법"
 
 #. TRANSLATORS: Exoplanet detection method. TTV=Transit Timing Variation
-#: plugins/Exoplanets/src/Exoplanets.cpp:1066
+#: plugins/Exoplanets/src/Exoplanets.cpp:1068
 msgid "TTV"
 msgstr "통과 시간 변동법"
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:1068
+#: plugins/Exoplanets/src/Exoplanets.cpp:1070
 msgid "Timing"
 msgstr "타이밍"
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:1070
+#: plugins/Exoplanets/src/Exoplanets.cpp:1072
 msgid "Default"
 msgstr "기본"
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:1072
+#: plugins/Exoplanets/src/Exoplanets.cpp:1074
 msgid "Secondary Transit"
 msgstr "2차 통과법"
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:1074
+#: plugins/Exoplanets/src/Exoplanets.cpp:1076
 msgid "Disk Kinematics"
 msgstr "원반 운동학"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:341
+#: plugins/Exoplanets/src/Exoplanet.cpp:342
 msgid "Metallicity"
 msgstr "중원소 함량"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:345
-#: plugins/Exoplanets/src/Exoplanet.cpp:361
+#: plugins/Exoplanets/src/Exoplanet.cpp:346
+#: plugins/Exoplanets/src/Exoplanet.cpp:362
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:175
 msgid "Mass"
 msgstr "질량"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:349
-#: plugins/Exoplanets/src/Exoplanet.cpp:362
+#: plugins/Exoplanets/src/Exoplanet.cpp:350
+#: plugins/Exoplanets/src/Exoplanet.cpp:363
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:176
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:185
 msgid "Radius"
 msgstr "반지름"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:353
+#: plugins/Exoplanets/src/Exoplanet.cpp:354
 msgid "Effective temperature"
 msgstr "유효온도"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:353
+#: plugins/Exoplanets/src/Exoplanet.cpp:354
 msgctxt "temperature"
 msgid "K"
 msgstr "K"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:358
+#: plugins/Exoplanets/src/Exoplanet.cpp:359
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:174
 msgid "Exoplanet"
 msgstr "외계 행성"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:363
+#: plugins/Exoplanets/src/Exoplanet.cpp:364
 msgid "Semi-Major Axis"
 msgstr "긴반지름"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:366
+#: plugins/Exoplanets/src/Exoplanet.cpp:367
 msgid "Angle Distance"
 msgstr "각거리"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:367
+#: plugins/Exoplanets/src/Exoplanet.cpp:368
 msgid "Discovery year"
 msgstr "발견 연도"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:368
+#: plugins/Exoplanets/src/Exoplanet.cpp:369
 msgid "Detection method"
 msgstr "발견 방법"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:369
+#: plugins/Exoplanets/src/Exoplanet.cpp:370
 msgid "Planetary class"
 msgstr "행성 분류"
 
 #. TRANSLATORS: Full phrase is "Equilibrium Temperature"
-#: plugins/Exoplanets/src/Exoplanet.cpp:371
+#: plugins/Exoplanets/src/Exoplanet.cpp:372
 msgid "Equilibrium temp."
 msgstr "평형 온도"
 
 #. TRANSLATORS: Average stellar flux of the planet
-#: plugins/Exoplanets/src/Exoplanet.cpp:373
+#: plugins/Exoplanets/src/Exoplanet.cpp:374
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:318
 msgid "Flux"
 msgstr "항성풍의 평균 유속"
 
 #. TRANSLATORS: ESI = Earth Similarity Index
-#: plugins/Exoplanets/src/Exoplanet.cpp:375
+#: plugins/Exoplanets/src/Exoplanet.cpp:376
 msgid "ESI"
 msgstr "지구 유사성 지수 (ESI)"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:498
+#: plugins/Exoplanets/src/Exoplanet.cpp:499
 msgid "Equilibrium temperature on Earth"
 msgstr "지구의 평형 온도"
 
-#: plugins/Exoplanets/src/Exoplanet.hpp:87
+#: plugins/Exoplanets/src/Exoplanet.hpp:86
 msgid "planetary system"
 msgstr "행성계"
 
@@ -31618,7 +31644,6 @@ msgstr "메소아메리카"
 
 #: plugins/OnlineQueries/src/OnlineQueries.cpp:55
 #: plugins/OnlineQueries/src/OnlineQueries.cpp:105
-#: plugins/OnlineQueries/src/OnlineQueries.cpp:106
 #: plugins/OnlineQueries/src/OnlineQueries.cpp:107
 #: plugins/OnlineQueries/src/OnlineQueries.cpp:108
 #: plugins/OnlineQueries/src/OnlineQueries.cpp:109
@@ -31638,10 +31663,6 @@ msgstr "이 프로그램은 선택한 온라인 서비스에서 천체 정보를
 #: plugins/OnlineQueries/src/OnlineQueries.cpp:105
 msgid "Show window for Online Queries"
 msgstr "온라인 문의 창 띄우기"
-
-#: plugins/OnlineQueries/src/OnlineQueries.cpp:106
-msgid "Call ancient-skies on current selection"
-msgstr "선택한 천체에 대해 ancient-skies 불러오기"
 
 #: plugins/OnlineQueries/src/OnlineQueries.cpp:107
 msgid "Call AAVSO database on current selection"
@@ -31700,66 +31721,60 @@ msgstr ""
 msgid "We can request data for stars, planets and deep-sky objects only."
 msgstr "이 플러그인은 항성, 행성, 심우주 천체의 자료만 불러올 수 있습니다."
 
-#: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:107
+#: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:109
 msgctxt "GUI label"
 msgid "(Custom 1)"
 msgstr "(사용자 정의 1)"
 
-#: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:116
+#: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:118
 msgctxt "GUI label"
 msgid "(Custom 2)"
 msgstr "(사용자 정의 2)"
 
-#: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:125
+#: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:127
 msgctxt "GUI label"
 msgid "(Custom 3)"
 msgstr "(사용자 정의 3)"
 
-#: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:164
-#: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:172
+#: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:166
+#: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:174
 #, qt-format
 msgctxt "OnlineQueries"
 msgid "Opened %1 in your web browser"
 msgstr "당신의 웹 브라우저에서 %1를 열었습니다"
 
-#: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:179
+#: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:181
 msgid "OnlineQueries Plug-in"
 msgstr "온라인 문의 플러그인"
 
-#: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:186
+#: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:188
 msgid ""
 "The OnlineQueries plugin provides an interface to various online sources for"
 " astronomical information."
 msgstr "온라인 문의 플러그인은 천문학에 대한 여러 온라인 출처를 보여주는 인터페이스를 제공합니다."
 
-#: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:187
+#: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:189
 msgid "Wikipedia, the free online encyclopedia"
 msgstr "위키백과, 우리 모두의 백과사전"
 
-#: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:188
+#: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:190
 msgid ""
 "AAVSO, the International Variable Star Index of the American Association for"
 " Variable Star Observers"
 msgstr "AAVSO, 미국 변광성 관측자 협회의 국제 변광성 목록"
 
-#: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:189
+#: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:191
 msgid ""
 "GCVS, the General Catalogue of Variable Stars of the Sternberg Astronomical "
 "Institute and the Institute of Astronomy of the Russian Academy of Sciences "
 "in Moscow"
 msgstr "GCVS, 스턴버그 천문 연구소와 모스크바 러시아 과학 협회 내 천문학 연구소의 변광성 일반목록"
 
-#: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:190
-msgid ""
-"Ancient-Skies, a private project which collects information about star names"
-" and their mythologies"
-msgstr "Ancient-Skies, 별의 이름에 얽힌 신화를 모으는 개인 프로젝트"
-
-#: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:191
+#: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:194
 msgid "3 custom websites of your choice"
 msgstr "당신이 원하는 3개의 사용자 지정 웹 사이트"
 
-#: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:193
+#: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:196
 msgid ""
 "Regardless of the current program language, the result is always presented "
 "in English or the language of the respective website."
@@ -31780,3 +31795,32 @@ msgstr "(사용자 정의2)"
 #: plugins/OnlineQueries/src/ui_onlineQueriesDialog.h:249
 msgid "Queries"
 msgstr "요청"
+
+#: plugins/MissingStars/src/MissingStars.cpp:62
+#: plugins/MissingStars/src/MissingStars.cpp:125
+msgid "Missing Stars"
+msgstr ""
+
+#: plugins/MissingStars/src/MissingStars.cpp:65
+msgid "This plugin allows you to see some missing stars."
+msgstr ""
+
+#: plugins/MissingStars/src/MissingStars.cpp:125
+msgid "Missing Stars configuration window"
+msgstr ""
+
+#: plugins/MissingStars/src/gui/MissingStarsDialog.cpp:84
+msgid "Missing Stars Plug-in"
+msgstr ""
+
+#: plugins/MissingStars/src/gui/MissingStarsDialog.cpp:90
+msgid "This plugin allows you to see some missing stars: "
+msgstr ""
+
+#: plugins/MissingStars/src/ui_missingStarsDialog.h:117
+msgid "Missing Stars Configuration"
+msgstr ""
+
+#: plugins/MissingStars/src/ui_missingStarsDialog.h:118
+msgid "Missing Stars Plug-in Configuration"
+msgstr ""

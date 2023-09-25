@@ -1,72 +1,108 @@
-<h2>中國傳統星空文化</h2>
+<h1>中國傳統星空文化</h1>
 
-<p>中國天文學是獨立發展的，因此也獨立發展出了一套星座系統，稱為星官。它在東亞影響深遠。在古代，星官和行星與占星術緊密聯系在一起。經過數千年的演變，現行的星官和星名最終定型於十七到十九世紀。</p>
-<p>Stellarium提供儀象考成的300個的星官，3000多個星名。主要資料來自<i>儀象考成</i>。儀象考成是一個1756年完成的官方天文學紀錄，1844年對其完成了一次修訂，出版了<i>儀象考成續編</i>。現時中國星名都以此作基礎。伊世同先生在著作<i>中西對照恒星圖表 1950.0</i>對其進行了系統的整理。</p>
-<p>Stellarium顯示的絕大多數星名整理自伊世同先生的<i>中西對照恒星圖表（星表分冊）</i>。在<i>中西對照恒星圖表（星表分冊）</i>中無對應或者對應仍有待商榷的，依據潘鼐先生的<i>中國恒星觀測史</i>補充，並在星名後加一“*”，在<i>中國恒星觀測史</i>中有對應但仍表示存疑的，在星名後加一“?”。如此最終，還有幾十個星名找不到對照星。</p>
-
-<h3>日月和行星</h3>
-
-<p>西方依據神話中的神祇人物命名行星。中國古人對五大行星的認識始於五行觀念。木為青，火為赤，土為黃，金為白，水為黑。木星呈青色，故稱木星；火星呈紅色，故稱火星；土星為黃色，故稱土星；金星為白色，故稱金星，水星呈灰色，故以黑色配水星。</p>
-<p>在中文裏，日和月都是象形字，他們的另一個名字是太陽和太陰，使用陰陽命名。</p>
-<p>日月加上五個行星構成七曜，對應了陰陽五行。</p>
-
-<h3>星官</h3>
-
-<p>中國傳統天文學將天空分成不同的星群或者星座，稱為星官。和現代的星座指天球的特定區域不同，星官只指恒星的分佈方式，相互之間沒有具體的邊界。</p>
-<p>其名稱和佈局非常社會化，地上的王國、山川、百物、百業都搬上天際，按照地上人間的方式在天上複製了一個世界。</p>
-<p>中國的星官一般比傳統的希臘星座小。星官包含的恒星多則即幾十顆，少則可以是只有一顆。中世紀的中國星圖通常有283個星官，1464顆恒星。星官被分成三十一組。二十八宿沿著黃道附近分佈，三垣在北方天空。由於歲差的影響，其中有六個在南天的星官越來越南，在明清已經不容易被天文學家觀測，儀象考成不再記載。</p>
-<p>在明末以前，中國的星官不包括近南極星區。明末，根據西方星圖加入了南天二十三個星官。明末到清代，西方傳教士進入了欽天監，他們沿用了以前的星官的名字，但是改變了其中一些星官對應的恒星，並給各星官添補了一些恒星，叫做增星。<i>儀象考成續編</i>中有兩顆以上恒星組成的星官，每個恒星都有編號。但也有少數星官，每個恒星都有專名。</p>
-<p>如此一來，<i>儀象考成續編</i>總共有300個星官3240個星名。</p>
-<p>直到辛亥革命後，星官失去了官方地位。這些星官和星名在今天沿用下來，成為中國星名體系。星官已經很少被使用，但中國傳統星名相比西方星名仍然被更普遍的使用。</p>
-
-<p><img src="yxkcxt.png"/><br/><em>儀象考成星圖(1757年)</em></p>
+<p>中國天文學是獨立發展的，中國人有自己的恆星分組系統，稱爲「星官」。中國傳統的星空文化在東亞有著深遠的影響。在中國古代，星官和行星與占星術有關。經過幾千年的演變，現在的星官和星名是在17至19世紀定型的。 </p>
+<p>Stellarium 目前提供 300 個中國星官和 3000
+多個中國星名，來自《儀象考成》和《儀象考成續編》。《儀象考成》是1756年完成的御制天文記錄。1844年，欽天監對其進行了修訂，出版了《儀象考成續編》，這是今天中國傳統星官和星名的主要參考。伊世同在其著作《中西對照恆星圖表1950.0》一書中對這些記載進行了考證和總結。 </p>
+<p>中國傳統星空文化以《中西對照恆星圖表1950.0》和《儀象考成》中的資料爲基礎。</p>
+<p>此外，根據潘鼐的《中國恆星觀測史》添加了一些未在1950年中西對照恆星圖表確認的恆星。</p>
+<p>如果星名後有「*」，則爲根據《中國恆星觀測史》加註的星。</p>
+<p>如果星名後接「？」，則爲根據《中國恆星觀測史》加註的星，但不能完全證明。</p>
 
 
+<h2>日月星辰</h2>
 
-<h3>三垣</h3>
+<p>西方國家以神話人物命名行星。中國自漢代起將五顆行星的名稱與五行的概念相匹配。因此，辰星叫水星，太白叫金星，熒惑叫火星，歲星叫木星，鎮星叫土星。
+<p>在中文中，日月以陰陽命名，分別是太陽和太陰。它們的本名日和月則屬於象形文字。</p>
+<p>日月和五行星形成七曜，對應於五行和陰陽。</p>
 
-<p>三垣是北天黃道所圍區域裏的三個大天區。垣裏包含著很多星官。三垣是紫微垣，太微垣，天市垣。 </p>
-<p>垣是圍牆的意思。垣裏包含著很多星官，牆外附近也有相關星官屬於該垣。</p>
-<p>紫微垣代表了皇家的紫禁城，是天帝起居的地方，大體是北天的拱極星區。這裏是天際的中央，所有的星星都環繞它運行。紫薇垣有星官37個。</p>
+<h2>星官</h2>
+
+<p>中國傳統天文學有一個將天球划分爲星群或星座的系統，稱爲「星官」。現代星座指的是天球的特定區域。星官只是指恆星的分佈方式，星官之間沒有具體的界限。</p>
+<p>星官的名字和佈局反映的是人間的社會體系，帝王將相、宮廷廟宇、軍營車騎、農耕狩獵都搬到了天上，按照人間的方式在天上複製一個世界。</p>
+<p>星官通常比希臘傳統的星座要小。一個星官多的是幾十顆星，少的只有一顆。中古中國星圖一般有星官共283個，共1464顆星。星官分爲 31
+個區域，沿黃道的二十八宿和北天的三垣。由於歲差的影響，南方地平線附近的六個星官越來越南。明清時期天文學家已不易觀測到，故《儀象考成》不再記載。</p>
+<p>明末（17世紀）以前，南天極周圍沒有星官。近南極星區（南天）是明末根據歐洲星圖添加的第 32 個區域，包括 23
+個新增星官。近南極星區現在也被視爲中國傳統系統的一部分。  </p> 
+<p>明末以來，西方傳教士進入欽天監。他們沿用了星官的名字，只是改變了一些星官對應的星，幾乎每一個星官都加了一些星，叫做「增星」。原有的星稱爲「正星」。一個星官一般由兩顆或更多顆星組成，每顆星都有一個編號。《儀象考成續編》中的星名是星官加數字。但也有幾個星官，每顆星都有專門的名字。</p>
+<p>如此，《儀象考成續編》共有星官300個，星3240顆。</p>
+<p>直到1911年辛亥革命，中國才不再以星官爲官方星座系統。與星官不同的是，傳統的中國星名仍在現代中國天文學中使用，且比西方名字更常見。 </p>
+
+<p><img src="yxkcxt.png"/><br/><em>儀象考成星圖 (1757)</em></p>
+
+
+<h2>三垣</h2>
+
+<p>三垣是北天的三個天區，包括上垣之太微垣、中垣之紫微垣及下垣之天市垣。</p>
+<p>每垣分左右兩藩，稱左垣和右垣，是主要的星官。 兩藩是環繞排列的許多星官，其附近也有屬於該垣的星官。</p>
+<p>紫微垣是皇帝的內宮，位於在夜空的最北端。 從古代中國人的角度來看，紫微垣位於天空之中，被群星環繞。
+它涵蓋了現代星座小熊座、天龍座、鹿豹座、仙王座、仙后座、禦夫座、牧夫座，以及大熊座、獵犬座、小獅子座、武仙座的部分區域。 紫微垣有37星官。</p>
 <ul>
-<li><a href="https://en.wikipedia.org/wiki/Purple_Forbidden_enclosure">紫微垣的維琪百科</a></li>
+<li><a
+href="https://zh.wikipedia.org/wiki/%E7%B4%AB%E5%BE%AE%E5%9E%A3">紫微垣（維基百科）</a></li>
 </ul>
-<p>太微垣是天帝和臣子門處理政務的地方。裏面有各種官員和政府機構。太微垣在獅子座，后發座，室女座的位置。太微垣有星官20個。</p>
+<p>太微垣是皇帝和朝臣處理政事的地方。太微垣有各種官員和政府機構。 它涵蓋現代星座處女座、后髮座和獅子座，以及獵犬座、大熊座和小獅座的部分區域。
+太微垣有20個星官。</p>
 <ul>
-<li><a href="https://en.wikipedia.org/wiki/Supreme_Palace_enclosure">太微垣的維琪百科</a></li>
+<li><a
+href="https://zh.wikipedia.org/wiki/%E5%A4%AA%E5%BE%AE%E5%9E%A3">太微垣（維基百科）</a></li>
 </ul>
-<p>天市垣是天上的市集，是平民百姓居住的地方。大致相當於武仙、巨蛇、蛇夫等星座的一部分。天市垣有星官19個，以市場的設施和參與者命名。</p>
+<p>天市垣是天上的集市，是普通人居住的地方。天市垣涵蓋現代星座巨蛇座、蛇夫座、天鷹座和北冕座，以及部分武仙座。天市垣有19個星官。它們以集市的參與者和集市的設施命名。</p>
 <ul>
-<li><a href="https://en.wikipedia.org/wiki/Heavenly_Market_enclosure">天市垣的維琪百科</a></li>
+<li><a
+href="https://zh.wikipedia.org/wiki/%E5%A4%A9%E5%B8%82%E5%9E%A3">天市垣（維基百科）</a></li>
 </ul>
 
-<h3>二十八宿</h3>
+<h2>二十八宿</h2>
 
-<p>二十八宿是古代中國將黃道和天赤道附近的天區按照赤經劃分為二十八個區域。每個區域稱為宿。月行一日大致為一宿。</p>
-<p>每一個宿在黃道附近有一個同名的星官，為宿星。凡落在某宿這個區域的星官，便屬於該宿統轄。</p>
-<p>中國古代的傳統坐標系以日行一日為一度，周天共三百六十五又四分之一度，為一個回歸年。二十八宿的每宿中作為測量赤經相對標誌的恒星稱為該宿的距星。本宿距星和下一距星之間的在赤經上的差值為本宿的宿度。</p>
-<p>中國星圖上都有28條從北天極出發的經過二十八宿距星的的線，稱為宿度線。stellarium以星座界限的形式提供了這些宿度線。</p>
-<p>一個天體在某宿距星以東，並且和該宿與該宿距星之間的赤經差小於該宿宿度的話，就稱為入該宿（注意：此處入該宿的範圍，和前文作為區分星官歸屬的天區是有區別的），這個赤經差就稱為該天體的入宿度，寫作“入×宿×度”。再配上該天體與北天極之間的角距離——“去極度”，就成為中國古代的一對赤道座標分量。</p>
-<p>距星選取後，由於歲差原因，各宿宿度還在相當緩慢的變化，歷史上也亦因此更換過一些距星。</p>
-<p>二十八宿又按照東南西北分成四象，每組七宿，分別對應七曜。二十八宿與四象的匹配，是以古代春分前後初昏時的天象為依據的，這時朱雀七宿在南方，蒼龍七宿在東方，玄武七宿在北方，白虎七宿在西方。</p>
+<p>二十八宿，是中國古代在黃道和赤道附近劃分的天區，將黃道按赤經分為28個區域。 每個區域稱爲一宿，月亮每天所在的天區就被古人看成月亮當天歇息的住所。</p>
+<p>各宿在黃道附近各有一座同名星官，即主星官。 附近區域的星官屬於宿。</p>
+<p>每個星官都有一顆主星，稱爲距星。 在中國古代，二十八宿距星是確定赤道坐標系經度的基準。 相鄰兩宿西側距星的赤經差爲宿度。
+中國傳統的赤道坐標系將赤道分爲365.25度，太陽運行一天轉一度，也是28宿的宿度數之和。 </p>
+<p>由於歲差的影響，各個宿的宿度一直在慢慢變化，歷史上一些距星也發生了變化。 </p>
+<p>在中國傳統星圖上，有28條線以北天極爲界穿過二十八宿的距星，以方便天體定位。 </p>
+<p>若某天體在本宿距星以東，且其赤經不超過下一宿距星的赤經，則該天體與距星的赤經差，稱爲入宿度。 </p>
+<p>去極度，即恆星與北天極之間的角距，我們可以確定恆星在天球上的位置。 入宿度和去極度共同構成中國古代赤道坐標系的兩個分量。 </p>
+<p>二十八宿分爲四象，每象都與一個羅盤方向相關聯，並包含七宿，對應於七曜。 二十八宿與四象的對應關係，是以古代某一時期春分黃昏時分的天空爲依據的。
+此時朱雀在南，青龍在東，玄武在北，白虎在西。 </p>
 
-
-<h3>二十八宿列表(J2000)</h3>
+<h2>二十八宿列表 (J2000)</h2>
 <table class="nomenclature">
    <tr>
-      <td>七耀</td>
+      <td>七曜</td>
       <td></td>
       <td>木</td>
       <td>金</td>
-      <td>土</td>
-      <td>日</td>
-      <td>月</td>
+      <td>地球</td>
+      <td>太陽</td>
+      <td>月球</td>
       <td>火</td>
       <td>水</td>
    </tr>
    <tr>
-      <td>中名</td>
-      <td>東方蒼龍</td>
+      <td>中國名</td>
+      <td><notr>东方苍龙</notr></td>
+      <td><notr>角宿</notr></td>
+      <td><notr>亢宿</notr></td>
+      <td><notr>氐宿</notr></td>
+      <td><notr>房宿</notr></td>
+      <td><notr>心宿</notr></td>
+      <td><notr>尾宿</notr></td>
+      <td><notr>箕宿</notr></td>
+   </tr>
+   <tr>
+      <td>拼音</td>
+      <td><notr>Dōngfāng Cānglóng</notr></td>
+      <td><notr>Jiǎoxiù</notr></td>
+      <td><notr>Kàngxiù</notr></td>
+      <td><notr>Dīxiù</notr></td>
+      <td><notr>Fángxiù</notr></td>
+      <td><notr>Xīnxiù</notr></td>
+      <td><notr>Wěixiù</notr></td>
+      <td><notr>Jīxiù</notr></td>
+   </tr>
+   <tr>
+      <td>翻譯</td>
+      <td>東方青龍</td>
       <td>角宿</td>
       <td>亢宿</td>
       <td>氐宿</td>
@@ -76,84 +112,84 @@
       <td>箕宿</td>
    </tr>
    <tr>
-      <td>拼音</td>
-      <td>Dōngfāng Cānglóng</td>
-      <td>Jiǎoxiù</td>
-      <td>Kàngxiù</td>
-      <td>Dīxiù</td>
-      <td>Fángxiù</td>
-      <td>Xīnxiù</td>
-      <td>Wěixiù</td>
-      <td>Jīxiù</td>
-   </tr>
-   <tr>
-      <td>英譯</td>
-      <td>Azure Dragon of the East</td>
-      <td>Horn Mansion</td>
-      <td>Neck Mansion</td>
-      <td>Root Mansion</td>
-      <td>Room Mansion</td>
-      <td>Heart Mansion</td>
-      <td>Tail Mansion</td>
-      <td>Winnowing Basket Mansion</td>
-   </tr>
-   <tr>
       <td>星官數</td>
-      <td>46</td>
-      <td>11</td>
-      <td>7</td>
-      <td>11</td>
-      <td>7</td>
-      <td>2</td>
-      <td>5</td>
-      <td>3</td>
+      <td><notr>46</notr></td>
+      <td><notr>11</notr></td>
+      <td><notr>7</notr></td>
+      <td><notr>11</notr></td>
+      <td><notr>7</notr></td>
+      <td><notr>2</notr></td>
+      <td><notr>5</notr></td>
+      <td><notr>3</notr></td>
    </tr>
    <tr>
       <td>距星</td>
       <td></td>
-      <td>角宿一,α Vir</td>
-      <td>亢宿一,κ Vir</td>
-      <td>氐宿一,α2 Lib</td>
-      <td>房宿一,π Sco</td>
-      <td>心宿一,σ Sco</td>
-      <td>尾宿一,μ1 Sco</td>
-      <td>箕宿一,γ Sgr</td>
+      <td><notr>α Vir</notr></td>
+      <td><notr>κ Vir</notr></td>
+      <td><notr>α2 Lib</notr></td>
+      <td><notr>π Sco</notr></td>
+      <td><notr>σ Sco</notr></td>
+      <td><notr>μ1 Sco</notr></td>
+      <td><notr>γ Sgr</notr></td>
    </tr>
    <tr>
       <td>距星赤經</td>
       <td></td>
-      <td>13h25m11.6s</td>
-      <td>14h12m53.8s</td>
-      <td>14h50m52.8s</td>
-      <td>15h58m51.1s</td>
-      <td>16h21m11.3s</td>
-      <td>16h51m52.2s</td>
-      <td>18h05m48.5s</td>
+      <td><notr>13h25m11.6s</notr></td>
+      <td><notr>14h12m53.8s</notr></td>
+      <td><notr>14h50m52.8s</notr></td>
+      <td><notr>15h58m51.1s</notr></td>
+      <td><notr>16h21m11.3s</notr></td>
+      <td><notr>16h51m52.2s</notr></td>
+      <td><notr>18h05m48.5s</notr></td>
    </tr>
    <tr>
       <td>宿度1</td>
       <td></td>
-      <td>47m42s</td>
-      <td>37m59s</td>
-      <td>1h07m58s</td>
-      <td>22m20s</td>
-      <td>30m41s</td>
-      <td>1h13m57s</td>
-      <td>39m51s</td>
+      <td><notr>47m42s</notr></td>
+      <td><notr>37m59s</notr></td>
+      <td><notr>1h07m58s</notr></td>
+      <td><notr>22m20s</notr></td>
+      <td><notr>30m41s</notr></td>
+      <td><notr>1h13m57s</notr></td>
+      <td><notr>39m51s</notr></td>
    </tr>
    <tr>
       <td>宿度2</td>
       <td></td>
-      <td>12.10°</td>
-      <td>9.63°</td>
-      <td>17.24°</td>
-      <td>5.67°</td>
-      <td>7.78°</td>
-      <td>18.76°</td>
-      <td>10.11°</td>
+      <td><notr>12.10°</notr></td>
+      <td><notr>9.63°</notr></td>
+      <td><notr>17.24°</notr></td>
+      <td><notr>5.67°</notr></td>
+      <td><notr>7.78°</notr></td>
+      <td><notr>18.76°</notr></td>
+      <td><notr>10.11°</notr></td>
    </tr>
    <tr>
-      <td>中名</td>
+      <td>中國名</td>
+      <td><notr>北方玄武</notr></td>
+      <td><notr>斗宿</notr></td>
+      <td><notr>牛宿</notr></td>
+      <td><notr>女宿</notr></td>
+      <td><notr>虚宿</notr></td>
+      <td><notr>危宿</notr></td>
+      <td><notr>室宿</notr></td>
+      <td><notr>壁宿</notr></td>
+   </tr>
+   <tr>
+      <td>拼音</td>
+      <td><notr>Běifāng Xuánwǔ</notr></td>
+      <td><notr>Dǒuxiù</notr></td>
+      <td><notr>Niúxiù</notr></td>
+      <td><notr>Nǚxiù</notr></td>
+      <td><notr>Xūxiù</notr></td>
+      <td><notr>Wēixiù</notr></td>
+      <td><notr>Shìxiù</notr></td>
+      <td><notr>Bìxiù</notr></td>
+   </tr>
+   <tr>
+      <td>翻譯</td>
       <td>北方玄武</td>
       <td>斗宿</td>
       <td>牛宿</td>
@@ -164,84 +200,84 @@
       <td>壁宿</td>
    </tr>
    <tr>
-      <td>拼音</td>
-      <td>Běifāng Xuánwǔ</td>
-      <td>Dǒuxiù</td>
-      <td>Niúxiù</td>
-      <td>Nǚxiù</td>
-      <td>Xūxiù</td>
-      <td>Wēixiù</td>
-      <td>Shìxiù</td>
-      <td>Bìxiù</td>
-   </tr>
-   <tr>
-      <td>英譯</td>
-      <td>Black Tortoise of the North</td>
-      <td>Dipper Mansion</td>
-      <td>Ox Mansion</td>
-      <td>Girl Mansion</td>
-      <td>Emptiness Mansion</td>
-      <td>Rooftop Mansion</td>
-      <td>Encampment Mansion</td>
-      <td>Wall Mansion</td>
-   </tr>
-   <tr>
       <td>星官數</td>
-      <td>65</td>
-      <td>10</td>
-      <td>11</td>
-      <td>8</td>
-      <td>10</td>
-      <td>10</td>
-      <td>10</td>
-      <td>6</td>
+      <td><notr>65</notr></td>
+      <td><notr>10</notr></td>
+      <td><notr>11</notr></td>
+      <td><notr>8</notr></td>
+      <td><notr>10</notr></td>
+      <td><notr>10</notr></td>
+      <td><notr>10</notr></td>
+      <td><notr>6</notr></td>
    </tr>
    <tr>
       <td>距星</td>
       <td></td>
-      <td>斗宿一,μ Sgr</td>
-      <td>牛宿一,β Cap</td>
-      <td>女宿一,ε Aqr</td>
-      <td>虛宿一,β Aqr</td>
-      <td>危宿一,α Aqr</td>
-      <td>室宿一,α Peg</td>
-      <td>壁宿一,γ Peg</td>
+      <td><notr>μ Sgr</notr></td>
+      <td><notr>β Cap</notr></td>
+      <td><notr>ε Aqr</notr></td>
+      <td><notr>β Aqr</notr></td>
+      <td><notr>α Aqr</notr></td>
+      <td><notr>α Peg</notr></td>
+      <td><notr>γ Peg</notr></td>
    </tr>
    <tr>
       <td>距星赤經</td>
       <td></td>
-      <td>18h45m39.4s</td>
-      <td>20h21m0.7s</td>
-      <td>20h47m40.6s</td>
-      <td>21h31m33.5s</td>
-      <td>22h05m47.0s</td>
-      <td>23h04m45.7s</td>
-      <td>00h13m14.2s</td>
+      <td><notr>18h45m39.4s</notr></td>
+      <td><notr>20h21m0.7s</notr></td>
+      <td><notr>20h47m40.6s</notr></td>
+      <td><notr>21h31m33.5s</notr></td>
+      <td><notr>22h05m47.0s</notr></td>
+      <td><notr>23h04m45.7s</notr></td>
+      <td><notr>00h13m14.2s</notr></td>
    </tr>
    <tr>
       <td>宿度1</td>
       <td></td>
-      <td>1h35m21s</td>
-      <td>26m40s</td>
-      <td>43m53s</td>
-      <td>34m13s</td>
-      <td>58m59s</td>
-      <td>1h08s29s</td>
-      <td>43m58s</td>
+      <td><notr>1h35m21s</notr></td>
+      <td><notr>26m40s</notr></td>
+      <td><notr>43m53s</notr></td>
+      <td><notr>34m13s</notr></td>
+      <td><notr>58m59s</notr></td>
+      <td><notr>1h08s29s</notr></td>
+      <td><notr>43m58s</notr></td>
    </tr>
    <tr>
       <td>宿度2</td>
       <td></td>
-      <td>24.19°</td>
-      <td>6.76°</td>
-      <td>11.13°</td>
-      <td>8.68</td>
-      <td>14.96°</td>
-      <td>17.37°</td>
-      <td>11.15°</td>
+      <td><notr>24.19°</notr></td>
+      <td><notr>6.76°</notr></td>
+      <td><notr>11.13°</notr></td>
+      <td><notr>8.68°</notr></td>
+      <td><notr>14.96°</notr></td>
+      <td><notr>17.37°</notr></td>
+      <td><notr>11.15°</notr></td>
    </tr>
    <tr>
-      <td>中名</td>
+      <td>中國名</td>
+      <td><notr>西方白虎</notr></td>
+      <td><notr>奎宿</notr></td>
+      <td><notr>娄宿</notr></td>
+      <td><notr>胃宿</notr></td>
+      <td><notr>昴宿</notr></td>
+      <td><notr>毕宿</notr></td>
+      <td><notr>觜宿</notr></td>
+      <td><notr>参宿</notr></td>
+   </tr>
+   <tr>
+      <td>拼音</td>
+      <td><notr>Xīfāng Báihǔ</notr></td>
+      <td><notr>Kuíxiù</notr></td>
+      <td><notr>Loúxiù</notr></td>
+      <td><notr>Wèixiù</notr></td>
+      <td><notr>Mǎoxiù</notr></td>
+      <td><notr>Bìxiù</notr></td>
+      <td><notr>Zīxiù</notr></td>
+      <td><notr>Shēnxiù</notr></td>
+   </tr>
+   <tr>
+      <td>翻譯</td>
       <td>西方白虎</td>
       <td>奎宿</td>
       <td>婁宿</td>
@@ -252,84 +288,84 @@
       <td>參宿</td>
    </tr>
    <tr>
-      <td>拼音</td>
-      <td>Xīfāng Báihǔ</td>
-      <td>Kuíxiù</td>
-      <td>Loúxiù</td>
-      <td>Wèixiù</td>
-      <td>Mǎoxiù</td>
-      <td>Bìxiù</td>
-      <td>Zīxiù</td>
-      <td>Shēnxiù</td>
-   </tr>
-   <tr>
-      <td>英譯</td>
-      <td>White Tiger of the West</td>
-      <td>Legs Mansion</td>
-      <td>Bond Mansion</td>
-      <td>Stomach Mansion</td>
-      <td>Hairy Head Mansion</td>
-      <td>Net Mansion</td>
-      <td>Turtle Beak Mansion</td>
-      <td>Three Stars Mansion</td>
-   </tr>
-   <tr>
       <td>星官數</td>
-      <td>54</td>
-      <td>9</td>
-      <td>6</td>
-      <td>7</td>
-      <td>9</td>
-      <td>14</td>
-      <td>3</td>
-      <td>6</td>
+      <td><notr>54</notr></td>
+      <td><notr>9</notr></td>
+      <td><notr>6</notr></td>
+      <td><notr>7</notr></td>
+      <td><notr>9</notr></td>
+      <td><notr>14</notr></td>
+      <td><notr>3</notr></td>
+      <td><notr>6</notr></td>
    </tr>
    <tr>
       <td>距星</td>
       <td></td>
-      <td>奎宿一,η And</td>
-      <td>婁宿一,β Ari</td>
-      <td>胃宿一,35 Ari</td>
-      <td>昴宿一,17 Tau</td>
-      <td>畢宿一,ε Tau</td>
-      <td>觜宿一,λ Ori</td>
-      <td>參宿一,ζ Ori</td>
+      <td><notr>η And</notr></td>
+      <td><notr>β Ari</notr></td>
+      <td><notr>35 Ari</notr></td>
+      <td><notr>17 Tau</notr></td>
+      <td><notr>ε Tau</notr></td>
+      <td><notr>λ Ori</notr></td>
+      <td><notr>ζ Ori</notr></td>
    </tr>
    <tr>
       <td>距星赤經</td>
       <td></td>
-      <td>00h57m12.3s</td>
-      <td>01h54m38.4s</td>
-      <td>02h43m27.1s</td>
-      <td>03h44m52.5s</td>
-      <td>04h28m37.0s</td>
-      <td>5h35m8.3s</td>
-      <td>05h40m45.5s</td>
+      <td><notr>00h57m12.3s</notr></td>
+      <td><notr>01h54m38.4s</notr></td>
+      <td><notr>02h43m27.1s</notr></td>
+      <td><notr>03h44m52.5s</notr></td>
+      <td><notr>04h28m37.0s</notr></td>
+      <td><notr>5h35m8.3s</notr></td>
+      <td><notr>05h40m45.5s</notr></td>
    </tr>
    <tr>
       <td>宿度1</td>
       <td></td>
-      <td>57m26s</td>
-      <td>48m49s</td>
-      <td>1h01m26s</td>
-      <td>43m44s</td>
-      <td>1h06m31s</td>
-      <td>5m32s</td>
-      <td>42m12s</td>
+      <td><notr>57m26s</notr></td>
+      <td><notr>48m49s</notr></td>
+      <td><notr>1h01m26s</notr></td>
+      <td><notr>43m44s</notr></td>
+      <td><notr>1h06m31s</notr></td>
+      <td><notr>5m32s</notr></td>
+      <td><notr>42m12s</notr></td>
    </tr>
    <tr>
       <td>宿度2</td>
       <td></td>
-      <td>14.57°</td>
-      <td>12.38°</td>
-      <td>15.58°</td>
-      <td>11.09°</td>
-      <td>16.87°</td>
-      <td>1.40°</td>
-      <td>10.70°</td>
+      <td><notr>14.57°</notr></td>
+      <td><notr>12.38°</notr></td>
+      <td><notr>15.58°</notr></td>
+      <td><notr>11.09°</notr></td>
+      <td><notr>16.87°</notr></td>
+      <td><notr>1.40°</notr></td>
+      <td><notr>10.70°</notr></td>
    </tr>
    <tr>
-      <td>中名</td>
+      <td>中國名</td>
+      <td><notr>南方朱雀</notr></td>
+      <td><notr>井宿</notr></td>
+      <td><notr>鬼宿</notr></td>
+      <td><notr>柳宿</notr></td>
+      <td><notr>星宿</notr></td>
+      <td><notr>张宿</notr></td>
+      <td><notr>翼宿</notr></td>
+      <td><notr>轸宿</notr></td>
+   </tr>
+   <tr>
+      <td>拼音</td>
+      <td><notr>Nánfāng Zhūquè</notr></td>
+      <td><notr>Jǐngxiù</notr></td>
+      <td><notr>Guǐxiù</notr></td>
+      <td><notr>Liǔxiù</notr></td>
+      <td><notr>Xīngxiù</notr></td>
+      <td><notr>Zhāngxiù</notr></td>
+      <td><notr>Yìxiù</notr></td>
+      <td><notr>Zhěnxiù</notr></td>
+   </tr>
+   <tr>
+      <td>翻譯</td>
       <td>南方朱雀</td>
       <td>井宿</td>
       <td>鬼宿</td>
@@ -340,2642 +376,2629 @@
       <td>軫宿</td>
    </tr>
    <tr>
-      <td>拼音</td>
-      <td>Nánfāng Zhūquè</td>
-      <td>Jǐngxiù</td>
-      <td>Guǐxiù</td>
-      <td>Liǔxiù</td>
-      <td>Xīngxiù</td>
-      <td>Zhāngxiù</td>
-      <td>Yìxiù</td>
-      <td>Zhěnxiù</td>
-   </tr>
-   <tr>
-      <td>英譯</td>
-      <td>Vermilion Bird of the South</td>
-      <td>Well Mansion</td>
-      <td>Ghosts Mansion</td>
-      <td>Willow Mansion</td>
-      <td>Star Mansion</td>
-      <td>Extended Net Mansion</td>
-      <td>Wings Mansion</td>
-      <td>Chariot Mansion</td>
-   </tr>
-   <tr>
       <td>星官數</td>
-      <td>42</td>
-      <td>19</td>
-      <td>7</td>
-      <td>2</td>
-      <td>5</td>
-      <td>2</td>
-      <td>2</td>
-      <td>5</td>
+      <td><notr>42</notr></td>
+      <td><notr>19</notr></td>
+      <td><notr>7</notr></td>
+      <td><notr>2</notr></td>
+      <td><notr>5</notr></td>
+      <td><notr>2</notr></td>
+      <td><notr>2</notr></td>
+      <td><notr>5</notr></td>
    </tr>
    <tr>
       <td>距星</td>
       <td></td>
-      <td>井宿一,μ Gem</td>
-      <td>鬼宿一,θ Cnc</td>
-      <td>柳宿一,δ Hya</td>
-      <td>星宿一,α Hya</td>
-      <td>張宿一,υ1 Hya</td>
-      <td>翼宿一,α Crt</td>
-      <td>軫宿一,γ Crv</td>
+      <td><notr>μ Gem</notr></td>
+      <td><notr>θ Cnc</notr></td>
+      <td><notr>δ Hya</notr></td>
+      <td><notr>α Hya</notr></td>
+      <td><notr>υ1 Hya</notr></td>
+      <td><notr>α Crt</notr></td>
+      <td><notr>γ Crv</notr></td>
    </tr>
    <tr>
       <td>距星赤經</td>
       <td></td>
-      <td>6h22m57.6s</td>
-      <td>8h31m35.7s</td>
-      <td>8h37m39.4s</td>
-      <td>09h27m35.2s</td>
-      <td>09h51m28.7s</td>
-      <td>10h59m45.9s</td>
-      <td>12h15m48.4s</td>
+      <td><notr>6h22m57.6s</notr></td>
+      <td><notr>8h31m35.7s</notr></td>
+      <td><notr>8h37m39.4s</notr></td>
+      <td><notr>09h27m35.2s</notr></td>
+      <td><notr>09h51m28.7s</notr></td>
+      <td><notr>10h59m45.9s</notr></td>
+      <td><notr>12h15m48.4s</notr></td>
    </tr>
    <tr>
       <td>宿度1</td>
       <td></td>
-      <td>2h08m38s</td>
-      <td>6m3s</td>
-      <td>49m58s</td>
-      <td>23m54s</td>
-      <td>1h08m17s</td>
-      <td>1h16m02s</td>
-      <td>1h09m23s</td>
+      <td><notr>2h08m38s</notr></td>
+      <td><notr>6m3s</notr></td>
+      <td><notr>49m58s</notr></td>
+      <td><notr>23m54s</notr></td>
+      <td><notr>1h08m17s</notr></td>
+      <td><notr>1h16m02s</notr></td>
+      <td><notr>1h09m23s</notr></td>
    </tr>
    <tr>
       <td>宿度2</td>
       <td></td>
-      <td>32.63°</td>
-      <td>1.54°</td>
-      <td>12.67°</td>
-      <td>6.06°</td>
-      <td>17.32°</td>
-      <td>19.29°</td>
-      <td>17.60°</td>
+      <td><notr>32.63°</notr></td>
+      <td><notr>1.54°</notr></td>
+      <td><notr>12.67°</notr></td>
+      <td><notr>6.06°</notr></td>
+      <td><notr>17.32°</notr></td>
+      <td><notr>19.29°</notr></td>
+      <td><notr>17.60°</notr></td>
    </tr>
-
 </table>
-<p>注1.宿度1 現代赤道坐標系赤經。</p>
-<p>注2.宿度2 中國傳統坐標系赤經，以周天365.25度計。</p>
-
+<p>註：宿度1：現代赤道坐標系。</p>
+<p>註：宿度2：中國傳統的赤道坐標系，將赤道分爲365.25度。</p>
 
 <ul>
-<li><a href="https://en.wikipedia.org/wiki/Twenty-Eight_Mansions">二十八宿的維琪百科</a></li>
+<li><notr><a href="https://en.wikipedia.org/wiki/Twenty-Eight_Mansions">二十八宿（維基百科）</a></notr></li>
 </ul>
 
-<h3>近南極星區</h3>
 
-<p>近南極星區對古中國來說是未知的，所以不包括在三垣二十八宿內。明朝末年，徐光啟根據西方星表加上近南極星區的二十三個星官。近南極星官由此納入了中國傳統星圖。這些星官其實是西方星座的變異，多以動物命名。</p>
+<h2>南天</h2>
 
-
+<p>南天極周圍的天空對古代中國人來說是未知的。 故未列入三垣二十八宿體系。 然而，在明末，徐光啟根據歐洲星圖引入了另外 23 個星官。
+這些星官從此被納入了中國傳統的星圖。 這些星官實際上是西方星座的變種，多以動物命名。 </p>
+ 
 <h3>星官列表</h3>
 
 <table class="nomenclature">
    <tr>
-      <td>星官</td>
+      <td>中國名</td>
       <td>拼音</td>
-      <td>英譯</td>
+      <td>翻譯</td>
       <td>正星數</td>
       <td>增星數</td>
    </tr>
    <tr>
+      <td><notr>紫微垣</notr></td>
+      <td><notr>Zǐwēiyuán</notr></td>
       <td>紫微垣</td>
-      <td>Zǐwēiyuán</td>
-      <td>Purple Forbidden Enclosure</td>
       <td></td>
       <td></td>
    </tr>
    <tr>
+      <td><notr>北极</notr></td>
+      <td><notr>Běijí</notr></td>
       <td>北極</td>
-      <td>Běijí</td>
-      <td>Northern Pole</td>
-      <td>5</td>
-      <td>3</td>
+      <td><notr>5</notr></td>
+      <td><notr>3</notr></td>
    </tr>
    <tr>
+      <td><notr>四辅</notr></td>
+      <td><notr>Sìfǔ</notr></td>
       <td>四輔</td>
-      <td>Sìfǔ</td>
-      <td>Four Advisors</td>
-      <td>4</td>
-      <td>1</td>
+      <td><notr>4</notr></td>
+      <td><notr>1</notr></td>
    </tr>
    <tr>
+      <td><notr>天乙</notr></td>
+      <td><notr>Tiānyǐ</notr></td>
       <td>天乙</td>
-      <td>Tiānyǐ</td>
-      <td>Celestial Great One</td>
-      <td>1</td>
-      <td>0</td>
+      <td><notr>1</notr></td>
+      <td><notr>0</notr></td>
    </tr>
    <tr>
+      <td><notr>太乙</notr></td>
+      <td><notr>Tàiyǐ</notr></td>
       <td>太乙</td>
-      <td>Tàiyǐ</td>
-      <td>First Great One</td>
-      <td>1</td>
-      <td>0</td>
+      <td><notr>1</notr></td>
+      <td><notr>0</notr></td>
    </tr>
    <tr>
+      <td><notr>紫微左垣</notr></td>
+      <td><notr>Zǐwēizuǒyuán</notr></td>
       <td>紫微左垣</td>
-      <td>Zǐwēizuǒyuán</td>
-      <td>Purple Forbidden Left Wall</td>
-      <td>8</td>
-      <td>12</td>
+      <td><notr>8</notr></td>
+      <td><notr>12</notr></td>
    </tr>
    <tr>
+      <td><notr>紫微右垣</notr></td>
+      <td><notr>Zǐwēiyòuyuán</notr></td>
       <td>紫微右垣</td>
-      <td>Zǐwēiyòuyuán</td>
-      <td>Purple Forbidden Right Wall</td>
-      <td>7</td>
-      <td>12</td>
+      <td><notr>7</notr></td>
+      <td><notr>12</notr></td>
    </tr>
    <tr>
+      <td><notr>阴德</notr></td>
+      <td><notr>Yīndé</notr></td>
       <td>陰德</td>
-      <td>Yīndé</td>
-      <td>Hidden Virtue</td>
-      <td>2</td>
-      <td>1</td>
+      <td><notr>2</notr></td>
+      <td><notr>1</notr></td>
    </tr>
    <tr>
+      <td><notr>尚书</notr></td>
+      <td><notr>Shàngshū</notr></td>
       <td>尚書</td>
-      <td>Shàngshū</td>
-      <td>Royal Secretary</td>
-      <td>5</td>
-      <td>2</td>
+      <td><notr>5</notr></td>
+      <td><notr>2</notr></td>
    </tr>
    <tr>
+      <td><notr>女史</notr></td>
+      <td><notr>Nǚshǐ</notr></td>
       <td>女史</td>
-      <td>Nǚshǐ</td>
-      <td>Female Protocol</td>
-      <td>1</td>
-      <td>1</td>
+      <td><notr>1</notr></td>
+      <td><notr>1</notr></td>
    </tr>
    <tr>
+      <td><notr>柱史</notr></td>
+      <td><notr>Zhùshǐ</notr></td>
       <td>柱史</td>
-      <td>Zhùshǐ</td>
-      <td>Official of Royal Archives</td>
-      <td>1</td>
-      <td>2</td>
+      <td><notr>1</notr></td>
+      <td><notr>2</notr></td>
    </tr>
    <tr>
+      <td><notr>御女</notr></td>
+      <td><notr>Yùnǚ</notr></td>
       <td>御女</td>
-      <td>Yùnǚ</td>
-      <td>Maids-in-waiting</td>
-      <td>4</td>
-      <td>1</td>
+      <td><notr>4</notr></td>
+      <td><notr>1</notr></td>
    </tr>
    <tr>
+      <td><notr>天柱</notr></td>
+      <td><notr>Tiānzhù</notr></td>
       <td>天柱</td>
-      <td>Tiānzhù</td>
-      <td>Celestial Pillar</td>
-      <td>5</td>
-      <td>6</td>
+      <td><notr>5</notr></td>
+      <td><notr>6</notr></td>
    </tr>
    <tr>
+      <td><notr>大理</notr></td>
+      <td><notr>Dàlǐ</notr></td>
       <td>大理</td>
-      <td>Dàlǐ</td>
-      <td>Chief Judge</td>
-      <td>2</td>
-      <td>1</td>
+      <td><notr>2</notr></td>
+      <td><notr>1</notr></td>
    </tr>
    <tr>
+      <td><notr>勾陈</notr></td>
+      <td><notr>Gōuchén</notr></td>
       <td>勾陳</td>
-      <td>Gōuchén</td>
-      <td>Curved Array</td>
-      <td>6</td>
-      <td>10</td>
+      <td><notr>6</notr></td>
+      <td><notr>10</notr></td>
    </tr>
    <tr>
+      <td><notr>六甲</notr></td>
+      <td><notr>Liùjiǎ</notr></td>
       <td>六甲</td>
-      <td>Liùjiǎ</td>
-      <td>Six Jia</td>
-      <td>6</td>
-      <td>1</td>
+      <td><notr>6</notr></td>
+      <td><notr>1</notr></td>
    </tr>
    <tr>
+      <td><notr>天皇大帝</notr></td>
+      <td><notr>Tiānhuángdàdì</notr></td>
       <td>天皇大帝</td>
-      <td>Tiānhuángdàdì</td>
-      <td>Great Emperor of Heaven</td>
-      <td>1</td>
-      <td>0</td>
+      <td><notr>1</notr></td>
+      <td><notr>0</notr></td>
    </tr>
    <tr>
+      <td><notr>五帝内座</notr></td>
+      <td><notr>WǔdìnèiZuò</notr></td>
       <td>五帝內座</td>
-      <td>WǔdìnèiZuò</td>
-      <td>Interior Seats of the Five Emperors</td>
-      <td>5</td>
-      <td>3</td>
+      <td><notr>5</notr></td>
+      <td><notr>3</notr></td>
    </tr>
    <tr>
-      <td>華蓋</td>
-      <td>Huágài</td>
-      <td>Canopy of the Emperor</td>
-      <td>7</td>
-      <td>0</td>
+      <td><notr>华盖</notr></td>
+      <td><notr>Huágài</notr></td>
+      <td>華葢</td>
+      <td><notr>7</notr></td>
+      <td><notr>0</notr></td>
    </tr>
    <tr>
-      <td>杠（附華蓋）</td>
-      <td>Gàng</td>
-      <td>Canopy Support(Vassal of Canopy of the Emperor )</td>
-      <td>9</td>
-      <td>1</td>
+      <td><notr>杠(附华盖)</notr></td>
+      <td><notr>Gàng</notr></td>
+      <td>杠（附華葢）</td>
+      <td><notr>9</notr></td>
+      <td><notr>1</notr></td>
    </tr>
    <tr>
+      <td><notr>传舍</notr></td>
+      <td><notr>Chuánshè</notr></td>
       <td>傳舍</td>
-      <td>Chuánshè</td>
-      <td>Guest House</td>
-      <td>9</td>
-      <td>4</td>
+      <td><notr>9</notr></td>
+      <td><notr>4</notr></td>
    </tr>
    <tr>
+      <td><notr>内阶</notr></td>
+      <td><notr>Nèijiē</notr></td>
       <td>內階</td>
-      <td>Nèijiē</td>
-      <td>Inner Steps</td>
-      <td>6</td>
-      <td>10</td>
+      <td><notr>6</notr></td>
+      <td><notr>10</notr></td>
    </tr>
    <tr>
+      <td><notr>天厨</notr></td>
+      <td><notr>Tiānchú</notr></td>
       <td>天廚</td>
-      <td>Tiānchú</td>
-      <td>Celestial Kitchen</td>
-      <td>6</td>
-      <td>2</td>
+      <td><notr>6</notr></td>
+      <td><notr>2</notr></td>
    </tr>
    <tr>
+      <td><notr>八谷</notr></td>
+      <td><notr>Bāgǔ</notr></td>
       <td>八穀</td>
-      <td>Bāgǔ</td>
-      <td>Eight Kinds of Crops</td>
-      <td>8</td>
-      <td>34</td>
+      <td><notr>8</notr></td>
+      <td><notr>34</notr></td>
    </tr>
    <tr>
+      <td><notr>天棓</notr></td>
+      <td><notr>Tiānbàng</notr></td>
       <td>天棓</td>
-      <td>Tiānbàng</td>
-      <td>Celestial Flail</td>
-      <td>5</td>
-      <td>10</td>
+      <td><notr>5</notr></td>
+      <td><notr>10</notr></td>
    </tr>
    <tr>
+      <td><notr>内厨</notr></td>
+      <td><notr>Nèichú</notr></td>
       <td>內廚</td>
-      <td>Nèichú</td>
-      <td>Inner Kitchen</td>
-      <td>2</td>
-      <td>2</td>
+      <td><notr>2</notr></td>
+      <td><notr>2</notr></td>
    </tr>
    <tr>
+      <td><notr>文昌</notr></td>
+      <td><notr>Wénchāng</notr></td>
       <td>文昌</td>
-      <td>Wénchāng</td>
-      <td>Administrative Center</td>
-      <td>6</td>
-      <td>8</td>
+      <td><notr>6</notr></td>
+      <td><notr>8</notr></td>
    </tr>
    <tr>
+      <td><notr>三师</notr></td>
+      <td><notr>Sānshī</notr></td>
       <td>三師</td>
-      <td>Sānshī</td>
-      <td>Three Top Instructors</td>
-      <td>3</td>
-      <td>1</td>
+      <td><notr>3</notr></td>
+      <td><notr>1</notr></td>
    </tr>
    <tr>
+      <td><notr>三公</notr></td>
+      <td><notr>Sāngōng</notr></td>
       <td>三公</td>
-      <td>Sāngōng</td>
-      <td>Three Excellencies</td>
-      <td>3</td>
-      <td>0</td>
+      <td><notr>3</notr></td>
+      <td><notr>0</notr></td>
    </tr>
    <tr>
+      <td><notr>天床</notr></td>
+      <td><notr>Tiānchuáng</notr></td>
       <td>天床</td>
-      <td>Tiānchuáng</td>
-      <td>Celestial Bed</td>
-      <td>6</td>
-      <td>2</td>
+      <td><notr>6</notr></td>
+      <td><notr>2</notr></td>
    </tr>
    <tr>
+      <td><notr>太尊</notr></td>
+      <td><notr>Tàizūn</notr></td>
       <td>太尊</td>
-      <td>Tàizūn</td>
-      <td>Royals</td>
-      <td>1</td>
-      <td>0</td>
+      <td><notr>1</notr></td>
+      <td><notr>0</notr></td>
    </tr>
    <tr>
+      <td><notr>天牢</notr></td>
+      <td><notr>Tiānláo</notr></td>
       <td>天牢</td>
-      <td>Tiānláo</td>
-      <td>Celestial Prison</td>
-      <td>6</td>
-      <td>2</td>
+      <td><notr>6</notr></td>
+      <td><notr>2</notr></td>
    </tr>
    <tr>
+      <td><notr>太阳守</notr></td>
+      <td><notr>Tàiyángshǒu</notr></td>
       <td>太陽守</td>
-      <td>Tàiyángshǒu</td>
-      <td>Guard of the Sun</td>
-      <td>1</td>
-      <td>1</td>
+      <td><notr>1</notr></td>
+      <td><notr>1</notr></td>
    </tr>
    <tr>
+      <td><notr>势</notr></td>
+      <td><notr>Shì</notr></td>
       <td>勢</td>
-      <td>Shì</td>
-      <td>Eunuch</td>
-      <td>4</td>
-      <td>19</td>
+      <td><notr>4</notr></td>
+      <td><notr>19</notr></td>
    </tr>
    <tr>
+      <td><notr>相</notr></td>
+      <td><notr>Xiàng</notr></td>
       <td>相</td>
-      <td>Xiàng</td>
-      <td>Prime Minister</td>
-      <td>1</td>
-      <td>3</td>
+      <td><notr>1</notr></td>
+      <td><notr>3</notr></td>
    </tr>
    <tr>
-      <td>玄戈</td>
-      <td>Xuángē</td>
-      <td>Sombre Lance</td>
-      <td>1</td>
-      <td>2</td>
+      <td><notr>玄戈</notr></td>
+      <td><notr>Xuángē</notr></td>
+      <td>元戈</td>
+      <td><notr>1</notr></td>
+      <td><notr>2</notr></td>
    </tr>
    <tr>
+      <td><notr>天理</notr></td>
+      <td><notr>Tiānlǐ</notr></td>
       <td>天理</td>
-      <td>Tiānlǐ</td>
-      <td>Judge for Nobility</td>
-      <td>4</td>
-      <td>1</td>
+      <td><notr>4</notr></td>
+      <td><notr>1</notr></td>
    </tr>
    <tr>
+      <td><notr>北斗</notr></td>
+      <td><notr>Běidǒu</notr></td>
       <td>北斗</td>
-      <td>Běidǒu</td>
-      <td>Northern Dipper</td>
-      <td>7</td>
-      <td>16</td>
+      <td><notr>7</notr></td>
+      <td><notr>16</notr></td>
    </tr>
    <tr>
-      <td>輔（附北斗）</td>
-      <td>Fǔ</td>
-      <td>Assistant(Vassal of Northern Dipper)</td>
-      <td>1</td>
-      <td>3</td>
+      <td><notr>辅(附北斗)</notr></td>
+      <td><notr>Fǔ</notr></td>
+      <td>輔 (附北斗)</td>
+      <td><notr>1</notr></td>
+      <td><notr>3</notr></td>
    </tr>
    <tr>
+      <td><notr>天枪</notr></td>
+      <td><notr>Tiānqiāng</notr></td>
       <td>天槍</td>
-      <td>Tiānqiāng</td>
-      <td>Celestial Spear</td>
-      <td>3</td>
-      <td>4</td>
+      <td><notr>3</notr></td>
+      <td><notr>4</notr></td>
    </tr>
    <tr>
+      <td><notr>太微垣</notr></td>
+      <td><notr>Tàiwēiyuán</notr></td>
       <td>太微垣</td>
-      <td>Tàiwēiyuán</td>
-      <td> Supreme Palace Enclosure</td>
       <td></td>
       <td></td>
    </tr>
    <tr>
+      <td><notr>太微左垣</notr></td>
+      <td><notr>Tàiwēizuǒyuán</notr></td>
       <td>太微左垣</td>
-      <td>Tàiwēizuǒyuán</td>
-      <td>Supreme Palace Left Wall</td>
-      <td>5</td>
-      <td>9</td>
+      <td><notr>5</notr></td>
+      <td><notr>9</notr></td>
    </tr>
    <tr>
+      <td><notr>太微右垣</notr></td>
+      <td><notr>Tàiwēiyòuyuán</notr></td>
       <td>太微右垣</td>
-      <td>Tàiwēiyòuyuán</td>
-      <td>Supreme Palace Right Wall</td>
-      <td>5</td>
-      <td>5</td>
+      <td><notr>5</notr></td>
+      <td><notr>5</notr></td>
    </tr>
    <tr>
+      <td><notr>谒者</notr></td>
+      <td><notr>Yèzhě</notr></td>
       <td>謁者</td>
-      <td>Yèzhě</td>
-      <td>Usher to the Court</td>
-      <td>1</td>
-      <td>2</td>
+      <td><notr>1</notr></td>
+      <td><notr>2</notr></td>
    </tr>
    <tr>
+      <td><notr>三公</notr></td>
+      <td><notr>Sāngōng</notr></td>
       <td>三公</td>
-      <td>Sāngōng</td>
-      <td>Three Excellencies</td>
-      <td>3</td>
-      <td>0</td>
+      <td><notr>3</notr></td>
+      <td><notr>0</notr></td>
    </tr>
    <tr>
+      <td><notr>九卿</notr></td>
+      <td><notr>Jiǔqīng</notr></td>
       <td>九卿</td>
-      <td>Jiǔqīng</td>
-      <td>Nine Senior Officers</td>
-      <td>3</td>
-      <td>9</td>
+      <td><notr>3</notr></td>
+      <td><notr>9</notr></td>
    </tr>
    <tr>
+      <td><notr>五诸侯</notr></td>
+      <td><notr>Wǔzhūhóu</notr></td>
       <td>五諸侯</td>
-      <td>Wǔzhūhóu</td>
-      <td>Five Lords</td>
-      <td>5</td>
-      <td>7</td>
+      <td><notr>5</notr></td>
+      <td><notr>7</notr></td>
    </tr>
    <tr>
+      <td><notr>内屏</notr></td>
+      <td><notr>Nèipíng</notr></td>
       <td>內屏</td>
-      <td>Nèipíng</td>
-      <td>Inner Screen</td>
-      <td>4</td>
-      <td>6</td>
+      <td><notr>4</notr></td>
+      <td><notr>6</notr></td>
    </tr>
    <tr>
+      <td><notr>五帝座</notr></td>
+      <td><notr>Wǔdìzuò</notr></td>
       <td>五帝座</td>
-      <td>Wǔdìzuò</td>
-      <td>Seats of the Five Emperors</td>
-      <td>5</td>
-      <td>4</td>
+      <td><notr>5</notr></td>
+      <td><notr>4</notr></td>
    </tr>
    <tr>
+      <td><notr>幸臣</notr></td>
+      <td><notr>Xìngchén</notr></td>
       <td>幸臣</td>
-      <td>Xìngchén</td>
-      <td>Officer of Honour</td>
-      <td>1</td>
-      <td>0</td>
+      <td><notr>1</notr></td>
+      <td><notr>0</notr></td>
    </tr>
    <tr>
+      <td><notr>太子</notr></td>
+      <td><notr>Tàizǐ</notr></td>
       <td>太子</td>
-      <td>Tàizǐ</td>
-      <td>Crown Prince</td>
-      <td>1</td>
-      <td>0</td>
+      <td><notr>1</notr></td>
+      <td><notr>0</notr></td>
    </tr>
    <tr>
+      <td><notr>从官</notr></td>
+      <td><notr>Cóngguān</notr></td>
       <td>從官</td>
-      <td>Cóngguān</td>
-      <td>Retinue</td>
-      <td>1</td>
-      <td>0</td>
+      <td><notr>1</notr></td>
+      <td><notr>0</notr></td>
    </tr>
    <tr>
+      <td><notr>郎将</notr></td>
+      <td><notr>Lángjiàng</notr></td>
       <td>郎將</td>
-      <td>Lángjiàng</td>
-      <td>Captain of the Bodyguards</td>
-      <td>1</td>
-      <td>2</td>
+      <td><notr>1</notr></td>
+      <td><notr>2</notr></td>
    </tr>
    <tr>
+      <td><notr>虎贲</notr></td>
+      <td><notr>Hǔbēn</notr></td>
       <td>虎賁</td>
-      <td>Hǔbēn</td>
-      <td>Emperor's Bodyguard</td>
-      <td>1</td>
-      <td>0</td>
+      <td><notr>1</notr></td>
+      <td><notr>0</notr></td>
    </tr>
    <tr>
+      <td><notr>常陈</notr></td>
+      <td><notr>Chángchén</notr></td>
       <td>常陳</td>
-      <td>Chángchén</td>
-      <td>Royal Guards</td>
-      <td>7</td>
-      <td>7</td>
+      <td><notr>7</notr></td>
+      <td><notr>7</notr></td>
    </tr>
    <tr>
+      <td><notr>郎位</notr></td>
+      <td><notr>Lángwèi</notr></td>
       <td>郎位</td>
-      <td>Lángwèi</td>
-      <td>Officers of the Imperial Guard</td>
-      <td>15</td>
-      <td>3</td>
+      <td><notr>15</notr></td>
+      <td><notr>3</notr></td>
    </tr>
    <tr>
+      <td><notr>明堂</notr></td>
+      <td><notr>Míngtáng</notr></td>
       <td>明堂</td>
-      <td>Míngtáng</td>
-      <td>The Hall of Glory</td>
-      <td>3</td>
-      <td>7</td>
+      <td><notr>3</notr></td>
+      <td><notr>7</notr></td>
    </tr>
    <tr>
-      <td>靈台</td>
-      <td>Língtaí</td>
-      <td>Astronomical Observatory</td>
-      <td>3</td>
-      <td>8</td>
+      <td><notr>灵台</notr></td>
+      <td><notr>Língtaí</notr></td>
+      <td>靈臺</td>
+      <td><notr>3</notr></td>
+      <td><notr>8</notr></td>
    </tr>
    <tr>
+      <td><notr>少微</notr></td>
+      <td><notr>Shàowēi</notr></td>
       <td>少微</td>
-      <td>Shàowēi</td>
-      <td>Junior Officers</td>
-      <td>4</td>
-      <td>9</td>
+      <td><notr>4</notr></td>
+      <td><notr>9</notr></td>
    </tr>
    <tr>
+      <td><notr>长垣</notr></td>
+      <td><notr>Chángyuán</notr></td>
       <td>長垣</td>
-      <td>Chángyuán</td>
-      <td>Long Wall</td>
-      <td>4</td>
-      <td>9</td>
+      <td><notr>4</notr></td>
+      <td><notr>9</notr></td>
    </tr>
    <tr>
+      <td><notr>三台</notr></td>
+      <td><notr>Sāntái</notr></td>
       <td>三台</td>
-      <td>Sāntái</td>
-      <td>Three Steps</td>
-      <td>6</td>
-      <td>13</td>
+      <td><notr>6</notr></td>
+      <td><notr>13</notr></td>
    </tr>
    <tr>
+      <td><notr>天市垣</notr></td>
+      <td><notr>Tiānshìyuán</notr></td>
       <td>天市垣</td>
-      <td>Tiānshìyuán</td>
-      <td> Heavenly Market Enclosure</td>
       <td></td>
       <td></td>
    </tr>
    <tr>
+      <td><notr>天市左垣</notr></td>
+      <td><notr>Tiānshìzuǒyuán</notr></td>
       <td>天市左垣</td>
-      <td>Tiānshìzuǒyuán</td>
-      <td>Heavenly Market Left Wall</td>
-      <td>11</td>
-      <td>48</td>
+      <td><notr>11</notr></td>
+      <td><notr>48</notr></td>
    </tr>
    <tr>
+      <td><notr>天市右垣</notr></td>
+      <td><notr>Tiānshìyòuyuán</notr></td>
       <td>天市右垣</td>
-      <td>Tiānshìyòuyuán</td>
-      <td>Heavenly Market Right Wall</td>
-      <td>11</td>
-      <td>32</td>
+      <td><notr>11</notr></td>
+      <td><notr>32</notr></td>
    </tr>
    <tr>
+      <td><notr>市楼</notr></td>
+      <td><notr>Shìlóu</notr></td>
       <td>市樓</td>
-      <td>Shìlóu</td>
-      <td>Municipal Office</td>
-      <td>6</td>
-      <td>1</td>
+      <td><notr>6</notr></td>
+      <td><notr>1</notr></td>
    </tr>
    <tr>
+      <td><notr>车肆</notr></td>
+      <td><notr>Chēsì</notr></td>
       <td>車肆</td>
-      <td>Chēsì</td>
-      <td>Commodity Market</td>
-      <td>2</td>
-      <td>2</td>
+      <td><notr>2</notr></td>
+      <td><notr>2</notr></td>
    </tr>
    <tr>
+      <td><notr>宗正</notr></td>
+      <td><notr>Zōngzhèng</notr></td>
       <td>宗正</td>
-      <td>Zōngzhèng</td>
-      <td>Official for the Royal Clan</td>
-      <td>2</td>
-      <td>3</td>
+      <td><notr>2</notr></td>
+      <td><notr>3</notr></td>
    </tr>
    <tr>
+      <td><notr>宗人</notr></td>
+      <td><notr>Zōngrén</notr></td>
       <td>宗人</td>
-      <td>Zōngrén</td>
-      <td>Official of Religious Ceremonies</td>
-      <td>4</td>
-      <td>4</td>
+      <td><notr>4</notr></td>
+      <td><notr>4</notr></td>
    </tr>
    <tr>
+      <td><notr>宗</notr></td>
+      <td><notr>Zōng</notr></td>
       <td>宗</td>
-      <td>Zōng</td>
-      <td>Patriarchal Clan</td>
-      <td>2</td>
-      <td>0</td>
+      <td><notr>2</notr></td>
+      <td><notr>0</notr></td>
    </tr>
    <tr>
+      <td><notr>帛度</notr></td>
+      <td><notr>Bódù</notr></td>
       <td>帛度</td>
-      <td>Bódù</td>
-      <td>Textile Ruler</td>
-      <td>2</td>
-      <td>3</td>
+      <td><notr>2</notr></td>
+      <td><notr>3</notr></td>
    </tr>
    <tr>
+      <td><notr>屠肆</notr></td>
+      <td><notr>Túsì</notr></td>
       <td>屠肆</td>
-      <td>Túsì</td>
-      <td>Butcher's Shops</td>
-      <td>2</td>
-      <td>3</td>
+      <td><notr>2</notr></td>
+      <td><notr>3</notr></td>
    </tr>
    <tr>
+      <td><notr>候</notr></td>
+      <td><notr>Hòu</notr></td>
       <td>候</td>
-      <td>Hòu</td>
-      <td>Astrologer</td>
-      <td>1</td>
-      <td>6</td>
+      <td><notr>1</notr></td>
+      <td><notr>6</notr></td>
    </tr>
    <tr>
+      <td><notr>帝座</notr></td>
+      <td><notr>Dìzuò</notr></td>
       <td>帝座</td>
-      <td>Dìzuò</td>
-      <td>Emperor's Seat</td>
-      <td>1</td>
-      <td>0</td>
+      <td><notr>1</notr></td>
+      <td><notr>0</notr></td>
    </tr>
    <tr>
+      <td><notr>宦者</notr></td>
+      <td><notr>Huànzhě</notr></td>
       <td>宦者</td>
-      <td>Huànzhě</td>
-      <td>Eunuch Official</td>
-      <td>2</td>
-      <td>5</td>
+      <td><notr>2</notr></td>
+      <td><notr>5</notr></td>
    </tr>
    <tr>
+      <td><notr>列肆</notr></td>
+      <td><notr>Lièsì</notr></td>
       <td>列肆</td>
-      <td>Lièsì</td>
-      <td>Jewel Market</td>
-      <td>2</td>
-      <td>4</td>
+      <td><notr>2</notr></td>
+      <td><notr>4</notr></td>
    </tr>
    <tr>
+      <td><notr>斗</notr></td>
+      <td><notr>Dǒu</notr></td>
       <td>斗</td>
-      <td>Dǒu</td>
-      <td>Dipper for Liquids</td>
-      <td>5</td>
-      <td>11</td>
+      <td><notr>5</notr></td>
+      <td><notr>11</notr></td>
    </tr>
    <tr>
+      <td><notr>斛</notr></td>
+      <td><notr>Hú</notr></td>
       <td>斛</td>
-      <td>Hú</td>
-      <td>Dipper for Solids</td>
-      <td>4</td>
-      <td>7</td>
+      <td><notr>4</notr></td>
+      <td><notr>7</notr></td>
    </tr>
    <tr>
+      <td><notr>贯索</notr></td>
+      <td><notr>Guànsuǒ</notr></td>
       <td>貫索</td>
-      <td>Guànsuǒ</td>
-      <td>Coiled Thong</td>
-      <td>9</td>
-      <td>13</td>
+      <td><notr>9</notr></td>
+      <td><notr>13</notr></td>
    </tr>
    <tr>
+      <td><notr>七公</notr></td>
+      <td><notr>Qīgōng</notr></td>
       <td>七公</td>
-      <td>Qīgōng</td>
-      <td>Seven Excellencies</td>
-      <td>7</td>
-      <td>16</td>
+      <td><notr>7</notr></td>
+      <td><notr>16</notr></td>
    </tr>
    <tr>
+      <td><notr>天纪</notr></td>
+      <td><notr>Tiānjì</notr></td>
       <td>天紀</td>
-      <td>Tiānjì</td>
-      <td>Celestial Discipline</td>
-      <td>9</td>
-      <td>15</td>
+      <td><notr>9</notr></td>
+      <td><notr>15</notr></td>
    </tr>
    <tr>
+      <td><notr>女床</notr></td>
+      <td><notr>Nǚchuáng</notr></td>
       <td>女床</td>
-      <td>Nǚchuáng</td>
-      <td>Woman's Bed</td>
-      <td>3</td>
-      <td>0</td>
+      <td><notr>3</notr></td>
+      <td><notr>0</notr></td>
    </tr>
    <tr>
+      <td><notr>角宿</notr></td>
+      <td><notr>Jiǎoxiù</notr></td>
       <td>角宿</td>
-      <td>Jiǎoxiù</td>
-      <td>Horn Mansion</td>
       <td></td>
       <td></td>
    </tr>
    <tr>
+      <td><notr>角宿</notr></td>
+      <td><notr>Jiǎoxiù</notr></td>
       <td>角宿</td>
-      <td>Jiǎoxiù</td>
-      <td>Horn</td>
-      <td>2</td>
-      <td>16</td>
+      <td><notr>2</notr></td>
+      <td><notr>16</notr></td>
    </tr>
    <tr>
+      <td><notr>平道</notr></td>
+      <td><notr>Píngdào</notr></td>
       <td>平道</td>
-      <td>Píngdào</td>
-      <td>Flat Road</td>
-      <td>2</td>
-      <td>0</td>
+      <td><notr>2</notr></td>
+      <td><notr>0</notr></td>
    </tr>
    <tr>
+      <td><notr>天田</notr></td>
+      <td><notr>Tiāntián</notr></td>
       <td>天田</td>
-      <td>Tiāntián</td>
-      <td>Celestial Farmland</td>
-      <td>2</td>
-      <td>7</td>
+      <td><notr>2</notr></td>
+      <td><notr>7</notr></td>
    </tr>
    <tr>
+      <td><notr>进贤</notr></td>
+      <td><notr>Jìnxián</notr></td>
       <td>進賢</td>
-      <td>Jìnxiǎn</td>
-      <td>Recommending Virtuous Men</td>
-      <td>1</td>
-      <td>9</td>
+      <td><notr>1</notr></td>
+      <td><notr>9</notr></td>
    </tr>
    <tr>
+      <td><notr>周鼎</notr></td>
+      <td><notr>Zhōudǐng</notr></td>
       <td>周鼎</td>
-      <td>Zhōudǐng</td>
-      <td>Tripod of the Zhou</td>
-      <td>3</td>
-      <td>0</td>
+      <td><notr>3</notr></td>
+      <td><notr>0</notr></td>
    </tr>
    <tr>
+      <td><notr>天门</notr></td>
+      <td><notr>Tiānmén</notr></td>
       <td>天門</td>
-      <td>Tiānmén</td>
-      <td>Celestial Gate</td>
-      <td>2</td>
-      <td>11</td>
+      <td><notr>2</notr></td>
+      <td><notr>11</notr></td>
    </tr>
    <tr>
+      <td><notr>平</notr></td>
+      <td><notr>Píng</notr></td>
       <td>平</td>
-      <td>Píng</td>
-      <td>Justice</td>
-      <td>2</td>
-      <td>4</td>
+      <td><notr>2</notr></td>
+      <td><notr>4</notr></td>
    </tr>
    <tr>
+      <td><notr>库楼</notr></td>
+      <td><notr>Kùlóu</notr></td>
       <td>庫樓</td>
-      <td>Kùlóu</td>
-      <td>Arsenal</td>
-      <td>10</td>
-      <td>1</td>
+      <td><notr>10</notr></td>
+      <td><notr>1</notr></td>
    </tr>
    <tr>
+      <td><notr>柱</notr></td>
+      <td><notr>Zhù</notr></td>
       <td>柱</td>
-      <td>Zhù</td>
-      <td>Pillars</td>
-      <td>11</td>
-      <td>0</td>
+      <td><notr>11</notr></td>
+      <td><notr>0</notr></td>
    </tr>
    <tr>
+      <td><notr>衡</notr></td>
+      <td><notr>Héng</notr></td>
       <td>衡</td>
-      <td>Héng</td>
-      <td>Railings</td>
-      <td>4</td>
-      <td>0</td>
+      <td><notr>4</notr></td>
+      <td><notr>0</notr></td>
    </tr>
    <tr>
+      <td><notr>南门</notr></td>
+      <td><notr>Nánmén</notr></td>
       <td>南門</td>
-      <td>Nánmén</td>
-      <td>Southern Gate</td>
-      <td>2</td>
-      <td>2</td>
+      <td><notr>2</notr></td>
+      <td><notr>2</notr></td>
    </tr>
    <tr>
+      <td><notr>亢宿</notr></td>
+      <td><notr>Kàngxiù</notr></td>
       <td>亢宿</td>
-      <td>Kàngxiù</td>
-      <td>Neck Mansion</td>
       <td></td>
       <td></td>
    </tr>
    <tr>
+      <td><notr>亢宿</notr></td>
+      <td><notr>Kàngxiù</notr></td>
       <td>亢宿</td>
-      <td>Kàngxiù</td>
-      <td>Neck</td>
-      <td>4</td>
-      <td>12</td>
+      <td><notr>4</notr></td>
+      <td><notr>12</notr></td>
    </tr>
    <tr>
+      <td><notr>大角</notr></td>
+      <td><notr>Dàjiǎo</notr></td>
       <td>大角</td>
-      <td>Dàjiǎo</td>
-      <td>Great Horn</td>
-      <td>1</td>
-      <td>2</td>
+      <td><notr>1</notr></td>
+      <td><notr>2</notr></td>
    </tr>
    <tr>
+      <td><notr>左摄提</notr></td>
+      <td><notr>Zuǒshètí</notr></td>
       <td>左攝提</td>
-      <td>Zuǒshètí</td>
-      <td>Left Conductor</td>
-      <td>3</td>
-      <td>4</td>
+      <td><notr>3</notr></td>
+      <td><notr>4</notr></td>
    </tr>
    <tr>
+      <td><notr>右摄提</notr></td>
+      <td><notr>Yòushètí</notr></td>
       <td>右攝提</td>
-      <td>Yòushètí</td>
-      <td>Right Conductor</td>
-      <td>3</td>
-      <td>6</td>
+      <td><notr>3</notr></td>
+      <td><notr>6</notr></td>
    </tr>
    <tr>
+      <td><notr>顿顽</notr></td>
+      <td><notr>Dùnwán</notr></td>
       <td>頓頑</td>
-      <td>Dùnwán</td>
-      <td>Trials</td>
-      <td>2</td>
-      <td>1</td>
+      <td><notr>2</notr></td>
+      <td><notr>1</notr></td>
    </tr>
    <tr>
+      <td><notr>阳门</notr></td>
+      <td><notr>Yángmén</notr></td>
       <td>陽門</td>
-      <td>Yángmén</td>
-      <td>Gate of Yang</td>
-      <td>2</td>
-      <td>0</td>
+      <td><notr>2</notr></td>
+      <td><notr>0</notr></td>
    </tr>
    <tr>
+      <td><notr>折威</notr></td>
+      <td><notr>Zhéwēi</notr></td>
       <td>折威</td>
-      <td>Zhéwēi</td>
-      <td>Executions</td>
-      <td>7</td>
-      <td>7</td>
+      <td><notr>7</notr></td>
+      <td><notr>7</notr></td>
    </tr>
    <tr>
+      <td><notr>氐宿</notr></td>
+      <td><notr>Dīxiù</notr></td>
       <td>氐宿</td>
-      <td>Dīxiù</td>
-      <td>Root Mansion</td>
       <td></td>
       <td></td>
    </tr>
    <tr>
+      <td><notr>氐宿</notr></td>
+      <td><notr>Dīxiù</notr></td>
       <td>氐宿</td>
-      <td>Dīxiù</td>
-      <td>Root</td>
-      <td>4</td>
-      <td>30</td>
+      <td><notr>4</notr></td>
+      <td><notr>30</notr></td>
    </tr>
    <tr>
+      <td><notr>天乳</notr></td>
+      <td><notr>Tiānrǔ</notr></td>
       <td>天乳</td>
-      <td>Tiānrǔ</td>
-      <td>Celestial Milk</td>
-      <td>1</td>
-      <td>4</td>
+      <td><notr>1</notr></td>
+      <td><notr>4</notr></td>
    </tr>
    <tr>
+      <td><notr>招摇</notr></td>
+      <td><notr>Zhāoyáo</notr></td>
       <td>招搖</td>
-      <td>Zhāoyáo</td>
-      <td>Twinkling Indicator</td>
-      <td>1</td>
-      <td>0</td>
+      <td><notr>1</notr></td>
+      <td><notr>0</notr></td>
    </tr>
    <tr>
+      <td><notr>梗河</notr></td>
+      <td><notr>Gěnghé</notr></td>
       <td>梗河</td>
-      <td>Gěnghé</td>
-      <td>Celestial Lance</td>
-      <td>3</td>
-      <td>5</td>
+      <td><notr>3</notr></td>
+      <td><notr>5</notr></td>
    </tr>
    <tr>
+      <td><notr>帝席</notr></td>
+      <td><notr>Dìxí</notr></td>
       <td>帝席</td>
-      <td>Dìxí</td>
-      <td>Mattress of the Emperor</td>
-      <td>3</td>
-      <td>1</td>
+      <td><notr>3</notr></td>
+      <td><notr>1</notr></td>
    </tr>
    <tr>
+      <td><notr>亢池</notr></td>
+      <td><notr>Kàngchí</notr></td>
       <td>亢池</td>
-      <td>Kàngchí</td>
-      <td>Boats and Lake</td>
-      <td>4</td>
-      <td>0</td>
+      <td><notr>4</notr></td>
+      <td><notr>0</notr></td>
    </tr>
    <tr>
+      <td><notr>阵车</notr></td>
+      <td><notr>Zhènchē</notr></td>
       <td>陣車</td>
-      <td>Zhènchē</td>
-      <td>Battle Chariots</td>
-      <td>3</td>
-      <td>2</td>
+      <td><notr>3</notr></td>
+      <td><notr>2</notr></td>
    </tr>
    <tr>
+      <td><notr>骑官</notr></td>
+      <td><notr>Qíguān</notr></td>
       <td>騎官</td>
-      <td>Qíguān</td>
-      <td>Imperial Guards</td>
-      <td>10</td>
-      <td>0</td>
+      <td><notr>10</notr></td>
+      <td><notr>0</notr></td>
    </tr>
    <tr>
+      <td><notr>车骑</notr></td>
+      <td><notr>Chēqí</notr></td>
       <td>車騎</td>
-      <td>Chēqí</td>
-      <td>Chariots and Cavalry</td>
-      <td>3</td>
-      <td>0</td>
+      <td><notr>3</notr></td>
+      <td><notr>0</notr></td>
    </tr>
    <tr>
+      <td><notr>天辐</notr></td>
+      <td><notr>Tiānfú</notr></td>
       <td>天輻</td>
-      <td>Tiānfú</td>
-      <td>Celestial Spokes</td>
-      <td>2</td>
-      <td>1</td>
+      <td><notr>2</notr></td>
+      <td><notr>1</notr></td>
    </tr>
    <tr>
-      <td>騎陣將軍</td>
-      <td>Qízhènjiāngjūn</td>
-      <td>Chariots and Cavalry General</td>
-      <td>1</td>
-      <td>0</td>
+      <td><notr>骑阵将军</notr></td>
+      <td><notr>Qízhènjiāngjūn</notr></td>
+      <td>騎鎮將軍</td>
+      <td><notr>1</notr></td>
+      <td><notr>0</notr></td>
    </tr>
    <tr>
+      <td><notr>房宿</notr></td>
+      <td><notr>Fángxiù</notr></td>
       <td>房宿</td>
-      <td>Fángxiù</td>
-      <td>Room Mansion</td>
       <td></td>
       <td></td>
    </tr>
    <tr>
+      <td><notr>房宿</notr></td>
+      <td><notr>Fángxiù</notr></td>
       <td>房宿</td>
-      <td>Fángxiù</td>
-      <td>Room</td>
-      <td>4</td>
-      <td>6</td>
+      <td><notr>4</notr></td>
+      <td><notr>6</notr></td>
    </tr>
    <tr>
-      <td>鉤鈐（附房宿）</td>
-      <td>Gōuqián</td>
-      <td>Lock(Vassal of Room)</td>
-      <td>2</td>
-      <td>0</td>
+      <td><notr>钩钤(附房宿)</notr></td>
+      <td><notr>Gōuqián</notr></td>
+      <td>鈎鈴 (附房宿)</td>
+      <td><notr>2</notr></td>
+      <td><notr>0</notr></td>
    </tr>
    <tr>
+      <td><notr>键闭</notr></td>
+      <td><notr>Jiànbì</notr></td>
       <td>鍵閉</td>
-      <td>Jiànbì</td>
-      <td>Door Bolt</td>
-      <td>1</td>
-      <td>0</td>
+      <td><notr>1</notr></td>
+      <td><notr>0</notr></td>
    </tr>
    <tr>
+      <td><notr>罚</notr></td>
+      <td><notr>Fá</notr></td>
       <td>罰</td>
-      <td>Fá</td>
-      <td>Punishment</td>
-      <td>3</td>
-      <td>3</td>
+      <td><notr>3</notr></td>
+      <td><notr>3</notr></td>
    </tr>
    <tr>
+      <td><notr>东咸</notr></td>
+      <td><notr>Dōngxián</notr></td>
       <td>東咸</td>
-      <td>Dōngxián</td>
-      <td>Eastern Door</td>
-      <td>4</td>
-      <td>2</td>
+      <td><notr>4</notr></td>
+      <td><notr>2</notr></td>
    </tr>
    <tr>
+      <td><notr>西咸</notr></td>
+      <td><notr>Xīxián</notr></td>
       <td>西咸</td>
-      <td>Xīxián</td>
-      <td>Western Door</td>
-      <td>4</td>
-      <td>2</td>
+      <td><notr>4</notr></td>
+      <td><notr>2</notr></td>
    </tr>
    <tr>
+      <td><notr>日</notr></td>
+      <td><notr>Rì</notr></td>
       <td>日</td>
-      <td>Rì</td>
-      <td>Solar Star</td>
-      <td>1</td>
-      <td>1</td>
+      <td><notr>1</notr></td>
+      <td><notr>1</notr></td>
    </tr>
    <tr>
+      <td><notr>从官</notr></td>
+      <td><notr>Cóngguān</notr></td>
       <td>從官</td>
-      <td>Cóngguān</td>
-      <td>Retinue</td>
-      <td>2</td>
-      <td>1</td>
+      <td><notr>2</notr></td>
+      <td><notr>1</notr></td>
    </tr>
    <tr>
+      <td><notr>心宿</notr></td>
+      <td><notr>Xīnxiù</notr></td>
       <td>心宿</td>
-      <td>Xīnxiù</td>
-      <td>Heart Mansion</td>
       <td></td>
       <td></td>
    </tr>
    <tr>
+      <td><notr>心宿</notr></td>
+      <td><notr>Xīnxiù</notr></td>
       <td>心宿</td>
-      <td>Xīnxiù</td>
-      <td>Heart</td>
-      <td>3</td>
-      <td>9</td>
+      <td><notr>3</notr></td>
+      <td><notr>9</notr></td>
    </tr>
    <tr>
+      <td><notr>积卒</notr></td>
+      <td><notr>Jīzú</notr></td>
       <td>積卒</td>
-      <td>Jīzú</td>
-      <td>Group of Soldiers</td>
-      <td>2</td>
-      <td>2</td>
+      <td><notr>2</notr></td>
+      <td><notr>2</notr></td>
    </tr>
    <tr>
+      <td><notr>尾宿</notr></td>
+      <td><notr>Wěixiù</notr></td>
       <td>尾宿</td>
-      <td>Wěixiù</td>
-      <td>Tail Mansion</td>
       <td></td>
       <td></td>
    </tr>
    <tr>
+      <td><notr>尾宿</notr></td>
+      <td><notr>Wěixiù</notr></td>
       <td>尾宿</td>
-      <td>Wěixiù</td>
-      <td>Tail</td>
-      <td>9</td>
-      <td>4</td>
+      <td><notr>9</notr></td>
+      <td><notr>4</notr></td>
    </tr>
    <tr>
-      <td> 神宮(附尾宿)</td>
-      <td>shéngōng</td>
-      <td>Changing Room(Vassal of Tail)</td>
-      <td>1</td>
-      <td>0</td>
+      <td><notr>神宫(附尾宿)</notr></td>
+      <td><notr>shéngōng</notr></td>
+      <td>神宮 (附尾宿)</td>
+      <td><notr>1</notr></td>
+      <td><notr>0</notr></td>
    </tr>
    <tr>
-      <td> 龜</td>
-      <td>Guī</td>
-      <td>Tortoise</td>
-      <td>5</td>
-      <td>0</td>
+      <td><notr>龟</notr></td>
+      <td><notr>Guī</notr></td>
+      <td>龜</td>
+      <td><notr>5</notr></td>
+      <td><notr>0</notr></td>
    </tr>
    <tr>
+      <td><notr>天江</notr></td>
+      <td><notr>Tiānjiāng</notr></td>
       <td>天江</td>
-      <td>Tiānjiāng</td>
-      <td>Celestial River</td>
-      <td>4</td>
-      <td>11</td>
+      <td><notr>4</notr></td>
+      <td><notr>11</notr></td>
    </tr>
    <tr>
+      <td><notr>傅说</notr></td>
+      <td><notr>Fùyuè</notr></td>
       <td>傅說</td>
-      <td>Fùyuè</td>
-      <td>Fu Yue</td>
-      <td>1</td>
-      <td>0</td>
+      <td><notr>1</notr></td>
+      <td><notr>0</notr></td>
    </tr>
    <tr>
+      <td><notr>鱼</notr></td>
+      <td><notr>Yú</notr></td>
       <td>魚</td>
-      <td>Yú</td>
-      <td>Fish</td>
-      <td>1</td>
-      <td>0</td>
+      <td><notr>1</notr></td>
+      <td><notr>0</notr></td>
    </tr>
    <tr>
+      <td><notr>箕宿</notr></td>
+      <td><notr>Jīxiù</notr></td>
       <td>箕宿</td>
-      <td>Jīxiù</td>
-      <td>Winnowing Basket Mansion</td>
       <td></td>
       <td></td>
    </tr>
    <tr>
+      <td><notr>箕宿</notr></td>
+      <td><notr>Jīxiù</notr></td>
       <td>箕宿</td>
-      <td>Jīxiù</td>
-      <td>Winnowing Basket</td>
-      <td>4</td>
-      <td>0</td>
+      <td><notr>4</notr></td>
+      <td><notr>0</notr></td>
    </tr>
    <tr>
+      <td><notr>糠</notr></td>
+      <td><notr>Kāng</notr></td>
       <td>糠</td>
-      <td>Kāng</td>
-      <td>Chaff</td>
-      <td>1</td>
-      <td>1</td>
+      <td><notr>1</notr></td>
+      <td><notr>1</notr></td>
    </tr>
    <tr>
+      <td><notr>杵</notr></td>
+      <td><notr>Chǔ</notr></td>
       <td>杵</td>
-      <td>Chǔ</td>
-      <td>Pestle</td>
-      <td>3</td>
-      <td>1</td>
+      <td><notr>3</notr></td>
+      <td><notr>1</notr></td>
    </tr>
    <tr>
+      <td><notr>斗宿</notr></td>
+      <td><notr>Dǒuxiù</notr></td>
       <td>斗宿</td>
-      <td>Dǒuxiù</td>
-      <td>Dipper Mansion</td>
       <td></td>
       <td></td>
    </tr>
    <tr>
+      <td><notr>斗宿</notr></td>
+      <td><notr>Dǒuxiù</notr></td>
       <td>斗宿</td>
-      <td>Dǒuxiù</td>
-      <td>Dipper</td>
-      <td>6</td>
-      <td>5</td>
+      <td><notr>6</notr></td>
+      <td><notr>5</notr></td>
    </tr>
    <tr>
+      <td><notr>建</notr></td>
+      <td><notr>Jiàn</notr></td>
       <td>建</td>
-      <td>Jiàn</td>
-      <td>Establishment</td>
-      <td>6</td>
-      <td>10</td>
+      <td><notr>6</notr></td>
+      <td><notr>10</notr></td>
    </tr>
    <tr>
+      <td><notr>天籥</notr></td>
+      <td><notr>Tiānyuè</notr></td>
       <td>天籥</td>
-      <td>Tiānyuè</td>
-      <td>Celestial Keyhole</td>
-      <td>8</td>
-      <td>4</td>
+      <td><notr>8</notr></td>
+      <td><notr>4</notr></td>
    </tr>
    <tr>
+      <td><notr>天弁</notr></td>
+      <td><notr>Tiānbiàn</notr></td>
       <td>天弁</td>
-      <td>Tiānbiàn</td>
-      <td>Market Officer</td>
-      <td>9</td>
-      <td>6</td>
+      <td><notr>9</notr></td>
+      <td><notr>6</notr></td>
    </tr>
    <tr>
-      <td>鱉</td>
-      <td>Biē</td>
-      <td>River Turtle</td>
-      <td>11</td>
-      <td>0</td>
+      <td><notr>鳖</notr></td>
+      <td><notr>Biē</notr></td>
+      <td>鼈</td>
+      <td><notr>11</notr></td>
+      <td><notr>0</notr></td>
    </tr>
    <tr>
+      <td><notr>天鸡</notr></td>
+      <td><notr>Tiānjī</notr></td>
       <td>天雞</td>
-      <td>Tiānjī</td>
-      <td>Celestial Cock</td>
-      <td>2</td>
-      <td>3</td>
+      <td><notr>2</notr></td>
+      <td><notr>3</notr></td>
    </tr>
    <tr>
+      <td><notr>狗国</notr></td>
+      <td><notr>Gǒuguó</notr></td>
       <td>狗國</td>
-      <td>Gǒuguó</td>
-      <td>Territory of Dog</td>
-      <td>4</td>
-      <td>3</td>
+      <td><notr>4</notr></td>
+      <td><notr>3</notr></td>
    </tr>
    <tr>
+      <td><notr>天渊</notr></td>
+      <td><notr>Tiānyuān</notr></td>
       <td>天淵</td>
-      <td>Tiānyuān</td>
-      <td>Celestial Spring</td>
-      <td>3</td>
-      <td>3</td>
+      <td><notr>3</notr></td>
+      <td><notr>3</notr></td>
    </tr>
    <tr>
+      <td><notr>狗</notr></td>
+      <td><notr>Gǒu</notr></td>
       <td>狗</td>
-      <td>Gǒu</td>
-      <td>Dog</td>
-      <td>2</td>
-      <td>7</td>
+      <td><notr>2</notr></td>
+      <td><notr>7</notr></td>
    </tr>
    <tr>
+      <td><notr>农丈人</notr></td>
+      <td><notr>Nóngzhàngrén</notr></td>
       <td>農丈人</td>
-      <td>Nóngzhàngrén</td>
-      <td>Peasant</td>
-      <td>1</td>
-      <td>0</td>
+      <td><notr>1</notr></td>
+      <td><notr>0</notr></td>
    </tr>
    <tr>
+      <td><notr>牛宿</notr></td>
+      <td><notr>Niúxiù</notr></td>
       <td>牛宿</td>
-      <td>Niúxiù</td>
-      <td>Ox Mansion</td>
       <td></td>
       <td></td>
    </tr>
    <tr>
+      <td><notr>牛宿</notr></td>
+      <td><notr>Niúxiù</notr></td>
       <td>牛宿</td>
-      <td>Niúxiù</td>
-      <td>Ox</td>
-      <td>6</td>
-      <td>14</td>
+      <td><notr>6</notr></td>
+      <td><notr>14</notr></td>
    </tr>
    <tr>
+      <td><notr>天田</notr></td>
+      <td><notr>Tiāntián</notr></td>
       <td>天田</td>
-      <td>Tiāntián</td>
-      <td>Celestial Farmland</td>
-      <td>4</td>
-      <td>0</td>
+      <td><notr>4</notr></td>
+      <td><notr>0</notr></td>
    </tr>
    <tr>
+      <td><notr>九坎</notr></td>
+      <td><notr>Jiǔkǎn</notr></td>
       <td>九坎</td>
-      <td>Jiǔkǎn</td>
-      <td>Nine Water Wells</td>
-      <td>4</td>
-      <td>0</td>
+      <td><notr>4</notr></td>
+      <td><notr>0</notr></td>
    </tr>
    <tr>
+      <td><notr>河鼓</notr></td>
+      <td><notr>Hégǔ</notr></td>
       <td>河鼓</td>
-      <td>Hégǔ</td>
-      <td>Drum at the River</td>
-      <td>3</td>
-      <td>9</td>
+      <td><notr>3</notr></td>
+      <td><notr>9</notr></td>
    </tr>
    <tr>
+      <td><notr>织女</notr></td>
+      <td><notr>Zhinǚ</notr></td>
       <td>織女</td>
-      <td>Zhinǚ</td>
-      <td>Weaving Girl</td>
-      <td>3</td>
-      <td>4</td>
+      <td><notr>3</notr></td>
+      <td><notr>4</notr></td>
    </tr>
    <tr>
+      <td><notr>左旗</notr></td>
+      <td><notr>Zuǒqí</notr></td>
       <td>左旗</td>
-      <td>Zuǒqí</td>
-      <td>Left Flag</td>
-      <td>9</td>
-      <td>30</td>
+      <td><notr>9</notr></td>
+      <td><notr>30</notr></td>
    </tr>
    <tr>
+      <td><notr>右旗</notr></td>
+      <td><notr>Yòuqí</notr></td>
       <td>右旗</td>
-      <td>Yòuqí</td>
-      <td>Right Flag</td>
-      <td>9</td>
-      <td>12</td>
+      <td><notr>9</notr></td>
+      <td><notr>12</notr></td>
    </tr>
    <tr>
+      <td><notr>天桴</notr></td>
+      <td><notr>Tiānfú</notr></td>
       <td>天桴</td>
-      <td>Tiānfú</td>
-      <td>Celestial Drumstick</td>
-      <td>4</td>
-      <td>2</td>
+      <td><notr>4</notr></td>
+      <td><notr>2</notr></td>
    </tr>
    <tr>
+      <td><notr>罗堰</notr></td>
+      <td><notr>Luóyàn</notr></td>
       <td>羅堰</td>
-      <td>Luóyàn</td>
-      <td>Network of Dykes</td>
-      <td>3</td>
-      <td>1</td>
+      <td><notr>3</notr></td>
+      <td><notr>1</notr></td>
    </tr>
    <tr>
-      <td>漸台</td>
-      <td>Jiàntái</td>
-      <td>Clepsydra Terrace</td>
-      <td>4</td>
-      <td>7</td>
+      <td><notr>渐台</notr></td>
+      <td><notr>Jiàntái</notr></td>
+      <td>漸臺</td>
+      <td><notr>4</notr></td>
+      <td><notr>7</notr></td>
    </tr>
    <tr>
+      <td><notr>辇道</notr></td>
+      <td><notr>Niǎndào</notr></td>
       <td>輦道</td>
-      <td>Niǎndào</td>
-      <td>Imperial Passageway</td>
-      <td>5</td>
-      <td>9</td>
+      <td><notr>5</notr></td>
+      <td><notr>9</notr></td>
    </tr>
    <tr>
+      <td><notr>女宿</notr></td>
+      <td><notr>Nǚxiù</notr></td>
       <td>女宿</td>
-      <td>Nǚxiù</td>
-      <td>Girl Mansion</td>
       <td></td>
       <td></td>
    </tr>
    <tr>
+      <td><notr>女宿</notr></td>
+      <td><notr>Nǚxiù</notr></td>
       <td>女宿</td>
-      <td>Nǚxiù</td>
-      <td>Girl</td>
-      <td>4</td>
-      <td>5</td>
+      <td><notr>4</notr></td>
+      <td><notr>5</notr></td>
    </tr>
    <tr>
+      <td><notr>十二国</notr></td>
+      <td><notr>Shí'èrguó</notr></td>
       <td>十二國</td>
-      <td>Shí'èrguó</td>
-      <td>Twelve States</td>
-      <td>16</td>
-      <td>2</td>
+      <td><notr>16</notr></td>
+      <td><notr>2</notr></td>
    </tr>
    <tr>
+      <td><notr>离珠</notr></td>
+      <td><notr>Lízhū</notr></td>
       <td>離珠</td>
-      <td>Lízhū</td>
-      <td>Pearls on Ladies' Wear</td>
-      <td>4</td>
-      <td>1</td>
+      <td><notr>4</notr></td>
+      <td><notr>1</notr></td>
    </tr>
    <tr>
+      <td><notr>败瓜</notr></td>
+      <td><notr>Bàiguā</notr></td>
       <td>敗瓜</td>
-      <td>Bàiguā</td>
-      <td>Rotten Gourd</td>
-      <td>5</td>
-      <td>3</td>
+      <td><notr>5</notr></td>
+      <td><notr>3</notr></td>
    </tr>
    <tr>
+      <td><notr>瓠瓜</notr></td>
+      <td><notr>Hùguā</notr></td>
       <td>瓠瓜</td>
-      <td>Hùguā</td>
-      <td>Good Gourd</td>
-      <td>5</td>
-      <td>8</td>
+      <td><notr>5</notr></td>
+      <td><notr>8</notr></td>
    </tr>
    <tr>
+      <td><notr>天津</notr></td>
+      <td><notr>Tiānjīn</notr></td>
       <td>天津</td>
-      <td>Tiānjīn</td>
-      <td>Celestial Ford</td>
-      <td>9</td>
-      <td>40</td>
+      <td><notr>9</notr></td>
+      <td><notr>40</notr></td>
    </tr>
    <tr>
+      <td><notr>奚仲</notr></td>
+      <td><notr>Xīzhòng</notr></td>
       <td>奚仲</td>
-      <td>Xīzhòng</td>
-      <td>Xi Zhong</td>
-      <td>4</td>
-      <td>7</td>
+      <td><notr>4</notr></td>
+      <td><notr>7</notr></td>
    </tr>
    <tr>
+      <td><notr>扶筐</notr></td>
+      <td><notr>Fúkuāng</notr></td>
       <td>扶筐</td>
-      <td>Fúkuāng</td>
-      <td>Basket for Mulberry Leaves</td>
-      <td>7</td>
-      <td>4</td>
+      <td><notr>7</notr></td>
+      <td><notr>4</notr></td>
    </tr>
    <tr>
+      <td><notr>虚宿</notr></td>
+      <td><notr>Xūxiù</notr></td>
       <td>虛宿</td>
-      <td>Xūxiù</td>
-      <td>Emptiness Mansion</td>
       <td></td>
       <td></td>
    </tr>
    <tr>
+      <td><notr>虚宿</notr></td>
+      <td><notr>Xūxiù</notr></td>
       <td>虛宿</td>
-      <td>Xūxiù</td>
-      <td>Emptiness</td>
-      <td>2</td>
-      <td>8</td>
+      <td><notr>2</notr></td>
+      <td><notr>8</notr></td>
    </tr>
    <tr>
+      <td><notr>司命</notr></td>
+      <td><notr>Sīmìng</notr></td>
       <td>司命</td>
-      <td>Sīmìng</td>
-      <td>Deified Judge of Life</td>
-      <td>2</td>
-      <td>0</td>
+      <td><notr>2</notr></td>
+      <td><notr>0</notr></td>
    </tr>
    <tr>
+      <td><notr>司禄</notr></td>
+      <td><notr>Sīlù</notr></td>
       <td>司祿</td>
-      <td>Sīlù</td>
-      <td>Deified Judge of Rank</td>
-      <td>2</td>
-      <td>0</td>
+      <td><notr>2</notr></td>
+      <td><notr>0</notr></td>
    </tr>
    <tr>
+      <td><notr>司危</notr></td>
+      <td><notr>Sīwēi</notr></td>
       <td>司危</td>
-      <td>Sīwēi</td>
-      <td>Deified Judge of Disaster and Good Fortune</td>
-      <td>2</td>
-      <td>0</td>
+      <td><notr>2</notr></td>
+      <td><notr>0</notr></td>
    </tr>
    <tr>
+      <td><notr>司非</notr></td>
+      <td><notr>Sīfēi</notr></td>
       <td>司非</td>
-      <td>Sīfēi</td>
-      <td>Deified Judge of Right and Wrong</td>
-      <td>2</td>
-      <td>3</td>
+      <td><notr>2</notr></td>
+      <td><notr>3</notr></td>
    </tr>
    <tr>
+      <td><notr>哭</notr></td>
+      <td><notr>Kū</notr></td>
       <td>哭</td>
-      <td>Kū</td>
-      <td>Crying</td>
-      <td>2</td>
-      <td>4</td>
+      <td><notr>2</notr></td>
+      <td><notr>4</notr></td>
    </tr>
    <tr>
+      <td><notr>泣</notr></td>
+      <td><notr>Qì</notr></td>
       <td>泣</td>
-      <td>Qì</td>
-      <td>Weeping</td>
-      <td>2</td>
-      <td>2</td>
+      <td><notr>2</notr></td>
+      <td><notr>2</notr></td>
    </tr>
    <tr>
+      <td><notr>天垒城</notr></td>
+      <td><notr>Tiānlěichéng</notr></td>
       <td>天壘城</td>
-      <td>Tiānlěichéng</td>
-      <td>Celestial Ramparts</td>
-      <td>13</td>
-      <td>2</td>
+      <td><notr>13</notr></td>
+      <td><notr>2</notr></td>
    </tr>
    <tr>
+      <td><notr>败臼</notr></td>
+      <td><notr>Bàijiù</notr></td>
       <td>敗臼</td>
-      <td>Bàijiù</td>
-      <td>Decayed Mortar</td>
-      <td>4</td>
-      <td>1</td>
+      <td><notr>4</notr></td>
+      <td><notr>1</notr></td>
    </tr>
    <tr>
+      <td><notr>离瑜</notr></td>
+      <td><notr>Líyú</notr></td>
       <td>離瑜</td>
-      <td>Líyú</td>
-      <td>Jade Ornament on Ladies' Wear</td>
-      <td>3</td>
-      <td>3</td>
+      <td><notr>3</notr></td>
+      <td><notr>3</notr></td>
    </tr>
    <tr>
+      <td><notr>危宿</notr></td>
+      <td><notr>Wēixiù</notr></td>
       <td>危宿</td>
-      <td>Wēixiù</td>
-      <td>Rooftop Mansion</td>
       <td></td>
       <td></td>
    </tr>
    <tr>
+      <td><notr>危宿</notr></td>
+      <td><notr>Wēixiù</notr></td>
       <td>危宿</td>
-      <td>Wēixiù</td>
-      <td>Rooftop</td>
-      <td>3</td>
-      <td>14</td>
+      <td><notr>3</notr></td>
+      <td><notr>14</notr></td>
    </tr>
    <tr>
-      <td>墳墓（附危宿）</td>
-      <td>Fénmù</td>
-      <td>Tomb(Vassal of Rooftop)</td>
-      <td>4</td>
-      <td>4</td>
+      <td><notr>坟墓(附危宿)</notr></td>
+      <td><notr>Fénmù</notr></td>
+      <td>墳墓 (附危宿)</td>
+      <td><notr>4</notr></td>
+      <td><notr>4</notr></td>
    </tr>
    <tr>
+      <td><notr>人</notr></td>
+      <td><notr>Rén</notr></td>
       <td>人</td>
-      <td>Rén</td>
-      <td>Humans</td>
-      <td>4</td>
-      <td>4</td>
+      <td><notr>4</notr></td>
+      <td><notr>4</notr></td>
    </tr>
    <tr>
+      <td><notr>杵</notr></td>
+      <td><notr>Chǔ</notr></td>
       <td>杵</td>
-      <td>Chǔ</td>
-      <td>Pestle</td>
-      <td>3</td>
-      <td>2</td>
+      <td><notr>3</notr></td>
+      <td><notr>2</notr></td>
    </tr>
    <tr>
+      <td><notr>臼</notr></td>
+      <td><notr>Jiù</notr></td>
       <td>臼</td>
-      <td>Jiù</td>
-      <td>Mortar</td>
-      <td>4</td>
-      <td>8</td>
+      <td><notr>4</notr></td>
+      <td><notr>8</notr></td>
    </tr>
    <tr>
+      <td><notr>车府</notr></td>
+      <td><notr>Chēfǔ</notr></td>
       <td>車府</td>
-      <td>Chēfǔ</td>
-      <td>Big Yard for Chariots</td>
-      <td>7</td>
-      <td>20</td>
+      <td><notr>7</notr></td>
+      <td><notr>20</notr></td>
    </tr>
    <tr>
+      <td><notr>天钩</notr></td>
+      <td><notr>Tiāngōu</notr></td>
       <td>天鉤</td>
-      <td>Tiāngōu</td>
-      <td>Celestial Hook</td>
-      <td>9</td>
-      <td>18</td>
+      <td><notr>9</notr></td>
+      <td><notr>18</notr></td>
    </tr>
    <tr>
+      <td><notr>造父</notr></td>
+      <td><notr>Zàofù</notr></td>
       <td>造父</td>
-      <td>Zàofù</td>
-      <td>Zaofu</td>
-      <td>5</td>
-      <td>5</td>
+      <td><notr>5</notr></td>
+      <td><notr>5</notr></td>
    </tr>
    <tr>
-      <td>蓋屋</td>
-      <td>Gàiwū</td>
-      <td>Roofing</td>
-      <td>2</td>
-      <td>0</td>
+      <td><notr>盖屋</notr></td>
+      <td><notr>Gàiwū</notr></td>
+      <td>葢屋</td>
+      <td><notr>2</notr></td>
+      <td><notr>0</notr></td>
    </tr>
    <tr>
+      <td><notr>虚梁</notr></td>
+      <td><notr>Xūliáng</notr></td>
       <td>虛梁</td>
-      <td>Xūliáng</td>
-      <td>Temple</td>
-      <td>4</td>
-      <td>0</td>
+      <td><notr>4</notr></td>
+      <td><notr>0</notr></td>
    </tr>
    <tr>
+      <td><notr>天钱</notr></td>
+      <td><notr>Tiānqián</notr></td>
       <td>天錢</td>
-      <td>Tiānqián</td>
-      <td>Celestial Money</td>
-      <td>5</td>
-      <td>3</td>
+      <td><notr>5</notr></td>
+      <td><notr>3</notr></td>
    </tr>
    <tr>
+      <td><notr>室宿</notr></td>
+      <td><notr>Shìxiù</notr></td>
       <td>室宿</td>
-      <td>Shìxiù</td>
-      <td>Encampment Mansion</td>
       <td></td>
       <td></td>
    </tr>
    <tr>
+      <td><notr>室宿</notr></td>
+      <td><notr>Shìxiù</notr></td>
       <td>室宿</td>
-      <td>Shìxiù</td>
-      <td>Encampment</td>
-      <td>2</td>
-      <td>7</td>
+      <td><notr>2</notr></td>
+      <td><notr>7</notr></td>
    </tr>
    <tr>
-      <td>離宮（附室宿）</td>
-      <td>Lígōng</td>
-      <td>Resting Palace(Vassal of Encampment)</td>
-      <td>6</td>
-      <td>8</td>
+      <td><notr>离宫(附室宿)</notr></td>
+      <td><notr>Lígōng</notr></td>
+      <td>離宮 (附室宿)</td>
+      <td><notr>6</notr></td>
+      <td><notr>8</notr></td>
    </tr>
    <tr>
+      <td><notr>雷电</notr></td>
+      <td><notr>Léidiàn</notr></td>
       <td>雷電</td>
-      <td>Léidiàn</td>
-      <td>Thunder and Lightning</td>
-      <td>6</td>
-      <td>8</td>
+      <td><notr>6</notr></td>
+      <td><notr>8</notr></td>
    </tr>
    <tr>
+      <td><notr>垒壁阵</notr></td>
+      <td><notr>Lěibìzhèn</notr></td>
       <td>壘壁陣</td>
-      <td>Lěibìzhèn</td>
-      <td>Line of Ramparts</td>
-      <td>12</td>
-      <td>8</td>
+      <td><notr>12</notr></td>
+      <td><notr>8</notr></td>
    </tr>
    <tr>
+      <td><notr>羽林军</notr></td>
+      <td><notr>Yǔlínjūn</notr></td>
       <td>羽林軍</td>
-      <td>Yǔlínjūn</td>
-      <td>Palace Guard</td>
-      <td>45</td>
-      <td>0</td>
+      <td><notr>45</notr></td>
+      <td><notr>0</notr></td>
    </tr>
    <tr>
+      <td><notr>𫓧钺</notr></td>
+      <td><notr>Fūyuè</notr></td>
       <td>鈇鉞</td>
-      <td>Fūyuè</td>
-      <td>Axe</td>
-      <td>3</td>
-      <td>3</td>
+      <td><notr>3</notr></td>
+      <td><notr>3</notr></td>
    </tr>
    <tr>
+      <td><notr>北落师门</notr></td>
+      <td><notr>Běiluòshīmén</notr></td>
       <td>北落師門</td>
-      <td>Běiluò Shīmén</td>
-      <td>North Gate of the Military Camp</td>
-      <td>1</td>
-      <td>0</td>
+      <td><notr>1</notr></td>
+      <td><notr>0</notr></td>
    </tr>
    <tr>
+      <td><notr>八魁</notr></td>
+      <td><notr>Bākuí</notr></td>
       <td>八魁</td>
-      <td>Bākuí</td>
-      <td>Net for Catching Birds</td>
-      <td>6</td>
-      <td>0</td>
+      <td><notr>6</notr></td>
+      <td><notr>0</notr></td>
    </tr>
    <tr>
+      <td><notr>天纲</notr></td>
+      <td><notr>Tiāngāng</notr></td>
       <td>天綱</td>
-      <td>Tiāngāng</td>
-      <td>Materials for Making Tents</td>
-      <td>1</td>
-      <td>0</td>
+      <td><notr>1</notr></td>
+      <td><notr>0</notr></td>
    </tr>
    <tr>
+      <td><notr>土公吏</notr></td>
+      <td><notr>Tǔgōnglì</notr></td>
       <td>土公吏</td>
-      <td>Tǔgōnglì</td>
-      <td>Official for Materials Supply</td>
-      <td>2</td>
-      <td>0</td>
+      <td><notr>2</notr></td>
+      <td><notr>0</notr></td>
    </tr>
    <tr>
+      <td><notr>螣蛇</notr></td>
+      <td><notr>Téngshé</notr></td>
       <td>螣蛇</td>
-      <td>Téngshé</td>
-      <td>Flying Serpent</td>
-      <td>22</td>
-      <td>19</td>
+      <td><notr>22</notr></td>
+      <td><notr>19</notr></td>
    </tr>
    <tr>
+      <td><notr>壁宿</notr></td>
+      <td><notr>Bìxiù</notr></td>
       <td>壁宿</td>
-      <td>Bìxiù</td>
-      <td>Wall Mansion</td>
       <td></td>
       <td></td>
    </tr>
    <tr>
+      <td><notr>壁宿</notr></td>
+      <td><notr>Bìxiù</notr></td>
       <td>壁宿</td>
-      <td>Bìxiù</td>
-      <td>Wall</td>
-      <td>2</td>
-      <td>23</td>
+      <td><notr>2</notr></td>
+      <td><notr>23</notr></td>
    </tr>
    <tr>
+      <td><notr>霹雳</notr></td>
+      <td><notr>Pīlì</notr></td>
       <td>霹靂</td>
-      <td>Pīlì</td>
-      <td>Thunderbolt</td>
-      <td>5</td>
-      <td>9</td>
+      <td><notr>5</notr></td>
+      <td><notr>9</notr></td>
    </tr>
    <tr>
+      <td><notr>云雨</notr></td>
+      <td><notr>Yúnyǔ</notr></td>
       <td>雲雨</td>
-      <td>Yúnyǔ</td>
-      <td>Cloud and Rain</td>
-      <td>4</td>
-      <td>10</td>
+      <td><notr>4</notr></td>
+      <td><notr>10</notr></td>
    </tr>
    <tr>
+      <td><notr>天厩</notr></td>
+      <td><notr>Tiānjiù</notr></td>
       <td>天廄</td>
-      <td>Tiānjiù</td>
-      <td>Celestial Stable</td>
-      <td>3</td>
-      <td>1</td>
+      <td><notr>3</notr></td>
+      <td><notr>1</notr></td>
    </tr>
    <tr>
+      <td><notr>𫓧锧</notr></td>
+      <td><notr>Fūzhì</notr></td>
       <td>鈇鑕</td>
-      <td>Fūzhì</td>
-      <td>Sickle</td>
-      <td>5</td>
-      <td>0</td>
+      <td><notr>5</notr></td>
+      <td><notr>0</notr></td>
    </tr>
    <tr>
+      <td><notr>土公</notr></td>
+      <td><notr>Tǔgōng</notr></td>
       <td>土公</td>
-      <td>Tǔgōng</td>
-      <td>Official for Earthworks and Buildings</td>
-      <td>2</td>
-      <td>11</td>
+      <td><notr>2</notr></td>
+      <td><notr>11</notr></td>
    </tr>
    <tr>
+      <td><notr>奎宿</notr></td>
+      <td><notr>Kuíxiù</notr></td>
       <td>奎宿</td>
-      <td>Kuíxiù</td>
-      <td>Legs Mansion</td>
       <td></td>
       <td></td>
    </tr>
    <tr>
+      <td><notr>奎宿</notr></td>
+      <td><notr>Kuíxiù</notr></td>
       <td>奎宿</td>
-      <td>Kuíxiù</td>
-      <td>Legs</td>
-      <td>16</td>
-      <td>23</td>
+      <td><notr>16</notr></td>
+      <td><notr>23</notr></td>
    </tr>
    <tr>
+      <td><notr>外屏</notr></td>
+      <td><notr>Wàipíng</notr></td>
       <td>外屏</td>
-      <td>Wàipíng</td>
-      <td>Outer Fence</td>
-      <td>7</td>
-      <td>15</td>
+      <td><notr>7</notr></td>
+      <td><notr>15</notr></td>
    </tr>
    <tr>
+      <td><notr>天溷</notr></td>
+      <td><notr>Tiānhùn</notr></td>
       <td>天溷</td>
-      <td>Tiānhùn</td>
-      <td>Celestial Pigsty</td>
-      <td>4</td>
-      <td>6</td>
+      <td><notr>4</notr></td>
+      <td><notr>6</notr></td>
    </tr>
    <tr>
+      <td><notr>土司空</notr></td>
+      <td><notr>Tǔsīkōng</notr></td>
       <td>土司空</td>
-      <td>Tǔsīkōng</td>
-      <td>Master of Constructions</td>
-      <td>1</td>
-      <td>0</td>
+      <td><notr>1</notr></td>
+      <td><notr>0</notr></td>
    </tr>
    <tr>
+      <td><notr>军南门</notr></td>
+      <td><notr>Jūnnánmén</notr></td>
       <td>軍南門</td>
-      <td>Nánjūnmén</td>
-      <td>Southern Military Gate</td>
-      <td>1</td>
-      <td>0</td>
+      <td><notr>1</notr></td>
+      <td><notr>0</notr></td>
    </tr>
    <tr>
+      <td><notr>阁道</notr></td>
+      <td><notr>Gédào</notr></td>
       <td>閣道</td>
-      <td>Gédào</td>
-      <td>Flying Corridor</td>
-      <td>6</td>
-      <td>5</td>
+      <td><notr>6</notr></td>
+      <td><notr>5</notr></td>
    </tr>
    <tr>
+      <td><notr>附路</notr></td>
+      <td><notr>Fùlù</notr></td>
       <td>附路</td>
-      <td>Fùlù</td>
-      <td>Auxiliary Road</td>
-      <td>1</td>
-      <td>0</td>
+      <td><notr>1</notr></td>
+      <td><notr>0</notr></td>
    </tr>
    <tr>
+      <td><notr>王良</notr></td>
+      <td><notr>Wángliáng</notr></td>
       <td>王良</td>
-      <td>Wáng Liáng</td>
-      <td>Wang Liang</td>
-      <td>5</td>
-      <td>14</td>
+      <td><notr>5</notr></td>
+      <td><notr>14</notr></td>
    </tr>
    <tr>
+      <td><notr>策</notr></td>
+      <td><notr>Cè</notr></td>
       <td>策</td>
-      <td>Cè</td>
-      <td>Whip</td>
-      <td>1</td>
-      <td>0</td>
+      <td><notr>1</notr></td>
+      <td><notr>0</notr></td>
    </tr>
    <tr>
+      <td><notr>娄宿</notr></td>
+      <td><notr>Loúxiù</notr></td>
       <td>婁宿</td>
-      <td>Loúxiù</td>
-      <td>Bond Mansion</td>
       <td></td>
       <td></td>
    </tr>
    <tr>
+      <td><notr>娄宿</notr></td>
+      <td><notr>Loúxiù</notr></td>
       <td>婁宿</td>
-      <td>Loúxiù</td>
-      <td>Bond</td>
-      <td>3</td>
-      <td>15</td>
+      <td><notr>3</notr></td>
+      <td><notr>15</notr></td>
    </tr>
    <tr>
+      <td><notr>左更</notr></td>
+      <td><notr>Zuǒgēng</notr></td>
       <td>左更</td>
-      <td>Zuǒgēng</td>
-      <td>Official in Charge of the Forest</td>
-      <td>5</td>
-      <td>8</td>
+      <td><notr>5</notr></td>
+      <td><notr>8</notr></td>
    </tr>
    <tr>
+      <td><notr>右更</notr></td>
+      <td><notr>Yòugēng</notr></td>
       <td>右更</td>
-      <td>Yòugēng</td>
-      <td>Official in Charge of Pasturing</td>
-      <td>5</td>
-      <td>5</td>
+      <td><notr>5</notr></td>
+      <td><notr>5</notr></td>
    </tr>
    <tr>
-      <td>天倉 </td>
-      <td>Tiāncāng</td>
-      <td>Square Celestial Granary</td>
-      <td>6</td>
-      <td>21</td>
+      <td><notr>天仓 </notr></td>
+      <td><notr>Tiāncāng</notr></td>
+      <td>天倉</td>
+      <td><notr>6</notr></td>
+      <td><notr>21</notr></td>
    </tr>
    <tr>
+      <td><notr>天庾</notr></td>
+      <td><notr>Tiānyǔ</notr></td>
       <td>天庾</td>
-      <td>Tiānyǔ</td>
-      <td>Ricks of Grain</td>
-      <td>3</td>
-      <td>3</td>
+      <td><notr>3</notr></td>
+      <td><notr>3</notr></td>
    </tr>
    <tr>
+      <td><notr>天大将军</notr></td>
+      <td><notr>Tiāndàjiāngjūn</notr></td>
       <td>天大將軍</td>
-      <td>Tiāndàjiāngjūn</td>
-      <td>Great General of Heaven</td>
-      <td>11</td>
-      <td>17</td>
+      <td><notr>11</notr></td>
+      <td><notr>17</notr></td>
    </tr>
    <tr>
+      <td><notr>胃宿</notr></td>
+      <td><notr>Wèixiù</notr></td>
       <td>胃宿</td>
-      <td>Wèixiù</td>
-      <td>Stomach Mansion</td>
       <td></td>
       <td></td>
    </tr>
    <tr>
+      <td><notr>胃宿</notr></td>
+      <td><notr>Wèixiù</notr></td>
       <td>胃宿</td>
-      <td>Wèixiù</td>
-      <td>Stomach</td>
-      <td>3</td>
-      <td>5</td>
+      <td><notr>3</notr></td>
+      <td><notr>5</notr></td>
    </tr>
    <tr>
+      <td><notr>天廪</notr></td>
+      <td><notr>Tiānlǐn</notr></td>
       <td>天廩</td>
-      <td>Tiānlǐn</td>
-      <td>Celestial Foodstuff</td>
-      <td>4</td>
-      <td>3</td>
+      <td><notr>4</notr></td>
+      <td><notr>3</notr></td>
    </tr>
    <tr>
+      <td><notr>天囷</notr></td>
+      <td><notr>Tiānqūn</notr></td>
       <td>天囷</td>
-      <td>Tiānqūn</td>
-      <td>Circular Celestial Granary</td>
-      <td>13</td>
-      <td>21</td>
+      <td><notr>13</notr></td>
+      <td><notr>21</notr></td>
    </tr>
    <tr>
+      <td><notr>大陵</notr></td>
+      <td><notr>Dàlíng</notr></td>
       <td>大陵</td>
-      <td>Dàlíng</td>
-      <td>Mausoleum</td>
-      <td>8</td>
-      <td>21</td>
+      <td><notr>8</notr></td>
+      <td><notr>21</notr></td>
    </tr>
    <tr>
+      <td><notr>天船</notr></td>
+      <td><notr>Tiānchuán</notr></td>
       <td>天船</td>
-      <td>Tiānchuán</td>
-      <td>Celestial Boat</td>
-      <td>9</td>
-      <td>10</td>
+      <td><notr>9</notr></td>
+      <td><notr>10</notr></td>
    </tr>
    <tr>
-      <td>積屍</td>
-      <td>JīShī</td>
-      <td>Heap of Corpses</td>
-      <td>1</td>
-      <td>0</td>
+      <td><notr>积尸</notr></td>
+      <td><notr>JīShī</notr></td>
+      <td>積尸</td>
+      <td><notr>1</notr></td>
+      <td><notr>0</notr></td>
    </tr>
    <tr>
+      <td><notr>积水</notr></td>
+      <td><notr>Jīshuǐ</notr></td>
       <td>積水</td>
-      <td>Jīshuǐ</td>
-      <td>Stored Water</td>
-      <td>1</td>
-      <td>1</td>
+      <td><notr>1</notr></td>
+      <td><notr>1</notr></td>
    </tr>
    <tr>
+      <td><notr>昴宿</notr></td>
+      <td><notr>Mǎoxiù</notr></td>
       <td>昴宿</td>
-      <td>Mǎoxiù</td>
-      <td>Hairy Head Mansion</td>
       <td></td>
       <td></td>
    </tr>
    <tr>
+      <td><notr>昴宿</notr></td>
+      <td><notr>Mǎoxiù</notr></td>
       <td>昴宿</td>
-      <td>Mǎoxiù</td>
-      <td>Hairy Head</td>
-      <td>7</td>
-      <td>13</td>
+      <td><notr>7</notr></td>
+      <td><notr>13</notr></td>
    </tr>
    <tr>
+      <td><notr>天阿</notr></td>
+      <td><notr>Tiān'ē</notr></td>
       <td>天阿</td>
-      <td>Tiān'ē</td>
-      <td>Celestial Concave</td>
-      <td>1</td>
-      <td>0</td>
+      <td><notr>1</notr></td>
+      <td><notr>0</notr></td>
    </tr>
    <tr>
+      <td><notr>月</notr></td>
+      <td><notr>Yuè</notr></td>
       <td>月</td>
-      <td>Yuè</td>
-      <td>Lunar Star</td>
-      <td>1</td>
-      <td>1</td>
+      <td><notr>1</notr></td>
+      <td><notr>1</notr></td>
    </tr>
    <tr>
+      <td><notr>天阴</notr></td>
+      <td><notr>Tiānyīn</notr></td>
       <td>天陰</td>
-      <td>Tiānyīn</td>
-      <td>Celestial Yin Force</td>
-      <td>5</td>
-      <td>6</td>
+      <td><notr>5</notr></td>
+      <td><notr>6</notr></td>
    </tr>
    <tr>
-      <td>芻藁</td>
-      <td>Chúgǎo</td>
-      <td>Hay</td>
-      <td>6</td>
-      <td>5</td>
+      <td><notr>刍藁</notr></td>
+      <td><notr>Chúgǎo</notr></td>
+      <td>蒭藁</td>
+      <td><notr>6</notr></td>
+      <td><notr>5</notr></td>
    </tr>
    <tr>
+      <td><notr>天苑</notr></td>
+      <td><notr>Tiānyuàn</notr></td>
       <td>天苑</td>
-      <td>Tiānyuàn</td>
-      <td>Celestial Meadows</td>
-      <td>16</td>
-      <td>18</td>
+      <td><notr>16</notr></td>
+      <td><notr>18</notr></td>
    </tr>
    <tr>
-      <td>捲舌</td>
-      <td>Juǎnshé</td>
-      <td>Rolled Tongue</td>
-      <td>6</td>
-      <td>7</td>
+      <td><notr>卷舌</notr></td>
+      <td><notr>Juǎnshé</notr></td>
+      <td>卷舌</td>
+      <td><notr>6</notr></td>
+      <td><notr>7</notr></td>
    </tr>
    <tr>
+      <td><notr>天谗</notr></td>
+      <td><notr>Tiānchán</notr></td>
       <td>天讒</td>
-      <td>Tiānchán</td>
-      <td>Celestial Slander</td>
-      <td>1</td>
-      <td>0</td>
+      <td><notr>1</notr></td>
+      <td><notr>0</notr></td>
    </tr>
    <tr>
+      <td><notr>砺石</notr></td>
+      <td><notr>Lìshí</notr></td>
       <td>礪石</td>
-      <td>Lìshí</td>
-      <td>Whetstone</td>
-      <td>4</td>
-      <td>0</td>
+      <td><notr>4</notr></td>
+      <td><notr>0</notr></td>
    </tr>
    <tr>
+      <td><notr>毕宿</notr></td>
+      <td><notr>Bìxiù</notr></td>
       <td>畢宿</td>
-      <td>Bìxiù</td>
-      <td>Net Mansion</td>
       <td></td>
       <td></td>
    </tr>
    <tr>
+      <td><notr>毕宿</notr></td>
+      <td><notr>Bìxiù</notr></td>
       <td>畢宿</td>
-      <td>Bìxiù</td>
-      <td>Net</td>
-      <td>8</td>
-      <td>18</td>
+      <td><notr>8</notr></td>
+      <td><notr>18</notr></td>
    </tr>
    <tr>
-      <td>附耳（附畢宿）</td>
-      <td>Fù'ěr</td>
-      <td>Whisper(Vassal of Net)</td>
-      <td>1</td>
-      <td>4</td>
+      <td><notr>附耳(附毕宿)</notr></td>
+      <td><notr>Fù'ěr</notr></td>
+      <td>附耳 (附畢宿)</td>
+      <td><notr>1</notr></td>
+      <td><notr>4</notr></td>
    </tr>
    <tr>
+      <td><notr>天街</notr></td>
+      <td><notr>Tiānjiē</notr></td>
       <td>天街</td>
-      <td>Tiānjiē</td>
-      <td>Celestial Street</td>
-      <td>2</td>
-      <td>4</td>
+      <td><notr>2</notr></td>
+      <td><notr>4</notr></td>
    </tr>
    <tr>
+      <td><notr>天节</notr></td>
+      <td><notr>Tiānjié</notr></td>
       <td>天節</td>
-      <td>Tiānjié</td>
-      <td>Celestial Tally</td>
-      <td>8</td>
-      <td>0</td>
+      <td><notr>8</notr></td>
+      <td><notr>0</notr></td>
    </tr>
    <tr>
+      <td><notr>诸王</notr></td>
+      <td><notr>Zhūwáng</notr></td>
       <td>諸王</td>
-      <td>Zhūwáng</td>
-      <td>Feudal Kings</td>
-      <td>6</td>
-      <td>4</td>
+      <td><notr>6</notr></td>
+      <td><notr>4</notr></td>
    </tr>
    <tr>
+      <td><notr>天高</notr></td>
+      <td><notr>Tiāngāo</notr></td>
       <td>天高</td>
-      <td>Tiāngāo</td>
-      <td>Celestial High Terrace</td>
-      <td>4</td>
-      <td>4</td>
+      <td><notr>4</notr></td>
+      <td><notr>4</notr></td>
    </tr>
    <tr>
+      <td><notr>九州殊口</notr></td>
+      <td><notr>Jiǔzhōushūkǒu</notr></td>
       <td>九州殊口</td>
-      <td>Jiǔzhōushūkǒu</td>
-      <td>Interpreters of Nine Dialects</td>
-      <td>6</td>
-      <td>11</td>
+      <td><notr>6</notr></td>
+      <td><notr>11</notr></td>
    </tr>
    <tr>
+      <td><notr>五车</notr></td>
+      <td><notr>Wǔchē</notr></td>
       <td>五車</td>
-      <td>Wǔchē</td>
-      <td>Five Chariots</td>
-      <td>5</td>
-      <td>19</td>
+      <td><notr>5</notr></td>
+      <td><notr>19</notr></td>
    </tr>
    <tr>
+      <td><notr>柱</notr></td>
+      <td><notr>Zhù</notr></td>
       <td>柱</td>
-      <td>Zhù</td>
-      <td>Pillars</td>
-      <td>9</td>
-      <td>0</td>
+      <td><notr>9</notr></td>
+      <td><notr>0</notr></td>
    </tr>
    <tr>
+      <td><notr>天潢</notr></td>
+      <td><notr>Tiānhuáng</notr></td>
       <td>天潢</td>
-      <td>Tiānhuáng</td>
-      <td>Celestial Pier</td>
-      <td>5</td>
-      <td>2</td>
+      <td><notr>5</notr></td>
+      <td><notr>2</notr></td>
    </tr>
    <tr>
+      <td><notr>咸池</notr></td>
+      <td><notr>Xiánchí</notr></td>
       <td>咸池</td>
-      <td>Xiánchí</td>
-      <td>Pool of Harmony</td>
-      <td>3</td>
-      <td>0</td>
+      <td><notr>3</notr></td>
+      <td><notr>0</notr></td>
    </tr>
    <tr>
+      <td><notr>天关</notr></td>
+      <td><notr>Tiānguān</notr></td>
       <td>天關</td>
-      <td>Tiānguān</td>
-      <td>Celestial Pass</td>
-      <td>1</td>
-      <td>6</td>
+      <td><notr>1</notr></td>
+      <td><notr>6</notr></td>
    </tr>
    <tr>
+      <td><notr>参旗</notr></td>
+      <td><notr>Shēnqí</notr></td>
       <td>參旗</td>
-      <td>Shēnqí</td>
-      <td>Banner of Three Stars</td>
-      <td>9</td>
-      <td>12</td>
+      <td><notr>9</notr></td>
+      <td><notr>12</notr></td>
    </tr>
    <tr>
+      <td><notr>九斿</notr></td>
+      <td><notr>Jiǔyóu</notr></td>
       <td>九斿</td>
-      <td>Jiǔyóu</td>
-      <td>Imperial Military Flag</td>
-      <td>9</td>
-      <td>7</td>
+      <td><notr>9</notr></td>
+      <td><notr>7</notr></td>
    </tr>
    <tr>
+      <td><notr>天园</notr></td>
+      <td><notr>Tiānyuán</notr></td>
       <td>天園</td>
-      <td>Tiānyuán</td>
-      <td>Celestial Orchard</td>
-      <td>13</td>
-      <td>6</td>
+      <td><notr>13</notr></td>
+      <td><notr>6</notr></td>
    </tr>
    <tr>
+      <td><notr>觜宿</notr></td>
+      <td><notr>Zīxiù</notr></td>
       <td>觜宿</td>
-      <td>Zīxiù</td>
-      <td>Turtle Beak Mansion</td>
       <td></td>
       <td></td>
    </tr>
    <tr>
+      <td><notr>觜宿</notr></td>
+      <td><notr>Zīxiù</notr></td>
       <td>觜宿</td>
-      <td>Zīxiù</td>
-      <td>Turtle Beak</td>
-      <td>3</td>
-      <td>0</td>
+      <td><notr>3</notr></td>
+      <td><notr>0</notr></td>
    </tr>
    <tr>
+      <td><notr>司怪</notr></td>
+      <td><notr>Sīguài</notr></td>
       <td>司怪</td>
-      <td>Sīguài</td>
-      <td>Deity in Charge of Monsters</td>
-      <td>4</td>
-      <td>6</td>
+      <td><notr>4</notr></td>
+      <td><notr>6</notr></td>
    </tr>
    <tr>
+      <td><notr>座旗</notr></td>
+      <td><notr>Zuòqí</notr></td>
       <td>座旗</td>
-      <td>Zuòqí</td>
-      <td>Seat Flags</td>
-      <td>9</td>
-      <td>11</td>
+      <td><notr>9</notr></td>
+      <td><notr>11</notr></td>
    </tr>
    <tr>
+      <td><notr>参宿</notr></td>
+      <td><notr>Shēnxiù</notr></td>
       <td>參宿</td>
-      <td>Shēnxiù</td>
-      <td>Three Stars Mansion</td>
       <td></td>
       <td></td>
    </tr>
    <tr>
+      <td><notr>参宿</notr></td>
+      <td><notr>Shēnxiù</notr></td>
       <td>參宿</td>
-      <td>Shēnxiù</td>
-      <td>Three Stars</td>
-      <td>7</td>
-      <td>39</td>
+      <td><notr>7</notr></td>
+      <td><notr>39</notr></td>
    </tr>
    <tr>
-      <td>伐（附參宿）</td>
-      <td>Fá</td>
-      <td>Send Armed Forces To Suppress(Vassal of Three Stars)</td>
-      <td>3</td>
-      <td>2</td>
+      <td><notr>伐(附参宿)</notr></td>
+      <td><notr>Fá</notr></td>
+      <td>伐 (附參宿)</td>
+      <td><notr>3</notr></td>
+      <td><notr>2</notr></td>
    </tr>
    <tr>
+      <td><notr>玉井</notr></td>
+      <td><notr>Yùjǐng</notr></td>
       <td>玉井</td>
-      <td>Yùjǐng</td>
-      <td>Jade Well</td>
-      <td>4</td>
-      <td>3</td>
+      <td><notr>4</notr></td>
+      <td><notr>3</notr></td>
    </tr>
    <tr>
+      <td><notr>屏</notr></td>
+      <td><notr>Píng</notr></td>
       <td>屏</td>
-      <td>Píng</td>
-      <td>Screen</td>
-      <td>2</td>
-      <td>0</td>
+      <td><notr>2</notr></td>
+      <td><notr>0</notr></td>
    </tr>
    <tr>
+      <td><notr>军井</notr></td>
+      <td><notr>Jūnjǐng</notr></td>
       <td>軍井</td>
-      <td>Jūnjǐng</td>
-      <td>Military well</td>
-      <td>4</td>
-      <td>2</td>
+      <td><notr>4</notr></td>
+      <td><notr>2</notr></td>
    </tr>
    <tr>
+      <td><notr>厕</notr></td>
+      <td><notr>Cè</notr></td>
       <td>廁</td>
-      <td>Cè</td>
-      <td>Toilet</td>
-      <td>4</td>
-      <td>8</td>
+      <td><notr>4</notr></td>
+      <td><notr>8</notr></td>
    </tr>
    <tr>
+      <td><notr>屎</notr></td>
+      <td><notr>Shǐ</notr></td>
       <td>屎</td>
-      <td>Shǐ</td>
-      <td>Excrement</td>
-      <td>1</td>
-      <td>0</td>
+      <td><notr>1</notr></td>
+      <td><notr>0</notr></td>
    </tr>
    <tr>
+      <td><notr>井宿</notr></td>
+      <td><notr>Jǐngxiù</notr></td>
       <td>井宿</td>
-      <td>Jǐngxiù</td>
-      <td>Well Mansion</td>
       <td></td>
       <td></td>
    </tr>
    <tr>
+      <td><notr>井宿</notr></td>
+      <td><notr>Jǐngxiù</notr></td>
       <td>井宿</td>
-      <td>Jǐngxiù</td>
-      <td>Well</td>
-      <td>8</td>
-      <td>19</td>
+      <td><notr>8</notr></td>
+      <td><notr>19</notr></td>
    </tr>
    <tr>
-      <td>鉞（附井宿）</td>
-      <td>Yuè</td>
-      <td>Battle Axe(Vassal of Well)</td>
-      <td>1</td>
-      <td>1</td>
+      <td><notr>钺(附井宿)</notr></td>
+      <td><notr>Yuè</notr></td>
+      <td>鉞 (附井宿)</td>
+      <td><notr>1</notr></td>
+      <td><notr>1</notr></td>
    </tr>
    <tr>
+      <td><notr>南河</notr></td>
+      <td><notr>Nánhé</notr></td>
       <td>南河</td>
-      <td>Nánhé</td>
-      <td>South River</td>
-      <td>3</td>
-      <td>11</td>
+      <td><notr>3</notr></td>
+      <td><notr>11</notr></td>
    </tr>
    <tr>
+      <td><notr>北河</notr></td>
+      <td><notr>Běihé</notr></td>
       <td>北河</td>
-      <td>Běihé</td>
-      <td>North River</td>
-      <td>3</td>
-      <td>4</td>
+      <td><notr>3</notr></td>
+      <td><notr>4</notr></td>
    </tr>
    <tr>
-      <td>天樽</td>
-      <td>Tiānzūn</td>
-      <td>Celestial Wine Cup</td>
-      <td>3</td>
-      <td>9</td>
+      <td><notr>天樽</notr></td>
+      <td><notr>Tiānzūn</notr></td>
+      <td>天罇</td>
+      <td><notr>3</notr></td>
+      <td><notr>9</notr></td>
    </tr>
    <tr>
+      <td><notr>五诸侯</notr></td>
+      <td><notr>Wǔzhūhóu</notr></td>
       <td>五諸侯</td>
-      <td>Wǔzhūhóu</td>
-      <td>Five Feudal Kings</td>
-      <td>5</td>
-      <td>4</td>
+      <td><notr>5</notr></td>
+      <td><notr>4</notr></td>
    </tr>
    <tr>
+      <td><notr>积水</notr></td>
+      <td><notr>Jīshuǐ</notr></td>
       <td>積水</td>
-      <td>Jīshuǐ</td>
-      <td>Accumulated Water</td>
-      <td>1</td>
-      <td>0</td>
+      <td><notr>1</notr></td>
+      <td><notr>0</notr></td>
    </tr>
    <tr>
+      <td><notr>积薪</notr></td>
+      <td><notr>Jīxīn</notr></td>
       <td>積薪</td>
-      <td>Jīxīn</td>
-      <td>Pile of Firewood</td>
-      <td>1</td>
-      <td>3</td>
+      <td><notr>1</notr></td>
+      <td><notr>3</notr></td>
    </tr>
    <tr>
+      <td><notr>水府</notr></td>
+      <td><notr>Shuǐfǔ</notr></td>
       <td>水府</td>
-      <td>Shuǐfǔ</td>
-      <td>Official for Irrigation</td>
-      <td>4</td>
-      <td>8</td>
+      <td><notr>4</notr></td>
+      <td><notr>8</notr></td>
    </tr>
    <tr>
+      <td><notr>水位</notr></td>
+      <td><notr>Shuǐwèi</notr></td>
       <td>水位</td>
-      <td>Shuǐwèi</td>
-      <td>Water Level</td>
-      <td>4</td>
-      <td>12</td>
+      <td><notr>4</notr></td>
+      <td><notr>12</notr></td>
    </tr>
    <tr>
+      <td><notr>四渎</notr></td>
+      <td><notr>Sìdú</notr></td>
       <td>四瀆</td>
-      <td>Sìdú</td>
-      <td>Four Channels</td>
-      <td>4</td>
-      <td>8</td>
+      <td><notr>4</notr></td>
+      <td><notr>8</notr></td>
    </tr>
    <tr>
+      <td><notr>军市</notr></td>
+      <td><notr>Jūnshì</notr></td>
       <td>軍市</td>
-      <td>Jūnshì</td>
-      <td>Market for Soldiers</td>
-      <td>6</td>
-      <td>7</td>
+      <td><notr>6</notr></td>
+      <td><notr>7</notr></td>
    </tr>
    <tr>
+      <td><notr>野鸡</notr></td>
+      <td><notr>Yějī</notr></td>
       <td>野雞</td>
-      <td>Yějī</td>
-      <td>Wild Cockerel</td>
-      <td>1</td>
-      <td>0</td>
+      <td><notr>1</notr></td>
+      <td><notr>0</notr></td>
    </tr>
    <tr>
+      <td><notr>丈人</notr></td>
+      <td><notr>Zhàngrén</notr></td>
       <td>丈人</td>
-      <td>Zhàngrén</td>
-      <td>Grandfather</td>
-      <td>2</td>
-      <td>0</td>
+      <td><notr>2</notr></td>
+      <td><notr>0</notr></td>
    </tr>
    <tr>
+      <td><notr>子</notr></td>
+      <td><notr>Zǐ</notr></td>
       <td>子</td>
-      <td>Zǐ</td>
-      <td>Son</td>
-      <td>2</td>
-      <td>1</td>
+      <td><notr>2</notr></td>
+      <td><notr>1</notr></td>
    </tr>
    <tr>
+      <td><notr>孙</notr></td>
+      <td><notr>Sūn</notr></td>
       <td>孫</td>
-      <td>Sūn</td>
-      <td>Grandson</td>
-      <td>2</td>
-      <td>4</td>
+      <td><notr>2</notr></td>
+      <td><notr>4</notr></td>
    </tr>
    <tr>
+      <td><notr>阙丘</notr></td>
+      <td><notr>Quèqiū</notr></td>
       <td>闕丘</td>
-      <td>Quèqiū</td>
-      <td>Palace Gate</td>
-      <td>2</td>
-      <td>7</td>
+      <td><notr>2</notr></td>
+      <td><notr>7</notr></td>
    </tr>
    <tr>
+      <td><notr>天狼</notr></td>
+      <td><notr>Tiānláng</notr></td>
       <td>天狼</td>
-      <td>Tiānláng</td>
-      <td>Celestial Wolf</td>
-      <td>1</td>
-      <td>6</td>
+      <td><notr>1</notr></td>
+      <td><notr>6</notr></td>
    </tr>
    <tr>
+      <td><notr>弧矢</notr></td>
+      <td><notr>Húshǐ</notr></td>
       <td>弧矢</td>
-      <td>Húshǐ</td>
-      <td>Bow and Arrow</td>
-      <td>9</td>
-      <td>32</td>
+      <td><notr>9</notr></td>
+      <td><notr>32</notr></td>
    </tr>
    <tr>
+      <td><notr>老人</notr></td>
+      <td><notr>Lǎorén</notr></td>
       <td>老人</td>
-      <td>Lǎorén</td>
-      <td>Old Man</td>
-      <td>1</td>
-      <td>4</td>
+      <td><notr>1</notr></td>
+      <td><notr>4</notr></td>
    </tr>
    <tr>
+      <td><notr>鬼宿</notr></td>
+      <td><notr>Guǐxiù</notr></td>
       <td>鬼宿</td>
-      <td>Guǐxiù</td>
-      <td>Ghosts Mansion</td>
       <td></td>
       <td></td>
    </tr>
    <tr>
+      <td><notr>鬼宿</notr></td>
+      <td><notr>Guǐxiù</notr></td>
       <td>鬼宿</td>
-      <td>Guǐxiù</td>
-      <td>Ghosts</td>
-      <td>4</td>
-      <td>19</td>
+      <td><notr>4</notr></td>
+      <td><notr>19</notr></td>
    </tr>
    <tr>
-      <td>積屍</td>
-      <td>Jīshī</td>
-      <td>Cumulative Corpses</td>
-      <td>1</td>
-      <td>3</td>
+      <td><notr>积尸</notr></td>
+      <td><notr>Jīshī</notr></td>
+      <td>積尸</td>
+      <td><notr>1</notr></td>
+      <td><notr>3</notr></td>
    </tr>
    <tr>
+      <td><notr>爟</notr></td>
+      <td><notr>Guàn</notr></td>
       <td>爟</td>
-      <td>Guàn</td>
-      <td>Beacon Fire</td>
-      <td>4</td>
-      <td>11</td>
+      <td><notr>4</notr></td>
+      <td><notr>11</notr></td>
    </tr>
    <tr>
+      <td><notr>天狗</notr></td>
+      <td><notr>Tiāngǒu</notr></td>
       <td>天狗</td>
-      <td>Tiāngǒu</td>
-      <td>Celestial Dog</td>
-      <td>7</td>
-      <td>0</td>
+      <td><notr>7</notr></td>
+      <td><notr>0</notr></td>
    </tr>
    <tr>
+      <td><notr>外厨</notr></td>
+      <td><notr>Wàichú</notr></td>
       <td>外廚</td>
-      <td>Wàichú</td>
-      <td>Outer Kitchen</td>
-      <td>6</td>
-      <td>17</td>
+      <td><notr>6</notr></td>
+      <td><notr>17</notr></td>
    </tr>
    <tr>
+      <td><notr>天社</notr></td>
+      <td><notr>Tiānshè</notr></td>
       <td>天社</td>
-      <td>Tiānshè</td>
-      <td>Celestial Earth God's Temple</td>
-      <td>6</td>
-      <td>5</td>
+      <td><notr>6</notr></td>
+      <td><notr>5</notr></td>
    </tr>
    <tr>
+      <td><notr>天记</notr></td>
+      <td><notr>Tiānjì</notr></td>
       <td>天記</td>
-      <td>Tiānjì</td>
-      <td>Judge for Estimating the Age of Animals</td>
-      <td>1</td>
-      <td>2</td>
+      <td><notr>1</notr></td>
+      <td><notr>2</notr></td>
    </tr>
    <tr>
+      <td><notr>柳宿</notr></td>
+      <td><notr>Liǔxiù</notr></td>
       <td>柳宿</td>
-      <td>Liǔxiù</td>
-      <td>Willow Mansion</td>
       <td></td>
       <td></td>
    </tr>
    <tr>
+      <td><notr>柳宿</notr></td>
+      <td><notr>Liǔxiù</notr></td>
       <td>柳宿</td>
-      <td>Liǔxiù</td>
-      <td>Willow</td>
-      <td>8</td>
-      <td>13</td>
+      <td><notr>8</notr></td>
+      <td><notr>13</notr></td>
    </tr>
    <tr>
+      <td><notr>酒旗</notr></td>
+      <td><notr>Jiǔqí</notr></td>
       <td>酒旗</td>
-      <td>Jiǔqí</td>
-      <td>Banner of Wine Shop</td>
-      <td>3</td>
-      <td>5</td>
+      <td><notr>3</notr></td>
+      <td><notr>5</notr></td>
    </tr>
    <tr>
+      <td><notr>星宿</notr></td>
+      <td><notr>Xīngxiù</notr></td>
       <td>星宿</td>
-      <td>Xīngxiù</td>
-      <td>Star Mansion</td>
       <td></td>
       <td></td>
    </tr>
    <tr>
+      <td><notr>星宿</notr></td>
+      <td><notr>Xīngxiù</notr></td>
       <td>星宿</td>
-      <td>Xīngxiù</td>
-      <td>Star Mansion</td>
-      <td>7</td>
-      <td>15</td>
+      <td><notr>7</notr></td>
+      <td><notr>15</notr></td>
    </tr>
    <tr>
+      <td><notr>天相</notr></td>
+      <td><notr>Tiānxiàng</notr></td>
       <td>天相</td>
-      <td>Tiānxiàng</td>
-      <td>Celestial Premier</td>
-      <td>3</td>
-      <td>11</td>
+      <td><notr>3</notr></td>
+      <td><notr>11</notr></td>
    </tr>
    <tr>
-      <td>天稷*</td>
-      <td>Tiānjì</td>
-      <td>Celestial Cereals</td>
-      <td>/</td>
-      <td>/</td>
+      <td><notr>天稷*</notr></td>
+      <td><notr>Tiānjì</notr></td>
+      <td>天稷</td>
+      <td><notr>/</notr></td>
+      <td><notr>/</notr></td>
    </tr>
    <tr>
+      <td><notr>轩辕</notr></td>
+      <td><notr>Xuānyuán</notr></td>
       <td>軒轅</td>
-      <td>Xuānyuán</td>
-      <td>Xuanyuan</td>
-      <td>17</td>
-      <td>59</td>
+      <td><notr>17</notr></td>
+      <td><notr>59</notr></td>
    </tr>
    <tr>
+      <td><notr>内平</notr></td>
+      <td><notr>Nèipíng</notr></td>
       <td>內平</td>
-      <td>Nèipíng</td>
-      <td>High Judge</td>
-      <td>4</td>
-      <td>11</td>
+      <td><notr>4</notr></td>
+      <td><notr>11</notr></td>
    </tr>
    <tr>
+      <td><notr>张宿</notr></td>
+      <td><notr>Zhāngxiù</notr></td>
       <td>張宿</td>
-      <td>Zhāngxiù</td>
-      <td>Extended Net Mansion</td>
       <td></td>
       <td></td>
    </tr>
    <tr>
+      <td><notr>张宿</notr></td>
+      <td><notr>Zhāngxiù</notr></td>
       <td>張宿</td>
-      <td>Zhāngxiù</td>
-      <td>Extended Net</td>
-      <td>6</td>
-      <td>5</td>
+      <td><notr>6</notr></td>
+      <td><notr>5</notr></td>
    </tr>
    <tr>
-      <td>天廟*</td>
-      <td>Tiānmiào</td>
-      <td>Celestial Temple</td>
-      <td>/</td>
-      <td>/</td>
+      <td><notr>天庙*</notr></td>
+      <td><notr>Tiānmiào</notr></td>
+      <td>天廟</td>
+      <td><notr>/</notr></td>
+      <td><notr>/</notr></td>
    </tr>
    <tr>
+      <td><notr>翼宿</notr></td>
+      <td><notr>Yìxiù</notr></td>
       <td>翼宿</td>
-      <td>Yìxiù</td>
-      <td>Wings Mansion</td>
       <td></td>
       <td></td>
    </tr>
    <tr>
+      <td><notr>翼宿</notr></td>
+      <td><notr>Yìxiù</notr></td>
       <td>翼宿</td>
-      <td>Yìxiù</td>
-      <td>Wings</td>
-      <td>22</td>
-      <td>7</td>
+      <td><notr>22</notr></td>
+      <td><notr>7</notr></td>
    </tr>
    <tr>
-      <td>東甌*</td>
-      <td>Dōngōu</td>
-      <td>Dongou</td>
-      <td>/</td>
-      <td>/</td>
+      <td><notr>东瓯*</notr></td>
+      <td><notr>Dōngōu</notr></td>
+      <td>東甌</td>
+      <td><notr>/</notr></td>
+      <td><notr>/</notr></td>
    </tr>
    <tr>
+      <td><notr>轸宿</notr></td>
+      <td><notr>Zhěnxiù</notr></td>
       <td>軫宿</td>
-      <td>Zhěnxiù</td>
-      <td> Chariot Mansion</td>
       <td></td>
       <td></td>
    </tr>
    <tr>
+      <td><notr>轸宿</notr></td>
+      <td><notr>Zhěnxiù</notr></td>
       <td>軫宿</td>
-      <td>Zhěnxiù</td>
-      <td>Chariot</td>
-      <td>4</td>
-      <td>5</td>
+      <td><notr>4</notr></td>
+      <td><notr>5</notr></td>
    </tr>
    <tr>
-      <td>長沙（附軫宿）</td>
-      <td>Chángshā</td>
-      <td>Changsha(Vassal of Chariot)</td>
-      <td>1</td>
-      <td>0</td>
+      <td><notr>长沙(附轸宿)</notr></td>
+      <td><notr>Chángshā</notr></td>
+      <td>長沙 (附軫宿)</td>
+      <td><notr>1</notr></td>
+      <td><notr>0</notr></td>
    </tr>
    <tr>
-      <td>左轄（附軫宿）</td>
-      <td>Zuǒxiá</td>
-      <td>Left Linchpin(Vassal of Chariot)</td>
-      <td>1</td>
-      <td>0</td>
+      <td><notr>左辖(附轸宿)</notr></td>
+      <td><notr>Zuǒxiá</notr></td>
+      <td>左轄 (附軫宿)</td>
+      <td><notr>1</notr></td>
+      <td><notr>0</notr></td>
    </tr>
    <tr>
-      <td>右轄（附軫宿）</td>
-      <td>Yoùxiá</td>
-      <td>Right Linchpin(Vassal of Chariot)</td>
-      <td>1</td>
-      <td>0</td>
+      <td><notr>右辖(附轸宿)</notr></td>
+      <td><notr>Yoùxiá</notr></td>
+      <td>右轄 (附軫宿)</td>
+      <td><notr>1</notr></td>
+      <td><notr>0</notr></td>
    </tr>
    <tr>
-      <td>青丘</td>
-      <td>Qīngqiū</td>
-      <td>Green Hill</td>
-      <td>7</td>
-      <td>3</td>
+      <td><notr>青丘</notr></td>
+      <td><notr>Qīngqiū</notr></td>
+      <td>青邱</td>
+      <td><notr>7</notr></td>
+      <td><notr>3</notr></td>
    </tr>
    <tr>
-      <td>軍門*</td>
-      <td>Jūnmén</td>
-      <td>Military Gate</td>
-      <td>/</td>
-      <td>/</td>
+      <td><notr>军门*</notr></td>
+      <td><notr>Jūnmén</notr></td>
+      <td>軍門</td>
+      <td><notr>/</notr></td>
+      <td><notr>/</notr></td>
    </tr>
    <tr>
-      <td>土司空*</td>
-      <td>Tǔsīkōng</td>
-      <td>Master of Constructions</td>
-      <td>/</td>
-      <td>/</td>
+      <td><notr>土司空*</notr></td>
+      <td><notr>Tǔsīkōng</notr></td>
+      <td>土司空</td>
+      <td><notr>/</notr></td>
+      <td><notr>/</notr></td>
    </tr>
    <tr>
-      <td>器府*</td>
-      <td>Qìfǔ</td>
-      <td>House for Musical Instruments</td>
-      <td>/</td>
-      <td>/</td>
+      <td><notr>器府*</notr></td>
+      <td><notr>Qìfǔ</notr></td>
+      <td>器府</td>
+      <td><notr>/</notr></td>
+      <td><notr>/</notr></td>
    </tr>
    <tr>
-      <td>近南極星區</td>
-      <td>JìnnánJí Xīngqū</td>
-      <td>The Southern Asterisms</td>
+      <td><notr>近南极星区</notr></td>
+      <td><notr>JìnnánJí Xīngqū</notr></td>
+      <td>南天</td>
       <td></td>
       <td></td>
    </tr>
    <tr>
+      <td><notr>海山</notr></td>
+      <td><notr>Hǎishān</notr></td>
       <td>海山</td>
-      <td>Hǎishān</td>
-      <td>Sea and Mountain</td>
-      <td>4</td>
-      <td>2</td>
+      <td><notr>4</notr></td>
+      <td><notr>2</notr></td>
    </tr>
    <tr>
+      <td><notr>十字架</notr></td>
+      <td><notr>Shízìjià</notr></td>
       <td>十字架</td>
-      <td>Shízìjià</td>
-      <td>Cross</td>
-      <td>4</td>
-      <td>0</td>
+      <td><notr>4</notr></td>
+      <td><notr>0</notr></td>
    </tr>
    <tr>
+      <td><notr>马尾</notr></td>
+      <td><notr>Mǎwěi</notr></td>
       <td>馬尾</td>
-      <td>Mǎwěi</td>
-      <td>Horse's Tail</td>
-      <td>3</td>
-      <td>0</td>
+      <td><notr>3</notr></td>
+      <td><notr>0</notr></td>
    </tr>
    <tr>
+      <td><notr>马腹</notr></td>
+      <td><notr>Mǎfù</notr></td>
       <td>馬腹</td>
-      <td>Mǎfù</td>
-      <td>Horse's Abdomen</td>
-      <td>3</td>
-      <td>0</td>
+      <td><notr>3</notr></td>
+      <td><notr>0</notr></td>
    </tr>
    <tr>
+      <td><notr>蜜蜂</notr></td>
+      <td><notr>Mìfēng</notr></td>
       <td>蜜蜂</td>
-      <td>Mìfēng</td>
-      <td>Bee</td>
-      <td>4</td>
-      <td>0</td>
+      <td><notr>4</notr></td>
+      <td><notr>0</notr></td>
    </tr>
    <tr>
+      <td><notr>三角形</notr></td>
+      <td><notr>Sānjiǎoxíng</notr></td>
       <td>三角形</td>
-      <td>Sānjiǎoxíng</td>
-      <td>Triangle</td>
-      <td>3</td>
-      <td>4</td>
+      <td><notr>3</notr></td>
+      <td><notr>4</notr></td>
    </tr>
    <tr>
+      <td><notr>异雀</notr></td>
+      <td><notr>Yìquè</notr></td>
       <td>異雀</td>
-      <td>Yìquè</td>
-      <td>Exotic Bird</td>
-      <td>9</td>
-      <td>0</td>
+      <td><notr>9</notr></td>
+      <td><notr>0</notr></td>
    </tr>
    <tr>
+      <td><notr>孔雀</notr></td>
+      <td><notr>Kǒngquè</notr></td>
       <td>孔雀</td>
-      <td>Kǒngquè</td>
-      <td>Peafowl</td>
-      <td>11</td>
-      <td>4</td>
+      <td><notr>11</notr></td>
+      <td><notr>4</notr></td>
    </tr>
    <tr>
+      <td><notr>波斯</notr></td>
+      <td><notr>Bōsī</notr></td>
       <td>波斯</td>
-      <td>Bōsī</td>
-      <td>Persia</td>
-      <td>11</td>
-      <td>0</td>
+      <td><notr>11</notr></td>
+      <td><notr>0</notr></td>
    </tr>
    <tr>
+      <td><notr>蛇尾</notr></td>
+      <td><notr>Shéwěi</notr></td>
       <td>蛇尾</td>
-      <td>Shéwěi</td>
-      <td>Snake's Tail</td>
-      <td>4</td>
-      <td>0</td>
+      <td><notr>4</notr></td>
+      <td><notr>0</notr></td>
    </tr>
    <tr>
+      <td><notr>蛇腹</notr></td>
+      <td><notr>Shéfù</notr></td>
       <td>蛇腹</td>
-      <td>Shéfù</td>
-      <td>Snake's Abdomen</td>
-      <td>4</td>
-      <td>0</td>
+      <td><notr>4</notr></td>
+      <td><notr>0</notr></td>
    </tr>
    <tr>
+      <td><notr>蛇首</notr></td>
+      <td><notr>Shéshǒu</notr></td>
       <td>蛇首</td>
-      <td>Shéshǒu</td>
-      <td>Snake's Head</td>
-      <td>2</td>
-      <td>0</td>
+      <td><notr>2</notr></td>
+      <td><notr>0</notr></td>
    </tr>
    <tr>
+      <td><notr>鸟喙</notr></td>
+      <td><notr>Niǎohuì</notr></td>
       <td>鳥喙</td>
-      <td>Niǎohuì</td>
-      <td>Bird's Beak</td>
-      <td>7</td>
-      <td>1</td>
+      <td><notr>7</notr></td>
+      <td><notr>1</notr></td>
    </tr>
    <tr>
-      <td>鶴 </td>
-      <td>Hè</td>
-      <td>Crane</td>
-      <td>12</td>
-      <td>2</td>
+      <td><notr>鹤 </notr></td>
+      <td><notr>Hè</notr></td>
+      <td>鶴</td>
+      <td><notr>12</notr></td>
+      <td><notr>2</notr></td>
    </tr>
    <tr>
+      <td><notr>火鸟</notr></td>
+      <td><notr>Huǒniǎo</notr></td>
       <td>火鳥</td>
-      <td>Huǒniǎo</td>
-      <td>Firebird</td>
-      <td>10</td>
-      <td>1</td>
+      <td><notr>10</notr></td>
+      <td><notr>1</notr></td>
    </tr>
    <tr>
+      <td><notr>水委</notr></td>
+      <td><notr>Shuǐweǐ</notr></td>
       <td>水委</td>
-      <td>Shuǐweǐ</td>
-      <td>Crooked Running Water</td>
-      <td>3</td>
-      <td>0</td>
+      <td><notr>3</notr></td>
+      <td><notr>0</notr></td>
    </tr>
    <tr>
+      <td><notr>附白</notr></td>
+      <td><notr>Fùbái</notr></td>
       <td>附白</td>
-      <td>Fùbái</td>
-      <td>White Patched Nearby</td>
-      <td>2</td>
-      <td>0</td>
+      <td><notr>2</notr></td>
+      <td><notr>0</notr></td>
    </tr>
    <tr>
+      <td><notr>夹白</notr></td>
+      <td><notr>Jiābái</notr></td>
       <td>夾白</td>
-      <td>Jiābái</td>
-      <td>White Patches Attached</td>
-      <td>2</td>
-      <td>0</td>
+      <td><notr>2</notr></td>
+      <td><notr>0</notr></td>
    </tr>
    <tr>
+      <td><notr>金鱼</notr></td>
+      <td><notr>Jīnyú</notr></td>
       <td>金魚</td>
-      <td>Jīnyú</td>
-      <td>Goldfish</td>
-      <td>5</td>
-      <td>1</td>
+      <td><notr>5</notr></td>
+      <td><notr>1</notr></td>
    </tr>
    <tr>
+      <td><notr>海石</notr></td>
+      <td><notr>Hǎishí</notr></td>
       <td>海石</td>
-      <td>Hǎishí</td>
-      <td>Sea Rock</td>
-      <td>5</td>
-      <td>3</td>
+      <td><notr>5</notr></td>
+      <td><notr>3</notr></td>
    </tr>
    <tr>
+      <td><notr>飞鱼</notr></td>
+      <td><notr>Fēiyú</notr></td>
       <td>飛魚</td>
-      <td>Fēiyú</td>
-      <td>Flying Fish</td>
-      <td>6</td>
-      <td>0</td>
+      <td><notr>6</notr></td>
+      <td><notr>0</notr></td>
    </tr>
    <tr>
+      <td><notr>南船</notr></td>
+      <td><notr>Nánchuán</notr></td>
       <td>南船</td>
-      <td>Nánchuán</td>
-      <td>Southern Boat</td>
-      <td>5</td>
-      <td>1</td>
+      <td><notr>5</notr></td>
+      <td><notr>1</notr></td>
    </tr>
    <tr>
+      <td><notr>小斗</notr></td>
+      <td><notr>Xiǎodǒu</notr></td>
       <td>小斗</td>
-      <td>Xiǎodǒu</td>
-      <td>Little Dipper</td>
-      <td>9</td>
-      <td>1</td>
+      <td><notr>9</notr></td>
+      <td><notr>1</notr></td>
    </tr>
 </table>
-<p>注1.帶*的星官<i>儀象考成</i>裏無記載。<p>
-<p>注2.附官不是獨立星官，是所附星官的一部分。<p>
+<p>注1：帶「*」的星官，於1752年正式刪除。</p>
+<p>注2：附星官不是單獨的星官，而是父星官的附屬。</p>
 
 
-<h3>深空天體</h3>
+<h2>深空天體</h2>
 
 
-<p>中國古代發現的有些星實際是深空天體。</p>
-<p>包括以下:</p>
+<p>中國古代也發現了一些深空天體，也被列入星官。</p>
+<p>包括以下：</p>
 
 <table class="nomenclature">
    <tr>
-      <td>西名</td>
-      <td>中文名</td>
+      <td>General name</td>
+      <td>中國名</td>
       <td>拼音</td>
-      <td>英譯</td>
-      <td>昵稱</td>
+      <td>翻譯</td>
+      <td>Nick name</td>
    </tr>
    <tr>
-      <td>NGC 6231</td>
-      <td>神宮</td>
-      <td>shéngōng</td>
+      <td><notr>NGC 6231</notr></td>
+      <td><notr>神宫</notr></td>
+      <td><notr>shéngōng</notr></td>
       <td>God's Palace</td>
-      <td>北寶盒星團</td>
+      <td>北天珠寶盒星團</td>
    </tr>
    <tr>
-      <td>NGC 6475/M 7</td>
+      <td><notr>NGC 6475/M 7</notr></td>
+      <td><notr>鱼</notr></td>
+      <td><notr>Yú</notr></td>
       <td>魚</td>
-      <td>Yú</td>
-      <td>Fish</td>
-      <td>托勒密星團</td>
+      <td>魚</td>
    </tr>
    <tr>
-      <td>NGC 2632/M 44</td>
-      <td>積屍</td>
-      <td>JīShī</td>
-      <td>Cumulative Corpses</td>
-      <td>蜂巢星團，鬼星團</td>
+      <td><notr>NGC 2632/M 44</notr></td>
+      <td><notr>积尸</notr></td>
+      <td><notr>JīShī</notr></td>
+      <td>積尸</td>
+      <td>蜂巢星團</td>
    </tr>
    <tr>
-      <td>NGC 5139</td>
+      <td><notr>NGC 5139</notr></td>
+      <td><notr>库楼增一</notr></td>
+      <td><notr>Kùlóu Zēng I</notr></td>
       <td>庫樓增一</td>
-      <td>Kùlóu Zēng I</td>
-      <td>Arsenal Added I</td>
-      <td>奧米茄星團，半人馬座Omega</td>
+      <td>庫樓增一</td>
    </tr>
    <tr>
-      <td>NGC 224/M 31</td>
+      <td><notr>NGC 224/M 31</notr></td>
+      <td><notr>奎宿增廿一</notr></td>
+      <td><notr>Kuíxiù Zēng XXI</notr></td>
       <td>奎宿增廿一</td>
-      <td>Kuíxiù Zēng XXI</td>
-      <td>Legs Mansion XXI</td>
-      <td>仙女座大星雲</td>
+      <td>仙女座大星系</td>
    </tr>
    <tr>
-      <td>NGC 3372 </td>
+      <td><notr>NGC 3372 </notr></td>
+      <td><notr>海山二</notr></td>
+      <td><notr>Hǎishān II</notr></td>
       <td>海山二</td>
-      <td>Hǎishān II</td>
-      <td>Sea and Mountain II</td>
-      <td>船底座η，1843年發生極為明亮的假超新星爆發，如今海山二已十分暗淡且沒有依巴穀編號，以該位置包圍它的船底座星雲表示。</td>
+      <td>侏儒星雲</td>
    </tr>
 </table>
 
 
-<h3>附注和參考資料</h3>
+<h2>注釋</h2>
 
-<p>此星空文化主要整理于伊世同先生的<i>中西對照恒星圖表（星表分冊）</i>，依據的是清代的<i>儀象考成續編</i>。特別感謝劉春濱先生對<i>中西對照恒星圖表（星表分冊）</i>的整理，他製作的星表<i>Stellarium 中國星官體系下中文星名擴展包</i>是非常重要的參考資料。 </p>
-<p>依據潘鼐先生的<i>中國恒星觀測史</i>添加了<i>中西對照恒星圖表（星表分冊）</i>中無對應或者對應有待商榷的恒星。</p>
-<p>根據以上資料，有七顆星有中國星名但沒有依巴穀編號，無法編入Stellarium星表，它們是海山二(η Car)，五車增十八(12 Aur)，進賢增六(39 Vir)，大角增二(CN Boo)，昴宿增十(24 Tau)，心宿增七(18 Oph)，南河增十一(GC 10303)。</p>
-<p>這裏星官的翻譯，主要採用了香港太空館<i>中國星區、星官及星名英譯表</i>。僅改了一些重複的，以及和其它星空文化的翻譯有衝突的譯名，以適應Stellarium的環境。由於歷史久遠，一些名字背後的含義學術界也沒有統一。這個翻譯只是反應了一種意思。為了使這些星官名字在非東亞地區具有可讀性，還提供了拼音音譯。</p>
+<p>本星空文化是根據《中西對照恆星圖表1950.0（星表分冊）》和《儀象考成》中的資料整理而成。</p>
+<p>感謝劉春濱整理《中西對照恆星圖表1950.0（星表分冊）》。他為Stellarium製作了《Stellarium中國星官體系下中文星名擴展包》，這是一個非常重要的參考資料。</p>
+<p>根據《中國恆星觀測史》增補部分恆星。</p>
+<p>對於星座的翻譯，我們使用香港太空館的《中國星區、星官及星名英譯表》。只有一小部分翻譯發生了變化，例如，當兩個不同星官的翻譯相同時。</p>
+<p>七顆有中國星名的星沒有相應的HIP編號，因此無法在Stellarium中顯示。分別是海山二(船底座η)、五車增十八(御夫座12)、進賢增六(室女座39)、大角增二(牧夫座CN)、昴宿增十(金牛座24)、心宿增七(蛇夫座18)、南河增十一(GC
+10303)。 <p>
+<p> <p>
 
-
-<h3>外部鏈接</h3>
+<h2>External links</h2>
 
 <ul>
-<li><a href="http://www.lcsd.gov.hk/CE/Museum/Space/zh_TW/web/spm/starshine/resources/constemyth/glossary.html">中國星區、星官及星名英譯表</a></li>
-<li><a href="http://aeea.nmns.edu.tw/aeea/contents_list/star_sign.html">AEEA 天文教育資訊網-中國古代的星象系統 </a></li>
-<li><a href="http://en.wikipedia.org/wiki/Chinese_constellations">Chinese constellations (Wikipedia)</a></li>
-<li><a href="https://en.wikipedia.org/wiki/Traditional_Chinese_star_names">Traditional Chinese star names (Wikipedia)</a></li>
-<li><a href="http://www.chinapage.com/astronomy/astronomy.html">http://www.chinapage.com/astronomy/astronomy.html</a></li>
+<li><a
+href="https://www.lcsd.gov.hk/CE/Museum/Space/zh_TW/web/spm/resources/teachers-corner/constellations-and-myths/glossary-of-chinese-star-regions-asterisms-and-star-names.html">中國星區、星官及星名英譯表</a></li>
+<li><a
+href="http://aeea.nmns.edu.tw/aeea/contents_list/star_sign.html">AEEA天文教育資訊網——中國古代的星象系統</a></li>
+<li><a href="https://zh.wikipedia.org/wiki/%E6%98%9F%E5%AE%98">星官（維基百科）</a></li>
+<li><a
+href="https://zh.wikipedia.org/wiki/%E4%B8%AD%E8%A5%BF%E6%98%9F%E5%90%8D%E5%B0%8D%E7%85%A7%E8%A1%A8">中西星名對照表（維基百科）</a></li>
+<li><a
+href="http://www.chinapage.com/astronomy/astronomy.html">http://www.chinapage.com/astronomy/astronomy.html</a></li>
+
 </ul>
 
-<h3>作者</h3>
+<h2>作者</h2>
 
-<p>中國傳統星空文化原由來自 Digitalis Education Solutions, Inc. 的<i>Karrie Berglund</i>  提供, 基於<!-- a href="http://www.lcsd.gov.hk/CE/Museum/Space/en_US/web/spm/starshine/interactive-star-maps.html" -->香港太空館星圖 <!--/a--> (不再在網上提供)。</p>
-<p>孫殳瑋 <a href="mailto:sunshuwei.hi@foxmail.com">sunshuwei.hi@foxmail.com</a> 根據<i>中西對照恒星圖表1950.0</i>和<i>中國恒星觀測史</i>補充了200多個星官和3000多個恒星.提供了完整的中國星空文化，並用並且完善了這份說明。</p>
-
+<p><!-- a href="http://www.lcsd.gov.hk/CE/Museum/Space/en_US/web/spm/starshine/interactive-star-maps.html" -->
+<!--/a-->
+本星空文化最初是由 Digitalis Education Solutions, Inc. 的 <i>Karrie Berglund</i>
+根據香港太空館星圖（不再在線提供）貢獻的。</p>
+<p>孫殳瑋<a
+href="mailto:sunshuwei.hi@foxmail.com">sunshuwei.hi@foxmail.com</a>補充星官200多個，星3000多顆，主要根據伊世同的《中西對照恆星圖表1950.0》，並添加說明。</p>
 

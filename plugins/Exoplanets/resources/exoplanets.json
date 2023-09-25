@@ -4342,13 +4342,6 @@
 					"discovered": 2023,
 					"detectionMethod": "Primary Transit",
 					"planetName": "b"
-				},
-				{
-					"period": 34.369,
-					"eccentricity": 0.14,
-					"discovered": 2023,
-					"detectionMethod": "Radial Velocity",
-					"planetName": "d"
 				}
 			],
 			"distance": 22.075,
@@ -5428,6 +5421,13 @@
 					"discovered": 2023,
 					"detectionMethod": "Radial Velocity",
 					"planetName": "c"
+				},
+				{
+					"period": 34.369,
+					"eccentricity": 0.14,
+					"discovered": 2023,
+					"detectionMethod": "Radial Velocity",
+					"planetName": "d"
 				}
 			],
 			"distance": 9.41,
@@ -87232,27 +87232,6 @@
 			"RA": "5h38m38.8s",
 			"DE": "-2d28m1.7s"
 		},
-		"SAND 364":
-		{
-			"exoplanets":
-			[
-				{
-					"period": 121.71,
-					"eccentricity": 0.35,
-					"discovered": 2014,
-					"detectionMethod": "Radial Velocity",
-					"planetName": "b"
-				}
-			],
-			"stype": "K3III",
-			"smass": 1.35,
-			"smetal": -0.02,
-			"Vmag": 9.8,
-			"sradius": 21.8,
-			"effectiveTemp": 4284.0,
-			"RA": "8h49m57s",
-			"DE": "11d41m33s"
-		},
 		"SCR 1845":
 		{
 			"exoplanets":
@@ -88951,6 +88930,31 @@
 			"effectiveTemp": 4884.0,
 			"RA": "14h27m42s",
 			"DE": "41d57m12s"
+		},
+		"TOI-1420":
+		{
+			"exoplanets":
+			[
+				{
+					"mass": 0.079,
+					"radius": 1.0608,
+					"period": 6.9561063,
+					"semiAxis": 0.071,
+					"eccentricity": 0.17,
+					"inclination": 88.58,
+					"discovered": 2023,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 201.84,
+			"smass": 0.987,
+			"smetal": 0.29,
+			"Vmag": 12.0,
+			"sradius": 0.923,
+			"effectiveTemp": 5493.0,
+			"RA": "21h31m46s",
+			"DE": "66d20m56s"
 		},
 		"TOI-1422":
 		{
@@ -91704,6 +91708,23 @@
 			"effectiveTemp": 5579.0,
 			"RA": "7h9m57s",
 			"DE": "-37d13m51s"
+		},
+		"TOI-262":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.1838,
+					"period": 11.1452,
+					"discovered": 0,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"stype": "KOV",
+			"Vmag": 9.0,
+			"RA": "2h10m8s",
+			"DE": "-31d4m12s"
 		},
 		"TOI-263":
 		{
@@ -94495,6 +94516,31 @@
 			"effectiveTemp": 5746.0,
 			"RA": "1h38m58s",
 			"DE": "-7d16m52s"
+		},
+		"TOI-858 B":
+		{
+			"exoplanets":
+			[
+				{
+					"mass": 1.1,
+					"radius": 1.255,
+					"period": 3.2797178,
+					"semiAxis": 0.04445,
+					"eccentricity": 0.15,
+					"inclination": 86.8,
+					"discovered": 2023,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 251.7,
+			"smass": 1.08,
+			"smetal": 0.15,
+			"Vmag": 11.2,
+			"sradius": 1.3,
+			"effectiveTemp": 5842.0,
+			"RA": "4h0m48s",
+			"DE": "-54d35m34s"
 		},
 		"TOI-892":
 		{

@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2023-08-29 10:57+0700\n"
+"POT-Creation-Date: 2023-09-18 21:31+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: राजಐயர், 2023\n"
 "Language-Team: Hindi (https://app.transifex.com/stellarium/teams/80998/hi/)\n"
@@ -34,14 +34,15 @@ msgstr ""
 #: src/gui/AstroCalcDialog.cpp:905 src/gui/AstroCalcDialog.cpp:2307
 #: src/gui/AstroCalcDialog.cpp:2879 src/gui/AstroCalcDialog.cpp:2911
 #: src/gui/AstroCalcDialog.cpp:3295 src/gui/AstroCalcDialog.cpp:8210
-#: src/gui/ObsListDialog.cpp:260 src/ui_configurationDialog.h:1863
+#: src/gui/ObsListDialog.cpp:253 src/ui_configurationDialog.h:1863
 #: plugins/Satellites/src/Satellite.cpp:339
 #: plugins/TelescopeControl/src/TelescopeClient.cpp:136
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:515
-#: plugins/Supernovae/src/Supernova.cpp:143 plugins/Novae/src/Nova.cpp:150
+#: plugins/Supernovae/src/Supernova.cpp:144 plugins/Novae/src/Nova.cpp:150
 #: plugins/Quasars/src/Quasar.cpp:125 plugins/Pulsars/src/Pulsar.cpp:189
-#: plugins/Pulsars/src/Pulsar.cpp:191 plugins/Exoplanets/src/Exoplanet.cpp:319
+#: plugins/Pulsars/src/Pulsar.cpp:191 plugins/Exoplanets/src/Exoplanet.cpp:320
 #: plugins/MeteorShowers/src/MeteorShower.cpp:525
+#: plugins/MissingStars/src/MissingStar.cpp:130
 msgid "Type"
 msgstr "प्रकार"
 
@@ -70,7 +71,7 @@ msgstr "नक्षत्र"
 #: src/core/modules/NebulaMgr.cpp:358 src/core/modules/SolarSystem.cpp:307
 #: src/core/modules/MilkyWay.cpp:107 src/core/modules/ZodiacalLight.cpp:112
 #: src/core/modules/ToastMgr.cpp:62 src/core/modules/HipsMgr.cpp:156
-#: src/core/StelApp.cpp:654 src/core/StelCore.cpp:296
+#: src/core/StelApp.cpp:658 src/core/StelCore.cpp:296
 #: src/core/StelSkyLayerMgr.cpp:83 src/core/StelSkyLayerMgr.cpp:84
 #: src/StelMainView.cpp:939
 msgid "Display Options"
@@ -825,7 +826,8 @@ msgstr "चक्रीय परिवर्तन प्रकाशीय प
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:473
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:215
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:187
-#: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:182
+#: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:184
+#: plugins/MissingStars/src/gui/MissingStarsDialog.cpp:87
 msgid "Author"
 msgstr "रचयिता"
 
@@ -838,8 +840,8 @@ msgctxt "distance"
 msgid "m"
 msgstr "मी॰"
 
-#: src/core/modules/LandscapeMgr.cpp:1383 src/gui/ObsListDialog.cpp:266
-#: src/ui_locationDialogGui.h:486 src/ui_obsListDialog.h:414
+#: src/core/modules/LandscapeMgr.cpp:1383 src/gui/ObsListDialog.cpp:259
+#: src/ui_locationDialogGui.h:486 src/ui_obsListDialog.h:427
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:144
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:482
 msgid "Location"
@@ -927,8 +929,8 @@ msgstr "व्यास"
 #. TRANSLATORS: Unit of measure for distance - kilometers
 #: src/core/modules/NomenclatureItem.cpp:244 src/core/modules/Planet.cpp:672
 #: src/core/modules/Planet.cpp:697 src/core/modules/Planet.cpp:805
-#: src/core/modules/Planet.cpp:1526 src/core/modules/Comet.cpp:189
-#: src/core/modules/Comet.cpp:199 src/gui/StelGuiItems.cpp:890
+#: src/core/modules/Planet.cpp:1526 src/core/modules/Comet.cpp:190
+#: src/core/modules/Comet.cpp:200 src/gui/StelGuiItems.cpp:890
 #: src/gui/AstroCalcDialog.cpp:3112 src/gui/AstroCalcDialog.cpp:3625
 #: src/gui/AstroCalcDialog.cpp:9032 plugins/Satellites/src/Satellites.cpp:2914
 #: plugins/Satellites/src/Satellite.cpp:356
@@ -1665,7 +1667,7 @@ msgstr "दीर्घतरंगीय तारासंगम"
 msgid "interacting galaxy"
 msgstr "अन्तर्प्रभावी तारासंगम"
 
-#: src/core/modules/Nebula.cpp:70 plugins/Quasars/src/Quasar.hpp:72
+#: src/core/modules/Nebula.cpp:70 plugins/Quasars/src/Quasar.hpp:71
 msgid "quasar"
 msgstr "तारामय दीर्घतरंगज"
 
@@ -1763,6 +1765,7 @@ msgstr "प्रारम्भिक ग्रहमय अन्तरिक�
 
 #: src/core/modules/Nebula.cpp:94 src/core/modules/Planet.cpp:128
 #: src/core/modules/StarWrapper.cpp:90
+#: plugins/MissingStars/src/MissingStar.hpp:71
 msgid "star"
 msgstr "तारा"
 
@@ -1801,7 +1804,7 @@ msgstr "अज्ञात चरित्र का वस्तु"
 #: src/core/modules/Nebula.cpp:175 src/core/StelObject.cpp:348
 #: src/gui/AstroCalcChart.cpp:95 src/gui/AstroCalcChart.cpp:105
 #: src/gui/AstroCalcChart.cpp:434 src/gui/AstroCalcChart.cpp:460
-#: src/gui/ObsListDialog.cpp:263 plugins/Supernovae/src/Supernova.cpp:127
+#: src/gui/ObsListDialog.cpp:256 plugins/Supernovae/src/Supernova.cpp:128
 msgid "Magnitude"
 msgstr "मात्रा"
 
@@ -1841,6 +1844,7 @@ msgstr "अतिरिक्त सूचीपत्र संख्या : "
 #: src/core/modules/Nebula.cpp:260 src/core/modules/Planet.cpp:815
 #: src/core/modules/MinorPlanet.cpp:186 src/core/modules/StarWrapper.cpp:54
 #: src/core/modules/StarWrapper.cpp:306 plugins/Quasars/src/Quasar.cpp:134
+#: plugins/MissingStars/src/MissingStar.cpp:143
 msgid "Color Index (B-V)"
 msgstr "वर्ण निर्देशिका ( नील दृश्य )"
 
@@ -1885,8 +1889,9 @@ msgstr "दिशा अस्र"
 #. TRANSLATORS: Unit of measure for distance - Light Years
 #: src/core/modules/Nebula.cpp:345 src/core/modules/Nebula.cpp:358
 #: src/core/modules/StarWrapper.cpp:336
-#: plugins/Supernovae/src/Supernova.cpp:158 plugins/Novae/src/Nova.cpp:164
-#: plugins/Pulsars/src/Pulsar.cpp:268 plugins/Exoplanets/src/Exoplanet.cpp:333
+#: plugins/Supernovae/src/Supernova.cpp:159 plugins/Novae/src/Nova.cpp:164
+#: plugins/Pulsars/src/Pulsar.cpp:268 plugins/Exoplanets/src/Exoplanet.cpp:334
+#: plugins/MissingStars/src/MissingStar.cpp:153
 msgctxt "distance"
 msgid "ly"
 msgstr "प्र॰व॰"
@@ -1897,8 +1902,10 @@ msgstr "प्र॰व॰"
 #: src/core/modules/StarWrapper.cpp:343 src/gui/AstroCalcDialog.cpp:940
 #: src/gui/AstroCalcChart.cpp:92 src/gui/AstroCalcChart.cpp:102
 #: src/gui/AstroCalcChart.cpp:427 src/gui/AstroCalcChart.cpp:453
-#: src/ui_configurationDialog.h:1848 plugins/Supernovae/src/Supernova.cpp:159
-#: plugins/Novae/src/Nova.cpp:165 plugins/Exoplanets/src/Exoplanet.cpp:334
+#: src/ui_configurationDialog.h:1848 plugins/Supernovae/src/Supernova.cpp:160
+#: plugins/Novae/src/Nova.cpp:165 plugins/Exoplanets/src/Exoplanet.cpp:335
+#: plugins/MissingStars/src/MissingStar.cpp:158
+#: plugins/MissingStars/src/MissingStar.cpp:160
 msgid "Distance"
 msgstr "दूरी"
 
@@ -1925,12 +1932,14 @@ msgid "Redshift"
 msgstr "रक्तवर्णीकरण"
 
 #: src/core/modules/Nebula.cpp:417 src/core/modules/StarWrapper.cpp:370
+#: plugins/MissingStars/src/MissingStar.cpp:180
 msgid "Parallax"
 msgstr "लम्बन"
 
 #. TRANSLATORS: Unit of measure for annual parallax - milliarcseconds
 #: src/core/modules/Nebula.cpp:417 src/core/modules/StarWrapper.cpp:375
 #: plugins/Pulsars/src/Pulsar.cpp:257
+#: plugins/MissingStars/src/MissingStar.cpp:185
 msgctxt "parallax"
 msgid "mas"
 msgstr "श॰तम चा॰वि॰"
@@ -2318,8 +2327,9 @@ msgstr "सेडनामय ग्रहखण्ड"
 msgid "interstellar object"
 msgstr "तारान्तर वस्तु"
 
-#: src/core/modules/Planet.cpp:546 src/core/modules/Comet.cpp:180
+#: src/core/modules/Planet.cpp:546 src/core/modules/Comet.cpp:181
 #: src/core/modules/StarWrapper.cpp:300 plugins/Quasars/src/Quasar.cpp:131
+#: plugins/MissingStars/src/MissingStar.cpp:138
 msgid "Absolute Magnitude"
 msgstr "निरपेक्ष मात्रा"
 
@@ -2355,6 +2365,7 @@ msgstr "घण्टेवार गति"
 #: src/core/modules/Planet.cpp:658 src/core/modules/Planet.cpp:1385
 #: src/core/modules/Planet.cpp:1394 src/core/modules/StarWrapper.cpp:358
 #: plugins/Pulsars/src/Pulsar.cpp:204
+#: plugins/MissingStars/src/MissingStar.cpp:172
 msgctxt "into the direction of"
 msgid "towards"
 msgstr "की ओर"
@@ -2366,7 +2377,7 @@ msgstr "की ओर"
 #: src/gui/AstroCalcDialog.cpp:9057 src/gui/AstroCalcChart.cpp:427
 #: src/gui/AstroCalcChart.cpp:431 src/gui/AstroCalcChart.cpp:446
 #: src/gui/AstroCalcChart.cpp:453 src/gui/AstroCalcChart.cpp:457
-#: plugins/Exoplanets/src/Exoplanet.cpp:363
+#: plugins/Exoplanets/src/Exoplanet.cpp:364
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:178
 msgctxt "distance, astronomical unit"
 msgid "AU"
@@ -2376,7 +2387,7 @@ msgstr "ज्यो॰मा॰"
 #. TRANSLATORS: Unit of measure for distance - milliones kilometers
 #. TRANSLATORS: Unit of measure for distance - millions kilometers
 #: src/core/modules/Planet.cpp:686 src/core/modules/Planet.cpp:704
-#: src/core/modules/Comet.cpp:191 src/gui/AstroCalcDialog.cpp:9034
+#: src/core/modules/Comet.cpp:192 src/gui/AstroCalcDialog.cpp:9034
 msgctxt "distance"
 msgid "M km"
 msgstr "प्र॰स॰मे॰"
@@ -2633,7 +2644,7 @@ msgid "Albedo"
 msgstr "प्रतिबिम्बन"
 
 #: src/core/modules/Planet.cpp:1553 src/core/modules/MinorPlanet.cpp:211
-#: src/core/modules/Comet.cpp:240
+#: src/core/modules/Comet.cpp:241
 msgid "Discovered"
 msgstr "खोजा गया।"
 
@@ -2647,19 +2658,19 @@ msgstr "थोलेन वर्णक्रम प्रकार"
 msgid "SMASSII spectral type"
 msgstr "समासस२ वर्णक्रम प्रकार"
 
-#: src/core/modules/Comet.cpp:199
+#: src/core/modules/Comet.cpp:200
 msgid "Core diameter"
 msgstr "अन्तःगोल व्यास"
 
-#: src/core/modules/Comet.cpp:204
+#: src/core/modules/Comet.cpp:205
 msgid "Coma diameter (estimate)"
 msgstr "धूम व्यास ( अनुमान )"
 
-#: src/core/modules/Comet.cpp:226
+#: src/core/modules/Comet.cpp:227
 msgid "Gas tail length (estimate)"
 msgstr "वायु पूँछ लम्बाई ( अनुमान )"
 
-#: src/core/modules/Comet.cpp:496 src/core/StelProjectorClasses.cpp:729
+#: src/core/modules/Comet.cpp:497 src/core/StelProjectorClasses.cpp:729
 msgid "Orthographic"
 msgstr "लम्बरेखाचित्रीय"
 
@@ -2754,27 +2765,32 @@ msgid "Photometric system"
 msgstr "प्रकाशमात्रा व्यवस्था"
 
 #: src/core/modules/StarWrapper.cpp:355 plugins/Pulsars/src/Pulsar.cpp:202
+#: plugins/MissingStars/src/MissingStar.cpp:170
 msgid "Proper motion"
 msgstr "निज गति"
 
 #: src/core/modules/StarWrapper.cpp:357 src/core/modules/StarWrapper.cpp:363
 #: plugins/Pulsars/src/Pulsar.cpp:203 plugins/Pulsars/src/Pulsar.cpp:205
+#: plugins/MissingStars/src/MissingStar.cpp:171
+#: plugins/MissingStars/src/MissingStar.cpp:173
 msgctxt "milliarc second per year"
 msgid "mas/yr"
 msgstr "श॰तम चा॰वि॰प्र॰व॰"
 
 #: src/core/modules/StarWrapper.cpp:360 plugins/Pulsars/src/Pulsar.cpp:205
+#: plugins/MissingStars/src/MissingStar.cpp:173
 msgid "Proper motions by axes"
 msgstr "निज गति अक्ष आधारित"
 
 #: src/core/modules/StarWrapper.cpp:379 plugins/Quasars/src/Quasar.cpp:142
-#: plugins/Exoplanets/src/Exoplanet.cpp:328
+#: plugins/Exoplanets/src/Exoplanet.cpp:329
+#: plugins/MissingStars/src/MissingStar.cpp:189
 msgid "Spectral Type"
 msgstr "वर्णक्रम प्रकार"
 
 #: src/core/modules/StarWrapper.cpp:382
 #: plugins/Satellites/src/ui_satellitesFilterDialog.h:300
-#: plugins/Exoplanets/src/Exoplanet.cpp:360
+#: plugins/Exoplanets/src/Exoplanet.cpp:361
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:177
 msgid "Period"
 msgstr "अवधि"
@@ -2956,143 +2972,143 @@ msgstr "दक्षिण अयनान्त अगले वर्ष"
 msgid "December solstice at previous year"
 msgstr "दक्षिण अयनान्त पिछले वर्ष"
 
-#: src/core/StelApp.cpp:459
+#: src/core/StelApp.cpp:463
 msgid "Initializing textures..."
 msgstr "बुनाईयों का आरम्भीकरण"
 
-#: src/core/StelApp.cpp:463
+#: src/core/StelApp.cpp:467
 msgid "Initializing network access..."
 msgstr "जाल प्रवेश अधिकार का आरम्भीकरण"
 
-#: src/core/StelApp.cpp:466
+#: src/core/StelApp.cpp:470
 msgid "Initializing network disk cache..."
 msgstr "जाल अल्पकालिक स्मरणकोश का आरम्भीकरण"
 
-#: src/core/StelApp.cpp:480
+#: src/core/StelApp.cpp:484
 msgid "Initializing network proxy..."
 msgstr "जाल मध्यस्थ का आरम्भीकरण"
 
-#: src/core/StelApp.cpp:495
+#: src/core/StelApp.cpp:499
 msgid "Initializing Object Database..."
 msgstr "वस्तु तथ्यकोश का आरम्भीकरण"
 
-#: src/core/StelApp.cpp:501
+#: src/core/StelApp.cpp:505
 msgid "Initializing HiPS survey..."
 msgstr "हईपस सर्वेक्षण का आरम्भीकरण"
 
-#: src/core/StelApp.cpp:507
+#: src/core/StelApp.cpp:511
 msgid "Initializing Solar System objects..."
 msgstr "सौरमण्डल वस्तुओं का आरम्भीकरण"
 
-#: src/core/StelApp.cpp:513
+#: src/core/StelApp.cpp:517
 msgid "Initializing planetary nomenclature..."
 msgstr "ग्रह नामकरण का आरम्भीकरण"
 
-#: src/core/StelApp.cpp:519
+#: src/core/StelApp.cpp:523
 msgid "Initializing stars..."
 msgstr "तारों का आरम्भीकरण"
 
-#: src/core/StelApp.cpp:524
+#: src/core/StelApp.cpp:528
 msgid "Initializing core..."
 msgstr "अन्तःगोल का आरम्भीकरण"
 
-#: src/core/StelApp.cpp:528
+#: src/core/StelApp.cpp:532
 msgid "Initializing deep-sky objects..."
 msgstr "गहनाकाश वस्तुओं का आरम्भीकरण"
 
-#: src/core/StelApp.cpp:534
+#: src/core/StelApp.cpp:538
 msgid "Initializing Milky Way..."
 msgstr "आकाशगंगा का आरम्भीकरण"
 
-#: src/core/StelApp.cpp:540
+#: src/core/StelApp.cpp:544
 msgid "Initializing zodiacal light..."
 msgstr "राशिचक्र प्रकाश का आरम्भीकरण"
 
-#: src/core/StelApp.cpp:546
+#: src/core/StelApp.cpp:550
 msgid "Initializing sky image layer..."
 msgstr "आकाश चित्र स्तर का आरम्भीकरण"
 
-#: src/core/StelApp.cpp:552
+#: src/core/StelApp.cpp:556
 msgid "Initializing TOAST surveys..."
 msgstr "टओएसट सर्वेक्षणों का आरम्भीकरण"
 
-#: src/core/StelApp.cpp:558
+#: src/core/StelApp.cpp:562
 msgid "Initializing audio..."
 msgstr "ध्वनि का आरम्भीकरण"
 
-#: src/core/StelApp.cpp:562
+#: src/core/StelApp.cpp:566
 msgid "Initializing video..."
 msgstr "चलनचित्र का आरम्भीकरण"
 
-#: src/core/StelApp.cpp:568
+#: src/core/StelApp.cpp:572
 msgid "Initializing constellations..."
 msgstr "तारामण्डलों का आरम्भीकरण"
 
-#: src/core/StelApp.cpp:574
+#: src/core/StelApp.cpp:578
 msgid "Initializing asterisms..."
 msgstr "नक्षत्रों का आरम्भीकरण"
 
-#: src/core/StelApp.cpp:580
+#: src/core/StelApp.cpp:584
 msgid "Initializing landscape..."
 msgstr "भूदृश्य का आरम्भीकरण"
 
-#: src/core/StelApp.cpp:585
+#: src/core/StelApp.cpp:589
 msgid "Initializing grid lines..."
 msgstr "जालरेखाओं का आरम्भीकरण"
 
-#: src/core/StelApp.cpp:590
+#: src/core/StelApp.cpp:594
 msgid "Initializing special markers..."
 msgstr "विशिष्ट चिह्नों का आरम्भीकरण"
 
-#: src/core/StelApp.cpp:596
+#: src/core/StelApp.cpp:600
 msgid "Initializing sporadic meteors..."
 msgstr "असामयिक उल्काओं का आरम्भीकरण"
 
-#: src/core/StelApp.cpp:602
+#: src/core/StelApp.cpp:606
 msgid "Initializing user labels..."
 msgstr "उपयोगकर्ता नामसूचकों का आरम्भीकरण"
 
-#: src/core/StelApp.cpp:607
+#: src/core/StelApp.cpp:611
 msgid "Initializing sky cultures..."
 msgstr "आकाश दर्शनों का आरम्भीकरण"
 
-#: src/core/StelApp.cpp:611
+#: src/core/StelApp.cpp:615
 msgid "Initializing user markers..."
 msgstr "उपयोगकर्ता चिह्नों का आरम्भीकरण"
 
-#: src/core/StelApp.cpp:617
+#: src/core/StelApp.cpp:621
 msgid "Initializing custom objects..."
 msgstr "वैयक्तीकृत वस्तुओं का आरम्भीकरण"
 
-#: src/core/StelApp.cpp:623
+#: src/core/StelApp.cpp:627
 msgid "Initializing highlights..."
 msgstr "विशेषताओं का आरम्भीकरण"
 
-#: src/core/StelApp.cpp:629
+#: src/core/StelApp.cpp:633
 msgid "Initializing specific time..."
 msgstr "विशिष्ट समय का आरम्भीकरण"
 
-#: src/core/StelApp.cpp:637
+#: src/core/StelApp.cpp:641
 msgid "Initializing scripting..."
 msgstr "क्रमादेश सुविधा का आरम्भीकरण"
 
-#: src/core/StelApp.cpp:642
+#: src/core/StelApp.cpp:646
 msgid "Initializing color scheme..."
 msgstr "वर्ण शैली का आरम्भीकरण"
 
-#: src/core/StelApp.cpp:654 src/ui_configurationDialog.h:1955
+#: src/core/StelApp.cpp:658 src/ui_configurationDialog.h:1955
 msgid "Night mode"
 msgstr "रात्री अनुकूल शैली"
 
-#: src/core/StelApp.cpp:684
+#: src/core/StelApp.cpp:688
 msgid "Initializing SPOUT sender..."
 msgstr "सपओउट भेजनेवाला का आरम्भीकरण"
 
-#: src/core/StelApp.cpp:694
+#: src/core/StelApp.cpp:698
 msgid "Cannot create Spout sender. See log for details."
 msgstr "सपओउट भेजनेवाला नही बना सके। विवरण कार्याभिलेख में देखें।"
 
-#: src/core/StelApp.cpp:721
+#: src/core/StelApp.cpp:725
 msgid "Loading plugin"
 msgstr "उपलग्न का आरोहण"
 
@@ -3604,27 +3620,19 @@ msgstr ""
 msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
 "(2004) and a polynomial fit through tabulated values for 1600-2000, is used "
-"for the %1NASA Eclipse Web Site%2 and in their <em>Five Millennium Canon of "
-"Solar Eclipses: -1900 to +3000</em> (2006). This formula is also used in the"
-" solar, lunar and planetary ephemeris program SOLEX."
+"for the %1NASA Eclipse Web Site%2, in their <em>Five Millennium Canon of "
+"Solar Eclipses: -1900 to +3000</em> (2006) and <em>Thousand Year Canon of "
+"Solar Eclipses 1501 to 2500</em> (2014). This formula is also used in the "
+"solar, lunar and planetary ephemeris program SOLEX."
 msgstr ""
-"यह सुलझाव एफ॰एस्पेनाक तथा जे॰मीयुस द्वारा जो आधारित है मोर्रिसन तथा "
-"स्टीफेन्सन (2004) तथा 1600-2000 के लिए फलकीकृत मूल्यों का एक बहुपद आसंजन पर "
-"प्रयोजित हुआ है %1 ॰नासा॰ ग्रहण जालस्थान %2 के लिए तथा उनके <em> पाँच सहस्र "
-"मापदण्ड सूर्यग्रहणों का : -1900 से +3000 तक </em> (2006)  में। यह कारिका सौर"
-" चन्द्र तथा ग्रहों के ग्रहपत्री क्रम ॰सोलेक्स॰ में भी प्रयोजित।"
 
 #: src/core/StelCore.cpp:2550
 msgid ""
 "This solution is modified from F. Espenak and J. Meeus, based on Morrison & "
 "Stephenson (2004) and a polynomial fit through tabulated values for "
-"1600-2000. Formula for 2005-2050 is modified to match observed values and "
-"near-term predictions."
+"1600-2000. Values for 2015-2033 are interpolated from observations and "
+"predictions by IERS Rapid Service/Prediction Center."
 msgstr ""
-"यह सुलझाव संशोधित हुआ एफ॰एस्पेनाक तथा जे॰मीयुस से तथा आधारित है मोर्रिसन तथा"
-" स्टीफेनसन (2004) पर तथा 1600-2000 के लिए फलकीकृत मूल्यों का एक बहुपद आसंजन "
-"पर। कारिका 2005-2050 के लिए संशोधित है अवलोकित मूल्यों तथा निकट काल "
-"पूर्वानुमानों के अनुसार।"
 
 #: src/core/StelCore.cpp:2550
 msgid "Used by default."
@@ -3715,12 +3723,12 @@ msgstr ""
 "निर्धारित हो।"
 
 #: src/core/StelCore.cpp:2574 src/core/SimbadSearcher.cpp:173
-#: src/gui/ObsListDialog.cpp:83 src/gui/ObsListDialog.cpp:901
-#: src/gui/ObsListDialog.cpp:919 src/gui/ObsListDialog.cpp:953
-#: src/gui/ObsListDialog.cpp:969 src/gui/ObsListDialog.cpp:1004
-#: src/gui/ObsListDialog.cpp:1016 src/gui/ObsListDialog.cpp:1025
-#: src/gui/ObsListDialog.cpp:1037 src/gui/ObsListDialog.cpp:1054
-#: src/gui/ObsListDialog.cpp:1217 src/gui/ObsListDialog.cpp:1222
+#: src/gui/ObsListDialog.cpp:83 src/gui/ObsListDialog.cpp:897
+#: src/gui/ObsListDialog.cpp:918 src/gui/ObsListDialog.cpp:964
+#: src/gui/ObsListDialog.cpp:980 src/gui/ObsListDialog.cpp:1021
+#: src/gui/ObsListDialog.cpp:1033 src/gui/ObsListDialog.cpp:1042
+#: src/gui/ObsListDialog.cpp:1058 src/gui/ObsListDialog.cpp:1075
+#: src/gui/ObsListDialog.cpp:1238 src/gui/ObsListDialog.cpp:1243
 #: plugins/OnlineQueries/src/HipOnlineQuery.cpp:91
 msgid "Error"
 msgstr "अपक्रम"
@@ -3924,160 +3932,160 @@ msgid "(apparent)"
 msgstr "( प्रतीयमान )"
 
 #. TRANSLATORS: Right ascension/Declination
-#: src/core/StelObject.cpp:383
+#: src/core/StelObject.cpp:390
 msgctxt "celestial coordinate system"
 msgid "RA/Dec"
 msgstr "दा॰आ॰/झु॰"
 
 #. TRANSLATORS: Hour angle/Declination
-#: src/core/StelObject.cpp:472
+#: src/core/StelObject.cpp:479
 msgctxt "celestial coordinate system"
 msgid "HA/Dec"
 msgstr "घ॰अ॰/झु॰"
 
 #. TRANSLATORS: Azimuth/Altitude
-#: src/core/StelObject.cpp:521
+#: src/core/StelObject.cpp:528
 msgctxt "celestial coordinate system"
 msgid "Az./Alt."
 msgstr "दि॰/ऊँ॰"
 
 #. TRANSLATORS: Galactic longitude/latitude
-#: src/core/StelObject.cpp:547
+#: src/core/StelObject.cpp:554
 msgctxt "celestial coordinate system"
 msgid "Gal. long./lat."
 msgstr "आ॰ दे॰/अ॰"
 
 #. TRANSLATORS: Supergalactic longitude/latitude
-#: src/core/StelObject.cpp:572
+#: src/core/StelObject.cpp:579
 msgctxt "celestial coordinate system"
 msgid "Supergal. long./lat."
 msgstr "आ॰स॰ दे॰/अ॰"
 
-#: src/core/StelObject.cpp:590
+#: src/core/StelObject.cpp:597
 msgctxt "celestial coordinate system"
 msgid "Ecl. long./lat."
 msgstr "क्रा॰ दे॰/अ॰"
 
-#: src/core/StelObject.cpp:655
+#: src/core/StelObject.cpp:662
 msgid "Ecliptic obliquity"
 msgstr "क्रान्तिवृत तिर्यक्ता"
 
-#: src/core/StelObject.cpp:684
+#: src/core/StelObject.cpp:691
 msgid "Mean Sidereal Time"
 msgstr "मध्यमान नक्षत्र समय"
 
-#: src/core/StelObject.cpp:699
+#: src/core/StelObject.cpp:706
 msgid "Apparent Sidereal Time"
 msgstr "प्रतीयमान नक्षत्र समय"
 
 #. TRANSLATORS: time of transit
-#: src/core/StelObject.cpp:718 src/gui/AstroCalcDialog.cpp:899
+#: src/core/StelObject.cpp:727 src/gui/AstroCalcDialog.cpp:899
 #: src/gui/AstroCalcDialog.cpp:2081 src/gui/AstroCalcDialog.cpp:8194
 msgctxt "celestial event; passage across a meridian"
 msgid "Transit"
 msgstr "पारगमन"
 
-#: src/core/StelObject.cpp:719 src/gui/AstroCalcDialog.cpp:2080
+#: src/core/StelObject.cpp:728 src/gui/AstroCalcDialog.cpp:2080
 #: src/gui/AstroCalcDialog.cpp:8193
 msgctxt "celestial event"
 msgid "Rise"
 msgstr "उदय"
 
-#: src/core/StelObject.cpp:720 src/gui/AstroCalcDialog.cpp:2082
+#: src/core/StelObject.cpp:729 src/gui/AstroCalcDialog.cpp:2082
 #: src/gui/AstroCalcDialog.cpp:8197
 msgctxt "celestial event"
 msgid "Set"
 msgstr "अस्त"
 
-#: src/core/StelObject.cpp:791
+#: src/core/StelObject.cpp:798
 msgctxt "celestial event"
 msgid "Morning twilight"
 msgstr "प्रातःकाल लालिमा आकाश"
 
-#: src/core/StelObject.cpp:792
+#: src/core/StelObject.cpp:799
 msgctxt "celestial event"
 msgid "Evening twilight"
 msgstr "सायंकाल लालिमा आकाश"
 
-#: src/core/StelObject.cpp:813 plugins/NavStars/src/ui_navStarsWindow.h:576
+#: src/core/StelObject.cpp:820 plugins/NavStars/src/ui_navStarsWindow.h:576
 msgid "Daytime"
 msgstr "दिन के समय"
 
-#: src/core/StelObject.cpp:827
+#: src/core/StelObject.cpp:834
 msgid "Polar night"
 msgstr "ध्रुवीय रात"
 
-#: src/core/StelObject.cpp:829
+#: src/core/StelObject.cpp:836
 msgid "This object never rises"
 msgstr "इस वस्तु का उदय कभी नही होता"
 
-#: src/core/StelObject.cpp:834
+#: src/core/StelObject.cpp:841
 msgid "Polar day"
 msgstr "ध्रुवीय दिन"
 
-#: src/core/StelObject.cpp:836
+#: src/core/StelObject.cpp:843
 msgid "Circumpolar (never sets)"
 msgstr "परिध्रुवी ( अस्त कभी नही होता )"
 
 #. TRANSLATORS: Greatest Eastern Digression is the maximum azimuth for stars
 #. with upper culmination between pole and zenith
-#: src/core/StelObject.cpp:854
+#: src/core/StelObject.cpp:861
 msgid "Max. E. Digression"
 msgstr "उ॰ पू॰ दि॰"
 
 #. TRANSLATORS: azimuth (abbrev.)
-#: src/core/StelObject.cpp:856
+#: src/core/StelObject.cpp:863
 msgctxt "celestial coordinate system"
 msgid "A"
 msgstr "दि॰"
 
-#: src/core/StelObject.cpp:856
+#: src/core/StelObject.cpp:863
 msgctxt "celestial coordinate system"
 msgid "Az."
 msgstr "दि॰"
 
-#: src/core/StelObject.cpp:858
+#: src/core/StelObject.cpp:865
 msgctxt "celestial coordinate system"
 msgid "h"
 msgstr "घ॰"
 
-#: src/core/StelObject.cpp:858
+#: src/core/StelObject.cpp:865
 msgctxt "celestial coordinate system"
 msgid "HA"
 msgstr "घ॰अ॰"
 
 #. TRANSLATORS: Greatest Western Digression is the maximum western azimuth for
 #. stars with upper culmination between pole and zenith
-#: src/core/StelObject.cpp:884
+#: src/core/StelObject.cpp:891
 msgid "Max. W. Digression"
 msgstr "उ॰ प॰ दि॰"
 
-#: src/core/StelObject.cpp:919
+#: src/core/StelObject.cpp:926
 msgid "Parallactic Angle"
 msgstr "ल॰अ॰"
 
-#: src/core/StelObject.cpp:928 src/gui/AstroCalcDialog.cpp:8292
+#: src/core/StelObject.cpp:935 src/gui/AstroCalcDialog.cpp:8292
 msgid "IAU Constellation"
 msgstr "एै॰ए॰यु॰ तारामण्डल"
 
 #. TRANSLATORS: Azimuth/Altitude
-#: src/core/StelObject.cpp:1240
+#: src/core/StelObject.cpp:1271
 msgctxt "celestial coordinate system"
 msgid "Solar A/a"
 msgstr "सौर दि॰/ऊँ॰"
 
-#: src/core/StelObject.cpp:1240
+#: src/core/StelObject.cpp:1271
 msgctxt "celestial coordinate system"
 msgid "Solar Az./Alt."
 msgstr "सौर दि॰/ऊँ॰"
 
 #. TRANSLATORS: Azimuth/Altitude
-#: src/core/StelObject.cpp:1258
+#: src/core/StelObject.cpp:1289
 msgctxt "celestial coordinate system"
 msgid "Lunar A/a"
 msgstr "चन्द्र दि॰/ऊँ॰"
 
-#: src/core/StelObject.cpp:1258
+#: src/core/StelObject.cpp:1289
 msgctxt "celestial coordinate system"
 msgid "Lunar Az./Alt."
 msgstr "चन्द्र दि॰/ऊँ॰"
@@ -4356,7 +4364,8 @@ msgstr ""
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:119
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:214
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:186
-#: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:181
+#: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:183
+#: plugins/MissingStars/src/gui/MissingStarsDialog.cpp:86
 msgid "License"
 msgstr "अनुज्ञापत्र"
 
@@ -4842,7 +4851,8 @@ msgstr "सम्पर्क करें"
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:118
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:213
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:185
-#: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:180
+#: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:182
+#: plugins/MissingStars/src/gui/MissingStarsDialog.cpp:85
 msgid "Version"
 msgstr "प्रकाशन संख्या"
 
@@ -4896,7 +4906,7 @@ msgstr ""
 "तारों की संख्या : %2 Million\n"
 "तेजस्विता विस्तार : %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:1573 src/gui/ConfigurationDialog.cpp:1610
+#: src/gui/ConfigurationDialog.cpp:1573 src/gui/ConfigurationDialog.cpp:1614
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -4905,11 +4915,11 @@ msgstr ""
 "%1 डाउनलोड नही हो पाया :\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:1663
+#: src/gui/ConfigurationDialog.cpp:1667
 msgid "Verifying file integrity..."
 msgstr "अभिलेख समग्रता की जाँच चालू।"
 
-#: src/gui/ConfigurationDialog.cpp:1667
+#: src/gui/ConfigurationDialog.cpp:1671
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -4918,21 +4928,21 @@ msgstr ""
 "%1 डाउनलोड नही हो पाया :\n"
 "फाइल खराब है."
 
-#: src/gui/ConfigurationDialog.cpp:1747 src/gui/ConfigurationDialog.cpp:1756
-#: src/gui/ConfigurationDialog.cpp:1765 src/gui/ConfigurationDialog.cpp:1774
+#: src/gui/ConfigurationDialog.cpp:1751 src/gui/ConfigurationDialog.cpp:1760
+#: src/gui/ConfigurationDialog.cpp:1769 src/gui/ConfigurationDialog.cpp:1778
 msgid "Available"
 msgstr "उपलब्ध"
 
-#: src/gui/ConfigurationDialog.cpp:1749 src/gui/ConfigurationDialog.cpp:1758
-#: src/gui/ConfigurationDialog.cpp:1767 src/gui/ConfigurationDialog.cpp:1776
+#: src/gui/ConfigurationDialog.cpp:1753 src/gui/ConfigurationDialog.cpp:1762
+#: src/gui/ConfigurationDialog.cpp:1771 src/gui/ConfigurationDialog.cpp:1780
 msgid "Not Available"
 msgstr "अनुपलब्ध"
 
-#: src/gui/ConfigurationDialog.cpp:1812
+#: src/gui/ConfigurationDialog.cpp:1816
 msgid "Annual proper motion (stars) or hourly motion (solar system objects)"
 msgstr "वार्षिक निज गति ( तारें ) अथवा घण्टेवार गति ( सौरमण्डल वस्तुएँ )"
 
-#: src/gui/ConfigurationDialog.cpp:1813
+#: src/gui/ConfigurationDialog.cpp:1817
 msgid ""
 "Show time of rising, transit and setting of celestial object. The rising and"
 " setting events are defined with the upper limb of the celestial body."
@@ -4941,211 +4951,211 @@ msgstr ""
 "पारिभाषित हैं खगोलीय वस्तु के ऊपरी अंग के अनुसार।"
 
 #. TRANSLATORS: Full phrase is "Algorithm of DeltaT"
-#: src/gui/ConfigurationDialog.cpp:1854
+#: src/gui/ConfigurationDialog.cpp:1858
 msgid "Algorithm of"
 msgstr "गणितक्रम इस के लिए  "
 
-#: src/gui/ConfigurationDialog.cpp:1867
+#: src/gui/ConfigurationDialog.cpp:1871
 msgid "Without correction"
 msgstr "बिना ठीक किये"
 
-#: src/gui/ConfigurationDialog.cpp:1868
+#: src/gui/ConfigurationDialog.cpp:1872
 msgid "Schoch (1931)"
 msgstr "स्कोख (1931)"
 
-#: src/gui/ConfigurationDialog.cpp:1869
+#: src/gui/ConfigurationDialog.cpp:1873
 msgid "Clemence (1948)"
 msgstr "क्लेमेन्स (1948)"
 
-#: src/gui/ConfigurationDialog.cpp:1870
+#: src/gui/ConfigurationDialog.cpp:1874
 msgid "IAU (1952)"
 msgstr "एै॰ए॰यू॰ (1952)"
 
-#: src/gui/ConfigurationDialog.cpp:1871
+#: src/gui/ConfigurationDialog.cpp:1875
 msgid "Astronomical Ephemeris (1960)"
 msgstr "ज्योतिषशास्त्रीय ग्रहपत्री (1960)"
 
-#: src/gui/ConfigurationDialog.cpp:1872
+#: src/gui/ConfigurationDialog.cpp:1876
 msgid "Tuckerman (1962, 1964) & Goldstine (1973)"
 msgstr "टकर्मन (1962, 1964) तथा गोल्ड्स्टीन (1973)"
 
-#: src/gui/ConfigurationDialog.cpp:1873
+#: src/gui/ConfigurationDialog.cpp:1877
 msgid "Muller & Stephenson (1975)"
 msgstr "म्यूल्लर तथा स्टीफेम्सन (1975)"
 
-#: src/gui/ConfigurationDialog.cpp:1874
+#: src/gui/ConfigurationDialog.cpp:1878
 msgid "Stephenson (1978)"
 msgstr "स्टीफेन्सन (1978)"
 
-#: src/gui/ConfigurationDialog.cpp:1875
+#: src/gui/ConfigurationDialog.cpp:1879
 msgid "Schmadel & Zech (1979)"
 msgstr "स्ख्माडेल तथा जेख (1979)"
 
-#: src/gui/ConfigurationDialog.cpp:1876
+#: src/gui/ConfigurationDialog.cpp:1880
 msgid "Morrison & Stephenson (1982)"
 msgstr "मोर्रिसन तथा स्टीफेन्सन (1982)"
 
-#: src/gui/ConfigurationDialog.cpp:1877
+#: src/gui/ConfigurationDialog.cpp:1881
 msgid "Stephenson & Morrison (1984)"
 msgstr "स्टीफेन्सन तथा मोर्रिसन (1984)"
 
-#: src/gui/ConfigurationDialog.cpp:1878
+#: src/gui/ConfigurationDialog.cpp:1882
 msgid "Stephenson & Houlden (1986)"
 msgstr "स्टीफेन्सन तथा हौल्डेन (1986)"
 
-#: src/gui/ConfigurationDialog.cpp:1879
+#: src/gui/ConfigurationDialog.cpp:1883
 msgid "Espenak (1987, 1989)"
 msgstr "एस्पेनाक (1987, 1989)"
 
-#: src/gui/ConfigurationDialog.cpp:1880
+#: src/gui/ConfigurationDialog.cpp:1884
 msgid "Borkowski (1988)"
 msgstr "बोर्कौस्की (1988)"
 
-#: src/gui/ConfigurationDialog.cpp:1881
+#: src/gui/ConfigurationDialog.cpp:1885
 msgid "Schmadel & Zech (1988)"
 msgstr "स्ख्माडेल तथा जेख (1988)"
 
-#: src/gui/ConfigurationDialog.cpp:1882
+#: src/gui/ConfigurationDialog.cpp:1886
 msgid "Chapront-Touze & Chapront (1991)"
 msgstr "चाप्रोण्ट-तूस तथा चाप्रोण्ट (1991)"
 
-#: src/gui/ConfigurationDialog.cpp:1883
+#: src/gui/ConfigurationDialog.cpp:1887
 msgid "Stephenson & Morrison (1995)"
 msgstr "स्टीफेन्सन तथा मोर्रिसन (1995)"
 
-#: src/gui/ConfigurationDialog.cpp:1884
+#: src/gui/ConfigurationDialog.cpp:1888
 msgid "Stephenson (1997)"
 msgstr "स्टीफेन्सन (1997)"
 
-#: src/gui/ConfigurationDialog.cpp:1886
+#: src/gui/ConfigurationDialog.cpp:1890
 msgid "Meeus (1998) (with Chapront, Chapront-Touze & Francou (1997))"
 msgstr ""
 "मीयुस (1998) ( चाप्रोण्ट तथा चाप्रोण्ट-तूस तथा फ्रांकौ (1997) के साथ )"
 
-#: src/gui/ConfigurationDialog.cpp:1887
+#: src/gui/ConfigurationDialog.cpp:1891
 msgid "JPL Horizons"
 msgstr "जे॰पी॰एल॰ क्षितिजें"
 
-#: src/gui/ConfigurationDialog.cpp:1888
+#: src/gui/ConfigurationDialog.cpp:1892
 msgid "Meeus & Simons (2000)"
 msgstr "मीयुस तथा सैमन्स (2000)"
 
-#: src/gui/ConfigurationDialog.cpp:1889
+#: src/gui/ConfigurationDialog.cpp:1893
 msgid "Montenbruck & Pfleger (2000)"
 msgstr "मोर्टेन्ब्रुक तथा फ्लेगर (2000) "
 
-#: src/gui/ConfigurationDialog.cpp:1890
+#: src/gui/ConfigurationDialog.cpp:1894
 msgid "Reingold & Dershowitz (2002, 2007, 2018)"
 msgstr "रैन्गोल्ड तथा डेर्शोविट्स (2002, 2007, 2018)"
 
-#: src/gui/ConfigurationDialog.cpp:1891
+#: src/gui/ConfigurationDialog.cpp:1895
 msgid "Morrison & Stephenson (2004, 2005)"
 msgstr "मोर्रिसन तथा स्टीफेन्सन (2004, 2005) "
 
-#: src/gui/ConfigurationDialog.cpp:1892
-msgid "Espenak & Meeus (2006)"
-msgstr "एस्पेनाक तथा मीयुस (2006)"
-
-#: src/gui/ConfigurationDialog.cpp:1895
-msgid "Espenak & Meeus (2006) no extra moon acceleration"
-msgstr "एस्पेनाक तथा मीयुस (2006) कोई अधिक चन्द्रमा तेजी नही"
-
-#: src/gui/ConfigurationDialog.cpp:1898
-msgid "Modified Espenak & Meeus (2006, 2022)"
-msgstr "संशोधित एस्पेनाक तथा मीयुस (2006, 2022)"
+#: src/gui/ConfigurationDialog.cpp:1896
+msgid "Espenak & Meeus (2006, 2014)"
+msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1899
+msgid "Espenak & Meeus (2006, 2014) no extra moon acceleration"
+msgstr ""
+
+#: src/gui/ConfigurationDialog.cpp:1902
+msgid "Modified Espenak & Meeus (2006, 2014, 2023)"
+msgstr ""
+
+#: src/gui/ConfigurationDialog.cpp:1903
 msgid "Reijs (2006)"
 msgstr "रैज्स (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1900
+#: src/gui/ConfigurationDialog.cpp:1904
 msgid "Banjevic (2006)"
 msgstr "बान्जेविक (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1901
+#: src/gui/ConfigurationDialog.cpp:1905
 msgid "Islam, Sadiq & Qureshi (2008, 2013)"
 msgstr "इस्लाम तथा सादिक तथा कुरेशी (2008, 2013)"
 
-#: src/gui/ConfigurationDialog.cpp:1902
+#: src/gui/ConfigurationDialog.cpp:1906
 msgid "Khalid, Sultana & Zaidi (2014)"
 msgstr "खालिद तथा सुल्ताना तथा सयिदी (2014)"
 
-#: src/gui/ConfigurationDialog.cpp:1903
+#: src/gui/ConfigurationDialog.cpp:1907
 msgid "Stephenson, Morrison & Hohenkerk (2016, 2021)"
 msgstr "स्टीफेन्सन तथा मोर्रिसन तथा होहेनकेर्क (2016, 2021)"
 
-#: src/gui/ConfigurationDialog.cpp:1904
+#: src/gui/ConfigurationDialog.cpp:1908
 msgid "Henriksson (2017)"
 msgstr "हेन्रिक्स्सन (2017)"
 
-#: src/gui/ConfigurationDialog.cpp:1905
+#: src/gui/ConfigurationDialog.cpp:1909
 #, qt-format
 msgid "Custom equation of %1T"
 msgstr "वैयक्तीकृत समीकरण %1टी का"
 
-#: src/gui/ConfigurationDialog.cpp:1961 src/gui/ConfigurationDialog.cpp:1998
+#: src/gui/ConfigurationDialog.cpp:1965 src/gui/ConfigurationDialog.cpp:2002
 #: src/gui/StelGuiItems.cpp:784 src/gui/LocationDialog.cpp:561
 msgid "System default"
 msgstr "व्यवस्था मूलविकल्प"
 
-#: src/gui/ConfigurationDialog.cpp:1962
+#: src/gui/ConfigurationDialog.cpp:1966
 msgid "yyyy-mm-dd (ISO 8601)"
 msgstr "वववव-मम-दद (एै॰एस॰ओ 8601)"
 
-#: src/gui/ConfigurationDialog.cpp:1963
+#: src/gui/ConfigurationDialog.cpp:1967
 msgid "dd-mm-yyyy"
 msgstr "दद-मम-वववव"
 
-#: src/gui/ConfigurationDialog.cpp:1964
+#: src/gui/ConfigurationDialog.cpp:1968
 msgid "mm-dd-yyyy"
 msgstr "मम-दद-वववव"
 
-#: src/gui/ConfigurationDialog.cpp:1965
+#: src/gui/ConfigurationDialog.cpp:1969
 msgid "ww, yyyy-mm-dd"
 msgstr "सस, ववव-मम-दद"
 
-#: src/gui/ConfigurationDialog.cpp:1966
+#: src/gui/ConfigurationDialog.cpp:1970
 msgid "ww, dd-mm-yyyy"
 msgstr "सस, दद-मम-वववव"
 
-#: src/gui/ConfigurationDialog.cpp:1967
+#: src/gui/ConfigurationDialog.cpp:1971
 msgid "ww, mm-dd-yyyy"
 msgstr "सस, मम-दद-वववव"
 
-#: src/gui/ConfigurationDialog.cpp:1999
+#: src/gui/ConfigurationDialog.cpp:2003
 msgid "12-hour format"
 msgstr "12-घण्टा प्रारूप "
 
-#: src/gui/ConfigurationDialog.cpp:2000
+#: src/gui/ConfigurationDialog.cpp:2004
 msgid "24-hour format"
 msgstr "24-घण्टा प्रारूप"
 
-#: src/gui/ConfigurationDialog.cpp:2028
+#: src/gui/ConfigurationDialog.cpp:2032
 msgctxt "disabled"
 msgid "None"
 msgstr "कुछ नही"
 
-#: src/gui/ConfigurationDialog.cpp:2029
+#: src/gui/ConfigurationDialog.cpp:2033
 msgid "5/6/5 bits"
 msgstr "5/6/5 अंक"
 
-#: src/gui/ConfigurationDialog.cpp:2030
+#: src/gui/ConfigurationDialog.cpp:2034
 msgid "6/6/6 bits"
 msgstr "6/6/6 अंक"
 
-#: src/gui/ConfigurationDialog.cpp:2031
+#: src/gui/ConfigurationDialog.cpp:2035
 msgid "8/8/8 bits"
 msgstr "8/8/8 अंक"
 
-#: src/gui/ConfigurationDialog.cpp:2032
+#: src/gui/ConfigurationDialog.cpp:2036
 msgid "10/10/10 bits"
 msgstr "10/10/10 अंक"
 
-#: src/gui/ConfigurationDialog.cpp:2044
+#: src/gui/ConfigurationDialog.cpp:2048
 msgid "Unsupported"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:2046
+#: src/gui/ConfigurationDialog.cpp:2050
 msgid "Unsupported in low-graphics mode"
 msgstr ""
 
@@ -5742,6 +5752,10 @@ msgstr "चि॰प्र॰से॰"
 msgid "Frames per second"
 msgstr "चित्र प्रति सेकण्ड"
 
+#: src/gui/StelDialog.hpp:218
+msgid "Are you sure? This will delete your customized data."
+msgstr "क्या आप निश्चित हैं। यह आपके वैयक्तीकृत तथ्य मिटा देगा।"
+
 #: src/gui/ViewDialog.cpp:707
 msgid "properties"
 msgstr "लक्षण"
@@ -5906,11 +5920,11 @@ msgstr ""
 msgid "Visual magnitude based on phase angle and albedo."
 msgstr "दृश्य मात्रा जो आधारित है चरण अस्र तथा प्रतिबिम्बन पर।"
 
-#: src/gui/LocationDialog.cpp:173 src/gui/LocationDialog.cpp:977
+#: src/gui/LocationDialog.cpp:173 src/gui/LocationDialog.cpp:974
 msgid "Get location from GPS or system service"
 msgstr "स्थान पाएँ जी॰पी॰एस॰ से अथवा व्यवस्था सुविधा से।"
 
-#: src/gui/LocationDialog.cpp:175 src/gui/LocationDialog.cpp:979
+#: src/gui/LocationDialog.cpp:175 src/gui/LocationDialog.cpp:976
 #: src/ui_locationDialogGui.h:505
 msgid "Get location from GPS"
 msgstr "स्थान पाएँ जी॰पी॰एस से"
@@ -5937,23 +5951,23 @@ msgstr ""
 "जी॰पी॰एस॰ से स्थान प्राप्ती पलटें। ( समय क्षेत्र अपरिवर्तित रहेगा। ) जब "
 "संतुष्ट तब पुनः पलटें ताकि अन्य क्रमों को जी॰पी॰एस॰ यन्त्र उपलब्ध हो सके।"
 
-#: src/gui/LocationDialog.cpp:921
+#: src/gui/LocationDialog.cpp:918
 msgid "GPS listening..."
 msgstr "जी॰पी॰एस॰ सुन रहा है"
 
-#: src/gui/LocationDialog.cpp:928
+#: src/gui/LocationDialog.cpp:925
 msgid "GPS disconnecting..."
 msgstr "जी॰पी॰एस॰ संचार कट रही है"
 
-#: src/gui/LocationDialog.cpp:950
+#: src/gui/LocationDialog.cpp:947
 msgid "2D location fix"
 msgstr "2मा॰ स्थान निश्चित"
 
-#: src/gui/LocationDialog.cpp:955
+#: src/gui/LocationDialog.cpp:952
 msgid "3D location fix"
 msgstr "3मा॰ स्थान निश्चित"
 
-#: src/gui/LocationDialog.cpp:964
+#: src/gui/LocationDialog.cpp:961
 msgid "GPS:FAILED"
 msgstr "जी॰पी॰एस॰ असफल"
 
@@ -6172,13 +6186,13 @@ msgid "Ecliptic (J2000.0)"
 msgstr "क्रान्तिवृत्तीय ( जू॰2000.0 )"
 
 #: src/gui/SearchDialog.cpp:296 src/gui/AstroCalcChart.cpp:442
-#: src/gui/AstroCalcChart.cpp:468 src/gui/ObsListDialog.cpp:261
+#: src/gui/AstroCalcChart.cpp:468 src/gui/ObsListDialog.cpp:254
 msgid "Right ascension"
 msgstr "दाएँ आरोहण"
 
 #: src/gui/SearchDialog.cpp:299 src/gui/AstroCalcChart.cpp:91
 #: src/gui/AstroCalcChart.cpp:101 src/gui/AstroCalcChart.cpp:425
-#: src/gui/AstroCalcChart.cpp:451 src/gui/ObsListDialog.cpp:262
+#: src/gui/AstroCalcChart.cpp:451 src/gui/ObsListDialog.cpp:255
 msgid "Declination"
 msgstr "झुकाव"
 
@@ -6237,15 +6251,15 @@ msgstr "सिम्बाड खोज अपक्रम"
 msgid "Simbad Lookup"
 msgstr "सिम्बाड खोज"
 
-#: src/gui/SearchDialog.cpp:1392
+#: src/gui/SearchDialog.cpp:1393
 msgid "University of Strasbourg (France)"
 msgstr "स्ट्रास्बौर्ग विश्वविद्यालय ( फ्रान्स )"
 
-#: src/gui/SearchDialog.cpp:1393
+#: src/gui/SearchDialog.cpp:1394
 msgid "Harvard University (USA)"
 msgstr "हार्वर्ड विश्वविद्यालय ( यू॰एस॰ए॰ )"
 
-#: src/gui/SearchDialog.cpp:1475
+#: src/gui/SearchDialog.cpp:1476
 msgid "Paste and Search"
 msgstr "चिपकाएँ तथा खोजें"
 
@@ -6331,7 +6345,7 @@ msgstr ""
 #: src/gui/AstroCalcDialog.cpp:8182 src/ui_configurationDialog.h:1883
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:516
 #: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:103
-#: plugins/Exoplanets/src/Exoplanet.cpp:359
+#: plugins/Exoplanets/src/Exoplanet.cpp:360
 #: plugins/MeteorShowers/src/gui/MSSearchDialog.cpp:183
 msgid "Name"
 msgstr "नाम"
@@ -6807,7 +6821,7 @@ msgid "Duration of total or annular phase at greatest eclipse"
 msgstr "अवधि पूर्णता अथवा वलयता की ग्रहण अधिकतम होने पर"
 
 #: src/gui/AstroCalcDialog.cpp:3294 src/gui/AstroCalcChart.cpp:378
-#: src/gui/ObsListDialog.cpp:265 src/ui_obsListDialog.h:410
+#: src/gui/ObsListDialog.cpp:258 src/ui_obsListDialog.h:423
 msgid "Date"
 msgstr "दिनांक"
 
@@ -8027,116 +8041,114 @@ msgctxt "unit of measurement"
 msgid "saros"
 msgstr "ग्रहणचक्रावधि"
 
-#: src/gui/ObsListDialog.cpp:83 src/gui/ObsListDialog.cpp:1025
+#: src/gui/ObsListDialog.cpp:83 src/gui/ObsListDialog.cpp:1042
 msgid "Cannot open observingLists.json to write"
 msgstr "लिखने के लिए खोल नही सके observingLists.json"
 
-#: src/gui/ObsListDialog.cpp:184
+#: src/gui/ObsListDialog.cpp:176
 msgctxt "default name for observing list if none is available"
 msgid "new list"
 msgstr "नयी सूची"
 
-#: src/gui/ObsListDialog.cpp:258
+#: src/gui/ObsListDialog.cpp:251
 msgid "Object designation"
 msgstr "वस्तु उपाधि"
 
-#: src/gui/ObsListDialog.cpp:259
+#: src/gui/ObsListDialog.cpp:252
 msgid "Object name"
 msgstr "वस्तु नाम"
 
-#: src/gui/ObsListDialog.cpp:264 src/ui_configurationDialog.h:1872
+#: src/gui/ObsListDialog.cpp:257 src/ui_configurationDialog.h:1872
 msgid "Constellation"
 msgstr "तारामण्डल"
 
-#: src/gui/ObsListDialog.cpp:267 src/ui_viewDialog.h:3585
-#: src/ui_obsListDialog.h:418
+#: src/gui/ObsListDialog.cpp:260 src/ui_viewDialog.h:3585
+#: src/ui_obsListDialog.h:431
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:480
 msgid "Landscape"
 msgstr "भूदृश्य"
 
-#: src/gui/ObsListDialog.cpp:882
+#: src/gui/ObsListDialog.cpp:878
 msgid "New Observation List"
 msgstr "नयी अवलोकन सूची"
 
-#: src/gui/ObsListDialog.cpp:883
+#: src/gui/ObsListDialog.cpp:879
 msgid "Observing list creation mode"
 msgstr "अवलोकन सूची सृजन शैली"
 
-#: src/gui/ObsListDialog.cpp:896
+#: src/gui/ObsListDialog.cpp:892
 msgid "Observing list editor mode"
 msgstr "अवलोकन सूची सम्पादन शैली"
 
-#: src/gui/ObsListDialog.cpp:901
+#: src/gui/ObsListDialog.cpp:897
 msgid "selectedOlud empty. This is a bug"
 msgstr "selectedOlud रिक्त है। यह एक अपक्रम है।"
 
-#: src/gui/ObsListDialog.cpp:911
+#: src/gui/ObsListDialog.cpp:909
 msgid "Export observing list as..."
 msgstr "अवलोकन सूची निर्यात करें इस नाम से"
 
-#: src/gui/ObsListDialog.cpp:919
+#: src/gui/ObsListDialog.cpp:918
 msgid "Cannot export. See logfile for details."
 msgstr "निर्यात करने में अक्षम। कार्याभिलेख देखें विवरण के लिए।"
 
-#: src/gui/ObsListDialog.cpp:944
+#: src/gui/ObsListDialog.cpp:955
 msgid "Import observing list"
 msgstr "अवलोकन सूची आयात करें"
 
-#: src/gui/ObsListDialog.cpp:953
+#: src/gui/ObsListDialog.cpp:964
 msgid "Cannot open selected file for import"
 msgstr "चयनित अभिलेख खोल नही सके आयात के लिए।"
 
-#: src/gui/ObsListDialog.cpp:969
+#: src/gui/ObsListDialog.cpp:980
 msgid "Empty list."
 msgstr "रिक्त सूची।"
 
-#: src/gui/ObsListDialog.cpp:988
+#: src/gui/ObsListDialog.cpp:1002
 #, qt-format
 msgid ""
-"A list named '%1' and dated %2 would overwrite your existing list '%3', "
-"dated %4. Accept?"
+"A list named '%1', created %2 and last modified %3 would overwrite your "
+"existing list '%4', dated %5 and last modified %6. Accept?"
 msgstr ""
-"एक '%1' नाम की सूची दिनांक %2 का आपके दिनांक %4 के '%3' नाम की सूची को "
-"अधिलिखित कर देगा। क्या यह स्वीकृत है।"
 
-#: src/gui/ObsListDialog.cpp:1004
+#: src/gui/ObsListDialog.cpp:1021
 msgid "The file is empty or doesn't contain legacy bookmarks."
 msgstr "अभिलेख रिक्त है अथवा इसमें कोई पुराने स्मरणचिह्न नही।"
 
-#: src/gui/ObsListDialog.cpp:1016
+#: src/gui/ObsListDialog.cpp:1033
 msgid "File does not contain observing lists or legacy bookmarks"
 msgstr "अभिलेख में ना कोई अवलोकन सूची हैं ना कोई पुराने स्मरणचिह्न"
 
-#: src/gui/ObsListDialog.cpp:1037
+#: src/gui/ObsListDialog.cpp:1058
 msgid "File format is wrong!"
 msgstr "अभिलेख प्रकार ठीक नही।"
 
-#: src/gui/ObsListDialog.cpp:1054
+#: src/gui/ObsListDialog.cpp:1075
 msgid "Cannot open JSON output file. Will not delete."
 msgstr "खोल मही सके JSON उत्पादन अभिलेख। नही मिटाया जाएगा।"
 
-#: src/gui/ObsListDialog.cpp:1078 src/ui_configurationDialog.h:1747
+#: src/gui/ObsListDialog.cpp:1099 src/ui_configurationDialog.h:1747
 msgid "Information"
 msgstr "जानकारी"
 
-#: src/gui/ObsListDialog.cpp:1078
+#: src/gui/ObsListDialog.cpp:1099
 msgid "You cannot delete the default or the last list."
 msgstr "मूलविकल्प सूची अथवा अन्तिम सूची नही मिटा सकते।"
 
-#: src/gui/ObsListDialog.cpp:1134
+#: src/gui/ObsListDialog.cpp:1155
 msgid "Unnamed object"
 msgstr "नाम रहित वस्तु"
 
-#: src/gui/ObsListDialog.cpp:1217
+#: src/gui/ObsListDialog.cpp:1238
 msgid "Empty name"
 msgstr "रिक्त नाम"
 
-#: src/gui/ObsListDialog.cpp:1222
+#: src/gui/ObsListDialog.cpp:1243
 msgid "List name already exists"
 msgstr "सूची नाम पहले से है"
 
-#: src/gui/ObsListDialog.cpp:1287 src/ui_configurationDialog.h:1930
-#: src/ui_obsListDialog.h:353
+#: src/gui/ObsListDialog.cpp:1308 src/ui_configurationDialog.h:1930
+#: src/ui_obsListDialog.h:365
 msgid "Observing lists"
 msgstr "अवलोकन सूचीयाँ"
 
@@ -9835,7 +9847,7 @@ msgid "&Choose"
 msgstr "चुनें"
 
 #: src/translations.h:630 src/ui_configurationDialog.h:1972
-#: src/ui_obsListDialog.h:364
+#: src/ui_obsListDialog.h:376
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:645
 msgid "Cancel"
 msgstr "निरस्त करें"
@@ -15222,133 +15234,137 @@ msgstr "वैयक्तीकृत अवधि"
 msgid "Unit of measurement:"
 msgstr "मापन इकाई : "
 
-#: src/ui_obsListDialog.h:356 src/ui_obsListDialog.h:374
+#: src/ui_obsListDialog.h:368 src/ui_obsListDialog.h:387
 msgid "Highlight all the objects of the selected list"
 msgstr "चयनित सूची के सभी वस्तुओं को उद्दीप्त करें"
 
-#: src/ui_obsListDialog.h:358
+#: src/ui_obsListDialog.h:370
 msgid "Add object"
 msgstr "वस्तु जोडें"
 
-#: src/ui_obsListDialog.h:360 src/ui_obsListDialog.h:378
+#: src/ui_obsListDialog.h:372 src/ui_obsListDialog.h:391
 msgid "Clear all the highlight objects"
 msgstr "उद्दीप्त वस्तुओं को हटाएँ"
 
-#: src/ui_obsListDialog.h:362
+#: src/ui_obsListDialog.h:374
 msgid "Remove object"
 msgstr "वस्तु हटाएँ"
 
-#: src/ui_obsListDialog.h:363
+#: src/ui_obsListDialog.h:375
 msgid "Save list"
 msgstr "सूची अभिलिखित करें"
 
-#: src/ui_obsListDialog.h:365
+#: src/ui_obsListDialog.h:377
 #: plugins/Satellites/src/ui_satellitesDialog.h:1385
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:216
 msgid "Description:"
 msgstr "विवरण : "
 
-#: src/ui_obsListDialog.h:367
+#: src/ui_obsListDialog.h:379
 msgid "Activate to set list as default"
 msgstr "सक्षम करें सूची को मूलविकल्प बनाने के लिए"
 
-#: src/ui_obsListDialog.h:369
+#: src/ui_obsListDialog.h:381
 msgid "Default list"
 msgstr "मूलविकल्प सूची"
 
-#: src/ui_obsListDialog.h:370
+#: src/ui_obsListDialog.h:382
 msgid "Creation date:"
 msgstr "निर्माण दिनांक : "
 
-#: src/ui_obsListDialog.h:371
+#: src/ui_obsListDialog.h:383
+msgid "Last edit:"
+msgstr ""
+
+#: src/ui_obsListDialog.h:384
 msgid "List name:"
 msgstr "सूची नाम : "
 
-#: src/ui_obsListDialog.h:372
+#: src/ui_obsListDialog.h:385
 msgid "List:"
 msgstr "सूची : "
 
-#: src/ui_obsListDialog.h:376
+#: src/ui_obsListDialog.h:389
 msgid "Highlight all"
 msgstr "सब को उद्दीप्त करें"
 
-#: src/ui_obsListDialog.h:380
+#: src/ui_obsListDialog.h:393
 msgid "Clear highlight(s)"
 msgstr "उद्दीप्त(ओं) को हटाएँ"
 
-#: src/ui_obsListDialog.h:382
+#: src/ui_obsListDialog.h:395
 msgid "Create a new observing list"
 msgstr "नया अवलोकन सूची बनाएँ"
 
-#: src/ui_obsListDialog.h:384
+#: src/ui_obsListDialog.h:397
 msgid "New list"
 msgstr "नया सूची"
 
-#: src/ui_obsListDialog.h:386
+#: src/ui_obsListDialog.h:399
 msgid "Edit the selected list"
 msgstr "चयनित सूची का संपादन करें"
 
-#: src/ui_obsListDialog.h:388
+#: src/ui_obsListDialog.h:401
 msgid "Edit list"
 msgstr "सूची का संपादन करें"
 
-#: src/ui_obsListDialog.h:390
+#: src/ui_obsListDialog.h:403
 msgid "Export list"
 msgstr "सूची निर्यात करें"
 
-#: src/ui_obsListDialog.h:392
+#: src/ui_obsListDialog.h:405
 msgid "Export list..."
 msgstr "निर्यात सूची।"
 
-#: src/ui_obsListDialog.h:394
+#: src/ui_obsListDialog.h:407
 msgid "Import list"
 msgstr "सूची आयात करें"
 
-#: src/ui_obsListDialog.h:396
+#: src/ui_obsListDialog.h:409
 msgid "Import list..."
 msgstr "आयात सूची।"
 
-#: src/ui_obsListDialog.h:398
+#: src/ui_obsListDialog.h:411
 msgid "Delete the selected list"
 msgstr "चयनित सूची मिटाएँ"
 
-#: src/ui_obsListDialog.h:400
+#: src/ui_obsListDialog.h:413
 msgid "Delete list"
 msgstr "सूची मिटाएँ"
 
-#: src/ui_obsListDialog.h:401
+#: src/ui_obsListDialog.h:414
 msgid "Also load:"
 msgstr "प्रयोग में लाएँ इसे भी : "
 
-#: src/ui_obsListDialog.h:402
+#: src/ui_obsListDialog.h:415
 msgid "Also store:"
 msgstr "इसे भी स्मृत रखें : "
 
-#: src/ui_obsListDialog.h:404
+#: src/ui_obsListDialog.h:417
 msgid "Store/load equatorial coordinates (J2000.0)"
 msgstr "स्मृत रखें / भरण करें भूमध्यरेखा निर्देशांक ( जू॰2000.0 )"
 
-#: src/ui_obsListDialog.h:406
+#: src/ui_obsListDialog.h:419
 msgid "Coordinates (RA and DEC)"
 msgstr "निर्देशांक ( दा॰आ॰ तथा झु॰ )"
 
-#: src/ui_obsListDialog.h:408
+#: src/ui_obsListDialog.h:421
 msgid "Store/load with date/time (JD)"
 msgstr "स्मृत रखें / भरण करें दिनांक / समय के साथ ( जू॰ दि॰ )"
 
-#: src/ui_obsListDialog.h:412
+#: src/ui_obsListDialog.h:425
 msgid "Store/load with location"
 msgstr "स्मृत रखें / भरण करें स्थान के साथ"
 
-#: src/ui_obsListDialog.h:416
+#: src/ui_obsListDialog.h:429
 msgid "Store/load with landscape"
 msgstr "स्मृत रखें / भरण करें भूदृश्य के साथ"
 
-#: src/ui_obsListDialog.h:420
+#: src/ui_obsListDialog.h:433
 msgid "Store/load with field of view"
 msgstr "स्मृत रखें / भरण करें दृश्यक्षेत्र के साथ"
 
-#: src/ui_obsListDialog.h:422
+#: src/ui_obsListDialog.h:435
 msgid "FOV"
 msgstr "दृ॰क्षे॰"
 
@@ -16116,6 +16132,7 @@ msgstr "अनुमति दें चयनित वस्तु के स�
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:341
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:820
 #: plugins/Calendars/src/ui_calendarsDialog.h:1034
+#: plugins/MissingStars/src/ui_missingStarsDialog.h:120
 msgctxt "tab in plugin windows"
 msgid "About"
 msgstr "परिचय"
@@ -18190,7 +18207,7 @@ msgstr "ग्रहपथ अवधि"
 
 #: plugins/Satellites/src/Satellite.cpp:392
 #: plugins/Satellites/src/ui_satellitesFilterDialog.h:295
-#: plugins/Exoplanets/src/Exoplanet.cpp:365
+#: plugins/Exoplanets/src/Exoplanet.cpp:366
 msgid "Inclination"
 msgstr "प्रवृत्ति"
 
@@ -19307,7 +19324,7 @@ msgid "Min."
 msgstr "न्यूनतम"
 
 #: plugins/Satellites/src/ui_satellitesFilterDialog.h:299
-#: plugins/Pulsars/src/Pulsar.cpp:249 plugins/Exoplanets/src/Exoplanet.cpp:364
+#: plugins/Pulsars/src/Pulsar.cpp:249 plugins/Exoplanets/src/Exoplanet.cpp:365
 msgid "Eccentricity"
 msgstr "सनकीपन"
 
@@ -21143,13 +21160,13 @@ msgstr "अपक्रम। अज्ञात वर्ण अम्श \"%1\
 msgid " [RETURN to activate]"
 msgstr "[ लौटें सक्रिय करने के लिए ]"
 
-#: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:61
-#: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:153
+#: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:60
+#: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:151
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:235
 msgid "Solar System Editor"
 msgstr "सौरमण्डल सम्पादक"
 
-#: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:64
+#: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:63
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:243
 msgid ""
 "An interface for adding asteroids and comets to Stellarium. It can download "
@@ -21160,10 +21177,14 @@ msgstr ""
 "सूचियों का जालावरोहण कर सकता है छोटे ग्रह मध्यस्थान के जालस्थान से तथा उसके "
 "जाल स्थित तथ्यकोश में खोजें कर सकता है।"
 
-#: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:153
+#: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:151
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:275
 msgid "Import orbital elements in MPC format..."
 msgstr "ग्रहपथीय तत्त्वों का आयात करें एम॰पी॰सी॰ प्रारूप में।"
+
+#: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:766
+msgid "Anonymous"
+msgstr ""
 
 #. TRANSLATORS: A link showing the text "Minor Planet & Comet Ephemeris
 #. Service" is inserted.
@@ -21407,28 +21428,28 @@ msgstr "समाकृति अभिलेख"
 msgid "Add new Minor Solar System objects"
 msgstr "जोडें नये छोटे सौरमण्डल वस्तुएँ"
 
-#: plugins/Supernovae/src/Supernovae.cpp:70
-#: plugins/Supernovae/src/Supernovae.cpp:149
+#: plugins/Supernovae/src/Supernovae.cpp:71
+#: plugins/Supernovae/src/Supernovae.cpp:150
 msgid "Historical Supernovae"
 msgstr "एैतिहासिक महानवतारें"
 
-#: plugins/Supernovae/src/Supernovae.cpp:73
+#: plugins/Supernovae/src/Supernovae.cpp:74
 msgid "This plugin allows you to see some bright historical supernovae."
 msgstr "यह उपलग्न आपको देखने देगा कुछ उज्ज्वल एैतिहासिक महानवतारें।"
 
-#: plugins/Supernovae/src/Supernovae.cpp:149
+#: plugins/Supernovae/src/Supernovae.cpp:150
 msgid "Historical Supernovae configuration window"
 msgstr "एैतिहासिक महानवतारें समाकृति खिडकी"
 
-#: plugins/Supernovae/src/Supernova.cpp:153
+#: plugins/Supernovae/src/Supernova.cpp:154
 msgid "Type of supernova"
 msgstr "महानवतारा प्रकार"
 
-#: plugins/Supernovae/src/Supernova.cpp:154 plugins/Novae/src/Nova.cpp:160
+#: plugins/Supernovae/src/Supernova.cpp:155 plugins/Novae/src/Nova.cpp:160
 msgid "Maximum brightness"
 msgstr "अधिकतम चमक"
 
-#: plugins/Supernovae/src/Supernova.hpp:70
+#: plugins/Supernovae/src/Supernova.hpp:69
 msgid "supernova"
 msgstr "महानवतारा"
 
@@ -22045,19 +22066,19 @@ msgstr "आरम्भ करें"
 msgid "Today"
 msgstr "आज"
 
-#: plugins/Novae/src/Novae.cpp:70 plugins/Novae/src/Novae.cpp:143
+#: plugins/Novae/src/Novae.cpp:71 plugins/Novae/src/Novae.cpp:144
 msgid "Bright Novae"
 msgstr "उज्ज्वल नवतारें"
 
-#: plugins/Novae/src/Novae.cpp:73 plugins/Novae/src/gui/NovaeDialog.cpp:119
+#: plugins/Novae/src/Novae.cpp:74 plugins/Novae/src/gui/NovaeDialog.cpp:119
 msgid "A plugin that shows some bright novae in the Milky Way galaxy."
 msgstr "एक उपलग्न जो दिखाता है कुछ उज्ज्वल नवतारें आकाशगंगा तारासंगम में।"
 
-#: plugins/Novae/src/Novae.cpp:143
+#: plugins/Novae/src/Novae.cpp:144
 msgid "Bright Novae configuration window"
 msgstr "उज्ज्वल नवतारें समाकृति खिडकी"
 
-#: plugins/Novae/src/Nova.hpp:61
+#: plugins/Novae/src/Nova.hpp:60
 msgid "nova"
 msgstr "नवतारा"
 
@@ -22268,7 +22289,7 @@ msgid "Binary period of pulsar"
 msgstr "युगल अवधि स्फुरन्ततारा की"
 
 #. TRANSLATORS: Unit of measure for period - days
-#: plugins/Pulsars/src/Pulsar.cpp:246 plugins/Exoplanets/src/Exoplanet.cpp:360
+#: plugins/Pulsars/src/Pulsar.cpp:246 plugins/Exoplanets/src/Exoplanet.cpp:361
 msgctxt "period"
 msgid "days"
 msgstr "दिन"
@@ -22340,11 +22361,11 @@ msgstr ""
 "एकान्त मध्यमकण तारा स्फुरन्त तापमय एक्स॰ किरण उतसर्जन के साथ परन्तु कोई "
 "अवलोकमान दीर्घतरंग उत्सर्जन नही"
 
-#: plugins/Pulsars/src/Pulsar.hpp:86
+#: plugins/Pulsars/src/Pulsar.hpp:85
 msgid "pulsar"
 msgstr "स्फुरन्ततारा"
 
-#: plugins/Pulsars/src/Pulsar.hpp:86
+#: plugins/Pulsars/src/Pulsar.hpp:85
 msgid "pulsar with glitches"
 msgstr "स्फुरन्ततारा अपक्रमों के साथ"
 
@@ -22506,14 +22527,14 @@ msgstr ""
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:160
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:243
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:229
-#: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:195
+#: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:198
 msgid "Publications"
 msgstr "प्रकाशन"
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:161
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:244
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:230
-#: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:196
+#: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:199
 msgid "If you use this plugin in your publications, please cite:"
 msgstr ""
 "यदि आप इस उपलग्न को अपने प्रकाशन में प्रयोग करते हैं तो कृपया उद्धृत करें : "
@@ -22833,172 +22854,172 @@ msgid "Show exoplanets"
 msgstr "दिखाएँ बाह्यग्रह"
 
 #. TRANSLATORS: Habitable zone
-#: plugins/Exoplanets/src/Exoplanets.cpp:1036
+#: plugins/Exoplanets/src/Exoplanets.cpp:1038
 msgid "Hot"
 msgstr "उष्ण"
 
 #. TRANSLATORS: Habitable zone
-#: plugins/Exoplanets/src/Exoplanets.cpp:1038
+#: plugins/Exoplanets/src/Exoplanets.cpp:1040
 msgid "Warm"
 msgstr "मध्यम ताप"
 
 #. TRANSLATORS: Habitable zone
-#: plugins/Exoplanets/src/Exoplanets.cpp:1040
+#: plugins/Exoplanets/src/Exoplanets.cpp:1042
 msgid "Cold"
 msgstr "ठण्डा"
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:1043
+#: plugins/Exoplanets/src/Exoplanets.cpp:1045
 msgid "Miniterran"
 msgstr "छोटा पृथ्वी"
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:1045
+#: plugins/Exoplanets/src/Exoplanets.cpp:1047
 msgid "Subterran"
 msgstr "उप पृथ्वी"
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:1047
+#: plugins/Exoplanets/src/Exoplanets.cpp:1049
 msgid "Terran"
 msgstr "पृथ्वीमय"
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:1049
+#: plugins/Exoplanets/src/Exoplanets.cpp:1051
 msgid "Superterran"
 msgstr "महा पृथ्वी"
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:1051
+#: plugins/Exoplanets/src/Exoplanets.cpp:1053
 msgid "Jovian"
 msgstr "बृहस्पतिमय"
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:1053
+#: plugins/Exoplanets/src/Exoplanets.cpp:1055
 msgid "Neptunian"
 msgstr "वरुणमय"
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:1056
+#: plugins/Exoplanets/src/Exoplanets.cpp:1058
 msgid "Primary Transit"
 msgstr "प्रमुख पारगमन"
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:1058
+#: plugins/Exoplanets/src/Exoplanets.cpp:1060
 msgid "Microlensing"
 msgstr "सूक्ष्मतालघटन"
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:1060
+#: plugins/Exoplanets/src/Exoplanets.cpp:1062
 msgid "Radial Velocity"
 msgstr "व्यासार्धीय गति"
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:1062
+#: plugins/Exoplanets/src/Exoplanets.cpp:1064
 msgid "Imaging"
 msgstr "चित्रग्रहण"
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:1064
+#: plugins/Exoplanets/src/Exoplanets.cpp:1066
 msgid "Astrometry"
 msgstr "तारा मापन"
 
 #. TRANSLATORS: Exoplanet detection method. TTV=Transit Timing Variation
-#: plugins/Exoplanets/src/Exoplanets.cpp:1066
+#: plugins/Exoplanets/src/Exoplanets.cpp:1068
 msgid "TTV"
 msgstr "पा॰स॰वि॰"
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:1068
+#: plugins/Exoplanets/src/Exoplanets.cpp:1070
 msgid "Timing"
 msgstr "समय निर्धारण"
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:1070
+#: plugins/Exoplanets/src/Exoplanets.cpp:1072
 msgid "Default"
 msgstr "मूलविकल्प"
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:1072
+#: plugins/Exoplanets/src/Exoplanets.cpp:1074
 msgid "Secondary Transit"
 msgstr "गौण पारगमन"
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:1074
+#: plugins/Exoplanets/src/Exoplanets.cpp:1076
 msgid "Disk Kinematics"
 msgstr "चक्र गतिविद्या"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:341
+#: plugins/Exoplanets/src/Exoplanet.cpp:342
 msgid "Metallicity"
 msgstr "धातुमयता"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:345
-#: plugins/Exoplanets/src/Exoplanet.cpp:361
+#: plugins/Exoplanets/src/Exoplanet.cpp:346
+#: plugins/Exoplanets/src/Exoplanet.cpp:362
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:175
 msgid "Mass"
 msgstr "द्रव्यमान"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:349
-#: plugins/Exoplanets/src/Exoplanet.cpp:362
+#: plugins/Exoplanets/src/Exoplanet.cpp:350
+#: plugins/Exoplanets/src/Exoplanet.cpp:363
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:176
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:185
 msgid "Radius"
 msgstr "व्यासार्ध"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:353
+#: plugins/Exoplanets/src/Exoplanet.cpp:354
 msgid "Effective temperature"
 msgstr "प्रभावी तापमान"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:353
+#: plugins/Exoplanets/src/Exoplanet.cpp:354
 msgctxt "temperature"
 msgid "K"
 msgstr "के॰"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:358
+#: plugins/Exoplanets/src/Exoplanet.cpp:359
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:174
 msgid "Exoplanet"
 msgstr "बाह्यग्रह"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:363
+#: plugins/Exoplanets/src/Exoplanet.cpp:364
 msgid "Semi-Major Axis"
 msgstr "ज्येष्ठ अक्षार्ध"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:366
+#: plugins/Exoplanets/src/Exoplanet.cpp:367
 msgid "Angle Distance"
 msgstr "अस्रीय दूरी"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:367
+#: plugins/Exoplanets/src/Exoplanet.cpp:368
 msgid "Discovery year"
 msgstr "खोज वर्ष"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:368
+#: plugins/Exoplanets/src/Exoplanet.cpp:369
 msgid "Detection method"
 msgstr "खोज तन्त्र"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:369
+#: plugins/Exoplanets/src/Exoplanet.cpp:370
 msgid "Planetary class"
 msgstr "ग्रहमय वर्ग"
 
 #. TRANSLATORS: Full phrase is "Equilibrium Temperature"
-#: plugins/Exoplanets/src/Exoplanet.cpp:371
+#: plugins/Exoplanets/src/Exoplanet.cpp:372
 msgid "Equilibrium temp."
 msgstr "सन्तुलन ताप॰"
 
 #. TRANSLATORS: Average stellar flux of the planet
-#: plugins/Exoplanets/src/Exoplanet.cpp:373
+#: plugins/Exoplanets/src/Exoplanet.cpp:374
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:318
 msgid "Flux"
 msgstr "प्रवाह"
 
 #. TRANSLATORS: ESI = Earth Similarity Index
-#: plugins/Exoplanets/src/Exoplanet.cpp:375
+#: plugins/Exoplanets/src/Exoplanet.cpp:376
 msgid "ESI"
 msgstr "पृ॰स॰नि॰"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:498
+#: plugins/Exoplanets/src/Exoplanet.cpp:499
 msgid "Equilibrium temperature on Earth"
 msgstr "सन्तुलन तापमान पृथ्वी पर"
 
-#: plugins/Exoplanets/src/Exoplanet.hpp:87
+#: plugins/Exoplanets/src/Exoplanet.hpp:86
 msgid "planetary system"
 msgstr "ग्रहमण्डल"
 
@@ -33001,7 +33022,6 @@ msgstr "मध्यामेरिका"
 
 #: plugins/OnlineQueries/src/OnlineQueries.cpp:55
 #: plugins/OnlineQueries/src/OnlineQueries.cpp:105
-#: plugins/OnlineQueries/src/OnlineQueries.cpp:106
 #: plugins/OnlineQueries/src/OnlineQueries.cpp:107
 #: plugins/OnlineQueries/src/OnlineQueries.cpp:108
 #: plugins/OnlineQueries/src/OnlineQueries.cpp:109
@@ -33023,10 +33043,6 @@ msgstr ""
 #: plugins/OnlineQueries/src/OnlineQueries.cpp:105
 msgid "Show window for Online Queries"
 msgstr "दिखाएँ खिडकी संचारजाल प्रश्नों के लिए"
-
-#: plugins/OnlineQueries/src/OnlineQueries.cpp:106
-msgid "Call ancient-skies on current selection"
-msgstr "पूछें प्राचीन आकाशें वर्तमान चयन पर"
 
 #: plugins/OnlineQueries/src/OnlineQueries.cpp:107
 msgid "Call AAVSO database on current selection"
@@ -33086,33 +33102,33 @@ msgstr ""
 msgid "We can request data for stars, planets and deep-sky objects only."
 msgstr "हम पूछ सकते हैं तथ्य केवल तारों ग्रह तथा गहनाकाश वस्तुओं के लिए।"
 
-#: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:107
+#: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:109
 msgctxt "GUI label"
 msgid "(Custom 1)"
 msgstr "( वैयक्तीकृत 1 )"
 
-#: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:116
+#: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:118
 msgctxt "GUI label"
 msgid "(Custom 2)"
 msgstr "( वैयक्तीकृत 2 )"
 
-#: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:125
+#: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:127
 msgctxt "GUI label"
 msgid "(Custom 3)"
 msgstr "( वैयक्तीकृत 3 )"
 
-#: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:164
-#: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:172
+#: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:166
+#: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:174
 #, qt-format
 msgctxt "OnlineQueries"
 msgid "Opened %1 in your web browser"
 msgstr "आपके जालसंचारक में %1 खोल दिया गया"
 
-#: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:179
+#: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:181
 msgid "OnlineQueries Plug-in"
 msgstr "संचारजाल प्रश्न उपलग्न"
 
-#: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:186
+#: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:188
 msgid ""
 "The OnlineQueries plugin provides an interface to various online sources for"
 " astronomical information."
@@ -33120,11 +33136,11 @@ msgstr ""
 "संचारजाल प्रश्न उपलग्न उपलब्ध करता है एक माध्यम अनेक संचारजालीय स्रोतों तक "
 "खगोल विज्ञान जानकारी के लिए।"
 
-#: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:187
+#: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:189
 msgid "Wikipedia, the free online encyclopedia"
 msgstr "विकिपीडिया मुक्त संचारजालीय परिचक्रपाठ्य"
 
-#: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:188
+#: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:190
 msgid ""
 "AAVSO, the International Variable Star Index of the American Association for"
 " Variable Star Observers"
@@ -33132,7 +33148,7 @@ msgstr ""
 "॰एएवीएसओ॰ अन्तरराष्ट्रीय विकारी तारा निर्देशिका विकारी तारा अवलोकनकर्ताओं का"
 " अमेरिकी संगठन द्वारा।"
 
-#: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:189
+#: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:191
 msgid ""
 "GCVS, the General Catalogue of Variable Stars of the Sternberg Astronomical "
 "Institute and the Institute of Astronomy of the Russian Academy of Sciences "
@@ -33141,19 +33157,11 @@ msgstr ""
 "॰जीसीवीएस॰ विकारी तारों का सामान्य सूचीपत्र स्टेर्णबेर्ग खगोल विज्ञान संस्था"
 " द्वारा तथा रूस्सी विज्ञान विद्यापीठ मोस्कौव द्वारा।"
 
-#: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:190
-msgid ""
-"Ancient-Skies, a private project which collects information about star names"
-" and their mythologies"
-msgstr ""
-"प्राचीन आकाशें एक निजी योजना जो तारा नामों की तथा उनके पुराणकथाओं की जानकारी"
-" संग्रहित करता है।"
-
-#: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:191
+#: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:194
 msgid "3 custom websites of your choice"
 msgstr "आपके चयन के 3 वैयक्तीकृत जालस्थान"
 
-#: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:193
+#: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:196
 msgid ""
 "Regardless of the current program language, the result is always presented "
 "in English or the language of the respective website."
@@ -33176,3 +33184,32 @@ msgstr "( वैयक्तीकृत 2 )"
 #: plugins/OnlineQueries/src/ui_onlineQueriesDialog.h:249
 msgid "Queries"
 msgstr "प्रश्न"
+
+#: plugins/MissingStars/src/MissingStars.cpp:62
+#: plugins/MissingStars/src/MissingStars.cpp:125
+msgid "Missing Stars"
+msgstr ""
+
+#: plugins/MissingStars/src/MissingStars.cpp:65
+msgid "This plugin allows you to see some missing stars."
+msgstr ""
+
+#: plugins/MissingStars/src/MissingStars.cpp:125
+msgid "Missing Stars configuration window"
+msgstr ""
+
+#: plugins/MissingStars/src/gui/MissingStarsDialog.cpp:84
+msgid "Missing Stars Plug-in"
+msgstr ""
+
+#: plugins/MissingStars/src/gui/MissingStarsDialog.cpp:90
+msgid "This plugin allows you to see some missing stars: "
+msgstr ""
+
+#: plugins/MissingStars/src/ui_missingStarsDialog.h:117
+msgid "Missing Stars Configuration"
+msgstr ""
+
+#: plugins/MissingStars/src/ui_missingStarsDialog.h:118
+msgid "Missing Stars Plug-in Configuration"
+msgstr ""
