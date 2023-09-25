@@ -30,6 +30,7 @@
 #include <iterator>
 #include <limits>
 #include <QString>
+#include <QVector2D>
 #include <QMatrix4x4>
 #include <QColor>
 #include <QRegularExpression>
@@ -171,6 +172,8 @@ public:
 	//! Compact comma-separated string without brackets and spaces.
 	//! The result can be restored into a Vector2 by the Vector2(QString s) constructors.
 	QString toStr() const;
+	//! Convert to a QVector2D.
+	QVector2D toQVector() const;
 
 	T v[2];
 };
