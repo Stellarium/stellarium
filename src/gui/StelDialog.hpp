@@ -253,8 +253,18 @@ class CustomProxy : public QGraphicsProxyWidget
 		bool event(QEvent* event) override
 		{
 			if (StelApp::getInstance().getSettings()->value("gui/flag_use_window_transparency", true).toBool())
-				widget()->setWindowOpacity(0.9);
-
+			{
+				switch (event->type())
+				{
+					case QEvent::WindowDeactivate:
+						widget()->setWindowOpacity(0.4);
+						break;
+					case QEvent::WindowActivate:
+						widget()->setWindowOpacity(0.9);
+					default:
+						break;
+				}
+			}
 			return QGraphicsProxyWidget::event(event);
 		}
 		void resizeEvent(QGraphicsSceneResizeEvent *event) override
