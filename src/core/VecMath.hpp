@@ -394,6 +394,8 @@ public:
 	inline Matrix3 operator-(const Matrix3<T>&) const;
 	inline Matrix3 operator+(const Matrix3<T>&) const;
 	inline Matrix3 operator*(const Matrix3<T>&) const;
+	inline Matrix3 operator*(T) const;
+	inline Matrix3 operator/(T) const;
 
 	inline Vector3<T> operator*(const Vector3<T>&) const;
 
@@ -1157,6 +1159,25 @@ template<class T> Matrix3<T> Matrix3<T>::operator*(const Matrix3<T>& a) const
 #undef MATMUL
 }
 
+template<class T> Matrix3<T> Matrix3<T>::operator*(T a) const
+{
+	return Matrix3(r[0]*a, r[1]*a, r[2]*a,
+	               r[3]*a, r[4]*a, r[5]*a,
+	               r[6]*a, r[7]*a, r[8]*a);
+}
+
+template<class T> Matrix3<T> operator*(T a, const Matrix3<T>& m)
+{
+	return m * a;
+}
+
+template<class T> Matrix3<T> Matrix3<T>::operator/(T a) const
+{
+	return Matrix3(r[0]/a, r[1]/a, r[2]/a,
+	               r[3]/a, r[4]/a, r[5]/a,
+	               r[6]/a, r[7]/a, r[8]/a);
+}
+
 
 template<class T> Matrix3<T> Matrix3<T>::operator+(const Matrix3<T>& a) const
 {
@@ -1765,6 +1786,20 @@ template<class T> inline
 Vector4<T> operator*(T s,const Vector4<T>&v)
 {
 	return Vector4<T>(s*v[0],s*v[1],s*v[2],s*v[3]);
+}
+
+template<class T>
+Matrix3<T> outerProduct(const Vector3<T>& a, const Vector3<T>& b)
+{
+	return Matrix3<T>(a[0]*b[0], a[1]*b[0], a[2]*b[0],
+	                  a[0]*b[1], a[1]*b[1], a[2]*b[1],
+	                  a[0]*b[2], a[1]*b[2], a[2]*b[2]);
+}
+
+template<class T>
+T dot(const Vector3<T>& a, const Vector3<T>& b)
+{
+	return a.dot(b);
 }
 
 //Make Qt handle the classes as primitive type. This optimizes performance with Qt's container classes
