@@ -361,9 +361,7 @@ public:
 		  mainView(mainView),
 		  skyBackgroundColor(0.f,0.f,0.f)
 	{
-		setFlag(QGraphicsItem::ItemClipsToShape);
-		setFlag(QGraphicsItem::ItemClipsChildrenToShape);
-		setFlag(QGraphicsItem::ItemIsFocusable);
+		setFlags(QGraphicsItem::ItemClipsToShape | QGraphicsItem::ItemClipsChildrenToShape | QGraphicsItem::ItemIsFocusable);
 
 		setAcceptHoverEvents(true);
 
@@ -1934,4 +1932,17 @@ void StelMainView::setSkyBackgroundColor(Vec3f color)
 Vec3f StelMainView::getSkyBackgroundColor() const
 {
 	return rootItem->getSkyBackgroundColor();
+}
+
+QRectF StelMainView::setWindowSize(int width, int height)
+{
+	// Make sure to leave fullscreen if necessary.
+	if (isFullScreen())
+		setFullScreen(false);
+	QRect geo=geometry();
+	geo.setWidth(width);
+	geo.setHeight(height);
+	setGeometry(geo);
+
+	return stelScene->sceneRect(); // retrieve what was finally available.
 }

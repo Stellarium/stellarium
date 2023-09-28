@@ -1542,3 +1542,10 @@ double StelMainScriptAPI::getDisplayGamma()
 {
     return static_cast<double>(StelApp::getInstance().getCore()->getToneReproducer()->getDisplayGamma());
 }
+
+Vec2d StelMainScriptAPI::setWindowSize(int width, int height)
+{
+	StelMainView &mainView=StelMainView::getInstance();
+	QRectF rect=mainView.setWindowSize(width, height);
+	return Vec2d(rect.width(), rect.height());
+}

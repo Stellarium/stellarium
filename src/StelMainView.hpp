@@ -123,6 +123,10 @@ public:
 	//! Returns the desired OpenGL format settings.
 	static QSurfaceFormat getDesiredGLFormat(QSettings *configuration);
 
+	//! Set image size in windowed mode. Leaves fullScreen if necessary.
+	//! This is required for externally accessing Stellarium from other programs, do not delete!
+	QRectF setWindowSize(int width, int height);
+
 public slots:
 
 	//! Set whether fullscreen is activated or not
