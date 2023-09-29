@@ -73,6 +73,8 @@ after_test:
   - if [%PUBLISH_BINARY%]==[true] cmake --build c:\stellarium\build-%qtver%-%qtbin%\ --config %configuration% --target install
   - if [%USE_EXT_LIBGLES%]==[true] appveyor DownloadFile https://github.com/Stellarium/stellarium-data/releases/download/qt-5.6/libGLES-Win%BITS%.zip -FileName c:\stellarium\build-%qtver%-%qtbin%\libGLES.zip
   - if [%USE_EXT_LIBGLES%]==[true] 7z e c:\stellarium\build-%qtver%-%qtbin%\libGLES.zip -aoa -oc:\stellarium-%qtver%-%qtbin%\qtstuff
+  - if ([%PUBLISH_BINARY%]==[true] -and ($env:BITS -eq "64"))  appveyor DownloadFile https://github.com/Stellarium/stellarium-data/releases/download/mesa-win-20.1.8/opengl32sw-x64.dll -FileName c:\stellarium\build-%qtver%-%qtbin%\opengl32sw.dll
+  - if ([%PUBLISH_BINARY%]==[true] -and ($env:BITS -eq "32"))  appveyor DownloadFile https://github.com/Stellarium/stellarium-data/releases/download/mesa-win-20.1.8/opengl32sw-x86.dll -FileName c:\stellarium\build-%qtver%-%qtbin%\opengl32sw.dll
   - if [%PUBLISH_BINARY%]==[true] cmake --build c:\stellarium\build-%qtver%-%qtbin%\ --config %configuration% --target stellarium-installer
   - if [%USE_EXTRA_EXE%]==[true] cmake --build c:\stellarium\build-%qtver%-%qtbin%\ --config %configuration% --target stellarium-patch-installer
   - if [%PUBLISH_BINARY%]==[true] cd c:\stellarium\installers
