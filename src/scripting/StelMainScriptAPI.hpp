@@ -541,6 +541,10 @@ public slots:
 	//! - ProjectionMiller
 	void setProjectionMode(const QString& id);
 
+	//! Set size of current window. This will never exceed the current screen dimensions.
+	//! @return the actually gained size(width, height).
+	static Vec2d setWindowSize(int width, int height);
+
 	//! Get the status of the disk viewport
 	//! @return true if the disk view port is currently enabled
 	static bool getDiskViewport();

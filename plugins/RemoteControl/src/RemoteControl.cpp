@@ -62,8 +62,8 @@ StelPluginInfo RemoteControlStelPluginInterface::getPluginInfo() const
 }
 
 RemoteControl::RemoteControl()
-	: httpListener(Q_NULLPTR)
-	, requestHandler(Q_NULLPTR)
+	: httpListener(nullptr)
+	, requestHandler(nullptr)
 	, enabled(false)
 	, autoStart(false)
 	, usePassword(false)
@@ -73,7 +73,7 @@ RemoteControl::RemoteControl()
 	, port(8090)
 	, minThreads(1)
 	, maxThreads(30)
-	, toolbarButton(Q_NULLPTR)
+	, toolbarButton(nullptr)
 {
 	setObjectName("RemoteControl");
 
@@ -92,7 +92,7 @@ RemoteControl::~RemoteControl()
 		//we manually delete the listener here to make sure
 		//all connections are closed before the requesthandler is deleted
 		delete httpListener;
-		httpListener = Q_NULLPTR;
+		httpListener = nullptr;
 	}
 }
 
@@ -154,9 +154,9 @@ void RemoteControl::init()
 	try
 	{
 		StelGui* gui = dynamic_cast<StelGui*>(app.getGui());
-		if (gui!=Q_NULLPTR)
+		if (gui!=nullptr)
 		{
-			toolbarButton = new StelButton(Q_NULLPTR,
+			toolbarButton = new StelButton(nullptr,
 						       QPixmap(":/RemoteControl/resources/bt_remote_on.png"),
 						       QPixmap(":/RemoteControl/resources/bt_remote_off.png"),
 						       QPixmap(":/graphicGui/miscGlow32x32.png"),
@@ -260,7 +260,7 @@ void RemoteControl::setPort(const int port)
 
 void RemoteControl::startServer()
 {
-	Q_ASSERT(httpListener == Q_NULLPTR);
+	Q_ASSERT(httpListener == nullptr);
 
 	//set request handler password settings
 	requestHandler->setPassword(password);
@@ -279,7 +279,7 @@ void RemoteControl::stopServer()
 	if(httpListener)
 	{
 		delete httpListener;
-		httpListener = Q_NULLPTR;
+		httpListener = nullptr;
 	}
 }
 

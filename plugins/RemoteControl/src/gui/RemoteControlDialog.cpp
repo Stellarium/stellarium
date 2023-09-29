@@ -32,7 +32,7 @@
 
 RemoteControlDialog::RemoteControlDialog()
 	: StelDialog("RemoteControl")
-	, rc(Q_NULLPTR)
+	, rc(nullptr)
 {
 	ui = new Ui_remoteControlDialog();
 }
@@ -168,7 +168,7 @@ void RemoteControlDialog::setAboutHtml(void)
 	html += "</body></html>";
 
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-	if(gui!=Q_NULLPTR)
+	if(gui!=nullptr)
 	{
 		QString htmlStyleSheet(gui->getStelStyle().htmlStyleSheet);
 		ui->aboutTextBrowser->document()->setDefaultStyleSheet(htmlStyleSheet);

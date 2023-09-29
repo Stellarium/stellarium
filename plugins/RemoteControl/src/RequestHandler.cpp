@@ -49,7 +49,7 @@ public:
 	{
 		rcTranslator = localInstance;
 	}
-	QString getTranslation(const QString &key) Q_DECL_OVERRIDE
+	QString getTranslation(const QString &key) override
 	{
 		//try to get a RemoteControl specific translation first
 		QString trans = rcTranslator->tryQtranslate(key);
@@ -70,7 +70,7 @@ public:
 		rcTranslator = localInstance;
 	}
 
-	QString getTranslation(const QString &key) Q_DECL_OVERRIDE
+	QString getTranslation(const QString &key) override
 	{
 		//try to get a RemoteControl specific translation first
 		QString trans = rcTranslator->tryQtranslate(key);

@@ -511,10 +511,28 @@ void MainService::post(const QByteArray& operation, const APIParameters &paramet
 
 		response.setData("ok");
 	}
+	else if(operation == "window")
+	{
+		bool wOk,hOk;
+
+		double w = parameters.value("w").toDouble(&wOk);
+		double h = parameters.value("h").toDouble(&hOk);
+
+		if(wOk && hOk)
+		{
+			QMetaObject::invokeMethod(this,"setWindowSize", SERVICE_DEFAULT_INVOKETYPE,
+						  Q_ARG(int,w),
+						  Q_ARG(int,h));
+
+			response.setData("ok");
+		}
+		else
+			response.writeRequestError("requires w and h parameters");
+	}
 	else
 	{
 		//TODO some sort of service description?
-		response.writeRequestError("unsupported operation. POST: time,focus,move,view,fov");
+		response.writeRequestError("unsupported operation. POST: time,focus,move,view,fov,window");
 	}
 }
 
@@ -619,6 +637,11 @@ void MainService::setFov(double fov)
 {
 	//TODO calculate a better move duration here
 	mvmgr->zoomTo(fov,0.25f);
+}
+
+void MainService::setWindowSize(const int width, const int height)
+{
+	StelMainView::getInstance().setWindowSize(width, height);
 }
 
 void MainService::actionToggled(const QString &id, bool val)
