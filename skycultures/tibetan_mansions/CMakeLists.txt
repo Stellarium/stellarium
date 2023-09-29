@@ -8,5 +8,6 @@ INSTALL(FILES info.ini DESTINATION share/${PACKAGE}/skycultures/tibetan_mansions
 INSTALL(DIRECTORY ./ DESTINATION share/${PACKAGE}/skycultures/tibetan_mansions
 	FILES_MATCHING PATTERN "*.fab" 
 	PATTERN "*.png" 
+	PATTERN "*.jpg" 
 	PATTERN "description.*.utf8" 
 	PATTERN "CMakeFiles" EXCLUDE )
