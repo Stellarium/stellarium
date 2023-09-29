@@ -21,7 +21,6 @@
 #define APIHANDLER_HPP
 
 #include "httpserver/httprequesthandler.h"
-//#include "AbstractAPIService.hpp"
 #include "RemoteControlServiceInterface.hpp"
 
 //! @ingroup remoteControl
