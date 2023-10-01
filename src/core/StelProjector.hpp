@@ -173,6 +173,11 @@ public:
 	virtual QByteArray getBackwardTransformShader() const = 0;
 	//! Sets the necessary uniforms so that the shader returned by getBackwardTransformShader can work
 	virtual void setBackwardTransformUniforms(QOpenGLShaderProgram& program) const;
+	//! Makes the object whose center is at \p objectCenter appear only on one side of the screen for
+	//! projections with a wraparound, preventing a stretching across the whole screen.
+	virtual void enableOneSideProjection(const Vec3f& objectCenter) {}
+	//! Undoes the effect of #enableOneSideProjection.
+	virtual void disableOneSideProjection() {}
 
 	//! Determine whether a great circle connection p1 and p2 intersects with a projection discontinuity.
 	//! For many projections without discontinuity, this should return always false, but for other like

@@ -127,6 +127,8 @@ public:
 	//float deltaZoom(float fov) const override;
 	QByteArray getForwardTransformShader() const override;
 	QByteArray getBackwardTransformShader() const override;
+	void enableOneSideProjection(const Vec3f& objectCenter) override;
+	void disableOneSideProjection() override;
 protected:
 	bool hasDiscontinuity() const override {return true;}
 	bool intersectViewportDiscontinuityInternal(const Vec3d& p1, const Vec3d& p2) const override
@@ -141,6 +143,10 @@ protected:
 		SphericalCap cap(capN, capD);
 		return cap.intersects(cap1) && cap.intersects(cap2) && cap.intersects(cap3);
 	}
+
+	//! Used for one-side projection, 0 means disable, <0 places the object
+	//! on the left side of the screen, >0 on the right one.
+	float objectCenterAzimuth = 0;
 };
 
 // A variant which fills the viewport with a plate carrée, regardless of screen dimensions.

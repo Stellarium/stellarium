@@ -560,7 +560,11 @@ bool StelProjectorCylinder::forward(Vec3f &v) const
 {
 	const float r = std::sqrt(v[0]*v[0] + v[1]*v[1] + v[2]*v[2]);
 	const bool rval = (-r < v[1] && v[1] < r);
-	const float alpha = std::atan2(v[0],-v[2]);
+	float alpha = std::atan2(v[0],-v[2]);
+	if(objectCenterAzimuth > 0 && alpha < 0)
+		alpha += M_PI*2;
+	if(objectCenterAzimuth < 0 && alpha > 0)
+		alpha -= M_PI*2;
 	const float delta = std::asin(v[1]/r);
 	v[0] = alpha*static_cast<float>(widthStretch);
 	v[1] = delta;
@@ -625,6 +629,18 @@ vec3 projectorBackwardTransform(vec3 v, out bool ok)
 }
 #line 1 0
 )";
+}
+
+void StelProjectorCylinder::enableOneSideProjection(const Vec3f& objectCenter)
+{
+	Vec3f transformed = objectCenter;
+	modelViewTransform->forward(transformed);
+	objectCenterAzimuth = std::atan2(transformed[0],-transformed[2]);
+}
+
+void StelProjectorCylinder::disableOneSideProjection()
+{
+	objectCenterAzimuth = 0;
 }
 
 

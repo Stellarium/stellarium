@@ -4079,12 +4079,15 @@ void Planet::drawSphere(StelPainter* painter, float screenRd, bool drawOnlyRing)
 	sSphere(&model, static_cast<float>(equatorialRadius), static_cast<float>(oneMinusOblateness), nb_facet, nb_facet);
 
 	QVector<float> projectedVertexArr(model.vertexArr.size());
+	const auto projector = painter->getProjector();
+	projector->enableOneSideProjection(Vec3f(0,0,0));
 	for (int i=0;i<model.vertexArr.size()/3;++i)
 	{
 		Vec3f p = *(reinterpret_cast<const Vec3f*>(model.vertexArr.constData()+i*3));
 		p *= sphereScaleF;
-		painter->getProjector()->project(p, *(reinterpret_cast<Vec3f*>(projectedVertexArr.data()+i*3)));
+		projector->project(p, *(reinterpret_cast<Vec3f*>(projectedVertexArr.data()+i*3)));
 	}
+	projector->disableOneSideProjection();
 	
 	const SolarSystem* ssm = GETSTELMODULE(SolarSystem);
 
