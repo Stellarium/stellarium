@@ -43,7 +43,7 @@ environment:
 
 before_build:
   - ps: if($env:qtbin.contains('_64')) { $env:BITS=64 } else { $env:BITS=32 }
-  - ps: if($env:qtbin.contains('_64')) { $env:PKGARCH="x64" } else { $env:PKGARCH="x86" }
+  - ps: if($env:qtbin.contains('_64')) { $env:PKGARCH=64 } else { $env:PKGARCH=86 }
   - ps: if($env:qtbin.contains('_64')) { $env:cmake_args:="-A x64" }
   - ps: if($env:qtver.contains('6.')) { $env:SSL="OpenSSL-" } else { $env:SSL="OpenSSL-1-" }
   - set PUBLISH_BINARY=false
@@ -78,7 +78,7 @@ test_script:
 
 after_test:
   - if [%PUBLISH_BINARY%]==[true] cmake --build c:\stellarium\build-%qtver%-%qtbin%\ --config %configuration% --target install
-  - if [%PUBLISH_BINARY%]==[true] appveyor DownloadFile https://github.com/Stellarium/stellarium-data/releases/download/mesa-win-20.1.8/opengl32sw-%PKGARCH%.dll -FileName c:\stellarium\build-%qtver%-%qtbin%\qtstuff\opengl32sw.dll
+  - if [%PUBLISH_BINARY%]==[true] appveyor DownloadFile https://github.com/Stellarium/stellarium-data/releases/download/mesa-win-20.1.8/opengl32sw-x%PKGARCH%.dll -FileName c:\stellarium\build-%qtver%-%qtbin%\qtstuff\opengl32sw.dll
   - if [%PUBLISH_BINARY%]==[true] cmake --build c:\stellarium\build-%qtver%-%qtbin%\ --config %configuration% --target stellarium-installer
   - if [%USE_EXTRA_EXE%]==[true] cmake --build c:\stellarium\build-%qtver%-%qtbin%\ --config %configuration% --target stellarium-patch-installer
   - if [%PUBLISH_BINARY%]==[true] cd c:\stellarium\installers
