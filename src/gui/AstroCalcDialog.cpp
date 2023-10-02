@@ -1874,15 +1874,22 @@ void AstroCalcDialog::generateEphemeris()
 		{35, 6585.321314219*solarDay },	// 1 saros (223 synodic months)
 		{36, 500. * siderealDay },
 		{37, 500. * solarDay },
-		{38, StelCore::JD_MINUTE }
+		{38, StelCore::JD_MINUTE },
+		{39, 3. * siderealDay },
+		{40, 3. * solarDay }
 	};
 	double currentStep = timeStepMap.value(ui->ephemerisStepComboBox->currentData().toInt(), solarDay);
 
 	const double currentJD = core->getJD(); // save current JD
-	double firstJD = StelUtils::qDateTimeToJd(ui->dateFromDateTimeEdit->dateTime());	
+	QDateTime fdt = ui->dateFromDateTimeEdit->dateTime();
+	fdt.setTimeSpec(Qt::UTC);
+	double firstJD = StelUtils::qDateTimeToJd(fdt);
 	firstJD -= core->getUTCOffset(firstJD) / 24.;
-	double secondJD = StelUtils::qDateTimeToJd(ui->dateToDateTimeEdit->dateTime());	
+	QDateTime sdt = ui->dateToDateTimeEdit->dateTime();
+	sdt.setTimeSpec(Qt::UTC);
+	double secondJD = StelUtils::qDateTimeToJd(sdt);
 	secondJD -= core->getUTCOffset(secondJD) / 24.;
+
 	const int elements = static_cast<int>((secondJD - firstJD) / currentStep);
 	EphemerisList.clear();
 	const bool allNakedEyePlanets = (ui->allNakedEyePlanetsCheckBox->isChecked() && cplanet==solarSystem->getEarth());
@@ -5660,13 +5667,14 @@ void AstroCalcDialog::populateEphemerisTimeStepsList()
 	typedef QPair<QString, QString> itemPairs;
 	const QList<itemPairs> items = {
 		{q_("1 minute"), "38"}, {q_("10 minutes"), "1"}, {q_("30 minutes"), "2"}, {q_("1 hour"), "3"}, {q_("6 hours"), "4"}, {q_("12 hours"), "5"},
-		{q_("1 solar day"), "6"}, {q_("5 solar days"), "7"}, {q_("10 solar days"), "8"}, {q_("15 solar days"), "9"}, {q_("30 solar days"), "10"},
-		{q_("60 solar days"), "11"}, {q_("100 solar days"), "24"},{q_("500 solar days"), "37"},{q_("1 sidereal day"), "18"},{q_("5 sidereal days"), "19"},
-		{q_("10 sidereal days"), "20"},{q_("15 sidereal days"), "21"},{q_("30 sidereal days"), "22"},{q_("60 sidereal days"), "23"},{q_("100 sidereal days"), "25"},
-		{q_("500 sidereal days"), "36"},{q_("1 sidereal year"), "27"},{q_("1 Julian day"), "12"},{q_("5 Julian days"), "13"},{q_("10 Julian days"), "14"},
-		{q_("15 Julian days"), "15"},{q_("30 Julian days"), "16"},{q_("60 Julian days"), "17"},{q_("100 Julian days"), "26"},{q_("1 Julian year"), "28"},
-		{q_("1 Gaussian year"), "29"},{q_("1 synodic month"), "30"},{q_("1 draconic month"), "31"},{q_("1 mean tropical month"), "32"},
-		{q_("1 anomalistic month"), "33"},{q_("1 anomalistic year"), "34"},{q_("1 saros"), "35"},{q_("custom interval"), "0"}
+		{q_("1 solar day"), "6"}, {q_("3 solar days"), "40"}, {q_("5 solar days"), "7"}, {q_("10 solar days"), "8"}, {q_("15 solar days"), "9"},
+		{q_("30 solar days"), "10"}, {q_("60 solar days"), "11"}, {q_("100 solar days"), "24"}, {q_("500 solar days"), "37"}, {q_("1 sidereal day"), "18"},
+		{q_("3 sidereal days"), "39"}, {q_("5 sidereal days"), "19"}, {q_("10 sidereal days"), "20"}, {q_("15 sidereal days"), "21"},
+		{q_("30 sidereal days"), "22"}, {q_("60 sidereal days"), "23"}, {q_("100 sidereal days"), "25"}, {q_("500 sidereal days"), "36"},
+		{q_("1 sidereal year"), "27"}, {q_("1 Julian day"), "12"}, {q_("5 Julian days"), "13"}, {q_("10 Julian days"), "14"}, {q_("15 Julian days"), "15"},
+		{q_("30 Julian days"), "16"}, {q_("60 Julian days"), "17"}, {q_("100 Julian days"), "26"}, {q_("1 Julian year"), "28"},
+		{q_("1 Gaussian year"), "29"}, {q_("1 synodic month"), "30"}, {q_("1 draconic month"), "31"}, {q_("1 mean tropical month"), "32"},
+		{q_("1 anomalistic month"), "33"} ,{q_("1 anomalistic year"), "34"}, {q_("1 saros"), "35"}, {q_("custom interval"), "0"}
 	};
 	Q_ASSERT(ui->ephemerisStepComboBox);
 	QComboBox* steps = ui->ephemerisStepComboBox;
