@@ -17,7 +17,6 @@
  */
 
 #include "ASCOMDevice.hpp"
-#include <atlcomcli.h>
 #include <comdef.h>
 
 ASCOMDevice::ASCOMDevice(QObject* parent, QString ascomDeviceId) : QObject(parent),
