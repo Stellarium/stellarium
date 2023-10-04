@@ -23,7 +23,6 @@
 
 #ifdef Q_OS_WIN
 
-#include <atlcomcli.h>
 #include <comdef.h>
 #include <QRegularExpression>
 

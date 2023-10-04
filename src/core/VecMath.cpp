@@ -103,6 +103,17 @@ template<> Vec2d Vec2d::fromBracketedString(QString s)
 	}
 	return vec;
 }
+
+template<> QVector2D Vec2f::toQVector() const
+{
+	return QVector2D(v[0], v[1]);
+}
+
+template<> QVector2D Vec2d::toQVector() const
+{
+	return QVector2D(static_cast<float>(v[0]), static_cast<float>(v[1]));
+}
+
 ///// Vector3 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Obtains a Vec3i/Vec3f/Vec3d from a stringlist with the form x,y,z  (use C++11 type delegating constructors)
