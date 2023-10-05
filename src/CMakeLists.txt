@@ -613,6 +613,12 @@ IF(WIN32)
           SET(VIRTUAL_KBD_SETTING "--no-virtualkeyboard")
      ENDIF()
 
+     IF("${QT_PATHS}" STREQUAL "")
+          SET(_qt_paths "")
+     ELSE()
+          SET(_qt_paths "--qtpaths \"${QTPATHS}\"")
+     ENDIF()
+
      INSTALL(CODE
 	  "
 	  EXECUTE_PROCESS(
@@ -621,6 +627,7 @@ IF(WIN32)
 		    --no-translations
 		    --verbose 1
 		    ${VIRTUAL_KBD_SETTING}
+		    ${_qt_paths}
 		    --compiler-runtime
 		    \"\${CMAKE_INSTALL_PREFIX}/bin/stellarium.exe\"
 	       WORKING_DIRECTORY \"\${CMAKE_INSTALL_PREFIX}/bin\"
