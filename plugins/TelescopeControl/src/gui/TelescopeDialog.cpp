@@ -22,6 +22,7 @@
 #include "StelApp.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelStyle.hpp"
+#include "StelMainView.hpp"
 #include "StelTranslator.hpp"
 #include "TelescopeControl.hpp"
 #include "TelescopeConfigurationDialog.hpp"
@@ -1021,7 +1022,7 @@ void TelescopeDialog::updateStyle()
 
 void TelescopeDialog::buttonBrowseServerDirectoryPressed()
 {
-	QString newPath = QFileDialog::getExistingDirectory (nullptr, QString(q_("Select a directory")), telescopeManager->getServerExecutablesDirectoryPath());
+	QString newPath = QFileDialog::getExistingDirectory (&StelMainView::getInstance(), QString(q_("Select a directory")), telescopeManager->getServerExecutablesDirectoryPath());
 	//TODO: Validation? Directory exists and contains servers?
 	if(!newPath.isEmpty())
 	{

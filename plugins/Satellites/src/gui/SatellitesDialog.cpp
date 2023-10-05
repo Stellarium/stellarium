@@ -1477,7 +1477,7 @@ void SatellitesDialog::updateTLEs(void)
 	}
 	else
 	{
-		QStringList updateFiles = QFileDialog::getOpenFileNames(nullptr,
+		QStringList updateFiles = QFileDialog::getOpenFileNames(&StelMainView::getInstance(),
 									q_("Select TLE Update File"),
 									StelFileMgr::getDesktopDir(),
 									"*.*");
@@ -1591,7 +1591,7 @@ void SatellitesDialog::savePredictedIridiumFlares()
 
 	QString defaultFilter = QString("(*.%1)").arg(defaultExtension);
 	QString dir = QString("%1/iridium_flares.%2").arg(QDir::homePath(), defaultExtension);
-	QString filePath = QFileDialog::getSaveFileName(nullptr, q_("Save predicted Iridium flares as..."), dir, filter, &defaultFilter);
+	QString filePath = QFileDialog::getSaveFileName(&StelMainView::getInstance(), q_("Save predicted Iridium flares as..."), dir, filter, &defaultFilter);
 
 	int count = ui->iridiumFlaresTreeWidget->topLevelItemCount();
 	int columns = iridiumFlaresHeader.size();

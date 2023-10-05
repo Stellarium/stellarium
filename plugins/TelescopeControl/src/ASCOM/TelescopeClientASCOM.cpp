@@ -26,6 +26,7 @@
 
 #include "StelCore.hpp"
 #include "StelUtils.hpp"
+#include "StelMainView.hpp"
 #include "StelTranslator.hpp"
 
 TelescopeClientASCOM::TelescopeClientASCOM(const QString& name, const QString& params, TelescopeControl::Equinox eq)
@@ -138,7 +139,7 @@ void TelescopeClientASCOM::telescopeGoto(const Vec3d& j2000Pos, StelObjectP sele
 
 	if (mAscomDevice->isParked())
 	{
-		QMessageBox::warning(nullptr, "Stellarium",
+		QMessageBox::warning(&StelMainView::getInstance(), "Stellarium",
 		  q_("Can't slew a telescope which is parked. Unpark before performing any goto command."));
 		return;
 	}
