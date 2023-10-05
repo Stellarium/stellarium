@@ -29,7 +29,7 @@ environment:
     qtver: 5.12
     qtbin: msvc2017_64
     msvcname: Visual Studio 15 2017 Win64
-    cmake_args: -A x64
+    cmake_args:
   - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
     qtver: 5.12
     qtbin: msvc2017
