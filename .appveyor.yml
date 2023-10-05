@@ -24,18 +24,25 @@ environment:
     qtver: 6.5
     qtbin: msvc2019_64
     msvcname: Visual Studio 16 2019
+    cmake_args: -A x64
   - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
     qtver: 5.12
     qtbin: msvc2017_64
     msvcname: Visual Studio 15 2017 Win64
+    cmake_args: -A x64
   - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
     qtver: 5.12
     qtbin: msvc2017
     msvcname: Visual Studio 15 2017
+    cmake_args:
+  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2022
+    qtver: 6.5
+    qtbin: msvc2019_arm64
+    msvcname: Visual Studio 17 2022
+    cmake_args: -A ARM64 -DQT_HOST_PATH=C:/Qt/6.5/msvc2019_64 -DENABLE_SPOUT=OFF -DENABLE_QTWEBENGINE=OFF
 
 before_build:
   - ps: if($env:qtbin.contains('_64')) { $env:BITS=64 } else { $env:BITS=32 }
-  - ps: if($env:qtbin.contains('_64')) { $env:cmake_args:="-A x64" }
   - ps: if($env:qtver.contains('6.')) { $env:SSL="OpenSSL-" } else { $env:SSL="OpenSSL-1-" }
   - set PUBLISH_BINARY=false
   - set USE_EXT_LIBGLES=false
@@ -67,7 +74,7 @@ build:
   verbosity: minimal
 
 test_script:
-  - if [%PUBLISH_BINARY%]==[false] ctest --output-on-failure
+  - ps: if($env:PUBLISH_BINARY -eq "false" -and $env:qtbin -ne "msvc2019_arm64") { ctest --output-on-failure }
 
 after_test:
   - if [%PUBLISH_BINARY%]==[true] cmake --build c:\stellarium\build-%qtver%-%qtbin%\ --config %configuration% --target install
