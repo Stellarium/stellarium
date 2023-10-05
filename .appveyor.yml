@@ -39,7 +39,7 @@ environment:
     qtver: 6.5
     qtbin: msvc2019_arm64
     msvcname: Visual Studio 17 2022
-    cmake_args: -A ARM64 -DQT_HOST_PATH=C:/Qt/6.5/msvc2019_64 -DENABLE_SPOUT=OFF -DENABLE_QTWEBENGINE=OFF
+    cmake_args: -A ARM64 -DQT_HOST_PATH=C:/Qt/6.5/msvc2019_64 -DQT_PATHS=C:/Qt/6.5/msvc2019_arm64/bin/qtpaths.bat -DENABLE_SPOUT=OFF -DENABLE_QTWEBENGINE=OFF
 
 before_build:
   - ps: if($env:qtbin.contains('_64')) { $env:BITS=64 } else { $env:BITS=32 }
