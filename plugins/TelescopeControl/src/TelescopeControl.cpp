@@ -37,6 +37,7 @@
 #include "StelFileMgr.hpp"
 #include "StelGui.hpp"
 #include "StelGuiItems.hpp"
+#include "StelMainView.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelMovementMgr.hpp"
 #include "StelObject.hpp"
@@ -770,7 +771,7 @@ void TelescopeControl::loadTelescopes()
 			qWarning() << "[TelescopeControl] The existing version of telescopes.json is obsolete. Unable to rename.";
 
 		telescopeDescriptions = result;
-		QMessageBox::warning(nullptr, q_("Attention!"), q_("The existing version of the configuration data for telescopes in the Telescope Control plugin is obsolete."), QMessageBox::Ok);
+		QMessageBox::warning(&StelMainView::getInstance(), q_("Attention!"), q_("The existing version of the configuration data for telescopes in the Telescope Control plugin is obsolete."), QMessageBox::Ok);
 		return;
 	}
 

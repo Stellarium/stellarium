@@ -24,6 +24,7 @@
 
 #include "StelTranslator.hpp"
 #include "StelApp.hpp"
+#include "StelMainView.hpp"
 #include "StelObjectMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelLocationMgr.hpp"
@@ -906,7 +907,7 @@ void ObsListDialog::exportListButtonPressed()
 	static const QString filter = "Stellarium Single Observing List (*.sol);;Stellarium Observing List (*.ol)";
 	const QString destinationDir=StelApp::getInstance().getSettings()->value("main/observinglists_dir", QDir::homePath()).toString();
 	QString selectedFilter = "Stellarium Single Observing List (*.sol)";
-	QString exportListJsonPath = QFileDialog::getSaveFileName(nullptr, q_("Export observing list as..."),
+	QString exportListJsonPath = QFileDialog::getSaveFileName(&StelMainView::getInstance(), q_("Export observing list as..."),
 							      destinationDir + "/" + JSON_FILE_BASENAME + "_" + currentListName + ".sol", filter, &selectedFilter);
 
 	QFile jsonFile(exportListJsonPath);
@@ -952,7 +953,7 @@ void ObsListDialog::importListButtonPressed()
 {
 	static const QString filter = "Stellarium Single Observing List (*.sol);;Stellarium Observing List (*.ol);;Stellarium Legacy JSON Observing List or Bookmarks (*.json)";
 	const QString destinationDir=StelApp::getInstance().getSettings()->value("main/observinglists_dir", QDir::homePath()).toString();
-	QString fileToImportJsonPath = QFileDialog::getOpenFileName(nullptr, q_("Import observing list"),
+	QString fileToImportJsonPath = QFileDialog::getOpenFileName(&StelMainView::getInstance(), q_("Import observing list"),
 								    destinationDir,
 								    filter);
 	QVariantMap map;

@@ -25,6 +25,7 @@
 
 #include "StelApp.hpp"
 #include "StelFileMgr.hpp"
+#include "StelMainView.hpp"
 #include "StelJsonParser.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelTranslator.hpp"
@@ -337,7 +338,7 @@ void MpcImportWindow::selectFile()
 	filter.append(" (*.txt);;");
 	filter.append(q_("All Files"));
 	filter.append(" (*.*)");
-	QString filePath = QFileDialog::getOpenFileName(nullptr, q_("Select a file"), QDir::homePath(), filter);
+	QString filePath = QFileDialog::getOpenFileName(&StelMainView::getInstance(), q_("Select a file"), QDir::homePath(), filter);
 	ui->lineEditFilePath->setText(filePath);
 }
 
