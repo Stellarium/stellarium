@@ -198,7 +198,7 @@ void ScriptConsole::loadScript()
 	QString filter = q_("Stellarium Script Files");
 	filter.append(" (*.ssc *.inc);;");
 	filter.append(getFileMask());
-	QString aFile = QFileDialog::getOpenFileName(nullptr, q_("Load Script"), openDir, filter);
+	QString aFile = QFileDialog::getOpenFileName(&StelMainView::getInstance(), q_("Load Script"), openDir, filter);
 	if (aFile.isNull())
 		return;
 	scriptFileName = aFile;
@@ -224,7 +224,7 @@ void ScriptConsole::saveScript()
 	// Let's ask file name, when file is new and overwrite it in other case
 	if (scriptFileName.isEmpty())
 	{
-		QString aFile = QFileDialog::getSaveFileName(nullptr, q_("Save Script"), saveDir + "/myscript.ssc", getFileMask(), &defaultFilter);
+		QString aFile = QFileDialog::getSaveFileName(&StelMainView::getInstance(), q_("Save Script"), saveDir + "/myscript.ssc", getFileMask(), &defaultFilter);
 		if (aFile.isNull())
 			return;
 		scriptFileName = aFile;
@@ -366,7 +366,7 @@ void ScriptConsole::appendOutputLine(const QString& s)
 
 void ScriptConsole::includeBrowse()
 {
-	QString aDir = QFileDialog::getExistingDirectory(nullptr, q_("Select Script Include Directory"), StelFileMgr::getInstallationDir() + "/scripts");
+	QString aDir = QFileDialog::getExistingDirectory(&StelMainView::getInstance(), q_("Select Script Include Directory"), StelFileMgr::getInstallationDir() + "/scripts");
 	if (!aDir.isNull())
 		ui->includeEdit->setText(aDir);
 }

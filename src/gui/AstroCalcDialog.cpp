@@ -22,6 +22,7 @@
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelGui.hpp"
+#include "StelMainView.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelMovementMgr.hpp"
 #include "StelObjectMgr.hpp"
@@ -629,7 +630,7 @@ void AstroCalcDialog::saveGraph(QChartView *graph)
 		dir = StelFileMgr::getUserDir();
 	QString filter = q_("Images");
 	filter.append(" (*.png)");
-	QString filename = QFileDialog::getSaveFileName(nullptr, q_("Save graph"), dir + "/stellarium-graph.png", filter);
+	QString filename = QFileDialog::getSaveFileName(&StelMainView::getInstance(), q_("Save graph"), dir + "/stellarium-graph.png", filter);
 	if (!filename.isEmpty())
 	{
 		QPixmap p = graph->grab();
@@ -4069,7 +4070,7 @@ void AstroCalcDialog::saveSolarEclipseKML()
 		QString filter = "KML";
 		filter.append(" (*.kml)");
 		QString defaultFilter("(*.kml)");
-		QString filePath = QFileDialog::getSaveFileName(nullptr,
+		QString filePath = QFileDialog::getSaveFileName(&StelMainView::getInstance(),
 								q_("Save KML as..."),
 								QDir::homePath() + "/solareclipse"+eclipseDateStr+".kml",
 								filter,
@@ -9435,7 +9436,7 @@ QPair<QString, QString> AstroCalcDialog::askTableFilePath(const QString &caption
 
 	QString dir = QString("%1/%2.%3").arg(QDir::homePath(), fileName, defaultExtension);
 	QString defaultFilter = QString("(*.%1)").arg(defaultExtension);
-	QString filePath = QFileDialog::getSaveFileName(nullptr, caption, dir, filter, &defaultFilter);
+	QString filePath = QFileDialog::getSaveFileName(&StelMainView::getInstance(), caption, dir, filter, &defaultFilter);
 
 	return QPair<QString, QString>(filePath, defaultFilter);
 }
