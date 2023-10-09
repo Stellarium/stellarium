@@ -615,6 +615,10 @@ IF(WIN32)
      IF((NOT EXISTS ${OPENSSL_SSL_LIBRARY_DLL}) AND (NOT EXISTS ${OPENSSL_CRYPTO_LIBRARY_DLL}))
 	  SET(ISS_OPENSSL_LIBS "; OpenSSL libraries not found")
      ENDIF()
+
+     IF(STELLARIUM_BUILD_ARM64 AND ${QT_VERSION} VERSION_LESS "6.5.0")
+       MESSAGE(FATAL_ERROR "Qt 6.5.0 or later is required for Windows on ARM builds.")
+     ENDIF()
 ENDIF()
 
 IF(APPLE)
