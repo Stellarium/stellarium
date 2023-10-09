@@ -614,7 +614,7 @@ IF(WIN32)
      IF("${QT_PATHS}" STREQUAL "")
           SET(_qt_paths "")
      ELSE()
-          SET(_qt_paths "--qtpaths \"${QTPATHS}\"")
+          SET(_qt_paths "--qtpaths \"${QT_PATHS}\"")
      ENDIF()
 
      INSTALL(CODE
