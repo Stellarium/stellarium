@@ -413,6 +413,8 @@ ENDIF()
 # SPOUT allows relaying the Stellarium OpenGL framebuffer as DirectX texture in other programs.
 # It exists on Windows only. Syphon is a similar system for MacOS, this might be added by a Mac developer.
 IF(WIN32)
+     SET(STELLARIUM_BUILD_ARM64 0 CACHE BOOL "Build for Windows on ARM")
+
      IF(${CMAKE_SYSTEM_VERSION} LESS 6.1 ) # Need Windows 7 or later to enable support of Spout
           SET(ENABLE_SPOUT 0)
           MESSAGE(STATUS "Spout support disabled due to operating system requirement")
@@ -424,7 +426,12 @@ ELSE()
 ENDIF()
 IF(ENABLE_SPOUT)
      ADD_DEFINITIONS(-DENABLE_SPOUT)
-     IF("${CMAKE_SIZEOF_VOID_P}" EQUAL "4") # 32bit build?
+     # let spout2 be found again if SPOUT_PATH_HINT changes
+     UNSET(SPOUT_LIBRARY CACHE)
+     UNSET(SPOUT_LIBRARY_DLL CACHE)
+     IF(STELLARIUM_BUILD_ARM64) # 64bit ARM build?
+          SET(SPOUT_PATH_HINT ${CMAKE_SOURCE_DIR}/util/spout2/ARM64/)
+     ELSEIF("${CMAKE_SIZEOF_VOID_P}" EQUAL "4") # 32bit build?
           SET(SPOUT_PATH_HINT ${CMAKE_SOURCE_DIR}/util/spout2/Win32/)
      ELSEIF("${CMAKE_SIZEOF_VOID_P}" EQUAL "8") # 64bit build?
           SET(SPOUT_PATH_HINT ${CMAKE_SOURCE_DIR}/util/spout2/x64/)
@@ -868,7 +875,10 @@ IF(WIN32)
      ### Generate an Inno Setup project file
      #######################################################
 
-     IF("${CMAKE_SIZEOF_VOID_P}" EQUAL "4")
+     IF(STELLARIUM_BUILD_ARM64) # 64bit ARM build?
+	  SET(ISS_ARCHITECTURE_SPECIFIC ";Switch to 64-bit install mode:\nArchitecturesInstallIn64BitMode=arm64")
+	  SET(ISS_PACKAGE_PLATFORM "qt${QT_VERSION_MAJOR}-arm64")
+     ELSEIF("${CMAKE_SIZEOF_VOID_P}" EQUAL "4")
 	  SET(ISS_ARCHITECTURE_SPECIFIC "")
 	  SET(ISS_PACKAGE_PLATFORM "qt${QT_VERSION_MAJOR}-win32")
      ELSEIF("${CMAKE_SIZEOF_VOID_P}" EQUAL "8")
