@@ -611,10 +611,13 @@ IF(WIN32)
           SET(VIRTUAL_KBD_SETTING "--no-virtualkeyboard")
      ENDIF()
 
-     IF("${QT_PATHS}" STREQUAL "")
-          SET(_qt_paths "")
-     ELSE()
+     IF(STELLARIUM_BUILD_ARM64)
+          cmake_path(APPEND QT_PATHS ${QT6_INSTALL_PREFIX} "bin" "qtpaths.bat")
+     ENDIF()
+     IF(QT_PATHS)
           SET(_qt_paths "--qtpaths \"${QT_PATHS}\"")
+     ELSE()
+          SET(_qt_paths "")
      ENDIF()
 
      INSTALL(CODE
