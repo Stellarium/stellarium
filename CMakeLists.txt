@@ -875,7 +875,10 @@ IF(WIN32)
      ### Generate an Inno Setup project file
      #######################################################
 
-     IF("${CMAKE_SIZEOF_VOID_P}" EQUAL "4")
+     IF(STELLARIUM_BUILD_ARM64) # 64bit ARM build?
+	  SET(ISS_ARCHITECTURE_SPECIFIC ";Switch to 64-bit install mode:\nArchitecturesInstallIn64BitMode=arm64")
+	  SET(ISS_PACKAGE_PLATFORM "qt${QT_VERSION_MAJOR}-arm64")
+     ELSEIF("${CMAKE_SIZEOF_VOID_P}" EQUAL "4")
 	  SET(ISS_ARCHITECTURE_SPECIFIC "")
 	  SET(ISS_PACKAGE_PLATFORM "qt${QT_VERSION_MAJOR}-win32")
      ELSEIF("${CMAKE_SIZEOF_VOID_P}" EQUAL "8")
