@@ -36,10 +36,10 @@ environment:
     msvcname: Visual Studio 15 2017
     cmake_args:
   - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2022
-    qtver: 6.5
+    qtver: 6.5.2
     qtbin: msvc2019_arm64
     msvcname: Visual Studio 17 2022
-    cmake_args: -A ARM64 -DSTELLARIUM_BUILD_ARM64=ON -DQT_HOST_PATH=C:/Qt/6.5/msvc2019_64 -DENABLE_QTWEBENGINE=OFF
+    cmake_args: -A ARM64 -DSTELLARIUM_BUILD_ARM64=ON -DQT_HOST_PATH=C:/Qt/6.5.2/msvc2019_64 -DENABLE_QTWEBENGINE=OFF -DENABLE_NLS=OFF -DQT_PATHS=%APPVEYOR_BUILD_FOLDER%/util/qtpaths_workaround.bat
 
 before_build:
   - ps: if($env:qtbin.contains('_64')) { $env:BITS=64 } else { $env:BITS=32 }
