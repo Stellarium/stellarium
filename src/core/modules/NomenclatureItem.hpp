@@ -130,7 +130,7 @@ public:
 	};
 	Q_ENUM(PlanetCoordinateOrientation)
 
-	NomenclatureItem(PlanetP nPlanet, int nId, const QString& nName, const QString& nContext, NomenclatureItemType nItemType, double nLatitude, double nLongitude, double nSize);
+	NomenclatureItem(PlanetP nPlanet, int nId, const QString& nName, const QString& nContext, const QString& nOrigin, NomenclatureItemType nItemType, double nLatitude, double nLongitude, double nSize);
 	virtual ~NomenclatureItem() Q_DECL_OVERRIDE;
 
 	//! Get the type of object
@@ -248,7 +248,7 @@ private:
 
 	PlanetP planet;
 	int identificator;
-	QString englishName, context, nameI18n;
+	QString englishName, context, nameI18n, origin;
 	NomenclatureItemType nType; // Type of nomenclature item
 	mutable double latitude;    // degrees
 	mutable double longitude;   // degrees. Declared mutable to allow change in otherwise const methods (for special points)
