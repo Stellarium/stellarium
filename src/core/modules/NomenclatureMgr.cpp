@@ -102,31 +102,31 @@ void NomenclatureMgr::loadSpecialNomenclature()
 	for (const auto& p: ss)
 	{
 		const double size = p->getEquatorialRadius()*AU*0.25; // formal radius of point is 25% of equatorial radius
-		NomenclatureItemP nomNP = NomenclatureItemP(new NomenclatureItem(p, featureId, N_("North Pole"), "", NomenclatureItem::niSpecialPointPole, 90., 0., size));
+		NomenclatureItemP nomNP = NomenclatureItemP(new NomenclatureItem(p, featureId, N_("North Pole"), "", "", NomenclatureItem::niSpecialPointPole, 90., 0., size));
 		if (!nomNP.isNull())
 			nomenclatureItems.insert(p, nomNP);
 		featureId++;
-		NomenclatureItemP nomSP = NomenclatureItemP(new NomenclatureItem(p, featureId, N_("South Pole"), "", NomenclatureItem::niSpecialPointPole, -90., 0., size));
+		NomenclatureItemP nomSP = NomenclatureItemP(new NomenclatureItem(p, featureId, N_("South Pole"), "", "", NomenclatureItem::niSpecialPointPole, -90., 0., size));
 		if (!nomSP.isNull())
 			nomenclatureItems.insert(p, nomSP);
 		featureId++;
 		// longitude is fake, used just to define the object
-		NomenclatureItemP nomE = NomenclatureItemP(new NomenclatureItem(p, featureId, N_("East"), "", NomenclatureItem::niSpecialPointEast, 0., 0., size));
+		NomenclatureItemP nomE = NomenclatureItemP(new NomenclatureItem(p, featureId, N_("East"), "", "", NomenclatureItem::niSpecialPointEast, 0., 0., size));
 		if (!nomE.isNull())
 			nomenclatureItems.insert(p, nomE);
 		featureId++;
 		// longitude is fake, used just to define the object
-		NomenclatureItemP nomW = NomenclatureItemP(new NomenclatureItem(p, featureId, N_("West"), "", NomenclatureItem::niSpecialPointWest, 0., 180., size));
+		NomenclatureItemP nomW = NomenclatureItemP(new NomenclatureItem(p, featureId, N_("West"), "", "", NomenclatureItem::niSpecialPointWest, 0., 180., size));
 		if (!nomW.isNull())
 			nomenclatureItems.insert(p, nomW);
 		featureId++;
 		// longitude is fake, used just to define the object
-		NomenclatureItemP nomC = NomenclatureItemP(new NomenclatureItem(p, featureId, N_("Centre"), "", NomenclatureItem::niSpecialPointCenter, 0., 180., size));
+		NomenclatureItemP nomC = NomenclatureItemP(new NomenclatureItem(p, featureId, N_("Centre"), "", "", NomenclatureItem::niSpecialPointCenter, 0., 180., size));
 		if (!nomC.isNull())
 			nomenclatureItems.insert(p, nomC);
 		featureId++;
 		// longitude is fake, used just to define the object
-		NomenclatureItemP nomS = NomenclatureItemP(new NomenclatureItem(p, featureId, N_("Subsolar"), "", NomenclatureItem::niSpecialPointSubSolar, 0., 180., size));
+		NomenclatureItemP nomS = NomenclatureItemP(new NomenclatureItem(p, featureId, N_("Subsolar"), "", "", NomenclatureItem::niSpecialPointSubSolar, 0., 180., size));
 		if (!nomS.isNull())
 			nomenclatureItems.insert(p, nomS);
 		featureId++;
@@ -153,7 +153,8 @@ void NomenclatureMgr::loadNomenclature()
 	//	latitude of surface feature		: float (decimal degrees)
 	//	longitude of surface feature		: float (decimal degrees)
 	//	diameter of surface feature		: float (kilometers)
-	static const QRegularExpression recRx("^\\s*(\\w+)\\s+(\\d+)\\s+_[(]\"(.*)\"[)]\\s+(\\w+)\\s+([\\-\\+\\.\\d]+)\\s+([\\-\\+\\.\\d]+)\\s+([\\-\\+\\.\\d]+)(.*)");
+	//	translatable origin of name		: string
+	static const QRegularExpression recRx("^\\s*(\\w+)\\s+(\\d+)\\s+_[(]\"(.*)\"[)]\\s+(\\w+)\\s+([\\-\\+\\.\\d]+)\\s+([\\-\\+\\.\\d]+)\\s+([\\-\\+\\.\\d]+)\\s+_[(]\"(.*)\"[)](.*)");
 	static const QRegularExpression ctxRx("(.*)\",\\s*\"(.*)");
 
 	QString surfNamesFile = StelFileMgr::findFile("data/nomenclature.dat"); // compressed version of file nomenclature.fab
@@ -186,7 +187,7 @@ void NomenclatureMgr::loadNomenclature()
 		PlanetP p;
 
 		int featureId;
-		QString name, planet = "", planetName = "", context = "";
+		QString name, planet = "", planetName = "", context = "", origin = "";
 		NomenclatureItem::NomenclatureItemType ntype;
 		double latitude, longitude, size;
 		QStringList missingPlanets;
@@ -228,6 +229,12 @@ void NomenclatureMgr::loadNomenclature()
 				latitude	= recMatch.captured(5).toDouble();
 				longitude	= recMatch.captured(6).toDouble();
 				size		= recMatch.captured(7).toDouble();
+				QString otxt	= recMatch.captured(8).trimmed();
+				QRegularExpressionMatch otxMatch=ctxRx.match(otxt);
+				if (otxMatch.hasMatch())
+					origin  = otxMatch.captured(1).trimmed();
+				else
+					origin  = otxt;
 
 				if (planetName.isEmpty() || planet!=planetName)
 				{
@@ -239,7 +246,7 @@ void NomenclatureMgr::loadNomenclature()
 
 				if (!p.isNull())
 				{
-					NomenclatureItemP nom = NomenclatureItemP(new NomenclatureItem(p, featureId, name, context, ntype, latitude, longitude, size));
+					NomenclatureItemP nom = NomenclatureItemP(new NomenclatureItem(p, featureId, name, context, origin, ntype, latitude, longitude, size));
 					if (!nom.isNull())
 						nomenclatureItems.insert(p, nom);
 
