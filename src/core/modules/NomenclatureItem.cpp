@@ -43,6 +43,7 @@ NomenclatureItem::NomenclatureItem(PlanetP nPlanet,
 				   int nId,
 				   const QString& nName,
 				   const QString& nContext,
+				   const QString& nOrigin,
 				   NomenclatureItemType nItemType,
 				   double nLatitude,
 				   double nLongitude,
@@ -54,6 +55,7 @@ NomenclatureItem::NomenclatureItem(PlanetP nPlanet,
 	, englishName(nName)
 	, context(nContext)
 	, nameI18n(nName)
+	, origin(nOrigin)
 	, nType(nItemType)
 	, latitude(nLatitude)
 	, longitude(nLongitude)
@@ -278,6 +280,9 @@ QString NomenclatureItem::getInfoString(const StelCore* core, const InfoStringGr
 			oss << QString("%1: %2<br/>").arg(q_("Landform description"), description);
 		if (planet->getEnglishName()!="Jupiter") // we must exclude this for now due to Jupiter's "off" rotation
 			oss << QString("%1: %2°<br/>").arg(q_("Solar altitude"), QString::number(getSolarAltitude(core), 'f', 1));
+
+		if (!origin.isEmpty())
+			oss << QString("%1: %2<br/>").arg(q_("Origin of name"), qc_(origin, "origin"));
 
 		// DEBUG output. This should help defining valid criteria for selection priority.
 		// oss << QString("Planet angular size (semidiameter!): %1''<br/>").arg(QString::number(planet->getAngularSize(core)*3600.));
