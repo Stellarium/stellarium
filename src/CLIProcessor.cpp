@@ -59,6 +59,7 @@ void CLIProcessor::parseCLIArgsPreQApp(const QStringList argList)
 	if (argsGetOption(argList, "-m", "--mesa-mode"))
 	{
 		qputenv("QT_OPENGL", "software");
+		qputenv("MESA_GL_VERSION_OVERRIDE", "3.3"); // The Mesa 20.1.8 library reports providing 3.1 only. This does the trick for us.
 		// These prepare using current Mesa3D libraries, should the user install them. Else the vars are harmless.
 		qputenv("QT_OPENGL_DLL", "opengl32sw.dll");
 		qputenv("GALLIUM_DRIVER", "llvmpipe");
