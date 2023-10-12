@@ -122,10 +122,7 @@ StelTexture::GLData StelTexture::imageToGLData(const QImage &image, const int de
 {
 	GLData ret = GLData();
 	if (image.isNull())
-	{
-		qCritical() << "Image is null";
 		return ret;
-	}
 	ret.data = convertToGLFormat(image, ret.format, ret.type, decimateBy, ret.width, ret.height);
 	return ret;
 }
@@ -137,9 +134,16 @@ StelTexture::GLData StelTexture::loadFromPath(const QString &path, const int dec
 {
 	try
 	{
-		QImage img(path);
+		QImageReader imgReader(path);
+		QImage img = imgReader.read();
 		if (img.isNull())
-			throw std::bad_alloc();
+		{
+			QImageReader::ImageReaderError error=imgReader.error();
+			qCritical() << "Error reading image file " << path << ":" << imgReader.errorString();
+
+			if (error==QImageReader::InvalidDataError)
+				qCritical() << "This may also indicate an out-of-memory error.";
+		}
 		return imageToGLData(img, decimateBy);
 	}
 	catch(std::bad_alloc& ex) //this catches out-of-memory errors from file conversion
