@@ -136,7 +136,15 @@ StelTexture::GLData StelTexture::loadFromPath(const QString &path, const int dec
 	{
 		return imageToGLData(QImage(path), decimateBy);
 	}
-	catch(std::exception& ex) //this catches out-of-memory errors from file conversion
+	catch(std::bad_alloc& ex) //this catches out-of-memory errors from file conversion
+	{
+		qCritical()<<"Failed loading texture from"<<path<<"error:"<<ex.what();
+		qCritical() << "Try higher value for config.ini:[astro]/nebula_texture_decimation";
+		GLData ret;
+		ret.loaderError = ex.what();
+		return ret;
+	}
+	catch(std::exception& ex) //this catches other errors from file conversion
 	{
 		qCritical()<<"Failed loading texture from"<<path<<"error:"<<ex.what();
 		GLData ret;
