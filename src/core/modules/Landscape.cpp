@@ -550,6 +550,8 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 		// if that query is not going to be prevented by the polygon that already has been loaded at that point...
 		if ( (!horizonPolygon) && calibrated ) { // for uncalibrated landscapes the texture is currently never queried, so no need to store.
 			QImage *image = new QImage(texturePath);
+			if (image->isNull())
+				qWarning() << "Null image (out of memory!) in Landscape!";
 			sidesImages.append(image); // indices identical to those in sideTexs
 			memorySize+=(image->sizeInBytes());
 		}
@@ -1567,6 +1569,8 @@ void LandscapeFisheye::create(const QString _name, float _texturefov, const QStr
 	{
 		mapImage = new QImage(_maptex);
 		memorySize+=(mapImage->sizeInBytes());
+		if (mapImage->isNull())
+			qWarning() << "Null image in Landscape" << _name << "- cannot load" << _maptex;
 	}
 	mapTex = texMan.createTexture(_maptex, StelTexture::StelTextureParams(true));
 	memorySize+=mapTex->getGlSize();
@@ -1852,6 +1856,8 @@ void LandscapeSpherical::create(const QString _name, const QString& _maptex, con
 	{
 		mapImage = new QImage(_maptex);
 		memorySize+=(mapImage->sizeInBytes());
+		if (mapImage->isNull())
+			qWarning() << "Null image in Landscape" << _name << "- cannot load" << _maptex;
 	}
 
 	auto& gl = *QOpenGLContext::currentContext()->functions();
