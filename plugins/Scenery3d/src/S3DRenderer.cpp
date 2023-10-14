@@ -1365,7 +1365,7 @@ void S3DRenderer::drawCoordinatesText()
 	const int fontSize=debugTextFont.pixelSize();
 	const QFontMetrics fm(debugTextFont);
 
-	const float devicePixelscaling = static_cast<float>(altAzProjector->getDevicePixelsPerPixel())*StelApp::getInstance().getGlobalScalingRatio();
+	const float devicePixelscaling = static_cast<float>(altAzProjector->getDevicePixelsPerPixel());
 	float screen_x = altAzProjector->getViewportWidth()  -  240.0f*devicePixelscaling;
 	float screen_x_cs=altAzProjector->getViewportWidth()-10.f-devicePixelscaling*qMax(240, painter.getFontMetrics().boundingRect(gridName).width());
 	float screen_y = altAzProjector->getViewportHeight() -  60.0f*devicePixelscaling;

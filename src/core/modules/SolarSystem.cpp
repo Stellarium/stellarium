@@ -512,7 +512,7 @@ void SolarSystem::drawPointer(const StelCore* core)
 
 		float screenSize = static_cast<float>(obj->getAngularRadius(core))*prj->getPixelPerRadAtCenter()*M_PI_180f*2.f;
 		
-		const float scale = static_cast<float>(prj->getDevicePixelsPerPixel())*StelApp::getInstance().getGlobalScalingRatio();
+		const float scale = static_cast<float>(prj->getDevicePixelsPerPixel());
 		screenSize+= scale * (45.f + 10.f*std::sin(2.f * static_cast<float>(StelApp::getInstance().getAnimationTime())));
 
 		texPointer->bind();
