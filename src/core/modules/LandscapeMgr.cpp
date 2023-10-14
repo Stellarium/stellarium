@@ -664,7 +664,7 @@ void LandscapeMgr::draw(StelCore* core)
 	StelSkyDrawer* drawer=core->getSkyDrawer();
 
 	// Draw the atmosphere
-	if (!getFlagAtmosphereNoScatter())
+	if (!getFlagAtmosphereNoScatter() && core->getFlagClearSky())
 	    atmosphere->draw(core);
 
 	// GZ 2016-01: When we draw the atmosphere with a low sun, it is possible that the glaring red ball is overpainted and thus invisible.

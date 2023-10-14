@@ -977,10 +977,17 @@ void StelApp::highGraphicsModeDraw()
 
 	const QList<StelModule*> modules = moduleMgr->getCallOrders(StelModule::ActionDraw);
 
-	for(auto* module : modules)
-	{
-		module->draw(core);
-	}
+	if (core->getFlagClearSky())
+		for (auto* module : modules)
+		{
+			module->draw(core);
+		}
+	else
+		for (auto* module : modules)
+		{
+			if (! QStringList({"MilkyWay", "ZodiacalLight", "LandscapeMgr", "GridlinesMgr"}).contains(module->objectName()))
+				module->draw(core);
+		}
 
 	if(sceneMultisampledFBO)
 	{
@@ -1051,10 +1058,17 @@ void StelApp::draw()
 	else
 	{
 		const QList<StelModule*> modules = moduleMgr->getCallOrders(StelModule::ActionDraw);
-		for (auto* module : modules)
-		{
-			module->draw(core);
-		}
+		if (core->getFlagClearSky())
+			for (auto* module : modules)
+			{
+				module->draw(core);
+			}
+		else
+			for (auto* module : modules)
+			{
+				if (! QStringList({"MilkyWay", "ZodiacalLight", "LandscapeMgr", "GridlinesMgr"}).contains(module->objectName()))
+					module->draw(core);
+			}
 	}
 
 	core->postDraw();
