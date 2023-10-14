@@ -41,8 +41,9 @@
         </security>
     </trustInfo>
     <asmv3:application>
-      <asmv3:windowsSettings xmlns="http://schemas.microsoft.com/SMI/2005/WindowsSettings">
+      <asmv3:windowsSettings>
         <ms_windowsSettings:dpiAware xmlns:ms_windowsSettings="http://schemas.microsoft.com/SMI/2005/WindowsSettings">true</ms_windowsSettings:dpiAware>
+        <ms_windowsSettings:dpiAwareness xmlns:ms_windowsSettings="http://schemas.microsoft.com/SMI/2016/WindowsSettings">PerMonitorV2</ms_windowsSettings:dpiAwareness>
       </asmv3:windowsSettings>
     </asmv3:application>
 </assembly>
