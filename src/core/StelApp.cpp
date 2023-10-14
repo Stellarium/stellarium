@@ -255,7 +255,6 @@ StelApp::StelApp(StelMainView *parent)
 #endif
 	, stelGui(Q_NULLPTR)
 	, devicePixelsPerPixel(1.)
-	, globalScalingRatio(1.f)
 	, fps(0)
 	, frame(0)
 	, frameTimeAccum(0.)

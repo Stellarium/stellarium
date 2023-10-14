@@ -211,12 +211,6 @@ public:
 	qreal getDevicePixelsPerPixel() const {return devicePixelsPerPixel;}
 	void setDevicePixelsPerPixel(qreal dppp);
 	
-	//! Get the scaling ratio to apply on all display elements, like GUI, text etc..
-	//! When this ratio is 1, all pixel sizes used in Stellarium will look OK on a regular
-	//! computer screen with 96 pixel per inch (reference for tuning sizes).
-	float getGlobalScalingRatio() const {return globalScalingRatio;}
-	void setGlobalScalingRatio(float r) {globalScalingRatio=r;}
-
 	//! Get the fontsize used for screen text.
 	int getScreenFontSize() const { return screenFontSize; }
 	//! Change screen font size.
@@ -456,9 +450,6 @@ private:
 	// Store the ratio between real device pixel in "Device Independent Pixel"
 	// Usually this value is 1, but for a mac with retina screen this will be value 2.
 	qreal devicePixelsPerPixel;
-
-	// The scaling ratio to apply on all display elements, like GUI, text etc..
-	float globalScalingRatio;
 	
 	float fps;
 	int frame;

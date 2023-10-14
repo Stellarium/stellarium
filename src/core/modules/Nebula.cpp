@@ -731,8 +731,7 @@ void Nebula::renderDarkNebulaMarker(StelPainter& sPainter, const float x, const 
                                     float size, const Vec3f color) const
 {
 	// Take into account device pixel density and global scale ratio, as we are drawing 2D stuff.
-	const auto pixelRatio = sPainter.getProjector()->getDevicePixelsPerPixel();
-	const auto scale = pixelRatio * StelApp::getInstance().getGlobalScalingRatio();
+	const auto scale = sPainter.getProjector()->getDevicePixelsPerPixel();
 	size *= scale;
 
 	const float roundRadius = 0.35 * size;
@@ -819,8 +818,7 @@ void Nebula::renderMarkerRoundedRect(StelPainter& sPainter, const float x, const
                                      float size, const Vec3f color) const
 {
 	// Take into account device pixel density and global scale ratio, as we are drawing 2D stuff.
-	const auto pixelRatio = sPainter.getProjector()->getDevicePixelsPerPixel();
-	const auto scale = pixelRatio * StelApp::getInstance().getGlobalScalingRatio();
+	const auto scale = sPainter.getProjector()->getDevicePixelsPerPixel();
 	size *= scale;
 
 	const float roundRadius = 0.35 * size;
@@ -876,8 +874,7 @@ void Nebula::renderRoundMarker(StelPainter& sPainter, const float x, const float
                                float size, const Vec3f color, const bool crossed) const
 {
 	// Take into account device pixel density and global scale ratio, as we are drawing 2D stuff.
-	const auto pixelRatio = sPainter.getProjector()->getDevicePixelsPerPixel();
-	const auto scale = pixelRatio * StelApp::getInstance().getGlobalScalingRatio();
+	const auto scale = sPainter.getProjector()->getDevicePixelsPerPixel();
 	size *= scale;
 
 	sPainter.setBlending(true);
@@ -903,8 +900,7 @@ void Nebula::renderEllipticMarker(StelPainter& sPainter, const float x, const fl
                                   const float aspectRatio, const float angle, const Vec3f color) const
 {
 	// Take into account device pixel density and global scale ratio, as we are drawing 2D stuff.
-	const auto pixelRatio = sPainter.getProjector()->getDevicePixelsPerPixel();
-	const auto scale = pixelRatio * StelApp::getInstance().getGlobalScalingRatio();
+	const auto scale = sPainter.getProjector()->getDevicePixelsPerPixel();
 	size *= scale;
 
 	const float radiusY = 0.35 * size;
@@ -938,8 +934,7 @@ void Nebula::renderMarkerPointedCircle(StelPainter& sPainter, const float x, con
                                        float size, const Vec3f color, const bool insideRect) const
 {
 	// Take into account device pixel density and global scale ratio, as we are drawing 2D stuff.
-	const auto pixelRatio = sPainter.getProjector()->getDevicePixelsPerPixel();
-	const auto scale = pixelRatio * StelApp::getInstance().getGlobalScalingRatio();
+	const auto scale = sPainter.getProjector()->getDevicePixelsPerPixel();
 	size *= scale;
 
 	texPointElement->bind();
