@@ -1067,7 +1067,7 @@ void StelApp::draw()
 }
 
 /*************************************************************************
- Call this when the size of the GL window has changed
+ Call this when the virtual size of the GL window has changed
 *************************************************************************/
 void StelApp::glWindowHasBeenResized(const QRectF& rect)
 {
@@ -1085,6 +1085,17 @@ void StelApp::glWindowHasBeenResized(const QRectF& rect)
 	}
 	// Force to recreate the viewport effect if any.
 	setViewportEffect(effect);
+#ifdef ENABLE_SPOUT
+	if (spoutSender)
+		spoutSender->resize(static_cast<uint>(rect.width()),static_cast<uint>(rect.height()));
+#endif
+}
+
+/*************************************************************************
+ Call this when the physical size of the GL window has changed
+*************************************************************************/
+void StelApp::glPhysicalWindowHasBeenResized(const QRectF& rect)
+{
 #ifdef ENABLE_SPOUT
 	if (spoutSender)
 		spoutSender->resize(static_cast<uint>(rect.width()),static_cast<uint>(rect.height()));

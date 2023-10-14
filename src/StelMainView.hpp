@@ -301,6 +301,8 @@ private:
 	//! Startup diagnostics, providing test for various circumstances of bad OS/OpenGL driver combinations
 	//! to provide feedback to the user about bad OpenGL drivers.
 	void processOpenGLdiagnosticsAndWarnings(QSettings *conf, QOpenGLContext* context) const;
+	//! Get physical dimensions given the virtual dimensions for the screen where this window is located.
+	QRectF getPhysicalSize(const QRectF& virtualRect) const;
 
 	//! The StelMainView singleton
 	static StelMainView* singleton;

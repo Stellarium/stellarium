@@ -264,8 +264,11 @@ public:
 	///////////////////////////////////////////////////////////////////////////
 	// Scriptable methods
 public slots:
-	//! Call this when the size of the GL window has changed.
+	//! Call this when the virtual size of the GL window has changed.
 	void glWindowHasBeenResized(const QRectF &rect);
+
+	//! Call this when the physical size of the GL window has changed.
+	void glPhysicalWindowHasBeenResized(const QRectF &rect);
 
 	//! Set flag for activating night vision mode.
 	void setVisionModeNight(bool);
