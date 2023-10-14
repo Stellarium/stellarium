@@ -929,8 +929,14 @@ void StelMainView::init()
 	stelApp->init(configuration);
 	//this makes sure the app knows how large the window is
 	connect(stelScene,SIGNAL(sceneRectChanged(QRectF)),stelApp,SLOT(glWindowHasBeenResized(QRectF)));
+	QObject::connect(stelScene, &StelGraphicsScene::sceneRectChanged, [&](const QRectF& rect)
+	{
+        stelApp->glPhysicalWindowHasBeenResized(getPhysicalSize(rect));
+	});
+
 	//also immediately set the current values
 	stelApp->glWindowHasBeenResized(stelScene->sceneRect());
+	stelApp->glPhysicalWindowHasBeenResized(getPhysicalSize(stelScene->sceneRect()));
 
 	StelActionMgr *actionMgr = stelApp->getStelActionManager();
 	actionMgr->addAction("actionSave_Screenshot_Global", N_("Miscellaneous"), N_("Save screenshot"), this, "saveScreenShot()", "Ctrl+S");
@@ -1344,6 +1350,21 @@ void StelMainView::processOpenGLdiagnosticsAndWarnings(QSettings *conf, QOpenGLC
 		qDebug() << "Please send a bug report that includes this log file and states if Stellarium works or has problems.";
 	}
 #endif
+}
+
+// Get physical dimensions given the virtual dimensions for the screen where this window is located.
+QRectF StelMainView::getPhysicalSize(const QRectF& virtualRect) const
+{
+	auto window = this->window();
+	if(window)
+	{
+		auto pixelRatio = window->devicePixelRatio();
+		QRectF newRect(virtualRect.x(), virtualRect.y(), virtualRect.width() * pixelRatio, virtualRect.height() * pixelRatio);
+		return newRect;
+	}
+
+	// If the platform does not support getting the QWindow backing instance of this QWidget
+	return virtualRect;
 }
 
 // Debug info about OpenGL capabilities.
