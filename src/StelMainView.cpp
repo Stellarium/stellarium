@@ -929,14 +929,18 @@ void StelMainView::init()
 	stelApp->init(configuration);
 	//this makes sure the app knows how large the window is
 	connect(stelScene,SIGNAL(sceneRectChanged(QRectF)),stelApp,SLOT(glWindowHasBeenResized(QRectF)));
+#ifdef ENABLE_SPOUT
 	QObject::connect(stelScene, &StelGraphicsScene::sceneRectChanged, [&](const QRectF& rect)
 	{
         stelApp->glPhysicalWindowHasBeenResized(getPhysicalSize(rect));
 	});
+#endif
 
 	//also immediately set the current values
 	stelApp->glWindowHasBeenResized(stelScene->sceneRect());
+#ifdef ENABLE_SPOUT
 	stelApp->glPhysicalWindowHasBeenResized(getPhysicalSize(stelScene->sceneRect()));
+#endif
 
 	StelActionMgr *actionMgr = stelApp->getStelActionManager();
 	actionMgr->addAction("actionSave_Screenshot_Global", N_("Miscellaneous"), N_("Save screenshot"), this, "saveScreenShot()", "Ctrl+S");
