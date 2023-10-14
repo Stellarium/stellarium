@@ -36,14 +36,14 @@ environment:
     msvcname: Visual Studio 15 2017
     cmake_args:
   - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2022
-    qtver: 6.5
+    qtver: 6.5.2
     qtbin: msvc2019_arm64
     msvcname: Visual Studio 17 2022
-    cmake_args: -A ARM64 -DSTELLARIUM_BUILD_ARM64=ON -DQT_HOST_PATH=C:/Qt/6.5/msvc2019_64 -DQT_PATHS=C:/Qt/6.5/msvc2019_arm64/bin/qtpaths.bat -DENABLE_QTWEBENGINE=OFF
+    cmake_args: -A ARM64 -DSTELLARIUM_BUILD_ARM64=ON -DQT_HOST_PATH=C:/Qt/6.5.2/msvc2019_64 -DENABLE_QTWEBENGINE=OFF -DENABLE_NLS=OFF -DQT_PATHS=%APPVEYOR_BUILD_FOLDER%/util/qtpaths_workaround.bat
 
 before_build:
   - ps: if($env:qtbin.contains('_64')) { $env:BITS=64 } else { $env:BITS=32 }
-  - ps: if($env:qtver.contains('6.')) { $env:SSL="OpenSSL-" } else { $env:SSL="OpenSSL-1-" }
+  - ps: if($env:qtver.startsWith('6.')) { $env:SSL="OpenSSL-" } else { $env:SSL="OpenSSL-1-" }
   - set PUBLISH_BINARY=false
   - set USE_EXT_LIBGLES=false
   - set SIGNING=false
@@ -54,9 +54,9 @@ before_build:
   - ps: if($env:APPVEYOR_REPO_BRANCH -eq "stellarium-oldstable") { $env:PUBLISH_BINARY = 'true' }
   - ps: if($env:APPVEYOR_REPO_COMMIT_MESSAGE.contains('[publish]')) { $env:PUBLISH_BINARY = 'true' }
   - ps: if($env:APPVEYOR_REPO_BRANCH -eq "stellarium-next" -or $env:APPVEYOR_REPO_COMMIT_MESSAGE.contains('[publish]')) { $env:USE_EXTRA_EXE = 'true' } else { $env:USE_EXTRA_EXE = 'false' }
-  - ps: if($env:PUBLISH_BINARY -eq "true" -and $env:qtver.contains('5.')) { $env:USE_EXT_LIBGLES = 'true' }
-  - ps: if($env:APPVEYOR_REPO_BRANCH -eq "stellarium-stable" -and $env:qtver.contains('6.')) { $env:SIGNING = 'true' }
-  - ps: if($env:APPVEYOR_REPO_BRANCH -eq "stellarium-oldstable" -and $env:qtver.contains('5.')) { $env:SIGNING = 'true' }
+  - ps: if($env:PUBLISH_BINARY -eq "true" -and $env:qtver.startsWith('5.')) { $env:USE_EXT_LIBGLES = 'true' }
+  - ps: if($env:APPVEYOR_REPO_BRANCH -eq "stellarium-stable" -and $env:qtver.startsWith('6.')) { $env:SIGNING = 'true' }
+  - ps: if($env:APPVEYOR_REPO_BRANCH -eq "stellarium-oldstable" -and $env:qtver.startsWith('5.')) { $env:SIGNING = 'true' }
   - if [%PUBLISH_BINARY%]==[true] appveyor DownloadFile https://github.com/Stellarium/stellarium-data/releases/download/guide/guide.pdf -FileName c:\stellarium\guide\guide.pdf
   - if [%PUBLISH_BINARY%]==[true] mkdir c:\stellarium-OpenSSL
   - if [%PUBLISH_BINARY%]==[true] set PATH=C:\stellarium-OpenSSL;%PATH%
