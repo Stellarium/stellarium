@@ -136,6 +136,11 @@ void ObsListDialog::createDialogContent()
 	connectBoolProperty(ui->landscapeCheckBox, "ObsListDialog.flagUseLandscape");
 	connectBoolProperty(ui->fovCheckBox,       "ObsListDialog.flagUseFov");
 
+	ui->obsListDirEdit->setText(StelFileMgr::getObsListDir());
+	connect(ui->obsListDirEdit, SIGNAL(editingFinished()), this, SLOT(selectObsListDir()));
+	connect(ui->obsListBrowseButton, SIGNAL(clicked()), this, SLOT(browseForObsListDir()));
+
+
 	//obsListCombo settings: A change in the combobox loads the list.
 	connect(ui->obsListComboBox, SIGNAL(activated(int)), this, SLOT(loadSelectedObservingList(int)));
 
@@ -209,6 +214,38 @@ void ObsListDialog::createDialogContent()
 	defaultOlud = jsonMap.value(KEY_DEFAULT_LIST_OLUD).toString();
 	loadListNames(); // also populate Combobox and make sure at least some defaultOlud exists.
 	loadDefaultList();
+}
+
+void ObsListDialog::browseForObsListDir()
+{
+	const QString &oldObsListDir = StelFileMgr::getObsListDir();
+	QString newObsListDir = QFileDialog::getExistingDirectory(&StelMainView::getInstance(), q_("Select observing lists directory"), oldObsListDir, QFileDialog::ShowDirsOnly);
+
+	if (!newObsListDir.isEmpty()) {
+		// remove trailing slash
+		if (newObsListDir.right(1) == "/")
+			newObsListDir = newObsListDir.left(newObsListDir.length()-1);
+
+		ui->obsListDirEdit->setText(newObsListDir);
+		selectObsListDir();
+	}
+}
+
+void ObsListDialog::selectObsListDir()
+{
+	QString dir = ui->obsListDirEdit->text();
+	try
+	{
+		StelFileMgr::setObsListDir(dir);
+		QSettings* conf = StelApp::getInstance().getSettings();
+		conf->setValue("main/observinglists_dir", dir);
+	}
+	catch (std::runtime_error& e)
+	{
+		Q_UNUSED(e)
+		// nop
+		// this will happen when people are only half way through typing dirs
+	}
 }
 
 /*

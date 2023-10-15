@@ -370,6 +370,12 @@ private slots:
 	//! Connected to the defaultList checkbox
 	void defaultClicked(bool b);
 
+	//! open a file dialog to browse for a directory to save observing lists to or retrieve them from.
+	//! If a directory is selected (i.e. dialog not cancelled), current
+	//! value will be changed and saved to config file.
+	void browseForObsListDir();
+	void selectObsListDir();
+
 private:
 	static const QString JSON_FILE_NAME;
 	static const QString JSON_FILE_BASENAME;

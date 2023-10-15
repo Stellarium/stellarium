@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>677</width>
+    <width>760</width>
     <height>448</height>
    </rect>
   </property>
@@ -504,6 +504,41 @@
           </property>
          </spacer>
         </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_obsListDir">
+          <item>
+           <widget class="QLabel" name="label">
+            <property name="toolTip">
+             <string>Observing Lists Directory</string>
+            </property>
+            <property name="text">
+             <string>Dir</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="obsListDirEdit"/>
+          </item>
+          <item>
+           <widget class="QPushButton" name="obsListBrowseButton">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset resource="../../data/gui/guiRes.qrc">
+              <normaloff>:/graphicGui/uibtFolder.png</normaloff>
+              <disabledoff>:/graphicGui/uibtFolder-disabled.png</disabledoff>:/graphicGui/uibtFolder.png</iconset>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
        </layout>
       </item>
      </layout>
@@ -524,6 +559,8 @@
    <header>gui/StelCloseButton.hpp</header>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="../../data/gui/guiRes.qrc"/>
+ </resources>
  <connections/>
 </ui>

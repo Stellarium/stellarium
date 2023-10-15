@@ -763,8 +763,8 @@ void ConfigurationDialog::saveCustomSelectedInfo()
 
 void ConfigurationDialog::browseForScreenshotDir()
 {
-	QString oldScreenshorDir = StelFileMgr::getScreenshotDir();
-	QString newScreenshotDir = QFileDialog::getExistingDirectory(&StelMainView::getInstance(), q_("Select screenshot directory"), oldScreenshorDir, QFileDialog::ShowDirsOnly);
+	const QString &oldScreenshotDir = StelFileMgr::getScreenshotDir();
+	QString newScreenshotDir = QFileDialog::getExistingDirectory(&StelMainView::getInstance(), q_("Select screenshot directory"), oldScreenshotDir, QFileDialog::ShowDirsOnly);
 
 	if (!newScreenshotDir.isEmpty()) {
 		// remove trailing slash
