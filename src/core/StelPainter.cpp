@@ -672,7 +672,7 @@ StringTexture* StelPainter::getTextTexture(const QString& str, int pixelSize) co
 	if (cachedTex)
 		return cachedTex;
 	QFont tmpFont = currentFont;
-	tmpFont.setPixelSize(currentFont.pixelSize()*static_cast<int>(static_cast<float>(prj->getDevicePixelsPerPixel())*StelApp::getInstance().getGlobalScalingRatio()));
+	tmpFont.setPixelSize(currentFont.pixelSize()*static_cast<int>(prj->getDevicePixelsPerPixel()));
 	tmpFont.setStyleStrategy(QFont::NoSubpixelAntialias); // The text may rotate, which would break subpixel AA
 	QRect strRect = QFontMetrics(tmpFont).boundingRect(str);
 	int w = strRect.width()+1+static_cast<int>(0.02f*strRect.width());
@@ -1728,10 +1728,6 @@ void StelPainter::drawEllipse(double x, double y, double rX, double rY, double a
 {
 	if (rX <= 1.0 || rY <= 1.0)
 		return;
-	// Taken largely from Nebula::renderEllipticMarker()
-	const double scale = StelApp::getInstance().getGlobalScalingRatio();
-	rX *= scale;
-	rY *= scale;
 
 	//const float radiusY = 0.35 * size;
 	//const float radiusX = aspectRatio * radiusY;
@@ -1751,7 +1747,7 @@ void StelPainter::drawEllipse(double x, double y, double rX, double rY, double a
 	}
 	const auto vertCount = vertexData.size() / 2;
 	setLineSmooth(true);
-	setLineWidth(scale * std::clamp(qMax(rX, rY)/40, 1., 2.));
+	setLineWidth(std::clamp(qMax(rX, rY)/40, 1., 2.));
 	enableClientStates(true);
 	setVertexPointer(2, GL_FLOAT, vertexData.data());
 	drawFromArray(StelPainter::LineLoop, vertCount, 0, false);
@@ -1764,7 +1760,7 @@ void StelPainter::drawSprite2dMode(float x, float y, float radius)
 	static const float texCoordData[] = {0.,0., 1.,0., 0.,1., 1.,1.};
 	
 	// Takes into account device pixel density and global scale ratio, as we are drawing 2D stuff.
-	radius *= static_cast<float>(prj->getDevicePixelsPerPixel())*StelApp::getInstance().getGlobalScalingRatio();
+	radius *= static_cast<float>(prj->getDevicePixelsPerPixel());
 	
 	vertexData[0]=x-radius; vertexData[1]=y-radius;
 	vertexData[2]=x+radius; vertexData[3]=y-radius;
@@ -1779,7 +1775,7 @@ void StelPainter::drawSprite2dMode(float x, float y, float radius)
 
 void StelPainter::drawSprite2dModeNoDeviceScale(float x, float y, float radius)
 {
-	drawSprite2dMode(x, y, radius/(static_cast<float>(prj->getDevicePixelsPerPixel())*StelApp::getInstance().getGlobalScalingRatio()));
+	drawSprite2dMode(x, y, radius/(static_cast<float>(prj->getDevicePixelsPerPixel())));
 }
 
 void StelPainter::drawSprite2dMode(const Vec3d& v, float radius)
@@ -1800,7 +1796,7 @@ void StelPainter::drawSprite2dMode(float x, float y, float radius, float rotatio
 	const float sinr = std::sin(rotation * M_PI_180f);
 	
 	// Takes into account device pixel density and global scale ratio, as we are drawing 2D stuff.
-	radius *= static_cast<float>(prj->getDevicePixelsPerPixel())*StelApp::getInstance().getGlobalScalingRatio();
+	radius *= static_cast<float>(prj->getDevicePixelsPerPixel());
 	
 	for (int i = 0; i < 8; i+=2)
 	{

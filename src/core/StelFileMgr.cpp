@@ -44,6 +44,7 @@
 QStringList StelFileMgr::fileLocations;
 QString StelFileMgr::userDir;
 QString StelFileMgr::screenshotDir;
+QString StelFileMgr::obsListDir;
 QString StelFileMgr::installDir;
 
 void StelFileMgr::init()
@@ -458,6 +459,18 @@ void StelFileMgr::setScreenshotDir(const QString& newDir)
 	makeSureDirExistsAndIsWritable(newDir);
 	QFileInfo userDirFI(newDir);
 	screenshotDir = userDirFI.filePath();
+}
+
+QString StelFileMgr::getObsListDir()
+{
+	return obsListDir;
+}
+
+void StelFileMgr::setObsListDir(const QString& newDir)
+{
+	makeSureDirExistsAndIsWritable(newDir);
+	QFileInfo userDirFI(newDir);
+	obsListDir = userDirFI.filePath();
 }
 
 QString StelFileMgr::getLocaleDir()

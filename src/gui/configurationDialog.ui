@@ -424,7 +424,7 @@
           <item>
            <widget class="QGroupBox" name="groupBox_EphemerisSettings">
             <property name="toolTip">
-             <string>This feature has not been thoroughly tested yet!</string>
+             <string>See User Guide for adding ephemeris data.</string>
             </property>
             <property name="title">
              <string>Ephemeris settings</string>
@@ -446,9 +446,6 @@
               <layout class="QGridLayout" name="EphemerisGridLayout">
                <item row="2" column="0">
                 <widget class="QCheckBox" name="de430checkBox">
-                 <property name="toolTip">
-                  <string>DE430 provides highest accuracy, only for years 1550...2650.</string>
-                 </property>
                  <property name="text">
                   <string>Use DE430 (high accuracy)</string>
                  </property>
@@ -480,6 +477,9 @@
                </item>
                <item row="1" column="0">
                 <widget class="QCheckBox" name="de441checkBox">
+                 <property name="toolTip">
+                  <string>DE441 provides position data for years -13000...+17000. For special applications only.</string>
+                 </property>
                  <property name="text">
                   <string>Use DE441 (long-time data)</string>
                  </property>
@@ -497,6 +497,9 @@
                </item>
                <item row="0" column="0">
                 <widget class="QCheckBox" name="de440checkBox">
+                 <property name="toolTip">
+                  <string>DE440 provides highest accuracy, only for years 1550...2650.</string>
+                 </property>
                  <property name="text">
                   <string>Use DE440 (high accuracy)</string>
                  </property>

@@ -384,6 +384,8 @@ int main(int argc, char **argv)
 	// Override config file values from CLI.
 	CLIProcessor::parseCLIArgsPostConfig(argList, confSettings);
 
+	StelFileMgr::setObsListDir(confSettings->value("main/observinglists_dir", StelFileMgr::getUserDir()).toString());
+
 	// Add the Noto & DejaVu fonts that we use everywhere in the program
 	const QStringList customFonts = { "NotoSans-Regular.ttf", "NotoSansMono-Regular.ttf", "NotoSansSC-Regular.otf", "DejaVuSans.ttf", "DejaVuSansMono.ttf" };
 	for (auto &font: qAsConst(customFonts))

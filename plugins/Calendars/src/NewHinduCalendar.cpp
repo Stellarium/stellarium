@@ -644,7 +644,7 @@ double NewHinduCalendar::hinduLunarPhaseInv(double phase, double rdA, double rdB
 	do
 	{
 		double rdMid=(rdA+rdB)*0.5;
-		double phaseMid=lunarPhase(rdMid);
+		double phaseMid=hinduLunarPhase(rdMid);
 		// in case lngA<0 and lngB>0!
 		if ((phaseMid>phaseA) && (phaseMid>phaseB))
 			phaseMid-=360.;

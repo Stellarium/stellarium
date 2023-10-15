@@ -530,7 +530,7 @@ void StelSkyDrawer::drawSunCorona(StelPainter* painter, const Vec3f& v, float ra
 	// For some reason we must mix color with the given alpha as well, else mixing does not work.
 	painter->setColor(color*alpha, alpha);
 	// pre-compensate the automatic scaling of sprite painting on HiDPI screens
-	radius /= static_cast<float>(painter->getProjector()->getDevicePixelsPerPixel())*StelApp::getInstance().getGlobalScalingRatio();
+	radius /= static_cast<float>(painter->getProjector()->getDevicePixelsPerPixel());
 	// Our corona image was made in 2008-08-01 near Khovd, Mongolia. It shows the correct parallactic angle for its location and time, we must add this, and subtract the ecliptic/equator angle from that date of 15.43 degrees.
 	painter->drawSprite2dMode(win[0], win[1], radius, -angle+44.65f-15.43f);
 

@@ -86,7 +86,7 @@ public slots:
 	static int hinduZodiac(const double rd_ut);
 	//! @return lunar longitude at RD (CC:UE 20.14)
 	static double hinduLunarLongitude(const double rd_ut);
-	//! @return lunar phase at RD (CC:UE 20.15)
+	//! @return lunar phase at RD [0..360] (CC:UE 20.15)
 	static double hinduLunarPhase(const double rd_ut);
 	//! @return lunar day at RD (CC:UE 20.16)
 	static int hinduLunarDayFromMoment(const double rd_ut);
