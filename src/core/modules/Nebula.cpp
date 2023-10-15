@@ -120,7 +120,7 @@ Nebula::Nebula()
 	, PGC_nb(0)
 	, UGC_nb(0)
 	, Arp_nb(0)
-	, VV_nb(0)		
+	, VV_nb(0)
 	, DWB_nb(0)
 	, Tr_nb(0)
 	, St_nb(0)
@@ -283,7 +283,7 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 			if (getAirmass(core)>-1.f && getSurfaceBrightnessWithExtinction(core)<99.f) // Don't show extincted surface brightness much below horizon where model is meaningless.
 			{
 				oss << QString("%1: <b>%2</b> %5 (%3: <b>%4</b> %5)").arg(sb, QString::number(getSurfaceBrightness(core, flagUseArcsecSurfaceBrightness), 'f', 2),
-											  ae, QString::number(getSurfaceBrightnessWithExtinction(core, flagUseArcsecSurfaceBrightness), 'f', 2), mu) << "<br />";
+				                                                          ae, QString::number(getSurfaceBrightnessWithExtinction(core, flagUseArcsecSurfaceBrightness), 'f', 2), mu) << "<br />";
 			}
 			else
 				oss << QString("%1: <b>%2</b> %3").arg(sb, QString::number(getSurfaceBrightness(core, flagUseArcsecSurfaceBrightness), 'f', 2), mu) << "<br />";
@@ -498,7 +498,7 @@ QString Nebula::getI18nAliases() const
 					firstLine = false;
 				}
 				if (i>3 && ((i-2) % 4)==0 && !firstLine &&  i<asize)
-						aliases.append("<br />");
+					aliases.append("<br />");
 			}
 		}
 		else
@@ -557,9 +557,9 @@ float Nebula::getSelectPriority(const StelCore* core) const
 
 	if (drawer->getFlagNebulaMagnitudeLimit() && (mag>static_cast<float>(drawer->getCustomNebulaMagnitudeLimit())))
 		return selectPriority+mLim;
-	
+
 	const float maxMagHint = nebMgr->computeMaxMagHint(drawer);
-	// make very easy to select if labeled	
+	// make very easy to select if labeled
 	if (surfaceBrightnessUsage)
 	{
 		lim = mag = getSurfaceBrightness(core);
@@ -649,7 +649,7 @@ float Nebula::getVisibilityLevelByMagnitude(void) const
 	if (surfaceBrightnessUsage)
 	{
 		lim = getSurfaceBrightness(core) - 3.f;
-		if (lim > 90.f) lim = mLim + 1.f;		
+		if (lim > 90.f) lim = mLim + 1.f;
 	}
 	else
 	{
@@ -728,7 +728,7 @@ void Nebula::drawOutlines(StelPainter &sPainter, float maxMagHints) const
 }
 
 void Nebula::renderDarkNebulaMarker(StelPainter& sPainter, const float x, const float y,
-				    float size, const Vec3f color) const
+                                    float size, const Vec3f color) const
 {
 	// Take into account device pixel density and global scale ratio, as we are drawing 2D stuff.
 	const auto pixelRatio = sPainter.getProjector()->getDevicePixelsPerPixel();
@@ -749,7 +749,7 @@ void Nebula::renderDarkNebulaMarker(StelPainter& sPainter, const float x, const 
 	const float topInnerY = topOuterY - roundRadius;
 	const float gap = 0.15*size;
 	const float*const cossin = StelUtils::ComputeCosSinRhoZone((M_PIf/2)/(numPointsInArc-1),
-								   numPointsInArc-1, 0);
+	                                                           numPointsInArc-1, 0);
 	sPainter.setBlending(true);
 	sPainter.setLineSmooth(true);
 	sPainter.setLineWidth(scale * std::clamp(2*size/35, 1.f, 2.5f));
@@ -816,7 +816,7 @@ void Nebula::renderDarkNebulaMarker(StelPainter& sPainter, const float x, const 
 }
 
 void Nebula::renderMarkerRoundedRect(StelPainter& sPainter, const float x, const float y,
-				     float size, const Vec3f color) const
+                                     float size, const Vec3f color) const
 {
 	// Take into account device pixel density and global scale ratio, as we are drawing 2D stuff.
 	const auto pixelRatio = sPainter.getProjector()->getDevicePixelsPerPixel();
@@ -836,7 +836,7 @@ void Nebula::renderMarkerRoundedRect(StelPainter& sPainter, const float x, const
 	const float topOuterY = y + size;
 	const float topInnerY = topOuterY - roundRadius;
 	const float*const cossin = StelUtils::ComputeCosSinRhoZone((M_PIf/2)/(numPointsInArc-1),
-								   numPointsInArc-1, 0);
+	                                                           numPointsInArc-1, 0);
 	for(int n = 0; n < numPointsInArc; ++n)
 	{
 		const auto cosa = cossin[2*n], sina = cossin[2*n+1];
@@ -873,7 +873,7 @@ void Nebula::renderMarkerRoundedRect(StelPainter& sPainter, const float x, const
 }
 
 void Nebula::renderRoundMarker(StelPainter& sPainter, const float x, const float y,
-			       float size, const Vec3f color, const bool crossed) const
+                               float size, const Vec3f color, const bool crossed) const
 {
 	// Take into account device pixel density and global scale ratio, as we are drawing 2D stuff.
 	const auto pixelRatio = sPainter.getProjector()->getDevicePixelsPerPixel();
@@ -890,9 +890,9 @@ void Nebula::renderRoundMarker(StelPainter& sPainter, const float x, const float
 
 	sPainter.enableClientStates(true);
 	const float vertexData[] = {x-size, y,
-								x+size, y,
-								x, y-size,
-								x, y+size};
+	                            x+size, y,
+	                            x, y-size,
+	                            x, y+size};
 	const auto vertCount = std::size(vertexData) / 2;
 	sPainter.setVertexPointer(2, GL_FLOAT, vertexData);
 	sPainter.drawFromArray(StelPainter::Lines, vertCount, 0, false);
@@ -900,7 +900,7 @@ void Nebula::renderRoundMarker(StelPainter& sPainter, const float x, const float
 }
 
 void Nebula::renderEllipticMarker(StelPainter& sPainter, const float x, const float y, float size,
-				  const float aspectRatio, const float angle, const Vec3f color) const
+                                  const float aspectRatio, const float angle, const Vec3f color) const
 {
 	// Take into account device pixel density and global scale ratio, as we are drawing 2D stuff.
 	const auto pixelRatio = sPainter.getProjector()->getDevicePixelsPerPixel();
@@ -935,7 +935,7 @@ void Nebula::renderEllipticMarker(StelPainter& sPainter, const float x, const fl
 }
 
 void Nebula::renderMarkerPointedCircle(StelPainter& sPainter, const float x, const float y,
-				       float size, const Vec3f color, const bool insideRect) const
+                                       float size, const Vec3f color, const bool insideRect) const
 {
 	// Take into account device pixel density and global scale ratio, as we are drawing 2D stuff.
 	const auto pixelRatio = sPainter.getProjector()->getDevicePixelsPerPixel();
@@ -1024,7 +1024,7 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints, StelCore *core)
 		case NebHII:
 		case NebMolCld:
 		case NebYSO:
-		case NebRn:		
+		case NebRn:
 		case NebSNR:
 		case NebBn:
 		case NebEn:
@@ -1233,7 +1233,7 @@ bool Nebula::objectInDisplayedType() const
 		case NebIGx:
 			cntype = 2; // Interacting Galaxies
 			break;
-		case NebOc:		
+		case NebOc:
 		case NebCl:
 		case NebSA:
 		case NebSC:
@@ -1317,7 +1317,7 @@ bool Nebula::objectInDisplayedCatalog() const
 		|| ((catalogFilters&CatPNG)   && !(PNG_nb.isEmpty()))
 		|| ((catalogFilters&CatSNRG)  && !(SNRG_nb.isEmpty()))
 		|| ((catalogFilters&CatACO)   && (!ACO_nb.isEmpty()))
-		|| ((catalogFilters&CatHCG)   && (!HCG_nb.isEmpty()))		
+		|| ((catalogFilters&CatHCG)   && (!HCG_nb.isEmpty()))
 		|| ((catalogFilters&CatESO)   && (!ESO_nb.isEmpty()))
 		|| ((catalogFilters&CatVdBH)  && (!VdBH_nb.isEmpty()))
 		|| ((catalogFilters&CatDWB)   && (DWB_nb>0))
