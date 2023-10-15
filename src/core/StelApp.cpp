@@ -985,7 +985,7 @@ void StelApp::highGraphicsModeDraw()
 	else
 		for (auto* module : modules)
 		{
-			if (! QStringList({"MilkyWay", "ZodiacalLight", "LandscapeMgr", "GridlinesMgr"}).contains(module->objectName()))
+			if (! QStringList({"MilkyWay", "ZodiacalLight", "GridLinesMgr", "NebulaMgr"}).contains(module->objectName()))
 				module->draw(core);
 		}
 
@@ -1066,7 +1066,7 @@ void StelApp::draw()
 		else
 			for (auto* module : modules)
 			{
-				if (! QStringList({"MilkyWay", "ZodiacalLight", "LandscapeMgr", "GridlinesMgr"}).contains(module->objectName()))
+				if (! QStringList({"MilkyWay", "ZodiacalLight", "GridLinesMgr", "NebulaMgr"}).contains(module->objectName()))
 					module->draw(core);
 			}
 	}
