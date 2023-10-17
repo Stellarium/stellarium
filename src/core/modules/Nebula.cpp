@@ -419,7 +419,7 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 		if (!discoverer.isEmpty())
 			oss << QString("%1: %2 (%3)").arg(q_("Discoverer"), discoverer, StelUtils::localeDiscoveryDateString(discoveryYear)) << "<br />";
 		if (!getMorphologicalTypeDescription().isEmpty())
-			oss << QString("%1: %2.").arg(q_("Morphological description"), getMorphologicalTypeDescription()) << "<br />";
+			oss << StelUtils::wrapText(QString("%1: %2.").arg(q_("Morphological description"), getMorphologicalTypeDescription())) << "<br />";
 	}
 
 	oss << getSolarLunarInfoString(core, flags);
@@ -1536,7 +1536,7 @@ QString Nebula::getMorphologicalTypeDescription(void) const
 				rtx << qc_("undocumented reflection nebulae", "Reflection Nebulae Classification");
 				break;
 		}
-		r = rtx.join(",<br />");
+		r = rtx.join(", ");
 	}
 
 

@@ -294,7 +294,7 @@ QString Pulsar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 			oss << QString("%1 %2%3: %4 %5<br />").arg(flux, QString::number(1400), freq, QString::number(s1400, 'f', 2), sfd);
 
 		if (!notes.isEmpty())
-			oss << StelUtils::wrapText(QString("%1: %2<br />").arg(q_("Notes"), getPulsarTypeInfoString(notes)));
+			oss << StelUtils::wrapText(QString("%1: %2").arg(q_("Notes"), getPulsarTypeInfoString(notes))) << "<br />";
 	}
 
 	oss << getSolarLunarInfoString(core, flags);
