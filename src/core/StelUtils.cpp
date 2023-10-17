@@ -1406,6 +1406,33 @@ QString hoursToHmsStr(const float hours, const bool lowprecision)
 	return hoursToHmsStr(static_cast<double>(hours), lowprecision);
 }
 
+//! The method to splitting the text by substrings by some limit of string length
+QString wrapText(const QString& s, const int limit)
+{
+	QString result = "";
+	if (s.length()<=limit)
+		result = s;
+	else
+	{
+		QString prepare = "";
+		QStringList data = s.split(" ");
+		for (int i = 0; i<data.size(); i++)
+		{
+			prepare.append(QString(" %1").arg(data.at(i)));
+			if (prepare.length() >= limit)
+			{
+				result.append(QString("<br />%1").arg(data.at(i)));
+				prepare = "";
+			}
+			else
+				result.append(QString(" %1").arg(data.at(i)));
+		}
+	}
+
+	return result;
+}
+
+
 /* /////////////////// DELTA T VARIANTS
 // For the standard epochs for many formulae, we use
 // J2000.0=2000-jan-1.5=2451545.0,

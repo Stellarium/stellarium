@@ -282,7 +282,7 @@ QString NomenclatureItem::getInfoString(const StelCore* core, const InfoStringGr
 			oss << QString("%1: %2°<br/>").arg(q_("Solar altitude"), QString::number(getSolarAltitude(core), 'f', 1));
 
 		if (!origin.isEmpty())
-			oss << QString("%1: %2<br/>").arg(q_("Origin of name"), qc_(origin, "origin"));
+			oss << StelUtils::wrapText(QString("%1: %2<br/>").arg(q_("Origin of name"), qc_(origin, "origin")));
 
 		// DEBUG output. This should help defining valid criteria for selection priority.
 		// oss << QString("Planet angular size (semidiameter!): %1''<br/>").arg(QString::number(planet->getAngularSize(core)*3600.));
