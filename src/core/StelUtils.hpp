@@ -593,6 +593,9 @@ namespace StelUtils
 	//! Convert days (float) to a time string
 	QString daysFloatToDHMS(float days);
 
+	//! The method to splitting the text by substrings by some limit of string length
+	QString wrapText(const QString& s, const int limit = 52);
+
 	//! Get Delta-T estimation for a given date.
 	//! This is just an "empty" correction function, returning 0.
 	double getDeltaTwithoutCorrection(const double jDay);
