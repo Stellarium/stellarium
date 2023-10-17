@@ -294,7 +294,7 @@ QString Pulsar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 			oss << QString("%1 %2%3: %4 %5<br />").arg(flux, QString::number(1400), freq, QString::number(s1400, 'f', 2), sfd);
 
 		if (!notes.isEmpty())
-			oss << QString("%1: %2<br />").arg(q_("Notes"), getPulsarTypeInfoString(notes));
+			oss << StelUtils::wrapText(QString("%1: %2<br />").arg(q_("Notes"), getPulsarTypeInfoString(notes)));
 	}
 
 	oss << getSolarLunarInfoString(core, flags);
@@ -416,7 +416,7 @@ QString Pulsar::getPulsarTypeInfoString(QString pcode) const
 		out.append(q_("isolated neutron star with pulsed thermal X-ray emission but no detectable radio emission"));
 	}
 
-	return out.join(",<br />");
+	return out.join(", ");
 }
 
 void Pulsar::draw(StelCore* core, StelPainter *painter)
