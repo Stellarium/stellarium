@@ -58,8 +58,12 @@ void CustomObjectMgr::handleMouseClicks(class QMouseEvent* e)
 {
 	StelCore *core = StelApp::getInstance().getCore();
 	Vec3d mousePosition = core->getMouseJ2000Pos();
+	// Make sure the modifiers are exact, not just "Shift is pressed", but "Shift is pressed while Ctrl and Alt aren't"
+	const auto modifiers = e->modifiers() & (Qt::ShiftModifier | Qt::ControlModifier | Qt::AltModifier);
+	const bool modifierIsShift = modifiers == Qt::ShiftModifier;
+	const bool modifierIsShiftAlt = modifiers == (Qt::ShiftModifier | Qt::AltModifier);
 	// Shift + LeftClick -- Add custom marker
-	if (e->modifiers().testFlag(Qt::ShiftModifier) && e->button()==Qt::LeftButton && e->type()==QEvent::MouseButtonPress)
+	if (modifierIsShift && e->button()==Qt::LeftButton && e->type()==QEvent::MouseButtonPress)
 	{
 		addCustomObject(QString("%1 %2").arg(N_("Marker")).arg(countMarkers + 1), mousePosition, true);
 
@@ -67,8 +71,7 @@ void CustomObjectMgr::handleMouseClicks(class QMouseEvent* e)
 		return;
 	}
 	// Shift + Alt + RightClick -- Removes all custom markers
-	// Changed by snowsailor 5/04/2017
-	if(e->modifiers().testFlag(Qt::ShiftModifier) && e->modifiers().testFlag(Qt::AltModifier) && e->button() == Qt::RightButton && e->type() == QEvent::MouseButtonPress)
+	if(modifierIsShiftAlt && e->button() == Qt::RightButton && e->type() == QEvent::MouseButtonPress)
 	{
 		//Delete ALL custom markers
 		removeCustomObjects();
@@ -76,8 +79,7 @@ void CustomObjectMgr::handleMouseClicks(class QMouseEvent* e)
 		return;
 	}
 	// Shift + RightClick -- Removes the closest marker within a radius specified within
-	// Added by snowsailor 5/04/2017
-	if (e->modifiers().testFlag(Qt::ShiftModifier) && e->button()==Qt::RightButton && e->type()==QEvent::MouseButtonPress)
+	if (modifierIsShift && e->button()==Qt::RightButton && e->type()==QEvent::MouseButtonPress)
 	{
 		const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000, StelCore::RefractionAuto);
 		Vec3d winpos;
