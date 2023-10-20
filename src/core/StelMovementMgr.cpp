@@ -632,7 +632,8 @@ void StelMovementMgr::handleMouseClicks(QMouseEvent* event)
 			}
 			else if (event->type()==QEvent::MouseButtonPress)
 			{
-				if (event->modifiers() & Qt::ControlModifier)
+				const auto modifiers = event->modifiers() & (Qt::ControlModifier|Qt::ShiftModifier|Qt::AltModifier);
+				if (modifiers == Qt::ControlModifier)
 				{
 					dragTimeMode=true;
 					beforeTimeDragTimeRate=core->getTimeRate();
