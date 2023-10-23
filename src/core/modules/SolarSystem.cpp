@@ -224,9 +224,9 @@ void SolarSystem::init()
 	setOrbitColorStyle(conf->value("astro/planets_orbits_color_style", "one_color").toString());
 
 	// Settings for calculation of position of Great Red Spot on Jupiter
-	setGrsLongitude(conf->value("astro/grs_longitude", 216).toInt());
+	setGrsLongitude(conf->value("astro/grs_longitude", 46).toInt());
 	setGrsDrift(conf->value("astro/grs_drift", 15.).toDouble());
-	setGrsJD(conf->value("astro/grs_jd", 2456901.5).toDouble());
+	setGrsJD(conf->value("astro/grs_jd", 2460218.5).toDouble());
 
 	setFlagEarthShadowEnlargementDanjon(conf->value("astro/shadow_enlargement_danjon", false).toBool());
 	setFlagPermanentSolarCorona(conf->value("viewing/flag_draw_sun_corona", true).toBool());
