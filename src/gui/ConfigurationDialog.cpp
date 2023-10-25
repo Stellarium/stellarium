@@ -287,7 +287,6 @@ void ConfigurationDialog::createDialogContent()
 	connect(ui->dtRadioButton, SIGNAL(clicked(bool)), this, SLOT(setButtonBarDTFormat()));
 
 	// Delta-T
-	ui->pushButtonCustomDeltaTEquationDialog->setFixedSize(QSize(26, 26));
 	populateDeltaTAlgorithmsList();	
 	idx = ui->deltaTAlgorithmComboBox->findData(core->getCurrentDeltaTAlgorithmKey(), Qt::UserRole, Qt::MatchCaseSensitive);
 	if (idx==-1)
@@ -1856,8 +1855,6 @@ void ConfigurationDialog::populateDeltaTAlgorithmsList()
 
 	// TRANSLATORS: Full phrase is "Algorithm of DeltaT"
 	ui->deltaTLabel->setText(QString("%1 %2T:").arg(q_("Algorithm of")).arg(QChar(0x0394)));
-
-	ui->pushButtonCustomDeltaTEquationDialog->setFixedHeight(ui->deltaTAlgorithmComboBox->height());
 
 	QComboBox* algorithms = ui->deltaTAlgorithmComboBox;
 
