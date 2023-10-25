@@ -115,6 +115,8 @@ public:
 	//! @return the current maximum value
 	//! @param isDegrees true if the maximum value is required in degrees, else max is returned as radians.
 	double getMaximum(const bool isDegrees) const { return maxRad * (isDegrees ? 180.0/M_PI : 1.0); }
+
+	QSize minimumSizeHint() const override;
 	
 public slots:
 	//! Set the value to default 0 angle.
