@@ -1034,6 +1034,21 @@ QTextBrowser#deltaTAlgorithmDescription {
 	background: transparent;
 	padding: 0;
 	margin: 0;
+	max-height: 175px;
+}
+
+QListWidget#scriptListWidget {
+	min-width: 190px;
+	max-width: 190px;
+}
+
+QListWidget#pluginsListWidget {
+	min-width: 180px;
+	max-width: 180px;
+}
+
+QCommandLinkButton#getStarsButton {
+	qproperty-iconSize: 24px;
 }
 
 /**************************************************************************************************************
