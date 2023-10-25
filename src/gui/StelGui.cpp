@@ -66,6 +66,28 @@
 #include <QAction>
 #include <QKeySequence>
 
+static QString applyScaleToCSS(const QString& css, const double scale)
+{
+	auto out = css;
+	const QRegularExpression pat("\\b([0-9.]+)px\\b");
+	QRegularExpressionMatch match;
+	int pos = 0;
+	while((pos = out.indexOf(pat, pos, &match)) >= 0)
+	{
+		const auto numStr = match.captured(1);
+		bool ok = false;
+		const auto num = numStr.toDouble(&ok);
+		assert(ok);
+		const auto scaled = num * scale;
+		const bool hasDot = numStr.contains(QLatin1Char('.'));
+		const auto newNumStr = hasDot ? QString::number(scaled,'f',3)
+		                              : QString::number(int(scaled));
+		out.replace(pos, numStr.size(), newNumStr);
+		pos += newNumStr.size() + 2; // skip the whole resulting pattern
+	}
+	return out;
+}
+
 StelGui::StelGui()
 	: topLevelGraphicsWidget(nullptr)
 	, skyGui(nullptr)
@@ -187,6 +209,11 @@ StelGui::~StelGui()
 		delete obsListDialog;
 		obsListDialog = nullptr;
 	}
+}
+
+void StelGui::updateStelStyle()
+{
+	setStelStyle(StelApp::getInstance().getCurrentStelStyle());
 }
 
 void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
@@ -384,7 +411,8 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 	l->addItem(skyGui, 0, 0);
 	atopLevelGraphicsWidget->setLayout(l);
 
-	setStelStyle(StelApp::getInstance().getCurrentStelStyle());
+	connect(&StelApp::getInstance(), &StelApp::guiFontSizeChanged, this, &StelGui::updateStelStyle);
+	updateStelStyle();
 
 	int margin = conf->value("gui/space_between_groups", 5).toInt();
 	skyGui->bottomBar->setGroupMargin("020-gridsGroup", margin, 0);
@@ -484,6 +512,8 @@ void StelGui::setStelStyle(const QString& style)
 	else
 		qDebug().noquote() << "Cannot find HTML style file:" << htmlStyleFileName;
 
+	const auto scale = double(StelApp::getInstance().getGuiFontSize()) / StelApp::getDefaultGuiFontSize();
+	currentStelStyle.qtStyleSheet = applyScaleToCSS(currentStelStyle.qtStyleSheet, scale);
 	emit guiStyleChanged(currentStelStyle.qtStyleSheet);
 	emit htmlStyleChanged(currentStelStyle.htmlStyleSheet);
 }

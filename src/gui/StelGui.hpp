@@ -312,6 +312,7 @@ private slots:
 	void copySelectedObjectInfo(void);
 
 private:
+	void updateStelStyle();
 	//! convenience method to find an action in the StelActionMgr.
 	StelAction* getAction(const QString& actionName) const;
 
