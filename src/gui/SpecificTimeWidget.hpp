@@ -45,6 +45,8 @@ private:
     double sunriseJD, sunsetJD, moonriseJD, moonsetJD, civilDawnJD, civilDuskJD, nauticalDawnJD, nauticalDuskJD, astronomicalDawnJD, astronomicalDuskJD;
 
     void populateData();
+    // method to get a formatted string for date and time of equinox/solstice
+    QString getFormattedDateTime(const double JD, const double utcShift);
 
     std::unique_ptr<Ui_specificTimeWidget> ui;
 };

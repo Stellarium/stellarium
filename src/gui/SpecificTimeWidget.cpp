@@ -57,14 +57,10 @@ void SpecificTimeWidget::setup()
 
 	populateData();
 
-	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(setSeasonLabels()));
-	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(setTodayTimes()));
-	// update the seasons data when year is changed
-	//connect(core, SIGNAL(dateChangedByYear(const int)), this, SLOT(setSeasonTimes()));
-	// update the seasons data when "Now" button is pressed or date is changed
-	// TODO: need a better solution here to avoid extra computations
-	connect(core, SIGNAL(dateChanged()), this, SLOT(setSeasonTimes()));
-	connect(core, SIGNAL(dateChanged()), this, SLOT(setTodayTimes()));
+	connect(core, &StelCore::locationChanged, this, [=](const StelLocation&){ populateData(); });
+	connect(core, &StelCore::currentTimeZoneChanged, this, [=](const QString&){ setSeasonTimes(); setTodayTimes(); });
+	// update the data when "Now" button is pressed or date is changed
+	connect(core, &StelCore::dateChanged, this, [=](){ setSeasonTimes(); setTodayTimes(); });
 	connect(specMgr, SIGNAL(eventYearChanged()), this, SLOT(setSeasonTimes()));
 	connect(specMgr, SIGNAL(eventYearChanged()), this, SLOT(setTodayTimes()));
 
@@ -130,8 +126,7 @@ void SpecificTimeWidget::setup()
 void SpecificTimeWidget::retranslate()
 {
 	ui->retranslateUi(this);
-	setSeasonTimes();
-	setTodayTimes();
+	populateData();
 }
 
 void SpecificTimeWidget::populateData()
@@ -173,9 +168,17 @@ void SpecificTimeWidget::setSeasonLabels()
 	}
 }
 
+QString SpecificTimeWidget::getFormattedDateTime(const double JD, const double utcShift)
+{
+	int year, month, day;
+	StelUtils::getDateFromJulianDay(JD, &year, &month, &day);
+	return QString("%1 %2 %3").arg(QString::number(day), localeMgr->longGenitiveMonthName(month), StelUtils::hoursToHmsStr(StelUtils::getHoursFromJulianDay(JD+utcShift), true));
+}
+
 void SpecificTimeWidget::setSeasonTimes()
 {
-	const double JD = core->getJD() + core->getUTCOffset(core->getJD()) / 24;
+	const double utcShift = core->getUTCOffset(core->getJD()) / 24.; // Fix DST shift...
+	const double JD = core->getJD() + utcShift;
 	int year, month, day;
 	double jdFirstDay, jdLastDay;
 	StelUtils::getDateFromJulianDay(JD, &year, &month, &day);
@@ -185,7 +188,7 @@ void SpecificTimeWidget::setSeasonTimes()
 	const double septemberEquinox = specMgr->getEquinox(year, SpecificTimeMgr::Equinox::September);
 	const double juneSolstice = specMgr->getSolstice(year, SpecificTimeMgr::Solstice::June);
 	const double decemberSolstice = specMgr->getSolstice(year, SpecificTimeMgr::Solstice::December);
-	QString days = qc_("days", "duration");
+	QString days = qc_("days", "duration");	
 	int jdDepth = 5;
 	int daysDepth = 2;
 
@@ -194,19 +197,19 @@ void SpecificTimeWidget::setSeasonTimes()
 	ui->labelYearDuration->setText(QString("(%1 %2)").arg(QString::number(jdLastDay-jdFirstDay), days));
 	// Spring/Fall
 	ui->labelMarchEquinoxJD->setText(QString::number(marchEquinox, 'f', jdDepth));
-	ui->labelMarchEquinoxLT->setText(QString("%1 %2").arg(localeMgr->getPrintableDateLocal(marchEquinox), localeMgr->getPrintableTimeLocal(marchEquinox)));
+	ui->labelMarchEquinoxLT->setText(getFormattedDateTime(marchEquinox, utcShift));
 	ui->labelMarchEquinoxDuration->setText(QString("%1 %2").arg(QString::number(juneSolstice-marchEquinox, 'f', daysDepth), days));
 	// Summer/Winter
 	ui->labelJuneSolsticeJD->setText(QString::number(juneSolstice, 'f', jdDepth));
-	ui->labelJuneSolsticeLT->setText(QString("%1 %2").arg(localeMgr->getPrintableDateLocal(juneSolstice), localeMgr->getPrintableTimeLocal(juneSolstice)));
+	ui->labelJuneSolsticeLT->setText(getFormattedDateTime(juneSolstice, utcShift));
 	ui->labelJuneSolsticeDuration->setText(QString("%1 %2").arg(QString::number(septemberEquinox-juneSolstice, 'f', daysDepth), days));
 	// Fall/Spring
 	ui->labelSeptemberEquinoxJD->setText(QString::number(septemberEquinox, 'f', jdDepth));
-	ui->labelSeptemberEquinoxLT->setText(QString("%1 %2").arg(localeMgr->getPrintableDateLocal(septemberEquinox), localeMgr->getPrintableTimeLocal(septemberEquinox)));
+	ui->labelSeptemberEquinoxLT->setText(getFormattedDateTime(septemberEquinox, utcShift));
 	ui->labelSeptemberEquinoxDuration->setText(QString("%1 %2").arg(QString::number(decemberSolstice-septemberEquinox, 'f', daysDepth), days));
 	// Winter/Summer
 	ui->labelDecemberSolsticeJD->setText(QString::number(decemberSolstice, 'f', jdDepth));
-	ui->labelDecemberSolsticeLT->setText(QString("%1 %2").arg(localeMgr->getPrintableDateLocal(decemberSolstice), localeMgr->getPrintableTimeLocal(decemberSolstice)));
+	ui->labelDecemberSolsticeLT->setText(getFormattedDateTime(decemberSolstice, utcShift));
 	const double duration = (marchEquinox-jdFirstDay) + (jdLastDay-decemberSolstice);
 	ui->labelDecemberSolsticeDuration->setText(QString("%1 %2").arg(QString::number(duration, 'f', daysDepth), days));
 }
