@@ -339,6 +339,7 @@ QPushButton, QToolButton {
 	color: rgb(31, 31, 31);
         font-size: 100%;
 	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(183, 184, 185), stop: 1 rgb(111, 113, 114));
+	icon-size: 16px;
 }
 
 QPushButton:disabled, QToolButton:disabled {
