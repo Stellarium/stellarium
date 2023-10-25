@@ -1059,6 +1059,31 @@ QTextBrowser#projectionTextBrowser {
 	background: transparent;
 	padding: 0;
 	margin: 0;
+	min-height: 75px;
+}
+
+QListWidget#projectionListWidget {
+	min-width: 180px;
+	max-width: 230px;
+}
+
+QListWidget#landscapesListWidget {
+	min-width: 120px;
+	max-width: 220px;
+}
+
+QListWidget#culturesListWidget {
+	min-width: 120px;
+	max-width: 220px;
+}
+
+/* Try to make them the same size */
+QPushButton#selectAllCatalogs,
+QPushButton#selectStandardCatalogs,
+QPushButton#selectPreferredCatalogs,
+QPushButton#storePreferredCatalogs,
+QPushButton#selectNoneCatalogs {
+	min-width: 150px;
 }
 
 /**************************************************************************************************************
