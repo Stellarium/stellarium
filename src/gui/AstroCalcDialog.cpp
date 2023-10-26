@@ -284,11 +284,6 @@ void AstroCalcDialog::createDialogContent()
 	ui->phenomenToDateEdit->setMinimumDate(minDate);
 	ui->rtsFromDateEdit->setMinimumDate(minDate);
 	ui->rtsToDateEdit->setMinimumDate(minDate);
-	ui->pushButtonExtraEphemerisDialog->setFixedSize(QSize(20, 20));
-	ui->pushButtonCustomStepsDialog->setFixedSize(QSize(26, 26));
-	ui->pushButtonCustomStepsDialog->setIconSize(QSize(20, 20));
-	ui->pushButtonNow->setFixedSize(QSize(26, 26));
-	ui->pushButtonNow->setIconSize(QSize(20, 20));
 
 	// bug #1350669 (https://bugs.launchpad.net/stellarium/+bug/1350669)
 	connect(ui->celestialPositionsTreeWidget, SIGNAL(currentItemChanged(QTreeWidgetItem*, QTreeWidgetItem*)), ui->celestialPositionsTreeWidget, SLOT(repaint()));
