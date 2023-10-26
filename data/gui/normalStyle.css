@@ -311,40 +311,47 @@ QTabBar QToolButton {
 	background-color: rgb(31, 31, 31);
 }
 
-
 /*
- * QPushButton
+ * QPushButton and QToolButton
  */
 
+QToolButton {
+	padding: 2px;
+}
+
+
 QPushButton {
+	padding: 2px 8px;
+}
+
+QPushButton, QToolButton {
 	border: 1px solid rgb(0, 0, 0);
 	border-radius: 2px;
-	padding: 2px 8px;
 	color: rgb(31, 31, 31);
         font-size: 100%;
 	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(183, 184, 185), stop: 1 rgb(111, 113, 114));
 }
 
-QPushButton:disabled {
+QPushButton:disabled, QToolButton:disabled {
         color: rgb(61, 61, 61);
         border: 1px solid rgb(61, 61, 61);
 	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(150, 150, 153), stop: 1 rgb(120, 120, 120));
 }
 
-QPushButton:flat {
+QPushButton:flat, QToolButton:flat {
 	border: none; /* no border for a flat push button */
 	background: transparent;
 }
 
-QPushButton:hover {
+QPushButton:hover, QToolButton:hover {
 	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(183, 184, 165), stop: 1 rgb(111, 113, 94));
 }
 
-QPushButton:pressed {
+QPushButton:pressed, QToolButton:pressed {
 	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(41, 41, 49), stop: 0.2 rgb(73, 74, 84), stop: 1 rgb(58, 60, 73));
 }
 
-QPushButton:checked {
+QPushButton:checked, QToolButton:checked {
 	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(41, 41, 49), stop: 0.2 rgb(73, 74, 84), stop: 1 rgb(58, 60, 73));
 }
 
