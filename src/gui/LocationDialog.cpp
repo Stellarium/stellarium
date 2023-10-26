@@ -175,7 +175,6 @@ void LocationDialog::createDialogContent()
 	ui->gpsToolButton->setText(q_("Get location from GPS"));
 #endif
 	connect(ui->gpsToolButton, SIGNAL(toggled(bool)), this, SLOT(gpsEnableQueryLocation(bool)));
-	ui->gpsToolButton->setStyleSheet(QString("QToolButton{ background: gray; }")); // ? Missing default style?
 	connect(locMgr, SIGNAL(gpsQueryFinished(bool)), this, SLOT(gpsReturn(bool)));
 #else
 	ui->gpsToolButton->setEnabled(false);
@@ -975,7 +974,7 @@ void LocationDialog::resetGPSbuttonLabel()
 #else
 	ui->gpsToolButton->setText(q_("Get location from GPS"));
 #endif
-	ui->gpsToolButton->setStyleSheet(QString("QToolButton{ background: gray; }"));
+	ui->gpsToolButton->setStyleSheet("");
 }
 #endif
 
