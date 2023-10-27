@@ -34,6 +34,9 @@ class TuiNode;
 class TextUserInterface : public StelModule
 {
 	Q_OBJECT
+
+	Q_PROPERTY(bool tuiDateTime READ getTuiDateTime WRITE setTuiDateTime NOTIFY flagShowDateTimeChanged)
+	Q_PROPERTY(bool tuiObjInfo  READ getTuiObjInfo  WRITE setTuiObjInfo  NOTIFY flagShowObjInfoChanged)
 public:
 	TextUserInterface();
 	virtual ~TextUserInterface() Q_DECL_OVERRIDE;
@@ -54,13 +57,15 @@ public slots:
 	//! Show/hide the TUI menu
 	void setTuiMenuActive(bool tActive) { tuiActive = tActive;}
 	//! Show/hide the TUI date time display
-	void setTuiDateTime(bool tDateTime) { tuiDateTime = tDateTime; }
+	void setTuiDateTime(bool tDateTime) { tuiDateTime = tDateTime; emit flagShowDateTimeChanged(tDateTime);}
+	bool getTuiDateTime(){return tuiDateTime;}
 	//! Show/hide the selected object's short object information 
-	void setTuiObjInfo(bool tObjInfo) { tuiObjInfo = tObjInfo; }
+	void setTuiObjInfo(bool tObjInfo) { tuiObjInfo = tObjInfo; emit flagShowObjInfoChanged(tObjInfo);}
+	bool getTuiObjInfo(){return tuiObjInfo;}
 	//! Set Gravity text for the TUI text
 	void setTuiGravityUi(bool tGravityUi) { tuiGravityUi = tGravityUi; }
-    //! Set light pollution level
-    void setLightPollutionLevel(int level);
+	//! Set light pollution level
+	void setLightPollutionLevel(int level);
 
 private slots:
 	void setHomePlanet(QString planetName);
@@ -76,12 +81,16 @@ private slots:
 	void saveDefaultSettings(void);
 	void shutDown(void);
 
+signals:
+	void flagShowDateTimeChanged(bool);
+	void flagShowObjInfoChanged(bool);
+
 private:
 	DummyDialog dummyDialog;
 	QFont font;
 	bool tuiActive;
-	bool tuiDateTime;
-	bool tuiObjInfo;
+	bool tuiDateTime; // property
+	bool tuiObjInfo;  // property
 	bool tuiGravityUi;
 	TuiNode* currentNode;
 	Vec3f color;

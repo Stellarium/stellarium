@@ -575,6 +575,8 @@ void TextUserInterface::init()
 
 
 	currentNode = m1;
+
+	addAction("actionShow_TUI_dateTime", N_("Text User Interface"), N_("Toggle TUI date&time"), this, "flagShowDateTime", "Ctrl+Alt+T");
 }
 
 /*************************************************************************
@@ -588,8 +590,10 @@ void TextUserInterface::loadConfiguration(void)
 	font.setPixelSize(conf->value("tui/tui_font_size", 15).toInt());
 	tuiDateTime = conf->value("tui/flag_show_tui_datetime", false).toBool();
 	tuiObjInfo = conf->value("tui/flag_show_tui_short_obj_info", false).toBool();
-	tuiGravityUi = conf->value("tui/flag_show_gravity_ui", false).toBool();
+	setTuiGravityUi(conf->value("tui/flag_show_gravity_ui", false).toBool());
 	color = Vec3f(conf->value("tui/tui_font_color", "0.3,1,0.3").toString());
+	StelCore *core=StelApp::getInstance().getCore();
+	connect(core, SIGNAL(flagGravityLabelsChanged(bool)), this, SLOT(setTuiGravityUi(bool)));
 }
 
 /*************************************************************************
