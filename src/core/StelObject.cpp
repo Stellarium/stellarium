@@ -958,8 +958,8 @@ void StelObject::postProcessInfoString(QString& str, const InfoStringGroup& flag
 
 	// hack for avoiding an empty line before table
 	static const QRegularExpression tableRe("<br(\\s*/)?><table");
-	static const QRegularExpression brRe("<br(\\s*/)?>\\s*$");
-	static const QRegularExpression brRe2("<br(\\s*/)?>\\s*$");
+	static const QRegularExpression  brRe("<br(\\s*/)?>\\s*$");
+	static const QRegularExpression brRe2("<br(\\s*/)?>\\s*");
 	static const QRegularExpression tdRe("<td(\\w*)?>");
 	static const QRegularExpression tableRe2("<table(\\w*)?>");
 	str.replace(tableRe, "<table");
