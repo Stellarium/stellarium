@@ -1034,10 +1034,15 @@ QLineEdit#citySearchLineEdit {
 
 QListView#citiesListView {
         font-size: 100%;
+        min-width: 300px;
 }
 
 QListView#citiesListView::item {
 	padding: 2px 0;
+}
+
+QFrame#frame_coordinates {
+	min-width: 300px;
 }
 
 /**************************************************************************************************************

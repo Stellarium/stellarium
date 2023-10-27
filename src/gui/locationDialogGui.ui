@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>699</width>
-    <height>511</height>
+    <width>786</width>
+    <height>300</height>
    </rect>
   </property>
   <property name="styleSheet">
@@ -31,7 +31,7 @@
    </property>
    <item>
     <widget class="TitleBar" name="titleBar">
-     <property name="title">
+     <property name="title" stdset="0">
       <string>Location</string>
      </property>
     </widget>
@@ -71,18 +71,6 @@
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>180</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>16777215</width>
-          <height>2400</height>
-         </size>
-        </property>
         <property name="frameShape">
          <enum>QFrame::StyledPanel</enum>
         </property>
@@ -106,7 +94,14 @@
           <number>0</number>
          </property>
          <item row="1" column="0">
-          <widget class="MapWidget" name="mapWidget" native="true"/>
+          <widget class="MapWidget" name="mapWidget" native="true">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+             <horstretch>1</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+          </widget>
          </item>
          <item row="1" column="1">
           <widget class="QFrame" name="frame_citylist">
@@ -115,18 +110,6 @@
              <horstretch>0</horstretch>
              <verstretch>0</verstretch>
             </sizepolicy>
-           </property>
-           <property name="minimumSize">
-            <size>
-             <width>200</width>
-             <height>180</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>300</width>
-             <height>2400</height>
-            </size>
            </property>
            <property name="frameShape">
             <enum>QFrame::StyledPanel</enum>
@@ -152,6 +135,12 @@
             </property>
             <item>
              <widget class="QListView" name="citiesListView">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Expanding">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="focusPolicy">
                <enum>Qt::NoFocus</enum>
               </property>
@@ -171,12 +160,6 @@
             </item>
             <item>
              <widget class="QLineEdit" name="citySearchLineEdit">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
               <property name="toolTip">
                <string>Standard list of locations contains only English names (without diacritics!)</string>
               </property>
@@ -203,18 +186,6 @@
       </item>
       <item row="2" column="1">
        <widget class="QGroupBox" name="groupBox">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>180</height>
-         </size>
-        </property>
         <property name="title">
          <string>Current location information</string>
         </property>
@@ -233,12 +204,6 @@
          </property>
          <item row="2" column="1" colspan="3">
           <widget class="QFrame" name="frame_buttons">
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>0</height>
-            </size>
-           </property>
            <property name="frameShape">
             <enum>QFrame::StyledPanel</enum>
            </property>
@@ -276,12 +241,6 @@
               <property name="enabled">
                <bool>false</bool>
               </property>
-              <property name="minimumSize">
-               <size>
-                <width>100</width>
-                <height>0</height>
-               </size>
-              </property>
               <property name="focusPolicy">
                <enum>Qt::NoFocus</enum>
               </property>
@@ -294,12 +253,6 @@
              <widget class="QPushButton" name="deleteLocationFromListPushButton">
               <property name="enabled">
                <bool>false</bool>
-              </property>
-              <property name="minimumSize">
-               <size>
-                <width>60</width>
-                <height>0</height>
-               </size>
               </property>
               <property name="focusPolicy">
                <enum>Qt::NoFocus</enum>
@@ -327,18 +280,6 @@
          </item>
          <item row="0" column="1">
           <widget class="QFrame" name="frame_coordinates">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>0</height>
-            </size>
-           </property>
            <property name="frameShape">
             <enum>QFrame::StyledPanel</enum>
            </property>
@@ -370,11 +311,11 @@
             </item>
             <item row="0" column="1">
              <widget class="AngleSpinBox" name="latitudeSpinBox">
-              <property name="minimumSize">
-               <size>
-                <width>180</width>
-                <height>24</height>
-               </size>
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
               </property>
               <property name="toolTip">
                <string>You can enter values in decimal degrees, or using dms format, for example: +1d 12m 8s</string>
@@ -424,12 +365,6 @@
             </item>
             <item row="1" column="1">
              <widget class="AngleSpinBox" name="longitudeSpinBox">
-              <property name="minimumSize">
-               <size>
-                <width>140</width>
-                <height>24</height>
-               </size>
-              </property>
               <property name="toolTip">
                <string>You can enter values in decimal degrees, or using dms format, for example: +1d 12m 8s</string>
               </property>
@@ -454,12 +389,6 @@
             </item>
             <item row="2" column="1">
              <widget class="QSpinBox" name="altitudeSpinBox">
-              <property name="minimumSize">
-               <size>
-                <width>100</width>
-                <height>24</height>
-               </size>
-              </property>
               <property name="toolTip">
                <string>Enter the elevation in meter</string>
               </property>
@@ -527,12 +456,6 @@
              <verstretch>0</verstretch>
             </sizepolicy>
            </property>
-           <property name="minimumSize">
-            <size>
-             <width>350</width>
-             <height>0</height>
-            </size>
-           </property>
            <property name="frameShape">
             <enum>QFrame::StyledPanel</enum>
            </property>
@@ -552,34 +475,6 @@
             <property name="bottomMargin">
              <number>0</number>
             </property>
-            <item row="1" column="1">
-             <widget class="QComboBox" name="regionNameComboBox">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="minimumSize">
-               <size>
-                <width>0</width>
-                <height>24</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>16777215</width>
-                <height>24</height>
-               </size>
-              </property>
-              <property name="editable">
-               <bool>true</bool>
-              </property>
-              <property name="insertPolicy">
-               <enum>QComboBox::NoInsert</enum>
-              </property>
-             </widget>
-            </item>
             <item row="0" column="1">
              <widget class="QLineEdit" name="cityNameLineEdit">
               <property name="placeholderText">
@@ -594,17 +489,27 @@
               </property>
              </widget>
             </item>
-            <item row="4" column="0" colspan="2">
-             <widget class="QCheckBox" name="useCustomTimeZoneCheckBox">
-              <property name="text">
-               <string>Use custom time zone</string>
-              </property>
-             </widget>
-            </item>
             <item row="3" column="0">
              <widget class="QLabel" name="labelTimeZone">
               <property name="text">
                <string>Time zone:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QLabel" name="labelRegion">
+              <property name="text">
+               <string>Region:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QComboBox" name="regionNameComboBox">
+              <property name="editable">
+               <bool>true</bool>
+              </property>
+              <property name="insertPolicy">
+               <enum>QComboBox::NoInsert</enum>
               </property>
              </widget>
             </item>
@@ -615,57 +520,10 @@
               </property>
              </widget>
             </item>
-            <item row="3" column="1">
-             <widget class="QComboBox" name="timeZoneNameComboBox">
-              <property name="enabled">
-               <bool>true</bool>
-              </property>
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="editable">
-               <bool>true</bool>
-              </property>
-              <property name="insertPolicy">
-               <enum>QComboBox::NoInsert</enum>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="1">
-             <widget class="QComboBox" name="planetNameComboBox">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="minimumSize">
-               <size>
-                <width>0</width>
-                <height>24</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>16777215</width>
-                <height>24</height>
-               </size>
-              </property>
-              <property name="editable">
-               <bool>true</bool>
-              </property>
-              <property name="insertPolicy">
-               <enum>QComboBox::NoInsert</enum>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="0">
-             <widget class="QLabel" name="labelRegion">
+            <item row="4" column="0" colspan="2">
+             <widget class="QCheckBox" name="useCustomTimeZoneCheckBox">
               <property name="text">
-               <string>Region:</string>
+               <string>Use custom time zone</string>
               </property>
              </widget>
             </item>
@@ -686,6 +544,29 @@
               </property>
               <property name="text">
                <string>Auto-enable atmosphere</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="1">
+             <widget class="QComboBox" name="timeZoneNameComboBox">
+              <property name="enabled">
+               <bool>true</bool>
+              </property>
+              <property name="editable">
+               <bool>true</bool>
+              </property>
+              <property name="insertPolicy">
+               <enum>QComboBox::NoInsert</enum>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <widget class="QComboBox" name="planetNameComboBox">
+              <property name="editable">
+               <bool>true</bool>
+              </property>
+              <property name="insertPolicy">
+               <enum>QComboBox::NoInsert</enum>
               </property>
              </widget>
             </item>
@@ -716,11 +597,6 @@
    <class>MapWidget</class>
    <extends>QWidget</extends>
    <header>MapWidget.hpp</header>
-  </customwidget>
-  <customwidget>
-   <class>StelCloseButton</class>
-   <extends>QPushButton</extends>
-   <header>gui/StelCloseButton.hpp</header>
   </customwidget>
  </customwidgets>
  <tabstops>
