@@ -211,8 +211,12 @@ QMenu::item:selected { /* when user selects item using mouse or keyboard */
  * Windows
  */
 
-QFrame#TitleBar {
+QFrame#titleBar {
 	/* Title bar on windows */
+	min-width: 16px;
+	min-height: 25px;
+	max-height: 25px;
+	margin: 0;
 	background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop: 0 rgb(41, 47, 50), stop:1 rgb(31, 33, 36));
 }
 

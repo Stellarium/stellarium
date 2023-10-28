@@ -68,8 +68,8 @@ void RemoteSyncDialog::createDialogContent()
 	ui->pushButtonDeselectProperties->setText(QChar(0x2190));
 
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
-	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
-	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
+	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
+	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	connect(rs, SIGNAL(stateChanged(RemoteSync::SyncState)), this, SLOT(updateState()));
 	updateState();

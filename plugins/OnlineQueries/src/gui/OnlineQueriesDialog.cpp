@@ -80,8 +80,8 @@ void OnlineQueriesDialog::createDialogContent()
 	//hook up retranslate event
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	//connect UI events
-	connect(ui->closeStelWindow, &QPushButton::clicked, plugin, [=]{ plugin->setEnabled(false);});
-	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
+	connect(ui->titleBar, &TitleBar::closeClicked, plugin, [=]{ plugin->setEnabled(false);});
+	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	// Kinetic scrolling and style sheet for output
 	kineticScrollingList << view;

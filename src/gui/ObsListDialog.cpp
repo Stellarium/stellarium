@@ -107,7 +107,7 @@ void ObsListDialog::createDialogContent()
 
 	//Signals and slots
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
-	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
+	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
 
 	// Standard mode buttons: NewList/EditList/DeleteList
 	connect(ui->newListButton,        SIGNAL(clicked()), this, SLOT(   newListButtonPressed()));
@@ -914,7 +914,7 @@ void ObsListDialog::newListButtonPressed()
 	switchEditMode(true, true);
 
 	ui->listNameLineEdit->setText(q_("New Observation List"));
-	ui->stelWindowTitle->setText(q_("Observing list creation mode"));
+	ui->titleBar->setTitle(q_("Observing list creation mode"));
 }
 /*
  * Slot for editButton
@@ -927,7 +927,7 @@ void ObsListDialog::editListButtonPressed()
 	{
 		switchEditMode(true, false);
 
-		ui->stelWindowTitle->setText(q_("Observing list editor mode"));
+		ui->titleBar->setTitle(q_("Observing list editor mode"));
 	}
 	else
 	{
@@ -1343,7 +1343,7 @@ void ObsListDialog::switchEditMode(bool enableEditMode, bool newList)
 		isCreationMode=newList;
 		// The Layout classes have no setVisible(bool), we must configure individual buttons! :-(
 
-		ui->stelWindowTitle->setText(q_("Observing lists"));
+		ui->titleBar->setTitle(q_("Observing lists"));
 		//ui->horizontalLayoutCombo->setEnabled(!isEditMode);     // disable list selection
 		ui->obsListComboLabel->setVisible(!isEditMode);
 		ui->obsListComboBox->setVisible(!isEditMode);
