@@ -20,9 +20,9 @@
 #ifndef STEL_CLOSE_BUTTON_HPP
 #define STEL_CLOSE_BUTTON_HPP
 
-#include <QPushButton>
+#include <QToolButton>
 
-class StelCloseButton : public QPushButton
+class StelCloseButton : public QToolButton
 {
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 	using EnterEvent=QEvent;
