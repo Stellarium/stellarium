@@ -24,6 +24,7 @@
 
 class StelCloseButton : public QToolButton
 {
+	Q_OBJECT
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 	using EnterEvent=QEvent;
 #else
