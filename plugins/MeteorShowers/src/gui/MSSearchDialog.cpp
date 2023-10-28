@@ -70,8 +70,8 @@ void MSSearchDialog::createDialogContent()
 
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 
-	connect(m_ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
-	connect(m_ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
+	connect(m_ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
+	connect(m_ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	connect(m_ui->searchButton, SIGNAL(clicked()), this, SLOT(searchEvents()));
 

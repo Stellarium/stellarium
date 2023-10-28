@@ -131,8 +131,8 @@ void LocationDialog::createDialogContent()
 		this, SLOT(setLocationFromList(const QModelIndex&)));
 
 	// Connect all the QT signals
-	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
-	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
+	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
+	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 	connect(ui->mapWidget, SIGNAL(positionChanged(double, double, const QColor&)), this, SLOT(setLocationFromMap(double, double, const QColor&)), Qt::UniqueConnection);
 
 	connect(ui->addLocationToListPushButton, SIGNAL(clicked()), this, SLOT(addCurrentLocationToList()));
