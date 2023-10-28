@@ -21,7 +21,7 @@
 
 
 StelCloseButton::StelCloseButton(QWidget* parent)
-	: QPushButton(parent)
+	: QToolButton(parent)
 	, iconNormal(":/graphicGui/uieCloseButton.png")
 	, iconHover(":/graphicGui/uieCloseButton-hover.png")
 {
