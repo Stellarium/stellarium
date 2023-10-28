@@ -311,40 +311,47 @@ QTabBar QToolButton {
 	background-color: rgb(31, 31, 31);
 }
 
-
 /*
- * QPushButton
+ * QPushButton and QToolButton
  */
 
+QToolButton {
+	padding: 2px;
+}
+
+
 QPushButton {
+	padding: 2px 8px;
+}
+
+QPushButton, QToolButton {
 	border: 1px solid rgb(0, 0, 0);
 	border-radius: 2px;
-	padding: 2px 8px;
 	color: rgb(31, 31, 31);
         font-size: 100%;
 	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(183, 184, 185), stop: 1 rgb(111, 113, 114));
 }
 
-QPushButton:disabled {
+QPushButton:disabled, QToolButton:disabled {
         color: rgb(61, 61, 61);
         border: 1px solid rgb(61, 61, 61);
 	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(150, 150, 153), stop: 1 rgb(120, 120, 120));
 }
 
-QPushButton:flat {
+QPushButton:flat, QToolButton:flat {
 	border: none; /* no border for a flat push button */
 	background: transparent;
 }
 
-QPushButton:hover {
+QPushButton:hover, QToolButton:hover {
 	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(183, 184, 165), stop: 1 rgb(111, 113, 94));
 }
 
-QPushButton:pressed {
+QPushButton:pressed, QToolButton:pressed {
 	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(41, 41, 49), stop: 0.2 rgb(73, 74, 84), stop: 1 rgb(58, 60, 73));
 }
 
-QPushButton:checked {
+QPushButton:checked, QToolButton:checked {
 	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(41, 41, 49), stop: 0.2 rgb(73, 74, 84), stop: 1 rgb(58, 60, 73));
 }
 
@@ -758,12 +765,18 @@ QScrollBar::left-arrow {
 
 QSlider {
 	background: none;
+	height: 14px;
 }
 
 QSlider::groove:horizontal {
 	border: none;
-	height: 4px; /* the groove expands to the size of the slider by default. by giving it a height, it has a fixed size */
-	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(0, 0, 0), stop: 1 rgb(54, 54, 54));
+	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+	                            stop: 0 rgba(0,0,0,0),
+	                            stop: 0.3571 rgba(0,0,0,0),
+	                            stop: 0.3572 rgb(0, 0, 0),
+	                            stop: 0.6429 rgb(54, 54, 54),
+	                            stop: 0.6430 rgba(0,0,0,0),
+	                            stop: 1 rgba(0,0,0,0));
 	margin: 0;
 }
 
@@ -771,7 +784,7 @@ QSlider::handle:horizontal {
 	border: 1px solid rgb(0, 0, 0);
 	border-radius: 2px;
 	width: 32px;
-	margin: -5px 0; /* handle is placed by default on the contents rect of the groove. Expand outside the groove */
+	margin: 0;
 	color: rgb(31, 31, 31);
 	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(183, 184, 185), stop: 1 rgb(111, 113, 114));
 }
@@ -781,7 +794,13 @@ QSlider::handle:horizontal:hover {
 }
 
 QSlider::groove:horizontal:disabled {
-	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(61, 61, 61), stop: 1 rgb(80, 80, 80));
+	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+	                            stop: 0 rgba(0,0,0,0),
+	                            stop: 0.3571 rgba(0,0,0,0),
+	                            stop: 0.3572 rgb(61,61,61),
+	                            stop: 0.6429 rgb(80,80,80),
+	                            stop: 0.6430 rgba(0,0,0,0),
+	                            stop: 1 rgba(0,0,0,0));
 }
 
 QSlider::handle:horizontal:disabled {
