@@ -243,6 +243,9 @@ QFrame#viewContent {
  */
 
 QListView#stackListWidget {
+	min-height: 74px;
+	max-height: 74px;
+	icon-size: 50px;
 	font-weight: bold;
 	color: rgb(120, 120, 120);
 }
@@ -261,6 +264,8 @@ QListView::item:selected#stackListWidget {
 }
 
 QListView::item#stackListWidget {
+	min-height: 74px;
+	max-height: 74px;
 	margin: 0;
 	padding-top: 0;
 	padding-bottom: 5px;
