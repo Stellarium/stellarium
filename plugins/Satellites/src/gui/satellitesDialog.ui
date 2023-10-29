@@ -289,7 +289,7 @@
              </spacer>
             </item>
             <item>
-             <widget class="QToolButton" name="penumbraColor">
+             <widget class="ColorButton" name="penumbraColor">
               <property name="toolTip">
                <string>The color of Earth's penumbra circle</string>
               </property>
@@ -515,7 +515,7 @@
              </spacer>
             </item>
             <item>
-             <widget class="QToolButton" name="transitColorButton">
+             <widget class="ColorButton" name="transitColorButton">
               <property name="toolTip">
                <string>Color of satellite markers in transit through the Sun or the Moon</string>
               </property>
@@ -552,7 +552,7 @@
              </spacer>
             </item>
             <item>
-             <widget class="QToolButton" name="invisibleColorButton">
+             <widget class="ColorButton" name="invisibleColorButton">
               <property name="toolTip">
                <string>Color of markers, labels and orbits for invisible satellites</string>
               </property>
@@ -635,7 +635,7 @@
              </spacer>
             </item>
             <item>
-             <widget class="QToolButton" name="umbraColor">
+             <widget class="ColorButton" name="umbraColor">
               <property name="toolTip">
                <string>The color of Earth's umbra circle</string>
               </property>
@@ -1646,9 +1646,9 @@
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>StelCloseButton</class>
-   <extends>QPushButton</extends>
-   <header>gui/StelCloseButton.hpp</header>
+   <class>ColorButton</class>
+   <extends>QToolButton</extends>
+   <header>gui/ColorButton.hpp</header>
   </customwidget>
  </customwidgets>
  <tabstops>

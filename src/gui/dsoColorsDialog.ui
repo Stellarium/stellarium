@@ -52,7 +52,7 @@
        <number>0</number>
       </property>
       <item row="2" column="4">
-       <widget class="QToolButton" name="colorDSOBLLacObjects">
+       <widget class="ColorButton" name="colorDSOBLLacObjects">
         <property name="toolTip">
          <string>Color of markers of BL Lac objects</string>
         </property>
@@ -66,7 +66,7 @@
        </widget>
       </item>
       <item row="5" column="0">
-       <widget class="QToolButton" name="colorDSOStars">
+       <widget class="ColorButton" name="colorDSOStars">
         <property name="toolTip">
          <string>Color of markers of stars</string>
         </property>
@@ -90,7 +90,7 @@
        </widget>
       </item>
       <item row="10" column="4">
-       <widget class="QToolButton" name="colorDSOEmissionLineStars">
+       <widget class="ColorButton" name="colorDSOEmissionLineStars">
         <property name="toolTip">
          <string>Color of markers of emission-line stars</string>
         </property>
@@ -118,7 +118,7 @@
        </widget>
       </item>
       <item row="3" column="0">
-       <widget class="QToolButton" name="colorDSOBlazars">
+       <widget class="ColorButton" name="colorDSOBlazars">
         <property name="toolTip">
          <string>Color of markers of blazars</string>
         </property>
@@ -139,7 +139,7 @@
        </widget>
       </item>
       <item row="1" column="4">
-       <widget class="QToolButton" name="colorDSOInteractingGalaxies">
+       <widget class="ColorButton" name="colorDSOInteractingGalaxies">
         <property name="toolTip">
          <string>Color of markers of interacting galaxies</string>
         </property>
@@ -153,14 +153,14 @@
        </widget>
       </item>
       <item row="9" column="4">
-       <widget class="QToolButton" name="colorDSOYoungStellarObjects">
+       <widget class="ColorButton" name="colorDSOYoungStellarObjects">
         <property name="toolTip">
          <string>Color of markers of young stellar objects</string>
         </property>
        </widget>
       </item>
       <item row="4" column="4">
-       <widget class="QToolButton" name="colorDSOStarClouds">
+       <widget class="ColorButton" name="colorDSOStarClouds">
         <property name="toolTip">
          <string>Color of markers of star clouds</string>
         </property>
@@ -174,14 +174,14 @@
        </widget>
       </item>
       <item row="7" column="4">
-       <widget class="QToolButton" name="colorDSOBipolarNebulae">
+       <widget class="ColorButton" name="colorDSOBipolarNebulae">
         <property name="toolTip">
          <string>Color of markers of bipolar nebulae</string>
         </property>
        </widget>
       </item>
       <item row="11" column="0">
-       <widget class="QToolButton" name="colorDSOSupernovaCandidates">
+       <widget class="ColorButton" name="colorDSOSupernovaCandidates">
         <property name="toolTip">
          <string>Color of markers of supernova candidates</string>
         </property>
@@ -195,14 +195,14 @@
        </widget>
       </item>
       <item row="9" column="0">
-       <widget class="QToolButton" name="colorDSOInterstellarMatter">
+       <widget class="ColorButton" name="colorDSOInterstellarMatter">
         <property name="toolTip">
          <string>Color of markers of interstellar matter</string>
         </property>
        </widget>
       </item>
       <item row="0" column="4">
-       <widget class="QToolButton" name="colorDSOGalaxies">
+       <widget class="ColorButton" name="colorDSOGalaxies">
         <property name="toolTip">
          <string>Color of markers of galaxies</string>
         </property>
@@ -216,7 +216,7 @@
        </widget>
       </item>
       <item row="4" column="2">
-       <widget class="QToolButton" name="colorDSOStellarAssociations">
+       <widget class="ColorButton" name="colorDSOStellarAssociations">
         <property name="toolTip">
          <string>Color of markers of stellar associations</string>
         </property>
@@ -237,21 +237,21 @@
        </widget>
       </item>
       <item row="7" column="0">
-       <widget class="QToolButton" name="colorDSODarkNebulae">
+       <widget class="ColorButton" name="colorDSODarkNebulae">
         <property name="toolTip">
          <string>Color of markers of dark nebulae</string>
         </property>
        </widget>
       </item>
       <item row="8" column="0">
-       <widget class="QToolButton" name="colorDSOEmissionNebulae">
+       <widget class="ColorButton" name="colorDSOEmissionNebulae">
         <property name="toolTip">
          <string>Color of markers of emission nebulae</string>
         </property>
        </widget>
       </item>
       <item row="1" column="0">
-       <widget class="QToolButton" name="colorDSOActiveGalaxies">
+       <widget class="ColorButton" name="colorDSOActiveGalaxies">
         <property name="toolTip">
          <string>Color of markers of active galaxies</string>
         </property>
@@ -265,14 +265,14 @@
        </widget>
       </item>
       <item row="0" column="0">
-       <widget class="QToolButton" name="colorDSOLabels">
+       <widget class="ColorButton" name="colorDSOLabels">
         <property name="toolTip">
          <string>Color of labels of deep-sky objects</string>
         </property>
        </widget>
       </item>
       <item row="8" column="4">
-       <widget class="QToolButton" name="colorDSOMolecularClouds">
+       <widget class="ColorButton" name="colorDSOMolecularClouds">
         <property name="toolTip">
          <string>Color of markers of molecular clouds</string>
         </property>
@@ -286,7 +286,7 @@
        </widget>
       </item>
       <item row="3" column="2">
-       <widget class="QToolButton" name="colorDSOStarClusters">
+       <widget class="ColorButton" name="colorDSOStarClusters">
         <property name="toolTip">
          <string>Color of markers of star clusters</string>
         </property>
@@ -300,14 +300,14 @@
        </widget>
       </item>
       <item row="4" column="0">
-       <widget class="QToolButton" name="colorDSOGlobularStarClusters">
+       <widget class="ColorButton" name="colorDSOGlobularStarClusters">
         <property name="toolTip">
          <string>Color of markers of globular star clusters</string>
         </property>
        </widget>
       </item>
       <item row="6" column="2">
-       <widget class="QToolButton" name="colorDSOPossiblePlanetaryNebulae">
+       <widget class="ColorButton" name="colorDSOPossiblePlanetaryNebulae">
         <property name="toolTip">
          <string>Color of markers of possible planetary nebulae</string>
         </property>
@@ -331,7 +331,7 @@
        </widget>
       </item>
       <item row="5" column="4">
-       <widget class="QToolButton" name="colorDSONebulae">
+       <widget class="ColorButton" name="colorDSONebulae">
         <property name="toolTip">
          <string>Color of markers of nebulae</string>
         </property>
@@ -345,21 +345,21 @@
        </widget>
       </item>
       <item row="6" column="0">
-       <widget class="QToolButton" name="colorDSOPlanetaryNebulae">
+       <widget class="ColorButton" name="colorDSOPlanetaryNebulae">
         <property name="toolTip">
          <string>Color of markers of planetary nebulae</string>
         </property>
        </widget>
       </item>
       <item row="11" column="2">
-       <widget class="QToolButton" name="colorDSOSupernovaRemnantCandidates">
+       <widget class="ColorButton" name="colorDSOSupernovaRemnantCandidates">
         <property name="toolTip">
          <string>Color of markers of supernova remnant candidates</string>
         </property>
        </widget>
       </item>
       <item row="2" column="2">
-       <widget class="QToolButton" name="colorDSOPossibleQuasars">
+       <widget class="ColorButton" name="colorDSOPossibleQuasars">
         <property name="toolTip">
          <string>Color of markers of possible quasars</string>
         </property>
@@ -373,14 +373,14 @@
        </widget>
       </item>
       <item row="2" column="0">
-       <widget class="QToolButton" name="colorDSOQuasars">
+       <widget class="ColorButton" name="colorDSOQuasars">
         <property name="toolTip">
          <string>Color of markers of quasars</string>
         </property>
        </widget>
       </item>
       <item row="7" column="2">
-       <widget class="QToolButton" name="colorDSOReflectionNebulae">
+       <widget class="ColorButton" name="colorDSOReflectionNebulae">
         <property name="toolTip">
          <string>Color of markers of reflection nebulae</string>
         </property>
@@ -418,7 +418,7 @@
        </widget>
       </item>
       <item row="0" column="2">
-       <widget class="QToolButton" name="colorDSOMarkers">
+       <widget class="ColorButton" name="colorDSOMarkers">
         <property name="toolTip">
          <string>Color of markers of deep-sky objects</string>
         </property>
@@ -432,7 +432,7 @@
        </widget>
       </item>
       <item row="1" column="2">
-       <widget class="QToolButton" name="colorDSORadioGalaxies">
+       <widget class="ColorButton" name="colorDSORadioGalaxies">
         <property name="toolTip">
          <string>Color of markers of radio galaxies</string>
         </property>
@@ -453,7 +453,7 @@
        </widget>
       </item>
       <item row="9" column="2">
-       <widget class="QToolButton" name="colorDSOEmissionObjects">
+       <widget class="ColorButton" name="colorDSOEmissionObjects">
         <property name="toolTip">
          <string>Color of markers of emission objects</string>
         </property>
@@ -481,28 +481,28 @@
        </widget>
       </item>
       <item row="3" column="4">
-       <widget class="QToolButton" name="colorDSOOpenStarClusters">
+       <widget class="ColorButton" name="colorDSOOpenStarClusters">
         <property name="toolTip">
          <string>Color of markers of open star clusters</string>
         </property>
        </widget>
       </item>
       <item row="10" column="2">
-       <widget class="QToolButton" name="colorDSOSymbioticStars">
+       <widget class="ColorButton" name="colorDSOSymbioticStars">
         <property name="toolTip">
          <string>Color of markers of symbiotic stars</string>
         </property>
        </widget>
       </item>
       <item row="6" column="4">
-       <widget class="QToolButton" name="colorDSOProtoplanetaryNebulae">
+       <widget class="ColorButton" name="colorDSOProtoplanetaryNebulae">
         <property name="toolTip">
          <string>Color of markers of protoplanetary nebulae</string>
         </property>
        </widget>
       </item>
       <item row="8" column="2">
-       <widget class="QToolButton" name="colorDSOHydrogenRegions">
+       <widget class="ColorButton" name="colorDSOHydrogenRegions">
         <property name="toolTip">
          <string>Color of markers of hydrogen regions</string>
         </property>
@@ -523,7 +523,7 @@
        </widget>
       </item>
       <item row="10" column="0">
-       <widget class="QToolButton" name="colorDSOSupernovaRemnants">
+       <widget class="ColorButton" name="colorDSOSupernovaRemnants">
         <property name="toolTip">
          <string>Color of markers of supernova remnants</string>
         </property>
@@ -547,7 +547,7 @@
        </widget>
       </item>
       <item row="11" column="4">
-       <widget class="QToolButton" name="colorDSOGalaxyClusters">
+       <widget class="ColorButton" name="colorDSOGalaxyClusters">
         <property name="toolTip">
          <string>Color of markers for clusters of galaxies</string>
         </property>
@@ -561,7 +561,7 @@
        </widget>
       </item>
       <item row="5" column="2">
-       <widget class="QToolButton" name="colorDSORegions">
+       <widget class="ColorButton" name="colorDSORegions">
         <property name="toolTip">
          <string>Color of markers of regions of the sky</string>
         </property>
@@ -580,9 +580,9 @@
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>StelCloseButton</class>
-   <extends>QPushButton</extends>
-   <header>gui/StelCloseButton.hpp</header>
+   <class>ColorButton</class>
+   <extends>QToolButton</extends>
+   <header>gui/ColorButton.hpp</header>
   </customwidget>
  </customwidgets>
  <resources/>

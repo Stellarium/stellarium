@@ -150,7 +150,7 @@
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout">
             <item>
-             <widget class="QToolButton" name="textColorButton">
+             <widget class="ColorButton" name="textColorButton">
               <property name="toolTip">
                <string>The color of the screen text</string>
               </property>
@@ -348,9 +348,9 @@
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>StelCloseButton</class>
-   <extends>QPushButton</extends>
-   <header>gui/StelCloseButton.hpp</header>
+   <class>ColorButton</class>
+   <extends>QToolButton</extends>
+   <header>gui/ColorButton.hpp</header>
   </customwidget>
  </customwidgets>
  <tabstops>

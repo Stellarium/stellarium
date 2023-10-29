@@ -105,7 +105,7 @@
              </spacer>
             </item>
             <item>
-             <widget class="QToolButton" name="equatorialTextColorToolButton">
+             <widget class="ColorButton" name="equatorialTextColorToolButton">
               <property name="text">
                <string/>
               </property>
@@ -125,7 +125,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QToolButton" name="equatorialLineColorToolButton">
+             <widget class="ColorButton" name="equatorialLineColorToolButton">
               <property name="text">
                <string/>
               </property>
@@ -199,7 +199,7 @@
              </spacer>
             </item>
             <item>
-             <widget class="QToolButton" name="horizontalTextColorToolButton">
+             <widget class="ColorButton" name="horizontalTextColorToolButton">
               <property name="text">
                <string/>
               </property>
@@ -219,7 +219,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QToolButton" name="horizontalLineColorToolButton">
+             <widget class="ColorButton" name="horizontalLineColorToolButton">
               <property name="text">
                <string/>
               </property>
@@ -368,9 +368,9 @@
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>StelCloseButton</class>
-   <extends>QPushButton</extends>
-   <header>gui/StelCloseButton.hpp</header>
+   <class>ColorButton</class>
+   <extends>QToolButton</extends>
+   <header>gui/ColorButton.hpp</header>
   </customwidget>
  </customwidgets>
  <tabstops>

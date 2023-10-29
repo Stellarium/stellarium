@@ -138,7 +138,7 @@ void CalendarsDialog::createDialogContent()
 	connectBoolProperty(ui->bahaiAstronomicalCheckBox,  "Calendars.flagShowBahaiAstronomical");
 
 	connectBoolProperty(ui->overrideTextColorCheckBox,  "Calendars.flagTextColorOverride");
-	connectColorButton(ui->textcolorToolButton,         "Calendars.textColor", "Calendars/text_color");
+	ui->textcolorToolButton->setup("Calendars.textColor", "Calendars/text_color");
 
 	// MAKE SURE to connect all part edit elements respective ...Changed() method here.
 	connect(ui->julianYearSpinBox,		SIGNAL(valueChanged(int)), this, SLOT(julianChanged()));

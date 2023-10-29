@@ -247,7 +247,7 @@
              <item row="14" column="0">
               <layout class="QHBoxLayout" name="colorHorizontalLayout">
                <item>
-                <widget class="QToolButton" name="lineColorToolButton">
+                <widget class="ColorButton" name="lineColorToolButton">
                  <property name="toolTip">
                   <string>Color for ocular circles and sensor frames</string>
                  </property>
@@ -264,7 +264,7 @@
                 </widget>
                </item>
                <item>
-                <widget class="QToolButton" name="textColorToolButton">
+                <widget class="ColorButton" name="textColorToolButton">
                  <property name="toolTip">
                   <string>Color for text which is shown only when GUI is switched off.</string>
                  </property>
@@ -486,7 +486,7 @@
              <item row="8" column="0">
               <layout class="QHBoxLayout" name="horizontalLayout_4">
                <item>
-                <widget class="QToolButton" name="focuserColorToolButton">
+                <widget class="ColorButton" name="focuserColorToolButton">
                  <property name="toolTip">
                   <string>Color for focuser overlay line</string>
                  </property>
@@ -2069,9 +2069,9 @@
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>StelCloseButton</class>
-   <extends>QPushButton</extends>
-   <header>gui/StelCloseButton.hpp</header>
+   <class>ColorButton</class>
+   <extends>QToolButton</extends>
+   <header>gui/ColorButton.hpp</header>
   </customwidget>
  </customwidgets>
  <tabstops>

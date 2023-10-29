@@ -65,7 +65,7 @@ void PointerCoordinatesWindow::createDialogContent()
 	connectBoolProperty(ui->checkBoxCrossedLines,    "PointerCoordinates.showCrossedLines");
 	connectBoolProperty(ui->checkBoxElongation,      "PointerCoordinates.showElongation");
 	connectIntProperty(ui->spinBoxFontSize,          "PointerCoordinates.fontSize");
-	connectColorButton(ui->textColorButton, "PointerCoordinates.fontColor", "PointerCoordinates/text_color");
+	ui->textColorButton->setup("PointerCoordinates.fontColor", "PointerCoordinates/text_color");
 
 	// Place of the string with coordinates
 	populateCoordinatesPlacesList();
