@@ -576,7 +576,8 @@ void TextUserInterface::init()
 
 	currentNode = m1;
 
-	addAction("actionShow_TUI_dateTime", N_("Text User Interface"), N_("Toggle TUI date&time"), this, "flagShowDateTime", "Ctrl+Alt+T");
+	addAction("actionShow_TUI_dateTime",   N_("Text User Interface"), N_("Toggle TUI date&time"),   this, "tuiDateTime", ""); // Recommend "Ctrl+Alt+T", but conflicts with Equation of Time.
+	addAction("actionShow_TUI_objectInfo", N_("Text User Interface"), N_("Toggle TUI object info"), this, "tuiObjInfo",  ""); // Recommend  "Ctrl+Alt+Shift+T"
 }
 
 /*************************************************************************
