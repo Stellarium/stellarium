@@ -212,7 +212,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QToolButton" name="pulsarMarkerColor">
+             <widget class="ColorButton" name="pulsarMarkerColor">
               <property name="toolTip">
                <string>Marker Color for pulsars</string>
               </property>
@@ -230,7 +230,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QToolButton" name="pulsarGlitchesMarkerColor">
+             <widget class="ColorButton" name="pulsarGlitchesMarkerColor">
               <property name="toolTip">
                <string>Marker Color for pulsars with glitches</string>
               </property>
@@ -362,9 +362,9 @@
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>StelCloseButton</class>
-   <extends>QPushButton</extends>
-   <header>gui/StelCloseButton.hpp</header>
+   <class>ColorButton</class>
+   <extends>QToolButton</extends>
+   <header>gui/ColorButton.hpp</header>
   </customwidget>
  </customwidgets>
  <resources/>

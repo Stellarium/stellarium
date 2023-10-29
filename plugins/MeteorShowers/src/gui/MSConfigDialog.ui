@@ -219,7 +219,7 @@
               <number>0</number>
              </property>
              <item row="0" column="0">
-              <widget class="QToolButton" name="setColorARG">
+              <widget class="ColorButton" name="setColorARG">
                <property name="text">
                 <string/>
                </property>
@@ -262,7 +262,7 @@
               <number>0</number>
              </property>
              <item row="0" column="0">
-              <widget class="QToolButton" name="setColorIR">
+              <widget class="ColorButton" name="setColorIR">
                <property name="text">
                 <string/>
                </property>
@@ -305,7 +305,7 @@
               <number>0</number>
              </property>
              <item row="0" column="0">
-              <widget class="QToolButton" name="setColorARC">
+              <widget class="ColorButton" name="setColorARC">
                <property name="text">
                 <string/>
                </property>
@@ -556,9 +556,9 @@
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>StelCloseButton</class>
-   <extends>QPushButton</extends>
-   <header>gui/StelCloseButton.hpp</header>
+   <class>ColorButton</class>
+   <extends>QToolButton</extends>
+   <header>gui/ColorButton.hpp</header>
   </customwidget>
  </customwidgets>
  <resources/>

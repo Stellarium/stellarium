@@ -370,6 +370,8 @@ IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
           gui/ContributorsList.hpp
           gui/StelCloseButton.hpp
           gui/StelCloseButton.cpp
+          gui/ColorButton.hpp
+          gui/ColorButton.cpp
           gui/ExternalStepSpinBox.hpp
      )
 

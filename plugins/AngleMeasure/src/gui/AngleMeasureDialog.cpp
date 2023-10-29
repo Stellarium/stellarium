@@ -71,10 +71,10 @@ void AngleMeasureDialog::createDialogContent()
 	connectBoolProperty(ui->azAltStartOnSkyCheckBox,		"AngleMeasure.flagShowHorizontalStartSkylinked");
 	connectBoolProperty(ui->azAltEndOnSkyCheckBox,			"AngleMeasure.flagShowHorizontalEndSkylinked");
 
-	connectColorButton(ui->equatorialLineColorToolButton,	"AngleMeasure.equatorialLineColor", "AngleMeasure/line_color");
-	connectColorButton(ui->equatorialTextColorToolButton,	"AngleMeasure.equatorialTextColor", "AngleMeasure/text_color");
-	connectColorButton(ui->horizontalLineColorToolButton,	"AngleMeasure.horizontalLineColor", "AngleMeasure/line_color_horizontal");
-	connectColorButton(ui->horizontalTextColorToolButton,	"AngleMeasure.horizontalTextColor", "AngleMeasure/text_color_horizontal");
+	ui->equatorialLineColorToolButton->setup("AngleMeasure.equatorialLineColor", "AngleMeasure/line_color");
+	ui->equatorialTextColorToolButton->setup("AngleMeasure.equatorialTextColor", "AngleMeasure/text_color");
+	ui->horizontalLineColorToolButton->setup("AngleMeasure.horizontalLineColor", "AngleMeasure/line_color_horizontal");
+	ui->horizontalTextColorToolButton->setup("AngleMeasure.horizontalTextColor", "AngleMeasure/text_color_horizontal");
 
 	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), this, SLOT(restoreDefaults()));
 

@@ -1982,7 +1982,7 @@
              <item row="18" column="1">
               <layout class="QHBoxLayout" name="horizontalLayout_15">
                <item>
-                <widget class="QToolButton" name="overwriteTextColorButton">
+                <widget class="ColorButton" name="overwriteTextColorButton">
                  <property name="toolTip">
                   <string>Info text color for overwrite</string>
                  </property>
@@ -2030,7 +2030,7 @@
              <item row="18" column="3">
               <layout class="QHBoxLayout" name="horizontalLayout_14">
                <item>
-                <widget class="QToolButton" name="daylightTextColorButton">
+                <widget class="ColorButton" name="daylightTextColorButton">
                  <property name="toolTip">
                   <string>Info text color at daylight</string>
                  </property>
@@ -2737,6 +2737,11 @@
    <extends>QFrame</extends>
    <header>Dialog.hpp</header>
    <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ColorButton</class>
+   <extends>QToolButton</extends>
+   <header>gui/ColorButton.hpp</header>
   </customwidget>
  </customwidgets>
  <tabstops>

@@ -117,8 +117,8 @@ void ExoplanetsDialog::createDialogContent()
 	connectBoolProperty(ui->displayShowDesignationsCheckBox,   "Exoplanets.flagShowExoplanetsDesignations");
 	connectBoolProperty(ui->displayShowNumbersCheckBox,        "Exoplanets.flagShowExoplanetsNumbers");
 
-	connectColorButton(ui->exoplanetMarkerColor,		"Exoplanets.markerColor",    "Exoplanets/exoplanet_marker_color");
-	connectColorButton(ui->habitableExoplanetMarkerColor,	"Exoplanets.habitableColor", "Exoplanets/habitable_exoplanet_marker_color");
+	ui->exoplanetMarkerColor         ->setup("Exoplanets.markerColor",    "Exoplanets/exoplanet_marker_color");
+	ui->habitableExoplanetMarkerColor->setup("Exoplanets.habitableColor", "Exoplanets/habitable_exoplanet_marker_color");
 
 	updateTimer = new QTimer(this);
 	connect(updateTimer, SIGNAL(timeout()), this, SLOT(refreshUpdateValues()));

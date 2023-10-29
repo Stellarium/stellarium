@@ -222,7 +222,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QToolButton" name="quasarMarkerColor">
+             <widget class="ColorButton" name="quasarMarkerColor">
               <property name="toolTip">
                <string>Color of markers of quasars</string>
               </property>
@@ -326,9 +326,9 @@
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>StelCloseButton</class>
-   <extends>QPushButton</extends>
-   <header>gui/StelCloseButton.hpp</header>
+   <class>ColorButton</class>
+   <extends>QToolButton</extends>
+   <header>gui/ColorButton.hpp</header>
   </customwidget>
  </customwidgets>
  <resources/>

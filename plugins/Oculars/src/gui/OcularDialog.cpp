@@ -332,13 +332,13 @@ void OcularDialog::createDialogContent()
 	connectBoolProperty(ui->contourCheckBox,		"Oculars.flagShowContour");
 	connectBoolProperty(ui->cardinalsCheckBox,		"Oculars.flagShowCardinals");
 	connectBoolProperty(ui->alignCrosshairCheckBox,		"Oculars.flagAlignCrosshair");
-	connectColorButton(ui->textColorToolButton,             "Oculars.textColor", "text_color", "Oculars");
-	connectColorButton(ui->lineColorToolButton,             "Oculars.lineColor", "line_color", "Oculars");
-	connectColorButton(ui->focuserColorToolButton,		"Oculars.focuserColor", "focuser_color", "Oculars");
 	connectBoolProperty(ui->checkBoxShowFocuserOverlay,	"Oculars.flagShowFocuserOverlay");
 	connectBoolProperty(ui->checkBoxUseSmallFocuser,	"Oculars.flagUseSmallFocuserOverlay");
 	connectBoolProperty(ui->checkBoxUseMediumFocuser,	"Oculars.flagUseMediumFocuserOverlay");
 	connectBoolProperty(ui->checkBoxUseLargeFocuser,	"Oculars.flagUseLargeFocuserOverlay");
+	ui->textColorToolButton->setup("Oculars.textColor", "text_color", "Oculars");
+	ui->lineColorToolButton->setup("Oculars.lineColor", "line_color", "Oculars");
+	ui->focuserColorToolButton->setup("Oculars.focuserColor", "focuser_color", "Oculars");
 
 	setupTelradFOVspins(plugin->getTelradFOV());
 	connect(plugin, SIGNAL(telradFOVChanged(Vec4f)), this, SLOT(setupTelradFOVspins(Vec4f)));

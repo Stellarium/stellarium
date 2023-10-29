@@ -206,10 +206,10 @@ void SatellitesDialog::createDialogContent()
 	connect(ui->iconicCheckBox, SIGNAL(clicked(bool)), ui->hideInvisibleSatellites, SLOT(setEnabled(bool)));
 	ui->hideInvisibleSatellites->setEnabled(ui->iconicCheckBox->isChecked());
 	// Logic sub-group: Colors
-	connectColorButton(ui->invisibleColorButton, "Satellites.invisibleSatelliteColor", "Satellites/invisible_satellite_color");
-	connectColorButton(ui->transitColorButton,   "Satellites.transitSatelliteColor",   "Satellites/transit_satellite_color");
-	connectColorButton(ui->umbraColor,           "Satellites.umbraColor",              "Satellites/umbra_color");
-	connectColorButton(ui->penumbraColor,        "Satellites.penumbraColor",           "Satellites/penumbra_color");
+	ui->invisibleColorButton->setup("Satellites.invisibleSatelliteColor", "Satellites/invisible_satellite_color");
+	ui->transitColorButton  ->setup("Satellites.transitSatelliteColor",   "Satellites/transit_satellite_color");
+	ui->umbraColor          ->setup("Satellites.umbraColor",              "Satellites/umbra_color");
+	ui->penumbraColor       ->setup("Satellites.penumbraColor",           "Satellites/penumbra_color");
 	// Logic sub-group: Penumbra
 	connectBoolProperty(ui->penumbraCheckBox,    "Satellites.flagPenumbraVisible");
 	// Logic sub-group: Visual filter / Altitude range

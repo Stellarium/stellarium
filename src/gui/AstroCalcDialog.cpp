@@ -346,14 +346,14 @@ void AstroCalcDialog::createDialogContent()
 	connect(ui->secondaryCelestialBodyComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(saveEphemerisSecondaryCelestialBody(int)));
 	connect(ui->pushButtonNow, SIGNAL(clicked()), this, SLOT(setDateTimeNow()));
 
-	connectColorButton(ui->genericMarkerColor, "SolarSystem.ephemerisGenericMarkerColor", "color/ephemeris_generic_marker_color");
-	connectColorButton(ui->secondaryMarkerColor, "SolarSystem.ephemerisSecondaryMarkerColor", "color/ephemeris_secondary_marker_color");
-	connectColorButton(ui->selectedMarkerColor, "SolarSystem.ephemerisSelectedMarkerColor", "color/ephemeris_selected_marker_color");
-	connectColorButton(ui->mercuryMarkerColor, "SolarSystem.ephemerisMercuryMarkerColor", "color/ephemeris_mercury_marker_color");
-	connectColorButton(ui->venusMarkerColor, "SolarSystem.ephemerisVenusMarkerColor", "color/ephemeris_venus_marker_color");
-	connectColorButton(ui->marsMarkerColor, "SolarSystem.ephemerisMarsMarkerColor", "color/ephemeris_mars_marker_color");
-	connectColorButton(ui->jupiterMarkerColor, "SolarSystem.ephemerisJupiterMarkerColor", "color/ephemeris_jupiter_marker_color");
-	connectColorButton(ui->saturnMarkerColor, "SolarSystem.ephemerisSaturnMarkerColor", "color/ephemeris_saturn_marker_color");
+	ui->genericMarkerColor->setup("SolarSystem.ephemerisGenericMarkerColor", "color/ephemeris_generic_marker_color");
+	ui->secondaryMarkerColor->setup("SolarSystem.ephemerisSecondaryMarkerColor", "color/ephemeris_secondary_marker_color");
+	ui->selectedMarkerColor->setup("SolarSystem.ephemerisSelectedMarkerColor", "color/ephemeris_selected_marker_color");
+	ui->mercuryMarkerColor->setup("SolarSystem.ephemerisMercuryMarkerColor", "color/ephemeris_mercury_marker_color");
+	ui->venusMarkerColor->setup("SolarSystem.ephemerisVenusMarkerColor", "color/ephemeris_venus_marker_color");
+	ui->marsMarkerColor->setup("SolarSystem.ephemerisMarsMarkerColor", "color/ephemeris_mars_marker_color");
+	ui->jupiterMarkerColor->setup("SolarSystem.ephemerisJupiterMarkerColor", "color/ephemeris_jupiter_marker_color");
+	ui->saturnMarkerColor->setup("SolarSystem.ephemerisSaturnMarkerColor", "color/ephemeris_saturn_marker_color");
 
 	// Tab: Transits
 	initListRTS();

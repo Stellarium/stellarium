@@ -264,7 +264,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QToolButton" name="exoplanetMarkerColor">
+             <widget class="ColorButton" name="exoplanetMarkerColor">
               <property name="toolTip">
                <string>Exoplanets marker color</string>
               </property>
@@ -282,7 +282,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QToolButton" name="habitableExoplanetMarkerColor">
+             <widget class="ColorButton" name="habitableExoplanetMarkerColor">
               <property name="toolTip">
                <string>Marker color for potential habitable exoplanets</string>
               </property>
@@ -669,9 +669,9 @@
    <header location="global">qchartview.h</header>
   </customwidget>
   <customwidget>
-   <class>StelCloseButton</class>
-   <extends>QPushButton</extends>
-   <header>gui/StelCloseButton.hpp</header>
+   <class>ColorButton</class>
+   <extends>QToolButton</extends>
+   <header>gui/ColorButton.hpp</header>
   </customwidget>
  </customwidgets>
  <resources/>

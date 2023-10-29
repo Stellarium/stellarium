@@ -84,9 +84,9 @@ void MSConfigDialog::createDialogContent()
 	connect(m_ui->enableLabels, SIGNAL(clicked(bool)), m_mgr, SLOT(setEnableLabels(bool)));
 	connect(m_ui->fontSize, SIGNAL(valueChanged(int)), m_mgr, SLOT(setFontSize(int)));
 
-	connectColorButton(m_ui->setColorARG, "MeteorShowers.colorARG", "MeteorShowers/colorARG");
-	connectColorButton(m_ui->setColorARC, "MeteorShowers.colorARC", "MeteorShowers/colorARC");
-	connectColorButton(m_ui->setColorIR,  "MeteorShowers.colorIR",  "MeteorShowers/colorIR");
+	m_ui->setColorARG->setup("MeteorShowers.colorARG", "MeteorShowers/colorARG");
+	m_ui->setColorARC->setup("MeteorShowers.colorARC", "MeteorShowers/colorARC");
+	m_ui->setColorIR ->setup("MeteorShowers.colorIR",  "MeteorShowers/colorIR");
 
 	// Update tab
 	connect(m_ui->enableUpdates, SIGNAL(clicked(bool)), m_mgr, SLOT(setEnableAutoUpdates(bool)));
