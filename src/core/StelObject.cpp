@@ -959,25 +959,32 @@ void StelObject::postProcessInfoString(QString& str, const InfoStringGroup& flag
 	// hack for avoiding an empty line before table
 	static const QRegularExpression tableRe("<br(\\s*/)?><table");
 	static const QRegularExpression  brRe("<br(\\s*/)?>\\s*$");
-	static const QRegularExpression brRe2("<br(\\s*/)?>\\s*");
-	static const QRegularExpression tdRe("<td(\\w*)?>");
-	static const QRegularExpression tableRe2("<table(\\w*)?>");
 	str.replace(tableRe, "<table");
 	// chomp trailing line breaks
 	str.replace(brRe, "");
 
 	if (flags&PlainText)
 	{
+		static const QRegularExpression brRe2("<br(\\s*/)?>\\s*");
+		static const QRegularExpression tdRe1("<td(\\w*)?>");
+		static const QRegularExpression tdRe2("<td style='[^']*'>");
+		static const QRegularExpression tdRe3("<td style=\"[^\"]*\">");
+		static const QRegularExpression tableRe2("<table(\\w*)?>");
+		static const QRegularExpression tableRe3("<table style='[^']*'>");
+		static const QRegularExpression tableRe4("<table style=\"[^\"]*\">");
 		str.replace("<b>", "");
 		str.replace("</b>", "");
 		str.replace("<h2>", "");
 		str.replace("</h2>", "\n");
 		str.replace(brRe2, "\n");
 		str.replace("<tr>", "");
-		str.replace(tdRe, "");
-		str.replace("<td>", "");
+		str.replace(tdRe1, "");
+		str.replace(tdRe2, "");
+		str.replace(tdRe3, "");
 		str.replace("</tr>", "\n");
 		str.replace(tableRe2, "");
+		str.replace(tableRe3, "");
+		str.replace(tableRe4, "");
 		str.replace("</table>", "");
 	}
 	else if(!(flags&NoFont))
