@@ -415,6 +415,8 @@ void ViewDialog::createDialogContent()
 	connectCheckBox(ui->showSolsticePointsCheckBox,           "actionShow_Solstice_Points");
 	connectCheckBox(ui->showAntisolarPointCheckBox,           "actionShow_Antisolar_Point");
 	connectCheckBox(ui->showApexPointsCheckBox,               "actionShow_Apex_Points");
+	connectCheckBox(ui->showLagrangePointsSolarCheckBox,      "actionShow_Lagrange_Points_Solar");
+	connectCheckBox(ui->showLagrangePointsLunarCheckBox,      "actionShow_Lagrange_Points_Lunar");
 	connectCheckBox(ui->showFOVCenterMarkerCheckBox,          "actionShow_FOV_Center_Marker");
 	connectCheckBox(ui->showFOVCircularMarkerCheckBox,        "actionShow_FOV_Circular_Marker");
 	connectCheckBox(ui->showFOVRectangularMarkerCheckBox,     "actionShow_FOV_Rectangular_Marker");
@@ -499,6 +501,8 @@ void ViewDialog::createDialogContent()
 	connectColorButton(ui->colorSolsticePoints,           "GridLinesMgr.solsticePointsColor",            "color/solstice_points_color");
 	connectColorButton(ui->colorAntisolarPoint,           "GridLinesMgr.antisolarPointColor",            "color/antisolar_point_color");
 	connectColorButton(ui->colorApexPoints,               "GridLinesMgr.apexPointsColor",                "color/apex_points_color");
+	connectColorButton(ui->colorLagrangePointsSolar,      "GridLinesMgr.lagrangePointsSolarColor",       "color/lagrange_points_solar_color");
+	connectColorButton(ui->colorLagrangePointsLunar,      "GridLinesMgr.lagrangePointsLunarColor",       "color/lagrange_points_lunar_color");
 	connectColorButton(ui->colorFOVCenterMarker,          "SpecialMarkersMgr.fovCenterMarkerColor",      "color/fov_center_marker_color");
 	connectColorButton(ui->colorFOVCircularMarker,        "SpecialMarkersMgr.fovCircularMarkerColor",    "color/fov_circular_marker_color");
 	connectColorButton(ui->colorFOVRectangularMarker,     "SpecialMarkersMgr.fovRectangularMarkerColor", "color/fov_rectangular_marker_color");

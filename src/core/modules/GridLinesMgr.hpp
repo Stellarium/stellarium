@@ -197,6 +197,12 @@ class GridLinesMgr : public StelModule
 	Q_PROPERTY(bool apexPointsDisplayed		READ getFlagApexPoints		WRITE setFlagApexPoints			NOTIFY apexPointsDisplayedChanged)
 	Q_PROPERTY(Vec3f apexPointsColor		READ getColorApexPoints		WRITE setColorApexPoints		NOTIFY apexPointsColorChanged)
 
+	Q_PROPERTY(bool lagrangePointsSolarDisplayed		READ getFlagLagrangePointsSolar		WRITE setFlagLagrangePointsSolar			NOTIFY lagrangePointsSolarDisplayedChanged)
+	Q_PROPERTY(Vec3f lagrangePointsSolarColor		READ getColorLagrangePointsSolar		WRITE setColorLagrangePointsSolar		NOTIFY lagrangePointsSolarColorChanged)
+
+	Q_PROPERTY(bool lagrangePointsLunarDisplayed		READ getFlagLagrangePointsLunar		WRITE setFlagLagrangePointsLunar			NOTIFY lagrangePointsLunarDisplayedChanged)
+	Q_PROPERTY(Vec3f lagrangePointsLunarColor		READ getColorLagrangePointsLunar		WRITE setColorLagrangePointsLunar		NOTIFY lagrangePointsLunarColorChanged)
+
 	Q_PROPERTY(float lineThickness			READ getLineThickness		WRITE setLineThickness			NOTIFY lineThicknessChanged)
 	Q_PROPERTY(float partThickness			READ getPartThickness		WRITE setPartThickness			NOTIFY partThicknessChanged)
 public:
@@ -972,6 +978,16 @@ public slots:
 	//! Get the thickness of lines
 	float getPartThickness() const;
 
+	void setFlagLagrangePointsSolar(const bool displayed);
+	bool getFlagLagrangePointsSolar() const;
+	Vec3f getColorLagrangePointsSolar() const;
+	void setColorLagrangePointsSolar(const Vec3f& newColor);
+
+	void setFlagLagrangePointsLunar(const bool displayed);
+	bool getFlagLagrangePointsLunar() const;
+	Vec3f getColorLagrangePointsLunar() const;
+	void setColorLagrangePointsLunar(const Vec3f& newColor);
+
 signals:
 	void gridlinesDisplayedChanged(const bool);
 	void lineThicknessChanged(const float);
@@ -1094,6 +1110,10 @@ signals:
 	void umbraCenterPointDisplayedChanged(const bool displayed);
 	void apexPointsDisplayedChanged(const bool displayed);
 	void apexPointsColorChanged(const Vec3f & newColor);
+	void lagrangePointsSolarDisplayedChanged(const bool displayed);
+	void lagrangePointsSolarColorChanged(const Vec3f & newColor);
+	void lagrangePointsLunarDisplayedChanged(const bool displayed);
+	void lagrangePointsLunarColorChanged(const Vec3f & newColor);
 
 private slots:
 	//! Re-translate the labels of the great circles.
@@ -1156,6 +1176,8 @@ private:
 	SkyPoint * antisolarPoint;		// Antisolar point
 	SkyPoint * umbraCenterPoint;		// The point of the center of umbra
 	SkyPoint * apexPoints;			// Apex and Antapex points, i.e. the point where the observer planet is moving to or receding from	
+	SkyPoint * lagrangePointsSolar;		// Earth-Sun lagrange points
+	SkyPoint * lagrangePointsLunar;
 };
 
 #endif // GRIDLINESMGR_HPP
