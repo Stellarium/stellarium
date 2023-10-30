@@ -251,7 +251,11 @@ public:
 	//!       *  +100. for circumpolar objects. Rise and set give lower culmination times.
 	//!       *  -100. for objects never rising. Rise and set give transit times.
 	//!       * -1000. is used as "invalid" value. The result should then not be used.
+	//!       *   +20. (Planet objects only) no transit time on current date.
+	//!       *   +30. (Planet objects only) no rise time on current date.
+	//!       *   +40. (Planet objects only) no set time on current date.
 	//! @note This is an abbreviated version of the method implemented in the Planet class.
+
 	virtual Vec4d getRTSTime(const StelCore* core, const double altitude=0.) const;
 
 	//! Return object's apparent V magnitude as seen from observer, without including extinction.

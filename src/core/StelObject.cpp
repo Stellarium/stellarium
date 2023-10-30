@@ -169,7 +169,7 @@ Vec4d StelObject::getRTSTime(const StelCore *core, const double altitude) const
 	const double phi = static_cast<double>(loc.getLatitude()) * M_PI_180;
 	const double L = static_cast<double>(loc.getLongitude()) * M_PI_180; // OUR longitude. Meeus has it reversed
 	PlanetP obsPlanet = core->getCurrentPlanet();
-	const double rotRate = obsPlanet->getSiderealDay();
+	const double rotDuration = obsPlanet->getSiderealDay();
 	const double currentJD=core->getJD();
 	const double currentJDE=core->getJDE();
 	const double utcShift = core->getUTCOffset(currentJD) / 24.;
@@ -208,31 +208,31 @@ Vec4d StelObject::getRTSTime(const StelCore *core, const double altitude) const
 	// In terms of chapter 15, where m0, m1 and m2 are fractions of day within the current day, we use mr, mt, ms as fractions of day from currentJD, and they lie within [-1...+1].
 
 	double mr, ms, flag=0.;
-	double mt=-h2*(0.5*rotRate/M_PI);
+	double mt=-h2*(0.5*rotDuration/M_PI);
 	// Transit should occur on current date
 	StelUtils::getDateFromJulianDay(currentJD+mt+utcShift, &year, &month, &day);
 	if (day != currentdate)
 	{
 		if (mt<0.)
-			mt += rotRate;
+			mt += rotDuration;
 		else
-			mt -= rotRate;
+			mt -= rotDuration;
 	}
 
 	// circumpolar: set rise and set times to lower culmination, i.e. 1/2 rotation from transit
 	if (fabs(cosH0)>1.)
 	{
 		flag = (cosH0<-1.) ? 100 : -100; // circumpolar / never rises
-		mr   = (cosH0<-1.) ? mt-0.5*rotRate : mt;
-		ms   = (cosH0<-1.) ? mt+0.5*rotRate : mt;
+		mr   = (cosH0<-1.) ? mt-0.5*rotDuration : mt;
+		ms   = (cosH0<-1.) ? mt+0.5*rotDuration : mt;
 	}
 	else
 	{
 		const double H0 = acos(cosH0);
 		//omgr->addToExtraInfoString(StelObject::DebugAid, QString("H<sub>0</sub>= %1<br/>").arg(QString::number(H0*M_180_PI, 'f', 6)));
 
-		mr = mt - H0*rotRate/(2.*M_PI);
-		ms = mt + H0*rotRate/(2.*M_PI);
+		mr = mt - H0*rotDuration/(2.*M_PI);
+		ms = mt + H0*rotDuration/(2.*M_PI);
 	}
 
 	// Rise should occur on current date
@@ -240,9 +240,9 @@ Vec4d StelObject::getRTSTime(const StelCore *core, const double altitude) const
 	if (day != currentdate)
 	{
 		if (mr<0.)
-			mr += rotRate;
+			mr += rotDuration;
 		else
-			mr -= rotRate;
+			mr -= rotDuration;
 	}
 
 	// Set should occur on current date
@@ -250,9 +250,9 @@ Vec4d StelObject::getRTSTime(const StelCore *core, const double altitude) const
 	if (day != currentdate)
 	{
 		if (ms<0.)
-			ms += rotRate;
+			ms += rotDuration;
 		else
-			ms -= rotRate;
+			ms -= rotDuration;
 	}
 
 	//omgr->addToExtraInfoString(StelObject::DebugAid, QString("m<sub>t</sub>= %1<br/>").arg(QString::number(mt, 'f', 6)));
@@ -375,10 +375,8 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 	const double utcShift = core->getUTCOffset(currentJD) / 24.; // Fix DST shift...
 	QString currentObjStr = getEnglishName();
 	QString res, firstCoordinate, secondCoordinate;
-	int currentYear, currentMonth, currentDate;
-	static int prevYear, prevMonth, prevDate;
-	static QString prevObjStr;
-	StelUtils::getDateFromJulianDay(currentJD+utcShift, &currentYear, &currentMonth, &currentDate);
+	int currentYear, currentMonth, currentDay;
+	StelUtils::getDateFromJulianDay(currentJD+utcShift, &currentYear, &currentMonth, &currentDay);
 	double az_app, alt_app;
 	StelUtils::rectToSphe(&az_app,&alt_app,getAltAzPosApparent(core));
 	Q_UNUSED(az_app)
@@ -718,9 +716,12 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 
 	if (flags&RTSTime && getType()!=QStringLiteral("Satellite") && currentLocation.role!='o' && !onTransitionToNewLocation)
 	{
+		static int prevYear, prevMonth, prevDay;
+		static QString prevObjStr;
+
 		const bool isSun = (getEnglishName()=="Sun");
 		static Vec4d rts;
-		if ((currentYear != prevYear) || (currentMonth != prevMonth) || (currentDate != prevDate) || (currentObjStr != prevObjStr))
+		if ((currentYear != prevYear) || (currentMonth != prevMonth) || (currentDay != prevDay) || (currentObjStr != prevObjStr))
 		{
 			rts = getRTSTime(core);
 		}
@@ -738,7 +739,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 
 		// Rise
 		StelUtils::getDateFromJulianDay(rts[0]+utcShift, &year, &month, &day);
-		if (rts[3]==30 || rts[3]<0 || rts[3]>50 || day != currentDate) // no rise
+		if (rts[3]==30 || rts[3]<0 || rts[3]>50 || day != currentDay) // no rise
 		{
 			if (withTables)
 				res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2</td></tr>").arg(sRise, dash);
@@ -758,7 +759,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 
 		// Transit
 		StelUtils::getDateFromJulianDay(rts[1]+utcShift, &year, &month, &day);
-		if (rts[3]==20 || day != currentDate) // no transit
+		if (rts[3]==20 || day != currentDay) // no transit
 		{
 			if (withTables)
 				res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2</td></tr>").arg(sTransit, dash);
@@ -776,7 +777,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 
 		// Set
 		StelUtils::getDateFromJulianDay(rts[2]+utcShift, &year, &month, &day);
-		if (rts[3]==40 || rts[3]<0 || rts[3]>50 || day != currentDate) // no set
+		if (rts[3]==40 || rts[3]<0 || rts[3]>50 || day != currentDay) // no set
 		{
 			if (withTables)
 				res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2</td></tr>").arg(sSet, dash);
@@ -910,6 +911,11 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 		}
 		res += getExtraInfoStrings(flags&RTSTime).join(' ');
 		res += omgr->getExtraInfoStrings(flags&RTSTime).join(' ');
+
+		prevObjStr = currentObjStr;
+		prevYear = currentYear;
+		prevMonth = currentMonth;
+		prevDay = currentDay;
 	}
 
 	if (flags&Extra)
@@ -936,11 +942,6 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 		res += getExtraInfoStrings(flags&IAUConstellation).join("");
 		res += omgr->getExtraInfoStrings(flags&IAUConstellation).join("");
 	}
-
-	prevObjStr = currentObjStr;
-	prevYear = currentYear;
-	prevMonth = currentMonth;
-	prevDate = currentDate;
 
 	return res;
 }
@@ -1129,14 +1130,14 @@ QVariantMap StelObject::getInfoMap(const StelCore *core) const
 
 	const double currentJD = core->getJD();
 	const double utcShift = core->getUTCOffset(currentJD) / 24.; // Fix DST shift...
-	int currentYear, currentMonth, currentDate;
-	StelUtils::getDateFromJulianDay(currentJD+utcShift, &currentYear, &currentMonth, &currentDate);
+	int currentYear, currentMonth, currentDay;
+	StelUtils::getDateFromJulianDay(currentJD+utcShift, &currentYear, &currentMonth, &currentDay);
 
-	static int prevYear, prevMonth, prevDate;
+	static int prevYear, prevMonth, prevDay;
 	static Vec4d rts;
 	static QString prevObjStr;
 
-	if ((currentYear != prevYear) || (currentMonth != prevMonth) || (currentDate != prevDate) || (currentObjStr != prevObjStr))
+	if ((currentYear != prevYear) || (currentMonth != prevMonth) || (currentDay != prevDay) || (currentObjStr != prevObjStr))
 	{
 		rts = getRTSTime(core);
 	}
@@ -1148,9 +1149,9 @@ QVariantMap StelObject::getInfoMap(const StelCore *core) const
 		double hours=hr+static_cast<double>(min)/60. + static_cast<double>(sec)/3600.;
 
 		int year, month, day;
-		StelUtils::getDateFromJulianDay(core->getJD()+utcShift, &year, &month, &currentDate);
+		StelUtils::getDateFromJulianDay(core->getJD()+utcShift, &year, &month, &currentDay);
 		StelUtils::getDateFromJulianDay(rts[1]+utcShift, &year, &month, &day);
-		if (rts[3]==20 || day != currentDate) // no transit
+		if (rts[3]==20 || day != currentDay) // no transit
 		{
 			map.insert("transit", "---");
 		}
@@ -1160,7 +1161,7 @@ QVariantMap StelObject::getInfoMap(const StelCore *core) const
 		}
 
 		StelUtils::getDateFromJulianDay(rts[0]+utcShift, &year, &month, &day);
-		if (rts[3]==30 || rts[3]<0 || rts[3]>50 || day != currentDate) // no rise
+		if (rts[3]==30 || rts[3]<0 || rts[3]>50 || day != currentDay) // no rise
 		{
 			map.insert("rise", "---");
 		}
@@ -1172,7 +1173,7 @@ QVariantMap StelObject::getInfoMap(const StelCore *core) const
 		}
 
 		StelUtils::getDateFromJulianDay(rts[2]+utcShift, &year, &month, &day);
-		if (rts[3]==40 || rts[3]<0 || rts[3]>50 || day != currentDate) // no set
+		if (rts[3]==40 || rts[3]<0 || rts[3]>50 || day != currentDay) // no set
 		{
 			map.insert("set", "---");
 		}
@@ -1187,7 +1188,7 @@ QVariantMap StelObject::getInfoMap(const StelCore *core) const
 	prevObjStr = currentObjStr;
 	prevYear = currentYear;
 	prevMonth = currentMonth;
-	prevDate = currentDate;
+	prevDay = currentDay;
 
 	return map;
 }
