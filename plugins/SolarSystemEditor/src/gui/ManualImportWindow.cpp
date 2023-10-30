@@ -53,8 +53,8 @@ void ManualImportWindow::createDialogContent()
 	//Signals
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()),
 	        this, SLOT(retranslate()));
-	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
-	connect(ui->LocationBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
+	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
+	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	connect(ui->lineEditColor, SIGNAL(textChanged(QString)), this, SLOT(parseColorString(QString)));
 	connect(ui->pushButtonSelectColor, SIGNAL(clicked()), this, SLOT(selectColor()));

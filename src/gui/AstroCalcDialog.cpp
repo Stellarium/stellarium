@@ -222,8 +222,8 @@ void AstroCalcDialog::createDialogContent()
 	connect(&StelApp::getInstance().getSkyCultureMgr(), SIGNAL(currentSkyCultureChanged(QString)), this, SLOT(populateCelestialNames(QString)));
 	ui->stackedWidget->setCurrentIndex(0);
 	ui->stackListWidget->setCurrentRow(0);
-	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
-	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
+	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
+	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	// prepare default background gradient for all charts. This is used for the outer frame, not the actual chart!
 	QLinearGradient graphBackgroundGradient(QPointF(0, 0), QPointF(0, 1));
@@ -1010,6 +1010,7 @@ void AstroCalcDialog::populateCelestialCategoryList()
 	category->addItem(q_("Solar system objects: comets"), "201");
 	category->addItem(q_("Solar system objects: minor bodies"), "202");
 	category->addItem(q_("Solar system objects: planets"), "203");
+	category->addItem(q_("Almanac: Sun, Moon and naked-eye planets"), "204");
 
 	index = category->findData(selectedCategoryId, Qt::UserRole, Qt::MatchCaseSensitive);
 	if (index < 0) // read config data
@@ -1190,7 +1191,7 @@ void AstroCalcDialog::currentCelestialPositions()
 			}
 		}
 	}
-	else if (celTypeId >= 200 && celTypeId <= 203)
+	else if (celTypeId >= 200 && celTypeId <= 204)
 	{
 		QString distanceInfo = q_("Planetocentric distance");
 		if (core->getUseTopocentricCoordinates())
@@ -1211,6 +1212,12 @@ void AstroCalcDialog::currentCelestialPositions()
 			case 201:
 			case 202:
 				planets = solarSystem->getAllMinorBodies();
+				break;
+			case 204:
+				const QStringList NEP = { "Moon", "Mercury", "Venus", "Mars", "Jupiter", "Saturn" };
+				planets.append(sun);
+				for (auto &planet: NEP)
+					planets.append(solarSystem->searchByEnglishName(planet));
 				break;
 		}
 
@@ -1238,6 +1245,9 @@ void AstroCalcDialog::currentCelestialPositions()
 				case 203:
 					if (planet->getPlanetType() == Planet::isPlanet)
 						passByType = true;
+					break;
+				case 204:
+					passByType = true;
 					break;
 			}
 

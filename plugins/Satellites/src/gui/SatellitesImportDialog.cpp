@@ -96,10 +96,8 @@ void SatellitesImportDialog::createDialogContent()
 		connect(gui, SIGNAL(flagUseKineticScrollingChanged(bool)), this, SLOT(enableKineticScrolling(bool)));
 	}
 
-	connect(ui->closeStelWindow, SIGNAL(clicked()),
-	        this, SLOT(close()));
-	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)),
-		this, SLOT(handleMovedTo(QPoint)));
+	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
+	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	connect(ui->pushButtonGetData, SIGNAL(clicked()),
 	        this, SLOT(getData()));

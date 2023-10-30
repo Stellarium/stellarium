@@ -110,8 +110,8 @@ void PulsarsDialog::createDialogContent()
 	connect(updateTimer, SIGNAL(timeout()), this, SLOT(refreshUpdateValues()));
 	updateTimer->start(7000);
 
-	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
-	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
+	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
+	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), this, SLOT(restoreDefaults()));
 	connect(ui->saveSettingsButton, SIGNAL(clicked()), this, SLOT(saveSettings()));

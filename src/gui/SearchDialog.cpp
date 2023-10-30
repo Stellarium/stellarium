@@ -183,6 +183,7 @@ SearchDialog::SearchDialog(QObject* parent)
 	conf = StelApp::getInstance().getSettings();
 	enableSimbadSearch(conf->value("search/flag_search_online", true).toBool());
 	useStartOfWords = conf->value("search/flag_start_words", false).toBool();
+	useLengthSorting = conf->value("search/flag_sorting_length", false).toBool();
 	useLockPosition = conf->value("search/flag_lock_position", true).toBool();
 	useFOVCenterMarker = conf->value("search/flag_fov_center_marker", true).toBool();
 	fovCenterMarkerState = GETSTELMODULE(SpecialMarkersMgr)->getFlagFOVCenterMarker();
@@ -360,8 +361,8 @@ void SearchDialog::createDialogContent()
 	ui->setupUi(dialog);
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	connect(&StelApp::getInstance(), SIGNAL(flagShowDecimalDegreesChanged(bool)), this, SLOT(populateCoordinateAxis()));
-	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
-	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
+	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
+	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 	connect(ui->lineEditSearchSkyObject, SIGNAL(textChanged(const QString&)), this, SLOT(onSearchTextChanged(const QString&)));
 	connect(ui->simbadCooQueryButton, SIGNAL(clicked()), this, SLOT(lookupCoordinates()));
 	connect(GETSTELMODULE(StelObjectMgr), SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)), this, SLOT(clearSimbadText(StelModule::StelModuleSelectAction)));
@@ -440,6 +441,8 @@ void SearchDialog::createDialogContent()
 
 	connect(ui->checkBoxUseStartOfWords, SIGNAL(clicked(bool)), this, SLOT(enableStartOfWordsAutofill(bool)));
 	ui->checkBoxUseStartOfWords->setChecked(useStartOfWords);
+	connect(ui->checkBoxUseSortingByLength, SIGNAL(clicked(bool)), this, SLOT(enableSortingByLength(bool)));
+	ui->checkBoxUseSortingByLength->setChecked(useLengthSorting);
 
 	connect(ui->checkBoxFOVCenterMarker, SIGNAL(clicked(bool)), this, SLOT(enableFOVCenterMarker(bool)));
 	ui->checkBoxFOVCenterMarker->setChecked(useFOVCenterMarker);
@@ -629,6 +632,15 @@ void SearchDialog::enableStartOfWordsAutofill(bool enable)
 {
 	useStartOfWords = enable;
 	conf->setValue("search/flag_start_words", useStartOfWords);
+
+	// Update search result on "Object" tab
+	onSearchTextChanged(ui->lineEditSearchSkyObject->text());
+}
+
+void SearchDialog::enableSortingByLength(bool enable)
+{
+	useLengthSorting = enable;
+	conf->setValue("search/flag_sorting_length", useLengthSorting);
 
 	// Update search result on "Object" tab
 	onSearchTextChanged(ui->lineEditSearchSkyObject->text());
@@ -1053,8 +1065,12 @@ QStringList SearchDialog::listMatchingRecentObjects(const QString& objPrefix, in
 		if (result.size() >= maxNbItem)
 			break;
 	}
-	stringLengthCompare comparator;
-	std::sort(result.begin(), result.end(), comparator);
+
+	if (useLengthSorting)
+	{
+		stringLengthCompare comparator;
+		std::sort(result.begin(), result.end(), comparator);
+	}
 
 	return result;
 }

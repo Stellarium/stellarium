@@ -53,14 +53,14 @@ class AngleSpinBox;
 //! The createDialogContent() function itself is called automatically the first
 //! time setVisible() is called with "true".
 //!
-//! Moving a window is done by dragging its title bar, defined in the BarFrame
-//! class. Every derived window class needs a BarFrame object - it
+//! Moving a window is done by dragging its title bar, defined in the TitleBar
+//! class. Every derived window class needs a TitleBar object - it
 //! has to be either included in a .ui file, or manually instantiated in
 //! createDialogContent().
 //!
 //! The screen location of the StelDialog can be stored in config.ini. This requires
 //! setting dialogName (must be a unique name, should be set in the constructor),
-//! and setting a connect() from the BarFrame's movedTo() signal to handleMovedTo()
+//! and setting a connect() from the TitleBar's movedTo() signal to handleMovedTo()
 //! in createDialogContent().
 //! If the dialog is called and the stored location is off-screen, the dialog is
 //! shifted to become visible.
