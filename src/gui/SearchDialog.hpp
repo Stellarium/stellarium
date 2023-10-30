@@ -209,6 +209,9 @@ private slots:
 	//! Whether to use autofill for start of words or not.
 	void enableStartOfWordsAutofill(bool enable);
 
+	//! Whether to use sorting by string length or not
+	void enableSortingByLength(bool enable);
+
 	//! Whether to use lock position when coordinates are used or not.
 	void enableLockPosition(bool enable);
 
@@ -309,6 +312,7 @@ private:
 	bool flagHasSelectedText;
 
 	bool useStartOfWords;
+	bool useLengthSorting;
 	bool useLockPosition;
 	bool useSimbad;
 	bool useFOVCenterMarker;

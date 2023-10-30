@@ -1001,6 +1001,13 @@
            </widget>
           </item>
           <item>
+           <widget class="QCheckBox" name="checkBoxUseSortingByLength">
+            <property name="text">
+             <string>Use sorting by string length</string>
+            </property>
+           </widget>
+          </item>
+          <item>
            <widget class="QCheckBox" name="checkBoxLockPosition">
             <property name="text">
              <string>Lock position when coordinates are used</string>
