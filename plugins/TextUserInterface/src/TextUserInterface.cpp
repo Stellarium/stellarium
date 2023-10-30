@@ -589,8 +589,8 @@ void TextUserInterface::loadConfiguration(void)
 	Q_ASSERT(conf);
 
 	font.setPixelSize(conf->value("tui/tui_font_size", 15).toInt());
-	tuiDateTime = conf->value("tui/flag_show_tui_datetime", false).toBool();
-	tuiObjInfo = conf->value("tui/flag_show_tui_short_obj_info", false).toBool();
+	setTuiDateTime(conf->value("tui/flag_show_tui_datetime", false).toBool());
+	setTuiObjInfo(conf->value("tui/flag_show_tui_short_obj_info", false).toBool());
 	setTuiGravityUi(conf->value("tui/flag_show_gravity_ui", false).toBool());
 	color = Vec3f(conf->value("tui/tui_font_color", "0.3,1,0.3").toString());
 	StelCore *core=StelApp::getInstance().getCore();
