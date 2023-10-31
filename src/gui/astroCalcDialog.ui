@@ -645,7 +645,7 @@
                <number>8</number>
               </property>
               <item>
-               <widget class="QToolButton" name="genericMarkerColor">
+               <widget class="ColorButton" name="genericMarkerColor">
                 <property name="toolTip">
                  <string>Color of ephemeris marker for first celestial body</string>
                 </property>
@@ -655,7 +655,7 @@
                </widget>
               </item>
               <item>
-               <widget class="QToolButton" name="secondaryMarkerColor">
+               <widget class="ColorButton" name="secondaryMarkerColor">
                 <property name="toolTip">
                  <string>Color of ephemeris marker for second celestial body</string>
                 </property>
@@ -665,7 +665,7 @@
                </widget>
               </item>
               <item>
-               <widget class="QToolButton" name="selectedMarkerColor">
+               <widget class="ColorButton" name="selectedMarkerColor">
                 <property name="toolTip">
                  <string>Color of selected ephemeris marker</string>
                 </property>
@@ -677,7 +677,7 @@
              </layout>
             </item>
             <item>
-             <widget class="QToolButton" name="mercuryMarkerColor">
+             <widget class="ColorButton" name="mercuryMarkerColor">
               <property name="toolTip">
                <string>Color of Mercury's ephemeris marker</string>
               </property>
@@ -687,7 +687,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QToolButton" name="venusMarkerColor">
+             <widget class="ColorButton" name="venusMarkerColor">
               <property name="toolTip">
                <string>Color of Venus' ephemeris marker</string>
               </property>
@@ -697,7 +697,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QToolButton" name="marsMarkerColor">
+             <widget class="ColorButton" name="marsMarkerColor">
               <property name="toolTip">
                <string>Color of Mars' ephemeris marker</string>
               </property>
@@ -707,7 +707,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QToolButton" name="jupiterMarkerColor">
+             <widget class="ColorButton" name="jupiterMarkerColor">
               <property name="toolTip">
                <string>Color of Jupiter's ephemeris marker</string>
               </property>
@@ -717,7 +717,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QToolButton" name="saturnMarkerColor">
+             <widget class="ColorButton" name="saturnMarkerColor">
               <property name="toolTip">
                <string>Color of Saturn's ephemeris marker</string>
               </property>
@@ -2981,9 +2981,9 @@
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>StelCloseButton</class>
-   <extends>QPushButton</extends>
-   <header>gui/StelCloseButton.hpp</header>
+   <class>ColorButton</class>
+   <extends>QToolButton</extends>
+   <header>gui/ColorButton.hpp</header>
   </customwidget>
   <customwidget>
    <class>AngleSpinBox</class>

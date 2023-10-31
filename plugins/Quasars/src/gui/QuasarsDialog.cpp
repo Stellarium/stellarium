@@ -90,7 +90,7 @@ void QuasarsDialog::createDialogContent()
 	// if the state didn't change, setUpdatesEnabled will not be called, so we force it
 	setUpdatesEnabled(ui->internetUpdatesCheckbox->checkState());
 
-	connectColorButton(ui->quasarMarkerColor, "Quasars.quasarsColor", "Quasars/marker_color");
+	ui->quasarMarkerColor->setup("Quasars.quasarsColor", "Quasars/marker_color");
 
 	updateTimer = new QTimer(this);
 	connect(updateTimer, SIGNAL(timeout()), this, SLOT(refreshUpdateValues()));

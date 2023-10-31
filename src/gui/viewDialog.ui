@@ -1300,7 +1300,7 @@
                 </widget>
                </item>
                <item>
-                <widget class="QToolButton" name="planetLabelColor">
+                <widget class="ColorButton" name="planetLabelColor">
                  <property name="toolTip">
                   <string>Color of planet labels</string>
                  </property>
@@ -1335,7 +1335,7 @@
              <item row="12" column="0">
               <layout class="QHBoxLayout" name="horizontalLayout_19">
                <item>
-                <widget class="QToolButton" name="planetTrailsColor">
+                <widget class="ColorButton" name="planetTrailsColor">
                  <property name="toolTip">
                   <string>Color of trails</string>
                  </property>
@@ -1507,7 +1507,7 @@
              <item row="2" column="0">
               <layout class="QHBoxLayout" name="horizontalLayout_9">
                <item>
-                <widget class="QToolButton" name="planetNomenclatureColor">
+                <widget class="ColorButton" name="planetNomenclatureColor">
                  <property name="toolTip">
                   <string>Color of nomenclature labels</string>
                  </property>
@@ -2986,7 +2986,7 @@
                 </widget>
                </item>
                <item row="3" column="0">
-                <widget class="QToolButton" name="colorEclipticGridJ2000">
+                <widget class="ColorButton" name="colorEclipticGridJ2000">
                  <property name="toolTip">
                   <string>Color of the ecliptical grid (J2000.0)</string>
                  </property>
@@ -3056,7 +3056,7 @@
                 </widget>
                </item>
                <item row="5" column="0">
-                <widget class="QToolButton" name="colorAzimuthalGrid">
+                <widget class="ColorButton" name="colorAzimuthalGrid">
                  <property name="toolTip">
                   <string>Color of the azimuthal grid</string>
                  </property>
@@ -3150,7 +3150,7 @@
                 </widget>
                </item>
                <item row="0" column="0">
-                <widget class="QToolButton" name="colorEquatorialJ2000Grid">
+                <widget class="ColorButton" name="colorEquatorialJ2000Grid">
                  <property name="toolTip">
                   <string>Color of the equatorial grid (J2000.0)</string>
                  </property>
@@ -3368,7 +3368,7 @@
                 </widget>
                </item>
                <item row="3" column="2">
-                <widget class="QToolButton" name="colorEclipticLineJ2000">
+                <widget class="ColorButton" name="colorEclipticLineJ2000">
                  <property name="toolTip">
                   <string>Color of ecliptic (J2000.0)</string>
                  </property>
@@ -3388,7 +3388,7 @@
                 </widget>
                </item>
                <item row="9" column="7">
-                <widget class="QToolButton" name="colorAntisolarPoint">
+                <widget class="ColorButton" name="colorAntisolarPoint">
                  <property name="toolTip">
                   <string>Color of antisolar point</string>
                  </property>
@@ -3398,7 +3398,7 @@
                 </widget>
                </item>
                <item row="6" column="2">
-                <widget class="QToolButton" name="colorGalacticEquatorLine">
+                <widget class="ColorButton" name="colorGalacticEquatorLine">
                  <property name="toolTip">
                   <string>Color of galactic equator</string>
                  </property>
@@ -3418,7 +3418,7 @@
                 </widget>
                </item>
                <item row="1" column="7">
-                <widget class="QToolButton" name="colorCelestialPoles">
+                <widget class="ColorButton" name="colorCelestialPoles">
                  <property name="toolTip">
                   <string>Color of celestial poles (of date)</string>
                  </property>
@@ -3428,7 +3428,7 @@
                 </widget>
                </item>
                <item row="2" column="7">
-                <widget class="QToolButton" name="colorCircumpolarCircles">
+                <widget class="ColorButton" name="colorCircumpolarCircles">
                  <property name="toolTip">
                   <string>Color of circumpolar circles</string>
                  </property>
@@ -3438,7 +3438,7 @@
                 </widget>
                </item>
                <item row="5" column="7">
-                <widget class="QToolButton" name="colorZenithNadir">
+                <widget class="ColorButton" name="colorZenithNadir">
                  <property name="toolTip">
                   <string>Color of Zenith and Nadir</string>
                  </property>
@@ -3458,7 +3458,7 @@
                 </widget>
                </item>
                <item row="4" column="2">
-                <widget class="QToolButton" name="colorEclipticLineOfDate">
+                <widget class="ColorButton" name="colorEclipticLineOfDate">
                  <property name="toolTip">
                   <string>Color of ecliptic (of date)</string>
                  </property>
@@ -3488,7 +3488,7 @@
                 </widget>
                </item>
                <item row="13" column="0">
-                <widget class="QToolButton" name="colorGalacticCenter">
+                <widget class="ColorButton" name="colorGalacticCenter">
                  <property name="toolTip">
                   <string>Color of galactic center and anticenter</string>
                  </property>
@@ -3525,7 +3525,7 @@
                 </widget>
                </item>
                <item row="9" column="0">
-                <widget class="QToolButton" name="colorEquinoxPoints">
+                <widget class="ColorButton" name="colorEquinoxPoints">
                  <property name="toolTip">
                   <string>Color of the equinox points (of date)</string>
                  </property>
@@ -3535,7 +3535,7 @@
                 </widget>
                </item>
                <item row="12" column="2">
-                <widget class="QToolButton" name="colorColuresLine">
+                <widget class="ColorButton" name="colorColuresLine">
                  <property name="toolTip">
                   <string>Color of colures</string>
                  </property>
@@ -3565,7 +3565,7 @@
                 </widget>
                </item>
                <item row="2" column="2">
-                <widget class="QToolButton" name="colorFixedEquatorLine">
+                <widget class="ColorButton" name="colorFixedEquatorLine">
                  <property name="toolTip">
                   <string>Color of fixed equator</string>
                  </property>
@@ -3575,7 +3575,7 @@
                 </widget>
                </item>
                <item row="16" column="0">
-                <widget class="QToolButton" name="colorCompassMarks">
+                <widget class="ColorButton" name="colorCompassMarks">
                  <property name="toolTip">
                   <string>Color of compass marks</string>
                  </property>
@@ -3599,7 +3599,7 @@
                 </widget>
                </item>
                <item row="7" column="7">
-                <widget class="QToolButton" name="colorSupergalacticPoles">
+                <widget class="ColorButton" name="colorSupergalacticPoles">
                  <property name="toolTip">
                   <string>Color of supergalactic poles</string>
                  </property>
@@ -3619,7 +3619,7 @@
                 </widget>
                </item>
                <item row="7" column="2">
-                <widget class="QToolButton" name="colorSupergalacticEquatorLine">
+                <widget class="ColorButton" name="colorSupergalacticEquatorLine">
                  <property name="toolTip">
                   <string>Color of supergalactic equator</string>
                  </property>
@@ -3744,7 +3744,7 @@
                 </widget>
                </item>
                <item row="11" column="7">
-                <widget class="QToolButton" name="colorPenumbraCircle">
+                <widget class="ColorButton" name="colorPenumbraCircle">
                  <property name="toolTip">
                   <string>Color of penumbra circle</string>
                  </property>
@@ -3774,7 +3774,7 @@
                 </widget>
                </item>
                <item row="12" column="0">
-                <widget class="QToolButton" name="colorApexPoints">
+                <widget class="ColorButton" name="colorApexPoints">
                  <property name="toolTip">
                   <string>Color of Apex and Antapex points</string>
                  </property>
@@ -3824,7 +3824,7 @@
                 </widget>
                </item>
                <item row="10" column="2">
-                <widget class="QToolButton" name="colorMeridianLine">
+                <widget class="ColorButton" name="colorMeridianLine">
                  <property name="toolTip">
                   <string>Color of meridian</string>
                  </property>
@@ -3844,7 +3844,7 @@
                 </widget>
                </item>
                <item row="2" column="0">
-                <widget class="QToolButton" name="colorFixedEquatorialGrid">
+                <widget class="ColorButton" name="colorFixedEquatorialGrid">
                  <property name="text">
                   <string/>
                  </property>
@@ -3908,7 +3908,7 @@
                 </layout>
                </item>
                <item row="9" column="2">
-                <widget class="QToolButton" name="colorSolarEquatorLine">
+                <widget class="ColorButton" name="colorSolarEquatorLine">
                  <property name="toolTip">
                   <string>Color of the projected Solar equator line</string>
                  </property>
@@ -3964,7 +3964,7 @@
                 </widget>
                </item>
                <item row="7" column="0">
-                <widget class="QToolButton" name="colorSupergalacticGrid">
+                <widget class="ColorButton" name="colorSupergalacticGrid">
                  <property name="toolTip">
                   <string>Color of the supergalactic grid</string>
                  </property>
@@ -3974,7 +3974,7 @@
                 </widget>
                </item>
                <item row="0" column="7">
-                <widget class="QToolButton" name="colorCelestialJ2000Poles">
+                <widget class="ColorButton" name="colorCelestialJ2000Poles">
                  <property name="toolTip">
                   <string>Color of the celestial poles (J2000.0)</string>
                  </property>
@@ -3994,7 +3994,7 @@
                 </widget>
                </item>
                <item row="13" column="2">
-                <widget class="QToolButton" name="colorPrecessionCircles">
+                <widget class="ColorButton" name="colorPrecessionCircles">
                  <property name="toolTip">
                   <string>Color of precession circles</string>
                  </property>
@@ -4004,7 +4004,7 @@
                 </widget>
                </item>
                <item row="8" column="7">
-                <widget class="QToolButton" name="colorQuadratureLine">
+                <widget class="ColorButton" name="colorQuadratureLine">
                  <property name="toolTip">
                   <string>Color of the quadrature circle</string>
                  </property>
@@ -4028,7 +4028,7 @@
                 </widget>
                </item>
                <item row="13" column="7">
-                <widget class="QToolButton" name="colorFOVCenterMarker">
+                <widget class="ColorButton" name="colorFOVCenterMarker">
                  <property name="toolTip">
                   <string>Color of marker of center of FOV</string>
                  </property>
@@ -4065,7 +4065,7 @@
                 </widget>
                </item>
                <item row="1" column="2">
-                <widget class="QToolButton" name="colorEquatorLine">
+                <widget class="ColorButton" name="colorEquatorLine">
                  <property name="toolTip">
                   <string>Color of equator (of date)</string>
                  </property>
@@ -4120,7 +4120,7 @@
                 </layout>
                </item>
                <item row="1" column="0">
-                <widget class="QToolButton" name="colorEquatorialGrid">
+                <widget class="ColorButton" name="colorEquatorialGrid">
                  <property name="toolTip">
                   <string>Color of the equatorial grid (of date)</string>
                  </property>
@@ -4140,7 +4140,7 @@
                 </widget>
                </item>
                <item row="8" column="2">
-                <widget class="QToolButton" name="colorLongitudeLine">
+                <widget class="ColorButton" name="colorLongitudeLine">
                  <property name="toolTip">
                   <string>Color of the opposition/conjunction longitude line</string>
                  </property>
@@ -4160,7 +4160,7 @@
                 </widget>
                </item>
                <item row="12" column="7">
-                <widget class="QToolButton" name="colorInvariablePlane">
+                <widget class="ColorButton" name="colorInvariablePlane">
                  <property name="toolTip">
                   <string>Color of the invariable plane of the Solar system</string>
                  </property>
@@ -4170,7 +4170,7 @@
                 </widget>
                </item>
                <item row="11" column="0">
-                <widget class="QToolButton" name="colorSolsticePoints">
+                <widget class="ColorButton" name="colorSolsticePoints">
                  <property name="toolTip">
                   <string>Color of the solstice points (of date)</string>
                  </property>
@@ -4200,7 +4200,7 @@
                 </widget>
                </item>
                <item row="3" column="7">
-                <widget class="QToolButton" name="colorEclipticJ2000Poles">
+                <widget class="ColorButton" name="colorEclipticJ2000Poles">
                  <property name="toolTip">
                   <string>Color of the ecliptic poles (J2000.0)</string>
                  </property>
@@ -4210,7 +4210,7 @@
                 </widget>
                </item>
                <item row="11" column="2">
-                <widget class="QToolButton" name="colorCurrentVerticalLine">
+                <widget class="ColorButton" name="colorCurrentVerticalLine">
                  <property name="toolTip">
                   <string>Color of altitude line</string>
                  </property>
@@ -4220,7 +4220,7 @@
                 </widget>
                </item>
                <item row="8" column="0">
-                <widget class="QToolButton" name="colorEquinoxJ2000Points">
+                <widget class="ColorButton" name="colorEquinoxJ2000Points">
                  <property name="toolTip">
                   <string>Color of the equinox points (J2000.0)</string>
                  </property>
@@ -4237,7 +4237,7 @@
                 </widget>
                </item>
                <item row="4" column="7">
-                <widget class="QToolButton" name="colorEclipticPoles">
+                <widget class="ColorButton" name="colorEclipticPoles">
                  <property name="toolTip">
                   <string>Color of ecliptic poles (of date)</string>
                  </property>
@@ -4247,7 +4247,7 @@
                 </widget>
                </item>
                <item row="14" column="0">
-                <widget class="QToolButton" name="colorCardinalPoints">
+                <widget class="ColorButton" name="colorCardinalPoints">
                  <property name="toolTip">
                   <string>Color of cardinal points</string>
                  </property>
@@ -4273,7 +4273,7 @@
                 </widget>
                </item>
                <item row="10" column="0">
-                <widget class="QToolButton" name="colorSolsticeJ2000Points">
+                <widget class="ColorButton" name="colorSolsticeJ2000Points">
                  <property name="toolTip">
                   <string>Color of the solstice points (J2000.0)</string>
                  </property>
@@ -4283,14 +4283,14 @@
                 </widget>
                </item>
                <item row="16" column="7">
-                <widget class="QToolButton" name="colorFOVRectangularMarker">
+                <widget class="ColorButton" name="colorFOVRectangularMarker">
                  <property name="toolTip">
                   <string>Color of rectangular marker of FOV</string>
                  </property>
                 </widget>
                </item>
                <item row="14" column="2">
-                <widget class="QToolButton" name="colorPrimeVerticalLine">
+                <widget class="ColorButton" name="colorPrimeVerticalLine">
                  <property name="toolTip">
                   <string>Color of Prime Vertical</string>
                  </property>
@@ -4300,7 +4300,7 @@
                 </widget>
                </item>
                <item row="10" column="7">
-                <widget class="QToolButton" name="colorUmbraCircle">
+                <widget class="ColorButton" name="colorUmbraCircle">
                  <property name="toolTip">
                   <string>Color of umbra circle</string>
                  </property>
@@ -4370,7 +4370,7 @@
                 </widget>
                </item>
                <item row="5" column="2">
-                <widget class="QToolButton" name="colorHorizonLine">
+                <widget class="ColorButton" name="colorHorizonLine">
                  <property name="toolTip">
                   <string>Color of horizon</string>
                  </property>
@@ -4390,7 +4390,7 @@
                 </widget>
                </item>
                <item row="6" column="0">
-                <widget class="QToolButton" name="colorGalacticGrid">
+                <widget class="ColorButton" name="colorGalacticGrid">
                  <property name="toolTip">
                   <string>Color of the galactic grid</string>
                  </property>
@@ -4430,7 +4430,7 @@
                 </widget>
                </item>
                <item row="4" column="0">
-                <widget class="QToolButton" name="colorEclipticGridOfDate">
+                <widget class="ColorButton" name="colorEclipticGridOfDate">
                  <property name="toolTip">
                   <string>Color of the ecliptical grid (of date)</string>
                  </property>
@@ -4450,14 +4450,14 @@
                 </widget>
                </item>
                <item row="14" column="7">
-                <widget class="QToolButton" name="colorFOVCircularMarker">
+                <widget class="ColorButton" name="colorFOVCircularMarker">
                  <property name="toolTip">
                   <string>Color of circular marker of FOV</string>
                  </property>
                 </widget>
                </item>
                <item row="6" column="7">
-                <widget class="QToolButton" name="colorGalacticPoles">
+                <widget class="ColorButton" name="colorGalacticPoles">
                  <property name="toolTip">
                   <string>Color of galactic poles</string>
                  </property>
@@ -4504,7 +4504,7 @@
                 </widget>
                </item>
                <item row="0" column="2">
-                <widget class="QToolButton" name="colorEquatorJ2000Line">
+                <widget class="ColorButton" name="colorEquatorJ2000Line">
                  <property name="toolTip">
                   <string>Color of equator (J2000.0)</string>
                  </property>
@@ -4752,7 +4752,7 @@
              <item row="1" column="1">
               <layout class="QHBoxLayout" name="horizontalLayout_3">
                <item>
-                <widget class="QToolButton" name="labelsColorButton">
+                <widget class="ColorButton" name="labelsColorButton">
                  <property name="toolTip">
                   <string>Color of the landscape labels</string>
                  </property>
@@ -5120,7 +5120,7 @@
              <item row="2" column="0">
               <layout class="QHBoxLayout" name="horizontalLayout_constLabels">
                <item>
-                <widget class="QToolButton" name="colorConstellationLabels">
+                <widget class="ColorButton" name="colorConstellationLabels">
                  <property name="toolTip">
                   <string>Color of constellation names</string>
                  </property>
@@ -5148,7 +5148,7 @@
              <item row="4" column="0">
               <layout class="QHBoxLayout" name="horizontalLayout_asterismLines">
                <item>
-                <widget class="QToolButton" name="colorAsterismLines">
+                <widget class="ColorButton" name="colorAsterismLines">
                  <property name="toolTip">
                   <string>Color of asterism lines</string>
                  </property>
@@ -5188,7 +5188,7 @@
              <item row="5" column="1">
               <layout class="QHBoxLayout" name="horizontalLayout_5">
                <item>
-                <widget class="QToolButton" name="colorConstellationBoundaries">
+                <widget class="ColorButton" name="colorConstellationBoundaries">
                  <property name="toolTip">
                   <string>Color of constellation boundaries</string>
                  </property>
@@ -5231,7 +5231,7 @@
              <item row="5" column="0">
               <layout class="QHBoxLayout" name="horizontalLayout_8">
                <item>
-                <widget class="QToolButton" name="colorRayHelpers">
+                <widget class="ColorButton" name="colorRayHelpers">
                  <property name="toolTip">
                   <string>Color of ray helpers</string>
                  </property>
@@ -5301,7 +5301,7 @@
              <item row="3" column="0">
               <layout class="QHBoxLayout" name="horizontalLayout_constLines">
                <item>
-                <widget class="QToolButton" name="colorConstellationLines">
+                <widget class="ColorButton" name="colorConstellationLines">
                  <property name="toolTip">
                   <string>Color of constellation lines</string>
                  </property>
@@ -5341,7 +5341,7 @@
              <item row="4" column="1">
               <layout class="QHBoxLayout" name="horizontalLayout_asterismLabels">
                <item>
-                <widget class="QToolButton" name="colorAsterismLabels">
+                <widget class="ColorButton" name="colorAsterismLabels">
                  <property name="toolTip">
                   <string>Color of asterism names</string>
                  </property>
@@ -5485,9 +5485,9 @@
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>StelCloseButton</class>
-   <extends>QPushButton</extends>
-   <header>gui/StelCloseButton.hpp</header>
+   <class>ColorButton</class>
+   <extends>QToolButton</extends>
+   <header>gui/ColorButton.hpp</header>
   </customwidget>
   <customwidget>
    <class>LightPollutionWidget</class>

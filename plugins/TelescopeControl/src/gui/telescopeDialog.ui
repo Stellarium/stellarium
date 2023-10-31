@@ -408,21 +408,21 @@
            </widget>
           </item>
           <item row="1" column="0">
-           <widget class="QToolButton" name="reticleColorButton">
+           <widget class="ColorButton" name="reticleColorButton">
             <property name="text">
              <string/>
             </property>
            </widget>
           </item>
           <item row="2" column="0">
-           <widget class="QToolButton" name="circleColorButton">
+           <widget class="ColorButton" name="circleColorButton">
             <property name="text">
              <string/>
             </property>
            </widget>
           </item>
           <item row="0" column="0">
-           <widget class="QToolButton" name="labelColorButton">
+           <widget class="ColorButton" name="labelColorButton">
             <property name="text">
              <string/>
             </property>
@@ -619,9 +619,9 @@
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>StelCloseButton</class>
-   <extends>QPushButton</extends>
-   <header>gui/StelCloseButton.hpp</header>
+   <class>ColorButton</class>
+   <extends>QToolButton</extends>
+   <header>gui/ColorButton.hpp</header>
   </customwidget>
  </customwidgets>
  <resources>

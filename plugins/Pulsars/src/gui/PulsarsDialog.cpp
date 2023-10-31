@@ -103,8 +103,8 @@ void PulsarsDialog::createDialogContent()
 	// if the state didn't change, setUpdatesEnabled will not be called, so we force it
 	setUpdatesEnabled(ui->internetUpdatesCheckbox->checkState());
 
-	connectColorButton(ui->pulsarMarkerColor,         "Pulsars.markerColor", "Pulsars/marker_color");
-	connectColorButton(ui->pulsarGlitchesMarkerColor, "Pulsars.glitchColor", "Pulsars/glitch_color");
+	ui->pulsarMarkerColor        ->setup("Pulsars.markerColor", "Pulsars/marker_color");
+	ui->pulsarGlitchesMarkerColor->setup("Pulsars.glitchColor", "Pulsars/glitch_color");
 
 	updateTimer = new QTimer(this);
 	connect(updateTimer, SIGNAL(timeout()), this, SLOT(refreshUpdateValues()));

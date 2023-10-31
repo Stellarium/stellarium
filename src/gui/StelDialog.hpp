@@ -195,15 +195,6 @@ protected:
 	//Q_DECL_DEPRECATED_X("Use functor-based connections. https://doc.qt.io/qt-5/signalsandslots-syntaxes.html")
 	static void connectBoolProperty(QGroupBox *checkBox, const QString &propName);
 
-	//! Prepare a QToolButton so that it can receive and handle askColor() connections properly.
-	//! @param toolButton the QToolButton which shows the color
-	//! @param propertyName a StelProperty name which must represent a color (coded as Vec3f)
-	//! @param iniName the associated entry for config.ini, in the form group/name. Usually "color/some_feature_name_color".
-	//! @param moduleName if the iniName is for a module (plugin)-specific ini file, add the module name here. The module needs an implementation of getSettings()
-	//! @warning If the action with \c propName is invalid/unregistered, or cannot be converted
-	//! to the required datatype, the application will crash
-	void connectColorButton(QToolButton* button, const QString &propertyName, const QString &iniName, const QString &moduleName="");
-
 	//! The main dialog
 	QWidget* dialog;
 	class CustomProxy* proxy;
@@ -218,9 +209,6 @@ protected slots:
 	bool askConfirmation(const QString &message = q_("Are you sure? This will delete your customized data."));
 	void messageBox(const QString &title, const QString &message);
 
-	//! To be called by a connected QToolButton with a color background.
-	//! This QToolButton needs properties "propName" and "iniName" which should be prepared using connectColorButton().
-	void askColor();
 	//! enable kinetic scrolling. This should be connected to StelApp's StelGui signal flagUseKineticScrollingChanged.
 	void enableKineticScrolling(bool b);
 	//! connect from StelApp to handle font and font size changes.

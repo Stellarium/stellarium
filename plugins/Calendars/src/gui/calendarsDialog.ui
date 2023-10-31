@@ -315,7 +315,7 @@
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_Settings">
          <item>
-          <widget class="QToolButton" name="textcolorToolButton">
+          <widget class="ColorButton" name="textcolorToolButton">
            <property name="text">
             <string/>
            </property>
@@ -1157,9 +1157,9 @@
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>StelCloseButton</class>
-   <extends>QPushButton</extends>
-   <header>gui/StelCloseButton.hpp</header>
+   <class>ColorButton</class>
+   <extends>QToolButton</extends>
+   <header>gui/ColorButton.hpp</header>
   </customwidget>
  </customwidgets>
  <resources>

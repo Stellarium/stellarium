@@ -127,9 +127,9 @@ void TelescopeDialog::createDialogContent()
 	connectBoolProperty(ui->checkBoxReticles,   "TelescopeControl.flagTelescopeReticles");
 	connectBoolProperty(ui->checkBoxLabels,     "TelescopeControl.flagTelescopeLabels");
 	connectBoolProperty(ui->checkBoxCircles,    "TelescopeControl.flagTelescopeCircles");
-	connectColorButton(ui->reticleColorButton,  "TelescopeControl.reticleColor", "TelescopeControl/color_telescope_reticles");
-	connectColorButton(ui->labelColorButton,    "TelescopeControl.labelColor",   "TelescopeControl/color_telescope_labels");
-	connectColorButton(ui->circleColorButton,   "TelescopeControl.circleColor",  "TelescopeControl/color_telescope_circles");
+	ui->reticleColorButton->setup("TelescopeControl.reticleColor", "TelescopeControl/color_telescope_reticles");
+	ui->labelColorButton  ->setup("TelescopeControl.labelColor",   "TelescopeControl/color_telescope_labels");
+	ui->circleColorButton ->setup("TelescopeControl.circleColor",  "TelescopeControl/color_telescope_circles");
 	connectBoolProperty(ui->checkBoxEnableLogs, "TelescopeControl.useTelescopeServerLogs");
 
 	connect(ui->checkBoxUseExecutables, SIGNAL(toggled(bool)), ui->labelExecutablesDirectory, SLOT(setEnabled(bool)));
