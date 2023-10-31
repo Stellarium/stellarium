@@ -36,7 +36,7 @@ void ColorButton::setup(const QString &propertyName, const QString &iniName, con
 	moduleName_ = moduleName;
 	const auto prop = StelApp::getInstance().getStelPropertyManager()->getProperty(propertyName);
 	const auto color = prop->getValue().value<Vec3f>().toQColor();
-	setStyleSheet("background-color:" + color.name() + ";");
+	setStyleSheet("ColorButton { background-color:" + color.name() + "; }");
 	connect(this, &ColorButton::clicked, this, &ColorButton::askColor);
 }
 
@@ -68,5 +68,5 @@ void ColorButton::askColor()
 		Q_ASSERT(settings);
 		settings->setValue(iniName_, newVColor.toStr());
 	}
-	setStyleSheet("background-color:" + newColor.name() + ";");
+	setStyleSheet("ColorButton { background-color:" + newColor.name() + "; }");
 }
