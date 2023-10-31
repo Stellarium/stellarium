@@ -352,12 +352,14 @@ IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
           gui/ConfigureScreenshotsDialog.cpp
           gui/AstroCalcDialog.hpp
           gui/AstroCalcDialog.cpp
+          gui/AstroCalcChart.hpp
+          gui/AstroCalcChart.cpp
           gui/AstroCalcExtraEphemerisDialog.hpp
           gui/AstroCalcExtraEphemerisDialog.cpp
           gui/AstroCalcCustomStepsDialog.hpp
           gui/AstroCalcCustomStepsDialog.cpp
-          gui/AstroCalcChart.hpp
-          gui/AstroCalcChart.cpp
+          gui/AstroCalcAlmanacWidget.hpp
+          gui/AstroCalcAlmanacWidget.cpp
           gui/ObsListDialog.hpp
           gui/ObsListDialog.cpp
           gui/StelDialog.hpp
@@ -394,6 +396,7 @@ IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
           gui/astroCalcDialog.ui
           gui/astroCalcExtraEphemerisDialog.ui
           gui/astroCalcCustomStepsDialog.ui
+          gui/astroCalcAlmanacWidget.ui
           gui/obsListDialog.ui
           gui/addRemoveLandscapesDialog.ui
           gui/dsoColorsDialog.ui
