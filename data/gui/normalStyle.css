@@ -1184,3 +1184,12 @@ QMessageBox {
 QColorDialog {
         background-color: rgb(143, 143, 143);
 }
+
+/*************************************************************************
+ * AstroCalcAlmanacWidget
+ *************************************************************************/
+
+AstroCalcAlmanacWidget QFrame[frameShape="4"],   /* QFrame::HLine == 0x0004 */
+AstroCalcAlmanacWidget QFrame[frameShape="5"] {  /* QFrame::VLine == 0x0005 */
+	border: 1px solid rgb(238, 238, 238);
+}

@@ -181,6 +181,9 @@ void AstroCalcDialog::retranslate()
 		// by causing the list items to be laid out again.
 		updateTabBarListWidgetWidth();
 		populateToolTips();
+		// Almanac
+		ui->astroCalcAlmanac->retranslate();
+
 	}
 }
 
@@ -565,6 +568,11 @@ void AstroCalcDialog::createDialogContent()
 	connect(ui->pushButtonExtraEphemerisDialog, SIGNAL(clicked()), this, SLOT(showExtraEphemerisDialog()));
 	connect(ui->pushButtonCustomStepsDialog, SIGNAL(clicked()), this, SLOT(showCustomStepsDialog()));
 
+	// Tab: Almanac
+	ui->astroCalcAlmanac->setup();
+	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(updateAlmanacWidgetVisibility()));
+	updateAlmanacWidgetVisibility();
+
 	updateTabBarListWidgetWidth();
 
 	ui->celestialPositionsUpdateButton->setShortcut(QKeySequence("Shift+F10"));
@@ -590,6 +598,20 @@ void AstroCalcDialog::createDialogContent()
 
 	// NOTE: populating tooltips should be doing after initialization and setting the values for all spinboxes
 	populateToolTips();
+}
+
+void AstroCalcDialog::updateAlmanacWidgetVisibility()
+{
+	const int almanacTabIndex = 8;
+	const bool onEarth = core->getCurrentPlanet()==solarSystem->getEarth();
+
+	// hide Almanac tab or not
+	ui->stackListWidget->item(almanacTabIndex)->setHidden(!onEarth);
+	ui->astroCalcAlmanac->setVisible(onEarth);
+
+	// move to first tab if Alamac was visible when user are moved to non-terrestial location
+	if (!onEarth && ui->stackListWidget->currentRow()==almanacTabIndex)
+		ui->stackListWidget->setCurrentRow(0);
 }
 
 void AstroCalcDialog::populateToolTips()
