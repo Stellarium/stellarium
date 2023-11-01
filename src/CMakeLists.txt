@@ -615,10 +615,9 @@ IF(WIN32)
           SET(VIRTUAL_KBD_SETTING "--no-virtualkeyboard")
      ENDIF()
 
-     # Use external workaround until https://github.com/appveyor/ci/issues/3892 is addressed
-     # IF(STELLARIUM_BUILD_ARM64)
-     #      cmake_path(APPEND QT_PATHS ${QT6_INSTALL_PREFIX} "bin" "qtpaths.bat")
-     # ENDIF()
+     IF(STELLARIUM_BUILD_ARM64)
+          cmake_path(APPEND QT_PATHS ${QT6_INSTALL_PREFIX} "bin" "qtpaths.bat")
+     ENDIF()
      IF(QT_PATHS)
           SET(_qt_paths "--qtpaths \"${QT_PATHS}\"")
      ELSE()
