@@ -127,7 +127,7 @@ void CustomObjectMgr::init()
 	setMarkersSize(conf->value("gui/custom_marker_size", 5.f).toFloat());
 	// Limit the click radius to 15px in any direction
 	setActiveRadiusLimit(conf->value("gui/custom_marker_radius_limit", 15).toInt());
-	setSelectPriority(conf->value("gui/custom_marker_priority", 0.f).toFloat());
+	setSelectPriority(conf->value("gui/custom_marker_priority", -2.f).toFloat());
 
 	GETSTELMODULE(StelObjectMgr)->registerStelObjectMgr(this);
 }
