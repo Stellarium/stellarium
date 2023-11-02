@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>680</width>
-    <height>634</height>
+    <width>300</width>
+    <height>300</height>
    </rect>
   </property>
   <layout class="QVBoxLayout">
@@ -28,7 +28,7 @@
    </property>
    <item>
     <widget class="TitleBar" name="titleBar">
-     <property name="title">
+     <property name="title" stdset="0">
       <string>Configuration</string>
      </property>
     </widget>
@@ -225,63 +225,26 @@
              </property>
              <item row="0" column="0">
               <layout class="QGridLayout" name="languageGridLayout">
+               <item row="0" column="4">
+                <spacer name="horizontalSpacer_9">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
                <item row="0" column="3">
-                <widget class="QComboBox" name="skycultureLanguageComboBox">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <property name="minimumSize">
-                  <size>
-                   <width>180</width>
-                   <height>0</height>
-                  </size>
-                 </property>
-                 <property name="maximumSize">
-                  <size>
-                   <width>180</width>
-                   <height>24</height>
-                  </size>
-                 </property>
-                 <property name="editable">
-                  <bool>true</bool>
-                 </property>
-                 <property name="insertPolicy">
-                  <enum>QComboBox::NoInsert</enum>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="0">
-                <widget class="QLabel" name="programLanguageLabel">
-                 <property name="text">
-                  <string>Program Language</string>
-                 </property>
-                 <property name="alignment">
-                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="1">
                 <widget class="QComboBox" name="programLanguageComboBox">
                  <property name="sizePolicy">
                   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                    <horstretch>0</horstretch>
                    <verstretch>0</verstretch>
                   </sizepolicy>
-                 </property>
-                 <property name="minimumSize">
-                  <size>
-                   <width>180</width>
-                   <height>0</height>
-                  </size>
-                 </property>
-                 <property name="maximumSize">
-                  <size>
-                   <width>180</width>
-                   <height>24</height>
-                  </size>
                  </property>
                  <property name="editable">
                   <bool>true</bool>
@@ -297,7 +260,30 @@
                  </property>
                 </widget>
                </item>
-               <item row="0" column="2">
+               <item row="0" column="1">
+                <widget class="QLabel" name="programLanguageLabel">
+                 <property name="text">
+                  <string>Program Language</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="0">
+                <spacer name="horizontalSpacer_8">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="5">
                 <widget class="QLabel" name="skycultureLanguageLabel">
                  <property name="text">
                   <string>Sky Culture Language</string>
@@ -306,6 +292,35 @@
                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                  </property>
                 </widget>
+               </item>
+               <item row="0" column="6">
+                <widget class="QComboBox" name="skycultureLanguageComboBox">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="editable">
+                  <bool>true</bool>
+                 </property>
+                 <property name="insertPolicy">
+                  <enum>QComboBox::NoInsert</enum>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="7">
+                <spacer name="horizontalSpacer_11">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
                </item>
               </layout>
              </item>
@@ -335,13 +350,6 @@
              </property>
              <item row="0" column="0">
               <layout class="QGridLayout" name="EphemerisGridLayout">
-               <item row="2" column="0">
-                <widget class="QCheckBox" name="de430checkBox">
-                 <property name="text">
-                  <string>Use DE430 (high accuracy)</string>
-                 </property>
-                </widget>
-               </item>
                <item row="3" column="1">
                 <widget class="QLabel" name="de431label">
                  <property name="text">
@@ -349,40 +357,10 @@
                  </property>
                 </widget>
                </item>
-               <item row="2" column="1">
-                <widget class="QLabel" name="de430label">
+               <item row="2" column="0">
+                <widget class="QCheckBox" name="de430checkBox">
                  <property name="text">
-                  <string>Not installed</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="0">
-                <widget class="QCheckBox" name="de431checkBox">
-                 <property name="toolTip">
-                  <string>DE431 provides position data for years -13000...+17000. For special applications only.</string>
-                 </property>
-                 <property name="text">
-                  <string>Use DE431 (long-time data)</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="0">
-                <widget class="QCheckBox" name="de441checkBox">
-                 <property name="toolTip">
-                  <string>DE441 provides position data for years -13000...+17000. For special applications only.</string>
-                 </property>
-                 <property name="text">
-                  <string>Use DE441 (long-time data)</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="4" column="0" colspan="2">
-                <widget class="QLabel" name="label_VSOP87used">
-                 <property name="toolTip">
-                  <string>Using VSOP87 is recommended for years -4000...+8000 only, but delivers useful positions outside this range.</string>
-                 </property>
-                 <property name="text">
-                  <string>VSOP87/ELP2000-82B is used when these are not installed or not activated.</string>
+                  <string>Use DE430 (high accuracy)</string>
                  </property>
                 </widget>
                </item>
@@ -396,10 +374,13 @@
                  </property>
                 </widget>
                </item>
-               <item row="1" column="1">
-                <widget class="QLabel" name="de441label">
+               <item row="3" column="0">
+                <widget class="QCheckBox" name="de431checkBox">
+                 <property name="toolTip">
+                  <string>DE431 provides position data for years -13000...+17000. For special applications only.</string>
+                 </property>
                  <property name="text">
-                  <string>Not installed</string>
+                  <string>Use DE431 (long-time data)</string>
                  </property>
                 </widget>
                </item>
@@ -407,6 +388,40 @@
                 <widget class="QLabel" name="de440label">
                  <property name="text">
                   <string>Not installed</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="0">
+                <widget class="QCheckBox" name="de441checkBox">
+                 <property name="toolTip">
+                  <string>DE441 provides position data for years -13000...+17000. For special applications only.</string>
+                 </property>
+                 <property name="text">
+                  <string>Use DE441 (long-time data)</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="1">
+                <widget class="QLabel" name="de441label">
+                 <property name="text">
+                  <string>Not installed</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="1">
+                <widget class="QLabel" name="de430label">
+                 <property name="text">
+                  <string>Not installed</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="4" column="0" colspan="2">
+                <widget class="QLabel" name="label_VSOP87used">
+                 <property name="toolTip">
+                  <string>Using VSOP87 is recommended for years -4000...+8000 only, but delivers useful positions outside this range.</string>
+                 </property>
+                 <property name="text">
+                  <string>VSOP87/ELP2000-82B is used when these are not installed or not activated.</string>
                  </property>
                 </widget>
                </item>
@@ -437,12 +452,6 @@
               <layout class="QHBoxLayout" name="horizontalLayout_3">
                <item>
                 <widget class="QPushButton" name="saveViewDirAsDefaultPushButton">
-                 <property name="minimumSize">
-                  <size>
-                   <width>0</width>
-                   <height>24</height>
-                  </size>
-                 </property>
                  <property name="text">
                   <string>Save view</string>
                  </property>
@@ -450,12 +459,6 @@
                </item>
                <item>
                 <widget class="QPushButton" name="saveSettingsAsDefaultPushButton">
-                 <property name="minimumSize">
-                  <size>
-                   <width>0</width>
-                   <height>24</height>
-                  </size>
-                 </property>
                  <property name="whatsThis">
                   <string>Save the settings you've changed this session to be the same the next time you start Stellarium</string>
                  </property>
@@ -466,12 +469,6 @@
                </item>
                <item>
                 <widget class="QPushButton" name="restoreDefaultsButton">
-                 <property name="minimumSize">
-                  <size>
-                   <width>0</width>
-                   <height>24</height>
-                  </size>
-                 </property>
                  <property name="whatsThis">
                   <string>Restore the default settings that came with Stellarium</string>
                  </property>
@@ -1212,12 +1209,6 @@
                 <iconset resource="../../data/gui/guiRes.qrc">
                  <normaloff>:/graphicGui/uibtDownload.png</normaloff>:/graphicGui/uibtDownload.png</iconset>
                </property>
-               <property name="iconSize">
-                <size>
-                 <width>24</width>
-                 <height>24</height>
-                </size>
-               </property>
                <property name="description">
                 <string>Download this file to view even more stars</string>
                </property>
@@ -1372,18 +1363,84 @@
                </property>
               </widget>
              </item>
-             <item row="0" column="0">
-              <widget class="QRadioButton" name="systemTimeRadio">
+             <item row="2" column="0">
+              <widget class="QRadioButton" name="fixedTimeRadio">
                <property name="toolTip">
-                <string>Starts Stellarium at system clock date and time</string>
+                <string>Use a specific date and time when Stellarium starts up</string>
                </property>
                <property name="text">
-                <string>System date and time</string>
+                <string>Other:</string>
                </property>
               </widget>
              </item>
              <item row="2" column="1">
+              <widget class="QDateTimeEdit" name="fixedDateTimeEdit">
+               <property name="date">
+                <date>
+                 <year>1952</year>
+                 <month>5</month>
+                 <day>11</day>
+                </date>
+               </property>
+               <property name="time">
+                <time>
+                 <hour>0</hour>
+                 <minute>42</minute>
+                 <second>0</second>
+                </time>
+               </property>
+               <property name="calendarPopup">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="2">
+              <widget class="QRadioButton" name="todayRadio">
+               <property name="toolTip">
+                <string>Sets the simulation time to the next instance of this time of day when Stellarium starts</string>
+               </property>
+               <property name="text">
+                <string>System date at:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="3">
+              <widget class="QTimeEdit" name="todayTimeSpinBox">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="font">
+                <font/>
+               </property>
+               <property name="frame">
+                <bool>true</bool>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+               <property name="currentSectionIndex">
+                <number>0</number>
+               </property>
+               <property name="time">
+                <time>
+                 <hour>21</hour>
+                 <minute>0</minute>
+                 <second>0</second>
+                </time>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="2" colspan="2">
               <widget class="QPushButton" name="fixedDateTimeCurrentButton">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
                <property name="toolTip">
                 <string>Use current local date and time</string>
                </property>
@@ -1392,110 +1449,15 @@
                </property>
               </widget>
              </item>
-             <item row="2" column="0">
-              <layout class="QHBoxLayout" name="_4">
-               <item>
-                <widget class="QRadioButton" name="fixedTimeRadio">
-                 <property name="toolTip">
-                  <string>Use a specific date and time when Stellarium starts up</string>
-                 </property>
-                 <property name="text">
-                  <string>Other:</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QDateTimeEdit" name="fixedDateTimeEdit">
-                 <property name="minimumSize">
-                  <size>
-                   <width>0</width>
-                   <height>24</height>
-                  </size>
-                 </property>
-                 <property name="maximumSize">
-                  <size>
-                   <width>16777215</width>
-                   <height>24</height>
-                  </size>
-                 </property>
-                 <property name="date">
-                  <date>
-                   <year>1952</year>
-                   <month>5</month>
-                   <day>11</day>
-                  </date>
-                 </property>
-                 <property name="time">
-                  <time>
-                   <hour>0</hour>
-                   <minute>42</minute>
-                   <second>0</second>
-                  </time>
-                 </property>
-                 <property name="calendarPopup">
-                  <bool>true</bool>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-             <item row="0" column="1">
-              <layout class="QHBoxLayout" name="_3">
-               <property name="spacing">
-                <number>6</number>
+             <item row="0" column="0" colspan="2">
+              <widget class="QRadioButton" name="systemTimeRadio">
+               <property name="toolTip">
+                <string>Starts Stellarium at system clock date and time</string>
                </property>
-               <item>
-                <widget class="QRadioButton" name="todayRadio">
-                 <property name="toolTip">
-                  <string>Sets the simulation time to the next instance of this time of day when Stellarium starts</string>
-                 </property>
-                 <property name="text">
-                  <string>System date at:</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QTimeEdit" name="todayTimeSpinBox">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <property name="minimumSize">
-                  <size>
-                   <width>0</width>
-                   <height>24</height>
-                  </size>
-                 </property>
-                 <property name="maximumSize">
-                  <size>
-                   <width>16777215</width>
-                   <height>24</height>
-                  </size>
-                 </property>
-                 <property name="font">
-                  <font/>
-                 </property>
-                 <property name="frame">
-                  <bool>true</bool>
-                 </property>
-                 <property name="alignment">
-                  <set>Qt::AlignCenter</set>
-                 </property>
-                 <property name="currentSectionIndex">
-                  <number>0</number>
-                 </property>
-                 <property name="time">
-                  <time>
-                   <hour>21</hour>
-                   <minute>0</minute>
-                   <second>0</second>
-                  </time>
-                 </property>
-                </widget>
-               </item>
-              </layout>
+               <property name="text">
+                <string>System date and time</string>
+               </property>
+              </widget>
              </item>
             </layout>
            </widget>
@@ -1521,36 +1483,26 @@
              <property name="bottomMargin">
               <number>0</number>
              </property>
-             <item row="0" column="2">
-              <widget class="QLabel" name="dateFormatsLabel">
+             <item row="0" column="0">
+              <widget class="QRadioButton" name="jdRadioButton">
                <property name="text">
-                <string>Date:</string>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignCenter</set>
+                <string notr="true">JD</string>
                </property>
               </widget>
              </item>
              <item row="0" column="4">
+              <widget class="QComboBox" name="timeFormatsComboBox"/>
+             </item>
+             <item row="0" column="2">
+              <widget class="QComboBox" name="dateFormatsComboBox"/>
+             </item>
+             <item row="0" column="3">
               <widget class="QLabel" name="timeFormatsLabel">
                <property name="text">
                 <string>and time:</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignCenter</set>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="3">
-              <widget class="QComboBox" name="dateFormatsComboBox"/>
-             </item>
-             <item row="0" column="5">
-              <widget class="QComboBox" name="timeFormatsComboBox"/>
-             </item>
-             <item row="0" column="0">
-              <widget class="QRadioButton" name="jdRadioButton">
-               <property name="text">
-                <string notr="true">JD</string>
                </property>
               </widget>
              </item>
@@ -1562,14 +1514,8 @@
                  <verstretch>0</verstretch>
                 </sizepolicy>
                </property>
-               <property name="maximumSize">
-                <size>
-                 <width>20</width>
-                 <height>16777215</height>
-                </size>
-               </property>
                <property name="text">
-                <string notr="true"/>
+                <string notr="true">Date:</string>
                </property>
                <property name="checked">
                 <bool>true</bool>
@@ -1581,18 +1527,6 @@
           </item>
           <item>
            <widget class="QGroupBox" name="deltaTGroupBox">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>228</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>16777215</width>
-              <height>232</height>
-             </size>
-            </property>
             <property name="title">
              <string>Time correction</string>
             </property>
@@ -1653,7 +1587,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QPushButton" name="pushButtonCustomDeltaTEquationDialog">
+                   <widget class="QToolButton" name="pushButtonCustomDeltaTEquationDialog">
                     <property name="enabled">
                      <bool>false</bool>
                     </property>
@@ -1684,12 +1618,6 @@
                 </item>
                 <item>
                  <widget class="QTextBrowser" name="deltaTAlgorithmDescription">
-                  <property name="maximumSize">
-                   <size>
-                    <width>16777215</width>
-                    <height>175</height>
-                   </size>
-                  </property>
                   <property name="autoFillBackground">
                    <bool>true</bool>
                   </property>
@@ -1780,12 +1708,6 @@
                </item>
                <item>
                 <widget class="QSpinBox" name="screenFontSizeSpinBox">
-                 <property name="maximumSize">
-                  <size>
-                   <width>50</width>
-                   <height>16777215</height>
-                  </size>
-                 </property>
                  <property name="toolTip">
                   <string>Base font size for on-screen text</string>
                  </property>
@@ -1815,18 +1737,6 @@
                </item>
                <item>
                 <widget class="QSpinBox" name="guiFontSizeSpinBox">
-                 <property name="minimumSize">
-                  <size>
-                   <width>20</width>
-                   <height>0</height>
-                  </size>
-                 </property>
-                 <property name="maximumSize">
-                  <size>
-                   <width>50</width>
-                   <height>16777215</height>
-                  </size>
-                 </property>
                  <property name="toolTip">
                   <string>Base font size for dialogs</string>
                  </property>
@@ -1843,6 +1753,19 @@
                   <number>13</number>
                  </property>
                 </widget>
+               </item>
+               <item>
+                <spacer name="horizontalSpacer_7">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
                </item>
                <item>
                 <widget class="QComboBox" name="fontWritingSystemComboBox">
@@ -2190,12 +2113,6 @@
                </item>
                <item>
                 <widget class="QDoubleSpinBox" name="mouseTimeoutSpinBox">
-                 <property name="maximumSize">
-                  <size>
-                   <width>16777215</width>
-                   <height>24</height>
-                  </size>
-                 </property>
                  <property name="toolTip">
                   <string>seconds</string>
                  </property>
@@ -2515,12 +2432,6 @@
           </property>
           <item>
            <widget class="QListWidget" name="scriptListWidget">
-            <property name="minimumSize">
-             <size>
-              <width>190</width>
-              <height>0</height>
-             </size>
-            </property>
             <property name="focusPolicy">
              <enum>Qt::NoFocus</enum>
             </property>
@@ -2635,18 +2546,6 @@
           </property>
           <item>
            <widget class="QListWidget" name="pluginsListWidget">
-            <property name="minimumSize">
-             <size>
-              <width>180</width>
-              <height>0</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>180</width>
-              <height>16777215</height>
-             </size>
-            </property>
             <property name="focusPolicy">
              <enum>Qt::NoFocus</enum>
             </property>
