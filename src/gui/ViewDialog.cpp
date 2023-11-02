@@ -156,12 +156,6 @@ void ViewDialog::createDialogContent()
 
 	populateLists();
 	populateToolTips();
-	// fixed size for buttons
-	QSize bs = QSize(24, 24);
-	ui->pushButtonAtmosphereDetails->setFixedSize(bs);
-	ui->pushButtonSkylightDetails->setFixedSize(bs);
-	ui->tonemappingPushButton->setFixedSize(bs);
-	ui->pushButtonOrbitColors->setFixedSize(bs);	
 
 	ui->currentFovSpinBox->setMinimum(app->getCore()->getMovementMgr()->getMinFov(), true);
 	ui->currentFovSpinBox->setMaximum(360.0, true);
