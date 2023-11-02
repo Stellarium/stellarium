@@ -339,6 +339,7 @@ QPushButton, QToolButton {
 	color: rgb(31, 31, 31);
         font-size: 100%;
 	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(183, 184, 185), stop: 1 rgb(111, 113, 114));
+	icon-size: 16px;
 }
 
 QPushButton:disabled, QToolButton:disabled {
@@ -362,6 +363,19 @@ QPushButton:pressed, QToolButton:pressed {
 
 QPushButton:checked, QToolButton:checked {
 	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(41, 41, 49), stop: 0.2 rgb(73, 74, 84), stop: 1 rgb(58, 60, 73));
+}
+
+QToolButton#pushButtonGotoSearchSkyObject {
+	icon-size: 24px;
+}
+
+QToolButton#pushButtonCustomStepsDialog, QToolButton#pushButtonNow, QToolButton#pushButtonExtraEphemerisDialog {
+	icon-size: 20px;
+	min-width: 22px;
+	max-width: 22px;
+	min-height: 22px;
+	max-height: 22px;
+	padding: 0;
 }
 
 ColorButton {
@@ -1020,10 +1034,15 @@ QLineEdit#citySearchLineEdit {
 
 QListView#citiesListView {
         font-size: 100%;
+        min-width: 300px;
 }
 
 QListView#citiesListView::item {
 	padding: 2px 0;
+}
+
+QFrame#frame_coordinates {
+	min-width: 300px;
 }
 
 /**************************************************************************************************************

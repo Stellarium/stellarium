@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>861</width>
-    <height>536</height>
+    <width>1059</width>
+    <height>611</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -31,7 +31,7 @@
    </property>
    <item>
     <widget class="TitleBar" name="titleBar">
-     <property name="title">
+     <property name="title" stdset="0">
       <string>Satellites Configuration</string>
      </property>
     </widget>
@@ -833,7 +833,7 @@
               </widget>
              </item>
              <item>
-              <widget class="QPushButton" name="customFilterButton">
+              <widget class="QToolButton" name="customFilterButton">
                <property name="enabled">
                 <bool>false</bool>
                </property>
@@ -869,7 +869,7 @@
            <item>
             <layout class="QHBoxLayout" name="horizontalLayout_2">
              <item>
-              <widget class="QPushButton" name="addSatellitesButton">
+              <widget class="QToolButton" name="addSatellitesButton">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                  <horstretch>0</horstretch>
@@ -887,7 +887,7 @@
               </widget>
              </item>
              <item>
-              <widget class="QPushButton" name="removeSatellitesButton">
+              <widget class="QToolButton" name="removeSatellitesButton">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                  <horstretch>0</horstretch>
@@ -905,7 +905,7 @@
               </widget>
              </item>
              <item>
-              <widget class="QPushButton" name="commSatelliteButton">
+              <widget class="QToolButton" name="commSatelliteButton">
                <property name="toolTip">
                 <string>Edit communication data for the selected satellite</string>
                </property>
@@ -917,7 +917,7 @@
               </widget>
              </item>
              <item>
-              <widget class="QPushButton" name="selectAllButton">
+              <widget class="QToolButton" name="selectAllButton">
                <property name="toolTip">
                 <string>Select all satellites in list</string>
                </property>
@@ -943,7 +943,7 @@
               </spacer>
              </item>
              <item>
-              <widget class="QPushButton" name="satMarkerColorPickerButton">
+              <widget class="QToolButton" name="satMarkerColorPickerButton">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                  <horstretch>0</horstretch>
@@ -959,7 +959,7 @@
               </widget>
              </item>
              <item>
-              <widget class="QPushButton" name="satOrbitColorPickerButton">
+              <widget class="QToolButton" name="satOrbitColorPickerButton">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                  <horstretch>0</horstretch>
@@ -975,7 +975,7 @@
               </widget>
              </item>
              <item>
-              <widget class="QPushButton" name="satInfoColorPickerButton">
+              <widget class="QToolButton" name="satInfoColorPickerButton">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                  <horstretch>0</horstretch>
@@ -1452,7 +1452,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="addSourceButton">
+          <widget class="QToolButton" name="addSourceButton">
            <property name="toolTip">
             <string>Add new source</string>
            </property>
@@ -1464,7 +1464,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="editSourceButton">
+          <widget class="QToolButton" name="editSourceButton">
            <property name="toolTip">
             <string>Edit selected source</string>
            </property>
@@ -1476,7 +1476,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="saveSourceButton">
+          <widget class="QToolButton" name="saveSourceButton">
            <property name="toolTip">
             <string>Save source</string>
            </property>
@@ -1488,7 +1488,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="deleteSourceButton">
+          <widget class="QToolButton" name="deleteSourceButton">
            <property name="toolTip">
             <string>Remove selected source</string>
            </property>
@@ -1516,7 +1516,7 @@
           </spacer>
          </item>
          <item>
-          <widget class="QPushButton" name="resetSourcesButton">
+          <widget class="QToolButton" name="resetSourcesButton">
            <property name="toolTip">
             <string>Reset sources list to it defaults</string>
            </property>

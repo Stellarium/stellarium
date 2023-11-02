@@ -34,7 +34,7 @@
    </property>
    <item>
     <widget class="TitleBar" name="titleBar">
-     <property name="title">
+     <property name="title" stdset="0">
       <string>Frequencies</string>
      </property>
     </widget>
@@ -118,7 +118,7 @@
          </spacer>
         </item>
         <item>
-         <widget class="QPushButton" name="addCommLinkButton">
+         <widget class="QToolButton" name="addCommLinkButton">
           <property name="icon">
            <iconset resource="../../../../data/gui/guiRes.qrc">
             <normaloff>:/graphicGui/uibtAdd.png</normaloff>
@@ -127,7 +127,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="removeCommLinkButton">
+         <widget class="QToolButton" name="removeCommLinkButton">
           <property name="icon">
            <iconset resource="../../../../data/gui/guiRes.qrc">
             <normaloff>:/graphicGui/uibtRemove.png</normaloff>
@@ -195,11 +195,6 @@
    <extends>QFrame</extends>
    <header>Dialog.hpp</header>
    <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>StelCloseButton</class>
-   <extends>QPushButton</extends>
-   <header>gui/StelCloseButton.hpp</header>
   </customwidget>
  </customwidgets>
  <resources>

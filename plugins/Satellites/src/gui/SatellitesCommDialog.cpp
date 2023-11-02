@@ -75,11 +75,6 @@ void SatellitesCommDialog::createDialogContent()
 	connect(ui->removeCommLinkButton, SIGNAL(clicked()), this, SLOT(removeCommData()));
 
 	populateTexts();
-
-	// Set size of buttons
-	QSize bs = QSize(26, 26);
-	ui->addCommLinkButton->setFixedSize(bs);
-	ui->removeCommLinkButton->setFixedSize(bs);
 }
 
 void SatellitesCommDialog::populateTexts()

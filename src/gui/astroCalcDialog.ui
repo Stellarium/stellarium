@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>851</width>
-    <height>467</height>
+    <width>1030</width>
+    <height>590</height>
    </rect>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
@@ -338,6 +338,7 @@
                <widget class="QLabel" name="hecPositionsHeaderLabel">
                 <property name="font">
                  <font>
+                  <weight>75</weight>
                   <bold>true</bold>
                  </font>
                 </property>
@@ -425,12 +426,6 @@
                   </item>
                   <item>
                    <widget class="QDoubleSpinBox" name="hecMagnitudeLimitSpinBox">
-                    <property name="maximumSize">
-                     <size>
-                      <width>70</width>
-                      <height>16777215</height>
-                     </size>
-                    </property>
                     <property name="alignment">
                      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                     </property>
@@ -552,13 +547,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QPushButton" name="pushButtonExtraEphemerisDialog">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
+             <widget class="QToolButton" name="pushButtonExtraEphemerisDialog">
               <property name="toolTip">
                <string>Extra options for ephemeris visualization</string>
               </property>
@@ -763,7 +752,7 @@
                </widget>
               </item>
               <item>
-               <widget class="QPushButton" name="pushButtonNow">
+               <widget class="QToolButton" name="pushButtonNow">
                 <property name="toolTip">
                  <string>Now</string>
                 </property>
@@ -836,7 +825,7 @@
                </widget>
               </item>
               <item>
-               <widget class="QPushButton" name="pushButtonCustomStepsDialog">
+               <widget class="QToolButton" name="pushButtonCustomStepsDialog">
                 <property name="toolTip">
                  <string>Custom time step for ephemeris visualization</string>
                 </property>
@@ -1006,6 +995,7 @@
                 </property>
                 <property name="font">
                  <font>
+                  <weight>75</weight>
                   <bold>true</bold>
                  </font>
                 </property>
@@ -1070,6 +1060,7 @@
            <widget class="QLabel" name="rtsHeaderLabel">
             <property name="font">
              <font>
+              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -1128,12 +1119,6 @@
                 <verstretch>0</verstretch>
                </sizepolicy>
               </property>
-              <property name="minimumSize">
-               <size>
-                <width>50</width>
-                <height>0</height>
-               </size>
-              </property>
               <property name="text">
                <string>and</string>
               </property>
@@ -1181,12 +1166,6 @@
                   <horstretch>0</horstretch>
                   <verstretch>0</verstretch>
                  </sizepolicy>
-                </property>
-                <property name="minimumSize">
-                 <size>
-                  <width>140</width>
-                  <height>0</height>
-                 </size>
                 </property>
                 <property name="alignment">
                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -1370,6 +1349,7 @@
            <widget class="QTabWidget" name="tabWidgetGraphs">
             <property name="font">
              <font>
+              <weight>50</weight>
               <bold>false</bold>
              </font>
             </property>
@@ -1424,12 +1404,6 @@
                 </item>
                 <item>
                  <widget class="QSpinBox" name="positiveAltitudeLimitSpinBox">
-                  <property name="maximumSize">
-                   <size>
-                    <width>75</width>
-                    <height>16777215</height>
-                   </size>
-                  </property>
                   <property name="toolTip">
                    <string>Altitude limit in degrees</string>
                   </property>
@@ -1558,12 +1532,6 @@
                 </item>
                 <item>
                  <widget class="QSpinBox" name="monthlyElevationPositiveLimitSpinBox">
-                  <property name="maximumSize">
-                   <size>
-                    <width>75</width>
-                    <height>16777215</height>
-                   </size>
-                  </property>
                   <property name="toolTip">
                    <string>Altitude limit in degrees</string>
                   </property>
@@ -1599,18 +1567,6 @@
                 </item>
                 <item>
                  <widget class="QLabel" name="monthlyElevationTimeInfo">
-                  <property name="minimumSize">
-                   <size>
-                    <width>60</width>
-                    <height>0</height>
-                   </size>
-                  </property>
-                  <property name="maximumSize">
-                   <size>
-                    <width>60</width>
-                    <height>16777215</height>
-                   </size>
-                  </property>
                   <property name="text">
                    <string/>
                   </property>
@@ -1961,12 +1917,6 @@
                 </item>
                 <item row="1" column="1">
                  <widget class="QSpinBox" name="lunarElongationLimitSpinBox">
-                  <property name="maximumSize">
-                   <size>
-                    <width>100</width>
-                    <height>16777215</height>
-                   </size>
-                  </property>
                   <property name="alignment">
                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                   </property>
@@ -2005,73 +1955,154 @@
         </widget>
         <widget class="QWidget" name="stackedWidgetPage6">
          <layout class="QGridLayout" name="gridLayout">
-          <item row="0" column="1">
-           <layout class="QHBoxLayout" name="horizontalLayout_12">
+          <item row="0" column="0" rowspan="2">
+           <layout class="QVBoxLayout" name="verticalLayout_3">
             <item>
-             <widget class="QLabel" name="wutTimeIntervalLabel">
+             <widget class="QLabel" name="label_3">
               <property name="text">
-               <string>Show objects which are up:</string>
+               <string>Select a category:</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QComboBox" name="wutComboBox"/>
-            </item>
-            <item>
-             <spacer name="horizontalSpacer_10">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>40</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item>
-             <widget class="QLabel" name="label_2">
-              <property name="toolTip">
-               <string>Show objects brighter than magnitude</string>
-              </property>
-              <property name="text">
-               <string>Up to mag.:</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QDoubleSpinBox" name="wutMagnitudeDoubleSpinBox">
-              <property name="maximumSize">
-               <size>
-                <width>70</width>
-                <height>16777215</height>
-               </size>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-              </property>
-              <property name="minimum">
-               <double>-21.000000000000000</double>
-              </property>
-              <property name="maximum">
-               <double>21.000000000000000</double>
-              </property>
-              <property name="value">
-               <double>10.000000000000000</double>
+             <widget class="QListWidget" name="wutCategoryListWidget">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
               </property>
              </widget>
             </item>
            </layout>
           </item>
-          <item row="3" column="1">
+          <item row="1" column="1">
            <layout class="QVBoxLayout" name="verticalLayout_5">
             <item>
-             <widget class="QLabel" name="label_4">
-              <property name="text">
-               <string>Matching objects:</string>
-              </property>
-             </widget>
+             <layout class="QGridLayout" name="gridLayout_26">
+              <item row="2" column="0">
+               <widget class="QLabel" name="label_6">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="text">
+                 <string>Above altitude:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="1">
+               <widget class="AngleSpinBox" name="wutAngularSizeLimitMinSpinBox">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
+                <property name="toolTip">
+                 <string>Minimal angular size for visible celestial objects</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="2">
+               <widget class="AngleSpinBox" name="wutAngularSizeLimitMaxSpinBox">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
+                <property name="toolTip">
+                 <string>Maximum angular size for visible celestial objects</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="2">
+               <widget class="AngleSpinBox" name="wutAltitudeMinSpinBox">
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="0">
+               <widget class="QCheckBox" name="wutAngularSizeLimitCheckBox">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="toolTip">
+                 <string>Set limits for angular size for visible celestial objects</string>
+                </property>
+                <property name="text">
+                 <string>Limit angular size:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="0">
+               <widget class="QLabel" name="label_4">
+                <property name="text">
+                 <string>Matching objects:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="0" colspan="3">
+               <layout class="QHBoxLayout" name="horizontalLayout_12">
+                <item>
+                 <widget class="QLabel" name="wutTimeIntervalLabel">
+                  <property name="text">
+                   <string>Show objects which are up:</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QComboBox" name="wutComboBox"/>
+                </item>
+                <item>
+                 <spacer name="horizontalSpacer_10">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>40</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+                <item>
+                 <widget class="QLabel" name="label_2">
+                  <property name="toolTip">
+                   <string>Show objects brighter than magnitude</string>
+                  </property>
+                  <property name="text">
+                   <string>Up to mag.:</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QDoubleSpinBox" name="wutMagnitudeDoubleSpinBox">
+                  <property name="alignment">
+                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                  </property>
+                  <property name="minimum">
+                   <double>-21.000000000000000</double>
+                  </property>
+                  <property name="maximum">
+                   <double>21.000000000000000</double>
+                  </property>
+                  <property name="value">
+                   <double>10.000000000000000</double>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+             </layout>
             </item>
             <item>
              <widget class="QLineEdit" name="wutMatchingObjectsLineEdit">
@@ -2106,129 +2137,6 @@
              <widget class="QPushButton" name="saveObjectsButton">
               <property name="text">
                <string>Export list of objects...</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-          <item row="0" column="0" rowspan="4">
-           <layout class="QVBoxLayout" name="verticalLayout_3">
-            <item>
-             <widget class="QLabel" name="label_3">
-              <property name="text">
-               <string>Select a category:</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QListWidget" name="wutCategoryListWidget">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-          <item row="1" column="1">
-           <layout class="QHBoxLayout" name="wutAngularLimitLayout">
-            <item>
-             <widget class="QCheckBox" name="wutAngularSizeLimitCheckBox">
-              <property name="toolTip">
-               <string>Set limits for angular size for visible celestial objects</string>
-              </property>
-              <property name="text">
-               <string>Limit angular size:</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <spacer name="horizontalSpacer_7">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>40</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item>
-             <widget class="AngleSpinBox" name="wutAngularSizeLimitMinSpinBox">
-              <property name="enabled">
-               <bool>true</bool>
-              </property>
-              <property name="minimumSize">
-               <size>
-                <width>140</width>
-                <height>0</height>
-               </size>
-              </property>
-              <property name="toolTip">
-               <string>Minimal angular size for visible celestial objects</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="AngleSpinBox" name="wutAngularSizeLimitMaxSpinBox">
-              <property name="enabled">
-               <bool>true</bool>
-              </property>
-              <property name="minimumSize">
-               <size>
-                <width>140</width>
-                <height>0</height>
-               </size>
-              </property>
-              <property name="toolTip">
-               <string>Maximum angular size for visible celestial objects</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-          <item row="2" column="1">
-           <layout class="QHBoxLayout" name="horizontalLayout_22">
-            <item>
-             <widget class="QLabel" name="label_6">
-              <property name="text">
-               <string>Above altitude:</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <spacer name="horizontalSpacer_13">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>40</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item>
-             <widget class="AngleSpinBox" name="wutAltitudeMinSpinBox">
-              <property name="minimumSize">
-               <size>
-                <width>140</width>
-                <height>0</height>
-               </size>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
               </property>
              </widget>
             </item>
@@ -2865,6 +2773,7 @@
                 </property>
                 <property name="font">
                  <font>
+                  <weight>75</weight>
                   <bold>true</bold>
                  </font>
                 </property>

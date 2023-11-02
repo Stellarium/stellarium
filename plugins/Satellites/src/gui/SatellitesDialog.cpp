@@ -149,15 +149,6 @@ void SatellitesDialog::createDialogContent()
 	ui->satOrbitColorPickerButton->setText("");
 	ui->satInfoColorPickerButton->setText("");
 
-	// Set size of buttons
-	QSize bs = QSize(26, 26);
-	const QList<QPushButton*> buttons = {
-		ui->customFilterButton, ui->addSatellitesButton, ui->removeSatellitesButton, ui->selectAllButton,
-		ui->satMarkerColorPickerButton, ui->satOrbitColorPickerButton, ui->satInfoColorPickerButton,
-		ui->addSourceButton, ui->deleteSourceButton, ui->editSourceButton, ui->saveSourceButton,
-		ui->resetSourcesButton, ui->commSatelliteButton};
-	for (auto btn: qAsConst(buttons)) { btn->setFixedSize(bs); }
-
 	// Settings tab / updates group
 	// These controls are refreshed by updateSettingsPage(), which in
 	// turn is triggered by setting any of these values. Because
@@ -374,7 +365,7 @@ void SatellitesDialog::askSatMarkerColor()
 		}
 		// colourize the button
 		buttonMarkerColor = c;
-		ui->satMarkerColorPickerButton->setStyleSheet("QPushButton { background-color:" + buttonMarkerColor.name() + "; }");
+		ui->satMarkerColorPickerButton->setStyleSheet("QToolButton { background-color:" + buttonMarkerColor.name() + "; }");
 		saveSatellites();
 	}
 }
@@ -402,7 +393,7 @@ void SatellitesDialog::askSatOrbitColor()
 		}
 		// colourize the button
 		buttonOrbitColor = c;
-		ui->satOrbitColorPickerButton->setStyleSheet("QPushButton { background-color:" + buttonOrbitColor.name() + "; }");
+		ui->satOrbitColorPickerButton->setStyleSheet("QToolButton { background-color:" + buttonOrbitColor.name() + "; }");
 		saveSatellites();
 	}
 }
@@ -430,7 +421,7 @@ void SatellitesDialog::askSatInfoColor()
 		}
 		// colourize the button
 		buttonInfoColor = c;
-		ui->satInfoColorPickerButton->setStyleSheet("QPushButton { background-color:" + buttonInfoColor.name() + "; }");
+		ui->satInfoColorPickerButton->setStyleSheet("QToolButton { background-color:" + buttonInfoColor.name() + "; }");
 		saveSatellites();
 	}
 }
@@ -670,11 +661,11 @@ void SatellitesDialog::updateSatelliteData()
 
 	// colourize the colorpicker button
 	buttonMarkerColor=mColor.toQColor(); // .setRgbF(mColor.v[0], mColor.v[1], mColor.v[2]);
-	ui->satMarkerColorPickerButton->setStyleSheet("QPushButton { background-color:" + buttonMarkerColor.name() + "; }");
+	ui->satMarkerColorPickerButton->setStyleSheet("QToolButton { background-color:" + buttonMarkerColor.name() + "; }");
 	buttonOrbitColor=oColor.toQColor(); // .setRgbF(oColor.v[0], oColor.v[1], oColor.v[2]);
-	ui->satOrbitColorPickerButton->setStyleSheet("QPushButton { background-color:" + buttonOrbitColor.name() + "; }");
+	ui->satOrbitColorPickerButton->setStyleSheet("QToolButton { background-color:" + buttonOrbitColor.name() + "; }");
 	buttonInfoColor=iColor.toQColor(); // .setRgbF(iColor.v[0], iColor.v[1], iColor.v[2]);
-	ui->satInfoColorPickerButton->setStyleSheet("QPushButton { background-color:" + buttonInfoColor.name() + "; }");
+	ui->satInfoColorPickerButton->setStyleSheet("QToolButton { background-color:" + buttonInfoColor.name() + "; }");
 
 	// bug #1350669 (https://bugs.launchpad.net/stellarium/+bug/1350669)
 	ui->satellitesList->repaint();
@@ -1379,9 +1370,9 @@ void SatellitesDialog::setRightSideToROMode()
 	buttonMarkerColor = QColor(QColor::fromRgbF(0.7f, 0.7f, 0.7f));
 	buttonOrbitColor = QColor(QColor::fromRgbF(0.7f, 0.7f, 0.7f));
 	buttonInfoColor = QColor(QColor::fromRgbF(0.7f, 0.7f, 0.7f));
-	ui->satMarkerColorPickerButton->setStyleSheet("QPushButton { background-color:" + buttonMarkerColor.name() + "; }");
-	ui->satOrbitColorPickerButton->setStyleSheet("QPushButton { background-color:" + buttonOrbitColor.name() + "; }");
-	ui->satInfoColorPickerButton->setStyleSheet("QPushButton { background-color:" + buttonInfoColor.name() + "; }");
+	ui->satMarkerColorPickerButton->setStyleSheet("QToolButton { background-color:" + buttonMarkerColor.name() + "; }");
+	ui->satOrbitColorPickerButton->setStyleSheet("QToolButton { background-color:" + buttonOrbitColor.name() + "; }");
+	ui->satInfoColorPickerButton->setStyleSheet("QToolButton { background-color:" + buttonInfoColor.name() + "; }");
 }
 
 // The status of elements on right side of GUI may be changed when satellite is selected
