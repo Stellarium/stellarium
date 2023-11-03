@@ -267,7 +267,7 @@ StelApp::StelApp(StelMainView *parent)
 	, totalDownloadedSize(0)
 	, nbUsedCache(0)
 	, totalUsedCacheSize(0)
-	, screenFontSize(13)
+	, screenFontSize(getDefaultGuiFontSize())
 	, renderBuffer(Q_NULLPTR)
 	, viewportEffect(Q_NULLPTR)
 	, gl(Q_NULLPTR)
@@ -446,8 +446,8 @@ void StelApp::init(QSettings* conf)
 	if (devicePixelsPerPixel>1)
 		qDebug() << "Detected a high resolution device! Device pixel ratio:" << devicePixelsPerPixel;
 
-	setScreenFontSize(confSettings->value("gui/screen_font_size", 13).toInt());
-	setGuiFontSize(confSettings->value("gui/gui_font_size", 13).toInt());
+	setScreenFontSize(confSettings->value("gui/screen_font_size", getDefaultGuiFontSize()).toInt());
+	setGuiFontSize(confSettings->value("gui/gui_font_size", getDefaultGuiFontSize()).toInt());
 	setFlagImmediateSave(confSettings->value("gui/immediate_save_details", false).toBool());
 
 	core = new StelCore();
