@@ -254,6 +254,8 @@ public:
 
 	//! Dump diagnostics about action call priorities
 	void dumpModuleActionPriorities(StelModule::StelModuleActionName actionName) const;
+
+	static constexpr int getDefaultGuiFontSize() { return 13; }
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Scriptable methods
