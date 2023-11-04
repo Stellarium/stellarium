@@ -409,11 +409,18 @@ QCheckBox:disabled {
 }
 
 QCheckBox::indicator,
-QListWidget::indicator,
-QListView::indicator,
 QGroupBox::indicator {
 	width: 16px;
 	height: 16px;
+	margin: 0;
+	background: none;
+}
+
+/* FIXME: these should configured the same way as QCheckBox and QGroupBox
+ * indicators, but there's a problem with spacing discussed at
+ * https://stackoverflow.com/q/77422984 */
+QListWidget::indicator,
+QListView::indicator {
 	margin: 0;
 	background: none;
 }
