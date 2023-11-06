@@ -80,7 +80,7 @@ To install all of these, use the following commands:
 sudo apt install build-essential cmake zlib1g-dev libgl1-mesa-dev libdrm-dev gcc g++ \
                  graphviz doxygen gettext git libgps-dev \
                  gstreamer1.0-plugins-base gstreamer1.0-plugins-good gstreamer1.0-pulseaudio \
-                 gstreamer1.0-libav gstreamer1.0-vaapi qtbase5-dev \                
+                 gstreamer1.0-libav gstreamer1.0-vaapi qtbase5-dev \
                  qtbase5-private-dev qtscript5-dev libqt5svg5-dev qttools5-dev-tools \
                  qttools5-dev libqt5opengl5-dev qtmultimedia5-dev libqt5multimedia5-plugins \
                  libqt5serialport5 libqt5serialport5-dev qtpositioning5-dev libqt5positioning5 \
@@ -155,13 +155,13 @@ Stellarium will be built without QtWebEngine support. The result is shown in the
 - Install [Homebrew](https://brew.sh/). 
 - Install required packages:
   ```
-  $ brew install cmake git gettext
-  $ brew link gettext --force
+  brew install cmake git gettext
+  brew link gettext --force
   ```
 
   On MacOS 11 and above, if
   ```
-  $ brew link gettext --force
+  brew link gettext --force
   ```
 
   failed due to :
@@ -173,14 +173,14 @@ Stellarium will be built without QtWebEngine support. The result is shown in the
   Try the following:
 
   ```
-  $ sudo mkdir /usr/local/include
-  $ sudo chown -R $(whoami) $(brew --prefix)/*
+  sudo mkdir /usr/local/include
+  sudo chown -R $(whoami) $(brew --prefix)/*
 
   ```
 
 - Install latest Qt 5:
   ```
-  $ brew install qt@5
+  brew install qt@5
   ```
 - Add Qt to your PATH environment variable  
   Intel Mac: add the following line to `~/.bash_profile` (Bash) or `~/.zprofile` (Zsh):
