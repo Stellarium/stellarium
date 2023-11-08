@@ -248,7 +248,7 @@ private:
 
 	PlanetP planet;
 	int identificator;
-	QString englishName, context, nameI18n, origin;
+	QString englishName, context, nameI18n, origin, originI18n;
 	NomenclatureItemType nType; // Type of nomenclature item
 	mutable double latitude;    // degrees
 	mutable double longitude;   // degrees. Declared mutable to allow change in otherwise const methods (for special points)
