@@ -56,6 +56,7 @@ NomenclatureItem::NomenclatureItem(PlanetP nPlanet,
 	, context(nContext)
 	, nameI18n(nName)
 	, origin(nOrigin)
+	, originI18n(nOrigin)
 	, nType(nItemType)
 	, latitude(nLatitude)
 	, longitude(nLongitude)
@@ -206,6 +207,7 @@ QString NomenclatureItem::getEnglishName() const
 void NomenclatureItem::translateName(const StelTranslator& trans)
 {
 	nameI18n = trans.qtranslate(englishName, context);
+	originI18n = trans.qtranslate(origin, "origin");
 }
 
 QString NomenclatureItem::getInfoString(const StelCore* core, const InfoStringGroup& flags) const
@@ -282,7 +284,7 @@ QString NomenclatureItem::getInfoString(const StelCore* core, const InfoStringGr
 			oss << QString("%1: %2°<br/>").arg(q_("Solar altitude"), QString::number(getSolarAltitude(core), 'f', 1));
 
 		if (!origin.isEmpty())
-			oss << StelUtils::wrapText(QString("%1: %2").arg(q_("Origin of name"), qc_(origin, "origin"))) << "<br/>";
+			oss << StelUtils::wrapText(QString("%1: %2").arg(q_("Origin of name"), originI18n)) << "<br/>";
 
 		// DEBUG output. This should help defining valid criteria for selection priority.
 		// oss << QString("Planet angular size (semidiameter!): %1''<br/>").arg(QString::number(planet->getAngularSize(core)*3600.));
