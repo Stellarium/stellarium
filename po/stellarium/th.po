@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2023-11-03 15:28+0700\n"
+"POT-Creation-Date: 2023-11-11 14:27+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Worachate Boonplod, 2023\n"
 "Language-Team: Thai (https://app.transifex.com/stellarium/teams/80998/th/)\n"
@@ -28,10 +28,10 @@ msgstr ""
 #. TRANSLATORS: type of object
 #: src/core/modules/CustomObject.cpp:81 src/core/modules/Asterism.cpp:194
 #: src/core/modules/Constellation.cpp:290
-#: src/core/modules/NomenclatureItem.cpp:230 src/core/modules/Nebula.cpp:249
+#: src/core/modules/NomenclatureItem.cpp:232 src/core/modules/Nebula.cpp:249
 #: src/core/modules/Nebula.cpp:251 src/core/modules/Planet.cpp:592
 #: src/core/modules/Planet.cpp:595 src/core/modules/StarWrapper.cpp:49
-#: src/core/modules/StarWrapper.cpp:290 src/core/modules/StarWrapper.cpp:292
+#: src/core/modules/StarWrapper.cpp:270 src/core/modules/StarWrapper.cpp:272
 #: src/gui/AstroCalcDialog.cpp:901 src/gui/AstroCalcDialog.cpp:2320
 #: src/gui/AstroCalcDialog.cpp:2892 src/gui/AstroCalcDialog.cpp:2924
 #: src/gui/AstroCalcDialog.cpp:3308 src/gui/AstroCalcDialog.cpp:8224
@@ -884,51 +884,51 @@ msgid "<b>Light pollution</b>: %1 %2 (NELM: %3; Bortle class: %4)"
 msgstr ""
 "<b>มลพิษทางแสง</b>: %1 %2 (ขอบเขตโชติมาตรมองเห็น: %3; ชั้นบอร์เทิล: %4)"
 
-#: src/core/modules/NomenclatureItem.cpp:74
+#: src/core/modules/NomenclatureItem.cpp:75
 msgctxt "landform"
 msgid "undocumented landform type"
 msgstr "ชนิดธรณีสัณฐานที่ไม่มีในเอกสาร"
 
-#: src/core/modules/NomenclatureItem.cpp:143
+#: src/core/modules/NomenclatureItem.cpp:144
 msgid "Undocumented landform type."
 msgstr "ชนิดธรณีสัณฐานที่ไม่มีในเอกสาร"
 
 #. TRANSLATORS: Description for landform 'mare' on Mars
-#: src/core/modules/NomenclatureItem.cpp:147
+#: src/core/modules/NomenclatureItem.cpp:148
 msgid "'Sea'; dark albedo areas of no known geological significance."
 msgstr "'ทะเล' พื้นที่มีอัลบีโดมืดเนื่องจากไม่ทราบข้อมูลทางภูมิศาสตร์"
 
 #. TRANSLATORS: Description for landform 'lacus' on Titan
-#: src/core/modules/NomenclatureItem.cpp:152
+#: src/core/modules/NomenclatureItem.cpp:153
 msgid "'Lake' or small, dark plain with discrete, sharp boundaries."
 msgstr "'ทะเลสาบ' หรือที่ราบขนาดเล็กและมืด มีขอบที่ชัดเจน"
 
 #. TRANSLATORS: Description for landform 'mare' on Titan
-#: src/core/modules/NomenclatureItem.cpp:155
+#: src/core/modules/NomenclatureItem.cpp:156
 msgid ""
 "'Sea'; large expanses of dark materials thought to be liquid hydrocarbons"
 msgstr ""
 "'ทะเล'; พื้นที่มืดขนาดกว้างใหญ่ คาดว่าเป็นของเหลวของสารประเภทไฮโดรคาร์บอน"
 
 #. TRANSLATORS: Description for landform 'sinus' on Titan
-#: src/core/modules/NomenclatureItem.cpp:158
+#: src/core/modules/NomenclatureItem.cpp:159
 msgid "'Bay'; bays within seas or lakes of liquid hydrocarbons."
 msgstr "'อ่าว'; บริเวณที่อยู่ในทะเลหรือทะเลสาบของไฮโดรคาร์บอนเหลว"
 
-#: src/core/modules/NomenclatureItem.cpp:232
+#: src/core/modules/NomenclatureItem.cpp:234
 msgid "geologic term"
 msgstr "ศัพท์ทางธรณีวิทยา"
 
-#: src/core/modules/NomenclatureItem.cpp:242
+#: src/core/modules/NomenclatureItem.cpp:244
 msgid "Linear size"
 msgstr "ขนาดเชิงเส้น"
 
-#: src/core/modules/NomenclatureItem.cpp:245 src/core/modules/Planet.cpp:804
+#: src/core/modules/NomenclatureItem.cpp:247 src/core/modules/Planet.cpp:804
 msgid "Diameter"
 msgstr "เส้นผ่านศูนย์กลาง"
 
 #. TRANSLATORS: Unit of measure for distance - kilometers
-#: src/core/modules/NomenclatureItem.cpp:246 src/core/modules/Planet.cpp:672
+#: src/core/modules/NomenclatureItem.cpp:248 src/core/modules/Planet.cpp:672
 #: src/core/modules/Planet.cpp:697 src/core/modules/Planet.cpp:805
 #: src/core/modules/Planet.cpp:1526 src/core/modules/Comet.cpp:190
 #: src/core/modules/Comet.cpp:200 src/gui/StelGuiItems.cpp:894
@@ -942,215 +942,215 @@ msgctxt "distance"
 msgid "km"
 msgstr "กม."
 
-#: src/core/modules/NomenclatureItem.cpp:251
+#: src/core/modules/NomenclatureItem.cpp:253
 msgid "Planetocentric coordinates"
 msgstr "พิกัดศูนย์ดาวเคราะห์"
 
-#: src/core/modules/NomenclatureItem.cpp:251
+#: src/core/modules/NomenclatureItem.cpp:253
 msgid "Planetographic coordinates"
 msgstr "พิกัดบนผิวดาว"
 
-#: src/core/modules/NomenclatureItem.cpp:277
+#: src/core/modules/NomenclatureItem.cpp:279
 msgid "Celestial body"
 msgstr "วัตถุท้องฟ้า"
 
-#: src/core/modules/NomenclatureItem.cpp:280
+#: src/core/modules/NomenclatureItem.cpp:282
 msgid "Landform description"
 msgstr "คำอธิบายธรณีสัณฐาน"
 
-#: src/core/modules/NomenclatureItem.cpp:282
+#: src/core/modules/NomenclatureItem.cpp:284
 msgid "Solar altitude"
 msgstr "มุมเงยของดวงอาทิตย์"
 
-#: src/core/modules/NomenclatureItem.cpp:285
+#: src/core/modules/NomenclatureItem.cpp:287
 msgid "Origin of name"
 msgstr ""
 
-#: src/core/modules/NomenclatureItem.cpp:596
-#: src/core/modules/NomenclatureItem.cpp:597
 #: src/core/modules/NomenclatureItem.cpp:598
 #: src/core/modules/NomenclatureItem.cpp:599
 #: src/core/modules/NomenclatureItem.cpp:600
+#: src/core/modules/NomenclatureItem.cpp:601
+#: src/core/modules/NomenclatureItem.cpp:602
 msgctxt "special point"
 msgid "point"
 msgstr "จุด"
 
 #. TRANSLATORS: Geographic area distinguished by amount of reflected light
-#: src/core/modules/NomenclatureItem.cpp:602
+#: src/core/modules/NomenclatureItem.cpp:604
 msgctxt "landform"
 msgid "albedo feature"
 msgstr "ภูมิลักษณ์ตามอัตราส่วนสะท้อน"
 
 #. TRANSLATORS: Arc-shaped feature
-#: src/core/modules/NomenclatureItem.cpp:604
+#: src/core/modules/NomenclatureItem.cpp:606
 msgctxt "landform"
 msgid "arcus"
 msgstr "อาร์คัส"
 
 #. TRANSLATORS: Radial-patterned features on Venus
-#: src/core/modules/NomenclatureItem.cpp:606
+#: src/core/modules/NomenclatureItem.cpp:608
 msgctxt "landform"
 msgid "astrum"
 msgstr ""
 
 #. TRANSLATORS: Chain of craters
-#: src/core/modules/NomenclatureItem.cpp:608
+#: src/core/modules/NomenclatureItem.cpp:610
 msgctxt "landform"
 msgid "catena"
 msgstr ""
 
 #. TRANSLATORS: Hollows, irregular steep-sided depressions usually in arrays
 #. or clusters
-#: src/core/modules/NomenclatureItem.cpp:610
+#: src/core/modules/NomenclatureItem.cpp:612
 msgctxt "landform"
 msgid "cavus"
 msgstr ""
 
 #. TRANSLATORS: Distinctive area of broken terrain
-#: src/core/modules/NomenclatureItem.cpp:612
+#: src/core/modules/NomenclatureItem.cpp:614
 msgctxt "landform"
 msgid "chaos"
 msgstr ""
 
 #. TRANSLATORS: A deep, elongated, steep-sided depression
-#: src/core/modules/NomenclatureItem.cpp:614
+#: src/core/modules/NomenclatureItem.cpp:616
 msgctxt "landform"
 msgid "chasma"
 msgstr ""
 
 #. TRANSLATORS: Small hills or knobs
-#: src/core/modules/NomenclatureItem.cpp:616
+#: src/core/modules/NomenclatureItem.cpp:618
 msgctxt "landform"
 msgid "collis"
 msgstr ""
 
 #. TRANSLATORS: Ovoid-shaped feature
-#: src/core/modules/NomenclatureItem.cpp:618
+#: src/core/modules/NomenclatureItem.cpp:620
 msgctxt "landform"
 msgid "corona"
 msgstr ""
 
 #. TRANSLATORS: A circular depression
-#: src/core/modules/NomenclatureItem.cpp:620
+#: src/core/modules/NomenclatureItem.cpp:622
 msgctxt "landform"
 msgid "crater"
 msgstr "หลุม"
 
 #. TRANSLATORS: Ridge
-#: src/core/modules/NomenclatureItem.cpp:622
+#: src/core/modules/NomenclatureItem.cpp:624
 msgctxt "landform"
 msgid "dorsum"
 msgstr "สันเขา"
 
 #. TRANSLATORS: Active volcanic centers on Io
-#: src/core/modules/NomenclatureItem.cpp:624
+#: src/core/modules/NomenclatureItem.cpp:626
 msgctxt "landform"
 msgid "eruptive center"
 msgstr ""
 
 #. TRANSLATORS: Bright spot
-#: src/core/modules/NomenclatureItem.cpp:626
+#: src/core/modules/NomenclatureItem.cpp:628
 msgctxt "landform"
 msgid "facula"
 msgstr ""
 
 #. TRANSLATORS: Pancake-like structure, or a row of such structures
-#: src/core/modules/NomenclatureItem.cpp:628
+#: src/core/modules/NomenclatureItem.cpp:630
 msgctxt "landform"
 msgid "farrum"
 msgstr ""
 
 #. TRANSLATORS: A very low curvilinear ridge with a scalloped pattern
-#: src/core/modules/NomenclatureItem.cpp:630
+#: src/core/modules/NomenclatureItem.cpp:632
 msgctxt "landform"
 msgid "flexus"
 msgstr ""
 
 #. TRANSLATORS: Flow terrain
-#: src/core/modules/NomenclatureItem.cpp:632
+#: src/core/modules/NomenclatureItem.cpp:634
 msgctxt "landform"
 msgid "fluctus"
 msgstr "รอยน้ำไหล"
 
 #. TRANSLATORS: Channel on Titan that might carry liquid
-#: src/core/modules/NomenclatureItem.cpp:634
+#: src/core/modules/NomenclatureItem.cpp:636
 msgctxt "landform"
 msgid "flumen"
 msgstr ""
 
 #. TRANSLATORS: Strait, a narrow passage of liquid connecting two larger areas
 #. of liquid
-#: src/core/modules/NomenclatureItem.cpp:636
+#: src/core/modules/NomenclatureItem.cpp:638
 msgctxt "landform"
 msgid "fretum"
 msgstr ""
 
 #. TRANSLATORS: Long, narrow depression
-#: src/core/modules/NomenclatureItem.cpp:638
+#: src/core/modules/NomenclatureItem.cpp:640
 msgctxt "landform"
 msgid "fossa"
 msgstr "ร่องยาวตื้น"
 
 #. TRANSLATORS: Island (islands), an isolated land area (or group of such
 #. areas) surrounded by, or nearly surrounded by, a liquid area (sea or lake)
-#: src/core/modules/NomenclatureItem.cpp:640
+#: src/core/modules/NomenclatureItem.cpp:642
 msgctxt "landform"
 msgid "insula"
 msgstr ""
 
 #. TRANSLATORS: Landslide
-#: src/core/modules/NomenclatureItem.cpp:642
+#: src/core/modules/NomenclatureItem.cpp:644
 msgctxt "landform"
 msgid "labes"
 msgstr ""
 
 #. TRANSLATORS: Complex of intersecting valleys or ridges
-#: src/core/modules/NomenclatureItem.cpp:644
+#: src/core/modules/NomenclatureItem.cpp:646
 msgctxt "landform"
 msgid "labyrinthus"
 msgstr ""
 
 #. TRANSLATORS: Irregularly shaped depression on Titan having the appearance
 #. of a dry lake bed
-#: src/core/modules/NomenclatureItem.cpp:646
+#: src/core/modules/NomenclatureItem.cpp:648
 msgctxt "landform"
 msgid "lacuna"
 msgstr ""
 
 #. TRANSLATORS: "Lake" or small plain; on Titan, a "lake" or small, dark plain
 #. with discrete, sharp boundaries
-#: src/core/modules/NomenclatureItem.cpp:648
+#: src/core/modules/NomenclatureItem.cpp:650
 msgctxt "landform"
 msgid "lacus"
 msgstr "ทะเลสาบ"
 
 #. TRANSLATORS: Cryptic ringed feature
-#: src/core/modules/NomenclatureItem.cpp:650
+#: src/core/modules/NomenclatureItem.cpp:652
 msgctxt "landform"
 msgid "large ringed feature"
 msgstr "ภูมิลักษณ์รูปวงแหวนขนาดใหญ่"
 
 #. TRANSLATORS: Small dark spots on Europa
-#: src/core/modules/NomenclatureItem.cpp:652
+#: src/core/modules/NomenclatureItem.cpp:654
 msgctxt "landform"
 msgid "lenticula"
 msgstr ""
 
 #. TRANSLATORS: A dark or bright elongate marking, may be curved or straight
-#: src/core/modules/NomenclatureItem.cpp:654
+#: src/core/modules/NomenclatureItem.cpp:656
 msgctxt "landform"
 msgid "linea"
 msgstr ""
 
 #. TRANSLATORS: Extension of plateau having rounded lobate or tongue-like
 #. boundaries
-#: src/core/modules/NomenclatureItem.cpp:656
+#: src/core/modules/NomenclatureItem.cpp:658
 msgctxt "landform"
 msgid "lingula"
 msgstr ""
 
 #. TRANSLATORS: Dark spot, may be irregular
-#: src/core/modules/NomenclatureItem.cpp:658
+#: src/core/modules/NomenclatureItem.cpp:660
 msgctxt "landform"
 msgid "macula"
 msgstr ""
@@ -1159,462 +1159,462 @@ msgstr ""
 #. generally of large extent; on Mars, dark albedo areas of no known
 #. geological significance; on Titan, large expanses of dark materials thought
 #. to be liquid hydrocarbons
-#: src/core/modules/NomenclatureItem.cpp:660
+#: src/core/modules/NomenclatureItem.cpp:662
 msgctxt "landform"
 msgid "mare"
 msgstr "ทะเล"
 
 #. TRANSLATORS: A flat-topped prominence with cliff-like edges
-#: src/core/modules/NomenclatureItem.cpp:662
+#: src/core/modules/NomenclatureItem.cpp:664
 msgctxt "landform"
 msgid "mensa"
 msgstr ""
 
 #. TRANSLATORS: Mountain
-#: src/core/modules/NomenclatureItem.cpp:664
+#: src/core/modules/NomenclatureItem.cpp:666
 msgctxt "landform"
 msgid "mons"
 msgstr "ภูเขา"
 
 #. TRANSLATORS: A very large dark area on the Moon
-#: src/core/modules/NomenclatureItem.cpp:666
+#: src/core/modules/NomenclatureItem.cpp:668
 msgctxt "landform"
 msgid "oceanus"
 msgstr "มหาสมุทร"
 
 #. TRANSLATORS: "Swamp"; small plain
-#: src/core/modules/NomenclatureItem.cpp:668
+#: src/core/modules/NomenclatureItem.cpp:670
 msgctxt "landform"
 msgid "palus"
 msgstr "บึง"
 
 #. TRANSLATORS: An irregular crater, or a complex one with scalloped edges
-#: src/core/modules/NomenclatureItem.cpp:670
+#: src/core/modules/NomenclatureItem.cpp:672
 msgctxt "landform"
 msgid "patera"
 msgstr ""
 
 #. TRANSLATORS: Low plain
-#: src/core/modules/NomenclatureItem.cpp:672
+#: src/core/modules/NomenclatureItem.cpp:674
 msgctxt "landform"
 msgid "planitia"
 msgstr "ที่ราบต่ำ"
 
 #. TRANSLATORS: Plateau or high plain
-#: src/core/modules/NomenclatureItem.cpp:674
+#: src/core/modules/NomenclatureItem.cpp:676
 msgctxt "landform"
 msgid "planum"
 msgstr "ที่ราบสูง"
 
 #. TRANSLATORS: Cryo-volcanic features on Triton
-#: src/core/modules/NomenclatureItem.cpp:676
+#: src/core/modules/NomenclatureItem.cpp:678
 msgctxt "landform"
 msgid "plume"
 msgstr ""
 
 #. TRANSLATORS: "Cape"; headland promontoria
-#: src/core/modules/NomenclatureItem.cpp:678
+#: src/core/modules/NomenclatureItem.cpp:680
 msgctxt "landform"
 msgid "promontorium"
 msgstr ""
 
 #. TRANSLATORS: A large area marked by reflectivity or color distinctions from
 #. adjacent areas, or a broad geographic region
-#: src/core/modules/NomenclatureItem.cpp:680
+#: src/core/modules/NomenclatureItem.cpp:682
 msgctxt "landform"
 msgid "regio"
 msgstr ""
 
 #. TRANSLATORS: Reticular (netlike) pattern on Venus
-#: src/core/modules/NomenclatureItem.cpp:682
+#: src/core/modules/NomenclatureItem.cpp:684
 msgctxt "landform"
 msgid "reticulum"
 msgstr ""
 
 #. TRANSLATORS: Fissure
-#: src/core/modules/NomenclatureItem.cpp:684
+#: src/core/modules/NomenclatureItem.cpp:686
 msgctxt "landform"
 msgid "rima"
 msgstr "รอยแยก"
 
 #. TRANSLATORS: Scarp
-#: src/core/modules/NomenclatureItem.cpp:686
+#: src/core/modules/NomenclatureItem.cpp:688
 msgctxt "landform"
 msgid "rupes"
 msgstr "ผาชัน"
 
 #. TRANSLATORS: A feature that shares the name of an associated feature.
-#: src/core/modules/NomenclatureItem.cpp:688
+#: src/core/modules/NomenclatureItem.cpp:690
 msgctxt "landform"
 msgid "satellite feature"
 msgstr "ภูมิลักษณ์รายรอบ"
 
 #. TRANSLATORS: Boulder or rock
-#: src/core/modules/NomenclatureItem.cpp:690
+#: src/core/modules/NomenclatureItem.cpp:692
 msgctxt "landform"
 msgid "saxum"
 msgstr ""
 
 #. TRANSLATORS: Lobate or irregular scarp
-#: src/core/modules/NomenclatureItem.cpp:692
+#: src/core/modules/NomenclatureItem.cpp:694
 msgctxt "landform"
 msgid "scopulus"
 msgstr ""
 
 #. TRANSLATORS: Sinuous feature with segments of positive and negative relief
 #. along its length
-#: src/core/modules/NomenclatureItem.cpp:694
+#: src/core/modules/NomenclatureItem.cpp:696
 msgctxt "landform"
 msgid "serpens"
 msgstr ""
 
 #. TRANSLATORS: Subparallel furrows and ridges
-#: src/core/modules/NomenclatureItem.cpp:696
+#: src/core/modules/NomenclatureItem.cpp:698
 msgctxt "landform"
 msgid "sulcus"
 msgstr ""
 
 #. TRANSLATORS: "Bay"; small plain; on Titan, bays within seas or lakes of
 #. liquid hydrocarbons
-#: src/core/modules/NomenclatureItem.cpp:698
+#: src/core/modules/NomenclatureItem.cpp:700
 msgctxt "landform"
 msgid "sinus"
 msgstr "อ่าว"
 
 #. TRANSLATORS: Extensive land mass
-#: src/core/modules/NomenclatureItem.cpp:700
+#: src/core/modules/NomenclatureItem.cpp:702
 msgctxt "landform"
 msgid "terra"
 msgstr ""
 
 #. TRANSLATORS: Tile-like, polygonal terrain
-#: src/core/modules/NomenclatureItem.cpp:702
+#: src/core/modules/NomenclatureItem.cpp:704
 msgctxt "landform"
 msgid "tessera"
 msgstr ""
 
 #. TRANSLATORS: Small domical mountain or hill
-#: src/core/modules/NomenclatureItem.cpp:704
+#: src/core/modules/NomenclatureItem.cpp:706
 msgctxt "landform"
 msgid "tholus"
 msgstr ""
 
 #. TRANSLATORS: Dunes
-#: src/core/modules/NomenclatureItem.cpp:706
+#: src/core/modules/NomenclatureItem.cpp:708
 msgctxt "landform"
 msgid "unda"
 msgstr "เนินทราย"
 
 #. TRANSLATORS: Valley
-#: src/core/modules/NomenclatureItem.cpp:708
+#: src/core/modules/NomenclatureItem.cpp:710
 msgctxt "landform"
 msgid "vallis"
 msgstr "หุบเขา"
 
 #. TRANSLATORS: Extensive plain
-#: src/core/modules/NomenclatureItem.cpp:710
+#: src/core/modules/NomenclatureItem.cpp:712
 msgctxt "landform"
 msgid "vastitas"
 msgstr ""
 
 #. TRANSLATORS: A streak or stripe of color
-#: src/core/modules/NomenclatureItem.cpp:712
+#: src/core/modules/NomenclatureItem.cpp:714
 msgctxt "landform"
 msgid "virga"
 msgstr ""
 
 #. TRANSLATORS: Lunar features at or near Apollo landing sites
-#: src/core/modules/NomenclatureItem.cpp:714
+#: src/core/modules/NomenclatureItem.cpp:716
 msgctxt "landform"
 msgid "landing site name"
 msgstr "ชื่อสถานที่ลงจอด"
 
 #. TRANSLATORS: Description for landform 'albedo feature'
-#: src/core/modules/NomenclatureItem.cpp:718
+#: src/core/modules/NomenclatureItem.cpp:720
 msgid "Geographic area distinguished by amount of reflected light."
 msgstr "พื้นที่ทางภูมิศาสตร์ซึ่งจำแนกตามปริมาณแสงสะท้อน"
 
 #. TRANSLATORS: Description for landform 'arcus'
-#: src/core/modules/NomenclatureItem.cpp:720
+#: src/core/modules/NomenclatureItem.cpp:722
 msgid "Arc-shaped feature."
 msgstr "ภูมิลักษณ์รูปโค้ง"
 
 #. TRANSLATORS: Description for landform 'astrum'
-#: src/core/modules/NomenclatureItem.cpp:722
+#: src/core/modules/NomenclatureItem.cpp:724
 msgid "Radial-patterned feature."
 msgstr "ภูมิลักษณ์ซึ่งมีรูปแบบของการแผ่รัศมีเป็นวง"
 
 #. TRANSLATORS: Description for landform 'catena'
-#: src/core/modules/NomenclatureItem.cpp:724
+#: src/core/modules/NomenclatureItem.cpp:726
 msgid "Chain of craters."
 msgstr "หลุมซึ่งเรียงต่อกันเป็นขบวน"
 
 #. TRANSLATORS: Description for landform 'cavus'
-#: src/core/modules/NomenclatureItem.cpp:726
+#: src/core/modules/NomenclatureItem.cpp:728
 msgid ""
 "Hollows, irregular steep-sided depressions usually in arrays or clusters."
 msgstr ""
 
 #. TRANSLATORS: Description for landform 'chaos'
-#: src/core/modules/NomenclatureItem.cpp:728
+#: src/core/modules/NomenclatureItem.cpp:730
 msgid "Distinctive area of broken terrain."
 msgstr ""
 
 #. TRANSLATORS: Description for landform 'chasma'
-#: src/core/modules/NomenclatureItem.cpp:730
+#: src/core/modules/NomenclatureItem.cpp:732
 msgid "A deep, elongated, steep-sided depression."
 msgstr "เหวลึก ยาว และแคบ"
 
 #. TRANSLATORS: Description for landform 'collis'
-#: src/core/modules/NomenclatureItem.cpp:732
+#: src/core/modules/NomenclatureItem.cpp:734
 msgid "Small hills or knobs."
 msgstr "เนินขนาดเล็กหรือเนินเขาหัวกลม"
 
 #. TRANSLATORS: Description for landform 'corona'
-#: src/core/modules/NomenclatureItem.cpp:734
+#: src/core/modules/NomenclatureItem.cpp:736
 msgid "Ovoid-shaped feature."
 msgstr "ภูมิลักษณ์รูปไข่"
 
 #. TRANSLATORS: Description for landform 'crater'
-#: src/core/modules/NomenclatureItem.cpp:736
+#: src/core/modules/NomenclatureItem.cpp:738
 msgid "A circular depression."
 msgstr "บริเวณยุบตัวทรงกลม"
 
 #. TRANSLATORS: Description for landform 'dorsum'
-#: src/core/modules/NomenclatureItem.cpp:738
+#: src/core/modules/NomenclatureItem.cpp:740
 msgid "Ridge."
 msgstr "สันเขา"
 
 #. TRANSLATORS: Description for landform 'eruptive center'
-#: src/core/modules/NomenclatureItem.cpp:740
+#: src/core/modules/NomenclatureItem.cpp:742
 msgid "Active volcanic center."
 msgstr "ศูนย์กลางภูเขาไฟมีพลัง"
 
 #. TRANSLATORS: Description for landform 'facula'
-#: src/core/modules/NomenclatureItem.cpp:742
+#: src/core/modules/NomenclatureItem.cpp:744
 msgid "Bright spot."
 msgstr "จุดสว่าง"
 
 #. TRANSLATORS: Description for landform 'farrum'
-#: src/core/modules/NomenclatureItem.cpp:744
+#: src/core/modules/NomenclatureItem.cpp:746
 msgid "Pancake-like structure, or a row of such structures."
 msgstr ""
 
 #. TRANSLATORS: Description for landform 'flexus'
-#: src/core/modules/NomenclatureItem.cpp:746
+#: src/core/modules/NomenclatureItem.cpp:748
 msgid "A very low curvilinear ridge with a scalloped pattern."
 msgstr ""
 
 #. TRANSLATORS: Description for landform 'fluctus'
-#: src/core/modules/NomenclatureItem.cpp:748
+#: src/core/modules/NomenclatureItem.cpp:750
 msgid "Flow terrain."
 msgstr ""
 
 #. TRANSLATORS: Description for landform 'flumen'
-#: src/core/modules/NomenclatureItem.cpp:750
+#: src/core/modules/NomenclatureItem.cpp:752
 msgid "Channel, that might carry liquid."
 msgstr "ร่องซึ่งอาจมีของเหลว"
 
 #. TRANSLATORS: Description for landform 'fretum'
-#: src/core/modules/NomenclatureItem.cpp:752
+#: src/core/modules/NomenclatureItem.cpp:754
 msgid ""
 "Strait, a narrow passage of liquid connecting two larger areas of liquid."
 msgstr "ช่องแคบ ทางผ่านแคบ ๆ ที่เชื่อมพื้นที่ขนาดใหญ่ที่มีของเหลวสองพื้นที่"
 
 #. TRANSLATORS: Description for landform 'fossa'
-#: src/core/modules/NomenclatureItem.cpp:754
+#: src/core/modules/NomenclatureItem.cpp:756
 msgid "Long, narrow depression."
 msgstr "ร่องยาวตื้น"
 
 #. TRANSLATORS: Description for landform 'insula'
-#: src/core/modules/NomenclatureItem.cpp:756
+#: src/core/modules/NomenclatureItem.cpp:758
 msgid ""
 "Island, an isolated land area surrounded by, or nearly surrounded by, a "
 "liquid area (sea or lake)."
 msgstr "เกาะ พื้นที่ซึ่งล้อมรอบด้วยพื้นที่ที่มีของเหลว (ทะเลหรือบึง)"
 
 #. TRANSLATORS: Description for landform 'labes'
-#: src/core/modules/NomenclatureItem.cpp:758
+#: src/core/modules/NomenclatureItem.cpp:760
 msgid "Landslide."
 msgstr "แผ่นดินถล่ม"
 
 #. TRANSLATORS: Description for landform 'labyrinthus'
-#: src/core/modules/NomenclatureItem.cpp:760
+#: src/core/modules/NomenclatureItem.cpp:762
 msgid "Complex of intersecting valleys or ridges."
 msgstr ""
 
 #. TRANSLATORS: Description for landform 'lacuna'
-#: src/core/modules/NomenclatureItem.cpp:762
+#: src/core/modules/NomenclatureItem.cpp:764
 msgid ""
 "Irregularly shaped depression, having the appearance of a dry lake bed."
 msgstr ""
 
 #. TRANSLATORS: Description for landform 'lacus'
-#: src/core/modules/NomenclatureItem.cpp:764
+#: src/core/modules/NomenclatureItem.cpp:766
 msgid "'Lake' or small plain."
 msgstr "'ทะเลสาบ' หรือที่ราบขนาดเล็ก"
 
 #. TRANSLATORS: Description for landform 'large ringed feature'
-#: src/core/modules/NomenclatureItem.cpp:766
+#: src/core/modules/NomenclatureItem.cpp:768
 msgid "Cryptic ringed feature."
 msgstr "ภูมิลักษณ์รูปวงแหวนที่คลุมเครือ"
 
 #. TRANSLATORS: Description for landform 'lenticula'
-#: src/core/modules/NomenclatureItem.cpp:768
+#: src/core/modules/NomenclatureItem.cpp:770
 msgid "Small dark spot."
 msgstr "จุดมืดขนาดเล็ก"
 
 #. TRANSLATORS: Description for landform 'linea'
-#: src/core/modules/NomenclatureItem.cpp:770
+#: src/core/modules/NomenclatureItem.cpp:772
 msgid "A dark or bright elongate marking, may be curved or straight."
 msgstr "รอยมืดหรือสว่างเป็นแนวยาว อาจเป็นส่วนโค้งหรือเส้นตรง"
 
 #. TRANSLATORS: Description for landform 'lingula'
-#: src/core/modules/NomenclatureItem.cpp:772
+#: src/core/modules/NomenclatureItem.cpp:774
 msgid "Extension of plateau having rounded lobate or tongue-like boundaries."
 msgstr ""
 
 #. TRANSLATORS: Description for landform 'macula'
-#: src/core/modules/NomenclatureItem.cpp:774
+#: src/core/modules/NomenclatureItem.cpp:776
 msgid "Dark spot, may be irregular"
 msgstr "จุดมืด อาจมีรูปร่างไม่แน่นอน"
 
 #. TRANSLATORS: Description for landform 'mare' on the Moon
-#: src/core/modules/NomenclatureItem.cpp:776
+#: src/core/modules/NomenclatureItem.cpp:778
 msgid "'Sea'; low albedo, relatively smooth plain, generally of large extent."
 msgstr ""
 
 #. TRANSLATORS: Description for landform 'mensa'
-#: src/core/modules/NomenclatureItem.cpp:778
+#: src/core/modules/NomenclatureItem.cpp:780
 msgid "A flat-topped prominence with cliff-like edges."
 msgstr ""
 
 #. TRANSLATORS: Description for landform 'mons'
-#: src/core/modules/NomenclatureItem.cpp:780
+#: src/core/modules/NomenclatureItem.cpp:782
 msgid "Mountain."
 msgstr "ภูเขา"
 
 #. TRANSLATORS: Description for landform 'oceanus'
-#: src/core/modules/NomenclatureItem.cpp:782
+#: src/core/modules/NomenclatureItem.cpp:784
 msgid "A very large dark area."
 msgstr "พื้นที่มืดขนาดใหญ่มาก"
 
 #. TRANSLATORS: Description for landform 'palus'
-#: src/core/modules/NomenclatureItem.cpp:784
+#: src/core/modules/NomenclatureItem.cpp:786
 msgid "'Swamp'; small plain."
 msgstr "'บึง'; ที่ราบขนาดเล็ก"
 
 #. TRANSLATORS: Description for landform 'patera'
-#: src/core/modules/NomenclatureItem.cpp:786
+#: src/core/modules/NomenclatureItem.cpp:788
 msgid "An irregular crater, or a complex one with scalloped edges."
 msgstr "หลุมรูปร่างไม่แน่นอน หรือมีลักษณะซับซ้อนโดยขอบเป็นรอย"
 
 #. TRANSLATORS: Description for landform 'planitia'
-#: src/core/modules/NomenclatureItem.cpp:788
+#: src/core/modules/NomenclatureItem.cpp:790
 msgid "Low plain."
 msgstr "ที่ราบต่ำ"
 
 #. TRANSLATORS: Description for landform 'planum'
-#: src/core/modules/NomenclatureItem.cpp:790
+#: src/core/modules/NomenclatureItem.cpp:792
 msgid "Plateau or high plain."
 msgstr "ที่ราบสูง"
 
 #. TRANSLATORS: Description for landform 'plume'
-#: src/core/modules/NomenclatureItem.cpp:792
+#: src/core/modules/NomenclatureItem.cpp:794
 msgid "Cryo-volcanic feature."
 msgstr "ภูมิลักษณ์แบบภูเขาพ่นน้ำแข็ง"
 
 #. TRANSLATORS: Description for landform 'promontorium'
-#: src/core/modules/NomenclatureItem.cpp:794
+#: src/core/modules/NomenclatureItem.cpp:796
 msgid "'Cape'; headland promontoria."
 msgstr "'แหลม'; ส่วนที่ยื่นออกไป"
 
 #. TRANSLATORS: Description for landform 'regio'
-#: src/core/modules/NomenclatureItem.cpp:796
+#: src/core/modules/NomenclatureItem.cpp:798
 msgid ""
 "A large area marked by reflectivity or color distinctions from adjacent "
 "areas, or a broad geographic region."
 msgstr ""
 
 #. TRANSLATORS: Description for landform 'reticulum'
-#: src/core/modules/NomenclatureItem.cpp:798
+#: src/core/modules/NomenclatureItem.cpp:800
 msgid "Reticular (netlike) pattern."
 msgstr "รูปแบบคล้ายตาข่าย"
 
 #. TRANSLATORS: Description for landform 'rima'
-#: src/core/modules/NomenclatureItem.cpp:800
+#: src/core/modules/NomenclatureItem.cpp:802
 msgid "Fissure."
 msgstr "รอยแยก"
 
 #. TRANSLATORS: Description for landform 'rupes'
-#: src/core/modules/NomenclatureItem.cpp:802
+#: src/core/modules/NomenclatureItem.cpp:804
 msgid "Scarp."
 msgstr "ผาชัน"
 
 #. TRANSLATORS: Description for landform 'satellite feature'
-#: src/core/modules/NomenclatureItem.cpp:804
+#: src/core/modules/NomenclatureItem.cpp:806
 msgid "A feature that shares the name of an associated feature."
 msgstr "ภูมิลักษณ์ซึ่งมีชื่อเดียวกับภูมิลักษณ์ที่เกี่ยวข้อง"
 
 #. TRANSLATORS: Description for landform 'saxum'
-#: src/core/modules/NomenclatureItem.cpp:806
+#: src/core/modules/NomenclatureItem.cpp:808
 msgid "Boulder or rock."
 msgstr "ก้อนหินมนใหญ่หรือก้อนหินทั่วไป"
 
 #. TRANSLATORS: Description for landform 'scopulus'
-#: src/core/modules/NomenclatureItem.cpp:808
+#: src/core/modules/NomenclatureItem.cpp:810
 msgid "Lobate or irregular scarp."
 msgstr ""
 
 #. TRANSLATORS: Description for landform 'serpens'
-#: src/core/modules/NomenclatureItem.cpp:810
+#: src/core/modules/NomenclatureItem.cpp:812
 msgid ""
 "Sinuous feature with segments of positive and negative relief along its "
 "length."
 msgstr ""
 
 #. TRANSLATORS: Description for landform 'sinus'
-#: src/core/modules/NomenclatureItem.cpp:812
+#: src/core/modules/NomenclatureItem.cpp:814
 msgid "'Bay'; small plain."
 msgstr "'อ่าว'; ที่ราบขนาดเล็ก"
 
 #. TRANSLATORS: Description for landform 'sulcus'
-#: src/core/modules/NomenclatureItem.cpp:814
+#: src/core/modules/NomenclatureItem.cpp:816
 msgid "Subparallel furrows and ridges."
 msgstr ""
 
 #. TRANSLATORS: Description for landform 'terra'
-#: src/core/modules/NomenclatureItem.cpp:816
+#: src/core/modules/NomenclatureItem.cpp:818
 msgid "Extensive land mass."
 msgstr "แผ่นดินขนาดกว้างใหญ่"
 
 #. TRANSLATORS: Description for landform 'tessera'
-#: src/core/modules/NomenclatureItem.cpp:818
+#: src/core/modules/NomenclatureItem.cpp:820
 msgid "Tile-like, polygonal terrain."
 msgstr "ภูมิประเทศหลายเหลี่ยมคล้ายกระเบื้อง"
 
 #. TRANSLATORS: Description for landform 'tholus'
-#: src/core/modules/NomenclatureItem.cpp:820
+#: src/core/modules/NomenclatureItem.cpp:822
 msgid "Small domical mountain or hill."
 msgstr "ภูเขาหรือเนินรูปโดมขนาดเล็ก"
 
 #. TRANSLATORS: Description for landform 'unda'
-#: src/core/modules/NomenclatureItem.cpp:822
+#: src/core/modules/NomenclatureItem.cpp:824
 msgid "Dunes."
 msgstr "เนินทราย"
 
 #. TRANSLATORS: Description for landform 'vallis'
-#: src/core/modules/NomenclatureItem.cpp:824
+#: src/core/modules/NomenclatureItem.cpp:826
 msgid "Valley."
 msgstr "หุบเขา"
 
 #. TRANSLATORS: Description for landform 'vastitas'
-#: src/core/modules/NomenclatureItem.cpp:826
+#: src/core/modules/NomenclatureItem.cpp:828
 msgid "Extensive plain."
 msgstr "ที่ราบกว้างใหญ่"
 
 #. TRANSLATORS: Description for landform 'virga'
-#: src/core/modules/NomenclatureItem.cpp:828
+#: src/core/modules/NomenclatureItem.cpp:830
 msgid "A streak or stripe of color."
 msgstr "ทางหรือเส้นที่มีสี"
 
@@ -1831,18 +1831,18 @@ msgid "Airmasses"
 msgstr "มวลอากาศ"
 
 #: src/core/modules/Nebula.cpp:236 src/core/modules/Planet.cpp:568
-#: src/core/modules/StarWrapper.cpp:276
+#: src/core/modules/StarWrapper.cpp:256
 msgid "Additional names: "
 msgstr "ชื่ออื่น ๆ: "
 
 #: src/core/modules/Nebula.cpp:242 src/core/modules/Planet.cpp:575
-#: src/core/modules/StarWrapper.cpp:282
+#: src/core/modules/StarWrapper.cpp:262
 msgid "Additional catalog numbers: "
 msgstr "เลขตามบัญชีอื่น ๆ: "
 
 #: src/core/modules/Nebula.cpp:260 src/core/modules/Planet.cpp:815
 #: src/core/modules/MinorPlanet.cpp:186 src/core/modules/StarWrapper.cpp:54
-#: src/core/modules/StarWrapper.cpp:306 plugins/Quasars/src/Quasar.cpp:134
+#: src/core/modules/StarWrapper.cpp:286 plugins/Quasars/src/Quasar.cpp:134
 #: plugins/MissingStars/src/MissingStar.cpp:143
 msgid "Color Index (B-V)"
 msgstr "ดัชนีสี (B-V)"
@@ -1887,7 +1887,7 @@ msgstr "มุมของทิศทางการวางตัว"
 #. TRANSLATORS: Unit of measure for distance - light years
 #. TRANSLATORS: Unit of measure for distance - Light Years
 #: src/core/modules/Nebula.cpp:345 src/core/modules/Nebula.cpp:358
-#: src/core/modules/StarWrapper.cpp:336
+#: src/core/modules/StarWrapper.cpp:316
 #: plugins/Supernovae/src/Supernova.cpp:159 plugins/Novae/src/Nova.cpp:164
 #: plugins/Pulsars/src/Pulsar.cpp:268 plugins/Exoplanets/src/Exoplanet.cpp:334
 #: plugins/MissingStars/src/MissingStar.cpp:153
@@ -1897,8 +1897,8 @@ msgstr "ปีแสง"
 
 #. TRANSLATORS: distance
 #: src/core/modules/Nebula.cpp:346 src/core/modules/Nebula.cpp:392
-#: src/core/modules/Planet.cpp:707 src/core/modules/StarWrapper.cpp:341
-#: src/core/modules/StarWrapper.cpp:343 src/gui/AstroCalcDialog.cpp:936
+#: src/core/modules/Planet.cpp:707 src/core/modules/StarWrapper.cpp:321
+#: src/core/modules/StarWrapper.cpp:323 src/gui/AstroCalcDialog.cpp:936
 #: src/gui/AstroCalcChart.cpp:92 src/gui/AstroCalcChart.cpp:102
 #: src/gui/AstroCalcChart.cpp:427 src/gui/AstroCalcChart.cpp:453
 #: src/ui_configurationDialog.h:1791 plugins/Supernovae/src/Supernova.cpp:160
@@ -1930,13 +1930,13 @@ msgstr "ล้านปีแสง"
 msgid "Redshift"
 msgstr "การเลื่อนไปทางแดง"
 
-#: src/core/modules/Nebula.cpp:417 src/core/modules/StarWrapper.cpp:370
+#: src/core/modules/Nebula.cpp:417 src/core/modules/StarWrapper.cpp:350
 #: plugins/MissingStars/src/MissingStar.cpp:180
 msgid "Parallax"
 msgstr "แพรัลแลกซ์"
 
 #. TRANSLATORS: Unit of measure for annual parallax - milliarcseconds
-#: src/core/modules/Nebula.cpp:417 src/core/modules/StarWrapper.cpp:375
+#: src/core/modules/Nebula.cpp:417 src/core/modules/StarWrapper.cpp:355
 #: plugins/Pulsars/src/Pulsar.cpp:257
 #: plugins/MissingStars/src/MissingStar.cpp:185
 msgctxt "parallax"
@@ -2326,7 +2326,7 @@ msgid "interstellar object"
 msgstr "วัตถุระหว่างดาว"
 
 #: src/core/modules/Planet.cpp:546 src/core/modules/Comet.cpp:181
-#: src/core/modules/StarWrapper.cpp:300 plugins/Quasars/src/Quasar.cpp:131
+#: src/core/modules/StarWrapper.cpp:280 plugins/Quasars/src/Quasar.cpp:131
 #: plugins/MissingStars/src/MissingStar.cpp:138
 msgid "Absolute Magnitude"
 msgstr "โชติมาตรสัมบูรณ์"
@@ -2361,7 +2361,7 @@ msgid "Hourly motion"
 msgstr "การเคลื่อนที่รายชั่วโมง"
 
 #: src/core/modules/Planet.cpp:658 src/core/modules/Planet.cpp:1385
-#: src/core/modules/Planet.cpp:1394 src/core/modules/StarWrapper.cpp:358
+#: src/core/modules/Planet.cpp:1394 src/core/modules/StarWrapper.cpp:338
 #: plugins/Pulsars/src/Pulsar.cpp:204
 #: plugins/MissingStars/src/MissingStar.cpp:172
 msgctxt "into the direction of"
@@ -2459,7 +2459,7 @@ msgid "Angular distance"
 msgstr "ระยะห่างเชิงมุม"
 
 #. TRANSLATORS: Unit of measure for period - days
-#: src/core/modules/Planet.cpp:911 src/core/modules/StarWrapper.cpp:382
+#: src/core/modules/Planet.cpp:911 src/core/modules/StarWrapper.cpp:362
 #: src/gui/AstroCalcDialog.cpp:9082
 msgctxt "duration"
 msgid "days"
@@ -2753,21 +2753,21 @@ msgstr "ระบบดาวคู่อุปราคา"
 msgid "variable star"
 msgstr "ดาวแปรแสง"
 
-#: src/core/modules/StarWrapper.cpp:324
+#: src/core/modules/StarWrapper.cpp:304
 #: plugins/Satellites/src/ui_satellitesDialog.h:1268
 msgid "Magnitude range"
 msgstr "พิสัยโชติมาตร"
 
-#: src/core/modules/StarWrapper.cpp:324
+#: src/core/modules/StarWrapper.cpp:304
 msgid "Photometric system"
 msgstr "ระบบการวัดแสง"
 
-#: src/core/modules/StarWrapper.cpp:355 plugins/Pulsars/src/Pulsar.cpp:202
+#: src/core/modules/StarWrapper.cpp:335 plugins/Pulsars/src/Pulsar.cpp:202
 #: plugins/MissingStars/src/MissingStar.cpp:170
 msgid "Proper motion"
 msgstr "การเคลื่อนที่เฉพาะ"
 
-#: src/core/modules/StarWrapper.cpp:357 src/core/modules/StarWrapper.cpp:363
+#: src/core/modules/StarWrapper.cpp:337 src/core/modules/StarWrapper.cpp:343
 #: plugins/Pulsars/src/Pulsar.cpp:203 plugins/Pulsars/src/Pulsar.cpp:205
 #: plugins/MissingStars/src/MissingStar.cpp:171
 #: plugins/MissingStars/src/MissingStar.cpp:173
@@ -2775,45 +2775,45 @@ msgctxt "milliarc second per year"
 msgid "mas/yr"
 msgstr "มิลลิพิลิปดา/ปี"
 
-#: src/core/modules/StarWrapper.cpp:360 plugins/Pulsars/src/Pulsar.cpp:205
+#: src/core/modules/StarWrapper.cpp:340 plugins/Pulsars/src/Pulsar.cpp:205
 #: plugins/MissingStars/src/MissingStar.cpp:173
 msgid "Proper motions by axes"
 msgstr "การเคลื่อนที่เฉพาะตามแกน"
 
-#: src/core/modules/StarWrapper.cpp:379 plugins/Quasars/src/Quasar.cpp:142
+#: src/core/modules/StarWrapper.cpp:359 plugins/Quasars/src/Quasar.cpp:142
 #: plugins/Exoplanets/src/Exoplanet.cpp:329
 #: plugins/MissingStars/src/MissingStar.cpp:189
 msgid "Spectral Type"
 msgstr "ชนิดสเปกตรัม"
 
-#: src/core/modules/StarWrapper.cpp:382
+#: src/core/modules/StarWrapper.cpp:362
 #: plugins/Satellites/src/ui_satellitesFilterDialog.h:262
 #: plugins/Exoplanets/src/Exoplanet.cpp:361
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:177
 msgid "Period"
 msgstr "คาบ"
 
-#: src/core/modules/StarWrapper.cpp:390
+#: src/core/modules/StarWrapper.cpp:370
 msgid "Next maximum light"
 msgstr "สว่างสูงสุดครั้งถัดไป"
 
-#: src/core/modules/StarWrapper.cpp:392
+#: src/core/modules/StarWrapper.cpp:372
 msgid "Next minimum light"
 msgstr "สว่างต่ำสุดครั้งถัดไป"
 
-#: src/core/modules/StarWrapper.cpp:399
+#: src/core/modules/StarWrapper.cpp:379
 msgid "Rising time"
 msgstr "เวลาขึ้น"
 
-#: src/core/modules/StarWrapper.cpp:401
+#: src/core/modules/StarWrapper.cpp:381
 msgid "Duration of eclipse"
 msgstr "ระยะเวลาของอุปราคา"
 
-#: src/core/modules/StarWrapper.cpp:410
+#: src/core/modules/StarWrapper.cpp:390
 msgid "Position angle"
 msgstr "มุมตำแหน่ง"
 
-#: src/core/modules/StarWrapper.cpp:417 src/core/modules/StarWrapper.cpp:422
+#: src/core/modules/StarWrapper.cpp:397 src/core/modules/StarWrapper.cpp:402
 #: src/gui/AstroCalcDialog.cpp:6452
 msgid "Separation"
 msgstr "ระยะห่าง"
@@ -3111,7 +3111,7 @@ msgstr ""
 msgid "Loading plugin"
 msgstr "กำลังโหลดโปรแกรมเสริม"
 
-#: src/core/StelCore.cpp:294 src/gui/StelGui.cpp:225
+#: src/core/StelCore.cpp:294 src/gui/StelGui.cpp:252
 #: src/gui/AstroCalcDialog.cpp:1739 src/gui/AstroCalcDialog.cpp:2318
 #: src/gui/AstroCalcDialog.cpp:2342 src/gui/AstroCalcDialog.cpp:2890
 #: src/gui/AstroCalcDialog.cpp:2919 src/gui/AstroCalcDialog.cpp:6445
@@ -3261,108 +3261,132 @@ msgid "Add 1 Gaussian year"
 msgstr "เพิ่ม 1 ปีเกาส์"
 
 #: src/core/StelCore.cpp:332
-msgid "Add 1 calendric month"
-msgstr "เพิ่ม 1 เดือนปฏิทิน"
+msgid "Add 1 calendar month"
+msgstr ""
 
 #: src/core/StelCore.cpp:333
+msgid "Add 1 calendar year"
+msgstr ""
+
+#: src/core/StelCore.cpp:334
+msgid "Add 10 calendar years"
+msgstr ""
+
+#: src/core/StelCore.cpp:335
+msgid "Add 100 calendar years"
+msgstr ""
+
+#: src/core/StelCore.cpp:336
 msgid "Subtract 1 sidereal day"
 msgstr "ลด 1 วันดาราคติ"
 
-#: src/core/StelCore.cpp:334
+#: src/core/StelCore.cpp:337
 msgid "Subtract 7 sidereal days"
 msgstr "ลด 7 วันดาราคติ"
 
-#: src/core/StelCore.cpp:335
+#: src/core/StelCore.cpp:338
 msgid "Subtract 1 sidereal year"
 msgstr "ลด 1 ปีดาราคติ"
 
-#: src/core/StelCore.cpp:336
+#: src/core/StelCore.cpp:339
 msgid "Subtract 100 sidereal years"
 msgstr "ลด 100 ปีดาราคติ"
 
-#: src/core/StelCore.cpp:337
+#: src/core/StelCore.cpp:340
 msgid "Subtract 1 synodic month"
 msgstr "ลด 1 เดือนดิถี"
 
-#: src/core/StelCore.cpp:338
+#: src/core/StelCore.cpp:341
 msgid "Subtract 1 saros"
 msgstr "ลด 1 ซารอส"
 
-#: src/core/StelCore.cpp:339
+#: src/core/StelCore.cpp:342
 msgid "Subtract 1 draconic month"
 msgstr "ลด 1 เดือนราหู"
 
-#: src/core/StelCore.cpp:340
+#: src/core/StelCore.cpp:343
 msgid "Subtract 1 draconic year"
 msgstr "ลด 1 ปีราหู"
 
-#: src/core/StelCore.cpp:341
+#: src/core/StelCore.cpp:344
 msgid "Subtract 1 anomalistic month"
 msgstr "ลด 1 เดือนจุดใกล้"
 
-#: src/core/StelCore.cpp:342
+#: src/core/StelCore.cpp:345
 msgid "Subtract 1 anomalistic year"
 msgstr "ลด 1 ปีจุดใกล้"
 
-#: src/core/StelCore.cpp:343
+#: src/core/StelCore.cpp:346
 msgid "Subtract 100 anomalistic years"
 msgstr "ลด 100  ปีจุดใกล้"
 
-#: src/core/StelCore.cpp:344
+#: src/core/StelCore.cpp:347
 msgid "Subtract 1 mean tropical month"
 msgstr "ลด 1 เดือนฤดูกาลเฉลี่ย"
 
-#: src/core/StelCore.cpp:345
+#: src/core/StelCore.cpp:348
 msgid "Subtract 1 mean tropical year"
 msgstr "ลด 1 ปีฤดูกาลเฉลี่ย"
 
-#: src/core/StelCore.cpp:346
+#: src/core/StelCore.cpp:349
 msgid "Subtract 100 mean tropical years"
 msgstr "ลด 100 ปีฤดูกาลเฉลี่ย"
 
-#: src/core/StelCore.cpp:347
+#: src/core/StelCore.cpp:350
 msgid "Subtract 1 tropical year"
 msgstr "ลด 1 ปีฤดูกาล"
 
-#: src/core/StelCore.cpp:348
+#: src/core/StelCore.cpp:351
 msgid "Subtract 1 Julian year"
 msgstr "ลด 1 ปีจูเลียน"
 
-#: src/core/StelCore.cpp:349
+#: src/core/StelCore.cpp:352
 msgid "Subtract 1 Julian century"
 msgstr "ลด 1 ศตวรรษจูเลียน"
 
-#: src/core/StelCore.cpp:350
+#: src/core/StelCore.cpp:353
 msgid "Subtract 1 Gaussian year"
 msgstr "ลด 1 ปีเกาส์"
 
-#: src/core/StelCore.cpp:351
-msgid "Subtract 1 calendric month"
-msgstr "ลด 1 เดือนปฏิทิน"
+#: src/core/StelCore.cpp:354
+msgid "Subtract 1 calendar month"
+msgstr ""
 
-#: src/core/StelCore.cpp:353
+#: src/core/StelCore.cpp:355
+msgid "Subtract 1 calendar year"
+msgstr ""
+
+#: src/core/StelCore.cpp:356
+msgid "Subtract 10 calendar years"
+msgstr ""
+
+#: src/core/StelCore.cpp:357
+msgid "Subtract 100 calendar years"
+msgstr ""
+
+#: src/core/StelCore.cpp:359
 msgid "Set home planet to selected planet"
 msgstr "ย้ายไปอยู่บนดาวเคราะห์ที่เลือก"
 
-#: src/core/StelCore.cpp:354
+#: src/core/StelCore.cpp:360
 msgid "Go to home"
 msgstr "ไปที่ตำแหน่งเริ่มต้น"
 
-#: src/core/StelCore.cpp:356
+#: src/core/StelCore.cpp:362
 msgid "Flip scene horizontally"
 msgstr "กลับภาพในแนวนอน"
 
-#: src/core/StelCore.cpp:357
+#: src/core/StelCore.cpp:363
 msgid "Flip scene vertically"
 msgstr "กลับภาพในแนวตั้ง"
 
-#: src/core/StelCore.cpp:2469
+#: src/core/StelCore.cpp:2535
 msgid "Correction is disabled. Use only if you know what you are doing!"
 msgstr ""
 "การตรวจแก้ถูกปิดการใช้งาน "
 "ใช้ตัวเลือกนี้ก็ต่อเมื่อคุณทราบดีว่ากำลังทำอะไรอยู่!"
 
-#: src/core/StelCore.cpp:2472
+#: src/core/StelCore.cpp:2538
 #, qt-format
 msgid ""
 "This historical formula was obtained by C. Schoch in 1931 and was used by G."
@@ -3373,7 +3397,7 @@ msgstr ""
 "<em>Einstein's Theory of Relativity Confirmed by Ancient Solar Eclipses</em>"
 " (%1) สำหรับข้อมูลเพิ่มเติม ให้ดู %2ที่นี่%3"
 
-#: src/core/StelCore.cpp:2475
+#: src/core/StelCore.cpp:2541
 #, qt-format
 msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
@@ -3382,7 +3406,7 @@ msgstr ""
 "สมการเอมพิริคัลนี้เผยแพร่โดย G. M. Clemence ในบทความ <em>On the system of "
 "astronomical constants</em> (%1)"
 
-#: src/core/StelCore.cpp:2478
+#: src/core/StelCore.cpp:2544
 #, qt-format
 msgid ""
 "This formula is based on a study of post-1650 observations of the Sun, the "
@@ -3394,7 +3418,7 @@ msgstr ""
 " โดย Spencer Jones (%1) ซึ่ง Jean Meeus นำมาใช้ในหนังสือ <em>Astronomical "
 "Formulae for Calculators</em> และนำมาใช้ในโปรแกรมคอมพิวเตอร์ SunTracker Pro"
 
-#: src/core/StelCore.cpp:2482
+#: src/core/StelCore.cpp:2548
 msgid ""
 "This is a slightly modified version of the IAU (1952) formula which was "
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar"
@@ -3404,7 +3428,7 @@ msgstr ""
 "<em>Astronomical Ephemeris</em> และ <em>Canon of Solar Eclipses</em> โดย "
 "Mucke & Meeus (ค.ศ. 1983)"
 
-#: src/core/StelCore.cpp:2486
+#: src/core/StelCore.cpp:2552
 msgid ""
 "The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon"
 " and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The "
@@ -3416,7 +3440,7 @@ msgstr ""
 "ความสัมพันธ์เดียวกันยังนำไปดัดแปลงใช้ในตารางการร่วมแนวของ Goldstine (ค.ศ. "
 "1973)"
 
-#: src/core/StelCore.cpp:2490
+#: src/core/StelCore.cpp:2556
 #, qt-format
 msgid ""
 "This equation was published by P. M. Muller and F. R. Stephenson in the "
@@ -3427,7 +3451,7 @@ msgstr ""
 "accelerations of the earth and moon from early astronomical "
 "observations</em> (%1)"
 
-#: src/core/StelCore.cpp:2493
+#: src/core/StelCore.cpp:2559
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
@@ -3436,7 +3460,7 @@ msgstr ""
 "สมการนี้แผยแพร่โดย F. R. Stephenson ในบทความ <em>Pre-Telescopic Astronomical"
 " Observations</em> (%1)"
 
-#: src/core/StelCore.cpp:2496
+#: src/core/StelCore.cpp:2562
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation (outdated and superseded by Schmadel & "
@@ -3449,7 +3473,7 @@ msgstr ""
 " for the correction delta T E.T.-U.T. in the period 1800-1975</em> (%1) "
 "จากข้อมูลของ Brouwer (1952)"
 
-#: src/core/StelCore.cpp:2499
+#: src/core/StelCore.cpp:2565
 msgid ""
 "This algorithm was adopted in P. Bretagnon & L. Simon's <em>Planetary "
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
@@ -3458,7 +3482,7 @@ msgstr ""
 "สูตรนี้ใช้ใน <em>Planetary Programs and Tables from -4000 to +2800</em> "
 "(ค.ศ. 1986) โดย P. Bretagnon & L. Simon และในโปรแกรม RedShift"
 
-#: src/core/StelCore.cpp:2502
+#: src/core/StelCore.cpp:2568
 #, qt-format
 msgid ""
 "This formula was published by F. R. Stephenson and L. V. Morrison in the "
@@ -3468,7 +3492,7 @@ msgstr ""
 "สูตรนี้เผยแพร่โดย F. R. Stephenson และ L. V. Morrison ในบทความ <em>Long-term"
 " changes in the rotation of the earth - 700 B.C. to A.D. 1980</em> (%1)"
 
-#: src/core/StelCore.cpp:2505
+#: src/core/StelCore.cpp:2571
 #, qt-format
 msgid ""
 "This algorithm was published by F. R. Stephenson and M. A. Houlden in the "
@@ -3479,7 +3503,7 @@ msgstr ""
 "ในหนังสือ<em>Atlas of Historical Eclipse Maps</em> (%1). ใช้ในโปรแกรม Guide "
 "7"
 
-#: src/core/StelCore.cpp:2508
+#: src/core/StelCore.cpp:2574
 msgid ""
 "This algorithm was given by F. Espenak in his <em>Fifty Year Canon of Solar "
 "Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar "
@@ -3489,7 +3513,7 @@ msgstr ""
 "1986-2035</em> (ค.ศ. 1987) และ <em>Fifty Year Canon of Lunar Eclipses: "
 "1986-2035</em> (ค.ศ. 1989)"
 
-#: src/core/StelCore.cpp:2511
+#: src/core/StelCore.cpp:2577
 #, qt-format
 msgid ""
 "This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 "
@@ -3498,7 +3522,7 @@ msgstr ""
 "สูตรนี้ใช้โดย K.M. Borkowski (%1) จากการวิเคราะห์บันทึกสุริยุปราคา 31 ครั้ง "
 "ระหว่าง 2137 ปี ก่อนคริสต์ศักราช ถึง ค.ศ. 1715"
 
-#: src/core/StelCore.cpp:2514
+#: src/core/StelCore.cpp:2580
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation was published by L. D. Schmadel and G. "
@@ -3510,7 +3534,7 @@ msgstr ""
 "<em>Empirical Transformations from U.T. to E.T. for the Period "
 "1800-1988</em> (%1) จากข้อมูลของ Stephenson & Morrison (1984)"
 
-#: src/core/StelCore.cpp:2517
+#: src/core/StelCore.cpp:2583
 msgid ""
 "This formula was adopted by M. Chapront-Touze & J. Chapront in the shortened"
 " version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and "
@@ -3520,7 +3544,7 @@ msgstr ""
 "ในทฤษฎีการเคลื่อนที่ของดวงจันทร์ ELP 2000-85 รุ่นย่อ และใน <em>Lunar Tables "
 "and Programs from 4000 B.C. to A.D. 8000</em> (ค.ศ. 1991)"
 
-#: src/core/StelCore.cpp:2520
+#: src/core/StelCore.cpp:2586
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson and L. V. Morrison in the "
@@ -3530,7 +3554,7 @@ msgstr ""
 "สูตรนี้เผยแพร่โดย F. R. Stephenson และ L. V. Morrison ในบทความ <em>Long-Term"
 " Fluctuations in the Earth's Rotation: 700 BC to AD 1990</em> (%1)"
 
-#: src/core/StelCore.cpp:2523
+#: src/core/StelCore.cpp:2589
 #, qt-format
 msgid ""
 "F. R. Stephenson published this formula in his book <em>Historical Eclipses "
@@ -3539,7 +3563,7 @@ msgstr ""
 "F. R. Stephenson เผยแพร่สูตรนี้ในหนังสือ <em>Historical Eclipses and Earth's"
 " Rotation</em> (%1)"
 
-#: src/core/StelCore.cpp:2526
+#: src/core/StelCore.cpp:2592
 msgid ""
 "From J. Meeus, <em>Astronomical Algorithms</em> (2nd ed., 1998), and widely "
 "used. Table for 1620..2000, and includes a variant of Chapront, Chapront-"
@@ -3549,7 +3573,7 @@ msgstr ""
 "(2nd ed., 1998) ซึ่งใช้กันแพร่หลาย และ Chapront, Chapront-Touze & Francou "
 "(1997) สำหรับวันที่อยู่นอกเหนือจากช่วงปี 1620 - 2000"
 
-#: src/core/StelCore.cpp:2529
+#: src/core/StelCore.cpp:2595
 #, qt-format
 msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
@@ -3558,7 +3582,7 @@ msgstr ""
 "JPL Solar System Dynamics Group ของ NASA Jet Propulsion Laboratory "
 "ใช้สูตรนี้บนเว็บไซต์ %1JPL Horizons%2"
 
-#: src/core/StelCore.cpp:2532
+#: src/core/StelCore.cpp:2598
 #, qt-format
 msgid ""
 "This polynome was published by J. Meeus and L. Simons in article "
@@ -3567,7 +3591,7 @@ msgstr ""
 "สมการพหุนามที่เผยแพร่โดย J. Meeus และ L. Simons ในบทความ <em>Polynomial "
 "approximations to Delta T, 1620-2000 AD</em> (%1)"
 
-#: src/core/StelCore.cpp:2535
+#: src/core/StelCore.cpp:2601
 msgid ""
 "The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the "
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits"
@@ -3577,7 +3601,7 @@ msgstr ""
 " 4 ของ O. Montenbruck และ T. Pfleger ใช้สมการพหุนามกำลัง 3 "
 "ที่ทำให้เข้ากับข้อมูลในอดีตเมื่อไม่นานมานี้"
 
-#: src/core/StelCore.cpp:2538
+#: src/core/StelCore.cpp:2604
 msgid ""
 "E. M. Reingold & N. Dershowitz present this polynomial data fit in "
 "<em>Calendrical Calculations</em> (4th ed. 2018) and in their "
@@ -3588,7 +3612,7 @@ msgstr ""
 "Calculations</em> (4th ed. 2018) และ <em>Calendrical Tabulations</em> (2002)"
 " มีรากฐานจาก <em>Astronomical Algorithms</em> (1991) ของ Jean Meeus"
 
-#: src/core/StelCore.cpp:2541
+#: src/core/StelCore.cpp:2607
 #, qt-format
 msgid ""
 "This important solution was published by L. V. Morrison and F. R. Stephenson"
@@ -3599,7 +3623,7 @@ msgstr ""
 "<em>Historical values of the Earth's clock error %1T and the calculation of "
 "eclipses</em> (%2) และบทเพิ่มเติมใน (%3)"
 
-#: src/core/StelCore.cpp:2544
+#: src/core/StelCore.cpp:2610
 #, qt-format
 msgid ""
 "From the Length of Day (LOD; as determined by Stephenson & Morrison (%2)), "
@@ -3613,7 +3637,7 @@ msgstr ""
 "โดยมีสมมุติฐานว่าอาจมีคาบตามที่ Stephenson (%2) อธิบายไว้ "
 "ดู%3ที่นี่%4สำหรับข้อมูลเพิ่มเติม"
 
-#: src/core/StelCore.cpp:2547
+#: src/core/StelCore.cpp:2613
 #, qt-format
 msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
@@ -3624,7 +3648,7 @@ msgid ""
 "solar, lunar and planetary ephemeris program SOLEX."
 msgstr ""
 
-#: src/core/StelCore.cpp:2550
+#: src/core/StelCore.cpp:2616
 msgid ""
 "This solution is modified from F. Espenak and J. Meeus, based on Morrison & "
 "Stephenson (2004) and a polynomial fit through tabulated values for "
@@ -3632,15 +3656,15 @@ msgid ""
 "predictions by IERS Rapid Service/Prediction Center."
 msgstr ""
 
-#: src/core/StelCore.cpp:2550
+#: src/core/StelCore.cpp:2616
 msgid "Used by default."
 msgstr "ใช้โดยปริยาย"
 
-#: src/core/StelCore.cpp:2553
+#: src/core/StelCore.cpp:2619
 msgid "PATCHED VERSION WITHOUT ADDITIONAL LUNAR ACCELERATION."
 msgstr "รุ่นที่ไม่มีความเร่งของดวงจันทร์เพิ่มเติม"
 
-#: src/core/StelCore.cpp:2553
+#: src/core/StelCore.cpp:2619
 msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
 "(2004) and a polynomial fit through tabulated values for 1600-2000."
@@ -3649,7 +3673,7 @@ msgstr ""
 "Stephenson (2004) และปรับสมการพหุนามให้เข้ากับค่าจริงในตารางสำหรับ ค.ศ. "
 "1600-2000"
 
-#: src/core/StelCore.cpp:2556
+#: src/core/StelCore.cpp:2622
 #, qt-format
 msgid ""
 "This solution by B. Banjevic, based on Stephenson & Morrison (1984), was "
@@ -3660,7 +3684,7 @@ msgstr ""
 "1984) เผยแพร่ในบทความ <em>Ancient eclipses and dating the fall of "
 "Babylon</em> (%1)"
 
-#: src/core/StelCore.cpp:2559
+#: src/core/StelCore.cpp:2625
 #, qt-format
 msgid ""
 "This solution by S. Islam, M. Sadiq and M. S. Qureshi, based on Meeus & "
@@ -3671,7 +3695,7 @@ msgstr ""
 "และ Simons (ค.ศ. 2000) เผยแพร่ในบทความ <em>Error Minimization of Polynomial "
 "Approximation of DeltaT</em> (%1) และปรับปรุงโดย Sana Islam ใน ค.ศ. 2013"
 
-#: src/core/StelCore.cpp:2562
+#: src/core/StelCore.cpp:2628
 #, qt-format
 msgid ""
 "This polynomial approximation with 0.6 seconds of accuracy by M. Khalid, "
@@ -3682,7 +3706,7 @@ msgstr ""
 "Sultana และ Faheem Zaidi ตีพิมพ์ใน <em>Delta T: Polynomial Approximation of "
 "Time Period 1620-2013</em> (%1)"
 
-#: src/core/StelCore.cpp:2565
+#: src/core/StelCore.cpp:2631
 #, qt-format
 msgid ""
 "This solution by F. R. Stephenson, L. V. Morrison and C. Y. Hohenkerk (2016)"
@@ -3701,7 +3725,7 @@ msgstr ""
 "(ซึ่งเป็นสมการเสมือนพหุนามที่เข้ากับค่าที่วัดได้) "
 "เป็นค่าประมาณจากเส้นโค้งพาราโบลา"
 
-#: src/core/StelCore.cpp:2568
+#: src/core/StelCore.cpp:2634
 #, qt-format
 msgid ""
 "This solution by G. Henriksson was published in the article <em>The "
@@ -3712,7 +3736,7 @@ msgstr ""
 " Moon and the Universe - the Mass of the Graviton</em> (%1) "
 "และมีรากฐานจากสูตรของ C. Schoch (1931)"
 
-#: src/core/StelCore.cpp:2571
+#: src/core/StelCore.cpp:2637
 #, qt-format
 msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined"
@@ -3720,7 +3744,7 @@ msgid ""
 msgstr ""
 "นี่คือสูตรกำลังสองสำหรับการคำนวณ %1T โดยมีสัมประสิทธ์ตามที่ผู้ใช้กำหนด"
 
-#: src/core/StelCore.cpp:2574 src/core/SimbadSearcher.cpp:173
+#: src/core/StelCore.cpp:2640 src/core/SimbadSearcher.cpp:173
 #: src/gui/ObsListDialog.cpp:84 src/gui/ObsListDialog.cpp:935
 #: src/gui/ObsListDialog.cpp:956 src/gui/ObsListDialog.cpp:1002
 #: src/gui/ObsListDialog.cpp:1018 src/gui/ObsListDialog.cpp:1059
@@ -3731,7 +3755,7 @@ msgstr ""
 msgid "Error"
 msgstr "เกิดข้อผิดพลาด"
 
-#: src/core/StelCore.cpp:2582
+#: src/core/StelCore.cpp:2648
 #, qt-format
 msgid ""
 "The solution's value of %1 for %2 (secular acceleration of the Moon) "
@@ -3740,16 +3764,16 @@ msgstr ""
 "ค่าของ %1 สำหรับ %2 (ความเร่งเชิงก้าวหน้าของดวงจันทร์) "
 "จำเป็นต้องมีการดัดแปลง อ่านคู่มือผู้ใช้สำหรับรายละเอียด"
 
-#: src/core/StelCore.cpp:2626
+#: src/core/StelCore.cpp:2692
 msgid "with zero values outside this range"
 msgstr "มีค่าเป็นศูนย์เมื่ออยู่นอกช่วงเวลานี้"
 
-#: src/core/StelCore.cpp:2629
+#: src/core/StelCore.cpp:2695
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr ""
 "ด้วยความแม่นยำปรกติที่ 1 วินาที และมีค่าเป็นศูนย์เมื่ออยู่นอกช่วงเวลานี้"
 
-#: src/core/StelCore.cpp:2632
+#: src/core/StelCore.cpp:2698
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and values for "
 "the limit years outside this range"
@@ -3757,16 +3781,16 @@ msgstr ""
 "ด้วยความคลาดเคลื่อนเฉลี่ยน้อยกว่า 1 วินาที, และไม่เกิน 1.9 วินาที "
 "สำหรับปีที่จำกัดนอกเหนือจากช่วงที่ระบุนี้"
 
-#: src/core/StelCore.cpp:2639
+#: src/core/StelCore.cpp:2705
 msgid "with values for the limit years outside this range"
 msgstr "ด้วยค่าสำหรับปีที่จำกัดนอกเหนือจากช่วงที่ระบุนี้"
 
-#: src/core/StelCore.cpp:2649
+#: src/core/StelCore.cpp:2715
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
 msgstr "ช่วงที่ใช้งานได้: ระหว่าง ค.ศ. %1 ถึง %2, %3"
 
-#: src/core/StelCore.cpp:2651
+#: src/core/StelCore.cpp:2717
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
 msgstr "ช่วงที่ใช้งานได้: ระหว่าง ค.ศ. %1 ถึง %2"
@@ -4087,7 +4111,7 @@ msgid "Lunar Az./Alt."
 msgstr "มุมทิศ/มุมเงยดวงจันทร์"
 
 #: src/core/StelObjectMgr.cpp:53 src/core/StelMovementMgr.cpp:194
-#: src/gui/StelGui.cpp:220 src/StelMainView.cpp:946 src/StelMainView.cpp:947
+#: src/gui/StelGui.cpp:247 src/StelMainView.cpp:946 src/StelMainView.cpp:947
 msgid "Miscellaneous"
 msgstr "จิปาถะ"
 
@@ -5529,116 +5553,116 @@ msgid ""
 "citation format."
 msgstr "หรือคุณอาจ {ดาวน์โหลดแฟ้ม BibTeX ของงานวิจัยนี้} สำหรับการอ้างอิง"
 
-#: src/gui/StelGui.cpp:219
+#: src/gui/StelGui.cpp:246
 msgid "Windows"
 msgstr "หน้าต่าง"
 
-#: src/gui/StelGui.cpp:221 src/ui_configurationDialog.h:1689
+#: src/gui/StelGui.cpp:248 src/ui_configurationDialog.h:1689
 #: src/ui_configurationDialog.h:1751
 msgid "Selected object information"
 msgstr "ข้อมูลวัตถุที่เลือก"
 
-#: src/gui/StelGui.cpp:222 plugins/RemoteSync/src/ui_remoteSyncDialog.h:436
+#: src/gui/StelGui.cpp:249 plugins/RemoteSync/src/ui_remoteSyncDialog.h:436
 msgid "Quit"
 msgstr "ออก"
 
-#: src/gui/StelGui.cpp:226
+#: src/gui/StelGui.cpp:253
 msgid "Speed up the script execution rate"
 msgstr "เพิ่มอัตราการประมวลผลสคริปต์"
 
-#: src/gui/StelGui.cpp:227
+#: src/gui/StelGui.cpp:254
 msgid "Slow down the script execution rate"
 msgstr "ลดอัตราการประมวลผลสคริปต์"
 
-#: src/gui/StelGui.cpp:228
+#: src/gui/StelGui.cpp:255
 msgid "Set the normal script execution rate"
 msgstr "ตั้งอัตราการประมวลผลสคริปต์เป็นอัตราปกติ"
 
-#: src/gui/StelGui.cpp:229
+#: src/gui/StelGui.cpp:256
 msgid "Stop script execution"
 msgstr "หยุดสคริปต์"
 
-#: src/gui/StelGui.cpp:231
+#: src/gui/StelGui.cpp:258
 msgid "Pause script execution"
 msgstr "หยุดสคริปต์ชั่วคราว"
 
-#: src/gui/StelGui.cpp:232
+#: src/gui/StelGui.cpp:259
 msgid "Resume script execution"
 msgstr "ให้สคริปต์ทำงานต่อ"
 
-#: src/gui/StelGui.cpp:236
+#: src/gui/StelGui.cpp:263
 msgid "Script console window"
 msgstr "หน้าต่างรายการสคริปต์"
 
-#: src/gui/StelGui.cpp:239
+#: src/gui/StelGui.cpp:266
 msgid "Help window"
 msgstr "หน้าต่างวิธีใช้"
 
-#: src/gui/StelGui.cpp:240
+#: src/gui/StelGui.cpp:267
 msgid "Configuration window"
 msgstr "หน้าต่างการปรับแต่ง"
 
-#: src/gui/StelGui.cpp:241 src/ui_searchDialogGui.h:758
+#: src/gui/StelGui.cpp:268 src/ui_searchDialogGui.h:758
 msgid "Search window"
 msgstr "หน้าต่างการค้นหา"
 
-#: src/gui/StelGui.cpp:242
+#: src/gui/StelGui.cpp:269
 msgid "Sky and viewing options window"
 msgstr "หน้าต่างท้องฟ้าและการมองเห็น"
 
-#: src/gui/StelGui.cpp:243
+#: src/gui/StelGui.cpp:270
 msgid "Date/time window"
 msgstr "หน้าต่างวันที่/เวลา"
 
-#: src/gui/StelGui.cpp:244
+#: src/gui/StelGui.cpp:271
 msgid "Location window"
 msgstr "หน้าต่างที่ตั้ง"
 
-#: src/gui/StelGui.cpp:245
+#: src/gui/StelGui.cpp:272
 msgid "Shortcuts window"
 msgstr "หน้าต่างปุ่มลัด"
 
-#: src/gui/StelGui.cpp:246
+#: src/gui/StelGui.cpp:273
 msgid "Astronomical calculations window"
 msgstr "หน้าต่างการคำนวณทางดาราศาสตร์"
 
-#: src/gui/StelGui.cpp:247
+#: src/gui/StelGui.cpp:274
 msgid "Observing list"
 msgstr "บัญชีรายชื่อเพื่อการสังเกตการณ์"
 
-#: src/gui/StelGui.cpp:248
+#: src/gui/StelGui.cpp:275
 msgid "Copy selected object information to clipboard"
 msgstr "คัดลอกข้อมูลของวัตถุที่เลือกไปยังคลิปบอร์ด"
 
-#: src/gui/StelGui.cpp:254
+#: src/gui/StelGui.cpp:281
 msgid "Auto hide horizontal button bar"
 msgstr "ซ่อนแถบแนวนอนโดยอัตโนมัติ"
 
-#: src/gui/StelGui.cpp:255
+#: src/gui/StelGui.cpp:282
 msgid "Auto hide vertical button bar"
 msgstr "ซ่อนแถบแนวตั้งโดยอัตโนมัติ"
 
-#: src/gui/StelGui.cpp:258
+#: src/gui/StelGui.cpp:285
 msgid "Toggle visibility of GUI"
 msgstr "สลับการแสดงส่วนต่อประสานกราฟิกกับผู้ใช้"
 
-#: src/gui/StelGui.cpp:266
+#: src/gui/StelGui.cpp:293
 msgid "All available info"
 msgstr "ข้อมูลทั้งหมดที่มี"
 
-#: src/gui/StelGui.cpp:267
+#: src/gui/StelGui.cpp:294
 msgid "Default info"
 msgstr "ข้อมูลปริยาย"
 
-#: src/gui/StelGui.cpp:268
+#: src/gui/StelGui.cpp:295
 msgid "Short info"
 msgstr "ข้อมูลโดยย่อ"
 
-#: src/gui/StelGui.cpp:269
+#: src/gui/StelGui.cpp:296
 msgid "None info"
 msgstr "ไม่แสดงข้อมูล"
 
-#: src/gui/StelGui.cpp:270
+#: src/gui/StelGui.cpp:297
 msgid "Custom info"
 msgstr "ข้อมูลที่กำหนดเอง"
 
