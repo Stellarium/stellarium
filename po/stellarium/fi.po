@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2023-11-03 15:28+0700\n"
+"POT-Creation-Date: 2023-11-11 14:27+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Ilpo Kantonen, 2023\n"
 "Language-Team: Finnish (https://app.transifex.com/stellarium/teams/80998/fi/)\n"
@@ -30,10 +30,10 @@ msgstr ""
 #. TRANSLATORS: type of object
 #: src/core/modules/CustomObject.cpp:81 src/core/modules/Asterism.cpp:194
 #: src/core/modules/Constellation.cpp:290
-#: src/core/modules/NomenclatureItem.cpp:230 src/core/modules/Nebula.cpp:249
+#: src/core/modules/NomenclatureItem.cpp:232 src/core/modules/Nebula.cpp:249
 #: src/core/modules/Nebula.cpp:251 src/core/modules/Planet.cpp:592
 #: src/core/modules/Planet.cpp:595 src/core/modules/StarWrapper.cpp:49
-#: src/core/modules/StarWrapper.cpp:290 src/core/modules/StarWrapper.cpp:292
+#: src/core/modules/StarWrapper.cpp:270 src/core/modules/StarWrapper.cpp:272
 #: src/gui/AstroCalcDialog.cpp:901 src/gui/AstroCalcDialog.cpp:2320
 #: src/gui/AstroCalcDialog.cpp:2892 src/gui/AstroCalcDialog.cpp:2924
 #: src/gui/AstroCalcDialog.cpp:3308 src/gui/AstroCalcDialog.cpp:8224
@@ -884,28 +884,28 @@ msgstr "mcd/m<sup>2</sup>"
 msgid "<b>Light pollution</b>: %1 %2 (NELM: %3; Bortle class: %4)"
 msgstr "<b>Valosaaste</b>: %1 %2 (NELM: %3; Bortle-luokka: %4)"
 
-#: src/core/modules/NomenclatureItem.cpp:74
+#: src/core/modules/NomenclatureItem.cpp:75
 msgctxt "landform"
 msgid "undocumented landform type"
 msgstr "dokumentoimaton pinnanmuototyyppi"
 
-#: src/core/modules/NomenclatureItem.cpp:143
+#: src/core/modules/NomenclatureItem.cpp:144
 msgid "Undocumented landform type."
 msgstr "Dokumentoimaton pinnanmuototyyppi."
 
 #. TRANSLATORS: Description for landform 'mare' on Mars
-#: src/core/modules/NomenclatureItem.cpp:147
+#: src/core/modules/NomenclatureItem.cpp:148
 msgid "'Sea'; dark albedo areas of no known geological significance."
 msgstr "'Meri'; tumma albedoalue ilman tunnettua geologista selitystä."
 
 #. TRANSLATORS: Description for landform 'lacus' on Titan
-#: src/core/modules/NomenclatureItem.cpp:152
+#: src/core/modules/NomenclatureItem.cpp:153
 msgid "'Lake' or small, dark plain with discrete, sharp boundaries."
 msgstr ""
 "'Järvi' tai pieni tumma tasanko, jolla selkeästi erottuvat terävät reunat. "
 
 #. TRANSLATORS: Description for landform 'mare' on Titan
-#: src/core/modules/NomenclatureItem.cpp:155
+#: src/core/modules/NomenclatureItem.cpp:156
 msgid ""
 "'Sea'; large expanses of dark materials thought to be liquid hydrocarbons"
 msgstr ""
@@ -913,24 +913,24 @@ msgstr ""
 "hiilivetyä"
 
 #. TRANSLATORS: Description for landform 'sinus' on Titan
-#: src/core/modules/NomenclatureItem.cpp:158
+#: src/core/modules/NomenclatureItem.cpp:159
 msgid "'Bay'; bays within seas or lakes of liquid hydrocarbons."
 msgstr "'Lahti', hiilivedystä muodostuneiden merien tai järvien lahti."
 
-#: src/core/modules/NomenclatureItem.cpp:232
+#: src/core/modules/NomenclatureItem.cpp:234
 msgid "geologic term"
 msgstr "geologinen termi"
 
-#: src/core/modules/NomenclatureItem.cpp:242
+#: src/core/modules/NomenclatureItem.cpp:244
 msgid "Linear size"
 msgstr "Todellinen koko"
 
-#: src/core/modules/NomenclatureItem.cpp:245 src/core/modules/Planet.cpp:804
+#: src/core/modules/NomenclatureItem.cpp:247 src/core/modules/Planet.cpp:804
 msgid "Diameter"
 msgstr "Halkaisija"
 
 #. TRANSLATORS: Unit of measure for distance - kilometers
-#: src/core/modules/NomenclatureItem.cpp:246 src/core/modules/Planet.cpp:672
+#: src/core/modules/NomenclatureItem.cpp:248 src/core/modules/Planet.cpp:672
 #: src/core/modules/Planet.cpp:697 src/core/modules/Planet.cpp:805
 #: src/core/modules/Planet.cpp:1526 src/core/modules/Comet.cpp:190
 #: src/core/modules/Comet.cpp:200 src/gui/StelGuiItems.cpp:894
@@ -944,215 +944,215 @@ msgctxt "distance"
 msgid "km"
 msgstr "km"
 
-#: src/core/modules/NomenclatureItem.cpp:251
+#: src/core/modules/NomenclatureItem.cpp:253
 msgid "Planetocentric coordinates"
 msgstr "Geodeettiset koordinaatit"
 
-#: src/core/modules/NomenclatureItem.cpp:251
+#: src/core/modules/NomenclatureItem.cpp:253
 msgid "Planetographic coordinates"
 msgstr "Geograafiset koordinaatit"
 
-#: src/core/modules/NomenclatureItem.cpp:277
+#: src/core/modules/NomenclatureItem.cpp:279
 msgid "Celestial body"
 msgstr "Taivaankappale"
 
-#: src/core/modules/NomenclatureItem.cpp:280
+#: src/core/modules/NomenclatureItem.cpp:282
 msgid "Landform description"
 msgstr "Pinnanmuodon kuvaus"
 
-#: src/core/modules/NomenclatureItem.cpp:282
+#: src/core/modules/NomenclatureItem.cpp:284
 msgid "Solar altitude"
 msgstr "Auringon korkeus"
 
-#: src/core/modules/NomenclatureItem.cpp:285
+#: src/core/modules/NomenclatureItem.cpp:287
 msgid "Origin of name"
 msgstr "Nimen alkuperä"
 
-#: src/core/modules/NomenclatureItem.cpp:596
-#: src/core/modules/NomenclatureItem.cpp:597
 #: src/core/modules/NomenclatureItem.cpp:598
 #: src/core/modules/NomenclatureItem.cpp:599
 #: src/core/modules/NomenclatureItem.cpp:600
+#: src/core/modules/NomenclatureItem.cpp:601
+#: src/core/modules/NomenclatureItem.cpp:602
 msgctxt "special point"
 msgid "point"
 msgstr "piste"
 
 #. TRANSLATORS: Geographic area distinguished by amount of reflected light
-#: src/core/modules/NomenclatureItem.cpp:602
+#: src/core/modules/NomenclatureItem.cpp:604
 msgctxt "landform"
 msgid "albedo feature"
 msgstr "albedokohde"
 
 #. TRANSLATORS: Arc-shaped feature
-#: src/core/modules/NomenclatureItem.cpp:604
+#: src/core/modules/NomenclatureItem.cpp:606
 msgctxt "landform"
 msgid "arcus"
 msgstr "kaari"
 
 #. TRANSLATORS: Radial-patterned features on Venus
-#: src/core/modules/NomenclatureItem.cpp:606
+#: src/core/modules/NomenclatureItem.cpp:608
 msgctxt "landform"
 msgid "astrum"
 msgstr "astrum"
 
 #. TRANSLATORS: Chain of craters
-#: src/core/modules/NomenclatureItem.cpp:608
+#: src/core/modules/NomenclatureItem.cpp:610
 msgctxt "landform"
 msgid "catena"
 msgstr "catena"
 
 #. TRANSLATORS: Hollows, irregular steep-sided depressions usually in arrays
 #. or clusters
-#: src/core/modules/NomenclatureItem.cpp:610
+#: src/core/modules/NomenclatureItem.cpp:612
 msgctxt "landform"
 msgid "cavus"
 msgstr "cavus"
 
 #. TRANSLATORS: Distinctive area of broken terrain
-#: src/core/modules/NomenclatureItem.cpp:612
+#: src/core/modules/NomenclatureItem.cpp:614
 msgctxt "landform"
 msgid "chaos"
 msgstr "chaos"
 
 #. TRANSLATORS: A deep, elongated, steep-sided depression
-#: src/core/modules/NomenclatureItem.cpp:614
+#: src/core/modules/NomenclatureItem.cpp:616
 msgctxt "landform"
 msgid "chasma"
 msgstr "chasma"
 
 #. TRANSLATORS: Small hills or knobs
-#: src/core/modules/NomenclatureItem.cpp:616
+#: src/core/modules/NomenclatureItem.cpp:618
 msgctxt "landform"
 msgid "collis"
 msgstr "collis"
 
 #. TRANSLATORS: Ovoid-shaped feature
-#: src/core/modules/NomenclatureItem.cpp:618
+#: src/core/modules/NomenclatureItem.cpp:620
 msgctxt "landform"
 msgid "corona"
 msgstr "corona"
 
 #. TRANSLATORS: A circular depression
-#: src/core/modules/NomenclatureItem.cpp:620
+#: src/core/modules/NomenclatureItem.cpp:622
 msgctxt "landform"
 msgid "crater"
 msgstr "kraatteri"
 
 #. TRANSLATORS: Ridge
-#: src/core/modules/NomenclatureItem.cpp:622
+#: src/core/modules/NomenclatureItem.cpp:624
 msgctxt "landform"
 msgid "dorsum"
 msgstr "dorsum"
 
 #. TRANSLATORS: Active volcanic centers on Io
-#: src/core/modules/NomenclatureItem.cpp:624
+#: src/core/modules/NomenclatureItem.cpp:626
 msgctxt "landform"
 msgid "eruptive center"
 msgstr "purkauskeskus"
 
 #. TRANSLATORS: Bright spot
-#: src/core/modules/NomenclatureItem.cpp:626
+#: src/core/modules/NomenclatureItem.cpp:628
 msgctxt "landform"
 msgid "facula"
 msgstr "facula"
 
 #. TRANSLATORS: Pancake-like structure, or a row of such structures
-#: src/core/modules/NomenclatureItem.cpp:628
+#: src/core/modules/NomenclatureItem.cpp:630
 msgctxt "landform"
 msgid "farrum"
 msgstr "farrum"
 
 #. TRANSLATORS: A very low curvilinear ridge with a scalloped pattern
-#: src/core/modules/NomenclatureItem.cpp:630
+#: src/core/modules/NomenclatureItem.cpp:632
 msgctxt "landform"
 msgid "flexus"
 msgstr "flexus"
 
 #. TRANSLATORS: Flow terrain
-#: src/core/modules/NomenclatureItem.cpp:632
+#: src/core/modules/NomenclatureItem.cpp:634
 msgctxt "landform"
 msgid "fluctus"
 msgstr "fluctus"
 
 #. TRANSLATORS: Channel on Titan that might carry liquid
-#: src/core/modules/NomenclatureItem.cpp:634
+#: src/core/modules/NomenclatureItem.cpp:636
 msgctxt "landform"
 msgid "flumen"
 msgstr "flumen"
 
 #. TRANSLATORS: Strait, a narrow passage of liquid connecting two larger areas
 #. of liquid
-#: src/core/modules/NomenclatureItem.cpp:636
+#: src/core/modules/NomenclatureItem.cpp:638
 msgctxt "landform"
 msgid "fretum"
 msgstr "salmi"
 
 #. TRANSLATORS: Long, narrow depression
-#: src/core/modules/NomenclatureItem.cpp:638
+#: src/core/modules/NomenclatureItem.cpp:640
 msgctxt "landform"
 msgid "fossa"
 msgstr "fossa"
 
 #. TRANSLATORS: Island (islands), an isolated land area (or group of such
 #. areas) surrounded by, or nearly surrounded by, a liquid area (sea or lake)
-#: src/core/modules/NomenclatureItem.cpp:640
+#: src/core/modules/NomenclatureItem.cpp:642
 msgctxt "landform"
 msgid "insula"
 msgstr "saari"
 
 #. TRANSLATORS: Landslide
-#: src/core/modules/NomenclatureItem.cpp:642
+#: src/core/modules/NomenclatureItem.cpp:644
 msgctxt "landform"
 msgid "labes"
 msgstr "labes"
 
 #. TRANSLATORS: Complex of intersecting valleys or ridges
-#: src/core/modules/NomenclatureItem.cpp:644
+#: src/core/modules/NomenclatureItem.cpp:646
 msgctxt "landform"
 msgid "labyrinthus"
 msgstr "labyrinthus"
 
 #. TRANSLATORS: Irregularly shaped depression on Titan having the appearance
 #. of a dry lake bed
-#: src/core/modules/NomenclatureItem.cpp:646
+#: src/core/modules/NomenclatureItem.cpp:648
 msgctxt "landform"
 msgid "lacuna"
 msgstr "lacuna"
 
 #. TRANSLATORS: "Lake" or small plain; on Titan, a "lake" or small, dark plain
 #. with discrete, sharp boundaries
-#: src/core/modules/NomenclatureItem.cpp:648
+#: src/core/modules/NomenclatureItem.cpp:650
 msgctxt "landform"
 msgid "lacus"
 msgstr "järvi"
 
 #. TRANSLATORS: Cryptic ringed feature
-#: src/core/modules/NomenclatureItem.cpp:650
+#: src/core/modules/NomenclatureItem.cpp:652
 msgctxt "landform"
 msgid "large ringed feature"
 msgstr "suuri rengasmainen pinnanmuoto"
 
 #. TRANSLATORS: Small dark spots on Europa
-#: src/core/modules/NomenclatureItem.cpp:652
+#: src/core/modules/NomenclatureItem.cpp:654
 msgctxt "landform"
 msgid "lenticula"
 msgstr "lenticula"
 
 #. TRANSLATORS: A dark or bright elongate marking, may be curved or straight
-#: src/core/modules/NomenclatureItem.cpp:654
+#: src/core/modules/NomenclatureItem.cpp:656
 msgctxt "landform"
 msgid "linea"
 msgstr "linea"
 
 #. TRANSLATORS: Extension of plateau having rounded lobate or tongue-like
 #. boundaries
-#: src/core/modules/NomenclatureItem.cpp:656
+#: src/core/modules/NomenclatureItem.cpp:658
 msgctxt "landform"
 msgid "lingula"
 msgstr "lingula"
 
 #. TRANSLATORS: Dark spot, may be irregular
-#: src/core/modules/NomenclatureItem.cpp:658
+#: src/core/modules/NomenclatureItem.cpp:660
 msgctxt "landform"
 msgid "macula"
 msgstr "macula"
@@ -1161,198 +1161,198 @@ msgstr "macula"
 #. generally of large extent; on Mars, dark albedo areas of no known
 #. geological significance; on Titan, large expanses of dark materials thought
 #. to be liquid hydrocarbons
-#: src/core/modules/NomenclatureItem.cpp:660
+#: src/core/modules/NomenclatureItem.cpp:662
 msgctxt "landform"
 msgid "mare"
 msgstr "meri"
 
 #. TRANSLATORS: A flat-topped prominence with cliff-like edges
-#: src/core/modules/NomenclatureItem.cpp:662
+#: src/core/modules/NomenclatureItem.cpp:664
 msgctxt "landform"
 msgid "mensa"
 msgstr "mensa"
 
 #. TRANSLATORS: Mountain
-#: src/core/modules/NomenclatureItem.cpp:664
+#: src/core/modules/NomenclatureItem.cpp:666
 msgctxt "landform"
 msgid "mons"
 msgstr "vuori"
 
 #. TRANSLATORS: A very large dark area on the Moon
-#: src/core/modules/NomenclatureItem.cpp:666
+#: src/core/modules/NomenclatureItem.cpp:668
 msgctxt "landform"
 msgid "oceanus"
 msgstr "valtameri"
 
 #. TRANSLATORS: "Swamp"; small plain
-#: src/core/modules/NomenclatureItem.cpp:668
+#: src/core/modules/NomenclatureItem.cpp:670
 msgctxt "landform"
 msgid "palus"
 msgstr "suo"
 
 #. TRANSLATORS: An irregular crater, or a complex one with scalloped edges
-#: src/core/modules/NomenclatureItem.cpp:670
+#: src/core/modules/NomenclatureItem.cpp:672
 msgctxt "landform"
 msgid "patera"
 msgstr "patera"
 
 #. TRANSLATORS: Low plain
-#: src/core/modules/NomenclatureItem.cpp:672
+#: src/core/modules/NomenclatureItem.cpp:674
 msgctxt "landform"
 msgid "planitia"
 msgstr "tasanko"
 
 #. TRANSLATORS: Plateau or high plain
-#: src/core/modules/NomenclatureItem.cpp:674
+#: src/core/modules/NomenclatureItem.cpp:676
 msgctxt "landform"
 msgid "planum"
 msgstr "ylätasanko"
 
 #. TRANSLATORS: Cryo-volcanic features on Triton
-#: src/core/modules/NomenclatureItem.cpp:676
+#: src/core/modules/NomenclatureItem.cpp:678
 msgctxt "landform"
 msgid "plume"
 msgstr "pluumi"
 
 #. TRANSLATORS: "Cape"; headland promontoria
-#: src/core/modules/NomenclatureItem.cpp:678
+#: src/core/modules/NomenclatureItem.cpp:680
 msgctxt "landform"
 msgid "promontorium"
 msgstr "niemi"
 
 #. TRANSLATORS: A large area marked by reflectivity or color distinctions from
 #. adjacent areas, or a broad geographic region
-#: src/core/modules/NomenclatureItem.cpp:680
+#: src/core/modules/NomenclatureItem.cpp:682
 msgctxt "landform"
 msgid "regio"
 msgstr "alue"
 
 #. TRANSLATORS: Reticular (netlike) pattern on Venus
-#: src/core/modules/NomenclatureItem.cpp:682
+#: src/core/modules/NomenclatureItem.cpp:684
 msgctxt "landform"
 msgid "reticulum"
 msgstr "reticulum"
 
 #. TRANSLATORS: Fissure
-#: src/core/modules/NomenclatureItem.cpp:684
+#: src/core/modules/NomenclatureItem.cpp:686
 msgctxt "landform"
 msgid "rima"
 msgstr "halkeama"
 
 #. TRANSLATORS: Scarp
-#: src/core/modules/NomenclatureItem.cpp:686
+#: src/core/modules/NomenclatureItem.cpp:688
 msgctxt "landform"
 msgid "rupes"
 msgstr "jyrkänne"
 
 #. TRANSLATORS: A feature that shares the name of an associated feature.
-#: src/core/modules/NomenclatureItem.cpp:688
+#: src/core/modules/NomenclatureItem.cpp:690
 msgctxt "landform"
 msgid "satellite feature"
 msgstr "satelliittimuoto"
 
 #. TRANSLATORS: Boulder or rock
-#: src/core/modules/NomenclatureItem.cpp:690
+#: src/core/modules/NomenclatureItem.cpp:692
 msgctxt "landform"
 msgid "saxum"
 msgstr "saxum"
 
 #. TRANSLATORS: Lobate or irregular scarp
-#: src/core/modules/NomenclatureItem.cpp:692
+#: src/core/modules/NomenclatureItem.cpp:694
 msgctxt "landform"
 msgid "scopulus"
 msgstr "scopulus"
 
 #. TRANSLATORS: Sinuous feature with segments of positive and negative relief
 #. along its length
-#: src/core/modules/NomenclatureItem.cpp:694
+#: src/core/modules/NomenclatureItem.cpp:696
 msgctxt "landform"
 msgid "serpens"
 msgstr "serpens"
 
 #. TRANSLATORS: Subparallel furrows and ridges
-#: src/core/modules/NomenclatureItem.cpp:696
+#: src/core/modules/NomenclatureItem.cpp:698
 msgctxt "landform"
 msgid "sulcus"
 msgstr "sulcus"
 
 #. TRANSLATORS: "Bay"; small plain; on Titan, bays within seas or lakes of
 #. liquid hydrocarbons
-#: src/core/modules/NomenclatureItem.cpp:698
+#: src/core/modules/NomenclatureItem.cpp:700
 msgctxt "landform"
 msgid "sinus"
 msgstr "lahti"
 
 #. TRANSLATORS: Extensive land mass
-#: src/core/modules/NomenclatureItem.cpp:700
+#: src/core/modules/NomenclatureItem.cpp:702
 msgctxt "landform"
 msgid "terra"
 msgstr "manner"
 
 #. TRANSLATORS: Tile-like, polygonal terrain
-#: src/core/modules/NomenclatureItem.cpp:702
+#: src/core/modules/NomenclatureItem.cpp:704
 msgctxt "landform"
 msgid "tessera"
 msgstr "tessera"
 
 #. TRANSLATORS: Small domical mountain or hill
-#: src/core/modules/NomenclatureItem.cpp:704
+#: src/core/modules/NomenclatureItem.cpp:706
 msgctxt "landform"
 msgid "tholus"
 msgstr "tholus"
 
 #. TRANSLATORS: Dunes
-#: src/core/modules/NomenclatureItem.cpp:706
+#: src/core/modules/NomenclatureItem.cpp:708
 msgctxt "landform"
 msgid "unda"
 msgstr "unda"
 
 #. TRANSLATORS: Valley
-#: src/core/modules/NomenclatureItem.cpp:708
+#: src/core/modules/NomenclatureItem.cpp:710
 msgctxt "landform"
 msgid "vallis"
 msgstr "laakso"
 
 #. TRANSLATORS: Extensive plain
-#: src/core/modules/NomenclatureItem.cpp:710
+#: src/core/modules/NomenclatureItem.cpp:712
 msgctxt "landform"
 msgid "vastitas"
 msgstr "vastitas"
 
 #. TRANSLATORS: A streak or stripe of color
-#: src/core/modules/NomenclatureItem.cpp:712
+#: src/core/modules/NomenclatureItem.cpp:714
 msgctxt "landform"
 msgid "virga"
 msgstr "virga"
 
 #. TRANSLATORS: Lunar features at or near Apollo landing sites
-#: src/core/modules/NomenclatureItem.cpp:714
+#: src/core/modules/NomenclatureItem.cpp:716
 msgctxt "landform"
 msgid "landing site name"
 msgstr "laskeutumispaikan nimi"
 
 #. TRANSLATORS: Description for landform 'albedo feature'
-#: src/core/modules/NomenclatureItem.cpp:718
+#: src/core/modules/NomenclatureItem.cpp:720
 msgid "Geographic area distinguished by amount of reflected light."
 msgstr "Maantieteellinen alue, joka heijastaa merkittävästi valoa"
 
 #. TRANSLATORS: Description for landform 'arcus'
-#: src/core/modules/NomenclatureItem.cpp:720
+#: src/core/modules/NomenclatureItem.cpp:722
 msgid "Arc-shaped feature."
 msgstr "Kaarimainen pinnanmuoto."
 
 #. TRANSLATORS: Description for landform 'astrum'
-#: src/core/modules/NomenclatureItem.cpp:722
+#: src/core/modules/NomenclatureItem.cpp:724
 msgid "Radial-patterned feature."
 msgstr "Säteittäinen pinnanmuoto."
 
 #. TRANSLATORS: Description for landform 'catena'
-#: src/core/modules/NomenclatureItem.cpp:724
+#: src/core/modules/NomenclatureItem.cpp:726
 msgid "Chain of craters."
 msgstr "Kraatteriketju."
 
 #. TRANSLATORS: Description for landform 'cavus'
-#: src/core/modules/NomenclatureItem.cpp:726
+#: src/core/modules/NomenclatureItem.cpp:728
 msgid ""
 "Hollows, irregular steep-sided depressions usually in arrays or clusters."
 msgstr ""
@@ -1360,80 +1360,80 @@ msgstr ""
 "ryhmissä."
 
 #. TRANSLATORS: Description for landform 'chaos'
-#: src/core/modules/NomenclatureItem.cpp:728
+#: src/core/modules/NomenclatureItem.cpp:730
 msgid "Distinctive area of broken terrain."
 msgstr "Selvästi erottuva rikkonainen maastoalue."
 
 #. TRANSLATORS: Description for landform 'chasma'
-#: src/core/modules/NomenclatureItem.cpp:730
+#: src/core/modules/NomenclatureItem.cpp:732
 msgid "A deep, elongated, steep-sided depression."
 msgstr "Syvä, pitkänomainen ja jyrkkäreunainen vajoama."
 
 #. TRANSLATORS: Description for landform 'collis'
-#: src/core/modules/NomenclatureItem.cpp:732
+#: src/core/modules/NomenclatureItem.cpp:734
 msgid "Small hills or knobs."
 msgstr "Pieniä kukkuloita tai kumpuja."
 
 #. TRANSLATORS: Description for landform 'corona'
-#: src/core/modules/NomenclatureItem.cpp:734
+#: src/core/modules/NomenclatureItem.cpp:736
 msgid "Ovoid-shaped feature."
 msgstr "Munanmuotoinen pinnanmuoto"
 
 #. TRANSLATORS: Description for landform 'crater'
-#: src/core/modules/NomenclatureItem.cpp:736
+#: src/core/modules/NomenclatureItem.cpp:738
 msgid "A circular depression."
 msgstr "Pyöreä vajoama."
 
 #. TRANSLATORS: Description for landform 'dorsum'
-#: src/core/modules/NomenclatureItem.cpp:738
+#: src/core/modules/NomenclatureItem.cpp:740
 msgid "Ridge."
 msgstr "Harjanne."
 
 #. TRANSLATORS: Description for landform 'eruptive center'
-#: src/core/modules/NomenclatureItem.cpp:740
+#: src/core/modules/NomenclatureItem.cpp:742
 msgid "Active volcanic center."
 msgstr "Aktiivinen vulkaaninen keskus."
 
 #. TRANSLATORS: Description for landform 'facula'
-#: src/core/modules/NomenclatureItem.cpp:742
+#: src/core/modules/NomenclatureItem.cpp:744
 msgid "Bright spot."
 msgstr "Kirkas täplä."
 
 #. TRANSLATORS: Description for landform 'farrum'
-#: src/core/modules/NomenclatureItem.cpp:744
+#: src/core/modules/NomenclatureItem.cpp:746
 msgid "Pancake-like structure, or a row of such structures."
 msgstr "Pannukakkumainen muodostuma, tai jono sellaisia."
 
 #. TRANSLATORS: Description for landform 'flexus'
-#: src/core/modules/NomenclatureItem.cpp:746
+#: src/core/modules/NomenclatureItem.cpp:748
 msgid "A very low curvilinear ridge with a scalloped pattern."
 msgstr ""
 "Erittäin loivasti käyräviivainen harjanne, jolla simpukkamainen muoto."
 
 #. TRANSLATORS: Description for landform 'fluctus'
-#: src/core/modules/NomenclatureItem.cpp:748
+#: src/core/modules/NomenclatureItem.cpp:750
 msgid "Flow terrain."
 msgstr "Virtausmaasto."
 
 #. TRANSLATORS: Description for landform 'flumen'
-#: src/core/modules/NomenclatureItem.cpp:750
+#: src/core/modules/NomenclatureItem.cpp:752
 msgid "Channel, that might carry liquid."
 msgstr "Kanaali, joka voi kuljettaa nestettä."
 
 #. TRANSLATORS: Description for landform 'fretum'
-#: src/core/modules/NomenclatureItem.cpp:752
+#: src/core/modules/NomenclatureItem.cpp:754
 msgid ""
 "Strait, a narrow passage of liquid connecting two larger areas of liquid."
 msgstr ""
 "Salmi, kapea nestekäytävä, joka yhdistää kahta laajempaa nestealuetta."
 
 #. TRANSLATORS: Description for landform 'fossa'
-#: src/core/modules/NomenclatureItem.cpp:754
+#: src/core/modules/NomenclatureItem.cpp:756
 msgid "Long, narrow depression."
 msgstr "Pitkä, kapea vajoama."
 
 #. TRANSLATORS: Description for landform 'insula'
-#: src/core/modules/NomenclatureItem.cpp:756
+#: src/core/modules/NomenclatureItem.cpp:758
 msgid ""
 "Island, an isolated land area surrounded by, or nearly surrounded by, a "
 "liquid area (sea or lake)."
@@ -1442,108 +1442,108 @@ msgstr ""
 " (meri tai järvi)."
 
 #. TRANSLATORS: Description for landform 'labes'
-#: src/core/modules/NomenclatureItem.cpp:758
+#: src/core/modules/NomenclatureItem.cpp:760
 msgid "Landslide."
 msgstr "Maanvyörymä."
 
 #. TRANSLATORS: Description for landform 'labyrinthus'
-#: src/core/modules/NomenclatureItem.cpp:760
+#: src/core/modules/NomenclatureItem.cpp:762
 msgid "Complex of intersecting valleys or ridges."
 msgstr "Risteävien laaksojen ja harjanteiden kokonaisuus."
 
 #. TRANSLATORS: Description for landform 'lacuna'
-#: src/core/modules/NomenclatureItem.cpp:762
+#: src/core/modules/NomenclatureItem.cpp:764
 msgid ""
 "Irregularly shaped depression, having the appearance of a dry lake bed."
 msgstr ""
 "Epäsäännöllisen muotoinen painuma, joka näyttää kuivalta järvenpohjalta."
 
 #. TRANSLATORS: Description for landform 'lacus'
-#: src/core/modules/NomenclatureItem.cpp:764
+#: src/core/modules/NomenclatureItem.cpp:766
 msgid "'Lake' or small plain."
 msgstr "'Järvi' tai pieni tasanko."
 
 #. TRANSLATORS: Description for landform 'large ringed feature'
-#: src/core/modules/NomenclatureItem.cpp:766
+#: src/core/modules/NomenclatureItem.cpp:768
 msgid "Cryptic ringed feature."
 msgstr "Erikoinen rengasmainen muodostuma."
 
 #. TRANSLATORS: Description for landform 'lenticula'
-#: src/core/modules/NomenclatureItem.cpp:768
+#: src/core/modules/NomenclatureItem.cpp:770
 msgid "Small dark spot."
 msgstr "Pieni tumma piste."
 
 #. TRANSLATORS: Description for landform 'linea'
-#: src/core/modules/NomenclatureItem.cpp:770
+#: src/core/modules/NomenclatureItem.cpp:772
 msgid "A dark or bright elongate marking, may be curved or straight."
 msgstr "Tumma tai kirkas pitkänomainen piirre, voi olla kaareva tai suora."
 
 #. TRANSLATORS: Description for landform 'lingula'
-#: src/core/modules/NomenclatureItem.cpp:772
+#: src/core/modules/NomenclatureItem.cpp:774
 msgid "Extension of plateau having rounded lobate or tongue-like boundaries."
 msgstr "Ylängön laajennus, jolla pyöreät liuskeiset ja kielimäiset reunat."
 
 #. TRANSLATORS: Description for landform 'macula'
-#: src/core/modules/NomenclatureItem.cpp:774
+#: src/core/modules/NomenclatureItem.cpp:776
 msgid "Dark spot, may be irregular"
 msgstr "Tumma piste, voi olla epäsäännöllinen."
 
 #. TRANSLATORS: Description for landform 'mare' on the Moon
-#: src/core/modules/NomenclatureItem.cpp:776
+#: src/core/modules/NomenclatureItem.cpp:778
 msgid "'Sea'; low albedo, relatively smooth plain, generally of large extent."
 msgstr ""
 "'Meri'; matalan albedon alue, suhteellisen tasainen alue, yleisesti laaja "
 "alue."
 
 #. TRANSLATORS: Description for landform 'mensa'
-#: src/core/modules/NomenclatureItem.cpp:778
+#: src/core/modules/NomenclatureItem.cpp:780
 msgid "A flat-topped prominence with cliff-like edges."
 msgstr "Tasahuippuinen kohouma, jolla jyrkkärinteiset reunat."
 
 #. TRANSLATORS: Description for landform 'mons'
-#: src/core/modules/NomenclatureItem.cpp:780
+#: src/core/modules/NomenclatureItem.cpp:782
 msgid "Mountain."
 msgstr "Vuori."
 
 #. TRANSLATORS: Description for landform 'oceanus'
-#: src/core/modules/NomenclatureItem.cpp:782
+#: src/core/modules/NomenclatureItem.cpp:784
 msgid "A very large dark area."
 msgstr "Hyvin laaja tumma alue."
 
 #. TRANSLATORS: Description for landform 'palus'
-#: src/core/modules/NomenclatureItem.cpp:784
+#: src/core/modules/NomenclatureItem.cpp:786
 msgid "'Swamp'; small plain."
 msgstr "'Suo'; pieni tasanko."
 
 #. TRANSLATORS: Description for landform 'patera'
-#: src/core/modules/NomenclatureItem.cpp:786
+#: src/core/modules/NomenclatureItem.cpp:788
 msgid "An irregular crater, or a complex one with scalloped edges."
 msgstr ""
 "Epäsäännöllinen kraatteri tai monimutkainen kraatteri simpukkamaisilla "
 "reunoilla."
 
 #. TRANSLATORS: Description for landform 'planitia'
-#: src/core/modules/NomenclatureItem.cpp:788
+#: src/core/modules/NomenclatureItem.cpp:790
 msgid "Low plain."
 msgstr "Alanko."
 
 #. TRANSLATORS: Description for landform 'planum'
-#: src/core/modules/NomenclatureItem.cpp:790
+#: src/core/modules/NomenclatureItem.cpp:792
 msgid "Plateau or high plain."
 msgstr "Tasanne tai ylänkö."
 
 #. TRANSLATORS: Description for landform 'plume'
-#: src/core/modules/NomenclatureItem.cpp:792
+#: src/core/modules/NomenclatureItem.cpp:794
 msgid "Cryo-volcanic feature."
 msgstr "Kryovulkaaninen muodostuma."
 
 #. TRANSLATORS: Description for landform 'promontorium'
-#: src/core/modules/NomenclatureItem.cpp:794
+#: src/core/modules/NomenclatureItem.cpp:796
 msgid "'Cape'; headland promontoria."
 msgstr "'Niemi', niemeke."
 
 #. TRANSLATORS: Description for landform 'regio'
-#: src/core/modules/NomenclatureItem.cpp:796
+#: src/core/modules/NomenclatureItem.cpp:798
 msgid ""
 "A large area marked by reflectivity or color distinctions from adjacent "
 "areas, or a broad geographic region."
@@ -1552,37 +1552,37 @@ msgstr ""
 "värivivahteensa vuoksi, tai laaja maantieteellinen alue."
 
 #. TRANSLATORS: Description for landform 'reticulum'
-#: src/core/modules/NomenclatureItem.cpp:798
+#: src/core/modules/NomenclatureItem.cpp:800
 msgid "Reticular (netlike) pattern."
 msgstr "Verkkomainen pinta."
 
 #. TRANSLATORS: Description for landform 'rima'
-#: src/core/modules/NomenclatureItem.cpp:800
+#: src/core/modules/NomenclatureItem.cpp:802
 msgid "Fissure."
 msgstr "Halkeama."
 
 #. TRANSLATORS: Description for landform 'rupes'
-#: src/core/modules/NomenclatureItem.cpp:802
+#: src/core/modules/NomenclatureItem.cpp:804
 msgid "Scarp."
 msgstr "Rinne."
 
 #. TRANSLATORS: Description for landform 'satellite feature'
-#: src/core/modules/NomenclatureItem.cpp:804
+#: src/core/modules/NomenclatureItem.cpp:806
 msgid "A feature that shares the name of an associated feature."
 msgstr "Muodostuma, jolla on sama nimi kuin liittyvällä pinnanmuodolla."
 
 #. TRANSLATORS: Description for landform 'saxum'
-#: src/core/modules/NomenclatureItem.cpp:806
+#: src/core/modules/NomenclatureItem.cpp:808
 msgid "Boulder or rock."
 msgstr "Lohkare tai kvi."
 
 #. TRANSLATORS: Description for landform 'scopulus'
-#: src/core/modules/NomenclatureItem.cpp:808
+#: src/core/modules/NomenclatureItem.cpp:810
 msgid "Lobate or irregular scarp."
 msgstr "Liuskeinen tai epäsäännöllinen rinne."
 
 #. TRANSLATORS: Description for landform 'serpens'
-#: src/core/modules/NomenclatureItem.cpp:810
+#: src/core/modules/NomenclatureItem.cpp:812
 msgid ""
 "Sinuous feature with segments of positive and negative relief along its "
 "length."
@@ -1591,47 +1591,47 @@ msgstr ""
 "muotoja koko pituudellaan."
 
 #. TRANSLATORS: Description for landform 'sinus'
-#: src/core/modules/NomenclatureItem.cpp:812
+#: src/core/modules/NomenclatureItem.cpp:814
 msgid "'Bay'; small plain."
 msgstr "'Lahti', pieni tasanko"
 
 #. TRANSLATORS: Description for landform 'sulcus'
-#: src/core/modules/NomenclatureItem.cpp:814
+#: src/core/modules/NomenclatureItem.cpp:816
 msgid "Subparallel furrows and ridges."
 msgstr "Melko yhdensuuntaisia vakoja ja harjanteita."
 
 #. TRANSLATORS: Description for landform 'terra'
-#: src/core/modules/NomenclatureItem.cpp:816
+#: src/core/modules/NomenclatureItem.cpp:818
 msgid "Extensive land mass."
 msgstr "Laaja maamassa."
 
 #. TRANSLATORS: Description for landform 'tessera'
-#: src/core/modules/NomenclatureItem.cpp:818
+#: src/core/modules/NomenclatureItem.cpp:820
 msgid "Tile-like, polygonal terrain."
 msgstr "Laattamainen kulmikas maasto."
 
 #. TRANSLATORS: Description for landform 'tholus'
-#: src/core/modules/NomenclatureItem.cpp:820
+#: src/core/modules/NomenclatureItem.cpp:822
 msgid "Small domical mountain or hill."
 msgstr "Pieni kupolimainen vuori tai kukkula."
 
 #. TRANSLATORS: Description for landform 'unda'
-#: src/core/modules/NomenclatureItem.cpp:822
+#: src/core/modules/NomenclatureItem.cpp:824
 msgid "Dunes."
 msgstr "Dyynejä."
 
 #. TRANSLATORS: Description for landform 'vallis'
-#: src/core/modules/NomenclatureItem.cpp:824
+#: src/core/modules/NomenclatureItem.cpp:826
 msgid "Valley."
 msgstr "Laakso."
 
 #. TRANSLATORS: Description for landform 'vastitas'
-#: src/core/modules/NomenclatureItem.cpp:826
+#: src/core/modules/NomenclatureItem.cpp:828
 msgid "Extensive plain."
 msgstr "Laaja tasanko."
 
 #. TRANSLATORS: Description for landform 'virga'
-#: src/core/modules/NomenclatureItem.cpp:828
+#: src/core/modules/NomenclatureItem.cpp:830
 msgid "A streak or stripe of color."
 msgstr "Värillinen raita tai nauha."
 
@@ -1848,18 +1848,18 @@ msgid "Airmasses"
 msgstr "ilmamassaa)"
 
 #: src/core/modules/Nebula.cpp:236 src/core/modules/Planet.cpp:568
-#: src/core/modules/StarWrapper.cpp:276
+#: src/core/modules/StarWrapper.cpp:256
 msgid "Additional names: "
 msgstr "Vaihtoehtoiset nimet:"
 
 #: src/core/modules/Nebula.cpp:242 src/core/modules/Planet.cpp:575
-#: src/core/modules/StarWrapper.cpp:282
+#: src/core/modules/StarWrapper.cpp:262
 msgid "Additional catalog numbers: "
 msgstr "Vaihtoehtoiset luettelonumerot:"
 
 #: src/core/modules/Nebula.cpp:260 src/core/modules/Planet.cpp:815
 #: src/core/modules/MinorPlanet.cpp:186 src/core/modules/StarWrapper.cpp:54
-#: src/core/modules/StarWrapper.cpp:306 plugins/Quasars/src/Quasar.cpp:134
+#: src/core/modules/StarWrapper.cpp:286 plugins/Quasars/src/Quasar.cpp:134
 #: plugins/MissingStars/src/MissingStar.cpp:143
 msgid "Color Index (B-V)"
 msgstr "Väri-indeksi (B-V)"
@@ -1904,7 +1904,7 @@ msgstr "Asentokulma"
 #. TRANSLATORS: Unit of measure for distance - light years
 #. TRANSLATORS: Unit of measure for distance - Light Years
 #: src/core/modules/Nebula.cpp:345 src/core/modules/Nebula.cpp:358
-#: src/core/modules/StarWrapper.cpp:336
+#: src/core/modules/StarWrapper.cpp:316
 #: plugins/Supernovae/src/Supernova.cpp:159 plugins/Novae/src/Nova.cpp:164
 #: plugins/Pulsars/src/Pulsar.cpp:268 plugins/Exoplanets/src/Exoplanet.cpp:334
 #: plugins/MissingStars/src/MissingStar.cpp:153
@@ -1914,8 +1914,8 @@ msgstr "valovuotta"
 
 #. TRANSLATORS: distance
 #: src/core/modules/Nebula.cpp:346 src/core/modules/Nebula.cpp:392
-#: src/core/modules/Planet.cpp:707 src/core/modules/StarWrapper.cpp:341
-#: src/core/modules/StarWrapper.cpp:343 src/gui/AstroCalcDialog.cpp:936
+#: src/core/modules/Planet.cpp:707 src/core/modules/StarWrapper.cpp:321
+#: src/core/modules/StarWrapper.cpp:323 src/gui/AstroCalcDialog.cpp:936
 #: src/gui/AstroCalcChart.cpp:92 src/gui/AstroCalcChart.cpp:102
 #: src/gui/AstroCalcChart.cpp:427 src/gui/AstroCalcChart.cpp:453
 #: src/ui_configurationDialog.h:1791 plugins/Supernovae/src/Supernova.cpp:160
@@ -1947,13 +1947,13 @@ msgstr "milj. valovuotta"
 msgid "Redshift"
 msgstr "Punasiirtymä"
 
-#: src/core/modules/Nebula.cpp:417 src/core/modules/StarWrapper.cpp:370
+#: src/core/modules/Nebula.cpp:417 src/core/modules/StarWrapper.cpp:350
 #: plugins/MissingStars/src/MissingStar.cpp:180
 msgid "Parallax"
 msgstr "Parallaksi"
 
 #. TRANSLATORS: Unit of measure for annual parallax - milliarcseconds
-#: src/core/modules/Nebula.cpp:417 src/core/modules/StarWrapper.cpp:375
+#: src/core/modules/Nebula.cpp:417 src/core/modules/StarWrapper.cpp:355
 #: plugins/Pulsars/src/Pulsar.cpp:257
 #: plugins/MissingStars/src/MissingStar.cpp:185
 msgctxt "parallax"
@@ -2346,7 +2346,7 @@ msgid "interstellar object"
 msgstr "tähtienvälinen kohde"
 
 #: src/core/modules/Planet.cpp:546 src/core/modules/Comet.cpp:181
-#: src/core/modules/StarWrapper.cpp:300 plugins/Quasars/src/Quasar.cpp:131
+#: src/core/modules/StarWrapper.cpp:280 plugins/Quasars/src/Quasar.cpp:131
 #: plugins/MissingStars/src/MissingStar.cpp:138
 msgid "Absolute Magnitude"
 msgstr "Absoluuttinen magnitudi"
@@ -2381,7 +2381,7 @@ msgid "Hourly motion"
 msgstr "Tunnittainen liike"
 
 #: src/core/modules/Planet.cpp:658 src/core/modules/Planet.cpp:1385
-#: src/core/modules/Planet.cpp:1394 src/core/modules/StarWrapper.cpp:358
+#: src/core/modules/Planet.cpp:1394 src/core/modules/StarWrapper.cpp:338
 #: plugins/Pulsars/src/Pulsar.cpp:204
 #: plugins/MissingStars/src/MissingStar.cpp:172
 msgctxt "into the direction of"
@@ -2479,7 +2479,7 @@ msgid "Angular distance"
 msgstr "Kulmaetäisyys"
 
 #. TRANSLATORS: Unit of measure for period - days
-#: src/core/modules/Planet.cpp:911 src/core/modules/StarWrapper.cpp:382
+#: src/core/modules/Planet.cpp:911 src/core/modules/StarWrapper.cpp:362
 #: src/gui/AstroCalcDialog.cpp:9082
 msgctxt "duration"
 msgid "days"
@@ -2773,21 +2773,21 @@ msgstr "pimennysmuuttuja"
 msgid "variable star"
 msgstr "muuttuva tähti"
 
-#: src/core/modules/StarWrapper.cpp:324
+#: src/core/modules/StarWrapper.cpp:304
 #: plugins/Satellites/src/ui_satellitesDialog.h:1268
 msgid "Magnitude range"
 msgstr "Magnitudiväli"
 
-#: src/core/modules/StarWrapper.cpp:324
+#: src/core/modules/StarWrapper.cpp:304
 msgid "Photometric system"
 msgstr "fotometrinen järjestelmä"
 
-#: src/core/modules/StarWrapper.cpp:355 plugins/Pulsars/src/Pulsar.cpp:202
+#: src/core/modules/StarWrapper.cpp:335 plugins/Pulsars/src/Pulsar.cpp:202
 #: plugins/MissingStars/src/MissingStar.cpp:170
 msgid "Proper motion"
 msgstr "Ominaisliike"
 
-#: src/core/modules/StarWrapper.cpp:357 src/core/modules/StarWrapper.cpp:363
+#: src/core/modules/StarWrapper.cpp:337 src/core/modules/StarWrapper.cpp:343
 #: plugins/Pulsars/src/Pulsar.cpp:203 plugins/Pulsars/src/Pulsar.cpp:205
 #: plugins/MissingStars/src/MissingStar.cpp:171
 #: plugins/MissingStars/src/MissingStar.cpp:173
@@ -2795,45 +2795,45 @@ msgctxt "milliarc second per year"
 msgid "mas/yr"
 msgstr "millikaarisek/v"
 
-#: src/core/modules/StarWrapper.cpp:360 plugins/Pulsars/src/Pulsar.cpp:205
+#: src/core/modules/StarWrapper.cpp:340 plugins/Pulsars/src/Pulsar.cpp:205
 #: plugins/MissingStars/src/MissingStar.cpp:173
 msgid "Proper motions by axes"
 msgstr "Ominaisliike akseleittain"
 
-#: src/core/modules/StarWrapper.cpp:379 plugins/Quasars/src/Quasar.cpp:142
+#: src/core/modules/StarWrapper.cpp:359 plugins/Quasars/src/Quasar.cpp:142
 #: plugins/Exoplanets/src/Exoplanet.cpp:329
 #: plugins/MissingStars/src/MissingStar.cpp:189
 msgid "Spectral Type"
 msgstr "Spektriluokka"
 
-#: src/core/modules/StarWrapper.cpp:382
+#: src/core/modules/StarWrapper.cpp:362
 #: plugins/Satellites/src/ui_satellitesFilterDialog.h:262
 #: plugins/Exoplanets/src/Exoplanet.cpp:361
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:177
 msgid "Period"
 msgstr "Kiertoaika"
 
-#: src/core/modules/StarWrapper.cpp:390
+#: src/core/modules/StarWrapper.cpp:370
 msgid "Next maximum light"
 msgstr "Seuraava kirkkausmaksimi"
 
-#: src/core/modules/StarWrapper.cpp:392
+#: src/core/modules/StarWrapper.cpp:372
 msgid "Next minimum light"
 msgstr "Seuraava kirkkausminimi"
 
-#: src/core/modules/StarWrapper.cpp:399
+#: src/core/modules/StarWrapper.cpp:379
 msgid "Rising time"
 msgstr "Kirkastumisjakso"
 
-#: src/core/modules/StarWrapper.cpp:401
+#: src/core/modules/StarWrapper.cpp:381
 msgid "Duration of eclipse"
 msgstr "Pimennyksen kesto"
 
-#: src/core/modules/StarWrapper.cpp:410
+#: src/core/modules/StarWrapper.cpp:390
 msgid "Position angle"
 msgstr "Suuntakulma"
 
-#: src/core/modules/StarWrapper.cpp:417 src/core/modules/StarWrapper.cpp:422
+#: src/core/modules/StarWrapper.cpp:397 src/core/modules/StarWrapper.cpp:402
 #: src/gui/AstroCalcDialog.cpp:6452
 msgid "Separation"
 msgstr "Kulmaerotus"
@@ -3130,7 +3130,7 @@ msgstr "Spout-lähettäjää ei voitu luoda. Katso yksityiskohdat lokista."
 msgid "Loading plugin"
 msgstr "Ladataan laajennus"
 
-#: src/core/StelCore.cpp:294 src/gui/StelGui.cpp:225
+#: src/core/StelCore.cpp:294 src/gui/StelGui.cpp:252
 #: src/gui/AstroCalcDialog.cpp:1739 src/gui/AstroCalcDialog.cpp:2318
 #: src/gui/AstroCalcDialog.cpp:2342 src/gui/AstroCalcDialog.cpp:2890
 #: src/gui/AstroCalcDialog.cpp:2919 src/gui/AstroCalcDialog.cpp:6445
@@ -3280,107 +3280,131 @@ msgid "Add 1 Gaussian year"
 msgstr "Lisää gaussinen vuosi"
 
 #: src/core/StelCore.cpp:332
-msgid "Add 1 calendric month"
-msgstr "Lisää kalenterikuukausi"
+msgid "Add 1 calendar month"
+msgstr ""
 
 #: src/core/StelCore.cpp:333
+msgid "Add 1 calendar year"
+msgstr ""
+
+#: src/core/StelCore.cpp:334
+msgid "Add 10 calendar years"
+msgstr ""
+
+#: src/core/StelCore.cpp:335
+msgid "Add 100 calendar years"
+msgstr ""
+
+#: src/core/StelCore.cpp:336
 msgid "Subtract 1 sidereal day"
 msgstr "Vähennä tähtivuorokausi"
 
-#: src/core/StelCore.cpp:334
+#: src/core/StelCore.cpp:337
 msgid "Subtract 7 sidereal days"
 msgstr "Vähennä 7 tähtivuorokautta"
 
-#: src/core/StelCore.cpp:335
+#: src/core/StelCore.cpp:338
 msgid "Subtract 1 sidereal year"
 msgstr "Vähennä tähtivuosi"
 
-#: src/core/StelCore.cpp:336
+#: src/core/StelCore.cpp:339
 msgid "Subtract 100 sidereal years"
 msgstr "Vähennä 100 sidereaalista päivää"
 
-#: src/core/StelCore.cpp:337
+#: src/core/StelCore.cpp:340
 msgid "Subtract 1 synodic month"
 msgstr "Vähennä synodinen kuukausi"
 
-#: src/core/StelCore.cpp:338
+#: src/core/StelCore.cpp:341
 msgid "Subtract 1 saros"
 msgstr "Vähennä saros-jakso"
 
-#: src/core/StelCore.cpp:339
+#: src/core/StelCore.cpp:342
 msgid "Subtract 1 draconic month"
 msgstr "Vähennä drakoniittinen kuukausi"
 
-#: src/core/StelCore.cpp:340
+#: src/core/StelCore.cpp:343
 msgid "Subtract 1 draconic year"
 msgstr "Vähennä drakoniittinen vuosi"
 
-#: src/core/StelCore.cpp:341
+#: src/core/StelCore.cpp:344
 msgid "Subtract 1 anomalistic month"
 msgstr "Vähennä anomalistinen kuukausi"
 
-#: src/core/StelCore.cpp:342
+#: src/core/StelCore.cpp:345
 msgid "Subtract 1 anomalistic year"
 msgstr "Vähennä anomalistinen vuosi"
 
-#: src/core/StelCore.cpp:343
+#: src/core/StelCore.cpp:346
 msgid "Subtract 100 anomalistic years"
 msgstr "Vähennä 100 anomalistista vuotta"
 
-#: src/core/StelCore.cpp:344
+#: src/core/StelCore.cpp:347
 msgid "Subtract 1 mean tropical month"
 msgstr "Vähennä trooppinen kuukausi"
 
-#: src/core/StelCore.cpp:345
+#: src/core/StelCore.cpp:348
 msgid "Subtract 1 mean tropical year"
 msgstr "Vähennä trooppinen vuosi"
 
-#: src/core/StelCore.cpp:346
+#: src/core/StelCore.cpp:349
 msgid "Subtract 100 mean tropical years"
 msgstr "Vähennä 100 trooppista vuotta"
 
-#: src/core/StelCore.cpp:347
+#: src/core/StelCore.cpp:350
 msgid "Subtract 1 tropical year"
 msgstr "Vähennä trooppinen vuosi"
 
-#: src/core/StelCore.cpp:348
+#: src/core/StelCore.cpp:351
 msgid "Subtract 1 Julian year"
 msgstr "Vähennä juliaaninen vuosi"
 
-#: src/core/StelCore.cpp:349
+#: src/core/StelCore.cpp:352
 msgid "Subtract 1 Julian century"
 msgstr "Vähennä juliaaninen vuosisata"
 
-#: src/core/StelCore.cpp:350
+#: src/core/StelCore.cpp:353
 msgid "Subtract 1 Gaussian year"
 msgstr "Vähennä gaussinen vuosi"
 
-#: src/core/StelCore.cpp:351
-msgid "Subtract 1 calendric month"
-msgstr "Vähennä kalenterikuukausi"
+#: src/core/StelCore.cpp:354
+msgid "Subtract 1 calendar month"
+msgstr ""
 
-#: src/core/StelCore.cpp:353
+#: src/core/StelCore.cpp:355
+msgid "Subtract 1 calendar year"
+msgstr ""
+
+#: src/core/StelCore.cpp:356
+msgid "Subtract 10 calendar years"
+msgstr ""
+
+#: src/core/StelCore.cpp:357
+msgid "Subtract 100 calendar years"
+msgstr ""
+
+#: src/core/StelCore.cpp:359
 msgid "Set home planet to selected planet"
 msgstr "Aseta valittu planeetta kotiplaneetaksi"
 
-#: src/core/StelCore.cpp:354
+#: src/core/StelCore.cpp:360
 msgid "Go to home"
 msgstr "Palaa kotiin"
 
-#: src/core/StelCore.cpp:356
+#: src/core/StelCore.cpp:362
 msgid "Flip scene horizontally"
 msgstr "Peilaa vaakasuunnassa"
 
-#: src/core/StelCore.cpp:357
+#: src/core/StelCore.cpp:363
 msgid "Flip scene vertically"
 msgstr "Peilaa pystysuunnassa"
 
-#: src/core/StelCore.cpp:2469
+#: src/core/StelCore.cpp:2535
 msgid "Correction is disabled. Use only if you know what you are doing!"
 msgstr ""
 "Korjaus on poistettu käytöstä. Käytä vain, jos tiedät mitä olet tekemässä!"
 
-#: src/core/StelCore.cpp:2472
+#: src/core/StelCore.cpp:2538
 #, qt-format
 msgid ""
 "This historical formula was obtained by C. Schoch in 1931 and was used by G."
@@ -3391,7 +3415,7 @@ msgstr ""
 "artikkelissaan <em>Einstein's Theory of Relativity Confirmed by Ancient "
 "Solar Eclipses</em> (%1). Katso lisätietoa %2täältä%3."
 
-#: src/core/StelCore.cpp:2475
+#: src/core/StelCore.cpp:2541
 #, qt-format
 msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
@@ -3400,7 +3424,7 @@ msgstr ""
 "Tämän empiirisen yhtälön julkaisi G. M. Clemence artikkelissaan <em>On the "
 "system of astronomical constants</em> (%1)."
 
-#: src/core/StelCore.cpp:2478
+#: src/core/StelCore.cpp:2544
 #, qt-format
 msgid ""
 "This formula is based on a study of post-1650 observations of the Sun, the "
@@ -3413,7 +3437,7 @@ msgstr ""
 "teoksessaan <em>Astronomical Formulae for Calculators</em>. Se otettiin "
 "käyttöön myös SunTracker Pro -ohjelmistoon."
 
-#: src/core/StelCore.cpp:2482
+#: src/core/StelCore.cpp:2548
 msgid ""
 "This is a slightly modified version of the IAU (1952) formula which was "
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar"
@@ -3423,7 +3447,7 @@ msgstr ""
 "<em>Astronomical Ephemeris</em> -almanakkaan, sekä Mucken ja Meeuksen (1983)"
 " <em>Canon of Solar Eclipses</em> -teokseen."
 
-#: src/core/StelCore.cpp:2486
+#: src/core/StelCore.cpp:2552
 msgid ""
 "The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon"
 " and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The "
@@ -3436,7 +3460,7 @@ msgstr ""
 "aikaa eli 16.00 GMT. Sama suhde otettiin epäsuorasti käyttöön myös "
 "Goldstinen (1973) syzygitaulukoihin."
 
-#: src/core/StelCore.cpp:2490
+#: src/core/StelCore.cpp:2556
 #, qt-format
 msgid ""
 "This equation was published by P. M. Muller and F. R. Stephenson in the "
@@ -3447,7 +3471,7 @@ msgstr ""
 "<em>The accelerations of the earth and moon from early astronomical "
 "observations</em> (%1)."
 
-#: src/core/StelCore.cpp:2493
+#: src/core/StelCore.cpp:2559
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
@@ -3456,7 +3480,7 @@ msgstr ""
 "Tämän yhtälön julkaisi F. R. Stephenson artikkelissaan <em>Pre-Telescopic "
 "Astronomical Observations</em> (%1)."
 
-#: src/core/StelCore.cpp:2496
+#: src/core/StelCore.cpp:2562
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation (outdated and superseded by Schmadel & "
@@ -3469,7 +3493,7 @@ msgstr ""
 "E.T.-U.T. in the period 1800-1975</em> (%1). Schmadel ja Zech korvasivat "
 "tämän yhtälön uudella vuonna 1988."
 
-#: src/core/StelCore.cpp:2499
+#: src/core/StelCore.cpp:2565
 msgid ""
 "This algorithm was adopted in P. Bretagnon & L. Simon's <em>Planetary "
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
@@ -3479,7 +3503,7 @@ msgstr ""
 "<em>Planetary Programs and Tables from -4000 to +2800</em> (1986). Sen "
 "otettiin käyttöön myös RedShift-planetaario-ohjelmaan."
 
-#: src/core/StelCore.cpp:2502
+#: src/core/StelCore.cpp:2568
 #, qt-format
 msgid ""
 "This formula was published by F. R. Stephenson and L. V. Morrison in the "
@@ -3490,7 +3514,7 @@ msgstr ""
 "<em>Long-term changes in the rotation of the earth - 700 B.C. to A.D. "
 "1980</em> (%1)."
 
-#: src/core/StelCore.cpp:2505
+#: src/core/StelCore.cpp:2571
 #, qt-format
 msgid ""
 "This algorithm was published by F. R. Stephenson and M. A. Houlden in the "
@@ -3501,7 +3525,7 @@ msgstr ""
 "<em>Atlas of Historical Eclipse Maps</em> (%1). Tätä algoritmia käytetään "
 "PC-planetaario-ohjelman oppaassa 7."
 
-#: src/core/StelCore.cpp:2508
+#: src/core/StelCore.cpp:2574
 msgid ""
 "This algorithm was given by F. Espenak in his <em>Fifty Year Canon of Solar "
 "Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar "
@@ -3511,7 +3535,7 @@ msgstr ""
 "Solar Eclipses: 1986-2035</em> (1987) ja <em>Fifty Year Canon of Lunar "
 "Eclipses: 1986-2035</em> (1989)."
 
-#: src/core/StelCore.cpp:2511
+#: src/core/StelCore.cpp:2577
 #, qt-format
 msgid ""
 "This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 "
@@ -3520,7 +3544,7 @@ msgstr ""
 "Tämän kaavan laski K. M. Borkowski (%1) analysoimalla 31:tä vuosien 2173 "
 "eKr.–1715 jKr. välillä tapahtunutta auringonpimennystä."
 
-#: src/core/StelCore.cpp:2514
+#: src/core/StelCore.cpp:2580
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation was published by L. D. Schmadel and G. "
@@ -3532,7 +3556,7 @@ msgstr ""
 "artikkelissaan <em>Empirical Transformations from U.T. to E.T. for the "
 "Period 1800-1988</em> (%1)."
 
-#: src/core/StelCore.cpp:2517
+#: src/core/StelCore.cpp:2583
 msgid ""
 "This formula was adopted by M. Chapront-Touze & J. Chapront in the shortened"
 " version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and "
@@ -3542,7 +3566,7 @@ msgstr ""
 "ELP 2000-85 -kuuteoriaan teoksessaan <em>Lunar Tables and Programs from 4000"
 " B.C. to A.D. 8000</em> (1991)."
 
-#: src/core/StelCore.cpp:2520
+#: src/core/StelCore.cpp:2586
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson and L. V. Morrison in the "
@@ -3553,7 +3577,7 @@ msgstr ""
 "<em>Long-Term Fluctuations in the Earth's Rotation: 700 BC to AD 1990</em> "
 "(%1)."
 
-#: src/core/StelCore.cpp:2523
+#: src/core/StelCore.cpp:2589
 #, qt-format
 msgid ""
 "F. R. Stephenson published this formula in his book <em>Historical Eclipses "
@@ -3562,7 +3586,7 @@ msgstr ""
 "F. R. Stephenson julkaisi tämän kaavan kirjassaan <em>Historical Eclipses "
 "and Earth's Rotation</em> (%1)."
 
-#: src/core/StelCore.cpp:2526
+#: src/core/StelCore.cpp:2592
 msgid ""
 "From J. Meeus, <em>Astronomical Algorithms</em> (2nd ed., 1998), and widely "
 "used. Table for 1620..2000, and includes a variant of Chapront, Chapront-"
@@ -3572,7 +3596,7 @@ msgstr ""
 "laajasti käytetty. Taulukko vuosille 1620–2000, sisältää myös Chaprontin, "
 "Chapront-Touzen ja Francoun variantin tämän aikavälin ulkopuolelle."
 
-#: src/core/StelCore.cpp:2529
+#: src/core/StelCore.cpp:2595
 #, qt-format
 msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
@@ -3581,7 +3605,7 @@ msgstr ""
 "JPL:n Solar System Dynamics -ryhmä käyttää tätä kaavaa interaktiivisella "
 "%1JPL Horizons%2 -sivustollaan."
 
-#: src/core/StelCore.cpp:2532
+#: src/core/StelCore.cpp:2598
 #, qt-format
 msgid ""
 "This polynome was published by J. Meeus and L. Simons in article "
@@ -3590,7 +3614,7 @@ msgstr ""
 "Tämän polynomin julkaisivat J. Meeus ja L. Simons artikkelissaan "
 "<em>Polynomial approximations to Delta T, 1620-2000 AD</em> (%1)."
 
-#: src/core/StelCore.cpp:2535
+#: src/core/StelCore.cpp:2601
 msgid ""
 "The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the "
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits"
@@ -3600,7 +3624,7 @@ msgstr ""
 "Computer</em> neljäs painos (2000) tarjoaa kolmannen asteen polynomeja "
 "lähimenneisyydelle."
 
-#: src/core/StelCore.cpp:2538
+#: src/core/StelCore.cpp:2604
 msgid ""
 "E. M. Reingold & N. Dershowitz present this polynomial data fit in "
 "<em>Calendrical Calculations</em> (4th ed. 2018) and in their "
@@ -3612,7 +3636,7 @@ msgstr ""
 "julkaisussaan <em>Calendrical Tabulations</em> (2002).  Se perustuu Jean "
 "Meeuksen julkaisuun<em>Astronomical Algorithms</em> (1991)."
 
-#: src/core/StelCore.cpp:2541
+#: src/core/StelCore.cpp:2607
 #, qt-format
 msgid ""
 "This important solution was published by L. V. Morrison and F. R. Stephenson"
@@ -3623,7 +3647,7 @@ msgstr ""
 "artikkelissaan <em>Historical values of the Earth's clock error %1T and the "
 "calculation of eclipses</em> (%2), seuraavin lisäyksin (%3)."
 
-#: src/core/StelCore.cpp:2544
+#: src/core/StelCore.cpp:2610
 #, qt-format
 msgid ""
 "From the Length of Day (LOD; as determined by Stephenson & Morrison (%2)), "
@@ -3636,7 +3660,7 @@ msgstr ""
 "neliöfunktion kanssa. Tämä perustuu Stephensonin kuvailemaan mahdolliseen "
 "jaksollisuuteen (%2). Lisätietoa %3täällä%4."
 
-#: src/core/StelCore.cpp:2547
+#: src/core/StelCore.cpp:2613
 #, qt-format
 msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
@@ -3653,7 +3677,7 @@ msgstr ""
 "<em>Tuhannen vuoden auringonpimennysten kaanon 1501-2500</em> (2014). Tätä "
 "kaavaa käytetään myös aurinko-, kuu- ja planeetta-efemeridiohjelmassa SOLEX."
 
-#: src/core/StelCore.cpp:2550
+#: src/core/StelCore.cpp:2616
 msgid ""
 "This solution is modified from F. Espenak and J. Meeus, based on Morrison & "
 "Stephenson (2004) and a polynomial fit through tabulated values for "
@@ -3665,15 +3689,15 @@ msgstr ""
 "1600-2000 kautta. Arvot vuosille 2015–2033 on interpoloitu IERS Rapid "
 "Service/Prediction Centerin havainnoista ja ennusteista."
 
-#: src/core/StelCore.cpp:2550
+#: src/core/StelCore.cpp:2616
 msgid "Used by default."
 msgstr "Käytössä oletuksena."
 
-#: src/core/StelCore.cpp:2553
+#: src/core/StelCore.cpp:2619
 msgid "PATCHED VERSION WITHOUT ADDITIONAL LUNAR ACCELERATION."
 msgstr "Päivitetty versio ilman erillistä Kuun kiihtyvyyttä"
 
-#: src/core/StelCore.cpp:2553
+#: src/core/StelCore.cpp:2619
 msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
 "(2004) and a polynomial fit through tabulated values for 1600-2000."
@@ -3681,7 +3705,7 @@ msgstr ""
 "Tämä F. Espenakin ja J. Meeuksen ratkaisu perustuu Morrison & Stephensoniin "
 "(2004) ja polynomin sovitukseen taulukoitujen arvojen välillä 1600-2000."
 
-#: src/core/StelCore.cpp:2556
+#: src/core/StelCore.cpp:2622
 #, qt-format
 msgid ""
 "This solution by B. Banjevic, based on Stephenson & Morrison (1984), was "
@@ -3692,7 +3716,7 @@ msgstr ""
 "julkaistiin artikkelissa <em>Ancient eclipses and dating the fall of "
 "Babylon</em> (%1)."
 
-#: src/core/StelCore.cpp:2559
+#: src/core/StelCore.cpp:2625
 #, qt-format
 msgid ""
 "This solution by S. Islam, M. Sadiq and M. S. Qureshi, based on Meeus & "
@@ -3704,7 +3728,7 @@ msgstr ""
 "Polynomial Approximation of DeltaT</em> (%1), ja Sana Islam tarkisti sen "
 "2013."
 
-#: src/core/StelCore.cpp:2562
+#: src/core/StelCore.cpp:2628
 #, qt-format
 msgid ""
 "This polynomial approximation with 0.6 seconds of accuracy by M. Khalid, "
@@ -3715,7 +3739,7 @@ msgstr ""
 " M. Khalid, Mariam Sultana ja Faheem Zaidi <em>Delta T: Polynomial "
 "Approximation of Time Period 1620-2013</em> (%1)."
 
-#: src/core/StelCore.cpp:2565
+#: src/core/StelCore.cpp:2631
 #, qt-format
 msgid ""
 "This solution by F. R. Stephenson, L. V. Morrison and C. Y. Hohenkerk (2016)"
@@ -3734,7 +3758,7 @@ msgstr ""
 "ulkopuolella (mallinnettu spline-sovituksella) se tarjoaa arvot "
 "likimääräisestä paraabelista."
 
-#: src/core/StelCore.cpp:2568
+#: src/core/StelCore.cpp:2634
 #, qt-format
 msgid ""
 "This solution by G. Henriksson was published in the article <em>The "
@@ -3745,7 +3769,7 @@ msgstr ""
 " of the Moon and the Universe - the Mass of the Graviton</em> (%1) ja "
 "perustuu C. Schochin kaavaan (1931)."
 
-#: src/core/StelCore.cpp:2571
+#: src/core/StelCore.cpp:2637
 #, qt-format
 msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined"
@@ -3754,7 +3778,7 @@ msgstr ""
 "Tämä on toisen asteen kaava %1T:n laskemiseksi käyttäjän määrittelemillä "
 "arvoilla."
 
-#: src/core/StelCore.cpp:2574 src/core/SimbadSearcher.cpp:173
+#: src/core/StelCore.cpp:2640 src/core/SimbadSearcher.cpp:173
 #: src/gui/ObsListDialog.cpp:84 src/gui/ObsListDialog.cpp:935
 #: src/gui/ObsListDialog.cpp:956 src/gui/ObsListDialog.cpp:1002
 #: src/gui/ObsListDialog.cpp:1018 src/gui/ObsListDialog.cpp:1059
@@ -3765,7 +3789,7 @@ msgstr ""
 msgid "Error"
 msgstr "Virhe"
 
-#: src/core/StelCore.cpp:2582
+#: src/core/StelCore.cpp:2648
 #, qt-format
 msgid ""
 "The solution's value of %1 for %2 (secular acceleration of the Moon) "
@@ -3774,15 +3798,15 @@ msgstr ""
 "Ratkaisun arvo %1 arvolle %2 (Kuun sekulaarikiihtyvyys) vaatii "
 "mukauttamista, katso lisätietoja käyttöohjeesta."
 
-#: src/core/StelCore.cpp:2626
+#: src/core/StelCore.cpp:2692
 msgid "with zero values outside this range"
 msgstr "nolla-arvo alueen ulkopuolella"
 
-#: src/core/StelCore.cpp:2629
+#: src/core/StelCore.cpp:2695
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr "tyypillinen yhden sekunnin tarkkuus, nolla-arvo alueen ulkopuolella"
 
-#: src/core/StelCore.cpp:2632
+#: src/core/StelCore.cpp:2698
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and values for "
 "the limit years outside this range"
@@ -3790,16 +3814,16 @@ msgstr ""
 "alle sekunnin keskivirheellä, maksimivirheenä 1,9 s, ja arvot tämän "
 "aikavälin ulkopuolisten vuosien rajoittamiseen"
 
-#: src/core/StelCore.cpp:2639
+#: src/core/StelCore.cpp:2705
 msgid "with values for the limit years outside this range"
 msgstr "tämän aikavälin ulkopuolisten vuosien raja-arvoilla"
 
-#: src/core/StelCore.cpp:2649
+#: src/core/StelCore.cpp:2715
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
 msgstr "Käyttökelpoinen aikaväli: vuodesta %1 vuoteen %2, %3."
 
-#: src/core/StelCore.cpp:2651
+#: src/core/StelCore.cpp:2717
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
 msgstr "Käyttökelpoinen aikaväli: vuodesta %1 vuoteen %2."
@@ -4126,7 +4150,7 @@ msgid "Lunar Az./Alt."
 msgstr "Kuu Az./Alt."
 
 #: src/core/StelObjectMgr.cpp:53 src/core/StelMovementMgr.cpp:194
-#: src/gui/StelGui.cpp:220 src/StelMainView.cpp:946 src/StelMainView.cpp:947
+#: src/gui/StelGui.cpp:247 src/StelMainView.cpp:946 src/StelMainView.cpp:947
 msgid "Miscellaneous"
 msgstr "Sekalaista"
 
@@ -5579,116 +5603,116 @@ msgid ""
 "citation format."
 msgstr "Tai voit {lataa BibTeX-tiedosto} luodaksesi toisen tavan avustaa."
 
-#: src/gui/StelGui.cpp:219
+#: src/gui/StelGui.cpp:246
 msgid "Windows"
 msgstr "Ikkunat"
 
-#: src/gui/StelGui.cpp:221 src/ui_configurationDialog.h:1689
+#: src/gui/StelGui.cpp:248 src/ui_configurationDialog.h:1689
 #: src/ui_configurationDialog.h:1751
 msgid "Selected object information"
 msgstr "Valitun kohteen tiedot"
 
-#: src/gui/StelGui.cpp:222 plugins/RemoteSync/src/ui_remoteSyncDialog.h:436
+#: src/gui/StelGui.cpp:249 plugins/RemoteSync/src/ui_remoteSyncDialog.h:436
 msgid "Quit"
 msgstr "Lopeta"
 
-#: src/gui/StelGui.cpp:226
+#: src/gui/StelGui.cpp:253
 msgid "Speed up the script execution rate"
 msgstr "Nopeuta skriptin suoritusnopeutta"
 
-#: src/gui/StelGui.cpp:227
+#: src/gui/StelGui.cpp:254
 msgid "Slow down the script execution rate"
 msgstr "Hidasta skriptin suoritusnopeutta"
 
-#: src/gui/StelGui.cpp:228
+#: src/gui/StelGui.cpp:255
 msgid "Set the normal script execution rate"
 msgstr "Aseta skriptin suoritusnopeus normaaliksi"
 
-#: src/gui/StelGui.cpp:229
+#: src/gui/StelGui.cpp:256
 msgid "Stop script execution"
 msgstr "Lopeta skriptin suoritus"
 
-#: src/gui/StelGui.cpp:231
+#: src/gui/StelGui.cpp:258
 msgid "Pause script execution"
 msgstr "Pysäytä skriptin suoritus"
 
-#: src/gui/StelGui.cpp:232
+#: src/gui/StelGui.cpp:259
 msgid "Resume script execution"
 msgstr "Jatka skriptin suoritusta"
 
-#: src/gui/StelGui.cpp:236
+#: src/gui/StelGui.cpp:263
 msgid "Script console window"
 msgstr "Skriptin hallintaikkuna"
 
-#: src/gui/StelGui.cpp:239
+#: src/gui/StelGui.cpp:266
 msgid "Help window"
 msgstr "Avustusikkuna"
 
-#: src/gui/StelGui.cpp:240
+#: src/gui/StelGui.cpp:267
 msgid "Configuration window"
 msgstr "Asetusikkuna"
 
-#: src/gui/StelGui.cpp:241 src/ui_searchDialogGui.h:758
+#: src/gui/StelGui.cpp:268 src/ui_searchDialogGui.h:758
 msgid "Search window"
 msgstr "Hakuikkuna"
 
-#: src/gui/StelGui.cpp:242
+#: src/gui/StelGui.cpp:269
 msgid "Sky and viewing options window"
 msgstr "Taivas- ja näyttöasetusten ikkuna"
 
-#: src/gui/StelGui.cpp:243
+#: src/gui/StelGui.cpp:270
 msgid "Date/time window"
 msgstr "Päiväys/aika-ikkuna"
 
-#: src/gui/StelGui.cpp:244
+#: src/gui/StelGui.cpp:271
 msgid "Location window"
 msgstr "Paikkakunta-ikkuna"
 
-#: src/gui/StelGui.cpp:245
+#: src/gui/StelGui.cpp:272
 msgid "Shortcuts window"
 msgstr "Pikanäppäimet-ikkuna"
 
-#: src/gui/StelGui.cpp:246
+#: src/gui/StelGui.cpp:273
 msgid "Astronomical calculations window"
 msgstr "Tähtitieteellinen laskin -ikkuna"
 
-#: src/gui/StelGui.cpp:247
+#: src/gui/StelGui.cpp:274
 msgid "Observing list"
 msgstr "Havaintoluettelo"
 
-#: src/gui/StelGui.cpp:248
+#: src/gui/StelGui.cpp:275
 msgid "Copy selected object information to clipboard"
 msgstr "Kopioi valitun kohteen tiedot leikepöydälle"
 
-#: src/gui/StelGui.cpp:254
+#: src/gui/StelGui.cpp:281
 msgid "Auto hide horizontal button bar"
 msgstr "Piilota automaattisesti painikkeiden vaakapalkki"
 
-#: src/gui/StelGui.cpp:255
+#: src/gui/StelGui.cpp:282
 msgid "Auto hide vertical button bar"
 msgstr "Piilota automaattisesti painikkeiden pystypalkki"
 
-#: src/gui/StelGui.cpp:258
+#: src/gui/StelGui.cpp:285
 msgid "Toggle visibility of GUI"
 msgstr "Aseta käyttöliittymän näkyvyys"
 
-#: src/gui/StelGui.cpp:266
+#: src/gui/StelGui.cpp:293
 msgid "All available info"
 msgstr "Kaikki saatavilla olevat tiedot"
 
-#: src/gui/StelGui.cpp:267
+#: src/gui/StelGui.cpp:294
 msgid "Default info"
 msgstr "Oletustiedot"
 
-#: src/gui/StelGui.cpp:268
+#: src/gui/StelGui.cpp:295
 msgid "Short info"
 msgstr "Lyhyet tiedot"
 
-#: src/gui/StelGui.cpp:269
+#: src/gui/StelGui.cpp:296
 msgid "None info"
 msgstr "Ei tietoja"
 
-#: src/gui/StelGui.cpp:270
+#: src/gui/StelGui.cpp:297
 msgid "Custom info"
 msgstr "Mukautetut tiedot"
 

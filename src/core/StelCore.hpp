@@ -673,8 +673,14 @@ public slots:
 	//! Add one tropical year to the simulation time.
 	void addTropicalYear();
 
-	//! Add one calendric month to the simulation time.
-	void addCalendricMonth();
+	//! Add one calendar month to the simulation time.
+	void addCalendarMonth();
+	//! Add one calendar year to the simulation time.
+	void addCalendarYear();
+	//! Add one calendar decade to the simulation time.
+	void addCalendarDecade();
+	//! Add one calendar century to the simulation time.
+	void addCalendarCentury();
 
 	//! Add one Julian year to the simulation time.
 	void addJulianYear();
@@ -685,42 +691,48 @@ public slots:
 	//! Note that 1 GaussY=2 &pi;/k where k is the Gaussian gravitational constant. A massless body orbits one solar mass in 1AU distance in a Gaussian Year.
 	void addGaussianYear();
 
-	//! Subtract one synodic month to the simulation time.
+	//! Subtract one synodic month from the simulation time.
 	void subtractSynodicMonth();
 
-	//! Subtract one saros (223 synodic months) to the simulation time.
+	//! Subtract one saros (223 synodic months) from the simulation time.
 	void subtractSaros();
 
-	//! Subtract one draconic year to the simulation time.
+	//! Subtract one draconic year from the simulation time.
 	void subtractDraconicYear();
-	//! Subtract one draconic month to the simulation time.
+	//! Subtract one draconic month from the simulation time.
 	void subtractDraconicMonth();
 
-	//! Subtract one anomalistic month to the simulation time.
+	//! Subtract one anomalistic month from the simulation time.
 	void subtractAnomalisticMonth();
-	//! Subtract one anomalistic year to the simulation time.
+	//! Subtract one anomalistic year from the simulation time.
 	void subtractAnomalisticYear();
-	//! Subtract n anomalistic years to the simulation time.
+	//! Subtract n anomalistic years from the simulation time.
 	void subtractAnomalisticYears(double n=100.);
 
-	//! Subtract one mean tropical month to the simulation time.
+	//! Subtract one mean tropical month from the simulation time.
 	void subtractMeanTropicalMonth();
-	//! Subtract one mean tropical year to the simulation time.
+	//! Subtract one mean tropical year from the simulation time.
 	void subtractMeanTropicalYear();
-	//! Subtract n mean tropical years to the simulation time.
+	//! Subtract n mean tropical years from the simulation time.
 	void subtractMeanTropicalYears(double n=100.);
-	//! Subtract one tropical year to the simulation time.
+	//! Subtract one tropical year from the simulation time.
 	void subtractTropicalYear();
 
-	//! Subtract one calendric month to the simulation time.
-	void subtractCalendricMonth();
+	//! Subtract one calendar month from the simulation time.
+	void subtractCalendarMonth();
+	//! Subtract one calendar year from the simulation time.
+	void subtractCalendarYear();
+	//! Subtract one calendar decade from the simulation time.
+	void subtractCalendarDecade();
+	//! Subtract one calendar century from the simulation time.
+	void subtractCalendarCentury();
 
-	//! Subtract one Julian year to the simulation time.
+	//! Subtract one Julian year from the simulation time.
 	void subtractJulianYear();
-	//! Subtract n Julian years to the simulation time.
+	//! Subtract n Julian years from the simulation time.
 	void subtractJulianYears(double n=100.);
 
-	//! Subtract one Gaussian year to the simulation time.
+	//! Subtract one Gaussian year from the simulation time.
 	void subtractGaussianYear();
 
 	//! Add a number of Earth Solar days to the current simulation time

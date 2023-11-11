@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-remotecontrol\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2023-10-12 09:31+0700\n"
+"POT-Creation-Date: 2023-11-11 14:27+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Sveinn í Felli <sv1@fellsnet.is>, 2023\n"
 "Language-Team: Icelandic (https://app.transifex.com/stellarium/teams/80998/is/)\n"
@@ -82,8 +82,8 @@ msgstr "Villa (%1)"
 msgid "Error performing Simbad lookup"
 msgstr "Villa kom upp við Simbad-uppflettingu"
 
-#: plugins/RemoteControl/webroot/js/api/search.js:79 index.html:219
-#: tablet7in.html:235
+#: plugins/RemoteControl/webroot/js/api/search.js:79 index.html:223
+#: tablet7in.html:240
 msgid "idle"
 msgstr "iðjulaus"
 
@@ -109,8 +109,8 @@ msgid "Could not retrieve landscape list"
 msgstr "Gat ekki náð í lista yfir landslög"
 
 #: plugins/RemoteControl/webroot/js/plugins/scenery3d.js:22
-#: plugins/RemoteControl/webroot/js/ui/scripts.js:76 index.html:680
-#: index.html:742 tablet7in.html:738 tablet7in.html:798
+#: plugins/RemoteControl/webroot/js/ui/scripts.js:76 index.html:684
+#: index.html:746 tablet7in.html:743 tablet7in.html:803
 msgid "-none-"
 msgstr "-ekkert-"
 
@@ -192,180 +192,192 @@ msgstr "Sólardagur"
 msgid "Solar week"
 msgstr "Sólarvika"
 
+#: index.html:90 tablet7in.html:191
+msgid "Calendar year"
+msgstr ""
+
 #: index.html:91 tablet7in.html:192
+msgid "10 Calendar years"
+msgstr ""
+
+#: index.html:92 tablet7in.html:193
+msgid "100 Calendar years"
+msgstr ""
+
+#: index.html:95 tablet7in.html:196
 msgid "Sidereal year"
 msgstr "Stjörnuár"
 
-#: index.html:92 tablet7in.html:193
+#: index.html:96 tablet7in.html:197
 msgid "Sidereal century"
 msgstr "Stjörnuöld"
 
-#: index.html:94 tablet7in.html:195
+#: index.html:98 tablet7in.html:199
 msgid "Synodic month"
 msgstr "Sólbundinn tunglmánuður"
 
-#: index.html:95 tablet7in.html:196
+#: index.html:99 tablet7in.html:200
 msgid "Draconic month"
 msgstr "Hnútamánuður"
 
-#: index.html:96 tablet7in.html:197
+#: index.html:100 tablet7in.html:201
 msgid "Draconic year"
 msgstr "Hnútaár"
 
-#: index.html:98 tablet7in.html:210
-msgid "Gaussian year"
-msgstr "Gaussískt ár"
-
-#: index.html:101 tablet7in.html:200
+#: index.html:103 tablet7in.html:204
 msgid "Anomalistic month"
 msgstr "Jarðbrautarmánuður"
 
-#: index.html:102 tablet7in.html:201
+#: index.html:104 tablet7in.html:205
 msgid "Anomalistic year"
 msgstr "Jarðbrautarár"
 
-#: index.html:103 tablet7in.html:202
+#: index.html:105 tablet7in.html:206
 msgid "Anomalistic century"
 msgstr "Jarðbrautaröld"
 
-#: index.html:105 tablet7in.html:204
+#: index.html:107 tablet7in.html:208
 msgid "Mean tropical month"
 msgstr "Meðal hvarfmánuður"
 
-#: index.html:106 tablet7in.html:205
+#: index.html:108 tablet7in.html:209
 msgid "Mean tropical year"
 msgstr "Meðal hvarfár"
 
-#: index.html:107 tablet7in.html:206
+#: index.html:109 tablet7in.html:210
 msgid "Mean tropical century"
 msgstr "Meðal hvarföld"
 
-#: index.html:109 tablet7in.html:208
+#: index.html:111 tablet7in.html:212
 msgid "Tropical year"
 msgstr "Hvarfár"
 
-#: index.html:110 tablet7in.html:209
+#: index.html:112 tablet7in.html:213
 msgid "Julian year"
 msgstr "Júlianskt ár"
 
-#: index.html:111 tablet7in.html:211
+#: index.html:113 tablet7in.html:214
 msgid "Julian century"
 msgstr "Júlíönsk öld"
 
-#: index.html:123 tablet7in.html:101
+#: index.html:115 tablet7in.html:216
+msgid "Gaussian year"
+msgstr "Gaussískt ár"
+
+#: index.html:127 tablet7in.html:101
 msgid "View towards horizon at Azimuth"
 msgstr "Sýn í átt að sjóndeildarhring með áttarhorn"
 
-#: index.html:144 tablet7in.html:123
+#: index.html:148 tablet7in.html:123
 msgid "Vertical View offset"
 msgstr "Lóðrétt hliðrun sýnar"
 
-#: index.html:213 tablet7in.html:229
+#: index.html:217 tablet7in.html:234
 msgid "Enter search term. Use TAB to navigate results."
 msgstr ""
 "Settu inn leitarorð. Notaðu TAB/Dálklykil til að flakka í niðurstöðum."
 
-#: index.html:214 tablet7in.html:230
+#: index.html:218 tablet7in.html:235
 msgid "Select and focus"
 msgstr "Velja og gera virkt"
 
-#: index.html:240 tablet7in.html:259
+#: index.html:244 tablet7in.html:264
 msgid "Selection mode"
 msgstr "Valhamur"
 
-#: index.html:240 tablet7in.html:259
+#: index.html:244 tablet7in.html:264
 msgid "Center on object"
 msgstr "Miðja á hlut"
 
-#: index.html:240 tablet7in.html:259
+#: index.html:244 tablet7in.html:264
 msgid "Center and zoom to object"
 msgstr "Miðja og renna að hlut"
 
-#: index.html:240 tablet7in.html:259
+#: index.html:244 tablet7in.html:264
 msgid "Just mark the object"
 msgstr "Bara merkja hlutinn"
 
-#: index.html:242 tablet7in.html:261
+#: index.html:246 tablet7in.html:266
 msgid "Quick select"
 msgstr "Hraðval"
 
-#: index.html:246 tablet7in.html:265
+#: index.html:250 tablet7in.html:270
 msgid "Earth"
 msgstr "Jörðin"
 
-#: index.html:246 tablet7in.html:265
+#: index.html:250 tablet7in.html:270
 msgid "Pluto"
 msgstr "Plútó"
 
-#: index.html:252 tablet7in.html:294
+#: index.html:256 tablet7in.html:299
 msgid "Current selection"
 msgstr "Núverandi val"
 
-#: index.html:269 tablet7in.html:321
+#: index.html:273 tablet7in.html:326
 msgid "Milky Way brightness:"
 msgstr "Birtustig Vetrarbrautar:"
 
-#: index.html:274 tablet7in.html:333
+#: index.html:278 tablet7in.html:338
 msgid "Digitized Sky Survey"
 msgstr "Digitized Sky Survey (DDS)"
 
-#: index.html:275 tablet7in.html:334
+#: index.html:279 tablet7in.html:339
 msgid "HiPS Survey"
 msgstr "HiPS-rannsóknir"
 
-#: index.html:288 tablet7in.html:350
+#: index.html:292 tablet7in.html:355
 msgid "Show planet markers"
 msgstr "Merkja reikistjörnur"
 
-#: index.html:289 tablet7in.html:351
+#: index.html:293 tablet7in.html:356
 msgid "Show planet orbits"
 msgstr "Sýna brautir reikistjarna"
 
-#: index.html:290 tablet7in.html:352
+#: index.html:294 tablet7in.html:357
 msgid "Show planet orbits only"
 msgstr "Sýna einungis brautir reikistjarna"
 
-#: index.html:291 tablet7in.html:353
+#: index.html:295 tablet7in.html:358
 msgid "Show orbit for selected planet"
 msgstr "Sýna sporbraut valinnar plánetu"
 
-#: index.html:292 tablet7in.html:354
+#: index.html:296 tablet7in.html:359
 msgid "Show planet trails"
 msgstr "Sýna ferla reikistjarna"
 
-#: index.html:293 tablet7in.html:355
+#: index.html:297 tablet7in.html:360
 msgid "Show trail only for selected planet"
 msgstr "Sýna einungis feril valinnar plánetu"
 
-#: index.html:298 tablet7in.html:359
+#: index.html:302 tablet7in.html:364
 msgid "Scale Moon:"
 msgstr "Stækka tunglið:"
 
-#: index.html:299
+#: index.html:303
 msgid "Scale Sun:"
 msgstr "Kvarða sól:"
 
-#: index.html:300
+#: index.html:304
 msgid "Scale Planets:"
 msgstr "Kvarða reikistjörnur:"
 
-#: index.html:301 tablet7in.html:363
+#: index.html:305 tablet7in.html:368
 msgid "Scale minor bodies:"
 msgstr "Kvarða minni hnetti:"
 
-#: index.html:332 tablet7in.html:409
+#: index.html:336 tablet7in.html:414
 msgid "Extinction Coefficient:"
 msgstr "Ljósdeyfingarstuðull"
 
-#: index.html:336 tablet7in.html:414
+#: index.html:340 tablet7in.html:419
 msgid "Shooting Stars"
 msgstr "Stjörnuhröp"
 
-#: index.html:337 tablet7in.html:415
+#: index.html:341 tablet7in.html:420
 msgid "ZHR:"
 msgstr "ZHR:"
 
-#: index.html:380 tablet7in.html:472
+#: index.html:384 tablet7in.html:477
 msgid ""
 "Instantaneous circles of earth´s axis on its motion around ecliptical poles."
 " Displayed on Earth only."
@@ -373,174 +385,174 @@ msgstr ""
 "Sjálfvirkir hringir með snúningi jarðaráss í kringum póla sólbaugs. Birtist "
 "einungis á Jörðinni."
 
-#: index.html:396
+#: index.html:400
 msgid "Center"
 msgstr "Miðja"
 
-#: index.html:414 tablet7in.html:481
+#: index.html:418 tablet7in.html:486
 msgid "Solstices"
 msgstr "Sólstöður"
 
-#: index.html:415 tablet7in.html:482
+#: index.html:419 tablet7in.html:487
 msgid "Crossquarters"
 msgstr "Árstíðafjórðungar"
 
-#: index.html:416 tablet7in.html:483
+#: index.html:420 tablet7in.html:488
 msgid "Major Standstill"
 msgstr "Mesta hvarfstaða"
 
-#: index.html:417 tablet7in.html:484
+#: index.html:421 tablet7in.html:489
 msgid "Minor Standstill"
 msgstr "Minnsta hvarfstaða"
 
-#: index.html:427 tablet7in.html:493
+#: index.html:431 tablet7in.html:498
 msgid "Current Planet:"
 msgstr "Núverandi pláneta:"
 
-#: index.html:465 tablet7in.html:529
+#: index.html:469 tablet7in.html:534
 msgid "Catalogue of Reflection Nebulae (Van den Bergh, 1966)"
 msgstr "Skrá yfir endurskinsþokur (van den Bergh, 1966)"
 
-#: index.html:512 tablet7in.html:547
+#: index.html:516 tablet7in.html:552
 msgid ""
 "Catalogue of southern stars embedded in nebulosity (van den Bergh+, 1975)"
 msgstr ""
 "Stjörnuskrá yfir suðlægar stjörnur ívafðar þokuslæðu (van den Bergh og "
 "Herbst+,1975)"
 
-#: index.html:550
+#: index.html:554
 msgid "Objects without identifier"
 msgstr "Hlutir án auðkennis"
 
-#: index.html:568
+#: index.html:572
 msgid "Open Star clusters"
 msgstr "Opnar stjörnuþyrpingar"
 
-#: index.html:569
+#: index.html:573
 msgid "Globular Star clusters"
 msgstr "Hnattlaga stjörnuþyrpingar"
 
-#: index.html:576 tablet7in.html:621
+#: index.html:580 tablet7in.html:626
 msgid "Bright Nebulae"
 msgstr "Bjartar geimþokur"
 
-#: index.html:577 tablet7in.html:622
+#: index.html:581 tablet7in.html:627
 msgid "Dark Nebulae"
 msgstr "Gleypiþokur"
 
-#: index.html:578 tablet7in.html:623
+#: index.html:582 tablet7in.html:628
 msgid "Planetary Nebulae"
 msgstr "Hringþokur"
 
-#: index.html:580
+#: index.html:584
 msgid "Galaxy clusters"
 msgstr "Þyrpingar vetrarbrauta"
 
-#: index.html:588 tablet7in.html:632
+#: index.html:592 tablet7in.html:637
 msgid "Labels and markers"
 msgstr "Nöfn og merkingar"
 
-#: index.html:613 tablet7in.html:657
+#: index.html:617 tablet7in.html:662
 msgid "Use associated planet and position"
 msgstr "Nota tengda reikistjörnu og stöðu"
 
-#: index.html:624 tablet7in.html:666
+#: index.html:628 tablet7in.html:671
 msgid "Show illumination"
 msgstr "Birta ljósvarp"
 
-#: index.html:629 tablet7in.html:672
+#: index.html:633 tablet7in.html:677
 msgid "Current landscape"
 msgstr "Núverandi landslag"
 
-#: index.html:641 tablet7in.html:685
+#: index.html:645 tablet7in.html:690
 msgid "Show lines with thickness"
 msgstr "Sýna línur með breidd"
 
-#: index.html:646 tablet7in.html:690
+#: index.html:650 tablet7in.html:695
 msgid "Show asterisms with thickness"
 msgstr "Sýna stjörnusamstæður með breidd"
 
-#: index.html:650 tablet7in.html:694
+#: index.html:654 tablet7in.html:699
 msgid "Show ray helpers with thickness"
 msgstr "Sýna stoðlínur geisla með breidd"
 
-#: index.html:658 tablet7in.html:704
+#: index.html:662 tablet7in.html:709
 msgid "Show boundaries with thickness"
 msgstr "Sýna mörk með breidd"
 
-#: index.html:663 tablet7in.html:709
+#: index.html:667 tablet7in.html:714
 msgid "Constellation selection isolated"
 msgstr "Einangrað val stjörnumerkja"
 
-#: index.html:667 tablet7in.html:713
+#: index.html:671 tablet7in.html:718
 msgid "Current sky culture"
 msgstr "Núverandi stjörnumerkjakerfi"
 
-#: index.html:680 tablet7in.html:738
+#: index.html:684 tablet7in.html:743
 msgid "Active script:"
 msgstr "Virk skrifta:"
 
-#: index.html:681 tablet7in.html:739
+#: index.html:685 tablet7in.html:744
 msgid "Run selected script"
 msgstr "Keyra valda skriftu"
 
-#: index.html:681 tablet7in.html:739
+#: index.html:685 tablet7in.html:744
 msgid "Stop current script"
 msgstr "Stöðva núverandi skriftu"
 
-#: index.html:686 tablet7in.html:41 tablet7in.html:723
+#: index.html:690 tablet7in.html:41 tablet7in.html:728
 msgid "Actions"
 msgstr "Aðgerðir"
 
-#: index.html:690 tablet7in.html:727
+#: index.html:694 tablet7in.html:732
 msgid "Run/toggle action"
 msgstr "Keyra/víxla aðgerð"
 
-#: index.html:701 tablet7in.html:762
+#: index.html:705 tablet7in.html:767
 msgid "Planet map"
 msgstr "Plánetukort"
 
-#: index.html:702 tablet7in.html:763
+#: index.html:706 tablet7in.html:768
 msgid "Planet map pointer"
 msgstr "Bendill á plánetukorti"
 
-#: index.html:706 tablet7in.html:767
+#: index.html:710 tablet7in.html:772
 msgid "Type to search location"
 msgstr "Skrifaðu hér til að leita að staðsetningu"
 
-#: index.html:740 tablet7in.html:796
+#: index.html:744 tablet7in.html:801
 msgid "Interaction"
 msgstr "Gagnvikni"
 
-#: index.html:741 tablet7in.html:797
+#: index.html:745 tablet7in.html:802
 msgid "Current scene:"
 msgstr "Núverandi sena:"
 
-#: index.html:744 tablet7in.html:800
+#: index.html:748 tablet7in.html:805
 msgid "View controls"
 msgstr "Stýringar fyrir sýn"
 
-#: index.html:750 tablet7in.html:806
+#: index.html:754 tablet7in.html:811
 msgid "Movement controls"
 msgstr "Stýringar fyrir hreyfingar"
 
-#: index.html:762 tablet7in.html:818
+#: index.html:766 tablet7in.html:823
 msgid "Torchlight"
 msgstr "Ljóskastari"
 
-#: index.html:769 tablet7in.html:825
+#: index.html:773 tablet7in.html:830
 msgid "Scene selection"
 msgstr "Val á senu"
 
-#: index.html:773 tablet7in.html:829
+#: index.html:777 tablet7in.html:834
 msgid "Load selected scene"
 msgstr "Hlaða inn valinni senu"
 
-#: index.html:797 tablet7in.html:854
+#: index.html:801 tablet7in.html:859
 msgid "No response from server"
 msgstr "Ekkert svar frá vefþjóni"
 
-#: index.html:798 tablet7in.html:855
+#: index.html:802 tablet7in.html:860
 msgid "No response from server for %1 seconds. Is Stellarium still running?"
 msgstr "Ekkert svar frá miðlara í %1 sekúndur. Er Stellarium ennþá í gangi?"
 
@@ -592,110 +604,110 @@ msgstr "Niður"
 msgid "Down/Right"
 msgstr "Niður/Hægri"
 
-#: tablet7in.html:266
+#: tablet7in.html:271
 msgid "Sirius"
 msgstr "Síríus"
 
-#: tablet7in.html:267
+#: tablet7in.html:272
 msgid "Arcturus"
 msgstr "Arktúrus"
 
-#: tablet7in.html:268
+#: tablet7in.html:273
 msgid "Capella"
 msgstr "Kapella (Kaupmannastjarnan)"
 
-#: tablet7in.html:269
+#: tablet7in.html:274
 msgid "Vega"
 msgstr "Vega (Blástjarnan)"
 
-#: tablet7in.html:270
+#: tablet7in.html:275
 msgid "Deneb"
 msgstr "Deneb"
 
-#: tablet7in.html:271
+#: tablet7in.html:276
 msgid "Altair"
 msgstr "Altair"
 
-#: tablet7in.html:272
+#: tablet7in.html:277
 msgid "Andromeda Galaxy"
 msgstr "Andrómeda vetrarbrautin"
 
-#: tablet7in.html:273
+#: tablet7in.html:278
 msgid "Hercules Cluster"
 msgstr "Herkúles stjörnuþyrpingin"
 
-#: tablet7in.html:274
+#: tablet7in.html:279
 msgid "Orion Nebula"
 msgstr "Oríon geimþokan"
 
-#: tablet7in.html:275
+#: tablet7in.html:280
 msgid "Eta Carinae Nebula"
 msgstr "Eta Carinae geimþokan"
 
-#: tablet7in.html:276
+#: tablet7in.html:281
 msgid "47 Tucanae Cluster"
 msgstr "47 Tucanae stjörnuþyrpingin"
 
-#: tablet7in.html:277
+#: tablet7in.html:282
 msgid "Aries"
 msgstr "Hrúturinn"
 
-#: tablet7in.html:278
+#: tablet7in.html:283
 msgid "Taurus"
 msgstr "Nautið"
 
-#: tablet7in.html:279
+#: tablet7in.html:284
 msgid "Gemini"
 msgstr "Tvíburarnir"
 
-#: tablet7in.html:280
+#: tablet7in.html:285
 msgid "Cancer"
 msgstr "Krabbinn"
 
-#: tablet7in.html:281
+#: tablet7in.html:286
 msgid "Leo"
 msgstr "Ljónið"
 
-#: tablet7in.html:282
+#: tablet7in.html:287
 msgid "Virgo"
 msgstr "Meyjan"
 
-#: tablet7in.html:283
+#: tablet7in.html:288
 msgid "Libra"
 msgstr "Vogin"
 
-#: tablet7in.html:284
+#: tablet7in.html:289
 msgid "Scorpius"
 msgstr "Sporðdrekinn"
 
-#: tablet7in.html:285
+#: tablet7in.html:290
 msgid "Sagittarius"
 msgstr "Bogmaðurinn"
 
-#: tablet7in.html:286
+#: tablet7in.html:291
 msgid "Capricornus"
 msgstr "Steingeitin"
 
-#: tablet7in.html:287
+#: tablet7in.html:292
 msgid "Aquarius"
 msgstr "Vatnsberinn"
 
-#: tablet7in.html:288
+#: tablet7in.html:293
 msgid "Pisces"
 msgstr "Fiskarnir"
 
-#: tablet7in.html:747
+#: tablet7in.html:752
 msgid "Favorites"
 msgstr "Eftirlæti"
 
-#: tablet7in.html:749
+#: tablet7in.html:754
 msgid "Show 1"
 msgstr "Sýna 1"
 
-#: tablet7in.html:750
+#: tablet7in.html:755
 msgid "Remove Labels and Images"
 msgstr "Fjarlægja merki og myndir"
 
-#: tablet7in.html:750
+#: tablet7in.html:755
 msgid "Cleanup Screen"
 msgstr "Hreinsun á skjá"

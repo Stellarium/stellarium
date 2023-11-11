@@ -2903,7 +2903,7 @@ void Satellites::drawCircles(StelCore* core, StelPainter &painter)
 		umbra.vertex.append(pos+point);
 	}
 	painter.setColor(getUmbraColor(), 1.f);
-	painter.drawStelVertexArray(umbra, false);
+	painter.drawStelVertexArray(umbra, true);
 
 	// plot a center cross mark
 	texCross->bind();
@@ -2926,7 +2926,7 @@ void Satellites::drawCircles(StelCore* core, StelPainter &painter)
 		}
 
 		painter.setColor(getPenumbraColor(), 1.f);
-		painter.drawStelVertexArray(penumbra, false);
+		painter.drawStelVertexArray(penumbra, true);
 	}
 	painter.setProjector(saveProj);
 }

@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2023-11-03 15:28+0700\n"
+"POT-Creation-Date: 2023-11-11 14:27+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: राजಐயர், 2023\n"
 "Language-Team: Hindi (https://app.transifex.com/stellarium/teams/80998/hi/)\n"
@@ -27,10 +27,10 @@ msgstr ""
 #. TRANSLATORS: type of object
 #: src/core/modules/CustomObject.cpp:81 src/core/modules/Asterism.cpp:194
 #: src/core/modules/Constellation.cpp:290
-#: src/core/modules/NomenclatureItem.cpp:230 src/core/modules/Nebula.cpp:249
+#: src/core/modules/NomenclatureItem.cpp:232 src/core/modules/Nebula.cpp:249
 #: src/core/modules/Nebula.cpp:251 src/core/modules/Planet.cpp:592
 #: src/core/modules/Planet.cpp:595 src/core/modules/StarWrapper.cpp:49
-#: src/core/modules/StarWrapper.cpp:290 src/core/modules/StarWrapper.cpp:292
+#: src/core/modules/StarWrapper.cpp:270 src/core/modules/StarWrapper.cpp:272
 #: src/gui/AstroCalcDialog.cpp:901 src/gui/AstroCalcDialog.cpp:2320
 #: src/gui/AstroCalcDialog.cpp:2892 src/gui/AstroCalcDialog.cpp:2924
 #: src/gui/AstroCalcDialog.cpp:3308 src/gui/AstroCalcDialog.cpp:8224
@@ -882,27 +882,27 @@ msgstr "स॰तम का॰प्र॰मे<sup>2</sup>"
 msgid "<b>Light pollution</b>: %1 %2 (NELM: %3; Bortle class: %4)"
 msgstr "<b>प्रकाशीय प्रदूषण</b> : %1 %2 (न॰आ॰प॰सी॰ : %3; बोर्ट्ल वर्ग : %4)"
 
-#: src/core/modules/NomenclatureItem.cpp:74
+#: src/core/modules/NomenclatureItem.cpp:75
 msgctxt "landform"
 msgid "undocumented landform type"
 msgstr "अनाभिलिखित भू आकार प्रकार"
 
-#: src/core/modules/NomenclatureItem.cpp:143
+#: src/core/modules/NomenclatureItem.cpp:144
 msgid "Undocumented landform type."
 msgstr "अनाभिलिखित भू आकार प्रकार।"
 
 #. TRANSLATORS: Description for landform 'mare' on Mars
-#: src/core/modules/NomenclatureItem.cpp:147
+#: src/core/modules/NomenclatureItem.cpp:148
 msgid "'Sea'; dark albedo areas of no known geological significance."
 msgstr "सागर। अन्धकारमय प्रतिबिम्बन क्षेत्र जिसका भौगोलिक महत्व ज्ञात नही।"
 
 #. TRANSLATORS: Description for landform 'lacus' on Titan
-#: src/core/modules/NomenclatureItem.cpp:152
+#: src/core/modules/NomenclatureItem.cpp:153
 msgid "'Lake' or small, dark plain with discrete, sharp boundaries."
 msgstr "झील। अथवा छोटी अन्धकारमय समतल भूमि जिसका असतत तीक्ष्ण सीमाएँ हो।"
 
 #. TRANSLATORS: Description for landform 'mare' on Titan
-#: src/core/modules/NomenclatureItem.cpp:155
+#: src/core/modules/NomenclatureItem.cpp:156
 msgid ""
 "'Sea'; large expanses of dark materials thought to be liquid hydrocarbons"
 msgstr ""
@@ -910,24 +910,24 @@ msgstr ""
 " जाता है।"
 
 #. TRANSLATORS: Description for landform 'sinus' on Titan
-#: src/core/modules/NomenclatureItem.cpp:158
+#: src/core/modules/NomenclatureItem.cpp:159
 msgid "'Bay'; bays within seas or lakes of liquid hydrocarbons."
 msgstr "खाडी। सागर अथवा झील के भीतर खाडी जलमय तैलवत पदार्थों का।"
 
-#: src/core/modules/NomenclatureItem.cpp:232
+#: src/core/modules/NomenclatureItem.cpp:234
 msgid "geologic term"
 msgstr "भौगोलिक नाम"
 
-#: src/core/modules/NomenclatureItem.cpp:242
+#: src/core/modules/NomenclatureItem.cpp:244
 msgid "Linear size"
 msgstr "रेखीय आकार"
 
-#: src/core/modules/NomenclatureItem.cpp:245 src/core/modules/Planet.cpp:804
+#: src/core/modules/NomenclatureItem.cpp:247 src/core/modules/Planet.cpp:804
 msgid "Diameter"
 msgstr "व्यास"
 
 #. TRANSLATORS: Unit of measure for distance - kilometers
-#: src/core/modules/NomenclatureItem.cpp:246 src/core/modules/Planet.cpp:672
+#: src/core/modules/NomenclatureItem.cpp:248 src/core/modules/Planet.cpp:672
 #: src/core/modules/Planet.cpp:697 src/core/modules/Planet.cpp:805
 #: src/core/modules/Planet.cpp:1526 src/core/modules/Comet.cpp:190
 #: src/core/modules/Comet.cpp:200 src/gui/StelGuiItems.cpp:894
@@ -941,215 +941,215 @@ msgctxt "distance"
 msgid "km"
 msgstr "स॰मे॰"
 
-#: src/core/modules/NomenclatureItem.cpp:251
+#: src/core/modules/NomenclatureItem.cpp:253
 msgid "Planetocentric coordinates"
 msgstr "ग्रह मध्यमान निर्देशांक"
 
-#: src/core/modules/NomenclatureItem.cpp:251
+#: src/core/modules/NomenclatureItem.cpp:253
 msgid "Planetographic coordinates"
 msgstr "ग्रहगौलिक निर्देशांक"
 
-#: src/core/modules/NomenclatureItem.cpp:277
+#: src/core/modules/NomenclatureItem.cpp:279
 msgid "Celestial body"
 msgstr "आकाशीय ग्रह"
 
-#: src/core/modules/NomenclatureItem.cpp:280
+#: src/core/modules/NomenclatureItem.cpp:282
 msgid "Landform description"
 msgstr "क्षेत्राकार विवरण"
 
-#: src/core/modules/NomenclatureItem.cpp:282
+#: src/core/modules/NomenclatureItem.cpp:284
 msgid "Solar altitude"
 msgstr "सौर ऊँचाई"
 
-#: src/core/modules/NomenclatureItem.cpp:285
+#: src/core/modules/NomenclatureItem.cpp:287
 msgid "Origin of name"
 msgstr ""
 
-#: src/core/modules/NomenclatureItem.cpp:596
-#: src/core/modules/NomenclatureItem.cpp:597
 #: src/core/modules/NomenclatureItem.cpp:598
 #: src/core/modules/NomenclatureItem.cpp:599
 #: src/core/modules/NomenclatureItem.cpp:600
+#: src/core/modules/NomenclatureItem.cpp:601
+#: src/core/modules/NomenclatureItem.cpp:602
 msgctxt "special point"
 msgid "point"
 msgstr "बिन्दु"
 
 #. TRANSLATORS: Geographic area distinguished by amount of reflected light
-#: src/core/modules/NomenclatureItem.cpp:602
+#: src/core/modules/NomenclatureItem.cpp:604
 msgctxt "landform"
 msgid "albedo feature"
 msgstr "प्रतिबिम्बन लक्षण"
 
 #. TRANSLATORS: Arc-shaped feature
-#: src/core/modules/NomenclatureItem.cpp:604
+#: src/core/modules/NomenclatureItem.cpp:606
 msgctxt "landform"
 msgid "arcus"
 msgstr "चापाकारीय"
 
 #. TRANSLATORS: Radial-patterned features on Venus
-#: src/core/modules/NomenclatureItem.cpp:606
+#: src/core/modules/NomenclatureItem.cpp:608
 msgctxt "landform"
 msgid "astrum"
 msgstr "किरणरूपीय"
 
 #. TRANSLATORS: Chain of craters
-#: src/core/modules/NomenclatureItem.cpp:608
+#: src/core/modules/NomenclatureItem.cpp:610
 msgctxt "landform"
 msgid "catena"
 msgstr "गड्ढाशृंखला"
 
 #. TRANSLATORS: Hollows, irregular steep-sided depressions usually in arrays
 #. or clusters
-#: src/core/modules/NomenclatureItem.cpp:610
+#: src/core/modules/NomenclatureItem.cpp:612
 msgctxt "landform"
 msgid "cavus"
 msgstr "गुफासमूह"
 
 #. TRANSLATORS: Distinctive area of broken terrain
-#: src/core/modules/NomenclatureItem.cpp:612
+#: src/core/modules/NomenclatureItem.cpp:614
 msgctxt "landform"
 msgid "chaos"
 msgstr "विशृंखल"
 
 #. TRANSLATORS: A deep, elongated, steep-sided depression
-#: src/core/modules/NomenclatureItem.cpp:614
+#: src/core/modules/NomenclatureItem.cpp:616
 msgctxt "landform"
 msgid "chasma"
 msgstr "खाई"
 
 #. TRANSLATORS: Small hills or knobs
-#: src/core/modules/NomenclatureItem.cpp:616
+#: src/core/modules/NomenclatureItem.cpp:618
 msgctxt "landform"
 msgid "collis"
 msgstr "पहाडी"
 
 #. TRANSLATORS: Ovoid-shaped feature
-#: src/core/modules/NomenclatureItem.cpp:618
+#: src/core/modules/NomenclatureItem.cpp:620
 msgctxt "landform"
 msgid "corona"
 msgstr "अण्डाकार"
 
 #. TRANSLATORS: A circular depression
-#: src/core/modules/NomenclatureItem.cpp:620
+#: src/core/modules/NomenclatureItem.cpp:622
 msgctxt "landform"
 msgid "crater"
 msgstr "वृत्तीयगड्ढा"
 
 #. TRANSLATORS: Ridge
-#: src/core/modules/NomenclatureItem.cpp:622
+#: src/core/modules/NomenclatureItem.cpp:624
 msgctxt "landform"
 msgid "dorsum"
 msgstr "पहाडशिखर"
 
 #. TRANSLATORS: Active volcanic centers on Io
-#: src/core/modules/NomenclatureItem.cpp:624
+#: src/core/modules/NomenclatureItem.cpp:626
 msgctxt "landform"
 msgid "eruptive center"
 msgstr "ज्वालामुखीमध्य"
 
 #. TRANSLATORS: Bright spot
-#: src/core/modules/NomenclatureItem.cpp:626
+#: src/core/modules/NomenclatureItem.cpp:628
 msgctxt "landform"
 msgid "facula"
 msgstr "बत्तिका"
 
 #. TRANSLATORS: Pancake-like structure, or a row of such structures
-#: src/core/modules/NomenclatureItem.cpp:628
+#: src/core/modules/NomenclatureItem.cpp:630
 msgctxt "landform"
 msgid "farrum"
 msgstr "टिकियाँ"
 
 #. TRANSLATORS: A very low curvilinear ridge with a scalloped pattern
-#: src/core/modules/NomenclatureItem.cpp:630
+#: src/core/modules/NomenclatureItem.cpp:632
 msgctxt "landform"
 msgid "flexus"
 msgstr "वक्रशिखर"
 
 #. TRANSLATORS: Flow terrain
-#: src/core/modules/NomenclatureItem.cpp:632
+#: src/core/modules/NomenclatureItem.cpp:634
 msgctxt "landform"
 msgid "fluctus"
 msgstr "प्रवाहरूपक्षेत्र"
 
 #. TRANSLATORS: Channel on Titan that might carry liquid
-#: src/core/modules/NomenclatureItem.cpp:634
+#: src/core/modules/NomenclatureItem.cpp:636
 msgctxt "landform"
 msgid "flumen"
 msgstr "नदी"
 
 #. TRANSLATORS: Strait, a narrow passage of liquid connecting two larger areas
 #. of liquid
-#: src/core/modules/NomenclatureItem.cpp:636
+#: src/core/modules/NomenclatureItem.cpp:638
 msgctxt "landform"
 msgid "fretum"
 msgstr "जलसंयोगी"
 
 #. TRANSLATORS: Long, narrow depression
-#: src/core/modules/NomenclatureItem.cpp:638
+#: src/core/modules/NomenclatureItem.cpp:640
 msgctxt "landform"
 msgid "fossa"
 msgstr "खाई"
 
 #. TRANSLATORS: Island (islands), an isolated land area (or group of such
 #. areas) surrounded by, or nearly surrounded by, a liquid area (sea or lake)
-#: src/core/modules/NomenclatureItem.cpp:640
+#: src/core/modules/NomenclatureItem.cpp:642
 msgctxt "landform"
 msgid "insula"
 msgstr "द्वीप"
 
 #. TRANSLATORS: Landslide
-#: src/core/modules/NomenclatureItem.cpp:642
+#: src/core/modules/NomenclatureItem.cpp:644
 msgctxt "landform"
 msgid "labes"
 msgstr "भूस्खलन"
 
 #. TRANSLATORS: Complex of intersecting valleys or ridges
-#: src/core/modules/NomenclatureItem.cpp:644
+#: src/core/modules/NomenclatureItem.cpp:646
 msgctxt "landform"
 msgid "labyrinthus"
 msgstr "पहाडीजाल"
 
 #. TRANSLATORS: Irregularly shaped depression on Titan having the appearance
 #. of a dry lake bed
-#: src/core/modules/NomenclatureItem.cpp:646
+#: src/core/modules/NomenclatureItem.cpp:648
 msgctxt "landform"
 msgid "lacuna"
 msgstr "सूखीझीलतल"
 
 #. TRANSLATORS: "Lake" or small plain; on Titan, a "lake" or small, dark plain
 #. with discrete, sharp boundaries
-#: src/core/modules/NomenclatureItem.cpp:648
+#: src/core/modules/NomenclatureItem.cpp:650
 msgctxt "landform"
 msgid "lacus"
 msgstr "झील"
 
 #. TRANSLATORS: Cryptic ringed feature
-#: src/core/modules/NomenclatureItem.cpp:650
+#: src/core/modules/NomenclatureItem.cpp:652
 msgctxt "landform"
 msgid "large ringed feature"
 msgstr "बडा वलयाकार लक्षण"
 
 #. TRANSLATORS: Small dark spots on Europa
-#: src/core/modules/NomenclatureItem.cpp:652
+#: src/core/modules/NomenclatureItem.cpp:654
 msgctxt "landform"
 msgid "lenticula"
 msgstr "दालाकार"
 
 #. TRANSLATORS: A dark or bright elongate marking, may be curved or straight
-#: src/core/modules/NomenclatureItem.cpp:654
+#: src/core/modules/NomenclatureItem.cpp:656
 msgctxt "landform"
 msgid "linea"
 msgstr "रेखा"
 
 #. TRANSLATORS: Extension of plateau having rounded lobate or tongue-like
 #. boundaries
-#: src/core/modules/NomenclatureItem.cpp:656
+#: src/core/modules/NomenclatureItem.cpp:658
 msgctxt "landform"
 msgid "lingula"
 msgstr "जिह्वाकार"
 
 #. TRANSLATORS: Dark spot, may be irregular
-#: src/core/modules/NomenclatureItem.cpp:658
+#: src/core/modules/NomenclatureItem.cpp:660
 msgctxt "landform"
 msgid "macula"
 msgstr "धब्बा"
@@ -1158,276 +1158,276 @@ msgstr "धब्बा"
 #. generally of large extent; on Mars, dark albedo areas of no known
 #. geological significance; on Titan, large expanses of dark materials thought
 #. to be liquid hydrocarbons
-#: src/core/modules/NomenclatureItem.cpp:660
+#: src/core/modules/NomenclatureItem.cpp:662
 msgctxt "landform"
 msgid "mare"
 msgstr "सागर"
 
 #. TRANSLATORS: A flat-topped prominence with cliff-like edges
-#: src/core/modules/NomenclatureItem.cpp:662
+#: src/core/modules/NomenclatureItem.cpp:664
 msgctxt "landform"
 msgid "mensa"
 msgstr "फलकाकार"
 
 #. TRANSLATORS: Mountain
-#: src/core/modules/NomenclatureItem.cpp:664
+#: src/core/modules/NomenclatureItem.cpp:666
 msgctxt "landform"
 msgid "mons"
 msgstr "पर्वत"
 
 #. TRANSLATORS: A very large dark area on the Moon
-#: src/core/modules/NomenclatureItem.cpp:666
+#: src/core/modules/NomenclatureItem.cpp:668
 msgctxt "landform"
 msgid "oceanus"
 msgstr "महासागर"
 
 #. TRANSLATORS: "Swamp"; small plain
-#: src/core/modules/NomenclatureItem.cpp:668
+#: src/core/modules/NomenclatureItem.cpp:670
 msgctxt "landform"
 msgid "palus"
 msgstr "दलदल"
 
 #. TRANSLATORS: An irregular crater, or a complex one with scalloped edges
-#: src/core/modules/NomenclatureItem.cpp:670
+#: src/core/modules/NomenclatureItem.cpp:672
 msgctxt "landform"
 msgid "patera"
 msgstr "कटोरा"
 
 #. TRANSLATORS: Low plain
-#: src/core/modules/NomenclatureItem.cpp:672
+#: src/core/modules/NomenclatureItem.cpp:674
 msgctxt "landform"
 msgid "planitia"
 msgstr "तराई"
 
 #. TRANSLATORS: Plateau or high plain
-#: src/core/modules/NomenclatureItem.cpp:674
+#: src/core/modules/NomenclatureItem.cpp:676
 msgctxt "landform"
 msgid "planum"
 msgstr "पठार"
 
 #. TRANSLATORS: Cryo-volcanic features on Triton
-#: src/core/modules/NomenclatureItem.cpp:676
+#: src/core/modules/NomenclatureItem.cpp:678
 msgctxt "landform"
 msgid "plume"
 msgstr "पंख"
 
 #. TRANSLATORS: "Cape"; headland promontoria
-#: src/core/modules/NomenclatureItem.cpp:678
+#: src/core/modules/NomenclatureItem.cpp:680
 msgctxt "landform"
 msgid "promontorium"
 msgstr "अन्तरीप"
 
 #. TRANSLATORS: A large area marked by reflectivity or color distinctions from
 #. adjacent areas, or a broad geographic region
-#: src/core/modules/NomenclatureItem.cpp:680
+#: src/core/modules/NomenclatureItem.cpp:682
 msgctxt "landform"
 msgid "regio"
 msgstr "क्षेत्र"
 
 #. TRANSLATORS: Reticular (netlike) pattern on Venus
-#: src/core/modules/NomenclatureItem.cpp:682
+#: src/core/modules/NomenclatureItem.cpp:684
 msgctxt "landform"
 msgid "reticulum"
 msgstr "जाल"
 
 #. TRANSLATORS: Fissure
-#: src/core/modules/NomenclatureItem.cpp:684
+#: src/core/modules/NomenclatureItem.cpp:686
 msgctxt "landform"
 msgid "rima"
 msgstr "दरार"
 
 #. TRANSLATORS: Scarp
-#: src/core/modules/NomenclatureItem.cpp:686
+#: src/core/modules/NomenclatureItem.cpp:688
 msgctxt "landform"
 msgid "rupes"
 msgstr "टीला"
 
 #. TRANSLATORS: A feature that shares the name of an associated feature.
-#: src/core/modules/NomenclatureItem.cpp:688
+#: src/core/modules/NomenclatureItem.cpp:690
 msgctxt "landform"
 msgid "satellite feature"
 msgstr "उपविशेषता"
 
 #. TRANSLATORS: Boulder or rock
-#: src/core/modules/NomenclatureItem.cpp:690
+#: src/core/modules/NomenclatureItem.cpp:692
 msgctxt "landform"
 msgid "saxum"
 msgstr "चट्टान"
 
 #. TRANSLATORS: Lobate or irregular scarp
-#: src/core/modules/NomenclatureItem.cpp:692
+#: src/core/modules/NomenclatureItem.cpp:694
 msgctxt "landform"
 msgid "scopulus"
 msgstr "अवलोकनस्थल"
 
 #. TRANSLATORS: Sinuous feature with segments of positive and negative relief
 #. along its length
-#: src/core/modules/NomenclatureItem.cpp:694
+#: src/core/modules/NomenclatureItem.cpp:696
 msgctxt "landform"
 msgid "serpens"
 msgstr "सर्पमय"
 
 #. TRANSLATORS: Subparallel furrows and ridges
-#: src/core/modules/NomenclatureItem.cpp:696
+#: src/core/modules/NomenclatureItem.cpp:698
 msgctxt "landform"
 msgid "sulcus"
 msgstr "नाली"
 
 #. TRANSLATORS: "Bay"; small plain; on Titan, bays within seas or lakes of
 #. liquid hydrocarbons
-#: src/core/modules/NomenclatureItem.cpp:698
+#: src/core/modules/NomenclatureItem.cpp:700
 msgctxt "landform"
 msgid "sinus"
 msgstr "खाडी"
 
 #. TRANSLATORS: Extensive land mass
-#: src/core/modules/NomenclatureItem.cpp:700
+#: src/core/modules/NomenclatureItem.cpp:702
 msgctxt "landform"
 msgid "terra"
 msgstr "धरा"
 
 #. TRANSLATORS: Tile-like, polygonal terrain
-#: src/core/modules/NomenclatureItem.cpp:702
+#: src/core/modules/NomenclatureItem.cpp:704
 msgctxt "landform"
 msgid "tessera"
 msgstr "इष्टिकारूपीय"
 
 #. TRANSLATORS: Small domical mountain or hill
-#: src/core/modules/NomenclatureItem.cpp:704
+#: src/core/modules/NomenclatureItem.cpp:706
 msgctxt "landform"
 msgid "tholus"
 msgstr "गोलछतीय"
 
 #. TRANSLATORS: Dunes
-#: src/core/modules/NomenclatureItem.cpp:706
+#: src/core/modules/NomenclatureItem.cpp:708
 msgctxt "landform"
 msgid "unda"
 msgstr "लहरमय"
 
 #. TRANSLATORS: Valley
-#: src/core/modules/NomenclatureItem.cpp:708
+#: src/core/modules/NomenclatureItem.cpp:710
 msgctxt "landform"
 msgid "vallis"
 msgstr "घाटी"
 
 #. TRANSLATORS: Extensive plain
-#: src/core/modules/NomenclatureItem.cpp:710
+#: src/core/modules/NomenclatureItem.cpp:712
 msgctxt "landform"
 msgid "vastitas"
 msgstr "विस्तृतक्षेत्र"
 
 #. TRANSLATORS: A streak or stripe of color
-#: src/core/modules/NomenclatureItem.cpp:712
+#: src/core/modules/NomenclatureItem.cpp:714
 msgctxt "landform"
 msgid "virga"
 msgstr "धज्जी"
 
 #. TRANSLATORS: Lunar features at or near Apollo landing sites
-#: src/core/modules/NomenclatureItem.cpp:714
+#: src/core/modules/NomenclatureItem.cpp:716
 msgctxt "landform"
 msgid "landing site name"
 msgstr "अवतरण स्थल नाम"
 
 #. TRANSLATORS: Description for landform 'albedo feature'
-#: src/core/modules/NomenclatureItem.cpp:718
+#: src/core/modules/NomenclatureItem.cpp:720
 msgid "Geographic area distinguished by amount of reflected light."
 msgstr "क्षेत्र जिसकी विशेषता प्रतिबिम्बित प्रकाश की मात्रा।"
 
 #. TRANSLATORS: Description for landform 'arcus'
-#: src/core/modules/NomenclatureItem.cpp:720
+#: src/core/modules/NomenclatureItem.cpp:722
 msgid "Arc-shaped feature."
 msgstr "चाप आकार का लक्षण।"
 
 #. TRANSLATORS: Description for landform 'astrum'
-#: src/core/modules/NomenclatureItem.cpp:722
+#: src/core/modules/NomenclatureItem.cpp:724
 msgid "Radial-patterned feature."
 msgstr "किरण प्रतिरूप का लक्षण।"
 
 #. TRANSLATORS: Description for landform 'catena'
-#: src/core/modules/NomenclatureItem.cpp:724
+#: src/core/modules/NomenclatureItem.cpp:726
 msgid "Chain of craters."
 msgstr "गड्ढों की शृंखला।"
 
 #. TRANSLATORS: Description for landform 'cavus'
-#: src/core/modules/NomenclatureItem.cpp:726
+#: src/core/modules/NomenclatureItem.cpp:728
 msgid ""
 "Hollows, irregular steep-sided depressions usually in arrays or clusters."
 msgstr ""
 "खोखला अनियमित तथा ढालवाँ भुज युक्त गड्ढे सामाम्यतः व्यूह अथवा संग्रह में।"
 
 #. TRANSLATORS: Description for landform 'chaos'
-#: src/core/modules/NomenclatureItem.cpp:728
+#: src/core/modules/NomenclatureItem.cpp:730
 msgid "Distinctive area of broken terrain."
 msgstr "असमान्य टूटा हुआ धरा।"
 
 #. TRANSLATORS: Description for landform 'chasma'
-#: src/core/modules/NomenclatureItem.cpp:730
+#: src/core/modules/NomenclatureItem.cpp:732
 msgid "A deep, elongated, steep-sided depression."
 msgstr "गहरा लम्बा तथा ढालवाँ भुज युक्त गड्ढा।"
 
 #. TRANSLATORS: Description for landform 'collis'
-#: src/core/modules/NomenclatureItem.cpp:732
+#: src/core/modules/NomenclatureItem.cpp:734
 msgid "Small hills or knobs."
 msgstr "छोटे पर्वत पहाड।"
 
 #. TRANSLATORS: Description for landform 'corona'
-#: src/core/modules/NomenclatureItem.cpp:734
+#: src/core/modules/NomenclatureItem.cpp:736
 msgid "Ovoid-shaped feature."
 msgstr "अण्डाकार लक्षण।"
 
 #. TRANSLATORS: Description for landform 'crater'
-#: src/core/modules/NomenclatureItem.cpp:736
+#: src/core/modules/NomenclatureItem.cpp:738
 msgid "A circular depression."
 msgstr "चक्र आकार का गड्ढा।"
 
 #. TRANSLATORS: Description for landform 'dorsum'
-#: src/core/modules/NomenclatureItem.cpp:738
+#: src/core/modules/NomenclatureItem.cpp:740
 msgid "Ridge."
 msgstr "पहाड का शिखर।"
 
 #. TRANSLATORS: Description for landform 'eruptive center'
-#: src/core/modules/NomenclatureItem.cpp:740
+#: src/core/modules/NomenclatureItem.cpp:742
 msgid "Active volcanic center."
 msgstr "सक्रिय ज्वालामुखी मध्य।"
 
 #. TRANSLATORS: Description for landform 'facula'
-#: src/core/modules/NomenclatureItem.cpp:742
+#: src/core/modules/NomenclatureItem.cpp:744
 msgid "Bright spot."
 msgstr "उज्ज्वल स्थल।"
 
 #. TRANSLATORS: Description for landform 'farrum'
-#: src/core/modules/NomenclatureItem.cpp:744
+#: src/core/modules/NomenclatureItem.cpp:746
 msgid "Pancake-like structure, or a row of such structures."
 msgstr "टिकिया जैसा आकार अथवा एैसे आकारों की पंक्ति।"
 
 #. TRANSLATORS: Description for landform 'flexus'
-#: src/core/modules/NomenclatureItem.cpp:746
+#: src/core/modules/NomenclatureItem.cpp:748
 msgid "A very low curvilinear ridge with a scalloped pattern."
 msgstr "बहुत नीचे की वक्र आकार शिखर जिसका सीप रूप हो।"
 
 #. TRANSLATORS: Description for landform 'fluctus'
-#: src/core/modules/NomenclatureItem.cpp:748
+#: src/core/modules/NomenclatureItem.cpp:750
 msgid "Flow terrain."
 msgstr "लहर जैसा धरा।"
 
 #. TRANSLATORS: Description for landform 'flumen'
-#: src/core/modules/NomenclatureItem.cpp:750
+#: src/core/modules/NomenclatureItem.cpp:752
 msgid "Channel, that might carry liquid."
 msgstr "नाली जिसमें जल जैसा पदार्थ वहन हो।"
 
 #. TRANSLATORS: Description for landform 'fretum'
-#: src/core/modules/NomenclatureItem.cpp:752
+#: src/core/modules/NomenclatureItem.cpp:754
 msgid ""
 "Strait, a narrow passage of liquid connecting two larger areas of liquid."
 msgstr "जलसंयोगी एक पतला जलमार्ग जो दो बडे जलाशय को जोडता हो।"
 
 #. TRANSLATORS: Description for landform 'fossa'
-#: src/core/modules/NomenclatureItem.cpp:754
+#: src/core/modules/NomenclatureItem.cpp:756
 msgid "Long, narrow depression."
 msgstr "लम्बा पतला गड्ढा।"
 
 #. TRANSLATORS: Description for landform 'insula'
-#: src/core/modules/NomenclatureItem.cpp:756
+#: src/core/modules/NomenclatureItem.cpp:758
 msgid ""
 "Island, an isolated land area surrounded by, or nearly surrounded by, a "
 "liquid area (sea or lake)."
@@ -1436,104 +1436,104 @@ msgstr ""
 "अथवा अधिकाम्शतः।"
 
 #. TRANSLATORS: Description for landform 'labes'
-#: src/core/modules/NomenclatureItem.cpp:758
+#: src/core/modules/NomenclatureItem.cpp:760
 msgid "Landslide."
 msgstr "भूस्खलन।"
 
 #. TRANSLATORS: Description for landform 'labyrinthus'
-#: src/core/modules/NomenclatureItem.cpp:760
+#: src/core/modules/NomenclatureItem.cpp:762
 msgid "Complex of intersecting valleys or ridges."
 msgstr "घाटी तथा शिखरों का जाल जैसा क्षेत्र।"
 
 #. TRANSLATORS: Description for landform 'lacuna'
-#: src/core/modules/NomenclatureItem.cpp:762
+#: src/core/modules/NomenclatureItem.cpp:764
 msgid ""
 "Irregularly shaped depression, having the appearance of a dry lake bed."
 msgstr "अनियमित आकार का गड्ढा जिसका रूप सूखी झील के धरातल जैसा हो।"
 
 #. TRANSLATORS: Description for landform 'lacus'
-#: src/core/modules/NomenclatureItem.cpp:764
+#: src/core/modules/NomenclatureItem.cpp:766
 msgid "'Lake' or small plain."
 msgstr "झील अथवा छोटा समतल।"
 
 #. TRANSLATORS: Description for landform 'large ringed feature'
-#: src/core/modules/NomenclatureItem.cpp:766
+#: src/core/modules/NomenclatureItem.cpp:768
 msgid "Cryptic ringed feature."
 msgstr "रहस्यमय वलयाकार लक्षण।"
 
 #. TRANSLATORS: Description for landform 'lenticula'
-#: src/core/modules/NomenclatureItem.cpp:768
+#: src/core/modules/NomenclatureItem.cpp:770
 msgid "Small dark spot."
 msgstr "छोटा अन्धकारमय स्थल।"
 
 #. TRANSLATORS: Description for landform 'linea'
-#: src/core/modules/NomenclatureItem.cpp:770
+#: src/core/modules/NomenclatureItem.cpp:772
 msgid "A dark or bright elongate marking, may be curved or straight."
 msgstr "एक अन्धकारमय अथवा उज्ज्वल खींचा चिह्न जो वक्र अथवा सीधा हो।"
 
 #. TRANSLATORS: Description for landform 'lingula'
-#: src/core/modules/NomenclatureItem.cpp:772
+#: src/core/modules/NomenclatureItem.cpp:774
 msgid "Extension of plateau having rounded lobate or tongue-like boundaries."
 msgstr "पठार का विस्तार क्षेत्र जिसका गोल पालि अथवा जिह्वा जैसा सीमा हो।"
 
 #. TRANSLATORS: Description for landform 'macula'
-#: src/core/modules/NomenclatureItem.cpp:774
+#: src/core/modules/NomenclatureItem.cpp:776
 msgid "Dark spot, may be irregular"
 msgstr "अन्धकारमय स्थल सम्भवतः अनियमित। "
 
 #. TRANSLATORS: Description for landform 'mare' on the Moon
-#: src/core/modules/NomenclatureItem.cpp:776
+#: src/core/modules/NomenclatureItem.cpp:778
 msgid "'Sea'; low albedo, relatively smooth plain, generally of large extent."
 msgstr ""
 "सागर। न्यून प्रतिबिम्बन। सापेक्षतः समस्तर समतल। सामान्यतः बडे आकार का।"
 
 #. TRANSLATORS: Description for landform 'mensa'
-#: src/core/modules/NomenclatureItem.cpp:778
+#: src/core/modules/NomenclatureItem.cpp:780
 msgid "A flat-topped prominence with cliff-like edges."
 msgstr "एक चपटा शिखर का उभाड जिसका ढालवाँ सीमाएँ हो।"
 
 #. TRANSLATORS: Description for landform 'mons'
-#: src/core/modules/NomenclatureItem.cpp:780
+#: src/core/modules/NomenclatureItem.cpp:782
 msgid "Mountain."
 msgstr "पर्वत।"
 
 #. TRANSLATORS: Description for landform 'oceanus'
-#: src/core/modules/NomenclatureItem.cpp:782
+#: src/core/modules/NomenclatureItem.cpp:784
 msgid "A very large dark area."
 msgstr "एक बहुत बडा अन्धकारमय क्षेत्र।"
 
 #. TRANSLATORS: Description for landform 'palus'
-#: src/core/modules/NomenclatureItem.cpp:784
+#: src/core/modules/NomenclatureItem.cpp:786
 msgid "'Swamp'; small plain."
 msgstr "दलदल। छोटा समतल।"
 
 #. TRANSLATORS: Description for landform 'patera'
-#: src/core/modules/NomenclatureItem.cpp:786
+#: src/core/modules/NomenclatureItem.cpp:788
 msgid "An irregular crater, or a complex one with scalloped edges."
 msgstr "अनियमित आकार का गड्ढा। अथवा जटिल आकार का जिसके सीप आकार के सीमाएँ हो।"
 
 #. TRANSLATORS: Description for landform 'planitia'
-#: src/core/modules/NomenclatureItem.cpp:788
+#: src/core/modules/NomenclatureItem.cpp:790
 msgid "Low plain."
 msgstr "अधोस्तरीय समतल।"
 
 #. TRANSLATORS: Description for landform 'planum'
-#: src/core/modules/NomenclatureItem.cpp:790
+#: src/core/modules/NomenclatureItem.cpp:792
 msgid "Plateau or high plain."
 msgstr "पठार अथवा ऊँचाई पर समतल।"
 
 #. TRANSLATORS: Description for landform 'plume'
-#: src/core/modules/NomenclatureItem.cpp:792
+#: src/core/modules/NomenclatureItem.cpp:794
 msgid "Cryo-volcanic feature."
 msgstr "ठण्ड ज्वालामुखी लक्षण।"
 
 #. TRANSLATORS: Description for landform 'promontorium'
-#: src/core/modules/NomenclatureItem.cpp:794
+#: src/core/modules/NomenclatureItem.cpp:796
 msgid "'Cape'; headland promontoria."
 msgstr "अन्तरीप। शिरभूमी अथवा रास।"
 
 #. TRANSLATORS: Description for landform 'regio'
-#: src/core/modules/NomenclatureItem.cpp:796
+#: src/core/modules/NomenclatureItem.cpp:798
 msgid ""
 "A large area marked by reflectivity or color distinctions from adjacent "
 "areas, or a broad geographic region."
@@ -1542,84 +1542,84 @@ msgstr ""
 "हो।"
 
 #. TRANSLATORS: Description for landform 'reticulum'
-#: src/core/modules/NomenclatureItem.cpp:798
+#: src/core/modules/NomenclatureItem.cpp:800
 msgid "Reticular (netlike) pattern."
 msgstr "जाल ( जैसा ) प्रतिरूप।"
 
 #. TRANSLATORS: Description for landform 'rima'
-#: src/core/modules/NomenclatureItem.cpp:800
+#: src/core/modules/NomenclatureItem.cpp:802
 msgid "Fissure."
 msgstr "दरार।"
 
 #. TRANSLATORS: Description for landform 'rupes'
-#: src/core/modules/NomenclatureItem.cpp:802
+#: src/core/modules/NomenclatureItem.cpp:804
 msgid "Scarp."
 msgstr "टीला अथवा चट्टान। सीधी ढाल अथवा उतार।"
 
 #. TRANSLATORS: Description for landform 'satellite feature'
-#: src/core/modules/NomenclatureItem.cpp:804
+#: src/core/modules/NomenclatureItem.cpp:806
 msgid "A feature that shares the name of an associated feature."
 msgstr "एक लक्षण जो अन्य एक सम्बन्धित लक्षण के सम नाम का हो।"
 
 #. TRANSLATORS: Description for landform 'saxum'
-#: src/core/modules/NomenclatureItem.cpp:806
+#: src/core/modules/NomenclatureItem.cpp:808
 msgid "Boulder or rock."
 msgstr "पत्थर अथवा चट्टान।"
 
 #. TRANSLATORS: Description for landform 'scopulus'
-#: src/core/modules/NomenclatureItem.cpp:808
+#: src/core/modules/NomenclatureItem.cpp:810
 msgid "Lobate or irregular scarp."
 msgstr "पालि अथवा अनियमित रूप का टीला।"
 
 #. TRANSLATORS: Description for landform 'serpens'
-#: src/core/modules/NomenclatureItem.cpp:810
+#: src/core/modules/NomenclatureItem.cpp:812
 msgid ""
 "Sinuous feature with segments of positive and negative relief along its "
 "length."
 msgstr "सर्प आकार का लक्षण जिसके लम्बाई के चलते बढाव घटाव उत्कीर्णित जैसे हो।"
 
 #. TRANSLATORS: Description for landform 'sinus'
-#: src/core/modules/NomenclatureItem.cpp:812
+#: src/core/modules/NomenclatureItem.cpp:814
 msgid "'Bay'; small plain."
 msgstr "खाडी। छोटा समतल।"
 
 #. TRANSLATORS: Description for landform 'sulcus'
-#: src/core/modules/NomenclatureItem.cpp:814
+#: src/core/modules/NomenclatureItem.cpp:816
 msgid "Subparallel furrows and ridges."
 msgstr "उपसमान्तर हलरेखा तथा शिखर।"
 
 #. TRANSLATORS: Description for landform 'terra'
-#: src/core/modules/NomenclatureItem.cpp:816
+#: src/core/modules/NomenclatureItem.cpp:818
 msgid "Extensive land mass."
 msgstr "विसतृत भूखण्ड।"
 
 #. TRANSLATORS: Description for landform 'tessera'
-#: src/core/modules/NomenclatureItem.cpp:818
+#: src/core/modules/NomenclatureItem.cpp:820
 msgid "Tile-like, polygonal terrain."
 msgstr "इष्टिका जैसे अनेकास्र धरती।"
 
 #. TRANSLATORS: Description for landform 'tholus'
-#: src/core/modules/NomenclatureItem.cpp:820
+#: src/core/modules/NomenclatureItem.cpp:822
 msgid "Small domical mountain or hill."
 msgstr "छोटा गोलाकार पर्वत पहाड।"
 
 #. TRANSLATORS: Description for landform 'unda'
-#: src/core/modules/NomenclatureItem.cpp:822
+#: src/core/modules/NomenclatureItem.cpp:824
 msgid "Dunes."
 msgstr "लहर रूप धरातल।"
 
 #. TRANSLATORS: Description for landform 'vallis'
-#: src/core/modules/NomenclatureItem.cpp:824
+#: src/core/modules/NomenclatureItem.cpp:826
 msgid "Valley."
 msgstr "घाटी।"
 
 #. TRANSLATORS: Description for landform 'vastitas'
-#: src/core/modules/NomenclatureItem.cpp:826
+#: src/core/modules/NomenclatureItem.cpp:828
 msgid "Extensive plain."
 msgstr "विस्तृत समतल।"
 
 #. TRANSLATORS: Description for landform 'virga'
-#: src/core/modules/NomenclatureItem.cpp:828
+#: src/core/modules/NomenclatureItem.cpp:830
 msgid "A streak or stripe of color."
 msgstr "वर्ण युक्त धज्जी जैसा।"
 
@@ -1836,18 +1836,18 @@ msgid "Airmasses"
 msgstr "वायुखण्ड"
 
 #: src/core/modules/Nebula.cpp:236 src/core/modules/Planet.cpp:568
-#: src/core/modules/StarWrapper.cpp:276
+#: src/core/modules/StarWrapper.cpp:256
 msgid "Additional names: "
 msgstr "अतिरिक्त नाम : "
 
 #: src/core/modules/Nebula.cpp:242 src/core/modules/Planet.cpp:575
-#: src/core/modules/StarWrapper.cpp:282
+#: src/core/modules/StarWrapper.cpp:262
 msgid "Additional catalog numbers: "
 msgstr "अतिरिक्त सूचीपत्र संख्या : "
 
 #: src/core/modules/Nebula.cpp:260 src/core/modules/Planet.cpp:815
 #: src/core/modules/MinorPlanet.cpp:186 src/core/modules/StarWrapper.cpp:54
-#: src/core/modules/StarWrapper.cpp:306 plugins/Quasars/src/Quasar.cpp:134
+#: src/core/modules/StarWrapper.cpp:286 plugins/Quasars/src/Quasar.cpp:134
 #: plugins/MissingStars/src/MissingStar.cpp:143
 msgid "Color Index (B-V)"
 msgstr "वर्ण निर्देशिका ( नील दृश्य )"
@@ -1892,7 +1892,7 @@ msgstr "दिशा अस्र"
 #. TRANSLATORS: Unit of measure for distance - light years
 #. TRANSLATORS: Unit of measure for distance - Light Years
 #: src/core/modules/Nebula.cpp:345 src/core/modules/Nebula.cpp:358
-#: src/core/modules/StarWrapper.cpp:336
+#: src/core/modules/StarWrapper.cpp:316
 #: plugins/Supernovae/src/Supernova.cpp:159 plugins/Novae/src/Nova.cpp:164
 #: plugins/Pulsars/src/Pulsar.cpp:268 plugins/Exoplanets/src/Exoplanet.cpp:334
 #: plugins/MissingStars/src/MissingStar.cpp:153
@@ -1902,8 +1902,8 @@ msgstr "प्र॰व॰"
 
 #. TRANSLATORS: distance
 #: src/core/modules/Nebula.cpp:346 src/core/modules/Nebula.cpp:392
-#: src/core/modules/Planet.cpp:707 src/core/modules/StarWrapper.cpp:341
-#: src/core/modules/StarWrapper.cpp:343 src/gui/AstroCalcDialog.cpp:936
+#: src/core/modules/Planet.cpp:707 src/core/modules/StarWrapper.cpp:321
+#: src/core/modules/StarWrapper.cpp:323 src/gui/AstroCalcDialog.cpp:936
 #: src/gui/AstroCalcChart.cpp:92 src/gui/AstroCalcChart.cpp:102
 #: src/gui/AstroCalcChart.cpp:427 src/gui/AstroCalcChart.cpp:453
 #: src/ui_configurationDialog.h:1791 plugins/Supernovae/src/Supernova.cpp:160
@@ -1935,13 +1935,13 @@ msgstr "प्र॰प्र॰व॰"
 msgid "Redshift"
 msgstr "रक्तवर्णीकरण"
 
-#: src/core/modules/Nebula.cpp:417 src/core/modules/StarWrapper.cpp:370
+#: src/core/modules/Nebula.cpp:417 src/core/modules/StarWrapper.cpp:350
 #: plugins/MissingStars/src/MissingStar.cpp:180
 msgid "Parallax"
 msgstr "लम्बन"
 
 #. TRANSLATORS: Unit of measure for annual parallax - milliarcseconds
-#: src/core/modules/Nebula.cpp:417 src/core/modules/StarWrapper.cpp:375
+#: src/core/modules/Nebula.cpp:417 src/core/modules/StarWrapper.cpp:355
 #: plugins/Pulsars/src/Pulsar.cpp:257
 #: plugins/MissingStars/src/MissingStar.cpp:185
 msgctxt "parallax"
@@ -2332,7 +2332,7 @@ msgid "interstellar object"
 msgstr "तारान्तर वस्तु"
 
 #: src/core/modules/Planet.cpp:546 src/core/modules/Comet.cpp:181
-#: src/core/modules/StarWrapper.cpp:300 plugins/Quasars/src/Quasar.cpp:131
+#: src/core/modules/StarWrapper.cpp:280 plugins/Quasars/src/Quasar.cpp:131
 #: plugins/MissingStars/src/MissingStar.cpp:138
 msgid "Absolute Magnitude"
 msgstr "निरपेक्ष मात्रा"
@@ -2367,7 +2367,7 @@ msgid "Hourly motion"
 msgstr "घण्टेवार गति"
 
 #: src/core/modules/Planet.cpp:658 src/core/modules/Planet.cpp:1385
-#: src/core/modules/Planet.cpp:1394 src/core/modules/StarWrapper.cpp:358
+#: src/core/modules/Planet.cpp:1394 src/core/modules/StarWrapper.cpp:338
 #: plugins/Pulsars/src/Pulsar.cpp:204
 #: plugins/MissingStars/src/MissingStar.cpp:172
 msgctxt "into the direction of"
@@ -2465,7 +2465,7 @@ msgid "Angular distance"
 msgstr "अस्रीय दूरी"
 
 #. TRANSLATORS: Unit of measure for period - days
-#: src/core/modules/Planet.cpp:911 src/core/modules/StarWrapper.cpp:382
+#: src/core/modules/Planet.cpp:911 src/core/modules/StarWrapper.cpp:362
 #: src/gui/AstroCalcDialog.cpp:9082
 msgctxt "duration"
 msgid "days"
@@ -2759,21 +2759,21 @@ msgstr "ग्रहणकारी युगलतारा मण्डल"
 msgid "variable star"
 msgstr "विकारी तारा"
 
-#: src/core/modules/StarWrapper.cpp:324
+#: src/core/modules/StarWrapper.cpp:304
 #: plugins/Satellites/src/ui_satellitesDialog.h:1268
 msgid "Magnitude range"
 msgstr "मात्रा फैलाव"
 
-#: src/core/modules/StarWrapper.cpp:324
+#: src/core/modules/StarWrapper.cpp:304
 msgid "Photometric system"
 msgstr "प्रकाशमात्रा व्यवस्था"
 
-#: src/core/modules/StarWrapper.cpp:355 plugins/Pulsars/src/Pulsar.cpp:202
+#: src/core/modules/StarWrapper.cpp:335 plugins/Pulsars/src/Pulsar.cpp:202
 #: plugins/MissingStars/src/MissingStar.cpp:170
 msgid "Proper motion"
 msgstr "निज गति"
 
-#: src/core/modules/StarWrapper.cpp:357 src/core/modules/StarWrapper.cpp:363
+#: src/core/modules/StarWrapper.cpp:337 src/core/modules/StarWrapper.cpp:343
 #: plugins/Pulsars/src/Pulsar.cpp:203 plugins/Pulsars/src/Pulsar.cpp:205
 #: plugins/MissingStars/src/MissingStar.cpp:171
 #: plugins/MissingStars/src/MissingStar.cpp:173
@@ -2781,45 +2781,45 @@ msgctxt "milliarc second per year"
 msgid "mas/yr"
 msgstr "श॰तम चा॰वि॰प्र॰व॰"
 
-#: src/core/modules/StarWrapper.cpp:360 plugins/Pulsars/src/Pulsar.cpp:205
+#: src/core/modules/StarWrapper.cpp:340 plugins/Pulsars/src/Pulsar.cpp:205
 #: plugins/MissingStars/src/MissingStar.cpp:173
 msgid "Proper motions by axes"
 msgstr "निज गति अक्ष आधारित"
 
-#: src/core/modules/StarWrapper.cpp:379 plugins/Quasars/src/Quasar.cpp:142
+#: src/core/modules/StarWrapper.cpp:359 plugins/Quasars/src/Quasar.cpp:142
 #: plugins/Exoplanets/src/Exoplanet.cpp:329
 #: plugins/MissingStars/src/MissingStar.cpp:189
 msgid "Spectral Type"
 msgstr "वर्णक्रम प्रकार"
 
-#: src/core/modules/StarWrapper.cpp:382
+#: src/core/modules/StarWrapper.cpp:362
 #: plugins/Satellites/src/ui_satellitesFilterDialog.h:262
 #: plugins/Exoplanets/src/Exoplanet.cpp:361
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:177
 msgid "Period"
 msgstr "अवधि"
 
-#: src/core/modules/StarWrapper.cpp:390
+#: src/core/modules/StarWrapper.cpp:370
 msgid "Next maximum light"
 msgstr "अगला उच्चतम प्रकाश"
 
-#: src/core/modules/StarWrapper.cpp:392
+#: src/core/modules/StarWrapper.cpp:372
 msgid "Next minimum light"
 msgstr "अगला न्यूनतम प्रकाश"
 
-#: src/core/modules/StarWrapper.cpp:399
+#: src/core/modules/StarWrapper.cpp:379
 msgid "Rising time"
 msgstr "उदय का समय"
 
-#: src/core/modules/StarWrapper.cpp:401
+#: src/core/modules/StarWrapper.cpp:381
 msgid "Duration of eclipse"
 msgstr "ग्रहण कालावधि"
 
-#: src/core/modules/StarWrapper.cpp:410
+#: src/core/modules/StarWrapper.cpp:390
 msgid "Position angle"
 msgstr "स्थान अस्र"
 
-#: src/core/modules/StarWrapper.cpp:417 src/core/modules/StarWrapper.cpp:422
+#: src/core/modules/StarWrapper.cpp:397 src/core/modules/StarWrapper.cpp:402
 #: src/gui/AstroCalcDialog.cpp:6452
 msgid "Separation"
 msgstr "वियोग"
@@ -3116,7 +3116,7 @@ msgstr "सपओउट भेजनेवाला नही बना सक�
 msgid "Loading plugin"
 msgstr "उपलग्न का आरोहण"
 
-#: src/core/StelCore.cpp:294 src/gui/StelGui.cpp:225
+#: src/core/StelCore.cpp:294 src/gui/StelGui.cpp:252
 #: src/gui/AstroCalcDialog.cpp:1739 src/gui/AstroCalcDialog.cpp:2318
 #: src/gui/AstroCalcDialog.cpp:2342 src/gui/AstroCalcDialog.cpp:2890
 #: src/gui/AstroCalcDialog.cpp:2919 src/gui/AstroCalcDialog.cpp:6445
@@ -3266,106 +3266,130 @@ msgid "Add 1 Gaussian year"
 msgstr "जोडें 1 गौस्सियन वर्ष"
 
 #: src/core/StelCore.cpp:332
-msgid "Add 1 calendric month"
-msgstr "जोडें 1 कालदर्शक मास"
+msgid "Add 1 calendar month"
+msgstr ""
 
 #: src/core/StelCore.cpp:333
+msgid "Add 1 calendar year"
+msgstr ""
+
+#: src/core/StelCore.cpp:334
+msgid "Add 10 calendar years"
+msgstr ""
+
+#: src/core/StelCore.cpp:335
+msgid "Add 100 calendar years"
+msgstr ""
+
+#: src/core/StelCore.cpp:336
 msgid "Subtract 1 sidereal day"
 msgstr "1 नाक्षत्र दिन घटाएँ"
 
-#: src/core/StelCore.cpp:334
+#: src/core/StelCore.cpp:337
 msgid "Subtract 7 sidereal days"
 msgstr "घटाएँ 7 नक्षत्र दिन"
 
-#: src/core/StelCore.cpp:335
+#: src/core/StelCore.cpp:338
 msgid "Subtract 1 sidereal year"
 msgstr "घटाएँ 1 नक्षत्र वर्ष"
 
-#: src/core/StelCore.cpp:336
+#: src/core/StelCore.cpp:339
 msgid "Subtract 100 sidereal years"
 msgstr "घटाएँ 100 नक्षत्र वर्ष"
 
-#: src/core/StelCore.cpp:337
+#: src/core/StelCore.cpp:340
 msgid "Subtract 1 synodic month"
 msgstr "घटाएँ 1 चन्द्रकला मास"
 
-#: src/core/StelCore.cpp:338
+#: src/core/StelCore.cpp:341
 msgid "Subtract 1 saros"
 msgstr "घटाएँ 1 ग्रहणचक्रावधि"
 
-#: src/core/StelCore.cpp:339
+#: src/core/StelCore.cpp:342
 msgid "Subtract 1 draconic month"
 msgstr "घटाएँ 1 राहु मास"
 
-#: src/core/StelCore.cpp:340
+#: src/core/StelCore.cpp:343
 msgid "Subtract 1 draconic year"
 msgstr "घटाएँ 1 राहु वर्ष"
 
-#: src/core/StelCore.cpp:341
+#: src/core/StelCore.cpp:344
 msgid "Subtract 1 anomalistic month"
 msgstr "घटाएँ 1 विषम मास"
 
-#: src/core/StelCore.cpp:342
+#: src/core/StelCore.cpp:345
 msgid "Subtract 1 anomalistic year"
 msgstr "घटाएँ 1 विषम वर्ष"
 
-#: src/core/StelCore.cpp:343
+#: src/core/StelCore.cpp:346
 msgid "Subtract 100 anomalistic years"
 msgstr "घटाएँ 100 विषम वर्ष"
 
-#: src/core/StelCore.cpp:344
+#: src/core/StelCore.cpp:347
 msgid "Subtract 1 mean tropical month"
 msgstr "घटाएँ 1 मध्यमान अयन मास"
 
-#: src/core/StelCore.cpp:345
+#: src/core/StelCore.cpp:348
 msgid "Subtract 1 mean tropical year"
 msgstr "घटाएँ 1 मध्यमान अयन वर्ष"
 
-#: src/core/StelCore.cpp:346
+#: src/core/StelCore.cpp:349
 msgid "Subtract 100 mean tropical years"
 msgstr "घटाएँ 100 मध्यमान अयन वर्ष"
 
-#: src/core/StelCore.cpp:347
+#: src/core/StelCore.cpp:350
 msgid "Subtract 1 tropical year"
 msgstr "घटाएँ 1 अयनमान वर्ष"
 
-#: src/core/StelCore.cpp:348
+#: src/core/StelCore.cpp:351
 msgid "Subtract 1 Julian year"
 msgstr "घटाएँ 1 जूलियन वर्ष"
 
-#: src/core/StelCore.cpp:349
+#: src/core/StelCore.cpp:352
 msgid "Subtract 1 Julian century"
 msgstr "घटाएँ 1 जूलियन शतवर्ष"
 
-#: src/core/StelCore.cpp:350
+#: src/core/StelCore.cpp:353
 msgid "Subtract 1 Gaussian year"
 msgstr "घटाएँ 1 गौस्सियन वर्ष"
 
-#: src/core/StelCore.cpp:351
-msgid "Subtract 1 calendric month"
-msgstr "घटाएँ 1 कालदर्शक मास"
+#: src/core/StelCore.cpp:354
+msgid "Subtract 1 calendar month"
+msgstr ""
 
-#: src/core/StelCore.cpp:353
+#: src/core/StelCore.cpp:355
+msgid "Subtract 1 calendar year"
+msgstr ""
+
+#: src/core/StelCore.cpp:356
+msgid "Subtract 10 calendar years"
+msgstr ""
+
+#: src/core/StelCore.cpp:357
+msgid "Subtract 100 calendar years"
+msgstr ""
+
+#: src/core/StelCore.cpp:359
 msgid "Set home planet to selected planet"
 msgstr "चुने हुए ग्रह को घर ग्रह बनाएँ"
 
-#: src/core/StelCore.cpp:354
+#: src/core/StelCore.cpp:360
 msgid "Go to home"
 msgstr "जाएँ घर"
 
-#: src/core/StelCore.cpp:356
+#: src/core/StelCore.cpp:362
 msgid "Flip scene horizontally"
 msgstr "दृश्य दाएँ बाएँ पलटें"
 
-#: src/core/StelCore.cpp:357
+#: src/core/StelCore.cpp:363
 msgid "Flip scene vertically"
 msgstr "दृश्य को लम्बवत पलटें"
 
-#: src/core/StelCore.cpp:2469
+#: src/core/StelCore.cpp:2535
 msgid "Correction is disabled. Use only if you know what you are doing!"
 msgstr "ठीक करना अक्षम। प्रयोजन करें यदि आप जानते हैं आप क्या कर रहे हैं।"
 
-#: src/core/StelCore.cpp:2472
+#: src/core/StelCore.cpp:2538
 #, qt-format
 msgid ""
 "This historical formula was obtained by C. Schoch in 1931 and was used by G."
@@ -3377,7 +3401,7 @@ msgstr ""
 "सिद्ध पुराने सौरग्रहणों द्वारा </em> (%1) । अधिक जानकारी के लिए देखें "
 "%2इधर%3 ।"
 
-#: src/core/StelCore.cpp:2475
+#: src/core/StelCore.cpp:2541
 #, qt-format
 msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
@@ -3386,7 +3410,7 @@ msgstr ""
 "यह व्यावहारिक समीकरण प्रकाशित हुआ जी॰एम॰क्लेमेस द्वारा अपने इस शोधपत्र में "
 "<em> ज्योतिषशास्त्र के अविकारी अंकों की व्यवस्था पर </em> (%1) ।"
 
-#: src/core/StelCore.cpp:2478
+#: src/core/StelCore.cpp:2544
 #, qt-format
 msgid ""
 "This formula is based on a study of post-1650 observations of the Sun, the "
@@ -3399,7 +3423,7 @@ msgstr ""
 "अपने इस शोधपत्र में <em> ज्योतिषशास्त्र कारिकाएँ परिकलनकर्ताओं के लिए </em> "
 "। यह अपनाया गया संगणक क्रम सन्ट्राकर प्रो द्वारा भी।"
 
-#: src/core/StelCore.cpp:2482
+#: src/core/StelCore.cpp:2548
 msgid ""
 "This is a slightly modified version of the IAU (1952) formula which was "
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar"
@@ -3409,7 +3433,7 @@ msgstr ""
 " <em> ज्योतिषशास्त्र ग्रहपत्री </em> तथा इस में <em> सौरग्रहणों का मापदण्ड "
 "</em> मुक तथा मीयुस (1983) द्वारा।"
 
-#: src/core/StelCore.cpp:2486
+#: src/core/StelCore.cpp:2552
 msgid ""
 "The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon"
 " and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The "
@@ -3420,7 +3444,7 @@ msgstr ""
 "ग्रहों के 5- तथा 10- दिन अवधि पर 601 ई॰पू॰ से 1649 ई॰ तक। समान सम्बन्ध "
 "अन्तर्निहितः अपनाया गया संयोग फलकों में गोल्ड्स्टीन (1973) के।"
 
-#: src/core/StelCore.cpp:2490
+#: src/core/StelCore.cpp:2556
 #, qt-format
 msgid ""
 "This equation was published by P. M. Muller and F. R. Stephenson in the "
@@ -3430,7 +3454,7 @@ msgstr ""
 "यह समीकरण प्रकाशित हुआ पी॰एम॰म्यूल्लर तथा एफ॰आर॰स्टीफेन्सन इस पत्र में <em> "
 "पृथ्वी तथा चन्द्रमा की तेजी पूर्वी ज्योतषशास्त्रीय अवलोकनों से </em> (%1) ।"
 
-#: src/core/StelCore.cpp:2493
+#: src/core/StelCore.cpp:2559
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
@@ -3439,7 +3463,7 @@ msgstr ""
 "यह समीकरण प्रकाशित हुआ एफ॰आर॰स्टीफेन्सन द्वारा अपने इस पत्र में <em> "
 "दूरदर्शक पूर्व ज्योतिषशास्त्रीय अवलोकन </em> (%1) ।"
 
-#: src/core/StelCore.cpp:2496
+#: src/core/StelCore.cpp:2562
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation (outdated and superseded by Schmadel & "
@@ -3452,7 +3476,7 @@ msgstr ""
 "ई॰टी॰-यु॰टी॰ 1800-1975 कालावधि में </em> (%1) आसंजन तथ्य के रूप में ब्रौवर "
 "(1952) द्वारा।"
 
-#: src/core/StelCore.cpp:2499
+#: src/core/StelCore.cpp:2565
 msgid ""
 "This algorithm was adopted in P. Bretagnon & L. Simon's <em>Planetary "
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
@@ -3462,7 +3486,7 @@ msgstr ""
 " फलकें -4000 से +2800 तक </em> (1986) तथा संगणक ग्रहालय क्रम रेडशिफ्ट "
 "द्वारा।"
 
-#: src/core/StelCore.cpp:2502
+#: src/core/StelCore.cpp:2568
 #, qt-format
 msgid ""
 "This formula was published by F. R. Stephenson and L. V. Morrison in the "
@@ -3473,7 +3497,7 @@ msgstr ""
 "में <em> दीर्घकाल परिवर्तन पृथ्वी के घुमाव में - 700 ई॰पू॰ से 1980 ई॰ तक "
 "</em> (%1) ।"
 
-#: src/core/StelCore.cpp:2505
+#: src/core/StelCore.cpp:2571
 #, qt-format
 msgid ""
 "This algorithm was published by F. R. Stephenson and M. A. Houlden in the "
@@ -3484,7 +3508,7 @@ msgstr ""
 "में <em> एैतिहासिक ग्रहण मानचित्रों का पुस्तक </em> (%1) । यह कार्यक्रम "
 "प्रयोजित है संगणक ग्रहालय क्रम गय्ड 7 में।"
 
-#: src/core/StelCore.cpp:2508
+#: src/core/StelCore.cpp:2574
 msgid ""
 "This algorithm was given by F. Espenak in his <em>Fifty Year Canon of Solar "
 "Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar "
@@ -3494,7 +3518,7 @@ msgstr ""
 " ग्रहणों का : 1986-2035 </em> (1987) तथा <em> पचास वर्ष मापदण्ड "
 "चन्द्रग्रहणों का : 1986-2035 </em> (1989) ।"
 
-#: src/core/StelCore.cpp:2511
+#: src/core/StelCore.cpp:2577
 #, qt-format
 msgid ""
 "This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 "
@@ -3503,7 +3527,7 @@ msgstr ""
 "यह कारिका प्राप्त हुआ के॰एम॰बोर्कौस्की (%1) को एक विश्लेषण द्वारा 31 "
 "सूर्यग्रहणों के अभिलेखों का जिनका काल है 2137 ई॰पू॰ से 1715 ई॰ तक"
 
-#: src/core/StelCore.cpp:2514
+#: src/core/StelCore.cpp:2580
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation was published by L. D. Schmadel and G. "
@@ -3516,7 +3540,7 @@ msgstr ""
 "1800-1988 के लिए </em> (%1) आसंजन मूल्यों के रूप मे जो दिए गये थे स्टीफेन्सन"
 " तथा मोर्रिसन (1984) द्वारा।"
 
-#: src/core/StelCore.cpp:2517
+#: src/core/StelCore.cpp:2583
 msgid ""
 "This formula was adopted by M. Chapront-Touze & J. Chapront in the shortened"
 " version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and "
@@ -3526,7 +3550,7 @@ msgstr ""
 "संकुचित प्रकाशन ई॰एल॰पी॰ 2000-85 चन्द्र वाद का अपने <em> चन्द्र फलकें तथा "
 "क्रम 4000 ई॰पू॰ से 8000 ई॰ तक </em> (1991) में।"
 
-#: src/core/StelCore.cpp:2520
+#: src/core/StelCore.cpp:2586
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson and L. V. Morrison in the "
@@ -3537,7 +3561,7 @@ msgstr ""
 "में <em> दीर्घकाल चंचलता पृथ्वी के घुमाव में : 700 ई॰पू॰ से 1990 ई॰ तक </em>"
 " (%1) ।"
 
-#: src/core/StelCore.cpp:2523
+#: src/core/StelCore.cpp:2589
 #, qt-format
 msgid ""
 "F. R. Stephenson published this formula in his book <em>Historical Eclipses "
@@ -3546,7 +3570,7 @@ msgstr ""
 "एफ॰आर॰स्टीफेन्सन ने प्रकाशित किया इस कारिका को अपने पुस्तक <em> एैतिहासिक "
 "ग्रहणें तथा पृथ्वी का घुमाव </em> (%1) में।"
 
-#: src/core/StelCore.cpp:2526
+#: src/core/StelCore.cpp:2592
 msgid ""
 "From J. Meeus, <em>Astronomical Algorithms</em> (2nd ed., 1998), and widely "
 "used. Table for 1620..2000, and includes a variant of Chapront, Chapront-"
@@ -3556,7 +3580,7 @@ msgstr ""
 "व्यापक प्रयुक्त। फलक 1620..2000 के लिए तथा समावेशित एक विकार चाप्रोण्ट "
 "चाप्रोण्ट-तूस तथा फ्रांकौ (1997) का कालावधि 1620..2000 के बाहर के लिए।"
 
-#: src/core/StelCore.cpp:2529
+#: src/core/StelCore.cpp:2595
 #, qt-format
 msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
@@ -3565,7 +3589,7 @@ msgstr ""
 "॰नासा॰ विमान प्रस्फुरण तन्त्रशाला के सौरमण्डल गतिविधि गुट इस कारिका का "
 "प्रयोग करते हैं अपने संचारी जालस्थान में %1 जे॰पी॰एल॰ क्षितिजें %2 ।"
 
-#: src/core/StelCore.cpp:2532
+#: src/core/StelCore.cpp:2598
 #, qt-format
 msgid ""
 "This polynome was published by J. Meeus and L. Simons in article "
@@ -3574,7 +3598,7 @@ msgstr ""
 "यह बहुपद प्रकाशित हुआ जे॰मीयुस तथा एल॰सैमन्स द्वारा इस पत्र में <em> बहुपद "
 "सन्निकटन अन्तर टी के लिए 1620-2000 ई॰ </em> (%1) ।"
 
-#: src/core/StelCore.cpp:2535
+#: src/core/StelCore.cpp:2601
 msgid ""
 "The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the "
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits"
@@ -3583,7 +3607,7 @@ msgstr ""
 "ओ॰मोण्टेन्ब्रुक तथा टी॰प्फ्लेगर के चतुर्थ प्रकाशन <em> ज्योतिषशास्त्र संगणक "
 "पर </em> (2000) उपलब्ध करता है सरल 3 वर्ग बहुपद तथ्य आसंजन निकट अतीत के लिए।"
 
-#: src/core/StelCore.cpp:2538
+#: src/core/StelCore.cpp:2604
 msgid ""
 "E. M. Reingold & N. Dershowitz present this polynomial data fit in "
 "<em>Calendrical Calculations</em> (4th ed. 2018) and in their "
@@ -3595,7 +3619,7 @@ msgstr ""
 "फलकीकरण </em> (2002) में। यह आधारित है ज्यान मीयुस के <em> ज्योतिषशास्त्र "
 "गणितक्रमावली </em> (1991) पर।"
 
-#: src/core/StelCore.cpp:2541
+#: src/core/StelCore.cpp:2607
 #, qt-format
 msgid ""
 "This important solution was published by L. V. Morrison and F. R. Stephenson"
@@ -3606,7 +3630,7 @@ msgstr ""
 " इस पत्र में <em> एैतिहासिक मूल्य पृथ्वी के घडी मे चूक की %1टी तथा ग्रहणों "
 "का परिकलन </em> (%2) अनुशेष के साथ (%3) में।"
 
-#: src/core/StelCore.cpp:2544
+#: src/core/StelCore.cpp:2610
 #, qt-format
 msgid ""
 "From the Length of Day (LOD; as determined by Stephenson & Morrison (%2)), "
@@ -3619,7 +3643,7 @@ msgstr ""
 "वर्ग कार्य के साथ। यह आधारित है एक सम्भव आवधिकता जिसका विवरण किया गया "
 "स्टीफेन्सन (%2) द्वारा। अधिक जानकारी के लिए देखें  %3 इधर %4 ।"
 
-#: src/core/StelCore.cpp:2547
+#: src/core/StelCore.cpp:2613
 #, qt-format
 msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
@@ -3630,7 +3654,7 @@ msgid ""
 "solar, lunar and planetary ephemeris program SOLEX."
 msgstr ""
 
-#: src/core/StelCore.cpp:2550
+#: src/core/StelCore.cpp:2616
 msgid ""
 "This solution is modified from F. Espenak and J. Meeus, based on Morrison & "
 "Stephenson (2004) and a polynomial fit through tabulated values for "
@@ -3638,15 +3662,15 @@ msgid ""
 "predictions by IERS Rapid Service/Prediction Center."
 msgstr ""
 
-#: src/core/StelCore.cpp:2550
+#: src/core/StelCore.cpp:2616
 msgid "Used by default."
 msgstr "प्रयोजित मूलविकल्पतः।"
 
-#: src/core/StelCore.cpp:2553
+#: src/core/StelCore.cpp:2619
 msgid "PATCHED VERSION WITHOUT ADDITIONAL LUNAR ACCELERATION."
 msgstr "संशोधित प्रकाशन बिना अधिक चन्द्रमा तेजी के।"
 
-#: src/core/StelCore.cpp:2553
+#: src/core/StelCore.cpp:2619
 msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
 "(2004) and a polynomial fit through tabulated values for 1600-2000."
@@ -3654,7 +3678,7 @@ msgstr ""
 "यह सुलझाव एफ॰एस्पेनाक तथा जे॰मीयुस द्वारा आधारित है मोर्रिसन तथा स्टीफेन्सन "
 "(2004) पर तथा 1600-2000 के लिए फलकीकृत मूल्यों का एक बहुपद आसंजन पर।"
 
-#: src/core/StelCore.cpp:2556
+#: src/core/StelCore.cpp:2622
 #, qt-format
 msgid ""
 "This solution by B. Banjevic, based on Stephenson & Morrison (1984), was "
@@ -3665,7 +3689,7 @@ msgstr ""
 " प्रकाशित हुआ इस पत्र में <em> पुराने ग्रहण तथा बाबिलोन के पतन का कालनिर्णय "
 "</em> (%1) ।"
 
-#: src/core/StelCore.cpp:2559
+#: src/core/StelCore.cpp:2625
 #, qt-format
 msgid ""
 "This solution by S. Islam, M. Sadiq and M. S. Qureshi, based on Meeus & "
@@ -3676,7 +3700,7 @@ msgstr ""
 "सैमन्स (2000) पर प्रकाशित हुआ इस पत्र में <em> चूक न्यूनीकरण बहुपद सन्निकटन "
 "का अन्तर टी का </em> (%1) तथा पुनरालोचित सना इस्लाम द्वारा 2013 में।"
 
-#: src/core/StelCore.cpp:2562
+#: src/core/StelCore.cpp:2628
 #, qt-format
 msgid ""
 "This polynomial approximation with 0.6 seconds of accuracy by M. Khalid, "
@@ -3687,7 +3711,7 @@ msgstr ""
 " फहीम जयिदी द्वारा प्रकाशित हुआ इस पत्र में <em> अन्तर टी : बहुपद सन्निकटन "
 "1620-2013 कालावधि के लिए </em> (%1) ।"
 
-#: src/core/StelCore.cpp:2565
+#: src/core/StelCore.cpp:2631
 #, qt-format
 msgid ""
 "This solution by F. R. Stephenson, L. V. Morrison and C. Y. Hohenkerk (2016)"
@@ -3706,7 +3730,7 @@ msgstr ""
 "विस्तार के बाहर ( जो प्रतिरूपित है एक खण्डशः अनास्र वक्ररेखा आसंजन द्वारा ) "
 "यह उपलब्ध करता मूल्यों को एक सन्निकट परवलय से।"
 
-#: src/core/StelCore.cpp:2568
+#: src/core/StelCore.cpp:2634
 #, qt-format
 msgid ""
 "This solution by G. Henriksson was published in the article <em>The "
@@ -3717,7 +3741,7 @@ msgstr ""
 " तथा ब्रह्माण्ड का - द्रव्यमान गुरुत्वकण का </em> (%1) तथा आधारित है "
 "सी॰स्खोख के कारिका (1931) पर।"
 
-#: src/core/StelCore.cpp:2571
+#: src/core/StelCore.cpp:2637
 #, qt-format
 msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined"
@@ -3726,7 +3750,7 @@ msgstr ""
 "यह एक द्विघात कारिका है %1टी का परिकलन के लिए जिसके गुणांक उपयोगकर्ता "
 "निर्धारित हो।"
 
-#: src/core/StelCore.cpp:2574 src/core/SimbadSearcher.cpp:173
+#: src/core/StelCore.cpp:2640 src/core/SimbadSearcher.cpp:173
 #: src/gui/ObsListDialog.cpp:84 src/gui/ObsListDialog.cpp:935
 #: src/gui/ObsListDialog.cpp:956 src/gui/ObsListDialog.cpp:1002
 #: src/gui/ObsListDialog.cpp:1018 src/gui/ObsListDialog.cpp:1059
@@ -3737,7 +3761,7 @@ msgstr ""
 msgid "Error"
 msgstr "अपक्रम"
 
-#: src/core/StelCore.cpp:2582
+#: src/core/StelCore.cpp:2648
 #, qt-format
 msgid ""
 "The solution's value of %1 for %2 (secular acceleration of the Moon) "
@@ -3746,15 +3770,15 @@ msgstr ""
 "सुलझाव का %1 मूल्य %2 के लिए ( धीमी तेजी चन्द्रमा का ) में कुछ अनुकूलन "
 "आवश्यक है। मार्गदर्शन देखें विवरणों के लिए।"
 
-#: src/core/StelCore.cpp:2626
+#: src/core/StelCore.cpp:2692
 msgid "with zero values outside this range"
 msgstr "शून्य संख्याएँ इस विस्तार के बाहर"
 
-#: src/core/StelCore.cpp:2629
+#: src/core/StelCore.cpp:2695
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr "साधारणतः 1-सेकण्ड अचूकता युक्त तथा शून्य संख्याएँ इस विस्तार के बाहर"
 
-#: src/core/StelCore.cpp:2632
+#: src/core/StelCore.cpp:2698
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and values for "
 "the limit years outside this range"
@@ -3762,16 +3786,16 @@ msgstr ""
 "मध्यमान चूक एक सेकण्ड से न्यून। उच्चतम चूक 1.9 से॰। तथा संख्याएँ सीमा वर्षों"
 " के लिए इस विस्तार के बाहर।"
 
-#: src/core/StelCore.cpp:2639
+#: src/core/StelCore.cpp:2705
 msgid "with values for the limit years outside this range"
 msgstr "संख्याएँ सीमा वर्षों के लिए इस विस्तार के बाहर"
 
-#: src/core/StelCore.cpp:2649
+#: src/core/StelCore.cpp:2715
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
 msgstr "वैध विस्तार प्रयोग का : इन वर्षों के भीतर %1 तथा %2, %3 ।"
 
-#: src/core/StelCore.cpp:2651
+#: src/core/StelCore.cpp:2717
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
 msgstr "वैध विस्तार प्रयोग का : इन वर्षों के भीतर %1 तथा %2 ।"
@@ -4095,7 +4119,7 @@ msgid "Lunar Az./Alt."
 msgstr "चन्द्र दि॰/ऊँ॰"
 
 #: src/core/StelObjectMgr.cpp:53 src/core/StelMovementMgr.cpp:194
-#: src/gui/StelGui.cpp:220 src/StelMainView.cpp:946 src/StelMainView.cpp:947
+#: src/gui/StelGui.cpp:247 src/StelMainView.cpp:946 src/StelMainView.cpp:947
 msgid "Miscellaneous"
 msgstr "विविध"
 
@@ -5555,116 +5579,116 @@ msgstr ""
 "अथवा आप { पत्र का बिबटेख अभिलेख का जालावरोहण } कर सकते हैं अन्य उद्धरण "
 "प्रारूप बनाने के लिए।"
 
-#: src/gui/StelGui.cpp:219
+#: src/gui/StelGui.cpp:246
 msgid "Windows"
 msgstr "विभिन्न खिड़कियाँ"
 
-#: src/gui/StelGui.cpp:221 src/ui_configurationDialog.h:1689
+#: src/gui/StelGui.cpp:248 src/ui_configurationDialog.h:1689
 #: src/ui_configurationDialog.h:1751
 msgid "Selected object information"
 msgstr "चुनी वस्तु की जानकारी देखें"
 
-#: src/gui/StelGui.cpp:222 plugins/RemoteSync/src/ui_remoteSyncDialog.h:436
+#: src/gui/StelGui.cpp:249 plugins/RemoteSync/src/ui_remoteSyncDialog.h:436
 msgid "Quit"
 msgstr "निष्क्रिय करें"
 
-#: src/gui/StelGui.cpp:226
+#: src/gui/StelGui.cpp:253
 msgid "Speed up the script execution rate"
 msgstr "क्रमादेश की कार्यान्वयन गति बढाएँ"
 
-#: src/gui/StelGui.cpp:227
+#: src/gui/StelGui.cpp:254
 msgid "Slow down the script execution rate"
 msgstr "क्रमादेश की कार्यान्वयन गति घटाएँ"
 
-#: src/gui/StelGui.cpp:228
+#: src/gui/StelGui.cpp:255
 msgid "Set the normal script execution rate"
 msgstr "क्रमादेश को साधारण गति से चलायें"
 
-#: src/gui/StelGui.cpp:229
+#: src/gui/StelGui.cpp:256
 msgid "Stop script execution"
 msgstr "क्रमादेश का चलन रोकें"
 
-#: src/gui/StelGui.cpp:231
+#: src/gui/StelGui.cpp:258
 msgid "Pause script execution"
 msgstr "क्रमादेश का चलन ठहराएँ"
 
-#: src/gui/StelGui.cpp:232
+#: src/gui/StelGui.cpp:259
 msgid "Resume script execution"
 msgstr "क्रमादेश का चलन पुनः आरम्भ करें"
 
-#: src/gui/StelGui.cpp:236
+#: src/gui/StelGui.cpp:263
 msgid "Script console window"
 msgstr "क्रमादेश अंतक खिडकी"
 
-#: src/gui/StelGui.cpp:239
+#: src/gui/StelGui.cpp:266
 msgid "Help window"
 msgstr "सहायता खिडकी"
 
-#: src/gui/StelGui.cpp:240
+#: src/gui/StelGui.cpp:267
 msgid "Configuration window"
 msgstr "समाकृति खिडकी"
 
-#: src/gui/StelGui.cpp:241 src/ui_searchDialogGui.h:758
+#: src/gui/StelGui.cpp:268 src/ui_searchDialogGui.h:758
 msgid "Search window"
 msgstr "खोज खिडकी"
 
-#: src/gui/StelGui.cpp:242
+#: src/gui/StelGui.cpp:269
 msgid "Sky and viewing options window"
 msgstr "आकाश तथा दृश्य विकल्प खिडकी"
 
-#: src/gui/StelGui.cpp:243
+#: src/gui/StelGui.cpp:270
 msgid "Date/time window"
 msgstr "दिनांक / समय खिडकी"
 
-#: src/gui/StelGui.cpp:244
+#: src/gui/StelGui.cpp:271
 msgid "Location window"
 msgstr "स्थान खिडकी"
 
-#: src/gui/StelGui.cpp:245
+#: src/gui/StelGui.cpp:272
 msgid "Shortcuts window"
 msgstr "छोटेमार्गों की खिडकी"
 
-#: src/gui/StelGui.cpp:246
+#: src/gui/StelGui.cpp:273
 msgid "Astronomical calculations window"
 msgstr "ज्योतिषशास्त्र परिकलन खिडकी"
 
-#: src/gui/StelGui.cpp:247
+#: src/gui/StelGui.cpp:274
 msgid "Observing list"
 msgstr "अवलोकन सूची"
 
-#: src/gui/StelGui.cpp:248
+#: src/gui/StelGui.cpp:275
 msgid "Copy selected object information to clipboard"
 msgstr "चयनित वस्तु की जानकारी का अनुकरण करें टांकाफलक पर।"
 
-#: src/gui/StelGui.cpp:254
+#: src/gui/StelGui.cpp:281
 msgid "Auto hide horizontal button bar"
 msgstr "क्षितिजवत घुण्डी छड को स्वतः अदृश्य करें"
 
-#: src/gui/StelGui.cpp:255
+#: src/gui/StelGui.cpp:282
 msgid "Auto hide vertical button bar"
 msgstr "लम्बवत घुण्डी छड स्वतः अदृश्य करें"
 
-#: src/gui/StelGui.cpp:258
+#: src/gui/StelGui.cpp:285
 msgid "Toggle visibility of GUI"
 msgstr "चि॰उ॰मा॰ की दृश्यता पलटें"
 
-#: src/gui/StelGui.cpp:266
+#: src/gui/StelGui.cpp:293
 msgid "All available info"
 msgstr "सभी उपलब्ध जानकारी"
 
-#: src/gui/StelGui.cpp:267
+#: src/gui/StelGui.cpp:294
 msgid "Default info"
 msgstr "मूलविकल्प जानकारी"
 
-#: src/gui/StelGui.cpp:268
+#: src/gui/StelGui.cpp:295
 msgid "Short info"
 msgstr "संक्षिप्त जानकारी"
 
-#: src/gui/StelGui.cpp:269
+#: src/gui/StelGui.cpp:296
 msgid "None info"
 msgstr "कोई जानकारी नही"
 
-#: src/gui/StelGui.cpp:270
+#: src/gui/StelGui.cpp:297
 msgid "Custom info"
 msgstr "वैयक्तीकृत जानकारी"
 

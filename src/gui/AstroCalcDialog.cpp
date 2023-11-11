@@ -2273,8 +2273,25 @@ void AstroCalcDialog::selectCurrentRTS(const QModelIndex& modelIndex)
 {
 	// Find the object
 	const QString name = modelIndex.sibling(modelIndex.row(), RTSCOName).data(Qt::UserRole).toString();
-	const double JD = modelIndex.sibling(modelIndex.row(), RTSTransitDate).data(Qt::UserRole).toDouble();
-	goToObject(name, JD);
+	const double JD = modelIndex.sibling(modelIndex.row(), RTSTransitDate).data(Qt::UserRole).toDouble();	
+	if (objectMgr->findAndSelectI18n(name) || objectMgr->findAndSelect(name))
+	{
+		core->setJD(JD);
+		const QList<StelObjectP> newSelected = objectMgr->getSelectedObject();
+		if (!newSelected.empty())
+		{
+			// Can't point to home planet
+			if (newSelected[0]->getEnglishName() != core->getCurrentLocation().planetName)
+			{
+				mvMgr->moveToObject(newSelected[0], mvMgr->getAutoMoveDuration());
+				mvMgr->setFlagTracking(true);
+			}
+			else
+			{
+				GETSTELMODULE(StelObjectMgr)->unSelect();
+			}
+		}
+	}
 }
 
 void AstroCalcDialog::setRTSCelestialBodyName()
@@ -3879,14 +3896,14 @@ void AstroCalcDialog::selectCurrentSolarEclipseDate(const QModelIndex& modelInde
 	const float lon = modelIndex.sibling(modelIndex.row(), SolarEclipseLongitude).data(Qt::UserRole).toFloat();
 
 	StelLocation maxLoc(q_("Greatest eclipse’s point"), "", "", lon, lat, 10, 0, "LMST", 1, 'X');
-	qDebug() << "AstroCalcDialog::selectCurrentSolarEclipseDate(" << modelIndex;
-	qDebug() << "Moving to MaxLoc ...";
+	//qDebug() << "AstroCalcDialog::selectCurrentSolarEclipseDate(" << modelIndex;
+	//qDebug() << "Moving to MaxLoc ...";
 	// Find landscape color at the spot
 	StelLocationMgr* locationMgr = &StelApp::getInstance().getLocationMgr();
 	QColor color=locationMgr->getColorForCoordinates(lon, lat);
 	core->moveObserverTo(maxLoc, 2., 2., QString("ZeroColor(%1)").arg(Vec3f(color).toStr())); // use a neutral horizon but environmental color to avoid confusion.
 	goToObject("Sun", JD);
-	qDebug() << "Moving to MaxLoc ... done";
+	//qDebug() << "Moving to MaxLoc ... done";
 }
 
 QPair<double, double> AstroCalcDialog::getRiseSetLineCoordinates(bool first, double x,double y,double d,double L,double mu)
@@ -9497,7 +9514,7 @@ QList<PlanetP> AstroCalcDialog::getSelectedMinorPlanets()
 
 void AstroCalcDialog::goToObject(const QString &name, const double JD)
 {
-	if (objectMgr->findAndSelectI18n(name) || objectMgr->findAndSelect(name))
+	if (objectMgr->findAndSelectI18n(name, "Planet") || objectMgr->findAndSelect(name, "Planet"))
 	{
 		core->setJD(JD);
 		const QList<StelObjectP> newSelected = objectMgr->getSelectedObject();
