@@ -23,7 +23,6 @@
 StelVertexArray StelVertexArray::removeDiscontinuousTriangles(const StelProjector* prj) const
 {
 	StelVertexArray ret = *this;
-	ret.primitiveType = Triangles;
 
 	if (isIndexed())
 	{
@@ -56,12 +55,14 @@ StelVertexArray StelVertexArray::removeDiscontinuousTriangles(const StelProjecto
 	else
 	{
 		ret.indices.clear();
-		const unsigned short int limit=static_cast<unsigned short int>(vertex.size());
+		Q_ASSERT(vertex.size() <= std::numeric_limits<unsigned short>::max());
+		const unsigned short limit=vertex.size();
 		// Create a 'Triangles' vertex array from this array.
 		// We have different algorithms for different original mode
 		switch (primitiveType)
 		{
 			case TriangleStrip:
+				ret.primitiveType = Triangles;
 				ret.indices.reserve(vertex.size() * 3);
 				for (unsigned short int i = 2; i < limit; ++i)
 				{
