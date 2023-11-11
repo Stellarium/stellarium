@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2023-11-03 15:28+0700\n"
+"POT-Creation-Date: 2023-11-11 14:27+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: freemanli <freeman.tam@gmail.com>, 2023\n"
 "Language-Team: Chinese (Taiwan) (https://app.transifex.com/stellarium/teams/80998/zh_TW/)\n"
@@ -28,10 +28,10 @@ msgstr ""
 #. TRANSLATORS: type of object
 #: src/core/modules/CustomObject.cpp:81 src/core/modules/Asterism.cpp:194
 #: src/core/modules/Constellation.cpp:290
-#: src/core/modules/NomenclatureItem.cpp:230 src/core/modules/Nebula.cpp:249
+#: src/core/modules/NomenclatureItem.cpp:232 src/core/modules/Nebula.cpp:249
 #: src/core/modules/Nebula.cpp:251 src/core/modules/Planet.cpp:592
 #: src/core/modules/Planet.cpp:595 src/core/modules/StarWrapper.cpp:49
-#: src/core/modules/StarWrapper.cpp:290 src/core/modules/StarWrapper.cpp:292
+#: src/core/modules/StarWrapper.cpp:270 src/core/modules/StarWrapper.cpp:272
 #: src/gui/AstroCalcDialog.cpp:901 src/gui/AstroCalcDialog.cpp:2320
 #: src/gui/AstroCalcDialog.cpp:2892 src/gui/AstroCalcDialog.cpp:2924
 #: src/gui/AstroCalcDialog.cpp:3308 src/gui/AstroCalcDialog.cpp:8224
@@ -881,50 +881,50 @@ msgstr "mcd/m<sup>2</sup>"
 msgid "<b>Light pollution</b>: %1 %2 (NELM: %3; Bortle class: %4)"
 msgstr "<b>光污染</b>: %1 %2 (NELM: %3; 波特爾暗空分類法: %4)"
 
-#: src/core/modules/NomenclatureItem.cpp:74
+#: src/core/modules/NomenclatureItem.cpp:75
 msgctxt "landform"
 msgid "undocumented landform type"
 msgstr "未命名地形"
 
-#: src/core/modules/NomenclatureItem.cpp:143
+#: src/core/modules/NomenclatureItem.cpp:144
 msgid "Undocumented landform type."
 msgstr "未正式命名的地帽類型。"
 
 #. TRANSLATORS: Description for landform 'mare' on Mars
-#: src/core/modules/NomenclatureItem.cpp:147
+#: src/core/modules/NomenclatureItem.cpp:148
 msgid "'Sea'; dark albedo areas of no known geological significance."
 msgstr "「海」，未具有其他已知地形特徵的低反照率區域。"
 
 #. TRANSLATORS: Description for landform 'lacus' on Titan
-#: src/core/modules/NomenclatureItem.cpp:152
+#: src/core/modules/NomenclatureItem.cpp:153
 msgid "'Lake' or small, dark plain with discrete, sharp boundaries."
 msgstr "具有不連續的清晰邊界結構的小型黑暗平原或是湖。"
 
 #. TRANSLATORS: Description for landform 'mare' on Titan
-#: src/core/modules/NomenclatureItem.cpp:155
+#: src/core/modules/NomenclatureItem.cpp:156
 msgid ""
 "'Sea'; large expanses of dark materials thought to be liquid hydrocarbons"
 msgstr "「海」，被認為是液態碳氫化合物的黑色物質所構成的大面積區域。"
 
 #. TRANSLATORS: Description for landform 'sinus' on Titan
-#: src/core/modules/NomenclatureItem.cpp:158
+#: src/core/modules/NomenclatureItem.cpp:159
 msgid "'Bay'; bays within seas or lakes of liquid hydrocarbons."
 msgstr "「灣」，液態碳氫化合物海洋或湖泊內的灣。"
 
-#: src/core/modules/NomenclatureItem.cpp:232
+#: src/core/modules/NomenclatureItem.cpp:234
 msgid "geologic term"
 msgstr "地質學名詞"
 
-#: src/core/modules/NomenclatureItem.cpp:242
+#: src/core/modules/NomenclatureItem.cpp:244
 msgid "Linear size"
 msgstr "線性尺寸"
 
-#: src/core/modules/NomenclatureItem.cpp:245 src/core/modules/Planet.cpp:804
+#: src/core/modules/NomenclatureItem.cpp:247 src/core/modules/Planet.cpp:804
 msgid "Diameter"
 msgstr "直徑"
 
 #. TRANSLATORS: Unit of measure for distance - kilometers
-#: src/core/modules/NomenclatureItem.cpp:246 src/core/modules/Planet.cpp:672
+#: src/core/modules/NomenclatureItem.cpp:248 src/core/modules/Planet.cpp:672
 #: src/core/modules/Planet.cpp:697 src/core/modules/Planet.cpp:805
 #: src/core/modules/Planet.cpp:1526 src/core/modules/Comet.cpp:190
 #: src/core/modules/Comet.cpp:200 src/gui/StelGuiItems.cpp:894
@@ -938,215 +938,215 @@ msgctxt "distance"
 msgid "km"
 msgstr "公里"
 
-#: src/core/modules/NomenclatureItem.cpp:251
+#: src/core/modules/NomenclatureItem.cpp:253
 msgid "Planetocentric coordinates"
 msgstr "行星中心坐標系"
 
-#: src/core/modules/NomenclatureItem.cpp:251
+#: src/core/modules/NomenclatureItem.cpp:253
 msgid "Planetographic coordinates"
 msgstr "行星表面坐標系"
 
-#: src/core/modules/NomenclatureItem.cpp:277
+#: src/core/modules/NomenclatureItem.cpp:279
 msgid "Celestial body"
 msgstr "天體"
 
-#: src/core/modules/NomenclatureItem.cpp:280
+#: src/core/modules/NomenclatureItem.cpp:282
 msgid "Landform description"
 msgstr "地形說明"
 
-#: src/core/modules/NomenclatureItem.cpp:282
+#: src/core/modules/NomenclatureItem.cpp:284
 msgid "Solar altitude"
 msgstr "太陽高度"
 
-#: src/core/modules/NomenclatureItem.cpp:285
+#: src/core/modules/NomenclatureItem.cpp:287
 msgid "Origin of name"
 msgstr ""
 
-#: src/core/modules/NomenclatureItem.cpp:596
-#: src/core/modules/NomenclatureItem.cpp:597
 #: src/core/modules/NomenclatureItem.cpp:598
 #: src/core/modules/NomenclatureItem.cpp:599
 #: src/core/modules/NomenclatureItem.cpp:600
+#: src/core/modules/NomenclatureItem.cpp:601
+#: src/core/modules/NomenclatureItem.cpp:602
 msgctxt "special point"
 msgid "point"
 msgstr "點"
 
 #. TRANSLATORS: Geographic area distinguished by amount of reflected light
-#: src/core/modules/NomenclatureItem.cpp:602
+#: src/core/modules/NomenclatureItem.cpp:604
 msgctxt "landform"
 msgid "albedo feature"
 msgstr "反射特徵"
 
 #. TRANSLATORS: Arc-shaped feature
-#: src/core/modules/NomenclatureItem.cpp:604
+#: src/core/modules/NomenclatureItem.cpp:606
 msgctxt "landform"
 msgid "arcus"
 msgstr "弧狀地"
 
 #. TRANSLATORS: Radial-patterned features on Venus
-#: src/core/modules/NomenclatureItem.cpp:606
+#: src/core/modules/NomenclatureItem.cpp:608
 msgctxt "landform"
 msgid "astrum"
 msgstr "放射狀地形"
 
 #. TRANSLATORS: Chain of craters
-#: src/core/modules/NomenclatureItem.cpp:608
+#: src/core/modules/NomenclatureItem.cpp:610
 msgctxt "landform"
 msgid "catena"
 msgstr "環形山串"
 
 #. TRANSLATORS: Hollows, irregular steep-sided depressions usually in arrays
 #. or clusters
-#: src/core/modules/NomenclatureItem.cpp:610
+#: src/core/modules/NomenclatureItem.cpp:612
 msgctxt "landform"
 msgid "cavus"
 msgstr "坑窪地"
 
 #. TRANSLATORS: Distinctive area of broken terrain
-#: src/core/modules/NomenclatureItem.cpp:612
+#: src/core/modules/NomenclatureItem.cpp:614
 msgctxt "landform"
 msgid "chaos"
 msgstr " 混沌地"
 
 #. TRANSLATORS: A deep, elongated, steep-sided depression
-#: src/core/modules/NomenclatureItem.cpp:614
+#: src/core/modules/NomenclatureItem.cpp:616
 msgctxt "landform"
 msgid "chasma"
 msgstr "峽谷"
 
 #. TRANSLATORS: Small hills or knobs
-#: src/core/modules/NomenclatureItem.cpp:616
+#: src/core/modules/NomenclatureItem.cpp:618
 msgctxt "landform"
 msgid "collis"
 msgstr "山丘"
 
 #. TRANSLATORS: Ovoid-shaped feature
-#: src/core/modules/NomenclatureItem.cpp:618
+#: src/core/modules/NomenclatureItem.cpp:620
 msgctxt "landform"
 msgid "corona"
 msgstr "冕狀地"
 
 #. TRANSLATORS: A circular depression
-#: src/core/modules/NomenclatureItem.cpp:620
+#: src/core/modules/NomenclatureItem.cpp:622
 msgctxt "landform"
 msgid "crater"
 msgstr "隕坑"
 
 #. TRANSLATORS: Ridge
-#: src/core/modules/NomenclatureItem.cpp:622
+#: src/core/modules/NomenclatureItem.cpp:624
 msgctxt "landform"
 msgid "dorsum"
 msgstr "山脊"
 
 #. TRANSLATORS: Active volcanic centers on Io
-#: src/core/modules/NomenclatureItem.cpp:624
+#: src/core/modules/NomenclatureItem.cpp:626
 msgctxt "landform"
 msgid "eruptive center"
 msgstr "噴發中心"
 
 #. TRANSLATORS: Bright spot
-#: src/core/modules/NomenclatureItem.cpp:626
+#: src/core/modules/NomenclatureItem.cpp:628
 msgctxt "landform"
 msgid "facula"
 msgstr "光斑"
 
 #. TRANSLATORS: Pancake-like structure, or a row of such structures
-#: src/core/modules/NomenclatureItem.cpp:628
+#: src/core/modules/NomenclatureItem.cpp:630
 msgctxt "landform"
 msgid "farrum"
 msgstr "煎餅狀"
 
 #. TRANSLATORS: A very low curvilinear ridge with a scalloped pattern
-#: src/core/modules/NomenclatureItem.cpp:630
+#: src/core/modules/NomenclatureItem.cpp:632
 msgctxt "landform"
 msgid "flexus"
 msgstr "殼紋狀山脊"
 
 #. TRANSLATORS: Flow terrain
-#: src/core/modules/NomenclatureItem.cpp:632
+#: src/core/modules/NomenclatureItem.cpp:634
 msgctxt "landform"
 msgid "fluctus"
 msgstr "熔岩台地"
 
 #. TRANSLATORS: Channel on Titan that might carry liquid
-#: src/core/modules/NomenclatureItem.cpp:634
+#: src/core/modules/NomenclatureItem.cpp:636
 msgctxt "landform"
 msgid "flumen"
 msgstr "溝渠"
 
 #. TRANSLATORS: Strait, a narrow passage of liquid connecting two larger areas
 #. of liquid
-#: src/core/modules/NomenclatureItem.cpp:636
+#: src/core/modules/NomenclatureItem.cpp:638
 msgctxt "landform"
 msgid "fretum"
 msgstr "峽"
 
 #. TRANSLATORS: Long, narrow depression
-#: src/core/modules/NomenclatureItem.cpp:638
+#: src/core/modules/NomenclatureItem.cpp:640
 msgctxt "landform"
 msgid "fossa"
 msgstr "槽溝"
 
 #. TRANSLATORS: Island (islands), an isolated land area (or group of such
 #. areas) surrounded by, or nearly surrounded by, a liquid area (sea or lake)
-#: src/core/modules/NomenclatureItem.cpp:640
+#: src/core/modules/NomenclatureItem.cpp:642
 msgctxt "landform"
 msgid "insula"
 msgstr "島"
 
 #. TRANSLATORS: Landslide
-#: src/core/modules/NomenclatureItem.cpp:642
+#: src/core/modules/NomenclatureItem.cpp:644
 msgctxt "landform"
 msgid "labes"
 msgstr " 崩塌"
 
 #. TRANSLATORS: Complex of intersecting valleys or ridges
-#: src/core/modules/NomenclatureItem.cpp:644
+#: src/core/modules/NomenclatureItem.cpp:646
 msgctxt "landform"
 msgid "labyrinthus"
 msgstr "迷宮"
 
 #. TRANSLATORS: Irregularly shaped depression on Titan having the appearance
 #. of a dry lake bed
-#: src/core/modules/NomenclatureItem.cpp:646
+#: src/core/modules/NomenclatureItem.cpp:648
 msgctxt "landform"
 msgid "lacuna"
 msgstr "間歇湖泊"
 
 #. TRANSLATORS: "Lake" or small plain; on Titan, a "lake" or small, dark plain
 #. with discrete, sharp boundaries
-#: src/core/modules/NomenclatureItem.cpp:648
+#: src/core/modules/NomenclatureItem.cpp:650
 msgctxt "landform"
 msgid "lacus"
 msgstr "湖"
 
 #. TRANSLATORS: Cryptic ringed feature
-#: src/core/modules/NomenclatureItem.cpp:650
+#: src/core/modules/NomenclatureItem.cpp:652
 msgctxt "landform"
 msgid "large ringed feature"
 msgstr "大環斑"
 
 #. TRANSLATORS: Small dark spots on Europa
-#: src/core/modules/NomenclatureItem.cpp:652
+#: src/core/modules/NomenclatureItem.cpp:654
 msgctxt "landform"
 msgid "lenticula"
 msgstr "雀斑"
 
 #. TRANSLATORS: A dark or bright elongate marking, may be curved or straight
-#: src/core/modules/NomenclatureItem.cpp:654
+#: src/core/modules/NomenclatureItem.cpp:656
 msgctxt "landform"
 msgid "linea"
 msgstr "條紋"
 
 #. TRANSLATORS: Extension of plateau having rounded lobate or tongue-like
 #. boundaries
-#: src/core/modules/NomenclatureItem.cpp:656
+#: src/core/modules/NomenclatureItem.cpp:658
 msgctxt "landform"
 msgid "lingula"
 msgstr "舌緣高地"
 
 #. TRANSLATORS: Dark spot, may be irregular
-#: src/core/modules/NomenclatureItem.cpp:658
+#: src/core/modules/NomenclatureItem.cpp:660
 msgctxt "landform"
 msgid "macula"
 msgstr "暗斑"
@@ -1155,462 +1155,462 @@ msgstr "暗斑"
 #. generally of large extent; on Mars, dark albedo areas of no known
 #. geological significance; on Titan, large expanses of dark materials thought
 #. to be liquid hydrocarbons
-#: src/core/modules/NomenclatureItem.cpp:660
+#: src/core/modules/NomenclatureItem.cpp:662
 msgctxt "landform"
 msgid "mare"
 msgstr "海"
 
 #. TRANSLATORS: A flat-topped prominence with cliff-like edges
-#: src/core/modules/NomenclatureItem.cpp:662
+#: src/core/modules/NomenclatureItem.cpp:664
 msgctxt "landform"
 msgid "mensa"
 msgstr "桌山"
 
 #. TRANSLATORS: Mountain
-#: src/core/modules/NomenclatureItem.cpp:664
+#: src/core/modules/NomenclatureItem.cpp:666
 msgctxt "landform"
 msgid "mons"
 msgstr "山"
 
 #. TRANSLATORS: A very large dark area on the Moon
-#: src/core/modules/NomenclatureItem.cpp:666
+#: src/core/modules/NomenclatureItem.cpp:668
 msgctxt "landform"
 msgid "oceanus"
 msgstr "洋"
 
 #. TRANSLATORS: "Swamp"; small plain
-#: src/core/modules/NomenclatureItem.cpp:668
+#: src/core/modules/NomenclatureItem.cpp:670
 msgctxt "landform"
 msgid "palus"
 msgstr "沼"
 
 #. TRANSLATORS: An irregular crater, or a complex one with scalloped edges
-#: src/core/modules/NomenclatureItem.cpp:670
+#: src/core/modules/NomenclatureItem.cpp:672
 msgctxt "landform"
 msgid "patera"
 msgstr "火山口"
 
 #. TRANSLATORS: Low plain
-#: src/core/modules/NomenclatureItem.cpp:672
+#: src/core/modules/NomenclatureItem.cpp:674
 msgctxt "landform"
 msgid "planitia"
 msgstr "平原"
 
 #. TRANSLATORS: Plateau or high plain
-#: src/core/modules/NomenclatureItem.cpp:674
+#: src/core/modules/NomenclatureItem.cpp:676
 msgctxt "landform"
 msgid "planum"
 msgstr "高原"
 
 #. TRANSLATORS: Cryo-volcanic features on Triton
-#: src/core/modules/NomenclatureItem.cpp:676
+#: src/core/modules/NomenclatureItem.cpp:678
 msgctxt "landform"
 msgid "plume"
 msgstr " 羽狀"
 
 #. TRANSLATORS: "Cape"; headland promontoria
-#: src/core/modules/NomenclatureItem.cpp:678
+#: src/core/modules/NomenclatureItem.cpp:680
 msgctxt "landform"
 msgid "promontorium"
 msgstr "岬"
 
 #. TRANSLATORS: A large area marked by reflectivity or color distinctions from
 #. adjacent areas, or a broad geographic region
-#: src/core/modules/NomenclatureItem.cpp:680
+#: src/core/modules/NomenclatureItem.cpp:682
 msgctxt "landform"
 msgid "regio"
 msgstr "區域"
 
 #. TRANSLATORS: Reticular (netlike) pattern on Venus
-#: src/core/modules/NomenclatureItem.cpp:682
+#: src/core/modules/NomenclatureItem.cpp:684
 msgctxt "landform"
 msgid "reticulum"
 msgstr "網狀"
 
 #. TRANSLATORS: Fissure
-#: src/core/modules/NomenclatureItem.cpp:684
+#: src/core/modules/NomenclatureItem.cpp:686
 msgctxt "landform"
 msgid "rima"
 msgstr "裂縫"
 
 #. TRANSLATORS: Scarp
-#: src/core/modules/NomenclatureItem.cpp:686
+#: src/core/modules/NomenclatureItem.cpp:688
 msgctxt "landform"
 msgid "rupes"
 msgstr "岩"
 
 #. TRANSLATORS: A feature that shares the name of an associated feature.
-#: src/core/modules/NomenclatureItem.cpp:688
+#: src/core/modules/NomenclatureItem.cpp:690
 msgctxt "landform"
 msgid "satellite feature"
 msgstr "附屬地形"
 
 #. TRANSLATORS: Boulder or rock
-#: src/core/modules/NomenclatureItem.cpp:690
+#: src/core/modules/NomenclatureItem.cpp:692
 msgctxt "landform"
 msgid "saxum"
 msgstr "巨岩"
 
 #. TRANSLATORS: Lobate or irregular scarp
-#: src/core/modules/NomenclatureItem.cpp:692
+#: src/core/modules/NomenclatureItem.cpp:694
 msgctxt "landform"
 msgid "scopulus"
 msgstr "不規則斷崖"
 
 #. TRANSLATORS: Sinuous feature with segments of positive and negative relief
 #. along its length
-#: src/core/modules/NomenclatureItem.cpp:694
+#: src/core/modules/NomenclatureItem.cpp:696
 msgctxt "landform"
 msgid "serpens"
 msgstr "蛇狀"
 
 #. TRANSLATORS: Subparallel furrows and ridges
-#: src/core/modules/NomenclatureItem.cpp:696
+#: src/core/modules/NomenclatureItem.cpp:698
 msgctxt "landform"
 msgid "sulcus"
 msgstr "槽狀"
 
 #. TRANSLATORS: "Bay"; small plain; on Titan, bays within seas or lakes of
 #. liquid hydrocarbons
-#: src/core/modules/NomenclatureItem.cpp:698
+#: src/core/modules/NomenclatureItem.cpp:700
 msgctxt "landform"
 msgid "sinus"
 msgstr "灣"
 
 #. TRANSLATORS: Extensive land mass
-#: src/core/modules/NomenclatureItem.cpp:700
+#: src/core/modules/NomenclatureItem.cpp:702
 msgctxt "landform"
 msgid "terra"
 msgstr "大陸"
 
 #. TRANSLATORS: Tile-like, polygonal terrain
-#: src/core/modules/NomenclatureItem.cpp:702
+#: src/core/modules/NomenclatureItem.cpp:704
 msgctxt "landform"
 msgid "tessera"
 msgstr "鑲嵌地塊"
 
 #. TRANSLATORS: Small domical mountain or hill
-#: src/core/modules/NomenclatureItem.cpp:704
+#: src/core/modules/NomenclatureItem.cpp:706
 msgctxt "landform"
 msgid "tholus"
 msgstr "丘"
 
 #. TRANSLATORS: Dunes
-#: src/core/modules/NomenclatureItem.cpp:706
+#: src/core/modules/NomenclatureItem.cpp:708
 msgctxt "landform"
 msgid "unda"
 msgstr "沙丘"
 
 #. TRANSLATORS: Valley
-#: src/core/modules/NomenclatureItem.cpp:708
+#: src/core/modules/NomenclatureItem.cpp:710
 msgctxt "landform"
 msgid "vallis"
 msgstr "谷"
 
 #. TRANSLATORS: Extensive plain
-#: src/core/modules/NomenclatureItem.cpp:710
+#: src/core/modules/NomenclatureItem.cpp:712
 msgctxt "landform"
 msgid "vastitas"
 msgstr "大平原"
 
 #. TRANSLATORS: A streak or stripe of color
-#: src/core/modules/NomenclatureItem.cpp:712
+#: src/core/modules/NomenclatureItem.cpp:714
 msgctxt "landform"
 msgid "virga"
 msgstr "條紋"
 
 #. TRANSLATORS: Lunar features at or near Apollo landing sites
-#: src/core/modules/NomenclatureItem.cpp:714
+#: src/core/modules/NomenclatureItem.cpp:716
 msgctxt "landform"
 msgid "landing site name"
 msgstr "登月位置"
 
 #. TRANSLATORS: Description for landform 'albedo feature'
-#: src/core/modules/NomenclatureItem.cpp:718
+#: src/core/modules/NomenclatureItem.cpp:720
 msgid "Geographic area distinguished by amount of reflected light."
 msgstr "以反射光量加以區別的地理區域"
 
 #. TRANSLATORS: Description for landform 'arcus'
-#: src/core/modules/NomenclatureItem.cpp:720
+#: src/core/modules/NomenclatureItem.cpp:722
 msgid "Arc-shaped feature."
 msgstr "弧形特徵"
 
 #. TRANSLATORS: Description for landform 'astrum'
-#: src/core/modules/NomenclatureItem.cpp:722
+#: src/core/modules/NomenclatureItem.cpp:724
 msgid "Radial-patterned feature."
 msgstr "輻射狀特徵"
 
 #. TRANSLATORS: Description for landform 'catena'
-#: src/core/modules/NomenclatureItem.cpp:724
+#: src/core/modules/NomenclatureItem.cpp:726
 msgid "Chain of craters."
 msgstr "隕石坑串鏈"
 
 #. TRANSLATORS: Description for landform 'cavus'
-#: src/core/modules/NomenclatureItem.cpp:726
+#: src/core/modules/NomenclatureItem.cpp:728
 msgid ""
 "Hollows, irregular steep-sided depressions usually in arrays or clusters."
 msgstr "通常在陣列或集群中的不規則陡峭的凹陷。"
 
 #. TRANSLATORS: Description for landform 'chaos'
-#: src/core/modules/NomenclatureItem.cpp:728
+#: src/core/modules/NomenclatureItem.cpp:730
 msgid "Distinctive area of broken terrain."
 msgstr "獨特的破碎地區地形"
 
 #. TRANSLATORS: Description for landform 'chasma'
-#: src/core/modules/NomenclatureItem.cpp:730
+#: src/core/modules/NomenclatureItem.cpp:732
 msgid "A deep, elongated, steep-sided depression."
 msgstr "一個深邃延伸，陡峭邊緣的凹地。"
 
 #. TRANSLATORS: Description for landform 'collis'
-#: src/core/modules/NomenclatureItem.cpp:732
+#: src/core/modules/NomenclatureItem.cpp:734
 msgid "Small hills or knobs."
 msgstr "小山丘或小圓丘"
 
 #. TRANSLATORS: Description for landform 'corona'
-#: src/core/modules/NomenclatureItem.cpp:734
+#: src/core/modules/NomenclatureItem.cpp:736
 msgid "Ovoid-shaped feature."
 msgstr "卵圓形特徵"
 
 #. TRANSLATORS: Description for landform 'crater'
-#: src/core/modules/NomenclatureItem.cpp:736
+#: src/core/modules/NomenclatureItem.cpp:738
 msgid "A circular depression."
 msgstr "一個環形的凹陷"
 
 #. TRANSLATORS: Description for landform 'dorsum'
-#: src/core/modules/NomenclatureItem.cpp:738
+#: src/core/modules/NomenclatureItem.cpp:740
 msgid "Ridge."
 msgstr "山脊，山脈，（狹長的）隆起部"
 
 #. TRANSLATORS: Description for landform 'eruptive center'
-#: src/core/modules/NomenclatureItem.cpp:740
+#: src/core/modules/NomenclatureItem.cpp:742
 msgid "Active volcanic center."
 msgstr "活躍的火山中心"
 
 #. TRANSLATORS: Description for landform 'facula'
-#: src/core/modules/NomenclatureItem.cpp:742
+#: src/core/modules/NomenclatureItem.cpp:744
 msgid "Bright spot."
 msgstr "明亮的斑點"
 
 #. TRANSLATORS: Description for landform 'farrum'
-#: src/core/modules/NomenclatureItem.cpp:744
+#: src/core/modules/NomenclatureItem.cpp:746
 msgid "Pancake-like structure, or a row of such structures."
 msgstr "類似煎餅的結構，或一排像這樣的結構。"
 
 #. TRANSLATORS: Description for landform 'flexus'
-#: src/core/modules/NomenclatureItem.cpp:746
+#: src/core/modules/NomenclatureItem.cpp:748
 msgid "A very low curvilinear ridge with a scalloped pattern."
 msgstr "一個非常低的扇形曲線狀山脊"
 
 #. TRANSLATORS: Description for landform 'fluctus'
-#: src/core/modules/NomenclatureItem.cpp:748
+#: src/core/modules/NomenclatureItem.cpp:750
 msgid "Flow terrain."
 msgstr "流動地形"
 
 #. TRANSLATORS: Description for landform 'flumen'
-#: src/core/modules/NomenclatureItem.cpp:750
+#: src/core/modules/NomenclatureItem.cpp:752
 msgid "Channel, that might carry liquid."
 msgstr "渠道，可能是液體流動的通道。"
 
 #. TRANSLATORS: Description for landform 'fretum'
-#: src/core/modules/NomenclatureItem.cpp:752
+#: src/core/modules/NomenclatureItem.cpp:754
 msgid ""
 "Strait, a narrow passage of liquid connecting two larger areas of liquid."
 msgstr "一條狹窄的液體通道，連接兩塊較大面積的液體。"
 
 #. TRANSLATORS: Description for landform 'fossa'
-#: src/core/modules/NomenclatureItem.cpp:754
+#: src/core/modules/NomenclatureItem.cpp:756
 msgid "Long, narrow depression."
 msgstr "長而狹窄的凹地"
 
 #. TRANSLATORS: Description for landform 'insula'
-#: src/core/modules/NomenclatureItem.cpp:756
+#: src/core/modules/NomenclatureItem.cpp:758
 msgid ""
 "Island, an isolated land area surrounded by, or nearly surrounded by, a "
 "liquid area (sea or lake)."
 msgstr "島嶼，一個被液態區域(海洋或湖泊)所包圍或幾乎被包圍的孤立陸地區域。"
 
 #. TRANSLATORS: Description for landform 'labes'
-#: src/core/modules/NomenclatureItem.cpp:758
+#: src/core/modules/NomenclatureItem.cpp:760
 msgid "Landslide."
 msgstr "滑落崩塌的地形"
 
 #. TRANSLATORS: Description for landform 'labyrinthus'
-#: src/core/modules/NomenclatureItem.cpp:760
+#: src/core/modules/NomenclatureItem.cpp:762
 msgid "Complex of intersecting valleys or ridges."
 msgstr "相交的山谷或山脊的複雜地形"
 
 #. TRANSLATORS: Description for landform 'lacuna'
-#: src/core/modules/NomenclatureItem.cpp:762
+#: src/core/modules/NomenclatureItem.cpp:764
 msgid ""
 "Irregularly shaped depression, having the appearance of a dry lake bed."
 msgstr "形狀不規則的凹陷，具有乾燥的湖床外觀。"
 
 #. TRANSLATORS: Description for landform 'lacus'
-#: src/core/modules/NomenclatureItem.cpp:764
+#: src/core/modules/NomenclatureItem.cpp:766
 msgid "'Lake' or small plain."
 msgstr "小平原或湖"
 
 #. TRANSLATORS: Description for landform 'large ringed feature'
-#: src/core/modules/NomenclatureItem.cpp:766
+#: src/core/modules/NomenclatureItem.cpp:768
 msgid "Cryptic ringed feature."
 msgstr "隱秘的環狀特徵"
 
 #. TRANSLATORS: Description for landform 'lenticula'
-#: src/core/modules/NomenclatureItem.cpp:768
+#: src/core/modules/NomenclatureItem.cpp:770
 msgid "Small dark spot."
 msgstr "小黑斑"
 
 #. TRANSLATORS: Description for landform 'linea'
-#: src/core/modules/NomenclatureItem.cpp:770
+#: src/core/modules/NomenclatureItem.cpp:772
 msgid "A dark or bright elongate marking, may be curved or straight."
 msgstr "一個黑色或明亮的細長標記，可能是彎曲的或筆直的。"
 
 #. TRANSLATORS: Description for landform 'lingula'
-#: src/core/modules/NomenclatureItem.cpp:772
+#: src/core/modules/NomenclatureItem.cpp:774
 msgid "Extension of plateau having rounded lobate or tongue-like boundaries."
 msgstr "具有圓形葉狀或舌狀邊界的延伸高原"
 
 #. TRANSLATORS: Description for landform 'macula'
-#: src/core/modules/NomenclatureItem.cpp:774
+#: src/core/modules/NomenclatureItem.cpp:776
 msgid "Dark spot, may be irregular"
 msgstr "暗斑，可能是不規則狀。"
 
 #. TRANSLATORS: Description for landform 'mare' on the Moon
-#: src/core/modules/NomenclatureItem.cpp:776
+#: src/core/modules/NomenclatureItem.cpp:778
 msgid "'Sea'; low albedo, relatively smooth plain, generally of large extent."
 msgstr "「海」，指低反照率且相對光滑的平原，面積一般比較大的區域。"
 
 #. TRANSLATORS: Description for landform 'mensa'
-#: src/core/modules/NomenclatureItem.cpp:778
+#: src/core/modules/NomenclatureItem.cpp:780
 msgid "A flat-topped prominence with cliff-like edges."
 msgstr "一個具有懸崖般邊緣的突出平頂。"
 
 #. TRANSLATORS: Description for landform 'mons'
-#: src/core/modules/NomenclatureItem.cpp:780
+#: src/core/modules/NomenclatureItem.cpp:782
 msgid "Mountain."
 msgstr "山，山脈"
 
 #. TRANSLATORS: Description for landform 'oceanus'
-#: src/core/modules/NomenclatureItem.cpp:782
+#: src/core/modules/NomenclatureItem.cpp:784
 msgid "A very large dark area."
 msgstr "一個非常大面積的黑色區域。"
 
 #. TRANSLATORS: Description for landform 'palus'
-#: src/core/modules/NomenclatureItem.cpp:784
+#: src/core/modules/NomenclatureItem.cpp:786
 msgid "'Swamp'; small plain."
 msgstr "沼澤，小平地"
 
 #. TRANSLATORS: Description for landform 'patera'
-#: src/core/modules/NomenclatureItem.cpp:786
+#: src/core/modules/NomenclatureItem.cpp:788
 msgid "An irregular crater, or a complex one with scalloped edges."
 msgstr "不規則的火山口，或具有扇形邊緣的組合區域。"
 
 #. TRANSLATORS: Description for landform 'planitia'
-#: src/core/modules/NomenclatureItem.cpp:788
+#: src/core/modules/NomenclatureItem.cpp:790
 msgid "Low plain."
 msgstr "低矮的平原。"
 
 #. TRANSLATORS: Description for landform 'planum'
-#: src/core/modules/NomenclatureItem.cpp:790
+#: src/core/modules/NomenclatureItem.cpp:792
 msgid "Plateau or high plain."
 msgstr "高原或高出地面的平原。"
 
 #. TRANSLATORS: Description for landform 'plume'
-#: src/core/modules/NomenclatureItem.cpp:792
+#: src/core/modules/NomenclatureItem.cpp:794
 msgid "Cryo-volcanic feature."
 msgstr "低溫火山特徵"
 
 #. TRANSLATORS: Description for landform 'promontorium'
-#: src/core/modules/NomenclatureItem.cpp:794
+#: src/core/modules/NomenclatureItem.cpp:796
 msgid "'Cape'; headland promontoria."
 msgstr "「岬角」，海角，向水中突出的陸地。"
 
 #. TRANSLATORS: Description for landform 'regio'
-#: src/core/modules/NomenclatureItem.cpp:796
+#: src/core/modules/NomenclatureItem.cpp:798
 msgid ""
 "A large area marked by reflectivity or color distinctions from adjacent "
 "areas, or a broad geographic region."
 msgstr "藉由反照率，或與鄰近地區顏色區分，或是廣泛的地理區域來標示的一個大面積區域。"
 
 #. TRANSLATORS: Description for landform 'reticulum'
-#: src/core/modules/NomenclatureItem.cpp:798
+#: src/core/modules/NomenclatureItem.cpp:800
 msgid "Reticular (netlike) pattern."
 msgstr "錯綜的(網狀的)圖案"
 
 #. TRANSLATORS: Description for landform 'rima'
-#: src/core/modules/NomenclatureItem.cpp:800
+#: src/core/modules/NomenclatureItem.cpp:802
 msgid "Fissure."
 msgstr "裂縫"
 
 #. TRANSLATORS: Description for landform 'rupes'
-#: src/core/modules/NomenclatureItem.cpp:802
+#: src/core/modules/NomenclatureItem.cpp:804
 msgid "Scarp."
 msgstr "懸崖，陡坡"
 
 #. TRANSLATORS: Description for landform 'satellite feature'
-#: src/core/modules/NomenclatureItem.cpp:804
+#: src/core/modules/NomenclatureItem.cpp:806
 msgid "A feature that shares the name of an associated feature."
 msgstr "共享關聯地貌名稱的特徵。"
 
 #. TRANSLATORS: Description for landform 'saxum'
-#: src/core/modules/NomenclatureItem.cpp:806
+#: src/core/modules/NomenclatureItem.cpp:808
 msgid "Boulder or rock."
 msgstr "巨石或岩石"
 
 #. TRANSLATORS: Description for landform 'scopulus'
-#: src/core/modules/NomenclatureItem.cpp:808
+#: src/core/modules/NomenclatureItem.cpp:810
 msgid "Lobate or irregular scarp."
 msgstr "葉狀或不軌則狀陡坡。"
 
 #. TRANSLATORS: Description for landform 'serpens'
-#: src/core/modules/NomenclatureItem.cpp:810
+#: src/core/modules/NomenclatureItem.cpp:812
 msgid ""
 "Sinuous feature with segments of positive and negative relief along its "
 "length."
 msgstr "蜿蜒曲折的特徵，沿著它的路徑具有高低地勢起伏的區段。"
 
 #. TRANSLATORS: Description for landform 'sinus'
-#: src/core/modules/NomenclatureItem.cpp:812
+#: src/core/modules/NomenclatureItem.cpp:814
 msgid "'Bay'; small plain."
 msgstr "「灣」，小平原。"
 
 #. TRANSLATORS: Description for landform 'sulcus'
-#: src/core/modules/NomenclatureItem.cpp:814
+#: src/core/modules/NomenclatureItem.cpp:816
 msgid "Subparallel furrows and ridges."
 msgstr "近乎平行的溝和脊"
 
 #. TRANSLATORS: Description for landform 'terra'
-#: src/core/modules/NomenclatureItem.cpp:816
+#: src/core/modules/NomenclatureItem.cpp:818
 msgid "Extensive land mass."
 msgstr "廣大面積的土地。"
 
 #. TRANSLATORS: Description for landform 'tessera'
-#: src/core/modules/NomenclatureItem.cpp:818
+#: src/core/modules/NomenclatureItem.cpp:820
 msgid "Tile-like, polygonal terrain."
 msgstr "瓷磚狀，多邊形的地形。"
 
 #. TRANSLATORS: Description for landform 'tholus'
-#: src/core/modules/NomenclatureItem.cpp:820
+#: src/core/modules/NomenclatureItem.cpp:822
 msgid "Small domical mountain or hill."
 msgstr "小圓頂狀山頭或山丘。"
 
 #. TRANSLATORS: Description for landform 'unda'
-#: src/core/modules/NomenclatureItem.cpp:822
+#: src/core/modules/NomenclatureItem.cpp:824
 msgid "Dunes."
 msgstr "沙丘"
 
 #. TRANSLATORS: Description for landform 'vallis'
-#: src/core/modules/NomenclatureItem.cpp:824
+#: src/core/modules/NomenclatureItem.cpp:826
 msgid "Valley."
 msgstr "山谷。"
 
 #. TRANSLATORS: Description for landform 'vastitas'
-#: src/core/modules/NomenclatureItem.cpp:826
+#: src/core/modules/NomenclatureItem.cpp:828
 msgid "Extensive plain."
 msgstr "廣大的平原。"
 
 #. TRANSLATORS: Description for landform 'virga'
-#: src/core/modules/NomenclatureItem.cpp:828
+#: src/core/modules/NomenclatureItem.cpp:830
 msgid "A streak or stripe of color."
 msgstr "條紋或彩色的斑紋。"
 
@@ -1827,18 +1827,18 @@ msgid "Airmasses"
 msgstr "大氣質量"
 
 #: src/core/modules/Nebula.cpp:236 src/core/modules/Planet.cpp:568
-#: src/core/modules/StarWrapper.cpp:276
+#: src/core/modules/StarWrapper.cpp:256
 msgid "Additional names: "
 msgstr "額外的名稱 : "
 
 #: src/core/modules/Nebula.cpp:242 src/core/modules/Planet.cpp:575
-#: src/core/modules/StarWrapper.cpp:282
+#: src/core/modules/StarWrapper.cpp:262
 msgid "Additional catalog numbers: "
 msgstr "額外的星表編號 : "
 
 #: src/core/modules/Nebula.cpp:260 src/core/modules/Planet.cpp:815
 #: src/core/modules/MinorPlanet.cpp:186 src/core/modules/StarWrapper.cpp:54
-#: src/core/modules/StarWrapper.cpp:306 plugins/Quasars/src/Quasar.cpp:134
+#: src/core/modules/StarWrapper.cpp:286 plugins/Quasars/src/Quasar.cpp:134
 #: plugins/MissingStars/src/MissingStar.cpp:143
 msgid "Color Index (B-V)"
 msgstr "(B-V)色指數"
@@ -1883,7 +1883,7 @@ msgstr "方位角"
 #. TRANSLATORS: Unit of measure for distance - light years
 #. TRANSLATORS: Unit of measure for distance - Light Years
 #: src/core/modules/Nebula.cpp:345 src/core/modules/Nebula.cpp:358
-#: src/core/modules/StarWrapper.cpp:336
+#: src/core/modules/StarWrapper.cpp:316
 #: plugins/Supernovae/src/Supernova.cpp:159 plugins/Novae/src/Nova.cpp:164
 #: plugins/Pulsars/src/Pulsar.cpp:268 plugins/Exoplanets/src/Exoplanet.cpp:334
 #: plugins/MissingStars/src/MissingStar.cpp:153
@@ -1893,8 +1893,8 @@ msgstr "光年"
 
 #. TRANSLATORS: distance
 #: src/core/modules/Nebula.cpp:346 src/core/modules/Nebula.cpp:392
-#: src/core/modules/Planet.cpp:707 src/core/modules/StarWrapper.cpp:341
-#: src/core/modules/StarWrapper.cpp:343 src/gui/AstroCalcDialog.cpp:936
+#: src/core/modules/Planet.cpp:707 src/core/modules/StarWrapper.cpp:321
+#: src/core/modules/StarWrapper.cpp:323 src/gui/AstroCalcDialog.cpp:936
 #: src/gui/AstroCalcChart.cpp:92 src/gui/AstroCalcChart.cpp:102
 #: src/gui/AstroCalcChart.cpp:427 src/gui/AstroCalcChart.cpp:453
 #: src/ui_configurationDialog.h:1791 plugins/Supernovae/src/Supernova.cpp:160
@@ -1926,13 +1926,13 @@ msgstr "百萬光年"
 msgid "Redshift"
 msgstr "紅移"
 
-#: src/core/modules/Nebula.cpp:417 src/core/modules/StarWrapper.cpp:370
+#: src/core/modules/Nebula.cpp:417 src/core/modules/StarWrapper.cpp:350
 #: plugins/MissingStars/src/MissingStar.cpp:180
 msgid "Parallax"
 msgstr "視差"
 
 #. TRANSLATORS: Unit of measure for annual parallax - milliarcseconds
-#: src/core/modules/Nebula.cpp:417 src/core/modules/StarWrapper.cpp:375
+#: src/core/modules/Nebula.cpp:417 src/core/modules/StarWrapper.cpp:355
 #: plugins/Pulsars/src/Pulsar.cpp:257
 #: plugins/MissingStars/src/MissingStar.cpp:185
 msgctxt "parallax"
@@ -2321,7 +2321,7 @@ msgid "interstellar object"
 msgstr "星際物質"
 
 #: src/core/modules/Planet.cpp:546 src/core/modules/Comet.cpp:181
-#: src/core/modules/StarWrapper.cpp:300 plugins/Quasars/src/Quasar.cpp:131
+#: src/core/modules/StarWrapper.cpp:280 plugins/Quasars/src/Quasar.cpp:131
 #: plugins/MissingStars/src/MissingStar.cpp:138
 msgid "Absolute Magnitude"
 msgstr "絕對星等"
@@ -2356,7 +2356,7 @@ msgid "Hourly motion"
 msgstr "每小時移動"
 
 #: src/core/modules/Planet.cpp:658 src/core/modules/Planet.cpp:1385
-#: src/core/modules/Planet.cpp:1394 src/core/modules/StarWrapper.cpp:358
+#: src/core/modules/Planet.cpp:1394 src/core/modules/StarWrapper.cpp:338
 #: plugins/Pulsars/src/Pulsar.cpp:204
 #: plugins/MissingStars/src/MissingStar.cpp:172
 msgctxt "into the direction of"
@@ -2452,7 +2452,7 @@ msgid "Angular distance"
 msgstr "角距離"
 
 #. TRANSLATORS: Unit of measure for period - days
-#: src/core/modules/Planet.cpp:911 src/core/modules/StarWrapper.cpp:382
+#: src/core/modules/Planet.cpp:911 src/core/modules/StarWrapper.cpp:362
 #: src/gui/AstroCalcDialog.cpp:9082
 msgctxt "duration"
 msgid "days"
@@ -2746,21 +2746,21 @@ msgstr "食雙星系統"
 msgid "variable star"
 msgstr "變星"
 
-#: src/core/modules/StarWrapper.cpp:324
+#: src/core/modules/StarWrapper.cpp:304
 #: plugins/Satellites/src/ui_satellitesDialog.h:1268
 msgid "Magnitude range"
 msgstr "星等範圍"
 
-#: src/core/modules/StarWrapper.cpp:324
+#: src/core/modules/StarWrapper.cpp:304
 msgid "Photometric system"
 msgstr "測光系"
 
-#: src/core/modules/StarWrapper.cpp:355 plugins/Pulsars/src/Pulsar.cpp:202
+#: src/core/modules/StarWrapper.cpp:335 plugins/Pulsars/src/Pulsar.cpp:202
 #: plugins/MissingStars/src/MissingStar.cpp:170
 msgid "Proper motion"
 msgstr "自行運動"
 
-#: src/core/modules/StarWrapper.cpp:357 src/core/modules/StarWrapper.cpp:363
+#: src/core/modules/StarWrapper.cpp:337 src/core/modules/StarWrapper.cpp:343
 #: plugins/Pulsars/src/Pulsar.cpp:203 plugins/Pulsars/src/Pulsar.cpp:205
 #: plugins/MissingStars/src/MissingStar.cpp:171
 #: plugins/MissingStars/src/MissingStar.cpp:173
@@ -2768,45 +2768,45 @@ msgctxt "milliarc second per year"
 msgid "mas/yr"
 msgstr "毫弧秒/年"
 
-#: src/core/modules/StarWrapper.cpp:360 plugins/Pulsars/src/Pulsar.cpp:205
+#: src/core/modules/StarWrapper.cpp:340 plugins/Pulsars/src/Pulsar.cpp:205
 #: plugins/MissingStars/src/MissingStar.cpp:173
 msgid "Proper motions by axes"
 msgstr "自行分量"
 
-#: src/core/modules/StarWrapper.cpp:379 plugins/Quasars/src/Quasar.cpp:142
+#: src/core/modules/StarWrapper.cpp:359 plugins/Quasars/src/Quasar.cpp:142
 #: plugins/Exoplanets/src/Exoplanet.cpp:329
 #: plugins/MissingStars/src/MissingStar.cpp:189
 msgid "Spectral Type"
 msgstr "光譜類型"
 
-#: src/core/modules/StarWrapper.cpp:382
+#: src/core/modules/StarWrapper.cpp:362
 #: plugins/Satellites/src/ui_satellitesFilterDialog.h:262
 #: plugins/Exoplanets/src/Exoplanet.cpp:361
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:177
 msgid "Period"
 msgstr "公轉周期"
 
-#: src/core/modules/StarWrapper.cpp:390
+#: src/core/modules/StarWrapper.cpp:370
 msgid "Next maximum light"
 msgstr "下次最大亮度"
 
-#: src/core/modules/StarWrapper.cpp:392
+#: src/core/modules/StarWrapper.cpp:372
 msgid "Next minimum light"
 msgstr "下次最小亮度"
 
-#: src/core/modules/StarWrapper.cpp:399
+#: src/core/modules/StarWrapper.cpp:379
 msgid "Rising time"
 msgstr "升起時間"
 
-#: src/core/modules/StarWrapper.cpp:401
+#: src/core/modules/StarWrapper.cpp:381
 msgid "Duration of eclipse"
 msgstr "食的持續時間"
 
-#: src/core/modules/StarWrapper.cpp:410
+#: src/core/modules/StarWrapper.cpp:390
 msgid "Position angle"
 msgstr "方位角"
 
-#: src/core/modules/StarWrapper.cpp:417 src/core/modules/StarWrapper.cpp:422
+#: src/core/modules/StarWrapper.cpp:397 src/core/modules/StarWrapper.cpp:402
 #: src/gui/AstroCalcDialog.cpp:6452
 msgid "Separation"
 msgstr "間距"
@@ -3103,7 +3103,7 @@ msgstr "無法建立Spout發送器，詳見記錄檔。"
 msgid "Loading plugin"
 msgstr "載入外掛"
 
-#: src/core/StelCore.cpp:294 src/gui/StelGui.cpp:225
+#: src/core/StelCore.cpp:294 src/gui/StelGui.cpp:252
 #: src/gui/AstroCalcDialog.cpp:1739 src/gui/AstroCalcDialog.cpp:2318
 #: src/gui/AstroCalcDialog.cpp:2342 src/gui/AstroCalcDialog.cpp:2890
 #: src/gui/AstroCalcDialog.cpp:2919 src/gui/AstroCalcDialog.cpp:6445
@@ -3253,106 +3253,130 @@ msgid "Add 1 Gaussian year"
 msgstr "增加 1 高斯(Gaussian)年"
 
 #: src/core/StelCore.cpp:332
-msgid "Add 1 calendric month"
-msgstr "增加 1 個(日曆)月"
+msgid "Add 1 calendar month"
+msgstr ""
 
 #: src/core/StelCore.cpp:333
+msgid "Add 1 calendar year"
+msgstr ""
+
+#: src/core/StelCore.cpp:334
+msgid "Add 10 calendar years"
+msgstr ""
+
+#: src/core/StelCore.cpp:335
+msgid "Add 100 calendar years"
+msgstr ""
+
+#: src/core/StelCore.cpp:336
 msgid "Subtract 1 sidereal day"
 msgstr "減少 1 恆星日"
 
-#: src/core/StelCore.cpp:334
+#: src/core/StelCore.cpp:337
 msgid "Subtract 7 sidereal days"
 msgstr "減少7個恆星日"
 
-#: src/core/StelCore.cpp:335
+#: src/core/StelCore.cpp:338
 msgid "Subtract 1 sidereal year"
 msgstr "減少 1 恆星年"
 
-#: src/core/StelCore.cpp:336
+#: src/core/StelCore.cpp:339
 msgid "Subtract 100 sidereal years"
 msgstr "減少 100 恆星年"
 
-#: src/core/StelCore.cpp:337
+#: src/core/StelCore.cpp:340
 msgid "Subtract 1 synodic month"
 msgstr "減少 1 朔望月"
 
-#: src/core/StelCore.cpp:338
+#: src/core/StelCore.cpp:341
 msgid "Subtract 1 saros"
 msgstr "減少一個沙羅(saros)周期"
 
-#: src/core/StelCore.cpp:339
+#: src/core/StelCore.cpp:342
 msgid "Subtract 1 draconic month"
 msgstr "減少 1 交點月"
 
-#: src/core/StelCore.cpp:340
+#: src/core/StelCore.cpp:343
 msgid "Subtract 1 draconic year"
 msgstr "減少 1 交點年"
 
-#: src/core/StelCore.cpp:341
+#: src/core/StelCore.cpp:344
 msgid "Subtract 1 anomalistic month"
 msgstr "減少 1 近點月"
 
-#: src/core/StelCore.cpp:342
+#: src/core/StelCore.cpp:345
 msgid "Subtract 1 anomalistic year"
 msgstr "減少 1 近點年"
 
-#: src/core/StelCore.cpp:343
+#: src/core/StelCore.cpp:346
 msgid "Subtract 100 anomalistic years"
 msgstr "減少 100 近點年"
 
-#: src/core/StelCore.cpp:344
+#: src/core/StelCore.cpp:347
 msgid "Subtract 1 mean tropical month"
 msgstr "減少 1 平回歸月"
 
-#: src/core/StelCore.cpp:345
+#: src/core/StelCore.cpp:348
 msgid "Subtract 1 mean tropical year"
 msgstr "減少 1 平回歸年"
 
-#: src/core/StelCore.cpp:346
+#: src/core/StelCore.cpp:349
 msgid "Subtract 100 mean tropical years"
 msgstr "減少 100 平回歸年"
 
-#: src/core/StelCore.cpp:347
+#: src/core/StelCore.cpp:350
 msgid "Subtract 1 tropical year"
 msgstr "減少 1 回歸年"
 
-#: src/core/StelCore.cpp:348
+#: src/core/StelCore.cpp:351
 msgid "Subtract 1 Julian year"
 msgstr "減少 1 儒略年"
 
-#: src/core/StelCore.cpp:349
+#: src/core/StelCore.cpp:352
 msgid "Subtract 1 Julian century"
 msgstr "減少 1 儒略世紀"
 
-#: src/core/StelCore.cpp:350
+#: src/core/StelCore.cpp:353
 msgid "Subtract 1 Gaussian year"
 msgstr "減少 1 高斯(Gaussian)年"
 
-#: src/core/StelCore.cpp:351
-msgid "Subtract 1 calendric month"
-msgstr "減少 1 個(日曆)月"
+#: src/core/StelCore.cpp:354
+msgid "Subtract 1 calendar month"
+msgstr ""
 
-#: src/core/StelCore.cpp:353
+#: src/core/StelCore.cpp:355
+msgid "Subtract 1 calendar year"
+msgstr ""
+
+#: src/core/StelCore.cpp:356
+msgid "Subtract 10 calendar years"
+msgstr ""
+
+#: src/core/StelCore.cpp:357
+msgid "Subtract 100 calendar years"
+msgstr ""
+
+#: src/core/StelCore.cpp:359
 msgid "Set home planet to selected planet"
 msgstr "將選擇的行星設為「家」行星"
 
-#: src/core/StelCore.cpp:354
+#: src/core/StelCore.cpp:360
 msgid "Go to home"
 msgstr "返回預設位置"
 
-#: src/core/StelCore.cpp:356
+#: src/core/StelCore.cpp:362
 msgid "Flip scene horizontally"
 msgstr "水平翻轉"
 
-#: src/core/StelCore.cpp:357
+#: src/core/StelCore.cpp:363
 msgid "Flip scene vertically"
 msgstr "垂直翻轉"
 
-#: src/core/StelCore.cpp:2469
+#: src/core/StelCore.cpp:2535
 msgid "Correction is disabled. Use only if you know what you are doing!"
 msgstr "禁止修正，僅使用於您瞭解您在做什麼！"
 
-#: src/core/StelCore.cpp:2472
+#: src/core/StelCore.cpp:2538
 #, qt-format
 msgid ""
 "This historical formula was obtained by C. Schoch in 1931 and was used by G."
@@ -3362,7 +3386,7 @@ msgstr ""
 "這個古老公式是由C. Schoch於1931年的得到的，被G. Henriksson使用在他的論文<em>Einstein's Theory of "
 "Relativity Confirmed by Ancient Solar Eclipses</ em>(%1)。要了解更多信息，請點擊%2這裡%3。"
 
-#: src/core/StelCore.cpp:2475
+#: src/core/StelCore.cpp:2541
 #, qt-format
 msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
@@ -3371,7 +3395,7 @@ msgstr ""
 "這個經驗方程式被發表於G. M. Clemence的論文<em>On the system of astronomical "
 "constants</em>(%1)。"
 
-#: src/core/StelCore.cpp:2478
+#: src/core/StelCore.cpp:2544
 #, qt-format
 msgid ""
 "This formula is based on a study of post-1650 observations of the Sun, the "
@@ -3383,7 +3407,7 @@ msgstr ""
 "Meeus在他的<em>Astronomical Formulae for Calculators</ em>書中使用。它也被使用於電腦程式 "
 "SunTracker Pro中。"
 
-#: src/core/StelCore.cpp:2482
+#: src/core/StelCore.cpp:2548
 msgid ""
 "This is a slightly modified version of the IAU (1952) formula which was "
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar"
@@ -3392,7 +3416,7 @@ msgstr ""
 "這是一個由Mucke & Meeus (1983)對 IAU (1952)公式進行稍微修正後的版本，並被<em>Astronomical "
 "Ephemeris</em>和<em>Canon of Solar Eclipses</em>書中採用。"
 
-#: src/core/StelCore.cpp:2486
+#: src/core/StelCore.cpp:2552
 msgid ""
 "The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon"
 " and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The "
@@ -3402,7 +3426,7 @@ msgstr ""
 "Tuckerman (1962, 1964)的這個表格詳列太陽、月亮、行星從西元前 601 年到西元 1649 年，每5天和每10天的間格位置。  "
 "Goldstine (1973)在他的朔望表格也未明示的採用相同的關係。"
 
-#: src/core/StelCore.cpp:2490
+#: src/core/StelCore.cpp:2556
 #, qt-format
 msgid ""
 "This equation was published by P. M. Muller and F. R. Stephenson in the "
@@ -3412,7 +3436,7 @@ msgstr ""
 "這個方程式發表於 P. M. Muller 和 F. R. Stephenson 的論文<em>The accelerations of the "
 "earth and moon from early astronomical observations</em> (%1) 。"
 
-#: src/core/StelCore.cpp:2493
+#: src/core/StelCore.cpp:2559
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
@@ -3421,7 +3445,7 @@ msgstr ""
 "這個方程式發表於 F. R. Stephenson 的論文<em>Pre-Telescopic Astronomical "
 "Observations</em> (%1) 。"
 
-#: src/core/StelCore.cpp:2496
+#: src/core/StelCore.cpp:2562
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation (outdated and superseded by Schmadel & "
@@ -3433,7 +3457,7 @@ msgstr ""
 "的論文<em>Polynomial approximations for the correction delta T E.T.-U.T. in the"
 " period 1800-1975</em> (%1) ，它與Brouwer (1952)所公布的數據相吻合。"
 
-#: src/core/StelCore.cpp:2499
+#: src/core/StelCore.cpp:2565
 msgid ""
 "This algorithm was adopted in P. Bretagnon & L. Simon's <em>Planetary "
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
@@ -3442,7 +3466,7 @@ msgstr ""
 "這個運算式被 P. Bretagnon 和 L. Simon 的論文<em>Planetary Programs and Tables from "
 "-4000 to +2800</em>(1986) 和星象儀軟體 RedShift 所採用。"
 
-#: src/core/StelCore.cpp:2502
+#: src/core/StelCore.cpp:2568
 #, qt-format
 msgid ""
 "This formula was published by F. R. Stephenson and L. V. Morrison in the "
@@ -3452,7 +3476,7 @@ msgstr ""
 "這個公式發表於 F. R. Stephenson 和 L. V. Morrison 的論文<em>Long-term changes in the "
 "rotation of the earth - 700 B.C. to A.D. 1980</em> (%1) 。"
 
-#: src/core/StelCore.cpp:2505
+#: src/core/StelCore.cpp:2571
 #, qt-format
 msgid ""
 "This algorithm was published by F. R. Stephenson and M. A. Houlden in the "
@@ -3462,7 +3486,7 @@ msgstr ""
 "這個演算法發表於 F. R. Stephenson 和 M. A. Houlden 所著的 <em>Atlas of Historical "
 "Eclipse Maps《歷史日食地圖集》</em> (%1) 的書中。這個演算法使用於個人電腦星象軟體指引 7。"
 
-#: src/core/StelCore.cpp:2508
+#: src/core/StelCore.cpp:2574
 msgid ""
 "This algorithm was given by F. Espenak in his <em>Fifty Year Canon of Solar "
 "Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar "
@@ -3471,14 +3495,14 @@ msgstr ""
 "這個運算式由F. Espenak在他的論文<em>Fifty Year Canon of Solar Eclipses: 1986-2035</em> "
 "(1987) 和<em>Fifty Year Canon of Lunar Eclipses: 1986-2035</em> (1989)中所提供 。"
 
-#: src/core/StelCore.cpp:2511
+#: src/core/StelCore.cpp:2577
 #, qt-format
 msgid ""
 "This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 "
 "solar eclipse records dating between 2137 BCE and 1715 CE."
 msgstr "這個公式由K.M. Borkowski (%1)對 2137 BCE 到 1715 CE 之間的31次日食數據分析中獲得。"
 
-#: src/core/StelCore.cpp:2514
+#: src/core/StelCore.cpp:2580
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation was published by L. D. Schmadel and G. "
@@ -3490,7 +3514,7 @@ msgstr ""
 "from U.T. to E.T. for the Period 1800-1988</em> (%1) ，其值合於 Stephenson 和 "
 "Morrison (1984)所給出的數值。"
 
-#: src/core/StelCore.cpp:2517
+#: src/core/StelCore.cpp:2583
 msgid ""
 "This formula was adopted by M. Chapront-Touze & J. Chapront in the shortened"
 " version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and "
@@ -3499,7 +3523,7 @@ msgstr ""
 "這個公式由 M. Chapront-Touze 和 J. Chapront 在他們的論文<em>Lunar Tables and Programs "
 "from 4000 B.C. to A.D. 8000</em> (1991) 中的 ELP 2000-85月球理論簡潔版採用。"
 
-#: src/core/StelCore.cpp:2520
+#: src/core/StelCore.cpp:2586
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson and L. V. Morrison in the "
@@ -3509,7 +3533,7 @@ msgstr ""
 "這個方程式發表於 F. R. Stephenson 和 L. V. Morrison 的論文<em>Long-Term Fluctuations in "
 "the Earth's Rotation: 700 BC to AD 1990</em>(%1)。"
 
-#: src/core/StelCore.cpp:2523
+#: src/core/StelCore.cpp:2589
 #, qt-format
 msgid ""
 "F. R. Stephenson published this formula in his book <em>Historical Eclipses "
@@ -3518,7 +3542,7 @@ msgstr ""
 "F. R. Stephenson 在他的<em>Historical Eclipses and Earth's "
 "Rotation</em>(%1)書中發表這個公式。"
 
-#: src/core/StelCore.cpp:2526
+#: src/core/StelCore.cpp:2592
 msgid ""
 "From J. Meeus, <em>Astronomical Algorithms</em> (2nd ed., 1998), and widely "
 "used. Table for 1620..2000, and includes a variant of Chapront, Chapront-"
@@ -3528,14 +3552,14 @@ msgstr ""
 "一書中的1620到2000年列表並包含Chapront變數(Chapront-Touze & Francou (1997) "
 "1620..2000以外的日期)。"
 
-#: src/core/StelCore.cpp:2529
+#: src/core/StelCore.cpp:2595
 #, qt-format
 msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
 "use this formula in their interactive website %1JPL Horizons%2."
 msgstr "美國航太總署的噴氣推進實驗室將這個公式應用在他們的互動式網站%1JPL Horizons%2。"
 
-#: src/core/StelCore.cpp:2532
+#: src/core/StelCore.cpp:2598
 #, qt-format
 msgid ""
 "This polynome was published by J. Meeus and L. Simons in article "
@@ -3544,7 +3568,7 @@ msgstr ""
 "此多項式由 J. Meeus 和 L. Simons 發表在他們的文章<em>Polynomial approximations to Delta T,"
 " 1620-2000 AD</em>(%1)。"
 
-#: src/core/StelCore.cpp:2535
+#: src/core/StelCore.cpp:2601
 msgid ""
 "The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the "
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits"
@@ -3553,7 +3577,7 @@ msgstr ""
 "在 O. Montenbruck 和 T. Pfleger 第四版的《個人電腦上的天文》[<em>Astronomy on the Personal "
 "Computer</em>] (2000) 書中證明一個簡單的三階多項式資料可以符合最近發生過的數據。"
 
-#: src/core/StelCore.cpp:2538
+#: src/core/StelCore.cpp:2604
 msgid ""
 "E. M. Reingold & N. Dershowitz present this polynomial data fit in "
 "<em>Calendrical Calculations</em> (4th ed. 2018) and in their "
@@ -3564,7 +3588,7 @@ msgstr ""
 "ed. 2018) 和他們<em>Calendrical Tabulations</em>(2002)這二本書的這個多項式數據。方法是基於Jean "
 "Meeus 的<em>Astronomical Algorithms</em>(1991)。"
 
-#: src/core/StelCore.cpp:2541
+#: src/core/StelCore.cpp:2607
 #, qt-format
 msgid ""
 "This important solution was published by L. V. Morrison and F. R. Stephenson"
@@ -3575,7 +3599,7 @@ msgstr ""
 "the Earth's clock error %1T and the calculation of eclipses</em> (%2) with "
 "addendum in (%3) 。"
 
-#: src/core/StelCore.cpp:2544
+#: src/core/StelCore.cpp:2610
 #, qt-format
 msgid ""
 "From the Length of Day (LOD; as determined by Stephenson & Morrison (%2)), "
@@ -3586,7 +3610,7 @@ msgstr ""
 "依據一日的長度(LOD; 由 Stephenson 和 Morrison (%2)所定義)，Victor Reijs "
 "使用一個包含餘弦和平方函數的單體最佳化，此乃基於一個由Stephenson (%2)所描述的可能周期(詳見%3here%4)，推導出一個 %1T 公式。"
 
-#: src/core/StelCore.cpp:2547
+#: src/core/StelCore.cpp:2613
 #, qt-format
 msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
@@ -3602,7 +3626,7 @@ msgstr ""
 "Canon of Solar Eclipses 1501 to 2500</em> (2014) 的網頁中使用。此方程式亦用在太陽, "
 "月球及行星星曆軟件SOLEX。"
 
-#: src/core/StelCore.cpp:2550
+#: src/core/StelCore.cpp:2616
 msgid ""
 "This solution is modified from F. Espenak and J. Meeus, based on Morrison & "
 "Stephenson (2004) and a polynomial fit through tabulated values for "
@@ -3612,15 +3636,15 @@ msgstr ""
 "這個解法是由 F. Espenak 和 J. Meeus 基於 Morrison & Stephenson (2004) 和 1600-2000 "
 "年區間的表格數值的最適多項式所作的修改。 並對 2015-2033 年的數值進行修正，以匹配 IERS 的快捷服務/預報中心所作的觀測值和近期預測。"
 
-#: src/core/StelCore.cpp:2550
+#: src/core/StelCore.cpp:2616
 msgid "Used by default."
 msgstr "預設使用"
 
-#: src/core/StelCore.cpp:2553
+#: src/core/StelCore.cpp:2619
 msgid "PATCHED VERSION WITHOUT ADDITIONAL LUNAR ACCELERATION."
 msgstr "沒有額外月球加速的修正版"
 
-#: src/core/StelCore.cpp:2553
+#: src/core/StelCore.cpp:2619
 msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
 "(2004) and a polynomial fit through tabulated values for 1600-2000."
@@ -3628,7 +3652,7 @@ msgstr ""
 "這個解法是由 F. Espenak 和 J. Meeus 基於 Morrison & Stephenson (2004) 和 1600-2000 "
 "年區間的表格數值的最適多項式所作的修改。"
 
-#: src/core/StelCore.cpp:2556
+#: src/core/StelCore.cpp:2622
 #, qt-format
 msgid ""
 "This solution by B. Banjevic, based on Stephenson & Morrison (1984), was "
@@ -3638,7 +3662,7 @@ msgstr ""
 "此修正由B. Banjevic提供, 基於Stephenson & Morrison (1984), 並發表在<em>Ancient eclipses "
 "and dating the fall of Babylon</em> (%1)."
 
-#: src/core/StelCore.cpp:2559
+#: src/core/StelCore.cpp:2625
 #, qt-format
 msgid ""
 "This solution by S. Islam, M. Sadiq and M. S. Qureshi, based on Meeus & "
@@ -3649,7 +3673,7 @@ msgstr ""
 "並發表在<em>Error Minimization of Polynomial Approximation of DeltaT</em> (%1) "
 "及由 Sana Islam 在2013年審視."
 
-#: src/core/StelCore.cpp:2562
+#: src/core/StelCore.cpp:2628
 #, qt-format
 msgid ""
 "This polynomial approximation with 0.6 seconds of accuracy by M. Khalid, "
@@ -3659,7 +3683,7 @@ msgstr ""
 "這個誤差在0.6秒內的多項式逼近法，由M. Khalid, Mariam Sultana 和 Faheem Zaidi 發表於論文<em>Delta "
 "T: Polynomial Approximation of Time Period 1620-2013</em> (%1)。"
 
-#: src/core/StelCore.cpp:2565
+#: src/core/StelCore.cpp:2631
 #, qt-format
 msgid ""
 "This solution by F. R. Stephenson, L. V. Morrison and C. Y. Hohenkerk (2016)"
@@ -3676,7 +3700,7 @@ msgstr ""
 "2015'</em> (Morrison, L. V., Stephenson, F.R., Hohenkerk, C.Y. 與 Zawilski, "
 "M.; %2)更新。 在已知(使用仿樣適用模型)範圍之外，它從一個近似拋物線的解提供數值。"
 
-#: src/core/StelCore.cpp:2568
+#: src/core/StelCore.cpp:2634
 #, qt-format
 msgid ""
 "This solution by G. Henriksson was published in the article <em>The "
@@ -3686,14 +3710,14 @@ msgstr ""
 "此解法是由 G. Henriksson 基於 C. Schoch 的公式 (1931) 所解開並發表於<em>The Acceleration of "
 "the Moon and the Universe - the Mass of the Graviton</em> (%1) "
 
-#: src/core/StelCore.cpp:2571
+#: src/core/StelCore.cpp:2637
 #, qt-format
 msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined"
 " by the user."
 msgstr "這是一個為計算 %1T 的二次項公式，係數由使用者決定。"
 
-#: src/core/StelCore.cpp:2574 src/core/SimbadSearcher.cpp:173
+#: src/core/StelCore.cpp:2640 src/core/SimbadSearcher.cpp:173
 #: src/gui/ObsListDialog.cpp:84 src/gui/ObsListDialog.cpp:935
 #: src/gui/ObsListDialog.cpp:956 src/gui/ObsListDialog.cpp:1002
 #: src/gui/ObsListDialog.cpp:1018 src/gui/ObsListDialog.cpp:1059
@@ -3704,37 +3728,37 @@ msgstr "這是一個為計算 %1T 的二次項公式，係數由使用者決定�
 msgid "Error"
 msgstr "錯誤"
 
-#: src/core/StelCore.cpp:2582
+#: src/core/StelCore.cpp:2648
 #, qt-format
 msgid ""
 "The solution's value of %1 for %2 (secular acceleration of the Moon) "
 "requires an adaptation, see Guide for details."
 msgstr "這個 %2 (月球的現行加速) 解的值 %1 ，需要改寫，詳見使用手冊。"
 
-#: src/core/StelCore.cpp:2626
+#: src/core/StelCore.cpp:2692
 msgid "with zero values outside this range"
 msgstr "此範圍之外的值為零"
 
-#: src/core/StelCore.cpp:2629
+#: src/core/StelCore.cpp:2695
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr "精確度一般在一秒內，超出該範圍的值為零"
 
-#: src/core/StelCore.cpp:2632
+#: src/core/StelCore.cpp:2698
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and values for "
 "the limit years outside this range"
 msgstr "平均誤差小於一秒，最大誤差1.9秒，超過年數限制的值不在此範圍。"
 
-#: src/core/StelCore.cpp:2639
+#: src/core/StelCore.cpp:2705
 msgid "with values for the limit years outside this range"
 msgstr "超過年數限制的值不在此範圍"
 
-#: src/core/StelCore.cpp:2649
+#: src/core/StelCore.cpp:2715
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
 msgstr "正確的使用範圍: 在 %1 與 %2, %3 之間"
 
-#: src/core/StelCore.cpp:2651
+#: src/core/StelCore.cpp:2717
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
 msgstr "正確的使用範圍: 在 %1 與 %2 之間"
@@ -4033,7 +4057,7 @@ msgid "Lunar Az./Alt."
 msgstr "月球 方位/高度角"
 
 #: src/core/StelObjectMgr.cpp:53 src/core/StelMovementMgr.cpp:194
-#: src/gui/StelGui.cpp:220 src/StelMainView.cpp:946 src/StelMainView.cpp:947
+#: src/gui/StelGui.cpp:247 src/StelMainView.cpp:946 src/StelMainView.cpp:947
 msgid "Miscellaneous"
 msgstr "其他"
 
@@ -5415,116 +5439,116 @@ msgid ""
 "citation format."
 msgstr "或者您可以 {下載這篇文章的 BibTeX 檔案} 來建立其他的引用文格式。"
 
-#: src/gui/StelGui.cpp:219
+#: src/gui/StelGui.cpp:246
 msgid "Windows"
 msgstr "視窗"
 
-#: src/gui/StelGui.cpp:221 src/ui_configurationDialog.h:1689
+#: src/gui/StelGui.cpp:248 src/ui_configurationDialog.h:1689
 #: src/ui_configurationDialog.h:1751
 msgid "Selected object information"
 msgstr "選擇天體的資訊"
 
-#: src/gui/StelGui.cpp:222 plugins/RemoteSync/src/ui_remoteSyncDialog.h:436
+#: src/gui/StelGui.cpp:249 plugins/RemoteSync/src/ui_remoteSyncDialog.h:436
 msgid "Quit"
 msgstr "離開"
 
-#: src/gui/StelGui.cpp:226
+#: src/gui/StelGui.cpp:253
 msgid "Speed up the script execution rate"
 msgstr "加快 Script 執行速度"
 
-#: src/gui/StelGui.cpp:227
+#: src/gui/StelGui.cpp:254
 msgid "Slow down the script execution rate"
 msgstr "減慢 Script 執行速度"
 
-#: src/gui/StelGui.cpp:228
+#: src/gui/StelGui.cpp:255
 msgid "Set the normal script execution rate"
 msgstr "正常 Script 執行速度"
 
-#: src/gui/StelGui.cpp:229
+#: src/gui/StelGui.cpp:256
 msgid "Stop script execution"
 msgstr "停止 Script 執行"
 
-#: src/gui/StelGui.cpp:231
+#: src/gui/StelGui.cpp:258
 msgid "Pause script execution"
 msgstr "暫停 Script 執行"
 
-#: src/gui/StelGui.cpp:232
+#: src/gui/StelGui.cpp:259
 msgid "Resume script execution"
 msgstr "繼續 Script 執行"
 
-#: src/gui/StelGui.cpp:236
+#: src/gui/StelGui.cpp:263
 msgid "Script console window"
 msgstr "Script 主控台視窗"
 
-#: src/gui/StelGui.cpp:239
+#: src/gui/StelGui.cpp:266
 msgid "Help window"
 msgstr "說明"
 
-#: src/gui/StelGui.cpp:240
+#: src/gui/StelGui.cpp:267
 msgid "Configuration window"
 msgstr "設定視窗"
 
-#: src/gui/StelGui.cpp:241 src/ui_searchDialogGui.h:758
+#: src/gui/StelGui.cpp:268 src/ui_searchDialogGui.h:758
 msgid "Search window"
 msgstr "搜尋"
 
-#: src/gui/StelGui.cpp:242
+#: src/gui/StelGui.cpp:269
 msgid "Sky and viewing options window"
 msgstr "星空與顯示選項"
 
-#: src/gui/StelGui.cpp:243
+#: src/gui/StelGui.cpp:270
 msgid "Date/time window"
 msgstr "日期/時間"
 
-#: src/gui/StelGui.cpp:244
+#: src/gui/StelGui.cpp:271
 msgid "Location window"
 msgstr "觀測位置"
 
-#: src/gui/StelGui.cpp:245
+#: src/gui/StelGui.cpp:272
 msgid "Shortcuts window"
 msgstr "快速鍵視窗"
 
-#: src/gui/StelGui.cpp:246
+#: src/gui/StelGui.cpp:273
 msgid "Astronomical calculations window"
 msgstr "天文數值計算視窗"
 
-#: src/gui/StelGui.cpp:247
+#: src/gui/StelGui.cpp:274
 msgid "Observing list"
 msgstr "觀測列表"
 
-#: src/gui/StelGui.cpp:248
+#: src/gui/StelGui.cpp:275
 msgid "Copy selected object information to clipboard"
 msgstr "複製選擇天體的資訊到剪貼板"
 
-#: src/gui/StelGui.cpp:254
+#: src/gui/StelGui.cpp:281
 msgid "Auto hide horizontal button bar"
 msgstr "自動隱藏水平工具列"
 
-#: src/gui/StelGui.cpp:255
+#: src/gui/StelGui.cpp:282
 msgid "Auto hide vertical button bar"
 msgstr "自動隱藏垂直工具列"
 
-#: src/gui/StelGui.cpp:258
+#: src/gui/StelGui.cpp:285
 msgid "Toggle visibility of GUI"
 msgstr "切換顯示圖形操作介面"
 
-#: src/gui/StelGui.cpp:266
+#: src/gui/StelGui.cpp:293
 msgid "All available info"
 msgstr "所有可用資訊"
 
-#: src/gui/StelGui.cpp:267
+#: src/gui/StelGui.cpp:294
 msgid "Default info"
 msgstr "預設資訊"
 
-#: src/gui/StelGui.cpp:268
+#: src/gui/StelGui.cpp:295
 msgid "Short info"
 msgstr "簡短資訊"
 
-#: src/gui/StelGui.cpp:269
+#: src/gui/StelGui.cpp:296
 msgid "None info"
 msgstr "無資訊"
 
-#: src/gui/StelGui.cpp:270
+#: src/gui/StelGui.cpp:297
 msgid "Custom info"
 msgstr "自訂資訊"
 
