@@ -931,7 +931,7 @@ void SkyLine::draw(StelCore *core) const
 				rot.transfo(point);                                                // rotate towards earth position
 				circle.vertex.append(pos+point);                                   // attach to earth centre
 			}
-			sPainter.drawStelVertexArray(circle, false); // setting true does not paint for cylindrical&friends :-(
+			sPainter.drawStelVertexArray(circle, true);
 
 			// Special case for Umbra and Penumbra labels
 			Vec3d point(dist, 0.0, 0.0);

@@ -23,6 +23,7 @@
 StelVertexArray StelVertexArray::removeDiscontinuousTriangles(const StelProjector* prj) const
 {
 	StelVertexArray ret = *this;
+	ret.primitiveType = Triangles;
 
 	if (isIndexed())
 	{
@@ -55,14 +56,13 @@ StelVertexArray StelVertexArray::removeDiscontinuousTriangles(const StelProjecto
 	else
 	{
 		ret.indices.clear();
-		unsigned short int limit;
+		const unsigned short int limit=static_cast<unsigned short int>(vertex.size());
 		// Create a 'Triangles' vertex array from this array.
 		// We have different algorithms for different original mode
 		switch (primitiveType)
 		{
 			case TriangleStrip:
 				ret.indices.reserve(vertex.size() * 3);
-				limit = static_cast<unsigned short int>(vertex.size());
 				for (unsigned short int i = 2; i < limit; ++i)
 				{
 					if (prj->intersectViewportDiscontinuity(vertex[i], vertex[i-1]) ||
@@ -83,7 +83,6 @@ StelVertexArray StelVertexArray::removeDiscontinuousTriangles(const StelProjecto
 
 			case Triangles:
 				ret.indices.reserve(vertex.size());
-				limit = static_cast<unsigned short int>(vertex.size());
 				for (unsigned short int i = 0; i < limit; i += 3)
 				{
 					if (prj->intersectViewportDiscontinuity(vertex.at(i), vertex.at(i+1)) ||
@@ -99,6 +98,23 @@ StelVertexArray StelVertexArray::removeDiscontinuousTriangles(const StelProjecto
 				}
 				break;
 
+			case LineLoop:
+			case LineStrip:
+				// convert to an indexed set of GL_LINEs, leaving those away which intersect
+				ret.primitiveType=Lines;
+				ret.indices.reserve(2*vertex.size());
+				for (unsigned short int i = 0; i < limit-1; i++)
+				{
+					if (!prj->intersectViewportDiscontinuity(vertex.at(i), vertex.at(i+1))  )
+						ret.indices << i << i+1;
+				}
+				if (primitiveType==LineLoop)
+				{
+					if (!prj->intersectViewportDiscontinuity(vertex.at(limit-1), vertex.at(0))  )
+						ret.indices << limit-1 << 0;
+				}
+				break;
+
 			default:
 				Q_ASSERT(false);
 		}
@@ -108,7 +124,6 @@ StelVertexArray StelVertexArray::removeDiscontinuousTriangles(const StelProjecto
 	// FIXME: we should use an attribute for indexed array.
 	if (ret.indices.isEmpty())
 		ret.vertex.clear();
-	ret.primitiveType = Triangles;
 
 	return ret;
 }
