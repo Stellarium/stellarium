@@ -1804,7 +1804,7 @@ void LensDistortionEstimatorDialog::setAboutText()
 	                   "Dave Coffin) or <code>dcraw_emu</code> (from <code>libRaw</code> package), plus "
 	                   "<code>exiftool</code> as in the following commands (adjust the file names to your needs):") + "</p>"
 	        "<pre>dcraw_emu -t 0 -T -W -Z 20230921_235104-dcraw.tiff 20230921_235104.dng\n"
-	             "exiftool -tagsfromfile 20230921_235104.jpg -Time:all -DateTimeOriginal -gps:all "
+	             "exiftool -tagsfromfile 20230921_235104.jpg -Time:all -DateTimeOriginal -gps:all -MakerNotes "
 	             "-wm cg 20230921_235104-dcraw.tiff</pre>"
 	        "<p>" + q_("Here the <code>-t 0</code> option for <code>dcraw_emu</code> prevents automatic rotation, "
 	                   "<code>-T</code> generates a TIFF file instead of the default PPM, <code>-W</code> prevents "
