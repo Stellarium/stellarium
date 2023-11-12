@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2023-11-12 18:26+0700\n"
+"POT-Creation-Date: 2023-11-13 00:31+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -64,7 +64,7 @@ msgstr ""
 #: src/core/modules/NebulaMgr.cpp:359 src/core/modules/SolarSystem.cpp:307
 #: src/core/modules/MilkyWay.cpp:107 src/core/modules/ZodiacalLight.cpp:112
 #: src/core/modules/ToastMgr.cpp:62 src/core/modules/HipsMgr.cpp:156
-#: src/core/StelApp.cpp:657 src/core/StelCore.cpp:296
+#: src/core/StelApp.cpp:661 src/core/StelCore.cpp:296
 #: src/core/StelSkyLayerMgr.cpp:83 src/core/StelSkyLayerMgr.cpp:84
 #: src/StelMainView.cpp:948
 msgid "Display Options"
@@ -2939,143 +2939,143 @@ msgstr ""
 msgid "December solstice at previous year"
 msgstr ""
 
-#: src/core/StelApp.cpp:462
+#: src/core/StelApp.cpp:466
 msgid "Initializing textures..."
 msgstr ""
 
-#: src/core/StelApp.cpp:466
+#: src/core/StelApp.cpp:470
 msgid "Initializing network access..."
 msgstr ""
 
-#: src/core/StelApp.cpp:469
+#: src/core/StelApp.cpp:473
 msgid "Initializing network disk cache..."
 msgstr ""
 
-#: src/core/StelApp.cpp:483
+#: src/core/StelApp.cpp:487
 msgid "Initializing network proxy..."
 msgstr ""
 
-#: src/core/StelApp.cpp:498
+#: src/core/StelApp.cpp:502
 msgid "Initializing Object Database..."
 msgstr ""
 
-#: src/core/StelApp.cpp:504
+#: src/core/StelApp.cpp:508
 msgid "Initializing HiPS survey..."
 msgstr ""
 
-#: src/core/StelApp.cpp:510
+#: src/core/StelApp.cpp:514
 msgid "Initializing Solar System objects..."
 msgstr ""
 
-#: src/core/StelApp.cpp:516
+#: src/core/StelApp.cpp:520
 msgid "Initializing planetary nomenclature..."
 msgstr ""
 
-#: src/core/StelApp.cpp:522
+#: src/core/StelApp.cpp:526
 msgid "Initializing stars..."
 msgstr ""
 
-#: src/core/StelApp.cpp:527
+#: src/core/StelApp.cpp:531
 msgid "Initializing core..."
 msgstr ""
 
-#: src/core/StelApp.cpp:531
+#: src/core/StelApp.cpp:535
 msgid "Initializing deep-sky objects..."
 msgstr ""
 
-#: src/core/StelApp.cpp:537
+#: src/core/StelApp.cpp:541
 msgid "Initializing Milky Way..."
 msgstr ""
 
-#: src/core/StelApp.cpp:543
+#: src/core/StelApp.cpp:547
 msgid "Initializing zodiacal light..."
 msgstr ""
 
-#: src/core/StelApp.cpp:549
+#: src/core/StelApp.cpp:553
 msgid "Initializing sky image layer..."
 msgstr ""
 
-#: src/core/StelApp.cpp:555
+#: src/core/StelApp.cpp:559
 msgid "Initializing TOAST surveys..."
 msgstr ""
 
-#: src/core/StelApp.cpp:561
+#: src/core/StelApp.cpp:565
 msgid "Initializing audio..."
 msgstr ""
 
-#: src/core/StelApp.cpp:565
+#: src/core/StelApp.cpp:569
 msgid "Initializing video..."
 msgstr ""
 
-#: src/core/StelApp.cpp:571
+#: src/core/StelApp.cpp:575
 msgid "Initializing constellations..."
 msgstr ""
 
-#: src/core/StelApp.cpp:577
+#: src/core/StelApp.cpp:581
 msgid "Initializing asterisms..."
 msgstr ""
 
-#: src/core/StelApp.cpp:583
+#: src/core/StelApp.cpp:587
 msgid "Initializing landscape..."
 msgstr ""
 
-#: src/core/StelApp.cpp:588
+#: src/core/StelApp.cpp:592
 msgid "Initializing grid lines..."
 msgstr ""
 
-#: src/core/StelApp.cpp:593
+#: src/core/StelApp.cpp:597
 msgid "Initializing special markers..."
 msgstr ""
 
-#: src/core/StelApp.cpp:599
+#: src/core/StelApp.cpp:603
 msgid "Initializing sporadic meteors..."
 msgstr ""
 
-#: src/core/StelApp.cpp:605
+#: src/core/StelApp.cpp:609
 msgid "Initializing user labels..."
 msgstr ""
 
-#: src/core/StelApp.cpp:610
+#: src/core/StelApp.cpp:614
 msgid "Initializing sky cultures..."
 msgstr ""
 
-#: src/core/StelApp.cpp:614
+#: src/core/StelApp.cpp:618
 msgid "Initializing user markers..."
 msgstr ""
 
-#: src/core/StelApp.cpp:620
+#: src/core/StelApp.cpp:624
 msgid "Initializing custom objects..."
 msgstr ""
 
-#: src/core/StelApp.cpp:626
+#: src/core/StelApp.cpp:630
 msgid "Initializing highlights..."
 msgstr ""
 
-#: src/core/StelApp.cpp:632
+#: src/core/StelApp.cpp:636
 msgid "Initializing specific time..."
 msgstr ""
 
-#: src/core/StelApp.cpp:640
+#: src/core/StelApp.cpp:644
 msgid "Initializing scripting..."
 msgstr ""
 
-#: src/core/StelApp.cpp:645
+#: src/core/StelApp.cpp:649
 msgid "Initializing color scheme..."
 msgstr ""
 
-#: src/core/StelApp.cpp:657 src/ui_configurationDialog.h:1898
+#: src/core/StelApp.cpp:661 src/ui_configurationDialog.h:1898
 msgid "Night mode"
 msgstr ""
 
-#: src/core/StelApp.cpp:687
+#: src/core/StelApp.cpp:691
 msgid "Initializing SPOUT sender..."
 msgstr ""
 
-#: src/core/StelApp.cpp:697
+#: src/core/StelApp.cpp:701
 msgid "Cannot create Spout sender. See log for details."
 msgstr ""
 
-#: src/core/StelApp.cpp:724
+#: src/core/StelApp.cpp:728
 msgid "Loading plugin"
 msgstr ""
 
