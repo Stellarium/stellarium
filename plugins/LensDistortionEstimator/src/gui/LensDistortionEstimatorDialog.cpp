@@ -1689,23 +1689,29 @@ void LensDistortionEstimatorDialog::generateLensfunModel()
 		ui_->lensfunModelXML->setText(q_("Internal error: bad distortion model chosen"));
 		return;
 	}
+
+	const auto gcd = std::gcd(image_.width(), image_.height());
+	const int aspectNum = image_.width() / gcd;
+	const int aspectDenom = image_.height() / gcd;
+
 	ui_->lensfunModelXML->setText(QString(1+R"(
 <lens>
     <maker>%1</maker>
     <model>%2</model>
     <mount>%3</mount>
     <cropfactor>%4</cropfactor>
-    <aspect-ratio>%5</aspect-ratio>
-    <center x="%6" y="%7"/>
+    <aspect-ratio>%5:%6</aspect-ratio>
+    <center x="%7" y="%8"/>
     <calibration>
-        %8
+        %9
     </calibration>
 </lens>
 )").arg(ui_->lensMake->text())
    .arg(ui_->lensModel->text())
    .arg(ui_->lensMount->text())
    .arg(computeLensCropFactor(), 0, 'g', 7)
-   .arg(double(image_.width())/image_.height(), 0, 'g', 7)
+   .arg(aspectNum)
+   .arg(aspectDenom)
    .arg(lensfunCenter[0], 0, 'f', 7)
    .arg(lensfunCenter[1], 0, 'f', 7)
    .arg(distModel));
