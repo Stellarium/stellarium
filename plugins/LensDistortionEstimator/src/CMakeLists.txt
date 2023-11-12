@@ -22,7 +22,7 @@ SET(LensDistortionEstimator_SRCS
      gui/LensDistortionEstimatorDialog.cpp
 )
 
-SET(LensDistortionEstimatorDialog_UIS
+SET(LensDistortionEstimator_UIS
      gui/lensDistortionEstimatorDialog.ui
 )
 

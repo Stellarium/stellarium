@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2023-11-13 01:15+0700\n"
+"POT-Creation-Date: 2023-11-13 01:34+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -12998,6 +12998,7 @@ msgstr ""
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:296
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:709
 #: plugins/Calendars/src/ui_calendarsDialog.h:943
+#: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:780
 msgid "Restore defaults"
 msgstr ""
 
@@ -13897,6 +13898,7 @@ msgstr ""
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:317
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:563
 #: plugins/Observability/src/ui_ObservabilityDialog.h:309
+#: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:781
 msgid "Settings"
 msgstr ""
 
@@ -14557,6 +14559,7 @@ msgid "Export list"
 msgstr ""
 
 #: src/ui_obsListDialog.h:402
+#: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:758
 msgid "Export list..."
 msgstr ""
 
@@ -14565,6 +14568,7 @@ msgid "Import list"
 msgstr ""
 
 #: src/ui_obsListDialog.h:406
+#: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:756
 msgid "Import list..."
 msgstr ""
 
@@ -15353,6 +15357,7 @@ msgstr ""
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:781
 #: plugins/Calendars/src/ui_calendarsDialog.h:995
 #: plugins/MissingStars/src/ui_missingStarsDialog.h:76
+#: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:782
 msgctxt "tab in plugin windows"
 msgid "About"
 msgstr ""
@@ -15928,6 +15933,7 @@ msgstr ""
 #: plugins/Oculars/src/gui/OcularDialog.cpp:589
 #: plugins/Oculars/src/ui_ocularDialog.h:1541
 #: plugins/Oculars/src/ui_ocularDialog.h:1576
+#: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:766
 msgid "Focal length:"
 msgstr ""
 
@@ -30933,6 +30939,8 @@ msgstr ""
 
 #: plugins/LensDistortionEstimator/src/LensDistortionEstimator.cpp:400
 #: plugins/LensDistortionEstimator/src/LensDistortionEstimator.cpp:403
+#: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:714
+#: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:715
 msgid "Lens Distortion Estimator"
 msgstr ""
 
@@ -31235,4 +31243,180 @@ msgstr ""
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1821
 msgid ""
 "Keyboard hotkeys can be configured in the Keyboard shortcuts editor (F7)."
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:716
+msgid "Image placement"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:717
+msgid "Distortion model:"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:718
+#: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:720
+msgid " px"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:719
+msgid ","
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:721
+#: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:723
+#: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:725
+#: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:734
+msgid "°"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:722
+msgid "Field of view in smaller direction:"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:724
+msgid "Image rotation angle:"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:726
+msgid "Center of projection elevation:"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:727
+msgid "3rd order polynomial"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:728
+msgid "5th order polynomial"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:729
+msgid "PTLens"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:731
+msgid "Image center shift:"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:732
+msgid "Center of projection azimuth:"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:733
+msgid "Distortion coefficients:"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:735
+msgid ""
+"Reset\n"
+"placement"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:737
+msgid ""
+"Reset\n"
+"distortion"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:739
+msgid "Image to load:"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:741
+msgid "Browse for an image..."
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:745
+msgid "Fix"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:746
+msgid "Subtract background RGB:"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:747
+msgid "Image brightness:"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:748
+msgid " %"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:749
+msgid "Image Loading"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:750
+msgid "Reposition image by first two points"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:751
+msgid "Pick an image point for selected object..."
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:752
+msgid "Optimize"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:754
+msgid "y, px"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:755
+msgid "x, px"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:757
+msgid "Remove point"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:759
+msgid "Fitting"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:760
+msgid " mm"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:761
+msgid "Make:"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:765
+msgid "Mount:"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:767
+msgid "Generate"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:768
+msgid "Model:"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:769
+msgid "Model for lensfun"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:770
+msgid "Show image"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:772
+msgid "normal"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:773
+msgid "Mark image axes"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:774
+msgid "selected"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:775
+msgid "Mark picked points"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:778
+msgid "Mark center of projection"
 msgstr ""
