@@ -351,9 +351,8 @@ void LensDistortionEstimatorDialog::periodicWarningsCheck()
 	if(std::abs(timeDiff) > 5000)
 		emitWarning(q_("Stellarium time differs from image EXIF time %1 by %2 seconds")
 		              .arg(exifHasLocalTime ? exifDateTime_.toString("yyyy-MM-dd hh:mm:ss")
-		                                    : exifDateTime_.toString("yyyy-MM-dd hh:mm:ss UTC+ttt"))
-		              .arg(timeDiff/1000.)
-		              .replace("UTC+UTCUTCUTC", "UTC+0") /* XXX: a Qt 6.4.1 bug I suppose */,
+		                                    : exifDateTime_.toString("yyyy-MM-dd hh:mm:ss t"))
+		              .arg(timeDiff/1000.),
 		            true);
 }
 
