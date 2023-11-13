@@ -127,7 +127,7 @@
           <item row="0" column="1" colspan="2">
            <widget class="QDoubleSpinBox" name="projectionCenterAzimuth">
             <property name="suffix">
-             <string>°</string>
+             <string notr="true">°</string>
             </property>
             <property name="decimals">
              <number>7</number>
@@ -156,7 +156,7 @@
           <item row="4" column="1" colspan="2">
            <widget class="QDoubleSpinBox" name="imageSmallerSideFoV">
             <property name="suffix">
-             <string>°</string>
+             <string notr="true">°</string>
             </property>
             <property name="decimals">
              <number>7</number>
@@ -185,7 +185,7 @@
           <item row="3" column="1" colspan="2">
            <widget class="QDoubleSpinBox" name="imageFieldRotation">
             <property name="suffix">
-             <string>°</string>
+             <string notr="true">°</string>
             </property>
             <property name="decimals">
              <number>7</number>
@@ -276,7 +276,7 @@
           <item row="1" column="1" colspan="2">
            <widget class="QDoubleSpinBox" name="projectionCenterElevation">
             <property name="suffix">
-             <string>°</string>
+             <string notr="true">°</string>
             </property>
             <property name="decimals">
              <number>7</number>
@@ -483,7 +483,7 @@ distortion</string>
          <item>
           <widget class="QDoubleSpinBox" name="imageBrightness">
            <property name="suffix">
-            <string> %</string>
+            <string notr="true">%</string>
            </property>
            <property name="decimals">
             <number>1</number>
