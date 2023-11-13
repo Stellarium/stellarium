@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2023-11-13 09:56+0700\n"
+"POT-Creation-Date: 2023-11-13 11:51+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -30937,18 +30937,28 @@ msgstr ""
 msgid "Missing Stars Plug-in Configuration"
 msgstr ""
 
-#: plugins/LensDistortionEstimator/src/LensDistortionEstimator.cpp:400
-#: plugins/LensDistortionEstimator/src/LensDistortionEstimator.cpp:403
+#: plugins/LensDistortionEstimator/src/LensDistortionEstimator.cpp:59
+msgid "Lens distortion estimator"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/LensDistortionEstimator.cpp:62
+msgid ""
+"Estimates lens distortion by letting the user match stars to a photo and "
+"computing a fit."
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/LensDistortionEstimator.cpp:401
+#: plugins/LensDistortionEstimator/src/LensDistortionEstimator.cpp:404
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:720
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:721
 msgid "Lens Distortion Estimator"
 msgstr ""
 
-#: plugins/LensDistortionEstimator/src/LensDistortionEstimator.cpp:401
+#: plugins/LensDistortionEstimator/src/LensDistortionEstimator.cpp:402
 msgid "Toggle pick-a-point mode"
 msgstr ""
 
-#: plugins/LensDistortionEstimator/src/LensDistortionEstimator.cpp:404
+#: plugins/LensDistortionEstimator/src/LensDistortionEstimator.cpp:405
 msgid "Show lens distortion estimator dialog"
 msgstr ""
 
