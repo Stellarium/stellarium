@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2023-11-12 18:26+0700\n"
+"POT-Creation-Date: 2023-11-13 13:01+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -64,7 +64,7 @@ msgstr ""
 #: src/core/modules/NebulaMgr.cpp:359 src/core/modules/SolarSystem.cpp:307
 #: src/core/modules/MilkyWay.cpp:107 src/core/modules/ZodiacalLight.cpp:112
 #: src/core/modules/ToastMgr.cpp:62 src/core/modules/HipsMgr.cpp:156
-#: src/core/StelApp.cpp:657 src/core/StelCore.cpp:296
+#: src/core/StelApp.cpp:661 src/core/StelCore.cpp:296
 #: src/core/StelSkyLayerMgr.cpp:83 src/core/StelSkyLayerMgr.cpp:84
 #: src/StelMainView.cpp:948
 msgid "Display Options"
@@ -819,6 +819,7 @@ msgstr ""
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:187
 #: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:184
 #: plugins/MissingStars/src/gui/MissingStarsDialog.cpp:87
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1748
 msgid "Author"
 msgstr ""
 
@@ -2939,143 +2940,143 @@ msgstr ""
 msgid "December solstice at previous year"
 msgstr ""
 
-#: src/core/StelApp.cpp:462
+#: src/core/StelApp.cpp:466
 msgid "Initializing textures..."
 msgstr ""
 
-#: src/core/StelApp.cpp:466
+#: src/core/StelApp.cpp:470
 msgid "Initializing network access..."
 msgstr ""
 
-#: src/core/StelApp.cpp:469
+#: src/core/StelApp.cpp:473
 msgid "Initializing network disk cache..."
 msgstr ""
 
-#: src/core/StelApp.cpp:483
+#: src/core/StelApp.cpp:487
 msgid "Initializing network proxy..."
 msgstr ""
 
-#: src/core/StelApp.cpp:498
+#: src/core/StelApp.cpp:502
 msgid "Initializing Object Database..."
 msgstr ""
 
-#: src/core/StelApp.cpp:504
+#: src/core/StelApp.cpp:508
 msgid "Initializing HiPS survey..."
 msgstr ""
 
-#: src/core/StelApp.cpp:510
+#: src/core/StelApp.cpp:514
 msgid "Initializing Solar System objects..."
 msgstr ""
 
-#: src/core/StelApp.cpp:516
+#: src/core/StelApp.cpp:520
 msgid "Initializing planetary nomenclature..."
 msgstr ""
 
-#: src/core/StelApp.cpp:522
+#: src/core/StelApp.cpp:526
 msgid "Initializing stars..."
 msgstr ""
 
-#: src/core/StelApp.cpp:527
+#: src/core/StelApp.cpp:531
 msgid "Initializing core..."
 msgstr ""
 
-#: src/core/StelApp.cpp:531
+#: src/core/StelApp.cpp:535
 msgid "Initializing deep-sky objects..."
 msgstr ""
 
-#: src/core/StelApp.cpp:537
+#: src/core/StelApp.cpp:541
 msgid "Initializing Milky Way..."
 msgstr ""
 
-#: src/core/StelApp.cpp:543
+#: src/core/StelApp.cpp:547
 msgid "Initializing zodiacal light..."
 msgstr ""
 
-#: src/core/StelApp.cpp:549
+#: src/core/StelApp.cpp:553
 msgid "Initializing sky image layer..."
 msgstr ""
 
-#: src/core/StelApp.cpp:555
+#: src/core/StelApp.cpp:559
 msgid "Initializing TOAST surveys..."
 msgstr ""
 
-#: src/core/StelApp.cpp:561
+#: src/core/StelApp.cpp:565
 msgid "Initializing audio..."
 msgstr ""
 
-#: src/core/StelApp.cpp:565
+#: src/core/StelApp.cpp:569
 msgid "Initializing video..."
 msgstr ""
 
-#: src/core/StelApp.cpp:571
+#: src/core/StelApp.cpp:575
 msgid "Initializing constellations..."
 msgstr ""
 
-#: src/core/StelApp.cpp:577
+#: src/core/StelApp.cpp:581
 msgid "Initializing asterisms..."
 msgstr ""
 
-#: src/core/StelApp.cpp:583
+#: src/core/StelApp.cpp:587
 msgid "Initializing landscape..."
 msgstr ""
 
-#: src/core/StelApp.cpp:588
+#: src/core/StelApp.cpp:592
 msgid "Initializing grid lines..."
 msgstr ""
 
-#: src/core/StelApp.cpp:593
+#: src/core/StelApp.cpp:597
 msgid "Initializing special markers..."
 msgstr ""
 
-#: src/core/StelApp.cpp:599
+#: src/core/StelApp.cpp:603
 msgid "Initializing sporadic meteors..."
 msgstr ""
 
-#: src/core/StelApp.cpp:605
+#: src/core/StelApp.cpp:609
 msgid "Initializing user labels..."
 msgstr ""
 
-#: src/core/StelApp.cpp:610
+#: src/core/StelApp.cpp:614
 msgid "Initializing sky cultures..."
 msgstr ""
 
-#: src/core/StelApp.cpp:614
+#: src/core/StelApp.cpp:618
 msgid "Initializing user markers..."
 msgstr ""
 
-#: src/core/StelApp.cpp:620
+#: src/core/StelApp.cpp:624
 msgid "Initializing custom objects..."
 msgstr ""
 
-#: src/core/StelApp.cpp:626
+#: src/core/StelApp.cpp:630
 msgid "Initializing highlights..."
 msgstr ""
 
-#: src/core/StelApp.cpp:632
+#: src/core/StelApp.cpp:636
 msgid "Initializing specific time..."
 msgstr ""
 
-#: src/core/StelApp.cpp:640
+#: src/core/StelApp.cpp:644
 msgid "Initializing scripting..."
 msgstr ""
 
-#: src/core/StelApp.cpp:645
+#: src/core/StelApp.cpp:649
 msgid "Initializing color scheme..."
 msgstr ""
 
-#: src/core/StelApp.cpp:657 src/ui_configurationDialog.h:1898
+#: src/core/StelApp.cpp:661 src/ui_configurationDialog.h:1898
 msgid "Night mode"
 msgstr ""
 
-#: src/core/StelApp.cpp:687
+#: src/core/StelApp.cpp:691
 msgid "Initializing SPOUT sender..."
 msgstr ""
 
-#: src/core/StelApp.cpp:697
+#: src/core/StelApp.cpp:701
 msgid "Cannot create Spout sender. See log for details."
 msgstr ""
 
-#: src/core/StelApp.cpp:724
+#: src/core/StelApp.cpp:728
 msgid "Loading plugin"
 msgstr ""
 
@@ -4175,6 +4176,7 @@ msgstr ""
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:186
 #: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:183
 #: plugins/MissingStars/src/gui/MissingStarsDialog.cpp:86
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1747
 msgid "License"
 msgstr ""
 
@@ -4657,6 +4659,7 @@ msgstr ""
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:185
 #: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:182
 #: plugins/MissingStars/src/gui/MissingStarsDialog.cpp:85
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1746
 msgid "Version"
 msgstr ""
 
@@ -12995,6 +12998,7 @@ msgstr ""
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:296
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:709
 #: plugins/Calendars/src/ui_calendarsDialog.h:943
+#: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:780
 msgid "Restore defaults"
 msgstr ""
 
@@ -13894,6 +13898,7 @@ msgstr ""
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:317
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:563
 #: plugins/Observability/src/ui_ObservabilityDialog.h:309
+#: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:781
 msgid "Settings"
 msgstr ""
 
@@ -14554,6 +14559,7 @@ msgid "Export list"
 msgstr ""
 
 #: src/ui_obsListDialog.h:402
+#: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:758
 msgid "Export list..."
 msgstr ""
 
@@ -14562,6 +14568,7 @@ msgid "Import list"
 msgstr ""
 
 #: src/ui_obsListDialog.h:406
+#: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:756
 msgid "Import list..."
 msgstr ""
 
@@ -15350,6 +15357,7 @@ msgstr ""
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:781
 #: plugins/Calendars/src/ui_calendarsDialog.h:995
 #: plugins/MissingStars/src/ui_missingStarsDialog.h:76
+#: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:782
 msgctxt "tab in plugin windows"
 msgid "About"
 msgstr ""
@@ -15925,6 +15933,7 @@ msgstr ""
 #: plugins/Oculars/src/gui/OcularDialog.cpp:589
 #: plugins/Oculars/src/ui_ocularDialog.h:1541
 #: plugins/Oculars/src/ui_ocularDialog.h:1576
+#: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:766
 msgid "Focal length:"
 msgstr ""
 
@@ -15950,6 +15959,7 @@ msgid "Pixel grid feature"
 msgstr ""
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:638
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1751
 msgid "Overview"
 msgstr ""
 
@@ -16012,6 +16022,7 @@ msgid "If you find any issues, please let me know. Enjoy!"
 msgstr ""
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:652
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1816
 msgid "Hot Keys"
 msgstr ""
 
@@ -30924,4 +30935,486 @@ msgstr ""
 
 #: plugins/MissingStars/src/ui_missingStarsDialog.h:75
 msgid "Missing Stars Plug-in Configuration"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/LensDistortionEstimator.cpp:59
+msgid "Lens distortion estimator"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/LensDistortionEstimator.cpp:62
+msgid ""
+"Estimates lens distortion by letting the user match stars to a photo and "
+"computing a fit."
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/LensDistortionEstimator.cpp:401
+#: plugins/LensDistortionEstimator/src/LensDistortionEstimator.cpp:404
+#: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:720
+#: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:721
+msgid "Lens Distortion Estimator"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/LensDistortionEstimator.cpp:402
+msgid "Toggle pick-a-point mode"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/LensDistortionEstimator.cpp:405
+msgid "Show lens distortion estimator dialog"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:320
+msgid ""
+"Sets simulation date/time to image EXIF date/time, and freezes simulation "
+"time"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:352
+#, qt-format
+msgid "Stellarium time differs from image EXIF time %1 by %2 seconds"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:373
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:429
+msgid "Save points to file"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:374
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:430
+msgid "Comma-separated values (*.csv)"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:379
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:413
+msgid "Error saving data"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:380
+#, qt-format
+msgid ""
+"Failed to open output file for writing:\n"
+"%1"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:414
+#, qt-format
+msgid ""
+"Failed to write the output file:\n"
+"%1"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:422
+msgid "Confirm deletion of old points"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:423
+msgid ""
+"There are some points defined. They will be deleted and replaced with the "
+"ones from the file. Proceed?"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:435
+msgid "Error reading data"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:436
+#, qt-format
+msgid ""
+"Failed to open input file for reading:\n"
+"%1"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:452
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:462
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:471
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:478
+msgid "File format error"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:453
+#, qt-format
+msgid ""
+"Can't import file: expected to find at least %1 entries at line %2, but got "
+"%3."
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:463
+#, qt-format
+msgid "Can't import file: object \"%1\" not found at line %2."
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:472
+#, qt-format
+msgid "Can't import file: failed to parse image position X at line %1."
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:479
+#, qt-format
+msgid "Can't import file: failed to parse image position Y at line %1."
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:675
+msgid "Distance from center, °"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:681
+msgid "Error estimate, °"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:968
+msgid "Confirm resetting image placement"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:969
+msgid "This will move the image to the center of the screen. Proceed?"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:978
+msgid "Confirm resetting distortion"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:979
+msgid "This will zero out all distortion and shift coefficients. Proceed?"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1332
+msgid ""
+"Can't get EXIF date from the image, please make sure current date and time "
+"setting is correct."
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1342
+msgid ""
+"Failed to parse EXIF date/time, please make sure current date and time "
+"setting is correct."
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1382
+msgid "Open image file"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1383
+msgid ""
+"Image files (*.png *.bmp *.jpg *.jpeg *.tif *.tiff *.webm *.pbm *.pgm *.ppm "
+"*.xbm *.xpm)"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1657
+msgid "Make, model and mount fields must be filled"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1688
+msgid "Internal error: bad distortion model chosen"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1744
+msgid "Lens Distortion Estimator Plug-in"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1753
+msgid ""
+"This plugin lets you estimate distortion of the objective lens of your "
+"camera and generate a distortion model for use with the lensfun library."
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1755
+msgid "The process is as follows."
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1757
+msgid ""
+"Take a photo of the night sky so that you can easily find enough stars "
+"scattered from the center of the frame to the border. Some care must be "
+"taken to get a useful shot, see more details in <b>Preparing a photo</b> "
+"section.\n"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1760
+msgid ""
+"On the <i>Image Loading</i> tab choose the image to load and use the "
+"available controls (or hotkeys) to position it so that it approximately "
+"matches the direction where the camera looked and corresponding orientation. "
+"You need to be able to tell which point in the image corresponds to which "
+"simulated star/planet."
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1764
+msgid ""
+"Then you switch to the <i>Fitting</i> tab, and pick some points in the image "
+"for a set of celestial objects. To do this,\n"
+"<ol><li>Select an object as you'd normally do.</li>\n"
+"<li>Click <i>Pick an image point for selected object...</i> button (or use a "
+"hotkey).</li>\n"
+"<li>Click the point in the image corresponding to this object (hide the "
+"simulated stars if they are too confusing at this point).</li></ol>"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1770
+msgid ""
+"Finally, when enough points have been picked to fill the different distances "
+"from image center, click <i>Optimize</i> button. After a few moments the "
+"image should appear aligned with the stars. If it's not, try picking more "
+"points from the ones which don't match, and retry optimization."
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1774
+msgid ""
+"On the <i>Model for lensfun</i> tab you can generate the XML entry for "
+"lensfun database. Enter make and model for the lens, and the mount (the name "
+"must match one of the mounts supported by your camera as listed in the "
+"database)."
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1779
+msgid "Preparing a photo"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1780
+msgid "To make a useful shot, you should follow some guidelines:\n"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1782
+msgid ""
+"Try to keep away from the horizon, because star elevation there is very "
+"dependent on weather conditions due to atmospheric refraction."
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1784
+msgid ""
+"Be sure to disable any geometry distortion correction, because failure to "
+"disable distortion correction may make good fitting impossible. In "
+"particular:"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1787
+msgid ""
+"If you're shooting RAW, lens distortion correction must be turned off in RAW "
+"development software like Lightroom or Darktable that you use for processing "
+"of your shots."
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1789
+msgid ""
+"If you're shooting JPEG, lens distortion correction must be turned off in "
+"the camera settings before taking the photo."
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1793
+msgid ""
+"Disable automatic image rotation according to its orientation saved in EXIF "
+"tags. While such rotation may make the image look better, the shifts of the "
+"center of projection that will be computed during the fitting process will "
+"have wrong directions if such rotation was applied."
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1798
+msgid ""
+"The image that you input into this estimator should contain as much EXIF "
+"information from the original RAW as possible, this will let the UI tell you "
+"if e.g. current time and date set in the simulation are not the same as "
+"specified in the image."
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1801
+msgid ""
+"One method that will take an input RAW image and output a result following "
+"the above guidelines (except those about shooting) is to use <code>dcraw</"
+"code> (the original one from Dave Coffin) or <code>dcraw_emu</code> (from "
+"<code>libRaw</code> package), plus <code>exiftool</code> as in the following "
+"commands (adjust the file names to your needs):"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1808
+msgid ""
+"Here the <code>-t 0</code> option for <code>dcraw_emu</code> prevents "
+"automatic rotation, <code>-T</code> generates a TIFF file instead of the "
+"default PPM, <code>-W</code> prevents automatic brightening which may make "
+"stars not as small as they are in the photo, and <code>-Z</code> gives an "
+"explicit name to the file."
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1812
+msgid ""
+"The <code>exiftool</code> command copies all time-related and GPS tags from "
+"the JPEG sidecar (which on my Samsung Galaxy S8 appeared to contain more "
+"complete EXIF info than the DNG) into the TIFF. Your case may differ, you "
+"may have to copy from your RAW file instead."
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1818
+msgid "Ctrl+Shift & left mouse drag: move the image around the sky"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1819
+msgid ""
+"Ctrl+Shift & right mouse drag: scale and rotate the image around the last "
+"drag point"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1820
+msgid ""
+"Keyboard hotkeys can be configured in the Keyboard shortcuts editor (F7)."
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:722
+msgid "Image placement"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:723
+msgid "Distortion model:"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:724
+#: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:725
+msgid " px"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:726
+msgid "Field of view in smaller direction:"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:727
+msgid "Image rotation angle:"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:728
+msgid "Center of projection elevation:"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:729
+msgid "3rd order polynomial"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:730
+msgid "5th order polynomial"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:731
+msgid "PTLens"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:733
+msgid "Image center shift:"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:734
+msgid "Center of projection azimuth:"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:735
+msgid "Distortion coefficients:"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:736
+msgid ""
+"Reset\n"
+"placement"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:738
+msgid ""
+"Reset\n"
+"distortion"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:740
+msgid "Image to load:"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:742
+msgid "Browse for an image..."
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:746
+msgid "Fix"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:747
+msgid "Subtract background RGB:"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:748
+msgid "Image brightness:"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:749
+msgid "Image Loading"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:750
+msgid "Reposition image by first two points"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:751
+msgid "Pick an image point for selected object..."
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:752
+msgid "Optimize"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:754
+msgid "y, px"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:755
+msgid "x, px"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:757
+msgid "Remove point"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:759
+msgid "Fitting"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:760
+msgid " mm"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:761
+msgid "Make:"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:765
+msgctxt "Lens mount on a camera"
+msgid "Mount:"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:767
+msgid "Generate"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:768
+msgid "Model:"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:769
+msgid "Model for lensfun"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:770
+msgid "Show image"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:772
+msgctxt "As in \"normal\" points, the opposite being \"selected\""
+msgid "normal"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:773
+msgid "Mark image axes"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:774
+msgctxt "As in \"selected points\""
+msgid "selected"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:775
+msgid "Mark picked points"
+msgstr ""
+
+#: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:778
+msgid "Mark center of projection"
 msgstr ""

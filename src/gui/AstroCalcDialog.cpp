@@ -9177,10 +9177,10 @@ void AstroCalcDialog::drawDistanceGraph()
 		return;
 	}
 
-	int limit = 76, step = 4;
+	int limit = 40, step = 4;
 	if (firstCBId->getParent() == currentPlanet || secondCBId->getParent() == currentPlanet)
 	{
-		limit = 151; step = 2;
+		limit = 80; step = 2;
 	}
 
 	// use full calendar days, not offsets from current JD.

@@ -311,8 +311,8 @@ QPair<QDateTime, QDateTime> AstroCalcChart::findXRange(const double JD, const Se
 			break;
 		case AstroCalcChart::pcDistanceAU:
 		case AstroCalcChart::pcDistanceDeg:
-			startDate=StelUtils::jdToQDateTime(baseJD-300, Qt::UTC);
-			endDate=StelUtils::jdToQDateTime(baseJD+300, Qt::UTC);
+			startDate=StelUtils::jdToQDateTime(baseJD-150, Qt::UTC);
+			endDate=StelUtils::jdToQDateTime(baseJD+150, Qt::UTC);
 			break;
 		default: // 2-curves page
 			StelUtils::getDateFromJulianDay(baseJD, &year, &month, &day);
@@ -401,6 +401,7 @@ void AstroCalcChart::setupAxes(const double jd, const int periods, const QString
 	{
 		xAxis->setTickCount(21); // step is 30 days. 20 intervals.
 		xRange=findXRange(jd, AstroCalcChart::pcDistanceAU, 1);
+		xAxis->setFormat("<div style=\"text-align:center\">dd.<br/>MMM</div>");
 	}
 	else
 	{

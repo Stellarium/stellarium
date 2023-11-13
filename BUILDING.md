@@ -84,7 +84,8 @@ sudo apt install build-essential cmake zlib1g-dev libgl1-mesa-dev libdrm-dev gcc
                  qtbase5-private-dev qtscript5-dev libqt5svg5-dev qttools5-dev-tools \
                  qttools5-dev libqt5opengl5-dev qtmultimedia5-dev libqt5multimedia5-plugins \
                  libqt5serialport5 libqt5serialport5-dev qtpositioning5-dev libqt5positioning5 \
-                 libqt5positioning5-plugins qtwebengine5-dev libqt5charts5-dev
+                 libqt5positioning5-plugins qtwebengine5-dev libqt5charts5-dev \
+                 libexiv2-dev libnlopt-cxx-dev
 ```
 
 ##### Qt6
@@ -100,7 +101,8 @@ sudo apt install build-essential cmake zlib1g-dev libgl1-mesa-dev libdrm-dev gcc
                  qt6-tools-dev-tools qt6-base-dev-tools qt6-qpa-plugins qt6-image-formats-plugins \
                  qt6-l10n-tools qt6-webengine-dev qt6-webengine-dev-tools libqt6charts6-dev \
                  libqt6charts6 libqt6opengl6-dev libqt6positioning6-plugins libqt6serialport6-dev \
-                 qt6-base-dev libqt6webenginecore6-bin libqt6webengine6-data 
+                 qt6-base-dev libqt6webenginecore6-bin libqt6webengine6-data \
+                 libexiv2-dev libnlopt-cxx-dev
 ```
 
 

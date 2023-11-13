@@ -150,6 +150,10 @@ Q_IMPORT_PLUGIN(TelescopeControlStelPluginInterface)
 Q_IMPORT_PLUGIN(SolarSystemEditorStelPluginInterface)
 #endif
 
+#ifdef USE_STATIC_PLUGIN_LENSDISTORTIONESTIMATOR
+Q_IMPORT_PLUGIN(LensDistortionEstimatorStelPluginInterface)
+#endif
+
 #ifdef USE_STATIC_PLUGIN_METEORSHOWERS
 Q_IMPORT_PLUGIN(MeteorShowersStelPluginInterface)
 #endif
