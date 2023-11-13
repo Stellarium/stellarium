@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2023-11-13 09:56+0700\n"
+"POT-Creation-Date: 2023-11-13 11:51+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Alexander V. Wolf <alex.v.wolf@gmail.com>, 2023\n"
 "Language-Team: Russian (https://app.transifex.com/stellarium/teams/80998/ru/)\n"
@@ -33439,18 +33439,30 @@ msgstr "Настройка \"Недостающие звёзды\""
 msgid "Missing Stars Plug-in Configuration"
 msgstr "Настройка плагина \"Недостающие звёзды\""
 
-#: plugins/LensDistortionEstimator/src/LensDistortionEstimator.cpp:400
-#: plugins/LensDistortionEstimator/src/LensDistortionEstimator.cpp:403
+#: plugins/LensDistortionEstimator/src/LensDistortionEstimator.cpp:59
+msgid "Lens distortion estimator"
+msgstr "Оценщик искажений объектива"
+
+#: plugins/LensDistortionEstimator/src/LensDistortionEstimator.cpp:62
+msgid ""
+"Estimates lens distortion by letting the user match stars to a photo and "
+"computing a fit."
+msgstr ""
+"Оценивает искажение объектива, позволяя пользователю сопоставлять звезды с "
+"фотографией и вычислять подгонку."
+
+#: plugins/LensDistortionEstimator/src/LensDistortionEstimator.cpp:401
+#: plugins/LensDistortionEstimator/src/LensDistortionEstimator.cpp:404
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:720
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:721
 msgid "Lens Distortion Estimator"
 msgstr "Оценщик искажений объектива"
 
-#: plugins/LensDistortionEstimator/src/LensDistortionEstimator.cpp:401
+#: plugins/LensDistortionEstimator/src/LensDistortionEstimator.cpp:402
 msgid "Toggle pick-a-point mode"
 msgstr "Переключить режим выбора точки"
 
-#: plugins/LensDistortionEstimator/src/LensDistortionEstimator.cpp:404
+#: plugins/LensDistortionEstimator/src/LensDistortionEstimator.cpp:405
 msgid "Show lens distortion estimator dialog"
 msgstr "Показать диалоговое окно оценщика искажений объектива"
 
