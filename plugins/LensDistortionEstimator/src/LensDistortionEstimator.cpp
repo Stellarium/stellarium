@@ -29,6 +29,7 @@
 #include "StelModuleMgr.hpp"
 #include "StelObjectMgr.hpp"
 #include "StelTextureMgr.hpp"
+#include "StelTranslator.hpp"
 
 #include <QDebug>
 
@@ -55,10 +56,10 @@ StelPluginInfo LensDistortionEstimatorStelPluginInterface::getPluginInfo() const
 
 	StelPluginInfo info;
 	info.id = "LensDistortionEstimator";
-	info.displayedName = "Lens distortion estimator";
+	info.displayedName = N_("Lens distortion estimator");
 	info.authors = "Ruslan Kabatsayev";
 	info.contact = STELLARIUM_DEV_URL;
-	info.description = "Estimates lens distortion by letting the user match stars to a photo and computing a fit.";
+	info.description = N_("Estimates lens distortion by letting the user match stars to a photo and computing a fit.");
 	info.version = LENSDISTORTIONESTIMATOR_PLUGIN_VERSION;
 	info.license = LENSDISTORTIONESTIMATOR_PLUGIN_LICENSE;
 	return info;
