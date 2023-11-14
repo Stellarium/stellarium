@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2023-11-13 13:01+0700\n"
+"POT-Creation-Date: 2023-11-14 09:32+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -202,7 +202,7 @@ msgstr ""
 #: src/core/modules/GridLinesMgr.cpp:826 src/gui/SearchDialog.cpp:311
 #: src/gui/AstroCalcDialog.cpp:839 src/gui/AstroCalcDialog.cpp:1745
 #: src/gui/AstroCalcDialog.cpp:2097 src/gui/AstroCalcDialog.cpp:2360
-#: src/gui/AstroCalcChart.cpp:80 src/gui/AstroCalcChart.cpp:417
+#: src/gui/AstroCalcChart.cpp:80 src/gui/AstroCalcChart.cpp:418
 #: src/ui_viewDialog.h:4183 plugins/Satellites/src/Satellite.cpp:362
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1495
 msgid "Altitude"
@@ -1778,7 +1778,7 @@ msgstr ""
 
 #: src/core/modules/Nebula.cpp:175 src/core/StelObject.cpp:348
 #: src/gui/AstroCalcChart.cpp:95 src/gui/AstroCalcChart.cpp:105
-#: src/gui/AstroCalcChart.cpp:434 src/gui/AstroCalcChart.cpp:460
+#: src/gui/AstroCalcChart.cpp:435 src/gui/AstroCalcChart.cpp:461
 #: src/gui/ObsListDialog.cpp:294 plugins/Supernovae/src/Supernova.cpp:128
 msgid "Magnitude"
 msgstr ""
@@ -1876,7 +1876,7 @@ msgstr ""
 #: src/core/modules/Planet.cpp:707 src/core/modules/StarWrapper.cpp:321
 #: src/core/modules/StarWrapper.cpp:323 src/gui/AstroCalcDialog.cpp:936
 #: src/gui/AstroCalcChart.cpp:92 src/gui/AstroCalcChart.cpp:102
-#: src/gui/AstroCalcChart.cpp:427 src/gui/AstroCalcChart.cpp:453
+#: src/gui/AstroCalcChart.cpp:428 src/gui/AstroCalcChart.cpp:454
 #: src/ui_configurationDialog.h:1791 plugins/Supernovae/src/Supernova.cpp:160
 #: plugins/Novae/src/Nova.cpp:165 plugins/Exoplanets/src/Exoplanet.cpp:335
 #: plugins/MissingStars/src/MissingStar.cpp:158
@@ -2344,9 +2344,9 @@ msgstr ""
 #: src/core/modules/Planet.cpp:670 src/gui/AstroCalcDialog.cpp:882
 #: src/gui/AstroCalcDialog.cpp:1194 src/gui/AstroCalcDialog.cpp:1492
 #: src/gui/AstroCalcDialog.cpp:1759 src/gui/AstroCalcDialog.cpp:1818
-#: src/gui/AstroCalcDialog.cpp:9088 src/gui/AstroCalcChart.cpp:427
-#: src/gui/AstroCalcChart.cpp:431 src/gui/AstroCalcChart.cpp:446
-#: src/gui/AstroCalcChart.cpp:453 src/gui/AstroCalcChart.cpp:457
+#: src/gui/AstroCalcDialog.cpp:9088 src/gui/AstroCalcChart.cpp:428
+#: src/gui/AstroCalcChart.cpp:432 src/gui/AstroCalcChart.cpp:447
+#: src/gui/AstroCalcChart.cpp:454 src/gui/AstroCalcChart.cpp:458
 #: plugins/Exoplanets/src/Exoplanet.cpp:364
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:178
 msgctxt "distance, astronomical unit"
@@ -2402,14 +2402,14 @@ msgstr ""
 
 #: src/core/modules/Planet.cpp:868 src/core/modules/Planet.cpp:869
 #: src/core/modules/Planet.cpp:877 src/gui/AstroCalcChart.cpp:93
-#: src/gui/AstroCalcChart.cpp:103 src/gui/AstroCalcChart.cpp:429
-#: src/gui/AstroCalcChart.cpp:455 src/ui_configurationDialog.h:1830
+#: src/gui/AstroCalcChart.cpp:103 src/gui/AstroCalcChart.cpp:430
+#: src/gui/AstroCalcChart.cpp:456 src/ui_configurationDialog.h:1830
 msgid "Elongation"
 msgstr ""
 
 #: src/core/modules/Planet.cpp:870 src/core/modules/Planet.cpp:879
 #: src/gui/AstroCalcChart.cpp:96 src/gui/AstroCalcChart.cpp:106
-#: src/gui/AstroCalcChart.cpp:438 src/gui/AstroCalcChart.cpp:464
+#: src/gui/AstroCalcChart.cpp:439 src/gui/AstroCalcChart.cpp:465
 #: plugins/Satellites/src/Satellite.cpp:408
 msgid "Phase angle"
 msgstr ""
@@ -2424,7 +2424,7 @@ msgid "Elong. in Ecl.Long."
 msgstr ""
 
 #: src/core/modules/Planet.cpp:893 src/gui/AstroCalcDialog.cpp:9298
-#: src/gui/AstroCalcChart.cpp:472
+#: src/gui/AstroCalcChart.cpp:473
 msgid "Angular distance"
 msgstr ""
 
@@ -5931,21 +5931,21 @@ msgctxt "coordinate system"
 msgid "Ecliptic (J2000.0)"
 msgstr ""
 
-#: src/gui/SearchDialog.cpp:297 src/gui/AstroCalcChart.cpp:442
-#: src/gui/AstroCalcChart.cpp:468 src/gui/ObsListDialog.cpp:292
+#: src/gui/SearchDialog.cpp:297 src/gui/AstroCalcChart.cpp:443
+#: src/gui/AstroCalcChart.cpp:469 src/gui/ObsListDialog.cpp:292
 msgid "Right ascension"
 msgstr ""
 
 #: src/gui/SearchDialog.cpp:300 src/gui/AstroCalcChart.cpp:91
-#: src/gui/AstroCalcChart.cpp:101 src/gui/AstroCalcChart.cpp:425
-#: src/gui/AstroCalcChart.cpp:451 src/gui/ObsListDialog.cpp:293
+#: src/gui/AstroCalcChart.cpp:101 src/gui/AstroCalcChart.cpp:426
+#: src/gui/AstroCalcChart.cpp:452 src/gui/ObsListDialog.cpp:293
 msgid "Declination"
 msgstr ""
 
 #. TRANSLATORS: azimuth
 #: src/gui/SearchDialog.cpp:308 src/gui/AstroCalcDialog.cpp:837
 #: src/gui/AstroCalcDialog.cpp:1743 src/gui/AstroCalcDialog.cpp:2361
-#: src/gui/AstroCalcChart.cpp:88 src/gui/AstroCalcChart.cpp:419
+#: src/gui/AstroCalcChart.cpp:88 src/gui/AstroCalcChart.cpp:420
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1496
 msgid "Azimuth"
 msgstr ""
@@ -6246,8 +6246,8 @@ msgstr ""
 
 #. TRANSLATORS: phase
 #: src/gui/AstroCalcDialog.cpp:1757 src/gui/AstroCalcChart.cpp:97
-#: src/gui/AstroCalcChart.cpp:107 src/gui/AstroCalcChart.cpp:440
-#: src/gui/AstroCalcChart.cpp:466
+#: src/gui/AstroCalcChart.cpp:107 src/gui/AstroCalcChart.cpp:441
+#: src/gui/AstroCalcChart.cpp:467
 msgid "Phase"
 msgstr ""
 
@@ -7197,8 +7197,8 @@ msgstr ""
 #. TRANSLATORS: hours.
 #. TRANSLATORS: duration
 #. TRANSLATORS: hours.
-#: src/gui/AstroCalcDialog.cpp:6326 src/gui/AstroCalcChart.cpp:442
-#: src/gui/AstroCalcChart.cpp:468
+#: src/gui/AstroCalcDialog.cpp:6326 src/gui/AstroCalcChart.cpp:443
+#: src/gui/AstroCalcChart.cpp:469
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:873
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1148
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:173
@@ -7667,28 +7667,28 @@ msgstr ""
 msgid "Local Time"
 msgstr ""
 
-#: src/gui/AstroCalcChart.cpp:421
+#: src/gui/AstroCalcChart.cpp:422
 msgid "Lunar elongation"
 msgstr ""
 
-#: src/gui/AstroCalcChart.cpp:423 src/gui/AstroCalcChart.cpp:449
+#: src/gui/AstroCalcChart.cpp:424 src/gui/AstroCalcChart.cpp:450
 msgid "Angular size"
 msgstr ""
 
-#: src/gui/AstroCalcChart.cpp:427 src/gui/AstroCalcChart.cpp:453
+#: src/gui/AstroCalcChart.cpp:428 src/gui/AstroCalcChart.cpp:454
 msgctxt "distance, Megameters"
 msgid "Mm"
 msgstr ""
 
-#: src/gui/AstroCalcChart.cpp:431 src/gui/AstroCalcChart.cpp:457
+#: src/gui/AstroCalcChart.cpp:432 src/gui/AstroCalcChart.cpp:458
 msgid "Heliocentric distance"
 msgstr ""
 
-#: src/gui/AstroCalcChart.cpp:444 src/gui/AstroCalcChart.cpp:470
+#: src/gui/AstroCalcChart.cpp:445 src/gui/AstroCalcChart.cpp:471
 msgid "Culmination altitude"
 msgstr ""
 
-#: src/gui/AstroCalcChart.cpp:446
+#: src/gui/AstroCalcChart.cpp:447
 msgid "Linear Distance"
 msgstr ""
 
@@ -31325,6 +31325,7 @@ msgid "Browse for an image..."
 msgstr ""
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:746
+msgctxt "A verb in imperative, used on a button that fixes a problem."
 msgid "Fix"
 msgstr ""
 
