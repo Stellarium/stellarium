@@ -106,6 +106,11 @@ void StelSkyCultureMgr::init()
 	setCurrentSkyCultureID(defaultSkyCultureID);
 }
 
+void StelSkyCultureMgr::reloadSkyCulture()
+{
+	emit currentSkyCultureChanged(currentSkyCultureDir);
+}
+
 //! Set the current sky culture from the passed directory
 bool StelSkyCultureMgr::setCurrentSkyCultureID(const QString& cultureDir)
 {

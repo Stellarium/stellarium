@@ -147,6 +147,8 @@ public slots:
 	//! @param id the sky culture ID.
 	//! @return true on success; else false.
 	bool setCurrentSkyCultureID(const QString& id);
+	//! Reload the current sky culture
+	void reloadSkyCulture();
 
 	//! Get the type of boundaries of the current sky culture
 	//! Config option: info/boundaries
