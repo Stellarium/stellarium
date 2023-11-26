@@ -400,7 +400,7 @@ void MeteorShower::drawMeteors(StelCore *core)
 
 	// step through and draw all active meteors
 	StelPainter painter(core->getProjection(StelCore::FrameAltAz));
-	for (auto* m : qAsConst(m_activeMeteors))
+	for (auto* m : std::as_const(m_activeMeteors))
 	{
 		m->draw(core, painter);
 	}

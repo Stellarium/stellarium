@@ -107,7 +107,7 @@ void SatellitesCommDialog::getSatCommData()
 		communications = SatellitesMgr->getCommunicationData(satelliteID);
 		if (communications.count()>0)
 		{
-			for (const auto& comm : qAsConst(communications))
+			for (const auto& comm : std::as_const(communications))
 			{
 				fillCommunicationsTable(satelliteID, comm.description, comm.frequency, comm.modulation);
 			}

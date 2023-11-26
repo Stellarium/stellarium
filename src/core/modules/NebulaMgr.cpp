@@ -752,7 +752,7 @@ NebulaP NebulaMgr::search(const QString& name)
 {
 	QString uname = name.toUpper();
 
-	for (const auto& n : qAsConst(dsoArray))
+	for (const auto& n : std::as_const(dsoArray))
 	{
 		QString testName = n->getEnglishName().toUpper();
 		if (testName==uname) return n;
@@ -804,7 +804,7 @@ NebulaP NebulaMgr::search(const Vec3d& apos)
 	pos.normalize();
 	NebulaP plusProche;
 	double anglePlusProche=0.0;
-	for (const auto& n : qAsConst(dsoArray))
+	for (const auto& n : std::as_const(dsoArray))
 	{
 		if (n->XYZ*pos>anglePlusProche)
 		{
@@ -830,7 +830,7 @@ QList<StelObjectP> NebulaMgr::searchAround(const Vec3d& av, double limitFov, con
 	v.normalize();
 	const double cosLimFov = cos(limitFov * M_PI/180.);
 	Vec3d equPos;
-	for (const auto& n : qAsConst(dsoArray))
+	for (const auto& n : std::as_const(dsoArray))
 	{
 		equPos = n->XYZ;
 		equPos.normalize();
@@ -1726,7 +1726,7 @@ void NebulaMgr::updateSkyCulture(const QString& skyCultureDir)
 {
 	QString namesFile = StelFileMgr::findFile("skycultures/" + skyCultureDir + "/dso_names.fab");
 
-	for (const auto& n : qAsConst(dsoArray))
+	for (const auto& n : std::as_const(dsoArray))
 		n->removeAllNames();
 
 	if (namesFile.isEmpty())
@@ -1807,7 +1807,7 @@ void NebulaMgr::updateSkyCulture(const QString& skyCultureDir)
 void NebulaMgr::updateI18n()
 {
 	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
-	for (const auto& n : qAsConst(dsoArray))
+	for (const auto& n : std::as_const(dsoArray))
 		n->translateName(trans);
 }
 
@@ -1818,7 +1818,7 @@ StelObjectP NebulaMgr::searchByNameI18n(const QString& nameI18n) const
 	QString objw = nameI18n.toUpper();
 
 	// Search by common names
-	for (const auto& n : qAsConst(dsoArray))
+	for (const auto& n : std::as_const(dsoArray))
 	{
 		QString objwcap = n->nameI18.toUpper();
 		if (objwcap==objw)
@@ -1826,7 +1826,7 @@ StelObjectP NebulaMgr::searchByNameI18n(const QString& nameI18n) const
 	}
 
 	// Search by aliases of common names
-	for (const auto& n : qAsConst(dsoArray))
+	for (const auto& n : std::as_const(dsoArray))
 	{
 		for (auto &objwcapa : n->nameI18Aliases)
 		{
@@ -2554,13 +2554,13 @@ QStringList NebulaMgr::listMatchingObjects(const QString& objPrefix, int maxNbIt
 				names.append(name);
 
 			nameList = n->englishAliases;
-			for (const auto &name : qAsConst(nameList))
+			for (const auto &name : std::as_const(nameList))
 				names.append(name);
 		}
 	}
 
 	QString fullMatch = "";
-	for (const auto& name : qAsConst(names))
+	for (const auto& name : std::as_const(names))
 	{
 		if (!matchObjectName(name, objPrefix, useStartOfWords))
 			continue;

@@ -567,7 +567,7 @@ BottomStelBar::~BottomStelBar()
 	// Remove currently hidden buttons which are not deleted by a parent element
 	for (auto& group : buttonGroups)
 	{
-		for (auto* b : qAsConst(group.elems))
+		for (auto* b : std::as_const(group.elems))
 		{
 			if (b->parentItem()==nullptr)
 			{
@@ -611,7 +611,7 @@ StelButton* BottomStelBar::hideButton(const QString& actionName)
 	for (auto iter = buttonGroups.begin(); iter != buttonGroups.end(); ++iter)
 	{
 		int i=0;
-		for (auto* b : qAsConst(iter.value().elems))
+		for (auto* b : std::as_const(iter.value().elems))
 		{
 			if (b->action && b->action->objectName()==actionName)
 			{

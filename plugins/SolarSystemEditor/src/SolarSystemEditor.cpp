@@ -419,7 +419,7 @@ bool SolarSystemEditor::addFromSolarSystemConfigurationFile(QString filePath)
 
 			minorBodies.beginGroup(fixedGroupName);
 			QStringList newKeys = newData.allKeys(); // limited to the group!
-			for (const auto &key : qAsConst(newKeys))
+			for (const auto &key : std::as_const(newKeys))
 			{
 				minorBodies.setValue(key, newData.value(key));
 			}
@@ -460,7 +460,7 @@ QHash<QString,QString> SolarSystemEditor::listAllLoadedObjectsInFile(QString fil
 	QStringList groups = solarSystemIni.childGroups();
 	QStringList minorBodies = solarSystem->getAllMinorPlanetCommonEnglishNames();
 	QHash<QString,QString> loadedObjects;
-	for (const auto &group : qAsConst(groups))
+	for (const auto &group : std::as_const(groups))
 	{
 		QString name = solarSystemIni.value(group + "/name").toString();
 		if (minorBodies.contains(name))

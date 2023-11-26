@@ -200,7 +200,7 @@ void Supernovae::draw(StelCore* core)
 	StelPainter painter(prj);
 	painter.setFont(font);
 	
-	for (const auto& sn : qAsConst(snstar))
+	for (const auto& sn : std::as_const(snstar))
 	{
 		if (sn && sn->initialized)
 			sn->draw(core, painter);

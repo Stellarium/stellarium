@@ -603,7 +603,7 @@ bool Exoplanet::isDiscovered(const StelCore *core)
 	// This hack need for correct display of discovery mode of exoplanets.
 	StelUtils::getDateFromJulianDay(core->getJD()+0.5, &year, &month, &day);
 	discovery.clear();
-	for (const auto& p : qAsConst(exoplanets))
+	for (const auto& p : std::as_const(exoplanets))
 	{
 		if (p.discovered>0)
 		{

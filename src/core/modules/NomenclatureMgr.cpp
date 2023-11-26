@@ -604,7 +604,7 @@ void NomenclatureMgr::updateI18n()
 	NomenclatureItem::createNameLists();
 	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getPlanetaryFeaturesTranslator();
 	const StelTranslator& transSpecial = StelApp::getInstance().getLocaleMgr().getAppStelTranslator();
-	for (const auto& i : qAsConst(nomenclatureItems))
+	for (const auto& i : std::as_const(nomenclatureItems))
 	{
 		NomenclatureItem::NomenclatureItemType niType = i->getNomenclatureType();
 		if (niType>=NomenclatureItem::niSpecialPointPole)

@@ -87,7 +87,7 @@ ShortcutsDialog::~ShortcutsDialog()
 void ShortcutsDialog::drawCollisions()
 {
 	QBrush brush(Qt::red);
-	for (auto* item : qAsConst(collisionItems))
+	for (auto* item : std::as_const(collisionItems))
 	{
 		// change colors of all columns for better visibility
 		item->setForeground(brush);
@@ -105,7 +105,7 @@ void ShortcutsDialog::resetCollisions()
 #else
 		ui->shortcutsTreeView->palette().brush(QPalette::Foreground);
 #endif
-	for (auto* item : qAsConst(collisionItems))
+	for (auto* item : std::as_const(collisionItems))
 	{
 		item->setForeground(brush);
 		QModelIndex index = item->index();

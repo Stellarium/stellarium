@@ -241,25 +241,25 @@ void Oculars::deinit()
 	settings->remove("telescope");
 	settings->remove("lens");
 	int index = 0;
-	for (auto* ccd : qAsConst(ccds))
+	for (auto* ccd : std::as_const(ccds))
 	{
 		ccd->writeToSettings(settings, index);
 		index++;
 	}
 	index = 0;
-	for (auto* ocular : qAsConst(oculars))
+	for (auto* ocular : std::as_const(oculars))
 	{
 		ocular->writeToSettings(settings, index);
 		index++;
 	}
 	index = 0;
-	for (auto* telescope : qAsConst(telescopes))
+	for (auto* telescope : std::as_const(telescopes))
 	{
 		telescope->writeToSettings(settings, index);
 		index++;
 	}
 	index = 0;
-	for (auto* lens : qAsConst(lenses))
+	for (auto* lens : std::as_const(lenses))
 	{
 		lens->writeToSettings(settings, index);
 		index++;
@@ -660,7 +660,7 @@ void Oculars::determineMaxEyepieceAngle()
 {
 	if (ready)
 	{
-		for (const auto* ocular : qAsConst(oculars))
+		for (const auto* ocular : std::as_const(oculars))
 		{
 			if (ocular->apparentFOV() > maxEyepieceAngle)
 			{

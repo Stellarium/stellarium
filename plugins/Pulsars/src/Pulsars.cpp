@@ -228,7 +228,7 @@ void Pulsars::draw(StelCore* core)
 	StelPainter painter(prj);
 	painter.setFont(font);
 	
-	for (const auto& pulsar : qAsConst(psr))
+	for (const auto& pulsar : std::as_const(psr))
 	{
 		if (pulsar && pulsar->initialized)
 			pulsar->draw(core, &painter);
@@ -334,7 +334,7 @@ QStringList Pulsars::listMatchingObjects(const QString& objPrefix, int maxNbItem
 		}
 
 		QString fullMatch = "";
-		for (const auto& name : qAsConst(names))
+		for (const auto& name : std::as_const(names))
 		{
 			if (!matchObjectName(name, objPrefix, useStartOfWords))
 				continue;

@@ -388,7 +388,7 @@ int main(int argc, char **argv)
 
 	// Add the Noto & DejaVu fonts that we use everywhere in the program
 	const QStringList customFonts = { "NotoSans-Regular.ttf", "NotoSansMono-Regular.ttf", "NotoSansSC-Regular.otf", "DejaVuSans.ttf", "DejaVuSansMono.ttf" };
-	for (auto &font: qAsConst(customFonts))
+	for (auto &font: std::as_const(customFonts))
 	{
 		QString customFont = StelFileMgr::findFile(QString("data/%1").arg(font));
 		if (!customFont.isEmpty())

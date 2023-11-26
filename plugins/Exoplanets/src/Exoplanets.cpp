@@ -227,7 +227,7 @@ void Exoplanets::draw(StelCore* core)
 	StelPainter painter(prj);
 	painter.setFont(font);
 	
-	for (const auto& eps : qAsConst(ep))
+	for (const auto& eps : std::as_const(ep))
 	{
 		if (eps && eps->initialized)
 			eps->draw(core, &painter);
@@ -300,7 +300,7 @@ StelObjectP Exoplanets::searchByName(const QString& englishName) const
 		ppn << eps->getExoplanetsDesignations();
 		if (!ppn.isEmpty())
 		{
-			for (const auto& str : qAsConst(ppn))
+			for (const auto& str : std::as_const(ppn))
 			{
 				if (str.toUpper() == englishName.toUpper())
 					return qSharedPointerCast<StelObject>(eps);

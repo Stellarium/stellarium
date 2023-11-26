@@ -238,7 +238,7 @@ void Satellites::init()
 void Satellites::translateData()
 {
 	bindingGroups();
-	for (const auto& sat : qAsConst(satellites))
+	for (const auto& sat : std::as_const(satellites))
 	{
 		if (sat->initialized)
 			sat->recomputeSatData();
@@ -281,7 +281,7 @@ void Satellites::bindingGroups()
 
 void Satellites::setSatGroupVisible(const QString& groupId, bool visible)
 {
-	for (const auto& sat : qAsConst(satellites))
+	for (const auto& sat : std::as_const(satellites))
 	{
 		if (sat->initialized && sat->groups.contains(groupId))
 		{
@@ -564,7 +564,7 @@ QStringList Satellites::listMatchingObjects(const QString& objPrefix, int maxNbI
 	}
 
 	QString fullMatch = "";
-	for (const auto& name : qAsConst(names))
+	for (const auto& name : std::as_const(names))
 	{
 		if (!matchObjectName(name, objPrefix, useStartOfWords))
 			continue;
@@ -1183,7 +1183,7 @@ QVariantMap Satellites::createDataMap(void)
 	map["hintColor"] = defHintCol;
 	map["shortName"] = "satellite orbital data";
 	QVariantMap sats;
-	for (const auto& sat : qAsConst(satellites))
+	for (const auto& sat : std::as_const(satellites))
 	{
 		QVariantMap satMap = sat->getMap();
 
@@ -1331,7 +1331,7 @@ bool Satellites::add(const TleData& tleData)
 		if (!satGroups.isEmpty())
 		{
 			satProperties.insert("groups", satGroups);
-			for (const auto& str : qAsConst(satGroups))
+			for (const auto& str : std::as_const(satGroups))
 			{
 				if (!getGroupIdList().contains(str))
 					addGroup(str);
@@ -1466,7 +1466,7 @@ QList<CommLink> Satellites::getCommunicationData(const QString &id)
 {
 	QList<CommLink> comms;
 
-	for (const auto& sat : qAsConst(satellites))
+	for (const auto& sat : std::as_const(satellites))
 	{
 		if (sat->initialized && sat->getID() == id)
 			comms = sat->comms;
@@ -1532,7 +1532,7 @@ QList<CommLink> Satellites::getCommunicationData(const TleData& tleData)
 	if (tleData.name.startsWith("GSAT") && (tleData.name.contains("PRN") || tleData.name.contains("GALILEO")))
 		groups << "galileo";
 
-	for (const auto& name : qAsConst(groups))
+	for (const auto& name : std::as_const(groups))
 	{
 		communications.clear();
 		communications = groupComms.value(name, QVariantMap());
@@ -2260,7 +2260,7 @@ void Satellites::updateFromOnlineSources()
 	// TRANSLATORS: The full phrase is 'Loading TLE %VALUE%/%MAX%' in progress bar
 	progressBar->setFormat(QString("%1 %v/%m").arg(q_("Loading TLE")));
 
-	for (auto url : qAsConst(updateUrls))
+	for (auto url : std::as_const(updateUrls))
 	{
 		TleSource source;
 		source.file = nullptr;
@@ -2416,7 +2416,7 @@ bool Satellites::getFlagOrbitLines()
 
 void Satellites::recalculateOrbitLines(void)
 {
-	for (const auto& sat : qAsConst(satellites))
+	for (const auto& sat : std::as_const(satellites))
 	{
 		if (sat->initialized && sat->displayed && sat->orbitDisplayed)
 			sat->recalculateOrbitLines();
@@ -2478,7 +2478,7 @@ void Satellites::updateSatellites(TleDataHash& newTleSets)
 	int addedCount = 0;
 	int missingCount = 0; // Also the number of removed sats, if any.
 	QStringList toBeRemoved;
-	for (const auto& sat : qAsConst(satellites))
+	for (const auto& sat : std::as_const(satellites))
 	{
 		totalCount++;
 		
@@ -2769,7 +2769,7 @@ void Satellites::update(double deltaTime)
 
 	hintFader.update(static_cast<int>(deltaTime*1000));
 
-	for (const auto& sat : qAsConst(satellites))
+	for (const auto& sat : std::as_const(satellites))
 	{
 		if (sat->initialized && sat->displayed)
 			sat->update(deltaTime);
@@ -2796,7 +2796,7 @@ void Satellites::draw(StelCore* core)
 	painter.setBlending(true);
 	Satellite::hintTexture->bind();
 	Satellite::viewportHalfspace = painter.getProjector()->getBoundingCap();
-	for (const auto& sat : qAsConst(satellites))
+	for (const auto& sat : std::as_const(satellites))
 	{
 		if (sat && sat->initialized && sat->displayed)
 			sat->draw(core, painter);
