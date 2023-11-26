@@ -1551,7 +1551,7 @@ QStringList StelLocationMgr::getAllTimezoneNames() const
 	// Accept others after testing against sanitized names, and especially all UT+/- names!
 
 	auto tzList = QTimeZone::availableTimeZoneIds(); // System dependent set of IANA timezone names.
-	for (const auto& tz : qAsConst(tzList))
+	for (const auto& tz : std::as_const(tzList))
 	{
 		QString tzcand=sanitizeTimezoneStringFromLocationDB(tz); // try to find name as we use it in the program.
 		if (!ret.contains(tzcand))

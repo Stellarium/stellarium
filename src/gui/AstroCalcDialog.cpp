@@ -1125,7 +1125,7 @@ void AstroCalcDialog::currentCelestialPositions()
 			celestialObjects = dsoMgr->getAllDeepSkyObjects().toList();
 		else
 			celestialObjects = dsoMgr->getDeepSkyObjectsByType(celType);
-		for (const auto& obj : qAsConst(celestialObjects))
+		for (const auto& obj : std::as_const(celestialObjects))
 		{
 			if (celTypeId == 12 || celTypeId == 102 || celTypeId == 111) // opacity cannot be extincted
 				magOp = static_cast<double>(obj->getVMagnitude(core));
@@ -1216,7 +1216,7 @@ void AstroCalcDialog::currentCelestialPositions()
 				break;
 		}
 
-		for (const auto& planet : qAsConst(planets))
+		for (const auto& planet : std::as_const(planets))
 		{
 			passByType = false;
 
@@ -1326,7 +1326,7 @@ void AstroCalcDialog::currentCelestialPositions()
 			celestialObjects = starMgr->getHipparcosHighPMStars();
 		}
 
-		for (const auto& star : qAsConst(celestialObjects))
+		for (const auto& star : std::as_const(celestialObjects))
 		{
 			StelObjectP obj = star.firstKey();
 			QString extra, elongStr;
@@ -1537,7 +1537,7 @@ void AstroCalcDialog::currentHECPositions()
 	QList<PlanetP> planets;
 	QList<PlanetP> allplanets = solarSystem->getAllPlanets();
 	planets.clear();
-	for (const auto& planet : qAsConst(allplanets))
+	for (const auto& planet : std::as_const(allplanets))
 	{
 		if (planet->getPlanetType() == Planet::isPlanet)
 			planets.append(planet);
@@ -1550,7 +1550,7 @@ void AstroCalcDialog::currentHECPositions()
 	if (minorPlanets)
 		planets.append(getSelectedMinorPlanets());
 
-	for (const auto& planet : qAsConst(planets))
+	for (const auto& planet : std::as_const(planets))
 	{
 		if (!planet.isNull())
 		{
@@ -1594,7 +1594,7 @@ void AstroCalcDialog::drawHECGraph(const QString &selectedObject)
 	seriesSun->append(0., -1.5);
 	const bool minorPlanets = ui->hecSelectedMinorPlanetsCheckBox->isChecked();
 
-	for (const auto& planet : qAsConst(hecObjects))
+	for (const auto& planet : std::as_const(hecObjects))
 	{
 		seriesPlanets->append(planet.angle, planet.dist);
 		if (!selectedObject.isEmpty() && planet.objectName==selectedObject)
@@ -5799,7 +5799,7 @@ void AstroCalcDialog::populatePlanetList()
 	// special case: selected dwarf and minor planets
 	planets.clear();
 	planets = getSelectedMinorPlanets();
-	for (const auto& planet : qAsConst(planets))
+	for (const auto& planet : std::as_const(planets))
 	{
 		if (!planet.isNull() && planet->getEnglishName()!=cpName)
 			planetList->addItem(planet->getNameI18n(), planet->getEnglishName());
@@ -6597,7 +6597,7 @@ void AstroCalcDialog::calculatePhenomena()
 				stars = bariumStars;
 			else
 				stars = carbonStars;
-			for (const auto& object : qAsConst(stars))
+			for (const auto& object : std::as_const(stars))
 			{
 				if (object->getVMagnitude(core) < static_cast<float>(brightLimit - 5.0))
 					star.append(object);
@@ -8407,7 +8407,7 @@ void AstroCalcDialog::calculateWutObjects()
 						stars = bariumStars;
 					else
 						stars = carbonStars;
-					for (const auto& object : qAsConst(stars))
+					for (const auto& object : std::as_const(stars))
 					{
 						// Filter for angular size is not applicable
 						mag = object->getVMagnitude(core);
@@ -8928,7 +8928,7 @@ void AstroCalcDialog::calculateWutObjects()
 							break;
 					}
 
-					for (const auto& object : qAsConst(catDSO))
+					for (const auto& object : std::as_const(catDSO))
 					{
 						mag = object->getVMagnitude(core);
 						if (mag <= magLimit && object->isAboveRealHorizon(core))

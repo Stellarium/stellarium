@@ -346,7 +346,7 @@ void StelDialog::enableKineticScrolling(bool b)
 	if (kineticScrollingList.length()==0) return;
 	if (b)
 	{
-		for (auto* w : qAsConst(kineticScrollingList))
+		for (auto* w : std::as_const(kineticScrollingList))
 		{
 			QScroller::grabGesture(w, QScroller::LeftMouseButtonGesture);
 			QScroller::scroller(w); // WHAT DOES THIS DO? We don't use the return value.
@@ -354,7 +354,7 @@ void StelDialog::enableKineticScrolling(bool b)
 	}
 	else
 	{
-		for (auto* w : qAsConst(kineticScrollingList))
+		for (auto* w : std::as_const(kineticScrollingList))
 		{
 			QScroller::ungrabGesture(w);
 			// QScroller::scroller(w);

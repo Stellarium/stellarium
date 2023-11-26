@@ -230,7 +230,7 @@ void Quasars::draw(StelCore* core)
 	StelPainter painter(prj);
 	painter.setFont(font);
 
-	for (const auto& quasar : qAsConst(QSO))
+	for (const auto& quasar : std::as_const(QSO))
 	{
 		if (quasar && quasar->initialized)
 			quasar->draw(core, painter);

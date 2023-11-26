@@ -297,7 +297,7 @@ void TelescopeControl::draw(StelCore* core)
 	StelPainter sPainter(prj);
 	sPainter.setFont(labelFont);
 	reticleTexture->bind();
-	for (const auto& telescope : qAsConst(telescopeClients))
+	for (const auto& telescope : std::as_const(telescopeClients))
 	{
 		if (telescope->isConnected() && telescope->hasKnownPosition())
 		{
@@ -585,7 +585,7 @@ void TelescopeControl::loadTelescopeServerExecutables(void)
 	QList<QFileInfo> telescopeServerExecutables = serverDirectory.entryInfoList(QStringList("TelescopeServer*"), (QDir::Files|QDir::Executable|QDir::CaseSensitive), QDir::Name);
 	if(!telescopeServerExecutables.isEmpty())
 	{
-		for (auto &telescopeServerExecutable : qAsConst(telescopeServerExecutables))
+		for (auto &telescopeServerExecutable : std::as_const(telescopeServerExecutables))
 			telescopeServers.append(telescopeServerExecutable.baseName());//This strips the ".exe" suffix on Windows
 	}
 	else

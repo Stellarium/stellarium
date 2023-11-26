@@ -849,7 +849,7 @@ void ObsListDialog::highlightAll()
 	const QString color = hlMgr->getColor().toHtmlColor();
 	float distance = hlMgr->getMarkersSize();
 
-	for (const auto &item: qAsConst(currentItemCollection)) {
+	for (const auto &item: std::as_const(currentItemCollection)) {
 		const QString name = item.designation;
 		const QString raStr = item.ra.trimmed();
 		const QString decStr = item.dec.trimmed();

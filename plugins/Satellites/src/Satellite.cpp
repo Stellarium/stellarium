@@ -194,7 +194,7 @@ Satellite::Satellite(const QString& identifier, const QVariantMap& map)
 	QVariantList groupList =  map.value("groups", QVariantList()).toList();
 	if (!groupList.isEmpty())
 	{
-		for (const auto& group : qAsConst(groupList))
+		for (const auto& group : std::as_const(groupList))
 			groups.insert(group.toString());
 	}
 
@@ -271,7 +271,7 @@ QVariantMap Satellite::getMap(void)
 	map["orbitColor"] = orbitCol;
 	map["infoColor"] = infoCol;
 	QVariantList commList;
-	for (const auto& c : qAsConst(comms))
+	for (const auto& c : std::as_const(comms))
 	{
 		QVariantMap commMap;
 		commMap["frequency"] = c.frequency;
@@ -281,7 +281,7 @@ QVariantMap Satellite::getMap(void)
 	}
 	map["comms"] = commList;
 	QVariantList groupList;
-	for (const auto& g : qAsConst(groups))
+	for (const auto& g : std::as_const(groups))
 	{
 		groupList << g;
 	}

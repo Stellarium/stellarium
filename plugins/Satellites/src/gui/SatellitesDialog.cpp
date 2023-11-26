@@ -739,7 +739,7 @@ void SatellitesDialog::updateSatelliteData()
 	// Nice list of checkable, translated groups that allows adding new groups
 	ui->groupsListWidget->blockSignals(true);
 	ui->groupsListWidget->clear();
-	for (const auto& group : qAsConst(globalGroups))
+	for (const auto& group : std::as_const(globalGroups))
 	{
 		QListWidgetItem* item = new QListWidgetItem(q_(group),
 							    ui->groupsListWidget);

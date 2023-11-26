@@ -474,7 +474,7 @@ void LocationDialog::populateRegionList(const QString& planet)
 	regionCombo->clear();
 	//For each region, display the localized name and store the original as user
 	//data. Unfortunately, there's no other way to do this than with a loop.
-	for (const auto& name : qAsConst(regionNames))
+	for (const auto& name : std::as_const(regionNames))
 		regionCombo->addItem(q_(name), name);
 
 	regionCombo->addItem(QChar(0x2014), "");
@@ -493,7 +493,7 @@ void LocationDialog::populateTimeZonesList()
 	// Return a list of all the known time zone names (from Qt)
 	QStringList tzNames;
 	auto tzList = QTimeZone::availableTimeZoneIds(); // System dependent set of IANA timezone names.
-	for (const auto& tz : qAsConst(tzList))
+	for (const auto& tz : std::as_const(tzList))
 	{
 		tzNames.append(tz);
 		// Activate this to get a list of known TZ names...

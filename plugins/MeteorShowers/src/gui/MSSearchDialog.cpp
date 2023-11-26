@@ -105,7 +105,7 @@ void MSSearchDialog::searchEvents()
 
 	//Fill list of events
 	initListEvents();
-	for (const auto& r : qAsConst(searchResult))
+	for (const auto& r : std::as_const(searchResult))
 	{
 		MSTreeWidgetItem* treeItem = new MSTreeWidgetItem(m_ui->listEvents);
 		treeItem->setText(ColumnCode, r.code);

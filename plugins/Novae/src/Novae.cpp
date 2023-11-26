@@ -194,7 +194,7 @@ void Novae::draw(StelCore* core)
 	StelPainter painter(prj);
 	painter.setFont(font);
 	
-	for (const auto& n : qAsConst(nova))
+	for (const auto& n : std::as_const(nova))
 	{
 		if (n && n->initialized)
 		{

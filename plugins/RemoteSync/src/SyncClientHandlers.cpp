@@ -255,7 +255,7 @@ bool ClientSelectionHandler::handleMessage(QDataStream &stream, SyncProtocol::tP
 	//this might cause problems if 2 objects of different types have the same name!
 	QList<StelObjectP> selection;
 
-	for (const auto& selectedObject : qAsConst(msg.selectedObjects))
+	for (const auto& selectedObject : std::as_const(msg.selectedObjects))
 	{
 		StelObjectP obj = objMgr->searchByID(selectedObject.first, selectedObject.second);
 		if(obj)

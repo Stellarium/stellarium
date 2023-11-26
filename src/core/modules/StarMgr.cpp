@@ -167,7 +167,7 @@ double StarMgr::getCallOrder(StelModuleActionName actionName) const
 
 StarMgr::~StarMgr(void)
 {
-	for (auto* z : qAsConst(gridLevels))
+	for (auto* z : std::as_const(gridLevels))
 		delete z;
 	gridLevels.clear();
 	if (hipIndex)
@@ -452,7 +452,7 @@ void StarMgr::init()
 	texPointer = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/pointeur2.png");   // Load pointer texture
 
 	StelApp::getInstance().getCore()->getGeodesicGrid(maxGeodesicGridLevel)->visitTriangles(maxGeodesicGridLevel,initTriangleFunc,this);
-	for (auto* z : qAsConst(gridLevels))
+	for (auto* z : std::as_const(gridLevels))
 		z->scaleAxis();
 	StelApp *app = &StelApp::getInstance();
 	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
@@ -577,7 +577,7 @@ void StarMgr::setCheckFlag(const QString& catId, bool b)
 {
 	// Update the starConfigFileFullPath file to take into account that we now have a new catalog
 	int idx=0;
-	for (const auto& catV : qAsConst(catalogsDescription))
+	for (const auto& catV : std::as_const(catalogsDescription))
 	{
 		++idx;
 		QVariantMap m = catV.toMap();
@@ -618,7 +618,7 @@ void StarMgr::loadData(QVariantMap starsConfig)
 		hipIndex[i].z = Q_NULLPTR;
 		hipIndex[i].s = Q_NULLPTR;
 	}
-	for (auto* z : qAsConst(gridLevels))
+	for (auto* z : std::as_const(gridLevels))
 		z->updateHipIndex(hipIndex);
 
 	const QString cat_hip_sp_file_name = starsConfig.value("hipSpectralFile").toString();
@@ -1314,7 +1314,7 @@ void StarMgr::draw(StelCore* core)
 	RCMag rcmag_table[RCMAG_TABLE_SIZE];
 	
 	// Draw all the stars of all the selected zones
-	for (const auto* z : qAsConst(gridLevels))
+	for (const auto* z : std::as_const(gridLevels))
 	{
 		int limitMagIndex=RCMAG_TABLE_SIZE;
 		const float mag_min = 0.001f*z->mag_min;
@@ -1657,7 +1657,7 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 		{
 			k.next();
 			QStringList names = getAdditionalNames(k.value()).split(" - ");
-			for (const auto &name : qAsConst(names))
+			for (const auto &name : std::as_const(names))
 			{
 				if (useStartOfWords && name.startsWith(objw, Qt::CaseInsensitive))
 					found = true;
@@ -1681,7 +1681,7 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 		{
 			l.next();
 			QStringList names = getAdditionalEnglishNames(l.value()).split(" - ");
-			for (const auto &name : qAsConst(names))
+			for (const auto &name : std::as_const(names))
 			{
 				if (useStartOfWords && name.startsWith(objw, Qt::CaseInsensitive))
 					found = true;
@@ -1721,7 +1721,7 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 			if (maxNbItem<=0)
 				break;
 			QStringList names = getSciName(it.value()).split(" - ");
-			for (const auto &name : qAsConst(names))
+			for (const auto &name : std::as_const(names))
 			{
 				if (useStartOfWords && name.startsWith(objPrefix, Qt::CaseInsensitive))
 					found = true;
@@ -1750,7 +1750,7 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 			if (maxNbItem<=0)
 				break;
 			QStringList names = getSciName(it.value()).split(" - ");
-			for (const auto &name : qAsConst(names))
+			for (const auto &name : std::as_const(names))
 			{
 				if (useStartOfWords && name.startsWith(objPrefix, Qt::CaseInsensitive))
 					found = true;
@@ -1779,7 +1779,7 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 			if (maxNbItem<=0)
 				break;
 			QStringList names = getSciExtraName(it.value()).split(" - ");
-			for (const auto &name : qAsConst(names))
+			for (const auto &name : std::as_const(names))
 			{
 				if (useStartOfWords && name.startsWith(objPrefix, Qt::CaseInsensitive))
 					found = true;
@@ -1808,7 +1808,7 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 			if (maxNbItem<=0)
 				break;
 			QStringList names = getSciExtraName(it.value()).split(" - ");
-			for (const auto &name : qAsConst(names))
+			for (const auto &name : std::as_const(names))
 			{
 				if (useStartOfWords && name.startsWith(objPrefix, Qt::CaseInsensitive))
 					found = true;
@@ -2158,7 +2158,7 @@ QStringList StarMgr::listAllObjectsByType(const QString &objType, bool inEnglish
 	QString starName;
 	if (isStarT1)
 	{
-		for (const auto& star : qAsConst(starsT1))
+		for (const auto& star : std::as_const(starsT1))
 		{
 			starName = inEnglish ? star->getEnglishName() : star->getNameI18n();
 			if (!starName.isEmpty())
@@ -2170,7 +2170,7 @@ QStringList StarMgr::listAllObjectsByType(const QString &objType, bool inEnglish
 
 	if (isStarT2)
 	{
-		for (const auto& star : qAsConst(starsT2))
+		for (const auto& star : std::as_const(starsT2))
 		{
 			starName = inEnglish ? star.firstKey()->getEnglishName() : star.firstKey()->getNameI18n();
 			if (!starName.isEmpty())

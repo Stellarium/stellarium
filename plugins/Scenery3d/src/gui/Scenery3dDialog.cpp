@@ -58,7 +58,7 @@ void Scenery3dDialog::retranslate()
 			si = mgr->getCurrentScene(); //the scene that is currently displayed
 		updateTextBrowser(si);
 
-		for (auto* but : qAsConst(shortcutButtons))
+		for (auto* but : std::as_const(shortcutButtons))
 		{
 			//replace stored text with re-translated one
 			const QString btClassName=but->metaObject()->className();

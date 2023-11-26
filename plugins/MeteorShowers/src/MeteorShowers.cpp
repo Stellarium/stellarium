@@ -42,7 +42,7 @@ MeteorShowers::~MeteorShowers()
 void MeteorShowers::update(double deltaTime)
 {
 	StelCore* core = StelApp::getInstance().getCore();
-	for (const auto& ms : qAsConst(m_meteorShowers))
+	for (const auto& ms : std::as_const(m_meteorShowers))
 	{
 		ms->update(core, deltaTime);
 	}
@@ -50,7 +50,7 @@ void MeteorShowers::update(double deltaTime)
 
 void MeteorShowers::draw(StelCore* core)
 {
-	for (const auto& ms : qAsConst(m_meteorShowers))
+	for (const auto& ms : std::as_const(m_meteorShowers))
 	{
 		ms->draw(core);
 	}

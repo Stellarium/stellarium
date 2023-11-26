@@ -504,7 +504,7 @@ void LabelMgr::init()
 void LabelMgr::draw(StelCore* core)
 {
 	StelPainter sPainter(core->getProjection(StelCore::FrameJ2000));
-	for (auto* l : qAsConst(allLabels))
+	for (auto* l : std::as_const(allLabels))
 	{
 		l->draw(core, sPainter);
 	}
@@ -513,7 +513,7 @@ void LabelMgr::draw(StelCore* core)
 void LabelMgr::messageTimeout2()
 {
 	QObject* obj = QObject::sender();
-	for (auto* l : qAsConst(allLabels))
+	for (auto* l : std::as_const(allLabels))
 	{
 		if (l->timer == obj)
 		{
@@ -526,7 +526,7 @@ void LabelMgr::messageTimeout2()
 void LabelMgr::messageTimeout1()
 {
 	QObject* obj = QObject::sender();
-	for (auto* l : qAsConst(allLabels))
+	for (auto* l : std::as_const(allLabels))
 	{
 		if (l->timer == obj)
 		{
@@ -747,7 +747,7 @@ void LabelMgr::deleteLabel(int id)
 	
 void LabelMgr::update(double deltaTime)
 {
-	for (auto* l : qAsConst(allLabels))
+	for (auto* l : std::as_const(allLabels))
 		l->update(deltaTime);
 }
 	
@@ -761,7 +761,7 @@ double LabelMgr::getCallOrder(StelModuleActionName actionName) const
 int LabelMgr::deleteAllLabels(void)
 {
 	int count=0;
-	for (auto* l : qAsConst(allLabels))
+	for (auto* l : std::as_const(allLabels))
 	{
 		delete l;
 		count++;

@@ -60,7 +60,7 @@ void LocationService::get(const QByteArray& operation, const APIParameters &para
 
 		QStringList allRegions = StelApp::getInstance().getLocationMgr().getRegionNames();
 		QJsonArray list;
-		for (const auto &str : qAsConst(allRegions))
+		for (const auto &str : std::as_const(allRegions))
 		{
 			QJsonObject obj;
 			obj.insert("name",str);

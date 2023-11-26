@@ -71,7 +71,7 @@ SyncClient::~SyncClient()
 	delete server;
 
 	//delete handlers
-	for (auto* h : qAsConst(handlerHash))
+	for (auto* h : std::as_const(handlerHash))
 	{
 		if(h)
 			delete h;

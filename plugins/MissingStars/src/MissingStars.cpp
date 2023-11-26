@@ -137,7 +137,7 @@ void MissingStars::draw(StelCore* core)
 	StelPainter painter(prj);
 	painter.setFont(font);
 	
-	for (const auto& ms : qAsConst(missingstars))
+	for (const auto& ms : std::as_const(missingstars))
 	{
 		if (ms && ms->initialized)
 			ms->draw(core, &painter);

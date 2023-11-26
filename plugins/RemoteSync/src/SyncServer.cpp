@@ -50,7 +50,7 @@ SyncServer::~SyncServer()
 	stop();
 
 	//delete handlers
-	for (auto* h : qAsConst(handlerHash))
+	for (auto* h : std::as_const(handlerHash))
 	{
 		if(h)
 			delete h;
@@ -106,7 +106,7 @@ void SyncServer::broadcastMessage(const SyncMessage &msg)
 		return;
 	}
 
-	for (auto* client : qAsConst(clients))
+	for (auto* client : std::as_const(clients))
 	{
 		if(client->isAuthenticated())
 		{
@@ -125,7 +125,7 @@ void SyncServer::stop()
 		qserver->close();
 
 		//delete senders
-		for (auto* s : qAsConst(senderList))
+		for (auto* s : std::as_const(senderList))
 		{
 			if(s)
 				delete s;
@@ -147,7 +147,7 @@ void SyncServer::stop()
 
 void SyncServer::update()
 {
-	for (auto* s : qAsConst(senderList))
+	for (auto* s : std::as_const(senderList))
 	{
 		s->update();
 	}
@@ -165,7 +165,7 @@ void SyncServer::timerEvent(QTimerEvent *evt)
 void SyncServer::checkTimeouts()
 {
 	//iterate over the connected clients
-	for (auto* client : qAsConst(clients))
+	for (auto* client : std::as_const(clients))
 	{
 		client->checkTimeout();
 	}
@@ -212,7 +212,7 @@ void SyncServer::handleNewConnection()
 void SyncServer::clientAuthenticated(SyncRemotePeer &peer)
 {
 	//we have to send the client the current app state
-	for (auto* s : qAsConst(senderList))
+	for (auto* s : std::as_const(senderList))
 	{
 		s->newClientConnected(peer);
 	}
