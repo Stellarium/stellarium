@@ -57,7 +57,15 @@ jobs:
     # @BODY At the moment after installing gpsd (brew install gpsd) library can be found by cmake, but not headers! Apparently we should add some magic for environment variables or something else on macOS Catalina to make headers available for cmake/make
     steps:
     - name: Install dependencies
-      run: brew install qt@6 nlopt exiv2 inih
+      run: |
+        brew install inih # XXX: this should be put into dependencies in exiv2 formula
+        cd /usr/local/Homebrew/Library/Taps/homebrew/homebrew-core/Formula/e/
+        sed -e 's@0\.27\..@0.28.0@g' -e 's@4c192483a1125dc59a3d70b30d30d32edace9e14adf52802d2f853abf72db8a6@89af3b5ef7277753ef7a7b5374ae017c6b9e304db3b688f1948e73e103491f3d@g' exiv2.rb > exiv2.rb-
+        mv exiv2.rb- exiv2.rb
+        cd -
+        export HOMEBREW_NO_INSTALL_FROM_API=1
+        brew install --build-from-source exiv2
+        brew install qt@6 nlopt
 
     - name: Checkout repository
       uses: actions/checkout@v3
