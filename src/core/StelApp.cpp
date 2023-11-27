@@ -1102,6 +1102,8 @@ void StelApp::glPhysicalWindowHasBeenResized(const QRectF& rect)
 #ifdef ENABLE_SPOUT
 	if (spoutSender)
 		spoutSender->resize(static_cast<uint>(rect.width()),static_cast<uint>(rect.height()));
+#else
+	Q_UNUSED(rect)
 #endif
 }
 
