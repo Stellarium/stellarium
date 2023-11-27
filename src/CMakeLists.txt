@@ -529,7 +529,7 @@ ENDIF()
 IF(GENERATE_STELMAINLIB)
      ADD_LIBRARY(stelMain SHARED ${stellarium_lib_SRCS} ${stellarium_RES_CXX})
      TARGET_LINK_LIBRARIES(stelMain ${STELMAIN_DEPS})
-     INSTALL(TARGETS stelMain DESTINATION lib)
+     INSTALL(TARGETS stelMain DESTINATION bin)
      # WIN32 creates a windows app without console, no effect on non-win platforms
      ADD_EXECUTABLE(stellarium WIN32 ${stellarium_exe_SRCS})
      #stelMain should be after the plug-ins, otherwise the build crashes
