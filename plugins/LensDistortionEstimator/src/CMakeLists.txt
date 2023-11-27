@@ -45,7 +45,11 @@ SET_TARGET_PROPERTIES(LensDistortionEstimator-static PROPERTIES COMPILE_FLAGS "-
 if(exiv2_FOUND)
      MESSAGE(STATUS "Found exiv2 ${exiv2_VERSION_MAJOR}.${exiv2_VERSION_MINOR}.${exiv2_VERSION_PATCH}")
      TARGET_COMPILE_OPTIONS(LensDistortionEstimator-static PRIVATE "-DHAVE_EXIV2")
-     TARGET_LINK_LIBRARIES(LensDistortionEstimator-static exiv2lib)
+     IF(${exiv2_VERSION_MAJOR}.${exiv2_VERSION_MINOR}.${exiv2_VERSION_PATCH} VERSION_GREATER_EQUAL 0.28.1)
+	     TARGET_LINK_LIBRARIES(LensDistortionEstimator-static Exiv2::exiv2lib)
+     ELSE()
+	     TARGET_LINK_LIBRARIES(LensDistortionEstimator-static exiv2lib)
+     ENDIF()
 endif()
 
 TARGET_COMPILE_OPTIONS(LensDistortionEstimator-static PRIVATE "-DHAVE_NLOPT")
