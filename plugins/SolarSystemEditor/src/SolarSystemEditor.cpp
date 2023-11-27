@@ -811,7 +811,7 @@ SsoElements SolarSystemEditor::readMpcOneLineCometElements(QString oneLineElemen
 		// The data parsed from MPC may contain a makeshift perihelion code that only has a year. Only overwrite if we are in the same year!
 		if (!comet.perihelion_code.isEmpty() &&
 				(!result.contains("perihelion_code") ||
-				 (result.value("perihelion_code").toString().length()==4) && comet.perihelion_code.contains(result.value("perihelion_code").toString())))
+				 ((result.value("perihelion_code").toString().length()==4) && comet.perihelion_code.contains(result.value("perihelion_code").toString()))))
 		{
 			result.insert("perihelion_code", comet.perihelion_code);
 			if (!comet.discovery_code.isEmpty() && result.contains("discovery_code") && (comet.discovery_code!=result.value("discovery_code")))

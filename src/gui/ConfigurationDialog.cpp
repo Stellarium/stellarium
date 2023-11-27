@@ -2066,8 +2066,12 @@ void ConfigurationDialog::setDitherFormat()
 void ConfigurationDialog::populateFontWritingSystemCombo()
 {
 	QComboBox *combo=ui->fontWritingSystemComboBox;
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+	const QList<QFontDatabase::WritingSystem> writingSystems=QFontDatabase::writingSystems();
+#else
 	QFontDatabase fontDatabase;
 	const QList<QFontDatabase::WritingSystem> writingSystems=fontDatabase.writingSystems();
+#endif
 		for (const auto& system : writingSystems)
 		{
 			combo->addItem(QFontDatabase::writingSystemName(system) + "  " + QFontDatabase::writingSystemSample(system), system);

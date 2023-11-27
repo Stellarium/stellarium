@@ -1720,10 +1720,12 @@ double LensDistortionEstimatorDialog::computeLensCropFactor() const
 {
 	const double f = ui_->lensFocalLength->value();
 	const double alpha = M_PI/180 * imageSmallerSideFoV();
-	const double w = 2*f * std::tan(alpha/2);
-	const double aspect = double(image_.width())/image_.height();
-	const double h = w/aspect;
-	return 36 / std::hypot(w,h);
+	const double h = 2*f * std::tan(alpha/2);
+	const double largerSidePx  = std::max(image_.width(), image_.height());
+	const double smallerSidePx = std::min(image_.width(), image_.height());
+	const double aspect = largerSidePx/smallerSidePx;
+	const double w = h*aspect;
+	return std::hypot(36,24) / std::hypot(w,h);
 }
 
 void LensDistortionEstimatorDialog::showSettingsPage()
