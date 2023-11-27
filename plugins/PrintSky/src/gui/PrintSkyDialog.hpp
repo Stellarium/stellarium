@@ -41,8 +41,6 @@ public:
 	void retranslate() override;
 	void updateStyle();
 
-	//! Notify that the application style changed
-	void styleChanged() override;
 	void enableOutputOptions(bool enable);
 
 public slots:

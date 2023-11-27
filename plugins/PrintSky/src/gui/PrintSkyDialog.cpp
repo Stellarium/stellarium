@@ -70,11 +70,6 @@ void PrintSkyDialog::updateStyle()
 	}
 }
 
-void PrintSkyDialog::styleChanged()
-{
-	// Nothing for now
-}
-
 /* ********************************************************************* */
 void PrintSkyDialog::closeWindow()
 {
@@ -88,7 +83,9 @@ void PrintSkyDialog::createDialogContent()
 	ui->setupUi(dialog);
 
 	//Now the rest of the actions.
-	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
+	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
+	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
+
 	connect(ui->previewSkyPushButton, SIGNAL(clicked()), this, SLOT(previewSky()));
 	connect(ui->printSkyPushButton, SIGNAL(clicked()), this, SLOT(printSky()));
 
@@ -117,8 +114,8 @@ void PrintSkyDialog::printFooter(QPrinter * printer, QPainter *painter, int page
 	QString stelVersion = q_("Stellarium %1").arg(StelUtils::getApplicationVersion());
 	StelLocaleMgr lMgr=StelApp::getInstance().getLocaleMgr();
 
-	QString footerDate=QString("%1 %2 (%3)").arg(lMgr.getPrintableDateLocal(jd)).arg(lMgr.getPrintableTimeLocal(jd)).arg(lMgr.getPrintableTimeZoneLocal(jd));
-	QString footerText=QString("%1 %2 %3 %4").arg(q_("Created on")).arg(footerDate).arg(q_("by")).arg(stelVersion);
+	QString footerDate=QString("%1 %2 (%3)").arg(lMgr.getPrintableDateLocal(jd), lMgr.getPrintableTimeLocal(jd), lMgr.getPrintableTimeZoneLocal(jd));
+	QString footerText=QString("%1 %2 %3 %4").arg(q_("Created on"), footerDate, q_("by"), stelVersion);
 
 	const QPageLayout pageLayout=printer->pageLayout();
 	const QRectF fullRect=pageLayout.fullRect();
@@ -130,7 +127,7 @@ void PrintSkyDialog::printFooter(QPrinter * printer, QPainter *painter, int page
 	qDebug() << "printFooter of page " << pageNumber << "at x:" << marginLeft << " y: " << yPos << "in fontsize" << fontSize;
 
 	painter->drawText(QRectF(marginLeft, yPos, fullRect.width()-marginLeft-marginRight, 2*fontSize), Qt::AlignLeft, footerText);
-	painter->drawText(QRectF(marginLeft, yPos, fullRect.width()-marginLeft-marginRight, 2*fontSize), Qt::AlignRight, QString("%1 %2").arg(q_("Page")).arg(QString::number(pageNumber)));
+	painter->drawText(QRectF(marginLeft, yPos, fullRect.width()-marginLeft-marginRight, 2*fontSize), Qt::AlignRight, QString("%1 %2").arg(q_("Page"), QString::number(pageNumber)));
 	qDebug() << "printFooter done";
 }
 
@@ -200,18 +197,18 @@ void PrintSkyDialog::printDataSky(QPrinter * printer)
 
 		painter.drawText(surfaceData.adjusted(0, 0, 0, -(surfaceData.height()-lineSpacing)), Qt::AlignCenter, q_("CHART INFORMATION"));
 
-		QString printLatitude=StelUtils::radToDmsStr((std::fabs(static_cast<double>(location.latitude))/180.)*M_PI);
-		QString printLongitude=StelUtils::radToDmsStr((std::fabs(static_cast<double>(location.longitude))/180.)*M_PI);
+		QString printLatitude=StelUtils::radToDmsStr((std::fabs(static_cast<double>(location.getLatitude()))/180.)*M_PI);
+		QString printLongitude=StelUtils::radToDmsStr((std::fabs(static_cast<double>(location.getLongitude()))/180.)*M_PI);
 
 		QString locationStr = QString("%1: %2,\t%3,\t%4;\t%5\t%6\t%7%8")
-							 .arg(q_("Location"))
-							 .arg(location.name)
-							 .arg(q_(location.region))
-							 .arg(q_(location.planetName))
-							 .arg(location.latitude<0 ? QString("%1S").arg(printLatitude) : QString("%1N").arg(printLatitude))
-							 .arg(location.longitude<0 ? QString("%1W").arg(printLongitude) : QString("%1E").arg(printLongitude))
-							 .arg(location.altitude)
-							 .arg(qc_("m", "altitude, metres"));
+							 .arg(q_("Location"),
+							      location.name,
+							      q_(location.region),
+							      q_(location.planetName),
+							      location.getLatitude()<0 ? QString("%1S").arg(printLatitude) : QString("%1N").arg(printLatitude),
+							      location.getLongitude()<0 ? QString("%1W").arg(printLongitude) : QString("%1E").arg(printLongitude),
+							      QString::number(location.altitude),
+							      qc_("m", "altitude, metres"));
 		painter.drawText(surfaceData.adjusted(50, lineSpacing, 0, 0), Qt::AlignLeft, locationStr);
 
 		qDebug() << "PrintSky: Basic info 1 ";
