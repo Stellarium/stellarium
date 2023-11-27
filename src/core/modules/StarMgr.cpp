@@ -535,13 +535,21 @@ bool StarMgr::checkAndLoadCatalog(const QVariantMap& catDesc)
 				while (!file.atEnd())
 				{
 					qint64 sz = file.read(mmd5buf, maxStarBufMd5);
+#if QT_VERSION >= QT_VERSION_CHECK(6, 4, 0)
+					md5Hash.addData(QByteArrayView(mmd5buf, static_cast<int>(sz)));
+#else
 					md5Hash.addData(mmd5buf, static_cast<int>(sz));
+#endif
 				}
 				free(mmd5buf);
 			}
 			else
 			{
+#if QT_VERSION >= QT_VERSION_CHECK(6, 4, 0)
+				md5Hash.addData(QByteArrayView(reinterpret_cast<const char*>(cat), static_cast<int>(cat_sz)));
+#else
 				md5Hash.addData(reinterpret_cast<const char*>(cat), static_cast<int>(cat_sz));
+#endif
 				file.unmap(cat);
 			}
 			file.close();
