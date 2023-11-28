@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2023-11-22 14:51+0700\n"
+"POT-Creation-Date: 2023-11-28 13:10+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Alexander V. Wolf <alex.v.wolf@gmail.com>, 2023\n"
 "Language-Team: Russian (https://app.transifex.com/stellarium/teams/80998/ru/)\n"
@@ -828,7 +828,7 @@ msgstr "Циклическое изменение засветки"
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:187
 #: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:184
 #: plugins/MissingStars/src/gui/MissingStarsDialog.cpp:87
-#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1748
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1750
 msgid "Author"
 msgstr "Автор"
 
@@ -4174,12 +4174,12 @@ msgstr "Загрузка '%1'"
 msgid "Loading '%1' from %2"
 msgstr "Загрузка '%1' из %2"
 
-#: src/core/StelSkyCultureMgr.cpp:178
+#: src/core/StelSkyCultureMgr.cpp:183
 msgctxt "sky culture classification"
 msgid "ethnographic"
 msgstr "этнографическая"
 
-#: src/core/StelSkyCultureMgr.cpp:179
+#: src/core/StelSkyCultureMgr.cpp:184
 msgid ""
 "Provided by ethnographic researchers based on interviews of indigenous "
 "people."
@@ -4187,12 +4187,12 @@ msgstr ""
 "Предоставлена исследователями-этнографами на основе опросов коренных "
 "народов."
 
-#: src/core/StelSkyCultureMgr.cpp:183
+#: src/core/StelSkyCultureMgr.cpp:188
 msgctxt "sky culture classification"
 msgid "historical"
 msgstr "историческая"
 
-#: src/core/StelSkyCultureMgr.cpp:184
+#: src/core/StelSkyCultureMgr.cpp:189
 msgid ""
 "Provided by historians based on historical written sources from a (usually "
 "short) period of the past."
@@ -4200,12 +4200,12 @@ msgstr ""
 "Предоставлена историками на основе исторических письменных источников из "
 "(обычно короткого) периода прошлого."
 
-#: src/core/StelSkyCultureMgr.cpp:188
+#: src/core/StelSkyCultureMgr.cpp:193
 msgctxt "sky culture classification"
 msgid "single"
 msgstr "одиночная"
 
-#: src/core/StelSkyCultureMgr.cpp:189
+#: src/core/StelSkyCultureMgr.cpp:194
 msgid ""
 "Represents a single source like a historical atlas, or publications of a "
 "single author."
@@ -4213,12 +4213,12 @@ msgstr ""
 "Представляет один источник, такой как исторический атлас или публикации "
 "одного автора."
 
-#: src/core/StelSkyCultureMgr.cpp:193
+#: src/core/StelSkyCultureMgr.cpp:198
 msgctxt "sky culture classification"
 msgid "comparative"
 msgstr "сравнительная"
 
-#: src/core/StelSkyCultureMgr.cpp:194
+#: src/core/StelSkyCultureMgr.cpp:199
 msgid ""
 "Compares and confronts elements from at least two sky cultures with each "
 "other."
@@ -4226,12 +4226,12 @@ msgstr ""
 "Сравнивает и сопоставляет элементы, по крайней мере, из двух небесных "
 "культур друг с другом. "
 
-#: src/core/StelSkyCultureMgr.cpp:198
+#: src/core/StelSkyCultureMgr.cpp:203
 msgctxt "sky culture classification"
 msgid "traditional"
 msgstr "традиционная"
 
-#: src/core/StelSkyCultureMgr.cpp:199
+#: src/core/StelSkyCultureMgr.cpp:204
 msgid ""
 "Content represents 'common' knowledge by several members of an ethnic "
 "community, and the sky culture has been developed by members of such "
@@ -4240,12 +4240,12 @@ msgstr ""
 "Контент представляет собой «общие» знания нескольких членов этнического "
 "сообщества и члены этого сообщества разработали культуру неба."
 
-#: src/core/StelSkyCultureMgr.cpp:203
+#: src/core/StelSkyCultureMgr.cpp:208
 msgctxt "sky culture classification"
 msgid "personal"
 msgstr "персональная"
 
-#: src/core/StelSkyCultureMgr.cpp:204
+#: src/core/StelSkyCultureMgr.cpp:209
 msgid ""
 "This is a personally developed sky culture which is not founded in published"
 " historical or ethnological research. Stellarium may include it when it is "
@@ -4255,12 +4255,12 @@ msgstr ""
 " исторических или этнологических исследованиях. Stellarium может включать "
 "их, когда они 'достаточно симпатичны', фактически не одобряя её содержание."
 
-#: src/core/StelSkyCultureMgr.cpp:208
+#: src/core/StelSkyCultureMgr.cpp:213
 msgctxt "sky culture classification"
 msgid "incomplete"
 msgstr "неполная"
 
-#: src/core/StelSkyCultureMgr.cpp:209
+#: src/core/StelSkyCultureMgr.cpp:214
 msgid ""
 "The accuracy of the sky culture description cannot be given, although it "
 "looks like it is built on a solid background. More work would be needed."
@@ -4268,20 +4268,20 @@ msgstr ""
 "Точность описание культуры неба не может быть дано, хотя похоже, что она "
 "построена на хорошем фундаменте. Потребуется больше работы."
 
-#: src/core/StelSkyCultureMgr.cpp:213
+#: src/core/StelSkyCultureMgr.cpp:218
 msgctxt "sky culture classification"
 msgid "undefined"
 msgstr "неопределенная"
 
-#: src/core/StelSkyCultureMgr.cpp:220
+#: src/core/StelSkyCultureMgr.cpp:225
 msgid "Classification"
 msgstr "Классификация"
 
-#: src/core/StelSkyCultureMgr.cpp:232
+#: src/core/StelSkyCultureMgr.cpp:237
 msgid "unknown"
 msgstr "неизвестно"
 
-#: src/core/StelSkyCultureMgr.cpp:233
+#: src/core/StelSkyCultureMgr.cpp:238
 msgid ""
 "This sky culture is provided under unknown license. Please ask authors for "
 "details about license for this sky culture."
@@ -4289,7 +4289,7 @@ msgstr ""
 "Эта культура неба предоставляется по неизвестной лицензии. Пожалуйста, "
 "обратитесь к авторам за подробностями о лицензии на эту культуру неба."
 
-#: src/core/StelSkyCultureMgr.cpp:240
+#: src/core/StelSkyCultureMgr.cpp:245
 msgid ""
 "This sky culture is provided under GNU General Public License. You can use "
 "it for commercial and non-commercial purposes, freely adapt it and share "
@@ -4299,7 +4299,7 @@ msgstr ""
 "GNU. Вы можете использовать её в коммерческих и некоммерческих целях, "
 "свободно её адаптировать и делиться адаптированной работой."
 
-#: src/core/StelSkyCultureMgr.cpp:245
+#: src/core/StelSkyCultureMgr.cpp:250
 msgid ""
 "This sky culture is provided under MIT License. You can use it for "
 "commercial and non-commercial purposes, freely adapt it and share adapted "
@@ -4309,11 +4309,11 @@ msgstr ""
 "её в коммерческих и некоммерческих целях, свободно её адаптировать и "
 "делиться адаптированной работой."
 
-#: src/core/StelSkyCultureMgr.cpp:249
+#: src/core/StelSkyCultureMgr.cpp:254
 msgid "This sky culture is provided under Creative Commons License."
 msgstr "Эта культура неба предоставляется по лицензии Creative Commons."
 
-#: src/core/StelSkyCultureMgr.cpp:257
+#: src/core/StelSkyCultureMgr.cpp:262
 msgid ""
 "You may distribute, remix, adapt, and build upon this sky culture, even "
 "commercially, as long as you credit authors for the original creation."
@@ -4322,7 +4322,7 @@ msgstr ""
 "культуру неба, даже в коммерческих целях, если вы указываете авторов "
 "оригинального творения."
 
-#: src/core/StelSkyCultureMgr.cpp:258
+#: src/core/StelSkyCultureMgr.cpp:263
 msgid ""
 "You may remix, adapt, and build upon this sky culture even for commercial "
 "purposes, as long as you credit authors and license the new creations under "
@@ -4334,7 +4334,7 @@ msgstr ""
 " на тех же условиях. Эту лицензию часто сравнивают с лицензиями на свободное"
 " и открытое программное обеспечение с авторским левом."
 
-#: src/core/StelSkyCultureMgr.cpp:259
+#: src/core/StelSkyCultureMgr.cpp:264
 msgid ""
 "You may reuse this sky culture for any purpose, including commercially; "
 "however, adapted work cannot be shared with others, and credit must be "
@@ -4345,7 +4345,7 @@ msgstr ""
 "другими, и вы должны предоставить признательность авторам изначальной "
 "работы."
 
-#: src/core/StelSkyCultureMgr.cpp:260
+#: src/core/StelSkyCultureMgr.cpp:265
 msgid ""
 "You may remix, adapt, and build upon this sky culture non-commercially, and "
 "although your new works must also acknowledge authors and be non-commercial,"
@@ -4356,7 +4356,7 @@ msgstr ""
 "авторов и быть некоммерческими, вам не нужно лицензировать свои производные "
 "работы на тех же условиях."
 
-#: src/core/StelSkyCultureMgr.cpp:261
+#: src/core/StelSkyCultureMgr.cpp:266
 msgid ""
 "You may remix, adapt, and build upon this sky culture non-commercially, as "
 "long as you credit authors and license your new creations under the "
@@ -4366,7 +4366,7 @@ msgstr ""
 "некоммерческих целях, если вы указываете авторов и лицензируете свои новые "
 "творения на тех же условиях."
 
-#: src/core/StelSkyCultureMgr.cpp:262
+#: src/core/StelSkyCultureMgr.cpp:267
 msgid ""
 "You may use this sky culture and share them with others as long as you "
 "credit authors, but you can’t change it in any way or use it commercially."
@@ -4375,17 +4375,17 @@ msgstr ""
 "указываете авторов, но вы не можете каким-либо образом изменить ее или "
 "использовать в коммерческих целях."
 
-#: src/core/StelSkyCultureMgr.cpp:274
+#: src/core/StelSkyCultureMgr.cpp:279
 msgid "This sky culture is distributed as public domain."
 msgstr "Эта культура неба распространяется как общественное достояние."
 
 #. TRANSLATORS: A phrase like "Please credit: XY Museum". The creditee is in a
 #. skyculture's info.ini.
-#: src/core/StelSkyCultureMgr.cpp:280
+#: src/core/StelSkyCultureMgr.cpp:285
 msgid "Please credit:"
 msgstr "Пожалуйста, укажите:"
 
-#: src/core/StelSkyCultureMgr.cpp:284
+#: src/core/StelSkyCultureMgr.cpp:289
 msgid ""
 "Illustrations are provided under Free Art License that grants the right to "
 "freely copy, distribute, and transform."
@@ -4393,7 +4393,7 @@ msgstr ""
 "Иллюстрации предоставляются по лицензии Free Art License, которая дает право"
 " на их свободное копирование, распространение и преобразование."
 
-#: src/core/StelSkyCultureMgr.cpp:289 src/gui/ConfigurationDialog.cpp:1319
+#: src/core/StelSkyCultureMgr.cpp:294 src/gui/ConfigurationDialog.cpp:1319
 #: src/scripting/StelScriptMgr.cpp:652
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:100
 #: plugins/Oculars/src/gui/OcularDialog.cpp:626
@@ -4416,21 +4416,21 @@ msgstr ""
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:186
 #: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:183
 #: plugins/MissingStars/src/gui/MissingStarsDialog.cpp:86
-#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1747
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1749
 msgid "License"
 msgstr "Лицензия"
 
-#: src/core/StelSkyCultureMgr.cpp:297
+#: src/core/StelSkyCultureMgr.cpp:302
 msgid ""
 "The region indicates the geographical area of origin of a given sky culture."
 msgstr ""
 "Регион указывает географическую область происхождения данной культуры неба."
 
-#: src/core/StelSkyCultureMgr.cpp:303
+#: src/core/StelSkyCultureMgr.cpp:308
 msgid "World"
 msgstr "Мир"
 
-#: src/core/StelSkyCultureMgr.cpp:304
+#: src/core/StelSkyCultureMgr.cpp:309
 msgid ""
 "All 'modern' sky cultures are based on the IAU-approved 88 constellations "
 "with standardized boundaries and are used worldwide. The origins of these "
@@ -4440,15 +4440,15 @@ msgstr ""
 "со стандартными границами и используются во всем мире. Происхождение этих "
 "созвездий общеевропейское."
 
-#: src/core/StelSkyCultureMgr.cpp:308 src/ui_locationDialogGui.h:450
+#: src/core/StelSkyCultureMgr.cpp:313 src/ui_locationDialogGui.h:450
 msgid "Region:"
 msgstr "Регион:"
 
-#: src/core/StelSkyCultureMgr.cpp:370
+#: src/core/StelSkyCultureMgr.cpp:375
 msgid "No description"
 msgstr "Без описания"
 
-#: src/core/StelSkyCultureMgr.cpp:405
+#: src/core/StelSkyCultureMgr.cpp:410
 msgid "References / Further Reading"
 msgstr "Ссылки / Дополнительная литература"
 
@@ -4905,7 +4905,7 @@ msgstr "Обратная связь"
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:185
 #: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:182
 #: plugins/MissingStars/src/gui/MissingStarsDialog.cpp:85
-#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1746
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1748
 msgid "Version"
 msgstr "Версия"
 
@@ -11778,35 +11778,40 @@ msgstr "Сери"
 
 #: skycultures/translations_skycultures.fab:104
 msgctxt "sky culture"
+msgid "Tibetan"
+msgstr "Тибетская"
+
+#: skycultures/translations_skycultures.fab:106
+msgctxt "sky culture"
 msgid "Tongan"
 msgstr "Тонганская"
 
-#: skycultures/translations_skycultures.fab:106
+#: skycultures/translations_skycultures.fab:108
 msgctxt "sky culture"
 msgid "Tukano"
 msgstr "Тукано"
 
-#: skycultures/translations_skycultures.fab:108
+#: skycultures/translations_skycultures.fab:110
 msgctxt "sky culture"
 msgid "Tikuna"
 msgstr "Тикуна"
 
-#: skycultures/translations_skycultures.fab:110
+#: skycultures/translations_skycultures.fab:112
 msgctxt "sky culture"
 msgid "Tupi-Guarani"
 msgstr "Тупи-гуарани"
 
-#: skycultures/translations_skycultures.fab:112
+#: skycultures/translations_skycultures.fab:114
 msgctxt "sky culture"
 msgid "Vanuatu (Netwar)"
 msgstr "Вануату (Нетвар)"
 
-#: skycultures/translations_skycultures.fab:114
+#: skycultures/translations_skycultures.fab:116
 msgctxt "sky culture"
 msgid "Xhosa"
 msgstr "Косанская"
 
-#: skycultures/translations_skycultures.fab:116
+#: skycultures/translations_skycultures.fab:118
 msgctxt "sky culture"
 msgid "Zulu"
 msgstr "Зулусская"
@@ -16881,7 +16886,7 @@ msgid "Pixel grid feature"
 msgstr "Функция пиксельной сетки"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:638
-#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1751
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1753
 msgid "Overview"
 msgstr "Обзор"
 
@@ -16965,7 +16970,7 @@ msgstr ""
 "Наслаждайтесь!"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:652
-#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1816
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1818
 msgid "Hot Keys"
 msgstr "Горячие клавиши"
 
@@ -33634,11 +33639,11 @@ msgstr "Поля «Марка», «Модель» и «Байонет» долж
 msgid "Internal error: bad distortion model chosen"
 msgstr "Внутренняя ошибка: выбрана невалидная модель искажений."
 
-#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1744
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1746
 msgid "Lens Distortion Estimator Plug-in"
 msgstr "Плагин \"Оценщик искажений объектива\""
 
-#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1753
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1755
 msgid ""
 "This plugin lets you estimate distortion of the objective lens of your "
 "camera and generate a distortion model for use with the lensfun library."
@@ -33646,11 +33651,11 @@ msgstr ""
 "Этот плагин позволяет оценить искажение объектива вашей камеры и создать "
 "модель искажения для использования с библиотекой LensFun."
 
-#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1755
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1757
 msgid "The process is as follows."
 msgstr "Процесс заключается в следующем."
 
-#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1757
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1759
 msgid ""
 "Take a photo of the night sky so that you can easily find enough stars "
 "scattered from the center of the frame to the border. Some care must be "
@@ -33662,7 +33667,7 @@ msgstr ""
 "снимок, необходимо проявить некоторую осторожность, подробнее см. в разделе "
 "<b>Подготовка фотографии</b>.\n"
 
-#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1760
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1762
 msgid ""
 "On the <i>Image Loading</i> tab choose the image to load and use the "
 "available controls (or hotkeys) to position it so that it approximately "
@@ -33676,7 +33681,7 @@ msgstr ""
 "соответствующей ориентации. Вы должны быть в состоянии определить, какая "
 "точка на изображении соответствует какой симулируемой звезде/планете."
 
-#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1764
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1766
 msgid ""
 "Then you switch to the <i>Fitting</i> tab, and pick some points in the image for a set of celestial objects. To do this,\n"
 "<ol><li>Select an object as you'd normally do.</li>\n"
@@ -33688,7 +33693,7 @@ msgstr ""
 "<li>Нажмите кнопку <i>Выбрать точку изображения для выбранного объекта...</i> (или используйте горячую клавишу).</li>\n"
 "<li>Щелкните точку на изображении, соответствующую этому объекту (скройте моделируемые звезды, если они в данный момент вас слишком сбивают с толку).</li></ol>"
 
-#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1770
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1772
 msgid ""
 "Finally, when enough points have been picked to fill the different distances"
 " from image center, click <i>Optimize</i> button. After a few moments the "
@@ -33701,7 +33706,7 @@ msgstr ""
 " так, попробуйте выбрать больше точек из тех, которые не совпадают, и "
 "повторите оптимизацию."
 
-#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1774
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1776
 msgid ""
 "On the <i>Model for lensfun</i> tab you can generate the XML entry for "
 "lensfun database. Enter make and model for the lens, and the mount (the name"
@@ -33713,16 +33718,16 @@ msgstr ""
 "(название должно соответствовать одному из байонетов, поддерживаемых вашей "
 "камерой и перечисленных в базе данных)."
 
-#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1779
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1781
 msgid "Preparing a photo"
 msgstr "Подготовка фотографии"
 
-#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1780
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1782
 msgid "To make a useful shot, you should follow some guidelines:\n"
 msgstr ""
 "Чтобы сделать полезный кадр, следует следовать некоторым рекомендациям:\n"
 
-#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1782
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1784
 msgid ""
 "Try to keep away from the horizon, because star elevation there is very "
 "dependent on weather conditions due to atmospheric refraction."
@@ -33730,7 +33735,7 @@ msgstr ""
 "Старайтесь держаться подальше от горизонта, поскольку высота звезд там очень"
 " зависит от погодных условий из-за атмосферной рефракции."
 
-#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1784
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1786
 msgid ""
 "Be sure to disable any geometry distortion correction, because failure to "
 "disable distortion correction may make good fitting impossible. In "
@@ -33739,7 +33744,7 @@ msgstr ""
 "Обязательно отключите любую коррекцию искажений геометрии, поскольку, если "
 "этого не сделать, хорошая подгонка может стать невозможной. В частности:"
 
-#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1787
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1789
 msgid ""
 "If you're shooting RAW, lens distortion correction must be turned off in RAW"
 " development software like Lightroom or Darktable that you use for "
@@ -33749,7 +33754,7 @@ msgstr ""
 "отключить в программном обеспечении для обработки RAW, таком как Lightroom "
 "или Darktable, которое вы используете для обработки снимков."
 
-#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1789
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1791
 msgid ""
 "If you're shooting JPEG, lens distortion correction must be turned off in "
 "the camera settings before taking the photo."
@@ -33757,7 +33762,7 @@ msgstr ""
 "Если вы снимаете в формате JPEG, перед съемкой фотографии необходимо "
 "отключить коррекцию искажений объектива в настройках камеры."
 
-#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1793
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1795
 msgid ""
 "Disable automatic image rotation according to its orientation saved in EXIF "
 "tags. While such rotation may make the image look better, the shifts of the "
@@ -33770,7 +33775,7 @@ msgstr ""
 "процессе подгонки, будут иметь неправильные направления, если такое вращение"
 " было применено."
 
-#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1798
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1800
 msgid ""
 "The image that you input into this estimator should contain as much EXIF "
 "information from the original RAW as possible, this will let the UI tell you"
@@ -33782,7 +33787,7 @@ msgstr ""
 "вам, например, что установленные текущие время и дата в симуляции не "
 "совпадают с указанными в файле изображения."
 
-#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1801
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1803
 msgid ""
 "One method that will take an input RAW image and output a result following "
 "the above guidelines (except those about shooting) is to use "
@@ -33798,7 +33803,7 @@ msgstr ""
 "<code>exiftool</code>, как в следующих командах (отрегулируйте имена файлов "
 "в соответствии с вашими потребностями):"
 
-#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1808
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1810
 msgid ""
 "Here the <code>-t 0</code> option for <code>dcraw_emu</code> prevents "
 "automatic rotation, <code>-T</code> generates a TIFF file instead of the "
@@ -33812,7 +33817,7 @@ msgstr ""
 "из-за которого звезды могут стать не такими маленькими, как на исходной "
 "фотографии, а <code>-Z</code> задает имя файлу."
 
-#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1812
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1814
 msgid ""
 "The <code>exiftool</code> command copies all time-related and GPS tags from "
 "the JPEG sidecar (which on my Samsung Galaxy S8 appeared to contain more "
@@ -33824,13 +33829,13 @@ msgstr ""
 "содержал более полную информацию EXIF, чем DNG) в TIFF. В вашем случае может"
 " быть иначе: возможно, надо будет копировать из RAW-файла."
 
-#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1818
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1820
 msgid "Ctrl+Shift & left mouse drag: move the image around the sky"
 msgstr ""
 "Ctrl+Shift и перетаскивание левой кнопкой мыши: перемещение изображения по "
 "небу."
 
-#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1819
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1821
 msgid ""
 "Ctrl+Shift & right mouse drag: scale and rotate the image around the last "
 "drag point"
@@ -33838,7 +33843,7 @@ msgstr ""
 "Ctrl+Shift и перетаскивание правой кнопкой мыши: масштабирование и поворот "
 "изображения вокруг последней точки перетаскивания."
 
-#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1820
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1822
 msgid ""
 "Keyboard hotkeys can be configured in the Keyboard shortcuts editor (F7)."
 msgstr ""
