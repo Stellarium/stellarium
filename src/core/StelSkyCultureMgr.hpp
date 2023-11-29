@@ -38,13 +38,13 @@ public:
 	//! Most traditional skies do not have boundaries.
 	//! Some atlases in the 18th and 19th centuries had curved boundaries that differed between authors.
 	//! Only IAU implemented "approved" boundaries, but a similar technique could be used for other skycultures.
-	enum BOUNDARIES
+	enum class BoundariesType
 	{
-		NONE = -1,
+		None = -1,
 		IAU,
-		OWN
+		Own
 	};
-	Q_ENUM(BOUNDARIES)
+	Q_ENUM(BoundariesType)
 
 	//! Since V0.19. A rough classification scheme that may allow filtering and at least some rough idea of quality control.
 	//! In future versions, this scheme could be refined or changed, and external reviewers
@@ -96,8 +96,8 @@ public:
 	QString license;
 	//! The name of region
 	QString region;
-	//! Type of the boundaries (enum)
-	BOUNDARIES boundaries;
+	//! Type of the boundaries
+	BoundariesType boundariesType;
 	//! Classification of sky culture (enum)
 	CLASSIFICATION classification;
 };
@@ -152,11 +152,7 @@ public slots:
 
 	//! Get the type of boundaries of the current sky culture
 	//! Config option: info/boundaries
-	//! Keys:
-	//! - none (-1; using by default)
-	//! - generic (0)
-	//! - own (1)
-	int getCurrentSkyCultureBoundariesIdx() const;
+	StelSkyCulture::BoundariesType getCurrentSkyCultureBoundariesType() const;
 
 	//! Get the classification index for the current sky culture
 	//! Config option: info/classification
