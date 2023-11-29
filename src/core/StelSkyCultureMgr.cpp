@@ -55,23 +55,23 @@ StelSkyCultureMgr::StelSkyCultureMgr()
 		dirToNameEnglish[dir].license = pd.value("info/license", "").toString();
 		dirToNameEnglish[dir].region = pd.value("info/region", "").toString();
 		QString boundariesStr = pd.value("info/boundaries", "none").toString();
-		static const QMap<QString, StelSkyCulture::BOUNDARIES>boundariesMap={
-			{ "none",    StelSkyCulture::NONE},
-			{ "iau",     StelSkyCulture::IAU},
-			{ "generic", StelSkyCulture::IAU}, // deprecated, add warning below
-			{ "own",     StelSkyCulture::OWN},
+		static const QMap<QString, StelSkyCulture::BoundariesType> boundariesMap = {
+			{ "none",    StelSkyCulture::BoundariesType::None},
+			{ "iau",     StelSkyCulture::BoundariesType::IAU},
+			{ "generic", StelSkyCulture::BoundariesType::IAU}, // deprecated, add warning below
+			{ "own",     StelSkyCulture::BoundariesType::Own},
 		};
-		StelSkyCulture::BOUNDARIES boundaries = boundariesMap.value(boundariesStr.toLower(), StelSkyCulture::NONE);
+		const auto boundariesType = boundariesMap.value(boundariesStr.toLower(), StelSkyCulture::BoundariesType::None);
 		if (boundariesStr.contains("generic", Qt::CaseInsensitive))
 		{
-			qDebug() << "Skyculture " << dir << "'s boundaries is given with deprecated 'generic'. Please edit info.ini and change to 'iau'";
+			qDebug() << "Skyculture " << dir << "'s boundariesType is given with deprecated 'generic'. Please edit info.ini and change to 'iau'";
 		}
 		else if (!boundariesMap.contains(boundariesStr.toLower()))
 		{
-			qDebug() << "Skyculture " << dir << "'s boundaries value unknown:" << boundariesStr;
+			qDebug() << "Skyculture " << dir << "'s boundariesType value unknown:" << boundariesStr;
 			qDebug() << "Please edit info.ini and change to a supported value. For now, this equals 'none'";
 		}
-		dirToNameEnglish[dir].boundaries = boundaries;
+		dirToNameEnglish[dir].boundariesType = boundariesType;
 		// Use 'traditional' as default
 		QString classificationStr = pd.value("info/classification", "traditional").toString();
 		static const QMap <QString, StelSkyCulture::CLASSIFICATION>classificationMap={
@@ -163,9 +163,9 @@ QString StelSkyCultureMgr::getCurrentSkyCultureEnglishName() const
 	return currentSkyCulture.englishName;
 }
 
-int StelSkyCultureMgr::getCurrentSkyCultureBoundariesIdx() const
+StelSkyCulture::BoundariesType StelSkyCultureMgr::getCurrentSkyCultureBoundariesType() const
 {
-	return currentSkyCulture.boundaries;
+	return currentSkyCulture.boundariesType;
 }
 
 int StelSkyCultureMgr::getCurrentSkyCultureClassificationIdx() const

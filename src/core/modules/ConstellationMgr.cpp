@@ -189,11 +189,11 @@ void ConstellationMgr::updateSkyCulture(const QString& skyCultureDir)
 
 	// load constellation boundaries
 	StelApp *app = &StelApp::getInstance();
-	int idx = app->getSkyCultureMgr().getCurrentSkyCultureBoundariesIdx();
-	if (idx>=0)
+	const auto idx = app->getSkyCultureMgr().getCurrentSkyCultureBoundariesType();
+	if (idx != StelSkyCulture::BoundariesType::None)
 	{
 		// OK, the current sky culture has boundaries!
-		if (idx==1)
+		if (idx == StelSkyCulture::BoundariesType::Own)
 		{
 			// boundaries = own
 			fic = StelFileMgr::findFile("skycultures/" + skyCultureDir + "/constellation_boundaries.dat");
@@ -255,7 +255,7 @@ void ConstellationMgr::selectedObjectChange(StelModule::StelModuleSelectAction a
 	else
 	{
 		QList<StelObjectP> newSelectedObject;
-		if (StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureBoundariesIdx()==0) // generic IAU boundaries
+		if (StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureBoundariesType()==StelSkyCulture::BoundariesType::IAU)
 			newSelectedObject = omgr->getSelectedObject();
 		else
 			newSelectedObject = omgr->getSelectedObject("Star");
@@ -343,7 +343,7 @@ void ConstellationMgr::selectConstellationByObjectName(const QString &englishNam
 	if (!getFlagIsolateSelected())
 		setFlagIsolateSelected(true); // Enable isolated selection
 
-	if (StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureBoundariesIdx()==0) // generic IAU boundaries
+	if (StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureBoundariesType()==StelSkyCulture::BoundariesType::IAU)
 		setSelectedConst(isObjectIn(GETSTELMODULE(StelObjectMgr)->searchByName(englishName).data()));
 	else
 		setSelectedConst(isStarIn(GETSTELMODULE(StelObjectMgr)->searchByName(englishName).data()));
@@ -1517,7 +1517,7 @@ void ConstellationMgr::setSelected(const StelObject *s)
 		setSelectedConst(Q_NULLPTR);
 	else
 	{
-		if (StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureBoundariesIdx()==0) // generic IAU boundaries
+		if (StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureBoundariesType()==StelSkyCulture::BoundariesType::IAU)
 			setSelectedConst(isObjectIn(s));
 		else
 			setSelectedConst(isStarIn(s));
