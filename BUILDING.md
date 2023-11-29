@@ -309,6 +309,14 @@ $ git clone https://github.com/Stellarium/stellarium.git
 $ cd stellarium
 ```
 
+If you ever want to contribute from a Windows environment, you *must* configure git to use Unix-style line endings. 
+(The --global applies to all projects.)
+(https://docs.github.com/en/get-started/getting-started-with-git/configuring-git-to-handle-line-endings)
+
+```
+$ git config [--global] core.autocrlf true
+```
+
 ### Download source code from GitHub
 
 You can [download](https://github.com/Stellarium/stellarium/archive/master.zip) fresh source code from 
