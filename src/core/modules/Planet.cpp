@@ -1039,8 +1039,9 @@ SolarEclipseBessel::SolarEclipseBessel(double &besX, double &besY,
 SolarEclipseData::SolarEclipseData(double JD, double &dRatio, double &latDeg,
 	double &lngDeg, double &altitude, double &pathWidth, double &duration, double &magnitude)
 {
-	StelCore* core = StelApp::getInstance().getCore();
-	const double currentJD = core->getJD();   // save current JD
+	StelCore* core = StelApp::getInstance().getCore();  
+	const double currentJD = core->getJDOfLastJDUpdate(); // save current JD
+	const qint64 millis = core->getMilliSecondsOfLastJDUpdate(); // keep time in sync
 	const bool saveTopocentric = core->getUseTopocentricCoordinates();
 
 	core->setUseTopocentricCoordinates(false);
@@ -1162,6 +1163,7 @@ SolarEclipseData::SolarEclipseData(double JD, double &dRatio, double &latDeg,
 		pathWidth = 0.;
 	}
 	core->setJD(currentJD);
+	core->setMilliSecondsOfLastJDUpdate(millis); // restore millis.
 	core->setUseTopocentricCoordinates(saveTopocentric);
 	core->update(0);
 };
