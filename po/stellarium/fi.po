@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2023-11-22 14:51+0700\n"
+"POT-Creation-Date: 2023-11-28 13:10+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Ilpo Kantonen, 2023\n"
 "Language-Team: Finnish (https://app.transifex.com/stellarium/teams/80998/fi/)\n"
@@ -830,7 +830,7 @@ msgstr "Valosaasteen jaksollinen muutos"
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:187
 #: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:184
 #: plugins/MissingStars/src/gui/MissingStarsDialog.cpp:87
-#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1748
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1750
 msgid "Author"
 msgstr "Tekijä"
 
@@ -4182,12 +4182,12 @@ msgstr "Lataa '%1'"
 msgid "Loading '%1' from %2"
 msgstr "Lataa '%1' lähteestä %2"
 
-#: src/core/StelSkyCultureMgr.cpp:178
+#: src/core/StelSkyCultureMgr.cpp:183
 msgctxt "sky culture classification"
 msgid "ethnographic"
 msgstr "etnografinen"
 
-#: src/core/StelSkyCultureMgr.cpp:179
+#: src/core/StelSkyCultureMgr.cpp:184
 msgid ""
 "Provided by ethnographic researchers based on interviews of indigenous "
 "people."
@@ -4195,12 +4195,12 @@ msgstr ""
 "Tiedot ovat etnografisten tutkijoiden toimittamia ja perustuvat "
 "alkuperäiskansojen haastatteluihin."
 
-#: src/core/StelSkyCultureMgr.cpp:183
+#: src/core/StelSkyCultureMgr.cpp:188
 msgctxt "sky culture classification"
 msgid "historical"
 msgstr "historiallinen"
 
-#: src/core/StelSkyCultureMgr.cpp:184
+#: src/core/StelSkyCultureMgr.cpp:189
 msgid ""
 "Provided by historians based on historical written sources from a (usually "
 "short) period of the past."
@@ -4209,12 +4209,12 @@ msgstr ""
 "kirjallisiin lähteisiin joltakin (yleensä lyhyeltä) ajanjaksolta "
 "menneisyydestä."
 
-#: src/core/StelSkyCultureMgr.cpp:188
+#: src/core/StelSkyCultureMgr.cpp:193
 msgctxt "sky culture classification"
 msgid "single"
 msgstr "yksittäinen"
 
-#: src/core/StelSkyCultureMgr.cpp:189
+#: src/core/StelSkyCultureMgr.cpp:194
 msgid ""
 "Represents a single source like a historical atlas, or publications of a "
 "single author."
@@ -4222,12 +4222,12 @@ msgstr ""
 "Esittää yksittäistä lähdettä, kuten historiallista karttaa tai yksittäisen "
 "kirjoittajan julkaisuja."
 
-#: src/core/StelSkyCultureMgr.cpp:193
+#: src/core/StelSkyCultureMgr.cpp:198
 msgctxt "sky culture classification"
 msgid "comparative"
 msgstr "vertaileva"
 
-#: src/core/StelSkyCultureMgr.cpp:194
+#: src/core/StelSkyCultureMgr.cpp:199
 msgid ""
 "Compares and confronts elements from at least two sky cultures with each "
 "other."
@@ -4235,12 +4235,12 @@ msgstr ""
 "Vertailee ja asettaa vastakkain elementtejä vähintään kahdesta "
 "tähtitarustosta."
 
-#: src/core/StelSkyCultureMgr.cpp:198
+#: src/core/StelSkyCultureMgr.cpp:203
 msgctxt "sky culture classification"
 msgid "traditional"
 msgstr "perinteinen"
 
-#: src/core/StelSkyCultureMgr.cpp:199
+#: src/core/StelSkyCultureMgr.cpp:204
 msgid ""
 "Content represents 'common' knowledge by several members of an ethnic "
 "community, and the sky culture has been developed by members of such "
@@ -4249,12 +4249,12 @@ msgstr ""
 "Sisältö edustaa useiden etnisen yhteisön jäsenten \"yhteistä\" tietoa, ja "
 "tähtitaruston ovat kehittäneet kyseisen yhteisön jäsenet."
 
-#: src/core/StelSkyCultureMgr.cpp:203
+#: src/core/StelSkyCultureMgr.cpp:208
 msgctxt "sky culture classification"
 msgid "personal"
 msgstr "oma"
 
-#: src/core/StelSkyCultureMgr.cpp:204
+#: src/core/StelSkyCultureMgr.cpp:209
 msgid ""
 "This is a personally developed sky culture which is not founded in published"
 " historical or ethnological research. Stellarium may include it when it is "
@@ -4265,12 +4265,12 @@ msgstr ""
 "saattaa sisällyttää sen, kun se on \"tarpeeksi kaunis\", mutta sen sisältöä "
 "ei varsinaisesti vahvisteta."
 
-#: src/core/StelSkyCultureMgr.cpp:208
+#: src/core/StelSkyCultureMgr.cpp:213
 msgctxt "sky culture classification"
 msgid "incomplete"
 msgstr "epätäydellinen"
 
-#: src/core/StelSkyCultureMgr.cpp:209
+#: src/core/StelSkyCultureMgr.cpp:214
 msgid ""
 "The accuracy of the sky culture description cannot be given, although it "
 "looks like it is built on a solid background. More work would be needed."
@@ -4278,20 +4278,20 @@ msgstr ""
 "Tähtitaruston kuvauksen tarkkuutta ei voida antaa, vaikka se näyttääkin "
 "rakentuvan vankalle pohjalle. Lisätyötä tarvittaisiin."
 
-#: src/core/StelSkyCultureMgr.cpp:213
+#: src/core/StelSkyCultureMgr.cpp:218
 msgctxt "sky culture classification"
 msgid "undefined"
 msgstr "määrittelemätön"
 
-#: src/core/StelSkyCultureMgr.cpp:220
+#: src/core/StelSkyCultureMgr.cpp:225
 msgid "Classification"
 msgstr "Luokka"
 
-#: src/core/StelSkyCultureMgr.cpp:232
+#: src/core/StelSkyCultureMgr.cpp:237
 msgid "unknown"
 msgstr "tuntematon"
 
-#: src/core/StelSkyCultureMgr.cpp:233
+#: src/core/StelSkyCultureMgr.cpp:238
 msgid ""
 "This sky culture is provided under unknown license. Please ask authors for "
 "details about license for this sky culture."
@@ -4299,7 +4299,7 @@ msgstr ""
 "Tämä tähtitarusto tarjotaan tuntemattomalla lisenssillä. Kysy tekijältä "
 "lisätietoja tämän tähtitaruston lisenssistä."
 
-#: src/core/StelSkyCultureMgr.cpp:240
+#: src/core/StelSkyCultureMgr.cpp:245
 msgid ""
 "This sky culture is provided under GNU General Public License. You can use "
 "it for commercial and non-commercial purposes, freely adapt it and share "
@@ -4309,7 +4309,7 @@ msgstr ""
 "käyttää sitä kaupallisiin ja ei-kaupallisiin tarkoituksiin, muokata sitä "
 "vapaasti ja jakaa mukautettuja töitä."
 
-#: src/core/StelSkyCultureMgr.cpp:245
+#: src/core/StelSkyCultureMgr.cpp:250
 msgid ""
 "This sky culture is provided under MIT License. You can use it for "
 "commercial and non-commercial purposes, freely adapt it and share adapted "
@@ -4319,11 +4319,11 @@ msgstr ""
 "kaupallisiin ja ei-kaupallisiin tarkoituksiin, muokata sitä vapaasti ja "
 "jakaa mukautettuja töitä."
 
-#: src/core/StelSkyCultureMgr.cpp:249
+#: src/core/StelSkyCultureMgr.cpp:254
 msgid "This sky culture is provided under Creative Commons License."
 msgstr "Tämä tähtitarusto tarjotaan Creative Commons -lisenssillä."
 
-#: src/core/StelSkyCultureMgr.cpp:257
+#: src/core/StelSkyCultureMgr.cpp:262
 msgid ""
 "You may distribute, remix, adapt, and build upon this sky culture, even "
 "commercially, as long as you credit authors for the original creation."
@@ -4331,7 +4331,7 @@ msgstr ""
 "Voit levittää, miksata, muokata ja rakentaa tätä tähtitarustoa, jopa "
 "kaupallisesti, kunhan mainitset tekijöiden alkuperäisen luomuksen."
 
-#: src/core/StelSkyCultureMgr.cpp:258
+#: src/core/StelSkyCultureMgr.cpp:263
 msgid ""
 "You may remix, adapt, and build upon this sky culture even for commercial "
 "purposes, as long as you credit authors and license the new creations under "
@@ -4343,7 +4343,7 @@ msgstr ""
 "samoilla ehdoilla. Tätä lisenssiä verrataan usein \"copyleft\" ilmaisiin ja "
 "avoimen lähdekoodin ohjelmistolisensseihin."
 
-#: src/core/StelSkyCultureMgr.cpp:259
+#: src/core/StelSkyCultureMgr.cpp:264
 msgid ""
 "You may reuse this sky culture for any purpose, including commercially; "
 "however, adapted work cannot be shared with others, and credit must be "
@@ -4353,7 +4353,7 @@ msgstr ""
 "mukaan lukien kaupallinen; mukautettua työtä ei kuitenkaan voi jakaa muiden "
 "kanssa, ja sinun on annettava luotto."
 
-#: src/core/StelSkyCultureMgr.cpp:260
+#: src/core/StelSkyCultureMgr.cpp:265
 msgid ""
 "You may remix, adapt, and build upon this sky culture non-commercially, and "
 "although your new works must also acknowledge authors and be non-commercial,"
@@ -4363,7 +4363,7 @@ msgstr ""
 "vaikka uusien teoksesi on myös nimettävä tekijät ja oltava ei-kaupallisia, "
 "sinun ei tarvitse lisensoida johdannaisteoksiasi samoin ehdoin."
 
-#: src/core/StelSkyCultureMgr.cpp:261
+#: src/core/StelSkyCultureMgr.cpp:266
 msgid ""
 "You may remix, adapt, and build upon this sky culture non-commercially, as "
 "long as you credit authors and license your new creations under the "
@@ -4372,7 +4372,7 @@ msgstr ""
 "Voit remiksata, mukauttaa ja rakentaa tätä tähtitarustoa ei-kaupallisesti, "
 "kunhan mainitset tekijät ja lisensoit uusia luomuksiasi samoilla ehdoilla."
 
-#: src/core/StelSkyCultureMgr.cpp:262
+#: src/core/StelSkyCultureMgr.cpp:267
 msgid ""
 "You may use this sky culture and share them with others as long as you "
 "credit authors, but you can’t change it in any way or use it commercially."
@@ -4381,17 +4381,17 @@ msgstr ""
 " mainitset kirjoittajia, mutta et voi muuttaa sitä millään tavalla tai "
 "käyttää kaupallisesti."
 
-#: src/core/StelSkyCultureMgr.cpp:274
+#: src/core/StelSkyCultureMgr.cpp:279
 msgid "This sky culture is distributed as public domain."
 msgstr "Tämä tähtitarusto jaetaan public domainina."
 
 #. TRANSLATORS: A phrase like "Please credit: XY Museum". The creditee is in a
 #. skyculture's info.ini.
-#: src/core/StelSkyCultureMgr.cpp:280
+#: src/core/StelSkyCultureMgr.cpp:285
 msgid "Please credit:"
 msgstr "Ole hyvä ja tue:"
 
-#: src/core/StelSkyCultureMgr.cpp:284
+#: src/core/StelSkyCultureMgr.cpp:289
 msgid ""
 "Illustrations are provided under Free Art License that grants the right to "
 "freely copy, distribute, and transform."
@@ -4399,7 +4399,7 @@ msgstr ""
 "Kuvitukset tarjotaan Free Art License -lisenssillä, joka antaa oikeuden "
 "vapaasti kopioida, levittää ja muunnella."
 
-#: src/core/StelSkyCultureMgr.cpp:289 src/gui/ConfigurationDialog.cpp:1319
+#: src/core/StelSkyCultureMgr.cpp:294 src/gui/ConfigurationDialog.cpp:1319
 #: src/scripting/StelScriptMgr.cpp:652
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:100
 #: plugins/Oculars/src/gui/OcularDialog.cpp:626
@@ -4422,20 +4422,20 @@ msgstr ""
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:186
 #: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:183
 #: plugins/MissingStars/src/gui/MissingStarsDialog.cpp:86
-#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1747
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1749
 msgid "License"
 msgstr "Lisenssi"
 
-#: src/core/StelSkyCultureMgr.cpp:297
+#: src/core/StelSkyCultureMgr.cpp:302
 msgid ""
 "The region indicates the geographical area of origin of a given sky culture."
 msgstr "Alue osoittaa tietyn tähtitaruston maantieteellisen alkuperäalueen."
 
-#: src/core/StelSkyCultureMgr.cpp:303
+#: src/core/StelSkyCultureMgr.cpp:308
 msgid "World"
 msgstr "Maailma"
 
-#: src/core/StelSkyCultureMgr.cpp:304
+#: src/core/StelSkyCultureMgr.cpp:309
 msgid ""
 "All 'modern' sky cultures are based on the IAU-approved 88 constellations "
 "with standardized boundaries and are used worldwide. The origins of these "
@@ -4445,15 +4445,15 @@ msgstr ""
 "tähtitarustoon, joilla on standardoidut rajat, ja niitä käytetään "
 "maailmanlaajuisesti. Näiden tähtikuvioiden alkuperä on yleiseurooppalainen."
 
-#: src/core/StelSkyCultureMgr.cpp:308 src/ui_locationDialogGui.h:450
+#: src/core/StelSkyCultureMgr.cpp:313 src/ui_locationDialogGui.h:450
 msgid "Region:"
 msgstr "Alue:"
 
-#: src/core/StelSkyCultureMgr.cpp:370
+#: src/core/StelSkyCultureMgr.cpp:375
 msgid "No description"
 msgstr "Ei kuvausta"
 
-#: src/core/StelSkyCultureMgr.cpp:405
+#: src/core/StelSkyCultureMgr.cpp:410
 msgid "References / Further Reading"
 msgstr "Viitteet / Lisälukemista"
 
@@ -4910,7 +4910,7 @@ msgstr "Yhteystieto"
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:185
 #: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:182
 #: plugins/MissingStars/src/gui/MissingStarsDialog.cpp:85
-#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1746
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1748
 msgid "Version"
 msgstr "Versio"
 
@@ -11788,35 +11788,40 @@ msgstr "Seri"
 
 #: skycultures/translations_skycultures.fab:104
 msgctxt "sky culture"
+msgid "Tibetan"
+msgstr "Tiibettiläinen"
+
+#: skycultures/translations_skycultures.fab:106
+msgctxt "sky culture"
 msgid "Tongan"
 msgstr "Tongalainen"
 
-#: skycultures/translations_skycultures.fab:106
+#: skycultures/translations_skycultures.fab:108
 msgctxt "sky culture"
 msgid "Tukano"
 msgstr "Tukano"
 
-#: skycultures/translations_skycultures.fab:108
+#: skycultures/translations_skycultures.fab:110
 msgctxt "sky culture"
 msgid "Tikuna"
 msgstr "Tikuna"
 
-#: skycultures/translations_skycultures.fab:110
+#: skycultures/translations_skycultures.fab:112
 msgctxt "sky culture"
 msgid "Tupi-Guarani"
 msgstr "Tupi-Guarani"
 
-#: skycultures/translations_skycultures.fab:112
+#: skycultures/translations_skycultures.fab:114
 msgctxt "sky culture"
 msgid "Vanuatu (Netwar)"
 msgstr "Vanuatu (Netwar)"
 
-#: skycultures/translations_skycultures.fab:114
+#: skycultures/translations_skycultures.fab:116
 msgctxt "sky culture"
 msgid "Xhosa"
 msgstr "Xhosalainen"
 
-#: skycultures/translations_skycultures.fab:116
+#: skycultures/translations_skycultures.fab:118
 msgctxt "sky culture"
 msgid "Zulu"
 msgstr "Zulu"
@@ -16872,7 +16877,7 @@ msgid "Pixel grid feature"
 msgstr "Pikseliruudukko-ominaisuus"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:638
-#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1751
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1753
 msgid "Overview"
 msgstr "Yhteenveto"
 
@@ -16951,7 +16956,7 @@ msgid "If you find any issues, please let me know. Enjoy!"
 msgstr "Jos löydät ongelmia, ilmoita minulle. Nauti!"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:652
-#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1816
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1818
 msgid "Hot Keys"
 msgstr "Pikanäppäimet"
 
@@ -33579,11 +33584,11 @@ msgstr "Merkki-, malli- ja asennuskentät on täytettävä"
 msgid "Internal error: bad distortion model chosen"
 msgstr "Sisäinen virhe: huono vääristymämalli valittu"
 
-#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1744
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1746
 msgid "Lens Distortion Estimator Plug-in"
 msgstr "Linssin vääristymän arvioijan laajennus"
 
-#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1753
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1755
 msgid ""
 "This plugin lets you estimate distortion of the objective lens of your "
 "camera and generate a distortion model for use with the lensfun library."
@@ -33591,11 +33596,11 @@ msgstr ""
 "Tämän laajennuksen avulla voit arvioida objektiivin vääristymiä ja luoda "
 "vääristymämallin kameraksi lensfun-kirjaston kanssa."
 
-#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1755
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1757
 msgid "The process is as follows."
 msgstr "Prosessi on seuraava."
 
-#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1757
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1759
 msgid ""
 "Take a photo of the night sky so that you can easily find enough stars "
 "scattered from the center of the frame to the border. Some care must be "
@@ -33606,7 +33611,7 @@ msgstr ""
 "kehyksen keskeltä reunaan. Hyödyllisen kuvan saamiseksi on oltava "
 "varovainen, katso lisätietoja kohdasta <b>Valokuvan valmistelu</b> osio.\n"
 
-#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1760
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1762
 msgid ""
 "On the <i>Image Loading</i> tab choose the image to load and use the "
 "available controls (or hotkeys) to position it so that it approximately "
@@ -33620,7 +33625,7 @@ msgstr ""
 "kyettävä kertomaan, mikä kuvan piste vastaa mitäkin simuloitua "
 "tähteä/planeettaa."
 
-#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1764
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1766
 msgid ""
 "Then you switch to the <i>Fitting</i> tab, and pick some points in the image for a set of celestial objects. To do this,\n"
 "<ol><li>Select an object as you'd normally do.</li>\n"
@@ -33632,7 +33637,7 @@ msgstr ""
 "<li>Napsauta <i>Poimi valitun kohteen kuvapiste.</i> painike (tai käytä pikanäppäintä).</li>\n"
 "<li>Napsauta tätä kohdetta vastaavaa pistettä kuvassa (piilota simuloidut tähdet, jos ne ovat liian hämmentäviä tässä vaiheessa).</li></ol>"
 
-#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1770
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1772
 msgid ""
 "Finally, when enough points have been picked to fill the different distances"
 " from image center, click <i>Optimize</i> button. After a few moments the "
@@ -33645,7 +33650,7 @@ msgstr ""
 "valita lisää pisteitä niistä, jotka eivät täsmää, ja yritä optimointia "
 "uudelleen."
 
-#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1774
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1776
 msgid ""
 "On the <i>Model for lensfun</i> tab you can generate the XML entry for "
 "lensfun database. Enter make and model for the lens, and the mount (the name"
@@ -33656,15 +33661,15 @@ msgstr ""
 "tietokantaan. Anna objektiivin merkki ja malli sekä teline (nimen on "
 "vastattava yhtä kamerasi tukemista kiinnikkeistä tietokannassa)."
 
-#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1779
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1781
 msgid "Preparing a photo"
 msgstr "Valokuvan valmistelu"
 
-#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1780
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1782
 msgid "To make a useful shot, you should follow some guidelines:\n"
 msgstr "Noudata joitain ohjeita ottaaksesi käyttökelpoisen kuvan:\n"
 
-#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1782
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1784
 msgid ""
 "Try to keep away from the horizon, because star elevation there is very "
 "dependent on weather conditions due to atmospheric refraction."
@@ -33672,7 +33677,7 @@ msgstr ""
 "Yritä pysyä kaukana horisontista, koska tähtien korkeus siellä on hyvin "
 "riippuvainen sääolosuhteista ilmakehän taittumisesta johtuen."
 
-#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1784
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1786
 msgid ""
 "Be sure to disable any geometry distortion correction, because failure to "
 "disable distortion correction may make good fitting impossible. In "
@@ -33682,7 +33687,7 @@ msgstr ""
 "vääristymän korjauksen poistaminen käytöstä voi tehdä hyvän sovituksen "
 "mahdottomaksi. Erityisesti:"
 
-#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1787
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1789
 msgid ""
 "If you're shooting RAW, lens distortion correction must be turned off in RAW"
 " development software like Lightroom or Darktable that you use for "
@@ -33692,7 +33697,7 @@ msgstr ""
 "käytöstä RAW-kehitysohjelmistossa, kuten Lightroom tai Darktable, joita "
 "käytät kuviesi käsittelyyn."
 
-#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1789
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1791
 msgid ""
 "If you're shooting JPEG, lens distortion correction must be turned off in "
 "the camera settings before taking the photo."
@@ -33700,7 +33705,7 @@ msgstr ""
 "Jos kuvaat JPEG-kuvaa, objektiivin vääristymän korjaus on poistettava käytöstä kameran asetuksista ennen kuvan ottamista.\n"
 "​"
 
-#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1793
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1795
 msgid ""
 "Disable automatic image rotation according to its orientation saved in EXIF "
 "tags. While such rotation may make the image look better, the shifts of the "
@@ -33713,7 +33718,7 @@ msgstr ""
 "projisointikeskipisteen siirtymillä on väärät suunnat, jos tällaista kiertoa"
 " käytetään."
 
-#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1798
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1800
 msgid ""
 "The image that you input into this estimator should contain as much EXIF "
 "information from the original RAW as possible, this will let the UI tell you"
@@ -33725,7 +33730,7 @@ msgstr ""
 "esim. simulaatiossa asetettu nykyinen aika ja päivämäärä eivät ole samat "
 "kuin kuvassa."
 
-#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1801
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1803
 msgid ""
 "One method that will take an input RAW image and output a result following "
 "the above guidelines (except those about shooting) is to use "
@@ -33737,7 +33742,7 @@ msgstr ""
 "Yksi tapa, joka ottaa syötetyn RAW-kuvan ja tulostaa tuloksen yllä olevien ohjeiden mukaisesti (lukuun ottamatta kuvausta koskevia ohjeita), on käyttää <code>dcraw</code> (alkuperäinen Dave Coffinilta) tai <code>dcraw_emu</code> ( <code>libRaw</code> paketista), sekä <code>exiftool</code> kuten seuraavissa komennoissa (säädä tiedostonimet tarpeidesi mukaan):\n"
 "​"
 
-#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1808
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1810
 msgid ""
 "Here the <code>-t 0</code> option for <code>dcraw_emu</code> prevents "
 "automatic rotation, <code>-T</code> generates a TIFF file instead of the "
@@ -33751,7 +33756,7 @@ msgstr ""
 " ole niin pieniä kuin kuvassa, ja <code>-Z</code> antaa tiedostolle selkeän "
 "nimen."
 
-#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1812
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1814
 msgid ""
 "The <code>exiftool</code> command copies all time-related and GPS tags from "
 "the JPEG sidecar (which on my Samsung Galaxy S8 appeared to contain more "
@@ -33763,11 +33768,11 @@ msgstr ""
 " täydellisempiä EXIF ​​​​tietoja kuin DNG) TIFF-tiedostoon. Tapaus voi "
 "vaihdella, saatat joutua kopioimaan sen sijaan RAW-tiedostostasi."
 
-#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1818
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1820
 msgid "Ctrl+Shift & left mouse drag: move the image around the sky"
 msgstr "Ctrl+Shift ja hiiren vasen vetäminen: siirrä kuvaa taivaalla"
 
-#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1819
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1821
 msgid ""
 "Ctrl+Shift & right mouse drag: scale and rotate the image around the last "
 "drag point"
@@ -33775,7 +33780,7 @@ msgstr ""
 "Ctrl+Shift ja hiiren oikea vetäminen: skaalaa ja kierrä kuvaa viimeisen "
 "vetopisteen ympäri"
 
-#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1820
+#: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1822
 msgid ""
 "Keyboard hotkeys can be configured in the Keyboard shortcuts editor (F7)."
 msgstr ""
