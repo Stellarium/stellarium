@@ -64,11 +64,11 @@ StelSkyCultureMgr::StelSkyCultureMgr()
 		const auto boundariesType = boundariesMap.value(boundariesStr.toLower(), StelSkyCulture::BoundariesType::None);
 		if (boundariesStr.contains("generic", Qt::CaseInsensitive))
 		{
-			qDebug() << "Skyculture " << dir << "'s boundariesType is given with deprecated 'generic'. Please edit info.ini and change to 'iau'";
+			qDebug() << "Skyculture " << dir << "'s boundaries is given with deprecated 'generic'. Please edit info.ini and change to 'iau'";
 		}
 		else if (!boundariesMap.contains(boundariesStr.toLower()))
 		{
-			qDebug() << "Skyculture " << dir << "'s boundariesType value unknown:" << boundariesStr;
+			qDebug() << "Skyculture " << dir << "'s boundaries value unknown:" << boundariesStr;
 			qDebug() << "Please edit info.ini and change to a supported value. For now, this equals 'none'";
 		}
 		dirToNameEnglish[dir].boundariesType = boundariesType;
