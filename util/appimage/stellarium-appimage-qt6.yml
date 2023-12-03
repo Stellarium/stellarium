@@ -1,7 +1,7 @@
 version: 1
 
 script:
-    - cmake ../.. -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release -DENABLE_QTWEBENGINE=Off
+    - cmake ../.. -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release
     - make -j3
     - make install DESTDIR=AppDir
 
@@ -35,14 +35,23 @@ AppDir:
       - libqt6webchannel6
       - libqt6serialport6
       - libqt6widgets6
-#      - libqt6webenginecore6
-#      - libqt6webenginecore6-bin
-#      - libqt6webenginewidgets6
-#      - libqt6webenginequick6
-#      - libqt6webenginequickdelegatesqml6
-#      - libqt6webengine6-data
+      - libqt6webenginecore6
+      - libqt6webenginecore6-bin
+      - libqt6webenginewidgets6
+      - libqt6webenginequick6
+      - libqt6webenginequickdelegatesqml6
+      - libqt6webengine6-data
       - libqt6charts6
       - libqt6opengl6
+      - libqt6openglwidgets6
+      - libqt6qml6
+      - libqt6qmlcore6
+      - libqt6quick6
+      - libqt6quickwidgets6
+      - libqt6qmlmodels6
+      - qt6-qpa-plugins
+      - qt6-gtk-platformtheme
+      - qt6-image-formats-plugins
       - libgps28
       - libexiv2-27
       - libnlopt-cxx0
