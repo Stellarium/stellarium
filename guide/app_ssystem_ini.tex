@@ -589,6 +589,98 @@ orbit. Stellarium shows data for this comet for almost 3 years
 (\texttt{orbit\_good=1000} days) from the epoch (defaults to pericenter time).
 
 
+\subsection{JPL Horizons}
+\label{sec:ssystem.ini:JPLHorizons}
+
+
+The \indexterm{JPL Horizons}\footnote{\url{https://ssd.jpl.nasa.gov/horizons/}} on-line solar system data and ephemeris computation service provides access to key solar system data and 
+flexible production of highly accurate ephemerides for solar system objects (Late 2023: 1,334,683 asteroids, 3,904 comets, 290 planetary satellites {includes satellites of Earth and dwarf planet Pluto}, 
+8 planets, the Sun, L1, L2, select spacecraft, and system barycenters). Horizons is provided by the Solar System Dynamics Group of the Jet Propulsion Laboratory.
+
+\subsubsection{How to manually look up a body}
+
+A comet discovered in early 2023, C/2023 A3 (Tsuchinshan-ATLAS), may become bright in October 2024. 
+Let's find out its orbital elements for the most interesting time! 
+
+Use the Horizons web interface. You're going to look up the body you are interested in and copy down its orbital elements. 
+The Horizons web interface will display something like this. 
+
+\fbox{\begin{tabular}{rcl}
+  1&               & Ephemeris Type: \button{Osculating Orbital Elements}\\
+  2& \button{Edit} & Target Body: C/2023 A3 (Tsuchinshan-ATLAS)\\
+  3& \button{Edit} & Coordinate Center: Sun (body center) [500@10]\\
+  4& \button{Edit} & Time Specification: Start=2024-07-03 TDB, Stop=2024-12-02, Step=5 (days)\\
+  5& \button{Edit} & Table Settings: \emph{custom}\\
+  \multicolumn{3}{l}{\button{Generate Ephemeris}}
+\end{tabular}}
+
+\begin{enumerate}
+\item Ephemeris Type \emph{must} be set to \button{Osculating Orbital Elements}.
+\item Target Body is the body you want to add to Stellarium. Click \button{Edit} to look it up.
+\item Center should be set to  Sun for all heliocentric trajectories.
+\item Time Specification: Use a short interval or discrete dates near the time you are most interested. The returned JDE date (Julian Day number) will be used as epoch in Stellarium.
+\item Table Settings: We must \button{Edit} and select Output units: \button{au and days} to create data compatible with the appropriate fields in \file{ssystem\_minor.ini}
+\end{enumerate}
+
+The result begins with listing osculating elements for a certain epoch in the past and its own initial conditions and settings. 
+Horizons then applies numerical integration and simulates the movement and gravitational interaction between all its solar system objects, icluding our comet. 
+Then, for each requested time, orbital elements are listed. Here you could see the slight changes these elements undergo over weeks. 
+However, in Stellarium, we can only use one particular element set and show the comet's movement under the assumption that these elements do not change. 
+When we have read it will be brightest in October, let's take this section. The first number is the date where thjese elements are valid, 
+i.\,e., the element epoch.
+
+\begin{configfile}[\scriptsize]
+2460584.500000000 = A.D. 2024-Oct-01 00:00:00.0000 TDB 
+ EC= 1.000086779013436E+00 QR= 3.914011809348247E-01 IN= 1.391089312570287E+02
+ OM= 2.156049287759364E+01 W = 3.084955943429219E+02 Tp=  2460581.248532149941
+ N = 3.253815615607083E-06 MA= 1.057967686457091E-05 TA= 1.819722055160837E+01
+ A =-4.510320703532996E+03 AD= 9.999999999999998E+99 PR= 9.999999999999998E+99
+\end{configfile}
+Below you also find the keys:
+
+\begin{configfile}
+   Symbol meaning:
+
+    JDTDB    Julian Day Number, Barycentric Dynamical Time
+      EC     Eccentricity, e
+      QR     Periapsis distance, q (km)
+      IN     Inclination w.r.t X-Y plane, i (degrees)
+      OM     Longitude of Ascending Node, OMEGA, (degrees)
+      W      Argument of Perifocus, w (degrees)
+      Tp     Time of periapsis (Julian Day Number)
+      N      Mean motion, n (degrees/sec)
+      MA     Mean anomaly, M (degrees)
+      TA     True anomaly, nu (degrees)
+      A      Semi-major axis, a (km)
+      AD     Apoapsis distance (km)
+      PR     Sidereal orbit period (sec)
+\end{configfile} 
+ 
+\noindent Now we can add an entry into our \file{ssystems\_minor.ini}. 
+You can leave the exponential writing style (trailing ``E+02'' etc.) 
+or convert to the more human-readable as shown here. 
+Symbols \texttt{M1} and \texttt{k1} are given only in the top list of initial elements. 
+The symbols in brackets refer to the above table, do not enter those!
+
+\begin{configfile}[\scriptsize]
+[c2023A3(tsuchinshanatlas)]
+iau_designation                = C/2023 A3
+name                           = C/2023 A3 (Tsuchinshan-ATLAS)
+type                           = comet
+orbit_Epoch                    = 2460584.5
+orbit_ArgOfPericenter          = (W)   308.4955943429219
+orbit_AscendingNode            = (OM)   21.56049287759364
+orbit_Eccentricity             = (EC)    1.000086779013436
+orbit_Inclination              = (IN)  139.1089312570287
+orbit_PericenterDistance       = (QR)    0.3914011809348247
+orbit_TimeAtPericenter         = (Tp) 2460581.248532149941
+absolute_magnitude             = (M1)    6.1
+slope_parameter                = (k1/2)  4.25
+orbit_good                     = 1000
+discovery                      = 2023-01-09 [Not given by JPL Horizons]
+ref                            = JPL Horizons: JPL#25
+\end{configfile}
+
 
 
 %%% Local Variables: 
