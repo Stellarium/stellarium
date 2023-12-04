@@ -1667,7 +1667,8 @@ void StelMainView::doScreenshot(void)
 	// HiDPI screens interfere, and the viewing angle has to be maintained.
 	// First, image size:
 	glWidget->makeCurrent();
-	const auto pixelRatio = QOpenGLContext::currentContext()->screen()->devicePixelRatio();
+	const auto screen = QOpenGLContext::currentContext()->screen();
+	const auto pixelRatio = screen->devicePixelRatio();
 	int physImgWidth  = std::lround(stelScene->width() * pixelRatio);
 	int physImgHeight = std::lround(stelScene->height() * pixelRatio);
 	bool nightModeWasEnabled=nightModeEffect->isEnabled();
@@ -1739,7 +1740,7 @@ void StelMainView::doScreenshot(void)
 	sParams.viewportXywh[3] = virtImgHeight;
 
 	// Configure a helper value to allow some modules to tweak their output sizes. Currently used by StarMgr, maybe solve font issues?
-	customScreenshotMagnification=static_cast<float>(virtImgHeight)/static_cast<float>(qApp->screenAt(QPoint(stelScene->width()*0.5, stelScene->height()*0.5))->geometry().height());
+	customScreenshotMagnification=static_cast<float>(virtImgHeight)/static_cast<float>(screen->geometry().height());
 	sParams.viewportCenter.set(0.0+(0.5+pParams.viewportCenterOffset.v[0])*virtImgWidth,
 							   0.0+(0.5+pParams.viewportCenterOffset.v[1])*virtImgHeight);
 	sParams.viewportFovDiameter = qMin(virtImgWidth,virtImgHeight);
