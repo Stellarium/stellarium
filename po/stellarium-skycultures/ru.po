@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2023-10-12 09:31+0700\n"
+"POT-Creation-Date: 2023-11-28 13:22+0700\n"
 "PO-Revision-Date: 2022-10-05 10:49+0000\n"
 "Last-Translator: Alexander V. Wolf <alex.v.wolf@gmail.com>, 2023\n"
 "Language-Team: Russian (https://app.transifex.com/stellarium/teams/80998/ru/)\n"
@@ -10362,6 +10362,7 @@ msgstr "Треугольник"
 #: skycultures/modern_hlad/constellation_names.eng.fab:7
 #: skycultures/modern_st/constellation_names.eng.fab:7
 #: skycultures/modern_sternenkarten/constellation_names.eng.fab:7
+#: skycultures/tibetan/constellation_names.eng.fab:8
 msgid "Aries"
 msgstr "Овен"
 
@@ -10375,6 +10376,7 @@ msgstr "Овен"
 #: skycultures/modern_hlad/constellation_names.eng.fab:82
 #: skycultures/modern_st/constellation_names.eng.fab:78
 #: skycultures/modern_sternenkarten/constellation_names.eng.fab:81
+#: skycultures/tibetan/constellation_names.eng.fab:16
 msgid "Taurus"
 msgstr "Телец"
 
@@ -10388,6 +10390,7 @@ msgstr "Телец"
 #: skycultures/modern_hlad/constellation_names.eng.fab:37
 #: skycultures/modern_st/constellation_names.eng.fab:38
 #: skycultures/modern_sternenkarten/constellation_names.eng.fab:36
+#: skycultures/tibetan/constellation_names.eng.fab:11
 msgid "Gemini"
 msgstr "Близнецы"
 
@@ -10401,6 +10404,7 @@ msgstr "Близнецы"
 #: skycultures/modern_hlad/constellation_names.eng.fab:13
 #: skycultures/modern_st/constellation_names.eng.fab:12
 #: skycultures/modern_sternenkarten/constellation_names.eng.fab:12
+#: skycultures/tibetan/constellation_names.eng.fab:9
 msgid "Cancer"
 msgstr "Рак"
 
@@ -10414,6 +10418,7 @@ msgstr "Рак"
 #: skycultures/modern_hlad/constellation_names.eng.fab:50
 #: skycultures/modern_st/constellation_names.eng.fab:47
 #: skycultures/modern_sternenkarten/constellation_names.eng.fab:49
+#: skycultures/tibetan/constellation_names.eng.fab:12
 msgid "Leo"
 msgstr "Лев"
 
@@ -10427,6 +10432,7 @@ msgstr "Лев"
 #: skycultures/modern_hlad/constellation_names.eng.fab:88
 #: skycultures/modern_st/constellation_names.eng.fab:86
 #: skycultures/modern_sternenkarten/constellation_names.eng.fab:87
+#: skycultures/tibetan/constellation_names.eng.fab:18
 msgid "Virgo"
 msgstr "Дева"
 
@@ -10441,6 +10447,7 @@ msgstr "Дева"
 #: skycultures/modern_hlad/constellation_names.eng.fab:5
 #: skycultures/modern_st/constellation_names.eng.fab:49
 #: skycultures/modern_sternenkarten/constellation_names.eng.fab:5
+#: skycultures/tibetan/constellation_names.eng.fab:7
 msgid "Libra"
 msgstr "Весы"
 
@@ -10454,6 +10461,7 @@ msgstr "Весы"
 #: skycultures/modern_hlad/constellation_names.eng.fab:77
 #: skycultures/modern_st/constellation_names.eng.fab:73
 #: skycultures/modern_sternenkarten/constellation_names.eng.fab:76
+#: skycultures/tibetan/constellation_names.eng.fab:15
 msgid "Scorpius"
 msgstr "Скорпион"
 
@@ -10466,6 +10474,7 @@ msgstr "Скорпион"
 #: skycultures/modern_hlad/constellation_names.eng.fab:76
 #: skycultures/modern_st/constellation_names.eng.fab:72
 #: skycultures/modern_sternenkarten/constellation_names.eng.fab:75
+#: skycultures/tibetan/constellation_names.eng.fab:14
 msgid "Sagittarius"
 msgstr "Стрелец"
 
@@ -10478,6 +10487,7 @@ msgstr "Стрелец"
 #: skycultures/modern_hlad/constellation_names.eng.fab:14
 #: skycultures/modern_st/constellation_names.eng.fab:16
 #: skycultures/modern_sternenkarten/constellation_names.eng.fab:13
+#: skycultures/tibetan/constellation_names.eng.fab:10
 msgid "Capricornus"
 msgstr "Козерог"
 
@@ -10491,6 +10501,7 @@ msgstr "Козерог"
 #: skycultures/modern_hlad/constellation_names.eng.fab:87
 #: skycultures/modern_st/constellation_names.eng.fab:4
 #: skycultures/modern_sternenkarten/constellation_names.eng.fab:86
+#: skycultures/tibetan/constellation_names.eng.fab:17
 msgid "Aquarius"
 msgstr "Водолей"
 
@@ -10504,6 +10515,7 @@ msgstr "Водолей"
 #: skycultures/modern_hlad/constellation_names.eng.fab:71
 #: skycultures/modern_st/constellation_names.eng.fab:66
 #: skycultures/modern_sternenkarten/constellation_names.eng.fab:70
+#: skycultures/tibetan/constellation_names.eng.fab:13
 msgid "Pisces"
 msgstr "Рыбы"
 
@@ -15050,31 +15062,32 @@ msgstr "Звезда в животе, под боком"
 #: skycultures/arabic_al-sufi/star_names.fab:2230
 #: skycultures/greek_almagest/star_names.fab:1965
 msgid "The star on the thigh"
-msgstr ""
+msgstr "Звезда на бедре"
 
 #: skycultures/arabic_al-sufi/star_names.fab:2231
 msgid ""
 "The northernmost of the two stars near the place where the thigh joins [the "
 "body]"
 msgstr ""
+"Самая северная из двух звезд рядом с местом, где бедро соединяется [с телом]"
 
 #: skycultures/arabic_al-sufi/star_names.fab:2233
 #: skycultures/greek_almagest/star_names.fab:1971
 msgid "The star on the end of the rump"
-msgstr ""
+msgstr "Звезда в конце крупа"
 
 #: skycultures/arabic_al-sufi/star_names.fab:2234
 #: skycultures/greek_almagest/star_names.fab:1973
 msgid "The southernmost of the 3 stars in the end of the tail"
-msgstr ""
+msgstr "Самая южная из трёх звезд в конце хвоста"
 
 #: skycultures/arabic_al-sufi/star_names.fab:2237
 msgid "The southernmost of the two stars in the neck"
-msgstr ""
+msgstr "Самая южная из двух звезд в шее"
 
 #: skycultures/arabic_al-sufi/star_names.fab:2239
 msgid "The more advanced of the two stars in the snout"
-msgstr ""
+msgstr "Более близкая из двух звезд в морде"
 
 #: skycultures/arabic_al-sufi/star_names.fab:2241
 msgid "The southernmost of the two stars in the front leg, on the hand"
@@ -15110,12 +15123,12 @@ msgstr ""
 #: skycultures/greek_almagest/star_names.fab:2005
 msgid ""
 "The most advanced of the stars on the southern rim, outside [the crown]"
-msgstr ""
+msgstr "Самая близкая из звезд южного края, за пределами [короны]"
 
 #: skycultures/arabic_al-sufi/star_names.fab:2277
 #: skycultures/greek_almagest/star_names.fab:2007
 msgid "The star to the rear of this on the crown"
-msgstr ""
+msgstr "Звезда позади этой на короне"
 
 #: skycultures/arabic_al-sufi/star_names.fab:2280
 #: skycultures/greek_almagest/star_names.fab:2013
@@ -15136,21 +15149,21 @@ msgstr "Звезда к северу от этой"
 #: skycultures/arabic_al-sufi/star_names.fab:2283
 #: skycultures/greek_almagest/star_names.fab:2019
 msgid "The one to the north again of this"
-msgstr ""
+msgstr "Та, что снова к северу от этой"
 
 #: skycultures/arabic_al-sufi/star_names.fab:2284
 msgid ""
 "The rearmost of the two stars after this, in advance, in the northern rim"
-msgstr ""
+msgstr "Самая дальняя из двух звезд после этой впереди, на северном краю. "
 
 #: skycultures/arabic_al-sufi/star_names.fab:2285
 msgid "The more advanced of these two faint stars"
-msgstr ""
+msgstr "Более близкая из этих двух слабых звезд"
 
 #: skycultures/arabic_al-sufi/star_names.fab:2286
 #: skycultures/greek_almagest/star_names.fab:2025
 msgid "The star quite some distance in advance of this"
-msgstr ""
+msgstr "Звезда довольно далеко перед этой"
 
 #: skycultures/arabic_al-sufi/star_names.fab:2288
 #: skycultures/greek_almagest/star_names.fab:2029
@@ -15220,7 +15233,7 @@ msgstr "Кончик носа льва"
 #. TRANSLATORS: Aba Bzay is a proper name
 #: skycultures/arabic_arabian_peninsula/constellation_names.eng.fab:2
 msgid "The Two Guards - The Two Refugees - The Family Of Aba Bzay"
-msgstr ""
+msgstr "Два стражника - Два беженца - Семья Аба Бзая"
 
 #: skycultures/arabic_arabian_peninsula/constellation_names.eng.fab:3
 msgid "Al-Naayem - The Seven - Daughters Of Na'sh"
@@ -15426,11 +15439,11 @@ msgstr "Два беженца 2"
 
 #: skycultures/arabic_arabian_peninsula/star_names.fab:6
 msgid "Al aba Bzay 1"
-msgstr ""
+msgstr "Аль аба Бзай 1"
 
 #: skycultures/arabic_arabian_peninsula/star_names.fab:7
 msgid "Al aba bzay 2"
-msgstr ""
+msgstr "Аль аба Бзай 2"
 
 #. TRANSLATORS: Al-Khilj is a proper name
 #: skycultures/arabic_arabian_peninsula/star_names.fab:9
@@ -15935,12 +15948,12 @@ msgstr "Лев"
 #: skycultures/arabic_indigenous/constellation_names.eng.fab:75
 #: skycultures/arabic_lunar_mansions/constellation_names.eng.fab:23
 msgid "The Retracted Arm"
-msgstr ""
+msgstr "Втянутая рука"
 
 #: skycultures/arabic_indigenous/constellation_names.eng.fab:76
 #: skycultures/arabic_lunar_mansions/constellation_names.eng.fab:24
 msgid "The Extended Arm"
-msgstr ""
+msgstr "Вытянутая рука"
 
 #: skycultures/arabic_indigenous/constellation_names.eng.fab:84
 msgid "The Tassel"
@@ -66950,6 +66963,168 @@ msgstr "Золотой кол"
 #: skycultures/russian_siberian/planet_names.fab:2
 msgid "Night Star"
 msgstr "Ночная звезда"
+
+#. TRANSLATORS: "Tibetan Lunar Mansion Zero"
+#: skycultures/tibetan/asterism_names.eng.fab:3
+msgctxt "asterism"
+msgid "LM00 Takar"
+msgstr "LM00 Такар"
+
+#. TRANSLATORS: "Tibetan Lunar Mansion 1"
+#: skycultures/tibetan/asterism_names.eng.fab:5
+msgctxt "asterism"
+msgid "LM01 Dranye"
+msgstr "LM01 Дранё"
+
+#. TRANSLATORS: "Tibetan Lunar Mansion 2"
+#: skycultures/tibetan/asterism_names.eng.fab:7
+msgctxt "asterism"
+msgid "LM02 Mindruk"
+msgstr "LM02 Миндрук"
+
+#. TRANSLATORS: "Tibetan Lunar Mansion 3"
+#: skycultures/tibetan/asterism_names.eng.fab:9
+msgctxt "asterism"
+msgid "LM03 Narma"
+msgstr "LM03 Нарма"
+
+#. TRANSLATORS: "Tibetan Lunar Mansion 4"
+#: skycultures/tibetan/asterism_names.eng.fab:11
+msgctxt "asterism"
+msgid "LM04 Go"
+msgstr "LM04 Го"
+
+#. TRANSLATORS: "Tibetan Lunar Mansion 5"
+#: skycultures/tibetan/asterism_names.eng.fab:13
+msgctxt "asterism"
+msgid "LM05 Lak"
+msgstr "LM05 Лак"
+
+#. TRANSLATORS: "Tibetan Lunar Mansion 6"
+#: skycultures/tibetan/asterism_names.eng.fab:15
+msgctxt "asterism"
+msgid "LM06 Nabso"
+msgstr "LM06 Набсо"
+
+#. TRANSLATORS: "Tibetan Lunar Mansion 7"
+#: skycultures/tibetan/asterism_names.eng.fab:17
+msgctxt "asterism"
+msgid "LM07 Gyal"
+msgstr "LM07 Гял"
+
+#. TRANSLATORS: "Tibetan Lunar Mansion 8"
+#: skycultures/tibetan/asterism_names.eng.fab:19
+msgctxt "asterism"
+msgid "LM08 Kak"
+msgstr "LM08 Как"
+
+#. TRANSLATORS: "Tibetan Lunar Mansion 9"
+#: skycultures/tibetan/asterism_names.eng.fab:21
+msgctxt "asterism"
+msgid "LM09 Chu"
+msgstr "LM09 Чу"
+
+#. TRANSLATORS: "Tibetan Lunar Mansion 10"
+#: skycultures/tibetan/asterism_names.eng.fab:23
+msgctxt "asterism"
+msgid "LM10 Dre"
+msgstr "LM10 Дре"
+
+#. TRANSLATORS: "Tibetan Lunar Mansion 11"
+#: skycultures/tibetan/asterism_names.eng.fab:25
+msgctxt "asterism"
+msgid "LM11 Wo"
+msgstr "LM11 Во"
+
+#. TRANSLATORS: "Tibetan Lunar Mansion 12"
+#: skycultures/tibetan/asterism_names.eng.fab:27
+msgctxt "asterism"
+msgid "LM12 Mezhi"
+msgstr "LM12 Межи"
+
+#. TRANSLATORS: "Tibetan Lunar Mansion 13"
+#: skycultures/tibetan/asterism_names.eng.fab:29
+msgctxt "asterism"
+msgid "LM13 Nakpa"
+msgstr "LM13 Накпа"
+
+#. TRANSLATORS: "Tibetan Lunar Mansion 14"
+#: skycultures/tibetan/asterism_names.eng.fab:31
+msgctxt "asterism"
+msgid "LM14 Sari"
+msgstr "LM14 Сари"
+
+#. TRANSLATORS: "Tibetan Lunar Mansion 15"
+#: skycultures/tibetan/asterism_names.eng.fab:33
+msgctxt "asterism"
+msgid "LM15 Saga"
+msgstr "LM15 Сага"
+
+#. TRANSLATORS: "Tibetan Lunar Mansion 16"
+#: skycultures/tibetan/asterism_names.eng.fab:35
+msgctxt "asterism"
+msgid "LM16 Lhatsam"
+msgstr "LM16 Лхатсам"
+
+#. TRANSLATORS: "Tibetan Lunar Mansion 17"
+#: skycultures/tibetan/asterism_names.eng.fab:37
+msgctxt "asterism"
+msgid "LM17 Nrön"
+msgstr "LM17 Нрён"
+
+#. TRANSLATORS: "Tibetan Lunar Mansion 18"
+#: skycultures/tibetan/asterism_names.eng.fab:39
+msgctxt "asterism"
+msgid "LM18 Nup"
+msgstr "LM18 Нуп"
+
+#. TRANSLATORS: "Tibetan Lunar Mansion 19"
+#: skycultures/tibetan/asterism_names.eng.fab:41
+msgctxt "asterism"
+msgid "LM19 Chutö"
+msgstr "LM19 Чутё"
+
+#. TRANSLATORS: "Tibetan Lunar Mansion 20"
+#: skycultures/tibetan/asterism_names.eng.fab:43
+msgctxt "asterism"
+msgid "LM20 Chume"
+msgstr "LM20 Чуме"
+
+#. TRANSLATORS: "Tibetan Lunar Mansion 21"
+#: skycultures/tibetan/asterism_names.eng.fab:45
+msgctxt "asterism"
+msgid "LM21 Drozhin"
+msgstr "LM21 Дрожин"
+
+#. TRANSLATORS: "Tibetan Lunar Mansion 22"
+#: skycultures/tibetan/asterism_names.eng.fab:47
+msgctxt "asterism"
+msgid "LM22 Möndre"
+msgstr "LM22 Мёндре"
+
+#. TRANSLATORS: "Tibetan Lunar Mansion 23"
+#: skycultures/tibetan/asterism_names.eng.fab:49
+msgctxt "asterism"
+msgid "LM23 (Möndru)"
+msgstr "LM23 (Мёндру)"
+
+#. TRANSLATORS: "Tibetan Lunar Mansion 24"
+#: skycultures/tibetan/asterism_names.eng.fab:51
+msgctxt "asterism"
+msgid "LM24 Trumtö"
+msgstr "LM24 Трумтё"
+
+#. TRANSLATORS: "Tibetan Lunar Mansion 25"
+#: skycultures/tibetan/asterism_names.eng.fab:53
+msgctxt "asterism"
+msgid "LM25 Trume"
+msgstr "LM25 Труме"
+
+#. TRANSLATORS: "Tibetan Lunar Mansion 26"
+#: skycultures/tibetan/asterism_names.eng.fab:55
+msgctxt "asterism"
+msgid "LM26 Namdru"
+msgstr "LM26 Намдру"
 
 #: skycultures/tukano/constellation_names.eng.fab:1
 msgid "Fer-de-lance (snake)"
