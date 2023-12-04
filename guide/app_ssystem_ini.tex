@@ -602,8 +602,8 @@ flexible production of highly accurate ephemerides for solar system objects (Lat
 A comet discovered in early 2023, C/2023 A3 (Tsuchinshan-ATLAS), may become bright in October 2024. 
 Let's find out its orbital elements for the most interesting time! 
 
-Use the Horizons web interface. You're going to look up the body you are interested in and copy down its orbital elements. 
-The Horizons web interface will display something like this. 
+We use the Horizons web interface to look up the body we are interested in and find its orbital elements. 
+The Horizons web interface will display something like this:\vspace{\baselineskip}
 
 \fbox{\begin{tabular}{rcl}
   1&               & Ephemeris Type: \button{Osculating Orbital Elements}\\
@@ -612,7 +612,7 @@ The Horizons web interface will display something like this.
   4& \button{Edit} & Time Specification: Start=2024-07-03 TDB, Stop=2024-12-02, Step=5 (days)\\
   5& \button{Edit} & Table Settings: \emph{custom}\\
   \multicolumn{3}{l}{\button{Generate Ephemeris}}
-\end{tabular}}
+\end{tabular}}\vspace{\baselineskip}
 
 \begin{enumerate}
 \item Ephemeris Type \emph{must} be set to \button{Osculating Orbital Elements}.
@@ -622,11 +622,11 @@ The Horizons web interface will display something like this.
 \item Table Settings: We must \button{Edit} and select Output units: \button{au and days} to create data compatible with the appropriate fields in \file{ssystem\_minor.ini}
 \end{enumerate}
 
-The result begins with listing osculating elements for a certain epoch in the past and its own initial conditions and settings. 
+\noindent The result begins with listing osculating elements for a certain epoch in the past and its own initial conditions and settings. 
 Horizons then applies numerical integration and simulates the movement and gravitational interaction between all its solar system objects, icluding our comet. 
 Then, for each requested time, orbital elements are listed. Here you could see the slight changes these elements undergo over weeks. 
 However, in Stellarium, we can only use one particular element set and show the comet's movement under the assumption that these elements do not change. 
-When we have read it will be brightest in October, let's take this section. The first number is the date where thjese elements are valid, 
+When we have read it will be brightest in October, let's take this section. The first number is the date (JDE) where these elements are valid, 
 i.\,e., the element epoch.
 
 \begin{configfile}[\scriptsize]
@@ -657,7 +657,7 @@ Below you also find the keys:
 \end{configfile} 
  
 \noindent Now we can add an entry into our \file{ssystems\_minor.ini}. 
-You can leave the exponential writing style (trailing ``E+02'' etc.) 
+We can leave the exponential writing style (trailing ``E+02'' etc.) 
 or convert to the more human-readable as shown here. 
 Symbols \texttt{M1} and \texttt{k1} are given only in the top list of initial elements. 
 The symbols in brackets refer to the above table, do not enter those!
@@ -681,6 +681,33 @@ discovery                      = 2023-01-09 [Not given by JPL Horizons]
 ref                            = JPL Horizons: JPL#25
 \end{configfile}
 
+\noindent JPL Horizons can also deliver osculating elements for a number of interplanetary spacecraft. 
+To visualize them, you should assign \texttt{type=interstellar object} 
+(to make the orbit line stand out a bit more than with \texttt{asteroid}) 
+and invent your own magnitude, e.g., \texttt{absolute\_magnitude=0} or even brighter, to make them visible. 
+Obviously, the shown trajectory is valid only around the given epoch and changes significantly whenever a spacecraft 
+encounters a larger solar system object or when operators fire its engines. An Example for the Voyager~2 spacecraft may look like:
+
+\begin{configfile}[\scriptsize]
+[voyager2]
+name                           = Voyager 2 (after Neptune)
+iau_designation                = Voyager 2
+type                           = interstellar object
+orbit_ArgOfPericenter          = 1.300872388863244E+02
+orbit_AscendingNode            = 1.017840511971174E+02
+orbit_Eccentricity             = 6.294338891686261E+00
+orbit_Epoch                    = 2460554.5               [Sept 1, 2024]
+orbit_Inclination              = 7.895342038400214E+01
+orbit_PericenterDistance       = 2.130818195968974E+01
+orbit_TimeAtPericenter         = 2445446.868665616959
+orbit_good                     = 12797
+ref                            = JPL Horizons 
+absolute_magnitude             = 0
+slope_parameter                = 4
+\end{configfile}
+
+\noindent The displayed trajectory should start at Voyager~2's encounter with Neptune on August 18, 1989 (JD 2447757.5). 
+The value of \texttt{orbit\_good=} ($2460554.5-2447757.5 = $) \texttt{12797} fulfills this idea. 
 
 
 %%% Local Variables: 
