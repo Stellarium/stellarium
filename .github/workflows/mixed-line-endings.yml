@@ -1,0 +1,21 @@
+#
+# See https://github.com/marketplace/actions/check-mixed-line-endings
+#
+name: "Maintenance"
+on:
+  push:
+  pull_request_target:
+    types: [synchronize]
+
+jobs:
+  main:
+    name: "Check mixed line endings"
+    runs-on: ubuntu-latest
+    if: "!contains(github.actor, 'transifex')"
+    steps:
+      - name: Checkout repository contents
+        uses: actions/checkout@v2
+
+      - name: Check mixed line endings (CRLF and LF)
+        uses: ymwymw/check-mixed-line-endings@v2
+            
