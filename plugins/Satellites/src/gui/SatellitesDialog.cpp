@@ -769,16 +769,18 @@ void SatellitesDialog::populateAboutPage()
 	QString jsonFileName("<tt>satellites.json</tt>");
 	QString oldJsonFileName("<tt>satellites.json.old</tt>");
 	QString html = "<html><head></head><body>";
-	html += "<h2>" + q_("Stellarium Satellites Plugin") + "</h2><table width=\"90%\">";
+	html += "<h2>" + q_("Stellarium Satellites Plugin") + "</h2><table width =\"90%\">";
 	html += "<tr width=\"30%\"><td><strong>" + q_("Version") + "</strong></td><td>" + SATELLITES_PLUGIN_VERSION + "</td></td>";
 	html += "<tr><td><strong>" + q_("License") + ":</strong></td><td>" + SATELLITES_PLUGIN_LICENSE + "</td></tr>";
 	html += "<tr><td rowspan=\"2\"><strong>" + q_("Authors") + "</strong></td><td>Matthew Gates &lt;matthewg42@gmail.com&gt;</td></td>";
 	html += "<tr><td>Jose Luis Canales &lt;jlcanales.gasco@gmail.com&gt;</td></tr>";
-	html += "<tr><td rowspan=\"5\"><strong>" + q_("Contributors") + "</strong></td><td>Bogdan Marinov &lt;bogdan.marinov84@gmail.com&gt;</td></tr>";
+	html += "<tr><td rowspan=\"6\"><strong>" + q_("Contributors") + "</strong></td><td>Bogdan Marinov &lt;bogdan.marinov84@gmail.com&gt;</td></tr>";
 	html += "<tr><td>Nick Fedoseev &lt;nick.ut2uz@gmail.com&gt;</td></tr>";
 	html += "<tr><td>Alexander Wolf</td></tr>";
 	html += "<tr><td>Alexander Duytschaever</td></tr>";
-	html += "<tr><td>Georg Zotti</td></tr></table>";
+	html += "<tr><td>Georg Zotti</td></tr>";
+	html += "<tr><td>Andy Kirkham &lt;kirkham.andy@gmail.com&gt;</td></tr>";
+	html += "</table>";
 
 	html += "<p>" + q_("The Satellites plugin predicts the positions of artificial satellites in Earth orbit.") + "</p>";
 
@@ -1258,8 +1260,9 @@ void SatellitesDialog::addSatellites(const TleDataList& newSatellites)
 	selectionModel->clearSelection();
 	QModelIndex firstSelectedIndex;
 	QSet<QString> newIds;
-	for (const auto& sat : newSatellites)
-		newIds.insert(sat.id);
+	for (const auto& sat : newSatellites) {
+		newIds.insert(sat->omm.getObjectId());
+	}
 	for (int row = 0; row < ui->satellitesList->model()->rowCount(); row++)
 	{
 		QModelIndex index = ui->satellitesList->model()->index(row, 0);

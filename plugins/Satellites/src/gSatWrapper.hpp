@@ -33,6 +33,7 @@
 
 #include "VecMath.hpp"
 
+#include "OMM.hpp"
 #include "gsatellite/gSatTEME.hpp"
 #include "gsatellite/gTime.hpp"
 
@@ -52,6 +53,8 @@ public:
 		ANNULAR		= 5,
 		BELOW_HORIZON   = 6
 	};
+
+	gSatWrapper(const OMM& omm);
 	gSatWrapper(QString designation, QString tle1,QString tle2);
 	~gSatWrapper();
 

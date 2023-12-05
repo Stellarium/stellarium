@@ -24,12 +24,15 @@
 #include "Satellite.hpp"
 #include "StelFader.hpp"
 #include "StelLocation.hpp"
+#include "OMM.hpp"
+#include "OMMDownload.hpp"
 
 #include <QDateTime>
 #include <QFile>
 #include <QDir>
 #include <QUrl>
 #include <QVariantMap>
+#include <QSharedPointer>
 
 class StelButton;
 class Planet;
@@ -89,12 +92,8 @@ file.
 //! @ingroup satellites
 struct TleData
 {
-	//! NORAD catalog number, as extracted from the TLE set.
-	QString id;
-	//! Human readable name, as extracted from the TLE title line.
-	QString name;
-	QString first;
-	QString second;
+	//! OMM satellite details.
+	OMM omm;
 	int status;
 	//! Flag indicating whether this satellite should be added.
 	//! See Satellites::autoAddEnabled.
@@ -103,10 +102,12 @@ struct TleData
 	QString sourceURL;
 };
 
+typedef QSharedPointer<TleData> TleDataShPtr;
+
 //! @ingroup satellites
-typedef QList<TleData> TleDataList;
+typedef QList<TleDataShPtr> TleDataList;
 //! @ingroup satellites
-typedef QHash<QString, TleData> TleDataHash ;
+typedef QHash<QString, TleDataShPtr> TleDataHash ;
 
 //! TLE update source, used only internally for now.
 //! @ingroup satellites
@@ -882,7 +883,7 @@ private:
 	//! @name Updater module
 	//@{
 	UpdateState updateState;
-	QNetworkAccessManager* downloadMgr;
+	OMMDownload ommDownload;
 	//! List of TLE source lists for automatic updates.
 	//! Use getTleSources() to get the value, setTleSources() to set it (and
 	//! save it to configuration).

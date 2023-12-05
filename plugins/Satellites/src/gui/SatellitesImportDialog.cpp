@@ -360,7 +360,7 @@ void SatellitesImportDialog::populateList()
 	sourceFiles.clear();
 	
 	QStringList existingIDs = satMgr->listAllIds();
-	QHashIterator<QString,TleData> i(newSatellites);
+	QHashIterator<QString,TleDataShPtr> i(newSatellites);
 	while (i.hasNext())
 	{
 		i.next();
@@ -369,12 +369,12 @@ void SatellitesImportDialog::populateList()
 		if (existingIDs.contains(i.key()))
 			continue;
 		
-		TleData tle = i.value();		
-		QStandardItem* newItem = new QStandardItem(QString("%1 (NORAD %2)").arg(tle.name, tle.id)); // Available to search via NORAD number
+		TleDataShPtr tle = i.value();
+		QStandardItem* newItem = new QStandardItem(QString("%1 (NORAD %2)").arg(tle->omm.getObjectName(), tle->omm.getObjectId())); // Available to search via NORAD number
 		newItem->setFlags(Qt::ItemIsEnabled | Qt::ItemIsUserCheckable);
 		newItem->setCheckState(Qt::Unchecked);
-		newItem->setData(tle.id, Qt::UserRole);		
-		newItem->setToolTip(QString(q_("Catalog Number: %1")).arg(tle.id));
+		newItem->setData(tle->omm.getObjectId(), Qt::UserRole);		
+		newItem->setToolTip(QString(q_("Catalog Number: %1")).arg(tle->omm.getObjectId()));
 		newSatellitesModel->appendRow(newItem);
 	}
 	existingIDs.clear();

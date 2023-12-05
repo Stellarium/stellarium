@@ -41,7 +41,6 @@
 #include <math.h>
 
 #include "mathUtils.hpp"
-#include "sgp4io.h"
 
 #define CONSTANTS_SET wgs84
 #define TYPERUN_SET   'c'
@@ -56,30 +55,58 @@
 gSatTEME::gSatTEME(const char *pstrName, char *pstrTleLine1, char *pstrTleLine2)
 {
 	double startmfe, stopmfe, deltamin;
-
 	m_SatName = pstrName;
-
-	//set gravitational constants
-	getgravconst(CONSTANTS_SET, tumin, mu, radiusearthkm, xke, j2, j3, j4, j3oj2);
-
-	//Parsing TLE_Files and sat variables setting
-	twoline2rv(pstrTleLine1, pstrTleLine2, TYPERUN_SET, TYPEINPUT_SET, OPSMODE_SET, CONSTANTS_SET,
+	SGP4Funcs::twoline2rv(pstrTleLine1, pstrTleLine2, TYPERUN_SET, TYPEINPUT_SET, OPSMODE_SET, CONSTANTS_SET,
 	           startmfe, stopmfe, deltamin, satrec);
+	SGP4Funcs::sgp4(satrec, 0.0, m_Position.v, m_Vel.v);
+}
 
-	// call the propagator to get the initial state vector value
-	sgp4(CONSTANTS_SET, satrec,  0.0, m_Position.v,  m_Vel.v);
+gSatTEME::gSatTEME(const OMM& omm)
+{
+	// No use is made of the satnum within the SGP4 propergator
+	// so we just fake it here.
+	char objectId[] = "ABCDE";
+	
+	// The newer interface to sgp4() without using a TLE but
+	// instead using direct element placement within the elsetrec
+	// is done in this constructor (because XML and JSON do not
+	// have two lines :)
+	// Because we do not call twoline2rv() we must convert the 
+	// SGP4 parameters when calling sgp4init() to ensure the 
+	// terms are in their correct base units, (radians, etc).
+	// The comments to the right are the parameter names for
+	// the sgp4init() function call.
+	SGP4Funcs::sgp4init(wgs84, 'c',                         // sgp4init(args) below
+		objectId,                                           // satn[5]
+		omm.getEpochJD() - 2433281.5,                       // epoch
+		omm.getBstar(),                                     // xbstar
+		omm.getMeanMotionDot() / (XPDOTP * 1440.0),         // xndot
+		omm.getMeanMotionDDot() / (XPDOTP * 1440.0 * 1440), // xnndot
+		omm.getEccentricity(),                              // xecco
+		omm.getArgumentOfPerigee() * KDEG2RAD,              // xargpo
+		omm.getInclination() * KDEG2RAD,                    // xinclo
+		omm.getMeanAnomoly() * KDEG2RAD,                    // xmo
+		omm.getMeanMotion() / XPDOTP,                       // xno_kozai
+		omm.getAscendingNode() * KDEG2RAD,                  // xnodeo
+		satrec);
+
+	// Despite passing EpochJD to the sgp4init() function 
+	// is does not setup the following like twoline2rv() does.
+	satrec.jdsatepoch  = omm.getEpochJDW();
+	satrec.jdsatepochF = omm.getEpochJDF();
+
+	// Call the propagator to get the initial state vector value.
+	SGP4Funcs::sgp4(satrec, 0.0, m_Position.v, m_Vel.v);
+	m_SubPoint = computeSubPoint(omm.getEpochJD());
 }
 
 void gSatTEME::setEpoch(gTime ai_time)
 {
-	gTime     kepEpoch(satrec.jdsatepoch);
+	gTime kepEpoch(satrec.jdsatepoch + satrec.jdsatepochF);
 	gTimeSpan tSince = ai_time - kepEpoch;
-
 	double dtsince = tSince.getDblSeconds()/KSEC_PER_MIN;
-	// call the propagator to get the initial state vector value
-	sgp4(CONSTANTS_SET, satrec,  dtsince, m_Position.v,  m_Vel.v);
-
-	m_SubPoint    = computeSubPoint( ai_time);
+	SGP4Funcs::sgp4(satrec, dtsince, m_Position.v, m_Vel.v);
+	m_SubPoint = computeSubPoint(ai_time);
 }
 
 void gSatTEME::setMinSinceKepEpoch(double ai_minSinceKepEpoch)
@@ -88,9 +115,8 @@ void gSatTEME::setMinSinceKepEpoch(double ai_minSinceKepEpoch)
 	gTime     Epoch(satrec.jdsatepoch);
 	Epoch += tSince;
 	// call the propagator to get the initial state vector value
-	sgp4(CONSTANTS_SET, satrec,  ai_minSinceKepEpoch, m_Position.v,  m_Vel.v);
-
-	m_SubPoint    = computeSubPoint( Epoch);
+	SGP4Funcs::sgp4(satrec, ai_minSinceKepEpoch, m_Position.v, m_Vel.v);
+	m_SubPoint = computeSubPoint( Epoch);
 }
 
 Vec3d gSatTEME::computeSubPoint(gTime ai_Time)

@@ -34,6 +34,7 @@
 #include "StelTranslator.hpp"
 #include "gSatWrapper.hpp"
 #include "SolarSystem.hpp"
+#include "OMM.hpp"
 
 class StelPainter;
 class StelLocation;
@@ -400,6 +401,7 @@ private:
 	Vec3f    orbitColor;
 	double    lastEpochCompForOrbit; //measured in Julian Days
 	double    epochTime;  //measured in Julian Days
+	OMM       m_omm; 
 	QList<Vec4d> orbitPoints; //orbit points represented by ElAzPos vectors and altitudes
 	QList<gSatWrapper::Visibility> visibilityPoints; //orbit visibility points
 	QMap<gSatWrapper::Visibility, QString> visibilityDescription;
