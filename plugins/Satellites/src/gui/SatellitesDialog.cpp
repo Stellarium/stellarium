@@ -812,6 +812,33 @@ void SatellitesDialog::populateAboutPage()
 	html += "</ul></p>";
 
 	// TRANSLATORS: Title of a section in the About tab of the Satellites window
+	html += "<h3>" + q_("Communication links") + "</h3>";
+	html += "<p>" + q_("Many satellites having transmitters (transceivers and transponders) with many modes for telemetry and data packets. You should to know which demodulator you need to decode telemetry and packets:");
+	html += "<ul>";
+	html += "<li>APT &mdash; " + q_("Automatic Picture Transmission") + "</li>";
+	html += "<li>LRPT &mdash; " + q_("Low Resolution Picture Transmission") + "</li>";
+	html += "<li>HRPT &mdash; " + q_("High Resolution Picture Transmission") + "</li>";
+	html += "<li>AHRPT &mdash; " + q_("Advanced High Resolution Picture Transmission") + "</li>";
+	html += "<li>AX.25 &mdash; " + q_("Amateur Radio adaptation of X.25 packet protocol") + "</li>";
+	html += "<li>CW &mdash; " + q_("Continuous Wave, Morse Code") + "</li>";
+	html += "<li>AM &mdash; " + q_("Amplitude Modulation") + "</li>";
+	html += "<li>FM &mdash; " + q_("Frequency Modulation") + "</li>";
+	html += "<li>DUV &mdash; " + q_("Data Under Voice") + "</li>";
+	html += "<li>FSK &mdash; " + q_("Frequency Shift Keying") + "</li>";
+	html += "<li>GFSK &mdash; " + q_("Gaussian Frequency Shift Keying") + "</li>";
+	html += "<li>GMSK &mdash; " + q_("Gaussian Minimum Shift Keying") + "</li>";
+	html += "<li>AFSK &mdash; " + q_("Audio Frequency Shift Keying") + "</li>";
+	html += "<li>ASK &mdash; " + q_("Amplitude-shift Keying") + "</li>";
+	html += "<li>PSK &mdash; " + q_("Phase-shift Keying") + "</li>";
+	html += "<li>BPSK &mdash; " + q_("Binary Phase-shift Keying") + "</li>";
+	html += "<li>QPSK &mdash; " + q_("Quadrature Phase-shift Keying") + "</li>";
+	html += "<li>OQPSK &mdash; " + q_("Offset Quadrature Phase-shift Keying") + "</li>";
+	html += "<li>DPSK &mdash; " + q_("Differential Phase-shift Keying") + "</li>";
+	html += "<li>BOC &mdash; " + q_("Binary Offset Carrier") + "</li>";
+	html += "<li>MBOC &mdash; " + q_("Multiplexed Binary Offset Carrier") + "</li>";
+	html += "</ul></p>";
+
+	// TRANSLATORS: Title of a section in the About tab of the Satellites window
 	html += "<h3>" + q_("TLE data updates") + "</h3>";
 	html += "<p>" + q_("The Satellites plugin can automatically download TLE data from Internet sources, and by default the plugin will do this if the existing data is more than 72 hours old. ");
 	html += "</p><p>" + QString(q_("If you disable Internet updates, you may update from a file on your computer.  This file must be in the same format as the Celestrak updates (see %1 for an example).").arg("<a href=\"https://celestrak.org/NORAD/elements/visual.txt\">visual.txt</a>"));
@@ -824,11 +851,11 @@ void SatellitesDialog::populateAboutPage()
 
 	html += "<h3>" + q_("Technical notes") + "</h3>";
 	html += "<p>" + q_("Positions are calculated using the SGP4 & SDP4 methods, using NORAD TLE data as the input.") + " ";
-	html +=               q_("The orbital calculation code is written by Jose Luis Canales according to the revised Spacetrack Report #3 (including Spacetrack Report #6)") + " <a href=\"https://celestrak.org/publications/AIAA/2006-6753\">[*]</a>. ";
-	html +=               q_("To calculate an approximate visual magnitude of satellites we use data from Mike McCants' database (with permissions) of the radar cross-section (RCS) and standard magnitudes.") + " ";
-	html +=               q_("Formula to calculate an approximate visual magnitude of satellites from the standard magnitude may be found at Mike McCants website") + " <a href=\"https://mmccants.org/tles/mccdesc.html\">[**]</a>. ";
-	html +=               q_("We use a spherical shape of satellite to calculate an approximate visual magnitude from RCS values.") + " ";
-	html +=               q_("For modelling Starlink magnitudes we use Anthony Mallama's formula") + " <a href=\"http://www.satobs.org/seesat/Aug-2020/0079.html\">[***]</a>.</p>";
+	html +=         q_("The orbital calculation code is written by Jose Luis Canales according to the revised Spacetrack Report #3 (including Spacetrack Report #6)") + " <a href=\"https://celestrak.org/publications/AIAA/2006-6753\">[*]</a>. ";
+	html +=         q_("To calculate an approximate visual magnitude of satellites we use data from Mike McCants' database (with permissions) of the radar cross-section (RCS) and standard magnitudes.") + " ";
+	html +=         q_("Formula to calculate an approximate visual magnitude of satellites from the standard magnitude may be found at Mike McCants website") + " <a href=\"https://mmccants.org/tles/mccdesc.html\">[**]</a>. ";
+	html +=         q_("We use a spherical shape of satellite to calculate an approximate visual magnitude from RCS values.") + " ";
+	html +=         q_("For modelling Starlink magnitudes we use Anthony Mallama's formula") + " <a href=\"http://www.satobs.org/seesat/Aug-2020/0079.html\">[***]</a>.</p>";
 
 	html += StelApp::getInstance().getModuleMgr().getStandardSupportLinksInfo("Satellites plugin");
 	html += "</body></html>";

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2023-12-04 09:58+0700\n"
+"POT-Creation-Date: 2023-12-05 17:46+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>, 2023\n"
 "Language-Team: Ukrainian (https://app.transifex.com/stellarium/teams/80998/uk/)\n"
@@ -210,7 +210,7 @@ msgstr "Головна вертикаль"
 #: src/gui/AstroCalcDialog.cpp:2097 src/gui/AstroCalcDialog.cpp:2360
 #: src/gui/AstroCalcChart.cpp:80 src/gui/AstroCalcChart.cpp:418
 #: src/ui_viewDialog.h:4184 plugins/Satellites/src/Satellite.cpp:362
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1495
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1522
 msgid "Altitude"
 msgstr "Висота"
 
@@ -834,7 +834,7 @@ msgstr "Автор"
 #. TRANSLATORS: Unit of measure for distance - meter
 #: src/core/modules/LandscapeMgr.cpp:1380 src/gui/StelGuiItems.cpp:866
 #: plugins/Satellites/src/Satellite.cpp:433
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1141
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1168
 #: plugins/Satellites/src/gui/SatellitesFilterDialog.cpp:134
 msgctxt "distance"
 msgid "m"
@@ -935,7 +935,7 @@ msgstr "Діаметр"
 #: src/gui/AstroCalcDialog.cpp:9063 plugins/Satellites/src/Satellites.cpp:2914
 #: plugins/Satellites/src/Satellite.cpp:356
 #: plugins/Satellites/src/Satellite.cpp:399
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1150
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1177
 #: plugins/Satellites/src/gui/SatellitesFilterDialog.cpp:133
 msgctxt "distance"
 msgid "km"
@@ -6286,7 +6286,7 @@ msgstr "Схилення"
 #: src/gui/SearchDialog.cpp:308 src/gui/AstroCalcDialog.cpp:837
 #: src/gui/AstroCalcDialog.cpp:1743 src/gui/AstroCalcDialog.cpp:2361
 #: src/gui/AstroCalcChart.cpp:88 src/gui/AstroCalcChart.cpp:420
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1496
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1523
 msgid "Azimuth"
 msgstr "Азимут"
 
@@ -6395,7 +6395,7 @@ msgid "Valid range years:"
 msgstr "Коректний діапазон років:"
 
 #: src/gui/AstroCalcDialog.cpp:616
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1140
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1167
 #: plugins/Satellites/src/gui/SatellitesFilterDialog.cpp:136
 msgid "Valid range"
 msgstr "Коректний діапазон"
@@ -7577,8 +7577,8 @@ msgstr "Схилення-Час"
 #. TRANSLATORS: hours.
 #: src/gui/AstroCalcDialog.cpp:6326 src/gui/AstroCalcChart.cpp:443
 #: src/gui/AstroCalcChart.cpp:469
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:873
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1148
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:900
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1175
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:173
 #: plugins/Novae/src/gui/NovaeDialog.cpp:168
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:165
@@ -7971,12 +7971,12 @@ msgid "Angular distance between the Moon and celestial object"
 msgstr "Кутова відстань між Місяцем і небесним об'єктом"
 
 #: src/gui/AstroCalcDialog.cpp:9448
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1571
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1598
 msgid "CSV (Comma delimited)"
 msgstr "CSV (із відокремленням комами)"
 
 #: src/gui/AstroCalcDialog.cpp:9451
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1572
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1599
 msgid "Microsoft Excel Open XML Spreadsheet"
 msgstr "Електронна таблиця Microsoft Excel Open XML"
 
@@ -13705,7 +13705,7 @@ msgid "Additional settings for Graphical User Interface"
 msgstr "Додаткові параметри графічного інтерфейсу користувача"
 
 #: src/ui_configurationDialog.h:1697
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1493
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1520
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:443
 msgid "Time"
 msgstr "Час"
@@ -15389,7 +15389,7 @@ msgstr "Товщина ліній ефемерид:"
 #: src/ui_astroCalcExtraEphemerisDialog.h:174
 #: plugins/Oculars/src/Oculars.cpp:1970
 #: plugins/Oculars/src/gui/OcularDialog.cpp:598
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1151
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1178
 #: plugins/Satellites/src/ui_satellitesDialog.h:1249
 msgctxt "pixels"
 msgid "px"
@@ -16399,8 +16399,8 @@ msgstr "С&кинути обертання"
 #: plugins/Oculars/src/gui/OcularDialog.cpp:118
 #: plugins/Oculars/src/gui/OcularDialog.cpp:135
 #: plugins/Oculars/src/gui/OcularDialog.cpp:152
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:911
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:918
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:938
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:945
 msgid "Warning!"
 msgstr "Попередження!"
 
@@ -16537,7 +16537,7 @@ msgstr "Макс. експонування"
 #. TRANSLATORS: duration
 #. TRANSLATORS: seconds.
 #: plugins/Oculars/src/Oculars.cpp:1988
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1145
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1172
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:223
 msgctxt "time"
 msgid "s"
@@ -18711,10 +18711,109 @@ msgstr ""
 
 #. TRANSLATORS: Title of a section in the About tab of the Satellites window
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:815
+msgid "Communication links"
+msgstr "Посилання на обмін даними"
+
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:816
+msgid ""
+"Many satellites having transmitters (transceivers and transponders) with "
+"many modes for telemetry and data packets. You should to know which "
+"demodulator you need to decode telemetry and packets:"
+msgstr ""
+"На багатьох супутниках встановлено ретранслятори (приймачі-передавачі та "
+"автовідповідачі) з багатьма режимами для пакетів телеметрії та даних. Вам "
+"слід знати, який демодулятор потрібен для декодування телеметрії та пакетів:"
+
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:818
+msgid "Automatic Picture Transmission"
+msgstr "Автоматичне передавання зображень"
+
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:819
+msgid "Low Resolution Picture Transmission"
+msgstr "Передавання зображень у низькій роздільності"
+
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:820
+msgid "High Resolution Picture Transmission"
+msgstr "Передавання зображень у високій роздільності"
+
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:821
+msgid "Advanced High Resolution Picture Transmission"
+msgstr "Передавання зображень у надвисокій роздільності"
+
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:822
+msgid "Amateur Radio adaptation of X.25 packet protocol"
+msgstr "Радіоаматорська адаптація протоколу пакетів X.25"
+
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:823
+msgid "Continuous Wave, Morse Code"
+msgstr "Неперервна хвиля, код Морзе"
+
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:824
+msgid "Amplitude Modulation"
+msgstr "Модуляція амплітуди"
+
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:825
+msgid "Frequency Modulation"
+msgstr "Модуляція частоти"
+
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:826
+msgid "Data Under Voice"
+msgstr "Дані у голосовому зв'язку"
+
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:827
+msgid "Frequency Shift Keying"
+msgstr "Сховище ключів зсуву частоти"
+
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:828
+msgid "Gaussian Frequency Shift Keying"
+msgstr "Сховище ключів гаусового зсуву частоти"
+
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:829
+msgid "Gaussian Minimum Shift Keying"
+msgstr "Сховище ключів гаусового мінімального зсуву"
+
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:830
+msgid "Audio Frequency Shift Keying"
+msgstr "Сховище ключів зсуву звукової частоти"
+
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:831
+msgid "Amplitude-shift Keying"
+msgstr "Сховище ключів зсуву амплітуди"
+
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:832
+msgid "Phase-shift Keying"
+msgstr "Сховище ключів зсуву фази"
+
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:833
+msgid "Binary Phase-shift Keying"
+msgstr "Двійкове сховище ключів зсуву фази"
+
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:834
+msgid "Quadrature Phase-shift Keying"
+msgstr "Квадратурне сховище ключів зсуву фази"
+
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:835
+msgid "Offset Quadrature Phase-shift Keying"
+msgstr "Квадратурне зміщене сховище ключів зсуву фази"
+
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:836
+msgid "Differential Phase-shift Keying"
+msgstr "Диференційне сховище ключів зсуву фази"
+
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:837
+msgid "Binary Offset Carrier"
+msgstr "Носій сигналу двійкового зсуву"
+
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:838
+msgid "Multiplexed Binary Offset Carrier"
+msgstr "Мультиплексований носій сигналу двійкового зсуву"
+
+#. TRANSLATORS: Title of a section in the About tab of the Satellites window
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:842
 msgid "TLE data updates"
 msgstr "Оновлення даних TLE"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:816
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:843
 msgid ""
 "The Satellites plugin can automatically download TLE data from Internet "
 "sources, and by default the plugin will do this if the existing data is more"
@@ -18724,7 +18823,7 @@ msgstr ""
 "автоматичному режимі. Типово, додаток отримує ці дані, якщо поточні дані є "
 "застарілими на понад 72 години. "
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:817
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:844
 #, qt-format
 msgid ""
 "If you disable Internet updates, you may update from a file on your "
@@ -18735,7 +18834,7 @@ msgstr ""
 "файла на вашому комп’ютері. Цей файл має бути збережено у тому самому "
 "форматі, що і оновлення Celestrak (приклад можна знайти у %1)."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:818
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:845
 msgid ""
 "<b>Note:</b> if the name of a satellite in update data has anything in "
 "square brackets at the end, it will be removed before the data is used."
@@ -18744,11 +18843,11 @@ msgstr ""
 "вказано якісь дані у квадратних дужках, ці дані буде вилучено до "
 "використання назви."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:821
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:848
 msgid "Adding new satellites"
 msgstr "Додавання нових супутників"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:822
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:849
 msgid ""
 "Make sure the satellite(s) you wish to add are included in one of the URLs "
 "listed in the Sources tab of the satellites configuration dialog."
@@ -18757,7 +18856,7 @@ msgstr ""
 "одного зі списків за адресами, вказаними на вкладці «Джерела» діалогового "
 "вікна налаштування джерел даних щодо супутників."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:823
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:850
 msgid ""
 "Go to the Satellites tab, and click the '+' button.  Select the satellite(s)"
 " you wish to add and select the 'add' button."
@@ -18765,11 +18864,11 @@ msgstr ""
 "Перейдіть на вкладку «Супутники» і натисніть кнопку «+». Позначте пункти "
 "супутників, які слід додати, і натисніть кнопку «Додати»."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:825
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:852
 msgid "Technical notes"
 msgstr "Технічні нотатки"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:826
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:853
 msgid ""
 "Positions are calculated using the SGP4 & SDP4 methods, using NORAD TLE data"
 " as the input."
@@ -18777,7 +18876,7 @@ msgstr ""
 "Розташування обчислюються на основі способів SGP4 і SDP4. Початковими даними"
 " є дані TLE NORAD."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:827
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:854
 msgid ""
 "The orbital calculation code is written by Jose Luis Canales according to "
 "the revised Spacetrack Report #3 (including Spacetrack Report #6)"
@@ -18786,7 +18885,7 @@ msgstr ""
 "відповідно до переглянутої доповіді Spacetrack №3 (з даними з доповіді "
 "Spacetrack №6)"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:828
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:855
 msgid ""
 "To calculate an approximate visual magnitude of satellites we use data from "
 "Mike McCants' database (with permissions) of the radar cross-section (RCS) "
@@ -18796,7 +18895,7 @@ msgstr ""
 "з бази даних радарних перерізів (RCS) та стандартних величин Майка МакКантса"
 " (Mike McCants) (з дозволу)."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:829
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:856
 msgid ""
 "Formula to calculate an approximate visual magnitude of satellites from the "
 "standard magnitude may be found at Mike McCants website"
@@ -18804,7 +18903,7 @@ msgstr ""
 "Формулу для обчислення приблизних видимих величин супутників на основі "
 "стандартної величини наведено на сайті Майка МакКантса (Mike McCants)"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:830
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:857
 msgid ""
 "We use a spherical shape of satellite to calculate an approximate visual "
 "magnitude from RCS values."
@@ -18812,13 +18911,13 @@ msgstr ""
 "Для обчислення приблизної видимої величини на основі даних RCS нами "
 "використано припущення про сферичну форму супутників."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:831
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:858
 msgid "For modelling Starlink magnitudes we use Anthony Mallama's formula"
 msgstr ""
 "Для моделювання величин супутників Starlink нами використано формулу Ентоні "
 "Маллами (Anthony Mallama)"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:850
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:877
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:152
 #: plugins/Novae/src/gui/NovaeDialog.cpp:147
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:144
@@ -18828,7 +18927,7 @@ msgstr ""
 msgid "Next update"
 msgstr "Наступне оновлення"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:855
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:882
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:158
 #: plugins/Novae/src/gui/NovaeDialog.cpp:153
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:150
@@ -18838,8 +18937,8 @@ msgstr "Наступне оновлення"
 msgid "Internet updates disabled"
 msgstr "Оновлення за допомогою інтернету вимкнено"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:857
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:881
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:884
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:908
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:160
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:206
 #: plugins/Novae/src/gui/NovaeDialog.cpp:155
@@ -18854,7 +18953,7 @@ msgstr "Оновлення за допомогою інтернету вимкн
 msgid "Updating now..."
 msgstr "Оновлення…"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:862
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:889
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:162
 #: plugins/Novae/src/gui/NovaeDialog.cpp:157
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:154
@@ -18864,7 +18963,7 @@ msgid "< 1 minute"
 msgstr "< 1 хвилини"
 
 #. TRANSLATORS: minutes.
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:867
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:894
 #: plugins/Satellites/src/gui/SatellitesFilterDialog.cpp:135
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:167
 #: plugins/Novae/src/gui/NovaeDialog.cpp:162
@@ -18876,7 +18975,7 @@ msgctxt "time"
 msgid "m"
 msgstr "хв"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:884
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:911
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:209
 #: plugins/Novae/src/gui/NovaeDialog.cpp:204
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:225
@@ -18886,29 +18985,29 @@ msgstr "хв"
 msgid "Update error"
 msgstr "Помилка оновлення"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:894
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:921
 #, qt-format
 msgid "Updated %1/%2 satellite(s); %3 added; %4 removed"
 msgstr "Оновлено дані %1 з %2 супутників; додано %3; вилучено %4 записи"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:896
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:923
 #, qt-format
 msgid "Updated %1/%2 satellite(s); %3 added; %4 missing"
 msgstr "Оновлено дані %1 з %2 супутників; додано %3; не знайдено %4 записи"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:911
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:938
 msgid "Empty string - not saving"
 msgstr "Порожній рядок — не зберігаємо"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:918
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:945
 msgid "Invalid URL - not saving"
 msgstr "Некоректна адреса — не зберігаємо"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:985
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1012
 msgid "[new source]"
 msgstr "[нове джерело]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1071
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1098
 #: plugins/Satellites/src/ui_satellitesDialog.h:1222
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:195
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:204
@@ -18924,7 +19023,7 @@ msgstr "[нове джерело]"
 msgid "Update now"
 msgstr "Оновити зараз"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1073
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1100
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:197
 #: plugins/Novae/src/gui/NovaeDialog.cpp:192
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:189
@@ -18933,107 +19032,107 @@ msgstr "Оновити зараз"
 msgid "Update from files"
 msgstr "Оновити з файлів"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1101
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1128
 msgid "[orbit calculation error]"
 msgstr "[помилка під час обчислення орбіти]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1102
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1129
 msgid "[atmospheric entry]"
 msgstr "[вхід до атмосфери]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1103
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1130
 msgid "[all newly added]"
 msgstr "[всі щойно додані]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1104
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1131
 msgid "[all not displayed]"
 msgstr "[всі не показані]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1105
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1132
 msgid "[all displayed]"
 msgstr "[всі показані]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1106
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1133
 msgid "[all communications]"
 msgstr "[увесь обмін даними]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1107
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1134
 msgid "[small satellites]"
 msgstr "[малі супутники]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1108
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1135
 msgid "[medium satellites]"
 msgstr "[середні супутники]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1109
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1136
 msgid "[large satellites]"
 msgstr "[великі супутники]"
 
 #. TRANSLATORS: LEO = Low Earth orbit
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1111
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1138
 msgid "[LEO satellites]"
 msgstr "[Супутники на ННО]"
 
 #. TRANSLATORS: GEO = Geosynchronous equatorial orbit (Geostationary orbit)
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1113
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1140
 msgid "[GEO/GSO satellites]"
 msgstr "[Супутники на ГСО]"
 
 #. TRANSLATORS: MEO = Medium Earth orbit
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1115
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1142
 msgid "[MEO satellites]"
 msgstr "[Супутники на СНО]"
 
 #. TRANSLATORS: HEO = Highly elliptical orbit
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1117
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1144
 msgid "[HEO satellites]"
 msgstr "[Супутники на ВЕО]"
 
 #. TRANSLATORS: HGEO = High geosynchronous orbit
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1119
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1146
 msgid "[HGSO satellites]"
 msgstr "[Супутники на ВГСО]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1120
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1147
 msgid "[polar orbit satellites]"
 msgstr "[супутники на полярних орбітах]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1121
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1148
 msgid "[equatorial orbit satellites]"
 msgstr "[супутники на екваторіальних орбітах]"
 
 #. TRANSLATORS: PSSO = Polar sun synchronous orbit
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1123
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1150
 msgid "[PSSO satellites]"
 msgstr "[супутники на PSSO]"
 
 #. TRANSLATORS: HEO/E = High Earth orbit
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1125
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1152
 msgid "[HEO/E satellites]"
 msgstr "[супутники на HEO/E]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1126
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1153
 msgid "[outdated TLE]"
 msgstr "[застарілий TLE]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1127
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1154
 msgid "[custom filter]"
 msgstr "[нетиповий фільтр]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1128
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1155
 msgid "[all user defined]"
 msgstr "[все визначено користувачем]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1129
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1156
 msgid "[all]"
 msgstr "[всі]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1141
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1168
 #: plugins/Satellites/src/ui_satellitesFilterDialog.h:263
 msgid "RCS"
 msgstr "ЕПР"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1142
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1169
 msgid ""
 "Radar cross-section (RCS) is a measure of how detectable an object is with a"
 " radar. A larger RCS indicates that an object is more easily detected."
@@ -19042,7 +19141,7 @@ msgstr ""
 "для виявлення радаром. Більше значення ЕПР вказує на те, що об'єкт простіше "
 "виявити."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1143
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1170
 msgid ""
 "The standard magnitude of a satellite is defined as its apparent magnitude "
 "when at half-phase and at a distance 1000 km from the observer."
@@ -19050,57 +19149,57 @@ msgstr ""
 "Стандартна величина супутника визначається як видима величина, коли він "
 "перебуває у напівфазі і на відстані 1000 км від спостерігача."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1156
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1183
 msgid ""
 "Display satellites and their orbits within selected range of altitudes only."
 msgstr "Показувати супутники та їхні орбіти лише у вибраному діапазоні висот."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1158
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1185
 #: plugins/Satellites/src/ui_satellitesDialog.h:1242
 msgid ""
 "Distance to the center of umbra from Earth's surface (height of imagined "
 "satellite)"
 msgstr "Відстань до центра тіні від поверхні Землі (висота уявного супутника)"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1159
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1186
 msgid "Number of segments: number of segments used to draw the line"
 msgstr "Кількість сегментів: кількість сегментів для малювання лінії"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1160
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1187
 msgid "Segment length: duration of a single segment in seconds"
 msgstr "Довжина сегмента: тривалість окремого сегмента у секундах"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1161
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1188
 msgid "Fade length: number of segments used to draw each end of the line"
 msgstr "Довжина згасання: кількість сегментів для малювання кінців лінії"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1162
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1189
 msgid "Orbit line thickness"
 msgstr "Товщина ліній орбіт"
 
 #. TRANSLATORS: Displayed in the satellite group selection box.
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1196
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1223
 msgid "New group..."
 msgstr "Створити групу…"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1472
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1499
 msgid "Select TLE Update File"
 msgstr "Вибір файла оновлення TLE"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1494
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1521
 msgid "Brightness"
 msgstr "Яскравість"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1497
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1524
 msgid "Satellite"
 msgstr "Супутник"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1585
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1612
 msgid "Save predicted Iridium flares as..."
 msgstr "Зберегти прогнози спалахів Іридіумів як…"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1631
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1633
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1658
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1660
 msgid "Predicted Iridium flares"
 msgstr "Прогнозовані спалахи Іридіумів"
 
