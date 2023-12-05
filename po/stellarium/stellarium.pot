@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2023-12-04 09:58+0700\n"
+"POT-Creation-Date: 2023-12-05 17:46+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -204,7 +204,7 @@ msgstr ""
 #: src/gui/AstroCalcDialog.cpp:2097 src/gui/AstroCalcDialog.cpp:2360
 #: src/gui/AstroCalcChart.cpp:80 src/gui/AstroCalcChart.cpp:418
 #: src/ui_viewDialog.h:4184 plugins/Satellites/src/Satellite.cpp:362
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1495
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1522
 msgid "Altitude"
 msgstr ""
 
@@ -826,7 +826,7 @@ msgstr ""
 #. TRANSLATORS: Unit of measure for distance - meter
 #: src/core/modules/LandscapeMgr.cpp:1380 src/gui/StelGuiItems.cpp:866
 #: plugins/Satellites/src/Satellite.cpp:433
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1141
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1168
 #: plugins/Satellites/src/gui/SatellitesFilterDialog.cpp:134
 msgctxt "distance"
 msgid "m"
@@ -925,7 +925,7 @@ msgstr ""
 #: src/gui/AstroCalcDialog.cpp:9063 plugins/Satellites/src/Satellites.cpp:2914
 #: plugins/Satellites/src/Satellite.cpp:356
 #: plugins/Satellites/src/Satellite.cpp:399
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1150
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1177
 #: plugins/Satellites/src/gui/SatellitesFilterDialog.cpp:133
 msgctxt "distance"
 msgid "km"
@@ -5946,7 +5946,7 @@ msgstr ""
 #: src/gui/SearchDialog.cpp:308 src/gui/AstroCalcDialog.cpp:837
 #: src/gui/AstroCalcDialog.cpp:1743 src/gui/AstroCalcDialog.cpp:2361
 #: src/gui/AstroCalcChart.cpp:88 src/gui/AstroCalcChart.cpp:420
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1496
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1523
 msgid "Azimuth"
 msgstr ""
 
@@ -6055,7 +6055,7 @@ msgid "Valid range years:"
 msgstr ""
 
 #: src/gui/AstroCalcDialog.cpp:616
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1140
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1167
 #: plugins/Satellites/src/gui/SatellitesFilterDialog.cpp:136
 msgid "Valid range"
 msgstr ""
@@ -7199,8 +7199,8 @@ msgstr ""
 #. TRANSLATORS: hours.
 #: src/gui/AstroCalcDialog.cpp:6326 src/gui/AstroCalcChart.cpp:443
 #: src/gui/AstroCalcChart.cpp:469
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:873
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1148
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:900
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1175
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:173
 #: plugins/Novae/src/gui/NovaeDialog.cpp:168
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:165
@@ -7589,12 +7589,12 @@ msgid "Angular distance between the Moon and celestial object"
 msgstr ""
 
 #: src/gui/AstroCalcDialog.cpp:9448
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1571
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1598
 msgid "CSV (Comma delimited)"
 msgstr ""
 
 #: src/gui/AstroCalcDialog.cpp:9451
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1572
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1599
 msgid "Microsoft Excel Open XML Spreadsheet"
 msgstr ""
 
@@ -12875,7 +12875,7 @@ msgid "Additional settings for Graphical User Interface"
 msgstr ""
 
 #: src/ui_configurationDialog.h:1697
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1493
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1520
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:443
 msgid "Time"
 msgstr ""
@@ -14473,7 +14473,7 @@ msgstr ""
 #: src/ui_astroCalcExtraEphemerisDialog.h:174
 #: plugins/Oculars/src/Oculars.cpp:1970
 #: plugins/Oculars/src/gui/OcularDialog.cpp:598
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1151
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1178
 #: plugins/Satellites/src/ui_satellitesDialog.h:1249
 msgctxt "pixels"
 msgid "px"
@@ -15437,8 +15437,8 @@ msgstr ""
 #: plugins/Oculars/src/gui/OcularDialog.cpp:118
 #: plugins/Oculars/src/gui/OcularDialog.cpp:135
 #: plugins/Oculars/src/gui/OcularDialog.cpp:152
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:911
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:918
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:938
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:945
 msgid "Warning!"
 msgstr ""
 
@@ -15573,7 +15573,7 @@ msgstr ""
 #. TRANSLATORS: duration
 #. TRANSLATORS: seconds.
 #: plugins/Oculars/src/Oculars.cpp:1988
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1145
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1172
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:223
 msgctxt "time"
 msgid "s"
@@ -17472,17 +17472,113 @@ msgstr ""
 
 #. TRANSLATORS: Title of a section in the About tab of the Satellites window
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:815
-msgid "TLE data updates"
+msgid "Communication links"
 msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:816
+msgid ""
+"Many satellites having transmitters (transceivers and transponders) with "
+"many modes for telemetry and data packets. You should to know which "
+"demodulator you need to decode telemetry and packets:"
+msgstr ""
+
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:818
+msgid "Automatic Picture Transmission"
+msgstr ""
+
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:819
+msgid "Low Resolution Picture Transmission"
+msgstr ""
+
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:820
+msgid "High Resolution Picture Transmission"
+msgstr ""
+
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:821
+msgid "Advanced High Resolution Picture Transmission"
+msgstr ""
+
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:822
+msgid "Amateur Radio adaptation of X.25 packet protocol"
+msgstr ""
+
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:823
+msgid "Continuous Wave, Morse Code"
+msgstr ""
+
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:824
+msgid "Amplitude Modulation"
+msgstr ""
+
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:825
+msgid "Frequency Modulation"
+msgstr ""
+
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:826
+msgid "Data Under Voice"
+msgstr ""
+
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:827
+msgid "Frequency Shift Keying"
+msgstr ""
+
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:828
+msgid "Gaussian Frequency Shift Keying"
+msgstr ""
+
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:829
+msgid "Gaussian Minimum Shift Keying"
+msgstr ""
+
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:830
+msgid "Audio Frequency Shift Keying"
+msgstr ""
+
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:831
+msgid "Amplitude-shift Keying"
+msgstr ""
+
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:832
+msgid "Phase-shift Keying"
+msgstr ""
+
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:833
+msgid "Binary Phase-shift Keying"
+msgstr ""
+
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:834
+msgid "Quadrature Phase-shift Keying"
+msgstr ""
+
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:835
+msgid "Offset Quadrature Phase-shift Keying"
+msgstr ""
+
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:836
+msgid "Differential Phase-shift Keying"
+msgstr ""
+
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:837
+msgid "Binary Offset Carrier"
+msgstr ""
+
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:838
+msgid "Multiplexed Binary Offset Carrier"
+msgstr ""
+
+#. TRANSLATORS: Title of a section in the About tab of the Satellites window
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:842
+msgid "TLE data updates"
+msgstr ""
+
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:843
 msgid ""
 "The Satellites plugin can automatically download TLE data from Internet "
 "sources, and by default the plugin will do this if the existing data is more "
 "than 72 hours old. "
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:817
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:844
 #, qt-format
 msgid ""
 "If you disable Internet updates, you may update from a file on your "
@@ -17490,68 +17586,68 @@ msgid ""
 "(see %1 for an example)."
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:818
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:845
 msgid ""
 "<b>Note:</b> if the name of a satellite in update data has anything in "
 "square brackets at the end, it will be removed before the data is used."
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:821
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:848
 msgid "Adding new satellites"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:822
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:849
 msgid ""
 "Make sure the satellite(s) you wish to add are included in one of the URLs "
 "listed in the Sources tab of the satellites configuration dialog."
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:823
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:850
 msgid ""
 "Go to the Satellites tab, and click the '+' button.  Select the satellite(s) "
 "you wish to add and select the 'add' button."
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:825
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:852
 msgid "Technical notes"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:826
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:853
 msgid ""
 "Positions are calculated using the SGP4 & SDP4 methods, using NORAD TLE data "
 "as the input."
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:827
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:854
 msgid ""
 "The orbital calculation code is written by Jose Luis Canales according to "
 "the revised Spacetrack Report #3 (including Spacetrack Report #6)"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:828
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:855
 msgid ""
 "To calculate an approximate visual magnitude of satellites we use data from "
 "Mike McCants' database (with permissions) of the radar cross-section (RCS) "
 "and standard magnitudes."
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:829
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:856
 msgid ""
 "Formula to calculate an approximate visual magnitude of satellites from the "
 "standard magnitude may be found at Mike McCants website"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:830
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:857
 msgid ""
 "We use a spherical shape of satellite to calculate an approximate visual "
 "magnitude from RCS values."
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:831
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:858
 msgid "For modelling Starlink magnitudes we use Anthony Mallama's formula"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:850
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:877
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:152
 #: plugins/Novae/src/gui/NovaeDialog.cpp:147
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:144
@@ -17561,7 +17657,7 @@ msgstr ""
 msgid "Next update"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:855
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:882
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:158
 #: plugins/Novae/src/gui/NovaeDialog.cpp:153
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:150
@@ -17571,8 +17667,8 @@ msgstr ""
 msgid "Internet updates disabled"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:857
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:881
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:884
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:908
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:160
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:206
 #: plugins/Novae/src/gui/NovaeDialog.cpp:155
@@ -17587,7 +17683,7 @@ msgstr ""
 msgid "Updating now..."
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:862
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:889
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:162
 #: plugins/Novae/src/gui/NovaeDialog.cpp:157
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:154
@@ -17597,7 +17693,7 @@ msgid "< 1 minute"
 msgstr ""
 
 #. TRANSLATORS: minutes.
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:867
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:894
 #: plugins/Satellites/src/gui/SatellitesFilterDialog.cpp:135
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:167
 #: plugins/Novae/src/gui/NovaeDialog.cpp:162
@@ -17609,7 +17705,7 @@ msgctxt "time"
 msgid "m"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:884
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:911
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:209
 #: plugins/Novae/src/gui/NovaeDialog.cpp:204
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:225
@@ -17619,29 +17715,29 @@ msgstr ""
 msgid "Update error"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:894
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:921
 #, qt-format
 msgid "Updated %1/%2 satellite(s); %3 added; %4 removed"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:896
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:923
 #, qt-format
 msgid "Updated %1/%2 satellite(s); %3 added; %4 missing"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:911
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:938
 msgid "Empty string - not saving"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:918
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:945
 msgid "Invalid URL - not saving"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:985
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1012
 msgid "[new source]"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1071
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1098
 #: plugins/Satellites/src/ui_satellitesDialog.h:1222
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:195
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:204
@@ -17657,7 +17753,7 @@ msgstr ""
 msgid "Update now"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1073
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1100
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:197
 #: plugins/Novae/src/gui/NovaeDialog.cpp:192
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:189
@@ -17666,169 +17762,169 @@ msgstr ""
 msgid "Update from files"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1101
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1128
 msgid "[orbit calculation error]"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1102
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1129
 msgid "[atmospheric entry]"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1103
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1130
 msgid "[all newly added]"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1104
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1131
 msgid "[all not displayed]"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1105
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1132
 msgid "[all displayed]"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1106
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1133
 msgid "[all communications]"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1107
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1134
 msgid "[small satellites]"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1108
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1135
 msgid "[medium satellites]"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1109
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1136
 msgid "[large satellites]"
 msgstr ""
 
 #. TRANSLATORS: LEO = Low Earth orbit
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1111
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1138
 msgid "[LEO satellites]"
 msgstr ""
 
 #. TRANSLATORS: GEO = Geosynchronous equatorial orbit (Geostationary orbit)
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1113
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1140
 msgid "[GEO/GSO satellites]"
 msgstr ""
 
 #. TRANSLATORS: MEO = Medium Earth orbit
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1115
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1142
 msgid "[MEO satellites]"
 msgstr ""
 
 #. TRANSLATORS: HEO = Highly elliptical orbit
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1117
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1144
 msgid "[HEO satellites]"
 msgstr ""
 
 #. TRANSLATORS: HGEO = High geosynchronous orbit
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1119
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1146
 msgid "[HGSO satellites]"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1120
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1147
 msgid "[polar orbit satellites]"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1121
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1148
 msgid "[equatorial orbit satellites]"
 msgstr ""
 
 #. TRANSLATORS: PSSO = Polar sun synchronous orbit
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1123
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1150
 msgid "[PSSO satellites]"
 msgstr ""
 
 #. TRANSLATORS: HEO/E = High Earth orbit
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1125
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1152
 msgid "[HEO/E satellites]"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1126
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1153
 msgid "[outdated TLE]"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1127
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1154
 msgid "[custom filter]"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1128
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1155
 msgid "[all user defined]"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1129
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1156
 msgid "[all]"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1141
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1168
 #: plugins/Satellites/src/ui_satellitesFilterDialog.h:263
 msgid "RCS"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1142
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1169
 msgid ""
 "Radar cross-section (RCS) is a measure of how detectable an object is with a "
 "radar. A larger RCS indicates that an object is more easily detected."
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1143
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1170
 msgid ""
 "The standard magnitude of a satellite is defined as its apparent magnitude "
 "when at half-phase and at a distance 1000 km from the observer."
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1156
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1183
 msgid ""
 "Display satellites and their orbits within selected range of altitudes only."
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1158
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1185
 #: plugins/Satellites/src/ui_satellitesDialog.h:1242
 msgid ""
 "Distance to the center of umbra from Earth's surface (height of imagined "
 "satellite)"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1159
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1186
 msgid "Number of segments: number of segments used to draw the line"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1160
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1187
 msgid "Segment length: duration of a single segment in seconds"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1161
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1188
 msgid "Fade length: number of segments used to draw each end of the line"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1162
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1189
 msgid "Orbit line thickness"
 msgstr ""
 
 #. TRANSLATORS: Displayed in the satellite group selection box.
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1196
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1223
 msgid "New group..."
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1472
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1499
 msgid "Select TLE Update File"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1494
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1521
 msgid "Brightness"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1497
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1524
 msgid "Satellite"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1585
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1612
 msgid "Save predicted Iridium flares as..."
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1631
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1633
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1658
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1660
 msgid "Predicted Iridium flares"
 msgstr ""
 
