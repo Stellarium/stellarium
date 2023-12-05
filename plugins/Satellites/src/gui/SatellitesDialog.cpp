@@ -828,7 +828,7 @@ void SatellitesDialog::populateAboutPage()
 	html += "<li>GFSK &mdash; " + q_("Gaussian Frequency Shift Keying") + "</li>";
 	html += "<li>GMSK &mdash; " + q_("Gaussian Minimum Shift Keying") + "</li>";
 	html += "<li>AFSK &mdash; " + q_("Audio Frequency Shift Keying") + "</li>";
-	html += "<li>ASK &mdash; " + q_("Amplitude-shift keying") + "</li>";
+	html += "<li>ASK &mdash; " + q_("Amplitude-shift Keying") + "</li>";
 	html += "<li>PSK &mdash; " + q_("Phase-shift Keying") + "</li>";
 	html += "<li>BPSK &mdash; " + q_("Binary Phase-shift Keying") + "</li>";
 	html += "<li>QPSK &mdash; " + q_("Quadrature Phase-shift Keying") + "</li>";
