@@ -58,8 +58,8 @@ jobs:
     steps:
     - name: Install dependencies
       run: |
-        brew update
         brew uninstall php
+        brew update
         brew install qt@6 nlopt exiv2
 
     - name: Checkout repository
