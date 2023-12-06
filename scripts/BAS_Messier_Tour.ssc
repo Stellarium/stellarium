@@ -1,0 +1,166 @@
+//
+// Name: Messier Objects Tour
+// License: Public Domain
+// Version: 20231127.1
+// Author: C. Gaudion, Bridgend Astronomical Society
+// Description: A tour of Messier Objects
+
+// Build list of Messier object names
+
+var messier = new Array();
+
+for(var i=1;i<=110;i++) 
+{
+    messier.push("M" + i); 
+}
+// Note actual array index starts from zero!
+
+// messierText array contains Type, Constellation, When Viewable
+
+var messierText = [
+"Supernova remnant - Taurus - Winter",
+"Globular Cluster - Aquarius - Autumn / Early Winter",
+"Globular Cluster - Canes Venatici - Early Spring",
+"Globular Cluster - Scorpio - Mid-Summer",
+"Globular Cluster - Serpens Caput - Mid-Summer",
+"Open Cluster - Scorpius - Mid-Summer",
+"Open Cluster - Scorpius - Mid-Summer",
+"Lagoon Nebula - Sagittarius - Late Summer",
+"Globular Cluster - Ophiucus - Mid-Summer",
+"Globular Cluster - Ophiucus - Mid-Summer",
+"Open Cluster - Scutum - Late Summer",
+"Globular Cluster - Ophiucus - Mid-Summer",
+"Globular Cluster - Hercules - Mid-Summer",
+"Globular Cluster - Ophiucus - Mid-Summer",
+"Globular Cluster - Pegasus - Autumn/Early Winter",
+"Open Cluster - Serpens Claudia - Late Summer",
+"Diffuse Nebula - Sagittarius - Late Summer",
+"Open Cluster - Sagittarius - Late Summer",
+"Globular Cluster - Ophiucus - Mid-Summer",
+"Trifid Nebula - Sagittarius - Late Summer",
+"Open Cluster - Sagittarius - Late Summer",
+"Globular Cluster - Sagittarius - Late Summer",
+"Open Cluster - Sagittarius - Late Summer",
+"Star Cloud - Sagittarius - Late Summer",
+"Open Cluster - Sagittarius - Late Summer",
+"Open Cluster - Scutum - Late Summer",
+"Planetary Nebula - Vulpecula - Autumn/Early Winter",
+"Globular Cluster - Sagittarius - Late Summer",
+"Open Cluster - Cygnus - Autumn/Early Winter",
+"Globular Cluster - Capricornus - Autumn/Early Winter",
+"Spiral Galaxy - Andromeda - Winter",
+"Elliptical Galaxy - Andromeda - Winter",
+"Spiral Galaxy - Triangulum - Winter",
+"Open Cluster - Perseus - Winter",
+"Open Cluster - Gemini - Winter",
+"Open Cluster - Auriga - Winter",
+"Open Cluster - Auriga - Winter",
+"Open Cluster - Auriga - Winter",
+"Open Cluster - Cygnus - Autumn/Early Winter",
+"Double Star - Ursa Major - Early Spring",
+"Open Cluster - Canis Major - Winter",
+"Diffuse Nebula - Orion - Winter",
+"Diffuse Nebula - Orion - Winter",
+"Open Cluster - Cancer - Early Spring",
+"Open Cluster - Taurus - Winter",
+"Open Cluster - Puppis - Winter",
+"Open Cluster - Puppis - Winter",
+"Open Cluster - Hydra - Early Spring",
+"Elliptical Galaxy - Virgo - Late Spring",
+"Open Cluster - Monocerus - Winter",
+"Spiral Galaxy - Ursa Major - Early Spring",
+"Open Cluster - Cassiopea - Winter",
+"Globular Cluster - Coma Berenices - Late Spring",
+"Globular Cluster - Sagittarius - Late Summer",
+"Globular Cluster - Sagittarius - Late Summer",
+"Globular Cluster - Lyra - Autumn/Early Winter",
+"Planetary Nebula - Lyra - Autumn/Early Winter",
+"Spiral Galaxy - Virgo - Late Spring",
+"Elliptical Galaxy - Virgo - Late Spring",
+"Elliptical Galaxy - Virgo - Late Spring",
+"Spiral Galaxy - Virgo - Late Spring",
+"Globular Cluster - Ophiucus - Mid-Summer",
+"Spiral Galaxy - Canes Venatici - Early Spring",
+"Spiral Galaxy - Coma Berenices - Late Spring",
+"Spiral Galaxy - Leo - Early Spring",
+"Spiral Galaxy - Leo - Early Spring",
+"Open Cluster - Cancer - Early Spring",
+"Globular Cluster - Hydra - Late Spring",
+"Globular Cluster - Sagittarius - Late Summer",
+"Globular Cluster - Sagittarius - Late Summer",
+"Globular Cluster - Sagitta - Autumn/Early Winter",
+"Globular Cluster - Aquarius - Autumn/Early Winter",
+"Spiral Galaxy - Pisces - Autumn/Early Winter",
+"Globular Cluster - Sagittarius - Late Summer",
+"Planetary Nebula - Perseus - Winter",
+"Spiral Galaxy - Cetus - Autumn/Early Winter",
+"Diffuse Nebula - Orion - Winter",
+"Globular Cluster - Lepus - Winter",
+"Globular Cluster - Scorpius - Mid-Summer",
+"Spiral Galaxy - Ursa Major - Early Spring",
+"Irregular Galaxy - Ursa Major - Late Spring",
+"Spiral Galaxy - Hydra - Mid-Summer",
+"Lenticular (S0) Galaxy - Virgo - Late Spring",
+"Lenticular (S0) Galaxy - Coma Berenices - Late Spring",
+"Lenticular (S0) Galaxy - Virgo - Late Spring",
+"Elliptical Galaxy - Virgo - Late Spring",
+"Spiral Galaxy - Coma Berenices - Late Spring",
+"Elliptical Galaxy - Virgo - Late Spring",
+"Spiral Galaxy - Virgo - Late Spring",
+"Spiral Galaxy - Coma Berenices - Late Spring",
+"Globular Cluster - Hercules - Mid-Summer",
+"Open Cluster - Puppis - Winter",
+"Spiral Galaxy - Canes Venatici - Early Spring",
+"Spiral Galaxy - Leo - Early Spring",
+"Spiral Galaxy - Leo - Early Spring",
+"Planetary Nebula - Ursa Major - Late Spring",
+"Spiral Galaxy - Coma Berenices - Late Spring",
+"Spiral Galaxy - Coma Berenices - Autumn/Early Winter",
+"Spiral Galaxy - Coma Berenices - Late Spring",
+"Spiral Galaxy - Ursa Major - Early Spring",
+"Lenticular (S0) Galaxy - Draco - Mid-Summer",
+"Open Cluster - Cassiopeia - Winter",
+"Spiral Galaxy - Virgo - Late Spring",
+"Elliptical Galaxy - Leo - Early Spring",
+"Spiral Galaxy - Ursa Major - Early Spring",
+"Globular Cluster - Ophiucus - Mid-Summer",
+"Spiral Galaxy - Ursa Major - Early Spring",
+"Spiral Galaxy - Ursa Major - Early Spring",
+"Elliptical Galaxy - Andromeda - Winter"
+]
+
+
+core.clear("deepspace");
+core.wait(4);
+
+ConstellationMgr.setFlagIsolateSelected(true);
+
+LabelMgr.labelScreen("BAS Stellarium Messier Object Tour v20231127.1",500,200,true,30,"#ff0000");
+core.wait(5);
+LabelMgr.labelScreen("Note: Not all objects may be visible from your location!",500,400,true,30,"#ff0000");
+core.wait(5);
+LabelMgr.labelScreen("In addition to Stellarium data this shows Object Type - Constellation - Season Viewable",100,600,true,30,"#ff0000");
+core.wait(5);
+LabelMgr.deleteAllLabels();
+
+for (i=0; i<messier.length; i++)
+{
+	objName = messier[i];
+	core.selectObjectByName(objName, true);
+
+	StelMovementMgr.autoZoomIn(6);
+	core.wait(4);
+	
+	LabelMgr.labelScreen(messierText[i],600,100,true,30,"#ff0000");
+	core.wait(10);
+	LabelMgr.deleteAllLabels();
+	
+	
+	StelMovementMgr.zoomTo(40,8);
+	core.wait(5);
+
+}
+
+LabelMgr.labelScreen("Stellarium Messier Object End of Tour",200,200,true,30,"#ff0000");
+core.wait(6);
+LabelMgr.deleteAllLabels();
