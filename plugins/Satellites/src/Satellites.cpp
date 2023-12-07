@@ -1515,7 +1515,20 @@ QList<CommLink> Satellites::getCommunicationData(const TleData& tleData)
 		{ "METEOR 1",	"meteor-1" },
 		{ "METEOR 3",	"meteor-2" },
 		{ "METEOR 2",	"meteor-3" },
+		{ "METEOR M",	"meteor-m" },
+		{ "METEOR-M",	"meteor-m" },
+		{ "METOP",	"metop" },
+		{ "BEESAT",	"beesat" },
+		{ "UMBRA",	"umbra" },
+		{ "BLACKJACK",	"blackjack" },
+		{ "S-NET",	"s-net" },
+		{ "ION SCV",	"ion-scv" },
+		{ "ASTROCAST-",	"astrocast" },
+		{ "VR3X",	"vr3x" },
+		{ "RASSVET",	"rassvet" },
+		{ "PICO-1A",	"pico-1a" },
 		{ "GLOBALSTAR",	"globalstar" },
+		{ "STRATOSAT",	"stratosat" },
 		{ "COSMO-SKYMED", "cosmo-skymed" }
 	};
 
@@ -3550,20 +3563,39 @@ void Satellites::translations()
 	N_("TIANGONG (TIANHE)");
 
 	// Special terms for communications
+	// NOTE: Please remember to update Satellite::getCommLinkInfo() method after updating the list of terms
 	// TRANSLATORS: An uplink (UL or U/L) is the link from a ground station to a satellite
-	N_("uplink");
+	NC_("uplink", "comms");
 	// TRANSLATORS: A downlink (DL) is the link from a satellite to a ground station
-	N_("downlink");
+	NC_("downlink", "comms");
 	// TRANSLATORS: The beacon (or radio beacon) is a device in the satellite, which emit one or more signals (normally on a fixed frequency) whose purpose is twofold: station-keeping information (telemetry) and locates the satellite (determines its azimuth and elevation) in the sky
-	N_("beacon");
+	NC_("beacon", "comms");
 	// TRANSLATORS: Telemetry is the collection of measurements or other data at satellites and their automatic transmission to receiving equipment (telecommunication) for monitoring
-	N_("telemetry");
+	NC_("telemetry", "comms");
 	// TRANSLATORS: The channel for transmission of video data
-	N_("video");
+	NC_("video", "comms");
 	// TRANSLATORS: The broadband is wide bandwidth data transmission which transports multiple signals at a wide range of frequencies
-	N_("broadband");
+	NC_("broadband", "comms");
 	// TRANSLATORS: The channel for transmission of commands
-	N_("command");
+	NC_("command", "comms");
+	// TRANSLATORS: Meteorological is a service on the satellite for transmitting meteorological data to a ground station
+	NC_("meteorological", "comms");
+	// TRANSLATORS: Maritime is a service on the satellite
+	NC_("maritime", "comms");
+	// TRANSLATORS: Mobile is a service on the satellite
+	NC_("mobile", "comms");
+	// TRANSLATORS: Mobile telephony is a service on the satellite
+	NC_("mobile telephony", "comms");
+	// TRANSLATORS: A repeater is an electronic device that receives a signal and retransmits it.
+	NC_("repeater", "comms");
+	// TRANSLATORS: The digital repeater (or digipiter) is used in channels that transmit data by binary digital signals
+	NC_("digipeater", "comms");
+	// TRANSLATORS: A radio band is a small frequency band (a contiguous section of the range of the radio spectrum) in which channels are usually used or set aside for the same purpose. S-band for example.
+	NC_("-band", "comms");
+	NC_("crew voice", "comms");
+	NC_("imaging", "comms");
+	// TRANSLATORS: Some mode of communication via radio channel
+	NC_("mode", "comms");
 
 #endif
 }

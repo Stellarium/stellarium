@@ -483,10 +483,10 @@ QString Satellite::getCommLinkInfo(CommLink comm) const
 
 	// Translate some specific communications terms
 	// See end of Satellites.cpp file to define translatable terms
-	static const QStringList commTerms={ "uplink", "downlink", "beacon", "telemetry", "video", "broadband", "command" };
+	static const QStringList commTerms={ "uplink", "downlink", "beacon", "telemetry", "video", "broadband", "command", "meteorological", "maritime", "mobile telephony", "mobile", "repeater", "digipeater", "-band", "crew voice", "imaging", "mode" };
 	for (auto& term: commTerms)
 	{
-		commLinkData.replace(term, q_(term));
+		commLinkData.replace(term, qc_(term, "comms"));
 	}
 	commLinkData.replace("&", q_("and"));
 
