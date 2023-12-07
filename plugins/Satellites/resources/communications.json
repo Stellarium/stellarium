@@ -1,5 +1,16 @@
 {
     "satellites": {
+        "1002": {
+            "name": "LES-1",
+            "source": "https://db.satnogs.org/satellite/AMOM-6643-5608-9156-4431#transmitters",
+            "comms": [
+            {
+                "description": "downlink",
+                "frequency": 236.997,
+                "modulation": "USB"
+            }
+            ]
+        },
         "1291": {
             "name": "SOLRAD 7B",
             "source": "https://r4uab.ru/frequency/; https://www.zarya.info/Frequencies/FrequenciesAll.php",
@@ -872,6 +883,17 @@
             }
             ]
         },
+        "36037": {
+            "name": "PROBA-2",
+            "source": "https://db.satnogs.org/satellite/XEUA-1308-9129-3386-4820#transmitters",
+            "comms": [
+            {
+                "description": "S-band downlink",
+                "frequency": 2235.000,
+                "modulation": "BPSK"
+            }
+            ]
+        },
         "36122": {
             "name": "XIWANG-1 (HOPE-1)",
             "source": "https://www.n2yo.com/satellite/?s=36122",
@@ -936,7 +958,7 @@
             "source": "https://db.satnogs.org/satellite/TFCO-6065-7327-3798-1948#transmitters",
             "comms": [
             {
-                "description": "Space Research GGAK-E 1",
+                "description": "space research GGAK-E 1",
                 "frequency": 1693.000,
                 "modulation": "FSK"
             }
@@ -998,6 +1020,17 @@
                 "description": "downlink",
                 "frequency": 910.000,
                 "modulation": "AMTV-CW SSTV"
+            }
+            ]
+        },
+        "39159": {
+            "name": "PROBA-V",
+            "source": "https://db.satnogs.org/satellite/XEUA-1308-9129-3386-4820#transmitters",
+            "comms": [
+            {
+                "description": "S-band downlink",
+                "frequency": 2235.000,
+                "modulation": "BPSK"
             }
             ]
         },
@@ -1618,7 +1651,7 @@
                 "modulation": "FM"
             },
             {
-                "description": "Space Research GGAK-E 2",
+                "description": "space research GGAK-E 2",
                 "frequency": 1693.000,
                 "modulation": "FSK"
             }
@@ -2274,7 +2307,7 @@
                 "modulation": "44500bps FM"
             },
             {
-                "description": "Radiolocation SARSAT L-band",
+                "description": "radiolocation SARSAT L-band",
                 "frequency": 1544.550,
                 "modulation": "2400bps BPSK"
             },
@@ -3391,6 +3424,32 @@
             }
             ]
         },
+        "49044": {
+            "name": "ISS (NAUKA)",
+            "source": "https://db.satnogs.org/satellite/GKEP-4423-7467-9358-6493#transmitters",
+            "comms": [
+            {
+                "description": "telemetry",
+                "frequency": 631.000,
+                "modulation": "FM"
+            },
+            {
+                "description": "strong sideband",
+                "frequency": 631.129,
+                "modulation": "FM"
+            },
+            {
+                "description": "strong sideband",
+                "frequency": 630.873,
+                "modulation": "FM"
+            },
+            {
+                "description": "mode V space operation",
+                "frequency": 166.075,
+                "modulation": "FM"
+            }
+            ]
+        },
         "49069": {
             "name": "LEDSAT-1",
             "source": "https://r4uab.ru/frequency/",
@@ -4424,6 +4483,126 @@
                 "description": "uplink",
                 "frequency": 1633.95,
                 "modulation": "NFM GMSK"
+            }
+            ]
+        },
+        "umbra": {
+            "source": "https://db.satnogs.org/transmitters",
+            "comms": [
+            {
+                "description": "S-band TT&C downlink",
+                "frequency": 2254.000,
+                "modulation": "FM"
+            },
+            {
+                "description": "X-band downlink",
+                "frequency": 8150.000,
+                "modulation": "FM"
+            },
+            {
+                "description": "X-band SAR downlink",
+                "frequency": 9600.000,
+                "modulation": "FM"
+            }
+            ]
+        },
+        "blackjack": {
+            "source": "https://db.satnogs.org/transmitters",
+            "comms": [
+            {
+                "description": "S-band telemetry",
+                "frequency": 2264.800,
+                "modulation": "BPSK"
+            }
+            ]
+        },
+        "s-net": {
+            "source": "https://db.satnogs.org/transmitters",
+            "comms": [
+            {
+                "description": "S-Band downlink",
+                "frequency": 2263.000,
+                "modulation": "FM"
+            },
+            {
+                "description": "TLM",
+                "frequency": 435.950,
+                "modulation": "1k2 AFSK TUBiX10"
+            }
+            ]
+        },
+        "ion-scv": {
+            "source": "https://db.satnogs.org/transmitters",
+            "comms": [
+            {
+                "description": "mode U downlink",
+                "frequency": 401.415,
+                "modulation": "1k2 FSK AX.100 Mode 5"
+            }
+            ]
+        },
+        "astrocast": {
+            "source": "https://db.satnogs.org/transmitters",
+            "comms": [
+            {
+                "description": "L-band telemetry",
+                "frequency": 1530.905,
+                "modulation": "FM"
+            }
+            ]
+        },
+        "rassvet": {
+            "source": "https://db.satnogs.org/transmitters",
+            "comms": [
+            {
+                "description": "mode U downlink",
+                "frequency": 637.500,
+                "modulation": "FM"
+            }
+            ]
+        },
+        "pico-1a": {
+            "source": "https://db.satnogs.org/transmitters",
+            "comms": [
+            {
+                "description": "mode U downlink",
+                "frequency": 454.100,
+                "modulation": "LoRa"
+            },
+            {
+                "description": "mode U 2 downlink",
+                "frequency": 454.300,
+                "modulation": "LoRa"
+            }
+            ]
+        },
+        "stratosat": {
+            "source": "https://db.satnogs.org/transmitters",
+            "comms": [
+            {
+                "description": "mode U downlink",
+                "frequency": 436.260,
+                "modulation": "LoRa"
+            }
+            ]
+        },
+        "vr3x": {
+            "source": "https://db.satnogs.org/transmitters",
+            "comms": [
+            {
+                "description": "mode S downlink",
+                "frequency": 2290.000,
+                "modulation": "FM"
+            },
+            {
+                "description": "mode U downlink",
+                "frequency": 915.600,
+                "modulation": "CW"
+            },
+            {
+                "description": "mode U downlink",
+                "frequency": 915.600,
+                "modulation": "125k LoRa"
             }
             ]
         }

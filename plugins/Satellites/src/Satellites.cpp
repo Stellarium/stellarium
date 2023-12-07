@@ -1519,7 +1519,16 @@ QList<CommLink> Satellites::getCommunicationData(const TleData& tleData)
 		{ "METEOR-M",	"meteor-m" },
 		{ "METOP",	"metop" },
 		{ "BEESAT",	"beesat" },
+		{ "UMBRA",	"umbra" },
+		{ "BLACKJACK",	"blackjack" },
+		{ "S-NET",	"s-net" },
+		{ "ION SCV",	"ion-scv" },
+		{ "ASTROCAST-",	"astrocast" },
+		{ "VR3X",	"vr3x" },
+		{ "RASSVET",	"rassvet" },
+		{ "PICO-1A",	"pico-1a" },
 		{ "GLOBALSTAR",	"globalstar" },
+		{ "STRATOSAT",	"stratosat" },
 		{ "COSMO-SKYMED", "cosmo-skymed" }
 	};
 
