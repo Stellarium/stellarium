@@ -101,6 +101,22 @@
             }
             ]
         },
+        "15427": {
+            "name": "NOAA 9",
+            "source": "https://db.satnogs.org/satellite/RQTU-0962-4589-7454-8433#transmitters",
+            "comms": [
+            {
+                "description": "meteorological",
+                "frequency": 1707.000,
+                "modulation": "HRPT"                
+            },
+            {
+                "description": "beacon",
+                "frequency": 136.770,
+                "modulation": "BPSK"
+            }
+            ]
+        },
         "15595": {
             "name": "GEOSAT",
             "source": "https://www.ne.jp/asahi/hamradio/je9pel/satslist.htm",
@@ -380,6 +396,17 @@
             }
         ]
         },
+        "26958": {
+            "name": "PROBA-1",
+            "source": "https://db.satnogs.org/satellite/PESU-6606-3114-9520-8906#transmitters",
+            "comms": [
+            {
+                "description": "meteorological mode S Dumps",
+                "frequency": 2235.000,
+                "modulation": "BPSK"
+            }
+        ]
+        },
         "27424": {
             "name": "Aqua (EOS PM-1)",
             "source": "https://en.wikipedia.org/wiki/Earth_observation_satellites_transmission_frequencies",
@@ -387,6 +414,37 @@
             {
                 "description": "downlink",
                 "frequency": 8160.0
+            }
+            ]
+        },
+        "27431": {
+            "name": "FENGYUN-1D",
+            "source": "https://db.satnogs.org/satellite/HXCQ-2150-9044-4954-9390#transmitters",
+            "comms": [
+            {
+                "description": "downlink",
+                "frequency": 1700.500,
+                "modulation": "HRPT"
+            },
+            {
+                "description": "downlink",
+                "frequency": 1700.500,
+                "modulation": "BPSK"
+            },
+            {
+                "description": "meteorological mode L",
+                "frequency": 2201.050,
+                "modulation": "FM"
+            },
+            {
+                "description": "mode U",
+                "frequency": 480.019,
+                "modulation": "CW"
+            },
+            {
+                "description": "mode V",
+                "frequency": 180.007,
+                "modulation": "USB"
             }
             ]
         },
@@ -586,6 +644,33 @@
             }
             ]
         },
+        "31589": {
+            "name": "SKYMED 1",
+            "source": "https://db.satnogs.org/satellite/BEBS-6223-1179-9603-3761#transmitters",
+            "comms": [
+            {
+                "description": "S-band telemetry",
+                "frequency": 2230.000,
+                "modulation": "BPSK"
+            }
+            ]
+        },
+        "32376": {
+            "name": "SKYMED 2",
+            "source": "https://db.satnogs.org/satellite/JXWR-7717-8415-0462-5029#transmitters",
+            "comms": [
+            {
+                "description": "S-band telemetry",
+                "frequency": 2230.019,
+                "modulation": "BPSK"
+            },
+            {
+                "description": "S-band telemetry",
+                "frequency": 2242.279,
+                "modulation": "FM"
+            }
+            ]
+        },
         "32785": {
             "name": "CUTE-1.7+APD II",
             "source": "https://www.n2yo.com/satellite/?s=32785",
@@ -637,6 +722,27 @@
                 "description": "JQ1YGU downlink",
                 "frequency": 437.485,
                 "modulation": "1k2AFSK CW DigiTalker"
+            }
+            ]
+        },
+        "32958": {
+            "name": "FENGYUN 3A",
+            "source": "https://db.satnogs.org/satellite/SHEZ-1778-3591-0474-2098#transmitters",
+            "comms": [
+            {
+                "description": "downlink",
+                "frequency": 1704.500,
+                "modulation": "AHRPT"
+            },
+            {
+                "description": "meteorological mode X",
+                "frequency": 8145.950,
+                "modulation": "QPSK"
+            },
+            {
+                "description": "meteorological MPT",
+                "frequency": 7775.000,
+                "modulation": "PSK"
             }
             ]
         },
@@ -809,6 +915,33 @@
             }
             ]
         },
+        "37216": {
+            "name": "SKYMED 4",
+            "source": "https://db.satnogs.org/satellite/WZYP-3269-9982-1368-7019#transmitters",
+            "comms": [
+            {
+                "description": "S-band telemetry",
+                "frequency": 2230.007,
+                "modulation": "FM"
+            },
+            {
+                "description": "S-band telemetry",
+                "frequency": 2244.272,
+                "modulation": "FM"
+            }
+            ]
+        },
+        "37344": {
+            "name": "ELEKTRO-L 1",
+            "source": "https://db.satnogs.org/satellite/TFCO-6065-7327-3798-1948#transmitters",
+            "comms": [
+            {
+                "description": "Space Research GGAK-E 1",
+                "frequency": 1693.000,
+                "modulation": "FSK"
+            }
+            ]
+        },
         "37855": {
             "name": "M-CUBED/EXP-1 PRIME",
             "source": "https://www.n2yo.com/satellite/?s=37855",
@@ -865,6 +998,42 @@
                 "description": "downlink",
                 "frequency": 910.000,
                 "modulation": "AMTV-CW SSTV"
+            }
+            ]
+        },
+        "39260": {
+            "name": "FENGYUN 3C",
+            "source": "https://db.satnogs.org/satellite/YVMN-3096-6332-4393-7492#transmitters",
+            "comms": [
+            {
+                "description": "downlink",
+                "frequency": 1701.400,
+                "modulation": "AHRPT"
+            },
+            {
+                "description": "telemetry",
+                "frequency": 2218.566,
+                "modulation": "BPSK"
+            },
+            {
+                "description": "meteorological mode X",
+                "frequency": 8175.000,
+                "modulation": "QPSK"
+            },
+            {
+                "description": "S-band telemetry",
+                "frequency": 2252.892,
+                "modulation": "FM"
+            },
+            {
+                "description": "meteorological",
+                "frequency": 1701.300,
+                "modulation": "AHRPT"
+            },
+            {
+                "description": "MPT",
+                "frequency": 7780.000,
+                "modulation": "FM"
             }
             ]
         },
@@ -1436,12 +1605,22 @@
         },
         "41105": {
             "name": "ELEKTRO-L N2",
-            "source": "https://www.sigidwiki.com/wiki/Category:Satellite",
+            "source": "https://www.sigidwiki.com/wiki/Category:Satellite https://db.satnogs.org/satellite/KKUD-0899-6953-1494-1490#transmitters",
             "comms": [
             {
                 "description": "beacon",
                 "frequency": 1.693,
                 "modulation": "DSB"
+            },
+            {
+                "description": "LHCP",
+                "frequency": 7502.000,
+                "modulation": "FM"
+            },
+            {
+                "description": "Space Research GGAK-E 2",
+                "frequency": 1693.000,
+                "modulation": "FSK"
             }
             ]
         },
@@ -2080,6 +2259,47 @@
             }
             ]
         },
+        "43226": {
+            "name": "GOES-17",
+            "source": "https://db.satnogs.org/satellite/HQQK-4977-1513-0996-6919#transmitters",
+            "comms": [
+            {
+                "description": "meteorological downlink",
+                "frequency": 148.545,
+                "modulation": "FM"
+            },
+            {
+                "description": "mode U TLM",
+                "frequency": 468.775,
+                "modulation": "44500bps FM"
+            },
+            {
+                "description": "Radiolocation SARSAT L-band",
+                "frequency": 1544.550,
+                "modulation": "2400bps BPSK"
+            },
+            {
+                "description": "meteorological CDA",
+                "frequency": 1693.000,
+                "modulation": "FM"
+            },
+            {
+                "description": "DCPD",
+                "frequency": 468.825,
+                "modulation": "44450bps FM"
+            },
+            {
+                "description": "mobile DCP",
+                "frequency": 1694.100,
+                "modulation": "1210000bps BPSK PMT-A3"
+            },
+            {
+                "description": "maritime SARSAT to LUT",
+                "frequency": 2211.040,
+                "modulation": "4930000bps PSK"
+            }
+            ]
+        },
         "43616": {
             "name": "ELFIN B",
             "source": "https://www.n2yo.com/satellite/?s=43616",
@@ -2475,6 +2695,47 @@
                 "description": "downlink",
                 "frequency": 145.935,
                 "modulation": "SSB"
+            }
+            ]
+        },
+        "44903": {
+            "name": "ELEKTRO-L 3",
+            "source": "https://db.satnogs.org/satellite/BTEP-5467-6423-3488-4155#transmitters",
+            "comms": [
+            {
+                "description": "meteorological LRIT Bandwidth 200 kHz Rate 64/128 kbps",
+                "frequency": 1691.000,
+                "modulation": "BPSK"
+            },
+            {
+                "description": "Inter-satellite telecommand RHCP mode U",
+                "frequency": 465.000,
+                "modulation": "FM"
+            },
+            {
+                "description": "meteorological TLM RHCP mode S",
+                "frequency": 3405.703,
+                "modulation": "FM"
+            },
+            {
+                "description": "DCP Downlink RHCP mode C",
+                "frequency": 7500.000,
+                "modulation": "FM"
+            },
+            {
+                "description": "mobile DCP/Selected Data Linear mode L",
+                "frequency": 1697.000,
+                "modulation": "BPSK PMT-A3"
+            },
+            {
+                "description": "200 kHz Selected Data RHCP mode L",
+                "frequency": 1693.000,
+                "modulation": "BPSK"
+            },
+            {
+                "description": "Data Relay LHCP mode L",
+                "frequency": 1544.500,
+                "modulation": "BPSK"
             }
             ]
         },
@@ -3004,6 +3265,77 @@
             }
             ]
         },
+        "48274": {
+            "name": "CSS (Tianhe)",
+            "source": "https://db.satnogs.org/satellite/AYDR-6527-9294-8555-4924#transmitters",
+            "comms": [
+            {
+                "description": "1A V/V crew voice NFM downlink",
+                "frequency": 145.985,
+                "modulation": "12500bps FMN"
+            },
+            {
+                "description": "1A V/V crew voice NFM uplink",
+                "frequency": 145.850,
+                "modulation": "FMN"
+            },
+            {
+                "description": "1B U/U crew voice NFM downlink",
+                "frequency": 436.510,
+                "modulation": "12500bps FMN"
+            },
+            {
+                "description": "1B U/U crew voice NFM uplink",
+                "frequency": 435.050,
+                "modulation": "FMN"
+            },
+            {
+                "description": "2A V/U FM repeater NFM downlink",
+                "frequency": 436.510,
+                "modulation": "12500bps FMN"
+            },
+            {
+                "description": "2A V/U FM repeater NFM uplink",
+                "frequency": 145.875,
+                "modulation": "FMN"
+            },
+            {
+                "description": "3A V/V digipeater",
+                "frequency": 145.825,
+                "modulation": "1200bps AFSK"
+            },
+            {
+                "description": "3B U/U digipeater",
+                "frequency": 437.550,
+                "modulation": "1200bps AFSK"
+            },
+            {
+                "description": "4A V/V imaging SSTV-FM downlink",
+                "frequency": 145.985,
+                "modulation": "SSTV"
+            },
+            {
+                "description": "4A V/V imaging SSTV-FM uplink",
+                "frequency": 145.850,
+                "modulation": "SSTV"
+            },
+            {
+                "description": "4B U/U imaging SSTV-FM downlink",
+                "frequency": 436.510,
+                "modulation": "SSTV"
+            },
+            {
+                "description": "4B U/U imaging SSTV-FM uplink",
+                "frequency": 435.050,
+                "modulation": "SSTV"
+            },
+            {
+                "description": "S TLM 1",
+                "frequency": 2232.220,
+                "modulation": "FM"
+            }
+            ]
+        },
         "48850": {
             "name": "RAMSAT",
             "source": "https://www.n2yo.com/satellite/?s=48850",
@@ -3334,6 +3666,47 @@
                 "description": "DLFIPQ downlink",
                 "frequency": 436.650,
                 "modulation": "1k2/2k4/19k2 FSK"
+            }
+            ]
+        },
+        "51850": {
+            "name": "GOES-18",
+            "source": "https://db.satnogs.org/satellite/FATA-2352-0047-2594-0636#transmitters",
+            "comms": [
+            {
+                "description": "meteorological mode L - GRB",
+                "frequency": 1686.600,
+                "modulation": "FM"
+            },
+            {
+                "description": "meteorological mode L - HRIT",
+                "frequency": 1694.100,
+                "modulation": "FM"
+            },
+            {
+                "description": "meteorological mode L - CDA",
+                "frequency": 1693.000,
+                "modulation": "FM"
+            },
+            {
+                "description": "meteorological mode S - TTC",
+                "frequency": 2211.040,
+                "modulation": "FM"
+            },
+            {
+                "description": "maritime mode L SARSAT to LUT",
+                "frequency": 1544.550,
+                "modulation": "FM"
+            },
+            {
+                "description": "mobile mode L - DCP Relay US",
+                "frequency": 1679.900,
+                "modulation": "FM"
+            },
+            {
+                "description": "mobile mode U - DCP Command 1",
+                "frequency": 468.775,
+                "modulation": "FM"
             }
             ]
         },
@@ -3672,17 +4045,17 @@
                 "modulation": "NFM PSK"
             },
             {
-                "description": "Mobile Telephony",
+                "description": "mobile telephony",
                 "frequency": 137.44,
                 "modulation": "NFM UNK"
             },
             {
-                "description": "Mobile Telephony",
+                "description": "mobile telephony",
                 "frequency": 137.46,
                 "modulation": "NFM UNK"
             },
             {
-                "description": "Mobile Telephony",
+                "description": "mobile telephony",
                 "frequency": 137.2,
                 "modulation": "NFM UNK"
 	    },
@@ -3760,12 +4133,22 @@
             ]        
         },
         "netsat": {
-            "source": "https://www.n2yo.com/satellite/?s=46504; https://www.n2yo.com/satellite/?s=46505; https://www.n2yo.com/satellite/?s=46506; https://www.n2yo.com/satellite/?s=46507",
+            "source": "https://www.n2yo.com/satellite/?s=46504; https://www.n2yo.com/satellite/?s=46505; https://www.n2yo.com/satellite/?s=46506; https://www.n2yo.com/satellite/?s=46507 https://db.satnogs.org/transmitters",
             "comms": [
             {
-                "description": "downlink",
+                "description": "telemetry downlink",
                 "frequency": 435.600,
-                "modulation": "9600bps FSK"
+                "modulation": "9600bps FSK AX.25 G3RUH"
+            }
+            ]
+        },
+        "beesat": {
+            "source": "https://db.satnogs.org/transmitters",
+            "comms": [
+            {
+                "description": "mode U - TLM (Mobitex)",
+                "frequency": 435.950,
+                "modulation": "1200/2400/4800bps GMSK"
             }
             ]
         },
@@ -3841,6 +4224,41 @@
 		"description": "downlink",
 		"frequency": 465.500,
 		"modulation": "HRPT"
+	    }
+	    ]
+	},
+	"meteor-m": {
+	    "source": "https://db.satnogs.org/transmitters",
+	    "comms": [
+	    {
+		"description": "meteorological downlink",
+		"frequency": 1700.000,
+		"modulation": "HRPT"
+	    }
+	    ]
+	},
+	"metop": {
+	    "source": "https://db.satnogs.org/transmitters",
+	    "comms": [
+	    {
+		"description": "downlink",
+		"frequency": 1701.300,
+		"modulation": "AHRPT"
+	    },
+	    {
+		"description": "downlink",
+		"frequency": 1707.000,
+		"modulation": "AHRPT"
+	    },
+	    {
+		"description": "telemetry",
+		"frequency": 2230.000,
+		"modulation": "PSK"
+	    },
+	    {
+		"description": "1",
+		"frequency": 137.100,
+		"modulation": "LRPT"
 	    }
 	    ]
 	},
