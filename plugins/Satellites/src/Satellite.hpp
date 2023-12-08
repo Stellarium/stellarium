@@ -380,9 +380,9 @@ private:
 
 	//Satellite Orbit Position calculation
 	gSatWrapper *pSatWrapper;
-	Vec3d	position;
-	Vec3d	velocity;
-	Vec3d	latLongSubPointPosition;
+	Vec3d	position; //< holds TEME coordinates [km]
+	Vec3d	velocity; //< holds TEME velocity [km/s]
+	Vec3d	latLongSubPointPosition; //< holds WGS84 satellite coordinates: long[degrees]/lat[degrees]/altitude[km]_over_wgs84
 	Vec3d	elAzPosition;
 
 	gSatWrapper::Visibility	visibility;
