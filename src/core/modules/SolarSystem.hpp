@@ -725,6 +725,9 @@ public slots:
 	void setFlagDrawSunHalo(bool b);
 	bool getFlagDrawSunHalo() const;
 
+	//! Reload the planets. This can be helpful as scripting command when editing planet details, e.g. comet tails or magnitude parameters.
+	void reloadPlanets();
+
 	//! Reset and recreate trails
 	void recreateTrails();
 
@@ -860,8 +863,6 @@ public:
 	//! Get the list of all the minor planet common english names
 	QStringList getAllMinorPlanetCommonEnglishNames() const;
 
-	//! Reload the planets
-	void reloadPlanets();
 
 	//! New 0.16: delete a planet from the solar system. Writes a warning to log if this is not a minor object.
 	bool removeMinorPlanet(QString name);

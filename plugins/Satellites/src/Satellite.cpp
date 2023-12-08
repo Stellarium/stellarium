@@ -827,7 +827,7 @@ void Satellite::update(double)
 		perigee                  = pa[0];
 		apogee                   = pa[1];
 		*/
-		if (height < 0.1)
+		if (height < 100) // below Kármán line: Satellite is certainly lost, at least TLE not applicable.
 		{
 			// The orbit is no longer valid.  Causes include very out of date
 			// TLE, system date and time out of a reasonable range, and orbital

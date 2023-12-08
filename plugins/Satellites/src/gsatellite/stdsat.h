@@ -20,19 +20,15 @@
 
 #ifndef STDSAT_H
 #define STDSAT_H
+#include <cmath>
 
 static const double KINTERPOLATIONLIMIT=0.0000000000001;
 static const double KMU=3.9861352E5;
-static const double KPI=3.1415926535897932384626433832795;
-static const double K2PI=6.283185307179586476925286766559;
 // AW: switch to use StelUtils::EARTH_RADIUS by WGS-84 data
 //static const double KEARTHRADIUS=6378.137;
 static const double __f=3.352779E-3;
 static const double KMFACTOR=7.292115E-5;
-static const double KAU=1.4959787066E8; //Km
 
-static const double KDEG2RAD  =   KPI / 180.0;   //   0.0174532925199433
-static const double KRAD2DEG  =  180.0 / KPI ;   //   0.0174532925199433
-static const double XPDOTP   =  1440.0 / K2PI;  // 229.1831180523293 minutes per radian (earth rotation)
+static const double XPDOTP   =  1440.0 / (2.*M_PI);  // 229.1831180523293 minutes per radian (earth rotation)
 
 #endif // STDSAT_H
