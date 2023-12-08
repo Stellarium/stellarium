@@ -269,9 +269,12 @@
           <item row="4" column="0">
            <layout class="QHBoxLayout" name="horizontalLayout_14">
             <item>
-             <widget class="QCheckBox" name="penumbraCheckBox">
+             <widget class="QCheckBox" name="umbraAtAltitude">
+              <property name="toolTip">
+               <string>Distance to the center of umbra from Earth's surface (height of imagined satellite)</string>
+              </property>
               <property name="text">
-               <string>Show Earth's penumbra</string>
+               <string>Show umbra/penumbra at altitude:</string>
               </property>
              </widget>
             </item>
@@ -289,9 +292,27 @@
              </spacer>
             </item>
             <item>
-             <widget class="ColorButton" name="penumbraColor">
-              <property name="toolTip">
-               <string>The color of Earth's penumbra circle</string>
+             <widget class="QDoubleSpinBox" name="umbraAltitude">
+              <property name="minimumSize">
+               <size>
+                <width>120</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+              <property name="decimals">
+               <number>1</number>
+              </property>
+              <property name="minimum">
+               <double>50.000000000000000</double>
+              </property>
+              <property name="maximum">
+               <double>400000.000000000000000</double>
+              </property>
+              <property name="value">
+               <double>300.000000000000000</double>
               </property>
              </widget>
             </item>
@@ -394,12 +415,9 @@
           <item row="3" column="0">
            <layout class="QHBoxLayout" name="horizontalLayout_17">
             <item>
-             <widget class="QCheckBox" name="umbraAtDistance">
-              <property name="toolTip">
-               <string>Distance to the center of umbra from Earth's surface (height of imagined satellite)</string>
-              </property>
+             <widget class="QCheckBox" name="penumbraCheckBox">
               <property name="text">
-               <string>Show umbra at distance:</string>
+               <string>Show Earth's penumbra</string>
               </property>
              </widget>
             </item>
@@ -417,24 +435,9 @@
              </spacer>
             </item>
             <item>
-             <widget class="QDoubleSpinBox" name="umbraDistance">
-              <property name="minimumSize">
-               <size>
-                <width>120</width>
-                <height>0</height>
-               </size>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-              </property>
-              <property name="decimals">
-               <number>1</number>
-              </property>
-              <property name="minimum">
-               <double>75.000000000000000</double>
-              </property>
-              <property name="maximum">
-               <double>400000.000000000000000</double>
+             <widget class="ColorButton" name="penumbraColor">
+              <property name="toolTip">
+               <string>The color of Earth's penumbra circle</string>
               </property>
              </widget>
             </item>
