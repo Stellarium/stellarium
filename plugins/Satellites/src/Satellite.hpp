@@ -249,6 +249,10 @@ public:
 	//! Vec4d(umbraDistance, umbraRadius, penumbraDistance, penumbraRadius);
 	Vec4d getUmbraData();
 
+	//! Get radii and geocentric distances of shadow circles in km for a hypothetical object in dist_km above the (spherical) Earth.
+	//! Vec4d(umbraDistance, umbraRadius, penumbraDistance, penumbraRadius);
+	static Vec4d getUmbraData(double dist_km);
+
 	//! Get operational status of satellite
 	QString getOperationalStatus() const;
 

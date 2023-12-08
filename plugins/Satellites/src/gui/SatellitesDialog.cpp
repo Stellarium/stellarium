@@ -183,11 +183,8 @@ void SatellitesDialog::createDialogContent()
 	handleOrbitLinesGroup(ui->orbitLinesCheckBox->isChecked());
 	// Logic sub-group: Umbra
 	connectBoolProperty(ui->umbraCheckBox,      "Satellites.flagUmbraVisible");
-	// V23.1: We must disable this button for now.
-	//connectBoolProperty(ui->umbraAtDistance,    "Satellites.flagUmbraAtFixedDistance");
-	//connectDoubleProperty(ui->umbraDistance,       "Satellites.umbraDistance");
-	ui->umbraAtDistance->hide();
-	ui->umbraDistance->hide();
+	connectBoolProperty(ui->umbraAtAltitude,    "Satellites.flagUmbraAtFixedAltitude");
+	connectDoubleProperty(ui->umbraAltitude,    "Satellites.umbraAltitude");
 	connect(ui->umbraCheckBox, SIGNAL(clicked(bool)), this, SLOT(handleUmbraGroup(bool)));
 	handleUmbraGroup(ui->umbraCheckBox->isChecked());
 	// Logic sub-group: Markers
@@ -337,8 +334,8 @@ void SatellitesDialog::handleOrbitLinesGroup(bool state)
 
 void SatellitesDialog::handleUmbraGroup(bool state)
 {
-	ui->umbraAtDistance->setEnabled(state);
-	ui->umbraDistance->setEnabled(state);
+	ui->umbraAtAltitude->setEnabled(state);
+	ui->umbraAltitude->setEnabled(state);
 	ui->penumbraCheckBox->setEnabled(state);
 }
 
@@ -1181,8 +1178,8 @@ void SatellitesDialog::populateInfo()
 	ui->maxAltitude->setSuffix(QString(" %1").arg(km));
 	ui->maxAltitude->setToolTip(QString("%1: %2..%3 %4").arg(vr, QString::number(ui->maxAltitude->minimum(), 'f', 0), QString::number(ui->maxAltitude->maximum(), 'f', 0), km));
 	ui->altitudeCheckBox->setToolTip(QString("<p>%1</p>").arg(q_("Display satellites and their orbits within selected range of altitudes only.")));
-	ui->umbraDistance->setSuffix(QString(" %1").arg(km));
-	ui->umbraDistance->setToolTip(QString("<p>%1. %2: %3..%4 %5</p>").arg(q_("Distance to the center of umbra from Earth's surface (height of imagined satellite)"), vr, QString::number(ui->umbraDistance->minimum(), 'f', 1), QString::number(ui->umbraDistance->maximum(), 'f', 1), km));
+	ui->umbraAltitude->setSuffix(QString(" %1").arg(km));
+	ui->umbraAltitude->setToolTip(QString("<p>%1. %2: %3..%4 %5</p>").arg(q_("Altitude of imagined satellite"), vr, QString::number(ui->umbraAltitude->minimum(), 'f', 1), QString::number(ui->umbraAltitude->maximum(), 'f', 1), km));
 	ui->orbitSegmentsSpin->setToolTip(QString("<p>%1. %2: %3..%4</p>").arg(q_("Number of segments: number of segments used to draw the line"), vr, QString::number(ui->orbitSegmentsSpin->minimum()), QString::number(ui->orbitSegmentsSpin->maximum())));
 	ui->orbitDurationSpin->setToolTip(QString("<p>%1. %2: %3..%4 %5</p>").arg(q_("Segment length: duration of a single segment in seconds"), vr, QString::number(ui->orbitDurationSpin->minimum()), QString::number(ui->orbitDurationSpin->maximum()), s));
 	ui->orbitFadeSpin->setToolTip(QString("<p>%1. %2: %3..%4</p>").arg(q_("Fade length: number of segments used to draw each end of the line"), vr, QString::number(ui->orbitFadeSpin->minimum()), QString::number(ui->orbitFadeSpin->maximum())));
