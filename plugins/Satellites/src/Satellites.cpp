@@ -102,7 +102,6 @@ Satellites::Satellites()
 	, fixedUmbraAltitude(1000.0)
 	, flagPenumbraVisible(false)
 	, penumbraColor(1.0f, 0.0f, 0.0f)
-	, earthShadowEnlargementDanjon(false)
 	, lastSelectedSatellite(QString())
 	#if(SATELLITES_PLUGIN_IRIDIUM == 1)
 	, iridiumFlaresPredictionDepth(7)
@@ -228,7 +227,6 @@ void Satellites::init()
 	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(updateObserverLocation(StelLocation)));
 	connect(core, SIGNAL(configurationDataSaved()), this, SLOT(saveSettings()));
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(translateData()));
-	connect(ssystem, SIGNAL(earthShadowEnlargementDanjonChanged(bool)), this, SLOT(updateEarthShadowEnlargementFlag(bool)));
 
 	connect(this, SIGNAL(satSelectionChanged(QString)), this, SLOT(changeSelectedSatellite(QString)));
 
@@ -2875,19 +2873,10 @@ void Satellites::drawCircles(StelCore* core, StelPainter &painter)
 	else
 		return;
 
-
-	double shadowScale=1.02;
-	if (earthShadowEnlargementDanjon)
-	{
-		shadowScale = 1.+1./85.-1./594.; // ~1.01, shadow magnification factor (see Espenak 5000 years Canon)
-	}
-	// FIXME: Any shadow enlargement here contradicts visibility computations in the main model.
-	shadowScale = 1.;
-
 	const double umbraDistance_AU    = umbraData[0];
-	const double umbraRadius_AU      = umbraData[1] * shadowScale;
+	const double umbraRadius_AU      = umbraData[1];
 	const double penumbraDistance_AU = umbraData[2];
-	const double penumbraRadius_AU   = umbraData[3] * shadowScale;
+	const double penumbraRadius_AU   = umbraData[3];
 	StelVertexArray umbra(StelVertexArray::LineLoop);
 	for (int i=0; i<4*360; ++i)
 	{
@@ -2905,7 +2894,6 @@ void Satellites::drawCircles(StelCore* core, StelPainter &painter)
 	Vec3d coord = pos+point;
 	painter.drawSprite2dMode(coord, 5.f);
 	QString number = QString::number( (getFlagUmbraAtFixedAltitude() ? getUmbraAltitude() : sat->latLongSubPointPosition[2] ), 'f', 1);
-	//QString cuLabel = QString("%1 (h=%2 %3)").arg(q_("C.U."), QString::number(AU*(umbraDistance_AU - earth->getEquatorialRadius()), 'f', 1), qc_("km","distance"));
 	QString cuLabel = QString("%1 (h=%2 %3)").arg(q_("C.U."), number, qc_("km","distance"));
 	const float shift = 8.f;
 	painter.drawText(coord, cuLabel, 0, shift, shift, false);
