@@ -448,7 +448,7 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 		//Visibility: Full text		
 		oss << q_(visibilityDescription.value(visibility, "")) << "<br />";
 
-		if (!comms.isEmpty())
+		if (!comms.isEmpty() && (status!=Satellite::StatusNonoperational))
 		{
 			oss << q_("Radio communication") << ":<br/>";
 			for (const auto& c : comms)
@@ -468,9 +468,6 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 
 QString Satellite::getCommLinkInfo(CommLink comm) const
 {
-	if (status==Satellite::StatusNonoperational)
-		return QString();
-
 	QString commLinkData;
 	if (!comm.modulation.isEmpty()) // OK, the signal modulation mode is exist
 		commLinkData = comm.modulation;
