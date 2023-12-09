@@ -46,35 +46,36 @@ StelTexture::StelTexture(StelTextureMgr *mgr)
 
 StelTexture::~StelTexture()
 {
-	if (id != 0)
+	if (id)
 	{
-		/// FS: make sure the correct GL context is bound!
-		/// Causes #595 flicker in Night Mode with DSS/HiPS. Tentatively remove this.
-		//StelApp::getInstance().ensureGLContextCurrent();
-
-		if (gl->glIsTexture(id)==GL_FALSE)
+		if (id != 0)
 		{
-			GLenum err = gl->glGetError();
-			qWarning() << "WARNING: in StelTexture::~StelTexture() tried to delete invalid texture with ID="
-			           << id << "Current GL ERROR status is" << err << "(" << StelOpenGL::getGLErrorText(err) << ")";
+			/// FS: make sure the correct GL context is bound!
+			/// Causes #595 flicker in Night Mode with DSS/HiPS. Tentatively remove this.
+			//StelApp::getInstance().ensureGLContextCurrent();
+
+			if (gl->glIsTexture(id)==GL_FALSE)
+			{
+				GLenum err = gl->glGetError();
+				qWarning() << "WARNING: in StelTexture::~StelTexture() tried to delete invalid texture with ID="
+					   << id << "Current GL ERROR status is" << err << "(" << StelOpenGL::getGLErrorText(err) << ")";
+			}
+			else
+			{
+				gl->glDeleteTextures(1, &id);
+				textureMgr->glMemoryUsage -= glSize;
+				textureMgr->idMap.remove(id);
+				glSize = 0;
+			}
+	#ifndef NDEBUG
+			if (qApp->property("verbose") == true)
+				qDebug() << "Deleted StelTexture" << id << ", total memory usage "
+					 << textureMgr->glMemoryUsage / (1024.0 * 1024.0)<<"MB";
+	#endif
+			id = 0;
 		}
 		else
-		{
-			gl->glDeleteTextures(1, &id);
-			textureMgr->glMemoryUsage -= glSize;
-			textureMgr->idMap.remove(id);
-			glSize = 0;
-		}
-#ifndef NDEBUG
-		if (qApp->property("verbose") == true)
-			qDebug() << "Deleted StelTexture" << id << ", total memory usage "
-			         << textureMgr->glMemoryUsage / (1024.0 * 1024.0)<<"MB";
-#endif
-		id = 0;
-	}
-	else if (id)
-	{
-		qWarning()<<"Cannot delete texture"<<id<<", no GL context";
+			qWarning()<<"Cannot delete texture"<<id<<", no GL context";
 	}
 	if (networkReply)
 	{
