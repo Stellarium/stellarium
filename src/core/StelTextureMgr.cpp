@@ -46,6 +46,7 @@ StelTextureMgr::StelTextureMgr(QObject *parent)
 	ctx->functions()->glGetIntegerv(GL_MAX_TEXTURE_SIZE, &maxTexSize);
 	if (maxTexSize<8192)
 		qDebug() << "Max texture size:" << maxTexSize;
+	StelTexture::textureMgr = this;
 }
 
 StelTextureSP StelTextureMgr::createTexture(const QString& afilename, const StelTexture::StelTextureParams& params)
@@ -67,7 +68,7 @@ StelTextureSP StelTextureMgr::createTexture(const QString& afilename, const Stel
 	StelTextureSP cache = lookupCache(canPath);
 	if(!cache.isNull()) return cache;
 
-	StelTextureSP tex = StelTextureSP(new StelTexture(this));
+	StelTextureSP tex = StelTextureSP(new StelTexture);
 	tex->fullPath = canPath;
 
 	QImage image(tex->fullPath);
@@ -159,7 +160,7 @@ StelTextureSP StelTextureMgr::createTextureThread(const QString& url, const Stel
 	StelTextureSP cache = lookupCache(canPath);
 	if(!cache.isNull()) return cache;
 
-	StelTextureSP tex = StelTextureSP(new StelTexture(this));
+	StelTextureSP tex = StelTextureSP(new StelTexture);
 	tex->loadParams = params;
 	tex->fullPath = canPath;
 	if (!lazyLoading)
@@ -175,7 +176,7 @@ StelTextureSP StelTextureMgr::createTextureThread(const QString& url, const Stel
 //! Create a texture from a QImage.
 StelTextureSP StelTextureMgr::createTexture(const QImage &image, const StelTexture::StelTextureParams& params)
 {
-	StelTextureSP tex = StelTextureSP(new StelTexture(this));
+	StelTextureSP tex = StelTextureSP(new StelTexture);
 	tex->loadParams = params;
 	bool r = tex->glLoad(image);
 	Q_ASSERT(r);
@@ -202,7 +203,7 @@ StelTextureSP StelTextureMgr::wrapperForGLTexture(GLuint texId)
 
 
 	//no existing tex with this ID found, create a new wrapper
-	StelTextureSP newTex(new StelTexture(this));
+	StelTextureSP newTex(new StelTexture);
 	newTex->wrapGLTexture(texId);
 	if(!newTex->errorOccured)
 	{
@@ -230,7 +231,7 @@ StelTextureSP StelTextureMgr::getDitheringTexture(const int samplerToBindTo)
 
 	const auto texId = ForTextureMgr::makeDitherPatternTexture(gl);
 
-	ditheringTexture.reset(new StelTexture(this));
+	ditheringTexture.reset(new StelTexture);
 	ditheringTexture->wrapGLTexture(texId);
 	if(!ditheringTexture->errorOccured)
 	{
