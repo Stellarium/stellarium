@@ -34,7 +34,7 @@ class QThreadPool;
 //! @class StelTextureMgr
 //! Manage textures loading.
 //! It provides method for loading images in a separate thread.
-class StelTextureMgr : QObject
+class StelTextureMgr : public QObject
 {
 	Q_OBJECT
 public:
