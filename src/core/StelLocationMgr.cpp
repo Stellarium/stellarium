@@ -17,6 +17,7 @@
  */
 
 #include "StelLocationMgr.hpp"
+#include "LandscapeMgr.hpp"
 #include "SolarSystem.hpp"
 #include "StelLocationMgr_p.hpp"
 
@@ -1074,7 +1075,7 @@ void StelLocationMgr::positionUpdated(QGeoPositionInfo info)
 
 void StelLocationMgr::changeLocationFromGPSQuery(const StelLocation &locin)
 {
-	bool verbose=qApp->property("verbose").toBool();
+	const bool verbose=qApp->property("verbose").toBool();
 	StelCore *core=StelApp::getInstance().getCore();
 	StelLocation loc=locin;
 	loc.lightPollutionLuminance=StelLocation::DEFAULT_LIGHT_POLLUTION_LUMINANCE;
@@ -1085,8 +1086,14 @@ void StelLocationMgr::changeLocationFromGPSQuery(const StelLocation &locin)
 	loc.name=QString("GPS %1%2 %3%4")
 		.arg(loc.getLatitude()<0?"S":"N").arg(qRound(abs(loc.getLatitude())))
 		.arg(loc.getLongitude()<0?"W":"E").arg(qRound(abs(loc.getLongitude())));
-	QColor color=getColorForCoordinates(loc.getLongitude(), loc.getLatitude());
-	core->moveObserverTo(loc, 0.0, 0.0, QString("ZeroColor(%1)").arg(Vec3f(color).toStr()));
+	LandscapeMgr *lMgr=GETSTELMODULE(LandscapeMgr);
+	QString landscapeAutoName;
+	if (lMgr->getFlagLandscapeAutoSelection())
+	{
+		QColor color=getColorForCoordinates(loc.getLongitude(), loc.getLatitude());
+		landscapeAutoName=QString("ZeroColor(%1)").arg(Vec3f(color).toStr());
+	}
+	core->moveObserverTo(loc, 0.0, 0.0, landscapeAutoName);
 	if (nmeaHelper)
 	{
 		if (verbose)
@@ -1164,8 +1171,15 @@ void StelLocationMgr::changeLocationFromNetworkLookup()
 			// Ensure that ipTimeZone is a valid IANA timezone name!
 			QTimeZone ipTZ(ipTimeZone.toUtf8());
 			core->setCurrentTimeZone( !ipTZ.isValid() || ipTimeZone.isEmpty() ? "LMST" : ipTimeZone);
-			QColor color=getColorForCoordinates(loc.getLongitude(), loc.getLatitude());
-			core->moveObserverTo(loc, 0.0, 0.0, QString("ZeroColor(%1)").arg(Vec3f(color).toStr()));
+			LandscapeMgr *lMgr=GETSTELMODULE(LandscapeMgr);
+			QString landscapeAutoName;
+			if (lMgr->getFlagLandscapeAutoSelection())
+			{
+				QColor color=getColorForCoordinates(loc.getLongitude(), loc.getLatitude());
+				landscapeAutoName=QString("ZeroColor(%1)").arg(Vec3f(color).toStr());
+			}
+			core->moveObserverTo(loc, 0.0, 0.0, landscapeAutoName);
+
 
 			QSettings* conf = StelApp::getInstance().getSettings();
 			conf->setValue("init_location/last_location", QString("%1, %2").arg(latitude).arg(longitude));

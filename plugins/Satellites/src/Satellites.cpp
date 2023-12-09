@@ -97,12 +97,11 @@ Satellites::Satellites()
 	, autoRemoveEnabled(false)
 	, updateFrequencyHours(0)
 	, flagUmbraVisible(false)
-	, flagUmbraAtFixedDistance(false)
+	, flagUmbraAtFixedAltitude(false)
 	, umbraColor(1.0f, 0.0f, 0.0f)
-	, fixedUmbraDistance(1000.0)
+	, fixedUmbraAltitude(1000.0)
 	, flagPenumbraVisible(false)
 	, penumbraColor(1.0f, 0.0f, 0.0f)
-	, earthShadowEnlargementDanjon(false)
 	, lastSelectedSatellite(QString())
 	#if(SATELLITES_PLUGIN_IRIDIUM == 1)
 	, iridiumFlaresPredictionDepth(7)
@@ -228,7 +227,6 @@ void Satellites::init()
 	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(updateObserverLocation(StelLocation)));
 	connect(core, SIGNAL(configurationDataSaved()), this, SLOT(saveSettings()));
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(translateData()));
-	connect(ssystem, SIGNAL(earthShadowEnlargementDanjonChanged(bool)), this, SLOT(updateEarthShadowEnlargementFlag(bool)));
 
 	connect(this, SIGNAL(satSelectionChanged(QString)), this, SLOT(changeSelectedSatellite(QString)));
 
@@ -689,9 +687,9 @@ void Satellites::restoreDefaultSettings()
 	conf->setValue("hide_invisible_satellites", false);
 	conf->setValue("colored_invisible_satellites", true);
 	conf->setValue("umbra_flag", false);
-	conf->setValue("umbra_fixed_distance_flag", false);
+	conf->setValue("umbra_fixed_altitude_flag", false);
 	conf->setValue("umbra_color", "1.0,0.0,0.0");
-	conf->setValue("umbra_fixed_distance", 1000.0);
+	conf->setValue("umbra_fixed_altitude", 1000.0);
 	conf->setValue("penumbra_flag", false);
 	conf->setValue("penumbra_color", "1.0,0.0,0.0");
 	conf->setValue("cf_magnitude_flag", false);
@@ -834,11 +832,9 @@ void Satellites::loadSettings()
 
 	// umbra/penumbra
 	setFlagUmbraVisible(conf->value("umbra_flag", false).toBool());
-	// FIXME: Repair the functionality!
-	setFlagUmbraAtFixedDistance(false);
-	//setFlagUmbraAtFixedDistance(conf->value("umbra_fixed_distance_flag", false).toBool());
+	setFlagUmbraAtFixedAltitude(conf->value("umbra_fixed_altitude_flag", false).toBool());
 	setUmbraColor(Vec3f(conf->value("umbra_color", "1.0,0.0,0.0").toString()));
-	setUmbraDistance(conf->value("umbra_fixed_distance", 1000.0).toDouble());
+	setUmbraAltitude(conf->value("umbra_fixed_altitude", 1000.0).toDouble());
 	setFlagPenumbraVisible(conf->value("penumbra_flag", false).toBool());
 	setPenumbraColor(Vec3f(conf->value("penumbra_color", "1.0,0.0,0.0").toString()));
 
@@ -930,11 +926,9 @@ void Satellites::saveSettingsToConfig()
 
 	// umbra/penumbra
 	conf->setValue("umbra_flag", getFlagUmbraVisible());
-	// FIXME: Fix and re-enable this function
-	//conf->setValue("umbra_fixed_distance_flag", getFlagUmbraAtFixedDistance());
-	conf->setValue("umbra_fixed_distance_flag", false); // Preliminary
+	conf->setValue("umbra_fixed_altitude_flag", getFlagUmbraAtFixedAltitude());
 	conf->setValue("umbra_color", getUmbraColor().toStr());
-	conf->setValue("umbra_fixed_distance", getUmbraDistance());
+	conf->setValue("umbra_fixed_altitude", getUmbraAltitude());
 	conf->setValue("penumbra_flag", getFlagPenumbraVisible());
 	conf->setValue("penumbra_color", getPenumbraColor().toStr());
 
@@ -1911,18 +1905,14 @@ void Satellites::setFlagUmbraVisible(bool b)
 	}
 }
 
-void Satellites::setFlagUmbraAtFixedDistance(bool b)
+void Satellites::setFlagUmbraAtFixedAltitude(bool b)
 {
-	flagUmbraAtFixedDistance = false;
-	qDebug() << "setFlagUmbraAtFixedDistance() currently not possible";
-
-	// TO BE FIXED
-	//if (flagUmbraAtFixedDistance != b)
-	//{
-	//	flagUmbraAtFixedDistance = b;
-	//	emit settingsChanged(); // GZ IS THIS REQUIRED/USEFUL??
-	//	emit flagUmbraAtFixedDistanceChanged(b);
-	//}
+	if (flagUmbraAtFixedAltitude != b)
+	{
+		flagUmbraAtFixedAltitude = b;
+		emit settingsChanged(); // GZ IS THIS REQUIRED/USEFUL??
+		emit flagUmbraAtFixedAltitudeChanged(b);
+	}
 }
 
 void Satellites::setUmbraColor(const Vec3f &c)
@@ -1931,10 +1921,10 @@ void Satellites::setUmbraColor(const Vec3f &c)
 	emit umbraColorChanged(c);
 }
 
-void Satellites::setUmbraDistance(double d)
+void Satellites::setUmbraAltitude(double d)
 {
-	fixedUmbraDistance = d;
-	emit umbraDistanceChanged(d);
+	fixedUmbraAltitude = d;
+	emit umbraAltitudeChanged(d);
 }
 
 void Satellites::setFlagPenumbraVisible(bool b)
@@ -2860,7 +2850,7 @@ void Satellites::drawCircles(StelCore* core, StelPainter &painter)
 	painter.setLineSmooth(true);
 	painter.setFont(labelFont);
 
-	double lambda, beta, umbraDistance_AU, umbraRadius_AU, penumbraDistance_AU, penumbraRadius_AU;
+	double lambda, beta;
 	const Vec3d pos = earth->getEclipticPos();
 	const Vec3d dir = - sun->getAberrationPush() + pos;
 	StelUtils::rectToSphe(&lambda, &beta, dir);
@@ -2871,47 +2861,26 @@ void Satellites::drawCircles(StelCore* core, StelPainter &painter)
 	if (!newSelected.empty())
 		sat = getById(newSelected[0].staticCast<Satellite>()->getCatalogNumberString());
 
-	if (flagUmbraAtFixedDistance)
+	Vec4d umbraData;
+	if (flagUmbraAtFixedAltitude)
 	{
-		umbraDistance_AU = penumbraDistance_AU = fixedUmbraDistance/AU+earth->getEquatorialRadius(); // geocentric circle distance [AU]
-		const double earthDistance=earth->getHeliocentricEclipticPos().norm(); // Earth distance [AU]
-		const double sunHP = asin(earth->getEquatorialRadius()/earthDistance)    * (M_180_PI*3600.); // arcsec.
-		const double satHP = asin(earth->getEquatorialRadius()/umbraDistance_AU) * (M_180_PI*3600.); // arcsec.
-		const double sunSD = atan(sun->getEquatorialRadius()/earthDistance)      * (M_180_PI*3600.); // arcsec.
-
-		//Classical Bessel elements
-		double f1, f2;
-		if (earthShadowEnlargementDanjon)
-		{
-			static const double danjonScale=1+1./85.-1./594.; // ~1.01, shadow magnification factor (see Espenak 5000 years Canon)
-			f1=danjonScale*satHP + sunHP + sunSD; // penumbra radius, arcsec
-			f2=danjonScale*satHP + sunHP - sunSD; // umbra radius, arcsec
-		}
-		else
-		{
-			const double mHP1=0.998340*satHP;
-			f1=1.02*(mHP1 + sunHP + sunSD); // penumbra radius, arcsec
-			f2=1.02*(mHP1 + sunHP - sunSD); // umbra radius, arcsec
-		}
-		penumbraRadius_AU=tan(f1/3600.*M_PI_180)*umbraDistance_AU;
-		umbraRadius_AU=tan(f2/3600.*M_PI_180)*umbraDistance_AU;
+		umbraData=Satellite::getUmbraData(fixedUmbraAltitude)/AU;
 	}
 	else if (!sat.isNull())
 	{
-		Vec4d umbraData=sat->getUmbraData();
-		umbraDistance_AU    = umbraData[0]/AU;
-		umbraRadius_AU      = umbraData[1]/AU;
-		penumbraDistance_AU = umbraData[2]/AU;
-		penumbraRadius_AU   = umbraData[3]/AU;
+		umbraData=sat->getUmbraData()/AU;
 	}
 	else
 		return;
 
-
+	const double umbraDistance_AU    = umbraData[0];
+	const double umbraRadius_AU      = umbraData[1];
+	const double penumbraDistance_AU = umbraData[2];
+	const double penumbraRadius_AU   = umbraData[3];
 	StelVertexArray umbra(StelVertexArray::LineLoop);
-	for (int i=0; i<360; ++i)
+	for (int i=0; i<4*360; ++i)
 	{
-		Vec3d point(umbraDistance_AU, cos(i*M_PI_180)*umbraRadius_AU, sin(i*M_PI_180)*umbraRadius_AU);
+		Vec3d point(umbraDistance_AU, cos(i*M_PI_180*0.25)*umbraRadius_AU, sin(i*M_PI_180*0.25)*umbraRadius_AU);
 		rot.transfo(point);
 		umbra.vertex.append(pos+point);
 	}
@@ -2924,16 +2893,17 @@ void Satellites::drawCircles(StelCore* core, StelPainter &painter)
 	rot.transfo(point);
 	Vec3d coord = pos+point;
 	painter.drawSprite2dMode(coord, 5.f);
-	QString cuLabel = QString("%1 (h=%2 %3)").arg(q_("C.U."), QString::number(AU*(umbraDistance_AU - earth->getEquatorialRadius()), 'f', 1), qc_("km","distance"));
+	QString number = QString::number( (getFlagUmbraAtFixedAltitude() ? getUmbraAltitude() : sat->latLongSubPointPosition[2] ), 'f', 1);
+	QString cuLabel = QString("%1 (h=%2 %3)").arg(q_("C.U."), number, qc_("km","distance"));
 	const float shift = 8.f;
 	painter.drawText(coord, cuLabel, 0, shift, shift, false);
 
 	if (getFlagPenumbraVisible())
 	{
 		StelVertexArray penumbra(StelVertexArray::LineLoop);
-		for (int i=0; i<360; ++i)
+		for (int i=0; i<4*360; ++i)
 		{
-			Vec3d point(penumbraDistance_AU, cos(i*M_PI_180)*penumbraRadius_AU, sin(i*M_PI_180)*penumbraRadius_AU);
+			Vec3d point(penumbraDistance_AU, cos(i*M_PI_180*0.25)*penumbraRadius_AU, sin(i*M_PI_180*0.25)*penumbraRadius_AU);
 			rot.transfo(point);
 			penumbra.vertex.append(pos+point);
 		}

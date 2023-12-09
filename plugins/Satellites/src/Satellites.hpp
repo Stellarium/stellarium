@@ -165,8 +165,8 @@ class Satellites : public StelObjectModule
 	Q_PROPERTY(Vec3f invisibleSatelliteColor	READ getInvisibleSatelliteColor		WRITE setInvisibleSatelliteColor	NOTIFY invisibleSatelliteColorChanged)
 	Q_PROPERTY(Vec3f transitSatelliteColor		READ getTransitSatelliteColor		WRITE setTransitSatelliteColor		NOTIFY transitSatelliteColorChanged)
 	Q_PROPERTY(bool flagUmbraVisible		READ getFlagUmbraVisible		WRITE setFlagUmbraVisible		NOTIFY flagUmbraVisibleChanged)
-	Q_PROPERTY(bool flagUmbraAtFixedDistance	READ getFlagUmbraAtFixedDistance	WRITE setFlagUmbraAtFixedDistance	NOTIFY flagUmbraAtFixedDistanceChanged)
-	Q_PROPERTY(double umbraDistance			READ getUmbraDistance			WRITE setUmbraDistance			NOTIFY umbraDistanceChanged)
+	Q_PROPERTY(bool flagUmbraAtFixedAltitude	READ getFlagUmbraAtFixedAltitude	WRITE setFlagUmbraAtFixedAltitude	NOTIFY flagUmbraAtFixedAltitudeChanged)
+	Q_PROPERTY(double umbraAltitude			READ getUmbraAltitude			WRITE setUmbraAltitude			NOTIFY umbraAltitudeChanged)
 	Q_PROPERTY(Vec3f umbraColor			READ getUmbraColor			WRITE setUmbraColor			NOTIFY umbraColorChanged)
 	Q_PROPERTY(bool flagPenumbraVisible		READ getFlagPenumbraVisible		WRITE setFlagPenumbraVisible		NOTIFY flagPenumbraVisibleChanged)
 	Q_PROPERTY(Vec3f penumbraColor			READ getPenumbraColor			WRITE setPenumbraColor			NOTIFY penumbraColorChanged)
@@ -435,9 +435,9 @@ signals:
 	void invisibleSatelliteColorChanged(Vec3f);
 	void transitSatelliteColorChanged(Vec3f);
 	void flagUmbraVisibleChanged(bool b);
-	void flagUmbraAtFixedDistanceChanged(bool b);
+	void flagUmbraAtFixedAltitudeChanged(bool b);
 	void umbraColorChanged(Vec3f);
-	void umbraDistanceChanged(double d);
+	void umbraAltitudeChanged(double d);
 	void flagPenumbraVisibleChanged(bool b);
 	void penumbraColorChanged(Vec3f);
 	void flagCFKnownStdMagnitudeChanged(bool b);
@@ -611,11 +611,10 @@ public slots:
 	void setFlagUmbraVisible(bool b);
 	bool getFlagUmbraVisible() { return flagUmbraVisible; }
 
-	//! Set whether ring of Earth's umbra should be displayed at fixed distance.
+	//! Set whether ring of Earth's umbra should be displayed at given satellite altitude.
 	//! Emits settingsChanged() if the value changes.
-	//! V23.1: For now this had to be disabled/set to false.
-	void setFlagUmbraAtFixedDistance(bool b);
-	bool getFlagUmbraAtFixedDistance() { return flagUmbraAtFixedDistance; }
+	void setFlagUmbraAtFixedAltitude(bool b);
+	bool getFlagUmbraAtFixedAltitude() { return flagUmbraAtFixedAltitude; }
 
 	//! Get color for ring of Earth's umbra
 	//! @return color
@@ -625,9 +624,9 @@ public slots:
 
 	//! Get the fixed distance for center of visualized Earth's umbra
 	//! @return distance, km
-	double getUmbraDistance() { return fixedUmbraDistance; }
+	double getUmbraAltitude() { return fixedUmbraAltitude; }
 	//! Set the fixed distance for center of visualized Earth's umbra
-	void setUmbraDistance(double d);
+	void setUmbraAltitude(double d);
 
 	//! Set whether ring of Earth's penumbra should be displayed.
 	//! Emits settingsChanged() if the value changes.
@@ -778,7 +777,6 @@ private slots:
 	//! Call when button "Save settings" in main GUI are pressed
 	void saveSettings() { saveSettingsToConfig(); }	
 	void translateData();
-	void updateEarthShadowEnlargementFlag(bool state) { earthShadowEnlargementDanjon=state; }
 
 private:
 	//! Drawing the circles of Earth's umbra and penumbra
@@ -916,17 +914,14 @@ private:
 	//@{
 	//! Flag enabling visualization the Earth's umbra.
 	bool flagUmbraVisible;
-	//! Flag enabling visualization the Earth's umbra at fixed distance
-	//! V23.1: This had to be disabled until computation will be implemented correctly.
-	bool flagUmbraAtFixedDistance; // MUST REMAIN false FOR NOW!
+	//! Flag enabling visualization the Earth's umbra at a given altitude above a spherical Earth
+	bool flagUmbraAtFixedAltitude;
 	Vec3f umbraColor;
 	//! The distance for center of visualized Earth's umbra in kilometers
-	double fixedUmbraDistance;
+	double fixedUmbraAltitude;
 	//! Flag enabling visualization the Earth's penumbra.
 	bool flagPenumbraVisible;
 	Vec3f penumbraColor;
-	//! Used to track whether earth shadow enlargement shall be computed after Danjon (1951)
-	bool earthShadowEnlargementDanjon;
 	//@}
 
 	//! @name Screen message infrastructure
