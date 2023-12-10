@@ -788,7 +788,7 @@ private:
 	//! @returns true if the addition was successful.
 	bool add(const TleData& tleData);
 	//! Guess the groups of satellites
-	QStringList guessGroups(const TleData& tleData);
+	QStringList guessGroups(const TleData& tleData);	
 	//! Get the standard magnitude and RCS data for satellite
 	//! @return standard magnitude, RCS
 	QPair<double, double> getStdMagRCS(const TleData& tleData);

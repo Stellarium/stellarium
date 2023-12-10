@@ -1045,8 +1045,37 @@ SatFlags Satellite::getFlags() const
 		flags |= SatCustomFilter;
 	if (!comms.isEmpty())
 		flags |= SatCommunication;
-	if (apogee<=100.0 || height<=100.0) // Karman line, atmosphere
+	if (apogee<=100.0 || height<=100.0) // Karman line, atmosphere: thermosphere
 		flags |= SatReentry;
+	if (status == StatusOperational)
+	{
+		flags |= SatOperationalOS;
+		flags |= SatActiveOS;
+	}
+	if (status == StatusNonoperational)
+		flags |= SatNonoperationalOS;
+	if (status == StatusPartiallyOperational)
+	{
+		flags |= SatPartiallyOperationalOS;
+		flags |= SatActiveOS;
+	}
+	if (status == StatusStandby)
+	{
+		flags |= SatStandbyOS;
+		flags |= SatActiveOS;
+	}
+	if (status == StatusSpare)
+	{
+		flags |= SatSpareOS;
+		flags |= SatActiveOS;
+	}
+	if (status == StatusExtendedMission)
+	{
+		flags |= SatExtendedMissionOS;
+		flags |= SatActiveOS;
+	}
+	if (status == StatusDecayed)
+		flags |= SatDecayedOS;
 
 	return flags;
 }

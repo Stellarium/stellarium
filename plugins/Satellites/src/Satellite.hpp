@@ -73,29 +73,37 @@ typedef QSet<QString> GroupSet;
 //! @ingroup satellites
 enum SatFlag
 {
-	SatNoFlags		= 0x000000,
-	SatDisplayed		= 0x000001,
-	SatNotDisplayed		= 0x000002,
-	SatUser			= 0x000004,
-	SatOrbit		= 0x000008,
-	SatNew			= 0x000010,
-	SatError		= 0x000020,
-	SatSmallSize		= 0x000040,
-	SatMediumSize		= 0x000080,
-	SatLargeSize		= 0x000100,
-	SatLEO			= 0x000200,
-	SatMEO			= 0x000400,
-	SatGSO			= 0x000800,
-	SatHEO			= 0x001000,
-	SatHGSO			= 0x002000,
-	SatPolarOrbit		= 0x004000,
-	SatEquatOrbit		= 0x008000,
-	SatPSSO			= 0x010000,
-	SatHEarthO		= 0x020000,
-	SatOutdatedTLE		= 0x040000,
-	SatCustomFilter		= 0x080000,
-	SatCommunication	= 0x100000,
-	SatReentry		= 0x200000
+	SatNoFlags				= 0x00000000,
+	SatDisplayed				= 0x00000001,
+	SatNotDisplayed			= 0x00000002,
+	SatUser					= 0x00000004,
+	SatOrbit					= 0x00000008,
+	SatNew					= 0x00000010,
+	SatError					= 0x00000020,
+	SatSmallSize				= 0x00000040,
+	SatMediumSize			= 0x00000080,
+	SatLargeSize				= 0x00000100,
+	SatLEO					= 0x00000200,
+	SatMEO					= 0x00000400,
+	SatGSO					= 0x00000800,
+	SatHEO					= 0x00001000,
+	SatHGSO					= 0x00002000,
+	SatPolarOrbit				= 0x00004000,
+	SatEquatOrbit				= 0x00008000,
+	SatPSSO					= 0x00010000,
+	SatHEarthO				= 0x00020000,
+	SatOutdatedTLE			= 0x00040000,
+	SatCustomFilter			= 0x00080000,
+	SatCommunication			= 0x00100000,
+	SatReentry				= 0x00200000,
+	SatActiveOS				= 0x00400000,
+	SatOperationalOS			= 0x00800000,
+	SatNonoperationalOS		= 0x01000000,
+	SatPartiallyOperationalOS	= 0x02000000,
+	SatStandbyOS				= 0x04000000,
+	SatSpareOS				= 0x08000000,
+	SatExtendedMissionOS		= 0x10000000,
+	SatDecayedOS			= 0x20000000
 };
 typedef QFlags<SatFlag> SatFlags;
 Q_DECLARE_OPERATORS_FOR_FLAGS(SatFlags)
@@ -124,14 +132,14 @@ public:
 	//! @enum OptStatus operational statuses
 	enum OptStatus
 	{
-		StatusOperational          = 1,
-		StatusNonoperational       = 2,
-		StatusPartiallyOperational = 3,
-		StatusStandby              = 4,
-		StatusSpare                = 5,
-		StatusExtendedMission      = 6,
-		StatusDecayed              = 7,
-		StatusUnknown              = 0
+		StatusOperational			= 1,
+		StatusNonoperational		= 2,
+		StatusPartiallyOperational	= 3,
+		StatusStandby			= 4,
+		StatusSpare				= 5,
+		StatusExtendedMission		= 6,
+		StatusDecayed			= 7,
+		StatusUnknown			= 0
 	};
 	Q_ENUM(OptStatus)
 

@@ -456,28 +456,36 @@ void SatellitesDialog::filterListByGroup(int index)
 		return;
 
 	const QMap<QString, SatFlag> secondaryFilter = {
-		{ "all",		SatNoFlags },
-		{ "[displayed]",	SatDisplayed },
+		{ "all",			SatNoFlags },
+		{ "[displayed]",		SatDisplayed },
 		{ "[userdefined]",	SatUser },
 		{ "[undisplayed]",	SatNotDisplayed },
 		{ "[newlyadded]",	SatNew },
-		{ "[orbiterror]",	SatError },
+		{ "[orbiterror]",		SatError },
 		{ "[reentry]",		SatReentry },
-		{ "[smallsize]",	SatSmallSize },
+		{ "[smallsize]",		SatSmallSize },
 		{ "[mediumsize]",	SatMediumSize },
-		{ "[largesize]",	SatLargeSize },
-		{ "[LEO]",		SatLEO },
-		{ "[GSO]",		SatGSO },
-		{ "[MEO]",		SatMEO },
-		{ "[HEO]",		SatHEO },
+		{ "[largesize]",		SatLargeSize },
+		{ "[LEO]",			SatLEO },
+		{ "[GSO]",			SatGSO },
+		{ "[MEO]",			SatMEO },
+		{ "[HEO]",			SatHEO },
 		{ "[HGSO]",		SatHGSO },
-		{ "[polarorbit]",	SatPolarOrbit },
+		{ "[polarorbit]",		SatPolarOrbit },
 		{ "[equatorialorbit]",	SatEquatOrbit },
 		{ "[PSSO]",		SatPSSO },
 		{ "[HEarthO]",		SatHEarthO },
 		{ "[outdatedTLE]",	SatOutdatedTLE },
 		{ "[custom]",		SatCustomFilter },
-		{ "[communication]",	SatCommunication }
+		{ "[communication]",	SatCommunication },
+		{ "[activeOS]",		SatActiveOS },
+		{ "[operationalOS]",	SatOperationalOS },
+		{ "[nonopOS]",		SatNonoperationalOS },
+		{ "[partiallyopOS]",	SatPartiallyOperationalOS },
+		{ "[standbyOS]",	SatStandbyOS },
+		{ "[spareOS]",		SatSpareOS },
+		{ "[extmissionOS]",	SatExtendedMissionOS },
+		{ "[decayedOS]",	SatDecayedOS }
 	};
 
 	ui->customFilterButton->setEnabled(false);
@@ -1149,8 +1157,26 @@ void SatellitesDialog::populateFilterMenu()
 	ui->groupFilterCombo->insertItem(0, q_("[HEO/E satellites]"), QVariant("[HEarthO]"));
 	ui->groupFilterCombo->insertItem(0, q_("[outdated TLE]"), QVariant("[outdatedTLE]"));
 	ui->groupFilterCombo->insertItem(0, q_("[custom filter]"), QVariant("[custom]"));
-	ui->groupFilterCombo->insertItem(0, q_("[all user defined]"), QVariant("[userdefined]"));
-	ui->groupFilterCombo->insertItem(0, q_("[all]"), QVariant("all"));	
+	ui->groupFilterCombo->insertItem(0, q_("[all user defined]"), QVariant("[userdefined]"));	
+	// Add special groups - based on SATCAT Operational Status
+	// TRANSLATORS: Satellite group [SATCAT Operational Status]: Active status does not require power or communications (e.g., geodetic satellites); Active is any satellite with an operational status of +, P, B, S, or X.
+	ui->groupFilterCombo->insertItem(0, q_("[active satellites]"), QVariant("[activeOS]"));
+	// TRANSLATORS: Satellite group [SATCAT Operational Status]: Satellites that are fully functioning
+	ui->groupFilterCombo->insertItem(0, q_("[operational satellites]"), QVariant("[operationalOS]"));
+	// TRANSLATORS: Satellite group [SATCAT Operational Status]: Satellites that are no longer functioning
+	ui->groupFilterCombo->insertItem(0, q_("[non-operational satellites]"), QVariant("[nonopOS]"));
+	// TRANSLATORS: Satellite group [SATCAT Operational Status]: Satellites that are partially fulfilling primary mission or secondary mission(s)
+	ui->groupFilterCombo->insertItem(0, q_("[partially operational satellites]"), QVariant("[partiallyopOS]"));
+	// TRANSLATORS: Satellite group [SATCAT Operational Status]: Previously operational satellite put into reserve status
+	ui->groupFilterCombo->insertItem(0, q_("[backup / standby satellites]"), QVariant("[standbyOS]"));
+	// TRANSLATORS: Satellite group [SATCAT Operational Status]: New satellite awaiting full activation
+	ui->groupFilterCombo->insertItem(0, q_("[spare satellites]"), QVariant("[spareOS]"));
+	// TRANSLATORS: Satellite group [SATCAT Operational Status]: Satellites with extended mission(s)
+	ui->groupFilterCombo->insertItem(0, q_("[extended mission]"), QVariant("[extmissionOS]"));
+	// TRANSLATORS: Satellite group [SATCAT Operational Status]: Satellites that are decayed
+	ui->groupFilterCombo->insertItem(0, q_("[decayed satellites]"), QVariant("[decayedOS]"));
+	// Special group - All satellites (this item should be latest in the list)
+	ui->groupFilterCombo->insertItem(0, q_("[all]"), QVariant("all"));
 
 	// Restore current selection
 	index = (!selectedId.isEmpty()) ? qMax(0, ui->groupFilterCombo->findData(selectedId)) : 0;

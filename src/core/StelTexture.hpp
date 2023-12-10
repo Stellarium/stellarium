@@ -22,6 +22,7 @@
 
 #include <QOpenGLFunctions>
 #include <QSharedPointer>
+#include <QPointer>
 #include <QObject>
 #include <QImage>
 
@@ -143,7 +144,7 @@ private:
 	static GLData loadFromData( const QByteArray &data, const int decimateBy);
 
 	//! Private constructor
-	StelTexture(StelTextureMgr* mgr);
+	StelTexture();
 
 	//! Wrap an existing GL texture with this object
 	void wrapGLTexture(GLuint texId);
@@ -173,7 +174,7 @@ private:
 	void startAsyncLoader(T (*functionPointer)(Params...), Args&&...args);
 
 	//! The parent texture manager
-	StelTextureMgr* textureMgr = nullptr;
+	static QPointer<StelTextureMgr> textureMgr;
 
 	QOpenGLFunctions* gl = nullptr;
 	StelTextureParams loadParams;

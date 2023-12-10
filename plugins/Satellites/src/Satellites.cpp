@@ -1317,10 +1317,10 @@ bool Satellites::add(const TleData& tleData)
 	if (!satProperties.contains("description") && !description.isEmpty())
 		satProperties.insert("description", description);
 
-	// Guessing the groups for newly added satellites only
 	QVariantList groupList =  satProperties.value("groups", QVariantList()).toList();
 	if (groupList.isEmpty())
 	{
+		// Guessing the groups for newly added satellites only
 		QStringList satGroups = guessGroups(tleData);
 		if (!satGroups.isEmpty())
 		{
@@ -1662,8 +1662,6 @@ QStringList Satellites::guessGroups(const TleData& tleData)
 		satGroups.append("crewed");
 	if (tleData.name.startsWith("PROGRESS-MS") || tleData.name.startsWith("CYGNUS NG"))
 		satGroups.append("resupply");
-	if (tleData.status==Satellite::StatusNonoperational)
-		satGroups.append("non-operational");
 
 	// Guessing the groups from CelesTrak's groups (a "supergroups")
 	if (tleData.sourceURL.contains("celestrak.org", Qt::CaseInsensitive))

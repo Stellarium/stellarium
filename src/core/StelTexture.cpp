@@ -39,13 +39,19 @@
 # define GL_TEXTURE_MAX_ANISOTROPY 0x84FE
 #endif
 
-StelTexture::StelTexture(StelTextureMgr *mgr)
-	: textureMgr(mgr)
+QPointer<StelTextureMgr> StelTexture::textureMgr;
+
+StelTexture::StelTexture()
 {
 }
 
 StelTexture::~StelTexture()
 {
+	// Don't try to access texture manager or OpenGL context if texture
+	// manager has been deleted, because at this point we are shutting
+	// down, and the OpenGL context may have also been deleted.
+	if (!textureMgr) return;
+
 	if (id != 0)
 	{
 		/// FS: make sure the correct GL context is bound!
@@ -228,6 +234,7 @@ template <typename T, typename...Params, typename...Args>
 void StelTexture::startAsyncLoader(T (*functionPointer)(Params...), Args&&...args)
 {
 	Q_ASSERT(loader==Q_NULLPTR);
+	if (!textureMgr) return;
 	//own thread pool supported with Qt 5.4+
 	loader = new QFuture<GLData>(QtConcurrent::run(textureMgr->loaderThreadPool,
 	                                               functionPointer, std::forward<Args>(args)...));
@@ -379,6 +386,11 @@ QByteArray StelTexture::convertToGLFormat(QImage image, GLint& format, GLint& ty
 
 bool StelTexture::glLoad(const GLData& data)
 {
+	// Don't try to access texture manager or OpenGL context if texture
+	// manager has been deleted, because at this point we are shutting
+	// down, and the OpenGL context may have also been deleted.
+	if (!textureMgr) return false;
+
 	if (data.data.isEmpty())
 	{
 		reportError(data.loaderError.isEmpty() ? "Unknown error" : data.loaderError);
