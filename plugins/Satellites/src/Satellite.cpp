@@ -854,83 +854,22 @@ void Satellite::update(double)
 // Get radii and distances of shadow circles
 Vec4d Satellite::getUmbraData()
 {
-	static PlanetP earth=GETSTELMODULE(SolarSystem)->getEarth();
-	// Compute altitudes of umbra and penumbra circles. These should show where the satellite enters/exits umbra/penumbra.
-	// The computation follows ideas from https://celestrak.org/columns/v03n01/
-	// These sources mention ECI coordinates (Earth Centered Inertial). Presumably TEME (True Equator Mean Equinox) are equivalent, at least for our purposes.
 	const double rhoE=position.norm(); // geocentric Satellite distance, km
-	const double rS=earth->getHeliocentricEclipticPos().norm()*AU; // distance earth...sun
-	const double thetaE=asin((earth->getEquatorialRadius()*AU)/(rhoE));
-	// Accurate distance sat...sun from ECI sunpos
-	Vec3d sunTEME=pSatWrapper->getSunECIPos() - pSatWrapper->getObserverECIPos(); // km
-	const double thetaS=asin((sun->getEquatorialRadius()*AU)/(sunTEME.norm()));
-	Q_ASSERT(thetaE>thetaS);
-	const double theta=thetaE-thetaS; // angle so that satellite dives into umbra
-	// angle at Sun:
-	const double sigma=asin(sin(theta)*rhoE/rS);
-	// angle in geocenter
-	const double eta=M_PI-sigma-theta;
-	// complement
-	const double mu=M_PI-eta;
-	// geocentric distance of shadow circle towards antisun
-	umbraDistance=rhoE*cos(mu);
-	// radius of shadow circle
-	umbraRadius=rhoE*sin(mu);
-	// Repeat for penumbra
-	const double thetaP=thetaE+thetaS; // angle so that satellite touches penumbra
-	// angle at Sun:
-	const double sigmaP=asin(sin(thetaP)*rhoE/rS);
-	// angle in geocenter
-	const double etaP=M_PI-sigmaP-thetaP;
-	// complement
-	const double muP=M_PI-etaP;
-	// geocentric distance of shadow circle towards antisun
-	penumbraDistance=rhoE*cos(muP);
-	// radius of shadow circle
-	penumbraRadius=rhoE*sin(muP);
-	//// DBG out
-	//StelObjectMgr *om=GETSTELMODULE(StelObjectMgr);
-	//om->setExtraInfoString(StelObject::DebugAid, QString("&rho;<sub>E</sub> %1, r<sub>S</sub> %2, &theta;<sub>E</sub> %3°, &theta;<sub>S</sub> %4° <br/>")
-	//		       .arg(QString::number(rhoE, 'f', 3),
-	//			    QString::number(rS, 'f', 3),
-	//			    QString::number(thetaE*M_180_PI, 'f', 3),
-	//			    QString::number(thetaS*M_180_PI, 'f', 3)
-	//			    )
-	//		       );
-	//om->addToExtraInfoString(StelObject::DebugAid, QString("&theta; %1°, &sigma; %2°, &eta; %3°, &mu; %4° <br/>")
-	//		       .arg(
-	//			    QString::number(theta*M_180_PI, 'f', 3),
-	//			    QString::number(sigma*M_180_PI, 'f', 3),
-	//			    QString::number(eta*M_180_PI, 'f', 3),
-	//			    QString::number(mu*M_180_PI, 'f', 3)
-	//			    )
-	//		       );
-	//om->addToExtraInfoString(StelObject::DebugAid, QString("&theta;<sub>P</sub> %1°, &sigma; %2°, &eta; %3°, &mu; %4° <br/>")
-	//		       .arg(
-	//			    QString::number(thetaP*M_180_PI, 'f', 3),
-	//			    QString::number(sigmaP*M_180_PI, 'f', 3),
-	//			    QString::number(etaP*M_180_PI, 'f', 3),
-	//			    QString::number(muP*M_180_PI, 'f', 3)
-	//			    )
-	//		       );
-	return Vec4d(umbraDistance, umbraRadius, penumbraDistance, penumbraRadius);
+	return Satellite::getUmbraData(rhoE);
 }
 
-//! Get radii and geocentric distances of shadow circles in km for a hypothetical object in dist_km above the (spherical) Earth.
+//! Get radii and geocentric antisolar distances of shadow circles in km for a hypothetical object in geocentric distance rhoE [km].
 //! Vec4d(umbraDistance, umbraRadius, penumbraDistance, penumbraRadius);
-Vec4d Satellite::getUmbraData(double dist_km)
+Vec4d Satellite::getUmbraData(const double rhoE)
 {
 	static PlanetP earth=GETSTELMODULE(SolarSystem)->getEarth();
 	static PlanetP sun = GETSTELMODULE(SolarSystem)->getSun();
 
-	// Compute altitudes of umbra and penumbra circles. These should show where the satellite enters/exits umbra/penumbra.
+	// Compute locations of umbra and penumbra circles. These should show where the satellite enters/exits umbra/penumbra.
 	// The computation follows ideas from https://celestrak.org/columns/v03n01/
 	// These sources mention ECI coordinates (Earth Centered Inertial). Presumably TEME (True Equator Mean Equinox) are equivalent, at least for our purposes.
-	const double rhoE=earth->getEquatorialRadius()*AU+dist_km; // geocentric Satellite distance, km
 	const double rS=earth->getHeliocentricEclipticPos().norm()*AU; // distance earth...sun
 	const double thetaE=asin((earth->getEquatorialRadius()*AU)/(rhoE));
-	// Accurate distance sat...sun from ECI sunpos
-	//Vec3d sunTEME=pSatWrapper->getSunECIPos() - pSatWrapper->getObserverECIPos(); // km
 	Vec3d sunEquinoxEqPos = sun->getEquinoxEquatorialPos(StelApp::getInstance().getCore());
 	Vec3d sunTEME=sunEquinoxEqPos*AU;
 	const double thetaS=asin((sun->getEquatorialRadius()*AU)/(sunTEME.norm()));
