@@ -269,9 +269,9 @@ void Oculars::deinit()
 	settings->setValue("telescope_count", telescopes.count());
 	settings->setValue("ccd_count", ccds.count());
 	settings->setValue("lens_count", lenses.count());
-	settings->setValue("ocular_index", selectedOcularIndex);
-	settings->setValue("telescope_index", selectedTelescopeIndex);
-	settings->setValue("ccd_index", selectedCCDIndex);
+	settings->setValue("ocular_index", qMax(0, selectedOcularIndex));
+	settings->setValue("telescope_index", qMax(0, selectedTelescopeIndex));
+	settings->setValue("ccd_index", qMax(0, selectedCCDIndex));
 	settings->setValue("lens_index", selectedLensIndex);
 
 	StelCore *core = StelApp::getInstance().getCore();
@@ -505,7 +505,7 @@ void Oculars::init()
 		}
 		else
 		{
-			selectedOcularIndex = settings->value("ocular_index", 0).toInt();
+			selectedOcularIndex = qMax(0, settings->value("ocular_index", 0).toInt());
 		}
 
 		int ccdCount = settings->value("ccd_count", 0).toInt();
@@ -527,9 +527,9 @@ void Oculars::init()
 			qWarning() << "The Oculars ini file appears to be corrupt; delete it.";
 			ready = false;
 		}
-		selectedCCDIndex = settings->value("ccd_index", 0).toInt();
+		selectedCCDIndex = qMax(0, settings->value("ccd_index", 0).toInt());
 
-		int telescopeCount = settings->value("telescope_count", 0).toInt();
+		int telescopeCount = qMax(0, settings->value("telescope_count", 0).toInt());
 		int actualTelescopeCount = telescopeCount;
 		for (int index = 0; index < telescopeCount; index++)
 		{
