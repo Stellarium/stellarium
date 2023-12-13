@@ -53,7 +53,7 @@ jobs:
         location: '../../../.stellarium/ephem'
 
     - name: Make coverage
-      uses: GabrielBB/xvfb-action@v1
+      uses: coactions/setup-xvfb@v1
       with:
         working-directory: build
         run: make coverage

@@ -42,7 +42,7 @@ jobs:
       run: make -j3
 
     - name: Run unit tests
-      uses: GabrielBB/xvfb-action@v1
+      uses: coactions/setup-xvfb@v1
       with:
         working-directory: build
         run: ctest --output-on-failure
@@ -77,7 +77,7 @@ jobs:
       run: make -j3
 
     - name: Run unit tests
-      uses: GabrielBB/xvfb-action@v1
+      uses: coactions/setup-xvfb@v1
       with:
         working-directory: build
         run: ctest --output-on-failure
