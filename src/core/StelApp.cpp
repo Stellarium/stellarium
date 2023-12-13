@@ -588,6 +588,14 @@ void StelApp::init(QSettings* conf)
 	LandscapeMgr* landscape = new LandscapeMgr();
 	landscape->init();
 	getModuleMgr().registerModule(landscape);
+	// Only now we can switch to auto-landscape. (GH:#3550)
+	if (landscape->getFlagLandscapeAutoSelection() && (confSettings->value("init_location/location", "auto").toString() == "auto"))
+	{
+		StelLocation loc=core->getCurrentLocation();
+		QColor color=planetLocationMgr->getColorForCoordinates(loc.getLongitude(), loc.getLatitude());
+		QString landscapeAutoName=QString("ZeroColor(%1)").arg(Vec3f(color).toStr());
+		emit core->targetLocationChanged(loc, landscapeAutoName); // inform others about our next location. E.g., let LandscapeMgr load a new landscape.
+	}
 
 	SplashScreen::showMessage(q_("Initializing grid lines..."));
 	GridLinesMgr* gridLines = new GridLinesMgr();

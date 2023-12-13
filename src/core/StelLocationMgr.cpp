@@ -1171,9 +1171,9 @@ void StelLocationMgr::changeLocationFromNetworkLookup()
 			// Ensure that ipTimeZone is a valid IANA timezone name!
 			QTimeZone ipTZ(ipTimeZone.toUtf8());
 			core->setCurrentTimeZone( !ipTZ.isValid() || ipTimeZone.isEmpty() ? "LMST" : ipTimeZone);
-			LandscapeMgr *lMgr=GETSTELMODULE(LandscapeMgr);
+			LandscapeMgr *lMgr=GETSTELMODULE_SILENT(LandscapeMgr); // This may fail during StelApp:init() (GH:#3550)
 			QString landscapeAutoName;
-			if (lMgr->getFlagLandscapeAutoSelection())
+			if (lMgr && lMgr->getFlagLandscapeAutoSelection())
 			{
 				QColor color=getColorForCoordinates(loc.getLongitude(), loc.getLatitude());
 				landscapeAutoName=QString("ZeroColor(%1)").arg(Vec3f(color).toStr());
