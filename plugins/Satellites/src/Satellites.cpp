@@ -2862,7 +2862,7 @@ void Satellites::drawCircles(StelCore* core, StelPainter &painter)
 	Vec4d umbraData;
 	if (flagUmbraAtFixedAltitude)
 	{
-		umbraData=Satellite::getUmbraData(fixedUmbraAltitude)/AU;
+		umbraData=Satellite::getUmbraData(earth->getEquatorialRadius()*AU+fixedUmbraAltitude)/AU;
 	}
 	else if (!sat.isNull())
 	{

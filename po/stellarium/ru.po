@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2023-12-10 15:40+0700\n"
+"POT-Creation-Date: 2023-12-13 11:04+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Alexander V. Wolf <alex.v.wolf@gmail.com>, 2023\n"
 "Language-Team: Russian (https://app.transifex.com/stellarium/teams/80998/ru/)\n"
@@ -9548,30 +9548,35 @@ msgstr "Марафон Мессье"
 msgid "Random location"
 msgstr "Случайное местоположение"
 
+#. TRANSLATORS: Name of script
+#: src/translations.h:567
+msgid "Jupiter Moons"
+msgstr "Луны Юпитера"
+
 #. TRANSLATORS: Description of the landscape tour script.
-#: src/translations.h:571
+#: src/translations.h:573
 msgid "Look around each installed landscape."
 msgstr "Посмотрите вокруг каждого установленного ландшафта."
 
 #. TRANSLATORS: Description of the sky culture tour script.
-#: src/translations.h:573
+#: src/translations.h:575
 msgid "Look at each installed sky culture."
 msgstr "Посмотрите каждую установленную культуру неба."
 
-#: src/translations.h:574
+#: src/translations.h:576
 msgid "Script to demonstrate a partial lunar eclipse."
 msgstr "Сценарий для демонстрации частного лунного затмения."
 
-#: src/translations.h:575
+#: src/translations.h:577
 msgid "Script to demonstrate a total lunar eclipse."
 msgstr "Сценарий для демонстрации полного лунного затмения."
 
-#: src/translations.h:576
+#: src/translations.h:578
 msgid "A slow, infinite tour of the sky, looking at random objects."
 msgstr ""
 "Медленная, бесконечная экскурсия по небу с просмотром случайных объектов."
 
-#: src/translations.h:577
+#: src/translations.h:579
 msgid ""
 "Script to demonstrate a total solar eclipse which has happened in 2009 "
 "(location=Rangpur, Bangladesh)."
@@ -9579,11 +9584,11 @@ msgstr ""
 "Сценарий для демонстрации полного солнечного затмения, которое произошло в "
 "2009 году (место - Рангпур, Бангладеш)."
 
-#: src/translations.h:578
+#: src/translations.h:580
 msgid "Script which runs automatically at startup"
 msgstr "Сценарий, который запускается автоматически при запуске"
 
-#: src/translations.h:579
+#: src/translations.h:581
 msgid ""
 "This script displays the constellations of the Zodiac. That means the "
 "constellations which lie along the line which the Sun traces across the "
@@ -9592,7 +9597,7 @@ msgstr ""
 "Этот сценарий демонстрирует Зодиак - линию созвездий, через которые Солнце "
 "проходит по небесной сфере в течении года."
 
-#: src/translations.h:580
+#: src/translations.h:582
 msgid ""
 "Due to the quirks in Mercury's orbit and rotation at certain spots the sun "
 "will rise & set 3 different times in one Mercury day."
@@ -9601,7 +9606,7 @@ msgstr ""
 "определенных местах на планете Солнце восходит и заходит три раза в течении "
 "меркурианского дня."
 
-#: src/translations.h:581
+#: src/translations.h:583
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Scorpio and Sagittarius on April 26, 2017."
@@ -9610,7 +9615,7 @@ msgstr ""
 "затмевает Солнце первым. Действие происходит между Скорпионом и Стрельцом 26"
 " апреля 2017 года."
 
-#: src/translations.h:582
+#: src/translations.h:584
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Taurus and Gemini on July 23, 2031."
@@ -9619,11 +9624,11 @@ msgstr ""
 "затмевает Солнце первым. Действие происходит между Тельцом и Близнецами 23 "
 "июля 2031 года."
 
-#: src/translations.h:583
+#: src/translations.h:585
 msgid "Phobos eclipsing the Sun as seen from Olympus Mons on Jan 2, 2021."
 msgstr "Вид затмения Солнца Фобосом с горы Олимп 2 января 2021 года."
 
-#: src/translations.h:584
+#: src/translations.h:586
 msgid ""
 "Phobos occultations of Earth are common, as are occultations of Jupiter. But"
 " occultations of both on the same day are very rare. Here's one that takes "
@@ -9633,7 +9638,7 @@ msgstr ""
 "покрытия обоих планет в один и тот же день очень редки. Вот одно из таких "
 "покрытий в режиме реального времени, которое произойдёт 23 января 2048 года."
 
-#: src/translations.h:585
+#: src/translations.h:587
 msgid ""
 "Phobos races ahead of Mars and transits the sun, passes through it and then "
 "retrogrades back towards the sun and just partially transits it again (only "
@@ -9649,37 +9654,37 @@ msgstr ""
 " с диска Марса он всё ещё оказывается в тени планеты и только спустя "
 "некоторое время он попадает на свет."
 
-#: src/translations.h:586
+#: src/translations.h:588
 msgid ""
 "Screensaver of various happenings in the Solar System. 321 events in all!"
 msgstr ""
 "Хранитель экрана с различными событиями в Солнечной системе. Всего 321 "
 "событие!"
 
-#: src/translations.h:587
+#: src/translations.h:589
 msgid "A tour of the modern constellations."
 msgstr "Экскурсия по современным созвездиям."
 
-#: src/translations.h:588
+#: src/translations.h:590
 msgid "A tour of the constellations of the selected sky culture."
 msgstr "Экскурсия по созвездиям выбранной культуры неба."
 
-#: src/translations.h:589
+#: src/translations.h:591
 msgid "Look at the Sun from big planets of Solar System and Pluto."
 msgstr "Вид Солнца на больших планетах Солнечной системы и Плутоне."
 
-#: src/translations.h:590
+#: src/translations.h:592
 msgid ""
 "Best views of Earth from other Solar System bodies in the 21st Century."
 msgstr "Лучшие в 21-м веке виды Земли с других тел Солнечной системы."
 
-#: src/translations.h:591
+#: src/translations.h:593
 msgid "Transit of Venus as seen from Sydney Australia, 6th June 2012."
 msgstr ""
 "Прохождение Венеры, каким оно было видно 6 июня 2012 года из Сиднея, "
 "Австралия."
 
-#: src/translations.h:592
+#: src/translations.h:594
 msgid ""
 "Flash of the supernova observed by Tycho Brahe in 1572. The Historical "
 "Supernovae plugin has to be enabled."
@@ -9687,7 +9692,7 @@ msgstr ""
 "Вспышка сверхновой, которую наблюдал Тихо Браге в 1572 году. Плагин "
 "\"Исторические сверхновые\" должен быть включён."
 
-#: src/translations.h:593
+#: src/translations.h:595
 msgid ""
 "Earth and other planet's Greatest Elongations and Oppositions from Mars "
 "2000-3000"
@@ -9695,7 +9700,7 @@ msgstr ""
 "Великие элонгации и противостояния Земля и других планет с Марса на "
 "протяжении 2000-3000 годов"
 
-#: src/translations.h:594
+#: src/translations.h:596
 msgid ""
 "Earth Greatest Elongations and Transits from Callisto 2000-3000. Why "
 "Callisto? Well of the 4 Galilean Moons, Callisto is the only one outside of "
@@ -9707,7 +9712,7 @@ msgstr ""
 "пределами радиационного пояса Юпитера. Поэтому, если люди когда-нибудь "
 "колонизируют спутники Юпитера, Каллисто будет одним из них."
 
-#: src/translations.h:595
+#: src/translations.h:597
 msgid ""
 "Earth the other visible Planet's Greatest Elongations and Oppositions from "
 "Ceres 2000-2200"
@@ -9715,11 +9720,11 @@ msgstr ""
 "Великие элонгации и противостояния Земля и других видимых планет с Цереры на"
 " протяжении 2000-2200 годов"
 
-#: src/translations.h:596
+#: src/translations.h:598
 msgid "A tour of Messier Objects"
 msgstr "Экскурсия по объектам Мессье"
 
-#: src/translations.h:597
+#: src/translations.h:599
 msgid ""
 "Tours around interesting objects, which accessible to observation with "
 "binoculars. The data for the script are taken from the eponymous book by "
@@ -9728,7 +9733,7 @@ msgstr ""
 "Экскурсии по интересным объектам, которые доступны для наблюдения с "
 "биноклем. Данные для сценария взяты из одноименной книги Гэри Сероника."
 
-#: src/translations.h:598
+#: src/translations.h:600
 msgid ""
 "This script helps you make an excursion around 20 fun double stars. The list"
 " has been collected by Jerry Lodriguss and published in Sky & Telescope "
@@ -9739,16 +9744,16 @@ msgstr ""
 "номере Sky & Telescope от 2014 года. Данные взяты из его сайта, "
 "http://www.astropix.com/doubles/"
 
-#: src/translations.h:599
+#: src/translations.h:601
 msgid "This script helps you make an excursion around largest known stars."
 msgstr ""
 "Этот скрипт поможет вам совершить экскурсию по крупнейшим известным звёздам."
 
-#: src/translations.h:600
+#: src/translations.h:602
 msgid "A tour around objects from the Herschel 400 Catalogue"
 msgstr "Экскурсия по объектам из каталога Гершель 400"
 
-#: src/translations.h:601
+#: src/translations.h:603
 msgid ""
 "Ben Crowell has created Binosky, an observing list of Deep Sky Objects for "
 "Binoculars. In the script we give a list of these 31 objects, ordered by "
@@ -9758,7 +9763,7 @@ msgstr ""
 " в бинокль. В сценарии мы приводим список этих объектов, упорядоченных по "
 "прямому восхождению (2000,0)."
 
-#: src/translations.h:602
+#: src/translations.h:604
 msgid ""
 "The Jack Bennett Catalog of Southern Deep-Sky Objects (152 objects in all). "
 "The Bennett catalog was contributed by Auke Slotegraaf."
@@ -9766,7 +9771,7 @@ msgstr ""
 "Каталог южных объектов глубокого космоса Джека Беннета (всего 152 объекта). "
 "Каталог Беннета был подготовлен Эйком Слотеграафом."
 
-#: src/translations.h:603
+#: src/translations.h:605
 msgid ""
 "This list of 111 objects by A.J. Crayon and Steve Coe is used by members of "
 "the Saguaro Astronomy Club of Phoenix, AZ, for the Best of the NGC "
@@ -9776,7 +9781,7 @@ msgstr ""
 "астрономического клуба Сагуаро из Феникса, штат Аризона в качестве "
 "контрольного списка для получения награды."
 
-#: src/translations.h:604
+#: src/translations.h:606
 msgid ""
 "Demonstration of the mid-time of rare events - triple shadow phenomena of "
 "the satellites of Jupiter from 1900 to 2100. All events are given in "
@@ -9785,7 +9790,7 @@ msgstr ""
 "Демонстрация середины редких событий - явлений тройных теней от спутников "
 "Юпитера с 1900 по 2100 год. Все события даны в динамическом времени."
 
-#: src/translations.h:605
+#: src/translations.h:607
 msgid ""
 "The planet Jupiter sometimes appears to be without moons, when the four "
 "Galilean satellites are simultaneously invisible because they are passing "
@@ -9799,7 +9804,7 @@ msgstr ""
 "(затмении). Этот сценарий демонстрирует эти редкие явления с 1900 по 2100 "
 "год в динамическом времени."
 
-#: src/translations.h:606
+#: src/translations.h:608
 msgid ""
 "This script demonstrates interesting phenomena - occultations bright stars "
 "by planets, 2000 to 2040."
@@ -9807,7 +9812,7 @@ msgstr ""
 "Этот сценарий демонстрирует интересные явления - покрытия ярких звезд "
 "планетами, с 2000 по 2040 год."
 
-#: src/translations.h:607
+#: src/translations.h:609
 msgid ""
 "This script demonstrates interesting and very rare phenomena - mutual "
 "occultations of planets, 0 to 2500."
@@ -9815,36 +9820,36 @@ msgstr ""
 "Этот сценарий демонстрирует интересные и очень редкие явления - взаимные "
 "покрытия планет, с 0 по 2500 год."
 
-#: src/translations.h:608
+#: src/translations.h:610
 msgid "A tour of the Solar System planets"
 msgstr "Экскурсия по планетам солнечной системы"
 
-#: src/translations.h:609
+#: src/translations.h:611
 msgid ""
 "A demonstration of the analemma - the path of the Sun across the sky during "
 "the year on Earth."
 msgstr "Демонстрация аналеммы - пути Солнца по небу в течение года на Земле."
 
-#: src/translations.h:610
+#: src/translations.h:612
 msgid ""
 "A demonstration of the analemma - the path of the Sun across the sky during "
 "the year on Mars."
 msgstr "Демонстрация аналеммы - пути Солнца по небу в течение года на Марсе."
 
-#: src/translations.h:611
+#: src/translations.h:613
 msgid ""
 "A demonstration of the analemma - the path of the Sun across the sky during "
 "the year on Saturn."
 msgstr ""
 "Демонстрация аналеммы - пути Солнца по небу в течение года на Сатурне."
 
-#: src/translations.h:612
+#: src/translations.h:614
 msgid ""
 "A demonstration of the analemma - the path of the Sun across the sky during "
 "the year on Uranus."
 msgstr "Демонстрация аналеммы - пути Солнца по небу в течение года на Уране."
 
-#: src/translations.h:613
+#: src/translations.h:615
 msgid ""
 "Messier Marathon on March 20, 2020. The data for the script are taken from "
 "GaoXing's observation log: http://www.xjltp.com/2_huodong/2_030301.htm"
@@ -9852,7 +9857,7 @@ msgstr ""
 "Марафон Мессье 20 марта 2020 года. Данные для сценария взяты из журнала "
 "наблюдений GaoXing: http://www.xjltp.com/2_huodong/2_030301.htm"
 
-#: src/translations.h:614
+#: src/translations.h:616
 msgid ""
 "Creates 6 tiles (North/East/South/West/Up/Down) for a skybox. These can be "
 "further used e.g. in Unity3D or other 3D environments. Output directory and "
@@ -9869,7 +9874,7 @@ msgstr ""
 "OUTPUT_DATA. Пожалуйста, прочтите сценарий, чтобы понять, как применить его "
 "в ваших проектах."
 
-#: src/translations.h:615
+#: src/translations.h:617
 msgid ""
 "This script will help you make practical works for celestial navigation - he"
 " sets a random location and hides it from the GUI."
@@ -9878,195 +9883,199 @@ msgstr ""
 "он устанавливает случайное местоположение и скрывает его из графического "
 "интерфейса."
 
-#: src/translations.h:619
+#: src/translations.h:618
+msgid "Jupiter's Moons Orbital Simulation"
+msgstr "Моделирование орбиты спутников Юпитера"
+
+#: src/translations.h:622
 msgid "&Undo"
 msgstr "&Отменить"
 
-#: src/translations.h:620
+#: src/translations.h:623
 msgid "&Redo"
 msgstr "&Повторить"
 
-#: src/translations.h:621
+#: src/translations.h:624
 msgid "Cu&t"
 msgstr "Выре&зать"
 
-#: src/translations.h:622
+#: src/translations.h:625
 msgid "&Copy"
 msgstr "&Копировать"
 
-#: src/translations.h:623
+#: src/translations.h:626
 msgid "&Paste"
 msgstr "В&ставить"
 
-#: src/translations.h:624 plugins/Oculars/src/ui_ocularDialog.h:1536
+#: src/translations.h:627 plugins/Oculars/src/ui_ocularDialog.h:1536
 #: plugins/Oculars/src/ui_ocularDialog.h:1545
 #: plugins/Oculars/src/ui_ocularDialog.h:1551
 #: plugins/Oculars/src/ui_ocularDialog.h:1570
 msgid "Delete"
 msgstr "Удалить"
 
-#: src/translations.h:625
+#: src/translations.h:628
 msgid "Select All"
 msgstr "Выделить всё"
 
-#: src/translations.h:626
+#: src/translations.h:629
 msgid "Look in:"
 msgstr "Искать в:"
 
-#: src/translations.h:627
+#: src/translations.h:630
 msgid "Directory:"
 msgstr "Каталог:"
 
-#: src/translations.h:628
+#: src/translations.h:631
 msgid "Folder"
 msgstr "Папка"
 
-#: src/translations.h:629
+#: src/translations.h:632
 msgid "&Choose"
 msgstr "&Выбрать"
 
-#: src/translations.h:630 src/ui_configurationDialog.h:1915
+#: src/translations.h:633 src/ui_configurationDialog.h:1915
 #: src/ui_obsListDialog.h:373
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:608
 msgid "Cancel"
 msgstr "Отмена"
 
-#: src/translations.h:631
+#: src/translations.h:634
 msgid "&Cancel"
 msgstr "&Отмена"
 
-#: src/translations.h:632
+#: src/translations.h:635
 msgid "Files of type:"
 msgstr "Файлы типа:"
 
-#: src/translations.h:633
+#: src/translations.h:636
 msgid "Date Modified"
 msgstr "Дата изменения"
 
-#: src/translations.h:634
+#: src/translations.h:637
 msgid "Directories"
 msgstr "Каталоги"
 
-#: src/translations.h:635
+#: src/translations.h:638
 msgid "Computer"
 msgstr "Компьютер"
 
-#: src/translations.h:636
+#: src/translations.h:639
 msgid "&Open"
 msgstr "&Открыть"
 
-#: src/translations.h:637
+#: src/translations.h:640
 msgid "&Save"
 msgstr "&Сохранить"
 
-#: src/translations.h:638
+#: src/translations.h:641
 msgid "Save"
 msgstr "Сохранить"
 
-#: src/translations.h:639
+#: src/translations.h:642
 msgid "Save As:"
 msgstr "Сохранить как:"
 
-#: src/translations.h:640
+#: src/translations.h:643
 msgid "Tags:"
 msgstr "Теги:"
 
-#: src/translations.h:641
+#: src/translations.h:644
 msgid "File &name:"
 msgstr "&Имя файла:"
 
-#: src/translations.h:642
+#: src/translations.h:645
 msgid "Copy &Link Location"
 msgstr "Копировать ссылку"
 
-#: src/translations.h:643
+#: src/translations.h:646
 msgid "Abort"
 msgstr "Прервать"
 
-#: src/translations.h:644
+#: src/translations.h:647
 msgid "Ignore"
 msgstr "Игнорировать"
 
-#: src/translations.h:645
+#: src/translations.h:648
 msgid "&Basic colors"
 msgstr "&Основные цвета"
 
-#: src/translations.h:646
+#: src/translations.h:649
 msgid "&Pick Screen Color"
 msgstr "&Выберите цвет экрана"
 
-#: src/translations.h:647
+#: src/translations.h:650
 msgid "&Custom colors"
 msgstr "&Пользовательские цвета"
 
-#: src/translations.h:648
+#: src/translations.h:651
 msgid "&Add to Custom Colors"
 msgstr "&Добавить к пользовательским цветам"
 
-#: src/translations.h:649
+#: src/translations.h:652
 msgid "Hu&e:"
 msgstr "&Тон:"
 
-#: src/translations.h:650
+#: src/translations.h:653
 msgid "&Sat:"
 msgstr "&Нас:"
 
-#: src/translations.h:651
+#: src/translations.h:654
 msgid "&Val:"
 msgstr "&Ярк:"
 
-#: src/translations.h:652
+#: src/translations.h:655
 msgid "&Red:"
 msgstr "&Красный:"
 
-#: src/translations.h:653
+#: src/translations.h:656
 msgid "&Green:"
 msgstr "&Зеленый:"
 
-#: src/translations.h:654
+#: src/translations.h:657
 msgid "Bl&ue:"
 msgstr "С&иний:"
 
-#: src/translations.h:655
+#: src/translations.h:658
 msgid "Select Color"
 msgstr "Выбор цвета"
 
-#: src/translations.h:656
+#: src/translations.h:659
 #, qt-format
 msgid "Cursor at %1, %2 Press ESC to cancel"
 msgstr "Курсор в %1, %2 Нажмите ESC для отмены"
 
-#: src/translations.h:657
+#: src/translations.h:660
 #: plugins/OnlineQueries/src/ui_onlineQueriesDialog.h:194
 msgid "Back"
 msgstr "Назад"
 
-#: src/translations.h:658
+#: src/translations.h:661
 #: plugins/OnlineQueries/src/ui_onlineQueriesDialog.h:196
 msgid "Forward"
 msgstr "Вперёд"
 
-#: src/translations.h:659
+#: src/translations.h:662
 msgid "Parent Directory"
 msgstr "Родительский каталог"
 
-#: src/translations.h:660
+#: src/translations.h:663
 msgid "Create New Folder"
 msgstr "Создать новую папку"
 
-#: src/translations.h:661
+#: src/translations.h:664
 msgid "List View"
 msgstr "Вид списком"
 
-#: src/translations.h:662
+#: src/translations.h:665
 msgid "Detail View"
 msgstr "Детальный вид"
 
-#: src/translations.h:663
+#: src/translations.h:666
 msgid "Recent Places"
 msgstr "Недавние места"
 
-#: src/translations.h:664
+#: src/translations.h:667
 #, qt-format
 msgid ""
 "%1 already exists.\n"
@@ -10075,47 +10084,47 @@ msgstr ""
 "%1 уже существует.\n"
 "Вы хотите заменить его?"
 
-#: src/translations.h:665
+#: src/translations.h:668
 msgid "&Yes"
 msgstr "&Да"
 
-#: src/translations.h:666
+#: src/translations.h:669
 msgid "&No"
 msgstr "&Нет"
 
-#: src/translations.h:667
+#: src/translations.h:670
 msgid "&Select All"
 msgstr "&Выбрать всё"
 
-#: src/translations.h:668
+#: src/translations.h:671
 msgid "&Step up"
 msgstr "&Шаг вверх"
 
-#: src/translations.h:669
+#: src/translations.h:672
 msgid "Step &down"
 msgstr "Шаг &вниз"
 
-#: src/translations.h:670
+#: src/translations.h:673
 msgid "&Rename"
 msgstr "&Переименовать"
 
-#: src/translations.h:671
+#: src/translations.h:674
 msgid "&Delete"
 msgstr "У&далить"
 
-#: src/translations.h:672
+#: src/translations.h:675
 msgid "&New Folder"
 msgstr "&Новая папка"
 
-#: src/translations.h:673
+#: src/translations.h:676
 msgid "New Folder"
 msgstr "Новая папка"
 
-#: src/translations.h:674
+#: src/translations.h:677
 msgid "Show &hidden files"
 msgstr "Показать &скрытые файлы"
 
-#: src/translations.h:675 plugins/MeteorShowers/src/ui_MSSearchDialog.h:139
+#: src/translations.h:678 plugins/MeteorShowers/src/ui_MSSearchDialog.h:139
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:141
 msgid "Search"
 msgstr "Найти"

@@ -253,13 +253,24 @@ public:
 	//! Calculation of illuminated fraction of the satellite.
 	float calculateIlluminatedFraction() const;
 
-	//! Get radii and geocentric distances of shadow circles in km
-	//! Vec4d(umbraDistance, umbraRadius, penumbraDistance, penumbraRadius);
+	//! Get radii and geocentric antisolar distances of shadow circles in km from the geocenter.
+	//! @return Vec4d(umbraDistance, umbraRadius, penumbraDistance, penumbraRadius);
+	//! umbraDistance    : geocentric distance (km) of the umbra circle centre in the antisolar direction
+	//! umbraRadius      : radius (km) of the umbra circle
+	//! penumbraDistance : geocentric distance (km) of the penumbra circle in the antisolar direction
+	//! penumbraRadius   : radius (km) of the penumbra circle
 	Vec4d getUmbraData();
 
-	//! Get radii and geocentric distances of shadow circles in km for a hypothetical object in dist_km above the (spherical) Earth.
-	//! Vec4d(umbraDistance, umbraRadius, penumbraDistance, penumbraRadius);
-	static Vec4d getUmbraData(double dist_km);
+	//! Get radii and geocentric antisolar distances of shadow circles in km for a hypothetical object in distance rhoE [km] from the geocenter.
+	//! @param rhoE distance [km] from the geocenter.
+	//! @return Vec4d(umbraDistance, umbraRadius, penumbraDistance, penumbraRadius);
+	//! umbraDistance    : geocentric distance (km) of the umbra circle centre in the antisolar direction
+	//! umbraRadius      : radius (km) of the umbra circle
+	//! penumbraDistance : geocentric distance (km) of the penumbra circle in the antisolar direction
+	//! penumbraRadius   : radius (km) of the penumbra circle
+	//! @note To gain data for an object in dist_km above (spherical) earth, use
+	//!    rhoE=earth->getEquatorialRadius()*AU+dist_km;
+	static Vec4d getUmbraData(const double rhoE);
 
 	//! Get operational status of satellite
 	QString getOperationalStatus() const;
@@ -399,10 +410,6 @@ private:
 
 	gSatWrapper::Visibility	visibility;
 	double	phaseAngle; // phase angle for the satellite
-	double umbraDistance;    //! geocentric distance (km) of the umbra circle equivalent to the satellite distance when it would enter/exit umbra
-	double umbraRadius;      //! radius (km) of the umbra circle at satellite distance when it would enter/exit umbra
-	double penumbraDistance; //! geocentric distance (km) of the penumbra circle equivalent to the satellite distance when it would enter/exit penumbra
-	double penumbraRadius;   //! radius (km) of the penumbra circle at satellite distance when it would enter/exit penumbra
 #if(SATELLITES_PLUGIN_IRIDIUM == 1)
 	static double sunReflAngle; // for Iridium satellites
 	//static double timeShift; // for Iridium satellites UNUSED
