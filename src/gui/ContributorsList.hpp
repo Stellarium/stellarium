@@ -53,18 +53,18 @@ namespace StelContributors {
         "Daniel De Mickey", "Daniel Michalik", "Danny Milosavljevic", "Dark Dragon", "Dempsey-p", 
         "Dhia", "Dominik Maximilián Ramík", "François Scholder", "Froenchenko Leonid", "Gion Kunz", 
         "GitHaarek", "Guillaume Communie", "Gábor Péterffy", "Hector Quemada", "Holger", 
-        "JMejuto", "Jack Schmidt", "Jean-Philippe Lambert", "Katrin Leinweber", "Kenan Dervišević", 
-        "Louis Strous", "M.S. Adityan", "Martin Bernardi (Laptop)", "Matt Hughes", "Matthias Drochner", 
-        "Matwey V. Kornilov", "Michael Dickens", "Michael Taylor", "Mykyta Sytyi", "Nidroide", 
-        "Nir Lichtman", "Oleg Ginzburg", "Oscar Roig Felius", "ParkSangJun", "Patrick", 
-        "Pavel Klimenko", "Peter", "Peter Hickey", "Pino Toscano", "Roland Bosa", 
-        "Sam Lanning", "Sebastian Jennen", "SilverAstro", "Song Li", "Sripath Roy Koganti", 
-        "Sveinn í Felli", "Thilo", "Thomas1664", "Tig la Pomme", "Tomasz Buchert", 
-        "TotalCaesar659", "Tuomas Teipainen", "Tēvita O. Kaʻili", "Vancho Stojkoski", "Vicente Reyes", 
-        "Wonkyo Choe", "Yaakov Selkowitz", "Youssif Ghantous Filho", "Yury Solomonov", "adalava", 
-        "afontenot", "bkuhls", "chithihuynh", "Marc Espie", "leonardcj", 
-        "luz paz", "Pavel Klimenko", "rikardfalkeborn", "riodoro1", "Ross Mitchell", 
-        "Edgar Scholz", "zhu1995zpb", "Łukasz 'sil2100' Zemczak"
+        "JAY RESPLER", "JMejuto", "Jack Schmidt", "Jean-Philippe Lambert", "Katrin Leinweber", 
+        "Kenan Dervišević", "Louis Strous", "M.S. Adityan", "Martin Bernardi (Laptop)", "Matt Hughes", 
+        "Matthias Drochner", "Matwey V. Kornilov", "Michael Dickens", "Michael Taylor", "Mykyta Sytyi", 
+        "Nidroide", "Nir Lichtman", "Oleg Ginzburg", "Oscar Roig Felius", "ParkSangJun", 
+        "Patrick", "Pavel Klimenko", "Peter", "Peter Hickey", "Pino Toscano", 
+        "Roland Bosa", "Sam Lanning", "Sebastian Jennen", "SilverAstro", "Song Li", 
+        "Sripath Roy Koganti", "Sveinn í Felli", "Thilo", "Thomas1664", "Tig la Pomme", 
+        "Tomasz Buchert", "TotalCaesar659", "Tuomas Teipainen", "Tēvita O. Kaʻili", "Vancho Stojkoski", 
+        "Vicente Reyes", "Wonkyo Choe", "Yaakov Selkowitz", "Youssif Ghantous Filho", "Yury Solomonov", 
+        "adalava", "afontenot", "bkuhls", "chithihuynh", "Marc Espie", 
+        "leonardcj", "luz paz", "Pavel Klimenko", "rikardfalkeborn", "riodoro1", 
+        "Ross Mitchell", "Edgar Scholz", "zhu1995zpb", "Łukasz 'sil2100' Zemczak"
     };
     
 }
