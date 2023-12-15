@@ -148,6 +148,7 @@ StelSkyCultureMgr::StelSkyCultureMgr()
 		culture.boundaries = data["edges"].toArray();
 		culture.boundariesEpoch = data["edges_epoch"].toString("J2000");
 		culture.fallbackToInternationalNames = data["fallback_to_international_names"].toBool();
+		culture.names = data["common_names"].toObject();
 
 		const auto classifications = data["classification"].toArray();
 		if (classifications.isEmpty())

@@ -24,6 +24,7 @@
 #include <QMap>
 #include <QString>
 #include <QStringList>
+#include <QJsonObject>
 #include <QJsonArray>
 
 //! @class StelSkyCulture
@@ -105,6 +106,8 @@ public:
 	QJsonArray asterisms;
 	//! Classification of sky culture (enum)
 	CLASSIFICATION classification;
+	//! JSON data containing culture-specific names of celestial objects
+	QJsonObject names;
 	//! Whether to show common names in addition to the culture-specific ones
 	bool fallbackToInternationalNames = false;
 };
