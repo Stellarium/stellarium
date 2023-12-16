@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2023-12-04 09:58+0700\n"
+"POT-Creation-Date: 2023-12-13 11:04+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Tahmid Wasif <twrak007@gmail.com>, 2023\n"
 "Language-Team: Bengali (https://app.transifex.com/stellarium/teams/80998/bn/)\n"
@@ -211,7 +211,7 @@ msgstr "মধ্যরেখা"
 #: src/gui/AstroCalcDialog.cpp:2097 src/gui/AstroCalcDialog.cpp:2360
 #: src/gui/AstroCalcChart.cpp:80 src/gui/AstroCalcChart.cpp:418
 #: src/ui_viewDialog.h:4184 plugins/Satellites/src/Satellite.cpp:362
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1495
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1545
 msgid "Altitude"
 msgstr "উন্নতি কোণ / উচ্চতা"
 
@@ -316,7 +316,7 @@ msgstr "সৌর প্রতিপাদ"
 
 #. TRANSLATORS: Center of the umbra
 #: src/core/modules/GridLinesMgr.cpp:1610
-#: plugins/Satellites/src/Satellites.cpp:2914
+#: plugins/Satellites/src/Satellites.cpp:2895
 msgid "C.U."
 msgstr "প্রচ্ছায়া কেন্দ্র"
 
@@ -833,7 +833,7 @@ msgstr "প্রস্তুতকারকবৃন্দ"
 #. TRANSLATORS: Unit of measure for distance - meter
 #: src/core/modules/LandscapeMgr.cpp:1380 src/gui/StelGuiItems.cpp:866
 #: plugins/Satellites/src/Satellite.cpp:433
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1141
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1191
 #: plugins/Satellites/src/gui/SatellitesFilterDialog.cpp:134
 msgctxt "distance"
 msgid "m"
@@ -929,10 +929,10 @@ msgstr "ব্যাস"
 #: src/core/modules/Planet.cpp:1528 src/core/modules/Comet.cpp:190
 #: src/core/modules/Comet.cpp:200 src/gui/StelGuiItems.cpp:894
 #: src/gui/AstroCalcDialog.cpp:3142 src/gui/AstroCalcDialog.cpp:3655
-#: src/gui/AstroCalcDialog.cpp:9063 plugins/Satellites/src/Satellites.cpp:2914
+#: src/gui/AstroCalcDialog.cpp:9063 plugins/Satellites/src/Satellites.cpp:2895
 #: plugins/Satellites/src/Satellite.cpp:356
 #: plugins/Satellites/src/Satellite.cpp:399
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1150
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1200
 #: plugins/Satellites/src/gui/SatellitesFilterDialog.cpp:133
 msgctxt "distance"
 msgid "km"
@@ -2269,7 +2269,7 @@ msgstr "আরো জানতে কার্যবিবরণী দেখু
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=planet&FORMAT=tle
 #. TRANSLATORS: CelesTrak supplemental source [Planet TLEs]:
 #. https://celestrak.org/NORAD/elements/supplemental/planet.txt
-#: src/core/modules/Planet.cpp:129 plugins/Satellites/src/Satellites.cpp:3344
+#: src/core/modules/Planet.cpp:129 plugins/Satellites/src/Satellites.cpp:3325
 msgid "planet"
 msgstr "গ্রহ"
 
@@ -2748,7 +2748,7 @@ msgid "variable star"
 msgstr "অসম ঔজ্জ্বল্যের তারা"
 
 #: src/core/modules/StarWrapper.cpp:304
-#: plugins/Satellites/src/ui_satellitesDialog.h:1268
+#: plugins/Satellites/src/ui_satellitesDialog.h:1269
 msgid "Magnitude range"
 msgstr "উজ্জ্ব্যলতার পরিধি"
 
@@ -4357,7 +4357,7 @@ msgstr ""
 #: src/scripting/StelScriptMgr.cpp:652
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:100
 #: plugins/Oculars/src/gui/OcularDialog.cpp:626
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:774
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:779
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:258
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:238
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:116
@@ -4829,7 +4829,7 @@ msgid "Acknowledgments"
 msgstr "কৃতজ্ঞতা স্বীকার"
 
 #: src/gui/ConfigurationDialog.cpp:1315
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:775
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:780
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:259
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:294
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:138
@@ -4845,7 +4845,7 @@ msgstr "যোগাযোগ"
 #: src/scripting/StelScriptMgr.cpp:657
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:99
 #: plugins/Oculars/src/gui/OcularDialog.cpp:625
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:773
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:778
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:257
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:237
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:115
@@ -5488,7 +5488,7 @@ msgstr "OSX প্রস্তুতকারক : %1"
 #: src/gui/HelpDialog.cpp:563
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:102
 #: plugins/Oculars/src/gui/OcularDialog.cpp:628
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:777
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:782
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:264
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:240
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:140
@@ -6208,7 +6208,7 @@ msgstr "বিষুবলম্ব"
 #: src/gui/SearchDialog.cpp:308 src/gui/AstroCalcDialog.cpp:837
 #: src/gui/AstroCalcDialog.cpp:1743 src/gui/AstroCalcDialog.cpp:2361
 #: src/gui/AstroCalcChart.cpp:88 src/gui/AstroCalcChart.cpp:420
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1496
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1546
 msgid "Azimuth"
 msgstr "দিগংশ"
 
@@ -6317,7 +6317,7 @@ msgid "Valid range years:"
 msgstr "প্রযোজ্য সময় সীমা :"
 
 #: src/gui/AstroCalcDialog.cpp:616
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1140
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1190
 #: plugins/Satellites/src/gui/SatellitesFilterDialog.cpp:136
 msgid "Valid range"
 msgstr "প্রযোজ্য সীমা"
@@ -7493,8 +7493,8 @@ msgstr "বিষুবলম্ব বনাম সময় লেখ"
 #. TRANSLATORS: hours.
 #: src/gui/AstroCalcDialog.cpp:6326 src/gui/AstroCalcChart.cpp:443
 #: src/gui/AstroCalcChart.cpp:469
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:873
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1148
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:905
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1198
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:173
 #: plugins/Novae/src/gui/NovaeDialog.cpp:168
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:165
@@ -7885,12 +7885,12 @@ msgid "Angular distance between the Moon and celestial object"
 msgstr "চাঁদ ও জ্যোতিষ্কটির মাঝের কৌণিক দূরত্ব"
 
 #: src/gui/AstroCalcDialog.cpp:9448
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1571
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1621
 msgid "CSV (Comma delimited)"
 msgstr "CSV (কমা দ্বারা বিভাজিত)"
 
 #: src/gui/AstroCalcDialog.cpp:9451
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1572
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1622
 msgid "Microsoft Excel Open XML Spreadsheet"
 msgstr "Microsoft Excel Open XML Spreadsheet"
 
@@ -9489,40 +9489,45 @@ msgstr "মেসিয়ার ম্যারাথন"
 msgid "Random location"
 msgstr "খামখেয়ালী অবস্থান"
 
+#. TRANSLATORS: Name of script
+#: src/translations.h:567
+msgid "Jupiter Moons"
+msgstr ""
+
 #. TRANSLATORS: Description of the landscape tour script.
-#: src/translations.h:571
+#: src/translations.h:573
 msgid "Look around each installed landscape."
 msgstr "সবকটি ভূমিরূপ ঘুরে দেখুন ।"
 
 #. TRANSLATORS: Description of the sky culture tour script.
-#: src/translations.h:573
+#: src/translations.h:575
 msgid "Look at each installed sky culture."
 msgstr "মহাকাশচর্চার বিভিন্ন সংস্কৃতিগুলি ঘুরে দেখুন ।"
 
-#: src/translations.h:574
+#: src/translations.h:576
 msgid "Script to demonstrate a partial lunar eclipse."
 msgstr "খন্ডগ্রাস চন্দ্রগ্রহণ দেখানোর কার্যলিপি ।"
 
-#: src/translations.h:575
+#: src/translations.h:577
 msgid "Script to demonstrate a total lunar eclipse."
 msgstr "পূর্ণগ্রাস চন্দ্রগ্রহণ দেখানোর কার্যলিপি ।"
 
-#: src/translations.h:576
+#: src/translations.h:578
 msgid "A slow, infinite tour of the sky, looking at random objects."
 msgstr "ধীরসুস্থে অসীম মহাকাশের পরিভ্রমণ ।"
 
-#: src/translations.h:577
+#: src/translations.h:579
 msgid ""
 "Script to demonstrate a total solar eclipse which has happened in 2009 "
 "(location=Rangpur, Bangladesh)."
 msgstr ""
 "২০০৯ এর পূর্ণগ্রাস সূর্যগ্রহণ দেখানোর কার্যলিপি । (বাংলাদেশের রংপুর থেকে)"
 
-#: src/translations.h:578
+#: src/translations.h:580
 msgid "Script which runs automatically at startup"
 msgstr "প্রারম্ভে স্বয়ংক্রিয়রূপে সঞ্চালিত কার্যলিপি"
 
-#: src/translations.h:579
+#: src/translations.h:581
 msgid ""
 "This script displays the constellations of the Zodiac. That means the "
 "constellations which lie along the line which the Sun traces across the "
@@ -9531,7 +9536,7 @@ msgstr ""
 "এই কার্যলিপিটি রাশিচক্রগুলি দেখায় মানে সেই সমস্ত নক্ষত্রমন্ডলগুলি, যারা "
 "সৌরপথের উপর পড়ে ।"
 
-#: src/translations.h:580
+#: src/translations.h:582
 msgid ""
 "Due to the quirks in Mercury's orbit and rotation at certain spots the sun "
 "will rise & set 3 different times in one Mercury day."
@@ -9539,7 +9544,7 @@ msgstr ""
 "বার্ষিক ও আহ্নিক গতির অদ্ভূত বিশিষ্টতার জন্য বুধের কোথাও কোথাও এক দিনে "
 "তিনবার সূর্যোদয় ও সূর্যাস্ত হয় ।"
 
-#: src/translations.h:581
+#: src/translations.h:583
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Scorpio and Sagittarius on April 26, 2017."
@@ -9547,7 +9552,7 @@ msgstr ""
 "২৬ শে এপ্রিল, ২০১৭ সাল : বৃশ্চিক ও ধনু রাশির মাঝে মঙ্গল গ্রহ সূর্যকে গ্রাস "
 "করার আগেই তার পিছন থেকে ফোবস এসে সূর্যকে প্রথমে গ্রাস করে ফেলে ।"
 
-#: src/translations.h:582
+#: src/translations.h:584
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Taurus and Gemini on July 23, 2031."
@@ -9555,12 +9560,12 @@ msgstr ""
 "২৩ শে এপ্রিল, ২০৩১ সাল : বৃষ ও মিথুন রাশির মাঝে মঙ্গল গ্রহ সূর্যকে গ্রাস "
 "করার আগেই তার পিছন থেকে ফোবস এসে সূর্যকে প্রথমে গ্রাস করে ফেলে ।"
 
-#: src/translations.h:583
+#: src/translations.h:585
 msgid "Phobos eclipsing the Sun as seen from Olympus Mons on Jan 2, 2021."
 msgstr ""
 "২রা জানুয়ারী ২০২১ এর অলিম্পাস পর্বত থেকে দৃশ্যমান ফোবোস দ্বারা সূর্যগ্রহণ ।"
 
-#: src/translations.h:584
+#: src/translations.h:586
 msgid ""
 "Phobos occultations of Earth are common, as are occultations of Jupiter. But"
 " occultations of both on the same day are very rare. Here's one that takes "
@@ -9569,7 +9574,7 @@ msgstr ""
 "ফোবোস-পৃথিবী সমাপতন ও ফোবোস-বৃহস্পতি সমাপতন খুবই সাধারণ ব্যাপার । তবে একসাথে"
 " একই দিনে দুটো ঘটা খুবই দুর্লভ, যার একটা ২৩/০১/২০৪৮ তে হবে ।"
 
-#: src/translations.h:585
+#: src/translations.h:587
 msgid ""
 "Phobos races ahead of Mars and transits the sun, passes through it and then "
 "retrogrades back towards the sun and just partially transits it again (only "
@@ -9583,36 +9588,36 @@ msgstr ""
 "এরপর মঙ্গল সূর্যের পূর্ণ গ্রহণ ঘটায়, আর ফোবোস মঙ্গলের ছায়ায় ঢাকা পড়ে যায় । "
 "ফোবসের নিষ্ক্রমণের পরও তা মঙ্গলের ছায়ায় আরও কিছু সময় অনুজ্জ্বল হয়ে থাকে ।"
 
-#: src/translations.h:586
+#: src/translations.h:588
 msgid ""
 "Screensaver of various happenings in the Solar System. 321 events in all!"
 msgstr "সৌরজগতের বিশেষ কিছু ঘটনা সম্বলিত স্ক্রীনসেভার, মোট ৩২১ ঘটনা রয়েছে ।"
 
-#: src/translations.h:587
+#: src/translations.h:589
 msgid "A tour of the modern constellations."
 msgstr "আধুনিক তারামন্ডলগুলি একে একে দেখানো হবে ।"
 
-#: src/translations.h:588
+#: src/translations.h:590
 msgid "A tour of the constellations of the selected sky culture."
 msgstr "বেছে নেওয়া সংস্কৃতি অনুযায়ী নক্ষত্রমন্ডল পরিভ্রমন"
 
-#: src/translations.h:589
+#: src/translations.h:591
 msgid "Look at the Sun from big planets of Solar System and Pluto."
 msgstr "প্লুটো ও সৌরজগতের বড় গ্রহগুলি থেকে সূর্যকে দেখা ।"
 
-#: src/translations.h:590
+#: src/translations.h:592
 msgid ""
 "Best views of Earth from other Solar System bodies in the 21st Century."
 msgstr ""
 "এটি (একবিংশ শতাব্দীতে) সৌরজগতের অন্যান্য বস্তুগুলির আকাশে দৃশ্যমান পৃথিবীর "
 "শ্রেষ্ঠ দৃশ্যগুলির একটি সংগ্রহ ।"
 
-#: src/translations.h:591
+#: src/translations.h:593
 msgid "Transit of Venus as seen from Sydney Australia, 6th June 2012."
 msgstr ""
 "৬ই জুন, ২০১২ সালে অস্ট্রেলিয়ার সিডনি থেকে দৃশ্যমান শুক্রের সরণটি দেখায় ।"
 
-#: src/translations.h:592
+#: src/translations.h:594
 msgid ""
 "Flash of the supernova observed by Tycho Brahe in 1572. The Historical "
 "Supernovae plugin has to be enabled."
@@ -9620,7 +9625,7 @@ msgstr ""
 "১৫৭২ সালের টাইকো ব্রাহের অতিনোভা । দেখার জন্য ঐতিহাসিক অতিনোভা সরঞ্জাম "
 "সক্রিয় করা আবশ্যক ।"
 
-#: src/translations.h:593
+#: src/translations.h:595
 msgid ""
 "Earth and other planet's Greatest Elongations and Oppositions from Mars "
 "2000-3000"
@@ -9628,7 +9633,7 @@ msgstr ""
 "মঙ্গলের আকাশে পৃথিবী ও অন্য গ্রহের প্রতিযোগ ও সর্বোচ্চ অবস্থান (২০০০ থেকে "
 "৩০০০ সালের মধ্যে)"
 
-#: src/translations.h:594
+#: src/translations.h:596
 msgid ""
 "Earth Greatest Elongations and Transits from Callisto 2000-3000. Why "
 "Callisto? Well of the 4 Galilean Moons, Callisto is the only one outside of "
@@ -9641,7 +9646,7 @@ msgstr ""
 "বেষ্টনীর বাইরে অবস্থিত । তাই যদি কোনো দিন মানুষ বৃহস্পতির কাছে বসতি গড়ে তোলে"
 " তবে এটাই হবে সবচেয়ে আদর্শ স্থান ।"
 
-#: src/translations.h:595
+#: src/translations.h:597
 msgid ""
 "Earth the other visible Planet's Greatest Elongations and Oppositions from "
 "Ceres 2000-2200"
@@ -9649,11 +9654,11 @@ msgstr ""
 "২০০০ ও ৩০০০ মধ্যবর্তী সময়ে সেরেসের আকাশে পৃথিবী ও অন্য গ্রহের প্রতিযোগ ও "
 "সর্বোচ্চ অবস্থান"
 
-#: src/translations.h:596
+#: src/translations.h:598
 msgid "A tour of Messier Objects"
 msgstr "মেসিয়ার জ্যোতিষ্ক গুলি পরপর পরিভ্রমন"
 
-#: src/translations.h:597
+#: src/translations.h:599
 msgid ""
 "Tours around interesting objects, which accessible to observation with "
 "binoculars. The data for the script are taken from the eponymous book by "
@@ -9662,7 +9667,7 @@ msgstr ""
 "এটি দূরবীন দিয়ে রাতের আকাশ পর্যবেক্ষণের পথপ্রদর্শক হিসাবে কাজ করে । Gary "
 "Seronik এর লেখা বই অনুকরনে এই কার্যলিপিটি তৈরী করা হয়েছে ।"
 
-#: src/translations.h:598
+#: src/translations.h:600
 msgid ""
 "This script helps you make an excursion around 20 fun double stars. The list"
 " has been collected by Jerry Lodriguss and published in Sky & Telescope "
@@ -9673,15 +9678,15 @@ msgstr ""
 " কার্যলিপিটি সমস্ত তথ্য তাঁর ওয়েবসাইট http://www.astropix.com/doubles/ থেকে "
 "নেওয়া হয়েছে ।"
 
-#: src/translations.h:599
+#: src/translations.h:601
 msgid "This script helps you make an excursion around largest known stars."
 msgstr "এর সাহায্যে প্রকান্ড তারাগুলির সম্পর্কে জানা যায় ।"
 
-#: src/translations.h:600
+#: src/translations.h:602
 msgid "A tour around objects from the Herschel 400 Catalogue"
 msgstr "হার্শেল ৪০০ তালিকায় থাকা জ্যোতিষ্ক গুলি পরিভ্রমন"
 
-#: src/translations.h:601
+#: src/translations.h:603
 msgid ""
 "Ben Crowell has created Binosky, an observing list of Deep Sky Objects for "
 "Binoculars. In the script we give a list of these 31 objects, ordered by "
@@ -9691,7 +9696,7 @@ msgstr ""
 "Ben Crowell । বর্তমানে এই কার্যলিপিটিতে বিষুবাংশ (২০০০) অনুসারে পরপর ৩১টি "
 "জ্যোতিষ্ক অন্তর্ভুক্ত করা আছে ।"
 
-#: src/translations.h:602
+#: src/translations.h:604
 msgid ""
 "The Jack Bennett Catalog of Southern Deep-Sky Objects (152 objects in all). "
 "The Bennett catalog was contributed by Auke Slotegraaf."
@@ -9699,7 +9704,7 @@ msgstr ""
 "জ্যাক বেনেট প্রবর্তিত দক্ষিণ গোলার্ধের ১৫২ টি মহাজাগতিক জ্যোতিষ্কের তালিকা ।"
 " Auke Slotegraaf এটি যুক্ত করেছেন ।"
 
-#: src/translations.h:603
+#: src/translations.h:605
 msgid ""
 "This list of 111 objects by A.J. Crayon and Steve Coe is used by members of "
 "the Saguaro Astronomy Club of Phoenix, AZ, for the Best of the NGC "
@@ -9709,7 +9714,7 @@ msgstr ""
 "করেছেন A.J. Crayon এবং Steve Coe যা ফিনিক্সের সুগুয়ারো জ্যোতির্বৈজ্ঞানিক "
 "ক্লাবের সদস্যরা ব্যবহার করে থাকেন ।"
 
-#: src/translations.h:604
+#: src/translations.h:606
 msgid ""
 "Demonstration of the mid-time of rare events - triple shadow phenomena of "
 "the satellites of Jupiter from 1900 to 2100. All events are given in "
@@ -9718,7 +9723,7 @@ msgstr ""
 "১৯২০ থেকে ২১০০ সালের মধ্যে বৃহস্পতি গ্রহে একসাথে তিনটি সূর্য গ্রহণের বিরল "
 "ঘটনাবলী ।"
 
-#: src/translations.h:605
+#: src/translations.h:607
 msgid ""
 "The planet Jupiter sometimes appears to be without moons, when the four "
 "Galilean satellites are simultaneously invisible because they are passing "
@@ -9730,7 +9735,7 @@ msgstr ""
 "কারণে) যে বৃহস্পতি গ্রহকে চাঁদহীন বলে মনে হয় । ১৯০০ থেকে ২১০০ সালের মাঝের "
 "সময়ের ঘটনাগুলি এখানে দেখানো হয়েছে ।"
 
-#: src/translations.h:606
+#: src/translations.h:608
 msgid ""
 "This script demonstrates interesting phenomena - occultations bright stars "
 "by planets, 2000 to 2040."
@@ -9738,41 +9743,41 @@ msgstr ""
 "২০০০ থেকে ২০৪০ এর মাঝে ঘটা গ্রহ ও অতি উজ্জ্বল তারাদের সমাপতন গুলি দেখানো "
 "হয়েছে ।"
 
-#: src/translations.h:607
+#: src/translations.h:609
 msgid ""
 "This script demonstrates interesting and very rare phenomena - mutual "
 "occultations of planets, 0 to 2500."
 msgstr "0 থেকে ২৫০০০ এর মাঝে ঘটা গ্রহদের পারস্পরিক সমাপতন গুলি দেখানো হয়েছে ।"
 
-#: src/translations.h:608
+#: src/translations.h:610
 msgid "A tour of the Solar System planets"
 msgstr "সৌরজগতের গ্রহগুলি পরিভ্রমন"
 
-#: src/translations.h:609
+#: src/translations.h:611
 msgid ""
 "A demonstration of the analemma - the path of the Sun across the sky during "
 "the year on Earth."
 msgstr "দিনের একটি নির্দিষ্ট সময়ে আকাশে সূর্যের বার্ষিক অবস্থান"
 
-#: src/translations.h:610
+#: src/translations.h:612
 msgid ""
 "A demonstration of the analemma - the path of the Sun across the sky during "
 "the year on Mars."
 msgstr "দিনের একটি নির্দিষ্ট সময়ে আকাশে সূর্যের বার্ষিক অবস্থান"
 
-#: src/translations.h:611
+#: src/translations.h:613
 msgid ""
 "A demonstration of the analemma - the path of the Sun across the sky during "
 "the year on Saturn."
 msgstr "দিনের একটি নির্দিষ্ট সময়ে আকাশে সূর্যের বার্ষিক অবস্থান"
 
-#: src/translations.h:612
+#: src/translations.h:614
 msgid ""
 "A demonstration of the analemma - the path of the Sun across the sky during "
 "the year on Uranus."
 msgstr "দিনের একটি নির্দিষ্ট সময়ে আকাশে সূর্যের বার্ষিক অবস্থান"
 
-#: src/translations.h:613
+#: src/translations.h:615
 msgid ""
 "Messier Marathon on March 20, 2020. The data for the script are taken from "
 "GaoXing's observation log: http://www.xjltp.com/2_huodong/2_030301.htm"
@@ -9780,7 +9785,7 @@ msgstr ""
 "মার্চ ২০, ২০২০ এর আকাশ । এটি GaoXing এর পর্যবেক্ষণ লিপি "
 "http://www.xjltp.com/2_huodong/2_030301.htm থেকে নেওয়া হয়েছে ।"
 
-#: src/translations.h:614
+#: src/translations.h:616
 msgid ""
 "Creates 6 tiles (North/East/South/West/Up/Down) for a skybox. These can be "
 "further used e.g. in Unity3D or other 3D environments. Output directory and "
@@ -9795,7 +9800,7 @@ msgstr ""
 " করা যায় । এছাড়াও একটি ডেটা ফাইলও তৈরী হয়, যার নাম OUTPUT_DATA চলরাশির "
 "সাহায্যে ঠিক করা যায় । আরও তথ্যের জন্য কার্যলিপিটি বিশদে পড়ুন ।"
 
-#: src/translations.h:615
+#: src/translations.h:617
 msgid ""
 "This script will help you make practical works for celestial navigation - he"
 " sets a random location and hides it from the GUI."
@@ -9804,195 +9809,199 @@ msgstr ""
 " প্রস্তুত কারক একটি এলোমেলো অবস্থান বেছে নিয়েছেন ও সেটিকে দেখতে পাওয়া "
 "নিস্ক্রিয় করে রেখেছেন ।"
 
-#: src/translations.h:619
+#: src/translations.h:618
+msgid "Jupiter's Moons Orbital Simulation"
+msgstr ""
+
+#: src/translations.h:622
 msgid "&Undo"
 msgstr "পূর্বা&বস্থায় ফিরুন"
 
-#: src/translations.h:620
+#: src/translations.h:623
 msgid "&Redo"
 msgstr "পুনরা&য় করুন"
 
-#: src/translations.h:621
+#: src/translations.h:624
 msgid "Cu&t"
 msgstr "কেটে নি&ন"
 
-#: src/translations.h:622
+#: src/translations.h:625
 msgid "&Copy"
 msgstr "&অনুকরন করুন"
 
-#: src/translations.h:623
+#: src/translations.h:626
 msgid "&Paste"
 msgstr "অনুলে&পন করুন"
 
-#: src/translations.h:624 plugins/Oculars/src/ui_ocularDialog.h:1536
+#: src/translations.h:627 plugins/Oculars/src/ui_ocularDialog.h:1536
 #: plugins/Oculars/src/ui_ocularDialog.h:1545
 #: plugins/Oculars/src/ui_ocularDialog.h:1551
 #: plugins/Oculars/src/ui_ocularDialog.h:1570
 msgid "Delete"
 msgstr "মুছে ফেলুন"
 
-#: src/translations.h:625
+#: src/translations.h:628
 msgid "Select All"
 msgstr "সব নির্বাচন করুন"
 
-#: src/translations.h:626
+#: src/translations.h:629
 msgid "Look in:"
 msgstr "নির্বাচন স্থল :"
 
-#: src/translations.h:627
+#: src/translations.h:630
 msgid "Directory:"
 msgstr "ডিরেক্টরি :"
 
-#: src/translations.h:628
+#: src/translations.h:631
 msgid "Folder"
 msgstr "ফোল্ডার"
 
-#: src/translations.h:629
+#: src/translations.h:632
 msgid "&Choose"
 msgstr "বেছে নি&ন"
 
-#: src/translations.h:630 src/ui_configurationDialog.h:1915
+#: src/translations.h:633 src/ui_configurationDialog.h:1915
 #: src/ui_obsListDialog.h:373
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:608
 msgid "Cancel"
 msgstr "বাতিল করুন"
 
-#: src/translations.h:631
+#: src/translations.h:634
 msgid "&Cancel"
 msgstr "বাতি&ল"
 
-#: src/translations.h:632
+#: src/translations.h:635
 msgid "Files of type:"
 msgstr "ধরণ :"
 
-#: src/translations.h:633
+#: src/translations.h:636
 msgid "Date Modified"
 msgstr "শেষ সম্পাদনা"
 
-#: src/translations.h:634
+#: src/translations.h:637
 msgid "Directories"
 msgstr "ডিরেক্টরি সমূহ"
 
-#: src/translations.h:635
+#: src/translations.h:638
 msgid "Computer"
 msgstr "কম্পিউটার"
 
-#: src/translations.h:636
+#: src/translations.h:639
 msgid "&Open"
 msgstr "খুলু&ন"
 
-#: src/translations.h:637
+#: src/translations.h:640
 msgid "&Save"
 msgstr "&সঞ্চয় করুন"
 
-#: src/translations.h:638
+#: src/translations.h:641
 msgid "Save"
 msgstr "সঞ্চয় করুন"
 
-#: src/translations.h:639
+#: src/translations.h:642
 msgid "Save As:"
 msgstr ""
 
-#: src/translations.h:640
+#: src/translations.h:643
 msgid "Tags:"
 msgstr ""
 
-#: src/translations.h:641
+#: src/translations.h:644
 msgid "File &name:"
 msgstr "ফাইলের না&ম :"
 
-#: src/translations.h:642
+#: src/translations.h:645
 msgid "Copy &Link Location"
 msgstr "সংযো&গটির ঠিকানা অনুকরন করুন"
 
-#: src/translations.h:643
+#: src/translations.h:646
 msgid "Abort"
 msgstr "বাতিল করুন"
 
-#: src/translations.h:644
+#: src/translations.h:647
 msgid "Ignore"
 msgstr "উপেক্ষা করুন"
 
-#: src/translations.h:645
+#: src/translations.h:648
 msgid "&Basic colors"
 msgstr "প্রা&থমিক রং"
 
-#: src/translations.h:646
+#: src/translations.h:649
 msgid "&Pick Screen Color"
 msgstr "স্ক্রীন থেকে &রঙ বাছুন"
 
-#: src/translations.h:647
+#: src/translations.h:650
 msgid "&Custom colors"
 msgstr "প&ছন্দসই রং"
 
-#: src/translations.h:648
+#: src/translations.h:651
 msgid "&Add to Custom Colors"
 msgstr "পছন্দসই রঙের তালিকায় যো&গ করুন"
 
-#: src/translations.h:649
+#: src/translations.h:652
 msgid "Hu&e:"
 msgstr "&ধরন :"
 
-#: src/translations.h:650
+#: src/translations.h:653
 msgid "&Sat:"
 msgstr "গা&ড়ত্ব :"
 
-#: src/translations.h:651
+#: src/translations.h:654
 msgid "&Val:"
 msgstr "&উজ্জ্বল্যতা :"
 
-#: src/translations.h:652
+#: src/translations.h:655
 msgid "&Red:"
 msgstr "লা&ল বর্ণ :"
 
-#: src/translations.h:653
+#: src/translations.h:656
 msgid "&Green:"
 msgstr "সবু&জ বর্ণ :"
 
-#: src/translations.h:654
+#: src/translations.h:657
 msgid "Bl&ue:"
 msgstr "নীল &বর্ণ :"
 
-#: src/translations.h:655
+#: src/translations.h:658
 msgid "Select Color"
 msgstr "রং নির্বাচন করুন"
 
-#: src/translations.h:656
+#: src/translations.h:659
 #, qt-format
 msgid "Cursor at %1, %2 Press ESC to cancel"
 msgstr "কার্সারের অবস্থান : %1, %2 । বাতিল করতে ESC চাপুন ।"
 
-#: src/translations.h:657
+#: src/translations.h:660
 #: plugins/OnlineQueries/src/ui_onlineQueriesDialog.h:194
 msgid "Back"
 msgstr "পূর্ববর্তী"
 
-#: src/translations.h:658
+#: src/translations.h:661
 #: plugins/OnlineQueries/src/ui_onlineQueriesDialog.h:196
 msgid "Forward"
 msgstr "পরবর্তী"
 
-#: src/translations.h:659
+#: src/translations.h:662
 msgid "Parent Directory"
 msgstr "মূল ফোল্ডার"
 
-#: src/translations.h:660
+#: src/translations.h:663
 msgid "Create New Folder"
 msgstr "নতুন ফোল্ডার তৈরী করুন"
 
-#: src/translations.h:661
+#: src/translations.h:664
 msgid "List View"
 msgstr "তালিকা অনুসারে প্রদর্শন"
 
-#: src/translations.h:662
+#: src/translations.h:665
 msgid "Detail View"
 msgstr "বিশদে প্রদর্শন"
 
-#: src/translations.h:663
+#: src/translations.h:666
 msgid "Recent Places"
 msgstr "সাম্প্রতিক ব্যাবহার সমুহ"
 
-#: src/translations.h:664
+#: src/translations.h:667
 #, qt-format
 msgid ""
 "%1 already exists.\n"
@@ -10001,47 +10010,47 @@ msgstr ""
 "%1 টি বর্তমান আছে ।\n"
 "এটিকে মুছে নতুন যোগ করতে চান ?"
 
-#: src/translations.h:665
+#: src/translations.h:668
 msgid "&Yes"
 msgstr "ঠিক &আছে"
 
-#: src/translations.h:666
+#: src/translations.h:669
 msgid "&No"
 msgstr "বাতিল করু&ন"
 
-#: src/translations.h:667
+#: src/translations.h:670
 msgid "&Select All"
 msgstr "&সব নির্বাচন করুন"
 
-#: src/translations.h:668
+#: src/translations.h:671
 msgid "&Step up"
 msgstr "পূর্ব&বর্তী"
 
-#: src/translations.h:669
+#: src/translations.h:672
 msgid "Step &down"
 msgstr "&পরবর্তী"
 
-#: src/translations.h:670
+#: src/translations.h:673
 msgid "&Rename"
 msgstr "পুনঃ নামক&রণ করুন"
 
-#: src/translations.h:671
+#: src/translations.h:674
 msgid "&Delete"
 msgstr "বা&দ দিন"
 
-#: src/translations.h:672
+#: src/translations.h:675
 msgid "&New Folder"
 msgstr "&নতুন ফোল্ডার"
 
-#: src/translations.h:673
+#: src/translations.h:676
 msgid "New Folder"
 msgstr "নতুন ফোল্ডার"
 
-#: src/translations.h:674
+#: src/translations.h:677
 msgid "Show &hidden files"
 msgstr "র&হস্যময় ও গোপন ফাইলগুলি দেখুন"
 
-#: src/translations.h:675 plugins/MeteorShowers/src/ui_MSSearchDialog.h:139
+#: src/translations.h:678 plugins/MeteorShowers/src/ui_MSSearchDialog.h:139
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:141
 msgid "Search"
 msgstr "অনুসন্ধান"
@@ -12758,7 +12767,7 @@ msgstr "প্রকৃত আকার অনুপাতে নির্দে
 msgid "Use proportional hints"
 msgstr "আকার অনুপাতে নির্দেশক ব্যবহার"
 
-#: src/ui_viewDialog.h:3750 plugins/Satellites/src/ui_satellitesDialog.h:1245
+#: src/ui_viewDialog.h:3750 plugins/Satellites/src/ui_satellitesDialog.h:1246
 msgid "Labels"
 msgstr "নাম"
 
@@ -13551,7 +13560,7 @@ msgid "Additional settings for Graphical User Interface"
 msgstr "অতিরিক্ত"
 
 #: src/ui_configurationDialog.h:1697
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1493
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1543
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:443
 msgid "Time"
 msgstr "সময়"
@@ -13651,7 +13660,7 @@ msgstr ""
 " শুরুর সময়ে ব্যবহার করতে পারবেন"
 
 #: src/ui_configurationDialog.h:1739
-#: plugins/Satellites/src/ui_satellitesDialog.h:1270
+#: plugins/Satellites/src/ui_satellitesDialog.h:1271
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:206
 #: plugins/NavStars/src/ui_navStarsWindow.h:507
 #: plugins/Novae/src/ui_novaeDialog.h:209
@@ -13672,7 +13681,7 @@ msgstr "স্টেলারিয়াম প্রদত্ত স্বাভ�
 
 #: src/ui_configurationDialog.h:1743
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:314
-#: plugins/Satellites/src/ui_satellitesDialog.h:1269
+#: plugins/Satellites/src/ui_satellitesDialog.h:1270
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:222
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:205
 #: plugins/NavStars/src/ui_navStarsWindow.h:506
@@ -14605,7 +14614,7 @@ msgid "Allow scripts to store output to arbitrary directories"
 msgstr ""
 
 #: src/ui_scriptConsole.h:397
-#: plugins/Satellites/src/ui_satellitesDialog.h:1271
+#: plugins/Satellites/src/ui_satellitesDialog.h:1272
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:207
 #: plugins/NavStars/src/ui_navStarsWindow.h:498
 #: plugins/Novae/src/ui_novaeDialog.h:210
@@ -14803,7 +14812,7 @@ msgid "Export ephemeris..."
 msgstr "অবস্থান তথ্য সঞ্চয় করুন ..."
 
 #: src/ui_astroCalcDialog.h:2225 src/ui_astroCalcDialog.h:2272
-#: plugins/Satellites/src/ui_satellitesDialog.h:1384
+#: plugins/Satellites/src/ui_satellitesDialog.h:1385
 msgid "Calculations require time, please be patient"
 msgstr "গণনার জন্য কিছু সময়ের প্রয়োজন, ধৈর্য সহকারে একটু অপেক্ষা করুন"
 
@@ -14834,7 +14843,7 @@ msgid "First celestial body"
 msgstr "১ম জ্যোতিষ্ক"
 
 #: src/ui_astroCalcDialog.h:2243 src/ui_astroCalcDialog.h:2262
-#: plugins/Satellites/src/Satellite.cpp:491
+#: plugins/Satellites/src/Satellite.cpp:490
 msgid "and"
 msgstr "ও"
 
@@ -15200,8 +15209,8 @@ msgstr "রেখার বেধ"
 #: src/ui_astroCalcExtraEphemerisDialog.h:174
 #: plugins/Oculars/src/Oculars.cpp:1970
 #: plugins/Oculars/src/gui/OcularDialog.cpp:598
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1151
-#: plugins/Satellites/src/ui_satellitesDialog.h:1249
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1201
+#: plugins/Satellites/src/ui_satellitesDialog.h:1250
 msgctxt "pixels"
 msgid "px"
 msgstr "পিক্সেল"
@@ -15235,7 +15244,7 @@ msgid "Save list"
 msgstr ""
 
 #: src/ui_obsListDialog.h:374
-#: plugins/Satellites/src/ui_satellitesDialog.h:1349
+#: plugins/Satellites/src/ui_satellitesDialog.h:1350
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:156
 msgid "Description:"
 msgstr "বিবরণ :"
@@ -16084,7 +16093,7 @@ msgstr ""
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:316
 #: plugins/Oculars/src/ui_ocularDialog.h:1578
-#: plugins/Satellites/src/ui_satellitesDialog.h:1389
+#: plugins/Satellites/src/ui_satellitesDialog.h:1390
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:420
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:234
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:208
@@ -16179,8 +16188,8 @@ msgstr "&সোজা করুন"
 #: plugins/Oculars/src/gui/OcularDialog.cpp:118
 #: plugins/Oculars/src/gui/OcularDialog.cpp:135
 #: plugins/Oculars/src/gui/OcularDialog.cpp:152
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:911
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:918
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:943
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:950
 msgid "Warning!"
 msgstr "সতর্কতা"
 
@@ -16213,7 +16222,7 @@ msgid "Telrad sight"
 msgstr "প্রতিফলকীয় নিশানা"
 
 #: plugins/Oculars/src/Oculars.cpp:1496
-#: plugins/Satellites/src/Satellites.cpp:167
+#: plugins/Satellites/src/Satellites.cpp:166
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:206
 #: plugins/NavStars/src/NavStars.cpp:120 plugins/Quasars/src/Quasars.cpp:172
 #: plugins/Pulsars/src/Pulsars.cpp:170
@@ -16318,7 +16327,7 @@ msgstr ""
 #. TRANSLATORS: duration
 #. TRANSLATORS: seconds.
 #: plugins/Oculars/src/Oculars.cpp:1988
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1145
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1195
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:223
 msgctxt "time"
 msgid "s"
@@ -17105,7 +17114,7 @@ msgstr "দূরবীন"
 #: plugins/Oculars/src/ui_ocularDialog.h:1546
 #: plugins/Oculars/src/ui_ocularDialog.h:1556
 #: plugins/Oculars/src/ui_ocularDialog.h:1571
-#: plugins/Satellites/src/ui_satellitesDialog.h:1300
+#: plugins/Satellites/src/ui_satellitesDialog.h:1301
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:559
 #: plugins/TelescopeControl/src/gui/ui_storedPointsDialog.h:203
 msgid "Name:"
@@ -17216,9 +17225,9 @@ msgid "Support for Oculus Rift"
 msgstr "অকুলাস রিফ্ট ব্যাবহার করা যায়"
 
 #: plugins/Satellites/src/Satellites.cpp:71
-#: plugins/Satellites/src/Satellites.cpp:164
-#: plugins/Satellites/src/Satellites.cpp:258
-#: plugins/Satellites/src/ui_satellitesDialog.h:1361
+#: plugins/Satellites/src/Satellites.cpp:163
+#: plugins/Satellites/src/Satellites.cpp:256
+#: plugins/Satellites/src/ui_satellitesDialog.h:1362
 msgid "Satellites"
 msgstr "কৃত্রিম উপগ্রহ"
 
@@ -17230,200 +17239,200 @@ msgstr ""
 "এটি NORAD TLE তথ্যের উপর ভিত্তি করে পৃথিবীর কৃত্রিম উপগ্রহগুলির অবস্থানের "
 "ভবিষ্যদ্বাণী করে"
 
-#: plugins/Satellites/src/Satellites.cpp:165
+#: plugins/Satellites/src/Satellites.cpp:164
 msgid "Artificial satellites"
 msgstr "কৃত্রিম উপগ্রহ"
 
-#: plugins/Satellites/src/Satellites.cpp:166
+#: plugins/Satellites/src/Satellites.cpp:165
 msgid "Satellite labels"
 msgstr "উপগ্রহের নাম"
 
-#: plugins/Satellites/src/Satellites.cpp:194
+#: plugins/Satellites/src/Satellites.cpp:193
 msgid ""
 "The old satellites.json file is no longer compatible - using default file"
 msgstr ""
 "পুরোনো satellites.json তালিকাটি উপযুক্ত বা সামঞ্জস্যপূর্ণ নয় তাই স্বাভাবিক "
 "তালিকাটি ব্যবহার করা হচ্ছে"
 
-#: plugins/Satellites/src/Satellites.cpp:259
+#: plugins/Satellites/src/Satellites.cpp:257
 msgid "Show satellites from the group"
 msgstr "এই কৃত্রিম উপগ্রহ গুলি দেখুন - "
 
-#: plugins/Satellites/src/Satellites.cpp:260
+#: plugins/Satellites/src/Satellites.cpp:258
 msgid "Hide satellites from the group"
 msgstr "এই কৃত্রিম উপগ্রহ গুলি লুকান - "
 
 #. TRANSLATORS: Satellite description. "Hubble" is a person's name.
-#: plugins/Satellites/src/Satellites.cpp:1375
+#: plugins/Satellites/src/Satellites.cpp:1369
 msgid "The Hubble Space Telescope"
 msgstr "হাবল স্পেস টেলিস্কোপ"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1377
+#: plugins/Satellites/src/Satellites.cpp:1371
 msgid "The International Space Station"
 msgstr "আন্তর্জাতিক মহাকাশ কেন্দ্র"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1379
+#: plugins/Satellites/src/Satellites.cpp:1373
 msgid "The Chandra X-ray Observatory"
 msgstr "চন্দ্র এক্স-রে দূরবীন"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1381
+#: plugins/Satellites/src/Satellites.cpp:1375
 msgid "X-ray Multi-Mirror Mission"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1383
+#: plugins/Satellites/src/Satellites.cpp:1377
 msgid "Reuven Ramaty High Energy Solar Spectroscopic Imager"
 msgstr "রেভেন রামাটি উচ্চ শক্তি সৌর বর্নালীবীক্ষন"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1385
+#: plugins/Satellites/src/Satellites.cpp:1379
 msgid "International Gamma-Ray Astrophysics Laboratory"
 msgstr "আন্তর্জাতিক গামারশ্মি জ্যোতির্পদার্থবিজ্ঞান গবেষনাগার"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1387
+#: plugins/Satellites/src/Satellites.cpp:1381
 msgid "The Microvariability and Oscillations of Stars telescope"
 msgstr "নক্ষত্রদের সূক্ষ পরিবর্তন ও স্পন্দন পরিমাপক দূরবীন"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1389
+#: plugins/Satellites/src/Satellites.cpp:1383
 msgid "Neil Gehrels Swift Observatory (Swift Gamma-Ray Burst Explorer)"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1391
+#: plugins/Satellites/src/Satellites.cpp:1385
 msgid "Astro‐Rivelatore Gamma a Immagini Leggero"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1393
+#: plugins/Satellites/src/Satellites.cpp:1387
 msgid "Fermi Gamma-ray Space Telescope"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1395
+#: plugins/Satellites/src/Satellites.cpp:1389
 msgid "Wide-field Infrared Survey Explorer"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1397
+#: plugins/Satellites/src/Satellites.cpp:1391
 msgid "Interplanetary Kite-craft Accelerated by Radiation Of the Sun"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1399
+#: plugins/Satellites/src/Satellites.cpp:1393
 msgid "The russian space radio telescope RadioAstron"
 msgstr "রাশিয়ান মহাকাশ বেতার দূরবীন রেডিও অ্যাসট্রন"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1401
+#: plugins/Satellites/src/Satellites.cpp:1395
 msgid "Nuclear Spectroscopic Telescope Array"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1403
+#: plugins/Satellites/src/Satellites.cpp:1397
 msgid "Near Earth Object Surveillance Satellite"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1405
+#: plugins/Satellites/src/Satellites.cpp:1399
 msgid "The Interface Region Imaging Spectrograph"
 msgstr "ক্রিয়াশীল অঞ্চলের বর্ণালীবীক্ষক উপগ্রহ"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1407
+#: plugins/Satellites/src/Satellites.cpp:1401
 msgid ""
 "The Spectroscopic Planet Observatory for Recognition of Interaction of "
 "Atmosphere"
 msgstr "গ্রহের বায়ুমন্ডলের কার্যকলাপ পরিমাপক বর্ণালীবীক্ষক উপগ্রহ"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1409
+#: plugins/Satellites/src/Satellites.cpp:1403
 msgid "The Dark Matter Particle Explorer"
 msgstr "কৃষ্ণবস্তু কনা সন্ধান উপগ্রহ"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1411
+#: plugins/Satellites/src/Satellites.cpp:1405
 msgid "Hard X-ray Modulation Telescope"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1413
+#: plugins/Satellites/src/Satellites.cpp:1407
 msgid "Arcsecond Space Telescope Enabling Research in Astrophysics"
 msgstr "আর্কসেকেন্ড মহাকাশ দূরবীন"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1415
+#: plugins/Satellites/src/Satellites.cpp:1409
 msgid "Transiting Exoplanet Survey Satellite"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1417
+#: plugins/Satellites/src/Satellites.cpp:1411
 msgid "Spectrum-X-Gamma"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1419
+#: plugins/Satellites/src/Satellites.cpp:1413
 msgid "Characterising Exoplanets Satellite"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1421
+#: plugins/Satellites/src/Satellites.cpp:1415
 msgid "Tiangong space station (Chinese large modular space station)"
 msgstr "তিয়ানগং মহাকাশ কেন্দ্র (চীনের তৈরী স্পেস স্টেশন মডিউল)"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1423
+#: plugins/Satellites/src/Satellites.cpp:1417
 msgid "Imaging X-ray Polarimetry Explorer"
 msgstr ""
 
 #. TRANSLATORS: Satellite description. "James Webb" is a person's name.
-#: plugins/Satellites/src/Satellites.cpp:1425
+#: plugins/Satellites/src/Satellites.cpp:1419
 msgid "James Webb Space Telescope"
 msgstr ""
 
 #. TRANSLATORS: The full phrase is 'Loading TLE %VALUE%/%MAX%' in progress bar
-#: plugins/Satellites/src/Satellites.cpp:2261
+#: plugins/Satellites/src/Satellites.cpp:2262
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:152
 msgid "Loading TLE"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Communication satellites
-#: plugins/Satellites/src/Satellites.cpp:3251
+#: plugins/Satellites/src/Satellites.cpp:3232
 msgid "communications"
 msgstr "সংযোগ সংক্রান্ত"
 
 #. TRANSLATORS: Satellite group: Navigation satellites
-#: plugins/Satellites/src/Satellites.cpp:3253
+#: plugins/Satellites/src/Satellites.cpp:3234
 msgid "navigation"
 msgstr "মার্গদর্শী"
 
 #. TRANSLATORS: Satellite group: Scientific satellites
-#: plugins/Satellites/src/Satellites.cpp:3255
+#: plugins/Satellites/src/Satellites.cpp:3236
 msgid "scientific"
 msgstr "বৈজ্ঞানিক"
 
 #. TRANSLATORS: Satellite group: Earth Resources satellites
-#: plugins/Satellites/src/Satellites.cpp:3257
+#: plugins/Satellites/src/Satellites.cpp:3238
 msgid "earth resources"
 msgstr "ভূসম্পদ"
 
 #. TRANSLATORS: Satellite group: Satellites in geostationary orbit
-#: plugins/Satellites/src/Satellites.cpp:3259
+#: plugins/Satellites/src/Satellites.cpp:3240
 msgid "geostationary"
 msgstr "ভুসমলিত"
 
 #. TRANSLATORS: Satellite group: Satellites that are no longer functioning
-#: plugins/Satellites/src/Satellites.cpp:3261
+#: plugins/Satellites/src/Satellites.cpp:3242
 msgid "non-operational"
 msgstr "অকেজো"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the space
 #. observatories
-#: plugins/Satellites/src/Satellites.cpp:3263
+#: plugins/Satellites/src/Satellites.cpp:3244
 msgid "observatory"
 msgstr "পর্যবেক্ষণ সংক্রান্ত"
 
@@ -17431,7 +17440,7 @@ msgstr "পর্যবেক্ষণ সংক্রান্ত"
 #. System (IRNSS) is an autonomous regional satellite navigation system being
 #. developed by the Indian Space Research Organisation (ISRO) which would be
 #. under complete control of the Indian government.
-#: plugins/Satellites/src/Satellites.cpp:3265
+#: plugins/Satellites/src/Satellites.cpp:3246
 msgid "irnss"
 msgstr "ভারতীয় আঞ্চলিক দিকনির্ণয় উপগ্রহ"
 
@@ -17439,51 +17448,51 @@ msgstr "ভারতীয় আঞ্চলিক দিকনির্ণয�
 #. a proposed three-satellite regional time transfer system and Satellite
 #. Based Augmentation System for the Global Positioning System, that would be
 #. receivable within Japan.
-#: plugins/Satellites/src/Satellites.cpp:3267
+#: plugins/Satellites/src/Satellites.cpp:3248
 msgid "qzss"
 msgstr "কোয়াশি-জেনিথ উপগ্রহ"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the COSMOS satellites
-#: plugins/Satellites/src/Satellites.cpp:3269
+#: plugins/Satellites/src/Satellites.cpp:3250
 msgid "cosmos"
 msgstr "কসমস"
 
 #. TRANSLATORS: Satellite group: Debris of satellites
-#: plugins/Satellites/src/Satellites.cpp:3271
+#: plugins/Satellites/src/Satellites.cpp:3252
 msgid "debris"
 msgstr "ভাঙা টুকরো"
 
 #. TRANSLATORS: Satellite group: Crewed satellites
-#: plugins/Satellites/src/Satellites.cpp:3273
+#: plugins/Satellites/src/Satellites.cpp:3254
 msgid "crewed"
 msgstr "মানবযান"
 
 #. TRANSLATORS: Satellite group: Satellites of ISS resupply missions
-#: plugins/Satellites/src/Satellites.cpp:3275
+#: plugins/Satellites/src/Satellites.cpp:3256
 msgid "resupply"
 msgstr "মালবাহক"
 
 #. TRANSLATORS: Satellite group: are known to broadcast TV signals
-#: plugins/Satellites/src/Satellites.cpp:3277
+#: plugins/Satellites/src/Satellites.cpp:3258
 msgid "tv"
 msgstr "টিভি"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GONETS satellites
-#: plugins/Satellites/src/Satellites.cpp:3279
+#: plugins/Satellites/src/Satellites.cpp:3260
 msgid "gonets"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Last 30 Days' Launches
 #. TRANSLATORS: CelesTrak source [Last 30 Days' Launches]:
 #. https://celestrak.org/NORAD/elements/tle-new.txt
-#: plugins/Satellites/src/Satellites.cpp:3285
+#: plugins/Satellites/src/Satellites.cpp:3266
 msgid "tle-new"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Last 30 Days' Launches
 #. TRANSLATORS: CelesTrak source [Last 30 Days' Launches]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=last-30-days&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3288
+#: plugins/Satellites/src/Satellites.cpp:3269
 msgid "last-30-days"
 msgstr ""
 
@@ -17492,7 +17501,7 @@ msgstr ""
 #. https://celestrak.org/NORAD/elements/stations.txt
 #. TRANSLATORS: CelesTrak source [Space Stations]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=stations&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3292
+#: plugins/Satellites/src/Satellites.cpp:3273
 msgid "stations"
 msgstr "মহাকাশ কেন্দ্র"
 
@@ -17501,7 +17510,7 @@ msgstr "মহাকাশ কেন্দ্র"
 #. https://celestrak.org/NORAD/elements/visual.txt
 #. TRANSLATORS: CelesTrak source [100 (or so) Brightest]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=visual&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3296
+#: plugins/Satellites/src/Satellites.cpp:3277
 msgid "visual"
 msgstr "দৃষ্টিগ্রাহ্য"
 
@@ -17510,7 +17519,7 @@ msgstr "দৃষ্টিগ্রাহ্য"
 #. https://celestrak.org/NORAD/elements/active.txt
 #. TRANSLATORS: CelesTrak source [Active Satellites]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=active&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3300
+#: plugins/Satellites/src/Satellites.cpp:3281
 msgid "active"
 msgstr "সক্রিয়"
 
@@ -17519,7 +17528,7 @@ msgstr "সক্রিয়"
 #. https://celestrak.org/NORAD/elements/analyst.txt
 #. TRANSLATORS: CelesTrak source [Analyst Satellites]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=analyst&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3304
+#: plugins/Satellites/src/Satellites.cpp:3285
 msgid "analyst"
 msgstr ""
 
@@ -17528,7 +17537,7 @@ msgstr ""
 #. https://celestrak.org/NORAD/elements/weather.txt
 #. TRANSLATORS: CelesTrak source [Weather]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=weather&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3311
+#: plugins/Satellites/src/Satellites.cpp:3292
 msgid "weather"
 msgstr "আবহাওয়া সংক্রান্ত"
 
@@ -17537,7 +17546,7 @@ msgstr "আবহাওয়া সংক্রান্ত"
 #. https://celestrak.org/NORAD/elements/noaa.txt
 #. TRANSLATORS: CelesTrak source [NOAA]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=noaa&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3315
+#: plugins/Satellites/src/Satellites.cpp:3296
 msgid "noaa"
 msgstr "নোয়া"
 
@@ -17546,7 +17555,7 @@ msgstr "নোয়া"
 #. https://celestrak.org/NORAD/elements/goes.txt
 #. TRANSLATORS: CelesTrak source [GOES]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=goes&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3319
+#: plugins/Satellites/src/Satellites.cpp:3300
 msgid "goes"
 msgstr ""
 
@@ -17555,7 +17564,7 @@ msgstr ""
 #. https://celestrak.org/NORAD/elements/resource.txt
 #. TRANSLATORS: CelesTrak source [Earth Resources]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=resource&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3323
+#: plugins/Satellites/src/Satellites.cpp:3304
 msgid "resource"
 msgstr ""
 
@@ -17564,7 +17573,7 @@ msgstr ""
 #. https://celestrak.org/NORAD/elements/sarsat.txt
 #. TRANSLATORS: CelesTrak source [Search & Rescue (SARSAT)]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=sarsat&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3327
+#: plugins/Satellites/src/Satellites.cpp:3308
 msgid "sarsat"
 msgstr ""
 
@@ -17573,7 +17582,7 @@ msgstr ""
 #. https://celestrak.org/NORAD/elements/dmc.txt
 #. TRANSLATORS: CelesTrak source [Disaster Monitoring]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=dmc&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3331
+#: plugins/Satellites/src/Satellites.cpp:3312
 msgid "dmc"
 msgstr ""
 
@@ -17585,7 +17594,7 @@ msgstr ""
 #. TRANSLATORS: CelesTrak source [Tracking and Data Relay Satellite System
 #. (TDRSS)]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=tdrss&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3335
+#: plugins/Satellites/src/Satellites.cpp:3316
 msgid "tdrss"
 msgstr "ট্র্যাকিং এবং ডেটা রিলে উপগ্রহ"
 
@@ -17594,7 +17603,7 @@ msgstr "ট্র্যাকিং এবং ডেটা রিলে উপ�
 #. https://celestrak.org/NORAD/elements/argos.txt
 #. TRANSLATORS: CelesTrak source [ARGOS Data Collection System]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=argos&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3339
+#: plugins/Satellites/src/Satellites.cpp:3320
 msgid "argos"
 msgstr ""
 
@@ -17604,7 +17613,7 @@ msgstr ""
 #. https://celestrak.org/NORAD/elements/spire.txt
 #. TRANSLATORS: CelesTrak source [Spire]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=spire&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3348
+#: plugins/Satellites/src/Satellites.cpp:3329
 msgid "spire"
 msgstr "স্পায়ার"
 
@@ -17613,7 +17622,7 @@ msgstr "স্পায়ার"
 #. https://celestrak.org/NORAD/elements/geo.txt
 #. TRANSLATORS: CelesTrak source [Active Geosynchronous]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=geo&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3355
+#: plugins/Satellites/src/Satellites.cpp:3336
 msgid "geo"
 msgstr ""
 
@@ -17622,7 +17631,7 @@ msgstr ""
 #. https://celestrak.org/satcat/gpz.php
 #. TRANSLATORS: CelesTrak source [GEO Protected Zone]:
 #. https://celestrak.org/NORAD/elements/gp.php?SPECIAL=gpz&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3359
+#: plugins/Satellites/src/Satellites.cpp:3340
 msgid "gpz"
 msgstr ""
 
@@ -17631,7 +17640,7 @@ msgstr ""
 #. https://celestrak.org/satcat/gpz-plus.php
 #. TRANSLATORS: CelesTrak source [GEO Protected Zone Plus]:
 #. https://celestrak.org/NORAD/elements/gp.php?SPECIAL=gpz-plus&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3363
+#: plugins/Satellites/src/Satellites.cpp:3344
 msgid "gpz-plus"
 msgstr ""
 
@@ -17643,7 +17652,7 @@ msgstr ""
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=intelsat&FORMAT=tle
 #. TRANSLATORS: CelesTrak supplemental source [INTELSAT TLEs]:
 #. https://celestrak.org/NORAD/elements/supplemental/intelsat.txt
-#: plugins/Satellites/src/Satellites.cpp:3368
+#: plugins/Satellites/src/Satellites.cpp:3349
 msgid "intelsat"
 msgstr "ইন্টেলস্যাট"
 
@@ -17654,7 +17663,7 @@ msgstr "ইন্টেলস্যাট"
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=ses&FORMAT=tle
 #. TRANSLATORS: CelesTrak supplemental source [SES TLEs]:
 #. https://celestrak.org/NORAD/elements/supplemental/ses.txt
-#: plugins/Satellites/src/Satellites.cpp:3373
+#: plugins/Satellites/src/Satellites.cpp:3354
 msgid "ses"
 msgstr ""
 
@@ -17664,7 +17673,7 @@ msgstr ""
 #. https://celestrak.org/NORAD/elements/iridium.txt
 #. TRANSLATORS: CelesTrak source [Iridium]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=iridium&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3377
+#: plugins/Satellites/src/Satellites.cpp:3358
 msgid "iridium"
 msgstr "ইরিডিয়াম"
 
@@ -17674,7 +17683,7 @@ msgstr "ইরিডিয়াম"
 #. https://celestrak.org/NORAD/elements/iridium-NEXT.txt
 #. TRANSLATORS: CelesTrak source [Iridium NEXT]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=iridium-NEXT&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3381
+#: plugins/Satellites/src/Satellites.cpp:3362
 msgid "iridium-NEXT"
 msgstr ""
 
@@ -17686,7 +17695,7 @@ msgstr ""
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=starlink&FORMAT=tle
 #. TRANSLATORS: CelesTrak supplemental source [Starlink TLEs]:
 #. https://celestrak.org/NORAD/elements/supplemental/starlink.txt
-#: plugins/Satellites/src/Satellites.cpp:3386
+#: plugins/Satellites/src/Satellites.cpp:3367
 msgid "starlink"
 msgstr "স্টারলিঙ্ক"
 
@@ -17698,7 +17707,7 @@ msgstr "স্টারলিঙ্ক"
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=oneweb&FORMAT=tle
 #. TRANSLATORS: CelesTrak supplemental source [OneWeb TLEs]:
 #. https://celestrak.org/NORAD/elements/supplemental/oneweb.txt
-#: plugins/Satellites/src/Satellites.cpp:3391
+#: plugins/Satellites/src/Satellites.cpp:3372
 msgid "oneweb"
 msgstr "ওয়ান ওয়েব"
 
@@ -17710,7 +17719,7 @@ msgstr "ওয়ান ওয়েব"
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=orbcomm&FORMAT=tle
 #. TRANSLATORS: CelesTrak supplemental source [ORBCOMM TLEs]:
 #. https://celestrak.org/NORAD/elements/supplemental/orbcomm.txt
-#: plugins/Satellites/src/Satellites.cpp:3396
+#: plugins/Satellites/src/Satellites.cpp:3377
 msgid "orbcomm"
 msgstr "অর্বকম"
 
@@ -17720,7 +17729,7 @@ msgstr "অর্বকম"
 #. https://celestrak.org/NORAD/elements/globalstar.txt
 #. TRANSLATORS: CelesTrak source [Globalstar]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=globalstar&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3400
+#: plugins/Satellites/src/Satellites.cpp:3381
 msgid "globalstar"
 msgstr "গ্লোবালস্টার"
 
@@ -17729,7 +17738,7 @@ msgstr "গ্লোবালস্টার"
 #. https://celestrak.org/NORAD/elements/swarm.txt
 #. TRANSLATORS: CelesTrak source [Swarm]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=swarm&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3404
+#: plugins/Satellites/src/Satellites.cpp:3385
 msgid "swarm"
 msgstr ""
 
@@ -17738,7 +17747,7 @@ msgstr ""
 #. https://celestrak.org/NORAD/elements/amateur.txt
 #. TRANSLATORS: CelesTrak source [Amateur Radio]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=amateur&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3408
+#: plugins/Satellites/src/Satellites.cpp:3389
 msgid "amateur"
 msgstr "সৌখিন"
 
@@ -17747,7 +17756,7 @@ msgstr "সৌখিন"
 #. https://celestrak.org/NORAD/elements/x-comm.txt
 #. TRANSLATORS: CelesTrak source [Experimental]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=x-comm&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3412
+#: plugins/Satellites/src/Satellites.cpp:3393
 msgid "x-comm"
 msgstr ""
 
@@ -17756,7 +17765,7 @@ msgstr ""
 #. https://celestrak.org/NORAD/elements/other-comm.txt
 #. TRANSLATORS: CelesTrak source [Other Comm]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=other-comm&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3416
+#: plugins/Satellites/src/Satellites.cpp:3397
 msgid "other-comm"
 msgstr ""
 
@@ -17766,7 +17775,7 @@ msgstr ""
 #. https://celestrak.org/NORAD/elements/satnogs.txt
 #. TRANSLATORS: CelesTrak source [SatNOGS]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=satnogs&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3420
+#: plugins/Satellites/src/Satellites.cpp:3401
 msgid "satnogs"
 msgstr ""
 
@@ -17776,7 +17785,7 @@ msgstr ""
 #. https://celestrak.org/NORAD/elements/gorizont.txt
 #. TRANSLATORS: CelesTrak source [Gorizont]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=gorizont&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3424
+#: plugins/Satellites/src/Satellites.cpp:3405
 msgid "gorizont"
 msgstr "গরিজন্ট"
 
@@ -17785,7 +17794,7 @@ msgstr "গরিজন্ট"
 #. https://celestrak.org/NORAD/elements/raduga.txt
 #. TRANSLATORS: CelesTrak source [Raduga]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=raduga&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3428
+#: plugins/Satellites/src/Satellites.cpp:3409
 msgid "raduga"
 msgstr "রাডুগা"
 
@@ -17795,7 +17804,7 @@ msgstr "রাডুগা"
 #. https://celestrak.org/NORAD/elements/molniya.txt
 #. TRANSLATORS: CelesTrak source [Molniya]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=molniya&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3432
+#: plugins/Satellites/src/Satellites.cpp:3413
 msgid "molniya"
 msgstr "মোলনিয়া"
 
@@ -17804,7 +17813,7 @@ msgstr "মোলনিয়া"
 #. https://celestrak.org/NORAD/elements/gnss.txt
 #. TRANSLATORS: CelesTrak source [GNSS]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=gnss&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3439
+#: plugins/Satellites/src/Satellites.cpp:3420
 msgid "gnss"
 msgstr ""
 
@@ -17812,7 +17821,7 @@ msgstr ""
 #. (the Global Positioning System)
 #. TRANSLATORS: CelesTrak supplemental source [GPS TLEs]:
 #. https://celestrak.org/NORAD/elements/supplemental/gps.txt
-#: plugins/Satellites/src/Satellites.cpp:3442
+#: plugins/Satellites/src/Satellites.cpp:3423
 msgid "gps"
 msgstr "জিপিএস"
 
@@ -17822,7 +17831,7 @@ msgstr "জিপিএস"
 #. https://celestrak.org/NORAD/elements/gps-ops.txt
 #. TRANSLATORS: CelesTrak source [GPS Operational]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=gps-ops&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3446
+#: plugins/Satellites/src/Satellites.cpp:3427
 msgid "gps-ops"
 msgstr ""
 
@@ -17830,7 +17839,7 @@ msgstr ""
 #. constellation (GLObal NAvigation Satellite System)
 #. TRANSLATORS: CelesTrak supplemental source [GLONASS TLEs]:
 #. https://celestrak.org/NORAD/elements/supplemental/glonass.txt
-#: plugins/Satellites/src/Satellites.cpp:3449
+#: plugins/Satellites/src/Satellites.cpp:3430
 msgid "glonass"
 msgstr "গ্লোনাস"
 
@@ -17840,7 +17849,7 @@ msgstr "গ্লোনাস"
 #. https://celestrak.org/NORAD/elements/glo-ops.txt
 #. TRANSLATORS: CelesTrak supplemental source [GLONASS Operational]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=glo-ops&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3453
+#: plugins/Satellites/src/Satellites.cpp:3434
 msgid "glo-ops"
 msgstr ""
 
@@ -17850,7 +17859,7 @@ msgstr ""
 #. https://celestrak.org/NORAD/elements/galileo.txt
 #. TRANSLATORS: CelesTrak source [Galileo]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=galileo&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3457
+#: plugins/Satellites/src/Satellites.cpp:3438
 msgid "galileo"
 msgstr "গ্যালিলিও"
 
@@ -17860,7 +17869,7 @@ msgstr "গ্যালিলিও"
 #. https://celestrak.org/NORAD/elements/beidou.txt
 #. TRANSLATORS: CelesTrak source [Beidou]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=beidou&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3461
+#: plugins/Satellites/src/Satellites.cpp:3442
 msgid "beidou"
 msgstr "বাইডু"
 
@@ -17871,7 +17880,7 @@ msgstr "বাইডু"
 #. TRANSLATORS: CelesTrak source [Satellite-Based Augmentation System
 #. (WAAS/EGNOS/MSAS)]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=sbas&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3465
+#: plugins/Satellites/src/Satellites.cpp:3446
 msgid "sbas"
 msgstr ""
 
@@ -17880,7 +17889,7 @@ msgstr ""
 #. https://celestrak.org/NORAD/elements/nnss.txt
 #. TRANSLATORS: CelesTrak source [Navy Navigation Satellite System (NNSS)]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=nnss&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3469
+#: plugins/Satellites/src/Satellites.cpp:3450
 msgid "nnss"
 msgstr ""
 
@@ -17889,7 +17898,7 @@ msgstr ""
 #. https://celestrak.org/NORAD/elements/musson.txt
 #. TRANSLATORS: CelesTrak source [Russian LEO Navigation]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=musson&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3473
+#: plugins/Satellites/src/Satellites.cpp:3454
 msgid "musson"
 msgstr "মৌসুমী"
 
@@ -17898,7 +17907,7 @@ msgstr "মৌসুমী"
 #. https://celestrak.org/NORAD/elements/science.txt
 #. TRANSLATORS: CelesTrak source [Space & Earth Science]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=science&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3480
+#: plugins/Satellites/src/Satellites.cpp:3461
 msgid "science"
 msgstr "বৈজ্ঞানিক"
 
@@ -17907,7 +17916,7 @@ msgstr "বৈজ্ঞানিক"
 #. https://celestrak.org/NORAD/elements/geodetic.txt
 #. TRANSLATORS: CelesTrak source [Geodetic]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=geodetic&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3484
+#: plugins/Satellites/src/Satellites.cpp:3465
 msgid "geodetic"
 msgstr "ভৌগলিক"
 
@@ -17916,7 +17925,7 @@ msgstr "ভৌগলিক"
 #. https://celestrak.org/NORAD/elements/engineering.txt
 #. TRANSLATORS: CelesTrak source [Engineering]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=engineering&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3488
+#: plugins/Satellites/src/Satellites.cpp:3469
 msgid "engineering"
 msgstr "কারিগরী"
 
@@ -17925,7 +17934,7 @@ msgstr "কারিগরী"
 #. https://celestrak.org/NORAD/elements/education.txt
 #. TRANSLATORS: CelesTrak source [Education]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=education&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3492
+#: plugins/Satellites/src/Satellites.cpp:3473
 msgid "education"
 msgstr "শিক্ষা সংক্রান্ত"
 
@@ -17934,7 +17943,7 @@ msgstr "শিক্ষা সংক্রান্ত"
 #. https://celestrak.org/NORAD/elements/military.txt
 #. TRANSLATORS: CelesTrak source [Miscellaneous Military]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=military&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3499
+#: plugins/Satellites/src/Satellites.cpp:3480
 msgid "military"
 msgstr "প্রতিরক্ষা"
 
@@ -17943,7 +17952,7 @@ msgstr "প্রতিরক্ষা"
 #. https://celestrak.org/NORAD/elements/radar.txt
 #. TRANSLATORS: CelesTrak source [Radar Calibration]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=radar&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3503
+#: plugins/Satellites/src/Satellites.cpp:3484
 msgid "radar"
 msgstr "বেতার"
 
@@ -17952,7 +17961,7 @@ msgstr "বেতার"
 #. https://celestrak.org/NORAD/elements/cubesat.txt
 #. TRANSLATORS: CelesTrak source [CubeSats]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=cubesat&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3507
+#: plugins/Satellites/src/Satellites.cpp:3488
 msgid "cubesat"
 msgstr "কিউবস্যাট"
 
@@ -17961,99 +17970,101 @@ msgstr "কিউবস্যাট"
 #. https://celestrak.org/NORAD/elements/other.txt
 #. TRANSLATORS: CelesTrak source [Other]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=other&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3511
+#: plugins/Satellites/src/Satellites.cpp:3492
 msgid "other"
 msgstr "অন্যান্য"
 
 #. TRANSLATORS: Satellite group: Meteosat
 #. TRANSLATORS: CelesTrak supplemental source [METEOSAT TLEs]:
 #. https://celestrak.org/NORAD/elements/supplemental/meteosat.txt
-#: plugins/Satellites/src/Satellites.cpp:3518
+#: plugins/Satellites/src/Satellites.cpp:3499
 msgid "meteosat"
 msgstr "মেটিওস্যাট"
 
 #. TRANSLATORS: Satellite group: Telesat
 #. TRANSLATORS: CelesTrak supplemental source [Telesat TLEs]:
 #. https://celestrak.org/NORAD/elements/supplemental/telesat.txt
-#: plugins/Satellites/src/Satellites.cpp:3522
+#: plugins/Satellites/src/Satellites.cpp:3503
 msgid "telesat"
 msgstr "টেলিস্যাট"
 
 #. TRANSLATORS: Satellite group: ISS Segments
 #. TRANSLATORS: CelesTrak supplemental source [ISS TLEs]:
 #. https://celestrak.org/NORAD/elements/supplemental/iss.txt
-#: plugins/Satellites/src/Satellites.cpp:3525
+#: plugins/Satellites/src/Satellites.cpp:3506
 msgid "iss"
 msgstr "আন্ত মহা স্টে"
 
 #. TRANSLATORS: Satellite group: CPF
 #. TRANSLATORS: CelesTrak supplemental source [CPF TLEs]:
 #. https://celestrak.org/NORAD/elements/supplemental/cpf.txt
-#: plugins/Satellites/src/Satellites.cpp:3528
+#: plugins/Satellites/src/Satellites.cpp:3509
 msgid "cpf"
 msgstr ""
 
 #. TRANSLATORS: Satellite name: International Space Station
-#: plugins/Satellites/src/Satellites.cpp:3532
+#: plugins/Satellites/src/Satellites.cpp:3513
 msgid "ISS (ZARYA)"
 msgstr "আন্তর্জাতিক স্পেস স্টেশন (জারিয়া)"
 
 #. TRANSLATORS: Satellite name: International Space Station
-#: plugins/Satellites/src/Satellites.cpp:3534
+#: plugins/Satellites/src/Satellites.cpp:3515
 msgid "ISS (NAUKA)"
 msgstr "মহাকাশযান (নাউকা)"
 
 #. TRANSLATORS: Satellite name: International Space Station
-#: plugins/Satellites/src/Satellites.cpp:3536
+#: plugins/Satellites/src/Satellites.cpp:3517
 msgid "ISS"
 msgstr "আঃমঃস্টেঃ"
 
 #. TRANSLATORS: Satellite name: Hubble Space Telescope
-#: plugins/Satellites/src/Satellites.cpp:3538
+#: plugins/Satellites/src/Satellites.cpp:3519
 msgid "HST"
 msgstr "হাবল দূরবীন"
 
 #. TRANSLATORS: Satellite name: Spektr-R Space Observatory (or RadioAstron)
-#: plugins/Satellites/src/Satellites.cpp:3540
+#: plugins/Satellites/src/Satellites.cpp:3521
 msgid "SPEKTR-R"
 msgstr "স্পেকটর-আর"
 
 #. TRANSLATORS: Satellite name: Spektr-RG Space Observatory
-#: plugins/Satellites/src/Satellites.cpp:3542
+#: plugins/Satellites/src/Satellites.cpp:3523
 msgid "SPEKTR-RG"
 msgstr ""
 
 #. TRANSLATORS: Satellite name: International Gamma-Ray Astrophysics
 #. Laboratory (INTEGRAL)
-#: plugins/Satellites/src/Satellites.cpp:3544
+#: plugins/Satellites/src/Satellites.cpp:3525
 msgid "INTEGRAL"
 msgstr "ইন্টিগ্রাল"
 
 #. TRANSLATORS: Satellite name: China's first space station name
-#: plugins/Satellites/src/Satellites.cpp:3546
+#: plugins/Satellites/src/Satellites.cpp:3527
 msgid "TIANGONG 1"
 msgstr "টিয়াংগং ১"
 
 #. TRANSLATORS: Satellite name: name of China's space station module
-#: plugins/Satellites/src/Satellites.cpp:3548
+#: plugins/Satellites/src/Satellites.cpp:3529
 msgid "TIANHE"
 msgstr "তিয়ানহে"
 
 #. TRANSLATORS: Satellite name: China's space station name (with name of base
 #. module)
-#: plugins/Satellites/src/Satellites.cpp:3550
+#: plugins/Satellites/src/Satellites.cpp:3531
 msgid "TIANGONG (TIANHE)"
 msgstr "তিয়ানগং (তিয়ানহে)"
 
 #. TRANSLATORS: An uplink (UL or U/L) is the link from a ground station to a
 #. satellite
-#: plugins/Satellites/src/Satellites.cpp:3554
+#: plugins/Satellites/src/Satellites.cpp:3536
+msgctxt "comms"
 msgid "uplink"
 msgstr ""
 
 #. TRANSLATORS: A downlink (DL) is the link from a satellite to a ground
 #. station
-#: plugins/Satellites/src/Satellites.cpp:3556
+#: plugins/Satellites/src/Satellites.cpp:3538
+msgctxt "comms"
 msgid "downlink"
 msgstr ""
 
@@ -18061,31 +18072,99 @@ msgstr ""
 #. which emit one or more signals (normally on a fixed frequency) whose
 #. purpose is twofold: station-keeping information (telemetry) and locates the
 #. satellite (determines its azimuth and elevation) in the sky
-#: plugins/Satellites/src/Satellites.cpp:3558
+#: plugins/Satellites/src/Satellites.cpp:3540
+msgctxt "comms"
 msgid "beacon"
 msgstr ""
 
 #. TRANSLATORS: Telemetry is the collection of measurements or other data at
 #. satellites and their automatic transmission to receiving equipment
 #. (telecommunication) for monitoring
-#: plugins/Satellites/src/Satellites.cpp:3560
+#: plugins/Satellites/src/Satellites.cpp:3542
+msgctxt "comms"
 msgid "telemetry"
 msgstr ""
 
 #. TRANSLATORS: The channel for transmission of video data
-#: plugins/Satellites/src/Satellites.cpp:3562
+#: plugins/Satellites/src/Satellites.cpp:3544
+msgctxt "comms"
 msgid "video"
 msgstr ""
 
 #. TRANSLATORS: The broadband is wide bandwidth data transmission which
 #. transports multiple signals at a wide range of frequencies
-#: plugins/Satellites/src/Satellites.cpp:3564
+#: plugins/Satellites/src/Satellites.cpp:3546
+msgctxt "comms"
 msgid "broadband"
 msgstr ""
 
 #. TRANSLATORS: The channel for transmission of commands
-#: plugins/Satellites/src/Satellites.cpp:3566
+#: plugins/Satellites/src/Satellites.cpp:3548
+msgctxt "comms"
 msgid "command"
+msgstr ""
+
+#. TRANSLATORS: Meteorological is a service on the satellite for transmitting
+#. meteorological data to a ground station
+#: plugins/Satellites/src/Satellites.cpp:3550
+msgctxt "comms"
+msgid "meteorological"
+msgstr ""
+
+#. TRANSLATORS: Maritime is a service on the satellite
+#: plugins/Satellites/src/Satellites.cpp:3552
+msgctxt "comms"
+msgid "maritime"
+msgstr ""
+
+#. TRANSLATORS: Mobile is a service on the satellite
+#: plugins/Satellites/src/Satellites.cpp:3554
+msgctxt "comms"
+msgid "mobile"
+msgstr ""
+
+#. TRANSLATORS: Mobile telephony is a service on the satellite
+#: plugins/Satellites/src/Satellites.cpp:3556
+msgctxt "comms"
+msgid "mobile telephony"
+msgstr ""
+
+#. TRANSLATORS: A repeater is an electronic device that receives a signal and
+#. retransmits it.
+#: plugins/Satellites/src/Satellites.cpp:3558
+msgctxt "comms"
+msgid "repeater"
+msgstr ""
+
+#. TRANSLATORS: The digital repeater (or digipiter) is used in channels that
+#. transmit data by binary digital signals
+#: plugins/Satellites/src/Satellites.cpp:3560
+msgctxt "comms"
+msgid "digipeater"
+msgstr ""
+
+#. TRANSLATORS: A radio band is a small frequency band (a contiguous section
+#. of the range of the radio spectrum) in which channels are usually used or
+#. set aside for the same purpose. S-band for example.
+#: plugins/Satellites/src/Satellites.cpp:3562
+msgctxt "comms"
+msgid "-band"
+msgstr ""
+
+#: plugins/Satellites/src/Satellites.cpp:3563
+msgctxt "comms"
+msgid "crew voice"
+msgstr ""
+
+#: plugins/Satellites/src/Satellites.cpp:3564
+msgctxt "comms"
+msgid "imaging"
+msgstr ""
+
+#. TRANSLATORS: Some mode of communication via radio channel
+#: plugins/Satellites/src/Satellites.cpp:3566
+msgctxt "comms"
+msgid "mode"
 msgstr ""
 
 #: plugins/Satellites/src/Satellite.cpp:218
@@ -18182,7 +18261,7 @@ msgid "Sun reflection angle"
 msgstr "রোদের প্রতিফলন কোণ"
 
 #: plugins/Satellites/src/Satellite.cpp:421
-#: plugins/Satellites/src/Satellite.cpp:535
+#: plugins/Satellites/src/Satellite.cpp:533
 msgctxt "unknown date"
 msgid "unknown"
 msgstr "অজানা"
@@ -18221,82 +18300,82 @@ msgid "Radio communication"
 msgstr "বেতার যোগাযোগ"
 
 #. TRANSLATORS: Unit of measurement of frequency
-#: plugins/Satellites/src/Satellite.cpp:504
+#: plugins/Satellites/src/Satellite.cpp:503
 #: plugins/Satellites/src/gui/SatellitesCommDialog.cpp:83
 #: plugins/Pulsars/src/Pulsar.cpp:283
 msgctxt "frequency"
 msgid "MHz"
 msgstr "মেগাহার্জ"
 
-#: plugins/Satellites/src/Satellite.cpp:504
+#: plugins/Satellites/src/Satellite.cpp:503
 msgctxt "frequency"
 msgid "kHz"
 msgstr "কিলোহার্জ"
 
-#: plugins/Satellites/src/Satellite.cpp:762
+#: plugins/Satellites/src/Satellite.cpp:760
 msgctxt "operational status"
 msgid "operational"
 msgstr "কার্যরত"
 
-#: plugins/Satellites/src/Satellite.cpp:763
+#: plugins/Satellites/src/Satellite.cpp:761
 msgctxt "operational status"
 msgid "non-operational"
 msgstr "অকেজো"
 
-#: plugins/Satellites/src/Satellite.cpp:764
+#: plugins/Satellites/src/Satellite.cpp:762
 msgctxt "operational status"
 msgid "partially operational"
 msgstr "আংশিক কার্যরত"
 
-#: plugins/Satellites/src/Satellite.cpp:765
+#: plugins/Satellites/src/Satellite.cpp:763
 msgctxt "operational status"
 msgid "standby"
 msgstr "সুপ্ত"
 
-#: plugins/Satellites/src/Satellite.cpp:766
+#: plugins/Satellites/src/Satellite.cpp:764
 msgctxt "operational status"
 msgid "spare"
 msgstr "অতিরিক্ত"
 
-#: plugins/Satellites/src/Satellite.cpp:767
+#: plugins/Satellites/src/Satellite.cpp:765
 msgctxt "operational status"
 msgid "extended mission"
 msgstr "বিবর্ধিত কার্যকাল"
 
-#: plugins/Satellites/src/Satellite.cpp:768
+#: plugins/Satellites/src/Satellite.cpp:766
 msgctxt "operational status"
 msgid "decayed"
 msgstr "ক্ষয়িষ্ণু"
 
-#: plugins/Satellites/src/Satellite.cpp:770
+#: plugins/Satellites/src/Satellite.cpp:768
 msgctxt "operational status"
 msgid "unknown"
 msgstr "অজ্ঞাত"
 
-#: plugins/Satellites/src/Satellite.hpp:155
+#: plugins/Satellites/src/Satellite.hpp:163
 msgid "artificial satellite"
 msgstr "কৃত্রিম উপগ্রহ"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:772
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:777
 msgid "Stellarium Satellites Plugin"
 msgstr "কৃত্রিম উপগ্রহ সরঞ্জাম"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:783
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:788
 msgid ""
 "The Satellites plugin predicts the positions of artificial satellites in "
 "Earth orbit."
 msgstr "এটি পৃথিবীর কৃত্রিম উপগ্রহগুলির অবস্থানের ভবিষ্যদ্বাণী করে ।"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:785
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:790
 msgid "Notes for users"
 msgstr "ব্যবহারকারীর জন্য টোটকা"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:786
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:791
 msgid ""
 "Satellites and their orbits are only shown when the observer is on Earth."
 msgstr "শুধুমাত্র পৃথিবী থেকেই উপগ্রহগুলির অবস্থান ও কক্ষপথ দেখানো হবে ।"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:787
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:792
 msgid ""
 "Predicted positions are only good for a fairly short time (on the order of "
 "days, weeks or perhaps a month into the past and future). Expect high "
@@ -18306,7 +18385,7 @@ msgstr ""
 "বা কখনও একটি মাস হতে পারে) । এই সীমার বাইরের তারিখের জন্য খুবই অদ্ভুত মান "
 "পাওয়া যায় ।"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:788
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:793
 msgid ""
 "Orbital elements go out of date pretty quickly (over mere weeks, sometimes "
 "days).  To get useful data out, you need to update the TLE data regularly."
@@ -18318,7 +18397,7 @@ msgstr ""
 #. TRANSLATORS: The translated names of the button and the tab are filled in
 #. automatically. You can check the original names in Stellarium. File names
 #. are not translated.
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:790
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:795
 #, qt-format
 msgid ""
 "Clicking the \"%1\" button in the \"%2\" tab of this dialog will revert to "
@@ -18330,14 +18409,14 @@ msgstr ""
 " যাবে । যা user data directory এর ভিতরে \"modules/Satellites/\" তে পাওয়া "
 "যাবে ।"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:793
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:798
 msgid ""
 "The value of perigee and apogee altitudes compute for mean Earth radius."
 msgstr ""
 "সর্বনিম্ন ও সর্বোচ্চ দূরত্ব গণনার ক্ষেত্রে পৃথিবীর গড় ব্যাসার্ধকে ভূপৃষ্ঠ "
 "হিসাবে ধরে নেওয়া হয়েছে ।"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:794
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:799
 msgid ""
 "The Satellites plugin is still under development.  Some features are "
 "incomplete, missing or buggy."
@@ -18345,11 +18424,11 @@ msgstr ""
 "কৃত্রিম উপগ্রহ সরঞ্জামটির এখনো  কাজ চলছে ।  তাই কিছু বৈশিষ্ট্য এখনও "
 "অসম্পূর্ণ, অনুপস্থিত বা ত্রুটিপূর্ণ ।"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:798
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:803
 msgid "Altitude classifications for geocentric orbits"
 msgstr "বিভিন্ন ভূ-কেন্দ্রিক কক্ষপথ"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:799
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:804
 msgid ""
 "Low Earth orbit (LEO): geocentric orbits with altitudes of apogee below 4400"
 " km, inclination of orbits in range 0-180 degrees and eccentricity below "
@@ -18358,7 +18437,7 @@ msgstr ""
 "নিম্ন কক্ষপথ (LEO) : অপসুর অবস্থানে পৃথিবীর কেন্দ্র থেকে দূরত্ব ৪৪০০ কিমির "
 "কম, তীর্যকতা ০-১৮০ ডিগ্রির মধ্যে এবং উৎকেন্দ্রতা ০.২৫ এর কম ।"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:800
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:805
 msgid ""
 "Medium Earth orbit (MEO): geocentric orbits with altitude of apogee at least"
 " 4400 km, inclination of orbits in range 0-180 degrees, eccentricity below "
@@ -18368,7 +18447,7 @@ msgstr ""
 "বেশি, তীর্যকতা ০-১৮০ ডিগ্রির মধ্যে, উৎকেন্দ্রতা ০.২৫ এর কম এবং পর্যায়কাল "
 "১১০০ মিনিটের বেশি ।"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:801
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:806
 msgid ""
 "Geosynchronous orbit (GSO) and geostationary orbit (GEO) are orbits with "
 "inclination of orbits below 25 degrees, eccentricity below 0.25 and period "
@@ -18379,7 +18458,7 @@ msgstr ""
 "উৎকেন্দ্রতা ০.২৫ এর কম এবং পর্যায়কাল ১১০০-২০০০ মিনিটের মধ্যে (সাধারণত "
 "আহ্নিকগতি সমান) ।"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:802
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:807
 msgid ""
 "Highly elliptical orbit (HEO): geocentric orbits with altitudes of perigee "
 "below 70000 km, inclination of orbits in range 0-180 degrees, eccentricity "
@@ -18389,7 +18468,7 @@ msgstr ""
 " ৭০০০০ কিমির কম, তীর্যকতা ০-১৮০ ডিগ্রির মধ্যে, উৎকেন্দ্রতা ০.২৫ এর কম এবং "
 "পর্যায়কাল ১৪0০০ মিনিটের কম ।"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:803
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:808
 msgid ""
 "High geosynchronous orbit (HGSO): geocentric orbits above the altitude of "
 "geosynchronous orbit: inclination of orbits in range 25-180 degrees, "
@@ -18399,7 +18478,7 @@ msgstr ""
 "তীর্যকতা ২৫-১৮০ ডিগ্রির মধ্যে, উৎকেন্দ্রতা ০.২৫ এর কম এবং পর্যায়কাল "
 "১১০০-২০০০ মিনিটের মধ্যে (সাধারণত আহ্নিকগতি সমান) ।"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:805
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:810
 msgid ""
 "High Earth orbit (HEO or HEO/E): a geocentric orbit with an altitude "
 "entirely above that of a geosynchronous orbit (35786 kilometres). The "
@@ -18407,24 +18486,24 @@ msgid ""
 "satellites in such orbits have an apparent retrograde motion."
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:808
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:813
 msgid "Inclination classifications for geocentric orbits"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:809
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:814
 msgid ""
 "Equatorial orbit: an orbit whose inclination in reference to the equatorial "
 "plane is (or very close to) 0 degrees."
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:810
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:815
 msgid ""
 "Polar orbit: a satellite that passes above or nearly above both poles of the"
 " planet on each revolution. Therefore it has an inclination of (or very "
 "close to) 90 degrees."
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:811
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:816
 msgid ""
 "Polar sun-synchronous orbit (PSSO): A nearly polar orbit that passes the "
 "equator at the same local time on every pass. Useful for image-taking "
@@ -18434,11 +18513,107 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Title of a section in the About tab of the Satellites window
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:815
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:820
+msgid "Communication links"
+msgstr ""
+
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:821
+msgid ""
+"Many satellites having transmitters (transceivers and transponders) with "
+"many modes for telemetry and data packets. You should to know which "
+"demodulator you need to decode telemetry and packets:"
+msgstr ""
+
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:823
+msgid "Automatic Picture Transmission"
+msgstr ""
+
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:824
+msgid "Low Resolution Picture Transmission"
+msgstr ""
+
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:825
+msgid "High Resolution Picture Transmission"
+msgstr ""
+
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:826
+msgid "Advanced High Resolution Picture Transmission"
+msgstr ""
+
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:827
+msgid "Amateur Radio adaptation of X.25 packet protocol"
+msgstr ""
+
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:828
+msgid "Continuous Wave, Morse Code"
+msgstr ""
+
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:829
+msgid "Amplitude Modulation"
+msgstr ""
+
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:830
+msgid "Frequency Modulation"
+msgstr ""
+
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:831
+msgid "Data Under Voice"
+msgstr ""
+
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:832
+msgid "Frequency Shift Keying"
+msgstr ""
+
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:833
+msgid "Gaussian Frequency Shift Keying"
+msgstr ""
+
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:834
+msgid "Gaussian Minimum Shift Keying"
+msgstr ""
+
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:835
+msgid "Audio Frequency Shift Keying"
+msgstr ""
+
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:836
+msgid "Amplitude-shift Keying"
+msgstr ""
+
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:837
+msgid "Phase-shift Keying"
+msgstr ""
+
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:838
+msgid "Binary Phase-shift Keying"
+msgstr ""
+
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:839
+msgid "Quadrature Phase-shift Keying"
+msgstr ""
+
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:840
+msgid "Offset Quadrature Phase-shift Keying"
+msgstr ""
+
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:841
+msgid "Differential Phase-shift Keying"
+msgstr ""
+
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:842
+msgid "Binary Offset Carrier"
+msgstr ""
+
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:843
+msgid "Multiplexed Binary Offset Carrier"
+msgstr ""
+
+#. TRANSLATORS: Title of a section in the About tab of the Satellites window
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:847
 msgid "TLE data updates"
 msgstr "TLE তথ্যের সংশোধনগুলি"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:816
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:848
 msgid ""
 "The Satellites plugin can automatically download TLE data from Internet "
 "sources, and by default the plugin will do this if the existing data is more"
@@ -18447,7 +18622,7 @@ msgstr ""
 "ইন্টারনেট থেকে কৃত্রিম উপগ্রহ সরঞ্জামটি সরাসরি TLE তথ্য সংগ্রহ করে নেয়, তবে "
 "স্বাভাবিক ভাবে তথ্যগুলি ৭২ ঘন্টার বেশি পুরানো না হলে কাজটি শুরু হয় না । "
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:817
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:849
 #, qt-format
 msgid ""
 "If you disable Internet updates, you may update from a file on your "
@@ -18459,7 +18634,7 @@ msgstr ""
 "অবশ্যই সেলেসট্র্যাক (Celestrak) সংশোধন তথ্য থাকতে হবে । (উদাহরণের জন্য %1 "
 "দেখুন) ।"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:818
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:850
 msgid ""
 "<b>Note:</b> if the name of a satellite in update data has anything in "
 "square brackets at the end, it will be removed before the data is used."
@@ -18467,11 +18642,11 @@ msgstr ""
 "<b>বি:দ্র:</b>যদি সংশোধন তথ্যের কোনো একটি উপগ্রহের নামের শেষে ৩য় বন্ধনীর  "
 "মধ্যে কিছু থেকে থাকে, তবে তথ্য ব্যবহার করার পূর্বে সেটি মুছে ফেলা হবে"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:821
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:853
 msgid "Adding new satellites"
 msgstr "নতুন কৃত্রিম উপগ্রহ যোগ করতে"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:822
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:854
 msgid ""
 "Make sure the satellite(s) you wish to add are included in one of the URLs "
 "listed in the Sources tab of the satellites configuration dialog."
@@ -18479,7 +18654,7 @@ msgstr ""
 "যে উপগ্রহগুলি যোগ করতে চান সেগুলি কোনো একটি উৎস তালিকায় আছে কিনা প্রথমে তা "
 "নিশ্চিত করুন ।"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:823
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:855
 msgid ""
 "Go to the Satellites tab, and click the '+' button.  Select the satellite(s)"
 " you wish to add and select the 'add' button."
@@ -18487,11 +18662,11 @@ msgstr ""
 "কৃত্রিম উপগ্রহ বিভাগের '+' বোতামে ক্লিক করুন । এরপর পছন্দমত উপগ্রহগুলি "
 "নির্বাচন করে 'যোগ করুন' বোতামে ক্লিক করুন ।"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:825
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:857
 msgid "Technical notes"
 msgstr "প্রযুক্তি সংক্রান্ত টিপ্পনী"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:826
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:858
 msgid ""
 "Positions are calculated using the SGP4 & SDP4 methods, using NORAD TLE data"
 " as the input."
@@ -18499,7 +18674,7 @@ msgstr ""
 "অবস্থান গণনা করা হয়েছে SGP4 ও SDP4 পদ্ধতিতে, NORAD TLE প্রাপ্ত তথ্যের "
 "ভিত্তিতে ।"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:827
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:859
 msgid ""
 "The orbital calculation code is written by Jose Luis Canales according to "
 "the revised Spacetrack Report #3 (including Spacetrack Report #6)"
@@ -18507,7 +18682,7 @@ msgstr ""
 "কক্ষপথ গণনা সংক্রান্ত কোড লিখেছেন Jose Luis Canales, সংশোধিত Spacetrack "
 "Report #3 (Spacetrack Report #6 মিলিয়ে) অনুসারে ।"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:828
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:860
 msgid ""
 "To calculate an approximate visual magnitude of satellites we use data from "
 "Mike McCants' database (with permissions) of the radar cross-section (RCS) "
@@ -18516,26 +18691,26 @@ msgstr ""
 "আপাত দৃশ্যমান উজ্জ্ব্যলতা গণনার জন্য Mike McCants এর বেতার তুল্যতা (RCS) ও "
 "উজ্জ্ব্যলতা সংক্রান্ত তথ্যভান্ডার ব্যবহার করা হয়েছে ।"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:829
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:861
 msgid ""
 "Formula to calculate an approximate visual magnitude of satellites from the "
 "standard magnitude may be found at Mike McCants website"
 msgstr "এই সংক্রান্ত সূত্রগুলি Mike McCants এর ওয়েবসাইটে পাবেন ।"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:830
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:862
 msgid ""
 "We use a spherical shape of satellite to calculate an approximate visual "
 "magnitude from RCS values."
 msgstr ""
 "উজ্জ্ব্যলতা পরিমাপের জন্য উপগ্রহগুলির বেতার তুল্য গোলকের আকার নেওয়া হয়েছে ।"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:831
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:863
 msgid "For modelling Starlink magnitudes we use Anthony Mallama's formula"
 msgstr ""
 "স্টারলিঙ্ক উপগ্রহের উজ্জ্ব্যলতার জন্য Anthony Mallama এর সূত্র ব্যবহার করা "
 "হয়েছে ।"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:850
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:882
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:152
 #: plugins/Novae/src/gui/NovaeDialog.cpp:147
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:144
@@ -18545,7 +18720,7 @@ msgstr ""
 msgid "Next update"
 msgstr "পরবর্তী সংশোধন"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:855
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:887
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:158
 #: plugins/Novae/src/gui/NovaeDialog.cpp:153
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:150
@@ -18555,8 +18730,8 @@ msgstr "পরবর্তী সংশোধন"
 msgid "Internet updates disabled"
 msgstr "ইন্টারনেটের মাধ্যমে সংশোধন ব্যবস্থা নিষ্ক্রিয় করা আছে"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:857
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:881
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:889
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:913
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:160
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:206
 #: plugins/Novae/src/gui/NovaeDialog.cpp:155
@@ -18571,7 +18746,7 @@ msgstr "ইন্টারনেটের মাধ্যমে সংশোধ�
 msgid "Updating now..."
 msgstr "এখনই সংশোধন করুন..."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:862
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:894
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:162
 #: plugins/Novae/src/gui/NovaeDialog.cpp:157
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:154
@@ -18581,7 +18756,7 @@ msgid "< 1 minute"
 msgstr "< ১ মিনিট"
 
 #. TRANSLATORS: minutes.
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:867
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:899
 #: plugins/Satellites/src/gui/SatellitesFilterDialog.cpp:135
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:167
 #: plugins/Novae/src/gui/NovaeDialog.cpp:162
@@ -18593,7 +18768,7 @@ msgctxt "time"
 msgid "m"
 msgstr "মিনিট"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:884
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:916
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:209
 #: plugins/Novae/src/gui/NovaeDialog.cpp:204
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:225
@@ -18603,32 +18778,32 @@ msgstr "মিনিট"
 msgid "Update error"
 msgstr "সংশোধনে ত্রুটি"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:894
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:926
 #, qt-format
 msgid "Updated %1/%2 satellite(s); %3 added; %4 removed"
 msgstr ""
 "%2 টির মধ্যে %1টি সংশোধিত হয়েছে, %3টি যুক্ত হয়েছে ও %4টি মুছে ফেলা হয়েছে"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:896
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:928
 #, qt-format
 msgid "Updated %1/%2 satellite(s); %3 added; %4 missing"
 msgstr ""
 "%2 টির মধ্যে %1টি সংশোধিত হয়েছে, %3টি যুক্ত হয়েছে ও %4টি খুঁজে পাওয়া যায় নি"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:911
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:943
 msgid "Empty string - not saving"
 msgstr "ফাঁকা - সঞ্চয় করা যায় নি"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:918
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:950
 msgid "Invalid URL - not saving"
 msgstr "অকেজো ঠিকানা - সঞ্চয় করা যায় নি"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:985
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1017
 msgid "[new source]"
 msgstr "[নতুন উৎস]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1071
-#: plugins/Satellites/src/ui_satellitesDialog.h:1222
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1103
+#: plugins/Satellites/src/ui_satellitesDialog.h:1223
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:195
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:204
 #: plugins/Novae/src/gui/NovaeDialog.cpp:190
@@ -18643,7 +18818,7 @@ msgstr "[নতুন উৎস]"
 msgid "Update now"
 msgstr "এখনই সংশোধন করুন"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1073
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1105
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:197
 #: plugins/Novae/src/gui/NovaeDialog.cpp:192
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:189
@@ -18652,114 +18827,163 @@ msgstr "এখনই সংশোধন করুন"
 msgid "Update from files"
 msgstr "কোনো নথি থেকে সংশোধন করুন"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1101
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1133
 msgid "[orbit calculation error]"
 msgstr "[কক্ষপথ গণনায় ত্রুটি]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1102
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1134
 msgid "[atmospheric entry]"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1103
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1135
 msgid "[all newly added]"
 msgstr "[নতুন অন্তর্ভূক্তি]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1104
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1136
 msgid "[all not displayed]"
 msgstr "[অদৃশ্য]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1105
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1137
 msgid "[all displayed]"
 msgstr "[দৃশ্যমান]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1106
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1138
 msgid "[all communications]"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1107
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1139
 msgid "[small satellites]"
 msgstr "[ছোটো কৃত্রিম উপগ্রহ]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1108
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1140
 msgid "[medium satellites]"
 msgstr "[মাঝারি কৃত্রিম উপগ্রহ]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1109
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1141
 msgid "[large satellites]"
 msgstr "[বড় কৃত্রিম উপগ্রহ]"
 
 #. TRANSLATORS: LEO = Low Earth orbit
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1111
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1143
 msgid "[LEO satellites]"
 msgstr "[নিম্নকক্ষ উপগ্রহ]"
 
 #. TRANSLATORS: GEO = Geosynchronous equatorial orbit (Geostationary orbit)
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1113
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1145
 msgid "[GEO/GSO satellites]"
 msgstr "[ভূ-সমলয়/ভূস্থির উপগ্রহ]"
 
 #. TRANSLATORS: MEO = Medium Earth orbit
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1115
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1147
 msgid "[MEO satellites]"
 msgstr "[মধ্যকক্ষ উপগ্রহ]"
 
 #. TRANSLATORS: HEO = Highly elliptical orbit
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1117
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1149
 msgid "[HEO satellites]"
 msgstr "[উচ্চ উপবৃত্ত কক্ষ উপগ্রহ]"
 
 #. TRANSLATORS: HGEO = High geosynchronous orbit
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1119
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1151
 msgid "[HGSO satellites]"
 msgstr "[উচ্চ ভু-সমলয় উপগ্রহ]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1120
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1152
 msgid "[polar orbit satellites]"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1121
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1153
 msgid "[equatorial orbit satellites]"
 msgstr ""
 
 #. TRANSLATORS: PSSO = Polar sun synchronous orbit
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1123
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1155
 msgid "[PSSO satellites]"
 msgstr ""
 
 #. TRANSLATORS: HEO/E = High Earth orbit
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1125
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1157
 msgid "[HEO/E satellites]"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1126
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1158
 msgid "[outdated TLE]"
 msgstr "[সেকেলে TLE]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1127
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1159
 msgid "[custom filter]"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1128
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1160
 msgid "[all user defined]"
 msgstr "[ব্যক্তিগতভাবে সংজ্ঞায়িত]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1129
+#. TRANSLATORS: Satellite group [SATCAT Operational Status]: Active status
+#. does not require power or communications (e.g., geodetic satellites);
+#. Active is any satellite with an operational status of +, P, B, S, or X.
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1163
+msgid "[active satellites]"
+msgstr ""
+
+#. TRANSLATORS: Satellite group [SATCAT Operational Status]: Satellites that
+#. are fully functioning
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1165
+msgid "[operational satellites]"
+msgstr ""
+
+#. TRANSLATORS: Satellite group [SATCAT Operational Status]: Satellites that
+#. are no longer functioning
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1167
+msgid "[non-operational satellites]"
+msgstr ""
+
+#. TRANSLATORS: Satellite group [SATCAT Operational Status]: Satellites that
+#. are partially fulfilling primary mission or secondary mission(s)
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1169
+msgid "[partially operational satellites]"
+msgstr ""
+
+#. TRANSLATORS: Satellite group [SATCAT Operational Status]: Previously
+#. operational satellite put into reserve status
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1171
+msgid "[backup / standby satellites]"
+msgstr ""
+
+#. TRANSLATORS: Satellite group [SATCAT Operational Status]: New satellite
+#. awaiting full activation
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1173
+msgid "[spare satellites]"
+msgstr ""
+
+#. TRANSLATORS: Satellite group [SATCAT Operational Status]: Satellites with
+#. extended mission(s)
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1175
+msgid "[extended mission]"
+msgstr ""
+
+#. TRANSLATORS: Satellite group [SATCAT Operational Status]: Satellites that
+#. are decayed
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1177
+msgid "[decayed satellites]"
+msgstr ""
+
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1179
 msgid "[all]"
 msgstr "[সব]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1141
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1191
 #: plugins/Satellites/src/ui_satellitesFilterDialog.h:263
 msgid "RCS"
 msgstr "বেতার তুল্যতা"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1142
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1192
 msgid ""
 "Radar cross-section (RCS) is a measure of how detectable an object is with a"
 " radar. A larger RCS indicates that an object is more easily detected."
 msgstr ""
 "বেতার তুল্যতা আসলে বেতারের মাধ্যমে কোনো বস্তুর ধরা পড়ার সম্ভাবনার পরিমাপ ।"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1143
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1193
 msgid ""
 "The standard magnitude of a satellite is defined as its apparent magnitude "
 "when at half-phase and at a distance 1000 km from the observer."
@@ -18767,57 +18991,54 @@ msgstr ""
 "কোনো কৃত্রিম উপগ্রহ অর্ধেক দশায় ১০০০ কিলোমিটার দূরত্বে থাকলে তার আপাত "
 "উজ্জ্বল্যতার মানকে সেটির তুল্য উজ্জ্বল্যতা বলা হয় ।"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1156
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1206
 msgid ""
 "Display satellites and their orbits within selected range of altitudes only."
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1158
-#: plugins/Satellites/src/ui_satellitesDialog.h:1242
-msgid ""
-"Distance to the center of umbra from Earth's surface (height of imagined "
-"satellite)"
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1208
+msgid "Altitude of imagined satellite"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1159
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1209
 msgid "Number of segments: number of segments used to draw the line"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1160
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1210
 msgid "Segment length: duration of a single segment in seconds"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1161
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1211
 msgid "Fade length: number of segments used to draw each end of the line"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1162
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1212
 msgid "Orbit line thickness"
 msgstr ""
 
 #. TRANSLATORS: Displayed in the satellite group selection box.
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1196
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1246
 msgid "New group..."
 msgstr "নতুন গ্রুপ..."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1472
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1522
 msgid "Select TLE Update File"
 msgstr "TLE সংশোধিত নথি নির্বাচন করুন"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1494
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1544
 msgid "Brightness"
 msgstr "ঔজ্জ্বল্যতা"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1497
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1547
 msgid "Satellite"
 msgstr "কৃত্রিম উপগ্রহ"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1585
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1635
 msgid "Save predicted Iridium flares as..."
 msgstr "ইরিডিয়াম ঝলকের সময় সঞ্চয় করুন .."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1631
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1633
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1681
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1683
 msgid "Predicted Iridium flares"
 msgstr "ইরিডিয়াম ঝলকের পূর্বাভাস"
 
@@ -18913,22 +19134,22 @@ msgstr ""
 msgid "Please select a line first!"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1217
 #: plugins/Satellites/src/ui_satellitesDialog.h:1218
+#: plugins/Satellites/src/ui_satellitesDialog.h:1219
 msgid "Satellites Configuration"
 msgstr "কৃত্রিম উপগ্রহ সংক্রান্ত তথ্য বিন্যাস"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1219
+#: plugins/Satellites/src/ui_satellitesDialog.h:1220
 msgid "Updates"
 msgstr "সংস্করণ"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1220
+#: plugins/Satellites/src/ui_satellitesDialog.h:1221
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:532
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:426
 msgid "Update frequency:"
 msgstr "সংশোধন অবকাশ :"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1221
+#: plugins/Satellites/src/ui_satellitesDialog.h:1222
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:201
 #: plugins/Novae/src/ui_novaeDialog.h:204
 #: plugins/Quasars/src/ui_quasarsDialog.h:258
@@ -18937,123 +19158,129 @@ msgstr "সংশোধন অবকাশ :"
 msgid "Last update:"
 msgstr "সর্বশেষ সংশোধন :"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1223
+#: plugins/Satellites/src/ui_satellitesDialog.h:1224
 msgid "On update, add all new satellites from the selected source(s)"
 msgstr "সংশোধনের পর সমস্ত নতুন কৃত্রিম উপগ্রহ গুলির সংযুক্তি"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1224
+#: plugins/Satellites/src/ui_satellitesDialog.h:1225
 msgid "Update satellite data from Internet sources"
 msgstr "ইন্টারনেট উৎসগুলি থেকে কৃত্রিম উপগ্রহ তালিকা সংশোধন"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1225
+#: plugins/Satellites/src/ui_satellitesDialog.h:1226
 msgid ""
 "On update, remove the satellites that are no longer listed in the update "
 "sources"
 msgstr "সংশোধনের পর তালিকায় না থাকা কৃত্রিম উপগ্রহ গুলির অপসারন"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1226
+#: plugins/Satellites/src/ui_satellitesDialog.h:1227
 msgid "Visualisation settings"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1227
-msgid "Show Earth's penumbra"
-msgstr ""
-
 #: plugins/Satellites/src/ui_satellitesDialog.h:1229
-msgid "The color of Earth's penumbra circle"
+msgid ""
+"Distance to the center of umbra from Earth's surface (height of imagined "
+"satellite)"
 msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1231
+msgid "Show umbra/penumbra at altitude:"
+msgstr ""
+
+#: plugins/Satellites/src/ui_satellitesDialog.h:1232
 msgid "Orbit lines"
 msgstr "কক্ষপথ রেখা"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1244
-msgid "Show umbra at distance:"
+#: plugins/Satellites/src/ui_satellitesDialog.h:1242
+msgid "Show Earth's penumbra"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1247
+#: plugins/Satellites/src/ui_satellitesDialog.h:1244
+msgid "The color of Earth's penumbra circle"
+msgstr ""
+
+#: plugins/Satellites/src/ui_satellitesDialog.h:1248
 msgid "Font size for labels"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1250
+#: plugins/Satellites/src/ui_satellitesDialog.h:1251
 msgid "Show satellites as markers"
 msgstr "শুধু নিশানা দেখানো হবে"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1252
+#: plugins/Satellites/src/ui_satellitesDialog.h:1253
 msgid "Color of satellite markers in transit through the Sun or the Moon"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1255
+#: plugins/Satellites/src/ui_satellitesDialog.h:1256
 msgid "Use special color for all invisible satellites"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1257
+#: plugins/Satellites/src/ui_satellitesDialog.h:1258
 msgid "Set color for invisible satellites"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1259
+#: plugins/Satellites/src/ui_satellitesDialog.h:1260
 msgid "Color of markers, labels and orbits for invisible satellites"
 msgstr "অদৃশ্য কৃত্রিম উপগ্রহগুলির নির্দেশক ও গতিপথের রং"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1262
+#: plugins/Satellites/src/ui_satellitesDialog.h:1263
 msgid "Altitude range"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1263
+#: plugins/Satellites/src/ui_satellitesDialog.h:1264
 msgid "Show Earth's umbra"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1265
+#: plugins/Satellites/src/ui_satellitesDialog.h:1266
 msgid "The color of Earth's umbra circle"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1267
+#: plugins/Satellites/src/ui_satellitesDialog.h:1268
 msgid "Hide invisible artificial satellites"
 msgstr "অদৃশ্য উপগ্রহগুলির নিশানা দেখানো হবে না"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1273
+#: plugins/Satellites/src/ui_satellitesDialog.h:1274
 #: plugins/Satellites/src/ui_satellitesFilterDialog.h:256
 msgid "Settings of custom filter"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1275
+#: plugins/Satellites/src/ui_satellitesDialog.h:1276
 msgid "Search ..."
 msgstr "অনুসন্ধান করুন ..."
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1277
+#: plugins/Satellites/src/ui_satellitesDialog.h:1278
 msgid "Double-click a satellite to start tracking it."
 msgstr "অনুসরণ করতে কোনো একটি উপগ্রহের উপর দুইবার ক্লিক করুন ।"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1280
+#: plugins/Satellites/src/ui_satellitesDialog.h:1281
 msgid "Add more satellites"
 msgstr "আরও কৃত্রিম উপগ্রহ যোগ করুন"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1283
+#: plugins/Satellites/src/ui_satellitesDialog.h:1284
 msgid "Remove the selected satellites"
 msgstr "নির্বাচিত কৃত্রিম উপগ্রহগুলি মুছুন"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1286
+#: plugins/Satellites/src/ui_satellitesDialog.h:1287
 msgid "Edit communication data for the selected satellite"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1289
+#: plugins/Satellites/src/ui_satellitesDialog.h:1290
 msgid "Select all satellites in list"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1292
+#: plugins/Satellites/src/ui_satellitesDialog.h:1293
 msgid "Change markers color for selected satellites"
 msgstr "নির্বাচিত উপগ্রহগুলির নিশানার রং পাল্টান"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1295
+#: plugins/Satellites/src/ui_satellitesDialog.h:1296
 msgid "Change orbits color for selected satellites"
 msgstr "নির্বাচিত উপগ্রহগুলির কক্ষপথের রং পাল্টান"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1298
+#: plugins/Satellites/src/ui_satellitesDialog.h:1299
 msgid "Change info color for selected satellites"
 msgstr "নির্বাচিত উপগ্রহগুলির বিবরনের রং পাল্টান"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1302
-#: plugins/Satellites/src/ui_satellitesDialog.h:1306
+#: plugins/Satellites/src/ui_satellitesDialog.h:1303
+#: plugins/Satellites/src/ui_satellitesDialog.h:1307
 msgid ""
 "The Satellite Catalog Number (also known as NORAD (North American Aerospace "
 "Defense) Catalog Number, NORAD ID)"
@@ -19061,103 +19288,103 @@ msgstr ""
 "কৃত্রিম উপগ্রহ সংখ্যা তালিকা (NORAD (North American Aerospace Defense) "
 "তালিকা ক্রম নামেও পরিচিত, NORAD ID)"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1304
+#: plugins/Satellites/src/ui_satellitesDialog.h:1305
 msgid "Catalog number:"
 msgstr "তালিকা সংখ্যা :"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1309
-#: plugins/Satellites/src/ui_satellitesDialog.h:1313
+#: plugins/Satellites/src/ui_satellitesDialog.h:1310
+#: plugins/Satellites/src/ui_satellitesDialog.h:1314
 msgid "The International Designator, also known as COSPAR ID"
 msgstr "আন্তর্জাতিক আখ্যায়িত নাম, ওরফে COSPAR ID"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1311
+#: plugins/Satellites/src/ui_satellitesDialog.h:1312
 msgid "I.D.:"
 msgstr "আই ডি :"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1315
+#: plugins/Satellites/src/ui_satellitesDialog.h:1316
 msgid "Standard magnitude:"
 msgstr "তুল্য উজ্জ্বল্যতা :"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1317
-#: plugins/Satellites/src/ui_satellitesDialog.h:1321
+#: plugins/Satellites/src/ui_satellitesDialog.h:1318
+#: plugins/Satellites/src/ui_satellitesDialog.h:1322
 msgid "Perigee altitude in kilometers"
 msgstr "উচ্চতা কিলোমিটারে পরিমেয়"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1319
+#: plugins/Satellites/src/ui_satellitesDialog.h:1320
 msgid "Perigee:"
 msgstr "অনুভূ :"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1324
-#: plugins/Satellites/src/ui_satellitesDialog.h:1328
+#: plugins/Satellites/src/ui_satellitesDialog.h:1325
+#: plugins/Satellites/src/ui_satellitesDialog.h:1329
 msgid "Apogee altitude in kilometers"
 msgstr "উচ্চতা কিলোমিটারে পরিমেয়"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1326
+#: plugins/Satellites/src/ui_satellitesDialog.h:1327
 msgid "Apogee:"
 msgstr "অপভূ :"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1331
-#: plugins/Satellites/src/ui_satellitesDialog.h:1335
+#: plugins/Satellites/src/ui_satellitesDialog.h:1332
+#: plugins/Satellites/src/ui_satellitesDialog.h:1336
 msgid "Orbital period in minutes"
 msgstr "মিনিটে পরিমেয়"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1333
+#: plugins/Satellites/src/ui_satellitesDialog.h:1334
 msgid "Period:"
 msgstr "কক্ষীয় পর্যায়কাল :"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1338
+#: plugins/Satellites/src/ui_satellitesDialog.h:1339
 msgid "Display orbit line(s) for the selected satellite(s)"
 msgstr "নির্বাচিত উপগ্রহের (গুলি) কক্ষপথের রেখা (গুলি) দেখানো হবে"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1340
+#: plugins/Satellites/src/ui_satellitesDialog.h:1341
 msgid "Orbit"
 msgstr "কক্ষপথ"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1342
+#: plugins/Satellites/src/ui_satellitesDialog.h:1343
 msgid "Display the selected satellite(s)"
 msgstr "নির্বাচিত কৃত্রিম উপগ্রহ (গুলি) দেখানো হবে"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1344
+#: plugins/Satellites/src/ui_satellitesDialog.h:1345
 msgid "Displayed"
 msgstr "দৃশ্যপটে উপস্থাপন"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1346
+#: plugins/Satellites/src/ui_satellitesDialog.h:1347
 msgid "Do not update TLE of selected satellite(s)"
 msgstr "নিরবাচিত উপগ্রহগুলির TLE সংশোধণ দরকার নেই"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1348
+#: plugins/Satellites/src/ui_satellitesDialog.h:1349
 msgid "Do not update"
 msgstr "সংশোধন বন্ধ"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1350
+#: plugins/Satellites/src/ui_satellitesDialog.h:1351
 msgid "(add personal notes here)"
 msgstr "(ব্যক্তিগত মন্তব্য যোগ করুন)"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1351
+#: plugins/Satellites/src/ui_satellitesDialog.h:1352
 msgid "Groups:"
 msgstr "গোষ্ঠীসমূহ :"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1352
+#: plugins/Satellites/src/ui_satellitesDialog.h:1353
 msgid "TLE set:"
 msgstr "TLE তথ্য :"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1353
+#: plugins/Satellites/src/ui_satellitesDialog.h:1354
 msgid "Epoch of the TLE:"
 msgstr "TLE এর সময়:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1355
-#: plugins/Satellites/src/ui_satellitesDialog.h:1359
+#: plugins/Satellites/src/ui_satellitesDialog.h:1356
+#: plugins/Satellites/src/ui_satellitesDialog.h:1360
 msgid ""
 "The valid time range for epoch of TLE in days, used in filtering of "
 "satellites"
 msgstr ""
 "TLE সময়কালের বৈধ পরিসীমা, দিনে পরিমিত, উপগ্রহ বাছাই এর কাজে ব্যবহৃত হয় ।"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1357
+#: plugins/Satellites/src/ui_satellitesDialog.h:1358
 msgid "Age:"
 msgstr "আয়ু :"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1362
+#: plugins/Satellites/src/ui_satellitesDialog.h:1363
 msgid ""
 "Satellites in the marked source lists will be automatically added on the "
 "next update if they are not already in the collection."
@@ -19165,43 +19392,43 @@ msgstr ""
 "চিহ্নিত উৎসগুলির তালিকায় অবস্থিত কৃত্রিম উপগ্রহগুলি পরের সংশোধনের সময় "
 "স্বয়ংক্রিয় ভাবে য়ুক্ত হয়ে যাবে ।"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1367
+#: plugins/Satellites/src/ui_satellitesDialog.h:1368
 msgid "Add new source"
 msgstr "নতুন উৎস যোগ করুন"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1370
+#: plugins/Satellites/src/ui_satellitesDialog.h:1371
 msgid "Edit selected source"
 msgstr "উৎসটি সংশোধন করুন"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1373
+#: plugins/Satellites/src/ui_satellitesDialog.h:1374
 msgid "Save source"
 msgstr "সঞ্চয় করুন"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1376
+#: plugins/Satellites/src/ui_satellitesDialog.h:1377
 msgid "Remove selected source"
 msgstr "নির্বাচিত উৎসগুলি মুছুন"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1379
+#: plugins/Satellites/src/ui_satellitesDialog.h:1380
 msgid "Reset sources list to it defaults"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1381
+#: plugins/Satellites/src/ui_satellitesDialog.h:1382
 msgid "Sources"
 msgstr "তথ্যসূত্র"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1382
+#: plugins/Satellites/src/ui_satellitesDialog.h:1383
 msgid "Flare prediction (days):"
 msgstr "পূর্বাভাসের সময় সীমা (দিন) :"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1386
+#: plugins/Satellites/src/ui_satellitesDialog.h:1387
 msgid "Predict Iridium flares"
 msgstr "উপগ্রহ (ইরিডিয়াম) ঝলকের পূর্বাভাস"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1387
+#: plugins/Satellites/src/ui_satellitesDialog.h:1388
 msgid "Save predictions..."
 msgstr "পূর্বাভাস সঞ্চয় করুন .."
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1388
+#: plugins/Satellites/src/ui_satellitesDialog.h:1389
 msgid "Iridium flares"
 msgstr "উপগ্রহ (ইরিডিয়াম) ঝলক"
 
