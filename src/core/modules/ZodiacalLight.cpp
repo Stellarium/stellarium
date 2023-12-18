@@ -255,7 +255,7 @@ void main()
 )";
 		bool ok = renderProgram->addShaderFromSourceCode(QOpenGLShader::Vertex, vert);
 		if(!renderProgram->log().isEmpty())
-			qWarning().noquote() << "MilkyWay: Warnings while compiling vertex shader:\n" << renderProgram->log();
+			qWarning().noquote() << "ZodiacalLight: Warnings while compiling vertex shader:\n" << renderProgram->log();
 		if(!ok) return;
 
 		const auto frag =
