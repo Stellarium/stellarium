@@ -46,7 +46,7 @@ StelSkyCultureMgr::StelSkyCultureMgr()
 		if (pdFile.isEmpty())
 		{
 			qWarning() << "WARNING: unable to successfully read info.ini file from skyculture dir" << QDir::toNativeSeparators(dir);
-			return;
+			continue;
 		}
 		QSettings pd(pdFile, StelIniFormat);
 		dirToNameEnglish[dir].englishName = pd.value("info/name").toString();
