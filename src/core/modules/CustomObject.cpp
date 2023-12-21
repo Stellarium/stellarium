@@ -94,7 +94,9 @@ Vec3f CustomObject::getInfoColor(void) const
 
 Vec3d CustomObject::getJ2000EquatorialPos(const StelCore* core) const
 {
-	if  ((!isMarker) && (core) && (core->getUseAberration()) && (core->getCurrentPlanet()))
+	return XYZ;
+	/*
+	if  (!isMarker && (core && core->getUseAberration() && core->getCurrentPlanet()))
 	{
 		Vec3d vel=core->getCurrentPlanet()->getHeliocentricEclipticVelocity();
 		vel=StelCore::matVsop87ToJ2000*vel*core->getAberrationFactor()*(AU/(86400.0*SPEED_OF_LIGHT));
@@ -106,6 +108,7 @@ Vec3d CustomObject::getJ2000EquatorialPos(const StelCore* core) const
 	{
 		return XYZ;
 	}
+	*/
 }
 
 float CustomObject::getVMagnitude(const StelCore* core) const
