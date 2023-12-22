@@ -925,6 +925,13 @@ private slots:
 	//! Loads native names of deep-sky objects for a given sky culture.
 	void updateSkyCulture(const StelSkyCulture& skyCulture);
 
+	//! Load culture-independent names and return a map from name to id to
+	//! enable search while loading culture-specific names.
+	QMap<QString/*name*/,QString/*dsoId*/> loadCommonNames(bool saveIntoObjects);
+	void loadCultureSpecificNames(const QJsonObject& data, const QMap<QString/*name*/,QString/*dsoId*/>& commonNameToIdMap);
+	void loadCultureSpecificNameForNamedObject(const QJsonArray& data, const QString& commonName,
+	                                           const QMap<QString/*name*/,QString/*dsoId*/>& commonNameToIdMap);
+
 	//! Connect from StelApp to reflect font size change.
 	void setFontSizeFromApp(int size){nebulaFont.setPixelSize(size);}
 
