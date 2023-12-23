@@ -593,6 +593,7 @@ void ViewDialog::populateOrbitsControls(bool flag)
 {
 	ui->planetIsolatedOrbitCheckBox->setEnabled(flag);
 	ui->planetOrbitOnlyCheckBox->setEnabled(flag);
+	ui->planetOrbitsMoonCheckBox->setEnabled(flag);
 	ui->planetOrbitPermanentCheckBox->setEnabled(flag);
 	ui->planetOrbitsThicknessSpinBox->setEnabled(flag);
 	ui->pushButtonOrbitColors->setEnabled(flag);
