@@ -1,3 +1,26 @@
+23.4 [2023-12-23]
+The Stellarium Team has released version 23.4.
+
+The major changes of this version:
+- New plugin: Lens Distortion Estimator (experimental)
+- Changed GUI: ability to change the look via normalStyle.css
+- Added new MESA for Windows packages
+- Added support Windows/ARM64 packages
+- Added support the origins of nomenclature names
+- Improvements in plugins and AstroCalc tools
+- Improvements for performance on macOS/ARM64
+
+Behind the scenes, many more minor issues were fixed.
+
+TELESCOPE USERS
+
+We have identified and fixed some bugs in the TelescopeControl plugin on
+the Qt6-based releases.
+
+Telescope users, please try whether this solves your problems.
+If not, we are looking for those of you with programming skills to help
+us fixing remaining issues. Reward possible!
+
 23.3 [2023-09-25]
 The Stellarium Team has released version 23.3.
 
