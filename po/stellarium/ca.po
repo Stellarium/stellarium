@@ -10,9 +10,9 @@
 # cardinot <mcardinot@gmail.com>, 2022
 # Pascual Martínez Reig <pascualmralcoi@gmail.com>, 2022
 # Xavier PG, 2023
-# Daniel Alomar <daniel.adastra@gmail.com>, 2023
 # Susanna Pujol, 2023
 # Pep Pujols Puigdesens, 2023
+# Daniel Alomar <daniel.adastra@gmail.com>, 2023
 # 
 #, fuzzy
 msgid ""
@@ -21,7 +21,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
 "POT-Creation-Date: 2023-12-13 11:04+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
-"Last-Translator: Pep Pujols Puigdesens, 2023\n"
+"Last-Translator: Daniel Alomar <daniel.adastra@gmail.com>, 2023\n"
 "Language-Team: Catalan (https://app.transifex.com/stellarium/teams/80998/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -9587,7 +9587,7 @@ msgstr "Ubicació aleatoria"
 #. TRANSLATORS: Name of script
 #: src/translations.h:567
 msgid "Jupiter Moons"
-msgstr ""
+msgstr "Llunes de Júpiter"
 
 #. TRANSLATORS: Description of the landscape tour script.
 #: src/translations.h:573
@@ -9930,7 +9930,7 @@ msgstr ""
 
 #: src/translations.h:618
 msgid "Jupiter's Moons Orbital Simulation"
-msgstr ""
+msgstr "Simulació orbital de les llunes de Júpiter"
 
 #: src/translations.h:622
 msgid "&Undo"
@@ -11833,7 +11833,7 @@ msgstr "Seri"
 #: skycultures/translations_skycultures.fab:104
 msgctxt "sky culture"
 msgid "Tibetan"
-msgstr ""
+msgstr "Tibetà"
 
 #: skycultures/translations_skycultures.fab:106
 msgctxt "sky culture"
@@ -18324,14 +18324,14 @@ msgstr "TIANGONG (TIANHE)"
 #: plugins/Satellites/src/Satellites.cpp:3536
 msgctxt "comms"
 msgid "uplink"
-msgstr ""
+msgstr "enllaç ascendent"
 
 #. TRANSLATORS: A downlink (DL) is the link from a satellite to a ground
 #. station
 #: plugins/Satellites/src/Satellites.cpp:3538
 msgctxt "comms"
 msgid "downlink"
-msgstr ""
+msgstr "enllaç de baixada"
 
 #. TRANSLATORS: The beacon (or radio beacon) is a device in the satellite,
 #. which emit one or more signals (normally on a fixed frequency) whose
@@ -18340,7 +18340,7 @@ msgstr ""
 #: plugins/Satellites/src/Satellites.cpp:3540
 msgctxt "comms"
 msgid "beacon"
-msgstr ""
+msgstr "beacon"
 
 #. TRANSLATORS: Telemetry is the collection of measurements or other data at
 #. satellites and their automatic transmission to receiving equipment
@@ -18348,65 +18348,65 @@ msgstr ""
 #: plugins/Satellites/src/Satellites.cpp:3542
 msgctxt "comms"
 msgid "telemetry"
-msgstr ""
+msgstr "telemetria"
 
 #. TRANSLATORS: The channel for transmission of video data
 #: plugins/Satellites/src/Satellites.cpp:3544
 msgctxt "comms"
 msgid "video"
-msgstr ""
+msgstr "vídeo"
 
 #. TRANSLATORS: The broadband is wide bandwidth data transmission which
 #. transports multiple signals at a wide range of frequencies
 #: plugins/Satellites/src/Satellites.cpp:3546
 msgctxt "comms"
 msgid "broadband"
-msgstr ""
+msgstr "ample de banda"
 
 #. TRANSLATORS: The channel for transmission of commands
 #: plugins/Satellites/src/Satellites.cpp:3548
 msgctxt "comms"
 msgid "command"
-msgstr ""
+msgstr "comanda"
 
 #. TRANSLATORS: Meteorological is a service on the satellite for transmitting
 #. meteorological data to a ground station
 #: plugins/Satellites/src/Satellites.cpp:3550
 msgctxt "comms"
 msgid "meteorological"
-msgstr ""
+msgstr "meteorològic"
 
 #. TRANSLATORS: Maritime is a service on the satellite
 #: plugins/Satellites/src/Satellites.cpp:3552
 msgctxt "comms"
 msgid "maritime"
-msgstr ""
+msgstr "marítim"
 
 #. TRANSLATORS: Mobile is a service on the satellite
 #: plugins/Satellites/src/Satellites.cpp:3554
 msgctxt "comms"
 msgid "mobile"
-msgstr ""
+msgstr "mòbil"
 
 #. TRANSLATORS: Mobile telephony is a service on the satellite
 #: plugins/Satellites/src/Satellites.cpp:3556
 msgctxt "comms"
 msgid "mobile telephony"
-msgstr ""
+msgstr "telefonia mòbil"
 
 #. TRANSLATORS: A repeater is an electronic device that receives a signal and
 #. retransmits it.
 #: plugins/Satellites/src/Satellites.cpp:3558
 msgctxt "comms"
 msgid "repeater"
-msgstr ""
+msgstr "repetidor"
 
 #. TRANSLATORS: The digital repeater (or digipiter) is used in channels that
 #. transmit data by binary digital signals
 #: plugins/Satellites/src/Satellites.cpp:3560
 msgctxt "comms"
 msgid "digipeater"
-msgstr ""
+msgstr "digipeater"
 
 #. TRANSLATORS: A radio band is a small frequency band (a contiguous section
 #. of the range of the radio spectrum) in which channels are usually used or
@@ -18414,23 +18414,23 @@ msgstr ""
 #: plugins/Satellites/src/Satellites.cpp:3562
 msgctxt "comms"
 msgid "-band"
-msgstr ""
+msgstr "-banda"
 
 #: plugins/Satellites/src/Satellites.cpp:3563
 msgctxt "comms"
 msgid "crew voice"
-msgstr ""
+msgstr "veu de l'equip"
 
 #: plugins/Satellites/src/Satellites.cpp:3564
 msgctxt "comms"
 msgid "imaging"
-msgstr ""
+msgstr "imatge"
 
 #. TRANSLATORS: Some mode of communication via radio channel
 #: plugins/Satellites/src/Satellites.cpp:3566
 msgctxt "comms"
 msgid "mode"
-msgstr ""
+msgstr "mode"
 
 #: plugins/Satellites/src/Satellite.cpp:218
 msgid "The satellite and the observer are in sunlight"
@@ -18804,7 +18804,7 @@ msgstr ""
 #. TRANSLATORS: Title of a section in the About tab of the Satellites window
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:820
 msgid "Communication links"
-msgstr ""
+msgstr "Enllaços de comunicació"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:821
 msgid ""
@@ -18812,50 +18812,53 @@ msgid ""
 "many modes for telemetry and data packets. You should to know which "
 "demodulator you need to decode telemetry and packets:"
 msgstr ""
+"Molts satèl·lits tenen transmissors (transceptors i transpondedors) amb "
+"molts modes per a telemetria i paquets de dades. Has de saber quin "
+"desmodulador necessites per descodificar la telemetria i els paquets."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:823
 msgid "Automatic Picture Transmission"
-msgstr ""
+msgstr "Transmissió Automàtica d'Imatges"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:824
 msgid "Low Resolution Picture Transmission"
-msgstr ""
+msgstr "Transmissió d'Imatge de Baixa Resolució"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:825
 msgid "High Resolution Picture Transmission"
-msgstr ""
+msgstr "Transmissió d'Imatge d'Alta Resolució"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:826
 msgid "Advanced High Resolution Picture Transmission"
-msgstr ""
+msgstr "Transmissió d'Imatges Avançada d'Alta Resolució"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:827
 msgid "Amateur Radio adaptation of X.25 packet protocol"
-msgstr ""
+msgstr "Adaptació de la radiodifusió amateur del protocol de paquets X.25"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:828
 msgid "Continuous Wave, Morse Code"
-msgstr ""
+msgstr "Ona contínua, Codi Morse"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:829
 msgid "Amplitude Modulation"
-msgstr ""
+msgstr "Modulació d'Amplitud"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:830
 msgid "Frequency Modulation"
-msgstr ""
+msgstr "Modulació de Freqüència"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:831
 msgid "Data Under Voice"
-msgstr ""
+msgstr "Dades Sota Veu"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:832
 msgid "Frequency Shift Keying"
-msgstr ""
+msgstr "Modulació per Desplaçament de Freqüència"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:833
 msgid "Gaussian Frequency Shift Keying"
-msgstr ""
+msgstr "Modulació per Desplaçament de Freqüència Gaussiana"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:834
 msgid "Gaussian Minimum Shift Keying"
