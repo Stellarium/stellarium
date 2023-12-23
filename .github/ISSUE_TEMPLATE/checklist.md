@@ -63,7 +63,6 @@ This is checklist for maintainer of Stellarium (a release master)
 - [ ] Update the ChangeLog file
 - [ ] Update the link to Stellarium User Guide in README.md file
 - [ ] Update the version number in CMakeLists.txt file
-- [ ] Set `CMAKE_BUILD_TYPE Release` in CMakeLists.txt file
 - [ ] Set `STELLARIUM_RELEASE_BUILD 1` in CMakeLists.txt file
 - [ ] Update metainfo for new release (`util\metainfo\metainfo.sh`)
 - [ ] Update translations of desktop info (`util\desktop\desktoppo.py`)
