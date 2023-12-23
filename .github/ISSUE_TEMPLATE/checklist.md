@@ -62,6 +62,7 @@ This is checklist for maintainer of Stellarium (a release master)
 ### Environment
 - [ ] Update the ChangeLog file
 - [ ] Update the link to Stellarium User Guide in README.md file
+- [ ] Update BUILDING.md file
 - [ ] Update the version number in CMakeLists.txt file
 - [ ] Set `STELLARIUM_RELEASE_BUILD 1` in CMakeLists.txt file
 - [ ] Update metainfo for new release (`util\metainfo\metainfo.sh`)
@@ -69,6 +70,7 @@ This is checklist for maintainer of Stellarium (a release master)
 - [ ] Update translations for landscapes descriptions (`util\landscapes\translate.sh`)
 - [ ] Update translations for skycultures descriptions (`util\skycultures\translate.sh`)
 - [ ] Update translations for scenery3d descriptions (`util\scenery3d\translate.sh`)
+- [ ] Update CITATION.cff file
 
 ## Step 4: release
 
