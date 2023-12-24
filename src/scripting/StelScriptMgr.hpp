@@ -64,7 +64,7 @@ friend class ScriptConsole;
 
 public:
 	StelScriptMgr(QObject *parent=Q_NULLPTR);
-	~StelScriptMgr() Q_DECL_OVERRIDE;
+	~StelScriptMgr() override;
 
 	QStringList getScriptList() const;
 

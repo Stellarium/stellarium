@@ -36,13 +36,13 @@ class PointerCoordinatesWindow : public StelDialog
 
 public:
 	PointerCoordinatesWindow();
-	~PointerCoordinatesWindow() Q_DECL_OVERRIDE;
+	~PointerCoordinatesWindow() override;
 
 public slots:
-	void retranslate() Q_DECL_OVERRIDE;
+	void retranslate() override;
 
 protected:
-	void createDialogContent() Q_DECL_OVERRIDE;
+	void createDialogContent() override;
 
 private:
 	Ui_pointerCoordinatesWindowForm* ui;

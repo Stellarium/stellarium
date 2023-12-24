@@ -40,7 +40,7 @@ public:
 	OcularsGuiPanel(Oculars* ocularsPlugin,
 			QGraphicsWidget * parent = Q_NULLPTR,
 			Qt::WindowFlags wFlags = Qt::Widget);
-	~OcularsGuiPanel() Q_DECL_OVERRIDE;
+	~OcularsGuiPanel() override;
 
 public slots:
 	//! Show only the controls used with an ocular overlay.

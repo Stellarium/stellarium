@@ -33,10 +33,10 @@ class GreatRedSpotDialog : public StelDialog
 
 public:
 	GreatRedSpotDialog();
-	virtual ~GreatRedSpotDialog() Q_DECL_OVERRIDE;
+	~GreatRedSpotDialog() override;
 
 public slots:
-	virtual void retranslate() Q_DECL_OVERRIDE;
+	void retranslate() override;
 
 private slots:
 	void setGrsJD(QDateTime dt);
@@ -44,7 +44,7 @@ private slots:
 
 protected:
         //! Initialize the dialog widgets and connect the signals/slots.
-	virtual void createDialogContent() Q_DECL_OVERRIDE;
+	void createDialogContent() override;
 	Ui_GreatRedSpotDialogForm *ui;
 };
 

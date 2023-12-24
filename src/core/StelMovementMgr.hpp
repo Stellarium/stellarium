@@ -116,7 +116,7 @@ public:
 	Q_ENUM(ZoomingMode)
 
 	StelMovementMgr(StelCore* core);
-	virtual ~StelMovementMgr() Q_DECL_OVERRIDE;
+	~StelMovementMgr() override;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
@@ -128,28 +128,28 @@ public:
 	//! - Enabling/disabling the mouse movement
 	//! - Sets the zoom and movement speeds
 	//! - Sets the auto-zoom duration and mode.
-	virtual void init() Q_DECL_OVERRIDE;
+	void init() override;
 
 	//! Update time-dependent things (triggers a time dragging record if required)
-	virtual void update(double) Q_DECL_OVERRIDE
+	void update(double) override
 	{
 		if (dragTimeMode)
 			addTimeDragPoint(QCursor::pos().x(), QCursor::pos().y());
 	}
 	//! Implement required draw function.  Does nothing.
-	virtual void draw(StelCore*) Q_DECL_OVERRIDE {}
+	void draw(StelCore*) override {}
 	//! Handle keyboard events.
-	virtual void handleKeys(QKeyEvent* event) Q_DECL_OVERRIDE;
+	void handleKeys(QKeyEvent* event) override;
 	//! Handle mouse movement events.
-	virtual bool handleMouseMoves(int x, int y, Qt::MouseButtons b) Q_DECL_OVERRIDE;
+	bool handleMouseMoves(int x, int y, Qt::MouseButtons b) override;
 	//! Handle mouse wheel events.
-	virtual void handleMouseWheel(class QWheelEvent* event) Q_DECL_OVERRIDE;
+	void handleMouseWheel(class QWheelEvent* event) override;
 	//! Handle mouse click events.
-	virtual void handleMouseClicks(class QMouseEvent* event) Q_DECL_OVERRIDE;
+	void handleMouseClicks(class QMouseEvent* event) override;
 	// allow some keypress interaction by plugins.
-	virtual double getCallOrder(StelModuleActionName actionName) const Q_DECL_OVERRIDE;
+	double getCallOrder(StelModuleActionName actionName) const override;
 	//! Handle pinch gesture.
-	virtual bool handlePinch(qreal scale, bool started) Q_DECL_OVERRIDE;
+	bool handlePinch(qreal scale, bool started) override;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods specific to StelMovementMgr

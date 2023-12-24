@@ -36,7 +36,7 @@ class DummyDialog : public QObject
 	Q_OBJECT
 public:
 	DummyDialog(StelModule* eventHandler);
-	~DummyDialog() Q_DECL_OVERRIDE;
+	~DummyDialog() override;
 
 public slots:
 	void setVisible(bool);
@@ -46,7 +46,7 @@ signals:
         void visibleChanged(bool);
 
 protected:
-	bool eventFilter(QObject *obj, QEvent *event) Q_DECL_OVERRIDE;
+	bool eventFilter(QObject *obj, QEvent *event) override;
 	void createDialogContent();
 	class DummyCustomProxy* proxy;
 	QWidget* dialog;

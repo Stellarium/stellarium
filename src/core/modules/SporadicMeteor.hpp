@@ -30,7 +30,7 @@ class SporadicMeteor : public Meteor
 public:
 	//! Create a SporadicMeteor object.
 	SporadicMeteor(const StelCore* core, const float& maxVel, const StelTextureSP& bolideTexture);
-	virtual ~SporadicMeteor() Q_DECL_OVERRIDE;
+	~SporadicMeteor() override;
 
 private:
 	static QList<ColorPair> getRandColor();

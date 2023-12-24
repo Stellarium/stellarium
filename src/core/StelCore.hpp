@@ -158,7 +158,7 @@ public:
 	Q_ENUM(DeltaTAlgorithm)
 
 	StelCore();
-	virtual ~StelCore() Q_DECL_OVERRIDE;
+	~StelCore() override;
 
 	//! Init and load all main core components.
 	void init();

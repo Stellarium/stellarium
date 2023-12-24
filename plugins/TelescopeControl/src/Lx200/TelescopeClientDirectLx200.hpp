@@ -85,7 +85,7 @@ private:
 	int time_delay;
 	
 	InterpolatedPosition interpolatedPosition;
-	virtual bool hasKnownPosition(void) const override
+	bool hasKnownPosition(void) const override
 	{
 		return interpolatedPosition.isKnown();
 	}

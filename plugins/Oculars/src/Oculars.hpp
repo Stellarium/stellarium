@@ -136,17 +136,17 @@ class Oculars : public StelModule
 
 public:
 	Oculars();
-	virtual ~Oculars() Q_DECL_OVERRIDE;
+	~Oculars() override;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
-	virtual void init() Q_DECL_OVERRIDE;
-	virtual void deinit() Q_DECL_OVERRIDE;
-	virtual bool configureGui(bool show=true) Q_DECL_OVERRIDE;
-	virtual void draw(StelCore* core) Q_DECL_OVERRIDE;
-	virtual double getCallOrder(StelModuleActionName actionName) const Q_DECL_OVERRIDE;
+	void init() override;
+	void deinit() override;
+	bool configureGui(bool show=true) override;
+	void draw(StelCore* core) override;
+	double getCallOrder(StelModuleActionName actionName) const override;
 	//! Returns the module-specific style sheet.	
-	virtual void handleMouseClicks(class QMouseEvent* event) Q_DECL_OVERRIDE;
+	void handleMouseClicks(class QMouseEvent* event) override;
 
 	QString getDimensionsString(double fovX, double fovY) const;
 	QString getFOVString(double fov) const;
@@ -154,7 +154,7 @@ public:
 public slots:
 	//! return the plugin's own settings (these do not include the settings from the main application)
 	//! This implementation return a singleton (class static) QSettings object.
-	virtual QSettings* getSettings() Q_DECL_OVERRIDE;
+	QSettings* getSettings() override;
 	//! Update the ocular, telescope and sensor lists after the removal of a member.
 	//! Necessary because of the way model/view management in the OcularDialog
 	//! is implemented.
@@ -594,9 +594,9 @@ class OcularsStelPluginInterface : public QObject, public StelPluginInterface
 	Q_PLUGIN_METADATA(IID StelPluginInterface_iid)
 	Q_INTERFACES(StelPluginInterface)
 public:
-	virtual StelModule* getStelModule() const Q_DECL_OVERRIDE;
-	virtual StelPluginInfo getPluginInfo() const Q_DECL_OVERRIDE;
-	//virtual QObjectList getExtensionList() const Q_DECL_OVERRIDE { return QObjectList(); }
+	StelModule* getStelModule() const override;
+	StelPluginInfo getPluginInfo() const override;
+	//QObjectList getExtensionList() const override { return QObjectList(); }
 };
 
 #endif /* OCULARS_HPP */

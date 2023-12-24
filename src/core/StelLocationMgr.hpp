@@ -53,7 +53,7 @@ class StelLocationMgr : public QObject
 public:
 	//! Default constructor which loads the list of locations from the base and user location files.
 	StelLocationMgr();
-	~StelLocationMgr() Q_DECL_OVERRIDE;
+	~StelLocationMgr() override;
 
 	//! Construct a StelLocationMgr which uses the locations given instead of loading them from the files.
 	StelLocationMgr(const LocationList& locations);

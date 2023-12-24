@@ -46,7 +46,7 @@ class StelMainScriptAPI : public QObject
 
 public:
 	StelMainScriptAPI(QObject *parent = Q_NULLPTR);
-	~StelMainScriptAPI() Q_DECL_OVERRIDE;
+	~StelMainScriptAPI() override;
 
 #ifdef ENABLE_SCRIPT_QML
 	void setEngine(QJSEngine *eng){m_engine=eng;}

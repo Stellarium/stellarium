@@ -89,14 +89,14 @@ class CustomQTranslator : public QTranslator
 {
 	using QTranslator::translate;
 public:
-	virtual bool isEmpty() const Q_DECL_OVERRIDE { return false; }
+	bool isEmpty() const override { return false; }
 
 	//! Overrides QTranslator::translate().
 	//! Calls StelTranslator::qtranslate().
 	//! @param context Qt context string - IGNORED.
 	//! @param sourceText the source message.
 	//! @param comment optional parameter
-	virtual QString translate(const char *context, const char *sourceText, const char *disambiguation = Q_NULLPTR, int n = -1) const Q_DECL_OVERRIDE
+	QString translate(const char *context, const char *sourceText, const char *disambiguation = Q_NULLPTR, int n = -1) const override
 	{
 		Q_UNUSED(context)
 		Q_UNUSED(n)

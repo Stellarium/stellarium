@@ -50,25 +50,25 @@ class MilkyWay : public StelModule
 		   NOTIFY saturationChanged)
 public:
 	MilkyWay();
-	virtual ~MilkyWay() Q_DECL_OVERRIDE;
+	~MilkyWay() override;
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
 	//! Initialize the class.  Here we load the texture for the Milky Way and 
 	//! get the display settings from application settings, namely the flag which
 	//! determines if the Milky Way is displayed or not, and the intensity setting.
-	virtual void init() Q_DECL_OVERRIDE;
+	void init() override;
 
 	//! Draw the Milky Way.
-	virtual void draw(StelCore* core) Q_DECL_OVERRIDE;
+	void draw(StelCore* core) override;
 	
 	//! Update and time-dependent state.  Updates the fade level while the 
 	//! Milky way rendering is being changed from on to off or off to on.
-	virtual void update(double deltaTime) Q_DECL_OVERRIDE;
+	void update(double deltaTime) override;
 	
 	//! actionDraw returns 1 (because this is background, very early drawing).
 	//! Other actions return 0 for no action.
-	virtual double getCallOrder(StelModuleActionName actionName) const Q_DECL_OVERRIDE;
+	double getCallOrder(StelModuleActionName actionName) const override;
 	
 	///////////////////////////////////////////////////////////////////////////////////////
 	// Setter and getters

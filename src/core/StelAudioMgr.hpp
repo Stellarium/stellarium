@@ -34,7 +34,7 @@ class StelAudioMgr : public QObject
 
 public:
 	StelAudioMgr();
-	~StelAudioMgr() Q_DECL_OVERRIDE;
+	~StelAudioMgr() override;
 
 public slots:
 	//! Load sound file to be accessed under ID.
