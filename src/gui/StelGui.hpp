@@ -306,7 +306,7 @@ private slots:
 	void scriptStopped();
 #endif
 	//! Load color scheme from the given ini file and section name
-	void setStelStyle(const QString& style) override Q_DECL_FINAL;
+	void setStelStyle(const QString& style) override final;
 	void quit();	
 	void updateI18n();
 	void copySelectedObjectInfo(void);
