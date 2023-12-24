@@ -655,24 +655,29 @@ IF(APPLE)
      ENDIF()
 ENDIF()
 
-# Since Qt 5.4, linking to OpenGL is basically not required anymore,
-# because the QtGui module re-implements the GL functions, and perhaps even
-# dispatches the calls to a dynamically selected GL library.
-#
-# The only exception where this does not work with CMake is for
-# ES2-only/ANGLE-only builds, which are seemingly not included in
-# official Qt downloads, but may be required as a custom build
-# for some embedded systems. Interestingly, this works with qmake,
-# but CMake needs an explicit link definition.
-# See also this bug: https://bugreports.qt.io/browse/QTBUG-29132
+IF(${QT_VERSION_MAJOR} EQUAL 5)
+     # Since Qt 5.4, linking to OpenGL is basically not required anymore,
+     # because the QtGui module re-implements the GL functions, and perhaps even
+     # dispatches the calls to a dynamically selected GL library.
+     #
+     # The only exception where this does not work with CMake is for
+     # ES2-only/ANGLE-only builds, which are seemingly not included in
+     # official Qt downloads, but may be required as a custom build
+     # for some embedded systems. Interestingly, this works with qmake,
+     # but CMake needs an explicit link definition.
+     # See also this bug: https://bugreports.qt.io/browse/QTBUG-29132
 
-# Check if we have a GLES-only build
-# On dynamic builds, this property is also "GL"
-IF(${Qt5Gui_OPENGL_IMPLEMENTATION} MATCHES "GLES")
-     MESSAGE(STATUS "Building an OpenGL ES build (${Qt5Gui_OPENGL_IMPLEMENTATION})")
-     SET(STEL_GLES_LIBS Qt5::Gui_EGL Qt5::Gui_GLESv2)
+     # Check if we have a GLES-only build
+     # On dynamic builds, this property is also "GL"
+     IF(${Qt5Gui_OPENGL_IMPLEMENTATION} MATCHES "GLES")
+	  MESSAGE(STATUS "Building an OpenGL ES build (${Qt5Gui_OPENGL_IMPLEMENTATION})")
+	  SET(STEL_GLES_LIBS Qt5::Gui_EGL Qt5::Gui_GLESv2)
+     ELSE()
+	  MESSAGE(STATUS "Building an OpenGL build")
+     ENDIF()
 ELSE()
-     MESSAGE(STATUS "Building an OpenGL build")
+     # See https://doc.qt.io/qt-6/qopenglcontext.html#details + https://doc.qt.io/qt-6/qtgui-overview.html#opengl-and-opengl-es-integration
+     MESSAGE(STATUS "Building an OpenGL/OpenGL ES build")
 ENDIF()
 
 # Tell CMake to run moc when necessary:
