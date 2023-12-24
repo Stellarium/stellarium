@@ -77,10 +77,12 @@ This is checklist for maintainer of Stellarium (a release master)
 ### Environment
 - [ ] Add tag on the GitHub
 - [ ] Fill the release notes on the GitHub
+- [ ] Make and upload [Stellarium User Guide for AppVeyor](https://github.com/Stellarium/stellarium-data/releases/tag/guide)
 - [ ] Upload packages on the GitHub
+- [ ] Upload Stellarium User Guide on the GitHub
 - [ ] Close milestone on the GitHub
 - [ ] Remove label `state: published` for all items from closed milestone on the GitHub
-               
+
 ## Step 5: immediately after release
 
 ### Environment
@@ -90,5 +92,8 @@ This is checklist for maintainer of Stellarium (a release master)
 - [ ] Add news about new release on the website
 - [ ] Update the catalog of pulsars on the website
 - [ ] Update the catalog of exoplanets on the website
+- [ ] Update Stellarium User Guide on the website
 - [ ] Set `STELLARIUM_RELEASE_BUILD 0` in CMakeLists.txt file
+- [ ] Upload Stellarium User Guide on [Zenodo](https://zenodo.org/doi/10.5281/zenodo.8377210) and update DOI on the website
+- [ ] Upload Stellarium User Guide on [ResearchGate](https://www.researchgate.net)
 - [ ] Close this issue
