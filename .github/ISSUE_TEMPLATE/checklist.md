@@ -70,7 +70,7 @@ This is checklist for maintainer of Stellarium (a release master)
 - [ ] Update translations for landscapes descriptions (`util\landscapes\translate.sh`)
 - [ ] Update translations for skycultures descriptions (`util\skycultures\translate.sh`)
 - [ ] Update translations for scenery3d descriptions (`util\scenery3d\translate.sh`)
-- [ ] Update CITATION.cff file
+- [ ] Update `CITATION.cff` and `CITATION` files
 
 ## Step 4: release
 
