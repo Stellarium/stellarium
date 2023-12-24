@@ -27,15 +27,15 @@ class HelloStelModule : public StelModule
 {
 public:
 	HelloStelModule();
-	virtual ~HelloStelModule() override;
+	~HelloStelModule() override;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
-	virtual void init() override;
+	void init() override;
 	// Activate only if update() does something.
-	//virtual void update(double deltaTime) override {}
-	virtual void draw(StelCore* core) override;
-	virtual double getCallOrder(StelModuleActionName actionName) const override;
+	//void update(double deltaTime) override {}
+	void draw(StelCore* core) override;
+	double getCallOrder(StelModuleActionName actionName) const override;
 private:
 	// Font used for displaying our text
 	QFont font;
@@ -52,9 +52,9 @@ class HelloStelModuleStelPluginInterface : public QObject, public StelPluginInte
 	Q_PLUGIN_METADATA(IID StelPluginInterface_iid)
 	Q_INTERFACES(StelPluginInterface)
 public:
-	virtual StelModule* getStelModule() const override;
-	virtual StelPluginInfo getPluginInfo() const override;
-	virtual QObjectList getExtensionList() const override { return QObjectList(); }
+	StelModule* getStelModule() const override;
+	StelPluginInfo getPluginInfo() const override;
+	QObjectList getExtensionList() const override { return QObjectList(); }
 };
 
 #endif /* HELLOSTELMODULE_HPP */

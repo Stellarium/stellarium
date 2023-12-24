@@ -34,12 +34,12 @@ public:
 	virtual ~Oculus();
 
 	// Methods defined in the StelModule class
-	virtual void init() override;
-	virtual void deinit() override;
-	// virtual void draw(StelCore* core) override;
-	virtual void update(double deltaTime) override;
+	void init() override;
+	void deinit() override;
+	//void draw(StelCore* core) override;
+	void update(double deltaTime) override;
 	// Make sure we get called after everything else.
-	virtual double getCallOrder(StelModuleActionName actionName) const override {Q_UNUSED(actionName); return 100;}
+	double getCallOrder(StelModuleActionName actionName) const override {Q_UNUSED(actionName); return 100;}
 public slots:
 	void recenter();
 private:

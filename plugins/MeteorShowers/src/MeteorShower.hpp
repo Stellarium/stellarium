@@ -102,7 +102,7 @@ public:
 	//
 	// Methods defined in StelObject class
 	//
-	virtual QString getInfoString(const StelCore* core, const InfoStringGroup& flags) const override;
+	QString getInfoString(const StelCore* core, const InfoStringGroup& flags) const override;
 
 	//! Return a map like StelObject, but with a few extra tags:
 	// TODO: Describe the fields!
@@ -113,16 +113,16 @@ public:
 	//! - pop-idx (population index)
 	//! - parent
 	//! - zhr-max (information string)
-	virtual QVariantMap getInfoMap(const StelCore *core) const override;
-	virtual QString getType(void) const override { return METEORSHOWER_TYPE; }
-	virtual QString getObjectType(void) const override { return N_("meteor shower"); }
-	virtual QString getObjectTypeI18n(void) const override { return q_(getObjectType()); }
-	virtual QString getID(void) const override { return m_showerID; }
-	virtual QString getEnglishName(void) const override { return m_designation.trimmed(); }
-	virtual QString getNameI18n(void) const override	{ return q_(m_designation.trimmed()); }
-	virtual Vec3d getJ2000EquatorialPos(const StelCore*) const override { return m_position; }
-	virtual float getSelectPriority(const StelCore*) const override { return -4.0; }
-	virtual Vec3f getInfoColor(void) const override;
+	QVariantMap getInfoMap(const StelCore *core) const override;
+	QString getType(void) const override { return METEORSHOWER_TYPE; }
+	QString getObjectType(void) const override { return N_("meteor shower"); }
+	QString getObjectTypeI18n(void) const override { return q_(getObjectType()); }
+	QString getID(void) const override { return m_showerID; }
+	QString getEnglishName(void) const override { return m_designation.trimmed(); }
+	QString getNameI18n(void) const override	{ return q_(m_designation.trimmed()); }
+	Vec3d getJ2000EquatorialPos(const StelCore*) const override { return m_position; }
+	float getSelectPriority(const StelCore*) const override { return -4.0; }
+	Vec3f getInfoColor(void) const override;
 
 	//! @return approximate Julian day calculated from solar longitude (J2000)
 	static double JDfromSolarLongitude(double solarLong, int year);

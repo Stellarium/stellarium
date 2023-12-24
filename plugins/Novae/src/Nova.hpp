@@ -50,21 +50,21 @@ public:
 	//! Get a QVariantMap which describes the nova.  Could be used to create a duplicate.
 	QVariantMap getMap(void) const;
 
-	virtual QString getType(void) const override
+	QString getType(void) const override
 	{
 		return NOVA_TYPE;
 	}
 
-	virtual QString getObjectType(void) const override
+	QString getObjectType(void) const override
 	{
 		return N_("nova");
 	}
-	virtual QString getObjectTypeI18n(void) const override
+	QString getObjectTypeI18n(void) const override
 	{
 		return q_(getObjectType());
 	}
 
-	virtual QString getID(void) const override
+	QString getID(void) const override
 	{
 		return getDesignation();
 	}
@@ -72,7 +72,7 @@ public:
 	//! Get an HTML string to describe the object
 	//! @param core A pointer to the core
 	//! @flags a set of flags with information types to include.
-	virtual QString getInfoString(const StelCore* core, const InfoStringGroup& flags) const override;
+	QString getInfoString(const StelCore* core, const InfoStringGroup& flags) const override;
 	//! Return a map like StelObject::getInfoMap(), but with a few extra tags also available in getMap().
 	// TODO: Describe the entries!
 	//! - designation
@@ -86,12 +86,12 @@ public:
 	//! - m6
 	//! - m9
 	//! - distance
-	virtual QVariantMap getInfoMap(const StelCore *core) const override;
-	virtual Vec3f getInfoColor(void) const override;
-	virtual Vec3d getJ2000EquatorialPos(const StelCore *core) const override;
-	virtual float getVMagnitude(const StelCore* core) const override;
-	virtual QString getNameI18n(void) const override;
-	virtual QString getEnglishName(void) const override;
+	QVariantMap getInfoMap(const StelCore *core) const override;
+	Vec3f getInfoColor(void) const override;
+	Vec3d getJ2000EquatorialPos(const StelCore *core) const override;
+	float getVMagnitude(const StelCore* core) const override;
+	QString getNameI18n(void) const override;
+	QString getEnglishName(void) const override;
 	QString getDesignation(void) const;
 
 private:

@@ -299,11 +299,11 @@ class LandscapeOldStyle : public Landscape
 {
 public:
 	LandscapeOldStyle(float radius = 2.0f);
-	virtual ~LandscapeOldStyle() override;
-	virtual void load(const QSettings& landscapeIni, const QString& landscapeId) override;
-	virtual void draw(StelCore* core, bool onlyPolygon) override;
+	~LandscapeOldStyle() override;
+	void load(const QSettings& landscapeIni, const QString& landscapeId) override;
+	void draw(StelCore* core, bool onlyPolygon) override;
 	//void create(bool _fullpath, QMap<QString, QString> param); // still not implemented
-	virtual float getOpacity(Vec3d azalt) const override;
+	float getOpacity(Vec3d azalt) const override;
 protected:
 	typedef struct
 	{
@@ -389,10 +389,10 @@ class LandscapePolygonal : public Landscape
 {
 public:
 	LandscapePolygonal(float radius = 1.f);
-	virtual ~LandscapePolygonal() override;
-	virtual void load(const QSettings& landscapeIni, const QString& landscapeId) override;
-	virtual void draw(StelCore* core, bool onlyPolygon) override;
-	virtual float getOpacity(Vec3d azalt) const override;
+	~LandscapePolygonal() override;
+	void load(const QSettings& landscapeIni, const QString& landscapeId) override;
+	void draw(StelCore* core, bool onlyPolygon) override;
+	float getOpacity(Vec3d azalt) const override;
 	// To allow ad-hoc "zero" landscapes with color from map
 	void setGroundColor(const Vec3f &color);
 private:
@@ -410,12 +410,12 @@ class LandscapeFisheye : public Landscape
 {
 public:
 	LandscapeFisheye(float radius = 1.f);
-	virtual ~LandscapeFisheye() override;
-	virtual void load(const QSettings& landscapeIni, const QString& landscapeId) override;
-	virtual void draw(StelCore* core, bool onlyPolygon) override;
+	~LandscapeFisheye() override;
+	void load(const QSettings& landscapeIni, const QString& landscapeId) override;
+	void draw(StelCore* core, bool onlyPolygon) override;
 	//! Sample landscape texture for transparency/opacity. May be used for visibility, sunrise etc.
 	//! @param azalt normalized direction in alt-az frame
-	virtual float getOpacity(Vec3d azalt) const override;
+	float getOpacity(Vec3d azalt) const override;
 	//! create a fisheye landscape from basic parameters (no ini file needed).
 	//! @param name Landscape name
 	//! @param maptex the fisheye texture
@@ -457,13 +457,13 @@ class LandscapeSpherical : public Landscape
 {
 public:
 	LandscapeSpherical(float radius = 1.f);
-	virtual ~LandscapeSpherical() override;
-	virtual void load(const QSettings& landscapeIni, const QString& landscapeId) override;
-	virtual void draw(StelCore* core, bool onlyPolygon) override;
+	~LandscapeSpherical() override;
+	void load(const QSettings& landscapeIni, const QString& landscapeId) override;
+	void draw(StelCore* core, bool onlyPolygon) override;
 	//! Sample landscape texture for transparency/opacity. May be used for visibility, sunrise etc.
 	//! @param azalt normalized direction in alt-az frame
 	//! @retval alpha (0=fully transparent, 1=fully opaque. Trees, leaves, glass etc may have intermediate values.)
-	virtual float getOpacity(Vec3d azalt) const override;
+	float getOpacity(Vec3d azalt) const override;
 	//! create a spherical landscape from basic parameters (no ini file needed).
 	//! @param name Landscape name
 	//! @param maptex the equirectangular texture

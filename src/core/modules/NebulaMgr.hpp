@@ -314,7 +314,7 @@ class NebulaMgr : public StelObjectModule
 
 public:
 	NebulaMgr();
-	virtual ~NebulaMgr() override;
+	~NebulaMgr() override;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
@@ -325,16 +325,16 @@ public:
 	//!  - Load the pointer texture.
 	//!  - Set flags values from ini parser which relate to nebula display.
 	//!  - call updateI18n() to translate names.
-	virtual void init() override;
+	void init() override;
 
 	//! Draws all nebula objects.
-	virtual void draw(StelCore* core) override;
+	void draw(StelCore* core) override;
 
 	//! Update state which is time dependent.
-	virtual void update(double deltaTime) override {hintsFader.update(static_cast<int>(deltaTime*1000)); flagShow.update(static_cast<int>(deltaTime*1000));}
+	void update(double deltaTime) override {hintsFader.update(static_cast<int>(deltaTime*1000)); flagShow.update(static_cast<int>(deltaTime*1000));}
 
 	//! Determines the order in which the various modules are drawn.
-	virtual double getCallOrder(StelModuleActionName actionName) const override;
+	double getCallOrder(StelModuleActionName actionName) const override;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in StelObjectModule class
@@ -343,30 +343,30 @@ public:
 	//! @param limitFov the field of view around the position v in which to search for nebulae.
 	//! @param core the StelCore to use for computations.
 	//! @return a list containing the nebulae located inside the limitFov circle around position v.
-	virtual QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const override;
+	QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const override;
 
 	//! Return the matching nebula object's pointer if exists or an "empty" StelObjectP.
 	//! @param nameI18n The case in-sensitive nebula name or NGC M catalog name : format can
 	//! be M31, M 31, NGC31, NGC 31
-	virtual StelObjectP searchByNameI18n(const QString& nameI18n) const override;
+	StelObjectP searchByNameI18n(const QString& nameI18n) const override;
 
 	//! Return the matching nebula if exists or Q_NULLPTR.
 	//! @param name The case in-sensitive standard program name
-	virtual StelObjectP searchByName(const QString& name) const override;
+	StelObjectP searchByName(const QString& name) const override;
 
-	virtual StelObjectP searchByID(const QString &id) const override { return searchByName(id); }
+	StelObjectP searchByID(const QString &id) const override { return searchByName(id); }
 
 	//! Find and return the list of at most maxNbItem objects auto-completing the passed object English name.
 	//! @param objPrefix the case insensitive first letters of the searched object
 	//! @param maxNbItem the maximum number of returned object names
 	//! @param useStartOfWords the autofill mode for returned objects names
 	//! @return a list of matching object name by order of relevance, or an empty list if nothing match
-	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const override;
+	QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const override;
 	//! @note Loading deep-sky objects with the proper names only.
-	virtual QStringList listAllObjects(bool inEnglish) const override;
-	virtual QStringList listAllObjectsByType(const QString& objType, bool inEnglish) const override;
-	virtual QString getName() const override { return "Deep-sky objects"; }
-	virtual QString getStelObjectType() const override { return Nebula::NEBULA_TYPE; }
+	QStringList listAllObjects(bool inEnglish) const override;
+	QStringList listAllObjectsByType(const QString& objType, bool inEnglish) const override;
+	QString getName() const override { return "Deep-sky objects"; }
+	QString getStelObjectType() const override { return Nebula::NEBULA_TYPE; }
 
 	//! Compute the maximum magntiude for which hints will be displayed.
 	float computeMaxMagHint(const class StelSkyDrawer* skyDrawer) const;

@@ -285,7 +285,7 @@ class LandscapeMgr : public StelModule
 
 public:
 	LandscapeMgr();
-	virtual ~LandscapeMgr() override;
+	~LandscapeMgr() override;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
@@ -293,10 +293,10 @@ public:
 	//! Operations performed:
 	//! - Load the default landscape as specified in the application configuration
 	//! - Set up landscape-related display flags from ini parser object
-	virtual void init() override;
+	void init() override;
 
 	//! Draw the atmosphere, landscape graphics, and cardinal points.
-	virtual void draw(StelCore* core) override;
+	void draw(StelCore* core) override;
 	//! Draw landscape graphics and cardinal points. This only will redraw a polygonal line (if defined), the gazetteer and the Cardinal points.
 	//! This can be called outside the usual call order, if any foreground has to be overdrawn, e.g. 3D sceneries.
 	void drawPolylineOnly(StelCore* core);
@@ -308,10 +308,10 @@ public:
 	//!   and moon.
 	//! - updates adaptation luminescence based on visible bright objects.
 	//! - Landscape and lightscape brightness computations based on sun position and whether atmosphere is on or off.
-	virtual void update(double deltaTime) override;
+	void update(double deltaTime) override;
 
 	//! Get the order in which this module will draw its objects relative to other modules.
-	virtual double getCallOrder(StelModuleActionName actionName) const override;
+	double getCallOrder(StelModuleActionName actionName) const override;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods specific to the landscape manager

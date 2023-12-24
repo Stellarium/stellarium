@@ -85,7 +85,7 @@ public:
 	//! @flags a set of flags with information types to include.
 	QString getInfoString(const StelCore* core, const InfoStringGroup& flags) const override;
 	//! Return a map like StelObject::getInfoMap(), but with a few extra tags also available in getMap().
-	//virtual QVariantMap getInfoMap(const StelCore *core) const override;
+	//QVariantMap getInfoMap(const StelCore *core) const override;
 	Vec3f getInfoColor(void) const override;
 	Vec3d getJ2000EquatorialPos(const StelCore *core) const override;
 	float getVMagnitude(const StelCore* core) const override;

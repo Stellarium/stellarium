@@ -88,12 +88,12 @@ public:
 	Q_ENUM(CoordinateSystem)
 
 	PointerCoordinates();
-	virtual ~PointerCoordinates() override;
+	~PointerCoordinates() override;
 
-	virtual void init() override;
-	virtual void draw(StelCore *core) override;
-	virtual double getCallOrder(StelModuleActionName actionName) const override;
-	virtual bool configureGui(bool show) override;
+	void init() override;
+	void draw(StelCore *core) override;
+	double getCallOrder(StelModuleActionName actionName) const override;
+	bool configureGui(bool show) override;
 
 	//! Set up the plugin with default values.  This means clearing out the PointerCoordinates section in the
 	//! main config.ini (if one already exists), and populating it with default values.
@@ -215,9 +215,9 @@ class PointerCoordinatesStelPluginInterface : public QObject, public StelPluginI
 	Q_PLUGIN_METADATA(IID StelPluginInterface_iid)
 	Q_INTERFACES(StelPluginInterface)
 public:
-	virtual StelModule* getStelModule() const override;
-	virtual StelPluginInfo getPluginInfo() const override;
-	//virtual QObjectList getExtensionList() const override { return QObjectList(); }
+	StelModule* getStelModule() const override;
+	StelPluginInfo getPluginInfo() const override;
+	//QObjectList getExtensionList() const override { return QObjectList(); }
 };
 
 #endif /* POINTERCOORDINATES_HPP */

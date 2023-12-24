@@ -31,10 +31,10 @@ class SkylightDialog : public StelDialog
 
 public:
 	SkylightDialog();
-	virtual ~SkylightDialog() override;
+	~SkylightDialog() override;
 
 public slots:
-	virtual void retranslate() override;
+	void retranslate() override;
 
 protected slots:
 	//! Reset function for the parametrizable Preetham atmosphere model.
@@ -77,7 +77,7 @@ protected slots:
 
 protected:
         //! Initialize the dialog widgets and connect the signals/slots.
-	virtual void createDialogContent() override;
+	void createDialogContent() override;
 	Ui_skylightDialogForm *ui;
 };
 

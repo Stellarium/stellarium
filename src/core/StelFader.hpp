@@ -61,7 +61,7 @@ public:
 	float getInterstate() const override {return state ? 1.f : 0.f;}
 	// Switchors can be used just as bools
 	StelFader& operator=(bool s) override {state=s; return *this;}
-	virtual float getDuration() const override {return 0.f;}
+	float getDuration() const override {return 0.f;}
 };
 
 //! @class LinearFader
@@ -126,7 +126,7 @@ public:
 			counter = _duration;
 		duration = _duration;
 	}
-	virtual float getDuration() const override {return static_cast<float>(duration);}
+	float getDuration() const override {return static_cast<float>(duration);}
 
 private:
 	bool isTransiting() const { return counter < duration; }

@@ -70,7 +70,7 @@ public:
 	StelToneReproducer();
 	
 	//! Destructor
-	virtual ~StelToneReproducer() override;
+	~StelToneReproducer() override;
 
 public slots:
 	//! Set the eye adaptation luminance for the display (and precompute what can be)

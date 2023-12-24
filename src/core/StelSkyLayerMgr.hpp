@@ -45,13 +45,13 @@ public:
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
 	//! Initialize
-	virtual void init() override;
+	void init() override;
 
 	//! Draws sky background
-	virtual void draw(StelCore* core) override;
+	void draw(StelCore* core) override;
 
 	//! Determines the order in which the various modules are drawn.
-	virtual double getCallOrder(StelModuleActionName actionName) const override;
+	double getCallOrder(StelModuleActionName actionName) const override;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Other specific methods

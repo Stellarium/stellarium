@@ -49,7 +49,7 @@ class OcularDialog : public StelDialog
 
 public:
 	OcularDialog(Oculars* plugin, QList<CCD *>* ccds, QList<Ocular *>* oculars, QList<Telescope *>* telescopes, QList<Lens *>* lenses);
-	virtual ~OcularDialog() override;
+	~OcularDialog() override;
 
 public slots:
 	void closeWindow();
@@ -83,7 +83,7 @@ public slots:
 
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots
-	virtual void createDialogContent() override;
+	void createDialogContent() override;
 	Ui_ocularDialogForm* ui;
 
 private slots:

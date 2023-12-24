@@ -32,14 +32,14 @@ class AtmosphereDialog : public StelDialog
 
 public:
 	AtmosphereDialog();
-	virtual ~AtmosphereDialog() override;
+	~AtmosphereDialog() override;
 
 public slots:
-	virtual void retranslate() override;
+	void retranslate() override;
 
 protected:
         //! Initialize the dialog widgets and connect the signals/slots.
-	virtual void createDialogContent() override;
+	void createDialogContent() override;
         Ui_atmosphereDialogForm *ui;
 
 private:

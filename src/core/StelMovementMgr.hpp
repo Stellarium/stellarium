@@ -116,7 +116,7 @@ public:
 	Q_ENUM(ZoomingMode)
 
 	StelMovementMgr(StelCore* core);
-	virtual ~StelMovementMgr() override;
+	~StelMovementMgr() override;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
@@ -128,28 +128,28 @@ public:
 	//! - Enabling/disabling the mouse movement
 	//! - Sets the zoom and movement speeds
 	//! - Sets the auto-zoom duration and mode.
-	virtual void init() override;
+	void init() override;
 
 	//! Update time-dependent things (triggers a time dragging record if required)
-	virtual void update(double) override
+	void update(double) override
 	{
 		if (dragTimeMode)
 			addTimeDragPoint(QCursor::pos().x(), QCursor::pos().y());
 	}
 	//! Implement required draw function.  Does nothing.
-	virtual void draw(StelCore*) override {}
+	void draw(StelCore*) override {}
 	//! Handle keyboard events.
-	virtual void handleKeys(QKeyEvent* event) override;
+	void handleKeys(QKeyEvent* event) override;
 	//! Handle mouse movement events.
-	virtual bool handleMouseMoves(int x, int y, Qt::MouseButtons b) override;
+	bool handleMouseMoves(int x, int y, Qt::MouseButtons b) override;
 	//! Handle mouse wheel events.
-	virtual void handleMouseWheel(class QWheelEvent* event) override;
+	void handleMouseWheel(class QWheelEvent* event) override;
 	//! Handle mouse click events.
-	virtual void handleMouseClicks(class QMouseEvent* event) override;
+	void handleMouseClicks(class QMouseEvent* event) override;
 	// allow some keypress interaction by plugins.
-	virtual double getCallOrder(StelModuleActionName actionName) const override;
+	double getCallOrder(StelModuleActionName actionName) const override;
 	//! Handle pinch gesture.
-	virtual bool handlePinch(qreal scale, bool started) override;
+	bool handlePinch(qreal scale, bool started) override;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods specific to StelMovementMgr

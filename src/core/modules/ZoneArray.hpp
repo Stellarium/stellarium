@@ -182,15 +182,15 @@ protected:
 	//! @param boundingCaps
 	//! @param withAberration true if aberration to be applied
 	//! @param vel velocity vector of observer planet
-	virtual void draw(StelPainter* sPainter, int index, bool isInsideViewport,
-			  const RCMag *rcmag_table, int limitMagIndex, StelCore* core,
-			  int maxMagStarName, float names_brightness,
-			  const QVector<SphericalCap>& boundingCaps,
-			  const bool withAberration, const Vec3f vel) const override;
+	void draw(StelPainter* sPainter, int index, bool isInsideViewport,
+	          const RCMag *rcmag_table, int limitMagIndex, StelCore* core,
+	          int maxMagStarName, float names_brightness,
+	          const QVector<SphericalCap>& boundingCaps,
+	          const bool withAberration, const Vec3f vel) const override;
 
-	virtual void scaleAxis() override;
-	virtual void searchAround(const StelCore* core, int index,const Vec3d &v,double cosLimFov,
-					  QList<StelObjectP > &result) override;
+	void scaleAxis() override;
+	void searchAround(const StelCore* core, int index,const Vec3d &v,double cosLimFov,
+	                  QList<StelObjectP > &result) override;
 
 	Star *stars;
 private:

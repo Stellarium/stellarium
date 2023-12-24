@@ -60,8 +60,8 @@ public:
 	OnlineQueries();
 	virtual ~OnlineQueries() ;
 
-	virtual void init() override;
-	virtual bool configureGui(bool show) override;
+	void init() override;
+	bool configureGui(bool show) override;
 
 signals:
 	void flagEnabledChanged(bool b);

@@ -66,10 +66,10 @@ public:
 	LibGPSLookupHelper(QObject * parent);
 	~LibGPSLookupHelper() override;
 
-	virtual bool isReady() override;
+	bool isReady() override;
 public slots:
-	virtual void query() override;
-	virtual void setPeriodicQuery(int interval) override;
+	void query() override;
+	void setPeriodicQuery(int interval) override;
 private:
 	bool ready;
 	gpsmm* gps_rec;
@@ -86,14 +86,14 @@ class NMEALookupHelper : public GPSLookupHelper
 public:
 	NMEALookupHelper(QObject* parent);
 	~NMEALookupHelper() override;
-	virtual bool isReady() override
+	bool isReady() override
 	{
 		//if (nmea) qDebug() << "NMEALookupHelper::isReady(): Last Error was:" << nmea->error();
 		return nmea && nmea->device();
 	}
 public slots:
-	virtual void query() override;
-	virtual void setPeriodicQuery(int interval) override;
+	void query() override;
+	void setPeriodicQuery(int interval) override;
 private slots:
 	void nmeaUpdated(const QGeoPositionInfo &update);
 	void nmeaError(QGeoPositionInfoSource::Error error);

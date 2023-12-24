@@ -36,14 +36,14 @@ class CustomDeltaTEquationDialog : public StelDialog
 
 public:
 	CustomDeltaTEquationDialog();
-	virtual ~CustomDeltaTEquationDialog() override;
+	~CustomDeltaTEquationDialog() override;
 
 public slots:
-	virtual void retranslate() override;
+	void retranslate() override;
 
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots.
-	virtual void createDialogContent() override;
+	void createDialogContent() override;
 	Ui_customDeltaTEquationDialogForm *ui;
 
 private slots:

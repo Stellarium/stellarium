@@ -39,14 +39,14 @@ class ConfigurationDialog : public StelDialog
 	Q_OBJECT
 public:
 	ConfigurationDialog(StelGui* agui, QObject* parent);
-	virtual ~ConfigurationDialog() override;
+	~ConfigurationDialog() override;
 
 public slots:
-	virtual void retranslate() override;
+	void retranslate() override;
 
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots
-	virtual void createDialogContent() override;
+	void createDialogContent() override;
 	Ui_configurationDialogForm* ui;
 
 private:

@@ -103,43 +103,43 @@ public:
 	//! Constructor
 	ConstellationMgr(StarMgr *stars);
 	//! Destructor
-	virtual ~ConstellationMgr() override;
+	~ConstellationMgr() override;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
 	//! Initialize the ConstellationMgr.
 	//! Reads from the configuration parser object and updates the loading bar
 	//! as constellation objects are loaded for the required sky culture.
-	virtual void init() override;
+	void init() override;
 
 	//! Draw constellation lines, art, names and boundaries.
-	virtual void draw(StelCore* core) override;
+	void draw(StelCore* core) override;
 
 	//! Updates time-varying state for each Constellation.
-	virtual void update(double deltaTime) override;
+	void update(double deltaTime) override;
 
 	//! Return the value defining the order of call for the given action
 	//! @param actionName the name of the action for which we want the call order
 	//! @return the value defining the order. The closer to 0 the earlier the module's action will be called
-	virtual double getCallOrder(StelModuleActionName actionName) const override;
+	double getCallOrder(StelModuleActionName actionName) const override;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in StelObjectModule class
-	virtual QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const override;
+	QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const override;
 
 	//! @return the matching constellation object's pointer if exists or Q_NULLPTR
 	//! @param nameI18n The case in-sensitive constellation name
-	virtual StelObjectP searchByNameI18n(const QString& nameI18n) const override;
+	StelObjectP searchByNameI18n(const QString& nameI18n) const override;
 
 	//! @return the matching constellation if exists or Q_NULLPTR
 	//! @param name The case in-sensitive standard program name (three letter abbreviation)
-	virtual StelObjectP searchByName(const QString& name) const override;
+	StelObjectP searchByName(const QString& name) const override;
 
-	virtual StelObjectP searchByID(const QString &id) const override;
+	StelObjectP searchByID(const QString &id) const override;
 
-	virtual QStringList listAllObjects(bool inEnglish) const override;
-	virtual QString getName() const override { return "Constellations"; }
-	virtual QString getStelObjectType() const override;
+	QStringList listAllObjects(bool inEnglish) const override;
+	QString getName() const override { return "Constellations"; }
+	QString getStelObjectType() const override;
 	//! Describes how to display constellation labels. The viewDialog GUI has a combobox which corresponds to these values.
 	enum ConstellationDisplayStyle
 	{

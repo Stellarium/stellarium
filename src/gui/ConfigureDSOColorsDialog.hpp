@@ -31,14 +31,14 @@ class ConfigureDSOColorsDialog : public StelDialog
 
 public:
 	ConfigureDSOColorsDialog();
-	virtual ~ConfigureDSOColorsDialog() override;
+	~ConfigureDSOColorsDialog() override;
 
 public slots:
-	virtual void retranslate() override;
+	void retranslate() override;
 
 protected:
         //! Initialize the dialog widgets and connect the signals/slots.
-	virtual void createDialogContent() override;
+	void createDialogContent() override;
 	Ui_ConfigureDSOColorsDialogForm *ui;
 };
 

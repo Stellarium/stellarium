@@ -51,9 +51,9 @@ class StelViewportDistorterFisheyeToSphericMirror : public StelViewportEffect
 public:
 	StelViewportDistorterFisheyeToSphericMirror(int screen_w,int screen_h);
 	~StelViewportDistorterFisheyeToSphericMirror() override;
-	virtual QString getName() const override {return "sphericMirrorDistorter";}
-	virtual void paintViewportBuffer(const QOpenGLFramebufferObject* buf) const override;
-	virtual void distortXY(qreal& x, qreal& y) const override;
+	QString getName() const override {return "sphericMirrorDistorter";}
+	void paintViewportBuffer(const QOpenGLFramebufferObject* buf) const override;
+	void distortXY(qreal& x, qreal& y) const override;
 private:
 	const int screen_w;
 	const int screen_h;

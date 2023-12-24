@@ -42,21 +42,21 @@ class LabelMgr : public StelModule
 public:
 	//! Construct a LabelMgr object.
 	LabelMgr();
-	virtual ~LabelMgr() override;
+	~LabelMgr() override;
  
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
 	//! Initialize the LabelMgr object.
-	virtual void init() override;
+	void init() override;
 	
 	//! Draw user labels.
-	virtual void draw(StelCore* core) override;
+	void draw(StelCore* core) override;
 	
 	//! Update time-dependent parts of the module.
-	virtual void update(double deltaTime) override;
+	void update(double deltaTime) override;
 
 	//! Defines the order in which the various modules are drawn.
-	virtual double getCallOrder(StelModuleActionName actionName) const override;
+	double getCallOrder(StelModuleActionName actionName) const override;
 
 public slots:
 	//! Create a label which is attached to a StelObject.

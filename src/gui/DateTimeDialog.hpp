@@ -37,14 +37,14 @@ public:
 	bool makeValidAndApply(int y, int m, int d, int h, int min, int s);
 	bool applyJD(double jday);
 public slots:
-	virtual void retranslate() override;
-	virtual void close() override;
+	void retranslate() override;
+	void close() override;
 	//! update the editing display with new JD.
 	void setDateTime(double newJd);
 
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots
-	virtual void createDialogContent() override;
+	void createDialogContent() override;
 	void connectSpinnerEvents() const;
 	void disconnectSpinnerEvents()const;
 

@@ -42,21 +42,21 @@ class MarkerMgr : public StelModule
 public:
 	//! Construct a MarkerMgr object.
 	MarkerMgr();
-	virtual ~MarkerMgr() override;
+	~MarkerMgr() override;
  
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
 	//! Initialize the MarkerMgr object.
-	virtual void init() override;
+	void init() override;
 	
 	//! Draw user labels.
-	virtual void draw(StelCore* core) override;
+	void draw(StelCore* core) override;
 	
 	//! Update time-dependent parts of the module.
-	virtual void update(double deltaTime) override;
+	void update(double deltaTime) override;
 
 	//! Defines the order in which the various modules are drawn.
-	virtual double getCallOrder(StelModuleActionName actionName) const override;
+	double getCallOrder(StelModuleActionName actionName) const override;
 
 public slots:
 	//! Create a marker which is attached to a StelObject.

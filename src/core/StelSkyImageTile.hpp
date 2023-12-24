@@ -99,12 +99,12 @@ public:
 	QString getAbsoluteImageURI() const {return absoluteImageURI;}
 
 	//! Return an HTML description of the image to be displayed in the GUI.
-	virtual QString getLayerDescriptionHtml() const override {return htmlDescription;}
+	QString getLayerDescriptionHtml() const override {return htmlDescription;}
 
 protected:
 	//! Reimplement the abstract method.
 	//! Load the tile from a valid QVariantMap.
-	virtual void loadFromQVariantMap(const QVariantMap& map) override;
+	void loadFromQVariantMap(const QVariantMap& map) override;
 
 	//! The credits of the server where this data come from
 	ServerCredits serverCredits;

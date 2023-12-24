@@ -54,17 +54,17 @@ private:
 	//! @param core the StelCore object
 	//! @param flags a set of InfoStringGroup items to include in the return value.
 	//! @return a QString a description of the constellation.
-	virtual QString getInfoString(const StelCore*, const InfoStringGroup& flags) const override;
+	QString getInfoString(const StelCore*, const InfoStringGroup& flags) const override;
 
 	//! Get the module/object type string.
 	//! @return "Asterism"
-	virtual QString getType() const override {return ASTERISM_TYPE;}
-	virtual QString getObjectType() const override {return N_("asterism"); }
-	virtual QString getObjectTypeI18n() const override {return q_(getObjectType()); }
-	virtual QString getID() const override { return abbreviation; }
+	QString getType() const override {return ASTERISM_TYPE;}
+	QString getObjectType() const override {return N_("asterism"); }
+	QString getObjectTypeI18n() const override {return q_(getObjectType()); }
+	QString getID() const override { return abbreviation; }
 
 	//! observer centered J2000 coordinates.
-	virtual Vec3d getJ2000EquatorialPos(const StelCore*) const override {return XYZname;}
+	Vec3d getJ2000EquatorialPos(const StelCore*) const override {return XYZname;}
 
 	//! @param record string containing the following whitespace
 	//! separated fields: abbreviation - a three character abbreviation

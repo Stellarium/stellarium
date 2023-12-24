@@ -91,15 +91,15 @@ public:
 	//! A pre-defined "shortest useful" set of specifiers for the getInfoString flags argument to getInfoString
 	static constexpr InfoStringGroup ShortInfo = static_cast<InfoStringGroup>(Name|CatalogNumber|Magnitude|RaDecJ2000);
 
-	virtual ~StelObject() override {}
+	~StelObject() override {}
 
 	//! Default implementation of the getRegion method.
 	//! Return the spatial region of the object.
-	virtual SphericalRegionP getRegion() const override {return SphericalRegionP(new SphericalPoint(getJ2000EquatorialPos(Q_NULLPTR)));}
+	SphericalRegionP getRegion() const override {return SphericalRegionP(new SphericalPoint(getJ2000EquatorialPos(Q_NULLPTR)));}
 
 	//! Default implementation of the getPointInRegion method.
 	//! Return the J2000 Equatorial Position of the object.
-	virtual Vec3d getPointInRegion() const override {return getJ2000EquatorialPos(Q_NULLPTR);}
+	Vec3d getPointInRegion() const override {return getJ2000EquatorialPos(Q_NULLPTR);}
 	
 	//! Write I18n information about the object in QString.
 	//! @param core the StelCore object to use

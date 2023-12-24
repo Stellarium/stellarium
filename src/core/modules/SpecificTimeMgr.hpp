@@ -49,14 +49,14 @@ public:
 	Q_ENUM(Solstice)
 
 	SpecificTimeMgr();
-	virtual ~SpecificTimeMgr() override;
+	~SpecificTimeMgr() override;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
-	virtual void init() override;
-	virtual void deinit() override;
-	//virtual void draw(StelCore* core) override;
-	//virtual double getCallOrder(StelModuleActionName actionName) const override;
+	void init() override;
+	void deinit() override;
+	//void draw(StelCore* core) override;
+	//double getCallOrder(StelModuleActionName actionName) const override;
 
 	//! Get twilight altitude [degrees]
 	double getTwilightAltitude() const {return twilightAltitude;}

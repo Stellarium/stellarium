@@ -61,14 +61,14 @@ public:
 	//was not designed to handle different types of objects.
 	// \todo Decide if this is going to be "MinorPlanet" or "Asteroid"
 	//virtual QString getType() const {return "MinorPlanet";}
-	virtual float getVMagnitude(const StelCore* core) const override;
+	float getVMagnitude(const StelCore* core) const override;
 	//! sets the nameI18 property with the appropriate translation.
 	//! Function overridden to handle the problem with name conflicts.
-	virtual void translateName(const StelTranslator& trans) override;
-	virtual QString getEnglishName(void) const override;
-	virtual QString getNameI18n(void) const override;
+	void translateName(const StelTranslator& trans) override;
+	QString getEnglishName(void) const override;
+	QString getNameI18n(void) const override;
 	//! gets an IAU provisional designation.
-	virtual QString getIAUDesignation() const override { return iauDesignationText; }
+	QString getIAUDesignation() const override { return iauDesignationText; }
 
 	//! set the minor planet's number, if any.
 	//! The number should be specified as an additional parameter, as
@@ -109,16 +109,16 @@ public:
 	QStringList getExtraDesignations() const { return extraDesignations; }
 
 	//! get sidereal period for minor planet
-	virtual double getSiderealPeriod() const override;
+	double getSiderealPeriod() const override;
 
 protected:
 	// components for Planet::getInfoString() that are overridden here:
-	virtual QString getInfoStringName(const StelCore *core, const InfoStringGroup& flags) const override;
-	virtual QString getInfoStringExtraMag(const StelCore *core, const InfoStringGroup& flags) const override;
+	QString getInfoStringName(const StelCore *core, const InfoStringGroup& flags) const override;
+	QString getInfoStringExtraMag(const StelCore *core, const InfoStringGroup& flags) const override;
 	//! Any flag=Extra information to be displayed at the end
-	virtual QString getInfoStringExtra(const StelCore *core, const InfoStringGroup& flags) const override;
+	QString getInfoStringExtra(const StelCore *core, const InfoStringGroup& flags) const override;
 
-	virtual QString getDiscoveryCircumstances() const override;
+	QString getDiscoveryCircumstances() const override;
 
 private:
 	int minorPlanetNumber;

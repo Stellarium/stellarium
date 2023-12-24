@@ -75,32 +75,32 @@ public:
 	QVariantMap getMap(void) const;
 
 	//! Get the type of object
-	virtual QString getType(void) const override
+	QString getType(void) const override
 	{
 		return EXOPLANET_TYPE;
 	}
 
 	//! Get the type of object
-	virtual QString getObjectType(void) const override
+	QString getObjectType(void) const override
 	{
 		return N_("planetary system");
 	}
-	virtual QString getObjectTypeI18n(void) const override
+	QString getObjectTypeI18n(void) const override
 	{
 		return q_(getObjectType());
 	}
 
-	virtual QString getID(void) const override
+	QString getID(void) const override
 	{
 		return getDesignation();
 	}
 
-	virtual float getSelectPriority(const StelCore* core) const override;
+	float getSelectPriority(const StelCore* core) const override;
 
 	//! Get an HTML string to describe the object
 	//! @param core A pointer to the core
 	//! @flags a set of flags with information types to include.
-	virtual QString getInfoString(const StelCore* core, const InfoStringGroup& flags) const override;
+	QString getInfoString(const StelCore* core, const InfoStringGroup& flags) const override;
 	//! Return a map like StelObject, but with a few extra tags also available in getMap().
 	//! - distance = distance in pc
 	//! - stype = Spectral type of star
@@ -109,15 +109,15 @@ public:
 	//! - sradius = Radius of star in Rsun
 	//! - effectiveTemp = Effective temperature of star in K
 	//! - hasHabitablePlanets (true/false)
-	virtual QVariantMap getInfoMap(const StelCore *core) const override;
-	virtual Vec3f getInfoColor(void) const override;
-	virtual Vec3d getJ2000EquatorialPos(const StelCore* core) const override;
+	QVariantMap getInfoMap(const StelCore *core) const override;
+	Vec3f getInfoColor(void) const override;
+	Vec3d getJ2000EquatorialPos(const StelCore* core) const override;
 	//! Get the visual magnitude
-	virtual float getVMagnitude(const StelCore* core) const override;
+	float getVMagnitude(const StelCore* core) const override;
 	//! Get the localized name of host star
-	virtual QString getNameI18n(void) const override;
+	QString getNameI18n(void) const override;
 	//! Get the english name
-	virtual QString getEnglishName(void) const override;
+	QString getEnglishName(void) const override;
 
 	bool isVMagnitudeDefined() const;
 

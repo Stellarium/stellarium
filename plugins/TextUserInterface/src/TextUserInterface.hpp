@@ -39,14 +39,14 @@ class TextUserInterface : public StelModule
 	Q_PROPERTY(bool tuiObjInfo  READ getTuiObjInfo  WRITE setTuiObjInfo  NOTIFY flagShowObjInfoChanged)
 public:
 	TextUserInterface();
-	virtual ~TextUserInterface() override;
+	~TextUserInterface() override;
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
-	virtual void init() override;
-	virtual void draw(StelCore* core) override;
-	virtual double getCallOrder(StelModuleActionName actionName) const override;
-	virtual void handleKeys(class QKeyEvent* event) override;
+	void init() override;
+	void draw(StelCore* core) override;
+	double getCallOrder(StelModuleActionName actionName) const override;
+	void handleKeys(class QKeyEvent* event) override;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods specific to TextUserInterface
@@ -111,9 +111,9 @@ class TextUserInterfaceStelPluginInterface : public QObject, public StelPluginIn
 	Q_PLUGIN_METADATA(IID StelPluginInterface_iid)
 	Q_INTERFACES(StelPluginInterface)
 public:
-	virtual StelModule* getStelModule() const override;
-	virtual StelPluginInfo getPluginInfo() const override;
-	//virtual QObjectList getExtensionList() const override { return QObjectList(); }
+	StelModule* getStelModule() const override;
+	StelPluginInfo getPluginInfo() const override;
+	//QObjectList getExtensionList() const override { return QObjectList(); }
 };
 
 #endif /* TEXTUSERINTERFACE_HPP*/

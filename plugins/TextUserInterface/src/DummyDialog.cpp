@@ -41,7 +41,7 @@ class DummyCustomProxy : public QGraphicsProxyWidget
 		}
 
 	protected:
-		virtual bool event(QEvent* event) override
+		bool event(QEvent* event) override
 		{
 			if (event->type()==QEvent::WindowDeactivate)
 			{
@@ -55,7 +55,7 @@ class DummyCustomProxy : public QGraphicsProxyWidget
 		}
 		
 		// Avoid blocking the program when hovering over an inactive window
-		virtual bool sceneEvent(QEvent* event) override
+		bool sceneEvent(QEvent* event) override
 		{
 			if (!(isActiveWindow() || event->type()==QEvent::WindowActivate || event->type()==QEvent::GraphicsSceneMousePress))
 			{

@@ -108,7 +108,7 @@ public:
 		qDebug()<<"StelGLWidget destroyed";
 	}
 
-	virtual void initializeGL() override
+	void initializeGL() override
 	{
 		if(initialized)
 		{
@@ -141,7 +141,7 @@ public:
 	}
 
 protected:
-	virtual void paintGL() override
+	void paintGL() override
 	{
 		//this is actually never called because the
 		//QGraphicsView intercepts the paint event
@@ -149,7 +149,7 @@ protected:
 		//or as a QGraphicsItem
 		qDebug()<<"paintGL";
 	}
-	virtual void resizeGL(int w, int h) override
+	void resizeGL(int w, int h) override
 	{
 		//we probably can ignore this method,
 		//it seems it is also never called
@@ -218,7 +218,7 @@ public:
 		vbo.release();
 	}
 
-	virtual ~NightModeGraphicsEffect() override
+	~NightModeGraphicsEffect() override
 	{
 		// NOTE: Why Q_ASSERT is here?
 		//Q_ASSERT(parent->glContext() == QOpenGLContext::currentContext());
@@ -226,7 +226,7 @@ public:
 		delete fbo;
 	}
 protected:
-	virtual void draw(QPainter* painter) override
+	void draw(QPainter* painter) override
 	{
 		Q_ASSERT(parent->glContext() == QOpenGLContext::currentContext());
 		QOpenGLFunctions* gl = QOpenGLContext::currentContext()->functions();
@@ -387,7 +387,7 @@ public:
 
 
 protected:
-	virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override
+	void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override
 	{
 		Q_UNUSED(option)
 		Q_UNUSED(widget)
@@ -417,7 +417,7 @@ protected:
 		mainView->drawEnded();
 	}
 
-	virtual QRectF boundingRect() const override
+	QRectF boundingRect() const override
 	{
 		return rect;
 	}

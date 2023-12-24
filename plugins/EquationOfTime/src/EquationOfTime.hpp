@@ -71,13 +71,13 @@ class EquationOfTime : public StelModule
 
 public:
 	EquationOfTime();
-	virtual ~EquationOfTime() override;
+	~EquationOfTime() override;
 
-	virtual void init() override;
-	virtual void deinit() override;
-	virtual void draw(StelCore *core) override;
-	virtual double getCallOrder(StelModuleActionName actionName) const override;
-	virtual bool configureGui(bool show) override;
+	void init() override;
+	void deinit() override;
+	void draw(StelCore *core) override;
+	double getCallOrder(StelModuleActionName actionName) const override;
+	bool configureGui(bool show) override;
 
 	//! Set up the plugin with default values.  This means clearing out the EquationOfTime section in the
 	//! main config.ini (if one already exists), and populating it with default values.
@@ -179,9 +179,9 @@ class EquationOfTimeStelPluginInterface : public QObject, public StelPluginInter
 	Q_PLUGIN_METADATA(IID StelPluginInterface_iid)
 	Q_INTERFACES(StelPluginInterface)
 public:
-	virtual StelModule* getStelModule() const override;
-	virtual StelPluginInfo getPluginInfo() const override;
-	//virtual QObjectList getExtensionList() const override { return QObjectList(); }
+	StelModule* getStelModule() const override;
+	StelPluginInfo getPluginInfo() const override;
+	//QObjectList getExtensionList() const override { return QObjectList(); }
 };
 
 #endif /* EQUATIONOFTIME_HPP */

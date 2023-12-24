@@ -145,7 +145,7 @@ class SolarSystem : public StelObjectModule
 
 public:
 	SolarSystem();
-	virtual ~SolarSystem() override;
+	~SolarSystem() override;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
@@ -154,22 +154,22 @@ public:
 	//! - loading planetary body orbital and model data from data/ssystem.ini
 	//! - perform initial planet position calculation
 	//! - set display options from application settings
-	virtual void init() override;
+	void init() override;
 
-	virtual void deinit() override;
+	void deinit() override;
 	
 	//! Draw SolarSystem objects (planets).
 	//! @param core The StelCore object.
 	//! @return The maximum squared distance in pixels that any SolarSystem object
 	//! has travelled since the last update.
-	virtual void draw(StelCore *core) override;
+	void draw(StelCore *core) override;
 
 	//! Update time-varying components.
 	//! This includes planet motion trails.
-	virtual void update(double deltaTime) override;
+	void update(double deltaTime) override;
 
 	//! Used to determine what order to draw the various StelModules.
-	virtual double getCallOrder(StelModuleActionName actionName) const override;
+	double getCallOrder(StelModuleActionName actionName) const override;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in StelObjectModule class
@@ -180,19 +180,19 @@ public:
 	//! @param core the core object
 	//! @return QList of StelObjectP (pointers) containing all SolarSystem objects
 	//! found in the specified area. This vector is not sorted by distance from v.
-	virtual QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const override;
+	QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const override;
 
 	//! Search for a SolarSystem object based on the localised name.
 	//! @param nameI18n the case in-sensitive translated planet name.
 	//! @return a StelObjectP for the object if found, else Q_NULLPTR.
-	virtual StelObjectP searchByNameI18n(const QString& nameI18n) const override;
+	StelObjectP searchByNameI18n(const QString& nameI18n) const override;
 
 	//! Search for a SolarSystem object based on the English name.
 	//! @param name the case in-sensitive English planet name.
 	//! @return a StelObjectP for the object if found, else Q_NULLPTR.
-	virtual StelObjectP searchByName(const QString& name) const override;
+	StelObjectP searchByName(const QString& name) const override;
 
-	virtual StelObjectP searchByID(const QString &id) const override
+	StelObjectP searchByID(const QString &id) const override
 	{
 		return searchByName(id);
 	}
@@ -202,11 +202,11 @@ public:
 	//! @param maxNbItem the maximum number of returned object names
 	//! @param useStartOfWords the autofill mode for returned objects names
 	//! @return a list of matching object name by order of relevance, or an empty list if nothing match
-	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const override;
-	virtual QStringList listAllObjects(bool inEnglish) const override;
-	virtual QStringList listAllObjectsByType(const QString& objType, bool inEnglish) const override;
-	virtual QString getName() const override { return "Solar System"; }
-	virtual QString getStelObjectType() const override { return Planet::PLANET_TYPE; }
+	QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const override;
+	QStringList listAllObjects(bool inEnglish) const override;
+	QStringList listAllObjectsByType(const QString& objType, bool inEnglish) const override;
+	QString getName() const override { return "Solar System"; }
+	QString getStelObjectType() const override { return Planet::PLANET_TYPE; }
 
 public slots:
 	///////////////////////////////////////////////////////////////////////////

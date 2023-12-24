@@ -90,15 +90,15 @@ public:
 	};
 
 	Quasars();
-	virtual ~Quasars() override;
+	~Quasars() override;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
-	virtual void init() override;
-	virtual void deinit() override;
-	virtual void draw(StelCore* core) override;
+	void init() override;
+	void deinit() override;
+	void draw(StelCore* core) override;
 	virtual void drawPointer(StelCore* core, StelPainter& painter);
-	virtual double getCallOrder(StelModuleActionName actionName) const override;
+	double getCallOrder(StelModuleActionName actionName) const override;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in StelObjectModule class
@@ -107,19 +107,19 @@ public:
 	//! @param limitFov the field of view around the position v in which to search for quasars.
 	//! @param core the StelCore to use for computations.
 	//! @return a list containing the quasars located inside the limitFov circle around position v.
-	virtual QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const override;
+	QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const override;
 
 	//! Return the matching Quasar object's pointer if exists or Q_NULLPTR.
 	//! @param nameI18n The case in-sensitive localized quasar name
-	virtual StelObjectP searchByNameI18n(const QString& nameI18n) const override;
+	StelObjectP searchByNameI18n(const QString& nameI18n) const override;
 
 	//! Return the matching Quasar if exists or Q_NULLPTR.
 	//! @param name The case in-sensitive english quasar name
-	virtual StelObjectP searchByName(const QString& name) const override;
+	StelObjectP searchByName(const QString& name) const override;
 
 	//! Return the matching Quasar if exists or Q_NULLPTR.
 	//! @param id The quasar id
-	virtual StelObjectP searchByID(const QString &id) const override
+	StelObjectP searchByID(const QString &id) const override
 	{
 		return qSharedPointerCast<StelObject>(getByID(id));
 	}
@@ -129,20 +129,20 @@ public:
 	//! @param maxNbItem the maximum number of returned object names
 	//! @param useStartOfWords the autofill mode for returned objects names
 	//! @return a list of matching object name by order of relevance, or an empty list if nothing match
-	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const override;
+	QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const override;
 
-	virtual QStringList listAllObjects(bool inEnglish) const override;
+	QStringList listAllObjects(bool inEnglish) const override;
 
-	virtual QString getName() const override { return "Quasars"; }
+	QString getName() const override { return "Quasars"; }
 
-	virtual QString getStelObjectType() const override { return Quasar::QUASAR_TYPE; }
+	QString getStelObjectType() const override { return Quasar::QUASAR_TYPE; }
 
 	//! get a Quasar object by identifier
 	QuasarP getByID(const QString& id) const;
 
 	//! Implement this to tell the main Stellarium GUI that there is a GUI element to configure this
 	//! plugin.
-	virtual bool configureGui(bool show=true) override;
+	bool configureGui(bool show=true) override;
 
 	//! Set up the plugin with default values.  This means clearing out the Quasars section in the
 	//! main config.ini (if one already exists), and populating it with default values.  It also
@@ -338,9 +338,9 @@ class QuasarsStelPluginInterface : public QObject, public StelPluginInterface
 	Q_PLUGIN_METADATA(IID StelPluginInterface_iid)
 	Q_INTERFACES(StelPluginInterface)
 public:
-	virtual StelModule* getStelModule() const override;
-	virtual StelPluginInfo getPluginInfo() const override;
-	//virtual QObjectList getExtensionList() const override { return QObjectList(); }
+	StelModule* getStelModule() const override;
+	StelPluginInfo getPluginInfo() const override;
+	//QObjectList getExtensionList() const override { return QObjectList(); }
 };
 
 #endif /* QUASARS_HPP */

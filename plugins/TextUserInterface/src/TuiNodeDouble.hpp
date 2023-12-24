@@ -48,8 +48,8 @@ public:
 	//! shares the same parent)
 	TuiNodeDouble(const QString& text, QObject* receiver, const char* method, double defValue, 
 		      double min, double max, double inc, TuiNode* parent=Q_NULLPTR, TuiNode* prev=Q_NULLPTR);
-	virtual TuiNodeResponse handleEditingKey(int key) override;
-	virtual QString getDisplayText() const override;
+	TuiNodeResponse handleEditingKey(int key) override;
+	QString getDisplayText() const override;
 
 signals:
 	void setValue(double b);

@@ -44,11 +44,11 @@ class StelObjectMgr : public StelModule
 
 public:
 	StelObjectMgr();
-	virtual ~StelObjectMgr() override;
+	~StelObjectMgr() override;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
-	virtual void init() override;
+	void init() override;
 
 	///////////////////////////////////////////////////////////////////////////
 	//! Add a new StelObject manager into the list of supported modules.

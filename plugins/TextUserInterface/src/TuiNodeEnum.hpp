@@ -42,8 +42,8 @@ public:
 	//! @param prev the previous node in the current menu (typically shares the same parent)
 	TuiNodeEnum(const QString& text, QObject* receiver, const char* method, QStringList items, 
 		    QString defValue, TuiNode* parent=Q_NULLPTR, TuiNode* prev=Q_NULLPTR);
-	virtual TuiNodeResponse handleEditingKey(int key) override;
-	virtual QString getDisplayText() const override;
+	TuiNodeResponse handleEditingKey(int key) override;
+	QString getDisplayText() const override;
 
 signals:
 	void setValue(QString s);

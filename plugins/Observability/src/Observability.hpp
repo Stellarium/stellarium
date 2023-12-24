@@ -62,13 +62,13 @@ class Observability : public StelModule
 		   )
 public:
 	Observability();
-	virtual ~Observability() override;
-	virtual void init() override;
-	virtual void draw(StelCore* core) override;
-	virtual double getCallOrder(StelModuleActionName actionName) const override;
+	~Observability() override;
+	void init() override;
+	void draw(StelCore* core) override;
+	double getCallOrder(StelModuleActionName actionName) const override;
 
 	//! Implement this to tell the main Stellarium GUI that there is a GUI element to configure this plugin.
-	virtual bool configureGui(bool show=true) override;
+	bool configureGui(bool show=true) override;
 
 
 	//! Read (or re-read) settings from the main config file.
@@ -447,9 +447,9 @@ class ObservabilityStelPluginInterface : public QObject, public StelPluginInterf
        Q_PLUGIN_METADATA(IID StelPluginInterface_iid)
        Q_INTERFACES(StelPluginInterface)
 public:
-       virtual StelModule* getStelModule() const override;
-       virtual StelPluginInfo getPluginInfo() const override;
-       //virtual QObjectList getExtensionList() const override { return QObjectList(); }
+       StelModule* getStelModule() const override;
+       StelPluginInfo getPluginInfo() const override;
+       //QObjectList getExtensionList() const override { return QObjectList(); }
 };
 
 #endif /*OBSERVABILITY_HPP*/

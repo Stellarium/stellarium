@@ -131,43 +131,43 @@ public:
 	Q_ENUM(PlanetCoordinateOrientation)
 
 	NomenclatureItem(PlanetP nPlanet, int nId, const QString& nName, const QString& nContext, const QString& nOrigin, NomenclatureItemType nItemType, double nLatitude, double nLongitude, double nSize);
-	virtual ~NomenclatureItem() override;
+	~NomenclatureItem() override;
 
 	//! Get the type of object
-	virtual QString getType(void) const override
+	QString getType(void) const override
 	{
 		return NOMENCLATURE_TYPE;
 	}
-	virtual QString getObjectType(void) const override
+	QString getObjectType(void) const override
 	{
 		return getNomenclatureTypeLatinString(nType);
 	}
-	virtual QString getObjectTypeI18n(void) const override
+	QString getObjectTypeI18n(void) const override
 	{
 		return getNomenclatureTypeString(nType);
 	}
 
-	virtual QString getID(void) const override
+	QString getID(void) const override
 	{
 		return QString("%1").arg(identificator);
 	}
 
-	virtual float getSelectPriority(const StelCore* core) const override;
+	float getSelectPriority(const StelCore* core) const override;
 
 	//! Get an HTML string to describe the object
 	//! @param core A pointer to the core
 	//! @flags a set of flags with information types to include.
-	virtual QString getInfoString(const StelCore* core, const InfoStringGroup& flags) const override;
-	virtual Vec3f getInfoColor(void) const override;
-	virtual Vec3d getJ2000EquatorialPos(const StelCore*) const override;
+	QString getInfoString(const StelCore* core, const InfoStringGroup& flags) const override;
+	Vec3f getInfoColor(void) const override;
+	Vec3d getJ2000EquatorialPos(const StelCore*) const override;
 	//! Return the angular radius of a circle containing the feature as seen from the observer
 	//! with the circle center assumed to be at getJ2000EquatorialPos().
 	//! @return radius in degree. This value is half of the apparent angular size of the object, and is independent of the current FOV.
-	virtual double getAngularRadius(const StelCore* core) const override;
+	double getAngularRadius(const StelCore* core) const override;
 	//! Get the localized name of nomenclature item.
-	virtual QString getNameI18n(void) const override;
+	QString getNameI18n(void) const override;
 	//! Get the english name of nomenclature item.
-	virtual QString getEnglishName(void) const override;
+	QString getEnglishName(void) const override;
 
 	///////////////////////////////////////////////////////////////////////////
 	//! Translate feature name using the passed translator
@@ -181,7 +181,7 @@ public:
 	//!       *  +100. for circumpolar objects. Rise and set give lower culmination times.
 	//!       *  -100. for objects never rising. Rise and set give transit times.
 	//!       * -1000. is used as "invalid" value. The result should then not be used.
-	virtual Vec4d getRTSTime(const StelCore* core, const double altitude=0.) const override;
+	Vec4d getRTSTime(const StelCore* core, const double altitude=0.) const override;
 
 	void draw(StelCore* core, StelPainter *painter);
 	NomenclatureItemType getNomenclatureType() const { return nType;}

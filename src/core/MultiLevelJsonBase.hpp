@@ -53,7 +53,7 @@ public:
 	~MultiLevelJsonBase() override;
 
 	//! Return the short name for this image to be used in the loading bar.
-	virtual QString getShortName() const override {return shortName;}
+	QString getShortName() const override {return shortName;}
 
 	//! Return true if an error occurred while loading the data.
 	bool hasErrorOccured() const {return errorOccured;}

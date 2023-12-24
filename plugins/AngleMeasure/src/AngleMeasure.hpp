@@ -87,18 +87,18 @@ class AngleMeasure : public StelModule
 	Q_PROPERTY(Vec3f horizontalLineColor             READ getHorizontalLineColor     WRITE setHorizontalLineColor       NOTIFY horizontalLineColorChanged )
 public:
 	AngleMeasure();
-	virtual ~AngleMeasure() override;
+	~AngleMeasure() override;
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
-	virtual void init() override;
-	virtual void update(double deltaTime) override;
-	virtual void draw(StelCore* core) override;
-	virtual double getCallOrder(StelModuleActionName actionName) const override;
-	virtual void handleKeys(class QKeyEvent* event) override;
-	virtual void handleMouseClicks(class QMouseEvent* event) override;
-	virtual bool handleMouseMoves(int x, int y, Qt::MouseButtons b) override;
-	virtual bool configureGui(bool show=true) override;
+	void init() override;
+	void update(double deltaTime) override;
+	void draw(StelCore* core) override;
+	double getCallOrder(StelModuleActionName actionName) const override;
+	void handleKeys(class QKeyEvent* event) override;
+	void handleMouseClicks(class QMouseEvent* event) override;
+	bool handleMouseMoves(int x, int y, Qt::MouseButtons b) override;
+	bool configureGui(bool show=true) override;
 
 	//! Restore the plug-in's settings to the default state.
 	//! Replace the plug-in's settings in Stellarium's configuration file
@@ -235,9 +235,9 @@ class AngleMeasureStelPluginInterface : public QObject, public StelPluginInterfa
 	Q_PLUGIN_METADATA(IID StelPluginInterface_iid)
 	Q_INTERFACES(StelPluginInterface)
 public:
-	virtual StelModule* getStelModule() const override;
-	virtual StelPluginInfo getPluginInfo() const override;
-	//virtual QObjectList getExtensionList() const override { return QObjectList(); }
+	StelModule* getStelModule() const override;
+	StelPluginInfo getPluginInfo() const override;
+	//QObjectList getExtensionList() const override { return QObjectList(); }
 };
 
 #endif /*ANGLEMEASURE_HPP*/

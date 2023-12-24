@@ -61,27 +61,27 @@ class SpecialMarkersMgr : public StelModule
 
 public:
 	SpecialMarkersMgr();
-	virtual ~SpecialMarkersMgr() override;
+	~SpecialMarkersMgr() override;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
 	//! Initialize the SpecialMarkersMgr. This process checks the values in the
 	//! application settings, and according to the settings there
 	//! sets the visibility of type of the special markers.
-	virtual void init() override;
+	void init() override;
 
 	//! Get the module ID, returns "SpecialMarkersMgr".
 	virtual QString getModuleID() const {return "SpecialMarkersMgr";}
 
 	//! Draw the special markers.
-	virtual void draw(StelCore* core) override;
+	void draw(StelCore* core) override;
 
 	//! Update time-dependent features.
 	//! Used to control fading when turning on and off the special markers.
-	virtual void update(double deltaTime) override;
+	void update(double deltaTime) override;
 
 	//! Used to determine the order in which the various modules are drawn.
-	virtual double getCallOrder(StelModuleActionName actionName) const override;
+	double getCallOrder(StelModuleActionName actionName) const override;
 
 	///////////////////////////////////////////////////////////////////////////////////////
 	// Setter and getters

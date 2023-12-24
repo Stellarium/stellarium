@@ -37,15 +37,15 @@ class HighlightMgr : public StelObjectModule
 
 public:
 	HighlightMgr();
-	virtual ~HighlightMgr() override;
+	~HighlightMgr() override;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
-	virtual void init() override;
-	virtual void deinit() override;
-	virtual void draw(StelCore* core) override;
+	void init() override;
+	void deinit() override;
+	void draw(StelCore* core) override;
 	//virtual void drawPointer(StelCore* core, StelPainter& painter);
-	virtual double getCallOrder(StelModuleActionName actionName) const override;
+	double getCallOrder(StelModuleActionName actionName) const override;
 
 	void drawHighlights(StelCore* core, StelPainter& painter);
 
@@ -58,34 +58,34 @@ public:
 	//! @param limitFov angular diameter of the searching zone in degree.
 	//! @param core the core instance to use.
 	//! @return the list of all the displayed objects contained in the defined zone.
-	virtual QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const override;
+	QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const override;
 
 	//! Find a Highlight by name.
 	//! @param nameI18n The translated case in-sensitive name for the current sky locale.
 	//! @return Q_NULLPTR
 	//! @todo return The matching Highlight if exists or Q_NULLPTR if not found.
-	virtual StelObjectP searchByNameI18n(const QString& nameI18n) const override;
+	StelObjectP searchByNameI18n(const QString& nameI18n) const override;
 
 	//! Find a Highlight by name.
 	//! @param name The case in-sensitive standard program name
 	//! @return Q_NULLPTR
 	//! @todo return the matching Highlight object's pointer if exists or Q_NULLPTR if not found.
-	virtual StelObjectP searchByName(const QString& name) const override;
+	StelObjectP searchByName(const QString& name) const override;
 
 	//! @param id the english ID
 	//! @return Q_NULLPTR
 	//! @todo return The matching Highlight if exists or Q_NULLPTR if not found.
-	virtual StelObjectP searchByID(const QString &id) const override;
+	StelObjectP searchByID(const QString &id) const override;
 
 	//! Find and return the list of at most maxNbItem objects auto-completing the passed object name.
 	//! @param objPrefix the case insensitive first letters of the searched object
 	//! @param maxNbItem the maximum number of returned object names
 	//! @param useStartOfWords the autofill mode for returned objects names
 	//! @return a list of matching object name by order of relevance, or an empty list if nothing match
-	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const override;
-	virtual QStringList listAllObjects(bool inEnglish) const override;
-	virtual QString getName() const override { return "Highlights"; }
-	virtual QString getStelObjectType() const override { return QString(); }
+	QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const override;
+	QStringList listAllObjects(bool inEnglish) const override;
+	QString getName() const override { return "Highlights"; }
+	QString getStelObjectType() const override { return QString(); }
 
 	//! Fill the list highlight markers
 	//! @param list - list of coordinates of the highlights (J2000.0 frame)

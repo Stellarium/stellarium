@@ -66,7 +66,7 @@ class JsonLoadThread : public QThread
 	public:
 		JsonLoadThread(MultiLevelJsonBase* atile, QByteArray content, bool aqZcompressed=false, bool agzCompressed=false) : QThread(static_cast<QObject*>(atile)),
 			tile(atile), data(content), qZcompressed(aqZcompressed), gzCompressed(agzCompressed){}
-		virtual void run() override;
+		void run() override;
 	private:
 		MultiLevelJsonBase* tile;
 		QByteArray data;

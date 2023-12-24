@@ -64,8 +64,8 @@ public:
 	~AngleSpinBox() override;
 
 	// QAbstractSpinBox virtual members
-	virtual void stepBy(int steps) override;
-	virtual QValidator::State validate(QString& input, int& pos) const override;
+	void stepBy(int steps) override;
+	QValidator::State validate(QString& input, int& pos) const override;
 
 	//! Get the angle held in the AngleSpinBox
 	//! @return the angle in radians
@@ -120,7 +120,7 @@ public:
 	
 public slots:
 	//! Set the value to default 0 angle.
-	virtual void clear() override;
+	void clear() override;
 	
 	//! Set the value of the spin box in radians.
 	//! @param radians the value to set, in radians.
@@ -137,7 +137,7 @@ signals:
 	void valueChangedRad(double);
 
 protected:
-	virtual StepEnabled stepEnabled() const override;
+	StepEnabled stepEnabled() const override;
 
 private slots:
 	//! Updates radAngle (internal representation of the angle) and calls formatText

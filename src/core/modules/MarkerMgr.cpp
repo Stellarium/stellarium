@@ -103,12 +103,12 @@ public:
 	//! @param style determines type of marker
 	SkyMarker(Vec3d pos, const float& size, const Vec3f& color, SkyMarker::MarkerType style=Cross, const bool withAberration=true);
 
-	virtual ~SkyMarker() override;
+	~SkyMarker() override;
 
 	//! Draw the marker on the sky
 	//! @param core the StelCore object
 	//! @param sPainter the StelPainter to use for drawing operations
-	virtual bool draw(StelCore* core, StelPainter& sPainter) override;
+	bool draw(StelCore* core, StelPainter& sPainter) override;
 
 	static SkyMarker::MarkerType stringToMarkerType(const QString& s);
 
@@ -131,12 +131,12 @@ public:
 	//! @param color the color for the label
 	//! @param style determines type of marker
 	HorizonMarker(const float az, const float alt, const float& size, const Vec3f& color, SkyMarker::MarkerType style=SkyMarker::Cross);
-	virtual ~HorizonMarker() override;
+	~HorizonMarker() override;
 
 	//! draw the marker on the screen
 	//! @param core the StelCore object
 	//! @param sPainter the StelPainter to use for drawing operations
-	virtual bool draw(StelCore* core, StelPainter& sPainter) override;
+	bool draw(StelCore* core, StelPainter& sPainter) override;
 private:
 	StelTextureSP markerTexture;
 	SkyMarker::MarkerType markerType;
