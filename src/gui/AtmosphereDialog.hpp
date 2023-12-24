@@ -32,14 +32,14 @@ class AtmosphereDialog : public StelDialog
 
 public:
 	AtmosphereDialog();
-	virtual ~AtmosphereDialog() Q_DECL_OVERRIDE;
+	virtual ~AtmosphereDialog() override;
 
 public slots:
-	virtual void retranslate() Q_DECL_OVERRIDE;
+	virtual void retranslate() override;
 
 protected:
         //! Initialize the dialog widgets and connect the signals/slots.
-	virtual void createDialogContent() Q_DECL_OVERRIDE;
+	virtual void createDialogContent() override;
         Ui_atmosphereDialogForm *ui;
 
 private:
@@ -52,7 +52,7 @@ private:
 	void browsePathToModel();
 	void setCurrentValues();
 	void clearStatus();
-	bool eventFilter(QObject* object, QEvent* event) Q_DECL_OVERRIDE;
+	bool eventFilter(QObject* object, QEvent* event) override;
 
 private slots:
 	void setStandardAtmosphere();

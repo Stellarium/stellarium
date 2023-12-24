@@ -46,7 +46,7 @@ public:
 
 	//! @param id The official designation for a supernova, e.g. "SN 1054A"
 	Supernova(const QVariantMap& map);
-	~Supernova() Q_DECL_OVERRIDE;
+	~Supernova() override;
 
 	//! Get a QVariantMap which describes the supernova.  Could be used to create a duplicate.
 	//! - designation
@@ -59,21 +59,21 @@ public:
 	//! - distance
 	QVariantMap getMap(void) const;
 
-	virtual QString getType(void) const Q_DECL_OVERRIDE
+	virtual QString getType(void) const override
 	{
 		return SUPERNOVA_TYPE;
 	}
 
-	virtual QString getObjectType(void) const Q_DECL_OVERRIDE
+	virtual QString getObjectType(void) const override
 	{
 		return N_("supernova");
 	}
-	virtual QString getObjectTypeI18n(void) const Q_DECL_OVERRIDE
+	virtual QString getObjectTypeI18n(void) const override
 	{
 		return q_(getObjectType());
 	}
 
-	virtual QString getID(void) const Q_DECL_OVERRIDE
+	virtual QString getID(void) const override
 	{
 		return designation;
 	}
@@ -81,22 +81,22 @@ public:
 	//! Get an HTML string to describe the object
 	//! @param core A pointer to the core
 	//! @flags a set of flags with information types to include.
-	virtual QString getInfoString(const StelCore* core, const InfoStringGroup& flags) const Q_DECL_OVERRIDE;
+	virtual QString getInfoString(const StelCore* core, const InfoStringGroup& flags) const override;
 	//! Return a map like StelObject::getInfoMap(), but with a few extra tags also available in getMap().
 	//! - sntype
 	//! - max-magnitude
 	//! - peakJD
 	//! - note
 	//! - distance
-	virtual QVariantMap getInfoMap(const StelCore *core) const Q_DECL_OVERRIDE;
-	virtual Vec3f getInfoColor(void) const Q_DECL_OVERRIDE;
-	virtual Vec3d getJ2000EquatorialPos(const StelCore *core) const Q_DECL_OVERRIDE;
-	virtual float getVMagnitude(const StelCore* core) const Q_DECL_OVERRIDE;
-	virtual QString getNameI18n(void) const Q_DECL_OVERRIDE;
-	virtual QString getEnglishName(void) const Q_DECL_OVERRIDE;
+	virtual QVariantMap getInfoMap(const StelCore *core) const override;
+	virtual Vec3f getInfoColor(void) const override;
+	virtual Vec3d getJ2000EquatorialPos(const StelCore *core) const override;
+	virtual float getVMagnitude(const StelCore* core) const override;
+	virtual QString getNameI18n(void) const override;
+	virtual QString getEnglishName(void) const override;
 
 protected:
-	virtual QString getMagnitudeInfoString(const StelCore *core, const InfoStringGroup& flags, const int decimals=1) const Q_DECL_OVERRIDE;
+	virtual QString getMagnitudeInfoString(const StelCore *core, const InfoStringGroup& flags, const int decimals=1) const override;
 
 private:
 	bool initialized;

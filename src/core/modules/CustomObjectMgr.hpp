@@ -38,15 +38,15 @@ class CustomObjectMgr : public StelObjectModule
 
 public:
 	CustomObjectMgr();
-	virtual ~CustomObjectMgr() Q_DECL_OVERRIDE;
+	virtual ~CustomObjectMgr() override;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
-	virtual void init() Q_DECL_OVERRIDE;
-	virtual void deinit() Q_DECL_OVERRIDE;
-	virtual void draw(StelCore* core) Q_DECL_OVERRIDE;
+	virtual void init() override;
+	virtual void deinit() override;
+	virtual void draw(StelCore* core) override;
 	virtual void drawPointer(StelCore* core, StelPainter& painter);
-	virtual double getCallOrder(StelModuleActionName actionName) const Q_DECL_OVERRIDE;
+	virtual double getCallOrder(StelModuleActionName actionName) const override;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in StelObjectModule class
@@ -55,25 +55,25 @@ public:
 	//! @param limitFov the field of view around the position v in which to search for objects.
 	//! @param core the StelCore to use for computations.
 	//! @return a list containing the objects located inside the limitFov circle around position v.
-	virtual QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const Q_DECL_OVERRIDE;
+	virtual QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const override;
 
 	//! @return the matching object's pointer if exists or Q_NULLPTR.
 	//! @param nameI18n The case in-sensitive localized name
-	virtual StelObjectP searchByNameI18n(const QString& nameI18n) const Q_DECL_OVERRIDE;
+	virtual StelObjectP searchByNameI18n(const QString& nameI18n) const override;
 
 	//! @return the matching object if exists or Q_NULLPTR.
 	//! @param name The case in-sensitive english name
-	virtual StelObjectP searchByName(const QString& name) const Q_DECL_OVERRIDE;
+	virtual StelObjectP searchByName(const QString& name) const override;
 
-	virtual StelObjectP searchByID(const QString &id) const Q_DECL_OVERRIDE { return qSharedPointerCast<StelObject>(searchByEnglishName(id)); }
+	virtual StelObjectP searchByID(const QString &id) const override { return qSharedPointerCast<StelObject>(searchByEnglishName(id)); }
 
-	virtual QStringList listAllObjects(bool inEnglish) const Q_DECL_OVERRIDE;
-	virtual QString getName() const Q_DECL_OVERRIDE { return "Custom Objects"; }
-	virtual QString getStelObjectType() const Q_DECL_OVERRIDE { return CustomObject::CUSTOMOBJECT_TYPE; }
+	virtual QStringList listAllObjects(bool inEnglish) const override;
+	virtual QString getName() const override { return "Custom Objects"; }
+	virtual QString getStelObjectType() const override { return CustomObject::CUSTOMOBJECT_TYPE; }
 
 	//! Handle mouse clicks. Please note that most of the interactions will be done through the GUI module.
 	//! @return set the event as accepted if it was intercepted
-	virtual void handleMouseClicks(class QMouseEvent* e) Q_DECL_OVERRIDE;
+	virtual void handleMouseClicks(class QMouseEvent* e) override;
 
 public slots:
 	///////////////////////////////////////////////////////////////////////////

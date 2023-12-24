@@ -46,7 +46,7 @@ public:
 	
 protected:
 	virtual bool filterAcceptsRow(int source_row,
-			      const QModelIndex &source_parent) const Q_DECL_OVERRIDE;
+			      const QModelIndex &source_parent) const override;
 };
 
 
@@ -56,7 +56,7 @@ class ShortcutsDialog : public StelDialog
 
 public:
 	ShortcutsDialog(QObject* parent);
-	~ShortcutsDialog() Q_DECL_OVERRIDE;
+	~ShortcutsDialog() override;
 
 	//! highlight items that have collisions with current lineEdits' state according to CSS.
 	//! Note: previous collisions aren't redrawn.
@@ -65,7 +65,7 @@ public:
 public slots:
 	//! restore colors of all items it TreeWidget to defaults.
 	void resetCollisions();
-	virtual void retranslate() Q_DECL_OVERRIDE;
+	virtual void retranslate() override;
 	//! initialize editors state when current item changed.
 	void initEditors();
 	//! checks whether one QKeySequence is prefix of another.
@@ -88,7 +88,7 @@ public slots:
 
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots.
-	virtual void createDialogContent() Q_DECL_OVERRIDE;
+	virtual void createDialogContent() override;
 
 private:
 	//! checks whether given item can be changed by editors.

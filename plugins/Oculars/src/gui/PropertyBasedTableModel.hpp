@@ -38,7 +38,7 @@ class PropertyBasedTableModel : public QAbstractTableModel
 	Q_OBJECT
 public:
 	PropertyBasedTableModel(QObject *parent = Q_NULLPTR);
-	virtual ~PropertyBasedTableModel() Q_DECL_OVERRIDE;
+	virtual ~PropertyBasedTableModel() override;
 
 	//! Initializes this instance for use.  If you do not call this method, and use this class, your app will crash.
 	//! @param content the domain objects you want to model.  They should all be the same type.  This instance does not
@@ -49,15 +49,15 @@ public:
 	void init(QList<QObject *>* content, QObject *model, QMap<int, QString> mappings);
 
 	//Overrides from QAbstractTableModel
-	virtual QVariant data(const QModelIndex &item, int role = Qt::DisplayRole) const Q_DECL_OVERRIDE;
+	virtual QVariant data(const QModelIndex &item, int role = Qt::DisplayRole) const override;
 
-	virtual int rowCount(const QModelIndex &parent = QModelIndex()) const Q_DECL_OVERRIDE;
-	virtual int columnCount(const QModelIndex &parent = QModelIndex()) const Q_DECL_OVERRIDE;
+	virtual int rowCount(const QModelIndex &parent = QModelIndex()) const override;
+	virtual int columnCount(const QModelIndex &parent = QModelIndex()) const override;
 
-	virtual Qt::ItemFlags flags(const QModelIndex &index) const Q_DECL_OVERRIDE;
-	virtual bool insertRows(int position, int rows, const QModelIndex &index=QModelIndex()) Q_DECL_OVERRIDE;
-	virtual bool setData(const QModelIndex &index, const QVariant &value, int role=Qt::EditRole) Q_DECL_OVERRIDE;
-	virtual bool removeRows(int position, int rows, const QModelIndex &index=QModelIndex()) Q_DECL_OVERRIDE;
+	virtual Qt::ItemFlags flags(const QModelIndex &index) const override;
+	virtual bool insertRows(int position, int rows, const QModelIndex &index=QModelIndex()) override;
+	virtual bool setData(const QModelIndex &index, const QVariant &value, int role=Qt::EditRole) override;
+	virtual bool removeRows(int position, int rows, const QModelIndex &index=QModelIndex()) override;
 
 	void moveRowUp(int position);
 	void moveRowDown(int position);

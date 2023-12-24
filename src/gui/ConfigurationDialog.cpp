@@ -71,7 +71,7 @@ public:
 	MinMaxIntValidator(int min, int max, QObject *parent=Q_NULLPTR):
 		QIntValidator(min, max, parent){}
 
-	virtual void fixup(QString &input) const Q_DECL_OVERRIDE
+	virtual void fixup(QString &input) const override
 	{
 		int allowed=qBound(bottom(), input.toInt(), top());
 		input.setNum(allowed);

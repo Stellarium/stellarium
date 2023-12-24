@@ -45,12 +45,12 @@ public:
 	Q_ENUM(State)
 
 	HipsMgr();
-	virtual ~HipsMgr() Q_DECL_OVERRIDE;
-	virtual void init() Q_DECL_OVERRIDE;
-	virtual void deinit() Q_DECL_OVERRIDE;
-	virtual void update(double deltaTime) Q_DECL_OVERRIDE;
-	virtual void draw(StelCore* core) Q_DECL_OVERRIDE;
-	virtual double getCallOrder(StelModuleActionName actionName) const Q_DECL_OVERRIDE;
+	virtual ~HipsMgr() override;
+	virtual void init() override;
+	virtual void deinit() override;
+	virtual void update(double deltaTime) override;
+	virtual void draw(StelCore* core) override;
+	virtual double getCallOrder(StelModuleActionName actionName) const override;
 
 	//! Return the hips survey that has a given url.
 	Q_INVOKABLE

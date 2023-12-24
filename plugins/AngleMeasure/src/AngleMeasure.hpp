@@ -87,18 +87,18 @@ class AngleMeasure : public StelModule
 	Q_PROPERTY(Vec3f horizontalLineColor             READ getHorizontalLineColor     WRITE setHorizontalLineColor       NOTIFY horizontalLineColorChanged )
 public:
 	AngleMeasure();
-	virtual ~AngleMeasure() Q_DECL_OVERRIDE;
+	virtual ~AngleMeasure() override;
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
-	virtual void init() Q_DECL_OVERRIDE;
-	virtual void update(double deltaTime) Q_DECL_OVERRIDE;
-	virtual void draw(StelCore* core) Q_DECL_OVERRIDE;
-	virtual double getCallOrder(StelModuleActionName actionName) const Q_DECL_OVERRIDE;
-	virtual void handleKeys(class QKeyEvent* event) Q_DECL_OVERRIDE;
-	virtual void handleMouseClicks(class QMouseEvent* event) Q_DECL_OVERRIDE;
-	virtual bool handleMouseMoves(int x, int y, Qt::MouseButtons b) Q_DECL_OVERRIDE;
-	virtual bool configureGui(bool show=true) Q_DECL_OVERRIDE;
+	virtual void init() override;
+	virtual void update(double deltaTime) override;
+	virtual void draw(StelCore* core) override;
+	virtual double getCallOrder(StelModuleActionName actionName) const override;
+	virtual void handleKeys(class QKeyEvent* event) override;
+	virtual void handleMouseClicks(class QMouseEvent* event) override;
+	virtual bool handleMouseMoves(int x, int y, Qt::MouseButtons b) override;
+	virtual bool configureGui(bool show=true) override;
 
 	//! Restore the plug-in's settings to the default state.
 	//! Replace the plug-in's settings in Stellarium's configuration file
@@ -235,9 +235,9 @@ class AngleMeasureStelPluginInterface : public QObject, public StelPluginInterfa
 	Q_PLUGIN_METADATA(IID StelPluginInterface_iid)
 	Q_INTERFACES(StelPluginInterface)
 public:
-	virtual StelModule* getStelModule() const Q_DECL_OVERRIDE;
-	virtual StelPluginInfo getPluginInfo() const Q_DECL_OVERRIDE;
-	//virtual QObjectList getExtensionList() const Q_DECL_OVERRIDE { return QObjectList(); }
+	virtual StelModule* getStelModule() const override;
+	virtual StelPluginInfo getPluginInfo() const override;
+	//virtual QObjectList getExtensionList() const override { return QObjectList(); }
 };
 
 #endif /*ANGLEMEASURE_HPP*/

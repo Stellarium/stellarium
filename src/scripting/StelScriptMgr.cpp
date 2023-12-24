@@ -416,12 +416,12 @@ class StelScriptEngineAgent : public QScriptEngineAgent
 {
 public:
 	explicit StelScriptEngineAgent(QScriptEngine *engine);
-	virtual ~StelScriptEngineAgent() Q_DECL_OVERRIDE {}
+	virtual ~StelScriptEngineAgent() override {}
 
 	void setPauseScript(bool pause) { qWarning() << "setPauseScript() is deprecated and will no longer be available in future versions of Stellarium."; isPaused=pause; }
 	bool getPauseScript() { qWarning() << "getPauseScript() is deprecated and will no longer be available in future versions of Stellarium."; return isPaused; }
 
-	void positionChange(qint64 scriptId, int lineNumber, int columnNumber) Q_DECL_OVERRIDE;
+	void positionChange(qint64 scriptId, int lineNumber, int columnNumber) override;
 
 private:
 	bool isPaused;

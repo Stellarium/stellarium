@@ -54,7 +54,7 @@ class StelPropertyIntProxy : public StelPropertyProxy
 public:
 	StelPropertyIntProxy(StelProperty* prop,QObject* parent);
 protected slots:
-	void onPropertyChanged(const QVariant &value) Q_DECL_OVERRIDE;
+	void onPropertyChanged(const QVariant &value) override;
 signals:
 	//! Emitted when the property value changes
 	void propertyChanged(int value);
@@ -67,7 +67,7 @@ class StelPropertyBoolProxy : public StelPropertyProxy
 public:
 	StelPropertyBoolProxy(StelProperty* prop,QObject* parent);
 protected slots:
-	void onPropertyChanged(const QVariant &value) Q_DECL_OVERRIDE;
+	void onPropertyChanged(const QVariant &value) override;
 signals:
 	//! Emitted when the property value changes
 	void propertyChanged(bool value);
@@ -80,7 +80,7 @@ class StelPropertyDoubleProxy : public StelPropertyProxy
 public:
 	StelPropertyDoubleProxy(StelProperty* prop,QObject* parent);
 protected slots:
-	void onPropertyChanged(const QVariant &value) Q_DECL_OVERRIDE;
+	void onPropertyChanged(const QVariant &value) override;
 signals:
 	//! Emitted when the property value changes
 	void propertyChanged(double value);
@@ -93,7 +93,7 @@ class StelPropertyStringProxy : public StelPropertyProxy
 public:
 	StelPropertyStringProxy(StelProperty* prop,QObject* parent);
 protected slots:
-	void onPropertyChanged(const QVariant &value) Q_DECL_OVERRIDE;
+	void onPropertyChanged(const QVariant &value) override;
 signals:
 	//! Emitted when the property value changes
 	void propertyChanged(QString value);
@@ -161,7 +161,7 @@ signals:
 //!			setObjectName("MyCustomModule");
 //!		}
 //!		...
-//!		void init() Q_DECL_OVERRIDE
+//!		void init() override
 //!		{
 //!			...
 //!			// to manually register the property as a StelProperty, this could be used,

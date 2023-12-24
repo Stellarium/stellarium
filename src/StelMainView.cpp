@@ -103,12 +103,12 @@ public:
 		setAutoFillBackground(false);
 	}
 
-	~StelGLWidget() Q_DECL_OVERRIDE
+	~StelGLWidget() override
 	{
 		qDebug()<<"StelGLWidget destroyed";
 	}
 
-	virtual void initializeGL() Q_DECL_OVERRIDE
+	virtual void initializeGL() override
 	{
 		if(initialized)
 		{
@@ -141,7 +141,7 @@ public:
 	}
 
 protected:
-	virtual void paintGL() Q_DECL_OVERRIDE
+	virtual void paintGL() override
 	{
 		//this is actually never called because the
 		//QGraphicsView intercepts the paint event
@@ -149,7 +149,7 @@ protected:
 		//or as a QGraphicsItem
 		qDebug()<<"paintGL";
 	}
-	virtual void resizeGL(int w, int h) Q_DECL_OVERRIDE
+	virtual void resizeGL(int w, int h) override
 	{
 		//we probably can ignore this method,
 		//it seems it is also never called
@@ -218,7 +218,7 @@ public:
 		vbo.release();
 	}
 
-	virtual ~NightModeGraphicsEffect() Q_DECL_OVERRIDE
+	virtual ~NightModeGraphicsEffect() override
 	{
 		// NOTE: Why Q_ASSERT is here?
 		//Q_ASSERT(parent->glContext() == QOpenGLContext::currentContext());
@@ -226,7 +226,7 @@ public:
 		delete fbo;
 	}
 protected:
-	virtual void draw(QPainter* painter) Q_DECL_OVERRIDE
+	virtual void draw(QPainter* painter) override
 	{
 		Q_ASSERT(parent->glContext() == QOpenGLContext::currentContext());
 		QOpenGLFunctions* gl = QOpenGLContext::currentContext()->functions();
@@ -336,7 +336,7 @@ public:
 	}
 
 protected:
-	void keyPressEvent(QKeyEvent* event) Q_DECL_OVERRIDE
+	void keyPressEvent(QKeyEvent* event) override
 	{
 		// Try to trigger a global shortcut.
 		StelActionMgr* actionMgr = StelApp::getInstance().getStelActionManager();
@@ -387,7 +387,7 @@ public:
 
 
 protected:
-	virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) Q_DECL_OVERRIDE
+	virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override
 	{
 		Q_UNUSED(option)
 		Q_UNUSED(widget)
@@ -417,13 +417,13 @@ protected:
 		mainView->drawEnded();
 	}
 
-	virtual QRectF boundingRect() const Q_DECL_OVERRIDE
+	virtual QRectF boundingRect() const override
 	{
 		return rect;
 	}
 
 	//*** Main event handlers to pass on to StelApp ***//
-	void mousePressEvent(QGraphicsSceneMouseEvent *event) Q_DECL_OVERRIDE
+	void mousePressEvent(QGraphicsSceneMouseEvent *event) override
 	{
 		QMouseEvent ev = convertMouseEvent(event);
 		StelApp::getInstance().handleClick(&ev);
@@ -432,7 +432,7 @@ protected:
 			mainView->thereWasAnEvent();
 	}
 
-	void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) Q_DECL_OVERRIDE
+	void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override
 	{
 		QMouseEvent ev = convertMouseEvent(event);
 		StelApp::getInstance().handleClick(&ev);
@@ -442,7 +442,7 @@ protected:
 	}
 
 #ifndef MOUSE_TRACKING
-	void mouseMoveEvent(QGraphicsSceneMouseEvent *event) Q_DECL_OVERRIDE
+	void mouseMoveEvent(QGraphicsSceneMouseEvent *event) override
 	{
 		QMouseEvent ev = convertMouseEvent(event);
 		QPointF pos = ev.pos();
@@ -452,7 +452,7 @@ protected:
 	}
 #endif
 
-	void wheelEvent(QGraphicsSceneWheelEvent *event) Q_DECL_OVERRIDE
+	void wheelEvent(QGraphicsSceneWheelEvent *event) override
 	{
 		QPointF pos = event->scenePos();
 		pos.setY(rect.height() - 1 - pos.y());
@@ -467,14 +467,14 @@ protected:
 			mainView->thereWasAnEvent();
 	}
 
-	void keyPressEvent(QKeyEvent *event) Q_DECL_OVERRIDE
+	void keyPressEvent(QKeyEvent *event) override
 	{
 		StelApp::getInstance().handleKeys(event);
 		if(event->isAccepted())
 			mainView->thereWasAnEvent();
 	}
 
-	void keyReleaseEvent(QKeyEvent *event) Q_DECL_OVERRIDE
+	void keyReleaseEvent(QKeyEvent *event) override
 	{
 		StelApp::getInstance().handleKeys(event);
 		if(event->isAccepted())
@@ -483,7 +483,7 @@ protected:
 
 	//*** Gesture and touch support, currently only for Windows
 #ifdef Q_OS_WIN
-	bool event(QEvent * e) Q_DECL_OVERRIDE
+	bool event(QEvent * e) override
 	{
 		bool r = false;
 		switch (e->type()){
@@ -587,7 +587,7 @@ public:
 	}
 
 protected:
-	void resizeEvent(QGraphicsSceneResizeEvent* event) Q_DECL_OVERRIDE
+	void resizeEvent(QGraphicsSceneResizeEvent* event) override
 	{
 		if(!inited) return;
 

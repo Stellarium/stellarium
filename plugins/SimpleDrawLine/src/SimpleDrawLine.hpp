@@ -27,13 +27,13 @@ class SimpleDrawLine : public StelModule
 {
 public:
 	SimpleDrawLine();
-	virtual ~SimpleDrawLine() Q_DECL_OVERRIDE;
+	virtual ~SimpleDrawLine() override;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
-	virtual void init() Q_DECL_OVERRIDE;
-	virtual void draw(StelCore* core) Q_DECL_OVERRIDE;
-	virtual double getCallOrder(StelModuleActionName actionName) const Q_DECL_OVERRIDE;
+	virtual void init() override;
+	virtual void draw(StelCore* core) override;
+	virtual double getCallOrder(StelModuleActionName actionName) const override;
 private:
 	// Font used for displaying our text
 	QFont font;
@@ -50,9 +50,9 @@ class SimpleDrawLineStelPluginInterface : public QObject, public StelPluginInter
 	Q_PLUGIN_METADATA(IID StelPluginInterface_iid)
 	Q_INTERFACES(StelPluginInterface)
 public:
-	virtual StelModule* getStelModule() const Q_DECL_OVERRIDE;
-	virtual StelPluginInfo getPluginInfo() const Q_DECL_OVERRIDE;
-	//virtual QObjectList getExtensionList() const Q_DECL_OVERRIDE { return QObjectList(); }
+	virtual StelModule* getStelModule() const override;
+	virtual StelPluginInfo getPluginInfo() const override;
+	//virtual QObjectList getExtensionList() const override { return QObjectList(); }
 };
 
 #endif /* SIMPLEDRAWLINE_HPP */

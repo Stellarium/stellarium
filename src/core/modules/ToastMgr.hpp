@@ -31,13 +31,13 @@ class ToastMgr : public StelModule
 			NOTIFY surveyDisplayedChanged)
 public:
 	ToastMgr();
-	virtual ~ToastMgr() Q_DECL_OVERRIDE;
-	virtual void init() Q_DECL_OVERRIDE;
-	virtual void deinit() Q_DECL_OVERRIDE;
-	virtual void update(double deltaTime) Q_DECL_OVERRIDE;
-	virtual void draw(StelCore* core) Q_DECL_OVERRIDE;
+	virtual ~ToastMgr() override;
+	virtual void init() override;
+	virtual void deinit() override;
+	virtual void update(double deltaTime) override;
+	virtual void draw(StelCore* core) override;
 	//! Used to determine the order in which the various modules are drawn. MilkyWay=1, we use 7 for actionDraw, else 0.
-	virtual double getCallOrder(StelModuleActionName actionName) const Q_DECL_OVERRIDE;
+	virtual double getCallOrder(StelModuleActionName actionName) const override;
 
 public slots:
 	void setFlagShow(bool displayed);

@@ -119,7 +119,7 @@ public:
 	Q_ENUM(Line)
 
 	ArchaeoLine(ArchaeoLine::Line lineType, double definingAngle);
-	virtual ~ArchaeoLine() Q_DECL_OVERRIDE {}
+	virtual ~ArchaeoLine() override {}
 	void draw(StelCore* core, float intensity=1.0f) const;
 	const Vec3f& getColor() const {return color;}
 	bool isDisplayed(void) const {return fader;}
@@ -243,17 +243,17 @@ class ArchaeoLines : public StelModule
 	Q_PROPERTY(int lineWidth    READ getLineWidth WRITE setLineWidth NOTIFY lineWidthChanged)
 public:
 	ArchaeoLines();
-	virtual ~ArchaeoLines() Q_DECL_OVERRIDE;
+	virtual ~ArchaeoLines() override;
 	
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
-	virtual void init() Q_DECL_OVERRIDE;
-	virtual void update(double deltaTime) Q_DECL_OVERRIDE;
-	virtual void draw(StelCore* core) Q_DECL_OVERRIDE;
-	virtual double getCallOrder(StelModuleActionName actionName) const Q_DECL_OVERRIDE;
-	virtual void handleKeys(class QKeyEvent* event) Q_DECL_OVERRIDE {event->setAccepted(false);}
-	virtual bool configureGui(bool show=true) Q_DECL_OVERRIDE;
+	virtual void init() override;
+	virtual void update(double deltaTime) override;
+	virtual void draw(StelCore* core) override;
+	virtual double getCallOrder(StelModuleActionName actionName) const override;
+	virtual void handleKeys(class QKeyEvent* event) override {event->setAccepted(false);}
+	virtual bool configureGui(bool show=true) override;
 	//////////////////////////////////////////////////////////////////////////
 
 	//! Restore the plug-in's settings to the default state.
@@ -592,9 +592,9 @@ class ArchaeoLinesStelPluginInterface : public QObject, public StelPluginInterfa
 	Q_PLUGIN_METADATA(IID StelPluginInterface_iid)
 	Q_INTERFACES(StelPluginInterface)
 public:
-	virtual StelModule* getStelModule()    const Q_DECL_OVERRIDE;
-	virtual StelPluginInfo getPluginInfo() const Q_DECL_OVERRIDE;
-	//virtual QObjectList getExtensionList() const Q_DECL_OVERRIDE { return QObjectList(); }
+	virtual StelModule* getStelModule()    const override;
+	virtual StelPluginInfo getPluginInfo() const override;
+	//virtual QObjectList getExtensionList() const override { return QObjectList(); }
 };
 
 #endif /*ARCHAEOLINES_HPP*/

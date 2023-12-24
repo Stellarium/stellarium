@@ -60,25 +60,25 @@ public:
 	      float dustTailBrightnessFact=1.5f
 	);
 
-	virtual ~Comet() Q_DECL_OVERRIDE;
+	virtual ~Comet() override;
 
 	//! In addition to Planet::getInfoMap(), Comets provides estimates for
 	//! - tail-length-km
 	//! - coma-diameter-km
 	//! using the formula from Guide found by the GSoC2012 initiative at http://www.projectpluto.com/update7b.htm#comet_tail_formula
-	virtual QVariantMap getInfoMap(const StelCore *core) const Q_DECL_OVERRIDE;
+	virtual QVariantMap getInfoMap(const StelCore *core) const override;
 	//The Comet class inherits the "Planet" type because the SolarSystem class
 	//was not designed to handle different types of objects.
 	//virtual QString getType() const {return "Comet";}
 	//! \todo Find better sources for the g,k system
-	virtual float getVMagnitude(const StelCore* core) const Q_DECL_OVERRIDE;
+	virtual float getVMagnitude(const StelCore* core) const override;
 	//! sets the nameI18 property with the appropriate translation.
 	//! Function overridden to handle the problem with name conflicts.
-	virtual void translateName(const StelTranslator& trans) Q_DECL_OVERRIDE;
-	virtual QString getEnglishName(void) const Q_DECL_OVERRIDE {return englishName;}
-	virtual QString getNameI18n(void) const Q_DECL_OVERRIDE {return nameI18;}
+	virtual void translateName(const StelTranslator& trans) override;
+	virtual QString getEnglishName(void) const override {return englishName;}
+	virtual QString getNameI18n(void) const override {return nameI18;}
 	//! gets an IAU designation.
-	virtual QString getIAUDesignation() const Q_DECL_OVERRIDE { return iauDesignation; }
+	virtual QString getIAUDesignation() const override { return iauDesignation; }
 
 	//! \brief sets absolute magnitude and slope parameter.
 	//! These are the parameters in the IAU's two-parameter magnitude system
@@ -106,24 +106,24 @@ public:
 	QStringList getExtraDesignations() const { return extraDesignations; }
 
 	//! get sidereal period for comet, days, or returns 0 if not possible (parabolic, hyperbolic orbit)
-	virtual double getSiderealPeriod() const Q_DECL_OVERRIDE;
+	virtual double getSiderealPeriod() const override;
 
 	//! re-implementation of Planet's draw()
-	virtual void draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont) Q_DECL_OVERRIDE;
+	virtual void draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont) override;
 
 	// re-implementation of Planet's update() to prepare tails (extinction etc). @param deltaTime: ms (since last call)
-	virtual void update(int deltaTime) Q_DECL_OVERRIDE;
+	virtual void update(int deltaTime) override;
 
 protected:
 	// components for Planet::getInfoString() that are overridden here:
-	virtual QString getInfoStringName(const StelCore *core, const InfoStringGroup& flags) const Q_DECL_OVERRIDE;
-	virtual QString getInfoStringAbsoluteMagnitude(const StelCore *core, const InfoStringGroup& flags) const Q_DECL_OVERRIDE;
+	virtual QString getInfoStringName(const StelCore *core, const InfoStringGroup& flags) const override;
+	virtual QString getInfoStringAbsoluteMagnitude(const StelCore *core, const InfoStringGroup& flags) const override;
 	//! Any flag=Size information to be displayed
-	virtual QString getInfoStringSize(const StelCore *core, const InfoStringGroup& flags) const Q_DECL_OVERRIDE;
+	virtual QString getInfoStringSize(const StelCore *core, const InfoStringGroup& flags) const override;
 	//! Any flag=Extra information to be displayed at the end
-	virtual QString getInfoStringExtra(const StelCore *core, const InfoStringGroup& flags) const Q_DECL_OVERRIDE;
+	virtual QString getInfoStringExtra(const StelCore *core, const InfoStringGroup& flags) const override;
 
-	virtual QString getDiscoveryCircumstances() const Q_DECL_OVERRIDE;
+	virtual QString getDiscoveryCircumstances() const override;
 
 private:
 	//! @returns estimates for (Coma diameter [AU], gas tail length [AU]).

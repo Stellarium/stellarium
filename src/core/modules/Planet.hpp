@@ -184,7 +184,7 @@ public:
 	       bool hasHalo,
 	       const QString &pTypeStr);
 
-	virtual ~Planet() Q_DECL_OVERRIDE;
+	virtual ~Planet() override;
 
 	//! Initializes static vars. Must be called before creating first planet.
 	// Currently ensured by SolarSystem::init()
@@ -206,7 +206,7 @@ public:
 	//! @param core the StelCore object
 	//! @param flags a set of InfoStringGroup items to include in the return value.
 	//! @return a QString containing an HMTL encoded description of the Planet.
-	virtual QString getInfoString(const StelCore *core, const InfoStringGroup& flags) const Q_DECL_OVERRIDE;
+	virtual QString getInfoString(const StelCore *core, const InfoStringGroup& flags) const override;
 	//! In addition to the entries from StelObject::getInfoMap(), Planet objects provide
 	//! - distance
 	//! - phase (result of getPhase)
@@ -238,38 +238,38 @@ public:
 	//! - age (on Earth for Moon only; days. This is currently "elongation angle age" only, not time since last conjunction!)
 	//! - penumbral-eclipse-magnitude (on Earth for Moon only)
 	//! - umbral-eclipse-magnitude (on Earth for Moon only)
-	virtual QVariantMap getInfoMap(const StelCore *core) const  Q_DECL_OVERRIDE;
-	virtual double getCloseViewFov(const StelCore* core) const Q_DECL_OVERRIDE;
-	virtual double getSatellitesFov(const StelCore* core) const Q_DECL_OVERRIDE;
-	virtual double getParentSatellitesFov(const StelCore* core) const Q_DECL_OVERRIDE;
-	virtual float getVMagnitude(const StelCore* core) const Q_DECL_OVERRIDE;
-	virtual float getSelectPriority(const StelCore* core) const Q_DECL_OVERRIDE;
-	virtual Vec3f getInfoColor(void) const Q_DECL_OVERRIDE;
+	virtual QVariantMap getInfoMap(const StelCore *core) const  override;
+	virtual double getCloseViewFov(const StelCore* core) const override;
+	virtual double getSatellitesFov(const StelCore* core) const override;
+	virtual double getParentSatellitesFov(const StelCore* core) const override;
+	virtual float getVMagnitude(const StelCore* core) const override;
+	virtual float getSelectPriority(const StelCore* core) const override;
+	virtual Vec3f getInfoColor(void) const override;
 	//! @return "Planet". For technical reasons this is also returned by Comets and MinorPlanets and the Sun. A better type is returned by getObjectType()
-	virtual QString getType(void) const Q_DECL_OVERRIDE {return PLANET_TYPE;}
+	virtual QString getType(void) const override {return PLANET_TYPE;}
 	//! Get more specific Planet type for scripts
 	//! @return an English type description of planet (star, planet, moon, observer, artificial, asteroid, plutino, comet, dwarf planet, cubewano, scattered disc object, Oort cloud object, sednoid, interstellar object)
-	virtual QString getObjectType(void) const Q_DECL_OVERRIDE { return pTypeMap.value(pType); }
+	virtual QString getObjectType(void) const override { return pTypeMap.value(pType); }
 	//! Get more specific Planet type for scripts
 	//! @return a localized type description of planet (star, planet, moon, observer, artificial, asteroid, plutino, comet, dwarf planet, cubewano, scattered disc object, Oort cloud object, sednoid, interstellar object)
-	virtual QString getObjectTypeI18n(void) const Q_DECL_OVERRIDE { return q_(pTypeMap.value(pType)); }
+	virtual QString getObjectTypeI18n(void) const override { return q_(pTypeMap.value(pType)); }
 	//! @return English name of planet
-	virtual QString getID(void) const Q_DECL_OVERRIDE { return englishName; }
+	virtual QString getID(void) const override { return englishName; }
 	//! A Planet's own eclipticPos is in VSOP87 ref. frame (practically equal to ecliptic of J2000 for us) coordinates relative to the parent body (sun, planet).
 	//! To get J2000 equatorial coordinates, we require heliocentric ecliptical positions (adding up parent positions) of observer and Planet.
 	//! Then we use the matrix rotation multiplication with an existing matrix in StelCore to orient from eclipticalJ2000 to equatorialJ2000.
 	//! The end result is a non-normalized 3D vector which allows retrieving distances etc.
 	//! The positional computation is called by SolarSystem. If the core's aberration setting is active, the J2000 position will then include it.
-	virtual Vec3d getJ2000EquatorialPos(const StelCore *core) const Q_DECL_OVERRIDE;
-	virtual QString getEnglishName(void) const Q_DECL_OVERRIDE;
-	virtual QString getNameI18n(void) const Q_DECL_OVERRIDE;
+	virtual Vec3d getJ2000EquatorialPos(const StelCore *core) const override;
+	virtual QString getEnglishName(void) const override;
+	virtual QString getNameI18n(void) const override;
 	virtual QString getIAUDesignation(void) const;
 	QString getNativeName(void) const { return nativeName; }
 	QString getNativeNameI18n(void) const { return nativeNameMeaningI18n; }
 	QString getCommonEnglishName(void) const {return englishName;}
 	QString getCommonNameI18n(void) const {return nameI18;}
 	//! Get angular semidiameter, degrees. If planet display is artificially enlarged (e.g. Moon upscale), value will also be increased.
-	virtual double getAngularRadius(const StelCore* core) const Q_DECL_OVERRIDE;
+	virtual double getAngularRadius(const StelCore* core) const override;
 	virtual bool hasAtmosphere(void) {return atmosphere;}
 	virtual bool hasHalo(void) {return halo;}
 	//! Returns whether planet positions are valid and useful for the current simulation time.
@@ -646,7 +646,7 @@ public:
 	//!       *   +20 for objects with no transit time on current date.
 	//!       *   +30 for objects with no rise time on current date.
 	//!       *   +40 for objects with no set time on current date.
-	virtual Vec4d getRTSTime(const StelCore* core, const double altitude=0.) const Q_DECL_OVERRIDE;
+	virtual Vec4d getRTSTime(const StelCore* core, const double altitude=0.) const override;
 
 	void resetTextures();
 	void replaceTexture(const QString& texName);

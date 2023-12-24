@@ -162,7 +162,7 @@ public:
 	//! @param mag_steps number of steps used to describe values in range
 	SpecialZoneArray(QFile* file,bool byte_swap,bool use_mmap,int level,int mag_min,
 			 int mag_range,int mag_steps);
-	~SpecialZoneArray(void) Q_DECL_OVERRIDE;
+	~SpecialZoneArray(void) override;
 protected:
 	//! Get an array of all SpecialZoneData objects in this catalog.
 	SpecialZoneData<Star> *getZones(void) const
@@ -186,11 +186,11 @@ protected:
 			  const RCMag *rcmag_table, int limitMagIndex, StelCore* core,
 			  int maxMagStarName, float names_brightness,
 			  const QVector<SphericalCap>& boundingCaps,
-			  const bool withAberration, const Vec3f vel) const Q_DECL_OVERRIDE;
+			  const bool withAberration, const Vec3f vel) const override;
 
-	virtual void scaleAxis() Q_DECL_OVERRIDE;
+	virtual void scaleAxis() override;
 	virtual void searchAround(const StelCore* core, int index,const Vec3d &v,double cosLimFov,
-					  QList<StelObjectP > &result) Q_DECL_OVERRIDE;
+					  QList<StelObjectP > &result) override;
 
 	Star *stars;
 private:
@@ -210,7 +210,7 @@ public:
 
 	//! Add Hipparcos information for all stars in this catalog into @em hipIndex.
 	//! @param hipIndex array of Hipparcos info structs
-	void updateHipIndex(HipIndexStruct hipIndex[]) const Q_DECL_OVERRIDE;
+	void updateHipIndex(HipIndexStruct hipIndex[]) const override;
 };
 
 #endif // ZONEARRAY_HPP

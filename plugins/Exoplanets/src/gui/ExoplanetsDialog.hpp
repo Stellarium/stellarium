@@ -64,14 +64,14 @@ public:
 	};
 
 	ExoplanetsDialog();
-	~ExoplanetsDialog() Q_DECL_OVERRIDE;
+	~ExoplanetsDialog() override;
 
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots
-	void createDialogContent() Q_DECL_OVERRIDE;
+	void createDialogContent() override;
 
 public slots:
-	void retranslate() Q_DECL_OVERRIDE;
+	void retranslate() override;
 	void refreshUpdateValues(void);
 
 private slots:
@@ -120,7 +120,7 @@ public:
 	}
 
 private:
-	bool operator < (const QTreeWidgetItem &other) const Q_DECL_OVERRIDE
+	bool operator < (const QTreeWidgetItem &other) const override
 	{
 		int column = treeWidget()->sortColumn();
 
