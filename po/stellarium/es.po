@@ -9583,7 +9583,7 @@ msgstr "Ubicación aleatoria"
 #. TRANSLATORS: Name of script
 #: src/translations.h:567
 msgid "Jupiter Moons"
-msgstr ""
+msgstr "Lunas de Júpiter"
 
 #. TRANSLATORS: Description of the landscape tour script.
 #: src/translations.h:573
@@ -9925,7 +9925,7 @@ msgstr ""
 
 #: src/translations.h:618
 msgid "Jupiter's Moons Orbital Simulation"
-msgstr ""
+msgstr "Simulación orbital de las lunas de Júpiter"
 
 #: src/translations.h:622
 msgid "&Undo"
@@ -18328,14 +18328,14 @@ msgstr "TIANGONG (TIANHE)"
 #: plugins/Satellites/src/Satellites.cpp:3536
 msgctxt "comms"
 msgid "uplink"
-msgstr ""
+msgstr "enlace de subida"
 
 #. TRANSLATORS: A downlink (DL) is the link from a satellite to a ground
 #. station
 #: plugins/Satellites/src/Satellites.cpp:3538
 msgctxt "comms"
 msgid "downlink"
-msgstr ""
+msgstr "enlace de bajada"
 
 #. TRANSLATORS: The beacon (or radio beacon) is a device in the satellite,
 #. which emit one or more signals (normally on a fixed frequency) whose
@@ -18344,7 +18344,7 @@ msgstr ""
 #: plugins/Satellites/src/Satellites.cpp:3540
 msgctxt "comms"
 msgid "beacon"
-msgstr ""
+msgstr "baliza"
 
 #. TRANSLATORS: Telemetry is the collection of measurements or other data at
 #. satellites and their automatic transmission to receiving equipment
@@ -18352,65 +18352,65 @@ msgstr ""
 #: plugins/Satellites/src/Satellites.cpp:3542
 msgctxt "comms"
 msgid "telemetry"
-msgstr ""
+msgstr "telemetría"
 
 #. TRANSLATORS: The channel for transmission of video data
 #: plugins/Satellites/src/Satellites.cpp:3544
 msgctxt "comms"
 msgid "video"
-msgstr ""
+msgstr "video"
 
 #. TRANSLATORS: The broadband is wide bandwidth data transmission which
 #. transports multiple signals at a wide range of frequencies
 #: plugins/Satellites/src/Satellites.cpp:3546
 msgctxt "comms"
 msgid "broadband"
-msgstr ""
+msgstr "ancho de banda"
 
 #. TRANSLATORS: The channel for transmission of commands
 #: plugins/Satellites/src/Satellites.cpp:3548
 msgctxt "comms"
 msgid "command"
-msgstr ""
+msgstr "comando"
 
 #. TRANSLATORS: Meteorological is a service on the satellite for transmitting
 #. meteorological data to a ground station
 #: plugins/Satellites/src/Satellites.cpp:3550
 msgctxt "comms"
 msgid "meteorological"
-msgstr ""
+msgstr "meteorológico"
 
 #. TRANSLATORS: Maritime is a service on the satellite
 #: plugins/Satellites/src/Satellites.cpp:3552
 msgctxt "comms"
 msgid "maritime"
-msgstr ""
+msgstr "marítimo"
 
 #. TRANSLATORS: Mobile is a service on the satellite
 #: plugins/Satellites/src/Satellites.cpp:3554
 msgctxt "comms"
 msgid "mobile"
-msgstr ""
+msgstr "móvil"
 
 #. TRANSLATORS: Mobile telephony is a service on the satellite
 #: plugins/Satellites/src/Satellites.cpp:3556
 msgctxt "comms"
 msgid "mobile telephony"
-msgstr ""
+msgstr "telefonía móvil"
 
 #. TRANSLATORS: A repeater is an electronic device that receives a signal and
 #. retransmits it.
 #: plugins/Satellites/src/Satellites.cpp:3558
 msgctxt "comms"
 msgid "repeater"
-msgstr ""
+msgstr "repetidor"
 
 #. TRANSLATORS: The digital repeater (or digipiter) is used in channels that
 #. transmit data by binary digital signals
 #: plugins/Satellites/src/Satellites.cpp:3560
 msgctxt "comms"
 msgid "digipeater"
-msgstr ""
+msgstr "repetidor digital"
 
 #. TRANSLATORS: A radio band is a small frequency band (a contiguous section
 #. of the range of the radio spectrum) in which channels are usually used or
@@ -18418,23 +18418,23 @@ msgstr ""
 #: plugins/Satellites/src/Satellites.cpp:3562
 msgctxt "comms"
 msgid "-band"
-msgstr ""
+msgstr "-banda"
 
 #: plugins/Satellites/src/Satellites.cpp:3563
 msgctxt "comms"
 msgid "crew voice"
-msgstr ""
+msgstr "voz de tripulación"
 
 #: plugins/Satellites/src/Satellites.cpp:3564
 msgctxt "comms"
 msgid "imaging"
-msgstr ""
+msgstr "imágenes"
 
 #. TRANSLATORS: Some mode of communication via radio channel
 #: plugins/Satellites/src/Satellites.cpp:3566
 msgctxt "comms"
 msgid "mode"
-msgstr ""
+msgstr "modo"
 
 #: plugins/Satellites/src/Satellite.cpp:218
 msgid "The satellite and the observer are in sunlight"
@@ -18809,7 +18809,7 @@ msgstr ""
 #. TRANSLATORS: Title of a section in the About tab of the Satellites window
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:820
 msgid "Communication links"
-msgstr ""
+msgstr "Enlaces de comunicación"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:821
 msgid ""
@@ -18817,90 +18817,93 @@ msgid ""
 "many modes for telemetry and data packets. You should to know which "
 "demodulator you need to decode telemetry and packets:"
 msgstr ""
+"Muchos satélites tienen transmisores (transceptores y transpondedores) con "
+"muchos modos de telemetría y paquetes de datos. Debe saber qué demodulador "
+"necesita para decodificar telemetría y paquetes:"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:823
 msgid "Automatic Picture Transmission"
-msgstr ""
+msgstr "Transmisión automática de imágenes"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:824
 msgid "Low Resolution Picture Transmission"
-msgstr ""
+msgstr "Transmisión de imágenes de baja resolución"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:825
 msgid "High Resolution Picture Transmission"
-msgstr ""
+msgstr "Transmisión de imágenes de alta resolución"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:826
 msgid "Advanced High Resolution Picture Transmission"
-msgstr ""
+msgstr "Transmisión avanzada de imágenes de alta resolución"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:827
 msgid "Amateur Radio adaptation of X.25 packet protocol"
-msgstr ""
+msgstr "Adaptación de radioaficionados del protocolo de paquetes X.25"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:828
 msgid "Continuous Wave, Morse Code"
-msgstr ""
+msgstr "Onda continua, código Morse"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:829
 msgid "Amplitude Modulation"
-msgstr ""
+msgstr "Amplitud modulada"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:830
 msgid "Frequency Modulation"
-msgstr ""
+msgstr "Frecuencia modulada"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:831
 msgid "Data Under Voice"
-msgstr ""
+msgstr "Datos bajo voz"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:832
 msgid "Frequency Shift Keying"
-msgstr ""
+msgstr "Frecuencia de modulación por desplazamiento"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:833
 msgid "Gaussian Frequency Shift Keying"
-msgstr ""
+msgstr "Frecuencia de modulación por desplazamiento gaussiana"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:834
 msgid "Gaussian Minimum Shift Keying"
-msgstr ""
+msgstr "Frecuencia de modulación por desplazamiento mínimo gaussiano"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:835
 msgid "Audio Frequency Shift Keying"
-msgstr ""
+msgstr "Frecuencia de modulación por desplazamiento de audio"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:836
 msgid "Amplitude-shift Keying"
-msgstr ""
+msgstr "Modulación por desplazamiento de amplitud"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:837
 msgid "Phase-shift Keying"
-msgstr ""
+msgstr "Modulación por desplazamiento de fase"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:838
 msgid "Binary Phase-shift Keying"
-msgstr ""
+msgstr "Modulación por desplazamiento de fase binaria"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:839
 msgid "Quadrature Phase-shift Keying"
-msgstr ""
+msgstr "Modulación por desplazamiento de fase en cuadratura"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:840
 msgid "Offset Quadrature Phase-shift Keying"
-msgstr ""
+msgstr "Modulación por desplazamiento de fase en cuadratura compensada"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:841
 msgid "Differential Phase-shift Keying"
-msgstr ""
+msgstr "Modulación por desplazamiento de fase diferencial"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:842
 msgid "Binary Offset Carrier"
-msgstr ""
+msgstr "Portador de compensación binaria"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:843
 msgid "Multiplexed Binary Offset Carrier"
-msgstr ""
+msgstr "Portador de compensación binaria multiplexada"
 
 #. TRANSLATORS: Title of a section in the About tab of the Satellites window
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:847
@@ -19222,49 +19225,49 @@ msgstr "[todos los usuarios definidos]"
 #. Active is any satellite with an operational status of +, P, B, S, or X.
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1163
 msgid "[active satellites]"
-msgstr ""
+msgstr "[satélites activos]"
 
 #. TRANSLATORS: Satellite group [SATCAT Operational Status]: Satellites that
 #. are fully functioning
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1165
 msgid "[operational satellites]"
-msgstr ""
+msgstr "[satélites operacionales]"
 
 #. TRANSLATORS: Satellite group [SATCAT Operational Status]: Satellites that
 #. are no longer functioning
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1167
 msgid "[non-operational satellites]"
-msgstr ""
+msgstr "[satélites no operacionales]"
 
 #. TRANSLATORS: Satellite group [SATCAT Operational Status]: Satellites that
 #. are partially fulfilling primary mission or secondary mission(s)
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1169
 msgid "[partially operational satellites]"
-msgstr ""
+msgstr "[satélites parcialmente operacionales]"
 
 #. TRANSLATORS: Satellite group [SATCAT Operational Status]: Previously
 #. operational satellite put into reserve status
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1171
 msgid "[backup / standby satellites]"
-msgstr ""
+msgstr "[satélites de respaldo/en espera]"
 
 #. TRANSLATORS: Satellite group [SATCAT Operational Status]: New satellite
 #. awaiting full activation
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1173
 msgid "[spare satellites]"
-msgstr ""
+msgstr "[satélites de repuesto]"
 
 #. TRANSLATORS: Satellite group [SATCAT Operational Status]: Satellites with
 #. extended mission(s)
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1175
 msgid "[extended mission]"
-msgstr ""
+msgstr "[misión extendida]"
 
 #. TRANSLATORS: Satellite group [SATCAT Operational Status]: Satellites that
 #. are decayed
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1177
 msgid "[decayed satellites]"
-msgstr ""
+msgstr "[satélites decaídos]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1179
 msgid "[all]"
@@ -19301,7 +19304,7 @@ msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1208
 msgid "Altitude of imagined satellite"
-msgstr ""
+msgstr "Altitud del satélite imaginado"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1209
 msgid "Number of segments: number of segments used to draw the line"
@@ -19496,7 +19499,7 @@ msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1231
 msgid "Show umbra/penumbra at altitude:"
-msgstr ""
+msgstr "Mostrar umbra/penumbra en la altitud:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1232
 msgid "Orbit lines"
@@ -34070,6 +34073,10 @@ msgid ""
 "<li>Click <i>Pick an image point for selected object...</i> button (or use a hotkey).</li>\n"
 "<li>Click the point in the image corresponding to this object (hide the simulated stars if they are too confusing at this point).</li></ol>"
 msgstr ""
+"Luego cambie a la pestaña <i>Adaptación</i> y seleccione algunos puntos en la imagen para un conjunto de objetos celestes. Para hacer esto,\n"
+"<ol><li>Seleccione un objeto como lo haría normalmente.</li>\n"
+"<li>Haga clic en el botón <i>Seleccionar un punto de imagen para el objeto seleccionado...</i> (o use una tecla de acceso rápido).</li>\n"
+"<li>Haga clic en el punto de la imagen correspondiente a este objeto (oculte las estrellas simuladas si son demasiado confusas en este punto).</li></ol>"
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1772
 msgid ""
@@ -34078,6 +34085,11 @@ msgid ""
 "image should appear aligned with the stars. If it's not, try picking more "
 "points from the ones which don't match, and retry optimization."
 msgstr ""
+"Finalmente, cuando se hayan seleccionado suficientes puntos para llenar las "
+"diferentes distancias desde el centro de la imagen, haga clic en el botón "
+"<i>Optimizar</i>. Después de unos momentos la imagen debería aparecer "
+"alineada con las estrellas. Si no es así, intente elegir más puntos de los "
+"que no coinciden y vuelva a intentar la optimización."
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1776
 msgid ""
@@ -34086,20 +34098,27 @@ msgid ""
 " must match one of the mounts supported by your camera as listed in the "
 "database)."
 msgstr ""
+"En la pestaña <i>Modelo para lensfun</i> puede generar la entrada XML para "
+"la base de datos lensfun. Ingrese la marca y el modelo de la lente y la "
+"montura (el nombre debe coincidir con una de las monturas admitidas por su "
+"cámara que figuran en la base de datos)."
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1781
 msgid "Preparing a photo"
-msgstr ""
+msgstr "Preparando una foto"
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1782
 msgid "To make a useful shot, you should follow some guidelines:\n"
-msgstr ""
+msgstr "Para realizar una toma útil, debe seguir algunas pautas:\n"
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1784
 msgid ""
 "Try to keep away from the horizon, because star elevation there is very "
 "dependent on weather conditions due to atmospheric refraction."
 msgstr ""
+"Trate de mantenerse alejado del horizonte, porque la elevación de las "
+"estrellas allí depende en gran medida de las condiciones climáticas debido a"
+" la refracción atmosférica."
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1786
 msgid ""
@@ -34107,6 +34126,9 @@ msgid ""
 "disable distortion correction may make good fitting impossible. In "
 "particular:"
 msgstr ""
+"Asegúrese de desactivar cualquier corrección de distorsión de la geometría, "
+"ya que si no se desactiva la corrección de distorsión, es posible que sea "
+"imposible un buen ajuste. En particular:"
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1789
 msgid ""
@@ -34114,12 +34136,17 @@ msgid ""
 " development software like Lightroom or Darktable that you use for "
 "processing of your shots."
 msgstr ""
+"Si está tomando imágenes en formato RAW, la corrección de distorsión de la "
+"lente debe estar desactivada en el software de desarrollo RAW como Lightroom"
+" o Darktable que utiliza para procesar sus tomas."
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1791
 msgid ""
 "If you're shooting JPEG, lens distortion correction must be turned off in "
 "the camera settings before taking the photo."
 msgstr ""
+"Si está tomando imágenes JPEG, la corrección de distorsión de la lente debe "
+"estar desactivada en la configuración de la cámara antes de tomar la foto."
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1795
 msgid ""
@@ -34128,6 +34155,11 @@ msgid ""
 "center of projection that will be computed during the fitting process will "
 "have wrong directions if such rotation was applied."
 msgstr ""
+"Desactive la rotación automática de imágenes según su orientación guardada "
+"en etiquetas EXIF. Si bien dicha rotación puede hacer que la imagen se vea "
+"mejor, los desplazamientos del centro de proyección que se calcularán "
+"durante el proceso de adaptación tendrán direcciones incorrectas si se "
+"aplica dicha rotación."
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1800
 msgid ""
@@ -34136,6 +34168,11 @@ msgid ""
 " if e.g. current time and date set in the simulation are not the same as "
 "specified in the image."
 msgstr ""
+"La imagen que ingrese en este estimador debe contener la mayor cantidad "
+"posible de información EXIF ​​del RAW original, esto permitirá que la "
+"interfaz de usuario le indique, por ejemplo, la hora y fecha actuales "
+"establecidas en la simulación no son las mismas que las especificadas en la "
+"imagen."
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1803
 msgid ""
@@ -34146,6 +34183,12 @@ msgid ""
 "<code>exiftool</code> as in the following commands (adjust the file names to"
 " your needs):"
 msgstr ""
+"Un método que tomará una imagen RAW de entrada y generará un resultado "
+"siguiendo las pautas anteriores (excepto las relacionadas con la fotografía)"
+" es usar <code>dcraw</code> (el original de Dave Coffin) o "
+"<code>dcraw_emu</code> (del paquete <code>libRaw</code>), más "
+"<code>exiftool</code> como en los siguientes comandos (ajuste los nombres de"
+" los archivos a sus necesidades):"
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1810
 msgid ""
@@ -34155,6 +34198,11 @@ msgid ""
 "stars not as small as they are in the photo, and <code>-Z</code> gives an "
 "explicit name to the file."
 msgstr ""
+"Aquí, la opción <code>-t 0</code> para <code>dcraw_emu</code> evita la "
+"rotación automática, <code>-T</code> genera un archivo TIFF en lugar del PPM"
+" predeterminado, <code>-W</code> evita el brillo automático que puede hacer "
+"que las estrellas no sean tan pequeñas como en la foto, y <code>-Z</code> da"
+" un nombre explícito al archivo."
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1814
 msgid ""
@@ -34163,183 +34211,197 @@ msgid ""
 "complete EXIF info than the DNG) into the TIFF. Your case may differ, you "
 "may have to copy from your RAW file instead."
 msgstr ""
+"El comando <code>exiftool</code> copia todas las etiquetas GPS y "
+"relacionadas con el tiempo del sidecar JPEG (que en mi Samsung Galaxy S8 "
+"parecía contener información EXIF más completa que el DNG) al TIFF. Su caso "
+"puede diferir, es posible que deba copiar desde su archivo RAW."
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1820
 msgid "Ctrl+Shift & left mouse drag: move the image around the sky"
 msgstr ""
+"Ctrl+Shift y arrastrar con el botón izquierdo del mouse: mueva la imagen por"
+" el cielo"
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1821
 msgid ""
 "Ctrl+Shift & right mouse drag: scale and rotate the image around the last "
 "drag point"
 msgstr ""
+"Ctrl+Shift y arrastrar con el botón derecho del mouse: escalar y rotar la "
+"imagen alrededor del último punto de arrastre"
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1822
 msgid ""
 "Keyboard hotkeys can be configured in the Keyboard shortcuts editor (F7)."
 msgstr ""
+"Las teclas de acceso rápido del teclado se pueden configurar en el editor de"
+" atajos de teclado (F7)."
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:719
 msgid "Image placement"
-msgstr ""
+msgstr "Ubicación de la imagen"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:720
 msgid "Distortion model:"
-msgstr ""
+msgstr "Modelo de distorsión:"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:721
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:722
 msgid " px"
-msgstr ""
+msgstr "px"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:723
 msgid "Field of view in smaller direction:"
-msgstr ""
+msgstr "Campo de visión en dirección más pequeña:"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:724
 msgid "Image rotation angle:"
-msgstr ""
+msgstr "Ángulo de rotación de imagen:"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:725
 msgid "Center of projection elevation:"
-msgstr ""
+msgstr "Centro de elevación de proyección:"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:726
 msgid "3rd order polynomial"
-msgstr ""
+msgstr "polinomio de 3º orden"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:727
 msgid "5th order polynomial"
-msgstr ""
+msgstr "polinomio de 5º orden"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:728
 msgid "PTLens"
-msgstr ""
+msgstr "PTLens"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:730
 msgid "Image center shift:"
-msgstr ""
+msgstr "Desplazamiento del centro de la imagen:"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:731
 msgid "Center of projection azimuth:"
-msgstr ""
+msgstr "Centro de azimut de proyección:"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:732
 msgid "Distortion coefficients:"
-msgstr ""
+msgstr "Coeficientes de distorsión:"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:733
 msgid ""
 "Reset\n"
 "placement"
 msgstr ""
+"Restablecer\n"
+"ubicación"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:735
 msgid ""
 "Reset\n"
 "distortion"
 msgstr ""
+"Restablecer\n"
+"distorsión"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:737
 msgid "Image to load:"
-msgstr ""
+msgstr "Imagen a cargar:"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:739
 msgid "Browse for an image..."
-msgstr ""
+msgstr "Buscar una imagen..."
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:743
 msgctxt "A verb in imperative, used on a button that fixes a problem."
 msgid "Fix"
-msgstr ""
+msgstr "Reparar"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:744
 msgid "Subtract background RGB:"
-msgstr ""
+msgstr "Sustraer fondo RGB:"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:745
 msgid "Image brightness:"
-msgstr ""
+msgstr "Brillo de imagen:"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:746
 msgid "Image Loading"
-msgstr ""
+msgstr "Carga de imagen"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:747
 msgid "Reposition image by first two points"
-msgstr ""
+msgstr "Reposicionar la imagen en los dos primeros puntos"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:748
 msgid "Pick an image point for selected object..."
-msgstr ""
+msgstr "Elija un punto de imagen para el objeto seleccionado..."
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:749
 msgid "Optimize"
-msgstr ""
+msgstr "Optimizar"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:751
 msgid "y, px"
-msgstr ""
+msgstr "y, px"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:752
 msgid "x, px"
-msgstr ""
+msgstr "x, px"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:755
 msgid "Remove point"
-msgstr ""
+msgstr "Eliminar punto"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:757
 msgid "Fitting"
-msgstr ""
+msgstr "Adaptación"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:758
 msgid " mm"
-msgstr ""
+msgstr " mm"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:759
 msgid "Make:"
-msgstr ""
+msgstr "Hacer:"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:763
 msgctxt "Lens mount on a camera"
 msgid "Mount:"
-msgstr ""
+msgstr "Montura:"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:765
 msgid "Generate"
-msgstr ""
+msgstr "Generar"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:766
 msgid "Model:"
-msgstr ""
+msgstr "Modelo:"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:767
 msgid "Model for lensfun"
-msgstr ""
+msgstr "Modelo para lensfun"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:768
 msgid "Show image"
-msgstr ""
+msgstr "Mostrar imagen"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:770
 msgctxt "As in \"normal\" points, the opposite being \"selected\""
 msgid "normal"
-msgstr ""
+msgstr "normal"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:771
 msgid "Mark image axes"
-msgstr ""
+msgstr "Marcar ejes de imagen"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:772
 msgctxt "As in \"selected points\""
 msgid "selected"
-msgstr ""
+msgstr "seleccionado"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:773
 msgid "Mark picked points"
-msgstr ""
+msgstr "Marcar puntos elegidos"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:776
 msgid "Mark center of projection"
-msgstr ""
+msgstr "Marcar centro de proyección"
