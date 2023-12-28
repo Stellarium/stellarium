@@ -407,73 +407,43 @@ void SolarSystem::updateSkyCulture(const StelSkyCulture& skyCulture)
 	planetNativeNamesMap.clear();
 	planetNativeNamesMeaningMap.clear();
 
-#if 0 // TODO: implement
-	QString namesFile = StelFileMgr::findFile("skycultures/" + skyCultureDir + "/planet_names.fab");
+	if (!skyCulture.names.isEmpty())
+		loadCultureSpecificNames(skyCulture.names);
 
-	if (namesFile.isEmpty())
+	updateI18n();
+}
+
+void SolarSystem::loadCultureSpecificNames(const QJsonObject& data)
+{
+	for (auto it = data.begin(); it != data.end(); ++it)
 	{
-		for (const auto& p : std::as_const(systemPlanets))
+		const auto key = it.key();
+		const auto specificNames = it->toArray();
+
+		if (key.startsWith("NAME "))
 		{
-			if (p->getPlanetType()==Planet::isPlanet || p->getPlanetType()==Planet::isMoon || p->getPlanetType()==Planet::isStar)
+			const auto planetId = key.mid(5);
+			const auto names = it.value().toArray();
+
+			// We store only one name per planet, so just take the first valid one
+			// FIXME: maybe we should somehow store all
+			QString nativeName, nativeNameMeaning;
+			for (const auto& nameVal : names)
 			{
-				p->setNativeName("");
-				p->setNativeNameMeaning("");
+				const auto nameObj = nameVal.toObject();
+				if (nameObj.find("english") == nameObj.end())
+					continue;
+				nativeNameMeaning = nameObj["english"].toString();
+				if (nameObj.find("native") != nameObj.end())
+					nativeName = nameObj["native"].toString();
+				else
+					nativeName = nativeNameMeaning;
+				break;
 			}
-		}
-		updateI18n();
-		return;
-	}
-
-	// Open file
-	QFile planetNamesFile(namesFile);
-	if (!planetNamesFile.open(QIODevice::ReadOnly | QIODevice::Text))
-	{
-		qDebug() << " Cannot open file" << QDir::toNativeSeparators(namesFile);
-		return;
-	}
-
-	// Now parse the file
-	// lines to ignore which start with a # or are empty
-	static const QRegularExpression commentRx("^(\\s*#.*|\\s*)$");
-
-	// lines which look like records - we use the RE to extract the fields
-	// which will be available in recRx.capturedTexts()
-	static const QRegularExpression recRx("^\\s*(\\w+)\\s+\"(.+)\"\\s+_[(]\"(.+)\"[)]\\n");
-
-	QString record, planetId, nativeName, nativeNameMeaning;
-
-	// keep track of how many records we processed.
-	int totalRecords=0;
-	int readOk=0;
-	int lineNumber=0;
-	while (!planetNamesFile.atEnd())
-	{
-		record = QString::fromUtf8(planetNamesFile.readLine());
-		lineNumber++;
-
-		// Skip comments
-		if (commentRx.match(record).hasMatch())
-			continue;
-
-		totalRecords++;
-
-		QRegularExpressionMatch match=recRx.match(record);
-		if (!match.hasMatch())
-		{
-			qWarning() << "ERROR - cannot parse record at line" << lineNumber << "in planet names file" << QDir::toNativeSeparators(namesFile);
-		}
-		else
-		{
-			planetId          = match.captured(1).trimmed();
-			nativeName        = match.captured(2).trimmed();
-			nativeNameMeaning = match.captured(3).trimmed();
 			planetNativeNamesMap[planetId] = nativeName;
 			planetNativeNamesMeaningMap[planetId] = nativeNameMeaning;
-			readOk++;
 		}
 	}
-	planetNamesFile.close();
-	qDebug() << "Loaded" << readOk << "/" << totalRecords << "native names of planets";
 
 	for (const auto& p : std::as_const(systemPlanets))
 	{
@@ -483,9 +453,6 @@ void SolarSystem::updateSkyCulture(const StelSkyCulture& skyCulture)
 			p->setNativeNameMeaning(planetNativeNamesMeaningMap[p->getEnglishName()]);
 		}
 	}
-
-	updateI18n();
-#endif
 }
 
 void SolarSystem::reloadShaders()

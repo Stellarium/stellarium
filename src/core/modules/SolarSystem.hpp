@@ -900,6 +900,8 @@ private slots:
 	//! Loads native names of planets for a given sky culture.
 	void updateSkyCulture(const StelSkyCulture& skyCulture);
 
+	void loadCultureSpecificNames(const QJsonObject& data);
+
 	//! Called following StelMainView::reloadShadersRequested
 	void reloadShaders();
 
