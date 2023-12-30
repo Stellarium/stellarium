@@ -960,8 +960,12 @@ void StelObject::postProcessInfoString(QString& str, const InfoStringGroup& flag
 	static const QRegularExpression tableRe("<br(\\s*/)?><table");
 	static const QRegularExpression  brRe("<br(\\s*/)?>\\s*$");
 	str.replace(tableRe, "<table");
-	// chomp trailing line breaks
+	// chomp trailing line break (TBD: Why?)
 	str.replace(brRe, "");
+	// avoid two breaks (Comet Core diameter w/o table mode?)
+	static const QRegularExpression brbrRe("<br(\\s*/)?><br(\\s*/)?>");
+	str.replace(brbrRe, "<br/>");
+
 
 	if (flags&PlainText)
 	{

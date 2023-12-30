@@ -197,7 +197,7 @@ QString Comet::getInfoStringSize(const StelCore *core, const InfoStringGroup &fl
 	if (flags&Size)
 	{
 		// Given the very irregular shape, other terminology like "equatorial radius" do not make much sense.
-		oss << QString("%1: %2 %3<br/>").arg(q_("Core diameter"), QString::number(AU * 2.0 * getEquatorialRadius(), 'f', 1) , qc_("km", "distance"));
+		oss << QString("<br/>%1: %2 %3<br/>").arg(q_("Core diameter"), QString::number(AU * 2.0 * getEquatorialRadius(), 'f', 1) , qc_("km", "distance"));
 	}
 	if ((flags&Size) && (tailFactors[0]>0.0f))
 	{
