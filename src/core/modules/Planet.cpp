@@ -555,6 +555,9 @@ QString Planet::getInfoStringAbsoluteMagnitude(const StelCore *core, const InfoS
 // Return the information string "ready to print" :)
 QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags) const
 {
+	StelApp& app = StelApp::getInstance();
+	const bool withTables = app.getFlagUseFormattingOutput();
+
 	QString str;
 	QTextStream oss(&str);
 	const double distanceAu = getJ2000EquatorialPos(core).norm();
@@ -664,19 +667,24 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 
 	if (flags&Distance)
 	{
+		if (withTables)
+			oss << "<table style='margin:0em 0em 0em -0.125em;border-spacing:0px;border:0px;'>";
+
 		const double hdistanceAu = getHeliocentricEclipticPos().norm();
 		const double hdistanceKm = AU * hdistanceAu;
 		// TRANSLATORS: Unit of measure for distance - astronomical unit
 		QString au = qc_("AU", "distance, astronomical unit");
-		// TRANSLATORS: Unit of measure for distance - kilometers
-		QString km = qc_("km", "distance");
-		QString distAU, distKM;
+		// TRANSLATORS: Distance measured in terms of the speed of light
+		QString lightTime(q_("Light time"));
+		QString km, distAU, distKM;
 		if (englishName!="Sun")
 		{
 			if (hdistanceAu < 0.1)
 			{
 				distAU = QString::number(hdistanceAu, 'f', 6);
 				distKM = QString::number(hdistanceKm, 'f', 3);
+				// TRANSLATORS: Unit of measure for distance - kilometers
+				km = qc_("km", "distance");
 			}
 			else
 			{
@@ -686,7 +694,10 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 				km = qc_("M km", "distance");
 			}
 
-			oss << QString("%1: %2 %3 (%4 %5)<br/>").arg(q_("Distance from Sun"), distAU, au, distKM, km);
+			if (withTables)
+				oss << QString("<tr><td>%1:</td><td style='text-align:right;'>%2</td><td style='text-align:left;'>%3</td><td style='text-align:right;'> (%4</td><td style='text-align:left;'>%5)</td></tr>").arg(q_("Distance from Sun"), distAU, au, distKM, km);
+			else
+				oss << QString("%1: %2 %3 (%4 %5)<br/>").arg(q_("Distance from Sun"), distAU, au, distKM, km);
 		}
 		const double distanceKm = AU * distanceAu;
 		if (distanceAu < 0.1)
@@ -704,10 +715,19 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 			km = qc_("M km", "distance");
 		}
 
-		oss << QString("%1: %2 %3 (%4 %5)<br/>").arg(q_("Distance"), distAU, au, distKM, km);
-		// TRANSLATORS: Distance measured in terms of the speed of light
-		oss << QString("%1: %2 <br/>").arg(q_("Light time"), StelUtils::hoursToHmsStr(distanceKm/SPEED_OF_LIGHT/3600.) );
-		oss << getExtraInfoStrings(Distance).join("");
+		if (withTables)
+		{
+			oss << QString("<tr><td>%1:</td><td style='text-align:right;'>%2</td><td style='text-align:left;'>%3</td><td style='text-align:right;'> (%4</td><td style='text-align:left;'>%5)</td></tr>").arg(q_("Distance"), distAU, au, distKM, km);
+			oss << QString("<tr><td>%1:</td><td colspan='4'>%2</td></tr>").arg(lightTime, StelUtils::hoursToHmsStr(distanceKm/SPEED_OF_LIGHT/3600.));
+			oss << "</table>";
+		}
+		else
+		{
+			oss << QString("%1: %2 %3 (%4 %5)<br/>").arg(q_("Distance"), distAU, au, distKM, km);
+			oss << QString("%1: %2 <br/>").arg(lightTime, StelUtils::hoursToHmsStr(distanceKm/SPEED_OF_LIGHT/3600.) );
+		}
+
+		oss << getExtraInfoStrings(Distance).join(""); // Caveat: This currently just adds extra lines, not table entries.
 	}
 
 	if (flags&Velocity)
