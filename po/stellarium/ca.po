@@ -11,8 +11,8 @@
 # Pascual Martínez Reig <pascualmralcoi@gmail.com>, 2022
 # Xavier PG, 2023
 # Susanna Pujol, 2023
-# Pep Pujols Puigdesens, 2023
 # Daniel Alomar <daniel.adastra@gmail.com>, 2023
+# Pep Pujols Puigdesens, 2023
 # 
 #, fuzzy
 msgid ""
@@ -21,7 +21,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
 "POT-Creation-Date: 2023-12-13 11:04+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
-"Last-Translator: Daniel Alomar <daniel.adastra@gmail.com>, 2023\n"
+"Last-Translator: Pep Pujols Puigdesens, 2023\n"
 "Language-Team: Catalan (https://app.transifex.com/stellarium/teams/80998/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18862,43 +18862,43 @@ msgstr "Modulació per Desplaçament de Freqüència Gaussiana"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:834
 msgid "Gaussian Minimum Shift Keying"
-msgstr ""
+msgstr "Modulació per desplaçament mínim Gaussià"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:835
 msgid "Audio Frequency Shift Keying"
-msgstr ""
+msgstr "Modulació perdesplaçament d'audio-freqüència"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:836
 msgid "Amplitude-shift Keying"
-msgstr ""
+msgstr "Modulació per desplaçament d'amplitud"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:837
 msgid "Phase-shift Keying"
-msgstr ""
+msgstr "Modulació per desplaçament de fase"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:838
 msgid "Binary Phase-shift Keying"
-msgstr ""
+msgstr "Modulació per desplaçament de fase binària"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:839
 msgid "Quadrature Phase-shift Keying"
-msgstr ""
+msgstr "Modulació per desplaçament de fase de quadratura"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:840
 msgid "Offset Quadrature Phase-shift Keying"
-msgstr ""
+msgstr "Modulació per desplaçament de quadratura desplaçada"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:841
 msgid "Differential Phase-shift Keying"
-msgstr ""
+msgstr "Modulació per desplaçament de fase diferencial"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:842
 msgid "Binary Offset Carrier"
-msgstr ""
+msgstr "Portadora de desplaçament binària"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:843
 msgid "Multiplexed Binary Offset Carrier"
-msgstr ""
+msgstr "Portadora multiplexada de desplaçament binària"
 
 #. TRANSLATORS: Title of a section in the About tab of the Satellites window
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:847
@@ -19219,49 +19219,49 @@ msgstr "[Tots els usuaris definits]"
 #. Active is any satellite with an operational status of +, P, B, S, or X.
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1163
 msgid "[active satellites]"
-msgstr ""
+msgstr "[satèl·lits actius]"
 
 #. TRANSLATORS: Satellite group [SATCAT Operational Status]: Satellites that
 #. are fully functioning
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1165
 msgid "[operational satellites]"
-msgstr ""
+msgstr "[satèl·lits operatius]"
 
 #. TRANSLATORS: Satellite group [SATCAT Operational Status]: Satellites that
 #. are no longer functioning
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1167
 msgid "[non-operational satellites]"
-msgstr ""
+msgstr "[satèl·lits no operatius]"
 
 #. TRANSLATORS: Satellite group [SATCAT Operational Status]: Satellites that
 #. are partially fulfilling primary mission or secondary mission(s)
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1169
 msgid "[partially operational satellites]"
-msgstr ""
+msgstr "[satèl·lits parcialment operatius]"
 
 #. TRANSLATORS: Satellite group [SATCAT Operational Status]: Previously
 #. operational satellite put into reserve status
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1171
 msgid "[backup / standby satellites]"
-msgstr ""
+msgstr "[satèl·lits de còpia de seguretat / en espera]"
 
 #. TRANSLATORS: Satellite group [SATCAT Operational Status]: New satellite
 #. awaiting full activation
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1173
 msgid "[spare satellites]"
-msgstr ""
+msgstr "[satèl·lits de reserva]"
 
 #. TRANSLATORS: Satellite group [SATCAT Operational Status]: Satellites with
 #. extended mission(s)
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1175
 msgid "[extended mission]"
-msgstr ""
+msgstr "[missió ampliada]"
 
 #. TRANSLATORS: Satellite group [SATCAT Operational Status]: Satellites that
 #. are decayed
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1177
 msgid "[decayed satellites]"
-msgstr ""
+msgstr "[satèl·lits deteriorats]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1179
 msgid "[all]"
@@ -19297,7 +19297,7 @@ msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1208
 msgid "Altitude of imagined satellite"
-msgstr ""
+msgstr "Altitud del satèl·lit imaginat"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1209
 msgid "Number of segments: number of segments used to draw the line"
@@ -19493,7 +19493,7 @@ msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1231
 msgid "Show umbra/penumbra at altitude:"
-msgstr ""
+msgstr "Mostra ombra/penombra a l'altitud:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1232
 msgid "Orbit lines"
@@ -33792,54 +33792,60 @@ msgstr "Configuració del connector d'estels desapareguts"
 
 #: plugins/LensDistortionEstimator/src/LensDistortionEstimator.cpp:59
 msgid "Lens distortion estimator"
-msgstr ""
+msgstr "Estimador de distorsió de lents"
 
 #: plugins/LensDistortionEstimator/src/LensDistortionEstimator.cpp:62
 msgid ""
 "Estimates lens distortion by letting the user match stars to a photo and "
 "computing a fit."
 msgstr ""
+"Estima la distorsió de la lent permetent a l'usuari comprar estels amb una "
+"foto i el càlcul d'un ajustament."
 
 #: plugins/LensDistortionEstimator/src/LensDistortionEstimator.cpp:401
 #: plugins/LensDistortionEstimator/src/LensDistortionEstimator.cpp:404
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:717
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:718
 msgid "Lens Distortion Estimator"
-msgstr ""
+msgstr "Estimador de distorsió de lents"
 
 #: plugins/LensDistortionEstimator/src/LensDistortionEstimator.cpp:402
 msgid "Toggle pick-a-point mode"
-msgstr ""
+msgstr "Activar el mode de selecció de punt"
 
 #: plugins/LensDistortionEstimator/src/LensDistortionEstimator.cpp:405
 msgid "Show lens distortion estimator dialog"
-msgstr ""
+msgstr "Mostra el diàleg de l'estimador de distorsió de la lent"
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:320
 msgid ""
 "Sets simulation date/time to image EXIF date/time, and freezes simulation "
 "time"
 msgstr ""
+"Estableix la data/hora de la simulació a la data/hora EXIF de la imatge i "
+"congela el temps de simulació"
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:352
 #, qt-format
 msgid "Stellarium time differs from image EXIF time %1 by %2 seconds"
 msgstr ""
+"El temps de l'Stellarium difereix del temps EXIF de la imatge %1 en %2 "
+"segons"
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:373
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:429
 msgid "Save points to file"
-msgstr ""
+msgstr "Guardar punts a fitxer"
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:374
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:430
 msgid "Comma-separated values (*.csv)"
-msgstr ""
+msgstr "Valors separats per comes (*.csv)"
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:379
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:413
 msgid "Error saving data"
-msgstr ""
+msgstr "Error guardant les dades"
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:380
 #, qt-format
@@ -33847,41 +33853,45 @@ msgid ""
 "Failed to open output file for writing:\n"
 "%1"
 msgstr ""
+"Error obrint el fitxer de sortida per escriure\\: %1\n"
+" "
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:414
 #, qt-format
 msgid ""
 "Failed to write the output file:\n"
 "%1"
-msgstr ""
+msgstr "Error escribint sobre el fitxer de sortida\\: %1"
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:422
 msgid "Confirm deletion of old points"
-msgstr ""
+msgstr "Confirma l'eliminació dels punts vells"
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:423
 msgid ""
 "There are some points defined. They will be deleted and replaced with the "
 "ones from the file. Proceed?"
 msgstr ""
+"Hi ha alguns punts definits. S'eliminaran i se substituiran per les del "
+"fitxer. Voleu que ho faci?"
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:435
 msgid "Error reading data"
-msgstr ""
+msgstr "Error llegint les dades"
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:436
 #, qt-format
 msgid ""
 "Failed to open input file for reading:\n"
 "%1"
-msgstr ""
+msgstr "No s'ha pogut obrir el fitxer d'entrada per llegir\\: %1"
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:452
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:462
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:471
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:478
 msgid "File format error"
-msgstr ""
+msgstr "Error de format de fitxer"
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:453
 #, qt-format
@@ -33889,89 +33899,108 @@ msgid ""
 "Can't import file: expected to find at least %1 entries at line %2, but got "
 "%3."
 msgstr ""
+"No es pot importar el fitxer\\: s'esperava trobar almenys %1 entrades a la "
+"línia %2, però se n'han obtingut %3."
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:463
 #, qt-format
 msgid "Can't import file: object \"%1\" not found at line %2."
 msgstr ""
+"No es pot importar el fitxer\\: l'objecte \"%1\" no s'ha trobat a la línia "
+"%2."
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:472
 #, qt-format
 msgid "Can't import file: failed to parse image position X at line %1."
 msgstr ""
+"No es pot importar el fitxer\\: no s'ha pogut analitzar la posició X de la "
+"imatge a la línia %1."
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:479
 #, qt-format
 msgid "Can't import file: failed to parse image position Y at line %1."
 msgstr ""
+"No es pot importar el fitxer\\: no s'ha pogut analitzar la posició de la "
+"imatge Y a la línia %1."
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:675
 msgid "Distance from center, °"
-msgstr ""
+msgstr "Distància des del centre, °"
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:681
 msgid "Error estimate, °"
-msgstr ""
+msgstr "Estimació de l'error, °"
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:968
 msgid "Confirm resetting image placement"
-msgstr ""
+msgstr "Confirmeu el restabliment de la ubicació de la imatge"
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:969
 msgid "This will move the image to the center of the screen. Proceed?"
-msgstr ""
+msgstr "Això mourà la imatge al centre de la pantalla. Voleu que ho faci?"
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:978
 msgid "Confirm resetting distortion"
-msgstr ""
+msgstr "Confirmeu el restabliment de la distorsió"
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:979
 msgid "This will zero out all distortion and shift coefficients. Proceed?"
 msgstr ""
+"Això eliminarà tots els coeficients de distorsió i desplaçament. Voleu que "
+"ho faci?"
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1332
 msgid ""
 "Can't get EXIF date from the image, please make sure current date and time "
 "setting is correct."
 msgstr ""
+"No es pot obtenir la data EXIF de la imatge, assegureu-vos que la "
+"configuració de la data i l'hora actual sigui correcta."
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1342
 msgid ""
 "Failed to parse EXIF date/time, please make sure current date and time "
 "setting is correct."
 msgstr ""
+"No s'ha pogut analitzar la data i l'hora EXIF. Assegureu-vos que la "
+"configuració de la data i l'hora actual sigui correcta."
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1382
 msgid "Open image file"
-msgstr ""
+msgstr "Obre el fitxer d'imatge"
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1383
 msgid ""
 "Image files (*.png *.bmp *.jpg *.jpeg *.tif *.tiff *.webm *.pbm *.pgm *.ppm "
 "*.xbm *.xpm)"
 msgstr ""
+"Fitxers d'imatge (*.png *.bmp *.jpg *.jpeg *.tif *.tiff *.webm *.pbm *.pgm "
+"*.ppm *.xbm *.xpm)"
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1657
 msgid "Make, model and mount fields must be filled"
-msgstr ""
+msgstr "Els camps de marca, model i muntatge s'han d'omplir"
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1688
 msgid "Internal error: bad distortion model chosen"
-msgstr ""
+msgstr "Error intern\\: el model de distorsió escollit és incorrecte"
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1746
 msgid "Lens Distortion Estimator Plug-in"
-msgstr ""
+msgstr "Connector de càlcul de distorsió de la lent"
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1755
 msgid ""
 "This plugin lets you estimate distortion of the objective lens of your "
 "camera and generate a distortion model for use with the lensfun library."
 msgstr ""
+"Aquest connector us permet calcular la distorsió de la lent objectiu de la "
+"vostra càmera i generar un model de distorsió per utilitzar-lo amb la "
+"biblioteca lensfun."
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1757
 msgid "The process is as follows."
-msgstr ""
+msgstr "El procés és el següent."
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1759
 msgid ""
@@ -33980,6 +34009,10 @@ msgid ""
 "taken to get a useful shot, see more details in <b>Preparing a photo</b> "
 "section.\n"
 msgstr ""
+"Feu una foto del cel nocturn on pugueu trobar fàcilment prou estrelles "
+"disperses des del centre del marc fins a la vora. S'ha de tenir una mica de "
+"cura per obtenir una fotografia útil. Vegeu més detalls a la secció "
+"<b>Preparació d'una foto</b>.\n"
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1762
 msgid ""
@@ -33989,6 +34022,11 @@ msgid ""
 " You need to be able to tell which point in the image corresponds to which "
 "simulated star/planet."
 msgstr ""
+"A la pestanya <i>Càrrega d'imatges</i>, trieu la imatge que voleu carregar i"
+" utilitzeu els controls disponibles (o tecles d'accés ràpid) per col·locar-"
+"la de manera que coincideixi aproximadament amb la direcció on mirava la "
+"càmera i l'orientació corresponent. Heu de saber quin punt de la imatge "
+"correspon a quin estrel/planeta simulat."
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1766
 msgid ""
@@ -33997,6 +34035,13 @@ msgid ""
 "<li>Click <i>Pick an image point for selected object...</i> button (or use a hotkey).</li>\n"
 "<li>Click the point in the image corresponding to this object (hide the simulated stars if they are too confusing at this point).</li></ol>"
 msgstr ""
+"A continuació, canvieu a la pestanya <i>Ajust</i> i seleccioneu alguns punts"
+" de la imatge per a un conjunt d'objectes celestes. Per fer-ho, "
+"<ol><li>Seleccioneu un objecte com ho faríeu normalment.</li> <li>Feu clic "
+"al botó <i>Tria un punt d'imatge per a l'objecte seleccionat...</i> (o "
+"utilitzeu un Tecla d'accés ràpid).</li> <li>Feu clic al punt de la imatge "
+"corresponent a aquest objecte (amaga els estels simulats si són massa "
+"confusos en aquest punt).</li></ol>"
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1772
 msgid ""
@@ -34005,6 +34050,11 @@ msgid ""
 "image should appear aligned with the stars. If it's not, try picking more "
 "points from the ones which don't match, and retry optimization."
 msgstr ""
+"Finalment, quan s'hagin seleccionat prou punts per omplir les diferents "
+"distàncies des del centre de la imatge, feu clic al botó <i>Optimitza</i>. "
+"Al cap d'uns moments, la imatge hauria d'aparèixer alineada amb els estels. "
+"Si no és així, proveu de triar més punts dels que no coincideixen i torneu a"
+" intentar l'optimització."
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1776
 msgid ""
@@ -34013,20 +34063,26 @@ msgid ""
 " must match one of the mounts supported by your camera as listed in the "
 "database)."
 msgstr ""
+"A la pestanya <i>Model per a lensfun</i> podeu generar l'entrada XML per a "
+"la base de dades de lensfun. Introduïu la marca i el model de la lent i la "
+"montura (el nom ha de coincidir amb una de les montures compatibles amb la "
+"vostra càmera, tal com es mostra a la base de dades)."
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1781
 msgid "Preparing a photo"
-msgstr ""
+msgstr "Preparant una foto"
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1782
 msgid "To make a useful shot, you should follow some guidelines:\n"
-msgstr ""
+msgstr "Per fer una presa útil, hauríeu de seguir algunes pautes\\:\n"
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1784
 msgid ""
 "Try to keep away from the horizon, because star elevation there is very "
 "dependent on weather conditions due to atmospheric refraction."
 msgstr ""
+"Intenta allunyar-te de l'horitzó, perquè l'elevació de les estrelles depèn "
+"molt de les condicions meteorològiques a causa de la refracció atmosfèrica."
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1786
 msgid ""
@@ -34034,6 +34090,9 @@ msgid ""
 "disable distortion correction may make good fitting impossible. In "
 "particular:"
 msgstr ""
+"Assegureu-vos de desactivar qualsevol correcció de la distorsió de la "
+"geometria, perquè si no es desactiva la correcció de la distorsió, pot ser "
+"impossible un bon ajust. En particular\\:"
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1789
 msgid ""
@@ -34041,12 +34100,17 @@ msgid ""
 " development software like Lightroom or Darktable that you use for "
 "processing of your shots."
 msgstr ""
+"Si esteu gravant en RAW, la correcció de la distorsió de la lent ha d'estar "
+"desactivada al programari de desenvolupament RAW com Lightroom o Darktable "
+"que feu servir per processar les vostres fotografies."
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1791
 msgid ""
 "If you're shooting JPEG, lens distortion correction must be turned off in "
 "the camera settings before taking the photo."
 msgstr ""
+"Si esteu gravant JPEG, la correcció de la distorsió de l'objectiu s'ha "
+"d'haver desactivat a la configuració de la càmera abans de fer la foto."
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1795
 msgid ""
@@ -34055,6 +34119,11 @@ msgid ""
 "center of projection that will be computed during the fitting process will "
 "have wrong directions if such rotation was applied."
 msgstr ""
+"Desactiveu la rotació automàtica de la imatge segons la seva orientació "
+"desada a les etiquetes EXIF. Tot i que aquesta rotació pot fer que la imatge"
+" sembli millor, els desplaçaments del centre de projecció que es calcularan "
+"durant el procés d'ajustament tindran direccions incorrectes si s'aplica "
+"aquesta rotació."
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1800
 msgid ""
@@ -34063,6 +34132,10 @@ msgid ""
 " if e.g. current time and date set in the simulation are not the same as "
 "specified in the image."
 msgstr ""
+"La imatge que introduïu en aquest calculador hauria de contenir tanta "
+"informació EXIF com sigui possible del RAW original, això permetria que la "
+"interfície d'usuari us digui si, per l'hora i data actuals establertes a la "
+"simulació no són les mateixes que les especificades a la imatge."
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1803
 msgid ""
@@ -34073,6 +34146,12 @@ msgid ""
 "<code>exiftool</code> as in the following commands (adjust the file names to"
 " your needs):"
 msgstr ""
+"Un mètode que agafarà una imatge RAW d'entrada i en sortirà un resultat "
+"seguint les directrius anteriors (excepte les referides a la fotografia) és "
+"utilitzar <code>dcraw</code> (l'original de Dave Coffin) o "
+"<code>dcraw_emu</code. > (del paquet <code>libRaw</code>), més "
+"<code>exiftool</code> com a les ordres següents (ajusteu els noms dels "
+"fitxers a les vostres necessitats)\\:"
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1810
 msgid ""
@@ -34082,6 +34161,11 @@ msgid ""
 "stars not as small as they are in the photo, and <code>-Z</code> gives an "
 "explicit name to the file."
 msgstr ""
+"Aquí l'opció <code>-t 0</code> per a <code>dcraw_emu</code> impedeix la "
+"rotació automàtica, <code>-T</code> genera un fitxer TIFF en lloc del PPM "
+"predeterminat, <code>-W </code> impedeix la brillantor automàtica que pot "
+"fer que els estels no siguin tan petits com a la foto, i <code>-Z</code> "
+"dóna un nom explícit al fitxer."
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1814
 msgid ""
@@ -34090,183 +34174,199 @@ msgid ""
 "complete EXIF info than the DNG) into the TIFF. Your case may differ, you "
 "may have to copy from your RAW file instead."
 msgstr ""
+"L'ordre <code>exiftool</code> copia totes les etiquetes GPS i relacionades "
+"amb el temps del sidecar JPEG (que al meu Samsung Galaxy S8 semblava "
+"contenir informació EXIF més completa que el DNG) al TIFF. El vostre cas pot"
+" ser diferent, potser haureu de copiar des del vostre fitxer RAW."
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1820
 msgid "Ctrl+Shift & left mouse drag: move the image around the sky"
 msgstr ""
+"Ctrl+Maj i arrossegar prement el botó esquerre del ratolí\\: mou la imatge "
+"pel cel"
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1821
 msgid ""
 "Ctrl+Shift & right mouse drag: scale and rotate the image around the last "
 "drag point"
 msgstr ""
+"Ctrl+Maj i arrossegar prement el botó dret del ratolí\\: escala i gira la "
+"imatge al voltant de l'últim punt d'arrossegament"
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1822
 msgid ""
 "Keyboard hotkeys can be configured in the Keyboard shortcuts editor (F7)."
 msgstr ""
+"Les tecles d'accés directe del teclat es poden configurar a l'editor de "
+"dreceres de teclat (F7)."
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:719
 msgid "Image placement"
-msgstr ""
+msgstr "Col·locació d'imatges"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:720
 msgid "Distortion model:"
-msgstr ""
+msgstr "Model de distorsió\\:"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:721
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:722
 msgid " px"
-msgstr ""
+msgstr "px"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:723
 msgid "Field of view in smaller direction:"
-msgstr ""
+msgstr "Camp de visió en la direcció més petita\\:"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:724
 msgid "Image rotation angle:"
-msgstr ""
+msgstr "Angle de gir de la imatge\\:"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:725
 msgid "Center of projection elevation:"
-msgstr ""
+msgstr "Centre d'elevació de la projecció\\:"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:726
 msgid "3rd order polynomial"
-msgstr ""
+msgstr "Polinomi de 3r ordre"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:727
 msgid "5th order polynomial"
-msgstr ""
+msgstr "Polinomi de 5è ordre"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:728
 msgid "PTLens"
-msgstr ""
+msgstr "PTLens"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:730
 msgid "Image center shift:"
-msgstr ""
+msgstr "Desplaáment del centre de la imatge\\:"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:731
 msgid "Center of projection azimuth:"
-msgstr ""
+msgstr "Centre de projecció de l'azimut\\:"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:732
 msgid "Distortion coefficients:"
-msgstr ""
+msgstr "Coeficients de distorsió\\:"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:733
 msgid ""
 "Reset\n"
 "placement"
 msgstr ""
+"Restableix\n"
+"la ubicació"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:735
 msgid ""
 "Reset\n"
 "distortion"
 msgstr ""
+"Restableix\n"
+" la distorsió"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:737
 msgid "Image to load:"
-msgstr ""
+msgstr "Imatge per carregar\\:"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:739
 msgid "Browse for an image..."
-msgstr ""
+msgstr "Cerca una imatge..."
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:743
 msgctxt "A verb in imperative, used on a button that fixes a problem."
 msgid "Fix"
-msgstr ""
+msgstr "Arregla"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:744
 msgid "Subtract background RGB:"
-msgstr ""
+msgstr "Resta el fons RGB\\:"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:745
 msgid "Image brightness:"
-msgstr ""
+msgstr "Brillantor de la imatge\\:"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:746
 msgid "Image Loading"
-msgstr ""
+msgstr "Càrrega d'imatges"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:747
 msgid "Reposition image by first two points"
-msgstr ""
+msgstr "Reposicioneu la imatge pels dos primers punts"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:748
 msgid "Pick an image point for selected object..."
-msgstr ""
+msgstr "Trieu un punt de la imatge per a l'objecte seleccionat..."
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:749
 msgid "Optimize"
-msgstr ""
+msgstr "Optimitza"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:751
 msgid "y, px"
-msgstr ""
+msgstr "y, px"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:752
 msgid "x, px"
-msgstr ""
+msgstr "x, px"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:755
 msgid "Remove point"
-msgstr ""
+msgstr "Elimina el punt"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:757
 msgid "Fitting"
-msgstr ""
+msgstr "Omplint"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:758
 msgid " mm"
 msgstr ""
+"mm\n"
+" "
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:759
 msgid "Make:"
-msgstr ""
+msgstr "Fes\\:"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:763
 msgctxt "Lens mount on a camera"
 msgid "Mount:"
-msgstr ""
+msgstr "Munta\\:"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:765
 msgid "Generate"
-msgstr ""
+msgstr "Genera"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:766
 msgid "Model:"
-msgstr ""
+msgstr "Model\\: "
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:767
 msgid "Model for lensfun"
-msgstr ""
+msgstr "Model per lensfun"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:768
 msgid "Show image"
-msgstr ""
+msgstr "Mostra la imatge"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:770
 msgctxt "As in \"normal\" points, the opposite being \"selected\""
 msgid "normal"
-msgstr ""
+msgstr "normal"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:771
 msgid "Mark image axes"
-msgstr ""
+msgstr "Marca els eixos de la imatge"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:772
 msgctxt "As in \"selected points\""
 msgid "selected"
-msgstr ""
+msgstr "seleccionat"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:773
 msgid "Mark picked points"
-msgstr ""
+msgstr "Marca els punts escollits"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:776
 msgid "Mark center of projection"
-msgstr ""
+msgstr "Marca el centre de projecció"
