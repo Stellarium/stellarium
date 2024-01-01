@@ -392,6 +392,7 @@ List of supported parameters (passed as `-DPARAMETER=VALUE`):
 | CMAKE_OSX_ARCHITECTURES       | string | arm64;x86_64 | macOS architecture**
 | CMAKE_OSX_DEPLOYMENT_TARGET   | string | 11.0    | Minimum macOS deployment version**
 | OPENGL_DEBUG_LOGGING          | bool   | OFF     | Enable to log OpenGL information using the GL_KHR_debug extension/QOpenGLLogger
+| ENABLE_QT6                    | bool   | ON      | Enable building Qt6-based Stellarium
 | ENABLE_NLS                    | bool   | ON      | Enable interface translation
 | ENABLE_SHOWMYSKY              | bool   | ON      | Enable support for ShowMySky module that implements a realistic atmosphere model
 | ENABLE_GPS                    | bool   | ON      | Enable GPS support
