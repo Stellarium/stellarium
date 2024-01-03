@@ -653,9 +653,8 @@ void Satellites::restoreDefaultTleSources()
 			urls << url;
 	}
 	// Other sources and supplemental data from Celestrack
-	urls << "1,https://celestrak.org/NORAD/elements/supplemental/sup-gp.php?FILE=starlink&FORMAT=tle"
-	     << "https://www.amsat.org/amsat/ftp/keps/current/nasabare.txt"
-	     << "https://mmccants.org/tles/classfd.zip";
+	urls << "https://www.amsat.org/amsat/ftp/keps/current/nasabare.txt"
+	      << "https://mmccants.org/tles/classfd.zip";
 
 	saveTleSources(urls);
 }
