@@ -14,7 +14,7 @@ jobs:
     if: "!contains(github.actor, 'transifex')"
     steps:
       - name: Checkout repository contents
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Check CRLF line endings
         uses: erclu/check-crlf@v1
