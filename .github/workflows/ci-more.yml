@@ -10,7 +10,6 @@ on:
     branches: [master]
 
 jobs:
-  # CI on Linux (Qt5)
   ci-linux-qt5:
     strategy:
       matrix:
@@ -62,7 +61,6 @@ jobs:
           make -j3
           xvfb-run ctest --output-on-failure
 
-  # CI on Linux (Qt6)
   ci-linux-qt6:
     strategy:
       matrix:
