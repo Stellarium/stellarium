@@ -14,9 +14,7 @@ jobs:
   ci-linux-qt5:
     strategy:
       matrix:
-        include:
-          - arch: aarch64
-          - arch: riscv64
+        arch: [aarch64, riscv64]
     name: "Linux (${{ matrix.arch }}; qt5)"
     runs-on: ubuntu-20.04
     if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.actor, 'transifex')"
@@ -31,7 +29,7 @@ jobs:
 #        tar -zxvf ${{ runner.temp }}/qemu-${{ matrix.arch }}-static.tar.gz
 #        chmod +x ${PWD}/qemu-${{ matrix.arch }}-static
 
-    - name: Configure and build Stellarium
+    - name: Build and run unit tests
       uses: uraimo/run-on-arch-action@v2
       id: build
       with:
@@ -67,7 +65,7 @@ jobs:
           # Installing dependencies
           apt install -y qtbase5-private-dev qtscript5-dev libqt5svg5-dev qttools5-dev-tools qttools5-dev libqt5opengl5-dev qtmultimedia5-dev libqt5multimedia5-plugins libqt5serialport5 libqt5serialport5-dev qtpositioning5-dev libgps-dev libqt5positioning5 libqt5positioning5-plugins libqt5charts5-dev zlib1g-dev libgl1-mesa-dev libdrm-dev libexiv2-dev libnlopt-cxx-dev
           # Installing dev. env. dependencies
-          apt install -y build-essential gcc g++ cmake gettext fakeroot ccache
+          apt install -y build-essential gcc g++ cmake gettext fakeroot ccache xvfb
           # Installing optional dependencies
           # apt install -y qtwebengine5-dev libqt5webengine5 libqt5webenginecore5 libqt5webenginewidgets5
  
@@ -75,6 +73,6 @@ jobs:
         run: |
           mkdir -p build
           cd build
-          cmake -DCMAKE_BUILD_TYPE=Debug -DENABLE_TESTING=On "${{ github.workspace }}"
+          cmake -DCMAKE_BUILD_TYPE=Debug -DENABLE_TESTING=On -DENABLE_SHOWMYSKY=Off -DENABLE_QTWEBENGINE=Off "${{ github.workspace }}"
           make -j3
-          ctest --output-on-failure
+          xvfb-run ctest --output-on-failure
