@@ -31,7 +31,7 @@ jobs:
 #        tar -zxvf ${{ runner.temp }}/qemu-${{ matrix.arch }}-static.tar.gz
 #        chmod +x ${PWD}/qemu-${{ matrix.arch }}-static
 
-    - name: Build AppImage
+    - name: Configure and build Stellarium
       uses: uraimo/run-on-arch-action@v2
       id: build
       with:
