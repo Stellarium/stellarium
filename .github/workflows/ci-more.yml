@@ -11,13 +11,12 @@ on:
 
 jobs:
   # CI on Linux (Qt5)
-  # Note: cmake in U20.04/armhf (armv7) is broken
   ci-linux-qt5:
     strategy:
       matrix:
-        arch: [aarch64, riscv64]
+        arch: [armv7, aarch64, riscv64]
     name: "Linux (${{ matrix.arch }}; qt5)"
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.actor, 'transifex')"
 
     steps:
@@ -29,7 +28,7 @@ jobs:
       id: build-qt5
       with:
         arch: ${{ matrix.arch }}
-        distro: ubuntu20.04
+        distro: ubuntu22.04
 
         # Not required, but speeds up builds by storing container images in
         # a GitHub package registry.
@@ -69,7 +68,7 @@ jobs:
       matrix:
         arch: [armv7, aarch64, riscv64]
     name: "Linux (${{ matrix.arch }}; qt6)"
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.actor, 'transifex')"
 
     steps:
