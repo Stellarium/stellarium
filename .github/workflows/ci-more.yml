@@ -23,15 +23,9 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
 
-#    - name: Download static QEMU (${{ matrix.arch }})
-#      run: |
-#        wget https://github.com/multiarch/qemu-user-static/releases/download/v7.2.0-1/qemu-${{ matrix.arch }}-static.tar.gz -O ${{ runner.temp }}/qemu-${{ matrix.arch }}-static.tar.gz
-#        tar -zxvf ${{ runner.temp }}/qemu-${{ matrix.arch }}-static.tar.gz
-#        chmod +x ${PWD}/qemu-${{ matrix.arch }}-static
-
     - name: Build and run unit tests
       uses: uraimo/run-on-arch-action@v2
-      id: build
+      id: build-qt5
       with:
         arch: ${{ matrix.arch }}
         distro: ubuntu20.04
@@ -39,15 +33,6 @@ jobs:
         # Not required, but speeds up builds by storing container images in
         # a GitHub package registry.
         githubToken: ${{ github.GITHUB_TOKEN }}
-
-        # Create an artifacts directory
-#        setup: |
-#          mkdir -p "${PWD}/artifact"
-
-        # Mount the artifacts directory as /artifact in the container
-#        dockerRunArgs: |
-#          --volume "${PWD}/artifact:/artifact"
-#          --volume "${PWD}/qemu-${{ matrix.arch }}-static:/usr/bin/qemu-static"
 
         # The shell to run commands with in the container
         shell: /bin/bash
@@ -64,6 +49,58 @@ jobs:
           ACCEPT_EULA=Y apt upgrade -o Dpkg::Options::="--force-overwrite" --yes
           # Installing dependencies
           apt install -y qtbase5-private-dev qtscript5-dev libqt5svg5-dev qttools5-dev-tools qttools5-dev libqt5opengl5-dev qtmultimedia5-dev libqt5multimedia5-plugins libqt5serialport5 libqt5serialport5-dev qtpositioning5-dev libgps-dev libqt5positioning5 libqt5positioning5-plugins libqt5charts5-dev zlib1g-dev libgl1-mesa-dev libdrm-dev libexiv2-dev libnlopt-cxx-dev
+          # Installing dev. env. dependencies
+          apt install -y build-essential gcc g++ cmake gettext fakeroot ccache xvfb
+          # Installing optional dependencies
+          # apt install -y qtwebengine5-dev libqt5webengine5 libqt5webenginecore5 libqt5webenginewidgets5
+ 
+        # Produce a binary artifact and place it in the mounted volume
+        run: |
+          mkdir -p build
+          cd build
+          cmake -DCMAKE_BUILD_TYPE=Debug -DENABLE_TESTING=On -DENABLE_SHOWMYSKY=Off -DENABLE_QTWEBENGINE=Off "${{ github.workspace }}"
+          make -j3
+          xvfb-run ctest --output-on-failure
+
+  # CI on Linux (Qt6)
+  ci-linux-qt6:
+    strategy:
+      matrix:
+        arch: [aarch64, riscv64]
+    name: "Linux (${{ matrix.arch }}; qt6)"
+    runs-on: ubuntu-20.04
+    if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.actor, 'transifex')"
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Build and run unit tests
+      uses: uraimo/run-on-arch-action@v2
+      id: build-qt6
+      with:
+        arch: ${{ matrix.arch }}
+        distro: ubuntu22.04
+
+        # Not required, but speeds up builds by storing container images in
+        # a GitHub package registry.
+        githubToken: ${{ github.GITHUB_TOKEN }}
+
+        # The shell to run commands with in the container
+        shell: /bin/bash
+
+        # Install some dependencies in the container. This speeds up builds if
+        # you are also using githubToken. Any dependencies installed here will
+        # be part of the container image that gets cached, so subsequent
+        # builds don't have to re-install them. The image layer is cached
+        # publicly in your project's package repository, so it is vital that
+        # no secrets are present in the container state or logs.
+        install: |
+          # Update installed packages
+          apt update -y
+          ACCEPT_EULA=Y apt upgrade -o Dpkg::Options::="--force-overwrite" --yes
+          # Installing dependencies
+          apt install -y qt6-base-private-dev qt6-multimedia-dev qt6-positioning-dev qt6-tools-dev qt6-tools-dev-tools qt6-base-dev-tools qt6-qpa-plugins qt6-image-formats-plugins qt6-l10n-tools libqt6charts6-dev libqt6charts6 libqt6opengl6-dev libqt6positioning6-plugins libqt6serialport6-dev qt6-base-dev libexiv2-dev libnlopt-cxx-dev zlib1g-dev libgl1-mesa-dev libdrm-dev libglx-dev libxkbcommon-x11-dev libgps-dev
           # Installing dev. env. dependencies
           apt install -y build-essential gcc g++ cmake gettext fakeroot ccache xvfb
           # Installing optional dependencies
