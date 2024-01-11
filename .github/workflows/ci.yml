@@ -12,7 +12,7 @@ on:
 jobs:
   # CI on Linux (Qt5)
   ci-linux-qt5:
-    name: "Linux (qt5)"
+    name: "Linux (amd64; qt5)"
     runs-on: ubuntu-latest
     if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.actor, 'transifex')"
 
@@ -49,7 +49,7 @@ jobs:
 
   # CI on Linux (Qt6)
   ci-linux-qt6:
-    name: "Linux (qt6)"
+    name: "Linux (amd64; qt6)"
     runs-on: ubuntu-latest
     if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.actor, 'transifex')"
 
@@ -86,7 +86,7 @@ jobs:
 
   # CI on macOS (Qt5)
   ci-macos-qt5:
-    name: "macOS (qt5)"
+    name: "macOS (x86_64; qt5)"
     runs-on: macos-latest
     if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.actor, 'transifex')"
 
@@ -123,7 +123,7 @@ jobs:
 
   # CI on macOS (Qt6)
   ci-macos-qt6:
-    name: "macOS (qt6)"
+    name: "macOS (x86_64; qt6)"
     runs-on: macos-latest
     if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.actor, 'transifex')"
 
