@@ -576,10 +576,9 @@ public slots:
 			flagLandscapeUseTransparency=b;
 			emit flagLandscapeUseTransparencyChanged(b);
 		}
-		if (b==false)
+		if (!flagLandscapeUseTransparency) // equals to false
 			landscape->setTransparency(0.0);
 	}
-
 
 	/*
 	//This method has been removed, use StelSkyDrawer::getBortleScaleIndex instead, or StelMainScriptAPI::getBortleScaleIndex in scripts
