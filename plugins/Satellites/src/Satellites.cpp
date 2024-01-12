@@ -756,6 +756,7 @@ void Satellites::loadSettings()
 //	if (conf->contains("tle_url0")) // This can skip some operations...
 	static const QRegularExpression keyRE("^tle_url\\d+$");
 	QStringList urls;
+	bool urlWasUpdated = false;
 	for (const auto& key : conf->childKeys())
 	{
 		if (keyRE.match(key).hasMatch())
@@ -767,7 +768,18 @@ void Satellites::loadSettings()
 
 			// celestrak.com moved to celestrak.org
 			if (url.contains("celestrak.com", Qt::CaseInsensitive))
+			{
 				url.replace("celestrak.com", "celestrak.org", Qt::CaseInsensitive);
+				urlWasUpdated = true;
+			}
+
+			// simple text files are removed
+			if (url.contains("celestrak.org", Qt::CaseInsensitive) && url.endsWith(".txt", Qt::CaseInsensitive))
+			{
+				url.replace("NORAD/elements/", "NORAD/elements/gp.php?GROUP=", Qt::CaseInsensitive);
+				url.replace(".txt", "&FORMAT=TLE", Qt::CaseInsensitive);
+				urlWasUpdated = true;
+			}
 
 			urls << url;
 		}
@@ -776,12 +788,18 @@ void Satellites::loadSettings()
 	if (!urls.isEmpty())
 	{
 		conf->endGroup();
-		setTleSources(urls);
+		setTleSources(urls);		
+		if (urlWasUpdated)
+		{
+			saveTleSources(urls);
+			qWarning() << "[Satellites] updated an old-style array of TLE sources";
+		}
 		conf->beginGroup("Satellites");
 	}
 	else
 	{
 		int size = conf->beginReadArray("tle_sources");
+		bool urlWasUpdated = false;
 		for (int i = 0; i < size; i++)
 		{
 			conf->setArrayIndex(i);
@@ -790,7 +808,18 @@ void Satellites::loadSettings()
 			{
 				// celestrak.com moved to celestrak.org
 				if (url.contains("celestrak.com", Qt::CaseInsensitive))
+				{
 					url.replace("celestrak.com", "celestrak.org", Qt::CaseInsensitive);
+					urlWasUpdated = true;
+				}
+
+				// simple text files are removed
+				if (url.contains("celestrak.org", Qt::CaseInsensitive) && url.endsWith(".txt", Qt::CaseInsensitive))
+				{
+					url.replace("NORAD/elements/", "NORAD/elements/gp.php?GROUP=", Qt::CaseInsensitive);
+					url.replace(".txt", "&FORMAT=TLE", Qt::CaseInsensitive);
+					urlWasUpdated = true;
+				}
 
 				if (conf->value("add_new").toBool())
 					url.prepend("1,");
@@ -798,6 +827,13 @@ void Satellites::loadSettings()
 			}
 		}
 		conf->endArray();
+		if (urlWasUpdated)
+		{
+			conf->endGroup();
+			saveTleSources(updateUrls);
+			qWarning() << "[Satellites] updated list of TLE sources";
+			conf->beginGroup("Satellites");
+		}
 	}
 	
 	// NOTE: Providing default values AND using restoreDefaultSettings() to create the section seems redundant. --BM 
