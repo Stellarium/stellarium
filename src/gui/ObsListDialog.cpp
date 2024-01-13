@@ -443,6 +443,7 @@ void ObsListDialog::loadSelectedList()
 	// At this point selectedOlud must be set
 	Q_ASSERT(selectedOlud.length()>0);
 
+	bool conversionError=false;
 	// We must keep selection for the user. It is not enough to store/restore the existingSelection.
 	// The QList<StelObjectP> objects are apparently volatile. We must retrieve the actual object.
 	const QList<StelObjectP>&existingSelection = objectMgr->getSelectedObject();
@@ -471,7 +472,11 @@ void ObsListDialog::loadSelectedList()
 		listOfObjects = data.value<QVariantList>();
 	}
 	else
+	{
 		qCritical() << "[ObservingList] conversion error";
+		qCritical() << "Cannot convert this objects entry:" << observingListMap.value(KEY_OBJECTS);
+		conversionError=true;
+	}
 
 	// Clear model
 	itemModel->removeRows(0, itemModel->rowCount()); // don't use clear() here!
@@ -494,26 +499,23 @@ void ObsListDialog::loadSelectedList()
 				item.objTypeI18n  = objectMap.value(KEY_OBJECTS_TYPE).toString(); // Preliminary: Do not rely on this translated string! Re-retrieve later
 				item.ra  = objectMap.value(KEY_RA).toString();
 				item.dec = objectMap.value(KEY_DEC).toString();
+				QList<StelObjectP> selectedObject;
 
 				if (objectMgr->findAndSelect(item.designation, item.objClass) && !objectMgr->getSelectedObject().isEmpty())
 				{
 					//qDebug() << "ObsList: found an object of objClass" << item.objClass << "for" << item.designation;
-					const QList<StelObjectP> &selectedObject = objectMgr->getSelectedObject();
-					double ra, dec;
-					StelUtils::rectToSphe(&ra, &dec, selectedObject[0]->getJ2000EquatorialPos(core));
-
-					if (item.ra.isEmpty())
-						item.ra = StelUtils::radToHmsStr(ra, false).trimmed();
-					if (item.dec.isEmpty())
-						item.dec = StelUtils::radToDmsStr(dec, false).trimmed();
-					item.objTypeI18n = selectedObject[0]->getObjectTypeI18n();
-					item.name=selectedObject[0]->getEnglishName();
-					item.nameI18n=selectedObject[0]->getNameI18n();
+					selectedObject = objectMgr->getSelectedObject();
 				}
-				else // THEREFORE: repeat the same code with findAndSelect with any type.
+				else // try findAndSelect with any type. Note that this may lead to confusion!
 					if (objectMgr->findAndSelect(item.designation) && !objectMgr->getSelectedObject().isEmpty())
 				{
-					const QList<StelObjectP> &selectedObject = objectMgr->getSelectedObject();
+					selectedObject = objectMgr->getSelectedObject();
+					//qDebug() << "Changing item.objClass " << item.objClass << "to" << selectedObject[0]->getType();
+					item.objClass = selectedObject[0]->getType();
+				}
+
+				if (!selectedObject.isEmpty())
+				{
 					double ra, dec;
 					StelUtils::rectToSphe(&ra, &dec, selectedObject[0]->getJ2000EquatorialPos(core));
 
@@ -521,16 +523,15 @@ void ObsListDialog::loadSelectedList()
 						item.ra = StelUtils::radToHmsStr(ra, false).trimmed();
 					if (item.dec.isEmpty())
 						item.dec = StelUtils::radToDmsStr(dec, false).trimmed();
-					//qDebug() << "Changing item.objClass " << item.objClass << "to" << selectedObject[0]->getType();
-					item.objClass = selectedObject[0]->getType();
 					item.objTypeI18n = selectedObject[0]->getObjectTypeI18n();
 					item.name=selectedObject[0]->getEnglishName();
 					item.nameI18n=selectedObject[0]->getNameI18n();
 				}
 				else
 				{
-					qWarning() << "[ObservingList] object: " << item.designation << " not found or empty. Cannot set item.objClass !";
+					qWarning() << "[ObservingList] object: " << item.designation << " not found or empty.";
 					qWarning() << "item.objType given as:" << item.objTypeI18n;
+					qWarning() << "item.objClass given as:" << item.objClass;
 				}
 
 				item.magnitude = objectMap.value(KEY_MAGNITUDE).toString();
@@ -573,10 +574,16 @@ void ObsListDialog::loadSelectedList()
 			}
 			else
 			{
-				qCritical() << "[ObservingList] conversion error";
-				return;
+				qCritical() << "[ObservingList] conversion error for object: "  << object;
+				conversionError=true;
 			}
 		}
+	}
+
+	if (conversionError)
+	{
+		QMessageBox::warning(&StelMainView::getInstance(), q_("Attention!"), q_("Error during conversion. Please see logfile for details."));
+		return;
 	}
 
 	// Sorting for the objects list.
@@ -947,6 +954,9 @@ void ObsListDialog::exportListButtonPressed()
 	QString exportListJsonPath = QFileDialog::getSaveFileName(&StelMainView::getInstance(), q_("Export observing list as..."),
 							      destinationDir + "/" + JSON_FILE_BASENAME + "_" + currentListName + ".sol", filter, &selectedFilter);
 
+	if (exportListJsonPath.isEmpty()) // cancel pressed.
+		return;
+
 	QFile jsonFile(exportListJsonPath);
 	if (!jsonFile.open(QIODevice::ReadWrite | QIODevice::Text))
 	{
@@ -993,6 +1003,9 @@ void ObsListDialog::importListButtonPressed()
 	QString fileToImportJsonPath = QFileDialog::getOpenFileName(&StelMainView::getInstance(), q_("Import observing list"),
 								    destinationDir,
 								    filter);
+	if (fileToImportJsonPath.isEmpty()) // cancel pressed.
+		return;
+
 	QVariantMap map;
 	QFile jsonFile(fileToImportJsonPath);
 	if (!jsonFile.open(QIODevice::ReadOnly))
@@ -1104,8 +1117,11 @@ void ObsListDialog::importListButtonPressed()
 */
 void ObsListDialog::deleteListButtonPressed()
 {
-	if (observingLists.count()>1 && (selectedOlud!=defaultOlud) && askConfirmation())
+	if (observingLists.count()>1 && (selectedOlud!=defaultOlud))
 	{
+		if (!askConfirmation()) // place inside to avoid error message below.
+			return;
+
 		QFile jsonFile(observingListJsonPath);
 		if (!jsonFile.open(QIODevice::ReadWrite | QIODevice::Text)) {
 			qWarning() << "[ObservingList] bookmarks list can not be saved. A file can not be open for reading and writing:"
