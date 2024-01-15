@@ -54,6 +54,11 @@ StelTranslator::~StelTranslator()
 	translator = Q_NULLPTR;
 }
 
+bool StelTranslator::isEmpty() const
+{
+	return translator->isEmpty();
+}
+
 QString StelTranslator::qtranslate(const QString& s, const QString& c) const
 {
 	if (s.isEmpty())
@@ -201,4 +206,24 @@ void StelTranslator::initIso639_1LanguageCodes(const QString& fileName)
 		#endif
 		iso639codes.insert(fields.at(0), fields.at(2));
 	}
+}
+
+StelSkyTranslator::StelSkyTranslator(const QString& langName)
+	: StelTranslator("stellarium-skycultures", langName)
+	, commonSkyTranslator("stellarium-sky", langName)
+{
+	if (commonSkyTranslator.isEmpty())
+		qWarning() << "Empty skyculture-independent translation file for language " << getTrueLocaleName();
+}
+
+QString StelSkyTranslator::tryQtranslate(const QString& s, const QString& c) const
+{
+	const auto res = StelTranslator::tryQtranslate(s, c);
+	if (!res.isEmpty()) return res;
+	return commonSkyTranslator.tryQtranslate(s, c);
+}
+
+bool StelSkyTranslator::isEmpty() const
+{
+	return StelTranslator::isEmpty() && commonSkyTranslator.isEmpty();
 }
