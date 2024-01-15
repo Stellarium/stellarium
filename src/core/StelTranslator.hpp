@@ -63,7 +63,10 @@ public:
 	//! @param alangName The C locale name or language name like "fr" or "fr_FR". If string is "" or "system" it will use the system locale.
 	StelTranslator(const QString& adomain, const QString& alangName);
 	
-	~StelTranslator();
+	virtual ~StelTranslator();
+
+	//! Checks whether any translations have been loaded
+	virtual bool isEmpty() const;
 	
 	//! Translate input message and return it as a QString.
 	//! If the string is not translated in the current locale, the input string is returned unchanged.
@@ -77,7 +80,7 @@ public:
 	//! @param s input string in english.
 	//! @param c disambiguation string (gettext "context" string).
 	//! @return The translated QString
-	QString tryQtranslate(const QString& s, const QString& c = QString()) const;
+	virtual QString tryQtranslate(const QString& s, const QString& c = QString()) const;
 	
 	//! Get true translator locale name. Actual locale, never "system".
 	//! @return Locale name e.g "fr_FR"
@@ -106,6 +109,18 @@ public:
 	//! @param fileName file containing the list of language codes
 	static void init(const QString& fileName);
 	
+protected:
+	StelTranslator() = default;
+
+	//! The domain name
+	QString domain;
+
+	//! The two letter string defining the current language name
+	QString langName;
+
+	//! QTranslator instance
+	class QTranslator* translator = nullptr;
+
 private:
 	StelTranslator(const StelTranslator& );
 	const StelTranslator& operator=(const StelTranslator&);
@@ -117,15 +132,6 @@ private:
 	//! Get available language codes from passed locales directory
 	static QStringList getAvailableIso639_1Codes(const QString& localeDir="");
 
-	//! The domain name
-	QString domain;
-
-	//! The two letter string defining the current language name
-	QString langName;
-	
-	//! QTranslator instance
-	class QTranslator* translator;
-
 	//! Try to determine system language from system configuration
 	static void initSystemLanguage(void);
 	
@@ -134,6 +140,17 @@ private:
 	
 	//! Contains the list of all iso639 languages codes
 	static QMap<QString, QString> iso639codes;
+};
+
+class StelSkyTranslator : public StelTranslator
+{
+public:
+	StelSkyTranslator(const QString& langName);
+	QString tryQtranslate(const QString& s, const QString& c = QString()) const override;
+	bool isEmpty() const override;
+private:
+	//! Used as a skyculture-independent fallback when current sky culture doesn't have a translation
+	StelTranslator commonSkyTranslator;
 };
 
 #endif // STELTRANSLATOR_HPP

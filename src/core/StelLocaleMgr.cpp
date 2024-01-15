@@ -20,6 +20,7 @@
 #include "StelLocaleMgr.hpp"
 #include "StelApp.hpp"
 #include "StelUtils.hpp"
+#include "StelSkyCultureMgr.hpp"
 
 #include <QLocale>
 #include <QDebug>
@@ -70,6 +71,10 @@ void StelLocaleMgr::setAppLanguage(const QString& newAppLanguageName, bool refre
 	scriptsTranslator.reset(new StelTranslator("stellarium-scripts", newAppLanguageName));
 	qDebug().noquote() << "Scripts language:" << scriptsTranslator->getTrueLocaleName();
 
+	// Update the translator with new locale name
+	skyCultureDescriptionsTranslator.reset(new StelTranslator("stellarium-skycultures-descriptions", newAppLanguageName));
+	qDebug().noquote() << "Sky culture description language:" << skyCultureDescriptionsTranslator->getTrueLocaleName();
+
 	createNameLists();
 	if (refreshAll)
 		StelApp::getInstance().updateI18n();
@@ -86,7 +91,7 @@ bool StelLocaleMgr::isAppRTL() const
 void StelLocaleMgr::setSkyLanguage(const QString& newSkyLanguageName, bool refreshAll)
 {
 	// Update the translator with new locale name
-	skyTranslator.reset(new StelTranslator("stellarium-skycultures", newSkyLanguageName));
+	skyTranslator.reset(new StelSkyTranslator(newSkyLanguageName));
 	qDebug().noquote() << "Sky language:" << skyTranslator->getTrueLocaleName();
 
 	// Update the translator with new locale name
@@ -129,6 +134,11 @@ const StelTranslator &StelLocaleMgr::getAppStelTranslator() const
 const StelTranslator& StelLocaleMgr::getScriptsTranslator() const
 {
 	return *scriptsTranslator;
+}
+
+const StelTranslator& StelLocaleMgr::getSkyCultureDescriptionsTranslator() const
+{
+	return *skyCultureDescriptionsTranslator;
 }
 
 // Return the time in ISO 8601 format that is : %Y-%m-%d %H:%M:%S
