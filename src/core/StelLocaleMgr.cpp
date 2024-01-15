@@ -20,6 +20,7 @@
 #include "StelLocaleMgr.hpp"
 #include "StelApp.hpp"
 #include "StelUtils.hpp"
+#include "StelSkyCultureMgr.hpp"
 
 #include <QLocale>
 #include <QDebug>
@@ -97,7 +98,7 @@ void StelLocaleMgr::setSkyLanguage(const QString& newSkyLanguageName, bool refre
 {
 	delete skyTranslator;
 	// Update the translator with new locale name
-	skyTranslator = new StelTranslator("stellarium-skycultures", newSkyLanguageName);
+	skyTranslator = new StelSkyTranslator(newSkyLanguageName);
 	qDebug().noquote() << "Sky language:" << skyTranslator->getTrueLocaleName();
 
 	delete planetaryFeaturesTranslator;
