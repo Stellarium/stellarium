@@ -1,11 +1,11 @@
-FILE(GLOB poscfiles RELATIVE "${CMAKE_SOURCE_DIR}/po/stellarium-skycultures/" "*.po")
+FILE(GLOB poscfiles RELATIVE "${CMAKE_SOURCE_DIR}/po/stellarium-skycultures-descriptions/" "*.po")
 LIST(SORT poscfiles)
 STRING(REGEX REPLACE ".po" "" outposcfiles "${poscfiles}")
 
 # This is a copy of the implementation of GETTEXT_CREATE_TRANSLATIONS, but
 # without updating the .po or .pot files, because they are made by an external
 # script from a separate repository.
-set(_domain stellarium-skycultures)
+set(_domain stellarium-skycultures-descriptions)
 
 file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/translations/${_domain})
 
