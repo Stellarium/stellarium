@@ -541,6 +541,12 @@ QString StelSkyCultureMgr::convertMarkdownLevel2Section(const QString& markdown,
 
 QString StelSkyCultureMgr::descriptionMarkdownToHTML(const QString& markdown, const QString& descrPath)
 {
+	// Section names should be available for translation
+	(void)NC_("Introduction", "Name of a section in sky culture description");
+	(void)NC_("Description" , "Name of a section in sky culture description");
+	(void)NC_("Extras"      , "Name of a section in sky culture description");
+	(void)NC_("References"  , "Name of a section in sky culture description");
+	(void)NC_("Authors"     , "Name of a section in sky culture description");
 	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
 
 	const QRegularExpression headerPat("^# +(.+)$", QRegularExpression::MultilineOption);
@@ -572,7 +578,7 @@ QString StelSkyCultureMgr::descriptionMarkdownToHTML(const QString& markdown, co
 			const auto sectionText = convertMarkdownLevel2Section(markdown, prevSectionName, prevBodyStartPos, nameStartPos, trans);
 			if (!sectionText.isEmpty())
 			{
-				text += "<h1>" + trans.qtranslate(prevSectionName) + "</h1>";
+				text += "<h1>" + qc_(prevSectionName, "Name of a section in sky culture description") + "</h1>";
 				text += sectionText;
 			}
 		}
@@ -584,7 +590,7 @@ QString StelSkyCultureMgr::descriptionMarkdownToHTML(const QString& markdown, co
 		const auto sectionText = convertMarkdownLevel2Section(markdown, prevSectionName, prevBodyStartPos, markdown.size(), trans);
 		if (!sectionText.isEmpty())
 		{
-			text += "<h1>" + prevSectionName + "</h1>\n";
+			text += "<h1>" + qc_(prevSectionName, "Name of a section in sky culture description") + "</h1>\n";
 			text += sectionText;
 		}
 	}
