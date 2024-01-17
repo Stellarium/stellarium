@@ -508,9 +508,12 @@ QStringList StelSkyCultureMgr::getSkyCultureListIDs(void) const
 }
 
 QString StelSkyCultureMgr::convertMarkdownLevel2Section(const QString& markdown, const QString& sectionName,
-                                                  const qsizetype bodyStartPos, const qsizetype bodyEndPos)
+                                                        const qsizetype bodyStartPos, const qsizetype bodyEndPos,
+                                                        const StelTranslator& trans)
 {
 	auto text = markdown.mid(bodyStartPos, bodyEndPos - bodyStartPos);
+	text.replace(QRegularExpression("^\n*|\n*$"), "");
+	text = trans.qtranslate(text);
 
 	if (sectionName.trimmed() == "References")
 	{
@@ -538,6 +541,8 @@ QString StelSkyCultureMgr::convertMarkdownLevel2Section(const QString& markdown,
 
 QString StelSkyCultureMgr::descriptionMarkdownToHTML(const QString& markdown, const QString& descrPath)
 {
+	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
+
 	const QRegularExpression headerPat("^# +(.+)$", QRegularExpression::MultilineOption);
 	const auto match = headerPat.match(markdown);
 	QString name;
@@ -564,10 +569,10 @@ QString StelSkyCultureMgr::descriptionMarkdownToHTML(const QString& markdown, co
 		const auto bodyStartPos = match.capturedEnd(0);
 		if (!prevSectionName.isEmpty())
 		{
-			const auto sectionText = convertMarkdownLevel2Section(markdown, prevSectionName, prevBodyStartPos, nameStartPos);
+			const auto sectionText = convertMarkdownLevel2Section(markdown, prevSectionName, prevBodyStartPos, nameStartPos, trans);
 			if (!sectionText.isEmpty())
 			{
-				text += "<h1>" + prevSectionName + "</h1>";
+				text += "<h1>" + trans.qtranslate(prevSectionName) + "</h1>";
 				text += sectionText;
 			}
 		}
@@ -576,7 +581,7 @@ QString StelSkyCultureMgr::descriptionMarkdownToHTML(const QString& markdown, co
 	}
 	if (prevBodyStartPos >= 0)
 	{
-		const auto sectionText = convertMarkdownLevel2Section(markdown, prevSectionName, prevBodyStartPos, markdown.size());
+		const auto sectionText = convertMarkdownLevel2Section(markdown, prevSectionName, prevBodyStartPos, markdown.size(), trans);
 		if (!sectionText.isEmpty())
 		{
 			text += "<h1>" + prevSectionName + "</h1>\n";
