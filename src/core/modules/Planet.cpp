@@ -408,8 +408,19 @@ void Planet::replaceTexture(const QString &texName)
 
 void Planet::translateName(const StelTranslator& trans)
 {
-	nameI18 = trans.qtranslate(englishName, getContextString());
-	nativeNameMeaningI18n = (!nativeNameMeaning.isEmpty() ? trans.qtranslate(nativeNameMeaning) : "");
+	nameI18 = trans.tryQtranslate(englishName, getContextString());
+	if (nameI18.isEmpty())
+		nameI18 = qc_(englishName, getContextString());
+	if (!nativeNameMeaning.isEmpty())
+	{
+		nativeNameMeaningI18n = trans.tryQtranslate(nativeNameMeaning);
+		if (nativeNameMeaningI18n.isEmpty())
+			nativeNameMeaningI18n = q_(nativeNameMeaning);
+	}
+	else
+	{
+		nativeNameMeaningI18n = "";
+	}
 }
 
 void Planet::setIAUMoonNumber(const QString &designation)
