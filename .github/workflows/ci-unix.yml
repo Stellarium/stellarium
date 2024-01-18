@@ -58,7 +58,7 @@ jobs:
       uses: vmactions/netbsd-vm@v1
       id: netbsd-qt5
       with:
-        release: 9.0
+        release: "9.0"
         # Use sh shell
         usesh: true
         prepare: |
@@ -98,14 +98,49 @@ jobs:
         # When using rsync, you can define copyback: false to not copy files back from the VM in to the host.
         copyback: false
         prepare: |
-          pkg_add cmake qt5 qxlsx exiv2 nlopt perl5 gettext
+          pkg_add cmake calcmysky exiv2 indi indi-libs nlopt gpsd qt5-qxlsx qt5
 
         run: |
           set -e -x
           export DISPLAY=:0
           mkdir builds
           cd builds
-          cmake -DCMAKE_BUILD_TYPE=Debug -DENABLE_TESTING=On -DENABLE_SHOWMYSKY=Off "${{ github.workspace }}"
+          cmake -DCMAKE_BUILD_TYPE=Debug -DENABLE_TESTING=On "${{ github.workspace }}"
+          make -j3
+          Xvfb :0 -ac -screen 0 1024x768x24+32 >/dev/null 2>&1 &
+          sleep 3
+          ctest --output-on-failure
+          xvfb_pids=`ps aux | grep Xvfb | grep -v grep | awk '{print $2}'`
+          if [ "$xvfb_pids" != "" ]; then
+             kill $xvfb_pids
+          fi
+
+  ci-openbsd-qt6:
+    name: "OpenBSD (x86_64; qt6)"
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.actor, 'transifex')"
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Build and run unit tests in OpenBSD
+      uses: vmactions/openbsd-vm@v1
+      id: openbsd-qt6
+      with:
+        # Use sh shell
+        usesh: true
+        # When using rsync, you can define copyback: false to not copy files back from the VM in to the host.
+        copyback: false
+        prepare: |
+          pkg_add cmake calcmysky exiv2 indi indi-libs nlopt gpsd qt6-qxlsx qt6
+
+        run: |
+          set -e -x
+          export DISPLAY=:0
+          mkdir builds
+          cd builds
+          cmake -DCMAKE_BUILD_TYPE=Debug -DENABLE_TESTING=On "${{ github.workspace }}"
           make -j3
           Xvfb :0 -ac -screen 0 1024x768x24+32 >/dev/null 2>&1 &
           sleep 3
