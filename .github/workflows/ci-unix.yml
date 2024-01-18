@@ -45,8 +45,8 @@ jobs:
              kill $xvfb_pids
           fi
 
-  ci-netbsd-qt6:
-    name: "NetBSD (x86_64; qt6)"
+  ci-netbsd-qt5:
+    name: "NetBSD (x86_64; qt5)"
     runs-on: ubuntu-latest
     if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.actor, 'transifex')"
 
@@ -56,17 +56,17 @@ jobs:
 
     - name: Build and run unit tests in NetBSD
       uses: vmactions/netbsd-vm@v1
-      id: netbsd-qt6
+      id: netbsd-qt5
       with:
         release: "9.0"
         # Use sh shell
         usesh: true
         prepare: |
-          /usr/sbin/pkg_add cmake qt6 exiv2 nlopt gettext 
+          /usr/sbin/pkg_add cmake qt5-qtscript qt5-qtserialport qt5-qttools qt5-qtdeclarative qt5-qtlocation qt5-qtbase qt5-qtmultimedia qt5-qtscript glu libdrm MesaLib exiv2 nlopt gettext 
 
         run: |
           set -e -x
-          export PATH=/usr/pkg/qt6/bin:$PATH
+          export PATH=/usr/pkg/qt5/bin:$PATH
           export DISPLAY=:0
           mkdir builds
           cd builds
@@ -98,7 +98,7 @@ jobs:
         # When using rsync, you can define copyback: false to not copy files back from the VM in to the host.
         copyback: false
         prepare: |
-          pkg_add cmake calcmysky exiv2 nlopt gpsd qt6-qxlsx qt6
+          pkg_add cmake calcmysky eigen3 glm exiv2 nlopt gpsd qt6-qxlsx qt6
 
         run: |
           set -e -x
