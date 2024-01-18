@@ -28,7 +28,7 @@ jobs:
         # When using rsync, you can define copyback: false to not copy files back from the VM in to the host.
         copyback: false
         prepare: |
-          pkg install -y cmake qxlsx exiv2 nlopt perl5 xorg-vfbserver gettext calcmysky qt5-buildtools qt5-charts qt5-concurrent qt5-core qt5-declarative qt5-gui qt5-script qt5-serialport qt5-qmake qt5-webengine qt5-widgets qt5-testlib qt5-linguisttools qt5-location qt5-network qt5-multimedia qt5-opengl
+          pkg install -y cmake qxlsx exiv2 nlopt perl5 xorg-vfbserver gettext calcmysky qt5-buildtools qt5-charts qt5-concurrent qt5-core qt5-declarative qt5-gui qt5-script qt5-serialport qt5-qmake qt5-webengine qt5-widgets qt5-testlib qt5-linguisttools qt5-location qt5-network qt5-multimedia qt5-opengl qt5-webchannel
 
         run: |
           set -e -x
@@ -68,38 +68,6 @@ jobs:
           mkdir builds
           cd builds
           cmake -DCMAKE_BUILD_TYPE=Debug -DENABLE_TESTING=On -DENABLE_SHOWMYSKY=Off "${{ github.workspace }}"
-          make -j3
-          Xvfb :0 -ac -screen 0 1024x768x24+32 >/dev/null 2>&1 &
-          sleep 3
-          ctest --output-on-failure
-          pkill Xvfb
-
-  ci-openbsd-qt5:
-    name: "OpenBSD (x86_64; qt5)"
-    runs-on: ubuntu-latest
-    if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.actor, 'transifex')"
-
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
-
-    - name: Build and run unit tests in OpenBSD
-      uses: vmactions/openbsd-vm@v1
-      id: openbsd-qt5
-      with:
-        # Use sh shell
-        usesh: true
-        # When using rsync, you can define copyback: false to not copy files back from the VM in to the host.
-        copyback: false
-        prepare: |
-          pkg_add cmake eigen3 glm exiv2 nlopt gpsd qt5-qxlsx qt5 qtbase qtscript qtserialport qtdeclarative qtmultimedia qtcharts qttools qtlocation qtwebengine
-
-        run: |
-          set -e -x
-          export DISPLAY=:0
-          mkdir builds
-          cd builds
-          cmake -DCMAKE_BUILD_TYPE=Debug -DENABLE_TESTING=On -DENABLE_QTWEBENGINE=Off -DENABLE_SHOWMYSKY=Off "${{ github.workspace }}"
           make -j3
           Xvfb :0 -ac -screen 0 1024x768x24+32 >/dev/null 2>&1 &
           sleep 3
