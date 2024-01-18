@@ -28,14 +28,14 @@ jobs:
         # When using rsync, you can define copyback: false to not copy files back from the VM in to the host.
         copyback: false
         prepare: |
-          pkg install -y cmake qt5-buildtools qt5-charts qt5-concurrent qt5-core qt5-declarative qt5-gui qt5-location qt5-multimedia qt5-network qt5-opengl qt5-qmake qt5-script qt5-serialport qt5-widgets qt5-testlib qt5-linguisttools qt5-webengine qxlsx exiv2 nlopt perl5 xorg-vfbserver gettext
+          pkg install -y cmake qxlsx exiv2 nlopt perl5 xorg-vfbserver gettext calcmysky qt5-buildtools qt5-charts qt5-concurrent qt5-core qt5-declarative qt5-gui qt5-script qt5-serialport qt5-qmake qt5-webengine qt5-widgets qt5-testlib qt5-linguisttools qt5-location qt5-network qt5-multimedia qt5-opengl
 
         run: |
           set -e -x
           export DISPLAY=:0
           mkdir builds
           cd builds
-          cmake -DCMAKE_BUILD_TYPE=Debug -DENABLE_TESTING=On -DENABLE_SHOWMYSKY=Off "${{ github.workspace }}"
+          cmake -DCMAKE_BUILD_TYPE=Debug -DENABLE_TESTING=On "${{ github.workspace }}"
           make -j3
           Xvfb :0 -ac -screen 0 1024x768x24+32 >/dev/null 2>&1 &
           sleep 3
@@ -66,7 +66,7 @@ jobs:
 
         run: |
           set -e -x
-          export PATH=/usr/pkg/qt5/bin:$PATH
+          export PATH=/usr/pkg/qt6/bin:$PATH
           export DISPLAY=:0
           mkdir builds
           cd builds
@@ -98,7 +98,7 @@ jobs:
         # When using rsync, you can define copyback: false to not copy files back from the VM in to the host.
         copyback: false
         prepare: |
-          pkg_add cmake calcmysky exiv2 libindi indi nlopt gpsd qt6-qxlsx qt6
+          pkg_add cmake calcmysky exiv2 nlopt gpsd qt6-qxlsx qt6
 
         run: |
           set -e -x
