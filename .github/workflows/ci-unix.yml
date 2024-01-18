@@ -62,7 +62,7 @@ jobs:
         # Use sh shell
         usesh: true
         prepare: |
-          /usr/sbin/pkg_add cmake qt5-qtscript qt5-qtserialport qt5-qttools qt5-qtdeclarative qt5-qtlocation qt5-qtbase qt5-qtmultimedia qt5-qtscript glu libdrm MesaLib exiv2 nlopt gettext 
+          /usr/sbin/pkg_add cmake qt5-qtscript qt5-qtserialport qt5-qttools qt5-qtdeclarative qt5-qtlocation qt5-qtbase qt5-qtmultimedia qt5-qtscript glu exiv2 nlopt gettext 
 
         run: |
           set -e -x
@@ -105,7 +105,7 @@ jobs:
           export DISPLAY=:0
           mkdir builds
           cd builds
-          cmake -DCMAKE_BUILD_TYPE=Debug -DENABLE_TESTING=On "${{ github.workspace }}"
+          cmake -DCMAKE_BUILD_TYPE=Debug -DENABLE_TESTING=On -DENABLE_QTWEBENGINE=Off "${{ github.workspace }}"
           make -j3
           Xvfb :0 -ac -screen 0 1024x768x24+32 >/dev/null 2>&1 &
           sleep 3
@@ -133,7 +133,7 @@ jobs:
         # When using rsync, you can define copyback: false to not copy files back from the VM in to the host.
         copyback: false
         prepare: |
-          pkg install -y cmake qt5-buildtools qt5-charts qt5-concurrent qt5-core qt5-declarative qt5-gui qt5-location qt5-multimedia qt5-network qt5-opengl qt5-qmake qt5-script qt5-serialport qt5-widgets qt5-testlib qt5-linguisttools qt5-webengine qxlsx exiv2 nlopt perl5 xorg-vfbserver gettext
+          pkg install -y cmake qt5 qxlsx exiv2 nlopt perl5 xorg-vfbserver gettext
 
         run: |
           set -e -x
