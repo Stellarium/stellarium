@@ -79,5 +79,3 @@ jobs:
           if [ "$xvfb_pids" != "" ]; then
              kill $xvfb_pids
           fi
-
-y
