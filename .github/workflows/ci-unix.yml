@@ -58,13 +58,15 @@ jobs:
       uses: vmactions/netbsd-vm@v1
       id: netbsd-qt5
       with:
+        release: 9.0
         # Use sh shell
         usesh: true
         prepare: |
-          /usr/sbin/pkg_add cmake qt5 qxlsx exiv2 nlopt perl5 gettext
+          /usr/sbin/pkg_add cmake qt5 exiv2 nlopt gettext
 
         run: |
           set -e -x
+          export PATH=/usr/pkg/qt5/bin:$PATH
           export DISPLAY=:0
           mkdir builds
           cd builds

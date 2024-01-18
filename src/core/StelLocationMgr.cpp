@@ -1084,8 +1084,8 @@ void StelLocationMgr::changeLocationFromGPSQuery(const StelLocation &locin)
 	loc.isUserLocation=true;
 	loc.planetName="Earth";
 	loc.name=QString("GPS %1%2 %3%4")
-		.arg(loc.getLatitude()<0?"S":"N").arg(qRound(abs(loc.getLatitude())))
-		.arg(loc.getLongitude()<0?"W":"E").arg(qRound(abs(loc.getLongitude())));
+		.arg(loc.getLatitude()<0.f?"S":"N").arg(qRound(abs(loc.getLatitude())))
+		.arg(loc.getLongitude()<0.f?"W":"E").arg(qRound(abs(loc.getLongitude())));
 	LandscapeMgr *lMgr=GETSTELMODULE(LandscapeMgr);
 	QString landscapeAutoName;
 	if (lMgr->getFlagLandscapeAutoSelection())
