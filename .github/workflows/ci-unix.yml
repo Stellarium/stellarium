@@ -45,3 +45,105 @@ jobs:
              kill $xvfb_pids
           fi
 
+  ci-netbsd-qt5:
+    name: "NetBSD (x86_64; qt5)"
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.actor, 'transifex')"
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Build and run unit tests in NetBSD
+      uses: vmactions/netbsd-vm@v1
+      id: netbsd-qt5
+      with:
+        # Use sh shell
+        usesh: true
+        prepare: |
+          /usr/sbin/pkg_add cmake qt5 qxlsx exiv2 nlopt perl5 gettext
+
+        run: |
+          set -e -x
+          export DISPLAY=:0
+          mkdir builds
+          cd builds
+          cmake -DCMAKE_BUILD_TYPE=Debug -DENABLE_TESTING=On -DENABLE_SHOWMYSKY=Off "${{ github.workspace }}"
+          make -j3
+          Xvfb :0 -ac -screen 0 1024x768x24+32 >/dev/null 2>&1 &
+          sleep 3
+          ctest --output-on-failure
+          xvfb_pids=`ps aux | grep Xvfb | grep -v grep | awk '{print $2}'`
+          if [ "$xvfb_pids" != "" ]; then
+             kill $xvfb_pids
+          fi
+
+  ci-openbsd-qt5:
+    name: "OpenBSD (x86_64; qt5)"
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.actor, 'transifex')"
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Build and run unit tests in OpenBSD
+      uses: vmactions/openbsd-vm@v1
+      id: openbsd-qt5
+      with:
+        # Use sh shell
+        usesh: true
+        # When using rsync, you can define copyback: false to not copy files back from the VM in to the host.
+        copyback: false
+        prepare: |
+          pkg_add cmake qt5 qxlsx exiv2 nlopt perl5 gettext
+
+        run: |
+          set -e -x
+          export DISPLAY=:0
+          mkdir builds
+          cd builds
+          cmake -DCMAKE_BUILD_TYPE=Debug -DENABLE_TESTING=On -DENABLE_SHOWMYSKY=Off "${{ github.workspace }}"
+          make -j3
+          Xvfb :0 -ac -screen 0 1024x768x24+32 >/dev/null 2>&1 &
+          sleep 3
+          ctest --output-on-failure
+          xvfb_pids=`ps aux | grep Xvfb | grep -v grep | awk '{print $2}'`
+          if [ "$xvfb_pids" != "" ]; then
+             kill $xvfb_pids
+          fi
+
+  ci-dragonflybsd-qt5:
+    name: "DragonflyBSD (x86_64; qt5)"
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.actor, 'transifex')"
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Build and run unit tests in DragonflyBSD
+      uses: vmactions/dragonflybsd-vm@v1
+      id: dragonflybsd-qt5
+      with:
+        # Use sh shell
+        usesh: true
+        # When using rsync, you can define copyback: false to not copy files back from the VM in to the host.
+        copyback: false
+        prepare: |
+          pkg install -y cmake qt5-buildtools qt5-charts qt5-concurrent qt5-core qt5-declarative qt5-gui qt5-location qt5-multimedia qt5-network qt5-opengl qt5-qmake qt5-script qt5-serialport qt5-widgets qt5-testlib qt5-linguisttools qt5-webengine qxlsx exiv2 nlopt perl5 xorg-vfbserver gettext
+
+        run: |
+          set -e -x
+          export DISPLAY=:0
+          mkdir builds
+          cd builds
+          cmake -DCMAKE_BUILD_TYPE=Debug -DENABLE_TESTING=On -DENABLE_SHOWMYSKY=Off "${{ github.workspace }}"
+          make -j3
+          Xvfb :0 -ac -screen 0 1024x768x24+32 >/dev/null 2>&1 &
+          sleep 3
+          ctest --output-on-failure
+          xvfb_pids=`ps aux | grep Xvfb | grep -v grep | awk '{print $2}'`
+          if [ "$xvfb_pids" != "" ]; then
+             kill $xvfb_pids
+          fi
