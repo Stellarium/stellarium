@@ -63,6 +63,14 @@ V3f & V3f::operator =(const V3f &v)
 	return *this;
 }
 
+QString V3f::toHex() const
+{
+	return QString("#%1%2%3")
+		.arg(qMin(255, int(m_x * 255)), 2, 16, QChar('0'))
+		.arg(qMin(255, int(m_y * 255)), 2, 16, QChar('0'))
+		.arg(qMin(255, int(m_z * 255)), 2, 16, QChar('0'));
+}
+
 ///////////////////////
 #ifdef ENABLE_SCRIPT_QML
 
