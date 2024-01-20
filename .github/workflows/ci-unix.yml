@@ -100,6 +100,7 @@ jobs:
           set -e -x
           export Qt5_DIR=/usr/local/lib/qt5/cmake/Qt5
           export Qt5Script_DIR=/usr/local/lib/qt5/cmake/Qt5Script
+          export Qt5LinguistTools_DIR=/usr/local/lib/qt5/cmake/Qt5LinguistTools
           export CPATH=$CPATH:/usr/local/include
           export PATH=/usr/local/lib/qt5:/usr/local/lib/qt5/bin:$PATH
           export DISPLAY=:0
