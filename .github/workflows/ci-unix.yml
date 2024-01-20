@@ -98,6 +98,8 @@ jobs:
 
         run: |
           set -e -x
+          export Qt5_DIR=/usr/local/lib/qt5/cmake/Qt5
+          export CPATH=$CPATH:/usr/local/include
           export PATH=/usr/local/lib/qt5:/usr/local/lib/qt5/bin:$PATH
           export DISPLAY=:0
           mkdir builds
