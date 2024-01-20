@@ -31,7 +31,7 @@ QTEST_GUILESS_MAIN(TestJavaScripting)
 #ifdef ENABLE_SCRIPT_QML
 QString TestJavaScripting::runScript(QJSEngine *engine, QString script )
 {
-	std::cout << "Script:" << std::endl << script.toStdString() << std::endl;
+//	std::cout << "Script:" << std::endl << script.toStdString() << std::endl;
 	QJSValue result = engine->evaluate(script);
 	if (result.isError()) {
 //		int line = engine->uncaughtExceptionLineNumber();

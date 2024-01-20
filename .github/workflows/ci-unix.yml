@@ -146,3 +146,74 @@ jobs:
           sleep 1
           pkill Xvfb
 
+  ci-netbsd-qt5:
+    name: "NetBSD (x86_64; qt5)"
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.actor, 'transifex')"
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Build and run unit tests in NetBSD
+      uses: vmactions/netbsd-vm@v1
+      id: netbsd-qt5
+      with:
+        release: "9.0"
+        # Use sh shell
+        usesh: true
+        prepare: |
+          /usr/sbin/pkg_add cmake qt5-qtscript qt5-qtserialport qt5-qttools qt5-qtdeclarative qt5-qtlocation qt5-qtbase qt5-qtmultimedia qt5-qtcharts glu exiv2 nlopt gettext 
+          cd /usr/pkg/graphics/MesaLib/
+          make -j3 && make install && make clean
+          cd ~
+
+        run: |
+          set -e -x
+          export PATH=/usr/pkg/qt5/bin:$PATH
+          export DISPLAY=:0
+          mkdir builds
+          cd builds
+          cmake -DCMAKE_BUILD_TYPE=Debug -DENABLE_TESTING=On -DENABLE_GPS=OFF -DENABLE_SHOWMYSKY=Off "${{ github.workspace }}"
+          make -j3
+          Xvfb :0 -ac -screen 0 1024x768x24+32 >/dev/null 2>&1 &
+          sleep 3
+          ctest --output-on-failure
+          sleep 1
+          pkill Xvfb
+
+  ci-netbsd-qt6:
+    name: "NetBSD (x86_64; qt6)"
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.actor, 'transifex')"
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Build and run unit tests in NetBSD
+      uses: vmactions/netbsd-vm@v1
+      id: netbsd-qt6
+      with:
+        release: "9.0"
+        # Use sh shell
+        usesh: true
+        prepare: |
+          /usr/sbin/pkg_add cmake qt6-qtserialport qt6-qttools qt6-qtdeclarative qt6-qtlocation qt6-qtbase qt6-qtmultimedia qt6-qtcharts glu exiv2 nlopt gettext 
+          cd /usr/pkg/graphics/MesaLib/
+          make -j3 && make install && make clean
+          cd ~
+
+        run: |
+          set -e -x
+          export PATH=/usr/pkg/qt6/bin:$PATH
+          export DISPLAY=:0
+          mkdir builds
+          cd builds
+          cmake -DCMAKE_BUILD_TYPE=Debug -DENABLE_TESTING=On -DENABLE_GPS=OFF -DENABLE_SHOWMYSKY=Off "${{ github.workspace }}"
+          make -j3
+          Xvfb :0 -ac -screen 0 1024x768x24+32 >/dev/null 2>&1 &
+          sleep 3
+          ctest --output-on-failure
+          sleep 1
+          pkill Xvfb
