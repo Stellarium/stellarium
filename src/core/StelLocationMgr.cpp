@@ -1078,19 +1078,21 @@ void StelLocationMgr::changeLocationFromGPSQuery(const StelLocation &locin)
 	const bool verbose=qApp->property("verbose").toBool();
 	StelCore *core=StelApp::getInstance().getCore();
 	StelLocation loc=locin;
+	const float latitude = loc.getLatitude();
+	const float longitude = loc.getLongitude();
 	loc.lightPollutionLuminance=StelLocation::DEFAULT_LIGHT_POLLUTION_LUMINANCE;
 	// Usually you don't leave your time zone with GPS.
 	loc.ianaTimeZone=core->getCurrentTimeZone();
 	loc.isUserLocation=true;
 	loc.planetName="Earth";
 	loc.name=QString("GPS %1%2 %3%4")
-		.arg(loc.getLatitude()<0.f?"S":"N").arg(qRound(abs(loc.getLatitude())))
-		.arg(loc.getLongitude()<0.f?"W":"E").arg(qRound(abs(loc.getLongitude())));
+		.arg(latitude<0.f?"S":"N").arg(qRound(qAbs(latitude)))
+		.arg(longitude<0.f?"W":"E").arg(qRound(qAbs(longitude)));
 	LandscapeMgr *lMgr=GETSTELMODULE(LandscapeMgr);
 	QString landscapeAutoName;
 	if (lMgr->getFlagLandscapeAutoSelection())
 	{
-		QColor color=getColorForCoordinates(loc.getLongitude(), loc.getLatitude());
+		QColor color=getColorForCoordinates(longitude, latitude);
 		landscapeAutoName=QString("ZeroColor(%1)").arg(Vec3f(color).toStr());
 	}
 	core->moveObserverTo(loc, 0.0, 0.0, landscapeAutoName);
@@ -1101,7 +1103,7 @@ void StelLocationMgr::changeLocationFromGPSQuery(const StelLocation &locin)
 	}
 	if (verbose)
 	{
-		qDebug() << "Location in progress: Long=" << loc.getLongitude() << " Lat=" << loc.getLatitude() << " Alt" << loc.altitude;
+		qDebug() << "Location in progress: Long=" << longitude << " Lat=" << latitude << " Alt" << loc.altitude;
 		qDebug() << "New location named " << loc.name;
 		qDebug() << "queryOK, resetting GUI";
 	}
