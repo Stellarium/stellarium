@@ -211,39 +211,3 @@ jobs:
           ctest --output-on-failure
           sleep 1
           pkill Xvfb
-
-  ci-solaris-qt5:
-    name: "Solaris (x86_64; qt5)"
-    runs-on: ubuntu-latest
-    if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.actor, 'transifex')"
-
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
-
-    - name: Build and run unit tests in Solaris
-      uses: vmactions/solaris-vm@v1
-      id: solaris-qt5
-      with:
-        release: 11.4-gcc
-        # Use sh shell
-        usesh: true
-        # When using rsync, you can define copyback: false to not copy files back from the VM in to the host.
-        copyback: false
-        prepare: |
-          pkg install cmake qt5 developer/gnome/gettext
-
-        run: |
-          set -e -x
-          cat /etc/release
-          psrinfo -v
-          export DISPLAY=:0
-          mkdir builds
-          cd builds
-          cmake -DCMAKE_BUILD_TYPE=Debug -DENABLE_TESTING=On -DENABLE_SHOWMYSKY=Off -DUSE_PLUGIN_LENSDISTORTIONESTIMATOR=Off -DENABLE_QTWEBENGINE=Off "${{ github.workspace }}"
-          make -j3
-          Xvfb :0 -ac -screen 0 1024x768x24+32 >/dev/null 2>&1 &
-          sleep 3
-          ctest --output-on-failure
-          sleep 1
-          pkill Xvfb
