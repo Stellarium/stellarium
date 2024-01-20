@@ -873,7 +873,8 @@ void StelMainView::init()
 	glInfo.isGLES = format.renderableType()==QSurfaceFormat::OpenGLES;
 	qDebug().nospace() << "Luminance textures are " << (glInfo.supportsLuminanceTextures ? "" : "not ") << "supported";
 	glInfo.isCoreProfile = format.profile() == QSurfaceFormat::CoreProfile;
-	glInfo.isHighGraphicsMode = !!StelOpenGL::highGraphicsFunctions();
+	glInfo.isHighGraphicsMode = !qApp->property("onetime_force_low_graphics").toBool() &&
+	                            !!StelOpenGL::highGraphicsFunctions();
 
 	auto& gl = *QOpenGLContext::currentContext()->functions();
 	if(format.majorVersion() * 1000 + format.minorVersion() >= 4006 ||

@@ -108,6 +108,7 @@ void CLIProcessor::parseCLIArgsPreConfig(const QStringList& argList)
 			  << "                          (esp. multimedia handling)\n"
 			  << "--opengl-compat (or -C) : Request OpenGL Compatibility profile\n"
 			  << "                          May help for certain driver configurations.\n"
+			  << "--low-graphics (or -L)  : Force low-graphics mode\n"
 			  << "--single-buffer         : Use single buffer swap (avoid screen blanking on Intel UHD)\n"
 			  << "--scale-gui  <scale factor>  : Scaling the GUI according to scale factor\n"
 			  << "--gui-css (or -G) <styleName> : Use customized <styleName>.css file for GUI colors\n"
@@ -154,6 +155,9 @@ void CLIProcessor::parseCLIArgsPreConfig(const QStringList& argList)
 
 	if (argsGetOption(argList, "-C", "--opengl-compat"))
 		qApp->setProperty("onetime_opengl_compat", true);
+
+	if (argsGetOption(argList, "-L", "--low-graphics"))
+		qApp->setProperty("onetime_force_low_graphics", true);
 
 	if (argsGetOption(argList, "", "--single-buffer"))
 		qApp->setProperty("onetime_single_buffer", true);
