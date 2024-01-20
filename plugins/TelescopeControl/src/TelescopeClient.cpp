@@ -31,6 +31,7 @@
 #include "INDI/TelescopeClientINDI.hpp"
 #include "StelTranslator.hpp"
 #include "StelCore.hpp"
+#include "StelUtils.hpp"
 
 #include <cmath>
 
@@ -269,14 +270,32 @@ void TelescopeTCP::telescopeGoto(const Vec3d &j2000Pos, StelObjectP selectObject
 		return;
 
 	Vec3d position = j2000Pos;
+   Vec3d position_alt_az = j2000Pos;
+   const StelCore* core = StelApp::getInstance().getCore();
+   position_alt_az = core->j2000ToAltAz(j2000Pos,StelCore::RefractionAuto);
 	if (equinox == TelescopeControl::EquinoxJNow)
 	{
 		const StelCore* core = StelApp::getInstance().getCore();
 		position = core->j2000ToEquinoxEqu(j2000Pos, StelCore::RefractionOff);
+
 	}
 
 	if (writeBufferEnd - writeBuffer + 20 < static_cast<int>(sizeof(writeBuffer)))
 	{
+      const double a = position_alt_az[0];
+      const double b = position_alt_az[1];
+      const double x = position_alt_az[2];
+      //StelUtils::rectToSphe(&az, &alt, pos);
+      double az,alt;
+      const bool useSouthAzimuth = StelApp::getInstance().getFlagSouthAzimuthUsage();
+      StelUtils::rectToSphe(&az,&alt,position_alt_az);
+      const double direction = useSouthAzimuth ? 2. : 3.; // N is zero, E is 90 degrees
+      az = direction*M_PI - az;
+      if (az > M_PI*2)
+         az -= M_PI*2;
+      az*=M_180_PI;
+      alt*=M_180_PI;
+
 		const double ra_signed = atan2(position[1], position[0]);
 		//Workaround for the discrepancy in precision between Windows/Linux/PPC Macs and Intel Macs:
 		const double ra = (ra_signed >= 0) ? ra_signed : (ra_signed + 2.0 * M_PI);
@@ -322,6 +341,7 @@ void TelescopeTCP::telescopeGoto(const Vec3d &j2000Pos, StelObjectP selectObject
 		*writeBufferEnd++ = static_cast<char>(dec_int & 0xFF);
 		dec_int>>=8;
 		*writeBufferEnd++ = static_cast<char>(dec_int & 0xFF);
+
 	}
 	else
 	{
