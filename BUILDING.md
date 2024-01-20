@@ -384,47 +384,53 @@ Feel free to send patches to our mailing list stellarium@googlegroups.com
 
 List of supported parameters (passed as `-DPARAMETER=VALUE`):
 
- Parameter                      | TYPE   | Default | Description
---------------------------------| -------|---------|-----------------------------------------------------
-| CMAKE_INSTALL_PREFIX          | path   | *       | Prefix where to install Stellarium
-| CMAKE_PREFIX_PATH             | path   |         | Additional path to look for libraries
-| CMAKE_BUILD_TYPE              | string | Release | Build type of Stellarium
-| CMAKE_OSX_ARCHITECTURES       | string | arm64;x86_64 | macOS architecture**
-| CMAKE_OSX_DEPLOYMENT_TARGET   | string | 11.0    | Minimum macOS deployment version**
-| OPENGL_DEBUG_LOGGING          | bool   | OFF     | Enable to log OpenGL information using the GL_KHR_debug extension/QOpenGLLogger
-| ENABLE_QT6                    | bool   | ON      | Enable building Qt6-based Stellarium
-| ENABLE_NLS                    | bool   | ON      | Enable interface translation
-| ENABLE_SHOWMYSKY              | bool   | ON      | Enable support for ShowMySky module that implements a realistic atmosphere model
-| ENABLE_GPS                    | bool   | ON      | Enable GPS support
-| ENABLE_LIBGPS                 | bool   | ON      | Enable GPS support with libGPS library (N/A on Windows)
-| ENABLE_MEDIA                  | bool   | ON      | Enable sound and video support
-| ENABLE_XLSX                   | bool   | ON      | Enable support for XLSX (Excel) files
-| ENABLE_SCRIPTING              | bool   | ON      | Enable the scripting feature
-| ENABLE_RELEASE_BUILD          | bool   | OFF     | This option flags the build as an official release
-| ENABLE_TESTING                | bool   | OFF     | Enable unit tests
-| ENABLE_QTWEBENGINE            | bool   | ON      | Enable QtWebEngine module support if it installed
-| USE_PLUGIN_ANGLEMEASURE       | bool   | ON      | Enable building the Angle Measure plugin
-| USE_PLUGIN_COMPASSMARKS       | bool   | ON      | Enable building the Compass Marks plugin
-| USE_PLUGIN_SATELLITES         | bool   | ON      | Enable building the Satellites plugin
-| USE_PLUGIN_TELESCOPECONTROL   | bool   | ON      | Enable building the Telescope Control plugin
-| USE_PLUGIN_OCULARS            | bool   | ON      | Enable building the Oculars plugin
-| USE_PLUGIN_TEXTUSERINTERFACE  | bool   | ON      | Enable building the Text User Interface plugin
-| USE_PLUGIN_SOLARSYSTEMEDITOR  | bool   | ON      | Enable building the Solar System Editor plugin
-| USE_PLUGIN_SUPERNOVAE         | bool   | ON      | Enable building the Historical Supernovae plugin
-| USE_PLUGIN_QUASARS            | bool   | ON      | Enable building the Quasars plugin
-| USE_PLUGIN_PULSARS            | bool   | ON      | Enable building the Pulsars plugin
-| USE_PLUGIN_EXOPLANETS         | bool   | ON      | Enable building the Exoplanets plugin
-| USE_PLUGIN_OBSERVABILITY      | bool   | ON      | Enable building the Observability Analysis plugin
-| USE_PLUGIN_ARCHAEOLINES       | bool   | ON      | Enable building the Archaeo Lines plugin
-| USE_PLUGIN_EQUATIONOFTIME     | bool   | ON      | Enable building the Equation Of Time plugin
-| USE_PLUGIN_METEORSHOWERS      | bool   | ON      | Enable building the Meteor Showers plugin
-| USE_PLUGIN_NAVSTARS           | bool   | ON      | Enable building the Navigational Stars plugin
-| USE_PLUGIN_NOVAE              | bool   | ON      | Enable building the Bright Novae plugin
-| USE_PLUGIN_ONLINEQUERIES      | bool   | ON      | Enable building the Online Queries plugin
-| USE_PLUGIN_POINTERCOORDINATES | bool   | ON      | Enable building the Pointer Coordinates plugin
-| USE_PLUGIN_SCENERY3D          | bool   | ON      | Enable building the 3D Scenery plugin
-| USE_PLUGIN_REMOTECONTROL      | bool   | ON      | Enable building the Remote Control plugin
-| USE_PLUGIN_REMOTESYNC         | bool   | ON      | Enable building the Remote Sync plugin
+ Parameter                           | TYPE   | Default | Description
+-------------------------------------| -------|---------|-----------------------------------------------------
+| CMAKE_INSTALL_PREFIX               | path   | *       | Prefix where to install Stellarium
+| CMAKE_PREFIX_PATH                  | path   |         | Additional path to look for libraries
+| CMAKE_BUILD_TYPE                   | string | Release | Build type of Stellarium
+| CMAKE_OSX_ARCHITECTURES            | string | arm64;x86_64 | macOS architecture**
+| CMAKE_OSX_DEPLOYMENT_TARGET        | string | 11.0    | Minimum macOS deployment version**
+| OPENGL_DEBUG_LOGGING               | bool   | OFF     | Enable to log OpenGL information using the GL_KHR_debug extension/QOpenGLLogger
+| ENABLE_QT6                         | bool   | ON      | Enable building Qt6-based Stellarium
+| ENABLE_NLS                         | bool   | ON      | Enable interface translation
+| ENABLE_SHOWMYSKY                   | bool   | ON      | Enable support for ShowMySky module that implements a realistic atmosphere model
+| ENABLE_GPS                         | bool   | ON      | Enable GPS support
+| ENABLE_LIBGPS                      | bool   | ON      | Enable GPS support with libGPS library (N/A on Windows)
+| ENABLE_MEDIA                       | bool   | ON      | Enable sound and video support
+| ENABLE_XLSX                        | bool   | ON      | Enable support for XLSX (Excel) files
+| ENABLE_SCRIPTING                   | bool   | ON      | Enable the scripting feature
+| ENABLE_RELEASE_BUILD               | bool   | OFF     | This option flags the build as an official release
+| ENABLE_TESTING                     | bool   | OFF     | Enable unit tests
+| ENABLE_QTWEBENGINE                 | bool   | ON      | Enable QtWebEngine module support if it installed
+| USE_PLUGIN_ANGLEMEASURE            | bool   | ON      | Enable building the Angle Measure plugin
+| USE_PLUGIN_ARCHAEOLINES            | bool   | ON      | Enable building the ArchaeoLines plugin
+| USE_PLUGIN_CALENDARS               | bool   | ON      | Enable building the Calendars plugin
+| USE_PLUGIN_EQUATIONOFTIME          | bool   | ON      | Enable building the Equation Of Time plugin
+| USE_PLUGIN_EXOPLANETS              | bool   | ON      | Enable building the Exoplanets plugin
+| USE_PLUGIN_HELLOSTELMODULE         | bool   | OFF     | Enable building the HelloStelModule plugin (example of simple plugin)
+| USE_PLUGIN_LENSDISTORTIONESTIMATOR | bool   | ON      | Enable building the Lens Distortion Estimator plugin
+| USE_PLUGIN_METEORSHOWERS           | bool   | ON      | Enable building the Meteor Showers plugin
+| USE_PLUGIN_MISSINGSTARS            | bool   | ON      | Enable building the Missing Stars plugin
+| USE_PLUGIN_NAVSTARS                | bool   | ON      | Enable building the Navigational Stars plugin
+| USE_PLUGIN_NOVAE                   | bool   | ON      | Enable building the Bright Novae plugin
+| USE_PLUGIN_OBSERVABILITY           | bool   | ON      | Enable building the Observability Analysis plugin
+| USE_PLUGIN_OCULARS                 | bool   | ON      | Enable building the Oculars plugin
+| USE_PLUGIN_OCULUS                  | bool   | OFF     | Enable building the Oculus plugin (support for Oculus Rift - outdated)
+| USE_PLUGIN_ONLINEQUERIES           | bool   | ON      | Enable building the Online Queries plugin
+| USE_PLUGIN_POINTERCOORDINATES      | bool   | ON      | Enable building the Pointer Coordinates plugin
+| USE_PLUGIN_PULSARS                 | bool   | ON      | Enable building the Pulsars plugin
+| USE_PLUGIN_QUASARS                 | bool   | ON      | Enable building the Quasars plugin
+| USE_PLUGIN_REMOTECONTROL           | bool   | ON      | Enable building the Remote Control plugin
+| USE_PLUGIN_REMOTESYNC              | bool   | ON      | Enable building the Remote Sync plugin
+| USE_PLUGIN_SATELLITES              | bool   | ON      | Enable building the Satellites plugin
+| USE_PLUGIN_SCENERY3D               | bool   | ON      | Enable building the 3D Scenery plugin
+| USE_PLUGIN_SIMPLEDRAWLINE          | bool   | OFF     | Enable building the SimpleDrawLine plugin (example of simple graphics plugin)
+| USE_PLUGIN_SOLARSYSTEMEDITOR       | bool   | ON      | Enable building the Solar System Editor plugin
+| USE_PLUGIN_SUPERNOVAE              | bool   | ON      | Enable building the Historical Supernovae plugin
+| USE_PLUGIN_TELESCOPECONTROL        | bool   | ON      | Enable building the Telescope Control plugin
+| USE_PLUGIN_TEXTUSERINTERFACE       | bool   | ON      | Enable building the Text User Interface plugin
+| USE_PLUGIN_VTS                     | bool   | OFF     | Enable building the Vts plugin (allow to use Stellarium as a plugin in CNES VTS)
 
 Notes:
  \* `/usr/local` on Unix-like systems, `C:\Program Files` or `C:\Program Files (x86)`
