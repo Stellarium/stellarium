@@ -171,7 +171,7 @@ jobs:
           export DISPLAY=:0
           mkdir builds
           cd builds
-          cmake -DCMAKE_BUILD_TYPE=Debug -DENABLE_TESTING=On -DENABLE_LENSDISTORTIONESTIMATOR=Off "${{ github.workspace }}"
+          cmake -DCMAKE_BUILD_TYPE=Debug -DENABLE_TESTING=On -DUSE_PLUGIN_LENSDISTORTIONESTIMATOR=Off "${{ github.workspace }}"
           make -j3
           Xvfb :0 -ac -screen 0 1024x768x24+32 >/dev/null 2>&1 &
           sleep 3
@@ -197,14 +197,14 @@ jobs:
         # When using rsync, you can define copyback: false to not copy files back from the VM in to the host.
         copyback: false
         prepare: |
-          pkg install -y cmake eigen glm perl5 xorg-vfbserver gettext qt6-webengine qt6-base qt6-tools qt6-serialport qt6-location qt6-positioning qt6-multimedia qt6-charts qt6-declarative
+          pkg install -y cmake eigen glm perl5 xorg-vfbserver gettext qt6-base qt6-tools qt6-serialport qt6-positioning qt6-multimedia qt6-charts qt6-declarative
 
         run: |
           set -e -x
           export DISPLAY=:0
           mkdir builds
           cd builds
-          cmake -DCMAKE_BUILD_TYPE=Debug -DENABLE_TESTING=On -DENABLE_LENSDISTORTIONESTIMATOR=Off "${{ github.workspace }}"
+          cmake -DCMAKE_BUILD_TYPE=Debug -DENABLE_TESTING=On -DUSE_PLUGIN_LENSDISTORTIONESTIMATOR=Off -DENABLE_QTWEBENGINE=Off "${{ github.workspace }}"
           make -j3
           Xvfb :0 -ac -screen 0 1024x768x24+32 >/dev/null 2>&1 &
           sleep 3
