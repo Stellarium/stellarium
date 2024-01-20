@@ -94,7 +94,7 @@ jobs:
         # When using rsync, you can define copyback: false to not copy files back from the VM in to the host.
         copyback: false
         prepare: |
-          pkg_add cmake eigen3 glm exiv2 nlopt gpsd qt5-qxlsx qt5
+          pkg_add -amUV cmake eigen3 glm exiv2 nlopt gpsd qt5-qxlsx qt5
 
         run: |
           set -e -x
@@ -127,7 +127,7 @@ jobs:
         # When using rsync, you can define copyback: false to not copy files back from the VM in to the host.
         copyback: false
         prepare: |
-          pkg_add cmake eigen3 glm exiv2 nlopt gpsd qt6-qxlsx qt6
+          pkg_add -amUV cmake eigen3 glm exiv2 nlopt gpsd qt6-qxlsx qt6
 
         run: |
           set -e -x
