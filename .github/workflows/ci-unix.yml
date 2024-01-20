@@ -231,7 +231,7 @@ jobs:
         # When using rsync, you can define copyback: false to not copy files back from the VM in to the host.
         copyback: false
         prepare: |
-          pkg install cmake qt5 gettext
+          pkg install cmake qt5 developer/gnome/gettext
 
         run: |
           set -e -x
