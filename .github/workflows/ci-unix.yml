@@ -163,14 +163,8 @@ jobs:
         # Use sh shell
         usesh: true
         prepare: |
-          /usr/sbin/pkg_add cmake qt5-qtscript qt5-qtserialport qt5-qttools qt5-qtdeclarative qt5-qtlocation qt5-qtbase qt5-qtmultimedia qt5-qtcharts glu exiv2 nlopt gettext wget
-          cd /usr
-          rm -rf pkgsrc
-          wget https://cdn.netbsd.org/pub/pkgsrc/current/pkgsrc.tgz -O pkgsrc.tgz
-          tar -xzvpf pkgsrc.tgz -C /usr
-          cd /usr/pkgsrc/graphics/MesaLib/
-          make -j3 && make install && make clean
-          cd ~
+          /usr/sbin/pkg_add pkgin cmake qt5-qtscript qt5-qtserialport qt5-qttools qt5-qtdeclarative qt5-qtlocation qt5-qtbase qt5-qtmultimedia qt5-qtcharts glu exiv2 nlopt gettext
+          pkgin MesaLib
 
         run: |
           set -e -x
@@ -203,14 +197,8 @@ jobs:
         # Use sh shell
         usesh: true
         prepare: |
-          /usr/sbin/pkg_add cmake qt6-qtserialport qt6-qttools qt6-qtdeclarative qt6-qtlocation qt6-qtbase qt6-qtmultimedia qt6-qtcharts glu exiv2 nlopt gettext wget
-          cd /usr
-          rm -rf pkgsrc
-          wget https://cdn.netbsd.org/pub/pkgsrc/current/pkgsrc.tgz -O pkgsrc.tgz
-          tar -xzvpf pkgsrc.tgz -C /usr
-          cd /usr/pkgsrc/graphics/MesaLib/
-          make -j3 && make install && make clean
-          cd ~
+          /usr/sbin/pkg_add cmake qt6-qtserialport qt6-qttools qt6-qtdeclarative qt6-qtlocation qt6-qtbase qt6-qtmultimedia qt6-qtcharts glu exiv2 nlopt gettext
+          pkgin MesaLib
 
         run: |
           set -e -x
