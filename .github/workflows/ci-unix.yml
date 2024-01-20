@@ -94,19 +94,19 @@ jobs:
         # When using rsync, you can define copyback: false to not copy files back from the VM in to the host.
         copyback: false
         prepare: |
-          pkg_add -aU cmake eigen3 glm exiv2 nlopt gpsd qt5-qxlsx qt5
+          pkg_add -aU cmake eigen3 glm exiv2 nlopt gpsd qt5-qxlsx qt5 gettext-runtime gettext-tools
 
         run: |
           set -e -x
-          export Qt5_DIR=/usr/local/lib/qt5/cmake/Qt5
-          export Qt5Script_DIR=/usr/local/lib/qt5/cmake/Qt5Script
-          export Qt5LinguistTools_DIR=/usr/local/lib/qt5/cmake/Qt5LinguistTools
+          #export Qt5_DIR=/usr/local/lib/qt5/cmake/Qt5
+          #export Qt5Script_DIR=/usr/local/lib/qt5/cmake/Qt5Script
+          #export Qt5LinguistTools_DIR=/usr/local/lib/qt5/cmake/Qt5LinguistTools
           export CPATH=$CPATH:/usr/local/include
-          export PATH=/usr/local/lib/qt5:/usr/local/lib/qt5/bin:$PATH
+          export PATH=/usr/local/lib/qt5/bin:$PATH
           export DISPLAY=:0
           mkdir builds
           cd builds
-          cmake -DCMAKE_BUILD_TYPE=Debug -DENABLE_TESTING=On -DENABLE_QTWEBENGINE=Off "${{ github.workspace }}"
+          cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_PREFIX_PATH=/usr/local/lib/qt5/cmake -DENABLE_TESTING=On -DENABLE_QTWEBENGINE=Off "${{ github.workspace }}"
           make -j3
           Xvfb :0 -ac -screen 0 1024x768x24+32 >/dev/null 2>&1 &
           sleep 3
@@ -132,7 +132,7 @@ jobs:
         # When using rsync, you can define copyback: false to not copy files back from the VM in to the host.
         copyback: false
         prepare: |
-          pkg_add -aU cmake eigen3 glm exiv2 nlopt gpsd qt6-qxlsx qt6
+          pkg_add -aU cmake eigen3 glm exiv2 nlopt gpsd qt6-qxlsx qt6 gettext-runtime gettext-tools
 
         run: |
           set -e -x
