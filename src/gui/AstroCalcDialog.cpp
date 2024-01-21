@@ -107,7 +107,8 @@ AstroCalcDialog::AstroCalcDialog(QObject* parent)
 	, plotMonthlyElevationPositive(false)
 	, plotDistanceGraph(false)
 	, plotLunarElongationGraph(false)
-	, plotAziVsTime(false)	
+	, plotAziVsTime(false)
+	, computeRTS(false)
 	, altVsTimePositiveLimit(0)
 	, monthlyElevationPositiveLimit(0)
 	, graphsDuration(1)
@@ -572,6 +573,7 @@ void AstroCalcDialog::createDialogContent()
 	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(drawDistanceGraph()));
 	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(drawLunarElongationGraph()));
 	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(initEphemerisFlagNakedEyePlanets()));
+	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(generateRTS()));
 
 	connect(ui->stackListWidget, SIGNAL(currentItemChanged(QListWidgetItem*, QListWidgetItem*)), this, SLOT(changePage(QListWidgetItem*, QListWidgetItem*)));
 	connect(ui->tabWidgetGraphs, SIGNAL(currentChanged(int)), this, SLOT(changeGraphsTab(int)));
@@ -2119,6 +2121,13 @@ void AstroCalcDialog::initListRTS()
 
 void AstroCalcDialog::generateRTS()
 {
+	// special case - compute time when tab is visible
+	if (!dialog->isVisible() || !computeRTS)
+	{
+		cleanupRTS();
+		return;
+	}
+
 	QList<StelObjectP> selectedObjects = objectMgr->getSelectedObject();
 	if (!selectedObjects.isEmpty())
 	{
@@ -2261,6 +2270,8 @@ void AstroCalcDialog::generateRTS()
 		else
 			cleanupRTS();
 	}
+	else
+		cleanupRTS();
 }
 
 void AstroCalcDialog::cleanupRTS()
@@ -7903,6 +7914,7 @@ void AstroCalcDialog::changePage(QListWidgetItem* current, QListWidgetItem* prev
 	plotMonthlyElevation = false;
 	plotLunarElongationGraph = false;
 	plotDistanceGraph = false;
+	computeRTS = false;
 
 	ui->stackedWidget->setCurrentIndex(ui->stackListWidget->row(current));
 
@@ -7921,7 +7933,10 @@ void AstroCalcDialog::changePage(QListWidgetItem* current, QListWidgetItem* prev
 
 	// special case - RTS
 	if (ui->stackListWidget->row(current) == 2)
+	{
 		setRTSCelestialBodyName();
+		computeRTS = true;
+	}
 
 	// special case - graphs
 	if (ui->stackListWidget->row(current) == 4)
