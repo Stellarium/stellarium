@@ -19,16 +19,16 @@
 #include "Oculus.hpp"
 #include "StelActionMgr.hpp"
 #include "StelApp.hpp"
-#include "StelLocaleMgr.hpp"
+#include "StelTranslator.hpp"
 #include "StelMainView.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelMovementMgr.hpp"
-#include "StelOpenGL.hpp"
+#include <QMessageBox>
+
+#include "OVR_CAPI_GL.h"
 #include "Extras/OVR_Math.h"
 
 #include <QOpenGLFramebufferObject>
-
-#include <assert.h>
 
 #define OVRC(f) do { \
 		ovrResult result = f; \
@@ -40,10 +40,10 @@
 
 void quat_to_mat4(const float q[4], float out[4][4])
 {
-    float x = q[0];
-    float y = q[1];
-    float z = q[2];
-    float w = q[3];
+    const float x = q[0];
+    const float y = q[1];
+    const float z = q[2];
+    const float w = q[3];
 
     out[0][0] = 1-2*y*y-2*z*z;
     out[0][1] = 2*x*y+2*z*w;
@@ -197,14 +197,37 @@ void Oculus::init()
 {
 	qDebug() << "Oculus plugin.";
 	initializeOpenGLFunctions();
-	OVRC(ovr_Initialize(nullptr));
-	ovrHmdDesc hmd = ovr_GetHmdDesc(nullptr);
+
+#ifndef NDEBUG
+	ovrInitParams initParams = { ovrInit_Debug | ovrInit_RequestVersion, OVR_MINOR_VERSION, NULL, 0, 100 };
+#else
+	ovrInitParams initParams = { ovrInit_RequestVersion, OVR_MINOR_VERSION, NULL, 0, 100 };
+#endif
+
+	OVRC(ovr_Initialize(&initParams));
+
+	OVRC(ovr_Create(&session, &luid));
+
+	if (!session)
+	{
+		QMessageBox::StandardButton ret=QMessageBox::critical(&StelMainView::getInstance(),
+								      q_("Oculus Plugin"),
+								      q_("Initialisation failed. Please see logfile for details. Continue without headset?"),
+								      QMessageBox::Ok|QMessageBox::Abort, QMessageBox::Ok);
+		qDebug() << "MessageBox returned" << ret;
+		if (ret==QMessageBox::Abort)
+		{
+			StelApp::getInstance().quit(); // seems not to work gracefully :-(
+			exit(0);
+		}
+	}
+
+	ovrHmdDesc hmd = ovr_GetHmdDesc(session);
 	if (hmd.Type == ovrHmd_None)
 	{
 		qDebug() << "No Oculus connected";
 		return;
 	}
-	OVRC(ovr_Create(&session, &luid));
 
 	// Create the textures and layer.
 	layer.Header.Type = ovrLayerType_EyeFov;
@@ -255,6 +278,9 @@ void Oculus::update(double deltaTime)
 {
 	Q_UNUSED(deltaTime);
 	if (!session) return;
+	static StelCore* core = StelApp::getInstance().getCore();
+	static StelMovementMgr* mmgr = GETSTELMODULE(StelMovementMgr);
+
 	ovrHmdDesc hmd = ovr_GetHmdDesc(session);
 
 	double displayMidpointSeconds = ovr_GetPredictedDisplayTime(session, 0);
@@ -263,10 +289,8 @@ void Oculus::update(double deltaTime)
 	if (!(ts.StatusFlags & (ovrStatus_OrientationTracked | ovrStatus_PositionTracked)))
 		return;
 	ovrPosef pose = ts.HeadPose.ThePose;
-	StelCore* core = StelApp::getInstance().getCore();
 
 	// Set the view direction.
-	StelMovementMgr* mmgr = GETSTELMODULE(StelMovementMgr);
 	QQuaternion quaternion(pose.Orientation.w, pose.Orientation.x, pose.Orientation.y, pose.Orientation.z);
 	QVector3D qViewDirection = quaternion.rotatedVector(QVector3D(0, 0, -1));
 	Vec3d viewDirection(qViewDirection.x(), -qViewDirection.z(), qViewDirection.y());
@@ -342,5 +366,6 @@ void Oculus::drawEye(int eye, GLuint texid, int width, int height, const ovrFovP
 
 void Oculus::recenter()
 {
+   if (!session) return;
 	OVRC(ovr_RecenterTrackingOrigin(session));
 }
