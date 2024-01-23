@@ -22,8 +22,13 @@
 
 #include <QDateTime>
 #include <QProcess>
+
 #ifdef Q_OS_WIN
- #include <Windows.h>
+#include "windows.h"
+#include <WbemIdl.h>
+#include <comdef.h>
+#include <string>
+#pragma comment(lib, "wbemuuid.lib")
 #endif
 
 // Init statics variables.
@@ -58,7 +63,96 @@ void StelLogger::init(const QString& logFilePath)
 	writeLog("Addressing mode: 32-bit");
 #endif
 
-	// write memory and CPU info
+	// write CPU and memory info
+	writeLog(QString("Processor architecture: %1").arg(QSysInfo::currentCpuArchitecture()));
+
+#ifdef Q_OS_WIN
+	// Use WMI
+	// Idea and some code is catching from HWInfo project (MIT license)
+	IWbemLocator* locator = nullptr;
+	IWbemServices* service = nullptr;
+	IEnumWbemClassObject* enumerator = nullptr;
+
+	auto res = CoInitializeSecurity(nullptr, -1, nullptr, nullptr, RPC_C_AUTHN_LEVEL_DEFAULT, RPC_C_IMP_LEVEL_IMPERSONATE, nullptr, EOAC_NONE, nullptr);
+	res &= CoInitializeEx(nullptr, COINIT_MULTITHREADED);
+	res &= CoCreateInstance(CLSID_WbemLocator, nullptr, CLSCTX_INPROC_SERVER, IID_IWbemLocator, (LPVOID*)&locator);
+	if (locator)
+	{
+		res &= locator->ConnectServer(_bstr_t("ROOT\\CIMV2"), nullptr, nullptr, nullptr, 0, nullptr, nullptr, &service);
+		if (service)
+		{
+			res &= CoSetProxyBlanket(service, RPC_C_AUTHN_WINNT, RPC_C_AUTHZ_NONE, nullptr, RPC_C_AUTHN_LEVEL_CALL, RPC_C_IMP_LEVEL_IMPERSONATE, nullptr, EOAC_NONE);
+
+			VARIANT vt_prop;
+			HRESULT hr;
+			ULONG u_return = 0;
+			IWbemClassObject* obj = nullptr;
+
+			// CPU info
+			const std::wstring cpu_query(L"SELECT Name, NumberOfLogicalProcessors, MaxClockSpeed FROM Win32_Processor");
+			service->ExecQuery(bstr_t(L"WQL"), bstr_t(std::wstring(cpu_query.begin(), cpu_query.end()).c_str()), WBEM_FLAG_FORWARD_ONLY | WBEM_FLAG_RETURN_IMMEDIATELY, nullptr, &enumerator);
+			while (enumerator)
+			{
+				enumerator->Next(WBEM_INFINITE, 1, &obj, &u_return);
+				if (!u_return)
+					break;
+
+				hr = obj->Get(L"Name", 0, &vt_prop, nullptr, nullptr);
+				writeLog(QString("Processor name: %1").arg(vt_prop.bstrVal));
+
+				hr = obj->Get(L"MaxClockSpeed", 0, &vt_prop, nullptr, nullptr);
+				writeLog(QString("Processor maximum speed: %1 MHz").arg(vt_prop.uintVal));
+
+				hr = obj->Get(L"NumberOfLogicalProcessors", 0, &vt_prop, nullptr, nullptr);
+				writeLog(QString("Processor logical cores: %1").arg(vt_prop.intVal));
+
+				VariantClear(&vt_prop);
+				obj->Release();
+			}
+
+			// RAM info
+			int64_t totalRAM = 0;
+			const std::wstring ram_query(L"SELECT Capacity FROM Win32_PhysicalMemory");
+			service->ExecQuery(bstr_t(L"WQL"), bstr_t(std::wstring(ram_query.begin(), ram_query.end()).c_str()), WBEM_FLAG_FORWARD_ONLY | WBEM_FLAG_RETURN_IMMEDIATELY, nullptr, &enumerator);
+			while (enumerator)
+			{
+				enumerator->Next(WBEM_INFINITE, 1, &obj, &u_return);
+				if (!u_return)
+					break;
+
+				hr = obj->Get(L"Capacity", 0, &vt_prop, nullptr, nullptr);
+				totalRAM += std::stoll(vt_prop.bstrVal);
+
+				VariantClear(&vt_prop);
+				obj->Release();
+			}
+			writeLog(QString("Total physical memory: %1 MB").arg(totalRAM/(1024<<10)));
+
+			// GPU info
+			const std::wstring gpu_query(L"SELECT Name FROM Win32_VideoController");
+			service->ExecQuery(bstr_t(L"WQL"), bstr_t(std::wstring(gpu_query.begin(), gpu_query.end()).c_str()), WBEM_FLAG_FORWARD_ONLY | WBEM_FLAG_RETURN_IMMEDIATELY, nullptr, &enumerator);
+			while (enumerator)
+			{
+				enumerator->Next(WBEM_INFINITE, 1, &obj, &u_return);
+				if (!u_return)
+					break;
+
+				hr = obj->Get(L"Name", 0, &vt_prop, nullptr, nullptr);
+				writeLog(QString("Video controller name: %1").arg(vt_prop.bstrVal));
+
+				VariantClear(&vt_prop);
+				obj->Release();
+			}
+		}
+	}
+
+	if (locator) locator->Release();
+	if (service) service->Release();
+	CoUninitialize();
+#endif
+
+/*
+
 #ifdef Q_OS_LINUX
 
 #ifndef BUILD_FOR_MAEMO
@@ -121,58 +215,8 @@ void StelLogger::init(const QString& logFilePath)
 
 // Aargh Windows API
 #elif defined Q_OS_WIN
-	MEMORYSTATUSEX statex;
-	statex.dwLength = sizeof (statex);
-	GlobalMemoryStatusEx(&statex);
-	writeLog(QString("Total physical memory: %1 MB").arg(statex.ullTotalPhys/(1024<<10)));
-	writeLog(QString("Available physical memory: %1 MB").arg(statex.ullAvailPhys/(1024<<10)));
-	writeLog(QString("Physical memory in use: %1%").arg(statex.dwMemoryLoad));
-	#ifndef _WIN64
-	// This always reports about 8TB on Win64, not really useful to show.
-	writeLog(QString("Total virtual memory: %1 MB").arg(statex.ullTotalVirtual/(1024<<10)));
-	writeLog(QString("Available virtual memory: %1 MB").arg(statex.ullAvailVirtual/(1024<<10)));
-	#endif
 
-	HKEY hKey = Q_NULLPTR;
-	DWORD dwType = REG_DWORD;
-	DWORD numVal = 0;
-	DWORD dwSize = sizeof(numVal);
-
-	// iterate over the processors listed in the registry
-	QString procKey = "Hardware\\Description\\System\\CentralProcessor";
-	LONG lRet = ERROR_SUCCESS;
-	int i;
-	for(i = 0; lRet == ERROR_SUCCESS; i++)
-	{
-		lRet = RegOpenKeyExA(HKEY_LOCAL_MACHINE,
-					qPrintable(QString("%1\\%2").arg(procKey).arg(i)),
-					0, KEY_QUERY_VALUE, &hKey);
-
-		if(lRet == ERROR_SUCCESS)
-		{
-			if(RegQueryValueExA(hKey, "~MHz", Q_NULLPTR, &dwType, reinterpret_cast<LPBYTE>(&numVal), &dwSize) == ERROR_SUCCESS)
-				writeLog(QString("Processor speed: %1 MHz").arg(numVal));
-			else
-				writeLog("Could not get processor speed.");
-		}
-
-		// can you believe this trash?
-		dwType = REG_SZ;
-		char nameStr[512];
-		DWORD nameSize = sizeof(nameStr);
-
-		if (lRet == ERROR_SUCCESS)
-		{
-			if (RegQueryValueExA(hKey, "ProcessorNameString", Q_NULLPTR, &dwType, reinterpret_cast<LPBYTE>(&nameStr), &nameSize) == ERROR_SUCCESS)
-				writeLog(QString("Processor name: %1").arg(nameStr));
-			else
-				writeLog("Could not get processor name.");
-		}
-
-		RegCloseKey(hKey);
-	}
-	if(i == 0)
-		writeLog("Could not get processor info.");
+	// REMOVED
 
 #elif defined Q_OS_MACOS
 	QProcess systemProfiler;
@@ -236,6 +280,7 @@ void StelLogger::init(const QString& logFilePath)
 	}
 
 #endif
+*/
 }
 
 void StelLogger::deinit()
