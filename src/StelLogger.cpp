@@ -24,7 +24,7 @@
 #include <QProcess>
 
 #ifdef Q_OS_WIN
-#include "windows.h"
+#include <windows.h>
 #include <WbemIdl.h>
 #include <comdef.h>
 #include <string>
