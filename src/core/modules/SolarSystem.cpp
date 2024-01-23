@@ -774,12 +774,32 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			const QString perihelCode =   pd.value(secname+"/perihelion_code").toString();
 			const QString discoveryCode = pd.value(secname+"/discovery_code").toString();
 			if (iauDesignation.isEmpty() && perihelCode.isEmpty() && discoveryCode.isEmpty() && !periodMatch.hasMatch() && !iauDesignationMatch.hasMatch())
+			{
 				qWarning() << "Comet " << englishName << "has no IAU designation, no perihelion code, no discovery code and seems not a numbered comet in section " << secname;
+			}
 			// order of codes: date_code [P/1982 U1] - perihelion_code [1986 III] - discovery_code [1982i]
 
 			// The test here can be improved, e.g. with a regexp. In case the name is already reasonably complete, we do not re-build it from the available elements for now. However, the ini file should provide the elements separated!
-			if (iauDesignation.isEmpty() && !englishName.contains("("))
-				englishName.append(QString(" (%1)").arg(discoveryCode));
+			if (iauDesignation.isEmpty() && !englishName.contains("(") && (!discoveryCode.isEmpty()))
+			{
+					englishName.append(QString(" (%1)").arg(discoveryCode));
+			}
+			else if (iauDesignation.isEmpty() && !englishName.contains("("))
+			{
+				// Prepare perihel year to attach to the name when loading an old ssystem_minor.ini where this name component is missing
+				QString periStr;
+				double periJD=pd.value(secname+"/orbit_TimeAtPericenter").toDouble();
+				if (periJD)
+				{
+					int day, month, year;
+					StelUtils::getDateFromJulianDay(periJD, &year, &month, &day);
+					periStr=QString::number(year);
+				}
+				if (!periStr.isEmpty())
+					englishName.append(QString(" (%1)").arg(periStr));
+				else
+					qWarning() << "orbit_TimeAtPericenter may be invalid for object" << englishName << "in section" << secname;
+			}
 			else if (!iauDesignation.isEmpty() && !englishName.contains("(") && !englishName.contains("/") && !englishName.startsWith("A/"))
 				englishName=QString("%1 (%2)").arg(iauDesignation, englishName); // recombine name and iau_designation if name is only the discoverer name.
 
@@ -1190,30 +1210,30 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 					      pd.value(secname+"/dust_lengthfactor", 0.4f).toFloat(),
 					      pd.value(secname+"/dust_brightnessfactor", 1.5f).toFloat()
 					      ));
-			QSharedPointer<Comet> mp = newP.dynamicCast<Comet>();
+			QSharedPointer<Comet> comet = newP.dynamicCast<Comet>();
 
 			//g,k magnitude system
 			const float magnitude = pd.value(secname+"/absolute_magnitude", -99.f).toFloat();
 			const float slope = qBound(-5.0f, pd.value(secname+"/slope_parameter", 4.0f).toFloat(), 30.0f);
 			if (magnitude > -99.f)
-					mp->setAbsoluteMagnitudeAndSlope(magnitude, slope);
+					comet->setAbsoluteMagnitudeAndSlope(magnitude, slope);
 
 			QString iauDesignation = pd.value(secname+"/iau_designation", "").toString();
 			if (!iauDesignation.isEmpty())
-				mp->setIAUDesignation(iauDesignation);
+				comet->setIAUDesignation(iauDesignation);
 			// order of codes: date_code [P/1982 U1] - perihelion_code [1986 III] - discovery_code [1982i]
 			QStringList codes = { pd.value(secname+"/date_code", "").toString(),
 					      pd.value(secname+"/perihelion_code", "").toString(),
 					      pd.value(secname+"/discovery_code", "").toString() };
 			codes.removeAll("");
 			if (codes.count()>0)
-				mp->setExtraDesignations(codes);
+				comet->setExtraDesignations(codes);
 
 			// Discovery circumstances
 			QString discovererName = pd.value(secname+"/discoverer", "").toString();
 			QString discoveryDate = pd.value(secname+"/discovery", "").toString();
 			if (!discoveryDate.isEmpty())
-				mp->setDiscoveryData(discoveryDate, discovererName);
+				comet->setDiscoveryData(discoveryDate, discovererName);
 
 			systemMinorBodies.push_back(newP);
 		}
