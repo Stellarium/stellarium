@@ -29,6 +29,7 @@
 
 //! @class ObsListDialog
 //! Since V0.21.2, this class manages the ObservingLists, successor of the Bookmarks feature available since 0.15.
+//! @note The old Bookmarks.json format should now be seen as deprecated.
 //! Updated in Version 1.0: ObservingLists Version 2.0
 //! Updated in Version 23.1: ObservingLists Version 2.1
 //!
@@ -155,7 +156,7 @@ public:
 		double jd;             //!< optional: stores date of observation
 		QString location;      //!< optional: should be a full location encoded with StelLocation::serializeToLine()
 		QString landscapeID;   //!< optional: landscapeID of landscape at moment of item creation.
-		double fov;            //!< optional: Field of view
+		double fov;            //!< optional: Field of view [degrees]
 		bool isVisibleMarker;  //!< Something around user-markers or SIMBAD-retrieved objects. Test and document!
 
 		//! constructor
@@ -278,6 +279,7 @@ private:
 
 	//! Load the lists names from jsonMap,
 	//! Populate the list names into combo box and extract defaultOlud
+	//! Note that list names may not be unique, but the OLUDs must be.
 	void loadListNames();
 
 	//! Load the selected observing list (selectedOlud) from the jsonMap.

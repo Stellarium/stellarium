@@ -43,6 +43,7 @@
 #include "StelUtils.hpp"
 #include "ObsListDialog.hpp"
 #include "LabelMgr.hpp"
+#include "StelLogger.hpp"
 
 #include "ui_obsListDialog.h"
 
@@ -368,32 +369,21 @@ void ObsListDialog::loadListNames()
 {
 	listNames.clear();
 	QVariantMap::iterator i;
-	for (i = observingLists.begin(); i != observingLists.end(); ++i) {
-		if (i.value().canConvert<QVariantMap>())
-		{
-			QVariant var = i.value();
-			QVariantMap data = var.value<QVariantMap>();
-			QString listName = data.value(KEY_NAME).toString();
-			listNames.append(listName);
-		}
-	}
-	listNames.sort(Qt::CaseInsensitive);
-	ui->obsListComboBox->clear();
-	ui->obsListComboBox->addItems(listNames);
 
-	// Now add the item data into the ComboBox
+	// Add the list name and OLUD (as item data) into the ComboBox.
 	for (i = observingLists.begin(); i != observingLists.end(); ++i) {
 		const QString &listUuid = i.key();
 		if (i.value().canConvert<QVariantMap>()) // if this looks like an actual obsList?
 		{
 			QVariant var = i.value();
-			auto data = var.value<QVariantMap>();
+			QVariantMap data = var.value<QVariantMap>();
 			QString listName = data.value(KEY_NAME).toString();
-			int idx=ui->obsListComboBox->findText(listName);
-			Q_ASSERT(idx!=-1);
-			ui->obsListComboBox->setItemData(idx, listUuid);
+			listNames.append(listName);
+			ui->obsListComboBox->addItem(listName, listUuid);
 		}
 	}
+	ui->obsListComboBox->model()->sort(0);
+
 	// If defaultOlud list not found, set first list as default.
 	if (!observingLists.contains(defaultOlud))
 	{
@@ -457,6 +447,7 @@ void ObsListDialog::loadSelectedList()
 	ui->defaultListCheckBox->setChecked(selectedOlud == defaultOlud);
 
 	QVariantMap observingListMap = observingLists.value(selectedOlud).toMap();
+
 	QVariantList listOfObjects;
 
 	// Display description and creation date
@@ -473,7 +464,7 @@ void ObsListDialog::loadSelectedList()
 	}
 	else
 	{
-		qCritical() << "[ObservingList] conversion error";
+		qCritical() << "[ObservingList] conversion error in list " << currentListName << "from" << observingListMap.value(KEY_CREATION_DATE).toString();
 		qCritical() << "Cannot convert this objects entry:" << observingListMap.value(KEY_OBJECTS);
 		conversionError=true;
 	}
@@ -546,7 +537,10 @@ void ObsListDialog::loadSelectedList()
 				// Location, landscapeID, FoV (may be empty)
 				item.location = objectMap.value(KEY_LOCATION).toString();
 				item.landscapeID = objectMap.value(KEY_LANDSCAPE_ID).toString();
-				item.fov = objectMap.value(KEY_FOV).toDouble();
+
+				const QSettings* conf  = StelApp::getInstance().getSettings();
+				const double minFov=conf->value("navigation/min_fov", 1./3600.).toDouble();
+				item.fov = qBound(minFov, objectMap.value(KEY_FOV).toDouble(), 360.);
 
 				// Visible flag
 				item.isVisibleMarker = objectMap.value(KEY_IS_VISIBLE_MARKER).toBool();
@@ -603,7 +597,11 @@ void ObsListDialog::loadSelectedList()
 */
 QHash<QString, ObsListDialog::observingListItem> ObsListDialog::loadBookmarksFile(QFile &file)
 {
-	//qDebug() << "LOADING OLD BOOKMARKS...";
+	qWarning() << "DEPRECATION WARNING";
+	qWarning() << "  Loading old-style Bookmarks file. This file format is deprecated.";
+	qWarning() << "  If you are loading this as a separate file, ";
+	qWarning() << "  Please update the file (re-export the list into *.sol format).";
+	bool importWarning=false;
 
 	QHash<QString, observingListItem> bookmarksItemHash;
 
@@ -679,6 +677,18 @@ QHash<QString, ObsListDialog::observingListItem> ObsListDialog::loadBookmarksFil
 
 					bookmarksItemHash.insert(it.key(), item);
 				}
+				else
+				{
+					qWarning() << "Bookmark import: Cannot find Object " << item.designation << "(" << nameI18n << ")";
+					importWarning=true;
+				}
+			}
+			if (importWarning)
+			{
+				qWarning() << "Some bookmarked objects in file" << file.fileName() << "were not found.";
+				qWarning() << "If these are Solar System objects, make sure you have imported the respective orbital elements, "
+					      "and the file loads without warnings in the current version.";
+				messageBox(q_("Note"), q_("Some bookmarked objects were not found. See logfile for details."));
 			}
 		}
 		catch (std::runtime_error &e)
@@ -1103,6 +1113,8 @@ void ObsListDialog::importListButtonPressed()
 
 			// Now we have stored to file, but the program is not aware of the new lists!
 			loadListNames(); // also populate Combobox and make sure at least some defaultOlud exists.
+			Q_ASSERT(selectedOlud.length()>0);
+
 			loadSelectedList();
 		} catch (std::runtime_error &e) {
 			qWarning() << "[ObservingList Creation/Edition] File format is wrong! Error: " << e.what();
