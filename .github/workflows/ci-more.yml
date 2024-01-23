@@ -60,7 +60,6 @@ jobs:
           cmake -DCMAKE_BUILD_TYPE=Debug -DENABLE_TESTING=On -DENABLE_SHOWMYSKY=Off -DENABLE_QTWEBENGINE=Off "${{ github.workspace }}"
           make -j3
           xvfb-run ctest --output-on-failure
-          cat /proc/cpuinfo
 
   ci-linux-qt6:
     strategy:
