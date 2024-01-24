@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2023-12-13 11:04+0700\n"
+"POT-Creation-Date: 2024-01-01 16:59+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Orr Nuts <orrnuts@gmail.com>, 2023\n"
 "Language-Team: Croatian (https://app.transifex.com/stellarium/teams/80998/hr/)\n"
@@ -27,8 +27,8 @@ msgstr ""
 #: src/core/modules/CustomObject.cpp:81 src/core/modules/Asterism.cpp:194
 #: src/core/modules/Constellation.cpp:290
 #: src/core/modules/NomenclatureItem.cpp:232 src/core/modules/Nebula.cpp:249
-#: src/core/modules/Nebula.cpp:251 src/core/modules/Planet.cpp:592
-#: src/core/modules/Planet.cpp:595 src/core/modules/StarWrapper.cpp:49
+#: src/core/modules/Nebula.cpp:251 src/core/modules/Planet.cpp:595
+#: src/core/modules/Planet.cpp:598 src/core/modules/StarWrapper.cpp:49
 #: src/core/modules/StarWrapper.cpp:270 src/core/modules/StarWrapper.cpp:272
 #: src/gui/AstroCalcDialog.cpp:901 src/gui/AstroCalcDialog.cpp:2337
 #: src/gui/AstroCalcDialog.cpp:2909 src/gui/AstroCalcDialog.cpp:2941
@@ -70,7 +70,7 @@ msgstr "asterizam"
 #: src/core/modules/NebulaMgr.cpp:359 src/core/modules/SolarSystem.cpp:307
 #: src/core/modules/MilkyWay.cpp:107 src/core/modules/ZodiacalLight.cpp:112
 #: src/core/modules/ToastMgr.cpp:62 src/core/modules/HipsMgr.cpp:156
-#: src/core/StelApp.cpp:661 src/core/StelCore.cpp:296
+#: src/core/StelApp.cpp:669 src/core/StelCore.cpp:296
 #: src/core/StelSkyLayerMgr.cpp:83 src/core/StelSkyLayerMgr.cpp:84
 #: src/StelMainView.cpp:948
 msgid "Display Options"
@@ -330,8 +330,8 @@ msgid "Antapex"
 msgstr "Antiapeks"
 
 #. TRANSLATORS: Unit of measure for speed - kilometers per second
-#: src/core/modules/GridLinesMgr.cpp:1629 src/core/modules/Planet.cpp:716
-#: src/core/modules/Planet.cpp:1212 src/gui/AstroCalcDialog.cpp:9128
+#: src/core/modules/GridLinesMgr.cpp:1629 src/core/modules/Planet.cpp:736
+#: src/core/modules/Planet.cpp:1232 src/gui/AstroCalcDialog.cpp:9128
 #: plugins/Satellites/src/Satellite.cpp:360
 #: plugins/Satellites/src/Satellite.cpp:403
 #: plugins/MeteorShowers/src/MeteorShower.cpp:556
@@ -539,97 +539,97 @@ msgid "Compass marks"
 msgstr "Oznake kompasa"
 
 #. TRANSLATORS: North
-#: src/core/modules/LandscapeMgr.cpp:279 src/core/modules/Planet.cpp:1334
+#: src/core/modules/LandscapeMgr.cpp:279 src/core/modules/Planet.cpp:1354
 msgctxt "compass direction"
 msgid "N"
 msgstr "S"
 
 #. TRANSLATORS: South
-#: src/core/modules/LandscapeMgr.cpp:281 src/core/modules/Planet.cpp:1326
+#: src/core/modules/LandscapeMgr.cpp:281 src/core/modules/Planet.cpp:1346
 msgctxt "compass direction"
 msgid "S"
 msgstr "J"
 
 #. TRANSLATORS: East
-#: src/core/modules/LandscapeMgr.cpp:283 src/core/modules/Planet.cpp:1338
+#: src/core/modules/LandscapeMgr.cpp:283 src/core/modules/Planet.cpp:1358
 msgctxt "compass direction"
 msgid "E"
 msgstr "I"
 
 #. TRANSLATORS: West
-#: src/core/modules/LandscapeMgr.cpp:285 src/core/modules/Planet.cpp:1330
+#: src/core/modules/LandscapeMgr.cpp:285 src/core/modules/Planet.cpp:1350
 msgctxt "compass direction"
 msgid "W"
 msgstr "Z"
 
 #. TRANSLATORS: Northeast
-#: src/core/modules/LandscapeMgr.cpp:287 src/core/modules/Planet.cpp:1336
+#: src/core/modules/LandscapeMgr.cpp:287 src/core/modules/Planet.cpp:1356
 msgctxt "compass direction"
 msgid "NE"
 msgstr "SI"
 
 #. TRANSLATORS: Southeast
-#: src/core/modules/LandscapeMgr.cpp:289 src/core/modules/Planet.cpp:1340
+#: src/core/modules/LandscapeMgr.cpp:289 src/core/modules/Planet.cpp:1360
 msgctxt "compass direction"
 msgid "SE"
 msgstr "JI"
 
 #. TRANSLATORS: Southwest
-#: src/core/modules/LandscapeMgr.cpp:291 src/core/modules/Planet.cpp:1328
+#: src/core/modules/LandscapeMgr.cpp:291 src/core/modules/Planet.cpp:1348
 msgctxt "compass direction"
 msgid "SW"
 msgstr "JZ"
 
 #. TRANSLATORS: Northwest
-#: src/core/modules/LandscapeMgr.cpp:293 src/core/modules/Planet.cpp:1332
+#: src/core/modules/LandscapeMgr.cpp:293 src/core/modules/Planet.cpp:1352
 msgctxt "compass direction"
 msgid "NW"
 msgstr "SZ"
 
 #. TRANSLATORS: North-northeast
-#: src/core/modules/LandscapeMgr.cpp:295 src/core/modules/Planet.cpp:1335
+#: src/core/modules/LandscapeMgr.cpp:295 src/core/modules/Planet.cpp:1355
 msgctxt "compass direction"
 msgid "NNE"
 msgstr ""
 
 #. TRANSLATORS: East-northeast
-#: src/core/modules/LandscapeMgr.cpp:297 src/core/modules/Planet.cpp:1337
+#: src/core/modules/LandscapeMgr.cpp:297 src/core/modules/Planet.cpp:1357
 msgctxt "compass direction"
 msgid "ENE"
 msgstr ""
 
 #. TRANSLATORS: East-southeast
-#: src/core/modules/LandscapeMgr.cpp:299 src/core/modules/Planet.cpp:1339
+#: src/core/modules/LandscapeMgr.cpp:299 src/core/modules/Planet.cpp:1359
 msgctxt "compass direction"
 msgid "ESE"
 msgstr ""
 
 #. TRANSLATORS: South-southeast
-#: src/core/modules/LandscapeMgr.cpp:301 src/core/modules/Planet.cpp:1341
+#: src/core/modules/LandscapeMgr.cpp:301 src/core/modules/Planet.cpp:1361
 msgctxt "compass direction"
 msgid "SSE"
 msgstr ""
 
 #. TRANSLATORS: South-southwest
-#: src/core/modules/LandscapeMgr.cpp:303 src/core/modules/Planet.cpp:1327
+#: src/core/modules/LandscapeMgr.cpp:303 src/core/modules/Planet.cpp:1347
 msgctxt "compass direction"
 msgid "SSW"
 msgstr ""
 
 #. TRANSLATORS: West-southwest
-#: src/core/modules/LandscapeMgr.cpp:305 src/core/modules/Planet.cpp:1329
+#: src/core/modules/LandscapeMgr.cpp:305 src/core/modules/Planet.cpp:1349
 msgctxt "compass direction"
 msgid "WSW"
 msgstr ""
 
 #. TRANSLATORS: West-northwest
-#: src/core/modules/LandscapeMgr.cpp:307 src/core/modules/Planet.cpp:1331
+#: src/core/modules/LandscapeMgr.cpp:307 src/core/modules/Planet.cpp:1351
 msgctxt "compass direction"
 msgid "WNW"
 msgstr ""
 
 #. TRANSLATORS: North-northwest
-#: src/core/modules/LandscapeMgr.cpp:309 src/core/modules/Planet.cpp:1333
+#: src/core/modules/LandscapeMgr.cpp:309 src/core/modules/Planet.cpp:1353
 msgctxt "compass direction"
 msgid "NNW"
 msgstr ""
@@ -731,7 +731,7 @@ msgid "NbW"
 msgstr ""
 
 #: src/core/modules/LandscapeMgr.cpp:434 src/core/modules/LandscapeMgr.cpp:751
-#: src/gui/ViewDialog.cpp:648
+#: src/gui/ViewDialog.cpp:649
 msgid "Loading..."
 msgstr ""
 
@@ -920,14 +920,14 @@ msgstr "geološki pojam"
 msgid "Linear size"
 msgstr "Linearna veličina"
 
-#: src/core/modules/NomenclatureItem.cpp:247 src/core/modules/Planet.cpp:804
+#: src/core/modules/NomenclatureItem.cpp:247 src/core/modules/Planet.cpp:824
 msgid "Diameter"
 msgstr "Promjer"
 
 #. TRANSLATORS: Unit of measure for distance - kilometers
-#: src/core/modules/NomenclatureItem.cpp:248 src/core/modules/Planet.cpp:672
-#: src/core/modules/Planet.cpp:697 src/core/modules/Planet.cpp:805
-#: src/core/modules/Planet.cpp:1528 src/core/modules/Comet.cpp:190
+#: src/core/modules/NomenclatureItem.cpp:248 src/core/modules/Planet.cpp:687
+#: src/core/modules/Planet.cpp:708 src/core/modules/Planet.cpp:825
+#: src/core/modules/Planet.cpp:1548 src/core/modules/Comet.cpp:190
 #: src/core/modules/Comet.cpp:200 src/gui/StelGuiItems.cpp:894
 #: src/gui/AstroCalcDialog.cpp:3142 src/gui/AstroCalcDialog.cpp:3655
 #: src/gui/AstroCalcDialog.cpp:9063 plugins/Satellites/src/Satellites.cpp:2895
@@ -1837,17 +1837,17 @@ msgstr "do"
 msgid "Airmasses"
 msgstr "Zračne mase"
 
-#: src/core/modules/Nebula.cpp:236 src/core/modules/Planet.cpp:568
+#: src/core/modules/Nebula.cpp:236 src/core/modules/Planet.cpp:571
 #: src/core/modules/StarWrapper.cpp:256
 msgid "Additional names: "
 msgstr "Dodatni nazivi:"
 
-#: src/core/modules/Nebula.cpp:242 src/core/modules/Planet.cpp:575
+#: src/core/modules/Nebula.cpp:242 src/core/modules/Planet.cpp:578
 #: src/core/modules/StarWrapper.cpp:262
 msgid "Additional catalog numbers: "
 msgstr "Dodatni kataloški brojevi:"
 
-#: src/core/modules/Nebula.cpp:260 src/core/modules/Planet.cpp:815
+#: src/core/modules/Nebula.cpp:260 src/core/modules/Planet.cpp:835
 #: src/core/modules/MinorPlanet.cpp:186 src/core/modules/StarWrapper.cpp:54
 #: src/core/modules/StarWrapper.cpp:286 plugins/Quasars/src/Quasar.cpp:134
 #: plugins/MissingStars/src/MissingStar.cpp:143
@@ -1904,12 +1904,13 @@ msgstr "sg"
 
 #. TRANSLATORS: distance
 #: src/core/modules/Nebula.cpp:346 src/core/modules/Nebula.cpp:392
-#: src/core/modules/Planet.cpp:707 src/core/modules/StarWrapper.cpp:321
-#: src/core/modules/StarWrapper.cpp:323 src/gui/AstroCalcDialog.cpp:936
-#: src/gui/AstroCalcChart.cpp:92 src/gui/AstroCalcChart.cpp:102
-#: src/gui/AstroCalcChart.cpp:428 src/gui/AstroCalcChart.cpp:454
-#: src/ui_configurationDialog.h:1791 plugins/Supernovae/src/Supernova.cpp:160
-#: plugins/Novae/src/Nova.cpp:165 plugins/Exoplanets/src/Exoplanet.cpp:335
+#: src/core/modules/Planet.cpp:720 src/core/modules/Planet.cpp:726
+#: src/core/modules/StarWrapper.cpp:321 src/core/modules/StarWrapper.cpp:323
+#: src/gui/AstroCalcDialog.cpp:936 src/gui/AstroCalcChart.cpp:92
+#: src/gui/AstroCalcChart.cpp:102 src/gui/AstroCalcChart.cpp:428
+#: src/gui/AstroCalcChart.cpp:454 src/ui_configurationDialog.h:1791
+#: plugins/Supernovae/src/Supernova.cpp:160 plugins/Novae/src/Nova.cpp:165
+#: plugins/Exoplanets/src/Exoplanet.cpp:335
 #: plugins/MissingStars/src/MissingStar.cpp:158
 #: plugins/MissingStars/src/MissingStar.cpp:160
 msgid "Distance"
@@ -2349,33 +2350,33 @@ msgstr "Apsolutna magnituda"
 msgid "Mean Opposition Magnitude"
 msgstr "Magnituda srednje opozicije"
 
-#: src/core/modules/Planet.cpp:582
+#: src/core/modules/Planet.cpp:585
 msgctxt "type of comet"
 msgid "non-periodic"
 msgstr "neperiodični"
 
-#: src/core/modules/Planet.cpp:587
+#: src/core/modules/Planet.cpp:590
 msgctxt "type of comet"
 msgid "short-period"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:589
+#: src/core/modules/Planet.cpp:592
 msgctxt "type of comet"
 msgid "periodic"
 msgstr "periodični"
 
 #. TRANSLATORS: Ecliptical rectangular coordinates
-#: src/core/modules/Planet.cpp:647 src/core/modules/Planet.cpp:649
+#: src/core/modules/Planet.cpp:650 src/core/modules/Planet.cpp:652
 msgctxt "coordinates"
 msgid "Ecliptical"
 msgstr "Ekliptičke"
 
-#: src/core/modules/Planet.cpp:658 src/core/modules/Planet.cpp:659
+#: src/core/modules/Planet.cpp:661 src/core/modules/Planet.cpp:662
 msgid "Hourly motion"
 msgstr "Satni pomak"
 
-#: src/core/modules/Planet.cpp:658 src/core/modules/Planet.cpp:1387
-#: src/core/modules/Planet.cpp:1396 src/core/modules/StarWrapper.cpp:338
+#: src/core/modules/Planet.cpp:661 src/core/modules/Planet.cpp:1407
+#: src/core/modules/Planet.cpp:1416 src/core/modules/StarWrapper.cpp:338
 #: plugins/Pulsars/src/Pulsar.cpp:204
 #: plugins/MissingStars/src/MissingStar.cpp:172
 msgctxt "into the direction of"
@@ -2383,7 +2384,7 @@ msgid "towards"
 msgstr "prema"
 
 #. TRANSLATORS: Unit of measure for distance - astronomical unit
-#: src/core/modules/Planet.cpp:670 src/gui/AstroCalcDialog.cpp:882
+#: src/core/modules/Planet.cpp:676 src/gui/AstroCalcDialog.cpp:882
 #: src/gui/AstroCalcDialog.cpp:1194 src/gui/AstroCalcDialog.cpp:1492
 #: src/gui/AstroCalcDialog.cpp:1759 src/gui/AstroCalcDialog.cpp:1818
 #: src/gui/AstroCalcDialog.cpp:9088 src/gui/AstroCalcChart.cpp:428
@@ -2395,265 +2396,265 @@ msgctxt "distance, astronomical unit"
 msgid "AU"
 msgstr "AJ"
 
+#. TRANSLATORS: Distance measured in terms of the speed of light
+#: src/core/modules/Planet.cpp:678
+msgid "Light time"
+msgstr "Svjetlosno vrijeme"
+
 #. TRANSLATORS: Unit of measure for distance - millions of kilometers
 #. TRANSLATORS: Unit of measure for distance - milliones kilometers
 #. TRANSLATORS: Unit of measure for distance - millions kilometers
-#: src/core/modules/Planet.cpp:686 src/core/modules/Planet.cpp:704
+#: src/core/modules/Planet.cpp:694 src/core/modules/Planet.cpp:715
 #: src/core/modules/Comet.cpp:192 src/gui/AstroCalcDialog.cpp:9065
 msgctxt "distance"
 msgid "M km"
 msgstr "mil. km"
 
-#: src/core/modules/Planet.cpp:689
+#: src/core/modules/Planet.cpp:698 src/core/modules/Planet.cpp:700
 msgid "Distance from Sun"
 msgstr "Udaljenost od Sunca"
 
-#. TRANSLATORS: Distance measured in terms of the speed of light
-#: src/core/modules/Planet.cpp:709
-msgid "Light time"
-msgstr "Svjetlosno vrijeme"
-
-#: src/core/modules/Planet.cpp:723
+#: src/core/modules/Planet.cpp:743
 msgid "Orbital velocity"
 msgstr "Orbitalna brzina"
 
-#: src/core/modules/Planet.cpp:726
+#: src/core/modules/Planet.cpp:746
 msgid "Heliocentric velocity"
 msgstr "Heliocentrička brzina"
 
-#: src/core/modules/Planet.cpp:740
+#: src/core/modules/Planet.cpp:760
 #, qt-format
 msgid "NOTE: elements for epoch %1 probably outdated. Consider updating data!"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:772
+#: src/core/modules/Planet.cpp:792
 msgid "with rings"
 msgstr "s prstenovima"
 
-#: src/core/modules/Planet.cpp:789
+#: src/core/modules/Planet.cpp:809
 msgid "scaled up to"
 msgstr "uvećan do"
 
-#: src/core/modules/Planet.cpp:799
+#: src/core/modules/Planet.cpp:819
 msgid "Apparent diameter"
 msgstr "Prividni promjer"
 
-#: src/core/modules/Planet.cpp:804
+#: src/core/modules/Planet.cpp:824
 msgid "Equatorial diameter"
 msgstr "Promjer ekvatora"
 
-#: src/core/modules/Planet.cpp:868 src/core/modules/Planet.cpp:869
-#: src/core/modules/Planet.cpp:877 src/gui/AstroCalcChart.cpp:93
+#: src/core/modules/Planet.cpp:888 src/core/modules/Planet.cpp:889
+#: src/core/modules/Planet.cpp:897 src/gui/AstroCalcChart.cpp:93
 #: src/gui/AstroCalcChart.cpp:103 src/gui/AstroCalcChart.cpp:430
 #: src/gui/AstroCalcChart.cpp:456 src/ui_configurationDialog.h:1830
 msgid "Elongation"
 msgstr "Elongacija"
 
-#: src/core/modules/Planet.cpp:870 src/core/modules/Planet.cpp:879
+#: src/core/modules/Planet.cpp:890 src/core/modules/Planet.cpp:899
 #: src/gui/AstroCalcChart.cpp:96 src/gui/AstroCalcChart.cpp:106
 #: src/gui/AstroCalcChart.cpp:439 src/gui/AstroCalcChart.cpp:465
 #: plugins/Satellites/src/Satellite.cpp:408
 msgid "Phase angle"
 msgstr "Fazni pomak"
 
-#: src/core/modules/Planet.cpp:872 src/core/modules/Planet.cpp:881
+#: src/core/modules/Planet.cpp:892 src/core/modules/Planet.cpp:901
 msgid "Illuminated"
 msgstr "Osvijetljen"
 
-#: src/core/modules/Planet.cpp:878
+#: src/core/modules/Planet.cpp:898
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:323
 msgid "Elong. in Ecl.Long."
 msgstr ""
 
-#: src/core/modules/Planet.cpp:893 src/gui/AstroCalcDialog.cpp:9298
+#: src/core/modules/Planet.cpp:913 src/gui/AstroCalcDialog.cpp:9298
 #: src/gui/AstroCalcChart.cpp:473
 msgid "Angular distance"
 msgstr "Kutna udaljenost"
 
 #. TRANSLATORS: Unit of measure for period - days
-#: src/core/modules/Planet.cpp:911 src/core/modules/StarWrapper.cpp:362
+#: src/core/modules/Planet.cpp:931 src/core/modules/StarWrapper.cpp:362
 #: src/gui/AstroCalcDialog.cpp:9099
 msgctxt "duration"
 msgid "days"
 msgstr "dana"
 
-#: src/core/modules/Planet.cpp:920
+#: src/core/modules/Planet.cpp:940
 msgid "Sidereal period"
 msgstr "Siderički period"
 
-#: src/core/modules/Planet.cpp:929
+#: src/core/modules/Planet.cpp:949
 msgid "Synodic period"
 msgstr "Sinodički period"
 
 #. TRANSLATORS: Unit of measure for speed - meters per second
-#: src/core/modules/Planet.cpp:1214
+#: src/core/modules/Planet.cpp:1234
 msgctxt "speed"
 msgid "m/s"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:1229
+#: src/core/modules/Planet.cpp:1249
 msgid "Sidereal day"
 msgstr "Siderički dan"
 
-#: src/core/modules/Planet.cpp:1231
+#: src/core/modules/Planet.cpp:1251
 msgid "Mean solar day"
 msgstr "Srednji solarni dan"
 
-#: src/core/modules/Planet.cpp:1237
+#: src/core/modules/Planet.cpp:1257
 msgid "The period of rotation is chaotic"
 msgstr "Period rotacije je kaotičan"
 
-#: src/core/modules/Planet.cpp:1243 src/core/modules/Planet.cpp:1245
-#: src/core/modules/Planet.cpp:1251 src/core/modules/Planet.cpp:1253
+#: src/core/modules/Planet.cpp:1263 src/core/modules/Planet.cpp:1265
+#: src/core/modules/Planet.cpp:1271 src/core/modules/Planet.cpp:1273
 msgid "Equatorial rotation velocity"
 msgstr "brzina rotacije na ekvatoru"
 
-#: src/core/modules/Planet.cpp:1277 src/core/modules/Planet.cpp:1672
+#: src/core/modules/Planet.cpp:1297 src/core/modules/Planet.cpp:1692
 msgctxt "Moon phase"
 msgid "New Moon"
 msgstr "Mlađak"
 
-#: src/core/modules/Planet.cpp:1279 src/core/modules/Planet.cpp:1674
+#: src/core/modules/Planet.cpp:1299 src/core/modules/Planet.cpp:1694
 msgctxt "Moon phase"
 msgid "Waxing Crescent"
 msgstr "Rastući srpasti polumjesec"
 
-#: src/core/modules/Planet.cpp:1281 src/core/modules/Planet.cpp:1676
+#: src/core/modules/Planet.cpp:1301 src/core/modules/Planet.cpp:1696
 msgctxt "Moon phase"
 msgid "First Quarter"
 msgstr "Prva četvrt"
 
-#: src/core/modules/Planet.cpp:1283 src/core/modules/Planet.cpp:1678
+#: src/core/modules/Planet.cpp:1303 src/core/modules/Planet.cpp:1698
 msgctxt "Moon phase"
 msgid "Waxing Gibbous"
 msgstr "Rastući izbočeni polumjesec"
 
-#: src/core/modules/Planet.cpp:1285 src/core/modules/Planet.cpp:1680
+#: src/core/modules/Planet.cpp:1305 src/core/modules/Planet.cpp:1700
 msgctxt "Moon phase"
 msgid "Full Moon"
 msgstr "Pun Mjesec"
 
-#: src/core/modules/Planet.cpp:1287 src/core/modules/Planet.cpp:1682
+#: src/core/modules/Planet.cpp:1307 src/core/modules/Planet.cpp:1702
 msgctxt "Moon phase"
 msgid "Waning Gibbous"
 msgstr "Opadajući izbočeni polumjesec"
 
-#: src/core/modules/Planet.cpp:1289 src/core/modules/Planet.cpp:1684
+#: src/core/modules/Planet.cpp:1309 src/core/modules/Planet.cpp:1704
 msgctxt "Moon phase"
 msgid "Third Quarter"
 msgstr "Zadnja četvrt"
 
-#: src/core/modules/Planet.cpp:1291 src/core/modules/Planet.cpp:1686
+#: src/core/modules/Planet.cpp:1311 src/core/modules/Planet.cpp:1706
 msgctxt "Moon phase"
 msgid "Waning Crescent"
 msgstr "Opadajući srpasti polumjesec"
 
-#: src/core/modules/Planet.cpp:1299
+#: src/core/modules/Planet.cpp:1319
 msgid "Moon age"
 msgstr "Mjesečeva starost"
 
-#: src/core/modules/Planet.cpp:1299
+#: src/core/modules/Planet.cpp:1319
 msgid "days old"
 msgstr "dana starosti"
 
-#: src/core/modules/Planet.cpp:1319 src/core/modules/Planet.cpp:1322
+#: src/core/modules/Planet.cpp:1339 src/core/modules/Planet.cpp:1342
 msgid "Position angle of bright limb"
 msgstr "Položajni kut osvijetljenog ruba"
 
-#: src/core/modules/Planet.cpp:1386 src/core/modules/Planet.cpp:1395
-#: src/core/modules/Planet.cpp:1431 src/core/modules/Planet.cpp:1438
+#: src/core/modules/Planet.cpp:1406 src/core/modules/Planet.cpp:1415
+#: src/core/modules/Planet.cpp:1451 src/core/modules/Planet.cpp:1458
 msgid "Position Angle of axis"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:1387 src/core/modules/Planet.cpp:1388
-#: src/core/modules/Planet.cpp:1396 src/core/modules/Planet.cpp:1397
+#: src/core/modules/Planet.cpp:1407 src/core/modules/Planet.cpp:1408
+#: src/core/modules/Planet.cpp:1416 src/core/modules/Planet.cpp:1417
 msgid "Libration"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:1389 src/core/modules/Planet.cpp:1398
-#: src/core/modules/Planet.cpp:1433 src/core/modules/Planet.cpp:1440
+#: src/core/modules/Planet.cpp:1409 src/core/modules/Planet.cpp:1418
+#: src/core/modules/Planet.cpp:1453 src/core/modules/Planet.cpp:1460
 msgid "Subsolar point"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:1390 src/core/modules/Planet.cpp:1399
+#: src/core/modules/Planet.cpp:1410 src/core/modules/Planet.cpp:1419
 msgid "Colongitude"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:1432 src/core/modules/Planet.cpp:1439
+#: src/core/modules/Planet.cpp:1452 src/core/modules/Planet.cpp:1459
 msgid "Center point"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:1459
+#: src/core/modules/Planet.cpp:1479
 msgid "Eclipse magnitude"
 msgstr "Magnituda pomrčine"
 
-#: src/core/modules/Planet.cpp:1461
+#: src/core/modules/Planet.cpp:1481
 msgid "Eclipse obscuration"
 msgstr "Zatamnjenje pomrčine"
 
-#: src/core/modules/Planet.cpp:1487
+#: src/core/modules/Planet.cpp:1507
 msgid "Moon/Sun diameter ratio"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:1490
+#: src/core/modules/Planet.cpp:1510
 msgctxt "type of solar eclipse"
 msgid "(annular)"
 msgstr "(prstenasta)"
 
-#: src/core/modules/Planet.cpp:1492
+#: src/core/modules/Planet.cpp:1512
 msgctxt "type of solar eclipse"
 msgid "(total)"
 msgstr "(potpuna)"
 
-#: src/core/modules/Planet.cpp:1503
+#: src/core/modules/Planet.cpp:1523
 msgid "Central eclipse duration"
 msgstr ""
 
 #. TRANSLATORS: Short for "minutes".
-#: src/core/modules/Planet.cpp:1505
+#: src/core/modules/Planet.cpp:1525
 #: plugins/Observability/src/Observability.cpp:153
 msgid "m"
 msgstr "m"
 
 #. TRANSLATORS: Short for "seconds".
-#: src/core/modules/Planet.cpp:1507
+#: src/core/modules/Planet.cpp:1527
 #: plugins/Observability/src/Observability.cpp:155
 msgid "s"
 msgstr "s"
 
-#: src/core/modules/Planet.cpp:1508
+#: src/core/modules/Planet.cpp:1528
 msgid "Center of solar eclipse (Lat./Long.)"
 msgstr "Središte sunčeve pomrčine (Šir./Duž.)"
 
-#: src/core/modules/Planet.cpp:1518
+#: src/core/modules/Planet.cpp:1538
 msgid "Shadow center point is"
 msgstr "Središnja točka sjene je"
 
-#: src/core/modules/Planet.cpp:1520
+#: src/core/modules/Planet.cpp:1540
 msgid "km towards azimuth"
 msgstr "km prema azimutu"
 
-#: src/core/modules/Planet.cpp:1523
+#: src/core/modules/Planet.cpp:1543
 msgid "Width of antumbra"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:1525
+#: src/core/modules/Planet.cpp:1545
 msgid "Width of umbra"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:1542
+#: src/core/modules/Planet.cpp:1562
 msgid "Penumbral eclipse magnitude"
 msgstr "Magnituda penumbralne pomrčine"
 
-#: src/core/modules/Planet.cpp:1545
+#: src/core/modules/Planet.cpp:1565
 msgid "Umbral eclipse magnitude"
 msgstr "Magnituda umbralne pomrčine"
 
-#: src/core/modules/Planet.cpp:1552
+#: src/core/modules/Planet.cpp:1572
 msgid "Albedo"
 msgstr "Albedo"
 
-#: src/core/modules/Planet.cpp:1555 src/core/modules/MinorPlanet.cpp:211
+#: src/core/modules/Planet.cpp:1575 src/core/modules/MinorPlanet.cpp:211
 #: src/core/modules/Comet.cpp:241
 msgid "Discovered"
 msgstr ""
@@ -3062,63 +3063,63 @@ msgstr "Inicijalizacija asterizama..."
 msgid "Initializing landscape..."
 msgstr "Inicijalizacija krajolika..."
 
-#: src/core/StelApp.cpp:592
+#: src/core/StelApp.cpp:600
 msgid "Initializing grid lines..."
 msgstr "Inicijalizacija linija mreža..."
 
-#: src/core/StelApp.cpp:597
+#: src/core/StelApp.cpp:605
 msgid "Initializing special markers..."
 msgstr "Inicijalizacija specijalnih oznaka..."
 
-#: src/core/StelApp.cpp:603
+#: src/core/StelApp.cpp:611
 msgid "Initializing sporadic meteors..."
 msgstr "Inicijalizacija sporadičnih meteora..."
 
-#: src/core/StelApp.cpp:609
+#: src/core/StelApp.cpp:617
 msgid "Initializing user labels..."
 msgstr "Inicijalizacija korisničkih naziva..."
 
-#: src/core/StelApp.cpp:614
+#: src/core/StelApp.cpp:622
 msgid "Initializing sky cultures..."
 msgstr "Inicijalizacija kultura zviježđa..."
 
-#: src/core/StelApp.cpp:618
+#: src/core/StelApp.cpp:626
 msgid "Initializing user markers..."
 msgstr "Inicijalizacija korisničkih oznaka..."
 
-#: src/core/StelApp.cpp:624
+#: src/core/StelApp.cpp:632
 msgid "Initializing custom objects..."
 msgstr "Inicijalizacija prilagođenih objekata..."
 
-#: src/core/StelApp.cpp:630
+#: src/core/StelApp.cpp:638
 msgid "Initializing highlights..."
 msgstr "Inicijalizacija istaknutih zanimljivosti..."
 
-#: src/core/StelApp.cpp:636
+#: src/core/StelApp.cpp:644
 msgid "Initializing specific time..."
 msgstr ""
 
-#: src/core/StelApp.cpp:644
+#: src/core/StelApp.cpp:652
 msgid "Initializing scripting..."
 msgstr "Inicijalizacija skriptiranja..."
 
-#: src/core/StelApp.cpp:649
+#: src/core/StelApp.cpp:657
 msgid "Initializing color scheme..."
 msgstr "Inicijalizacija kolorne sheme..."
 
-#: src/core/StelApp.cpp:661 src/ui_configurationDialog.h:1898
+#: src/core/StelApp.cpp:669 src/ui_configurationDialog.h:1898
 msgid "Night mode"
 msgstr "Noćni način rada"
 
-#: src/core/StelApp.cpp:691
+#: src/core/StelApp.cpp:699
 msgid "Initializing SPOUT sender..."
 msgstr "Inicijalizacija SPOUT sender dodatka..."
 
-#: src/core/StelApp.cpp:701
+#: src/core/StelApp.cpp:709
 msgid "Cannot create Spout sender. See log for details."
 msgstr "Spout sender opciju nije moguće kreirati. Pogledajte \"log\" za detalje."
 
-#: src/core/StelApp.cpp:728
+#: src/core/StelApp.cpp:736
 msgid "Loading plugin"
 msgstr "Učitavanje dodataka"
 
@@ -4091,23 +4092,23 @@ msgid "IAU Constellation"
 msgstr "IAU Zviježđe"
 
 #. TRANSLATORS: Azimuth/Altitude
-#: src/core/StelObject.cpp:1279
+#: src/core/StelObject.cpp:1283
 msgctxt "celestial coordinate system"
 msgid "Solar A/a"
 msgstr ""
 
-#: src/core/StelObject.cpp:1279
+#: src/core/StelObject.cpp:1283
 msgctxt "celestial coordinate system"
 msgid "Solar Az./Alt."
 msgstr ""
 
 #. TRANSLATORS: Azimuth/Altitude
-#: src/core/StelObject.cpp:1297
+#: src/core/StelObject.cpp:1301
 msgctxt "celestial coordinate system"
 msgid "Lunar A/a"
 msgstr ""
 
-#: src/core/StelObject.cpp:1297
+#: src/core/StelObject.cpp:1301
 msgctxt "celestial coordinate system"
 msgid "Lunar Az./Alt."
 msgstr ""
@@ -5729,20 +5730,20 @@ msgstr "Slika u sekundi"
 msgid "Are you sure? This will delete your customized data."
 msgstr "Jeste li sigurni? Ova akcija će izbrisati korisničke podatke."
 
-#: src/gui/ViewDialog.cpp:701
+#: src/gui/ViewDialog.cpp:702
 msgid "properties"
 msgstr "svojstva"
 
-#: src/gui/ViewDialog.cpp:722
+#: src/gui/ViewDialog.cpp:723
 msgid "Deep Sky"
 msgstr "Duboki svemir"
 
-#: src/gui/ViewDialog.cpp:723
+#: src/gui/ViewDialog.cpp:724
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:233
 msgid "Solar System"
 msgstr "Sunčev sustav"
 
-#: src/gui/ViewDialog.cpp:942
+#: src/gui/ViewDialog.cpp:943
 msgid ""
 "Uses a polygonal 3D model for some selected subplanetary objects (small "
 "moons, asteroids, comets) instead of a spherical approximation"
@@ -5750,7 +5751,7 @@ msgstr ""
 "Koristi poligonalni 3D model za neke odabrane subplanetarne objekte (male "
 "mjesece, asteroide, komete) umjesto sferne aproksimacije"
 
-#: src/gui/ViewDialog.cpp:943
+#: src/gui/ViewDialog.cpp:944
 msgid ""
 "Use a &quot;shadow map&quot; to simulate self-shadows of non-convex solar "
 "system objects. May reduce shadow penumbra quality on some objects."
@@ -5759,93 +5760,93 @@ msgstr ""
 "nekonveksnih objekata Sunčevog sustava . Moguća je smanjenje kvalitete "
 "penumbra sjene područja na nekim objektima."
 
-#: src/gui/ViewDialog.cpp:978
+#: src/gui/ViewDialog.cpp:979
 msgid "Abbreviated"
 msgstr "Skraćeno"
 
-#: src/gui/ViewDialog.cpp:979
+#: src/gui/ViewDialog.cpp:980
 msgid "Native"
 msgstr "Narodno"
 
-#: src/gui/ViewDialog.cpp:980
+#: src/gui/ViewDialog.cpp:981
 msgid "Translated"
 msgstr "Prevedeno"
 
-#: src/gui/ViewDialog.cpp:1162
+#: src/gui/ViewDialog.cpp:1163
 msgid "No shooting stars"
 msgstr "Bez padajućih zvijezdi"
 
-#: src/gui/ViewDialog.cpp:1164
+#: src/gui/ViewDialog.cpp:1165
 msgid "Normal rate"
 msgstr "Normalna učestalost"
 
-#: src/gui/ViewDialog.cpp:1166
+#: src/gui/ViewDialog.cpp:1167
 msgid "Standard Orionids rate"
 msgstr "Standardna učestalost Orionida"
 
-#: src/gui/ViewDialog.cpp:1168
+#: src/gui/ViewDialog.cpp:1169
 msgid "Standard Perseids rate"
 msgstr "Standarna učestalost Perzeida"
 
-#: src/gui/ViewDialog.cpp:1170
+#: src/gui/ViewDialog.cpp:1171
 msgid "Standard Geminids rate"
 msgstr "Standardna učestalost Geminida"
 
-#: src/gui/ViewDialog.cpp:1172
+#: src/gui/ViewDialog.cpp:1173
 msgid "Exceptional Perseid rate"
 msgstr "Izuzetna učestalost Perzeida"
 
-#: src/gui/ViewDialog.cpp:1174
+#: src/gui/ViewDialog.cpp:1175
 msgid "Meteor storm rate"
 msgstr "Učestalost kiše meteora"
 
-#: src/gui/ViewDialog.cpp:1176
+#: src/gui/ViewDialog.cpp:1177
 msgid "Exceptional Draconid rate"
 msgstr "Izuzetna učestalost Drakonida"
 
-#: src/gui/ViewDialog.cpp:1178
+#: src/gui/ViewDialog.cpp:1179
 msgid "Exceptional Leonid rate"
 msgstr "Izuzetna učestalost Leonida"
 
-#: src/gui/ViewDialog.cpp:1180
+#: src/gui/ViewDialog.cpp:1181
 msgid "Very high rate (1966 Leonids)"
 msgstr "Vrlo visoka učestalost (Leonidi 1966)"
 
-#: src/gui/ViewDialog.cpp:1182
+#: src/gui/ViewDialog.cpp:1183
 msgid "Highest rate ever (1833 Leonids)"
 msgstr "Najviša učestalost ikad (Leonidi 1833)"
 
-#: src/gui/ViewDialog.cpp:1245
+#: src/gui/ViewDialog.cpp:1246
 msgctxt "magnitude algorithm"
 msgid "G. Müller (1893)"
 msgstr "G. Müller (1893)"
 
-#: src/gui/ViewDialog.cpp:1246
+#: src/gui/ViewDialog.cpp:1247
 msgctxt "magnitude algorithm"
 msgid "Astronomical Almanac (1984)"
 msgstr "Astronomski Almanah (1984)"
 
-#: src/gui/ViewDialog.cpp:1247
+#: src/gui/ViewDialog.cpp:1248
 msgctxt "magnitude algorithm"
 msgid "Explanatory Supplement (1992)"
 msgstr "Dodatak za objašnjenje (1992)"
 
-#: src/gui/ViewDialog.cpp:1248
+#: src/gui/ViewDialog.cpp:1249
 msgctxt "magnitude algorithm"
 msgid "Explanatory Supplement (2013)"
 msgstr "Dodatak za objašnjenje (2013)"
 
-#: src/gui/ViewDialog.cpp:1249
+#: src/gui/ViewDialog.cpp:1250
 msgctxt "magnitude algorithm"
 msgid "Mallama & Hilton (2018)"
 msgstr "Mallama & Hilton (2018)"
 
-#: src/gui/ViewDialog.cpp:1250
+#: src/gui/ViewDialog.cpp:1251
 msgctxt "magnitude algorithm"
 msgid "Generic"
 msgstr "Generički"
 
-#: src/gui/ViewDialog.cpp:1272
+#: src/gui/ViewDialog.cpp:1273
 msgid ""
 "The algorithm was used in the <em>Astronomical Almanac</em> (1984 and later)"
 " and gives V (instrumental) magnitudes (allegedly from D.L. Harris)."
@@ -5853,20 +5854,20 @@ msgstr ""
 "Algoritam je korišten u <em>Astronomskom almanahu</em> (1984. i kasnije) i "
 "daje V (instrumentalne) magnitude (navodno od D. L. Harrisa)."
 
-#: src/gui/ViewDialog.cpp:1273
+#: src/gui/ViewDialog.cpp:1274
 msgid ""
 "The algorithm is based on visual observations 1877-1891 by G. Müller and was"
 " still republished in the <em>Explanatory Supplement to the Astronomical "
 "Ephemeris</em> (1961)."
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1274
+#: src/gui/ViewDialog.cpp:1275
 msgid ""
 "The algorithm was published in the 2nd edition of the <em>Explanatory "
 "Supplement to the Astronomical Almanac</em> (1992)."
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1275
+#: src/gui/ViewDialog.cpp:1276
 msgid ""
 "The algorithm was published in the 3rd edition of the <em>Explanatory "
 "Supplement to the Astronomical Almanac</em> (2013)."
@@ -5874,14 +5875,14 @@ msgstr ""
 "Algoritam je objavljen u trećem izdanju časopisa <em>Dodatak objašnjenja "
 "astronomskog almanaha</em> (2013)."
 
-#: src/gui/ViewDialog.cpp:1276
+#: src/gui/ViewDialog.cpp:1277
 msgid ""
 "The algorithm was published by A. Mallama & J. L. Hilton: <em>Computing "
 "apparent planetary magnitudes for the Astronomical Almanac.</em> "
 "Astronomy&Computing 25 (2018) 10-24."
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1279
+#: src/gui/ViewDialog.cpp:1280
 msgid "Visual magnitude based on phase angle and albedo."
 msgstr "Prividna magnituda bazirana na faznom kutu i albedu."
 
