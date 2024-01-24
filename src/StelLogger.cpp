@@ -37,6 +37,11 @@
 #include <string>
 #endif
 
+#ifdef Q_OS_LINUX
+#include <sys/types.h>
+#include <sys/sysinfo.h>
+#endif
+
 // Init statics variables.
 QFile StelLogger::logFile;
 QString StelLogger::log;
@@ -200,6 +205,64 @@ void StelLogger::init(const QString& logFilePath)
 	std::string model(len, '\0');
 	sysctlbyname("hw.model", const_cast<char *>(model.data()), &len, nullptr, 0);
 	writeLog(QString("Model identifier: %1").arg(model.data()));
+#endif
+
+#ifdef Q_OS_LINUX
+	// CPU info
+	QString model = "unknown";
+	int ncpu = 0;
+	bool cpuOK = false;
+	QFile infoFile("/proc/cpuinfo");
+	if (!infoFile.open(QIODevice::ReadOnly | QIODevice::Text))
+		writeLog("Could not get CPU info.");
+	else
+	{
+		cpuOK = true;
+		bool readModel = true;
+		while(!infoFile.peek(1).isEmpty())
+		{
+			QString line = infoFile.readLine();
+			line.chop(1);
+			if (line.startsWith("processor", Qt::CaseInsensitive))
+				ncpu++;
+
+			if (line.startsWith("model name", Qt::CaseInsensitive) && readModel)
+			{
+				model = line.split(":").last().trimmed();
+				readModel = false;
+			}
+		}
+		infoFile.close();
+	}
+
+	QString freq = "unknown";
+	infoFile.setFileName("/sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_max_freq");
+	if (infoFile.open(QIODevice::ReadOnly | QIODevice::Text))
+	{
+		// frequency in kHz: https://www.kernel.org/doc/Documentation/cpu-freq/user-guide.txt
+		freq = QString::number( infoFile.readAll().toInt()/1000);
+		infoFile.close();
+	}
+
+	if (cpuOK)
+	{
+		writeLog(QString("Processor name: %1").arg(model));
+		writeLog(QString("Processor maximum speed: %1 MHz").arg(freq));
+		writeLog(QString("Processor logical cores: %1").arg(ncpu));
+	}
+
+	// memory info
+	struct sysinfo memInfo;
+	sysinfo (&memInfo);
+	long long totalRAM = memInfo.totalram;
+	long long totalVRAM = totalRAM +memInfo.totalswap;
+	//Multiply in next statements to avoid int overflow on right hand side...
+	totalRAM *= memInfo.mem_unit;
+	totalVRAM *= memInfo.mem_unit;
+
+	writeLog(QString("Total physical memory: %1 MB").arg(totalRAM/(1024<<10)));
+	writeLog(QString("Total virtual memory: %1 MB").arg(totalVRAM/(1024<<10)));
+
 #endif
 
 /*
