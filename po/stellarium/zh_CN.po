@@ -23,7 +23,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2023-12-13 11:04+0700\n"
+"POT-Creation-Date: 2024-01-01 16:59+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: 殳玮 孙 <itun@qq.com>, 2023\n"
 "Language-Team: Chinese (China) (https://app.transifex.com/stellarium/teams/80998/zh_CN/)\n"
@@ -37,8 +37,8 @@ msgstr ""
 #: src/core/modules/CustomObject.cpp:81 src/core/modules/Asterism.cpp:194
 #: src/core/modules/Constellation.cpp:290
 #: src/core/modules/NomenclatureItem.cpp:232 src/core/modules/Nebula.cpp:249
-#: src/core/modules/Nebula.cpp:251 src/core/modules/Planet.cpp:592
-#: src/core/modules/Planet.cpp:595 src/core/modules/StarWrapper.cpp:49
+#: src/core/modules/Nebula.cpp:251 src/core/modules/Planet.cpp:595
+#: src/core/modules/Planet.cpp:598 src/core/modules/StarWrapper.cpp:49
 #: src/core/modules/StarWrapper.cpp:270 src/core/modules/StarWrapper.cpp:272
 #: src/gui/AstroCalcDialog.cpp:901 src/gui/AstroCalcDialog.cpp:2337
 #: src/gui/AstroCalcDialog.cpp:2909 src/gui/AstroCalcDialog.cpp:2941
@@ -80,7 +80,7 @@ msgstr "星群"
 #: src/core/modules/NebulaMgr.cpp:359 src/core/modules/SolarSystem.cpp:307
 #: src/core/modules/MilkyWay.cpp:107 src/core/modules/ZodiacalLight.cpp:112
 #: src/core/modules/ToastMgr.cpp:62 src/core/modules/HipsMgr.cpp:156
-#: src/core/StelApp.cpp:661 src/core/StelCore.cpp:296
+#: src/core/StelApp.cpp:669 src/core/StelCore.cpp:296
 #: src/core/StelSkyLayerMgr.cpp:83 src/core/StelSkyLayerMgr.cpp:84
 #: src/StelMainView.cpp:948
 msgid "Display Options"
@@ -340,8 +340,8 @@ msgid "Antapex"
 msgstr "背点"
 
 #. TRANSLATORS: Unit of measure for speed - kilometers per second
-#: src/core/modules/GridLinesMgr.cpp:1629 src/core/modules/Planet.cpp:716
-#: src/core/modules/Planet.cpp:1212 src/gui/AstroCalcDialog.cpp:9128
+#: src/core/modules/GridLinesMgr.cpp:1629 src/core/modules/Planet.cpp:736
+#: src/core/modules/Planet.cpp:1232 src/gui/AstroCalcDialog.cpp:9128
 #: plugins/Satellites/src/Satellite.cpp:360
 #: plugins/Satellites/src/Satellite.cpp:403
 #: plugins/MeteorShowers/src/MeteorShower.cpp:556
@@ -549,97 +549,97 @@ msgid "Compass marks"
 msgstr "罗盘标记"
 
 #. TRANSLATORS: North
-#: src/core/modules/LandscapeMgr.cpp:279 src/core/modules/Planet.cpp:1334
+#: src/core/modules/LandscapeMgr.cpp:279 src/core/modules/Planet.cpp:1354
 msgctxt "compass direction"
 msgid "N"
 msgstr "北"
 
 #. TRANSLATORS: South
-#: src/core/modules/LandscapeMgr.cpp:281 src/core/modules/Planet.cpp:1326
+#: src/core/modules/LandscapeMgr.cpp:281 src/core/modules/Planet.cpp:1346
 msgctxt "compass direction"
 msgid "S"
 msgstr "南"
 
 #. TRANSLATORS: East
-#: src/core/modules/LandscapeMgr.cpp:283 src/core/modules/Planet.cpp:1338
+#: src/core/modules/LandscapeMgr.cpp:283 src/core/modules/Planet.cpp:1358
 msgctxt "compass direction"
 msgid "E"
 msgstr "东"
 
 #. TRANSLATORS: West
-#: src/core/modules/LandscapeMgr.cpp:285 src/core/modules/Planet.cpp:1330
+#: src/core/modules/LandscapeMgr.cpp:285 src/core/modules/Planet.cpp:1350
 msgctxt "compass direction"
 msgid "W"
 msgstr "西"
 
 #. TRANSLATORS: Northeast
-#: src/core/modules/LandscapeMgr.cpp:287 src/core/modules/Planet.cpp:1336
+#: src/core/modules/LandscapeMgr.cpp:287 src/core/modules/Planet.cpp:1356
 msgctxt "compass direction"
 msgid "NE"
 msgstr "东北"
 
 #. TRANSLATORS: Southeast
-#: src/core/modules/LandscapeMgr.cpp:289 src/core/modules/Planet.cpp:1340
+#: src/core/modules/LandscapeMgr.cpp:289 src/core/modules/Planet.cpp:1360
 msgctxt "compass direction"
 msgid "SE"
 msgstr "东南"
 
 #. TRANSLATORS: Southwest
-#: src/core/modules/LandscapeMgr.cpp:291 src/core/modules/Planet.cpp:1328
+#: src/core/modules/LandscapeMgr.cpp:291 src/core/modules/Planet.cpp:1348
 msgctxt "compass direction"
 msgid "SW"
 msgstr "西南"
 
 #. TRANSLATORS: Northwest
-#: src/core/modules/LandscapeMgr.cpp:293 src/core/modules/Planet.cpp:1332
+#: src/core/modules/LandscapeMgr.cpp:293 src/core/modules/Planet.cpp:1352
 msgctxt "compass direction"
 msgid "NW"
 msgstr "西北"
 
 #. TRANSLATORS: North-northeast
-#: src/core/modules/LandscapeMgr.cpp:295 src/core/modules/Planet.cpp:1335
+#: src/core/modules/LandscapeMgr.cpp:295 src/core/modules/Planet.cpp:1355
 msgctxt "compass direction"
 msgid "NNE"
 msgstr "北北东"
 
 #. TRANSLATORS: East-northeast
-#: src/core/modules/LandscapeMgr.cpp:297 src/core/modules/Planet.cpp:1337
+#: src/core/modules/LandscapeMgr.cpp:297 src/core/modules/Planet.cpp:1357
 msgctxt "compass direction"
 msgid "ENE"
 msgstr "东北东"
 
 #. TRANSLATORS: East-southeast
-#: src/core/modules/LandscapeMgr.cpp:299 src/core/modules/Planet.cpp:1339
+#: src/core/modules/LandscapeMgr.cpp:299 src/core/modules/Planet.cpp:1359
 msgctxt "compass direction"
 msgid "ESE"
 msgstr "东南东"
 
 #. TRANSLATORS: South-southeast
-#: src/core/modules/LandscapeMgr.cpp:301 src/core/modules/Planet.cpp:1341
+#: src/core/modules/LandscapeMgr.cpp:301 src/core/modules/Planet.cpp:1361
 msgctxt "compass direction"
 msgid "SSE"
 msgstr "南南东"
 
 #. TRANSLATORS: South-southwest
-#: src/core/modules/LandscapeMgr.cpp:303 src/core/modules/Planet.cpp:1327
+#: src/core/modules/LandscapeMgr.cpp:303 src/core/modules/Planet.cpp:1347
 msgctxt "compass direction"
 msgid "SSW"
 msgstr "南南西"
 
 #. TRANSLATORS: West-southwest
-#: src/core/modules/LandscapeMgr.cpp:305 src/core/modules/Planet.cpp:1329
+#: src/core/modules/LandscapeMgr.cpp:305 src/core/modules/Planet.cpp:1349
 msgctxt "compass direction"
 msgid "WSW"
 msgstr "西南西"
 
 #. TRANSLATORS: West-northwest
-#: src/core/modules/LandscapeMgr.cpp:307 src/core/modules/Planet.cpp:1331
+#: src/core/modules/LandscapeMgr.cpp:307 src/core/modules/Planet.cpp:1351
 msgctxt "compass direction"
 msgid "WNW"
 msgstr "西北西"
 
 #. TRANSLATORS: North-northwest
-#: src/core/modules/LandscapeMgr.cpp:309 src/core/modules/Planet.cpp:1333
+#: src/core/modules/LandscapeMgr.cpp:309 src/core/modules/Planet.cpp:1353
 msgctxt "compass direction"
 msgid "NNW"
 msgstr "北北西"
@@ -741,7 +741,7 @@ msgid "NbW"
 msgstr "北偏西"
 
 #: src/core/modules/LandscapeMgr.cpp:434 src/core/modules/LandscapeMgr.cpp:751
-#: src/gui/ViewDialog.cpp:648
+#: src/gui/ViewDialog.cpp:649
 msgid "Loading..."
 msgstr "加载中..."
 
@@ -928,14 +928,14 @@ msgstr "地质术语"
 msgid "Linear size"
 msgstr "线性尺寸"
 
-#: src/core/modules/NomenclatureItem.cpp:247 src/core/modules/Planet.cpp:804
+#: src/core/modules/NomenclatureItem.cpp:247 src/core/modules/Planet.cpp:824
 msgid "Diameter"
 msgstr "直径"
 
 #. TRANSLATORS: Unit of measure for distance - kilometers
-#: src/core/modules/NomenclatureItem.cpp:248 src/core/modules/Planet.cpp:672
-#: src/core/modules/Planet.cpp:697 src/core/modules/Planet.cpp:805
-#: src/core/modules/Planet.cpp:1528 src/core/modules/Comet.cpp:190
+#: src/core/modules/NomenclatureItem.cpp:248 src/core/modules/Planet.cpp:687
+#: src/core/modules/Planet.cpp:708 src/core/modules/Planet.cpp:825
+#: src/core/modules/Planet.cpp:1548 src/core/modules/Comet.cpp:190
 #: src/core/modules/Comet.cpp:200 src/gui/StelGuiItems.cpp:894
 #: src/gui/AstroCalcDialog.cpp:3142 src/gui/AstroCalcDialog.cpp:3655
 #: src/gui/AstroCalcDialog.cpp:9063 plugins/Satellites/src/Satellites.cpp:2895
@@ -1835,17 +1835,17 @@ msgstr "穿过"
 msgid "Airmasses"
 msgstr "大气光学质量"
 
-#: src/core/modules/Nebula.cpp:236 src/core/modules/Planet.cpp:568
+#: src/core/modules/Nebula.cpp:236 src/core/modules/Planet.cpp:571
 #: src/core/modules/StarWrapper.cpp:256
 msgid "Additional names: "
 msgstr "附加名称："
 
-#: src/core/modules/Nebula.cpp:242 src/core/modules/Planet.cpp:575
+#: src/core/modules/Nebula.cpp:242 src/core/modules/Planet.cpp:578
 #: src/core/modules/StarWrapper.cpp:262
 msgid "Additional catalog numbers: "
 msgstr "附加编号："
 
-#: src/core/modules/Nebula.cpp:260 src/core/modules/Planet.cpp:815
+#: src/core/modules/Nebula.cpp:260 src/core/modules/Planet.cpp:835
 #: src/core/modules/MinorPlanet.cpp:186 src/core/modules/StarWrapper.cpp:54
 #: src/core/modules/StarWrapper.cpp:286 plugins/Quasars/src/Quasar.cpp:134
 #: plugins/MissingStars/src/MissingStar.cpp:143
@@ -1902,12 +1902,13 @@ msgstr "光年"
 
 #. TRANSLATORS: distance
 #: src/core/modules/Nebula.cpp:346 src/core/modules/Nebula.cpp:392
-#: src/core/modules/Planet.cpp:707 src/core/modules/StarWrapper.cpp:321
-#: src/core/modules/StarWrapper.cpp:323 src/gui/AstroCalcDialog.cpp:936
-#: src/gui/AstroCalcChart.cpp:92 src/gui/AstroCalcChart.cpp:102
-#: src/gui/AstroCalcChart.cpp:428 src/gui/AstroCalcChart.cpp:454
-#: src/ui_configurationDialog.h:1791 plugins/Supernovae/src/Supernova.cpp:160
-#: plugins/Novae/src/Nova.cpp:165 plugins/Exoplanets/src/Exoplanet.cpp:335
+#: src/core/modules/Planet.cpp:720 src/core/modules/Planet.cpp:726
+#: src/core/modules/StarWrapper.cpp:321 src/core/modules/StarWrapper.cpp:323
+#: src/gui/AstroCalcDialog.cpp:936 src/gui/AstroCalcChart.cpp:92
+#: src/gui/AstroCalcChart.cpp:102 src/gui/AstroCalcChart.cpp:428
+#: src/gui/AstroCalcChart.cpp:454 src/ui_configurationDialog.h:1791
+#: plugins/Supernovae/src/Supernova.cpp:160 plugins/Novae/src/Nova.cpp:165
+#: plugins/Exoplanets/src/Exoplanet.cpp:335
 #: plugins/MissingStars/src/MissingStar.cpp:158
 #: plugins/MissingStars/src/MissingStar.cpp:160
 msgid "Distance"
@@ -2339,33 +2340,33 @@ msgstr "绝对星等"
 msgid "Mean Opposition Magnitude"
 msgstr "平均冲时星等"
 
-#: src/core/modules/Planet.cpp:582
+#: src/core/modules/Planet.cpp:585
 msgctxt "type of comet"
 msgid "non-periodic"
 msgstr "非周期彗星"
 
-#: src/core/modules/Planet.cpp:587
+#: src/core/modules/Planet.cpp:590
 msgctxt "type of comet"
 msgid "short-period"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:589
+#: src/core/modules/Planet.cpp:592
 msgctxt "type of comet"
 msgid "periodic"
 msgstr "周期彗星"
 
 #. TRANSLATORS: Ecliptical rectangular coordinates
-#: src/core/modules/Planet.cpp:647 src/core/modules/Planet.cpp:649
+#: src/core/modules/Planet.cpp:650 src/core/modules/Planet.cpp:652
 msgctxt "coordinates"
 msgid "Ecliptical"
 msgstr "黄道"
 
-#: src/core/modules/Planet.cpp:658 src/core/modules/Planet.cpp:659
+#: src/core/modules/Planet.cpp:661 src/core/modules/Planet.cpp:662
 msgid "Hourly motion"
 msgstr "每时运动"
 
-#: src/core/modules/Planet.cpp:658 src/core/modules/Planet.cpp:1387
-#: src/core/modules/Planet.cpp:1396 src/core/modules/StarWrapper.cpp:338
+#: src/core/modules/Planet.cpp:661 src/core/modules/Planet.cpp:1407
+#: src/core/modules/Planet.cpp:1416 src/core/modules/StarWrapper.cpp:338
 #: plugins/Pulsars/src/Pulsar.cpp:204
 #: plugins/MissingStars/src/MissingStar.cpp:172
 msgctxt "into the direction of"
@@ -2373,7 +2374,7 @@ msgid "towards"
 msgstr "方向"
 
 #. TRANSLATORS: Unit of measure for distance - astronomical unit
-#: src/core/modules/Planet.cpp:670 src/gui/AstroCalcDialog.cpp:882
+#: src/core/modules/Planet.cpp:676 src/gui/AstroCalcDialog.cpp:882
 #: src/gui/AstroCalcDialog.cpp:1194 src/gui/AstroCalcDialog.cpp:1492
 #: src/gui/AstroCalcDialog.cpp:1759 src/gui/AstroCalcDialog.cpp:1818
 #: src/gui/AstroCalcDialog.cpp:9088 src/gui/AstroCalcChart.cpp:428
@@ -2385,265 +2386,265 @@ msgctxt "distance, astronomical unit"
 msgid "AU"
 msgstr "天文单位"
 
+#. TRANSLATORS: Distance measured in terms of the speed of light
+#: src/core/modules/Planet.cpp:678
+msgid "Light time"
+msgstr "光行时"
+
 #. TRANSLATORS: Unit of measure for distance - millions of kilometers
 #. TRANSLATORS: Unit of measure for distance - milliones kilometers
 #. TRANSLATORS: Unit of measure for distance - millions kilometers
-#: src/core/modules/Planet.cpp:686 src/core/modules/Planet.cpp:704
+#: src/core/modules/Planet.cpp:694 src/core/modules/Planet.cpp:715
 #: src/core/modules/Comet.cpp:192 src/gui/AstroCalcDialog.cpp:9065
 msgctxt "distance"
 msgid "M km"
 msgstr "兆千米"
 
-#: src/core/modules/Planet.cpp:689
+#: src/core/modules/Planet.cpp:698 src/core/modules/Planet.cpp:700
 msgid "Distance from Sun"
 msgstr "与太阳距离"
 
-#. TRANSLATORS: Distance measured in terms of the speed of light
-#: src/core/modules/Planet.cpp:709
-msgid "Light time"
-msgstr "光行时"
-
-#: src/core/modules/Planet.cpp:723
+#: src/core/modules/Planet.cpp:743
 msgid "Orbital velocity"
 msgstr "轨道速度"
 
-#: src/core/modules/Planet.cpp:726
+#: src/core/modules/Planet.cpp:746
 msgid "Heliocentric velocity"
 msgstr "日心速度"
 
-#: src/core/modules/Planet.cpp:740
+#: src/core/modules/Planet.cpp:760
 #, qt-format
 msgid "NOTE: elements for epoch %1 probably outdated. Consider updating data!"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:772
+#: src/core/modules/Planet.cpp:792
 msgid "with rings"
 msgstr "带环"
 
-#: src/core/modules/Planet.cpp:789
+#: src/core/modules/Planet.cpp:809
 msgid "scaled up to"
 msgstr "扩大到"
 
-#: src/core/modules/Planet.cpp:799
+#: src/core/modules/Planet.cpp:819
 msgid "Apparent diameter"
 msgstr "视直径"
 
-#: src/core/modules/Planet.cpp:804
+#: src/core/modules/Planet.cpp:824
 msgid "Equatorial diameter"
 msgstr "赤道直径"
 
-#: src/core/modules/Planet.cpp:868 src/core/modules/Planet.cpp:869
-#: src/core/modules/Planet.cpp:877 src/gui/AstroCalcChart.cpp:93
+#: src/core/modules/Planet.cpp:888 src/core/modules/Planet.cpp:889
+#: src/core/modules/Planet.cpp:897 src/gui/AstroCalcChart.cpp:93
 #: src/gui/AstroCalcChart.cpp:103 src/gui/AstroCalcChart.cpp:430
 #: src/gui/AstroCalcChart.cpp:456 src/ui_configurationDialog.h:1830
 msgid "Elongation"
 msgstr "距角"
 
-#: src/core/modules/Planet.cpp:870 src/core/modules/Planet.cpp:879
+#: src/core/modules/Planet.cpp:890 src/core/modules/Planet.cpp:899
 #: src/gui/AstroCalcChart.cpp:96 src/gui/AstroCalcChart.cpp:106
 #: src/gui/AstroCalcChart.cpp:439 src/gui/AstroCalcChart.cpp:465
 #: plugins/Satellites/src/Satellite.cpp:408
 msgid "Phase angle"
 msgstr "相位角"
 
-#: src/core/modules/Planet.cpp:872 src/core/modules/Planet.cpp:881
+#: src/core/modules/Planet.cpp:892 src/core/modules/Planet.cpp:901
 msgid "Illuminated"
 msgstr "相位"
 
-#: src/core/modules/Planet.cpp:878
+#: src/core/modules/Planet.cpp:898
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:323
 msgid "Elong. in Ecl.Long."
 msgstr "距角（黄经）"
 
-#: src/core/modules/Planet.cpp:893 src/gui/AstroCalcDialog.cpp:9298
+#: src/core/modules/Planet.cpp:913 src/gui/AstroCalcDialog.cpp:9298
 #: src/gui/AstroCalcChart.cpp:473
 msgid "Angular distance"
 msgstr "角距离"
 
 #. TRANSLATORS: Unit of measure for period - days
-#: src/core/modules/Planet.cpp:911 src/core/modules/StarWrapper.cpp:362
+#: src/core/modules/Planet.cpp:931 src/core/modules/StarWrapper.cpp:362
 #: src/gui/AstroCalcDialog.cpp:9099
 msgctxt "duration"
 msgid "days"
 msgstr "日"
 
-#: src/core/modules/Planet.cpp:920
+#: src/core/modules/Planet.cpp:940
 msgid "Sidereal period"
 msgstr "恒星周期"
 
-#: src/core/modules/Planet.cpp:929
+#: src/core/modules/Planet.cpp:949
 msgid "Synodic period"
 msgstr "会合周期"
 
 #. TRANSLATORS: Unit of measure for speed - meters per second
-#: src/core/modules/Planet.cpp:1214
+#: src/core/modules/Planet.cpp:1234
 msgctxt "speed"
 msgid "m/s"
 msgstr "米/秒"
 
-#: src/core/modules/Planet.cpp:1229
+#: src/core/modules/Planet.cpp:1249
 msgid "Sidereal day"
 msgstr "恒星日"
 
-#: src/core/modules/Planet.cpp:1231
+#: src/core/modules/Planet.cpp:1251
 msgid "Mean solar day"
 msgstr "平太阳日"
 
-#: src/core/modules/Planet.cpp:1237
+#: src/core/modules/Planet.cpp:1257
 msgid "The period of rotation is chaotic"
 msgstr "旋转周期不规则"
 
-#: src/core/modules/Planet.cpp:1243 src/core/modules/Planet.cpp:1245
-#: src/core/modules/Planet.cpp:1251 src/core/modules/Planet.cpp:1253
+#: src/core/modules/Planet.cpp:1263 src/core/modules/Planet.cpp:1265
+#: src/core/modules/Planet.cpp:1271 src/core/modules/Planet.cpp:1273
 msgid "Equatorial rotation velocity"
 msgstr "赤道自转速度"
 
-#: src/core/modules/Planet.cpp:1277 src/core/modules/Planet.cpp:1672
+#: src/core/modules/Planet.cpp:1297 src/core/modules/Planet.cpp:1692
 msgctxt "Moon phase"
 msgid "New Moon"
 msgstr "新月"
 
-#: src/core/modules/Planet.cpp:1279 src/core/modules/Planet.cpp:1674
+#: src/core/modules/Planet.cpp:1299 src/core/modules/Planet.cpp:1694
 msgctxt "Moon phase"
 msgid "Waxing Crescent"
 msgstr "娥眉月"
 
-#: src/core/modules/Planet.cpp:1281 src/core/modules/Planet.cpp:1676
+#: src/core/modules/Planet.cpp:1301 src/core/modules/Planet.cpp:1696
 msgctxt "Moon phase"
 msgid "First Quarter"
 msgstr "上弦月"
 
-#: src/core/modules/Planet.cpp:1283 src/core/modules/Planet.cpp:1678
+#: src/core/modules/Planet.cpp:1303 src/core/modules/Planet.cpp:1698
 msgctxt "Moon phase"
 msgid "Waxing Gibbous"
 msgstr "盈凸月"
 
-#: src/core/modules/Planet.cpp:1285 src/core/modules/Planet.cpp:1680
+#: src/core/modules/Planet.cpp:1305 src/core/modules/Planet.cpp:1700
 msgctxt "Moon phase"
 msgid "Full Moon"
 msgstr "满月"
 
-#: src/core/modules/Planet.cpp:1287 src/core/modules/Planet.cpp:1682
+#: src/core/modules/Planet.cpp:1307 src/core/modules/Planet.cpp:1702
 msgctxt "Moon phase"
 msgid "Waning Gibbous"
 msgstr "亏凸月"
 
-#: src/core/modules/Planet.cpp:1289 src/core/modules/Planet.cpp:1684
+#: src/core/modules/Planet.cpp:1309 src/core/modules/Planet.cpp:1704
 msgctxt "Moon phase"
 msgid "Third Quarter"
 msgstr "下弦月"
 
-#: src/core/modules/Planet.cpp:1291 src/core/modules/Planet.cpp:1686
+#: src/core/modules/Planet.cpp:1311 src/core/modules/Planet.cpp:1706
 msgctxt "Moon phase"
 msgid "Waning Crescent"
 msgstr "残月"
 
-#: src/core/modules/Planet.cpp:1299
+#: src/core/modules/Planet.cpp:1319
 msgid "Moon age"
 msgstr "月龄"
 
-#: src/core/modules/Planet.cpp:1299
+#: src/core/modules/Planet.cpp:1319
 msgid "days old"
 msgstr "日"
 
-#: src/core/modules/Planet.cpp:1319 src/core/modules/Planet.cpp:1322
+#: src/core/modules/Planet.cpp:1339 src/core/modules/Planet.cpp:1342
 msgid "Position angle of bright limb"
 msgstr "亮边缘位置角"
 
-#: src/core/modules/Planet.cpp:1386 src/core/modules/Planet.cpp:1395
-#: src/core/modules/Planet.cpp:1431 src/core/modules/Planet.cpp:1438
+#: src/core/modules/Planet.cpp:1406 src/core/modules/Planet.cpp:1415
+#: src/core/modules/Planet.cpp:1451 src/core/modules/Planet.cpp:1458
 msgid "Position Angle of axis"
 msgstr "轴的方位角"
 
-#: src/core/modules/Planet.cpp:1387 src/core/modules/Planet.cpp:1388
-#: src/core/modules/Planet.cpp:1396 src/core/modules/Planet.cpp:1397
+#: src/core/modules/Planet.cpp:1407 src/core/modules/Planet.cpp:1408
+#: src/core/modules/Planet.cpp:1416 src/core/modules/Planet.cpp:1417
 msgid "Libration"
 msgstr "天平动"
 
-#: src/core/modules/Planet.cpp:1389 src/core/modules/Planet.cpp:1398
-#: src/core/modules/Planet.cpp:1433 src/core/modules/Planet.cpp:1440
+#: src/core/modules/Planet.cpp:1409 src/core/modules/Planet.cpp:1418
+#: src/core/modules/Planet.cpp:1453 src/core/modules/Planet.cpp:1460
 msgid "Subsolar point"
 msgstr "日下点"
 
-#: src/core/modules/Planet.cpp:1390 src/core/modules/Planet.cpp:1399
+#: src/core/modules/Planet.cpp:1410 src/core/modules/Planet.cpp:1419
 msgid "Colongitude"
 msgstr "余经度"
 
-#: src/core/modules/Planet.cpp:1432 src/core/modules/Planet.cpp:1439
+#: src/core/modules/Planet.cpp:1452 src/core/modules/Planet.cpp:1459
 msgid "Center point"
 msgstr "中心点"
 
-#: src/core/modules/Planet.cpp:1459
+#: src/core/modules/Planet.cpp:1479
 msgid "Eclipse magnitude"
 msgstr "食分"
 
-#: src/core/modules/Planet.cpp:1461
+#: src/core/modules/Planet.cpp:1481
 msgid "Eclipse obscuration"
 msgstr "食遮蔽率"
 
-#: src/core/modules/Planet.cpp:1487
+#: src/core/modules/Planet.cpp:1507
 msgid "Moon/Sun diameter ratio"
 msgstr "月/日直径比"
 
-#: src/core/modules/Planet.cpp:1490
+#: src/core/modules/Planet.cpp:1510
 msgctxt "type of solar eclipse"
 msgid "(annular)"
 msgstr "（环食）"
 
-#: src/core/modules/Planet.cpp:1492
+#: src/core/modules/Planet.cpp:1512
 msgctxt "type of solar eclipse"
 msgid "(total)"
 msgstr "（全食）"
 
-#: src/core/modules/Planet.cpp:1503
+#: src/core/modules/Planet.cpp:1523
 msgid "Central eclipse duration"
 msgstr "中心食期间"
 
 #. TRANSLATORS: Short for "minutes".
-#: src/core/modules/Planet.cpp:1505
+#: src/core/modules/Planet.cpp:1525
 #: plugins/Observability/src/Observability.cpp:153
 msgid "m"
 msgstr "分"
 
 #. TRANSLATORS: Short for "seconds".
-#: src/core/modules/Planet.cpp:1507
+#: src/core/modules/Planet.cpp:1527
 #: plugins/Observability/src/Observability.cpp:155
 msgid "s"
 msgstr "秒"
 
-#: src/core/modules/Planet.cpp:1508
+#: src/core/modules/Planet.cpp:1528
 msgid "Center of solar eclipse (Lat./Long.)"
 msgstr "日食中心(纬度/经度)"
 
-#: src/core/modules/Planet.cpp:1518
+#: src/core/modules/Planet.cpp:1538
 msgid "Shadow center point is"
 msgstr "距离日食中心点"
 
-#: src/core/modules/Planet.cpp:1520
+#: src/core/modules/Planet.cpp:1540
 msgid "km towards azimuth"
 msgstr "千米，方位角"
 
-#: src/core/modules/Planet.cpp:1523
+#: src/core/modules/Planet.cpp:1543
 msgid "Width of antumbra"
 msgstr "本影宽度"
 
-#: src/core/modules/Planet.cpp:1525
+#: src/core/modules/Planet.cpp:1545
 msgid "Width of umbra"
 msgstr "本影宽度"
 
-#: src/core/modules/Planet.cpp:1542
+#: src/core/modules/Planet.cpp:1562
 msgid "Penumbral eclipse magnitude"
 msgstr "半影食分"
 
-#: src/core/modules/Planet.cpp:1545
+#: src/core/modules/Planet.cpp:1565
 msgid "Umbral eclipse magnitude"
 msgstr "本影食分"
 
-#: src/core/modules/Planet.cpp:1552
+#: src/core/modules/Planet.cpp:1572
 msgid "Albedo"
 msgstr "反照率"
 
-#: src/core/modules/Planet.cpp:1555 src/core/modules/MinorPlanet.cpp:211
+#: src/core/modules/Planet.cpp:1575 src/core/modules/MinorPlanet.cpp:211
 #: src/core/modules/Comet.cpp:241
 msgid "Discovered"
 msgstr ""
@@ -3052,63 +3053,63 @@ msgstr "正在初始化星群..."
 msgid "Initializing landscape..."
 msgstr "正在初始化地景..."
 
-#: src/core/StelApp.cpp:592
+#: src/core/StelApp.cpp:600
 msgid "Initializing grid lines..."
 msgstr "正在初始化坐标系网格线..."
 
-#: src/core/StelApp.cpp:597
+#: src/core/StelApp.cpp:605
 msgid "Initializing special markers..."
 msgstr "初始化的特殊标识"
 
-#: src/core/StelApp.cpp:603
+#: src/core/StelApp.cpp:611
 msgid "Initializing sporadic meteors..."
 msgstr "正在初始化流星..."
 
-#: src/core/StelApp.cpp:609
+#: src/core/StelApp.cpp:617
 msgid "Initializing user labels..."
 msgstr "正在初始化用户标签..."
 
-#: src/core/StelApp.cpp:614
+#: src/core/StelApp.cpp:622
 msgid "Initializing sky cultures..."
 msgstr "正在初始化星空文化..."
 
-#: src/core/StelApp.cpp:618
+#: src/core/StelApp.cpp:626
 msgid "Initializing user markers..."
 msgstr "正在初始化用户标识..."
 
-#: src/core/StelApp.cpp:624
+#: src/core/StelApp.cpp:632
 msgid "Initializing custom objects..."
 msgstr "初始化自定义天体"
 
-#: src/core/StelApp.cpp:630
+#: src/core/StelApp.cpp:638
 msgid "Initializing highlights..."
 msgstr "正在初始化高亮标识..."
 
-#: src/core/StelApp.cpp:636
+#: src/core/StelApp.cpp:644
 msgid "Initializing specific time..."
 msgstr "正在特定时间..."
 
-#: src/core/StelApp.cpp:644
+#: src/core/StelApp.cpp:652
 msgid "Initializing scripting..."
 msgstr "正在初始化脚本..."
 
-#: src/core/StelApp.cpp:649
+#: src/core/StelApp.cpp:657
 msgid "Initializing color scheme..."
 msgstr "正在初始化配色方案..."
 
-#: src/core/StelApp.cpp:661 src/ui_configurationDialog.h:1898
+#: src/core/StelApp.cpp:669 src/ui_configurationDialog.h:1898
 msgid "Night mode"
 msgstr "夜间模式"
 
-#: src/core/StelApp.cpp:691
+#: src/core/StelApp.cpp:699
 msgid "Initializing SPOUT sender..."
 msgstr "正在初始化喷口发送器..,"
 
-#: src/core/StelApp.cpp:701
+#: src/core/StelApp.cpp:709
 msgid "Cannot create Spout sender. See log for details."
 msgstr "无法创建喷口发送器 。 有关详细信息，请参阅日志。"
 
-#: src/core/StelApp.cpp:728
+#: src/core/StelApp.cpp:736
 msgid "Loading plugin"
 msgstr "正在加载插件"
 
@@ -4039,23 +4040,23 @@ msgid "IAU Constellation"
 msgstr "IAU星座"
 
 #. TRANSLATORS: Azimuth/Altitude
-#: src/core/StelObject.cpp:1279
+#: src/core/StelObject.cpp:1283
 msgctxt "celestial coordinate system"
 msgid "Solar A/a"
 msgstr "太阳方位角/地平高度"
 
-#: src/core/StelObject.cpp:1279
+#: src/core/StelObject.cpp:1283
 msgctxt "celestial coordinate system"
 msgid "Solar Az./Alt."
 msgstr "太阳方位角/地平高度"
 
 #. TRANSLATORS: Azimuth/Altitude
-#: src/core/StelObject.cpp:1297
+#: src/core/StelObject.cpp:1301
 msgctxt "celestial coordinate system"
 msgid "Lunar A/a"
 msgstr "月球方位角/地平高度"
 
-#: src/core/StelObject.cpp:1297
+#: src/core/StelObject.cpp:1301
 msgctxt "celestial coordinate system"
 msgid "Lunar Az./Alt."
 msgstr "月球方位角/地平高度"
@@ -5650,118 +5651,118 @@ msgstr "帧/秒"
 msgid "Are you sure? This will delete your customized data."
 msgstr "确认吗？这会删除自定义设置。"
 
-#: src/gui/ViewDialog.cpp:701
+#: src/gui/ViewDialog.cpp:702
 msgid "properties"
 msgstr "属性"
 
-#: src/gui/ViewDialog.cpp:722
+#: src/gui/ViewDialog.cpp:723
 msgid "Deep Sky"
 msgstr "深空"
 
-#: src/gui/ViewDialog.cpp:723
+#: src/gui/ViewDialog.cpp:724
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:233
 msgid "Solar System"
 msgstr "太阳系"
 
-#: src/gui/ViewDialog.cpp:942
+#: src/gui/ViewDialog.cpp:943
 msgid ""
 "Uses a polygonal 3D model for some selected subplanetary objects (small "
 "moons, asteroids, comets) instead of a spherical approximation"
 msgstr "对于某些选定的类行星天体（小卫星，小行星，彗星）使用多边形3D模型，而不是球面近似"
 
-#: src/gui/ViewDialog.cpp:943
+#: src/gui/ViewDialog.cpp:944
 msgid ""
 "Use a &quot;shadow map&quot; to simulate self-shadows of non-convex solar "
 "system objects. May reduce shadow penumbra quality on some objects."
 msgstr "使用“阴影贴图” 模拟非凸太阳系天体的自身阴影。这可能会降低一些天体上的半影质量。"
 
-#: src/gui/ViewDialog.cpp:978
+#: src/gui/ViewDialog.cpp:979
 msgid "Abbreviated"
 msgstr "缩写"
 
-#: src/gui/ViewDialog.cpp:979
+#: src/gui/ViewDialog.cpp:980
 msgid "Native"
 msgstr "原生"
 
-#: src/gui/ViewDialog.cpp:980
+#: src/gui/ViewDialog.cpp:981
 msgid "Translated"
 msgstr "已翻译"
 
-#: src/gui/ViewDialog.cpp:1162
+#: src/gui/ViewDialog.cpp:1163
 msgid "No shooting stars"
 msgstr "无流星"
 
-#: src/gui/ViewDialog.cpp:1164
+#: src/gui/ViewDialog.cpp:1165
 msgid "Normal rate"
 msgstr "日常频率"
 
-#: src/gui/ViewDialog.cpp:1166
+#: src/gui/ViewDialog.cpp:1167
 msgid "Standard Orionids rate"
 msgstr "常规猎户座流星雨"
 
-#: src/gui/ViewDialog.cpp:1168
+#: src/gui/ViewDialog.cpp:1169
 msgid "Standard Perseids rate"
 msgstr "常规英仙座流星雨"
 
-#: src/gui/ViewDialog.cpp:1170
+#: src/gui/ViewDialog.cpp:1171
 msgid "Standard Geminids rate"
 msgstr "常规双子座流星雨"
 
-#: src/gui/ViewDialog.cpp:1172
+#: src/gui/ViewDialog.cpp:1173
 msgid "Exceptional Perseid rate"
 msgstr "超量英仙座流星雨"
 
-#: src/gui/ViewDialog.cpp:1174
+#: src/gui/ViewDialog.cpp:1175
 msgid "Meteor storm rate"
 msgstr "流星数率"
 
-#: src/gui/ViewDialog.cpp:1176
+#: src/gui/ViewDialog.cpp:1177
 msgid "Exceptional Draconid rate"
 msgstr "超量天龙座流星雨"
 
-#: src/gui/ViewDialog.cpp:1178
+#: src/gui/ViewDialog.cpp:1179
 msgid "Exceptional Leonid rate"
 msgstr "超量狮子座流星雨"
 
-#: src/gui/ViewDialog.cpp:1180
+#: src/gui/ViewDialog.cpp:1181
 msgid "Very high rate (1966 Leonids)"
 msgstr "超强爆发(1966 狮子座流星雨)"
 
-#: src/gui/ViewDialog.cpp:1182
+#: src/gui/ViewDialog.cpp:1183
 msgid "Highest rate ever (1833 Leonids)"
 msgstr "最强爆发(1833 狮子座流星雨)"
 
-#: src/gui/ViewDialog.cpp:1245
+#: src/gui/ViewDialog.cpp:1246
 msgctxt "magnitude algorithm"
 msgid "G. Müller (1893)"
 msgstr "G. Müeller (1893)"
 
-#: src/gui/ViewDialog.cpp:1246
+#: src/gui/ViewDialog.cpp:1247
 msgctxt "magnitude algorithm"
 msgid "Astronomical Almanac (1984)"
 msgstr "天文学年鉴(1984)"
 
-#: src/gui/ViewDialog.cpp:1247
+#: src/gui/ViewDialog.cpp:1248
 msgctxt "magnitude algorithm"
 msgid "Explanatory Supplement (1992)"
 msgstr "解释性补充 (1992)"
 
-#: src/gui/ViewDialog.cpp:1248
+#: src/gui/ViewDialog.cpp:1249
 msgctxt "magnitude algorithm"
 msgid "Explanatory Supplement (2013)"
 msgstr "解释性补充 (2013)"
 
-#: src/gui/ViewDialog.cpp:1249
+#: src/gui/ViewDialog.cpp:1250
 msgctxt "magnitude algorithm"
 msgid "Mallama & Hilton (2018)"
 msgstr "Mallama & Hilton (2018)"
 
-#: src/gui/ViewDialog.cpp:1250
+#: src/gui/ViewDialog.cpp:1251
 msgctxt "magnitude algorithm"
 msgid "Generic"
 msgstr "一般"
 
-#: src/gui/ViewDialog.cpp:1272
+#: src/gui/ViewDialog.cpp:1273
 msgid ""
 "The algorithm was used in the <em>Astronomical Almanac</em> (1984 and later)"
 " and gives V (instrumental) magnitudes (allegedly from D.L. Harris)."
@@ -5769,7 +5770,7 @@ msgstr ""
 "该算法被用于《天文学年鉴》[<em>Astronomical Almanac</em>] "
 "(1984及以后)并给出V（仪器）星等（据称来自D.L.Harris）。"
 
-#: src/gui/ViewDialog.cpp:1273
+#: src/gui/ViewDialog.cpp:1274
 msgid ""
 "The algorithm is based on visual observations 1877-1891 by G. Müller and was"
 " still republished in the <em>Explanatory Supplement to the Astronomical "
@@ -5778,7 +5779,7 @@ msgstr ""
 "该算法基于G. Müller于1877-1891年的目视观测，发表在 天《天文星历表解释性补充》[<em>Explanatory Supplement "
 "to the Astronomical Ephemeris</em>] (1961)。"
 
-#: src/gui/ViewDialog.cpp:1274
+#: src/gui/ViewDialog.cpp:1275
 msgid ""
 "The algorithm was published in the 2nd edition of the <em>Explanatory "
 "Supplement to the Astronomical Almanac</em> (1992)."
@@ -5786,7 +5787,7 @@ msgstr ""
 "该算法发表在《天文星历表解释性补充》[<em>Explanatory Supplement to the Astronomical "
 "Ephemeris</em>] (1992) 第2版。"
 
-#: src/gui/ViewDialog.cpp:1275
+#: src/gui/ViewDialog.cpp:1276
 msgid ""
 "The algorithm was published in the 3rd edition of the <em>Explanatory "
 "Supplement to the Astronomical Almanac</em> (2013)."
@@ -5794,7 +5795,7 @@ msgstr ""
 "该算法发表在《天文星历表解释性补充》[<em>Explanatory Supplement to the Astronomical "
 "Ephemeris</em>] (2013) 第3版。"
 
-#: src/gui/ViewDialog.cpp:1276
+#: src/gui/ViewDialog.cpp:1277
 msgid ""
 "The algorithm was published by A. Mallama & J. L. Hilton: <em>Computing "
 "apparent planetary magnitudes for the Astronomical Almanac.</em> "
@@ -5804,7 +5805,7 @@ msgstr ""
 " planetary magnitudes for the Astronomical Almanac, Astronomy&Computing 25, "
 "2018, 10-24)."
 
-#: src/gui/ViewDialog.cpp:1279
+#: src/gui/ViewDialog.cpp:1280
 msgid "Visual magnitude based on phase angle and albedo."
 msgstr "基于相位角和反照率的目视星等。"
 

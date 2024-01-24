@@ -7,15 +7,16 @@
 # Alexander V. Wolf <alex.v.wolf@gmail.com>, 2022
 # cardinot <mcardinot@gmail.com>, 2022
 # Sveinn í Felli <sv1@fellsnet.is>, 2023
+# Valgarður Kristjánsson, 2024
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2023-12-13 11:04+0700\n"
+"POT-Creation-Date: 2024-01-01 16:59+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
-"Last-Translator: Sveinn í Felli <sv1@fellsnet.is>, 2023\n"
+"Last-Translator: Valgarður Kristjánsson, 2024\n"
 "Language-Team: Icelandic (https://app.transifex.com/stellarium/teams/80998/is/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -27,8 +28,8 @@ msgstr ""
 #: src/core/modules/CustomObject.cpp:81 src/core/modules/Asterism.cpp:194
 #: src/core/modules/Constellation.cpp:290
 #: src/core/modules/NomenclatureItem.cpp:232 src/core/modules/Nebula.cpp:249
-#: src/core/modules/Nebula.cpp:251 src/core/modules/Planet.cpp:592
-#: src/core/modules/Planet.cpp:595 src/core/modules/StarWrapper.cpp:49
+#: src/core/modules/Nebula.cpp:251 src/core/modules/Planet.cpp:595
+#: src/core/modules/Planet.cpp:598 src/core/modules/StarWrapper.cpp:49
 #: src/core/modules/StarWrapper.cpp:270 src/core/modules/StarWrapper.cpp:272
 #: src/gui/AstroCalcDialog.cpp:901 src/gui/AstroCalcDialog.cpp:2337
 #: src/gui/AstroCalcDialog.cpp:2909 src/gui/AstroCalcDialog.cpp:2941
@@ -47,7 +48,7 @@ msgstr "Tegund"
 
 #: src/core/modules/CustomObject.hpp:59
 msgid "custom marker"
-msgstr "sérsniðið merki"
+msgstr "sérsniðin merking"
 
 #: src/core/modules/CustomObject.hpp:59
 msgid "custom object"
@@ -55,7 +56,7 @@ msgstr "sérsniðið atriði"
 
 #: src/core/modules/CustomObjectMgr.cpp:68
 msgid "Marker"
-msgstr "Merki"
+msgstr "Merking"
 
 #: src/core/modules/Asterism.hpp:62
 msgid "asterism"
@@ -70,7 +71,7 @@ msgstr "stjörnusamstæða"
 #: src/core/modules/NebulaMgr.cpp:359 src/core/modules/SolarSystem.cpp:307
 #: src/core/modules/MilkyWay.cpp:107 src/core/modules/ZodiacalLight.cpp:112
 #: src/core/modules/ToastMgr.cpp:62 src/core/modules/HipsMgr.cpp:156
-#: src/core/StelApp.cpp:661 src/core/StelCore.cpp:296
+#: src/core/StelApp.cpp:669 src/core/StelCore.cpp:296
 #: src/core/StelSkyLayerMgr.cpp:83 src/core/StelSkyLayerMgr.cpp:84
 #: src/StelMainView.cpp:948
 msgid "Display Options"
@@ -151,7 +152,7 @@ msgstr "Minnka birtustigsmörk stjarna"
 
 #: src/core/modules/GridLinesMgr.cpp:768 src/ui_viewDialog.h:4259
 msgid "Meridian"
-msgstr "Hádegisbaugur"
+msgstr "Lengdarbaugur"
 
 #: src/core/modules/GridLinesMgr.cpp:772
 msgid "Ecliptic of J2000.0"
@@ -196,7 +197,7 @@ msgstr "Lengdarb. G./S."
 
 #: src/core/modules/GridLinesMgr.cpp:818
 msgid "Quadrature"
-msgstr ""
+msgstr "Þverstaða"
 
 #: src/core/modules/GridLinesMgr.cpp:822
 #: src/core/modules/GridLinesMgr.cpp:2057 src/ui_viewDialog.h:3875
@@ -236,7 +237,7 @@ msgstr "Hálfskuggi"
 
 #: src/core/modules/GridLinesMgr.cpp:851
 msgid "Invariable Plane"
-msgstr ""
+msgstr "Fastaslétta"
 
 #: src/core/modules/GridLinesMgr.cpp:855 src/ui_viewDialog.h:3903
 msgid "Projected Solar Equator"
@@ -322,22 +323,22 @@ msgstr ""
 #. TRANSLATORS: Apex Point, where the observer planet is heading to
 #: src/core/modules/GridLinesMgr.cpp:1617
 msgid "Apex"
-msgstr ""
+msgstr "Sóknarpunktur"
 
 #. TRANSLATORS: Antapex Point, where the observer planet is receding from
 #: src/core/modules/GridLinesMgr.cpp:1619
 msgid "Antapex"
-msgstr ""
+msgstr "Flóttapunktur"
 
 #. TRANSLATORS: Unit of measure for speed - kilometers per second
-#: src/core/modules/GridLinesMgr.cpp:1629 src/core/modules/Planet.cpp:716
-#: src/core/modules/Planet.cpp:1212 src/gui/AstroCalcDialog.cpp:9128
+#: src/core/modules/GridLinesMgr.cpp:1629 src/core/modules/Planet.cpp:736
+#: src/core/modules/Planet.cpp:1232 src/gui/AstroCalcDialog.cpp:9128
 #: plugins/Satellites/src/Satellite.cpp:360
 #: plugins/Satellites/src/Satellite.cpp:403
 #: plugins/MeteorShowers/src/MeteorShower.cpp:556
 msgctxt "speed"
 msgid "km/s"
-msgstr "km/sek"
+msgstr "km/s"
 
 #: src/core/modules/GridLinesMgr.cpp:2034
 msgid "Grids and lines"
@@ -368,7 +369,7 @@ msgstr "Sólbaugslína J2000"
 
 #: src/core/modules/GridLinesMgr.cpp:2040
 msgid "Invariable Plane line"
-msgstr ""
+msgstr "Fastasléttulína"
 
 #: src/core/modules/GridLinesMgr.cpp:2041
 msgid "Solar Equator Plane line"
@@ -435,7 +436,7 @@ msgstr "Lengdarbaugur gagnstöðu/samstöðu"
 
 #: src/core/modules/GridLinesMgr.cpp:2055
 msgid "Quadrature line"
-msgstr ""
+msgstr "Þverstöðulína"
 
 #: src/core/modules/GridLinesMgr.cpp:2056
 msgid "Precession Circles"
@@ -487,7 +488,7 @@ msgstr "Pólar vetrarbrautar"
 
 #: src/core/modules/GridLinesMgr.cpp:2069 src/ui_viewDialog.h:4068
 msgid "Galactic center and anticenter"
-msgstr ""
+msgstr "Miðja og andmiðja Vetrarbrautarinnar"
 
 #: src/core/modules/GridLinesMgr.cpp:2070 src/ui_viewDialog.h:3926
 msgid "Supergalactic poles"
@@ -511,7 +512,7 @@ msgstr "Sólstöðupunktar"
 
 #: src/core/modules/GridLinesMgr.cpp:2075 src/ui_viewDialog.h:4188
 msgid "Antisolar point"
-msgstr ""
+msgstr "Mótsólarpunktur"
 
 #: src/core/modules/GridLinesMgr.cpp:2076
 msgid "The center of the Earth's umbra"
@@ -519,15 +520,15 @@ msgstr "Miðjan á alskugga Jarðarinnar"
 
 #: src/core/modules/GridLinesMgr.cpp:2077 src/ui_viewDialog.h:4234
 msgid "Apex points"
-msgstr ""
+msgstr "Sóknarpunktar"
 
 #: src/core/modules/SpecialMarkersMgr.cpp:311
 msgid "FOV Center marker"
-msgstr ""
+msgstr "Miðjumerking sjónsviðs"
 
 #: src/core/modules/SpecialMarkersMgr.cpp:312
 msgid "Circular marker of FOV"
-msgstr ""
+msgstr "Hringmerking sjónsviðs"
 
 #: src/core/modules/SpecialMarkersMgr.cpp:313
 msgid "Rectangular marker of FOV"
@@ -539,97 +540,97 @@ msgid "Compass marks"
 msgstr "Áttavitastrik"
 
 #. TRANSLATORS: North
-#: src/core/modules/LandscapeMgr.cpp:279 src/core/modules/Planet.cpp:1334
+#: src/core/modules/LandscapeMgr.cpp:279 src/core/modules/Planet.cpp:1354
 msgctxt "compass direction"
 msgid "N"
 msgstr "N"
 
 #. TRANSLATORS: South
-#: src/core/modules/LandscapeMgr.cpp:281 src/core/modules/Planet.cpp:1326
+#: src/core/modules/LandscapeMgr.cpp:281 src/core/modules/Planet.cpp:1346
 msgctxt "compass direction"
 msgid "S"
 msgstr "S"
 
 #. TRANSLATORS: East
-#: src/core/modules/LandscapeMgr.cpp:283 src/core/modules/Planet.cpp:1338
+#: src/core/modules/LandscapeMgr.cpp:283 src/core/modules/Planet.cpp:1358
 msgctxt "compass direction"
 msgid "E"
 msgstr "A"
 
 #. TRANSLATORS: West
-#: src/core/modules/LandscapeMgr.cpp:285 src/core/modules/Planet.cpp:1330
+#: src/core/modules/LandscapeMgr.cpp:285 src/core/modules/Planet.cpp:1350
 msgctxt "compass direction"
 msgid "W"
 msgstr "V"
 
 #. TRANSLATORS: Northeast
-#: src/core/modules/LandscapeMgr.cpp:287 src/core/modules/Planet.cpp:1336
+#: src/core/modules/LandscapeMgr.cpp:287 src/core/modules/Planet.cpp:1356
 msgctxt "compass direction"
 msgid "NE"
 msgstr "NA"
 
 #. TRANSLATORS: Southeast
-#: src/core/modules/LandscapeMgr.cpp:289 src/core/modules/Planet.cpp:1340
+#: src/core/modules/LandscapeMgr.cpp:289 src/core/modules/Planet.cpp:1360
 msgctxt "compass direction"
 msgid "SE"
 msgstr "SA"
 
 #. TRANSLATORS: Southwest
-#: src/core/modules/LandscapeMgr.cpp:291 src/core/modules/Planet.cpp:1328
+#: src/core/modules/LandscapeMgr.cpp:291 src/core/modules/Planet.cpp:1348
 msgctxt "compass direction"
 msgid "SW"
 msgstr "SV"
 
 #. TRANSLATORS: Northwest
-#: src/core/modules/LandscapeMgr.cpp:293 src/core/modules/Planet.cpp:1332
+#: src/core/modules/LandscapeMgr.cpp:293 src/core/modules/Planet.cpp:1352
 msgctxt "compass direction"
 msgid "NW"
 msgstr "NV"
 
 #. TRANSLATORS: North-northeast
-#: src/core/modules/LandscapeMgr.cpp:295 src/core/modules/Planet.cpp:1335
+#: src/core/modules/LandscapeMgr.cpp:295 src/core/modules/Planet.cpp:1355
 msgctxt "compass direction"
 msgid "NNE"
 msgstr "NNA"
 
 #. TRANSLATORS: East-northeast
-#: src/core/modules/LandscapeMgr.cpp:297 src/core/modules/Planet.cpp:1337
+#: src/core/modules/LandscapeMgr.cpp:297 src/core/modules/Planet.cpp:1357
 msgctxt "compass direction"
 msgid "ENE"
 msgstr "ANA"
 
 #. TRANSLATORS: East-southeast
-#: src/core/modules/LandscapeMgr.cpp:299 src/core/modules/Planet.cpp:1339
+#: src/core/modules/LandscapeMgr.cpp:299 src/core/modules/Planet.cpp:1359
 msgctxt "compass direction"
 msgid "ESE"
 msgstr "ASA"
 
 #. TRANSLATORS: South-southeast
-#: src/core/modules/LandscapeMgr.cpp:301 src/core/modules/Planet.cpp:1341
+#: src/core/modules/LandscapeMgr.cpp:301 src/core/modules/Planet.cpp:1361
 msgctxt "compass direction"
 msgid "SSE"
 msgstr "SSA"
 
 #. TRANSLATORS: South-southwest
-#: src/core/modules/LandscapeMgr.cpp:303 src/core/modules/Planet.cpp:1327
+#: src/core/modules/LandscapeMgr.cpp:303 src/core/modules/Planet.cpp:1347
 msgctxt "compass direction"
 msgid "SSW"
 msgstr "SSV"
 
 #. TRANSLATORS: West-southwest
-#: src/core/modules/LandscapeMgr.cpp:305 src/core/modules/Planet.cpp:1329
+#: src/core/modules/LandscapeMgr.cpp:305 src/core/modules/Planet.cpp:1349
 msgctxt "compass direction"
 msgid "WSW"
 msgstr "VSV"
 
 #. TRANSLATORS: West-northwest
-#: src/core/modules/LandscapeMgr.cpp:307 src/core/modules/Planet.cpp:1331
+#: src/core/modules/LandscapeMgr.cpp:307 src/core/modules/Planet.cpp:1351
 msgctxt "compass direction"
 msgid "WNW"
 msgstr "VNV"
 
 #. TRANSLATORS: North-northwest
-#: src/core/modules/LandscapeMgr.cpp:309 src/core/modules/Planet.cpp:1333
+#: src/core/modules/LandscapeMgr.cpp:309 src/core/modules/Planet.cpp:1353
 msgctxt "compass direction"
 msgid "NNW"
 msgstr "NNV"
@@ -638,100 +639,100 @@ msgstr "NNV"
 #: src/core/modules/LandscapeMgr.cpp:311
 msgctxt "compass direction"
 msgid "NbE"
-msgstr ""
+msgstr "NaA"
 
 #. TRANSLATORS: Northeast by north
 #: src/core/modules/LandscapeMgr.cpp:313
 msgctxt "compass direction"
 msgid "NEbN"
-msgstr ""
+msgstr "NAaN"
 
 #. TRANSLATORS: Northeast by east
 #: src/core/modules/LandscapeMgr.cpp:315
 msgctxt "compass direction"
 msgid "NEbE"
-msgstr ""
+msgstr "NAaA"
 
 #. TRANSLATORS: East by north
 #: src/core/modules/LandscapeMgr.cpp:317
 msgctxt "compass direction"
 msgid "EbN"
-msgstr ""
+msgstr "AaN"
 
 #. TRANSLATORS: East by south
 #: src/core/modules/LandscapeMgr.cpp:319
 msgctxt "compass direction"
 msgid "EbS"
-msgstr ""
+msgstr "AaS"
 
 #. TRANSLATORS: Southeast by east
 #: src/core/modules/LandscapeMgr.cpp:321
 msgctxt "compass direction"
 msgid "SEbE"
-msgstr ""
+msgstr "SAaA"
 
 #. TRANSLATORS: Southeast by south
 #: src/core/modules/LandscapeMgr.cpp:323
 msgctxt "compass direction"
 msgid "SEbS"
-msgstr ""
+msgstr "SAaS"
 
 #. TRANSLATORS: South by east
 #: src/core/modules/LandscapeMgr.cpp:325
 msgctxt "compass direction"
 msgid "SbE"
-msgstr ""
+msgstr "SaA"
 
 #. TRANSLATORS: South by west
 #: src/core/modules/LandscapeMgr.cpp:327
 msgctxt "compass direction"
 msgid "SbW"
-msgstr ""
+msgstr "SaV"
 
 #. TRANSLATORS: Southwest by south
 #: src/core/modules/LandscapeMgr.cpp:329
 msgctxt "compass direction"
 msgid "SWbS"
-msgstr ""
+msgstr "SVaS"
 
 #. TRANSLATORS: Southwest by west
 #: src/core/modules/LandscapeMgr.cpp:331
 msgctxt "compass direction"
 msgid "SWbW"
-msgstr ""
+msgstr "SVaV"
 
 #. TRANSLATORS: West by south
 #: src/core/modules/LandscapeMgr.cpp:333
 msgctxt "compass direction"
 msgid "WbS"
-msgstr ""
+msgstr "VaS"
 
 #. TRANSLATORS: West by north
 #: src/core/modules/LandscapeMgr.cpp:335
 msgctxt "compass direction"
 msgid "WbN"
-msgstr ""
+msgstr "VaN"
 
 #. TRANSLATORS: Northwest by west
 #: src/core/modules/LandscapeMgr.cpp:337
 msgctxt "compass direction"
 msgid "NWbW"
-msgstr ""
+msgstr "NVaV"
 
 #. TRANSLATORS: Northwest by north
 #: src/core/modules/LandscapeMgr.cpp:339
 msgctxt "compass direction"
 msgid "NWbN"
-msgstr ""
+msgstr "NVaN"
 
 #. TRANSLATORS: North by west
 #: src/core/modules/LandscapeMgr.cpp:341
 msgctxt "compass direction"
 msgid "NbW"
-msgstr ""
+msgstr "NaV"
 
 #: src/core/modules/LandscapeMgr.cpp:434 src/core/modules/LandscapeMgr.cpp:751
-#: src/gui/ViewDialog.cpp:648
+#: src/gui/ViewDialog.cpp:649
 msgid "Loading..."
 msgstr "Hleð inn..."
 
@@ -773,7 +774,7 @@ msgstr ""
 
 #: src/core/modules/LandscapeMgr.cpp:875
 msgid "Secondary Intercardinal points"
-msgstr ""
+msgstr "Aukamilliáttir"
 
 #: src/core/modules/LandscapeMgr.cpp:876
 msgid "Tertiary Intercardinal points"
@@ -918,14 +919,14 @@ msgstr "jarðfræðihugtak"
 msgid "Linear size"
 msgstr "Línuleg stærð"
 
-#: src/core/modules/NomenclatureItem.cpp:247 src/core/modules/Planet.cpp:804
+#: src/core/modules/NomenclatureItem.cpp:247 src/core/modules/Planet.cpp:824
 msgid "Diameter"
 msgstr "Þvermál"
 
 #. TRANSLATORS: Unit of measure for distance - kilometers
-#: src/core/modules/NomenclatureItem.cpp:248 src/core/modules/Planet.cpp:672
-#: src/core/modules/Planet.cpp:697 src/core/modules/Planet.cpp:805
-#: src/core/modules/Planet.cpp:1528 src/core/modules/Comet.cpp:190
+#: src/core/modules/NomenclatureItem.cpp:248 src/core/modules/Planet.cpp:687
+#: src/core/modules/Planet.cpp:708 src/core/modules/Planet.cpp:825
+#: src/core/modules/Planet.cpp:1548 src/core/modules/Comet.cpp:190
 #: src/core/modules/Comet.cpp:200 src/gui/StelGuiItems.cpp:894
 #: src/gui/AstroCalcDialog.cpp:3142 src/gui/AstroCalcDialog.cpp:3655
 #: src/gui/AstroCalcDialog.cpp:9063 plugins/Satellites/src/Satellites.cpp:2895
@@ -947,11 +948,11 @@ msgstr ""
 
 #: src/core/modules/NomenclatureItem.cpp:279
 msgid "Celestial body"
-msgstr ""
+msgstr "Himintungl"
 
 #: src/core/modules/NomenclatureItem.cpp:282
 msgid "Landform description"
-msgstr ""
+msgstr "Lýsing landlagsþátta"
 
 #: src/core/modules/NomenclatureItem.cpp:284
 msgid "Solar altitude"
@@ -959,7 +960,7 @@ msgstr "Sólarhæð"
 
 #: src/core/modules/NomenclatureItem.cpp:287
 msgid "Origin of name"
-msgstr ""
+msgstr "Uppruni nafns"
 
 #: src/core/modules/NomenclatureItem.cpp:598
 #: src/core/modules/NomenclatureItem.cpp:599
@@ -974,13 +975,13 @@ msgstr "punktur"
 #: src/core/modules/NomenclatureItem.cpp:604
 msgctxt "landform"
 msgid "albedo feature"
-msgstr ""
+msgstr "endurskinseinkenni"
 
 #. TRANSLATORS: Arc-shaped feature
 #: src/core/modules/NomenclatureItem.cpp:606
 msgctxt "landform"
 msgid "arcus"
-msgstr ""
+msgstr "bogi"
 
 #. TRANSLATORS: Radial-patterned features on Venus
 #: src/core/modules/NomenclatureItem.cpp:608
@@ -992,7 +993,7 @@ msgstr ""
 #: src/core/modules/NomenclatureItem.cpp:610
 msgctxt "landform"
 msgid "catena"
-msgstr ""
+msgstr "keðjugígur"
 
 #. TRANSLATORS: Hollows, irregular steep-sided depressions usually in arrays
 #. or clusters
@@ -1017,13 +1018,13 @@ msgstr ""
 #: src/core/modules/NomenclatureItem.cpp:618
 msgctxt "landform"
 msgid "collis"
-msgstr ""
+msgstr "hæð/hóll"
 
 #. TRANSLATORS: Ovoid-shaped feature
 #: src/core/modules/NomenclatureItem.cpp:620
 msgctxt "landform"
 msgid "corona"
-msgstr ""
+msgstr "egglaga"
 
 #. TRANSLATORS: A circular depression
 #: src/core/modules/NomenclatureItem.cpp:622
@@ -1035,7 +1036,7 @@ msgstr "gígur"
 #: src/core/modules/NomenclatureItem.cpp:624
 msgctxt "landform"
 msgid "dorsum"
-msgstr ""
+msgstr "hryggur"
 
 #. TRANSLATORS: Active volcanic centers on Io
 #: src/core/modules/NomenclatureItem.cpp:626
@@ -1053,19 +1054,19 @@ msgstr ""
 #: src/core/modules/NomenclatureItem.cpp:630
 msgctxt "landform"
 msgid "farrum"
-msgstr ""
+msgstr "klatti"
 
 #. TRANSLATORS: A very low curvilinear ridge with a scalloped pattern
 #: src/core/modules/NomenclatureItem.cpp:632
 msgctxt "landform"
 msgid "flexus"
-msgstr ""
+msgstr "sveigrimi"
 
 #. TRANSLATORS: Flow terrain
 #: src/core/modules/NomenclatureItem.cpp:634
 msgctxt "landform"
 msgid "fluctus"
-msgstr ""
+msgstr "flóðdráttur"
 
 #. TRANSLATORS: Channel on Titan that might carry liquid
 #: src/core/modules/NomenclatureItem.cpp:636
@@ -1078,26 +1079,26 @@ msgstr ""
 #: src/core/modules/NomenclatureItem.cpp:638
 msgctxt "landform"
 msgid "fretum"
-msgstr ""
+msgstr "mjótt sund"
 
 #. TRANSLATORS: Long, narrow depression
 #: src/core/modules/NomenclatureItem.cpp:640
 msgctxt "landform"
 msgid "fossa"
-msgstr ""
+msgstr "drag"
 
 #. TRANSLATORS: Island (islands), an isolated land area (or group of such
 #. areas) surrounded by, or nearly surrounded by, a liquid area (sea or lake)
 #: src/core/modules/NomenclatureItem.cpp:642
 msgctxt "landform"
 msgid "insula"
-msgstr ""
+msgstr "eyja"
 
 #. TRANSLATORS: Landslide
 #: src/core/modules/NomenclatureItem.cpp:644
 msgctxt "landform"
 msgid "labes"
-msgstr ""
+msgstr "aurskriða"
 
 #. TRANSLATORS: Complex of intersecting valleys or ridges
 #: src/core/modules/NomenclatureItem.cpp:646
@@ -1117,7 +1118,7 @@ msgstr ""
 #: src/core/modules/NomenclatureItem.cpp:650
 msgctxt "landform"
 msgid "lacus"
-msgstr ""
+msgstr "tjörn"
 
 #. TRANSLATORS: Cryptic ringed feature
 #: src/core/modules/NomenclatureItem.cpp:652
@@ -1148,7 +1149,7 @@ msgstr ""
 #: src/core/modules/NomenclatureItem.cpp:660
 msgctxt "landform"
 msgid "macula"
-msgstr ""
+msgstr "dökkna"
 
 #. TRANSLATORS: "Sea"; on the Moon, low albedo, relatively smooth plain,
 #. generally of large extent; on Mars, dark albedo areas of no known
@@ -1157,7 +1158,7 @@ msgstr ""
 #: src/core/modules/NomenclatureItem.cpp:662
 msgctxt "landform"
 msgid "mare"
-msgstr ""
+msgstr "tunglhaf"
 
 #. TRANSLATORS: A flat-topped prominence with cliff-like edges
 #: src/core/modules/NomenclatureItem.cpp:664
@@ -1169,7 +1170,7 @@ msgstr ""
 #: src/core/modules/NomenclatureItem.cpp:666
 msgctxt "landform"
 msgid "mons"
-msgstr ""
+msgstr "fjall"
 
 #. TRANSLATORS: A very large dark area on the Moon
 #: src/core/modules/NomenclatureItem.cpp:668
@@ -1181,7 +1182,7 @@ msgstr ""
 #: src/core/modules/NomenclatureItem.cpp:670
 msgctxt "landform"
 msgid "palus"
-msgstr ""
+msgstr "mýri"
 
 #. TRANSLATORS: An irregular crater, or a complex one with scalloped edges
 #: src/core/modules/NomenclatureItem.cpp:672
@@ -1193,25 +1194,25 @@ msgstr ""
 #: src/core/modules/NomenclatureItem.cpp:674
 msgctxt "landform"
 msgid "planitia"
-msgstr ""
+msgstr "lágslétta"
 
 #. TRANSLATORS: Plateau or high plain
 #: src/core/modules/NomenclatureItem.cpp:676
 msgctxt "landform"
 msgid "planum"
-msgstr ""
+msgstr "háslétta"
 
 #. TRANSLATORS: Cryo-volcanic features on Triton
 #: src/core/modules/NomenclatureItem.cpp:678
 msgctxt "landform"
 msgid "plume"
-msgstr ""
+msgstr "strókur"
 
 #. TRANSLATORS: "Cape"; headland promontoria
 #: src/core/modules/NomenclatureItem.cpp:680
 msgctxt "landform"
 msgid "promontorium"
-msgstr ""
+msgstr "höfði"
 
 #. TRANSLATORS: A large area marked by reflectivity or color distinctions from
 #. adjacent areas, or a broad geographic region
@@ -1224,44 +1225,44 @@ msgstr ""
 #: src/core/modules/NomenclatureItem.cpp:684
 msgctxt "landform"
 msgid "reticulum"
-msgstr ""
+msgstr "net"
 
 #. TRANSLATORS: Fissure
 #: src/core/modules/NomenclatureItem.cpp:686
 msgctxt "landform"
 msgid "rima"
-msgstr ""
+msgstr "gjá"
 
 #. TRANSLATORS: Scarp
 #: src/core/modules/NomenclatureItem.cpp:688
 msgctxt "landform"
 msgid "rupes"
-msgstr ""
+msgstr "kambur"
 
 #. TRANSLATORS: A feature that shares the name of an associated feature.
 #: src/core/modules/NomenclatureItem.cpp:690
 msgctxt "landform"
 msgid "satellite feature"
-msgstr ""
+msgstr "gervihnattareinkenni"
 
 #. TRANSLATORS: Boulder or rock
 #: src/core/modules/NomenclatureItem.cpp:692
 msgctxt "landform"
 msgid "saxum"
-msgstr ""
+msgstr "steinn"
 
 #. TRANSLATORS: Lobate or irregular scarp
 #: src/core/modules/NomenclatureItem.cpp:694
 msgctxt "landform"
 msgid "scopulus"
-msgstr ""
+msgstr "sepakambur"
 
 #. TRANSLATORS: Sinuous feature with segments of positive and negative relief
 #. along its length
 #: src/core/modules/NomenclatureItem.cpp:696
 msgctxt "landform"
 msgid "serpens"
-msgstr ""
+msgstr "höggormur"
 
 #. TRANSLATORS: Subparallel furrows and ridges
 #: src/core/modules/NomenclatureItem.cpp:698
@@ -1274,7 +1275,7 @@ msgstr ""
 #: src/core/modules/NomenclatureItem.cpp:700
 msgctxt "landform"
 msgid "sinus"
-msgstr ""
+msgstr "tunglflói"
 
 #. TRANSLATORS: Extensive land mass
 #: src/core/modules/NomenclatureItem.cpp:702
@@ -1286,25 +1287,25 @@ msgstr ""
 #: src/core/modules/NomenclatureItem.cpp:704
 msgctxt "landform"
 msgid "tessera"
-msgstr ""
+msgstr "tiglajörð"
 
 #. TRANSLATORS: Small domical mountain or hill
 #: src/core/modules/NomenclatureItem.cpp:706
 msgctxt "landform"
 msgid "tholus"
-msgstr ""
+msgstr "hvolflaga hóll"
 
 #. TRANSLATORS: Dunes
 #: src/core/modules/NomenclatureItem.cpp:708
 msgctxt "landform"
 msgid "unda"
-msgstr ""
+msgstr "sandöldur"
 
 #. TRANSLATORS: Valley
 #: src/core/modules/NomenclatureItem.cpp:710
 msgctxt "landform"
 msgid "vallis"
-msgstr ""
+msgstr "dalur"
 
 #. TRANSLATORS: Extensive plain
 #: src/core/modules/NomenclatureItem.cpp:712
@@ -1327,12 +1328,12 @@ msgstr "nafn lendingarstaðar"
 #. TRANSLATORS: Description for landform 'albedo feature'
 #: src/core/modules/NomenclatureItem.cpp:720
 msgid "Geographic area distinguished by amount of reflected light."
-msgstr ""
+msgstr "Landsvæði aðgreint af endurskinshlutfalli og birtuskilum."
 
 #. TRANSLATORS: Description for landform 'arcus'
 #: src/core/modules/NomenclatureItem.cpp:722
 msgid "Arc-shaped feature."
-msgstr ""
+msgstr "Bogalaga einkenni."
 
 #. TRANSLATORS: Description for landform 'astrum'
 #: src/core/modules/NomenclatureItem.cpp:724
@@ -1388,7 +1389,7 @@ msgstr "Virk megineldstöð."
 #. TRANSLATORS: Description for landform 'facula'
 #: src/core/modules/NomenclatureItem.cpp:744
 msgid "Bright spot."
-msgstr ""
+msgstr "Skær blettur."
 
 #. TRANSLATORS: Description for landform 'farrum'
 #: src/core/modules/NomenclatureItem.cpp:746
@@ -1457,7 +1458,7 @@ msgstr ""
 #. TRANSLATORS: Description for landform 'lenticula'
 #: src/core/modules/NomenclatureItem.cpp:770
 msgid "Small dark spot."
-msgstr ""
+msgstr "Lítill dimmur blettur."
 
 #. TRANSLATORS: Description for landform 'linea'
 #: src/core/modules/NomenclatureItem.cpp:772
@@ -1539,12 +1540,12 @@ msgstr ""
 #. TRANSLATORS: Description for landform 'rima'
 #: src/core/modules/NomenclatureItem.cpp:802
 msgid "Fissure."
-msgstr "Sprunga."
+msgstr "Gjá."
 
 #. TRANSLATORS: Description for landform 'rupes'
 #: src/core/modules/NomenclatureItem.cpp:804
 msgid "Scarp."
-msgstr ""
+msgstr "Kambur."
 
 #. TRANSLATORS: Description for landform 'satellite feature'
 #: src/core/modules/NomenclatureItem.cpp:806
@@ -1643,7 +1644,7 @@ msgstr "Mið"
 
 #: src/core/modules/NomenclatureMgr.cpp:129
 msgid "Subsolar"
-msgstr ""
+msgstr "Lóðpunktur sólar"
 
 #: src/core/modules/Nebula.cpp:66
 msgid "galaxy"
@@ -1785,7 +1786,7 @@ msgstr "þyrping vetrarbrauta"
 
 #: src/core/modules/Nebula.cpp:100
 msgid "part of a galaxy"
-msgstr ""
+msgstr "hluti af vetrarbraut"
 
 #: src/core/modules/Nebula.cpp:101
 msgid "region of the sky"
@@ -1825,17 +1826,17 @@ msgstr ""
 msgid "Airmasses"
 msgstr "Loftmassar"
 
-#: src/core/modules/Nebula.cpp:236 src/core/modules/Planet.cpp:568
+#: src/core/modules/Nebula.cpp:236 src/core/modules/Planet.cpp:571
 #: src/core/modules/StarWrapper.cpp:256
 msgid "Additional names: "
 msgstr "Aukanöfn: "
 
-#: src/core/modules/Nebula.cpp:242 src/core/modules/Planet.cpp:575
+#: src/core/modules/Nebula.cpp:242 src/core/modules/Planet.cpp:578
 #: src/core/modules/StarWrapper.cpp:262
 msgid "Additional catalog numbers: "
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:260 src/core/modules/Planet.cpp:815
+#: src/core/modules/Nebula.cpp:260 src/core/modules/Planet.cpp:835
 #: src/core/modules/MinorPlanet.cpp:186 src/core/modules/StarWrapper.cpp:54
 #: src/core/modules/StarWrapper.cpp:286 plugins/Quasars/src/Quasar.cpp:134
 #: plugins/MissingStars/src/MissingStar.cpp:143
@@ -1859,12 +1860,12 @@ msgstr "birta"
 #: src/core/modules/Nebula.cpp:276 src/gui/AstroCalcDialog.cpp:1114
 #: src/gui/AstroCalcDialog.cpp:1121
 msgid "arc-min"
-msgstr ""
+msgstr "bogamínúta"
 
 #: src/core/modules/Nebula.cpp:278 src/gui/AstroCalcDialog.cpp:1116
 #: src/gui/AstroCalcDialog.cpp:1196
 msgid "arc-sec"
-msgstr ""
+msgstr "bogasekúnda"
 
 #: src/core/modules/Nebula.cpp:292
 msgid "Contrast index"
@@ -1892,12 +1893,13 @@ msgstr "ly"
 
 #. TRANSLATORS: distance
 #: src/core/modules/Nebula.cpp:346 src/core/modules/Nebula.cpp:392
-#: src/core/modules/Planet.cpp:707 src/core/modules/StarWrapper.cpp:321
-#: src/core/modules/StarWrapper.cpp:323 src/gui/AstroCalcDialog.cpp:936
-#: src/gui/AstroCalcChart.cpp:92 src/gui/AstroCalcChart.cpp:102
-#: src/gui/AstroCalcChart.cpp:428 src/gui/AstroCalcChart.cpp:454
-#: src/ui_configurationDialog.h:1791 plugins/Supernovae/src/Supernova.cpp:160
-#: plugins/Novae/src/Nova.cpp:165 plugins/Exoplanets/src/Exoplanet.cpp:335
+#: src/core/modules/Planet.cpp:720 src/core/modules/Planet.cpp:726
+#: src/core/modules/StarWrapper.cpp:321 src/core/modules/StarWrapper.cpp:323
+#: src/gui/AstroCalcDialog.cpp:936 src/gui/AstroCalcChart.cpp:92
+#: src/gui/AstroCalcChart.cpp:102 src/gui/AstroCalcChart.cpp:428
+#: src/gui/AstroCalcChart.cpp:454 src/ui_configurationDialog.h:1791
+#: plugins/Supernovae/src/Supernova.cpp:160 plugins/Novae/src/Nova.cpp:165
+#: plugins/Exoplanets/src/Exoplanet.cpp:335
 #: plugins/MissingStars/src/MissingStar.cpp:158
 #: plugins/MissingStars/src/MissingStar.cpp:160
 msgid "Distance"
@@ -1940,7 +1942,7 @@ msgstr "millíbogasek"
 
 #: src/core/modules/Nebula.cpp:420
 msgid "Discoverer"
-msgstr ""
+msgstr "Uppgötvandi"
 
 #: src/core/modules/Nebula.cpp:422 src/ui_searchDialogGui.h:843
 msgid "Morphological description"
@@ -2244,7 +2246,7 @@ msgstr "Varúð!"
 
 #: src/core/modules/NebulaMgr.cpp:1395
 msgid "DSO catalog version mismatch"
-msgstr ""
+msgstr "Ósamræmi í útgáfu efnisskráar djúpfyrirbæra"
 
 #: src/core/modules/NebulaMgr.cpp:1396 src/core/SimbadSearcher.cpp:175
 #: src/core/SimbadSearcher.cpp:177
@@ -2329,33 +2331,33 @@ msgstr "Reyndarbirtustig"
 msgid "Mean Opposition Magnitude"
 msgstr "Meðalbirtustig við gagnstöðu"
 
-#: src/core/modules/Planet.cpp:582
+#: src/core/modules/Planet.cpp:585
 msgctxt "type of comet"
 msgid "non-periodic"
 msgstr "ekki-lotubundð"
 
-#: src/core/modules/Planet.cpp:587
+#: src/core/modules/Planet.cpp:590
 msgctxt "type of comet"
 msgid "short-period"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:589
+#: src/core/modules/Planet.cpp:592
 msgctxt "type of comet"
 msgid "periodic"
 msgstr "lotubundð"
 
 #. TRANSLATORS: Ecliptical rectangular coordinates
-#: src/core/modules/Planet.cpp:647 src/core/modules/Planet.cpp:649
+#: src/core/modules/Planet.cpp:650 src/core/modules/Planet.cpp:652
 msgctxt "coordinates"
 msgid "Ecliptical"
-msgstr ""
+msgstr "Sólbaugshnit"
 
-#: src/core/modules/Planet.cpp:658 src/core/modules/Planet.cpp:659
+#: src/core/modules/Planet.cpp:661 src/core/modules/Planet.cpp:662
 msgid "Hourly motion"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:658 src/core/modules/Planet.cpp:1387
-#: src/core/modules/Planet.cpp:1396 src/core/modules/StarWrapper.cpp:338
+#: src/core/modules/Planet.cpp:661 src/core/modules/Planet.cpp:1407
+#: src/core/modules/Planet.cpp:1416 src/core/modules/StarWrapper.cpp:338
 #: plugins/Pulsars/src/Pulsar.cpp:204
 #: plugins/MissingStars/src/MissingStar.cpp:172
 msgctxt "into the direction of"
@@ -2363,7 +2365,7 @@ msgid "towards"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for distance - astronomical unit
-#: src/core/modules/Planet.cpp:670 src/gui/AstroCalcDialog.cpp:882
+#: src/core/modules/Planet.cpp:676 src/gui/AstroCalcDialog.cpp:882
 #: src/gui/AstroCalcDialog.cpp:1194 src/gui/AstroCalcDialog.cpp:1492
 #: src/gui/AstroCalcDialog.cpp:1759 src/gui/AstroCalcDialog.cpp:1818
 #: src/gui/AstroCalcDialog.cpp:9088 src/gui/AstroCalcChart.cpp:428
@@ -2375,268 +2377,268 @@ msgctxt "distance, astronomical unit"
 msgid "AU"
 msgstr "Stjörnufræðieiningar"
 
+#. TRANSLATORS: Distance measured in terms of the speed of light
+#: src/core/modules/Planet.cpp:678
+msgid "Light time"
+msgstr ""
+
 #. TRANSLATORS: Unit of measure for distance - millions of kilometers
 #. TRANSLATORS: Unit of measure for distance - milliones kilometers
 #. TRANSLATORS: Unit of measure for distance - millions kilometers
-#: src/core/modules/Planet.cpp:686 src/core/modules/Planet.cpp:704
+#: src/core/modules/Planet.cpp:694 src/core/modules/Planet.cpp:715
 #: src/core/modules/Comet.cpp:192 src/gui/AstroCalcDialog.cpp:9065
 msgctxt "distance"
 msgid "M km"
 msgstr "M km"
 
-#: src/core/modules/Planet.cpp:689
+#: src/core/modules/Planet.cpp:698 src/core/modules/Planet.cpp:700
 msgid "Distance from Sun"
 msgstr "Fjarlægð frá sól"
 
-#. TRANSLATORS: Distance measured in terms of the speed of light
-#: src/core/modules/Planet.cpp:709
-msgid "Light time"
-msgstr ""
-
-#: src/core/modules/Planet.cpp:723
+#: src/core/modules/Planet.cpp:743
 msgid "Orbital velocity"
-msgstr ""
+msgstr "Brautarhraði"
 
-#: src/core/modules/Planet.cpp:726
+#: src/core/modules/Planet.cpp:746
 msgid "Heliocentric velocity"
-msgstr ""
+msgstr "Sólmiðjuhraði"
 
-#: src/core/modules/Planet.cpp:740
+#: src/core/modules/Planet.cpp:760
 #, qt-format
 msgid "NOTE: elements for epoch %1 probably outdated. Consider updating data!"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:772
+#: src/core/modules/Planet.cpp:792
 msgid "with rings"
 msgstr "með hringjum"
 
-#: src/core/modules/Planet.cpp:789
+#: src/core/modules/Planet.cpp:809
 msgid "scaled up to"
 msgstr "kvarðað upp í"
 
-#: src/core/modules/Planet.cpp:799
+#: src/core/modules/Planet.cpp:819
 msgid "Apparent diameter"
 msgstr "Sýndarþvermál"
 
-#: src/core/modules/Planet.cpp:804
+#: src/core/modules/Planet.cpp:824
 msgid "Equatorial diameter"
-msgstr ""
+msgstr "Miðbaugsþvermál"
 
-#: src/core/modules/Planet.cpp:868 src/core/modules/Planet.cpp:869
-#: src/core/modules/Planet.cpp:877 src/gui/AstroCalcChart.cpp:93
+#: src/core/modules/Planet.cpp:888 src/core/modules/Planet.cpp:889
+#: src/core/modules/Planet.cpp:897 src/gui/AstroCalcChart.cpp:93
 #: src/gui/AstroCalcChart.cpp:103 src/gui/AstroCalcChart.cpp:430
 #: src/gui/AstroCalcChart.cpp:456 src/ui_configurationDialog.h:1830
 msgid "Elongation"
 msgstr "Álengd"
 
-#: src/core/modules/Planet.cpp:870 src/core/modules/Planet.cpp:879
+#: src/core/modules/Planet.cpp:890 src/core/modules/Planet.cpp:899
 #: src/gui/AstroCalcChart.cpp:96 src/gui/AstroCalcChart.cpp:106
 #: src/gui/AstroCalcChart.cpp:439 src/gui/AstroCalcChart.cpp:465
 #: plugins/Satellites/src/Satellite.cpp:408
 msgid "Phase angle"
 msgstr "Afstöðuhorn"
 
-#: src/core/modules/Planet.cpp:872 src/core/modules/Planet.cpp:881
+#: src/core/modules/Planet.cpp:892 src/core/modules/Planet.cpp:901
 msgid "Illuminated"
 msgstr "Upplýst"
 
-#: src/core/modules/Planet.cpp:878
+#: src/core/modules/Planet.cpp:898
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:323
 msgid "Elong. in Ecl.Long."
 msgstr ""
 
-#: src/core/modules/Planet.cpp:893 src/gui/AstroCalcDialog.cpp:9298
+#: src/core/modules/Planet.cpp:913 src/gui/AstroCalcDialog.cpp:9298
 #: src/gui/AstroCalcChart.cpp:473
 msgid "Angular distance"
 msgstr "Hornbil"
 
 #. TRANSLATORS: Unit of measure for period - days
-#: src/core/modules/Planet.cpp:911 src/core/modules/StarWrapper.cpp:362
+#: src/core/modules/Planet.cpp:931 src/core/modules/StarWrapper.cpp:362
 #: src/gui/AstroCalcDialog.cpp:9099
 msgctxt "duration"
 msgid "days"
 msgstr "dagar"
 
-#: src/core/modules/Planet.cpp:920
+#: src/core/modules/Planet.cpp:940
 msgid "Sidereal period"
 msgstr "Stjarnbundinn umferðartími"
 
-#: src/core/modules/Planet.cpp:929
+#: src/core/modules/Planet.cpp:949
 msgid "Synodic period"
-msgstr ""
+msgstr "Sólbundinn umferðartími"
 
 #. TRANSLATORS: Unit of measure for speed - meters per second
-#: src/core/modules/Planet.cpp:1214
+#: src/core/modules/Planet.cpp:1234
 msgctxt "speed"
 msgid "m/s"
 msgstr "m/s"
 
-#: src/core/modules/Planet.cpp:1229
+#: src/core/modules/Planet.cpp:1249
 msgid "Sidereal day"
 msgstr "Stjörnudagur"
 
-#: src/core/modules/Planet.cpp:1231
+#: src/core/modules/Planet.cpp:1251
 msgid "Mean solar day"
 msgstr "Miðgildi sólardags"
 
-#: src/core/modules/Planet.cpp:1237
+#: src/core/modules/Planet.cpp:1257
 msgid "The period of rotation is chaotic"
 msgstr "Umferðartími snúnings er óreglulegur"
 
-#: src/core/modules/Planet.cpp:1243 src/core/modules/Planet.cpp:1245
-#: src/core/modules/Planet.cpp:1251 src/core/modules/Planet.cpp:1253
+#: src/core/modules/Planet.cpp:1263 src/core/modules/Planet.cpp:1265
+#: src/core/modules/Planet.cpp:1271 src/core/modules/Planet.cpp:1273
 msgid "Equatorial rotation velocity"
-msgstr ""
+msgstr "Snúnigshraði miðbaugs"
 
-#: src/core/modules/Planet.cpp:1277 src/core/modules/Planet.cpp:1672
+#: src/core/modules/Planet.cpp:1297 src/core/modules/Planet.cpp:1692
 msgctxt "Moon phase"
 msgid "New Moon"
 msgstr "Nýtt tungl"
 
-#: src/core/modules/Planet.cpp:1279 src/core/modules/Planet.cpp:1674
+#: src/core/modules/Planet.cpp:1299 src/core/modules/Planet.cpp:1694
 msgctxt "Moon phase"
 msgid "Waxing Crescent"
 msgstr "Tungl kviknar"
 
-#: src/core/modules/Planet.cpp:1281 src/core/modules/Planet.cpp:1676
+#: src/core/modules/Planet.cpp:1301 src/core/modules/Planet.cpp:1696
 msgctxt "Moon phase"
 msgid "First Quarter"
 msgstr "Fyrsta kvartil"
 
-#: src/core/modules/Planet.cpp:1283 src/core/modules/Planet.cpp:1678
+#: src/core/modules/Planet.cpp:1303 src/core/modules/Planet.cpp:1698
 msgctxt "Moon phase"
 msgid "Waxing Gibbous"
 msgstr "Tungl fyllist"
 
-#: src/core/modules/Planet.cpp:1285 src/core/modules/Planet.cpp:1680
+#: src/core/modules/Planet.cpp:1305 src/core/modules/Planet.cpp:1700
 msgctxt "Moon phase"
 msgid "Full Moon"
 msgstr "Fullt tungl"
 
-#: src/core/modules/Planet.cpp:1287 src/core/modules/Planet.cpp:1682
+#: src/core/modules/Planet.cpp:1307 src/core/modules/Planet.cpp:1702
 msgctxt "Moon phase"
 msgid "Waning Gibbous"
 msgstr "Tungl minnkar"
 
-#: src/core/modules/Planet.cpp:1289 src/core/modules/Planet.cpp:1684
+#: src/core/modules/Planet.cpp:1309 src/core/modules/Planet.cpp:1704
 msgctxt "Moon phase"
 msgid "Third Quarter"
 msgstr "Þriðja kvartil"
 
-#: src/core/modules/Planet.cpp:1291 src/core/modules/Planet.cpp:1686
+#: src/core/modules/Planet.cpp:1311 src/core/modules/Planet.cpp:1706
 msgctxt "Moon phase"
 msgid "Waning Crescent"
 msgstr "Tungl hverfur"
 
-#: src/core/modules/Planet.cpp:1299
+#: src/core/modules/Planet.cpp:1319
 msgid "Moon age"
-msgstr ""
+msgstr "Aldur tungls"
 
-#: src/core/modules/Planet.cpp:1299
+#: src/core/modules/Planet.cpp:1319
 msgid "days old"
-msgstr ""
+msgstr "daga gamalt"
 
-#: src/core/modules/Planet.cpp:1319 src/core/modules/Planet.cpp:1322
+#: src/core/modules/Planet.cpp:1339 src/core/modules/Planet.cpp:1342
 msgid "Position angle of bright limb"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:1386 src/core/modules/Planet.cpp:1395
-#: src/core/modules/Planet.cpp:1431 src/core/modules/Planet.cpp:1438
+#: src/core/modules/Planet.cpp:1406 src/core/modules/Planet.cpp:1415
+#: src/core/modules/Planet.cpp:1451 src/core/modules/Planet.cpp:1458
 msgid "Position Angle of axis"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:1387 src/core/modules/Planet.cpp:1388
-#: src/core/modules/Planet.cpp:1396 src/core/modules/Planet.cpp:1397
+#: src/core/modules/Planet.cpp:1407 src/core/modules/Planet.cpp:1408
+#: src/core/modules/Planet.cpp:1416 src/core/modules/Planet.cpp:1417
 msgid "Libration"
-msgstr ""
+msgstr "Tunglvik"
 
-#: src/core/modules/Planet.cpp:1389 src/core/modules/Planet.cpp:1398
-#: src/core/modules/Planet.cpp:1433 src/core/modules/Planet.cpp:1440
+#: src/core/modules/Planet.cpp:1409 src/core/modules/Planet.cpp:1418
+#: src/core/modules/Planet.cpp:1453 src/core/modules/Planet.cpp:1460
 msgid "Subsolar point"
-msgstr ""
+msgstr "Lóðpunktur sólar"
 
-#: src/core/modules/Planet.cpp:1390 src/core/modules/Planet.cpp:1399
+#: src/core/modules/Planet.cpp:1410 src/core/modules/Planet.cpp:1419
 msgid "Colongitude"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:1432 src/core/modules/Planet.cpp:1439
+#: src/core/modules/Planet.cpp:1452 src/core/modules/Planet.cpp:1459
 msgid "Center point"
 msgstr "Miðjupunktur"
 
-#: src/core/modules/Planet.cpp:1459
+#: src/core/modules/Planet.cpp:1479
 msgid "Eclipse magnitude"
-msgstr ""
+msgstr "Birtustig myrkva"
 
-#: src/core/modules/Planet.cpp:1461
+#: src/core/modules/Planet.cpp:1481
 msgid "Eclipse obscuration"
-msgstr ""
+msgstr "Myrkvastig"
 
-#: src/core/modules/Planet.cpp:1487
+#: src/core/modules/Planet.cpp:1507
 msgid "Moon/Sun diameter ratio"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:1490
+#: src/core/modules/Planet.cpp:1510
 msgctxt "type of solar eclipse"
 msgid "(annular)"
-msgstr ""
+msgstr "(hringlaga)"
 
-#: src/core/modules/Planet.cpp:1492
+#: src/core/modules/Planet.cpp:1512
 msgctxt "type of solar eclipse"
 msgid "(total)"
 msgstr "(alls)"
 
-#: src/core/modules/Planet.cpp:1503
+#: src/core/modules/Planet.cpp:1523
 msgid "Central eclipse duration"
-msgstr ""
+msgstr "Lengd miðlínumyrkva"
 
 #. TRANSLATORS: Short for "minutes".
-#: src/core/modules/Planet.cpp:1505
+#: src/core/modules/Planet.cpp:1525
 #: plugins/Observability/src/Observability.cpp:153
 msgid "m"
 msgstr "mín"
 
 #. TRANSLATORS: Short for "seconds".
-#: src/core/modules/Planet.cpp:1507
+#: src/core/modules/Planet.cpp:1527
 #: plugins/Observability/src/Observability.cpp:155
 msgid "s"
 msgstr "sek"
 
-#: src/core/modules/Planet.cpp:1508
+#: src/core/modules/Planet.cpp:1528
 msgid "Center of solar eclipse (Lat./Long.)"
 msgstr "Miðja sólmyrkva (breidd/lengd)"
 
-#: src/core/modules/Planet.cpp:1518
+#: src/core/modules/Planet.cpp:1538
 msgid "Shadow center point is"
 msgstr "Miðjupunktur skugga er"
 
-#: src/core/modules/Planet.cpp:1520
+#: src/core/modules/Planet.cpp:1540
 msgid "km towards azimuth"
-msgstr ""
+msgstr "km að áttarhorni"
 
-#: src/core/modules/Planet.cpp:1523
+#: src/core/modules/Planet.cpp:1543
 msgid "Width of antumbra"
-msgstr ""
+msgstr "Breidd aftanskugga/útskugga"
 
-#: src/core/modules/Planet.cpp:1525
+#: src/core/modules/Planet.cpp:1545
 msgid "Width of umbra"
 msgstr "Breidd alskugga"
 
-#: src/core/modules/Planet.cpp:1542
+#: src/core/modules/Planet.cpp:1562
 msgid "Penumbral eclipse magnitude"
-msgstr ""
+msgstr "Birtustig hálfskugga"
 
-#: src/core/modules/Planet.cpp:1545
+#: src/core/modules/Planet.cpp:1565
 msgid "Umbral eclipse magnitude"
-msgstr ""
+msgstr "Birtustig alskugga"
 
-#: src/core/modules/Planet.cpp:1552
+#: src/core/modules/Planet.cpp:1572
 msgid "Albedo"
 msgstr "Endurskinshlutfall"
 
-#: src/core/modules/Planet.cpp:1555 src/core/modules/MinorPlanet.cpp:211
+#: src/core/modules/Planet.cpp:1575 src/core/modules/MinorPlanet.cpp:211
 #: src/core/modules/Comet.cpp:241
 msgid "Discovered"
-msgstr ""
+msgstr "Uppgötvað"
 
 #. TRANSLATORS: Tholen spectral taxonomic classification of asteroids
 #: src/core/modules/MinorPlanet.cpp:201
@@ -2691,7 +2693,7 @@ msgstr "Endurstilla ferla reikistjarna"
 
 #: src/core/modules/SolarSystem.cpp:314 src/ui_viewDialog.h:3579
 msgid "Planet markers"
-msgstr "Merki fyrir reikistjörnur"
+msgstr "Merkingar reikistjarna"
 
 #: src/core/modules/SolarSystem.cpp:315
 msgid "Planet selection marker"
@@ -3042,65 +3044,65 @@ msgstr "Frumstilli stjörnusamstæður..."
 msgid "Initializing landscape..."
 msgstr "Frumstilli landslag..."
 
-#: src/core/StelApp.cpp:592
+#: src/core/StelApp.cpp:600
 msgid "Initializing grid lines..."
 msgstr "Frumstilli hnitalínur..."
 
-#: src/core/StelApp.cpp:597
+#: src/core/StelApp.cpp:605
 msgid "Initializing special markers..."
 msgstr "Frumstilli sérmerkingar..."
 
-#: src/core/StelApp.cpp:603
+#: src/core/StelApp.cpp:611
 msgid "Initializing sporadic meteors..."
 msgstr "Frumstilli óreglulega loftsteina..."
 
-#: src/core/StelApp.cpp:609
+#: src/core/StelApp.cpp:617
 msgid "Initializing user labels..."
 msgstr "Frumstilli skýringar notanda..."
 
-#: src/core/StelApp.cpp:614
+#: src/core/StelApp.cpp:622
 msgid "Initializing sky cultures..."
 msgstr "Frumstilli stjörnumerkjakerfi..."
 
-#: src/core/StelApp.cpp:618
+#: src/core/StelApp.cpp:626
 msgid "Initializing user markers..."
 msgstr "Frumstilli merkingar notanda..."
 
-#: src/core/StelApp.cpp:624
+#: src/core/StelApp.cpp:632
 msgid "Initializing custom objects..."
 msgstr "Frumstilli sérsniðin fyrirbæri..."
 
-#: src/core/StelApp.cpp:630
+#: src/core/StelApp.cpp:638
 msgid "Initializing highlights..."
 msgstr "Frumstilli áhersluliti..."
 
-#: src/core/StelApp.cpp:636
+#: src/core/StelApp.cpp:644
 msgid "Initializing specific time..."
 msgstr "Frumstilli tiltekinn tíma..."
 
-#: src/core/StelApp.cpp:644
+#: src/core/StelApp.cpp:652
 msgid "Initializing scripting..."
 msgstr "Frumstilli skriftun..."
 
-#: src/core/StelApp.cpp:649
+#: src/core/StelApp.cpp:657
 msgid "Initializing color scheme..."
 msgstr "Frumstilli litastef..."
 
-#: src/core/StelApp.cpp:661 src/ui_configurationDialog.h:1898
+#: src/core/StelApp.cpp:669 src/ui_configurationDialog.h:1898
 msgid "Night mode"
 msgstr "Næturhamur"
 
-#: src/core/StelApp.cpp:691
+#: src/core/StelApp.cpp:699
 msgid "Initializing SPOUT sender..."
 msgstr "Frumstilli SPOUT-sendi..."
 
-#: src/core/StelApp.cpp:701
+#: src/core/StelApp.cpp:709
 msgid "Cannot create Spout sender. See log for details."
 msgstr ""
 "Gat ekki útbúið Spout-sendi. Skoðaðu vinnsluannál til að sjá frekari "
 "upplýsingar."
 
-#: src/core/StelApp.cpp:728
+#: src/core/StelApp.cpp:736
 msgid "Loading plugin"
 msgstr "Hleð viðbót"
 
@@ -3255,19 +3257,19 @@ msgstr "Bæta við 1 Gaussísku ári"
 
 #: src/core/StelCore.cpp:332
 msgid "Add 1 calendar month"
-msgstr ""
+msgstr "Bæta við 1 almanaksmánuði"
 
 #: src/core/StelCore.cpp:333
 msgid "Add 1 calendar year"
-msgstr ""
+msgstr "Bæta við 1 almanaksári"
 
 #: src/core/StelCore.cpp:334
 msgid "Add 10 calendar years"
-msgstr ""
+msgstr "Bæta við 10 almanaksárum"
 
 #: src/core/StelCore.cpp:335
 msgid "Add 100 calendar years"
-msgstr ""
+msgstr "Bæta við 100 almanaksárum"
 
 #: src/core/StelCore.cpp:336
 msgid "Subtract 1 sidereal day"
@@ -3343,19 +3345,19 @@ msgstr "Draga frá 1 Gaussískt ár"
 
 #: src/core/StelCore.cpp:354
 msgid "Subtract 1 calendar month"
-msgstr ""
+msgstr "Draga frá 1 almanaksmánuð"
 
 #: src/core/StelCore.cpp:355
 msgid "Subtract 1 calendar year"
-msgstr ""
+msgstr "Draga frá 1 almanaksár"
 
 #: src/core/StelCore.cpp:356
 msgid "Subtract 10 calendar years"
-msgstr ""
+msgstr "Draga frá 10 almanaksár"
 
 #: src/core/StelCore.cpp:357
 msgid "Subtract 100 calendar years"
-msgstr ""
+msgstr "Draga frá 100 almanaksár"
 
 #: src/core/StelCore.cpp:359
 msgid "Set home planet to selected planet"
@@ -3993,7 +3995,7 @@ msgstr ""
 #: src/core/StelObject.cpp:864
 msgctxt "celestial coordinate system"
 msgid "A"
-msgstr ""
+msgstr "Á"
 
 #: src/core/StelObject.cpp:864
 msgctxt "celestial coordinate system"
@@ -4018,30 +4020,30 @@ msgstr ""
 
 #: src/core/StelObject.cpp:932
 msgid "Parallactic Angle"
-msgstr ""
+msgstr "Hliðstöðuhorn"
 
 #: src/core/StelObject.cpp:941 src/gui/AstroCalcDialog.cpp:8323
 msgid "IAU Constellation"
 msgstr "IAU stjörnumerki"
 
 #. TRANSLATORS: Azimuth/Altitude
-#: src/core/StelObject.cpp:1279
+#: src/core/StelObject.cpp:1283
 msgctxt "celestial coordinate system"
 msgid "Solar A/a"
 msgstr "Áh/Stj.h sólar"
 
-#: src/core/StelObject.cpp:1279
+#: src/core/StelObject.cpp:1283
 msgctxt "celestial coordinate system"
 msgid "Solar Az./Alt."
 msgstr "Átt.horn/Stj.hæð sólar"
 
 #. TRANSLATORS: Azimuth/Altitude
-#: src/core/StelObject.cpp:1297
+#: src/core/StelObject.cpp:1301
 msgctxt "celestial coordinate system"
 msgid "Lunar A/a"
-msgstr ""
+msgstr "Tungl Á/h"
 
-#: src/core/StelObject.cpp:1297
+#: src/core/StelObject.cpp:1301
 msgctxt "celestial coordinate system"
 msgid "Lunar Az./Alt."
 msgstr ""
@@ -4079,7 +4081,7 @@ msgstr "Hleð inn '%1' úr %2"
 #: src/core/StelSkyCultureMgr.cpp:183
 msgctxt "sky culture classification"
 msgid "ethnographic"
-msgstr ""
+msgstr "þjóðfræðilegur"
 
 #: src/core/StelSkyCultureMgr.cpp:184
 msgid ""
@@ -4090,7 +4092,7 @@ msgstr ""
 #: src/core/StelSkyCultureMgr.cpp:188
 msgctxt "sky culture classification"
 msgid "historical"
-msgstr ""
+msgstr "sögulegur"
 
 #: src/core/StelSkyCultureMgr.cpp:189
 msgid ""
@@ -4101,7 +4103,7 @@ msgstr ""
 #: src/core/StelSkyCultureMgr.cpp:193
 msgctxt "sky culture classification"
 msgid "single"
-msgstr ""
+msgstr "eins manns"
 
 #: src/core/StelSkyCultureMgr.cpp:194
 msgid ""
@@ -4112,7 +4114,7 @@ msgstr ""
 #: src/core/StelSkyCultureMgr.cpp:198
 msgctxt "sky culture classification"
 msgid "comparative"
-msgstr ""
+msgstr "samanburðar"
 
 #: src/core/StelSkyCultureMgr.cpp:199
 msgid ""
@@ -4283,7 +4285,7 @@ msgstr ""
 
 #: src/core/StelSkyCultureMgr.cpp:308
 msgid "World"
-msgstr ""
+msgstr "Veröld"
 
 #: src/core/StelSkyCultureMgr.cpp:309
 msgid ""
@@ -4669,17 +4671,17 @@ msgstr ""
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: src/core/StelModuleMgr.cpp:316
 msgid "If you have a question, you can {get an answer here}."
-msgstr ""
+msgstr "Ef þú ert með spurningu, getur þú {fengið svar hér}."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: src/core/StelModuleMgr.cpp:318
 msgid "Bug reports and feature requests can be made {here}."
-msgstr ""
+msgstr "Tilkynningar um villur og beiðnur um eiginleika má nálgast {hér}."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: src/core/StelModuleMgr.cpp:324
 msgid "Further information can be found in the {developer documentation}."
-msgstr ""
+msgstr "Frekari upplýsingar má finna í {forritarasafninu}."
 
 #: src/gui/ConfigurationDialog.cpp:128 src/ui_configurationDialog.h:1703
 msgid "Plugins"
@@ -4698,11 +4700,11 @@ msgstr "mm"
 
 #: src/gui/ConfigurationDialog.cpp:811
 msgid "Dots per Inch (for image metadata)."
-msgstr ""
+msgstr "Punktar á tommu (fyrir lýsigögn mynda)."
 
 #: src/gui/ConfigurationDialog.cpp:812
 msgid "Current designated print size"
-msgstr ""
+msgstr "Núverandi valin leturstærð"
 
 #: src/gui/ConfigurationDialog.cpp:1236
 #, qt-format
@@ -5012,15 +5014,15 @@ msgstr "mm-dd-áááá"
 
 #: src/gui/ConfigurationDialog.cpp:1966
 msgid "ww, yyyy-mm-dd"
-msgstr ""
+msgstr "vv, áááá-mm-dd"
 
 #: src/gui/ConfigurationDialog.cpp:1967
 msgid "ww, dd-mm-yyyy"
-msgstr ""
+msgstr "vv, dd-mm-áááá"
 
 #: src/gui/ConfigurationDialog.cpp:1968
 msgid "ww, mm-dd-yyyy"
-msgstr ""
+msgstr "vv, mm-dd-áááá"
 
 #: src/gui/ConfigurationDialog.cpp:2000
 msgid "12-hour format"
@@ -5033,7 +5035,7 @@ msgstr "24 klst. snið"
 #: src/gui/ConfigurationDialog.cpp:2029
 msgctxt "disabled"
 msgid "None"
-msgstr ""
+msgstr "Enginn"
 
 #: src/gui/ConfigurationDialog.cpp:2030
 msgid "5/6/5 bits"
@@ -5053,11 +5055,11 @@ msgstr "10/10/10 bitar"
 
 #: src/gui/ConfigurationDialog.cpp:2045
 msgid "Unsupported"
-msgstr ""
+msgstr "Óstutt"
 
 #: src/gui/ConfigurationDialog.cpp:2047
 msgid "Unsupported in low-graphics mode"
-msgstr ""
+msgstr "Óstutt í lággrafíksham"
 
 #: src/gui/HelpDialog.cpp:202 src/gui/HelpDialog.cpp:214
 msgid "Cannot check updates..."
@@ -5169,7 +5171,7 @@ msgstr ""
 
 #: src/gui/HelpDialog.cpp:341
 msgid "Delete marker closest to mouse cursor"
-msgstr "Eyða merki næst músarbendli"
+msgstr "Eyða merkingu næst músarbendli"
 
 #: src/gui/HelpDialog.cpp:342 src/gui/HelpDialog.cpp:346
 #: src/gui/HelpDialog.cpp:348
@@ -5178,7 +5180,7 @@ msgstr ""
 
 #: src/gui/HelpDialog.cpp:344
 msgid "Delete all custom markers"
-msgstr "Eyða öllum sérsniðnum merkjum"
+msgstr "Eyða öllum sérsniðnum merkingum"
 
 #: src/gui/HelpDialog.cpp:352
 #, qt-format
@@ -5226,7 +5228,7 @@ msgstr "Vista skriftu í skrá"
 
 #: src/gui/HelpDialog.cpp:408 src/ui_scriptConsole.h:376
 msgid "Run script"
-msgstr ""
+msgstr "Keyra forskrift"
 
 #: src/gui/HelpDialog.cpp:410 src/ui_astroCalcDialog.h:2104
 msgid "Astronomical calculations"
@@ -5275,7 +5277,7 @@ msgstr "{Algengar spurningar} um Stellarium. Einnig svör."
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: src/gui/HelpDialog.cpp:444
 msgid "{The Stellarium Wiki} - general information."
-msgstr ""
+msgstr "{Stellarium alfræðiritið} - almennar upplýsingar."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: src/gui/HelpDialog.cpp:449
@@ -5398,7 +5400,7 @@ msgstr ""
 
 #: src/gui/HelpDialog.cpp:565
 msgid "Financial support"
-msgstr ""
+msgstr "Fjárhagsstuðningur"
 
 #: src/gui/HelpDialog.cpp:566
 #, qt-format
@@ -5531,23 +5533,23 @@ msgstr "Víxla sýnileika viðmótsins"
 
 #: src/gui/StelGui.cpp:293
 msgid "All available info"
-msgstr ""
+msgstr "Allar tiltækar upplýsingar"
 
 #: src/gui/StelGui.cpp:294
 msgid "Default info"
-msgstr ""
+msgstr "Sjálfgefnar upplýsingar"
 
 #: src/gui/StelGui.cpp:295
 msgid "Short info"
-msgstr ""
+msgstr "Stuttar upplýsingar"
 
 #: src/gui/StelGui.cpp:296
 msgid "None info"
-msgstr ""
+msgstr "Engar upplýsingar"
 
 #: src/gui/StelGui.cpp:297
 msgid "Custom info"
-msgstr ""
+msgstr "Sérsniðnar upplýsingar"
 
 #: src/gui/StelGuiItems.cpp:421 src/gui/StelGuiItems.cpp:1033
 msgid "Space"
@@ -5607,16 +5609,16 @@ msgstr "plánetumiðjaður athugandi"
 
 #: src/gui/StelGuiItems.cpp:905
 msgid "Atmospheric pressure"
-msgstr ""
+msgstr "Loftþrýstingur"
 
 #: src/gui/StelGuiItems.cpp:905
 msgctxt "pressure unit"
 msgid "mbar"
-msgstr ""
+msgstr "mbar"
 
 #: src/gui/StelGuiItems.cpp:905
 msgid "temperature"
-msgstr ""
+msgstr "hitastig"
 
 #: src/gui/StelGuiItems.cpp:920 src/gui/StelGuiItems.cpp:922
 msgctxt "abbreviation"
@@ -5639,22 +5641,22 @@ msgstr "Rammar á sekúndu"
 
 #: src/gui/StelDialog.hpp:209
 msgid "Are you sure? This will delete your customized data."
-msgstr ""
+msgstr "Ert þú viss? Þetta mun eyða sérsniðnu gögnunum þínum."
 
-#: src/gui/ViewDialog.cpp:701
+#: src/gui/ViewDialog.cpp:702
 msgid "properties"
 msgstr "eiginleikar"
 
-#: src/gui/ViewDialog.cpp:722
-msgid "Deep Sky"
-msgstr ""
-
 #: src/gui/ViewDialog.cpp:723
+msgid "Deep Sky"
+msgstr "Djúphiminn"
+
+#: src/gui/ViewDialog.cpp:724
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:233
 msgid "Solar System"
 msgstr "Sólkerfi"
 
-#: src/gui/ViewDialog.cpp:942
+#: src/gui/ViewDialog.cpp:943
 msgid ""
 "Uses a polygonal 3D model for some selected subplanetary objects (small "
 "moons, asteroids, comets) instead of a spherical approximation"
@@ -5662,7 +5664,7 @@ msgstr ""
 "Notar netjulíkön í þrívídd fyrir sum valin fyrirbæri áhangandi reikistjörnum"
 " (smærri tungl, loftsteinar, halastjörnur) í stað kúlulaga nálgunar"
 
-#: src/gui/ViewDialog.cpp:943
+#: src/gui/ViewDialog.cpp:944
 msgid ""
 "Use a &quot;shadow map&quot; to simulate self-shadows of non-convex solar "
 "system objects. May reduce shadow penumbra quality on some objects."
@@ -5670,99 +5672,99 @@ msgstr ""
 "Nota &quot;skuggavörpun&quot; til að líkja eftir eigin skuggum ekki-íhvolfra"
 " fyrirbæra í sólkerfinu. Gæti minnkað gæði hálfskugga á sumum fyrirbærum."
 
-#: src/gui/ViewDialog.cpp:978
+#: src/gui/ViewDialog.cpp:979
 msgid "Abbreviated"
 msgstr "Stytt"
 
-#: src/gui/ViewDialog.cpp:979
+#: src/gui/ViewDialog.cpp:980
 msgid "Native"
 msgstr "Innbyggt"
 
-#: src/gui/ViewDialog.cpp:980
+#: src/gui/ViewDialog.cpp:981
 msgid "Translated"
 msgstr "Þýtt"
 
-#: src/gui/ViewDialog.cpp:1162
+#: src/gui/ViewDialog.cpp:1163
 msgid "No shooting stars"
 msgstr "Engin stjörnuhröp"
 
-#: src/gui/ViewDialog.cpp:1164
+#: src/gui/ViewDialog.cpp:1165
 msgid "Normal rate"
 msgstr "Venjuleg tíðni"
 
-#: src/gui/ViewDialog.cpp:1166
+#: src/gui/ViewDialog.cpp:1167
 msgid "Standard Orionids rate"
 msgstr "Venjuleg tíðni Óríoníta"
 
-#: src/gui/ViewDialog.cpp:1168
+#: src/gui/ViewDialog.cpp:1169
 msgid "Standard Perseids rate"
 msgstr "Venjuleg tíðni Persíta"
 
-#: src/gui/ViewDialog.cpp:1170
+#: src/gui/ViewDialog.cpp:1171
 msgid "Standard Geminids rate"
 msgstr "Venjuleg tíðni Geminíta"
 
-#: src/gui/ViewDialog.cpp:1172
+#: src/gui/ViewDialog.cpp:1173
 msgid "Exceptional Perseid rate"
 msgstr "Óvenju há tíðni Persíta"
 
-#: src/gui/ViewDialog.cpp:1174
+#: src/gui/ViewDialog.cpp:1175
 msgid "Meteor storm rate"
 msgstr "Tíðni loftsteinadrífu"
 
-#: src/gui/ViewDialog.cpp:1176
+#: src/gui/ViewDialog.cpp:1177
 msgid "Exceptional Draconid rate"
 msgstr "Óvenju há tíðni Drakóníta"
 
-#: src/gui/ViewDialog.cpp:1178
+#: src/gui/ViewDialog.cpp:1179
 msgid "Exceptional Leonid rate"
 msgstr "Óvenju há tíðni Leoníta"
 
-#: src/gui/ViewDialog.cpp:1180
+#: src/gui/ViewDialog.cpp:1181
 msgid "Very high rate (1966 Leonids)"
 msgstr "Mjög há tíðni (Leonítadrífan 1966)"
 
-#: src/gui/ViewDialog.cpp:1182
+#: src/gui/ViewDialog.cpp:1183
 msgid "Highest rate ever (1833 Leonids)"
 msgstr "Hæsta tíðni (Leonítadrífan 1833)"
 
-#: src/gui/ViewDialog.cpp:1245
+#: src/gui/ViewDialog.cpp:1246
 msgctxt "magnitude algorithm"
 msgid "G. Müller (1893)"
 msgstr "G. Müller (1893)"
 
-#: src/gui/ViewDialog.cpp:1246
+#: src/gui/ViewDialog.cpp:1247
 msgctxt "magnitude algorithm"
 msgid "Astronomical Almanac (1984)"
 msgstr "Stjörnufræðialmanak (1984)"
 
-#: src/gui/ViewDialog.cpp:1247
+#: src/gui/ViewDialog.cpp:1248
 msgctxt "magnitude algorithm"
 msgid "Explanatory Supplement (1992)"
 msgstr "Skýringaviðbót (1992)"
 
-#: src/gui/ViewDialog.cpp:1248
+#: src/gui/ViewDialog.cpp:1249
 msgctxt "magnitude algorithm"
 msgid "Explanatory Supplement (2013)"
 msgstr "Skýringaviðbót (2013)"
 
-#: src/gui/ViewDialog.cpp:1249
+#: src/gui/ViewDialog.cpp:1250
 msgctxt "magnitude algorithm"
 msgid "Mallama & Hilton (2018)"
 msgstr "Mallama & Hilton (2018)"
 
-#: src/gui/ViewDialog.cpp:1250
+#: src/gui/ViewDialog.cpp:1251
 msgctxt "magnitude algorithm"
 msgid "Generic"
 msgstr "Almennt"
 
-#: src/gui/ViewDialog.cpp:1272
+#: src/gui/ViewDialog.cpp:1273
 msgid ""
 "The algorithm was used in the <em>Astronomical Almanac</em> (1984 and later)"
 " and gives V (instrumental) magnitudes (allegedly from D.L. Harris)."
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1273
+#: src/gui/ViewDialog.cpp:1274
 msgid ""
 "The algorithm is based on visual observations 1877-1891 by G. Müller and was"
 " still republished in the <em>Explanatory Supplement to the Astronomical "
@@ -5772,7 +5774,7 @@ msgstr ""
 "var það endurbirt í <em>Explanatory Supplement to the Astronomical "
 "Ephemeris</em> (1961)."
 
-#: src/gui/ViewDialog.cpp:1274
+#: src/gui/ViewDialog.cpp:1275
 msgid ""
 "The algorithm was published in the 2nd edition of the <em>Explanatory "
 "Supplement to the Astronomical Almanac</em> (1992)."
@@ -5780,7 +5782,7 @@ msgstr ""
 "Reikniritið var birt í 2. útgáfu <em>Explanatory Supplement to the "
 "Astronomical Almanac</em> (1992)."
 
-#: src/gui/ViewDialog.cpp:1275
+#: src/gui/ViewDialog.cpp:1276
 msgid ""
 "The algorithm was published in the 3rd edition of the <em>Explanatory "
 "Supplement to the Astronomical Almanac</em> (2013)."
@@ -5788,14 +5790,14 @@ msgstr ""
 "Reikniritið var birt í 3. útgáfu <em>Explanatory Supplement to the "
 "Astronomical Almanac</em> (2013)."
 
-#: src/gui/ViewDialog.cpp:1276
+#: src/gui/ViewDialog.cpp:1277
 msgid ""
 "The algorithm was published by A. Mallama & J. L. Hilton: <em>Computing "
 "apparent planetary magnitudes for the Astronomical Almanac.</em> "
 "Astronomy&Computing 25 (2018) 10-24."
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1279
+#: src/gui/ViewDialog.cpp:1280
 msgid "Visual magnitude based on phase angle and albedo."
 msgstr "Sýndarbirtustig byggt á afstöðuhorni og endurskinshlutfalli."
 
@@ -5943,7 +5945,7 @@ msgstr ""
 #: src/gui/ScriptConsole.cpp:86
 msgctxt "command"
 msgid "remove screen text"
-msgstr ""
+msgstr "fjarlæga skjátexta"
 
 #: src/gui/ScriptConsole.cpp:87
 msgctxt "command"
@@ -5953,7 +5955,7 @@ msgstr ""
 #: src/gui/ScriptConsole.cpp:88
 msgctxt "command"
 msgid "remove screen markers"
-msgstr ""
+msgstr "fjarlæga skjámerkingar"
 
 #: src/gui/ScriptConsole.cpp:89
 msgctxt "command"
@@ -6213,7 +6215,7 @@ msgstr "Vista graf"
 
 #: src/gui/AstroCalcDialog.cpp:802
 msgid "Please select object to plot its graph 'Azimuth vs. Time'."
-msgstr "Veldu einhvern hlut til að teikna graf fyrir 'Stefnuhorn vs. Tími'."
+msgstr "Veldu einhvern hlut til að teikna graf fyrir 'Áttarhorn gegn tíma'."
 
 #. TRANSLATORS: name of object
 #: src/gui/AstroCalcDialog.cpp:833 src/gui/AstroCalcDialog.cpp:929
@@ -6268,7 +6270,7 @@ msgstr "T-bil"
 #: src/gui/AstroCalcDialog.cpp:877
 msgctxt "days"
 msgid "d"
-msgstr "dag"
+msgstr "d"
 
 #. TRANSLATORS: distance, AU
 #: src/gui/AstroCalcDialog.cpp:882 src/gui/AstroCalcDialog.cpp:1759
@@ -6438,13 +6440,13 @@ msgstr ""
 #: src/gui/AstroCalcDialog.cpp:2340
 msgctxt "column name"
 msgid "Penumbral eclipse magnitude"
-msgstr ""
+msgstr "Birtustig hálfskuggamyrkva"
 
 #. TRANSLATORS: The name of column in AstroCalc/Eclipses tool
 #: src/gui/AstroCalcDialog.cpp:2342
 msgctxt "column name"
 msgid "Umbral eclipse magnitude"
-msgstr ""
+msgstr "Birtustig almyrkva"
 
 #. TRANSLATORS: Visibility conditions; the name of column in
 #. AstroCalc/Eclipses tool
@@ -6476,19 +6478,19 @@ msgstr "Fjarlægð áss"
 #: src/gui/AstroCalcDialog.cpp:3792 src/gui/AstroCalcDialog.cpp:3821
 msgctxt "eclipse type"
 msgid "Total"
-msgstr "Alls"
+msgstr "Almyrkvi"
 
 #: src/gui/AstroCalcDialog.cpp:2581 src/gui/AstroCalcDialog.cpp:3193
 #: src/gui/AstroCalcDialog.cpp:3550 src/gui/AstroCalcDialog.cpp:3781
 #: src/gui/AstroCalcDialog.cpp:3800
 msgctxt "eclipse type"
 msgid "Partial"
-msgstr "Að hluta"
+msgstr "Deildarmyrkvi"
 
 #: src/gui/AstroCalcDialog.cpp:2583
 msgctxt "eclipse type"
 msgid "Penumbral"
-msgstr ""
+msgstr "Hálfskuggamyrkvi"
 
 #: src/gui/AstroCalcDialog.cpp:2591
 msgctxt "visibility conditions"
@@ -6497,25 +6499,25 @@ msgstr "Fullkomið"
 
 #: src/gui/AstroCalcDialog.cpp:2592
 msgid "Perfect visibility conditions for current location"
-msgstr ""
+msgstr "Fullkomið skyggni fyrir núverandi staðsetningu"
 
 #: src/gui/AstroCalcDialog.cpp:2596
 msgctxt "visibility conditions"
 msgid "Good"
-msgstr "Góðar"
+msgstr "Gott"
 
 #: src/gui/AstroCalcDialog.cpp:2597
 msgid "Good visibility conditions for current location"
-msgstr ""
+msgstr "Gott skyggni fyrir núverandi staðsetningu"
 
 #: src/gui/AstroCalcDialog.cpp:2601
 msgctxt "visibility conditions"
 msgid "Bad"
-msgstr "Lélegar"
+msgstr "Lélegt"
 
 #: src/gui/AstroCalcDialog.cpp:2602
 msgid "Bad visibility conditions for current location"
-msgstr ""
+msgstr "Lélegt skyggni fyrir núverandi staðsetningu"
 
 #. TRANSLATORS: Not obs. = Not observable
 #: src/gui/AstroCalcDialog.cpp:2610
@@ -6534,7 +6536,7 @@ msgstr "Ósýnilegt"
 
 #: src/gui/AstroCalcDialog.cpp:2617
 msgid "The greatest eclipse is invisible in current location"
-msgstr ""
+msgstr "Hámark myrkvans er ósýnilegt frá núverandi staðsetningu"
 
 #: src/gui/AstroCalcDialog.cpp:2653 src/gui/AstroCalcDialog.cpp:3278
 msgid ""
@@ -6564,7 +6566,7 @@ msgstr "Tunglið kemur inn í alskugga"
 
 #: src/gui/AstroCalcDialog.cpp:2807
 msgid "Total eclipse begins"
-msgstr "Almyrkvi byrjar"
+msgstr "Almyrkvi hefst"
 
 #: src/gui/AstroCalcDialog.cpp:2808
 msgid "Maximum eclipse"
@@ -6660,24 +6662,24 @@ msgstr "Breidd ferils"
 #: src/gui/AstroCalcDialog.cpp:2922 src/gui/AstroCalcDialog.cpp:2940
 msgctxt "column name"
 msgid "Central Duration"
-msgstr ""
+msgstr "Tímalengd hámarks"
 
 #: src/gui/AstroCalcDialog.cpp:3190 src/gui/AstroCalcDialog.cpp:3204
 #: src/gui/AstroCalcDialog.cpp:3214 src/gui/AstroCalcDialog.cpp:3546
 #: src/gui/AstroCalcDialog.cpp:3796 src/gui/AstroCalcDialog.cpp:3823
 msgctxt "eclipse type"
 msgid "Annular"
-msgstr ""
+msgstr "Hringmyrkvi"
 
 #: src/gui/AstroCalcDialog.cpp:3210
 msgctxt "eclipse type"
 msgid "Hybrid"
-msgstr ""
+msgstr "Blendingsmyrkvi"
 
 #: src/gui/AstroCalcDialog.cpp:3282
 msgid ""
 "Eclipse magnitude is the fraction of the Sun's diameter obscured by the Moon"
-msgstr ""
+msgstr "Myrkvastig er það brot af þvermáli Sólar sem Tunglið skyggir á"
 
 #: src/gui/AstroCalcDialog.cpp:3289
 msgid "Sun's altitude at greatest eclipse"
@@ -6685,11 +6687,11 @@ msgstr "Hæð sólar við mesta myrkva"
 
 #: src/gui/AstroCalcDialog.cpp:3292
 msgid "Width of the path of totality or annularity at greatest eclipse"
-msgstr ""
+msgstr "Breidd ferils almyrkvunar eða hringmyrkvunar við mesta myrkva"
 
 #: src/gui/AstroCalcDialog.cpp:3295
 msgid "Duration of total or annular phase at greatest eclipse"
-msgstr ""
+msgstr "Tímalengd almyrkva eða hringmyrkvunarstig við mesta myrkva"
 
 #: src/gui/AstroCalcDialog.cpp:3324 src/gui/AstroCalcChart.cpp:378
 #: src/gui/ObsListDialog.cpp:296 src/ui_obsListDialog.h:420
@@ -6700,13 +6702,13 @@ msgstr "Dagsetning"
 #: src/gui/AstroCalcDialog.cpp:3327
 msgctxt "column name"
 msgid "Partial Eclipse Begins"
-msgstr "Deildarmyrkvi byrjar"
+msgstr "Deildarmyrkvi hefst"
 
 #. TRANSLATORS: The name of column in AstroCalc/Eclipses tool
 #: src/gui/AstroCalcDialog.cpp:3329
 msgctxt "column name"
 msgid "Central Eclipse Begins"
-msgstr ""
+msgstr "Miðlínumyrkvi hefst"
 
 #. TRANSLATORS: The name of column in AstroCalc/Eclipses tool
 #: src/gui/AstroCalcDialog.cpp:3331
@@ -6718,7 +6720,7 @@ msgstr "Hámark myrkva"
 #: src/gui/AstroCalcDialog.cpp:3335
 msgctxt "column name"
 msgid "Central Eclipse Ends"
-msgstr ""
+msgstr "Miðlínumyrkva lýkur"
 
 #. TRANSLATORS: The name of column in AstroCalc/Eclipses tool
 #: src/gui/AstroCalcDialog.cpp:3337
@@ -6735,35 +6737,35 @@ msgstr "Tímalengd"
 
 #: src/gui/AstroCalcDialog.cpp:3577
 msgid "The time of first contact"
-msgstr ""
+msgstr "Tími fyrstu snertingar"
 
 #: src/gui/AstroCalcDialog.cpp:3583
 msgid "The time of second contact"
-msgstr ""
+msgstr "Tími annar snertingar"
 
 #: src/gui/AstroCalcDialog.cpp:3585
 msgid "The time of greatest eclipse"
-msgstr ""
+msgstr "Tími mesta myrkva"
 
 #: src/gui/AstroCalcDialog.cpp:3591
 msgid "The time of third contact"
-msgstr ""
+msgstr "Tími þriðju snertingar"
 
 #: src/gui/AstroCalcDialog.cpp:3595
 msgid "The time of fourth contact"
-msgstr ""
+msgstr "Tími fjórðu snertingar"
 
 #: src/gui/AstroCalcDialog.cpp:3600
 msgid "Duration of total or annular eclipse"
-msgstr ""
+msgstr "Tímalengd almyrkva eða hringmyrkva"
 
 #: src/gui/AstroCalcDialog.cpp:3746
 msgid "Eclipse begins; first contact with Earth"
-msgstr ""
+msgstr "Myrkvi hefst; fyrsta snerting við Jörð"
 
 #: src/gui/AstroCalcDialog.cpp:3750
 msgid "Beginning of center line; central eclipse begins"
-msgstr ""
+msgstr "Byrjun af miðlínu; miðlínumyrkvi hefst"
 
 #: src/gui/AstroCalcDialog.cpp:3754 src/gui/AstroCalcDialog.cpp:4160
 msgid "Greatest eclipse"
@@ -6771,11 +6773,11 @@ msgstr "Mesti myrkvi"
 
 #: src/gui/AstroCalcDialog.cpp:3758
 msgid "End of center line; central eclipse ends"
-msgstr ""
+msgstr "Endir af miðlínu; miðlínumyrkva lýkur"
 
 #: src/gui/AstroCalcDialog.cpp:3762
 msgid "Eclipse ends; last contact with Earth"
-msgstr ""
+msgstr "Myrkva lýkur; síðasta snerting við Jörð"
 
 #: src/gui/AstroCalcDialog.cpp:3770
 msgid "Geographic latitude of contact point"
@@ -6838,47 +6840,47 @@ msgstr "Búið til með Stellarium"
 
 #: src/gui/AstroCalcDialog.cpp:4168
 msgid "First contact with Earth"
-msgstr ""
+msgstr "Fyrsta snerting við Jörð"
 
 #: src/gui/AstroCalcDialog.cpp:4176
 msgid "Last contact with Earth"
-msgstr ""
+msgstr "Síðasta snerting við Jörð"
 
 #: src/gui/AstroCalcDialog.cpp:4385
 msgid "Central eclipse begins"
-msgstr ""
+msgstr "Miðlínumyrkvi hefst"
 
 #: src/gui/AstroCalcDialog.cpp:4410
 msgid "Central eclipse ends"
-msgstr ""
+msgstr "Miðlínumyrkva lýkur"
 
 #: src/gui/AstroCalcDialog.cpp:4860
 msgctxt "column name"
 msgid "Date of mid-transit"
-msgstr ""
+msgstr "Dagsetning miðþvergöngu"
 
 #. TRANSLATORS: The name of column in AstroCalc/Eclipses/Transits tool
 #: src/gui/AstroCalcDialog.cpp:4862
 msgid "Planet"
-msgstr "Pláneta"
+msgstr "Reikisstjarna"
 
 #. TRANSLATORS: The name of column in AstroCalc/Eclipses/Transits tool
 #: src/gui/AstroCalcDialog.cpp:4864
 msgctxt "column name"
 msgid "Exterior Ingress"
-msgstr ""
+msgstr "Ytri innleið"
 
 #. TRANSLATORS: The name of column in AstroCalc/Eclipses/Transits tool
 #: src/gui/AstroCalcDialog.cpp:4866
 msgctxt "column name"
 msgid "Interior Ingress"
-msgstr ""
+msgstr "Innri innleið"
 
 #. TRANSLATORS: The name of column in AstroCalc/Eclipses/Transits tool
 #: src/gui/AstroCalcDialog.cpp:4868
 msgctxt "column name"
 msgid "Mid-transit"
-msgstr ""
+msgstr "Miðþverganga"
 
 #. TRANSLATORS: The name of column in AstroCalc/Eclipses/Transits tool
 #: src/gui/AstroCalcDialog.cpp:4870
@@ -6890,19 +6892,19 @@ msgstr "Hornbil"
 #: src/gui/AstroCalcDialog.cpp:4872
 msgctxt "column name"
 msgid "Interior Egress"
-msgstr ""
+msgstr "Innri útleið"
 
 #. TRANSLATORS: The name of column in AstroCalc/Eclipses/Transits tool
 #: src/gui/AstroCalcDialog.cpp:4874
 msgctxt "column name"
 msgid "Exterior Egress"
-msgstr ""
+msgstr "Ytri útleið"
 
 #. TRANSLATORS: The name of column in AstroCalc/Eclipses/Transits tool
 #: src/gui/AstroCalcDialog.cpp:4878
 msgctxt "column name"
 msgid "Observable Duration"
-msgstr ""
+msgstr "Tímalengd skoðanleika"
 
 #: src/gui/AstroCalcDialog.cpp:5091
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1470
@@ -6919,6 +6921,8 @@ msgid ""
 "The time of first contact, the instant when the planet's disk is externally "
 "tangent to the Sun (transit begins)"
 msgstr ""
+"Tími fyrstu snertingar, augnablikið sem útlínur stjarnanna virðist snertast "
+"(þverganga hefst)"
 
 #: src/gui/AstroCalcDialog.cpp:5332
 msgid ""
@@ -6948,7 +6952,7 @@ msgstr ""
 
 #: src/gui/AstroCalcDialog.cpp:5411
 msgid "Total duration of transit"
-msgstr "Heildar tímalengd þvergöngu"
+msgstr "Heildartímalengd þvergöngu"
 
 #: src/gui/AstroCalcDialog.cpp:5462
 msgid "Observable duration of transit"
@@ -7195,44 +7199,44 @@ msgstr "Sednustirni"
 #: src/gui/AstroCalcDialog.cpp:5841
 #, qt-format
 msgid "Bright stars (<%1 mag)"
-msgstr "Bjartar stjörnur (birtustig <%1)"
+msgstr "Bjartar stjörnur (<1% birta)"
 
 #: src/gui/AstroCalcDialog.cpp:5842
 #, qt-format
 msgid "Bright double stars (<%1 mag)"
-msgstr "Björt tvístirni (<%1 mag)"
+msgstr "Björt tvístirni (<1% birta)"
 
 #: src/gui/AstroCalcDialog.cpp:5843
 #, qt-format
 msgid "Bright variable stars (<%1 mag)"
-msgstr "Bjartar breytistjörnur (<%1 mag)"
+msgstr "Bjartar breytistjörnur (<1% birta)"
 
 #: src/gui/AstroCalcDialog.cpp:5844
 #, qt-format
 msgid "Bright star clusters (<%1 mag)"
-msgstr "Bjartar stjörnuþyrpingar (birtustig <%1)"
+msgstr "Bjartar stjörnuþyrpingar (<1% birta)"
 
 #: src/gui/AstroCalcDialog.cpp:5844
 #, qt-format
 msgid "Planetary nebulae (<%1 mag)"
-msgstr ""
+msgstr "Hringþoka (<1% birta)"
 
 #: src/gui/AstroCalcDialog.cpp:5845
 #, qt-format
 msgid "Bright nebulae (<%1 mag)"
-msgstr "Bjartar geimþokur (birtustig <%1)"
+msgstr "Skær stjörnuþoka (<1% birta)"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:5845 src/gui/AstroCalcDialog.cpp:8114
 #: src/translations.h:289 src/ui_viewDialog.h:3730
 #: src/ui_dsoColorsDialog.h:603
 msgid "Dark nebulae"
-msgstr "Gleypiþokur"
+msgstr "Gleypiþoka"
 
 #: src/gui/AstroCalcDialog.cpp:5846
 #, qt-format
 msgid "Bright galaxies (<%1 mag)"
-msgstr "Bjartar vetrarbrautir (birtustig <%1)"
+msgstr "Bjartar vetrarbrautir (birta <%1)"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:5846 src/gui/AstroCalcDialog.cpp:8129
@@ -7273,13 +7277,13 @@ msgstr ""
 #: src/gui/AstroCalcDialog.cpp:5851 src/gui/AstroCalcDialog.cpp:8147
 #: src/translations.h:426
 msgid "Bright carbon stars"
-msgstr ""
+msgstr "Skærar kolefnisstjörnur"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:5851 src/gui/AstroCalcDialog.cpp:8148
 #: src/translations.h:428
 msgid "Bright barium stars"
-msgstr ""
+msgstr "Skærar barínstjörnur"
 
 #: src/gui/AstroCalcDialog.cpp:5852
 msgid "Sun, planets and moons of first body and observer's planet"
@@ -7291,33 +7295,33 @@ msgstr "Veldu einhvern hlut til að teikna graf fyrir 'Hæð vs. Tími'."
 
 #: src/gui/AstroCalcDialog.cpp:6258 src/gui/AstroCalcDialog.cpp:6272
 msgid "Magnitude vs. Time"
-msgstr "Birtustig vs. Tími"
+msgstr "Birtustig gegn tíma"
 
 #: src/gui/AstroCalcDialog.cpp:6259 src/gui/AstroCalcDialog.cpp:6273
 msgid "Phase vs. Time"
-msgstr "Birtustaða vs. Tími"
+msgstr "Birtustaða gegn tíma"
 
 #: src/gui/AstroCalcDialog.cpp:6260 src/gui/AstroCalcDialog.cpp:6274
 msgid "Distance vs. Time"
-msgstr "Fjarlægð vs. tími"
+msgstr "Fjarlægð gegn tíma"
 
 #: src/gui/AstroCalcDialog.cpp:6261 src/gui/AstroCalcDialog.cpp:6275
 msgid "Elongation vs. Time"
-msgstr "Álengd vs. Tími"
+msgstr "Álengd gegn tíma"
 
 #: src/gui/AstroCalcDialog.cpp:6262 src/gui/AstroCalcDialog.cpp:6276
 msgid "Angular size vs. Time"
-msgstr "Hornstærð vs. Tími"
+msgstr "Hornstærð gegn tíma"
 
 #: src/gui/AstroCalcDialog.cpp:6263 src/gui/AstroCalcDialog.cpp:6277
 msgid "Phase angle vs. Time"
-msgstr "Afstöðuhorn vs. Tími"
+msgstr "Afstöðuhorn gegn tíma"
 
 #. TRANSLATORS: The phrase "Heliocentric distance" may be long in some
 #. languages and you can short it to use in the drop-down list.
 #: src/gui/AstroCalcDialog.cpp:6265 src/gui/AstroCalcDialog.cpp:6279
 msgid "Heliocentric distance vs. Time"
-msgstr ""
+msgstr "Sólmiðjufirð gegn tíma"
 
 #. TRANSLATORS: The phrase "Transit altitude" may be long in some languages
 #. and you can short it to use in the drop-down list.
@@ -7423,7 +7427,7 @@ msgstr "Samstaða"
 
 #: src/gui/AstroCalcDialog.cpp:6894
 msgid "Shadow transit"
-msgstr ""
+msgstr "Skuggaþverganga"
 
 #: src/gui/AstroCalcDialog.cpp:6897 src/gui/AstroCalcDialog.cpp:6904
 #: src/gui/AstroCalcDialog.cpp:6960 src/gui/AstroCalcDialog.cpp:6966
@@ -7442,11 +7446,11 @@ msgstr "Mesta álengd í vestur"
 
 #: src/gui/AstroCalcDialog.cpp:6923
 msgid "Eastern quadrature"
-msgstr ""
+msgstr "Austlæg þverstaða"
 
 #: src/gui/AstroCalcDialog.cpp:6926
 msgid "Western quadrature"
-msgstr ""
+msgstr "Vestlæg þverstaða"
 
 #. TRANSLATORS: The planet are stand still in the equatorial coordinates
 #: src/gui/AstroCalcDialog.cpp:6933
@@ -7460,11 +7464,11 @@ msgstr ""
 
 #: src/gui/AstroCalcDialog.cpp:6944
 msgid "Perihelion"
-msgstr ""
+msgstr "Sólnánd"
 
 #: src/gui/AstroCalcDialog.cpp:6946
 msgid "Aphelion"
-msgstr ""
+msgstr "Sólfirð"
 
 #: src/gui/AstroCalcDialog.cpp:6953 src/gui/AstroCalcDialog.cpp:7160
 msgctxt "passage of a celestial body in front of another"
@@ -7479,12 +7483,12 @@ msgstr "Stjörnumyrkvi"
 #: src/gui/AstroCalcDialog.cpp:6976 src/gui/AstroCalcDialog.cpp:6978
 #: src/gui/AstroCalcDialog.cpp:7186 src/gui/AstroCalcDialog.cpp:7188
 msgid "Superior conjunction"
-msgstr ""
+msgstr "Ytri samstaða"
 
 #: src/gui/AstroCalcDialog.cpp:6976 src/gui/AstroCalcDialog.cpp:6978
 #: src/gui/AstroCalcDialog.cpp:7186 src/gui/AstroCalcDialog.cpp:7188
 msgid "Inferior conjunction"
-msgstr ""
+msgstr "Innri samstaða"
 
 #: src/gui/AstroCalcDialog.cpp:7015
 msgid "Angular distance from the Sun for second object"
@@ -7533,7 +7537,7 @@ msgstr "Hvenær sem er um nótt"
 
 #: src/gui/AstroCalcDialog.cpp:8112
 msgid "Bright stars"
-msgstr "Bjartar stjörnur"
+msgstr "Skærar stjörnur"
 
 #: src/gui/AstroCalcDialog.cpp:8113 src/ui_viewDialog.h:3729
 msgid "Bright nebulae"
@@ -7559,7 +7563,7 @@ msgstr "Hringþokur"
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:8126 src/translations.h:416
 msgid "Bright double stars"
-msgstr "Björt tvístirni"
+msgstr "Skær tvístirni"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:8127 src/translations.h:418
@@ -7645,7 +7649,7 @@ msgstr ""
 
 #: src/gui/AstroCalcDialog.cpp:8150
 msgid "Bright nova stars"
-msgstr ""
+msgstr "Skær nýstirni"
 
 #: src/gui/AstroCalcDialog.cpp:8152
 msgid "Bright supernova stars"
@@ -7782,7 +7786,7 @@ msgstr "Hornstærð"
 
 #: src/gui/AstroCalcChart.cpp:94 src/gui/AstroCalcChart.cpp:104
 msgid "Heliocentric Distance"
-msgstr ""
+msgstr "Sólmiðjufirð"
 
 #: src/gui/AstroCalcChart.cpp:98 src/gui/AstroCalcChart.cpp:108
 msgid "Right Ascension"
@@ -7823,7 +7827,7 @@ msgstr "Mm"
 
 #: src/gui/AstroCalcChart.cpp:432 src/gui/AstroCalcChart.cpp:458
 msgid "Heliocentric distance"
-msgstr ""
+msgstr "Sólmiðjufirð"
 
 #: src/gui/AstroCalcChart.cpp:445 src/gui/AstroCalcChart.cpp:471
 msgid "Culmination altitude"
@@ -8768,7 +8772,7 @@ msgstr "Rafaldsvetrarbrautir"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:303
 msgid "Bright quasars"
-msgstr "Bjartir kvasar"
+msgstr "Skær dulstirni"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:305 src/ui_dsoColorsDialog.h:517
@@ -12749,16 +12753,16 @@ msgstr "Línubreidd fyrir hnitanet og línur"
 
 #: src/ui_viewDialog.h:3880
 msgid "Thickness: "
-msgstr ""
+msgstr "Sverleiki:"
 
 #: src/ui_viewDialog.h:3881
 msgid "lines"
-msgstr ""
+msgstr "línur"
 
 #: src/ui_viewDialog.h:3883 src/ui_viewDialog.h:4318 src/ui_viewDialog.h:4341
 #: src/ui_viewDialog.h:4354 src/ui_viewDialog.h:4357 src/ui_viewDialog.h:4375
 msgid "Thickness of line in pixels"
-msgstr "Breidd línu í mynddílum"
+msgstr "Þykkt línu í mynddílum"
 
 #: src/ui_viewDialog.h:3886
 msgid "The line thickness for circle partitions"
@@ -12786,11 +12790,11 @@ msgstr "Litur útþyrpingarmiðbaugs"
 
 #: src/ui_viewDialog.h:3912
 msgid "Show marker of center for field of view (FOV)"
-msgstr ""
+msgstr "Sýna miðjumerkingu sjónsviðs"
 
 #: src/ui_viewDialog.h:3914
 msgid "Center of FOV"
-msgstr ""
+msgstr "Miðja sjónsviðs"
 
 #: src/ui_viewDialog.h:3916
 msgid "Show mathematical horizon line."
@@ -12843,11 +12847,11 @@ msgstr "Birta miðbaug útþyrpingarhnita (supergalactic) de Vaucouleurs (1976).
 
 #: src/ui_viewDialog.h:3982
 msgid "Color of the solstice points (J2000.0)"
-msgstr "Litur sólstöðupunkta"
+msgstr "Litur sólstöðupunkta (J2000.0)"
 
 #: src/ui_viewDialog.h:3991
 msgid "Color of altitude line"
-msgstr ""
+msgstr "Litur hæðarlínu"
 
 #: src/ui_viewDialog.h:3995
 msgid ""
@@ -12878,7 +12882,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:4012
 msgid "Invariable plane of the Solar system"
-msgstr ""
+msgstr "Fastaslétta sólkerfisins"
 
 #: src/ui_viewDialog.h:4022
 msgid "Color of the equatorial grid (of date)"
@@ -12890,7 +12894,7 @@ msgstr "Litur miðbaugs (m.v. dagsetningu)"
 
 #: src/ui_viewDialog.h:4032
 msgid "Color of antisolar point"
-msgstr ""
+msgstr "Litur mótsólarpunkts"
 
 #: src/ui_viewDialog.h:4040
 msgid "Color of colures"
@@ -12902,11 +12906,11 @@ msgstr "Litur jafndægrapunkta (m.v. dagsetningu)"
 
 #: src/ui_viewDialog.h:4050
 msgid "Color of Apex and Antapex points"
-msgstr ""
+msgstr "Litir sóknar- og flóttapunkta"
 
 #: src/ui_viewDialog.h:4053
 msgid "Color of the quadrature circle"
-msgstr ""
+msgstr "Litur þverstöðuhrings"
 
 #: src/ui_viewDialog.h:4056
 msgid "Color of Zenith and Nadir"
@@ -12942,43 +12946,43 @@ msgstr "Litur lengdarbaugs gagnstöðu/samstöðu"
 
 #: src/ui_viewDialog.h:4085
 msgid "Width of rectangle, in degrees"
-msgstr ""
+msgstr "Breidd ferhyrnings, í gráðum"
 
 #: src/ui_viewDialog.h:4088
 msgid "Field of view in degrees"
-msgstr ""
+msgstr "Sjónsvið í gráðum"
 
 #: src/ui_viewDialog.h:4091
 msgid "Show circular marker of field of view (FOV)"
-msgstr ""
+msgstr "Sýna hringlaga merkingu sjónsviðs"
 
 #: src/ui_viewDialog.h:4093
 msgid "Circular FOV"
-msgstr ""
+msgstr "Hringlaga sjónsvið"
 
 #: src/ui_viewDialog.h:4095
 msgid "Rotation angle of rectangle, in degrees"
-msgstr ""
+msgstr "Snúningshorn ferhyrnings, í gráðum"
 
 #: src/ui_viewDialog.h:4098
 msgid "Height of rectangle, in degrees"
-msgstr ""
+msgstr "Hæð ferhyrnings, í gráðum"
 
 #: src/ui_viewDialog.h:4101
 msgid "Show rectangular marker of field of view (FOV)"
-msgstr ""
+msgstr "Sýna ferhyrnta merkingu sjónsviðs"
 
 #: src/ui_viewDialog.h:4103
 msgid "Rectangular FOV"
-msgstr ""
+msgstr "Ferhyrnt sjónsvið"
 
 #: src/ui_viewDialog.h:4105
 msgid "Color of circular marker of FOV"
-msgstr ""
+msgstr "Litur hringlaga merkingar sjónsviðs"
 
 #: src/ui_viewDialog.h:4108
 msgid "Color of rectangular marker of FOV"
-msgstr ""
+msgstr "Litur ferhyrndar merkingar sjónsviðs"
 
 #: src/ui_viewDialog.h:4115
 msgid "Color of the equatorial grid (J2000.0)"
@@ -12986,7 +12990,7 @@ msgstr "Litur miðbaugshnita (J2000.0)"
 
 #: src/ui_viewDialog.h:4118
 msgid "Color of the invariable plane of the Solar system"
-msgstr ""
+msgstr "Litur fastasléttu sólkerfisins"
 
 #: src/ui_viewDialog.h:4126
 msgid "Color of the solstice points (of date)"
@@ -13065,11 +13069,11 @@ msgstr "Litur sólbaugshnita (J2000.0)"
 
 #: src/ui_viewDialog.h:4197
 msgid "A circle 90° from the Sun marking quadrature"
-msgstr ""
+msgstr "Hringur 90° frá sólinni markandi þverstöðu"
 
 #: src/ui_viewDialog.h:4199
 msgid "Quadrature circle"
-msgstr ""
+msgstr "Ferningsfasalyklun"
 
 #: src/ui_viewDialog.h:4205
 msgid "Equatorial coordinates of J2000.0."
@@ -14543,7 +14547,7 @@ msgstr "Sýna merki fyrir staðsetningar núverandi hnattar á himninum"
 
 #: src/ui_astroCalcDialog.h:2177
 msgid "markers"
-msgstr ""
+msgstr "merkingar"
 
 #: src/ui_astroCalcDialog.h:2179
 msgid "Show dates of positions of current celestial body near markers"
@@ -14722,7 +14726,7 @@ msgstr ""
 
 #: src/ui_astroCalcDialog.h:2278
 msgid "elongations and quadratures"
-msgstr ""
+msgstr "álengd og þverstaða"
 
 #: src/ui_astroCalcDialog.h:2279
 msgid "Also the graph for the Sun"
@@ -14774,7 +14778,7 @@ msgstr ""
 #: src/ui_astroCalcDialog.h:2312
 msgctxt "duration"
 msgid "months"
-msgstr ""
+msgstr "mánuðir"
 
 #: src/ui_astroCalcDialog.h:2313
 msgid "Step:"
@@ -15172,7 +15176,7 @@ msgstr "Mögulegir kvasar"
 
 #: src/ui_dsoColorsDialog.h:501
 msgid "Color of markers of stars"
-msgstr "Litur merkja fyrir stjörnur"
+msgstr "Merkingarlitur fyrir stjörnur"
 
 #: src/ui_dsoColorsDialog.h:504
 msgid "Possible planetary nebulae"
@@ -15188,7 +15192,7 @@ msgstr "Litur merkja fyrir ljómlínustjörnur"
 
 #: src/ui_dsoColorsDialog.h:515
 msgid "Color of markers of blazars"
-msgstr "Litur merkja fyrir blasa"
+msgstr "Merkingarlitur fyrir blasa"
 
 #: src/ui_dsoColorsDialog.h:520
 msgid "Color of markers of interacting galaxies"
@@ -15216,7 +15220,7 @@ msgstr "Litur merkja fyrir miðgeimsefni"
 
 #: src/ui_dsoColorsDialog.h:541
 msgid "Color of markers of galaxies"
-msgstr "Litur merkja fyrir vetrarbrautir"
+msgstr "Merkingarlitur fyrir vetrarbrautir"
 
 #: src/ui_dsoColorsDialog.h:545
 msgid "Color of markers of stellar associations"
@@ -15260,7 +15264,7 @@ msgstr "Ungstirni"
 
 #: src/ui_dsoColorsDialog.h:582
 msgid "Color of markers of nebulae"
-msgstr "Litur merkja fyrir stjörnuþokur"
+msgstr "Merkingarlitur fyrir stjörnuþokur"
 
 #: src/ui_dsoColorsDialog.h:586
 msgid "Color of markers of planetary nebulae"
@@ -15276,7 +15280,7 @@ msgstr "Litur merkja fyrir mögulega kvasa"
 
 #: src/ui_dsoColorsDialog.h:596 plugins/Quasars/src/ui_quasarsDialog.h:272
 msgid "Color of markers of quasars"
-msgstr "Litur merkja fyrir kvasa"
+msgstr "Merkingarlitur fyrir dulstirni"
 
 #: src/ui_dsoColorsDialog.h:599
 msgid "Color of markers of reflection nebulae"
@@ -15720,7 +15724,7 @@ msgstr "μcd/m²"
 
 #: src/ui_lightPollutionWidget.h:111
 msgid "mag/arcsec²"
-msgstr ""
+msgstr "birta/bogasek²"
 
 #: src/ui_configureScreenshotsDialog.h:85
 msgid "Screenshots naming"
@@ -18303,23 +18307,23 @@ msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:837
 msgid "Phase-shift Keying"
-msgstr ""
+msgstr "Fasalyklun"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:838
 msgid "Binary Phase-shift Keying"
-msgstr ""
+msgstr "Tvífasalyklun"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:839
 msgid "Quadrature Phase-shift Keying"
-msgstr ""
+msgstr "Ferningsfasalyklun"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:840
 msgid "Offset Quadrature Phase-shift Keying"
-msgstr ""
+msgstr "Hliðruð ferningsfasalyklun"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:841
 msgid "Differential Phase-shift Keying"
-msgstr ""
+msgstr "Mismunarfasalyklun"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:842
 msgid "Binary Offset Carrier"
@@ -19379,7 +19383,7 @@ msgstr "Ekkert tæki valið"
 
 #: plugins/TelescopeControl/src/ASCOM/TelescopeClientASCOMWidget.cpp:44
 msgid "Source for coordinate system:"
-msgstr ""
+msgstr "Uppspretta fyrir hnitakerfi:"
 
 #: plugins/TelescopeControl/src/ASCOM/TelescopeClientASCOMWidget.cpp:45
 msgid ""
@@ -20373,7 +20377,7 @@ msgstr "&Miða"
 
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:334
 msgid "Sync"
-msgstr ""
+msgstr "Samstilla"
 
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:335
 msgid "Abort slew"
@@ -21795,11 +21799,11 @@ msgstr "Birta hnapp fyrir kvasa á verkfæraslá"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:269
 msgid "Use markers for quasars"
-msgstr ""
+msgstr "Nota merkingar fyrir dulstirni"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:270
 msgid "Quasars marker color"
-msgstr ""
+msgstr "Merkingarlitur dulstirna"
 
 #: plugins/Pulsars/src/Pulsars.cpp:74
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:136
@@ -22009,11 +22013,11 @@ msgstr "Birta hnapp fyrir tifstjörnur á verkfæraslá"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:305
 msgid "Pulsars marker color"
-msgstr ""
+msgstr "Merkingarlitur tifstjarna"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:307
 msgid "Marker Color for pulsars"
-msgstr ""
+msgstr "Merkingarlitur fyrir tifstjörnur"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:309
 msgid "Use separate color for pulsars with glitches"
@@ -22524,11 +22528,11 @@ msgstr "Hornbil"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:368
 msgid "Discovery year"
-msgstr ""
+msgstr "Uppgötvunarár"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:369
 msgid "Detection method"
-msgstr ""
+msgstr "Greiningaraðferð"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:370
 msgid "Planetary class"
@@ -22607,7 +22611,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:250
 msgid "Detection method of exoplanet"
-msgstr ""
+msgstr "Geiningaraðferð fjarreikistjörnu"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:276
 msgid "Exoplanets Plug-in"
@@ -24657,7 +24661,7 @@ msgstr "Birta hnapp fyrir fjarreikistjörnur á verkfæraslá"
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:552
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:554
 msgid "Exoplanets marker color"
-msgstr ""
+msgstr "Merkingarlitur fjarreikistjarna"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:556
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:558

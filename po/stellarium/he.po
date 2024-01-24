@@ -10,16 +10,16 @@
 # cardinot <mcardinot@gmail.com>, 2022
 # אלעזר ז. <ezalo05484@gmail.com>, 2022
 # יוסי מלמן <8140hp@gmail.com>, 2023
-# חיים שלמה רוזנבך, 2023
+# חיים שלמה רוזנבך, 2024
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2023-12-13 11:04+0700\n"
+"POT-Creation-Date: 2024-01-01 16:59+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
-"Last-Translator: חיים שלמה רוזנבך, 2023\n"
+"Last-Translator: חיים שלמה רוזנבך, 2024\n"
 "Language-Team: Hebrew (https://app.transifex.com/stellarium/teams/80998/he/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -31,8 +31,8 @@ msgstr ""
 #: src/core/modules/CustomObject.cpp:81 src/core/modules/Asterism.cpp:194
 #: src/core/modules/Constellation.cpp:290
 #: src/core/modules/NomenclatureItem.cpp:232 src/core/modules/Nebula.cpp:249
-#: src/core/modules/Nebula.cpp:251 src/core/modules/Planet.cpp:592
-#: src/core/modules/Planet.cpp:595 src/core/modules/StarWrapper.cpp:49
+#: src/core/modules/Nebula.cpp:251 src/core/modules/Planet.cpp:595
+#: src/core/modules/Planet.cpp:598 src/core/modules/StarWrapper.cpp:49
 #: src/core/modules/StarWrapper.cpp:270 src/core/modules/StarWrapper.cpp:272
 #: src/gui/AstroCalcDialog.cpp:901 src/gui/AstroCalcDialog.cpp:2337
 #: src/gui/AstroCalcDialog.cpp:2909 src/gui/AstroCalcDialog.cpp:2941
@@ -74,7 +74,7 @@ msgstr "אסטריזם"
 #: src/core/modules/NebulaMgr.cpp:359 src/core/modules/SolarSystem.cpp:307
 #: src/core/modules/MilkyWay.cpp:107 src/core/modules/ZodiacalLight.cpp:112
 #: src/core/modules/ToastMgr.cpp:62 src/core/modules/HipsMgr.cpp:156
-#: src/core/StelApp.cpp:661 src/core/StelCore.cpp:296
+#: src/core/StelApp.cpp:669 src/core/StelCore.cpp:296
 #: src/core/StelSkyLayerMgr.cpp:83 src/core/StelSkyLayerMgr.cpp:84
 #: src/StelMainView.cpp:948
 msgid "Display Options"
@@ -334,8 +334,8 @@ msgid "Antapex"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for speed - kilometers per second
-#: src/core/modules/GridLinesMgr.cpp:1629 src/core/modules/Planet.cpp:716
-#: src/core/modules/Planet.cpp:1212 src/gui/AstroCalcDialog.cpp:9128
+#: src/core/modules/GridLinesMgr.cpp:1629 src/core/modules/Planet.cpp:736
+#: src/core/modules/Planet.cpp:1232 src/gui/AstroCalcDialog.cpp:9128
 #: plugins/Satellites/src/Satellite.cpp:360
 #: plugins/Satellites/src/Satellite.cpp:403
 #: plugins/MeteorShowers/src/MeteorShower.cpp:556
@@ -345,7 +345,7 @@ msgstr "ק\"מ / שנייה"
 
 #: src/core/modules/GridLinesMgr.cpp:2034
 msgid "Grids and lines"
-msgstr "רשת וקווים"
+msgstr "רשתות וקווים"
 
 #: src/core/modules/GridLinesMgr.cpp:2035
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:371
@@ -543,97 +543,97 @@ msgid "Compass marks"
 msgstr "סימני מצפן"
 
 #. TRANSLATORS: North
-#: src/core/modules/LandscapeMgr.cpp:279 src/core/modules/Planet.cpp:1334
+#: src/core/modules/LandscapeMgr.cpp:279 src/core/modules/Planet.cpp:1354
 msgctxt "compass direction"
 msgid "N"
 msgstr "צ'"
 
 #. TRANSLATORS: South
-#: src/core/modules/LandscapeMgr.cpp:281 src/core/modules/Planet.cpp:1326
+#: src/core/modules/LandscapeMgr.cpp:281 src/core/modules/Planet.cpp:1346
 msgctxt "compass direction"
 msgid "S"
 msgstr "ד'"
 
 #. TRANSLATORS: East
-#: src/core/modules/LandscapeMgr.cpp:283 src/core/modules/Planet.cpp:1338
+#: src/core/modules/LandscapeMgr.cpp:283 src/core/modules/Planet.cpp:1358
 msgctxt "compass direction"
 msgid "E"
 msgstr "מז'"
 
 #. TRANSLATORS: West
-#: src/core/modules/LandscapeMgr.cpp:285 src/core/modules/Planet.cpp:1330
+#: src/core/modules/LandscapeMgr.cpp:285 src/core/modules/Planet.cpp:1350
 msgctxt "compass direction"
 msgid "W"
 msgstr "מע'"
 
 #. TRANSLATORS: Northeast
-#: src/core/modules/LandscapeMgr.cpp:287 src/core/modules/Planet.cpp:1336
+#: src/core/modules/LandscapeMgr.cpp:287 src/core/modules/Planet.cpp:1356
 msgctxt "compass direction"
 msgid "NE"
 msgstr "צ' מז'"
 
 #. TRANSLATORS: Southeast
-#: src/core/modules/LandscapeMgr.cpp:289 src/core/modules/Planet.cpp:1340
+#: src/core/modules/LandscapeMgr.cpp:289 src/core/modules/Planet.cpp:1360
 msgctxt "compass direction"
 msgid "SE"
 msgstr "ד' מז'"
 
 #. TRANSLATORS: Southwest
-#: src/core/modules/LandscapeMgr.cpp:291 src/core/modules/Planet.cpp:1328
+#: src/core/modules/LandscapeMgr.cpp:291 src/core/modules/Planet.cpp:1348
 msgctxt "compass direction"
 msgid "SW"
 msgstr "ד' מע'"
 
 #. TRANSLATORS: Northwest
-#: src/core/modules/LandscapeMgr.cpp:293 src/core/modules/Planet.cpp:1332
+#: src/core/modules/LandscapeMgr.cpp:293 src/core/modules/Planet.cpp:1352
 msgctxt "compass direction"
 msgid "NW"
 msgstr "צ' מע'"
 
 #. TRANSLATORS: North-northeast
-#: src/core/modules/LandscapeMgr.cpp:295 src/core/modules/Planet.cpp:1335
+#: src/core/modules/LandscapeMgr.cpp:295 src/core/modules/Planet.cpp:1355
 msgctxt "compass direction"
 msgid "NNE"
 msgstr "צ' צ' מז'"
 
 #. TRANSLATORS: East-northeast
-#: src/core/modules/LandscapeMgr.cpp:297 src/core/modules/Planet.cpp:1337
+#: src/core/modules/LandscapeMgr.cpp:297 src/core/modules/Planet.cpp:1357
 msgctxt "compass direction"
 msgid "ENE"
 msgstr "מז' צ' מז'"
 
 #. TRANSLATORS: East-southeast
-#: src/core/modules/LandscapeMgr.cpp:299 src/core/modules/Planet.cpp:1339
+#: src/core/modules/LandscapeMgr.cpp:299 src/core/modules/Planet.cpp:1359
 msgctxt "compass direction"
 msgid "ESE"
 msgstr "מז' ד' מז'"
 
 #. TRANSLATORS: South-southeast
-#: src/core/modules/LandscapeMgr.cpp:301 src/core/modules/Planet.cpp:1341
+#: src/core/modules/LandscapeMgr.cpp:301 src/core/modules/Planet.cpp:1361
 msgctxt "compass direction"
 msgid "SSE"
 msgstr "ד' ד' מז'"
 
 #. TRANSLATORS: South-southwest
-#: src/core/modules/LandscapeMgr.cpp:303 src/core/modules/Planet.cpp:1327
+#: src/core/modules/LandscapeMgr.cpp:303 src/core/modules/Planet.cpp:1347
 msgctxt "compass direction"
 msgid "SSW"
 msgstr "ד' ד' מע'"
 
 #. TRANSLATORS: West-southwest
-#: src/core/modules/LandscapeMgr.cpp:305 src/core/modules/Planet.cpp:1329
+#: src/core/modules/LandscapeMgr.cpp:305 src/core/modules/Planet.cpp:1349
 msgctxt "compass direction"
 msgid "WSW"
 msgstr "מע' ד' מע'"
 
 #. TRANSLATORS: West-northwest
-#: src/core/modules/LandscapeMgr.cpp:307 src/core/modules/Planet.cpp:1331
+#: src/core/modules/LandscapeMgr.cpp:307 src/core/modules/Planet.cpp:1351
 msgctxt "compass direction"
 msgid "WNW"
 msgstr "מע' צ' מע'"
 
 #. TRANSLATORS: North-northwest
-#: src/core/modules/LandscapeMgr.cpp:309 src/core/modules/Planet.cpp:1333
+#: src/core/modules/LandscapeMgr.cpp:309 src/core/modules/Planet.cpp:1353
 msgctxt "compass direction"
 msgid "NNW"
 msgstr "צ' צ' מע'"
@@ -735,7 +735,7 @@ msgid "NbW"
 msgstr ""
 
 #: src/core/modules/LandscapeMgr.cpp:434 src/core/modules/LandscapeMgr.cpp:751
-#: src/gui/ViewDialog.cpp:648
+#: src/gui/ViewDialog.cpp:649
 msgid "Loading..."
 msgstr "טוען ..."
 
@@ -781,7 +781,7 @@ msgstr "נקודות בין מרכזיות משניות"
 
 #: src/core/modules/LandscapeMgr.cpp:876
 msgid "Tertiary Intercardinal points"
-msgstr ""
+msgstr "נקודות בין מרכזיות שלישוניות"
 
 #: src/core/modules/LandscapeMgr.cpp:877
 msgid "Ground"
@@ -922,14 +922,14 @@ msgstr "מונח גיאולוגי"
 msgid "Linear size"
 msgstr "גודל ליניארי"
 
-#: src/core/modules/NomenclatureItem.cpp:247 src/core/modules/Planet.cpp:804
+#: src/core/modules/NomenclatureItem.cpp:247 src/core/modules/Planet.cpp:824
 msgid "Diameter"
 msgstr "קוטר"
 
 #. TRANSLATORS: Unit of measure for distance - kilometers
-#: src/core/modules/NomenclatureItem.cpp:248 src/core/modules/Planet.cpp:672
-#: src/core/modules/Planet.cpp:697 src/core/modules/Planet.cpp:805
-#: src/core/modules/Planet.cpp:1528 src/core/modules/Comet.cpp:190
+#: src/core/modules/NomenclatureItem.cpp:248 src/core/modules/Planet.cpp:687
+#: src/core/modules/Planet.cpp:708 src/core/modules/Planet.cpp:825
+#: src/core/modules/Planet.cpp:1548 src/core/modules/Comet.cpp:190
 #: src/core/modules/Comet.cpp:200 src/gui/StelGuiItems.cpp:894
 #: src/gui/AstroCalcDialog.cpp:3142 src/gui/AstroCalcDialog.cpp:3655
 #: src/gui/AstroCalcDialog.cpp:9063 plugins/Satellites/src/Satellites.cpp:2895
@@ -943,11 +943,11 @@ msgstr "ק\"מ"
 
 #: src/core/modules/NomenclatureItem.cpp:253
 msgid "Planetocentric coordinates"
-msgstr ""
+msgstr "קואורדינטות פלנטוצנטריות"
 
 #: src/core/modules/NomenclatureItem.cpp:253
 msgid "Planetographic coordinates"
-msgstr ""
+msgstr "קואורדינטות פלנטוגרפיות"
 
 #: src/core/modules/NomenclatureItem.cpp:279
 msgid "Celestial body"
@@ -1829,17 +1829,17 @@ msgstr ""
 msgid "Airmasses"
 msgstr "מסות אוויר"
 
-#: src/core/modules/Nebula.cpp:236 src/core/modules/Planet.cpp:568
+#: src/core/modules/Nebula.cpp:236 src/core/modules/Planet.cpp:571
 #: src/core/modules/StarWrapper.cpp:256
 msgid "Additional names: "
 msgstr "שמות נוספים: "
 
-#: src/core/modules/Nebula.cpp:242 src/core/modules/Planet.cpp:575
+#: src/core/modules/Nebula.cpp:242 src/core/modules/Planet.cpp:578
 #: src/core/modules/StarWrapper.cpp:262
 msgid "Additional catalog numbers: "
 msgstr "מספרים קטלוגיים נוספים:"
 
-#: src/core/modules/Nebula.cpp:260 src/core/modules/Planet.cpp:815
+#: src/core/modules/Nebula.cpp:260 src/core/modules/Planet.cpp:835
 #: src/core/modules/MinorPlanet.cpp:186 src/core/modules/StarWrapper.cpp:54
 #: src/core/modules/StarWrapper.cpp:286 plugins/Quasars/src/Quasar.cpp:134
 #: plugins/MissingStars/src/MissingStar.cpp:143
@@ -1896,12 +1896,13 @@ msgstr "ש\"א"
 
 #. TRANSLATORS: distance
 #: src/core/modules/Nebula.cpp:346 src/core/modules/Nebula.cpp:392
-#: src/core/modules/Planet.cpp:707 src/core/modules/StarWrapper.cpp:321
-#: src/core/modules/StarWrapper.cpp:323 src/gui/AstroCalcDialog.cpp:936
-#: src/gui/AstroCalcChart.cpp:92 src/gui/AstroCalcChart.cpp:102
-#: src/gui/AstroCalcChart.cpp:428 src/gui/AstroCalcChart.cpp:454
-#: src/ui_configurationDialog.h:1791 plugins/Supernovae/src/Supernova.cpp:160
-#: plugins/Novae/src/Nova.cpp:165 plugins/Exoplanets/src/Exoplanet.cpp:335
+#: src/core/modules/Planet.cpp:720 src/core/modules/Planet.cpp:726
+#: src/core/modules/StarWrapper.cpp:321 src/core/modules/StarWrapper.cpp:323
+#: src/gui/AstroCalcDialog.cpp:936 src/gui/AstroCalcChart.cpp:92
+#: src/gui/AstroCalcChart.cpp:102 src/gui/AstroCalcChart.cpp:428
+#: src/gui/AstroCalcChart.cpp:454 src/ui_configurationDialog.h:1791
+#: plugins/Supernovae/src/Supernova.cpp:160 plugins/Novae/src/Nova.cpp:165
+#: plugins/Exoplanets/src/Exoplanet.cpp:335
 #: plugins/MissingStars/src/MissingStar.cpp:158
 #: plugins/MissingStars/src/MissingStar.cpp:160
 msgid "Distance"
@@ -2333,33 +2334,33 @@ msgstr "גודל מוחלט"
 msgid "Mean Opposition Magnitude"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:582
+#: src/core/modules/Planet.cpp:585
 msgctxt "type of comet"
 msgid "non-periodic"
 msgstr "לא מחזורי"
 
-#: src/core/modules/Planet.cpp:587
+#: src/core/modules/Planet.cpp:590
 msgctxt "type of comet"
 msgid "short-period"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:589
+#: src/core/modules/Planet.cpp:592
 msgctxt "type of comet"
 msgid "periodic"
 msgstr "מחזורי"
 
 #. TRANSLATORS: Ecliptical rectangular coordinates
-#: src/core/modules/Planet.cpp:647 src/core/modules/Planet.cpp:649
+#: src/core/modules/Planet.cpp:650 src/core/modules/Planet.cpp:652
 msgctxt "coordinates"
 msgid "Ecliptical"
 msgstr "מישור המילקה"
 
-#: src/core/modules/Planet.cpp:658 src/core/modules/Planet.cpp:659
+#: src/core/modules/Planet.cpp:661 src/core/modules/Planet.cpp:662
 msgid "Hourly motion"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:658 src/core/modules/Planet.cpp:1387
-#: src/core/modules/Planet.cpp:1396 src/core/modules/StarWrapper.cpp:338
+#: src/core/modules/Planet.cpp:661 src/core/modules/Planet.cpp:1407
+#: src/core/modules/Planet.cpp:1416 src/core/modules/StarWrapper.cpp:338
 #: plugins/Pulsars/src/Pulsar.cpp:204
 #: plugins/MissingStars/src/MissingStar.cpp:172
 msgctxt "into the direction of"
@@ -2367,7 +2368,7 @@ msgid "towards"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for distance - astronomical unit
-#: src/core/modules/Planet.cpp:670 src/gui/AstroCalcDialog.cpp:882
+#: src/core/modules/Planet.cpp:676 src/gui/AstroCalcDialog.cpp:882
 #: src/gui/AstroCalcDialog.cpp:1194 src/gui/AstroCalcDialog.cpp:1492
 #: src/gui/AstroCalcDialog.cpp:1759 src/gui/AstroCalcDialog.cpp:1818
 #: src/gui/AstroCalcDialog.cpp:9088 src/gui/AstroCalcChart.cpp:428
@@ -2379,265 +2380,265 @@ msgctxt "distance, astronomical unit"
 msgid "AU"
 msgstr "י\"א"
 
+#. TRANSLATORS: Distance measured in terms of the speed of light
+#: src/core/modules/Planet.cpp:678
+msgid "Light time"
+msgstr "זמן אור"
+
 #. TRANSLATORS: Unit of measure for distance - millions of kilometers
 #. TRANSLATORS: Unit of measure for distance - milliones kilometers
 #. TRANSLATORS: Unit of measure for distance - millions kilometers
-#: src/core/modules/Planet.cpp:686 src/core/modules/Planet.cpp:704
+#: src/core/modules/Planet.cpp:694 src/core/modules/Planet.cpp:715
 #: src/core/modules/Comet.cpp:192 src/gui/AstroCalcDialog.cpp:9065
 msgctxt "distance"
 msgid "M km"
 msgstr "מ' ק\"מ"
 
-#: src/core/modules/Planet.cpp:689
+#: src/core/modules/Planet.cpp:698 src/core/modules/Planet.cpp:700
 msgid "Distance from Sun"
 msgstr "מרחק מהשמש"
 
-#. TRANSLATORS: Distance measured in terms of the speed of light
-#: src/core/modules/Planet.cpp:709
-msgid "Light time"
-msgstr "זמן אור"
-
-#: src/core/modules/Planet.cpp:723
+#: src/core/modules/Planet.cpp:743
 msgid "Orbital velocity"
 msgstr "מהירות מסלולית"
 
-#: src/core/modules/Planet.cpp:726
+#: src/core/modules/Planet.cpp:746
 msgid "Heliocentric velocity"
 msgstr "מהירות הליוצנטרית"
 
-#: src/core/modules/Planet.cpp:740
+#: src/core/modules/Planet.cpp:760
 #, qt-format
 msgid "NOTE: elements for epoch %1 probably outdated. Consider updating data!"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:772
+#: src/core/modules/Planet.cpp:792
 msgid "with rings"
 msgstr "עם טבעות"
 
-#: src/core/modules/Planet.cpp:789
+#: src/core/modules/Planet.cpp:809
 msgid "scaled up to"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:799
+#: src/core/modules/Planet.cpp:819
 msgid "Apparent diameter"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:804
+#: src/core/modules/Planet.cpp:824
 msgid "Equatorial diameter"
 msgstr "קוטר משווני"
 
-#: src/core/modules/Planet.cpp:868 src/core/modules/Planet.cpp:869
-#: src/core/modules/Planet.cpp:877 src/gui/AstroCalcChart.cpp:93
+#: src/core/modules/Planet.cpp:888 src/core/modules/Planet.cpp:889
+#: src/core/modules/Planet.cpp:897 src/gui/AstroCalcChart.cpp:93
 #: src/gui/AstroCalcChart.cpp:103 src/gui/AstroCalcChart.cpp:430
 #: src/gui/AstroCalcChart.cpp:456 src/ui_configurationDialog.h:1830
 msgid "Elongation"
 msgstr "התארכות"
 
-#: src/core/modules/Planet.cpp:870 src/core/modules/Planet.cpp:879
+#: src/core/modules/Planet.cpp:890 src/core/modules/Planet.cpp:899
 #: src/gui/AstroCalcChart.cpp:96 src/gui/AstroCalcChart.cpp:106
 #: src/gui/AstroCalcChart.cpp:439 src/gui/AstroCalcChart.cpp:465
 #: plugins/Satellites/src/Satellite.cpp:408
 msgid "Phase angle"
 msgstr "זווית-מופע"
 
-#: src/core/modules/Planet.cpp:872 src/core/modules/Planet.cpp:881
+#: src/core/modules/Planet.cpp:892 src/core/modules/Planet.cpp:901
 msgid "Illuminated"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:878
+#: src/core/modules/Planet.cpp:898
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:323
 msgid "Elong. in Ecl.Long."
 msgstr "אלונגציה באורך אקליפטי"
 
-#: src/core/modules/Planet.cpp:893 src/gui/AstroCalcDialog.cpp:9298
+#: src/core/modules/Planet.cpp:913 src/gui/AstroCalcDialog.cpp:9298
 #: src/gui/AstroCalcChart.cpp:473
 msgid "Angular distance"
 msgstr "מרחק זוויתי"
 
 #. TRANSLATORS: Unit of measure for period - days
-#: src/core/modules/Planet.cpp:911 src/core/modules/StarWrapper.cpp:362
+#: src/core/modules/Planet.cpp:931 src/core/modules/StarWrapper.cpp:362
 #: src/gui/AstroCalcDialog.cpp:9099
 msgctxt "duration"
 msgid "days"
 msgstr "ימים"
 
-#: src/core/modules/Planet.cpp:920
+#: src/core/modules/Planet.cpp:940
 msgid "Sidereal period"
 msgstr "מחזור כוכבי"
 
-#: src/core/modules/Planet.cpp:929
+#: src/core/modules/Planet.cpp:949
 msgid "Synodic period"
 msgstr "מחזור סינודי"
 
 #. TRANSLATORS: Unit of measure for speed - meters per second
-#: src/core/modules/Planet.cpp:1214
+#: src/core/modules/Planet.cpp:1234
 msgctxt "speed"
 msgid "m/s"
 msgstr "מ' / שני'"
 
-#: src/core/modules/Planet.cpp:1229
+#: src/core/modules/Planet.cpp:1249
 msgid "Sidereal day"
 msgstr "יממת כוכבים"
 
-#: src/core/modules/Planet.cpp:1231
+#: src/core/modules/Planet.cpp:1251
 msgid "Mean solar day"
 msgstr "יממת חמה ממוצעת"
 
-#: src/core/modules/Planet.cpp:1237
+#: src/core/modules/Planet.cpp:1257
 msgid "The period of rotation is chaotic"
 msgstr "The period of rotation is chaotic"
 
-#: src/core/modules/Planet.cpp:1243 src/core/modules/Planet.cpp:1245
-#: src/core/modules/Planet.cpp:1251 src/core/modules/Planet.cpp:1253
+#: src/core/modules/Planet.cpp:1263 src/core/modules/Planet.cpp:1265
+#: src/core/modules/Planet.cpp:1271 src/core/modules/Planet.cpp:1273
 msgid "Equatorial rotation velocity"
 msgstr "מהירות סיבוב משווני"
 
-#: src/core/modules/Planet.cpp:1277 src/core/modules/Planet.cpp:1672
+#: src/core/modules/Planet.cpp:1297 src/core/modules/Planet.cpp:1692
 msgctxt "Moon phase"
 msgid "New Moon"
 msgstr "ירח חדש"
 
-#: src/core/modules/Planet.cpp:1279 src/core/modules/Planet.cpp:1674
+#: src/core/modules/Planet.cpp:1299 src/core/modules/Planet.cpp:1694
 msgctxt "Moon phase"
 msgid "Waxing Crescent"
 msgstr "סהר גדל"
 
-#: src/core/modules/Planet.cpp:1281 src/core/modules/Planet.cpp:1676
+#: src/core/modules/Planet.cpp:1301 src/core/modules/Planet.cpp:1696
 msgctxt "Moon phase"
 msgid "First Quarter"
 msgstr "רבע ראשון"
 
-#: src/core/modules/Planet.cpp:1283 src/core/modules/Planet.cpp:1678
+#: src/core/modules/Planet.cpp:1303 src/core/modules/Planet.cpp:1698
 msgctxt "Moon phase"
 msgid "Waxing Gibbous"
 msgstr "Waxing Gibbous"
 
-#: src/core/modules/Planet.cpp:1285 src/core/modules/Planet.cpp:1680
+#: src/core/modules/Planet.cpp:1305 src/core/modules/Planet.cpp:1700
 msgctxt "Moon phase"
 msgid "Full Moon"
 msgstr "ירח מלא"
 
-#: src/core/modules/Planet.cpp:1287 src/core/modules/Planet.cpp:1682
+#: src/core/modules/Planet.cpp:1307 src/core/modules/Planet.cpp:1702
 msgctxt "Moon phase"
 msgid "Waning Gibbous"
 msgstr "Waning Gibbous"
 
-#: src/core/modules/Planet.cpp:1289 src/core/modules/Planet.cpp:1684
+#: src/core/modules/Planet.cpp:1309 src/core/modules/Planet.cpp:1704
 msgctxt "Moon phase"
 msgid "Third Quarter"
 msgstr "רבע שלישי"
 
-#: src/core/modules/Planet.cpp:1291 src/core/modules/Planet.cpp:1686
+#: src/core/modules/Planet.cpp:1311 src/core/modules/Planet.cpp:1706
 msgctxt "Moon phase"
 msgid "Waning Crescent"
 msgstr "סהר דועך"
 
-#: src/core/modules/Planet.cpp:1299
+#: src/core/modules/Planet.cpp:1319
 msgid "Moon age"
 msgstr "גיל הירח"
 
-#: src/core/modules/Planet.cpp:1299
+#: src/core/modules/Planet.cpp:1319
 msgid "days old"
 msgstr "בן ימים"
 
-#: src/core/modules/Planet.cpp:1319 src/core/modules/Planet.cpp:1322
+#: src/core/modules/Planet.cpp:1339 src/core/modules/Planet.cpp:1342
 msgid "Position angle of bright limb"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:1386 src/core/modules/Planet.cpp:1395
-#: src/core/modules/Planet.cpp:1431 src/core/modules/Planet.cpp:1438
+#: src/core/modules/Planet.cpp:1406 src/core/modules/Planet.cpp:1415
+#: src/core/modules/Planet.cpp:1451 src/core/modules/Planet.cpp:1458
 msgid "Position Angle of axis"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:1387 src/core/modules/Planet.cpp:1388
-#: src/core/modules/Planet.cpp:1396 src/core/modules/Planet.cpp:1397
+#: src/core/modules/Planet.cpp:1407 src/core/modules/Planet.cpp:1408
+#: src/core/modules/Planet.cpp:1416 src/core/modules/Planet.cpp:1417
 msgid "Libration"
 msgstr "ליברציה"
 
-#: src/core/modules/Planet.cpp:1389 src/core/modules/Planet.cpp:1398
-#: src/core/modules/Planet.cpp:1433 src/core/modules/Planet.cpp:1440
+#: src/core/modules/Planet.cpp:1409 src/core/modules/Planet.cpp:1418
+#: src/core/modules/Planet.cpp:1453 src/core/modules/Planet.cpp:1460
 msgid "Subsolar point"
 msgstr "נקודה תת-סולארית"
 
-#: src/core/modules/Planet.cpp:1390 src/core/modules/Planet.cpp:1399
+#: src/core/modules/Planet.cpp:1410 src/core/modules/Planet.cpp:1419
 msgid "Colongitude"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:1432 src/core/modules/Planet.cpp:1439
+#: src/core/modules/Planet.cpp:1452 src/core/modules/Planet.cpp:1459
 msgid "Center point"
 msgstr "נקודה מרכזית"
 
-#: src/core/modules/Planet.cpp:1459
+#: src/core/modules/Planet.cpp:1479
 msgid "Eclipse magnitude"
 msgstr "עוצמת הליקוי"
 
-#: src/core/modules/Planet.cpp:1461
+#: src/core/modules/Planet.cpp:1481
 msgid "Eclipse obscuration"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:1487
+#: src/core/modules/Planet.cpp:1507
 msgid "Moon/Sun diameter ratio"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:1490
+#: src/core/modules/Planet.cpp:1510
 msgctxt "type of solar eclipse"
 msgid "(annular)"
 msgstr "(חלקי)"
 
-#: src/core/modules/Planet.cpp:1492
+#: src/core/modules/Planet.cpp:1512
 msgctxt "type of solar eclipse"
 msgid "(total)"
 msgstr "(מלא)"
 
-#: src/core/modules/Planet.cpp:1503
+#: src/core/modules/Planet.cpp:1523
 msgid "Central eclipse duration"
 msgstr ""
 
 #. TRANSLATORS: Short for "minutes".
-#: src/core/modules/Planet.cpp:1505
+#: src/core/modules/Planet.cpp:1525
 #: plugins/Observability/src/Observability.cpp:153
 msgid "m"
 msgstr "דק'"
 
 #. TRANSLATORS: Short for "seconds".
-#: src/core/modules/Planet.cpp:1507
+#: src/core/modules/Planet.cpp:1527
 #: plugins/Observability/src/Observability.cpp:155
 msgid "s"
 msgstr "שני'"
 
-#: src/core/modules/Planet.cpp:1508
+#: src/core/modules/Planet.cpp:1528
 msgid "Center of solar eclipse (Lat./Long.)"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:1518
+#: src/core/modules/Planet.cpp:1538
 msgid "Shadow center point is"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:1520
+#: src/core/modules/Planet.cpp:1540
 msgid "km towards azimuth"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:1523
+#: src/core/modules/Planet.cpp:1543
 msgid "Width of antumbra"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:1525
+#: src/core/modules/Planet.cpp:1545
 msgid "Width of umbra"
-msgstr ""
+msgstr "רחב של הצל"
 
-#: src/core/modules/Planet.cpp:1542
+#: src/core/modules/Planet.cpp:1562
 msgid "Penumbral eclipse magnitude"
 msgstr "עוצמת הליקוי החלקי"
 
-#: src/core/modules/Planet.cpp:1545
+#: src/core/modules/Planet.cpp:1565
 msgid "Umbral eclipse magnitude"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:1552
+#: src/core/modules/Planet.cpp:1572
 msgid "Albedo"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:1555 src/core/modules/MinorPlanet.cpp:211
+#: src/core/modules/Planet.cpp:1575 src/core/modules/MinorPlanet.cpp:211
 #: src/core/modules/Comet.cpp:241
 msgid "Discovered"
 msgstr ""
@@ -3046,63 +3047,63 @@ msgstr ""
 msgid "Initializing landscape..."
 msgstr ""
 
-#: src/core/StelApp.cpp:592
+#: src/core/StelApp.cpp:600
 msgid "Initializing grid lines..."
 msgstr ""
 
-#: src/core/StelApp.cpp:597
+#: src/core/StelApp.cpp:605
 msgid "Initializing special markers..."
 msgstr ""
 
-#: src/core/StelApp.cpp:603
+#: src/core/StelApp.cpp:611
 msgid "Initializing sporadic meteors..."
 msgstr ""
 
-#: src/core/StelApp.cpp:609
+#: src/core/StelApp.cpp:617
 msgid "Initializing user labels..."
 msgstr ""
 
-#: src/core/StelApp.cpp:614
+#: src/core/StelApp.cpp:622
 msgid "Initializing sky cultures..."
 msgstr ""
 
-#: src/core/StelApp.cpp:618
+#: src/core/StelApp.cpp:626
 msgid "Initializing user markers..."
 msgstr ""
 
-#: src/core/StelApp.cpp:624
+#: src/core/StelApp.cpp:632
 msgid "Initializing custom objects..."
 msgstr ""
 
-#: src/core/StelApp.cpp:630
+#: src/core/StelApp.cpp:638
 msgid "Initializing highlights..."
 msgstr ""
 
-#: src/core/StelApp.cpp:636
+#: src/core/StelApp.cpp:644
 msgid "Initializing specific time..."
 msgstr ""
 
-#: src/core/StelApp.cpp:644
+#: src/core/StelApp.cpp:652
 msgid "Initializing scripting..."
 msgstr ""
 
-#: src/core/StelApp.cpp:649
+#: src/core/StelApp.cpp:657
 msgid "Initializing color scheme..."
 msgstr ""
 
-#: src/core/StelApp.cpp:661 src/ui_configurationDialog.h:1898
+#: src/core/StelApp.cpp:669 src/ui_configurationDialog.h:1898
 msgid "Night mode"
 msgstr "מצב לילה"
 
-#: src/core/StelApp.cpp:691
+#: src/core/StelApp.cpp:699
 msgid "Initializing SPOUT sender..."
 msgstr ""
 
-#: src/core/StelApp.cpp:701
+#: src/core/StelApp.cpp:709
 msgid "Cannot create Spout sender. See log for details."
 msgstr ""
 
-#: src/core/StelApp.cpp:728
+#: src/core/StelApp.cpp:736
 msgid "Loading plugin"
 msgstr "טוען תוסף"
 
@@ -3842,7 +3843,7 @@ msgstr ""
 
 #: src/core/StelProjectorClasses.cpp:551
 msgid "Cylinder"
-msgstr "Cylinder"
+msgstr "גליל"
 
 #: src/core/StelProjectorClasses.cpp:556
 msgid ""
@@ -3854,7 +3855,7 @@ msgstr ""
 
 #: src/core/StelProjectorClasses.cpp:633
 msgid "Equirectangular"
-msgstr ""
+msgstr "שווה מלבנים"
 
 #: src/core/StelProjectorClasses.cpp:638
 msgid ""
@@ -4039,7 +4040,7 @@ msgstr ""
 #: src/core/StelObject.cpp:866
 msgctxt "celestial coordinate system"
 msgid "HA"
-msgstr ""
+msgstr "זווית השעה"
 
 #. TRANSLATORS: Greatest Western Digression is the maximum western azimuth for
 #. stars with upper culmination between pole and zenith
@@ -4056,23 +4057,23 @@ msgid "IAU Constellation"
 msgstr ""
 
 #. TRANSLATORS: Azimuth/Altitude
-#: src/core/StelObject.cpp:1279
+#: src/core/StelObject.cpp:1283
 msgctxt "celestial coordinate system"
 msgid "Solar A/a"
 msgstr "גובה/אזימוט שמשי"
 
-#: src/core/StelObject.cpp:1279
+#: src/core/StelObject.cpp:1283
 msgctxt "celestial coordinate system"
 msgid "Solar Az./Alt."
 msgstr "גובה/אזימוט שמשי"
 
 #. TRANSLATORS: Azimuth/Altitude
-#: src/core/StelObject.cpp:1297
+#: src/core/StelObject.cpp:1301
 msgctxt "celestial coordinate system"
 msgid "Lunar A/a"
 msgstr "גובה/אזימוט ירחי"
 
-#: src/core/StelObject.cpp:1297
+#: src/core/StelObject.cpp:1301
 msgctxt "celestial coordinate system"
 msgid "Lunar Az./Alt."
 msgstr "גובה/אזימוט ירחי"
@@ -5676,150 +5677,150 @@ msgstr "Frames per second"
 msgid "Are you sure? This will delete your customized data."
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:701
+#: src/gui/ViewDialog.cpp:702
 msgid "properties"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:722
+#: src/gui/ViewDialog.cpp:723
 msgid "Deep Sky"
 msgstr "שמיים עמוקHO"
 
-#: src/gui/ViewDialog.cpp:723
+#: src/gui/ViewDialog.cpp:724
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:233
 msgid "Solar System"
 msgstr "מערכת השמש"
 
-#: src/gui/ViewDialog.cpp:942
+#: src/gui/ViewDialog.cpp:943
 msgid ""
 "Uses a polygonal 3D model for some selected subplanetary objects (small "
 "moons, asteroids, comets) instead of a spherical approximation"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:943
+#: src/gui/ViewDialog.cpp:944
 msgid ""
 "Use a &quot;shadow map&quot; to simulate self-shadows of non-convex solar "
 "system objects. May reduce shadow penumbra quality on some objects."
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:978
+#: src/gui/ViewDialog.cpp:979
 msgid "Abbreviated"
 msgstr "Abbreviated"
 
-#: src/gui/ViewDialog.cpp:979
+#: src/gui/ViewDialog.cpp:980
 msgid "Native"
 msgstr "Native"
 
-#: src/gui/ViewDialog.cpp:980
+#: src/gui/ViewDialog.cpp:981
 msgid "Translated"
 msgstr "מתורגם"
 
-#: src/gui/ViewDialog.cpp:1162
+#: src/gui/ViewDialog.cpp:1163
 msgid "No shooting stars"
 msgstr "No shooting stars"
 
-#: src/gui/ViewDialog.cpp:1164
+#: src/gui/ViewDialog.cpp:1165
 msgid "Normal rate"
-msgstr "Normal rate"
+msgstr "קצב רגיל"
 
-#: src/gui/ViewDialog.cpp:1166
+#: src/gui/ViewDialog.cpp:1167
 msgid "Standard Orionids rate"
 msgstr "Standard Orionids rate"
 
-#: src/gui/ViewDialog.cpp:1168
+#: src/gui/ViewDialog.cpp:1169
 msgid "Standard Perseids rate"
 msgstr "Standard Perseids rate"
 
-#: src/gui/ViewDialog.cpp:1170
+#: src/gui/ViewDialog.cpp:1171
 msgid "Standard Geminids rate"
 msgstr "Standard Geminids rate"
 
-#: src/gui/ViewDialog.cpp:1172
+#: src/gui/ViewDialog.cpp:1173
 msgid "Exceptional Perseid rate"
 msgstr "Exceptional Perseid rate"
 
-#: src/gui/ViewDialog.cpp:1174
+#: src/gui/ViewDialog.cpp:1175
 msgid "Meteor storm rate"
 msgstr "Meteor storm rate"
 
-#: src/gui/ViewDialog.cpp:1176
+#: src/gui/ViewDialog.cpp:1177
 msgid "Exceptional Draconid rate"
 msgstr "Exceptional Draconid rate"
 
-#: src/gui/ViewDialog.cpp:1178
+#: src/gui/ViewDialog.cpp:1179
 msgid "Exceptional Leonid rate"
 msgstr "Exceptional Leonid rate"
 
-#: src/gui/ViewDialog.cpp:1180
+#: src/gui/ViewDialog.cpp:1181
 msgid "Very high rate (1966 Leonids)"
 msgstr "Very high rate (1966 Leonids)"
 
-#: src/gui/ViewDialog.cpp:1182
+#: src/gui/ViewDialog.cpp:1183
 msgid "Highest rate ever (1833 Leonids)"
 msgstr "Highest rate ever (1833 Leonids)"
 
-#: src/gui/ViewDialog.cpp:1245
+#: src/gui/ViewDialog.cpp:1246
 msgctxt "magnitude algorithm"
 msgid "G. Müller (1893)"
 msgstr "ג'י מולר (1893)"
 
-#: src/gui/ViewDialog.cpp:1246
+#: src/gui/ViewDialog.cpp:1247
 msgctxt "magnitude algorithm"
 msgid "Astronomical Almanac (1984)"
 msgstr "אלמנך אסטרונומי (1984)"
 
-#: src/gui/ViewDialog.cpp:1247
+#: src/gui/ViewDialog.cpp:1248
 msgctxt "magnitude algorithm"
 msgid "Explanatory Supplement (1992)"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1248
+#: src/gui/ViewDialog.cpp:1249
 msgctxt "magnitude algorithm"
 msgid "Explanatory Supplement (2013)"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1249
+#: src/gui/ViewDialog.cpp:1250
 msgctxt "magnitude algorithm"
 msgid "Mallama & Hilton (2018)"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1250
+#: src/gui/ViewDialog.cpp:1251
 msgctxt "magnitude algorithm"
 msgid "Generic"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1272
+#: src/gui/ViewDialog.cpp:1273
 msgid ""
 "The algorithm was used in the <em>Astronomical Almanac</em> (1984 and later)"
 " and gives V (instrumental) magnitudes (allegedly from D.L. Harris)."
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1273
+#: src/gui/ViewDialog.cpp:1274
 msgid ""
 "The algorithm is based on visual observations 1877-1891 by G. Müller and was"
 " still republished in the <em>Explanatory Supplement to the Astronomical "
 "Ephemeris</em> (1961)."
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1274
+#: src/gui/ViewDialog.cpp:1275
 msgid ""
 "The algorithm was published in the 2nd edition of the <em>Explanatory "
 "Supplement to the Astronomical Almanac</em> (1992)."
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1275
+#: src/gui/ViewDialog.cpp:1276
 msgid ""
 "The algorithm was published in the 3rd edition of the <em>Explanatory "
 "Supplement to the Astronomical Almanac</em> (2013)."
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1276
+#: src/gui/ViewDialog.cpp:1277
 msgid ""
 "The algorithm was published by A. Mallama & J. L. Hilton: <em>Computing "
 "apparent planetary magnitudes for the Astronomical Almanac.</em> "
 "Astronomy&Computing 25 (2018) 10-24."
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1279
+#: src/gui/ViewDialog.cpp:1280
 msgid "Visual magnitude based on phase angle and albedo."
 msgstr ""
 
@@ -8202,7 +8203,7 @@ msgstr "אסטריזמים"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:62
 msgid "Geological features"
-msgstr ""
+msgstr "תכונות גאולוגיות"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:64
@@ -8905,12 +8906,12 @@ msgstr "קטלוג מלוט"
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:363
 msgid "New General Catalogue"
-msgstr ""
+msgstr "קטלוג כללי חדש"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:365
 msgid "Index Catalogue"
-msgstr ""
+msgstr "קטלוג אינדקס"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:367
@@ -12143,7 +12144,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:3500
 msgid "Projection"
-msgstr "Projection"
+msgstr "היטל"
 
 #: src/ui_viewDialog.h:3501
 msgid "Current FoV"
@@ -12756,15 +12757,15 @@ msgstr "Show Prime (East-West) Vertical."
 
 #: src/ui_viewDialog.h:3878
 msgid "The line thickness for grids and lines"
-msgstr ""
+msgstr "עובי הקו עבור רשתות וקווים"
 
 #: src/ui_viewDialog.h:3880
 msgid "Thickness: "
-msgstr ""
+msgstr "עובי:"
 
 #: src/ui_viewDialog.h:3881
 msgid "lines"
-msgstr ""
+msgstr "קווים"
 
 #: src/ui_viewDialog.h:3883 src/ui_viewDialog.h:4318 src/ui_viewDialog.h:4341
 #: src/ui_viewDialog.h:4354 src/ui_viewDialog.h:4357 src/ui_viewDialog.h:4375
@@ -13182,7 +13183,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:4283
 msgid "Color of cardinal points"
-msgstr "Color of cardinal points"
+msgstr "צבע של רוחות השמיים"
 
 #: src/ui_viewDialog.h:4290
 msgid "Color of Prime Vertical"
@@ -13276,7 +13277,7 @@ msgstr "Show fog"
 
 #: src/ui_viewDialog.h:4338
 msgid "Transparency:"
-msgstr ""
+msgstr "שקיפות:"
 
 #: src/ui_viewDialog.h:4344
 msgid "Color of asterism lines"
@@ -14060,7 +14061,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:2037
 msgid "nutation"
-msgstr ""
+msgstr "נוטציה"
 
 #: src/ui_configurationDialog.h:2039
 msgid ""
@@ -14441,7 +14442,7 @@ msgstr "מיקום הסמן"
 
 #: src/ui_scriptConsole.h:401
 msgid "R:0 C:0"
-msgstr ""
+msgstr "R:0 C:0"
 
 #: src/ui_scriptConsole.h:402
 msgid "Include dir:"
@@ -14996,7 +14997,7 @@ msgstr ""
 
 #: src/ui_astroCalcExtraEphemerisDialog.h:173
 msgid "Ephemeris line thickness:"
-msgstr ""
+msgstr "עובי קו האפמריס:"
 
 #: src/ui_astroCalcExtraEphemerisDialog.h:174
 #: plugins/Oculars/src/Oculars.cpp:1970
@@ -16487,7 +16488,7 @@ msgstr "aFOV:"
 #: plugins/Oculars/src/ui_ocularDialog.h:1576
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:764
 msgid "Focal length:"
-msgstr "Focal length:"
+msgstr "רחק המוקד:"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:590
 #: plugins/Oculars/src/ui_ocularDialog.h:1537
@@ -17589,7 +17590,7 @@ msgstr "מוֹלְנִיָּה"
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=gnss&FORMAT=tle
 #: plugins/Satellites/src/Satellites.cpp:3420
 msgid "gnss"
-msgstr ""
+msgstr "מערכת ניווט לוויינית גלובלית"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GPS constellation
 #. (the Global Positioning System)
@@ -17804,7 +17805,7 @@ msgstr "SPEKTR-R"
 #. TRANSLATORS: Satellite name: Spektr-RG Space Observatory
 #: plugins/Satellites/src/Satellites.cpp:3523
 msgid "SPEKTR-RG"
-msgstr ""
+msgstr "SPEKTR-RG"
 
 #. TRANSLATORS: Satellite name: International Gamma-Ray Astrophysics
 #. Laboratory (INTEGRAL)
@@ -17820,13 +17821,13 @@ msgstr "טיאנגונג 1"
 #. TRANSLATORS: Satellite name: name of China's space station module
 #: plugins/Satellites/src/Satellites.cpp:3529
 msgid "TIANHE"
-msgstr ""
+msgstr "טיאנחה"
 
 #. TRANSLATORS: Satellite name: China's space station name (with name of base
 #. module)
 #: plugins/Satellites/src/Satellites.cpp:3531
 msgid "TIANGONG (TIANHE)"
-msgstr ""
+msgstr "טיאנגונג (טיאנחה)"
 
 #. TRANSLATORS: An uplink (UL or U/L) is the link from a ground station to a
 #. satellite
@@ -17863,14 +17864,14 @@ msgstr ""
 #: plugins/Satellites/src/Satellites.cpp:3544
 msgctxt "comms"
 msgid "video"
-msgstr ""
+msgstr "וידאו"
 
 #. TRANSLATORS: The broadband is wide bandwidth data transmission which
 #. transports multiple signals at a wide range of frequencies
 #: plugins/Satellites/src/Satellites.cpp:3546
 msgctxt "comms"
 msgid "broadband"
-msgstr ""
+msgstr "פס רחב"
 
 #. TRANSLATORS: The channel for transmission of commands
 #: plugins/Satellites/src/Satellites.cpp:3548
@@ -22728,7 +22729,7 @@ msgstr ""
 #: plugins/Exoplanets/src/Exoplanet.cpp:354
 msgctxt "temperature"
 msgid "K"
-msgstr ""
+msgstr "K"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:359
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:174
@@ -27361,7 +27362,7 @@ msgstr "Declinations of the Minor Lunar Standstills"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:224
 msgid "Declination of the Polar circles"
-msgstr ""
+msgstr "נטייה של חוגי הקטבים"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:225
 msgid "Declination of the Zenith passage"
@@ -27493,7 +27494,7 @@ msgstr "שנה צבע"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:703
 msgid "Line thickness"
-msgstr ""
+msgstr "עובי קו"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:704
 msgid "Declination of Zenith passage"
@@ -29321,17 +29322,17 @@ msgstr ""
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:57
 msgctxt "Zoroastrian day name"
 msgid "Bahman"
-msgstr ""
+msgstr "בהמן"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:58
 msgctxt "Zoroastrian day name"
 msgid "Ordībehesht"
-msgstr ""
+msgstr "אורדיבהשט"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:59
 msgctxt "Zoroastrian day name"
 msgid "Shahrīvar"
-msgstr ""
+msgstr "שהריבר"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:60
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:89
@@ -29342,12 +29343,12 @@ msgstr ""
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:61
 msgctxt "Zoroastrian day name"
 msgid "Xordād"
-msgstr ""
+msgstr "חורדאד"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:62
 msgctxt "Zoroastrian day name"
 msgid "Mordād"
-msgstr ""
+msgstr "מורדאד"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:63
 msgctxt "Zoroastrian day name"
@@ -29357,12 +29358,12 @@ msgstr ""
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:64
 msgctxt "Zoroastrian day name"
 msgid "Āzar"
-msgstr ""
+msgstr "אזאר"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:65
 msgctxt "Zoroastrian day name"
 msgid "Ābān"
-msgstr ""
+msgstr "אבאן"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:66
 msgctxt "Zoroastrian day name"
@@ -29377,7 +29378,7 @@ msgstr ""
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:68
 msgctxt "Zoroastrian day name"
 msgid "Tīr"
-msgstr ""
+msgstr "תיר"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:69
 msgctxt "Zoroastrian day name"
@@ -29392,7 +29393,7 @@ msgstr ""
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:71
 msgctxt "Zoroastrian day name"
 msgid "Mehr"
-msgstr ""
+msgstr "מהר"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:72
 msgctxt "Zoroastrian day name"
@@ -29407,7 +29408,7 @@ msgstr ""
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:74
 msgctxt "Zoroastrian day name"
 msgid "Farvardīn"
-msgstr ""
+msgstr "פארווארדין"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:75
 msgctxt "Zoroastrian day name"
