@@ -138,7 +138,7 @@ void StelLogger::init(const QString& logFilePath)
 			writeLog(QString("Total physical memory: %1 MB").arg(totalRAM/(1024<<10)));
 
 			// GPU info
-			const std::wstring gpu_query(L"SELECT Name, AdapterRAM FROM Win32_VideoController");
+			const std::wstring gpu_query(L"SELECT Name, AdapterRAM, CurrentHorizontalResolution, CurrentVerticalResolution FROM Win32_VideoController");
 			service->ExecQuery(bstr_t(L"WQL"), bstr_t(std::wstring(gpu_query.begin(), gpu_query.end()).c_str()), WBEM_FLAG_FORWARD_ONLY | WBEM_FLAG_RETURN_IMMEDIATELY, nullptr, &enumerator);
 			while (enumerator)
 			{
@@ -151,6 +151,12 @@ void StelLogger::init(const QString& logFilePath)
 
 				hr = obj->Get(L"AdapterRAM", 0, &vt_prop, nullptr, nullptr);
 				writeLog(QString("Video controller RAM: %1 MB").arg(vt_prop.ullVal/(1024<<10)));
+
+				hr = obj->Get(L"CurrentHorizontalResolution", 0, &vt_prop, nullptr, nullptr);
+				int currHRes = vt_prop.intVal;
+				hr = obj->Get(L"CurrentVerticalResolution", 0, &vt_prop, nullptr, nullptr);
+				int currVRes = vt_prop.intVal;
+				writeLog(QString("Current resolution: %1x%2").arg(currHRes).arg(currVRes));
 
 				VariantClear(&vt_prop);
 				obj->Release();
