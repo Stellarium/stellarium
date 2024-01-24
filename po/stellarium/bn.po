@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2023-12-13 11:04+0700\n"
+"POT-Creation-Date: 2024-01-01 16:59+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Tahmid Wasif <twrak007@gmail.com>, 2023\n"
 "Language-Team: Bengali (https://app.transifex.com/stellarium/teams/80998/bn/)\n"
@@ -28,8 +28,8 @@ msgstr ""
 #: src/core/modules/CustomObject.cpp:81 src/core/modules/Asterism.cpp:194
 #: src/core/modules/Constellation.cpp:290
 #: src/core/modules/NomenclatureItem.cpp:232 src/core/modules/Nebula.cpp:249
-#: src/core/modules/Nebula.cpp:251 src/core/modules/Planet.cpp:592
-#: src/core/modules/Planet.cpp:595 src/core/modules/StarWrapper.cpp:49
+#: src/core/modules/Nebula.cpp:251 src/core/modules/Planet.cpp:595
+#: src/core/modules/Planet.cpp:598 src/core/modules/StarWrapper.cpp:49
 #: src/core/modules/StarWrapper.cpp:270 src/core/modules/StarWrapper.cpp:272
 #: src/gui/AstroCalcDialog.cpp:901 src/gui/AstroCalcDialog.cpp:2337
 #: src/gui/AstroCalcDialog.cpp:2909 src/gui/AstroCalcDialog.cpp:2941
@@ -71,7 +71,7 @@ msgstr "নক্ষত্রপুঞ্জ"
 #: src/core/modules/NebulaMgr.cpp:359 src/core/modules/SolarSystem.cpp:307
 #: src/core/modules/MilkyWay.cpp:107 src/core/modules/ZodiacalLight.cpp:112
 #: src/core/modules/ToastMgr.cpp:62 src/core/modules/HipsMgr.cpp:156
-#: src/core/StelApp.cpp:661 src/core/StelCore.cpp:296
+#: src/core/StelApp.cpp:669 src/core/StelCore.cpp:296
 #: src/core/StelSkyLayerMgr.cpp:83 src/core/StelSkyLayerMgr.cpp:84
 #: src/StelMainView.cpp:948
 msgid "Display Options"
@@ -331,8 +331,8 @@ msgid "Antapex"
 msgstr "আগমন"
 
 #. TRANSLATORS: Unit of measure for speed - kilometers per second
-#: src/core/modules/GridLinesMgr.cpp:1629 src/core/modules/Planet.cpp:716
-#: src/core/modules/Planet.cpp:1212 src/gui/AstroCalcDialog.cpp:9128
+#: src/core/modules/GridLinesMgr.cpp:1629 src/core/modules/Planet.cpp:736
+#: src/core/modules/Planet.cpp:1232 src/gui/AstroCalcDialog.cpp:9128
 #: plugins/Satellites/src/Satellite.cpp:360
 #: plugins/Satellites/src/Satellite.cpp:403
 #: plugins/MeteorShowers/src/MeteorShower.cpp:556
@@ -540,97 +540,97 @@ msgid "Compass marks"
 msgstr "দিক নির্দেশ"
 
 #. TRANSLATORS: North
-#: src/core/modules/LandscapeMgr.cpp:279 src/core/modules/Planet.cpp:1334
+#: src/core/modules/LandscapeMgr.cpp:279 src/core/modules/Planet.cpp:1354
 msgctxt "compass direction"
 msgid "N"
 msgstr "উত্তর"
 
 #. TRANSLATORS: South
-#: src/core/modules/LandscapeMgr.cpp:281 src/core/modules/Planet.cpp:1326
+#: src/core/modules/LandscapeMgr.cpp:281 src/core/modules/Planet.cpp:1346
 msgctxt "compass direction"
 msgid "S"
 msgstr "দক্ষিণ"
 
 #. TRANSLATORS: East
-#: src/core/modules/LandscapeMgr.cpp:283 src/core/modules/Planet.cpp:1338
+#: src/core/modules/LandscapeMgr.cpp:283 src/core/modules/Planet.cpp:1358
 msgctxt "compass direction"
 msgid "E"
 msgstr "পূর্ব"
 
 #. TRANSLATORS: West
-#: src/core/modules/LandscapeMgr.cpp:285 src/core/modules/Planet.cpp:1330
+#: src/core/modules/LandscapeMgr.cpp:285 src/core/modules/Planet.cpp:1350
 msgctxt "compass direction"
 msgid "W"
 msgstr "পশ্চিম"
 
 #. TRANSLATORS: Northeast
-#: src/core/modules/LandscapeMgr.cpp:287 src/core/modules/Planet.cpp:1336
+#: src/core/modules/LandscapeMgr.cpp:287 src/core/modules/Planet.cpp:1356
 msgctxt "compass direction"
 msgid "NE"
 msgstr "ঈশাণ"
 
 #. TRANSLATORS: Southeast
-#: src/core/modules/LandscapeMgr.cpp:289 src/core/modules/Planet.cpp:1340
+#: src/core/modules/LandscapeMgr.cpp:289 src/core/modules/Planet.cpp:1360
 msgctxt "compass direction"
 msgid "SE"
 msgstr "অগ্নি"
 
 #. TRANSLATORS: Southwest
-#: src/core/modules/LandscapeMgr.cpp:291 src/core/modules/Planet.cpp:1328
+#: src/core/modules/LandscapeMgr.cpp:291 src/core/modules/Planet.cpp:1348
 msgctxt "compass direction"
 msgid "SW"
 msgstr "নৈঋত"
 
 #. TRANSLATORS: Northwest
-#: src/core/modules/LandscapeMgr.cpp:293 src/core/modules/Planet.cpp:1332
+#: src/core/modules/LandscapeMgr.cpp:293 src/core/modules/Planet.cpp:1352
 msgctxt "compass direction"
 msgid "NW"
 msgstr "বায়ু"
 
 #. TRANSLATORS: North-northeast
-#: src/core/modules/LandscapeMgr.cpp:295 src/core/modules/Planet.cpp:1335
+#: src/core/modules/LandscapeMgr.cpp:295 src/core/modules/Planet.cpp:1355
 msgctxt "compass direction"
 msgid "NNE"
 msgstr "উঃউঃপূঃ"
 
 #. TRANSLATORS: East-northeast
-#: src/core/modules/LandscapeMgr.cpp:297 src/core/modules/Planet.cpp:1337
+#: src/core/modules/LandscapeMgr.cpp:297 src/core/modules/Planet.cpp:1357
 msgctxt "compass direction"
 msgid "ENE"
 msgstr "পূঃউঃপূঃ"
 
 #. TRANSLATORS: East-southeast
-#: src/core/modules/LandscapeMgr.cpp:299 src/core/modules/Planet.cpp:1339
+#: src/core/modules/LandscapeMgr.cpp:299 src/core/modules/Planet.cpp:1359
 msgctxt "compass direction"
 msgid "ESE"
 msgstr "পূঃদঃপূঃ"
 
 #. TRANSLATORS: South-southeast
-#: src/core/modules/LandscapeMgr.cpp:301 src/core/modules/Planet.cpp:1341
+#: src/core/modules/LandscapeMgr.cpp:301 src/core/modules/Planet.cpp:1361
 msgctxt "compass direction"
 msgid "SSE"
 msgstr "দঃদঃপূঃ"
 
 #. TRANSLATORS: South-southwest
-#: src/core/modules/LandscapeMgr.cpp:303 src/core/modules/Planet.cpp:1327
+#: src/core/modules/LandscapeMgr.cpp:303 src/core/modules/Planet.cpp:1347
 msgctxt "compass direction"
 msgid "SSW"
 msgstr "দঃদঃপঃ"
 
 #. TRANSLATORS: West-southwest
-#: src/core/modules/LandscapeMgr.cpp:305 src/core/modules/Planet.cpp:1329
+#: src/core/modules/LandscapeMgr.cpp:305 src/core/modules/Planet.cpp:1349
 msgctxt "compass direction"
 msgid "WSW"
 msgstr "পঃদঃপঃ"
 
 #. TRANSLATORS: West-northwest
-#: src/core/modules/LandscapeMgr.cpp:307 src/core/modules/Planet.cpp:1331
+#: src/core/modules/LandscapeMgr.cpp:307 src/core/modules/Planet.cpp:1351
 msgctxt "compass direction"
 msgid "WNW"
 msgstr "পঃউঃপঃ"
 
 #. TRANSLATORS: North-northwest
-#: src/core/modules/LandscapeMgr.cpp:309 src/core/modules/Planet.cpp:1333
+#: src/core/modules/LandscapeMgr.cpp:309 src/core/modules/Planet.cpp:1353
 msgctxt "compass direction"
 msgid "NNW"
 msgstr "উঃউঃপঃ"
@@ -732,7 +732,7 @@ msgid "NbW"
 msgstr "পঃ ঘেঁষা উঃ"
 
 #: src/core/modules/LandscapeMgr.cpp:434 src/core/modules/LandscapeMgr.cpp:751
-#: src/gui/ViewDialog.cpp:648
+#: src/gui/ViewDialog.cpp:649
 msgid "Loading..."
 msgstr "চালু করা হচ্ছে ..."
 
@@ -919,14 +919,14 @@ msgstr "ভূতাত্ত্বিক নাম"
 msgid "Linear size"
 msgstr "আকার"
 
-#: src/core/modules/NomenclatureItem.cpp:247 src/core/modules/Planet.cpp:804
+#: src/core/modules/NomenclatureItem.cpp:247 src/core/modules/Planet.cpp:824
 msgid "Diameter"
 msgstr "ব্যাস"
 
 #. TRANSLATORS: Unit of measure for distance - kilometers
-#: src/core/modules/NomenclatureItem.cpp:248 src/core/modules/Planet.cpp:672
-#: src/core/modules/Planet.cpp:697 src/core/modules/Planet.cpp:805
-#: src/core/modules/Planet.cpp:1528 src/core/modules/Comet.cpp:190
+#: src/core/modules/NomenclatureItem.cpp:248 src/core/modules/Planet.cpp:687
+#: src/core/modules/Planet.cpp:708 src/core/modules/Planet.cpp:825
+#: src/core/modules/Planet.cpp:1548 src/core/modules/Comet.cpp:190
 #: src/core/modules/Comet.cpp:200 src/gui/StelGuiItems.cpp:894
 #: src/gui/AstroCalcDialog.cpp:3142 src/gui/AstroCalcDialog.cpp:3655
 #: src/gui/AstroCalcDialog.cpp:9063 plugins/Satellites/src/Satellites.cpp:2895
@@ -1826,17 +1826,17 @@ msgstr "কারণ"
 msgid "Airmasses"
 msgstr "গুন বায়ুমন্ডলীয় গভীরতা"
 
-#: src/core/modules/Nebula.cpp:236 src/core/modules/Planet.cpp:568
+#: src/core/modules/Nebula.cpp:236 src/core/modules/Planet.cpp:571
 #: src/core/modules/StarWrapper.cpp:256
 msgid "Additional names: "
 msgstr "অন্যান্য নাম :"
 
-#: src/core/modules/Nebula.cpp:242 src/core/modules/Planet.cpp:575
+#: src/core/modules/Nebula.cpp:242 src/core/modules/Planet.cpp:578
 #: src/core/modules/StarWrapper.cpp:262
 msgid "Additional catalog numbers: "
 msgstr "অন্যান্য তালিকা :"
 
-#: src/core/modules/Nebula.cpp:260 src/core/modules/Planet.cpp:815
+#: src/core/modules/Nebula.cpp:260 src/core/modules/Planet.cpp:835
 #: src/core/modules/MinorPlanet.cpp:186 src/core/modules/StarWrapper.cpp:54
 #: src/core/modules/StarWrapper.cpp:286 plugins/Quasars/src/Quasar.cpp:134
 #: plugins/MissingStars/src/MissingStar.cpp:143
@@ -1893,12 +1893,13 @@ msgstr "আলোকবর্ষ"
 
 #. TRANSLATORS: distance
 #: src/core/modules/Nebula.cpp:346 src/core/modules/Nebula.cpp:392
-#: src/core/modules/Planet.cpp:707 src/core/modules/StarWrapper.cpp:321
-#: src/core/modules/StarWrapper.cpp:323 src/gui/AstroCalcDialog.cpp:936
-#: src/gui/AstroCalcChart.cpp:92 src/gui/AstroCalcChart.cpp:102
-#: src/gui/AstroCalcChart.cpp:428 src/gui/AstroCalcChart.cpp:454
-#: src/ui_configurationDialog.h:1791 plugins/Supernovae/src/Supernova.cpp:160
-#: plugins/Novae/src/Nova.cpp:165 plugins/Exoplanets/src/Exoplanet.cpp:335
+#: src/core/modules/Planet.cpp:720 src/core/modules/Planet.cpp:726
+#: src/core/modules/StarWrapper.cpp:321 src/core/modules/StarWrapper.cpp:323
+#: src/gui/AstroCalcDialog.cpp:936 src/gui/AstroCalcChart.cpp:92
+#: src/gui/AstroCalcChart.cpp:102 src/gui/AstroCalcChart.cpp:428
+#: src/gui/AstroCalcChart.cpp:454 src/ui_configurationDialog.h:1791
+#: plugins/Supernovae/src/Supernova.cpp:160 plugins/Novae/src/Nova.cpp:165
+#: plugins/Exoplanets/src/Exoplanet.cpp:335
 #: plugins/MissingStars/src/MissingStar.cpp:158
 #: plugins/MissingStars/src/MissingStar.cpp:160
 msgid "Distance"
@@ -2331,33 +2332,33 @@ msgstr "প্রমান উজ্জ্ব্যলতা"
 msgid "Mean Opposition Magnitude"
 msgstr "গড় প্রতিযোগ ঔজ্জ্বল্যতা"
 
-#: src/core/modules/Planet.cpp:582
+#: src/core/modules/Planet.cpp:585
 msgctxt "type of comet"
 msgid "non-periodic"
 msgstr "পর্যায়ক্রমিক নয়"
 
-#: src/core/modules/Planet.cpp:587
+#: src/core/modules/Planet.cpp:590
 msgctxt "type of comet"
 msgid "short-period"
 msgstr "স্বল্প মেয়াদী"
 
-#: src/core/modules/Planet.cpp:589
+#: src/core/modules/Planet.cpp:592
 msgctxt "type of comet"
 msgid "periodic"
 msgstr "পর্যায়ক্রমিক"
 
 #. TRANSLATORS: Ecliptical rectangular coordinates
-#: src/core/modules/Planet.cpp:647 src/core/modules/Planet.cpp:649
+#: src/core/modules/Planet.cpp:650 src/core/modules/Planet.cpp:652
 msgctxt "coordinates"
 msgid "Ecliptical"
 msgstr "উপবৃত্তাকার"
 
-#: src/core/modules/Planet.cpp:658 src/core/modules/Planet.cpp:659
+#: src/core/modules/Planet.cpp:661 src/core/modules/Planet.cpp:662
 msgid "Hourly motion"
 msgstr "ঘন্টা প্রতি সরণ"
 
-#: src/core/modules/Planet.cpp:658 src/core/modules/Planet.cpp:1387
-#: src/core/modules/Planet.cpp:1396 src/core/modules/StarWrapper.cpp:338
+#: src/core/modules/Planet.cpp:661 src/core/modules/Planet.cpp:1407
+#: src/core/modules/Planet.cpp:1416 src/core/modules/StarWrapper.cpp:338
 #: plugins/Pulsars/src/Pulsar.cpp:204
 #: plugins/MissingStars/src/MissingStar.cpp:172
 msgctxt "into the direction of"
@@ -2365,7 +2366,7 @@ msgid "towards"
 msgstr "হয়ে"
 
 #. TRANSLATORS: Unit of measure for distance - astronomical unit
-#: src/core/modules/Planet.cpp:670 src/gui/AstroCalcDialog.cpp:882
+#: src/core/modules/Planet.cpp:676 src/gui/AstroCalcDialog.cpp:882
 #: src/gui/AstroCalcDialog.cpp:1194 src/gui/AstroCalcDialog.cpp:1492
 #: src/gui/AstroCalcDialog.cpp:1759 src/gui/AstroCalcDialog.cpp:1818
 #: src/gui/AstroCalcDialog.cpp:9088 src/gui/AstroCalcChart.cpp:428
@@ -2377,265 +2378,265 @@ msgctxt "distance, astronomical unit"
 msgid "AU"
 msgstr "জ্যোঃ এঃ"
 
+#. TRANSLATORS: Distance measured in terms of the speed of light
+#: src/core/modules/Planet.cpp:678
+msgid "Light time"
+msgstr "আলোক দূরত্ব"
+
 #. TRANSLATORS: Unit of measure for distance - millions of kilometers
 #. TRANSLATORS: Unit of measure for distance - milliones kilometers
 #. TRANSLATORS: Unit of measure for distance - millions kilometers
-#: src/core/modules/Planet.cpp:686 src/core/modules/Planet.cpp:704
+#: src/core/modules/Planet.cpp:694 src/core/modules/Planet.cpp:715
 #: src/core/modules/Comet.cpp:192 src/gui/AstroCalcDialog.cpp:9065
 msgctxt "distance"
 msgid "M km"
 msgstr "মিলিয়ন কিমি"
 
-#: src/core/modules/Planet.cpp:689
+#: src/core/modules/Planet.cpp:698 src/core/modules/Planet.cpp:700
 msgid "Distance from Sun"
 msgstr "সূর্য থেকে দূরত্ব"
 
-#. TRANSLATORS: Distance measured in terms of the speed of light
-#: src/core/modules/Planet.cpp:709
-msgid "Light time"
-msgstr "আলোক দূরত্ব"
-
-#: src/core/modules/Planet.cpp:723
+#: src/core/modules/Planet.cpp:743
 msgid "Orbital velocity"
 msgstr "কাক্ষিক গতিবেগ"
 
-#: src/core/modules/Planet.cpp:726
+#: src/core/modules/Planet.cpp:746
 msgid "Heliocentric velocity"
 msgstr "সূর্য সাপেক্ষে গতিবেগ"
 
-#: src/core/modules/Planet.cpp:740
+#: src/core/modules/Planet.cpp:760
 #, qt-format
 msgid "NOTE: elements for epoch %1 probably outdated. Consider updating data!"
 msgstr "বিঃদ্রঃ- %1 সময়কালীন তথ্য সম্ভবত অচল হয়ে গেছে, টাটকা তথ্য প্রয়োজন ।"
 
-#: src/core/modules/Planet.cpp:772
+#: src/core/modules/Planet.cpp:792
 msgid "with rings"
 msgstr "বলয় সহ"
 
-#: src/core/modules/Planet.cpp:789
+#: src/core/modules/Planet.cpp:809
 msgid "scaled up to"
 msgstr "বিবর্ধিত হয়ে"
 
-#: src/core/modules/Planet.cpp:799
+#: src/core/modules/Planet.cpp:819
 msgid "Apparent diameter"
 msgstr "আপাত ব্যাস"
 
-#: src/core/modules/Planet.cpp:804
+#: src/core/modules/Planet.cpp:824
 msgid "Equatorial diameter"
 msgstr "নিরক্ষীয় ব্যাস"
 
-#: src/core/modules/Planet.cpp:868 src/core/modules/Planet.cpp:869
-#: src/core/modules/Planet.cpp:877 src/gui/AstroCalcChart.cpp:93
+#: src/core/modules/Planet.cpp:888 src/core/modules/Planet.cpp:889
+#: src/core/modules/Planet.cpp:897 src/gui/AstroCalcChart.cpp:93
 #: src/gui/AstroCalcChart.cpp:103 src/gui/AstroCalcChart.cpp:430
 #: src/gui/AstroCalcChart.cpp:456 src/ui_configurationDialog.h:1830
 msgid "Elongation"
 msgstr "দ্রাঘন"
 
-#: src/core/modules/Planet.cpp:870 src/core/modules/Planet.cpp:879
+#: src/core/modules/Planet.cpp:890 src/core/modules/Planet.cpp:899
 #: src/gui/AstroCalcChart.cpp:96 src/gui/AstroCalcChart.cpp:106
 #: src/gui/AstroCalcChart.cpp:439 src/gui/AstroCalcChart.cpp:465
 #: plugins/Satellites/src/Satellite.cpp:408
 msgid "Phase angle"
 msgstr "কলার কৌণিক অবস্থান"
 
-#: src/core/modules/Planet.cpp:872 src/core/modules/Planet.cpp:881
+#: src/core/modules/Planet.cpp:892 src/core/modules/Planet.cpp:901
 msgid "Illuminated"
 msgstr "দৃশ্যমান অংশ"
 
-#: src/core/modules/Planet.cpp:878
+#: src/core/modules/Planet.cpp:898
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:323
 msgid "Elong. in Ecl.Long."
 msgstr "সৌর দ্রাঘিমা চ্যুতি"
 
-#: src/core/modules/Planet.cpp:893 src/gui/AstroCalcDialog.cpp:9298
+#: src/core/modules/Planet.cpp:913 src/gui/AstroCalcDialog.cpp:9298
 #: src/gui/AstroCalcChart.cpp:473
 msgid "Angular distance"
 msgstr "কৌণিক দূরত্ব"
 
 #. TRANSLATORS: Unit of measure for period - days
-#: src/core/modules/Planet.cpp:911 src/core/modules/StarWrapper.cpp:362
+#: src/core/modules/Planet.cpp:931 src/core/modules/StarWrapper.cpp:362
 #: src/gui/AstroCalcDialog.cpp:9099
 msgctxt "duration"
 msgid "days"
 msgstr "দিন"
 
-#: src/core/modules/Planet.cpp:920
+#: src/core/modules/Planet.cpp:940
 msgid "Sidereal period"
 msgstr "বার্ষিক গতি"
 
-#: src/core/modules/Planet.cpp:929
+#: src/core/modules/Planet.cpp:949
 msgid "Synodic period"
 msgstr "সংযোগ অবকাশ"
 
 #. TRANSLATORS: Unit of measure for speed - meters per second
-#: src/core/modules/Planet.cpp:1214
+#: src/core/modules/Planet.cpp:1234
 msgctxt "speed"
 msgid "m/s"
 msgstr "মি/সে"
 
-#: src/core/modules/Planet.cpp:1229
+#: src/core/modules/Planet.cpp:1249
 msgid "Sidereal day"
 msgstr "দিন (আহ্নিক গতি অনুসারে)"
 
-#: src/core/modules/Planet.cpp:1231
+#: src/core/modules/Planet.cpp:1251
 msgid "Mean solar day"
 msgstr "গড় সৌরদিন"
 
-#: src/core/modules/Planet.cpp:1237
+#: src/core/modules/Planet.cpp:1257
 msgid "The period of rotation is chaotic"
 msgstr "আবর্তন কাল খুব অনিয়মিত"
 
-#: src/core/modules/Planet.cpp:1243 src/core/modules/Planet.cpp:1245
-#: src/core/modules/Planet.cpp:1251 src/core/modules/Planet.cpp:1253
+#: src/core/modules/Planet.cpp:1263 src/core/modules/Planet.cpp:1265
+#: src/core/modules/Planet.cpp:1271 src/core/modules/Planet.cpp:1273
 msgid "Equatorial rotation velocity"
 msgstr "নিরক্ষীয় ঘুর্ণন বেগ"
 
-#: src/core/modules/Planet.cpp:1277 src/core/modules/Planet.cpp:1672
+#: src/core/modules/Planet.cpp:1297 src/core/modules/Planet.cpp:1692
 msgctxt "Moon phase"
 msgid "New Moon"
 msgstr "অমাবস্যা"
 
-#: src/core/modules/Planet.cpp:1279 src/core/modules/Planet.cpp:1674
+#: src/core/modules/Planet.cpp:1299 src/core/modules/Planet.cpp:1694
 msgctxt "Moon phase"
 msgid "Waxing Crescent"
 msgstr "কৃষ্ণপক্ষ দ্বিতীয়ার্ধ"
 
-#: src/core/modules/Planet.cpp:1281 src/core/modules/Planet.cpp:1676
+#: src/core/modules/Planet.cpp:1301 src/core/modules/Planet.cpp:1696
 msgctxt "Moon phase"
 msgid "First Quarter"
 msgstr "কৃষ্ণপক্ষ অষ্টমী"
 
-#: src/core/modules/Planet.cpp:1283 src/core/modules/Planet.cpp:1678
+#: src/core/modules/Planet.cpp:1303 src/core/modules/Planet.cpp:1698
 msgctxt "Moon phase"
 msgid "Waxing Gibbous"
 msgstr "কৃষ্ণপক্ষ প্রথমার্ধ"
 
-#: src/core/modules/Planet.cpp:1285 src/core/modules/Planet.cpp:1680
+#: src/core/modules/Planet.cpp:1305 src/core/modules/Planet.cpp:1700
 msgctxt "Moon phase"
 msgid "Full Moon"
 msgstr "পূর্ণিমা"
 
-#: src/core/modules/Planet.cpp:1287 src/core/modules/Planet.cpp:1682
+#: src/core/modules/Planet.cpp:1307 src/core/modules/Planet.cpp:1702
 msgctxt "Moon phase"
 msgid "Waning Gibbous"
 msgstr "শুক্লপক্ষ প্রথমার্ধ"
 
-#: src/core/modules/Planet.cpp:1289 src/core/modules/Planet.cpp:1684
+#: src/core/modules/Planet.cpp:1309 src/core/modules/Planet.cpp:1704
 msgctxt "Moon phase"
 msgid "Third Quarter"
 msgstr "শুক্লপক্ষ অষ্টমী"
 
-#: src/core/modules/Planet.cpp:1291 src/core/modules/Planet.cpp:1686
+#: src/core/modules/Planet.cpp:1311 src/core/modules/Planet.cpp:1706
 msgctxt "Moon phase"
 msgid "Waning Crescent"
 msgstr "শুক্লপক্ষ দ্বিতীয়ার্ধ"
 
-#: src/core/modules/Planet.cpp:1299
+#: src/core/modules/Planet.cpp:1319
 msgid "Moon age"
 msgstr "অমাবশ্যা থেকে"
 
-#: src/core/modules/Planet.cpp:1299
+#: src/core/modules/Planet.cpp:1319
 msgid "days old"
 msgstr "দিন"
 
-#: src/core/modules/Planet.cpp:1319 src/core/modules/Planet.cpp:1322
+#: src/core/modules/Planet.cpp:1339 src/core/modules/Planet.cpp:1342
 msgid "Position angle of bright limb"
 msgstr "সূর্য সাপেক্ষে কলার অবস্থান"
 
-#: src/core/modules/Planet.cpp:1386 src/core/modules/Planet.cpp:1395
-#: src/core/modules/Planet.cpp:1431 src/core/modules/Planet.cpp:1438
+#: src/core/modules/Planet.cpp:1406 src/core/modules/Planet.cpp:1415
+#: src/core/modules/Planet.cpp:1451 src/core/modules/Planet.cpp:1458
 msgid "Position Angle of axis"
 msgstr "অক্ষের আপাত অবস্থান"
 
-#: src/core/modules/Planet.cpp:1387 src/core/modules/Planet.cpp:1388
-#: src/core/modules/Planet.cpp:1396 src/core/modules/Planet.cpp:1397
+#: src/core/modules/Planet.cpp:1407 src/core/modules/Planet.cpp:1408
+#: src/core/modules/Planet.cpp:1416 src/core/modules/Planet.cpp:1417
 msgid "Libration"
 msgstr "দোলন"
 
-#: src/core/modules/Planet.cpp:1389 src/core/modules/Planet.cpp:1398
-#: src/core/modules/Planet.cpp:1433 src/core/modules/Planet.cpp:1440
+#: src/core/modules/Planet.cpp:1409 src/core/modules/Planet.cpp:1418
+#: src/core/modules/Planet.cpp:1453 src/core/modules/Planet.cpp:1460
 msgid "Subsolar point"
 msgstr "সৌর লম্ব বিন্দু"
 
-#: src/core/modules/Planet.cpp:1390 src/core/modules/Planet.cpp:1399
+#: src/core/modules/Planet.cpp:1410 src/core/modules/Planet.cpp:1419
 msgid "Colongitude"
 msgstr "গোধূলী রেখা"
 
-#: src/core/modules/Planet.cpp:1432 src/core/modules/Planet.cpp:1439
+#: src/core/modules/Planet.cpp:1452 src/core/modules/Planet.cpp:1459
 msgid "Center point"
 msgstr "সম্মুখ বিন্দু"
 
-#: src/core/modules/Planet.cpp:1459
+#: src/core/modules/Planet.cpp:1479
 msgid "Eclipse magnitude"
 msgstr "গ্রহণের পরিমান"
 
-#: src/core/modules/Planet.cpp:1461
+#: src/core/modules/Planet.cpp:1481
 msgid "Eclipse obscuration"
 msgstr "গ্রাস"
 
-#: src/core/modules/Planet.cpp:1487
+#: src/core/modules/Planet.cpp:1507
 msgid "Moon/Sun diameter ratio"
 msgstr "চাঁদ / সূর্য ব্যাসের অনুপাত"
 
-#: src/core/modules/Planet.cpp:1490
+#: src/core/modules/Planet.cpp:1510
 msgctxt "type of solar eclipse"
 msgid "(annular)"
 msgstr "(বলয় গ্রহণ)"
 
-#: src/core/modules/Planet.cpp:1492
+#: src/core/modules/Planet.cpp:1512
 msgctxt "type of solar eclipse"
 msgid "(total)"
 msgstr "(পূর্ণগ্রাস)"
 
-#: src/core/modules/Planet.cpp:1503
+#: src/core/modules/Planet.cpp:1523
 msgid "Central eclipse duration"
 msgstr "মুখ্যগ্রাসের মেয়াদ"
 
 #. TRANSLATORS: Short for "minutes".
-#: src/core/modules/Planet.cpp:1505
+#: src/core/modules/Planet.cpp:1525
 #: plugins/Observability/src/Observability.cpp:153
 msgid "m"
 msgstr "মিনিট"
 
 #. TRANSLATORS: Short for "seconds".
-#: src/core/modules/Planet.cpp:1507
+#: src/core/modules/Planet.cpp:1527
 #: plugins/Observability/src/Observability.cpp:155
 msgid "s"
 msgstr "সেকেন্ড"
 
-#: src/core/modules/Planet.cpp:1508
+#: src/core/modules/Planet.cpp:1528
 msgid "Center of solar eclipse (Lat./Long.)"
 msgstr "গ্রহণের কেন্দ্রস্থল (অক্ষ/দ্রাঘিমা)"
 
-#: src/core/modules/Planet.cpp:1518
+#: src/core/modules/Planet.cpp:1538
 msgid "Shadow center point is"
 msgstr "গ্রহণের কেন্দ্রস্থলটি এখান থেকে"
 
-#: src/core/modules/Planet.cpp:1520
+#: src/core/modules/Planet.cpp:1540
 msgid "km towards azimuth"
 msgstr "কিমি দূরে, অভিমুখ"
 
-#: src/core/modules/Planet.cpp:1523
+#: src/core/modules/Planet.cpp:1543
 msgid "Width of antumbra"
 msgstr "বলয়গ্রহণ ছায়ার বেধ"
 
-#: src/core/modules/Planet.cpp:1525
+#: src/core/modules/Planet.cpp:1545
 msgid "Width of umbra"
 msgstr "পূর্ণগ্রহণ ছায়ার বেধ"
 
-#: src/core/modules/Planet.cpp:1542
+#: src/core/modules/Planet.cpp:1562
 msgid "Penumbral eclipse magnitude"
 msgstr "উপচ্ছায়া গ্রহণের পরিমান"
 
-#: src/core/modules/Planet.cpp:1545
+#: src/core/modules/Planet.cpp:1565
 msgid "Umbral eclipse magnitude"
 msgstr "প্রচ্ছায়া গ্রহণের পরিমান"
 
-#: src/core/modules/Planet.cpp:1552
+#: src/core/modules/Planet.cpp:1572
 msgid "Albedo"
 msgstr "প্রতিফলনানুপাত"
 
-#: src/core/modules/Planet.cpp:1555 src/core/modules/MinorPlanet.cpp:211
+#: src/core/modules/Planet.cpp:1575 src/core/modules/MinorPlanet.cpp:211
 #: src/core/modules/Comet.cpp:241
 msgid "Discovered"
 msgstr "আবিস্কার"
@@ -3044,63 +3045,63 @@ msgstr "নক্ষত্রপুঞ্জ সক্রিয় করা হচ
 msgid "Initializing landscape..."
 msgstr "ভূমিরূপ সক্রিয় করা হচ্ছে ..."
 
-#: src/core/StelApp.cpp:592
+#: src/core/StelApp.cpp:600
 msgid "Initializing grid lines..."
 msgstr "স্থানাঙ্ক ব্যবস্থা সক্রিয় করা হচ্ছে ..."
 
-#: src/core/StelApp.cpp:597
+#: src/core/StelApp.cpp:605
 msgid "Initializing special markers..."
 msgstr "দৃষ্টিক্ষেত্র নির্দেশক সক্রিয় করা হচ্ছে ..."
 
-#: src/core/StelApp.cpp:603
+#: src/core/StelApp.cpp:611
 msgid "Initializing sporadic meteors..."
 msgstr "উল্কাপাত সক্রিয় করা হচ্ছে ..."
 
-#: src/core/StelApp.cpp:609
+#: src/core/StelApp.cpp:617
 msgid "Initializing user labels..."
 msgstr "পছন্দসই হরফ সক্রিয় করা হচ্ছে ..."
 
-#: src/core/StelApp.cpp:614
+#: src/core/StelApp.cpp:622
 msgid "Initializing sky cultures..."
 msgstr "মহাকাশ সংস্কৃতিগুলি সক্রিয় করা হচ্ছে ..."
 
-#: src/core/StelApp.cpp:618
+#: src/core/StelApp.cpp:626
 msgid "Initializing user markers..."
 msgstr "পছন্দসই নিশানাগুলি সক্রিয় করা হচ্ছে ..."
 
-#: src/core/StelApp.cpp:624
+#: src/core/StelApp.cpp:632
 msgid "Initializing custom objects..."
 msgstr "পছন্দসই জ্যোতিষ্কগুলি সক্রিয় করা হচ্ছে ..."
 
-#: src/core/StelApp.cpp:630
+#: src/core/StelApp.cpp:638
 msgid "Initializing highlights..."
 msgstr "পছন্দসই আকর্ষনগুলি সক্রিয় করা হচ্ছে ..."
 
-#: src/core/StelApp.cpp:636
+#: src/core/StelApp.cpp:644
 msgid "Initializing specific time..."
 msgstr "নির্দিষ্ট বিশেষ দিনে নিয়ে যাওয়া হচ্ছে ..."
 
-#: src/core/StelApp.cpp:644
+#: src/core/StelApp.cpp:652
 msgid "Initializing scripting..."
 msgstr "কার্যলিপি সক্রিয় করা হচ্ছে ..."
 
-#: src/core/StelApp.cpp:649
+#: src/core/StelApp.cpp:657
 msgid "Initializing color scheme..."
 msgstr "রং প্রনালী সক্রিয় করা হচ্ছে ..."
 
-#: src/core/StelApp.cpp:661 src/ui_configurationDialog.h:1898
+#: src/core/StelApp.cpp:669 src/ui_configurationDialog.h:1898
 msgid "Night mode"
 msgstr "রাত্রিকালীন প্রদর্শণ সুবিধা"
 
-#: src/core/StelApp.cpp:691
+#: src/core/StelApp.cpp:699
 msgid "Initializing SPOUT sender..."
 msgstr "স্পাউট ভিডিও শেয়ার সক্রিয় করা হচ্ছে ..."
 
-#: src/core/StelApp.cpp:701
+#: src/core/StelApp.cpp:709
 msgid "Cannot create Spout sender. See log for details."
 msgstr "স্পাউট প্রেরক তৈরী করা যায় নি । বিশদ তথ্যের জন্য কার্যবিবরণী দেখুন ।"
 
-#: src/core/StelApp.cpp:728
+#: src/core/StelApp.cpp:736
 msgid "Loading plugin"
 msgstr "সরঞ্জামগুলি সক্রিয় করা হচ্ছে ..."
 
@@ -4092,23 +4093,23 @@ msgid "IAU Constellation"
 msgstr "আঃজ্যোঃসঃ নক্ষত্রমন্ডল"
 
 #. TRANSLATORS: Azimuth/Altitude
-#: src/core/StelObject.cpp:1279
+#: src/core/StelObject.cpp:1283
 msgctxt "celestial coordinate system"
 msgid "Solar A/a"
 msgstr "সৌর দিগংশ/উন্নতি"
 
-#: src/core/StelObject.cpp:1279
+#: src/core/StelObject.cpp:1283
 msgctxt "celestial coordinate system"
 msgid "Solar Az./Alt."
 msgstr "সৌর দিগংশ/উন্নতি"
 
 #. TRANSLATORS: Azimuth/Altitude
-#: src/core/StelObject.cpp:1297
+#: src/core/StelObject.cpp:1301
 msgctxt "celestial coordinate system"
 msgid "Lunar A/a"
 msgstr "চান্দ্র দিগংশ/উন্নতি"
 
-#: src/core/StelObject.cpp:1297
+#: src/core/StelObject.cpp:1301
 msgctxt "celestial coordinate system"
 msgid "Lunar Az./Alt."
 msgstr "চান্দ্র দিগংশ/উন্নতি"
@@ -5763,20 +5764,20 @@ msgstr ""
 "আপনি আপনার পছন্দসই বৈশিষ্ট্য ও তথ্যগুলি মুছে দিতে চলেছেন, আপনি কি এ ব্যাপারে"
 " নিশ্চিত ?"
 
-#: src/gui/ViewDialog.cpp:701
+#: src/gui/ViewDialog.cpp:702
 msgid "properties"
 msgstr "বৈশিষ্ট্য"
 
-#: src/gui/ViewDialog.cpp:722
+#: src/gui/ViewDialog.cpp:723
 msgid "Deep Sky"
 msgstr "মহাকাশ"
 
-#: src/gui/ViewDialog.cpp:723
+#: src/gui/ViewDialog.cpp:724
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:233
 msgid "Solar System"
 msgstr "সৌরজগত"
 
-#: src/gui/ViewDialog.cpp:942
+#: src/gui/ViewDialog.cpp:943
 msgid ""
 "Uses a polygonal 3D model for some selected subplanetary objects (small "
 "moons, asteroids, comets) instead of a spherical approximation"
@@ -5784,7 +5785,7 @@ msgstr ""
 "সৌরজগতের কিছু বস্তুদের (ছোটো উপগ্রহ, গ্রহাণু, ধূমকেতু) ক্ষেত্রে গোলকাকার "
 "প্রতিকৃতির বদলে সেগুলির ত্রিমাতৃক প্রতিকৃতি ব্যবহৃত হবে"
 
-#: src/gui/ViewDialog.cpp:943
+#: src/gui/ViewDialog.cpp:944
 msgid ""
 "Use a &quot;shadow map&quot; to simulate self-shadows of non-convex solar "
 "system objects. May reduce shadow penumbra quality on some objects."
@@ -5792,93 +5793,93 @@ msgstr ""
 "আকারহীন জ্যোতিষ্কদের ক্ষেত্রে ছায়া গঠনের জন্য একটি &quot;ছায়া মানচিত্র&quot;"
 " ব্যবহার করা হয়, যদিও এতে প্রচ্ছায়ার গঠন নিম্নমানের হয়ে যায় ।"
 
-#: src/gui/ViewDialog.cpp:978
+#: src/gui/ViewDialog.cpp:979
 msgid "Abbreviated"
 msgstr "সংক্ষিপ্ত নাম"
 
-#: src/gui/ViewDialog.cpp:979
+#: src/gui/ViewDialog.cpp:980
 msgid "Native"
 msgstr "আঞ্চলিক নাম"
 
-#: src/gui/ViewDialog.cpp:980
+#: src/gui/ViewDialog.cpp:981
 msgid "Translated"
 msgstr "ভাষান্তরিত নাম"
 
-#: src/gui/ViewDialog.cpp:1162
+#: src/gui/ViewDialog.cpp:1163
 msgid "No shooting stars"
 msgstr "কোনো উল্কাপাত ঘটবে না"
 
-#: src/gui/ViewDialog.cpp:1164
+#: src/gui/ViewDialog.cpp:1165
 msgid "Normal rate"
 msgstr "স্বাভাবিক হার"
 
-#: src/gui/ViewDialog.cpp:1166
+#: src/gui/ViewDialog.cpp:1167
 msgid "Standard Orionids rate"
 msgstr "কালপুরুষ মন্ডল থেকে বর্ষিত উল্কাবৃষ্টির প্রমাণ হার"
 
-#: src/gui/ViewDialog.cpp:1168
+#: src/gui/ViewDialog.cpp:1169
 msgid "Standard Perseids rate"
 msgstr "পারসিউস মন্ডল থেকে বর্ষিত উল্কাবৃষ্টির প্রমাণ হার"
 
-#: src/gui/ViewDialog.cpp:1170
+#: src/gui/ViewDialog.cpp:1171
 msgid "Standard Geminids rate"
 msgstr "মিথুন রাশি থেকে বর্ষিত উল্কাবৃষ্টির প্রমাণ হার"
 
-#: src/gui/ViewDialog.cpp:1172
+#: src/gui/ViewDialog.cpp:1173
 msgid "Exceptional Perseid rate"
 msgstr "পারসিউস মন্ডল থেকে বর্ষিত উল্কাবৃষ্টির অস্বাভাবিক হার"
 
-#: src/gui/ViewDialog.cpp:1174
+#: src/gui/ViewDialog.cpp:1175
 msgid "Meteor storm rate"
 msgstr "প্রবল উল্কা বৃষ্টির হার"
 
-#: src/gui/ViewDialog.cpp:1176
+#: src/gui/ViewDialog.cpp:1177
 msgid "Exceptional Draconid rate"
 msgstr "ড্রাগন মন্ডল থেকে বর্ষিত উল্কাবৃষ্টির অস্বাভাবিক হার"
 
-#: src/gui/ViewDialog.cpp:1178
+#: src/gui/ViewDialog.cpp:1179
 msgid "Exceptional Leonid rate"
 msgstr "সিংহরাশি থেকে বর্ষিত উল্কাবৃষ্টির অস্বাভাবিক হার"
 
-#: src/gui/ViewDialog.cpp:1180
+#: src/gui/ViewDialog.cpp:1181
 msgid "Very high rate (1966 Leonids)"
 msgstr "অতি প্রবল উল্কা বৃষ্টির হার (১৯৬৬ সাল, সিংহরাশি থেকে)"
 
-#: src/gui/ViewDialog.cpp:1182
+#: src/gui/ViewDialog.cpp:1183
 msgid "Highest rate ever (1833 Leonids)"
 msgstr "সর্বকালের সর্বোচ্চ হার (১৮৩৩ সাল, সিংহরাশি থেকে)"
 
-#: src/gui/ViewDialog.cpp:1245
+#: src/gui/ViewDialog.cpp:1246
 msgctxt "magnitude algorithm"
 msgid "G. Müller (1893)"
 msgstr "জি মুলার (১৮৯৩)"
 
-#: src/gui/ViewDialog.cpp:1246
+#: src/gui/ViewDialog.cpp:1247
 msgctxt "magnitude algorithm"
 msgid "Astronomical Almanac (1984)"
 msgstr "জ্যোতিরবৈজ্ঞানিক বর্ষপঞ্জি (১৯৮৪)"
 
-#: src/gui/ViewDialog.cpp:1247
+#: src/gui/ViewDialog.cpp:1248
 msgctxt "magnitude algorithm"
 msgid "Explanatory Supplement (1992)"
 msgstr "ব্যাখ্যা সংযুক্তি (১৯৯২)"
 
-#: src/gui/ViewDialog.cpp:1248
+#: src/gui/ViewDialog.cpp:1249
 msgctxt "magnitude algorithm"
 msgid "Explanatory Supplement (2013)"
 msgstr "ব্যাখ্যা সংযুক্তি (২০১৩)"
 
-#: src/gui/ViewDialog.cpp:1249
+#: src/gui/ViewDialog.cpp:1250
 msgctxt "magnitude algorithm"
 msgid "Mallama & Hilton (2018)"
 msgstr "মালামা ও হিলটন (২০১৮)"
 
-#: src/gui/ViewDialog.cpp:1250
+#: src/gui/ViewDialog.cpp:1251
 msgctxt "magnitude algorithm"
 msgid "Generic"
 msgstr "অজ্ঞাত"
 
-#: src/gui/ViewDialog.cpp:1272
+#: src/gui/ViewDialog.cpp:1273
 msgid ""
 "The algorithm was used in the <em>Astronomical Almanac</em> (1984 and later)"
 " and gives V (instrumental) magnitudes (allegedly from D.L. Harris)."
@@ -5886,7 +5887,7 @@ msgstr ""
 "এই গণনা পদ্ধতি <em>জ্যোতির্বৈজ্ঞানিক পঞ্জিকা</em> (১৯৮৪ পরবর্তী) তে ব্যবহার "
 "করা হয়েছে এবং এটির সাহায্যে আপাত উজ্জ্ব্যলতা পরিমাপ করা হবে ।"
 
-#: src/gui/ViewDialog.cpp:1273
+#: src/gui/ViewDialog.cpp:1274
 msgid ""
 "The algorithm is based on visual observations 1877-1891 by G. Müller and was"
 " still republished in the <em>Explanatory Supplement to the Astronomical "
@@ -5896,7 +5897,7 @@ msgstr ""
 "উপর ভিত্তি করে তৈরী করা হয়েছে এবং যা <em>জ্যোতির্বৈজ্ঞানিক পঞ্জিকার "
 "ব্যাখ্যামূলক সংযোজনী</em> (১৯৬১) তে পুনঃপ্রকাশিত করা হয়েছে ।"
 
-#: src/gui/ViewDialog.cpp:1274
+#: src/gui/ViewDialog.cpp:1275
 msgid ""
 "The algorithm was published in the 2nd edition of the <em>Explanatory "
 "Supplement to the Astronomical Almanac</em> (1992)."
@@ -5904,7 +5905,7 @@ msgstr ""
 "এই গণনা পদ্ধতিটির ২য় সংস্করণ প্রাকাশিত হয়েছে <em>জ্যোতির্বৈজ্ঞানিক পঞ্জিকার "
 "ব্যাখ্যামূলক সংযোজনী</em>(১৯৯২) তে ।"
 
-#: src/gui/ViewDialog.cpp:1275
+#: src/gui/ViewDialog.cpp:1276
 msgid ""
 "The algorithm was published in the 3rd edition of the <em>Explanatory "
 "Supplement to the Astronomical Almanac</em> (2013)."
@@ -5912,7 +5913,7 @@ msgstr ""
 "এই গণনা পদ্ধতি <em>জ্যোতির্বৈজ্ঞানিক পঞ্জিকার ব্যাখ্যা সংযুক্তি</em> (২০১৩)"
 "  ৩য় সংস্করনে প্রকাশিত হয়েছিল ।"
 
-#: src/gui/ViewDialog.cpp:1276
+#: src/gui/ViewDialog.cpp:1277
 msgid ""
 "The algorithm was published by A. Mallama & J. L. Hilton: <em>Computing "
 "apparent planetary magnitudes for the Astronomical Almanac.</em> "
@@ -5922,7 +5923,7 @@ msgstr ""
 "<em>জ্যোতিরবৈজ্ঞানিক পঞ্জিকার জন্য গ্রহ উপগ্রহ ও গ্রহাণুদের আপাত উজ্জ্বল্যতা"
 " গণনা</em> । জ্যেতিরবিজ্ঞান_ও_গণনা ২৫ (২০১৮) পৃ ১০-২৪"
 
-#: src/gui/ViewDialog.cpp:1279
+#: src/gui/ViewDialog.cpp:1280
 msgid "Visual magnitude based on phase angle and albedo."
 msgstr "প্রতিফলনানুপাত ও দশা অনুযায়ী  উজ্জ্ব্যলতা পরিমাপ"
 
