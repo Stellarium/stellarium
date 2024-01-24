@@ -31,6 +31,12 @@
 #pragma comment(lib, "wbemuuid.lib")
 #endif
 
+#ifdef Q_OS_MACOS
+#include <sys/sysctl.h>
+#include <mach/mach.h>
+#include <string>
+#endif
+
 // Init statics variables.
 QFile StelLogger::logFile;
 QString StelLogger::log;
@@ -157,6 +163,39 @@ void StelLogger::init(const QString& logFilePath)
 	CoUninitialize();
 #endif
 
+#ifdef Q_OS_MACOS
+	size_t size = 1024;
+	std::string cpuname;
+	cpuname.resize(size);
+	if (sysctlbyname("machdep.cpu.brand_string", cpuname.data(), &size, nullptr, 0) < 0)
+		cpuname = "unknown";
+	else
+		cpuname.resize(size);
+	writeLog(QString("Processor name: %1").arg(cpuname.data()));
+
+	int64_t maxFreq = 0;
+	size = sizeof(maxFreq);
+	if (sysctlbyname("hw.cpufrequency_max", &maxFreq, &size, nullptr, 0) != -1)
+		writeLog(QString("Processor maximum speed: %1 MHz").arg(maxFreq/1000000));
+
+	int ncpu = 0;
+	size = sizeof(ncpu);
+	sysctlbyname("hw.logicalcpu", &ncpu, &size, nullptr, 0);
+	writeLog(QString("Processor logical cores: %1").arg(ncpu));
+
+	int64_t totalRAM = 0;
+	size = sizeof(totalRAM);
+	sysctlbyname("hw.memsize", &totalRAM, &size, nullptr, 0);
+	writeLog(QString("Total physical memory: %1 MB").arg(totalRAM/(1024<<10)));
+
+	// extra info
+	size_t len = 0;
+	sysctlbyname("hw.model", nullptr, &len, nullptr, 0);
+	std::string model(len, '\0');
+	sysctlbyname("hw.model", const_cast<char *>(model.data()), &len, nullptr, 0);
+	writeLog(QString("Model identifier: %1").arg(model.data()));
+#endif
+
 /*
 
 #ifdef Q_OS_LINUX
@@ -225,38 +264,8 @@ void StelLogger::init(const QString& logFilePath)
 	// REMOVED
 
 #elif defined Q_OS_MACOS
-	QProcess systemProfiler;
-	systemProfiler.start("/usr/sbin/system_profiler", {"-detailLevel mini SPHardwareDataType SPDisplaysDataType"});
-	systemProfiler.waitForStarted();
-	systemProfiler.waitForFinished();
-	const QString systemData(systemProfiler.readAllStandardOutput());
-	#if (QT_VERSION>=QT_VERSION_CHECK(5, 14, 0))
-	QStringList systemLines = systemData.split('\n', Qt::SkipEmptyParts);
-	#else
-	QStringList systemLines = systemData.split('\n', QString::SkipEmptyParts);
-	#endif
-	for (int i = 0; i<systemLines.size(); i++)
-	{
-		// hardware overview
-		if(systemLines.at(i).contains("Model", Qt::CaseInsensitive))
-			writeLog(systemLines.at(i).trimmed());
 
-		if(systemLines.at(i).contains("Chip:", Qt::CaseInsensitive))
-			writeLog(systemLines.at(i).trimmed());
-
-		if(systemLines.at(i).contains("Processor", Qt::CaseInsensitive))
-			writeLog(systemLines.at(i).trimmed().replace("Unknown", "Apple M1"));
-
-		if(systemLines.at(i).contains("Memory", Qt::CaseInsensitive))
-			writeLog(systemLines.at(i).trimmed());
-
-		// graphics/display overview
-		if(systemLines.at(i).contains("Resolution", Qt::CaseInsensitive))
-			writeLog(systemLines.at(i).trimmed());
-
-		if(systemLines.at(i).contains("VRAM", Qt::CaseInsensitive))
-			writeLog(systemLines.at(i).trimmed());
-	}
+	// REMOVED
 
 #elif defined Q_OS_BSD4
 	QProcess dmesg;
