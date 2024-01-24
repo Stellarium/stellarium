@@ -56,6 +56,9 @@ void StelLogger::init(const QString& logFilePath)
 	writeLog(QString("Qt runtime version: %1").arg(qVersion()));
 	writeLog(QString("Qt compilation version: %1").arg(QT_VERSION_STR));
 
+	// write ABI
+	writeLog(QString("Build ABI: %1").arg(QSysInfo::buildAbi()));
+
 	// write addressing mode
 #if defined(__LP64__) || defined(_WIN64)
 	writeLog("Addressing mode: 64-bit");
@@ -129,7 +132,7 @@ void StelLogger::init(const QString& logFilePath)
 			writeLog(QString("Total physical memory: %1 MB").arg(totalRAM/(1024<<10)));
 
 			// GPU info
-			const std::wstring gpu_query(L"SELECT Name FROM Win32_VideoController");
+			const std::wstring gpu_query(L"SELECT Name, AdapterRAM FROM Win32_VideoController");
 			service->ExecQuery(bstr_t(L"WQL"), bstr_t(std::wstring(gpu_query.begin(), gpu_query.end()).c_str()), WBEM_FLAG_FORWARD_ONLY | WBEM_FLAG_RETURN_IMMEDIATELY, nullptr, &enumerator);
 			while (enumerator)
 			{
@@ -139,6 +142,9 @@ void StelLogger::init(const QString& logFilePath)
 
 				hr = obj->Get(L"Name", 0, &vt_prop, nullptr, nullptr);
 				writeLog(QString("Video controller name: %1").arg(vt_prop.bstrVal));
+
+				hr = obj->Get(L"AdapterRAM", 0, &vt_prop, nullptr, nullptr);
+				writeLog(QString("Video controller RAM: %1 MB").arg(vt_prop.ullVal/(1024<<10)));
 
 				VariantClear(&vt_prop);
 				obj->Release();
