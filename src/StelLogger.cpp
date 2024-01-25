@@ -269,37 +269,6 @@ void StelLogger::init(const QString& logFilePath)
 
 #ifdef Q_OS_LINUX
 
-#ifndef BUILD_FOR_MAEMO
-	QFile infoFile("/proc/meminfo");
-	if(!infoFile.open(QIODevice::ReadOnly | QIODevice::Text))
-		writeLog("Could not get memory info.");
-	else
-	{
-		while(!infoFile.peek(1).isEmpty())
-		{
-			QString line = infoFile.readLine();
-			line.chop(1);
-			if (line.startsWith("Mem") || line.startsWith("SwapTotal"))
-				writeLog(line);
-		}
-		infoFile.close();
-	}
-
-	infoFile.setFileName("/proc/cpuinfo");
-	if (!infoFile.open(QIODevice::ReadOnly | QIODevice::Text))
-		writeLog("Could not get CPU info.");
-	else
-	{
-		while(!infoFile.peek(1).isEmpty())
-		{
-			QString line = infoFile.readLine();
-			line.chop(1);
-			if(line.startsWith("model name") || line.startsWith("cpu MHz"))
-				writeLog(line);
-		}
-		infoFile.close();
-	}
-
 	QProcess lspci;
 	lspci.start("lspci", { "-v" }, QIODevice::ReadOnly);
 	lspci.waitForFinished(300);
@@ -325,7 +294,6 @@ void StelLogger::init(const QString& logFilePath)
 			}
 		}
 	}
-#endif
 
 // Aargh Windows API
 #elif defined Q_OS_WIN
