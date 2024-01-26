@@ -17,10 +17,6 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifdef CYGWIN
- #include <malloc.h>
-#endif
-
 #include "StelUtils.hpp"
 #include "VecMath.hpp"
 #include "StelLocaleMgr.hpp"
@@ -37,22 +33,26 @@
 #include <cmath> // std::fmod
 #include <zlib.h>
 
+#ifdef CYGWIN
+  #include <malloc.h>
+#endif
+
+#if (defined(Q_OS_FREEBSD) || defined(Q_OS_NETBSD) || defined(Q_OS_OPENBSD) || defined(Q_OS_BSD4))
+  #include <sys/utsname.h>
+#endif
+
 namespace StelUtils
 {
 //! Return the full name of stellarium, e.g. "Stellarium 23.1"
 QString getApplicationName()
 {
-#if defined(GIT_REVISION)
-	return QString("Stellarium %1+").arg(StelUtils::getApplicationPublicVersion());
-#else
-	return QString("Stellarium %1").arg(StelUtils::getApplicationPublicVersion());
-#endif
+	return QString("Stellarium %1").arg(STELLARIUM_BUIDING_VERSION); // see lines 158-188 in CMakeLists.txt
 }
 
 //! Return the version of stellarium, e.g. "23.1.0"
 QString getApplicationVersion()
 {
-#if defined(GIT_REVISION)
+#ifdef GIT_REVISION
 	return QString("%1-%2 [%3]").arg(PACKAGE_VERSION, GIT_REVISION, GIT_BRANCH);
 #else
 	return QString(PACKAGE_VERSION);
@@ -73,31 +73,18 @@ QString getApplicationSeries()
 
 QString getUserAgentString()
 {
-	// Get info about operating system
-	QString os = StelUtils::getOperatingSystemInfo();
-	if (os.contains("FreeBSD"))
-		os = "FreeBSD";
-	else if (os.contains("NetBSD"))
-		os = "NetBSD";
-	else if (os.contains("OpenBSD"))
-		os = "OpenBSD";
-
 	// Set user agent as "Stellarium/$version$ ($operating system$; $CPU architecture$)"
-	return QString("Stellarium/%1 (%2; %3)").arg(StelUtils::getApplicationPublicVersion(), os, QSysInfo::currentCpuArchitecture());
+	return QString("Stellarium/%1 (%2; %3)").arg(StelUtils::getApplicationPublicVersion(), StelUtils::getOperatingSystemInfo(), QSysInfo::currentCpuArchitecture());
 }
 
 QString getOperatingSystemInfo()
 {
 	QString OS = QSysInfo::prettyProductName();
 
-	#if (defined(Q_OS_FREEBSD) || defined(Q_OS_NETBSD) || defined(Q_OS_OPENBSD) || defined(Q_OS_SOLARIS))
-	// Check FreeBSD, OpenBSD, NetBSD and Sun Solaris operating systems
-	QProcess uname;
-	uname.start("/usr/bin/uname", { "-srm" });
-	uname.waitForStarted();
-	uname.waitForFinished();
-	const QString BSDsystem = uname.readAllStandardOutput();
-	OS = BSDsystem.trimmed();
+	#if (defined(Q_OS_FREEBSD) || defined(Q_OS_NETBSD) || defined(Q_OS_OPENBSD) || defined(Q_OS_BSD4))
+	struct utsname buff;
+	if (uname(&buff) != -1)
+		OS = QString("%1 %2").arg(buff.sysname, buff.release);
 	#endif
 
 	if (OS.isEmpty() || OS==QStringLiteral("unknown"))
