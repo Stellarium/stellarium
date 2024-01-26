@@ -40,7 +40,6 @@
 #ifdef Q_OS_LINUX
 #include <sys/types.h>
 #include <sys/sysinfo.h>
-#include <pci/pci.h>
 #endif
 
 // Init statics variables.
@@ -251,41 +250,6 @@ void StelLogger::init(const QString& logFilePath)
 		writeLog(QString("Processor maximum speed: %1 MHz").arg(freq));
 		writeLog(QString("Processor logical cores: %1").arg(ncpu));
 	}
-
-	// GPU info
-	struct pci_dev *dev;
-	struct pci_access *pciaccess;
-	char namebuf[128];
-	char *src = NULL;
-	char *dest = NULL;
-
-	pciaccess = pci_alloc();	/* Get the pci_access structure */
-	pci_init(pciaccess);		/* Initialize the PCI library */
-	pci_scan_bus(pciaccess);	/* We want to get the list of devices */
-	for (dev=pciaccess->devices; dev; dev=dev->next)	/* Iterate over all devices */
-	{
-		//if (likely((pci_read_word(dev, PCI_CLASS_DEVICE) ^ 0x300) != 0))
-		//	continue;
-
-		/* Look up and print the full name of the device */
-		pci_lookup_name(pciaccess, namebuf, sizeof(namebuf), PCI_LOOKUP_DEVICE,
-				pci_read_word(dev, PCI_VENDOR_ID),
-				pci_read_word(dev, PCI_DEVICE_ID));
-
-		src = dest = namebuf;
-		while (*src != '\0') {
-			if (!(*src == '[' || *src == ']')) {
-				*dest = *src; /* copy the char at src to dest */
-				dest++;
-			}
-			src++; /* increment source pointer */
-		}
-		*dest = '\0'; /* terminate string with NUL */
-		pci_cleanup(pciaccess);
-
-		writeLog(QString("PCI device: %1").arg(namebuf));
-	}
-	pci_cleanup(pciaccess);	/* Close everything */
 
 	// memory info
 	struct sysinfo memInfo;
