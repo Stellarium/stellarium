@@ -443,6 +443,25 @@ QVariantMap Nebula::getInfoMap(const StelCore *core) const
 	if (redshift<99.f)
 		map.insert("redshift", redshift);
 
+	double axisMajor = getAngularRadius(core)*(2.*M_PI_180);
+	double axisMinor = getAngularRadius(core)*(2.*M_PI_180);
+	int    axisPA    = 0;
+	if (minorAxisSize>0.f)
+	{
+		axisMajor = majorAxisSize*M_PI_180;
+		axisMinor = minorAxisSize*M_PI_180;
+		axisPA    = orientationAngle;
+	}
+	map.insert("axis-major", axisMajor);
+	map.insert("axis-major-dd", axisMajor*M_180_PI);
+	map.insert("axis-major-deg", StelUtils::radToDecDegStr(axisMajor, 5));
+	map.insert("axis-major-dms", StelUtils::radToDmsPStr(axisMajor, 2));
+	map.insert("axis-minor", axisMinor);
+	map.insert("axis-minor-dd", axisMinor*M_180_PI);
+	map.insert("axis-minor-deg", StelUtils::radToDecDegStr(axisMinor, 5));
+	map.insert("axis-minor-dms", StelUtils::radToDmsPStr(axisMinor, 2));
+	map.insert("orientation-angle", axisPA);
+
 	// TODO: more? Names? Data?
 	return map;
 }

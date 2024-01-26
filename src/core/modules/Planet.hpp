@@ -208,7 +208,6 @@ public:
 	//! @return a QString containing an HMTL encoded description of the Planet.
 	QString getInfoString(const StelCore *core, const InfoStringGroup& flags) const override;
 	//! In addition to the entries from StelObject::getInfoMap(), Planet objects provide
-	//! - distance
 	//! - phase (result of getPhase)
 	//! - illumination (=100*phase)
 	//! - phase-angle (radians)
@@ -238,10 +237,10 @@ public:
 	//! - age (on Earth for Moon only; days. This is currently "elongation angle age" only, not time since last conjunction!)
 	//! - penumbral-eclipse-magnitude (on Earth for Moon only)
 	//! - umbral-eclipse-magnitude (on Earth for Moon only)
-	//! - heliocentric-distance (for Solar system objects, except the Sun; A.U.)
-	//! - heliocentric-distance-km (for Solar system objects, except the Sun; kilometers)
-	//! - distance (distance from observer; for Solar system objects; A.U.)
-	//! - distance-km (distance from observer; for Solar system objects; kilometers)
+	//! - heliocentric-distance (distance to object from the Sun; for Solar system objects, except the Sun; A.U.)
+	//! - heliocentric-distance-km (distance to object from the Sun; for Solar system objects, except the Sun; kilometers)
+	//! - distance (distance to object; for Solar system objects only; A.U.)
+	//! - distance-km (distance to object; for Solar system objects only; kilometers)
 	QVariantMap getInfoMap(const StelCore *core) const  override;
 	double getCloseViewFov(const StelCore* core) const override;
 	double getSatellitesFov(const StelCore* core) const override;
