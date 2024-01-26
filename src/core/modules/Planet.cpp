@@ -1587,7 +1587,10 @@ QVariantMap Planet::getInfoMap(const StelCore *core) const
 	if (getEnglishName()!="Sun")
 	{
 		const Vec3d& observerHelioPos = core->getObserverHeliocentricEclipticPos();
-		map.insert("distance", getJ2000EquatorialPos(core).norm());
+		const double hdistanceAu = getHeliocentricEclipticPos().norm();
+		const double hdistanceKm = AU * hdistanceAu;
+		map.insert("heliocentric-distance", hdistanceAu);
+		map.insert("heliocentric-distance-km", hdistanceKm);
 		float phase=getPhase(observerHelioPos);
 		map.insert("phase", phase);
 		map.insert("illumination", 100.f*phase);
@@ -1633,6 +1636,10 @@ QVariantMap Planet::getInfoMap(const StelCore *core) const
 	}
 	map.insert("type", getType());
 	map.insert("object-type", getObjectType());
+	const double distanceAu = getJ2000EquatorialPos(core).norm();
+	const double distanceKm = AU * distanceAu;
+	map.insert("distance", distanceAu);
+	map.insert("distance-km", distanceKm);
 
 	if (onEarth)
 	{

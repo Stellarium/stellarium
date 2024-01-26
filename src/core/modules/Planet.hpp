@@ -238,6 +238,10 @@ public:
 	//! - age (on Earth for Moon only; days. This is currently "elongation angle age" only, not time since last conjunction!)
 	//! - penumbral-eclipse-magnitude (on Earth for Moon only)
 	//! - umbral-eclipse-magnitude (on Earth for Moon only)
+	//! - heliocentric-distance (for Solar system objects, except the Sun; A.U.)
+	//! - heliocentric-distance-km (for Solar system objects, except the Sun; kilometers)
+	//! - distance (distance from observer; for Solar system objects; A.U.)
+	//! - distance-km (distance from observer; for Solar system objects; kilometers)
 	QVariantMap getInfoMap(const StelCore *core) const  override;
 	double getCloseViewFov(const StelCore* core) const override;
 	double getSatellitesFov(const StelCore* core) const override;
