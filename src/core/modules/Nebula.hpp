@@ -164,6 +164,15 @@ public:
 	//! - morpho (longish description; translated!)
 	//! - surface-brightness
 	//! - designations (all designations of DSO)
+	//! - axis-major (major axis in radians)
+	//! - axis-major-dd (major axis in decimal degrees)
+	//! - axis-major-deg (major axis in decimal degrees (formatted string))
+	//! - axis-major-dms (major axis in DMS format)
+	//! - axis-minor (minor axis in radians)
+	//! - axis-minor-dd (minor axis in decimal degrees)
+	//! - axis-minor-deg (minor axis in decimal degrees (formatted string))
+	//! - axis-minor-dms (minor axis in DMS format)
+	//! - orientation-angle (in degrees)
 	//! A few entries are optional
 	//! - bV (B-V index)
 	//! - redshift

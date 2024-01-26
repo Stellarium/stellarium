@@ -221,7 +221,9 @@ public slots:
 	//! Fetch a map with data about an object's position, magnitude and so on
 	//! @param name is the English name of the object for which data will be
 	//! returned.
-	//! @return a map of object data.  Keys:
+	//! @return a map of object data.
+	//!
+	//! Keys:
 	//! - above-horizon : true, if celestial body is above horizon
 	//! - altitude : apparent altitude angle in decimal degrees
 	//! - azimuth : apparent azimuth angle in decimal degrees
@@ -252,8 +254,8 @@ public slots:
 	//! - size-deg : angular size in decimal degrees (formatted string)
 	//! - size-dms : angular size in DMS format
 	//! - localized-name : localized name	
+	//!
 	//! The returned map can contain other information. For example, Solar System objects add:
-	//! - distance : distance to object in AU (for Solar system objects only!)
 	//! - phase : phase (illuminated fraction, 0..1) of object (for Solar system objects only!)
 	//! - illumination : phase of object in percent (0..100) (for Solar system objects only!)
 	//! - phase-angle : phase angle of object in radians (for Solar system objects only!)
@@ -273,11 +275,20 @@ public slots:
 	//! - scale: scale factor for Solar system bodies (for Solar system objects only!)
 	//! - eclipse-obscuration: value of obscuration for solar eclipse (for Sun only!)
 	//! - eclipse-magnitude: value of magnitude for solar eclipse (for Sun only!)
+	//! - heliocentric-distance: distance to object from the Sun in AU (for Solar system objects, except the Sun)
+	//! - heliocentric-distance-km: distance to object from the Sun in kilometers (for Solar system objects, except the Sun)
+	//! - distance: distance to object in AU (for Solar system objects only!)
+	//! - distance-km: distance to object in kilometers (for Solar system objects only!)
+	//! - phase-name: name of phase (on Earth for Moon only!)
+	//! - age: the age of the Moon in days. This is currently "elongation angle age" only, not time since last conjunction! (on Earth for Moon only!)
+	//! - penumbral-eclipse-magnitude: the magnitude of penumbral lunar eclipse (on Earth for Moon only!)
+	//! - umbral-eclipse-magnitude: the magnitude of umbral lunar eclipse (on Earth for Moon only!)
+	//!
 	//! Other StelObject derivates, also those defined in plugins, may add more,
 	//! these fields are documented in the respective classes, or simply try what you get:
 	//! You can print a complete set of entries into output with the following commands:
 	//! @code
-	//! map=core.getSelectedObjectInfo();
+	//! map=core.getObjectInfo("Name_of_object");
 	//! core.output(core.mapToString(map));
 	//! @endcode
 	static QVariantMap getObjectInfo(const QString& name);
