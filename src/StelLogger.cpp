@@ -46,6 +46,11 @@
 #include <sys/sysctl.h>
 #endif
 
+#ifdef Q_OS_NETBSD
+#include <sys/param.h>
+#include <sys/sysctl.h>
+#endif
+
 // Init statics variables.
 QFile StelLogger::logFile;
 QString StelLogger::log;
@@ -286,6 +291,26 @@ void StelLogger::init(const QString& logFilePath)
 	int64_t totalRAM = 0;
 	len = sizeof(totalRAM);
 	sysctlbyname("hw.physmem", &totalRAM, &len, nullptr, 0);
+	writeLog(QString("Total physical memory: %1 MB").arg(totalRAM/(1024<<10)));
+#endif
+
+#ifdef Q_OS_NETBSD
+	// CPU info
+	size_t len = 0;
+	sysctlbyname("machdep.cpu_brand", nullptr, &len, nullptr, 0);
+	std::string model(len, '\0');
+	sysctlbyname("machdep.cpu_brand", const_cast<char *>(model.data()), &len, nullptr, 0);
+	writeLog(QString("Processor name: %1").arg(model.data()));
+
+	int ncpu = 0;
+	len = sizeof(ncpu);
+	sysctlbyname("hw.ncpu", &ncpu, &len, nullptr, 0);
+	writeLog(QString("Processor logical cores: %1").arg(ncpu));
+
+	// memory info
+	int64_t totalRAM = 0;
+	len = sizeof(totalRAM);
+	sysctlbyname("hw.physmem64", &totalRAM, &len, nullptr, 0);
 	writeLog(QString("Total physical memory: %1 MB").arg(totalRAM/(1024<<10)));
 #endif
 
