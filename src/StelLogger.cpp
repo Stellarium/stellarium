@@ -278,14 +278,14 @@ void StelLogger::init(const QString& logFilePath)
 	writeLog(QString("Processor name: %1").arg(model.data()));
 
 	int ncpu = 0;
-	size = sizeof(ncpu);
-	sysctlbyname("hw.ncpu", &ncpu, &size, nullptr, 0);
+	len = sizeof(ncpu);
+	sysctlbyname("hw.ncpu", &ncpu, &len, nullptr, 0);
 	writeLog(QString("Processor logical cores: %1").arg(ncpu));
 
 	// memory info
 	int64_t totalRAM = 0;
-	size = sizeof(totalRAM);
-	sysctlbyname("hw.physmem", &totalRAM, &size, nullptr, 0);
+	len = sizeof(totalRAM);
+	sysctlbyname("hw.physmem", &totalRAM, &len, nullptr, 0);
 	writeLog(QString("Total physical memory: %1 MB").arg(totalRAM/(1024<<10)));
 #endif
 
