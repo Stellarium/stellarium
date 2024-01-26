@@ -40,7 +40,7 @@
 #ifdef Q_OS_LINUX
 #include <sys/types.h>
 #include <sys/sysinfo.h>
-#include <sys/pci.h>
+#include <pci/pci.h>
 #endif
 
 // Init statics variables.
@@ -264,8 +264,8 @@ void StelLogger::init(const QString& logFilePath)
 	pci_scan_bus(pciaccess);	/* We want to get the list of devices */
 	for (dev=pciaccess->devices; dev; dev=dev->next)	/* Iterate over all devices */
 	{
-		if (likely((pci_read_word(dev, PCI_CLASS_DEVICE) ^ 0x300) != 0))
-			continue;
+		//if (likely((pci_read_word(dev, PCI_CLASS_DEVICE) ^ 0x300) != 0))
+		//	continue;
 
 		/* Look up and print the full name of the device */
 		pci_lookup_name(pciaccess, namebuf, sizeof(namebuf), PCI_LOOKUP_DEVICE,
