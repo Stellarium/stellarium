@@ -40,6 +40,7 @@
 #ifdef Q_OS_LINUX
 #include <sys/types.h>
 #include <sys/sysinfo.h>
+#include <lib/pci.h>
 #endif
 
 // Init statics variables.
@@ -250,6 +251,26 @@ void StelLogger::init(const QString& logFilePath)
 		writeLog(QString("Processor maximum speed: %1 MHz").arg(freq));
 		writeLog(QString("Processor logical cores: %1").arg(ncpu));
 	}
+
+	// GPU info
+	struct pci_access *pacc;
+	struct pci_dev *dev;
+	unsigned int c;
+	char namebuf[1024], *name;
+
+	pacc = pci_alloc();	/* Get the pci_access structure */
+	pci_init(pacc);		/* Initialize the PCI library */
+	pci_scan_bus(pacc);	/* We want to get the list of devices */
+	for (dev=pacc->devices; dev; dev=dev->next)	/* Iterate over all devices */
+	{
+		pci_fill_info(dev, PCI_FILL_IDENT | PCI_FILL_BASES | PCI_FILL_CLASS);	/* Fill in header info we need */
+		//pci_read_word(dev, PCI_CLASS_DEVICE);
+
+		/* Look up and print the full name of the device */
+		name = pci_lookup_name(pacc, namebuf, sizeof(namebuf), PCI_LOOKUP_DEVICE, dev->vendor_id, dev->device_id);
+		writeLog(QString("PCI device: %1; class: %2").arg(name).arg(dev->device_class));
+	}
+	pci_cleanup(pacc);	/* Close everything */
 
 	// memory info
 	struct sysinfo memInfo;
