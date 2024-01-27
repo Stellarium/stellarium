@@ -248,7 +248,7 @@ void StelLogger::init(const QString& logFilePath)
 			// for ARM-devices, such Raspberry Pi
 			if (line.startsWith("hardware", Qt::CaseInsensitive))
 				hardware = line.split(":").last().trimmed();
-			if (line.startsWith("model", Qt::CaseInsensitive))
+			if (line.startsWith("model", Qt::CaseInsensitive) && !hardware.isEmpty())
 				model = line.split(":").last().trimmed();
 		}
 		infoFile.close();
