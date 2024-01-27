@@ -31,19 +31,13 @@
 #pragma comment(lib, "wbemuuid.lib")
 #endif
 
-#ifdef Q_OS_MACOS
-#include <sys/sysctl.h>
-#include <mach/mach.h>
-#include <string>
-#endif
-
 #ifdef Q_OS_LINUX
 #include <sys/types.h>
 #include <sys/sysinfo.h>
 #endif
 
 // all BSD systems
-#ifdef Q_OS_BSD4
+#if defined Q_OS_BSD4 || defined Q_OS_MACOS
 #include <sys/sysctl.h>
 // specific for NetBSD
 #ifdef Q_OS_NETBSD
@@ -53,6 +47,11 @@
 #ifdef Q_OS_OPENBSD
 #include <sys/types.h>
 #endif
+#endif
+
+#ifdef Q_OS_MACOS
+#include <mach/mach.h>
+#include <string>
 #endif
 
 // Init statics variables.
@@ -288,8 +287,8 @@ void StelLogger::init(const QString& logFilePath)
 
 #endif
 
-#ifdef Q_OS_BSD4
-	std::string _model = "hw.model", _freq = "", _ncpu = "hw.ncpu", _physmem = "hw.physmem64";
+#if defined Q_OS_BSD4 && !defined Q_OS_MACOS
+	QString _model = "hw.model", _freq = "", _ncpu = "hw.ncpu", _physmem = "hw.physmem64";
 
 	#ifdef Q_OS_FREEBSD
 	_freq          = "dev.cpu.0.freq";
