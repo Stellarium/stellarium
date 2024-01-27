@@ -37,7 +37,7 @@
   #include <malloc.h>
 #endif
 
-#if (defined(Q_OS_FREEBSD) || defined(Q_OS_NETBSD) || defined(Q_OS_OPENBSD) || defined(Q_OS_BSD4))
+#if defined Q_OS_BSD4 || defined Q_OS_HAIKU
   #include <sys/utsname.h>
 #endif
 
@@ -81,7 +81,7 @@ QString getOperatingSystemInfo()
 {
 	QString OS = QSysInfo::prettyProductName();
 
-	#if (defined(Q_OS_FREEBSD) || defined(Q_OS_NETBSD) || defined(Q_OS_OPENBSD) || defined(Q_OS_BSD4))
+	#if defined Q_OS_BSD4 || defined Q_OS_HAIKU
 	struct utsname buff;
 	if (uname(&buff) != -1)
 		OS = QString("%1 %2").arg(buff.sysname, buff.release);
