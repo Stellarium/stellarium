@@ -320,7 +320,7 @@ void StelLogger::init(const QString& logFilePath)
 	#else
 	int64_t freq = 0;
 	len = sizeof(freq);
-	(sysctlbyname(_freq, &freq, &len, nullptr, 0);
+	sysctlbyname(_freq, &freq, &len, nullptr, 0);
 	writeLog(QString("Processor speed: %1 MHz").arg(freq/1000000));
 	#endif
 
