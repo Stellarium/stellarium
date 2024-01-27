@@ -42,13 +42,17 @@
 #include <sys/sysinfo.h>
 #endif
 
-#ifdef Q_OS_FREEBSD
+// all BSD systems
+#ifdef Q_OS_BSD4
 #include <sys/sysctl.h>
-#endif
-
+// specific for NetBSD
 #ifdef Q_OS_NETBSD
 #include <sys/param.h>
-#include <sys/sysctl.h>
+#endif
+// specific for OpenBSD
+#ifdef Q_OS_OPENBSD
+#include <sys/types.h>
+#endif
 #endif
 
 // Init statics variables.
@@ -274,114 +278,48 @@ void StelLogger::init(const QString& logFilePath)
 
 #endif
 
-#ifdef Q_OS_FREEBSD
+#ifdef Q_OS_BSD4
+	std::string _model = "hw.model", _freq = "", _ncpu = "hw.ncpu", _physmem = "hw.physmem64";
+
+	#ifdef Q_OS_FREEBSD
+	_freq          = "dev.cpu.0.freq";
+	_physmem  = "hw.physmem";
+	#endif
+
+	#ifdef Q_OS_NETBSD
+	_model       = "machdep.cpu_brand";
+	#endif
+
+	#ifdef Q_OS_OPENBSD
+	_freq          = "hw.cpuspeed";
+	#endif
+
 	// CPU info
 	size_t len = 0;
-	sysctlbyname("hw.model", nullptr, &len, nullptr, 0);
+	sysctlbyname(_model, nullptr, &len, nullptr, 0);
 	std::string model(len, '\0');
-	sysctlbyname("hw.model", const_cast<char *>(model.data()), &len, nullptr, 0);
+	sysctlbyname(_model, const_cast<char *>(model.data()), &len, nullptr, 0);
 	writeLog(QString("Processor name: %1").arg(model.data()));
+
+	if (!_freq.isEmpty())
+	{
+		int freq = -1;
+		size = sizeof(freq);
+		if (sysctlbyname(_freq, &freq, &size, nullptr, 0) != -1)
+			writeLog(QString("Processor speed: %1 MHz").arg(freq));
+	}
 
 	int ncpu = 0;
 	len = sizeof(ncpu);
-	sysctlbyname("hw.ncpu", &ncpu, &len, nullptr, 0);
+	sysctlbyname(_ncpu, &ncpu, &len, nullptr, 0);
 	writeLog(QString("Processor logical cores: %1").arg(ncpu));
 
 	// memory info
 	int64_t totalRAM = 0;
 	len = sizeof(totalRAM);
-	sysctlbyname("hw.physmem", &totalRAM, &len, nullptr, 0);
+	sysctlbyname(_physmem, &totalRAM, &len, nullptr, 0);
 	writeLog(QString("Total physical memory: %1 MB").arg(totalRAM/(1024<<10)));
 #endif
-
-#ifdef Q_OS_NETBSD
-	// CPU info
-	size_t len = 0;
-	sysctlbyname("machdep.cpu_brand", nullptr, &len, nullptr, 0);
-	std::string model(len, '\0');
-	sysctlbyname("machdep.cpu_brand", const_cast<char *>(model.data()), &len, nullptr, 0);
-	writeLog(QString("Processor name: %1").arg(model.data()));
-
-	int ncpu = 0;
-	len = sizeof(ncpu);
-	sysctlbyname("hw.ncpu", &ncpu, &len, nullptr, 0);
-	writeLog(QString("Processor logical cores: %1").arg(ncpu));
-
-	// memory info
-	int64_t totalRAM = 0;
-	len = sizeof(totalRAM);
-	sysctlbyname("hw.physmem64", &totalRAM, &len, nullptr, 0);
-	writeLog(QString("Total physical memory: %1 MB").arg(totalRAM/(1024<<10)));
-#endif
-
-/*
-
-#ifdef Q_OS_LINUX
-
-	QProcess lspci;
-	lspci.start("lspci", { "-v" }, QIODevice::ReadOnly);
-	lspci.waitForFinished(300);
-	const QString pciData(lspci.readAll());
-	#if (QT_VERSION>=QT_VERSION_CHECK(5, 14, 0))
-	QStringList pciLines = pciData.split('\n', Qt::SkipEmptyParts);
-	#else
-	QStringList pciLines = pciData.split('\n', QString::SkipEmptyParts);
-	#endif
-	for (int i = 0; i<pciLines.size(); i++)
-	{
-		if(pciLines.at(i).contains("VGA compatible controller"))
-		{
-			writeLog(pciLines.at(i));
-			i++;
-			while(i < pciLines.size() && pciLines.at(i).startsWith('\t'))
-			{
-				if(pciLines.at(i).contains("Kernel driver in use"))
-					writeLog(pciLines.at(i).trimmed());
-				else if(pciLines.at(i).contains("Kernel modules"))
-					writeLog(pciLines.at(i).trimmed());
-				i++;
-			}
-		}
-	}
-
-// Aargh Windows API
-#elif defined Q_OS_WIN
-
-	// REMOVED
-
-#elif defined Q_OS_MACOS
-
-	// REMOVED
-
-#elif defined Q_OS_BSD4
-	QProcess dmesg;
-	dmesg.start("/sbin/dmesg", {}, QIODevice::ReadOnly);
-	dmesg.waitForStarted();
-	dmesg.waitForFinished();
-	const QString dmesgData(dmesg.readAll());
-	#if (QT_VERSION>=QT_VERSION_CHECK(5, 14, 0))
-	QStringList dmesgLines = dmesgData.split('\n', QString::SkipEmptyParts);
-	#else
-	QStringList dmesgLines = dmesgData.split('\n', Qt::SkipEmptyParts);
-	#endif
-	for (int i = 0; i<dmesgLines.size(); i++)
-	{
-		if (dmesgLines.at(i).contains("memory"))
-		{
-			writeLog(dmesgLines.at(i).trimmed());
-		}
-		if (dmesgLines.at(i).contains("CPU"))
-		{
-			writeLog(dmesgLines.at(i).trimmed());
-		}
-		if (dmesgLines.at(i).contains("VGA"))
-		{
-			writeLog(dmesgLines.at(i).trimmed());
-		}
-	}
-
-#endif
-*/
 }
 
 void StelLogger::deinit()
