@@ -222,7 +222,7 @@ void StelLogger::init(const QString& logFilePath)
 
 #ifdef Q_OS_LINUX
 	// CPU info
-	QString model = "unknown";
+	QString cpumodel = "unknown", hardware = "", model = "";
 	int ncpu = 0;
 	bool cpuOK = false;
 	QFile infoFile("/proc/cpuinfo");
@@ -241,9 +241,15 @@ void StelLogger::init(const QString& logFilePath)
 
 			if (line.startsWith("model name", Qt::CaseInsensitive) && readModel)
 			{
-				model = line.split(":").last().trimmed();
+				cpumodel = line.split(":").last().trimmed();
 				readModel = false;
 			}
+
+			// for ARM-devices, such Raspberry Pi
+			if (line.startsWith("hardware", Qt::CaseInsensitive))
+				hardware = line.split(":").last().trimmed();
+			if (line.startsWith("model", Qt::CaseInsensitive))
+				model = line.split(":").last().trimmed();
 		}
 		infoFile.close();
 	}
@@ -259,7 +265,11 @@ void StelLogger::init(const QString& logFilePath)
 
 	if (cpuOK)
 	{
-		writeLog(QString("Processor name: %1").arg(model));
+		writeLog(QString("Processor name: %1").arg(cpumodel));
+		if (!hardware.isEmpty())
+			writeLog(QString("Processor hardware: %1").arg(hardware));
+		if (!model.isEmpty())
+			writeLog(QString("Device model: %1").arg(model));
 		writeLog(QString("Processor maximum speed: %1 MHz").arg(freq));
 		writeLog(QString("Processor logical cores: %1").arg(ncpu));
 	}
