@@ -289,12 +289,11 @@ void StelLogger::init(const QString& logFilePath)
 
 #if defined Q_OS_BSD4 && !defined Q_OS_MACOS
 	const char* _model = "hw.model";
-	const char* _freq = "";
+	const char* _freq = "machdep.tsc_freq";
 	const char* _ncpu = "hw.ncpu";
 	const char* _physmem = "hw.physmem64";
 
 	#ifdef Q_OS_FREEBSD
-	_freq          = "dev.cpu.0.freq";
 	_physmem  = "hw.physmem";
 	#endif
 
@@ -313,10 +312,17 @@ void StelLogger::init(const QString& logFilePath)
 	sysctlbyname(_model, const_cast<char *>(model.data()), &len, nullptr, 0);
 	writeLog(QString("Processor name: %1").arg(model.data()));
 
+	#ifdef Q_OS_OPENBSD
 	int freq = -1;
 	len = sizeof(freq);
-	if (sysctlbyname(_freq, &freq, &len, nullptr, 0) != -1)
-		writeLog(QString("Processor speed: %1 MHz").arg(freq));
+	sysctlbyname(_freq, &freq, &len, nullptr, 0);
+	writeLog(QString("Processor speed: %1 MHz").arg(freq));
+	#else
+	int64_t freq = 0;
+	len = sizeof(freq);
+	(sysctlbyname(_freq, &freq, &len, nullptr, 0);
+	writeLog(QString("Processor speed: %1 MHz").arg(freq/1000000));
+	#endif
 
 	int ncpu = 0;
 	len = sizeof(ncpu);
