@@ -49,6 +49,12 @@
 #include <string>
 #endif
 
+#ifdef Q_OS_SOLARIS
+#include <sys/types.h>
+#include <sys/processor.h>
+#include <unistd.h>
+#endif
+
 // Init statics variables.
 QFile StelLogger::logFile;
 QString StelLogger::log;
@@ -324,6 +330,20 @@ void StelLogger::init(const QString& logFilePath)
 	int64_t totalRAM = 0;
 	len = sizeof(totalRAM);
 	sysctlbyname(_physmem, &totalRAM, &len, nullptr, 0);
+	writeLog(QString("Total physical memory: %1 MB").arg(totalRAM/(1024<<10)));
+#endif
+
+#ifdef Q_OS_SOLARIS
+	processor_info_t pinfo;
+	processor_info(0, &pinfo);
+	writeLog(QString("Processor name: %1").arg(pinfo.pi_processor_type));
+	writeLog(QString("Processor speed: %1 MHz").arg(pinfo.pi_clock));
+
+	int ncpu = sysconf( _SC_NPROCESSORS_ONLN );
+	writeLog(QString("Processor logical cores: %1").arg(ncpu));
+
+	// memory info
+	int64_t totalRAM = (size_t)sysconf( _SC_PHYS_PAGES ) * (size_t)sysconf( _SC_PAGESIZE );
 	writeLog(QString("Total physical memory: %1 MB").arg(totalRAM/(1024<<10)));
 #endif
 }
