@@ -38,16 +38,13 @@ ENDIF()
 # Activate this to error on all things deprecated in 5.15
 #add_compile_definitions("QT_DISABLE_DEPRECATED_BEFORE=0x050F00")
 
-# two last digits of the current year
-STRING(TIMESTAMP SHORTYEAR "%y")
-MATH(EXPR STELLARIUM_MAJOR_DIGIT "${SHORTYEAR} + 0" OUTPUT_FORMAT DECIMAL)
 # Version of Stellarium has format YY.V.YD, where:
 # -- YY (MAJOR) - two last digits of the year of release
 # -- V  (MINOR) - version of the release (0 is used before first release)
 # -- YD (PATCH) - 0 for releases and the day of the current year for snapshots
 # Example: first release in year 2023 has version 23.1.0 and short (public) version 23.1, series 23.0
 # Note: Use integer versions instead of strings for easier handling if required
-SET(STELLARIUM_MAJOR ${STELLARIUM_MAJOR_DIGIT})
+SET(STELLARIUM_MAJOR 24)
 SET(STELLARIUM_MINOR ${STELLARIUM_RELEASE_NUMBER})
 IF(STELLARIUM_RELEASE_BUILD)
     ADD_DEFINITIONS(-DSTELLARIUM_RELEASE_BUILD)
