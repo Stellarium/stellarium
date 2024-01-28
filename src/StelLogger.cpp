@@ -336,7 +336,7 @@ void StelLogger::init(const QString& logFilePath)
 #ifdef Q_OS_SOLARIS
 	processor_info_t pinfo;
 	processor_info(0, &pinfo);
-	writeLog(QString("Processor name: %1").arg(pinfo.pi_processor_type));
+	//writeLog(QString("Processor name: %1").arg(pinfo.pi_processor_type));
 	writeLog(QString("Processor speed: %1 MHz").arg(pinfo.pi_clock));
 
 	int ncpu = sysconf( _SC_NPROCESSORS_ONLN );
