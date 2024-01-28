@@ -75,7 +75,7 @@ public slots:
 	//! Formats a comma-separated string in angle brackets
 	//! @todo currently this seems to to nothing. JS print output shows "V3d(address)". Use toVec3d() to show the values formatted by Vec3d's method.
 	Q_INVOKABLE QString toString() const {return QString("[%1, %2, %3]").arg(m_x).arg(m_y).arg(m_z);}
-	//! Formats a hex string
+	//! Formats a hex string usable as HTML color
 	Q_INVOKABLE QString toHex() const;
 private:
 	double m_x, m_y, m_z;
@@ -122,6 +122,8 @@ public slots:
 	//! Formats a comma-separated string in angle brackets
 	//! @todo currently this seems to to nothing. JS print output shows "V3f(address)". Use toVec3f() to show the values formatted by Vec3f's method.
 	Q_INVOKABLE QString toString() const {return QString("[%1, %2, %3]").arg(m_x).arg(m_y).arg(m_z);}
+	//! Formats a hex string usable as HTML color
+	Q_INVOKABLE QString toHex() const;
 private:
 	float m_x, m_y, m_z;
 };

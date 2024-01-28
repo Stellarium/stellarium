@@ -214,11 +214,7 @@ void StelLogger::init(const QString& logFilePath)
 	dmesg.waitForStarted();
 	dmesg.waitForFinished();
 	const QString dmesgData(dmesg.readAll());
-	#if (QT_VERSION>=QT_VERSION_CHECK(5, 14, 0))
-	QStringList dmesgLines = dmesgData.split('\n', QString::SkipEmptyParts);
-	#else
 	QStringList dmesgLines = dmesgData.split('\n', Qt::SkipEmptyParts);
-	#endif
 	for (int i = 0; i<dmesgLines.size(); i++)
 	{
 		if (dmesgLines.at(i).contains("memory"))
