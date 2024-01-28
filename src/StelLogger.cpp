@@ -288,21 +288,18 @@ void StelLogger::init(const QString& logFilePath)
 #endif
 
 #if defined Q_OS_BSD4 && !defined Q_OS_MACOS
-	const char* _model = "hw.model";
-	const char* _freq = "machdep.tsc_freq";
-	const char* _ncpu = "hw.ncpu";
-	const char* _physmem = "hw.physmem64";
-
-	#ifdef Q_OS_FREEBSD
-	_physmem  = "hw.physmem";
-	#endif
+	const char* _model   = "hw.model";
+	const char* _freq    = "machdep.tsc_freq";
+	const char* _ncpu    = "hw.ncpu";
+	const char* _physmem = "hw.physmem";
 
 	#ifdef Q_OS_NETBSD
-	_model       = "machdep.cpu_brand";
+	_model   = "machdep.cpu_brand";
+	_physmem = "hw.physmem64";
 	#endif
 
 	#ifdef Q_OS_OPENBSD
-	_freq          = "hw.cpuspeed";
+	_freq    = "hw.cpuspeed";
 	#endif
 
 	// CPU info
