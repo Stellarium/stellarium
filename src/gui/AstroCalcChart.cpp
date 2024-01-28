@@ -383,7 +383,7 @@ void AstroCalcChart::setupAxes(const double jd, const int periods, const QString
 		xAxis->setTickCount(13); // step is 2 hours
 		//xAxis->setFormat("<div style=\"text-align:center\">dd.MM.<br/>hh:mm</div>"); // This sets C locale with AM/PM hours! :-O
 		xAxis->setFormat("dd.MM.<br/>hh:mm");
-		xRange=findXRange(floor(jd+shift), AstroCalcChart::AltVsTime, 1);
+		xRange=findXRange(std::floor(jd+shift), AstroCalcChart::AltVsTime, 1);
 	}
 	else if (map.contains(AstroCalcChart::MonthlyElevation))
 	{
@@ -394,7 +394,7 @@ void AstroCalcChart::setupAxes(const double jd, const int periods, const QString
 	else if (map.contains(AstroCalcChart::LunarElongation))
 	{
 		xAxis->setTickCount(18+1); // step is 2 days. 16 intervals.
-		//xRange=findXRange(floor(jd)+0.5+shift, AstroCalcChart::LunarElongation, 1);
+		//xRange=findXRange(std::floor(jd)+0.5+shift, AstroCalcChart::LunarElongation, 1);
 		xRange=findXRange(jd, AstroCalcChart::LunarElongation, 1);
 	}
 	else if (map.contains(AstroCalcChart::pcDistanceAU))
@@ -546,10 +546,10 @@ void AstroCalcChart::setYrange(Series series, qreal min, qreal max, bool strictM
 
 	// We have to find a scaling that has steps in an appropriate range.
 	const double logYDiff=log10(yMax-yMin);
-	const double s=pow(10., floor(logYDiff)-1.); // A power of 10 that should provide not too much buffer above/below
+	const double s=std::pow(10., std::floor(logYDiff)-1.); // A power of 10 that should provide not too much buffer above/below
 
-	qreal rMin=floor(yMin/s)*s;
-	qreal rMax=ceil(yMax/s)*s;
+	qreal rMin=std::floor(yMin/s)*s;
+	qreal rMax=std::ceil(yMax/s)*s;
 
 	//qDebug() << "Setting yrange from" << min << "/" << max << "-->" << rMin << "/" << rMax;
 	yAxis->setRange(rMin, rMax);
@@ -573,10 +573,10 @@ void AstroCalcChart::setYrangeR(Series series, qreal min, qreal max)
 
 	// We have to find a scaling that has steps in an appropriate range.
 	const double logYDiff=log10(yMaxR-yMinR);
-	const double s=pow(10., floor(logYDiff)-1.);
+	const double s=std::pow(10., std::floor(logYDiff)-1.);
 
-	qreal rMin=floor(yMinR/s)*s;
-	qreal rMax=ceil(yMaxR/s)*s;
+	qreal rMin=std::floor(yMinR/s)*s;
+	qreal rMax=std::ceil(yMaxR/s)*s;
 
 	//qDebug() << "Setting yrangeR from" << min << "/" << max << "-->" << rMin*s << "/" << rMax*s;
 	yAxisR->setRange(rMin, rMax);

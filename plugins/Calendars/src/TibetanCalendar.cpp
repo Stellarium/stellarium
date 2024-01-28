@@ -226,7 +226,7 @@ int TibetanCalendar::fixedFromTibetan(QVector<int> tibetan)
 	const int day       = tibetan.value(3);
 	const int leapDay   = tibetan.value(4);
 
-	const int months=qRound(floor(804./65.*(year-1) + (67./65.)*month + (leapMonth ? -1 : 0) + (64./65.)));
+	const int months=qRound(std::floor(804./65.*(year-1) + (67./65.)*month + (leapMonth ? -1 : 0) + (64./65.)));
 	const int days = 30*months+day;
 	const double mean=days*(11135./11312.) - 30. + (leapDay ? 0. : -1.) +(1071./1616.);
 	const double solarAnomaly = StelUtils::fmodpos(days*(13./4824.)+(2117./4824.), 1.);
@@ -234,7 +234,7 @@ int TibetanCalendar::fixedFromTibetan(QVector<int> tibetan)
 	const double sun  = -tibetanSunEquation(12.*solarAnomaly);
 	const double moon =  tibetanMoonEquation(28.*lunarAnomaly);
 
-	return qRound(floor(tibetanEpoch+mean+sun+moon));
+	return qRound(std::floor(tibetanEpoch+mean+sun+moon));
 }
 
 QVector<int> TibetanCalendar::tibetanFromFixed(int rd)
@@ -295,7 +295,7 @@ double TibetanCalendar::tibetanSunEquation(const double alpha)
 		res=map.value(3.);
 	else res=map.value(alpha,
 			   StelUtils::fmodpos(alpha, 1.)*tibetanSunEquation(ceil(alpha)) +
-			   StelUtils::fmodpos(-alpha, 1.)*tibetanSunEquation(floor(alpha))
+			   StelUtils::fmodpos(-alpha, 1.)*tibetanSunEquation(std::floor(alpha))
 			   );
 	return res;
 }
@@ -327,7 +327,7 @@ double TibetanCalendar::tibetanMoonEquation(const double alpha)
 		res=map.value(7.);
 	else res= map.value(alpha,
 			    StelUtils::fmodpos(alpha, 1.)*tibetanMoonEquation(ceil(alpha)) +
-			    StelUtils::fmodpos(-alpha, 1.)*tibetanMoonEquation(floor(alpha))
+			    StelUtils::fmodpos(-alpha, 1.)*tibetanMoonEquation(std::floor(alpha))
 			   );
 	return res;
 }

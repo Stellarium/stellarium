@@ -245,7 +245,7 @@ unsigned char Quasar::BvToColorIndex(float b_v)
 	if (b_v<-98.f)
 		b_v = 0.f;
 	double dBV = qBound(-500., static_cast<double>(b_v)*1000., 3499.);
-	return static_cast<unsigned char>(floor(0.5+127.0*((500.0+dBV)/4000.0)));
+	return static_cast<unsigned char>(std::floor(0.5+127.0*((500.0+dBV)/4000.0)));
 }
 
 Vec3d Quasar::getJ2000EquatorialPos(const StelCore* core) const

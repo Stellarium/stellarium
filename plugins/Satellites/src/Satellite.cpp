@@ -238,7 +238,7 @@ Satellite::~Satellite()
 double Satellite::roundToDp(float n, int dp)
 {
 	// round n to dp decimal places
-	return floor(static_cast<double>(n) * pow(10., dp) + .5) / pow(10., dp);
+	return std::floor(static_cast<double>(n) * pow(10., dp) + .5) / pow(10., dp);
 }
 
 QString Satellite::getNameI18n() const

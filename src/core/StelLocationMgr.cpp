@@ -381,7 +381,7 @@ void NMEALookupHelper::nmeaUpdated(const QGeoPositionInfo &update)
 		loc.setLongitude(static_cast<float>(coord.longitude()));
 		loc.setLatitude(static_cast<float>(coord.latitude()));
 		// 2D fix may have only long/lat, invalid altitude.
-		loc.altitude=( qIsNaN(coord.altitude()) ? 0 : static_cast<int>(floor(coord.altitude())));
+		loc.altitude=( qIsNaN(coord.altitude()) ? 0 : static_cast<int>(std::floor(coord.altitude())));
 		emit queryFinished(loc);
 	}
 	else
@@ -1504,8 +1504,8 @@ QPair<int, QChar> StelLocationMgr::utmZone(const double longitude, const double 
 	// Everything in the middle
 	else if ( (latitude>-80.0) && (latitude<=84.0) ){
 		static const QString mid_zones("CDEFGHJKLMNPQRSTUVWX"); // C to X, skip I and O
-		letter = mid_zones[ qMin((int(floor(latitude)) + 80) / 8 , 19) ];
-		zone   = StelUtils::amod((int(floor(longitude)) + 180) / 6 , 60) + 1; // modulo in case longitude is 0 to 360 instead of -180 to 180
+		letter = mid_zones[ qMin((int(std::floor(latitude)) + 80) / 8 , 19) ];
+		zone   = StelUtils::amod((int(std::floor(longitude)) + 180) / 6 , 60) + 1; // modulo in case longitude is 0 to 360 instead of -180 to 180
 	}
 	// North + South Poles
 	else if (latitude > 84.0)

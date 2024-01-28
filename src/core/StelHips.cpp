@@ -624,7 +624,7 @@ static void healpix_xy2_z_phi(const double xy[2], double *z, double *phi)
 	// Polar
 	sigma = 2 - fabs(y * 4) / M_PI;
 	*z = (y > 0 ? 1 : -1) * (1 - sigma * sigma / 3);
-	xc = -M_PI + (2 * floor((x + M_PI) * 4 / (2 * M_PI)) + 1) * M_PI / 4;
+	xc = -M_PI + (2 * std::floor((x + M_PI) * 4 / (2 * M_PI)) + 1) * M_PI / 4;
 	*phi = sigma ? (xc + (x - xc) / sigma) : x;
     } else {
 	// Equatorial
