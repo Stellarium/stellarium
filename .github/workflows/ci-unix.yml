@@ -98,6 +98,7 @@ jobs:
 
         run: |
           set -e -x
+          sysctl -a
           #export Qt5_DIR=/usr/local/lib/qt5/cmake/Qt5
           #export Qt5Script_DIR=/usr/local/lib/qt5/cmake/Qt5Script
           #export Qt5LinguistTools_DIR=/usr/local/lib/qt5/cmake/Qt5LinguistTools
