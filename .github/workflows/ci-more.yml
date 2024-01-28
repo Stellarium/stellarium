@@ -16,7 +16,7 @@ jobs:
         arch: [armv7, aarch64, riscv64]
     name: "Linux (${{ matrix.arch }}; qt5)"
     runs-on: ubuntu-22.04
-    if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.actor, 'transifex')"
+    if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.actor, 'transifex') && contains(github.event.head_commit.message, '[qt5]')"
 
     steps:
     - name: Checkout repository
