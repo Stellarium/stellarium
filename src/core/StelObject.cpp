@@ -374,8 +374,18 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 	const double currentJD = core->getJD();
 	const double utcShift = core->getUTCOffset(currentJD) / 24.; // Fix DST shift...
 	QString currentObjStr = getEnglishName();
+	if (currentObjStr == "") // If objects have no name, we need something to represent it.
+	{
+		double ra_j2000, dec_j2000;
+		StelUtils::rectToSphe(&ra_j2000,&dec_j2000,getJ2000EquatorialPos(core));
+		currentObjStr = StelUtils::radToHmsStr(ra_j2000);
+	}
+
 	QString res, firstCoordinate, secondCoordinate;
 	int currentYear, currentMonth, currentDay;
+	double currentLatitude=static_cast<double>(currentLocation.getLatitude());
+	double currentLongitude=static_cast<double>(currentLocation.getLongitude());
+
 	StelUtils::getDateFromJulianDay(currentJD+utcShift, &currentYear, &currentMonth, &currentDay);
 	double az_app, alt_app;
 	StelUtils::rectToSphe(&az_app,&alt_app,getAltAzPosApparent(core));
@@ -717,11 +727,25 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 	if (flags&RTSTime && getType()!=QStringLiteral("Satellite") && currentLocation.role!='o' && !onTransitionToNewLocation)
 	{
 		static int prevYear, prevMonth, prevDay;
-		static QString prevObjStr;
+		static QString prevObjStr, prevPlanet;
+		static double prevLatitude, prevLongitude;
 
 		const bool isSun = (getEnglishName()=="Sun");
 		static Vec4d rts;
-		if ((currentYear != prevYear) || (currentMonth != prevMonth) || (currentDay != prevDay) || (currentObjStr != prevObjStr))
+		bool dayChanged = false;
+		bool locationChanged = false;
+		if ((currentYear != prevYear) || (currentMonth != prevMonth) || (currentDay != prevDay))
+		{
+			dayChanged = true;
+		}
+
+		if ((currentLatitude != prevLatitude) || (currentLongitude != prevLongitude))
+		{
+			locationChanged = true;
+		}
+
+		// Avoid frequent RTS recalculation
+		if ((currentObjStr != prevObjStr) || (currentPlanet != prevPlanet) || dayChanged || locationChanged)
 		{
 			rts = getRTSTime(core);
 		}
@@ -916,6 +940,9 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 		prevYear = currentYear;
 		prevMonth = currentMonth;
 		prevDay = currentDay;
+		prevLatitude = currentLatitude;
+		prevLongitude = currentLongitude;
+		prevPlanet = currentPlanet;
 	}
 
 	if (flags&Extra)
@@ -1018,6 +1045,10 @@ QVariantMap StelObject::getInfoMap(const StelCore *core) const
 	double ra, dec, alt, az, glong, glat;
 	bool useOldAzimuth = StelApp::getInstance().getFlagSouthAzimuthUsage();
 	QString currentObjStr = getEnglishName();
+	if (currentObjStr == "") // If objects have no name, we need something to represent it.
+	{
+		currentObjStr = StelUtils::radToHmsStr(ra);
+	}
 
 	map.insert("type", getType());
 	map.insert("object-type", getObjectType());
@@ -1142,13 +1173,30 @@ QVariantMap StelObject::getInfoMap(const StelCore *core) const
 	const double currentJD = core->getJD();
 	const double utcShift = core->getUTCOffset(currentJD) / 24.; // Fix DST shift...
 	int currentYear, currentMonth, currentDay;
+	const StelLocation currentLocation=core->getCurrentLocation();
+	double currentLatitude=static_cast<double>(currentLocation.getLatitude());
+	double currentLongitude=static_cast<double>(currentLocation.getLongitude());
+	const QString currentPlanet = core->getCurrentPlanet()->getEnglishName();
 	StelUtils::getDateFromJulianDay(currentJD+utcShift, &currentYear, &currentMonth, &currentDay);
 
 	static int prevYear, prevMonth, prevDay;
 	static Vec4d rts;
-	static QString prevObjStr;
+	static QString prevObjStr, prevPlanet;
+	static double prevLatitude, prevLongitude;
+	bool dayChanged = false;
+	bool locationChanged = false;
+	if ((currentYear != prevYear) || (currentMonth != prevMonth) || (currentDay != prevDay))
+	{
+		dayChanged = true;
+	}
 
-	if ((currentYear != prevYear) || (currentMonth != prevMonth) || (currentDay != prevDay) || (currentObjStr != prevObjStr))
+	if ((currentLatitude != prevLatitude) || (currentLongitude != prevLongitude))
+	{
+		locationChanged = true;
+	}
+
+	// Avoid frequent RTS recalculation
+	if ((currentObjStr != prevObjStr) || (currentPlanet != prevPlanet) || dayChanged || locationChanged)
 	{
 		rts = getRTSTime(core);
 	}
@@ -1200,6 +1248,9 @@ QVariantMap StelObject::getInfoMap(const StelCore *core) const
 	prevYear = currentYear;
 	prevMonth = currentMonth;
 	prevDay = currentDay;
+	prevLatitude = currentLatitude;
+	prevLongitude = currentLongitude;
+	prevPlanet = currentPlanet;
 
 	return map;
 }
