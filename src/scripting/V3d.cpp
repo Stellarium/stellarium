@@ -42,9 +42,9 @@ V3d & V3d::operator =(const V3d &v)
 QString V3d::toHex() const
 {
 	return QString("#%1%2%3")
-		.arg(qMin(255, int(m_x * 255)), 2, 16, QChar('0'))
-		.arg(qMin(255, int(m_y * 255)), 2, 16, QChar('0'))
-		.arg(qMin(255, int(m_z * 255)), 2, 16, QChar('0'));
+		.arg(qMin(255, qRound(m_x * 255)), 2, 16, QChar('0'))
+		.arg(qMin(255, qRound(m_y * 255)), 2, 16, QChar('0'))
+		.arg(qMin(255, qRound(m_z * 255)), 2, 16, QChar('0'));
 }
 
 /////////////////////
@@ -66,9 +66,9 @@ V3f & V3f::operator =(const V3f &v)
 QString V3f::toHex() const
 {
 	return QString("#%1%2%3")
-		.arg(qMin(255, int(m_x * 255)), 2, 16, QChar('0'))
-		.arg(qMin(255, int(m_y * 255)), 2, 16, QChar('0'))
-		.arg(qMin(255, int(m_z * 255)), 2, 16, QChar('0'));
+		.arg(qMin(255, qRound(m_x * 255)), 2, 16, QChar('0'))
+		.arg(qMin(255, qRound(m_y * 255)), 2, 16, QChar('0'))
+		.arg(qMin(255, qRound(m_z * 255)), 2, 16, QChar('0'));
 }
 
 ///////////////////////
@@ -108,8 +108,8 @@ Color::Color(QString hexColor) : QObject()
 QString Color::toHex() const
 {
 	return QString("#%1%2%3")
-		.arg(qMin(255, int(m_r * 255)), 2, 16, QChar('0'))
-		.arg(qMin(255, int(m_g * 255)), 2, 16, QChar('0'))
-		.arg(qMin(255, int(m_b * 255)), 2, 16, QChar('0'));
+		.arg(qMin(255, qRound(m_r * 255)), 2, 16, QChar('0'))
+		.arg(qMin(255, qRound(m_g * 255)), 2, 16, QChar('0'))
+		.arg(qMin(255, qRound(m_b * 255)), 2, 16, QChar('0'));
 }
 #endif
