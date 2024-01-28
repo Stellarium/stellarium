@@ -94,7 +94,7 @@ labels:
         body: |
           Hello @{{ issue.user.login }}!
 
-          This issue being blocked by another issue. Thanks for the report!
+          This issue being blocked by another PR or issue. Thanks for the report!
   - name: "state: confirmed"
     labeled:
       issue:
