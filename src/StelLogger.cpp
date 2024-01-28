@@ -38,15 +38,10 @@
 
 // all BSD systems
 #if defined Q_OS_BSD4 || defined Q_OS_MACOS
+#include <unistd.h>
 #include <sys/sysctl.h>
-// specific for NetBSD
-#ifdef Q_OS_NETBSD
 #include <sys/param.h>
-#endif
-// specific for OpenBSD
-#ifdef Q_OS_OPENBSD
 #include <sys/types.h>
-#endif
 #endif
 
 #ifdef Q_OS_MACOS
@@ -187,13 +182,10 @@ void StelLogger::init(const QString& logFilePath)
 #endif
 
 #ifdef Q_OS_MACOS
-	size_t size = 1024;
-	std::string cpuname;
-	cpuname.resize(size);
-	if (sysctlbyname("machdep.cpu.brand_string", cpuname.data(), &size, nullptr, 0) < 0)
-		cpuname = "unknown";
-	else
-		cpuname.resize(size);
+	size_t size = 0;
+	sysctlbyname("machdep.cpu.brand_string", nullptr, &size, nullptr, 0);
+	std::string cpuname(size, '\0');
+	sysctlbyname("machdep.cpu.brand_string", const_cast<char *>(cpuname.data()), &size, nullptr, 0);
 	writeLog(QString("Processor name: %1").arg(cpuname.data()));
 
 	int64_t maxFreq = 0;
@@ -203,7 +195,7 @@ void StelLogger::init(const QString& logFilePath)
 
 	int ncpu = 0;
 	size = sizeof(ncpu);
-	sysctlbyname("hw.logicalcpu", &ncpu, &size, nullptr, 0);
+	sysctlbyname("hw.ncpu", &ncpu, &size, nullptr, 0);
 	writeLog(QString("Processor logical cores: %1").arg(ncpu));
 
 	int64_t totalRAM = 0;
@@ -212,10 +204,9 @@ void StelLogger::init(const QString& logFilePath)
 	writeLog(QString("Total physical memory: %1 MB").arg(totalRAM/(1024<<10)));
 
 	// extra info
-	size_t len = 0;
-	sysctlbyname("hw.model", nullptr, &len, nullptr, 0);
-	std::string model(len, '\0');
-	sysctlbyname("hw.model", const_cast<char *>(model.data()), &len, nullptr, 0);
+	sysctlbyname("hw.model", nullptr, &size, nullptr, 0);
+	std::string model(size, '\0');
+	sysctlbyname("hw.model", const_cast<char *>(model.data()), &size, nullptr, 0);
 	writeLog(QString("Model identifier: %1").arg(model.data()));
 #endif
 
@@ -288,18 +279,21 @@ void StelLogger::init(const QString& logFilePath)
 #endif
 
 #if defined Q_OS_BSD4 && !defined Q_OS_MACOS
-	const char* _model   = "hw.model";
-	const char* _freq    = "machdep.tsc_freq";
-	const char* _ncpu    = "hw.ncpu";
+	const char* _model      = "hw.model";
+	const char* _freq         = "machdep.tsc_freq";
+	const char* _ncpu        = "hw.ncpu";
 	const char* _physmem = "hw.physmem";
 
 	#ifdef Q_OS_NETBSD
-	_model   = "machdep.cpu_brand";
+	_model      = "machdep.cpu_brand";
 	_physmem = "hw.physmem64";
 	#endif
 
 	#ifdef Q_OS_OPENBSD
-	_freq    = "hw.cpuspeed";
+	_freq         = "hw.cpuspeed";
+	#if defined(HW_PHYSMEM64)
+	_physmem = "hw.physmem64";
+	#endif
 	#endif
 
 	// CPU info
@@ -310,7 +304,7 @@ void StelLogger::init(const QString& logFilePath)
 	writeLog(QString("Processor name: %1").arg(model.data()));
 
 	#ifdef Q_OS_OPENBSD
-	int freq = -1;
+	int freq = 0;
 	len = sizeof(freq);
 	sysctlbyname(_freq, &freq, &len, nullptr, 0);
 	writeLog(QString("Processor speed: %1 MHz").arg(freq));
