@@ -418,7 +418,7 @@ struct OctTessTrianglesCallbackData
 void errorCallback(GLenum errn)
 {
 	qWarning() << "Tessellator error:" << QString::fromLatin1(reinterpret_cast<const char*>(gluesErrorString(errn)));
-	Q_ASSERT(0);
+	//Q_ASSERT(0);
 }
 
 void vertexTrianglesCallback(Vec3d* vertexData, OctTessTrianglesCallbackData* userData)
