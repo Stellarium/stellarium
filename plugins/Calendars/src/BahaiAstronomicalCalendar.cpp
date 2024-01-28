@@ -92,7 +92,7 @@ int BahaiAstronomicalCalendar::astroBahaiNewYearOnOrBefore(int rd)
 {
 	double approx=estimatePriorSolarLongitude(static_cast<double>(Calendar::spring), bahaiSunset(rd));
 
-	int day=qRound(floor(approx))-2;
+	int day=qRound(std::floor(approx))-2;
 	double lng;
 	do {
 		day++;
@@ -112,11 +112,11 @@ int BahaiAstronomicalCalendar::fixedFromBahaiAstronomical(QVector<int> bahai5)
 
 	const int years=361*(major-1)+19*(cycle-1)+year;
 	if (month==19)
-		return astroBahaiNewYearOnOrBefore(bahaiEpoch+floor(meanTropicalYear*(years+0.5)))-20+day;
+		return astroBahaiNewYearOnOrBefore(bahaiEpoch+std::floor(meanTropicalYear*(years+0.5)))-20+day;
 	else if (month==ayyam_i_Ha)
-		return astroBahaiNewYearOnOrBefore(bahaiEpoch+floor(meanTropicalYear*(years-0.5)))+341+day;
+		return astroBahaiNewYearOnOrBefore(bahaiEpoch+std::floor(meanTropicalYear*(years-0.5)))+341+day;
 	else
-		return astroBahaiNewYearOnOrBefore(bahaiEpoch+floor(meanTropicalYear*(years-0.5)))+(month-1)*19+day-1;
+		return astroBahaiNewYearOnOrBefore(bahaiEpoch+std::floor(meanTropicalYear*(years-0.5)))+(month-1)*19+day-1;
 }
 
 QVector<int> BahaiAstronomicalCalendar::bahaiAstronomicalFromFixed(int rd)

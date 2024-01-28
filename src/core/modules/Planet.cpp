@@ -1369,7 +1369,7 @@ QString Planet::getInfoStringExtra(const StelCore *core, const InfoStringGroup& 
 			const double totalLibr=sqrt(Le*Le+Be*Be);
 			double librAngle=StelUtils::fmodpos(atan2(Le, -Be), 2.0*M_PI);
 			// find out and indicate which limb is optimally visible
-			const int limbSector= std::lround(floor(StelUtils::fmodpos(librAngle*M_180_PI+11.25, 360.)/22.5));
+			const int limbSector= std::lround(std::floor(StelUtils::fmodpos(librAngle*M_180_PI+11.25, 360.)/22.5));
 			QString limbStr=compassDirs.at(limbSector);
 			if (totalLibr>3.*M_PI_180)
 				limbStr.append("!");

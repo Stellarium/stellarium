@@ -42,7 +42,7 @@ struct PrintRaDec
 static QTextStream &operator<<(QTextStream &o, const PrintRaDec &x)
 {
 	unsigned int h = x.ra_int;
-	int d = static_cast<int>(floor(0.5+x.dec_int*(360*3600*1000/4294967296.0)));
+	int d = static_cast<int>(std::floor(0.5+x.dec_int*(360*3600*1000/4294967296.0)));
 	char dec_sign;
 	if (d >= 0)
 	{
@@ -63,7 +63,7 @@ static QTextStream &operator<<(QTextStream &o, const PrintRaDec &x)
 		d = -d;
 		dec_sign = '-';
 	}
-	h = static_cast<unsigned int>(floor(0.5+h*(24*3600*10000/4294967296.0)));
+	h = static_cast<unsigned int>(std::floor(0.5+h*(24*3600*10000/4294967296.0)));
 	const int ra_ms = h % 10000; h /= 10000;
 	const int ra_s = h % 60; h /= 60;
 	const int ra_m = h % 60; h /= 60;

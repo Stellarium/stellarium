@@ -494,7 +494,7 @@ void rv2coe(double r[3], double v[3], double mu,
 void jday(int year, int mon, int day, int hr, int minute, double sec, double& jd)
 {
 	jd = 367.0 * year -
-	     std::floor((7 * (year + floor((mon + 9) / 12.0))) * 0.25) +
+	     std::floor((7 * (year + std::floor((mon + 9) / 12.0))) * 0.25) +
 	     std::floor( 275 * mon / 9.0 ) +
 	     day + 1721013.5 +
 	     ((sec / 60.0 + minute) / 60.0 + hr) / 24.0;  // ut in days

@@ -206,7 +206,7 @@ QString Comet::getInfoStringSize(const StelCore *core, const InfoStringGroup &fl
 	{
 		// GZ: Add estimates for coma diameter and tail length.
 		QString comaEst = q_("Coma diameter (estimate)");
-		const double coma = floor(static_cast<double>(tailFactors[0])*AU/1000.0)*1000.0;
+		const double coma = std::floor(static_cast<double>(tailFactors[0])*AU/1000.0)*1000.0;
 		const double tail = static_cast<double>(tailFactors[1])*AU;
 		const double distanceKm = AU * getJ2000EquatorialPos(core).norm();
 		// Try to estimate tail length in degrees.

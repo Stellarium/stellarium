@@ -67,7 +67,7 @@ int FrenchAstronomicalCalendar::fixedFromFrenchAstronomical(QVector<int> french)
 	const int month=french.value(1);
 	const int day  =french.value(2);
 
-	const int newYear=frenchNewYearOnOrBefore(qRound(floor(frenchEpoch+180+meanTropicalYear*(year-1))));
+	const int newYear=frenchNewYearOnOrBefore(qRound(std::floor(frenchEpoch+180+meanTropicalYear*(year-1))));
 	return newYear-1+30*(month-1)+day;
 }
 
@@ -87,7 +87,7 @@ int FrenchAstronomicalCalendar::frenchNewYearOnOrBefore(int rd)
 {
 	const double approx=estimatePriorSolarLongitude(static_cast<double>(Calendar::autumn), midnightInParis(rd));
 
-	int day=qRound(floor(approx))-2;
+	int day=qRound(std::floor(approx))-2;
 	double lng;
 	do {
 		day++;

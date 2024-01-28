@@ -708,7 +708,7 @@ void getDateFromJulianDay(const double jd, int *yy, int *mm, int *dd)
 
 	static const long JD_GREG_CAL = 2299161;
 	static const int JB_MAX_WITHOUT_OVERFLOW = 107374182;
-	const long julian = static_cast<long>(floor(jd + 0.5));
+	const long julian = static_cast<long>(std::floor(jd + 0.5));
 
 	long ta, jalpha, tb, tc, td, te;
 
@@ -758,9 +758,9 @@ void getDateFromJulianDay(const double jd, int *yy, int *mm, int *dd)
 
 void getTimeFromJulianDay(const double julianDay, int *hour, int *minute, int *second, int *millis, bool *wrapDay)
 {
-	double frac = julianDay - (floor(julianDay));
+	double frac = julianDay - (std::floor(julianDay));
 	double secs = frac * 24.0 * 60.0 * 60.0 + 0.0001; // add constant to fix floating-point truncation error
-	int s = int(floor(secs));
+	int s = int(std::floor(secs));
 
 	*hour = ((s / (60 * 60))+12);
 	if (*hour>=24)
@@ -777,7 +777,7 @@ void getTimeFromJulianDay(const double julianDay, int *hour, int *minute, int *s
 	*second = s % 60;
 	if(millis)
 	{
-		*millis = int(floor((secs - floor(secs)) * 1000.0));
+		*millis = int(std::floor((secs - std::floor(secs)) * 1000.0));
 	}
 	//qDebug() << "getTimeFromJulianDay:" << QString::number(frac, 'f', 18) << QString::number(secs, 'f', 5) << "~" << s << *hour << *minute << *second;
 }
@@ -1102,8 +1102,8 @@ double getJDFromDate_alg2(const int y, const int m, const int d, const int h, co
 {
 	double extra = (100.0* y) + m - 190002.5;
 	double rjd = 367.0 * y;
-	rjd -= floor(7.0*(y+floor((m+9.0)/12.0))/4.0);
-	rjd += floor(275.0*m/9.0) ;
+	rjd -= std::floor(7.0*(y+std::floor((m+9.0)/12.0))/4.0);
+	rjd += std::floor(275.0*m/9.0) ;
 	rjd += d;
 	rjd += (h + (min + s/60.0)/60.)/24.0;
 	rjd += 1721013.5;

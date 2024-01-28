@@ -1377,7 +1377,7 @@ float LandscapeOldStyle::getOpacity(Vec3d azalt) const
 	if (az_phot<0) az_phot+=1.0f;                                //  0..1 = image-X for a non-repeating pano photo
 	float az_panel =  nbSide*nbDecorRepeat * az_phot; // azimuth in "panel space". Ex for nbS=4, nbDR=3: [0..[12, say 11.4
 	float x_in_panel=fmodf(az_panel, 1.0f);
-	int currentSide = static_cast<int>(floor(fmodf(az_panel, nbSide)));
+	int currentSide = static_cast<int>(std::floor(fmodf(az_panel, nbSide)));
 	Q_ASSERT(currentSide>=0);
 	Q_ASSERT(currentSide<static_cast<int>(nbSideTexs));
 	if (sidesImages[currentSide]->isNull()) return 0.0f; // can happen if image is misconfigured and failed to load.

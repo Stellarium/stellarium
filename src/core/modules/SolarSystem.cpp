@@ -624,7 +624,7 @@ void SolarSystem::loadPlanets()
 unsigned char SolarSystem::BvToColorIndex(double bV)
 {
 	const double dBV = qBound(-500., static_cast<double>(bV)*1000.0, 3499.);
-	return static_cast<unsigned char>(floor(0.5+127.0*((500.0+dBV)/4000.0)));
+	return static_cast<unsigned char>(std::floor(0.5+127.0*((500.0+dBV)/4000.0)));
 }
 
 bool SolarSystem::loadPlanets(const QString& filePath)
