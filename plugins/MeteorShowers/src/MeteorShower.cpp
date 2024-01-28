@@ -664,12 +664,14 @@ QString MeteorShower::getInfoString(const StelCore* core, const InfoStringGroup&
 
 		// Altitude of radiant
 		StelUtils::rectToSphe(&az,&alt,getAltAzPosGeometric(core));
-		// Limiting magnitude
-		float mlimit = core->getSkyDrawer()->getLimitMagnitude();
-		if (mlimit>6.5) mlimit = 6.5;
+		// Naked-eye Limiting Magnitude
+		float nelm = StelCore::luminanceToNELM(core->getSkyDrawer()->getLightPollutionLuminance());
+		// float mlimit = core->getSkyDrawer()->getLimitMagnitude();
+		if (nelm>6.5) nelm = 6.5;
 		// Limiting magnitude could be higher than 6.5 but we can't see very faint meteors
 		// and we should set the limit to prevent unrealistic super-high meteor rate.
 		// Hourly rate that goes higher than ZHRmax may also confuse users if we allow it.
+		// Sunlight and moonlight are not taken into account. We should include them in the future version.
 		
 		if (m_activity.zhr > 0)
 		{
@@ -691,14 +693,16 @@ QString MeteorShower::getInfoString(const StelCore* core, const InfoStringGroup&
 
 				// Local hourly rate - radiant altitude and limiting magnitude are taken into account
 				// Jenniskens P. (1994), "Meteor stream activity I. The annual streams", Astron. Astrophys., 287, 990-1013.
-				localHR = qRound(currentZHR*sin(alt) / pow(m_pidx,6.5-mlimit));
+				localHR = qRound(currentZHR*sin(alt) / pow(m_pidx,6.5-nelm));
 				if (localHR<0) localHR = 0;
 				oss << QString("%1: %2<br />")
 						.arg(q_("Current ZHR"))
 						.arg(currentZHR);
-				oss << QString("%1: %2<br />")
+				oss << QString("%1: %2 (%3: %4)<br />")
 						.arg(q_("Local Hourly Rate"))
-						.arg(localHR);
+						.arg(localHR)
+						.arg(q_("Limiting magnitude"))
+						.arg(nelm);
 			}
 		}
 		else
@@ -719,15 +723,17 @@ QString MeteorShower::getInfoString(const StelCore* core, const InfoStringGroup&
 						.arg(minvarZHR)
 						.arg(maxvarZHR);
 
-					int localminvarHR = qRound(minvarZHR*sin(alt) / pow(m_pidx,6.5-mlimit));
-					int localmaxvarHR = qRound(maxvarZHR*sin(alt) / pow(m_pidx,6.5-mlimit));
+					int localminvarHR = qRound(minvarZHR*sin(alt) / pow(m_pidx,6.5-nelm));
+					int localmaxvarHR = qRound(maxvarZHR*sin(alt) / pow(m_pidx,6.5-nelm));
 
 					if (localmaxvarHR > 0)
 					{
-						oss << QString("%1: %2-%3<br />")
+						oss << QString("%1: %2-%3 (%4: %5)<br />")
 						.arg(q_("Local Hourly Rate"))
 						.arg(localminvarHR)
-						.arg(localmaxvarHR);
+						.arg(localmaxvarHR)
+						.arg(q_("Limiting magnitude"))
+						.arg(nelm);
 					}
 				}
 			}
