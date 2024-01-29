@@ -356,6 +356,10 @@ void StelLogger::init(const QString& logFilePath)
 	get_system_info(&hwinfo);
 	//writeLog(QString("Processor speed: %1 MHz").arg(hwinfo.cpu_clock_speed/1000000));
 	writeLog(QString("Processor logical cores: %1").arg(hwinfo.cpu_count));
+
+	// memory info
+	int64_t totalRAM = hwinfo.max_pages*B_PAGE_SIZE;
+	writeLog(QString("Total physical memory: %1 MB").arg(totalRAM/(1024<<10)));
 #endif
 }
 
