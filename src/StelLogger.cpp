@@ -352,9 +352,9 @@ void StelLogger::init(const QString& logFilePath)
 #endif
 
 #ifdef Q_OS_HAIKU
-	struct system_info hwinfo;
+	system_info hwinfo;
 	get_system_info(&hwinfo);
-	writeLog(QString("Processor speed: %1 MHz").arg(hwinfo.cpu_clock_speed/1000000));
+	//writeLog(QString("Processor speed: %1 MHz").arg(hwinfo.cpu_clock_speed/1000000));
 	writeLog(QString("Processor logical cores: %1").arg(hwinfo.cpu_count));
 #endif
 }
