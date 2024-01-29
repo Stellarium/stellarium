@@ -55,6 +55,10 @@
 #include <unistd.h>
 #endif
 
+#ifdef Q_OS_HAIKU
+#include <kernel/OS.h>
+#endif
+
 // Init statics variables.
 QFile StelLogger::logFile;
 QString StelLogger::log;
@@ -345,6 +349,13 @@ void StelLogger::init(const QString& logFilePath)
 	// memory info
 	int64_t totalRAM = (size_t)sysconf( _SC_PHYS_PAGES ) * (size_t)sysconf( _SC_PAGESIZE );
 	writeLog(QString("Total physical memory: %1 MB").arg(totalRAM/(1024<<10)));
+#endif
+
+#ifdef Q_OS_HAIKU
+	strunct system_info hwinfo;
+	get_system_info(&hwinfo);
+	writeLog(QString("Processor speed: %1 MHz").arg(hwinfo.cpu_clock_speed/1000000));
+	writeLog(QString("Processor logical cores: %1").arg(hwinfo.cpu_count));
 #endif
 }
 
