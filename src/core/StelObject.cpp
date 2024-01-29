@@ -1041,9 +1041,12 @@ QVariantMap StelObject::getInfoMap(const StelCore *core) const
 {
 	QVariantMap map;
 
-	Vec3d pos;
 	double ra, dec, alt, az, glong, glat;
 	bool useOldAzimuth = StelApp::getInstance().getFlagSouthAzimuthUsage();
+	// ra/dec
+	Vec3d pos = getEquinoxEquatorialPos(core);
+	StelUtils::rectToSphe(&ra, &dec, pos);
+
 	QString currentObjStr = getEnglishName();
 	if (currentObjStr == "") // If objects have no name, we need something to represent it.
 	{
@@ -1052,9 +1055,6 @@ QVariantMap StelObject::getInfoMap(const StelCore *core) const
 
 	map.insert("type", getType());
 	map.insert("object-type", getObjectType());
-	// ra/dec
-	pos = getEquinoxEquatorialPos(core);
-	StelUtils::rectToSphe(&ra, &dec, pos);
 	map.insert("ra", ra*M_180_PI);
 	map.insert("dec", dec*M_180_PI);
 	map.insert("iauConstellation", core->getIAUConstellation(pos));
