@@ -57,7 +57,7 @@ jobs:
         run: |
           mkdir -p build
           cd build
-          cmake -DCMAKE_BUILD_TYPE=Debug -DENABLE_TESTING=On -DENABLE_SHOWMYSKY=Off -DENABLE_QTWEBENGINE=Off "${{ github.workspace }}"
+          cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DENABLE_TESTING=On -DENABLE_SHOWMYSKY=Off -DENABLE_QTWEBENGINE=Off "${{ github.workspace }}"
           make -j3
           xvfb-run ctest --output-on-failure
 
@@ -108,6 +108,6 @@ jobs:
         run: |
           mkdir -p build
           cd build
-          cmake -DCMAKE_BUILD_TYPE=Debug -DENABLE_TESTING=On -DENABLE_SHOWMYSKY=Off -DENABLE_QTWEBENGINE=Off "${{ github.workspace }}"
+          cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DENABLE_TESTING=On -DENABLE_SHOWMYSKY=Off -DENABLE_QTWEBENGINE=Off "${{ github.workspace }}"
           make -j3
           xvfb-run ctest --output-on-failure

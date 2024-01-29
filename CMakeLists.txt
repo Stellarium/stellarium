@@ -23,8 +23,6 @@ SET_PROPERTY(GLOBAL PROPERTY USE_FOLDERS ON)
 PROJECT(Stellarium C CXX)
 
 SET(STELLARIUM_RELEASE_BUILD 0 CACHE BOOL "Set 1 to build as an official release (0 for development snapshots).")
-# Number of the release (0 is used before first release)
-SET(STELLARIUM_RELEASE_NUMBER 0)
 
 ########### Detect Qt version
 SET(ENABLE_QT6 1 CACHE BOOL "Whether to try building with Qt6. If Qt6 is not found, Qt5 will be used.")
@@ -45,7 +43,8 @@ ENDIF()
 # Example: first release in year 2023 has version 23.1.0 and short (public) version 23.1, series 23.0
 # Note: Use integer versions instead of strings for easier handling if required
 SET(STELLARIUM_MAJOR 24)
-SET(STELLARIUM_MINOR ${STELLARIUM_RELEASE_NUMBER})
+# Number of the release (0 is used before first release)
+SET(STELLARIUM_MINOR 0)
 IF(STELLARIUM_RELEASE_BUILD)
     ADD_DEFINITIONS(-DSTELLARIUM_RELEASE_BUILD)
     SET(CMAKE_BUILD_TYPE Release)
