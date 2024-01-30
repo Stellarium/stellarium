@@ -288,7 +288,7 @@ void StelLogger::init(const QString& logFilePath)
 
 #endif
 
-#if defined Q_OS_BSD4 && !defined Q_OS_MACOS
+#if defined Q_OS_FREEBSD || defined Q_OS_NETBSD && !defined Q_OS_MACOS
 	const char* _model      = "hw.model";
 	const char* _freq         = "machdep.tsc_freq";
 	const char* _ncpu        = "hw.ncpu";
@@ -299,13 +299,6 @@ void StelLogger::init(const QString& logFilePath)
 	_physmem = "hw.physmem64";
 	#endif
 
-	#ifdef Q_OS_OPENBSD
-	_freq         = "hw.cpuspeed";
-	#if defined(HW_PHYSMEM64)
-	_physmem = "hw.physmem64";
-	#endif
-	#endif
-
 	// CPU info
 	size_t len = 0;
 	sysctlbyname(_model, nullptr, &len, nullptr, 0);
@@ -313,17 +306,10 @@ void StelLogger::init(const QString& logFilePath)
 	sysctlbyname(_model, const_cast<char *>(model.data()), &len, nullptr, 0);
 	writeLog(QString("Processor name: %1").arg(model.data()));
 
-	#ifdef Q_OS_OPENBSD
-	int freq = 0;
-	len = sizeof(freq);
-	sysctlbyname(_freq, &freq, &len, nullptr, 0);
-	writeLog(QString("Processor speed: %1 MHz").arg(freq));
-	#else
 	int64_t freq = 0;
 	len = sizeof(freq);
 	sysctlbyname(_freq, &freq, &len, nullptr, 0);
 	writeLog(QString("Processor speed: %1 MHz").arg(freq/1000000));
-	#endif
 
 	int ncpu = 0;
 	len = sizeof(ncpu);
@@ -334,6 +320,42 @@ void StelLogger::init(const QString& logFilePath)
 	int64_t totalRAM = 0;
 	len = sizeof(totalRAM);
 	sysctlbyname(_physmem, &totalRAM, &len, nullptr, 0);
+	writeLog(QString("Total physical memory: %1 MB").arg(totalRAM/(1024<<10)));
+#endif
+
+#ifdef Q_OS_OPENBSD
+	int mib[2], freq, ncpu;
+	size_t len;
+	const char* model;
+
+	mib[0] = CTL_HW;
+	mib[1] = HW_MODEL;
+	len = sizeof(freq);
+	sysctl(mib, 2, model.data(), &len, NULL, 0);
+	writeLog(QString("Processor name: %1").arg(model.data()));
+
+	mib[0] = CTL_HW;
+	mib[1] = HW_CPUSPEED;
+	len = sizeof(freq);
+	sysctl(mib, 2, &freq, &len, NULL, 0);
+	writeLog(QString("Processor speed: %1 MHz").arg(freq));
+
+	mib[0] = CTL_HW;
+	mib[1] = HW_NCPU;
+	len = sizeof(ncpu);
+	sysctl(mib, 2, &ncpu, &len, NULL, 0);
+	writeLog(QString("Processor logical cores: %1").arg(ncpu));
+
+	mib[0] = CTL_HW;
+	#if defined(HW_PHYSMEM64)
+	mib[1] = HW_PHYSMEM64;
+	int64_t totalRAM = 0;
+	#else
+	mib[1] = HW_PHYSMEM;
+	int totalRAM = 0;
+	#endif
+	len = sizeof(totalRAM);
+	sysctl(mib, 2, &totalRAM, &len, NULL, 0);
 	writeLog(QString("Total physical memory: %1 MB").arg(totalRAM/(1024<<10)));
 #endif
 
