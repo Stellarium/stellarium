@@ -352,9 +352,50 @@ void StelLogger::init(const QString& logFilePath)
 #endif
 
 #ifdef Q_OS_HAIKU
+	uint32 topologyNodeCount = 0;
+	cpu_topology_node_info* topology = NULL;
+
+	get_cpu_topology_info(NULL, &topologyNodeCount);
+	if (topologyNodeCount != 0)
+		topology = new cpu_topology_node_info[topologyNodeCount];
+	get_cpu_topology_info(topology, &topologyNodeCount);
+
+	enum cpu_platform platform = B_CPU_UNKNOWN;
+	enum cpu_vendor cpuVendor = B_CPU_VENDOR_UNKNOWN;
+	uint32 cpuModel = 0;
+
+	for (uint32 i = 0; i < topologyNodeCount; i++)
+	{
+		switch (topology[i].type)
+		{
+			case B_TOPOLOGY_ROOT:
+				platform = topology[i].data.root.platform;
+				break;
+			case B_TOPOLOGY_PACKAGE:
+				cpuVendor = topology[i].data.package.vendor;
+				break;
+			case B_TOPOLOGY_CORE:
+				cpuModel = topology[i].data.core.model;
+				break;
+			default:
+				break;
+		}
+	}
+
+	delete[] topology;
+
+	int32 frequency = get_rounded_cpu_speed();
+	QString clockSpeed;
+	if (frequency < 1000)
+		clockSpeed = QString("%1 MHz").arg(frequency);
+	else
+		clockSpeed = QString("%1 GHz").arg(QString::number(frequency/1000, 'f', 2));
+
+	writeLog(QString("Processor name: %1 %2 @ %3").arg(get_cpu_vendor_string(cpuVendor), get_cpu_model_string(platform, cpuVendor, cpuModel), clockSpeed));
+
 	system_info hwinfo;
 	get_system_info(&hwinfo);
-	//writeLog(QString("Processor speed: %1 MHz").arg(hwinfo.cpu_clock_speed/1000000));
+	writeLog(QString("Processor speed: %1 MHz").arg(frequency/1000));
 	writeLog(QString("Processor logical cores: %1").arg(hwinfo.cpu_count));
 
 	// memory info
