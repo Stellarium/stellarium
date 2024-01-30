@@ -78,8 +78,7 @@ void StelLogger::init(const QString& logFilePath)
 	writeLog(QString("Operating System: %1").arg(StelUtils::getOperatingSystemInfo()));	
 
 	// write compiler version
-	QString compiler = StelUtils::getCompilerInfo();
-	writeLog(compiler.isEmpty() ? "Unknown compiler" : QString("Compiled using %1").arg(compiler));
+	writeLog(QString("Compiled using %1").arg(STELLARIUM_COMPILER));
 
 	// write Qt version
 	writeLog(QString("Qt runtime version: %1").arg(qVersion()));

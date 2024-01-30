@@ -72,6 +72,10 @@ SET(COPYRIGHT_YEARS "2000-${CURRENTYEAR}")
 SET(STELLARIUM_URL "https://stellarium.org/")
 ADD_DEFINITIONS(-DSTELLARIUM_URL="${STELLARIUM_URL}")
 
+# remembering the name and the version of compiler for StelLogger
+SET(STELLARIUM_COMPILER "${CMAKE_CXX_COMPILER_ID} ${CMAKE_CXX_COMPILER_VERSION}")
+ADD_DEFINITIONS(-DSTELLARIUM_COMPILER="${STELLARIUM_COMPILER}")
+
 # The line below is copied from src/gui/HelpDialog.cpp file
 SET(STELLARIUM_COPYRIGHT "Copyright (C) ${COPYRIGHT_YEARS} ${PROJECT_NAME} Developers")
 # The line below is copied from src/main.cpp file
