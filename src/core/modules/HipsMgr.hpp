@@ -56,11 +56,6 @@ public:
 	Q_INVOKABLE
 	HipsSurveyP getSurveyByUrl(const QString &url);
 
-	//! Get whether the surveys are displayed.
-	bool getFlagShow(void) const;
-	//! Set whether the surveys are displayed.
-	void setFlagShow(bool b);
-
 	State getState() const {return state;}
 	bool isLoaded() const {return state == Loaded;}
 
@@ -74,6 +69,11 @@ signals:
 public slots:
 	//! Start to load the default sources.
 	void loadSources();
+
+	//! Get whether the surveys are displayed.
+	bool getFlagShow(void) const;
+	//! Set whether the surveys are displayed.
+	void setFlagShow(bool b);
 
 private slots:
 	// after loading survey list from network, restore the visible surveys from config.ini.
