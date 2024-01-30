@@ -56,7 +56,8 @@
 #endif
 
 #ifdef Q_OS_HAIKU
-#include <kernel/OS.h>
+#include <os/kernel/OS.h>
+#include <private/shared/cpu_type.h>
 #endif
 
 // Init statics variables.
@@ -392,14 +393,15 @@ void StelLogger::init(const QString& logFilePath)
 		clockSpeed = QString("%1 GHz").arg(QString::number(frequency/1000, 'f', 2));
 
 	writeLog(QString("Processor name: %1 %2 @ %3").arg(get_cpu_vendor_string(cpuVendor), get_cpu_model_string(platform, cpuVendor, cpuModel), clockSpeed));
+	writeLog(QString("Processor speed: %1 MHz").arg(frequency));
 
 	system_info hwinfo;
 	get_system_info(&hwinfo);
-	writeLog(QString("Processor speed: %1 MHz").arg(frequency/1000));
+
 	writeLog(QString("Processor logical cores: %1").arg(hwinfo.cpu_count));
 
 	// memory info
-	int64_t totalRAM = hwinfo.max_pages*B_PAGE_SIZE;
+	int64_t totalRAM = (hwinfo.max_pages + hwinfo.ignored_pages)*B_PAGE_SIZE;
 	writeLog(QString("Total physical memory: %1 MB").arg(totalRAM/(1024<<10)));
 #endif
 }
