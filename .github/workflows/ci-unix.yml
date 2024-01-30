@@ -1,0 +1,213 @@
+#
+# Implementation of Continuous Integration process for UNIX by Github actions (with extra additionals...)
+#
+name: "CI"
+
+on:
+  push:
+  pull_request:
+    # The branches below must be a subset of the branches above
+    branches: [master]
+
+jobs:
+  ci-freebsd-qt5:
+    name: "FreeBSD (x86_64; qt5)"
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.actor, 'transifex') && contains(github.event.head_commit.message, '[qt5]')"
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Build and run unit tests in FreeBSD
+      uses: vmactions/freebsd-vm@v1
+      id: freebsd-qt5
+      with:
+        # Use sh shell
+        usesh: true
+        # When using rsync, you can define copyback: false to not copy files back from the VM in to the host.
+        copyback: false
+        prepare: |
+          pkg install -y cmake eigen glm exiv2 nlopt perl5 xorg-vfbserver gettext qt5-buildtools qt5-charts qt5-concurrent qt5-core qt5-declarative qt5-gui qt5-script qt5-serialport qt5-qmake qt5-webengine qt5-widgets qt5-testlib qt5-linguisttools qt5-location qt5-network qt5-multimedia qt5-opengl qt5-webchannel
+
+        run: |
+          set -e -x
+          export DISPLAY=:0
+          mkdir builds
+          cd builds
+          cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DENABLE_TESTING=On "${{ github.workspace }}"
+          make -j3
+          Xvfb :0 -ac -screen 0 1024x768x24+32 >/dev/null 2>&1 &
+          sleep 3
+          ctest --output-on-failure
+          sleep 1
+          pkill Xvfb
+
+  ci-freebsd-qt6:
+    name: "FreeBSD (x86_64; qt6)"
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.actor, 'transifex')"
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Build and run unit tests in FreeBSD
+      uses: vmactions/freebsd-vm@v1
+      id: freebsd-qt6
+      with:
+        # Use sh shell
+        usesh: true
+        # When using rsync, you can define copyback: false to not copy files back from the VM in to the host.
+        copyback: false
+        prepare: |
+          pkg install -y cmake eigen glm exiv2 nlopt perl5 xorg-vfbserver gettext qt6-webengine qt6-base qt6-tools qt6-serialport qt6-location qt6-positioning qt6-multimedia qt6-charts
+
+        run: |
+          set -e -x
+          export DISPLAY=:0
+          mkdir builds
+          cd builds
+          cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DENABLE_TESTING=On "${{ github.workspace }}"
+          make -j3
+          Xvfb :0 -ac -screen 0 1024x768x24+32 >/dev/null 2>&1 &
+          sleep 3
+          ctest --output-on-failure
+          sleep 1
+          pkill Xvfb
+
+  ci-openbsd-qt5:
+    name: "OpenBSD (x86_64; qt5)"
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.actor, 'transifex') && contains(github.event.head_commit.message, '[qt5]')"
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Build and run unit tests in OpenBSD
+      uses: vmactions/openbsd-vm@v1
+      id: openbsd-qt5
+      with:
+        # Use sh shell
+        usesh: true
+        # When using rsync, you can define copyback: false to not copy files back from the VM in to the host.
+        copyback: false
+        prepare: |
+          pkg_add -aU cmake eigen3 glm exiv2 nlopt gpsd qt5-qxlsx qt5 gettext-runtime gettext-tools
+
+        run: |
+          set -e -x
+          #export Qt5_DIR=/usr/local/lib/qt5/cmake/Qt5
+          #export Qt5Script_DIR=/usr/local/lib/qt5/cmake/Qt5Script
+          #export Qt5LinguistTools_DIR=/usr/local/lib/qt5/cmake/Qt5LinguistTools
+          export PATH=$PATH:/usr/local/lib/qt5/bin
+          export DISPLAY=:0
+          mkdir builds
+          cd builds
+          cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_PREFIX_PATH=/usr/local/lib/qt5/cmake -DENABLE_TESTING=On -DENABLE_QTWEBENGINE=Off "${{ github.workspace }}"
+          make -j3
+          Xvfb :0 -ac -screen 0 1024x768x24+32 >/dev/null 2>&1 &
+          sleep 3
+          ctest --output-on-failure
+          sleep 1
+          pkill Xvfb
+
+  ci-openbsd-qt6:
+    name: "OpenBSD (x86_64; qt6)"
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.actor, 'transifex')"
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Build and run unit tests in OpenBSD
+      uses: vmactions/openbsd-vm@v1
+      id: openbsd-qt6
+      with:
+        # Use sh shell
+        usesh: true
+        # When using rsync, you can define copyback: false to not copy files back from the VM in to the host.
+        copyback: false
+        prepare: |
+          pkg_add -aU cmake eigen3 glm exiv2 nlopt gpsd qt6-qxlsx qt6 gettext-runtime gettext-tools
+
+        run: |
+          set -e -x
+          export DISPLAY=:0
+          mkdir builds
+          cd builds
+          cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DENABLE_TESTING=On -DENABLE_QTWEBENGINE=Off "${{ github.workspace }}"
+          make -j3
+          Xvfb :0 -ac -screen 0 1024x768x24+32 >/dev/null 2>&1 &
+          sleep 3
+          ctest --output-on-failure
+          sleep 1
+          pkill Xvfb
+
+  ci-dragonflybsd-qt5:
+    name: "DragonflyBSD (x86_64; qt5)"
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.actor, 'transifex') && contains(github.event.head_commit.message, '[qt5]')"
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Build and run unit tests in DragonflyBSD
+      uses: vmactions/dragonflybsd-vm@v1
+      id: dragonflybsd-qt5
+      with:
+        # Use sh shell
+        usesh: true
+        # When using rsync, you can define copyback: false to not copy files back from the VM in to the host.
+        copyback: false
+        prepare: |
+          pkg install -y cmake gettext perl5 xorg-vfbserver qt5-buildtools qt5-charts qt5-concurrent qt5-core qt5-declarative qt5-gui qt5-linguisttools qt5-location qt5-multimedia qt5-network qt5-opengl qt5-qmake qt5-script qt5-serialport qt5-testlib qt5-webengine 
+
+        run: |
+          set -e -x
+          export DISPLAY=:0
+          mkdir builds
+          cd builds
+          cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DENABLE_TESTING=On -DENABLE_SHOWMYSKY=Off -DUSE_PLUGIN_LENSDISTORTIONESTIMATOR=Off "${{ github.workspace }}"
+          make -j3
+          Xvfb :0 -ac -screen 0 1024x768x24+32 >/dev/null 2>&1 &
+          sleep 3
+          ctest --output-on-failure
+          sleep 1
+          pkill Xvfb
+
+  ci-dragonflybsd-qt6:
+    name: "DragonflyBSD (x86_64; qt6)"
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.actor, 'transifex')"
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Build and run unit tests in DragonflyBSD
+      uses: vmactions/dragonflybsd-vm@v1
+      id: dragonflybsd-qt6
+      with:
+        # Use sh shell
+        usesh: true
+        # When using rsync, you can define copyback: false to not copy files back from the VM in to the host.
+        copyback: false
+        prepare: |
+          pkg install -y cmake perl5 xorg-vfbserver gettext qt6-base qt6-tools qt6-serialport qt6-positioning qt6-multimedia qt6-charts qt6-declarative
+
+        run: |
+          set -e -x
+          export DISPLAY=:0
+          mkdir builds
+          cd builds
+          cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DENABLE_TESTING=On -DENABLE_SHOWMYSKY=Off -DUSE_PLUGIN_LENSDISTORTIONESTIMATOR=Off -DENABLE_QTWEBENGINE=Off "${{ github.workspace }}"
+          make -j3
+          Xvfb :0 -ac -screen 0 1024x768x24+32 >/dev/null 2>&1 &
+          sleep 3
+          ctest --output-on-failure
+          sleep 1
+          pkill Xvfb

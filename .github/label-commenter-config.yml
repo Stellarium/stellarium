@@ -60,7 +60,7 @@ labels:
         body: |
           Hello @{{ issue.user.login }}!
  
-          We really need an your feedback.
+          We really need your feedback.
     unlabeled:
       issue:
         body: |
@@ -94,7 +94,7 @@ labels:
         body: |
           Hello @{{ issue.user.login }}!
 
-          This issue being blocked by another issue. Thanks for the report!
+          This issue being blocked by another PR or issue. Thanks for the report!
   - name: "state: confirmed"
     labeled:
       issue:
@@ -106,7 +106,7 @@ labels:
     labeled:
       issue:
         body: |
-          We have a strong reason not to do it! Some reasons for it in the FAQ:
+          We have a strong reason not to do it! Some reasons for it can be found in the FAQ:
           https://github.com/Stellarium/stellarium/wiki/FAQ#Why_dont_you_implement
         action: close
     unlabeled:
@@ -150,24 +150,24 @@ labels:
         body: |
           Hello @{{ issue.user.login }}!
 
-          The enhancement or feature has been implemented! You may test it via building Stellarium from source code or wait the weekly development snapshot...
+          The enhancement or feature has been implemented! You can test it by building Stellarium from source code or wait for the weekly development snapshot.
       pr:
         body: |
           Hello @{{ pull_request.user.login }}!
 
-          The enhancement or feature has been merged into source code and you may test it via building Stellarium from source code or wait the weekly development snapshot...
+          The enhancement or feature has been merged into source code and you can test it by building Stellarium from source code or wait for the weekly development snapshot.
   - name: "state: fixed"
     labeled:
       issue:
         body: |
           Hello @{{ issue.user.login }}!
 
-          The bug or issue has been fixed! You may test it via building Stellarium from source code or wait the weekly development snapshot...
+          The bug or issue has been fixed! You can test it by building Stellarium from source code or wait for the weekly development snapshot.
       pr:
         body: |
           Hello @{{ pull_request.user.login }}!
 
-          The fix has been merged into source code and you may test it via building Stellarium from source code or wait the weekly development snapshot...
+          The fix has been merged into source code and you can test it by building Stellarium from source code or wait for the weekly development snapshot.
   - name: "state: published"
     labeled:
       issue:
