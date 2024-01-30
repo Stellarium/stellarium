@@ -348,18 +348,10 @@ private:
 	void setFlagCheckLoadingData(const bool flag) { checkLoadingData = flag; }
 	bool getFlagCheckLoadingData(void) const { return checkLoadingData; }
 
-	//! Read constellation names from the given file.
-	//! @param namesFile Name of the file containing the constellation names
-	//!        in a format consisting of abbreviation, native name and translatable english name.
-	//! @note The abbreviation must occur in the lines file loaded first in @name loadLinesAndArt()!
-	void loadNames(const QJsonArray &constellationsData);
-
 	//! Load constellation line shapes, art textures and boundaries shapes from data files.
-	//! @param fileName The name of the constellation data file
-	//! @param artFileName The name of the constellation art data file
+	//! @param constellationsData The structure describing all the constellations
 	//! @param cultureName A string ID of the current skyculture
-	//! @note The abbreviation used in @param filename is required for cross-identifying translatable names in @name loadNames():
-	void loadLinesAndArt(const QJsonArray& constellationsData, const QString& cultureName);
+	void loadLinesNamesAndArt(const QJsonArray& constellationsData, const QString& cultureName);
 
 	//! Load the constellation boundary file.
 	//! This function deletes any currently loaded constellation boundaries
