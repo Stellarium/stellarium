@@ -390,7 +390,7 @@ void StelLogger::init(const QString& logFilePath)
 	if (frequency < 1000)
 		clockSpeed = QString("%1 MHz").arg(frequency);
 	else
-		clockSpeed = QString("%1 GHz").arg(QString::number(frequency/1000, 'f', 2));
+		clockSpeed = QString("%1 GHz").arg(QString::number(frequency/1000.f, 'f', 2));
 
 	writeLog(QString("Processor name: %1 %2 @ %3").arg(get_cpu_vendor_string(cpuVendor), get_cpu_model_string(platform, cpuVendor, cpuModel), clockSpeed));
 	writeLog(QString("Processor speed: %1 MHz").arg(frequency));
@@ -401,8 +401,8 @@ void StelLogger::init(const QString& logFilePath)
 	writeLog(QString("Processor logical cores: %1").arg(hwinfo.cpu_count));
 
 	// memory info
-	int64_t totalRAM = (hwinfo.max_pages + hwinfo.ignored_pages)*B_PAGE_SIZE;
-	writeLog(QString("Total physical memory: %1 MB").arg(totalRAM/(1024<<10)));
+	int totalRAM = round(hwinfo.max_pages*B_PAGE_SIZE/1048576.0 + hwinfo.ignored_pages*B_PAGE_SIZE/1048576.0);
+	writeLog(QString("Total physical memory: %1 MB").arg(totalRAM));
 #endif
 }
 
