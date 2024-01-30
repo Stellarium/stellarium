@@ -288,14 +288,12 @@ void StelLogger::init(const QString& logFilePath)
 
 #endif
 
-#if defined Q_OS_FREEBSD || defined Q_OS_NETBSD && !defined Q_OS_MACOS
-	const char* _model      = "hw.model";
-	const char* _freq         = "machdep.tsc_freq";
-	const char* _ncpu        = "hw.ncpu";
+#if defined Q_OS_BSD4 && !defined Q_OS_MACOS && !defined Q_OS_OPENBSD
+	const char* _model   = "hw.model";
 	const char* _physmem = "hw.physmem";
 
 	#ifdef Q_OS_NETBSD
-	_model      = "machdep.cpu_brand";
+	_model   = "machdep.cpu_brand";
 	_physmem = "hw.physmem64";
 	#endif
 
@@ -308,12 +306,12 @@ void StelLogger::init(const QString& logFilePath)
 
 	int64_t freq = 0;
 	len = sizeof(freq);
-	sysctlbyname(_freq, &freq, &len, nullptr, 0);
+	sysctlbyname("machdep.tsc_freq", &freq, &len, nullptr, 0);
 	writeLog(QString("Processor speed: %1 MHz").arg(freq/1000000));
 
 	int ncpu = 0;
 	len = sizeof(ncpu);
-	sysctlbyname(_ncpu, &ncpu, &len, nullptr, 0);
+	sysctlbyname("hw.ncpu", &ncpu, &len, nullptr, 0);
 	writeLog(QString("Processor logical cores: %1").arg(ncpu));
 
 	// memory info
@@ -326,12 +324,15 @@ void StelLogger::init(const QString& logFilePath)
 #ifdef Q_OS_OPENBSD
 	int mib[2], freq, ncpu;
 	size_t len;
-	const char* model;
+	std::string model;
+	model.resize(1024);
 
+	// CPU info
 	mib[0] = CTL_HW;
 	mib[1] = HW_MODEL;
 	len = sizeof(freq);
-	sysctl(mib, 2, model.data(), &len, NULL, 0);
+	sysctl(mib, 2, &model.data(), &len, NULL, 0);
+	model.resize(len);
 	writeLog(QString("Processor name: %1").arg(model.data()));
 
 	mib[0] = CTL_HW;
@@ -346,14 +347,14 @@ void StelLogger::init(const QString& logFilePath)
 	sysctl(mib, 2, &ncpu, &len, NULL, 0);
 	writeLog(QString("Processor logical cores: %1").arg(ncpu));
 
+	// memory info
 	mib[0] = CTL_HW;
 	#if defined(HW_PHYSMEM64)
 	mib[1] = HW_PHYSMEM64;
-	int64_t totalRAM = 0;
 	#else
 	mib[1] = HW_PHYSMEM;
-	int totalRAM = 0;
 	#endif
+	int64_t totalRAM = 0;
 	len = sizeof(totalRAM);
 	sysctl(mib, 2, &totalRAM, &len, NULL, 0);
 	writeLog(QString("Total physical memory: %1 MB").arg(totalRAM/(1024<<10)));
