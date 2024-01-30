@@ -353,6 +353,7 @@ void StelLogger::init(const QString& logFilePath)
 #endif
 
 #ifdef Q_OS_HAIKU
+	// Idea and some code is catching from Haiku OS (MIT license)
 	uint32 topologyNodeCount = 0;
 	cpu_topology_node_info* topology = NULL;
 
@@ -382,7 +383,6 @@ void StelLogger::init(const QString& logFilePath)
 				break;
 		}
 	}
-
 	delete[] topology;
 
 	int32 frequency = get_rounded_cpu_speed();
