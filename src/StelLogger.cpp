@@ -323,15 +323,14 @@ void StelLogger::init(const QString& logFilePath)
 
 #ifdef Q_OS_OPENBSD
 	int mib[2], freq, ncpu;
-	size_t len;
+	size_t len = 1024;
 	std::string model;
-	model.resize(1024);
+	model.resize(len);
 
 	// CPU info
 	mib[0] = CTL_HW;
 	mib[1] = HW_MODEL;
-	len = sizeof(freq);
-	sysctl(mib, 2, &model.data(), &len, NULL, 0);
+	sysctl(mib, 2, model.data(), &len, NULL, 0);
 	model.resize(len);
 	writeLog(QString("Processor name: %1").arg(model.data()));
 
