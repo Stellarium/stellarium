@@ -62,7 +62,7 @@ jobs:
     # Remove unnecessary data from final report
     - name: Coverage data cleanup
       working-directory: build
-      run: lcov --gcov-tool "/usr/bin/gcov" --remove coverage.info '*_autogen/*' '*/ui_*.h' '*/qrc_*.cpp' '*/build/*' '*/qt5/*' '/usr/*' '*gmock*' --output-file coverage.info
+      run: lcov --gcov-tool "/usr/bin/gcov" --remove coverage.info '*_autogen/*' '*/ui_*.h' '*/qrc_*.cpp' '*/build/*' '*/qt5/*' '*/qt6/*' '/usr/*' '*gmock*' --output-file coverage.info
 
     - name: Coveralls
       uses: coverallsapp/github-action@master
