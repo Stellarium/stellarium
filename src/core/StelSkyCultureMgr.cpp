@@ -127,6 +127,7 @@ StelSkyCultureMgr::StelSkyCultureMgr()
 		}
 
 		culture.asterisms = data["asterisms"].toArray();
+		culture.langsUseNativeNames = data["langs_use_native_names"].toArray();
 
 		culture.boundariesType = StelSkyCulture::BoundariesType::Own; // default value if not specified in the JSON file
 		if (data.contains("edges"))

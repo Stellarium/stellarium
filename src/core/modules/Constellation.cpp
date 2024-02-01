@@ -58,7 +58,7 @@ Constellation::~Constellation()
 {
 }
 
-bool Constellation::read(const QJsonObject& data, StarMgr *starMgr)
+bool Constellation::read(const QJsonObject& data, StarMgr *starMgr, const bool preferNativeName)
 {
 	const auto id = data["id"].toString();
 	const auto idParts = id.split(" ");
@@ -73,8 +73,8 @@ bool Constellation::read(const QJsonObject& data, StarMgr *starMgr)
 	}
 
 	const auto names = data["common_name"].toObject();
-	englishName = names["english"].toString();
 	nativeName = names["native"].toString();
+	englishName = preferNativeName && !nativeName.isEmpty() ? nativeName : names["english"].toString();
 	if (englishName.isEmpty() && nativeName.isEmpty())
 		qWarning() << "No name for constellation" << id;
 

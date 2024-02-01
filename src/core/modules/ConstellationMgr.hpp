@@ -351,7 +351,7 @@ private:
 	//! Load constellation line shapes, art textures and boundaries shapes from data files.
 	//! @param constellationsData The structure describing all the constellations
 	//! @param cultureName A string ID of the current skyculture
-	void loadLinesNamesAndArt(const QJsonArray& constellationsData, const QString& cultureName);
+	void loadLinesNamesAndArt(const QJsonArray& constellationsData, const QString& cultureName, bool preferNativeNames);
 
 	//! Load the constellation boundary file.
 	//! This function deletes any currently loaded constellation boundaries

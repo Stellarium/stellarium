@@ -82,7 +82,7 @@ private:
 	//! constellation.
 	//! @param starMgr a pointer to the StarManager object.
 	//! @return false if can't parse record (invalid result!), else true.
-	bool read(const QJsonObject& data, StarMgr *starMgr);
+	bool read(const QJsonObject& data, StarMgr *starMgr, bool preferNativeNames);
 
 	//! Draw the constellation name
 	void drawName(StelPainter& sPainter, ConstellationMgr::ConstellationDisplayStyle style) const;

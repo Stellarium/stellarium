@@ -158,7 +158,8 @@ void ConstellationMgr::updateSkyCulture(const StelSkyCulture& skyCulture)
 {
 	// first of all, remove constellations from the list of selected objects in StelObjectMgr, since we are going to delete them
 	deselectConstellations();
-	loadLinesNamesAndArt(skyCulture.constellations, skyCulture.englishName);
+	loadLinesNamesAndArt(skyCulture.constellations, skyCulture.englishName,
+	                     skyCulture.langsUseNativeNames.contains("en"));
 
 	constellationsEnglishNames.clear();
 	for (const auto*const cons : constellations)
@@ -433,7 +434,7 @@ void ConstellationMgr::setConstellationBoundariesThickness(const int thickness)
 	}
 }
 
-void ConstellationMgr::loadLinesNamesAndArt(const QJsonArray &constellationsData, const QString &cultureName)
+void ConstellationMgr::loadLinesNamesAndArt(const QJsonArray &constellationsData, const QString &cultureName, const bool preferNativeNames)
 {
 	constellations.clear();
 
@@ -442,7 +443,7 @@ void ConstellationMgr::loadLinesNamesAndArt(const QJsonArray &constellationsData
 	{
 		Constellation*const cons = new Constellation;
 		const auto consObj = constellationData.toObject();
-		if (!cons->read(consObj, hipStarMgr))
+		if (!cons->read(consObj, hipStarMgr, preferNativeNames))
 		{
 			delete cons;
 			continue;
@@ -685,6 +686,7 @@ QStringList ConstellationMgr::getConstellationsEnglishNames()
 void ConstellationMgr::updateI18n()
 {
 	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
+
 	for (auto* constellation : constellations)
 	{
 		constellation->nameI18 = trans.tryQtranslate(constellation->englishName, "constellation");

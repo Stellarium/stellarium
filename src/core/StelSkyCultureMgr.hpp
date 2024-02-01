@@ -110,6 +110,8 @@ public:
 	CLASSIFICATION classification;
 	//! JSON data containing culture-specific names of celestial objects
 	QJsonObject names;
+	//! JSON data describing the policy on the usage of native names vs the English ones
+	QJsonArray langsUseNativeNames;
 	//! Whether to show common names in addition to the culture-specific ones
 	bool fallbackToInternationalNames = false;
 };
