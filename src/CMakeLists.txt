@@ -699,6 +699,18 @@ IF(ENABLE_TESTING)
     ADD_TEST(testStelFileMgr testStelFileMgr)
     SET_TARGET_PROPERTIES(testStelFileMgr PROPERTIES FOLDER "src/tests")
 
+    SET(tests_testStelTranslator_SRCS
+        tests/testStelTranslator.hpp
+        tests/testStelTranslator.cpp
+    )
+    ADD_EXECUTABLE(testStelTranslator ${tests_testStelTranslator_SRCS})
+    TARGET_LINK_LIBRARIES(testStelTranslator ${TESTS_LIBRARIES})
+    ADD_DEPENDENCIES(buildTests testStelTranslator)
+    ADD_TEST(testStelTranslator testStelTranslator)
+    SET_TARGET_PROPERTIES(testStelTranslator PROPERTIES FOLDER "src/tests")
+    SET_TESTS_PROPERTIES(testStelTranslator PROPERTIES
+        ENVIRONMENT "STELLARIUM_DATA_ROOT=${PROJECT_SOURCE_DIR}")
+
     SET(tests_testStelSphereGeometry_SRCS
         tests/testStelSphereGeometry.hpp
         tests/testStelSphereGeometry.cpp
