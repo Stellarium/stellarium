@@ -208,7 +208,7 @@ void StelLogger::init(const QString& logFilePath)
 	sysctlbyname("hw.ncpu", &ncpu, &size, nullptr, 0);
 	writeLog(QString("Processor logical cores: %1").arg(ncpu));
 
-	int64_t totalRAM = 0;
+	uint64_t totalRAM = 0;
 	size = sizeof(totalRAM);
 	sysctlbyname("hw.memsize", &totalRAM, &size, nullptr, 0);
 	writeLog(QString("Total physical memory: %1 MB").arg(totalRAM/(1024<<10)));
@@ -277,8 +277,8 @@ void StelLogger::init(const QString& logFilePath)
 	// memory info
 	struct sysinfo memInfo;
 	sysinfo (&memInfo);
-	long long totalRAM = memInfo.totalram;
-	long long totalVRAM = totalRAM +memInfo.totalswap;
+	uint64_t totalRAM = memInfo.totalram;
+	uint64_t totalVRAM = totalRAM +memInfo.totalswap;
 	//Multiply in next statements to avoid int overflow on right hand side...
 	totalRAM *= memInfo.mem_unit;
 	totalVRAM *= memInfo.mem_unit;
@@ -315,7 +315,7 @@ void StelLogger::init(const QString& logFilePath)
 	writeLog(QString("Processor logical cores: %1").arg(ncpu));
 
 	// memory info
-	int64_t totalRAM = 0;
+	uint64_t totalRAM = 0;
 	len = sizeof(totalRAM);
 	sysctlbyname(_physmem, &totalRAM, &len, nullptr, 0);
 	writeLog(QString("Total physical memory: %1 MB").arg(totalRAM/(1024<<10)));
@@ -353,7 +353,7 @@ void StelLogger::init(const QString& logFilePath)
 	#else
 	mib[1] = HW_PHYSMEM;
 	#endif
-	int64_t totalRAM = 0;
+	uint64_t totalRAM = 0;
 	len = sizeof(totalRAM);
 	sysctl(mib, 2, &totalRAM, &len, NULL, 0);
 	writeLog(QString("Total physical memory: %1 MB").arg(totalRAM/(1024<<10)));
@@ -369,7 +369,7 @@ void StelLogger::init(const QString& logFilePath)
 	writeLog(QString("Processor logical cores: %1").arg(ncpu));
 
 	// memory info
-	int64_t totalRAM = (size_t)sysconf( _SC_PHYS_PAGES ) * (size_t)sysconf( _SC_PAGESIZE );
+	uint64_t totalRAM = (size_t)sysconf( _SC_PHYS_PAGES ) * (size_t)sysconf( _SC_PAGESIZE );
 	writeLog(QString("Total physical memory: %1 MB").arg(totalRAM/(1024<<10)));
 #endif
 
@@ -422,7 +422,7 @@ void StelLogger::init(const QString& logFilePath)
 	writeLog(QString("Processor logical cores: %1").arg(hwinfo.cpu_count));
 
 	// memory info
-	int totalRAM = round(hwinfo.max_pages*B_PAGE_SIZE/1048576.0 + hwinfo.ignored_pages*B_PAGE_SIZE/1048576.0);
+	uint64_t totalRAM = round(hwinfo.max_pages*B_PAGE_SIZE/1048576.0 + hwinfo.ignored_pages*B_PAGE_SIZE/1048576.0);
 	writeLog(QString("Total physical memory: %1 MB").arg(totalRAM));
 #endif
 }
