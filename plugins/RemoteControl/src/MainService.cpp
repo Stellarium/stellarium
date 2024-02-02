@@ -283,11 +283,16 @@ void MainService::post(const QByteArray& operation, const APIParameters &paramet
 
 		//set the time + timerate
 		{
-			const QByteArray& raw = parameters.value("time");
+			QByteArray raw = parameters.value("time");
 			if(!raw.isEmpty())
 			{
 				//parse time and set it
-				double jday = QString(raw).toDouble(&ok);
+				double jday = raw.toDouble(&ok);
+				if (!ok)
+				{
+					raw.replace(',', '.');
+					jday=raw.toDouble(&ok);
+				}
 				if(ok)
 				{
 					//check for invalid double (NaN, inf...)
@@ -304,6 +309,8 @@ void MainService::post(const QByteArray& operation, const APIParameters &paramet
 					QMetaObject::invokeMethod(core,"setJD", SERVICE_DEFAULT_INVOKETYPE,
 								  Q_ARG(double,jday));
 				}
+				else
+					qWarning() << "RC Main Service time request for invalid time string:" << raw;
 			}
 		}
 		{
@@ -311,7 +318,7 @@ void MainService::post(const QByteArray& operation, const APIParameters &paramet
 			if(!raw.isEmpty())
 			{
 				//parse timerate and set it
-				double rate = QString(raw).toDouble(&ok);
+				double rate = raw.toDouble(&ok);
 				if(ok)
 				{
 					doneSomething = true;

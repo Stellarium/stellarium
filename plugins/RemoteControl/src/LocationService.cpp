@@ -170,12 +170,22 @@ void LocationService::post(const QByteArray& operation, const APIParameters &par
 		bool doneSomething = false;
 		bool ok = false;
 		float latitude = sLatitude.toFloat(&ok);
+		if (!ok)
+		{
+			sLatitude.replace(",", ".");
+			latitude = sLatitude.toFloat(&ok);
+		}
 		if(ok && (latitude - loc.getLatitude()) != 0.0f)
 		{
 			loc.setLatitude(latitude);
 			doneSomething = true;
 		}
 		float longitude = sLongitude.toFloat(&ok);
+		if (!ok)
+		{
+			sLongitude.replace(",", ".");
+			longitude = sLongitude.toFloat(&ok);
+		}
 		if(ok && (longitude - loc.getLongitude()) != 0.0f)
 		{
 			loc.setLongitude(longitude);
