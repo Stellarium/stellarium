@@ -126,6 +126,31 @@ TelescopeClient *TelescopeClient::create(const QString &url)
 TelescopeClient::TelescopeClient(const QString &name) : nameI18n(name), name(name)
 {}
 
+
+bool TelescopeClient::GetAltAzFromJ2000Position(const Vec3d &j2000Pos,TelescopeControl::Equinox equinox ,double& alt, double &az) const
+{
+   const StelCore* core = StelApp::getInstance().getCore();
+   const  bool res = core != nullptr;
+   if(res)
+   {
+      const bool equinoxJNow = equinox == TelescopeControl::EquinoxJNow;
+      const StelCore::RefractionMode mode = equinoxJNow ? StelCore::RefractionOff : StelCore::RefractionAuto;
+      const Vec3d positionJ2000 = equinoxJNow ? core->j2000ToEquinoxEqu(j2000Pos,mode) : j2000Pos;
+
+      const Vec3d position_alt_az = core->j2000ToAltAz(positionJ2000,mode);
+      StelUtils::rectToSphe(&az,&alt,position_alt_az);
+
+      const bool useSouthAzimuth = StelApp::getInstance().getFlagSouthAzimuthUsage();
+      const double direction = useSouthAzimuth ? 2. : 3.; // N is zero, E is 90 degrees
+      az = direction*M_PI - az;
+      if (az > M_PI*2.0)
+      {
+         az -= M_PI*2.0;
+      }
+   }
+   return res;
+}
+
 QString TelescopeClient::getInfoString(const StelCore* core, const InfoStringGroup& flags) const
 {
 	QString str;
@@ -259,6 +284,7 @@ void TelescopeTCP::hangup(void)
 	interpolatedPosition.reset();
 }
 
+
 //! queues a GOTO command with the specified position to the write buffer.
 //! For the data format of the command see the
 //! "Stellarium telescope control protocol" text file
@@ -270,31 +296,16 @@ void TelescopeTCP::telescopeGoto(const Vec3d &j2000Pos, StelObjectP selectObject
 		return;
 
 	Vec3d position = j2000Pos;
-   Vec3d position_alt_az = j2000Pos;
-   const StelCore* core = StelApp::getInstance().getCore();
-   position_alt_az = core->j2000ToAltAz(j2000Pos,StelCore::RefractionAuto);
+
 	if (equinox == TelescopeControl::EquinoxJNow)
 	{
 		const StelCore* core = StelApp::getInstance().getCore();
 		position = core->j2000ToEquinoxEqu(j2000Pos, StelCore::RefractionOff);
-
 	}
 
-	if (writeBufferEnd - writeBuffer + 20 < static_cast<int>(sizeof(writeBuffer)))
+
+   if (writeBufferEnd - writeBuffer + packetLength < static_cast<int>(sizeof(writeBuffer)))
 	{
-      const double a = position_alt_az[0];
-      const double b = position_alt_az[1];
-      const double x = position_alt_az[2];
-      //StelUtils::rectToSphe(&az, &alt, pos);
-      double az,alt;
-      const bool useSouthAzimuth = StelApp::getInstance().getFlagSouthAzimuthUsage();
-      StelUtils::rectToSphe(&az,&alt,position_alt_az);
-      const double direction = useSouthAzimuth ? 2. : 3.; // N is zero, E is 90 degrees
-      az = direction*M_PI - az;
-      if (az > M_PI*2)
-         az -= M_PI*2;
-      az*=M_180_PI;
-      alt*=M_180_PI;
 
 		const double ra_signed = atan2(position[1], position[0]);
 		//Workaround for the discrepancy in precision between Windows/Linux/PPC Macs and Intel Macs:
@@ -302,8 +313,20 @@ void TelescopeTCP::telescopeGoto(const Vec3d &j2000Pos, StelObjectP selectObject
 		const double dec = atan2(position[2], std::sqrt(position[0]*position[0]+position[1]*position[1]));
 		unsigned int ra_int = static_cast<unsigned int>(std::floor(0.5 + ra*((static_cast<unsigned int>(0x80000000))/M_PI)));
 		int dec_int = static_cast<int>(std::floor(0.5 + dec*((static_cast<unsigned int>(0x80000000))/M_PI)));
-		// length of packet:
-		*writeBufferEnd++ = 20;
+
+      double azimuth = 0.0;
+      double altitude = 0.0;
+      if(!GetAltAzFromJ2000Position(j2000Pos,equinox,altitude,azimuth))
+      {
+           qDebug() << "TelescopeTCP(" << name << ")::telescopeGoto: "<< ""
+                   "unable to convert j2000 position to alt az.";
+      }
+
+      unsigned int az_int = static_cast<unsigned int>(std::floor(0.5 + azimuth*((static_cast<unsigned int>(0x80000000)/M_PI))));
+      int alt_int = static_cast<int>(std::floor(0.5 + altitude*((static_cast<unsigned int>(0x80000000)/M_PI))));
+
+      // length of packet:
+      *writeBufferEnd++ = packetLength;
 		*writeBufferEnd++ = 0;
 		// type of packet:
 		*writeBufferEnd++ = 0;
@@ -341,7 +364,22 @@ void TelescopeTCP::telescopeGoto(const Vec3d &j2000Pos, StelObjectP selectObject
 		*writeBufferEnd++ = static_cast<char>(dec_int & 0xFF);
 		dec_int>>=8;
 		*writeBufferEnd++ = static_cast<char>(dec_int & 0xFF);
-
+      //alt
+      *writeBufferEnd++ = static_cast<char>(alt_int & 0xFF);
+      alt_int>>=8;
+      *writeBufferEnd++ = static_cast<char>(alt_int & 0xFF);
+      alt_int>>=8;
+      *writeBufferEnd++ = static_cast<char>(alt_int & 0xFF);
+      alt_int>>=8;
+      *writeBufferEnd++ = static_cast<char>(alt_int & 0xFF);
+      //az
+      *writeBufferEnd++ = static_cast<char>(az_int & 0xFF);
+      az_int>>=8;
+      *writeBufferEnd++ = static_cast<char>(az_int & 0xFF);
+      az_int>>=8;
+      *writeBufferEnd++ = static_cast<char>(az_int & 0xFF);
+      az_int>>=8;
+      *writeBufferEnd++ = static_cast<char>(az_int & 0xFF);
 	}
 	else
 	{
