@@ -376,12 +376,10 @@ void StelLogger::init(const QString& logFilePath)
 #ifdef Q_OS_HAIKU
 	// Idea and some code is catching from Haiku OS (MIT license)
 	uint32 topologyNodeCount = 0;
-	cpu_topology_node_info* topology = NULL;
 
 	get_cpu_topology_info(NULL, &topologyNodeCount);
-	if (topologyNodeCount != 0)
-		topology = new cpu_topology_node_info[topologyNodeCount];
-	get_cpu_topology_info(topology, &topologyNodeCount);
+	std::unique_ptr<cpu_topology_node_info> topology(topologyNodeCount != 0 ? new cpu_topology_node_info[topologyNodeCount] : NULL);
+	get_cpu_topology_info(topology.get(), &topologyNodeCount);
 
 	enum cpu_platform platform = B_CPU_UNKNOWN;
 	enum cpu_vendor cpuVendor = B_CPU_VENDOR_UNKNOWN;
@@ -389,22 +387,21 @@ void StelLogger::init(const QString& logFilePath)
 
 	for (uint32 i = 0; i < topologyNodeCount; i++)
 	{
-		switch (topology[i].type)
+		switch (topology.get()[i].type)
 		{
 			case B_TOPOLOGY_ROOT:
-				platform = topology[i].data.root.platform;
+				platform = topology.get()[i].data.root.platform;
 				break;
 			case B_TOPOLOGY_PACKAGE:
-				cpuVendor = topology[i].data.package.vendor;
+				cpuVendor = topology.get()[i].data.package.vendor;
 				break;
 			case B_TOPOLOGY_CORE:
-				cpuModel = topology[i].data.core.model;
+				cpuModel = topology.get()[i].data.core.model;
 				break;
 			default:
 				break;
 		}
 	}
-	delete[] topology;
 
 	int32 frequency = get_rounded_cpu_speed();
 	QString clockSpeed;
