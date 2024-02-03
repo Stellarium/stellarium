@@ -365,7 +365,7 @@ void ObsListDialog::addModelRow(const QString &olud, const QString &designation,
  * Load the lists names from jsonMap,
  * Populate the list names into combo box and extract defaultOlud
 */
-void ObsListDialog::loadListNames()
+void ObsListDialog::loadListNames(const QString& listID)
 {
 	listNames.clear();
 	QVariantMap::iterator i;
@@ -385,6 +385,14 @@ void ObsListDialog::loadListNames()
 		}
 	}
 	ui->obsListComboBox->model()->sort(0);
+	if (!listID.isEmpty())
+	{
+		// select observing list by OLUD
+		int idx = ui->obsListComboBox->findData(listID, Qt::UserRole);
+		if (idx<0)
+			idx = 0;
+		ui->obsListComboBox->setCurrentIndex(idx);
+	}
 
 	// If defaultOlud list not found, set first list as default.
 	if (!observingLists.contains(defaultOlud))
@@ -1114,7 +1122,7 @@ void ObsListDialog::importListButtonPressed()
 			tainted=false;
 
 			// Now we have stored to file, but the program is not aware of the new lists!
-			loadListNames(); // also populate Combobox and make sure at least some defaultOlud exists.
+			loadListNames(selectedOlud); // also populate Combobox and make sure at least some defaultOlud exists.
 			Q_ASSERT(selectedOlud.length()>0);
 
 			loadSelectedList();
@@ -1342,7 +1350,7 @@ void ObsListDialog::saveButtonPressed()
 
 	tainted=false;
 	switchEditMode(false, false); // Set GUI to normal mode
-	loadListNames(); // reload Combobox
+	loadListNames(selectedOlud); // reload Combobox
 	loadSelectedList();
 }
 

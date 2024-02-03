@@ -280,7 +280,7 @@ private:
 	//! Load the lists names from jsonMap,
 	//! Populate the list names into combo box and extract defaultOlud
 	//! Note that list names may not be unique, but the OLUDs must be.
-	void loadListNames();
+	void loadListNames(const QString &listID = "");
 
 	//! Load the selected observing list (selectedOlud) from the jsonMap.
 	void loadSelectedList();
