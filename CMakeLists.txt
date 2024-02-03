@@ -71,6 +71,10 @@ SET(COPYRIGHT_YEARS "2000-${CURRENTYEAR}")
 SET(STELLARIUM_URL "https://stellarium.org/")
 ADD_DEFINITIONS(-DSTELLARIUM_URL="${STELLARIUM_URL}")
 
+# remembering the name and the version of compiler for StelLogger
+SET(STELLARIUM_COMPILER "${CMAKE_CXX_COMPILER_ID} ${CMAKE_CXX_COMPILER_VERSION}")
+ADD_DEFINITIONS(-DSTELLARIUM_COMPILER="${STELLARIUM_COMPILER}")
+
 # The line below is copied from src/gui/HelpDialog.cpp file
 SET(STELLARIUM_COPYRIGHT "Copyright (C) ${COPYRIGHT_YEARS} ${PROJECT_NAME} Developers")
 # The line below is copied from src/main.cpp file
@@ -181,6 +185,7 @@ ELSE()
      SET(STELLARIUM_BUIDING_VERSION "${STELLARIUM_PUBLIC_VERSION}+")
 ENDIF()
 MESSAGE(STATUS "Building ${PROJECT_NAME} ${STELLARIUM_BUIDING_VERSION} (v${PACKAGE_VERSION}; Mode: ${CMAKE_BUILD_TYPE})")
+ADD_DEFINITIONS(-DSTELLARIUM_BUIDING_VERSION="${STELLARIUM_BUIDING_VERSION}")
 
 # Write version and series of Stellarium to Stellarium User Guide
 CONFIGURE_FILE(${PROJECT_SOURCE_DIR}/cmake/version.tex.cmake ${PROJECT_SOURCE_DIR}/guide/version.tex @ONLY NEWLINE_STYLE LF)

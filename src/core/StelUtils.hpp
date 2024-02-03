@@ -97,9 +97,6 @@ namespace StelUtils
 	//! Return the name and the version of operating system, i.e. "macOS 12.5"
 	QString getOperatingSystemInfo();
 
-	//! Return the name and the version of compiler, which was used for building the planetarium, i.e. "GCC 9.3.0"
-	QString getCompilerInfo();
-
 	//! Return the user agent name, i.e. "Stellarium/0.15.0 (Linux)"
 	QString getUserAgentString();
 
