@@ -288,7 +288,7 @@ void StelLogger::init(const QString& logFilePath)
 
 #endif
 
-#if defined Q_OS_BSD4 && !defined Q_OS_MACOS && !defined Q_OS_OPENBSD
+#if defined Q_OS_FREEBSD || defined Q_OS_NETBSD
 	const char* _model   = "hw.model";
 	const char* _physmem = "hw.physmem";
 
