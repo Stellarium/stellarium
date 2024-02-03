@@ -315,8 +315,8 @@ void TelescopeTCP::telescopeGoto(const Vec3d &j2000Pos, StelObjectP selectObject
       int dec_int = static_cast<int>(std::floor(0.5 + dec*((static_cast<unsigned int>(0x80000000))/M_PI)));
 
       double azimuth = 0.0;
-      double altitutde = 0.0;
-      if(!GetAltAzFromJ2000Position(j2000Pos,equinox,altitutde,azimuth))
+      double altitude = 0.0;
+      if(!GetAltAzFromJ2000Position(j2000Pos,equinox,altitude,azimuth))
       {
            qDebug() << "TelescopeTCP(" << name << ")::telescopeGoto: "<< ""
                    "unable to convert j2000 position to alt az.";
