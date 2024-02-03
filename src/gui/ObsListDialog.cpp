@@ -369,6 +369,8 @@ void ObsListDialog::loadListNames()
 {
 	listNames.clear();
 	QVariantMap::iterator i;
+	// Clean list of OL to avoid duplicates
+	ui->obsListComboBox->clear();
 
 	// Add the list name and OLUD (as item data) into the ComboBox.
 	for (i = observingLists.begin(); i != observingLists.end(); ++i) {
