@@ -306,7 +306,6 @@ void TelescopeTCP::telescopeGoto(const Vec3d &j2000Pos, StelObjectP selectObject
 
    if (writeBufferEnd - writeBuffer + packetLength < static_cast<int>(sizeof(writeBuffer)))
 	{
-
 		const double ra_signed = atan2(position[1], position[0]);
 		//Workaround for the discrepancy in precision between Windows/Linux/PPC Macs and Intel Macs:
 		const double ra = (ra_signed >= 0) ? ra_signed : (ra_signed + 2.0 * M_PI);
