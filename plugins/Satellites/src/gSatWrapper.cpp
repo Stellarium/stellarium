@@ -248,12 +248,6 @@ gSatWrapper::Visibility gSatWrapper::getVisibilityPredict() const
 	return rval;
 }
 
-double gSatWrapper::getPhaseAngle() const
-{
-	Vec3d sunECIPos = getSunECIPos();
-	return sunECIPos.angle(getTEMEPos());
-}
-
 double gSatWrapper::getOrbitalPeriod() const
 {
 	return pSatellite->getPeriod();

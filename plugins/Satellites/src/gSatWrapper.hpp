@@ -119,7 +119,6 @@ public:
 	//!   David A. Vallado
 	Visibility getVisibilityPredict() const;
 
-	double getPhaseAngle() const;
 	//! Get orbital period in minutes
 	double getOrbitalPeriod() const;
 	//! Get orbital inclination in degrees
