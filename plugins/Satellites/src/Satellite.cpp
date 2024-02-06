@@ -184,7 +184,7 @@ Satellite::Satellite(const QString& identifier, const QVariantMap& map)
 		{
 			QVariantMap commMap = comm.toMap();
 			CommLink c;
-			if (commMap.contains("frequency")) c.frequency = commMap.value("frequency").toDouble();
+			c.frequency = commMap.value("frequency").toDouble(); // required!
 			if (commMap.contains("modulation")) c.modulation = commMap.value("modulation").toString();
 			if (commMap.contains("description")) c.description = commMap.value("description").toString();
 			comms.append(c);
@@ -844,7 +844,12 @@ void Satellite::update(double)
 
 		pSatWrapper->getSlantRange(range, rangeRate);
 		visibility = pSatWrapper->getVisibilityPredict();
-		phaseAngle = pSatWrapper->getPhaseAngle();
+
+		// Compute phase angle
+		double raSun, decSun, raSat, decSat;
+		StelUtils::rectToSphe(&raSun, &decSun, sun->getJ2000EquatorialPos(core));
+		StelUtils::rectToSphe(&raSat, &decSat, XYZ);
+		phaseAngle = std::acos(-1.0*(std::sin(decSun)*std::sin(decSat) + std::cos(decSun)*std::cos(decSat)*std::cos(raSun - raSat)));
 
 		// Compute orbit points to draw orbit line.
 		if (orbitDisplayed) computeOrbitPoints();
