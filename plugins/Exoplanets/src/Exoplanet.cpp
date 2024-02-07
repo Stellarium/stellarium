@@ -496,7 +496,7 @@ QString Exoplanet::getInfoString(const StelCore* core, const InfoStringGroup& fl
 			}
 			oss << "</table>";
 			if (hasHabitableExoplanets)
-				oss << QString("%1: %2%3").arg(q_("Equilibrium temperature on Earth"), QString::number(getTemperature(255), 'f', 2), getTemperatureScaleUnit()) << "<br />";
+				oss << QString("%1: %2%3").arg(q_("Surface temperature on Earth"), QString::number(getTemperature(288), 'f', 2), getTemperatureScaleUnit()) << "<br />";
 		}
 	}
 
