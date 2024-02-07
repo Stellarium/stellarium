@@ -314,6 +314,10 @@ void ExoplanetsDialog::setInfoHtml(void)
 			.arg(q_("Equilibrium Temperature"),
 			     q_("The planetary equilibrium temperature is a theoretical temperature in (°C) that the planet would be at when considered simply as if it were a black body being heated only by its parent star (assuming a 0.3 bond albedo). As example the planetary equilibrium temperature of Earth is -18.15°C (255 K)."),
 			     q_("Actual surface temperatures are expected to be larger than the equilibrium temperature depending on the atmosphere of the planets, which are currently unknown (e.g. Earth mean global surface temperature is about 288 K or 15°C)."));
+	html += QString("<p><b>%1</b> &mdash; %2 %3</p>")
+			.arg(q_("Surface Temperature"),
+			     q_("The estimated surface temperature in Kelvins (K) assuming an Earth-like atmosphere (i.e., same bond albedo and greenhouse)."),
+			     q_("Temperatures could be much larger for thicker atmospheres (Earth = 288 K or 15°C)."));
 	html += QString("<p><b>%1</b> &mdash; %2</p>")
 			.arg(q_("Flux"),
 			     q_("Average stellar flux of the planet in Earth fluxes (Earth = 1.0 S<sub>E</sub>)."));

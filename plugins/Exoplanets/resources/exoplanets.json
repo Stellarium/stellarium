@@ -939,7 +939,7 @@
 			"exoplanets":
 			[
 				{
-					"mass": 2.6,
+					"mass": 4.1,
 					"radius": 1.11,
 					"period": 10260.0,
 					"semiAxis": 11.1,
@@ -1034,7 +1034,7 @@
 					"inclination": 90.36,
 					"angleDistance": 0.001264,
 					"discovered": 2004,
-					"detectionMethod": "Primary Transit",
+					"detectionMethod": "Radial Velocity",
 					"planetProperName": "Janssen",
 					"planetName": "e"
 				},
@@ -4858,6 +4858,11 @@
 					"semiAxis": 0.0457,
 					"discovered": 2022,
 					"detectionMethod": "Radial Velocity",
+					"pclass": "M Warm Terran",
+					"SurfTemp": 260,
+					"flux": 67,
+					"ESI": 86,
+					"conservative": true,
 					"planetName": "b"
 				},
 				{
@@ -4866,12 +4871,18 @@
 					"semiAxis": 0.0738,
 					"discovered": 2022,
 					"detectionMethod": "Radial Velocity",
+					"pclass": "M Warm Terran",
+					"SurfTemp": 205,
+					"flux": 26,
+					"ESI": 58,
+					"conservative": true,
 					"planetName": "c"
 				}
 			],
 			"distance": 4.846,
 			"stype": "M5.5V",
 			"Vmag": 14.0,
+			"hasHP": true,
 			"RA": "0h6m43s",
 			"DE": "-7d32m17s"
 		},
@@ -4920,8 +4931,8 @@
 					"eccentricity": 0.29,
 					"discovered": 2019,
 					"detectionMethod": "Radial Velocity",
-					"pclass": "M-Warm Terran",
-					"EqTemp": 275,
+					"pclass": "M Warm Terran",
+					"SurfTemp": 310,
 					"flux": 145,
 					"ESI": 86,
 					"conservative": true,
@@ -4934,8 +4945,8 @@
 					"eccentricity": 0.54,
 					"discovered": 2019,
 					"detectionMethod": "Radial Velocity",
-					"pclass": "M-Warm Terran",
-					"EqTemp": 218,
+					"pclass": "M Warm Terran",
+					"SurfTemp": 246,
 					"flux": 69,
 					"ESI": 86,
 					"conservative": true,
@@ -5175,10 +5186,10 @@
 					"eccentricity": 0.03,
 					"discovered": 2012,
 					"detectionMethod": "Radial Velocity",
-					"pclass": "M-Warm Superterran",
-					"EqTemp": 277,
-					"flux": 141,
-					"ESI": 67,
+					"pclass": "M Warm Superterran",
+					"SurfTemp": 303,
+					"flux": 125,
+					"ESI": 69,
 					"planetName": "c"
 				},
 				{
@@ -5305,8 +5316,8 @@
 					"eccentricity": 0.09,
 					"discovered": 2014,
 					"detectionMethod": "Radial Velocity",
-					"pclass": "M-Warm Superterran",
-					"EqTemp": 239,
+					"pclass": "M Warm Superterran",
+					"SurfTemp": 270,
 					"flux": 78,
 					"ESI": 70,
 					"planetName": "c"
@@ -5318,6 +5329,10 @@
 					"eccentricity": 0.16,
 					"discovered": 2020,
 					"detectionMethod": "Radial Velocity",
+					"pclass": "M Warm Superterran",
+					"SurfTemp": 204,
+					"flux": 26,
+					"ESI": 48,
 					"planetName": "d"
 				}
 			],
@@ -5486,8 +5501,8 @@
 					"inclination": 80.0,
 					"discovered": 2017,
 					"detectionMethod": "Radial Velocity",
-					"pclass": "M-Warm Terran",
-					"EqTemp": 258,
+					"pclass": "M Warm Terran",
+					"SurfTemp": 291,
 					"flux": 106,
 					"ESI": 85,
 					"conservative": true,
@@ -5743,8 +5758,8 @@
 					"eccentricity": 0.12,
 					"discovered": 2014,
 					"detectionMethod": "Radial Velocity",
-					"pclass": "M-Warm Superterran",
-					"EqTemp": 223,
+					"pclass": "M Warm Superterran",
+					"SurfTemp": 251,
 					"flux": 59,
 					"ESI": 63,
 					"planetName": "d"
@@ -5951,8 +5966,8 @@
 					"eccentricity": 0.033,
 					"discovered": 2019,
 					"detectionMethod": "Radial Velocity",
-					"pclass": "M-Warm Superterran",
-					"EqTemp": 200,
+					"pclass": "M Warm Superterran",
+					"SurfTemp": 226,
 					"flux": 38,
 					"ESI": 58,
 					"planetName": "d"
@@ -6022,6 +6037,10 @@
 					"eccentricity": 0.14,
 					"discovered": 2023,
 					"detectionMethod": "Radial Velocity",
+					"pclass": "M Warm Superterran",
+					"SurfTemp": 296,
+					"flux": 115,
+					"ESI": 71,
 					"planetName": "d"
 				}
 			],
@@ -6032,6 +6051,7 @@
 			"Vmag": 10.0,
 			"sradius": 0.457,
 			"effectiveTemp": 3522.0,
+			"hasHP": true,
 			"starAltNames": "TOI-731",
 			"RA": "9h44m30s",
 			"DE": "-45d46m35s"
@@ -6321,6 +6341,10 @@
 					"eccentricity": 0.03,
 					"discovered": 2020,
 					"detectionMethod": "Radial Velocity",
+					"pclass": "M Warm Superterran",
+					"SurfTemp": 291,
+					"flux": 106,
+					"ESI": 74,
 					"planetName": "d"
 				}
 			],
@@ -6330,6 +6354,7 @@
 			"smetal": -0.22,
 			"Vmag": 9.79,
 			"effectiveTemp": 3600.0,
+			"hasHP": true,
 			"RA": "11h35m27s",
 			"DE": "-32d32m23.9s"
 		},
@@ -6346,7 +6371,7 @@
 					"inclination": 85.8,
 					"angleDistance": 0.00283,
 					"discovered": 2004,
-					"detectionMethod": "Primary Transit",
+					"detectionMethod": "Radial Velocity",
 					"planetName": "b"
 				}
 			],
@@ -6624,11 +6649,10 @@
 					"angleDistance": 0.018289,
 					"discovered": 2011,
 					"detectionMethod": "Radial Velocity",
-					"pclass": "M-Warm Terran",
-					"EqTemp": 247,
+					"pclass": "M Warm Terran",
+					"SurfTemp": 278,
 					"flux": 88,
 					"ESI": 80,
-					"conservative": true,
 					"planetName": "c"
 				},
 				{
@@ -6638,8 +6662,8 @@
 					"eccentricity": 0.02,
 					"discovered": 2013,
 					"detectionMethod": "Radial Velocity",
-					"pclass": "M-Warm Terran",
-					"EqTemp": 189,
+					"pclass": "M Warm Terran",
+					"SurfTemp": 213,
 					"flux": 30,
 					"ESI": 60,
 					"conservative": true,
@@ -6652,10 +6676,10 @@
 					"eccentricity": 0.03,
 					"discovered": 2013,
 					"detectionMethod": "Radial Velocity",
-					"pclass": "M-Warm Terran",
-					"EqTemp": 221,
+					"pclass": "M Warm Terran",
+					"SurfTemp": 249,
 					"flux": 56,
-					"ESI": 77,
+					"ESI": 76,
 					"conservative": true,
 					"planetName": "f"
 				},
@@ -6766,6 +6790,10 @@
 					"eccentricity": 0.08,
 					"discovered": 2014,
 					"detectionMethod": "Radial Velocity",
+					"pclass": "M Warm Superterran",
+					"SurfTemp": 215,
+					"flux": 31,
+					"ESI": 57,
 					"planetName": "b"
 				},
 				{
@@ -6781,6 +6809,7 @@
 			"stype": "M3.5V",
 			"smass": 0.27,
 			"effectiveTemp": 3028.0,
+			"hasHP": true,
 			"RA": "17h37m3.6s",
 			"DE": "-44d19m9.1s"
 		},
@@ -7013,7 +7042,6 @@
 			"smass": 0.45,
 			"smetal": -0.31,
 			"Vmag": 8.67,
-			"hasHP": true,
 			"RA": "21h33m34s",
 			"DE": "-49d0m32s"
 		},
@@ -13762,6 +13790,16 @@
 			"exoplanets":
 			[
 				{
+					"mass": 2.18,
+					"period": 448.6,
+					"semiAxis": 1.099,
+					"eccentricity": 0.25,
+					"angleDistance": 0.066205,
+					"discovered": 2002,
+					"detectionMethod": "Radial Velocity",
+					"planetName": "b"
+				},
+				{
 					"mass": 3.79,
 					"period": 919.0,
 					"semiAxis": 1.76,
@@ -13829,6 +13867,33 @@
 			"Vmag": 8.8,
 			"RA": "14h46m3s",
 			"DE": "-68d45m45s"
+		},
+		"HD 130322":
+		{
+			"exoplanets":
+			[
+				{
+					"mass": 136.0,
+					"period": 10.72,
+					"semiAxis": 0.09,
+					"eccentricity": 0.044,
+					"inclination": 76.0,
+					"angleDistance": 0.002933,
+					"discovered": 1999,
+					"detectionMethod": "Radial Velocity",
+					"planetProperName": "Eiger",
+					"planetName": "b"
+				}
+			],
+			"distance": 30.0,
+			"stype": "K0 V",
+			"smass": 0.79,
+			"smetal": -0.02,
+			"Vmag": 8.05,
+			"sradius": 0.83,
+			"effectiveTemp": 5330.0,
+			"RA": "14h47m32.9s",
+			"DE": "-0d16m53s"
 		},
 		"HD 130948 B":
 		{
@@ -14085,14 +14150,32 @@
 					"planetName": "c"
 				},
 				{
-					"mass": 0.121,
-					"period": 459.26,
-					"semiAxis": 1.1567,
-					"eccentricity": 0.46,
+					"mass": 0.141,
+					"period": 967.9,
+					"semiAxis": 1.94,
+					"eccentricity": 0.092,
 					"angleDistance": 0.043649,
 					"discovered": 2011,
 					"detectionMethod": "Radial Velocity",
 					"planetName": "d"
+				},
+				{
+					"mass": 0.00736,
+					"period": 4.3203,
+					"semiAxis": 0.0527,
+					"eccentricity": 0.2,
+					"discovered": 2024,
+					"detectionMethod": "Radial Velocity",
+					"planetName": "e"
+				},
+				{
+					"mass": 5.63,
+					"period": 26.915,
+					"semiAxis": 0.1784,
+					"eccentricity": 0.08,
+					"discovered": 2024,
+					"detectionMethod": "Radial Velocity",
+					"planetName": "f"
 				}
 			],
 			"distance": 26.5,
@@ -18918,6 +19001,16 @@
 					"planetName": "b"
 				},
 				{
+					"mass": 0.00793,
+					"period": 43.17,
+					"semiAxis": 0.225,
+					"eccentricity": 0.17,
+					"angleDistance": 0.033597,
+					"discovered": 2011,
+					"detectionMethod": "Radial Velocity",
+					"planetName": "c"
+				},
+				{
 					"mass": 0.01108,
 					"period": 88.9,
 					"semiAxis": 0.364,
@@ -19617,6 +19710,10 @@
 					"eccentricity": 0.12,
 					"discovered": 2020,
 					"detectionMethod": "Radial Velocity",
+					"pclass": "K Warm Superterran",
+					"SurfTemp": 304,
+					"flux": 128,
+					"ESI": 63,
 					"planetName": "c"
 				}
 			],
@@ -19626,6 +19723,7 @@
 			"smetal": -0.16,
 			"sradius": 0.76,
 			"effectiveTemp": 5103.0,
+			"hasHP": true,
 			"starAltNames": "2MASS J22473183+8341493, BD+82 704, HIP 112527, LSPM J2247+8341, SAO 3796, TIC 264899051, TYC 4650-00917-1, WISE J224731.02+834150.7",
 			"RA": "22h47m31.8s",
 			"DE": "+83d41m49.3s"
@@ -22555,8 +22653,8 @@
 					"eccentricity": 0.29,
 					"discovered": 2012,
 					"detectionMethod": "Radial Velocity",
-					"pclass": "K-Warm Superterran",
-					"EqTemp": 226,
+					"pclass": "K Warm Superterran",
+					"SurfTemp": 255,
 					"flux": 67,
 					"ESI": 66,
 					"planetName": "g"
@@ -23906,6 +24004,16 @@
 					"discovered": 2020,
 					"detectionMethod": "Primary Transit",
 					"planetName": "c"
+				},
+				{
+					"radius": 0.09573,
+					"period": 4.209075,
+					"semiAxis": 0.0503,
+					"eccentricity": 0.16,
+					"inclination": 88.73,
+					"discovered": 2024,
+					"detectionMethod": "Primary Transit",
+					"planetName": "d"
 				}
 			],
 			"distance": 22.42,
@@ -25142,7 +25250,7 @@
 					"inclination": 89.24,
 					"angleDistance": 0.007688,
 					"discovered": 2001,
-					"detectionMethod": "Primary Transit",
+					"detectionMethod": "Radial Velocity",
 					"planetName": "b"
 				}
 			],
@@ -27240,6 +27348,10 @@
 					"eccentricity": 0.17,
 					"discovered": 2020,
 					"detectionMethod": "Radial Velocity",
+					"pclass": "M Warm Superterran",
+					"SurfTemp": 307,
+					"flux": 134,
+					"ESI": 65,
 					"planetName": "b"
 				},
 				{
@@ -27255,6 +27367,7 @@
 			"distance": 17.798,
 			"stype": "M0",
 			"Vmag": 9.7,
+			"hasHP": true,
 			"RA": "7h54m11s",
 			"DE": "-25d18m11s"
 		},
@@ -28471,6 +28584,10 @@
 					"eccentricity": 0.079,
 					"discovered": 2023,
 					"detectionMethod": "Radial Velocity",
+					"pclass": "M Warm Superterran",
+					"SurfTemp": 242,
+					"flux": 51,
+					"ESI": 65,
 					"planetName": "b"
 				}
 			],
@@ -28481,6 +28598,7 @@
 			"Vmag": 11.3,
 			"sradius": 0.299,
 			"effectiveTemp": 3347.0,
+			"hasHP": true,
 			"starAltNames": "Gliese 555",
 			"RA": "14h34m18s",
 			"DE": "-12d31m10s"
@@ -31283,10 +31401,10 @@
 					"inclination": 89.5785,
 					"discovered": 2015,
 					"detectionMethod": "Primary Transit",
-					"pclass": "M-Warm Superterran",
-					"EqTemp": 257,
-					"flux": 108,
-					"ESI": 71,
+					"pclass": "M Warm Superterran",
+					"SurfTemp": 302,
+					"flux": 126,
+					"ESI": 70,
 					"planetName": "b"
 				},
 				{
@@ -33985,8 +34103,8 @@
 					"inclination": 89.81,
 					"discovered": 2018,
 					"detectionMethod": "Primary Transit",
-					"pclass": "M-Warm Superterran",
-					"EqTemp": 207,
+					"pclass": "M Warm Superterran",
+					"SurfTemp": 233,
 					"flux": 44,
 					"ESI": 65,
 					"planetName": "b"
@@ -34315,6 +34433,29 @@
 			"starAltNames": "2MASS J03292204+2217577, EPIC 210957318, WISE J032922.08+221757.7",
 			"RA": "3h29m22s",
 			"DE": "+22d17m57.8s"
+		},
+		"K2-311":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 1.11,
+					"period": 3650.0,
+					"semiAxis": 4.5,
+					"inclination": 89.87,
+					"discovered": 2018,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 560.0,
+			"smass": 0.9,
+			"smetal": -0.23,
+			"sradius": 2.7,
+			"effectiveTemp": 4898.0,
+			"starAltNames": "2MASS J10373341 + 1150338, EPIC 248847494",
+			"RA": "10h37m33.4s",
+			"DE": "+11d50m33.8s"
 		},
 		"EPIC 249893012":
 		{
@@ -35172,10 +35313,11 @@
 					"inclination": 89.788,
 					"discovered": 2015,
 					"detectionMethod": "Primary Transit",
-					"pclass": "M-Warm Superterran",
-					"EqTemp": 282,
-					"flux": 150,
-					"ESI": 78,
+					"pclass": "M Warm Terran",
+					"SurfTemp": 315,
+					"flux": 145,
+					"ESI": 81,
+					"conservative": true,
 					"planetName": "d"
 				}
 			],
@@ -36108,10 +36250,10 @@
 					"inclination": 89.68,
 					"discovered": 2016,
 					"detectionMethod": "Primary Transit",
-					"pclass": "M-Warm Terran",
-					"EqTemp": 261,
-					"flux": 111,
-					"ESI": 90,
+					"pclass": "M Warm Terran",
+					"SurfTemp": 306,
+					"flux": 130,
+					"ESI": 87,
 					"conservative": true,
 					"planetName": "e"
 				}
@@ -36705,8 +36847,8 @@
 					"inclination": 87.983,
 					"discovered": 2015,
 					"detectionMethod": "Primary Transit",
-					"pclass": "M-Warm Superterran",
-					"EqTemp": 279,
+					"pclass": "M Warm Superterran",
+					"SurfTemp": 315,
 					"flux": 145,
 					"ESI": 70,
 					"planetName": "b"
@@ -39657,10 +39799,6 @@
 					"period": 198.680179,
 					"discovered": 2016,
 					"detectionMethod": "Primary Transit",
-					"pclass": "G-Warm Superterran",
-					"EqTemp": 267,
-					"flux": 120,
-					"ESI": 72,
 					"planetName": "b"
 				}
 			],
@@ -39669,7 +39807,6 @@
 			"smetal": -0.04,
 			"sradius": 0.82,
 			"effectiveTemp": 5321.0,
-			"hasHP": true,
 			"starAltNames": "2MASS J19423908+4431330, KIC 8505920, KOI-2094, WISE J194239.09+443132.9",
 			"RA": "19h42m39s",
 			"DE": "+44d31m33s"
@@ -43152,10 +43289,10 @@
 					"period": 86.828989,
 					"discovered": 2016,
 					"detectionMethod": "Primary Transit",
-					"pclass": "M-Warm Terran",
-					"EqTemp": 213,
-					"flux": 49,
-					"ESI": 73,
+					"pclass": "M Warm Terran",
+					"SurfTemp": 217,
+					"flux": 32,
+					"ESI": 62,
 					"conservative": true,
 					"planetName": "b"
 				}
@@ -47749,10 +47886,10 @@
 					"period": 60.866168,
 					"discovered": 2016,
 					"detectionMethod": "Primary Transit",
-					"pclass": "K-Warm Superterran",
-					"EqTemp": 274,
-					"flux": 134,
-					"ESI": 78,
+					"pclass": "K Warm Superterran",
+					"SurfTemp": 292,
+					"flux": 107,
+					"ESI": 80,
 					"planetName": "b"
 				}
 			],
@@ -50992,10 +51129,10 @@
 					"period": 125.4131177,
 					"discovered": 2016,
 					"detectionMethod": "Primary Transit",
-					"pclass": "K-Warm Superterran",
-					"EqTemp": 250,
-					"flux": 92,
-					"ESI": 70,
+					"pclass": "K Warm Superterran",
+					"SurfTemp": 270,
+					"flux": 78,
+					"ESI": 69,
 					"planetName": "b"
 				}
 			],
@@ -51102,10 +51239,10 @@
 					"period": 168.811174,
 					"discovered": 2016,
 					"detectionMethod": "Primary Transit",
-					"pclass": "K-Warm Superterran",
-					"EqTemp": 248,
-					"flux": 90,
-					"ESI": 80,
+					"pclass": "K Warm Superterran",
+					"SurfTemp": 275,
+					"flux": 84,
+					"ESI": 79,
 					"planetName": "b"
 				}
 			],
@@ -51334,10 +51471,6 @@
 					"period": 184.771853,
 					"discovered": 2016,
 					"detectionMethod": "Primary Transit",
-					"pclass": "K-Warm Superterran",
-					"EqTemp": 261,
-					"flux": 110,
-					"ESI": 70,
 					"planetName": "b"
 				}
 			],
@@ -51346,7 +51479,6 @@
 			"smetal": -0.07,
 			"sradius": 0.78,
 			"effectiveTemp": 5202.0,
-			"hasHP": true,
 			"starAltNames": "2MASS J19264243+3852296, KIC 3747817, KOI-4103",
 			"RA": "19h26m42.4s",
 			"DE": "+38d52m29.6s"
@@ -51516,6 +51648,10 @@
 					"semiAxis": 0.242,
 					"discovered": 2014,
 					"detectionMethod": "Primary Transit",
+					"pclass": "M Warm Superterran",
+					"SurfTemp": 291,
+					"flux": 105,
+					"ESI": 73,
 					"planetName": "c"
 				}
 			],
@@ -51525,6 +51661,7 @@
 			"smetal": -0.363,
 			"sradius": 0.62,
 			"effectiveTemp": 4508.0,
+			"hasHP": true,
 			"starAltNames": "2MASS J19135899+5104550, KIC 12302530, KOI-438, WISE J191358.98+510454.5",
 			"RA": "19h13m58.9s",
 			"DE": "+51d4m55s"
@@ -52654,10 +52791,10 @@
 					"period": 196.435224,
 					"discovered": 2016,
 					"detectionMethod": "Primary Transit",
-					"pclass": "G-Warm Superterran",
-					"EqTemp": 277,
-					"flux": 141,
-					"ESI": 73,
+					"pclass": "G Warm Superterran",
+					"SurfTemp": 325,
+					"flux": 164,
+					"ESI": 70,
 					"planetName": "b"
 				}
 			],
@@ -53303,10 +53440,6 @@
 					"period": 448.303558,
 					"discovered": 2016,
 					"detectionMethod": "Primary Transit",
-					"pclass": "F-Warm Superterran",
-					"EqTemp": 270,
-					"flux": 127,
-					"ESI": 69,
 					"planetName": "b"
 				}
 			],
@@ -53315,7 +53448,6 @@
 			"smetal": 0.0,
 			"sradius": 1.19,
 			"effectiveTemp": 6137.0,
-			"hasHP": true,
 			"starAltNames": "2MASS J19375876+4354490, KIC 8105398, KOI-5475, WISE J193758.77+435448.8",
 			"RA": "19h37m58.7s",
 			"DE": "+43d54m49s"
@@ -53434,8 +53566,8 @@
 					"period": 259.33683,
 					"discovered": 2016,
 					"detectionMethod": "Primary Transit",
-					"pclass": "G-Warm Superterran",
-					"EqTemp": 276,
+					"pclass": "G Warm Superterran",
+					"SurfTemp": 312,
 					"flux": 139,
 					"ESI": 76,
 					"planetName": "b"
@@ -53705,10 +53837,10 @@
 					"inclination": 89.339,
 					"discovered": 2020,
 					"detectionMethod": "Primary Transit",
-					"pclass": "M-Warm Terran",
-					"EqTemp": 237,
-					"flux": 75,
-					"ESI": 90,
+					"pclass": "M Warm Terran",
+					"SurfTemp": 302,
+					"flux": 123,
+					"ESI": 93,
 					"conservative": true,
 					"planetName": "c"
 				}
@@ -53821,10 +53953,11 @@
 					"inclination": 89.993,
 					"discovered": 2017,
 					"detectionMethod": "Primary Transit",
-					"pclass": "M-Warm Superterran",
-					"EqTemp": 244,
+					"pclass": "M Warm Terran",
+					"SurfTemp": 275,
 					"flux": 84,
 					"ESI": 83,
+					"conservative": true,
 					"planetName": "b"
 				}
 			],
@@ -53851,8 +53984,8 @@
 					"inclination": 89.788,
 					"discovered": 2017,
 					"detectionMethod": "Primary Transit",
-					"pclass": "K-Warm Superterran",
-					"EqTemp": 258,
+					"pclass": "K Warm Superterran",
+					"SurfTemp": 290,
 					"flux": 104,
 					"ESI": 74,
 					"planetName": "b"
@@ -55141,9 +55274,9 @@
 					"inclination": 89.95,
 					"discovered": 2020,
 					"detectionMethod": "Primary Transit",
-					"pclass": "K-Warm Superterran",
-					"EqTemp": 275,
-					"flux": 137,
+					"pclass": "K Warm Superterran",
+					"SurfTemp": 313,
+					"flux": 142,
 					"ESI": 71,
 					"planetName": "b"
 				}
@@ -55408,10 +55541,10 @@
 					"semiAxis": 0.677,
 					"discovered": 2014,
 					"detectionMethod": "Primary Transit",
-					"pclass": "K-Warm Superterran",
-					"EqTemp": 206,
-					"flux": 43,
-					"ESI": 61,
+					"pclass": "K Warm Superterran",
+					"SurfTemp": 251,
+					"flux": 59,
+					"ESI": 68,
 					"planetName": "d"
 				}
 			],
@@ -55874,8 +56007,8 @@
 					"inclination": 89.96,
 					"discovered": 2014,
 					"detectionMethod": "Primary Transit",
-					"pclass": "M-Warm Terran",
-					"EqTemp": 188,
+					"pclass": "M Warm Terran",
+					"SurfTemp": 211,
 					"flux": 29,
 					"ESI": 61,
 					"conservative": true,
@@ -57679,10 +57812,10 @@
 					"angleDistance": 0.004468,
 					"discovered": 2011,
 					"detectionMethod": "Primary Transit",
-					"pclass": "G-Warm Superterran",
-					"EqTemp": 261,
-					"flux": 110,
-					"ESI": 71,
+					"pclass": "G Warm Superterran",
+					"SurfTemp": 275,
+					"flux": 141,
+					"ESI": 72,
 					"planetName": "b"
 				}
 			],
@@ -59614,6 +59747,13 @@
 					"discovered": 2011,
 					"detectionMethod": "Primary Transit",
 					"planetName": "c"
+				},
+				{
+					"mass": 0.025,
+					"radius": 0.45,
+					"discovered": 2023,
+					"detectionMethod": "Primary Transit",
+					"planetName": "d"
 				}
 			],
 			"distance": 1075.1,
@@ -59750,9 +59890,9 @@
 					"semiAxis": 0.341,
 					"discovered": 2014,
 					"detectionMethod": "Primary Transit",
-					"pclass": "K-Warm Superterran",
-					"EqTemp": 248,
-					"flux": 90,
+					"pclass": "K Warm Superterran",
+					"SurfTemp": 279,
+					"flux": 89,
 					"ESI": 79,
 					"planetName": "c"
 				}
@@ -60267,10 +60407,11 @@
 					"eccentricity": 0.33,
 					"discovered": 2014,
 					"detectionMethod": "Primary Transit",
-					"pclass": "M-Warm Superterran",
-					"EqTemp": 276,
-					"flux": 150,
-					"ESI": 80,
+					"pclass": "M Warm Superterran",
+					"SurfTemp": 281,
+					"flux": 100,
+					"ESI": 85,
+					"conservative": true,
 					"planetName": "e"
 				},
 				{
@@ -60280,10 +60421,10 @@
 					"eccentricity": 0.33,
 					"discovered": 2014,
 					"detectionMethod": "Primary Transit",
-					"pclass": "M-Warm Superterran",
-					"EqTemp": 225,
-					"flux": 66,
-					"ESI": 75,
+					"pclass": "M Warm Superterran",
+					"SurfTemp": 229,
+					"flux": 44,
+					"ESI": 66,
 					"planetName": "f"
 				}
 			],
@@ -60353,10 +60494,6 @@
 					"semiAxis": 0.305,
 					"discovered": 2014,
 					"detectionMethod": "Primary Transit",
-					"pclass": "K-Warm Superterran",
-					"EqTemp": 271,
-					"flux": 129,
-					"ESI": 68,
 					"planetName": "d"
 				}
 			],
@@ -60365,7 +60502,6 @@
 			"smetal": -0.121,
 			"sradius": 0.58,
 			"effectiveTemp": 4465.0,
-			"hasHP": true,
 			"starAltNames": "2MASS J18520955+4849312, KIC 11176127, KOI-1430, WISE J185209.55+484931.2",
 			"RA": "18h52m9.5s",
 			"DE": "+48d49m31.2s"
@@ -65418,8 +65554,8 @@
 					"inclination": 89.93,
 					"discovered": 2015,
 					"detectionMethod": "Primary Transit",
-					"pclass": "K-Warm Superterran",
-					"EqTemp": 273,
+					"pclass": "K Warm Superterran",
+					"SurfTemp": 307,
 					"flux": 144,
 					"ESI": 75,
 					"planetName": "b"
@@ -65473,8 +65609,8 @@
 					"inclination": 89.94,
 					"discovered": 2015,
 					"detectionMethod": "Primary Transit",
-					"pclass": "K-Warm Terran",
-					"EqTemp": 233,
+					"pclass": "K Warm Terran",
+					"SurfTemp": 263,
 					"flux": 70,
 					"ESI": 84,
 					"conservative": true,
@@ -65504,8 +65640,8 @@
 					"inclination": 89.94,
 					"discovered": 2015,
 					"detectionMethod": "Primary Transit",
-					"pclass": "K-Warm Superterran",
-					"EqTemp": 247,
+					"pclass": "K Warm Superterran",
+					"SurfTemp": 278,
 					"flux": 89,
 					"ESI": 71,
 					"planetName": "b"
@@ -65888,8 +66024,8 @@
 					"inclination": 89.806,
 					"discovered": 2015,
 					"detectionMethod": "Primary Transit",
-					"pclass": "G-Warm Superterran",
-					"EqTemp": 261,
+					"pclass": "G Warm Superterran",
+					"SurfTemp": 295,
 					"flux": 111,
 					"ESI": 83,
 					"planetName": "b"
@@ -65951,6 +66087,14 @@
 					"discovered": 2015,
 					"detectionMethod": "Radial Velocity",
 					"planetName": "c"
+				},
+				{
+					"mass": 13.4,
+					"period": 17600.0,
+					"semiAxis": 13.4,
+					"discovered": 2015,
+					"detectionMethod": "Radial Velocity",
+					"planetName": "d"
 				}
 			],
 			"distance": 232.41,
@@ -70260,10 +70404,6 @@
 					"inclination": 89.8,
 					"discovered": 2013,
 					"detectionMethod": "Primary Transit",
-					"pclass": "K-Warm Superterran",
-					"EqTemp": 273,
-					"flux": 139,
-					"ESI": 72,
 					"planetName": "b"
 				}
 			],
@@ -70274,7 +70414,6 @@
 			"Vmag": 15.0,
 			"sradius": 0.62,
 			"effectiveTemp": 4017.0,
-			"hasHP": true,
 			"starAltNames": "2MASS J19411308+4228310, KIC 6960913, KOI-1361, WISE J194113.07+422831.1",
 			"RA": "19h41m13s",
 			"DE": "+42d28m31s"
@@ -70538,8 +70677,8 @@
 					"inclination": 89.98,
 					"discovered": 2013,
 					"detectionMethod": "Primary Transit",
-					"pclass": "K-Warm Superterran",
-					"EqTemp": 264,
+					"pclass": "K Warm Superterran",
+					"SurfTemp": 297,
 					"flux": 115,
 					"ESI": 83,
 					"planetName": "e"
@@ -70552,8 +70691,8 @@
 					"inclination": 89.9,
 					"discovered": 2013,
 					"detectionMethod": "Primary Transit",
-					"pclass": "K-Warm Terran",
-					"EqTemp": 204,
+					"pclass": "K Warm Terran",
+					"SurfTemp": 229,
 					"flux": 41,
 					"ESI": 68,
 					"conservative": true,
@@ -72408,10 +72547,10 @@
 					"period": 56.0560538,
 					"discovered": 2016,
 					"detectionMethod": "Primary Transit",
-					"pclass": "M-Warm Superterran",
-					"EqTemp": 243,
-					"flux": 83,
-					"ESI": 74,
+					"pclass": "M Warm Superterran",
+					"SurfTemp": 269,
+					"flux": 77,
+					"ESI": 73,
 					"planetName": "b"
 				}
 			],
@@ -80358,6 +80497,23 @@
 			"RA": "17h52m27s",
 			"DE": "-29d23m4s"
 		},
+		"KMTNet-2016-BLG-2321":
+		{
+			"exoplanets":
+			[
+				{
+					"mass": 3.58,
+					"semiAxis": 3.58,
+					"discovered": 2024,
+					"detectionMethod": "Microlensing",
+					"planetName": "b"
+				}
+			],
+			"distance": 3580.0,
+			"smass": 0.73,
+			"RA": "17h36m14s",
+			"DE": "-25d31m29.9s"
+		},
 		"KMT-2016-BLG-2364":
 		{
 			"exoplanets":
@@ -81727,6 +81883,57 @@
 			"RA": "17h58m55s",
 			"DE": "-29d28m24s"
 		},
+		"KMT-2023-BLG-0416":
+		{
+			"exoplanets":
+			[
+				{
+					"mass": 6.15,
+					"semiAxis": 3.73,
+					"discovered": 2024,
+					"detectionMethod": "Microlensing",
+					"planetName": "b"
+				}
+			],
+			"distance": 6330.0,
+			"smass": 0.61,
+			"RA": "17h45m17.9s",
+			"DE": "+25d4m45.9s"
+		},
+		"KMT-2023-BLG-0469":
+		{
+			"exoplanets":
+			[
+				{
+					"mass": 0.124,
+					"semiAxis": 2.37,
+					"discovered": 2024,
+					"detectionMethod": "Microlensing",
+					"planetName": "b"
+				}
+			],
+			"distance": 7070.0,
+			"smass": 0.47,
+			"RA": "17h57m37.6s",
+			"DE": "-28d42m54.2s"
+		},
+		"KMT-2023-BLG-0735":
+		{
+			"exoplanets":
+			[
+				{
+					"mass": 0.12,
+					"semiAxis": 2.75,
+					"discovered": 2024,
+					"detectionMethod": "Microlensing",
+					"planetName": "b"
+				}
+			],
+			"distance": 6390.0,
+			"smass": 0.61,
+			"RA": "17h50m18.2s",
+			"DE": "+29d12m10.5s"
+		},
 		"KMT-2023-BLG-1431L":
 		{
 			"exoplanets":
@@ -81743,6 +81950,37 @@
 			"smass": 0.57,
 			"RA": "18h4m44s",
 			"DE": "-29d44m38s"
+		},
+		"KMT-2023-BLG-1454":
+		{
+			"exoplanets":
+			[
+				{
+					"mass": 0.63,
+					"semiAxis": 1.18,
+					"discovered": 2024,
+					"detectionMethod": "Microlensing",
+					"planetName": "b"
+				}
+			],
+			"RA": "17h50m28.8s",
+			"DE": "+29d37m21.8s"
+		},
+		"KMT-2023-BLG-1642":
+		{
+			"exoplanets":
+			[
+				{
+					"mass": 1.18,
+					"semiAxis": 1.37,
+					"discovered": 2024,
+					"detectionMethod": "Microlensing",
+					"planetName": "b"
+				}
+			],
+			"smass": 0.15,
+			"RA": "17h25m27.8s",
+			"DE": "-29d3m30.4s"
 		},
 		"KOI-1257":
 		{
@@ -83134,10 +83372,10 @@
 					"inclination": 89.912,
 					"discovered": 2017,
 					"detectionMethod": "Primary Transit",
-					"pclass": "M-Warm Superterran",
-					"EqTemp": 214,
-					"flux": 50,
-					"ESI": 70,
+					"pclass": "M Warm Superterran",
+					"SurfTemp": 221,
+					"flux": 36,
+					"ESI": 62,
 					"planetName": "b"
 				},
 				{
@@ -83526,6 +83764,11 @@
 					"inclination": 89.287,
 					"discovered": 2022,
 					"detectionMethod": "Primary Transit",
+					"pclass": "M Warm Terran",
+					"SurfTemp": 280,
+					"flux": 91,
+					"ESI": 89,
+					"conservative": true,
 					"planetName": "c"
 				}
 			],
@@ -83535,6 +83778,7 @@
 			"Vmag": 18.0,
 			"sradius": 0.1556,
 			"effectiveTemp": 2850.0,
+			"hasHP": true,
 			"starAltNames": "TOI-4306, SPECULOOS-2",
 			"RA": "4h16m31s",
 			"DE": "-28d18m53s"
@@ -84437,6 +84681,21 @@
 			"RA": "17h54m58s",
 			"DE": "-29d45m2s"
 		},
+		"MOA-2016-BLG-526":
+		{
+			"exoplanets":
+			[
+				{
+					"mass": 6.93,
+					"semiAxis": 2.07,
+					"discovered": 2024,
+					"detectionMethod": "Microlensing",
+					"planetName": "b"
+				}
+			],
+			"RA": "17h36m14s",
+			"DE": "-34d23m10s"
+		},
 		"MOA-2016-BLG-532":
 		{
 			"exoplanets":
@@ -84536,6 +84795,23 @@
 			"smass": 0.18,
 			"RA": "17h55m28s",
 			"DE": "-28d18m22s"
+		},
+		"MOA-2022-BLG-563":
+		{
+			"exoplanets":
+			[
+				{
+					"mass": 0.4,
+					"semiAxis": 2.25,
+					"discovered": 2024,
+					"detectionMethod": "Microlensing",
+					"planetName": "b"
+				}
+			],
+			"distance": 6530.0,
+			"smass": 0.48,
+			"RA": "18h1m12s",
+			"DE": "-27d50m8.9s"
 		},
 		"MOA-bin-1L":
 		{
@@ -85960,8 +86236,8 @@
 			"exoplanets":
 			[
 				{
-					"mass": 0.29,
-					"semiAxis": 3.6,
+					"mass": 0.26,
+					"semiAxis": 3.14,
 					"discovered": 2017,
 					"detectionMethod": "Microlensing",
 					"planetName": "b"
@@ -86537,6 +86813,23 @@
 			"RA": "18h7m46.9s",
 			"DE": "-26d17m23.6s"
 		},
+		"OGLE-2016-BLG-1598":
+		{
+			"exoplanets":
+			[
+				{
+					"mass": 5.91,
+					"semiAxis": 2.5,
+					"discovered": 2024,
+					"detectionMethod": "Microlensing",
+					"planetName": "b"
+				}
+			],
+			"distance": 5910.0,
+			"smass": 0.55,
+			"RA": "18h0m44.9s",
+			"DE": "-29d10m31.9s"
+		},
 		"OGLE-2016-BLG-1635":
 		{
 			"exoplanets":
@@ -86552,6 +86845,23 @@
 			"starAltNames": "KMT-2016-BLG-0269",
 			"RA": "17h54m1s",
 			"DE": "-30d46m38s"
+		},
+		"OGLE-2016-BLG-1800":
+		{
+			"exoplanets":
+			[
+				{
+					"mass": 2.59,
+					"semiAxis": 1.88,
+					"discovered": 2024,
+					"detectionMethod": "Microlensing",
+					"planetName": "b"
+				}
+			],
+			"distance": 6480.0,
+			"smass": 0.41,
+			"RA": "17h59m37s",
+			"DE": "-30d51m54.9s"
 		},
 		"OGLE-2016-BLG-1850":
 		{
@@ -88173,10 +88483,10 @@
 					"eccentricity": 0.02,
 					"discovered": 2016,
 					"detectionMethod": "Radial Velocity",
-					"pclass": "M-Warm Terran",
-					"EqTemp": 228,
-					"flux": 70,
-					"ESI": 87,
+					"pclass": "M Warm Terran",
+					"SurfTemp": 261,
+					"flux": 68,
+					"ESI": 86,
 					"conservative": true,
 					"planetName": "b"
 				},
@@ -89063,8 +89373,8 @@
 					"eccentricity": 0.116,
 					"discovered": 2017,
 					"detectionMethod": "Radial Velocity",
-					"pclass": "M-Warm Terran",
-					"EqTemp": 280,
+					"pclass": "M Warm Terran",
+					"SurfTemp": 316,
 					"flux": 148,
 					"ESI": 86,
 					"conservative": true,
@@ -89138,6 +89448,10 @@
 					"eccentricity": 0.35,
 					"discovered": 2022,
 					"detectionMethod": "Radial Velocity",
+					"pclass": "M Warm Superterran",
+					"SurfTemp": 301,
+					"flux": 132,
+					"ESI": 77,
 					"planetName": "b"
 				}
 			],
@@ -89148,6 +89462,7 @@
 			"Vmag": 13.0,
 			"sradius": 0.211,
 			"effectiveTemp": 3071.0,
+			"hasHP": true,
 			"RA": "15h23m51s",
 			"DE": "+17d27m57s"
 		},
@@ -89782,11 +90097,6 @@
 					"eccentricity": 0.16,
 					"discovered": 2012,
 					"detectionMethod": "Radial Velocity",
-					"pclass": "G-Warm Terran",
-					"EqTemp": 190,
-					"flux": 32,
-					"ESI": 58,
-					"conservative": true,
 					"planetName": "f"
 				},
 				{
@@ -89815,7 +90125,6 @@
 			"Vmag": 3.5,
 			"sradius": 0.793,
 			"effectiveTemp": 5344.0,
-			"hasHP": true,
 			"RA": "1h44m4s",
 			"DE": "-15d56m15s"
 		},
@@ -89865,32 +90174,41 @@
 			"exoplanets":
 			[
 				{
-					"mass": 0.0033,
-					"period": 4.91,
-					"semiAxis": 0.0252,
-					"eccentricity": 0.0,
+					"mass": 0.00365,
+					"period": 4.90634,
+					"semiAxis": 0.0259,
+					"eccentricity": 0.03,
 					"discovered": 2019,
 					"detectionMethod": "Radial Velocity",
-					"pclass": "M-Warm Terran",
-					"EqTemp": 264,
+					"pclass": "M Warm Terran",
+					"SurfTemp": 297,
 					"flux": 115,
 					"ESI": 95,
 					"conservative": true,
 					"planetName": "b"
 				},
 				{
-					"mass": 0.00349,
-					"period": 11.409,
-					"semiAxis": 0.0443,
-					"eccentricity": 0.0,
+					"mass": 0.0033,
+					"period": 11.416,
+					"semiAxis": 0.0455,
+					"eccentricity": 0.04,
 					"discovered": 2019,
 					"detectionMethod": "Radial Velocity",
-					"pclass": "M-Warm Terran",
-					"EqTemp": 199,
+					"pclass": "M Warm Terran",
+					"SurfTemp": 224,
 					"flux": 37,
 					"ESI": 68,
 					"conservative": true,
 					"planetName": "c"
+				},
+				{
+					"mass": 0.00258,
+					"period": 26.13,
+					"semiAxis": 0.0791,
+					"eccentricity": 0.07,
+					"discovered": 2024,
+					"detectionMethod": "Radial Velocity",
+					"planetName": "d"
 				}
 			],
 			"distance": 3.831,
@@ -89988,6 +90306,24 @@
 			"effectiveTemp": 4694.0,
 			"RA": "20h23m22s",
 			"DE": "+54d23m40s"
+		},
+		"TIC 4672985":
+		{
+			"exoplanets":
+			[
+				{
+					"mass": 12.74,
+					"radius": 1.026,
+					"period": 69.048,
+					"semiAxis": 0.33,
+					"eccentricity": 0.018,
+					"discovered": 2024,
+					"detectionMethod": "Primary Transit",
+					"planetName": "a"
+				}
+			],
+			"RA": "2h33m52.9s",
+			"DE": "-10d39m25.9s"
 		},
 		"TOI-1052":
 		{
@@ -91968,12 +92304,12 @@
 			"exoplanets":
 			[
 				{
-					"mass": 0.089,
-					"radius": 0.4764,
-					"period": 24.283429,
-					"semiAxis": 0.16,
-					"eccentricity": 0.16,
-					"inclination": 89.6,
+					"mass": 0.0579,
+					"radius": 0.4595,
+					"period": 24.283385,
+					"semiAxis": 0.164,
+					"eccentricity": 0.185,
+					"inclination": 89.8,
 					"discovered": 2022,
 					"detectionMethod": "Primary Transit",
 					"planetName": "b"
@@ -92462,6 +92798,25 @@
 			"effectiveTemp": 4969.0,
 			"RA": "14h5m50s",
 			"DE": "+16d59m33s"
+		},
+		"TOI-1855":
+		{
+			"exoplanets":
+			[
+				{
+					"mass": 1.133,
+					"radius": 1.65,
+					"period": 1.36414864,
+					"semiAxis": 0.02398,
+					"eccentricity": 0.033,
+					"inclination": 78.1,
+					"discovered": 2024,
+					"detectionMethod": "Primary Transit, Radial Velocity",
+					"planetName": "b"
+				}
+			],
+			"RA": "13h41m24.9s",
+			"DE": "+17d41m13.9s"
 		},
 		"TOI-1859":
 		{
@@ -93090,6 +93445,25 @@
 			"RA": "10h6m29s",
 			"DE": "+74d49m38s"
 		},
+		"TOI-2107":
+		{
+			"exoplanets":
+			[
+				{
+					"mass": 0.83,
+					"radius": 1.211,
+					"period": 2.4545467,
+					"semiAxis": 0.03515,
+					"eccentricity": 0.033,
+					"inclination": 89.44,
+					"discovered": 2024,
+					"detectionMethod": "Primary Transit, Radial Velocity",
+					"planetName": "b"
+				}
+			],
+			"RA": "19h7m11s",
+			"DE": "-58d41m47.9s"
+		},
 		"TOI-2109":
 		{
 			"exoplanets":
@@ -93569,6 +93943,10 @@
 					"inclination": 89.786,
 					"discovered": 2021,
 					"detectionMethod": "Primary Transit",
+					"pclass": "M Warm Superterran",
+					"SurfTemp": 253,
+					"flux": 74,
+					"ESI": 72,
 					"planetName": "b"
 				}
 			],
@@ -93579,6 +93957,7 @@
 			"Vmag": 15.2,
 			"sradius": 0.311,
 			"effectiveTemp": 3430.0,
+			"hasHP": true,
 			"RA": "12h58m58s",
 			"DE": "+77d39m42s"
 		},
@@ -93700,6 +94079,25 @@
 			"RA": "5h56m31s",
 			"DE": "-5d0m43s"
 		},
+		"TOI-2368":
+		{
+			"exoplanets":
+			[
+				{
+					"mass": 0.65,
+					"radius": 0.967,
+					"period": 5.1750073,
+					"semiAxis": 0.05649,
+					"eccentricity": 0.06,
+					"inclination": 86.6,
+					"discovered": 2024,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"RA": "8h59m50s",
+			"DE": "-48d29m18.2s"
+		},
 		"TOI-2373":
 		{
 			"exoplanets":
@@ -93820,6 +94218,25 @@
 			"effectiveTemp": 4099.0,
 			"RA": "1h23m42s",
 			"DE": "-8d42m5s"
+		},
+		"TOI-2416":
+		{
+			"exoplanets":
+			[
+				{
+					"mass": 3.0,
+					"radius": 0.88,
+					"period": 8.275479,
+					"semiAxis": 0.0831,
+					"eccentricity": 0.32,
+					"inclination": 90.0,
+					"discovered": 2023,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"RA": "3h49m20.9s",
+			"DE": "+8d50m57.9s"
 		},
 		"TOI-2421":
 		{
@@ -94067,6 +94484,26 @@
 			"effectiveTemp": 5096.0,
 			"RA": "5h47m24s",
 			"DE": "-60d31m17s"
+		},
+		"TOI-2529":
+		{
+			"exoplanets":
+			[
+				{
+					"mass": 2.34,
+					"radius": 1.03,
+					"period": 64.5949,
+					"semiAxis": 0.327,
+					"eccentricity": 0.02,
+					"discovered": 2024,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 296.271,
+			"Vmag": 11.5,
+			"RA": "7h55m58.9s",
+			"DE": "-52d21m16.9s"
 		},
 		"TOI-2545":
 		{
@@ -94633,6 +95070,25 @@
 			"RA": "13h49m54s",
 			"DE": "-46d3m58s"
 		},
+		"TOI-3321":
+		{
+			"exoplanets":
+			[
+				{
+					"mass": 0.554,
+					"radius": 1.39,
+					"period": 3.6525145,
+					"semiAxis": 0.047,
+					"eccentricity": 0.054,
+					"inclination": 86.33,
+					"discovered": 2024,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"RA": "17h43m2.4s",
+			"DE": "-65d0m29.6s"
+		},
 		"TOI-332":
 		{
 			"exoplanets":
@@ -94973,6 +95429,25 @@
 			"RA": "12h6m17s",
 			"DE": "+12d30m25s"
 		},
+		"TOI-3894":
+		{
+			"exoplanets":
+			[
+				{
+					"mass": 0.85,
+					"radius": 1.36,
+					"period": 4.3345401,
+					"semiAxis": 0.0543,
+					"eccentricity": 0.05,
+					"inclination": 84.86,
+					"discovered": 2024,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"RA": "13h25m29.9s",
+			"DE": "+52d46m5s"
+		},
 		"TOI-3912":
 		{
 			"exoplanets":
@@ -94996,6 +95471,25 @@
 			"effectiveTemp": 5725.0,
 			"RA": "14h23m12s",
 			"DE": "+24d4m36s"
+		},
+		"TOI-3919":
+		{
+			"exoplanets":
+			[
+				{
+					"mass": 3.88,
+					"radius": 1.1,
+					"period": 7.433234,
+					"semiAxis": 0.0795,
+					"eccentricity": 0.26,
+					"inclination": 87.0,
+					"discovered": 2024,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"RA": "13h55m46.7s",
+			"DE": "+40d23m30.4s"
 		},
 		"TOI-3976":
 		{
@@ -95242,6 +95736,25 @@
 			"effectiveTemp": 5281.0,
 			"RA": "2h37m43s",
 			"DE": "+80d16m3s"
+		},
+		"TOI-4153":
+		{
+			"exoplanets":
+			[
+				{
+					"mass": 1.15,
+					"radius": 1.438,
+					"period": 4.6174141,
+					"semiAxis": 0.06311,
+					"eccentricity": 0.04,
+					"inclination": 88.75,
+					"discovered": 2024,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"RA": "22h21m34.3s",
+			"DE": "+82d12m57.7s"
 		},
 		"TOI-4184":
 		{
@@ -96196,6 +96709,25 @@
 			"RA": "20h55m5s",
 			"DE": "+24d21m40s"
 		},
+		"TOI-5232":
+		{
+			"exoplanets":
+			[
+				{
+					"mass": 2.34,
+					"radius": 1.14,
+					"period": 4.0966692,
+					"semiAxis": 0.0559,
+					"eccentricity": 0.035,
+					"inclination": 88.3,
+					"discovered": 2024,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"RA": "19h37m20.9s",
+			"DE": "+35d16m35.9s"
+		},
 		"TOI-5238":
 		{
 			"exoplanets":
@@ -96232,6 +96764,25 @@
 			],
 			"RA": "23h43m19s",
 			"DE": "-2d2m42s"
+		},
+		"TOI-5301":
+		{
+			"exoplanets":
+			[
+				{
+					"mass": 3.65,
+					"radius": 1.18,
+					"period": 5.858858,
+					"semiAxis": 0.0726,
+					"eccentricity": 0.33,
+					"inclination": 83.1,
+					"discovered": 2024,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"RA": "0h51m57.6s",
+			"DE": "+13d4m41.8s"
 		},
 		"TOI-530":
 		{
@@ -96861,7 +97412,7 @@
 			[
 				{
 					"period": 0.8496822,
-					"discovered": 2024,
+					"discovered": 2023,
 					"detectionMethod": "Primary Transit",
 					"planetName": "b"
 				}
@@ -97180,10 +97731,10 @@
 					"inclination": 89.8,
 					"discovered": 2020,
 					"detectionMethod": "Primary Transit",
-					"pclass": "M-Warm Terran",
-					"EqTemp": 246,
-					"flux": 87,
-					"ESI": 93,
+					"pclass": "M Warm Terran",
+					"SurfTemp": 276,
+					"flux": 86,
+					"ESI": 94,
 					"conservative": true,
 					"planetName": "d"
 				},
@@ -97195,6 +97746,11 @@
 					"inclination": 89.6,
 					"discovered": 2023,
 					"detectionMethod": "Primary Transit",
+					"pclass": "M Warm Terran",
+					"SurfTemp": 305,
+					"flux": 128,
+					"ESI": 91,
+					"conservative": true,
 					"planetName": "e"
 				}
 			],
@@ -97267,6 +97823,11 @@
 					"inclination": 89.856,
 					"discovered": 2023,
 					"detectionMethod": "Primary Transit",
+					"pclass": "M Warm Terran",
+					"SurfTemp": 264,
+					"flux": 71,
+					"ESI": 81,
+					"conservative": true,
 					"planetName": "b"
 				}
 			],
@@ -97276,6 +97837,7 @@
 			"Vmag": 16.2,
 			"sradius": 0.24,
 			"effectiveTemp": 3074.0,
+			"hasHP": true,
 			"RA": "7h35m25s",
 			"DE": "-73d34m39s"
 		},
@@ -97354,6 +97916,25 @@
 			"effectiveTemp": 5585.0,
 			"RA": "10h37m38s",
 			"DE": "-40d53m18s"
+		},
+		"TOI-741":
+		{
+			"exoplanets":
+			[
+				{
+					"mass": 0.00227,
+					"radius": 0.0821,
+					"period": 7.576863,
+					"inclination": 89.22,
+					"discovered": 2023,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"distance": 10.4,
+			"starAltNames": "GJ 341",
+			"RA": "9h21m37.9s",
+			"DE": "-60d16m54.9s"
 		},
 		"TOI-763":
 		{
@@ -97488,6 +98069,16 @@
 					"discovered": 2023,
 					"detectionMethod": "Primary Transit",
 					"planetName": "b"
+				},
+				{
+					"mass": 22.0,
+					"period": 42.0,
+					"semiAxis": 0.22,
+					"eccentricity": 0.0,
+					"inclination": 88.3,
+					"discovered": 2023,
+					"detectionMethod": "Radial Velocity",
+					"planetName": "c"
 				}
 			],
 			"distance": 64.59,
@@ -97920,6 +98511,15 @@
 					"discovered": 2022,
 					"detectionMethod": "Primary Transit",
 					"planetName": "b"
+				},
+				{
+					"mass": 11.3,
+					"period": 1730.0,
+					"semiAxis": 2.54,
+					"eccentricity": 0.628,
+					"discovered": 2022,
+					"detectionMethod": "Radial Velocity",
+					"planetName": "c"
 				}
 			],
 			"distance": 77.83,
@@ -97967,10 +98567,10 @@
 					"inclination": 89.75,
 					"discovered": 2016,
 					"detectionMethod": "Primary Transit",
-					"pclass": "M-Warm Subterran",
-					"EqTemp": 263,
-					"flux": 114,
-					"ESI": 90,
+					"pclass": "M Warm Subterran",
+					"SurfTemp": 295,
+					"flux": 112,
+					"ESI": 91,
 					"conservative": true,
 					"planetName": "d"
 				},
@@ -97983,9 +98583,9 @@
 					"inclination": 89.86,
 					"discovered": 2017,
 					"detectionMethod": "Primary Transit",
-					"pclass": "M-Warm Terran",
-					"EqTemp": 230,
-					"flux": 66,
+					"pclass": "M Warm Terran",
+					"SurfTemp": 257,
+					"flux": 65,
 					"ESI": 85,
 					"conservative": true,
 					"planetName": "e"
@@ -97999,9 +98599,9 @@
 					"inclination": 89.68,
 					"discovered": 2017,
 					"detectionMethod": "Primary Transit",
-					"pclass": "M-Warm Terran",
-					"EqTemp": 200,
-					"flux": 38,
+					"pclass": "M Warm Terran",
+					"SurfTemp": 224,
+					"flux": 37,
 					"ESI": 68,
 					"conservative": true,
 					"planetName": "f"
@@ -98015,9 +98615,9 @@
 					"inclination": 89.71,
 					"discovered": 2017,
 					"detectionMethod": "Primary Transit",
-					"pclass": "M-Warm Terran",
-					"EqTemp": 181,
-					"flux": 26,
+					"pclass": "M Warm Terran",
+					"SurfTemp": 203,
+					"flux": 25,
 					"ESI": 58,
 					"conservative": true,
 					"planetName": "g"
@@ -98598,8 +99198,8 @@
 			"exoplanets":
 			[
 				{
-					"mass": 0.5,
-					"radius": 0.8877,
+					"mass": 0.076,
+					"radius": 0.68,
 					"period": 24.14041,
 					"semiAxis": 0.1716,
 					"eccentricity": 0.29,
@@ -103772,11 +104372,10 @@
 					"eccentricity": 0.11,
 					"discovered": 2015,
 					"detectionMethod": "Radial Velocity",
-					"pclass": "M-Warm Terran",
-					"EqTemp": 271,
+					"pclass": "M Warm Terran",
+					"SurfTemp": 306,
 					"flux": 130,
 					"ESI": 80,
-					"conservative": true,
 					"planetName": "c"
 				},
 				{
@@ -103811,6 +104410,11 @@
 					"semiAxis": 0.0672,
 					"discovered": 2023,
 					"detectionMethod": "Radial Velocity",
+					"pclass": "M Warm Terran",
+					"SurfTemp": 258,
+					"flux": 65,
+					"ESI": 85,
+					"conservative": true,
 					"planetName": "b"
 				}
 			],
@@ -103821,9 +104425,30 @@
 			"Vmag": 12.0,
 			"sradius": 0.1813,
 			"effectiveTemp": 3158.0,
+			"hasHP": true,
 			"starAltNames": "GJ 1253",
 			"RA": "20h26m6s",
 			"DE": "+58d34m31s"
+		},
+		"Wolf 327":
+		{
+			"exoplanets":
+			[
+				{
+					"mass": 2.53,
+					"radius": 0.1106,
+					"period": 0.5734745,
+					"semiAxis": 0.01,
+					"eccentricity": 0.0,
+					"inclination": 84.49,
+					"discovered": 2024,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				}
+			],
+			"stype": "M2.5V",
+			"RA": "9h53m30.9s",
+			"DE": "+35d34m16.6s"
 		},
 		"Wolf 359":
 		{
