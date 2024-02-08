@@ -1039,13 +1039,17 @@ void StelObject::postProcessInfoString(QString& str, const InfoStringGroup& flag
 
 QVariantMap StelObject::getInfoMap(const StelCore *core) const
 {
+	const bool useSouthAzimuth = StelApp::getInstance().getFlagSouthAzimuthUsage();
 	QVariantMap map;
 
+	Vec3d pos;
 	double ra, dec, alt, az, glong, glat;
-	bool useOldAzimuth = StelApp::getInstance().getFlagSouthAzimuthUsage();
 	// ra/dec
-	Vec3d pos = getEquinoxEquatorialPos(core);
+	pos = getEquinoxEquatorialPos(core);
 	StelUtils::rectToSphe(&ra, &dec, pos);
+	map.insert("ra", ra*M_180_PI);
+	map.insert("dec", dec*M_180_PI);
+	map.insert("iauConstellation", core->getIAUConstellation(pos));
 
 	QString currentObjStr = getEnglishName();
 	if (currentObjStr == "") // If objects have no name, we need something to represent it.
@@ -1055,9 +1059,6 @@ QVariantMap StelObject::getInfoMap(const StelCore *core) const
 
 	map.insert("type", getType());
 	map.insert("object-type", getObjectType());
-	map.insert("ra", ra*M_180_PI);
-	map.insert("dec", dec*M_180_PI);
-	map.insert("iauConstellation", core->getIAUConstellation(pos));
 
 	if (getType()!=QStringLiteral("Star"))
 		map.insert("parallacticAngle", static_cast<double>(getParallacticAngle(core))*M_180_PI);
@@ -1092,9 +1093,7 @@ QVariantMap StelObject::getInfoMap(const StelCore *core) const
 	// apparent altitude/azimuth
 	pos = getAltAzPosApparent(core);
 	StelUtils::rectToSphe(&az, &alt, pos);
-	double direction = 3.; // N is zero, E is 90 degrees
-	if (useOldAzimuth)
-		direction = 2.;
+	const double direction = (useSouthAzimuth ? 2. : 3.); // 2: S is zero, W is 90 degrees. 3: N is zero, E is 90 degrees
 	az = direction*M_PI - az;
 	if (az > M_PI*2)
 		az -= M_PI*2;
