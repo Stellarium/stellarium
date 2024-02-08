@@ -259,7 +259,7 @@ void ExoplanetsDialog::selectCurrentExoplanet(const QModelIndex& modelIndex)
 		ep->setFlagShowExoplanets(true);
 	// Find the object
 	QString name = modelIndex.sibling(modelIndex.row(), EPSExoplanetName).data(Qt::UserRole).toString();
-	if (objectMgr->findAndSelectI18n(name) || objectMgr->findAndSelect(name))
+	if (objectMgr->findAndSelectI18n(name, Exoplanet::EXOPLANET_TYPE) || objectMgr->findAndSelect(name, Exoplanet::EXOPLANET_TYPE))
 	{
 		const QList<StelObjectP> newSelected = objectMgr->getSelectedObject();
 		if (!newSelected.empty())
