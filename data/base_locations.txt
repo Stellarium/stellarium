@@ -435,7 +435,7 @@ Bella Vista	Tucuman	08	N	15.126	27.03424S	65.30196W	366	5	America/Argentina/Tucu
 Bahia Blanca	Buenos Aires	08	N	299.101	38.7176S	62.26545W	20	7	America/Argentina/Buenos_Aires
 Arroyo Seco	Santa Fe	08	N	20.62	33.15489S	60.50863W	29	5	America/Argentina/Cordoba
 Arroyito	Cordoba	08	N	19.577	31.42022S	63.05002W	154	5	America/Argentina/Cordoba
-Anatuya	Santiago del Estero	08	N	20.261	28.46064S	62.83472W	111	5	America/Argentina/Cordoba
+Anatuya	Santiago del Estero	08	N	20.261	28.4602S	62.83354W	101	5	America/Argentina/Cordoba
 Alta Gracia	Cordoba	08	N	40.384	31.64978S	64.42972W	544	5	America/Argentina/Cordoba
 Allen	Rio Negro	08	N	26.083	38.97736S	67.82714W	258	5	America/Argentina/Salta
 Alderetes	Tucuman	08	N	38.466	26.81787S	65.14202W	430	5	America/Argentina/Tucuman
@@ -3117,7 +3117,7 @@ Manono	Tanganyika	03	N	82.465	7.29862S	27.39894E	635	6	Africa/Lubumbashi
 Lusambo	Sankuru	03	R	49.376	4.97503S	23.44391E	432	5	Africa/Lubumbashi
 Luputa	Lomami	03	N	54.676	7.16177S	23.70057E	879	6	Africa/Lubumbashi
 Lukula	Sankuru	03	N	46.534	3.86881S	23.88348E	610	5	Africa/Lubumbashi
-Luebo	Kasai	03	R	45.443	5.35218S	21.42192E	498	5	Africa/Lubumbashi
+Luebo	Kasai	03	N	45.443	5.35218S	21.42192E	498	5	Africa/Lubumbashi
 Lubero	Nord Kivu	03	N	41.722	0.15837S	29.23859E	1871	5	Africa/Lubumbashi
 Lubao	Lomami	03	N	37.818	5.38771S	25.74885E	694	5	Africa/Lubumbashi
 Lodja	Sankuru	03	N	91.409	3.52105S	23.6005E	478	6	Africa/Lubumbashi
@@ -4268,7 +4268,7 @@ Shahecheng	Hebei	13	N	125.132	36.93833N	114.50583E	73	7	Asia/Shanghai
 Shahe	Chongqing	13	N	24.915	30.82819N	108.35033E	186	5	Asia/Shanghai
 Shagang	Guangxi	13	N	30.71	21.66667N	109.03333E	4	5	Asia/Shanghai
 Sanzhuang	Shandong	13	N	52.214	35.50333N	119.17167E	77	6	Asia/Shanghai
-Sanya	Hainan	13	N	1031.396	18.24306N	109.505E	11	9	Asia/Shanghai
+Sanya	Hainan	13	N	1031.396	18.25435N	109.50947E	1	9	Asia/Shanghai
 Sanqu	Chongqing	13	N	28.563	29.64157N	105.62161E	383	5	Asia/Shanghai
 Sanming	Fujian	13	N	602.166	26.24861N	117.61861E	126	8	Asia/Shanghai
 Sanmenxia	Henan	13	N	669.307	34.77472N	111.18139E	348	8	Asia/Shanghai
@@ -4937,7 +4937,7 @@ Qilian	Qinghai	13	N	25.603	38.18056N	100.24028E	2758	5	Asia/Shanghai
 Aoxi	Jiangxi	13	N	82.717	27.42589N	115.83643E	173	6	Asia/Shanghai
 Qingyang	Chongqing	13	N	16.197	29.52743N	107.20071E	747	5	Asia/Shanghai
 Anyuan	Gansu	13	N	40.828	34.88083N	105.27639E	1362	5	Asia/Shanghai
-Anxiang	Hunan	13	N	57.769	29.4N	112.15E	33	6	Asia/Shanghai
+Shenliu	Hunan	13	N	57.769	29.41369N	112.16435E	33	6	Asia/Shanghai
 Anshun	Guizhou	13	N	765.313	26.25N	105.93333E	1374	8	Asia/Shanghai
 Anqiu	Shandong	13	N	364.208	36.43417N	119.1925E	58	7	Asia/Shanghai
 Anqing	Anhui	13	N	804.493	30.51365N	117.04723E	19	8	Asia/Shanghai
@@ -8102,7 +8102,7 @@ Al-Minya al-Jadidah	Minya	01	N	17.47	28.08639N	30.81464E	128	5	Africa/Cairo
 An-Najaylah	Matruh	01	N	19.768	31.4071N	26.5832E	112	5	Africa/Cairo
 Ar-Rawdah	Damietta	01	N	31.24	31.32336N	31.76122E	13	5	Africa/Cairo
 Ash-Shaykh Zayid	Giza	01	N	95.854	30.02N	31E	133	6	Africa/Cairo
-Yusuf as-Siddiq	Faiyum	01	N	23.965	29.37843N	30.5646E	11	5	Africa/Cairo
+Yusuf as-Siddiq	Faiyum	01	N	23.965	29.385N	30.557E	-6	5	Africa/Cairo
 Laayoune		01	R	196.331	27.1418N	13.18797W	68	7	Africa/El_Aaiun
 Boujdour		01	N	42.651	26.13073N	14.48513W	28	5	Africa/El_Aaiun
 Dakhla		01	R	75	23.68477N	15.95798W	6	6	Africa/El_Aaiun
@@ -12649,7 +12649,7 @@ Navalgund	Karnataka	15	N	23.208	15.55877N	75.35305E	585	5	Asia/Kolkata
 Navadwip	West Bengal	15	N	111.123	23.4067N	88.36861E	17	7	Asia/Kolkata
 Nautanwa	Uttar Pradesh	15	N	32.587	27.42752N	83.41789E	105	5	Asia/Kolkata
 Naugachhia	Bihar	15	N	41.247	25.38807N	87.09906E	39	5	Asia/Kolkata
-Nattam	Tamil Nadu	15	N	21.888	10.22776N	78.22969E	252	5	Asia/Kolkata
+Natham	Tamil Nadu	15	N	21.888	10.22776N	78.22969E	252	5	Asia/Kolkata
 Nathdwara	Rajasthan	15	N	39.426	24.93805N	73.82392E	585	5	Asia/Kolkata
 Nasrullahganj	Madhya Pradesh	15	N	18.265	22.6837N	77.27069E	301	5	Asia/Kolkata
 Nasriganj	Bihar	15	N	23.286	25.0514N	84.32839E	102	5	Asia/Kolkata
@@ -18224,7 +18224,7 @@ Otjiwarongo	Otjozondjupa	04	R	33.481	20.46369S	16.64772E	1475	5	Africa/Windhoek
 Oshakati	Oshana	04	R	43.309	17.78833S	15.70436E	1103	5	Africa/Windhoek
 Ongwediva	Oshana	04	N	24.012	17.78333S	15.76667E	1098	5	Africa/Windhoek
 Ondangwa	Oshana	04	N	27.049	17.91667S	15.95E	1098	5	Africa/Windhoek
-Okahandja	Otjozondjupa	04	N	26.832	21.98333S	16.91667E	1339	5	Africa/Windhoek
+Okahandja	Otjozondjupa	04	N	26.832	21.98141S	16.9029E	1370	5	Africa/Windhoek
 Luderitz	Karas	04	N	15.137	26.64807S	15.15383E	16	5	Africa/Windhoek
 Keetmanshoop	Karas	04	R	23.049	26.57654S	18.13359E	998	5	Africa/Windhoek
 Katutura	Khomas	04	N	21.243	22.52306S	17.06028E	1630	5	Africa/Windhoek
@@ -20741,7 +20741,7 @@ Vyazniki	Vladimir Oblast	17	N	39.243	56.24227N	42.14911E	93	5	Europe/Moscow
 Vyaz'ma	Smolensk Oblast	17	N	55.5	55.20997N	34.29695E	246	6	Europe/Moscow
 Vyatskiye Polyany	Kirov Oblast	17	N	39.534	56.22912N	51.06098E	83	5	Europe/Kirov
 Vsevolozhsk	Leningradskaya Oblast'	17	N	48.224	60.01512N	30.67314E	28	5	Europe/Moscow
-Votkinsk	Udmurtiya Republic	17	N	98.633	57.04865N	53.98717E	85	6	Europe/Samara
+Votkinsk	Udmurtiya Republic	17	N	98.633	57.04867N	53.9872E	85	6	Europe/Samara
 Vostryakovo	Moscow Oblast	17	N	30	55.66667N	37.45E	182	5	Europe/Moscow
 Vostryakovo	Moscow Oblast	17	N	16.509	55.39934N	37.80829E	163	5	Europe/Moscow
 Voskresensk	Moscow Oblast	17	N	77.086	55.29092N	38.67556E	125	6	Europe/Moscow
@@ -20766,7 +20766,7 @@ Vichuga	Ivanovo Oblast	17	N	39.071	57.2145N	41.92555E	146	5	Europe/Moscow
 Veshnyaki	Moscow	17	N	122	55.72393N	37.81952E	155	7	Europe/Moscow
 Vereshchagino	Perm Krai	17	N	22.451	58.07894N	54.6557E	237	5	Asia/Yekaterinburg
 Venev	Tula Oblast	17	N	15.7	54.35074N	38.26304E	186	5	Europe/Moscow
-Vel'sk	Arkhangelskaya	17	N	23.126	61.07006N	42.0983E	94	5	Europe/Moscow
+Vel'sk	Arkhangelskaya	17	N	23.126	61.06919N	42.0992E	94	5	Europe/Moscow
 Velikiy Ustyug	Vologda Oblast	17	N	32.642	60.76186N	46.31352E	72	5	Europe/Moscow
 Velikiye Luki	Pskov Oblast	17	N	103.149	56.34063N	30.54377E	86	7	Europe/Moscow
 Vatutino	Moscow	17	N	50	55.88441N	37.69055E	149	6	Europe/Moscow
@@ -20890,8 +20890,8 @@ Shakhty	Rostov	17	N	221.312	47.70911N	40.21443E	114	7	Europe/Moscow
 Severskaya	Krasnodar Krai	17	N	22.849	44.85407N	38.67686E	49	5	Europe/Moscow
 Severo-Zadonsk	Tula Oblast	17	N	16.569	54.03481N	38.40172E	232	5	Europe/Moscow
 Severoural'sk	Sverdlovsk Oblast	17	N	33.5	60.15328N	59.95205E	173	5	Asia/Yekaterinburg
-Severomorsk	Murmansk	17	N	53.921	69.06889N	33.41622E	17	6	Europe/Moscow
-Severodvinsk	Arkhangelskaya	17	N	194.292	64.5635N	39.8302E	8	7	Europe/Moscow
+Severomorsk	Murmansk	17	N	53.921	69.06936N	33.40807E	43	6	Europe/Moscow
+Severodvinsk	Arkhangelskaya	17	N	194.292	64.55825N	39.82971E	8	7	Europe/Moscow
 Severnyy	Moscow	17	N	200	55.93583N	37.54889E	186	7	Europe/Moscow
 Setun'	Moscow	17	N	20	55.71667N	37.41667E	144	5	Europe/Moscow
 Sestroretsk	St.-Petersburg	17	N	37.248	60.09801N	29.96378E	8	5	Europe/Moscow
@@ -20960,7 +20960,7 @@ Povorino	Voronezh Oblast	17	N	18.004	51.1945N	42.2457E	118	5	Europe/Moscow
 Kotlovka	Moscow	17	N	64	55.65928N	37.60404E	185	6	Europe/Moscow
 Annino	Moscow	17	N	30	55.58333N	37.6E	184	5	Europe/Moscow
 Polyarnyye Zori	Murmansk	17	N	15.092	67.36611N	32.49806E	112	5	Europe/Moscow
-Polyarnyy	Murmansk	17	N	17.332	69.19889N	33.44778E	15	5	Europe/Moscow
+Polyarnyy	Murmansk	17	N	17.332	69.20279N	33.43697E	7	5	Europe/Moscow
 Pokrovskoye-Streshnevo	Moscow	17	N	55	55.80797N	37.45814E	157	6	Europe/Moscow
 Pokrov	Vladimir Oblast	17	N	15.867	55.91797N	39.17242E	132	5	Europe/Moscow
 Pokhvistnevo	Samara Oblast	17	N	28.3	53.65237N	52.12738E	69	5	Europe/Samara
@@ -21018,7 +21018,7 @@ Ocher	Perm Krai	17	N	15.395	57.89035N	54.72019E	163	5	Asia/Yekaterinburg
 Ochakovo-Matveyevskoye	Moscow	17	N	114	55.68432N	37.44654E	171	7	Europe/Moscow
 Obninsk	Kaluga Oblast	17	N	107.392	55.10993N	36.61238E	187	7	Europe/Moscow
 Nytva	Perm Krai	17	N	20.525	57.9437N	55.3396E	136	5	Asia/Yekaterinburg
-Nyandoma	Arkhangelskaya	17	N	22.179	61.6656N	40.2013E	220	5	Europe/Moscow
+Nyandoma	Arkhangelskaya	17	N	22.179	61.6718N	40.21221E	217	5	Europe/Moscow
 Nurlat	Tatarstan Republic	17	N	34.451	54.42766N	50.80511E	156	5	Europe/Moscow
 Novy Oskol	Belgorod Oblast	17	N	21.035	50.76331N	37.86415E	112	5	Europe/Moscow
 Novyye Kuz'minki	Moscow	17	N	143	55.7N	37.75E	141	7	Europe/Moscow
@@ -21040,7 +21040,7 @@ Novokuybyshevsk	Samara Oblast	17	N	111.8	53.0959N	49.9462E	110	7	Europe/Samara
 Novokubansk	Krasnodar Krai	17	N	36.401	45.117N	41.0267E	143	5	Europe/Moscow
 Novokhovrino	Moscow	17	N	50	55.86667N	37.5E	171	6	Europe/Moscow
 Novogireyevo	Moscow	17	N	95	55.75378N	37.81885E	158	6	Europe/Moscow
-Novodvinsk	Arkhangelskaya	17	N	42.9	64.4165N	40.8122E	24	5	Europe/Moscow
+Novodvinsk	Arkhangelskaya	17	N	42.9	64.41638N	40.81674E	24	5	Europe/Moscow
 Novocherkassk	Rostov	17	N	166.974	47.42096N	40.09185E	89	7	Europe/Moscow
 Novocheboksarsk	Chuvashia	17	N	128.468	56.11095N	47.47755E	105	7	Europe/Moscow
 Novoanninskiy	Volgograd Oblast	17	N	19.231	50.52891N	42.6707E	88	5	Europe/Volgograd
@@ -21077,9 +21077,9 @@ Nakhabino	Moscow Oblast	17	N	31.715	55.84854N	37.17789E	183	5	Europe/Moscow
 Naberezhnyye Chelny	Tatarstan Republic	17	N	509.87	55.72545N	52.41122E	103	8	Europe/Moscow
 Mytishchi	Moscow Oblast	17	N	160.542	55.91099N	37.72964E	158	7	Europe/Moscow
 Murom	Vladimir Oblast	17	N	126.931	55.56853N	42.02388E	121	7	Europe/Moscow
-Murmansk	Murmansk	17	R	295.374	68.97917N	33.09251E	96	7	Europe/Moscow
+Murmansk	Murmansk	17	R	295.374	68.97398N	33.09747E	75	7	Europe/Moscow
 Mtsensk	Oryol oblast	17	N	47.609	53.2788N	36.58047E	168	5	Europe/Moscow
-Mozhga	Udmurtiya Republic	17	N	47.27	56.44469N	52.22763E	152	5	Europe/Samara
+Mozhga	Udmurtiya Republic	17	N	47.27	56.44576N	52.2156E	148	5	Europe/Samara
 Mozhaysk	Moscow Oblast	17	N	31.557	55.50194N	36.02722E	211	5	Europe/Moscow
 Mozdok	North Ossetia-Alania	17	N	40.823	43.73976N	44.65157E	133	5	Europe/Moscow
 Mostovskoy	Krasnodar Krai	17	N	25.188	44.41222N	40.79361E	380	5	Europe/Moscow
@@ -21121,7 +21121,7 @@ Lys'va	Perm Krai	17	N	68.66	58.10861N	57.80528E	173	6	Asia/Yekaterinburg
 Lyskovo	Nizhny Novgorod Oblast	17	N	23.57	56.02927N	45.04233E	97	5	Europe/Moscow
 Luzhniki	Moscow	17	N	30	55.71599N	37.55376E	161	5	Europe/Moscow
 Lukhovitsy	Moscow Oblast	17	N	32.387	54.97661N	39.0444E	118	5	Europe/Moscow
-Luga	Leningradskaya Oblast'	17	N	40.114	58.73945N	29.84446E	40	5	Europe/Moscow
+Luga	Leningradskaya Oblast'	17	N	40.114	58.73876N	29.84756E	40	5	Europe/Moscow
 Losino-Petrovskiy	Moscow Oblast	17	N	22.116	55.87006N	38.19318E	154	5	Europe/Moscow
 Lomonosov	St.-Petersburg	17	N	42.505	59.90612N	29.77253E	30	5	Europe/Moscow
 Lodeynoye Pole	Leningradskaya Oblast'	17	N	22.164	60.72564N	33.56063E	23	5	Europe/Moscow
@@ -21193,17 +21193,17 @@ Kozeyevo	Moscow	17	N	50	55.86667N	37.61667E	148	6	Europe/Moscow
 Kozel'sk	Kaluga Oblast	17	N	19.5	54.0366N	35.77088E	164	5	Europe/Moscow
 Kovylkino	Mordoviya Republic	17	N	21.4	54.03876N	43.91385E	138	5	Europe/Moscow
 Kovrov	Vladimir Oblast	17	N	154.224	56.35752N	41.31893E	128	7	Europe/Moscow
-Kovdor	Murmansk	17	N	19.518	67.56616N	30.47576E	233	5	Europe/Moscow
+Kovdor	Murmansk	17	N	19.518	67.56627N	30.47765E	233	5	Europe/Moscow
 Kotovsk	Tambov Oblast	17	N	33.077	52.59047N	41.50251E	136	5	Europe/Moscow
 Kotovo	Volgograd Oblast	17	N	26.981	50.32113N	44.80119E	148	5	Europe/Volgograd
-Kotlas	Arkhangelskaya	17	N	59.18	61.25745N	46.64963E	84	6	Europe/Moscow
+Kotlas	Arkhangelskaya	17	N	59.18	61.25663N	46.6537E	78	6	Europe/Moscow
 Kotel'nikovo	Volgograd Oblast	17	N	19.622	47.63009N	43.14068E	50	5	Europe/Volgograd
 Kotel'niki	Moscow Oblast	17	N	18.3	55.65384N	37.86234E	140	5	Europe/Moscow
 Kotel'nich	Kirov Oblast	17	N	27.6	58.30348N	48.33745E	121	5	Europe/Kirov
 Kostroma	Kostroma Oblast	17	R	277.28	57.76647N	40.92686E	109	7	Europe/Moscow
 Kostomuksha	Karelia	17	N	30.135	64.571N	30.57667E	212	5	Europe/Moscow
 Kosaya Gora	Tula Oblast	17	N	17.836	54.11896N	37.54459E	233	5	Europe/Moscow
-Koryazhma	Arkhangelskaya	17	N	42.627	61.31433N	47.16914E	90	5	Europe/Moscow
+Koryazhma	Arkhangelskaya	17	N	42.627	61.31242N	47.14829E	87	5	Europe/Moscow
 Korenovsk	Krasnodar Krai	17	N	41.665	45.46899N	39.45136E	33	5	Europe/Moscow
 Konstantinovsk	Rostov	17	N	18.876	47.58278N	41.09222E	30	5	Europe/Moscow
 Kondopoga	Karelia	17	N	34.36	62.20406N	34.26932E	59	5	Europe/Moscow
@@ -21305,7 +21305,7 @@ Gorodets	Nizhny Novgorod Oblast	17	N	31.788	56.65497N	43.47269E	104	5	Europe/Mos
 Gorelovo	St.-Petersburg	17	N	22.503	59.77234N	30.13455E	47	5	Europe/Moscow
 Gol'yanovo	Moscow	17	N	158	55.82299N	37.81306E	157	7	Europe/Moscow
 Golitsyno	Moscow Oblast	17	N	16.056	55.60928N	36.98212E	183	5	Europe/Moscow
-Glazov	Udmurtiya Republic	17	N	100.676	58.1393N	52.658E	151	7	Europe/Samara
+Glazov	Udmurtiya Republic	17	N	100.676	58.14N	52.65619E	151	7	Europe/Samara
 Giaginskaya	Adygeya Republic	17	N	15.169	44.86208N	40.07195E	129	5	Europe/Moscow
 Georgiyevsk	Stavropol Kray	17	N	72.649	44.1494N	43.47019E	305	6	Europe/Moscow
 Gelendzhik	Krasnodar Krai	17	N	50.715	44.5622N	38.0848E	22	6	Europe/Moscow
@@ -21433,12 +21433,12 @@ Arzgir	Stavropol Kray	17	N	15.838	45.37411N	44.2198E	88	5	Europe/Moscow
 Arzamas	Nizhny Novgorod Oblast	17	N	109.479	55.39563N	43.8381E	166	7	Europe/Moscow
 Arsk	Tatarstan Republic	17	N	17.243	56.09151N	49.87783E	136	5	Europe/Moscow
 Armavir	Krasnodar Krai	17	N	199.548	44.9892N	41.1234E	201	7	Europe/Moscow
-Arkhangel'sk	Arkhangelskaya	17	R	349.742	64.5401N	40.5433E	8	7	Europe/Moscow
+Arkhangel'sk	Arkhangelskaya	17	R	349.742	64.54717N	40.55291E	11	7	Europe/Moscow
 Argun	Chechnya	17	N	28.1	43.29289N	45.86691E	118	5	Europe/Moscow
 Ardon	North Ossetia-Alania	17	N	18.313	43.17888N	44.29464E	412	5	Europe/Moscow
 Apsheronsk	Krasnodar Krai	17	N	40.451	44.46472N	39.73417E	198	5	Europe/Moscow
 Aprelevka	Moscow Oblast	17	N	17.78	55.55194N	37.0801E	199	5	Europe/Moscow
-Apatity	Murmansk	17	N	61.186	67.56414N	33.4031E	192	6	Europe/Moscow
+Apatity	Murmansk	17	N	61.186	67.58267N	33.41339E	169	6	Europe/Moscow
 Anna	Voronezh Oblast	17	N	19.148	51.48993N	40.4192E	152	5	Europe/Moscow
 Andreyevskoye	Moscow Oblast	17	N	20	55.55487N	37.92566E	129	5	Europe/Moscow
 Anapa	Krasnodar Krai	17	N	53.6	44.89497N	37.31623E	14	6	Europe/Moscow
@@ -21472,7 +21472,7 @@ Pavlovo	Nizhny Novgorod Oblast	17	N	63.338	55.9686N	43.0912E	128	6	Europe/Moscow
 Belidzhi	Dagestan	17	N	16.078	41.89184N	48.41247E	-7	5	Europe/Moscow
 Lesnoy	Sverdlovsk Oblast	17	N	23.834	58.63667N	59.80222E	221	5	Asia/Yekaterinburg
 Trekhgornyy	Chelyabinsk	17	N	34.5	54.815N	58.45917E	418	5	Asia/Yekaterinburg
-Mirnyy	Arkhangelskaya	17	N	28	62.76409N	40.33746E	114	5	Europe/Moscow
+Mirnyy	Arkhangelskaya	17	N	28	62.76437N	40.33855E	114	5	Europe/Moscow
 Znamensk	Astrakhan Oblast	17	N	31.922	48.5842N	45.7338E	9	5	Europe/Astrakhan
 Zarechnyy	Penza Oblast	17	N	62.139	53.13333N	46.58333E	233	6	Europe/Moscow
 Kochubeyevskoye	Stavropol Kray	17	N	28.491	44.64417N	41.84528E	372	5	Europe/Moscow
@@ -23445,13 +23445,13 @@ Shostka	Sumy	17	N	73.197	51.86296N	33.4698E	154	6	Europe/Kyiv
 Shepetivka	Khmelnytskyi	17	N	40.802	50.18118N	27.06517E	255	5	Europe/Kyiv
 Shakhtarsk	Donetsk	17	N	71.7	48.05657N	38.43826E	227	6	Europe/Kyiv
 Sevastopol	Sevastopol City	17	R	547.82	44.60795N	33.52134E	35	8	Europe/Simferopol
-Selydove	Donetsk	17	N	21.521	48.14708N	37.30032E	167	5	Europe/Kyiv
+Selydove	Donetsk	17	N	21.521	48.14446N	37.30058E	170	5	Europe/Kyiv
 Sarny	Rivne	17	N	28.865	51.33795N	26.60191E	158	5	Europe/Kyiv
 Sambir	Lviv	17	N	34.152	49.51631N	23.2006E	300	5	Europe/Kyiv
 Saki	Crimea	17	N	28.322	45.13424N	33.59996E	17	5	Europe/Simferopol
 Rubizhne	Luhansk	17	N	55.247	49.00606N	38.38119E	78	6	Europe/Kyiv
 Rozdilna	Odessa	17	N	17.858	46.85479N	30.07091E	145	5	Europe/Kyiv
-Kurakhove	Donetsk	17	N	18.22	47.98437N	37.27909E	132	5	Europe/Kyiv
+Kurakhove	Donetsk	17	N	18.22	47.9847N	37.27937E	132	5	Europe/Kyiv
 Rovenky	Luhansk	17	N	45.514	48.08331N	39.37764E	265	5	Europe/Kyiv
 Romny	Sumy	17	N	38.305	50.75104N	33.47471E	157	5	Europe/Kyiv
 Rivne	Rivne	17	R	245.289	50.62308N	26.22743E	207	7	Europe/Kyiv
@@ -23519,7 +23519,7 @@ Lyman	Donetsk	17	N	20.066	48.98616N	37.80307E	103	5	Europe/Kyiv
 Yany Kapu	Crimea	17	N	30.7	45.95547N	33.79261E	5	5	Europe/Simferopol
 Krasnohrad	Kharkiv	17	N	21.426	49.37511N	35.45493E	169	5	Europe/Kyiv
 Sorokyne	Luhansk	17	N	49.352	48.29235N	39.73921E	143	5	Europe/Kyiv
-Pokrovsk	Donetsk	17	N	60.127	48.28198N	37.17585E	199	6	Europe/Kyiv
+Pokrovsk	Donetsk	17	N	60.127	48.2824N	37.17772E	204	6	Europe/Kyiv
 Krasyliv	Khmelnytskyi	17	N	18.868	49.65376N	26.97211E	289	5	Europe/Kyiv
 Kramatorsk	Donetsk	17	N	147.145	48.73049N	37.58793E	152	7	Europe/Kyiv
 Kivsharivka	Kharkiv	17	N	19.738	49.63026N	37.6775E	98	5	Europe/Kyiv
@@ -26043,6 +26043,7 @@ Weirton	West Virginia	09	N	19.175	40.41896N	80.58952W	233	5	America/New_York
 Weirton Heights	West Virginia	09	N	19.45	40.4084N	80.53924W	365	5	America/New_York
 Wheeling	West Virginia	09	N	27.648	40.06396N	80.72091W	208	5	America/New_York
 Ansonia	Connecticut	09	N	18.854	41.34621N	73.079W	19	5	America/New_York
+Avon	Connecticut	09	N	18.932	41.80982N	72.83065W	62	5	America/New_York
 Bloomfield	Connecticut	09	N	21.535	41.82649N	72.73009W	34	5	America/New_York
 Bridgeport	Connecticut	09	N	147.629	41.17923N	73.18945W	14	7	America/New_York
 Bristol	Connecticut	09	N	60.452	41.67176N	72.94927W	95	6	America/New_York
