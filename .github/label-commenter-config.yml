@@ -54,19 +54,6 @@ labels:
           Hello @{{ issue.user.login }}, we need more info and feedback!
 
           The hardware info, steps of reproduction and log file are really important and help us resolve over 90% issues fast. Of course, in some specific cases we need more data, but we ask the required data separately...
-  - name: "waiting feedback"
-    labeled:
-      issue:
-        body: |
-          Hello @{{ issue.user.login }}!
- 
-          We really need your feedback.
-    unlabeled:
-      issue:
-        body: |
-          Hello @{{ issue.user.login }}!
-
-          Thank you for your feedback.
   - name: enhancement
     labeled:
       issue:
@@ -88,6 +75,19 @@ labels:
           Hello @{{ issue.user.login }}!
 
           Thank you for this suggestion.
+  - name: "state: waiting feedback"
+    labeled:
+      issue:
+        body: |
+          Hello @{{ issue.user.login }}!
+ 
+          We really need your feedback.
+    unlabeled:
+      issue:
+        body: |
+          Hello @{{ issue.user.login }}!
+
+          Thank you for your feedback.
   - name: "state: blocked"
     labeled:
       issue:
