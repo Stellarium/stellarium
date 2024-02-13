@@ -276,7 +276,8 @@ bool StelSkyCultureMgr::setDefaultSkyCultureID(const QString& id)
 	
 QString StelSkyCultureMgr::getCurrentSkyCultureNameI18() const
 {
-	return qc_(currentSkyCulture.englishName, "sky culture");
+	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
+	return trans.qtranslate(currentSkyCulture.englishName, "sky culture");
 }
 
 QString StelSkyCultureMgr::getCurrentSkyCultureEnglishName() const
@@ -526,12 +527,13 @@ QString StelSkyCultureMgr::getSkyCultureListEnglish(void) const
 //! returns newline delimited list of human readable culture names translated to current locale
 QStringList StelSkyCultureMgr::getSkyCultureListI18(void) const
 {
+	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
 	QStringList cultures;
 	QMapIterator<QString, StelSkyCulture> i(dirToNameEnglish);
 	while (i.hasNext())
 	{
 		i.next();
-		cultures += qc_(i.value().englishName, "sky culture");
+		cultures += trans.qtranslate(i.value().englishName, "sky culture");
 	}
 	// Sort for GUI use. Note that e.g. German Umlauts are sorted after Z. TODO: Fix this!
 	cultures.sort(Qt::CaseInsensitive);
@@ -692,11 +694,12 @@ QString StelSkyCultureMgr::directoryToSkyCultureI18(const QString& directory) co
 
 QString StelSkyCultureMgr::skyCultureI18ToDirectory(const QString& cultureName) const
 {
+	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
 	QMapIterator<QString, StelSkyCulture> i(dirToNameEnglish);
 	while (i.hasNext())
 	{
 		i.next();
-		if (qc_(i.value().englishName, "sky culture") == cultureName)
+		if (trans.qtranslate(i.value().englishName, "sky culture") == cultureName)
 			return i.key();
 	}
 	return "";
