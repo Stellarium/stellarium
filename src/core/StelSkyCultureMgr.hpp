@@ -90,6 +90,8 @@ public:
 	};
 	Q_ENUM(CLASSIFICATION)
 
+	//! Directory name
+	QString dirName;
 	//! English name
 	QString englishName;
 	//! The license

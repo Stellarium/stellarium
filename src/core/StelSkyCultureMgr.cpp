@@ -148,6 +148,7 @@ StelSkyCultureMgr::StelSkyCultureMgr()
 		const auto data = jsonDoc.object();
 
 		auto& culture = dirToNameEnglish[dir];
+		culture.dirName = dir;
 		culture.englishName = getSkyCultureEnglishName(data["id"].toString());
 		culture.region = data["region"].toString();
 		if (data["constellations"].isArray())

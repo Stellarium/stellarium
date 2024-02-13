@@ -158,7 +158,7 @@ void ConstellationMgr::updateSkyCulture(const StelSkyCulture& skyCulture)
 {
 	// first of all, remove constellations from the list of selected objects in StelObjectMgr, since we are going to delete them
 	deselectConstellations();
-	loadLinesNamesAndArt(skyCulture.constellations, skyCulture.englishName,
+	loadLinesNamesAndArt(skyCulture.constellations, skyCulture.dirName,
 	                     skyCulture.langsUseNativeNames.contains("en"));
 
 	constellationsEnglishNames.clear();
