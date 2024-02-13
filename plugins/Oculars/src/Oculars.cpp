@@ -1517,6 +1517,32 @@ void Oculars::initializeActivationActions()
 	addAction("actionShow_Sensor_Pixel_Grid", ocularsGroup, N_("Toggle sensor pixel grid"), "togglePixelGrid()");
 	addAction("actionShow_Sensor_Focuser_Overlay", ocularsGroup, N_("Toggle focuser overlay"), "toggleFocuserOverlay()");
 
+	// NOTE: GUI elements in OcularsGuiPanel
+	addAction("actionToggle_Oculars_Rotate_Frame_Reset", ocularsGroup, N_("Reset the sensor frame rotation"), this, "ccdRotationReset()", "", "");
+	addAction("actionToggle_Oculars_Rotate_Prism_Reset", ocularsGroup, N_("Reset the prism rotation"), this, "prismPositionAngleReset()", "", "");
+	QList<int> angles = { 1, 5, 15, 90 };
+	for (int i = 0; i < angles.size(); ++i)
+	{
+		QString angle = QString::number(angles.at(i));
+		QString degree = (angles.at(i)==1 ? "degree" : "degrees");
+
+		QString actionCounterclockwiseCCDName = QString("actionToggle_Oculars_Rotate_Frame_%1_Counterclockwise").arg(angle);
+		QString actionCounterclockwiseCCDDescription = QString("Rotate the sensor frame %1 %2 counterclockwise").arg(angle, degree);
+		addAction(actionCounterclockwiseCCDName, ocularsGroup, actionCounterclockwiseCCDDescription, this, [=](){rotateCCD(-1*angles.at(i));}, "");
+
+		QString actionClockwiseCCDName = QString("actionToggle_Oculars_Rotate_Frame_%1_Clockwise").arg(angle);
+		QString actionClockwiseCCDDescription = QString("Rotate the sensor frame %1 %2 clockwise").arg(angle, degree);
+		addAction(actionClockwiseCCDName, ocularsGroup, actionClockwiseCCDDescription, this, [=](){rotateCCD(angles.at(i));}, "");
+
+		QString actionCounterclockwisePrismName = QString("actionToggle_Oculars_Rotate_Prism_%1_Counterclockwise").arg(angle);
+		QString actionCounterclockwisePrismDescription = QString("Rotate the prism %1 %2 counterclockwise").arg(angle, degree);
+		addAction(actionCounterclockwisePrismName, ocularsGroup, actionCounterclockwisePrismDescription, this, [=](){rotatePrism(-1*angles.at(i));}, "");
+
+		QString actionClockwisePrismName = QString("actionToggle_Oculars_Rotate_Prism_%1_Clockwise").arg(angle);
+		QString actionClockwisePrismDescription = QString("Rotate the prism %1 %2 clockwise").arg(angle, degree);
+		addAction(actionClockwisePrismName, ocularsGroup, actionClockwisePrismDescription, this, [=](){rotatePrism(angles.at(i));}, "");
+	}
+
 	connect(this, SIGNAL(selectedCCDChanged(int)),       this, SLOT(instrumentChanged()));	
 	connect(this, SIGNAL(selectedOcularChanged(int)),    this, SLOT(instrumentChanged()));
 	connect(this, SIGNAL(selectedTelescopeChanged(int)), this, SLOT(instrumentChanged()));	

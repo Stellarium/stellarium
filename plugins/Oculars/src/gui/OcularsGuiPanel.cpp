@@ -181,33 +181,6 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	QPixmap naOff(":/graphicGui/btTimeForward-off.png");
 	QPixmap nextArrowOff = naOff.scaledToHeight(scale * StelButton::getInputPixmapsDevicePixelRatio(), Qt::SmoothTransformation);
 
-	StelActionMgr* actionMgr = StelApp::getInstance().getStelActionManager();
-	QString ocularsGroup = N_("Oculars"); // Possible group name: Oculars on-screen control panel
-	actionMgr->addAction("actionToggle_Oculars_Rotate_Frame_Reset", ocularsGroup, N_("Reset the sensor frame rotation"), this, "resetCCDRotation()", "", "");
-	actionMgr->addAction("actionToggle_Oculars_Rotate_Prism_Reset", ocularsGroup, N_("Reset the prism rotation"), this, "resetPrismRotation()", "", "");
-	QList<int> angles = { 1, 5, 15, 90 };
-	for (int i = 0; i < angles.size(); ++i)
-	{
-		QString angle = QString::number(angles.at(i));
-		QString degree = (angles.at(i)==1 ? "degree" : "degrees");
-
-		QString actionCounterclockwiseCCDName = QString("actionToggle_Oculars_Rotate_Frame_%1_Counterclockwise").arg(angle);
-		QString actionCounterclockwiseCCDDescription = QString("Rotate the sensor frame %1 %2 counterclockwise").arg(angle, degree);
-		actionMgr->addAction(actionCounterclockwiseCCDName, ocularsGroup, actionCounterclockwiseCCDDescription, this, [=](){rotateCCD(-1*angles.at(i));}, "");
-
-		QString actionClockwiseCCDName = QString("actionToggle_Oculars_Rotate_Frame_%1_Clockwise").arg(angle);
-		QString actionClockwiseCCDDescription = QString("Rotate the sensor frame %1 %2 clockwise").arg(angle, degree);
-		actionMgr->addAction(actionClockwiseCCDName, ocularsGroup, actionClockwiseCCDDescription, this, [=](){rotateCCD(angles.at(i));}, "");
-
-		QString actionCounterclockwisePrismName = QString("actionToggle_Oculars_Rotate_Prism_%1_Counterclockwise").arg(angle);
-		QString actionCounterclockwisePrismDescription = QString("Rotate the prism %1 %2 counterclockwise").arg(angle, degree);
-		actionMgr->addAction(actionCounterclockwisePrismName, ocularsGroup, actionCounterclockwisePrismDescription, this, [=](){rotatePrism(-1*angles.at(i));}, "");
-
-		QString actionClockwisePrismName = QString("actionToggle_Oculars_Rotate_Prism_%1_Clockwise").arg(angle);
-		QString actionClockwisePrismDescription = QString("Rotate the prism %1 %2 clockwise").arg(angle, degree);
-		actionMgr->addAction(actionClockwisePrismName, ocularsGroup, actionClockwisePrismDescription, this, [=](){rotatePrism(angles.at(i));}, "");
-	}
-
 	prevOcularButton = new StelButton(ocularControls, prevArrow, prevArrowOff, QPixmap(), "actionShow_Ocular_Decrement");
 	prevOcularButton->setToolTip(q_("Select previous eyepiece"));
 	nextOcularButton = new StelButton(ocularControls, nextArrow, nextArrowOff, QPixmap(), "actionShow_Ocular_Increment");
@@ -225,6 +198,7 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	nextTelescopeButton = new StelButton(telescopeControls, nextArrow, nextArrowOff, QPixmap(), "actionShow_Telescope_Increment");
 	nextTelescopeButton->setToolTip(q_("Select next telescope"));
 
+	// NOTE: actions for rotation in Oculars.cpp file
 	QColor cOn(255, 255, 255);
 	QColor cOff(102, 102, 102);
 	QColor cHover(162, 162, 162);
@@ -348,6 +322,8 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	connect(ocularsPlugin, SIGNAL(selectedCCDChanged(int)),       this, SLOT(updateCcdControls()));
 	connect(ocularsPlugin, SIGNAL(selectedTelescopeChanged(int)), this, SLOT(updateTelescopeControls()));
 	connect(ocularsPlugin, SIGNAL(selectedLensChanged(int)),      this, SLOT(updateTelescopeControls()));
+	connect(ocularsPlugin, SIGNAL(selectedCCDRotationAngleChanged(double)),      this, SLOT(updateCcdControls()));
+	connect(ocularsPlugin, SIGNAL(selectedCCDPrismPositionAngleChanged(double)), this, SLOT(updateCcdControls()));
 
 	//Night mode
 	connect(&stelApp, SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setColorScheme(const QString&)));
@@ -403,30 +379,6 @@ void OcularsGuiPanel::showOcularGui()
 
 void OcularsGuiPanel::showCcdGui()
 {
-	updateCcdControls();
-}
-
-void OcularsGuiPanel::rotateCCD(int angle)
-{
-	ocularsPlugin->rotateCCD(angle);
-	updateCcdControls();
-}
-
-void OcularsGuiPanel::rotatePrism(int angle)
-{
-	ocularsPlugin->rotatePrism(angle);
-	updateCcdControls();
-}
-
-void OcularsGuiPanel::resetCCDRotation()
-{
-	ocularsPlugin->ccdRotationReset();
-	updateCcdControls();
-}
-
-void OcularsGuiPanel::resetPrismRotation()
-{
-	ocularsPlugin->prismPositionAngleReset();
 	updateCcdControls();
 }
 
@@ -630,8 +582,10 @@ void OcularsGuiPanel::updateCcdControls()
 	int index = ocularsPlugin->selectedCCDIndex;
 	CCD* ccd = ocularsPlugin->ccds[index];	
 	Q_ASSERT(ccd);
-	ocularsPlugin->setSelectedCCDRotationAngle(ccd->chipRotAngle());
-	ocularsPlugin->setSelectedCCDPrismPositionAngle(ccd->prismPosAngle());
+	if (ccd->chipRotAngle()!=ocularsPlugin->getSelectedCCDRotationAngle())
+		ocularsPlugin->setSelectedCCDRotationAngle(ccd->chipRotAngle());
+	if (ccd->prismPosAngle()!=ocularsPlugin->getSelectedCCDPrismPositionAngle())
+		ocularsPlugin->setSelectedCCDPrismPositionAngle(ccd->prismPosAngle());
 	QString name = ccd->name();
 	QString fullName;
 	if (name.isEmpty())
