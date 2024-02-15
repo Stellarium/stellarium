@@ -1148,7 +1148,7 @@ void StelMovementMgr::updateVisionVector(double deltaTime)
 			move.coef=1.f;
 
 			//qDebug() << "Mount/Pole difference =" << fabs((fabs(viewDirectionMountFrame.v[2]) - 1.));
-			if (fabs((fabs(viewDirectionMountFrame.v[2]) - 1.)) < 0.01 )
+			if (fabs((fabs(viewDirectionMountFrame.v[2]) - 1.)) < 0.00001 )
 			{
 				//qDebug() << "ATTENTION: View towards or near the pole of the mount frame. This would cause black screen or orientation jitter.";
 				//qDebug() << "\tviewDirectionMountFrame=" << viewDirectionMountFrame;
