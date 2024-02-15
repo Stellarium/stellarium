@@ -106,9 +106,16 @@ QString StelSkyCultureMgr::getSkyCultureEnglishName(const QString& idFromJSON) c
 StelSkyCultureMgr::StelSkyCultureMgr()
 {
 	setObjectName("StelSkyCultureMgr");
+	makeCulturesList();
+}
 
+StelSkyCultureMgr::~StelSkyCultureMgr()
+{
+}
+
+void StelSkyCultureMgr::makeCulturesList()
+{
 	QSet<QString> cultureDirNames = StelFileMgr::listContents("skycultures",StelFileMgr::Directory);
-	
 	for (const auto& dir : std::as_const(cultureDirNames))
 	{
 		constexpr char indexFileName[] = "/index.json";
@@ -212,10 +219,6 @@ StelSkyCultureMgr::StelSkyCultureMgr()
 			culture.classification = classification;
 		}
 	}
-}
-
-StelSkyCultureMgr::~StelSkyCultureMgr()
-{
 }
 
 //! Init itself from a config file.

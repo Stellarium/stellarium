@@ -219,6 +219,9 @@ signals:
 	void currentSkyCultureChanged(const StelSkyCulture& culture);
 	
 private:
+	//! Scan all sky cultures to get their names and other properties.
+	void makeCulturesList();
+
 	//! Read the English name of the sky culture from description file.
 	//! @param idFromJSON the id from \p index.json that will be used as a default name if an error occurs.
 	QString getSkyCultureEnglishName(const QString& idFromJSON) const;
