@@ -94,8 +94,9 @@ Vec3f CustomObject::getInfoColor(void) const
 
 Vec3d CustomObject::getJ2000EquatorialPos(const StelCore* core) const
 {
-	return XYZ;
-	/*
+	if (getEnglishName()=="NCP") // regions: https://simbad.u-strasbg.fr/simbad/sim-basic?Ident=NCP&submit=SIMBAD+search
+		return XYZ;
+
 	if  (!isMarker && (core && core->getUseAberration() && core->getCurrentPlanet()))
 	{
 		Vec3d vel=core->getCurrentPlanet()->getHeliocentricEclipticVelocity();
@@ -105,10 +106,7 @@ Vec3d CustomObject::getJ2000EquatorialPos(const StelCore* core) const
 		return pos;
 	}
 	else
-	{
 		return XYZ;
-	}
-	*/
 }
 
 float CustomObject::getVMagnitude(const StelCore* core) const
