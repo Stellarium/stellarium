@@ -148,7 +148,7 @@ float CustomObjectMgr::getSelectPriority() const
 	return CustomObject::selectPriority;
 }
 
-void CustomObjectMgr::addCustomObject(QString designation, Vec3d coordinates, bool isVisible)
+void CustomObjectMgr::addCustomObject(const QString& designation, Vec3d coordinates, bool isVisible)
 {
 	if (!designation.isEmpty())
 	{
@@ -163,7 +163,7 @@ void CustomObjectMgr::addCustomObject(QString designation, Vec3d coordinates, bo
 	}
 }
 
-void CustomObjectMgr::addCustomObject(QString designation, const QString &ra, const QString &dec, bool isVisible)
+void CustomObjectMgr::addCustomObject(const QString& designation, const QString &ra, const QString &dec, bool isVisible)
 {
 	Vec3d j2000;
 	double dRa = StelUtils::getDecAngle(ra);
@@ -173,7 +173,7 @@ void CustomObjectMgr::addCustomObject(QString designation, const QString &ra, co
 	addCustomObject(designation, j2000, isVisible);
 }
 
-void CustomObjectMgr::addCustomObjectRaDec(QString designation, const QString &ra, const QString &dec, bool isVisible)
+void CustomObjectMgr::addCustomObjectRaDec(const QString& designation, const QString &ra, const QString &dec, bool isVisible)
 {
 	Vec3d aim;
 	double dRa = StelUtils::getDecAngle(ra);
@@ -183,7 +183,7 @@ void CustomObjectMgr::addCustomObjectRaDec(QString designation, const QString &r
 	addCustomObject(designation, StelApp::getInstance().getCore()->equinoxEquToJ2000(aim, StelCore::RefractionOff), isVisible);
 }
 
-void CustomObjectMgr::addCustomObjectAltAzi(QString designation, const QString &alt, const QString &azi, bool isVisible)
+void CustomObjectMgr::addCustomObjectAltAzi(const QString& designation, const QString &alt, const QString &azi, bool isVisible)
 {
 	Vec3d aim;
 	double dAlt = StelUtils::getDecAngle(alt);
