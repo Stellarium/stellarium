@@ -20,8 +20,6 @@
 #include "ui_astroCalcExtraEphemerisDialog.h"
 
 #include "Dialog.hpp"
-#include "StelTranslator.hpp"
-#include "StelObjectMgr.hpp"
 
 AstroCalcExtraEphemerisDialog::AstroCalcExtraEphemerisDialog() : StelDialog("AstroCalcExtraEphemeris")
 {
