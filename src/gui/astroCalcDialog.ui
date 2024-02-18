@@ -471,6 +471,9 @@
          <layout class="QGridLayout" name="gridLayout_3">
           <item row="7" column="0" colspan="2">
            <widget class="QTreeWidget" name="ephemerisTreeWidget">
+            <property name="toolTip">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Positions depend on your settings for topocentric correction, aberration, etc. &lt;/p&gt;&lt;p&gt;Magnitudes are affected by current atmosphere settings. &lt;/p&gt;&lt;p&gt;For almanac-like data, disable atmosphere and topocentric corrections!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
             <property name="editTriggers">
              <set>QAbstractItemView::NoEditTriggers</set>
             </property>
@@ -539,7 +542,7 @@
             <item>
              <widget class="QCheckBox" name="ephemerisShowMagnitudesCheckBox">
               <property name="toolTip">
-               <string>Show magnitudes of current celestial body</string>
+               <string>Show magnitudes of current celestial body (may be affected by atmosphere setting!)</string>
               </property>
               <property name="text">
                <string>magnitudes</string>
