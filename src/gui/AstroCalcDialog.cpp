@@ -3929,13 +3929,11 @@ QPair<double, double> AstroCalcDialog::getRiseSetLineCoordinates(bool first, dou
 	QPair<double, double> coordinates(99., 0.);
 	if (std::abs(cgm)<=1.)
 	{
-		double gamma = std::acos(cgm)+std::atan2(x,y);
-		if (!first)
-			gamma = M_PI*2.-std::acos(cgm)+std::atan2(x,y);
-		double xi = std::sin(gamma);
-		double eta = std::cos(gamma);
-		double b = -eta*std::sin(d);
-		double theta = std::atan2(xi,b)*M_180_PI;
+		const double gamma = first ? std::acos(cgm)+std::atan2(x,y) : M_PI*2.-std::acos(cgm)+std::atan2(x,y);
+		const double xi = std::sin(gamma);
+		const double eta = std::cos(gamma);
+		const double b = -eta*std::sin(d);
+		const double theta = std::atan2(xi,b)*M_180_PI;
 		double lngDeg = theta-mu;
 		lngDeg = StelUtils::fmodpos(lngDeg, 360.);
 		if (lngDeg > 180.) lngDeg -= 360.;
@@ -3956,28 +3954,31 @@ QPair<double, double> AstroCalcDialog::getShadowOutlineCoordinates(double angle,
 	static const double f = 1.0 - ssystem->getEarth()->getOneMinusOblateness(); // flattening
 	static const double e2 = f*(2.-f);
 	static const double ff = 1./(1.-f);
-	const double rho1 = std::sqrt(1.-e2*std::cos(d)*std::cos(d));
+	const double sinAngle=std::sin(angle);
+	const double cosAngle=std::cos(angle);
+	const double cosD = std::cos(d);
+	const double rho1 = std::sqrt(1.-e2*cosD*cosD);
 	const double sd1 = std::sin(d)/rho1;
-	const double cd1 = std::sqrt(1.-e2)*std::cos(d)/rho1;
-	const double xi0 = x-L*std::sin(angle);
-	const double eta0 = y-L*std::cos(angle);
-	const double zeta0 = 1.-xi0*xi0-eta0*eta0;
+	const double cd1 = std::sqrt(1.-e2)*cosD/rho1;
+	const double xi0 = x-L*sinAngle;
+	const double eta0 = y-L*cosAngle;
+	double zeta0 = 1.-xi0*xi0-eta0*eta0;
 
 	QPair<double, double> coordinates(99., 0.);
 	if (zeta0 >= 0)
 	{
-		const double L1 = L-zeta0*tf;
-		const double xi = x-L1*std::sin(angle);
-		const double eta1 = (y-L1*std::cos(angle))/rho1;
-		const double pp = 1.-xi*xi-eta1*eta1;
+		double L1 = L-zeta0*tf;
+		double xi = x-L1*sinAngle;
+		double eta1 = (y-L1*cosAngle)/rho1;
+		double pp = 1.-xi*xi-eta1*eta1;
 
 		if (pp >= 0)
 		{
-			const double zeta0 = std::sqrt(pp);
-			const double L1 = L-zeta0*tf;
-			const double xi = x-L1*std::sin(angle);
-			const double eta1 = (y-L1*std::cos(angle))/rho1;
-			const double pp = 1.-xi*xi-eta1*eta1;
+			zeta0 = std::sqrt(pp);
+			L1 = L-zeta0*tf;
+			xi = x-L1*sinAngle;
+			eta1 = (y-L1*cosAngle)/rho1;
+			pp = 1.-xi*xi-eta1*eta1;
 
 			if (pp >= 0)
 			{
@@ -4768,19 +4769,9 @@ QPair<double, double> AstroCalcDialog::getExtremeNSLimitofShadow(double JD, bool
 		cq = 1./scq;
 		const double L = penumbra ? L1 : L2;
 		if (northernLimit)
-		{
-			if (L<0.)
-				cq = std::abs(cq);
-			else
-				cq = -std::abs(cq);
-		}
+			cq = (L<0.) ?  std::abs(cq) : -std::abs(cq);
 		else
-		{
-			if (L<0.)
-				cq = -std::abs(cq);
-			else
-				cq = std::abs(cq);
-		}
+			cq = (L<0.) ? -std::abs(cq) :  std::abs(cq);
 		sq = tq*cq;
 		// clazy warns n2 below and therefore this all is unused!
 		//if (cq>0.)
