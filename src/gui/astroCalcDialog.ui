@@ -469,11 +469,36 @@
         </widget>
         <widget class="QWidget" name="stackedWidgetPage2">
          <layout class="QGridLayout" name="gridLayout_3">
+          <item row="9" column="0" colspan="2">
+           <layout class="QHBoxLayout" name="horizontalLayout_11">
+            <item>
+             <widget class="QPushButton" name="ephemerisCleanupButton">
+              <property name="text">
+               <string>Cleanup ephemerides</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="ephemerisSaveButton">
+              <property name="text">
+               <string>Export ephemeris...</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="ephemerisPushButton">
+              <property name="toolTip">
+               <string>Calculations require time, please be patient</string>
+              </property>
+              <property name="text">
+               <string>Calculate ephemeris</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
           <item row="7" column="0" colspan="2">
            <widget class="QTreeWidget" name="ephemerisTreeWidget">
-            <property name="toolTip">
-             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Positions depend on your settings for topocentric correction, aberration, etc. &lt;/p&gt;&lt;p&gt;Magnitudes are affected by current atmosphere settings. &lt;/p&gt;&lt;p&gt;For almanac-like data, disable atmosphere and topocentric corrections!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-            </property>
             <property name="editTriggers">
              <set>QAbstractItemView::NoEditTriggers</set>
             </property>
@@ -496,6 +521,86 @@
              <number>0</number>
             </property>
            </widget>
+          </item>
+          <item row="0" column="0" colspan="2">
+           <layout class="QHBoxLayout" name="horizontalLayout">
+            <item>
+             <widget class="QLabel" name="celestialBodyName">
+              <property name="text">
+               <string>Celestial body:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="celestialBodyComboBox">
+              <property name="toolTip">
+               <string>First celestial body</string>
+              </property>
+              <property name="editable">
+               <bool>true</bool>
+              </property>
+              <property name="currentText">
+               <string/>
+              </property>
+              <property name="currentIndex">
+               <number>-1</number>
+              </property>
+              <property name="insertPolicy">
+               <enum>QComboBox::NoInsert</enum>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="labelAnd">
+              <property name="text">
+               <string>and</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="secondaryCelestialBodyComboBox">
+              <property name="toolTip">
+               <string>Second celestial body</string>
+              </property>
+              <property name="editable">
+               <bool>true</bool>
+              </property>
+              <property name="insertPolicy">
+               <enum>QComboBox::NoInsert</enum>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="labelOr">
+              <property name="text">
+               <string>or</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="allNakedEyePlanetsCheckBox">
+              <property name="toolTip">
+               <string>Compute ephemeris for all planets visible to the unaided eye (works on Earth only)</string>
+              </property>
+              <property name="text">
+               <string>all naked-eye planets</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer_3">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
           </item>
           <item row="3" column="0" colspan="2">
            <layout class="QHBoxLayout" name="horizontalLayout_17">
@@ -702,34 +807,6 @@
             </item>
            </layout>
           </item>
-          <item row="8" column="0" colspan="2">
-           <layout class="QHBoxLayout" name="horizontalLayout_11">
-            <item>
-             <widget class="QPushButton" name="ephemerisCleanupButton">
-              <property name="text">
-               <string>Cleanup ephemerides</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="ephemerisSaveButton">
-              <property name="text">
-               <string>Export ephemeris...</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="ephemerisPushButton">
-              <property name="toolTip">
-               <string>Calculations require time, please be patient</string>
-              </property>
-              <property name="text">
-               <string>Calculate ephemeris</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
           <item row="2" column="0" colspan="2">
            <layout class="QHBoxLayout" name="horizontalLayout_25">
             <item>
@@ -843,85 +920,18 @@
             </item>
            </layout>
           </item>
-          <item row="0" column="0" colspan="2">
-           <layout class="QHBoxLayout" name="horizontalLayout">
-            <item>
-             <widget class="QLabel" name="celestialBodyName">
-              <property name="text">
-               <string>Celestial body:</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QComboBox" name="celestialBodyComboBox">
-              <property name="toolTip">
-               <string>First celestial body</string>
-              </property>
-              <property name="editable">
-               <bool>true</bool>
-              </property>
-              <property name="currentText">
-               <string/>
-              </property>
-              <property name="currentIndex">
-               <number>-1</number>
-              </property>
-              <property name="insertPolicy">
-               <enum>QComboBox::NoInsert</enum>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="labelAnd">
-              <property name="text">
-               <string>and</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QComboBox" name="secondaryCelestialBodyComboBox">
-              <property name="toolTip">
-               <string>Second celestial body</string>
-              </property>
-              <property name="editable">
-               <bool>true</bool>
-              </property>
-              <property name="insertPolicy">
-               <enum>QComboBox::NoInsert</enum>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="labelOr">
-              <property name="text">
-               <string>or</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QCheckBox" name="allNakedEyePlanetsCheckBox">
-              <property name="toolTip">
-               <string>Compute ephemeris for all planets visible to the unaided eye (works on Earth only)</string>
-              </property>
-              <property name="text">
-               <string>all naked-eye planets</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <spacer name="horizontalSpacer_3">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>40</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-           </layout>
+          <item row="8" column="0" colspan="2">
+           <widget class="QLabel" name="ephemerisNotificationLabel">
+            <property name="text">
+             <string>Note: Positions depend on your settings for topocentric correction, aberration, etc. Magnitudes are affected by current atmosphere settings. For almanac-like data, disable atmosphere and topocentric corrections!</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+            <property name="wordWrap">
+             <bool>true</bool>
+            </property>
+           </widget>
           </item>
          </layout>
         </widget>

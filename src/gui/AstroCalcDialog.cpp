@@ -1761,7 +1761,7 @@ void AstroCalcDialog::setEphemerisHeaderNames()
 	ephemerisHeader << QString("%1, %2").arg(q_("Dist."), qc_("AU", "distance, astronomical unit"));
 	// TRANSLATORS: elongation
 	ephemerisHeader << q_("Elong.");
-	ui->ephemerisTreeWidget->setHeaderLabels(ephemerisHeader);
+	ui->ephemerisTreeWidget->setHeaderLabels(ephemerisHeader);	
 
 	// adjust the column width
 	for (int i = 0; i < EphemerisCount; ++i)
@@ -1776,7 +1776,7 @@ void AstroCalcDialog::initListEphemeris()
 	ui->ephemerisTreeWidget->setColumnCount(EphemerisCount);
 	setEphemerisHeaderNames();
 	ui->ephemerisTreeWidget->header()->setSectionsMovable(false);
-	ui->ephemerisTreeWidget->header()->setDefaultAlignment(Qt::AlignCenter);
+	ui->ephemerisTreeWidget->header()->setDefaultAlignment(Qt::AlignCenter);	
 }
 
 void AstroCalcDialog::reGenerateEphemeris()
