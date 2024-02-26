@@ -250,6 +250,8 @@ private slots:
 	//! Clear recent list's data
 	void recentSearchClearDataClicked();
 
+	void setCenterOfScreenCoordinates();
+
 private:
 	bool simbadSearchEnabled() const {return useSimbad;}
 	int  getSimbadQueryDist () const { return simbadDist;}
