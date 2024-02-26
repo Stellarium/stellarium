@@ -394,6 +394,7 @@ void SearchDialog::createDialogContent()
 	connect(ui->AxisXSpinBox, SIGNAL(valueChanged()), this, SLOT(manualPositionChanged()));
 	connect(ui->AxisYSpinBox, SIGNAL(valueChanged()), this, SLOT(manualPositionChanged()));
 	connect(ui->goPushButton, SIGNAL(clicked(bool)), this, SLOT(manualPositionChanged()));
+	connect(GETSTELMODULE(StelMovementMgr), SIGNAL(currentDirectionChanged()), this, SLOT(setCenterOfScreenCoordinates()));
 	setCenterOfScreenCoordinates();
 	
 	connect(ui->alphaPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
