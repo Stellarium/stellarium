@@ -516,6 +516,7 @@ void SearchDialog::changeTab(int index)
 
 	if (index==2) // Position
 	{
+		setCenterOfScreenCoordinates();
 		if (useFOVCenterMarker)
 			GETSTELMODULE(SpecialMarkersMgr)->setFlagFOVCenterMarker(true);
 	}
