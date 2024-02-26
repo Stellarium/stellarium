@@ -122,9 +122,9 @@ jobs:
         run: ctest --output-on-failure
 
   # CI on macOS (Qt6)
-  ci-macos-qt6:
+  ci-macos-x86-qt6:
     name: "macOS (x86_64; qt6)"
-    runs-on: macos-latest
+    runs-on: macos-13
     if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.actor, 'transifex')"
 
     # @TODO Enable gpsd on macOS instance for CI testing
@@ -159,9 +159,9 @@ jobs:
         run: ctest --output-on-failure
 
   # CI on macOS (Qt6)
-  ci-macos14-qt6:
+  ci-macos-arm-qt6:
     name: "macOS (arm64; qt6)"
-    runs-on: macos-14
+    runs-on: macos-13-xlarge
     if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.actor, 'transifex')"
 
     # @TODO Enable gpsd on macOS instance for CI testing
