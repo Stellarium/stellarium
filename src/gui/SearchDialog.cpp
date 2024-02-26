@@ -394,6 +394,7 @@ void SearchDialog::createDialogContent()
 	connect(ui->AxisXSpinBox, SIGNAL(valueChanged()), this, SLOT(manualPositionChanged()));
 	connect(ui->AxisYSpinBox, SIGNAL(valueChanged()), this, SLOT(manualPositionChanged()));
 	connect(ui->goPushButton, SIGNAL(clicked(bool)), this, SLOT(manualPositionChanged()));
+	// following the current direction of FOV
 	connect(GETSTELMODULE(StelMovementMgr), SIGNAL(currentDirectionChanged()), this, SLOT(setCenterOfScreenCoordinates()));
 	setCenterOfScreenCoordinates();
 	
@@ -680,6 +681,7 @@ void SearchDialog::setCenterOfScreenCoordinates()
 	projector->unProject(centerScreen[0], centerScreen[1], centerPos);
 	double spinLong, spinLat;
 
+	// Getting coordinates (in radians) of position of the center of the screen
 	switch (getCurrentCoordinateSystem())
 	{
 		case equatorialJ2000:
@@ -724,12 +726,15 @@ void SearchDialog::setCenterOfScreenCoordinates()
 		}
 	}
 
+	// disable following the changes of spinbox
 	ui->AxisXSpinBox->blockSignals(true);
 	ui->AxisYSpinBox->blockSignals(true);
 
+	// set coordinates in spinboxes
 	ui->AxisXSpinBox->setRadians(spinLong);
 	ui->AxisYSpinBox->setRadians(spinLat);
 
+	// restore following the changes of spinbox
 	ui->AxisXSpinBox->blockSignals(false);
 	ui->AxisYSpinBox->blockSignals(false);
 }
