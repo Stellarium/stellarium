@@ -36,6 +36,7 @@
 #include "SolarSystem.hpp"
 
 #include <QFileDialog>
+#include <QMessageBox>
 
 SolarSystemManagerWindow::SolarSystemManagerWindow()
 	: StelDialog("SolarSystemEditor")
@@ -211,7 +212,24 @@ void SolarSystemManagerWindow::copyConfiguration()
 	QString filePath = QFileDialog::getSaveFileName(&StelMainView::getInstance(),
 							q_("Save the minor Solar System bodies as..."),
 							QDir::homePath() + "/ssystem_minor.ini");
-	ssEditor->copySolarSystemConfigurationFileTo(filePath);
+
+	const QFileInfo targetFile(filePath);
+	// We must remove an existing file because QFile::copy() does not overwrite.
+	// Note that at least on Windows, an existing and write-protected file has been identified by the previous dialog already,
+	// so these QMessageBoxes will never be seen here.
+	if (targetFile.exists() && targetFile.isWritable())
+	{
+		if (!QFile::remove(targetFile.absoluteFilePath()))
+		{
+			QMessageBox::information(&StelMainView::getInstance(), q_("Cannot overwrite"),
+					 q_("Cannot remove existing file. Do you have permissions?"));
+			return;
+		}
+	}
+
+	if (!ssEditor->copySolarSystemConfigurationFileTo(filePath))
+			QMessageBox::information(&StelMainView::getInstance(), q_("Cannot store"),
+						 q_("File cannot be written. Do you have permissions?"));
 }
 
 void SolarSystemManagerWindow::replaceConfiguration()

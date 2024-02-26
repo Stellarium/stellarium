@@ -316,7 +316,7 @@ bool SolarSystemEditor::isFileEncodingValid(QString filePath) const
 		if (state.invalidChars > 0)
 #endif
 		{
-			qDebug() << "[Solar System Editor] Not a valid UTF-8 sequence in file " << filePath;
+			qCritical() << "[Solar System Editor] Not a valid UTF-8 sequence in file " << filePath;
 			return false;
 		}
 		else
