@@ -30,6 +30,8 @@
 #include <QFileInfo>
 #include <QRegularExpression>
 #include <QTextStream>
+#include <charconv>
+#include <system_error>
 
 Q_LOGGING_CATEGORY(stelOBJ,"stel.OBJ")
 
@@ -133,9 +135,18 @@ bool StelOBJ::parseInt(const ParseParams &params, int &out, int paramsStart)
 		qCWarning(stelOBJ)<<"Additional parameters ignored in statement"<<params;
 	}
 
-	bool ok;
-	out = params.at(paramsStart).toInt(&ok);
-	return ok;
+	const QByteArray qba=params.at(paramsStart).toLocal8Bit();
+	//auto [ p, e ] = std::from_chars(params.at(paramsStart).constData(), params.at(paramsStart).constData() + params.at(paramsStart).size(), out[0]);
+	auto [ p, e ] = std::from_chars(qba.constData(), qba.constData() + params.at(paramsStart).size(), out);
+	if (e==std::errc())
+		return true;
+	qCCritical(stelOBJ)<<"Error parsing Vec3:"<<params;
+	return false;
+
+
+	//bool ok;
+	//out = params.at(paramsStart).toInt(&ok);
+	//return ok;
 }
 
 bool StelOBJ::parseString(const ParseParams &params, QString &out, int paramsStart)
@@ -171,9 +182,20 @@ bool StelOBJ::parseFloat(const ParseParams &params, float &out, int paramsStart)
 		qCWarning(stelOBJ)<<"Additional parameters ignored in statement"<<params;
 	}
 
-	bool ok;
-	out = params.at(paramsStart).toFloat(&ok);
-	return ok;
+	const QByteArray qba=params.at(paramsStart).toLocal8Bit();
+	//auto [ p, e ] = std::from_chars(params.at(paramsStart).constData(), params.at(paramsStart).constData() + params.at(paramsStart).size(), out[0]);
+	auto [ p, e ] = std::from_chars(qba.constData(), qba.constData() + params.at(paramsStart).size(), out);
+	if (e==std::errc())
+		return true;
+	qCCritical(stelOBJ)<<"Error parsing Vec3:"<<params;
+	return false;
+
+
+
+
+	//bool ok;
+	//out = params.at(paramsStart).toFloat(&ok);
+	//return ok;
 }
 
 template <typename T>
@@ -185,20 +207,51 @@ bool StelOBJ::parseVec3(const ParseParams& params, T &out, int paramsStart)
 		return false;
 	}
 
-	bool ok = false;
-	out[0] = params.at(paramsStart).toFloat(&ok); //use double here, so that it even works for Vec3d, etc
-	if(ok)
+
+	// TODO: Replace Qt's toFloat by C++17's from_chars()
+	// p=ptr, should be params.at(paramsStart).data() + params.at(paramsStart).size() on success
+	// e=error_code, should be errc()
+
+	const QByteArray qba=params.at(paramsStart).toLocal8Bit();
+	//auto [ p, e ] = std::from_chars(params.at(paramsStart).constData(), params.at(paramsStart).constData() + params.at(paramsStart).size(), out[0]);
+	auto [ p, e ] = std::from_chars(qba.constData(), qba.constData() + params.at(paramsStart).size(), out[0]);
+	if (e==std::errc())
 	{
-		out[1] = params.at(paramsStart+1).toFloat(&ok);
-		if(ok)
+		const QByteArray qba=params.at(paramsStart+1).toLocal8Bit();
+		auto [ p, e ] = std::from_chars(qba.constData(), qba.constData() + params.at(paramsStart+1).size(), out[1]);
+
+		if (e==std::errc())
 		{
-			out[2] = params.at(paramsStart+2).toFloat(&ok);
-			return true;
+			const QByteArray qba=params.at(paramsStart+2).toLocal8Bit();
+			auto [ p, e ] = std::from_chars(qba.constData(), qba.constData() + params.at(paramsStart+2).size(), out[2]);
+			if (e==std::errc())
+				return true;
 		}
 	}
 
+	//if (e == std::errc::invalid_argument)
+	//	    qWarning() << "OBJ: Invalid 3-vector: " << params;
+	//else if (e == std::errc::result_out_of_range)
+	//	    qWarning() << "This number is out of range: " << params.at(paramsStart);
+
 	qCCritical(stelOBJ)<<"Error parsing Vec3:"<<params;
 	return false;
+
+
+	//bool ok = false;
+	//out[0] = params.at(paramsStart).toFloat(&ok); //use double here, so that it even works for Vec3d, etc
+	//if(ok)
+	//{
+	//	out[1] = params.at(paramsStart+1).toFloat(&ok);
+	//	if(ok)
+	//	{
+	//		out[2] = params.at(paramsStart+2).toFloat(&ok);
+	//		return true;
+	//	}
+	//}
+
+	//qCCritical(stelOBJ)<<"Error parsing Vec3:"<<params;
+	//return false;
 }
 
 template <typename T>
@@ -210,16 +263,31 @@ bool StelOBJ::parseVec2(const ParseParams& params,T &out, int paramsStart)
 		return false;
 	}
 
-	bool ok = false;
-	out[0] = params.at(paramsStart).toDouble(&ok);
-	if(ok)
+	const QByteArray qba=params.at(paramsStart).toLocal8Bit();
+	//auto [ p, e ] = std::from_chars(params.at(paramsStart).constData(), params.at(paramsStart).constData() + params.at(paramsStart).size(), out[0]);
+	auto [ p, e ] = std::from_chars(qba.constData(), qba.constData() + params.at(paramsStart).size(), out[0]);
+	if (e==std::errc())
 	{
-		out[1] = params.at(paramsStart+1).toDouble(&ok);
-		return true;
-	}
+		const QByteArray qba=params.at(paramsStart+1).toLocal8Bit();
+		auto [ p, e ] = std::from_chars(qba.constData(), qba.constData() + params.at(paramsStart+1).size(), out[1]);
 
+		if (e==std::errc())
+			return true;
+	}
 	qCCritical(stelOBJ)<<"Error parsing Vec2:"<<params;
 	return false;
+
+
+	//bool ok = false;
+	//out[0] = params.at(paramsStart).toDouble(&ok);
+	//if(ok)
+	//{
+	//	out[1] = params.at(paramsStart+1).toDouble(&ok);
+	//	return true;
+	//}
+
+	//qCCritical(stelOBJ)<<"Error parsing Vec2:"<<params;
+	//return false;
 }
 
 StelOBJ::Object* StelOBJ::getCurrentObject(CurrentParserState &state)
@@ -760,11 +828,11 @@ bool StelOBJ::load(QIODevice& device, const QString &basePath, const VertexOrder
 
 		//split line by whitespace
 		#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
-		ParseParams splits = ParseParam(line).split(separator, Qt::SkipEmptyParts).toVector();
+		const ParseParams splits = ParseParam(line).split(separator, Qt::SkipEmptyParts).toVector();
 		#elif (QT_VERSION>=QT_VERSION_CHECK(5,15,0))
-		ParseParams splits = line.splitRef(separator, Qt::SkipEmptyParts);
+		const ParseParams splits = line.splitRef(separator, Qt::SkipEmptyParts);
 		#else
-		ParseParams splits = line.splitRef(separator, QString::SkipEmptyParts);
+		const ParseParams splits = line.splitRef(separator, QString::SkipEmptyParts);
 		#endif
 		if(!splits.isEmpty())
 		{
@@ -781,8 +849,8 @@ bool StelOBJ::load(QIODevice& device, const QString &basePath, const VertexOrder
 				//we have to handle the vertex order
 				Vec3f& target = INC_LIST(posList);
 				ok = parseVec3(splits,target);
-				//check the optional w coord if we have a vec4, must be 1
-				if(splits.size()>4)
+				//check the optional w coord if we have a vec4, must be 1. Even larger lists may be xyzrgb data, rgb is ignored here.
+				if(splits.size()==5)
 				{
 					float w;
 					parseFloat(splits,w,4);
