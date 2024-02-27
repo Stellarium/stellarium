@@ -385,49 +385,55 @@ bool StelOBJ::parseFace(const ParseParams& params, const V3Vec& posList, const V
 	//loop to parse each section separately
 	for(int i =0; i<vtxAmount;++i)
 	{
-		//split on slash
-		#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
-		ParseParams split = params.at(i+1).split('/').toVector();
-		#else
-		ParseParams split = params.at(i+1).split('/');
-		#endif
-		switch(split.size())
+		if(!params[i+1].contains('/'))
 		{
-			case 1: //no slash, only position
-				CHK_MODE(1)
-				CHK_OK(posIdx = split.at(0).toInt(&ok));
-				FIX_REL(posIdx, posList)
-				break;
-			case 2: //single slash, vert/tex
-				CHK_MODE(2)
-				CHK_OK(posIdx = split.at(0).toInt(&ok));
-				FIX_REL(posIdx, posList)
-				CHK_OK(texIdx = split.at(1).toInt(&ok));
-				FIX_REL(texIdx, texList)
-				break;
-			case 3: //2 slashes, either v/t/n or v//n
-				if(!split.at(1).isEmpty())
-				{
-					CHK_MODE(3)
+			//no slash, only position
+			CHK_MODE(1)
+			CHK_OK(posIdx = params[i+1].toInt(&ok));
+			FIX_REL(posIdx, posList)
+		}
+		else
+		{
+			//split on slash
+			#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+			ParseParams split = params.at(i+1).split('/').toVector();
+			#else
+			ParseParams split = params.at(i+1).split('/');
+			#endif
+			switch(split.size())
+			{
+				// case 1 is handled separately above
+				case 2: //single slash, vert/tex
+					CHK_MODE(2)
 					CHK_OK(posIdx = split.at(0).toInt(&ok));
 					FIX_REL(posIdx, posList)
 					CHK_OK(texIdx = split.at(1).toInt(&ok));
 					FIX_REL(texIdx, texList)
-					CHK_OK(normIdx = split.at(2).toInt(&ok));
-					FIX_REL(normIdx, normList)
-				}
-				else
-				{
-					CHK_MODE(4)
-					CHK_OK(posIdx = split.at(0).toInt(&ok));
-					FIX_REL(posIdx, posList)
-					CHK_OK(normIdx = split.at(2).toInt(&ok));
-					FIX_REL(normIdx, normList)
-				}
-				break;
-			default: //invalid line
-				qCCritical(stelOBJ)<<"Invalid face statement"<<params;
-				return false;
+					break;
+				case 3: //2 slashes, either v/t/n or v//n
+					if(!split.at(1).isEmpty())
+					{
+						CHK_MODE(3)
+						CHK_OK(posIdx = split.at(0).toInt(&ok));
+						FIX_REL(posIdx, posList)
+						CHK_OK(texIdx = split.at(1).toInt(&ok));
+						FIX_REL(texIdx, texList)
+						CHK_OK(normIdx = split.at(2).toInt(&ok));
+						FIX_REL(normIdx, normList)
+					}
+					else
+					{
+						CHK_MODE(4)
+						CHK_OK(posIdx = split.at(0).toInt(&ok));
+						FIX_REL(posIdx, posList)
+						CHK_OK(normIdx = split.at(2).toInt(&ok));
+						FIX_REL(normIdx, normList)
+					}
+					break;
+				default: //invalid line
+					qCCritical(stelOBJ)<<"Invalid face statement"<<params;
+					return false;
+			}
 		}
 
 		//create a temporary Vertex by copying the info from the lists
