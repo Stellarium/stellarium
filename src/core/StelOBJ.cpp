@@ -314,46 +314,56 @@ bool StelOBJ::parseFace(const ParseParams& params, const V3Vec& posList, const V
 	//note: the indices start with 1, this is fixed up later
 	#define FIX_REL(a, list) if(a<0) {a += list.size()+1; }
 
+	// Find all slashes without allocating memory, including allocation for storing
+	// the result (we assume that the output vector has a reasonable amount of space reserved)
+	const auto findSlashes = [](const QStringView& line, std::vector<int>& slashes)
+	{
+		slashes.clear();
+		for(int n = 0; n < line.size(); ++n)
+			if(line[n] == QLatin1Char('/'))
+				slashes.push_back(n);
+	};
+
+	thread_local std::vector<int> slashes;
+	slashes.reserve(4);
 	//loop to parse each section separately
 	for(int i =0; i<vtxAmount;++i)
 	{
-		//split on slash
-		#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
-		ParseParams split = params.at(i+1).split('/').toVector();
-		#else
-		ParseParams split = params.at(i+1).split('/');
-		#endif
-		switch(split.size())
+		const auto& vertStr = params[i+1];
+		findSlashes(vertStr, slashes);
+
+		switch(slashes.size())
 		{
-			case 1: //no slash, only position
+			case 0:
+				//no slash, only position
 				CHK_MODE(1)
-				CHK_OK(posIdx = split.at(0).toInt(&ok));
+				CHK_OK(posIdx = vertStr.toInt(&ok));
 				FIX_REL(posIdx, posList)
 				break;
-			case 2: //single slash, vert/tex
+			case 1: //single slash, vert/tex
 				CHK_MODE(2)
-				CHK_OK(posIdx = split.at(0).toInt(&ok));
+				CHK_OK(posIdx = vertStr.mid(0, slashes[0]).toInt(&ok));
 				FIX_REL(posIdx, posList)
-				CHK_OK(texIdx = split.at(1).toInt(&ok));
+				CHK_OK(texIdx = vertStr.mid(slashes[0] + 1, vertStr.size() - (slashes[0] + 1)).toInt(&ok));
 				FIX_REL(texIdx, texList)
 				break;
-			case 3: //2 slashes, either v/t/n or v//n
-				if(!split.at(1).isEmpty())
+			case 2: //2 slashes, either v/t/n or v//n
+				if(slashes[1]-slashes[0] != 1)
 				{
 					CHK_MODE(3)
-					CHK_OK(posIdx = split.at(0).toInt(&ok));
+					CHK_OK(posIdx = vertStr.mid(0, slashes[0]).toInt(&ok));
 					FIX_REL(posIdx, posList)
-					CHK_OK(texIdx = split.at(1).toInt(&ok));
+					CHK_OK(texIdx = vertStr.mid(slashes[0] + 1, slashes[1] - (slashes[0] + 1)).toInt(&ok));
 					FIX_REL(texIdx, texList)
-					CHK_OK(normIdx = split.at(2).toInt(&ok));
+					CHK_OK(normIdx = vertStr.mid(slashes[1] + 1, vertStr.size() - (slashes[1] + 1)).toInt(&ok));
 					FIX_REL(normIdx, normList)
 				}
 				else
 				{
 					CHK_MODE(4)
-					CHK_OK(posIdx = split.at(0).toInt(&ok));
+					CHK_OK(posIdx = vertStr.mid(0, slashes[0]).toInt(&ok));
 					FIX_REL(posIdx, posList)
-					CHK_OK(normIdx = split.at(2).toInt(&ok));
+					CHK_OK(normIdx = vertStr.mid(slashes[1] + 1, vertStr.size() - (slashes[1] + 1)).toInt(&ok));
 					FIX_REL(normIdx, normList)
 				}
 				break;
