@@ -15,6 +15,7 @@
 # Harry Mensch, 2022
 # Alexander V. Wolf <alex.v.wolf@gmail.com>, 2023
 # alex <alex.a.nder.duy.tschaever@gmail.com>, 2024
+# Erwin Dondorp, 2024
 # Alex Rijckaert, 2024
 # 
 #, fuzzy
@@ -14975,6 +14976,8 @@ msgid ""
 "Show magnitudes of current celestial body (may be affected by atmosphere "
 "setting!)"
 msgstr ""
+"Toon magnituden van huidig hemellichaam (kan worden beïnvloed door "
+"atmosfeerinstelling!)"
 
 #: src/ui_astroCalcDialog.h:2213
 msgid "magnitudes"
@@ -15050,6 +15053,10 @@ msgid ""
 "aberration, etc. Magnitudes are affected by current atmosphere settings. For"
 " almanac-like data, disable atmosphere and topocentric corrections!"
 msgstr ""
+"Opmerking: Posities zijn afhankelijk van je instellingen voor topocentrische"
+" correctie, aberratie, enz. Magnitudes worden beïnvloed door de huidige "
+"atmosfeerinstellingen. Schakel atmosfeer- en topocentrische correcties uit "
+"voor almanakachtige gegevens!"
 
 #: src/ui_astroCalcDialog.h:2261
 msgid "Cleanup data"
@@ -18467,7 +18474,7 @@ msgstr "Verwijderingssnelheid"
 
 #: plugins/Satellites/src/Satellite.cpp:363
 msgid "Perigee/apogee altitudes"
-msgstr "hoogtes perigeum/apogeum"
+msgstr "Hoogtes perigeum/apogeum"
 
 #: plugins/Satellites/src/Satellite.cpp:374
 msgid "Approx. angular size"
