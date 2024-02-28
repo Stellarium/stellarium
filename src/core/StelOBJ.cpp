@@ -384,7 +384,7 @@ bool StelOBJ::parseFace(const ParseParams& params, const V3Vec& posList, const V
 
 	// Find all slashes without allocating memory, including allocation for storing
 	// the result (we assume that the output vector has a reasonable amount of space reserved)
-	const auto findSlashes = [](const QStringRef& line, std::vector<int>& slashes)
+	const auto findSlashes = [](const QStringView& line, std::vector<int>& slashes)
 	{
 		slashes.clear();
 		for(int n = 0; n < line.size(); ++n)
