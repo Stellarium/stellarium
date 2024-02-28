@@ -2585,7 +2585,7 @@
                     <string/>
                    </property>
                    <property name="text">
-                    <string>Limit angular size (arcmin):</string>
+                    <string>Limit angular size:</string>
                    </property>
                   </widget>
                  </item>
@@ -2616,11 +2616,14 @@
                    <property name="alignment">
                     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                    </property>
+                   <property name="suffix">
+                    <string notr="true">'</string>
+                   </property>
                    <property name="decimals">
-                    <number>0</number>
+                    <number>2</number>
                    </property>
                    <property name="minimum">
-                    <double>1.000000000000000</double>
+                    <double>0.010000000000000</double>
                    </property>
                    <property name="maximum">
                     <double>1200.000000000000000</double>
@@ -2651,11 +2654,14 @@
                    <property name="alignment">
                     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                    </property>
+                   <property name="suffix">
+                    <string notr="true">'</string>
+                   </property>
                    <property name="decimals">
-                    <number>0</number>
+                    <number>2</number>
                    </property>
                    <property name="minimum">
-                    <double>1.000000000000000</double>
+                    <double>0.010000000000000</double>
                    </property>
                    <property name="maximum">
                     <double>600.000000000000000</double>
