@@ -342,11 +342,11 @@ private:
 	QGraphicsSimpleTextItem* helpLabel;
 };
 
-//! @class StelBarsPath: The path around the bottom and left button bars
-class StelBarsPath : public QGraphicsPathItem
+//! @class StelBarsFrame: The path around the bottom and left button bars
+class StelBarsFrame : public QGraphicsPathItem
 {
 	public:
-		StelBarsPath(QGraphicsItem* parent);
+		StelBarsFrame(QGraphicsItem* parent);
 		//! defines a line around the two button bars
 		void updatePath(BottomStelBar* bottom, LeftStelBar* left);
 		//! return radius of corner arc

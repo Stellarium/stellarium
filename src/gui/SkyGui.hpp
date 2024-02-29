@@ -91,7 +91,7 @@ public slots:
 	void updateBarsPos();
 
 private:
-	class StelBarsPath* buttonBarsPath;
+	class StelBarsFrame* buttonBarsFrame;
 	QTimeLine* animLeftBarTimeLine;
 	QTimeLine* animBottomBarTimeLine;
 	int lastBottomBarWidth;

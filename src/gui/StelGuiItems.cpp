@@ -1046,7 +1046,7 @@ void BottomStelBar::buttonHoverChanged(bool b)
 	StelMainView::getInstance().thereWasAnEvent();
 }
 
-StelBarsPath::StelBarsPath(QGraphicsItem* parent) : QGraphicsPathItem(parent), roundSize(6)
+StelBarsFrame::StelBarsFrame(QGraphicsItem* parent) : QGraphicsPathItem(parent), roundSize(6)
 {
 	setBrush(QBrush(QColor::fromRgbF(0.22, 0.22, 0.23, 0.2)));
 	QPen aPen(QColor::fromRgbF(0.7,0.7,0.7,0.5));
@@ -1054,7 +1054,7 @@ StelBarsPath::StelBarsPath(QGraphicsItem* parent) : QGraphicsPathItem(parent), r
 	setPen(aPen);
 }
 
-void StelBarsPath::updatePath(BottomStelBar* bottom, LeftStelBar* left)
+void StelBarsFrame::updatePath(BottomStelBar* bottom, LeftStelBar* left)
 {
 	const QPointF l = left->pos() + QPointF(-0.5,0.5);   // pos() is the top-left point in the parent's coordinate system.
 	const QRectF lB = left->boundingRectNoHelpLabel();
@@ -1073,7 +1073,7 @@ void StelBarsPath::updatePath(BottomStelBar* bottom, LeftStelBar* left)
 	setPath(path);
 }
 
-void StelBarsPath::setBackgroundOpacity(double opacity)
+void StelBarsFrame::setBackgroundOpacity(double opacity)
 {
 	setBrush(QBrush(QColor::fromRgbF(0.22, 0.22, 0.23, opacity)));
 }
