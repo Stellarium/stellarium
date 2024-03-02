@@ -395,7 +395,7 @@ void SearchDialog::createDialogContent()
 	connect(ui->AxisYSpinBox, SIGNAL(valueChanged()), this, SLOT(manualPositionChanged()));
 	connect(ui->goPushButton, SIGNAL(clicked(bool)), this, SLOT(manualPositionChanged()));
 	// following the current direction of FOV
-	connect(GETSTELMODULE(StelMovementMgr), &StelMovementMgr::currentDirectionChanged, this, [=](){setCenterOfScreenCoordinates();});
+	connect(GETSTELMODULE(StelMovementMgr), &StelMovementMgr::currentDirectionChanged, this, &SearchDialog::setCenterOfScreenCoordinates);
 	setCenterOfScreenCoordinates();
 	
 	connect(ui->alphaPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
