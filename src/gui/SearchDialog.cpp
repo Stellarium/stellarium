@@ -395,7 +395,7 @@ void SearchDialog::createDialogContent()
 	connect(ui->AxisYSpinBox, SIGNAL(valueChanged()), this, SLOT(manualPositionChanged()));
 	connect(ui->goPushButton, SIGNAL(clicked(bool)), this, SLOT(manualPositionChanged()));
 	// following the current direction of FOV
-	connect(GETSTELMODULE(StelMovementMgr), SIGNAL(currentDirectionChanged()), this, SLOT(setCenterOfScreenCoordinates()));
+	connect(GETSTELMODULE(StelMovementMgr), &StelMovementMgr::currentDirectionChanged, this, [=](){setCenterOfScreenCoordinates();});
 	setCenterOfScreenCoordinates();
 	
 	connect(ui->alphaPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
@@ -675,12 +675,11 @@ void SearchDialog::setSimpleStyle()
 void SearchDialog::setCenterOfScreenCoordinates()
 {
 	StelCore *core = StelApp::getInstance().getCore();
-	const auto projector = core->getProjection(StelCore::FrameJ2000, StelCore::RefractionMode::RefractionOff);
-	Vec2i centerScreen(projector->getViewportPosX() + projector->getViewportWidth() / 2,
-			   projector->getViewportPosY() + projector->getViewportHeight() / 2);
+	const auto projector = core->getProjection(StelCore::FrameJ2000, StelCore::RefractionMode::RefractionOff);	
+	Vector2<qreal> cpos = projector->getViewportCenter();
 	Vec3d centerPos;
-	projector->unProject(centerScreen[0], centerScreen[1], centerPos);
-	double spinLong, spinLat;
+	projector->unProject(cpos[0], cpos[1], centerPos);
+	double spinLong =0., spinLat = 0.;
 
 	// Getting coordinates (in radians) of position of the center of the screen
 	switch (getCurrentCoordinateSystem())
@@ -728,16 +727,16 @@ void SearchDialog::setCenterOfScreenCoordinates()
 	}
 
 	// disable following the changes of spinbox
-	ui->AxisXSpinBox->blockSignals(true);
-	ui->AxisYSpinBox->blockSignals(true);
+	const bool axisXState = ui->AxisXSpinBox->blockSignals(true);
+	const bool axisYState = ui->AxisYSpinBox->blockSignals(true);
 
 	// set coordinates in spinboxes
 	ui->AxisXSpinBox->setRadians(spinLong);
 	ui->AxisYSpinBox->setRadians(spinLat);
 
 	// restore following the changes of spinbox
-	ui->AxisXSpinBox->blockSignals(false);
-	ui->AxisYSpinBox->blockSignals(false);
+	ui->AxisXSpinBox->blockSignals(axisXState);
+	ui->AxisYSpinBox->blockSignals(axisYState);
 }
 
 void SearchDialog::manualPositionChanged()
