@@ -1610,6 +1610,7 @@ void StelMovementMgr::panView(const double deltaAz, const double deltaAlt)
 		{
 			setViewUpVector(Vec3d(0., 0., 1.));
 		}
+		emit currentDirectionChanged();
 	}
 }
 

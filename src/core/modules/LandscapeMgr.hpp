@@ -576,8 +576,6 @@ public slots:
 			flagLandscapeUseTransparency=b;
 			emit flagLandscapeUseTransparencyChanged(b);
 		}
-		if (!flagLandscapeUseTransparency) // equals to false
-			landscape->setTransparency(0.0);
 	}
 
 	/*

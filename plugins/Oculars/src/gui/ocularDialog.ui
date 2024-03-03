@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>792</width>
-    <height>619</height>
+    <width>300</width>
+    <height>300</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -34,7 +34,7 @@
    </property>
    <item>
     <widget class="TitleBar" name="titleBar">
-     <property name="title">
+     <property name="title" stdset="0">
       <string>Oculars</string>
      </property>
     </widget>
@@ -209,12 +209,6 @@
                </item>
                <item>
                 <widget class="QSpinBox" name="guiFontSizeSpinBox">
-                 <property name="maximumSize">
-                  <size>
-                   <width>50</width>
-                   <height>16777215</height>
-                  </size>
-                 </property>
                  <property name="toolTip">
                   <string>Font size of text on on-screen control panel</string>
                  </property>
@@ -619,12 +613,6 @@
                    <verstretch>0</verstretch>
                   </sizepolicy>
                  </property>
-                 <property name="maximumSize">
-                  <size>
-                   <width>70</width>
-                   <height>16777215</height>
-                  </size>
-                 </property>
                  <property name="toolTip">
                   <string>Horizontal size (width)</string>
                  </property>
@@ -649,12 +637,6 @@
                    <horstretch>0</horstretch>
                    <verstretch>0</verstretch>
                   </sizepolicy>
-                 </property>
-                 <property name="maximumSize">
-                  <size>
-                   <width>70</width>
-                   <height>16777215</height>
-                  </size>
                  </property>
                  <property name="toolTip">
                   <string>Vertical size (height)</string>
@@ -766,12 +748,6 @@
                </item>
                <item>
                 <widget class="QDoubleSpinBox" name="doubleSpinBoxTelradFOV1">
-                 <property name="maximumSize">
-                  <size>
-                   <width>80</width>
-                   <height>16777215</height>
-                  </size>
-                 </property>
                  <property name="toolTip">
                   <string>FOV for circle 1</string>
                  </property>
@@ -802,12 +778,6 @@
                    <horstretch>0</horstretch>
                    <verstretch>0</verstretch>
                   </sizepolicy>
-                 </property>
-                 <property name="maximumSize">
-                  <size>
-                   <width>80</width>
-                   <height>16777215</height>
-                  </size>
                  </property>
                  <property name="toolTip">
                   <string>FOV for circle 2</string>
@@ -840,12 +810,6 @@
                    <verstretch>0</verstretch>
                   </sizepolicy>
                  </property>
-                 <property name="maximumSize">
-                  <size>
-                   <width>80</width>
-                   <height>16777215</height>
-                  </size>
-                 </property>
                  <property name="toolTip">
                   <string>FOV for circle 3</string>
                  </property>
@@ -876,12 +840,6 @@
                    <horstretch>0</horstretch>
                    <verstretch>0</verstretch>
                   </sizepolicy>
-                 </property>
-                 <property name="maximumSize">
-                  <size>
-                   <width>80</width>
-                   <height>16777215</height>
-                  </size>
                  </property>
                  <property name="toolTip">
                   <string>FOV for circle 4</string>

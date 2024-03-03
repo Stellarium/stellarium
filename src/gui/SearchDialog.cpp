@@ -353,6 +353,7 @@ void SearchDialog::setCoordinateSystem(int csID)
 	ui->AxisXSpinBox->setRadians(0.);
 	ui->AxisYSpinBox->setRadians(0.);
 	conf->setValue("search/coordinate_system", currentCoordinateSystemID);
+	setCenterOfScreenCoordinates();
 }
 
 // Initialize the dialog widgets and connect the signals/slots
@@ -393,6 +394,9 @@ void SearchDialog::createDialogContent()
 	connect(ui->AxisXSpinBox, SIGNAL(valueChanged()), this, SLOT(manualPositionChanged()));
 	connect(ui->AxisYSpinBox, SIGNAL(valueChanged()), this, SLOT(manualPositionChanged()));
 	connect(ui->goPushButton, SIGNAL(clicked(bool)), this, SLOT(manualPositionChanged()));
+	// following the current direction of FOV
+	connect(GETSTELMODULE(StelMovementMgr), &StelMovementMgr::currentDirectionChanged, this, &SearchDialog::setCenterOfScreenCoordinates);
+	setCenterOfScreenCoordinates();
 	
 	connect(ui->alphaPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
 	connect(ui->betaPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
@@ -512,6 +516,7 @@ void SearchDialog::changeTab(int index)
 
 	if (index==2) // Position
 	{
+		setCenterOfScreenCoordinates();
 		if (useFOVCenterMarker)
 			GETSTELMODULE(SpecialMarkersMgr)->setFlagFOVCenterMarker(true);
 	}
@@ -667,6 +672,69 @@ void SearchDialog::setSimpleStyle()
 	ui->coordinateSystemComboBox->setVisible(false);
 }
 
+void SearchDialog::setCenterOfScreenCoordinates()
+{
+	StelCore *core = StelApp::getInstance().getCore();
+	const auto projector = core->getProjection(StelCore::FrameJ2000, StelCore::RefractionMode::RefractionOff);	
+	Vector2<qreal> cpos = projector->getViewportCenter();
+	Vec3d centerPos;
+	projector->unProject(cpos[0], cpos[1], centerPos);
+	double spinLong =0., spinLat = 0.;
+
+	// Getting coordinates (in radians) of position of the center of the screen
+	switch (getCurrentCoordinateSystem())
+	{
+		case equatorialJ2000:
+			StelUtils::rectToSphe(&spinLong, &spinLat, centerPos);
+			break;
+		case equatorial:
+			StelUtils::rectToSphe(&spinLong, &spinLat, core->j2000ToEquinoxEqu(centerPos, StelCore::RefractionOff));
+			break;
+		case galactic:
+			StelUtils::rectToSphe(&spinLong, &spinLat, core->j2000ToGalactic(centerPos));
+			break;
+		case supergalactic:
+			StelUtils::rectToSphe(&spinLong, &spinLat, core->j2000ToSupergalactic(centerPos));
+			break;
+		case horizontal:
+		{
+			StelUtils::rectToSphe(&spinLong, &spinLat, core->j2000ToAltAz(centerPos, StelCore::RefractionAuto));
+			spinLong = 3.*M_PI - spinLong; // N is zero, E is 90 degrees
+			if (StelApp::getInstance().getFlagSouthAzimuthUsage())
+				spinLong+=M_PI;
+			spinLong=StelUtils::fmodpos(spinLong, 2.*M_PI);
+			break;
+		}
+		case eclipticJ2000:
+		{
+			double lambda, beta;
+			StelUtils::rectToSphe(&spinLong, &spinLat, centerPos);
+			StelUtils::equToEcl(spinLong, spinLat, GETSTELMODULE(SolarSystem)->getEarth()->getRotObliquity(2451545.0), &lambda, &beta);
+			if (lambda<0) lambda+=2.0*M_PI;
+			spinLong = lambda;
+			spinLat = beta;
+			break;
+		}
+		case ecliptic:
+		{
+			double lambda, beta;
+			StelUtils::rectToSphe(&spinLong, &spinLat, core->j2000ToEquinoxEqu(centerPos, StelCore::RefractionOff));
+			StelUtils::equToEcl(spinLong, spinLat, GETSTELMODULE(SolarSystem)->getEarth()->getRotObliquity(core->getJDE()), &lambda, &beta);
+			if (lambda<0) lambda+=2.0*M_PI;
+			spinLong = lambda;
+			spinLat = beta;
+			break;
+		}
+	}
+
+	// Block spinbox signals locally, just until end of method.
+	const QSignalBlocker blockX(ui->AxisXSpinBox);
+	const QSignalBlocker blockY(ui->AxisYSpinBox);
+
+	// set coordinates in spinboxes
+	ui->AxisXSpinBox->setRadians(spinLong);
+	ui->AxisYSpinBox->setRadians(spinLat);
+}
 
 void SearchDialog::manualPositionChanged()
 {
@@ -715,8 +783,8 @@ void SearchDialog::manualPositionChanged()
 		{
 			double cx;
 			cx = 3.*M_PI - spinLong; // N is zero, E is 90 degrees
-			if (cx > 2.*M_PI)
-				cx -= 2.*M_PI;
+			if (StelApp::getInstance().getFlagSouthAzimuthUsage())
+				cx -= M_PI;
 			StelUtils::spheToRect(cx, spinLat, pos);
 			pos = core->altAzToJ2000(pos, StelCore::RefractionOff);
 			core->setTimeRate(0.);
