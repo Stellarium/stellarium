@@ -6526,7 +6526,7 @@ void AstroCalcDialog::calculatePhenomena()
 
 	QVector<PlanetP> objects;
 	Q_ASSERT(objects.isEmpty());
-	QList<PlanetP> allObjects = solarSystem->getAllPlanets();
+	QList<PlanetP> allSSObjects = solarSystem->getAllPlanets();
 
 	QVector<NebulaP> dso;
 	Q_ASSERT(dso.isEmpty());
@@ -6546,14 +6546,14 @@ void AstroCalcDialog::calculatePhenomena()
 	switch (obj2Type)
 	{
 		case PHCSolarSystem: // All Solar system objects
-			for (const auto& object : allObjects)
+			for (const auto& object : allSSObjects)
 			{
 				if (object->getPlanetType() != Planet::isUNDEFINED && object->getPlanetType() != Planet::isObserver)
 					objects.append(object);
 			}
 			break;
 		case PHCPlanets: // Planets
-			for (const auto& object : allObjects)
+			for (const auto& object : allSSObjects)
 			{
 				if (object->getPlanetType() == Planet::isPlanet && object->getEnglishName() != core->getCurrentPlanet()->getEnglishName() && object->getEnglishName() != currentPlanet)
 					objects.append(object);
@@ -6581,7 +6581,7 @@ void AstroCalcDialog::calculatePhenomena()
 				{PHCInterstellarObjects,  Planet::isInterstellar}};
 			const Planet::PlanetType pType = map.value(obj2Type, Planet::isUNDEFINED);
 
-			for (const auto& object : allObjects)
+			for (const auto& object : allSSObjects)
 			{
 				if (object->getPlanetType() == pType)
 					objects.append(object);
@@ -6670,7 +6670,7 @@ void AstroCalcDialog::calculatePhenomena()
 			}
 			break;
 		case PHCPlanetsSun: // Planets and Sun
-			for (const auto& object : allObjects)
+			for (const auto& object : allSSObjects)
 			{
 				if ((object->getPlanetType() == Planet::isPlanet || object->getPlanetType() == Planet::isStar) && object->getEnglishName() != core->getCurrentPlanet()->getEnglishName() && object->getEnglishName() != currentPlanet)
 					objects.append(object);
@@ -6679,7 +6679,7 @@ void AstroCalcDialog::calculatePhenomena()
 		case PHCSunPlanetsMoons: // Sun, planets and moons of observer's planet
 		{
 			PlanetP cp = core->getCurrentPlanet();
-			for (const auto& object : allObjects)
+			for (const auto& object : allSSObjects)
 			{
 				if ((object->getPlanetType() == Planet::isPlanet || object->getPlanetType() == Planet::isStar || (object->getParent()==cp && object->getPlanetType()==Planet::isMoon)) && object->getEnglishName() != cp->getEnglishName() && object->getEnglishName() != currentPlanet)
 					objects.append(object);
@@ -6687,14 +6687,14 @@ void AstroCalcDialog::calculatePhenomena()
 			break;
 		}
 		case PHCBrightSolarSystemObjects: // Bright Solar system objects
-			for (const auto& object : allObjects)
+			for (const auto& object : allSSObjects)
 			{
 				if (object->getVMagnitude(core) < (brightLimit + 2.0) && object->getPlanetType() != Planet::isUNDEFINED)
 					objects.append(object);
 			}
 			break;
 		case PHCSolarSystemMinorBodies: // Minor bodies of Solar system
-			for (const auto& object : allObjects)
+			for (const auto& object : allSSObjects)
 			{
 				if (object->getPlanetType() != Planet::isUNDEFINED && object->getPlanetType() != Planet::isPlanet && object->getPlanetType() != Planet::isStar && object->getPlanetType() != Planet::isMoon && object->getPlanetType() != Planet::isComet && object->getPlanetType() != Planet::isArtificial && object->getPlanetType() != Planet::isObserver && !object->getEnglishName().contains("Pluto", Qt::CaseInsensitive))
 					objects.append(object);
@@ -6703,7 +6703,7 @@ void AstroCalcDialog::calculatePhenomena()
 		case PHCMoonsFirstBody: // Moons of first body
 		{
 			PlanetP firstPlanet = solarSystem->searchByEnglishName(currentPlanet);
-			for (const auto& object : allObjects)
+			for (const auto& object : allSSObjects)
 			{
 				if (object->getParent()==firstPlanet && object->getPlanetType() == Planet::isMoon)
 					objects.append(object);
@@ -6714,7 +6714,7 @@ void AstroCalcDialog::calculatePhenomena()
 		{
 			PlanetP firstPlanet = solarSystem->searchByEnglishName(currentPlanet);
 			PlanetP cp = core->getCurrentPlanet();
-			for (const auto& object : allObjects)
+			for (const auto& object : allSSObjects)
 			{
 				if (object->getEnglishName() != cp->getEnglishName() && object->getEnglishName() != currentPlanet)
 				{
