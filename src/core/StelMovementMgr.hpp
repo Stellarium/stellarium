@@ -480,6 +480,7 @@ signals:
 	void flagEnableZoomKeysChanged(bool b);
 	void userMaxFovChanged(double fov);
 	void currentFovChanged(double fov);
+	void currentDirectionChanged();
 
 private slots:
 	//! Called when the selected object changes.

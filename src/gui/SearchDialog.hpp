@@ -250,6 +250,9 @@ private slots:
 	//! Clear recent list's data
 	void recentSearchClearDataClicked();
 
+	//! Setting coordinates of the center of screen in spinboxes (following axes of current coordinate system)
+	void setCenterOfScreenCoordinates();
+
 private:
 	bool simbadSearchEnabled() const {return useSimbad;}
 	int  getSimbadQueryDist () const { return simbadDist;}
