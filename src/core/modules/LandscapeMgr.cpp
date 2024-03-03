@@ -647,10 +647,7 @@ void LandscapeMgr::update(double deltaTime)
 		// If we have no atmosphere, we can assume windows and panels on spaceships etc. are switched on whenever the sun does not shine, i.e. when sun is blocked by landscape.
 		lightscapeBrightness= static_cast<double>(landscape->getOpacity(sunPos));
 	}
-
 	landscape->setBrightness(landscapeBrightness, lightscapeBrightness);
-	if (getFlagLandscapeUseTransparency())
-		landscape->setTransparency(landscapeTransparency);
 
 	messageFader.update(static_cast<int>(deltaTime*1000));
 }
@@ -680,8 +677,13 @@ void LandscapeMgr::draw(StelCore* core)
 	}
 
 	// Draw the landscape
+	landscape->setTransparency( getFlagLandscapeUseTransparency() ? landscapeTransparency : 0.0);
+
 	if (oldLandscape)
+	{
+		oldLandscape->setTransparency( getFlagLandscapeUseTransparency() ? landscapeTransparency : 0.0);
 		oldLandscape->draw(core, flagPolyLineDisplayedOnly);
+	}
 	landscape->draw(core, flagPolyLineDisplayedOnly);
 
 	// Draw the cardinal points
@@ -1261,7 +1263,7 @@ bool LandscapeMgr::getFlagIllumination() const
 void LandscapeMgr::setLandscapeTransparency(const double f)
 {
 	landscapeTransparency = f;
-	emit landscapeDisplayedChanged(f);
+	emit landscapeTransparencyChanged(f);
 }
 
 double LandscapeMgr::getLandscapeTransparency() const
