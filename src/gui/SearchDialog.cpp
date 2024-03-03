@@ -700,8 +700,9 @@ void SearchDialog::setCenterOfScreenCoordinates()
 		{
 			StelUtils::rectToSphe(&spinLong, &spinLat, core->j2000ToAltAz(centerPos, StelCore::RefractionAuto));
 			spinLong = 3.*M_PI - spinLong; // N is zero, E is 90 degrees
-			if (spinLong > M_PI*2)
-				spinLong -= M_PI*2;
+			if (StelApp::getInstance().getFlagSouthAzimuthUsage())
+				spinLong+=M_PI;
+			spinLong=StelUtils::fmodpos(spinLong, 2.*M_PI);
 			break;
 		}
 		case eclipticJ2000:
@@ -726,17 +727,13 @@ void SearchDialog::setCenterOfScreenCoordinates()
 		}
 	}
 
-	// disable following the changes of spinbox
-	const bool axisXState = ui->AxisXSpinBox->blockSignals(true);
-	const bool axisYState = ui->AxisYSpinBox->blockSignals(true);
+	// Block spinbox signals locally, just until end of method.
+	const QSignalBlocker blockX(ui->AxisXSpinBox);
+	const QSignalBlocker blockY(ui->AxisYSpinBox);
 
 	// set coordinates in spinboxes
 	ui->AxisXSpinBox->setRadians(spinLong);
 	ui->AxisYSpinBox->setRadians(spinLat);
-
-	// restore following the changes of spinbox
-	ui->AxisXSpinBox->blockSignals(axisXState);
-	ui->AxisYSpinBox->blockSignals(axisYState);
 }
 
 void SearchDialog::manualPositionChanged()
@@ -786,8 +783,8 @@ void SearchDialog::manualPositionChanged()
 		{
 			double cx;
 			cx = 3.*M_PI - spinLong; // N is zero, E is 90 degrees
-			if (cx > 2.*M_PI)
-				cx -= 2.*M_PI;
+			if (StelApp::getInstance().getFlagSouthAzimuthUsage())
+				cx -= M_PI;
 			StelUtils::spheToRect(cx, spinLat, pos);
 			pos = core->altAzToJ2000(pos, StelCore::RefractionOff);
 			core->setTimeRate(0.);
