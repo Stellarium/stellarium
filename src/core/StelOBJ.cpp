@@ -30,8 +30,6 @@
 #include <QFileInfo>
 #include <QRegularExpression>
 #include <QTextStream>
-#include <charconv>
-#include <system_error>
 
 Q_LOGGING_CATEGORY(stelOBJ,"stel.OBJ")
 
@@ -135,18 +133,9 @@ bool StelOBJ::parseInt(const ParseParams &params, int &out, int paramsStart)
 		qCWarning(stelOBJ)<<"Additional parameters ignored in statement"<<params;
 	}
 
-	const QByteArray qba=params.at(paramsStart).toLocal8Bit();
-	//auto [ p, e ] = std::from_chars(params.at(paramsStart).constData(), params.at(paramsStart).constData() + params.at(paramsStart).size(), out[0]);
-	auto [ p, e ] = std::from_chars(qba.constData(), qba.constData() + params.at(paramsStart).size(), out);
-	if (e==std::errc())
-		return true;
-	qCCritical(stelOBJ)<<"Error parsing Vec3:"<<params;
-	return false;
-
-
-	//bool ok;
-	//out = params.at(paramsStart).toInt(&ok);
-	//return ok;
+	bool ok;
+	out = params.at(paramsStart).toInt(&ok);
+	return ok;
 }
 
 bool StelOBJ::parseString(const ParseParams &params, QString &out, int paramsStart)
@@ -182,20 +171,9 @@ bool StelOBJ::parseFloat(const ParseParams &params, float &out, int paramsStart)
 		qCWarning(stelOBJ)<<"Additional parameters ignored in statement"<<params;
 	}
 
-	const QByteArray qba=params.at(paramsStart).toLocal8Bit();
-	//auto [ p, e ] = std::from_chars(params.at(paramsStart).constData(), params.at(paramsStart).constData() + params.at(paramsStart).size(), out[0]);
-	auto [ p, e ] = std::from_chars(qba.constData(), qba.constData() + params.at(paramsStart).size(), out);
-	if (e==std::errc())
-		return true;
-	qCCritical(stelOBJ)<<"Error parsing Vec3:"<<params;
-	return false;
-
-
-
-
-	//bool ok;
-	//out = params.at(paramsStart).toFloat(&ok);
-	//return ok;
+	bool ok;
+	out = params.at(paramsStart).toFloat(&ok);
+	return ok;
 }
 
 template <typename T>
@@ -207,51 +185,20 @@ bool StelOBJ::parseVec3(const ParseParams& params, T &out, int paramsStart)
 		return false;
 	}
 
-
-	// TODO: Replace Qt's toFloat by C++17's from_chars()
-	// p=ptr, should be params.at(paramsStart).data() + params.at(paramsStart).size() on success
-	// e=error_code, should be errc()
-
-	const QByteArray qba=params.at(paramsStart).toLocal8Bit();
-	//auto [ p, e ] = std::from_chars(params.at(paramsStart).constData(), params.at(paramsStart).constData() + params.at(paramsStart).size(), out[0]);
-	auto [ p, e ] = std::from_chars(qba.constData(), qba.constData() + params.at(paramsStart).size(), out[0]);
-	if (e==std::errc())
+	bool ok = false;
+	out[0] = params.at(paramsStart).toFloat(&ok); //use double here, so that it even works for Vec3d, etc
+	if(ok)
 	{
-		const QByteArray qba=params.at(paramsStart+1).toLocal8Bit();
-		auto [ p, e ] = std::from_chars(qba.constData(), qba.constData() + params.at(paramsStart+1).size(), out[1]);
-
-		if (e==std::errc())
+		out[1] = params.at(paramsStart+1).toFloat(&ok);
+		if(ok)
 		{
-			const QByteArray qba=params.at(paramsStart+2).toLocal8Bit();
-			auto [ p, e ] = std::from_chars(qba.constData(), qba.constData() + params.at(paramsStart+2).size(), out[2]);
-			if (e==std::errc())
-				return true;
+			out[2] = params.at(paramsStart+2).toFloat(&ok);
+			return true;
 		}
 	}
 
-	//if (e == std::errc::invalid_argument)
-	//	    qWarning() << "OBJ: Invalid 3-vector: " << params;
-	//else if (e == std::errc::result_out_of_range)
-	//	    qWarning() << "This number is out of range: " << params.at(paramsStart);
-
 	qCCritical(stelOBJ)<<"Error parsing Vec3:"<<params;
 	return false;
-
-
-	//bool ok = false;
-	//out[0] = params.at(paramsStart).toFloat(&ok); //use double here, so that it even works for Vec3d, etc
-	//if(ok)
-	//{
-	//	out[1] = params.at(paramsStart+1).toFloat(&ok);
-	//	if(ok)
-	//	{
-	//		out[2] = params.at(paramsStart+2).toFloat(&ok);
-	//		return true;
-	//	}
-	//}
-
-	//qCCritical(stelOBJ)<<"Error parsing Vec3:"<<params;
-	//return false;
 }
 
 template <typename T>
@@ -263,31 +210,16 @@ bool StelOBJ::parseVec2(const ParseParams& params,T &out, int paramsStart)
 		return false;
 	}
 
-	const QByteArray qba=params.at(paramsStart).toLocal8Bit();
-	//auto [ p, e ] = std::from_chars(params.at(paramsStart).constData(), params.at(paramsStart).constData() + params.at(paramsStart).size(), out[0]);
-	auto [ p, e ] = std::from_chars(qba.constData(), qba.constData() + params.at(paramsStart).size(), out[0]);
-	if (e==std::errc())
+	bool ok = false;
+	out[0] = params.at(paramsStart).toDouble(&ok);
+	if(ok)
 	{
-		const QByteArray qba=params.at(paramsStart+1).toLocal8Bit();
-		auto [ p, e ] = std::from_chars(qba.constData(), qba.constData() + params.at(paramsStart+1).size(), out[1]);
-
-		if (e==std::errc())
-			return true;
+		out[1] = params.at(paramsStart+1).toDouble(&ok);
+		return true;
 	}
+
 	qCCritical(stelOBJ)<<"Error parsing Vec2:"<<params;
 	return false;
-
-
-	//bool ok = false;
-	//out[0] = params.at(paramsStart).toDouble(&ok);
-	//if(ok)
-	//{
-	//	out[1] = params.at(paramsStart+1).toDouble(&ok);
-	//	return true;
-	//}
-
-	//qCCritical(stelOBJ)<<"Error parsing Vec2:"<<params;
-	//return false;
 }
 
 StelOBJ::Object* StelOBJ::getCurrentObject(CurrentParserState &state)
@@ -522,7 +454,7 @@ StelOBJ::MaterialList StelOBJ::Material::loadFromFile(const QString &filename)
 		QString line = stream.readLine().simplified();
 		//split line by space		
 		#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
-		ParseParams splits = ParseParam(line).split(' ', Qt::SkipEmptyParts).toVector();
+		ParseParams splits = ParseParam(line).split(' ', Qt::SkipEmptyParts);
 		#elif (QT_VERSION>=QT_VERSION_CHECK(5,15,0))
 		ParseParams splits = line.splitRef(' ', Qt::SkipEmptyParts);
 		#else
@@ -837,7 +769,7 @@ bool StelOBJ::load(QIODevice& device, const QString &basePath, const VertexOrder
 
 		//split line by whitespace
 		#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
-		const ParseParams splits = ParseParam(line).split(separator, Qt::SkipEmptyParts).toVector();
+		const ParseParams splits = ParseParam(line).split(separator, Qt::SkipEmptyParts);
 		#elif (QT_VERSION>=QT_VERSION_CHECK(5,15,0))
 		const ParseParams splits = line.splitRef(separator, Qt::SkipEmptyParts);
 		#else
