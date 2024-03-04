@@ -188,9 +188,21 @@ bool StelOBJ::parseFloat(const ParseParams &params, float &out, int paramsStart)
 		qCWarning(stelOBJ)<<"Additional parameters ignored in statement"<<params;
 	}
 
-	bool ok;
-	out = params.at(paramsStart).toFloat(&ok);
-	return ok;
+	const auto& xQStr = params[paramsStart+0];
+	// We'll do the allocationless equivalent of QString::toLocal8Bit(). The buffer will contain
+	// non-terminated Latin1 version of the contents of the input QString.
+	char string[1024]; // There can't be too many chars in a number; if there are, just fail
+
+	if (xQStr.size() - 1 > int(sizeof string))
+	{
+		qCCritical(stelOBJ) << "Error parsing float: too long number found:" << params;
+		return false;
+	}
+
+	for(int n = 0; n < xQStr.size(); ++n)
+		string[n] = xQStr[n].toLatin1();
+	const auto res = std::from_chars(string, string + xQStr.size(), out);
+	return res.ec == std::errc{};
 }
 
 template <typename T>
@@ -202,19 +214,42 @@ bool StelOBJ::parseVec3(const ParseParams& params, T &out, int paramsStart)
 		return false;
 	}
 
-	bool ok = false;
-	out[0] = params.at(paramsStart).toFloat(&ok); //use double here, so that it even works for Vec3d, etc
-	if(ok)
+	const auto& xQStr = params[paramsStart+0];
+	const auto& yQStr = params[paramsStart+1];
+	const auto& zQStr = params[paramsStart+2];
+
+	// We'll do the allocationless equivalent of QString::toLocal8Bit(). The buffer will contain
+	// non-terminated Latin1 version of the contents of each of the component QStrings.
+	char string[1024]; // There can't be too many chars in a number; if there are, just fail
+
+	if (xQStr.size() - 1 > int(sizeof string) ||
+	    yQStr.size() - 1 > int(sizeof string) ||
+	    zQStr.size() - 1 > int(sizeof string))
 	{
-		out[1] = params.at(paramsStart+1).toFloat(&ok);
-		if(ok)
-		{
-			out[2] = params.at(paramsStart+2).toFloat(&ok);
-			return true;
-		}
+		qCCritical(stelOBJ) << "Error parsing Vec3: too long number found:" << params;
+		return false;
 	}
 
-	qCCritical(stelOBJ)<<"Error parsing Vec3:"<<params;
+	for(int n = 0; n < xQStr.size(); ++n)
+		string[n] = xQStr[n].toLatin1();
+	std::from_chars_result res;
+	res = std::from_chars(string, string + xQStr.size(), out[0]);
+	if (res.ec != std::errc{}) goto error;
+
+	for(int n = 0; n < yQStr.size(); ++n)
+		string[n] = yQStr[n].toLatin1();
+	res = std::from_chars(string, string + yQStr.size(), out[1]);
+	if (res.ec != std::errc{}) goto error;
+
+	for(int n = 0; n < zQStr.size(); ++n)
+		string[n] = zQStr[n].toLatin1();
+	res = std::from_chars(string, string + zQStr.size(), out[2]);
+	if (res.ec != std::errc{}) goto error;
+
+	return true;
+
+error:
+	qCCritical(stelOBJ) << "Error parsing Vec3:" << params;
 	return false;
 }
 
@@ -227,15 +262,35 @@ bool StelOBJ::parseVec2(const ParseParams& params,T &out, int paramsStart)
 		return false;
 	}
 
-	bool ok = false;
-	out[0] = params.at(paramsStart).toDouble(&ok);
-	if(ok)
+	const auto& xQStr = params[paramsStart+0];
+	const auto& yQStr = params[paramsStart+1];
+
+	// We'll do the allocationless equivalent of QString::toLocal8Bit(). The buffer will contain
+	// non-terminated Latin1 version of the contents of each of the component QStrings.
+	char string[1024]; // There can't be too many chars in a number; if there are, just fail
+
+	if (xQStr.size() - 1 > int(sizeof string) ||
+	    yQStr.size() - 1 > int(sizeof string))
 	{
-		out[1] = params.at(paramsStart+1).toDouble(&ok);
-		return true;
+		qCCritical(stelOBJ) << "Error parsing Vec2: too long number found:" << params;
+		return false;
 	}
 
-	qCCritical(stelOBJ)<<"Error parsing Vec2:"<<params;
+	for(int n = 0; n < xQStr.size(); ++n)
+		string[n] = xQStr[n].toLatin1();
+	std::from_chars_result res;
+	res = std::from_chars(string, string + xQStr.size(), out[0]);
+	if (res.ec != std::errc{}) goto error;
+
+	for(int n = 0; n < yQStr.size(); ++n)
+		string[n] = yQStr[n].toLatin1();
+	res = std::from_chars(string, string + yQStr.size(), out[1]);
+	if (res.ec != std::errc{}) goto error;
+
+	return true;
+
+error:
+	qCCritical(stelOBJ) << "Error parsing Vec2:" << params;
 	return false;
 }
 
