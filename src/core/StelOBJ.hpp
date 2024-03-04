@@ -340,6 +340,7 @@ private:
 	//! Parse a single bool
 	inline static bool parseBool(const ParseParams& params, bool& out, int paramsStart=1);
 	//! Parse a single int
+	inline static bool parseInt(const QStringView& str, int& out);
 	inline static bool parseInt(const ParseParams& params, int& out, int paramsStart=1);
 	//! Parse a single string
 	inline static bool parseString(const ParseParams &params, QString &out, int paramsStart=1);
