@@ -23,6 +23,8 @@
 //#include "StelTextureMgr.hpp"
 #include "StelUtils.hpp"
 
+#include <charconv>
+
 #include <QBuffer>
 #include <QDir>
 #include <QElapsedTimer>
@@ -120,6 +122,23 @@ bool StelOBJ::parseBool(const ParseParams &params, bool &out, int paramsStart)
 	return true;
 }
 
+bool StelOBJ::parseInt(const QStringView& str, int& out)
+{
+	// We'll do the allocationless equivalent of QString::toLocal8Bit(). The buffer will contain
+	// non-terminated Latin1 version of the contents of the input QString.
+	char buf[64];
+	// There can't be too many chars in a number; if there are, just fail
+	if (str.size() - 1 > int(sizeof buf))
+	{
+		qCCritical(stelOBJ) << "Error parsing int: too long number found:" << str;
+		return false;
+	}
+	for(int n = 0; n < str.size(); ++n)
+		buf[n] = str[n].toLatin1();
+	const auto res = std::from_chars(buf, buf + str.size(), out);
+	return res.ec == std::errc{};
+}
+
 bool StelOBJ::parseInt(const ParseParams &params, int &out, int paramsStart)
 {
 	if(params.size()-paramsStart<1)
@@ -133,9 +152,7 @@ bool StelOBJ::parseInt(const ParseParams &params, int &out, int paramsStart)
 		qCWarning(stelOBJ)<<"Additional parameters ignored in statement"<<params;
 	}
 
-	bool ok;
-	out = params.at(paramsStart).toInt(&ok);
-	return ok;
+	return parseInt(params.at(paramsStart), out);
 }
 
 bool StelOBJ::parseString(const ParseParams &params, QString &out, int paramsStart)
@@ -337,33 +354,33 @@ bool StelOBJ::parseFace(const ParseParams& params, const V3Vec& posList, const V
 			case 0:
 				//no slash, only position
 				CHK_MODE(1)
-				CHK_OK(posIdx = vertStr.toInt(&ok));
+				CHK_OK(ok = parseInt(vertStr, posIdx));
 				FIX_REL(posIdx, posList)
 				break;
 			case 1: //single slash, vert/tex
 				CHK_MODE(2)
-				CHK_OK(posIdx = vertStr.mid(0, slashes[0]).toInt(&ok));
+				CHK_OK(ok = parseInt(vertStr.mid(0, slashes[0]), posIdx));
 				FIX_REL(posIdx, posList)
-				CHK_OK(texIdx = vertStr.mid(slashes[0] + 1, vertStr.size() - (slashes[0] + 1)).toInt(&ok));
+				CHK_OK(ok = parseInt(vertStr.mid(slashes[0] + 1, vertStr.size() - (slashes[0] + 1)), texIdx));
 				FIX_REL(texIdx, texList)
 				break;
 			case 2: //2 slashes, either v/t/n or v//n
 				if(slashes[1]-slashes[0] != 1)
 				{
 					CHK_MODE(3)
-					CHK_OK(posIdx = vertStr.mid(0, slashes[0]).toInt(&ok));
+					CHK_OK(ok = parseInt(vertStr.mid(0, slashes[0]), posIdx));
 					FIX_REL(posIdx, posList)
-					CHK_OK(texIdx = vertStr.mid(slashes[0] + 1, slashes[1] - (slashes[0] + 1)).toInt(&ok));
+					CHK_OK(ok = parseInt(vertStr.mid(slashes[0] + 1, slashes[1] - (slashes[0] + 1)), texIdx));
 					FIX_REL(texIdx, texList)
-					CHK_OK(normIdx = vertStr.mid(slashes[1] + 1, vertStr.size() - (slashes[1] + 1)).toInt(&ok));
+					CHK_OK(ok = parseInt(vertStr.mid(slashes[1] + 1, vertStr.size() - (slashes[1] + 1)), normIdx));
 					FIX_REL(normIdx, normList)
 				}
 				else
 				{
 					CHK_MODE(4)
-					CHK_OK(posIdx = vertStr.mid(0, slashes[0]).toInt(&ok));
+					CHK_OK(ok = parseInt(vertStr.mid(0, slashes[0]), posIdx));
 					FIX_REL(posIdx, posList)
-					CHK_OK(normIdx = vertStr.mid(slashes[1] + 1, vertStr.size() - (slashes[1] + 1)).toInt(&ok));
+					CHK_OK(ok = parseInt(vertStr.mid(slashes[1] + 1, vertStr.size() - (slashes[1] + 1)), normIdx));
 					FIX_REL(normIdx, normList)
 				}
 				break;
