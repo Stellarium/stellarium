@@ -21,6 +21,8 @@
 #ifndef STELOBJ_HPP
 #define STELOBJ_HPP
 
+#include <vector>
+#include <string_view>
 #include "GeomMath.hpp"
 
 #include <qopengl.h>
@@ -299,13 +301,8 @@ public:
 	//! This is intended to be used together with splitVertexData(), when you want your own vertex format.
 	void clearVertexData();
 private:
-#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
-	typedef QStringView ParseParam;
-	typedef QVector<QStringView> ParseParams;
-#else
-	typedef QStringRef ParseParam;
-	typedef QVector<QStringRef> ParseParams;
-#endif
+	typedef std::string_view ParseParam;
+	typedef std::vector<std::string_view> ParseParams;
 	typedef QHash<Vertex, int> VertexCache;
 
 	struct CurrentParserState
@@ -340,7 +337,7 @@ private:
 	//! Parse a single bool
 	inline static bool parseBool(const ParseParams& params, bool& out, int paramsStart=1);
 	//! Parse a single int
-	inline static bool parseInt(const QStringView& str, int& out);
+	inline static bool parseInt(const std::string_view& str, int& out);
 	inline static bool parseInt(const ParseParams& params, int& out, int paramsStart=1);
 	//! Parse a single string
 	inline static bool parseString(const ParseParams &params, QString &out, int paramsStart=1);

@@ -35,6 +35,38 @@
 
 Q_LOGGING_CATEGORY(stelOBJ,"stel.OBJ")
 
+namespace
+{
+// Split line by spaces without allocating memory, including allocation for storing
+// the result (we assume that the output vector has a reasonable amount of space reserved)
+void splitBySpacesWithoutEmptyParts(const QByteArray& line, std::vector<std::string_view>& splits)
+{
+	splits.clear();
+	int startPos = 0;
+	for(int n = 0; n < line.size(); ++n)
+	{
+		if(line[n] != ' ') continue;
+		const int currStartPos = startPos;
+		startPos = n + 1;
+		if(n == currStartPos) continue; // skip empty entry
+		splits.emplace_back(line.data() + currStartPos, n - currStartPos);
+	}
+	// store last entry if it's not empty
+	const int n = line.size();
+	if(n == startPos) return;
+	splits.emplace_back(line.data() + startPos, n - startPos);
+}
+
+QDebug& operator<<(QDebug& dbg, std::vector<std::string_view> const& strings)
+{
+	dbg << "{";
+	for(const auto& str : strings)
+		dbg << QString(QByteArray(str.data(), str.size()));
+	dbg << "}";
+	return dbg;
+}
+}
+
 StelOBJ::StelOBJ()
 	: m_isLoaded(false)
 {
@@ -97,7 +129,7 @@ bool StelOBJ::load(const QString& filename, const VertexOrder vertexOrder, const
 }
 
 //macro to test out different ways of comparison and their performance
-#define CMD_CMP(a) (QLatin1String(a)==cmd)
+#define CMD_CMP(a) (std::string_view(a)==cmd)
 
 //macro to increase a list by size one and return a reference to the last element
 //used instead of append() to avoid memory copies
@@ -122,21 +154,9 @@ bool StelOBJ::parseBool(const ParseParams &params, bool &out, int paramsStart)
 	return true;
 }
 
-bool StelOBJ::parseInt(const QStringView& str, int& out)
+bool StelOBJ::parseInt(const std::string_view& str, int& out)
 {
-	// We'll do the allocationless equivalent of QString::toLocal8Bit(). The buffer will contain
-	// non-terminated Latin1 version of the contents of the input QString.
-	char buf[64];
-	// There can't be too many chars in a number; if there are, just fail
-	if (str.size() - 1 > int(sizeof buf))
-	{
-		qCCritical(stelOBJ) << "Error parsing int: too long number found:" << str;
-		return false;
-	}
-	for(int n = 0; n < str.size(); ++n)
-		buf[n] = str[n].toLatin1();
-	const auto res = std::from_chars(buf, buf + str.size(), out);
-	return res.ec == std::errc{};
+	return std::from_chars(str.data(), str.data() + str.size(), out).ec == std::errc{};
 }
 
 bool StelOBJ::parseInt(const ParseParams &params, int &out, int paramsStart)
@@ -167,7 +187,7 @@ bool StelOBJ::parseString(const ParseParams &params, QString &out, int paramsSta
 		qCWarning(stelOBJ)<<"Additional parameters ignored in statement"<<params;
 	}
 
-	out = params.at(paramsStart).toString();
+	out = QString(QByteArray(params[paramsStart].data(), params[paramsStart].size()));
 	return true;
 }
 
@@ -188,20 +208,8 @@ bool StelOBJ::parseFloat(const ParseParams &params, float &out, int paramsStart)
 		qCWarning(stelOBJ)<<"Additional parameters ignored in statement"<<params;
 	}
 
-	const auto& xQStr = params[paramsStart+0];
-	// We'll do the allocationless equivalent of QString::toLocal8Bit(). The buffer will contain
-	// non-terminated Latin1 version of the contents of the input QString.
-	char string[1024]; // There can't be too many chars in a number; if there are, just fail
-
-	if (xQStr.size() - 1 > int(sizeof string))
-	{
-		qCCritical(stelOBJ) << "Error parsing float: too long number found:" << params;
-		return false;
-	}
-
-	for(int n = 0; n < xQStr.size(); ++n)
-		string[n] = xQStr[n].toLatin1();
-	const auto res = std::from_chars(string, string + xQStr.size(), out);
+	const auto& str = params[paramsStart];
+	const auto res = std::from_chars(str.data(), str.data() + str.size(), out);
 	return res.ec == std::errc{};
 }
 
@@ -214,36 +222,18 @@ bool StelOBJ::parseVec3(const ParseParams& params, T &out, int paramsStart)
 		return false;
 	}
 
-	const auto& xQStr = params[paramsStart+0];
-	const auto& yQStr = params[paramsStart+1];
-	const auto& zQStr = params[paramsStart+2];
+	const auto& xStr = params[paramsStart+0];
+	const auto& yStr = params[paramsStart+1];
+	const auto& zStr = params[paramsStart+2];
 
-	// We'll do the allocationless equivalent of QString::toLocal8Bit(). The buffer will contain
-	// non-terminated Latin1 version of the contents of each of the component QStrings.
-	char string[1024]; // There can't be too many chars in a number; if there are, just fail
-
-	if (xQStr.size() - 1 > int(sizeof string) ||
-	    yQStr.size() - 1 > int(sizeof string) ||
-	    zQStr.size() - 1 > int(sizeof string))
-	{
-		qCCritical(stelOBJ) << "Error parsing Vec3: too long number found:" << params;
-		return false;
-	}
-
-	for(int n = 0; n < xQStr.size(); ++n)
-		string[n] = xQStr[n].toLatin1();
 	std::from_chars_result res;
-	res = std::from_chars(string, string + xQStr.size(), out[0]);
+	res = std::from_chars(xStr.data(), xStr.data() + xStr.size(), out[0]);
 	if (res.ec != std::errc{}) goto error;
 
-	for(int n = 0; n < yQStr.size(); ++n)
-		string[n] = yQStr[n].toLatin1();
-	res = std::from_chars(string, string + yQStr.size(), out[1]);
+	res = std::from_chars(yStr.data(), yStr.data() + yStr.size(), out[1]);
 	if (res.ec != std::errc{}) goto error;
 
-	for(int n = 0; n < zQStr.size(); ++n)
-		string[n] = zQStr[n].toLatin1();
-	res = std::from_chars(string, string + zQStr.size(), out[2]);
+	res = std::from_chars(zStr.data(), zStr.data() + zStr.size(), out[2]);
 	if (res.ec != std::errc{}) goto error;
 
 	return true;
@@ -262,29 +252,14 @@ bool StelOBJ::parseVec2(const ParseParams& params,T &out, int paramsStart)
 		return false;
 	}
 
-	const auto& xQStr = params[paramsStart+0];
-	const auto& yQStr = params[paramsStart+1];
+	const auto& xStr = params[paramsStart+0];
+	const auto& yStr = params[paramsStart+1];
 
-	// We'll do the allocationless equivalent of QString::toLocal8Bit(). The buffer will contain
-	// non-terminated Latin1 version of the contents of each of the component QStrings.
-	char string[1024]; // There can't be too many chars in a number; if there are, just fail
-
-	if (xQStr.size() - 1 > int(sizeof string) ||
-	    yQStr.size() - 1 > int(sizeof string))
-	{
-		qCCritical(stelOBJ) << "Error parsing Vec2: too long number found:" << params;
-		return false;
-	}
-
-	for(int n = 0; n < xQStr.size(); ++n)
-		string[n] = xQStr[n].toLatin1();
 	std::from_chars_result res;
-	res = std::from_chars(string, string + xQStr.size(), out[0]);
+	res = std::from_chars(xStr.data(), xStr.data() + xStr.size(), out[0]);
 	if (res.ec != std::errc{}) goto error;
 
-	for(int n = 0; n < yQStr.size(); ++n)
-		string[n] = yQStr[n].toLatin1();
-	res = std::from_chars(string, string + yQStr.size(), out[1]);
+	res = std::from_chars(yStr.data(), yStr.data() + yStr.size(), out[1]);
 	if (res.ec != std::errc{}) goto error;
 
 	return true;
@@ -388,11 +363,11 @@ bool StelOBJ::parseFace(const ParseParams& params, const V3Vec& posList, const V
 
 	// Find all slashes without allocating memory, including allocation for storing
 	// the result (we assume that the output vector has a reasonable amount of space reserved)
-	const auto findSlashes = [](const QStringView& line, std::vector<int>& slashes)
+	const auto findSlashes = [](const std::string_view& line, std::vector<int>& slashes)
 	{
 		slashes.clear();
-		for(int n = 0; n < line.size(); ++n)
-			if(line[n] == QLatin1Char('/'))
+		for(unsigned n = 0; n < line.size(); ++n)
+			if(line[n] == '/')
 				slashes.push_back(n);
 	};
 
@@ -414,28 +389,28 @@ bool StelOBJ::parseFace(const ParseParams& params, const V3Vec& posList, const V
 				break;
 			case 1: //single slash, vert/tex
 				CHK_MODE(2)
-				CHK_OK(ok = parseInt(vertStr.mid(0, slashes[0]), posIdx));
+				CHK_OK(ok = parseInt(vertStr.substr(0, slashes[0]), posIdx));
 				FIX_REL(posIdx, posList)
-				CHK_OK(ok = parseInt(vertStr.mid(slashes[0] + 1, vertStr.size() - (slashes[0] + 1)), texIdx));
+				CHK_OK(ok = parseInt(vertStr.substr(slashes[0] + 1, vertStr.size() - (slashes[0] + 1)), texIdx));
 				FIX_REL(texIdx, texList)
 				break;
 			case 2: //2 slashes, either v/t/n or v//n
 				if(slashes[1]-slashes[0] != 1)
 				{
 					CHK_MODE(3)
-					CHK_OK(ok = parseInt(vertStr.mid(0, slashes[0]), posIdx));
+					CHK_OK(ok = parseInt(vertStr.substr(0, slashes[0]), posIdx));
 					FIX_REL(posIdx, posList)
-					CHK_OK(ok = parseInt(vertStr.mid(slashes[0] + 1, slashes[1] - (slashes[0] + 1)), texIdx));
+					CHK_OK(ok = parseInt(vertStr.substr(slashes[0] + 1, slashes[1] - (slashes[0] + 1)), texIdx));
 					FIX_REL(texIdx, texList)
-					CHK_OK(ok = parseInt(vertStr.mid(slashes[1] + 1, vertStr.size() - (slashes[1] + 1)), normIdx));
+					CHK_OK(ok = parseInt(vertStr.substr(slashes[1] + 1, vertStr.size() - (slashes[1] + 1)), normIdx));
 					FIX_REL(normIdx, normList)
 				}
 				else
 				{
 					CHK_MODE(4)
-					CHK_OK(ok = parseInt(vertStr.mid(0, slashes[0]), posIdx));
+					CHK_OK(ok = parseInt(vertStr.substr(0, slashes[0]), posIdx));
 					FIX_REL(posIdx, posList)
-					CHK_OK(ok = parseInt(vertStr.mid(slashes[1] + 1, vertStr.size() - (slashes[1] + 1)), normIdx));
+					CHK_OK(ok = parseInt(vertStr.substr(slashes[1] + 1, vertStr.size() - (slashes[1] + 1)), normIdx));
 					FIX_REL(normIdx, normList)
 				}
 				break;
@@ -511,30 +486,25 @@ StelOBJ::MaterialList StelOBJ::Material::loadFromFile(const QString &filename)
 		return list;
 	}
 
-	QTextStream stream(&file);
 	Material* curMaterial = Q_NULLPTR;
 	int lineNr = 0;
 	// some exporters give d and Tr, and some give contradicting interpretations. Track a warning with these.
 	bool dHasBeenGiven = false;
 	bool trHasBeenGiven = false;
 
-	while(!stream.atEnd())
+	ParseParams splits;
+	while(!file.atEnd())
 	{
 		++lineNr;
 		bool ok = true;
 		//make sure only spaces are the separator
-		QString line = stream.readLine().simplified();
-		//split line by space		
-		#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
-		ParseParams splits = ParseParam(line).split(' ', Qt::SkipEmptyParts);
-		#elif (QT_VERSION>=QT_VERSION_CHECK(5,15,0))
-		ParseParams splits = line.splitRef(' ', Qt::SkipEmptyParts);
-		#else
-		ParseParams splits = line.splitRef(' ', QString::SkipEmptyParts);
-		#endif
-		if(!splits.isEmpty())
+		const QByteArray line = file.readLine().simplified();
+
+		splitBySpacesWithoutEmptyParts(line, splits);
+
+		if(!splits.empty())
 		{
-			const ParseParam& cmd = splits.at(0);
+			const ParseParam& cmd = splits[0];
 
 			//macro to make sure a material is currently active
 			#define CHECK_MTL() if(!curMaterial) { ok = false; qCCritical(stelOBJ)<<"Encountered material statement without active material"; }
@@ -711,7 +681,7 @@ StelOBJ::MaterialList StelOBJ::Material::loadFromFile(const QString &filename)
 					curMaterial->illum = static_cast<Illum>(tmp);
 				}
 			}
-			else if(!cmd.startsWith(QChar('#')))
+			else if(!cmd.empty() && cmd[0] !='#')
 			{
 				CHECK_MTL()
 				if(ok)
@@ -719,12 +689,12 @@ StelOBJ::MaterialList StelOBJ::Material::loadFromFile(const QString &filename)
 					//unknown command, add to additional params
 					//we need to convert to actual string instances to store them
 					QStringList list;
-					for(int i = 1; i<splits.size();++i)
+					for(unsigned i = 1; i<splits.size();++i)
 					{
-						list.append(splits.at(i).toString());
+						list.append(QString(QByteArray(splits[i].data(), splits[i].size())));
 					}
 
-					curMaterial->additionalParams.insert(cmd.toString(),list);
+					curMaterial->additionalParams.insert(QString(QByteArray(cmd.data(), cmd.size())), list);
 					//qCWarning(stelOBJ)<<"Unknown MTL statement:"<<line;
 				}
 			}
@@ -746,11 +716,7 @@ bool StelOBJ::Material::parseBool(const QStringList &params, bool &out)
 	ParseParams pp(params.size());
 	for(int i = 0; i< params.size();++i)
 	{
-#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
-		pp[i] = params.at(i);
-#else
-		pp[i] = QStringRef(&params.at(i));
-#endif
+		pp[i] = params[i].toStdString();
 	}
 	return StelOBJ::parseBool(pp,out,0);
 }
@@ -760,11 +726,7 @@ bool StelOBJ::Material::parseFloat(const QStringList &params, float &out)
 	ParseParams pp(params.size());
 	for(int i = 0; i< params.size();++i)
 	{
-#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
-		pp[i] = params.at(i);
-#else
-		pp[i] = ParseParam(&params.at(i));
-#endif
+		pp[i] = params[i].toStdString();
 	}
 	return StelOBJ::parseFloat(pp,out,0);
 }
@@ -774,11 +736,7 @@ bool StelOBJ::Material::parseVec2d(const QStringList &params, Vec2d &out)
 	ParseParams pp(params.size());
 	for(int i = 0; i< params.size();++i)
 	{
-#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
-		pp[i] = params.at(i);
-#else
-		pp[i] = ParseParam(&params.at(i));
-#endif
+		pp[i] = params[i].toStdString();
 	}
 	return StelOBJ::parseVec2(pp,out,0);
 }
@@ -813,7 +771,6 @@ bool StelOBJ::load(QIODevice& device, const QString &basePath, const VertexOrder
 
 	QElapsedTimer timer;
 	timer.start();
-	QTextStream stream(&device);
 
 	bool smoothGroupWarned = false;
 	bool vertexWWarned = false;
@@ -828,28 +785,21 @@ bool StelOBJ::load(QIODevice& device, const QString &basePath, const VertexOrder
 
 	VertexCache vertCache;
 	CurrentParserState state = CurrentParserState();
-	static const QChar separator(' ');
 
 	int lineNr=0;
 
+	ParseParams splits;
 	//read file line by line
-	while(!stream.atEnd())
+	while(!device.atEnd())
 	{
 		++lineNr;
 		//ignore front/back whitespace
-		QString line = stream.readLine().trimmed();
+		const QByteArray line = device.readLine().trimmed();
+		splitBySpacesWithoutEmptyParts(line, splits);
 
-		//split line by whitespace
-		#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
-		ParseParams splits = ParseParam(line).split(separator, Qt::SkipEmptyParts);
-		#elif (QT_VERSION>=QT_VERSION_CHECK(5,15,0))
-		ParseParams splits = line.splitRef(separator, Qt::SkipEmptyParts);
-		#else
-		ParseParams splits = line.splitRef(separator, QString::SkipEmptyParts);
-		#endif
-		if(!splits.isEmpty())
+		if(!splits.empty())
 		{
-			const ParseParam& cmd = splits.at(0);
+			const ParseParam& cmd = splits[0];
 
 			bool ok = true;
 
@@ -1022,7 +972,7 @@ bool StelOBJ::load(QIODevice& device, const QString &basePath, const VertexOrder
 					smoothGroupWarned = true;
 				}
 			}
-			else if(!cmd.startsWith('#'))
+			else if(!cmd.empty() && cmd[0] !='#')
 			{
 				//unknown command, warn
 				qCWarning(stelOBJ)<<"Unknown OBJ statement:"<<line;
