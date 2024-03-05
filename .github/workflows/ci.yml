@@ -88,7 +88,7 @@ jobs:
   # CI on macOS (Qt5)
   ci-macos-qt5:
     name: "macOS (x86_64; qt5)"
-    runs-on: macos-13
+    runs-on: macos-14-large
     if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.actor, 'transifex') && contains(github.event.head_commit.message, '[qt5]')"
 
     # @TODO Enable gpsd on macOS instance for CI testing
@@ -125,7 +125,7 @@ jobs:
   # CI on macOS (Qt6)
   ci-macos-qt6:
     name: "macOS (x86_64; qt6)"
-    runs-on: macos-13
+    runs-on: macos-14-large
     if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.actor, 'transifex')"
 
     # @TODO Enable gpsd on macOS instance for CI testing
