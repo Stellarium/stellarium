@@ -23,7 +23,15 @@
 //#include "StelTextureMgr.hpp"
 #include "StelUtils.hpp"
 
-#include <charconv>
+#if USE_FAST_FLOAT
+# include <fast_float/fast_float.h>
+using fast_float::from_chars;
+using fast_float::from_chars_result;
+#else
+# include <charconv>
+using std::from_chars;
+using std::from_chars_result;
+#endif
 
 #include <QBuffer>
 #include <QDir>
@@ -156,7 +164,7 @@ bool StelOBJ::parseBool(const ParseParams &params, bool &out, int paramsStart)
 
 bool StelOBJ::parseInt(const std::string_view& str, int& out)
 {
-	return std::from_chars(str.data(), str.data() + str.size(), out).ec == std::errc{};
+	return from_chars(str.data(), str.data() + str.size(), out).ec == std::errc{};
 }
 
 bool StelOBJ::parseInt(const ParseParams &params, int &out, int paramsStart)
@@ -209,7 +217,7 @@ bool StelOBJ::parseFloat(const ParseParams &params, float &out, int paramsStart)
 	}
 
 	const auto& str = params[paramsStart];
-	const auto res = std::from_chars(str.data(), str.data() + str.size(), out);
+	const auto res = from_chars(str.data(), str.data() + str.size(), out);
 	return res.ec == std::errc{};
 }
 
@@ -226,14 +234,14 @@ bool StelOBJ::parseVec3(const ParseParams& params, T &out, int paramsStart)
 	const auto& yStr = params[paramsStart+1];
 	const auto& zStr = params[paramsStart+2];
 
-	std::from_chars_result res;
-	res = std::from_chars(xStr.data(), xStr.data() + xStr.size(), out[0]);
+	from_chars_result res;
+	res = from_chars(xStr.data(), xStr.data() + xStr.size(), out[0]);
 	if (res.ec != std::errc{}) goto error;
 
-	res = std::from_chars(yStr.data(), yStr.data() + yStr.size(), out[1]);
+	res = from_chars(yStr.data(), yStr.data() + yStr.size(), out[1]);
 	if (res.ec != std::errc{}) goto error;
 
-	res = std::from_chars(zStr.data(), zStr.data() + zStr.size(), out[2]);
+	res = from_chars(zStr.data(), zStr.data() + zStr.size(), out[2]);
 	if (res.ec != std::errc{}) goto error;
 
 	return true;
@@ -255,11 +263,11 @@ bool StelOBJ::parseVec2(const ParseParams& params,T &out, int paramsStart)
 	const auto& xStr = params[paramsStart+0];
 	const auto& yStr = params[paramsStart+1];
 
-	std::from_chars_result res;
-	res = std::from_chars(xStr.data(), xStr.data() + xStr.size(), out[0]);
+	from_chars_result res;
+	res = from_chars(xStr.data(), xStr.data() + xStr.size(), out[0]);
 	if (res.ec != std::errc{}) goto error;
 
-	res = std::from_chars(yStr.data(), yStr.data() + yStr.size(), out[1]);
+	res = from_chars(yStr.data(), yStr.data() + yStr.size(), out[1]);
 	if (res.ec != std::errc{}) goto error;
 
 	return true;

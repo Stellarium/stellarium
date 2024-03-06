@@ -1,0 +1,7 @@
+message(STATUS "Checking that std::from_chars for floats is supported by the C++ library")
+try_compile(FROM_CHARS_WORKS "${CMAKE_BINARY_DIR}" "${CMAKE_CURRENT_LIST_DIR}/check-from_chars.cpp")
+if(FROM_CHARS_WORKS)
+	message(STATUS "Checking that std::from_chars for floats is supported by the C++ library - yes")
+else()
+	message(STATUS "Checking that std::from_chars for floats is supported by the C++ library - NO")
+endif()
