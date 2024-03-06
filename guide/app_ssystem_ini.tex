@@ -53,7 +53,7 @@ Example:
 name=Jupiter
 type=planet
 coord_func=jupiter_special
-orbit_visualization_period=4331.87
+orbit_Period=4331.87
 
 atmosphere=1
 albedo=0.51
@@ -87,7 +87,7 @@ where
 \item[type] Mandatory for planets: \value{planet}
 \item[parent]=Sun. The body which this object is running around. Default: \texttt{Sun}
 \item[coord\_func] The planet positions are all computed with a dedicated function (VSOP87 or DE43x). 
-\item[orbit\_visualization\_period] number of (earth) days for how
+\item[orbit\_Period] number of (earth) days for how
   long the orbit should be made visible. Typically Stellarium shows
   one orbit line. The orbit slowly drifts, however.
 
@@ -191,7 +191,6 @@ orbit_LongOfPericenter=245.4222355150120000
 orbit_MeanLongitude=224.7924893552550000
 orbit_Period=0.5016370462116355
 orbit_SemiMajorAxis=181994.8658358799
-# orbit_visualization_period=0.5016370462116355
 
 absolute_magnitude=7.4
 albedo=0.09
@@ -230,8 +229,6 @@ where
   \item[orbit\_MeanLongitude]
   \item[orbit\_Period] [days]
   \item[orbit\_SemiMajorAxis] $a$ [km]
-  \item[orbit\_visualization\_period] [days] Defaults to \texttt{orbit\_Period} to show orbit as closed line. 
-       This is in fact only useful in case of special functions for positioning where \texttt{orbit\_Period} is not given.
 
   \item[radius] Equator radius, km.
   \item[oblateness] Flattening of the polar
@@ -273,49 +270,38 @@ requires a special kind of location.
 \label{sec:ssystem.ini:SolarSystemObserver}
 
 The Solar System Observer has
-been provided as a neutral view location high above the North pole of
-the Solar System. It has been configured like this:
+been provided in earlier versions as a neutral view location high above the North pole of
+the Solar System. Meanwhile \newFeature{0.19.2} the location can be changed by keyboard interaction. See section \ref{sec:gui:location:observers}.
 \begin{configfile}
 [solar_system_observer]
 name=Solar System Observer
 parent=Sun
 halo=false
 hidden=true
-coord_func=ell_orbit
-orbit_Inclination=90
-orbit_MeanLongitude=90
-orbit_Period=70000000000
-orbit_SemiMajorAxis=70000000000
-rot_obliquity=90
+orbit_SemiMajorAxis=30
 type=observer
 \end{configfile}
-Note the inclination and mean longitude of 90 degrees, and that it is \texttt{hidden} and has no \texttt{halo}. 
+Note that it is \texttt{hidden} and has no \texttt{halo}. 
+The observer is attached to the Sun, therefore distance \texttt{orbit\_semiMajorAxis} is given in AU.
 
 \paragraph{Planet Observers}
 \label{sec:ssystem.ini:PlanetObserver}
 
 There are other ``observer'' locations for all planets \newFeature{0.19.2} which have moons: Earth, Mars, Jupiter, Saturn, Uranus, and Neptune.
-They have all been provided as neutral view locations above the Northern hemisphere of
-the respective planet. For example:
+For example:
 \begin{configfile}
 [earth_observer]
 name=Earth Observer
 parent=Earth
 halo=false
 hidden=true
-coord_func=ell_orbit
-orbit_Inclination=90
-orbit_MeanLongitude=90
-orbit_Period=100000000000
 orbit_SemiMajorAxis=149600000
-rot_obliquity=90
 type=observer
 \end{configfile}
 
-The distance \texttt{orbit\_semiMajorAxis} has been configured with a
-distance that resembles the semimajor axis of the respective planet:
-when you want to compare the views from Earth and from the observer,
-light time correction should be at least approximately equal.
+The distance \texttt{orbit\_semiMajorAxis} has been preconfigured \newFeature{23.1} with a
+distance that gives a good view of the planet with its moons. 
+Like for moons, the units are \km\ from the planet. 
 
 \subsection{File ssystem\_minor.ini}
 \label{sec:ssystem.ini:minor}
@@ -363,7 +349,6 @@ Stellarium.
 \item[orbit\_Eccentricity] $e=0$ circular, $0<e<1$ elliptic, $e=1$ parabolic, $e>1$ hyperbolic
 \item[orbit\_Inclination] $i$ [degrees] inclination against J2000 ecliptic
 \item[orbit\_SemiMajorAxis] $a$ [AU]
-\item[orbit\_visualization\_period] [days] %TODO does that default to sth meaningful? Do we need it at all?
 \end{description}
 The other parameters are like those for the major planets. 
 
@@ -387,7 +372,7 @@ orbit_AscendingNode=103.85141
 orbit_Eccentricity=0.0887401
 orbit_Inclination=7.14043
 orbit_SemiMajorAxis=2.3617933
-orbit_visualization_period=1325.46
+orbit_good=1325.46
 
 color=1., 1., 1.
 halo=true
@@ -443,7 +428,47 @@ major planets cause fast changes in their orbital elements, so that
 each apparition should be specified with a dedicated section in
 \file{ssystem\_minor.ini}.
 
-Most elements are similar to minor planets. But note the specification of
+\paragraph{Naming schemes}
+Over just the past decades, the naming of comets has changed considerably. 
+Starting in the 19th century, comets are usually named after their discoverer(s). 
+In addition, they are given a catalog number. 
+Traditionally, comets observations published by scientific organisations were sorted and labelled with Roman numerals after date of perihelion. 
+When scientific communication became faster, comet discoveries were circulated by telegraphs, and a preliminary immediate labelling by sequence of discovery was used. 
+After the year was over, the comet received again the Roman number indicating the position in the sequence of perihelon dates in that year. 
+
+In 1994, a new scheme has been introduced\footnote{\url{https://minorplanetcenter.net/iau/lists/CometResolution.html}}: 
+When a comets is discovered, the discovery date governs a unique label: 
+The 12 months of the year are split into half-months, for which 24 of the 26 letters of the alphabet are used (I and Z are omitted). 
+After the letter, discoveries are enumerated in sequence. 
+A letter before this number indicates what kind of comet the element set describes: \textbf{C} indicates a regular comet, 
+\textbf{P} a periodic (recurring) comet, \textbf{D} is defunct (lost). \textbf{X} is one for which no reliable orbital elements can be given. 
+\textbf{I} labels an interstellar object (an object on an orbit, or more accurately, a hyperbolic trajectory which only swings around the Sun one time).
+After a return, periodic comets receive a serial number before the P.
+
+This new scheme is also applied for old comets. However, for the sake of compatibility with older literature, 
+Stellarium can use several optional entries in addition to the name:\newFeature{23.2}
+\begin{description}
+\item[name] 1P/Halley (First periodic comet, named after \name[Edmund]{Halley}, the astronomer who identified its recurrent nature)
+\item[iau\_designation] 1982 U1 (First comet discovered in 2nd half of October 1982)
+\item[discovery\_code] 1982i (9th comet discovered in 1982)
+\item[perihelion\_code] 1986 III (Third comet to go through perihelion in 1986)
+\end{description}
+
+There is unfortunately divergent information about use of the new IAU discovery code for periodical comets like 1P/Halley. 
+Some lists provide such codes for previous observations, while others use the modern code for Halley's own observation (P/1682 Q1) for every apparition, 
+in which case identification of the proper apparition from just the name becomes impossible. 
+IAU simply uses a periodic number with P and optional name (for comet Halley, ``1P/Halley''. Almost all periodic comets have names) to identify such a recurring object. 
+While this can be used for predicted future passages through the inner Solar system, 
+there cannot be a modern ``discovery code'' based label when the comet was at least in theory followed through aphelion.
+But also this format, using only periodic number, prevents disambiguation between apparitions. 
+To make life simpler for us, we prefer to use a name entry like ``1P/Halley (1986)'' with year of perihel passage in brackets. 
+A numbered comet may come without a discoverer name. In this case it is just shown with perihel year like ``396P (2019)''.
+The ini file should include a periodic number in front of the P in the name, however some data files are incomplete. 
+Unnumbered comets follow the new IAU code, e.g., ``C/1996 B2 (Hyakutake)''. 
+You can also provided separate \texttt{name} and \texttt{iau\_designation} entries, in which case they will be combined. 
+
+
+Most other elements are similar to minor planets. But note the specification of
 \begin{description}
 \item[orbit\_PericenterDistance] $q$ [AU]
 \item[orbit\_TimeAtPericenter] $T$  JDE of closest approach to the Sun
@@ -474,10 +499,18 @@ comets. From the literature \citep{AstronomicalAlgorithms:1998} (equation 33.13)
 \end{equation}
 from which $\kappa=2\cdot\mathtt{slope\_parameter}$. In any case, $\kappa$ is typically [5\ldots15] and specific for each comet.
 
+You can finetune the appearance of the comet, both when zooming in all the way to the core, or how the tails are represented. 
 \begin{description}
-\item[albedo] is used to set the brightness for rendering the body,
-if you are close enough. 
+\item[albedo] (default: 0.075) is used to set the brightness for rendering the body, if you are close enough. 
+\item[model] Some comets have been visited by spacecraft so that shape models of their cores 
+	may be available and can be configured with this entry.\newFeature{0.16.0}
+\item[outgas\_intensity] (default:0.1) Intensity of a pseudo-outgas effect on the core, based on an inverse exponential Lambert shading, with the light at the viewing position.
+\item[outgas\_falloff] (default:0.1)  Exponent for falloff of outgas effect, should probably stay $< 1$.
+\item[dust\_brightnessfactor] (default: 1.5) brightness of dust tail relative to the gas tail.
+\item[dust\_lengthfactor] (default: 0.4) length of dust tail relative to the gas tail.
+\item[dust\_widthfactor] (default: 1.5) width of dust tail relative to the gas tail.
 \end{description}
+Some historical depictions show huge comets. If painted correctly, you can try to recreate such paintings.
 
 A large number of elements for historical comets is provided in the
 file \file{ssystem\_1000comets.ini} in the installation directory. You
@@ -496,9 +529,10 @@ orbital elements for different epochs of one apparition.
 [1phalley]
 type=comet  
 name=1P/Halley
+iau_designation=1982 U1
+discovery_code=1982i
+perihelion_code=1986 III
 
-coord_func=comet_orbit [can be omitted]
-parent=Sun [can be omitted]
 orbit_ArgOfPericenter=111.7154
 orbit_AscendingNode=58.8583
 orbit_Eccentricity=0.968004
@@ -516,19 +550,15 @@ albedo=0.1
 radius=5
 absolute_magnitude=5.5
 slope_parameter=3.2
-tex_map=nomap.png
 model=1682q1halley_MLfix.obj [optional]
 \end{configfile}
 
-You may want to e.g.\ change the name in this entry to
-\texttt{name=1P/Halley (1982i)}. Note a rather short duration of
+Note a rather short duration of
 \texttt{orbit\_good}, which means the comet is only displayed 780 days
 before and after perihelion. (Actually, before and after
 \texttt{orbit\_Epoch}, but this is not given explicitly, so it
 defaults to \texttt{orbit\_TimeAtPericenter}.)
 
-Some comets have been visited by spacecraft so that shape models of their cores 
-may be available and can be configured with a \texttt{model} entry.\newFeature{0.16.0}
 
 \paragraph{Parabolic/Hyperbolic Comet}
 \label{sec:ssystem.ini:Comet:Parabolic}
@@ -536,10 +566,9 @@ may be available and can be configured with a \texttt{model} entry.\newFeature{0
 \begin{configfile}
 [c2013us10%28catalina%29]
 type=comet
-name=C/2013 US10 (Catalina)
+name=Catalina
+iau_designation=C/2013 US10
 
-coord_func=comet_orbit [can be omitted]
-parent=Sun [can be omitted]
 orbit_ArgOfPericenter=340.3533
 orbit_AscendingNode=186.141
 orbit_Eccentricity=1.000372
@@ -548,16 +577,10 @@ orbit_PericenterDistance=0.822958
 orbit_TimeAtPericenter=2457342.20748843
 orbit_good=1000
 
-color=1.0, 1.0, 1.0
-dust_brightnessfactor=1.5
-dust_lengthfactor=0.4
-dust_widthfactor=1.5
+...
 
-albedo=0.1
-radius=5
 absolute_magnitude=4.4
 slope_parameter=4
-tex_map=nomap.png
 \end{configfile}
 
 This has basically the same format. Note that eccentricity is larger than 1,
@@ -566,6 +589,125 @@ orbit. Stellarium shows data for this comet for almost 3 years
 (\texttt{orbit\_good=1000} days) from the epoch (defaults to pericenter time).
 
 
+\subsection{JPL Horizons}
+\label{sec:ssystem.ini:JPLHorizons}
+
+
+The \indexterm{JPL Horizons}\footnote{\url{https://ssd.jpl.nasa.gov/horizons/}} on-line solar system data and ephemeris computation service provides access to key solar system data and 
+flexible production of highly accurate ephemerides for solar system objects (Late 2023: 1,334,683 asteroids, 3,904 comets, 290 planetary satellites {includes satellites of Earth and dwarf planet Pluto}, 
+8 planets, the Sun, L1, L2, select spacecraft, and system barycenters). Horizons is provided by the Solar System Dynamics Group of the Jet Propulsion Laboratory.
+
+\subsubsection{How to manually look up a body}
+
+A comet discovered in early 2023, C/2023 A3 (Tsuchinshan-ATLAS), may become bright in October 2024. 
+Let's find out its orbital elements for the most interesting time! 
+
+We use the Horizons web interface to look up the body we are interested in and find its orbital elements. 
+The Horizons web interface will display something like this:\vspace{\baselineskip}
+
+\fbox{\begin{tabular}{rcl}
+  1&               & Ephemeris Type: \button{Osculating Orbital Elements}\\
+  2& \button{Edit} & Target Body: C/2023 A3 (Tsuchinshan-ATLAS)\\
+  3& \button{Edit} & Coordinate Center: Sun (body center) [500@10]\\
+  4& \button{Edit} & Time Specification: Start=2024-07-03 TDB, Stop=2024-12-02, Step=5 (days)\\
+  5& \button{Edit} & Table Settings: \emph{custom}\\
+  \multicolumn{3}{l}{\button{Generate Ephemeris}}
+\end{tabular}}\vspace{\baselineskip}
+
+\begin{enumerate}
+\item Ephemeris Type \emph{must} be set to \button{Osculating Orbital Elements}.
+\item Target Body is the body you want to add to Stellarium. Click \button{Edit} to look it up.
+\item Center should be set to  Sun for all heliocentric trajectories.
+\item Time Specification: Use a short interval or discrete dates near the time you are most interested. The returned JDE date (Julian Day number) will be used as epoch in Stellarium.
+\item Table Settings: We must \button{Edit} and select Output units: \button{au and days} to create data compatible with the appropriate fields in \file{ssystem\_minor.ini}
+\end{enumerate}
+
+\noindent The result begins with listing osculating elements for a certain epoch in the past and its own initial conditions and settings. 
+Horizons then applies numerical integration and simulates the movement and gravitational interaction between all its solar system objects, including our comet. 
+Then, for each requested time, orbital elements are listed. Here you could see the slight changes these elements undergo over weeks. 
+However, in Stellarium, we can only use one particular element set and show the comet's movement under the assumption that these elements do not change. 
+When we have read it will be brightest in October, let's take this section. The first number is the date (JDE) where these elements are valid, 
+i.\,e., the element epoch.
+
+\begin{configfile}[\scriptsize]
+2460584.500000000 = A.D. 2024-Oct-01 00:00:00.0000 TDB 
+ EC= 1.000086779013436E+00 QR= 3.914011809348247E-01 IN= 1.391089312570287E+02
+ OM= 2.156049287759364E+01 W = 3.084955943429219E+02 Tp=  2460581.248532149941
+ N = 3.253815615607083E-06 MA= 1.057967686457091E-05 TA= 1.819722055160837E+01
+ A =-4.510320703532996E+03 AD= 9.999999999999998E+99 PR= 9.999999999999998E+99
+\end{configfile}
+Below you also find the keys:
+
+\begin{configfile}
+   Symbol meaning:
+
+    JDTDB    Julian Day Number, Barycentric Dynamical Time
+      EC     Eccentricity, e
+      QR     Periapsis distance, q (km)
+      IN     Inclination w.r.t X-Y plane, i (degrees)
+      OM     Longitude of Ascending Node, OMEGA, (degrees)
+      W      Argument of Perifocus, w (degrees)
+      Tp     Time of periapsis (Julian Day Number)
+      N      Mean motion, n (degrees/sec)
+      MA     Mean anomaly, M (degrees)
+      TA     True anomaly, nu (degrees)
+      A      Semi-major axis, a (km)
+      AD     Apoapsis distance (km)
+      PR     Sidereal orbit period (sec)
+\end{configfile} 
+ 
+\noindent Now we can add an entry into our \file{ssystems\_minor.ini}. 
+We can leave the exponential writing style (trailing ``E+02'' etc.) 
+or convert to the more human-readable as shown here. 
+Symbols \texttt{M1} and \texttt{k1} are given only in the top list of initial elements. 
+The symbols in brackets refer to the above table, do not enter those!
+
+\begin{configfile}[\scriptsize]
+[c2023A3(tsuchinshanatlas)]
+iau_designation                = C/2023 A3
+name                           = C/2023 A3 (Tsuchinshan-ATLAS)
+type                           = comet
+orbit_Epoch                    = 2460584.5
+orbit_ArgOfPericenter          = (W)   308.4955943429219
+orbit_AscendingNode            = (OM)   21.56049287759364
+orbit_Eccentricity             = (EC)    1.000086779013436
+orbit_Inclination              = (IN)  139.1089312570287
+orbit_PericenterDistance       = (QR)    0.3914011809348247
+orbit_TimeAtPericenter         = (Tp) 2460581.248532149941
+absolute_magnitude             = (M1)    6.1
+slope_parameter                = (k1/2)  4.25
+orbit_good                     = 1000
+discovery                      = 2023-01-09 [Not given by JPL Horizons]
+ref                            = JPL Horizons: JPL#25
+\end{configfile}
+
+\noindent JPL Horizons can also deliver osculating elements for a number of interplanetary spacecraft. 
+To visualize them, you should assign \texttt{type=interstellar object} 
+(to make the orbit line stand out a bit more than with \texttt{asteroid}) 
+and invent your own magnitude, e.g., \texttt{absolute\_magnitude=0} or even brighter, to make them visible. 
+Obviously, the shown trajectory is valid only around the given epoch and changes significantly whenever a spacecraft 
+encounters a larger solar system object or when operators fire its engines. An Example for the Voyager~2 spacecraft may look like:
+
+\begin{configfile}[\scriptsize]
+[voyager2]
+name                           = Voyager 2 (after Neptune)
+iau_designation                = Voyager 2
+type                           = interstellar object
+orbit_ArgOfPericenter          = 1.300872388863244E+02
+orbit_AscendingNode            = 1.017840511971174E+02
+orbit_Eccentricity             = 6.294338891686261E+00
+orbit_Epoch                    = 2460554.5               [Sept 1, 2024]
+orbit_Inclination              = 7.895342038400214E+01
+orbit_PericenterDistance       = 2.130818195968974E+01
+orbit_TimeAtPericenter         = 2445446.868665616959
+orbit_good                     = 12797
+ref                            = JPL Horizons 
+absolute_magnitude             = 0
+slope_parameter                = 4
+\end{configfile}
+
+\noindent The displayed trajectory should start at Voyager~2's encounter with Neptune on August 18, 1989 (JD 2447757.5). 
+The value of \texttt{orbit\_good=} ($2460554.5-2447757.5 = $) \texttt{12797} fulfills this idea. 
 
 
 %%% Local Variables: 

@@ -109,8 +109,6 @@ void ZodiacalLight::init()
 	setupCurrentVAO();
 	releaseVAO();
 
-	ditherPatternTex = StelApp::getInstance().getTextureManager().getDitheringTexture(0);
-
 	QString displayGroup = N_("Display Options");
 	addAction("actionShow_ZodiacalLight", displayGroup, N_("Zodiacal Light"), "flagZodiacalLightDisplayed", "Ctrl+Shift+Z");
 
@@ -257,14 +255,13 @@ void main()
 )";
 		bool ok = renderProgram->addShaderFromSourceCode(QOpenGLShader::Vertex, vert);
 		if(!renderProgram->log().isEmpty())
-			qWarning().noquote() << "MilkyWay: Warnings while compiling vertex shader:\n" << renderProgram->log();
+			qWarning().noquote() << "ZodiacalLight: Warnings while compiling vertex shader:\n" << renderProgram->log();
 		if(!ok) return;
 
 		const auto frag =
 			StelOpenGL::globalShaderPrefix(StelOpenGL::FRAGMENT_SHADER) +
 			projector->getUnProjectShader() +
 			extinction.getForwardTransformShader() +
-			makeDitheringShader()+
 			R"(
 VARYING highp vec3 ndcPos;
 uniform sampler2D mainTex;
@@ -303,7 +300,7 @@ void main(void)
 	}
 
     vec4 color = texture2D(mainTex, texc)*vec4(brightness,1)*extinctionFactor;
-	FRAG_COLOR = dither(color);
+	FRAG_COLOR = color;
 }
 )";
 		ok = renderProgram->addShaderFromSourceCode(QOpenGLShader::Fragment, frag);
@@ -321,8 +318,6 @@ void main(void)
 		shaderVars.mainTex          = renderProgram->uniformLocation("mainTex");
 		shaderVars.lambdaSun        = renderProgram->uniformLocation("lambdaSun");
 		shaderVars.brightness       = renderProgram->uniformLocation("brightness");
-		shaderVars.rgbMaxValue      = renderProgram->uniformLocation("rgbMaxValue");
-		shaderVars.ditherPattern    = renderProgram->uniformLocation("ditherPattern");
 		shaderVars.bortleIntensity  = renderProgram->uniformLocation("bortleIntensity");
 		shaderVars.extinctionEnabled= renderProgram->uniformLocation("extinctionEnabled");
 		shaderVars.projectionMatrixInverse = renderProgram->uniformLocation("projectionMatrixInverse");
@@ -389,26 +384,19 @@ void main(void)
 	mainTex->bind(mainTexSampler);
 	renderProgram->setUniformValue(shaderVars.mainTex, mainTexSampler);
 
-	const int ditherTexSampler = 1;
-	ditherPatternTex->bind(ditherTexSampler);
-	renderProgram->setUniformValue(shaderVars.ditherPattern, ditherTexSampler);
-
 	renderProgram->setUniformValue(shaderVars.projectionMatrixInverse, projector->getProjectionMatrix().toQMatrix().inverted());
 	renderProgram->setUniformValue(shaderVars.brightness, c.toQVector());
 	renderProgram->setUniformValue(shaderVars.lambdaSun, GLfloat(lambdaSun));
-	renderProgram->setUniformValue(shaderVars.rgbMaxValue, calcRGBMaxValue(core->getDitheringMode()).toQVector());
 
 	projector->setUnProjectUniforms(*renderProgram);
 	extinction.setForwardTransformUniforms(*renderProgram);
 
 	auto& gl = *QOpenGLContext::currentContext()->functions();
 
-	gl.glEnable(GL_CULL_FACE);
 	gl.glEnable(GL_BLEND);
 	gl.glBlendFunc(GL_ONE,GL_ONE); // allow colored sky background
 	bindVAO();
 	gl.glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 	releaseVAO();
 	gl.glDisable(GL_BLEND);
-	gl.glDisable(GL_CULL_FACE);
 }

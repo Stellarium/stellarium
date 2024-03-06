@@ -37,14 +37,18 @@ class StelCore;
 class StelObjectMgr : public StelModule
 {
 	Q_OBJECT
+	Q_PROPERTY(bool objectPointerVisibility
+		   READ getFlagSelectedObjectPointer
+		   WRITE setFlagSelectedObjectPointer
+		   NOTIFY flagSelectedObjectPointerChanged)
 
 public:
 	StelObjectMgr();
-	virtual ~StelObjectMgr() Q_DECL_OVERRIDE;
+	~StelObjectMgr() override;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
-	virtual void init() Q_DECL_OVERRIDE;
+	void init() override;
 
 	///////////////////////////////////////////////////////////////////////////
 	//! Add a new StelObject manager into the list of supported modules.
@@ -73,12 +77,12 @@ public:
 	//! @return true if a object with the passed name was found
 	bool findAndSelectI18n(const QString &nameI18n, StelModule::StelModuleSelectAction action=StelModule::ReplaceSelection);
 
-	//! Find and select an object from its translated name and object type name.
+	//! Find and select an object from its translated name and object type name (i.e., the Stellarium class name).
 	//! @param action define whether to add to, replace, or remove from the existing selection
 	//! @param nameI18n the case sensitive object translated name
-	//! @param objtype the type of the object
+	//! @param objtype the type of the object (i.e., the Stellarium class name)
 	//! @return true if a object with the passed name was found
-	bool findAndSelectI18n(const QString &name, const QString &objtype, StelModule::StelModuleSelectAction action=StelModule::ReplaceSelection);
+	bool findAndSelectI18n(const QString &nameI18n, const QString &objtype, StelModule::StelModuleSelectAction action=StelModule::ReplaceSelection);
 
 	//! Find and select an object from its standard program name.
 	//! @param action define whether to add to, replace, or remove from the existing selection
@@ -86,10 +90,10 @@ public:
 	//! @return true if a object with the passed name was found
 	bool findAndSelect(const QString &name, StelModule::StelModuleSelectAction action=StelModule::ReplaceSelection);
 
-	//! Find and select an object from its standard program name and object type name.
+	//! Find and select an object from its standard program name and object type name (i.e., the Stellarium class name).
 	//! @param action define whether to add to, replace, or remove from the existing selection
 	//! @param name the case sensitive object translated name
-	//! @param objtype the type of the object
+	//! @param objtype the type of the object (i.e., the Stellarium class name)
 	//! @return true if a object with the passed name was found
 	bool findAndSelect(const QString &name, const QString &objtype, StelModule::StelModuleSelectAction action=StelModule::ReplaceSelection);
 
@@ -124,14 +128,9 @@ public:
 	//! Get the list of objects which was recently selected by the user.
 	const QList<StelObjectP>& getSelectedObject() const {return lastSelectedObjects;}
 
-	//! Return the list objects of type "withType" which was recently selected by the user.
+	//! Return the list objects of type "type" which was recently selected by the user.
 	//! @param type return only objects of the given type
 	QList<StelObjectP> getSelectedObject(const QString& type) const;
-
-	//! Set whether a pointer is to be drawn over selected object.
-	void setFlagSelectedObjectPointer(bool b) {objectPointerVisibility=b;}
-	//! Get whether a pointer is to be drawn over selected object.
-	bool getFlagSelectedObjectPointer(void) const {return objectPointerVisibility;}
 
 	//! Find any kind of object by its translated name.
 	StelObjectP searchByNameI18n(const QString &name) const;
@@ -198,10 +197,22 @@ public slots:
 	//! The behaviour of DebugAid texts depends on the use case.
 	void removeExtraInfoStrings(const StelObject::InfoStringGroup& flags);
 
+	//! Set whether a pointer is to be drawn over selected object.
+	void setFlagSelectedObjectPointer(bool b)
+	{
+		objectPointerVisibility=b;
+		emit flagSelectedObjectPointerChanged(b);
+
+	}
+	//! Get whether a pointer is to be drawn over selected object.
+	bool getFlagSelectedObjectPointer(void) { return objectPointerVisibility; }
+
 signals:
 	//! Indicate that the selected StelObjects has changed.
 	//! @param action define if the user requested that the objects are added to the selection or just replace it
 	void selectedObjectChanged(StelModule::StelModuleSelectAction);
+	//! Indicate that the visibility of pointer for selected StelObjects has changed.
+	void flagSelectedObjectPointerChanged(bool b);
 
 private:
 	// The list of StelObjectModule that are referenced in Stellarium

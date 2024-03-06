@@ -144,8 +144,8 @@ void TelescopeConfigurationDialog::createDialogContent()
 
 	// Inherited connect
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
-	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(buttonDiscardPressed()));
-	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
+	connect(ui->titleBar, &TitleBar::closeClicked, this, &TelescopeConfigurationDialog::buttonDiscardPressed);
+	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 	connect(dialog, SIGNAL(rejected()), this, SLOT(buttonDiscardPressed()));
 
 	// Connect: sender, signal, receiver, member
@@ -254,7 +254,7 @@ void TelescopeConfigurationDialog::initNewTelescopeConfiguration(int slot)
 {
 	configuredSlot = slot;
 	initConfigurationDialog();
-	ui->stelWindowTitle->setText(q_("Add New Telescope"));
+	ui->titleBar->setTitle(q_("Add New Telescope"));
 	ui->lineEditTelescopeName->setText(QString("New Telescope %1").arg(QString::number(configuredSlot)));
 
 	ui->doubleSpinBoxTelescopeDelay->setValue(SECONDS_FROM_MICROSECONDS(TelescopeControl::DEFAULT_DELAY));
@@ -264,7 +264,7 @@ void TelescopeConfigurationDialog::initExistingTelescopeConfiguration(int slot)
 {
 	configuredSlot = slot;
 	initConfigurationDialog();
-	ui->stelWindowTitle->setText(q_("Configure Telescope"));
+	ui->titleBar->setTitle(q_("Configure Telescope"));
 
 	// Read the telescope properties
 	QString name;

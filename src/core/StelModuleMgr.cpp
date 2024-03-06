@@ -319,8 +319,7 @@ QString StelModuleMgr::getStandardSupportLinksInfo(QString moduleName, bool furt
 	html += "</ul></p>";
 	if (furtherInfo)
 	{
-		QStringList ver = StelUtils::getApplicationPublicVersion().split(".");
-		QString URL = QString("<a href=\"http://stellarium.org/doc/%1.0/\">\\1</a>").arg(ver[0]);
+		QString URL = QString("<a href=\"http://stellarium.org/doc/%1/\">\\1</a>").arg(StelUtils::getApplicationSeries());
 		// TRANSLATORS: The text between braces is the text of an HTML link.
 		html += "<p>" + q_("Further information can be found in the {developer documentation}.").toHtmlEscaped().replace(a_rx, URL) + "</p>";
 	}

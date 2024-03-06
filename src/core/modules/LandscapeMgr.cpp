@@ -77,13 +77,18 @@ Cardinals::Cardinals()
 	font8WCR.setPixelSize(conf->value("viewing/ordinal_font_size", screenFontSize+5).toInt());
 	// Draw the principal wind points even smaller.
 	font16WCR.setPixelSize(conf->value("viewing/16wcr_font_size", screenFontSize+2).toInt());
+	font32WCR.setPixelSize(conf->value("viewing/32wcr_font_size", screenFontSize).toInt());
 
 	// English names for cardinals
 	labels = {
 		{   dN,  "N" }, {   dS,  "S" }, {   dE,  "E" }, {   dW,  "W" },
 		{  dNE, "NE" }, {  dSE, "SE" }, {  dSW, "SW" }, {  dNW, "NW" },
 		{ dNNE,"NNE" }, { dENE,"ENE" }, { dESE,"ESE" }, { dSSE,"SSE" },
-		{ dSSW,"SSW" }, { dWSW,"WSW" }, { dWNW,"WNW" }, { dNNW,"NNW" }
+		{ dSSW,"SSW" }, { dWSW,"WSW" }, { dWNW,"WNW" }, { dNNW,"NNW" },
+		{ dNbE,"NbE" }, {dNEbN,"NEbN"}, {dNEbE,"NEbE"}, { dEbN,"EbN" },
+		{ dEbS,"EbS" }, {dSEbE,"SEbE"}, {dSEbS,"SEbS"}, { dSbE,"SbE" },
+		{ dSbW,"SbW" }, {dSWbS,"SWbS"}, {dSWbW,"SWbW"}, { dWbS,"WbS" },
+		{ dWbN,"WbN" }, {dNWbW,"NWbW"}, {dNWbN,"NWbN"}, { dNbW,"NbW" }
 	};
 }
 
@@ -91,19 +96,36 @@ Cardinals::~Cardinals()
 {
 }
 
+const float Cardinals::sp8 = sin(M_PIf/8.f); // dimension for intercardinals
+const float Cardinals::cp8 = cos(M_PIf/8.f); // dimension for intercardinals
+const float Cardinals::s1p16 = sin(M_PIf/16.f);     // dimension for rose32
+const float Cardinals::c1p16 = cos(M_PIf/16.f);     // dimension for rose32
+const float Cardinals::s3p16 = sin(3.f*M_PIf/16.f); // dimension for rose32
+const float Cardinals::c3p16 = cos(3.f*M_PIf/16.f); // dimension for rose32
+
 const QMap<Cardinals::CompassDirection, Vec3f> Cardinals::rose4winds = {
 	{ Cardinals::dN, Vec3f(-1.f, 0.f, 0.f) }, { Cardinals::dS, Vec3f(1.f,  0.f, 0.f) },
 	{ Cardinals::dE, Vec3f( 0.f, 1.f, 0.f) }, { Cardinals::dW, Vec3f(0.f, -1.f, 0.f) }
 };
 const QMap<Cardinals::CompassDirection, Vec3f> Cardinals::rose8winds = {
-	{ Cardinals::dNE, Vec3f(-1.f,  1.f, 0.f) }, { Cardinals::dSE, Vec3f( 1.f,  1.f, 0.f) },
-	{ Cardinals::dSW, Vec3f( 1.f, -1.f, 0.f) }, { Cardinals::dNW, Vec3f(-1.f, -1.f, 0.f) }
+	{ Cardinals::dNE, Vec3f(-q8,  q8, 0.f) }, { Cardinals::dSE, Vec3f( q8,  q8, 0.f) },
+	{ Cardinals::dSW, Vec3f( q8, -q8, 0.f) }, { Cardinals::dNW, Vec3f(-q8, -q8, 0.f) }
 };
 const QMap<Cardinals::CompassDirection, Vec3f> Cardinals::rose16winds = {
-	{ dNNE, Vec3f(-1.f,   cp, 0.f) }, { dENE, Vec3f( -cp,  1.f, 0.f) },
-	{ dESE, Vec3f(  cp,  1.f, 0.f) }, { dSSE, Vec3f( 1.f,   cp, 0.f) },
-	{ dSSW, Vec3f( 1.f,  -cp, 0.f) }, { dWSW, Vec3f(  cp, -1.f, 0.f) },
-	{ dWNW, Vec3f( -cp, -1.f, 0.f) }, { dNNW, Vec3f(-1.f,  -cp, 0.f) }
+	{ Cardinals::dNNE, Vec3f(-cp8,  sp8, 0.f) }, { Cardinals::dENE, Vec3f(-sp8,  cp8, 0.f) },
+	{ Cardinals::dESE, Vec3f( sp8,  cp8, 0.f) }, { Cardinals::dSSE, Vec3f( cp8,  sp8, 0.f) },
+	{ Cardinals::dSSW, Vec3f( cp8, -sp8, 0.f) }, { Cardinals::dWSW, Vec3f( sp8, -cp8, 0.f) },
+	{ Cardinals::dWNW, Vec3f(-sp8, -cp8, 0.f) }, { Cardinals::dNNW, Vec3f(-cp8, -sp8, 0.f) }
+};
+const QMap<Cardinals::CompassDirection, Vec3f> Cardinals::rose32winds = {
+	{ Cardinals::dNbE,  Vec3f(-c1p16, s1p16, 0.f) }, { Cardinals::dNbW,  Vec3f(-c1p16, -s1p16, 0.f) },
+	{ Cardinals::dSbE,  Vec3f( c1p16, s1p16, 0.f) }, { Cardinals::dSbW,  Vec3f( c1p16, -s1p16, 0.f) },
+	{ Cardinals::dEbS,  Vec3f( s1p16, c1p16, 0.f) }, { Cardinals::dEbN,  Vec3f(-s1p16,  c1p16, 0.f) },
+	{ Cardinals::dWbN,  Vec3f(-s1p16,-c1p16, 0.f) }, { Cardinals::dWbS,  Vec3f( s1p16, -c1p16, 0.f) },
+	{ Cardinals::dNEbN, Vec3f(-c3p16, s3p16, 0.f) }, { Cardinals::dNWbN, Vec3f(-c3p16, -s3p16, 0.f) },
+	{ Cardinals::dSEbS, Vec3f( c3p16, s3p16, 0.f) }, { Cardinals::dSWbS, Vec3f( c3p16, -s3p16, 0.f) },
+	{ Cardinals::dSEbE, Vec3f( s3p16, c3p16, 0.f) }, { Cardinals::dNEbE, Vec3f(-s3p16,  c3p16, 0.f) },
+	{ Cardinals::dNWbW, Vec3f(-s3p16,-c3p16, 0.f) }, { Cardinals::dSWbW, Vec3f( s3p16, -c3p16, 0.f) }
 };
 
 void Cardinals::update(double deltaTime)
@@ -111,6 +133,7 @@ void Cardinals::update(double deltaTime)
 	fader4WCR.update(static_cast<int>(deltaTime*1000));
 	fader8WCR.update(static_cast<int>(deltaTime*1000));
 	fader16WCR.update(static_cast<int>(deltaTime*1000));
+	fader32WCR.update(static_cast<int>(deltaTime*1000));
 }
 
 void Cardinals::setFadeDuration(float duration)
@@ -118,6 +141,7 @@ void Cardinals::setFadeDuration(float duration)
 	fader4WCR.setDuration(static_cast<int>(duration*1000.f));
 	fader8WCR.setDuration(static_cast<int>(duration*1000.f));
 	fader16WCR.setDuration(static_cast<int>(duration*1000.f));
+	fader32WCR.setDuration(static_cast<int>(duration*1000.f));
 }
 
 // Draw the cardinals points : N S E W and the subcardinal and sub-subcardinal.
@@ -134,7 +158,7 @@ void Cardinals::draw(const StelCore* core, double latitude) const
 		const float ppx = static_cast<float>(core->getCurrentStelProjectorParams().devicePixelsPerPixel);
 		StelPainter sPainter(prj);
 		sPainter.setFont(font4WCR);
-		float sshift=0.f, bshift=0.f, cshift=0.f, vshift=1.f;
+		float sshift=0.f, bshift=0.f, cshift=0.f, dshift=0.f, vshift=1.f;
 		bool flagMask = (core->getProjection(StelCore::FrameJ2000)->getMaskType() != StelProjector::MaskDisk);
 		if (propMgr->getProperty("SpecialMarkersMgr.compassMarksDisplayed")->getValue().toBool())
 			vshift = static_cast<float>(screenFontSize + 12)*ppx;
@@ -215,6 +239,33 @@ void Cardinals::draw(const StelCore* core, double latitude) const
 						sPainter.drawText(xy[0], xy[1], directionLabel, -textAngle*M_180_PIf, -cshift, vshift, true);
 					}
 				}
+
+				if (fader32WCR.getInterstate()>0.f)
+				{
+					sPainter.setColor(color, qMin(minFader, fader32WCR.getInterstate()));
+					sPainter.setFont(font32WCR);
+
+					QMapIterator<Cardinals::CompassDirection, Vec3f> it32w(rose32winds);
+					while(it32w.hasNext())
+					{
+						it32w.next();
+						QString directionLabel = labels.value(it32w.key(), "");
+
+						if (flagMask)
+							dshift = ppx*static_cast<float>(sPainter.getFontMetrics().boundingRect(directionLabel).width())*0.5f;
+
+						if (prj->project(it32w.value(), xy))
+						{
+							Vec3f up(it32w.value()[0], it32w.value()[1], 1.f*M_PI_180f);
+							Vec3f upPrj;
+							prj->project(up, upPrj);
+							float dx=upPrj[0]-xy[0];
+							float dy=upPrj[1]-xy[1];
+							float textAngle=atan2(dx, dy);
+							sPainter.drawText(xy[0], xy[1], directionLabel, -textAngle*M_180_PIf, -dshift, vshift, true);
+						}
+					}
+				}
 			}
 		}
 	}
@@ -255,7 +306,39 @@ void Cardinals::updateI18n()
 		// TRANSLATORS: West-northwest
 		{ dWNW, qc_("WNW", "compass direction") },
 		// TRANSLATORS: North-northwest
-		{ dNNW,	qc_("NNW", "compass direction") }
+		{ dNNW,	qc_("NNW", "compass direction") },
+		// TRANSLATORS: North by east
+		{ dNbE, qc_("NbE", "compass direction") },
+		// TRANSLATORS: Northeast by north
+		{dNEbN, qc_("NEbN","compass direction") },
+		// TRANSLATORS: Northeast by east
+		{dNEbE, qc_("NEbE","compass direction") },
+		// TRANSLATORS: East by north
+		{ dEbN, qc_("EbN", "compass direction") },
+		// TRANSLATORS: East by south
+		{ dEbS, qc_("EbS", "compass direction") },
+		// TRANSLATORS: Southeast by east
+		{dSEbE, qc_("SEbE","compass direction") },
+		// TRANSLATORS: Southeast by south
+		{dSEbS, qc_("SEbS","compass direction") },
+		// TRANSLATORS: South by east
+		{ dSbE, qc_("SbE", "compass direction") },
+		// TRANSLATORS: South by west
+		{ dSbW, qc_("SbW", "compass direction") },
+		// TRANSLATORS: Southwest by south
+		{dSWbS, qc_("SWbS","compass direction") },
+		// TRANSLATORS: Southwest by west
+		{dSWbW, qc_("SWbW","compass direction") },
+		// TRANSLATORS: West by south
+		{ dWbS, qc_("WbS", "compass direction") },
+		// TRANSLATORS: West by north
+		{ dWbN, qc_("WbN", "compass direction") },
+		// TRANSLATORS: Northwest by west
+		{dNWbW, qc_("NWbW","compass direction") },
+		// TRANSLATORS: Northwest by north
+		{dNWbN, qc_("NWbN","compass direction") },
+		// TRANSLATORS: North by west
+		{ dNbW, qc_("NbW", "compass direction") }
 	};
 }
 
@@ -276,6 +359,8 @@ LandscapeMgr::LandscapeMgr()
 	, defaultMinimalBrightness(0.01)
 	, flagLandscapeSetsMinimalBrightness(false)
 	, flagEnvironmentAutoEnabling(false)
+	, flagLandscapeUseTransparency(false)
+	, landscapeTransparency(0.)
 {
 	setObjectName("LandscapeMgr"); // should be done by StelModule's constructor.
 
@@ -339,7 +424,7 @@ void LandscapeMgr::update(double deltaTime)
 			// Use no more than 1/60th of a second for this batch of loading
 			QElapsedTimer timer;
 			timer.start();
-			Atmosphere::LoadingStatus status;
+			Atmosphere::LoadingStatus status={1,1};
 			while(loadingAtmosphere->isLoading() && timer.elapsed() < 1000/60)
 				status = loadingAtmosphere->stepDataLoading();
 			if(loadingAtmosphere->isLoading())
@@ -354,7 +439,7 @@ void LandscapeMgr::update(double deltaTime)
 				setAtmosphereShowMySkyStatusText(q_("Switching models..."));
 			}
 		}
-		catch(AtmosphereShowMySky::InitFailure const& error)
+		catch(Atmosphere::InitFailure const& error)
 		{
 			qWarning() << "ERROR: Failed to load atmosphere model data:" << error.what();
 			qWarning() << "WARNING: Falling back to the Preetham's model";
@@ -439,7 +524,7 @@ void LandscapeMgr::update(double deltaTime)
 								 currentIsEarth ? moon.data() : nullptr, core->getCurrentLocation(),
 								 15.f, 40.f, static_cast<float>(drawer->getExtinctionCoefficient()), atmosphereNoScatter);
 	}
-	catch(AtmosphereShowMySky::InitFailure const& error)
+	catch(Atmosphere::InitFailure const& error)
 	{
 		qWarning().noquote() << "ShowMySky atmosphere model crashed:" << error.what();
 		qWarning() << "Loading Preetham model";
@@ -562,7 +647,6 @@ void LandscapeMgr::update(double deltaTime)
 		// If we have no atmosphere, we can assume windows and panels on spaceships etc. are switched on whenever the sun does not shine, i.e. when sun is blocked by landscape.
 		lightscapeBrightness= static_cast<double>(landscape->getOpacity(sunPos));
 	}
-
 	landscape->setBrightness(landscapeBrightness, lightscapeBrightness);
 
 	messageFader.update(static_cast<int>(deltaTime*1000));
@@ -570,6 +654,10 @@ void LandscapeMgr::update(double deltaTime)
 
 void LandscapeMgr::draw(StelCore* core)
 {
+	// For observers we never draw anything of landscape, atmosphere, cardinals.
+	if (core->getCurrentPlanet()->getPlanetType()==Planet::isObserver)
+		return;
+
 	StelSkyDrawer* drawer=core->getSkyDrawer();
 
 	// Draw the atmosphere
@@ -589,12 +677,17 @@ void LandscapeMgr::draw(StelCore* core)
 	}
 
 	// Draw the landscape
+	landscape->setTransparency( getFlagLandscapeUseTransparency() ? landscapeTransparency : 0.0);
+
 	if (oldLandscape)
+	{
+		oldLandscape->setTransparency( getFlagLandscapeUseTransparency() ? landscapeTransparency : 0.0);
 		oldLandscape->draw(core, flagPolyLineDisplayedOnly);
+	}
 	landscape->draw(core, flagPolyLineDisplayedOnly);
 
 	// Draw the cardinal points
-	cardinalPoints->draw(core, static_cast<double>(StelApp::getInstance().getCore()->getCurrentLocation().latitude));
+	cardinalPoints->draw(core, static_cast<double>(StelApp::getInstance().getCore()->getCurrentLocation().getLatitude()));
 
 	if(messageFader.getInterstate())
 	{
@@ -606,20 +699,15 @@ void LandscapeMgr::draw(StelCore* core)
 		painter.setColor(1, 0, 0, messageFader.getInterstate());
 		painter.drawText(83, 70, messageToShow);
 	}
-
-	// Workaround for a bug with spherical mirror mode when we don't show the cardinal points.
-	// I am not really sure why this seems to fix the problem.  If you want to
-	// remove this, make sure the spherical mirror mode with cardinal points
-	// toggled off works properly!
-	const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
-	QOpenGLPaintDevice device;
-	device.setSize(QSize(prj->getViewportWidth(), prj->getViewportHeight()));
-	QPainter painter(&device);
 }
 
 // Some element in drawing order behind LandscapeMgr can call this at the end of its own draw() to overdraw with the polygon line and gazetteer.
 void LandscapeMgr::drawPolylineOnly(StelCore* core)
 {
+	// For observers we never draw anything of landscape, atmosphere, cardinals.
+	if (core->getCurrentPlanet()->getPlanetType()==Planet::isObserver)
+		return;
+
 	// Draw the landscape
 	if (oldLandscape && oldLandscape->hasLandscapePolygon())
 		oldLandscape->draw(core, true);
@@ -627,7 +715,7 @@ void LandscapeMgr::drawPolylineOnly(StelCore* core)
 		landscape->draw(core, true);
 
 	// Draw the cardinal points
-	cardinalPoints->draw(core, static_cast<double>(StelApp::getInstance().getCore()->getCurrentLocation().latitude));
+	cardinalPoints->draw(core, static_cast<double>(StelApp::getInstance().getCore()->getCurrentLocation().getLatitude()));
 }
 
 void LandscapeMgr::createAtmosphere()
@@ -648,7 +736,8 @@ void LandscapeMgr::createAtmosphere()
 			setAtmosphereShowMySkyStatusText("");
 			setAtmosphereShowMySkyStoppedWithError(false);
 
-			loadingAtmosphere.reset(new AtmosphereShowMySky());
+			const auto core = StelApp::getInstance().getCore();
+			loadingAtmosphere.reset(new AtmosphereShowMySky(core->getCurrentLocation().altitude));
 			if(!atmosphere)
 			{
 				// We're just loading the first atmosphere in the run of Stellarium. Initialize it synchronously.
@@ -664,7 +753,7 @@ void LandscapeMgr::createAtmosphere()
 				setAtmosphereShowMySkyStatusText(QString("%1 0% %2").arg(q_("Loading..."), qc_("done","percentage of done")));
 			}
 		}
-		catch(AtmosphereShowMySky::InitFailure const& error)
+		catch(Atmosphere::InitFailure const& error)
 		{
 			qWarning() << "ERROR: Failed to initialize ShowMySky atmosphere model:" << error.what();
 			qWarning() << "WARNING: Falling back to the Preetham's model";
@@ -758,10 +847,14 @@ void LandscapeMgr::init()
 	setLabelFontSize(conf->value("landscape/label_font_size", 18).toInt());
 	setLabelColor(Vec3f(conf->value("landscape/label_color", "0.2,0.8,0.2").toString()));
 
+	setFlagLandscapeUseTransparency(conf->value("landscape/flag_transparency", false).toBool());
+	setLandscapeTransparency(conf->value("landscape/transparency", 0.5).toDouble());
+
 	cardinalPoints = new Cardinals();
 	cardinalPoints->setFlagShow4WCRLabels(conf->value("viewing/flag_cardinal_points", true).toBool());
 	cardinalPoints->setFlagShow8WCRLabels(conf->value("viewing/flag_ordinal_points", true).toBool());
 	cardinalPoints->setFlagShow16WCRLabels(conf->value("viewing/flag_16wcr_points", false).toBool());
+	cardinalPoints->setFlagShow32WCRLabels(conf->value("viewing/flag_32wcr_points", false).toBool());
 	// Load colors from config file
 	QString defaultColor = conf->value("color/default_color").toString();
 	setColorCardinalPoints(Vec3f(conf->value("color/cardinal_color", defaultColor).toString()));
@@ -772,7 +865,7 @@ void LandscapeMgr::init()
 	Q_ASSERT(drawer);
 	setAtmosphereLightPollutionLuminance(drawer->getLightPollutionLuminance());
 	connect(app->getCore(), SIGNAL(locationChanged(StelLocation)), this, SLOT(onLocationChanged(StelLocation)));
-	connect(app->getCore(), SIGNAL(targetLocationChanged(StelLocation)), this, SLOT(onTargetLocationChanged(StelLocation)));
+	connect(app->getCore(), SIGNAL(targetLocationChanged(const StelLocation&, const QString&)), this, SLOT(onTargetLocationChanged(const StelLocation&, const QString&)));
 	connect(drawer, &StelSkyDrawer::lightPollutionLuminanceChanged, this, &LandscapeMgr::setAtmosphereLightPollutionLuminance);
 	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
 
@@ -782,6 +875,7 @@ void LandscapeMgr::init()
 	addAction("actionShow_Cardinal_Points", displayGroup, N_("Cardinal points"), "cardinalPointsDisplayed", "Q");
 	addAction("actionShow_Intercardinal_Points", displayGroup, N_("Ordinal (Intercardinal) points"), "ordinalPointsDisplayed");
 	addAction("actionShow_Secondary_Intercardinal_Points", displayGroup, N_("Secondary Intercardinal points"), "ordinal16WRPointsDisplayed");
+	addAction("actionShow_Tertiary_Intercardinal_Points", displayGroup, N_("Tertiary Intercardinal points"), "ordinal32WRPointsDisplayed");
 	addAction("actionShow_Ground", displayGroup, N_("Ground"), "landscapeDisplayed", "G");
 	addAction("actionShow_LandscapeIllumination", displayGroup, N_("Landscape illumination"), "illuminationDisplayed", "Shift+G");
 	addAction("actionShow_LandscapeLabels", displayGroup, N_("Landscape labels"), "labelsDisplayed", "Ctrl+Shift+G");
@@ -800,6 +894,12 @@ bool LandscapeMgr::setCurrentLandscapeID(const QString& id, const double changeL
 	//prevent unnecessary changes/file access
 	if(id==currentLandscapeID)
 		return false;
+
+	if (!getAllLandscapeIDs().contains(id))
+	{
+		qDebug() << "LandscapeMgr::setCurrentLandscapeID: unknown landscape" << id << ", using 'zero'";
+		return setCurrentLandscapeID("zero", changeLocationDuration);
+	}
 
 	Landscape* newLandscape;
 
@@ -867,7 +967,7 @@ bool LandscapeMgr::setCurrentLandscapeID(const QString& id, const double changeL
 	if (getFlagLandscapeSetsLocation() && landscape->hasLocation())
 	{
 		StelCore *core = StelApp::getInstance().getCore();
-		core->moveObserverTo(landscape->getLocation(), changeLocationDuration);
+		core->moveObserverTo(landscape->getLocation(), changeLocationDuration, changeLocationDuration, id);
 		StelSkyDrawer* drawer=core->getSkyDrawer();
 
 		if (landscape->getLocation().ianaTimeZone.length())
@@ -919,13 +1019,17 @@ bool LandscapeMgr::setCurrentLandscapeName(const QString& name, const double cha
 	QMap<QString,QString> nameToDirMap = getNameToDirMap();
 	if (nameToDirMap.find(name)!=nameToDirMap.end())
 	{
+		//qDebug() << "Resolving " << name << "as" << nameToDirMap[name];
 		return setCurrentLandscapeID(nameToDirMap[name], changeLocationDuration);
 	}
-	else
+	// Legacy mess-up: e.g. Scenery3D calls name but should mean ID.
+	else if (!setCurrentLandscapeID(name, changeLocationDuration))
 	{
 		qWarning() << "Can't find a landscape with name=" << name << StelUtils::getEndLineChar();
 		return false;
 	}
+	qDebug() << "Loading landscapeID" << name;
+	return true;
 }
 
 // Load a landscape into cache.
@@ -1009,7 +1113,10 @@ bool LandscapeMgr::getIsLandscapeFullyVisible() const
 
 double LandscapeMgr::getLandscapeSinMinAltitudeLimit() const
 {
-	return landscape->getSinMinAltitudeLimit();
+	if (flagLandscapeUseTransparency && landscapeTransparency>0.)
+		return -1.;
+	else
+		return landscape->getSinMinAltitudeLimit();
 }
 
 bool LandscapeMgr::getFlagUseLightPollutionFromDatabase() const
@@ -1042,63 +1149,89 @@ void LandscapeMgr::onLocationChanged(const StelLocation &loc)
 	{
 		//this was previously logic in ViewDialog, but should really be on a non-GUI layer
 		StelCore* core = StelApp::getInstance().getCore();
-		float lum;
-		if (!loc.planetName.contains("Earth")) // location not on Earth...
-			lum = 0;
-		else if(loc.lightPollutionLuminance.isValid())
-			lum = loc.lightPollutionLuminance.toFloat();
-		else // ...or it is an observatory, or it is an unknown location
-			lum = loc.DEFAULT_LIGHT_POLLUTION_LUMINANCE;
-
+		float lum=0.; // location not on Earth...
+		if (loc.planetName.contains("Earth"))
+		{
+			if(loc.lightPollutionLuminance.isValid())
+				lum = loc.lightPollutionLuminance.toFloat();
+			else // ...or it is an observatory, or it is an unknown location
+				lum = loc.DEFAULT_LIGHT_POLLUTION_LUMINANCE;
+		}
 		core->getSkyDrawer()->setLightPollutionLuminance(lum);
 	}
 }
 
-void LandscapeMgr::onTargetLocationChanged(const StelLocation &loc)
+// Load landscapeID, but do not load its associated location.
+// If landscapeID is empty but flagLandscapeAutoSelection is true, load a location fitting to loc's planet.
+void LandscapeMgr::onTargetLocationChanged(const StelLocation &loc, const QString& landscapeID)
 {
-	if (loc.planetName != currentPlanetName)
+	//qDebug() << "LandscapeMgr::onTargetLocationChanged:" << loc.serializeToLine().replace('\t', '|') << "Landscape requested:" << landscapeID;
+	if (!landscapeID.isEmpty() && getAllLandscapeIDs().contains(landscapeID))
 	{
-		currentPlanetName = loc.planetName;
-		if (flagLandscapeAutoSelection)
-		{
-			// If we have a landscape for selected planet then set it, otherwise use zero horizon landscape
-			bool landscapeSetsLocation = getFlagLandscapeSetsLocation();
-			setFlagLandscapeSetsLocation(false);
-			if (getAllLandscapeNames().indexOf(loc.planetName)>0)
-				setCurrentLandscapeName(loc.planetName);
-			else
-				setCurrentLandscapeID("zero");
-			setFlagLandscapeSetsLocation(landscapeSetsLocation);
-		}
-
-		if (loc.planetName.contains("Observer", Qt::CaseInsensitive))
-		{
-			if (flagEnvironmentAutoEnabling)
-			{
-				setFlagAtmosphere(false);
-				setFlagFog(false);
-				setFlagLandscape(false);
-				setFlagCardinalPoints(false);
-				//setFlagOrdinalsPoints(false);
-				//setFlagOrdinals16WRPoints(false);
-			}
-		}
+		const bool landscapeSetsLocation = getFlagLandscapeSetsLocation();
+		setFlagLandscapeSetsLocation(false);
+		setCurrentLandscapeID(landscapeID);
+		setFlagLandscapeSetsLocation(landscapeSetsLocation);
+	}
+	else if(landscapeID.startsWith("ZeroColor("))
+	{
+		// Load a zero landscape and recolor it.
+		// This can happen when clicking on the map. The point on the map can be sampled for color (e.g., desert, greengrass, ocean blue, polar white, ...)
+		const bool landscapeSetsLocation = getFlagLandscapeSetsLocation();
+		setFlagLandscapeSetsLocation(false);
+		setCurrentLandscapeID("zero");
+		Vec3f color(0.3);
+		static const QRegularExpression zeroColor("^ZeroColor\\(([0-9].[0-9]+,[0-9].[0-9]+,[0-9].[0-9]+)\\)$");
+		QRegularExpressionMatch match=zeroColor.match(landscapeID);
+		if (match.hasMatch())
+			color=Vec3f(match.captured(1));
 		else
+			qDebug() << "Cannot extract color from landscapeID" << landscapeID;
+		LandscapePolygonal *l=static_cast<LandscapePolygonal*>(landscape);
+		l->setGroundColor(color);
+		setFlagLandscapeSetsLocation(landscapeSetsLocation);
+	}
+	else if (flagLandscapeAutoSelection && (loc.planetName != currentPlanetName))
+	{
+		//qDebug() << "landscapeID empty. Try planet name" << loc.planetName << "or zero";
+		// If we have a landscape for selected planet then set it, otherwise use zero horizon landscape
+		const bool landscapeSetsLocation = getFlagLandscapeSetsLocation();
+		setFlagLandscapeSetsLocation(false);
+		if (getAllLandscapeNames().indexOf(loc.planetName)>0)
+			setCurrentLandscapeName(loc.planetName);
+		else
+			setCurrentLandscapeID("zero");
+		setFlagLandscapeSetsLocation(landscapeSetsLocation);
+	}
+
+	if (loc.role==QChar('o')) // observer?
+	{
+		if (flagEnvironmentAutoEnabling)
 		{
-			SolarSystem* ssystem = static_cast<SolarSystem*>(StelApp::getInstance().getModuleMgr().getModule("SolarSystem"));
-			PlanetP pl = ssystem->searchByEnglishName(loc.planetName);
-			if (pl && flagEnvironmentAutoEnabling)
-			{
-				QSettings* conf = StelApp::getInstance().getSettings();
-				setFlagAtmosphere(pl->hasAtmosphere() && conf->value("landscape/flag_atmosphere", true).toBool());
-				setFlagFog(pl->hasAtmosphere() && conf->value("landscape/flag_fog", true).toBool());
-				setFlagLandscape(true);
-				setFlagCardinalPoints(conf->value("viewing/flag_cardinal_points", true).toBool());
-				setFlagOrdinalPoints(conf->value("viewing/flag_ordinal_points", true).toBool());
-				setFlagOrdinal16WRPoints(conf->value("viewing/flag_16wcr_points", false).toBool());
-			}
+			setFlagAtmosphere(false);
+			setFlagFog(false);
+			setFlagLandscape(false);
+			setFlagCardinalPoints(false); // suppresses all
 		}
 	}
+	else
+	{
+		SolarSystem* ssystem = static_cast<SolarSystem*>(StelApp::getInstance().getModuleMgr().getModule("SolarSystem"));
+		PlanetP pl = ssystem->searchByEnglishName(loc.planetName);
+		if (pl && flagEnvironmentAutoEnabling && currentPlanetName!=loc.planetName)
+		{
+			QSettings* conf = StelApp::getInstance().getSettings();
+			setFlagAtmosphere(pl->hasAtmosphere() && conf->value("landscape/flag_atmosphere", true).toBool());
+			setFlagFog(pl->hasAtmosphere() && conf->value("landscape/flag_fog", true).toBool());
+			setFlagLandscape(conf->value("landscape/flag_landscape", true).toBool());
+			setFlagCardinalPoints(conf->value("viewing/flag_cardinal_points", true).toBool());
+			setFlagOrdinalPoints(conf->value("viewing/flag_ordinal_points", true).toBool());
+			setFlagOrdinal16WRPoints(conf->value("viewing/flag_16wcr_points", false).toBool());
+			setFlagOrdinal32WRPoints(conf->value("viewing/flag_32wcr_points", false).toBool());
+		}
+	}
+	currentPlanetName = loc.planetName;
+	//qDebug() << "LandscapeMgr::onTargetLocationChanged done" ;
 }
 
 void LandscapeMgr::setFlagFog(const bool displayed)
@@ -1125,6 +1258,17 @@ void LandscapeMgr::setFlagIllumination(const bool displayed)
 bool LandscapeMgr::getFlagIllumination() const
 {
 	return landscape->getFlagShowIllumination();
+}
+
+void LandscapeMgr::setLandscapeTransparency(const double f)
+{
+	landscapeTransparency = f;
+	emit landscapeTransparencyChanged(f);
+}
+
+double LandscapeMgr::getLandscapeTransparency() const
+{
+	return landscapeTransparency;
 }
 
 void LandscapeMgr::setFlagLabels(const bool displayed)
@@ -1239,8 +1383,8 @@ QString LandscapeMgr::getCurrentLandscapeHtmlDescription() const
 
 		desc += QString("<b>%1</b>: %2, %3, %4 %5").arg(
 				q_("Location"),
-				StelUtils::radToDmsStrAdapt(static_cast<double>(landscape->getLocation().latitude) *M_PI_180),
-				StelUtils::radToDmsStrAdapt(static_cast<double>(landscape->getLocation().longitude) * M_PI_180),
+				StelUtils::radToDmsStrAdapt(static_cast<double>(landscape->getLocation().getLatitude()) *M_PI_180),
+				StelUtils::radToDmsStrAdapt(static_cast<double>(landscape->getLocation().getLongitude()) * M_PI_180),
 				QString::number(landscape->getLocation().altitude),
 				alt);
 
@@ -1272,7 +1416,7 @@ QString LandscapeMgr::getCurrentLandscapeHtmlDescription() const
 		if (extcoeff>-1.0)
 			atmosphere.append(QString("%1: %2").arg(q_("extinction coefficient"), QString::number(extcoeff, 'f', 2)));
 
-		if (atmosphere.size()>0)
+		if (!atmosphere.isEmpty())
 			desc += QString("<b>%1</b>: %2<br />").arg(q_("Atmospheric conditions"), atmosphere.join(", "));
 
 		const auto lightPollutionLum = landscape->getDefaultLightPollutionLuminance();
@@ -1350,6 +1494,22 @@ void LandscapeMgr::setFlagOrdinal16WRPoints(const bool displayed)
 bool LandscapeMgr::getFlagOrdinal16WRPoints() const
 {
 	return cardinalPoints->getFlagShow16WCRLabels();
+}
+
+//! Set flag for displaying ordinal points
+void LandscapeMgr::setFlagOrdinal32WRPoints(const bool displayed)
+{
+	if (cardinalPoints->getFlagShow32WCRLabels() != displayed)
+	{
+		cardinalPoints->setFlagShow32WCRLabels(displayed);
+		emit ordinal32WRPointsDisplayedChanged(displayed);
+	}
+}
+
+//! Get flag for displaying ordinal points
+bool LandscapeMgr::getFlagOrdinal32WRPoints() const
+{
+	return cardinalPoints->getFlagShow32WCRLabels();
 }
 
 //! Set Cardinals Points color

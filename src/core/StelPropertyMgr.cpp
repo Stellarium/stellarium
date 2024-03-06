@@ -1,5 +1,4 @@
 #include "StelPropertyMgr.hpp"
-#include "StelApp.hpp"
 #include <QtDebug>
 #include <QApplication>
 
@@ -143,7 +142,7 @@ void StelPropertyMgr::registerObject(QObject *obj)
 	if(!registeredObjects.contains(name))
 	{
 		//just a sanity check that we dont have the same object registered under a different name
-		Q_ASSERT(!registeredObjects.values().contains(obj));
+		Q_ASSERT(registeredObjects.key(obj).isEmpty());
 
 #ifndef NDEBUG
 		qDebug()<<"[StelPropertyMgr] Registering object"<<name;

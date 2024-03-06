@@ -121,7 +121,7 @@ public:
 	};
 
 	//! Returns a shader that supports the specified operations. Must be called within a GL context.
-	inline QOpenGLShaderProgram* getShader(const GlobalShaderParameters &globals, const S3DScene::Material *mat = Q_NULLPTR);
+	inline QOpenGLShaderProgram* getShader(const GlobalShaderParameters &globals, const S3DScene::Material *mat = nullptr);
 
 	//! Returns the Frustum/Boundingbox Debug shader
 	inline QOpenGLShaderProgram* getDebugShader();

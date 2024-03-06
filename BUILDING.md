@@ -44,7 +44,7 @@ your distribution. Here's a list.
 - A C++ compiler able to compile C++17 code ([GCC](https://gcc.gnu.org/) 7 or later, 
   Clang 6 or later, MSVC 2017 (15.7) or later; MSVC2019 required for Qt6)
 - [CMake](https://www.cmake.org/) 3.16.0 or later - buildsystem used by many open source projects
-- [Qt Framework](https://www.qt.io/) 5.9.0 or later. We recommend 5.15.2 for Stellarium 0.*, or Qt6.2 or later for Stellarium 1.*.
+- [Qt Framework](https://www.qt.io/) 5.12.0/6.2.0 or later. We recommend 5.15.2 or 6.5.1
 - [OpenGL](https://www.opengl.org/) - graphics library
 - [Zlib](https://www.zlib.net) - compression library
 
@@ -80,11 +80,12 @@ To install all of these, use the following commands:
 sudo apt install build-essential cmake zlib1g-dev libgl1-mesa-dev libdrm-dev gcc g++ \
                  graphviz doxygen gettext git libgps-dev \
                  gstreamer1.0-plugins-base gstreamer1.0-plugins-good gstreamer1.0-pulseaudio \
-                 gstreamer1.0-libav gstreamer1.0-vaapi qtbase5-dev \                
+                 gstreamer1.0-libav gstreamer1.0-vaapi qtbase5-dev \
                  qtbase5-private-dev qtscript5-dev libqt5svg5-dev qttools5-dev-tools \
                  qttools5-dev libqt5opengl5-dev qtmultimedia5-dev libqt5multimedia5-plugins \
                  libqt5serialport5 libqt5serialport5-dev qtpositioning5-dev libqt5positioning5 \
-                 libqt5positioning5-plugins qtwebengine5-dev libqt5charts5-dev
+                 libqt5positioning5-plugins qtwebengine5-dev libqt5charts5-dev \
+                 libexiv2-dev libnlopt-cxx-dev
 ```
 
 ##### Qt6
@@ -92,15 +93,16 @@ sudo apt install build-essential cmake zlib1g-dev libgl1-mesa-dev libdrm-dev gcc
 Ubuntu 22.04 comes with Qt5.15 and Qt6.2. To build with Qt6:
 
 ```
-sudo apt install build-essential cmake zlib1g-dev libgl1-mesa-dev libdrm-dev gcc g++ \
-                 graphviz doxygen gettext git libxkbcommon-x11-dev libgps-dev \
+sudo apt install build-essential cmake zlib1g-dev libgl1-mesa-dev libdrm-dev libglx-dev \
+                 gcc g++ graphviz doxygen gettext git libxkbcommon-x11-dev libgps-dev \
                  gstreamer1.0-plugins-base gstreamer1.0-plugins-good gstreamer1.0-pulseaudio \
                  gstreamer1.0-libav gstreamer1.0-vaapi \
                  qt6-base-private-dev qt6-multimedia-dev qt6-positioning-dev qt6-tools-dev \
                  qt6-tools-dev-tools qt6-base-dev-tools qt6-qpa-plugins qt6-image-formats-plugins \
                  qt6-l10n-tools qt6-webengine-dev qt6-webengine-dev-tools libqt6charts6-dev \
                  libqt6charts6 libqt6opengl6-dev libqt6positioning6-plugins libqt6serialport6-dev \
-                 qt6-base-dev libqt6webenginecore6-bin libqt6webengine6-data 
+                 qt6-base-dev libqt6webenginecore6-bin libqt6webengine6-data \
+                 libexiv2-dev libnlopt-cxx-dev
 ```
 
 
@@ -111,7 +113,7 @@ see [Linux with outdated Qt](#linux-with-outdated-qt).
 
 ```
 sudo dnf install cmake gcc graphviz doxygen gettext git \
-                 qt5-qtbase-devel qt5-qttools-devel qt5-qtscript-devel qt5-qtsvg-devel qt5-qtmultimedia-devel \
+                 qt5-qtbase-devel qt5-qtbase-private-devel qt5-qttools-devel qt5-qtscript-devel qt5-qtsvg-devel qt5-qtmultimedia-devel \
                  qt5-qtserialport-devel qt5-qtlocation-devel qt5-qtcharts-devel qt5-qtwebengine-devel
 ```
 
@@ -124,7 +126,7 @@ Here's how.
 
 The Qt development team provides binary installers. If you want to build Qt yourself from source, this is 
 fine but it will take a ''long'' time. We recommend the following procedure for manually installing the 
-latest Qt (required: 5.9 or above at the moment):
+latest Qt (required: 5.12 or above at the moment):
 - Download the Linux/X11 package from [Qt Company](http://www.qt.io/download-open-source/). Choose 32/64 bit 
   as appropriate.
 - Install it to `/opt/Qt5`
@@ -155,13 +157,13 @@ Stellarium will be built without QtWebEngine support. The result is shown in the
 - Install [Homebrew](https://brew.sh/). 
 - Install required packages:
   ```
-  $ brew install cmake git gettext
-  $ brew link gettext --force
+  brew install cmake git gettext
+  brew link gettext --force
   ```
 
   On MacOS 11 and above, if
   ```
-  $ brew link gettext --force
+  brew link gettext --force
   ```
 
   failed due to :
@@ -173,14 +175,14 @@ Stellarium will be built without QtWebEngine support. The result is shown in the
   Try the following:
 
   ```
-  $ sudo mkdir /usr/local/include
-  $ sudo chown -R $(whoami) $(brew --prefix)/*
+  sudo mkdir /usr/local/include
+  sudo chown -R $(whoami) $(brew --prefix)/*
 
   ```
 
 - Install latest Qt 5:
   ```
-  $ brew install qt@5
+  brew install qt@5
   ```
 - Add Qt to your PATH environment variable  
   Intel Mac: add the following line to `~/.bash_profile` (Bash) or `~/.zprofile` (Zsh):
@@ -212,8 +214,8 @@ Stellarium will build without QtWebEngine support. The result is shown in the sy
 - To get the source code of Stellarium you need to install some git environment. 
   [Git for Windows](https://git-scm.com/download/win) seems ok, or the Git Bash and Git GUI, whatever 
   seems suitable for you. But it is not necessary.
-- Get the [latest version of Qt5 from Qt Company](http://www.qt.io/download-open-source/). We recommend 
-  to use Qt 5.15 or, better, Qt6. For Qt5 you must select Qt Script and msvc2019 among so many checkboxes.
+- Get the [latest version of Qt from Qt Company](http://www.qt.io/download-open-source/). We recommend 
+  to use Qt 5.15.2 or, better, Qt6. For Qt5 you must select Qt Script and msvc2019 among so many checkboxes.
 
 After installing all required libraries and tools you should configure the build environment.
 
@@ -221,6 +223,9 @@ Add `C:\Qt\Qt5.15.2` to your `PATH` variable - you should add string `C:\Qt\Qt5.
 for 32-bit or `C:\Qt\Qt5.15.2\msvc2019_64;C:\Qt\Qt5.15.2\msvc2019_64\bin` for 64-bit to `PATH` variable.
 (Replace the version numbers of Qt and the version of Visual Studio (2017/2019) with the version that you 
 have installed)
+If you also want to run the ShowMySky sky model, add another directory to the PATH variable. This depends on your build environment. 
+If builds are made into `D:\StelDev\GIT\build-stellarium-Desktop_Qt_6_5_1_MSVC2019_64bit-Release\`, this would be 
+`D:\StelDev\GIT\build-stellarium-Desktop_Qt_6_5_1_MSVC2019_64bit-Release\_deps\showmysky-qt6-build\ShowMySky`
 
 **ANGLE issues:**
 
@@ -278,9 +283,9 @@ https://github.com/Stellarium/stellarium/releases
 Do this command in a terminal (if you prefer, you might use arK or some other graphical archive tool): 
 
 ```
-$ tar zxf stellarium-0.21.3.tar.gz
+$ tar zxf stellarium-23.4.tar.gz
 ```
-You should now have a directory `stellarium-0.21.3` with the source code in it.
+You should now have a directory `stellarium-23.4` with the source code in it.
 
 
 ### Clone project from GitHub
@@ -304,6 +309,14 @@ $ git clone https://github.com/Stellarium/stellarium.git
 $ cd stellarium
 ```
 
+If you ever want to contribute from a Windows environment, you *must* configure git to use Unix-style line endings. 
+(The --global applies to all projects.)
+(https://docs.github.com/en/get-started/getting-started-with-git/configuring-git-to-handle-line-endings)
+
+```
+$ git config [--global] core.autocrlf true
+```
+
 ### Download source code from GitHub
 
 You can [download](https://github.com/Stellarium/stellarium/archive/master.zip) fresh source code from 
@@ -311,7 +324,7 @@ GitHub by web.
 
 #### Windows specifics
 
-On Windows save the file (`master.zip` or `stellarium-0.21.3.tar.gz`) to the `C:/Devel` directory as 
+On Windows save the file (`master.zip` or `stellarium-23.4.tar.gz`) to the `C:/Devel` directory as 
 example. You will need a decompression program installed in Windows, for example [7-Zip](http://www.7-zip.org/). 
 The root of the source tree will be `C:/Devel/stellarium` for simplicity.
 
@@ -371,46 +384,53 @@ Feel free to send patches to our mailing list stellarium@googlegroups.com
 
 List of supported parameters (passed as `-DPARAMETER=VALUE`):
 
- Parameter                      | TYPE   | Default | Description
---------------------------------| -------|---------|-----------------------------------------------------
-| CMAKE_INSTALL_PREFIX          | path   | *       | Prefix where to install Stellarium
-| CMAKE_PREFIX_PATH             | path   |         | Additional path to look for libraries
-| CMAKE_BUILD_TYPE              | string | Release | Build type of Stellarium
-| CMAKE_OSX_ARCHITECTURES       | string | arm64;x86_64 | macOS architecture**
-| CMAKE_OSX_DEPLOYMENT_TARGET   | string | 11.0    | Minimum macOS deployment version**
-| OPENGL_DEBUG_LOGGING          | bool   | OFF     | Enable to log OpenGL information using the GL_KHR_debug extension/QOpenGLLogger
-| ENABLE_NLS                    | bool   | ON      | Enable interface translation
-| ENABLE_SHOWMYSKY              | bool   | ON      | Enable support for ShowMySky module that implements a realistic atmosphere model
-| ENABLE_GPS                    | bool   | ON      | Enable GPS support
-| ENABLE_LIBGPS                 | bool   | ON      | Enable GPS support with libGPS library (N/A on Windows)
-| ENABLE_MEDIA                  | bool   | ON      | Enable sound and video support
-| ENABLE_XLSX                   | bool   | ON      | Enable support for XLSX (Excel) files
-| ENABLE_SCRIPTING              | bool   | ON      | Enable the scripting feature
-| ENABLE_RELEASE_BUILD          | bool   | OFF     | This option flags the build as an official release
-| ENABLE_TESTING                | bool   | OFF     | Enable unit tests
-| ENABLE_QTWEBENGINE            | bool   | ON      | Enable QtWebEngine module support if it installed
-| USE_PLUGIN_ANGLEMEASURE       | bool   | ON      | Enable building the Angle Measure plugin
-| USE_PLUGIN_COMPASSMARKS       | bool   | ON      | Enable building the Compass Marks plugin
-| USE_PLUGIN_SATELLITES         | bool   | ON      | Enable building the Satellites plugin
-| USE_PLUGIN_TELESCOPECONTROL   | bool   | ON      | Enable building the Telescope Control plugin
-| USE_PLUGIN_OCULARS            | bool   | ON      | Enable building the Oculars plugin
-| USE_PLUGIN_TEXTUSERINTERFACE  | bool   | ON      | Enable building the Text User Interface plugin
-| USE_PLUGIN_SOLARSYSTEMEDITOR  | bool   | ON      | Enable building the Solar System Editor plugin
-| USE_PLUGIN_SUPERNOVAE         | bool   | ON      | Enable building the Historical Supernovae plugin
-| USE_PLUGIN_QUASARS            | bool   | ON      | Enable building the Quasars plugin
-| USE_PLUGIN_PULSARS            | bool   | ON      | Enable building the Pulsars plugin
-| USE_PLUGIN_EXOPLANETS         | bool   | ON      | Enable building the Exoplanets plugin
-| USE_PLUGIN_OBSERVABILITY      | bool   | ON      | Enable building the Observability Analysis plugin
-| USE_PLUGIN_ARCHAEOLINES       | bool   | ON      | Enable building the Archaeo Lines plugin
-| USE_PLUGIN_EQUATIONOFTIME     | bool   | ON      | Enable building the Equation Of Time plugin
-| USE_PLUGIN_METEORSHOWERS      | bool   | ON      | Enable building the Meteor Showers plugin
-| USE_PLUGIN_NAVSTARS           | bool   | ON      | Enable building the Navigational Stars plugin
-| USE_PLUGIN_NOVAE              | bool   | ON      | Enable building the Bright Novae plugin
-| USE_PLUGIN_ONLINEQUERIES      | bool   | ON      | Enable building the Online Queries plugin
-| USE_PLUGIN_POINTERCOORDINATES | bool   | ON      | Enable building the Pointer Coordinates plugin
-| USE_PLUGIN_SCENERY3D          | bool   | ON      | Enable building the 3D Scenery plugin
-| USE_PLUGIN_REMOTECONTROL      | bool   | ON      | Enable building the Remote Control plugin
-| USE_PLUGIN_REMOTESYNC         | bool   | ON      | Enable building the Remote Sync plugin
+ Parameter                           | TYPE   | Default | Description
+-------------------------------------| -------|---------|-----------------------------------------------------
+| CMAKE_INSTALL_PREFIX               | path   | *       | Prefix where to install Stellarium
+| CMAKE_PREFIX_PATH                  | path   |         | Additional path to look for libraries
+| CMAKE_BUILD_TYPE                   | string | Release | Build type of Stellarium
+| CMAKE_OSX_ARCHITECTURES            | string | arm64;x86_64 | macOS architecture**
+| CMAKE_OSX_DEPLOYMENT_TARGET        | string | 11.0    | Minimum macOS deployment version**
+| OPENGL_DEBUG_LOGGING               | bool   | OFF     | Enable to log OpenGL information using the GL_KHR_debug extension/QOpenGLLogger
+| ENABLE_QT6                         | bool   | ON      | Enable building Qt6-based Stellarium
+| ENABLE_NLS                         | bool   | ON      | Enable interface translation
+| ENABLE_SHOWMYSKY                   | bool   | ON      | Enable support for ShowMySky module that implements a realistic atmosphere model
+| ENABLE_GPS                         | bool   | ON      | Enable GPS support
+| ENABLE_LIBGPS                      | bool   | ON      | Enable GPS support with libGPS library (N/A on Windows)
+| ENABLE_MEDIA                       | bool   | ON      | Enable sound and video support
+| ENABLE_XLSX                        | bool   | ON      | Enable support for XLSX (Excel) files
+| ENABLE_SCRIPTING                   | bool   | ON      | Enable the scripting feature
+| ENABLE_RELEASE_BUILD               | bool   | OFF     | This option flags the build as an official release
+| ENABLE_TESTING                     | bool   | OFF     | Enable unit tests
+| ENABLE_QTWEBENGINE                 | bool   | ON      | Enable QtWebEngine module support if it installed
+| USE_PLUGIN_ANGLEMEASURE            | bool   | ON      | Enable building the Angle Measure plugin
+| USE_PLUGIN_ARCHAEOLINES            | bool   | ON      | Enable building the ArchaeoLines plugin
+| USE_PLUGIN_CALENDARS               | bool   | ON      | Enable building the Calendars plugin
+| USE_PLUGIN_EQUATIONOFTIME          | bool   | ON      | Enable building the Equation Of Time plugin
+| USE_PLUGIN_EXOPLANETS              | bool   | ON      | Enable building the Exoplanets plugin
+| USE_PLUGIN_HELLOSTELMODULE         | bool   | OFF     | Enable building the HelloStelModule plugin (example of simple plugin)
+| USE_PLUGIN_LENSDISTORTIONESTIMATOR | bool   | ON      | Enable building the Lens Distortion Estimator plugin
+| USE_PLUGIN_METEORSHOWERS           | bool   | ON      | Enable building the Meteor Showers plugin
+| USE_PLUGIN_MISSINGSTARS            | bool   | ON      | Enable building the Missing Stars plugin
+| USE_PLUGIN_NAVSTARS                | bool   | ON      | Enable building the Navigational Stars plugin
+| USE_PLUGIN_NOVAE                   | bool   | ON      | Enable building the Bright Novae plugin
+| USE_PLUGIN_OBSERVABILITY           | bool   | ON      | Enable building the Observability Analysis plugin
+| USE_PLUGIN_OCULARS                 | bool   | ON      | Enable building the Oculars plugin
+| USE_PLUGIN_OCULUS                  | bool   | OFF     | Enable building the Oculus plugin (support for Oculus Rift - outdated)
+| USE_PLUGIN_ONLINEQUERIES           | bool   | ON      | Enable building the Online Queries plugin
+| USE_PLUGIN_POINTERCOORDINATES      | bool   | ON      | Enable building the Pointer Coordinates plugin
+| USE_PLUGIN_PULSARS                 | bool   | ON      | Enable building the Pulsars plugin
+| USE_PLUGIN_QUASARS                 | bool   | ON      | Enable building the Quasars plugin
+| USE_PLUGIN_REMOTECONTROL           | bool   | ON      | Enable building the Remote Control plugin
+| USE_PLUGIN_REMOTESYNC              | bool   | ON      | Enable building the Remote Sync plugin
+| USE_PLUGIN_SATELLITES              | bool   | ON      | Enable building the Satellites plugin
+| USE_PLUGIN_SCENERY3D               | bool   | ON      | Enable building the 3D Scenery plugin
+| USE_PLUGIN_SIMPLEDRAWLINE          | bool   | OFF     | Enable building the SimpleDrawLine plugin (example of simple graphics plugin)
+| USE_PLUGIN_SOLARSYSTEMEDITOR       | bool   | ON      | Enable building the Solar System Editor plugin
+| USE_PLUGIN_SUPERNOVAE              | bool   | ON      | Enable building the Historical Supernovae plugin
+| USE_PLUGIN_TELESCOPECONTROL        | bool   | ON      | Enable building the Telescope Control plugin
+| USE_PLUGIN_TEXTUSERINTERFACE       | bool   | ON      | Enable building the Text User Interface plugin
+| USE_PLUGIN_VTS                     | bool   | OFF     | Enable building the Vts plugin (allow to use Stellarium as a plugin in CNES VTS)
 
 Notes:
  \* `/usr/local` on Unix-like systems, `C:\Program Files` or `C:\Program Files (x86)`
@@ -471,7 +491,7 @@ $ sudo make install
 
 ### Linux specifics
 
-To create a source package (TGZ) on linux you need run:
+To create a source packages on linux you need run:
 ```
 $ make package_source
 ```

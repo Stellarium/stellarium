@@ -4,19 +4,19 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Alexander V. Wolf <alex.v.wolf@gmail.com>, 2022
 # cardinot <mcardinot@gmail.com>, 2022
-# Víctor Vega <vegadark@protonmail.com>, 2022
+# Alexander V. Wolf <alex.v.wolf@gmail.com>, 2023
+# Víctor Vega <transifex.757ab@simplelogin.com>, 2023
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2022-12-13 22:53+0700\n"
+"POT-Creation-Date: 2023-11-29 07:24+0700\n"
 "PO-Revision-Date: 2022-10-05 17:12+0000\n"
-"Last-Translator: Víctor Vega <vegadark@protonmail.com>, 2022\n"
-"Language-Team: Spanish (https://www.transifex.com/stellarium/teams/80998/es/)\n"
+"Last-Translator: Víctor Vega <transifex.757ab@simplelogin.com>, 2023\n"
+"Language-Team: Spanish (https://app.transifex.com/stellarium/teams/80998/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -202,6 +202,7 @@ msgstr "Cara pequeña u ojos pequeños"
 #: ../../skycultures/greek_leidenAratea/description.en.utf8:129
 #: ../../skycultures/lokono/description.en.utf8:41
 #: ../../skycultures/russian_siberian/description.en.utf8:13
+#: ../../skycultures/tibetan/description.en.utf8:72
 #: ../../skycultures/tongan/description.en.utf8:66
 msgid "Pleiades"
 msgstr "Pléyades"
@@ -440,9 +441,9 @@ msgstr "Venus(?)"
 
 #. type: Content of: <h2>
 #: ../../skycultures/anutan/description.en.utf8:37
-#: ../../skycultures/greek_dante/description.en.utf8:9
+#: ../../skycultures/greek_dante/description.en.utf8:20
 #: ../../skycultures/greek_leidenAratea/description.en.utf8:275
-#: ../../skycultures/indian/description.en.utf8:35
+#: ../../skycultures/indian/description.en.utf8:46
 #: ../../skycultures/lokono/description.en.utf8:381
 #: ../../skycultures/samoan/description.en.utf8:93
 #: ../../skycultures/tongan/description.en.utf8:30
@@ -479,7 +480,7 @@ msgstr ""
 #: ../../skycultures/babylonian_seleucid/description.en.utf8:473
 #: ../../skycultures/chinese_medieval/description.en.utf8:49
 #: ../../skycultures/egyptian/description.en.utf8:17
-#: ../../skycultures/greek_dante/description.en.utf8:15
+#: ../../skycultures/greek_dante/description.en.utf8:26
 #: ../../skycultures/greek_farnese/description.en.utf8:297
 #: ../../skycultures/greek_leidenAratea/description.en.utf8:291
 #: ../../skycultures/korean/description.en.utf8:12
@@ -491,6 +492,7 @@ msgstr ""
 #: ../../skycultures/samoan/description.en.utf8:119
 #: ../../skycultures/sardinian/description.en.utf8:11
 #: ../../skycultures/seri/description.en.utf8:174
+#: ../../skycultures/tibetan/description.en.utf8:131
 #: ../../skycultures/tongan/description.en.utf8:85
 #: ../../skycultures/tupi/description.en.utf8:23
 msgid "Author"
@@ -500,10 +502,10 @@ msgstr "Autor"
 #: ../../skycultures/anutan/description.en.utf8:46
 msgid ""
 "This sky culture was contributed to Stellarium by <i>Dan Smale</i>, "
-"d.smale(at)niwa.co.nz"
+"smaledaniel(at)outlook.com"
 msgstr ""
 "Esta cultura estelar fue contribuida a Stellarium por <i>Dan Smale</i>, "
-"d.smale(at)niwa.co.nz"
+"smaledaniel(at)outlook.com"
 
 #. type: Content of: <h1>
 #: ../../skycultures/arabic_al-sufi/description.en.utf8:1
@@ -821,7 +823,7 @@ msgstr ""
 #: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:149
 #: ../../skycultures/arabic_lunar_mansions/description.en.utf8:75
 #: ../../skycultures/chinese/description.en.utf8:2960
-#: ../../skycultures/greek_dante/description.en.utf8:18
+#: ../../skycultures/greek_dante/description.en.utf8:29
 #: ../../skycultures/sami/description.en.utf8:57
 msgid "Notes"
 msgstr "Notas"
@@ -4850,7 +4852,7 @@ msgstr ""
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:522
 #: ../../skycultures/egyptian_dendera/description.en.utf8:222
 #: ../../skycultures/greek_almagest/description.en.utf8:489
-#: ../../skycultures/greek_dante/description.en.utf8:11
+#: ../../skycultures/greek_dante/description.en.utf8:22
 #: ../../skycultures/greek_farnese/description.en.utf8:294
 #: ../../skycultures/greek_leidenAratea/description.en.utf8:288
 msgid "Fair Use"
@@ -4939,7 +4941,7 @@ msgstr ""
 #. type: Content of: <h5>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:541
 #: ../../skycultures/egyptian_dendera/description.en.utf8:228
-#: ../../skycultures/greek_dante/description.en.utf8:20
+#: ../../skycultures/greek_dante/description.en.utf8:31
 #: ../../skycultures/greek_farnese/description.en.utf8:300
 #: ../../skycultures/greek_leidenAratea/description.en.utf8:294
 msgid "written in English:"
@@ -4948,7 +4950,7 @@ msgstr "escrito en inglés:"
 #. type: Content of: <h5>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:541
 #: ../../skycultures/egyptian_dendera/description.en.utf8:228
-#: ../../skycultures/greek_dante/description.en.utf8:20
+#: ../../skycultures/greek_dante/description.en.utf8:31
 msgid "SMH"
 msgstr "SMH"
 
@@ -11463,12 +11465,12 @@ msgstr "Divina Comedia de Dante"
 #: ../../skycultures/greek_dante/description.en.utf8:2
 msgid ""
 "Dante Alighieri mentions several stars and a few constellations: "
-"predominantly, the zodiacal constellation of Gemini. The Twins occurs in his"
-" texts (in the comedia as well as his poems). As Dante is not an astronomer "
-"but a person with broad knowledge, his view of the constellations is highly "
-"like not based upon observations of the sky but on manuscripts that he read."
-" Therefore, we chose to take the zodiacal constellation images from Michael "
-"Scotus whose manuscript was very popular in Dante's time."
+"predominantly, the zodiacal constellation of Gemini.  The Twins occurs in "
+"his texts (in the comedia as well as his poems).  As Dante is not an "
+"astronomer but a person with broad knowledge, his view of the constellations"
+" is highly like not based upon observations of the sky but on manuscripts "
+"that he read. Therefore, we chose to take the zodiacal constellation images "
+"from Michael Scotus whose manuscript was very popular in Dante's time."
 msgstr ""
 "Dante Alighieri menciona varias estrellas y algunas constelaciones: "
 "predominantemente, la constelación zodiacal de Géminis. Los Gemelos aparecen"
@@ -11480,11 +11482,11 @@ msgstr ""
 " en la época de Dante."
 
 #. type: Content of: <p>
-#: ../../skycultures/greek_dante/description.en.utf8:3
+#: ../../skycultures/greek_dante/description.en.utf8:6
 msgid ""
 "Dante Alighieri was a citizen of Florence, Italy, who was later banned and "
-"lived at several places in Northern Italy. The comedia was written around "
-"1300 but finished only short before his death in 1321. It is commonly "
+"lived at several places in Northern Italy.  The comedia was written around "
+"1300 but finished only short before his death in 1321.  It is commonly "
 "assumed that the story plays in around the Christian festival of Easter in "
 "1300 CE."
 msgstr ""
@@ -11495,21 +11497,21 @@ msgstr ""
 "cristiana de Pascua en 1300 EC."
 
 #. type: Content of: <h2>
-#: ../../skycultures/greek_dante/description.en.utf8:5
+#: ../../skycultures/greek_dante/description.en.utf8:10
 #: ../../skycultures/greek_leidenAratea/description.en.utf8:8
 msgid "How this Sky Culture was made"
 msgstr "¿Cómo se hizo esta cultura estelar?"
 
 #. type: Content of: <p>
-#: ../../skycultures/greek_dante/description.en.utf8:6
+#: ../../skycultures/greek_dante/description.en.utf8:11
 msgid ""
-"The Dante-experts of the German Dante Society selected some text passages "
+"The Dante experts of the German Dante Society selected some text passages "
 "with astronomical references in order to present them at Planetarium Jena in"
-" the dome. Professor Blume'ODs suggestion that Dante likely had Michael "
-"Scotus's drawings of the constellations in mind was accepted. Therefore, we "
-"copied these drawings and mapped them onto the stars. The \"16\" bright "
+" the dome.  Professor Blume's suggestion that Dante likely had Michael "
+"Scotus's drawings of the constellations in mind was accepted.  Therefore, we"
+" copied these drawings and mapped them onto the stars.  The \"16\" bright "
 "stars that are mentioned by Dante are usually interpreted by romanists as "
-"the stars of first magnitude in the Almagest. Therefore, these stars where "
+"the stars of first magnitude in the Almagest.  Therefore, these stars where "
 "highlighted with the \"star\"-symbol in Stellarium. Additionally, we painted"
 " a chariot (wagon) and a horn."
 msgstr ""
@@ -11524,11 +11526,11 @@ msgstr ""
 "\"estrella\" en Stellarium. Además, pintamos un carro (vagón) y un cuerno."
 
 #. type: Content of: <p>
-#: ../../skycultures/greek_dante/description.en.utf8:7
+#: ../../skycultures/greek_dante/description.en.utf8:16
 msgid ""
 "Dante calls the seven bright stars of Ursa Major \"The Chariot\", the "
 "constellation of Ursa Minor \"The Horn\", and possibly refers to Corona "
-"Borealis when he mentions a ring of stars. The latter interpretation is in "
+"Borealis when he mentions a ring of stars.  The latter interpretation is in "
 "our view unlikely but is discussed among researchers which is why we marked "
 "the stars of Corona Borealis as it is described in the Almagest."
 msgstr ""
@@ -11540,7 +11542,7 @@ msgstr ""
 "tal como se describe en el Almagesto."
 
 #. type: Content of: <p>
-#: ../../skycultures/greek_dante/description.en.utf8:10
+#: ../../skycultures/greek_dante/description.en.utf8:21
 msgid ""
 "The Italian Dante Society (Societá Dantesca Italiana) provides Dante's work "
 "online: <a href=\"https://danteonline.it/opere/index.php\">Dante_Online</a>."
@@ -11550,7 +11552,7 @@ msgstr ""
 "href=\"https://danteonline.it/opere/index.php\">Dante_Online</a>."
 
 #. type: Content of: <p>
-#: ../../skycultures/greek_dante/description.en.utf8:12
+#: ../../skycultures/greek_dante/description.en.utf8:23
 #: ../../skycultures/greek_farnese/description.en.utf8:295
 #: ../../skycultures/greek_leidenAratea/description.en.utf8:289
 msgid ""
@@ -11561,7 +11563,7 @@ msgstr ""
 "merecen ser citados de acuerdo con las reglas habituales. ¡Gracias!"
 
 #. type: Content of: <p>
-#: ../../skycultures/greek_dante/description.en.utf8:13
+#: ../../skycultures/greek_dante/description.en.utf8:24
 msgid ""
 "Susanne M Hoffmann, Dieter Blume, Karl Ph. Ellerbrock, Eduardo Castadura, "
 "Bodo Zöll (2022)"
@@ -11570,7 +11572,7 @@ msgstr ""
 "Bodo Zöll (2022)"
 
 #. type: Content of: <p>
-#: ../../skycultures/greek_dante/description.en.utf8:16
+#: ../../skycultures/greek_dante/description.en.utf8:27
 msgid ""
 "This sky culture was added to Stellarium by Susanne M. Hoffmann "
 "(service@uhura-uraniae.com) as a byproduct of a collaboration with Prof. Dr."
@@ -11583,7 +11585,7 @@ msgstr ""
 "Alemana Dante (Deutsche Dante Gesellschaft) y Planetario Jena."
 
 #. type: Content of: <p>
-#: ../../skycultures/greek_dante/description.en.utf8:19
+#: ../../skycultures/greek_dante/description.en.utf8:30
 msgid ""
 "region of origin: Florence, Italy; this single sky culture was made for use "
 "in research"
@@ -12883,55 +12885,36 @@ msgstr ""
 #: ../../skycultures/indian/description.en.utf8:11
 msgid ""
 "In Hindu tradition the ecliptic is divided into 27 parts of approximately "
-"13°20\", which correspond with 27 asterisms known as the nakṣatra-s (full "
-"list, with western equivalents here: https://goo.gl/2PVi28 ). In the "
+"13°20', which correspond with 27 asterisms known as the nakṣatra-s (full "
+"list, with western equivalents here: https://goo.gl/2PVi28 ).  In the "
 "earliest extant layers of the tradition this number is 28. This division is "
 "critical for several purposes including timing rituals and determining the "
-"birth lunar mansions. Since these asterisms define an area in the sky, they "
-"are also technically constellations."
+"birth lunar mansions.  Since these asterisms define an area in the sky, they"
+" are also technically constellations."
 msgstr ""
-"En la tradición hindú, la eclíptica se divide en 27 partes de "
-"aproximadamente 13°20\", que corresponden con 27 asterismos conocidos como "
-"los nakṣatra-s (lista completa, con equivalentes occidentales aquí: "
-"https://goo.gl/2PVi28). En el Las primeras capas existentes de la tradición,"
-" este número es 28. Esta división es crítica para varios propósitos, "
-"incluidos los rituales de tiempo y la determinación de las mansiones lunares"
-" de nacimiento. Dado que estos asterismos definen un área en el cielo, "
-"también son técnicamente constelaciones."
 
 #. type: Content of: <p>
-#: ../../skycultures/indian/description.en.utf8:12
+#: ../../skycultures/indian/description.en.utf8:14
 msgid ""
 "sUrya-siddhAnta and vedAnga-jyotiSha specify start coordinates for the "
-"13°20\" divisions using some stars (Please see penultimate paragraph in <a "
+"13°20' divisions using some stars (Please see penultimate paragraph in <a "
 "href=\"https://archive.org/stream/HistoryOfCalendarPanchangaCommittee/History-"
 "of-Calendar-Panchanga-Committee#page/n42/mode/1up\">this page</a>)"
 msgstr ""
-"sUrya-siddhAnta y vedAnga-jyotiSha especifican coordenadas de inicio para "
-"las divisiones de 13°20\" utilizando algunas estrellas (consulte el "
-"penúltimo párrafo en <a "
-"href=\"https://archive.org/stream/HistoryOfCalendarPanchangaCommittee/History-"
-"of-Calendar-Panchanga-Committee#page/n42/mode/1up\">esta página</a>)"
 
 #. type: Content of: <p>
-#: ../../skycultures/indian/description.en.utf8:13
+#: ../../skycultures/indian/description.en.utf8:16
 msgid ""
 "The earliest complete nakṣatra lists are found in the Taittirīya-śruti and "
 "the Atharvaveda where they are recited as part of the nakṣatreṣṭi ritual "
-"which places the deities of pantheon in these celestial compartments. Some "
+"which places the deities of pantheon in these celestial compartments.  Some "
 "scholars opine that the tradition shows that by the early medieval period, "
 "the nakṣatra identification had changed to a small degree from the Vedic "
 "period."
 msgstr ""
-"Las primeras listas completas de nakṣatra se encuentran en Taittirīya-śruti "
-"y Atharvaveda, donde se recitan como parte del ritual nakṣatreṣṭi que coloca"
-" a las deidades del panteón en estos compartimentos celestes. Algunos "
-"eruditos opinan que la tradición muestra que en el período medieval "
-"temprano, la identificación nakṣatra había cambiado en un pequeño grado "
-"desde el período védico."
 
 #. type: Content of: <p>
-#: ../../skycultures/indian/description.en.utf8:14
+#: ../../skycultures/indian/description.en.utf8:18
 msgid ""
 "There are multiple rich mythologies and symbolisms associated with the same "
 "constellations and stars (Example: <a "
@@ -12952,30 +12935,20 @@ msgstr ""
 "por separado. (Consulta las referencias a continuación)."
 
 #. type: Content of: <p>
-#: ../../skycultures/indian/description.en.utf8:15
+#: ../../skycultures/indian/description.en.utf8:21
 msgid ""
 "Name of the lunar months originated from those 12 divisions' names in which "
-"full moon or \"Purnimā\" occurs. Unlike a solar day which defined by a "
+"full moon or \"Purnimā\" occurs.  Unlike a solar day which defined by a "
 "sunrise to next sunrise, a lunar day or moon's position in a nakshatra "
-"doesn't depends on sun rising or moon rising. Thus a lunar day may start in "
-"any time of a solar day. Like other ancient human cultures, vedic people "
+"doesn't depends on sun rising or moon rising.  Thus a lunar day may start in"
+" any time of a solar day. Like other ancient human cultures, vedic people "
 "innovated a number of systems of which intercalary lunar months became most "
 "used, that is adding another month every 32.5 months on average or 4 months "
 "in every 11 years to correct the mismatch between lunar and solar year."
 msgstr ""
-"Nombre de los meses lunares originados a partir de los nombres de las 12 "
-"divisiones en las que se produce la luna llena o \"Purnimā\". A diferencia "
-"de un día solar que se define por un amanecer hasta el próximo amanecer, un "
-"día lunar o la posición de la luna en un nakshatra no depende de la salida "
-"del sol o la salida de la luna. Por lo tanto, un día lunar puede comenzar en"
-" cualquier momento de un día solar. Al igual que otras culturas humanas "
-"antiguas, las personas védicas innovaron una serie de sistemas de los cuales"
-" los meses lunares intercalares se usaron más, es decir, agregar otro mes "
-"cada 32.5 meses en promedio o 4 meses cada 11 años para corregir la falta de"
-" correspondencia entre el año lunar y el solar."
 
 #. type: Content of: <p>
-#: ../../skycultures/indian/description.en.utf8:16
+#: ../../skycultures/indian/description.en.utf8:25
 msgid ""
 "A few of the yogatārā-s or prominent asterisms in the nakṣatra-s (going by "
 "their mainstream identification) lie slightly outside their constellation "
@@ -12991,166 +12964,160 @@ msgstr ""
 "tales yogatārā-s)."
 
 #. type: Content of: <h2>
-#: ../../skycultures/indian/description.en.utf8:18
+#: ../../skycultures/indian/description.en.utf8:28
 msgid "Navagraha - Nine \"planets\""
 msgstr "Navagraha - Nueve \"planetas\""
 
 #. type: Content of: <p>
-#: ../../skycultures/indian/description.en.utf8:19
+#: ../../skycultures/indian/description.en.utf8:29
 msgid ""
 "They observed that some celestial body moves independently relative to "
 "background stars and named them \"planets\" or \"graha\". As such The sun "
-"and moon are also treated as graha. They also named the lunar nodes as "
+"and moon are also treated as graha.  They also named the lunar nodes as "
 "graha-s as these points are very important to calculate the eclipses. Name "
 "of vedic days originated from these planet's names."
 msgstr ""
-"Observaron que algunos cuerpos celestes se mueven independientemente en "
-"relación con las estrellas de fondo y los llamaron planetas o \"graha\". "
-"Como tal, el sol y la luna también son tratados como graha o planeta. "
-"También nombraron los nodos lunares como planetas, ya que estos puntos son "
-"muy importantes para calcular los eclipses. Nombre de los días védicos "
-"originados a partir de los nombres de estos planetas."
 
 #. type: Content of: <table><tr><th>
-#: ../../skycultures/indian/description.en.utf8:22
+#: ../../skycultures/indian/description.en.utf8:33
 msgid "Graha"
 msgstr "Graha"
 
 #. type: Content of: <table><tr><th>
-#: ../../skycultures/indian/description.en.utf8:22
+#: ../../skycultures/indian/description.en.utf8:33
 #: ../../skycultures/tongan/description.en.utf8:45
 msgid "Designation"
 msgstr "Designación"
 
 #. type: Content of: <table><tr><th>
-#: ../../skycultures/indian/description.en.utf8:22
+#: ../../skycultures/indian/description.en.utf8:33
 msgid "Name of Solar days"
 msgstr "Nombre de los días solares"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:23
+#: ../../skycultures/indian/description.en.utf8:34
 msgid "(Sun)"
 msgstr "(Sol)"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:23
+#: ../../skycultures/indian/description.en.utf8:34
 msgid "Sun God"
 msgstr "Dios Sol"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:23
+#: ../../skycultures/indian/description.en.utf8:34
 msgid "(Sunday)"
 msgstr "(Domingo)"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:24
+#: ../../skycultures/indian/description.en.utf8:35
 msgid "(Moon)"
 msgstr "(Luna)"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:24
+#: ../../skycultures/indian/description.en.utf8:35
 msgid "Moon god"
 msgstr "Dios Luna"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:24
+#: ../../skycultures/indian/description.en.utf8:35
 msgid "(Monday)"
 msgstr "(Lunes)"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:25
+#: ../../skycultures/indian/description.en.utf8:36
 msgid "(Mars)"
 msgstr "(Marte)"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:25
+#: ../../skycultures/indian/description.en.utf8:36
 msgid "God of war"
 msgstr "Dios de la guerra"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:25
+#: ../../skycultures/indian/description.en.utf8:36
 msgid "(Tuesday)"
 msgstr "(Martes)"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:26
+#: ../../skycultures/indian/description.en.utf8:37
 msgid "(Mercury)"
 msgstr "(Mercurio)"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:26
+#: ../../skycultures/indian/description.en.utf8:37
 msgid "Son of Moon"
 msgstr "Hijo de Luna"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:26
+#: ../../skycultures/indian/description.en.utf8:37
 msgid "(Wednesday)"
 msgstr "(Miércoles)"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:27
+#: ../../skycultures/indian/description.en.utf8:38
 msgid "(Jupiter)"
 msgstr "(Júpiter)"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:27
+#: ../../skycultures/indian/description.en.utf8:38
 msgid "Teacher of Gods"
 msgstr "Maestro de los Dioses"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:27
+#: ../../skycultures/indian/description.en.utf8:38
 msgid "(Thursday)"
 msgstr "(Jueves)"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:28
+#: ../../skycultures/indian/description.en.utf8:39
 msgid "(Venus)"
 msgstr "(Venus)"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:28
+#: ../../skycultures/indian/description.en.utf8:39
 msgid "Mentor of Demons"
 msgstr "Mentor de Demonios"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:28
+#: ../../skycultures/indian/description.en.utf8:39
 msgid "(Friday)"
 msgstr "(Viernes)"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:29
+#: ../../skycultures/indian/description.en.utf8:40
 msgid "(Saturn)"
 msgstr "(Saturno)"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:29
+#: ../../skycultures/indian/description.en.utf8:40
 msgid "God of Misfortune"
 msgstr "Dios de la desgracia"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:29
+#: ../../skycultures/indian/description.en.utf8:40
 msgid "(Saturday)"
 msgstr "(Sábado)"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:30
-#: ../../skycultures/indian/description.en.utf8:31
+#: ../../skycultures/indian/description.en.utf8:41
+#: ../../skycultures/indian/description.en.utf8:42
 msgid "lunar node"
 msgstr "nodo lunar"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:30
-#: ../../skycultures/indian/description.en.utf8:31
+#: ../../skycultures/indian/description.en.utf8:41
+#: ../../skycultures/indian/description.en.utf8:42
 msgid "-"
 msgstr "-"
 
 #. type: Content of: <h3>
-#: ../../skycultures/indian/description.en.utf8:36
+#: ../../skycultures/indian/description.en.utf8:47
 msgid "General"
 msgstr "General"
 
 #. type: Content of: <ul><li>
-#: ../../skycultures/indian/description.en.utf8:38
+#: ../../skycultures/indian/description.en.utf8:49
 msgid ""
 "<a href=\"https://sa.wikipedia.org/wiki/नक्षत्रम्\" class='external text' "
 "rel=\"nofollow\">Nakshatra</a> article at Sanskrit Wikipedia"
@@ -13159,7 +13126,7 @@ msgstr ""
 "rel=\"nofollow\">Nakshatra</a> artículo en Wikipedia en sánscrito"
 
 #. type: Content of: <ul><li>
-#: ../../skycultures/indian/description.en.utf8:39
+#: ../../skycultures/indian/description.en.utf8:50
 msgid ""
 "<a href=\"http://en.wikipedia.org/wiki/Nakshatra\" class='external text' "
 "rel=\"nofollow\">Nakshatra</a> article at English Wikipedia"
@@ -13168,7 +13135,7 @@ msgstr ""
 "rel=\"nofollow\">Nakshatra</a> artículo en Wikipedia en inglés"
 
 #. type: Content of: <ul><li>
-#: ../../skycultures/indian/description.en.utf8:40
+#: ../../skycultures/indian/description.en.utf8:51
 msgid ""
 "<a "
 "href=\"https://archive.org/stream/HistoryOfCalendarPanchangaCommittee/History-"
@@ -13181,7 +13148,7 @@ msgstr ""
 "rel=\"nofollow\">Historia del Informe del Comité Calendario-Panchanga</a>"
 
 #. type: Content of: <ul><li>
-#: ../../skycultures/indian/description.en.utf8:41
+#: ../../skycultures/indian/description.en.utf8:52
 msgid ""
 "<a "
 "href=\"http://www.tifr.res.in/~archaeo/papers/Others/Possible%20period%20of%20the%20design%20of%20Nakshatras.pdf\""
@@ -13194,19 +13161,19 @@ msgstr ""
 "Abhijit\"</a>"
 
 #. type: Content of: <h3>
-#: ../../skycultures/indian/description.en.utf8:44
+#: ../../skycultures/indian/description.en.utf8:55
 msgid "Mythology"
 msgstr "Mitología"
 
 #. type: Content of: outside any tag (error?)
-#: ../../skycultures/indian/description.en.utf8:45
+#: ../../skycultures/indian/description.en.utf8:56
 msgid "Much of the below is available online for free at archive.org."
 msgstr ""
 "Gran parte de lo siguiente está disponible en línea de forma gratuita en "
 "archive.org."
 
 #. type: Content of: <ul><li>
-#: ../../skycultures/indian/description.en.utf8:48
+#: ../../skycultures/indian/description.en.utf8:59
 msgid ""
 "Secondary references such as: Purana Encyclopedia, Purana Index, Mahabharata"
 " Index, Vedic Indix"
@@ -13215,13 +13182,13 @@ msgstr ""
 "Mahabharata, Índice Védico"
 
 #. type: Content of: <ul><li>
-#: ../../skycultures/indian/description.en.utf8:49
-#: ../../skycultures/indian/description.en.utf8:54
+#: ../../skycultures/indian/description.en.utf8:60
+#: ../../skycultures/indian/description.en.utf8:65
 msgid "Vedas, Agamas"
 msgstr "Vedas, Agamas"
 
 #. type: Content of: <ul><li>
-#: ../../skycultures/indian/description.en.utf8:50
+#: ../../skycultures/indian/description.en.utf8:61
 msgid ""
 "<a href=\"https://archive.org/details/vedicchronologya033083mbp/page/n5\" "
 "class='external text'> Vedic Chronology And Vedanga Jyotisha by Bala "
@@ -13232,7 +13199,7 @@ msgstr ""
 "Gangadhar Tilak</a>"
 
 #. type: Content of: <ul><li>
-#: ../../skycultures/indian/description.en.utf8:51
+#: ../../skycultures/indian/description.en.utf8:62
 msgid ""
 "<a href=\"https://archive.org/details/in.gov.ignca.5110\" class='external "
 "text'> Orion The Antiquity Of The Vedas by Bala Gangadhar Tilak</a>"
@@ -13241,7 +13208,7 @@ msgstr ""
 "text'> Orión La antigüedad de los Vedas por Bala Gangadhar Tilak</a>"
 
 #. type: Content of: <ul><li>
-#: ../../skycultures/indian/description.en.utf8:52
+#: ../../skycultures/indian/description.en.utf8:63
 msgid ""
 "<a href=\"https://archive.org/details/arctichm/page/n21/mode/2up\" "
 "class='external text'> The Arctic Home in the Vedas by Bal Gangadhar "
@@ -13252,7 +13219,7 @@ msgstr ""
 "Tilak</a>"
 
 #. type: Content of: <ul><li>
-#: ../../skycultures/indian/description.en.utf8:53
+#: ../../skycultures/indian/description.en.utf8:64
 msgid ""
 "<a href=\"https://archive.org/details/HamletsMill\" class='external "
 "text'>Hamlet's Mill: An Essay on Myth & the Frame of Time by Giorgio de "
@@ -13263,17 +13230,17 @@ msgstr ""
 "Giorgio de Santillana, Hertha von Dechend</a>"
 
 #. type: Content of: <h2>
-#: ../../skycultures/indian/description.en.utf8:58
+#: ../../skycultures/indian/description.en.utf8:69
 msgid "Contributors"
 msgstr "Colaboradores"
 
 #. type: Content of: <ul><li>
-#: ../../skycultures/indian/description.en.utf8:60
+#: ../../skycultures/indian/description.en.utf8:71
 msgid "Tanmoy Saha"
 msgstr "Tanmoy Saha"
 
 #. type: Content of: <ul><li>
-#: ../../skycultures/indian/description.en.utf8:61
+#: ../../skycultures/indian/description.en.utf8:72
 msgid ""
 "Contributors from the <a href=\"https://github.com/sanskrit-"
 "coders\">sanskrit-coders community</a> (esp <a "
@@ -13633,6 +13600,7 @@ msgstr "Ogro, diablo, tal vez fantasma"
 
 #. type: Content of: <h2>
 #: ../../skycultures/japanese_moon_stations/description.en.utf8:246
+#: ../../skycultures/tibetan/description.en.utf8:69
 #: ../../skycultures/vanuatu_netwar/description.en.utf8:25
 msgid "Stars"
 msgstr "Estrellas"
@@ -17223,10 +17191,10 @@ msgstr ""
 #: ../../skycultures/tongan/description.en.utf8:86
 msgid ""
 "This sky culture was contributed by Stellarium user <i>Dan Smale</i>, "
-"d.smale(at)niwa.co.nz"
+"smaledaniel(at)outlook.com"
 msgstr ""
 "Esta cultura estelar fue aportada por el usuario de Stellarium <i>Dan "
-"Smale</i>, d.smale(at)niwa.co.nz"
+"Smale</i>, smaledaniel(at)outlook.com"
 
 #. type: Content of: <h1>
 #: ../../skycultures/maya/description.en.utf8:1
@@ -21610,6 +21578,799 @@ msgstr ""
 msgid "Karpenko, Ju.A. Nazvanija zvezdnogo neba. - M.: Nauka, 1981. - 184 s."
 msgstr "Karpenko, Ju.A. Nazvanija zvezdnogo neba. - M.: Nauka, 1981. - 184 s."
 
+#. type: Content of: <h2>
+#: ../../skycultures/tibetan/description.en.utf8:1
+msgid "Tibetan (Preliminary)"
+msgstr ""
+
+#. type: Content of: <p>
+#: ../../skycultures/tibetan/description.en.utf8:3
+msgid ""
+"<em>This is unfinished work and only a tentative solution. Please help us "
+"improve! (see below)</em>"
+msgstr ""
+
+#. type: Content of: <p>
+#: ../../skycultures/tibetan/description.en.utf8:5
+msgid ""
+"During a travel to the Tibetan Autonomous Region of China (TAR) in 2019, I "
+"was confronted with a highly complex system of astronomy and calendar "
+"computations which has a long tradition in Tibet."
+msgstr ""
+
+#. type: Content of: <p>
+#: ../../skycultures/tibetan/description.en.utf8:8
+msgid ""
+"Traditional Tibetan astronomy is largely influenced by the Kalacakra Tantra "
+"which has been imported from India, mixed with some Chinese influence."
+msgstr ""
+
+#. type: Attribute 'alt' of: <table><tr><td><img>
+#: ../../skycultures/tibetan/description.en.utf8:13
+msgid "Emblem of Men Tsee Khang"
+msgstr ""
+
+#. type: Attribute 'alt' of: <table><tr><td><img>
+#: ../../skycultures/tibetan/description.en.utf8:14
+msgid "Stag Phu disk"
+msgstr ""
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:17
+msgid "Emblem on the door sign of Men Tsee Khang institute in Lhasa"
+msgstr ""
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:18
+msgid ""
+"Stag Phu observatory Platform. The traditional stone for the shadow "
+"observation has been embedded in a concrete platform which shows the lunar "
+"mansions.  The outermost circle shows figures of the 12 Zodiacal signs "
+"(barely visible but enlarged below)."
+msgstr ""
+
+#. type: Content of: <p>
+#: ../../skycultures/tibetan/description.en.utf8:23
+msgid ""
+"The Men Tsee Khang Institute for Astro and Medicine in Lhasa, TAR, is the "
+"central authority for traditional Tibetan medicine and astrology, two fields"
+" of research which are closely related in Tibetan tradition. The institute "
+"is in charge of editing the annual Tibetan calendar.  Although this can be "
+"described algorithmically, in 2009 Men Tsee Khang experts have re-erected a "
+"calendar observatory in Stag Phu monastery, where a sunrise observation is "
+"performed on each March 17th for calibrating the calendar.  On this day, "
+"just as the sun climbs over a mountain ridge, its first rays are cast "
+"through a window in the observatory tower onto a particular rock which has "
+"been embedded into a circular platform."
+msgstr ""
+
+#. type: Content of: <h3>
+#: ../../skycultures/tibetan/description.en.utf8:30
+msgid "The Zodiac"
+msgstr ""
+
+#. type: Content of: <p>
+#: ../../skycultures/tibetan/description.en.utf8:32
+msgid ""
+"The zodiac is partitioned into 12 figures largely identical to the classical"
+" figures of the zodiac known in Europe.  The following table is from Cornu, "
+"with photographs showing the figures illustrated in the circular platform. "
+"Note the unexpected appearance of Cancer. Is it a frog?"
+msgstr ""
+
+#. type: Content of: <table><tr><th>
+#: ../../skycultures/tibetan/description.en.utf8:37
+msgid "IAU"
+msgstr ""
+
+#. type: Content of: <table><tr><th>
+#: ../../skycultures/tibetan/description.en.utf8:37
+msgid "Tibetan"
+msgstr ""
+
+#. type: Content of: <table><tr><th>
+#: ../../skycultures/tibetan/description.en.utf8:37
+msgid "Indian"
+msgstr ""
+
+#. type: Content of: <table><tr><th>
+#: ../../skycultures/tibetan/description.en.utf8:37
+msgid "Platform Illustration"
+msgstr ""
+
+#. type: Attribute 'alt' of: <table><tr><td><img>
+#: ../../skycultures/tibetan/description.en.utf8:38
+msgid "Ari"
+msgstr "Ari"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:38
+msgid "Luk"
+msgstr ""
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:38
+msgid "Meṣa"
+msgstr "Meṣa"
+
+#. type: Attribute 'alt' of: <table><tr><td><img>
+#: ../../skycultures/tibetan/description.en.utf8:39
+msgid "Tau"
+msgstr "Tau"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:39
+msgid "Lang"
+msgstr ""
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:39
+msgid "Vṛṣa"
+msgstr ""
+
+#. type: Attribute 'alt' of: <table><tr><td><img>
+#: ../../skycultures/tibetan/description.en.utf8:40
+msgid "Gem"
+msgstr "Gem"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:40
+msgid "Trik"
+msgstr ""
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:40
+msgid "Mithuna"
+msgstr "Mithuna"
+
+#. type: Attribute 'alt' of: <table><tr><td><img>
+#: ../../skycultures/tibetan/description.en.utf8:41
+msgid "Cnc"
+msgstr "Cnc"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:41
+msgid "Karkata"
+msgstr ""
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:41
+msgid "Karka"
+msgstr ""
+
+#. type: Attribute 'alt' of: <table><tr><td><img>
+#: ../../skycultures/tibetan/description.en.utf8:42
+msgid "Leo"
+msgstr "Leo"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:42
+msgid "Senge"
+msgstr ""
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:42
+msgid "Simha"
+msgstr ""
+
+#. type: Attribute 'alt' of: <table><tr><td><img>
+#: ../../skycultures/tibetan/description.en.utf8:43
+msgid "Vir"
+msgstr "Vir"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:43
+msgid "Pumo"
+msgstr ""
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:43
+msgid "Kanyā"
+msgstr "Kanyā"
+
+#. type: Attribute 'alt' of: <table><tr><td><img>
+#: ../../skycultures/tibetan/description.en.utf8:44
+msgid "Lib"
+msgstr "Lib"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:44
+msgid "Sangwa"
+msgstr ""
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:44
+msgid "Tulā"
+msgstr "Tulā"
+
+#. type: Attribute 'alt' of: <table><tr><td><img>
+#: ../../skycultures/tibetan/description.en.utf8:45
+msgid "Sco"
+msgstr "Sco"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:45
+msgid "Dikpa"
+msgstr ""
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:45
+msgid "Vṛscika"
+msgstr ""
+
+#. type: Attribute 'alt' of: <table><tr><td><img>
+#: ../../skycultures/tibetan/description.en.utf8:46
+msgid "Sgr"
+msgstr "Sgr"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:46
+msgid "Zhu"
+msgstr ""
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:46
+msgid "Dhanus"
+msgstr ""
+
+#. type: Attribute 'alt' of: <table><tr><td><img>
+#: ../../skycultures/tibetan/description.en.utf8:47
+msgid "Cap"
+msgstr "Cap"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:47
+msgid "Chusin"
+msgstr ""
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:47
+msgid "Makara"
+msgstr "Makara"
+
+#. type: Attribute 'alt' of: <table><tr><td><img>
+#: ../../skycultures/tibetan/description.en.utf8:48
+msgid "Aqr"
+msgstr "Aqr"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:48
+msgid "Bumpa"
+msgstr ""
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:48
+msgid "Kumbha"
+msgstr "Kumbha"
+
+#. type: Attribute 'alt' of: <table><tr><td><img>
+#: ../../skycultures/tibetan/description.en.utf8:49
+msgid "Psc"
+msgstr "Psc"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:49
+msgid "Nya"
+msgstr ""
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:49
+msgid "Mīna"
+msgstr "Mīna"
+
+#. type: Content of: <h3>
+#: ../../skycultures/tibetan/description.en.utf8:54
+msgid "The Lunar Mansions"
+msgstr ""
+
+#. type: Content of: <p>
+#: ../../skycultures/tibetan/description.en.utf8:56
+msgid ""
+"The Men Tsee Khang emblem shows 27 stick figures for the Lunar mansions "
+"arranged in a circle around the central figure.  The same figures are also "
+"laid out in cement with bright stones connected by black lines in the "
+"circular platform which has been erected when the observatory was rebuilt.  "
+"These 27 <em>gyukar</em> figures are described as being equal to the Indian "
+"<em>Nakṣatras</em> and represent sections of 13°20' longitude along the "
+"ecliptic.  Actually, one of the <em>gyukars</em> consists of 2 "
+"constellations, therefore 28 <em>lunar constellations</em> are named."
+msgstr ""
+
+#. type: Content of: <p>
+#: ../../skycultures/tibetan/description.en.utf8:62
+msgid ""
+"However, not much is known of the exact identification of the Tibetan Lunar "
+"Stations outside of Tibet.  Most literature is Tibetan or Chinese only, and "
+"there were no Tibetan star maps available. Also our guides could not explain"
+" any of the following to us."
+msgstr ""
+
+#. type: Content of: <p>
+#: ../../skycultures/tibetan/description.en.utf8:66
+msgid ""
+"The following table was taken from Cornu. Note that Tibetans start counting "
+"at zero, while the Indians count from 1."
+msgstr ""
+
+#. type: Content of: <table><tr><th>
+#: ../../skycultures/tibetan/description.en.utf8:69
+msgid "Gyukar"
+msgstr ""
+
+#. type: Content of: <table><tr><th>
+#: ../../skycultures/tibetan/description.en.utf8:69
+msgid "Nakshatra"
+msgstr ""
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:70
+msgid "Takar, Yugu"
+msgstr ""
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:70
+msgid "Aśvini"
+msgstr ""
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:70
+msgid "&beta; Ari Sheratan"
+msgstr ""
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:71
+msgid "Dranye"
+msgstr ""
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:71
+msgid "Bharaṇī"
+msgstr ""
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:71
+msgid "35 Ari"
+msgstr "35 Ari"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:72
+msgid "Mindruk"
+msgstr ""
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:72
+msgid "Kṛttikā"
+msgstr ""
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:73
+msgid "Narma"
+msgstr ""
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:73
+msgid "Rohiṇī"
+msgstr "Rohiṇī"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:73
+msgid "&alpha; Tau Aldebaran"
+msgstr ""
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:74
+msgid "Go"
+msgstr ""
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:74
+msgid "Mṛgaśirā"
+msgstr ""
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:74
+msgid "&lambda; Ori"
+msgstr ""
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:75
+msgid "Lak"
+msgstr ""
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:75
+msgid "Ārdrā"
+msgstr "Ārdrā"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:75
+msgid "&alpha; Ori Betelgeuse"
+msgstr ""
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:76
+msgid "Nabso, Gyaltö"
+msgstr ""
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:76
+msgid "Punarvasū"
+msgstr ""
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:76
+msgid "&beta; Gem Pollux"
+msgstr ""
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:77
+msgid "Gyal, Gyalme"
+msgstr ""
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:77
+msgid "Puṣya"
+msgstr ""
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:77
+msgid "5 Cnc"
+msgstr ""
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:78
+msgid "Kak, Wa"
+msgstr ""
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:78
+msgid "Aśleṣa"
+msgstr ""
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:78
+msgid "&alpha; Hya"
+msgstr ""
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:79
+msgid "Chu, Ta chen"
+msgstr ""
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:79
+msgid "Maghā"
+msgstr "Maghā"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:79
+msgid "&alpha; Leo Regulus"
+msgstr ""
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:80
+msgid "Dre, Ta chung"
+msgstr ""
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:80
+msgid "Purva-Phālgunī"
+msgstr ""
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:80
+msgid "&delta; Leo Zosma"
+msgstr ""
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:81
+msgid "Wo"
+msgstr ""
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:81
+msgid "Uttara-Phālgunī"
+msgstr ""
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:81
+msgid "&beta; Leo Denebola"
+msgstr ""
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:82
+msgid "Mezhi"
+msgstr ""
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:82
+msgid "Hasta"
+msgstr ""
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:82
+msgid "&delta; Crv Algorab"
+msgstr ""
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:83
+msgid "Nakpa"
+msgstr ""
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:83
+msgid "Citrā"
+msgstr ""
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:83
+msgid "&alpha; Vir Spica"
+msgstr ""
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:84
+msgid "Sari"
+msgstr ""
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:84
+msgid "Svātī"
+msgstr "Svātī"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:84
+msgid "&alpha; Boo Arcturus"
+msgstr ""
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:85
+msgid "Saga"
+msgstr ""
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:85
+msgid "Viśākhā"
+msgstr ""
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:85
+msgid "&alpha; Lib"
+msgstr ""
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:86
+msgid "Lhatsam"
+msgstr ""
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:86
+msgid "Anurādhā"
+msgstr ""
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:86
+msgid "&delta; Sco"
+msgstr ""
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:87
+msgid "Nrön, Deu"
+msgstr ""
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:87
+msgid "Jyeṣṭhā"
+msgstr ""
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:87
+msgid "&alpha; Sco Antares"
+msgstr ""
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:88
+msgid "Nup"
+msgstr ""
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:88
+msgid "Mūla"
+msgstr ""
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:88
+msgid "&lambda; Sco Shaula"
+msgstr ""
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:89
+msgid "Chutö"
+msgstr ""
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:89
+msgid "Purvāṣadhā"
+msgstr ""
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:89
+msgid "&delta; Sgr"
+msgstr ""
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:90
+msgid "Chume"
+msgstr ""
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:90
+msgid "Uttarāṣadhā"
+msgstr ""
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:90
+msgid "&sigma; Sgr"
+msgstr ""
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:91
+msgid "Drozhin + Jizhin"
+msgstr ""
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:91
+msgid "Uttara-Āṣādhā + Śravaṇa"
+msgstr ""
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:91
+msgid "&alpha; Lyr Vega + &alpha; Aql Altair"
+msgstr ""
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:92
+msgid "Möndre"
+msgstr ""
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:92
+msgid "Dhaniāsṭha"
+msgstr ""
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:92
+msgid "&beta; Del"
+msgstr ""
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:93
+msgid "Möndru"
+msgstr ""
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:93
+msgid "Satabhiṣak"
+msgstr ""
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:93
+msgid "&lambda; Aqr"
+msgstr ""
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:94
+msgid "Trumtö"
+msgstr ""
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:94
+msgid "Purvabāadrapada"
+msgstr ""
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:94
+msgid "&alpha; Peg Markab"
+msgstr ""
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:95
+msgid "Trume"
+msgstr ""
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:95
+msgid "Uttarabhādrapada"
+msgstr ""
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:95
+msgid "&gamma; Peg, &alpha; And"
+msgstr ""
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:96
+msgid "Namdru, Shesa"
+msgstr ""
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:96
+msgid "Revati"
+msgstr "Revati"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:96
+msgid "&sigma; Psc"
+msgstr ""
+
+#. type: Content of: <p>
+#: ../../skycultures/tibetan/description.en.utf8:100
+msgid ""
+"The Lunar Mansions in this skyculture are shown as asterisms among the "
+"traditional 12 Ptolemaic zodiacal constellations.  It is assumed that most "
+"originate from the Indian traditions, esp. Kalacakra Tantra, but it appears "
+"that some Chinese influence is also present, e.g. Nr. 11.  Only for the "
+"Zodiacal constellations artwork is provided.  A few more constellations in "
+"Ptolemaic tradition are displayed in the northern sky to allow easier "
+"orientation, but with their names suppressed.  We have no information about "
+"their names, relevance or even publicity of these in Tibet."
+msgstr ""
+
+#. type: Content of: <h3>
+#: ../../skycultures/tibetan/description.en.utf8:109
+msgid "Please help us"
+msgstr ""
+
+#. type: Content of: <p>
+#: ../../skycultures/tibetan/description.en.utf8:110
+msgid ""
+"The figures are my own attempt of identification of the Lunar mansion "
+"figures.  We can be sure about the placement of only those which can also be"
+" found in other sky cultures, e.g. Japanese Moon Stations.  Many stars are "
+"rather dim, and the figures in the emblem apparently have to be rotated in "
+"arbitrary ways, like <em>gyukar 3</em>=Hyades.  Others require considerable "
+"liberties to accept a topological match.  Alternative matches with stars in "
+"similar topology arranged in the orientation shown in the emblem "
+"(north=outer circle)  have been found only in neighboring areas of the sky, "
+"making a match rather unlikely.  Others appear to have been taken over from "
+"Chinese tradition, e.g. Nr. 11.  LM21 can be explained only if we accept two"
+" separate figures which are not joined as shown in the concrete figure.  "
+"Then they represent Chinese constellations <em>Ox</em> and <em>Girl</em> "
+"(which is also Japanese Lunar station <em>Woman</em>)."
+msgstr ""
+
+#. type: Content of: <p>
+#: ../../skycultures/tibetan/description.en.utf8:121
+msgid ""
+"Alternative figures can be found in the configuration files.  We would like "
+"to hear from experts of Tibetan astronomy about both confirmed and corrected"
+" identification."
+msgstr ""
+
+#. type: Content of: <h4>
+#: ../../skycultures/tibetan/description.en.utf8:124
+msgid "Further reading"
+msgstr ""
+
+#. type: Content of: <p>
+#: ../../skycultures/tibetan/description.en.utf8:126
+msgid ""
+"This work accompanies a 3D model of the Stag Phu observatory for use with "
+"the Scenery3D plugin and described in:"
+msgstr ""
+
+#. type: Content of: <p>
+#: ../../skycultures/tibetan/description.en.utf8:128
+msgid ""
+"Georg Zotti, Guntram Hazod, Martin Gamon, Hubert Feiglstorfer: A Calendar "
+"Observatory in Tibet. Proc. SEAC2022, Timisoara University Press, 2023. (to "
+"appear)"
+msgstr ""
+
+#. type: Content of: <p>
+#: ../../skycultures/tibetan/description.en.utf8:132
+msgid "Georg Zotti on May 21, 2019, reworked July-October 2023."
+msgstr ""
+
 #. type: Content of: <h1>
 #: ../../skycultures/tongan/description.en.utf8:1
 msgid "Tongan (Tonga)"
@@ -22494,6 +23255,501 @@ msgid ""
 msgstr ""
 "Las exhibiciones fueron hechas por Antonio Gumercindo Taques dos Santos "
 "(Ticão) y Youssif Ganthous Filho (youssif@gmail.com)."
+
+#. type: Content of: <h1>
+#: ../../skycultures/tikuna/description.en.utf8:1
+msgid "The Tikuna Skyscape: Constellations and Seasonality"
+msgstr "El paisaje celeste de Tikuna: constelaciones y estacionalidad"
+
+#. type: Content of: <h3>
+#: ../../skycultures/tikuna/description.en.utf8:3
+msgid "Priscila Faulhaber"
+msgstr "Priscila Faulhaber"
+
+#. type: Content of: <h3>
+#: ../../skycultures/tikuna/description.en.utf8:3
+msgid "MAST (Museu de Astronomia e Ciências Afins (Brasil)"
+msgstr "MAST (Museu de Astronomia e Ciências Afins (Brasil)"
+
+#. type: Content of: <p>
+#: ../../skycultures/tikuna/description.en.utf8:5
+msgid ""
+"The Tikuna indigenous people have inhabited the region of the Upper Solimões"
+" river for the past 2,000 years.  They currently occupy a territory where "
+"the political borders of three countries converge: Brazil, Colombia, and "
+"Peru.  This is the reason why the Tikuna recognize themselves as a "
+"differentiated indigenous group, while also identifying with the national "
+"identities related to these three countries."
+msgstr ""
+"Los indígenas Tikuna habitan la región del río Alto Solimões desde hace "
+"2.000 años. Actualmente ocupan un territorio donde convergen las fronteras "
+"políticas de tres países: Brasil, Colombia y Perú. Esta es la razón por la "
+"cual los Tikuna se reconocen como un grupo indígena diferenciado, al mismo "
+"tiempo que se identifican con las identidades nacionales relacionadas con "
+"estos tres países."
+
+#. type: Content of: <p>
+#: ../../skycultures/tikuna/description.en.utf8:10
+msgid ""
+"Tikuna territory encompasses a region 600 kilometers long, running west to "
+"east from the Chimbote region in Peru—along the emptiness of the Amazonas-"
+"Solimões valley, in the so-called Trapézio Amazônico (Colombian Amazonian "
+"Trapezoid)—to the Barreira da Missão region, in the municipality of Tefé, in"
+" the Brazilian state of Amazonas (See The Ticuna Atlas, Figure I)."
+msgstr ""
+"El territorio Tikuna abarca una región de 600 kilómetros de largo, que se "
+"extiende de oeste a este desde la región de Chimbote en Perú —a lo largo del"
+" vacío del valle de Amazonas-Solimões, en el llamado Trapézio Amazônico "
+"(Trapecio Amazónico Colombiano)— hasta la región de Barreira da Missão, en "
+"el municipio de Tefé, en el estado brasileño de Amazonas (Ver El Atlas "
+"Tikuna, Figura I)."
+
+#. type: Content of: <p><p><h5><em><cite><a>
+#: ../../skycultures/tikuna/description.en.utf8:16
+msgid "<em>Figure 1: The Tikuna Atlas<cite id=\"cit1a\"><a href=\"#cit1\">"
+msgstr "<em>Figura 1: El Atlas Tikuna<cite id=\"cit1a\"><a href=\"#cit1\">"
+
+#. type: Content of: <p><p><h5><em><cite><a><B>
+#: ../../skycultures/tikuna/description.en.utf8:16
+msgid "¹"
+msgstr "¹"
+
+#. type: Content of: <p><p><h5>
+#: ../../skycultures/tikuna/description.en.utf8:16
+msgid "</a></cite> </em>"
+msgstr "</a></cite> </em>"
+
+#. type: Content of: <p><p><p><cite><a>
+#: ../../skycultures/tikuna/description.en.utf8:18
+msgid ""
+"The agencies and researchers that deal with them estimate that more than "
+"53,544 (Siasi/Sesai, 2014) Tikunas live in Brazil (FUNASA, 2009), 8.000 in "
+"Colombia (Goulard, 2010), and 6.982 in Peru (INEL, 2007)<cite "
+"id=\"cit2a\"><a href=\"#cit2\">"
+msgstr ""
+"Las agencias e investigadores que los tratan estiman que más de 53.544 "
+"(Siasi/Sesai, 2014) Tikunas viven en Brasil (FUNASA, 2009), 8.000 en "
+"Colombia (Goulard, 2010) y 6.982 en Perú (INEL, 2007)<cite id=\"cit2a\"><a "
+"href=\"#cit2\">"
+
+#. type: Content of: <p><p><p><cite><a><B>
+#: ../../skycultures/tikuna/description.en.utf8:19
+msgid "²"
+msgstr "²"
+
+#. type: Content of: <p><p><p>
+#: ../../skycultures/tikuna/description.en.utf8:19
+msgid ""
+"</a></cite>.  Together, they constitute the largest Amazonian indigenous "
+"population.  Aside from their own Tikuna language, they also speak Spanish "
+"and Portuguese, depending on whether they live in Colombia and Peru or in "
+"Brazil."
+msgstr ""
+"</a></cite>. Juntos, constituyen la mayor población indígena amazónica. "
+"Además de su propio idioma Tikuna, también hablan español y portugués, "
+"dependiendo de si viven en Colombia y Perú o en Brasil."
+
+#. type: Content of: <p><p><p>
+#: ../../skycultures/tikuna/description.en.utf8:23
+msgid ""
+"The Tikuna live in riverside villages along the Amazonas-Solimões and its "
+"tributaries, called igarapés.  Their daily life revolve around the "
+"cultivation cycles of different agricultural goods; specially, manioc, used "
+"to produce the flour the Tikuna sell in the markets of the region’s main "
+"cities.  They are also fishers, hunters, and gatherers of the forest "
+"products.  The women make hammocks, bags, and other objects with plant "
+"fibers; and the men paint on tururi fiber and fabricate arrows, paddles, and"
+" canoes."
+msgstr ""
+"Los Tikuna viven en pueblos ribereños a lo largo del Amazonas-Solimões y sus"
+" afluentes, llamados igarapés. Su vida cotidiana gira en torno a los ciclos "
+"de cultivo de diferentes productos agrícolas; en especial la yuca, con la "
+"que se produce la harina que los Tikuna venden en los mercados de las "
+"principales ciudades de la región. También son pescadores, cazadores y "
+"recolectores de los productos del bosque. Las mujeres elaboran hamacas, "
+"bolsos y otros objetos con fibras vegetales; y los hombres pintan sobre "
+"fibra de tururi y fabrican flechas, remos y canoas."
+
+#. type: Content of: <p><p><p>
+#: ../../skycultures/tikuna/description.en.utf8:29
+msgid ""
+"It should be noted that, in Brazil, the Tikuna Indians live in indigenous "
+"lands recognized by Brazil’s indigenous policy.  They are located in "
+"“terrestrial islands” among non-indigenous territories occupied by the "
+"Brazilian Population, from Tabatinga to Manaus (as illustrated in the "
+"Brazilian Tikuna Atlas)."
+msgstr ""
+"Cabe señalar que, en Brasil, los indios Tikuna viven en tierras indígenas "
+"reconocidas por la política indígena de Brasil. Están ubicados en “islas "
+"terrestres” entre territorios no indígenas ocupados por la población "
+"brasileña, desde Tabatinga hasta Manaus (como se ilustra en el Atlas Tikuna "
+"brasileño)."
+
+#. type: Content of: <p><p><h2>
+#: ../../skycultures/tikuna/description.en.utf8:33
+msgid "The Astronomical Correlations"
+msgstr "Las correlaciones astronómicas"
+
+#. type: Content of: <p><p><p>
+#: ../../skycultures/tikuna/description.en.utf8:35
+msgid ""
+"The movements of the Tikuna constellations correspond to an interpretation "
+"of the seasonality of rainfall, as the Tikuna narratives suggest.  These "
+"constellations are related to myths referencing the ascension and fall of "
+"Wücütcha (a heavenly beast related to the Jaguar Clan), Coyatchicüra "
+"(Caiman’s Jaw) and Baweta (Tracajá, the Aquatic Turtle Collective), the "
+"Anteater’s fight with the Jaguar, and the Way of the Tapir."
+msgstr ""
+"Los movimientos de las constelaciones Tikuna corresponden a una "
+"interpretación de la estacionalidad de las lluvias, como sugieren las "
+"narrativas Tikuna. Estas constelaciones están relacionadas con mitos que "
+"hacen referencia a la ascensión y caída de Wücütcha (una bestia celestial "
+"relacionada con el Clan Jaguar), Coyatchicüra (Mandíbula de Caimán) y Baweta"
+" (Tracajá, el Colectivo de la Tortuga Acuática), la lucha del Oso Hormiguero"
+" con el Jaguar y el Camino. del Tapir."
+
+#. type: Content of: <p><p><p>
+#: ../../skycultures/tikuna/description.en.utf8:39
+msgid ""
+"According to the testimony of the Tikuna indigenous people, Baweta (the "
+"Pleiades Star Cluster) appears in the eastern sky towards the end of "
+"November, at nightfall.  After Baweta rises, Caiman’s Jaw rises. Wücütcha’s "
+"leg corresponds to a portion of The Orion Constellation; and it begins to "
+"disappear from the western sky around the 20th of May, at nightfall.  About "
+"one month earlier, the Caiman’s Jaw, corresponding to The Hyades Star "
+"Cluster in Taurus, also disappears to the West."
+msgstr ""
+"Según el testimonio de los indígenas Tikuna, Baweta (el cúmulo estelar de "
+"las Pléyades) aparece en el cielo oriental hacia finales de noviembre, al "
+"caer la noche. Después de que sube Baweta, sube Caiman's Jaw. La pierna de "
+"Wücütcha corresponde a una porción de la constelación de Orión; y comienza a"
+" desaparecer del cielo occidental hacia el 20 de mayo, al caer la noche. "
+"Aproximadamente un mes antes, la Mandíbula del Caimán, correspondiente al "
+"Cúmulo Estelar de las Híades en Tauro, también desaparece hacia el Oeste."
+
+#. type: Content of: <p><p><p>
+#: ../../skycultures/tikuna/description.en.utf8:44
+msgid ""
+"According to Vieira’s interpretation, the form of Baweta (the Turtle "
+"Collective) is associated with the stars within the asterisms of the "
+"Pleiades and of Perseus.  Baweta’s eyes are the feet of Perseus (Omicron "
+"Persei - Atik and ζ (Zeta) Persei).  The “V” shape that Western astronomy "
+"relates to the head of Taurus is called Coyatchicüra (Caiman’s Jaw).  "
+"Wücütcha’s Leg corresponds to the stars that groups as Orion.  Its toes are "
+"Orion’s Belt and the bend of the legs are ι (iota) Orionis; κ (kappa) "
+"Orionis; η (eta) Leporis and δ (delta) Leporis."
+msgstr ""
+"Según la interpretación de Vieira, la forma de Baweta (la Tortuga Colectiva)"
+" está asociada con las estrellas dentro de los asterismos de las Pléyades y "
+"de Perseo. Los ojos de Baweta son los pies de Perseo (Omicron Persei - Atik "
+"y ζ (Zeta) Persei). La forma de “V” que la astronomía occidental relaciona "
+"con la cabeza de Tauro se llama Coyatchicüra (mandíbula de caimán). La "
+"Pierna de Wücütcha corresponde a las estrellas que se agrupan como Orión. "
+"Sus dedos de los pies son el Cinturón de Orión y la curvatura de las piernas"
+" es ι (iota) Orionis; κ (kappa) Orionis; η (eta) Leporis y δ (delta) "
+"Leporis."
+
+#. type: Content of: <p><p><p>
+#: ../../skycultures/tikuna/description.en.utf8:50
+msgid ""
+"During the summer, the fight between the Anteater (Tchatü) and the Jaguar "
+"(Ai) occurs.  The end of the battle coincides with the death and ascension "
+"of Wücütcha.  The eyes of the Anteater are located in β (beta) of Triangulum"
+" Australe; his claw and body is in the constellations Norma and Ara.  The "
+"right foot of the Jaguar is in Scorpio’s α (Antares), σ (Sigma), and τ "
+"(tau); its eyes are in ε (epsilon) and μ (mu) Scorpii; and its left paw is "
+"in λ (Shaula), υ (upsilon Sco – Lesath) and κ (kappa) of the same "
+"constellation.  Wücütcha (the Jaguar’s leg) represents the beginning of the "
+"rains in late September; and its reappearance to the east follows the "
+"setting of Tchatü in the west, at nightfall, in the end of November.  Those "
+"correlations are illuminated by indigenous testimony reproduced below:"
+msgstr ""
+"Durante el verano se produce la pelea entre el oso hormiguero (Tchatü) y el "
+"jaguar (Ai). El final de la batalla coincide con la muerte y ascensión de "
+"Wücütcha. Los ojos del oso hormiguero se encuentran en β (beta) del "
+"Triangulum Australe; su garra y cuerpo están en las constelaciones Norma y "
+"Ara. El pie derecho del Jaguar está en α (Antares), σ (Sigma) y τ (tau) de "
+"Escorpio; sus ojos están en ε (épsilon) y μ (mu) Scorpii; y su pata "
+"izquierda está en λ (Shaula), υ (upsilon Sco – Lesath) y κ (kappa) de la "
+"misma constelación. Wücütcha (pata de jaguar) representa el inicio de las "
+"lluvias a finales de septiembre; y su reaparición por el este sigue a la "
+"puesta de Tchatü por el oeste, al anochecer, a fines de noviembre. Esas "
+"correlaciones están iluminadas por el testimonio indígena que se reproduce a"
+" continuación:"
+
+#. type: Content of: <p><p><blockquote><p>
+#: ../../skycultures/tikuna/description.en.utf8:59
+msgid ""
+"“The stars fit into their respective constellations. First is Wücütcha. "
+"After winter, summer begins to walk. It is the Jaguar.  After him, comes "
+"Coyathicüra in the month of May, at nightfall, when the Caiman’s Jaw appears"
+" on the beach.  Baweta appears in September, the month of the turtle. In "
+"May, Wücütcha and Coyatchicüra fall. They all fall together at the end of "
+"May.  In July, they come again. Baweta already begins to appear in July.  "
+"When Wücütcha falls, beginning in May, caimans and turtles begin to appear. "
+"The apex is in September.”"
+msgstr ""
+"“Las estrellas encajan en sus respectivas constelaciones. Primero es "
+"Wücütcha. Después del invierno, el verano comienza a caminar. Es el Jaguar. "
+"Tras él, viene Coyathicüra en el mes de mayo, al caer la noche, cuando "
+"aparece en la playa la Mandíbula de Caimán. Baweta aparece en septiembre, el"
+" mes de la tortuga. En mayo caen Wücütcha y Coyatchicüra. Todos caen juntos "
+"a finales de mayo. En julio, vienen de nuevo. Baweta ya empieza a aparecer "
+"en julio. Cuando cae Wücütcha, a partir de mayo, comienzan a aparecer "
+"caimanes y tortugas. El vértice es en septiembre”."
+
+#. type: Content of: <p><p><blockquote><p>
+#: ../../skycultures/tikuna/description.en.utf8:65
+msgid ""
+"“In May, all the constellations fall, together with their planets.  It is "
+"summertime. Later, in July, they appear again for the New Year.  Coya and "
+"Wücütcha leave the sky from May to September. Later, in July, they appear "
+"again.”"
+msgstr ""
+"“En mayo caen todas las constelaciones, junto con sus planetas. es verano "
+"Más tarde, en julio, vuelven a aparecer para el Año Nuevo. Coya y Wücütcha "
+"dejan el cielo de mayo a septiembre. Más tarde, en julio, vuelven a "
+"aparecer”."
+
+#. type: Content of: <p><p><blockquote><p>
+#: ../../skycultures/tikuna/description.en.utf8:68
+msgid "Fernando Marques or Ütchancu – translated by Lucho"
+msgstr "Fernando Marques o Ütchancu – traducción por Lucho"
+
+#. type: Content of: <p><p><p>
+#: ../../skycultures/tikuna/description.en.utf8:71
+msgid ""
+"The Tikuna interpret processes affected by a succession of meteorological "
+"changes that, in turn, determine the rainy and the dry seasons.  In this "
+"region of Western Amazon, the rainy season runs from December to March and "
+"the dry season from June to September.  During April, May, October, and "
+"November the rainfall is intermediate. In November, the water level starts "
+"to rise and in late December the tides occur.  During the month of May, the "
+"water level drops until September, the peak of the drought.  The periods of "
+"El Niño imply a rain deficit, causing the extreme drought of the great "
+"river; during La Niña, the cooling of the Pacific increases the amount of "
+"water, causing dramatic tides and floods."
+msgstr ""
+"Los Tikuna interpretan procesos afectados por una sucesión de cambios "
+"meteorológicos que, a su vez, determinan las estaciones lluviosa y seca. En "
+"esta región de la Amazonía occidental, la temporada de lluvias se extiende "
+"de diciembre a marzo y la seca de junio a septiembre. Durante abril, mayo, "
+"octubre y noviembre la precipitación es intermedia. En noviembre, el nivel "
+"del agua comienza a subir y a finales de diciembre se producen las mareas. "
+"Durante el mes de mayo, el nivel del agua desciende hasta septiembre, el "
+"pico de la sequía. Los períodos de El Niño implican un déficit de lluvias, "
+"provocando la sequía extrema del gran río; durante La Niña, el enfriamiento "
+"del Pacífico aumenta la cantidad de agua, provocando mareas e inundaciones "
+"dramáticas."
+
+#. type: Content of: <p><p><p>
+#: ../../skycultures/tikuna/description.en.utf8:78
+msgid ""
+"Although dependent on weather variability, at the September Equinox the "
+"Tikuna observe how fog affects how they see in early morning; the Pleiades "
+"star cluster disappears on the morning horizon in early June and reappears "
+"in the evening, in late November.  The goal of the Tikuna is to predict the "
+"intensity of the coming rains in order to negotiate with the entity Mawü, "
+"the “Master of Rain,” the effects of the floods on their subsistence "
+"activities."
+msgstr ""
+"Aunque depende de la variabilidad del clima, en el equinoccio de septiembre "
+"los Tikuna observan cómo la niebla afecta la forma en que ven temprano en la"
+" mañana; el cúmulo estelar de las Pléyades desaparece en el horizonte "
+"matutino a principios de junio y reaparece por la noche, a fines de "
+"noviembre. El objetivo de los Tikuna es predecir la intensidad de las "
+"lluvias que se avecinan para poder negociar con la entidad Mawü, el “Señor "
+"de la Lluvia”, los efectos de las inundaciones en sus actividades de "
+"subsistencia."
+
+#. type: Content of: <p><p><p>
+#: ../../skycultures/tikuna/description.en.utf8:82
+msgid ""
+"According to the explanations found in Enepü (a Tikuna community in the "
+"indigenous Land Eware II, in the Brazilian State of Amazon, in Western "
+"Amazonia), the influence of seasonality upon Tikuna subsistence activities "
+"is more prevalent along the Solimões.  In the headwaters of the igarapés, "
+"where Enepü is situated, plenty of food exists all year long.  In Enepü, "
+"trees and palms, such as the ingá and açaí, are fertile all year long due to"
+" the “virginity” and the enrichment of the soil by natural compost.  The "
+"same thing occurs with the fishing in Lake Preto, within the limits of "
+"Enepü, where they can supply themselves abundantly with fish all year long."
+"  On the Solimões, however, one finds fish only from April to July, when the"
+" water level drops. Abundance in the hunt is also from April to July (or "
+"September, at most), along the Solimões.  Fishing becomes more difficult "
+"when the river is high. The fruit of the native açaí palm is collected in "
+"summer, and customarily saved for preparation during winter—time of poor "
+"hunting and fishing.  Through planning and regular gardening, harvests are "
+"available all year long. The harvest of cultivated plants also occurs during"
+" the drought months.  There is a certain degree of flexibility in adapting "
+"the agricultural calendar to the rainy season (when fishing and hunting are "
+"not productive) and the dry season, (when fishing is more abundant); "
+"however, difficulties involving navigation and transport grow as the water "
+"level drops along the igarapés linking the river.  Traditional culture, "
+"however, is not prepared for unforeseen alterations in the rainy season, "
+"such as it occurred in 2002.  In that year, July saw the beginning of the "
+"repiquete (the rise on water levels), which normally occurs in September.  "
+"This destroyed the short-range agricultural cycle and made the fish scarcer,"
+" changing alimentary habits."
+msgstr ""
+"Según las explicaciones encontradas en Enepü (una comunidad Tikuna en la "
+"Tierra indígena Eware II, en el Estado brasileño de Amazonas, en la Amazonía"
+" occidental), la influencia de la estacionalidad en las actividades de "
+"subsistencia Tikuna es más frecuente a lo largo de Solimões. En las "
+"cabeceras de los igarapés, donde se asienta Enepü, existe abundante alimento"
+" durante todo el año. En Enepü, árboles y palmeras, como el ingá y el açaí, "
+"son fértiles todo el año debido a la “virginidad” y al enriquecimiento del "
+"suelo con compost natural. Lo mismo ocurre con la pesca en el lago Preto, "
+"dentro de los límites de Enepü, donde pueden abastecerse abundantemente de "
+"pescado durante todo el año. En el Solimões, sin embargo, sólo se encuentran"
+" peces de abril a julio, cuando baja el nivel del agua. La abundancia en la "
+"caza también es de abril a julio (o septiembre, como máximo), a lo largo del"
+" Solimões. La pesca se vuelve más difícil cuando el río está alto. El fruto "
+"de la palma nativa de açaí se recolecta en verano y habitualmente se guarda "
+"para prepararlo durante el invierno, época de poca caza y pesca. A través de"
+" la planificación y la jardinería regular, las cosechas están disponibles "
+"durante todo el año. La cosecha de plantas cultivadas también ocurre durante"
+" los meses de sequía. Existe cierta flexibilidad para adaptar el calendario "
+"agrícola a la época de lluvias (cuando la pesca y la caza no son "
+"productivas) y la época seca, (cuando la pesca es más abundante); sin "
+"embargo, las dificultades de navegación y transporte crecen a medida que "
+"desciende el nivel del agua a lo largo de los igarapés que unen el río. La "
+"cultura tradicional, sin embargo, no está preparada para alteraciones "
+"imprevistas en la temporada de lluvias, como ocurrió en 2002. En ese año, "
+"julio vio el inicio del repiquete (aumento del nivel del agua), que "
+"normalmente ocurre en septiembre. Esto destruyó el ciclo agrícola de corto "
+"alcance y escaseó el pescado, cambiando los hábitos alimentarios."
+
+#. type: Content of: <p><p><h2>
+#: ../../skycultures/tikuna/description.en.utf8:96
+msgid "Researchers"
+msgstr "Investigadores"
+
+#. type: Content of: <p><p><p>
+#: ../../skycultures/tikuna/description.en.utf8:98
+msgid "<b>Priscila Faulhaber</b> (Museum of Astronomy and Related Sciences)"
+msgstr ""
+"<b>Priscila Faulhaber</b> (Museo de Astronomía y Ciencias Relacionadas)"
+
+#. type: Content of: <p><p><p>
+#: ../../skycultures/tikuna/description.en.utf8:100
+msgid ""
+"<b>Fernando Vieira</b> (Astronomer and Former Coordinator of Astronomy in "
+"The Planetarium Foundation of the City of Rio de Janeiro)  helped with the "
+"interpretation of the astronomical correlations between Western and Tikuna "
+"constellations, identified by the Tikuna in November 2002, during a research"
+" visit at the Science Center and Planetarium of the Universidade do Pará "
+"(Belém/Brazil), using the Starry Night System.  Vieira plotted the "
+"correspondence between the traces of Tikuna mythical animals and the "
+"Official IAU constellations of western astronomy.  He also reviewed this "
+"text for any skyscape incongruences related to corresponding Western "
+"astronomy and Tikuna cosmovision."
+msgstr ""
+"<b>Fernando Vieira</b> (Astrónomo y Ex Coordinador de Astronomía en la "
+"Fundación Planetario de la Ciudad de Río de Janeiro) ayudó con la "
+"interpretación de las correlaciones astronómicas entre las constelaciones de"
+" Tikuna y Occidental, identificadas por Tikuna en noviembre de 2002, durante"
+" una visita de investigación en el Centro de Ciencias y Planetario de la "
+"Universidade do Pará (Belém/Brasil), utilizando el Starry Night System. "
+"Vieira trazó la correspondencia entre las huellas de los animales míticos "
+"Tikuna y las constelaciones oficiales de la IAU de la astronomía occidental."
+" También revisó este texto en busca de incongruencias con el paisaje celeste"
+" relacionadas con la astronomía occidental correspondiente y la cosmovisión "
+"Tikuna."
+
+#. type: Content of: <p><p><p>
+#: ../../skycultures/tikuna/description.en.utf8:106
+msgid ""
+"We are integrating in this investigation <b>Walmir Thomazi Cardoso</b>, a "
+"Physics Professor in the Postgraduate Program in History of Sciences and "
+"Techniques and Epistemology at the Federal University of Rio de Janeiro "
+"(HCTE-UFRJ) and researcher of astronomy in culture; he made some "
+"reinterpretations in a collaborative work with physics undergraduate "
+"students; and <b>Youssif Ghantous Filho</b>, adapting and anchoring original"
+" drawings to Stellarium.  Nevertheless, every sky interpretation is "
+"contextual and circumstantial.  Current collaborative investigations are "
+"looking for new astronomical observation together with the Tikuna, which "
+"will improve the initial findings."
+msgstr ""
+"Estamos integrando en esta investigación a <b>Walmir Thomazi Cardoso</b>, "
+"profesor de Física en el Programa de Posgrado en Historia de las Ciencias y "
+"Técnicas y Epistemología de la Universidad Federal de Rio de Janeiro (HCTE-"
+"UFRJ) e investigador de astronomía en la cultura; realizó algunas "
+"reinterpretaciones en un trabajo colaborativo con estudiantes de grado de "
+"física; y <b>Youssif Ghantous Filho</b>, adaptando y anclando dibujos "
+"originales a Stellarium. Sin embargo, toda interpretación del cielo es "
+"contextual y circunstancial. Las investigaciones colaborativas actuales "
+"buscan nuevas observaciones astronómicas junto con Tikuna, lo que mejorará "
+"los hallazgos iniciales."
+
+#.  GZ: I have removed this as there is no panorama horizon included. Such
+#. acknowledgement would be applicable in a separate "landscape" contribution.
+#.  Barthelemy D’Ans (Instituto Peruano de Astronomia, Planetarium Maria Reich
+#. Lima-Ica-Nasca-Colca-Cusco), edited the panoramic picture and adapted it to
+#. the horizons of the Stellarium Astronomy Software.
+#. type: Content of: <p><p><p>
+#: ../../skycultures/tikuna/description.en.utf8:112
+msgid ""
+"The data used in <b>Cardoso & Ghantous Filho</b> were a reinterpretation of "
+"charts used by the Tikunas, <b>Pedro Inácio Pinheiro</b> and <b>Luís Angel "
+"Ramos</b>, to interpret Tikuna constellations.  The calculations were "
+"established based upon coordinates 70° W and 3°S with the help of Oswaldo "
+"dos Santos Barros, Pará State (CCPP).  The different interpretations of the "
+"drawings developed from the ongoing collaborative investigation with Walmir "
+"T. Cardoso, researcher of astronomy in Culture, takes into consideration "
+"some changes, such as the ones shown in this work.  <b>Marcio D´Olne "
+"Campos</b> (UNICAMP and SULear/SOUTHing Proposal) helped map the location of"
+" the Tikuna village and define their latitude and longitude coordinates (See"
+" Tikuna Lands Atlas)."
+msgstr ""
+"Los datos utilizados en <b>Cardoso & Ghantous Filho</b> fueron una "
+"reinterpretación de las cartas utilizadas por los Tikunas, <b>Pedro Inácio "
+"Pinheiro</b> y <b>Luís Angel Ramos</b>, para interpretar las constelaciones "
+"Tikuna. Los cálculos fueron establecidos con base en las coordenadas 70° W y"
+" 3°S con la ayuda de Oswaldo dos Santos Barros, Estado de Pará (CCPP). Las "
+"diferentes interpretaciones de los dibujos desarrolladas a partir de la "
+"investigación colaborativa en curso con Walmir T. Cardoso, investigador de "
+"astronomía en Cultura, tiene en cuenta algunos cambios, como los que se "
+"muestran en este trabajo. <b>Marcio D´Olne Campos</b> (UNICAMP y "
+"SULear/SOUTHing Proposal) ayudó a mapear la ubicación del pueblo Tikuna y "
+"definir sus coordenadas de latitud y longitud (Ver Atlas de Tierras Tikuna)."
+
+#. type: Content of: <p><p><p>
+#: ../../skycultures/tikuna/description.en.utf8:119
+msgid ""
+"The recording of this myth and the identification of the Jaguar’s eyes was "
+"inspired by Curt Nimuendajú, (1952 p.143)."
+msgstr ""
+"El registro de este mito y la identificación de los ojos del Jaguar se "
+"inspiró en Curt Nimuendajú, (1952 p.143)."
+
+#. type: Content of: <p><p><p><notr><a><B>
+#: ../../skycultures/tikuna/description.en.utf8:120
+msgid "1"
+msgstr "1"
+
+#. type: Content of: <p><p><p>
+#: ../../skycultures/tikuna/description.en.utf8:120
+msgid ""
+"<cite>This work adopts linguistic convention when writing Tikuna, even "
+"though several Anthropologists and Indigenous experts use the vernacular "
+"form (Ticuna).</cite>"
+msgstr ""
+"<cite>Este trabajo adopta la convención lingüística al escribir Tikuna, "
+"aunque varios antropólogos y expertos indígenas usan la forma vernácula "
+"(Ticuna).</cite>"
+
+#. type: Content of: <p><p><p><notr><a><B>
+#: ../../skycultures/tikuna/description.en.utf8:121
+msgid "2"
+msgstr "2"
+
+#. type: Content of: <p><p><p>
+#: ../../skycultures/tikuna/description.en.utf8:121
+msgid ""
+"<cite> According to socioambiental.org, consulted on 08/05/2019.</cite>"
+msgstr ""
+"<cite> De acuerdo con socioambiental.org, consultado el 08/05/2019.</cite>"
 
 #. type: Content of: <h1>
 #: ../../skycultures/tupi/description.en.utf8:1

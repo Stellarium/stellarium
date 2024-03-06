@@ -87,6 +87,10 @@
                 <li data-next="actionAdd_Solar_Day" data-prev="actionSubtract_Solar_Day"><?= tr("Solar day")?></li>
                 <li data-next="actionAdd_Solar_Week" data-prev="actionSubtract_Solar_Week"><?= tr("Solar week")?></li>
 
+                <li data-next="actionAdd_Calendar_Year"    data-prev="actionSubtract_Calendar_Year">   <?= tr("Calendar year")?></li>
+                <li data-next="actionAdd_Calendar_Decade"  data-prev="actionSubtract_Calendar_Decade"> <?= tr("10 Calendar years")?></li>
+                <li data-next="actionAdd_Calendar_Century" data-prev="actionSubtract_Calendar_Century"><?= tr("100 Calendar years")?></li>
+
                 <li data-next="actionAdd_Sidereal_Day" data-prev="actionSubtract_Sidereal_Day"><?= tr("Sidereal day")?></li>
                 <li data-next="actionAdd_Sidereal_Year" data-prev="actionSubtract_Sidereal_Year"><?= tr("Sidereal year")?></li>
                 <li data-next="actionAdd_Sidereal_Century" data-prev="actionSubtract_Sidereal_Century"><?= tr("Sidereal century")?></li>
@@ -94,8 +98,6 @@
                 <li data-next="actionAdd_Synodic_Month" data-prev="actionSubtract_Synodic_Month"><?= tr("Synodic month")?></li>
                 <li data-next="actionAdd_Draconic_Month" data-prev="actionSubtract_Draconic_Month"><?= tr("Draconic month")?></li>
                 <li data-next="actionAdd_Draconic_Year" data-prev="actionSubtract_Draconic_Year"><?= tr("Draconic year")?></li>
-
-                <li data-next="actionAdd_Gaussian_Year" data-prev="actionSubtract_Gaussian_Year"><?= tr("Gaussian year")?></li>
               </ul>
               <ul>
                 <li data-next="actionAdd_Anomalistic_Month" data-prev="actionSubtract_Anomalistic_Month"><?= tr("Anomalistic month")?></li>
@@ -109,6 +111,8 @@
                 <li data-next="actionAdd_Tropical_Year" data-prev="actionSubtract_Tropical_Year"><?= tr("Tropical year")?></li>
                 <li data-next="actionAdd_Julian_Year" data-prev="actionSubtract_Julian_Year"><?= tr("Julian year")?></li>
                 <li data-next="actionAdd_Julian_Century" data-prev="actionSubtract_Julian_Century"><?= tr("Julian century")?></li>
+
+                <li data-next="actionAdd_Gaussian_Year" data-prev="actionSubtract_Gaussian_Year"><?= tr("Gaussian year")?></li>
               </ul>
             </div>
           </section>
@@ -306,8 +310,8 @@
             <div class="flex flex-baseline">
               <label><input type="checkbox" class="stelaction" name="actionShow_Planets_Labels"/><?= tr("Labels and Markers")?></label><div class="slider stelproperty flex-expand" data-prop="SolarSystem.labelsAmount" data-min="0" data-max="10" data-step="0.1"></div>
             </div>
-            <label><input class="stelproperty" name="LandscapeMgr.flagLandscapeAutoSelection" type="checkbox"/><?= tr("Auto select landscapes")?></label>
-            <label><input class="stelproperty" name="LandscapeMgr.flagEnvironmentAutoEnabling" type="checkbox"/><?= tr("Auto-enabling for the environment")?></label>
+            <label><input class="stelproperty" name="LandscapeMgr.flagLandscapeAutoSelection" type="checkbox"/><?= tr("Auto-select landscapes")?></label>
+            <label><input class="stelproperty" name="LandscapeMgr.flagEnvironmentAutoEnabling" type="checkbox"/><?= tr("Auto-enable atmosphere")?></label>
             <label><input class="stelproperty" name="NomenclatureMgr.flagShowNomenclature" type="checkbox"/><?= tr("Show planetary nomenclature")?></label>
             <label><input class="stelproperty" name="NomenclatureMgr.flagHideLocalNomenclature" type="checkbox"/><?= tr("Hide nomenclature on the celestial body of observer")?></label>
 			<table><tr>
@@ -358,7 +362,8 @@
                 <label><input type="checkbox" class="stelaction" name="actionShow_Galactic_Center" /><?= tr("Galactic center and anticenter")?></label>
                 <label><input type="checkbox" class="stelaction" name="actionShow_Cardinal_Points" /><?= tr("Cardinal points")?>
 				       <input type="checkbox" class="stelaction" name="actionShow_Intercardinal_Points" />8 
-					   <input type="checkbox" class="stelaction" name="actionShow_Secondary_Intercardinal_Points" />16</label>
+					   <input type="checkbox" class="stelaction" name="actionShow_Secondary_Intercardinal_Points" />16
+					   <input type="checkbox" class="stelaction" name="actionShow_Tertiary_Intercardinal_Points" />32</label>
                 <label><input type="checkbox" class="stelaction" name="actionShow_Compass_Marks"/><?= tr("Compass marks")?></label>
             </div>
             <div class="inline-block blocklabel">
@@ -598,8 +603,8 @@
             <label><input class="stelproperty" name="NebulaMgr.flagSurfaceBrightnessUsage" type="checkbox"/><?= tr("Use surface brightness")?></label>
             <p><label><input class="stelproperty" name="StelSkyDrawer.flagNebulaMagnitudeLimit" type="checkbox"/><?= tr("Limit magnitude:")?></label><input class="spinner stelproperty" name="StelSkyDrawer.customNebulaMagLimit" data-min="3" data-max="21" data-step="0.25" data-numberformat="n2"/></p>
             <p><label><input class="stelproperty" name="NebulaMgr.flagUseSizeLimits" type="checkbox"/><?= tr("Limit angular size (arcmin):")?></label>
-					<input class="spinner stelproperty" name="NebulaMgr.minSizeLimit" data-min="1" data-max="600" data-step="1" data-numberformat="n0"/>
-					<input class="spinner stelproperty" name="NebulaMgr.maxSizeLimit" data-min="1" data-max="600" data-step="1" data-numberformat="n0"/></p>
+					<input class="spinner stelproperty" name="NebulaMgr.minSizeLimit" data-min="1" data-max="600" data-step="1" data-numberformat="n2"/>
+					<input class="spinner stelproperty" name="NebulaMgr.maxSizeLimit" data-min="1" data-max="1200" data-step="1" data-numberformat="n2"/></p>
           </div>
         </div>
       </div>

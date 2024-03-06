@@ -40,7 +40,7 @@ Q_LOGGING_CATEGORY(storedView,"stel.plugin.scenery3d.storedview")
 
 const QString SceneInfo::SCENES_PATH("scenery3d/");
 const QString StoredView::USERVIEWS_FILE = SceneInfo::SCENES_PATH + "userviews.ini";
-QSettings* StoredView::userviews = Q_NULLPTR;
+QSettings* StoredView::userviews = nullptr;
 
 int SceneInfo::metaTypeId = qRegisterMetaType<SceneInfo>();
 
@@ -161,9 +161,9 @@ bool SceneInfo::loadByID(const QString &id,SceneInfo& info)
 		}
 
 		if(ini.contains("latitude"))
-			info.location->latitude = StelUtils::getDecAngle(ini.value("latitude").toString())*M_180_PI;
+			info.location->setLatitude(StelUtils::getDecAngle(ini.value("latitude").toString())*M_180_PI);
 		if (ini.contains("longitude"))
-			info.location->longitude = StelUtils::getDecAngle(ini.value("longitude").toString())*M_180_PI;
+			info.location->setLongitude(StelUtils::getDecAngle(ini.value("longitude").toString())*M_180_PI);
 		if (ini.contains("country"))
 			info.location->region = StelLocationMgr::pickRegionFromCountry(ini.value("country").toString());
 		if (ini.contains("state"))
@@ -187,9 +187,27 @@ bool SceneInfo::loadByID(const QString &id,SceneInfo& info)
 	// Find a rotation around vertical axis, most likely required by meridian convergence.
 	double rot_z=0.0;
 	QVariant convAngle = ini.value("convergence_angle",0.0);
-	if (!convAngle.toString().compare("from_grid"))
+	if (convAngle.toString().startsWith("from_"))
 	{ // compute rot_z from grid_meridian and location. Check their existence!
-		if (ini.contains("grid_meridian"))
+		if (convAngle.toString()=="from_utm")
+		{
+			if (!info.location.isNull())
+			{
+				QPair<int, QChar>utmZone=StelLocationMgr::utmZone(info.location->getLongitude(), info.location->getLatitude());
+				QPair<Vec3d,Vec2d> utm= StelLocationMgr::geo2utm(info.location->getLongitude(), info.location->getLatitude());
+				rot_z = utm.second[0];
+
+				qCInfo(sceneInfo) << "With Longitude " << info.location->getLongitude()
+					 << ", Latitude " << info.location->getLatitude() << " and CM="
+					 << utm.first[2] << " of UTM zone" << utmZone.first << utmZone.second << ", ";
+				qCInfo(sceneInfo) << "setting meridian convergence to " << rot_z*M_180_PI << "degrees";
+			}
+			else
+			{
+				qCWarning(sceneInfo) << "scenery3d.ini: Convergence angle \"from_utm\" requires location section!";
+			}
+		}
+		else if (ini.contains("grid_meridian"))
 		{
 			double gridCentralMeridian=StelUtils::getDecAngle(ini.value("grid_meridian").toString())*M_180_PI;
 			if (!info.location.isNull())
@@ -197,12 +215,12 @@ bool SceneInfo::loadByID(const QString &id,SceneInfo& info)
 				// Formula from: http://en.wikipedia.org/wiki/Transverse_Mercator_projection, Convergence
 				//rot_z=std::atan(std::tan((lng-gridCentralMeridian)*M_PI/180.)*std::sin(lat*M_PI/180.));
 				// or from http://de.wikipedia.org/wiki/Meridiankonvergenz
-				rot_z=(info.location->longitude - gridCentralMeridian)*M_PI_180*std::sin(info.location->latitude*M_PI_180);
+				rot_z=(info.location->getLongitude() - gridCentralMeridian)*M_PI_180*std::sin(info.location->getLatitude()*M_PI_180);
 
-				qCDebug(sceneInfo) << "With Longitude " << info.location->longitude
-					 << ", Latitude " << info.location->latitude << " and CM="
+				qCInfo(sceneInfo) << "With Longitude " << info.location->getLongitude()
+					 << ", Latitude " << info.location->getLatitude() << " and CM="
 					 << gridCentralMeridian << ", ";
-				qCDebug(sceneInfo) << "setting meridian convergence to " << rot_z*M_180_PI << "degrees";
+				qCInfo(sceneInfo) << "setting meridian convergence to " << rot_z*M_180_PI << "degrees";
 			}
 			else
 			{
@@ -258,7 +276,7 @@ bool SceneInfo::loadByID(const QString &id,SceneInfo& info)
 		info.groundNullHeight=0.;
 	}
 
-	if (ini.contains("start_az_alt_fov"))
+	if (ini.contains("start_az_alt_fov") && !(GETSTELPROPERTYVALUE("Scenery3d.ignoreInitialView").toBool()))
 	{
 		qCDebug(sceneInfo) << "scenery3d.ini: setting initial dir/fov.";
 		info.lookAt_fov=Vec3f(ini.value("start_az_alt_fov").toString());
@@ -267,7 +285,7 @@ bool SceneInfo::loadByID(const QString &id,SceneInfo& info)
 	else
 	{
 		info.lookAt_fov=Vec3f(0.f, 0.f, -1000.f);
-		qCDebug(sceneInfo) << "scenery3d.ini: No initial dir/fov given.";
+		qCDebug(sceneInfo) << "scenery3d.ini: No start view direction/fov given, or ignoring initial view setting.";
 	}
 	ini.endGroup();
 

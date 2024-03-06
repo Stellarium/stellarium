@@ -64,7 +64,7 @@ public:
 	//! of the specified path.  By specifying a flags parameter it is possible to constrain
 	//! the results to those matching various criteria.
 	//! If the path argument is a complete path (is a full path on single root OSes, or
-	//! unambigiously identifies one and only one file on multi-root OSes), it will
+	//! unambiguously identifies one and only one file on multi-root OSes), it will
 	//! be tested for compliance with other conditions - the regular search path will
 	//! not be tested.
 	//! If you wish to search for a non-existing file which is not in the search path
@@ -190,6 +190,21 @@ public:
 	//! @param newDir the new value of the screenshot directory
 	static void setScreenshotDir(const QString& newDir);
 
+	//! This is the directory into which observing lists will be saved.
+	//! It is $HOME on Linux, BSD, Solaris etc.
+	//! It is the user's Desktop on MacOS X (??? - someone please verify this)
+	//! It is ??? on Windows
+	//! @return the path to the directory where observing lists are saved
+	static QString getObsListDir();
+
+	//! Sets the observing lists directory.
+	//! This is set to platform-specific values in the StelFileMgr constructor,
+	//! but it is settable using this function to make it possible to implement
+	//! the command-line option which specifies where observing lists go.
+	//! @param newDir the new value of the observing lists directory
+	static void setObsListDir(const QString& newDir);
+
+
 	//! get the directory for locate files (i18n)
 	//! @return the path to the locale directory or "" if the locale directory could not be found.
 	static QString getLocaleDir();
@@ -212,6 +227,9 @@ private:
 
 	//! Used to store the screenshot directory
 	static QString screenshotDir;
+
+	//! Used to store the observing list directory
+	static QString obsListDir;
 
 	//! Used to store the application data directory
 	static QString installDir;

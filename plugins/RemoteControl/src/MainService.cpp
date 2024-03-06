@@ -120,8 +120,8 @@ void MainService::get(const QByteArray& operation, const APIParameters &paramete
 			obj2.insert("name",loc.name);
 			obj2.insert("role",QString(loc.role));
 			obj2.insert("planet",loc.planetName);
-			obj2.insert("latitude",static_cast<double>(loc.latitude));
-			obj2.insert("longitude",static_cast<double>(loc.longitude));
+			obj2.insert("latitude",static_cast<double>(loc.getLatitude()));
+			obj2.insert("longitude",static_cast<double>(loc.getLongitude()));
 			obj2.insert("altitude",loc.altitude);
 			obj2.insert("region",loc.region);
 			obj2.insert("state",loc.state);
@@ -283,11 +283,16 @@ void MainService::post(const QByteArray& operation, const APIParameters &paramet
 
 		//set the time + timerate
 		{
-			const QByteArray& raw = parameters.value("time");
+			QByteArray raw = parameters.value("time");
 			if(!raw.isEmpty())
 			{
 				//parse time and set it
-				double jday = QString(raw).toDouble(&ok);
+				double jday = raw.toDouble(&ok);
+				if (!ok)
+				{
+					raw.replace(',', '.');
+					jday=raw.toDouble(&ok);
+				}
 				if(ok)
 				{
 					//check for invalid double (NaN, inf...)
@@ -304,6 +309,8 @@ void MainService::post(const QByteArray& operation, const APIParameters &paramet
 					QMetaObject::invokeMethod(core,"setJD", SERVICE_DEFAULT_INVOKETYPE,
 								  Q_ARG(double,jday));
 				}
+				else
+					qWarning() << "RC Main Service time request for invalid time string:" << raw;
 			}
 		}
 		{
@@ -311,7 +318,7 @@ void MainService::post(const QByteArray& operation, const APIParameters &paramet
 			if(!raw.isEmpty())
 			{
 				//parse timerate and set it
-				double rate = QString(raw).toDouble(&ok);
+				double rate = raw.toDouble(&ok);
 				if(ok)
 				{
 					doneSomething = true;
@@ -511,10 +518,28 @@ void MainService::post(const QByteArray& operation, const APIParameters &paramet
 
 		response.setData("ok");
 	}
+	else if(operation == "window")
+	{
+		bool wOk,hOk;
+
+		double w = parameters.value("w").toDouble(&wOk);
+		double h = parameters.value("h").toDouble(&hOk);
+
+		if(wOk && hOk)
+		{
+			QMetaObject::invokeMethod(this,"setWindowSize", SERVICE_DEFAULT_INVOKETYPE,
+						  Q_ARG(int,w),
+						  Q_ARG(int,h));
+
+			response.setData("ok");
+		}
+		else
+			response.writeRequestError("requires w and h parameters");
+	}
 	else
 	{
 		//TODO some sort of service description?
-		response.writeRequestError("unsupported operation. POST: time,focus,move,view,fov");
+		response.writeRequestError("unsupported operation. POST: time,focus,move,view,fov,window");
 	}
 }
 
@@ -619,6 +644,11 @@ void MainService::setFov(double fov)
 {
 	//TODO calculate a better move duration here
 	mvmgr->zoomTo(fov,0.25f);
+}
+
+void MainService::setWindowSize(const int width, const int height)
+{
+	StelMainView::getInstance().setWindowSize(width, height);
 }
 
 void MainService::actionToggled(const QString &id, bool val)

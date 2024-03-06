@@ -136,7 +136,7 @@ public:
 	//! Get color for landscape labels
 	Vec3f getLabelColor() const { return labelColor; }
 	//! Set color for landscape labels
-	void setLabelColor(const Vec3f& c) { labelColor=c; };
+	void setLabelColor(const Vec3f& c) { labelColor=c; }
 
 	//! Get landscape name
 	QString getName() const {return name;}
@@ -179,6 +179,8 @@ public:
 	//! Get the sine of the limiting altitude (can be used to short-cut drawing below horizon, like star fields). There is no set here, value is only from landscape.ini
 	double getSinMinAltitudeLimit() const {return sinMinAltitudeLimit;}
 
+	void setTransparency(const double f) { landscapeTransparency=f; }
+
 	//! Find opacity in a certain direction. (New in V0.13 series)
 	//! can be used to find sunrise or visibility questions on the real-world landscape horizon.
 	//! Default implementation indicates the horizon equals math horizon.
@@ -218,6 +220,7 @@ protected:
 	//! @param polyAngleRotateZ possibility to set some final calibration offset like meridian convergence correction.
 	//! @param listMode keys which indicate angular units for the angles
 	void createPolygonalHorizon(const QString& lineFileName, const float polyAngleRotateZ=0.0f, const QString &listMode="azDeg_altDeg");
+	void drawHorizonLine(StelCore* core, StelPainter& painter);
 
 	//! search for a texture in landscape directory, else global textures directory
 	//! @param basename The name of a texture file, e.g. "fog.png"
@@ -228,7 +231,6 @@ protected:
 	std::unique_ptr<QOpenGLVertexArrayObject> vao;
 	std::unique_ptr<QOpenGLBuffer> vbo;
 	StelProjectorP prevProjector;
-	StelTextureSP ditherPatternTex;
 	std::unique_ptr<QOpenGLShaderProgram> renderProgram;
 
 	double radius;
@@ -252,6 +254,7 @@ protected:
 				  //! Not in landscape.ini: Used in special cases where the horizon may rotate, e.g. on a ship.
 
 	double sinMinAltitudeLimit; //! Minimal altitude of landscape cover. Can be used to construct bounding caps, so that e.g. no stars are drawn below this altitude. Default -0.035, i.e. sin(-2 degrees).
+	double landscapeTransparency;
 
 	StelLocation location; //! OPTIONAL. If present, can be used to set location.
 	/** May be given in landscape.ini:light_pollution_luminance in cd/m². Default: no change.
@@ -296,11 +299,11 @@ class LandscapeOldStyle : public Landscape
 {
 public:
 	LandscapeOldStyle(float radius = 2.0f);
-	virtual ~LandscapeOldStyle() Q_DECL_OVERRIDE;
-	virtual void load(const QSettings& landscapeIni, const QString& landscapeId) Q_DECL_OVERRIDE;
-	virtual void draw(StelCore* core, bool onlyPolygon) Q_DECL_OVERRIDE;
+	~LandscapeOldStyle() override;
+	void load(const QSettings& landscapeIni, const QString& landscapeId) override;
+	void draw(StelCore* core, bool onlyPolygon) override;
 	//void create(bool _fullpath, QMap<QString, QString> param); // still not implemented
-	virtual float getOpacity(Vec3d azalt) const Q_DECL_OVERRIDE;
+	float getOpacity(Vec3d azalt) const override;
 protected:
 	typedef struct
 	{
@@ -310,10 +313,19 @@ protected:
 	} landscapeTexCoord;
 
 private:
-	void drawFog(StelCore* core, StelPainter&) const;
+	// Low-GL versions draw in the bad old way, suitable for low OpenGL versions like GL<3 or GLES2.
+	// This makes polygons stick in all directions on large FoV in some projections.
+	void drawLowGL(StelCore* core, bool onlyPolygon);
+	void drawFogLowGL(StelCore* core, StelPainter&) const;
 	// drawLight==true for illumination layer, it then selects only the self-illuminating panels.
-	void drawDecor(StelCore* core, StelPainter&, const bool drawLight=false) const;
-	void drawGround(StelCore* core, StelPainter&) const;
+	void drawDecorLowGL(StelCore* core, StelPainter&, bool drawLight = false) const;
+	void drawGroundLowGL(StelCore* core, StelPainter&) const;
+
+	void drawFog(StelCore* core, int firstFreeTexSampler) const;
+	// drawLight==true for illumination layer, it then selects only the self-illuminating panels.
+	void drawDecor(StelCore* core, int firstFreeTexSampler, bool drawLight = false) const;
+	void drawGround(StelCore* core, int firstFreeTexSampler) const;
+
 	QVector<Vec3d> groundVertexArr;
 	QVector<Vec2f> groundTexCoordArr;
 	StelTextureSP* sideTexs;
@@ -341,6 +353,27 @@ private:
 	};
 
 	QList<LOSSide> precomputedSides;
+
+	static constexpr unsigned SIDES_BATCH_SIZE = 8;
+	struct
+	{
+		int mapTex;
+		int vshift;
+		int tanMode;
+		int calibrated;
+		int brightness;
+		int whatToRender;
+		int decorAngleShift;
+		int firstSideInBatch;
+		int sidePresenceMask;
+		int sideAngularHeight;
+		int fogCylinderHeight;
+		int totalNumberOfSides;
+		int numberOfSidesInBatch;
+		int projectionMatrixInverse;
+		int sideTexN[SIDES_BATCH_SIZE];
+		int perSideTexCoords[SIDES_BATCH_SIZE];
+	} shaderVars;
 };
 
 /////////////////////////////////////////////////////////
@@ -356,10 +389,12 @@ class LandscapePolygonal : public Landscape
 {
 public:
 	LandscapePolygonal(float radius = 1.f);
-	virtual ~LandscapePolygonal() Q_DECL_OVERRIDE;
-	virtual void load(const QSettings& landscapeIni, const QString& landscapeId) Q_DECL_OVERRIDE;
-	virtual void draw(StelCore* core, bool onlyPolygon) Q_DECL_OVERRIDE;
-	virtual float getOpacity(Vec3d azalt) const Q_DECL_OVERRIDE;
+	~LandscapePolygonal() override;
+	void load(const QSettings& landscapeIni, const QString& landscapeId) override;
+	void draw(StelCore* core, bool onlyPolygon) override;
+	float getOpacity(Vec3d azalt) const override;
+	// To allow ad-hoc "zero" landscapes with color from map
+	void setGroundColor(const Vec3f &color);
 private:
 	// we have inherited: horizonFileName, horizonPolygon, horizonPolygonLineColor
 	Vec3f groundColor; //! specified in landscape.ini[landscape]ground_color.
@@ -375,12 +410,12 @@ class LandscapeFisheye : public Landscape
 {
 public:
 	LandscapeFisheye(float radius = 1.f);
-	virtual ~LandscapeFisheye() Q_DECL_OVERRIDE;
-	virtual void load(const QSettings& landscapeIni, const QString& landscapeId) Q_DECL_OVERRIDE;
-	virtual void draw(StelCore* core, bool onlyPolygon) Q_DECL_OVERRIDE;
+	~LandscapeFisheye() override;
+	void load(const QSettings& landscapeIni, const QString& landscapeId) override;
+	void draw(StelCore* core, bool onlyPolygon) override;
 	//! Sample landscape texture for transparency/opacity. May be used for visibility, sunrise etc.
 	//! @param azalt normalized direction in alt-az frame
-	virtual float getOpacity(Vec3d azalt) const Q_DECL_OVERRIDE;
+	float getOpacity(Vec3d azalt) const override;
 	//! create a fisheye landscape from basic parameters (no ini file needed).
 	//! @param name Landscape name
 	//! @param maptex the fisheye texture
@@ -404,8 +439,6 @@ private:
 		int texFov;
 		int mapTex;
 		int brightness;
-		int rgbMaxValue;
-		int ditherPattern;
 		int projectionMatrixInverse;
 	} shaderVars;
 };
@@ -424,13 +457,13 @@ class LandscapeSpherical : public Landscape
 {
 public:
 	LandscapeSpherical(float radius = 1.f);
-	virtual ~LandscapeSpherical() Q_DECL_OVERRIDE;
-	virtual void load(const QSettings& landscapeIni, const QString& landscapeId) Q_DECL_OVERRIDE;
-	virtual void draw(StelCore* core, bool onlyPolygon) Q_DECL_OVERRIDE;
+	~LandscapeSpherical() override;
+	void load(const QSettings& landscapeIni, const QString& landscapeId) override;
+	void draw(StelCore* core, bool onlyPolygon) override;
 	//! Sample landscape texture for transparency/opacity. May be used for visibility, sunrise etc.
 	//! @param azalt normalized direction in alt-az frame
 	//! @retval alpha (0=fully transparent, 1=fully opaque. Trees, leaves, glass etc may have intermediate values.)
-	virtual float getOpacity(Vec3d azalt) const Q_DECL_OVERRIDE;
+	float getOpacity(Vec3d azalt) const override;
 	//! create a spherical landscape from basic parameters (no ini file needed).
 	//! @param name Landscape name
 	//! @param maptex the equirectangular texture
@@ -470,9 +503,7 @@ private:
 		int mapTex;
 		int mapTexTop;
 		int brightness;
-		int rgbMaxValue;
 		int mapTexBottom;
-		int ditherPattern;
 		int bottomCapColor;
 		int projectionMatrixInverse;
 	} shaderVars;

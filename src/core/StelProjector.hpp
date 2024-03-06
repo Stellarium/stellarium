@@ -126,19 +126,19 @@ public:
 			, devicePixelsPerPixel(1)
 			, widthStretch(1) {}
 
-		Vec4i viewportXywh;              //! posX, posY, width, height
-		float fov;                       //! FOV in degrees
-		bool gravityLabels;              //! the flag to use gravity labels or not
-		float defaultAngleForGravityText;//! a rotation angle to apply to gravity text (only if gravityLabels is set to false)
-		StelProjectorMaskType maskType;  //! The current projector mask
-		double zNear, zFar;              //! Near and far clipping planes
-		Vector2<qreal> viewportCenter;   //! Viewport center in screen pixel
-		Vector2<qreal> viewportCenterOffset;//! Viewport center's offset in fractions of screen width/height. Usable e.g. in cylindrical projection to move horizon down.
-						 //! Currently only Y shift is fully implemented, X shift likely not too meaningful.
-		qreal viewportFovDiameter;       //! diameter of the FOV disk in pixel
-		bool flipHorz, flipVert;         //! Whether to flip in horizontal or vertical directions
-		qreal devicePixelsPerPixel;      //! The number of device pixel per "Device Independent Pixels" (value is usually 1, but 2 for mac retina screens)
-		qreal widthStretch;              //! A factor to adapt to special installation setups, e.g. multi-projector with edge blending. Allow to stretch/squeeze projected content. Larger than 1 means the image is stretched wider.
+		Vec4i viewportXywh;              //!< posX, posY, width, height
+		float fov;                       //!< FOV in degrees
+		bool gravityLabels;              //!< the flag to use gravity labels or not
+		float defaultAngleForGravityText;//!< a rotation angle to apply to gravity text (only if gravityLabels is set to false)
+		StelProjectorMaskType maskType;  //!< The current projector mask
+		double zNear, zFar;              //!< Near and far clipping planes
+		Vector2<qreal> viewportCenter;   //!< Viewport center in screen pixel
+		Vector2<qreal> viewportCenterOffset;//!< Viewport center's offset in fractions of screen width/height. Usable e.g. in cylindrical projection to move horizon down.
+						 //!< Currently only Y shift is fully implemented, X shift likely not too meaningful.
+		qreal viewportFovDiameter;       //!< diameter of the FOV disk in pixel
+		bool flipHorz, flipVert;         //!< Whether to flip in horizontal or vertical directions
+		qreal devicePixelsPerPixel;      //!< The number of device pixel per "Device Independent Pixels" (value is usually 1, but 2 for mac retina screens)
+		qreal widthStretch;              //!< A factor to adapt to special installation setups, e.g. multi-projector with edge blending. Allow to stretch/squeeze projected content. Larger than 1 means the image is stretched wider.
 	};
 
 	//! Destructor
@@ -186,7 +186,7 @@ public:
 	virtual float viewScalingFactorToFov(float vsf) const { return vsf;}
 
 	//! Get the current state of the flag which decides whether to
-	//! arrage labels so that they are aligned with the bottom of a 2d
+	//! arrange labels so that they are aligned with the bottom of a 2d
 	//! screen, or a 3d dome.
 	bool getFlagGravityLabels() const;
 
@@ -351,10 +351,20 @@ protected:
 	//! Determine whether a great circle connection p1 and p2 intersects with a projection discontinuity.
 	//! For many projections without discontinuity, this should return always false, but for other like
 	//! cylindrical projection it will return true if the line cuts the wrap-around line (i.e. at lon=180 if the observer look at lon=0).
-	virtual bool intersectViewportDiscontinuityInternal(const Vec3d& p1, const Vec3d& p2) const {return false;}
+	virtual bool intersectViewportDiscontinuityInternal(const Vec3d& p1, const Vec3d& p2) const
+	{
+		Q_UNUSED(p1)
+		Q_UNUSED(p2)
+		return false;
+	}
 
 	//! Determine whether a cap intersects with a projection discontinuity.
-	virtual bool intersectViewportDiscontinuityInternal(const Vec3d& capN, double capD) const {return false;}
+	virtual bool intersectViewportDiscontinuityInternal(const Vec3d& capN, double capD) const
+	{
+		Q_UNUSED(capN)
+		Q_UNUSED(capD)
+		return false;
+	}
 
 	//! Initialize the bounding cap.
 	virtual void computeBoundingCap();

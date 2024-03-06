@@ -306,12 +306,13 @@ private slots:
 	void scriptStopped();
 #endif
 	//! Load color scheme from the given ini file and section name
-	void setStelStyle(const QString& style) override Q_DECL_FINAL;
+	void setStelStyle(const QString& style) override final;
 	void quit();	
 	void updateI18n();
 	void copySelectedObjectInfo(void);
 
 private:
+	void updateStelStyle();
 	//! convenience method to find an action in the StelActionMgr.
 	StelAction* getAction(const QString& actionName) const;
 
@@ -348,7 +349,7 @@ private:
 	ScriptConsole* scriptConsole;
 #endif
 	AstroCalcDialog* astroCalcDialog;
-    ObsListDialog* obsListDialog;
+	ObsListDialog* obsListDialog;
 
 	bool flagShowFlipButtons;
 	StelButton* flipVert;

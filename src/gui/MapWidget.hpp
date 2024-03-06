@@ -38,12 +38,14 @@ public:
 	//! @param longitude longitude in degree in range [-180;180[
 	//! @param latitude latitude in degree in range [-90;90]
 	void setMarkerPos(double longitude, double latitude);
+	//! allow hiding the location arrow (if sitting on an observer)
+	void setMarkerVisible(bool visible);
 
 	void setMap(const QPixmap &map);
 	
 signals:
-	//! Signal emitted when we click on the map
-	void positionChanged(double longitude, double latitude);
+	//! Signal emitted when we click on the map. It also delivers the color value at the clicked point.
+	void positionChanged(double longitude, double latitude, const QColor &color);
 
 protected:
 	void mousePressEvent(QMouseEvent* event) override;
@@ -54,6 +56,7 @@ private:
 	QPixmap map;
 	QPixmap locationMarker;
 	QRectF mapRect; // in device pixels
+	bool markerVisible;
 };
 
 #endif // MAPWIDGET_HPP

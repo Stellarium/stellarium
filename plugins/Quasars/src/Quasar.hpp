@@ -28,7 +28,6 @@
 
 #include "StelObject.hpp"
 #include "StelTextureTypes.hpp"
-#include "StelFader.hpp"
 #include "StelTranslator.hpp"
 
 class StelPainter;
@@ -47,7 +46,7 @@ public:
 
 	//! @param id The official designation for a quasar, e.g. "RXS J00066+4342"
 	Quasar(const QVariantMap& map);
-	~Quasar() Q_DECL_OVERRIDE;
+	~Quasar() override;
 
 	//! Get a QVariantMap which describes the Quasar.  Could be used to create a duplicate.
 	//! - designation
@@ -62,50 +61,48 @@ public:
 	//! - sclass
 	QVariantMap getMap(void) const;
 
-	virtual QString getType(void) const Q_DECL_OVERRIDE
+	QString getType(void) const override
 	{
 		return QUASAR_TYPE;
 	}
 
-	virtual QString getObjectType(void) const Q_DECL_OVERRIDE
+	QString getObjectType(void) const override
 	{
 		return N_("quasar");
 	}
-	virtual QString getObjectTypeI18n(void) const Q_DECL_OVERRIDE
+	QString getObjectTypeI18n(void) const override
 	{
 		return q_(getObjectType());
 	}
 
-	virtual QString getID(void) const Q_DECL_OVERRIDE
+	QString getID(void) const override
 	{
 		return designation;
 	}
 
-	virtual float getSelectPriority(const StelCore *core) const Q_DECL_OVERRIDE;
+	float getSelectPriority(const StelCore *core) const override;
 
 	//! Get an HTML string to describe the object
 	//! @param core A pointer to the core
 	//! @flags a set of flags with information types to include.
-	virtual QString getInfoString(const StelCore* core, const InfoStringGroup& flags) const Q_DECL_OVERRIDE;
+	QString getInfoString(const StelCore* core, const InfoStringGroup& flags) const override;
 	//! Return a map like StelObject::getInfoMap(), but with a few extra tags also available in getMap().
 	// TODO: Describe the fields.
 	//! - amag
 	//! - bV
 	//! - redshift
-	virtual QVariantMap getInfoMap(const StelCore *core) const Q_DECL_OVERRIDE;
-	virtual Vec3f getInfoColor(void) const Q_DECL_OVERRIDE;
-	virtual Vec3d getJ2000EquatorialPos(const StelCore* core) const Q_DECL_OVERRIDE;
-	virtual float getVMagnitude(const StelCore* core) const Q_DECL_OVERRIDE;
-	virtual QString getNameI18n(void) const Q_DECL_OVERRIDE
+	QVariantMap getInfoMap(const StelCore *core) const override;
+	Vec3f getInfoColor(void) const override;
+	Vec3d getJ2000EquatorialPos(const StelCore* core) const override;
+	float getVMagnitude(const StelCore* core) const override;
+	QString getNameI18n(void) const override
 	{
 		return designation;
 	}
-	virtual QString getEnglishName(void) const Q_DECL_OVERRIDE
+	QString getEnglishName(void) const override
 	{
 		return designation;
 	}
-
-	void update(double deltaTime);
 
 private:
 	bool initialized;
@@ -135,8 +132,6 @@ private:
 	float f6;			//! Radio flux density around 5GHz (6cm)
 	float f20;			//! Radio flux density around 1.4GHz (21cm)
 	QString sclass;			//! Spectrum classification
-
-	LinearFader labelsFader;
 };
 
 #endif // QUASAR_HPP

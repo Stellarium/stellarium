@@ -30,21 +30,24 @@ class Planet;
 class StelLocation
 {
 public:
-	StelLocation() : longitude(0.f), latitude(0.f), altitude(0), population(0), role('X'), isUserLocation(true) {}
-	//! constructor for ad-hoc locations.
+	StelLocation() : altitude(0), population(0), role('X'), isUserLocation(true), longitude(0.f), latitude(0.f) {}
+	//! constructors for ad-hoc locations. The first, shorter version is only for earth locations
 	//! @arg lName location name
 	//! @arg lState may be usedful if region has more than one such name
 	//! @arg lRegion must be the long name of UN UM49 only! (E.g., "Western Europe")
-	//! @arg lng geographical longitude, east-positive
-	//! @arg lat geographical latitude, north-positive
+	//! @arg plName planetName. This must be identical to the englishName of a solar system object.
+	//! @arg lng geographical longitude, east-positive, degrees
+	//! @arg lat geographical latitude, north-positive, degrees
 	//! @arg alt altitude above mean sea level
 	//! @arg populationK population in thousands
 	//! @arg timeZone IANA timezone string like "Europe/Vienna" or "UT-7"
 	//! @arg bortleIndex light pollution hint
 	//! @arg roleKey code for location role.
 	//! @arg landscapeID a fitting landscape
-	StelLocation(QString lName, QString lState, QString lRegion, float lng, float lat, int alt,
-				 int populationK, QString timeZone, int bortleIndex, QChar roleKey='X', QString landscapeID="");
+	StelLocation(const QString &lName, const QString &lState, const QString &lRegion, const float lng, const float lat, const int alt,
+				 const int populationK, const QString &timeZone, const int bortleIndex, const QChar roleKey='X', const QString &landscapeID=QString());
+	StelLocation(const QString &lName, const QString &lState, const QString &lRegion, const QString &plName, const float lng, const float lat, const int alt,
+							   const int populationK, const QString &timeZone, const int bortleIndex, const QChar roleKey, const QString &landscapeID);
 
 	//! Return a short string which can be used in a list view.
 	QString getID() const;
@@ -66,6 +69,14 @@ public:
 	//! @return azimuth counted from north or south as set in the StelApp preferences, in [0...360].
 	double getAzimuthForLocation(double longTarget, double latTarget) const;
 
+	//! longitude and latitude are private to force use of special getters. These return a location on the north pole if we are located on an "Observer" (when "role" == 'o').
+	//! By this we force useful view orientation when on an observer pseudo-planet.
+	//! @param suppressObserver set to true to return the actual number in every case. (Required for some UI elements)
+	float getLatitude(bool suppressObserver=false)  const;
+	float getLongitude(bool suppressObserver=false) const;
+	void setLatitude(float l)  { latitude=l;}
+	void setLongitude(float l) { longitude=l;}
+
 	//! Location/city name
 	QString name;
 	//! English region name (Northern Europe for example) or empty string
@@ -74,10 +85,6 @@ public:
 	QString state;
 	//! English planet name
 	QString planetName;
-	//! Longitude in degree
-	float longitude;
-	//! Latitude in degree
-	float latitude;
 	//! Altitude in meter
 	int altitude;
 	//! Zenith luminance at moonless night as could be measured by a Sky Quality Meter, in cd/m²
@@ -97,6 +104,7 @@ public:
 	//! @li @p A is a spacecraft crash
 	//! @li @p X is an unknown or user-defined location (the default value).
 	//! @li @p ! is an invalid location.
+	//! @li @p o is an "observer" pseudo-planet. This is not stored in the location database but used ad-hoc in the LocationDialog.
 	QChar role;
 	//! IANA identificator of time zone.
 	//! Note that timezone names under various OSes may be different than those used in Stellarium's
@@ -131,6 +139,10 @@ private:
 	//Register with Qt
 	static int metaTypeId;
 	static int initMetaType();
+	//! Longitude in degree
+	float longitude;
+	//! Latitude in degree
+	float latitude;
 };
 
 Q_DECLARE_METATYPE(StelLocation)

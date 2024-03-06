@@ -158,6 +158,39 @@
 \newcommand{\cy}{\ensuremath{\,\mathrm{cy}}} % century
 \newcommand{\cdpmQ}{\ensuremath{\,\mathrm{cd}/\mathrm{m}^2}} % candela
 
+
+% Define JavaScript for script listings
+% Taken from https://tex.stackexchange.com/questions/89574/language-option-supported-in-listings
+%\definecolor{lightgray}{rgb}{.9,.9,.9}
+\definecolor{darkgray}{rgb}{.4,.4,.4}
+%\definecolor{purple}{rgb}{0.65, 0.12, 0.82}
+\lstdefinelanguage{JavaScript}{
+   basicstyle=\fontfamily{pcr}\selectfont,
+%  keywords={break, case, catch, continue, debugger, default, delete, do, else, false, finally, for, function, if, in, instanceof, new, null, return, switch, this, throw, true, try, typeof, var, void, while, with},
+% The following includes TypeScript
+  keywords={abstract, any, as, boolean, break, case, catch, class, console, 
+    const, continue, debugger, declare, default, delete, do, else, enum, export, 
+    extends, false, finally, for, from, function, get, if, implements, import, in, 
+    infer, instanceof, interface, keyof, let, module, namespace, never, new, null, 
+    number, object, package, private, protected, public, readonly, require, return, 
+    set, static, string, super, switch, symbol, this, throw, true, try, type, typeof, 
+    undefined, unique, unknown, var, void, while, with, yield},
+  morecomment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  morestring=[b]',
+  morestring=[b]",
+  keepspaces=true,%
+  showstringspaces=false,
+  escapeinside={(*}{*)},%
+  keywords=[2]{class, export, boolean, throw, implements, import, this},
+  keywordstyle=\color{green!40!black}\bfseries, % or blue in the example.
+  keywordstyle=[2]\color{darkgray}\bfseries,
+  identifierstyle=\color{blue},
+  commentstyle=\color{purple!40!black}\ttfamily,
+  stringstyle=\color{orange}\ttfamily,
+  sensitive=true
+}
+
 % It seems the lstenvironments are much too complicated or need big efforts for decorating in HTML/CSS. Just replace by something simpler.
 % We must repeat the same definitions with small and scriptsize (executed in PDF only), and later remove the optional size argument. 							 
 \ifhtlatex
@@ -167,30 +200,22 @@
 \DefineVerbatimEnvironment{configfileScr}{Verbatim}{frame=single}
 \DefineVerbatimEnvironment{script}{Verbatim}{numbers=left,frame=single}
 \else
-\lstnewenvironment{commands}[1][\small]{\lstset{language=sh,basicstyle=\ttfamily#1,%
+\lstnewenvironment{commands}[1][\small]{\lstset{language=sh,basicstyle=\ttfamily#1,showstringspaces=false,%
                                      backgroundcolor=\color{black!5},frame=leftline,rulecolor=\color{blue},framerule=1pt}%
                              }{}%
-\lstnewenvironment{commandsScr}[1][\scriptsize]{\lstset{language=sh,basicstyle=\ttfamily#1,%
+\lstnewenvironment{commandsScr}[1][\scriptsize]{\lstset{language=sh,basicstyle=\ttfamily#1,showstringspaces=false,%
                                      backgroundcolor=\color{black!5},frame=leftline,rulecolor=\color{blue},framerule=1pt}%
                              }{}%
-\lstnewenvironment{configfile}[1][\small]{\lstset{language=sh,basicstyle=\ttfamily#1,%
+\lstnewenvironment{configfile}[1][\small]{\lstset{language=sh,basicstyle=\ttfamily#1,showstringspaces=false,%
                                    backgroundcolor=\color{black!5},frame=shadowbox,rulecolor=\color{blue},framerule=1pt}%
                              }{}%
-\lstnewenvironment{configfileScr}[1][\scriptsize]{\lstset{language=sh,basicstyle=\ttfamily#1,%
+\lstnewenvironment{configfileScr}[1][\scriptsize]{\lstset{language=sh,basicstyle=\ttfamily#1,showstringspaces=false,%
                                    backgroundcolor=\color{black!5},frame=shadowbox,rulecolor=\color{blue},framerule=1pt}%
                              }{}%
-\lstnewenvironment{script}{\lstset{language=VBScript,%                                    
-                               basicstyle=\fontfamily{pcr}\selectfont,%
+\lstnewenvironment{script}{\lstset{language=JavaScript,                   
                                backgroundcolor=\color{black!5},%
                                frame=leftline,%
-                               keepspaces=true,%
                                rulecolor=\color{blue},%
-                               showstringspaces=false,
-                               keywordstyle=\bfseries\color{green!40!black},%
-                               commentstyle=\itshape\color{purple!40!black},%
-                               identifierstyle=\color{blue},%
-                               stringstyle=\color{orange},%
-                               escapeinside={(*}{*)},%
                                framerule=1pt}%
                          }{}%
 \fi
@@ -385,7 +410,7 @@
 \fancyhead[LO]{\rightmark} % Print the nearest section name on the left side of odd pages
 \fancyhead[RE]{\leftmark} % Print the current chapter name on the right side of even pages
 \renewcommand{\headrulewidth}{0.5pt} % Width of the rule under the header
-\addtolength{\headheight}{2.5pt} % Increase the spacing around the header slightly
+\addtolength{\headheight}{2.75pt} % Increase the spacing around the header slightly
 \renewcommand{\footrulewidth}{0pt} % Removes the rule in the footer
 \fancypagestyle{plain}{\fancyhead{}\renewcommand{\headrulewidth}{0pt}} % Style for when a plain pagestyle is specified
 
@@ -715,6 +740,7 @@ innerbottommargin=5pt]{cBox}
 \makeatother
 
 \usepackage{marvosym}% For the Zodiac symbols, \Aries etc.
+\usepackage{wasysym}% For \diameter etc.
 \usepackage{tocvsec2} % Allows fine-tuning TOC depth. (to suppress GPL sections in TOC but have them still numbered)
 %\newenvironment{commands}{\begin{wBox}\begin{Verbatim}}{\end{Verbatim}\end{wBox}}
 %\DefineVerbatimEnvironment{commands}{\begin{wBox}\begin{Verbatim}}{\end{Verbatim}\end{wBox}}
@@ -725,7 +751,7 @@ innerbottommargin=5pt]{cBox}
 
 
 \ifpdf
- \usepackage[os=win]{menukeys}% For the menu, keycaps, etc. This reqiures the updated catoptions.sty.
+ \usepackage[os=win]{menukeys}% For the menu, keycaps, etc. This requires the updated catoptions.sty.
  %% Keypress buttons. This is just a font change now, but can be a boxed key or such.
  % Prefer using menukeys.
  \newcommand{\key}[1]{\keys{#1}}

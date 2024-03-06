@@ -89,11 +89,11 @@ CalendarsInfoPanel::CalendarsInfoPanel(Calendars* plugin,
 	setColorScheme(stelApp.getCurrentStelStyle());
 }
 
-void CalendarsInfoPanel::updatePosition()
+void CalendarsInfoPanel::updatePosition(bool resetPos)
 {
 	qreal bottomBoundingHeight = static_cast<SkyGui*>(parentWidget)->getBottomBarHeight()+5.;
 
-	if (sender())
+	if (sender() || resetPos)
 	{
 		xPos=parentWidget->size().width(); // reset when window has been resized.
 		yPos=static_cast<qreal>(FLT_MAX);

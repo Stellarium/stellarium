@@ -47,13 +47,15 @@ void StelSkyImageTile::initCtor()
 	texFader = Q_NULLPTR;
 	birthJD = -1e10;
 	withAberration = true;
+	decimation = 1;
 }
 
 // Constructor
-StelSkyImageTile::StelSkyImageTile(const QString& url, StelSkyImageTile* parent) : MultiLevelJsonBase(parent)
+StelSkyImageTile::StelSkyImageTile(const QString& url, StelSkyImageTile* parent, int decimateBy) : MultiLevelJsonBase(parent)
 {
 	initCtor();
-	if (parent!=Q_NULLPTR)
+	decimation=decimateBy;
+	if (parent)
 	{
 		luminance = parent->luminance;
 		alphaBlend = parent->alphaBlend;
@@ -62,10 +64,11 @@ StelSkyImageTile::StelSkyImageTile(const QString& url, StelSkyImageTile* parent)
 }
 
 // Constructor from a map used for JSON files with more than 1 level
-StelSkyImageTile::StelSkyImageTile(const QVariantMap& map, StelSkyImageTile* parent) : MultiLevelJsonBase(parent)
+StelSkyImageTile::StelSkyImageTile(const QVariantMap& map, StelSkyImageTile* parent, int decimateBy) : MultiLevelJsonBase(parent)
 {
 	initCtor();
-	if (parent!=Q_NULLPTR)
+	decimation=decimateBy;
+	if (parent)
 	{
 		luminance = parent->luminance;
 		alphaBlend = parent->alphaBlend;
@@ -102,7 +105,7 @@ void StelSkyImageTile::draw(StelCore* core, StelPainter& sPainter, float opacity
 	getTilesToDraw(result, core, SphericalRegionP(new AllSkySphericalRegion()), limitLuminance, true);
 
 	int numToBeLoaded=0;
-	for (auto* t : qAsConst(result))
+	for (auto* t : std::as_const(result))
 		if (t->isReadyToDisplay()==false)
 			++numToBeLoaded;
 	updatePercent(result.size(), numToBeLoaded);
@@ -176,7 +179,7 @@ void StelSkyImageTile::getTilesToDraw(QMultiMap<double, StelSkyImageTile*>& resu
 		}
 		else
 		{
-			for (const auto& poly : qAsConst(skyConvexPolygons))
+			for (const auto& poly : std::as_const(skyConvexPolygons))
 			{
 				if (viewPortPoly->contains(poly))
 				{
@@ -209,7 +212,7 @@ void StelSkyImageTile::getTilesToDraw(QMultiMap<double, StelSkyImageTile*>& resu
 		{
 			// The tile has an associated texture, but it is not yet loaded: load it now
 			StelTextureMgr& texMgr=StelApp::getInstance().getTextureManager();
-			tex = texMgr.createTextureThread(absoluteImageURI, StelTexture::StelTextureParams(true));
+			tex = texMgr.createTextureThread(absoluteImageURI, StelTexture::StelTextureParams(true, GL_LINEAR, GL_CLAMP_TO_EDGE, false, decimation));
 			if (!tex)
 			{
 				qWarning() << "WARNING : Can't create tile: " << absoluteImageURI;
@@ -229,7 +232,7 @@ void StelSkyImageTile::getTilesToDraw(QMultiMap<double, StelSkyImageTile*>& resu
 		if (subTiles.isEmpty() && !subTilesUrls.isEmpty())
 		{
 			// Load the sub tiles because we reached the maximum resolution and they are not yet loaded
-			for (const auto& s : qAsConst(subTilesUrls))
+			for (const auto& s : std::as_const(subTilesUrls))
 			{
 				StelSkyImageTile* nt;
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
@@ -237,7 +240,7 @@ void StelSkyImageTile::getTilesToDraw(QMultiMap<double, StelSkyImageTile*>& resu
 #else
 				if (s.type()==QVariant::Map)
 #endif
-					nt = new StelSkyImageTile(s.toMap(), this);
+					nt = new StelSkyImageTile(s.toMap(), this, decimation);
 				else
 				{
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
@@ -245,13 +248,13 @@ void StelSkyImageTile::getTilesToDraw(QMultiMap<double, StelSkyImageTile*>& resu
 #else
 					Q_ASSERT(s.type()==QVariant::String);
 #endif
-					nt = new StelSkyImageTile(s.toString(), this);
+					nt = new StelSkyImageTile(s.toString(), this, decimation);
 				}
 				subTiles.append(nt);
 			}
 		}
 		// Try to add the subtiles
-		for (auto* tile : qAsConst(subTiles))
+		for (auto* tile : std::as_const(subTiles))
 		{
 			qobject_cast<StelSkyImageTile*>(tile)->getTilesToDraw(result, core, viewPortPoly, limitLuminance, !fullInScreen);
 		}
@@ -295,7 +298,7 @@ bool StelSkyImageTile::drawTile(StelCore* core, StelPainter& sPainter, const Vec
 
 	const bool withExtinction=(getFrameType()!=StelCore::FrameAltAz && core->getSkyDrawer()->getFlagHasAtmosphere() && core->getSkyDrawer()->getExtinction().getExtinctionCoefficient()>=0.01f);
 
-	for (const auto& poly : qAsConst(skyConvexPolygons))
+	for (const auto& poly : std::as_const(skyConvexPolygons))
 	{
 		// Not sure: Are all skyConvexPolygons in J2000 frame? This would also simplify code below...
 		// No, by scripting we can have other frames!
@@ -469,7 +472,8 @@ void StelSkyImageTile::loadFromQVariantMap(const QVariantMap& map)
 	{
 		const QVariant& polyRaDec = polyList.at(i);
 		QVector<Vec3d> vertices;
-		for (const auto& vRaDec : polyRaDec.toList())
+		const QList<QVariant> polyRaDecList=polyRaDec.toList();
+		for (const auto& vRaDec : polyRaDecList)
 		{
 			const QVariantList vl = vRaDec.toList();
 			Vec3d v;
@@ -484,7 +488,8 @@ void StelSkyImageTile::loadFromQVariantMap(const QVariantMap& map)
 		{
 			const QVariant& polyXY = texCoordList.at(i);
 			QVector<Vec2f> texCoords;
-			for (const auto& vXY : polyXY.toList())
+			const QList<QVariant> polyXYlist=polyXY.toList();
+			for (const auto& vXY : polyXYlist)
 			{
 				const QVariantList vl = vXY.toList();
 				texCoords.append(Vec2f(vl.at(0).toFloat(&ok), vl.at(1).toFloat(&ok)));

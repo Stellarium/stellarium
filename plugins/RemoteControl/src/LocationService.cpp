@@ -60,7 +60,7 @@ void LocationService::get(const QByteArray& operation, const APIParameters &para
 
 		QStringList allRegions = StelApp::getInstance().getLocationMgr().getRegionNames();
 		QJsonArray list;
-		for (const auto &str : qAsConst(allRegions))
+		for (const auto &str : std::as_const(allRegions))
 		{
 			QJsonObject obj;
 			obj.insert("name",str);
@@ -170,15 +170,25 @@ void LocationService::post(const QByteArray& operation, const APIParameters &par
 		bool doneSomething = false;
 		bool ok = false;
 		float latitude = sLatitude.toFloat(&ok);
-		if(ok && (latitude - loc.latitude) != 0.0f)
+		if (!ok)
 		{
-			loc.latitude = latitude;
+			sLatitude.replace(",", ".");
+			latitude = sLatitude.toFloat(&ok);
+		}
+		if(ok && (latitude - loc.getLatitude()) != 0.0f)
+		{
+			loc.setLatitude(latitude);
 			doneSomething = true;
 		}
 		float longitude = sLongitude.toFloat(&ok);
-		if(ok && (longitude - loc.longitude) != 0.0f)
+		if (!ok)
 		{
-			loc.longitude = longitude;
+			sLongitude.replace(",", ".");
+			longitude = sLongitude.toFloat(&ok);
+		}
+		if(ok && (longitude - loc.getLongitude()) != 0.0f)
+		{
+			loc.setLongitude(longitude);
 			doneSomething = true;
 		}
 		int altitude = sAltitude.toInt(&ok);
@@ -194,7 +204,7 @@ void LocationService::post(const QByteArray& operation, const APIParameters &par
 		}
 		else if (!parameters.contains("name"))
 		{
-			loc.name=QString("%1, %2").arg(loc.latitude).arg(loc.longitude); // Force a preliminary name
+			loc.name=QString("%1, %2").arg(loc.getLatitude()).arg(loc.getLongitude()); // Force a preliminary name
 		}
 		if(!region.isEmpty() && region != loc.region)
 		{

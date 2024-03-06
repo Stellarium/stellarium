@@ -93,13 +93,13 @@ public:
 	SkyLabel(const QString& text, StelObjectP bindObject, const QFont& font, Vec3f color,
 			 QString side="NE", double distance=-1.0, SkyLabel::Style style=TextOnly);
 
-	virtual ~SkyLabel() Q_DECL_OVERRIDE;
+	~SkyLabel() override;
 	// SkyLabel(const QString& text, Vec3d coords, QString side="NE", double distance=-1.0, SkyLabel::Style style=TextOnly, double enclosureSize=-1.0);
 
 	//! Draw the label on the sky
 	//! @param core the StelCore object
 	//! @param sPainter the StelPainter to use for drawing operations
-	virtual bool draw(StelCore* core, StelPainter& sPainter) Q_DECL_OVERRIDE;
+	bool draw(StelCore* core, StelPainter& sPainter) override;
 
 	static SkyLabel::Style stringToStyle(const QString& s);
 	
@@ -122,12 +122,12 @@ public:
 	//! @param font the font to use
 	//! @param color the color for the label
 	HorizonLabel(const QString& text, const float az, const float alt, const QFont& font, const Vec3f& color);
-	virtual ~HorizonLabel() Q_DECL_OVERRIDE;
+	~HorizonLabel() override;
 
 	//! draw the label on the screen
 	//! @param core the StelCore object
 	//! @param sPainter the StelPainter to use for drawing operations
-	virtual bool draw(StelCore* core, StelPainter& sPainter) Q_DECL_OVERRIDE;
+	bool draw(StelCore* core, StelPainter& sPainter) override;
 private:
 	Vec3d altaz; // the vector to the coordinates
 };
@@ -145,12 +145,12 @@ public:
 	//! @param color the color for the label
 	//! @param j2000epoch if true, the label starts displayed in equatorial coordinates for epoch J2000.0
 	EquatorialLabel(const QString& text, const float ra, const float dec, const QFont& font, const Vec3f& color, QString side="NE", double distance=-1.0, bool j2000epoch=true);
-	virtual ~EquatorialLabel() Q_DECL_OVERRIDE;
+	~EquatorialLabel() override;
 
 	//! draw the label on the screen
 	//! @param core the StelCore object
 	//! @param sPainter the StelPainter to use for drawing operations
-	virtual bool draw(StelCore* core, StelPainter& sPainter) Q_DECL_OVERRIDE;
+	bool draw(StelCore* core, StelPainter& sPainter) override;
 private:
 	Vec3d equPos; // the vector to the coordinates
 	QString labelSide;
@@ -170,12 +170,12 @@ public:
 	//! @param font the font to use
 	//! @param color the color for the label
 	ScreenLabel(const QString& text, int x, int y, const QFont& font, const Vec3f& color);
-	virtual ~ScreenLabel() Q_DECL_OVERRIDE;
+	~ScreenLabel() override;
 
 	//! draw the label on the screen
 	//! @param core the StelCore object
 	//! @param sPainter the StelPainter to use for drawing operations
-	virtual bool draw(StelCore* core, StelPainter& sPainter) Q_DECL_OVERRIDE;
+	bool draw(StelCore* core, StelPainter& sPainter) override;
 
 private:
 	int screenX;
@@ -504,7 +504,7 @@ void LabelMgr::init()
 void LabelMgr::draw(StelCore* core)
 {
 	StelPainter sPainter(core->getProjection(StelCore::FrameJ2000));
-	for (auto* l : qAsConst(allLabels))
+	for (auto* l : std::as_const(allLabels))
 	{
 		l->draw(core, sPainter);
 	}
@@ -513,7 +513,7 @@ void LabelMgr::draw(StelCore* core)
 void LabelMgr::messageTimeout2()
 {
 	QObject* obj = QObject::sender();
-	for (auto* l : qAsConst(allLabels))
+	for (auto* l : std::as_const(allLabels))
 	{
 		if (l->timer == obj)
 		{
@@ -526,7 +526,7 @@ void LabelMgr::messageTimeout2()
 void LabelMgr::messageTimeout1()
 {
 	QObject* obj = QObject::sender();
-	for (auto* l : qAsConst(allLabels))
+	for (auto* l : std::as_const(allLabels))
 	{
 		if (l->timer == obj)
 		{
@@ -747,7 +747,7 @@ void LabelMgr::deleteLabel(int id)
 	
 void LabelMgr::update(double deltaTime)
 {
-	for (auto* l : qAsConst(allLabels))
+	for (auto* l : std::as_const(allLabels))
 		l->update(deltaTime);
 }
 	
@@ -761,7 +761,7 @@ double LabelMgr::getCallOrder(StelModuleActionName actionName) const
 int LabelMgr::deleteAllLabels(void)
 {
 	int count=0;
-	for (auto* l : qAsConst(allLabels))
+	for (auto* l : std::as_const(allLabels))
 	{
 		delete l;
 		count++;

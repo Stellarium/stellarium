@@ -117,15 +117,15 @@ void ExoplanetsDialog::createDialogContent()
 	connectBoolProperty(ui->displayShowDesignationsCheckBox,   "Exoplanets.flagShowExoplanetsDesignations");
 	connectBoolProperty(ui->displayShowNumbersCheckBox,        "Exoplanets.flagShowExoplanetsNumbers");
 
-	connectColorButton(ui->exoplanetMarkerColor,		"Exoplanets.markerColor",    "Exoplanets/exoplanet_marker_color");
-	connectColorButton(ui->habitableExoplanetMarkerColor,	"Exoplanets.habitableColor", "Exoplanets/habitable_exoplanet_marker_color");
+	ui->exoplanetMarkerColor         ->setup("Exoplanets.markerColor",    "Exoplanets/exoplanet_marker_color");
+	ui->habitableExoplanetMarkerColor->setup("Exoplanets.habitableColor", "Exoplanets/habitable_exoplanet_marker_color");
 
 	updateTimer = new QTimer(this);
 	connect(updateTimer, SIGNAL(timeout()), this, SLOT(refreshUpdateValues()));
 	updateTimer->start(7000);
 
-	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
-	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
+	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
+	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), this, SLOT(restoreDefaults()));
 	connect(ui->saveSettingsButton, SIGNAL(clicked()), this, SLOT(saveSettings()));	
@@ -259,7 +259,7 @@ void ExoplanetsDialog::selectCurrentExoplanet(const QModelIndex& modelIndex)
 		ep->setFlagShowExoplanets(true);
 	// Find the object
 	QString name = modelIndex.sibling(modelIndex.row(), EPSExoplanetName).data(Qt::UserRole).toString();
-	if (objectMgr->findAndSelectI18n(name) || objectMgr->findAndSelect(name))
+	if (objectMgr->findAndSelectI18n(name, Exoplanet::EXOPLANET_TYPE) || objectMgr->findAndSelect(name, Exoplanet::EXOPLANET_TYPE))
 	{
 		const QList<StelObjectP> newSelected = objectMgr->getSelectedObject();
 		if (!newSelected.empty())
@@ -314,6 +314,10 @@ void ExoplanetsDialog::setInfoHtml(void)
 			.arg(q_("Equilibrium Temperature"),
 			     q_("The planetary equilibrium temperature is a theoretical temperature in (°C) that the planet would be at when considered simply as if it were a black body being heated only by its parent star (assuming a 0.3 bond albedo). As example the planetary equilibrium temperature of Earth is -18.15°C (255 K)."),
 			     q_("Actual surface temperatures are expected to be larger than the equilibrium temperature depending on the atmosphere of the planets, which are currently unknown (e.g. Earth mean global surface temperature is about 288 K or 15°C)."));
+	html += QString("<p><b>%1</b> &mdash; %2 %3</p>")
+			.arg(q_("Surface Temperature"),
+			     q_("The estimated surface temperature in Kelvins (K) assuming an Earth-like atmosphere (i.e., same bond albedo and greenhouse)."),
+			     q_("Temperatures could be much larger for thicker atmospheres (Earth = 288 K or 15°C)."));
 	html += QString("<p><b>%1</b> &mdash; %2</p>")
 			.arg(q_("Flux"),
 			     q_("Average stellar flux of the planet in Earth fluxes (Earth = 1.0 S<sub>E</sub>)."));

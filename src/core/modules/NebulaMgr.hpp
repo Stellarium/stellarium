@@ -256,11 +256,6 @@ class NebulaMgr : public StelObjectModule
 		   WRITE setProtoplanetaryNebulaColor
 		   NOTIFY protoplanetaryNebulaeColorChanged
 		   )
-	Q_PROPERTY(Vec3f clusterWithNebulosityColor
-		   READ getClusterWithNebulosityColor
-		   WRITE setClusterWithNebulosityColor
-		   NOTIFY clusterWithNebulosityColorChanged
-		   )
 	Q_PROPERTY(Vec3f hydrogenRegionsColor
 		   READ getHydrogenRegionColor
 		   WRITE setHydrogenRegionColor
@@ -319,7 +314,7 @@ class NebulaMgr : public StelObjectModule
 
 public:
 	NebulaMgr();
-	virtual ~NebulaMgr() Q_DECL_OVERRIDE;
+	~NebulaMgr() override;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
@@ -330,16 +325,16 @@ public:
 	//!  - Load the pointer texture.
 	//!  - Set flags values from ini parser which relate to nebula display.
 	//!  - call updateI18n() to translate names.
-	virtual void init() Q_DECL_OVERRIDE;
+	void init() override;
 
 	//! Draws all nebula objects.
-	virtual void draw(StelCore* core) Q_DECL_OVERRIDE;
+	void draw(StelCore* core) override;
 
 	//! Update state which is time dependent.
-	virtual void update(double deltaTime) Q_DECL_OVERRIDE {hintsFader.update(static_cast<int>(deltaTime*1000)); flagShow.update(static_cast<int>(deltaTime*1000));}
+	void update(double deltaTime) override {hintsFader.update(static_cast<int>(deltaTime*1000)); flagShow.update(static_cast<int>(deltaTime*1000));}
 
 	//! Determines the order in which the various modules are drawn.
-	virtual double getCallOrder(StelModuleActionName actionName) const Q_DECL_OVERRIDE;
+	double getCallOrder(StelModuleActionName actionName) const override;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in StelObjectModule class
@@ -348,30 +343,30 @@ public:
 	//! @param limitFov the field of view around the position v in which to search for nebulae.
 	//! @param core the StelCore to use for computations.
 	//! @return a list containing the nebulae located inside the limitFov circle around position v.
-	virtual QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const Q_DECL_OVERRIDE;
+	QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const override;
 
 	//! Return the matching nebula object's pointer if exists or an "empty" StelObjectP.
 	//! @param nameI18n The case in-sensitive nebula name or NGC M catalog name : format can
 	//! be M31, M 31, NGC31, NGC 31
-	virtual StelObjectP searchByNameI18n(const QString& nameI18n) const Q_DECL_OVERRIDE;
+	StelObjectP searchByNameI18n(const QString& nameI18n) const override;
 
 	//! Return the matching nebula if exists or Q_NULLPTR.
 	//! @param name The case in-sensitive standard program name
-	virtual StelObjectP searchByName(const QString& name) const Q_DECL_OVERRIDE;
+	StelObjectP searchByName(const QString& name) const override;
 
-	virtual StelObjectP searchByID(const QString &id) const Q_DECL_OVERRIDE { return searchByName(id); }
+	StelObjectP searchByID(const QString &id) const override { return searchByName(id); }
 
 	//! Find and return the list of at most maxNbItem objects auto-completing the passed object English name.
 	//! @param objPrefix the case insensitive first letters of the searched object
 	//! @param maxNbItem the maximum number of returned object names
 	//! @param useStartOfWords the autofill mode for returned objects names
 	//! @return a list of matching object name by order of relevance, or an empty list if nothing match
-	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const Q_DECL_OVERRIDE;
+	QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const override;
 	//! @note Loading deep-sky objects with the proper names only.
-	virtual QStringList listAllObjects(bool inEnglish) const Q_DECL_OVERRIDE;
-	virtual QStringList listAllObjectsByType(const QString& objType, bool inEnglish) const Q_DECL_OVERRIDE;
-	virtual QString getName() const Q_DECL_OVERRIDE { return "Deep-sky objects"; }
-	virtual QString getStelObjectType() const Q_DECL_OVERRIDE { return Nebula::NEBULA_TYPE; }
+	QStringList listAllObjects(bool inEnglish) const override;
+	QStringList listAllObjectsByType(const QString& objType, bool inEnglish) const override;
+	QString getName() const override { return "Deep-sky objects"; }
+	QString getStelObjectType() const override { return Nebula::NEBULA_TYPE; }
 
 	//! Compute the maximum magntiude for which hints will be displayed.
 	float computeMaxMagHint(const class StelSkyDrawer* skyDrawer) const;
@@ -590,16 +585,6 @@ public slots:
 	void setDarkNebulaColor(const Vec3f& c);
 	//! Get current value of the dark nebula color.
 	const Vec3f getDarkNebulaColor(void) const;
-
-	//! Set the color used to draw the cluster associated with nebulosity symbols.
-	//! @param c The color of the cluster associated with nebulosity symbols
-	//! @code
-	//! // example of usage in scripts
-	//! NebulaMgr.setClusterWithNebulosityColor(Vec3f(0.2,0.2,0.2));
-	//! @endcode
-	void setClusterWithNebulosityColor(const Vec3f& c);
-	//! Get current value of the cluster associated with nebulosity color.
-	const Vec3f getClusterWithNebulosityColor(void) const;
 
 	//! Set the color used to draw the star cluster symbols (Open/Globular).
 	//! @param c The color of the cluster symbols
@@ -917,7 +902,6 @@ signals:
 	void emissionNebulaeColorChanged(const Vec3f & color) const;
 	void possiblePlanetaryNebulaeColorChanged(const Vec3f & color) const;
 	void protoplanetaryNebulaeColorChanged(const Vec3f & color) const;
-	void clusterWithNebulosityColorChanged(const Vec3f & color) const;
 	void hydrogenRegionsColorChanged(const Vec3f & color) const;
 	void interstellarMatterColorChanged(const Vec3f & color) const;
 	void emissionObjectsColorChanged(const Vec3f & color) const;
@@ -1003,6 +987,9 @@ private:
 	bool loadDSONames(const QString& filename);
 	// Load outlines for DSO
 	bool loadDSOOutlines(const QString& filename);
+	// Load discovery data for DSO
+	// TODO: Move these data into main DSO catalog to fast reading (v4)
+	bool loadDSODiscoveryData(const QString& filename);
 
 	QVector<NebulaP> dsoArray;		// The DSO list
 	QHash<unsigned int, NebulaP> dsoIndex;

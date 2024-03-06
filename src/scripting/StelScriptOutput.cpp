@@ -56,18 +56,24 @@ void StelScriptOutput::reset(void)
 void StelScriptOutput::saveOutputAs(const QString &name)
 {
 	QFile asFile;
-	QFileInfo outputInfo(outputFile);
-	QDir dir=outputInfo.dir(); // will hold complete dirname
-	QFileInfo newFileNameInfo(name);
+	const QFileInfo outputInfo(outputFile);
+	const QDir dir=outputInfo.dir(); // will hold complete dirname
+	const QFileInfo newFileNameInfo(name);
 
-	bool okToSaveToAbsolutePath=StelApp::getInstance().getSettings()->value("scripts/flag_script_allow_write_absolute_path", false).toBool();
+	const bool okToSaveToAbsolutePath=StelApp::getInstance().getSettings()->value("scripts/flag_allow_write_absolute_path", false).toBool();
 
-	if (!okToSaveToAbsolutePath && (newFileNameInfo.isAbsolute()))
+	if (name.contains("config.ini"))
 	{
-		qWarning() << "SCRIPTING CONFIGURATION ISSUE: You are trying to save to an absolute pathname.";
-		qWarning() << "  To enable this, edit config.ini and set [scripts]/flag_script_allow_write_absolute_path=true";
+		qWarning() << "SCRIPTING ERROR: You are trying to overwrite config.ini. Ignoring.";
+		return;
+	}
+
+	if (!okToSaveToAbsolutePath && ((newFileNameInfo.isAbsolute() || (name.contains(".."))))) // The last condition may include dangerous/malicious paths
+	{
+		qWarning() << "SCRIPTING CONFIGURATION ISSUE: You are trying to save to an absolute pathname or move up in directories.";
+		qWarning() << "  To enable this, check the settings in the script console";
+		qWarning() << "  or edit config.ini and set [scripts]/flag_allow_write_absolute_path=true";
 		asFile.setFileName(dir.absolutePath() + "/" + newFileNameInfo.fileName());
-		qWarning() << "  Storing to " << asFile.fileName() << " instead";
 	}
 	else if (okToSaveToAbsolutePath && (newFileNameInfo.isAbsolute()))
 	{

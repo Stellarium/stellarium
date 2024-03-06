@@ -42,7 +42,7 @@ class StelModuleMgr : public QObject
 
 public:
 	StelModuleMgr();
-	~StelModuleMgr() Q_DECL_OVERRIDE;
+	~StelModuleMgr() override;
 
 	//! Regenerate calling lists if necessary
 	void update();

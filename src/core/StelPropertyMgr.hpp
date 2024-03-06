@@ -22,6 +22,7 @@
 #include <QObject>
 #include <QSet>
 #include <QMetaProperty>
+#include "StelApp.hpp"
 
 class StelProperty;
 
@@ -53,7 +54,7 @@ class StelPropertyIntProxy : public StelPropertyProxy
 public:
 	StelPropertyIntProxy(StelProperty* prop,QObject* parent);
 protected slots:
-	void onPropertyChanged(const QVariant &value) Q_DECL_OVERRIDE;
+	void onPropertyChanged(const QVariant &value) override;
 signals:
 	//! Emitted when the property value changes
 	void propertyChanged(int value);
@@ -66,7 +67,7 @@ class StelPropertyBoolProxy : public StelPropertyProxy
 public:
 	StelPropertyBoolProxy(StelProperty* prop,QObject* parent);
 protected slots:
-	void onPropertyChanged(const QVariant &value) Q_DECL_OVERRIDE;
+	void onPropertyChanged(const QVariant &value) override;
 signals:
 	//! Emitted when the property value changes
 	void propertyChanged(bool value);
@@ -79,7 +80,7 @@ class StelPropertyDoubleProxy : public StelPropertyProxy
 public:
 	StelPropertyDoubleProxy(StelProperty* prop,QObject* parent);
 protected slots:
-	void onPropertyChanged(const QVariant &value) Q_DECL_OVERRIDE;
+	void onPropertyChanged(const QVariant &value) override;
 signals:
 	//! Emitted when the property value changes
 	void propertyChanged(double value);
@@ -92,7 +93,7 @@ class StelPropertyStringProxy : public StelPropertyProxy
 public:
 	StelPropertyStringProxy(StelProperty* prop,QObject* parent);
 protected slots:
-	void onPropertyChanged(const QVariant &value) Q_DECL_OVERRIDE;
+	void onPropertyChanged(const QVariant &value) override;
 signals:
 	//! Emitted when the property value changes
 	void propertyChanged(QString value);
@@ -160,7 +161,7 @@ signals:
 //!			setObjectName("MyCustomModule");
 //!		}
 //!		...
-//!		void init() Q_DECL_OVERRIDE
+//!		void init() override
 //!		{
 //!			...
 //!			// to manually register the property as a StelProperty, this could be used,
@@ -194,6 +195,8 @@ signals:
 //!
 //!	//alternatively, use this to skip having to get the StelProperty instance:
 //!	//StelApp::getInstance().getStelPropertyManager()->setStelPropertyValue("MyCustomModule.awesomeProperty", 123);
+//!     // or even, much shorter, assuming awesomeProperty is an int,
+//!     // GETSTELPROPERTYVALUE("MyCustomModule.awesomeProperty").toInt();
 //!
 //!	//to see the effect
 //!	MyCustomModule *module = GETSTELMODULE(MyCustomModule);
@@ -336,5 +339,7 @@ private:
 	QMap<QString,QObject*> registeredObjects;
 	StelPropertyMap propMap;
 };
+
+#define GETSTELPROPERTYVALUE(pName) StelApp::getInstance().getStelPropertyManager()->getStelPropertyValue(pName, false)
 
 #endif

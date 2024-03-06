@@ -9,6 +9,8 @@
 # the `language` matrix defined below to confirm you have the correct set of
 # supported CodeQL languages.
 #
+# See also https://github.com/actions/runner-images
+#
 name: "CodeQL"
 
 on:
@@ -40,11 +42,11 @@ jobs:
         sudo apt-get update
         # using force-overwrite due to
         # https://github.com/actions/virtual-environments/issues/2703
-        sudo ACCEPT_EULA=Y apt-get upgrade -o Dpkg::Options::="--force-overwrite" --yes
-        sudo apt-get install -y qtbase5-private-dev qtscript5-dev libqt5svg5-dev qttools5-dev-tools qttools5-dev libqt5opengl5-dev qtmultimedia5-dev libqt5multimedia5-plugins libqt5serialport5 libqt5serialport5-dev qtpositioning5-dev libgps-dev libqt5positioning5 libqt5positioning5-plugins qtwebengine5-dev libqt5charts5-dev zlib1g-dev libgl1-mesa-dev libdrm-dev cmake
+        #sudo ACCEPT_EULA=Y apt-get upgrade -o Dpkg::Options::="--force-overwrite" --yes
+        sudo apt-get install -y qtbase5-private-dev qtscript5-dev libqt5svg5-dev qttools5-dev-tools qttools5-dev libqt5opengl5-dev qtmultimedia5-dev libqt5multimedia5-plugins libqt5serialport5 libqt5serialport5-dev qtpositioning5-dev libgps-dev libqt5positioning5 libqt5positioning5-plugins qtwebengine5-dev libqt5charts5-dev zlib1g-dev libgl1-mesa-dev libdrm-dev cmake libexiv2-dev libnlopt-cxx-dev
 
     - name: Checkout repository
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     # Initializes the CodeQL tools for scanning.
     - name: Initialize CodeQL
@@ -62,7 +64,7 @@ jobs:
       run: |
         mkdir -p build
         cd build
-        cmake -DCMAKE_BUILD_TYPE=Release ${{ github.workspace }}
+        cmake -DCMAKE_BUILD_TYPE=Release -DENABLE_NLS=Off ${{ github.workspace }}
         make
 
     # ℹ️ Command-line programs to run using the OS shell.
@@ -91,6 +93,6 @@ jobs:
           -**/_deps/**
 
     - name: Upload SARIF
-      uses: github/codeql-action/upload-sarif@v1
+      uses: github/codeql-action/upload-sarif@v2
       with:
         sarif_file: sarif-results/${{ matrix.language }}.sarif

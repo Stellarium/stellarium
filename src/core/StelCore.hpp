@@ -65,6 +65,7 @@ class StelCore : public QObject
 	Q_PROPERTY(QString currentTimeZone READ getCurrentTimeZone WRITE setCurrentTimeZone NOTIFY currentTimeZoneChanged)
 	Q_PROPERTY(bool flagUseCTZ READ getUseCustomTimeZone WRITE setUseCustomTimeZone NOTIFY useCustomTimeZoneChanged)
 	Q_PROPERTY(bool flagUseDST READ getUseDST WRITE setUseDST NOTIFY flagUseDSTChanged)
+	Q_PROPERTY(bool startupTimeStop READ getStartupTimeStop WRITE setStartupTimeStop NOTIFY startupTimeStopChanged)
 	Q_PROPERTY(DitheringMode ditheringMode READ getDitheringMode WRITE setDitheringMode NOTIFY ditheringModeChanged)
 
 public:
@@ -73,7 +74,7 @@ public:
 	enum FrameType
 	{
 		FrameUninitialized,			//!< Reference frame is not set (FMajerech: Added to avoid condition on uninitialized value in StelSkyLayerMgr::draw())
-		FrameAltAz,				//!< Altazimuthal reference frame centered on observer.
+		FrameAltAz,				//!< Altazimuthal reference frame centered on observer: +x=south, +y=east, +z=zenith.
 		FrameHeliocentricEclipticJ2000,		//!< Fixed-ecliptic reference frame centered on the Sun. This is J2000 ecliptical / almost VSOP87.
 		FrameObservercentricEclipticJ2000,	//!< Fixed-ecliptic reference frame centered on the Observer. Was ObservercentricEcliptic, but renamed because it is Ecliptic of J2000!
 		FrameObservercentricEclipticOfDate,	//!< Moving ecliptic reference frame centered on the Observer. Ecliptic of date, i.e. includes the precession of the ecliptic.
@@ -157,7 +158,7 @@ public:
 	Q_ENUM(DeltaTAlgorithm)
 
 	StelCore();
-	virtual ~StelCore() Q_DECL_OVERRIDE;
+	~StelCore() override;
 
 	//! Init and load all main core components.
 	void init();
@@ -235,6 +236,7 @@ public:
 	Vec3d altAzToJ2000(const Vec3d& v, RefractionMode refMode=RefractionAuto) const;
 	Vec3d j2000ToAltAz(const Vec3d& v, RefractionMode refMode=RefractionAuto) const;
 	void j2000ToAltAzInPlaceNoRefraction(Vec3f* v) const {v->transfo4d(matJ2000ToAltAz);}
+	void j2000ToAltAzInPlaceNoRefraction(Vec3d* v) const {v->transfo4d(matJ2000ToAltAz);}
 	Vec3d galacticToJ2000(const Vec3d& v) const;
 	Vec3d supergalacticToJ2000(const Vec3d& v) const;
 	//! Transform position vector v from equatorial coordinates of date (which may also include atmospheric refraction) to those of J2000.
@@ -304,6 +306,9 @@ public:
 
 	//! Return the observer heliocentric ecliptic position (GZ: presumably J2000)
 	Vec3d getObserverHeliocentricEclipticPos() const;
+	//! Return the observer heliocentric ecliptic velocity. This includes orbital and diurnal motion;
+	// diurnal motion is omitted if planetocentric coordinates are in use.
+	Vec3d getObserverHeliocentricEclipticVelocity() const;
 
 	//! Get the information on the current location
 	const StelLocation& getCurrentLocation() const;
@@ -373,7 +378,7 @@ public slots:
 	//! @param duration direction of view move duration in s
 	//! @param durationIfPlanetChange direction of view + planet travel move duration in s.
 	//! This is used only if the destination planet is different from the starting one.
-	void moveObserverTo(const StelLocation& target, double duration=1., double durationIfPlanetChange=1.);
+	void moveObserverTo(const StelLocation& target, double duration=1., double durationIfPlanetChange=1., const QString& landscapeID=QString());
 
 	//! Set the current ProjectionType to use
 	void setCurrentProjectionType(StelCore::ProjectionType type);
@@ -403,7 +408,7 @@ public slots:
 	//! Set the mask type.
 	void setMaskType(StelProjector::StelProjectorMaskType m);
 
-	//! Set the flag with decides whether to arrage labels so that
+	//! Set the flag with decides whether to arrange labels so that
 	//! they are aligned with the bottom of a 2d screen, or a 3d dome.
 	void setFlagGravityLabels(bool gravity);
 	//! return whether dome-aligned labels are in use
@@ -490,6 +495,9 @@ public slots:
 
 	bool getUseDST() const;
 	void setUseDST(const bool b);
+
+	bool getStartupTimeStop() const;
+	void setStartupTimeStop(const bool b);
 
 	DitheringMode getDitheringMode() const { return ditheringMode; }
 	void setDitheringMode(DitheringMode mode);
@@ -665,8 +673,14 @@ public slots:
 	//! Add one tropical year to the simulation time.
 	void addTropicalYear();
 
-	//! Add one calendric month to the simulation time.
-	void addCalendricMonth();
+	//! Add one calendar month to the simulation time.
+	void addCalendarMonth();
+	//! Add one calendar year to the simulation time.
+	void addCalendarYear();
+	//! Add one calendar decade to the simulation time.
+	void addCalendarDecade();
+	//! Add one calendar century to the simulation time.
+	void addCalendarCentury();
 
 	//! Add one Julian year to the simulation time.
 	void addJulianYear();
@@ -677,42 +691,48 @@ public slots:
 	//! Note that 1 GaussY=2 &pi;/k where k is the Gaussian gravitational constant. A massless body orbits one solar mass in 1AU distance in a Gaussian Year.
 	void addGaussianYear();
 
-	//! Subtract one synodic month to the simulation time.
+	//! Subtract one synodic month from the simulation time.
 	void subtractSynodicMonth();
 
-	//! Subtract one saros (223 synodic months) to the simulation time.
+	//! Subtract one saros (223 synodic months) from the simulation time.
 	void subtractSaros();
 
-	//! Subtract one draconic year to the simulation time.
+	//! Subtract one draconic year from the simulation time.
 	void subtractDraconicYear();
-	//! Subtract one draconic month to the simulation time.
+	//! Subtract one draconic month from the simulation time.
 	void subtractDraconicMonth();
 
-	//! Subtract one anomalistic month to the simulation time.
+	//! Subtract one anomalistic month from the simulation time.
 	void subtractAnomalisticMonth();
-	//! Subtract one anomalistic year to the simulation time.
+	//! Subtract one anomalistic year from the simulation time.
 	void subtractAnomalisticYear();
-	//! Subtract n anomalistic years to the simulation time.
+	//! Subtract n anomalistic years from the simulation time.
 	void subtractAnomalisticYears(double n=100.);
 
-	//! Subtract one mean tropical month to the simulation time.
+	//! Subtract one mean tropical month from the simulation time.
 	void subtractMeanTropicalMonth();
-	//! Subtract one mean tropical year to the simulation time.
+	//! Subtract one mean tropical year from the simulation time.
 	void subtractMeanTropicalYear();
-	//! Subtract n mean tropical years to the simulation time.
+	//! Subtract n mean tropical years from the simulation time.
 	void subtractMeanTropicalYears(double n=100.);
-	//! Subtract one tropical year to the simulation time.
+	//! Subtract one tropical year from the simulation time.
 	void subtractTropicalYear();
 
-	//! Subtract one calendric month to the simulation time.
-	void subtractCalendricMonth();
+	//! Subtract one calendar month from the simulation time.
+	void subtractCalendarMonth();
+	//! Subtract one calendar year from the simulation time.
+	void subtractCalendarYear();
+	//! Subtract one calendar decade from the simulation time.
+	void subtractCalendarDecade();
+	//! Subtract one calendar century from the simulation time.
+	void subtractCalendarCentury();
 
-	//! Subtract one Julian year to the simulation time.
+	//! Subtract one Julian year from the simulation time.
 	void subtractJulianYear();
-	//! Subtract n Julian years to the simulation time.
+	//! Subtract n Julian years from the simulation time.
 	void subtractJulianYears(double n=100.);
 
-	//! Subtract one Gaussian year to the simulation time.
+	//! Subtract one Gaussian year from the simulation time.
 	void subtractGaussianYear();
 
 	//! Add a number of Earth Solar days to the current simulation time
@@ -789,14 +809,17 @@ public slots:
 signals:
 	//! This signal is emitted when the observer location has changed.
 	void locationChanged(const StelLocation&);
-	//! This signal is emitted whenever the targeted location changes
-	void targetLocationChanged(const StelLocation&);
+	//! This signal is emitted whenever the targeted location changes, i.e., at the onset of location transitions.
+	//! The second parameter can transmit a landscapeID or should be QString().
+	void targetLocationChanged(const StelLocation& loc, const QString& id);
 	//! This signal is emitted when the current timezone name is changed.
 	void currentTimeZoneChanged(const QString& tz);
 	//! This signal is emitted when custom timezone use is activated (true) or deactivated (false).
 	void useCustomTimeZoneChanged(const bool b);
 	//! This signal is emitted when daylight saving time is enabled or disabled.
 	void flagUseDSTChanged(const bool b);
+	//! This signal is emitted when stop clock at startup is enabled or disabled.
+	void startupTimeStopChanged(const bool b);
 	//! This signal is emitted when the time rate has changed
 	void timeRateChanged(double rate);
 	//! This signal is emitted whenever the time is re-synced.
@@ -811,7 +834,7 @@ signals:
 	//! This signal is emitted when the date has changed for a month.
 	void dateChangedForMonth();
 	//! This signal is emitted when the date has changed by one year.
-	void dateChangedByYear();
+	void dateChangedByYear(const int year);
 	//! This signal indicates a horizontal display flip
 	void flipHorzChanged(bool b);
 	//! This signal indicates a vertical display flip
@@ -919,6 +942,7 @@ private:
 	QString currentTimeZone;	
 	bool flagUseDST;
 	bool flagUseCTZ; // custom time zone
+	bool startupTimeStop;
 
 	// Variables for equations of DeltaT
 	Vec3d deltaTCustomEquationCoeff;

@@ -41,11 +41,12 @@ class StelProjector;
 class StelToneReproducer;
 class StelCore;
 class QOpenGLFunctions;
+class TextureAverageComputer;
 
 class AtmosphereShowMySky : public Atmosphere, public QObject
 {
 public:
-	AtmosphereShowMySky();
+	AtmosphereShowMySky(double initialAltitude);
 	~AtmosphereShowMySky();
 
 	void computeColor(StelCore* core, double JD, const Planet& currentPlanet, const Planet& sun, const Planet* moon,
@@ -55,12 +56,6 @@ public:
 	bool isLoading() const override;
 	bool isReadyToRender() const override;
 	LoadingStatus stepDataLoading() override;
-
-	struct InitFailure : std::runtime_error
-	{
-		using std::runtime_error::runtime_error;
-		InitFailure(QString const& what) : std::runtime_error(what.toStdString()) {}
-	};
 
 private:
 #ifdef ENABLE_SHOWMYSKY
@@ -93,18 +88,12 @@ private:
 	 *	Especially at full resolution, frames will be skipped depending on the speed of movement.
 	 */
 	bool flagDynamicResolution;
-	QVector<Vec2f> posGrid;
-	QOpenGLBuffer posGridBuffer;
-	QOpenGLBuffer indexBuffer;
-	QVector<Vec4f> viewRayGrid;
-	QOpenGLBuffer viewRayGridBuffer;
 
 	std::unique_ptr<QOpenGLShaderProgram> luminanceToScreenProgram_;
 	decltype(::ShowMySky_AtmosphereRenderer_create)* ShowMySky_AtmosphereRenderer_create=nullptr;
 
 	struct {
-		int rgbMaxValue;
-		int ditherPattern;
+		int doSRGB;
 		int oneOverGamma;
 		int brightnessScale;
 		int luminanceTexture;
@@ -114,12 +103,13 @@ private:
 		int flagUseTmGamma;                      // switch between their use, true to use the first expression.
 	} shaderAttribLocations;
 
-	StelTextureSP ditherPatternTex_;
+	StelProjectorP prevProjector_;
+	std::unique_ptr<TextureAverageComputer> textureAverager_;
 
 	float prevFad=0, prevFov=0;
 	Vec3d prevPos=Vec3d(0,0,0), prevSun=Vec3d(0,0,0);
 	int prevWidth_=0, prevHeight_=0, dynResTimer=0, prevRes=0, atmoRes=1;
-	GLuint renderVAO_=0, luminanceToScreenVAO_=0, zenithProbeVAO_=0, vbo_=0;
+	GLuint mainVAO_=0, zenithProbeVAO_=0, vbo_=0;
 	std::unique_ptr<ShowMySky::AtmosphereRenderer> renderer_;
 	std::unique_ptr<ShowMySky::Settings> skySettings_;
 	std::function<void(QOpenGLShaderProgram&)> renderSurfaceFunc_;
@@ -147,10 +137,11 @@ private:
 	Vec4f getMeanPixelValue();
 	void resizeRenderTarget(int width, int height);
 	void drawAtmosphere(Mat4f const& projectionMatrix, float sunAzimuth, float sunZenithAngle, float sunAngularRadius,
-						float moonAzimuth, float moonZenithAngle, float earthMoonDistance, float altitude,
+	                    float moonAzimuth, float moonZenithAngle, float earthMoonDistance, float altitude,
 	                    float brightness, float lightPollutionGroundLuminance, float airglowRelativeBrightness,
 	                    bool drawAsEclipse, bool clearTarget);
 	bool dynamicResolution(StelProjectorP prj, Vec3d &sunPos, int width, int height);
+	std::pair<QByteArray,QByteArray> getViewDirShaderSources(const StelProjector& projector) const;
 	void probeZenithLuminances(float altitude);
 #endif // ENABLE_SHOWMYSKY
 };

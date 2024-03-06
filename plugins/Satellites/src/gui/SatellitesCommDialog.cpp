@@ -63,8 +63,8 @@ void SatellitesCommDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
 
-	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
-	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
+	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
+	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 
 	initListCommunications();
@@ -75,11 +75,6 @@ void SatellitesCommDialog::createDialogContent()
 	connect(ui->removeCommLinkButton, SIGNAL(clicked()), this, SLOT(removeCommData()));
 
 	populateTexts();
-
-	// Set size of buttons
-	QSize bs = QSize(26, 26);
-	ui->addCommLinkButton->setFixedSize(bs);
-	ui->removeCommLinkButton->setFixedSize(bs);
 }
 
 void SatellitesCommDialog::populateTexts()
@@ -112,7 +107,7 @@ void SatellitesCommDialog::getSatCommData()
 		communications = SatellitesMgr->getCommunicationData(satelliteID);
 		if (communications.count()>0)
 		{
-			for (const auto& comm : qAsConst(communications))
+			for (const auto& comm : std::as_const(communications))
 			{
 				fillCommunicationsTable(satelliteID, comm.description, comm.frequency, comm.modulation);
 			}

@@ -97,8 +97,6 @@ void Landscape::initGL()
 	setupCurrentVAO();
 	releaseVAO();
 
-	ditherPatternTex = StelApp::getInstance().getTextureManager().getDitheringTexture(0);
-
 	initialized = true;
 }
 
@@ -168,9 +166,9 @@ void Landscape::loadCommon(const QSettings& landscapeIni, const QString& landsca
 		if (landscapeIni.contains("location/altitude"))
 			location.altitude = qRound(landscapeIni.value("location/altitude").toDouble());
 		if (landscapeIni.contains("location/latitude"))
-			location.latitude = static_cast<float>(StelUtils::getDecAngle(landscapeIni.value("location/latitude").toString())*M_180_PI);
+			location.setLatitude(static_cast<float>(StelUtils::getDecAngle(landscapeIni.value("location/latitude").toString())*M_180_PI));
 		if (landscapeIni.contains("location/longitude"))
-			location.longitude = static_cast<float>(StelUtils::getDecAngle(landscapeIni.value("location/longitude").toString())*M_180_PI);
+			location.setLongitude(static_cast<float>(StelUtils::getDecAngle(landscapeIni.value("location/longitude").toString())*M_180_PI));
 		if (landscapeIni.contains("location/country"))
 			location.region = StelLocationMgr::pickRegionFromCountry(landscapeIni.value("location/country").toString());
 		if (landscapeIni.contains("location/state"))
@@ -182,7 +180,7 @@ void Landscape::loadCommon(const QSettings& landscapeIni, const QString& landsca
 		location.landscapeKey = name;
 
 		QString tzString=landscapeIni.value("location/timezone", "").toString();
-		if ((tzString.length() > 0))
+		if (!tzString.isEmpty())
 			location.ianaTimeZone=StelLocationMgr::sanitizeTimezoneStringFromLocationDB(tzString);
 
 		auto defaultBortleIndex = landscapeIni.value("location/light_pollution", -1).toInt();
@@ -195,8 +193,8 @@ void Landscape::loadCommon(const QSettings& landscapeIni, const QString& landsca
 
 			if (defaultBortleIndex>=0)
 			{
-				qWarning() << "Landscape light pollution is specified both as luminance and as Bortle scale index."
-				              "Only one value should be specified, preferably luminance.";
+				qWarning() << "Landscape light pollution is specified both as luminance and as Bortle "
+				              "scale index. Only one value should be specified, preferably luminance.";
 			}
 		}
 		else if (defaultBortleIndex>=0)
@@ -221,11 +219,13 @@ void Landscape::loadCommon(const QSettings& landscapeIni, const QString& landsca
 	if (landscapeIni.contains("landscape/polygonal_horizon_list"))
 	{
 		createPolygonalHorizon(
-					StelFileMgr::findFile("landscapes/" + landscapeId + "/" + landscapeIni.value("landscape/polygonal_horizon_list").toString()),
+					StelFileMgr::findFile("landscapes/" + landscapeId + "/" +
+							       landscapeIni.value("landscape/polygonal_horizon_list").toString()),
 					landscapeIni.value("landscape/polygonal_angle_rotatez", 0.f).toFloat(),
 					landscapeIni.value("landscape/polygonal_horizon_list_mode", "azDeg_altDeg").toString()
 					);
-		// This line can then be drawn in all classes with the color specified here. If not specified, don't draw it! (flagged by negative red)
+		// This line can then be drawn in all classes with the color specified here.
+		// If not specified, don't draw it! (flagged by negative red)
 		horizonPolygonLineColor=Vec3f(landscapeIni.value("landscape/horizon_line_color", "-1,0,0" ).toString());
 	}
 	loadLabels(landscapeId);
@@ -235,7 +235,8 @@ void Landscape::createPolygonalHorizon(const QString& lineFileName, const float 
 {
 	// qDebug() << _name << " " << _fullpath << " " << _lineFileName ;
 
-	const QStringList horizonModeList = { "azDeg_altDeg", "azDeg_zdDeg", "azRad_altRad", "azRad_zdRad", "azGrad_zdGrad", "azGrad_zdGrad"};
+	const QStringList horizonModeList = { "azDeg_altDeg", "azDeg_zdDeg", "azRad_altRad",
+					      "azRad_zdRad", "azGrad_zdGrad", "azGrad_zdGrad"};
 	const horizonListMode coordMode=static_cast<horizonListMode>(horizonModeList.indexOf(listMode));
 
 	QVector<Vec3d> horiPoints(0);
@@ -259,7 +260,8 @@ void Landscape::createPolygonalHorizon(const QString& lineFileName, const float 
 		const QStringList list = line.trimmed().split(spaceRe);
 		if (list.count() < 2)
 		{
-			qWarning() << "Landscape polygon file" << QDir::toNativeSeparators(lineFileName) << "has bad line:" << line << "with" << list.count() << "elements";
+			qWarning() << "Landscape polygon file" << QDir::toNativeSeparators(lineFileName)
+				   << "has bad line:" << line << "with" << list.count() << "elements";
 			continue;
 		}
 		//if (list.count() > 2) // use first two elements but give warning.
@@ -328,6 +330,26 @@ void Landscape::createPolygonalHorizon(const QString& lineFileName, const float 
 	}
 }
 
+void Landscape::drawHorizonLine(StelCore* core, StelPainter& painter)
+{
+	if (!horizonPolygon || horizonPolygonLineColor == Vec3f(-1.f,0.f,0.f))
+		return;
+
+	StelProjector::ModelViewTranformP transfo = core->getAltAzModelViewTransform(StelCore::RefractionOff);
+	transfo->combine(Mat4d::zrotation(static_cast<double>(-angleRotateZOffset)));
+	const StelProjectorP prj = core->getProjection(transfo);
+	painter.setProjector(prj);
+	painter.setLineSmooth(true);
+	painter.setBlending(true);
+	painter.setColor(horizonPolygonLineColor, landFader.getInterstate());
+	const float lineWidth=painter.getLineWidth();
+	const float ppx = static_cast<float>(prj->getDevicePixelsPerPixel());
+	painter.setLineWidth(GETSTELMODULE(LandscapeMgr)->getPolyLineThickness()*ppx);
+	painter.drawSphericalRegion(horizonPolygon.data(), StelPainter::SphericalPolygonDrawModeBoundary);
+	painter.setLineWidth(lineWidth);
+	painter.setLineSmooth(false);
+}
+
 #include <iostream>
 const QString Landscape::getTexturePath(const QString& basename, const QString& landscapeId)
 {
@@ -349,15 +371,18 @@ void Landscape::loadLabels(const QString& landscapeId)
 	QString lang, descFileName, locLabelFileName, engLabelFileName;
 
 	lang = StelApp::getInstance().getLocaleMgr().getAppLanguage();
-	locLabelFileName = StelFileMgr::findFile("landscapes/" + landscapeId, StelFileMgr::Directory) + "/gazetteer." + lang + ".utf8";
-	engLabelFileName = StelFileMgr::findFile("landscapes/" + landscapeId, StelFileMgr::Directory) + "/gazetteer.en.utf8";
+	locLabelFileName = StelFileMgr::findFile("landscapes/" + landscapeId,
+						 StelFileMgr::Directory) + "/gazetteer." + lang + ".utf8";
+	engLabelFileName = StelFileMgr::findFile("landscapes/" + landscapeId,
+						 StelFileMgr::Directory) + "/gazetteer.en.utf8";
 
 	// Check the file with full name of locale
 	if (!QFileInfo::exists(locLabelFileName))
 	{
 		// File not found. What about short name of locale?
 		lang = lang.split("_").at(0);
-		locLabelFileName = StelFileMgr::findFile("landscapes/" + landscapeId, StelFileMgr::Directory) + "/gazetteer." + lang + ".utf8";
+		locLabelFileName = StelFileMgr::findFile("landscapes/" + landscapeId,
+							 StelFileMgr::Directory) + "/gazetteer." + lang + ".utf8";
 	}
 
 	// Get localized or at least English description for landscape
@@ -394,8 +419,10 @@ void Landscape::loadLabels(const QString& landscapeId)
 			}
 			LandscapeLabel newLabel;
 			newLabel.name=parts.at(4).trimmed();
-			StelUtils::spheToRect((180.0f-parts.at(0).toFloat()) *M_PI_180f, parts.at(1).toFloat()*M_PI_180f, newLabel.featurePoint);
-			StelUtils::spheToRect((180.0f-parts.at(0).toFloat() - parts.at(3).toFloat())*M_PI_180f, (parts.at(1).toFloat() + parts.at(2).toFloat())*M_PI_180f, newLabel.labelPoint);
+			StelUtils::spheToRect((180.0f-parts.at(0).toFloat()) *M_PI_180f,
+					      parts.at(1).toFloat()*M_PI_180f, newLabel.featurePoint);
+			StelUtils::spheToRect((180.0f-parts.at(0).toFloat() - parts.at(3).toFloat())*M_PI_180f,
+					      (parts.at(1).toFloat() + parts.at(2).toFloat())*M_PI_180f, newLabel.labelPoint);
 			landscapeLabels.append(newLabel);
 			//qDebug() << "Added landscape label " << newLabel.name;
 		}
@@ -471,7 +498,7 @@ LandscapeOldStyle::~LandscapeOldStyle()
 	}
 
 	if (sides) delete [] sides;
-	if (sidesImages.size()>0)
+	if (!sidesImages.isEmpty())
 	{
 		qDeleteAll(sidesImages);
 		sidesImages.clear();
@@ -508,25 +535,25 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 	tanMode            = landscapeIni.value("landscape/tan_mode", false).toBool();
 	calibrated         = landscapeIni.value("landscape/calibrated", false).toBool();
 
+	auto& texMan = StelApp::getInstance().getTextureManager();
 	// Load sides textures
 	nbSideTexs = static_cast<unsigned short>(landscapeIni.value("landscape/nbsidetex", 0).toUInt());
 	sideTexs = new StelTextureSP[static_cast<size_t>(nbSideTexs)*2]; // 0.14: allow upper half for light textures!
+	const auto texParams = StelTexture::StelTextureParams(true, GL_LINEAR, GL_CLAMP_TO_EDGE, true);
 	for (unsigned int i=0; i<nbSideTexs; ++i)
 	{
 		QString textureKey = QString("landscape/tex%1").arg(i);
 		QString textureName = landscapeIni.value(textureKey).toString();
 		const QString texturePath = getTexturePath(textureName, landscapeId);
-		sideTexs[i] = StelApp::getInstance().getTextureManager().createTexture(texturePath);
+		sideTexs[i] = texMan.createTexture(texturePath, texParams);
 		// GZ: To query the textures, also keep an array of QImage*, but only
 		// if that query is not going to be prevented by the polygon that already has been loaded at that point...
 		if ( (!horizonPolygon) && calibrated ) { // for uncalibrated landscapes the texture is currently never queried, so no need to store.
 			QImage *image = new QImage(texturePath);
+			if (image->isNull())
+				qWarning() << "Null image (out of memory!) in Landscape!";
 			sidesImages.append(image); // indices identical to those in sideTexs
-#if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
 			memorySize+=(image->sizeInBytes());
-#else
-			memorySize+=static_cast<uint>(image->byteCount());
-#endif
 		}
 		// Also allow light textures. The light textures must cover the same geometry as the sides. It is allowed that not all or even any light textures are present!
 		textureKey = QString("landscape/light%1").arg(i);
@@ -534,7 +561,7 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 		if (textureName.length())
 		{
 			const QString lightTexturePath = getTexturePath(textureName, landscapeId);
-			sideTexs[nbSideTexs+i] = StelApp::getInstance().getTextureManager().createTexture(lightTexturePath);
+			sideTexs[nbSideTexs+i] = texMan.createTexture(lightTexturePath, texParams);
 			if(sideTexs[nbSideTexs+i])
 				memorySize+=sideTexs[nbSideTexs+i]->getGlSize();
 		}
@@ -577,13 +604,13 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 	}
 	const QString groundTexName = landscapeIni.value("landscape/groundtex").toString();
 	const QString groundTexPath = getTexturePath(groundTexName, landscapeId);
-	groundTex = StelApp::getInstance().getTextureManager().createTexture(groundTexPath, StelTexture::StelTextureParams(true));
+	groundTex = texMan.createTexture(groundTexPath, texParams);
 	if (groundTex)
 		memorySize+=groundTex->getGlSize();
 
 	const QString fogTexName = landscapeIni.value("landscape/fogtex").toString();
 	const QString fogTexPath = getTexturePath(fogTexName, landscapeId);
-	fogTex = StelApp::getInstance().getTextureManager().createTexture(fogTexPath, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
+	fogTex = texMan.createTexture(fogTexPath, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
 	if (fogTex)
 		memorySize+=fogTex->getGlSize();
 
@@ -636,8 +663,10 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 	}
 	else // buggy code, but legacy.
 	{
-		z0 =static_cast<float>(radius)*(tanMode ? std::tan(decorAngleShift*M_PI_180f)        : std::sin(decorAngleShift*M_PI_180f));
-		d_z=static_cast<float>(radius)*(tanMode ? std::tan(decorAltAngle  *M_PI_180f)/stacks : std::sin(decorAltAngle  *M_PI_180f)/stacks);
+		z0 =static_cast<float>(radius)*(tanMode ? std::tan(decorAngleShift*M_PI_180f)
+							: std::sin(decorAngleShift*M_PI_180f));
+		d_z=static_cast<float>(radius)*(tanMode ? std::tan(decorAltAngle  *M_PI_180f)/stacks
+							: std::sin(decorAltAngle  *M_PI_180f)/stacks);
 	}
 
 	const float alpha = 2.f*static_cast<float>(M_PI)/(nbDecorRepeat*nbSide*slices_per_side); //delta_azimuth
@@ -658,7 +687,8 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 				ti = texToSide[i];
 			else
 			{
-				qDebug() << QString("LandscapeOldStyle::load ERROR: found no corresponding tex value for side%1").arg(i);
+				qDebug() << QString("LandscapeOldStyle::load ERROR: found no "
+						    "corresponding tex value for side%1").arg(i);
 				break;
 			}
 			precompSide.arr.vertex.resize(0);
@@ -684,12 +714,16 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 					if (calibrated && !tanMode)
 					{
 						double tanZ=radius * static_cast<double>(std::tan(z*M_PI_180f));
-						precompSide.arr.vertex << Vec3d(static_cast<double>(x0), static_cast<double>(y0), tanZ)
-								       << Vec3d(static_cast<double>(x1), static_cast<double>(y1), tanZ);
+						precompSide.arr.vertex << Vec3d(static_cast<double>(x0),
+										static_cast<double>(y0), tanZ)
+								       << Vec3d(static_cast<double>(x1),
+										static_cast<double>(y1), tanZ);
 					} else
 					{
-						precompSide.arr.vertex << Vec3d(static_cast<double>(x0), static_cast<double>(y0), static_cast<double>(z))
-								       << Vec3d(static_cast<double>(x1), static_cast<double>(y1), static_cast<double>(z));
+						precompSide.arr.vertex << Vec3d(static_cast<double>(x0),
+										static_cast<double>(y0), static_cast<double>(z))
+								       << Vec3d(static_cast<double>(x1),
+										static_cast<double>(y1), static_cast<double>(z));
 					}
 					z += d_z;
 					ty0 += d_ty;
@@ -720,11 +754,472 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 
 void LandscapeOldStyle::draw(StelCore* core, bool onlyPolygon)
 {
+	if(!StelOpenGL::globalShaderPrefix(StelOpenGL::FRAGMENT_SHADER).contains("textureGrad_SUPPORTED"))
+	{
+		drawLowGL(core, onlyPolygon);
+		return;
+	}
+
+	if(!initialized) initGL();
+	if(!validLandscape) return;
+	if(landFader.getInterstate()==0.f) return;
+
+	StelProjector::ModelViewTranformP transfo = core->getAltAzModelViewTransform(StelCore::RefractionOff);
+	transfo->combine(Mat4d::zrotation(-static_cast<double>(angleRotateZ+angleRotateZOffset)));
+	const StelProjectorP prj = core->getProjection(transfo);
+
+	if(!renderProgram || !prevProjector || !prj->isSameProjection(*prevProjector))
+	{
+		renderProgram.reset(new QOpenGLShaderProgram);
+		prevProjector = prj;
+
+		const auto vert =
+			StelOpenGL::globalShaderPrefix(StelOpenGL::VERTEX_SHADER) +
+			R"(
+ATTRIBUTE highp vec3 vertex;
+VARYING highp vec3 ndcPos;
+void main()
+{
+	gl_Position = vec4(vertex, 1.);
+	ndcPos = vertex;
+}
+)";
+		bool ok = renderProgram->addShaderFromSourceCode(QOpenGLShader::Vertex, vert);
+		if(!renderProgram->log().isEmpty())
+			qWarning().noquote() << "LandscapeSpherical: Warnings while compiling vertex shader:\n"
+					     << renderProgram->log();
+		if(!ok) return;
+
+		const auto frag =
+			StelOpenGL::globalShaderPrefix(StelOpenGL::FRAGMENT_SHADER) +
+			prj->getUnProjectShader() +
+			R"(
+VARYING highp vec3 ndcPos;
+uniform int whatToRender;
+uniform int totalNumberOfSides;
+uniform int firstSideInBatch;
+uniform int numberOfSidesInBatch;
+uniform int sidePresenceMask;
+uniform vec4 perSideTexCoords[8];
+uniform sampler2D sideTex0;
+uniform sampler2D sideTex1;
+uniform sampler2D sideTex2;
+uniform sampler2D sideTex3;
+uniform sampler2D sideTex4;
+uniform sampler2D sideTex5;
+uniform sampler2D sideTex6;
+uniform sampler2D sideTex7;
+uniform sampler2D mapTex;
+uniform mat4 projectionMatrixInverse;
+uniform float vshift; // tan (or sin) of {ground,fog}_angle_shift
+uniform float decorAngleShift;
+uniform float sideAngularHeight;
+uniform float fogCylinderHeight;
+uniform bool calibrated;
+uniform bool tanMode;
+uniform vec4 brightness;
+
+vec4 sampleSideTexture(int sideIndex, const vec2 texc, const vec2 texDx, const vec2 texDy)
+{
+	sideIndex -= firstSideInBatch;
+	if(sideIndex==0 && (sidePresenceMask&  1)!=0) return textureGrad(sideTex0, texc, texDx, texDy);
+	if(sideIndex==1 && (sidePresenceMask&  2)!=0) return textureGrad(sideTex1, texc, texDx, texDy);
+	if(sideIndex==2 && (sidePresenceMask&  4)!=0) return textureGrad(sideTex2, texc, texDx, texDy);
+	if(sideIndex==3 && (sidePresenceMask&  8)!=0) return textureGrad(sideTex3, texc, texDx, texDy);
+	if(sideIndex==4 && (sidePresenceMask& 16)!=0) return textureGrad(sideTex4, texc, texDx, texDy);
+	if(sideIndex==5 && (sidePresenceMask& 32)!=0) return textureGrad(sideTex5, texc, texDx, texDy);
+	if(sideIndex==6 && (sidePresenceMask& 64)!=0) return textureGrad(sideTex6, texc, texDx, texDy);
+	if(sideIndex==7 && (sidePresenceMask&128)!=0) return textureGrad(sideTex7, texc, texDx, texDy);
+	return vec4(0);
+}
+
+void main(void)
+{
+	const float PI = 3.14159265;
+	vec4 winPos = projectionMatrixInverse * vec4(ndcPos, 1);
+	bool unprojectSuccess = false;
+	vec3 modelPos = unProject(winPos.x, winPos.y, unprojectSuccess).xyz;
+	// First we must compute the derivatives of texture coordinates, and only
+	// then decide whether we want to display the !unprojectSuccess case.
+
+	vec3 viewDir = normalize(modelPos);
+
+	vec4 color;
+	if(whatToRender == -1) // ground
+	{
+		vec2 centeredTexCoords = viewDir.z!=0. ? vshift / viewDir.z * viewDir.xy
+											   : vec2(0);
+		vec2 texc = (centeredTexCoords + 1.) / 2.;
+		vec2 texDx = dFdx(texc);
+		vec2 texDy = dFdy(texc);
+
+		// Now that all dFdx/dFdy are computed, we can early return if needed.
+		if(!unprojectSuccess)
+		{
+			FRAG_COLOR = vec4(0);
+			return;
+		}
+		if(viewDir.z > 0. || length(centeredTexCoords) > 1.)
+		{
+			FRAG_COLOR = vec4(0);
+			return;
+		}
+
+		color = textureGrad(mapTex, texc, texDx, texDy);
+	}
+	else if(whatToRender == -2) // fog
+	{
+		float azimuth = atan(viewDir.x, viewDir.y);
+		if(azimuth<0.) azimuth += 2.*PI;
+		float s = azimuth/(2.*PI);
+
+		float tanElevation = viewDir.z / sqrt(1. - viewDir.z*viewDir.z);
+		float t = (tanElevation - vshift) / fogCylinderHeight;
+
+		vec2 texc = vec2(s,t);
+		vec2 texDx = dFdx(texc);
+		vec2 texDy = dFdy(texc);
+
+		// Now that all dFdx/dFdy are computed, we can early return if needed.
+		if(!unprojectSuccess)
+		{
+			FRAG_COLOR = vec4(0);
+			return;
+		}
+		if(t<0. || t>1.)
+		{
+			FRAG_COLOR = vec4(0);
+			return;
+		}
+		color = textureGrad(mapTex, texc, texDx, texDy);
+	}
+	else
+	{
+		float azimuth = atan(viewDir.x, viewDir.y);
+		if(azimuth<0.) azimuth += 2.*PI;
+		float sideAngularWidth = 2.*PI/float(totalNumberOfSides);
+		int currentSide = int(azimuth/sideAngularWidth);
+		int currentSideInBatch = currentSide%numberOfSidesInBatch;
+		float leftBorderAzimuth = float(currentSide)*sideAngularWidth;
+		float texCoordLeft  = perSideTexCoords[currentSideInBatch][0];
+		float texCoordRight = perSideTexCoords[currentSideInBatch][2];
+		float deltaS = texCoordRight - texCoordLeft;
+		float s = texCoordLeft + (azimuth-leftBorderAzimuth)/sideAngularWidth * deltaS;
+
+		float elevation = asin(viewDir.z);
+		float texCoordBottom  = perSideTexCoords[currentSideInBatch][1];
+		float texCoordTop     = perSideTexCoords[currentSideInBatch][3];
+		float deltaT = texCoordTop - texCoordBottom;
+		float texCoordInUnitRange;
+		if(calibrated)
+		{
+			if(tanMode)
+			{
+				float tanShift = tan(decorAngleShift);
+				texCoordInUnitRange = (tan(elevation)-tanShift)/(tan(decorAngleShift+sideAngularHeight)-tanShift);
+			}
+			else
+			{
+				texCoordInUnitRange = (elevation-decorAngleShift)/sideAngularHeight;
+			}
+		}
+		else
+		{
+			if(tanMode)
+			{
+				texCoordInUnitRange = (tan(elevation)-tan(decorAngleShift))/tan(sideAngularHeight);
+			}
+			else
+			{
+				texCoordInUnitRange = (tan(elevation)-sin(decorAngleShift))/sin(sideAngularHeight);
+			}
+		}
+		float t = texCoordBottom + texCoordInUnitRange * deltaT;
+
+		// The usual automatic computation of derivatives of texture coordinates
+		// breaks down at the discontinuity of atan, resulting in choosing the most
+		// minified mip level instead of the correct one, which looks as a seam on
+		// the screen. Thus, we need to compute them in a custom way, treating atan
+		// as a (continuous) multivalued function. We differentiate
+		// atan(modelPosX(x,y), modelPosY(x,y)) with respect to x and y and yield
+		// gradAzimuth vector.
+		vec2 gradModelPosX = vec2(dFdx(modelPos.x), dFdy(modelPos.x));
+		vec2 gradModelPosY = vec2(dFdx(modelPos.y), dFdy(modelPos.y));
+		float texTdx = dFdx(t);
+		float texTdy = dFdy(t);
+
+		// Now that all dFdx/dFdy are computed, we can early return if needed.
+		int lastSideInBatch = firstSideInBatch+numberOfSidesInBatch-1;
+		if(currentSide < firstSideInBatch || currentSide > lastSideInBatch)
+		{
+			FRAG_COLOR = vec4(0);
+			return;
+		}
+		if(s<texCoordLeft || s>texCoordRight || t<texCoordBottom || t>texCoordTop)
+		{
+			FRAG_COLOR = vec4(0);
+			return;
+		}
+		if(!unprojectSuccess)
+		{
+			FRAG_COLOR = vec4(0);
+			return;
+		}
+
+		vec2 gradAzimuth   = vec2(modelPos.y*gradModelPosX.s-modelPos.x*gradModelPosY.s,
+								  modelPos.y*gradModelPosX.t-modelPos.x*gradModelPosY.t)
+															/
+												 dot(modelPos, modelPos);
+		vec2 texDx = vec2(gradAzimuth.s/sideAngularWidth*deltaS, texTdx);
+		vec2 texDy = vec2(gradAzimuth.t/sideAngularWidth*deltaS, texTdy);
+		color = sampleSideTexture(currentSide, vec2(s,t), texDx, texDy);
+	}
+
+	FRAG_COLOR = color * brightness;
+}
+)";
+		ok = renderProgram->addShaderFromSourceCode(QOpenGLShader::Fragment, frag);
+		if(!renderProgram->log().isEmpty())
+			qWarning().noquote() << "LandscapeSpherical: Warnings while compiling fragment shader:\n"
+					     << renderProgram->log();
+
+		if(!ok) return;
+
+		renderProgram->bindAttributeLocation("vertex", SKY_VERTEX_ATTRIB_INDEX);
+
+		if(!StelPainter::linkProg(renderProgram.get(), "Spherical landscape render program"))
+			return;
+
+		renderProgram->bind();
+		shaderVars.mapTex                  = renderProgram->uniformLocation("mapTex");
+		shaderVars.vshift                  = renderProgram->uniformLocation("vshift");
+		shaderVars.tanMode                 = renderProgram->uniformLocation("tanMode");
+		shaderVars.calibrated              = renderProgram->uniformLocation("calibrated");
+		shaderVars.brightness              = renderProgram->uniformLocation("brightness");
+		shaderVars.whatToRender            = renderProgram->uniformLocation("whatToRender");
+		shaderVars.decorAngleShift         = renderProgram->uniformLocation("decorAngleShift");
+		shaderVars.firstSideInBatch        = renderProgram->uniformLocation("firstSideInBatch");
+		shaderVars.sidePresenceMask        = renderProgram->uniformLocation("sidePresenceMask");
+		shaderVars.sideAngularHeight       = renderProgram->uniformLocation("sideAngularHeight");
+		shaderVars.fogCylinderHeight       = renderProgram->uniformLocation("fogCylinderHeight");
+		shaderVars.totalNumberOfSides      = renderProgram->uniformLocation("totalNumberOfSides");
+		shaderVars.numberOfSidesInBatch    = renderProgram->uniformLocation("numberOfSidesInBatch");
+		shaderVars.projectionMatrixInverse = renderProgram->uniformLocation("projectionMatrixInverse");
+		for(unsigned n = 0; n < std::size(shaderVars.sideTexN); ++n)
+		{
+			shaderVars.sideTexN[n] = renderProgram->uniformLocation(("sideTex"+std::to_string(n)).c_str());
+			shaderVars.perSideTexCoords[n] =
+				renderProgram->uniformLocation(("perSideTexCoords["+std::to_string(n)+"]").c_str());
+		}
+		renderProgram->release();
+	}
+	if(!renderProgram || !renderProgram->isLinked())
+		return;
+
+	auto& gl = *QOpenGLContext::currentContext()->functions();
+
+	if (!onlyPolygon || !horizonPolygon) // Make sure to draw the regular pano when there is no polygon
+	{
+		renderProgram->bind();
+		bindVAO();
+
+		const int firstFreeTexSampler = 0;
+
+		gl.glEnable(GL_BLEND);
+		gl.glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		if(drawGroundFirst)
+			drawGround(core, firstFreeTexSampler);
+		drawDecor(core, firstFreeTexSampler, false);
+		if(!drawGroundFirst)
+			drawGround(core, firstFreeTexSampler);
+
+		drawFog(core, firstFreeTexSampler);
+
+		// Self-luminous layer (Light pollution etc). This looks striking!
+		if (lightScapeBrightness>0.0f && (illumFader.getInterstate()>0.f))
+		{
+			gl.glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+			drawDecor(core, firstFreeTexSampler, true);
+		}
+
+		releaseVAO();
+		gl.glDisable(GL_BLEND);
+		renderProgram->release();
+	}
+	StelPainter painter(prj);
+	drawHorizonLine(core, painter);
+}
+
+
+// Draw the horizon fog
+void LandscapeOldStyle::drawFog(StelCore*const core, const int firstFreeTexSampler) const
+{
+	if (fogFader.getInterstate()==0.f)
+		return;
+	if(landFader.getInterstate()==0.f)
+		return;
+	if (!(core->getSkyDrawer()->getFlagHasAtmosphere()))
+		return;
+
+	const float vpos = tanMode || calibrated ? std::tan(fogAngleShift*M_PI_180f) : std::sin(fogAngleShift*M_PI_180f);
+	StelProjector::ModelViewTranformP transfo = core->getAltAzModelViewTransform(StelCore::RefractionOff);
+
+	if (calibrated) // new in V0.13: take proper care of the fog layer. This will work perfectly only for calibrated&&tanMode.
+		transfo->combine(Mat4d::zrotation(-static_cast<double>(angleRotateZ+angleRotateZOffset)));
+
+	const StelProjectorP prj = core->getProjection(transfo);
+
+	auto& gl = *QOpenGLContext::currentContext()->functions();
+	gl.glBlendFunc(GL_ONE, GL_ONE);
+
+	const float height = calibrated ? std::tan((fogAltAngle+fogAngleShift)*M_PI_180f) - std::tan(fogAngleShift*M_PI_180f)
+					: tanMode ? std::tan(fogAltAngle*M_PI_180f)
+						  : std::sin(fogAltAngle*M_PI_180f);
+
+	renderProgram->setUniformValue(shaderVars.whatToRender, -2);
+	renderProgram->setUniformValue(shaderVars.fogCylinderHeight, height);
+	renderProgram->setUniformValue(shaderVars.vshift, vpos);
+
+	const float brightness = landFader.getInterstate()*fogFader.getInterstate()*(0.1f+0.1f*landscapeBrightness);
+	renderProgram->setUniformValue(shaderVars.brightness, brightness, brightness, brightness,
+				       (1.f-landscapeTransparency)*landFader.getInterstate());
+	renderProgram->setUniformValue(shaderVars.projectionMatrixInverse, prj->getProjectionMatrix().toQMatrix().inverted());
+	prj->setUnProjectUniforms(*renderProgram);
+
+	fogTex->bind(firstFreeTexSampler);
+	renderProgram->setUniformValue(shaderVars.mapTex, firstFreeTexSampler);
+	gl.glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+}
+
+// Draw the side textures
+void LandscapeOldStyle::drawDecor(StelCore*const core, const int firstFreeTexSampler, const bool drawLight) const
+{
+	if (landFader.getInterstate()==0.f)
+		return;
+
+	StelProjector::ModelViewTranformP transfo = core->getAltAzModelViewTransform(StelCore::RefractionOff);
+	transfo->combine(Mat4d::zrotation(-static_cast<double>(angleRotateZ+angleRotateZOffset)));
+	const StelProjectorP prj = core->getProjection(transfo);
+
+	if (drawLight)
+	{
+		const auto brightness = illumFader.getInterstate()*lightScapeBrightness;
+		renderProgram->setUniformValue(shaderVars.brightness,
+					       brightness, brightness, brightness,
+					       (1.f-landscapeTransparency)*landFader.getInterstate());
+	}
+	else
+	{
+		renderProgram->setUniformValue(shaderVars.brightness,
+					       landscapeBrightness, landscapeBrightness, landscapeBrightness,
+					       (1.f-landscapeTransparency)*landFader.getInterstate());
+	}
+
+	renderProgram->setUniformValue(shaderVars.tanMode, tanMode);
+	renderProgram->setUniformValue(shaderVars.calibrated, calibrated);
+	renderProgram->setUniformValue(shaderVars.projectionMatrixInverse, prj->getProjectionMatrix().toQMatrix().inverted());
+	renderProgram->setUniformValue(shaderVars.totalNumberOfSides, static_cast<GLint>(nbSide));
+	renderProgram->setUniformValue(shaderVars.decorAngleShift, decorAngleShift*M_PI_180f);
+	renderProgram->setUniformValue(shaderVars.sideAngularHeight, decorAltAngle*M_PI_180f);
+	prj->setUnProjectUniforms(*renderProgram);
+
+	auto& gl = *QOpenGLContext::currentContext()->functions();
+	GLint globalSideNumber = 0, firstSideInBatch = 0;
+	const GLint numberOfSidesInBatch = std::size(shaderVars.sideTexN);
+	renderProgram->setUniformValue(shaderVars.numberOfSidesInBatch, numberOfSidesInBatch);
+	renderProgram->setUniformValue(shaderVars.firstSideInBatch, firstSideInBatch);
+	GLint sidePresenceMask = 0;
+	for(unsigned repetition = 0; repetition < nbDecorRepeat; ++repetition)
+	{
+		for(unsigned sideN = 0; sideN < nbSide; ++sideN, ++globalSideNumber)
+		{
+			auto sideNumberInBatch = globalSideNumber-firstSideInBatch;
+			if(sideNumberInBatch >= numberOfSidesInBatch)
+			{
+				if(sidePresenceMask)
+				{
+					renderProgram->setUniformValue(shaderVars.sidePresenceMask, sidePresenceMask);
+					gl.glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+				}
+
+				// Start a new batch
+				sidePresenceMask = 0;
+				sideNumberInBatch = 0;
+				firstSideInBatch += numberOfSidesInBatch;
+				renderProgram->setUniformValue(shaderVars.firstSideInBatch, firstSideInBatch);
+			}
+
+			const auto& side = sides[sideN];
+
+			const int texSampler = firstFreeTexSampler + sideNumberInBatch;
+			if(drawLight)
+			{
+				if(side.tex_illum)
+				{
+					side.tex_illum->bind(texSampler);
+					sidePresenceMask |= 1u<<sideNumberInBatch;
+					renderProgram->setUniformValue(shaderVars.sideTexN[sideNumberInBatch], texSampler);
+				}
+			}
+			else
+			{
+				side.tex->bind(texSampler);
+				sidePresenceMask |= 1u<<sideNumberInBatch;
+				renderProgram->setUniformValue(shaderVars.sideTexN[sideNumberInBatch], texSampler);
+			}
+
+			renderProgram->setUniformValue(shaderVars.perSideTexCoords[sideNumberInBatch],
+						       side.texCoords[0], side.texCoords[1],
+						       side.texCoords[2], side.texCoords[3]);
+			renderProgram->setUniformValue(shaderVars.whatToRender, 0);
+		}
+	}
+	// Draw the rest
+	if(sidePresenceMask)
+	{
+		renderProgram->setUniformValue(shaderVars.sidePresenceMask, sidePresenceMask);
+		gl.glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+	}
+}
+
+// Draw the ground, assuming full-screen-quad VAO is bound and the common uniforms are configured
+void LandscapeOldStyle::drawGround(StelCore*const core, const int firstFreeTexSampler) const
+{
+	if (landFader.getInterstate()==0.f)
+		return;
+
+	if (!groundTex)
+	{
+		qWarning() << "LandscapeOldStyle groundTex is invalid!";
+		return;
+	}
+
+	const float vshift = (tanMode || calibrated) ? std::tan(groundAngleShift) : std::sin(groundAngleShift);
+	StelProjector::ModelViewTranformP transfo = core->getAltAzModelViewTransform(StelCore::RefractionOff);
+	transfo->combine(Mat4d::zrotation(groundAngleRotateZ-static_cast<double>(angleRotateZOffset)));
+	const StelProjectorP prj = core->getProjection(transfo);
+
+	auto& gl = *QOpenGLContext::currentContext()->functions();
+
+	renderProgram->setUniformValue(shaderVars.whatToRender, -1);
+	const int texSampler = firstFreeTexSampler;
+	groundTex->bind(texSampler);
+	renderProgram->setUniformValue(shaderVars.mapTex, texSampler);
+	renderProgram->setUniformValue(shaderVars.vshift, vshift);
+	renderProgram->setUniformValue(shaderVars.projectionMatrixInverse, prj->getProjectionMatrix().toQMatrix().inverted());
+	renderProgram->setUniformValue(shaderVars.brightness,
+				       landscapeBrightness, landscapeBrightness, landscapeBrightness,
+				       (1.f-landscapeTransparency)*landFader.getInterstate());
+	prj->setUnProjectUniforms(*renderProgram);
+	gl.glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+}
+
+void LandscapeOldStyle::drawLowGL(StelCore* core, bool onlyPolygon)
+{
 	if (!validLandscape)
 		return;
 
 	StelPainter painter(core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff));
-	const float ppx = static_cast<float>(painter.getProjector()->getDevicePixelsPerPixel());
 	painter.setBlending(true);
 	painter.setCullFace(true);
 
@@ -737,17 +1232,17 @@ void LandscapeOldStyle::draw(StelCore* core, bool onlyPolygon)
 #endif
 
 		if (drawGroundFirst)
-			drawGround(core, painter);
-		drawDecor(core, painter, false);
+			drawGroundLowGL(core, painter);
+		drawDecorLowGL(core, painter, false);
 		if (!drawGroundFirst)
-			drawGround(core, painter);
-		drawFog(core, painter);
+			drawGroundLowGL(core, painter);
+		drawFogLowGL(core, painter);
 
 		// Self-luminous layer (Light pollution etc). This looks striking!
 		if (lightScapeBrightness>0.0f && (illumFader.getInterstate()>0.f))
 		{
 			painter.setBlending(true, GL_SRC_ALPHA, GL_ONE);
-			drawDecor(core, painter, true);
+			drawDecorLowGL(core, painter, true);
 		}
 
 #ifdef GL_MULTISAMPLE
@@ -755,29 +1250,13 @@ void LandscapeOldStyle::draw(StelCore* core, bool onlyPolygon)
 			gl->glDisable(GL_MULTISAMPLE);
 #endif
 	}
-	// If a horizon line also has been defined, draw it.
-	if (horizonPolygon && (horizonPolygonLineColor != Vec3f(-1.f,0.f,0.f)))
-	{
-		//qDebug() << "drawing line";
-		StelProjector::ModelViewTranformP transfo = core->getAltAzModelViewTransform(StelCore::RefractionOff);
-		transfo->combine(Mat4d::zrotation(static_cast<double>(-angleRotateZOffset)));
-		const StelProjectorP prj = core->getProjection(transfo);
-		painter.setProjector(prj);
-		painter.setBlending(true, GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		painter.setColor(horizonPolygonLineColor, landFader.getInterstate());
-		const float lineWidth=painter.getLineWidth();
-		painter.setLineWidth(GETSTELMODULE(LandscapeMgr)->getPolyLineThickness()*ppx);
-		painter.drawSphericalRegion(horizonPolygon.data(), StelPainter::SphericalPolygonDrawModeBoundary);
-		painter.setLineWidth(lineWidth);
-	}
-	//else qDebug() << "no polygon defined";
-
+	drawHorizonLine(core, painter);
 	drawLabels(core, &painter);
 }
 
 
 // Draw the horizon fog
-void LandscapeOldStyle::drawFog(StelCore* core, StelPainter& sPainter) const
+void LandscapeOldStyle::drawFogLowGL(StelCore* core, StelPainter& sPainter) const
 {
 	if (fogFader.getInterstate()==0.f)
 		return;
@@ -795,7 +1274,8 @@ void LandscapeOldStyle::drawFog(StelCore* core, StelPainter& sPainter) const
 	transfo->combine(Mat4d::translation(Vec3d(0.,0.,static_cast<double>(vpos))));
 	sPainter.setProjector(core->getProjection(transfo));
 	sPainter.setBlending(true, GL_ONE, GL_ONE);
-	sPainter.setColor(Vec3f(landFader.getInterstate()*fogFader.getInterstate()*(0.1f+0.1f*landscapeBrightness)), landFader.getInterstate());
+	sPainter.setColor(Vec3f(landFader.getInterstate()*fogFader.getInterstate()*(0.1f+0.1f*landscapeBrightness)),
+			  (1.f-landscapeTransparency)*landFader.getInterstate());
 	fogTex->bind();
 	const double height = radius * static_cast<double>(calibrated?
 				(std::tan((fogAltAngle+fogAngleShift)*M_PI_180f) - std::tan(fogAngleShift*M_PI_180f))
@@ -805,7 +1285,7 @@ void LandscapeOldStyle::drawFog(StelCore* core, StelPainter& sPainter) const
 }
 
 // Draw the side textures
-void LandscapeOldStyle::drawDecor(StelCore* core, StelPainter& sPainter, const bool drawLight) const
+void LandscapeOldStyle::drawDecorLowGL(StelCore* core, StelPainter& sPainter, const bool drawLight) const
 {
 	StelProjector::ModelViewTranformP transfo = core->getAltAzModelViewTransform(StelCore::RefractionOff);
 	transfo->combine(Mat4d::zrotation(-static_cast<double>(angleRotateZ+angleRotateZOffset)));
@@ -814,9 +1294,10 @@ void LandscapeOldStyle::drawDecor(StelCore* core, StelPainter& sPainter, const b
 	if (landFader.getInterstate()==0.f)
 		return;
 	if (drawLight)
-		sPainter.setColor(Vec3f(illumFader.getInterstate()*lightScapeBrightness), landFader.getInterstate());
+		sPainter.setColor(Vec3f(illumFader.getInterstate()*lightScapeBrightness),
+				  (1.f-landscapeTransparency)*landFader.getInterstate());
 	else
-		sPainter.setColor(Vec3f(landscapeBrightness), landFader.getInterstate());
+		sPainter.setColor(Vec3f(landscapeBrightness), (1.f-landscapeTransparency)*landFader.getInterstate());
 
 	for (const auto& side : precomputedSides)
 	{
@@ -829,16 +1310,19 @@ void LandscapeOldStyle::drawDecor(StelCore* core, StelPainter& sPainter, const b
 }
 
 // Draw the ground
-void LandscapeOldStyle::drawGround(StelCore* core, StelPainter& sPainter) const
+void LandscapeOldStyle::drawGroundLowGL(StelCore* core, StelPainter& sPainter) const
 {
 	if (landFader.getInterstate()==0.f)
 		return;
-	const float vshift = static_cast<float>(radius) * ((tanMode || calibrated) ? std::tan(groundAngleShift) : std::sin(groundAngleShift));
+	const float vshift = static_cast<float>(radius) * ((tanMode || calibrated) ? std::tan(groundAngleShift)
+							   			   : std::sin(groundAngleShift));
 	StelProjector::ModelViewTranformP transfo = core->getAltAzModelViewTransform(StelCore::RefractionOff);
-	transfo->combine(Mat4d::zrotation(groundAngleRotateZ-static_cast<double>(angleRotateZOffset)) * Mat4d::translation(Vec3d(0,0,static_cast<double>(vshift))));
+	transfo->combine(Mat4d::zrotation(groundAngleRotateZ-static_cast<double>(angleRotateZOffset)) *
+			  Mat4d::translation(Vec3d(0,0,static_cast<double>(vshift))));
 
 	sPainter.setProjector(core->getProjection(transfo));
-	sPainter.setColor(landscapeBrightness, landscapeBrightness, landscapeBrightness, landFader.getInterstate());
+	sPainter.setColor(landscapeBrightness, landscapeBrightness, landscapeBrightness,
+			  (1.f-landscapeTransparency)*landFader.getInterstate());
 
 	if(groundTex.isNull())
 	{
@@ -848,7 +1332,8 @@ void LandscapeOldStyle::drawGround(StelCore* core, StelPainter& sPainter) const
 	{
 		groundTex->bind();
 	}
-	StelVertexArray va(static_cast<const QVector<Vec3d> >(groundVertexArr), StelVertexArray::Triangles, static_cast<const QVector<Vec2f> >(groundTexCoordArr));
+	StelVertexArray va(static_cast<const QVector<Vec3d> >(groundVertexArr), StelVertexArray::Triangles,
+			   static_cast<const QVector<Vec2f> >(groundTexCoordArr));
 
 	sPainter.drawStelVertexArray(va, true);
 }
@@ -876,7 +1361,8 @@ float LandscapeOldStyle::getOpacity(Vec3d azalt) const
 		static QString lastLandscapeName;
 		if (lastLandscapeName != name)
 		{
-			qWarning() << "Dubious result: Landscape " << name << " not calibrated. Opacity test represents mathematical horizon only.";
+			qWarning() << "Dubious result: Landscape " << name
+				   << " not calibrated. Opacity test represents mathematical horizon only.";
 			lastLandscapeName=name;
 		}
 		return (azalt[2] > 0 ? 0.0f : 1.0f);
@@ -891,7 +1377,7 @@ float LandscapeOldStyle::getOpacity(Vec3d azalt) const
 	if (az_phot<0) az_phot+=1.0f;                                //  0..1 = image-X for a non-repeating pano photo
 	float az_panel =  nbSide*nbDecorRepeat * az_phot; // azimuth in "panel space". Ex for nbS=4, nbDR=3: [0..[12, say 11.4
 	float x_in_panel=fmodf(az_panel, 1.0f);
-	int currentSide = static_cast<int>(floor(fmodf(az_panel, nbSide)));
+	int currentSide = static_cast<int>(std::floor(fmodf(az_panel, nbSide)));
 	Q_ASSERT(currentSide>=0);
 	Q_ASSERT(currentSide<static_cast<int>(nbSideTexs));
 	if (sidesImages[currentSide]->isNull()) return 0.0f; // can happen if image is misconfigured and failed to load.
@@ -923,7 +1409,7 @@ float LandscapeOldStyle::getOpacity(Vec3d azalt) const
 	}
 	// x0/y0 is lower left, x1/y1 upper right corner.
 	float y_baseImg_1 = sides[currentSide].texCoords[1]+ y_img_1*(sides[currentSide].texCoords[3]-sides[currentSide].texCoords[1]);
-	int y=static_cast<int>((1.0f-y_baseImg_1)*static_cast<float>(sidesImages[currentSide]->height()));           // pixel Y from top.
+	int y=static_cast<int>((1.0f-y_baseImg_1)*static_cast<float>(sidesImages[currentSide]->height())); // pixel Y from top.
 	QRgb pixVal=sidesImages[currentSide]->pixel(x, y);
 /*
 #ifndef NDEBUG
@@ -952,18 +1438,22 @@ LandscapePolygonal::~LandscapePolygonal()
 
 void LandscapePolygonal::load(const QSettings& landscapeIni, const QString& landscapeId)
 {
-	// loading the polygon has been moved to Landscape::loadCommon(), so that all Landscape classes can use a polygon line.
+	// loading the polygon has been moved to Landscape::loadCommon(), so
+	// that all Landscape classes can use a polygon line.
 	loadCommon(landscapeIni, landscapeId);
 	const QString type = landscapeIni.value("landscape/type").toString();
 	if(type != "polygonal")
 	{
-		qWarning() << "Landscape type mismatch for landscape "<< landscapeId << ", expected polygonal, found " << type << ".  No landscape in use.\n";
+		qWarning() << "Landscape type mismatch for landscape "
+			   << landscapeId << ", expected polygonal, found "
+			   << type << ".  No landscape in use.\n";
 		validLandscape = false;
 		return;
 	}
 	if (horizonPolygon.isNull())
 	{
-		qWarning() << "Landscape " << landscapeId << " does not declare a valid polygonal_horizon_list.  No landscape in use.\n";
+		qWarning() << "Landscape " << landscapeId
+			   << " does not declare a valid polygonal_horizon_list.  No landscape in use.\n";
 		validLandscape = false;
 		return;
 	}
@@ -982,7 +1472,6 @@ void LandscapePolygonal::draw(StelCore* core, bool onlyPolygon)
 	transfo->combine(Mat4d::zrotation(-static_cast<double>(angleRotateZOffset)));
 	const StelProjectorP prj = core->getProjection(transfo);
 	StelPainter sPainter(prj);
-	const float ppx = static_cast<float>(sPainter.getProjector()->getDevicePixelsPerPixel());
 
 	// Normal transparency mode for the transition blending
 	sPainter.setBlending(true);
@@ -990,7 +1479,7 @@ void LandscapePolygonal::draw(StelCore* core, bool onlyPolygon)
 
 	if (!onlyPolygon) // The only useful application of the onlyPolygon is a demo which does not fill the polygon
 	{
-		sPainter.setColor(landscapeBrightness*groundColor, landFader.getInterstate());
+		sPainter.setColor(landscapeBrightness*groundColor, (1.f-landscapeTransparency)*landFader.getInterstate());
 #ifdef GL_MULTISAMPLE
 		const auto gl = sPainter.glFuncs();
 		if (multisamplingEnabled_)
@@ -1005,17 +1494,7 @@ void LandscapePolygonal::draw(StelCore* core, bool onlyPolygon)
 #endif
 	}
 
-	if (horizonPolygonLineColor != Vec3f(-1.f,0.f,0.f))
-	{
-		sPainter.setLineSmooth(true);
-		sPainter.setColor(horizonPolygonLineColor, landFader.getInterstate());
-		const float lineWidth=sPainter.getLineWidth();
-		sPainter.setLineWidth(GETSTELMODULE(LandscapeMgr)->getPolyLineThickness()*ppx);
-		sPainter.drawSphericalRegion(horizonPolygon.data(), StelPainter::SphericalPolygonDrawModeBoundary);
-		sPainter.setLineWidth(lineWidth);
-		sPainter.setLineSmooth(false);
-	}
-	sPainter.setCullFace(false);
+	drawHorizonLine(core, sPainter);
 	drawLabels(core, &sPainter);
 }
 
@@ -1026,6 +1505,11 @@ float LandscapePolygonal::getOpacity(Vec3d azalt) const
 		azalt.transfo4d(Mat4d::zrotation(static_cast<double>(angleRotateZOffset)));
 
 	if (horizonPolygon->contains(azalt)) return 1.0f; else return 0.0f;
+}
+
+void LandscapePolygonal::setGroundColor(const Vec3f &color)
+{
+	groundColor=color;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////
@@ -1056,7 +1540,8 @@ void LandscapeFisheye::load(const QSettings& landscapeIni, const QString& landsc
 	QString type = landscapeIni.value("landscape/type").toString();
 	if(type != "fisheye")
 	{
-		qWarning() << "Landscape type mismatch for landscape "<< landscapeId << ", expected fisheye, found " << type << ".  No landscape in use.\n";
+		qWarning() << "Landscape type mismatch for landscape "<< landscapeId
+			   << ", expected fisheye, found " << type << ".  No landscape in use.\n";
 		validLandscape = false;
 		return;
 	}
@@ -1070,7 +1555,8 @@ void LandscapeFisheye::load(const QSettings& landscapeIni, const QString& landsc
 }
 
 
-void LandscapeFisheye::create(const QString _name, float _texturefov, const QString& _maptex, const QString &_maptexFog, const QString& _maptexIllum, const float _angleRotateZ)
+void LandscapeFisheye::create(const QString _name, float _texturefov, const QString& _maptex,
+			      const QString &_maptexFog, const QString& _maptexIllum, const float _angleRotateZ)
 {
 	// qDebug() << _name << " " << _fullpath << " " << _maptex << " " << _texturefov;
 	validLandscape = true;  // assume ok...
@@ -1078,27 +1564,26 @@ void LandscapeFisheye::create(const QString _name, float _texturefov, const QStr
 	texFov = _texturefov*M_PI_180f;
 	angleRotateZ = _angleRotateZ*M_PI_180f;
 
+	auto& texMan = StelApp::getInstance().getTextureManager();
 	if (!horizonPolygon)
 	{
 		mapImage = new QImage(_maptex);
-#if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
 		memorySize+=(mapImage->sizeInBytes());
-#else
-		memorySize+=static_cast<uint>(mapImage->byteCount());
-#endif
+		if (mapImage->isNull())
+			qWarning() << "Null image in Landscape" << _name << "- cannot load" << _maptex;
 	}
-	mapTex = StelApp::getInstance().getTextureManager().createTexture(_maptex, StelTexture::StelTextureParams(true));
+	mapTex = texMan.createTexture(_maptex, StelTexture::StelTextureParams(true));
 	memorySize+=mapTex->getGlSize();
 
 	if (_maptexIllum.length() && (!_maptexIllum.endsWith("/")))
 	{
-		mapTexIllum = StelApp::getInstance().getTextureManager().createTexture(_maptexIllum, StelTexture::StelTextureParams(true));
+		mapTexIllum = texMan.createTexture(_maptexIllum, StelTexture::StelTextureParams(true));
 		if (mapTexIllum)
 			memorySize+=mapTexIllum->getGlSize();
 	}
 	if (_maptexFog.length() && (!_maptexFog.endsWith("/")))
 	{
-		mapTexFog = StelApp::getInstance().getTextureManager().createTexture(_maptexFog, StelTexture::StelTextureParams(true));
+		mapTexFog = texMan.createTexture(_maptexFog, StelTexture::StelTextureParams(true));
 		if (mapTexFog)
 			memorySize+=mapTexFog->getGlSize();
 	}
@@ -1133,13 +1618,13 @@ void main()
 )";
 		bool ok = renderProgram->addShaderFromSourceCode(QOpenGLShader::Vertex, vert);
 		if(!renderProgram->log().isEmpty())
-			qWarning().noquote() << "LandscapeSpherical: Warnings while compiling vertex shader:\n" << renderProgram->log();
+			qWarning().noquote() << "LandscapeSpherical: Warnings while compiling vertex shader:\n"
+					     << renderProgram->log();
 		if(!ok) return;
 
 		const auto frag =
 			StelOpenGL::globalShaderPrefix(StelOpenGL::FRAGMENT_SHADER) +
 			prj->getUnProjectShader() +
-			makeDitheringShader()+
 			R"(
 VARYING highp vec3 ndcPos;
 uniform sampler2D mapTex;
@@ -1171,7 +1656,7 @@ void main(void)
 		FRAG_COLOR = vec4(0);
 		return;
 	}
-	FRAG_COLOR = dither(color * brightness);
+	FRAG_COLOR = color * brightness;
 }
 )";
 		ok = renderProgram->addShaderFromSourceCode(QOpenGLShader::Fragment, frag);
@@ -1189,8 +1674,6 @@ void main(void)
 		shaderVars.texFov           = renderProgram->uniformLocation("texFov");
 		shaderVars.mapTex           = renderProgram->uniformLocation("mapTex");
 		shaderVars.brightness       = renderProgram->uniformLocation("brightness");
-		shaderVars.rgbMaxValue      = renderProgram->uniformLocation("rgbMaxValue");
-		shaderVars.ditherPattern    = renderProgram->uniformLocation("ditherPattern");
 		shaderVars.projectionMatrixInverse = renderProgram->uniformLocation("projectionMatrixInverse");
 		renderProgram->release();
 	}
@@ -1203,20 +1686,14 @@ void main(void)
 	{
 		renderProgram->bind();
 		renderProgram->setUniformValue(shaderVars.brightness,
-									   landscapeBrightness, landscapeBrightness,
-									   landscapeBrightness, landFader.getInterstate());
+					       landscapeBrightness, landscapeBrightness,
+					       landscapeBrightness, landFader.getInterstate());
 		const int mainTexSampler = 0;
 		mapTex->bind(mainTexSampler);
 		renderProgram->setUniformValue(shaderVars.mapTex, mainTexSampler);
-		renderProgram->setUniformValue(shaderVars.rgbMaxValue, calcRGBMaxValue(core->getDitheringMode()).toQVector());
-
-		const int ditherTexSampler = 1;
-		ditherPatternTex->bind(ditherTexSampler);
-		renderProgram->setUniformValue(shaderVars.ditherPattern, ditherTexSampler);
-
 		renderProgram->setUniformValue(shaderVars.texFov, texFov);
 		renderProgram->setUniformValue(shaderVars.projectionMatrixInverse,
-									   prj->getProjectionMatrix().toQMatrix().inverted());
+					       prj->getProjectionMatrix().toQMatrix().inverted());
 		prj->setUnProjectUniforms(*renderProgram);
 
 		gl.glEnable(GL_BLEND);
@@ -1232,7 +1709,7 @@ void main(void)
 			const float brightness = landFader.getInterstate()*fogFader.getInterstate()*(0.1f+0.1f*landscapeBrightness);
 
 			renderProgram->setUniformValue(shaderVars.brightness, brightness, brightness, brightness,
-										   landFader.getInterstate());
+						       landFader.getInterstate());
 			mapTexFog->bind();
 			gl.glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 		}
@@ -1242,7 +1719,7 @@ void main(void)
 			gl.glBlendFunc(GL_SRC_ALPHA, GL_ONE);
 			const float brightness = lightScapeBrightness*illumFader.getInterstate();
 			renderProgram->setUniformValue(shaderVars.brightness, brightness, brightness, brightness,
-										   landFader.getInterstate());
+						       landFader.getInterstate());
 			mapTexIllum->bind();
 			gl.glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 		}
@@ -1253,30 +1730,14 @@ void main(void)
 	}
 
 	StelPainter painter(prj);
-	// If a horizon line also has been defined, draw it.
-	if (horizonPolygon && (horizonPolygonLineColor != Vec3f(-1.f,0.f,0.f)))
-	{
-		//qDebug() << "drawing line";
-		StelProjector::ModelViewTranformP transfo = core->getAltAzModelViewTransform(StelCore::RefractionOff);
-		transfo->combine(Mat4d::zrotation(static_cast<double>(-angleRotateZOffset)));
-		const StelProjectorP prj = core->getProjection(transfo);
-		painter.setProjector(prj);
-		painter.setCullFace(true);
-		painter.setBlending(true, GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		painter.setColor(horizonPolygonLineColor, landFader.getInterstate());
-		const float lineWidth=painter.getLineWidth();
-		const float ppx = static_cast<float>(prj->getDevicePixelsPerPixel());
-		painter.setLineWidth(GETSTELMODULE(LandscapeMgr)->getPolyLineThickness()*ppx);
-		painter.drawSphericalRegion(horizonPolygon.data(), StelPainter::SphericalPolygonDrawModeBoundary);
-		painter.setLineWidth(lineWidth);
-	}
-	painter.setCullFace(false);
+	drawHorizonLine(core, painter);
 	drawLabels(core, &painter);
 }
 
 float LandscapeFisheye::getOpacity(Vec3d azalt) const
 {
-	if(!validLandscape || (!horizonPolygon && (!mapImage || mapImage->isNull()))) return (azalt[2]>0.0 ? 0.0f : 1.0f); // can happen if image is misconfigured and failed to load.
+	if(!validLandscape || (!horizonPolygon && (!mapImage || mapImage->isNull())))
+		return (azalt[2]>0.0 ? 0.0f : 1.0f); // can happen if image is misconfigured and failed to load.
 
 	if (angleRotateZOffset!=0.0f)
 		azalt.transfo4d(Mat4d::zrotation(static_cast<double>(angleRotateZOffset)));
@@ -1352,8 +1813,8 @@ void LandscapeSpherical::load(const QSettings& landscapeIni, const QString& land
 	if (type != "spherical")
 	{
 		qWarning() << "Landscape type mismatch for landscape "<< landscapeId
-			<< ", expected spherical, found " << type
-			<< ".  No landscape in use.\n";
+			   << ", expected spherical, found " << type
+			   << ".  No landscape in use.\n";
 		validLandscape = false;
 		return;
 	}
@@ -1394,16 +1855,15 @@ void LandscapeSpherical::create(const QString _name, const QString& _maptex, con
 	if (!horizonPolygon)
 	{
 		mapImage = new QImage(_maptex);
-#if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
 		memorySize+=(mapImage->sizeInBytes());
-#else
-		memorySize+=static_cast<uint>(mapImage->byteCount());
-#endif
+		if (mapImage->isNull())
+			qWarning() << "Null image in Landscape" << _name << "- cannot load" << _maptex;
 	}
 
 	auto& gl = *QOpenGLContext::currentContext()->functions();
+	auto& texMan = StelApp::getInstance().getTextureManager();
 
-	mapTex = StelApp::getInstance().getTextureManager().createTexture(_maptex, StelTexture::StelTextureParams(true));
+	mapTex = texMan.createTexture(_maptex, StelTexture::StelTextureParams(true));
 	memorySize+=mapTex->getGlSize();
 	mapTex->bind(0);
 	gl.glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
@@ -1419,7 +1879,7 @@ void LandscapeSpherical::create(const QString _name, const QString& _maptex, con
 
 	if (_maptexIllum.length() && (!_maptexIllum.endsWith("/")))
 	{
-		mapTexIllum = StelApp::getInstance().getTextureManager().createTexture(_maptexIllum, StelTexture::StelTextureParams(true));
+		mapTexIllum = texMan.createTexture(_maptexIllum, StelTexture::StelTextureParams(true));
 		if (mapTexIllum)
 		{
 			memorySize+=mapTexIllum->getGlSize();
@@ -1430,7 +1890,7 @@ void LandscapeSpherical::create(const QString _name, const QString& _maptex, con
 	}
 	if (_maptexFog.length() && (!_maptexFog.endsWith("/")))
 	{
-		mapTexFog = StelApp::getInstance().getTextureManager().createTexture(_maptexFog, StelTexture::StelTextureParams(true));
+		mapTexFog = texMan.createTexture(_maptexFog, StelTexture::StelTextureParams(true));
 		if (mapTexFog)
 		{
 			memorySize+=mapTexFog->getGlSize();
@@ -1476,13 +1936,13 @@ void main()
 )";
 		bool ok = renderProgram->addShaderFromSourceCode(QOpenGLShader::Vertex, vert);
 		if(!renderProgram->log().isEmpty())
-			qWarning().noquote() << "LandscapeSpherical: Warnings while compiling vertex shader:\n" << renderProgram->log();
+			qWarning().noquote() << "LandscapeSpherical: Warnings while compiling vertex shader:\n"
+					     << renderProgram->log();
 		if(!ok) return;
 
 		const auto frag =
 			StelOpenGL::globalShaderPrefix(StelOpenGL::FRAGMENT_SHADER) +
 			prj->getUnProjectShader() +
-			makeDitheringShader()+
 			R"(
 VARYING highp vec3 ndcPos;
 uniform sampler2D mapTex;
@@ -1537,7 +1997,7 @@ void main(void)
 	}
 	if(modelZenithAngle > mapTexBottom)
 	{
-		FRAG_COLOR = dither(bottomCapColor);
+		FRAG_COLOR = bottomCapColor;
 		return;
 	}
 	if(modelZenithAngle < mapTexTop)
@@ -1546,12 +2006,13 @@ void main(void)
 		return;
 	}
 
-	FRAG_COLOR = dither(color * brightness);
+	FRAG_COLOR = color * brightness;
 }
 )";
 		ok = renderProgram->addShaderFromSourceCode(QOpenGLShader::Fragment, frag);
 		if(!renderProgram->log().isEmpty())
-			qWarning().noquote() << "LandscapeSpherical: Warnings while compiling fragment shader:\n" << renderProgram->log();
+			qWarning().noquote() << "LandscapeSpherical: Warnings while compiling fragment shader:\n"
+					     << renderProgram->log();
 
 		if(!ok) return;
 
@@ -1564,9 +2025,7 @@ void main(void)
 		shaderVars.mapTex           = renderProgram->uniformLocation("mapTex");
 		shaderVars.mapTexTop        = renderProgram->uniformLocation("mapTexTop");
 		shaderVars.brightness       = renderProgram->uniformLocation("brightness");
-		shaderVars.rgbMaxValue      = renderProgram->uniformLocation("rgbMaxValue");
 		shaderVars.mapTexBottom     = renderProgram->uniformLocation("mapTexBottom");
-		shaderVars.ditherPattern    = renderProgram->uniformLocation("ditherPattern");
 		shaderVars.bottomCapColor   = renderProgram->uniformLocation("bottomCapColor");
 		shaderVars.projectionMatrixInverse = renderProgram->uniformLocation("projectionMatrixInverse");
 		renderProgram->release();
@@ -1580,28 +2039,22 @@ void main(void)
 	{
 		renderProgram->bind();
 		renderProgram->setUniformValue(shaderVars.bottomCapColor,
-									   landscapeBrightness*bottomCapColor[0],
-									   landscapeBrightness*bottomCapColor[1],
-									   landscapeBrightness*bottomCapColor[2],
-									   bottomCapColor[0] < 0 ? 0 : landFader.getInterstate());
+					       landscapeBrightness*bottomCapColor[0],
+					       landscapeBrightness*bottomCapColor[1],
+					       landscapeBrightness*bottomCapColor[2],
+					       bottomCapColor[0] < 0 ? 0 : landFader.getInterstate());
 
 		renderProgram->setUniformValue(shaderVars.brightness,
-									   landscapeBrightness, landscapeBrightness,
-									   landscapeBrightness, landFader.getInterstate());
+					       landscapeBrightness, landscapeBrightness,
+					       landscapeBrightness, (1.f-landscapeTransparency)*landFader.getInterstate());
 		const int mainTexSampler = 0;
 		mapTex->bind(mainTexSampler);
 		renderProgram->setUniformValue(shaderVars.mapTex, mainTexSampler);
-		renderProgram->setUniformValue(shaderVars.rgbMaxValue, calcRGBMaxValue(core->getDitheringMode()).toQVector());
-
-		const int ditherTexSampler = 1;
-		ditherPatternTex->bind(ditherTexSampler);
-		renderProgram->setUniformValue(shaderVars.ditherPattern, ditherTexSampler);
-
 		renderProgram->setUniformValue(shaderVars.mapTexTop, mapTexTop);
 		renderProgram->setUniformValue(shaderVars.mapTexBottom, mapTexBottom);
 
 		renderProgram->setUniformValue(shaderVars.projectionMatrixInverse,
-									   prj->getProjectionMatrix().toQMatrix().inverted());
+					       prj->getProjectionMatrix().toQMatrix().inverted());
 		prj->setUnProjectUniforms(*renderProgram);
 
 		gl.glEnable(GL_BLEND);
@@ -1614,11 +2067,13 @@ void main(void)
 		if ((mapTexFog) && (core->getSkyDrawer()->getFlagHasAtmosphere()))
 		{
 			gl.glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_COLOR);
-			const float brightness = landFader.getInterstate()*fogFader.getInterstate()*(0.1f+0.1f*landscapeBrightness);
+			const float brightness =
+				landFader.getInterstate()*fogFader.getInterstate()*(0.1f+0.1f*landscapeBrightness);
 
 			renderProgram->setUniformValue(shaderVars.bottomCapColor, 0.f, 0.f, 0.f, 0.f);
-			renderProgram->setUniformValue(shaderVars.brightness, brightness, brightness, brightness,
-										   landFader.getInterstate());
+			renderProgram->setUniformValue(shaderVars.brightness,
+						       brightness, brightness, brightness,
+						       (1.f-landscapeTransparency)*landFader.getInterstate());
 			mapTexFog->bind();
 			renderProgram->setUniformValue(shaderVars.mapTexTop, fogTexTop);
 			renderProgram->setUniformValue(shaderVars.mapTexBottom, fogTexBottom);
@@ -1631,8 +2086,9 @@ void main(void)
 			gl.glBlendFunc(GL_SRC_ALPHA, GL_ONE);
 			const float brightness = lightScapeBrightness*illumFader.getInterstate();
 			renderProgram->setUniformValue(shaderVars.bottomCapColor, 0.f, 0.f, 0.f, 0.f);
-			renderProgram->setUniformValue(shaderVars.brightness, brightness, brightness, brightness,
-										   landFader.getInterstate());
+			renderProgram->setUniformValue(shaderVars.brightness,
+						       brightness, brightness, brightness,
+						       (1.f-landscapeTransparency)*landFader.getInterstate());
 			mapTexIllum->bind();
 			renderProgram->setUniformValue(shaderVars.mapTexTop, illumTexTop);
 			renderProgram->setUniformValue(shaderVars.mapTexBottom, illumTexBottom);
@@ -1645,34 +2101,18 @@ void main(void)
 	}
 
 	StelPainter sPainter(prj);
-	// If a horizon line also has been defined, draw it.
-	if (horizonPolygon && (horizonPolygonLineColor != Vec3f(-1.f,0.f,0.f)))
-	{
-		//qDebug() << "drawing line";
-		transfo = core->getAltAzModelViewTransform(StelCore::RefractionOff);
-		transfo->combine(Mat4d::zrotation(-static_cast<double>(angleRotateZOffset)));
-		const StelProjectorP prj = core->getProjection(transfo);
-		sPainter.setProjector(prj);
-		sPainter.setCullFace(true);
-		sPainter.setBlending(true);
-		sPainter.setColor(horizonPolygonLineColor, landFader.getInterstate());
-		const float lineWidth=sPainter.getLineWidth();
-		const float ppx = static_cast<float>(prj->getDevicePixelsPerPixel());
-		sPainter.setLineWidth(GETSTELMODULE(LandscapeMgr)->getPolyLineThickness()*ppx);
-		sPainter.drawSphericalRegion(horizonPolygon.data(), StelPainter::SphericalPolygonDrawModeBoundary);
-		sPainter.setLineWidth(lineWidth);
-	}
-	//else qDebug() << "no polygon defined";
-	sPainter.setCullFace(false);
+	drawHorizonLine(core, sPainter);
 	drawLabels(core, &sPainter);
 }
 
-//! Sample landscape texture for transparency. May be used for advanced visibility computation like sunrise on the visible horizon etc.
+//! Sample landscape texture for transparency. May be used for advanced
+//! visibility computation like sunrise on the visible horizon etc.
 //! @param azalt: normalized direction in alt-az frame
 //! @retval alpha (0..1), where 0=fully transparent.
 float LandscapeSpherical::getOpacity(Vec3d azalt) const
 {
-	if(!validLandscape || (!horizonPolygon && (!mapImage || mapImage->isNull()))) return (azalt[2]>0.0 ? 0.0f : 1.0f); // can happen if image is misconfigured and failed to load.
+	if(!validLandscape || (!horizonPolygon && (!mapImage || mapImage->isNull())))
+		return (azalt[2]>0.0 ? 0.0f : 1.0f); // can happen if image is misconfigured and failed to load.
 
 	if (angleRotateZOffset!=0.0f)
 		azalt.transfo4d(Mat4d::zrotation(static_cast<double>(angleRotateZOffset)));

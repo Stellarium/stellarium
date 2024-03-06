@@ -22,6 +22,7 @@
 #include "StelApp.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelStyle.hpp"
+#include "StelMainView.hpp"
 #include "StelTranslator.hpp"
 #include "TelescopeControl.hpp"
 #include "TelescopeConfigurationDialog.hpp"
@@ -109,8 +110,8 @@ void TelescopeDialog::createDialogContent()
 
 	//Inherited connect
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
-	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
-	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
+	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
+	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	//Connect: sender, signal, receiver, method
 	//Page: Telescopes
@@ -126,9 +127,9 @@ void TelescopeDialog::createDialogContent()
 	connectBoolProperty(ui->checkBoxReticles,   "TelescopeControl.flagTelescopeReticles");
 	connectBoolProperty(ui->checkBoxLabels,     "TelescopeControl.flagTelescopeLabels");
 	connectBoolProperty(ui->checkBoxCircles,    "TelescopeControl.flagTelescopeCircles");
-	connectColorButton(ui->reticleColorButton,  "TelescopeControl.reticleColor", "TelescopeControl/color_telescope_reticles");
-	connectColorButton(ui->labelColorButton,    "TelescopeControl.labelColor",   "TelescopeControl/color_telescope_labels");
-	connectColorButton(ui->circleColorButton,   "TelescopeControl.circleColor",  "TelescopeControl/color_telescope_circles");
+	ui->reticleColorButton->setup("TelescopeControl.reticleColor", "TelescopeControl/color_telescope_reticles");
+	ui->labelColorButton  ->setup("TelescopeControl.labelColor",   "TelescopeControl/color_telescope_labels");
+	ui->circleColorButton ->setup("TelescopeControl.circleColor",  "TelescopeControl/color_telescope_circles");
 	connectBoolProperty(ui->checkBoxEnableLogs, "TelescopeControl.useTelescopeServerLogs");
 
 	connect(ui->checkBoxUseExecutables, SIGNAL(toggled(bool)), ui->labelExecutablesDirectory, SLOT(setEnabled(bool)));
@@ -1021,7 +1022,7 @@ void TelescopeDialog::updateStyle()
 
 void TelescopeDialog::buttonBrowseServerDirectoryPressed()
 {
-	QString newPath = QFileDialog::getExistingDirectory (nullptr, QString(q_("Select a directory")), telescopeManager->getServerExecutablesDirectoryPath());
+	QString newPath = QFileDialog::getExistingDirectory (&StelMainView::getInstance(), QString(q_("Select a directory")), telescopeManager->getServerExecutablesDirectoryPath());
 	//TODO: Validation? Directory exists and contains servers?
 	if(!newPath.isEmpty())
 	{

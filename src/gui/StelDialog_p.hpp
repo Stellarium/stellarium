@@ -43,7 +43,7 @@ public:
 	QAbstractButtonStelPropertyConnectionHelper(StelProperty* prop,QAbstractButton* button);
 
 protected slots:
-	virtual void onPropertyChanged(const QVariant& value) Q_DECL_OVERRIDE;
+	void onPropertyChanged(const QVariant& value) override;
 private:
 	QAbstractButton* button;
 };
@@ -58,7 +58,7 @@ public:
 	QGroupBoxStelPropertyConnectionHelper(StelProperty* prop,QGroupBox* box);
 
 protected slots:
-	virtual void onPropertyChanged(const QVariant& value) Q_DECL_OVERRIDE;
+	void onPropertyChanged(const QVariant& value) override;
 private:
 	QGroupBox* box;
 };
@@ -73,7 +73,7 @@ public:
 	QComboBoxStelPropertyConnectionHelper(StelProperty* prop,QComboBox* combo);
 
 protected slots:
-	virtual void onPropertyChanged(const QVariant& value) Q_DECL_OVERRIDE;
+	void onPropertyChanged(const QVariant& value) override;
 private:
 	QComboBox* combo;
 };
@@ -88,7 +88,7 @@ public:
 	QComboBoxStelStringPropertyConnectionHelper(StelProperty* prop,QComboBox* combo);
 
 protected slots:
-	virtual void onPropertyChanged(const QVariant& value) Q_DECL_OVERRIDE;
+	void onPropertyChanged(const QVariant& value) override;
 private:
 	QComboBox* combo;
 };
@@ -103,7 +103,7 @@ public:
 	QLineEditStelPropertyConnectionHelper(StelProperty* prop,QLineEdit* edit);
 
 protected slots:
-	virtual void onPropertyChanged(const QVariant& value) Q_DECL_OVERRIDE;
+	void onPropertyChanged(const QVariant& value) override;
 private:
 	QLineEdit* edit;
 };
@@ -118,7 +118,7 @@ public:
 	QSpinBoxStelPropertyConnectionHelper(StelProperty* prop,QSpinBox* spin);
 
 protected slots:
-	virtual void onPropertyChanged(const QVariant& value) Q_DECL_OVERRIDE;
+	void onPropertyChanged(const QVariant& value) override;
 private:
 	QSpinBox* spin;
 };
@@ -134,7 +134,7 @@ public:
 	QDoubleSpinBoxStelPropertyConnectionHelper(StelProperty* prop,QDoubleSpinBox* spin);
 
 protected slots:
-	virtual void onPropertyChanged(const QVariant& value) Q_DECL_OVERRIDE;
+	void onPropertyChanged(const QVariant& value) override;
 private:
 	QDoubleSpinBox* spin;
 };
@@ -149,7 +149,7 @@ public:
 	AngleSpinBoxStelPropertyConnectionHelper(StelProperty* prop,AngleSpinBox* spin);
 
 protected slots:
-	virtual void onPropertyChanged(const QVariant& value) Q_DECL_OVERRIDE;
+	void onPropertyChanged(const QVariant& value) override;
 private:
 	AngleSpinBox* spin;
 };
@@ -161,7 +161,7 @@ public:
 	QSliderStelPropertyConnectionHelper(StelProperty* prop, double minValue, double maxValue, QSlider* slider);
 	QSliderStelPropertyConnectionHelper(StelProperty* prop, int minValue, int maxValue, QSlider* slider);
 protected slots:
-	virtual void onPropertyChanged(const QVariant& value) Q_DECL_OVERRIDE;
+	void onPropertyChanged(const QVariant& value) override;
 private slots:
 	void sliderIntValueChanged(int val);
 private:

@@ -50,14 +50,14 @@ public:
 	MSSearchDialog(MeteorShowersMgr *mgr);
 
 	//! Destructor
-	~MSSearchDialog() Q_DECL_OVERRIDE;
+	~MSSearchDialog() override;
 
 protected:
 	//! Initialize the dialog and connect the signals/slots
-	void createDialogContent() Q_DECL_OVERRIDE;
+	void createDialogContent() override;
 
 public slots:
-	void retranslate() Q_DECL_OVERRIDE;
+	void retranslate() override;
 
 private slots:
 	//! Search events and fill the list.
@@ -91,7 +91,7 @@ public:
 	}
 
 private:
-	bool operator < (const QTreeWidgetItem& other) const Q_DECL_OVERRIDE
+	bool operator < (const QTreeWidgetItem& other) const override
 	{
 		const int column = treeWidget()->sortColumn();
 

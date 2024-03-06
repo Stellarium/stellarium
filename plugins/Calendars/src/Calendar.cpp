@@ -152,10 +152,10 @@ double Calendar::direction(const StelLocation &locFrom, const StelLocation &locT
 	// We could do that, but south azimuth may cause problems.
 	//return StelLocation::getAzimuthForLocation(static_cast<double>(loc1.longitude), static_cast<double>(loc1.latitude),
 	//					   static_cast<double>(loc2.longitude), static_cast<double>(loc2.latitude));
-	const double longObs    = static_cast<double>(locFrom.longitude) * M_PI_180;
-	const double latObs     = static_cast<double>(locFrom.latitude ) * M_PI_180;
-	const double longTarget = static_cast<double>(locTo.longitude) * M_PI_180;
-	const double latTarget  = static_cast<double>(locTo.latitude ) * M_PI_180;
+	const double longObs    = static_cast<double>(locFrom.getLongitude()) * M_PI_180;
+	const double latObs     = static_cast<double>(locFrom.getLatitude() ) * M_PI_180;
+	const double longTarget = static_cast<double>(locTo.getLongitude()) * M_PI_180;
+	const double latTarget  = static_cast<double>(locTo.getLatitude() ) * M_PI_180;
 
 	double az = atan2(sin(longTarget-longObs), cos(latObs)*tan(latTarget)-sin(latObs)*cos(longTarget-longObs));
 	return StelUtils::fmodpos(M_180_PI * az, 360.0);
@@ -163,12 +163,12 @@ double Calendar::direction(const StelLocation &locFrom, const StelLocation &locT
 double Calendar::universalFromLocal(double rd_loc, const StelLocation &loc)
 {
 	//qDebug() << "universalFromLocal: Location " << loc.name << "longitude:" << loc.longitude;
-	return rd_loc-zoneFromLongitude(static_cast<double>(loc.longitude));
+	return rd_loc-zoneFromLongitude(static_cast<double>(loc.getLongitude()));
 }
 double Calendar::localFromUniversal(double rd_ut, const StelLocation &loc)
 {
 	//qDebug() << "localFromUniversal: Location " << loc.name << "longitude:" << loc.longitude;
-	return rd_ut+zoneFromLongitude(static_cast<double>(loc.longitude));
+	return rd_ut+zoneFromLongitude(static_cast<double>(loc.getLongitude()));
 }
 double Calendar::standardFromUniversal(double rd_ut, const StelLocation &loc)
 {
@@ -456,8 +456,8 @@ double Calendar::precession(double rd_dt)
 // return altitude of the sun at loc, degrees
 double Calendar::solarAltitude(double rd_ut, const StelLocation &loc)
 {
-	const double phiRad=static_cast<double>(loc.latitude)*M_PI_180;
-	const double psi=static_cast<double>(loc.longitude);
+	const double phiRad=static_cast<double>(loc.getLatitude())*M_PI_180;
+	const double psi=static_cast<double>(loc.getLongitude());
 	const double lambda=solarLongitude(rd_ut);
 
 	static StelCore *core = StelApp::getInstance().getCore();
@@ -873,8 +873,8 @@ double Calendar::lunarPhaseAtOrAfter(double phi, double rd_ut)
 // return altitude of the moon at loc, degrees (CC:UE 14:64)
 double Calendar::lunarAltitude(double rd_ut, const StelLocation &loc)
 {
-	double phiRad=static_cast<double>(loc.latitude)*M_PI_180;
-	double psi=static_cast<double>(loc.longitude);
+	double phiRad=static_cast<double>(loc.getLatitude())*M_PI_180;
+	double psi=static_cast<double>(loc.getLongitude());
 	double lambda=lunarLongitude(rd_ut);
 	double beta=lunarLatitude(rd_ut);
 
@@ -931,7 +931,7 @@ double Calendar::approxMomentOfDepression(double rd_loc, double alpha, bool earl
 // return sine of ... (CC:UE 14.69)
 double Calendar::sineOffset(double rd_loc, double alpha, const StelLocation &loc)
 {
-	const double phiRad=static_cast<double>(loc.latitude)*M_PI_180;
+	const double phiRad=static_cast<double>(loc.getLatitude())*M_PI_180;
 	const double tP=universalFromLocal(rd_loc, loc);
 	const double deltaRad=M_PI_180*declination(tP, 0., solarLongitude(tP));
 	return tan(phiRad)*tan(deltaRad)+sin(alpha*M_PI_180)/(cos(deltaRad)*cos(phiRad));
@@ -992,7 +992,7 @@ double Calendar::moonrise(int rd, const StelLocation &loc)
 	const double t=universalFromStandard(rd, loc);
 	const bool waning=lunarPhase(t) > 180.;
 	const double alt=observedLunarAltitude(t, loc);
-	const double lat=static_cast<double>(loc.latitude);
+	const double lat=static_cast<double>(loc.getLatitude());
 	const double offset=alt/(4.*(90.-fabs(lat)));
 
 	static const QDateTime j2k(QDate(2000, 1, 1), QTime(0, 0, 0), Qt::UTC);
@@ -1036,7 +1036,7 @@ double Calendar::moonset(int rd, const StelLocation &loc)
 	const double t=universalFromStandard(rd, loc);
 	const bool waxing=lunarPhase(t) < 180.;
 	const double alt=observedLunarAltitude(t, loc);
-	const double lat=static_cast<double>(loc.latitude);
+	const double lat=static_cast<double>(loc.getLatitude());
 	const double offset=alt/(4.*(90.-fabs(lat)));
 	double approx = t + 0.5 - offset;
 	if (waxing)

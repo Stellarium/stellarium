@@ -168,7 +168,7 @@ double StarMgr::getCallOrder(StelModuleActionName actionName) const
 
 StarMgr::~StarMgr(void)
 {
-	for (auto* z : qAsConst(gridLevels))
+	for (auto* z : std::as_const(gridLevels))
 		delete z;
 	gridLevels.clear();
 	if (hipIndex)
@@ -453,7 +453,7 @@ void StarMgr::init()
 	texPointer = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/pointeur2.png");   // Load pointer texture
 
 	StelApp::getInstance().getCore()->getGeodesicGrid(maxGeodesicGridLevel)->visitTriangles(maxGeodesicGridLevel,initTriangleFunc,this);
-	for (auto* z : qAsConst(gridLevels))
+	for (auto* z : std::as_const(gridLevels))
 		z->scaleAxis();
 	StelApp *app = &StelApp::getInstance();
 	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
@@ -518,7 +518,7 @@ bool StarMgr::checkAndLoadCatalog(const QVariantMap& catDesc)
 	if (!checked)
 	{
 		// The file is not checked but we found it, maybe from a previous download/version
-		qWarning() << "Found file " << QDir::toNativeSeparators(catalogFilePath) << ", checking md5sum..";
+		qWarning().noquote() << "Found file" << QDir::toNativeSeparators(catalogFilePath) << ", checking md5sum...";
 
 		QFile file(catalogFilePath);
 		if(file.open(QIODevice::ReadOnly | QIODevice::Unbuffered))
@@ -536,19 +536,27 @@ bool StarMgr::checkAndLoadCatalog(const QVariantMap& catDesc)
 				while (!file.atEnd())
 				{
 					qint64 sz = file.read(mmd5buf, maxStarBufMd5);
+#if QT_VERSION >= QT_VERSION_CHECK(6, 4, 0)
+					md5Hash.addData(QByteArrayView(mmd5buf, static_cast<int>(sz)));
+#else
 					md5Hash.addData(mmd5buf, static_cast<int>(sz));
+#endif
 				}
 				free(mmd5buf);
 			}
 			else
 			{
+#if QT_VERSION >= QT_VERSION_CHECK(6, 4, 0)
+				md5Hash.addData(QByteArrayView(reinterpret_cast<const char*>(cat), static_cast<int>(cat_sz)));
+#else
 				md5Hash.addData(reinterpret_cast<const char*>(cat), static_cast<int>(cat_sz));
+#endif
 				file.unmap(cat);
 			}
 			file.close();
 			if (md5Hash.result().toHex()!=catDesc.value("checksum").toByteArray())
 			{
-				qWarning() << "Error: File " << QDir::toNativeSeparators(catalogFileName) << " is corrupt, MD5 mismatch! Found " << md5Hash.result().toHex() << " expected " << catDesc.value("checksum").toByteArray();
+				qWarning().noquote() << "Error: File" << QDir::toNativeSeparators(catalogFileName) << "is corrupt, MD5 mismatch! Found" << md5Hash.result().toHex() << "expected" << catDesc.value("checksum").toByteArray();
 				file.remove();
 				return false;
 			}
@@ -562,7 +570,7 @@ bool StarMgr::checkAndLoadCatalog(const QVariantMap& catDesc)
 	{
 		if (z->level<gridLevels.size())
 		{
-			qWarning() << QDir::toNativeSeparators(catalogFileName) << ", " << z->level << ": duplicate level";
+			qWarning().noquote() << QDir::toNativeSeparators(catalogFileName) << ", " << z->level << ": duplicate level";
 			delete z;
 			return true;
 		}
@@ -578,7 +586,7 @@ void StarMgr::setCheckFlag(const QString& catId, bool b)
 {
 	// Update the starConfigFileFullPath file to take into account that we now have a new catalog
 	int idx=0;
-	for (const auto& catV : qAsConst(catalogsDescription))
+	for (const auto& catV : std::as_const(catalogsDescription))
 	{
 		++idx;
 		QVariantMap m = catV.toMap();
@@ -619,7 +627,7 @@ void StarMgr::loadData(QVariantMap starsConfig)
 		hipIndex[i].z = Q_NULLPTR;
 		hipIndex[i].s = Q_NULLPTR;
 	}
-	for (auto* z : qAsConst(gridLevels))
+	for (auto* z : std::as_const(gridLevels))
 		z->updateHipIndex(hipIndex);
 
 	const QString cat_hip_sp_file_name = starsConfig.value("hipSpectralFile").toString();
@@ -631,7 +639,7 @@ void StarMgr::loadData(QVariantMap starsConfig)
 	{
 		QString tmpFic = StelFileMgr::findFile("stars/default/" + cat_hip_sp_file_name);
 		if (tmpFic.isEmpty())
-			qWarning() << "ERROR while loading data from " << QDir::toNativeSeparators(("stars/default/" + cat_hip_sp_file_name));
+			qWarning() << "ERROR while loading data from" << QDir::toNativeSeparators(("stars/default/" + cat_hip_sp_file_name));
 		else
 			spectral_array = initStringListFromFile(tmpFic);
 	}
@@ -651,7 +659,7 @@ void StarMgr::loadData(QVariantMap starsConfig)
 	}
 
 	lastMaxSearchLevel = maxGeodesicGridLevel;
-	qDebug() << "Finished loading star catalogue data, max_geodesic_level: " << maxGeodesicGridLevel;	
+	qDebug() << "Finished loading star catalogue data, max_geodesic_level:" << maxGeodesicGridLevel;
 }
 
 void StarMgr::populateHipparcosLists()
@@ -1329,7 +1337,7 @@ void StarMgr::draw(StelCore* core)
 	}
 	
 	// Draw all the stars of all the selected zones
-	for (const auto* z : qAsConst(gridLevels))
+	for (const auto* z : std::as_const(gridLevels))
 	{
 		int limitMagIndex=RCMAG_TABLE_SIZE;
 		const float mag_min = 0.001f*z->mag_min;
@@ -1531,8 +1539,8 @@ StelObjectP StarMgr::searchByName(const QString& name) const
 {
 	QString objw = name.toUpper();
 
-	// Search by HP number if it's an HP formatted number
-	static const QRegularExpression rx("^\\s*(HP|HIP)\\s*(\\d+)\\s*$", QRegularExpression::CaseInsensitiveOption);
+	// Search by HP number if it's an HP formatted number. The final part (A/B/...) is ignored
+	static const QRegularExpression rx("^\\s*(HP|HIP)\\s*(\\d+)\\s*.*$", QRegularExpression::CaseInsensitiveOption);
 	QRegularExpressionMatch match=rx.match(objw);
 	if (match.hasMatch())
 		return searchHP(match.captured(2).toInt());
@@ -1672,7 +1680,7 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 		{
 			k.next();
 			QStringList names = getAdditionalNames(k.value()).split(" - ");
-			for (const auto &name : qAsConst(names))
+			for (const auto &name : std::as_const(names))
 			{
 				if (useStartOfWords && name.startsWith(objw, Qt::CaseInsensitive))
 					found = true;
@@ -1696,7 +1704,7 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 		{
 			l.next();
 			QStringList names = getAdditionalEnglishNames(l.value()).split(" - ");
-			for (const auto &name : qAsConst(names))
+			for (const auto &name : std::as_const(names))
 			{
 				if (useStartOfWords && name.startsWith(objw, Qt::CaseInsensitive))
 					found = true;
@@ -1736,7 +1744,7 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 			if (maxNbItem<=0)
 				break;
 			QStringList names = getSciName(it.value()).split(" - ");
-			for (const auto &name : qAsConst(names))
+			for (const auto &name : std::as_const(names))
 			{
 				if (useStartOfWords && name.startsWith(objPrefix, Qt::CaseInsensitive))
 					found = true;
@@ -1765,7 +1773,7 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 			if (maxNbItem<=0)
 				break;
 			QStringList names = getSciName(it.value()).split(" - ");
-			for (const auto &name : qAsConst(names))
+			for (const auto &name : std::as_const(names))
 			{
 				if (useStartOfWords && name.startsWith(objPrefix, Qt::CaseInsensitive))
 					found = true;
@@ -1794,7 +1802,7 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 			if (maxNbItem<=0)
 				break;
 			QStringList names = getSciExtraName(it.value()).split(" - ");
-			for (const auto &name : qAsConst(names))
+			for (const auto &name : std::as_const(names))
 			{
 				if (useStartOfWords && name.startsWith(objPrefix, Qt::CaseInsensitive))
 					found = true;
@@ -1823,7 +1831,7 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 			if (maxNbItem<=0)
 				break;
 			QStringList names = getSciExtraName(it.value()).split(" - ");
-			for (const auto &name : qAsConst(names))
+			for (const auto &name : std::as_const(names))
 			{
 				if (useStartOfWords && name.startsWith(objPrefix, Qt::CaseInsensitive))
 					found = true;
@@ -1859,8 +1867,8 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 			break;
 	}
 
-	// Add exact Hp catalogue numbers
-	static const QRegularExpression hpRx("^(HIP|HP)\\s*(\\d+)\\s*$", QRegularExpression::CaseInsensitiveOption);
+	// Add exact Hp catalogue numbers. The final part (A/B/...) is ignored
+	static const QRegularExpression hpRx("^(HIP|HP)\\s*(\\d+)\\s*.*$", QRegularExpression::CaseInsensitiveOption);
 	QRegularExpressionMatch match=hpRx.match(objw);
 	if (match.hasMatch())
 	{
@@ -2173,7 +2181,7 @@ QStringList StarMgr::listAllObjectsByType(const QString &objType, bool inEnglish
 	QString starName;
 	if (isStarT1)
 	{
-		for (const auto& star : qAsConst(starsT1))
+		for (const auto& star : std::as_const(starsT1))
 		{
 			starName = inEnglish ? star->getEnglishName() : star->getNameI18n();
 			if (!starName.isEmpty())
@@ -2185,7 +2193,7 @@ QStringList StarMgr::listAllObjectsByType(const QString &objType, bool inEnglish
 
 	if (isStarT2)
 	{
-		for (const auto& star : qAsConst(starsT2))
+		for (const auto& star : std::as_const(starsT2))
 		{
 			starName = inEnglish ? star.firstKey()->getEnglishName() : star.firstKey()->getNameI18n();
 			if (!starName.isEmpty())

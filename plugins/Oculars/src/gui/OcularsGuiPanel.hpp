@@ -40,7 +40,7 @@ public:
 	OcularsGuiPanel(Oculars* ocularsPlugin,
 			QGraphicsWidget * parent = Q_NULLPTR,
 			Qt::WindowFlags wFlags = Qt::Widget);
-	~OcularsGuiPanel() Q_DECL_OVERRIDE;
+	~OcularsGuiPanel() override;
 
 public slots:
 	//! Show only the controls used with an ocular overlay.
@@ -55,15 +55,16 @@ private slots:
 	//! Tied to the parent's geometryChanged() signal.
 	void updatePosition();
 
-	//! Updates the information shown when an ocular overlay is displayed
-	void updateOcularControls();
 	//! Updates the information shown when a sensor overlay is displayed
 	void updateCcdControls();
+	//! Updates the information that depends on the current lens
+	void updateLensControls();
+	//! Updates the information shown when an ocular overlay is displayed
+	void updateOcularControls();
 	//! Updates the information that depends on the current telescope.
 	//! Called in both updateOcularControls() and updateCcdControls().
 	void updateTelescopeControls();
-	//! Updates the information that depends on the current lens
-	void updateLensControls();
+
 	//! Sets the color scheme (day/night mode)
 	void setColorScheme(const QString& schemeName);
 
@@ -123,6 +124,7 @@ private:
 	QGraphicsTextItem* fieldVisualResolution;
 
 	//Sensor frame rotation controls
+	StelButton* rotateCcdMinus90Button;
 	StelButton* rotateCcdMinus15Button;
 	StelButton* rotateCcdMinus5Button;
 	StelButton* rotateCcdMinus1Button;
@@ -130,6 +132,8 @@ private:
 	StelButton* rotateCcdPlus1Button;
 	StelButton* rotateCcdPlus5Button;
 	StelButton* rotateCcdPlus15Button;
+	StelButton* rotateCcdPlus90Button;
+	StelButton* rotatePrismMinus90Button;
 	StelButton* rotatePrismMinus15Button;
 	StelButton* rotatePrismMinus5Button;
 	StelButton* rotatePrismMinus1Button;
@@ -137,6 +141,7 @@ private:
 	StelButton* rotatePrismPlus1Button;
 	StelButton* rotatePrismPlus5Button;
 	StelButton* rotatePrismPlus15Button;
+	StelButton* rotatePrismPlus90Button;
 
 	//! Sets the visibility of the ocular name label and the associated buttons.
 	void setOcularControlsVisible(bool show);

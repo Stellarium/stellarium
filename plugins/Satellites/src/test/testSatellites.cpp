@@ -46,4 +46,14 @@ void TestSatellites::testNoSatDuplication()
     QVERIFY(dutA == dutB);
 }
 
-
+void TestSatellites::testSatZero()
+{
+    QString LineA = "2 00000 101.7770 337.7317 0012122 318.4445 104.4962 12.53641440 65623";
+    QString LineB = "2     0 101.7765 338.2965 0012116 317.3609 153.9519 12.53641545 65932";
+    QString dutA = Satellites::getSatIdFromLine2(LineA);
+    QString dutB = Satellites::getSatIdFromLine2(LineB);
+    QVERIFY(!dutA.isEmpty());
+    QVERIFY(!dutB.isEmpty());
+    QVERIFY("0" == dutA);
+    QVERIFY("0" == dutB);
+}

@@ -37,6 +37,7 @@
 #include "StelFileMgr.hpp"
 #include "StelGui.hpp"
 #include "StelGuiItems.hpp"
+#include "StelMainView.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelMovementMgr.hpp"
 #include "StelObject.hpp"
@@ -296,7 +297,7 @@ void TelescopeControl::draw(StelCore* core)
 	StelPainter sPainter(prj);
 	sPainter.setFont(labelFont);
 	reticleTexture->bind();
-	for (const auto& telescope : qAsConst(telescopeClients))
+	for (const auto& telescope : std::as_const(telescopeClients))
 	{
 		if (telescope->isConnected() && telescope->hasKnownPosition())
 		{
@@ -584,7 +585,7 @@ void TelescopeControl::loadTelescopeServerExecutables(void)
 	QList<QFileInfo> telescopeServerExecutables = serverDirectory.entryInfoList(QStringList("TelescopeServer*"), (QDir::Files|QDir::Executable|QDir::CaseSensitive), QDir::Name);
 	if(!telescopeServerExecutables.isEmpty())
 	{
-		for (auto &telescopeServerExecutable : qAsConst(telescopeServerExecutables))
+		for (auto &telescopeServerExecutable : std::as_const(telescopeServerExecutables))
 			telescopeServers.append(telescopeServerExecutable.baseName());//This strips the ".exe" suffix on Windows
 	}
 	else
@@ -770,7 +771,7 @@ void TelescopeControl::loadTelescopes()
 			qWarning() << "[TelescopeControl] The existing version of telescopes.json is obsolete. Unable to rename.";
 
 		telescopeDescriptions = result;
-		QMessageBox::warning(nullptr, q_("Attention!"), q_("The existing version of the configuration data for telescopes in the Telescope Control plugin is obsolete."), QMessageBox::Ok);
+		QMessageBox::warning(&StelMainView::getInstance(), q_("Attention!"), q_("The existing version of the configuration data for telescopes in the Telescope Control plugin is obsolete."), QMessageBox::Ok);
 		return;
 	}
 

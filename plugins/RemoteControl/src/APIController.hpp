@@ -21,7 +21,7 @@
 #define APIHANDLER_HPP
 
 #include "httpserver/httprequesthandler.h"
-#include "AbstractAPIService.hpp"
+#include "RemoteControlServiceInterface.hpp"
 
 //! @ingroup remoteControl
 //! This class handles the API-specific requests and dispatches them to the correct RemoteControlServiceInterface implementation.
@@ -34,8 +34,8 @@ public:
 	//! Constructs an APIController
 	//! @param prefixLength Determines how many characters to strip from the front of the request path
 	//! @param parent passed on to QObject constructor
-	APIController(int prefixLength, QObject* parent = Q_NULLPTR);
-	virtual ~APIController() Q_DECL_OVERRIDE;
+	APIController(int prefixLength, QObject* parent = nullptr);
+	~APIController() override;
 
 	//! Should be called each frame from the main thread, like from StelModule::update.
 	//! Passed on to each AbstractAPIService::update method for optional processing.
@@ -47,7 +47,7 @@ public:
 	//! method depending on the HTTP request type.
 	//! If RemoteControlServiceInterface::isThreadSafe is false, these methods are called in the Stellarium main thread
 	//! using QMetaObject::invokeMethod, otherwise they are directly executed in the current thread (HTTP worker thread).
-	virtual void service(HttpRequest& request, HttpResponse& response) Q_DECL_OVERRIDE;
+	void service(HttpRequest& request, HttpResponse& response) override;
 
 	//! Registers a service with the APIController.
 	//! The RemoteControlServiceInterface::getPath() determines the request path of the service.

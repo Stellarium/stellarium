@@ -1,5 +1,5 @@
 IF(WIN32 AND NOT MSVC)
-     SET(CMAKE_EXE_LINKER_FLAGS ${CMAKE_EXE_LINKER_FLAGS} "-Wl,--enable-runtime-pseudo-reloc")
+     STRING(APPEND CMAKE_EXE_LINKER_FLAGS " -Wl,--enable-runtime-pseudo-reloc")
 ENDIF()
 
 ADD_DEFINITIONS(-DQT_PLUGIN)

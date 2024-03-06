@@ -39,7 +39,7 @@ void TestStelSkyCultureMgr::testStelSkyCultureMgr()
 	QVERIFY(scMgr.setCurrentSkyCultureID("modern"));
 	QVERIFY(scMgr.getCurrentSkyCultureID()=="modern");
 	QVERIFY(scMgr.getCurrentSkyCultureEnglishName()=="Modern");
-	QVERIFY(scMgr.getCurrentSkyCultureBoundariesIdx()==StelSkyCulture::IAU);
+	QVERIFY(scMgr.getCurrentSkyCultureBoundariesType()==StelSkyCulture::BoundariesType::IAU);
 	QVERIFY(scMgr.getCurrentSkyCultureClassificationIdx()==StelSkyCulture::TRADITIONAL);
 	QVERIFY(scMgr.getSkyCultureListEnglish().contains("modern", Qt::CaseInsensitive));
 	QVERIFY(scMgr.getDirToNameMap().contains("modern"));

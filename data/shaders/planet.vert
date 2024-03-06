@@ -53,7 +53,7 @@ void main()
 {
     gl_Position = projectionMatrix * vertex;
     texc = texCoord;
-    
+
 #ifdef SHADOWMAP
     shadowCoord = shadowMatrix * unprojectedVertex; //uses the km data for better accuracy
 #endif
@@ -61,7 +61,7 @@ void main()
     //OBJ uses imported normals
     //assume it is pre-normalized by the importer
     normalVS = normalIn;
-    
+
     //The unprojectedVertex here is in km, so we have to scale to AU
     P = unprojectedVertex.xyz / 149597870.691;
 #else

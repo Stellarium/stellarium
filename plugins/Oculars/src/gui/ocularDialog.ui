@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>792</width>
-    <height>619</height>
+    <width>300</width>
+    <height>300</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -33,103 +33,10 @@
     <number>0</number>
    </property>
    <item>
-    <widget class="BarFrame" name="TitleBar">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
+    <widget class="TitleBar" name="titleBar">
+     <property name="title" stdset="0">
+      <string>Oculars</string>
      </property>
-     <property name="minimumSize">
-      <size>
-       <width>16</width>
-       <height>25</height>
-      </size>
-     </property>
-     <property name="maximumSize">
-      <size>
-       <width>16777215</width>
-       <height>25</height>
-      </size>
-     </property>
-     <property name="frameShape">
-      <enum>QFrame::StyledPanel</enum>
-     </property>
-     <property name="frameShadow">
-      <enum>QFrame::Raised</enum>
-     </property>
-     <layout class="QHBoxLayout" name="horizontalLayout_7">
-      <property name="spacing">
-       <number>6</number>
-      </property>
-      <property name="leftMargin">
-       <number>0</number>
-      </property>
-      <property name="topMargin">
-       <number>0</number>
-      </property>
-      <property name="rightMargin">
-       <number>4</number>
-      </property>
-      <property name="bottomMargin">
-       <number>0</number>
-      </property>
-      <item>
-       <spacer name="leftSpacer">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item>
-       <widget class="QLabel" name="stelWindowTitle">
-        <property name="text">
-         <string>Oculars</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <spacer name="rightSpacer">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item>
-       <widget class="StelCloseButton" name="closeStelWindow">
-        <property name="minimumSize">
-         <size>
-          <width>16</width>
-          <height>16</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>16</width>
-          <height>16</height>
-         </size>
-        </property>
-        <property name="focusPolicy">
-         <enum>Qt::NoFocus</enum>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-       </widget>
-      </item>
-     </layout>
     </widget>
    </item>
    <item>
@@ -302,12 +209,6 @@
                </item>
                <item>
                 <widget class="QSpinBox" name="guiFontSizeSpinBox">
-                 <property name="maximumSize">
-                  <size>
-                   <width>50</width>
-                   <height>16777215</height>
-                  </size>
-                 </property>
                  <property name="toolTip">
                   <string>Font size of text on on-screen control panel</string>
                  </property>
@@ -340,7 +241,7 @@
              <item row="14" column="0">
               <layout class="QHBoxLayout" name="colorHorizontalLayout">
                <item>
-                <widget class="QToolButton" name="lineColorToolButton">
+                <widget class="ColorButton" name="lineColorToolButton">
                  <property name="toolTip">
                   <string>Color for ocular circles and sensor frames</string>
                  </property>
@@ -357,7 +258,7 @@
                 </widget>
                </item>
                <item>
-                <widget class="QToolButton" name="textColorToolButton">
+                <widget class="ColorButton" name="textColorToolButton">
                  <property name="toolTip">
                   <string>Color for text which is shown only when GUI is switched off.</string>
                  </property>
@@ -579,7 +480,7 @@
              <item row="8" column="0">
               <layout class="QHBoxLayout" name="horizontalLayout_4">
                <item>
-                <widget class="QToolButton" name="focuserColorToolButton">
+                <widget class="ColorButton" name="focuserColorToolButton">
                  <property name="toolTip">
                   <string>Color for focuser overlay line</string>
                  </property>
@@ -712,12 +613,6 @@
                    <verstretch>0</verstretch>
                   </sizepolicy>
                  </property>
-                 <property name="maximumSize">
-                  <size>
-                   <width>70</width>
-                   <height>16777215</height>
-                  </size>
-                 </property>
                  <property name="toolTip">
                   <string>Horizontal size (width)</string>
                  </property>
@@ -742,12 +637,6 @@
                    <horstretch>0</horstretch>
                    <verstretch>0</verstretch>
                   </sizepolicy>
-                 </property>
-                 <property name="maximumSize">
-                  <size>
-                   <width>70</width>
-                   <height>16777215</height>
-                  </size>
                  </property>
                  <property name="toolTip">
                   <string>Vertical size (height)</string>
@@ -859,12 +748,6 @@
                </item>
                <item>
                 <widget class="QDoubleSpinBox" name="doubleSpinBoxTelradFOV1">
-                 <property name="maximumSize">
-                  <size>
-                   <width>80</width>
-                   <height>16777215</height>
-                  </size>
-                 </property>
                  <property name="toolTip">
                   <string>FOV for circle 1</string>
                  </property>
@@ -895,12 +778,6 @@
                    <horstretch>0</horstretch>
                    <verstretch>0</verstretch>
                   </sizepolicy>
-                 </property>
-                 <property name="maximumSize">
-                  <size>
-                   <width>80</width>
-                   <height>16777215</height>
-                  </size>
                  </property>
                  <property name="toolTip">
                   <string>FOV for circle 2</string>
@@ -933,12 +810,6 @@
                    <verstretch>0</verstretch>
                   </sizepolicy>
                  </property>
-                 <property name="maximumSize">
-                  <size>
-                   <width>80</width>
-                   <height>16777215</height>
-                  </size>
-                 </property>
                  <property name="toolTip">
                   <string>FOV for circle 3</string>
                  </property>
@@ -969,12 +840,6 @@
                    <horstretch>0</horstretch>
                    <verstretch>0</verstretch>
                   </sizepolicy>
-                 </property>
-                 <property name="maximumSize">
-                  <size>
-                   <width>80</width>
-                   <height>16777215</height>
-                  </size>
                  </property>
                  <property name="toolTip">
                   <string>FOV for circle 4</string>
@@ -1782,7 +1647,7 @@
               <item row="9" column="0">
                <widget class="QLabel" name="OAGDist_lbl">
                 <property name="toolTip">
-                 <string>This is the distance from the center of the Imaging Sensor to the bottom of the Prism</string>
+                 <string>This is the distance from the center of the Imaging Sensor to the center of the Prism</string>
                 </property>
                 <property name="text">
                  <string>Prism/CCD distance:</string>
@@ -2156,15 +2021,15 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>BarFrame</class>
+   <class>TitleBar</class>
    <extends>QFrame</extends>
    <header>Dialog.hpp</header>
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>StelCloseButton</class>
-   <extends>QPushButton</extends>
-   <header>gui/StelCloseButton.hpp</header>
+   <class>ColorButton</class>
+   <extends>QToolButton</extends>
+   <header>gui/ColorButton.hpp</header>
   </customwidget>
  </customwidgets>
  <tabstops>

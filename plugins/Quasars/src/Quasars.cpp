@@ -194,11 +194,11 @@ void Quasars::init()
 	}
 	else
 	{
-		qDebug() << "[Quasars] quasars.json does not exist - copying default file to" << QDir::toNativeSeparators(catalogJsonPath);
+		qDebug().noquote() << "[Quasars] quasars.json does not exist - copying default file to" << QDir::toNativeSeparators(catalogJsonPath);
 		restoreDefaultJsonFile();
 	}
 
-	qDebug() << "[Quasars] Loading catalog file:" << QDir::toNativeSeparators(catalogJsonPath);
+	qDebug().noquote() << "[Quasars] Loading catalog file:" << QDir::toNativeSeparators(catalogJsonPath);
 
 	readJsonFile();
 
@@ -230,7 +230,7 @@ void Quasars::draw(StelCore* core)
 	StelPainter painter(prj);
 	painter.setFont(font);
 
-	for (const auto& quasar : qAsConst(QSO))
+	for (const auto& quasar : std::as_const(QSO))
 	{
 		if (quasar && quasar->initialized)
 			quasar->draw(core, painter);
@@ -255,8 +255,7 @@ void Quasars::drawPointer(StelCore* core, StelPainter& painter)
 		if (!painter.getProjector()->project(pos.toVec3f(), screenpos))
 			return;
 
-		const Vec3f& c(obj->getInfoColor());
-		painter.setColor(c[0],c[1],c[2]);
+		painter.setColor(obj->getInfoColor());
 		texPointer->bind();
 		painter.setBlending(true);
 		painter.drawSprite2dMode(screenpos[0], screenpos[1], 13.f, StelApp::getInstance().getTotalRunTime()*40.);
@@ -659,7 +658,7 @@ void Quasars::startDownload(QString urlString)
 	request.setUrl(QUrl(updateUrl));
 	request.setRawHeader("User-Agent", StelUtils::getUserAgentString().toUtf8());
 #if (QT_VERSION<QT_VERSION_CHECK(6,0,0))
-	request.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);
+	request.setAttribute(QNetworkRequest::RedirectPolicyAttribute, true);
 #endif
 	downloadReply = networkManager->get(request);
 	connect(downloadReply, SIGNAL(downloadProgress(qint64,qint64)), this, SLOT(updateDownloadProgress(qint64,qint64)));

@@ -293,10 +293,11 @@ QString Pulsar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		if (s1400>0)
 			oss << QString("%1 %2%3: %4 %5<br />").arg(flux, QString::number(1400), freq, QString::number(s1400, 'f', 2), sfd);
 
-		if (notes.length()>0)
-			oss << QString("<br />%1: %2<br />").arg(q_("Notes"), getPulsarTypeInfoString(notes));
+		if (!notes.isEmpty())
+			oss << StelUtils::wrapText(QString("%1: %2").arg(q_("Notes"), getPulsarTypeInfoString(notes))) << "<br />";
 	}
 
+	oss << getSolarLunarInfoString(core, flags);
 	postProcessInfoString(str, flags);
 	return str;
 }
@@ -415,12 +416,7 @@ QString Pulsar::getPulsarTypeInfoString(QString pcode) const
 		out.append(q_("isolated neutron star with pulsed thermal X-ray emission but no detectable radio emission"));
 	}
 
-	return out.join(",<br />");
-}
-
-void Pulsar::update(double deltaTime)
-{
-	labelsFader.update(static_cast<int>(deltaTime*1000));
+	return out.join(", ");
 }
 
 void Pulsar::draw(StelCore* core, StelPainter *painter)
@@ -448,7 +444,7 @@ void Pulsar::draw(StelCore* core, StelPainter *painter)
 		painter->setBlending(true, GL_ONE, GL_ONE);
 		painter->drawSprite2dMode(coord, distributionMode ? 4.f : 5.f);
 
-		if (labelsFader.getInterstate()<=0.f && !distributionMode && (mag+2.f)<mlimit)
+		if (!distributionMode && (mag+2.f)<mlimit)
 		{
 			QString name = getDesignation();
 			if (!getNameI18n().isEmpty())

@@ -130,36 +130,36 @@ public:
 	//! Apply refraction.
 	//! @param altAzPos is the geometrical star position vector, to be transformed into apparent position.
 	//! Note that forward/backward are no absolute reverse operations!
-	void forward(Vec3d& altAzPos) const Q_DECL_OVERRIDE;
+	void forward(Vec3d& altAzPos) const override;
 
 	//! Remove refraction from position ("reduce").
 	//! @param altAzPos is the apparent star position vector, to be transformed into geometrical position.
 	//! Note that forward/backward are no absolute reverse operations!
-	void backward(Vec3d& altAzPos) const Q_DECL_OVERRIDE;
+	void backward(Vec3d& altAzPos) const override;
 
 	//! Apply refraction.
 	//! @param altAzPos is the geometrical star position vector, to be transformed into apparent position.
 	//! Note that forward/backward are no absolute reverse operations!
-	void forward(Vec3f& altAzPos) const Q_DECL_OVERRIDE;
+	void forward(Vec3f& altAzPos) const override;
 
 	//! Remove refraction from position ("reduce").
 	//! @param altAzPos is the apparent star position vector, to be transformed into geometrical position.
 	//! Note that forward/backward are no absolute reverse operations!
-	void backward(Vec3f& altAzPos) const Q_DECL_OVERRIDE;
+	void backward(Vec3f& altAzPos) const override;
 
-	void combine(const Mat4d& m) Q_DECL_OVERRIDE
+	void combine(const Mat4d& m) override
 	{
 		setPreTransfoMat(preTransfoMat*m);
 	}
 
-	Mat4d getApproximateLinearTransfo() const Q_DECL_OVERRIDE {return postTransfoMat*preTransfoMat;}
+	Mat4d getApproximateLinearTransfo() const override {return postTransfoMat*preTransfoMat;}
 
 	QByteArray getForwardTransformShader() const override;
 	void setForwardTransformUniforms(QOpenGLShaderProgram& program) const override;
 	QByteArray getBackwardTransformShader() const override;
 	void setBackwardTransformUniforms(QOpenGLShaderProgram& program) const override;
 
-	StelProjector::ModelViewTranformP clone() const Q_DECL_OVERRIDE {Refraction* refr = new Refraction(); *refr=*this; return StelProjector::ModelViewTranformP(refr);}
+	StelProjector::ModelViewTranformP clone() const override {Refraction* refr = new Refraction(); *refr=*this; return StelProjector::ModelViewTranformP(refr);}
 
 	//! Set surface air pressure (mbars), influences refraction computation.
 	void setPressure(float p_mbar);

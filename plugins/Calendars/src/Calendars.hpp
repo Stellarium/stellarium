@@ -364,7 +364,7 @@ class CalendarsStelPluginInterface : public QObject, public StelPluginInterface
 public:
 	StelModule* getStelModule() const override;
 	StelPluginInfo getPluginInfo() const override;
-	QObjectList getExtensionList() const override { return QObjectList(); }
+	//QObjectList getExtensionList() const override { return QObjectList(); }
 };
 
 #endif /* CALENDARS_HPP */

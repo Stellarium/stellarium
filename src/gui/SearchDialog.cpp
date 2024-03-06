@@ -183,6 +183,7 @@ SearchDialog::SearchDialog(QObject* parent)
 	conf = StelApp::getInstance().getSettings();
 	enableSimbadSearch(conf->value("search/flag_search_online", true).toBool());
 	useStartOfWords = conf->value("search/flag_start_words", false).toBool();
+	useLengthSorting = conf->value("search/flag_sorting_length", false).toBool();
 	useLockPosition = conf->value("search/flag_lock_position", true).toBool();
 	useFOVCenterMarker = conf->value("search/flag_fov_center_marker", true).toBool();
 	fovCenterMarkerState = GETSTELMODULE(SpecialMarkersMgr)->getFlagFOVCenterMarker();
@@ -352,6 +353,7 @@ void SearchDialog::setCoordinateSystem(int csID)
 	ui->AxisXSpinBox->setRadians(0.);
 	ui->AxisYSpinBox->setRadians(0.);
 	conf->setValue("search/coordinate_system", currentCoordinateSystemID);
+	setCenterOfScreenCoordinates();
 }
 
 // Initialize the dialog widgets and connect the signals/slots
@@ -360,8 +362,8 @@ void SearchDialog::createDialogContent()
 	ui->setupUi(dialog);
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	connect(&StelApp::getInstance(), SIGNAL(flagShowDecimalDegreesChanged(bool)), this, SLOT(populateCoordinateAxis()));
-	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
-	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
+	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
+	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 	connect(ui->lineEditSearchSkyObject, SIGNAL(textChanged(const QString&)), this, SLOT(onSearchTextChanged(const QString&)));
 	connect(ui->simbadCooQueryButton, SIGNAL(clicked()), this, SLOT(lookupCoordinates()));
 	connect(GETSTELMODULE(StelObjectMgr), SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)), this, SLOT(clearSimbadText(StelModule::StelModuleSelectAction)));
@@ -372,10 +374,6 @@ void SearchDialog::createDialogContent()
 	connect(ui->lineEditSearchSkyObject, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(showContextMenu(QPoint)));
 
 	ui->lineEditSearchSkyObject->installEventFilter(this);	
-	QSize bs = QSize(24, 24);
-	ui->recentSearchClearDataPushButton->setFixedSize(bs);
-	ui->goPushButton->setFixedSize(bs);
-	ui->pushButtonGotoSearchSkyObject->setFixedSize(QSize(40, 30));
 
 	// Kinetic scrolling
 	kineticScrollingList << ui->objectsListView;
@@ -396,6 +394,9 @@ void SearchDialog::createDialogContent()
 	connect(ui->AxisXSpinBox, SIGNAL(valueChanged()), this, SLOT(manualPositionChanged()));
 	connect(ui->AxisYSpinBox, SIGNAL(valueChanged()), this, SLOT(manualPositionChanged()));
 	connect(ui->goPushButton, SIGNAL(clicked(bool)), this, SLOT(manualPositionChanged()));
+	// following the current direction of FOV
+	connect(GETSTELMODULE(StelMovementMgr), &StelMovementMgr::currentDirectionChanged, this, &SearchDialog::setCenterOfScreenCoordinates);
+	setCenterOfScreenCoordinates();
 	
 	connect(ui->alphaPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
 	connect(ui->betaPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
@@ -440,6 +441,8 @@ void SearchDialog::createDialogContent()
 
 	connect(ui->checkBoxUseStartOfWords, SIGNAL(clicked(bool)), this, SLOT(enableStartOfWordsAutofill(bool)));
 	ui->checkBoxUseStartOfWords->setChecked(useStartOfWords);
+	connect(ui->checkBoxUseSortingByLength, SIGNAL(clicked(bool)), this, SLOT(enableSortingByLength(bool)));
+	ui->checkBoxUseSortingByLength->setChecked(useLengthSorting);
 
 	connect(ui->checkBoxFOVCenterMarker, SIGNAL(clicked(bool)), this, SLOT(enableFOVCenterMarker(bool)));
 	ui->checkBoxFOVCenterMarker->setChecked(useFOVCenterMarker);
@@ -513,6 +516,7 @@ void SearchDialog::changeTab(int index)
 
 	if (index==2) // Position
 	{
+		setCenterOfScreenCoordinates();
 		if (useFOVCenterMarker)
 			GETSTELMODULE(SpecialMarkersMgr)->setFlagFOVCenterMarker(true);
 	}
@@ -617,8 +621,8 @@ void SearchDialog::recentSearchClearDataClicked()
 
 void SearchDialog::setRecentSearchClearDataPushButton()
 {
-	// Enable clear button if recent list is greater than 0
-	bool toEnable = recentObjectSearchesData.recentList.size() > 0;
+	// Enable clear button if recent list is not empty
+	bool toEnable = !recentObjectSearchesData.recentList.isEmpty();
 	ui->recentSearchClearDataPushButton->setEnabled(toEnable);
 	// Tool tip depends on recent list size
 	QString toolTipText = toEnable ? q_("Clear search history: delete all search objects data") : q_("Clear search history: no data to delete");
@@ -629,6 +633,15 @@ void SearchDialog::enableStartOfWordsAutofill(bool enable)
 {
 	useStartOfWords = enable;
 	conf->setValue("search/flag_start_words", useStartOfWords);
+
+	// Update search result on "Object" tab
+	onSearchTextChanged(ui->lineEditSearchSkyObject->text());
+}
+
+void SearchDialog::enableSortingByLength(bool enable)
+{
+	useLengthSorting = enable;
+	conf->setValue("search/flag_sorting_length", useLengthSorting);
 
 	// Update search result on "Object" tab
 	onSearchTextChanged(ui->lineEditSearchSkyObject->text());
@@ -659,6 +672,69 @@ void SearchDialog::setSimpleStyle()
 	ui->coordinateSystemComboBox->setVisible(false);
 }
 
+void SearchDialog::setCenterOfScreenCoordinates()
+{
+	StelCore *core = StelApp::getInstance().getCore();
+	const auto projector = core->getProjection(StelCore::FrameJ2000, StelCore::RefractionMode::RefractionOff);	
+	Vector2<qreal> cpos = projector->getViewportCenter();
+	Vec3d centerPos;
+	projector->unProject(cpos[0], cpos[1], centerPos);
+	double spinLong =0., spinLat = 0.;
+
+	// Getting coordinates (in radians) of position of the center of the screen
+	switch (getCurrentCoordinateSystem())
+	{
+		case equatorialJ2000:
+			StelUtils::rectToSphe(&spinLong, &spinLat, centerPos);
+			break;
+		case equatorial:
+			StelUtils::rectToSphe(&spinLong, &spinLat, core->j2000ToEquinoxEqu(centerPos, StelCore::RefractionOff));
+			break;
+		case galactic:
+			StelUtils::rectToSphe(&spinLong, &spinLat, core->j2000ToGalactic(centerPos));
+			break;
+		case supergalactic:
+			StelUtils::rectToSphe(&spinLong, &spinLat, core->j2000ToSupergalactic(centerPos));
+			break;
+		case horizontal:
+		{
+			StelUtils::rectToSphe(&spinLong, &spinLat, core->j2000ToAltAz(centerPos, StelCore::RefractionAuto));
+			spinLong = 3.*M_PI - spinLong; // N is zero, E is 90 degrees
+			if (StelApp::getInstance().getFlagSouthAzimuthUsage())
+				spinLong+=M_PI;
+			spinLong=StelUtils::fmodpos(spinLong, 2.*M_PI);
+			break;
+		}
+		case eclipticJ2000:
+		{
+			double lambda, beta;
+			StelUtils::rectToSphe(&spinLong, &spinLat, centerPos);
+			StelUtils::equToEcl(spinLong, spinLat, GETSTELMODULE(SolarSystem)->getEarth()->getRotObliquity(2451545.0), &lambda, &beta);
+			if (lambda<0) lambda+=2.0*M_PI;
+			spinLong = lambda;
+			spinLat = beta;
+			break;
+		}
+		case ecliptic:
+		{
+			double lambda, beta;
+			StelUtils::rectToSphe(&spinLong, &spinLat, core->j2000ToEquinoxEqu(centerPos, StelCore::RefractionOff));
+			StelUtils::equToEcl(spinLong, spinLat, GETSTELMODULE(SolarSystem)->getEarth()->getRotObliquity(core->getJDE()), &lambda, &beta);
+			if (lambda<0) lambda+=2.0*M_PI;
+			spinLong = lambda;
+			spinLat = beta;
+			break;
+		}
+	}
+
+	// Block spinbox signals locally, just until end of method.
+	const QSignalBlocker blockX(ui->AxisXSpinBox);
+	const QSignalBlocker blockY(ui->AxisYSpinBox);
+
+	// set coordinates in spinboxes
+	ui->AxisXSpinBox->setRadians(spinLong);
+	ui->AxisYSpinBox->setRadians(spinLat);
+}
 
 void SearchDialog::manualPositionChanged()
 {
@@ -707,8 +783,8 @@ void SearchDialog::manualPositionChanged()
 		{
 			double cx;
 			cx = 3.*M_PI - spinLong; // N is zero, E is 90 degrees
-			if (cx > 2.*M_PI)
-				cx -= 2.*M_PI;
+			if (StelApp::getInstance().getFlagSouthAzimuthUsage())
+				cx -= M_PI;
 			StelUtils::spheToRect(cx, spinLat, pos);
 			pos = core->altAzToJ2000(pos, StelCore::RefractionOff);
 			core->setTimeRate(0.);
@@ -814,12 +890,12 @@ void SearchDialog::onSearchTextChanged(const QString& text)
 
 		QString greekText = substituteGreek(trimmedText);
 
-		int trimmedTextMaxNbItem = 13;
+		int trimmedTextMaxNbItem = 50;
 		int greekTextMaxMbItem = 0;
 
 		if(greekText != trimmedText)
 		{
-			trimmedTextMaxNbItem = 8;
+			trimmedTextMaxNbItem = 50;
 			greekTextMaxMbItem = 18;
 
 			// Get recent matches
@@ -836,7 +912,7 @@ void SearchDialog::onSearchTextChanged(const QString& text)
 		}
 		else
 		{
-			trimmedTextMaxNbItem = 13;
+			trimmedTextMaxNbItem = 50;
 
 			// Get recent matches
 			recentMatches = listMatchingRecentObjects(trimmedText, trimmedTextMaxNbItem, useStartOfWords);
@@ -1053,6 +1129,13 @@ QStringList SearchDialog::listMatchingRecentObjects(const QString& objPrefix, in
 		if (result.size() >= maxNbItem)
 			break;
 	}
+
+	if (useLengthSorting)
+	{
+		stringLengthCompare comparator;
+		std::sort(result.begin(), result.end(), comparator);
+	}
+
 	return result;
 }
 
@@ -1273,11 +1356,13 @@ void SearchDialog::gotoObjectWithType(const QModelIndex &modelIndex)
 	objType.replace("Nomenclature","NomenclatureItem");
 	// plug-ins
 	objType.replace("Supernovae","Supernova");
+	objType.replace("Satellites","Satellite");
 	objType.replace("Novae","Nova");
 	objType.replace("Exoplanets","Exoplanet");
 	objType.replace("Pulsars","Pulsar");
 	objType.replace("Quasars","Quasar");
 	objType.replace("MeteorShowers","MeteorShower");
+	objType.replace("MissingStars","MissingStar");
 
 	gotoObject(modelIndex.model()->data(modelIndex, Qt::DisplayRole).toString(), objType);
 }

@@ -211,7 +211,7 @@ int ChineseCalendar::fixedFromChinese(QVector<int> parts5)
 	const int leap  = parts5.value(3);
 	const int day   = parts5.value(4);
 
-	const int midYear=qRound(floor(chineseEpoch+((cycle-1)*60+year-1+0.5)*meanTropicalYear));
+	const int midYear=qRound(std::floor(chineseEpoch+((cycle-1)*60+year-1+0.5)*meanTropicalYear));
 	const int newYear=newYearOnOrBefore(midYear);
 	const int p = newMoonOnOrAfter(newYear+(month-1)*29);
 	const QVector<int>d = chineseFromFixed(p);
@@ -238,7 +238,7 @@ QVector<int> ChineseCalendar::chineseFromFixed(int rd)
 		month--;
 	month=StelUtils::amod(month, 12);
 	const bool leapMonth=leapYear && noMajorSolarTerm(m) && !priorLeapMonth(m12, newMoonBefore(m));
-	const int elapsedYears=qRound(floor(1.5-month/12.+(rd-chineseEpoch)/meanTropicalYear));
+	const int elapsedYears=qRound(std::floor(1.5-month/12.+(rd-chineseEpoch)/meanTropicalYear));
 	const int cycle = StelUtils::intFloorDiv(elapsedYears-1, 60)+1;
 	const int year = StelUtils::amod(elapsedYears, 60);
 	const int day = rd-m+1;
@@ -249,13 +249,13 @@ QVector<int> ChineseCalendar::chineseFromFixed(int rd)
 int ChineseCalendar::currentMajorSolarTerm(int rd)
 {
 	double s=solarLongitude(universalFromStandard(rd, chineseLocation(rd)));
-	return StelUtils::amod(2+qRound(floor(s/30.)), 12);
+	return StelUtils::amod(2+qRound(std::floor(s/30.)), 12);
 }
 
 // Return location of Chinese calendar computations (Beijing). Before 1929, this used LMST. CC:UE 19.2
 StelLocation ChineseCalendar::chineseLocation(double rd_t)
 {
-	const int year=GregorianCalendar::gregorianYearFromFixed(qRound(floor(rd_t)));
+	const int year=GregorianCalendar::gregorianYearFromFixed(qRound(std::floor(rd_t)));
 	StelLocation loc("Beijing", "China", "Eastern Asia", 116.+(25./60.), 39.+(55./60.), 44, 8000, "Asia/Shanghai", 9);
 	if (year<1929)
 		loc.ianaTimeZone="UTC+07:45";
@@ -281,7 +281,7 @@ int ChineseCalendar::majorSolarTermOnOrAfter(int rd)
 int ChineseCalendar::currentMinorSolarTerm(int rd)
 {
 	const double s=solarLongitude(universalFromStandard(rd, chineseLocation(rd)));
-	return StelUtils::amod(3+qRound(floor((s-15.)/30.)), 12);
+	return StelUtils::amod(3+qRound(std::floor((s-15.)/30.)), 12);
 }
 
 // Return minor solar term (CC:UE 19.6)
@@ -304,7 +304,7 @@ int ChineseCalendar::winterSolsticeOnOrBefore(int rd)
 {
 	const double approx=estimatePriorSolarLongitude(double(Calendar::winter), midnightInChina(rd+1));
 
-	int day=qRound(floor(approx))-2;
+	int day=qRound(std::floor(approx))-2;
 	double lng;
 	do {
 		day++;
@@ -318,14 +318,14 @@ int ChineseCalendar::winterSolsticeOnOrBefore(int rd)
 int ChineseCalendar::newMoonOnOrAfter(int rd)
 {
 	const double t=Calendar::newMoonAtOrAfter(midnightInChina(rd));
-	return qRound(floor(standardFromUniversal(t, chineseLocation(t))));
+	return qRound(std::floor(standardFromUniversal(t, chineseLocation(t))));
 }
 
 // Return Chinese New Moon (CC:UE 19.10)
 int ChineseCalendar::newMoonBefore(int rd)
 {
 	const double t=Calendar::newMoonBefore(midnightInChina(rd));
-	return qRound(floor(standardFromUniversal(t, chineseLocation(t))));
+	return qRound(std::floor(standardFromUniversal(t, chineseLocation(t))));
 }
 
 // Auxiliary function (CC:UE 19.11)
@@ -454,7 +454,7 @@ int ChineseCalendar::DragonFestivalInGregorianYear(int gYear)
 // Return RD of Winter minor term of Gregorian year gYear (CC:UE 19.28)
 int ChineseCalendar::qingMing(int gYear)
 {
-	return qRound(floor(minorSolarTermOnOrAfter(GregorianCalendar::fixedFromGregorian({gYear, GregorianCalendar::march, 30}))));
+	return qRound(std::floor(minorSolarTermOnOrAfter(GregorianCalendar::fixedFromGregorian({gYear, GregorianCalendar::march, 30}))));
 }
 
 // Return age of someone born on birthdate on date rd as expressed by Chinese (CC:UE 19.29)

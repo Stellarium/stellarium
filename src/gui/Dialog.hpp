@@ -23,38 +23,41 @@
 
 #include <QWidget>
 #include <QFrame>
+#include <QLabel>
 #include <QMouseEvent>
 
-//! \class BarFrame
+//! \class TitleBar
 //! A title bar control used in windows derived from StelDialog.
 //! 
 //! As window classes derived from StelDialog are basic QWidgets, they have no
-//! title bar. A BarFrame control needs to be used in each window's design
+//! title bar. A TitleBar control needs to be used in each window's design
 //! to allow the user to move them.
 //! 
 //! Typically, the frame should contain a centered label displaying the window's
 //! title and a button for closing the window (connected to the 
 //! StelDialog::close() slot).
-//! 
-//! To use the default Stellarium style for title bars, the BarFrame object of a
-//! given window should be named "TitleBar". See the normalStyle.css file for
-//! the style sheet description.
-class BarFrame : public QFrame
+
+class TitleBar : public QFrame
 {
-Q_OBJECT
+	Q_OBJECT
+	Q_PROPERTY(QString title READ title WRITE setTitle)
 public:
 	QPoint mousePos;
-  
-	BarFrame(QWidget* parent) : QFrame(parent), moving(false) {}
-  
-	virtual void mousePressEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
-	virtual void mouseReleaseEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
-	virtual void mouseMoveEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
+
+	TitleBar(QWidget* parent = nullptr);
+	void setTitle(const QString& title) { label->setText(title); }
+	QString title() const { return label->text(); }
+protected:
+	void mousePressEvent(QMouseEvent *event) override;
+	void mouseReleaseEvent(QMouseEvent *event) override;
+	void mouseMoveEvent(QMouseEvent *event) override;
 signals:
+	void closeClicked();
 	// should be connected to the StelDialog in createDialogContents()
 	void movedTo(QPoint newPosition);
 protected:
-	bool moving;
+	bool moving = false;
+	QLabel* label;
 };
 
 class ResizeFrame : public QFrame
@@ -65,11 +68,10 @@ public:
   
 	ResizeFrame(QWidget* parent) : QFrame(parent) {}
   
-	virtual void mousePressEvent(QMouseEvent *event) Q_DECL_OVERRIDE {
+	void mousePressEvent(QMouseEvent *event) override {
 		mousePos = event->pos();
 	}
-	virtual void mouseMoveEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
+	void mouseMoveEvent(QMouseEvent *event) override;
 };
-
 
 #endif // DIALOG_HPP

@@ -530,7 +530,7 @@ int Lx200CommandGetRa::readAnswerFromBuffer(const char *&buff,
 	
 	buff = p;
 	server.longFormatUsedReceived(long_format);
-	server.raReceived(static_cast<unsigned int>(floor(ra * (4294967296.0/86400.0))));
+	server.raReceived(static_cast<unsigned int>(std::floor(ra * (4294967296.0/86400.0))));
 	return 1;
 }
 
@@ -648,7 +648,7 @@ int Lx200CommandGetDec::readAnswerFromBuffer(const char *&buff,
 		dec = -dec;
 	buff = p;
 	server.longFormatUsedReceived(long_format);
-	server.decReceived(static_cast<unsigned int>(floor(dec* (4294967296.0/(360*3600.0)))));
+	server.decReceived(static_cast<unsigned int>(std::floor(dec* (4294967296.0/(360*3600.0)))));
 	return 1;
 }
 

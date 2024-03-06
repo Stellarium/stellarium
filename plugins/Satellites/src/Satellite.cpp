@@ -184,7 +184,7 @@ Satellite::Satellite(const QString& identifier, const QVariantMap& map)
 		{
 			QVariantMap commMap = comm.toMap();
 			CommLink c;
-			if (commMap.contains("frequency")) c.frequency = commMap.value("frequency").toDouble();
+			c.frequency = commMap.value("frequency").toDouble(); // required!
 			if (commMap.contains("modulation")) c.modulation = commMap.value("modulation").toString();
 			if (commMap.contains("description")) c.description = commMap.value("description").toString();
 			comms.append(c);
@@ -194,7 +194,7 @@ Satellite::Satellite(const QString& identifier, const QVariantMap& map)
 	QVariantList groupList =  map.value("groups", QVariantList()).toList();
 	if (!groupList.isEmpty())
 	{
-		for (const auto& group : qAsConst(groupList))
+		for (const auto& group : std::as_const(groupList))
 			groups.insert(group.toString());
 	}
 
@@ -219,7 +219,8 @@ Satellite::Satellite(const QString& identifier, const QVariantMap& map)
 		{ gSatWrapper::VISIBLE,		N_("The satellite is sunlit and the observer is in the dark") },
 		{ gSatWrapper::RADAR_NIGHT,	N_("The satellite isn't sunlit") },
 		{ gSatWrapper::PENUMBRAL,	N_("The satellite is in penumbra") },
-		{ gSatWrapper::ANNULAR,		N_("The satellite is eclipsed") }
+		{ gSatWrapper::ANNULAR,		N_("The satellite is eclipsed") },
+		{ gSatWrapper::BELOW_HORIZON,   N_("The satellite is below the horizon") }
 	};
 
 	update(0.);
@@ -237,7 +238,7 @@ Satellite::~Satellite()
 double Satellite::roundToDp(float n, int dp)
 {
 	// round n to dp decimal places
-	return floor(static_cast<double>(n) * pow(10., dp) + .5) / pow(10., dp);
+	return std::floor(static_cast<double>(n) * pow(10., dp) + .5) / pow(10., dp);
 }
 
 QString Satellite::getNameI18n() const
@@ -270,7 +271,7 @@ QVariantMap Satellite::getMap(void)
 	map["orbitColor"] = orbitCol;
 	map["infoColor"] = infoCol;
 	QVariantList commList;
-	for (const auto& c : qAsConst(comms))
+	for (const auto& c : std::as_const(comms))
 	{
 		QVariantMap commMap;
 		commMap["frequency"] = c.frequency;
@@ -280,7 +281,7 @@ QVariantMap Satellite::getMap(void)
 	}
 	map["comms"] = commList;
 	QVariantList groupList;
-	for (const auto& g : qAsConst(groups))
+	for (const auto& g : std::as_const(groups))
 	{
 		groupList << g;
 	}
@@ -337,7 +338,7 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 	if (flags & ObjectType)
 		oss << QString("%1: <b>%2</b>").arg(q_("Type"), getObjectTypeI18n())  << "<br/>";
 	
-	if ((flags & Magnitude) && (stdMag<99. || RCS>0.) && (visibility==gSatWrapper::VISIBLE))
+	if ((flags & Magnitude) && ((stdMag<99.) || (RCS>0.)) && (visibility==gSatWrapper::VISIBLE))
 	{
 		const int decimals = 2;
 		const float airmass = getAirmass(core);
@@ -359,7 +360,7 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 		oss << QString("%1: %2 %3").arg(q_("Range rate")).arg(rangeRate, 5, 'f', 3).arg(qc_("km/s", "speed")) << "<br/>";
 		// TRANSLATORS: Satellite altitude
 		oss << QString("%1: %2 %3").arg(q_("Altitude")).arg(qRound(height)).arg(km) << "<br/>";
-		oss << QString("%1: %2 %3 / %4 %5").arg(q_("Perigee/apogee altitudes")).arg(qRound(perigee)).arg(km).arg(qRound(apogee)).arg(km) << "<br/>";
+		oss << QString("%1 (WGS-84): %2 %3 / %4 %5").arg(q_("Perigee/apogee altitudes")).arg(qRound(perigee)).arg(km).arg(qRound(apogee)).arg(km) << "<br/>";
 	}
 
 	if (flags&Size && RCS>0.)
@@ -447,7 +448,7 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 		//Visibility: Full text		
 		oss << q_(visibilityDescription.value(visibility, "")) << "<br />";
 
-		if (comms.size() > 0)
+		if (!comms.isEmpty() && (status!=Satellite::StatusNonoperational))
 		{
 			oss << q_("Radio communication") << ":<br/>";
 			for (const auto& c : comms)
@@ -460,6 +461,7 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 		//oss << QString("%1: %2 km, %3: %4 km").arg(q_("Penumbra distance"), QString::number(penumbraDistance, 'f', 3), q_("Radius"), QString::number(penumbraRadius, 'f', 3)) << "<br/>";
 	}
 
+	oss << getSolarLunarInfoString(core, flags);
 	postProcessInfoString(str, flags);
 	return str;
 }
@@ -467,7 +469,6 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 QString Satellite::getCommLinkInfo(CommLink comm) const
 {
 	QString commLinkData;
-
 	if (!comm.modulation.isEmpty()) // OK, the signal modulation mode is exist
 		commLinkData = comm.modulation;
 
@@ -481,10 +482,10 @@ QString Satellite::getCommLinkInfo(CommLink comm) const
 
 	// Translate some specific communications terms
 	// See end of Satellites.cpp file to define translatable terms
-	static const QStringList commTerms={ "uplink", "downlink", "beacon", "telemetry", "video", "broadband", "command" };
+	static const QStringList commTerms={ "uplink", "downlink", "beacon", "telemetry", "video", "broadband", "command", "meteorological", "maritime", "mobile telephony", "mobile", "repeater", "digipeater", "-band", "crew voice", "imaging", "mode" };
 	for (auto& term: commTerms)
 	{
-		commLinkData.replace(term, q_(term));
+		commLinkData.replace(term, qc_(term, "comms"));
 	}
 	commLinkData.replace("&", q_("and"));
 
@@ -500,7 +501,6 @@ QString Satellite::getCommLinkInfo(CommLink comm) const
 		sign='+';
 
 	commLinkData.append(QString(": %1 %2 (%3%4 %5)<br />").arg(QString::number(comm.frequency, 'f', 3), qc_("MHz", "frequency"), sign, QString::number(ddop, 'f', 3), qc_("kHz", "frequency")));
-
 	return commLinkData;
 }
 
@@ -508,13 +508,12 @@ QString Satellite::getCommLinkInfo(CommLink comm) const
 void Satellite::calculateSatDataFromLine2(QString tle)
 {
 	// Details: http://www.satobs.org/seesat/Dec-2002/0197.html
-	const double meanEarthRadius = 6371.0088;
 	const double k = 8681663.653;
 	const double meanMotion = tle.left(63).right(11).toDouble();
 	const double semiMajorAxis = std::cbrt((k/meanMotion)*(k/meanMotion));
 	eccentricity = QString("0.%1").arg(tle.left(33).right(7)).toDouble();
-	perigee = semiMajorAxis*(1.0 - eccentricity) - meanEarthRadius;
-	apogee = semiMajorAxis*(1.0 + eccentricity) - meanEarthRadius;
+	perigee = semiMajorAxis*(1.0 - eccentricity) - EARTH_RADIUS;
+	apogee = semiMajorAxis*(1.0 + eccentricity) - EARTH_RADIUS;
 	inclination = QString(tle.left(16).right(8)).toDouble();
 }
 
@@ -522,7 +521,7 @@ void Satellite::calculateSatDataFromLine2(QString tle)
 void Satellite::calculateEpochFromLine1(QString tle)
 {
 	QString epochStr;
-	// Details: https://celestrak.com/columns/v04n03/ or https://en.wikipedia.org/wiki/Two-line_element_set
+	// Details: https://celestrak.org/columns/v04n03/ or https://en.wikipedia.org/wiki/Two-line_element_set
 	int year = tle.left(20).right(2).toInt();
 	if (year>=0 && year<57)
 		year += 2000;
@@ -643,7 +642,7 @@ float Satellite::getVMagnitude(const StelCore* core) const
 			// fracil = fraction of satellite illuminated,
 			//	    [ 0 <= fracil <= 1 ]
 			//
-			// Original description: http://www.prismnet.com/~mmccants/tles/mccdesc.html
+			// Original description: http://mmccants.org/tles/mccdesc.html
 
 			double fracil = qMax(0.000001, static_cast<double>(calculateIlluminatedFraction()));
 
@@ -673,8 +672,8 @@ float Satellite::getVMagnitude(const StelCore* core) const
 				m[2].rotate(-120, Vz);
 
 				StelLocation loc   = StelApp::getInstance().getCore()->getCurrentLocation();
-				const double  radLatitude    = loc.latitude * KDEG2RAD;
-				const double  theta          = pSatWrapper->getEpoch().toThetaLMST(loc.longitude * KDEG2RAD);
+				const double  radLatitude    = loc.getLatitude() * KDEG2RAD;
+				const double  theta          = pSatWrapper->getEpoch().toThetaLMST(loc.getLongitude() * KDEG2RAD);
 				const double sinRadLatitude=sin(radLatitude);
 				const double cosRadLatitude=cos(radLatitude);
 				const double sinTheta=sin(theta);
@@ -821,7 +820,12 @@ void Satellite::update(double)
 		velocity                 = pSatWrapper->getTEMEVel();
 		latLongSubPointPosition  = pSatWrapper->getSubPoint();
 		height                   = latLongSubPointPosition[2]; // km
-		if (height < 0.1)
+		/*
+		Vec2d pa                 = pSatWrapper->getPerigeeApogeeAltitudes();
+		perigee                  = pa[0];
+		apogee                   = pa[1];
+		*/
+		if (height < 80) // way below Kármán line: Satellite is certainly lost, at least TLE not applicable.
 		{
 			// The orbit is no longer valid.  Causes include very out of date
 			// TLE, system date and time out of a reasonable range, and orbital
@@ -840,7 +844,12 @@ void Satellite::update(double)
 
 		pSatWrapper->getSlantRange(range, rangeRate);
 		visibility = pSatWrapper->getVisibilityPredict();
-		phaseAngle = pSatWrapper->getPhaseAngle();
+
+		// Compute phase angle
+		double raSun, decSun, raSat, decSat;
+		StelUtils::rectToSphe(&raSun, &decSun, sun->getJ2000EquatorialPos(core));
+		StelUtils::rectToSphe(&raSat, &decSat, XYZ);
+		phaseAngle = std::acos(-1.0*(std::sin(decSun)*std::sin(decSat) + std::cos(decSun)*std::cos(decSat)*std::cos(raSun - raSat)));
 
 		// Compute orbit points to draw orbit line.
 		if (orbitDisplayed) computeOrbitPoints();
@@ -850,15 +859,24 @@ void Satellite::update(double)
 // Get radii and distances of shadow circles
 Vec4d Satellite::getUmbraData()
 {
-	static PlanetP earth=GETSTELMODULE(SolarSystem)->getEarth();
-	// Compute altitudes of umbra and penumbra circles. These should show where the satellite enters/exits umbra/penumbra.
-	// The computation follows ideas from https://celestrak.org/columns/v03n01/
-	// These sources mention ECI coordinates (Earth Centered Intertial). Presumably TEME (True Equator Mean Equinox) are equivalent, at least for our purposes.
 	const double rhoE=position.norm(); // geocentric Satellite distance, km
+	return Satellite::getUmbraData(rhoE);
+}
+
+//! Get radii and geocentric antisolar distances of shadow circles in km for a hypothetical object in geocentric distance rhoE [km].
+//! Vec4d(umbraDistance, umbraRadius, penumbraDistance, penumbraRadius);
+Vec4d Satellite::getUmbraData(const double rhoE)
+{
+	static PlanetP earth=GETSTELMODULE(SolarSystem)->getEarth();
+	static PlanetP sun = GETSTELMODULE(SolarSystem)->getSun();
+
+	// Compute locations of umbra and penumbra circles. These should show where the satellite enters/exits umbra/penumbra.
+	// The computation follows ideas from https://celestrak.org/columns/v03n01/
+	// These sources mention ECI coordinates (Earth Centered Inertial). Presumably TEME (True Equator Mean Equinox) are equivalent, at least for our purposes.
 	const double rS=earth->getHeliocentricEclipticPos().norm()*AU; // distance earth...sun
 	const double thetaE=asin((earth->getEquatorialRadius()*AU)/(rhoE));
-	// Accurate distance sat...sun from ECI sunpos
-	Vec3d sunTEME=pSatWrapper->getSunECIPos() - pSatWrapper->getObserverECIPos(); // km
+	Vec3d sunEquinoxEqPos = sun->getEquinoxEquatorialPos(StelApp::getInstance().getCore());
+	Vec3d sunTEME=sunEquinoxEqPos*AU;
 	const double thetaS=asin((sun->getEquatorialRadius()*AU)/(sunTEME.norm()));
 	Q_ASSERT(thetaE>thetaS);
 	const double theta=thetaE-thetaS; // angle so that satellite dives into umbra
@@ -869,9 +887,9 @@ Vec4d Satellite::getUmbraData()
 	// complement
 	const double mu=M_PI-eta;
 	// geocentric distance of shadow circle towards antisun
-	umbraDistance=rhoE*cos(mu);
+	double umbraDistance=rhoE*cos(mu);
 	// radius of shadow circle
-	umbraRadius=rhoE*sin(mu);
+	double umbraRadius=rhoE*sin(mu);
 	// Repeat for penumbra
 	const double thetaP=thetaE+thetaS; // angle so that satellite touches penumbra
 	// angle at Sun:
@@ -881,9 +899,10 @@ Vec4d Satellite::getUmbraData()
 	// complement
 	const double muP=M_PI-etaP;
 	// geocentric distance of shadow circle towards antisun
-	penumbraDistance=rhoE*cos(muP);
+	double penumbraDistance=rhoE*cos(muP);
 	// radius of shadow circle
-	penumbraRadius=rhoE*sin(muP);
+	double penumbraRadius=rhoE*sin(muP);
+	//// DBG OUT
 	//StelObjectMgr *om=GETSTELMODULE(StelObjectMgr);
 	//om->setExtraInfoString(StelObject::DebugAid, QString("&rho;<sub>E</sub> %1, r<sub>S</sub> %2, &theta;<sub>E</sub> %3°, &theta;<sub>S</sub> %4° <br/>")
 	//		       .arg(QString::number(rhoE, 'f', 3),
@@ -910,7 +929,6 @@ Vec4d Satellite::getUmbraData()
 	//		       );
 	return Vec4d(umbraDistance, umbraRadius, penumbraDistance, penumbraRadius);
 }
-
 
 double Satellite::getDoppler(double freq) const
 {
@@ -971,8 +989,37 @@ SatFlags Satellite::getFlags() const
 		flags |= SatCustomFilter;
 	if (!comms.isEmpty())
 		flags |= SatCommunication;
-	if (apogee<=100.0 || height<=100.0) // Karman line, atmosphere
+	if (apogee<=100.0 || height<=100.0) // Karman line, atmosphere: thermosphere
 		flags |= SatReentry;
+	if (status == StatusOperational)
+	{
+		flags |= SatOperationalOS;
+		flags |= SatActiveOS;
+	}
+	if (status == StatusNonoperational)
+		flags |= SatNonoperationalOS;
+	if (status == StatusPartiallyOperational)
+	{
+		flags |= SatPartiallyOperationalOS;
+		flags |= SatActiveOS;
+	}
+	if (status == StatusStandby)
+	{
+		flags |= SatStandbyOS;
+		flags |= SatActiveOS;
+	}
+	if (status == StatusSpare)
+	{
+		flags |= SatSpareOS;
+		flags |= SatActiveOS;
+	}
+	if (status == StatusExtendedMission)
+	{
+		flags |= SatExtendedMissionOS;
+		flags |= SatActiveOS;
+	}
+	if (status == StatusDecayed)
+		flags |= SatDecayedOS;
 
 	return flags;
 }
@@ -999,7 +1046,7 @@ bool Satellite::getCustomFiltersFlag() const
 	bool cfe = true;
 	if (flagCFEccentricity)
 		cfe = (eccentricity>=minCFEccentricity && eccentricity<=maxCFEccentricity);
-	// Known standrad magnitude
+	// Known standard magnitude
 	bool cfm = true;
 	if (flagCFKnownStdMagnitude)
 		cfm = (stdMag<99.0);

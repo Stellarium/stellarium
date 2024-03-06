@@ -59,6 +59,7 @@ struct Ephemeris
 	QString objDateStr;
 	float magnitude;
 	bool isComet;
+	PlanetP sso;
 };
 Q_DECLARE_METATYPE(Ephemeris)
 
@@ -286,7 +287,7 @@ private slots:
 	void selectCurrentCelestialPosition(const QModelIndex &modelIndex);
 
 	void currentHECPositions();
-	void drawHECGraph(QString selectedObject = "");
+	void drawHECGraph(const QString &selectedObject = "");
 	void saveHECPositions();
 	void selectCurrentHECPosition(const QModelIndex &modelIndex);
 	void markCurrentHECPosition(const QModelIndex &modelIndex);
@@ -305,6 +306,8 @@ private slots:
 	void saveEphemeris();	
 	void onChangedEphemerisPosition();
 	void reGenerateEphemeris();
+	void setDateTimeNow();
+	void saveIgnoreDateTestFlag(bool b);
 
 	//! Calculating the rises, transits and sets for selected celestial body and fill the list.
 	void generateRTS();
@@ -582,19 +585,22 @@ private:
 	double getCustomTimeStep();
 	void reGenerateEphemeris(bool withSelection);
 
+	//! Finding and selecting an object by its name in specific JD
+	void goToObject(const QString &name, const double JD);
+
 	//! Format RA/Dec or Az/Alt coordinates into nice strings.
 	//! @arg horizontal coord are horizontal (alt-azimuthal). Use degrees/degrees. Else use Hours/degrees.
 	//! @arg southAzimuth (relevant only for horizontal=true) count azimuth from south.
 	//! @arg decimalDegrees use decimal format, not DMS/HMS
 	//! @return QPair(lngStr, latStr) formatted output strings
 	static QPair<QString, QString> getStringCoordinates(const Vec3d &coord, const bool horizontal, const bool southAzimuth, const bool decimalDegrees);
-	void fillWUTTable(QString objectName, QString designation, float magnitude, Vec4d RTSTime, double maxElevation,
-			  double angularSize, QString constellation, QString otype, bool decimalDegrees = false);
-	void fillCelestialPositionTable(QString objectName, QString RA, QString Dec, double magnitude,
-					QString angularSize, QString angularSizeToolTip, QString extraData,
-					QString extraDataToolTip, QString transitTime, QString maxElevation,
-					QString sElongation, QString objectType);
-	void fillHECPositionTable(QString objectName, QChar objectSymbol, QString latitude, QString longitude, double distance);
+	void fillWUTTable(const QString &objectName, const QString &designation, float magnitude, const Vec4d &RTSTime, double maxElevation,
+			  double angularSize, const QString &constellation, const QString &otype, bool decimalDegrees = false);
+	void fillCelestialPositionTable(const QString &objectName, const QString &RA, const QString &Dec, double magnitude,
+					const QString &angularSize, const QString &angularSizeToolTip, const QString &extraData,
+					const QString &extraDataToolTip, const QString &transitTime, const QString &maxElevation,
+					QString &sElongation, const QString &objectType);
+	void fillHECPositionTable(const QString &objectName, const QChar objectSymbol, const QString &latitude, const QString &longitude, const double distance);
 
 	//! Calculation conjunctions and oppositions.
 	//! @note Ported from KStars, should be improved, because this feature calculates
@@ -605,7 +611,7 @@ private:
 	//! Finding the angular distance between two celestial bodies at some Julian date
 	double findDistance(double JD, PlanetP object1, StelObjectP object2, int mode);
 	//! Finding the initial time steps for interactions
-	double findInitialStep(double startJD, double stopJD, QStringList objects);
+	double findInitialStep(double startJD, double stopJD, QStringList &objects);
 	//! Finding the celestial event
 	bool findPrecise(QPair<double, double>* out, PlanetP object1, StelObjectP object2, double JD, double step, int prevSign, int mode);
 	//! Wrapper for filling the table of phenomena between planet and star
@@ -616,9 +622,9 @@ private:
 	//! @note modes: 0 - conjunction, 1 - opposition, 2 - greatest elongation
 	void fillPhenomenaTable(const QMap<double, double> list, const PlanetP object1, const PlanetP object2, int mode);
 	//! Filling the table of phenomena
-	void fillPhenomenaTableVis(QString phenomenType, double JD, QString firstObjectName, float firstObjectMagnitude,
-				   QString secondObjectName, float secondObjectMagnitude, QString separation, QString elevation,
-				   QString elongation, QString angularDistance, QString elongTooltip="", QString angDistTooltip="");
+	void fillPhenomenaTableVis(const QString &phenomenType, double JD, const QString &firstObjectName, float firstObjectMagnitude,
+				   const QString &secondObjectName, float secondObjectMagnitude, const QString &separation, const QString &elevation,
+				   QString &elongation, const QString &angularDistance, const QString &elongTooltip="", const QString &angDistTooltip="");
 	//! Calculation of greatest elongations
 	QMap<double, double> findGreatestElongationApproach(PlanetP& object1, StelObjectP& object2, double startJD, double stopJD);
 	bool findPreciseGreatestElongation(QPair<double, double>* out, PlanetP object1, StelObjectP object2, double JD, double stopJD, double step);
@@ -636,7 +642,7 @@ private:
 	bool isSecondObjectRight(double JD, PlanetP object1, StelObjectP object2);
 
 	// Signal that a plot has to be redone
-	bool plotAltVsTime, plotAltVsTimeSun, plotAltVsTimeMoon, plotAltVsTimePositive, plotMonthlyElevation, plotMonthlyElevationPositive, plotDistanceGraph, plotLunarElongationGraph, plotAziVsTime;
+	bool plotAltVsTime, plotAltVsTimeSun, plotAltVsTimeMoon, plotAltVsTimePositive, plotMonthlyElevation, plotMonthlyElevationPositive, plotDistanceGraph, plotLunarElongationGraph, plotAziVsTime, computeRTS;
 	int altVsTimePositiveLimit, monthlyElevationPositiveLimit, graphsDuration, graphsStep;
 	QStringList ephemerisHeader, phenomenaHeader, positionsHeader, hecPositionsHeader, wutHeader, rtsHeader, lunareclipseHeader, lunareclipsecontactsHeader, solareclipseHeader, solareclipsecontactsHeader, solareclipselocalHeader, transitHeader;
 	static double brightLimit;
@@ -686,6 +692,7 @@ private:
 		PHCMoonsFirstBody           = 25,
 		PHCBrightCarbonStars        = 26,
 		PHCBrightBariumStars        = 27,
+		PHCSunPlanetsTheirMoons     = 28,
 		PHCNone	// stop gapper for syntax reasons
 	};
 
@@ -736,7 +743,7 @@ private:
 	};
 };
 
-// Reimplements the QTreeWidgetItem class to fix the sorting bug
+//! Derived from QTreeWidgetItem class with customized sort
 class ACCelPosTreeWidgetItem : public QTreeWidgetItem
 {
 public:
@@ -791,7 +798,7 @@ private:
 	}
 };
 
-// Reimplements the QTreeWidgetItem class to fix the sorting bug
+//! Derived from QTreeWidgetItem class with customized sort
 class AHECPosTreeWidgetItem : public QTreeWidgetItem
 {
 public:
@@ -820,7 +827,7 @@ private:
 	}
 };
 
-// Reimplements the QTreeWidgetItem class to fix the sorting bug
+//! Derived from QTreeWidgetItem class with customized sort
 class ACEphemTreeWidgetItem : public QTreeWidgetItem
 {
 public:
@@ -853,7 +860,7 @@ private:
 	}
 };
 
-// Reimplements the QTreeWidgetItem class to fix the sorting bug
+//! Derived from QTreeWidgetItem class with customized sort
 class ACRTSTreeWidgetItem : public QTreeWidgetItem
 {
 public:
@@ -886,7 +893,7 @@ private:
 	}
 };
 
-// Reimplements the QTreeWidgetItem class to fix the sorting bug
+//! Derived from QTreeWidgetItem class with customized sort
 class ACLunarEclipseTreeWidgetItem : public QTreeWidgetItem
 {
 public:
@@ -929,7 +936,7 @@ public:
 	LunarEclipseIteration(double &JD, double &positionAngle, double &axisDistance, bool beforeMaximum, int eclipseType);
 };
 
-// Reimplements the QTreeWidgetItem class to fix the sorting bug
+//! Derived from QTreeWidgetItem class, but currently nothing else.
 class ACLunarEclipseContactsTreeWidgetItem : public QTreeWidgetItem
 {
 public:
@@ -939,7 +946,7 @@ public:
 	}
 };
 
-// Reimplements the QTreeWidgetItem class to fix the sorting bug
+//! Derived from QTreeWidgetItem class with customized sort
 class ACSolarEclipseTreeWidgetItem : public QTreeWidgetItem
 {
 public:
@@ -968,6 +975,7 @@ private:
 	}
 };
 
+//! Derived from QTreeWidgetItem class with customized sort
 class ACSolarEclipseContactsTreeWidgetItem : public QTreeWidgetItem
 {
 public:
@@ -1000,7 +1008,7 @@ public:
 	double &ldot, double &etadot, double &bdot, double &cdot, bool penumbra);
 };
 
-// Reimplements the QTreeWidgetItem class to fix the sorting bug
+//! Derived from QTreeWidgetItem class with customized sort
 class ACSolarEclipseLocalTreeWidgetItem : public QTreeWidgetItem
 {
 public:
@@ -1025,7 +1033,7 @@ private:
 	}
 };
 
-// Reimplements the QTreeWidgetItem class to fix the sorting bug
+//! Derived from QTreeWidgetItem class with customized sort
 class ACTransitTreeWidgetItem : public QTreeWidgetItem
 {
 public:
@@ -1058,7 +1066,7 @@ public:
 	double &besDec, double &besTf1, double &besTf2, double &besL1, double &besL2, double &besMu);
 };
 
-// Reimplements the QTreeWidgetItem class to fix the sorting bug
+//! Derived from QTreeWidgetItem class with customized sort
 class ACPhenTreeWidgetItem : public QTreeWidgetItem
 {
 public:
@@ -1091,7 +1099,7 @@ private:
 	}
 };
 
-// Reimplements the QTreeWidgetItem class to fix the sorting bug
+//! Derived from QTreeWidgetItem class with customized sort
 class WUTTreeWidgetItem : public QTreeWidgetItem
 {
 public:

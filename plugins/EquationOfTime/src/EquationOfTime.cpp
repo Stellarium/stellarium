@@ -88,7 +88,7 @@ void EquationOfTime::init()
 	// populate settings from main config file.
 	readSettingsFromConfig();
 
-	addAction("actionShow_EquationOfTime",        N_("Equation of Time"), N_("Show solution for Equation of Time"), "showEOT", "Ctrl+Alt+T");
+	addAction("actionShow_EquationOfTime",        N_("Equation of Time"), N_("Show value of the equation of time"), "showEOT", "Ctrl+Alt+T");
 	addAction("actionShow_EquationOfTime_dialog", N_("Equation of Time"), N_("Show settings dialog"), mainWindow, "visible");
 
 	enableEquationOfTime(getFlagEnableAtStartup());

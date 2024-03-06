@@ -69,7 +69,7 @@ gTime gTime::getCurrentTime()
 	struct tm timeinfo;
 
 	time(&rawtime);
-	#ifdef _MSC_VER
+	#if defined(_MSC_VER) || defined(__MINGW32__)
 	gmtime_s(&timeinfo, &rawtime);
 	#else
 	gmtime_r(&rawtime, &timeinfo);
@@ -128,7 +128,7 @@ gTimeSpan gTime::getTimeToUTC()
 	time_t when   = time(nullptr);
 	struct tm utc;
 	struct tm lcl;
-	#ifdef _MSC_VER
+	#if defined(_MSC_VER) || defined(__MINGW32__)
 	gmtime_s(&utc, &when);
 	localtime_s(&lcl, &when);
 	#else
@@ -154,7 +154,7 @@ const gTime& gTime::operator=(time_t t)
 {
 	struct tm ptm;
 
-	#ifdef _MSC_VER
+	#if defined(_MSC_VER) || defined(__MINGW32__)
 	gmtime_s(&ptm, &t);
 	#else
 	gmtime_r(&t, &ptm);
@@ -242,10 +242,10 @@ double gTime::toThetaGMST() const
 	              (8640184.812866 + TU * (0.093104 - TU * 6.2e-06));
 
 	GMST = fmod((GMST + KSEC_PER_DAY * OMEGA_E * UT),KSEC_PER_DAY);
-	Theta_JD=(K2PI * (GMST / KSEC_PER_DAY));
+	Theta_JD=(2.*M_PI * (GMST / KSEC_PER_DAY));
 
 	if(Theta_JD <0.0)
-		Theta_JD+=K2PI;
+		Theta_JD+=2.*M_PI;
 
 	return Theta_JD;
 }
@@ -254,7 +254,7 @@ double gTime::toThetaGMST() const
 // Definition: Calculate Theta Angle at Local Mean Time for the Julian date.
 double gTime::toThetaLMST(double longitude) const
 {
-	return fmod(toThetaGMST() + longitude,  K2PI);
+	return fmod(toThetaGMST() + longitude,  2.*M_PI);
 }
 
 

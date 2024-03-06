@@ -1,0 +1,714 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Stellarium's team
+# This file is distributed under the same license as the stellarium-remotecontrol package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+# Translators:
+# Alexander V. Wolf <alex.v.wolf@gmail.com>, 2022
+# Vaida Murale, 2023
+# Gediminas Tauras, 2024
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: stellarium-remotecontrol\n"
+"Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
+"POT-Creation-Date: 2024-03-01 08:54+0700\n"
+"PO-Revision-Date: 2022-10-05 14:25+0000\n"
+"Last-Translator: Gediminas Tauras, 2024\n"
+"Language-Team: Lithuanian (https://app.transifex.com/stellarium/teams/80998/lt/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: lt\n"
+"Plural-Forms: nplurals=4; plural=(n % 10 == 1 && (n % 100 > 19 || n % 100 < 11) ? 0 : (n % 10 >= 2 && n % 10 <=9) && (n % 100 > 19 || n % 100 < 11) ? 1 : n % 1 != 0 ? 2: 3);\n"
+
+#: plugins/RemoteControl/webroot/js/api/actions.js:60
+msgid "Could not retrieve action list"
+msgstr "Nepavyko gauti veiksmų sąrašo"
+
+#: plugins/RemoteControl/webroot/js/api/actions.js:88
+msgid "Action '%1' not accepted by server: "
+msgstr "Veiksmas '%1' nepriimtas serverio:"
+
+#: plugins/RemoteControl/webroot/js/api/actions.js:95
+msgid "Error sending action '%1' to server: "
+msgstr "Klaida siunčiant veiksmą '%1' į serverį:"
+
+#: plugins/RemoteControl/webroot/js/api/location.js:33
+#: plugins/RemoteControl/webroot/js/api/location.js:61
+#: plugins/RemoteControl/webroot/js/api/search.js:188
+msgid "Error performing search"
+msgstr "Klaida vykdant paiešką"
+
+#: plugins/RemoteControl/webroot/js/api/location.js:125
+msgid "Could not retrieve country list"
+msgstr "Nepavyko gauti šalių sąrašo"
+
+#: plugins/RemoteControl/webroot/js/api/location.js:138
+msgid "Could not retrieve planet list"
+msgstr "Nepavyko gauti planetų sąrašo"
+
+#: plugins/RemoteControl/webroot/js/api/properties.js:28
+msgid "Could not retrieve property list"
+msgstr "Nepavyko gauti savybių sąrašo"
+
+#: plugins/RemoteControl/webroot/js/api/properties.js:89
+#: plugins/RemoteControl/webroot/js/api/properties.js:110
+msgid "Property '%1' not accepted by server: "
+msgstr "Savybė '%1' nepriimama serverio:"
+
+#: plugins/RemoteControl/webroot/js/api/properties.js:96
+msgid "Error sending property '%1' to server: "
+msgstr "Klaida siunčiant savybę '%1' į serverį:"
+
+#: plugins/RemoteControl/webroot/js/api/remotecontrol.js:197
+msgid "Error sending command to server: "
+msgstr "Klaida siunčiant komandą į serverį:"
+
+#: plugins/RemoteControl/webroot/js/api/scripts.js:27
+msgid "Could not retrieve script list"
+msgstr "Nepavyko gauti scenarijų sąrašo"
+
+#: plugins/RemoteControl/webroot/js/api/search.js:35
+msgid "querying"
+msgstr "užklausa vykdoma"
+
+#: plugins/RemoteControl/webroot/js/api/search.js:44
+msgid "Error (%1)"
+msgstr "Klaida (%1)"
+
+#: plugins/RemoteControl/webroot/js/api/search.js:60
+msgid "Error performing Simbad lookup"
+msgstr "Klaida vykdant Simbad paiešką"
+
+#: plugins/RemoteControl/webroot/js/api/search.js:79 index.html:223
+#: tablet7in.html:240
+msgid "idle"
+msgstr "neveiklus"
+
+#: plugins/RemoteControl/webroot/js/api/search.js:105
+msgid "Error loading object types"
+msgstr "Klaida įkeliant objekto tipus"
+
+#: plugins/RemoteControl/webroot/js/api/search.js:138
+msgid "Error getting object list"
+msgstr "Klaida gaunant objektų sąrašą"
+
+#: plugins/RemoteControl/webroot/js/api/search.js:200
+msgid "waiting"
+msgstr "laukiama"
+
+#: plugins/RemoteControl/webroot/js/api/viewoptions.js:38
+msgid "Could not retrieve projection list"
+msgstr "Nepavyko gauti projekcijų sąrašo"
+
+#: plugins/RemoteControl/webroot/js/api/viewoptions.js:51
+#: plugins/RemoteControl/webroot/js/api/viewoptions.js:64
+msgid "Could not retrieve landscape list"
+msgstr "Nepavyko gauti kraštovaizdžių sąrašo"
+
+#: plugins/RemoteControl/webroot/js/plugins/scenery3d.js:22
+#: plugins/RemoteControl/webroot/js/ui/scripts.js:76 index.html:684
+#: index.html:746 tablet7in.html:743 tablet7in.html:803
+msgid "-none-"
+msgstr "-nėra-"
+
+#: plugins/RemoteControl/webroot/js/plugins/scenery3d.js:28
+msgid "(Currently loading: %1)"
+msgstr "(Dabar įkeliama: %1)"
+
+#: plugins/RemoteControl/webroot/js/plugins/scenery3d.js:71
+msgid "Could not retrieve Scenery3d list"
+msgstr "Nepavyko gauti Scenery3d sąrašo"
+
+#: plugins/RemoteControl/webroot/js/ui/actions.js:44
+#: plugins/RemoteControl/webroot/js/ui/actions.js:77
+msgid "on"
+msgstr "ij."
+
+#: plugins/RemoteControl/webroot/js/ui/actions.js:44
+#: plugins/RemoteControl/webroot/js/ui/actions.js:77
+msgid "off"
+msgstr "išj."
+
+#: plugins/RemoteControl/webroot/js/ui/combobox.js:58
+msgid "Show All Items"
+msgstr "Rodyti visus elementus"
+
+#: plugins/RemoteControl/webroot/js/ui/combobox.js:124
+msgid "Input did not match any item"
+msgstr "Įvestis neatitiko jokio elemento"
+
+#: plugins/RemoteControl/webroot/js/ui/search.js:285
+msgid "No current selection"
+msgstr "Nėra dabartinio pasirinkimo"
+
+#: index.html:5 tablet7in.html:5
+msgid "Stellarium remote control plugin"
+msgstr "Stellarium nuotolinio valdymo įskiepis"
+
+#: index.html:17 tablet7in.html:18
+msgid "Please wait, loading"
+msgstr "Palaukite, kraunama"
+
+#: index.html:26 tablet7in.html:27
+msgid "Stellarium remote control"
+msgstr "Stellarium nuotolinis valdymas"
+
+#: index.html:30 tablet7in.html:31
+msgid "Main controls"
+msgstr "Pagrindiniai valdymo elementai"
+
+#: index.html:33 tablet7in.html:38
+msgid "DSO"
+msgstr "DSO"
+
+#: index.html:36
+msgid "Actions and scripts"
+msgstr "Veiksmai ir scenarijai"
+
+#: index.html:39 tablet7in.html:45
+msgid "Scenery3d"
+msgstr "Scenery3d"
+
+#: index.html:77
+msgid "Pause"
+msgstr "Pauzė"
+
+#: index.html:82 tablet7in.html:183
+msgid "Time jumps"
+msgstr "Laiko šuoliai"
+
+#: index.html:86 tablet7in.html:187
+msgid "Solar hour"
+msgstr "Saulės valanda"
+
+#: index.html:87 tablet7in.html:188
+msgid "Solar day"
+msgstr "saulės diena"
+
+#: index.html:88 tablet7in.html:189
+msgid "Solar week"
+msgstr "Saulės savaitė"
+
+#: index.html:90 tablet7in.html:191
+msgid "Calendar year"
+msgstr "Kalendoriniai metai"
+
+#: index.html:91 tablet7in.html:192
+msgid "10 Calendar years"
+msgstr "10 Kalendorinių metų"
+
+#: index.html:92 tablet7in.html:193
+msgid "100 Calendar years"
+msgstr "100 Kalendorinių metų"
+
+#: index.html:95 tablet7in.html:196
+msgid "Sidereal year"
+msgstr "Žvaigždiniai metai"
+
+#: index.html:96 tablet7in.html:197
+msgid "Sidereal century"
+msgstr "Žvaigždinis šimtmetis"
+
+#: index.html:98 tablet7in.html:199
+msgid "Synodic month"
+msgstr "Sinodinis mėnuo"
+
+#: index.html:99 tablet7in.html:200
+msgid "Draconic month"
+msgstr "Drakoniškasis mėnuo"
+
+#: index.html:100 tablet7in.html:201
+msgid "Draconic year"
+msgstr "Drakoniškieji metai"
+
+#: index.html:103 tablet7in.html:204
+msgid "Anomalistic month"
+msgstr "Anomalusis mėnuo"
+
+#: index.html:104 tablet7in.html:205
+msgid "Anomalistic year"
+msgstr "Anomalieji metai"
+
+#: index.html:105 tablet7in.html:206
+msgid "Anomalistic century"
+msgstr "Anomalusis šimtmetis"
+
+#: index.html:107 tablet7in.html:208
+msgid "Mean tropical month"
+msgstr "Vidutinis atogrąžinis mėnuo"
+
+#: index.html:108 tablet7in.html:209
+msgid "Mean tropical year"
+msgstr "Vidutiniai atogrąžiniai metai"
+
+#: index.html:109 tablet7in.html:210
+msgid "Mean tropical century"
+msgstr "Vidutinis atogrąžinis šimtmetis"
+
+#: index.html:111 tablet7in.html:212
+msgid "Tropical year"
+msgstr "Atogrąžiniai metai"
+
+#: index.html:112 tablet7in.html:213
+msgid "Julian year"
+msgstr "Metai pagal Julijų"
+
+#: index.html:113 tablet7in.html:214
+msgid "Julian century"
+msgstr "Šimtmetis pagal Julijų"
+
+#: index.html:115 tablet7in.html:216
+msgid "Gaussian year"
+msgstr "Metai pagal Gausą"
+
+#: index.html:127 tablet7in.html:101
+msgid "View towards horizon at Azimuth"
+msgstr "Vaizdas link horizonto Azimute"
+
+#: index.html:148 tablet7in.html:123
+msgid "Vertical View offset"
+msgstr "Vertikalus rodinio poslinkis"
+
+#: index.html:217 tablet7in.html:234
+msgid "Enter search term. Use TAB to navigate results."
+msgstr "Įveskite paieškos terminą. Naudokite TAB, kad naršytumėte rezultatus."
+
+#: index.html:218 tablet7in.html:235
+msgid "Select and focus"
+msgstr "Pasirinkite ir pažymėkite"
+
+#: index.html:244 tablet7in.html:264
+msgid "Selection mode"
+msgstr "Pasirinkimo režimas"
+
+#: index.html:244 tablet7in.html:264
+msgid "Center on object"
+msgstr "Centruoti į objektą"
+
+#: index.html:244 tablet7in.html:264
+msgid "Center and zoom to object"
+msgstr "Centruokite ir priartinkite objektą"
+
+#: index.html:244 tablet7in.html:264
+msgid "Just mark the object"
+msgstr "Tiesiog pažymėk objektą"
+
+#: index.html:246 tablet7in.html:266
+msgid "Quick select"
+msgstr "Greitasis pasirinkimas"
+
+#: index.html:250 tablet7in.html:270
+msgid "Earth"
+msgstr "Žemė"
+
+#: index.html:250 tablet7in.html:270
+msgid "Pluto"
+msgstr "Plutonas"
+
+#: index.html:256 tablet7in.html:299
+msgid "Current selection"
+msgstr "Dabartinis pasirinkimas"
+
+#: index.html:273 tablet7in.html:326
+msgid "Milky Way brightness:"
+msgstr "Paukščių tako ryškumas:"
+
+#: index.html:278 tablet7in.html:338
+msgid "Digitized Sky Survey"
+msgstr "Skaitmeninė dangaus apžvalga"
+
+#: index.html:279 tablet7in.html:339
+msgid "HiPS Survey"
+msgstr "HiPS apklausa"
+
+#: index.html:292 tablet7in.html:355
+msgid "Show planet markers"
+msgstr "Rodyti planetų užuominas"
+
+#: index.html:293 tablet7in.html:356
+msgid "Show planet orbits"
+msgstr "Rodyti planetų orbitas"
+
+#: index.html:294 tablet7in.html:357
+msgid "Show planet orbits only"
+msgstr "Rodyti tik planetų orbitas"
+
+#: index.html:295 tablet7in.html:358
+msgid "Show orbit for selected planet"
+msgstr "Rodyti  pasirinktos planetos orbitą"
+
+#: index.html:296 tablet7in.html:359
+msgid "Show planet trails"
+msgstr "Rodyti planetų takus"
+
+#: index.html:297 tablet7in.html:360
+msgid "Show trail only for selected planet"
+msgstr "Rodyti  tik pasirinktos planetos takelį"
+
+#: index.html:302 tablet7in.html:364
+msgid "Scale Moon:"
+msgstr "Masteliuoti Mėnulį:"
+
+#: index.html:303
+msgid "Scale Sun:"
+msgstr "Masteliuoti Saulę:"
+
+#: index.html:304
+msgid "Scale Planets:"
+msgstr "Masteliuoti planetas:"
+
+#: index.html:305 tablet7in.html:368
+msgid "Scale minor bodies:"
+msgstr "Mažesnių kūnų mastelis:"
+
+#: index.html:336 tablet7in.html:414
+msgid "Extinction Coefficient:"
+msgstr "Ekstinkcijos koeficientas:"
+
+#: index.html:340 tablet7in.html:419
+msgid "Shooting Stars"
+msgstr "Krintančios žvaigždės"
+
+#: index.html:341 tablet7in.html:420
+msgid "ZHR:"
+msgstr "ZHR:"
+
+#: index.html:384 tablet7in.html:477
+msgid ""
+"Instantaneous circles of earth´s axis on its motion around ecliptical poles."
+" Displayed on Earth only."
+msgstr ""
+"Žemės ašies judėjimo aplink ekliptikos polius momentiniai apskritimai  . "
+"Rodoma tik Žemėje."
+
+#: index.html:400
+msgid "Center"
+msgstr "Centras"
+
+#: index.html:418 tablet7in.html:486
+msgid "Solstices"
+msgstr "Saulėgrįžos"
+
+#: index.html:419 tablet7in.html:487
+msgid "Crossquarters"
+msgstr "Kryžminiai ketvirčiai"
+
+#: index.html:420 tablet7in.html:488
+msgid "Major Standstill"
+msgstr "Didysis sustojimas"
+
+#: index.html:421 tablet7in.html:489
+msgid "Minor Standstill"
+msgstr "Mažasis sustojimas"
+
+#: index.html:431 tablet7in.html:498
+msgid "Current Planet:"
+msgstr "Dabartinė planeta:"
+
+#: index.html:469 tablet7in.html:534
+msgid "Catalogue of Reflection Nebulae (Van den Bergh, 1966)"
+msgstr " Atspindžio ūkų katalogas(Van den Bergh, 1966)"
+
+#: index.html:516 tablet7in.html:552
+msgid ""
+"Catalogue of southern stars embedded in nebulosity (van den Bergh+, 1975)"
+msgstr "Pietinių žvaigždžių,  įterptų į ūkus katalogas (van den Bergh+, 1975)"
+
+#: index.html:554
+msgid "Objects without identifier"
+msgstr "Objektai be identifikatoriaus"
+
+#: index.html:572
+msgid "Open Star clusters"
+msgstr "Padrikieji žvaigždžių spiečiai"
+
+#: index.html:573
+msgid "Globular Star clusters"
+msgstr "Kamuoliniai žvaigždžių spiečiai"
+
+#: index.html:580 tablet7in.html:626
+msgid "Bright Nebulae"
+msgstr "Ryškūs ūkai"
+
+#: index.html:581 tablet7in.html:627
+msgid "Dark Nebulae"
+msgstr "Tamsieji ūkai"
+
+#: index.html:582 tablet7in.html:628
+msgid "Planetary Nebulae"
+msgstr "Planetiškieji Ūkai"
+
+#: index.html:584
+msgid "Galaxy clusters"
+msgstr "Galaktikų spiečiai"
+
+#: index.html:592 tablet7in.html:637
+msgid "Labels and markers"
+msgstr "Pavadinimai ir žymos"
+
+#: index.html:605 tablet7in.html:650
+msgid "Limit angular size (arcmin):"
+msgstr "Ribokite kampinį dydį (arcmin):"
+
+#: index.html:617 tablet7in.html:662
+msgid "Use associated planet and position"
+msgstr "Naudoti susijusią planetą ir poziciją"
+
+#: index.html:628 tablet7in.html:671
+msgid "Show illumination"
+msgstr "Rodyti apšvietimą"
+
+#: index.html:633 tablet7in.html:677
+msgid "Current landscape"
+msgstr "Dabartinis kraštovaizdis"
+
+#: index.html:645 tablet7in.html:690
+msgid "Show lines with thickness"
+msgstr "Rodyti linijas su storio nustatymu"
+
+#: index.html:650 tablet7in.html:695
+msgid "Show asterisms with thickness"
+msgstr "Rodyti asterizmus su storio nustatymu"
+
+#: index.html:654 tablet7in.html:699
+msgid "Show ray helpers with thickness"
+msgstr "Rodyti spindulio pagalbininkus su storio nustatymu"
+
+#: index.html:662 tablet7in.html:709
+msgid "Show boundaries with thickness"
+msgstr "Rodyti ribas su storio nustatymu"
+
+#: index.html:667 tablet7in.html:714
+msgid "Constellation selection isolated"
+msgstr "Žvaigždyno pasirinkimas izoliuotas"
+
+#: index.html:671 tablet7in.html:718
+msgid "Current sky culture"
+msgstr "Dabartinė dangaus kultūra"
+
+#: index.html:684 tablet7in.html:743
+msgid "Active script:"
+msgstr "Aktyvus scenarijus:"
+
+#: index.html:685 tablet7in.html:744
+msgid "Run selected script"
+msgstr "Vykdyti pasirinktą scenarijų"
+
+#: index.html:685 tablet7in.html:744
+msgid "Stop current script"
+msgstr "Sustabdyti esamą scenarijų"
+
+#: index.html:690 tablet7in.html:41 tablet7in.html:728
+msgid "Actions"
+msgstr "Veiksmai"
+
+#: index.html:694 tablet7in.html:732
+msgid "Run/toggle action"
+msgstr "Vykdyti/perjungti veiksmą"
+
+#: index.html:705 tablet7in.html:767
+msgid "Planet map"
+msgstr "Planetų žemėlapis"
+
+#: index.html:706 tablet7in.html:768
+msgid "Planet map pointer"
+msgstr "Planetos žemėlapio rodyklė"
+
+#: index.html:710 tablet7in.html:772
+msgid "Type to search location"
+msgstr "Įveskite paieškos vietą"
+
+#: index.html:744 tablet7in.html:801
+msgid "Interaction"
+msgstr "Sąveika"
+
+#: index.html:745 tablet7in.html:802
+msgid "Current scene:"
+msgstr "Dabartinė scena:"
+
+#: index.html:748 tablet7in.html:805
+msgid "View controls"
+msgstr "Peržiūrėti valdiklius"
+
+#: index.html:754 tablet7in.html:811
+msgid "Movement controls"
+msgstr "Judesio valdymas"
+
+#: index.html:766 tablet7in.html:823
+msgid "Torchlight"
+msgstr "Žibintuvėlis"
+
+#: index.html:773 tablet7in.html:830
+msgid "Scene selection"
+msgstr "Scenos pasirinkimas"
+
+#: index.html:777 tablet7in.html:834
+msgid "Load selected scene"
+msgstr "Įkelti pasirinktą sceną"
+
+#: index.html:801 tablet7in.html:859
+msgid "No response from server"
+msgstr "Nėra atsakymo iš serverio"
+
+#: index.html:802 tablet7in.html:860
+msgid "No response from server for %1 seconds. Is Stellarium still running?"
+msgstr "Nėra atsakymo iš serverio jau %1 sek.. Ar Stellarium vis dar veikia?"
+
+#: tablet7in.html:32
+msgid "Time Jump"
+msgstr "Laiko šuoliai"
+
+#: tablet7in.html:37
+msgid "Grids"
+msgstr "Tinkleliai"
+
+#: tablet7in.html:97
+msgid "Up/Left"
+msgstr "Aukštyn/Kairėn"
+
+#: tablet7in.html:97
+msgid "Up"
+msgstr "Aukštyn"
+
+#: tablet7in.html:97
+msgid "Up/Right"
+msgstr "Aukštyn/Dešinėn"
+
+#: tablet7in.html:97
+msgid "Left"
+msgstr "Kairėn"
+
+#: tablet7in.html:97
+msgid "Focus on selected object"
+msgstr "Susitelkite į pasirinktą objektą."
+
+#: tablet7in.html:97
+msgid "Focus on selection"
+msgstr "Susikoncentruokite į pasirinkimą."
+
+#: tablet7in.html:97
+msgid "Right"
+msgstr "Dešinėn"
+
+#: tablet7in.html:97
+msgid "Down/Left"
+msgstr "Žemyn/Kairėn"
+
+#: tablet7in.html:97
+msgid "Down"
+msgstr "Žemyn"
+
+#: tablet7in.html:97
+msgid "Down/Right"
+msgstr "Žemyn/Dešinėn"
+
+#: tablet7in.html:271
+msgid "Sirius"
+msgstr "Sirijus"
+
+#: tablet7in.html:272
+msgid "Arcturus"
+msgstr "Arktūras"
+
+#: tablet7in.html:273
+msgid "Capella"
+msgstr "Kapela"
+
+#: tablet7in.html:274
+msgid "Vega"
+msgstr "Vega"
+
+#: tablet7in.html:275
+msgid "Deneb"
+msgstr "Denebas"
+
+#: tablet7in.html:276
+msgid "Altair"
+msgstr "Altayras"
+
+#: tablet7in.html:277
+msgid "Andromeda Galaxy"
+msgstr "Andromedos galaktika"
+
+#: tablet7in.html:278
+msgid "Hercules Cluster"
+msgstr "Heraklio spiečius"
+
+#: tablet7in.html:279
+msgid "Orion Nebula"
+msgstr "Oriono ūkas"
+
+#: tablet7in.html:280
+msgid "Eta Carinae Nebula"
+msgstr "Eta Carinae  ūkas"
+
+#: tablet7in.html:281
+msgid "47 Tucanae Cluster"
+msgstr "47 Tucanae spiečius"
+
+#: tablet7in.html:282
+msgid "Aries"
+msgstr "Avinas"
+
+#: tablet7in.html:283
+msgid "Taurus"
+msgstr "Jautis"
+
+#: tablet7in.html:284
+msgid "Gemini"
+msgstr "Dvyniai"
+
+#: tablet7in.html:285
+msgid "Cancer"
+msgstr "Vėžys"
+
+#: tablet7in.html:286
+msgid "Leo"
+msgstr "Liūtas"
+
+#: tablet7in.html:287
+msgid "Virgo"
+msgstr "Mergelė"
+
+#: tablet7in.html:288
+msgid "Libra"
+msgstr "Svarstyklės"
+
+#: tablet7in.html:289
+msgid "Scorpius"
+msgstr "Skorpionas"
+
+#: tablet7in.html:290
+msgid "Sagittarius"
+msgstr "Šaulys"
+
+#: tablet7in.html:291
+msgid "Capricornus"
+msgstr "Ožiaragis"
+
+#: tablet7in.html:292
+msgid "Aquarius"
+msgstr "Vandenis"
+
+#: tablet7in.html:293
+msgid "Pisces"
+msgstr "Žuvys"
+
+#: tablet7in.html:752
+msgid "Favorites"
+msgstr "Mėgstamiausi"
+
+#: tablet7in.html:754
+msgid "Show 1"
+msgstr "Rodyti 1"
+
+#: tablet7in.html:755
+msgid "Remove Labels and Images"
+msgstr "Pašalinkite etiketes ir paveikslėlius."
+
+#: tablet7in.html:755
+msgid "Cleanup Screen"
+msgstr "Ekrano valymas "

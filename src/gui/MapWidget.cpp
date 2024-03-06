@@ -22,6 +22,8 @@
 #include <cmath>
 #include <QPainter>
 #include <QMouseEvent>
+#include "StelLocationMgr.hpp"
+#include "StelApp.hpp"
 
 namespace
 {
@@ -32,7 +34,13 @@ MapWidget::MapWidget(QWidget* parent)
 	: QWidget(parent)
 	, map(":/graphicGui/miscWorldMap.jpg")
 	, locationMarker(":/graphicGui/uieMapPointer.png")
+	, markerVisible(true)
 {
+}
+
+void MapWidget::setMarkerVisible(bool visible)
+{
+	markerVisible=visible;
 }
 
 void MapWidget::setMarkerPos(double longitude, double latitude)
@@ -52,7 +60,11 @@ void MapWidget::mousePressEvent(QMouseEvent* event)
 
 	const auto lat = (pos.y() - mapRect.center().y()) / mapRect.height() * -180;
 	const auto lon = (pos.x() - mapRect.center().x()) / mapRect.width()  * 360;
-	emit positionChanged(lon, lat);
+
+	StelLocationMgr* locationMgr = &StelApp::getInstance().getLocationMgr();
+	QColor color=locationMgr->getColorForCoordinates(lon, lat);
+
+	emit positionChanged(lon, lat, color);
 }
 
 void MapWidget::setMap(const QPixmap &map)
@@ -76,16 +88,19 @@ void MapWidget::paintEvent(QPaintEvent*)
 
 	painter.drawPixmap(mapRect.topLeft(), scaledMap);
 
-	// We want the marker to have odd width, so that the arrow tip is one pixel wide.
-	auto locMarkerWidth = int(locationMarker.width() * (ratio / GUI_PIXMAPS_SCALE));
-	if(locMarkerWidth % 2 == 0)
-		++locMarkerWidth;
-	const auto scaledMarker = locationMarker.scaledToWidth(locMarkerWidth, Qt::SmoothTransformation);
+	if (markerVisible)
+	{
+		// We want the marker to have odd width, so that the arrow tip is one pixel wide.
+		auto locMarkerWidth = int(locationMarker.width() * (ratio / GUI_PIXMAPS_SCALE));
+		if(locMarkerWidth % 2 == 0)
+			++locMarkerWidth;
+		const auto scaledMarker = locationMarker.scaledToWidth(locMarkerWidth, Qt::SmoothTransformation);
 
-	const auto markerCenterPosX = std::lround(mapRect.left() + (markerLon + 180) /  360. * scaledMap.width() );
-	const auto markerCenterPosY = std::lround(mapRect.top()  + (markerLat -  90) / -180. * scaledMap.height());
+		const auto markerCenterPosX = std::lround(mapRect.left() + (markerLon + 180) /  360. * scaledMap.width() );
+		const auto markerCenterPosY = std::lround(mapRect.top()  + (markerLat -  90) / -180. * scaledMap.height());
 
-	painter.drawPixmap(markerCenterPosX - scaledMarker.width()/2,
-					   markerCenterPosY - scaledMarker.height(),
-					   scaledMarker);
+		painter.drawPixmap(markerCenterPosX - scaledMarker.width()/2,
+				   markerCenterPosY - scaledMarker.height(),
+				   scaledMarker);
+	}
 }

@@ -27,7 +27,7 @@ Also look into the User Guide before reporting unexpected but correct behaviour.
 Don't report in this case.
 
 If you miss translations, please help us with your language and join our 
-translators at [Transifex](https://www.transifex.com/stellarium/stellarium/dashboard/).
+translators at [Transifex](https://app.transifex.com/stellarium/stellarium/dashboard/).
 
 If the bug still persists, or you're find any typos, errors, or new feature suggestions 
 feel free to open a new issue.

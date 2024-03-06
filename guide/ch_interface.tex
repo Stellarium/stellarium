@@ -61,7 +61,7 @@ The other tab in this window allows you to see or set
 \label{sec:gui:location}
 
 \begin{figure}[htbp]
-\centering\includegraphics[width=0.75\textwidth]{location_dialog.png}
+\centering\includegraphics[width=0.85\textwidth]{location_dialog.png}
 \caption{Location window}
 \label{fig:gui:location}
 \end{figure}
@@ -113,14 +113,24 @@ There are a few ways you can set your location:
 ``use as default'' checkbox, disable ``Get location from Network'',
 and close the location window.
 
+Two settings may influence the landscape when changing locations:
+\begin{description}
+\item[Auto select landscapes] When changing the planet, 
+a fitting landscape panorama will be shown when available. 
+Also, \newFeature{23.2} when clicking on the earth map, 
+a zero-altitude landscape is displayed in the approximate color of that location (taken from the map).
+\item[Auto-enable atmosphere] When changing planet during
+  location change, the atmosphere will be switched as required.
+\end{description}
+
 \subsection{Time Zones}
 \label{sec:gui:location:timezones}
 Locations in Stellarium's location database include their respective
 time zone.\newFeature{0.15.1/0.19.0} When you click on a location in
 the list, the time should be shown in the respective time zone.  If
 daylight time rules exist and you have selected ``Enable daylight
-saving time'', also this civilisatory development is respected. Most
-users will want this setting active.
+saving time'', also this abomination of modern civilisation is respected. Most
+users will require to have this setting active.
 
 When you select ``Use custom time zone'', you can select other time zones.
 Those that start with UTC have no daylight time rules.
@@ -163,7 +173,20 @@ petty-minded assignment of political country names to locations in favour
 of geographical regions. There is only one known habitable planet, one 
 humankind, and one sky. Stellarium users should overcome borders! 
 
-For ``region'' classification of sky cultures we use same regions (see \ref{sec:skycultures:region}) and we follow UN M49 geoscheme\footnote{https://unstats.un.org/unsd/methodology/m49/} with extensions for other planets.
+For the ``region'' classification of sky cultures we use the same regions (see \ref{sec:skycultures:region}), 
+and we follow the UN~M49 geoscheme\footnote{https://unstats.un.org/unsd/methodology/m49/} with extensions for other planets.
+
+\subsection{Observers}
+\label{sec:gui:location:observers}
+
+In the list of Planets you can find entries called \emph{Solar System Observer}, \emph{Jupiter Observer} and 
+similar for each major planet that has moons: Earth, Mars, Jupiter, Saturn, Uranus, and Neptune. 
+These are specialized locations. When switching to them, you will find yourself looking 
+onto the respective observed object (Sun, Jupiter, \ldots) from somewhat above the plane of the Solar system. 
+By pressing \key{\Alt+\arrowkeyleft}/\key{\Alt+\arrowkeyright} you can rotate around a vertical axis through the observed object.
+Likewise, by pressing \key{\Alt+\arrowkeyup}/\key{\Alt+\arrowkeydown} you can change the latitude of observation. Finally, 
+with \key{\Alt+Home}/\key{\Alt+End} you can change the distance from the observed object. 
+
 
 \section{The Configuration Window}
 \label{sec:gui:configuration}
@@ -292,7 +315,7 @@ when the program starts:
 
 \noindent The lowest field allows selection of the correction model for the time
 correction $\Delta T$ (see section~\ref{sec:Concepts:DeltaT}). Default
-is ``Modified Espenak and Meeus (2006)''. Please use other values only if you
+is ``Modified Espenak and Meeus (2006, 2014, 2023)''. Please use other values only if you
 know what you are doing.
 
 \subsection{The Tools Tab}
@@ -324,8 +347,6 @@ and options for screenshots.
 \item[Select single constellation] When active, clicking on a star
   that is member in the constellation lines will make the
   constellation stand out. See section~\ref{sec:starlore:singleConstellations} for details.
-\item[Auto-enabling for the environment] When changing planet during
-  location change, atmosphere will be switched as required.
 \item[Dithering] options to allow select better simulation of sky on different hardware.
 \item[Auto zoom out returns to initial direction of view] When enabled,
   this option changes the behavior of the zoom out key
@@ -350,8 +371,9 @@ and options for screenshots.
   Usually it should be enabled. (See~\ref{sec:Concepts:Parallax:Topocentric})
 \item[Include nutation] Compute the slight wobble of earth's
   axis. This feature is active only about 500 years around J2000.0.
-\item[Auto select landscapes] When changing the planet in the location
-  panel, a fitting landscape panorama will be shown when available.
+\item[Include aberration] Add effect of annual \indexterm{aberration of light} to the object's position (see \ref{sec:Concepts:Aberration}). 
+     Note: This also influences the displayed position in the J2000 frame!
+	 For didactic purposes you can exaggerate the effect by up to $5\times$. 
 \item[Indication for mount mode] You can activate the short display of a message when switching type of used mount.
 \item[Edit keyboard shortcuts\ldots] See section~\ref{sec:gui:help:hotkeys}.
 \item[Mouse cursor timeout] You can decide whether, and when, the
@@ -364,6 +386,17 @@ dialogs can either be moved on sidebar handles (with this switch
 disabled) or by dragging the text itself (enabled), as it is known
 from touch-enabled devices like smartphones. 
 \end{description}
+
+\paragraph{Framerate intent} \label{sec:gui:configuration:tools:fps} The pace of screen updates (frames per second, FPS) depends on several factors: 
+CPU speed, graphics card speed, screen size, number of displayed objects and grids, etc. 
+As is common for interactive programs, the main program thread runs on a single core also on a multicore system. 
+For running Stellarium, a CPU with few but fast cores will appear faster in total than a multicore system at slower CPU cycles.  
+High-end systems may deliver needlessly high framerates, at cost of energy consumption.
+The maximum FPS setting limits the frame rate when Stellarium is interactively operated 
+(zoomed, panned, settings switched, etc.) 
+After a few seconds, when Stellarium is not interactively operated, it falls back to a minimum FPS setting to conserve energy. 
+Of course, when the system cannot even reach this FPS, the factual FPS will be lower and the system may be overloaded.
+Keep in mind that the minimum setting also applies to running scripts (non-interactively).
 
 \paragraph{Font size and font selection} \newFeature{0.18.3} You can change the font sizes for on-screen
 text and GUI dialogs separately.  For some purposes like presentations
@@ -643,15 +676,21 @@ for changing the general appearance of the view of Solar system objects. Some hi
   \item[Planets] will increase the apparent size of major planets.
   \end{description}
 \item[Show orbits] adds a rendition of the orbit or trajectory of an SSO. 
+For efficiency, orbits are not displayed when the object is not inside the screen, 
+unless you set the ``permanently'' option. You can further fine-tune the selection 
+and appearance (width and colors) of orbits with the additional settings. 
 \item[Show trails] plots the apparent path of SSO among the stars as
   seen from the current planet.
 \item[Show planetary nomenclature] displays positions and names of
   surface features officially named by the IAU (See
   Appendix~\ref{ch:Nomenclature}). When the sun is below the horizon
-  at the location of the feature, the label is attenuated. Features like
-  craters are best visible when they are illuminated by a low sun. 
+  at the location of the feature, the label is attenuated. A few special markers 
+  show Centre, North and South poles, east and west points along the equator, 
+  and the subsolar point (where the sun is at the zenith as seen from that feature). 
+  Features like craters are best visible when they are illuminated by a low sun. 
   You can therefore limit the display\newFeature{1.2} to items along the
   \indexterm{terminator} (the border between light and dark on the surface).
+  You can also\newFeature{23.3} mark craters and lunar \emph{maria} (the dark ``seas'') with circles. 
 \item[GRS details\ldots]: The Great Red Spot (GRS) is slowly
   drifting along Jupiter's System~II coordinate system. This button 
   opens a new dialog in which you can adjust the longitude (Jupiter system~II) 
@@ -683,7 +722,7 @@ for changing the general appearance of the view of Solar system objects. Some hi
 \end{figure}
 
 \begin{figure}[p]
-\centering\includegraphics[width=0.75\textwidth]{view_dialog_markings_tab.png}
+\centering\includegraphics[width=0.75\textwidth]{view_dialog_markings_tab.jpg}
 \caption{View Settings Window: Markings Tab}
 \label{fig:gui:view:markings}
 \end{figure}
@@ -719,13 +758,13 @@ and how to extend it with your own photographs.
 \label{sec:gui:view:markings}
 
 \noindent The Markings tab of the View window
-(Fig.~\ref{fig:gui:view:markings}) controls plot various grids and
-lines on celestial sphere. Colors for grids, lines and points can be
+(Fig.~\ref{fig:gui:view:markings}) controls plotting various grids and
+lines on the celestial sphere. Colors for grids, lines and points can be
 adjusted by clicking on the corresponding colored square.  The central
 column governs lines like equator, ecliptic, meridian etc., where each
 can optionally be fine-tuned to \newFeature{0.20.0} show partition
 marks and labels. Color settings are stored immediately, all other
-flags need an explicit saving of the settings (see section
+flags need explicit saving of the settings (see section
 \ref{sec:gui:configuration:main}).
 
 \subsection{The Landscape Tab}
@@ -746,18 +785,11 @@ that selection of a new landscape will alter the location for you.
 The controls at the bottom right of the window operate as follows:
 
 \begin{description}
-\item[Show ground] This turns on and off landscape rendering (same
-  as the button \guibutton{0.6}{bt_ground.png} in the main tool bar).
 \item[Use this landscape as default] Selecting this option will save
   the landscape into the program configuration file so that the current
   landscape will be the one used when Stellarium starts.
-\item[Use associated planet and position] When enabled, selecting a
-  new landscape will automatically update the observer location.
-  Use this if the landscape is not just decoration, but a true
-  representation of a particular site you wish to visit in the simulation.
-\item[Show landscape labels] Landscapes can be configured with a
-  gazetteer of interesting points, e.g., mountain peaks, which can be
-  labeled with this option.
+\item[Show ground] This turns on and off landscape rendering (same
+  as the button \guibutton{0.6}{bt_ground.png} in the main tool bar).
 \item[Show fog] This turns on and off rendering of a band of
   fog/haze along the horizon, when available in this landscape.
 \item[Show illumination] to reflect the ugly developments of our
@@ -765,16 +797,23 @@ The controls at the bottom right of the window operate as follows:
   pollution, e.g., streetlamps, bright windows, or the sky glow of a
   nearby city. This layer, if present, will be mixed in when it is
   dark enough.
-\item[Minimal brightness] Use some minimal brightness
-  setting. Moonless night on very dark locations may appear too dark
-  on your screen. You may want to configure some minimal brightness
-  here.
+\item[Show landscape labels] Landscapes can be configured with a
+  gazetteer of interesting points, e.g., mountain peaks, which can be
+  labeled with this option. Color and font size can also be configured.
+\item[Position from landscape] When enabled, selecting a
+  new landscape will automatically update the observer location.
+  Use this if the landscape is not just decoration, but a true
+  representation of a particular site you wish to visit in the simulation.
+\item[Minimal brightness] Moonless night on very dark locations may appear too dark
+  on your screen. You may want to configure some minimal brightness here.
+  \begin{description}
 \item[from landscape, if given] Landscape authors may decide to
   provide such a minimal brightness value in the \file{landscape.ini}
   file. 
+  \end{description}
 \item[Draw only polygon]\newFeature{0.20.2} If a polygonal horizon line has been
-  defined for the landscape, only draw this. 
-\item[Polygonal line thickness]\newFeature{0.20.2} Set line width for the polygonal line.
+  defined for the landscape, only draw this with the given thickness.
+\item[Transparency] Allow peeking below the horizon. \newFeature{23.3} Note that this may show graphical errors. 
 \end{description}
 
 \noindent Using the button \menu{Add/remove landscapes\ldots}, you can also
@@ -1189,6 +1228,10 @@ or observe the visibility of Mercury, Venus or a comet in the twilight sky.
 You can \newFeature{0.20.3}  draw an ephemeris of 
 two objects at the same time and define custom time step for the ephemeris 
 (Fig.~\ref{fig:gui:AstroCalc:Ephemeris:Asteroids}).
+
+Note: The ephemeris is computed with the current settings for atmosphere, topocentric correction etc. 
+In consequence, e.g.\ magnitudes may be affected by atmospheric absorption and may show unexpected values. 
+Remember to switch off atmosphere etc.\ to create geocentric mean positions as found in almanachs.
 
 \subsection{The ``Risings, Transits, and Settings'' (RTS) Tab}
 \label{sec:gui:AstroCalc:RTS}

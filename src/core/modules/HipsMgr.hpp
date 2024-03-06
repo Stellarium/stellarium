@@ -45,21 +45,16 @@ public:
 	Q_ENUM(State)
 
 	HipsMgr();
-	virtual ~HipsMgr() Q_DECL_OVERRIDE;
-	virtual void init() Q_DECL_OVERRIDE;
-	virtual void deinit() Q_DECL_OVERRIDE;
-	virtual void update(double deltaTime) Q_DECL_OVERRIDE;
-	virtual void draw(StelCore* core) Q_DECL_OVERRIDE;
-	virtual double getCallOrder(StelModuleActionName actionName) const Q_DECL_OVERRIDE;
+	~HipsMgr() override;
+	void init() override;
+	void deinit() override;
+	void update(double deltaTime) override;
+	void draw(StelCore* core) override;
+	double getCallOrder(StelModuleActionName actionName) const override;
 
 	//! Return the hips survey that has a given url.
 	Q_INVOKABLE
 	HipsSurveyP getSurveyByUrl(const QString &url);
-
-	//! Get whether the surveys are displayed.
-	bool getFlagShow(void) const;
-	//! Set whether the surveys are displayed.
-	void setFlagShow(bool b);
 
 	State getState() const {return state;}
 	bool isLoaded() const {return state == Loaded;}
@@ -74,6 +69,11 @@ signals:
 public slots:
 	//! Start to load the default sources.
 	void loadSources();
+
+	//! Get whether the surveys are displayed.
+	bool getFlagShow(void) const;
+	//! Set whether the surveys are displayed.
+	void setFlagShow(bool b);
 
 private slots:
 	// after loading survey list from network, restore the visible surveys from config.ini.

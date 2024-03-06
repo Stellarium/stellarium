@@ -100,6 +100,10 @@ class StelMovementMgr : public StelModule
 		   READ getUserMaxFov
 		   WRITE setUserMaxFov
 		   NOTIFY userMaxFovChanged)
+	Q_PROPERTY(double currentFov
+		   READ getCurrentFov
+		   WRITE setFov
+		   NOTIFY currentFovChanged)
 public:
 	//! Possible mount modes defining the reference frame in which head movements occur.
 	//! MountGalactic and MountSupergalactic is currently only available via scripting API: core.clear("galactic") and core.clear("supergalactic")
@@ -112,7 +116,7 @@ public:
 	Q_ENUM(ZoomingMode)
 
 	StelMovementMgr(StelCore* core);
-	virtual ~StelMovementMgr() Q_DECL_OVERRIDE;
+	~StelMovementMgr() override;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
@@ -124,28 +128,28 @@ public:
 	//! - Enabling/disabling the mouse movement
 	//! - Sets the zoom and movement speeds
 	//! - Sets the auto-zoom duration and mode.
-	virtual void init() Q_DECL_OVERRIDE;
+	void init() override;
 
 	//! Update time-dependent things (triggers a time dragging record if required)
-	virtual void update(double) Q_DECL_OVERRIDE
+	void update(double) override
 	{
 		if (dragTimeMode)
 			addTimeDragPoint(QCursor::pos().x(), QCursor::pos().y());
 	}
 	//! Implement required draw function.  Does nothing.
-	virtual void draw(StelCore*) Q_DECL_OVERRIDE {}
+	void draw(StelCore*) override {}
 	//! Handle keyboard events.
-	virtual void handleKeys(QKeyEvent* event) Q_DECL_OVERRIDE;
+	void handleKeys(QKeyEvent* event) override;
 	//! Handle mouse movement events.
-	virtual bool handleMouseMoves(int x, int y, Qt::MouseButtons b) Q_DECL_OVERRIDE;
+	bool handleMouseMoves(int x, int y, Qt::MouseButtons b) override;
 	//! Handle mouse wheel events.
-	virtual void handleMouseWheel(class QWheelEvent* event) Q_DECL_OVERRIDE;
+	void handleMouseWheel(class QWheelEvent* event) override;
 	//! Handle mouse click events.
-	virtual void handleMouseClicks(class QMouseEvent* event) Q_DECL_OVERRIDE;
+	void handleMouseClicks(class QMouseEvent* event) override;
 	// allow some keypress interaction by plugins.
-	virtual double getCallOrder(StelModuleActionName actionName) const Q_DECL_OVERRIDE;
+	double getCallOrder(StelModuleActionName actionName) const override;
 	//! Handle pinch gesture.
-	virtual bool handlePinch(qreal scale, bool started) Q_DECL_OVERRIDE;
+	bool handlePinch(qreal scale, bool started) override;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods specific to StelMovementMgr
@@ -176,6 +180,9 @@ public:
 	void moveToObject(const StelObjectP& target, float moveDuration = 1., ZoomingMode zooming = ZoomNone);
 
 public slots:
+	//! load and process initial viewing position. Can be called later to restore original "default" view.
+	void resetInitViewPos();
+
 	// UNUSED, but scriptable
 	//! Toggle current mount mode between equatorial and altazimuthal
 	void toggleMountMode() {if (getMountMode()==MountAltAzimuthal) setMountMode(MountEquinoxEquatorial); else setMountMode(MountAltAzimuthal);}
@@ -449,6 +456,16 @@ public slots:
 	void setUserMaxFov(double max);
 	double getUserMaxFov() const {return userMaxFov; }
 
+	void setFov(double f)
+	{
+		if (core->getCurrentProjectionType()==StelCore::ProjectionCylinderFill)
+			currentFov=180.0;
+		else
+			currentFov=qBound(minFov, f, maxFov);
+
+		emit currentFovChanged(currentFov);
+	}
+
 signals:
 	//! Emitted when the tracking property changes
 	void flagTrackingChanged(bool b);
@@ -462,6 +479,8 @@ signals:
 	void flagEnableMoveKeysChanged(bool b);
 	void flagEnableZoomKeysChanged(bool b);
 	void userMaxFovChanged(double fov);
+	void currentFovChanged(double fov);
+	void currentDirectionChanged();
 
 private slots:
 	//! Called when the selected object changes.
@@ -483,13 +502,7 @@ private:
 	StelCore* core;          // The core on which the movement are applied
 	QSettings* conf;
 	class StelObjectMgr* objectMgr;
-	void setFov(double f)
-	{
-		if (core->getCurrentProjectionType()==StelCore::ProjectionCylinderFill)
-			currentFov=180.0;
-		else
-			currentFov=qBound(minFov, f, maxFov);
-	}
+
 	// immediately add deltaFov argument to FOV - does not change private var.
 	void changeFov(double deltaFov);
 

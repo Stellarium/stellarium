@@ -17,10 +17,6 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifdef CYGWIN
- #include <malloc.h>
-#endif
-
 #include "StelUtils.hpp"
 #include "VecMath.hpp"
 #include "StelLocaleMgr.hpp"
@@ -37,22 +33,26 @@
 #include <cmath> // std::fmod
 #include <zlib.h>
 
+#ifdef CYGWIN
+  #include <malloc.h>
+#endif
+
+#if defined Q_OS_FREEBSD || defined Q_OS_OPENBSD || defined Q_OS_NETBSD || defined Q_OS_HAIKU || defined Q_OS_SOLARIS
+  #include <sys/utsname.h>
+#endif
+
 namespace StelUtils
 {
 //! Return the full name of stellarium, e.g. "Stellarium 23.1"
 QString getApplicationName()
 {
-#if defined(GIT_REVISION)
-	return QString("Stellarium %1+").arg(StelUtils::getApplicationPublicVersion());
-#else
-	return QString("Stellarium %1").arg(StelUtils::getApplicationPublicVersion());
-#endif
+	return QString("Stellarium %1").arg(STELLARIUM_BUIDING_VERSION); // see lines 158-188 in CMakeLists.txt
 }
 
-//! Return the version of stellarium, e.g. "0.23.1"
+//! Return the version of stellarium, e.g. "23.1.0"
 QString getApplicationVersion()
 {
-#if defined(GIT_REVISION)
+#ifdef GIT_REVISION
 	return QString("%1-%2 [%3]").arg(PACKAGE_VERSION, GIT_REVISION, GIT_BRANCH);
 #else
 	return QString(PACKAGE_VERSION);
@@ -65,98 +65,32 @@ QString getApplicationPublicVersion()
 	return QString(STELLARIUM_PUBLIC_VERSION);
 }
 
+//! Return the series of stellarium, e.g. "23.0"
+QString getApplicationSeries()
+{
+	return QString(STELLARIUM_SERIES);
+}
+
 QString getUserAgentString()
 {
-	// Get info about operating system
-	QString os = StelUtils::getOperatingSystemInfo();
-	if (os.contains("FreeBSD"))
-		os = "FreeBSD";
-	else if (os.contains("NetBSD"))
-		os = "NetBSD";
-	else if (os.contains("OpenBSD"))
-		os = "OpenBSD";
-
 	// Set user agent as "Stellarium/$version$ ($operating system$; $CPU architecture$)"
-	return QString("Stellarium/%1 (%2; %3)").arg(StelUtils::getApplicationPublicVersion(), os, QSysInfo::currentCpuArchitecture());
+	return QString("Stellarium/%1 (%2; %3)").arg(StelUtils::getApplicationPublicVersion(), StelUtils::getOperatingSystemInfo(), QSysInfo::currentCpuArchitecture());
 }
 
 QString getOperatingSystemInfo()
 {
 	QString OS = QSysInfo::prettyProductName();
 
-	#if (defined(Q_OS_FREEBSD) || defined(Q_OS_NETBSD) || defined(Q_OS_OPENBSD) || defined(Q_OS_SOLARIS))
-	// Check FreeBSD, OpenBSD, NetBSD and Sun Solaris operating systems
-	QProcess uname;
-	uname.start("/usr/bin/uname", { "-srm" });
-	uname.waitForStarted();
-	uname.waitForFinished();
-	const QString BSDsystem = uname.readAllStandardOutput();
-	OS = BSDsystem.trimmed();
+	#if defined Q_OS_FREEBSD || defined Q_OS_OPENBSD || defined Q_OS_NETBSD || defined Q_OS_HAIKU || defined Q_OS_SOLARIS
+	struct utsname buff;
+	if (uname(&buff) != -1)
+		OS = QString("%1 %2").arg(buff.sysname, buff.release);
 	#endif
 
 	if (OS.isEmpty() || OS==QStringLiteral("unknown"))
 		OS = "Unknown operating system";
 
 	return OS;
-}
-
-QString getCompilerInfo()
-{
-	QString compilerInfo = "";
-
-	#if defined __GNUC__ && !defined __clang__ && !defined __INTEL_COMPILER
-	#ifdef __MINGW32__
-		#define COMPILER "MinGW GCC"
-	#else
-		#define COMPILER "GCC"
-	#endif
-	compilerInfo = QString("%1 %2.%3.%4").arg(COMPILER).arg(__GNUC__).arg(__GNUC_MINOR__).arg(__GNUC_PATCHLEVEL__);
-	#elif defined __clang__
-	#ifdef Q_OS_MACOS
-		#define COMPILER "Clang (Apple)"
-	#else
-		#define COMPILER "Clang"
-	#endif
-	compilerInfo = QString("%1 %2.%3.%4").arg(COMPILER).arg(__clang_major__).arg(__clang_minor__).arg(__clang_patchlevel__);
-	#elif defined __INTEL_COMPILER
-	QString iccVer = QString::number(__INTEL_COMPILER);
-	int iccVL = iccVer.length();
-	compilerInfo = QString("%1 %2.%3.%4.%5").arg("Intel C/C++").arg(iccVer.mid(0, iccVL-2)).arg(iccVer.mid(iccVL-2,1)).arg(iccVer.mid(iccVL-1,1)).arg(__INTEL_COMPILER_BUILD_DATE);
-	#elif defined _MSC_VER
-	// Defines for _MSC_VER macro: https://docs.microsoft.com/ru-ru/cpp/preprocessor/predefined-macros?view=msvc-160
-	const QMap<int, QString> map = {
-		{1310, "MSVC++ 7.1 (Visual Studio 2003)"          },
-		{1400, "MSVC++ 8.0 (Visual Studio 2005)"          },
-		{1500, "MSVC++ 9.0 (Visual Studio 2008)"          },
-		{1600, "MSVC++ 10.0 (Visual Studio 2010)"         },
-		{1700, "MSVC++ 11.0 (Visual Studio 2012)"         },
-		{1800, "MSVC++ 12.0 (Visual Studio 2013)"         },
-		{1900, "MSVC++ 14.0 (Visual Studio 2015)"         },
-		{1910, "MSVC++ 15.0 (Visual Studio 2017 RTW)"     },
-		{1911, "MSVC++ 15.3 (Visual Studio 2017)"         },
-		{1912, "MSVC++ 15.5 (Visual Studio 2017)"         },
-		{1913, "MSVC++ 15.6 (Visual Studio 2017)"         },
-		{1914, "MSVC++ 15.7 (Visual Studio 2017)"         },
-		{1915, "MSVC++ 15.8 (Visual Studio 2017)"         },
-		{1916, "MSVC++ 15.9 (Visual Studio 2017)"         },
-		{1920, "MSVC++ 16.0 (Visual Studio 2019 RTW)"     },
-		{1921, "MSVC++ 16.1 (Visual Studio 2019)"         },
-		{1922, "MSVC++ 16.2 (Visual Studio 2019)"         },
-		{1923, "MSVC++ 16.3 (Visual Studio 2019)"         },
-		{1924, "MSVC++ 16.4 (Visual Studio 2019)"         },
-		{1925, "MSVC++ 16.5 (Visual Studio 2019)"         },
-		{1926, "MSVC++ 16.6 (Visual Studio 2019)"         },
-		{1927, "MSVC++ 16.7 (Visual Studio 2019)"         },
-		{1928, "MSVC++ 16.8, 16.9 (Visual Studio 2019)"   },
-		{1929, "MSVC++ 16.10, 16.11 (Visual Studio 2019)" },
-		{1930, "MSVC++ 17.0 (Visual Studio 2022 RTW)"     },
-		{1931, "MSVC++ 17.1 (Visual Studio 2022)"         },
-		{1932, "MSVC++ 17.2 (Visual Studio 2022)"         },
-	};
-	compilerInfo = map.value(_MSC_VER, "unknown MSVC++ version");
-	#endif
-
-	return compilerInfo;
 }
 
 double hmsStrToHours(const QString& s)
@@ -648,13 +582,23 @@ double getDecAngle(const QString& str)
 	return -0.0;
 }
 
-// Return the first power of two bigger than the given value
 int getBiggerPowerOfTwo(int value)
 {
 	int p=1;
 	while (p<value)
 		p<<=1;
 	return p;
+}
+
+// Return the first power of two smaller than or equal to the given value
+int getSmallerPowerOfTwo(const int value)
+{
+	if (value==0) return 1;
+	const auto bigger = getBiggerPowerOfTwo(value);
+	// Leave exact power of two unchanged
+	if (bigger == value) return value;
+
+	return bigger >> 1;
 }
 
 /*************************************************************************
@@ -686,7 +630,7 @@ void getDateFromJulianDay(const double jd, int *yy, int *mm, int *dd)
 
 	static const long JD_GREG_CAL = 2299161;
 	static const int JB_MAX_WITHOUT_OVERFLOW = 107374182;
-	const long julian = static_cast<long>(floor(jd + 0.5));
+	const long julian = static_cast<long>(std::floor(jd + 0.5));
 
 	long ta, jalpha, tb, tc, td, te;
 
@@ -736,9 +680,9 @@ void getDateFromJulianDay(const double jd, int *yy, int *mm, int *dd)
 
 void getTimeFromJulianDay(const double julianDay, int *hour, int *minute, int *second, int *millis, bool *wrapDay)
 {
-	double frac = julianDay - (floor(julianDay));
+	double frac = julianDay - (std::floor(julianDay));
 	double secs = frac * 24.0 * 60.0 * 60.0 + 0.0001; // add constant to fix floating-point truncation error
-	int s = int(floor(secs));
+	int s = int(std::floor(secs));
 
 	*hour = ((s / (60 * 60))+12);
 	if (*hour>=24)
@@ -755,7 +699,7 @@ void getTimeFromJulianDay(const double julianDay, int *hour, int *minute, int *s
 	*second = s % 60;
 	if(millis)
 	{
-		*millis = int(floor((secs - floor(secs)) * 1000.0));
+		*millis = int(std::floor((secs - std::floor(secs)) * 1000.0));
 	}
 	//qDebug() << "getTimeFromJulianDay:" << QString::number(frac, 'f', 18) << QString::number(secs, 'f', 5) << "~" << s << *hour << *minute << *second;
 }
@@ -941,6 +885,18 @@ QString localeDateString(const int year, const int month, const int day, const i
 	}
 }
 
+QString localeDiscoveryDateString(const QString& discovery)
+{
+	QString ddate = discovery; // YYYY
+	QStringList date = discovery.split("-");
+	if (date.count()==3) // YYYY-MM-DD
+		ddate = QString("%1 %2 %3").arg(QString::number(date.at(2).toInt()), StelLocaleMgr::longGenitiveMonthName(date.at(1).toInt()), date.at(0));
+	if (date.count()==2) // YYYY-MM
+		ddate = QString("%1 %2").arg(StelLocaleMgr::longMonthName(date.at(1).toInt()), date.at(0));
+
+	return ddate;
+}
+
 int getDayOfWeek(int year, int month, int day)
 {
 	double JD;
@@ -1068,8 +1024,8 @@ double getJDFromDate_alg2(const int y, const int m, const int d, const int h, co
 {
 	double extra = (100.0* y) + m - 190002.5;
 	double rjd = 367.0 * y;
-	rjd -= floor(7.0*(y+floor((m+9.0)/12.0))/4.0);
-	rjd += floor(275.0*m/9.0) ;
+	rjd -= std::floor(7.0*(y+std::floor((m+9.0)/12.0))/4.0);
+	rjd += std::floor(275.0*m/9.0) ;
 	rjd += d;
 	rjd += (h + (min + s/60.0)/60.)/24.0;
 	rjd += 1721013.5;
@@ -1147,8 +1103,19 @@ bool isLeapYear(const int year)
 // Meeus, AA 2nd, 1998, ch.7 p.65
 int dayInYear(const int year, const int month, const int day)
 {
-	int k=(isLeapYear(year) ? 1:2);
+	const int k=(isLeapYear(year) ? 1:2);
 	return static_cast<int>(275*month/9) - k*static_cast<int>((month+9)/12) + day -30;
+}
+
+// Find date from day number within year and the year.
+// Meeus, AA 2nd, 1998, ch.7 p.66
+Vec3i dateFromDayYear(const int day, const int year)
+{
+	const int k=(isLeapYear(year) ? 1:2);
+	int month = day<32 ? 1 : static_cast<int>(9.f*(k+day)/275.f+0.98f);
+
+	int monthDay = day - static_cast<int>(275.f*month/9.f) + k*static_cast<int>((month+9)/12.f) + 30;
+	return {year, month, monthDay};
 }
 
 // Return a fractional year like YYYY.ddddd. For negative years, the year number is of course decrease. E.g. -500.5 occurs in -501.
@@ -1364,6 +1331,33 @@ QString hoursToHmsStr(const float hours, const bool lowprecision)
 	return hoursToHmsStr(static_cast<double>(hours), lowprecision);
 }
 
+//! The method to splitting the text by substrings by some limit of string length
+QString wrapText(const QString& s, const int limit)
+{
+	QString result = "";
+	if (s.length()<=limit)
+		result = s;
+	else
+	{
+		QString prepare = "";
+		QStringList data = s.split(" ");
+		for (int i = 0; i<data.size(); i++)
+		{
+			prepare.append(QString(" %1").arg(data.at(i)));
+			if (prepare.length() >= limit)
+			{
+				result.append(QString("<br />%1").arg(data.at(i)));
+				prepare = "";
+			}
+			else
+				result.append(QString(" %1").arg(data.at(i)));
+		}
+	}
+
+	return result;
+}
+
+
 /* /////////////////// DELTA T VARIANTS
 // For the standard epochs for many formulae, we use
 // J2000.0=2000-jan-1.5=2451545.0,
@@ -1384,7 +1378,7 @@ double getDeltaTwithoutCorrection(const double jDay)
 	return 0.;
 }
 
-// Implementation of algorithm by Espenak & Meeus (2006) for DeltaT computation
+// Implementation of algorithm by Espenak & Meeus (2006) and Espenak (2014) for DeltaT computation
 double getDeltaTByEspenakMeeus(const double jDay)
 {
 	int year, month, day;	
@@ -1393,7 +1387,10 @@ double getDeltaTByEspenakMeeus(const double jDay)
 	// Note: the method here is adapted from
 	// "Five Millennium Canon of Solar Eclipses" [Espenak and Meeus, 2006]
 	// A summary is described here:
-	// http://eclipse.gsfc.nasa.gov/SEhelp/deltatpoly2004.html
+	// https://eclipse.gsfc.nasa.gov/SEhelp/deltatpoly2004.html
+	// And updated version:
+	// "Thousand Year Canon of Solar Eclipses 1501 to 2500" [Espenak, 2014]
+	// https://eclipsewise.com/help/deltatpoly2014.html
 
 	double y = yearFraction(year, month, day);
 
@@ -1477,23 +1474,32 @@ double getDeltaTByEspenakMeeus(const double jDay)
 		//r = (63.86 + 0.3345 * t - 0.060374 * std::pow(t,2) + 0.0017275 * std::pow(t,3) + 0.000651814 * std::pow(t,4) + 0.00002373599 * std::pow(t,5));
 		r = ((((0.00002373599*t + 0.000651814)*t + 0.0017275)*t - 0.060374)*t + 0.3345)*t +63.86;
 	}
-	else if (y < 2050)
+	else if (y < 2015)
 	{
-		double t = y - 2000;
-		//r = (62.92 + 0.32217 * t + 0.005589 * std::pow(t,2));
-		r = (0.005589*t +0.32217)*t + 62.92;
+		double t = y - 2005;
+		r = 0.2930*t +64.69;
 	}
-	else if (y < 2150)
+	else if (y < 3000)
 	{
-		//r = (-20 + 32 * std::pow((y-1820)/100,2) - 0.5628 * (2150 - y));
-		// r has been precomputed before, just add the term patching the discontinuity
-		r -= 0.5628*(2150.0-y);
+		double t = y - 2015;
+		r = (0.0039755*t + 0.3645)*t +67.62;
+		// r = 4283.78 at year 3000
+	}
+	else if (y < 3100)
+	{
+		// Default value for Delta T gives r = 4435.68 at year 3000
+		// and r = 5222.88 at year 3100
+		// We introduce a simple method to patch the discontinuity
+		r = 4283.78+(y-3000)*9.391;
 	}
 
 	return r;
 }
 
-// Implementation of algorithm by Espenak & Meeus (2006) with modified formulae for DeltaT computation
+// Values in second for interpolation table 2015..2033.
+static const double IERSDeltaTTable[] = { 67.64, 68.10, 68.59, 68.97, 69.22, 69.36, 69.36, 69.29, 69.20, // observed values for 2015-2023
+ 69.11, 69.04, 69.05, 69.14, 69.34, 69.63, 69.97, 70.32, 70.62, 70.98}; // predicted values for 2024-2033
+// Implementation of algorithm by Espenak & Meeus (2006, 2014) with interpolation and modified formula for 2015-2050
 double getDeltaTByEspenakMeeusModified(const double jDay)
 {
 	int year, month, day;	
@@ -1502,7 +1508,10 @@ double getDeltaTByEspenakMeeusModified(const double jDay)
 	// Note: the method here is adapted from
 	// "Five Millennium Canon of Solar Eclipses" [Espenak and Meeus, 2006]
 	// A summary is described here:
-	// http://eclipse.gsfc.nasa.gov/SEhelp/deltatpoly2004.html
+	// https://eclipse.gsfc.nasa.gov/SEhelp/deltatpoly2004.html
+	// And updated version:
+	// "Thousand Year Canon of Solar Eclipses 1501 to 2500" [Espenak, 2014]
+	// https://eclipsewise.com/help/deltatpoly2014.html
 
 	double y = yearFraction(year, month, day);
 
@@ -1569,34 +1578,44 @@ double getDeltaTByEspenakMeeusModified(const double jDay)
 		double t = y - 2000;
 		r = ((((0.00002373599*t + 0.000651814)*t + 0.0017275)*t - 0.060374)*t + 0.3345)*t +63.86;
 	}
-	// WB: Polynomial data fit from IERS's DeltaT values during 2005-2021, including predicted values until 2032
-	// Data: https://cddis.nasa.gov/archive/products/iers/deltat.data & https://cddis.nasa.gov/archive/products/iers/deltat.preds
-	// Last updated: 2022 Mar 11
-	else if (y < 2032)
+	else if (y < 2015)
 	{
-		double t = y - 2000;
-		r = (-0.00331233402*t + 0.404229283)*t + 62.48;
+		double t = y - 2005;
+		r = 0.2930*t +64.69;
 	}
-	// WB: Formula to create reasonable curve between final predicted year and 2050
-	// 93 is the predicted deltaT for 2050 (Espenak/Meeus)
+	// WB: Interpolation from IERS's DeltaT values between 2015-2023, including predicted values between 2024-2033
+	// Data: https://maia.usno.navy.mil/ser7/deltat.data & https://maia.usno.navy.mil/ser7/deltat.preds
+	else if (y < 2033)
+	{
+		double yeardec = yearFraction(year, month, day);
+		int pos = (year-2015);
+		r = IERSDeltaTTable[pos]+(yeardec-(pos+2015))*(IERSDeltaTTable[pos+1]-IERSDeltaTTable[pos]);
+	}
+	// WB: Formula to connect final predicted year and 2050
+	// 85 is the predicted deltaT for 2050 (Espenak)
 	// It looks more likely that this value is too high
 	// But we will follow it for now until we have a better model
-	// Small corrections (<0.2 sec) related to secular acceleration of the Moon are neglected
-	// Last updated: 2022 Mar 11
+	// Last updated: 2023 Sep 9
 	else if (y < 2050)
 	{
-		double finalPredictedYear = 2032.;
-		double finalPredictedDeltaT = 72.07;
+		double finalPredictedYear = 2033.0;
+		double finalPredictedDeltaT = 70.98;
 		double t = y - finalPredictedYear;
-		double diff = 2050.-finalPredictedYear;
-		r = finalPredictedDeltaT + (93.-finalPredictedDeltaT) * t * t/(diff*diff);
+		r = finalPredictedDeltaT + (85.-finalPredictedDeltaT) * t/(2050.-finalPredictedYear);
 	}
-	else if (y < 2150)
+	else if (y < 3000)
 	{
-		// r has been precomputed before, just add the term patching the discontinuity
-		r -= 0.5628*(2150.0-y);
+		double t = y - 2015;
+		r = (0.0039755*t + 0.3645)*t +67.62;
+		// r = 4283.78 at year 3000
 	}
-
+	else if (y < 3100)
+	{
+		// Default value for Delta T gives r = 4435.68 at year 3000
+		// and r = 5222.88 at year 3100
+		// We introduce a simple method to patch the discontinuity
+		r = 4283.78+(y-3000)*9.391;
+	}
 	return r;
 }
 
@@ -2570,6 +2589,8 @@ float* ComputeCosSinRho(const unsigned int segments)
 //! @param minAngle start angle inside the half-circle. maxAngle=minAngle+segments*phi
 float *ComputeCosSinRhoZone(const float dRho, const unsigned int segments, const float minAngle)
 {
+	Q_ASSERT(segments<=MAX_STACKS);
+
 	float *cos_sin = cos_sin_rho;
 	const float c = cosf(dRho);
 	const float s = sinf(dRho);

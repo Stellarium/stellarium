@@ -47,6 +47,7 @@ void SplashScreen::showMessage(QString const& message)
 void SplashScreen::finish(QWidget* mainWindow)
 {
 	Q_ASSERT(instance);
+	instance->hide();
 	instance->finish(mainWindow);
 	delete instance;
 	instance=nullptr;

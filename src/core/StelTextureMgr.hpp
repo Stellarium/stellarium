@@ -21,6 +21,7 @@
 #define STELTEXTUREMGR_HPP
 
 #include "StelTexture.hpp"
+#include "StelTextureTypes.hpp"
 #include <QObject>
 #include <QMap>
 #include <QWeakPointer>
@@ -33,7 +34,7 @@ class QThreadPool;
 //! @class StelTextureMgr
 //! Manage textures loading.
 //! It provides method for loading images in a separate thread.
-class StelTextureMgr : QObject
+class StelTextureMgr : public QObject
 {
 	Q_OBJECT
 public:

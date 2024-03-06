@@ -82,7 +82,7 @@ class SolarEclipseBessel
 {
 public:
 	SolarEclipseBessel(double &besX, double &besY,
-		double &besDec, double &besTf1, double &besTf2, double &besL1, double &besL2, double &besMu);
+	                   double &besDec, double &besTf1, double &besTf2, double &besL1, double &besL2, double &besMu);
 };
 
 // Class to calculate solar eclipse data at given time
@@ -90,9 +90,17 @@ class SolarEclipseData
 {
 public:
 	SolarEclipseData(double JD, double &dRatio, double &latDeg, double &lngDeg, double &altitude,
-		double &pathWidth, double &duration, double &magnitude);
+	                 double &pathWidth, double &duration, double &magnitude);
 };
 
+
+//! @class Planet
+//! The Planet class is used for the major planets, moons, "Observer" planets, and artificial objects ("Spaceship").
+//! Major planets and many moons have their own positional computation, the others, and derivatives Comet and MinorPlanet, use KeplerOrbit for their position.
+//! "Observer" objects (Solar System Observer, Earth Observer, Mars Observer, Jupiter Observer, Saturn Observer, Uranus Observer, Neptune Observer)
+//! are positioned with a GimbalOrbit and can be rotated around their parent by keyboard interaction.
+//! These are oriented parallel to their parents' polar axis. The actual observer location must be on the North pole so that the vertical screen axis
+//! aligns with the parent planet's rotational axis.
 class Planet : public StelObject
 {
 public:
@@ -114,7 +122,7 @@ public:
 		isObserver,     // ssystem.ini: type="observer"
 		isArtificial,   // Used in transitions from planet to planet.
 		isAsteroid,     // ssystem.ini: type="asteroid". all types >= isAsteroid are "Minor Bodies".
-				// Put other things (spacecraft etc) before isAsteroid.
+		                // Put other things (spacecraft etc) before isAsteroid.
 		isPlutino,      // ssystem.ini: type="plutino"
 		isComet,        // ssystem.ini: type="comet"
 		isDwarfPlanet,  // ssystem.ini: type="dwarf planet"
@@ -129,9 +137,9 @@ public:
 
 	enum PlanetOrbitColorStyle
 	{
-		ocsOneColor,		// One color for all orbits
-		ocsGroups,		// Separate colors for each group of Solar system bodies
-		ocsMajorPlanets		// Separate colors for each of major planets of Solar system
+		ocsOneColor,            // One color for all orbits
+		ocsGroups,              // Separate colors for each group of Solar system bodies
+		ocsMajorPlanets         // Separate colors for each of major planets of Solar system
 	};
 	Q_ENUM(PlanetOrbitColorStyle)
 
@@ -152,7 +160,7 @@ public:
 	enum PositionQuality
 	{
 		Position,                   // Good enough for positions.
-		OrbitPlotting		    // Good enough for orbitplotting?
+		OrbitPlotting               // Good enough for orbitplotting?
 	};
 	Q_ENUM(PositionQuality)
 
@@ -176,7 +184,7 @@ public:
 	       bool hasHalo,
 	       const QString &pTypeStr);
 
-	virtual ~Planet() Q_DECL_OVERRIDE;
+	~Planet() override;
 
 	//! Initializes static vars. Must be called before creating first planet.
 	// Currently ensured by SolarSystem::init()
@@ -198,9 +206,8 @@ public:
 	//! @param core the StelCore object
 	//! @param flags a set of InfoStringGroup items to include in the return value.
 	//! @return a QString containing an HMTL encoded description of the Planet.
-	virtual QString getInfoString(const StelCore *core, const InfoStringGroup& flags) const Q_DECL_OVERRIDE;
+	QString getInfoString(const StelCore *core, const InfoStringGroup& flags) const override;
 	//! In addition to the entries from StelObject::getInfoMap(), Planet objects provide
-	//! - distance
 	//! - phase (result of getPhase)
 	//! - illumination (=100*phase)
 	//! - phase-angle (radians)
@@ -226,33 +233,46 @@ public:
 	//! - libration_l (on Earth for Moon only; degrees)
 	//! - libration_b (on Earth for Moon only; degrees)
 	//! - colongitude (on Earth for Moon only; degrees)
+	//! - phase-name (on Earth for Moon only; string)
+	//! - age (on Earth for Moon only; days. This is currently "elongation angle age" only, not time since last conjunction!)
 	//! - penumbral-eclipse-magnitude (on Earth for Moon only)
 	//! - umbral-eclipse-magnitude (on Earth for Moon only)
-	virtual QVariantMap getInfoMap(const StelCore *core) const  Q_DECL_OVERRIDE;
-	virtual double getCloseViewFov(const StelCore* core) const Q_DECL_OVERRIDE;
-	virtual double getSatellitesFov(const StelCore* core) const Q_DECL_OVERRIDE;
-	virtual double getParentSatellitesFov(const StelCore* core) const Q_DECL_OVERRIDE;
-	virtual float getVMagnitude(const StelCore* core) const Q_DECL_OVERRIDE;
-	virtual float getSelectPriority(const StelCore* core) const Q_DECL_OVERRIDE;
-	virtual Vec3f getInfoColor(void) const Q_DECL_OVERRIDE;
-	virtual QString getType(void) const Q_DECL_OVERRIDE {return PLANET_TYPE;}
-	virtual QString getObjectType(void) const Q_DECL_OVERRIDE { return getPlanetTypeString(); }
-	virtual QString getObjectTypeI18n(void) const Q_DECL_OVERRIDE { return q_(getPlanetTypeString()); }
-	virtual QString getID(void) const Q_DECL_OVERRIDE { return englishName; }
+	//! - heliocentric-distance (distance to object from the Sun; for Solar system objects, except the Sun; A.U.)
+	//! - heliocentric-distance-km (distance to object from the Sun; for Solar system objects, except the Sun; kilometers)
+	//! - distance (distance to object; for Solar system objects only; A.U.)
+	//! - distance-km (distance to object; for Solar system objects only; kilometers)
+	QVariantMap getInfoMap(const StelCore *core) const  override;
+	double getCloseViewFov(const StelCore* core) const override;
+	double getSatellitesFov(const StelCore* core) const override;
+	double getParentSatellitesFov(const StelCore* core) const override;
+	float getVMagnitude(const StelCore* core) const override;
+	float getSelectPriority(const StelCore* core) const override;
+	Vec3f getInfoColor(void) const override;
+	//! @return "Planet". For technical reasons this is also returned by Comets and MinorPlanets and the Sun. A better type is returned by getObjectType()
+	QString getType(void) const override {return PLANET_TYPE;}
+	//! Get more specific Planet type for scripts
+	//! @return an English type description of planet (star, planet, moon, observer, artificial, asteroid, plutino, comet, dwarf planet, cubewano, scattered disc object, Oort cloud object, sednoid, interstellar object)
+	QString getObjectType(void) const override { return pTypeMap.value(pType); }
+	//! Get more specific Planet type for scripts
+	//! @return a localized type description of planet (star, planet, moon, observer, artificial, asteroid, plutino, comet, dwarf planet, cubewano, scattered disc object, Oort cloud object, sednoid, interstellar object)
+	QString getObjectTypeI18n(void) const override { return q_(pTypeMap.value(pType)); }
+	//! @return English name of planet
+	QString getID(void) const override { return englishName; }
 	//! A Planet's own eclipticPos is in VSOP87 ref. frame (practically equal to ecliptic of J2000 for us) coordinates relative to the parent body (sun, planet).
 	//! To get J2000 equatorial coordinates, we require heliocentric ecliptical positions (adding up parent positions) of observer and Planet.
 	//! Then we use the matrix rotation multiplication with an existing matrix in StelCore to orient from eclipticalJ2000 to equatorialJ2000.
 	//! The end result is a non-normalized 3D vector which allows retrieving distances etc.
 	//! The positional computation is called by SolarSystem. If the core's aberration setting is active, the J2000 position will then include it.
-	virtual Vec3d getJ2000EquatorialPos(const StelCore *core) const Q_DECL_OVERRIDE;
-	virtual QString getEnglishName(void) const Q_DECL_OVERRIDE;
-	virtual QString getNameI18n(void) const Q_DECL_OVERRIDE;
+	Vec3d getJ2000EquatorialPos(const StelCore *core) const override;
+	QString getEnglishName(void) const override;
+	QString getNameI18n(void) const override;
+	virtual QString getIAUDesignation(void) const;
 	QString getNativeName(void) const { return nativeName; }
 	QString getNativeNameI18n(void) const { return nativeNameMeaningI18n; }
 	QString getCommonEnglishName(void) const {return englishName;}
 	QString getCommonNameI18n(void) const {return nameI18;}
 	//! Get angular semidiameter, degrees. If planet display is artificially enlarged (e.g. Moon upscale), value will also be increased.
-	virtual double getAngularRadius(const StelCore* core) const Q_DECL_OVERRIDE;
+	double getAngularRadius(const StelCore* core) const override;
 	virtual bool hasAtmosphere(void) {return atmosphere;}
 	virtual bool hasHalo(void) {return halo;}
 	//! Returns whether planet positions are valid and useful for the current simulation time.
@@ -301,8 +321,9 @@ public:
 	//! Get albedo
 	double getAlbedo(void) const { return static_cast<double>(albedo); }
 
+	//! @return texture map name
 	const QString& getTextMapName() const {return texMapName;}
-	const QString getPlanetTypeString() const {return pTypeMap.value(pType);}
+	//! @return a type code enum
 	PlanetType getPlanetType() const {return pType;}
 	Orbit* getOrbit() const {return orbitPtr;}
 
@@ -310,16 +331,23 @@ public:
 	void setNativeNameMeaning(QString planet) { nativeNameMeaning = planet; }
 
 	//! set the IAU moon number (designation of the moon), if any.
-	void setIAUMoonNumber(QString designation);
+	void setIAUMoonNumber(const QString& designation);
 
 	//! set value for color index B-V
 	void setColorIndexBV(float bv=99.f);
+
+	//! set the discovery circumstances of celestial body
+	//! @param date of discovery
+	//! @param name of discoverer
+	void setDiscoveryData(const QString& date, const QString& name) { discoveryDate = date; discoverer = name; }
 
 	//! Return the absolute magnitude (read from file ssystem.ini)
 	float getAbsoluteMagnitude() const {return absoluteMagnitude;}
 	//! Return the mean opposition magnitude, defined as V(1,0)+5log10(a(a-1))
 	//! A return value of 100 signals invalid result.
 	float getMeanOppositionMagnitude() const;
+	//! Return the mass in kg
+	double getMass() const { return massKg; }
 	//
 	static ApparentMagnitudeAlgorithm getApparentMagnitudeAlgorithm()  { return vMagAlgorithm; }
 	static const QString getApparentMagnitudeAlgorithmString()  { return vMagAlgorithmMap.value(vMagAlgorithm); }
@@ -363,10 +391,10 @@ public:
 	//! _w0, _w1 to be given in degrees!
 	//! If _ra0 is not zero, we understand WGCCRE data ra0, ra1, de0, de1, w0, w1 are used.
 	void setRotationElements(const QString name, const double _period, const double _offset, const double _epoch,
-				 const double _obliquity, const double _ascendingNode,
-				 const double _ra0, const double _ra1,
-				 const double _de0, const double _de1,
-				 const double _w0,  const double _w1);
+	                         const double _obliquity, const double _ascendingNode,
+	                         const double _ra0, const double _ra1,
+	                         const double _de0, const double _de1,
+	                         const double _w0,  const double _w1);
 
 	//! Note: The only place where this is used is to build up orbits for planet moons w.r.t. the parent planet orientation.
 	double getRotAscendingNode(void) const {return re.ascendingNode; }
@@ -408,6 +436,8 @@ public:
 
 	//! Get the phase angle (radians) for an observer at pos obsPos in heliocentric coordinates (in AU)
 	double getPhaseAngle(const Vec3d& obsPos) const;
+	//! Check whether the planet is in a waning phase, i.e. its phase angle is increasing
+	bool isWaning(const Vec3d& observerPosition, const Vec3d& observerVelocity) const;
 	//! Get the elongation angle (radians) for an observer at pos obsPos in heliocentric coordinates (in AU)
 	double getElongation(const Vec3d& obsPos) const;
 	//! Get the angular radius (degrees) of the planet spheroid (i.e. without the rings)
@@ -432,12 +462,12 @@ public:
 	//!                         stay in sync with the texture. (GRS is moving). Set this to true to return the
 	//!                         incorrect, graphics-only longitude.
 	//! first[0]  = 10.26 phi_e     [rad] Planetocentric latitude of sub-earth point
-	//! first[1]  = 10.26 phi'_e	[rad] Planetographic latitude of sub-earth point
-	//! first[2]  = 10.26 lambda'_e	[rad] Planetographic longitude of sub-earth point (0..2pi)
-	//! first[3]  = 10.29 P_n	[rad] Position angle of axis north pole in equatorial coordinates of date
-	//! second[0] = 10.26 phi_s	[rad] Planetocentric latitude of sub-solar point
-	//! second[1] = 10.26 phi'_s	[rad] Planetographic latitude of sub-solar point
-	//! second[2] = 10.26 lambda'_s	[rad] Planetographic longitude of sub-solar point (0..2pi)
+	//! first[1]  = 10.26 phi'_e    [rad] Planetographic latitude of sub-earth point
+	//! first[2]  = 10.26 lambda'_e [rad] Planetographic longitude of sub-earth point (0..2pi)
+	//! first[3]  = 10.29 P_n       [rad] Position angle of axis north pole in equatorial coordinates of date
+	//! second[0] = 10.26 phi_s     [rad] Planetocentric latitude of sub-solar point
+	//! second[1] = 10.26 phi'_s    [rad] Planetographic latitude of sub-solar point
+	//! second[2] = 10.26 lambda'_s [rad] Planetographic longitude of sub-solar point (0..2pi)
 	//! @note: For the Moon, it is more common to give Libration angles, where L=-lambda'_e, B=phi'_e.
 	//! @note: For Jupiter, this returns central meridian in L_II.
 	//! @note: For Saturn, this returns central meridian in L_III (rotation of magnetic field).
@@ -511,8 +541,8 @@ public:
 	double deltaJDE;                // time difference between positional updates.
 	double deltaOrbitJDE;
 	bool closeOrbit;                // whether to connect the beginning of the orbit line to
-					// the end: good for elliptical orbits, bad for parabolic
-					// and hyperbolic orbits
+	                                // the end: good for elliptical orbits, bad for parabolic
+	                                // and hyperbolic orbits
 
 	static Vec3f orbitColor;
 	static void setOrbitColor(const Vec3f& oc) {orbitColor = oc;}
@@ -612,7 +642,14 @@ public:
 	//!       * -1000. is used as "invalid" value. The result should then not be used.
 	//! @note This is based on Meeus, Astronomical Algorithms (2nd ed.), but deviates in details.
 	//! @note Limitation for efficiency: If this is a planet moon from another planet, we compute RTS for the parent planet instead!
-	virtual Vec4d getRTSTime(const StelCore* core, const double altitude=0.) const Q_DECL_OVERRIDE;
+	virtual Vec4d getClosestRTSTime(const StelCore* core, const double altitude=0.) const;
+
+	//! Adaptation of getClosestRTSTime() to compute times of rise, transit and set for a solar system object for current location and date.
+	//! @note The fourth element flags particular conditions:
+	//!       *   +20 for objects with no transit time on current date.
+	//!       *   +30 for objects with no rise time on current date.
+	//!       *   +40 for objects with no set time on current date.
+	Vec4d getRTSTime(const StelCore* core, const double altitude=0.) const override;
 
 	void resetTextures();
 	void replaceTexture(const QString& texName);
@@ -631,6 +668,8 @@ protected:
 	virtual QString getInfoStringPeriods(const StelCore *core, const InfoStringGroup& flags) const;
 	//! Any flag=Extra information to be displayed at the end
 	virtual QString getInfoStringExtra(const StelCore *core, const InfoStringGroup& flags) const;
+
+	virtual QString getDiscoveryCircumstances() const;
 
 protected:
 	struct PlanetOBJModel
@@ -700,7 +739,7 @@ protected:
 
 	//! Draw the circle and name of the Planet
 	void drawHints(const StelCore* core, const QFont& planetNameFont);
-    
+
 	PlanetOBJModel* loadObjModel() const;
 
 	QString englishName;             // english planet name
@@ -716,33 +755,34 @@ protected:
 	double equatorialRadius;         // Planet's equatorial radius in AU
 	double oneMinusOblateness;       // OneMinusOblateness=(polar radius)/(equatorial radius). Geometric flattening f=1-oneMinusOblateness (ExplanSup2013 10.1)
 	Vec3d eclipticPos;               // Position in AU in the rectangular ecliptic coordinate system (J2000) centered on the parent body.
-					 // To get heliocentric coordinates, use getHeliocentricEclipticPos()
+	                                 // To get heliocentric coordinates, use getHeliocentricEclipticPos()
 	Vec3d eclipticVelocity;          // Speed in AU/d in the rectangular ecliptic coordinate system (J2000) around the parent body.
-					 // NEW FEATURE in late 2017. For now, this may be 0/0/0 when we are not yet able to compute it.
-					 // to get velocity, preferably read getEclipticVelocity() and getHeliocentricEclipticVelocity()
-					 // The "State Vector" [Heafner 1999] can be formed from (JDE, eclipticPos, eclipticVelocity)
+	                                 // NEW FEATURE in late 2017. For now, this may be 0/0/0 when we are not yet able to compute it.
+	                                 // to get velocity, preferably read getEclipticVelocity() and getHeliocentricEclipticVelocity()
+	                                 // The "State Vector" [Heafner 1999] can be formed from (JDE, eclipticPos, eclipticVelocity)
 	Vec3d aberrationPush;            // 0.21.2+: a small displacement to be applied if aberred positions are requested.
 	Vec3d screenPos;                 // Used to store temporarily the 2D position on screen. We need double for moons. Observe Styx from Pluto w/o atmosphere to see that.
 	Vec3f haloColor;                 // used for drawing the planet halo. Also, when non-spherical (OBJ) model without texture is used, its color is derived from haloColour*albedo.
 
 	float absoluteMagnitude;         // since 2017 this moved to the Planet class: V(1,0) from Explanatory Supplement or WGCCRE2009 paper for the planets, H in the H,G magnitude system for Minor planets, H10 for comets.
-					 // This is the apparent visual magnitude when 1AU from sun and observer, with zero phase angle.
+	                                 // This is the apparent visual magnitude when 1AU from sun and observer, with zero phase angle.
+	double massKg;                   // 23.1+: mass of the planet in kg
 	float albedo;                    // Planet albedo. Used for magnitude computation when no other formula in use. Also, when non-spherical (OBJ) model without texture is used, its color is derived from haloColour*albedo.
 	float roughness;                 // Oren-Nayar roughness for Moon and OBJ-based models
 	float outgas_intensity;          // The intensity of a pseudo-outgas effect, based on an inverse exponential Lambert shading, with the light at the viewing position
-					 // Non-null only for Comets, but we use one shader for all Planets and derivatives, so we need a placeholder here.
+	                                 // Non-null only for Comets, but we use one shader for all Planets and derivatives, so we need a placeholder here.
 	float outgas_falloff;            // Exponent for falloff of outgas effect, should probably be < 1
-					 // Non-null only for Comets, but we use one shader for all Planets and derivatives, so we need a placeholder here.
+	                                 // Non-null only for Comets, but we use one shader for all Planets and derivatives, so we need a placeholder here.
 	Mat4d rotLocalToParent;          // retro-documented:
-					 // rotation matrix of axis orientation with respect to the rotation axes of the parent body.
-					 // For planets, this is the axis orientation w.r.t. VSOP87A/J2000 ecliptical system.
-					 // For planets' satellites, this used to be a rotation into the planet's equatorial system.
-					 // 0.21+: if rot_pole... data available in ssystem_*.ini (and therefore re.method==WGCCRE), this is not the rotation from planet axes over ICRF to the VSOP frame on which Stellarium is defined.
-					 //
+	                                 // rotation matrix of axis orientation with respect to the rotation axes of the parent body.
+	                                 // For planets, this is the axis orientation w.r.t. VSOP87A/J2000 ecliptical system.
+	                                 // For planets' satellites, this used to be a rotation into the planet's equatorial system.
+	                                 // 0.21+: if rot_pole... data available in ssystem_*.ini (and therefore re.method==WGCCRE), this is not the rotation from planet axes over ICRF to the VSOP frame on which Stellarium is defined.
+	                                 //
 	float axisRotation;              // Rotation angle of the Planet on its axis, degrees.
-					 // For Earth, this should be Greenwich Mean Sidereal Time GMST.
-					 // For V0.21+, and for planets computed after the IAU2009/WGCCRE papers this is angle W (rotDeg),
-					 // i.e. angle between ascending node of body equator w.r.t. ICRF equator and its prime meridian.
+	                                 // For Earth, this should be Greenwich Mean Sidereal Time GMST.
+	                                 // For V0.21+, and for planets computed after the IAU2009/WGCCRE papers this is angle W (rotDeg),
+	                                 // i.e. angle between ascending node of body equator w.r.t. ICRF equator and its prime meridian.
 	StelTextureSP texMap;            // Planet map texture
 	StelTextureSP normalMap;         // Planet normal map texture
 	StelTextureSP horizonMap;        // Planet horizon map texture
@@ -755,14 +795,14 @@ protected:
 
 	Ring* rings;                     // Planet rings
 	double distance;                 // Temporary variable used to store the distance to a given point
-					 // it is used for sorting while drawing
+	                                 // it is used for sorting while drawing
 	double sphereScale;              // Artificial scaling for better viewing.
 	double lastJDE;                  // caches JDE of last positional computation
 
-	posFuncType coordFunc;		// callback for the calculation of the equatorial rectangular heliocentric position at time JDE.
-	Orbit* orbitPtr;		// Usually a KeplerOrbit for positional computations of Minor Planets, Comets and Moons.
-					// For an "observer", it is GimbalOrbit.
-					// For the major planets, it is Q_NULLPTR.
+	posFuncType coordFunc;           // callback for the calculation of the equatorial rectangular heliocentric position at time JDE.
+	Orbit* orbitPtr;                 // Usually a KeplerOrbit for positional computations of Minor Planets, Comets and Moons.
+	                                 // For an "observer", it is GimbalOrbit.
+	                                 // For the major planets, it is Q_NULLPTR.
 
 	OsculatingFunctType *const osculatingFunc;
 	QSharedPointer<Planet> parent;           // Planet parent i.e. sun for earth
@@ -784,6 +824,7 @@ protected:
 	static Vec3f labelColor;
 	static StelTextureSP hintCircleTex;
 	static const QMap<PlanetType, QString> pTypeMap; // Maps fast type to english name.
+	static const QMap<QString, QString> nPlanetMap; // Maps fast IAU number to IAU designation.
 	static const QMap<ApparentMagnitudeAlgorithm, QString> vMagAlgorithmMap;
 	static bool drawMoonHalo;
 	static bool drawSunHalo;
@@ -795,6 +836,9 @@ private:
 	class StelPropertyMgr* propMgr;
 	QString iauMoonNumber;
 	float b_v;
+	// Discovery data
+	QString discoverer;
+	QString discoveryDate;
 	// File path for texture and normal map; both variables used for saving original names of files
 	QString texMapFileOrig;
 	QString normalMapFileOrig;
@@ -889,7 +933,7 @@ private:
 	static PlanetShaderVars transformShaderVars;
 	static QOpenGLShaderProgram* transformShaderProgram;
 
-	static bool shaderError;		// True if loading shaders caused errors
+	static bool shaderError;  // True if loading shaders caused errors
 
 	static bool shadowInitialized;
 	static Vec2f shadowPolyOffset;
@@ -907,11 +951,11 @@ private:
 	static void deinitFBO();
 
 	static QOpenGLShaderProgram* createShader(const QString& name,
-						  PlanetShaderVars& vars,
-						  const QByteArray& vSrc,
-						  const QByteArray& fSrc,
-						  const QByteArray& prefix=QByteArray(),
-						  const QMap<QByteArray,int>& fixedAttributeLocations=QMap<QByteArray,int>());
+	                                          PlanetShaderVars& vars,
+	                                          const QByteArray& vSrc,
+	                                          const QByteArray& fSrc,
+	                                          const QByteArray& prefix=QByteArray(),
+	                                          const QMap<QByteArray,int>& fixedAttributeLocations=QMap<QByteArray,int>());
 
 	// Cache of positions in the parent ecliptic coordinates in AU.
 	// Used only for orbit plotting

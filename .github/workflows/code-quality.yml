@@ -1,34 +1,11 @@
 #
 # Actions for check the code quality
+# See also https://github.com/actions/runner-images
 #
 name: "Code Quality"
 on: [push]
 
 jobs:
-  #
-  # Codiga
-  # See https://github.com/marketplace/actions/codiga-github-action
-  #
-  check-quality:
-    runs-on: ubuntu-latest
-    if: "!contains(github.actor, 'transifex')"
-    name: "Codiga"
-    steps:
-    - name: Check code meets quality standards
-      id: codiga
-      uses: codiga/github-action@v1
-      with:
-        repo_token: ${{ secrets.GITHUB_TOKEN }}
-        codiga_api_token: ${{ secrets.CODIGA_API_TOKEN }}
-        force_ref: 'none'
-        min_quality_grade: 'WARNING'
-        min_quality_score: '50'
-        max_defects_rate: '0.01'
-        max_complex_functions_rate: '0.5'
-        max_long_functions_rate: '0.5'
-        max_timeout_sec: '3600'
-        project_name: 'stellarium'
-
   #
   # Coveralls
   #
@@ -44,11 +21,12 @@ jobs:
         sudo apt update
         # using force-overwrite due to
         # https://github.com/actions/virtual-environments/issues/2703
-        sudo ACCEPT_EULA=Y apt upgrade -o Dpkg::Options::="--force-overwrite" --yes
-        sudo apt install -y qtbase5-private-dev qtscript5-dev libqt5svg5-dev qttools5-dev-tools qttools5-dev libqt5opengl5-dev qtmultimedia5-dev libqt5multimedia5-plugins libqt5serialport5 libqt5serialport5-dev qtpositioning5-dev libgps-dev libqt5positioning5 libqt5positioning5-plugins qtwebengine5-dev libqt5charts5-dev zlib1g-dev libgl1-mesa-dev libdrm-dev cmake lcov
+        #sudo ACCEPT_EULA=Y apt upgrade -o Dpkg::Options::="--force-overwrite" --yes
+        #sudo apt install -y qtbase5-private-dev qtscript5-dev libqt5svg5-dev qttools5-dev-tools qttools5-dev libqt5opengl5-dev qtmultimedia5-dev libqt5multimedia5-plugins libqt5serialport5 libqt5serialport5-dev qtpositioning5-dev libgps-dev libqt5positioning5 libqt5positioning5-plugins qtwebengine5-dev libqt5charts5-dev zlib1g-dev libgl1-mesa-dev libdrm-dev cmake lcov libexiv2-dev libnlopt-cxx-dev
+        sudo apt install -y qt6-base-private-dev qt6-multimedia-dev qt6-positioning-dev qt6-tools-dev qt6-tools-dev-tools qt6-base-dev-tools qt6-qpa-plugins qt6-image-formats-plugins qt6-l10n-tools qt6-webengine-dev qt6-webengine-dev-tools libqt6charts6-dev libqt6charts6 libqt6opengl6-dev libqt6positioning6-plugins libqt6serialport6-dev qt6-base-dev libqt6webenginecore6-bin libqt6webengine6-data libexiv2-dev libnlopt-cxx-dev zlib1g-dev libgl1-mesa-dev libdrm-dev libglx-dev libxkbcommon-x11-dev libgps-dev zlib1g-dev libgl1-mesa-dev libdrm-dev cmake lcov libexiv2-dev libnlopt-cxx-dev
 
     - name: Checkout repository
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Configure CMake
       shell: bash
@@ -56,28 +34,28 @@ jobs:
         mkdir -p ../../../.stellarium/ephem
         mkdir -p build
         cd build
-        cmake -DCMAKE_BUILD_TYPE=Debug -DENABLE_TESTING=On ${{ github.workspace }}
+        cmake -DCMAKE_BUILD_TYPE=Debug -DENABLE_TESTING=On -DENABLE_NLS=Off ${{ github.workspace }}
 
     - name: Compile
       working-directory: build
       run: make -j3
 
     - name: Download JPL DE430 ephemeris
-      uses: carlosperate/download-file-action@v1.1.1
+      uses: carlosperate/download-file-action@v2
       with:
         file-url: 'https://github.com/Stellarium/stellarium-data/releases/download/qt-5.6/linux_p1550p2650.430'
         file-name: 'linux_p1550p2650.430'
         location: '../../../.stellarium/ephem'
 
     - name: Download JPL DE440 ephemeris
-      uses: carlosperate/download-file-action@v1.1.1
+      uses: carlosperate/download-file-action@v2
       with:
         file-url: 'https://github.com/Stellarium/stellarium-data/releases/download/qt-5.6/linux_p1550p2650.440'
         file-name: 'linux_p1550p2650.440'
         location: '../../../.stellarium/ephem'
 
     - name: Make coverage
-      uses: GabrielBB/xvfb-action@v1
+      uses: coactions/setup-xvfb@v1
       with:
         working-directory: build
         run: make coverage
@@ -85,7 +63,7 @@ jobs:
     # Remove unnecessary data from final report
     - name: Coverage data cleanup
       working-directory: build
-      run: lcov --gcov-tool "/usr/bin/gcov" --remove coverage.info '*_autogen/*' '*/ui_*.h' '*/qrc_*.cpp' '*/qt5/*' '/usr/*' '*gmock*' --output-file coverage.info
+      run: lcov --gcov-tool "/usr/bin/gcov" --remove coverage.info '*_autogen/*' '*/ui_*.h' '*/qrc_*.cpp' '*/build/*' '*/qt5/*' '*/qt6/*' '/usr/*' '*gmock*' --output-file coverage.info
 
     - name: Coveralls
       uses: coverallsapp/github-action@master

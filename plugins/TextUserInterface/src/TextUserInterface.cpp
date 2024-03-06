@@ -575,6 +575,9 @@ void TextUserInterface::init()
 
 
 	currentNode = m1;
+
+	addAction("actionShow_TUI_dateTime",   N_("Text User Interface"), N_("Toggle TUI date&time"),   this, "tuiDateTime", ""); // Recommend "Ctrl+Alt+T", but conflicts with Equation of Time.
+	addAction("actionShow_TUI_objectInfo", N_("Text User Interface"), N_("Toggle TUI object info"), this, "tuiObjInfo",  ""); // Recommend  "Ctrl+Alt+Shift+T"
 }
 
 /*************************************************************************
@@ -586,10 +589,12 @@ void TextUserInterface::loadConfiguration(void)
 	Q_ASSERT(conf);
 
 	font.setPixelSize(conf->value("tui/tui_font_size", 15).toInt());
-	tuiDateTime = conf->value("tui/flag_show_tui_datetime", false).toBool();
-	tuiObjInfo = conf->value("tui/flag_show_tui_short_obj_info", false).toBool();
-	tuiGravityUi = conf->value("tui/flag_show_gravity_ui", false).toBool();
+	setTuiDateTime(conf->value("tui/flag_show_tui_datetime", false).toBool());
+	setTuiObjInfo(conf->value("tui/flag_show_tui_short_obj_info", false).toBool());
+	setTuiGravityUi(conf->value("tui/flag_show_gravity_ui", false).toBool());
 	color = Vec3f(conf->value("tui/tui_font_color", "0.3,1,0.3").toString());
+	StelCore *core=StelApp::getInstance().getCore();
+	connect(core, SIGNAL(flagGravityLabelsChanged(bool)), this, SLOT(setTuiGravityUi(bool)));
 }
 
 /*************************************************************************
@@ -764,10 +769,10 @@ void TextUserInterface::setAltitude(int altitude)
 void TextUserInterface::setLatitude(double latitude)
 {
 	StelCore* core = StelApp::getInstance().getCore();
-	if (core->getCurrentLocation().latitude != latitude)
+	if (core->getCurrentLocation().getLatitude() != latitude)
 	{
 		StelLocation newLocation = core->getCurrentLocation();
-		newLocation.latitude = static_cast<float>(latitude);
+		newLocation.setLatitude(static_cast<float>(latitude));
 		core->moveObserverTo(newLocation, 0.0, 0.0);
 	}
 }
@@ -775,22 +780,22 @@ void TextUserInterface::setLatitude(double latitude)
 void TextUserInterface::setLongitude(double longitude)
 {
 	StelCore* core = StelApp::getInstance().getCore();
-	if (core->getCurrentLocation().longitude != longitude)
+	if (core->getCurrentLocation().getLongitude() != longitude)
 	{
 		StelLocation newLocation = core->getCurrentLocation();
-		newLocation.longitude = static_cast<float>(longitude);
+		newLocation.setLongitude(static_cast<float>(longitude));
 		core->moveObserverTo(newLocation, 0.0, 0.0);
 	}
 }
 
 double TextUserInterface::getLatitude(void)
 {
-	return static_cast<double>(StelApp::getInstance().getCore()->getCurrentLocation().latitude);
+	return static_cast<double>(StelApp::getInstance().getCore()->getCurrentLocation().getLatitude());
 }
 
 double TextUserInterface::getLongitude(void)
 {
-	return static_cast<double>(StelApp::getInstance().getCore()->getCurrentLocation().longitude);
+	return static_cast<double>(StelApp::getInstance().getCore()->getCurrentLocation().getLongitude());
 }
 
 void TextUserInterface::setStartupDateMode(QString mode)

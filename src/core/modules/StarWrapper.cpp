@@ -224,40 +224,20 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 
 		if (flags&Name)
 		{
+			QString commonNames;
 			if (!commonNameI18.isEmpty())
-				oss << commonNameI18;
+				commonNames = commonNameI18;
 
 			if (!additionalNameI18.isEmpty() && StarMgr::getFlagAdditionalNames())
 			{
-				QString aliases = "";
 				QStringList additionalNames = additionalNameI18.split(" - ");
 				additionalNames.removeDuplicates();
-				asize = additionalNames.size();
-				if (asize>5) // Special case for many AKA (max - 6 items per line)
-				{
-					bool firstLine = true;
-					for(int i=0; i<asize; i++)
-					{
-						aliases.append(additionalNames.at(i));
-						if (i<asize-1)
-							aliases.append(" - ");
 
-						if (i>0)
-						{
-							if ((i % 4)==0 && firstLine)
-							{
-								aliases.append("<br />");
-								firstLine = false;
-							}
-							if (((i-4) % 6)==0 && !firstLine && i>5 && i<(asize-1))
-								aliases.append("<br />");
-						}
-					}
-				}
-				else
-					aliases = additionalNames.join(" - ");
-				oss << " (" << aliases << ")";
+				commonNames.append(QString(" (%1)").arg(additionalNames.join(" - ")));
 			}
+
+			if (!commonNames.isEmpty())
+				oss << StelUtils::wrapText(commonNames, 80);
 
 			if (!commonNameI18.isEmpty() && !designationsList.isEmpty() && flags&CatalogNumber)
 				oss << "<br />";
@@ -272,13 +252,13 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 	if (flags&Name)
 	{
 		QStringList extraNames=getExtraInfoStrings(Name);
-		if (extraNames.length()>0)
+		if (!extraNames.isEmpty())
 			oss << q_("Additional names: ") << extraNames.join(", ") << "<br/>";
 	}
 	if (flags&CatalogNumber)
 	{
 		QStringList extraCat=getExtraInfoStrings(CatalogNumber);
-		if (extraCat.length()>0)
+		if (!extraCat.isEmpty())
 			oss << q_("Additional catalog numbers: ") << extraCat.join(", ") << "<br/>";
 	}
 

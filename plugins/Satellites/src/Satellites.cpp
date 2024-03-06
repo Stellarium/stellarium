@@ -97,12 +97,11 @@ Satellites::Satellites()
 	, autoRemoveEnabled(false)
 	, updateFrequencyHours(0)
 	, flagUmbraVisible(false)
-	, flagUmbraAtFixedDistance(false)
+	, flagUmbraAtFixedAltitude(false)
 	, umbraColor(1.0f, 0.0f, 0.0f)
-	, fixedUmbraDistance(1000.0)
+	, fixedUmbraAltitude(1000.0)
 	, flagPenumbraVisible(false)
 	, penumbraColor(1.0f, 0.0f, 0.0f)
-	, earthShadowEnlargementDanjon(false)
 	, lastSelectedSatellite(QString())
 	#if(SATELLITES_PLUGIN_IRIDIUM == 1)
 	, iridiumFlaresPredictionDepth(7)
@@ -146,6 +145,7 @@ void Satellites::init()
 		{
 			//qDebug() << "Satellites: created section in config file.";
 			restoreDefaultSettings();
+			restoreDefaultTleSources();
 		}
 
 		// populate settings from main config file.
@@ -227,7 +227,6 @@ void Satellites::init()
 	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(updateObserverLocation(StelLocation)));
 	connect(core, SIGNAL(configurationDataSaved()), this, SLOT(saveSettings()));
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(translateData()));
-	connect(ssystem, SIGNAL(earthShadowEnlargementDanjonChanged(bool)), this, SLOT(updateEarthShadowEnlargementFlag(bool)));
 
 	connect(this, SIGNAL(satSelectionChanged(QString)), this, SLOT(changeSelectedSatellite(QString)));
 
@@ -237,7 +236,7 @@ void Satellites::init()
 void Satellites::translateData()
 {
 	bindingGroups();
-	for (const auto& sat : qAsConst(satellites))
+	for (const auto& sat : std::as_const(satellites))
 	{
 		if (sat->initialized)
 			sat->recomputeSatData();
@@ -280,7 +279,7 @@ void Satellites::bindingGroups()
 
 void Satellites::setSatGroupVisible(const QString& groupId, bool visible)
 {
-	for (const auto& sat : qAsConst(satellites))
+	for (const auto& sat : std::as_const(satellites))
 	{
 		if (sat->initialized && sat->groups.contains(groupId))
 		{
@@ -322,7 +321,6 @@ bool Satellites::backupCatalog(bool deleteOriginal)
 			   << QDir::toNativeSeparators(backupPath);
 		return false;
 	}
-
 	return true;
 }
 
@@ -564,7 +562,7 @@ QStringList Satellites::listMatchingObjects(const QString& objPrefix, int maxNbI
 	}
 
 	QString fullMatch = "";
-	for (const auto& name : qAsConst(names))
+	for (const auto& name : std::as_const(names))
 	{
 		if (!matchObjectName(name, objPrefix, useStartOfWords))
 			continue;
@@ -655,9 +653,8 @@ void Satellites::restoreDefaultTleSources()
 			urls << url;
 	}
 	// Other sources and supplemental data from Celestrack
-	urls << "1,https://celestrak.org/NORAD/elements/supplemental/starlink.txt"
-	     << "https://www.amsat.org/amsat/ftp/keps/current/nasabare.txt"
-	     << "https://www.prismnet.com/~mmccants/tles/classfd.zip";
+	urls << "https://www.amsat.org/amsat/ftp/keps/current/nasabare.txt"
+	      << "https://mmccants.org/tles/classfd.zip";
 
 	saveTleSources(urls);
 }
@@ -689,9 +686,9 @@ void Satellites::restoreDefaultSettings()
 	conf->setValue("hide_invisible_satellites", false);
 	conf->setValue("colored_invisible_satellites", true);
 	conf->setValue("umbra_flag", false);
-	conf->setValue("umbra_fixed_distance_flag", false);
+	conf->setValue("umbra_fixed_altitude_flag", false);
 	conf->setValue("umbra_color", "1.0,0.0,0.0");
-	conf->setValue("umbra_fixed_distance", 1000.0);
+	conf->setValue("umbra_fixed_altitude", 1000.0);
 	conf->setValue("penumbra_flag", false);
 	conf->setValue("penumbra_color", "1.0,0.0,0.0");
 	conf->setValue("cf_magnitude_flag", false);
@@ -722,7 +719,7 @@ void Satellites::restoreDefaultSettings()
 
 void Satellites::restoreDefaultCatalog()
 {
-    if (QFileInfo::exists(catalogPath))
+	if (QFileInfo::exists(catalogPath))
 		backupCatalog(true);
 
 	QFile src(":/satellites/satellites.json");
@@ -759,6 +756,7 @@ void Satellites::loadSettings()
 //	if (conf->contains("tle_url0")) // This can skip some operations...
 	static const QRegularExpression keyRE("^tle_url\\d+$");
 	QStringList urls;
+	bool urlWasUpdated = false;
 	for (const auto& key : conf->childKeys())
 	{
 		if (keyRE.match(key).hasMatch())
@@ -770,7 +768,18 @@ void Satellites::loadSettings()
 
 			// celestrak.com moved to celestrak.org
 			if (url.contains("celestrak.com", Qt::CaseInsensitive))
+			{
 				url.replace("celestrak.com", "celestrak.org", Qt::CaseInsensitive);
+				urlWasUpdated = true;
+			}
+
+			// simple text files are removed
+			if (url.contains("celestrak.org", Qt::CaseInsensitive) && url.endsWith(".txt", Qt::CaseInsensitive))
+			{
+				url.replace("NORAD/elements/", "NORAD/elements/gp.php?GROUP=", Qt::CaseInsensitive);
+				url.replace(".txt", "&FORMAT=TLE", Qt::CaseInsensitive);
+				urlWasUpdated = true;
+			}
 
 			urls << url;
 		}
@@ -779,12 +788,18 @@ void Satellites::loadSettings()
 	if (!urls.isEmpty())
 	{
 		conf->endGroup();
-		setTleSources(urls);
+		setTleSources(urls);		
+		if (urlWasUpdated)
+		{
+			saveTleSources(urls);
+			qWarning() << "[Satellites] updated an old-style array of TLE sources";
+		}
 		conf->beginGroup("Satellites");
 	}
 	else
 	{
 		int size = conf->beginReadArray("tle_sources");
+		bool urlWasUpdated = false;
 		for (int i = 0; i < size; i++)
 		{
 			conf->setArrayIndex(i);
@@ -793,7 +808,18 @@ void Satellites::loadSettings()
 			{
 				// celestrak.com moved to celestrak.org
 				if (url.contains("celestrak.com", Qt::CaseInsensitive))
+				{
 					url.replace("celestrak.com", "celestrak.org", Qt::CaseInsensitive);
+					urlWasUpdated = true;
+				}
+
+				// simple text files are removed
+				if (url.contains("celestrak.org", Qt::CaseInsensitive) && url.endsWith(".txt", Qt::CaseInsensitive))
+				{
+					url.replace("NORAD/elements/", "NORAD/elements/gp.php?GROUP=", Qt::CaseInsensitive);
+					url.replace(".txt", "&FORMAT=TLE", Qt::CaseInsensitive);
+					urlWasUpdated = true;
+				}
 
 				if (conf->value("add_new").toBool())
 					url.prepend("1,");
@@ -801,6 +827,13 @@ void Satellites::loadSettings()
 			}
 		}
 		conf->endArray();
+		if (urlWasUpdated)
+		{
+			conf->endGroup();
+			saveTleSources(updateUrls);
+			qWarning() << "[Satellites] updated list of TLE sources";
+			conf->beginGroup("Satellites");
+		}
 	}
 	
 	// NOTE: Providing default values AND using restoreDefaultSettings() to create the section seems redundant. --BM 
@@ -834,9 +867,9 @@ void Satellites::loadSettings()
 
 	// umbra/penumbra
 	setFlagUmbraVisible(conf->value("umbra_flag", false).toBool());
-	setFlagUmbraAtFixedDistance(conf->value("umbra_fixed_distance_flag", false).toBool());
+	setFlagUmbraAtFixedAltitude(conf->value("umbra_fixed_altitude_flag", false).toBool());
 	setUmbraColor(Vec3f(conf->value("umbra_color", "1.0,0.0,0.0").toString()));
-	setUmbraDistance(conf->value("umbra_fixed_distance", 1000.0).toDouble());
+	setUmbraAltitude(conf->value("umbra_fixed_altitude", 1000.0).toDouble());
 	setFlagPenumbraVisible(conf->value("penumbra_flag", false).toBool());
 	setPenumbraColor(Vec3f(conf->value("penumbra_color", "1.0,0.0,0.0").toString()));
 
@@ -928,9 +961,9 @@ void Satellites::saveSettingsToConfig()
 
 	// umbra/penumbra
 	conf->setValue("umbra_flag", getFlagUmbraVisible());
-	conf->setValue("umbra_fixed_distance_flag", getFlagUmbraAtFixedDistance());
+	conf->setValue("umbra_fixed_altitude_flag", getFlagUmbraAtFixedAltitude());
 	conf->setValue("umbra_color", getUmbraColor().toStr());
-	conf->setValue("umbra_fixed_distance", getUmbraDistance());
+	conf->setValue("umbra_fixed_altitude", getUmbraAltitude());
 	conf->setValue("penumbra_flag", getFlagPenumbraVisible());
 	conf->setValue("penumbra_color", getPenumbraColor().toStr());
 
@@ -1179,7 +1212,7 @@ QVariantMap Satellites::createDataMap(void)
 	map["hintColor"] = defHintCol;
 	map["shortName"] = "satellite orbital data";
 	QVariantMap sats;
-	for (const auto& sat : qAsConst(satellites))
+	for (const auto& sat : std::as_const(satellites))
 	{
 		QVariantMap satMap = sat->getMap();
 
@@ -1319,15 +1352,15 @@ bool Satellites::add(const TleData& tleData)
 	if (!satProperties.contains("description") && !description.isEmpty())
 		satProperties.insert("description", description);
 
-	// Guessing the groups for newly added satellites only
 	QVariantList groupList =  satProperties.value("groups", QVariantList()).toList();
 	if (groupList.isEmpty())
 	{
+		// Guessing the groups for newly added satellites only
 		QStringList satGroups = guessGroups(tleData);
 		if (!satGroups.isEmpty())
 		{
 			satProperties.insert("groups", satGroups);
-			for (const auto& str : qAsConst(satGroups))
+			for (const auto& str : std::as_const(satGroups))
 			{
 				if (!getGroupIdList().contains(str))
 					addGroup(str);
@@ -1462,7 +1495,7 @@ QList<CommLink> Satellites::getCommunicationData(const QString &id)
 {
 	QList<CommLink> comms;
 
-	for (const auto& sat : qAsConst(satellites))
+	for (const auto& sat : std::as_const(satellites))
 	{
 		if (sat->initialized && sat->getID() == id)
 			comms = sat->comms;
@@ -1511,7 +1544,20 @@ QList<CommLink> Satellites::getCommunicationData(const TleData& tleData)
 		{ "METEOR 1",	"meteor-1" },
 		{ "METEOR 3",	"meteor-2" },
 		{ "METEOR 2",	"meteor-3" },
+		{ "METEOR M",	"meteor-m" },
+		{ "METEOR-M",	"meteor-m" },
+		{ "METOP",	"metop" },
+		{ "BEESAT",	"beesat" },
+		{ "UMBRA",	"umbra" },
+		{ "BLACKJACK",	"blackjack" },
+		{ "S-NET",	"s-net" },
+		{ "ION SCV",	"ion-scv" },
+		{ "ASTROCAST-",	"astrocast" },
+		{ "VR3X",	"vr3x" },
+		{ "RASSVET",	"rassvet" },
+		{ "PICO-1A",	"pico-1a" },
 		{ "GLOBALSTAR",	"globalstar" },
+		{ "STRATOSAT",	"stratosat" },
 		{ "COSMO-SKYMED", "cosmo-skymed" }
 	};
 
@@ -1528,7 +1574,7 @@ QList<CommLink> Satellites::getCommunicationData(const TleData& tleData)
 	if (tleData.name.startsWith("GSAT") && (tleData.name.contains("PRN") || tleData.name.contains("GALILEO")))
 		groups << "galileo";
 
-	for (const auto& name : qAsConst(groups))
+	for (const auto& name : std::as_const(groups))
 	{
 		communications.clear();
 		communications = groupComms.value(name, QVariantMap());
@@ -1651,8 +1697,6 @@ QStringList Satellites::guessGroups(const TleData& tleData)
 		satGroups.append("crewed");
 	if (tleData.name.startsWith("PROGRESS-MS") || tleData.name.startsWith("CYGNUS NG"))
 		satGroups.append("resupply");
-	if (tleData.status==Satellite::StatusNonoperational)
-		satGroups.append("non-operational");
 
 	// Guessing the groups from CelesTrak's groups (a "supergroups")
 	if (tleData.sourceURL.contains("celestrak.org", Qt::CaseInsensitive))
@@ -1672,7 +1716,7 @@ QStringList Satellites::guessGroups(const TleData& tleData)
 
 		// add "supergroups", based on CelesTrak's groups
 		QStringList superGroup = satSuperGroupsMap.values(groupName);
-		if (superGroup.size()>0)
+		if (!superGroup.isEmpty())
 		{
 			for (int i=0; i<superGroup.size(); i++)
 			{
@@ -1894,13 +1938,13 @@ void Satellites::setFlagUmbraVisible(bool b)
 	}
 }
 
-void Satellites::setFlagUmbraAtFixedDistance(bool b)
+void Satellites::setFlagUmbraAtFixedAltitude(bool b)
 {
-	if (flagUmbraAtFixedDistance != b)
+	if (flagUmbraAtFixedAltitude != b)
 	{
-		flagUmbraAtFixedDistance = b;
+		flagUmbraAtFixedAltitude = b;
 		emit settingsChanged(); // GZ IS THIS REQUIRED/USEFUL??
-		emit flagUmbraAtFixedDistanceChanged(b);
+		emit flagUmbraAtFixedAltitudeChanged(b);
 	}
 }
 
@@ -1910,10 +1954,10 @@ void Satellites::setUmbraColor(const Vec3f &c)
 	emit umbraColorChanged(c);
 }
 
-void Satellites::setUmbraDistance(double d)
+void Satellites::setUmbraAltitude(double d)
 {
-	fixedUmbraDistance = d;
-	emit umbraDistanceChanged(d);
+	fixedUmbraAltitude = d;
+	emit umbraAltitudeChanged(d);
 }
 
 void Satellites::setFlagPenumbraVisible(bool b)
@@ -2252,7 +2296,7 @@ void Satellites::updateFromOnlineSources()
 	// TRANSLATORS: The full phrase is 'Loading TLE %VALUE%/%MAX%' in progress bar
 	progressBar->setFormat(QString("%1 %v/%m").arg(q_("Loading TLE")));
 
-	for (auto url : qAsConst(updateUrls))
+	for (auto url : std::as_const(updateUrls))
 	{
 		TleSource source;
 		source.file = nullptr;
@@ -2384,7 +2428,7 @@ void Satellites::saveDownloadedUpdate(QNetworkReply* reply)
 		}
 	}
 	updateSources.clear();
-	if (newData.size()>0)
+	if (!newData.isEmpty())
 		updateSatellites(newData);
 	else
 		emit updateStateChanged(OtherError);
@@ -2408,7 +2452,7 @@ bool Satellites::getFlagOrbitLines()
 
 void Satellites::recalculateOrbitLines(void)
 {
-	for (const auto& sat : qAsConst(satellites))
+	for (const auto& sat : std::as_const(satellites))
 	{
 		if (sat->initialized && sat->displayed && sat->orbitDisplayed)
 			sat->recalculateOrbitLines();
@@ -2470,7 +2514,7 @@ void Satellites::updateSatellites(TleDataHash& newTleSets)
 	int addedCount = 0;
 	int missingCount = 0; // Also the number of removed sats, if any.
 	QStringList toBeRemoved;
-	for (const auto& sat : qAsConst(satellites))
+	for (const auto& sat : std::as_const(satellites))
 	{
 		totalCount++;
 		
@@ -2677,7 +2721,7 @@ QString Satellites::getSatIdFromLine2(const QString& line)
 	if (!id.isEmpty())
 	{
 		// Strip any leading zeros as they should be unique ints as strings.
-		static const QRegularExpression re("^[0]*");
+		static const QRegularExpression re("^[0]*\\B");
 		id.remove(re);
 	}
 	return id;
@@ -2686,8 +2730,8 @@ QString Satellites::getSatIdFromLine2(const QString& line)
 void Satellites::loadExtraData()
 {
 	// Description of file and some additional information you can find here:
-	// 1) http://www.prismnet.com/~mmccants/tles/mccdesc.html
-	// 2) http://www.prismnet.com/~mmccants/tles/intrmagdef.html
+	// 1) https://mmccants.org/tles/mccdesc.html
+	// 2) https://mmccants.org/tles/intrmagdef.html
 	QFile qsmFile(":/satellites/qs.mag");	
 	qsMagList.clear();	
 	if (qsmFile.open(QFile::ReadOnly))
@@ -2761,7 +2805,7 @@ void Satellites::update(double deltaTime)
 
 	hintFader.update(static_cast<int>(deltaTime*1000));
 
-	for (const auto& sat : qAsConst(satellites))
+	for (const auto& sat : std::as_const(satellites))
 	{
 		if (sat->initialized && sat->displayed)
 			sat->update(deltaTime);
@@ -2788,7 +2832,7 @@ void Satellites::draw(StelCore* core)
 	painter.setBlending(true);
 	Satellite::hintTexture->bind();
 	Satellite::viewportHalfspace = painter.getProjector()->getBoundingCap();
-	for (const auto& sat : qAsConst(satellites))
+	for (const auto& sat : std::as_const(satellites))
 	{
 		if (sat && sat->initialized && sat->displayed)
 			sat->draw(core, painter);
@@ -2839,7 +2883,7 @@ void Satellites::drawCircles(StelCore* core, StelPainter &painter)
 	painter.setLineSmooth(true);
 	painter.setFont(labelFont);
 
-	double lambda, beta, umbraDistance_AU, umbraRadius_AU, penumbraDistance_AU, penumbraRadius_AU;
+	double lambda, beta;
 	const Vec3d pos = earth->getEclipticPos();
 	const Vec3d dir = - sun->getAberrationPush() + pos;
 	StelUtils::rectToSphe(&lambda, &beta, dir);
@@ -2850,52 +2894,31 @@ void Satellites::drawCircles(StelCore* core, StelPainter &painter)
 	if (!newSelected.empty())
 		sat = getById(newSelected[0].staticCast<Satellite>()->getCatalogNumberString());
 
-	if (flagUmbraAtFixedDistance)
+	Vec4d umbraData;
+	if (flagUmbraAtFixedAltitude)
 	{
-		umbraDistance_AU = penumbraDistance_AU = fixedUmbraDistance/AU+earth->getEquatorialRadius(); // geocentric circle distance [AU]
-		const double earthDistance=earth->getHeliocentricEclipticPos().norm(); // Earth distance [AU]
-		const double sunHP = asin(earth->getEquatorialRadius()/earthDistance)    * (M_180_PI*3600.); // arcsec.
-		const double satHP = asin(earth->getEquatorialRadius()/umbraDistance_AU) * (M_180_PI*3600.); // arcsec.
-		const double sunSD = atan(sun->getEquatorialRadius()/earthDistance)      * (M_180_PI*3600.); // arcsec.
-
-		//Classical Bessel elements
-		double f1, f2;
-		if (earthShadowEnlargementDanjon)
-		{
-			static const double danjonScale=1+1./85.-1./594.; // ~1.01, shadow magnification factor (see Espenak 5000 years Canon)
-			f1=danjonScale*satHP + sunHP + sunSD; // penumbra radius, arcsec
-			f2=danjonScale*satHP + sunHP - sunSD; // umbra radius, arcsec
-		}
-		else
-		{
-			const double mHP1=0.998340*satHP;
-			f1=1.02*(mHP1 + sunHP + sunSD); // penumbra radius, arcsec
-			f2=1.02*(mHP1 + sunHP - sunSD); // umbra radius, arcsec
-		}
-		penumbraRadius_AU=tan(f1/3600.*M_PI_180)*umbraDistance_AU;
-		umbraRadius_AU=tan(f2/3600.*M_PI_180)*umbraDistance_AU;
+		umbraData=Satellite::getUmbraData(earth->getEquatorialRadius()*AU+fixedUmbraAltitude)/AU;
 	}
 	else if (!sat.isNull())
 	{
-		Vec4d umbraData=sat->getUmbraData();
-		umbraDistance_AU    = umbraData[0]/AU;
-		umbraRadius_AU      = umbraData[1]/AU;
-		penumbraDistance_AU = umbraData[2]/AU;
-		penumbraRadius_AU   = umbraData[3]/AU;
+		umbraData=sat->getUmbraData()/AU;
 	}
 	else
 		return;
 
-
+	const double umbraDistance_AU    = umbraData[0];
+	const double umbraRadius_AU      = umbraData[1];
+	const double penumbraDistance_AU = umbraData[2];
+	const double penumbraRadius_AU   = umbraData[3];
 	StelVertexArray umbra(StelVertexArray::LineLoop);
-	for (int i=0; i<360; ++i)
+	for (int i=0; i<4*360; ++i)
 	{
-		Vec3d point(umbraDistance_AU, cos(i*M_PI_180)*umbraRadius_AU, sin(i*M_PI_180)*umbraRadius_AU);
+		Vec3d point(umbraDistance_AU, cos(i*M_PI_180*0.25)*umbraRadius_AU, sin(i*M_PI_180*0.25)*umbraRadius_AU);
 		rot.transfo(point);
 		umbra.vertex.append(pos+point);
 	}
 	painter.setColor(getUmbraColor(), 1.f);
-	painter.drawStelVertexArray(umbra, false);
+	painter.drawStelVertexArray(umbra, true);
 
 	// plot a center cross mark
 	texCross->bind();
@@ -2903,22 +2926,23 @@ void Satellites::drawCircles(StelCore* core, StelPainter &painter)
 	rot.transfo(point);
 	Vec3d coord = pos+point;
 	painter.drawSprite2dMode(coord, 5.f);
-	QString cuLabel = QString("%1 (h=%2 %3)").arg(q_("C.U."), QString::number(AU*(umbraDistance_AU - earth->getEquatorialRadius()), 'f', 1), qc_("km","distance"));
+	QString number = QString::number( (getFlagUmbraAtFixedAltitude() ? getUmbraAltitude() : sat->latLongSubPointPosition[2] ), 'f', 1);
+	QString cuLabel = QString("%1 (h=%2 %3)").arg(q_("C.U."), number, qc_("km","distance"));
 	const float shift = 8.f;
 	painter.drawText(coord, cuLabel, 0, shift, shift, false);
 
 	if (getFlagPenumbraVisible())
 	{
 		StelVertexArray penumbra(StelVertexArray::LineLoop);
-		for (int i=0; i<360; ++i)
+		for (int i=0; i<4*360; ++i)
 		{
-			Vec3d point(penumbraDistance_AU, cos(i*M_PI_180)*penumbraRadius_AU, sin(i*M_PI_180)*penumbraRadius_AU);
+			Vec3d point(penumbraDistance_AU, cos(i*M_PI_180*0.25)*penumbraRadius_AU, sin(i*M_PI_180*0.25)*penumbraRadius_AU);
 			rot.transfo(point);
 			penumbra.vertex.append(pos+point);
 		}
 
 		painter.setColor(getPenumbraColor(), 1.f);
-		painter.drawStelVertexArray(penumbra, false);
+		painter.drawStelVertexArray(penumbra, true);
 	}
 	painter.setProjector(saveProj);
 }
@@ -3099,7 +3123,7 @@ IridiumFlaresPredictionList Satellites::getIridiumFlaresPrediction()
 		nextJD = predictionJD + 1./24;
 		pcore->setJD(predictionJD);
 
-		ssystem->getEarth()->computePosition(predictionJD);
+		ssystem->getEarth()->computePosition(predictionJD, Vec3d(0.));
 		pcore->update(0);
 
 		for (auto i = iridiums.begin(); i != iridiums.end(); ++i)
@@ -3542,20 +3566,39 @@ void Satellites::translations()
 	N_("TIANGONG (TIANHE)");
 
 	// Special terms for communications
+	// NOTE: Please remember to update Satellite::getCommLinkInfo() method after updating the list of terms
 	// TRANSLATORS: An uplink (UL or U/L) is the link from a ground station to a satellite
-	N_("uplink");
+	NC_("uplink", "comms");
 	// TRANSLATORS: A downlink (DL) is the link from a satellite to a ground station
-	N_("downlink");
+	NC_("downlink", "comms");
 	// TRANSLATORS: The beacon (or radio beacon) is a device in the satellite, which emit one or more signals (normally on a fixed frequency) whose purpose is twofold: station-keeping information (telemetry) and locates the satellite (determines its azimuth and elevation) in the sky
-	N_("beacon");
+	NC_("beacon", "comms");
 	// TRANSLATORS: Telemetry is the collection of measurements or other data at satellites and their automatic transmission to receiving equipment (telecommunication) for monitoring
-	N_("telemetry");
+	NC_("telemetry", "comms");
 	// TRANSLATORS: The channel for transmission of video data
-	N_("video");
+	NC_("video", "comms");
 	// TRANSLATORS: The broadband is wide bandwidth data transmission which transports multiple signals at a wide range of frequencies
-	N_("broadband");
+	NC_("broadband", "comms");
 	// TRANSLATORS: The channel for transmission of commands
-	N_("command");
+	NC_("command", "comms");
+	// TRANSLATORS: Meteorological is a service on the satellite for transmitting meteorological data to a ground station
+	NC_("meteorological", "comms");
+	// TRANSLATORS: Maritime is a service on the satellite
+	NC_("maritime", "comms");
+	// TRANSLATORS: Mobile is a service on the satellite
+	NC_("mobile", "comms");
+	// TRANSLATORS: Mobile telephony is a service on the satellite
+	NC_("mobile telephony", "comms");
+	// TRANSLATORS: A repeater is an electronic device that receives a signal and retransmits it.
+	NC_("repeater", "comms");
+	// TRANSLATORS: The digital repeater (or digipiter) is used in channels that transmit data by binary digital signals
+	NC_("digipeater", "comms");
+	// TRANSLATORS: A radio band is a small frequency band (a contiguous section of the range of the radio spectrum) in which channels are usually used or set aside for the same purpose. S-band for example.
+	NC_("-band", "comms");
+	NC_("crew voice", "comms");
+	NC_("imaging", "comms");
+	// TRANSLATORS: Some mode of communication via radio channel
+	NC_("mode", "comms");
 
 #endif
 }

@@ -30,106 +30,10 @@
     <number>0</number>
    </property>
    <item>
-    <widget class="BarFrame" name="TitleBar">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
+    <widget class="TitleBar" name="titleBar">
+     <property name="title">
+      <string>ArchaeoLines Plug-in Configuration</string>
      </property>
-     <property name="minimumSize">
-      <size>
-       <width>530</width>
-       <height>25</height>
-      </size>
-     </property>
-     <property name="maximumSize">
-      <size>
-       <width>16777215</width>
-       <height>25</height>
-      </size>
-     </property>
-     <property name="focusPolicy">
-      <enum>Qt::NoFocus</enum>
-     </property>
-     <property name="autoFillBackground">
-      <bool>false</bool>
-     </property>
-     <property name="frameShape">
-      <enum>QFrame::StyledPanel</enum>
-     </property>
-     <layout class="QHBoxLayout">
-      <property name="spacing">
-       <number>0</number>
-      </property>
-      <property name="leftMargin">
-       <number>0</number>
-      </property>
-      <property name="topMargin">
-       <number>0</number>
-      </property>
-      <property name="rightMargin">
-       <number>4</number>
-      </property>
-      <property name="bottomMargin">
-       <number>0</number>
-      </property>
-      <item>
-       <spacer>
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item>
-       <widget class="QLabel" name="stelWindowTitle">
-        <property name="text">
-         <string>ArchaeoLines Plug-in Configuration</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <spacer>
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item>
-       <widget class="StelCloseButton" name="closeStelWindow">
-        <property name="minimumSize">
-         <size>
-          <width>16</width>
-          <height>16</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>16</width>
-          <height>16</height>
-         </size>
-        </property>
-        <property name="focusPolicy">
-         <enum>Qt::NoFocus</enum>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-       </widget>
-      </item>
-     </layout>
     </widget>
    </item>
    <item>
@@ -220,7 +124,7 @@
           </widget>
          </item>
          <item row="4" column="2">
-          <widget class="QToolButton" name="selectedObjectAzimuthColorToolButton">
+          <widget class="ColorButton" name="selectedObjectAzimuthColorToolButton">
            <property name="text">
             <string notr="true"/>
            </property>
@@ -255,7 +159,7 @@
           </widget>
          </item>
          <item row="1" column="2">
-          <widget class="QToolButton" name="currentMoonColorToolButton">
+          <widget class="ColorButton" name="currentMoonColorToolButton">
            <property name="text">
             <string notr="true"/>
            </property>
@@ -269,7 +173,7 @@
           </widget>
          </item>
          <item row="3" column="2">
-          <widget class="QToolButton" name="selectedObjectColorToolButton">
+          <widget class="ColorButton" name="selectedObjectColorToolButton">
            <property name="text">
             <string notr="true"/>
            </property>
@@ -283,7 +187,7 @@
           </widget>
          </item>
          <item row="0" column="0">
-          <widget class="QToolButton" name="equinoxColorToolButton">
+          <widget class="ColorButton" name="equinoxColorToolButton">
            <property name="text">
             <string notr="true"/>
            </property>
@@ -297,7 +201,7 @@
           </widget>
          </item>
          <item row="0" column="2">
-          <widget class="QToolButton" name="currentSunColorToolButton">
+          <widget class="ColorButton" name="currentSunColorToolButton">
            <property name="text">
             <string notr="true"/>
            </property>
@@ -311,7 +215,7 @@
           </widget>
          </item>
          <item row="2" column="0">
-          <widget class="QToolButton" name="crossquarterColorToolButton">
+          <widget class="ColorButton" name="crossquarterColorToolButton">
            <property name="toolTip">
             <string>Change color</string>
            </property>
@@ -321,21 +225,21 @@
           </widget>
          </item>
          <item row="4" column="0">
-          <widget class="QToolButton" name="minorStandstillColorToolButton">
+          <widget class="ColorButton" name="minorStandstillColorToolButton">
            <property name="text">
             <string notr="true"/>
            </property>
           </widget>
          </item>
          <item row="2" column="2">
-          <widget class="QToolButton" name="currentPlanetColorToolButton">
+          <widget class="ColorButton" name="currentPlanetColorToolButton">
            <property name="text">
             <string notr="true"/>
            </property>
           </widget>
          </item>
          <item row="5" column="2">
-          <widget class="QToolButton" name="selectedObjectHourAngleColorToolButton">
+          <widget class="ColorButton" name="selectedObjectHourAngleColorToolButton">
            <property name="text">
             <string notr="true"/>
            </property>
@@ -356,7 +260,7 @@
           </widget>
          </item>
          <item row="1" column="0">
-          <widget class="QToolButton" name="solsticesColorToolButton">
+          <widget class="ColorButton" name="solsticesColorToolButton">
            <property name="text">
             <string notr="true"/>
            </property>
@@ -370,7 +274,7 @@
           </widget>
          </item>
          <item row="3" column="0">
-          <widget class="QToolButton" name="majorStandstillColorToolButton">
+          <widget class="ColorButton" name="majorStandstillColorToolButton">
            <property name="text">
             <string notr="true"/>
            </property>
@@ -391,21 +295,21 @@
           </widget>
          </item>
          <item row="7" column="0">
-          <widget class="QToolButton" name="nadirPassageColorToolButton">
+          <widget class="ColorButton" name="nadirPassageColorToolButton">
            <property name="text">
             <string notr="true"/>
            </property>
           </widget>
          </item>
          <item row="6" column="0">
-          <widget class="QToolButton" name="zenithPassageColorToolButton">
+          <widget class="ColorButton" name="zenithPassageColorToolButton">
            <property name="text">
             <string notr="true"/>
            </property>
           </widget>
          </item>
          <item row="5" column="0">
-          <widget class="QToolButton" name="polarCirclesColorToolButton">
+          <widget class="ColorButton" name="polarCirclesColorToolButton">
            <property name="text">
             <string/>
            </property>
@@ -483,7 +387,7 @@
           </widget>
          </item>
          <item row="9" column="0">
-          <widget class="QToolButton" name="customDeclination2ColorToolButton">
+          <widget class="ColorButton" name="customDeclination2ColorToolButton">
            <property name="text">
             <string notr="true"/>
            </property>
@@ -575,7 +479,7 @@
           </widget>
          </item>
          <item row="8" column="0">
-          <widget class="QToolButton" name="customDeclination1ColorToolButton">
+          <widget class="ColorButton" name="customDeclination1ColorToolButton">
            <property name="text">
             <string notr="true"/>
            </property>
@@ -606,7 +510,7 @@
           <widget class="QLineEdit" name="customDeclination2LineEdit"/>
          </item>
          <item row="5" column="0">
-          <widget class="QToolButton" name="customAzimuth2ColorToolButton">
+          <widget class="ColorButton" name="customAzimuth2ColorToolButton">
            <property name="text">
             <string notr="true"/>
            </property>
@@ -627,7 +531,7 @@
           </widget>
          </item>
          <item row="0" column="0">
-          <widget class="QToolButton" name="geographicLocation1ColorToolButton">
+          <widget class="ColorButton" name="geographicLocation1ColorToolButton">
            <property name="text">
             <string notr="true"/>
            </property>
@@ -703,7 +607,7 @@
           </widget>
          </item>
          <item row="4" column="0">
-          <widget class="QToolButton" name="customAzimuth1ColorToolButton">
+          <widget class="ColorButton" name="customAzimuth1ColorToolButton">
            <property name="text">
             <string notr="true"/>
            </property>
@@ -720,7 +624,7 @@
           </widget>
          </item>
          <item row="2" column="0">
-          <widget class="QToolButton" name="geographicLocation2ColorToolButton">
+          <widget class="ColorButton" name="geographicLocation2ColorToolButton">
            <property name="text">
             <string notr="true"/>
            </property>
@@ -867,14 +771,14 @@
           </widget>
          </item>
          <item row="6" column="0">
-          <widget class="QToolButton" name="customAltitude1ColorToolButton">
+          <widget class="ColorButton" name="customAltitude1ColorToolButton">
            <property name="text">
             <string notr="true"/>
            </property>
           </widget>
          </item>
          <item row="7" column="0">
-          <widget class="QToolButton" name="customAltitude2ColorToolButton">
+          <widget class="ColorButton" name="customAltitude2ColorToolButton">
            <property name="text">
             <string notr="true"/>
            </property>
@@ -930,7 +834,7 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>BarFrame</class>
+   <class>TitleBar</class>
    <extends>QFrame</extends>
    <header>Dialog.hpp</header>
    <container>1</container>
@@ -941,9 +845,9 @@
    <header>AngleSpinBox.hpp</header>
   </customwidget>
   <customwidget>
-   <class>StelCloseButton</class>
-   <extends>QPushButton</extends>
-   <header>gui/StelCloseButton.hpp</header>
+   <class>ColorButton</class>
+   <extends>QToolButton</extends>
+   <header>gui/ColorButton.hpp</header>
   </customwidget>
  </customwidgets>
  <resources>
