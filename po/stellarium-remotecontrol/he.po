@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-remotecontrol\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2023-12-13 10:12+0700\n"
+"POT-Creation-Date: 2024-03-01 08:54+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: חיים שלמה רוזנבך, 2022\n"
 "Language-Team: Hebrew (https://app.transifex.com/stellarium/teams/80998/he/)\n"
@@ -23,7 +23,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: he\n"
-"Plural-Forms: nplurals=3; plural=(n == 1 && n % 1 == 0) ? 0 : (n == 2 && n % 1 == 0) ? 1: (n % 10 == 0 && n % 1 == 0 && n > 10) ? 2 : 3;\n"
+"Plural-Forms: nplurals=3; plural=(n == 1 && n % 1 == 0) ? 0 : (n == 2 && n % 1 == 0) ? 1: 2;\n"
 
 #: plugins/RemoteControl/webroot/js/api/actions.js:60
 msgid "Could not retrieve action list"
@@ -450,6 +450,10 @@ msgstr ""
 #: index.html:592 tablet7in.html:637
 msgid "Labels and markers"
 msgstr "תוויות וסמנים"
+
+#: index.html:605 tablet7in.html:650
+msgid "Limit angular size (arcmin):"
+msgstr ""
 
 #: index.html:617 tablet7in.html:662
 msgid "Use associated planet and position"
