@@ -4,18 +4,18 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Besnik Bleta <besnik@programeshqip.org>, 2022
 # Alexander V. Wolf <alex.v.wolf@gmail.com>, 2022
 # cardinot <mcardinot@gmail.com>, 2022
+# Besnik Bleta <besnik@programeshqip.org>, 2024
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-remotecontrol\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2023-12-13 10:12+0700\n"
+"POT-Creation-Date: 2024-03-01 08:54+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
-"Last-Translator: cardinot <mcardinot@gmail.com>, 2022\n"
+"Last-Translator: Besnik Bleta <besnik@programeshqip.org>, 2024\n"
 "Language-Team: Albanian (https://app.transifex.com/stellarium/teams/80998/sq/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -25,148 +25,148 @@ msgstr ""
 
 #: plugins/RemoteControl/webroot/js/api/actions.js:60
 msgid "Could not retrieve action list"
-msgstr ""
+msgstr "S’u mor dot listë veprimesh"
 
 #: plugins/RemoteControl/webroot/js/api/actions.js:88
 msgid "Action '%1' not accepted by server: "
-msgstr ""
+msgstr "Veprim “'%1” i papranuar nga shërbyesi: "
 
 #: plugins/RemoteControl/webroot/js/api/actions.js:95
 msgid "Error sending action '%1' to server: "
-msgstr ""
+msgstr "Gabim gjatë dërgimit të veprimit “%1” te shërbyesi: "
 
 #: plugins/RemoteControl/webroot/js/api/location.js:33
 #: plugins/RemoteControl/webroot/js/api/location.js:61
 #: plugins/RemoteControl/webroot/js/api/search.js:188
 msgid "Error performing search"
-msgstr ""
+msgstr "Gabim gjatë kryerjes së kërkimt"
 
 #: plugins/RemoteControl/webroot/js/api/location.js:125
 msgid "Could not retrieve country list"
-msgstr ""
+msgstr "S’u mor dot listë vendesh"
 
 #: plugins/RemoteControl/webroot/js/api/location.js:138
 msgid "Could not retrieve planet list"
-msgstr ""
+msgstr "S’u mor dot listë planetesh"
 
 #: plugins/RemoteControl/webroot/js/api/properties.js:28
 msgid "Could not retrieve property list"
-msgstr ""
+msgstr "S’u mor dot listë vetish"
 
 #: plugins/RemoteControl/webroot/js/api/properties.js:89
 #: plugins/RemoteControl/webroot/js/api/properties.js:110
 msgid "Property '%1' not accepted by server: "
-msgstr ""
+msgstr "Veti “%1” e papranuar nga shërbyesi: "
 
 #: plugins/RemoteControl/webroot/js/api/properties.js:96
 msgid "Error sending property '%1' to server: "
-msgstr ""
+msgstr "Gabim gjatë dërgimit të vetisë “%1” te shërbyesi: "
 
 #: plugins/RemoteControl/webroot/js/api/remotecontrol.js:197
 msgid "Error sending command to server: "
-msgstr ""
+msgstr "Gabim gjatë dërgimit të urdhrit te shërbyesi: "
 
 #: plugins/RemoteControl/webroot/js/api/scripts.js:27
 msgid "Could not retrieve script list"
-msgstr ""
+msgstr "S’u mor dot listë programthesh"
 
 #: plugins/RemoteControl/webroot/js/api/search.js:35
 msgid "querying"
-msgstr ""
+msgstr "po bëhet kërkesa"
 
 #: plugins/RemoteControl/webroot/js/api/search.js:44
 msgid "Error (%1)"
-msgstr ""
+msgstr "Gabim (%1)"
 
 #: plugins/RemoteControl/webroot/js/api/search.js:60
 msgid "Error performing Simbad lookup"
-msgstr ""
+msgstr "Gabim në kryerje kërkimi Simbad"
 
 #: plugins/RemoteControl/webroot/js/api/search.js:79 index.html:223
 #: tablet7in.html:240
 msgid "idle"
-msgstr ""
+msgstr "i plogësht"
 
 #: plugins/RemoteControl/webroot/js/api/search.js:105
 msgid "Error loading object types"
-msgstr ""
+msgstr "Gabim gjatë ngarkimit të llojeve të objekteve"
 
 #: plugins/RemoteControl/webroot/js/api/search.js:138
 msgid "Error getting object list"
-msgstr ""
+msgstr "Gabim në marrje liste objektesh"
 
 #: plugins/RemoteControl/webroot/js/api/search.js:200
 msgid "waiting"
-msgstr ""
+msgstr "po pritet"
 
 #: plugins/RemoteControl/webroot/js/api/viewoptions.js:38
 msgid "Could not retrieve projection list"
-msgstr ""
+msgstr "S’u mor dot listë projeksionesh"
 
 #: plugins/RemoteControl/webroot/js/api/viewoptions.js:51
 #: plugins/RemoteControl/webroot/js/api/viewoptions.js:64
 msgid "Could not retrieve landscape list"
-msgstr ""
+msgstr "S’u mor dot listë peizazhesh"
 
 #: plugins/RemoteControl/webroot/js/plugins/scenery3d.js:22
 #: plugins/RemoteControl/webroot/js/ui/scripts.js:76 index.html:684
 #: index.html:746 tablet7in.html:743 tablet7in.html:803
 msgid "-none-"
-msgstr ""
+msgstr "-asnjë-"
 
 #: plugins/RemoteControl/webroot/js/plugins/scenery3d.js:28
 msgid "(Currently loading: %1)"
-msgstr ""
+msgstr "(Tani po ngarkohet: %1)"
 
 #: plugins/RemoteControl/webroot/js/plugins/scenery3d.js:71
 msgid "Could not retrieve Scenery3d list"
-msgstr ""
+msgstr "S’u mor dot listë Scenery3d"
 
 #: plugins/RemoteControl/webroot/js/ui/actions.js:44
 #: plugins/RemoteControl/webroot/js/ui/actions.js:77
 msgid "on"
-msgstr ""
+msgstr "on"
 
 #: plugins/RemoteControl/webroot/js/ui/actions.js:44
 #: plugins/RemoteControl/webroot/js/ui/actions.js:77
 msgid "off"
-msgstr ""
+msgstr "off"
 
 #: plugins/RemoteControl/webroot/js/ui/combobox.js:58
 msgid "Show All Items"
-msgstr ""
+msgstr "Shfaqi Krejt Objektet"
 
 #: plugins/RemoteControl/webroot/js/ui/combobox.js:124
 msgid "Input did not match any item"
-msgstr ""
+msgstr "Ç’u dha, s’pati përputhje me ndonjë objekt"
 
 #: plugins/RemoteControl/webroot/js/ui/search.js:285
 msgid "No current selection"
-msgstr ""
+msgstr "Pa përzgjedhje të tanishme"
 
 #: index.html:5 tablet7in.html:5
 msgid "Stellarium remote control plugin"
-msgstr ""
+msgstr "Shtojcë për kontroll së largëti të Stellarium-it"
 
 #: index.html:17 tablet7in.html:18
 msgid "Please wait, loading"
-msgstr ""
+msgstr "J lutemi, prisni, po ngarkohet"
 
 #: index.html:26 tablet7in.html:27
 msgid "Stellarium remote control"
-msgstr ""
+msgstr "Kontroll së largëti për Stellarium"
 
 #: index.html:30 tablet7in.html:31
 msgid "Main controls"
-msgstr ""
+msgstr "Kontrollet kryesore"
 
 #: index.html:33 tablet7in.html:38
 msgid "DSO"
-msgstr ""
+msgstr "DSO"
 
 #: index.html:36
 msgid "Actions and scripts"
-msgstr ""
+msgstr "Veprime dhe programthe"
 
 #: index.html:39 tablet7in.html:45
 msgid "Scenery3d"
@@ -174,35 +174,35 @@ msgstr ""
 
 #: index.html:77
 msgid "Pause"
-msgstr ""
+msgstr "Ndalesë"
 
 #: index.html:82 tablet7in.html:183
 msgid "Time jumps"
-msgstr ""
+msgstr "Kapërcime kohore"
 
 #: index.html:86 tablet7in.html:187
 msgid "Solar hour"
-msgstr ""
+msgstr "Orë diellore"
 
 #: index.html:87 tablet7in.html:188
 msgid "Solar day"
-msgstr ""
+msgstr "Ditë diellore"
 
 #: index.html:88 tablet7in.html:189
 msgid "Solar week"
-msgstr ""
+msgstr "Javë diellore"
 
 #: index.html:90 tablet7in.html:191
 msgid "Calendar year"
-msgstr ""
+msgstr "Vit kalendarik"
 
 #: index.html:91 tablet7in.html:192
 msgid "10 Calendar years"
-msgstr ""
+msgstr "10 vite Kalendari"
 
 #: index.html:92 tablet7in.html:193
 msgid "100 Calendar years"
-msgstr ""
+msgstr "100 vite Kalendari"
 
 #: index.html:95 tablet7in.html:196
 msgid "Sidereal year"
@@ -275,14 +275,15 @@ msgstr ""
 #: index.html:217 tablet7in.html:234
 msgid "Enter search term. Use TAB to navigate results."
 msgstr ""
+"Jepni term kërkimi. Që të lëvizni nëpër përfundime, përdorni tastin TAB."
 
 #: index.html:218 tablet7in.html:235
 msgid "Select and focus"
-msgstr ""
+msgstr "Përzgjidhe dhe fokusoje"
 
 #: index.html:244 tablet7in.html:264
 msgid "Selection mode"
-msgstr ""
+msgstr "Mënyrë përzgjedhjeje"
 
 #: index.html:244 tablet7in.html:264
 msgid "Center on object"
@@ -298,7 +299,7 @@ msgstr ""
 
 #: index.html:246 tablet7in.html:266
 msgid "Quick select"
-msgstr ""
+msgstr "Përzgjedhje e shpejtë"
 
 #: index.html:250 tablet7in.html:270
 msgid "Earth"
@@ -306,15 +307,15 @@ msgstr "Toka"
 
 #: index.html:250 tablet7in.html:270
 msgid "Pluto"
-msgstr ""
+msgstr "Plutoni"
 
 #: index.html:256 tablet7in.html:299
 msgid "Current selection"
-msgstr ""
+msgstr "Përzgjedhja e tanishme"
 
 #: index.html:273 tablet7in.html:326
 msgid "Milky Way brightness:"
-msgstr ""
+msgstr "Ndriçim i Rrugës së Qumështit:"
 
 #: index.html:278 tablet7in.html:338
 msgid "Digitized Sky Survey"
@@ -334,19 +335,19 @@ msgstr "Shfaq orbita planeti"
 
 #: index.html:294 tablet7in.html:357
 msgid "Show planet orbits only"
-msgstr ""
+msgstr "Shfaq vetëm orbita planetësh"
 
 #: index.html:295 tablet7in.html:358
 msgid "Show orbit for selected planet"
-msgstr ""
+msgstr "Shfaq orbitë për planetin e përzgjedhur"
 
 #: index.html:296 tablet7in.html:359
 msgid "Show planet trails"
-msgstr ""
+msgstr "Shfaq trajektore planeti"
 
 #: index.html:297 tablet7in.html:360
 msgid "Show trail only for selected planet"
-msgstr ""
+msgstr "Shfaq trajektore vetëm për planetin e përzgjedhur"
 
 #: index.html:302 tablet7in.html:364
 msgid "Scale Moon:"
@@ -366,7 +367,7 @@ msgstr ""
 
 #: index.html:336 tablet7in.html:414
 msgid "Extinction Coefficient:"
-msgstr ""
+msgstr "Koeficient Zhdukjeje:"
 
 #: index.html:340 tablet7in.html:419
 msgid "Shooting Stars"
@@ -381,14 +382,16 @@ msgid ""
 "Instantaneous circles of earth´s axis on its motion around ecliptical poles."
 " Displayed on Earth only."
 msgstr ""
+"Rrathë të atypëratyshëm të boshtit të tokës në lëvizjen e tij rreth polesh "
+"ekliptike. Shfaqur vetëm për Tokën."
 
 #: index.html:400
 msgid "Center"
-msgstr ""
+msgstr "Qendër"
 
 #: index.html:418 tablet7in.html:486
 msgid "Solstices"
-msgstr ""
+msgstr "Solstice"
 
 #: index.html:419 tablet7in.html:487
 msgid "Crossquarters"
@@ -404,11 +407,11 @@ msgstr ""
 
 #: index.html:431 tablet7in.html:498
 msgid "Current Planet:"
-msgstr ""
+msgstr "Planet i Tanishëm:"
 
 #: index.html:469 tablet7in.html:534
 msgid "Catalogue of Reflection Nebulae (Van den Bergh, 1966)"
-msgstr ""
+msgstr "Katalog i Mjegullnajës së Pasqyrimit (Van den Bergh, 1966)"
 
 #: index.html:516 tablet7in.html:552
 msgid ""
@@ -417,7 +420,7 @@ msgstr ""
 
 #: index.html:554
 msgid "Objects without identifier"
-msgstr ""
+msgstr "Objekte pa identifikues"
 
 #: index.html:572
 msgid "Open Star clusters"
@@ -429,15 +432,15 @@ msgstr ""
 
 #: index.html:580 tablet7in.html:626
 msgid "Bright Nebulae"
-msgstr ""
+msgstr "Mjegullnajë e Ndritshme"
 
 #: index.html:581 tablet7in.html:627
 msgid "Dark Nebulae"
-msgstr ""
+msgstr "Mjegullnajë e Errët"
 
 #: index.html:582 tablet7in.html:628
 msgid "Planetary Nebulae"
-msgstr ""
+msgstr "Mjegullnaja Planetare"
 
 #: index.html:584
 msgid "Galaxy clusters"
@@ -445,6 +448,10 @@ msgstr ""
 
 #: index.html:592 tablet7in.html:637
 msgid "Labels and markers"
+msgstr "Etiketa dhe piketa"
+
+#: index.html:605 tablet7in.html:650
+msgid "Limit angular size (arcmin):"
 msgstr ""
 
 #: index.html:617 tablet7in.html:662
@@ -453,15 +460,15 @@ msgstr "Përdor planetin përshoqëruar dhe pozicionin"
 
 #: index.html:628 tablet7in.html:671
 msgid "Show illumination"
-msgstr ""
+msgstr "Shfaq ndriçim"
 
 #: index.html:633 tablet7in.html:677
 msgid "Current landscape"
-msgstr ""
+msgstr "Peizazh i tanishëm"
 
 #: index.html:645 tablet7in.html:690
 msgid "Show lines with thickness"
-msgstr ""
+msgstr "Shfaq vija me trashësi"
 
 #: index.html:650 tablet7in.html:695
 msgid "Show asterisms with thickness"
@@ -473,7 +480,7 @@ msgstr ""
 
 #: index.html:662 tablet7in.html:709
 msgid "Show boundaries with thickness"
-msgstr ""
+msgstr "Shfaq kufij me trashësi"
 
 #: index.html:667 tablet7in.html:714
 msgid "Constellation selection isolated"
@@ -481,23 +488,23 @@ msgstr ""
 
 #: index.html:671 tablet7in.html:718
 msgid "Current sky culture"
-msgstr ""
+msgstr "Kultura e tanishme qiellore"
 
 #: index.html:684 tablet7in.html:743
 msgid "Active script:"
-msgstr ""
+msgstr "Programth aktiv:"
 
 #: index.html:685 tablet7in.html:744
 msgid "Run selected script"
-msgstr ""
+msgstr "Xhiro programthin e përzgjedhur"
 
 #: index.html:685 tablet7in.html:744
 msgid "Stop current script"
-msgstr ""
+msgstr "Ndal programthin e tanishëm"
 
 #: index.html:690 tablet7in.html:41 tablet7in.html:728
 msgid "Actions"
-msgstr ""
+msgstr "Veprime"
 
 #: index.html:694 tablet7in.html:732
 msgid "Run/toggle action"
@@ -505,7 +512,7 @@ msgstr ""
 
 #: index.html:705 tablet7in.html:767
 msgid "Planet map"
-msgstr ""
+msgstr "Hartë planetesh"
 
 #: index.html:706 tablet7in.html:768
 msgid "Planet map pointer"
@@ -513,43 +520,45 @@ msgstr ""
 
 #: index.html:710 tablet7in.html:772
 msgid "Type to search location"
-msgstr ""
+msgstr "Që të kërkohet për vendndodhje, shtypni"
 
 #: index.html:744 tablet7in.html:801
 msgid "Interaction"
-msgstr ""
+msgstr "Ndërveprim"
 
 #: index.html:745 tablet7in.html:802
 msgid "Current scene:"
-msgstr ""
+msgstr "Skena e tanishme:"
 
 #: index.html:748 tablet7in.html:805
 msgid "View controls"
-msgstr ""
+msgstr "Shihni kontrollet"
 
 #: index.html:754 tablet7in.html:811
 msgid "Movement controls"
-msgstr ""
+msgstr "Kontrolle lëvizjeje"
 
 #: index.html:766 tablet7in.html:823
 msgid "Torchlight"
-msgstr ""
+msgstr "Pishtari"
 
 #: index.html:773 tablet7in.html:830
 msgid "Scene selection"
-msgstr ""
+msgstr "Përzgjedhje skene"
 
 #: index.html:777 tablet7in.html:834
 msgid "Load selected scene"
-msgstr ""
+msgstr "Ngarko skenën e përzgjedhur"
 
 #: index.html:801 tablet7in.html:859
 msgid "No response from server"
-msgstr ""
+msgstr "S’ka përgjigje nga shërbyesi"
 
 #: index.html:802 tablet7in.html:860
 msgid "No response from server for %1 seconds. Is Stellarium still running?"
 msgstr ""
+"S’ka përgjigje nga shërbyesi, gjatë %1 sekondash. A është ende në funksionim"
+" Stellarium-i?"
 
 #: tablet7in.html:32
 msgid "Time Jump"
@@ -557,51 +566,51 @@ msgstr ""
 
 #: tablet7in.html:37
 msgid "Grids"
-msgstr ""
+msgstr "Rrjeta"
 
 #: tablet7in.html:97
 msgid "Up/Left"
-msgstr ""
+msgstr "Sipër/Majtas"
 
 #: tablet7in.html:97
 msgid "Up"
-msgstr ""
+msgstr "Sipër"
 
 #: tablet7in.html:97
 msgid "Up/Right"
-msgstr ""
+msgstr "Sipër/Djathtas"
 
 #: tablet7in.html:97
 msgid "Left"
-msgstr ""
+msgstr "Majtas"
 
 #: tablet7in.html:97
 msgid "Focus on selected object"
-msgstr ""
+msgstr "Fokuso objektin e përzgjedhur"
 
 #: tablet7in.html:97
 msgid "Focus on selection"
-msgstr ""
+msgstr "Fokuso përzgjedhjen"
 
 #: tablet7in.html:97
 msgid "Right"
-msgstr ""
+msgstr "Djathtas"
 
 #: tablet7in.html:97
 msgid "Down/Left"
-msgstr ""
+msgstr "Poshtë/Majtas"
 
 #: tablet7in.html:97
 msgid "Down"
-msgstr ""
+msgstr "Poshtë"
 
 #: tablet7in.html:97
 msgid "Down/Right"
-msgstr ""
+msgstr "Poshtë/Djathtas"
 
 #: tablet7in.html:271
 msgid "Sirius"
-msgstr ""
+msgstr "Sirius"
 
 #: tablet7in.html:272
 msgid "Arcturus"
@@ -633,11 +642,11 @@ msgstr ""
 
 #: tablet7in.html:279
 msgid "Orion Nebula"
-msgstr ""
+msgstr "Mjegullnaja e Orionit"
 
 #: tablet7in.html:280
 msgid "Eta Carinae Nebula"
-msgstr ""
+msgstr "Mjegullnaja Eta Carinae"
 
 #: tablet7in.html:281
 msgid "47 Tucanae Cluster"
@@ -693,7 +702,7 @@ msgstr "Peshqit"
 
 #: tablet7in.html:752
 msgid "Favorites"
-msgstr ""
+msgstr "Të parapëlqyer"
 
 #: tablet7in.html:754
 msgid "Show 1"
@@ -701,7 +710,7 @@ msgstr ""
 
 #: tablet7in.html:755
 msgid "Remove Labels and Images"
-msgstr ""
+msgstr "Hiq Etiketa dhe Figura"
 
 #: tablet7in.html:755
 msgid "Cleanup Screen"
