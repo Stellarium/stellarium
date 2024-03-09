@@ -432,10 +432,34 @@ MeteorShower::Activity MeteorShower::hasConfirmedShower(double currentSolLong, b
 		const Activity& a = m_activities.at(i);
 		double finishLong = a.finish;
 		if (a.start > finishLong) finishLong += 360.;
-		if (currentSolLong>=(a.start) && currentSolLong<=(finishLong) && a.year==Year)
+		if (currentSolLong>=(a.start) && currentSolLong<=(finishLong))
 		{
-			found = true;
-			return a;
+			int beginMonth, endMonth, beginYear, endYear;
+			double JD = MeteorShower::JDfromSolarLongitude(a.start, Year);
+			StelUtils::getDateFromJulianDay(JD, &beginYear, &beginMonth, &Day);
+			JD = MeteorShower::JDfromSolarLongitude(a.finish, a.year);
+			StelUtils::getDateFromJulianDay(JD, &endYear, &endMonth, &Day);
+			if (endMonth < beginMonth) // For showers that start in December and end in January/February
+			{
+				if ((Year==(a.year-1)) && (Month>endMonth))
+				{
+					found = true;
+					return a;
+				}
+				if ((Year==a.year) && ((Month<endMonth) || (Month==endMonth)))
+				{
+					found = true;
+					return a;
+				}
+			}
+			else
+			{
+				if (Year==a.year)
+				{
+					found = true;
+					return a;
+				}
+			}
 		}
 	}
 	return Activity();
