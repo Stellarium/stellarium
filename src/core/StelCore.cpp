@@ -2104,7 +2104,7 @@ void StelCore::updateTime(double deltaTime)
 		delete position;
 		position = newObs;
 	}
-	if (position->update(deltaTime))
+	if (position && position->update(deltaTime))
 	{
 		emit locationChanged(getCurrentLocation());
 	}

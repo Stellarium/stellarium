@@ -99,6 +99,7 @@ jobs:
         HOMEBREW_NO_INSTALLED_DEPENDENTS_CHECK: 1
       run: |
         brew update
+        brew upgrade
         brew install qt@5 nlopt exiv2
 
     - name: Checkout repository
@@ -136,6 +137,7 @@ jobs:
         HOMEBREW_NO_INSTALLED_DEPENDENTS_CHECK: 1
       run: |
         brew update
+        brew upgrade
         brew install qt@6 nlopt exiv2
 
     - name: Checkout repository
