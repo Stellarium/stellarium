@@ -45,7 +45,7 @@ jobs:
         cp ${{ github.workspace }}/builds/appimage/*.AppImage ${{ github.workspace }}/artifact
 
     - name: Upload AppImage
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       if: success()
       with:
         name: 'Stellarium-latest-qt5-x86_64'
@@ -89,7 +89,7 @@ jobs:
         cp ${{ github.workspace }}/builds/appimage/*.AppImage ${{ github.workspace }}/artifact
 
     - name: Upload AppImage
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       if: success()
       with:
         name: 'Stellarium-latest-qt6-x86_64'
