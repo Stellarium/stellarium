@@ -31,7 +31,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        language: [ 'cpp', 'javascript' ]
+        language: [ 'cpp' ]
         # CodeQL supports [ 'cpp', 'csharp', 'go', 'java', 'javascript', 'python' ]
         # Learn more:
         # https://docs.github.com/en/free-pro-team@latest/github/finding-security-vulnerabilities-and-errors-in-your-code/configuring-code-scanning#changing-the-languages-that-are-analyzed
@@ -93,7 +93,6 @@ jobs:
         output: sarif-results/${{ matrix.language }}.sarif
         patterns: |
           -**/_deps/**
-          -*.ts
 
     - name: Upload SARIF
       uses: github/codeql-action/upload-sarif@v3
