@@ -93,7 +93,7 @@ jobs:
         output: sarif-results/${{ matrix.language }}.sarif
         patterns: |
           -**/_deps/**
-          -**.ts
+          -*.ts
 
     - name: Upload SARIF
       uses: github/codeql-action/upload-sarif@v3
