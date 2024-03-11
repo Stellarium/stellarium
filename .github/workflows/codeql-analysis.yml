@@ -86,13 +86,14 @@ jobs:
         upload: false
         output: sarif-results
 
-    - name: Filter deps
+    - name: Filter Dependencies
       uses: advanced-security/filter-sarif@main
       with:
         input: sarif-results/${{ matrix.language }}.sarif
         output: sarif-results/${{ matrix.language }}.sarif
         patterns: |
           -**/_deps/**
+          -**.ts
 
     - name: Upload SARIF
       uses: github/codeql-action/upload-sarif@v3
