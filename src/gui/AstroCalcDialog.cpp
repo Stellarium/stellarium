@@ -1922,7 +1922,7 @@ void AstroCalcDialog::generateEphemeris()
 	else
 		celestialObjects.append(solarSystem->searchByEnglishName(currentPlanet));
 
-	EphemerisList.reserve(elements*n);
+	EphemerisList.reserve(static_cast<long>(elements)*n);
 	propMgr->setStelPropertyValue("SolarSystem.ephemerisDataLimit", n);
 
 	for (auto &obj: celestialObjects)
