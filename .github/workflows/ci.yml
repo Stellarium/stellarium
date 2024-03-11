@@ -97,9 +97,13 @@ jobs:
     - name: Install dependencies
       env:
         HOMEBREW_NO_INSTALLED_DEPENDENTS_CHECK: 1
+        HOMEBREW_NO_ANALYTICS: 1
+        HOMEBREW_NO_AUTO_UPDATE: 1
+        HOMEBREW_NO_INSTALL_CLEANUP: 1
+        PYTHONSTRICTEXTENSIONBUILD: 1
       run: |
-        brew update
-        brew upgrade
+        # brew update
+        # brew upgrade
         brew install qt@5 nlopt exiv2
 
     - name: Checkout repository
@@ -135,9 +139,13 @@ jobs:
     - name: Install dependencies
       env:
         HOMEBREW_NO_INSTALLED_DEPENDENTS_CHECK: 1
+        HOMEBREW_NO_ANALYTICS: 1
+        HOMEBREW_NO_AUTO_UPDATE: 1
+        HOMEBREW_NO_INSTALL_CLEANUP: 1
+        PYTHONSTRICTEXTENSIONBUILD: 1
       run: |
-        brew update
-        brew upgrade
+        # brew update
+        # brew upgrade
         brew install qt@6 nlopt exiv2
 
     - name: Checkout repository
@@ -173,9 +181,13 @@ jobs:
     - name: Install dependencies
       env:
         HOMEBREW_NO_INSTALLED_DEPENDENTS_CHECK: 1
+        HOMEBREW_NO_ANALYTICS: 1
+        HOMEBREW_NO_AUTO_UPDATE: 1
+        HOMEBREW_NO_INSTALL_CLEANUP: 1
+        PYTHONSTRICTEXTENSIONBUILD: 1
       run: |
-        brew update
-        brew upgrade
+        # brew update
+        # brew upgrade
         brew install qt@6 nlopt exiv2
 
     - name: Checkout repository
