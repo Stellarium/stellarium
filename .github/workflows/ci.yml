@@ -88,7 +88,7 @@ jobs:
   # CI on macOS (Qt5)
   ci-macos-qt5:
     name: "macOS (x86_64; qt5)"
-    runs-on: macos-13
+    runs-on: macos-14-large
     if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.actor, 'transifex')"
 
     # @TODO Enable gpsd on macOS instance for CI testing
@@ -98,8 +98,8 @@ jobs:
       env:
         HOMEBREW_NO_INSTALLED_DEPENDENTS_CHECK: 1
       run: |
-        # brew update
-        # brew upgrade
+        brew update
+        brew upgrade
         brew install qt@5 nlopt exiv2
 
     - name: Checkout repository
@@ -126,7 +126,7 @@ jobs:
   # CI on macOS (Qt6)
   ci-macos-intel-qt6:
     name: "macOS (x86_64; qt6)"
-    runs-on: macos-13
+    runs-on: macos-14-large
     if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.actor, 'transifex')"
 
     # @TODO Enable gpsd on macOS instance for CI testing
@@ -136,8 +136,8 @@ jobs:
       env:
         HOMEBREW_NO_INSTALLED_DEPENDENTS_CHECK: 1
       run: |
-        # brew update
-        # brew upgrade
+        brew update
+        brew upgrade
         brew install qt@6 nlopt exiv2
 
     - name: Checkout repository
@@ -175,6 +175,7 @@ jobs:
         HOMEBREW_NO_INSTALLED_DEPENDENTS_CHECK: 1
       run: |
         brew update
+        brew upgrade
         brew install qt@6 nlopt exiv2
 
     - name: Checkout repository
