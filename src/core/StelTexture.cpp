@@ -347,7 +347,7 @@ QByteArray StelTexture::convertToGLFormat(QImage image, GLint& format, GLint& ty
 	          format == GL_RGBA ? 4 :
 	                          3;
 
-	ret.reserve(width * height * bpp);
+	ret.reserve(static_cast<long>(width) * height * bpp);
 	QImage tmp = image.convertToFormat(QImage::Format_ARGB32);
 
 	// convert data

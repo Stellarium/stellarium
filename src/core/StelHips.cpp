@@ -309,7 +309,7 @@ HipsTile* HipsSurvey::getTile(int order, int pix)
 			tile->allsky = texMgr.createTexture(image, StelTexture::StelTextureParams(true));
 		}
 		int tileWidth = getPropertyInt("hips_tile_width", 512);
-		tiles.insert(uid, tile, tileWidth * tileWidth);
+		tiles.insert(uid, tile, static_cast<long>(tileWidth) * tileWidth);
 	}
 	return tile;
 }
