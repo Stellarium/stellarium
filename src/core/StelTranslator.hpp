@@ -75,12 +75,18 @@ public:
 	//! @return The translated QString
 	QString qtranslate(const QString& s, const QString& c = QString()) const;
 
+	//! Same as #qtranslate, but with additional code to handle Chinese names of stars
+	QString qTranslateStar(const QString& s, const QString& c = QString()) const;
+
 	//! Try to translate input message and return it as a QString. If no translation
 	//! exist for the current StelTranslator language, a null string is returned.
 	//! @param s input string in english.
 	//! @param c disambiguation string (gettext "context" string).
 	//! @return The translated QString
 	virtual QString tryQtranslate(const QString& s, const QString& c = QString()) const;
+
+	//! Same as #tryQtranslate, but with additional code to handle Chinese names of stars
+	QString tryQtranslateStar(const QString& s, const QString& c = QString()) const;
 	
 	//! Get true translator locale name. Actual locale, never "system".
 	//! @return Locale name e.g "fr_FR"
@@ -124,6 +130,8 @@ protected:
 private:
 	StelTranslator(const StelTranslator& );
 	const StelTranslator& operator=(const StelTranslator&);
+
+	QString tryTranslateChineseStar(const QString& s, const QString& c) const;
 	
 	//! Initialize the languages code list from the passed file
 	//! @param fileName file containing the list of language codes
