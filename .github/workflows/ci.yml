@@ -88,7 +88,7 @@ jobs:
   # CI on macOS (Qt5)
   ci-macos-qt5:
     name: "macOS (x86_64; qt5)"
-    runs-on: macos-13
+    runs-on: macos-latest
     if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.actor, 'transifex')"
 
     # @TODO Enable gpsd on macOS instance for CI testing
@@ -97,10 +97,7 @@ jobs:
     - name: Install dependencies
       env:
         HOMEBREW_NO_INSTALLED_DEPENDENTS_CHECK: 1
-        HOMEBREW_NO_ANALYTICS: 1
         HOMEBREW_NO_AUTO_UPDATE: 1
-        HOMEBREW_NO_INSTALL_CLEANUP: 1
-        PYTHONSTRICTEXTENSIONBUILD: 1
       run: |
         # brew update
         # brew upgrade
