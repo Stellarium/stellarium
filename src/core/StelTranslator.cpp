@@ -28,6 +28,37 @@
 #include <QDir>
 #include <QTranslator>
 
+namespace
+{
+int parseRomanNumeral(const QStringView& roman)
+{
+	const auto romanLat = roman.toLatin1();
+	int v = 0;
+	const char* p = romanLat.data();
+
+	/**/ if (strncmp(p, "XC",   2) == 0) { v += 90; p += 2; }
+	else if (strncmp(p, "LXXX", 4) == 0) { v += 80; p += 4; }
+	else if (strncmp(p, "LXX",  3) == 0) { v += 70; p += 3; }
+	else if (strncmp(p, "LX",   2) == 0) { v += 60; p += 2; }
+	else if (strncmp(p, "L",    1) == 0) { v += 50; p += 1; }
+	else if (strncmp(p, "XL",   2) == 0) { v += 40; p += 2; }
+	else if (strncmp(p, "XXX",  3) == 0) { v += 30; p += 3; }
+	else if (strncmp(p, "XX",   2) == 0) { v += 20; p += 2; }
+	else if (strncmp(p, "X",    1) == 0) { v += 10; p += 1; }
+
+	/**/ if (strncmp(p, "IX",   2) == 0) { v += 9;  p += 2; }
+	else if (strncmp(p, "VIII", 4) == 0) { v += 8;  p += 4; }
+	else if (strncmp(p, "VII",  3) == 0) { v += 7;  p += 3; }
+	else if (strncmp(p, "VI",   2) == 0) { v += 6;  p += 2; }
+	else if (strncmp(p, "V",    1) == 0) { v += 5;  p += 1; }
+	else if (strncmp(p, "IV",   2) == 0) { v += 4;  p += 2; }
+	else if (strncmp(p, "III",  3) == 0) { v += 3;  p += 3; }
+	else if (strncmp(p, "II",   2) == 0) { v += 2;  p += 2; }
+	else if (strncmp(p, "I",    1) == 0) { v += 1;  p += 1; }
+
+	return v;
+}
+}
 
 // Init static members
 QMap<QString, QString> StelTranslator::iso639codes;
@@ -69,10 +100,78 @@ QString StelTranslator::qtranslate(const QString& s, const QString& c) const
 	return res;
 }
 
+QString StelTranslator::qTranslateStar(const QString& s, const QString& c) const
+{
+	if (s.isEmpty())
+		return "";
+	const auto res = tryQtranslateStar(s, c);
+	if (res.isEmpty())
+		return s;
+	return res;
+}
+
+QString StelTranslator::tryTranslateChineseStar(const QString& s, const QString& c) const
+{
+	static const auto re = []{ QRegularExpression re("(.+)( [IXVLCDM]+)$"); re.optimize(); return re; }();
+	const auto match = re.match(s);
+	if (!match.hasMatch()) return {};
+
+	auto constellation = match.captured(1);
+	bool addedPresent = false;
+	static const QString addedPattern(" Added");
+	if (constellation.endsWith(addedPattern))
+	{
+		constellation.chop(addedPattern.length());
+		addedPresent = true;
+	}
+
+	const auto translatedConstellation = tryQtranslate(constellation, c);
+	if (translatedConstellation.isEmpty()) return {};
+
+	auto number = match.captured(2);
+	if (getTrueLocaleName().startsWith("zh"))
+	{
+		const auto num = parseRomanNumeral(QStringView(number).mid(1));
+		Q_ASSERT(num < 100);
+
+		static const char16_t chars[10+1] = u"十一二三四五六七八九";
+
+		number = "";
+		int tens = num / 10;
+		const int units = num % 10;
+		if (tens >= 2)
+		{
+			number += chars[tens];
+			tens = 1;
+		}
+		if (tens == 1)
+		{
+			number += chars[0];
+		}
+		if (units)
+		{
+			number += chars[units];
+		}
+	}
+
+	if (!addedPresent) return translatedConstellation + number;
+
+	const auto& translatedAdded = qtranslate("Added", "skyculture");
+	return QString("%1 %2%3").arg(translatedConstellation, translatedAdded, number);
+}
+
 QString StelTranslator::tryQtranslate(const QString &s, const QString &c) const
 {
 	return translator->translate("", s.toUtf8().constData(),c.toUtf8().constData());
 }
+
+QString StelTranslator::tryQtranslateStar(const QString &s, const QString &c) const
+{
+	const auto translated = tryTranslateChineseStar(s, c);
+	if (!translated.isEmpty()) return translated;
+	return tryQtranslate(s, c);
+}
+
 	
 //! Initialize Translation
 //! @param fileName file containing the list of language codes
