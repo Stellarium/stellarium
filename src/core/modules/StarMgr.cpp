@@ -1518,7 +1518,7 @@ void StarMgr::updateI18n()
 	for (QHash<int,QString>::ConstIterator it(commonNamesMap.constBegin());it!=commonNamesMap.constEnd();it++)
 	{
 		const int i = it.key();
-		const QString t(trans.qtranslate(it.value()));
+		const QString t(trans.qTranslateStar(it.value()));
 		commonNamesMapI18n[i] = t;
 		commonNamesIndexI18n[t.toUpper()] = i;
 	}
@@ -1529,7 +1529,7 @@ void StarMgr::updateI18n()
 		QStringList tn;
 		for (const auto& str : a)
 		{
-			QString tns = trans.qtranslate(str);
+			QString tns = trans.qTranslateStar(str);
 			tn << tns;
 			additionalNamesIndexI18n[tns.toUpper()] = i;
 		}
@@ -2183,7 +2183,7 @@ QStringList StarMgr::listAllObjectsByType(const QString &objType, bool inEnglish
 			{
 				for (const auto &star : doubleStars)
 				{
-					result << trans.qtranslate(star);
+					result << trans.qTranslateStar(star);
 				}
 			}
 			break;
@@ -2209,7 +2209,7 @@ QStringList StarMgr::listAllObjectsByType(const QString &objType, bool inEnglish
 			{
 				for (const auto &star : variableStars)
 				{
-					result << trans.qtranslate(star);
+					result << trans.qTranslateStar(star);
 				}
 			}
 			break;
