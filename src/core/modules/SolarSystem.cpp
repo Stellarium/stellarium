@@ -1618,11 +1618,12 @@ void SolarSystem::drawEphemerisMarkers(const StelCore *core)
 		Vec3f win;
 		for (int i =0; i < limit; i++)
 		{
-			sPainter.setColor(getEphemerisMarkerColor(AstroCalcDialog::EphemerisList[i*nsize].colorIndex));
+			long k = static_cast<long>(i)*nsize;
+			sPainter.setColor(getEphemerisMarkerColor(AstroCalcDialog::EphemerisList[k].colorIndex));
 			if (getFlagEphemerisHorizontalCoordinates())
-				pos = AstroCalcDialog::EphemerisList[i*nsize].sso->getAltAzPosAuto(core);
+				pos = AstroCalcDialog::EphemerisList[k].sso->getAltAzPosAuto(core);
 			else
-				pos = AstroCalcDialog::EphemerisList[i*nsize].sso->getJ2000EquatorialPos(core);
+				pos = AstroCalcDialog::EphemerisList[k].sso->getJ2000EquatorialPos(core);
 			if (prj->project(pos, win))
 				sPainter.drawSprite2dMode(static_cast<float>(win[0]), static_cast<float>(win[1]), 6.f, 0.f);
 		}

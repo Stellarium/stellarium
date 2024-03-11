@@ -688,7 +688,7 @@ StringTexture* StelPainter::getTextTexture(const QString& str, int pixelSize) co
 	painter.drawText(-strRect.x(), -strRect.y(), str);
 	StringTexture* newTex = new StringTexture(new QOpenGLTexture(strImage), QSize(w, h), QPoint(strRect.x(), -(strRect.y()+h)));
 	newTex->texture->setMinMagFilters(QOpenGLTexture::Linear, QOpenGLTexture::Linear);
-	texCache.insert(hash, newTex, 3*w*h);
+	texCache.insert(hash, newTex, static_cast<long>(w)*h*3);
 	// simply returning newTex is dangerous as the object is owned by the cache now. (Coverity Scan barks.)
 	return texCache.object(hash);
 }
