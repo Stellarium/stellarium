@@ -31,7 +31,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        language: [ 'cpp' ]
+        language: [ 'cpp', 'javascript' ]
         # CodeQL supports [ 'cpp', 'csharp', 'go', 'java', 'javascript', 'python' ]
         # Learn more:
         # https://docs.github.com/en/free-pro-team@latest/github/finding-security-vulnerabilities-and-errors-in-your-code/configuring-code-scanning#changing-the-languages-that-are-analyzed
@@ -85,6 +85,8 @@ jobs:
       with:
         upload: false
         output: sarif-results
+      paths-ignore:
+        - '**/*.ts'
 
     - name: Filter Dependencies
       uses: advanced-security/filter-sarif@main
