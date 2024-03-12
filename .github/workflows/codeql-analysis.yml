@@ -31,13 +31,14 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        language: [ 'cpp' ]
+        language: [ 'cpp', 'javascript' ]
         # CodeQL supports [ 'cpp', 'csharp', 'go', 'java', 'javascript', 'python' ]
         # Learn more:
         # https://docs.github.com/en/free-pro-team@latest/github/finding-security-vulnerabilities-and-errors-in-your-code/configuring-code-scanning#changing-the-languages-that-are-analyzed
 
     steps:
     - name: Install dependencies
+      if: ${{ matrix.language=='cpp' }}
       run: |
         sudo apt remove php7.* -y
         sudo apt remove php8.* -y
@@ -61,6 +62,7 @@ jobs:
         # queries: ./path/to/local/query, your-org/your-repo/queries@main
 
     - name: Build
+      if: ${{ matrix.language=='cpp' }}
       run: |
         mkdir -p build
         cd build
@@ -70,6 +72,7 @@ jobs:
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v3
       with:
+        category: "/language:${{matrix.language}}"
         upload: false
         output: sarif-results
 
