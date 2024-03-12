@@ -1,0 +1,786 @@
+{
+  "id": "arabic_al-sufi",
+  "region": "Middle East",
+  "classification": ["single"],
+  "langs_use_native_names": ["ar"],
+  "native_lang": "ar",
+  "thumbnail": "illustrations/Peg.webp",
+  "thumbnail_bscale": 0.8,
+  "highlight": "CON arabic_al-sufi Cyg",
+  "illustrations_bscale": 0.8,
+  "constellations": [
+    {
+      "id": "CON arabic_al-sufi UMi",
+      "lines": [[11767, 85822, 82080, 77055, 79822, 75097, 75097, 72607, 77055]],
+      "image": {
+        "file": "illustrations/UMi.webp",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [465, 430], "hip": 11767},
+          {"pos": [294, 131], "hip": 79822},
+          {"pos": [173, 223], "hip": 70692}
+        ]
+      },
+      "common_name": {"english": "Ursa Minor", "native": "الدب الأصغر"}
+    },
+    {
+      "id": "CON arabic_al-sufi UMa",
+      "lines": [[67301, 65378, 62956, 59774, 54061], [53910, 58001, 59774], [58001, 54539, 50801, 50372], [53910, 48402, 46853, 44471, 44127], [48402, 48319, 46733, 45075, 41704, 42527, 42080, 44390, 46977, 45038, 54061], [58001, 55219, 55203], [48319, 45493, 44901]],
+      "image": {
+        "file": "illustrations/UMa.webp",
+        "size": [1024, 1024],
+        "anchors": [
+          {"pos": [275, 665], "hip": 62956},
+          {"pos": [733, 733], "hip": 55219},
+          {"pos": [443, 160], "hip": 41704}
+        ]
+      },
+      "common_name": {"english": "Ursa Major", "native": "الدب الأكبر"}
+    },
+    {
+      "id": "CON arabic_al-sufi Dra",
+      "lines": [[83608, 85829, 87585, 87833, 85670, 85829], [87585, 90156, 92512, 91755, 90905, 95081, 94376, 96100, 97433, 98702, 89908, 89937, 94648, 92782, 86614, 86201, 85805, 83895, 82860, 81660, 80331, 78527, 75458, 68756, 67627, 61281, 56211]],
+      "image": {
+        "file": "illustrations/Dra.webp",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [71, 449], "hip": 56211},
+          {"pos": [297, 115], "hip": 83608},
+          {"pos": [445, 297], "hip": 97433}
+        ]
+      },
+      "common_name": {"english": "Draco", "native": "التنين"}
+    },
+    {
+      "id": "CON arabic_al-sufi Cep",
+      "lines": [[109857, 109492, 109556, 108917, 106032, 99255], [106032, 116727], [108917, 105199, 102422, 101093], [108917, 112724]],
+      "image": {
+        "file": "illustrations/Cep.webp",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [190, 190], "hip": 105199},
+          {"pos": [260, 290], "hip": 106032},
+          {"pos": [360, 185], "hip": 112724}
+        ]
+      },
+      "common_name": {"english": "Cepheus", "native": "قيقاوس"}
+    },
+    {
+      "id": "CON arabic_al-sufi Boo",
+      "lines": [[69483, 69713, 70497], [69713, 69732, 71075, 74666, 73745, 73568, 73996, 74087, 75049, 75312, 75411, 75973], [73555, 71284, 71053], [71284, 72105, 71795], [71053, 67927, 67275, 67459]],
+      "image": {
+        "file": "illustrations/Boo.webp",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [257, 373], "hip": 69673},
+          {"pos": [424, 32], "hip": 70497},
+          {"pos": [180, 168], "hip": 74666}
+        ]
+      },
+      "common_name": {"english": "Bootes", "native": "العواء"}
+    },
+    {
+      "id": "CON arabic_al-sufi 05Boo04",
+      "lines": [[71075, 71075], [79992, 79992]],
+      "common_name": {"english": "The hyenas and their youngsters", "native": "الضباع وأولاد الضباع"}
+    },
+    {
+      "id": "CON arabic_al-sufi CrB",
+      "lines": [[77048, 76127, 75695, 76267, 76952, 77512, 78159, 78493]],
+      "image": {
+        "file": "illustrations/CrB.webp",
+        "size": [256, 256],
+        "anchors": [
+          {"pos": [59, 83], "hip": 77048},
+          {"pos": [143, 89], "hip": 75695},
+          {"pos": [86, 201], "hip": 78159}
+        ]
+      },
+      "common_name": {"english": "Corona Borealis", "native": "الإكليل الشمالي"}
+    },
+    {
+      "id": "CON arabic_al-sufi Her",
+      "lines": [[84345, 83254, 80816, 80170, 79043], [83254, 84379, 85693, 86974, 87998, 88794], [86974, 87933, 88794], [80816, 81693, 81833, 81126, 79992, 79101, 77760, 75973], [79992, 78592, 75973], [84379, 83207, 83313, 83838, 84380, 84606, 85112, 87808, 86414, 84835, 86182, 87212], [81693, 83207]],
+      "image": {
+        "file": "illustrations/Her.webp",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [214, 94], "hip": 84345},
+          {"pos": [267, 404], "hip": 79992},
+          {"pos": [100, 185], "hip": 79043}
+        ]
+      },
+      "common_name": {"english": "Hercules", "native": "الجاثي"}
+    },
+    {
+      "id": "CON arabic_al-sufi Lyr",
+      "lines": [[91262, 91919, 91971, 92791, 94481, 94713], [91971, 92420, 92405], [92791, 93194, 93279]],
+      "image": {
+        "file": "illustrations/Lyr.webp",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [329, 162], "hip": 91262},
+          {"pos": [162, 229], "hip": 94481},
+          {"pos": [292, 335], "hip": 93194}
+        ]
+      },
+      "common_name": {"english": "Lyra", "native": "اللورا"}
+    },
+    {
+      "id": "CON arabic_al-sufi Cyg",
+      "lines": [[94779, 95853, 97165, 100453, 102098], [100453, 102589, 102488, 104732], [100453, 98110, 96683, 95947], [100453, 104060, 103413], [100453, 101138, 99675, 99848]],
+      "image": {
+        "file": "illustrations/Cyg.webp",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [77, 286], "hip": 94779},
+          {"pos": [417, 292], "hip": 104732},
+          {"pos": [270, 93], "hip": 95947}
+        ]
+      },
+      "common_name": {"english": "Cygnus", "native": "الطائر"}
+    },
+    {
+      "id": "CON arabic_al-sufi Cas",
+      "lines": [[2920, 3179, 3821, 4427, 6686, 8886, 11569], [3821, 6242, 5542], [3179, 746, 118243], [117863, 746, 2599], [4427, 2599]],
+      "image": {
+        "file": "illustrations/Cas.webp",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [222, 186], "hip": 118243},
+          {"pos": [350, 200], "hip": 2920},
+          {"pos": [380, 420], "hip": 8886}
+        ]
+      },
+      "common_name": {"english": "Cassiopeia", "native": "ذات الكرسي"}
+    },
+    {
+      "id": "CON arabic_al-sufi Per",
+      "lines": [[11279, 13268, 14328, 15863, 16335, 16826, 17358, 19167, 20070, 20354, 21476], [12686, 13531, 14328], [13531, 12777, 14668, 14576, 14817, 14354, 13879, 14576], [12777, 14632, 16335, 17529, 18532, 18614, 17448, 18246], [17358, 19343, 19812, 20354]],
+      "image": {
+        "file": "illustrations/Per.webp",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [335, 260], "hip": 14576},
+          {"pos": [226, 124], "hip": 13268},
+          {"pos": [180, 410], "hip": 21476}
+        ]
+      },
+      "common_name": {"english": "Perseus", "native": "برشاوش"}
+    },
+    {
+      "id": "CON arabic_al-sufi Aur",
+      "lines": [[28358, 27949, 26344], [27949, 26315, 24608, 23416, 23453, 23767], [23453, 23015], [26315, 28360, 27673, 28380], [27673, 25541, 25984, 25428], [23453, 27673]],
+      "image": {
+        "file": "illustrations/Aur.webp",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [316, 156], "hip": 24608},
+          {"pos": [221, 67], "hip": 28358},
+          {"pos": [310, 420], "hip": 25428}
+        ]
+      },
+      "common_name": {"english": "Auriga", "native": "ممسك الأعنة"}
+    },
+    {
+      "id": "CON arabic_al-sufi Oph",
+      "lines": [[86032, 85139, 86742, 87108, 85365, 86284, 88048, 88404], [86742, 83262, 84012, 84893, 86736, 85755, 85340, 84970, 84405], [86032, 85139, 82673, 80883, 79593, 79882], [82673, 83000, 82405, 81377, 80894, 80569, 80343, 80975, 80473], [83262, 82405]],
+      "image": {
+        "file": "illustrations/Oph.webp",
+        "size": [1024, 1024],
+        "anchors": [
+          {"pos": [126, 296], "hip": 92946},
+          {"pos": [651, 623], "hip": 79593},
+          {"pos": [900, 300], "hip": 77661}
+        ]
+      },
+      "common_name": {"english": "Ophiuchus", "native": "الحواء"}
+    },
+    {
+      "id": "CON arabic_al-sufi Ser",
+      "lines": [[76852, 77450, 77661, 78554], [77450, 78072, 77233, 76276, 77257, 77070, 77622, 77516, 80628, 84880, 86263, 86565, 88175, 89962, 92946]],
+      "image": {
+        "file": "illustrations/Oph.webp",
+        "size": [1024, 1024],
+        "anchors": [
+          {"pos": [126, 296], "hip": 92946},
+          {"pos": [651, 623], "hip": 79593},
+          {"pos": [900, 300], "hip": 77661}
+        ]
+      },
+      "common_name": {"english": "Serpens", "native": "الحية"}
+    },
+    {
+      "id": "CON arabic_al-sufi Sge",
+      "lines": [[98337, 97365, 96984, 96837], [96984, 96757], [97496, 97496]],
+      "image": {
+        "file": "illustrations/Sag.webp",
+        "size": [256, 256],
+        "anchors": [
+          {"pos": [126, 85], "hip": 98337},
+          {"pos": [116, 210], "hip": 96837},
+          {"pos": [140, 210], "hip": 96757}
+        ]
+      },
+      "common_name": {"english": "Sagitta", "native": "السهم"}
+    },
+    {
+      "id": "CON arabic_al-sufi Aql",
+      "lines": [[98823, 98036, 97938, 97649, 97278], [96229, 93747], [98103, 97649, 96665], [97649, 96229], [97278, 93747]],
+      "image": {
+        "file": "illustrations/Aql.webp",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [282, 63], "hip": 98823},
+          {"pos": [181, 141], "hip": 96665},
+          {"pos": [294, 445], "hip": 93747}
+        ]
+      },
+      "common_name": {"english": "Aquila", "native": "العقاب"}
+    },
+    {
+      "id": "CON arabic_al-sufi Del",
+      "lines": [[101421, 101483, 101589, 101769, 101958, 102532, 102281, 101882, 101800, 101916, 101421]],
+      "image": {
+        "file": "illustrations/Dol.webp",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [219, 176], "hip": 102532},
+          {"pos": [240, 330], "hip": 101916},
+          {"pos": [320, 240], "hip": 101589}
+        ]
+      },
+      "common_name": {"english": "Delphinus", "native": "الدلفين"}
+    },
+    {
+      "id": "CON arabic_al-sufi Equ",
+      "lines": [[104521, 104858, 105570, 104987, 104521]],
+      "image": {
+        "file": "illustrations/Equ.webp",
+        "size": [256, 256],
+        "anchors": [
+          {"pos": [75, 115], "hip": 104987},
+          {"pos": [110, 125], "hip": 105570},
+          {"pos": [72, 190], "hip": 104521}
+        ]
+      },
+      "common_name": {"english": "Equuleus", "native": "قطعة الفرس"}
+    },
+    {
+      "id": "CON arabic_al-sufi Peg",
+      "lines": [[107315, 109068, 113186, 113963, 1067, 677, 113881, 112748, 112440, 109176, 107354], [113881, 112158, 109410], [107315, 109427, 112029, 112447, 112440]],
+      "image": {
+        "file": "illustrations/Peg.webp",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [235, 72], "hip": 107315},
+          {"pos": [230, 430], "hip": 677},
+          {"pos": [150, 188], "hip": 109176}
+        ]
+      },
+      "common_name": {"english": "Pegasus", "native": "الفرس"}
+    },
+    {
+      "id": "CON arabic_al-sufi And",
+      "lines": [[677, 2912], [4463, 3693, 3031, 3092, 2912, 1473, 1686, 1366, 116631, 116805, 116584], [3092, 5447, 7818, 9640], [7818, 7513, 7719, 6999, 5434, 3881, 4436, 5447, 3092], [6999, 7607, 8068], [1473, 3881]],
+      "image": {
+        "file": "illustrations/And.webp",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [232, 101], "hip": 677},
+          {"pos": [51, 212], "hip": 116584},
+          {"pos": [266, 393], "hip": 9640}
+        ]
+      },
+      "common_name": {"english": "Andromeda", "native": "المسلسلة"}
+    },
+    {
+      "id": "CON arabic_al-sufi Tri",
+      "lines": [[10670, 10644, 10064, 8796, 10670], [5447, 3881]],
+      "image": {
+        "file": "illustrations/Tri.webp",
+        "size": [128, 128],
+        "anchors": [
+          {"pos": [41, 12], "hip": 10064},
+          {"pos": [14, 44], "hip": 10670},
+          {"pos": [107, 101], "hip": 8796}
+        ]
+      },
+      "common_name": {"english": "Triangulum", "native": "المثلث"}
+    },
+    {
+      "id": "CON arabic_al-sufi Ari",
+      "lines": [[8903, 10306, 10732, 12332, 13914, 14838, 15110, 15737, 14838, 13702, 13327, 12832], [13702, 10328, 9110, 10732], [8832, 10306, 9110]],
+      "image": {
+        "file": "illustrations/Ari.webp",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [120, 266], "hip": 14838},
+          {"pos": [275, 145], "hip": 9884},
+          {"pos": [331, 224], "hip": 9110}
+        ]
+      },
+      "common_name": {"english": "Aries", "native": "الحمل"}
+    },
+    {
+      "id": "CON arabic_al-sufi Tau",
+      "lines": [[16369, 16322, 16083, 15900, 17771, 18724, 19860, 18907], [18724, 20205, 21589, 21402], [20205, 20885, 21421, 22565, 21881, 20430, 20250, 19205, 17499, 16369], [22565, 23835, 26451], [21881, 25428], [21881, 20711, 20635, 19990, 20205]],
+      "image": {
+        "file": "illustrations/Tau.webp",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [460, 400], "hip": 15900},
+          {"pos": [100, 50], "hip": 25428},
+          {"pos": [213, 300], "hip": 21589}
+        ]
+      },
+      "common_name": {"english": "Taurus", "native": "الثور"}
+    },
+    {
+      "id": "CON arabic_al-sufi Gem",
+      "lines": [[31681, 34088, 35846, 36962, 37740, 38722], [37740, 36238, 35350, 32362], [36962, 37826], [36962, 36046, 34693, 36850], [34693, 33018], [34693, 32246, 30343, 29655], [36046, 32921, 30883]],
+      "image": {
+        "file": "illustrations/Gem.webp",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [420, 230], "hip": 32362},
+          {"pos": [175, 340], "hip": 37826},
+          {"pos": [150, 180], "hip": 33018}
+        ]
+      },
+      "common_name": {"english": "Gemini", "native": "التوأمان"}
+    },
+    {
+      "id": "CON arabic_al-sufi Can",
+      "lines": [[43103, 42806, 42911, 44066], [39780, 41909, 41822, 40526], [41909, 42806], [41822, 42911]],
+      "image": {
+        "file": "illustrations/Cnc.webp",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [262, 62], "hip": 43103},
+          {"pos": [100, 400], "hip": 44066},
+          {"pos": [280, 440], "hip": 40526}
+        ]
+      },
+      "common_name": {"english": "Cancer", "native": "السرطان"}
+    },
+    {
+      "id": "CON arabic_al-sufi Leo",
+      "lines": [[46750, 47908, 48455], [46146, 48455, 50335, 50583, 49583, 48883, 49637, 51624, 52911, 54879, 54872, 53954, 50583], [48883, 47723, 46771], [49637, 49029, 47508], [52911, 54182, 53824, 53807], [54879, 55642, 55434], [54872, 55765, 57632], [46146, 46750], [47908, 49583]],
+      "image": {
+        "file": "illustrations/Leo.webp",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [42, 369], "hip": 57632},
+          {"pos": [293, 242], "hip": 49669},
+          {"pos": [110, 181], "hip": 53417}
+        ]
+      },
+      "common_name": {"english": "Leo", "native": "الأسد"}
+    },
+    {
+      "id": "CON arabic_al-sufi Vir",
+      "lines": [[57757, 60129, 61941, 63494, 64238, 65474, 66247, 66098, 66006, 66803, 67172, 69427, 69974], [69427, 69701, 70755, 67929, 66249, 63090, 62267, 61960, 63608, 70755], [69701, 71957], [57380, 57328, 58948, 58590, 57380], [58590, 60172, 60129, 62267, 60172], [63494, 66006]],
+      "image": {
+        "file": "illustrations/Vir.webp",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [260, 425], "hip": 69427},
+          {"pos": [210, 300], "hip": 66249},
+          {"pos": [325, 327], "hip": 65474}
+        ]
+      },
+      "common_name": {"english": "Virgo", "native": "العذراء"}
+    },
+    {
+      "id": "CON arabic_al-sufi Lib",
+      "lines": [[72489, 72622, 73945, 74392, 76742, 76880, 77853, 77811, 76742], [77853, 76333, 74785, 73473]],
+      "image": {
+        "file": "illustrations/Lib.webp",
+        "size": [256, 256],
+        "anchors": [
+          {"pos": [56, 182], "hip": 73473},
+          {"pos": [40, 100], "hip": 72489},
+          {"pos": [205, 127], "hip": 77853}
+        ]
+      },
+      "common_name": {"english": "Libra", "native": "الميزان"}
+    },
+    {
+      "id": "CON arabic_al-sufi Sco",
+      "lines": [[85696, 85927, 86670, 87073, 86228, 84143, 82671, 82514, 82396, 81266, 80763, 80112, 78401, 78265], [78401, 78820]],
+      "image": {
+        "file": "illustrations/Sco.webp",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [280, 194], "hip": 80763},
+          {"pos": [183, 389], "hip": 82671},
+          {"pos": [55, 367], "hip": 87073}
+        ]
+      },
+      "common_name": {"english": "Scorpius", "native": "العقرب"}
+    },
+    {
+      "id": "CON arabic_al-sufi Sgr",
+      "lines": [[89341, 90496, 88635, 90185, 90037], [88635, 92041, 92855, 94643, 95477, 96465], [92761, 93085, 93683, 94141, 94820, 95168, 95176], [94141, 96950, 98258], [94141, 97290], [92761, 93864, 93506, 89642], [93506, 98066, 98353, 98688, 98412, 98032], [98412, 95347, 95241]],
+      "image": {
+        "file": "illustrations/Sgr.webp",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [444, 244], "hip": 88635},
+          {"pos": [213, 81], "hip": 95176},
+          {"pos": [150, 400], "hip": 98032}
+        ]
+      },
+      "common_name": {"english": "Sagittarius", "native": "الرامي"}
+    },
+    {
+      "id": "CON arabic_al-sufi Cap",
+      "lines": [[100027, 100310, 100345, 101027], [99572, 100881], [100195, 101123], [101923, 101027, 100881, 100195], [101923, 104139, 105515, 107095, 107517, 107382], [107095, 108036, 107556, 107188, 105881, 104365, 104019, 101984, 101123], [104963, 104234, 102978], [104365, 102485], [108036, 107382]],
+      "image": {
+        "file": "illustrations/Cap.webp",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [414, 120], "hip": 100064},
+          {"pos": [90, 265], "hip": 107556},
+          {"pos": [343, 381], "hip": 102978}
+        ]
+      },
+      "common_name": {"english": "Capricornus", "native": "الجدي"}
+    },
+    {
+      "id": "CON arabic_al-sufi Aqr",
+      "lines": [[106944, 108874], [110672, 110960, 110395, 109074, 108874, 106278, 106786, 103401, 103045, 102618], [106786, 109139, 110778, 112211, 112529], [109074, 111123, 112716, 113136], [110960, 111497, 112961, 113996, 114724, 114939, 114855, 115033, 115115, 115404, 116758, 116971, 116901, 117089, 117629, 116247, 115669, 115438, 114341, 114375, 114119, 113368]],
+      "image": {
+        "file": "illustrations/Aqr.webp",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [290, 241], "hip": 109139},
+          {"pos": [152, 151], "hip": 110395},
+          {"pos": [310, 91], "hip": 106278}
+        ]
+      },
+      "common_name": {"english": "Aquarius", "native": "ساكب الماء"}
+    },
+    {
+      "id": "CON arabic_al-sufi Psc",
+      "lines": [[113889, 115227, 115830, 116771, 118268, 116928, 115738, 114971, 113889], [118268, 1645, 2548, 3786, 4906, 5737, 5346, 6061, 7007, 7884, 8833, 9487, 8198, 7535, 7097, 6706, 5571, 5742, 6193, 5586, 5544, 4510, 4366, 3885, 5131, 5310, 5454, 6706]],
+      "image": {
+        "file": "illustrations/Psc.webp",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [120, 424], "hip": 5544},
+          {"pos": [410, 460], "hip": 9487},
+          {"pos": [275, 85], "hip": 113889}
+        ]
+      },
+      "common_name": {"english": "Pisces", "native": "السمكتان"}
+    },
+    {
+      "id": "CON arabic_al-sufi Cet",
+      "lines": [[13954, 14135, 12706, 12387], [10324, 11484, 12828, 13954], [12387, 12390, 12770, 11783, 9347, 8102, 3419, 3849, 3436, 1562, 3455, 3909, 5364, 6537, 8645, 11345, 10324]],
+      "image": {
+        "file": "illustrations/Cet.webp",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [165, 70], "hip": 12828},
+          {"pos": [433, 341], "hip": 1562},
+          {"pos": [170, 360], "hip": 9347}
+        ]
+      },
+      "common_name": {"english": "Cetus", "native": "قيطس"}
+    },
+    {
+      "id": "CON arabic_al-sufi Ori",
+      "lines": [[26207, 25336, 25473, 25142, 24010, 23607, 22957, 22845, 22509, 22449, 22549, 22797, 23123], [26207, 27989, 28614, 29800, 29426, 29038, 29434, 29704, 29426], [29704, 27913, 28716], [25473, 25930, 25281, 24674, 24436], [24674, 25923, 26563, 26727, 27989], [26563, 27366], [25930, 26311, 26727], [26311, 26237, 26221, 26241]],
+      "image": {
+        "file": "illustrations/Ori.webp",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [360, 145], "hip": 24010},
+          {"pos": [256, 210], "hip": 27989},
+          {"pos": [360, 360], "hip": 24436}
+        ]
+      },
+      "common_name": {"english": "Orion", "native": "الجبار"}
+    },
+    {
+      "id": "CON arabic_al-sufi Eri",
+      "lines": [[23972, 23875, 23364, 22701, 22109, 21444, 20507, 19849, 19587, 18543, 17593, 17378, 16537, 15197, 14293, 13701, 12444, 12843, 13288, 14146, 15474, 16611, 17651, 17717, 18216, 18673, 21248, 21393, 20535, 20042, 17874, 17797, 17351, 13847]],
+      "image": {
+        "file": "illustrations/Eri.webp",
+        "size": [1024, 1024],
+        "anchors": [
+          {"pos": [707, 682], "hip": 13847},
+          {"pos": [703, 376], "hip": 12843},
+          {"pos": [128, 320], "hip": 23875}
+        ]
+      },
+      "common_name": {"english": "Eridanus", "native": "النهر"}
+    },
+    {
+      "id": "CON arabic_al-sufi Lep",
+      "lines": [[24244, 24327, 24305], [24873, 24845, 24305, 25985, 25606, 23685], [25985, 27288, 28103, 27654, 27072]],
+      "image": {
+        "file": "illustrations/Lep.webp",
+        "size": [256, 256],
+        "anchors": [
+          {"pos": [97, 81], "hip": 28103},
+          {"pos": [136, 176], "hip": 27072},
+          {"pos": [242, 169], "hip": 23685}
+        ]
+      },
+      "common_name": {"english": "Lepus", "native": "الأرنب"}
+    },
+    {
+      "id": "CON arabic_al-sufi CMa",
+      "lines": [[32349, 33345, 33160, 34045, 32349], [34045, 33347, 33302, 31700, 30324, 31592, 33152, 31416, 31125], [33152, 33579, 32759, 30122], [33579, 34444, 33977, 33302], [34444, 35904]],
+      "image": {
+        "file": "illustrations/CMa.webp",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [300, 132], "hip": 30324},
+          {"pos": [230, 135], "hip": 32349},
+          {"pos": [153, 295], "hip": 35904}
+        ]
+      },
+      "common_name": {"english": "Canis Major", "native": "الكلب الأكبر"}
+    },
+    {
+      "id": "CON arabic_al-sufi CMi",
+      "lines": [[37279, 36188]],
+      "image": {
+        "file": "illustrations/CMi.webp",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [191, 39], "hip": 37921},
+          {"pos": [219, 234], "hip": 37279},
+          {"pos": [323, 188], "hip": 36188}
+        ]
+      },
+      "common_name": {"english": "Canis Minor", "native": "الكلب الأصغر"}
+    },
+    {
+      "id": "CON arabic_al-sufi Arg",
+      "lines": [[38835, 39757, 38901, 40091, 40326, 42312, 42884, 44816, 46651, 48774, 45556, 38827, 36377, 35264, 36514, 37648, 38170, 38835], [40091, 42515, 42828, 43409, 43825, 44816], [36377, 31685, 28328], [38164, 32768, 30438]],
+      "image": {
+        "file": "illustrations/Arg.webp",
+        "size": [1024, 1024],
+        "anchors": [
+          {"pos": [823, 877], "hip": 30438},
+          {"pos": [765, 239], "hip": 39757},
+          {"pos": [381, 441], "hip": 46651}
+        ]
+      },
+      "common_name": {"english": "Argo Navis", "native": "السفينة"}
+    },
+    {
+      "id": "CON arabic_al-sufi Hya",
+      "lines": [[42402, 42313, 43109, 42799, 42402], [43109, 43813, 44659, 45336, 46776, 47431, 46509, 46404, 46390, 48356, 49402, 49841, 51069, 52085, 52943, 53740, 54682, 54204, 56343, 56922, 57936, 59199, 61359, 64962, 68895]],
+      "image": {
+        "file": "illustrations/Hyd.webp",
+        "size": [1024, 1024],
+        "anchors": [
+          {"pos": [923, 224], "hip": 41307},
+          {"pos": [863, 90], "hip": 42313},
+          {"pos": [36, 844], "hip": 68895}
+        ]
+      },
+      "common_name": {"english": "Hydra", "native": "الشجاع"}
+    },
+    {
+      "id": "CON arabic_al-sufi Crt",
+      "lines": [[53740, 55282, 55687, 56633, 58188, 57283, 55705, 53740], [55282, 55705]],
+      "image": {
+        "file": "illustrations/Crt.webp",
+        "size": [256, 256],
+        "anchors": [
+          {"pos": [192, 38], "hip": 56633},
+          {"pos": [32, 26], "hip": 58188},
+          {"pos": [117, 235], "hip": 53740}
+        ]
+      },
+      "common_name": {"english": "Crater", "native": "الباطية"}
+    },
+    {
+      "id": "CON arabic_al-sufi Crv",
+      "lines": [[59199, 59316, 60189, 59803, 60965, 61174], [60965, 61359], [60965, 60189]],
+      "image": {
+        "file": "illustrations/Crv.webp",
+        "size": [256, 256],
+        "anchors": [
+          {"pos": [109, 127], "hip": 60965},
+          {"pos": [229, 215], "hip": 59199},
+          {"pos": [126, 216], "hip": 61359}
+        ]
+      },
+      "common_name": {"english": "Corvus", "native": "الغراب"}
+    },
+    {
+      "id": "CON arabic_al-sufi Cen",
+      "lines": [[67457, 67153, 67786, 67669, 67457, 65109, 65936, 65144, 64004, 61932, 61622, 60823, 59196, 59449, 61084, 62434], [59449, 59747, 60718], [59449, 63003, 66821, 68702], [66821, 66657, 71683], [66657, 67234, 68002, 68523, 68282, 68933, 67457], [68933, 68862, 71352, 73334], [67464, 70090, 72010], [67472, 68245, 70300, 71865], [65109, 63972, 67464], [63972, 67472]],
+      "image": {
+        "file": "illustrations/Cen.webp",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [208, 363], "hip": 71683},
+          {"pos": [42, 133], "hip": 77634},
+          {"pos": [290, 72], "hip": 67786}
+        ]
+      },
+      "common_name": {"english": "Centaurus", "native": "قنطورس"}
+    },
+    {
+      "id": "CON arabic_al-sufi Lup",
+      "lines": [[73273, 71860, 74117, 73807, 74376, 74395], [74376, 74911, 75264, 76297, 78384, 78918, 78105, 77634, 78384, 75141, 74857, 74604, 74117]],
+      "image": {
+        "file": "illustrations/Cen.webp",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [208, 363], "hip": 71683},
+          {"pos": [42, 133], "hip": 77634},
+          {"pos": [290, 72], "hip": 67786}
+        ]
+      },
+      "common_name": {"english": "Lupus", "native": "السبع"}
+    },
+    {
+      "id": "CON arabic_al-sufi Ara",
+      "lines": [[86092, 88714, 86796, 85792, 86092], [86248, 85258, 85267], [86248, 83153, 83081]],
+      "image": {
+        "file": "illustrations/Ara.webp",
+        "size": [256, 256],
+        "anchors": [
+          {"pos": [75, 33], "hip": 88714},
+          {"pos": [188, 127], "hip": 83153},
+          {"pos": [91, 192], "hip": 85727}
+        ]
+      },
+      "common_name": {"english": "Ara", "native": "المجمرة"}
+    },
+    {
+      "id": "CON arabic_al-sufi CrA",
+      "lines": [[90422, 92308, 92953, 93542, 94005, 94160, 94114, 93825, 93174, 92989, 91875, 90887, 90982, 90422]],
+      "image": {
+        "file": "illustrations/CrA.webp",
+        "size": [256, 256],
+        "anchors": [
+          {"pos": [175, 175], "hip": 90422},
+          {"pos": [80, 135], "hip": 93542},
+          {"pos": [100, 60], "hip": 93174}
+        ]
+      },
+      "common_name": {"english": "Corona Australis", "native": "الإكليل الجنوبي"}
+    },
+    {
+      "id": "CON arabic_al-sufi PsA",
+      "lines": [[111188, 112948, 113246, 113368, 111954, 111045, 109789, 108661, 107608, 107380, 108085, 109285, 111188]],
+      "image": {
+        "file": "illustrations/PsA.webp",
+        "size": [256, 256],
+        "anchors": [
+          {"pos": [184, 115], "hip": 108085},
+          {"pos": [129, 33], "hip": 108661},
+          {"pos": [33, 127], "hip": 113246}
+        ]
+      },
+      "common_name": {"english": "Piscis Austrinus", "native": "الحوت الجنوبي"}
+    },
+    {
+      "id": "CON arabic_al-sufi SHr",
+      "lines": [[113788, 112917, 111944, 111104, 109754, 109937, 109654, 109410, 107763, 107310, 107354, 107472, 109176, 110992, 112158, 111841, 112031, 112242, 113281, 113726], [112158, 113881], [112158, 112748], [107310, 106140, 106787, 107348], [107472, 107887]],
+      "image": {
+        "file": "illustrations/Sufi_Horse.webp",
+        "size": [1024, 1024],
+        "anchors": [
+          {"pos": [170, 190], "hip": 111944},
+          {"pos": [730, 476], "hip": 107354},
+          {"pos": [309, 635], "hip": 113881}
+        ]
+      },
+      "common_name": {"english": "The horse", "native": "فرس الصوفي"}
+    },
+    {
+      "id": "CON book-of-the-stars-almagest SFA",
+      "lines": [[3231, 2912, 3092, 3031, 3693, 5454, 6706, 6193, 5447, 4436, 3881, 3231]],
+      "image": {
+        "file": "illustrations/Sufi_FishA.webp",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [221, 142], "hip": 3092},
+          {"pos": [79, 130], "hip": 3231},
+          {"pos": [144, 239], "hip": 5447}
+        ]
+      },
+      "common_name": {"english": "The great fish", "native": "الحوت العظيم"}
+    },
+    {
+      "id": "CON arabic_al-sufi SFB",
+      "lines": [[7513, 7719, 7607, 8068, 9505, 11060, 11313, 10340, 9640, 8814, 7818, 7513]],
+      "image": {
+        "file": "illustrations/Sufi_FishB.webp",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [445, 178], "hip": 7818},
+          {"pos": [114, 374], "hip": 11060},
+          {"pos": [404, 291], "hip": 9640}
+        ]
+      },
+      "common_name": {"english": "The other fish", "native": "الحوت الآخر"}
+    }
+  ],
+  "common_names": {
+    "HIP 11767": [{"english": "The kid", "native": "الجدي"}],
+    "HIP 72607": [{"english": "The brighter of the two calves", "native": "أنور الفرقدين"}],
+    "HIP 75097": [{"english": "The dimmer of the two calves", "native": "أخفى الفرقدين"}],
+    "HIP 62956": [{"english": "The dark camel", "native": "الجون"}],
+    "HIP 65378": [{"english": "The little goat", "native": "العناق"}],
+    "HIP 67301": [{"english": "The leader", "native": "القائد"}],
+    "HIP 63125": [{"english": "Liver of the lion", "native": "كبد الأسد"}],
+    "HIP 75458": [{"english": "The male hyena", "native": "الذيخ"}],
+    "HIP 69673": [{"english": "The high one with the spear", "native": "السماك الرامح"}],
+    "HIP 76267": [{"english": "The bright star of al-Fakkah", "native": "المنير من الفكة"}],
+    "HIP 84345": [{"english": "Head of Hercules", "native": "رأس الجاثي"}],
+    "HIP 91262": [{"english": "The landing eagle", "native": "النسر الواقع"}],
+    "HIP 95947": [{"english": "Beak of the hen", "native": "منقار الدجاجة"}],
+    "HIP 102098": [{"english": "Tail of the hen", "native": "ذنب الدجاجة"}],
+    "HIP 746": [{"english": "The henna tinted hand", "native": "الكف الخضيب"}],
+    "HIP 15863": [{"english": "Side of Perseus", "native": "جنب برشاوش"}],
+    "HIP 14576": [{"english": "Head of the ogre", "native": "رأس الغول"}],
+    "HIP 24608": [{"english": "Al-Ayyuq", "native": "العيوق"}],
+    "HIP 86032": [{"english": "Head of the serpent holder", "native": "رأس الحواء"}],
+    "HIP 77070": [{"english": "Neck of the serpent", "native": "عنق الحية"}],
+    "HIP 97649": [{"english": "The flying eagle", "native": "النسر الطائر"}],
+    "HIP 101421": [{"english": "Tail of the Dolphin", "native": "ذنب الدلفين"}],
+    "HIP 677": [{"english": "Navel of the horse", "native": "سرة الفرس"}],
+    "HIP 1067": [{"english": "Wing of the horse", "native": "جناح الفرس"}],
+    "HIP 113881": [{"english": "Shoulder of the horse", "native": "منكب الفرس"}],
+    "HIP 113963": [{"english": "Rump of the horse", "native": "متن الفرس"}],
+    "HIP 107315": [{"english": "Mouth of the horse", "native": "فم الفرس"}],
+    "HIP 5447": [{"english": "Abdomen of the fish", "native": "بطن الحوت"}],
+    "HIP 9640": [{"english": "Leg of Andromeda", "native": "رجل المسلسلة"}],
+    "HIP 8796": [{"english": "Apex of the triangle", "native": "رأس المثلث"}],
+    "HIP 9884": [{"english": "The horn", "native": "الناطح"}],
+    "HIP 21421": [{"english": "The follower", "native": "الدبران"}],
+    "HIP 36850": [{"english": "Head of the twin", "native": "رأس التوأم"}],
+    "HIP 49669": [{"english": "Heart of the lion", "native": "قلب الأسد"}],
+    "HIP 54872": [{"english": "Back of the lion", "native": "ظهر الأسد"}],
+    "HIP 57632": [{"english": "Tail of the lion", "native": "ذنب الأسد"}],
+    "HIP 80763": [{"english": "Heart of the scorpion", "native": "قلب العقرب"}],
+    "HIP 95241": [{"english": "Heel of the archer", "native": "عرقوب الرامي"}],
+    "HIP 107556": [{"english": "Tail of capricornus", "native": "ذنب الجدي"}],
+    "HIP 113368": [{"english": "Mouth of Piscis Austrinus", "native": "فم الحوت الجنوبي"}],
+    "HIP 14135": [{"english": "The leprous hand", "native": "الكف الجذماء"}],
+    "HIP 1562": [{"english": "Tail of Cetus", "native": "ذنب قيطس"}],
+    "HIP 24436": [{"english": "Leg of al-Jawza", "native": "رجل الجوزاء"}],
+    "HIP 13847": [{"english": "End of the river", "native": "آخر النهر"}],
+    "HIP 32349": [{"english": "Southern Shi'raa", "native": "الشعرى اليمانية"}],
+    "HIP 37279": [{"english": "Northern Shi'raa", "native": "الشعرى الشامية"}],
+    "HIP 30438": [{"english": "Suhayl", "native": "سهيل"}],
+    "HIP 46390": [{"english": "Al-Fard", "native": "الفرد"}],
+    "HIP 59803": [{"english": "Right wing of Corvus", "native": "جناح الغراب الأيمن"}],
+    "HIP 65474": [{"english": "The armless high one", "native": "السماك الأعزل"}],
+    "HIP 27989": [{"english": "Shoulder of al-Jawza", "native": "منكب الجوزاء"}],
+    "HIP 71683": [{"english": "Leg of Centaurus", "native": "رجل قنطورس"}]
+  }
+}

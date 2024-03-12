@@ -1,0 +1,568 @@
+{
+  "id": "romanian",
+  "region": "Europe",
+  "classification": ["traditional"],
+  "fallback_to_international_names": true,
+  "thumbnail": "illustrations/crapii.webp",
+  "thumbnail_bscale": 2,
+  "illustrations_bscale": 2,
+  "highlight": "CON romanian Cio",
+  "constellations": [
+    {
+      "id": "CON romanian UMa",
+      "lines": [[67301, 65378, 62956, 59774, 54061, 53910, 58001, 59774], [58001, 57399, 54539, 50372], [54539, 50801], [53910, 48402, 46853, 44471], [46853, 44127], [48402, 48319, 41704, 46733, 54061]],
+      "image": {
+        "file": "illustrations/CarulMare.webp",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [24, 135], "hip": 67301},
+          {"pos": [490, 245], "hip": 54061},
+          {"pos": [455, 338], "hip": 53910}
+        ]
+      },
+      "common_name": {"english": "The Great Chariot", "native": "Carul Mare"}
+    },
+    {
+      "id": "CON romanian C3i",
+      "lines": [[24608, 23767, 23416, 23453, 23767]],
+      "image": {
+        "file": "illustrations/CapraCuTreiIezi.webp",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [205, 109], "hip": 24608},
+          {"pos": [355, 292], "hip": 23416},
+          {"pos": [266, 460], "hip": 23767}
+        ]
+      },
+      "common_name": {"english": "The She-Goat with Three She-Goat’s Kids", "native": "Capra"}
+    },
+    {
+      "id": "CON romanian Csa",
+      "lines": [[116727, 105199, 107259, 109492, 110991], [106032, 109400]],
+      "image": {
+        "file": "illustrations/Coasa.webp",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [371, 49], "hip": 116727},
+          {"pos": [303, 441], "hip": 105199},
+          {"pos": [137, 429], "hip": 109492}
+        ]
+      },
+      "common_name": {"english": "The Scythe", "native": "Coasa"}
+    },
+    {
+      "id": "CON romanian Cio",
+      "lines": [[91262, 91971, 92791, 93194, 92420, 91971]],
+      "image": {
+        "file": "illustrations/CiobanulCuOile.webp",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [66, 180], "hip": 91262},
+          {"pos": [188, 362], "hip": 92791},
+          {"pos": [382, 301], "hip": 92420}
+        ]
+      },
+      "common_name": {"english": "The Shepherd with His Sheep", "native": "Ciobanul cu oile"}
+    },
+    {
+      "id": "CON romanian Hra",
+      "lines": [[76127, 75695, 76267, 76952, 77512, 78159, 78493, 76127]],
+      "image": {
+        "file": "illustrations/Hora.webp",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [218, 141], "hip": 76267},
+          {"pos": [391, 284], "hip": 78159},
+          {"pos": [85, 296], "hip": 76127}
+        ]
+      },
+      "common_name": {"english": "The Ring Dance", "native": "Hora"}
+    },
+    {
+      "id": "CON romanian Jgb",
+      "lines": [[9640, 5447, 3092, 677, 113881, 113963], [677, 1067]],
+      "image": {
+        "file": "illustrations/JgheabulSiPutul.webp",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [452, 282], "hip": 9640},
+          {"pos": [104, 353], "hip": 113881},
+          {"pos": [145, 166], "hip": 1067}
+        ]
+      },
+      "common_name": {"english": "The Wall with a Drain", "native": "Jgheabul si putul"}
+    },
+    {
+      "id": "CON romanian Tdz",
+      "lines": [[8886, 6686, 4427, 2599, 746], [6686, 5542], [4427, 3179]],
+      "image": {
+        "file": "illustrations/Tronul.webp",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [129, 142], "hip": 8886},
+          {"pos": [445, 362], "hip": 746},
+          {"pos": [146, 430], "hip": 5542}
+        ]
+      },
+      "common_name": {"english": "God’s Chair", "native": "Tronul"}
+    },
+    {
+      "id": "CON romanian Fap",
+      "lines": [[97278, 97649, 98036]],
+      "image": {
+        "file": "illustrations/FataCuColibita.webp",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [108, 166], "hip": 97278},
+          {"pos": [247, 150], "hip": 97649},
+          {"pos": [423, 106], "hip": 98036}
+        ]
+      },
+      "common_name": {"english": "The Emperor’s Daughter with a Yoke", "native": "Fata de imparat"}
+    },
+    {
+      "id": "CON romanian Ccp",
+      "lines": [[17847, 17702, 17573, 17499, 17608, 17847]],
+      "image": {
+        "file": "illustrations/CloscaCuPui.webp",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [172, 210], "hip": 17847},
+          {"pos": [380, 226], "hip": 17579},
+          {"pos": [273, 324], "hip": 17608}
+        ]
+      },
+      "common_name": {"english": "The Hatching Hen with Her Chicks", "native": "Closca cu pui"}
+    },
+    {
+      "id": "CON romanian UMi",
+      "lines": [[11767, 85822, 82080, 77055, 79822, 75097, 72607, 77055]],
+      "image": {
+        "file": "illustrations/carul-mic.webp",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [50, 159], "hip": 11767},
+          {"pos": [381, 241], "hip": 72607},
+          {"pos": [309, 330], "hip": 79822}
+        ]
+      },
+      "common_name": {"english": "The Little Chariot", "native": "Carul mic"}
+    },
+    {
+      "id": "CON romanian Gem",
+      "lines": [[37826, 35550, 34088, 31681, 30343, 32246, 36850, 37826]],
+      "image": {
+        "file": "illustrations/gemenii.webp",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [179, 235], "hip": 37826},
+          {"pos": [301, 212], "hip": 36850},
+          {"pos": [170, 464], "hip": 35550}
+        ]
+      },
+      "common_name": {"english": "The Brothers", "native": "Fratii"}
+    },
+    {
+      "id": "CON romanian Pma",
+      "lines": [[107310, 104732, 102488, 100453, 97165, 95853], [102098, 100453, 98110, 95947]],
+      "image": {
+        "file": "illustrations/crucea-mare.webp",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [121, 181], "hip": 102488},
+          {"pos": [369, 181], "hip": 97165},
+          {"pos": [253, 418], "hip": 95947}
+        ]
+      },
+      "common_name": {"english": "The Great Cross", "native": "Crucea mare"}
+    },
+    {
+      "id": "CON romanian Pmi",
+      "lines": [[101421, 101769, 102532], [102281, 101958]],
+      "image": {
+        "file": "illustrations/crucea-mica.webp",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [240, 343], "hip": 101769},
+          {"pos": [320, 233], "hip": 101958},
+          {"pos": [248, 85], "hip": 102532}
+        ]
+      },
+      "common_name": {"english": "The Little Cross", "native": "Crucea mica"}
+    },
+    {
+      "id": "CON romanian Cap",
+      "lines": [[107556, 107188, 106723, 105881, 102978, 102485, 100345, 104139, 105515, 106985, 107556]],
+      "image": {
+        "file": "illustrations/tapul.webp",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [434, 93], "hip": 100345},
+          {"pos": [363, 337], "hip": 102978},
+          {"pos": [74, 221], "hip": 107556}
+        ]
+      },
+      "common_name": {"english": "The He-Goat", "native": "Tapul"}
+    },
+    {
+      "id": "CON romanian Rac",
+      "lines": [[44066, 42911, 42806, 43103], [40526, 42911]],
+      "image": {
+        "file": "illustrations/racul.webp",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [177, 75], "hip": 43103},
+          {"pos": [204, 353], "hip": 44066},
+          {"pos": [375, 351], "hip": 40526}
+        ]
+      },
+      "common_name": {"english": "The Crayfish", "native": "Racul"}
+    },
+    {
+      "id": "CON romanian Cal",
+      "lines": [[49669, 54879, 57632, 54872, 50583, 49583, 49669], [50583, 50335, 48455, 47908]],
+      "image": {
+        "file": "illustrations/calul.webp",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [105, 325], "hip": 57632},
+          {"pos": [397, 332], "hip": 49669},
+          {"pos": [422, 168], "hip": 48455}
+        ]
+      },
+      "common_name": {"english": "The Horse", "native": "Calul"}
+    },
+    {
+      "id": "CON romanian Dra",
+      "lines": [[87585, 87833, 85670, 85829, 87585, 94376, 97433, 94648, 89937, 83895, 80331, 78527, 75458, 68756, 61281, 56211]],
+      "image": {
+        "file": "illustrations/balaurul.webp",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [291, 384], "hip": 87585},
+          {"pos": [185, 284], "hip": 97433},
+          {"pos": [381, 79], "hip": 56211}
+        ]
+      },
+      "common_name": {"english": "The Dragon", "native": "Balaurul"}
+    },
+    {
+      "id": "CON romanian Crb",
+      "lines": [[60965, 59803, 59316, 59199, 61359, 60965]],
+      "image": {
+        "file": "illustrations/corbul.webp",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [139, 226], "hip": 60965},
+          {"pos": [224, 370], "hip": 61359},
+          {"pos": [354, 307], "hip": 59199}
+        ]
+      },
+      "common_name": {"english": "The Raven", "native": "Corbul"}
+    },
+    {
+      "id": "CON romanian Cat",
+      "lines": [[73714, 76333, 74785, 72622, 73714]],
+      "image": {
+        "file": "illustrations/cantarul.webp",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [194, 172], "hip": 76333},
+          {"pos": [344, 294], "hip": 72622},
+          {"pos": [208, 399], "hip": 73714}
+        ]
+      },
+      "common_name": {"english": "The Scales", "native": "Cantarul"}
+    },
+    {
+      "id": "CON romanian Vir",
+      "lines": [[65474, 61941, 60129, 57757, 57380, 58590, 58948], [61941, 63090, 66249, 65474], [73497, 72631, 72220, 73350, 71832, 68520, 66249], [63090, 63608]],
+      "image": {
+        "file": "illustrations/fecioara.webp",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [253, 302], "hip": 65474},
+          {"pos": [248, 33], "hip": 57757},
+          {"pos": [82, 147], "hip": 63608}
+        ]
+      },
+      "common_name": {"english": "The Virgin", "native": "Fecioara"}
+    },
+    {
+      "id": "CON romanian Psc",
+      "lines": [[113889, 114971, 115738, 116928, 118268, 4906, 5737, 7007, 7884, 8404, 8833, 9487, 8198, 7097, 5742], [113889, 115830, 116771, 118268], [5742, 5914, 6315, 5586, 4893, 5742]],
+      "image": {
+        "file": "illustrations/crapii.webp",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [98, 200], "hip": 9487},
+          {"pos": [291, 118], "hip": 5586},
+          {"pos": [347, 380], "hip": 113889}
+        ]
+      },
+      "common_name": {"english": "The Carp", "native": "Crapii"}
+    },
+    {
+      "id": "CON romanian Ber",
+      "lines": [[8832, 8903, 9884, 13209, 13914, 14838], [13914, 15110]],
+      "image": {
+        "file": "illustrations/berbecul.webp",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [66, 317], "hip": 15110},
+          {"pos": [134, 142], "hip": 13209},
+          {"pos": [459, 180], "hip": 8832}
+        ]
+      },
+      "common_name": {"english": "The Ram", "native": "Berbecul"}
+    },
+    {
+      "id": "CON romanian Cma",
+      "lines": [[32349, 30324, 30122, 33579, 33856, 35904], [33579, 32349]],
+      "image": {
+        "file": "illustrations/dulaul.webp",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [344, 127], "hip": 32349},
+          {"pos": [161, 234], "hip": 34444},
+          {"pos": [298, 401], "hip": 30122}
+        ]
+      },
+      "common_name": {"english": "The Mastiff", "native": "Dulaul"}
+    },
+    {
+      "id": "CON romanian Ctl",
+      "lines": [[37279, 36188]],
+      "image": {
+        "file": "illustrations/catelul.webp",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [129, 277], "hip": 37279},
+          {"pos": [439, 191], "hip": 36188},
+          {"pos": [374, 269], "hip": 36265}
+        ]
+      },
+      "common_name": {"english": "The Little Dog", "native": "Catelul"}
+    },
+    {
+      "id": "CON romanian Vca",
+      "lines": [[67459, 67927, 71795, 72125, 72105, 74666, 73555, 71075, 71053, 72105, 67927, 67275], [74666, 75411, 76041], [71075, 69732, 69483], [70497, 69732]],
+      "image": {
+        "file": "illustrations/vacarul.webp",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [330, 92], "hip": 69732},
+          {"pos": [329, 376], "hip": 67927},
+          {"pos": [182, 188], "hip": 74666}
+        ]
+      },
+      "common_name": {"english": "The Herdsman", "native": "Vacarul"}
+    },
+    {
+      "id": "CON romanian Prb",
+      "lines": [[25859, 27766, 28199, 29807], [26634, 28199]],
+      "image": {
+        "file": "illustrations/porumbita.webp",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [101, 236], "hip": 29807},
+          {"pos": [244, 384], "hip": 27766},
+          {"pos": [385, 294], "hip": 26634}
+        ]
+      },
+      "common_name": {"english": "The Turtle Dove", "native": "Porumbita"}
+    },
+    {
+      "id": "CON romanian Var",
+      "lines": [[102624, 102618, 103045, 106278, 109074, 110395, 110960, 110672], [111497, 110960], [110395, 112961, 114939, 115033, 117756, 117722, 115438, 113136, 112716, 109139, 106278], [110395, 110273, 109139], [117629, 117218, 116901]],
+      "image": {
+        "file": "illustrations/varsatorul.webp",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [408, 146], "hip": 102618},
+          {"pos": [229, 202], "hip": 110960},
+          {"pos": [230, 381], "hip": 115438}
+        ]
+      },
+      "common_name": {"english": "He Who Pours Out the Water", "native": "Varsatorul"}
+    },
+    {
+      "id": "CON romanian Chi",
+      "lines": [[10324, 11484, 12828, 13954, 14135, 12706, 12093, 11484], [12706, 12387, 10642, 8645, 11345, 12390, 12770, 11783, 11345], [8645, 6537, 5364, 8102, 8645], [8778, 8102], [5364, 3419, 1562]],
+      "image": {
+        "file": "illustrations/chitul.webp",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [114, 195], "hip": 10324},
+          {"pos": [192, 396], "hip": 12770},
+          {"pos": [413, 159], "hip": 1562}
+        ]
+      },
+      "common_name": {"english": "The Whale", "native": "Chitul"}
+    },
+    {
+      "id": "CON romanian Rar",
+      "lines": [[25336, 25930, 26311, 26727, 27366, 24436, 25930]],
+      "image": {
+        "file": "illustrations/rarita.webp",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [380, 142], "hip": 25336},
+          {"pos": [143, 315], "hip": 27366},
+          {"pos": [276, 374], "hip": 24436}
+        ]
+      },
+      "common_name": {"english": "The Little Plough", "native": "Rarita"}
+    },
+    {
+      "id": "CON romanian Sec",
+      "lines": [[26237, 26235, 26199, 25923, 25247, 24674]],
+      "image": {
+        "file": "illustrations/secera.webp",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [266, 450], "hip": 24674},
+          {"pos": [133, 295], "hip": 25923},
+          {"pos": [224, 178], "hip": 26237}
+        ]
+      },
+      "common_name": {"english": "The Sickle", "native": "Secera"}
+    },
+    {
+      "id": "CON romanian Sfm",
+      "lines": [[26727, 26311, 25930], [24436, 26311]],
+      "image": {
+        "file": "illustrations/sfredelul.webp",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [217, 148], "hip": 26727},
+          {"pos": [298, 149], "hip": 25930},
+          {"pos": [252, 392], "hip": 24436}
+        ]
+      },
+      "common_name": {"english": "The Great Auger", "native": "Sfredelul mare"}
+    },
+    {
+      "id": "CON romanian Tau",
+      "lines": [[21421, 20894, 20205, 20455, 20889, 21251, 21421]],
+      "image": {
+        "file": "illustrations/taurul.webp",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [156, 160], "hip": 21421},
+          {"pos": [352, 138], "hip": 20889},
+          {"pos": [268, 379], "hip": 20205}
+        ]
+      },
+      "common_name": {"english": "The Bull", "native": "Taurul"}
+    },
+    {
+      "id": "CON romanian Omu",
+      "lines": [[79992, 81126, 81833, 84380, 84606, 85112, 87808, 86414], [81833, 81693, 83207, 84380], [81693, 80816, 80170], [83207, 85693, 86974, 87933, 88794, 88817, 88528]],
+      "image": {
+        "file": "illustrations/omul.webp",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [90, 287], "hip": 86414},
+          {"pos": [440, 214], "hip": 80170},
+          {"pos": [243, 434], "hip": 88794}
+        ]
+      },
+      "common_name": {"english": "The Man", "native": "Omul"}
+    },
+    {
+      "id": "CON romanian Sar",
+      "lines": [[78554, 77661, 76852, 77450, 78072, 77233, 77450, 77661], [77233, 76276, 77070, 77622, 79593, 79882, 81377, 84012, 85755, 86263, 88048, 89962, 92946, 88771, 86032, 83000, 80883, 79593], [86032, 86742, 85355], [86742, 87108, 88192, 88290, 88601], [88149, 88192]],
+      "image": {
+        "file": "illustrations/sarpele.webp",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [87, 331], "hip": 92946},
+          {"pos": [319, 397], "hip": 85755},
+          {"pos": [282, 68], "hip": 77450}
+        ]
+      },
+      "common_name": {"english": "The Serpent", "native": "Sarpele"}
+    },
+    {
+      "id": "CON romanian Sco",
+      "lines": [[74857, 76470, 76600, 78104, 78265, 78401, 78820], [78401, 80763, 81266, 82396, 82514]],
+      "image": {
+        "file": "illustrations/scorpia.webp",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [214, 121], "hip": 78820},
+          {"pos": [413, 195], "hip": 74857},
+          {"pos": [218, 423], "hip": 82514}
+        ]
+      },
+      "common_name": {"english": "The Scorpion", "native": "Scorpia"}
+    },
+    {
+      "id": "CON romanian Bar",
+      "lines": [[18246, 18614, 18532, 17448, 18246], [18532, 15863, 14328, 13268, 13531, 12777, 14632, 15863, 14668, 14576, 14354], [13254, 14576]],
+      "image": {
+        "file": "illustrations/barda.webp",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [57, 370], "hip": 18246},
+          {"pos": [281, 170], "hip": 15863},
+          {"pos": [256, 316], "hip": 14576}
+        ]
+      },
+      "common_name": {"english": "The Axe", "native": "Barda"}
+    },
+    {
+      "id": "CON romanian Arc",
+      "lines": [[92041, 90185, 89931, 90496, 92041, 92855], [90496, 92111, 93085, 93683, 94141, 94820, 95168]],
+      "image": {
+        "file": "illustrations/arcasul.webp",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [344, 78], "hip": 90185},
+          {"pos": [228, 191], "hip": 90496},
+          {"pos": [278, 448], "hip": 95168}
+        ]
+      },
+      "common_name": {"english": "The Archer", "native": "Arcasul"}
+    },
+    {
+      "id": "CON romanian Trf",
+      "lines": [[26727, 26311, 25930]],
+      "image": {
+        "file": "illustrations/trisfetitele.webp",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [106, 278], "hip": 26727},
+          {"pos": [254, 298], "hip": 26311},
+          {"pos": [406, 299], "hip": 25930}
+        ]
+      },
+      "common_name": {"english": "The Three Saints", "native": "Trisfetitele"}
+    },
+    {
+      "id": "CON romanian Vri",
+      "lines": [[21421, 20894, 20205, 20455, 20889, 21251, 21421]],
+      "image": {
+        "file": "illustrations/vierii.webp",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [106, 181], "hip": 21421},
+          {"pos": [338, 141], "hip": 20889},
+          {"pos": [225, 434], "hip": 20205}
+        ]
+      },
+      "common_name": {"english": "The Boars", "native": "Vierii"}
+    }
+  ],
+  "common_names": {
+    "HIP 11767": [{"english": "The Sky's Votive Light"}],
+    "HIP 21421": [{"english": "The Bright Star of the Pig"}, {"english": "The Alarm Clock"}],
+    "HIP 32349": [{"english": "Morning Star"}],
+    "HIP 36850": [{"english": "Romulus"}],
+    "HIP 37826": [{"english": "Remus"}],
+    "HIP 65477": [{"english": "The Little Bitch"}],
+    "HIP 91262": [{"english": "The Shepherd"}, {"english": "The Stars Queen"}],
+    "HIP 112029": [{"english": "Homan"}]
+  }
+}

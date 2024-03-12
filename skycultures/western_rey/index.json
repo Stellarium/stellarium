@@ -1,0 +1,873 @@
+{
+  "id": "western_rey",
+  "region": "Europe",
+  "classification": ["single"],
+  "fallback_to_international_names": true,
+  "highlight": "CON western_rey Ori",
+  "constellations": [
+    {
+      "id": "CON western_rey BgD",
+      "lines": [[67301, 65378, 62956, 59774, 54061, 53910, 58001, 59774]],
+      "common_name": {"english": "Big Dipper", "pronounce": "BIG DIPPER"}
+    },
+    {
+      "id": "CON western_rey UMaP",
+      "lines": [[53910, 54061]],
+      "common_name": {"english": "Pointers"}
+    },
+    {
+      "id": "CON western_rey UMi",
+      "lines": [[11767, 85822, 82080, 77055, 79822, 75097, 72607, 77055]],
+      "common_name": {"english": "Little Dipper", "pronounce": "LITTLE DIPPER"}
+    },
+    {
+      "id": "CON western_rey UMiG",
+      "lines": [[72607, 75097]],
+      "common_name": {"english": "Guardians"}
+    },
+    {
+      "id": "CON western_rey Dra",
+      "lines": [[87585, 87833, 85670, 85829, 87585, 94376, 97433], [94376, 89908], [89937, 89908, 83895, 80331, 78527, 75458, 68756, 61281, 56211]],
+      "common_name": {"english": "Draco", "pronounce": "DRAGON"}
+    },
+    {
+      "id": "CON western_rey DraF",
+      "lines": [[89937, 89908, 94376, 97433]],
+      "common_name": {"english": "feet"}
+    },
+    {
+      "id": "CON western_rey DraH",
+      "lines": [[87585, 87833, 85670, 85829, 87585]],
+      "common_name": {"english": "head"}
+    },
+    {
+      "id": "CON western_rey DraT",
+      "lines": [[68756, 61281]],
+      "common_name": {"english": "tail"}
+    },
+    {
+      "id": "CON western_rey Cas",
+      "lines": [[9598, 8886, 6686, 4427, 3179, 746]],
+      "common_name": {"english": "Cassiopeia", "pronounce": "CASSIOPEIA"}
+    },
+    {
+      "id": "CON western_rey Cep",
+      "lines": [[110991, 112724, 106032, 105199, 102422, 101093], [105199, 107259, 109857, 109492, 110991], [109492, 107418], [112724, 116727, 106032]],
+      "common_name": {"english": "Cepheus", "pronounce": "CEPHEUS"}
+    },
+    {
+      "id": "CON western_rey Cam",
+      "lines": [[23040, 23522, 17884, 16228], [17884, 17959, 22783, 23522], [22783, 33694, 29997]],
+      "common_name": {"english": "Camelopardalis", "pronounce": "GIRAFFE"}
+    },
+    {
+      "id": "CON western_rey Uma",
+      "lines": [[67301, 65378, 62956, 59774, 54061, 53910, 58001, 59774], [54061, 46733, 41704, 44127, 44471, 50801], [50372, 46853, 48319, 46733], [50801, 55203], [55219, 54539, 57399, 67301]],
+      "common_name": {"english": "Ursa Major"}
+    },
+    {
+      "id": "CON western_rey UMah",
+      "lines": [[64468, 64468]],
+      "common_name": {"english": "head"}
+    },
+    {
+      "id": "CON western_rey UMap1",
+      "lines": [[55203, 55219]],
+      "common_name": {"english": "paws"}
+    },
+    {
+      "id": "CON western_rey UMap2",
+      "lines": [[50801, 44471]],
+      "common_name": {"english": "paws"}
+    },
+    {
+      "id": "CON western_rey Leo",
+      "lines": [[57632, 54872, 54879, 55642, 55434], [54879, 51624], [54879, 49583, 49669], [49583, 47508], [49583, 50583, 53954, 54872], [50583, 50335, 48455, 46146, 46750, 47908, 48455], [47908, 49583]],
+      "common_name": {"english": "Leo", "pronounce": "LION"}
+    },
+    {
+      "id": "CON western_rey Leoh",
+      "lines": [[48390, 48390]],
+      "common_name": {"english": "head"}
+    },
+    {
+      "id": "CON western_rey Leot",
+      "lines": [[56146, 56146]],
+      "common_name": {"english": "tail"}
+    },
+    {
+      "id": "CON western_rey CVn",
+      "lines": [[61317, 63125]],
+      "common_name": {"english": "Canes Venatici"}
+    },
+    {
+      "id": "CON western_rey LMi",
+      "lines": [[53229, 51233, 49593, 46952], [49593, 51056, 53229]],
+      "common_name": {"english": "Leo Minor", "pronounce": "LITTLE LION"}
+    },
+    {
+      "id": "CON western_rey Boo",
+      "lines": [[67275, 67459, 67927, 69673, 71795, 72105, 69673], [72105, 74666, 75411, 73555, 74666], [73555, 71075, 71053, 71284, 72105], [71075, 69732, 70497, 69483, 69732]],
+      "common_name": {"english": "Bootes", "pronounce": "HERDSMAN"}
+    },
+    {
+      "id": "CON western_rey Boob",
+      "lines": [[71571, 71571]],
+      "common_name": {"english": "body"}
+    },
+    {
+      "id": "CON western_rey Booh",
+      "lines": [[73634, 73634]],
+      "common_name": {"english": "head"}
+    },
+    {
+      "id": "CON western_rey Boop",
+      "lines": [[69483, 69483]],
+      "common_name": {"english": "pipe"}
+    },
+    {
+      "id": "CON western_rey Com",
+      "lines": [[64241, 64394, 60742], [64394, 60697], [64394, 60746], [64394, 60904]],
+      "common_name": {"english": "Coma Berenices", "pronounce": "BERENICE'S HAIR"}
+    },
+    {
+      "id": "CON western_rey CrB",
+      "lines": [[76127, 75695, 76267, 76952, 77512, 78159]],
+      "common_name": {"english": "Corona Borealis", "pronounce": "NORTHERN CROWN"}
+    },
+    {
+      "id": "CON western_rey Cyg",
+      "lines": [[94779, 97165, 100453, 102098, 104060], [102098, 99785, 95853, 94779], [100453, 102488, 104732, 103413, 102098], [103413, 105102, 104887], [100453, 98110, 96683, 95947]],
+      "common_name": {"english": "Cygnus", "pronounce": "SWAN"}
+    },
+    {
+      "id": "CON western_rey Cygw1",
+      "lines": [[98610, 98610]],
+      "common_name": {"english": "wing"}
+    },
+    {
+      "id": "CON western_rey Cygw2",
+      "lines": [[101756, 101756]],
+      "common_name": {"english": "wing"}
+    },
+    {
+      "id": "CON western_rey Cygf",
+      "lines": [[104463, 104463]],
+      "common_name": {"english": "feet"}
+    },
+    {
+      "id": "CON western_rey Cygn",
+      "lines": [[97295, 97295]],
+      "common_name": {"english": "outstretched neck"}
+    },
+    {
+      "id": "CON western_rey Lyr",
+      "lines": [[91262, 91926, 92862, 94481, 94713, 93194, 92420, 89826, 91262], [93194, 92791], [92420, 91971]],
+      "common_name": {"english": "Lyra", "pronounce": "LYRE"}
+    },
+    {
+      "id": "CON western_rey Vul",
+      "lines": [[95771, 98543]],
+      "common_name": {"english": "Vulpecula", "pronounce": "L.FOX"}
+    },
+    {
+      "id": "CON western_rey Her",
+      "lines": [[84345, 84379, 85693, 86974, 88794, 88267, 88886, 90139, 92043, 92161], [88794, 87933, 84380, 85112, 87808, 86414, 81126, 79101, 79992, 86414], [86974, 83207, 81693, 81833, 84380, 83207, 80816, 80170]],
+      "common_name": {"english": "Hercules", "pronounce": "HERCULES"}
+    },
+    {
+      "id": "CON western_rey Herc",
+      "lines": [[80963, 80963]],
+      "common_name": {"english": "club"}
+    },
+    {
+      "id": "CON western_rey Herk",
+      "lines": [[82959, 82959]],
+      "common_name": {"english": "Keystone"}
+    },
+    {
+      "id": "CON western_rey Lac",
+      "lines": [[109937, 109754, 111104, 111944, 111022, 110351, 111104], [111022, 110609, 110538, 111169, 111022]],
+      "common_name": {"english": "Lacerta", "pronounce": "LIZARD"}
+    },
+    {
+      "id": "CON western_rey Tri",
+      "lines": [[10670, 10064, 8796, 10670]],
+      "common_name": {"english": "Triangulum", "pronounce": "TRIANGLE"}
+    },
+    {
+      "id": "CON western_rey And",
+      "lines": [[677, 3092, 2912, 5447, 3092, 3031, 3693, 4463], [5447, 7513, 9640], [5447, 4436, 3881, 5434, 7607], [2912, 1366, 116631], [116584, 116805, 116631, 113726]],
+      "common_name": {"english": "Andromeda", "pronounce": "ANDROMEDA"}
+    },
+    {
+      "id": "CON western_rey Andc",
+      "lines": [[115808, 115808]],
+      "common_name": {"english": "the chain"}
+    },
+    {
+      "id": "CON western_rey GSq",
+      "lines": [[113963, 113881, 677, 1067, 113963]],
+      "common_name": {"english": "Great Square", "pronounce": "GREAT SQUARE"}
+    },
+    {
+      "id": "CON western_rey Peg",
+      "lines": [[113963, 113881, 1067, 113963, 112440, 112748, 112158, 109410], [114520, 113963, 114144], [113963, 112447, 112029, 109427], [112029, 107315], [112447, 109176, 107348], [112440, 109176, 107354, 105502]],
+      "common_name": {"english": "Pegasus", "pronounce": "PEGASUS"}
+    },
+    {
+      "id": "CON western_rey Pegh",
+      "lines": [[111191, 111191]],
+      "common_name": {"english": "head"}
+    },
+    {
+      "id": "CON western_rey Pegt",
+      "lines": [[113958, 113958]],
+      "common_name": {"english": "tail"}
+    },
+    {
+      "id": "CON western_rey Pegw",
+      "lines": [[115288, 115288]],
+      "common_name": {"english": "wing"}
+    },
+    {
+      "id": "CON western_rey Per",
+      "lines": [[17448, 18246, 18614, 18532, 14576, 14354, 13254], [18532, 17529, 16335, 15863, 16826, 17358, 19343, 19812, 20070, 19167], [14576, 14668, 14632, 13531, 13268, 14328, 13531], [14328, 15863, 14632, 12777, 8068]],
+      "common_name": {"english": "Perseus", "pronounce": "PERSEUS"}
+    },
+    {
+      "id": "CON western_rey Ari",
+      "lines": [[14838, 13914, 10306, 8832], [13914, 13209, 13061, 12719, 13209], [12719, 9884, 9153, 8903, 9884, 10306]],
+      "common_name": {"english": "Aries", "pronounce": "RAM"}
+    },
+    {
+      "id": "CON western_rey Arih",
+      "lines": [[8718, 8718]],
+      "common_name": {"english": "head"}
+    },
+    {
+      "id": "CON western_rey Arit",
+      "lines": [[12808, 12808]],
+      "common_name": {"english": "tail"}
+    },
+    {
+      "id": "CON western_rey Tau",
+      "lines": [[25428, 21881, 20711, 17702], [21881, 26451, 21421, 20894, 20205, 20455, 20648, 20889, 20711], [20205, 21589, 21402], [20205, 19860], [20205, 18724, 16083, 16369], [16083, 15900, 16852], [15900, 18907]],
+      "common_name": {"english": "Taurus", "pronounce": "BULL"}
+    },
+    {
+      "id": "CON western_rey Tauh",
+      "lines": [[22947, 22947]],
+      "common_name": {"english": "head"}
+    },
+    {
+      "id": "CON western_rey Tauc1",
+      "lines": [[23395, 23395]],
+      "common_name": {"english": "horn"}
+    },
+    {
+      "id": "CON western_rey Tauc2",
+      "lines": [[19009, 19009]],
+      "common_name": {"english": "horn"}
+    },
+    {
+      "id": "CON western_rey Taut",
+      "lines": [[16095, 16095]],
+      "common_name": {"english": "tail"}
+    },
+    {
+      "id": "CON western_rey Aur",
+      "lines": [[23015, 28380, 28360, 28358, 24608, 28360], [23015, 23767, 24608, 23416, 23453, 23767]],
+      "common_name": {"english": "Auriga", "pronounce": "CHARIOTEER"}
+    },
+    {
+      "id": "CON western_rey Lyn",
+      "lines": [[45860, 45688, 44248, 41075, 36145, 33449, 30060]],
+      "common_name": {"english": "Lynx", "pronounce": "LYNX"}
+    },
+    {
+      "id": "CON western_rey Gem",
+      "lines": [[31681, 34088, 35550, 35350, 32362], [35550, 36962, 37740], [36962, 37826], [36962, 36046, 34693, 36366, 36850], [34693, 33018], [34693, 32246, 30883], [32246, 30343, 29655, 28734]],
+      "common_name": {"english": "Gemini", "pronounce": "TWINS"}
+    },
+    {
+      "id": "CON western_rey CMi",
+      "lines": [[37279, 36188]],
+      "common_name": {"english": "Canis Minor", "pronounce": "LITTLE DOG"}
+    },
+    {
+      "id": "CON western_rey Cnc",
+      "lines": [[43103, 42806, 40167, 40526, 42911, 42806], [42911, 44066]],
+      "common_name": {"english": "Cancer", "pronounce": "CRAB"}
+    },
+    {
+      "id": "CON western_rey Mon",
+      "lines": [[41307, 39863], [29651, 30867, 34769, 32578, 30419], [34769, 39863, 37447], [32578, 31216], [30419, 31216, 31978]],
+      "common_name": {"english": "Monoceros", "pronounce": "UNICORN"}
+    },
+    {
+      "id": "CON western_rey Ori",
+      "lines": [[26727, 26311, 25930], [28716, 29426, 29038, 27913, 28716], [29239, 28614, 27989, 26727, 27366], [24436, 25281, 25930, 25336, 25813, 26207], [25813, 27989], [25336, 22449, 22549, 22797, 23123], [22449, 22509, 22845, 22957]],
+      "common_name": {"english": "Orion", "pronounce": "ORION"}
+    },
+    {
+      "id": "CON western_rey Orib",
+      "lines": [[26464, 26464]],
+      "common_name": {"english": "belt"}
+    },
+    {
+      "id": "CON western_rey Oric",
+      "lines": [[28447, 28447]],
+      "common_name": {"english": "club"}
+    },
+    {
+      "id": "CON western_rey Oris",
+      "lines": [[22245, 22245]],
+      "common_name": {"english": "shield"}
+    },
+    {
+      "id": "CON western_rey Lep",
+      "lines": [[28910, 28103, 27288, 25985, 24305], [28910, 27654, 27072, 25606, 23685], [25985, 25606], [24305, 24845], [24305, 24327], [23685, 24305]],
+      "common_name": {"english": "Lepus", "pronounce": "HARE"}
+    },
+    {
+      "id": "CON western_rey CMa",
+      "lines": [[33160, 34045, 33347, 32349, 33977, 34444, 35037, 35904], [33579, 33856, 34444], [33579, 33152, 31592, 31125], [31592, 30324], [31592, 32349], [33579, 32759], [30122, 33579], [33347, 33160]],
+      "common_name": {"english": "Canis Major", "pronounce": "BIG DOG"}
+    },
+    {
+      "id": "CON western_rey Eri",
+      "lines": [[7588, 9007, 10602, 11407, 12486, 13847, 15510, 17874, 20042, 20535, 21393, 18673, 18216, 17717, 17651, 16611, 15474, 14146, 13701, 16537, 17378, 18543, 19849, 19587, 21444, 22109, 23875, 21594]],
+      "common_name": {"english": "Eridanus", "pronounce": "RIVER ERIDANUS"}
+    },
+    {
+      "id": "CON western_rey Hya",
+      "lines": [[42799, 42402, 42313, 43109, 43813, 42799], [43813, 45336, 47431, 46390, 49841, 51069, 52943, 53740, 54682, 56343, 57936, 64962, 68895]],
+      "common_name": {"english": "Hydra", "pronounce": "HYDRA"}
+    },
+    {
+      "id": "CON western_rey Hyah",
+      "lines": [[42142, 42142]],
+      "common_name": {"english": "Hydra's head"}
+    },
+    {
+      "id": "CON western_rey Crt",
+      "lines": [[53740, 54682, 55705, 55282, 53740], [55282, 55687, 56633, 58188, 57283, 55705]],
+      "common_name": {"english": "Crater", "pronounce": "CUP"}
+    },
+    {
+      "id": "CON western_rey Ant",
+      "lines": [[51172, 51172]],
+      "common_name": {"english": "Antlia", "pronounce": "PUMP"}
+    },
+    {
+      "id": "CON western_rey Hyat",
+      "lines": [[61720, 61720]],
+      "common_name": {"english": "Hydra's tail", "pronounce": "HYDRA's tail"}
+    },
+    {
+      "id": "CON western_rey Vir",
+      "lines": [[57380, 57757, 60129, 61941, 58948, 57380], [61941, 64238, 65474, 69427, 69701, 71957], [65474, 66249, 68520, 72220], [66249, 63090, 63608], [63090, 61941], [69701, 68520]],
+      "common_name": {"english": "Virgo", "pronounce": "VIRGIN"}
+    },
+    {
+      "id": "CON western_rey Virh",
+      "lines": [[58510, 58510]],
+      "common_name": {"english": "head"}
+    },
+    {
+      "id": "CON western_rey Virf",
+      "lines": [[70755, 70755]],
+      "common_name": {"english": "feet"}
+    },
+    {
+      "id": "CON western_rey Lib",
+      "lines": [[73714, 72622, 74785, 76333, 72622], [76333, 76470, 76600]],
+      "common_name": {"english": "Libra", "pronounce": "SCALES"}
+    },
+    {
+      "id": "CON western_rey Crv",
+      "lines": [[61174, 60965, 59803, 59316, 59199], [59316, 60189, 61359], [60189, 60965]],
+      "common_name": {"english": "Corvus", "pronounce": "CROW"}
+    },
+    {
+      "id": "CON western_rey Crvb",
+      "lines": [[61145, 61145]],
+      "common_name": {"english": "bill"}
+    },
+    {
+      "id": "CON western_rey Crvf",
+      "lines": [[61251, 61251]],
+      "common_name": {"english": "foot"}
+    },
+    {
+      "id": "CON western_rey Crvt",
+      "lines": [[59087, 59087]],
+      "common_name": {"english": "tail"}
+    },
+    {
+      "id": "CON western_rey Ser",
+      "lines": [[92946, 88771, 88601, 89962, 88048, 86565, 86263, 84880], [80628, 79882, 79593, 77516, 77622, 77070, 77257, 76276, 77233, 78072, 77450, 76852, 77233]],
+      "common_name": {"english": "Serpens"}
+    },
+    {
+      "id": "CON western_rey SerCd",
+      "lines": [[92946, 88771, 88601, 89962, 88048, 86565, 86263, 84880]],
+      "common_name": {"english": "Serpens Cauda", "pronounce": "SERPENT'S TAIL"}
+    },
+    {
+      "id": "CON western_rey SerCp",
+      "lines": [[80628, 79882, 79593, 77516, 77622, 77070, 77257, 76276, 77233, 78072, 77450, 76852, 77233]],
+      "common_name": {"english": "Serpens Caput", "pronounce": "SERPENT'S HEAD"}
+    },
+    {
+      "id": "CON western_rey SerHh",
+      "lines": [[77995, 77995]],
+      "common_name": {"english": "head"}
+    },
+    {
+      "id": "CON western_rey Oph",
+      "lines": [[85423, 84405, 84970, 85340, 84893, 84012, 85365, 86742, 87108, 88601], [86742, 86032, 83000, 86742], [83000, 82673, 80883, 79593], [83000, 81377, 80894, 80569, 80343, 80975], [81377, 84012]],
+      "common_name": {"english": "Ophiuchus", "pronounce": "SERPENT HOLDER"}
+    },
+    {
+      "id": "CON western_rey Ophb",
+      "lines": [[83262, 83262]],
+      "common_name": {"english": "body"}
+    },
+    {
+      "id": "CON western_rey Ophh",
+      "lines": [[85664, 85664]],
+      "common_name": {"english": "head"}
+    },
+    {
+      "id": "CON western_rey Opha1",
+      "lines": [[87108, 87108]],
+      "common_name": {"english": "arm"}
+    },
+    {
+      "id": "CON western_rey Opha2",
+      "lines": [[81007, 81007]],
+      "common_name": {"english": "arm"}
+    },
+    {
+      "id": "CON western_rey Ophf1",
+      "lines": [[85084, 85084]],
+      "common_name": {"english": "foot"}
+    },
+    {
+      "id": "CON western_rey Ophf2",
+      "lines": [[80569, 80569]],
+      "common_name": {"english": "foot"}
+    },
+    {
+      "id": "CON western_rey Sco",
+      "lines": [[87261, 85927, 85696, 86170, 86670, 87073, 86228, 84143, 82671, 82514, 82396, 81266, 80763, 80112, 79404, 78104, 78265], [80112, 79374, 78820, 78401]],
+      "common_name": {"english": "Scorpius", "pronounce": "SCORPION"}
+    },
+    {
+      "id": "CON western_rey Scoc",
+      "lines": [[79098, 79098]],
+      "common_name": {"english": "claws"}
+    },
+    {
+      "id": "CON western_rey Scot",
+      "lines": [[85889, 85889]],
+      "common_name": {"english": "tail"}
+    },
+    {
+      "id": "CON western_rey Scoe",
+      "lines": [[85543, 85543]],
+      "common_name": {"english": "cat's eyes"}
+    },
+    {
+      "id": "CON western_rey Sge",
+      "lines": [[98337, 97365, 96837], [97365, 96757]],
+      "common_name": {"english": "Sagitta", "pronounce": "ARROW"}
+    },
+    {
+      "id": "CON western_rey Del",
+      "lines": [[101421, 101916], [101421, 101800], [101916, 101800, 101882, 102281, 102532, 101958, 101769, 101483, 101800]],
+      "common_name": {"english": "Delphinus", "pronounce": "DOLPHIN"}
+    },
+    {
+      "id": "CON western_rey Aql",
+      "lines": [[98036, 97649, 97278, 96229, 95501, 97804], [99473, 97804], [95501, 93747, 93244], [95501, 93805, 93429]],
+      "common_name": {"english": "Aquila", "pronounce": "EAGLE"}
+    },
+    {
+      "id": "CON western_rey Aqlh",
+      "lines": [[97229, 97229]],
+      "common_name": {"english": "head"}
+    },
+    {
+      "id": "CON western_rey Aqlw1",
+      "lines": [[97980, 97980]],
+      "common_name": {"english": "wing"}
+    },
+    {
+      "id": "CON western_rey Aqlw2",
+      "lines": [[94486, 94486]],
+      "common_name": {"english": "wing"}
+    },
+    {
+      "id": "CON western_rey Aqlt",
+      "lines": [[93717, 93717]],
+      "common_name": {"english": "tail"}
+    },
+    {
+      "id": "CON western_rey Sct",
+      "lines": [[92175, 91726, 90595, 91117, 92175]],
+      "common_name": {"english": "Scutum", "pronounce": "SHIELD"}
+    },
+    {
+      "id": "CON western_rey Sgr",
+      "lines": [[88635, 89931, 90185, 89642, 88635, 89341, 90496, 89931, 92041, 92855, 94141, 95168, 95176], [94141, 93085, 92855, 93864, 93506, 92041], [93864, 98412, 98032], [95241, 95347, 98412], [95347, 93506]],
+      "common_name": {"english": "Sagittarius", "pronounce": "ARCHER"}
+    },
+    {
+      "id": "CON western_rey Sgrh",
+      "lines": [[93537, 93537]],
+      "common_name": {"english": "head"}
+    },
+    {
+      "id": "CON western_rey Sgrb",
+      "lines": [[93277, 93277]],
+      "common_name": {"english": "body"}
+    },
+    {
+      "id": "CON western_rey Sgrs",
+      "lines": [[95774, 95774]],
+      "common_name": {"english": "skirt"}
+    },
+    {
+      "id": "CON western_rey Sgrt",
+      "lines": [[89678, 89678]],
+      "common_name": {"english": "the bow"}
+    },
+    {
+      "id": "CON western_rey CrA",
+      "lines": [[92989, 93174, 93825, 94114, 94160, 94005, 93542, 92953]],
+      "common_name": {"english": "Corona Australis", "pronounce": "SOUTHERN CROWN"}
+    },
+    {
+      "id": "CON western_rey Equ",
+      "lines": [[104987, 104858, 104521]],
+      "common_name": {"english": "Equuleus", "pronounce": "LITTLE HORSE"}
+    },
+    {
+      "id": "CON western_rey Aqr",
+      "lines": [[102618, 103045, 104459, 106278, 109139], [106278, 109074, 110395, 111497, 110672, 109074, 110003, 112961, 114855, 114724, 112961, 112716, 113136, 114855, 114341, 114375, 114119], [114855, 115438, 115669, 116247]],
+      "common_name": {"english": "Aquarius", "pronounce": "WATER CARRIER"}
+    },
+    {
+      "id": "CON western_rey Aqrh",
+      "lines": [[110764, 110764]],
+      "common_name": {"english": "head"}
+    },
+    {
+      "id": "CON western_rey Aqra",
+      "lines": [[110378, 110378]],
+      "common_name": {"english": "arm"}
+    },
+    {
+      "id": "CON western_rey Aqrv",
+      "lines": [[113658, 113658]],
+      "common_name": {"english": "vessel"}
+    },
+    {
+      "id": "CON western_rey Cap",
+      "lines": [[100064, 100345, 104139, 105515, 106985, 107556], [105515, 106039, 105881, 104139, 104019, 104234], [104019, 101027], [100345, 101027, 102485, 102978]],
+      "common_name": {"english": "Capricornus", "pronounce": "GOAT"}
+    },
+    {
+      "id": "CON western_rey PsA",
+      "lines": [[113368, 111954, 109285, 107380, 107608, 109285, 111188, 112948, 113246, 113368]],
+      "common_name": {"english": "Piscis Austrinus", "pronounce": "SOUTHERN FISH"}
+    },
+    {
+      "id": "CON western_rey Gru",
+      "lines": [[114131, 110997, 109268, 112122, 114421, 114131], [112122, 113638], [112122, 112623], [109268, 109111, 108085]],
+      "common_name": {"english": "Grus", "pronounce": "CRANE"}
+    },
+    {
+      "id": "CON western_rey Phe",
+      "lines": [[5348, 5165, 3245, 2072], [3245, 5348], [5165, 7083, 8837, 5165, 6867, 3245], [2072, 2081, 765, 2072]],
+      "common_name": {"english": "Phoenix", "pronounce": "PHOENIX"}
+    },
+    {
+      "id": "CON western_rey Psc",
+      "lines": [[5586, 5742], [5586, 6193, 5742, 6706, 7097, 8198, 9487, 7884, 7007, 5737, 4906, 3786, 118268, 116771, 116928, 115738, 114971, 115227, 115830, 116771]],
+      "common_name": {"english": "Pisces", "pronounce": "FISHES"}
+    },
+    {
+      "id": "CON western_rey PscN",
+      "lines": [[5339, 5339]],
+      "common_name": {"english": "Northern Fish", "pronounce": "N.FISH"}
+    },
+    {
+      "id": "CON western_rey PscW",
+      "lines": [[115476, 115476]],
+      "common_name": {"english": "Circlet", "pronounce": "Circlet or W. FISH"}
+    },
+    {
+      "id": "CON western_rey Cet",
+      "lines": [[12706, 11484, 12828, 13954, 14135, 12706, 12387, 10826, 8645, 6537, 1562, 3419, 8102], [3419, 9347, 12387]],
+      "common_name": {"english": "Cetus", "pronounce": "WHALE"}
+    },
+    {
+      "id": "CON western_rey Cett",
+      "lines": [[12925, 12925]],
+      "common_name": {"english": "tail"}
+    },
+    {
+      "id": "CON western_rey Scl",
+      "lines": [[4577, 4577]],
+      "common_name": {"english": "Sculptor", "pronounce": "SCULPTOR"}
+    },
+    {
+      "id": "CON western_rey Vel",
+      "lines": [[39953, 42913, 45941, 48774, 52727, 51986, 50191, 46651, 44816, 39953]],
+      "common_name": {"english": "Vela", "pronounce": "SHIP's SAIL"}
+    },
+    {
+      "id": "CON western_rey Pyx",
+      "lines": [[39429, 42515, 42828, 43409]],
+      "common_name": {"english": "Pyxis", "pronounce": "SHIP'S COMPASS"}
+    },
+    {
+      "id": "CON western_rey CruF",
+      "lines": [[45941, 41037], [45556, 42913]],
+      "common_name": {"english": "False Cross"}
+    },
+    {
+      "id": "CON western_rey Car",
+      "lines": [[39953, 38827, 41037, 45556, 50371, 51232, 51849, 53253, 54463], [53253, 52468, 51576, 52419, 50099, 45238, 30438]],
+      "common_name": {"english": "Carina", "pronounce": "SHIP'S KEEL"}
+    },
+    {
+      "id": "CON western_rey Carh",
+      "lines": [[52742, 52742]],
+      "common_name": {"english": "figurehead"}
+    },
+    {
+      "id": "CON western_rey Pup",
+      "lines": [[30438, 31685, 35264, 36917, 37229, 37173, 38170, 38070, 37677, 36917], [38170, 39757, 39429, 39953]],
+      "common_name": {"english": "Puppis", "pronounce": "SHIP'S STERN"}
+    },
+    {
+      "id": "CON western_rey Pupt",
+      "lines": [[37089, 37089]],
+      "common_name": {"english": "transom"}
+    },
+    {
+      "id": "CON western_rey Vol",
+      "lines": [[37504, 34481, 39794, 37504], [39794, 35228], [39794, 41312, 44382, 39794], [40817, 39794]],
+      "common_name": {"english": "Volans", "pronounce": "FLYING FISH"}
+    },
+    {
+      "id": "CON western_rey Volw1",
+      "lines": [[41304, 41304]],
+      "common_name": {"english": "wing"}
+    },
+    {
+      "id": "CON western_rey Volw2",
+      "lines": [[37032, 37032]],
+      "common_name": {"english": "wing"}
+    },
+    {
+      "id": "CON western_rey Dor",
+      "lines": [[27100, 27890, 26069, 27100], [26069, 21281, 19893], [26069, 23693, 21281]],
+      "common_name": {"english": "Dorado", "pronounce": "SWORDFISH"}
+    },
+    {
+      "id": "CON western_rey Col",
+      "lines": [[28328, 28199, 30277, 29807, 28199, 27628, 28328], [27628, 26634, 25859]],
+      "common_name": {"english": "Columba", "pronounce": "DOVE"}
+    },
+    {
+      "id": "CON western_rey Colh",
+      "lines": [[26035, 26035]],
+      "common_name": {"english": "head"}
+    },
+    {
+      "id": "CON western_rey Colt",
+      "lines": [[28992, 28992]],
+      "common_name": {"english": "tail"}
+    },
+    {
+      "id": "CON western_rey Colw",
+      "lines": [[27955, 27955]],
+      "common_name": {"english": "wing"}
+    },
+    {
+      "id": "CON western_rey Hyi",
+      "lines": [[2021, 17678, 12394, 11001, 8928, 9236]],
+      "common_name": {"english": "Hydrus", "pronounce": "HYDRUS"}
+    },
+    {
+      "id": "CON western_rey Pic",
+      "lines": [[32607, 27530, 27321], [32607, 27321]],
+      "common_name": {"english": "Pictor", "pronounce": "EASEL"}
+    },
+    {
+      "id": "CON western_rey Ret",
+      "lines": [[19780, 19921, 18597, 17440, 19780]],
+      "common_name": {"english": "Reticulum", "pronounce": "NET"}
+    },
+    {
+      "id": "CON western_rey Hor",
+      "lines": [[19747, 19747]],
+      "common_name": {"english": "Horologium", "pronounce": "CLOCK"}
+    },
+    {
+      "id": "CON western_rey For",
+      "lines": [[14879, 14879]],
+      "common_name": {"english": "Fornax", "pronounce": "FURNACE"}
+    },
+    {
+      "id": "CON western_rey Lup",
+      "lines": [[78918, 77634, 76705, 75177, 78384], [75177, 75304, 75501, 76297, 76552, 76829], [75501, 75141, 74117, 74911, 75264], [74117, 73807, 74376, 74395], [73807, 71536, 71121], [71536, 71860, 69996], [71860, 70576], [71860, 72683, 73273, 75177]],
+      "common_name": {"english": "Lupus", "pronounce": "WOLF"}
+    },
+    {
+      "id": "CON western_rey Lupt",
+      "lines": [[77523, 77523]],
+      "common_name": {"english": "tail"}
+    },
+    {
+      "id": "CON western_rey Lupe",
+      "lines": [[70320, 70320]],
+      "common_name": {"english": "ears"}
+    },
+    {
+      "id": "CON western_rey Cen",
+      "lines": [[72010, 71865, 73334, 71352, 68245, 68862, 70300, 70090, 68933, 67464, 68245], [67153, 67457], [67153, 67669], [67153, 67786], [67153, 65109, 65936, 67464, 67472, 68002, 68523, 68282, 68245], [68002, 66657, 71683], [66657, 68702], [66657, 61932, 68002], [61932, 60823, 59449, 56561], [60823, 59196, 55425]],
+      "common_name": {"english": "Centaurus", "pronounce": "CENTAUR"}
+    },
+    {
+      "id": "CON western_rey Cenh",
+      "lines": [[69995, 69995]],
+      "common_name": {"english": "head"}
+    },
+    {
+      "id": "CON western_rey Cena1",
+      "lines": [[71353, 71353]],
+      "common_name": {"english": "arm"}
+    },
+    {
+      "id": "CON western_rey Cena2",
+      "lines": [[66019, 66019]],
+      "common_name": {"english": "arm"}
+    },
+    {
+      "id": "CON western_rey Cenb",
+      "lines": [[65810, 65810]],
+      "common_name": {"english": "body"}
+    },
+    {
+      "id": "CON western_rey Cenf",
+      "lines": [[69618, 69618]],
+      "common_name": {"english": "front legs"}
+    },
+    {
+      "id": "CON western_rey Cenl",
+      "lines": [[57512, 57512]],
+      "common_name": {"english": "hind legs"}
+    },
+    {
+      "id": "CON western_rey Cru",
+      "lines": [[61084, 60718], [62434, 59747]],
+      "common_name": {"english": "Crux", "pronounce": "SOUTHERN CROSS"}
+    },
+    {
+      "id": "CON western_rey Nor",
+      "lines": [[80000, 80582, 78914, 78639, 80000]],
+      "common_name": {"english": "Norma", "pronounce": "SQUARE"}
+    },
+    {
+      "id": "CON western_rey Cir",
+      "lines": [[71908, 75323], [71908, 74824]],
+      "common_name": {"english": "Circinus", "pronounce": "DIVIDERS"}
+    },
+    {
+      "id": "CON western_rey TrA",
+      "lines": [[82273, 74946, 76440, 77952, 82273]],
+      "common_name": {"english": "Triangulum Australe", "pronounce": "SOUTHERN TRIANGLE"}
+    },
+    {
+      "id": "CON western_rey Ara",
+      "lines": [[88714, 85792, 83153, 83081, 82363, 85727, 88714]],
+      "common_name": {"english": "Ara", "pronounce": "ALTAR"}
+    },
+    {
+      "id": "CON western_rey Mus",
+      "lines": [[62322, 61585, 63613, 61199, 61585, 59929, 57363]],
+      "common_name": {"english": "Fly", "pronounce": "FLY"}
+    },
+    {
+      "id": "CON western_rey Aps",
+      "lines": [[80047, 81065, 81852, 80047, 72370]],
+      "common_name": {"english": "Apus", "pronounce": "BIRD OF PARADISE"}
+    },
+    {
+      "id": "CON western_rey Cha",
+      "lines": [[40702, 51839, 52595, 60000, 58484, 51839]],
+      "common_name": {"english": "Chamaeleon", "pronounce": "CHAMELEON"}
+    },
+    {
+      "id": "CON western_rey Chae",
+      "lines": [[40888, 40888]],
+      "common_name": {"english": "eyes"}
+    },
+    {
+      "id": "CON western_rey Pav",
+      "lines": [[100751, 105858, 102395, 99240, 100751], [99240, 98495, 91792, 93015, 99240], [93015, 92609, 90098, 88866, 92609], [88866, 86929]],
+      "common_name": {"english": "Pavo", "pronounce": "PEACOCK"}
+    },
+    {
+      "id": "CON western_rey Oct",
+      "lines": [[107089, 112405, 70638, 107089]],
+      "common_name": {"english": "Octans", "pronounce": "OCTANT"}
+    },
+    {
+      "id": "CON western_rey Tuc",
+      "lines": [[110130, 114996, 118322, 1599, 2484, 114996]],
+      "common_name": {"english": "Tucana", "pronounce": "TOUCAN"}
+    },
+    {
+      "id": "CON western_rey Ind",
+      "lines": [[101772, 102333, 103227, 108870, 108431, 103227]],
+      "common_name": {"english": "Indus", "pronounce": "INDIAN"}
+    },
+    {
+      "id": "CON western_rey Tel",
+      "lines": [[90568, 90422]],
+      "common_name": {"english": "Telescopium", "pronounce": "TELESCOPE"}
+    },
+    {
+      "id": "CON western_rey Mic",
+      "lines": [[102831, 102831]],
+      "common_name": {"english": "Microscopium", "pronounce": "MICROSCOPE"}
+    },
+    {
+      "id": "CON western_rey Cae",
+      "lines": [[21770, 21770]],
+      "common_name": {"english": "Caelum", "pronounce": "CHISEL"}
+    },
+    {
+      "id": "CON western_rey Men",
+      "lines": [[29271, 29271]],
+      "common_name": {"english": "Mensa", "pronounce": "TABLE M."}
+    },
+    {
+      "id": "CON western_rey Sex",
+      "lines": [[49641, 49641]],
+      "common_name": {"english": "Sextans", "pronounce": "SEXTANT"}
+    }
+  ],
+  "common_names": {
+    "HIP 11767": [{"english": "Pole Star"}],
+    "HIP 9487": [{"english": "Knot"}]
+  }
+}

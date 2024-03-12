@@ -1,0 +1,425 @@
+{
+  "id": "ruelle",
+  "region": "Europe",
+  "highlight": "CON ruelle Crt",
+  "langs_use_native_names": ["fr"],
+  "native_lang": "fr",
+  "constellations": [
+    {
+      "id": "CON ruelle UMi",
+      "lines": [[11767, 85822, 82080, 77055, 79822, 75097, 72607, 77055]],
+      "common_name": {"english": "Ursa Minor", "native": "La Petite Ourse"},
+      "iau": "UMi"
+    },
+    {
+      "id": "CON ruelle Dra",
+      "lines": [[56211, 61281, 68756, 75458, 78527, 80331, 83895, 86201, 89908, 94376, 95081, 92512, 87585, 85670, 87833, 87585], [80650, 80331], [80650, 83895]],
+      "common_name": {"english": "Draco", "native": "Le Dragon"},
+      "iau": "Dra"
+    },
+    {
+      "id": "CON ruelle Cam",
+      "lines": [[23522, 22783, 32864, 23522], [32864, 33104]],
+      "common_name": {"english": "Camelopardalis", "native": "La Giraffe"},
+      "iau": "Cam"
+    },
+    {
+      "id": "CON ruelle Cas",
+      "lines": [[746, 3179, 4427, 6686, 8886], [2599, 746], [2599, 4427], [2920, 3179], [5542, 3179], [5542, 6686]],
+      "common_name": {"english": "Cassiopeia", "native": "Casiopée"},
+      "iau": "Cas"
+    },
+    {
+      "id": "CON ruelle Cep",
+      "lines": [[102422, 105199, 106032, 112724], [106032, 116727], [112724, 110991, 105199, 112724]],
+      "common_name": {"english": "Cepheus", "native": "Cephée"},
+      "iau": "Cep"
+    },
+    {
+      "id": "CON ruelle UMa",
+      "lines": [[59774, 54061, 53910, 58001, 59774, 62956, 65378, 67301], [54061, 48319, 46733], [53910, 46853, 44471, 44127], [58001, 57399, 54539, 50801, 50372, 46853], [54539, 53910]],
+      "common_name": {"english": "Ursa Major", "native": "La Grande Ourse"},
+      "iau": "UMa"
+    },
+    {
+      "id": "CON ruelle Lyn",
+      "lines": [[46952, 45860, 45688, 44248, 30060]],
+      "common_name": {"english": "Lynx", "native": "Le Linx"},
+      "iau": "Lyn"
+    },
+    {
+      "id": "CON ruelle Gem",
+      "lines": [[36850, 32246, 30343, 30883, 31681, 34088, 35550, 37826, 36850], [32246, 34088]],
+      "common_name": {"english": "Gemini", "native": "Les Gemeaux"},
+      "iau": "Gem"
+    },
+    {
+      "id": "CON ruelle Aur",
+      "lines": [[24608, 28360, 28380, 23015, 24608], [24608, 23416, 23767], [23416, 23453], [23416, 23015], [24608, 28358, 28360], [28358, 27949]],
+      "common_name": {"english": "Auriga", "native": "Le Cocher"},
+      "iau": "Aur"
+    },
+    {
+      "id": "CON ruelle CMi",
+      "lines": [[37279, 36188]],
+      "common_name": {"english": "Canis Minor", "native": "Petit Chien"},
+      "iau": "CMi"
+    },
+    {
+      "id": "CON ruelle Cnc",
+      "lines": [[44066, 42911, 40526], [42911, 42806], [44066, 42795, 40526], [40843, 42806], [40843, 40526]],
+      "common_name": {"english": "Cancer", "native": "L'ecrevisse"},
+      "iau": "Cnc"
+    },
+    {
+      "id": "CON ruelle Per",
+      "lines": [[14328, 15863, 14576, 12777, 14328], [15863, 17358, 18532, 14576, 18246, 18532], [14576, 14354, 13879], [17358, 19812, 19167, 17358]],
+      "common_name": {"english": "Perseus", "native": "Persee"},
+      "iau": "Per"
+    },
+    {
+      "id": "CON ruelle Tri",
+      "lines": [[8796, 10064, 10670, 8796]],
+      "common_name": {"english": "Triangulum", "native": "Le Triangle"},
+      "iau": "Tri"
+    },
+    {
+      "id": "CON ruelle Ari",
+      "lines": [[8832, 8903, 9884, 14838]],
+      "common_name": {"english": "Aries", "native": "Le Belier"},
+      "iau": "Ari"
+    },
+    {
+      "id": "CON ruelle MuB",
+      "lines": [[12719, 13061, 13209, 12719]],
+      "common_name": {"english": "Musca Borealis", "native": "La Mouche"}
+    },
+    {
+      "id": "CON ruelle Lac",
+      "lines": [[111022, 111169], [111022, 109937]],
+      "common_name": {"english": "Lacerta", "native": "Le Lezard"},
+      "iau": "Lac"
+    },
+    {
+      "id": "CON ruelle And",
+      "lines": [[9640, 7513, 5447, 3092, 677, 113726, 9640], [3092, 3031, 3693], [5447, 4436, 3881, 7513], [116584, 116805], [116584, 116631]],
+      "common_name": {"english": "Andromeda", "native": "Andromede"},
+      "iau": "And"
+    },
+    {
+      "id": "CON ruelle Peg",
+      "lines": [[677, 113881, 113963, 1067, 677], [107315, 109427, 112029, 113963], [112158, 113881, 112748, 112440], [112158, 112440, 109176, 107354]],
+      "common_name": {"english": "Pegasus", "native": "Pegase"},
+      "iau": "Peg"
+    },
+    {
+      "id": "CON ruelle Lyr",
+      "lines": [[91262, 92420, 93194, 92791, 91262]],
+      "common_name": {"english": "Lyra", "native": "La Lyre"},
+      "iau": "Lyr"
+    },
+    {
+      "id": "CON ruelle Del",
+      "lines": [[101421, 101769, 101958, 102532, 102281, 101769]],
+      "common_name": {"english": "Delphinus", "native": "Le Dauphin"},
+      "iau": "Del"
+    },
+    {
+      "id": "CON ruelle Equ",
+      "lines": [[104987, 105570, 104858, 104521, 104987]],
+      "common_name": {"english": "Equuleus", "native": "Petit Cheval"},
+      "iau": "Equ"
+    },
+    {
+      "id": "CON ruelle Cyg",
+      "lines": [[102098, 100453, 95947], [100453, 97165], [100453, 104732, 107310], [99848, 102098], [99848, 96441, 94779], [102098, 104060, 103413, 102589, 102488, 101076], [103413, 104887], [104060, 106481, 107533]],
+      "common_name": {"english": "Cygnus", "native": "Le Cygne"},
+      "iau": "Cyg"
+    },
+    {
+      "id": "CON ruelle Vul",
+      "lines": [[95771, 97886, 99874, 98543], [99874, 99824]],
+      "common_name": {"english": "Vulpecula", "native": "Le Renard"},
+      "iau": "Vul"
+    },
+    {
+      "id": "CON ruelle Sge",
+      "lines": [[98337, 97365, 96757, 96837]],
+      "common_name": {"english": "Sagitta", "native": "La Fleche"},
+      "iau": "Sge"
+    },
+    {
+      "id": "CON ruelle Her",
+      "lines": [[84345, 83207, 81833, 81126, 79992], [83207, 81693], [81833, 81693, 80816, 80170, 84345], [81833, 84380, 85112, 87808, 87933, 86974, 84379], [85112, 86414]],
+      "common_name": {"english": "Hercules", "native": "Hercule"},
+      "iau": "Her"
+    },
+    {
+      "id": "CON ruelle Cer",
+      "lines": [[87933, 88794, 88267, 90139, 92043]],
+      "common_name": {"english": "Cerberus", "native": "Cerbere"}
+    },
+    {
+      "id": "CON ruelle CrB",
+      "lines": [[75695, 76267, 76952, 77512, 78159, 75695]],
+      "common_name": {"english": "Corona Borealis", "native": "La Couronne"},
+      "iau": "CrB"
+    },
+    {
+      "id": "CON ruelle Ser",
+      "lines": [[77622, 77070], [77257, 77070, 76276, 77233, 78072, 77450, 76852, 77661]],
+      "common_name": {"english": "Serpens", "native": "Le Serpent"},
+      "iau": "Ser"
+    },
+    {
+      "id": "CON ruelle Boo",
+      "lines": [[69673, 72105, 74666, 73555, 71075, 71053, 72105], [71075, 72105, 72659, 71762, 71795, 69673, 67927, 67275, 67459, 67927], [73555, 75411, 76669], [73555, 69732, 70497], [71075, 69732]],
+      "common_name": {"english": "Bootes", "native": "Le Bouvier"},
+      "iau": "Boo"
+    },
+    {
+      "id": "CON ruelle CVn",
+      "lines": [[63125, 61317]],
+      "common_name": {"english": "Canes Venatici", "native": "Chiens de Chasse"},
+      "iau": "CVn"
+    },
+    {
+      "id": "CON ruelle Com",
+      "lines": [[64241, 62886, 64394, 60742, 60697, 60746, 60904, 60941, 61394, 62886], [64241, 62356, 61394], [64241, 65721]],
+      "common_name": {"english": "Coma Berenices", "native": "Chevelure de Berenice"},
+      "iau": "Com"
+    },
+    {
+      "id": "CON ruelle Aql",
+      "lines": [[98036, 97649, 97278]],
+      "common_name": {"english": "Aquila", "native": "L'Aigle"},
+      "iau": "Aql"
+    },
+    {
+      "id": "CON ruelle Aql2",
+      "lines": [[97804, 99473, 101847], [97804, 95501, 93747, 93244], [97804, 96468, 93805, 96483, 96468]],
+      "common_name": {"english": "Antinoüs", "native": "Antinoüs"}
+    },
+    {
+      "id": "CON ruelle Sct",
+      "lines": [[93429, 92175, 91117, 93429]],
+      "common_name": {"english": "Scutum", "native": "L'Ecu de Sobieski"},
+      "iau": "Sct"
+    },
+    {
+      "id": "CON ruelle Psc",
+      "lines": [[9487, 5737, 7097], [5737, 4906, 3786]],
+      "common_name": {"english": "Pisces", "native": "Les Poissons"},
+      "iau": "Psc"
+    },
+    {
+      "id": "CON ruelle PsA",
+      "lines": [[113368, 111954, 111188, 113368], [111188, 109285, 107380, 107608, 109285]],
+      "common_name": {"english": "Piscis Austrinus", "native": "Le Poisson"},
+      "iau": "PsA"
+    },
+    {
+      "id": "CON ruelle Aqr",
+      "lines": [[106278, 109074, 110395, 110960, 111497], [110395, 113136, 114341], [110395, 112961, 113136], [109139, 106786, 106278], [109139, 110003, 110395]],
+      "common_name": {"english": "Aquarius", "native": "Le Verseau"},
+      "iau": "Aqr"
+    },
+    {
+      "id": "CON ruelle Cap",
+      "lines": [[100310, 100064, 100345, 107556, 106985, 106723]],
+      "common_name": {"english": "Capricornus", "native": "Le Capricorne"},
+      "iau": "Cap"
+    },
+    {
+      "id": "CON ruelle Sgr",
+      "lines": [[90185, 88635, 89931, 90185, 93506, 89931, 90496, 89341, 94141, 93683, 92855, 93506, 93864, 93683]],
+      "common_name": {"english": "Sagittarius", "native": "Le Sagittaire"},
+      "iau": "Sgr"
+    },
+    {
+      "id": "CON ruelle Sco",
+      "lines": [[85696, 85927, 86670, 87073], [86670, 86228, 84143, 82729, 82514, 82396, 81266, 80763, 78265, 78401, 78820, 80763, 78104, 78265]],
+      "common_name": {"english": "Scorpius", "native": "Le Scorpion"},
+      "iau": "Sco"
+    },
+    {
+      "id": "CON ruelle Lib",
+      "lines": [[72622, 73714, 74392, 72622, 74785, 75379, 76333, 74392], [76333, 77060, 77853, 78207, 74785], [77853, 76880, 73714], [76880, 76628, 76126, 76333]],
+      "common_name": {"english": "Libra", "native": "La Balance"},
+      "iau": "Lib"
+    },
+    {
+      "id": "CON ruelle Crv",
+      "lines": [[59199, 61359, 60965, 59803, 59316, 59199]],
+      "common_name": {"english": "Corvus", "native": "Le Corbeau"},
+      "iau": "Crv"
+    },
+    {
+      "id": "CON ruelle Crt",
+      "lines": [[53740, 54682, 55282, 55705, 53740], [56633, 55687, 55282], [58188, 57283, 55705], [55687, 57283], [58188, 56633]],
+      "common_name": {"english": "Crater", "native": "La Coupe"},
+      "iau": "Crt"
+    },
+    {
+      "id": "CON ruelle Cen",
+      "lines": [[71683, 68702, 66657, 68002, 71352], [68002, 67464, 68933, 71352], [68933, 65109, 61932, 59196, 56561]],
+      "common_name": {"english": "Centaurus", "native": "Le Centaure"},
+      "iau": "Cen"
+    },
+    {
+      "id": "CON ruelle Col",
+      "lines": [[26634, 27628, 30277, 26634]],
+      "common_name": {"english": "Columba", "native": "La Colombe"},
+      "iau": "Col"
+    },
+    {
+      "id": "CON ruelle Lep",
+      "lines": [[25985, 25606, 27072, 27654, 25985, 24305, 23685, 25606], [25985, 27288]],
+      "common_name": {"english": "Lepus", "native": "Le Lievre"},
+      "iau": "Lep"
+    },
+    {
+      "id": "CON ruelle CMa",
+      "lines": [[30324, 32349, 33347, 34045, 33160, 33347], [30122, 33579, 34444, 35904], [34444, 32349], [34444, 34045]],
+      "common_name": {"english": "Canis Major", "native": "Le Grand Chien"},
+      "iau": "CMa"
+    },
+    {
+      "id": "CON ruelle Ori",
+      "lines": [[26727, 26311, 25930], [26311, 25281], [26311, 27989, 25336, 26311, 27366, 24436, 26311], [24436, 23972], [27989, 28614, 26207, 25336, 22449, 22797], [22449, 22509, 22845]],
+      "common_name": {"english": "Orion", "native": "Orion"},
+      "iau": "Ori"
+    },
+    {
+      "id": "CON ruelle Tau",
+      "lines": [[26451, 25428, 27468, 26451, 21421, 25428], [21421, 20894, 20205, 20455, 20889], [20205, 17702], [20205, 18724, 18907, 19860, 20205], [18724, 16083, 15900, 18907]],
+      "common_name": {"english": "Taurus", "native": "Le Taureau"},
+      "iau": "Tau"
+    },
+    {
+      "id": "CON ruelle Leo",
+      "lines": [[46750, 47908], [46146, 46750], [46146, 47908], [48455, 50335], [50335, 51056, 48455, 47908], [51056, 52098, 53229, 51233, 49593, 51056], [50335, 50583, 49583, 49669, 54879, 54872, 57632, 54879], [54872, 57565, 57632, 55642, 55945, 56647, 55084, 51624, 49669], [51624, 54879], [51624, 49029, 47508, 46771, 46750]],
+      "common_name": {"english": "Leo", "native": "Le Lion"},
+      "iau": "Leo"
+    },
+    {
+      "id": "CON ruelle Hya",
+      "lines": [[68895, 64962, 57936, 56343, 51069, 52943, 49841, 51069], [49841, 46390, 47431, 49841], [47431, 45336, 42799, 42313, 43109, 43813, 42799, 39311]],
+      "common_name": {"english": "Hydra", "native": "L'Hydre Femelle"},
+      "iau": "Hya"
+    },
+    {
+      "id": "CON ruelle CarPupVel",
+      "lines": [[30438, 42913, 41037, 45556, 45941, 48002, 45238, 50099, 52419, 51576, 52468, 52727, 44816, 39953, 39429, 44816], [39429, 35264, 36377, 38414, 39429], [36377, 31685, 32768, 30438], [39429, 39757, 38835, 38170, 38070, 39429], [38835, 39906, 39095, 38835]],
+      "common_name": {"english": "Argo Navis", "native": "Le Vaisseau"}
+    },
+    {
+      "id": "CON ruelle Cet",
+      "lines": [[154, 1562, 3419, 5364, 1562], [5364, 6537, 8645, 10826, 12390, 8645, 8102, 6537], [8102, 9347, 11783, 11345, 12390, 12770, 11783], [10826, 12387, 12706, 14135, 15457, 13954, 14135], [13954, 12828, 12706]],
+      "common_name": {"english": "Cetus", "native": "La Baleine"},
+      "iau": "Cet"
+    },
+    {
+      "id": "CON ruelle Mon",
+      "lines": [[31978, 31216, 32578, 30867, 37447]],
+      "common_name": {"english": "Monoceros", "native": "La Licorne"},
+      "iau": "Mon"
+    },
+    {
+      "id": "CON ruelle Eri",
+      "lines": [[23875, 21444, 20507, 19587, 18543, 17593, 17378, 16537, 15197, 14293, 13701, 12843, 13288], [21444, 21594, 21763, 21393, 20535, 20042, 17651, 16611, 15474, 14146, 13847, 9007, 7588]],
+      "common_name": {"english": "Eridanus", "native": "L'Éridan"},
+      "iau": "Eri"
+    },
+    {
+      "id": "CON ruelle Vir",
+      "lines": [[65474, 64238, 61941, 60129, 57757, 60172, 60129], [60172, 63608, 63090, 60172], [63090, 61941], [63090, 66249, 65474], [66249, 72220, 70755, 69701, 69427, 69974, 65581, 65474], [70755, 71957, 69701]],
+      "common_name": {"english": "Virgo", "native": "La Vierge"},
+      "iau": "Vir"
+    },
+    {
+      "id": "CON ruelle Oph",
+      "lines": [[86032, 77070, 77622, 79593, 79882, 81377, 84012, 84970], [84012, 89962, 88175], [89962, 92946, 87108, 86742, 86032], [86742, 85355, 83000, 82673, 78072], [77622, 77516, 79375, 79882], [79375, 81377, 83962, 84880, 86263, 84970], [86263, 84012]],
+      "common_name": {"english": "Ophiuchus", "native": "Ophiucus"},
+      "iau": "Oph"
+    },
+    {
+      "id": "CON ruelle Dor",
+      "lines": [[21281, 26069]],
+      "common_name": {"english": "Dorado", "native": "La Dorade"},
+      "iau": "Dor"
+    },
+    {
+      "id": "CON ruelle Mus",
+      "lines": [[62322, 61585, 61199, 63613, 61585]],
+      "common_name": {"english": "Musca", "native": "La Mouche"},
+      "iau": "Mus"
+    },
+    {
+      "id": "CON ruelle Cru",
+      "lines": [[60718, 61084], [62434, 59747], [62434, 59747]],
+      "common_name": {"english": "Crux", "native": "La Croix"},
+      "iau": "Cru"
+    },
+    {
+      "id": "CON ruelle TrA",
+      "lines": [[82273, 77952, 74946, 82273]],
+      "common_name": {"english": "Triangulum Australe", "native": "Le Triangle"},
+      "iau": "TrA"
+    },
+    {
+      "id": "CON ruelle Lup",
+      "lines": [[71860, 73273, 76297, 75264, 71860]],
+      "common_name": {"english": "Lupus", "native": "Le Loup"},
+      "iau": "Lup"
+    },
+    {
+      "id": "CON ruelle Ara",
+      "lines": [[85792, 85727, 82363, 83153, 85792], [85727, 86929]],
+      "common_name": {"english": "Ara", "native": "L'Autel"},
+      "iau": "Ara"
+    },
+    {
+      "id": "CON ruelle Pav",
+      "lines": [[100751, 99240, 102395, 100751], [102395, 105858, 98495, 99240]],
+      "common_name": {"english": "Pavo", "native": "Le Paon"},
+      "iau": "Pav"
+    },
+    {
+      "id": "CON ruelle Ind",
+      "lines": [[101772, 103227]],
+      "common_name": {"english": "Indus", "native": "L'Indien"},
+      "iau": "Ind"
+    },
+    {
+      "id": "CON ruelle Gru",
+      "lines": [[109268, 112122, 108085, 109268]],
+      "common_name": {"english": "Grus", "native": "La Grue"},
+      "iau": "Gru"
+    },
+    {
+      "id": "CON ruelle Tuc",
+      "lines": [[110130, 114996, 118121, 1599, 2484, 118121]],
+      "common_name": {"english": "Tucana", "native": "Le Toucan"},
+      "iau": "Tuc"
+    },
+    {
+      "id": "CON ruelle Phe",
+      "lines": [[5165, 6867, 7083, 5165, 2081, 765, 5165]],
+      "common_name": {"english": "Phoenix", "native": "Le Phenix"},
+      "iau": "Phe"
+    },
+    {
+      "id": "CON ruelle Hyi",
+      "lines": [[2021, 17678, 9236, 2021]],
+      "common_name": {"english": "Hydrus", "native": "L'Hydre"},
+      "iau": "Hyi"
+    },
+    {
+      "id": "CON ruelle Ret",
+      "lines": [[19780, 17440]],
+      "common_name": {"english": "Reticulum", "native": "La Reticule"},
+      "iau": "Ret"
+    }
+  ]
+}

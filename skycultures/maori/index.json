@@ -1,0 +1,100 @@
+{
+  "id": "maori",
+  "region": "Oceania",
+  "classification": ["traditional"],
+  "highlight": "CON maori 004",
+  "constellations": [
+    {
+      "id": "CON maori 001",
+      "lines": [[61084, 60718], [62434, 59747]],
+      "image": {
+        "file": "illustrations/taki.webp",
+        "size": [248, 247],
+        "anchors": [
+          {"pos": [125, 42], "hip": 61084},
+          {"pos": [74, 106], "hip": 62434},
+          {"pos": [122, 202], "hip": 60718}
+        ]
+      },
+      "common_name": {"english": "Taki-o-Autahi"}
+    },
+    {
+      "id": "CON maori 002",
+      "lines": [[68702, 71683]],
+      "image": {
+        "file": "illustrations/taura.webp",
+        "size": [197, 132],
+        "anchors": [
+          {"pos": [13, 65], "hip": 71683},
+          {"pos": [182, 66], "hip": 68702},
+          {"pos": [102, 119], "hip": 69670}
+        ]
+      },
+      "common_name": {"english": "Te Taura-o-te-waka-o-tamarereti"}
+    },
+    {
+      "id": "CON maori 003",
+      "lines": [[26727, 26311, 25930]],
+      "common_name": {"english": "Tau-toro"}
+    },
+    {
+      "id": "CON maori 004",
+      "lines": [[82396, 82514, 82671, 84143, 86228, 87073, 86670, 85927, 85696]],
+      "image": {
+        "file": "illustrations/tama.webp",
+        "size": [255, 439],
+        "anchors": [
+          {"pos": [149, 24], "hip": 80763},
+          {"pos": [198, 368], "hip": 84720},
+          {"pos": [47, 280], "hip": 85927}
+        ]
+      },
+      "common_name": {"english": "The Great Boat of Tama Rereti", "pronounce": "Te-Waka-o-Tama-Rereti"}
+    },
+    {
+      "id": "CON maori 005",
+      "lines": [[21421, 20894, 20205, 20455, 20889]],
+      "common_name": {"english": "Matakarehu"}
+    },
+    {
+      "id": "CON maori 006",
+      "lines": [[21421, 20894, 20205, 20455, 20889], [21421, 20889], [20205, 25930], [17499, 20205], [26727, 26311, 25930]],
+      "image": {
+        "file": "illustrations/tainui.webp",
+        "size": [380, 205],
+        "anchors": [
+          {"pos": [53, 138], "hip": 26311},
+          {"pos": [348, 135], "hip": 17702},
+          {"pos": [185, 12], "hip": 26451}
+        ]
+      },
+      "common_name": {"english": "The Sail of Tainui", "pronounce": "Te-Ra-o-Tainui"}
+    }
+  ],
+  "common_names": {
+    "HIP 17499": [{"pronounce": "Waipunarangi"}],
+    "HIP 21421": [{"pronounce": "Taumata-kuku"}],
+    "HIP 24436": [{"pronounce": "Puanga"}],
+    "HIP 30438": [{"pronounce": "Atutahi"}],
+    "HIP 32349": [{"pronounce": "Takarua"}],
+    "HIP 36850": [{"pronounce": "Whakaahu"}],
+    "HIP 37279": [{"pronounce": "Puanga Hori"}],
+    "HIP 65474": [{"pronounce": "Mariao"}],
+    "HIP 69673": [{"pronounce": "Ruawahia"}],
+    "HIP 80763": [{"pronounce": "Rehua"}],
+    "HIP 80112": [{"pronounce": "Pekehawani"}],
+    "HIP 81266": [{"pronounce": "Whakaonge-kai"}],
+    "HIP 91262": [{"pronounce": "Whanui"}],
+    "HIP 97649": [{"pronounce": "Poutu-te-Rangi"}],
+    "HIP 50583": [{"pronounce": "Pipiri"}],
+    "HIP 7588": [{"pronounce": "Turu"}],
+    "HIP 17702": [{"pronounce": "Matariki"}],
+    "HIP 17573": [{"pronounce": "Waiti"}],
+    "HIP 17531": [{"pronounce": "Waita"}],
+    "HIP 17847": [{"pronounce": "Tupuarangi"}],
+    "HIP 17579": [{"pronounce": "Pohutukawa"}],
+    "HIP 17489": [{"pronounce": "Hiwa-i-te-rangi"}],
+    "HIP 17851": [{"pronounce": "Tupuanuku"}],
+    "HIP 17608": [{"pronounce": "Ururangi"}]
+  }
+}

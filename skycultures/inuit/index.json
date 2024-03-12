@@ -1,0 +1,185 @@
+{
+  "id": "inuit",
+  "region": "America",
+  "classification": ["ethnographic"],
+  "thumbnail": "illustrations/caribou.webp",
+  "thumbnail_bscale": 0.8,
+  "highlight": "CON inuit 006",
+  "constellations": [
+    {
+      "id": "CON inuit 001",
+      "lines": [[97649, 97278]],
+      "image": {
+        "file": "illustrations/two-sunbeams.webp",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [210, 54], "hip": 97675},
+          {"pos": [274, 92], "hip": 97278},
+          {"pos": [148, 129], "hip": 97649}
+        ]
+      },
+      "common_name": {"english": "Two Sunbeams", "native": "Aagjuuk"},
+      "description": "An important constellation for timekeeping."
+    },
+    {
+      "id": "CON inuit 002",
+      "lines": [[27989, 25336]],
+      "image": {
+        "file": "illustrations/two-placed-far-apart.webp",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [156, 99], "hip": 26207},
+          {"pos": [114, 413], "hip": 27989},
+          {"pos": [412, 98], "hip": 25336}
+        ]
+      },
+      "common_name": {"english": "Two Placed Far Apart", "native": "Akkuttujuuk"},
+      "description": "Two stars signaling the return of sunlight to the arctic"
+    },
+    {
+      "id": "CON inuit 003",
+      "lines": [[21421, 20894, 20205, 20455, 20889]],
+      "image": {
+        "file": "illustrations/dogs.webp",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [168, 216], "hip": 21421},
+          {"pos": [418, 352], "hip": 20205},
+          {"pos": [338, 67], "hip": 20889}
+        ]
+      },
+      "common_name": {"english": "Dogs", "native": "Qimmiitt"},
+      "description": "Five dogs harassing Nanook, or Nanurjuk, the polar bear."
+    },
+    {
+      "id": "CON inuit 004",
+      "lines": [[24608, 28360, 36850, 37826]],
+      "image": {
+        "file": "illustrations/collarbones.webp",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [52, 469], "hip": 37826},
+          {"pos": [123, 79], "hip": 35384},
+          {"pos": [496, 37], "hip": 24608}
+        ]
+      },
+      "common_name": {"english": "Collarbones", "native": "Quturjuuk"}
+    },
+    {
+      "id": "CON inuit 005",
+      "lines": [[4427, 3179, 746, 4427]],
+      "image": {
+        "file": "illustrations/lamp-stand.webp",
+        "size": [256, 256],
+        "anchors": [
+          {"pos": [244, 59], "hip": 746},
+          {"pos": [102, 182], "hip": 3179},
+          {"pos": [11, 31], "hip": 4427}
+        ]
+      },
+      "common_name": {"english": "Lamp Stand", "native": "Pituaq"},
+      "description": "Stand containing the burning fuel providing light"
+    },
+    {
+      "id": "CON inuit 006",
+      "lines": [[67301, 65378, 62956, 59774, 58001, 53910, 54061, 59774]],
+      "image": {
+        "file": "illustrations/caribou.webp",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [62, 217], "hip": 67301},
+          {"pos": [413, 308], "hip": 54061},
+          {"pos": [385, 380], "hip": 53910}
+        ]
+      },
+      "common_name": {"english": "Caribou", "native": "Tukturjuit"},
+      "description": "The big dipper is Tukturjuit, the caribou."
+    },
+    {
+      "id": "CON inuit 007",
+      "lines": [[67927, 69673]],
+      "image": {
+        "file": "illustrations/two-in-front.webp",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [264, 158], "hip": 69673},
+          {"pos": [412, 291], "hip": 67927},
+          {"pos": [171, 233], "hip": 70027}
+        ]
+      },
+      "common_name": {"english": "Two in Front", "native": "Sivulliik"},
+      "description": "\"The first ones\", Little Orphan Boy being chased by an angry grandfather."
+    },
+    {
+      "id": "CON inuit 008",
+      "lines": [[17851, 17847, 17702, 17851], [17702, 17608, 17499, 17531, 17702]],
+      "image": {
+        "file": "illustrations/breastbone.webp",
+        "size": [256, 256],
+        "anchors": [
+          {"pos": [137, 35], "hip": 17531},
+          {"pos": [188, 80], "hip": 17499},
+          {"pos": [38, 186], "hip": 17851}
+        ]
+      },
+      "common_name": {"english": "Breastbone", "native": "Sakiattiak"},
+      "description": "The Pleiades, are seen as a breast bone."
+    },
+    {
+      "id": "CON inuit 009",
+      "lines": [[26727, 26311, 25930]],
+      "image": {
+        "file": "illustrations/runners.webp",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [84, 338], "hip": 26727},
+          {"pos": [232, 235], "hip": 26311},
+          {"pos": [368, 112], "hip": 25930}
+        ]
+      },
+      "common_name": {"english": "Runners", "native": "Ullaktut"},
+      "description": "Orion's Belt is Ullaktut, three hunters lost on a hunting trip for Nanuk, the polar bear."
+    },
+    {
+      "id": "CON inuit 010",
+      "lines": [[8886, 6686, 4427, 3821, 3179, 746]],
+      "image": {
+        "file": "illustrations/blubber-container.webp",
+        "size": [256, 256],
+        "anchors": [
+          {"pos": [255, 187], "hip": 4427},
+          {"pos": [120, 220], "hip": 6686},
+          {"pos": [12, 81], "hip": 8886}
+        ]
+      },
+      "common_name": {"english": "Blubber Container", "native": "Uqsuutaattiaq"},
+      "description": "A seal flipper skin sewn shut, contains fuel for lamps."
+    },
+    {
+      "id": "CON inuit 011",
+      "lines": [[91262, 91262]],
+      "image": {
+        "file": "illustrations/the-one-behind.webp",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [428, 77], "hip": 91919},
+          {"pos": [416, 179], "hip": 91262},
+          {"pos": [311, 118], "hip": 91971}
+        ]
+      },
+      "common_name": {"english": "The One Behind", "native": "Kingulliq"},
+      "description": "The grandmother chasing the Two in Front"
+    }
+  ],
+  "common_names": {
+    "HIP 91262": [{"english": "The Old Woman"}],
+    "HIP 21421": [{"english": "Spirit of a Polar Bear"}],
+    "HIP 11767": [{"english": "Never Moves", "native": "Nuuttuittuq", "description": "The North Star Polaris, the star that never moves."}],
+    "HIP 37279": [{"english": "Name of a Murdered Man", "native": "Sikuliaqsiujuittuq", "description": "Sometimes called \"He who never goes out on newly formed ice\". Sikuliaqsiujuittuq is Procyon, the main star in Canis Minor."}],
+    "HIP 32349": [{"english": "Flickering"}],
+    "HIP 26241": [{"english": "Nephews"}],
+    "HIP 69673": [{"english": "The Old Man"}],
+    "HIP 67927": [{"english": "The Little Orphan Boy"}],
+    "NAME Orion Nebula": [{"english": "Nephews or Nieces", "native": "Qangimmaariik", "description": "A group of children"}]
+  }
+}

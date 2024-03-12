@@ -1,0 +1,202 @@
+{
+  "id": "hawaiian_starlines",
+  "region": "Oceania",
+  "classification": ["traditional"],
+  "thumbnail": "illustrations/lu1d.webp",
+  "thumbnail_bscale": 0.5,
+  "highlight": "CON hawaiian_starlines IWA",
+  "illustrations_bscale": 0.7,
+  "constellations": [
+    {
+      "id": "CON hawaiian_starlines KOM",
+      "lines": [[32349, 37279, 37826, 36850, 28360, 28380, 25428, 23015, 24608, 28360], [32349, 30324, 30438]],
+      "image": {
+        "file": "illustrations/kekaa1d.webp",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [36, 303], "hip": 31832},
+          {"pos": [368, 316], "hip": 37279},
+          {"pos": [399, 115], "hip": 30324}
+        ]
+      },
+      "common_name": {"english": "The Canoe Bailer of Makali`i", "native": "Ke Ka o Makali’i"}
+    },
+    {
+      "id": "CON hawaiian_starlines KHK",
+      "lines": [[27989, 26727, 27366, 24436, 25930, 25336, 27989], [26727, 26311, 25930]],
+      "common_name": {"english": "The Cat's Cradle", "native": "Ka Hei-Hei o Na Keiki"}
+    },
+    {
+      "id": "CON hawaiian_starlines MAK",
+      "lines": [[17499, 17489]],
+      "common_name": {"english": "The Chief's Eyes", "native": "Makali`i"}
+    },
+    {
+      "id": "CON hawaiian_starlines MEE",
+      "lines": [[60965, 59803, 59316, 61359, 60965]],
+      "common_name": {"english": "Voice of Joy", "native": "Me`e"}
+    },
+    {
+      "id": "CON hawaiian_starlines NAH",
+      "lines": [[67301, 65378, 62956, 59774, 54061, 53910, 58001, 59774]],
+      "common_name": {"english": "The Seven", "native": "Na Hiku"}
+    },
+    {
+      "id": "CON hawaiian_starlines IWI",
+      "lines": [[11767, 54061], [67301, 69673, 65474], [60965, 65474], [60221, 61084]],
+      "image": {
+        "file": "illustrations/kuamoobig.webp",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [91, 52], "hip": 53910},
+          {"pos": [503, 76], "hip": 59199},
+          {"pos": [235, 260], "hip": 69673}
+        ]
+      },
+      "common_name": {"english": "The Backbone", "native": "Ka Iwikuamo’o"}
+    },
+    {
+      "id": "CON hawaiian_starlines MAN",
+      "lines": [[85927, 86670, 87073, 86228, 84143, 82671, 82514, 82396, 81266, 80763, 80112, 78401], [78820, 78401, 78265]],
+      "image": {
+        "file": "illustrations/manaia.webp",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [158, 105], "hip": 84012},
+          {"pos": [500, 106], "hip": 76470},
+          {"pos": [222, 399], "hip": 84143}
+        ]
+      },
+      "common_name": {"english": "The Chief's Fishline", "native": "Manaiakalani"}
+    },
+    {
+      "id": "CON hawaiian_starlines NAV",
+      "lines": [[102098, 97649, 91262, 102098], [95947, 97165, 100453, 102488, 102098, 100453]],
+      "image": {
+        "file": "illustrations/waa2.webp",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [113, 63], "hip": 102098},
+          {"pos": [438, 99], "hip": 91262},
+          {"pos": [255, 423], "hip": 97649}
+        ]
+      },
+      "common_name": {"english": "Navigator's Triangle"}
+    },
+    {
+      "id": "CON hawaiian_starlines LUP",
+      "lines": [[677, 113881, 113963, 1067, 677], [113368, 113963], [746, 677], [3419, 2081], [1067, 3419], [113881, 112731]],
+      "image": {
+        "file": "illustrations/lu1d.webp",
+        "size": [512, 512],
+        "anchors": [
+          {"pos": [115, 185], "hip": 677},
+          {"pos": [174, 83], "hip": 113881},
+          {"pos": [276, 138], "hip": 113963}
+        ]
+      },
+      "common_name": {"english": "Kite of Kawelo", "native": "Ka Lupe o Kawelo"}
+    },
+    {
+      "id": "CON hawaiian_starlines IWA",
+      "lines": [[8886, 6686, 4427, 3179, 746]],
+      "image": {
+        "file": "illustrations/lu2c.webp",
+        "size": [256, 256],
+        "anchors": [
+          {"pos": [109, 37], "hip": 8886},
+          {"pos": [143, 156], "hip": 4427},
+          {"pos": [210, 244], "hip": 746}
+        ]
+      },
+      "common_name": {"english": "Chief Frigate Bird", "native": "`Iwa Keli`i"}
+    },
+    {
+      "id": "CON hawaiian_starlines HAN",
+      "lines": [[61084, 60718], [62434, 59747]],
+      "common_name": {"english": "Cared for by Moon", "native": "Hanaiakamalama"}
+    },
+    {
+      "id": "CON hawaiian_starlines NAK",
+      "lines": [[71683, 68702]],
+      "common_name": {"english": "The Pointers", "native": "Nakuhikuhi"}
+    },
+    {
+      "id": "CON hawaiian_starlines KAO",
+      "lines": [[57632, 54872, 54879, 49669, 49583, 50583, 50335, 48455, 47908], [57632, 54879]],
+      "common_name": {"english": "Leo", "native": "Ka`ohiweliweli"}
+    }
+  ],
+  "common_names": {
+    "HIP 24608": [{"native": "Hokulei"}],
+    "HIP 36850": [{"native": "Nana-mua"}],
+    "HIP 37826": [{"native": "Nana-hope"}],
+    "HIP 37279": [{"native": "Puana"}],
+    "HIP 32349": [{"native": "A‘a"}],
+    "HIP 24436": [{"native": "Puana-kau"}],
+    "HIP 27366": [{"native": "Pu‘uhonua"}],
+    "HIP 27989": [{"native": "Kaulua-koko"}],
+    "HIP 11767": [{"native": "Hokupa‘a"}],
+    "HIP 69673": [{"native": "Hokule‘a"}],
+    "HIP 65474": [{"native": "Hiki-analia"}],
+    "HIP 72607": [{"native": "Holopuni"}],
+    "HIP 102098": [{"native": "Hawaiki"}],
+    "HIP 97649": [{"native": "Humu"}],
+    "HIP 91262": [{"native": "Keoe"}],
+    "HIP 21421": [{"native": "Hoku‘ula"}, {"native": "Kapuahi"}],
+    "HIP 80763": [{"native": "Lehua-Kona"}],
+    "HIP 30438": [{"native": "Ke ali'i o kona i ka lewa"}],
+    "HIP 54061": [{"native": "Hiku-kahi"}],
+    "HIP 53910": [{"native": "Hiku-lua"}],
+    "HIP 58001": [{"native": "Hiku-kolu"}],
+    "HIP 59774": [{"native": "Hiku-ha"}],
+    "HIP 62956": [{"native": "Hiku-lima"}],
+    "HIP 65378": [{"native": "Hiku-ono"}],
+    "HIP 67301": [{"native": "Hiku-pau"}],
+    "HIP 61084": [{"native": "Kaulia"}],
+    "HIP 60718": [{"native": "Ka Mole Honua"}],
+    "HIP 68702": [{"native": "Ka-maile-mua"}],
+    "HIP 71683": [{"native": "Ka-maile-hope"}],
+    "HIP 85927": [{"native": "Ka Maka"}],
+    "HIP 113963": [{"native": "Keawe"}],
+    "HIP 677": [{"native": "Manokalanipo"}],
+    "HIP 1067": [{"native": "Pi‘ilani"}],
+    "HIP 113881": [{"native": "Kakuhihewa"}],
+    "HIP 3419": [{"native": "Pi‘ikea"}],
+    "HIP 2081": [{"native": "Kaikilani"}],
+    "HIP 113368": [{"native": "Kukaniloko"}],
+    "HIP 746": [{"native": "Kealohalani-po-keao"}],
+    "HIP 3179": [{"native": "Kamoanalipoli-po-keao"}],
+    "HIP 4427": [{"native": "Kaheihiwahiwa-o-keao"}],
+    "HIP 6686": [{"native": "Kapalinihinihi-o-keao"}],
+    "HIP 8886": [{"native": "Haumea"}],
+    "HIP 30324": [{"native": "Mirzim"}],
+    "HIP 11368": [{"native": "Kukaniloko"}],
+    "HIP 28360": [{"native": "‘Ekekeu’ena’ena"}],
+    "HIP 28380": [{"native": "‘Ekekeuehuehu"}],
+    "HIP 25428": [{"native": "‘Ekekeuhe’ehe’e"}],
+    "HIP 23015": [{"native": "‘Ekekeukolokolo"}],
+    "HIP 25336": [{"native": "Bellatrix"}],
+    "HIP 26727": [{"native": "Alnitak"}],
+    "HIP 26311": [{"native": "Alnilam"}],
+    "HIP 25930": [{"native": "Mintaka"}],
+    "HIP 65477": [{"native": "Hiku-ono"}],
+    "HIP 78820": [{"native": "Pua‘i"}],
+    "HIP 78401": [{"native": "Mili’opu"}],
+    "HIP 78265": [{"native": "Kahe"}],
+    "HIP 80112": [{"native": "Hihiwai"}],
+    "HIP 81266": [{"native": "Kawelaokapo"}],
+    "HIP 82396": [{"native": "‘Ohelokulu"}],
+    "HIP 82514": [{"native": "‘Ohelokoko"}],
+    "HIP 82729": [{"native": "‘Ohelouli"}],
+    "HIP 84143": [{"native": "‘Oheloawa"}],
+    "HIP 86228": [{"native": "‘Ohelowaha"}],
+    "HIP 87073": [{"native": "Kawilikolokio"}],
+    "HIP 86670": [{"native": "Ka‘ielawei‘a"}],
+    "HIP 85686": [{"native": "Lele"}],
+    "HIP 95947": [{"native": "Kalipo‘eu‘eu"}],
+    "HIP 100453": [{"native": "Momonapikowalu"}],
+    "HIP 97165": [{"native": "Mokopapa‘i"}],
+    "HIP 102488": [{"native": "Wainielela"}]
+  }
+}
