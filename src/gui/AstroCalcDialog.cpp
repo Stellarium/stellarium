@@ -220,7 +220,8 @@ void AstroCalcDialog::createDialogContent()
 
 	// Signals and slots
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
-	connect(&StelApp::getInstance().getSkyCultureMgr(), SIGNAL(currentSkyCultureChanged(QString)), this, SLOT(populateCelestialNames(QString)));
+	connect(&StelApp::getInstance().getSkyCultureMgr(), &StelSkyCultureMgr::currentSkyCultureChanged,
+	        this, &AstroCalcDialog::populateCelestialNames);
 	ui->stackedWidget->setCurrentIndex(0);
 	ui->stackListWidget->setCurrentRow(0);
 	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
@@ -635,7 +636,7 @@ void AstroCalcDialog::saveGraph(QChartView *graph)
 	}
 }
 
-void AstroCalcDialog::populateCelestialNames(QString)
+void AstroCalcDialog::populateCelestialNames()
 {
 	populateCelestialBodyList();
 	populatePlanetList();

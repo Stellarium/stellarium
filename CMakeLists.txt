@@ -826,6 +826,12 @@ IF(ENABLE_XLSX)
      ENDIF()
 ENDIF()
 
+CPMAddPackage(NAME md4c
+              URL https://github.com/mity/md4c/archive/refs/tags/release-0.4.8.tar.gz
+              URL_HASH SHA256=4a457df853425b6bb6e3457aa1d1a13bccec587a04c38c622b1013a0da41439f
+              EXCLUDE_FROM_ALL yes
+              OPTIONS "BUILD_MD2HTML_EXECUTABLE OFF")
+
 ########### Set some global variables ###########
 IF(UNIX AND NOT WIN32)
      IF(APPLE)

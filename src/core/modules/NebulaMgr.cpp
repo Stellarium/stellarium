@@ -352,7 +352,7 @@ void NebulaMgr::init()
 
 	StelApp *app = &StelApp::getInstance();
 	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
-	connect(&app->getSkyCultureMgr(), SIGNAL(currentSkyCultureChanged(QString)), this, SLOT(updateSkyCulture(const QString&)));
+	connect(&app->getSkyCultureMgr(), &StelSkyCultureMgr::currentSkyCultureChanged, this, &NebulaMgr::updateSkyCulture);
 	GETSTELMODULE(StelObjectMgr)->registerStelObjectMgr(this);
 
 	addAction("actionShow_Nebulas", N_("Display Options"), N_("Deep-sky objects"), "flagHintDisplayed", "D", "N");
@@ -1722,8 +1722,9 @@ bool NebulaMgr::loadDSOOutlines(const QString &filename)
 	return true;
 }
 
-void NebulaMgr::updateSkyCulture(const QString& skyCultureDir)
+void NebulaMgr::updateSkyCulture(const StelSkyCulture& skyCulture)
 {
+#if 0 // TODO: implement
 	QString namesFile = StelFileMgr::findFile("skycultures/" + skyCultureDir + "/dso_names.fab");
 
 	for (const auto& n : std::as_const(dsoArray))
@@ -1802,6 +1803,7 @@ void NebulaMgr::updateSkyCulture(const QString& skyCultureDir)
 	}
 
 	updateI18n();
+#endif
 }
 
 void NebulaMgr::updateI18n()

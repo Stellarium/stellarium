@@ -24,6 +24,7 @@
 #include <QMap>
 #include <QString>
 #include <QStringList>
+#include <QJsonArray>
 
 //! @class StelSkyCulture
 //! Store basic info about a sky culture for Stellarium.
@@ -88,18 +89,24 @@ public:
 
 	//! English name
 	QString englishName;
-	//! Name of the author
-	QString author;
-	//! Credits info, when it is not equal to author field (optional)
-	QString credit;
 	//! The license
 	QString license;
 	//! The name of region
 	QString region;
 	//! Type of the boundaries
 	BoundariesType boundariesType;
+	//! JSON data describing the constellations
+	QJsonArray constellations;
+	//! JSON data describing boundaries of the constellations
+	QJsonArray boundaries;
+	//! E.g. J2000, B1875
+	QString boundariesEpoch;
+	//! JSON data describing asterism lines and names
+	QJsonArray asterisms;
 	//! Classification of sky culture (enum)
 	CLASSIFICATION classification;
+	//! Whether to show common names in addition to the culture-specific ones
+	bool fallbackToInternationalNames = false;
 };
 
 //! @class StelSkyCultureMgr
@@ -128,9 +135,6 @@ public:
 	//! Gets the default sky culture name from the application's settings,
 	//! sets that sky culture by calling setCurrentSkyCultureID().
 	void init();
-	
-	//! Get the current sky culture.
-	StelSkyCulture getSkyCulture() const {return currentSkyCulture;}
 	
 public slots:
 	//! Get the current sky culture English name.
@@ -166,18 +170,15 @@ public slots:
 	//! @return a localized HTML description of the classification for the current sky culture
 	QString getCurrentSkyCultureHtmlClassification() const;
 
-	//! @return a localized HTML description of the license for the current sky culture
+	//! @return a localized HTML description of the license given in markdown
 	QString getCurrentSkyCultureHtmlLicense() const;
 
 	//! @return a localized HTML description of the region for the current sky culture
 	QString getCurrentSkyCultureHtmlRegion() const;
 
-	//! @return a localized HTML description of the references for the current sky culture
-	QString getCurrentSkyCultureHtmlReferences() const;
-
 	//! Returns a localized HTML description for the current sky culture.
 	//! @return a HTML description of the current sky culture, suitable for display
-	QString getCurrentSkyCultureHtmlDescription() const;
+	QString getCurrentSkyCultureHtmlDescription();
 	
 	//! Get the default sky culture ID
 	QString getDefaultSkyCultureID() {return defaultSkyCultureID;}
@@ -206,7 +207,7 @@ signals:
 	void defaultSkyCultureChanged(const QString& id);
 
 	//! Emitted when the current sky culture changes
-	void currentSkyCultureChanged(const QString& id);
+	void currentSkyCultureChanged(const StelSkyCulture& culture);
 	
 private:
 	//! Get the culture name in English associated with a specified directory.
@@ -224,7 +225,11 @@ private:
 	//! @param cultureName The culture name in the current language.
 	//! @return The directory associated with cultureName.
 	QString skyCultureI18ToDirectory(const QString& cultureName) const;
-	
+
+	QString descriptionMarkdownToHTML(const QString& markdown, const QString& descrPath);
+	QString convertMarkdownLevel2Section(const QString& markdown, const QString& sectionName, qsizetype bodyStartPos, qsizetype bodyEndPos);
+	std::pair<QString/*color*/,QString/*info*/> getLicenseDescription(const QString& license, const bool singleLicenseForAll) const;
+
 	QMap<QString, StelSkyCulture> dirToNameEnglish;
 	
 	// The directory containing data for the culture used for constellations, etc.. 

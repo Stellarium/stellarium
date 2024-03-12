@@ -434,7 +434,7 @@ private slots:
 	void changePositionsTab(int index);
 
 	void updateSolarSystemData();
-	void populateCelestialNames(QString);
+	void populateCelestialNames();
 	void showExtraEphemerisDialog();
 	void showCustomStepsDialog();
 

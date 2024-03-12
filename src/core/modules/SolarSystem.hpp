@@ -38,6 +38,7 @@ class StelObject;
 class StelCore;
 class StelProjector;
 class QSettings;
+class StelSkyCulture;
 
 typedef QSharedPointer<Planet> PlanetP;
 
@@ -897,8 +898,7 @@ private slots:
 
 	//! Called when the sky culture is updated.
 	//! Loads native names of planets for a given sky culture.
-	//! @param skyCultureDir the name of the directory containing the sky culture to use.
-	void updateSkyCulture(const QString& skyCultureDir);
+	void updateSkyCulture(const StelSkyCulture& skyCulture);
 
 	//! Called following StelMainView::reloadShadersRequested
 	void reloadShaders();

@@ -30,6 +30,7 @@
 #include "ConstellationMgr.hpp"
 
 #include <vector>
+#include <QJsonObject>
 #include <QString>
 #include <QFont>
 
@@ -81,7 +82,7 @@ private:
 	//! constellation.
 	//! @param starMgr a pointer to the StarManager object.
 	//! @return false if can't parse record (invalid result!), else true.
-	bool read(const QString& record, StarMgr *starMgr);
+	bool read(const QJsonObject& data, StarMgr *starMgr);
 
 	//! Draw the constellation name
 	void drawName(StelPainter& sPainter, ConstellationMgr::ConstellationDisplayStyle style) const;
@@ -169,7 +170,7 @@ private:
 	//! Month [1..12] of end visibility of constellation (seasonal rules)
 	int endSeason;
 	//! List of stars forming the segments
-	StelObjectP* constellation;
+	std::vector<StelObjectP> constellation;
 
 	StelTextureSP artTexture;
 	StelVertexArray artPolygon;

@@ -857,6 +857,11 @@ Vec3d StelCore::j2000ToJ1875(const Vec3d& v) const
 	return matJ2000ToJ1875*v;
 }
 
+Vec3d StelCore::j1875ToJ2000(const Vec3d& v) const
+{
+	return matJ2000ToJ1875.transpose()*v;
+}
+
 Vec3d StelCore::j2000ToGalactic(const Vec3d& v) const
 {
 	return matJ2000ToGalactic*v;

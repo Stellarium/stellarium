@@ -456,7 +456,7 @@ void StarMgr::init()
 		z->scaleAxis();
 	StelApp *app = &StelApp::getInstance();
 	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
-	connect(&app->getSkyCultureMgr(), SIGNAL(currentSkyCultureChanged(QString)), this, SLOT(updateSkyCulture(const QString&)));
+	connect(&app->getSkyCultureMgr(), &StelSkyCultureMgr::currentSkyCultureChanged, this, &StarMgr::updateSkyCulture);
 
 	QString displayGroup = N_("Display Options");
 	addAction("actionShow_Stars", displayGroup, N_("Stars"), "flagStarsDisplayed", "S");
@@ -1952,17 +1952,21 @@ void StarMgr::setFontSize(int newFontSize)
 	starFont.setPixelSize(newFontSize);
 }
 
-void StarMgr::updateSkyCulture(const QString& skyCultureDir)
+void StarMgr::updateSkyCulture(const StelSkyCulture& skyCulture)
 {
-	// Load culture star names in english
-	QString fic = StelFileMgr::findFile("skycultures/" + skyCultureDir + "/star_names.fab");
-	if (fic.isEmpty())
-		qDebug() << "Could not load star_names.fab for sky culture " << QDir::toNativeSeparators(skyCultureDir);
-	else
-		loadCommonNames(fic);
+	if (skyCulture.fallbackToInternationalNames)
+	{
+		const QString fic = StelFileMgr::findFile("skycultures/common_star_names.fab");
+		if (fic.isEmpty())
+			qWarning() << "Could not load common_star_names.fab";
+		else
+			loadCommonNames(fic);
+	}
+
+	// TODO: load cuture-specific names
 
 	// Turn on sci names/catalog names for modern cultures only
-	setFlagSciNames(skyCultureDir.contains("modern", Qt::CaseInsensitive));
+	setFlagSciNames(skyCulture.englishName.toLower().contains("modern", Qt::CaseInsensitive));
 	updateI18n();
 }
 

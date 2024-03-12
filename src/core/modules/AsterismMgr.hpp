@@ -33,6 +33,7 @@ class StarMgr;
 class Asterism;
 class StelProjector;
 class StelPainter;
+class StelSkyCulture;
 
 //! @class AsterismMgr
 //! Display and manage the asterisms.
@@ -237,8 +238,7 @@ signals:
 
 private slots:
 	//! Loads new asterism data and art if the SkyCulture has changed.
-	//! @param skyCultureDir the name of the directory containing the sky culture to use.
-	void updateSkyCulture(const QString& skyCultureDir);
+	void updateSkyCulture(const StelSkyCulture& skyCulture);
 
 	//! Update i18n names from English names according to current
 	//! locale, and update font for locale.
@@ -256,17 +256,6 @@ private slots:
 	void switchSelectionMode();
 
 private:
-	//! Read asterism names from the given file.
-	//! @param namesFile Name of the file containing the asterism names
-	//!        in a format consisting of abbreviation and translatable english name.
-	//! @note The abbreviation must occur in the lines file loaded first in @name loadLines()!
-	void loadNames(const QString& namesFile);
-
-	//! Load asterism line shapes from data files.
-	//! @param fileName The name of the asterism data file
-	//! @note The abbreviation used in @param filename is required for cross-identifying translatable names in @name loadNames():
-	void loadLines(const QString& fileName);
-
 	//! Draw the asterism lines at the epoch given by the StelCore.
 	void drawLines(StelPainter& sPainter, const StelCore* core) const;
 	//! Draw the ray helpers at the epoch given by the StelCore.

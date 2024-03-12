@@ -246,6 +246,8 @@ public:
 	Vec3d equinoxEquToJ2000(const Vec3d& v, RefractionMode refMode=RefractionAuto) const;
 	//! Use fixed matrix to allow fast transformation of positions related to the IAU constellation borders.
 	Vec3d j2000ToJ1875(const Vec3d& v) const;
+	//! Use fixed matrix to allow fast transformation of positions related to the IAU constellation borders.
+	Vec3d j1875ToJ2000(const Vec3d& v) const;
 	//! Transform position vector v from equatorial coordinates J2000 to those of date (optionally corrected by refraction).
 	//! Use refMode=StelCore::RefractionOff if you don't want any atmosphere correction.
 	//! Use refMode=StelCore::RefractionOn to correct observed (apparent) coordinates (which are subject to refraction).
