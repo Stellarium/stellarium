@@ -69,6 +69,40 @@ QString convertReferenceLinks(QString text)
 
 }
 
+QString StelSkyCultureMgr::getSkyCultureEnglishName(const QString& idFromJSON) const
+{
+	const auto skyCultureId = idFromJSON;
+	const QString descPath = StelFileMgr::findFile("skycultures/" + skyCultureId + "/description.md");
+	if (descPath.isEmpty())
+	{
+		qWarning() << "WARNING: can't find description for skyculture" << skyCultureId;
+		return idFromJSON;
+	}
+
+	QFile f(descPath);
+	if (!f.open(QIODevice::ReadOnly))
+	{
+		qWarning().nospace() << "Failed to open sky culture description file " << descPath << ": " << f.errorString();
+		return idFromJSON;
+	}
+
+	for (int lineNum = 1;; ++lineNum)
+	{
+		const auto line = QString::fromUtf8(f.readLine()).trimmed();
+		if (line.isEmpty()) continue;
+		if (!line.startsWith("#"))
+		{
+			qWarning().nospace() << "Sky culture description file " << descPath << " at line "
+			                     << lineNum << " has wrong format (expected a top-level header, got " << line;
+			return idFromJSON;
+		}
+		return line.mid(1).trimmed();
+	}
+
+	qWarning() << "Failed to find sky culture name in" << descPath;
+	return idFromJSON;
+}
+
 StelSkyCultureMgr::StelSkyCultureMgr()
 {
 	setObjectName("StelSkyCultureMgr");
@@ -114,7 +148,7 @@ StelSkyCultureMgr::StelSkyCultureMgr()
 		const auto data = jsonDoc.object();
 
 		auto& culture = dirToNameEnglish[dir];
-		culture.englishName = data["id"].toString();
+		culture.englishName = getSkyCultureEnglishName(data["id"].toString());
 		culture.region = data["region"].toString();
 		if (data["constellations"].isArray())
 		{

@@ -38,7 +38,7 @@ void TestStelSkyCultureMgr::testStelSkyCultureMgr()
 	QVERIFY(scMgr.getCurrentSkyCultureID()=="arabic_al-sufi");
 	QVERIFY(scMgr.setCurrentSkyCultureID("western"));
 	QVERIFY(scMgr.getCurrentSkyCultureID()=="western");
-	QVERIFY(scMgr.getCurrentSkyCultureEnglishName()=="western");
+	QVERIFY(scMgr.getCurrentSkyCultureEnglishName()=="Western");
 	QVERIFY(scMgr.getCurrentSkyCultureBoundariesType()==StelSkyCulture::BoundariesType::IAU);
 	QVERIFY(scMgr.getCurrentSkyCultureClassificationIdx()==StelSkyCulture::SINGLE);
 	QVERIFY(scMgr.getSkyCultureListEnglish().contains("western", Qt::CaseInsensitive));
