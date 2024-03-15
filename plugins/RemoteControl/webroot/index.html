@@ -239,6 +239,9 @@
                   </div>
                   <select id="srch_list_objectlist" class="scrollselect flex-expand" size="10"></select>
                 </div>
+                <div id="srch_button">
+                  <button value=""><?= tr("Selection of the current item")?></button>
+                </div>
               </div>
             </div>
             <p><label class="bold"><?= tr("Selection mode")?><select id="select_SelectionMode" class="selectmenu inline-block valign-middle"><option value="center"><?= tr("Center on object")?></option><option value="zoom"><?= tr("Center and zoom to object")?></option><option value="mark"><?= tr("Just mark the object")?></option></select></label></p>
@@ -782,6 +785,7 @@
     </div>
     <ul class="ui-corner-all ui-widget-content button32list margin-vertical">
       <li title="<?= tr("Constellation lines")?>"><button class="stelaction icon32 btConstellationLines" name="actionShow_Constellation_Lines"></button></li>
+      <li title="<?= tr("Constellation boundaries")?>"><button class="stelaction icon32 btConstellationBoundaries" name="actionShow_Constellation_Boundaries"></button></li>
       <li title="<?= tr("Constellation labels")?>"><button class="stelaction icon32 btConstellationLabels" name="actionShow_Constellation_Labels"></button></li>
       <li title="<?= tr("Constellation art")?>"><button class="stelaction icon32 btConstellationArt" name="actionShow_Constellation_Art"></button></li>
       <li title="<?= tr("Equatorial grid")?>"><button class="stelaction icon32 btEquatorialGrid" name="actionShow_Equatorial_Grid"></button></li>
