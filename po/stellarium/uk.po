@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2024-03-01 08:54+0700\n"
+"POT-Creation-Date: 2024-03-15 12:19+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>, 2024\n"
 "Language-Team: Ukrainian (https://app.transifex.com/stellarium/teams/80998/uk/)\n"
@@ -40,7 +40,7 @@ msgstr ""
 #: plugins/Supernovae/src/Supernova.cpp:144 plugins/Novae/src/Nova.cpp:150
 #: plugins/Quasars/src/Quasar.cpp:125 plugins/Pulsars/src/Pulsar.cpp:189
 #: plugins/Pulsars/src/Pulsar.cpp:191 plugins/Exoplanets/src/Exoplanet.cpp:320
-#: plugins/MeteorShowers/src/MeteorShower.cpp:525
+#: plugins/MeteorShowers/src/MeteorShower.cpp:549
 #: plugins/MissingStars/src/MissingStar.cpp:130
 msgid "Type"
 msgstr "Тип"
@@ -65,7 +65,7 @@ msgstr "астеризм"
 #: src/core/modules/ConstellationMgr.cpp:131 src/core/modules/StarMgr.cpp:461
 #: src/core/modules/GridLinesMgr.cpp:2033
 #: src/core/modules/SpecialMarkersMgr.cpp:310
-#: src/core/modules/LandscapeMgr.cpp:870
+#: src/core/modules/LandscapeMgr.cpp:872
 #: src/core/modules/NomenclatureMgr.cpp:84 src/core/modules/NebulaMgr.cpp:358
 #: src/core/modules/NebulaMgr.cpp:359 src/core/modules/SolarSystem.cpp:307
 #: src/core/modules/MilkyWay.cpp:107 src/core/modules/ZodiacalLight.cpp:112
@@ -334,7 +334,7 @@ msgstr "Антапекс"
 #: src/core/modules/Planet.cpp:1232 src/gui/AstroCalcDialog.cpp:9134
 #: plugins/Satellites/src/Satellite.cpp:360
 #: plugins/Satellites/src/Satellite.cpp:403
-#: plugins/MeteorShowers/src/MeteorShower.cpp:556
+#: plugins/MeteorShowers/src/MeteorShower.cpp:580
 msgctxt "speed"
 msgid "km/s"
 msgstr "км/с"
@@ -730,12 +730,12 @@ msgctxt "compass direction"
 msgid "NbW"
 msgstr "NbW"
 
-#: src/core/modules/LandscapeMgr.cpp:434 src/core/modules/LandscapeMgr.cpp:751
+#: src/core/modules/LandscapeMgr.cpp:434 src/core/modules/LandscapeMgr.cpp:753
 #: src/gui/ViewDialog.cpp:649
 msgid "Loading..."
 msgstr "Завантаження…"
 
-#: src/core/modules/LandscapeMgr.cpp:434 src/core/modules/LandscapeMgr.cpp:751
+#: src/core/modules/LandscapeMgr.cpp:434 src/core/modules/LandscapeMgr.cpp:753
 msgctxt "percentage of done"
 msgid "done"
 msgstr "виконано"
@@ -744,7 +744,7 @@ msgstr "виконано"
 msgid "Switching models..."
 msgstr "Перемикаємо моделі…"
 
-#: src/core/modules/LandscapeMgr.cpp:480 src/core/modules/LandscapeMgr.cpp:746
+#: src/core/modules/LandscapeMgr.cpp:480 src/core/modules/LandscapeMgr.cpp:748
 msgid "Loaded successfully"
 msgstr "Успішно завантажено"
 
@@ -755,61 +755,61 @@ msgstr ""
 "Обробка моделі атмосфери ShowMySky завершилася аварійно. Завантажуємо "
 "резервну модель Прітгема."
 
-#: src/core/modules/LandscapeMgr.cpp:871
+#: src/core/modules/LandscapeMgr.cpp:873
 msgid "Atmosphere"
 msgstr "Атмосфера"
 
-#: src/core/modules/LandscapeMgr.cpp:872
+#: src/core/modules/LandscapeMgr.cpp:874
 msgid "Fog"
 msgstr "Туман"
 
-#: src/core/modules/LandscapeMgr.cpp:873 src/ui_viewDialog.h:4274
+#: src/core/modules/LandscapeMgr.cpp:875 src/ui_viewDialog.h:4274
 #: src/ui_configurationDialog.h:1886
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:343
 msgid "Cardinal points"
 msgstr "Частини світу"
 
-#: src/core/modules/LandscapeMgr.cpp:874
+#: src/core/modules/LandscapeMgr.cpp:876
 msgid "Ordinal (Intercardinal) points"
 msgstr "Порядкові (проміжні) румби"
 
-#: src/core/modules/LandscapeMgr.cpp:875
+#: src/core/modules/LandscapeMgr.cpp:877
 msgid "Secondary Intercardinal points"
 msgstr "Вторинні проміжні румби"
 
-#: src/core/modules/LandscapeMgr.cpp:876
+#: src/core/modules/LandscapeMgr.cpp:878
 msgid "Tertiary Intercardinal points"
 msgstr "Непарні проміжні румби"
 
-#: src/core/modules/LandscapeMgr.cpp:877
+#: src/core/modules/LandscapeMgr.cpp:879
 msgid "Ground"
 msgstr "Земля"
 
-#: src/core/modules/LandscapeMgr.cpp:878
+#: src/core/modules/LandscapeMgr.cpp:880
 msgid "Landscape illumination"
 msgstr "Освітлення ландшафту"
 
-#: src/core/modules/LandscapeMgr.cpp:879
+#: src/core/modules/LandscapeMgr.cpp:881
 msgid "Landscape labels"
 msgstr "Мітки ландшафту"
 
-#: src/core/modules/LandscapeMgr.cpp:880
+#: src/core/modules/LandscapeMgr.cpp:882
 msgid "Light pollution data from locations database"
 msgstr "Дані щодо світлового забруднення з бази даних місцевостей"
 
-#: src/core/modules/LandscapeMgr.cpp:882
+#: src/core/modules/LandscapeMgr.cpp:884
 msgid "Increase light pollution"
 msgstr "Збільшити забруднення світлом"
 
-#: src/core/modules/LandscapeMgr.cpp:883
+#: src/core/modules/LandscapeMgr.cpp:885
 msgid "Reduce light pollution"
 msgstr "Зменшити забруднення світлом"
 
-#: src/core/modules/LandscapeMgr.cpp:884
+#: src/core/modules/LandscapeMgr.cpp:886
 msgid "Cyclic change in light pollution"
 msgstr "Циклічна зміна у забрудненні світлом"
 
-#: src/core/modules/LandscapeMgr.cpp:1374 src/scripting/StelScriptMgr.cpp:647
+#: src/core/modules/LandscapeMgr.cpp:1376 src/scripting/StelScriptMgr.cpp:647
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:101
 #: plugins/Oculars/src/gui/OcularDialog.cpp:627
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:257
@@ -832,7 +832,7 @@ msgid "Author"
 msgstr "Автор"
 
 #. TRANSLATORS: Unit of measure for distance - meter
-#: src/core/modules/LandscapeMgr.cpp:1380 src/gui/StelGuiItems.cpp:866
+#: src/core/modules/LandscapeMgr.cpp:1382 src/gui/StelGuiItems.cpp:866
 #: plugins/Satellites/src/Satellite.cpp:433
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1191
 #: plugins/Satellites/src/gui/SatellitesFilterDialog.cpp:134
@@ -840,7 +840,7 @@ msgctxt "distance"
 msgid "m"
 msgstr "м"
 
-#: src/core/modules/LandscapeMgr.cpp:1383 src/gui/ObsListDialog.cpp:298
+#: src/core/modules/LandscapeMgr.cpp:1385 src/gui/ObsListDialog.cpp:298
 #: src/ui_locationDialogGui.h:414 src/ui_obsListDialog.h:424
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:144
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:444
@@ -848,36 +848,36 @@ msgid "Location"
 msgstr "Розташування"
 
 #. TRANSLATORS: Unit of measure for pressure - hectopascals
-#: src/core/modules/LandscapeMgr.cpp:1405
+#: src/core/modules/LandscapeMgr.cpp:1407
 msgctxt "pressure"
 msgid "hPa"
 msgstr "гПа"
 
-#: src/core/modules/LandscapeMgr.cpp:1415
+#: src/core/modules/LandscapeMgr.cpp:1417
 msgid "extinction coefficient"
 msgstr "коефіцієнт поглинання"
 
-#: src/core/modules/LandscapeMgr.cpp:1418
+#: src/core/modules/LandscapeMgr.cpp:1420
 msgid "Atmospheric conditions"
 msgstr "Атмосферні умови"
 
-#: src/core/modules/LandscapeMgr.cpp:1425
+#: src/core/modules/LandscapeMgr.cpp:1427
 msgid "cd/m<sup>2</sup>"
 msgstr "кд/м<sup>2</sup>"
 
-#: src/core/modules/LandscapeMgr.cpp:1429
+#: src/core/modules/LandscapeMgr.cpp:1431
 msgid "ncd/m<sup>2</sup>"
 msgstr "нкд/м<sup>2</sup>"
 
-#: src/core/modules/LandscapeMgr.cpp:1434
+#: src/core/modules/LandscapeMgr.cpp:1436
 msgid "&mu;cd/m<sup>2</sup>"
 msgstr "мккд/м<sup>2</sup>"
 
-#: src/core/modules/LandscapeMgr.cpp:1439
+#: src/core/modules/LandscapeMgr.cpp:1441
 msgid "mcd/m<sup>2</sup>"
 msgstr "мкд/м<sup>2</sup>"
 
-#: src/core/modules/LandscapeMgr.cpp:1441
+#: src/core/modules/LandscapeMgr.cpp:1443
 #, qt-format
 msgid "<b>Light pollution</b>: %1 %2 (NELM: %3; Bortle class: %4)"
 msgstr "<b>Світлове забруднення</b>: %1 %2 (NELM: %3; клас за Бортлем: %4)"
@@ -6307,46 +6307,46 @@ msgstr "Довгота"
 msgid "Latitude"
 msgstr "Широта"
 
-#: src/gui/SearchDialog.cpp:492
+#: src/gui/SearchDialog.cpp:496
 msgctxt "search tool"
 msgid "Default"
 msgstr "Типовий"
 
-#: src/gui/SearchDialog.cpp:494
+#: src/gui/SearchDialog.cpp:498
 msgctxt "search tool"
 msgid "Range"
 msgstr "Діапазон"
 
-#: src/gui/SearchDialog.cpp:497
+#: src/gui/SearchDialog.cpp:501
 msgctxt "search tool"
 msgid "searches"
 msgstr "пошуки"
 
-#: src/gui/SearchDialog.cpp:623
+#: src/gui/SearchDialog.cpp:628
 msgid "Clear search history: delete all search objects data"
 msgstr "Спорожнити журнал пошуків: вилучити усі дані пошуку об'єктів"
 
-#: src/gui/SearchDialog.cpp:623
+#: src/gui/SearchDialog.cpp:628
 msgid "Clear search history: no data to delete"
 msgstr "Спорожнити журнал пошуку: немає даних для вилучення"
 
-#: src/gui/SearchDialog.cpp:1107
+#: src/gui/SearchDialog.cpp:1175
 msgid "Simbad Lookup Error"
 msgstr "Помилка під час пошуку у Simbad"
 
-#: src/gui/SearchDialog.cpp:1114
+#: src/gui/SearchDialog.cpp:1182
 msgid "Simbad Lookup"
 msgstr "Пошук у Simbad"
 
-#: src/gui/SearchDialog.cpp:1408
+#: src/gui/SearchDialog.cpp:1476
 msgid "University of Strasbourg (France)"
 msgstr "Стразбурзький університет (Франція)"
 
-#: src/gui/SearchDialog.cpp:1409
+#: src/gui/SearchDialog.cpp:1477
 msgid "Harvard University (USA)"
 msgstr "Гарвардський університет (США)"
 
-#: src/gui/SearchDialog.cpp:1491
+#: src/gui/SearchDialog.cpp:1559
 msgid "Paste and Search"
 msgstr "Вставити і шукати"
 
@@ -9970,10 +9970,10 @@ msgstr "&Копіювати"
 msgid "&Paste"
 msgstr "&Вставити"
 
-#: src/translations.h:627 plugins/Oculars/src/ui_ocularDialog.h:1536
-#: plugins/Oculars/src/ui_ocularDialog.h:1545
-#: plugins/Oculars/src/ui_ocularDialog.h:1551
-#: plugins/Oculars/src/ui_ocularDialog.h:1570
+#: src/translations.h:627 plugins/Oculars/src/ui_ocularDialog.h:1529
+#: plugins/Oculars/src/ui_ocularDialog.h:1538
+#: plugins/Oculars/src/ui_ocularDialog.h:1544
+#: plugins/Oculars/src/ui_ocularDialog.h:1563
 msgid "Delete"
 msgstr "Стерти"
 
@@ -16343,7 +16343,7 @@ msgid "Allow snap to selected object"
 msgstr "Дозволити прилипання до позначеного об'єкта"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:316
-#: plugins/Oculars/src/ui_ocularDialog.h:1578
+#: plugins/Oculars/src/ui_ocularDialog.h:1571
 #: plugins/Satellites/src/ui_satellitesDialog.h:1390
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:420
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:234
@@ -16368,7 +16368,7 @@ msgid "About"
 msgstr "Про програму"
 
 #: plugins/Oculars/src/Oculars.cpp:75 plugins/Oculars/src/Oculars.cpp:1490
-#: plugins/Oculars/src/ui_ocularDialog.h:1419
+#: plugins/Oculars/src/ui_ocularDialog.h:1412
 msgid "Oculars"
 msgstr "Окуляри"
 
@@ -16450,7 +16450,7 @@ msgstr ""
 "Не вдалося показати межу датчика: не визначено датчиків або телескопів."
 
 #: plugins/Oculars/src/Oculars.cpp:1491
-#: plugins/Oculars/src/ui_ocularDialog.h:1453
+#: plugins/Oculars/src/ui_ocularDialog.h:1446
 msgid "Ocular view"
 msgstr "Перегляд крізь окуляр"
 
@@ -16937,24 +16937,24 @@ msgid "Magnification factor:"
 msgstr "Коефіцієнт збільшення:"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:583
-#: plugins/Oculars/src/ui_ocularDialog.h:1575
+#: plugins/Oculars/src/ui_ocularDialog.h:1568
 msgid "Diameter:"
 msgstr "Діаметр:"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:588
-#: plugins/Oculars/src/ui_ocularDialog.h:1540
+#: plugins/Oculars/src/ui_ocularDialog.h:1533
 msgid "aFOV:"
 msgstr "Видиме ПЗ:"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:589
-#: plugins/Oculars/src/ui_ocularDialog.h:1541
-#: plugins/Oculars/src/ui_ocularDialog.h:1576
+#: plugins/Oculars/src/ui_ocularDialog.h:1534
+#: plugins/Oculars/src/ui_ocularDialog.h:1569
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:764
 msgid "Focal length:"
 msgstr "Фокусна відстань:"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:590
-#: plugins/Oculars/src/ui_ocularDialog.h:1537
+#: plugins/Oculars/src/ui_ocularDialog.h:1530
 msgid "Field stop:"
 msgstr "Польова діафрагма:"
 
@@ -17113,15 +17113,15 @@ msgstr ""
 "увімкненою сидеричною швидкістю лафета), щоб уникнути пересувань на понад 1 "
 "піксель ширини."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1420
+#: plugins/Oculars/src/ui_ocularDialog.h:1413
 msgid "Interface"
 msgstr "Інтерфейс"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1424
+#: plugins/Oculars/src/ui_ocularDialog.h:1417
 msgid "Arrow button scale (requires restart)"
 msgstr "Масштаб кнопки зі стрілкою (потребує перезапуску)"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1426
+#: plugins/Oculars/src/ui_ocularDialog.h:1419
 msgid ""
 "Mark it if you want the FOV value the same like at the startup of "
 "Stellarium."
@@ -17129,28 +17129,28 @@ msgstr ""
 "Позначте, якщо вам потрібне те значення поля зору, яке було на час запуску "
 "Stellarium."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1428
+#: plugins/Oculars/src/ui_ocularDialog.h:1421
 msgid "Restore FOV to initial values"
 msgstr "Відновити початкові значення параметрів поля зору"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1429
+#: plugins/Oculars/src/ui_ocularDialog.h:1422
 msgid "Show resolution criteria"
 msgstr "Показувати критерій роздільності"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1430
+#: plugins/Oculars/src/ui_ocularDialog.h:1423
 msgid "On-screen control panel"
 msgstr "Екранна панель керування"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1432
-#: plugins/Oculars/src/ui_ocularDialog.h:1436
+#: plugins/Oculars/src/ui_ocularDialog.h:1425
+#: plugins/Oculars/src/ui_ocularDialog.h:1429
 msgid "Font size of text on on-screen control panel"
 msgstr "Розмір шрифту тексту на екранній панелі керування"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1434
+#: plugins/Oculars/src/ui_ocularDialog.h:1427
 msgid "...font size"
 msgstr "…розмір шрифту"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1439
+#: plugins/Oculars/src/ui_ocularDialog.h:1432
 msgid ""
 "Mark it if you want the direction value the same like at the startup of "
 "Stellarium."
@@ -17158,112 +17158,112 @@ msgstr ""
 "Позначте, якщо хочете відновити початкові значення напрямку, які "
 "використовувалися під час запуску Stellarium."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1441
+#: plugins/Oculars/src/ui_ocularDialog.h:1434
 msgid "Restore direction to initial values"
 msgstr "Відновити початкові значення напрямку"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1443
+#: plugins/Oculars/src/ui_ocularDialog.h:1436
 msgid "Color for ocular circles and sensor frames"
 msgstr "Колір для кіл окулярів та рамок датчиків"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1446
+#: plugins/Oculars/src/ui_ocularDialog.h:1439
 msgid "Line Color"
 msgstr "Колір лінії"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1448
+#: plugins/Oculars/src/ui_ocularDialog.h:1441
 msgid "Color for text which is shown only when GUI is switched off."
 msgstr ""
 "Колір тексту, який буде показано, лише якщо вимкнено графічний інтерфейс."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1451
+#: plugins/Oculars/src/ui_ocularDialog.h:1444
 msgid "Text Color"
 msgstr "Колір тексту"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1452
+#: plugins/Oculars/src/ui_ocularDialog.h:1445
 msgid "Show oculars button on toolbar"
 msgstr "Показувати кнопку окулярів на панелі"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1455
+#: plugins/Oculars/src/ui_ocularDialog.h:1448
 msgid ""
 "Show FOV circles relative to the apparent FOV of the widest-angle ocular"
 msgstr ""
 "Показувати кола поля зору відносно видимого поля зору окуляра із найширшим "
 "кутом"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1457
+#: plugins/Oculars/src/ui_ocularDialog.h:1450
 msgid "Scale image circle"
 msgstr "Масштабувати зображення за колом"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1458
+#: plugins/Oculars/src/ui_ocularDialog.h:1451
 msgid "Hide grids and lines when enabled"
 msgstr "Приховати сітки і лінії, якщо увімкнено"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1459
+#: plugins/Oculars/src/ui_ocularDialog.h:1452
 msgid "Enable only if an object is selected"
 msgstr "Увімкнути, лише якщо позначено об’єкт"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1461
+#: plugins/Oculars/src/ui_ocularDialog.h:1454
 msgid "Show border circle"
 msgstr "Показувати межу колом"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1463
+#: plugins/Oculars/src/ui_ocularDialog.h:1456
 msgid "Show FOV outline"
 msgstr "Показувати контур поля зору"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1465
+#: plugins/Oculars/src/ui_ocularDialog.h:1458
 msgid "Apply limit for stellar magnitude based on telescope aperture"
 msgstr ""
 "Застосувати обмеження щодо зоряної величини на основі діафрагми телескопа"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1467
+#: plugins/Oculars/src/ui_ocularDialog.h:1460
 msgid "Auto-limit stellar magnitude"
 msgstr "Автообмеження зоряної величини"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1469
+#: plugins/Oculars/src/ui_ocularDialog.h:1462
 msgid "Show cardinal directions in equatorial coordinate system"
 msgstr "Показувати напрямки румбів у екваторіальній системі координат"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1471
+#: plugins/Oculars/src/ui_ocularDialog.h:1464
 msgid "Show compass rose"
 msgstr "Показувати румби"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1473
+#: plugins/Oculars/src/ui_ocularDialog.h:1466
 msgid "Align the crosshair in equatorial coordinate system"
 msgstr "Вирівняти перехрестя у екваторіальній системі координат"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1475
+#: plugins/Oculars/src/ui_ocularDialog.h:1468
 msgid "Align crosshair"
 msgstr "Вирівняти перехрестя"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1477
+#: plugins/Oculars/src/ui_ocularDialog.h:1470
 msgid "In ocular mode, allow some visibility outside ocular circle."
 msgstr "У режимі окуляра дозволити бачити зображення поза колом окуляра."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1479
+#: plugins/Oculars/src/ui_ocularDialog.h:1472
 msgid "Use semi-transparent mask"
 msgstr "Використовувати напівпрозору маску"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1481
+#: plugins/Oculars/src/ui_ocularDialog.h:1474
 msgid "Opacity of semi-transparent mask"
 msgstr "Непрозорість напівпрозорої маски"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1483
+#: plugins/Oculars/src/ui_ocularDialog.h:1476
 msgid "Sensor view"
 msgstr "Перегляд з датчика"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1485
+#: plugins/Oculars/src/ui_ocularDialog.h:1478
 msgid "Color for focuser overlay line"
 msgstr "Колір лінії накладки фокусувальника"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1487
+#: plugins/Oculars/src/ui_ocularDialog.h:1480
 msgid "Show focuser overlay"
 msgstr "Показувати накладку фокусувальника"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1488
+#: plugins/Oculars/src/ui_ocularDialog.h:1481
 msgid "Use degrees and minutes for FOV of CCD"
 msgstr "Градуси і мінути для поля зору ПЗЗ"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1490
+#: plugins/Oculars/src/ui_ocularDialog.h:1483
 msgid ""
 "Enable automatic switch of mount type from the telescope settings for "
 "horizontal orientation of CCD frame."
@@ -17271,42 +17271,42 @@ msgstr ""
 "Увімкнути автоматичне перемикання типу лафета із параметрів телескопа для "
 "горизонтальної орієнтації кадру ПЗЗ."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1492
+#: plugins/Oculars/src/ui_ocularDialog.h:1485
 msgid "Enable automatic switch of mount type"
 msgstr "Увімкнути автоматичне перемикання типу лафета"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1493
+#: plugins/Oculars/src/ui_ocularDialog.h:1486
 msgid "Use size of focuser:"
 msgstr "Розмір фокусувальника:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1494
+#: plugins/Oculars/src/ui_ocularDialog.h:1487
 msgid "Use horizontal coordinates instead equatorial coordinates"
 msgstr ""
 "Використовувати горизонтальні координати замість екваторіальних координат"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1495
+#: plugins/Oculars/src/ui_ocularDialog.h:1488
 msgid "Overlay size (px)"
 msgstr "Розмір накладки (у пк)"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1497
+#: plugins/Oculars/src/ui_ocularDialog.h:1490
 msgid "Horizontal size (width)"
 msgstr "Горизонтальний розмір (ширина)"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1500
+#: plugins/Oculars/src/ui_ocularDialog.h:1493
 msgid "Vertical size (height)"
 msgstr "Вертикальний розмір (висота)"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1503
+#: plugins/Oculars/src/ui_ocularDialog.h:1496
 msgid "Enable pixel grid of sensor binned pixels within sensor crop overlay."
 msgstr ""
 "Увімкнути піксельну ґратку із пікселями поділок датчика у межах накладки "
 "обрізання датчика."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1505
+#: plugins/Oculars/src/ui_ocularDialog.h:1498
 msgid "Show pixel grid"
 msgstr "Показувати піксельну ґратку"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1507
+#: plugins/Oculars/src/ui_ocularDialog.h:1500
 msgid ""
 "Enable a rectangular overlay showing the effective size of a number of "
 "pixels."
@@ -17314,95 +17314,95 @@ msgstr ""
 "Увімкнути прямокутну накладку із показом ефективного розміру кількості "
 "пікселів."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1509
+#: plugins/Oculars/src/ui_ocularDialog.h:1502
 msgid "Show sensor crop overlay"
 msgstr "Показувати накладку обрізання датчика"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1510
+#: plugins/Oculars/src/ui_ocularDialog.h:1503
 msgid "Enable autozoom when switching CCD"
 msgstr "Увімкнути автомасштабування при перемиканні ПЗЗ"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1512
+#: plugins/Oculars/src/ui_ocularDialog.h:1505
 msgid ""
 "Show maximum exposure time for Solar system objects to avoid movement streak"
 msgstr ""
 "Показувати максимальний час експонування для об'єктів Сонячної системи з "
 "метою уникнути смуги пересування"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1514
+#: plugins/Oculars/src/ui_ocularDialog.h:1507
 msgid "Show max exposure time for moving objects"
 msgstr "Показувати максимальний час експонування для рухомих об'єктів"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1515
+#: plugins/Oculars/src/ui_ocularDialog.h:1508
 msgid "Telrad view"
 msgstr "Перегляд видошукача"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1519
+#: plugins/Oculars/src/ui_ocularDialog.h:1512
 msgctxt "abbreviation"
 msgid "FOV:"
 msgstr "Поле зору:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1521
+#: plugins/Oculars/src/ui_ocularDialog.h:1514
 msgid "FOV for circle 1"
 msgstr "Поле зору для кола 1"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1524
+#: plugins/Oculars/src/ui_ocularDialog.h:1517
 msgid "FOV for circle 2"
 msgstr "Поле зору для кола 2"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1527
+#: plugins/Oculars/src/ui_ocularDialog.h:1520
 msgid "FOV for circle 3"
 msgstr "Поле зору для кола 3"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1530
+#: plugins/Oculars/src/ui_ocularDialog.h:1523
 msgid "FOV for circle 4"
 msgstr "Поле зору для кола 4"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1532
+#: plugins/Oculars/src/ui_ocularDialog.h:1525
 msgid "Restore original Telrad FOV"
 msgstr "Відновити початкове поле зору видошукача"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1533
+#: plugins/Oculars/src/ui_ocularDialog.h:1526
 msgid "Enable autozoom when switching Telrad"
 msgstr "Увімкнути автомасштабуванян при перемиканні видошукача"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1534
+#: plugins/Oculars/src/ui_ocularDialog.h:1527
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:226
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:401
 msgid "General"
 msgstr "Загальне"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1535
-#: plugins/Oculars/src/ui_ocularDialog.h:1544
-#: plugins/Oculars/src/ui_ocularDialog.h:1550
-#: plugins/Oculars/src/ui_ocularDialog.h:1569
+#: plugins/Oculars/src/ui_ocularDialog.h:1528
+#: plugins/Oculars/src/ui_ocularDialog.h:1537
+#: plugins/Oculars/src/ui_ocularDialog.h:1543
+#: plugins/Oculars/src/ui_ocularDialog.h:1562
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:174
 msgid "Add"
 msgstr "Додати"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1538
+#: plugins/Oculars/src/ui_ocularDialog.h:1531
 msgid "Has permanent cross-hairs"
 msgstr "Має постійні перехрестя"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1539
+#: plugins/Oculars/src/ui_ocularDialog.h:1532
 msgid "Binoculars"
 msgstr "Бінокль"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1542
-#: plugins/Oculars/src/ui_ocularDialog.h:1546
-#: plugins/Oculars/src/ui_ocularDialog.h:1556
-#: plugins/Oculars/src/ui_ocularDialog.h:1571
+#: plugins/Oculars/src/ui_ocularDialog.h:1535
+#: plugins/Oculars/src/ui_ocularDialog.h:1539
+#: plugins/Oculars/src/ui_ocularDialog.h:1549
+#: plugins/Oculars/src/ui_ocularDialog.h:1564
 #: plugins/Satellites/src/ui_satellitesDialog.h:1301
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:559
 #: plugins/TelescopeControl/src/gui/ui_storedPointsDialog.h:203
 msgid "Name:"
 msgstr "Назва:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1543
+#: plugins/Oculars/src/ui_ocularDialog.h:1536
 msgid "Eyepieces"
 msgstr "Окуляри"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1547
+#: plugins/Oculars/src/ui_ocularDialog.h:1540
 msgid ""
 "Values of multiplicity >1 expand the focal length (Barlow lens). Values of "
 "multiplicity <1 reduce the focal length (Shapley lens)."
@@ -17410,85 +17410,85 @@ msgstr ""
 "Значення кратності >1 збільшують фокусну відстань (лінза Барлоу).Значення "
 "кратності <1 зменшують фокусну відстань (лінза Шеплі)."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1548
+#: plugins/Oculars/src/ui_ocularDialog.h:1541
 msgid "Multiplier:"
 msgstr "Кратність:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1549
+#: plugins/Oculars/src/ui_ocularDialog.h:1542
 msgid "Lenses"
 msgstr "Лінзи"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1552
+#: plugins/Oculars/src/ui_ocularDialog.h:1545
 msgid "Off-Axis guider"
 msgstr "Позаосьове наведення"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1553
+#: plugins/Oculars/src/ui_ocularDialog.h:1546
 msgid "Resolution y:"
 msgstr "Роздільність за y:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1554
+#: plugins/Oculars/src/ui_ocularDialog.h:1547
 msgid "Binning x:"
 msgstr "Поділки x:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1555
+#: plugins/Oculars/src/ui_ocularDialog.h:1548
 msgid "Resolution x:"
 msgstr "Роздільність за x:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1557
+#: plugins/Oculars/src/ui_ocularDialog.h:1550
 msgid "Prism/CCD height:"
 msgstr "Висота призми/ПЗЗ:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1559
+#: plugins/Oculars/src/ui_ocularDialog.h:1552
 msgid ""
 "This is the distance from the center of the Imaging Sensor to the center of "
 "the Prism"
 msgstr "Це відстань від центра фотодатчика до центра призми"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1561
+#: plugins/Oculars/src/ui_ocularDialog.h:1554
 msgid "Prism/CCD distance:"
 msgstr "Відстань до призми/ПЗЗ:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1562
+#: plugins/Oculars/src/ui_ocularDialog.h:1555
 msgid "Rotation Angle:"
 msgstr "Кут обертання:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1563
+#: plugins/Oculars/src/ui_ocularDialog.h:1556
 msgid "Binning y:"
 msgstr "Поділки y:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1564
+#: plugins/Oculars/src/ui_ocularDialog.h:1557
 msgid "Prism/CCD width:"
 msgstr "Ширина призми/ПЗЗ:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1565
+#: plugins/Oculars/src/ui_ocularDialog.h:1558
 msgid "Chip height:"
 msgstr "Висота чипа:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1566
+#: plugins/Oculars/src/ui_ocularDialog.h:1559
 msgid "Chip width:"
 msgstr "Ширина чипа:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1567
+#: plugins/Oculars/src/ui_ocularDialog.h:1560
 msgid "Position angle:"
 msgstr "Позиційний кут:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1568
+#: plugins/Oculars/src/ui_ocularDialog.h:1561
 msgid "Sensors"
 msgstr "Датчики"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1572
+#: plugins/Oculars/src/ui_ocularDialog.h:1565
 msgid "Horizontal flip"
 msgstr "Віддзеркалити горизонтально"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1573
+#: plugins/Oculars/src/ui_ocularDialog.h:1566
 msgid "Vertical flip"
 msgstr "Віддзеркалити вертикально"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1574
+#: plugins/Oculars/src/ui_ocularDialog.h:1567
 msgid "Equatorial Mount"
 msgstr "Екваторіальний лафет"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1577
+#: plugins/Oculars/src/ui_ocularDialog.h:1570
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:395
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:406
 msgid "Telescopes"
@@ -26829,70 +26829,70 @@ msgstr "Підтверджений"
 msgid "Generic"
 msgstr "Загальні"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:511
+#: plugins/MeteorShowers/src/MeteorShower.cpp:535
 msgid "generic data"
 msgstr "загальні дані"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:512
+#: plugins/MeteorShowers/src/MeteorShower.cpp:536
 msgid "confirmed data"
 msgstr "підтверджені дані"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:513
+#: plugins/MeteorShowers/src/MeteorShower.cpp:537
 msgid "inactive"
 msgstr "неактивний"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:546
+#: plugins/MeteorShowers/src/MeteorShower.cpp:570
 msgid "IAU shower number"
 msgstr "Номер потоку МАО"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:547
+#: plugins/MeteorShowers/src/MeteorShower.cpp:571
 msgid "Radiant drift (per solar longitude)"
 msgstr "Дрейф радіанта (за сонячною довготою)"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:553
+#: plugins/MeteorShowers/src/MeteorShower.cpp:577
 msgid "Geocentric meteoric velocity"
 msgstr "Геоцентрична швидкість метеоритів"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:561
+#: plugins/MeteorShowers/src/MeteorShower.cpp:585
 msgid "The population index"
 msgstr "Індекс щільності"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:564
+#: plugins/MeteorShowers/src/MeteorShower.cpp:588
 msgid "Parent body"
 msgstr "Основне тіло"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:566
+#: plugins/MeteorShowers/src/MeteorShower.cpp:590
 msgid "Activity"
 msgstr "Активність"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:614
-#: plugins/MeteorShowers/src/MeteorShower.cpp:639
+#: plugins/MeteorShowers/src/MeteorShower.cpp:638
+#: plugins/MeteorShowers/src/MeteorShower.cpp:663
 msgid "Solar longitude "
 msgstr "Сонячна довгота "
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:622
+#: plugins/MeteorShowers/src/MeteorShower.cpp:646
 msgctxt "meteor shower activity"
 msgid "Maximum"
 msgstr "Максимум"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:699
-#: plugins/MeteorShowers/src/MeteorShower.cpp:722
+#: plugins/MeteorShowers/src/MeteorShower.cpp:723
+#: plugins/MeteorShowers/src/MeteorShower.cpp:746
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:276
 msgid "Current ZHR"
 msgstr "Поточне ЗГЧ"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:702
-#: plugins/MeteorShowers/src/MeteorShower.cpp:732
+#: plugins/MeteorShowers/src/MeteorShower.cpp:726
+#: plugins/MeteorShowers/src/MeteorShower.cpp:756
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:279
 msgid "Local Hourly Rate"
 msgstr "Локальне годинне число"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:704
-#: plugins/MeteorShowers/src/MeteorShower.cpp:735
+#: plugins/MeteorShowers/src/MeteorShower.cpp:728
+#: plugins/MeteorShowers/src/MeteorShower.cpp:759
 msgid "Limiting magnitude"
 msgstr "Обмеження на величину"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:710
+#: plugins/MeteorShowers/src/MeteorShower.cpp:734
 msgid "variable"
 msgstr "змінна"
 
@@ -34292,7 +34292,7 @@ msgid "Browse for an image..."
 msgstr "Вибрати зображення…"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:743
-msgctxt "A verb in imperative, used on a button that fixes a problem."
+msgctxt "A verb used on a button that fixes a problem."
 msgid "Fix"
 msgstr "Виправити"
 
