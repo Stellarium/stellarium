@@ -122,6 +122,7 @@ void CustomObjectMgr::init()
 	texPointer = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/pointeur2.png");
 
 	customObjects.clear();
+	persistentObjects.clear();
 
 	setMarkersColor(Vec3f(conf->value("color/custom_marker_color", "0.1,1.0,0.1").toString()));
 	setMarkersSize(conf->value("gui/custom_marker_size", 5.f).toFloat());
@@ -134,7 +135,8 @@ void CustomObjectMgr::init()
 
 void CustomObjectMgr::deinit()
 {
-	customObjects.clear();	
+	customObjects.clear();
+	persistentObjects.clear();
 	texPointer.clear();
 }
 
@@ -147,6 +149,28 @@ float CustomObjectMgr::getSelectPriority() const
 {
 	return CustomObject::selectPriority;
 }
+
+void CustomObjectMgr::removePersistentObjects()
+{
+	setSelected("");
+	persistentObjects.clear();
+	// TODO: Flush empty list to disk
+	emit StelApp::getInstance().getCore()->updateSearchLists();
+}
+
+void CustomObjectMgr::addPersistentObject(const QString& designation, Vec3d coordinates)
+{
+	if (!designation.isEmpty())
+	{
+		CustomObjectP custObj(new CustomObject(designation, coordinates, false));
+		if (custObj->initialized)
+			persistentObjects.append(custObj);
+
+		// TODO: Flush list of object to disk
+		emit StelApp::getInstance().getCore()->updateSearchLists();
+	}
+}
+
 
 void CustomObjectMgr::addCustomObject(const QString& designation, Vec3d coordinates, bool isVisible)
 {
@@ -236,6 +260,12 @@ void CustomObjectMgr::draw(StelCore* core)
 			cObj->draw(core, &painter);
 	}
 
+	for (const auto& pObj : std::as_const(persistentObjects))
+	{
+		if (pObj && pObj->initialized)
+			pObj->draw(core, &painter);
+	}
+
 	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer())
 		drawPointer(core, painter);
 }
@@ -284,6 +314,19 @@ QList<StelObjectP> CustomObjectMgr::searchAround(const Vec3d& av, double limitFo
 		}
 	}
 
+	for (const auto& pObj : persistentObjects)
+	{
+		if (pObj->initialized)
+		{
+			equPos = pObj->getJ2000EquatorialPos(core);
+			equPos.normalize();
+			if (equPos.dot(v) >= cosLimFov)
+			{
+				result.append(qSharedPointerCast<StelObject>(pObj));
+			}
+		}
+	}
+
 	return result;
 }
 
@@ -295,6 +338,12 @@ StelObjectP CustomObjectMgr::searchByName(const QString& englishName) const
 			return qSharedPointerCast<StelObject>(cObj);
 	}
 
+	for (const auto& pObj : persistentObjects)
+	{
+		if (pObj->getEnglishName().toUpper() == englishName.toUpper())
+			return qSharedPointerCast<StelObject>(pObj);
+	}
+
 	return Q_NULLPTR;
 }
 
@@ -304,6 +353,12 @@ StelObjectP CustomObjectMgr::searchByNameI18n(const QString& nameI18n) const
 	{
 		if (cObj->getNameI18n().toUpper() == nameI18n.toUpper())
 			return qSharedPointerCast<StelObject>(cObj);
+	}
+
+	for (const auto& pObj : persistentObjects)
+	{
+		if (pObj->getNameI18n().toUpper() == nameI18n.toUpper())
+			return qSharedPointerCast<StelObject>(pObj);
 	}
 
 	return Q_NULLPTR;
@@ -319,12 +374,21 @@ QStringList CustomObjectMgr::listAllObjects(bool inEnglish) const
 		{
 			result << cObj->getEnglishName();
 		}
+		for (const auto& pObj : persistentObjects)
+		{
+			result << pObj->getEnglishName();
+		}
+
 	}
 	else
 	{
 		for (const auto& cObj : customObjects)
 		{
 			result << cObj->getNameI18n();
+		}
+		for (const auto& pObj : persistentObjects)
+		{
+			result << pObj->getNameI18n();
 		}
 	}
 	return result;
@@ -361,6 +425,11 @@ CustomObjectP CustomObjectMgr::searchByEnglishName(QString customObjectEnglishNa
 	{
 		if (p->getEnglishName() == customObjectEnglishName)
 			return p;
+	}
+	for (const auto& po : persistentObjects)
+	{
+		if (po->getEnglishName() == customObjectEnglishName)
+			return po;
 	}
 	return CustomObjectP();
 }

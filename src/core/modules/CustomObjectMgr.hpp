@@ -75,6 +75,14 @@ public:
 	//! @return set the event as accepted if it was intercepted
 	void handleMouseClicks(class QMouseEvent* e) override;
 
+	//! Add persistent object on the sky
+	//! @param designation - designation of custom object
+	//! @param coordinates - coordinates of custom object
+	void addPersistentObject(const QString& designation, Vec3d coordinates);
+
+	//! Remove all persistent objects
+	void removePersistentObjects();
+
 public slots:
 	///////////////////////////////////////////////////////////////////////////
 	// Other public methods
@@ -166,7 +174,7 @@ private:
 	QFont font;
 	QSettings* conf;
 	StelTextureSP texPointer;
-	QList<CustomObjectP> customObjects;
+	QList<CustomObjectP> customObjects, persistentObjects;
 
 	Vec3f hightlightColor;
 	int countMarkers;
