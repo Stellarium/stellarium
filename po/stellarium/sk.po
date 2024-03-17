@@ -8,16 +8,16 @@
 # cardinot <mcardinot@gmail.com>, 2022
 # Alexander V. Wolf <alex.v.wolf@gmail.com>, 2023
 # Juraj Kubica <juraj.kubica@seznam.cz>, 2023
-# Lubomir Hambalek <lubomir.hambalek@gmail.com>, 2023
+# Lubomir Hambalek <lubomir.hambalek@gmail.com>, 2024
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2024-03-01 08:54+0700\n"
+"POT-Creation-Date: 2024-03-15 12:19+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
-"Last-Translator: Lubomir Hambalek <lubomir.hambalek@gmail.com>, 2023\n"
+"Last-Translator: Lubomir Hambalek <lubomir.hambalek@gmail.com>, 2024\n"
 "Language-Team: Slovak (https://app.transifex.com/stellarium/teams/80998/sk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -42,7 +42,7 @@ msgstr ""
 #: plugins/Supernovae/src/Supernova.cpp:144 plugins/Novae/src/Nova.cpp:150
 #: plugins/Quasars/src/Quasar.cpp:125 plugins/Pulsars/src/Pulsar.cpp:189
 #: plugins/Pulsars/src/Pulsar.cpp:191 plugins/Exoplanets/src/Exoplanet.cpp:320
-#: plugins/MeteorShowers/src/MeteorShower.cpp:525
+#: plugins/MeteorShowers/src/MeteorShower.cpp:549
 #: plugins/MissingStars/src/MissingStar.cpp:130
 msgid "Type"
 msgstr "Typ"
@@ -67,7 +67,7 @@ msgstr "asterizmus"
 #: src/core/modules/ConstellationMgr.cpp:131 src/core/modules/StarMgr.cpp:461
 #: src/core/modules/GridLinesMgr.cpp:2033
 #: src/core/modules/SpecialMarkersMgr.cpp:310
-#: src/core/modules/LandscapeMgr.cpp:870
+#: src/core/modules/LandscapeMgr.cpp:872
 #: src/core/modules/NomenclatureMgr.cpp:84 src/core/modules/NebulaMgr.cpp:358
 #: src/core/modules/NebulaMgr.cpp:359 src/core/modules/SolarSystem.cpp:307
 #: src/core/modules/MilkyWay.cpp:107 src/core/modules/ZodiacalLight.cpp:112
@@ -336,7 +336,7 @@ msgstr "Antapex"
 #: src/core/modules/Planet.cpp:1232 src/gui/AstroCalcDialog.cpp:9134
 #: plugins/Satellites/src/Satellite.cpp:360
 #: plugins/Satellites/src/Satellite.cpp:403
-#: plugins/MeteorShowers/src/MeteorShower.cpp:556
+#: plugins/MeteorShowers/src/MeteorShower.cpp:580
 msgctxt "speed"
 msgid "km/s"
 msgstr "km/s"
@@ -732,12 +732,12 @@ msgctxt "compass direction"
 msgid "NbW"
 msgstr "ZodS"
 
-#: src/core/modules/LandscapeMgr.cpp:434 src/core/modules/LandscapeMgr.cpp:751
+#: src/core/modules/LandscapeMgr.cpp:434 src/core/modules/LandscapeMgr.cpp:753
 #: src/gui/ViewDialog.cpp:649
 msgid "Loading..."
 msgstr "Nahrávam..."
 
-#: src/core/modules/LandscapeMgr.cpp:434 src/core/modules/LandscapeMgr.cpp:751
+#: src/core/modules/LandscapeMgr.cpp:434 src/core/modules/LandscapeMgr.cpp:753
 msgctxt "percentage of done"
 msgid "done"
 msgstr "hotovo"
@@ -746,7 +746,7 @@ msgstr "hotovo"
 msgid "Switching models..."
 msgstr "Vymieňam model..."
 
-#: src/core/modules/LandscapeMgr.cpp:480 src/core/modules/LandscapeMgr.cpp:746
+#: src/core/modules/LandscapeMgr.cpp:480 src/core/modules/LandscapeMgr.cpp:748
 msgid "Loaded successfully"
 msgstr "Úspešne nahraté"
 
@@ -756,61 +756,61 @@ msgid ""
 msgstr ""
 "Model atmosféry ShowMySky spadol. Načítavam miesto neho Preethamov model."
 
-#: src/core/modules/LandscapeMgr.cpp:871
+#: src/core/modules/LandscapeMgr.cpp:873
 msgid "Atmosphere"
 msgstr "Atmosféra"
 
-#: src/core/modules/LandscapeMgr.cpp:872
+#: src/core/modules/LandscapeMgr.cpp:874
 msgid "Fog"
 msgstr "Hmla"
 
-#: src/core/modules/LandscapeMgr.cpp:873 src/ui_viewDialog.h:4274
+#: src/core/modules/LandscapeMgr.cpp:875 src/ui_viewDialog.h:4274
 #: src/ui_configurationDialog.h:1886
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:343
 msgid "Cardinal points"
 msgstr "Svetové strany"
 
-#: src/core/modules/LandscapeMgr.cpp:874
+#: src/core/modules/LandscapeMgr.cpp:876
 msgid "Ordinal (Intercardinal) points"
 msgstr "Bežné (dodatočné) svetové strany"
 
-#: src/core/modules/LandscapeMgr.cpp:875
+#: src/core/modules/LandscapeMgr.cpp:877
 msgid "Secondary Intercardinal points"
 msgstr "Druhotné dodatočné svetové strany"
 
-#: src/core/modules/LandscapeMgr.cpp:876
+#: src/core/modules/LandscapeMgr.cpp:878
 msgid "Tertiary Intercardinal points"
 msgstr "Tretie dodatočné svetové strany"
 
-#: src/core/modules/LandscapeMgr.cpp:877
+#: src/core/modules/LandscapeMgr.cpp:879
 msgid "Ground"
 msgstr "Terén"
 
-#: src/core/modules/LandscapeMgr.cpp:878
+#: src/core/modules/LandscapeMgr.cpp:880
 msgid "Landscape illumination"
 msgstr "Osvetlenie terénu"
 
-#: src/core/modules/LandscapeMgr.cpp:879
+#: src/core/modules/LandscapeMgr.cpp:881
 msgid "Landscape labels"
 msgstr "Názvy terénu"
 
-#: src/core/modules/LandscapeMgr.cpp:880
+#: src/core/modules/LandscapeMgr.cpp:882
 msgid "Light pollution data from locations database"
 msgstr "Údaje o svetelnom znečistení podľa databázy lokalít"
 
-#: src/core/modules/LandscapeMgr.cpp:882
+#: src/core/modules/LandscapeMgr.cpp:884
 msgid "Increase light pollution"
 msgstr "Zvýšiť svetelné znečistenie"
 
-#: src/core/modules/LandscapeMgr.cpp:883
+#: src/core/modules/LandscapeMgr.cpp:885
 msgid "Reduce light pollution"
 msgstr "Znížiť svetelné znečistenie"
 
-#: src/core/modules/LandscapeMgr.cpp:884
+#: src/core/modules/LandscapeMgr.cpp:886
 msgid "Cyclic change in light pollution"
 msgstr "Pravidelná zmena svetelného znečistenia"
 
-#: src/core/modules/LandscapeMgr.cpp:1374 src/scripting/StelScriptMgr.cpp:647
+#: src/core/modules/LandscapeMgr.cpp:1376 src/scripting/StelScriptMgr.cpp:647
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:101
 #: plugins/Oculars/src/gui/OcularDialog.cpp:627
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:257
@@ -833,7 +833,7 @@ msgid "Author"
 msgstr "Autor"
 
 #. TRANSLATORS: Unit of measure for distance - meter
-#: src/core/modules/LandscapeMgr.cpp:1380 src/gui/StelGuiItems.cpp:866
+#: src/core/modules/LandscapeMgr.cpp:1382 src/gui/StelGuiItems.cpp:866
 #: plugins/Satellites/src/Satellite.cpp:433
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1191
 #: plugins/Satellites/src/gui/SatellitesFilterDialog.cpp:134
@@ -841,7 +841,7 @@ msgctxt "distance"
 msgid "m"
 msgstr "m"
 
-#: src/core/modules/LandscapeMgr.cpp:1383 src/gui/ObsListDialog.cpp:298
+#: src/core/modules/LandscapeMgr.cpp:1385 src/gui/ObsListDialog.cpp:298
 #: src/ui_locationDialogGui.h:414 src/ui_obsListDialog.h:424
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:144
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:444
@@ -849,36 +849,36 @@ msgid "Location"
 msgstr "Zemepisná poloha"
 
 #. TRANSLATORS: Unit of measure for pressure - hectopascals
-#: src/core/modules/LandscapeMgr.cpp:1405
+#: src/core/modules/LandscapeMgr.cpp:1407
 msgctxt "pressure"
 msgid "hPa"
 msgstr "hPa"
 
-#: src/core/modules/LandscapeMgr.cpp:1415
+#: src/core/modules/LandscapeMgr.cpp:1417
 msgid "extinction coefficient"
 msgstr "koeficient extinkcie"
 
-#: src/core/modules/LandscapeMgr.cpp:1418
+#: src/core/modules/LandscapeMgr.cpp:1420
 msgid "Atmospheric conditions"
 msgstr "atmosférické podmienky"
 
-#: src/core/modules/LandscapeMgr.cpp:1425
+#: src/core/modules/LandscapeMgr.cpp:1427
 msgid "cd/m<sup>2</sup>"
 msgstr "cd/m<sup>2</sup>"
 
-#: src/core/modules/LandscapeMgr.cpp:1429
+#: src/core/modules/LandscapeMgr.cpp:1431
 msgid "ncd/m<sup>2</sup>"
 msgstr "ncd/m<sup>2</sup>"
 
-#: src/core/modules/LandscapeMgr.cpp:1434
+#: src/core/modules/LandscapeMgr.cpp:1436
 msgid "&mu;cd/m<sup>2</sup>"
 msgstr "&mu;cd/m<sup>2</sup>"
 
-#: src/core/modules/LandscapeMgr.cpp:1439
+#: src/core/modules/LandscapeMgr.cpp:1441
 msgid "mcd/m<sup>2</sup>"
 msgstr "mcd/m<sup>2</sup>"
 
-#: src/core/modules/LandscapeMgr.cpp:1441
+#: src/core/modules/LandscapeMgr.cpp:1443
 #, qt-format
 msgid "<b>Light pollution</b>: %1 %2 (NELM: %3; Bortle class: %4)"
 msgstr "<b>Svetelné znečistenie</b>: %1 %2 (NELM: %3; Bortleho trieda: %4)"
@@ -962,7 +962,7 @@ msgstr "Výška Slnka"
 
 #: src/core/modules/NomenclatureItem.cpp:287
 msgid "Origin of name"
-msgstr ""
+msgstr "Pôvod mena"
 
 #: src/core/modules/NomenclatureItem.cpp:598
 #: src/core/modules/NomenclatureItem.cpp:599
@@ -3266,19 +3266,19 @@ msgstr "Pridať 1 gaussov rok"
 
 #: src/core/StelCore.cpp:332
 msgid "Add 1 calendar month"
-msgstr ""
+msgstr "Pridať 1 kalendárny mesiac"
 
 #: src/core/StelCore.cpp:333
 msgid "Add 1 calendar year"
-msgstr ""
+msgstr "Pridať 1 kalendárny rok"
 
 #: src/core/StelCore.cpp:334
 msgid "Add 10 calendar years"
-msgstr ""
+msgstr "Pridať 10 kalendárnych rokov"
 
 #: src/core/StelCore.cpp:335
 msgid "Add 100 calendar years"
-msgstr ""
+msgstr "Pridať 100 kalendárnych rokov"
 
 #: src/core/StelCore.cpp:336
 msgid "Subtract 1 sidereal day"
@@ -3354,19 +3354,19 @@ msgstr "Ubrať 1 gaussov rok"
 
 #: src/core/StelCore.cpp:354
 msgid "Subtract 1 calendar month"
-msgstr ""
+msgstr "Ubrať 1 kalendárny mesiac"
 
 #: src/core/StelCore.cpp:355
 msgid "Subtract 1 calendar year"
-msgstr ""
+msgstr "Ubrať 1 kalendárny rok"
 
 #: src/core/StelCore.cpp:356
 msgid "Subtract 10 calendar years"
-msgstr ""
+msgstr "Ubrať 10 kalendárnych rokov"
 
 #: src/core/StelCore.cpp:357
 msgid "Subtract 100 calendar years"
-msgstr ""
+msgstr "Ubrať 100 kalendárnych rokov"
 
 #: src/core/StelCore.cpp:359
 msgid "Set home planet to selected planet"
@@ -6249,47 +6249,47 @@ msgstr "Dĺžka"
 msgid "Latitude"
 msgstr "Šírka"
 
-#: src/gui/SearchDialog.cpp:492
+#: src/gui/SearchDialog.cpp:496
 msgctxt "search tool"
 msgid "Default"
 msgstr "Predvolené"
 
-#: src/gui/SearchDialog.cpp:494
+#: src/gui/SearchDialog.cpp:498
 msgctxt "search tool"
 msgid "Range"
 msgstr "Rozsah"
 
-#: src/gui/SearchDialog.cpp:497
+#: src/gui/SearchDialog.cpp:501
 msgctxt "search tool"
 msgid "searches"
 msgstr "hľadania"
 
-#: src/gui/SearchDialog.cpp:623
+#: src/gui/SearchDialog.cpp:628
 msgid "Clear search history: delete all search objects data"
 msgstr ""
 "Vymazanie histórie hľadania: vymazať dáta o všetkých hľadaných objektoch"
 
-#: src/gui/SearchDialog.cpp:623
+#: src/gui/SearchDialog.cpp:628
 msgid "Clear search history: no data to delete"
 msgstr "Vymazanie histórie hľadania: žiadne dáta na vymazanie"
 
-#: src/gui/SearchDialog.cpp:1107
+#: src/gui/SearchDialog.cpp:1175
 msgid "Simbad Lookup Error"
 msgstr "Chyba čítania zo Simbad-u"
 
-#: src/gui/SearchDialog.cpp:1114
+#: src/gui/SearchDialog.cpp:1182
 msgid "Simbad Lookup"
 msgstr "Vyhľadávanie v Simbad-e"
 
-#: src/gui/SearchDialog.cpp:1408
+#: src/gui/SearchDialog.cpp:1476
 msgid "University of Strasbourg (France)"
 msgstr "Univerzita v Štrasburgu (Francúzsko)"
 
-#: src/gui/SearchDialog.cpp:1409
+#: src/gui/SearchDialog.cpp:1477
 msgid "Harvard University (USA)"
 msgstr "Harvardova univerzita (USA)"
 
-#: src/gui/SearchDialog.cpp:1491
+#: src/gui/SearchDialog.cpp:1559
 msgid "Paste and Search"
 msgstr "Vložiť a hľadať"
 
@@ -6475,7 +6475,7 @@ msgstr "Objekty slnečnej sústavy: planéty"
 
 #: src/gui/AstroCalcDialog.cpp:1010
 msgid "Almanac: Sun, Moon and naked-eye planets"
-msgstr ""
+msgstr "Ročenka: Slnko, Mesiac a planéty viditeľné okom"
 
 #: src/gui/AstroCalcDialog.cpp:1073
 msgid "Elevation of object at moment of upper culmination"
@@ -8089,7 +8089,7 @@ msgstr "nový zoznam"
 
 #: src/gui/ObsListDialog.cpp:223
 msgid "Select observing lists directory"
-msgstr ""
+msgstr "Vybrať adresár pre zoznamy pozorovaní"
 
 #: src/gui/ObsListDialog.cpp:290
 msgid "Object designation"
@@ -8111,7 +8111,7 @@ msgstr "Terén"
 
 #: src/gui/ObsListDialog.cpp:589
 msgid "Error during conversion. Please see logfile for details."
-msgstr ""
+msgstr "Chyba pri konverzii. Pre viac detailov si pozrite súbor logu."
 
 #: src/gui/ObsListDialog.cpp:701
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:219
@@ -8122,6 +8122,8 @@ msgstr "Poznámka"
 #: src/gui/ObsListDialog.cpp:701
 msgid "Some bookmarked objects were not found. See logfile for details."
 msgstr ""
+"Niektoré uložené objekty sa nenašli. Pre viac detailov si pozrite súbor "
+"logu."
 
 #: src/gui/ObsListDialog.cpp:943
 msgid "New Observation List"
@@ -9528,7 +9530,7 @@ msgstr "Náhodná poloha"
 #. TRANSLATORS: Name of script
 #: src/translations.h:567
 msgid "Jupiter Moons"
-msgstr ""
+msgstr "Mesiace Jupitera"
 
 #. TRANSLATORS: Description of the landscape tour script.
 #: src/translations.h:573
@@ -9851,7 +9853,7 @@ msgstr ""
 
 #: src/translations.h:618
 msgid "Jupiter's Moons Orbital Simulation"
-msgstr ""
+msgstr "Simulácia obežných dráh mesiacov Jupitera"
 
 #: src/translations.h:622
 msgid "&Undo"
@@ -9873,10 +9875,10 @@ msgstr "&Kopírovať"
 msgid "&Paste"
 msgstr "&Vložiť"
 
-#: src/translations.h:627 plugins/Oculars/src/ui_ocularDialog.h:1536
-#: plugins/Oculars/src/ui_ocularDialog.h:1545
-#: plugins/Oculars/src/ui_ocularDialog.h:1551
-#: plugins/Oculars/src/ui_ocularDialog.h:1570
+#: src/translations.h:627 plugins/Oculars/src/ui_ocularDialog.h:1529
+#: plugins/Oculars/src/ui_ocularDialog.h:1538
+#: plugins/Oculars/src/ui_ocularDialog.h:1544
+#: plugins/Oculars/src/ui_ocularDialog.h:1563
 msgid "Delete"
 msgstr "Vymazať"
 
@@ -11754,7 +11756,7 @@ msgstr "Seri"
 #: skycultures/translations_skycultures.fab:104
 msgctxt "sky culture"
 msgid "Tibetan"
-msgstr ""
+msgstr "Tibetská"
 
 #: skycultures/translations_skycultures.fab:106
 msgctxt "sky culture"
@@ -12078,7 +12080,7 @@ msgstr "Max. polomer vyhľadávania"
 
 #: src/ui_searchDialogGui.h:848
 msgid " arcsec"
-msgstr ""
+msgstr "uhl. sek."
 
 #: src/ui_searchDialogGui.h:849
 msgid "Max. results "
@@ -12129,7 +12131,7 @@ msgstr "Automatické doplňovanie používať len od začiatku slov"
 
 #: src/ui_searchDialogGui.h:867
 msgid "Use sorting by string length"
-msgstr ""
+msgstr "Použiť zoradenie podľa dĺžky reťazca"
 
 #: src/ui_searchDialogGui.h:868
 msgid "Lock position when coordinates are used"
@@ -12981,11 +12983,11 @@ msgstr "Hrúbka mriežky a čiar"
 
 #: src/ui_viewDialog.h:3882
 msgid "Thickness: "
-msgstr ""
+msgstr "Hrúbka:"
 
 #: src/ui_viewDialog.h:3883
 msgid "lines"
-msgstr ""
+msgstr "čiary"
 
 #: src/ui_viewDialog.h:3885 src/ui_viewDialog.h:4320 src/ui_viewDialog.h:4343
 #: src/ui_viewDialog.h:4356 src/ui_viewDialog.h:4359 src/ui_viewDialog.h:4377
@@ -13631,7 +13633,7 @@ msgstr "Jazyk kultúry"
 
 #: src/ui_configurationDialog.h:1710
 msgid "See User Guide for adding ephemeris data."
-msgstr ""
+msgstr "Pre pridávanie údajov o efemeridách si pozrite užívateľskú príručku."
 
 #: src/ui_configurationDialog.h:1712
 msgid "Ephemeris settings"
@@ -13648,7 +13650,7 @@ msgstr "Použiť DE430 (vysoká presnosť)"
 
 #: src/ui_configurationDialog.h:1716
 msgid "DE440 provides highest accuracy, only for years 1550...2650."
-msgstr ""
+msgstr "DE440 poskytuje najvyššiu presnosť, len pre roky 1550...2650."
 
 #: src/ui_configurationDialog.h:1718
 msgid "Use DE440 (high accuracy)"
@@ -13671,6 +13673,8 @@ msgid ""
 "DE441 provides position data for years -13000...+17000. For special "
 "applications only."
 msgstr ""
+"DE441 poskytuje údaje o polohe na roky -13000...+17000. Určené výhradne na "
+"špeciálne použitie."
 
 #: src/ui_configurationDialog.h:1727
 msgid "Use DE441 (long-time data)"
@@ -14857,6 +14861,8 @@ msgid ""
 "Show magnitudes of current celestial body (may be affected by atmosphere "
 "setting!)"
 msgstr ""
+"Zobraziť magnitúdu aktuálneho nebeského telesa (môže byť ovplyvnená "
+"nastavením atmosféry!)"
 
 #: src/ui_astroCalcDialog.h:2212
 msgid "magnitudes"
@@ -14932,6 +14938,9 @@ msgid ""
 "aberration, etc. Magnitudes are affected by current atmosphere settings. For"
 " almanac-like data, disable atmosphere and topocentric corrections!"
 msgstr ""
+"Poznámka: polohy závisia na vašich nastaveniach topocentrickej korekcie, "
+"aberácie atď. Jasnosti ovplyvňujú aktuálne nastavenia atmosféry. Ak chcete "
+"dáta pre ročenku, vypnite atmosférické a topocentrické korekcie!"
 
 #: src/ui_astroCalcDialog.h:2260
 msgid "Cleanup data"
@@ -15433,11 +15442,11 @@ msgstr "FOV"
 
 #: src/ui_obsListDialog.h:434
 msgid "Observing Lists Directory"
-msgstr ""
+msgstr "Adresár zoznamov pozorovaní"
 
 #: src/ui_obsListDialog.h:436
 msgid "Dir"
-msgstr ""
+msgstr "Adr."
 
 #: src/ui_dsoColorsDialog.h:494 src/ui_orbitColorsDialog.h:352
 msgid "Color settings"
@@ -16187,7 +16196,7 @@ msgid "Allow snap to selected object"
 msgstr "Umožniť pripnutie k vybranému objektu"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:316
-#: plugins/Oculars/src/ui_ocularDialog.h:1578
+#: plugins/Oculars/src/ui_ocularDialog.h:1571
 #: plugins/Satellites/src/ui_satellitesDialog.h:1390
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:420
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:234
@@ -16212,7 +16221,7 @@ msgid "About"
 msgstr "O module"
 
 #: plugins/Oculars/src/Oculars.cpp:75 plugins/Oculars/src/Oculars.cpp:1490
-#: plugins/Oculars/src/ui_ocularDialog.h:1419
+#: plugins/Oculars/src/ui_ocularDialog.h:1412
 msgid "Oculars"
 msgstr "Okuláre"
 
@@ -16294,7 +16303,7 @@ msgstr ""
 "Nemôžem zobraziť hranicu senzora: Nie je zadaný senzor alebo ďalekohľad."
 
 #: plugins/Oculars/src/Oculars.cpp:1491
-#: plugins/Oculars/src/ui_ocularDialog.h:1453
+#: plugins/Oculars/src/ui_ocularDialog.h:1446
 msgid "Ocular view"
 msgstr "Okulárové zobrazenie"
 
@@ -16777,24 +16786,24 @@ msgid "Magnification factor:"
 msgstr "Zväčšenie:"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:583
-#: plugins/Oculars/src/ui_ocularDialog.h:1575
+#: plugins/Oculars/src/ui_ocularDialog.h:1568
 msgid "Diameter:"
 msgstr "Priemer:"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:588
-#: plugins/Oculars/src/ui_ocularDialog.h:1540
+#: plugins/Oculars/src/ui_ocularDialog.h:1533
 msgid "aFOV:"
 msgstr "zZP:"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:589
-#: plugins/Oculars/src/ui_ocularDialog.h:1541
-#: plugins/Oculars/src/ui_ocularDialog.h:1576
+#: plugins/Oculars/src/ui_ocularDialog.h:1534
+#: plugins/Oculars/src/ui_ocularDialog.h:1569
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:764
 msgid "Focal length:"
 msgstr "Ohnisková vzdialenosť:"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:590
-#: plugins/Oculars/src/ui_ocularDialog.h:1537
+#: plugins/Oculars/src/ui_ocularDialog.h:1530
 msgid "Field stop:"
 msgstr "Clona:"
 
@@ -16949,149 +16958,149 @@ msgstr ""
 "teleso Slnečnej sústavy (montáž má zapnutú hviezdnu rýchlosť), aby sa "
 "zabránilo pohybu o viac, ako šírku 1 pixel."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1420
+#: plugins/Oculars/src/ui_ocularDialog.h:1413
 msgid "Interface"
 msgstr "Rozhranie"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1424
+#: plugins/Oculars/src/ui_ocularDialog.h:1417
 msgid "Arrow button scale (requires restart)"
 msgstr "Škála tlačidla so šípkou (potrebný reštart)"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1426
+#: plugins/Oculars/src/ui_ocularDialog.h:1419
 msgid ""
 "Mark it if you want the FOV value the same like at the startup of "
 "Stellarium."
 msgstr "Označte, ak chcete rovnaké zorné pole, ako pri spustení Stellaria."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1428
+#: plugins/Oculars/src/ui_ocularDialog.h:1421
 msgid "Restore FOV to initial values"
 msgstr "Obnoviť zorné pole na počiatočnú hodnotu"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1429
+#: plugins/Oculars/src/ui_ocularDialog.h:1422
 msgid "Show resolution criteria"
 msgstr "Zobraziť kritériá rozlíšenia"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1430
+#: plugins/Oculars/src/ui_ocularDialog.h:1423
 msgid "On-screen control panel"
 msgstr "Ovládací panel na obrazovke"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1432
-#: plugins/Oculars/src/ui_ocularDialog.h:1436
+#: plugins/Oculars/src/ui_ocularDialog.h:1425
+#: plugins/Oculars/src/ui_ocularDialog.h:1429
 msgid "Font size of text on on-screen control panel"
 msgstr "Veľkosť písma textu ovládacieho panelu na obrazovke"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1434
+#: plugins/Oculars/src/ui_ocularDialog.h:1427
 msgid "...font size"
 msgstr "...veľkosť písma"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1439
+#: plugins/Oculars/src/ui_ocularDialog.h:1432
 msgid ""
 "Mark it if you want the direction value the same like at the startup of "
 "Stellarium."
 msgstr "Označte, ak chcete rovnaký smer, ako pri spustení Stellaria."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1441
+#: plugins/Oculars/src/ui_ocularDialog.h:1434
 msgid "Restore direction to initial values"
 msgstr "Obnoviť pôvodné nastavenie smeru"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1443
+#: plugins/Oculars/src/ui_ocularDialog.h:1436
 msgid "Color for ocular circles and sensor frames"
 msgstr "Farba pre krúžky okulárov a obrysy senzorov"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1446
+#: plugins/Oculars/src/ui_ocularDialog.h:1439
 msgid "Line Color"
 msgstr "Farba čiary"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1448
+#: plugins/Oculars/src/ui_ocularDialog.h:1441
 msgid "Color for text which is shown only when GUI is switched off."
 msgstr "Farba textu, ktorý sa ukáže len, ak je vypnuté grafické rozhranie."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1451
+#: plugins/Oculars/src/ui_ocularDialog.h:1444
 msgid "Text Color"
 msgstr "Farba textu"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1452
+#: plugins/Oculars/src/ui_ocularDialog.h:1445
 msgid "Show oculars button on toolbar"
 msgstr "Zobraziť tlačidlo okuláre na paneli nástrojov"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1455
+#: plugins/Oculars/src/ui_ocularDialog.h:1448
 msgid ""
 "Show FOV circles relative to the apparent FOV of the widest-angle ocular"
 msgstr "Zobraziť kruhy FOV vzhľadom na zdanlivé FOV okulára s najširším uhlom"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1457
+#: plugins/Oculars/src/ui_ocularDialog.h:1450
 msgid "Scale image circle"
 msgstr "Zmeniť mierku obrazového kruhu"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1458
+#: plugins/Oculars/src/ui_ocularDialog.h:1451
 msgid "Hide grids and lines when enabled"
 msgstr "Skryť mriežky a čiary"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1459
+#: plugins/Oculars/src/ui_ocularDialog.h:1452
 msgid "Enable only if an object is selected"
 msgstr "Povoliť, len ak je vybratý nejaký objekt"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1461
+#: plugins/Oculars/src/ui_ocularDialog.h:1454
 msgid "Show border circle"
 msgstr "Zobraziť okrajovú kružnicu"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1463
+#: plugins/Oculars/src/ui_ocularDialog.h:1456
 msgid "Show FOV outline"
 msgstr "Zobraziť obrys zorného poľa"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1465
+#: plugins/Oculars/src/ui_ocularDialog.h:1458
 msgid "Apply limit for stellar magnitude based on telescope aperture"
 msgstr "Aplikovať ohraničenie hviezdnej magnitúdy podľa apertúry ďalekohľadu"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1467
+#: plugins/Oculars/src/ui_ocularDialog.h:1460
 msgid "Auto-limit stellar magnitude"
 msgstr "Automaticky ohraničiť hviezdnu magnitúdu"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1469
+#: plugins/Oculars/src/ui_ocularDialog.h:1462
 msgid "Show cardinal directions in equatorial coordinate system"
 msgstr "Zobraziť svetové strany v rovníkovej súradnicovej sústave"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1471
+#: plugins/Oculars/src/ui_ocularDialog.h:1464
 msgid "Show compass rose"
 msgstr "Zobraziť ružicu kompasu"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1473
+#: plugins/Oculars/src/ui_ocularDialog.h:1466
 msgid "Align the crosshair in equatorial coordinate system"
 msgstr "Zladiť kríž s rovníkovou súradnicovou sústavou"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1475
+#: plugins/Oculars/src/ui_ocularDialog.h:1468
 msgid "Align crosshair"
 msgstr "Zladiť kríž"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1477
+#: plugins/Oculars/src/ui_ocularDialog.h:1470
 msgid "In ocular mode, allow some visibility outside ocular circle."
 msgstr "Povoliť slabú viditeľnosť aj mimo okulároveho kruhu."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1479
+#: plugins/Oculars/src/ui_ocularDialog.h:1472
 msgid "Use semi-transparent mask"
 msgstr "Použiť polopriehľadnú masku"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1481
+#: plugins/Oculars/src/ui_ocularDialog.h:1474
 msgid "Opacity of semi-transparent mask"
 msgstr "Opacita polopriehľadnej masky"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1483
+#: plugins/Oculars/src/ui_ocularDialog.h:1476
 msgid "Sensor view"
 msgstr "CCD zobrazenie"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1485
+#: plugins/Oculars/src/ui_ocularDialog.h:1478
 msgid "Color for focuser overlay line"
 msgstr "Farba čiary zaostrovania"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1487
+#: plugins/Oculars/src/ui_ocularDialog.h:1480
 msgid "Show focuser overlay"
 msgstr "Zobraziť vrstvu zaostrovania"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1488
+#: plugins/Oculars/src/ui_ocularDialog.h:1481
 msgid "Use degrees and minutes for FOV of CCD"
 msgstr "Použiť stupne a minúty v nastavení zorného poľa CCD"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1490
+#: plugins/Oculars/src/ui_ocularDialog.h:1483
 msgid ""
 "Enable automatic switch of mount type from the telescope settings for "
 "horizontal orientation of CCD frame."
@@ -17099,39 +17108,39 @@ msgstr ""
 "Povoliť automatické prepnutie montáže z nastavenia ďalekohľadu pre "
 "horizontálne otočenie rámu CCD."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1492
+#: plugins/Oculars/src/ui_ocularDialog.h:1485
 msgid "Enable automatic switch of mount type"
 msgstr "Povoliť automatické prepnutie montáže"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1493
+#: plugins/Oculars/src/ui_ocularDialog.h:1486
 msgid "Use size of focuser:"
 msgstr "Použiť veľkosť zaostrovania:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1494
+#: plugins/Oculars/src/ui_ocularDialog.h:1487
 msgid "Use horizontal coordinates instead equatorial coordinates"
 msgstr "Použiť horizontálne súradnice namiesto rovníkových súradníc"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1495
+#: plugins/Oculars/src/ui_ocularDialog.h:1488
 msgid "Overlay size (px)"
 msgstr "Veľkosť prekrytia (px)"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1497
+#: plugins/Oculars/src/ui_ocularDialog.h:1490
 msgid "Horizontal size (width)"
 msgstr "Horizontálna veľkosť (šírka)"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1500
+#: plugins/Oculars/src/ui_ocularDialog.h:1493
 msgid "Vertical size (height)"
 msgstr "Vertikálna veľkosť (výška)"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1503
+#: plugins/Oculars/src/ui_ocularDialog.h:1496
 msgid "Enable pixel grid of sensor binned pixels within sensor crop overlay."
 msgstr "Povoliť mriežku binovania bodov senzora vo vrstve orezania senzora."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1505
+#: plugins/Oculars/src/ui_ocularDialog.h:1498
 msgid "Show pixel grid"
 msgstr "Zobraziť mriežku senzora"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1507
+#: plugins/Oculars/src/ui_ocularDialog.h:1500
 msgid ""
 "Enable a rectangular overlay showing the effective size of a number of "
 "pixels."
@@ -17139,95 +17148,95 @@ msgstr ""
 "Umožní obdĺžnikové prekrytie, ktoré znázorní efektívnu veľkosť počtu "
 "pixelov."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1509
+#: plugins/Oculars/src/ui_ocularDialog.h:1502
 msgid "Show sensor crop overlay"
 msgstr "Zobraziť orezanie prekrytia senzora"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1510
+#: plugins/Oculars/src/ui_ocularDialog.h:1503
 msgid "Enable autozoom when switching CCD"
 msgstr "Povoliť automatický zoom pri zmene CCD"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1512
+#: plugins/Oculars/src/ui_ocularDialog.h:1505
 msgid ""
 "Show maximum exposure time for Solar system objects to avoid movement streak"
 msgstr ""
 "Zobraziť maximálny expozičný čas pre telesá slnečnej sústavy, aby "
 "nedochádzalo k stopám"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1514
+#: plugins/Oculars/src/ui_ocularDialog.h:1507
 msgid "Show max exposure time for moving objects"
 msgstr "Zobraziť max expozičný čas pohyblivých telies"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1515
+#: plugins/Oculars/src/ui_ocularDialog.h:1508
 msgid "Telrad view"
 msgstr "Pohľad cez Telrad"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1519
+#: plugins/Oculars/src/ui_ocularDialog.h:1512
 msgctxt "abbreviation"
 msgid "FOV:"
 msgstr "FOV:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1521
+#: plugins/Oculars/src/ui_ocularDialog.h:1514
 msgid "FOV for circle 1"
 msgstr "FOV pre kruh 1"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1524
+#: plugins/Oculars/src/ui_ocularDialog.h:1517
 msgid "FOV for circle 2"
 msgstr "FOV pre kruh 2"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1527
+#: plugins/Oculars/src/ui_ocularDialog.h:1520
 msgid "FOV for circle 3"
 msgstr "FOV pre kruh 3"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1530
+#: plugins/Oculars/src/ui_ocularDialog.h:1523
 msgid "FOV for circle 4"
 msgstr "FOV pre kruh 4"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1532
+#: plugins/Oculars/src/ui_ocularDialog.h:1525
 msgid "Restore original Telrad FOV"
 msgstr "Obnoviť originálne FOV Telrad-u"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1533
+#: plugins/Oculars/src/ui_ocularDialog.h:1526
 msgid "Enable autozoom when switching Telrad"
 msgstr "Povoliť automatický zoom pri zmene Telrad-u"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1534
+#: plugins/Oculars/src/ui_ocularDialog.h:1527
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:226
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:401
 msgid "General"
 msgstr "Všeobecné"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1535
-#: plugins/Oculars/src/ui_ocularDialog.h:1544
-#: plugins/Oculars/src/ui_ocularDialog.h:1550
-#: plugins/Oculars/src/ui_ocularDialog.h:1569
+#: plugins/Oculars/src/ui_ocularDialog.h:1528
+#: plugins/Oculars/src/ui_ocularDialog.h:1537
+#: plugins/Oculars/src/ui_ocularDialog.h:1543
+#: plugins/Oculars/src/ui_ocularDialog.h:1562
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:174
 msgid "Add"
 msgstr "Pridať"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1538
+#: plugins/Oculars/src/ui_ocularDialog.h:1531
 msgid "Has permanent cross-hairs"
 msgstr "Má vstavaný zameriavací kríž"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1539
+#: plugins/Oculars/src/ui_ocularDialog.h:1532
 msgid "Binoculars"
 msgstr "Binokulár"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1542
-#: plugins/Oculars/src/ui_ocularDialog.h:1546
-#: plugins/Oculars/src/ui_ocularDialog.h:1556
-#: plugins/Oculars/src/ui_ocularDialog.h:1571
+#: plugins/Oculars/src/ui_ocularDialog.h:1535
+#: plugins/Oculars/src/ui_ocularDialog.h:1539
+#: plugins/Oculars/src/ui_ocularDialog.h:1549
+#: plugins/Oculars/src/ui_ocularDialog.h:1564
 #: plugins/Satellites/src/ui_satellitesDialog.h:1301
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:559
 #: plugins/TelescopeControl/src/gui/ui_storedPointsDialog.h:203
 msgid "Name:"
 msgstr "Názov:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1543
+#: plugins/Oculars/src/ui_ocularDialog.h:1536
 msgid "Eyepieces"
 msgstr "Okuláre"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1547
+#: plugins/Oculars/src/ui_ocularDialog.h:1540
 msgid ""
 "Values of multiplicity >1 expand the focal length (Barlow lens). Values of "
 "multiplicity <1 reduce the focal length (Shapley lens)."
@@ -17235,85 +17244,85 @@ msgstr ""
 "Hodnoty násobiča >1 predlžujú ohniskovú vzdialenosť (Barlowova šošovka). "
 "Hodnoty násobiča <1 zmenšujú ohniskovú vzdialenosť (Shapleyova šošovka)."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1548
+#: plugins/Oculars/src/ui_ocularDialog.h:1541
 msgid "Multiplier:"
 msgstr "Násobič:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1549
+#: plugins/Oculars/src/ui_ocularDialog.h:1542
 msgid "Lenses"
 msgstr "Šošovky"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1552
+#: plugins/Oculars/src/ui_ocularDialog.h:1545
 msgid "Off-Axis guider"
 msgstr "Navádzanie mimo osi"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1553
+#: plugins/Oculars/src/ui_ocularDialog.h:1546
 msgid "Resolution y:"
 msgstr "Rozlíšenie y:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1554
+#: plugins/Oculars/src/ui_ocularDialog.h:1547
 msgid "Binning x:"
 msgstr "Binovanie x:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1555
+#: plugins/Oculars/src/ui_ocularDialog.h:1548
 msgid "Resolution x:"
 msgstr "Rozlíšenie x:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1557
+#: plugins/Oculars/src/ui_ocularDialog.h:1550
 msgid "Prism/CCD height:"
 msgstr "Výška hranola/CCC:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1559
+#: plugins/Oculars/src/ui_ocularDialog.h:1552
 msgid ""
 "This is the distance from the center of the Imaging Sensor to the center of "
 "the Prism"
 msgstr "Toto je vzdialenosť od stredu zobrazovacieho senzora k stredu hranola"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1561
+#: plugins/Oculars/src/ui_ocularDialog.h:1554
 msgid "Prism/CCD distance:"
 msgstr "Vzdialenosť hranola/CCD:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1562
+#: plugins/Oculars/src/ui_ocularDialog.h:1555
 msgid "Rotation Angle:"
 msgstr "Rotačný uhol:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1563
+#: plugins/Oculars/src/ui_ocularDialog.h:1556
 msgid "Binning y:"
 msgstr "Binovanie y:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1564
+#: plugins/Oculars/src/ui_ocularDialog.h:1557
 msgid "Prism/CCD width:"
 msgstr "Šírka hranola/CCD:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1565
+#: plugins/Oculars/src/ui_ocularDialog.h:1558
 msgid "Chip height:"
 msgstr "Výška čipu:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1566
+#: plugins/Oculars/src/ui_ocularDialog.h:1559
 msgid "Chip width:"
 msgstr "Šírka čipu:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1567
+#: plugins/Oculars/src/ui_ocularDialog.h:1560
 msgid "Position angle:"
 msgstr "Pozičný uhol:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1568
+#: plugins/Oculars/src/ui_ocularDialog.h:1561
 msgid "Sensors"
 msgstr "CCD"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1572
+#: plugins/Oculars/src/ui_ocularDialog.h:1565
 msgid "Horizontal flip"
 msgstr "Horizontálne prevrátenie"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1573
+#: plugins/Oculars/src/ui_ocularDialog.h:1566
 msgid "Vertical flip"
 msgstr "Vertikálne prevrátenie"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1574
+#: plugins/Oculars/src/ui_ocularDialog.h:1567
 msgid "Equatorial Mount"
 msgstr "Ekvatoreálna montáž"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1577
+#: plugins/Oculars/src/ui_ocularDialog.h:1570
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:395
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:406
 msgid "Telescopes"
@@ -17329,13 +17338,14 @@ msgstr "Podpora pre Oculus Rift"
 
 #: plugins/Oculus/src/Oculus.cpp:214
 msgid "Oculus Plugin"
-msgstr ""
+msgstr "Modul pre Oculus"
 
 #: plugins/Oculus/src/Oculus.cpp:215
 msgid ""
 "Initialisation failed. Please see logfile for details. Continue without "
 "headset?"
 msgstr ""
+"Spustenie zlyhalo. Viac detailov v súbore logu. Pokračovať bez headsetu?"
 
 #: plugins/Satellites/src/Satellites.cpp:71
 #: plugins/Satellites/src/Satellites.cpp:163
@@ -18174,14 +18184,14 @@ msgstr "TIANGONG (TIANHE)"
 #: plugins/Satellites/src/Satellites.cpp:3571
 msgctxt "comms"
 msgid "uplink"
-msgstr ""
+msgstr "uplink"
 
 #. TRANSLATORS: A downlink (DL) is the link from a satellite to a ground
 #. station
 #: plugins/Satellites/src/Satellites.cpp:3573
 msgctxt "comms"
 msgid "downlink"
-msgstr ""
+msgstr "downlink"
 
 #. TRANSLATORS: The beacon (or radio beacon) is a device in the satellite,
 #. which emit one or more signals (normally on a fixed frequency) whose
@@ -18190,7 +18200,7 @@ msgstr ""
 #: plugins/Satellites/src/Satellites.cpp:3575
 msgctxt "comms"
 msgid "beacon"
-msgstr ""
+msgstr "maják"
 
 #. TRANSLATORS: Telemetry is the collection of measurements or other data at
 #. satellites and their automatic transmission to receiving equipment
@@ -18198,65 +18208,65 @@ msgstr ""
 #: plugins/Satellites/src/Satellites.cpp:3577
 msgctxt "comms"
 msgid "telemetry"
-msgstr ""
+msgstr "telemetria"
 
 #. TRANSLATORS: The channel for transmission of video data
 #: plugins/Satellites/src/Satellites.cpp:3579
 msgctxt "comms"
 msgid "video"
-msgstr ""
+msgstr "video"
 
 #. TRANSLATORS: The broadband is wide bandwidth data transmission which
 #. transports multiple signals at a wide range of frequencies
 #: plugins/Satellites/src/Satellites.cpp:3581
 msgctxt "comms"
 msgid "broadband"
-msgstr ""
+msgstr "broadband"
 
 #. TRANSLATORS: The channel for transmission of commands
 #: plugins/Satellites/src/Satellites.cpp:3583
 msgctxt "comms"
 msgid "command"
-msgstr ""
+msgstr "veliaci"
 
 #. TRANSLATORS: Meteorological is a service on the satellite for transmitting
 #. meteorological data to a ground station
 #: plugins/Satellites/src/Satellites.cpp:3585
 msgctxt "comms"
 msgid "meteorological"
-msgstr ""
+msgstr "meteorologický"
 
 #. TRANSLATORS: Maritime is a service on the satellite
 #: plugins/Satellites/src/Satellites.cpp:3587
 msgctxt "comms"
 msgid "maritime"
-msgstr ""
+msgstr "námorný"
 
 #. TRANSLATORS: Mobile is a service on the satellite
 #: plugins/Satellites/src/Satellites.cpp:3589
 msgctxt "comms"
 msgid "mobile"
-msgstr ""
+msgstr "mobilný"
 
 #. TRANSLATORS: Mobile telephony is a service on the satellite
 #: plugins/Satellites/src/Satellites.cpp:3591
 msgctxt "comms"
 msgid "mobile telephony"
-msgstr ""
+msgstr "mobilné telefonovanie"
 
 #. TRANSLATORS: A repeater is an electronic device that receives a signal and
 #. retransmits it.
 #: plugins/Satellites/src/Satellites.cpp:3593
 msgctxt "comms"
 msgid "repeater"
-msgstr ""
+msgstr "opakovací"
 
 #. TRANSLATORS: The digital repeater (or digipiter) is used in channels that
 #. transmit data by binary digital signals
 #: plugins/Satellites/src/Satellites.cpp:3595
 msgctxt "comms"
 msgid "digipeater"
-msgstr ""
+msgstr "opakovací digitálny"
 
 #. TRANSLATORS: A radio band is a small frequency band (a contiguous section
 #. of the range of the radio spectrum) in which channels are usually used or
@@ -18264,23 +18274,23 @@ msgstr ""
 #: plugins/Satellites/src/Satellites.cpp:3597
 msgctxt "comms"
 msgid "-band"
-msgstr ""
+msgstr " pásmo"
 
 #: plugins/Satellites/src/Satellites.cpp:3598
 msgctxt "comms"
 msgid "crew voice"
-msgstr ""
+msgstr "hlas posádky"
 
 #: plugins/Satellites/src/Satellites.cpp:3599
 msgctxt "comms"
 msgid "imaging"
-msgstr ""
+msgstr "zobrazovanie"
 
 #. TRANSLATORS: Some mode of communication via radio channel
 #: plugins/Satellites/src/Satellites.cpp:3601
 msgctxt "comms"
 msgid "mode"
-msgstr ""
+msgstr "režim"
 
 #: plugins/Satellites/src/Satellite.cpp:218
 msgid "The satellite and the observer are in sunlight"
@@ -18642,7 +18652,7 @@ msgstr ""
 #. TRANSLATORS: Title of a section in the About tab of the Satellites window
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:820
 msgid "Communication links"
-msgstr ""
+msgstr "Komunikačné kanály"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:821
 msgid ""
@@ -18650,90 +18660,93 @@ msgid ""
 "many modes for telemetry and data packets. You should to know which "
 "demodulator you need to decode telemetry and packets:"
 msgstr ""
+"Mnohé družice majú vysielače (transceivery a transpondéry) s mnohými "
+"režimami pre balíčky dát a telemetrie. Mali by ste poznať, ktorý demodulátor"
+" potrebujete, aby ste mohli balíčky dekódovať:"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:823
 msgid "Automatic Picture Transmission"
-msgstr ""
+msgstr "Automatický prenos obrazu"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:824
 msgid "Low Resolution Picture Transmission"
-msgstr ""
+msgstr "Prenos obrazu s nízkym rozlíšením"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:825
 msgid "High Resolution Picture Transmission"
-msgstr ""
+msgstr "Prenos obrazu s vysokým rozlíšením"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:826
 msgid "Advanced High Resolution Picture Transmission"
-msgstr ""
+msgstr "Pokročilý prenos obrazu s vysokým rozlíšením"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:827
 msgid "Amateur Radio adaptation of X.25 packet protocol"
-msgstr ""
+msgstr "Amatérske rádiové použitie packet protokolu X.25"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:828
 msgid "Continuous Wave, Morse Code"
-msgstr ""
+msgstr "Súvislá vlna, morzeovka"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:829
 msgid "Amplitude Modulation"
-msgstr ""
+msgstr "Amplitúdová modulácia"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:830
 msgid "Frequency Modulation"
-msgstr ""
+msgstr "Frekvenčná modulácia"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:831
 msgid "Data Under Voice"
-msgstr ""
+msgstr "Dáta pod hlasom"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:832
 msgid "Frequency Shift Keying"
-msgstr ""
+msgstr "Kľúčovanie frekvenčným posunom"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:833
 msgid "Gaussian Frequency Shift Keying"
-msgstr ""
+msgstr "Kľúčovanie gaussovským frekvenčným posunom"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:834
 msgid "Gaussian Minimum Shift Keying"
-msgstr ""
+msgstr "Kľúčovanie minimálnym gaussovským posunom"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:835
 msgid "Audio Frequency Shift Keying"
-msgstr ""
+msgstr "Akustické kľúčovanie frekvenčným posunom"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:836
 msgid "Amplitude-shift Keying"
-msgstr ""
+msgstr "Kľúčovanie amplitúdovým posunom"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:837
 msgid "Phase-shift Keying"
-msgstr ""
+msgstr "Kľúčovanie fázovým posunom"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:838
 msgid "Binary Phase-shift Keying"
-msgstr ""
+msgstr "Binárne kľúčovanie fázovým posunom"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:839
 msgid "Quadrature Phase-shift Keying"
-msgstr ""
+msgstr "Kvadratúrne kľúčovanie fázovým posunom"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:840
 msgid "Offset Quadrature Phase-shift Keying"
-msgstr ""
+msgstr "Offsetové kvadratúrne kľúčovanie fázovým posunom"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:841
 msgid "Differential Phase-shift Keying"
-msgstr ""
+msgstr "Kľúčovanie diferenčným fázovým posunom"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:842
 msgid "Binary Offset Carrier"
-msgstr ""
+msgstr "Binárna offsetová nosná vlna"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:843
 msgid "Multiplexed Binary Offset Carrier"
-msgstr ""
+msgstr "Multiplexová binárna offsetová nosná vlna"
 
 #. TRANSLATORS: Title of a section in the About tab of the Satellites window
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:847
@@ -19051,49 +19064,49 @@ msgstr "[každý používateľ definovaný]"
 #. Active is any satellite with an operational status of +, P, B, S, or X.
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1163
 msgid "[active satellites]"
-msgstr ""
+msgstr "[aktívne družice]"
 
 #. TRANSLATORS: Satellite group [SATCAT Operational Status]: Satellites that
 #. are fully functioning
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1165
 msgid "[operational satellites]"
-msgstr ""
+msgstr "[fungujúce družice]"
 
 #. TRANSLATORS: Satellite group [SATCAT Operational Status]: Satellites that
 #. are no longer functioning
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1167
 msgid "[non-operational satellites]"
-msgstr ""
+msgstr "[nefungujúce družice]"
 
 #. TRANSLATORS: Satellite group [SATCAT Operational Status]: Satellites that
 #. are partially fulfilling primary mission or secondary mission(s)
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1169
 msgid "[partially operational satellites]"
-msgstr ""
+msgstr "[čiastočne fungujúce družice]"
 
 #. TRANSLATORS: Satellite group [SATCAT Operational Status]: Previously
 #. operational satellite put into reserve status
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1171
 msgid "[backup / standby satellites]"
-msgstr ""
+msgstr "[pohotovostné družice]"
 
 #. TRANSLATORS: Satellite group [SATCAT Operational Status]: New satellite
 #. awaiting full activation
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1173
 msgid "[spare satellites]"
-msgstr ""
+msgstr "[náhradné družice]"
 
 #. TRANSLATORS: Satellite group [SATCAT Operational Status]: Satellites with
 #. extended mission(s)
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1175
 msgid "[extended mission]"
-msgstr ""
+msgstr "[predĺžená misia]"
 
 #. TRANSLATORS: Satellite group [SATCAT Operational Status]: Satellites that
 #. are decayed
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1177
 msgid "[decayed satellites]"
-msgstr ""
+msgstr "[rozpadnuté družice]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1179
 msgid "[all]"
@@ -19127,7 +19140,7 @@ msgstr "Zobraziť družice a ich dráhy iba vo zvolenom rozsahu výšok."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1208
 msgid "Altitude of imagined satellite"
-msgstr ""
+msgstr "Výška zobrazenej družice"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1209
 msgid "Number of segments: number of segments used to draw the line"
@@ -19313,7 +19326,7 @@ msgstr "Vzdialenosť k stredu umbry z povrchu Zeme (výška pomyselnej družice)
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1231
 msgid "Show umbra/penumbra at altitude:"
-msgstr ""
+msgstr "Ukázať umbru/penumbru vo výške:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1232
 msgid "Orbit lines"
@@ -21411,11 +21424,11 @@ msgstr "Vypnúť"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:579
 msgid "Toggle TUI date&time"
-msgstr ""
+msgstr "Zapnúť dátum a čas textového rozhrania"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:580
 msgid "Toggle TUI object info"
-msgstr ""
+msgstr "Zapnúť informácie o objekte textového rozhrania"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:649
 msgid "[no TUI node]"
@@ -21541,19 +21554,19 @@ msgstr "Uložiť malé telesá slnečnej sústavy ako..."
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:224
 msgid "Cannot overwrite"
-msgstr ""
+msgstr "Nedá sa prepísať"
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:225
 msgid "Cannot remove existing file. Do you have permissions?"
-msgstr ""
+msgstr "Existujúci súbor sa nedá zmazať. Máte oprávnenie?"
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:231
 msgid "Cannot store"
-msgstr ""
+msgstr "Nedá sa uložiť"
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:232
 msgid "File cannot be written. Do you have permissions?"
-msgstr ""
+msgstr "Súbor sa nedá zapísať. Máte oprávnenie?"
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:237
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:245
@@ -22095,7 +22108,7 @@ msgstr "pod obzorom"
 msgid ""
 "The sum of the daytime duration and duration of morning and evening "
 "twilights"
-msgstr ""
+msgstr "Súčet trvania dňa a ranných a večerných súmrakov"
 
 #. TRANSLATORS: Part of full phrase: Anglo-American set of navigational stars
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:243
@@ -23280,7 +23293,7 @@ msgstr "Trieda planéty"
 #. TRANSLATORS: Full phrase is "Surface Temperature"
 #: plugins/Exoplanets/src/Exoplanet.cpp:372
 msgid "Surface temp."
-msgstr ""
+msgstr "Povrchová tep."
 
 #. TRANSLATORS: Average stellar flux of the planet
 #: plugins/Exoplanets/src/Exoplanet.cpp:374
@@ -23295,7 +23308,7 @@ msgstr "ESI"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:499
 msgid "Surface temperature on Earth"
-msgstr ""
+msgstr "Povrchová teplota Zeme"
 
 #: plugins/Exoplanets/src/Exoplanet.hpp:86
 msgid "planetary system"
@@ -23455,19 +23468,23 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:318
 msgid "Surface Temperature"
-msgstr ""
+msgstr "Povrchová teplota"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:319
 msgid ""
 "The estimated surface temperature in Kelvins (K) assuming an Earth-like "
 "atmosphere (i.e., same bond albedo and greenhouse)."
 msgstr ""
+"Odhadovaná povrchová teplota v Kelvinoch (K) pri predpoklade Zemi podobnej "
+"atmosféry (t.j. rovnaké Bondove albedo a skleníkový efekt)."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:320
 msgid ""
 "Temperatures could be much larger for thicker atmospheres (Earth = 288 K or "
 "15°C)."
 msgstr ""
+"Teploty môžu byť oveľa vyššie pre hustejšie atmosféry (Zem = 288 K alebo "
+"15°C)."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:323
 msgid ""
@@ -26494,70 +26511,70 @@ msgstr "Potvrdený"
 msgid "Generic"
 msgstr "Všeobecný"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:511
+#: plugins/MeteorShowers/src/MeteorShower.cpp:535
 msgid "generic data"
 msgstr "všeobecné dáta"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:512
+#: plugins/MeteorShowers/src/MeteorShower.cpp:536
 msgid "confirmed data"
 msgstr "potvrdené dáta"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:513
+#: plugins/MeteorShowers/src/MeteorShower.cpp:537
 msgid "inactive"
 msgstr "neaktívny"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:546
+#: plugins/MeteorShowers/src/MeteorShower.cpp:570
 msgid "IAU shower number"
 msgstr "IAU číslo roja"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:547
+#: plugins/MeteorShowers/src/MeteorShower.cpp:571
 msgid "Radiant drift (per solar longitude)"
 msgstr "Posun radiantu (na dĺžku Slnka)"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:553
+#: plugins/MeteorShowers/src/MeteorShower.cpp:577
 msgid "Geocentric meteoric velocity"
 msgstr "Geocentrická rýchlosť meteorov"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:561
+#: plugins/MeteorShowers/src/MeteorShower.cpp:585
 msgid "The population index"
 msgstr "Populačný index"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:564
+#: plugins/MeteorShowers/src/MeteorShower.cpp:588
 msgid "Parent body"
 msgstr "Materské teleso"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:566
+#: plugins/MeteorShowers/src/MeteorShower.cpp:590
 msgid "Activity"
 msgstr "Aktivita"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:614
-#: plugins/MeteorShowers/src/MeteorShower.cpp:639
+#: plugins/MeteorShowers/src/MeteorShower.cpp:638
+#: plugins/MeteorShowers/src/MeteorShower.cpp:663
 msgid "Solar longitude "
 msgstr "Dĺžka Slnka"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:622
+#: plugins/MeteorShowers/src/MeteorShower.cpp:646
 msgctxt "meteor shower activity"
 msgid "Maximum"
 msgstr "Maximum"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:699
-#: plugins/MeteorShowers/src/MeteorShower.cpp:722
+#: plugins/MeteorShowers/src/MeteorShower.cpp:723
+#: plugins/MeteorShowers/src/MeteorShower.cpp:746
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:276
 msgid "Current ZHR"
 msgstr "Aktuálna ZHR"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:702
-#: plugins/MeteorShowers/src/MeteorShower.cpp:732
+#: plugins/MeteorShowers/src/MeteorShower.cpp:726
+#: plugins/MeteorShowers/src/MeteorShower.cpp:756
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:279
 msgid "Local Hourly Rate"
 msgstr "Miestna hodinová frekvencia"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:704
-#: plugins/MeteorShowers/src/MeteorShower.cpp:735
+#: plugins/MeteorShowers/src/MeteorShower.cpp:728
+#: plugins/MeteorShowers/src/MeteorShower.cpp:759
 msgid "Limiting magnitude"
-msgstr ""
+msgstr "Hraničná magnitúda"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:710
+#: plugins/MeteorShowers/src/MeteorShower.cpp:734
 msgid "variable"
 msgstr "premenlivé"
 
@@ -33442,54 +33459,58 @@ msgstr "Nastavenia modulu chýbajúcich hviezd"
 
 #: plugins/LensDistortionEstimator/src/LensDistortionEstimator.cpp:59
 msgid "Lens distortion estimator"
-msgstr ""
+msgstr "Odhad skreslenia šošovky"
 
 #: plugins/LensDistortionEstimator/src/LensDistortionEstimator.cpp:62
 msgid ""
 "Estimates lens distortion by letting the user match stars to a photo and "
 "computing a fit."
 msgstr ""
+"Odhadne skreslenie šošovky tak, že nechá užívateľa spárovať hviezdy podľa "
+"fotografie a spočíta preloženie."
 
 #: plugins/LensDistortionEstimator/src/LensDistortionEstimator.cpp:401
 #: plugins/LensDistortionEstimator/src/LensDistortionEstimator.cpp:404
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:717
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:718
 msgid "Lens Distortion Estimator"
-msgstr ""
+msgstr "Odhad skreslenia šošovky"
 
 #: plugins/LensDistortionEstimator/src/LensDistortionEstimator.cpp:402
 msgid "Toggle pick-a-point mode"
-msgstr ""
+msgstr "Prepnúť režim výberu bodov"
 
 #: plugins/LensDistortionEstimator/src/LensDistortionEstimator.cpp:405
 msgid "Show lens distortion estimator dialog"
-msgstr ""
+msgstr "Ukázať dialóg odhadu skreslenia šošovky"
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:320
 msgid ""
 "Sets simulation date/time to image EXIF date/time, and freezes simulation "
 "time"
 msgstr ""
+"Nastaví dátum a čas simulácie podľa dátumu a času v EXIF obrázku a pozastaví"
+" simulovanie času"
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:352
 #, qt-format
 msgid "Stellarium time differs from image EXIF time %1 by %2 seconds"
-msgstr ""
+msgstr "Čas v Stellariu sa od času obrázka EXIF %1 líši o %2 sekúnd."
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:373
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:429
 msgid "Save points to file"
-msgstr ""
+msgstr "Uložiť body do súboru"
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:374
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:430
 msgid "Comma-separated values (*.csv)"
-msgstr ""
+msgstr "Hodnoty oddelené čiarkou (*.csv)"
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:379
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:413
 msgid "Error saving data"
-msgstr ""
+msgstr "Chyba pri ukladaní dát"
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:380
 #, qt-format
@@ -33497,6 +33518,8 @@ msgid ""
 "Failed to open output file for writing:\n"
 "%1"
 msgstr ""
+"Nemôžem otvoriť súbor na zápis:\n"
+"%1"
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:414
 #, qt-format
@@ -33504,20 +33527,24 @@ msgid ""
 "Failed to write the output file:\n"
 "%1"
 msgstr ""
+"Nemôžem písať do výstupného súboru:\n"
+"%1"
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:422
 msgid "Confirm deletion of old points"
-msgstr ""
+msgstr "Potvrdiť zmazanie starých bodov"
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:423
 msgid ""
 "There are some points defined. They will be deleted and replaced with the "
 "ones from the file. Proceed?"
 msgstr ""
+"Niektoré body už sú definované. Budú vymazané a nahradené tými zo súboru. "
+"Pokračovať?"
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:435
 msgid "Error reading data"
-msgstr ""
+msgstr "Chyba pri čítaní dát"
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:436
 #, qt-format
@@ -33525,13 +33552,15 @@ msgid ""
 "Failed to open input file for reading:\n"
 "%1"
 msgstr ""
+"Nemôžem otvoriť súbor na čítanie:\n"
+"%1"
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:452
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:462
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:471
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:478
 msgid "File format error"
-msgstr ""
+msgstr "Chyba formátu súboru"
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:453
 #, qt-format
@@ -33539,89 +33568,104 @@ msgid ""
 "Can't import file: expected to find at least %1 entries at line %2, but got "
 "%3."
 msgstr ""
+"Nemôžem importovať súbor: očakávaných aspoň %1 záznamov na riadku %2, ale "
+"nájdených %3."
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:463
 #, qt-format
 msgid "Can't import file: object \"%1\" not found at line %2."
-msgstr ""
+msgstr "Nemôžem importovať súbor: objekt \"%1\" sa nenašiel na riadku %2."
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:472
 #, qt-format
 msgid "Can't import file: failed to parse image position X at line %1."
 msgstr ""
+"Nemôžem importovať súbor: zlyhalo analyzovanie polohy X obrázku na riadku "
+"%1."
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:479
 #, qt-format
 msgid "Can't import file: failed to parse image position Y at line %1."
 msgstr ""
+"Nemôžem importovať súbor: zlyhalo analyzovanie polohy Y obrázku na riadku "
+"%1."
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:675
 msgid "Distance from center, °"
-msgstr ""
+msgstr "Vzdialenosť od stredu, °"
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:681
 msgid "Error estimate, °"
-msgstr ""
+msgstr "Odhad neistoty, °"
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:968
 msgid "Confirm resetting image placement"
-msgstr ""
+msgstr "Potvrdiť obnovenie polohy obrázku"
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:969
 msgid "This will move the image to the center of the screen. Proceed?"
-msgstr ""
+msgstr "Toto posunie obrázok do stredu obrazovky. Pokračovať?"
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:978
 msgid "Confirm resetting distortion"
-msgstr ""
+msgstr "Potvrdiť obnovenie skreslenia"
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:979
 msgid "This will zero out all distortion and shift coefficients. Proceed?"
 msgstr ""
+"Toto vynuluje akékoľvek skreslenie a koeficienty posunutí. Pokračovať?"
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1332
 msgid ""
 "Can't get EXIF date from the image, please make sure current date and time "
 "setting is correct."
 msgstr ""
+"Nemôžem načítať EXIF údaje z obrázku. Uistite sa, že aktuálne nastavenia "
+"času a dátumu sú správne."
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1342
 msgid ""
 "Failed to parse EXIF date/time, please make sure current date and time "
 "setting is correct."
 msgstr ""
+"Zlyhala analýza EXIF dátumu a času. Uistite sa, že aktuálne nastavenia času "
+"a dátumu sú správne."
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1382
 msgid "Open image file"
-msgstr ""
+msgstr "Otvoriť obrázkový súbor"
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1383
 msgid ""
 "Image files (*.png *.bmp *.jpg *.jpeg *.tif *.tiff *.webm *.pbm *.pgm *.ppm "
 "*.xbm *.xpm)"
 msgstr ""
+"Obrázkové súbory (*.png *.bmp *.jpg *.jpeg *.tif *.tiff *.webm *.pbm *.pgm "
+"*.ppm *.xbm *.xpm)"
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1657
 msgid "Make, model and mount fields must be filled"
-msgstr ""
+msgstr "Polia Typ, Montáž a Model musia byť vyplnené"
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1688
 msgid "Internal error: bad distortion model chosen"
-msgstr ""
+msgstr "Vnútorná chyba: zle zvolený model skreslenia"
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1746
 msgid "Lens Distortion Estimator Plug-in"
-msgstr ""
+msgstr "Modul Odhadu skreslenia šošovky"
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1755
 msgid ""
 "This plugin lets you estimate distortion of the objective lens of your "
 "camera and generate a distortion model for use with the lensfun library."
 msgstr ""
+"Tento modul vám umožňuje odhadnúť skreslenie šošovky objektívu vašej kamery "
+"a vygenerovať model skreslenia, ktorý sa dá použiť s knižnicou lensfun."
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1757
 msgid "The process is as follows."
-msgstr ""
+msgstr "Postup je nasledovný:"
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1759
 msgid ""
@@ -33630,6 +33674,9 @@ msgid ""
 "taken to get a useful shot, see more details in <b>Preparing a photo</b> "
 "section.\n"
 msgstr ""
+"Urobte fotografiu nočnej oblohy tak, aby ste na nej našli dostatok hviezd od"
+" stredu po okraj poľa. Pri príprave použiteľnej fotografie je treba si dávať"
+" pozor. Zistite viac v časti <b>Príprava fotografie</b>.\n"
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1762
 msgid ""
@@ -33639,6 +33686,11 @@ msgid ""
 " You need to be able to tell which point in the image corresponds to which "
 "simulated star/planet."
 msgstr ""
+"Na tabe <i>Nahratie obrázku</i> zvoľte obrázok, ktorý chcete nahrať a "
+"použite dostupné možnosti kontroly (alebo klávesové skratky) na jeho "
+"umiestnenie tak, aby približne zodpovedal smeru fotoaparátu a jeho "
+"orientácii. Musíte vedieť, ktorý bod na obrázku zodpovedá ktorej simulovanej"
+" hviezde/planéte. "
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1766
 msgid ""
@@ -33647,6 +33699,10 @@ msgid ""
 "<li>Click <i>Pick an image point for selected object...</i> button (or use a hotkey).</li>\n"
 "<li>Click the point in the image corresponding to this object (hide the simulated stars if they are too confusing at this point).</li></ol>"
 msgstr ""
+"Potom prepnite do tabu <i>Preloženie</i> a vyberte niekoľko bodov obrázku pre niekoľko nebeských telies. To spravíte tak, že\n"
+"<ol><li>Vyberiete objekt ako zvyčajne.</li>\n"
+"<li>Kliknete na tlačidlo <i>Vybrať bod obrázku pre zvolený objekt...</i> (alebo použite klávesovú skratku).</li>\n"
+"<li>Kliknite na bod na obrázku, ktorý zodpovedá tomuto telesu (možno bude potrebné skryť zobrazené simulované hviezdy, aby vás nemiatli).</li></ol>"
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1772
 msgid ""
@@ -33655,6 +33711,11 @@ msgid ""
 "image should appear aligned with the stars. If it's not, try picking more "
 "points from the ones which don't match, and retry optimization."
 msgstr ""
+"Napokon po zvolení dostatočného počtu bodov, aby ste zaplnili rôzne "
+"vzdialenosti od stredu obrázku, kliknite na tlačidlo <i>Optimalizovať</i>. "
+"Po chvíli by sa obrázok mal zobraziť tak, aby lícoval s hviezdami. Ak sa tak"
+" nestane, vyberte viac bodov pre tie, ktoré nelícujú a zopakujte "
+"optimalizovanie."
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1776
 msgid ""
@@ -33663,20 +33724,26 @@ msgid ""
 " must match one of the mounts supported by your camera as listed in the "
 "database)."
 msgstr ""
+"Na tabe <i>Model pre lensfun</i> môžete vygenerovať XML súbor pre databázu "
+"lensfun. Zadajte typ a model vašej šošovky a montáže (názvy musia zodpovedať"
+" jednotlivým montážam, ktoré podporuje váš fotoaparát a sú uvedené v "
+"databáze)."
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1781
 msgid "Preparing a photo"
-msgstr ""
+msgstr "Príprava fotografie"
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1782
 msgid "To make a useful shot, you should follow some guidelines:\n"
-msgstr ""
+msgstr "Aby ste urobili použiteľnú fotografiu, nasledujte pár rád:\n"
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1784
 msgid ""
 "Try to keep away from the horizon, because star elevation there is very "
 "dependent on weather conditions due to atmospheric refraction."
 msgstr ""
+"Snažte sa byť ďalej od obzoru, pretože výška hviezd tu silne závisí od "
+"poveternostných podmienok kvôli atmosférickej refrakcii."
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1786
 msgid ""
@@ -33684,6 +33751,8 @@ msgid ""
 "disable distortion correction may make good fitting impossible. In "
 "particular:"
 msgstr ""
+"Uistite sa, že nemáte zapnuté žiadne opravy skreslenia geometrie. V opačnom "
+"prípade nebude možné nájsť dobré preloženie. Hlavne: "
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1789
 msgid ""
@@ -33691,12 +33760,17 @@ msgid ""
 " development software like Lightroom or Darktable that you use for "
 "processing of your shots."
 msgstr ""
+"Ak fotografujete do RAW, v softvéri na vyvolávanie RAW obrázkov, ako sú "
+"Lightroom alebo Darktable, ktorý používate na spracovanie, musí byť vypnutá "
+"korekcia skreslenia šošovky."
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1791
 msgid ""
 "If you're shooting JPEG, lens distortion correction must be turned off in "
 "the camera settings before taking the photo."
 msgstr ""
+"Ak fotografujete do JPEG, pred fotografovaním vypnite v nastaveniach "
+"fotoaparátu korekciu skreslenia šošovky."
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1795
 msgid ""
@@ -33705,6 +33779,10 @@ msgid ""
 "center of projection that will be computed during the fitting process will "
 "have wrong directions if such rotation was applied."
 msgstr ""
+"Zakážte automatické otočenie obrázka podľa jeho orientácie uloženej v EXIF. "
+"Hoci takéto otočenie môže obrázok vylepšiť, pri jeho použití bude mať "
+"posunutie stredu projekcie, ktoré sa spočíta počas preloženia, nesprávne "
+"smery."
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1800
 msgid ""
@@ -33713,6 +33791,10 @@ msgid ""
 " if e.g. current time and date set in the simulation are not the same as "
 "specified in the image."
 msgstr ""
+"Obrázok, ktorý vložíte do tohto modulu, by mal obsahovať čo možno najviac "
+"EXIF informácií z pôvodného RAW. Toto umožní rozhraniu určiť či napr. "
+"aktuálny čas a dátum nastavený v simulácii nie je zhodný s tým, ktorý je "
+"uvedený v obrázku."
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1803
 msgid ""
@@ -33723,6 +33805,11 @@ msgid ""
 "<code>exiftool</code> as in the following commands (adjust the file names to"
 " your needs):"
 msgstr ""
+"Jednou z metód, ktorá používa vstupný RAW obrázok a vytvorí výsledný obrázok"
+" podľa horeuvedených pravidiel (okrem odfotenia) je použitie "
+"<code>dcraw</code> (originál od Davea Coffina) alebo <code>dcraw_emu</code> "
+"(z balíčka <code>libRaw</code>) spolu s <code>exiftool</code> podľa "
+"nasledujúcich príkazov (zmeňte meno súboru, ako potrebujete):"
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1810
 msgid ""
@@ -33732,6 +33819,11 @@ msgid ""
 "stars not as small as they are in the photo, and <code>-Z</code> gives an "
 "explicit name to the file."
 msgstr ""
+"Možnosť <code>-t 0</code> pre <code>dcraw_emu</code> zabráni automatickému "
+"otočeniu, <code>-T</code> vygeneruje súbor TIFF namiesto predvoleného PPM, "
+"<code>-W</code> zabráni automatickému zjasneniu, ktoré by mohlo zväčšiť "
+"hviezdy oproti fotografii, a <code>-Z</code> dá výstupnému súboru zreteľné "
+"meno."
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1814
 msgid ""
@@ -33740,183 +33832,195 @@ msgid ""
 "complete EXIF info than the DNG) into the TIFF. Your case may differ, you "
 "may have to copy from your RAW file instead."
 msgstr ""
+"Príkaz <code>exiftool</code> skopíruje všetky dátumové, časové a GPS "
+"informácie z JPEG (čo sa na mojom Samsungu Galaxy S8 zdá byť kompletnejší "
+"EXIF ako DNG) do TIFF. Vo vašom prípade však možno budete musieť použiť "
+"kopírovanie z RAW."
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1820
 msgid "Ctrl+Shift & left mouse drag: move the image around the sky"
 msgstr ""
+"Ctrl+Shift a potiahnutie ľavým tlačidlom myši: posunutie obrázku na oblohe"
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1821
 msgid ""
 "Ctrl+Shift & right mouse drag: scale and rotate the image around the last "
 "drag point"
 msgstr ""
+"Ctrl+Shift a potiahnutie pravým tlačidlom myši: škálovanie a otočenie "
+"obrázku okolo ostatného bodu posunu"
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1822
 msgid ""
 "Keyboard hotkeys can be configured in the Keyboard shortcuts editor (F7)."
 msgstr ""
+"Klávesové skratky je možné konfigurovať v editore klávesových skratiek (F7)."
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:719
 msgid "Image placement"
-msgstr ""
+msgstr "Umiestnenie obrázku"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:720
 msgid "Distortion model:"
-msgstr ""
+msgstr "Model skreslenia:"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:721
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:722
 msgid " px"
-msgstr ""
+msgstr " px"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:723
 msgid "Field of view in smaller direction:"
-msgstr ""
+msgstr "Zorné pole v kratšom rozmere:"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:724
 msgid "Image rotation angle:"
-msgstr ""
+msgstr "Uhol rotácie obrázku:"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:725
 msgid "Center of projection elevation:"
-msgstr ""
+msgstr "Stred výšky projekcie:"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:726
 msgid "3rd order polynomial"
-msgstr ""
+msgstr "polynóm 3. stupňa"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:727
 msgid "5th order polynomial"
-msgstr ""
+msgstr "polynóm 5. stupňa"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:728
 msgid "PTLens"
-msgstr ""
+msgstr "PTLens"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:730
 msgid "Image center shift:"
-msgstr ""
+msgstr "Posunutie stredu obrázku:"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:731
 msgid "Center of projection azimuth:"
-msgstr ""
+msgstr "Stred azimutu projekcie:"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:732
 msgid "Distortion coefficients:"
-msgstr ""
+msgstr "Koeficienty skreslenia:"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:733
 msgid ""
 "Reset\n"
 "placement"
 msgstr ""
+"Obnoviť\n"
+"umiestnenie"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:735
 msgid ""
 "Reset\n"
 "distortion"
 msgstr ""
+"Obnoviť\n"
+"skreslenie"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:737
 msgid "Image to load:"
-msgstr ""
+msgstr "Obrázok na načítanie:"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:739
 msgid "Browse for an image..."
-msgstr ""
+msgstr "Prehľadávať obrázok..."
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:743
-msgctxt "A verb in imperative, used on a button that fixes a problem."
+msgctxt "A verb used on a button that fixes a problem."
 msgid "Fix"
-msgstr ""
+msgstr "Opraviť"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:744
 msgid "Subtract background RGB:"
-msgstr ""
+msgstr "Odčítať pozadie RGB:"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:745
 msgid "Image brightness:"
-msgstr ""
+msgstr "Jasnosť obrázku:"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:746
 msgid "Image Loading"
-msgstr ""
+msgstr "Nahrávam obrázok"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:747
 msgid "Reposition image by first two points"
-msgstr ""
+msgstr "Zmeniť polohu obrázku podľa prvých dvoch bodov"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:748
 msgid "Pick an image point for selected object..."
-msgstr ""
+msgstr "Vybrať bod obrázku pre zvolený objekt..."
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:749
 msgid "Optimize"
-msgstr ""
+msgstr "Optimalizovať"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:751
 msgid "y, px"
-msgstr ""
+msgstr "y, px"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:752
 msgid "x, px"
-msgstr ""
+msgstr "x, px"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:755
 msgid "Remove point"
-msgstr ""
+msgstr "Odobrať bod"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:757
 msgid "Fitting"
-msgstr ""
+msgstr "Preložiť"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:758
 msgid " mm"
-msgstr ""
+msgstr " mm"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:759
 msgid "Make:"
-msgstr ""
+msgstr "Typ:"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:763
 msgctxt "Lens mount on a camera"
 msgid "Mount:"
-msgstr ""
+msgstr "Montáž:"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:765
 msgid "Generate"
-msgstr ""
+msgstr "Vygenerovať"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:766
 msgid "Model:"
-msgstr ""
+msgstr "Model:"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:767
 msgid "Model for lensfun"
-msgstr ""
+msgstr "Model pre lensfun"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:768
 msgid "Show image"
-msgstr ""
+msgstr "Zobraziť obrázok"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:770
 msgctxt "As in \"normal\" points, the opposite being \"selected\""
 msgid "normal"
-msgstr ""
+msgstr "normálne"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:771
 msgid "Mark image axes"
-msgstr ""
+msgstr "Označiť osi obrázku"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:772
 msgctxt "As in \"selected points\""
 msgid "selected"
-msgstr ""
+msgstr "vybrané"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:773
 msgid "Mark picked points"
-msgstr ""
+msgstr "Označiť vybrané body"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:776
 msgid "Mark center of projection"
-msgstr ""
+msgstr "Označiť stred projekcie"
