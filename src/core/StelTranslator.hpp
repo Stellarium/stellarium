@@ -41,6 +41,11 @@
 //! A call to N_() doesn't translate.
 #define N_(str) str
 
+//! @def NC_(str, ctxt)
+//! A pseudo function call that serves as a marker for the automated extraction of messages in some context.
+//! A call to NC_() doesn't translate.
+#define NC_(str, ctxt) str
+
 //! Class used to translate strings to any language.
 //! Implements a nice interface to gettext which is UTF-8 compliant and is somewhat multiplateform
 //! All its operations do not modify the global locale.

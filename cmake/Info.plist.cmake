@@ -12,6 +12,8 @@
 	<string>org.stellarium.Stellarium</string>
 	<key>CFBundleName</key>
 	<string>Stellarium</string>
+	<key>CFBundleDisplayName</key>
+	<string>Stellarium</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundlePackageType</key>
@@ -19,9 +21,9 @@
 	<key>CFBundleSignature</key>
 	<string>Stel</string>
 	<key>CFBundleVersion</key>
-	<string>@STELLARIUM_BUNDLE_VERSION@</string>
+	<string>@VERSION@</string>
 	<key>CFBundleShortVersionString</key>
-	<string>@STELLARIUM_BUNDLE_VERSION@</string>
+	<string>@VERSION@</string>
 	<key>LSMinimumSystemVersion</key>
 	<string>@PACKAGE_OSX_TARGET@</string>
 	<key>NSHumanReadableCopyright</key>
@@ -29,9 +31,11 @@
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
 	<key>NSHighResolutionCapable</key>
-	<string>true</string>
-	<key>Application Category</key>
-	<string>Education</string>
+	<true/>
+	<key>NSSupportsAutomaticGraphicsSwitching</key>
+	<true/>
+	<key>LSApplicationCategoryType</key>
+	<string>public.app-category.education</string>
 	<key>CFBundleDocumentTypes</key>
 	<array>
 	<dict>
@@ -49,6 +53,8 @@
 		</array>
 		<key>CFBundleTypeName</key>
 		<string>Stellarium Script</string>
+		<key>LSTypeIsPackage</key>
+		<false/>
 	</dict>
 	</array>
 </dict>

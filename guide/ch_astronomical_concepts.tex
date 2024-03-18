@@ -270,6 +270,7 @@ coordinates in the Markings dialog (\ref{sec:gui:view:markings}).
 
 The Earth's orbit around the Sun, i.e., the \indexterm{ecliptic},
 defines the ``equatorial line'' of this coordinate system, which is traditionally used when computing the coordinates for planets because of their close proximity to this line.
+Mirroring Earth's motion, the Sun is seen to move along the ecliptic. 
 
 The zero point of \indexterm{ecliptical longitude} $\lambda$ is the
 same as for equatorial coordinates (\Aries), and the \indexterm{ecliptical
@@ -286,11 +287,12 @@ over a period of almost 26.000 years (see section~\ref{sec:Concepts:Precession})
 In addition, \indexterm[obliquity, ecliptic]{ecliptic obliquity} against the equatorial coordinates,
 which mirrors the Earth's axial tilt, slowly changes.
 
-Therefore, also for ecliptical coordinates is is required to specify
+Therefore, also for ecliptical coordinates it is required to specify
 which date (epoch) the coordinates refer to.  Stellarium can draw grids
 for two epochs. Use the \key{,} key to draw the \indexterm{ecliptic}
 for the simulation time. The Markings dialog
-(\ref{sec:gui:view:markings}) allows you to also show a line for epoch
+(\ref{sec:gui:view:markings}) allows you to add date marks to the ecliptic 
+line \newFeature{23.1} and also show a line for epoch
 J2000.0 and grids for the ecliptical coordinates for current epoch and
 epoch J2000.0. You can assign your own shortcut keys
 (section~\ref{sec:gui:help:hotkeys}) if you frequently operate with
@@ -309,7 +311,7 @@ see that these circles vary in size, reflecting the changes in
 ecliptic \indexterm[obliquity, ecliptic]{obliquity}. The real track of where Earth's axis is pointing forms an open helical loop.
 
 The inner planets are best observed when their apparent distance from
-the Sun, or \indexterm{elongation} reaches a maximum. Unfortunately
+the Sun, or \indexterm{elongation}, reaches a maximum. Unfortunately
 there are two definitions for elongation, though:
 \begin{description}
 \item[$\psi$] angular distance on the sphere. This is today the most widely used definition.
@@ -624,9 +626,9 @@ century. There have been many attempts to properly model $\Delta T$,
 and Stellarium offers several models you can choose from in the
 configuration dialog (see
 section~\ref{sec:gui:configuration:time}). ``Espenak and
-Meeus (2006)'', is a widely accepted standard. The default, ``Modified Espenak and
-Meeus (2006)'', is created to make $\Delta T$ closely in line with observed and predicted
-values between the years 2005-2050. But if you are a researcher and want to experiment
+Meeus (2006, 2014)'', is a widely accepted standard. The default, ``Modified Espenak and
+Meeus (2006, 2014, 2023)'', is created to make $\Delta T$ closely in line with observed and predicted
+values between the years 2015-2050. But if you are a researcher and want to experiment
 with alternative models, you will hopefully like this feature. you can even specify your own data for
 $a$, $b$, $c$, $y$ and the secular term for lunar acceleration $n$
 (actually $\dot{n}=dn/dt$ in units of
@@ -659,7 +661,7 @@ The following list describes sources and a few details about the models for $\De
 \item[Astronomical Ephemeris (1960).] This is a slightly modified
   version of the IAU~1952 \citep{1939MNRAS..99..541S} formula which was
   adopted in the ``Astronomical Ephemeris''~\citep{ESAE:1961} and in
-  the \citetp{Mucke-Meeus:1983}. Valid range of usage: between years
+  the \citetp{Mucke-Meeus:Solar:1983}. Valid range of usage: between years
   -500 and 2000. $\dot{n}=-22.44''/\cy^2$.\index{IAU}
 
 \item[Tuckerman (1962, 1964) \& Goldstine (1973).] The famous tables 
@@ -778,18 +780,19 @@ The following list describes sources and a few details about the models for $\De
   The solution was updated in \citetp{StephensonMorrisonHohenkerk:2021}.
   Recommended range of usage: between years -720.0 and 2019.0 $\dot{n}=-25.82''/\cy^2$.
   
-\item[Espenak \& Meeus (2006).] This solution by F. Espenak and J. Meeus, based on 
+\item[Espenak \& Meeus (2006, 2014).] This solution by F. Espenak and J. Meeus, based on 
 	\citet{2004JHA....35..327M} and a polynomial fit
   through tabulated values for 1600-2000, is used for the NASA Eclipse
   Web Site\footnote{\url{https://eclipse.gsfc.nasa.gov/eclipse.html}}
-  and in their \citetp{Espenak-Meeus:2006}. This formula is also used in the
+  , in their \citetp{Espenak-Meeus:2006} and \citetp{Espenak:2014}. This formula is also used in the
   solar, lunar and planetary ephemeris program \program{SOLEX}. Valid
   range of usage: between years -1999 and
   3000. $\dot{n}=-25.858''/\cy^2$.
 
-\item[Modified Espenak \& Meeus (2006).] This solution\footnote{This solution
-  is used by default.} is a modification from Espenak \& Meeus (2006). Two formulae are developed to make $\Delta T$
-  closely in line with observed and predicted values by IERS and also connected with original values.
+\item[Modified Espenak \& Meeus (2006, 2014, 2023).] This solution\footnote{This solution
+  is used by default.} is a modification from Espenak \& Meeus (2006, 2014). Values for 2015-2033 are
+  interpolated from observations and predictions by IERS Rapid Service/Prediction Center. A simple formula is
+  used to connect with F. Espenak's predicted value at year 2050.
   Valid range of usage: between years -1999 and 3000. $\dot{n}=-25.858''/\cy^2$.
 
 \item[Reijs (2006).] From the Length of Day (LOD; as determined by

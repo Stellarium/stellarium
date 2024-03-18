@@ -43,7 +43,7 @@
 #include "mathUtils.hpp"
 #include "sgp4io.h"
 
-#define CONSTANTS_SET wgs72
+#define CONSTANTS_SET wgs84
 #define TYPERUN_SET   'c'
 #define OPSMODE_SET   'i'
 #define TYPEINPUT_SET 'm'
@@ -99,7 +99,7 @@ Vec3d gSatTEME::computeSubPoint(gTime ai_Time)
 	double theta, r, e2, phi, c;
 
 	theta = atan2(m_Position[1], m_Position[0]); // radians
-	resultVector[ LONGITUDE] = fmod((theta - ai_Time.toThetaGMST()), K2PI);  //radians
+	resultVector[ LONGITUDE] = fmod((theta - ai_Time.toThetaGMST()), 2.*M_PI);  //radians
 
 
 	r = std::sqrt(Sqr(m_Position[0]) + Sqr(m_Position[1]));
@@ -110,17 +110,17 @@ Vec3d gSatTEME::computeSubPoint(gTime ai_Time)
 	{
 		phi = resultVector[ LATITUDE];
 		c = 1./std::sqrt(1. - e2*Sqr(sin(phi)));
-		resultVector[ LATITUDE] = atan2(m_Position[2] + KEARTHRADIUS*c*e2*sin(phi),r);
+		resultVector[ LATITUDE] = atan2(m_Position[2] + EARTH_RADIUS*c*e2*sin(phi),r);
 	}
 	while(fabs(resultVector[ LATITUDE] - phi) >= 1E-10);
 
-	resultVector[ ALTITUDE] = r/cos(resultVector[ LATITUDE]) - KEARTHRADIUS*c;/*kilometers*/
+	resultVector[ ALTITUDE] = r/cos(resultVector[ LATITUDE]) - EARTH_RADIUS*c;/*kilometers*/
 
-	if(resultVector[ LATITUDE] > (KPI/2.0)) resultVector[ LATITUDE] -= K2PI;
+	if(resultVector[ LATITUDE] > (M_PI/2.0)) resultVector[ LATITUDE] -= 2.*M_PI;
 
-	resultVector[LATITUDE]  = resultVector[LATITUDE]/KDEG2RAD;
-	resultVector[LONGITUDE] = resultVector[LONGITUDE]/KDEG2RAD;
-	if(resultVector[LONGITUDE] < -180.0) resultVector[LONGITUDE] +=360;
+	resultVector[LATITUDE]  *= M_180_PI;
+	resultVector[LONGITUDE] *= M_180_PI;
+	if(resultVector[LONGITUDE] < -180.0) resultVector[LONGITUDE] += 360;
 	else if(resultVector[LONGITUDE] > 180.0) resultVector[LONGITUDE] -= 360;
 
 	return resultVector;

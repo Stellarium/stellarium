@@ -68,7 +68,7 @@ bool SatellitesListFilterModel::filterAcceptsRow(int source_row, const QModelInd
 	}
 	
 	// Check name
-#if (QT_VERSION>=QT_VERSION_CHECK(5,12,0))
+#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
 	if (index.data(Qt::DisplayRole).toString().contains(filterRegularExpression()))
 #else
 	if (index.data(Qt::DisplayRole).toString().contains(filterRegExp()))
@@ -78,7 +78,7 @@ bool SatellitesListFilterModel::filterAcceptsRow(int source_row, const QModelInd
 	// Check ID
 	data = index.data(Qt::UserRole);
 	QString id = data.toString();
-#if (QT_VERSION>=QT_VERSION_CHECK(5,12,0))
+#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
 	if (id.contains(filterRegularExpression()))
 #else
 	if (id.contains(filterRegExp()))
@@ -88,7 +88,7 @@ bool SatellitesListFilterModel::filterAcceptsRow(int source_row, const QModelInd
 	// search international designator
 	data = index.data(SatCosparIDRole);
 	id = data.toString();
-#if (QT_VERSION>=QT_VERSION_CHECK(5,12,0))
+#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
 	if (id.contains(filterRegularExpression()))
 #else
 	if (id.contains(filterRegExp()))
@@ -98,7 +98,7 @@ bool SatellitesListFilterModel::filterAcceptsRow(int source_row, const QModelInd
 	// search descriptions
 	data = index.data(SatDescriptionRole);
 	QString descr = data.toString();
-#if (QT_VERSION>=QT_VERSION_CHECK(5,12,0))
+#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
 	if (descr.contains(filterRegularExpression()))
 #else
 	if (descr.contains(filterRegExp()))

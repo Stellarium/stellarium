@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>861</width>
-    <height>536</height>
+    <width>664</width>
+    <height>485</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -30,100 +30,10 @@
     <number>0</number>
    </property>
    <item>
-    <widget class="BarFrame" name="TitleBar">
-     <property name="minimumSize">
-      <size>
-       <width>530</width>
-       <height>25</height>
-      </size>
+    <widget class="TitleBar" name="titleBar">
+     <property name="title" stdset="0">
+      <string>Satellites Configuration</string>
      </property>
-     <property name="maximumSize">
-      <size>
-       <width>16777215</width>
-       <height>25</height>
-      </size>
-     </property>
-     <property name="focusPolicy">
-      <enum>Qt::NoFocus</enum>
-     </property>
-     <property name="autoFillBackground">
-      <bool>false</bool>
-     </property>
-     <property name="frameShape">
-      <enum>QFrame::StyledPanel</enum>
-     </property>
-     <layout class="QHBoxLayout">
-      <property name="spacing">
-       <number>0</number>
-      </property>
-      <property name="leftMargin">
-       <number>0</number>
-      </property>
-      <property name="topMargin">
-       <number>0</number>
-      </property>
-      <property name="rightMargin">
-       <number>4</number>
-      </property>
-      <property name="bottomMargin">
-       <number>0</number>
-      </property>
-      <item>
-       <spacer>
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item>
-       <widget class="QLabel" name="stelWindowTitle">
-        <property name="text">
-         <string>Satellites Configuration</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <spacer>
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item>
-       <widget class="StelCloseButton" name="closeStelWindow">
-        <property name="minimumSize">
-         <size>
-          <width>16</width>
-          <height>16</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>16</width>
-          <height>16</height>
-         </size>
-        </property>
-        <property name="focusPolicy">
-         <enum>Qt::NoFocus</enum>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-       </widget>
-      </item>
-     </layout>
     </widget>
    </item>
    <item>
@@ -359,9 +269,12 @@
           <item row="4" column="0">
            <layout class="QHBoxLayout" name="horizontalLayout_14">
             <item>
-             <widget class="QCheckBox" name="penumbraCheckBox">
+             <widget class="QCheckBox" name="umbraAtAltitude">
+              <property name="toolTip">
+               <string>Distance to the center of umbra from Earth's surface (height of imagined satellite)</string>
+              </property>
               <property name="text">
-               <string>Show Earth's penumbra</string>
+               <string>Show umbra/penumbra at altitude:</string>
               </property>
              </widget>
             </item>
@@ -379,9 +292,27 @@
              </spacer>
             </item>
             <item>
-             <widget class="QToolButton" name="penumbraColor">
-              <property name="toolTip">
-               <string>The color of Earth's penumbra circle</string>
+             <widget class="QDoubleSpinBox" name="umbraAltitude">
+              <property name="minimumSize">
+               <size>
+                <width>120</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+              <property name="decimals">
+               <number>1</number>
+              </property>
+              <property name="minimum">
+               <double>50.000000000000000</double>
+              </property>
+              <property name="maximum">
+               <double>400000.000000000000000</double>
+              </property>
+              <property name="value">
+               <double>300.000000000000000</double>
               </property>
              </widget>
             </item>
@@ -484,12 +415,9 @@
           <item row="3" column="0">
            <layout class="QHBoxLayout" name="horizontalLayout_17">
             <item>
-             <widget class="QCheckBox" name="umbraAtDistance">
-              <property name="toolTip">
-               <string>Distance to the center of umbra from Earth's surface (height of imagined satellite)</string>
-              </property>
+             <widget class="QCheckBox" name="penumbraCheckBox">
               <property name="text">
-               <string>Show umbra at distance:</string>
+               <string>Show Earth's penumbra</string>
               </property>
              </widget>
             </item>
@@ -507,24 +435,9 @@
              </spacer>
             </item>
             <item>
-             <widget class="QDoubleSpinBox" name="umbraDistance">
-              <property name="minimumSize">
-               <size>
-                <width>120</width>
-                <height>0</height>
-               </size>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-              </property>
-              <property name="decimals">
-               <number>1</number>
-              </property>
-              <property name="minimum">
-               <double>75.000000000000000</double>
-              </property>
-              <property name="maximum">
-               <double>400000.000000000000000</double>
+             <widget class="ColorButton" name="penumbraColor">
+              <property name="toolTip">
+               <string>The color of Earth's penumbra circle</string>
               </property>
              </widget>
             </item>
@@ -605,7 +518,7 @@
              </spacer>
             </item>
             <item>
-             <widget class="QToolButton" name="transitColorButton">
+             <widget class="ColorButton" name="transitColorButton">
               <property name="toolTip">
                <string>Color of satellite markers in transit through the Sun or the Moon</string>
               </property>
@@ -642,7 +555,7 @@
              </spacer>
             </item>
             <item>
-             <widget class="QToolButton" name="invisibleColorButton">
+             <widget class="ColorButton" name="invisibleColorButton">
               <property name="toolTip">
                <string>Color of markers, labels and orbits for invisible satellites</string>
               </property>
@@ -671,7 +584,7 @@
                <number>0</number>
               </property>
               <property name="minimum">
-               <double>70.000000000000000</double>
+               <double>1.000000000000000</double>
               </property>
               <property name="maximum">
                <double>1000000.000000000000000</double>
@@ -690,7 +603,7 @@
                <number>0</number>
               </property>
               <property name="minimum">
-               <double>70.000000000000000</double>
+               <double>1.000000000000000</double>
               </property>
               <property name="maximum">
                <double>1000000.000000000000000</double>
@@ -725,7 +638,7 @@
              </spacer>
             </item>
             <item>
-             <widget class="QToolButton" name="umbraColor">
+             <widget class="ColorButton" name="umbraColor">
               <property name="toolTip">
                <string>The color of Earth's umbra circle</string>
               </property>
@@ -923,7 +836,7 @@
               </widget>
              </item>
              <item>
-              <widget class="QPushButton" name="customFilterButton">
+              <widget class="QToolButton" name="customFilterButton">
                <property name="enabled">
                 <bool>false</bool>
                </property>
@@ -959,7 +872,7 @@
            <item>
             <layout class="QHBoxLayout" name="horizontalLayout_2">
              <item>
-              <widget class="QPushButton" name="addSatellitesButton">
+              <widget class="QToolButton" name="addSatellitesButton">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                  <horstretch>0</horstretch>
@@ -977,7 +890,7 @@
               </widget>
              </item>
              <item>
-              <widget class="QPushButton" name="removeSatellitesButton">
+              <widget class="QToolButton" name="removeSatellitesButton">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                  <horstretch>0</horstretch>
@@ -995,7 +908,7 @@
               </widget>
              </item>
              <item>
-              <widget class="QPushButton" name="commSatelliteButton">
+              <widget class="QToolButton" name="commSatelliteButton">
                <property name="toolTip">
                 <string>Edit communication data for the selected satellite</string>
                </property>
@@ -1007,7 +920,7 @@
               </widget>
              </item>
              <item>
-              <widget class="QPushButton" name="selectAllButton">
+              <widget class="QToolButton" name="selectAllButton">
                <property name="toolTip">
                 <string>Select all satellites in list</string>
                </property>
@@ -1033,7 +946,7 @@
               </spacer>
              </item>
              <item>
-              <widget class="QPushButton" name="satMarkerColorPickerButton">
+              <widget class="QToolButton" name="satMarkerColorPickerButton">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                  <horstretch>0</horstretch>
@@ -1049,7 +962,7 @@
               </widget>
              </item>
              <item>
-              <widget class="QPushButton" name="satOrbitColorPickerButton">
+              <widget class="QToolButton" name="satOrbitColorPickerButton">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                  <horstretch>0</horstretch>
@@ -1065,7 +978,7 @@
               </widget>
              </item>
              <item>
-              <widget class="QPushButton" name="satInfoColorPickerButton">
+              <widget class="QToolButton" name="satInfoColorPickerButton">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                  <horstretch>0</horstretch>
@@ -1542,7 +1455,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="addSourceButton">
+          <widget class="QToolButton" name="addSourceButton">
            <property name="toolTip">
             <string>Add new source</string>
            </property>
@@ -1554,7 +1467,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="editSourceButton">
+          <widget class="QToolButton" name="editSourceButton">
            <property name="toolTip">
             <string>Edit selected source</string>
            </property>
@@ -1566,7 +1479,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="saveSourceButton">
+          <widget class="QToolButton" name="saveSourceButton">
            <property name="toolTip">
             <string>Save source</string>
            </property>
@@ -1578,7 +1491,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="deleteSourceButton">
+          <widget class="QToolButton" name="deleteSourceButton">
            <property name="toolTip">
             <string>Remove selected source</string>
            </property>
@@ -1606,7 +1519,7 @@
           </spacer>
          </item>
          <item>
-          <widget class="QPushButton" name="resetSourcesButton">
+          <widget class="QToolButton" name="resetSourcesButton">
            <property name="toolTip">
             <string>Reset sources list to it defaults</string>
            </property>
@@ -1730,15 +1643,15 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>BarFrame</class>
+   <class>TitleBar</class>
    <extends>QFrame</extends>
    <header>Dialog.hpp</header>
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>StelCloseButton</class>
-   <extends>QPushButton</extends>
-   <header>gui/StelCloseButton.hpp</header>
+   <class>ColorButton</class>
+   <extends>QToolButton</extends>
+   <header>gui/ColorButton.hpp</header>
   </customwidget>
  </customwidgets>
  <tabstops>

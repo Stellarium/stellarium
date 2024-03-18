@@ -34,7 +34,7 @@
 #include <QStandardItemModel>
 #include <QTimer>
 
-Scenery3dDialog::Scenery3dDialog(QObject* parent) : StelDialog("Scenery3d", parent), mgr(Q_NULLPTR)
+Scenery3dDialog::Scenery3dDialog(QObject* parent) : StelDialog("Scenery3d", parent), mgr(nullptr)
 {
 	ui = new Ui_scenery3dDialogForm;
 }
@@ -58,10 +58,16 @@ void Scenery3dDialog::retranslate()
 			si = mgr->getCurrentScene(); //the scene that is currently displayed
 		updateTextBrowser(si);
 
-		for (auto* but : qAsConst(shortcutButtons))
+		for (auto* but : std::as_const(shortcutButtons))
 		{
 			//replace stored text with re-translated one
-			but->setProperty("stelOriginalText",but->text());
+			const QString btClassName=but->metaObject()->className();
+			if (btClassName == "QGroupBox")
+				dynamic_cast<QGroupBox*>(but)->setProperty("stelOriginalText",dynamic_cast<QGroupBox*>(but)->title());
+			else if (btClassName == "QCheckBox")
+				dynamic_cast<QCheckBox*>(but)->setProperty("stelOriginalText",dynamic_cast<QCheckBox*>(but)->text());
+			else
+				qCritical() << "Scenery3dDialog: UNKNOWN WIDGET TYPE: " << but->metaObject()->className();
 		}
 
 		updateShortcutStrings();
@@ -88,8 +94,8 @@ void Scenery3dDialog::createDialogContent()
 	ui->comboBoxCubemapMode->setModel(new CubemapModeListModel(ui->comboBoxCubemapMode));
 
 	//connect UI events
-	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
-	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
+	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
+	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 	connect(ui->scenery3dListWidget, &QListWidget::currentItemChanged, this, &Scenery3dDialog::scenery3dChanged);
 
 	//checkboxes can connect directly to manager
@@ -103,6 +109,9 @@ void Scenery3dDialog::createDialogContent()
 	//connect(ui->checkBoxSimpleShadows,      &QCheckBox::clicked, mgr, &Scenery3d::setUseSimpleShadows);
 	//connect(ui->checkBoxCubemapShadows,     &QCheckBox::clicked, mgr, &Scenery3d::setUseFullCubemapShadows);
 	//connect(ui->spinLazyDrawingInterval, static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged), mgr, &Scenery3d::setLazyDrawingInterval);
+
+
+	connectBoolProperty(ui->ignoreInitialViewCheckBox,         "Scenery3d.ignoreInitialView");
 
 	connectBoolProperty(ui->checkBoxEnablePixelLight,          "Scenery3d.enablePixelLighting");
 	connectBoolProperty(ui->checkBoxEnableShadows,             "Scenery3d.enableShadows");
@@ -132,13 +141,15 @@ void Scenery3dDialog::createDialogContent()
 	ac = acMgr->findAction("actionShow_Scenery3d_locationinfo");
 	if(ac)
 	{
-		ui->checkBoxShowGridCoordinates->setProperty("stelActionKey",ac->getId());
-		ui->checkBoxShowGridCoordinates->setProperty("stelOriginalText",ui->checkBoxShowGridCoordinates->text());
-		ui->checkBoxShowGridCoordinates->setChecked(ac->isChecked());
-		connect(ac,&StelAction::toggled,ui->checkBoxShowGridCoordinates, &QCheckBox::setChecked);
-		connect(ui->checkBoxShowGridCoordinates,&QCheckBox::toggled,ac, &StelAction::setChecked);
+		connectBoolProperty(ui->gridCoordinatesGroupBox, "Scenery3d.enableLocationInfo");
+		ui->gridCoordinatesGroupBox->setProperty("stelActionKey",ac->getId());
+		ui->gridCoordinatesGroupBox->setProperty("stelOriginalText",ui->gridCoordinatesGroupBox->title());
 		connect(ac,&StelAction::changed,this,&Scenery3dDialog::updateShortcutStrings);
-		shortcutButtons.append(ui->checkBoxShowGridCoordinates);
+		shortcutButtons.append(ui->gridCoordinatesGroupBox);
+		ui->radioButton_GCTopRight->setChecked(mgr->getLocationInfoStyle()==S3DRenderer::LocationInfoTopRight);
+		ui->radioButton_GCBottom->setChecked(mgr->getLocationInfoStyle()==S3DRenderer::LocationInfoBottomCenter);
+		connect(ui->radioButton_GCTopRight, SIGNAL(toggled(bool)), this, SLOT(setCoordinateTextStyle()));
+		connect(ui->radioButton_GCBottom, SIGNAL(toggled(bool)), this, SLOT(setCoordinateTextStyle()));
 	}
 
 	//connectSlotsByName does not work in our case (because this class does not "own" the GUI in the Qt sense)
@@ -150,6 +161,7 @@ void Scenery3dDialog::createDialogContent()
 
 	connect(ui->sliderTorchStrength,  &QSlider::valueChanged, this, &Scenery3dDialog::on_sliderTorchStrength_valueChanged);
 	connect(ui->sliderTorchRange,     &QSlider::valueChanged, this, &Scenery3dDialog::on_sliderTorchRange_valueChanged);
+	connectDoubleProperty(ui->directionalLightPushSpinBox, "Scenery3d.directionalLightPush");
 	connect(ui->checkBoxDefaultScene, &QCheckBox::stateChanged, this, &Scenery3dDialog::on_checkBoxDefaultScene_stateChanged);
 
 	connect(ui->pushButtonOpenStoredViewDialog, &QPushButton::clicked, mgr, &Scenery3d::showStoredViewDialog);
@@ -300,6 +312,7 @@ void Scenery3dDialog::updateShortcutStrings()
 
 	for (auto* bt : shortcutButtons)
 	{
+		const QString btClassName=bt->metaObject()->className();
 		QVariant v = bt->property("stelActionKey");
 		QVariant t = bt->property("stelOriginalText");
 		if(v.isValid() && t.isValid())
@@ -309,7 +322,12 @@ void Scenery3dDialog::updateShortcutStrings()
 			StelAction* ac = acMgr->findAction(s);
 			if(ac)
 			{
-				bt->setText(text.arg(ac->getShortcut().toString(QKeySequence::NativeText)));
+				if (btClassName == "QGroupBox")
+					dynamic_cast<QGroupBox*>(bt)->setTitle(text.arg(ac->getShortcut().toString(QKeySequence::NativeText)));
+				else if (btClassName == "QCheckBox")
+					dynamic_cast<QCheckBox*>(bt)->setText(text.arg(ac->getShortcut().toString(QKeySequence::NativeText)));
+				else
+					qCritical() << "Scenery3dDialog: UNKNOWN WIDGET TYPE: " << bt->metaObject()->className();
 			}
 		}
 	}
@@ -379,7 +397,7 @@ void Scenery3dDialog::updateCurrentScene(const SceneInfo &sceneInfo)
 	{
 		ui->scenery3dListWidget->blockSignals(true);
 		QList<QListWidgetItem*> currentItems = ui->scenery3dListWidget->findItems(sceneInfo.name, Qt::MatchExactly);
-		if(currentItems.size()>0)
+		if(!currentItems.isEmpty())
 		{
 			ui->scenery3dListWidget->setCurrentItem(currentItems.at(0));
 		}
@@ -568,4 +586,15 @@ void Scenery3dDialog::setToInitialValues()
 		ui->checkBoxCubemapShadows->setVisible(false);
 		ui->checkBoxSimpleShadows->setVisible(false);
 	}
+}
+
+// Connect to the RadioButtons to set coordinate text output
+void Scenery3dDialog::setCoordinateTextStyle()
+{
+	if (ui->radioButton_GCTopRight->isChecked())
+		mgr->setLocationInfoStyle(S3DRenderer::LocationInfoTopRight);
+	else if (ui->radioButton_GCBottom->isChecked())
+		mgr->setLocationInfoStyle(S3DRenderer::LocationInfoBottomCenter);
+	else
+		qCritical() << "Scenery3dDialog: Problem with determining coordinate output!";
 }

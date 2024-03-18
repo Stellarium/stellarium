@@ -42,7 +42,7 @@ ToastGrid::ToastGrid(int amaxLevel)
 void ToastGrid::init_grid()
 {
 	// Allocate the grid memory.
-	grid.resize(size * size);
+	grid.resize(static_cast<long>(size) * size);
 	// Set up the level 0.
 	at(0, 0, 0) = at(0, 1, 0) = at(0, 1, 1) = at(0, 0, 1) = Vec3d(0, 0, -1);
 	// And the level 1
@@ -94,7 +94,7 @@ QVector<Vec3d> ToastGrid::getVertexArray(int level, int x, int y, int resolution
 	// The size of the returned array
 	int size = pow2(resolution - level) + 1;
 	QVector<Vec3d> ret;
-	ret.reserve(size * size);
+	ret.reserve(static_cast<long>(size) * size);
 	// Compute the real position in the grid
 	int scale = pow2(maxLevel - level);
 	x *= scale;
@@ -122,7 +122,7 @@ QVector<Vec2f> ToastGrid::getTextureArray(int level, int x, int y, int resolutio
 	// The size of the returned array
 	int size = pow2(resolution - level) + 1;
 	QVector<Vec2f> ret;
-	ret.reserve(size * size);
+	ret.reserve(static_cast<long>(size) * size);
 	for (int i = size-1; i >= 0; i--)
 	{
 		for (int j = 0; j < size; j++)

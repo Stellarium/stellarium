@@ -60,8 +60,8 @@ void NavStarsWindow::createDialogContent()
 	ui->setupUi(dialog);
 
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
-	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
-	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
+	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
+	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	populateNavigationalStarsSets();
 	populateNavigationalStarsSetDescription();
@@ -128,13 +128,15 @@ void NavStarsWindow::populateToday()
 
 	// Moon
 	Vec4d moon = GETSTELMODULE(SolarSystem)->getMoon()->getRTSTime(core, 0.);
-	if (moon[3]==0.)
-	{
-		moonrise = StelUtils::hoursToHmsStr(StelUtils::getHoursFromJulianDay(moon[0]+utcShift), true);
-		moonset = StelUtils::hoursToHmsStr(StelUtils::getHoursFromJulianDay(moon[2]+utcShift), true);
-	}
+	if (moon[3]==30 || moon[3]<0 || moon[3]>50) // no moonrise on current date
+		moonrise = dash;
 	else
-		moonrise = moonset = dash;
+		moonrise = StelUtils::hoursToHmsStr(StelUtils::getHoursFromJulianDay(moon[0]+utcShift), true);
+
+	if (moon[3]==40 || moon[3]<0 || moon[3]>50) // no moonset on current date
+		moonset = dash;
+	else
+		moonset = StelUtils::hoursToHmsStr(StelUtils::getHoursFromJulianDay(moon[2]+utcShift), true);
 
 	// day
 	Vec4d day = sun->getRTSTime(core, 0.);
@@ -219,6 +221,10 @@ void NavStarsWindow::populateToday()
 	ui->labelCivilTwilight->setToolTip(QString("6° %1").arg(belowHorizon));
 	ui->labelNauticalTwilight->setToolTip(QString("12° %1").arg(belowHorizon));
 	ui->labelAstronomicalTwilight->setToolTip(QString("18° %1").arg(belowHorizon));
+	QString twilights = q_("The sum of the daytime duration and duration of morning and evening twilights");
+	ui->labelCivilTwilightDuration->setToolTip(twilights);
+	ui->labelNauticalTwilightDuration->setToolTip(twilights);
+	ui->labelAstronomicalTwilightDuration->setToolTip(twilights);
 }
 
 void NavStarsWindow::populateNavigationalStarsSets()
@@ -239,12 +245,27 @@ void NavStarsWindow::populateNavigationalStarsSets()
 	nsSets->addItem(q_("French"), "French");
 	// TRANSLATORS: Part of full phrase: Russian set of navigational stars
 	nsSets->addItem(q_("Russian"), "Russian");
+	// TRANSLATORS: Part of full phrase: Soviet aviation set of navigational stars
+	nsSets->addItem(q_("Soviet aviation"), "USSRAvia");	
 	// TRANSLATORS: Part of full phrase: German set of navigational stars
 	nsSets->addItem(q_("German"), "German");
+
+	// TRANSLATORS: Part of full phrase: Voskhod and Soyuz manned space programs set of navigational stars
+	nsSets->addItem(q_("Voskhod and Soyuz manned space programs"), "USSRSpace");
+	// TRANSLATORS: Part of full phrase: Apollo space program set of navigational stars
+	nsSets->addItem(q_("Apollo space program"), "Apollo");
+	
+	// Telescope alignment stars
 	nsSets->addItem("Gemini APS", "GeminiAPS");
 	nsSets->addItem("Meade LX200", "MeadeLX200");
 	nsSets->addItem("Meade ETX", "MeadeETX");
-	nsSets->addItem("Celestron", "Celestron");
+	nsSets->addItem("Meade Autostar #494", "MeadeAS494");
+	nsSets->addItem("Meade Autostar #497", "MeadeAS497");
+	nsSets->addItem("Celestron NexStar", "CelestronNS");
+	nsSets->addItem("Skywatcher SynScan", "SkywatcherSS");
+	nsSets->addItem("Vixen Starbook", "VixenSB");
+	nsSets->addItem("Argo Navis", "ArgoNavis");
+	nsSets->addItem("Sky Commander DSC", "SkyCommander");
 
 	//Restore the selection
 	index = nsSets->findData(selectedNsSetId, Qt::UserRole, Qt::MatchCaseSensitive);

@@ -9,6 +9,8 @@
 # the `language` matrix defined below to confirm you have the correct set of
 # supported CodeQL languages.
 #
+# See also https://github.com/actions/runner-images
+#
 name: "CodeQL"
 
 on:
@@ -24,7 +26,7 @@ jobs:
   analyze:
     name: Analyze
     runs-on: ubuntu-latest
-    if: "!contains(github.actor, 'transifex')"
+    if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.actor, 'transifex')"
 
     strategy:
       fail-fast: false
@@ -36,19 +38,22 @@ jobs:
 
     steps:
     - name: Install dependencies
+      if: ${{ matrix.language=='cpp' }}
       run: |
-        sudo apt-get update
+        sudo apt remove php7.* -y
+        sudo apt remove php8.* -y
+        sudo apt update
         # using force-overwrite due to
         # https://github.com/actions/virtual-environments/issues/2703
-        sudo ACCEPT_EULA=Y apt-get upgrade -o Dpkg::Options::="--force-overwrite" --yes
-        sudo apt-get install -y qtbase5-private-dev qtscript5-dev libqt5svg5-dev qttools5-dev-tools qttools5-dev libqt5opengl5-dev qtmultimedia5-dev libqt5multimedia5-plugins libqt5serialport5 libqt5serialport5-dev qtpositioning5-dev libgps-dev libqt5positioning5 libqt5positioning5-plugins qtwebengine5-dev libqt5charts5-dev zlib1g-dev libgl1-mesa-dev libdrm-dev cmake
+        #sudo ACCEPT_EULA=Y apt upgrade -o Dpkg::Options::="--force-overwrite" --yes
+        sudo apt install -y qt6-base-private-dev qt6-multimedia-dev qt6-positioning-dev qt6-tools-dev qt6-tools-dev-tools qt6-base-dev-tools qt6-qpa-plugins qt6-image-formats-plugins qt6-l10n-tools qt6-webengine-dev qt6-webengine-dev-tools libqt6charts6-dev libqt6charts6 libqt6opengl6-dev libqt6positioning6-plugins libqt6serialport6-dev qt6-base-dev libqt6webenginecore6-bin libqt6webengine6-data libexiv2-dev libnlopt-cxx-dev zlib1g-dev libgl1-mesa-dev libdrm-dev libglx-dev libxkbcommon-x11-dev libgps-dev
 
     - name: Checkout repository
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     # Initializes the CodeQL tools for scanning.
     - name: Initialize CodeQL
-      uses: github/codeql-action/init@v2
+      uses: github/codeql-action/init@v3
       with:
         languages: ${{ matrix.language }}
         # If you wish to specify custom queries, you can do so here or in a config file.
@@ -56,33 +61,22 @@ jobs:
         # Prefix the list here with "+" to use these queries and those in the config file.
         # queries: ./path/to/local/query, your-org/your-repo/queries@main
 
-    # Autobuild attempts to build any compiled languages  (C/C++, C#, or Java).
-    # If this step fails, then you should remove it and run the build manually (see below)
     - name: Build
+      if: ${{ matrix.language=='cpp' }}
       run: |
         mkdir -p build
         cd build
-        cmake -DCMAKE_BUILD_TYPE=Release ${{ github.workspace }}
+        cmake -DCMAKE_BUILD_TYPE=Release -DENABLE_NLS=Off ${{ github.workspace }}
         make
 
-    # ℹ️ Command-line programs to run using the OS shell.
-    # 📚 https://git.io/JvXDl
-
-    # ✏️ If the Autobuild fails above, remove it and uncomment the following three lines
-    #    and modify them (or add more) to build your code if your project
-    #    uses a compiled language
-
-    #- run: |
-    #   make bootstrap
-    #   make release
-
     - name: Perform CodeQL Analysis
-      uses: github/codeql-action/analyze@v2
+      uses: github/codeql-action/analyze@v3
       with:
+        category: "/language:${{matrix.language}}"
         upload: false
         output: sarif-results
 
-    - name: Filter deps
+    - name: Filter Dependencies
       uses: advanced-security/filter-sarif@main
       with:
         input: sarif-results/${{ matrix.language }}.sarif
@@ -91,6 +85,6 @@ jobs:
           -**/_deps/**
 
     - name: Upload SARIF
-      uses: github/codeql-action/upload-sarif@v1
+      uses: github/codeql-action/upload-sarif@v3
       with:
         sarif_file: sarif-results/${{ matrix.language }}.sarif

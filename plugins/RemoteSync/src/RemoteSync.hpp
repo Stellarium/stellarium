@@ -38,6 +38,14 @@ Q_DECLARE_LOGGING_CATEGORY(remoteSync)
 Provides state synchronization for multiple Stellarium instances
 running in a network. See manual for detailed description.
 
+This plugin makes use of the QLoggingCategory infrastructure. By default it is very verbose.
+To reduce verbosity, configure an environment variable with these entries (Note the closing semicolon!):
+QT_LOGGING_RULES="stel.plugin.remoteSync.debug=false;
+		  stel.plugin.remoteSync.client.debug=false;
+		  stel.plugin.remoteSync.protocol.debug=true;"
+
+The final parts may be debug|info|warning|critical = true|false. Default=true.
+
 @}
 */
 
@@ -73,16 +81,16 @@ public:
 	Q_ENUM(ClientBehavior)
 
 	RemoteSync();
-	virtual ~RemoteSync() Q_DECL_OVERRIDE;
+	~RemoteSync() override;
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
-	virtual void init() Q_DECL_OVERRIDE;
-	virtual void update(double deltaTime) Q_DECL_OVERRIDE;
+	void init() override;
+	void update(double deltaTime) override;
 
-	virtual double getCallOrder(StelModuleActionName actionName) const Q_DECL_OVERRIDE;
+	double getCallOrder(StelModuleActionName actionName) const override;
 
-	virtual bool configureGui(bool show=true) Q_DECL_OVERRIDE;
+	bool configureGui(bool show=true) override;
 	///////////////////////////////////////////////////////////////////////////
 
 	QString getClientServerHost() const { return clientServerHost; }
@@ -196,9 +204,6 @@ private:
 
 Q_DECLARE_METATYPE(RemoteSync::SyncState)
 
-//! Stream overload for debugging
-QDebug operator<<(QDebug, RemoteSync::SyncState);
-
 #include "StelPluginInterface.hpp"
 
 //! This class is used by Qt to manage a plug-in interface
@@ -208,9 +213,9 @@ class RemoteSyncStelPluginInterface : public QObject, public StelPluginInterface
 	Q_PLUGIN_METADATA(IID StelPluginInterface_iid)
 	Q_INTERFACES(StelPluginInterface)
 public:
-	virtual StelModule* getStelModule() const Q_DECL_OVERRIDE;
-	virtual StelPluginInfo getPluginInfo() const Q_DECL_OVERRIDE;
-	virtual QObjectList getExtensionList() const Q_DECL_OVERRIDE { return QObjectList(); }
+	StelModule* getStelModule() const override;
+	StelPluginInfo getPluginInfo() const override;
+	//QObjectList getExtensionList() const override { return QObjectList(); }
 };
 
 #endif /*REMOTESYNC_HPP*/

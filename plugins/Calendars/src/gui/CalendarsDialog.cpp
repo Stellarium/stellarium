@@ -72,8 +72,8 @@ void CalendarsDialog::createDialogContent()
 	connect(gui, SIGNAL(flagUseKineticScrollingChanged(bool)), this, SLOT(enableKineticScrolling(bool)));
 
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
-	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
-	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
+	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
+	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), this, SLOT(resetCalendarsSettings()));
 	setAboutHtml();
@@ -138,7 +138,7 @@ void CalendarsDialog::createDialogContent()
 	connectBoolProperty(ui->bahaiAstronomicalCheckBox,  "Calendars.flagShowBahaiAstronomical");
 
 	connectBoolProperty(ui->overrideTextColorCheckBox,  "Calendars.flagTextColorOverride");
-	connectColorButton(ui->textcolorToolButton,         "Calendars.textColor", "Calendars/text_color");
+	ui->textcolorToolButton->setup("Calendars.textColor", "Calendars/text_color");
 
 	// MAKE SURE to connect all part edit elements respective ...Changed() method here.
 	connect(ui->julianYearSpinBox,		SIGNAL(valueChanged(int)), this, SLOT(julianChanged()));

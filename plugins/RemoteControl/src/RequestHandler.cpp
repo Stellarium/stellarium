@@ -49,7 +49,7 @@ public:
 	{
 		rcTranslator = localInstance;
 	}
-	QString getTranslation(const QString &key) Q_DECL_OVERRIDE
+	QString getTranslation(const QString &key) override
 	{
 		//try to get a RemoteControl specific translation first
 		QString trans = rcTranslator->tryQtranslate(key);
@@ -70,7 +70,7 @@ public:
 		rcTranslator = localInstance;
 	}
 
-	QString getTranslation(const QString &key) Q_DECL_OVERRIDE
+	QString getTranslation(const QString &key) override
 	{
 		//try to get a RemoteControl specific translation first
 		QString trans = rcTranslator->tryQtranslate(key);
@@ -281,7 +281,7 @@ void RequestHandler::refreshTemplates()
 				Template tmp(f);
 				tmp.translate(*transProv);
 				//check if the file was correctly loaded
-				if(tmp.size()>0)
+				if(!tmp.isEmpty())
 				{
 					templateMap.insert('/'+line.toUtf8(),tmp);
 				}

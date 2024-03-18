@@ -49,7 +49,7 @@ class OcularDialog : public StelDialog
 
 public:
 	OcularDialog(Oculars* plugin, QList<CCD *>* ccds, QList<Ocular *>* oculars, QList<Telescope *>* telescopes, QList<Lens *>* lenses);
-	virtual ~OcularDialog() Q_DECL_OVERRIDE;
+	~OcularDialog() override;
 
 public slots:
 	void closeWindow();
@@ -69,7 +69,7 @@ public slots:
 	void moveDownSelectedOcular();
 	void moveDownSelectedTelescope();
 	void moveDownSelectedLens();
-	void retranslate() Q_DECL_OVERRIDE;
+	void retranslate() override;
 
 	// Mini-methods required to immediately update display
 	void updateOcular();
@@ -83,7 +83,7 @@ public slots:
 
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots
-	virtual void createDialogContent() Q_DECL_OVERRIDE;
+	void createDialogContent() override;
 	Ui_ocularDialogForm* ui;
 
 private slots:

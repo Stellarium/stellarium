@@ -36,9 +36,7 @@
 void CLIProcessor::parseCLIArgsPreQApp(const QStringList argList)
 {
 #ifdef Q_OS_WIN
-	if (argsGetOption(argList, "-s", "--safe-mode"))
-		qputenv("QT_OPENGL", "software");
-
+    #if QT_VERSION < QT_VERSION_CHECK(6,0,0)
 	if (argsGetOption(argList, "-a", "--angle-mode"))
 		qputenv("QT_OPENGL", "angle");
 
@@ -57,9 +55,29 @@ void CLIProcessor::parseCLIArgsPreQApp(const QStringList argList)
 		qputenv("QT_OPENGL", "angle");
 		qputenv("QT_ANGLE_PLATFORM", "warp");
 	}
+    #endif
 	if (argsGetOption(argList, "-m", "--mesa-mode"))
+	{
 		qputenv("QT_OPENGL", "software");
+		qputenv("MESA_GL_VERSION_OVERRIDE", "3.3"); // The Mesa 20.1.8 library reports providing 3.1 only. This does the trick for us.
+		// These prepare using current Mesa3D libraries, should the user install them. Else the vars are harmless.
+		qputenv("QT_OPENGL_DLL", "opengl32sw.dll");
+		qputenv("GALLIUM_DRIVER", "llvmpipe");
+	}
 #endif
+	// Override user dir. This must be made via environment variable, else an empty user dir is created before resetting (GH:#3079)
+	try
+	{
+		QString newUserDir;
+		newUserDir = argsGetOptionWithArg(argList, "-u", "--user-dir", "").toString();
+		if (newUserDir!="" && !newUserDir.isEmpty())
+			qputenv("STEL_USERDIR", newUserDir.toLocal8Bit());
+	}
+	catch (std::runtime_error& e)
+	{
+		qCritical() << "ERROR: while processing --user-dir option: " << e.what();
+		exit(1);
+	}
 }
 
 void CLIProcessor::parseCLIArgsPreConfig(const QStringList& argList)
@@ -84,12 +102,13 @@ void CLIProcessor::parseCLIArgsPreConfig(const QStringList& argList)
 			  << "--version (or -v)       : Print program name and version and exit.\n"
 			  << "--help (or -h)          : This cruft.\n"
 			  << "--config-file (or -c)   : Use an alternative name for the config file\n"
+			  << "--log-file (or -l)      : Use an alternative name for the log file\n"
 			  << "--user-dir (or -u)      : Use an alternative user data directory\n"
 			  << "--verbose               : Even more diagnostic output in logfile \n"
 			  << "                          (esp. multimedia handling)\n"
 			  << "--opengl-compat (or -C) : Request OpenGL Compatibility profile\n"
 			  << "                          May help for certain driver configurations.\n"
-			  << "--fix-text (or -t)      : May fix text rendering problems\n"
+			  << "--low-graphics (or -L)  : Force low-graphics mode\n"
 			  << "--single-buffer         : Use single buffer swap (avoid screen blanking on Intel UHD)\n"
 			  << "--scale-gui  <scale factor>  : Scaling the GUI according to scale factor\n"
 			  << "--gui-css (or -G) <styleName> : Use customized <styleName>.css file for GUI colors\n"
@@ -115,12 +134,13 @@ void CLIProcessor::parseCLIArgsPreConfig(const QStringList& argList)
 		          << "--multires-image        : With filename / URL argument, specify a\n"
 			  << "                          multi-resolution image to load\n"
 #ifdef Q_OS_WIN
+			  #if QT_VERSION < QT_VERSION_CHECK(6,0,0)
 			  << "--angle-mode (or -a)    : Use ANGLE as OpenGL ES2 rendering engine (autodetect driver)\n"
 			  << "--angle-d3d9 (or -9)    : Force use Direct3D 9 for ANGLE OpenGL ES2 rendering engine\n"
 			  << "--angle-d3d11           : Force use Direct3D 11 for ANGLE OpenGL ES2 rendering engine\n"
 			  << "--angle-warp            : Force use the Direct3D 11 software rasterizer for ANGLE OpenGL ES2 rendering engine\n"
+			  #endif
 			  << "--mesa-mode (or -m)     : Use MESA as software OpenGL rendering engine\n"
-			  << "--safe-mode (or -s)     : Synonymous to --mesa-mode \n"
 			  #ifdef ENABLE_SPOUT
 			  << "--spout (or -S) <sky|all> : Act as SPOUT sender (Sky only/including GUI)\n"
 			  << "--spout-name <name>     : Set particular name for SPOUT sender.\n"
@@ -136,8 +156,8 @@ void CLIProcessor::parseCLIArgsPreConfig(const QStringList& argList)
 	if (argsGetOption(argList, "-C", "--opengl-compat"))
 		qApp->setProperty("onetime_opengl_compat", true);
 
-	if (argsGetOption(argList, "-t", "--fix-text"))
-		qApp->setProperty("text_texture", true); // Will be observed in StelPainter::drawText()
+	if (argsGetOption(argList, "-L", "--low-graphics"))
+		qApp->setProperty("onetime_force_low_graphics", true);
 
 	if (argsGetOption(argList, "", "--single-buffer"))
 		qApp->setProperty("onetime_single_buffer", true);
@@ -153,19 +173,6 @@ void CLIProcessor::parseCLIArgsPreConfig(const QStringList& argList)
 				std::cout << qPrintable(i) << std::endl;
 		}
 		exit(0);
-	}
-
-	try
-	{
-		QString newUserDir;
-		newUserDir = argsGetOptionWithArg(argList, "-u", "--user-dir", "").toString();
-		if (newUserDir!="" && !newUserDir.isEmpty())
-			StelFileMgr::setUserDir(newUserDir);
-	}
-	catch (std::runtime_error& e)
-	{
-		qCritical() << "ERROR: while processing --user-dir option: " << e.what();
-		exit(1);
 	}
 }
 

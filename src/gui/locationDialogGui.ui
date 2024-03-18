@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>630</width>
-    <height>542</height>
+    <width>786</width>
+    <height>300</height>
    </rect>
   </property>
   <property name="styleSheet">
@@ -30,168 +30,10 @@
     <number>0</number>
    </property>
    <item>
-    <widget class="BarFrame" name="TitleBar">
-     <property name="minimumSize">
-      <size>
-       <width>16</width>
-       <height>25</height>
-      </size>
+    <widget class="TitleBar" name="titleBar">
+     <property name="title" stdset="0">
+      <string>Location</string>
      </property>
-     <property name="maximumSize">
-      <size>
-       <width>16777215</width>
-       <height>30</height>
-      </size>
-     </property>
-     <property name="frameShape">
-      <enum>QFrame::StyledPanel</enum>
-     </property>
-     <layout class="QHBoxLayout">
-      <property name="leftMargin">
-       <number>0</number>
-      </property>
-      <property name="topMargin">
-       <number>0</number>
-      </property>
-      <property name="rightMargin">
-       <number>4</number>
-      </property>
-      <property name="bottomMargin">
-       <number>0</number>
-      </property>
-      <item>
-       <spacer>
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item>
-       <widget class="QLabel" name="stelWindowTitle">
-        <property name="palette">
-         <palette>
-          <active>
-           <colorrole role="WindowText">
-            <brush brushstyle="SolidPattern">
-             <color alpha="255">
-              <red>194</red>
-              <green>194</green>
-              <blue>195</blue>
-             </color>
-            </brush>
-           </colorrole>
-           <colorrole role="Text">
-            <brush brushstyle="SolidPattern">
-             <color alpha="255">
-              <red>194</red>
-              <green>194</green>
-              <blue>195</blue>
-             </color>
-            </brush>
-           </colorrole>
-          </active>
-          <inactive>
-           <colorrole role="WindowText">
-            <brush brushstyle="SolidPattern">
-             <color alpha="255">
-              <red>194</red>
-              <green>194</green>
-              <blue>195</blue>
-             </color>
-            </brush>
-           </colorrole>
-           <colorrole role="Text">
-            <brush brushstyle="SolidPattern">
-             <color alpha="255">
-              <red>194</red>
-              <green>194</green>
-              <blue>195</blue>
-             </color>
-            </brush>
-           </colorrole>
-          </inactive>
-          <disabled>
-           <colorrole role="WindowText">
-            <brush brushstyle="SolidPattern">
-             <color alpha="255">
-              <red>194</red>
-              <green>194</green>
-              <blue>195</blue>
-             </color>
-            </brush>
-           </colorrole>
-           <colorrole role="Text">
-            <brush brushstyle="SolidPattern">
-             <color alpha="255">
-              <red>194</red>
-              <green>194</green>
-              <blue>195</blue>
-             </color>
-            </brush>
-           </colorrole>
-          </disabled>
-         </palette>
-        </property>
-        <property name="font">
-         <font>
-          <weight>75</weight>
-          <italic>false</italic>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="text">
-         <string>Location</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <spacer>
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item>
-       <widget class="StelCloseButton" name="closeStelWindow">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-          <horstretch>16</horstretch>
-          <verstretch>16</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>16</width>
-          <height>16</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>16</width>
-          <height>16</height>
-         </size>
-        </property>
-        <property name="focusPolicy">
-         <enum>Qt::NoFocus</enum>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-       </widget>
-      </item>
-     </layout>
     </widget>
    </item>
    <item>
@@ -229,18 +71,6 @@
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>180</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>16777215</width>
-          <height>2400</height>
-         </size>
-        </property>
         <property name="frameShape">
          <enum>QFrame::StyledPanel</enum>
         </property>
@@ -264,28 +94,22 @@
           <number>0</number>
          </property>
          <item row="1" column="0">
-          <widget class="MapWidget" name="mapWidget">
+          <widget class="MapWidget" name="mapWidget" native="true">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+             <horstretch>1</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
           </widget>
          </item>
          <item row="1" column="1">
-          <widget class="QFrame" name="frame_2">
+          <widget class="QFrame" name="frame_citylist">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
              <horstretch>0</horstretch>
              <verstretch>0</verstretch>
             </sizepolicy>
-           </property>
-           <property name="minimumSize">
-            <size>
-             <width>200</width>
-             <height>180</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>300</width>
-             <height>2400</height>
-            </size>
            </property>
            <property name="frameShape">
             <enum>QFrame::StyledPanel</enum>
@@ -311,6 +135,12 @@
             </property>
             <item>
              <widget class="QListView" name="citiesListView">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Expanding">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="focusPolicy">
                <enum>Qt::NoFocus</enum>
               </property>
@@ -330,12 +160,6 @@
             </item>
             <item>
              <widget class="QLineEdit" name="citySearchLineEdit">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
               <property name="toolTip">
                <string>Standard list of locations contains only English names (without diacritics!)</string>
               </property>
@@ -362,18 +186,6 @@
       </item>
       <item row="2" column="1">
        <widget class="QGroupBox" name="groupBox">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>180</height>
-         </size>
-        </property>
         <property name="title">
          <string>Current location information</string>
         </property>
@@ -391,13 +203,7 @@
           <number>0</number>
          </property>
          <item row="2" column="1" colspan="3">
-          <widget class="QFrame" name="frame_3">
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>0</height>
-            </size>
-           </property>
+          <widget class="QFrame" name="frame_buttons">
            <property name="frameShape">
             <enum>QFrame::StyledPanel</enum>
            </property>
@@ -435,12 +241,6 @@
               <property name="enabled">
                <bool>false</bool>
               </property>
-              <property name="minimumSize">
-               <size>
-                <width>100</width>
-                <height>0</height>
-               </size>
-              </property>
               <property name="focusPolicy">
                <enum>Qt::NoFocus</enum>
               </property>
@@ -453,12 +253,6 @@
              <widget class="QPushButton" name="deleteLocationFromListPushButton">
               <property name="enabled">
                <bool>false</bool>
-              </property>
-              <property name="minimumSize">
-               <size>
-                <width>60</width>
-                <height>0</height>
-               </size>
               </property>
               <property name="focusPolicy">
                <enum>Qt::NoFocus</enum>
@@ -485,19 +279,7 @@
           </widget>
          </item>
          <item row="0" column="1">
-          <widget class="QFrame" name="frame_4">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>0</height>
-            </size>
-           </property>
+          <widget class="QFrame" name="frame_coordinates">
            <property name="frameShape">
             <enum>QFrame::StyledPanel</enum>
            </property>
@@ -520,80 +302,8 @@
             <property name="horizontalSpacing">
              <number>6</number>
             </property>
-            <item row="0" column="0">
-             <widget class="QLabel" name="label_5">
-              <property name="text">
-               <string>Latitude:</string>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="1">
-             <widget class="QSpinBox" name="altitudeSpinBox">
-              <property name="minimumSize">
-               <size>
-                <width>100</width>
-                <height>24</height>
-               </size>
-              </property>
-              <property name="toolTip">
-               <string>Enter the elevation in meter</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-              </property>
-              <property name="suffix">
-               <string> m</string>
-              </property>
-              <property name="minimum">
-               <number>-2000</number>
-              </property>
-              <property name="maximum">
-               <number>200000</number>
-              </property>
-              <property name="singleStep">
-               <number>100</number>
-              </property>
-             </widget>
-            </item>
-            <item row="4" column="0" colspan="2">
-             <widget class="QCheckBox" name="useIpQueryCheckBox">
-              <property name="text">
-               <string>Get location from Network</string>
-              </property>
-             </widget>
-            </item>
-            <item row="5" column="0" colspan="2">
-             <widget class="QCheckBox" name="useAsDefaultLocationCheckBox">
-              <property name="text">
-               <string>Use current location as default</string>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="0">
-             <widget class="QLabel" name="label_7">
-              <property name="text">
-               <string>Elevation:</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="1">
-             <widget class="AngleSpinBox" name="longitudeSpinBox">
-              <property name="minimumSize">
-               <size>
-                <width>140</width>
-                <height>24</height>
-               </size>
-              </property>
-              <property name="toolTip">
-               <string>You can enter values in decimal degrees, or using dms format, for example: +1d 12m 8s</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-              </property>
-             </widget>
-            </item>
             <item row="1" column="0">
-             <widget class="QLabel" name="label">
+             <widget class="QLabel" name="labelLongitude">
               <property name="text">
                <string>Longitude:</string>
               </property>
@@ -601,17 +311,24 @@
             </item>
             <item row="0" column="1">
              <widget class="AngleSpinBox" name="latitudeSpinBox">
-              <property name="minimumSize">
-               <size>
-                <width>180</width>
-                <height>24</height>
-               </size>
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
               </property>
               <property name="toolTip">
                <string>You can enter values in decimal degrees, or using dms format, for example: +1d 12m 8s</string>
               </property>
               <property name="alignment">
                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="5" column="0" colspan="2">
+             <widget class="QCheckBox" name="useAsDefaultLocationCheckBox">
+              <property name="text">
+               <string>Use current location as default</string>
               </property>
              </widget>
             </item>
@@ -646,6 +363,75 @@
               </property>
              </widget>
             </item>
+            <item row="1" column="1">
+             <widget class="AngleSpinBox" name="longitudeSpinBox">
+              <property name="toolTip">
+               <string>You can enter values in decimal degrees, or using dms format, for example: +1d 12m 8s</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="0">
+             <widget class="QLabel" name="labelLatitude">
+              <property name="text">
+               <string>Latitude:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="0" colspan="2">
+             <widget class="QCheckBox" name="useIpQueryCheckBox">
+              <property name="text">
+               <string>Get location from Network</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <widget class="QSpinBox" name="altitudeSpinBox">
+              <property name="toolTip">
+               <string>Enter the elevation in meter</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+              <property name="suffix">
+               <string> m</string>
+              </property>
+              <property name="minimum">
+               <number>-2000</number>
+              </property>
+              <property name="maximum">
+               <number>200000</number>
+              </property>
+              <property name="singleStep">
+               <number>100</number>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="0">
+             <widget class="QLabel" name="labelElevation">
+              <property name="text">
+               <string>Elevation:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="6" column="0" colspan="2">
+             <widget class="QCheckBox" name="autoChangeLandscapesCheckBox">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="toolTip">
+               <string>Automatic change of landscape when planet or location is changed</string>
+              </property>
+              <property name="text">
+               <string>Auto-select landscapes</string>
+              </property>
+             </widget>
+            </item>
            </layout>
           </widget>
          </item>
@@ -663,18 +449,12 @@
           </spacer>
          </item>
          <item row="0" column="3">
-          <widget class="QFrame" name="frame_5">
+          <widget class="QFrame" name="frame_names">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
              <horstretch>0</horstretch>
              <verstretch>0</verstretch>
             </sizepolicy>
-           </property>
-           <property name="minimumSize">
-            <size>
-             <width>350</width>
-             <height>0</height>
-            </size>
            </property>
            <property name="frameShape">
             <enum>QFrame::StyledPanel</enum>
@@ -695,34 +475,6 @@
             <property name="bottomMargin">
              <number>0</number>
             </property>
-            <item row="1" column="1">
-             <widget class="QComboBox" name="regionNameComboBox">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="minimumSize">
-               <size>
-                <width>0</width>
-                <height>24</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>16777215</width>
-                <height>24</height>
-               </size>
-              </property>
-              <property name="editable">
-               <bool>true</bool>
-              </property>
-              <property name="insertPolicy">
-               <enum>QComboBox::NoInsert</enum>
-              </property>
-             </widget>
-            </item>
             <item row="0" column="1">
              <widget class="QLineEdit" name="cityNameLineEdit">
               <property name="placeholderText">
@@ -731,9 +483,40 @@
              </widget>
             </item>
             <item row="2" column="0">
-             <widget class="QLabel" name="label_6">
+             <widget class="QLabel" name="labelPlanet">
               <property name="text">
                <string>Planet:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="0">
+             <widget class="QLabel" name="labelTimeZone">
+              <property name="text">
+               <string>Time zone:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QLabel" name="labelRegion">
+              <property name="text">
+               <string>Region:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QComboBox" name="regionNameComboBox">
+              <property name="editable">
+               <bool>true</bool>
+              </property>
+              <property name="insertPolicy">
+               <enum>QComboBox::NoInsert</enum>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="0">
+             <widget class="QLabel" name="labelName">
+              <property name="text">
+               <string>Name/City:</string>
               </property>
              </widget>
             </item>
@@ -744,17 +527,23 @@
               </property>
              </widget>
             </item>
-            <item row="3" column="0">
-             <widget class="QLabel" name="timeZoneLabel">
+            <item row="5" column="0" colspan="2">
+             <widget class="QCheckBox" name="dstCheckBox">
+              <property name="toolTip">
+               <string/>
+              </property>
               <property name="text">
-               <string>Time zone:</string>
+               <string>Enable daylight saving time</string>
               </property>
              </widget>
             </item>
-            <item row="0" column="0">
-             <widget class="QLabel" name="label_3">
+            <item row="6" column="0" colspan="2">
+             <widget class="QCheckBox" name="autoEnableEnvironmentCheckBox">
+              <property name="toolTip">
+               <string>Auto-enable atmosphere when planet is changed</string>
+              </property>
               <property name="text">
-               <string>Name/City:</string>
+               <string>Auto-enable atmosphere</string>
               </property>
              </widget>
             </item>
@@ -773,46 +562,11 @@
             </item>
             <item row="2" column="1">
              <widget class="QComboBox" name="planetNameComboBox">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="minimumSize">
-               <size>
-                <width>0</width>
-                <height>24</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>16777215</width>
-                <height>24</height>
-               </size>
-              </property>
               <property name="editable">
                <bool>true</bool>
               </property>
               <property name="insertPolicy">
                <enum>QComboBox::NoInsert</enum>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="0">
-             <widget class="QLabel" name="label_4">
-              <property name="text">
-               <string>Region:</string>
-              </property>
-             </widget>
-            </item>
-            <item row="5" column="0" colspan="2">
-             <widget class="QCheckBox" name="dstCheckBox">
-              <property name="toolTip">
-               <string/>
-              </property>
-              <property name="text">
-               <string>Enable daylight saving time</string>
               </property>
              </widget>
             </item>
@@ -829,7 +583,7 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>BarFrame</class>
+   <class>TitleBar</class>
    <extends>QFrame</extends>
    <header>Dialog.hpp</header>
    <container>1</container>
@@ -843,11 +597,6 @@
    <class>MapWidget</class>
    <extends>QWidget</extends>
    <header>MapWidget.hpp</header>
-  </customwidget>
-  <customwidget>
-   <class>StelCloseButton</class>
-   <extends>QPushButton</extends>
-   <header>gui/StelCloseButton.hpp</header>
   </customwidget>
  </customwidgets>
  <tabstops>

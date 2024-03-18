@@ -47,6 +47,7 @@
 *       ----------------------------------------------------------------      */
 
 #include "sgp4unit.h"
+#include "StelUtils.hpp"
 #include <cmath>
 
 //FILE *dbgfile;
@@ -1999,7 +2000,8 @@ void getgravconst(gravconsttype whichconst, double& tumin, double& mu, double& r
 		case wgs84:
 			// ------------ wgs-84 constants ------------
 			mu     = 398600.5;            // in km3 / s2
-			radiusearthkm = 6378.137;     // km
+			//radiusearthkm = 6378.137;     // km
+			radiusearthkm = EARTH_RADIUS; // km (EARTH_RADIUS=6378.1366)
 			xke    = 60.0 / std::sqrt(radiusearthkm*radiusearthkm*radiusearthkm/mu);
 			tumin  = 1.0 / xke;
 			j2     =   0.00108262998905;

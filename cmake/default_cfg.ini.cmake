@@ -8,6 +8,7 @@ Satellites                          = true
 SolarSystemEditor                   = true
 Exoplanets                          = true
 MeteorShowers                       = true
+MissingStars                        = true
 Novae                               = true
 FOV                                 = true
 

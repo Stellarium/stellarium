@@ -188,7 +188,37 @@ void StelMovementMgr::init()
 			setMountMode(StelMovementMgr::MountEquinoxEquatorial);
 		}
 	}
+	resetInitViewPos();
 
+	QString movementGroup = N_("Movement and Selection");
+	addAction("actionSwitch_Equatorial_Mount", N_("Miscellaneous"), N_("Switch between equatorial and azimuthal mount"), "equatorialMount", "Ctrl+M");
+	addAction("actionGoto_Selected_Object", movementGroup, N_("Center on selected object"), "tracking", "Space");
+	addAction("actionGoto_Deselection", movementGroup, N_("Deselect the selected object"), "deselection()", "Ctrl+Space");
+	addAction("actionZoom_In_Auto", movementGroup, N_("Zoom in on selected object"), "autoZoomIn()", "/");
+	addAction("actionZoom_Out_Auto", movementGroup, N_("Zoom out"), "autoZoomOut()", "\\");
+	// AW: Same behaviour has action "actionGoto_Selected_Object" by the fact (Is it for backward compatibility?)
+	addAction("actionSet_Tracking", movementGroup, N_("Track object"), "tracking", "T");
+	// Implementation of quick turning to different directions (examples: CdC, HNSKY)
+	addAction("actionLook_Towards_East", movementGroup, N_("Look towards East"), "lookEast()", "Shift+E");
+	addAction("actionLook_Towards_West", movementGroup, N_("Look towards West"), "lookWest()", "Shift+W");
+	addAction("actionLook_Towards_North", movementGroup, N_("Look towards North"), "lookNorth()", "Shift+N");
+	addAction("actionLook_Towards_South", movementGroup, N_("Look towards South"), "lookSouth()", "Shift+S");
+	addAction("actionLook_Towards_Zenith", movementGroup, N_("Look towards Zenith"), "lookZenith()", "Shift+Z");
+	// Additional hooks
+	addAction("actionLook_Towards_NCP", movementGroup, N_("Look towards North Celestial pole"), "lookTowardsNCP()", "Alt+Shift+N");
+	addAction("actionLook_Towards_SCP", movementGroup, N_("Look towards South Celestial pole"), "lookTowardsSCP()", "Alt+Shift+S");
+	// Field of view
+	// The feature was moved from FOV plugin	
+	bindingFOVActions();
+
+	viewportOffsetTimeline=new QTimeLine(1000, this);
+	viewportOffsetTimeline->setFrameRange(0, 100);
+	connect(viewportOffsetTimeline, SIGNAL(valueChanged(qreal)), this, SLOT(handleViewportOffsetMovement(qreal)));
+	targetViewportOffset.set(core->getViewportHorizontalOffset(), core->getViewportVerticalOffset());
+}
+
+void StelMovementMgr::resetInitViewPos()
+{
 	// With a special code of init_view_position=x/y/1 (or actually, anything equal or larger to 1) you can set zenith into the center and atan2(x/y) to bottom of screen.
 	// examples:  1/0   ->0     NORTH is bottom
 	//           -1/0   ->180   SOUTH is bottom
@@ -220,38 +250,11 @@ void StelMovementMgr::init()
 		viewDirectionJ2000 = core->altAzToJ2000(initViewPos, StelCore::RefractionOff);
 		//qDebug() << "viewDirectionJ2000: " << viewDirectionJ2000[0] << "/" << viewDirectionJ2000[1] << "/" << viewDirectionJ2000[2];
 		setViewDirectionJ2000(viewDirectionJ2000);
-		//qDebug() << "   up2000 initViewUp becomes " << initViewUp[0] << "/" << initViewUp[1] << "/" << initViewUp[2];		
+		//qDebug() << "   up2000 initViewUp becomes " << initViewUp[0] << "/" << initViewUp[1] << "/" << initViewUp[2];
 		setViewUpVector(initViewUp);
 
 		//qDebug() << "   upVectorMountFrame becomes " << upVectorMountFrame[0] << "/" << upVectorMountFrame[1] << "/" << upVectorMountFrame[2];
 	}
-
-
-	QString movementGroup = N_("Movement and Selection");
-	addAction("actionSwitch_Equatorial_Mount", N_("Miscellaneous"), N_("Switch between equatorial and azimuthal mount"), "equatorialMount", "Ctrl+M");
-	addAction("actionGoto_Selected_Object", movementGroup, N_("Center on selected object"), "tracking", "Space");
-	addAction("actionGoto_Deselection", movementGroup, N_("Deselect the selected object"), "deselection()", "Ctrl+Space");
-	addAction("actionZoom_In_Auto", movementGroup, N_("Zoom in on selected object"), "autoZoomIn()", "/");
-	addAction("actionZoom_Out_Auto", movementGroup, N_("Zoom out"), "autoZoomOut()", "\\");
-	// AW: Same behaviour has action "actionGoto_Selected_Object" by the fact (Is it for backward compatibility?)
-	addAction("actionSet_Tracking", movementGroup, N_("Track object"), "tracking", "T");
-	// Implementation of quick turning to different directions (examples: CdC, HNSKY)
-	addAction("actionLook_Towards_East", movementGroup, N_("Look towards East"), "lookEast()", "Shift+E");
-	addAction("actionLook_Towards_West", movementGroup, N_("Look towards West"), "lookWest()", "Shift+W");
-	addAction("actionLook_Towards_North", movementGroup, N_("Look towards North"), "lookNorth()", "Shift+N");
-	addAction("actionLook_Towards_South", movementGroup, N_("Look towards South"), "lookSouth()", "Shift+S");
-	addAction("actionLook_Towards_Zenith", movementGroup, N_("Look towards Zenith"), "lookZenith()", "Shift+Z");
-	// Additional hooks
-	addAction("actionLook_Towards_NCP", movementGroup, N_("Look towards North Celestial pole"), "lookTowardsNCP()", "Alt+Shift+N");
-	addAction("actionLook_Towards_SCP", movementGroup, N_("Look towards South Celestial pole"), "lookTowardsSCP()", "Alt+Shift+S");
-	// Field of view
-	// The feature was moved from FOV plugin	
-	bindingFOVActions();
-
-	viewportOffsetTimeline=new QTimeLine(1000, this);
-	viewportOffsetTimeline->setFrameRange(0, 100);
-	connect(viewportOffsetTimeline, SIGNAL(valueChanged(qreal)), this, SLOT(handleViewportOffsetMovement(qreal)));
-	targetViewportOffset.set(core->getViewportHorizontalOffset(), core->getViewportVerticalOffset());
 }
 
 void StelMovementMgr::bindingFOVActions()
@@ -534,11 +537,12 @@ void StelMovementMgr::handleMouseWheel(QWheelEvent* event)
 			double jdNow=core->getJD();
 			int year, month, day, hour, min, sec, millis;
 			StelUtils::getDateTimeFromJulianDay(jdNow, &year, &month, &day, &hour, &min, &sec, &millis);
+			year+=qRound(numSteps);
 			double jdNew;
-			StelUtils::getJDFromDate(&jdNew, year+qRound(numSteps), month, day, hour, min, static_cast<float>(sec));
+			StelUtils::getJDFromDate(&jdNew, year, month, day, hour, min, static_cast<float>(sec));
 			core->setJD(jdNew);
 			emit core->dateChanged();			
-			emit core->dateChangedByYear();
+			emit core->dateChangedByYear(year);
 		}
 		else if (event->modifiers() & Qt::AltModifier)
 		{
@@ -595,6 +599,13 @@ bool StelMovementMgr::handlePinch(qreal scale, bool started)
 
 void StelMovementMgr::handleMouseClicks(QMouseEvent* event)
 {
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+	const auto eventPosX = event->position().x();
+	const auto eventPosY = event->position().y();
+#else
+	const auto eventPosX = event->x();
+	const auto eventPosY = event->y();
+#endif
 	switch (event->button())
 	{
 		case Qt::RightButton:
@@ -621,26 +632,18 @@ void StelMovementMgr::handleMouseClicks(QMouseEvent* event)
 			}
 			else if (event->type()==QEvent::MouseButtonPress)
 			{
-				if (event->modifiers() & Qt::ControlModifier)
+				const auto modifiers = event->modifiers() & (Qt::ControlModifier|Qt::ShiftModifier|Qt::AltModifier);
+				if (modifiers == Qt::ControlModifier)
 				{
 					dragTimeMode=true;
 					beforeTimeDragTimeRate=core->getTimeRate();
 					timeDragHistory.clear();
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-					addTimeDragPoint(event->position().x(), event->position().y());
-#else
-					addTimeDragPoint(event->x(), event->y());
-#endif
+					addTimeDragPoint(eventPosX, eventPosY);
 				}
 				isDragging = true;
 				hasDragged = false;
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-				previousX = event->position().x();
-				previousY = event->position().y();
-#else
-				previousX = event->x();
-				previousY = event->y();
-#endif
+				previousX = eventPosX;
+				previousY = eventPosY;
 				event->accept();
 				return;
 			}
@@ -694,17 +697,9 @@ void StelMovementMgr::handleMouseClicks(QMouseEvent* event)
 					}
 
 					// Try to select object at that position
-				#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-					objectMgr->findAndSelect(core, event->position().x(), event->position().y(), event->modifiers().testFlag(Qt::MetaModifier) ? StelModule::AddToSelection : StelModule::ReplaceSelection);
-				#else
-					objectMgr->findAndSelect(core, event->x(), event->y(), event->modifiers().testFlag(Qt::MetaModifier) ? StelModule::AddToSelection : StelModule::ReplaceSelection);
-				#endif
+					objectMgr->findAndSelect(core, eventPosX, eventPosY, event->modifiers().testFlag(Qt::MetaModifier) ? StelModule::AddToSelection : StelModule::ReplaceSelection);
 			#else
-				#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-					objectMgr->findAndSelect(core, event->position().x(), event->position().y(), event->modifiers().testFlag(Qt::ControlModifier) ? StelModule::AddToSelection : StelModule::ReplaceSelection);
-				#else
-					objectMgr->findAndSelect(core, event->x(), event->y(), event->modifiers().testFlag(Qt::ControlModifier) ? StelModule::AddToSelection : StelModule::ReplaceSelection);
-				#endif
+					objectMgr->findAndSelect(core, eventPosX, eventPosY, event->modifiers().testFlag(Qt::ControlModifier) ? StelModule::AddToSelection : StelModule::ReplaceSelection);
 			#endif
 					if (objectMgr->getWasSelected())
 						setFlagTracking(false);
@@ -1153,7 +1148,7 @@ void StelMovementMgr::updateVisionVector(double deltaTime)
 			move.coef=1.f;
 
 			//qDebug() << "Mount/Pole difference =" << fabs((fabs(viewDirectionMountFrame.v[2]) - 1.));
-			if (fabs((fabs(viewDirectionMountFrame.v[2]) - 1.)) < 0.01 )
+			if (fabs((fabs(viewDirectionMountFrame.v[2]) - 1.)) < 0.00001 )
 			{
 				//qDebug() << "ATTENTION: View towards or near the pole of the mount frame. This would cause black screen or orientation jitter.";
 				//qDebug() << "\tviewDirectionMountFrame=" << viewDirectionMountFrame;
@@ -1483,7 +1478,6 @@ void StelMovementMgr::moveToAltAzi(const Vec3d& aim, const Vec3d &aimUp, float m
 		move.start=safeAltAz; //core->altAzToJ2000(safeAltAz, StelCore::RefractionOff);
 		viewDirectionJ2000=core->altAzToJ2000(move.start, StelCore::RefractionOff);
 		upVectorMountFrame.set(0,0,1);
-
 	}
 	move.startUp=aimUp; // we must put this to the target up vector immediately.
 	move.speed=1.f/(moveDuration*1000);
@@ -1497,7 +1491,6 @@ void StelMovementMgr::moveToAltAzi(const Vec3d& aim, const Vec3d &aimUp, float m
 	//StelUtils::rectToSphe(&newAzi, &newAlt, move.aim);
 	//qDebug() << "StelMovementMgr::moveToAltAzi() from alt:" << currAlt*(180./M_PI) << "/azi" << currAzi*(180./M_PI)  << "to alt:" << newAlt*(180./M_PI)  << "azi" << newAzi*(180./M_PI) ;
 }
-
 
 Vec3d StelMovementMgr::j2000ToMountFrame(const Vec3d& v) const
 {
@@ -1617,6 +1610,7 @@ void StelMovementMgr::panView(const double deltaAz, const double deltaAlt)
 		{
 			setViewUpVector(Vec3d(0., 0., 1.));
 		}
+		emit currentDirectionChanged();
 	}
 }
 

@@ -45,6 +45,7 @@ src/gui/HelpDialog.cpp
 src/gui/StelGui.cpp
 src/gui/StelGuiItems.cpp
 src/gui/StelDialog.cpp
+src/gui/StelDialog.hpp
 src/gui/ViewDialog.cpp
 src/gui/LocationDialog.cpp
 src/gui/AddRemoveLandscapesDialog.cpp
@@ -57,7 +58,6 @@ src/gui/AstroCalcChart.cpp
 src/gui/AstroCalcExtraEphemerisDialog.cpp
 src/gui/AstroCalcCustomStepsDialog.cpp
 src/gui/ObsListDialog.cpp
-src/gui/ObsListCreateEditDialog.cpp
 src/gui/ConfigureDSOColorsDialog.cpp
 src/gui/ConfigureOrbitColorsDialog.cpp
 src/gui/DateTimeDialog.cpp
@@ -87,7 +87,6 @@ src/ui_astroCalcDialog.h
 src/ui_astroCalcExtraEphemerisDialog.h
 src/ui_astroCalcCustomStepsDialog.h
 src/ui_obsListDialog.h
-src/ui_obsListCreateEditDialog.h
 src/ui_dsoColorsDialog.h
 src/ui_orbitColorsDialog.h
 src/ui_skylightDialog.h
@@ -245,3 +244,11 @@ plugins/OnlineQueries/src/HipOnlineQuery.cpp
 plugins/OnlineQueries/src/OnlineQueries.cpp
 plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp
 plugins/OnlineQueries/src/ui_onlineQueriesDialog.h
+plugins/MissingStars/src/MissingStars.cpp
+plugins/MissingStars/src/MissingStar.cpp
+plugins/MissingStars/src/MissingStar.hpp
+plugins/MissingStars/src/gui/MissingStarsDialog.cpp
+plugins/MissingStars/src/ui_missingStarsDialog.h
+plugins/LensDistortionEstimator/src/LensDistortionEstimator.cpp
+plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp
+plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h

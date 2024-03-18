@@ -119,7 +119,7 @@ public:
 	StelProjectorCylinder(ModelViewTranformP func) : StelProjector(func) {}
 	QString getNameI18() const override;
 	QString getDescriptionI18() const override;
-	virtual float getMaxFov() const override {return 185.f;} // slight overshoot
+	float getMaxFov() const override {return 185.f;} // slight overshoot
 	bool forward(Vec3f &win) const override;
 	bool backward(Vec3d &v) const override;
 	//float fovToViewScalingFactor(float fov) const override;

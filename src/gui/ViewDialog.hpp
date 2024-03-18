@@ -52,13 +52,13 @@ protected:
 	Ui_viewDialogForm* ui;
 	//! Initialize the dialog widgets and connect the signals/slots
 	void createDialogContent() override;
+	bool eventFilter(QObject* object, QEvent* event) override;
 private slots:
 	void populateLists();
 	void populateToolTips();
 	void skyCultureChanged();
 	void changeProjection(const QString& projectionNameI18n);
 	void projectionChanged();
-	void changeLandscape(QListWidgetItem* item);
 	void landscapeChanged(QString id,QString name);
 	void updateZhrDescription(int zhr);
 	void setCurrentLandscapeAsDefault(void);
@@ -98,6 +98,8 @@ private slots:
 	void populateOrbitsControls(bool flag);
 	void populateTrailsControls(bool flag);
 	void populateNomenclatureControls(bool flag);
+
+	void setDisplayFormatForSpins(bool flagDecimalDegrees);
 
 private:
 	void connectGroupBox(class QGroupBox* groupBox, const QString& actionId);

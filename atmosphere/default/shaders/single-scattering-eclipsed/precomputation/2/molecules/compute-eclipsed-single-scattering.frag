@@ -120,7 +120,7 @@ vec2 lightPollutionTexVarsToTexCoords(const float altitude, const float cosViewZ
 #endif
 #line 8 0 // compute-eclipsed-single-scattering.frag
 #line 1 4 // radiance-to-luminance.h.glsl
-const mat4 radianceToLuminance=mat4(21296.1113,10585.7773,6.80903196,807.40564,  8819.19727,3416.5498,0.346691847,67.973465,  1511.18506,551.902527,0,6.17586422,  177.630722,64.1456985,0,0.693584085);
+const mat4 radianceToLuminance=mat4(21296.1113,10585.7764,6.80903196,807.40564,  8819.19727,3416.5498,0.346691847,67.973465,  1511.18506,551.902527,0,6.17586422,  177.630707,64.1456985,0,0.693584085);
 #line 9 0 // compute-eclipsed-single-scattering.frag
 #line 1 5 // single-scattering-eclipsed.h.glsl
 #ifndef INCLUDE_ONCE_050024D2_BD56_434E_8D40_2055DA0B78EC

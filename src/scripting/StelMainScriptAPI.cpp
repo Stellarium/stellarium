@@ -258,8 +258,8 @@ void StelMainScriptAPI::setObserverLocation(double longitude, double latitude, d
 {
 	StelCore* core = StelApp::getInstance().getCore();
 	StelLocation loc = core->getCurrentLocation();
-	loc.longitude = static_cast<float>(longitude);
-	loc.latitude = static_cast<float>(latitude);
+	loc.setLongitude(static_cast<float>(longitude));
+	loc.setLatitude(static_cast<float>(latitude));
 	if (altitude > -1000)
 		loc.altitude = qRound(altitude);
 	if (!planet.isEmpty())
@@ -303,8 +303,8 @@ QVariantMap StelMainScriptAPI::getObserverLocationInfo()
 	const PlanetP& planet = core->getCurrentPlanet();
 	QString planetName = core->getCurrentLocation().planetName;
 	QVariantMap map;
-	map.insert("longitude", core->getCurrentLocation().longitude);
-	map.insert("latitude", core->getCurrentLocation().latitude);
+	map.insert("longitude", core->getCurrentLocation().getLongitude());
+	map.insert("latitude", core->getCurrentLocation().getLatitude());
 	map.insert("planet", planetName);
 	map.insert("altitude", core->getCurrentLocation().altitude);
 	map.insert("location", core->getCurrentLocation().getID());
@@ -340,15 +340,50 @@ QStringList StelMainScriptAPI::getAllTimezoneNames()
 	return StelApp::getInstance().getLocationMgr().getAllTimezoneNames();
 }
 
+// Coordinate conversion: geographic (WGS84)-->UTM
+QList<double> StelMainScriptAPI::geo2utm(const double longitude, const double latitude, const int zone)
+{
+	QPair<Vec3d, Vec2d> utm=StelLocationMgr::geo2utm(longitude, latitude, zone);
+	Vec3d pos=utm.first;
+	Vec2d ang=utm.second;
+	return QList<double>({pos[0], pos[1], pos[2], ang[0]*M_180_PI, ang[1]});
+}
+// Coordinate conversion: UTM->geographic (WGS84)
+QList<double> StelMainScriptAPI::utm2geo(const double easting, const double northing, const int zone, const bool north)
+{
+	QPair<Vec3d, Vec2d> geo=StelLocationMgr::utm2geo(easting, northing, zone, north);
+	Vec3d pos=geo.first;
+	Vec2d ang=geo.second;
+	return QList<double>({pos[0], pos[1], pos[2], ang[0]*M_180_PI, ang[1]});
+}
+
 void StelMainScriptAPI::screenshot(const QString& prefix, bool invert, const QString& dir, const bool overwrite, const QString &format)
 {
-	bool oldInvertSetting = StelMainView::getInstance().getFlagInvertScreenShotColors();
-	QString oldFormat=StelMainView::getInstance().getScreenshotFormat();
-	StelMainView::getInstance().setFlagInvertScreenShotColors(invert);
-	if ((format.length()>0) && (format.length()<=4))
+	QString realDir("");
+	if ((!dir.isEmpty()) && (!StelApp::getInstance().getScriptMgr().getFlagAllowExternalScreenshotDir()))
+	{
+		qWarning() << "SCRIPT CONFIGURATION ISSUE: the script wants to store a screenshot" << prefix << "." << format << "to an external directory " << dir;
+		qWarning() << "  To enable this, check the settings in the script console";
+		qWarning() << "  or set entry scripts/flag_allow_screenshots_dir=true in config.ini.";
+	}
+	else
+		realDir=dir;
+
+
+	const bool oldInvertSetting = StelMainView::getInstance().getFlagInvertScreenShotColors();
+	const QString oldFormat=StelMainView::getInstance().getScreenshotFormat();
+	if ((!format.isEmpty()) && (format.length()<=4))
 		StelMainView::getInstance().setScreenshotFormat(format);
+	// Check requested against set image format.
+	if ((!format.isEmpty()) && (StelMainView::getInstance().getScreenshotFormat() != format))
+	{
+		qWarning() << "Screenshot format" << format << "not supported. Not saving screenshot.";
+		return;
+	}
+
+	StelMainView::getInstance().setFlagInvertScreenShotColors(invert);
 	StelMainView::getInstance().setFlagOverwriteScreenShots(overwrite);
-	StelMainView::getInstance().saveScreenShot(prefix, dir, overwrite);
+	StelMainView::getInstance().saveScreenShot(prefix, realDir, overwrite);
 	StelMainView::getInstance().setFlagInvertScreenShotColors(oldInvertSetting);
 	StelMainView::getInstance().setScreenshotFormat(oldFormat);
 }
@@ -356,6 +391,11 @@ void StelMainScriptAPI::screenshot(const QString& prefix, bool invert, const QSt
 void StelMainScriptAPI::setGuiVisible(bool b)
 {
 	StelApp::getInstance().getGui()->setVisible(b);
+}
+
+void StelMainScriptAPI::setSelectedObjectMarkerVisible(bool b)
+{
+	GETSTELMODULE(StelObjectMgr)->setFlagSelectedObjectPointer(b);
 }
 
 void StelMainScriptAPI::setGuiStyle(const QString& cssStyle)
@@ -1434,11 +1474,7 @@ QVariantMap StelMainScriptAPI::getScreenXYFromAltAzi(const QString &alt, const Q
 
 QString StelMainScriptAPI::getEnv(const QString &var)
 {
-#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
 	return qEnvironmentVariable(var.toLocal8Bit().constData());
-#else
-	return QString::fromLocal8Bit(qgetenv(var.toLocal8Bit().constData()));
-#endif
 }
 
 // return whether a particular module has been loaded. Mostly useful to check whether a module available as plugin is active.
@@ -1505,4 +1541,11 @@ void StelMainScriptAPI::setDisplayGamma(double gamma)
 double StelMainScriptAPI::getDisplayGamma()
 {
     return static_cast<double>(StelApp::getInstance().getCore()->getToneReproducer()->getDisplayGamma());
+}
+
+Vec2d StelMainScriptAPI::setWindowSize(int width, int height)
+{
+	StelMainView &mainView=StelMainView::getInstance();
+	QRectF rect=mainView.setWindowSize(width, height);
+	return Vec2d(rect.width(), rect.height());
 }

@@ -33,13 +33,13 @@ class AngleMeasureDialog : public StelDialog
 
 public:
 	AngleMeasureDialog();
-	~AngleMeasureDialog() Q_DECL_OVERRIDE;
+	~AngleMeasureDialog() override;
 
 public slots:
-	void retranslate() Q_DECL_OVERRIDE;
+	void retranslate() override;
 
 protected:
-	void createDialogContent() Q_DECL_OVERRIDE;
+	void createDialogContent() override;
 
 private slots:
 	void restoreDefaults();

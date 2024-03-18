@@ -331,67 +331,14 @@ void StelDialog::connectBoolProperty(QGroupBox *checkBox, const QString &propNam
 	new QGroupBoxStelPropertyConnectionHelper(prop,checkBox);
 }
 
-bool StelDialog::askConfirmation()
+bool StelDialog::askConfirmation(const QString &message)
 {
-	return (QMessageBox::warning(&StelMainView::getInstance(), q_("Attention!"), q_("Are you sure? This will delete your customized data."), QMessageBox::Yes | QMessageBox::No, QMessageBox::No) == QMessageBox::Yes);
+	return (QMessageBox::warning(&StelMainView::getInstance(), q_("Attention!"), message, QMessageBox::Yes | QMessageBox::No, QMessageBox::No) == QMessageBox::Yes);
 }
 
-void StelDialog::connectColorButton(QToolButton *toolButton, QString propertyName, QString iniName, QString moduleName)
+void StelDialog::messageBox(const QString &title, const QString &message)
 {
-	toolButton->setProperty("propName", propertyName);
-	toolButton->setProperty("iniName", iniName);
-	toolButton->setProperty("moduleName", moduleName);
-	StelProperty* prop = StelApp::getInstance().getStelPropertyManager()->getProperty(propertyName);
-	QColor color=prop->getValue().value<Vec3f>().toQColor();
-	// Use style sheet to create a nice button :)
-	toolButton->setStyleSheet("QToolButton { background-color:" + color.name() + "; }");
-	toolButton->setFixedSize(QSize(18, 18));
-
-	connect(toolButton, SIGNAL(released()), this, SLOT(askColor()));
-}
-
-void StelDialog::askColor()
-{
-	// Only work if connected from a QToolButton
-	if (!sender())
-	{
-		qWarning() << "askColor(): No sender? Ignoring.";
-		Q_ASSERT(0);
-		return;
-	}
-	if (QString(sender()->metaObject()->className()) != QString("QToolButton"))
-	{
-		qWarning() << "Sender not a QToolButton but a |" << sender()->metaObject()->className() << "|! ColorButton not set up properly! Ignoring.";
-		Q_ASSERT(0);
-		return;
-	}
-	QString propName=sender()->property("propName").toString();
-	QString iniName=sender()->property("iniName").toString();
-	QString moduleName=sender()->property("moduleName").toString(); // optional
-	if ((propName.isEmpty()) || (iniName.isEmpty()))
-	{
-		qWarning() << "ColorButton not set up properly! Ignoring.";
-		Q_ASSERT(0);
-		return;
-	}
-	Vec3d vColor = StelApp::getInstance().getStelPropertyManager()->getProperty(propName)->getValue().value<Vec3f>().toVec3d();
-	QColor color = vColor.toQColor();
-	QColor c = QColorDialog::getColor(color, &StelMainView::getInstance() , q_(static_cast<QToolButton*>(QObject::sender())->toolTip()));
-	if (c.isValid())
-	{
-		vColor = Vec3d(c.redF(), c.greenF(), c.blueF());
-		StelApp::getInstance().getStelPropertyManager()->setStelPropertyValue(propName, QVariant::fromValue(vColor.toVec3f()));
-		if (moduleName.isEmpty())
-			StelApp::getInstance().getSettings()->setValue(iniName, vColor.toStr());
-		else
-		{
-			StelModule *module=StelApp::getInstance().getModuleMgr().getModule(moduleName);
-			QSettings *settings=module->getSettings();
-			Q_ASSERT(settings);
-			settings->setValue(iniName, vColor.toStr());
-		}
-		static_cast<QToolButton*>(QObject::sender())->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
-	}
+	QMessageBox::information(&StelMainView::getInstance(), title, message);
 }
 
 void StelDialog::enableKineticScrolling(bool b)
@@ -399,7 +346,7 @@ void StelDialog::enableKineticScrolling(bool b)
 	if (kineticScrollingList.length()==0) return;
 	if (b)
 	{
-		for (auto* w : qAsConst(kineticScrollingList))
+		for (auto* w : std::as_const(kineticScrollingList))
 		{
 			QScroller::grabGesture(w, QScroller::LeftMouseButtonGesture);
 			QScroller::scroller(w); // WHAT DOES THIS DO? We don't use the return value.
@@ -407,7 +354,7 @@ void StelDialog::enableKineticScrolling(bool b)
 	}
 	else
 	{
-		for (auto* w : qAsConst(kineticScrollingList))
+		for (auto* w : std::as_const(kineticScrollingList))
 		{
 			QScroller::ungrabGesture(w);
 			// QScroller::scroller(w);
@@ -444,7 +391,7 @@ QAbstractButtonStelPropertyConnectionHelper::QAbstractButtonStelPropertyConnecti
 	bool ok = val.canConvert<bool>();
 	Q_ASSERT_X(ok,"QAbstractButtonStelPropertyConnectionHelper","Can not convert to bool datatype");
 	Q_UNUSED(ok)
-	onPropertyChanged(val);
+	QAbstractButtonStelPropertyConnectionHelper::onPropertyChanged(val);
 
 	//in this direction, we can directly connect because Qt supports QVariant slots with the new syntax
 	connect(button, &QAbstractButton::toggled, prop, &StelProperty::setValue);
@@ -465,7 +412,7 @@ QGroupBoxStelPropertyConnectionHelper::QGroupBoxStelPropertyConnectionHelper(Ste
 	bool ok = val.canConvert<bool>();
 	Q_ASSERT_X(ok,"QGroupBoxStelPropertyConnectionHelper","Can not convert to bool datatype");
 	Q_UNUSED(ok)
-	onPropertyChanged(val);
+	QGroupBoxStelPropertyConnectionHelper::onPropertyChanged(val);
 
 	//in this direction, we can directly connect because Qt supports QVariant slots with the new syntax
 	connect(box, &QGroupBox::toggled, prop, &StelProperty::setValue);
@@ -486,7 +433,7 @@ QComboBoxStelPropertyConnectionHelper::QComboBoxStelPropertyConnectionHelper(Ste
 	bool ok = val.canConvert<int>();
 	Q_ASSERT_X(ok,"QComboBoxStelPropertyConnectionHelper","Can not convert to int datatype");
 	Q_UNUSED(ok)
-	onPropertyChanged(val);
+	QComboBoxStelPropertyConnectionHelper::onPropertyChanged(val);
 
 	//in this direction, we can directly connect because Qt supports QVariant slots with the new syntax
 	connect(combo, static_cast<void (QComboBox::*)(int)>(&QComboBox::activated),prop,&StelProperty::setValue);
@@ -506,7 +453,7 @@ QComboBoxStelStringPropertyConnectionHelper::QComboBoxStelStringPropertyConnecti
 	bool ok = val.canConvert<QString>();
 	Q_ASSERT_X(ok,"QComboBoxStelStringPropertyConnectionHelper","Can not convert to QString datatype");
 	Q_UNUSED(ok)
-	onPropertyChanged(val);
+	QComboBoxStelStringPropertyConnectionHelper::onPropertyChanged(val);
 
 	//in this direction, we can directly connect because Qt supports QVariant slots with the new syntax
 #if (QT_VERSION>=QT_VERSION_CHECK(5, 14, 0))
@@ -531,7 +478,7 @@ QLineEditStelPropertyConnectionHelper::QLineEditStelPropertyConnectionHelper(Ste
 	bool ok = val.canConvert<int>();
 	Q_ASSERT_X(ok,"QLineEditStelPropertyConnectionHelper","Can not convert to int datatype");
 	Q_UNUSED(ok)
-	onPropertyChanged(val);
+	QLineEditStelPropertyConnectionHelper::onPropertyChanged(val);
 
 	//in this direction, we can directly connect because Qt supports QVariant slots with the new syntax
 	connect(edit, static_cast<void (QLineEdit::*)(const QString&)>(&QLineEdit::textEdited),prop,&StelProperty::setValue);
@@ -552,7 +499,7 @@ QSpinBoxStelPropertyConnectionHelper::QSpinBoxStelPropertyConnectionHelper(StelP
 	bool ok = val.canConvert<int>();
 	Q_ASSERT_X(ok,"QSpinBoxStelPropertyConnectionHelper","Can not convert to int datatype");
 	Q_UNUSED(ok)
-	onPropertyChanged(val);
+	QSpinBoxStelPropertyConnectionHelper::onPropertyChanged(val);
 
 	//in this direction, we can directly connect because Qt supports QVariant slots with the new syntax
 	connect(spin, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged),prop,&StelProperty::setValue);
@@ -573,7 +520,7 @@ QDoubleSpinBoxStelPropertyConnectionHelper::QDoubleSpinBoxStelPropertyConnection
 	bool ok = val.canConvert<double>();
 	Q_ASSERT_X(ok,"QDoubleSpinBoxStelPropertyConnectionHelper","Can not convert to double datatype");
 	Q_UNUSED(ok)
-	onPropertyChanged(val);
+	QDoubleSpinBoxStelPropertyConnectionHelper::onPropertyChanged(val);
 
 	//in this direction, we can directly connect because Qt supports QVariant slots with the new syntax
 	connect(spin, static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged),prop,&StelProperty::setValue);
@@ -594,7 +541,7 @@ AngleSpinBoxStelPropertyConnectionHelper::AngleSpinBoxStelPropertyConnectionHelp
 	bool ok = val.canConvert<double>();
 	Q_ASSERT_X(ok,"AngleSpinBoxStelPropertyConnectionHelper","Can not convert to double datatype");
 	Q_UNUSED(ok)
-	onPropertyChanged(val);
+	AngleSpinBoxStelPropertyConnectionHelper::onPropertyChanged(val);
 
 	//in this direction, we can directly connect because Qt supports QVariant slots with the new syntax
 	connect(spin, static_cast<void (AngleSpinBox::*)(double)>(&AngleSpinBox::valueChangedDeg),prop,&StelProperty::setValue);
@@ -618,7 +565,7 @@ QSliderStelPropertyConnectionHelper::QSliderStelPropertyConnectionHelper(StelPro
 	Q_UNUSED(ok)
 
 	dRange = maxValue - minValue;
-	onPropertyChanged(val);
+	QSliderStelPropertyConnectionHelper::onPropertyChanged(val);
 
 	connect(slider,SIGNAL(valueChanged(int)),this,SLOT(sliderIntValueChanged(int)));
 }
@@ -632,7 +579,7 @@ QSliderStelPropertyConnectionHelper::QSliderStelPropertyConnectionHelper(StelPro
 	Q_UNUSED(ok)
 
 	dRange = maxValue - minValue;
-	onPropertyChanged(val);
+	QSliderStelPropertyConnectionHelper::onPropertyChanged(val);
 
 	connect(slider,SIGNAL(valueChanged(int)),this,SLOT(sliderIntValueChanged(int)));
 }

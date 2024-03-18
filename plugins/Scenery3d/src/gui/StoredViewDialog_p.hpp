@@ -33,19 +33,19 @@ class CustomTextEdit : public QTextEdit
 {
 	Q_OBJECT
 public:
-	CustomTextEdit(QWidget* parent = Q_NULLPTR) : QTextEdit(parent), textChanged(false), trackChange(false)
+	CustomTextEdit(QWidget* parent = nullptr) : QTextEdit(parent), textChanged(false), trackChange(false)
 	{
 		connect(this,&QTextEdit::textChanged,this,&CustomTextEdit::handleTextChange);
 	}
 protected:
-	virtual void focusInEvent(QFocusEvent* e) Q_DECL_OVERRIDE
+	void focusInEvent(QFocusEvent* e) override
 	{
 		trackChange = true;
 		textChanged = false;
 		QTextEdit::focusInEvent(e);
 	}
 
-	virtual void focusOutEvent(QFocusEvent *e) Q_DECL_OVERRIDE
+	void focusOutEvent(QFocusEvent *e) override
 	{
 		QTextEdit::focusOutEvent(e);
 		trackChange = false;
@@ -74,17 +74,17 @@ class StoredViewModel : public QAbstractListModel
 {
 	Q_OBJECT
 public:
-	StoredViewModel(QObject* parent = Q_NULLPTR) : QAbstractListModel(parent)
+	StoredViewModel(QObject* parent = nullptr) : QAbstractListModel(parent)
 	{ }
 
-	virtual int rowCount(const QModelIndex &parent) const Q_DECL_OVERRIDE
+	int rowCount(const QModelIndex &parent) const override
 	{
 		if(parent.isValid())
 			return 0;
 		return global.size() + user.size();
 	}
 
-	virtual QVariant data(const QModelIndex &index, int role) const Q_DECL_OVERRIDE
+	QVariant data(const QModelIndex &index, int role) const override
 	{
 		if(role == Qt::DisplayRole || role == Qt::EditRole)
 		{

@@ -416,12 +416,12 @@ class StelScriptEngineAgent : public QScriptEngineAgent
 {
 public:
 	explicit StelScriptEngineAgent(QScriptEngine *engine);
-	virtual ~StelScriptEngineAgent() Q_DECL_OVERRIDE {}
+	~StelScriptEngineAgent() override {}
 
 	void setPauseScript(bool pause) { qWarning() << "setPauseScript() is deprecated and will no longer be available in future versions of Stellarium."; isPaused=pause; }
 	bool getPauseScript() { qWarning() << "getPauseScript() is deprecated and will no longer be available in future versions of Stellarium."; return isPaused; }
 
-	void positionChange(qint64 scriptId, int lineNumber, int columnNumber) Q_DECL_OVERRIDE;
+	void positionChange(qint64 scriptId, int lineNumber, int columnNumber) override;
 
 private:
 	bool isPaused;
@@ -505,6 +505,9 @@ StelScriptMgr::StelScriptMgr(QObject *parent): QObject(parent)
 	engine->setAgent(agent);
 #endif
 	initActions();
+	QSettings *conf=StelApp::getInstance().getSettings();
+	flagAllowExternalScreenshotDir=conf->value("scripts/flag_allow_screenshots_dir", false).toBool();
+	flagAllowWriteAbsolutePaths=conf->value("scripts/flag_allow_write_absolute_path", false).toBool();
 }
 
 void StelScriptMgr::initActions()
@@ -794,8 +797,10 @@ bool StelScriptMgr::runPreprocessedScript(const QString &preprocessedScript, con
 bool StelScriptMgr::runScript(const QString& fileName, const QString& includePath)
 {
 	QString preprocessedScript;
-	prepareScript(preprocessedScript,fileName,includePath);
-	return runPreprocessedScript(preprocessedScript,fileName);
+	if (prepareScript(preprocessedScript,fileName,includePath))
+		return runPreprocessedScript(preprocessedScript,fileName);
+	else
+		return false;
 }
 
 bool StelScriptMgr::runScriptDirect(const QString scriptId, const QString &scriptCode, int &errLoc, const QString& includePath)
@@ -952,7 +957,7 @@ void StelScriptMgr::resumeScript()
 #endif
 }
 
-double StelScriptMgr::getScriptRate()
+double StelScriptMgr::getScriptRate() const
 {
 	return engine->globalObject().property("scriptRateReadOnly").toNumber();
 }
@@ -1191,3 +1196,26 @@ void StelScriptEngineAgent::positionChange(qint64 scriptId, int lineNumber, int 
 	}
 }
 #endif
+
+void StelScriptMgr::setFlagAllowExternalScreenshotDir(bool flag)
+{
+	if (flag!=flagAllowExternalScreenshotDir)
+	{
+		flagAllowExternalScreenshotDir=flag;
+		QSettings* conf = StelApp::getInstance().getSettings();
+		conf->setValue("scripts/flag_allow_screenshots_dir", flag);
+		conf->sync();
+		emit flagAllowExternalScreenshotDirChanged(flag);
+	}
+}
+void StelScriptMgr::setFlagAllowWriteAbsolutePaths(bool flag)
+{
+	if (flag!=flagAllowWriteAbsolutePaths)
+	{
+		flagAllowWriteAbsolutePaths=flag;
+		QSettings* conf = StelApp::getInstance().getSettings();
+		conf->setValue("scripts/flag_allow_write_absolute_path", flag);
+		conf->sync();
+		emit flagAllowWriteAbsolutePathsChanged(flag);
+	}
+}

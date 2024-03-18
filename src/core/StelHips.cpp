@@ -52,6 +52,7 @@ static QString getExt(const QString& format)
 	{
 		if (ext == "jpeg") return "jpg";
 		if (ext == "png") return "png";
+		if (ext == "webp") return "webp";
 	}
 	return QString();
 }
@@ -81,12 +82,14 @@ HipsSurvey::HipsSurvey(const QString& url_, double releaseDate_):
 	QNetworkReply* networkReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
 	connect(networkReply, &QNetworkReply::finished, this, [&, networkReply] {
 		QByteArray data = networkReply->readAll();
-		for (const QString &line : data.split('\n'))
+		for (const QByteArray &line : data.split('\n'))
 		{
 			if (line.startsWith("#")) continue;
-			QString key = line.section("=", 0, 0).trimmed();
+			QStringList list=QString(line).split("=");
+			if (list.length()!=2) continue;
+			QString key = list.at(0).trimmed();
 			if (key.isEmpty()) continue;
-			QString value = line.section("=", 1, -1).trimmed();
+			QString value = list.at(1).trimmed();
 			properties[key] = value;
 		}
 		if (properties.contains("hips_release_date"))
@@ -306,7 +309,7 @@ HipsTile* HipsSurvey::getTile(int order, int pix)
 			tile->allsky = texMgr.createTexture(image, StelTexture::StelTextureParams(true));
 		}
 		int tileWidth = getPropertyInt("hips_tile_width", 512);
-		tiles.insert(uid, tile, tileWidth * tileWidth);
+		tiles.insert(uid, tile, static_cast<long>(tileWidth) * tileWidth);
 	}
 	return tile;
 }
@@ -621,7 +624,7 @@ static void healpix_xy2_z_phi(const double xy[2], double *z, double *phi)
 	// Polar
 	sigma = 2 - fabs(y * 4) / M_PI;
 	*z = (y > 0 ? 1 : -1) * (1 - sigma * sigma / 3);
-	xc = -M_PI + (2 * floor((x + M_PI) * 4 / (2 * M_PI)) + 1) * M_PI / 4;
+	xc = -M_PI + (2 * std::floor((x + M_PI) * 4 / (2 * M_PI)) + 1) * M_PI / 4;
 	*phi = sigma ? (xc + (x - xc) / sigma) : x;
     } else {
 	// Equatorial

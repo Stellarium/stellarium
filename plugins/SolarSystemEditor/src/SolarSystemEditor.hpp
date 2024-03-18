@@ -46,6 +46,18 @@ class QSettings;
 //! \todo Better name.
 typedef QHash<QString, QVariant> SsoElements;
 
+typedef QPair<QString, QString> DiscoveryCircumstances;
+
+//! Data which can be used to add extra designations or discovery details to data retrieved from MPC or other sources
+typedef struct
+{
+	QString date_code;       //! date designation (Unique), e.g. "C/2022 A2"
+	QString perihelion_code; //! perihelion designation
+	QString discovery_code;  //! discovery designation
+	QString discovery_date;  //! date of discovery (format: YYYY-MM-DD)
+	QString discoverer;      //! name of discoverer
+} CometDiscoveryData;
+
 /*!
  \class SolarSystemEditor
  \brief Main class of the Solar System Editor plug-in which allows editing (add, delete, update) of the minor bodies.
@@ -61,18 +73,18 @@ class SolarSystemEditor : public StelModule
 
 public:
 	SolarSystemEditor();
-	virtual ~SolarSystemEditor() Q_DECL_OVERRIDE;
+	~SolarSystemEditor() override;
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Methods inherited from the StelModule class
 	//! called when the plug-in is loaded.
 	//! All initializations should be done here.
-	virtual void init() Q_DECL_OVERRIDE;
+	void init() override;
 
-	virtual double getCallOrder(StelModuleActionName actionName) const Q_DECL_OVERRIDE;
+	//double getCallOrder(StelModuleActionName actionName) const override;
 
 	//! called when the "configure" button in the "Plugins" tab is pressed
-	virtual bool configureGui(bool show) Q_DECL_OVERRIDE;
+	bool configureGui(bool show) override;
 	
 	//! Reads a single comet's orbital elements from a string.
 	//! This function converts a line of comet orbital elements in MPC format
@@ -196,8 +208,25 @@ public:
 
 	//! returns the path
 	QString getCustomSolarSystemFilePath() const {return customSolarSystemFilePath;}
-	
+
+	//! Converts a two-character number used in MPC packed IAU designations.
+	//! See http://www.minorplanetcenter.org/iau/info/PackedDes.html
+	//! This function is used for both asteroid and comet designations.
+	static int unpackAlphanumericNumber (QChar prefix, int lastDigit);
+
+	// Make public slots to allow script-based decoding.
 public slots:
+	//! Unpacks an MPC packed minor planet IAU designation.
+	//! See https://www.minorplanetcenter.org/iau/info/PackedDes.html
+	//! \returns an empty string if the argument is not a valid packed
+	//! IAU designation.
+	static QString unpackMinorPlanetIAUDesignation(const QString &packedDesignation);
+
+	//! Unpacks an MPC packed comet IAU designation. (7-letter variant only)
+	//! See https://www.minorplanetcenter.org/iau/info/PackedDes.html
+	//! \returns an empty string if the argument is not a valid packed IAU designation.
+	static QString unpackCometIAUDesignation(const QString &packedDesignation);
+
 	//! Resets the Solar System configuration file and reloads the Solar System.
 	//! \todo Return a bool and make the GUI display a message if it was not successful.
 	void resetSolarSystemToDefault();
@@ -226,9 +255,18 @@ private:
 	//! in the configuration file.
 
 	//! The names and group names of all objects in the default ssystem_major.ini.
-	//! The keys are the names, the values are the group names.
-	//! Initialized in init().
-	QHash<QString,QString> defaultSsoIdentifiers;
+	//! The keys are the names, the values are the group names.	
+	QHash<QString, QString> defaultSsoIdentifiers;
+
+	//! Extensive hash of comet cross-reference data.
+	//! When importing MPC data, some extra info can be added from this.
+	QHash<QString, CometDiscoveryData> cometCrossref;
+
+	//! The list of discovery circumstances for numbered minor planets
+	QHash<int, DiscoveryCircumstances> numberedMinorPlanets;
+
+	//! The list of periodic comet number for comet-like asteroids
+	QHash<int, QString> cometLikeAsteroids;
 
 	//! Gets the names of the minor planet objects listed in a ssystem.ini-formatted file.
 	//! Used internally in readAllCurrentSsoNames() and in init() to initialize
@@ -248,6 +286,12 @@ private:
 	//! Check encoding of the file
 	bool isFileEncodingValid(QString filePath) const;
 
+	//! Load data for comets: designations and discovery circumstances
+	void initCometCrossref();
+
+	//! Load the list of discovery circumstances for numbered minor planets
+	void initMinorPlanetData();
+
 	//! Converts an alphanumeric digit as used in MPC packed dates to an integer.
 	//! See http://www.minorplanetcenter.org/iau/info/PackedDates.html
 	//! Interprets the digits from 0 to 9 normally, and the capital letters
@@ -258,21 +302,11 @@ private:
 
 	//! Converts an alphanumeric year number as used in MPC packed dates to an integer.
 	//! See http://www.minorplanetcenter.org/iau/info/PackedDates.html
-	//! Also used in packed provisional designations, see
+	//! Also used in packed IAU designations, see
 	//! http://www.minorplanetcenter.org/iau/info/PackedDes.html
 	static int unpackYearNumber (QChar prefix, int lastTwoDigits);
 
-	//! Converts a two-character number used in MPC packed provisional designations.
-	//! See http://www.minorplanetcenter.org/iau/info/PackedDes.html
-	//! This function is used for both asteroid and comet designations.
-	static int unpackAlphanumericNumber (QChar prefix, int lastDigit);
 
-	//TODO: This should be public, perhaps?
-	//! Unpacks an MPC packed minor planet provisional designation.
-	//! See http://www.minorplanetcenter.org/iau/info/PackedDes.html
-	//! \returns an empty string if the argument is not a valid packed
-	//! provisional designation.
-	static QString unpackMinorPlanetProvisionalDesignation(QString packedDesignation);
 
 	//! Updates a value in a configuration file with a value with the same key in a SsoElements hash.
 	static void updateSsoProperty(QSettings& configuration, SsoElements& properties, QString key);
@@ -296,9 +330,9 @@ class SolarSystemEditorStelPluginInterface : public QObject, public StelPluginIn
 	Q_PLUGIN_METADATA(IID StelPluginInterface_iid)
 	Q_INTERFACES(StelPluginInterface)
 public:
-	virtual StelModule* getStelModule() const Q_DECL_OVERRIDE;
-	virtual StelPluginInfo getPluginInfo() const Q_DECL_OVERRIDE;
-	virtual QObjectList getExtensionList() const Q_DECL_OVERRIDE { return QObjectList(); }
+	StelModule* getStelModule() const override;
+	StelPluginInfo getPluginInfo() const override;
+	//QObjectList getExtensionList() const override { return QObjectList(); }
 };
 
 #endif // SOLARSYSTEMEDITOR_HPP

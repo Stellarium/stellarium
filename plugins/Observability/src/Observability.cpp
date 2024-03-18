@@ -1624,8 +1624,8 @@ void Observability::onLocationChanged(const StelLocation & location)
 {
    qDebug() << "[Observability] Location updated.";
 
-   mylat          = static_cast<double>(location.latitude)/Rad2Deg;
-   mylon          = static_cast<double>(location.longitude)/Rad2Deg;
+   mylat          = static_cast<double>(location.getLatitude())/Rad2Deg;
+   mylon          = static_cast<double>(location.getLongitude())/Rad2Deg;
    double currheight = (6371. + (location.altitude) / 1000.) / UA;
 
    double temp1   = currheight * std::cos(mylat);
@@ -1818,7 +1818,7 @@ void Observability::renderResults() {
 
 	// Set the painter:
 	StelPainter painter(core->getProjection2d());
-	painter.setColor(fontColor[0], fontColor[1], fontColor[2], 1.f);
+	painter.setColor(fontColor, 1.f);
 	font.setPixelSize(fontSize);
 	painter.setFont(font);
 

@@ -41,7 +41,7 @@ HipOnlineReply::~HipOnlineReply()
 		reply->abort();
 		//do not use delete here
 		reply->deleteLater();
-		reply = Q_NULLPTR;
+		reply = nullptr;
 	}
 }
 
@@ -53,7 +53,7 @@ void HipOnlineReply::deleteNetworkReply()
 		disconnect(reply, SIGNAL(finished()), this, SLOT(httpQueryFinished()));
 		reply->abort();
 		delete reply;
-		reply = Q_NULLPTR;
+		reply = nullptr;
 	}
 }
 

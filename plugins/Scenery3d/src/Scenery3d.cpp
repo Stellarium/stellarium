@@ -55,16 +55,16 @@ Q_LOGGING_CATEGORY(scenery3d,"stel.plugin.scenery3d")
 #define S3D_CONFIG_PREFIX QString("Scenery3d")
 
 Scenery3d::Scenery3d() :
-	renderer(Q_NULLPTR),
+	renderer(nullptr),
 	flagEnabled(false),
 	cleanedUp(false),
 	movementKeyInput(0.0,0.0,0.0),
 	oldProjectionType(StelCore::ProjectionPerspective),
 	forceHorizonPolyline(false),
 	loadCancel(false),
-	progressBar(Q_NULLPTR),
+	progressBar(nullptr),
 	currentLoadScene(),
-	currentScene(Q_NULLPTR),
+	currentScene(nullptr),
 	currentLoadFuture(this)
 {
 	setObjectName("Scenery3d");
@@ -235,7 +235,7 @@ void Scenery3d::draw(StelCore* core)
 		const StelProjectorP prj = core->getProjection(StelCore::FrameEquinoxEqu);
 		StelPainter painter(prj);
 		painter.setFont(font);
-		painter.setColor(textColor[0], textColor[1], textColor[2], messageFader.getInterstate());
+		painter.setColor(textColor, messageFader.getInterstate());
 		painter.drawText(83, 120, currentMessage);
 	}
 }
@@ -285,9 +285,9 @@ void Scenery3d::deinit()
 	}
 	//this is correct the place to delete all OpenGL related stuff, not the destructor
 	delete renderer;
-	renderer = Q_NULLPTR;
+	renderer = nullptr;
 	delete currentScene;
-	currentScene = Q_NULLPTR;
+	currentScene = nullptr;
 
 	cleanedUp = true;
 }
@@ -305,6 +305,7 @@ void Scenery3d::loadConfig()
 	renderer->setTorchEnabled(conf->value("torch_enabled", false).toBool());
 	renderer->setTorchBrightness(conf->value("torch_brightness", 0.5f).toFloat());
 	renderer->setTorchRange(conf->value("torch_range",5.0f).toFloat());
+	renderer->setDirectionalLightPush(conf->value("directional_push", 1.0f).toFloat());
 	renderer->setBumpsEnabled(conf->value("flag_bumpmap", false).toBool());
 	renderer->setShadowsEnabled(conf->value("flag_shadow", false).toBool());
 	renderer->setUseSimpleShadows(conf->value("flag_shadow_simple", false).toBool());
@@ -313,6 +314,7 @@ void Scenery3d::loadConfig()
 	renderer->setLazyCubemapInterval(conf->value("cubemap_lazy_interval",1.0).toDouble());
 	renderer->setPixelLightingEnabled(conf->value("flag_pixel_lighting", false).toBool());
 	renderer->setLocationInfoEnabled(conf->value("flag_location_info", false).toBool());
+	renderer->setLocationInfoStyle(static_cast<S3DRenderer::LocationInfoStyle>(conf->value("location_info_style", 0).toInt()));
 
 	forceHorizonPolyline = conf->value("force_landscape_polyline", false).toBool();
 
@@ -346,16 +348,16 @@ void Scenery3d::createToolbarButtons() const
 	{
 		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 
-		if (gui!=Q_NULLPTR)
+		if (gui!=nullptr)
 		{
-			StelButton* toolbarEnableButton =	new StelButton(Q_NULLPTR,
+			StelButton* toolbarEnableButton =	new StelButton(nullptr,
 									       QPixmap(":/Scenery3d/bt_scenery3d_on.png"),
 									       QPixmap(":/Scenery3d/bt_scenery3d_off.png"),
 									       QPixmap(":/graphicGui/miscGlow32x32.png"),
 									       "actionShow_Scenery3d",
 									       false,
 									       "actionShow_Scenery3d_dialog");
-			StelButton* toolbarStoredViewButton =	new StelButton(Q_NULLPTR,
+			StelButton* toolbarStoredViewButton =	new StelButton(nullptr,
 									       QPixmap(":/Scenery3d/bt_scenery3d_eyepoint_on.png"),
 									       QPixmap(":/Scenery3d/bt_scenery3d_eyepoint_off.png"),
 									       QPixmap(":/graphicGui/miscGlow32x32.png"),
@@ -456,7 +458,7 @@ S3DScene* Scenery3d::loadSceneBackground(const SceneInfo& scene) const
 	std::unique_ptr<S3DScene> newScene(new S3DScene(scene));
 
 	if(loadCancel)
-		return Q_NULLPTR;
+		return nullptr;
 
 	updateProgress(q_("Loading model..."),1,0,6);
 
@@ -464,20 +466,20 @@ S3DScene* Scenery3d::loadSceneBackground(const SceneInfo& scene) const
 	StelOBJ modelOBJ;
 	QString modelFile = StelFileMgr::findFile( scene.fullPath+ "/" + scene.modelScenery);
 	qCDebug(scenery3d)<<"Loading scene from "<<modelFile;
-	if(!modelOBJ.load(modelFile, scene.vertexOrderEnum))
+	if(!modelOBJ.load(modelFile, scene.vertexOrderEnum, scene.sceneryGenerateNormals))
 	{
 	    qCCritical(scenery3d)<<"Failed to load OBJ file"<<modelFile;
-	    return Q_NULLPTR;
+	    return nullptr;
 	}
 
 	if(loadCancel)
-		return Q_NULLPTR;
+		return nullptr;
 
 	updateProgress(q_("Transforming model..."),2,0,6);
 	newScene->setModel(modelOBJ);
 
 	if(loadCancel)
-		return Q_NULLPTR;
+		return nullptr;
 
 	if(scene.modelGround.isEmpty())
 	{
@@ -491,22 +493,22 @@ S3DScene* Scenery3d::loadSceneBackground(const SceneInfo& scene) const
 		StelOBJ groundOBJ;
 		modelFile = StelFileMgr::findFile(scene.fullPath + "/" + scene.modelGround);
 		qCDebug(scenery3d)<<"Loading ground from"<<modelFile;
-		if(!groundOBJ.load(modelFile, scene.vertexOrderEnum))
+		if(!groundOBJ.load(modelFile, scene.vertexOrderEnum, scene.groundGenerateNormals))
 		{
 			qCCritical(scenery3d)<<"Failed to load ground model"<<modelFile;
-			return Q_NULLPTR;
+			return nullptr;
 		}
 
 		updateProgress(q_("Transforming ground..."),4,0,6);
 		if(loadCancel)
-			return Q_NULLPTR;
+			return nullptr;
 
 		updateProgress(q_("Calculating collision map..."),5,0,6);
 		newScene->setGround(groundOBJ);
 	}
 
 	if(loadCancel)
-		return Q_NULLPTR;
+		return nullptr;
 
 	updateProgress(q_("Finalizing load..."),6,0,6);
 
@@ -519,7 +521,7 @@ void Scenery3d::loadSceneCompleted()
 
 	progressBar->setValue(100);
 	StelApp::getInstance().removeProgressBar(progressBar);
-	progressBar=Q_NULLPTR;
+	progressBar=nullptr;
 
 	if(!result)
 	{
@@ -547,7 +549,7 @@ void Scenery3d::loadSceneCompleted()
 	if (info.hasLocation())
 	{
 		qCDebug(scenery3d) << "Setting location to given coordinates";
-		StelApp::getInstance().getCore()->moveObserverTo(*info.location, 0., 0.);
+		StelApp::getInstance().getCore()->moveObserverTo(*info.location, 0., 0., info.landscapeName);
 	}
 	else qCDebug(scenery3d) << "No coordinates given in scenery3d.ini";
 
@@ -846,6 +848,23 @@ void Scenery3d::setEnableLocationInfo(const bool enableLocationInfo)
 	}
 }
 
+S3DRenderer::LocationInfoStyle Scenery3d::getLocationInfoStyle() const
+{
+	return renderer->getLocationInfoStyle();
+}
+
+void Scenery3d::setLocationInfoStyle(const S3DRenderer::LocationInfoStyle style)
+{
+	if(style != renderer->getLocationInfoStyle())
+	{
+		renderer->setLocationInfoStyle(style);
+
+		conf->setValue(S3D_CONFIG_PREFIX + "/location_info_style", style);
+
+		emit locationInfoStyleChanged(style);
+	}
+}
+
 void Scenery3d::setForceHorizonPolyline(const bool forcePolyline)
 {
 	if(forcePolyline != getForceHorizonPolyline())
@@ -907,6 +926,39 @@ void Scenery3d::setTorchRange(const float torchRange)
 
 	emit torchRangeChanged(torchRange);
 }
+
+float Scenery3d::getDirectionalLightPush() const
+{
+	return renderer->getDirectionalLightPush();
+}
+
+void Scenery3d::setDirectionalLightPush(const float push)
+{
+	renderer->setDirectionalLightPush(push);
+
+	conf->setValue(S3D_CONFIG_PREFIX + "/directional_push",push);
+
+	emit directionalLightPushChanged(push);
+}
+
+// Allow ignoring the configured start_az_alt_fov.
+// This may be helpful in a digital planetarium where fov should stay at ~180...200° and view direction is usually close to zenith.
+bool Scenery3d::getIgnoreInitialView() const
+{
+	return ignoreInitialViewSettings;
+}
+
+void Scenery3d::setIgnoreInitialView(const bool ignore)
+{
+	if (ignoreInitialViewSettings != ignore)
+	{
+		ignoreInitialViewSettings=ignore;
+		conf->setValue(S3D_CONFIG_PREFIX + "/ignore_start_az_alt_fov",ignore);
+
+		emit ignoreInitialViewChanged(ignore);
+	}
+}
+
 
 bool Scenery3d::getEnableLazyDrawing() const
 {
@@ -1074,7 +1126,7 @@ void Scenery3d::setView(const StoredView &view, const bool setDate)
 	mvMgr->zoomTo(view.view_fov[2]);
 }
 
-StoredView Scenery3d::getCurrentView()
+StoredView Scenery3d::getCurrentView() const
 {
 	if(!currentScene)
 	{

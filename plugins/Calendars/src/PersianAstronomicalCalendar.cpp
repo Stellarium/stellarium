@@ -84,7 +84,7 @@ int PersianAstronomicalCalendar::persianNewYearOnOrBefore(int rd)
 {
 	double approx=estimatePriorSolarLongitude(static_cast<double>(Calendar::spring), middayInTehran(rd));
 
-	int day=qRound(floor(approx))-2;
+	int day=qRound(std::floor(approx))-2;
 	double lng;
 	do {
 		day++;

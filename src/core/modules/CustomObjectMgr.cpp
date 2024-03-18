@@ -58,8 +58,12 @@ void CustomObjectMgr::handleMouseClicks(class QMouseEvent* e)
 {
 	StelCore *core = StelApp::getInstance().getCore();
 	Vec3d mousePosition = core->getMouseJ2000Pos();
+	// Make sure the modifiers are exact, not just "Shift is pressed", but "Shift is pressed while Ctrl and Alt aren't"
+	const auto modifiers = e->modifiers() & (Qt::ShiftModifier | Qt::ControlModifier | Qt::AltModifier);
+	const bool modifierIsShift = modifiers == Qt::ShiftModifier;
+	const bool modifierIsShiftAlt = modifiers == (Qt::ShiftModifier | Qt::AltModifier);
 	// Shift + LeftClick -- Add custom marker
-	if (e->modifiers().testFlag(Qt::ShiftModifier) && e->button()==Qt::LeftButton && e->type()==QEvent::MouseButtonPress)
+	if (modifierIsShift && e->button()==Qt::LeftButton && e->type()==QEvent::MouseButtonPress)
 	{
 		addCustomObject(QString("%1 %2").arg(N_("Marker")).arg(countMarkers + 1), mousePosition, true);
 
@@ -67,8 +71,7 @@ void CustomObjectMgr::handleMouseClicks(class QMouseEvent* e)
 		return;
 	}
 	// Shift + Alt + RightClick -- Removes all custom markers
-	// Changed by snowsailor 5/04/2017
-	if(e->modifiers().testFlag(Qt::ShiftModifier) && e->modifiers().testFlag(Qt::AltModifier) && e->button() == Qt::RightButton && e->type() == QEvent::MouseButtonPress)
+	if(modifierIsShiftAlt && e->button() == Qt::RightButton && e->type() == QEvent::MouseButtonPress)
 	{
 		//Delete ALL custom markers
 		removeCustomObjects();
@@ -76,8 +79,7 @@ void CustomObjectMgr::handleMouseClicks(class QMouseEvent* e)
 		return;
 	}
 	// Shift + RightClick -- Removes the closest marker within a radius specified within
-	// Added by snowsailor 5/04/2017
-	if (e->modifiers().testFlag(Qt::ShiftModifier) && e->button()==Qt::RightButton && e->type()==QEvent::MouseButtonPress)
+	if (modifierIsShift && e->button()==Qt::RightButton && e->type()==QEvent::MouseButtonPress)
 	{
 		const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000, StelCore::RefractionAuto);
 		Vec3d winpos;
@@ -88,7 +90,7 @@ void CustomObjectMgr::handleMouseClicks(class QMouseEvent* e)
 		CustomObjectP closest;
 		//Smallest valid radius will be at most `radiusLimit`, so radiusLimit + 10 is plenty as the default
 		float smallestRad = radiusLimit + 10;
-		for (const auto& cObj : qAsConst(customObjects))
+		for (const auto& cObj : std::as_const(customObjects))
 		{
 			//Get the position of the custom object
 			Vec3d a = cObj->getJ2000EquatorialPos(core);
@@ -125,7 +127,7 @@ void CustomObjectMgr::init()
 	setMarkersSize(conf->value("gui/custom_marker_size", 5.f).toFloat());
 	// Limit the click radius to 15px in any direction
 	setActiveRadiusLimit(conf->value("gui/custom_marker_radius_limit", 15).toInt());
-	setSelectPriority(conf->value("gui/custom_marker_priority", 0.f).toFloat());
+	setSelectPriority(conf->value("gui/custom_marker_priority", -2.f).toFloat());
 
 	GETSTELMODULE(StelObjectMgr)->registerStelObjectMgr(this);
 }
@@ -214,7 +216,7 @@ void CustomObjectMgr::removeCustomObject(CustomObjectP obj)
 void CustomObjectMgr::removeCustomObject(QString englishName)
 {
 	setSelected("");
-	for (const auto& cObj : qAsConst(customObjects))
+	for (const auto& cObj : std::as_const(customObjects))
 	{
 		//If we have a match for the thing we want to delete
 		if(cObj && cObj->getEnglishName()==englishName && cObj->initialized)
@@ -228,7 +230,7 @@ void CustomObjectMgr::draw(StelCore* core)
 	StelPainter painter(prj);
 	painter.setFont(font);
 
-	for (const auto& cObj : qAsConst(customObjects))
+	for (const auto& cObj : std::as_const(customObjects))
 	{
 		if (cObj && cObj->initialized)
 			cObj->draw(core, &painter);

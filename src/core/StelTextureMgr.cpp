@@ -17,12 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#include "StelApp.hpp"
 #include "Dithering.hpp"
 #include "StelTextureMgr.hpp"
-#include "StelFileMgr.hpp"
-#include "StelUtils.hpp"
-#include "StelPainter.hpp"
 
 #include <QFileInfo>
 #include <QFile>
@@ -38,8 +34,8 @@ StelTextureMgr::StelTextureMgr(QObject *parent)
 	: QObject(parent), glMemoryUsage(0), loaderThreadPool(new QThreadPool(this))
 {
 #ifdef Q_PROCESSOR_X86_64
-	//allow up to 4 textures to be loaded in parallel on 64 bit
-	loaderThreadPool->setMaxThreadCount(std::min(4,QThread::idealThreadCount()));
+	//allow up to 16 textures to be loaded in parallel. Do not use more than half of the cores, as this may cause issues (#3148)
+	loaderThreadPool->setMaxThreadCount(qBound(1,QThread::idealThreadCount()/2-1, 16));
 #else
 	//on other archs, for now ensure that just 1 texture is at once in background
 	//otherwise, for large textures loaded in parallel (some scenery3d scenes), the risk of an out-of-memory error is greater on 32bit systems
@@ -50,6 +46,7 @@ StelTextureMgr::StelTextureMgr(QObject *parent)
 	ctx->functions()->glGetIntegerv(GL_MAX_TEXTURE_SIZE, &maxTexSize);
 	if (maxTexSize<8192)
 		qDebug() << "Max texture size:" << maxTexSize;
+	StelTexture::textureMgr = this;
 }
 
 StelTextureSP StelTextureMgr::createTexture(const QString& afilename, const StelTexture::StelTextureParams& params)
@@ -71,7 +68,7 @@ StelTextureSP StelTextureMgr::createTexture(const QString& afilename, const Stel
 	StelTextureSP cache = lookupCache(canPath);
 	if(!cache.isNull()) return cache;
 
-	StelTextureSP tex = StelTextureSP(new StelTexture(this));
+	StelTextureSP tex = StelTextureSP(new StelTexture);
 	tex->fullPath = canPath;
 
 	QImage image(tex->fullPath);
@@ -163,7 +160,7 @@ StelTextureSP StelTextureMgr::createTextureThread(const QString& url, const Stel
 	StelTextureSP cache = lookupCache(canPath);
 	if(!cache.isNull()) return cache;
 
-	StelTextureSP tex = StelTextureSP(new StelTexture(this));
+	StelTextureSP tex = StelTextureSP(new StelTexture);
 	tex->loadParams = params;
 	tex->fullPath = canPath;
 	if (!lazyLoading)
@@ -179,7 +176,7 @@ StelTextureSP StelTextureMgr::createTextureThread(const QString& url, const Stel
 //! Create a texture from a QImage.
 StelTextureSP StelTextureMgr::createTexture(const QImage &image, const StelTexture::StelTextureParams& params)
 {
-	StelTextureSP tex = StelTextureSP(new StelTexture(this));
+	StelTextureSP tex = StelTextureSP(new StelTexture);
 	tex->loadParams = params;
 	bool r = tex->glLoad(image);
 	Q_ASSERT(r);
@@ -206,7 +203,7 @@ StelTextureSP StelTextureMgr::wrapperForGLTexture(GLuint texId)
 
 
 	//no existing tex with this ID found, create a new wrapper
-	StelTextureSP newTex(new StelTexture(this));
+	StelTextureSP newTex(new StelTexture);
 	newTex->wrapGLTexture(texId);
 	if(!newTex->errorOccured)
 	{
@@ -234,7 +231,7 @@ StelTextureSP StelTextureMgr::getDitheringTexture(const int samplerToBindTo)
 
 	const auto texId = ForTextureMgr::makeDitherPatternTexture(gl);
 
-	ditheringTexture.reset(new StelTexture(this));
+	ditheringTexture.reset(new StelTexture);
 	ditheringTexture->wrapGLTexture(texId);
 	if(!ditheringTexture->errorOccured)
 	{

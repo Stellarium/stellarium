@@ -40,7 +40,7 @@
 #define SPEED_OF_LIGHT 299792.458
 // Ecliptic obliquity of J2000.0, degrees
 #define EPS_0 23.4392803055555555555556
-// Equatorial radius of the Earth in km
+// Equatorial radius of the Earth in km (WGS-84)
 #define EARTH_RADIUS 6378.1366
 // Equatorial radius of the Sun in km
 #define SUN_RADIUS 696000.
@@ -85,17 +85,17 @@ namespace StelUtils
 	//! Return the full name of stellarium, i.e. "Stellarium 23.1"
 	QString getApplicationName();
 
-	//! Return the version of stellarium, i.e. "0.23.1"
+	//! Return the version of stellarium, i.e. "23.1.0"
 	QString getApplicationVersion();
 
 	//! Return the public version of stellarium, i.e. "23.1"
 	QString getApplicationPublicVersion();
 
+	//! Return the series of stellarium, i.e. "23.0"
+	QString getApplicationSeries();
+
 	//! Return the name and the version of operating system, i.e. "macOS 12.5"
 	QString getOperatingSystemInfo();
-
-	//! Return the name and the version of compiler, which was used for building the planetarium, i.e. "GCC 9.3.0"
-	QString getCompilerInfo();
 
 	//! Return the user agent name, i.e. "Stellarium/0.15.0 (Linux)"
 	QString getUserAgentString();
@@ -362,8 +362,11 @@ namespace StelUtils
 		return (value & -value) == value;
 	}
 
-	//! Return the first power of two bigger than the given value.
+	//! Return the smallest power of two greater than or equal to the given value.
 	int getBiggerPowerOfTwo(int value);
+
+	//! Return the largest power of two smaller than or equal to the given value
+	int getSmallerPowerOfTwo(const int value);
 
 	//! Return the inverse sinus hyperbolic of z.
 	inline double asinh(const double z){
@@ -481,9 +484,15 @@ namespace StelUtils
 	//! Return a day number of week for date
 	//! @return number of day: 0 - sunday, 1 - monday,..
 	int getDayOfWeek(int year, int month, int day);
-	inline int getDayOfWeek(double JD){ double d= fmodpos(JD+1.5, 7);
+	inline int getDayOfWeek(double JD)
+	{
+		double d= fmodpos(JD+1.5, 7);
 		return std::lround(floor(d));
 	}
+
+	//! Format the discovery date
+	//! @return QString representing the formatted date
+	QString localeDiscoveryDateString(const QString& discovery);
 
 	//! Get the current Julian Date from system time.
 	//! @return the current Julian Date
@@ -539,6 +548,10 @@ namespace StelUtils
 	//! Find day number for date in year.
 	//! Meeus, Astronomical Algorithms 2nd ed., 1998, ch.7, p.65
 	int dayInYear(const int year, const int month, const int day);
+	//! Find date from day number within year and the year.
+	//! Meeus, AA 2nd, 1998, ch.7 p.66
+	//! @returns Vec3i(year, month, day)
+	Vec3i dateFromDayYear(const int day, const int year);
 	//! Return a fractional year like YYYY.ddddd. For negative years, the year number is decreased. E.g. -500.5 occurs in -501.
 	double yearFraction(const int year, const int month, const double day);
 
@@ -576,6 +589,9 @@ namespace StelUtils
 
 	//! Convert days (float) to a time string
 	QString daysFloatToDHMS(float days);
+
+	//! The method to splitting the text by substrings by some limit of string length
+	QString wrapText(const QString& s, const int limit = 52);
 
 	//! Get Delta-T estimation for a given date.
 	//! This is just an "empty" correction function, returning 0.
@@ -844,7 +860,7 @@ namespace StelUtils
 	double getDeltaTByIslamSadiqQureshi(const double jDay);
 
 	//! Get Delta-T estimation for a given date.
-	//! Implementation of polinomial approximation of time period 1620-2013 for DeltaT by M. Khalid, Mariam Sultana and Faheem Zaidi (2014).
+	//! Implementation of polynomial approximation of time period 1620-2013 for DeltaT by M. Khalid, Mariam Sultana and Faheem Zaidi (2014).
 	//! Source: Delta T: Polynomial Approximation of Time Period 1620-2013
 	//! Journal of Astrophysics, Vol. 2014, Article ID 480964
 	//! https://doi.org/10.1155/2014/480964

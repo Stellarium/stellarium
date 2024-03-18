@@ -211,8 +211,12 @@ QMenu::item:selected { /* when user selects item using mouse or keyboard */
  * Windows
  */
 
-QFrame#TitleBar {
+QFrame#titleBar {
 	/* Title bar on windows */
+	min-width: 16px;
+	min-height: 25px;
+	max-height: 25px;
+	margin: 0;
 	background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop: 0 rgb(41, 47, 50), stop:1 rgb(31, 33, 36));
 }
 
@@ -220,8 +224,8 @@ QLabel#stelWindowTitle {
 	/* Titles of windows */
 	margin-left: 24px;
 	font-size: 108%;
+	font-weight: bold;
 	color: rgb(150, 150, 150);
-	font: bold;
 	background: none;
 }
 
@@ -239,6 +243,9 @@ QFrame#viewContent {
  */
 
 QListView#stackListWidget {
+	min-height: 74px;
+	max-height: 74px;
+	icon-size: 50px;
 	font-weight: bold;
 	color: rgb(120, 120, 120);
 }
@@ -257,6 +264,8 @@ QListView::item:selected#stackListWidget {
 }
 
 QListView::item#stackListWidget {
+	min-height: 74px;
+	max-height: 74px;
 	margin: 0;
 	padding-top: 0;
 	padding-bottom: 5px;
@@ -311,43 +320,80 @@ QTabBar QToolButton {
 	background-color: rgb(31, 31, 31);
 }
 
-
 /*
- * QPushButton
+ * QPushButton and QToolButton
  */
 
+QToolButton {
+	padding: 2px;
+}
+
+
 QPushButton {
+	padding: 2px 8px;
+}
+
+QPushButton, QToolButton {
 	border: 1px solid rgb(0, 0, 0);
 	border-radius: 2px;
-	padding: 2px 8px;
 	color: rgb(31, 31, 31);
         font-size: 100%;
 	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(183, 184, 185), stop: 1 rgb(111, 113, 114));
+	icon-size: 16px;
 }
 
-QPushButton:disabled {
+QPushButton:disabled, QToolButton:disabled {
         color: rgb(61, 61, 61);
         border: 1px solid rgb(61, 61, 61);
 	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(150, 150, 153), stop: 1 rgb(120, 120, 120));
 }
 
-QPushButton:flat {
+QPushButton:flat, QToolButton:flat {
 	border: none; /* no border for a flat push button */
 	background: transparent;
 }
 
-QPushButton:hover {
+QPushButton:hover, QToolButton:hover {
 	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(183, 184, 165), stop: 1 rgb(111, 113, 94));
 }
 
-QPushButton:pressed {
+QPushButton:pressed, QToolButton:pressed {
 	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(41, 41, 49), stop: 0.2 rgb(73, 74, 84), stop: 1 rgb(58, 60, 73));
 }
 
-QPushButton:checked {
+QPushButton:checked, QToolButton:checked {
 	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(41, 41, 49), stop: 0.2 rgb(73, 74, 84), stop: 1 rgb(58, 60, 73));
 }
 
+QToolButton#pushButtonGotoSearchSkyObject {
+	icon-size: 24px;
+}
+
+QToolButton#pushButtonCustomStepsDialog, QToolButton#pushButtonNow, QToolButton#pushButtonExtraEphemerisDialog {
+	icon-size: 20px;
+	min-width: 22px;
+	max-width: 22px;
+	min-height: 22px;
+	max-height: 22px;
+	padding: 0;
+}
+
+ColorButton {
+	min-width: 16px;
+	max-width: 16px;
+	min-height: 16px;
+	max-height: 16px;
+	padding: 0;
+}
+
+StelCloseButton, StelCloseButton:hover {
+	min-width: 16px;
+	max-width: 16px;
+	min-height: 16px;
+	max-height: 16px;
+	margin: 0 1px 0 0;
+	background: none;
+}
 
 /*
  * QCheckBox
@@ -363,11 +409,18 @@ QCheckBox:disabled {
 }
 
 QCheckBox::indicator,
-QListWidget::indicator,
-QListView::indicator,
 QGroupBox::indicator {
 	width: 16px;
 	height: 16px;
+	margin: 0;
+	background: none;
+}
+
+/* FIXME: these should configured the same way as QCheckBox and QGroupBox
+ * indicators, but there's a problem with spacing discussed at
+ * https://stackoverflow.com/q/77422984 */
+QListWidget::indicator,
+QListView::indicator {
 	margin: 0;
 	background: none;
 }
@@ -758,12 +811,18 @@ QScrollBar::left-arrow {
 
 QSlider {
 	background: none;
+	height: 14px;
 }
 
 QSlider::groove:horizontal {
 	border: none;
-	height: 4px; /* the groove expands to the size of the slider by default. by giving it a height, it has a fixed size */
-	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(0, 0, 0), stop: 1 rgb(54, 54, 54));
+	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+	                            stop: 0 rgba(0,0,0,0),
+	                            stop: 0.3571 rgba(0,0,0,0),
+	                            stop: 0.3572 rgb(0, 0, 0),
+	                            stop: 0.6429 rgb(54, 54, 54),
+	                            stop: 0.6430 rgba(0,0,0,0),
+	                            stop: 1 rgba(0,0,0,0));
 	margin: 0;
 }
 
@@ -771,7 +830,7 @@ QSlider::handle:horizontal {
 	border: 1px solid rgb(0, 0, 0);
 	border-radius: 2px;
 	width: 32px;
-	margin: -5px 0; /* handle is placed by default on the contents rect of the groove. Expand outside the groove */
+	margin: 0;
 	color: rgb(31, 31, 31);
 	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(183, 184, 185), stop: 1 rgb(111, 113, 114));
 }
@@ -781,7 +840,13 @@ QSlider::handle:horizontal:hover {
 }
 
 QSlider::groove:horizontal:disabled {
-	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(61, 61, 61), stop: 1 rgb(80, 80, 80));
+	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+	                            stop: 0 rgba(0,0,0,0),
+	                            stop: 0.3571 rgba(0,0,0,0),
+	                            stop: 0.3572 rgb(61,61,61),
+	                            stop: 0.6429 rgb(80,80,80),
+	                            stop: 0.6430 rgba(0,0,0,0),
+	                            stop: 1 rgba(0,0,0,0));
 }
 
 QSlider::handle:horizontal:disabled {
@@ -845,11 +910,11 @@ QLineEdit[collision="true"] {
 #dateTimeDialogForm QDoubleSpinBox::up-button {
 	subcontrol-origin: border;
 	subcontrol-position: top center;
-	margin: 0 14px 8px 12px;
-	width: 32px;
+	margin: 0 1px 8px 0;
+	width: 16px;
 	border: none;
 	background: none;
-	image: url(:/graphicGui/uieSpinup.png);
+	image: url(:/graphicGui/uieSpinup-aboveNumber.png);
 }
 
 #dateTimeDialogForm QSpinBox::up-arrow,
@@ -864,11 +929,11 @@ QLineEdit[collision="true"] {
 #dateTimeDialogForm QDoubleSpinBox::down-button {
 	subcontrol-origin: border;
 	subcontrol-position: bottom center;
-	margin: 8px 14px 0 12px;
+	margin: 8px 1px 0 0;
 	border: none;
-	width: 32px;
+	width: 16px;
 	background: none;
-	image: url(:/graphicGui/uieSpindown.png);
+	image: url(:/graphicGui/uieSpindown-aboveNumber.png);
 }
 
 #dateTimeDialogForm QSpinBox::down-arrow,
@@ -976,10 +1041,15 @@ QLineEdit#citySearchLineEdit {
 
 QListView#citiesListView {
         font-size: 100%;
+        min-width: 300px;
 }
 
 QListView#citiesListView::item {
 	padding: 2px 0;
+}
+
+QFrame#frame_coordinates {
+	min-width: 300px;
 }
 
 /**************************************************************************************************************
@@ -990,6 +1060,21 @@ QTextBrowser#deltaTAlgorithmDescription {
 	background: transparent;
 	padding: 0;
 	margin: 0;
+	max-height: 175px;
+}
+
+QListWidget#scriptListWidget {
+	min-width: 190px;
+	max-width: 190px;
+}
+
+QListWidget#pluginsListWidget {
+	min-width: 180px;
+	max-width: 180px;
+}
+
+QCommandLinkButton#getStarsButton {
+	qproperty-iconSize: 24px;
 }
 
 /**************************************************************************************************************
@@ -1000,6 +1085,31 @@ QTextBrowser#projectionTextBrowser {
 	background: transparent;
 	padding: 0;
 	margin: 0;
+	min-height: 75px;
+}
+
+QListWidget#projectionListWidget {
+	min-width: 180px;
+	max-width: 230px;
+}
+
+QListWidget#landscapesListWidget {
+	min-width: 120px;
+	max-width: 220px;
+}
+
+QListWidget#culturesListWidget {
+	min-width: 120px;
+	max-width: 220px;
+}
+
+/* Try to make them the same size */
+QPushButton#selectAllCatalogs,
+QPushButton#selectStandardCatalogs,
+QPushButton#selectPreferredCatalogs,
+QPushButton#storePreferredCatalogs,
+QPushButton#selectNoneCatalogs {
+	min-width: 150px;
 }
 
 /**************************************************************************************************************

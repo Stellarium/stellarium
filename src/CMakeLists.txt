@@ -11,6 +11,8 @@ ENDIF()
 
 SET(stellarium_lib_SRCS
      core/BlueNoiseTriangleRemapped.hpp
+     core/StelSRGB.hpp
+     core/StelSRGB.cpp
      core/Dithering.hpp
      core/Dithering.cpp
      core/SaturationShader.hpp
@@ -126,6 +128,8 @@ SET(stellarium_lib_SRCS
      core/StelOpenGLArray.cpp
      core/StelHips.hpp
      core/StelHips.cpp
+     core/TextureAverageComputer.hpp
+     core/TextureAverageComputer.cpp
 
      ${spout_SRCS}
 
@@ -354,9 +358,6 @@ IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
           gui/AstroCalcChart.cpp
           gui/ObsListDialog.hpp
           gui/ObsListDialog.cpp
-          gui/ObsListCreateEditDialog.hpp
-          gui/ObsListCreateEditDialog.cpp
-          gui/ObservingListCommon.hpp
           gui/StelDialog.hpp
           gui/StelDialog_p.hpp
           gui/StelDialog.cpp
@@ -369,6 +370,8 @@ IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
           gui/ContributorsList.hpp
           gui/StelCloseButton.hpp
           gui/StelCloseButton.cpp
+          gui/ColorButton.hpp
+          gui/ColorButton.cpp
           gui/ExternalStepSpinBox.hpp
      )
 
@@ -390,7 +393,6 @@ IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
           gui/astroCalcExtraEphemerisDialog.ui
           gui/astroCalcCustomStepsDialog.ui
           gui/obsListDialog.ui
-          gui/obsListCreateEditDialog.ui
           gui/addRemoveLandscapesDialog.ui
           gui/dsoColorsDialog.ui
           gui/orbitColorsDialog.ui
@@ -465,8 +467,11 @@ ENDIF()
 #############################################################################################
 
 IF(WIN32)
-    # This library is required for some native methods used in a fix in main.cpp
+     # This library is required for some native methods used in a fix in main.cpp
      SET(winMMLib winmm)
+     # This part is required to apply qt.conf for stellarium.exe when it's starting via QtCreator
+     SET(QT_CONF ${CMAKE_SOURCE_DIR}/data/qt.conf CACHE FILEPATH "The path to the qt.conf file")
+     CONFIGURE_FILE(${QT_CONF} ${CMAKE_CURRENT_BINARY_DIR} COPYONLY)
 ENDIF()
 
 IF(WIN32 AND ENABLE_WINDOWS_EXE_ICON)
@@ -522,7 +527,7 @@ ENDIF()
 IF(GENERATE_STELMAINLIB)
      ADD_LIBRARY(stelMain SHARED ${stellarium_lib_SRCS} ${stellarium_RES_CXX})
      TARGET_LINK_LIBRARIES(stelMain ${STELMAIN_DEPS})
-     INSTALL(TARGETS stelMain DESTINATION lib)
+     INSTALL(TARGETS stelMain DESTINATION bin)
      # WIN32 creates a windows app without console, no effect on non-win platforms
      ADD_EXECUTABLE(stellarium WIN32 ${stellarium_exe_SRCS})
      #stelMain should be after the plug-ins, otherwise the build crashes
@@ -586,7 +591,7 @@ IF(APPLE)
 	  )
      ENDIF()
      # workaround for https://bugreports.qt.io/browse/QTBUG-105984
-     IF(ENABLE_MEDIA AND (${QT_VERSION} VERSION_GREATER_EQUAL "6.4.0"))
+     IF(ENABLE_MEDIA AND (${QT_VERSION} VERSION_EQUAL "6.4.0"))
 	  GET_FILENAME_COMPONENT(_qt_bin_dir "${MACDEPLOYQT_COMMAND}" DIRECTORY)
 	  INSTALL(FILES ${_qt_bin_dir}/../plugins/multimedia/libdarwinmediaplugin.dylib DESTINATION PlugIns/multimedia)
      ENDIF()
@@ -608,6 +613,15 @@ IF(WIN32)
           SET(VIRTUAL_KBD_SETTING "--no-virtualkeyboard")
      ENDIF()
 
+     IF(STELLARIUM_BUILD_ARM64)
+          cmake_path(APPEND QT_PATHS ${QT6_INSTALL_PREFIX} "bin" "qtpaths.bat")
+     ENDIF()
+     IF(QT_PATHS)
+          SET(_qt_paths "--qtpaths \"${QT_PATHS}\"")
+     ELSE()
+          SET(_qt_paths "")
+     ENDIF()
+
      INSTALL(CODE
 	  "
 	  EXECUTE_PROCESS(
@@ -616,6 +630,7 @@ IF(WIN32)
 		    --no-translations
 		    --verbose 1
 		    ${VIRTUAL_KBD_SETTING}
+		    ${_qt_paths}
 		    --compiler-runtime
 		    \"\${CMAKE_INSTALL_PREFIX}/bin/stellarium.exe\"
 	       WORKING_DIRECTORY \"\${CMAKE_INSTALL_PREFIX}/bin\"
@@ -643,7 +658,7 @@ IF(WIN32)
      )
      ENDIF()
      # workaround for https://bugreports.qt.io/browse/QTBUG-105984
-     IF(ENABLE_MEDIA AND (${QT_VERSION} VERSION_GREATER_EQUAL "6.4.0"))
+     IF(ENABLE_MEDIA AND (${QT_VERSION} VERSION_EQUAL "6.4.0"))
 	  GET_FILENAME_COMPONENT(_qt_bin_dir "${WINDEPLOYQT_COMMAND}" DIRECTORY)
 	  INSTALL(FILES ${_qt_bin_dir}/../plugins/multimedia/windowsmediaplugin.dll DESTINATION ${CMAKE_INSTALL_PREFIX}/qtstuff/multimedia)
      ENDIF()

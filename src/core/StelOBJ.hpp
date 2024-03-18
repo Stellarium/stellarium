@@ -21,6 +21,8 @@
 #ifndef STELOBJ_HPP
 #define STELOBJ_HPP
 
+#include <vector>
+#include <string_view>
 #include "GeomMath.hpp"
 
 #include <qopengl.h>
@@ -245,13 +247,14 @@ public:
 	//! Loads an .obj file by name. Supports .gz decompression, and
 	//! then calls load(QIODevice) for the actual loading.
 	//! @return true if load was successful
-	bool load(const QString& filename, const VertexOrder vertexOrder = VertexOrder::XYZ);
+	bool load(const QString& filename, const VertexOrder vertexOrder = VertexOrder::XYZ, const bool forceCreateNormals=false);
 	//! Loads an .obj file from the specified device.
 	//! @param device The device to load OBJ data from
 	//! @param basePath The path to use to find additional files (like material definitions)
 	//! @param vertexOrder The order to use for vertex positions
+	//! @param forceCreateNormals set true to force creation of normals even if they exist
 	//! @return true if load was successful
-	bool load(QIODevice& device, const QString& basePath, const VertexOrder vertexOrder = VertexOrder::XYZ);
+	bool load(QIODevice& device, const QString& basePath, const VertexOrder vertexOrder = VertexOrder::XYZ, const bool forceCreateNormals=false);
 
 	//! Returns true if this object contains valid data from a load() method
 	bool isLoaded() const { return m_isLoaded; }
@@ -298,13 +301,8 @@ public:
 	//! This is intended to be used together with splitVertexData(), when you want your own vertex format.
 	void clearVertexData();
 private:
-#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
-	typedef QStringView ParseParam;
-	typedef QVector<QStringView> ParseParams;
-#else
-	typedef QStringRef ParseParam;
-	typedef QVector<QStringRef> ParseParams;
-#endif
+	typedef std::string_view ParseParam;
+	typedef std::vector<std::string_view> ParseParams;
 	typedef QHash<Vertex, int> VertexCache;
 
 	struct CurrentParserState
@@ -339,6 +337,7 @@ private:
 	//! Parse a single bool
 	inline static bool parseBool(const ParseParams& params, bool& out, int paramsStart=1);
 	//! Parse a single int
+	inline static bool parseInt(const std::string_view& str, int& out);
 	inline static bool parseInt(const ParseParams& params, int& out, int paramsStart=1);
 	//! Parse a single string
 	inline static bool parseString(const ParseParams &params, QString &out, int paramsStart=1);

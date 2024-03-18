@@ -105,8 +105,8 @@ void ScriptConsole::createDialogContent()
 
 	connect(ui->scriptEdit, SIGNAL(cursorPositionChanged()), this, SLOT(rowColumnChanged()));
 	connect(ui->scriptEdit, SIGNAL(textChanged()), this, SLOT(setDirty()));
-	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
-	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
+	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
+	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 	connect(ui->loadButton, SIGNAL(clicked()), this, SLOT(loadScript()));
 	connect(ui->saveButton, SIGNAL(clicked()), this, SLOT(saveScript()));
 	connect(ui->clearButton, SIGNAL(clicked()), this, SLOT(clearButtonPressed()));
@@ -125,11 +125,7 @@ void ScriptConsole::createDialogContent()
 	QFont font = ui->scriptEdit->font();
 	QFontMetrics fontMetrics = QFontMetrics(font);
 	int width = fontMetrics.boundingRect("0").width();
-#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
 	ui->scriptEdit->setTabStopDistance(4*width); // 4 characters
-#else
-	ui->scriptEdit->setTabStopWidth(4*width); // 4 characters
-#endif
 	ui->scriptEdit->setFocus();
 
 	QSettings* conf = StelApp::getInstance().getSettings();
@@ -142,6 +138,13 @@ void ScriptConsole::createDialogContent()
 	connect(ui->useUserDirCheckBox, SIGNAL(toggled(bool)), this, SLOT(setFlagUserDir(bool)));
 	connect(ui->closeWindowAtScriptRunCheckbox, SIGNAL(toggled(bool)), this, SLOT(setFlagHideWindow(bool)));
 	connect(ui->clearOutputCheckbox, SIGNAL(toggled(bool)), this, SLOT(setFlagClearOutput(bool)));
+
+	ui->allowScreenshotDirCheckBox->setChecked(StelApp::getInstance().getScriptMgr().getFlagAllowExternalScreenshotDir());
+	connect(ui->allowScreenshotDirCheckBox, SIGNAL(clicked(bool)), &StelApp::getInstance().getScriptMgr(), SLOT(setFlagAllowExternalScreenshotDir(bool)));
+
+	ui->allowStoreAbsoluteCheckBox->setChecked(StelApp::getInstance().getScriptMgr().getFlagAllowWriteAbsolutePaths());
+	connect(ui->allowStoreAbsoluteCheckBox, SIGNAL(clicked(bool)), &StelApp::getInstance().getScriptMgr(), SLOT(setFlagAllowWriteAbsolutePaths(bool)));
+
 
 	dirty = false;
 }
@@ -195,7 +198,7 @@ void ScriptConsole::loadScript()
 	QString filter = q_("Stellarium Script Files");
 	filter.append(" (*.ssc *.inc);;");
 	filter.append(getFileMask());
-	QString aFile = QFileDialog::getOpenFileName(nullptr, q_("Load Script"), openDir, filter);
+	QString aFile = QFileDialog::getOpenFileName(&StelMainView::getInstance(), q_("Load Script"), openDir, filter);
 	if (aFile.isNull())
 		return;
 	scriptFileName = aFile;
@@ -221,7 +224,7 @@ void ScriptConsole::saveScript()
 	// Let's ask file name, when file is new and overwrite it in other case
 	if (scriptFileName.isEmpty())
 	{
-		QString aFile = QFileDialog::getSaveFileName(nullptr, q_("Save Script"), saveDir + "/myscript.ssc", getFileMask(), &defaultFilter);
+		QString aFile = QFileDialog::getSaveFileName(&StelMainView::getInstance(), q_("Save Script"), saveDir + "/myscript.ssc", getFileMask(), &defaultFilter);
 		if (aFile.isNull())
 			return;
 		scriptFileName = aFile;
@@ -363,7 +366,7 @@ void ScriptConsole::appendOutputLine(const QString& s)
 
 void ScriptConsole::includeBrowse()
 {
-	QString aDir = QFileDialog::getExistingDirectory(nullptr, q_("Select Script Include Directory"), StelFileMgr::getInstallationDir() + "/scripts");
+	QString aDir = QFileDialog::getExistingDirectory(&StelMainView::getInstance(), q_("Select Script Include Directory"), StelFileMgr::getInstallationDir() + "/scripts");
 	if (!aDir.isNull())
 		ui->includeEdit->setText(aDir);
 }

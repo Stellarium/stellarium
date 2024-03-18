@@ -143,7 +143,7 @@ public:
 	Q_ENUM(NebulaType)
 
 	Nebula();
-	~Nebula() Q_DECL_OVERRIDE;
+	~Nebula() override;
 
 	//! Nebula support the following InfoStringGroup flags:
 	//! - Name
@@ -158,46 +158,55 @@ public:
 	//! @param core the StelCore object
 	//! @param flags a set of InfoStringGroup items to include in the return value.
 	//! @return a QString containing an HMTL encoded description of the Nebula.
-	virtual QString getInfoString(const StelCore *core, const InfoStringGroup& flags) const Q_DECL_OVERRIDE;
+	QString getInfoString(const StelCore *core, const InfoStringGroup& flags) const override;
 	//! In addition to the entries from StelObject::getInfoMap(), Nebula objects provide
 	//! - bmag (photometric B magnitude. 99 if unknown)
 	//! - morpho (longish description; translated!)
 	//! - surface-brightness
 	//! - designations (all designations of DSO)
+	//! - axis-major (major axis in radians)
+	//! - axis-major-dd (major axis in decimal degrees)
+	//! - axis-major-deg (major axis in decimal degrees (formatted string))
+	//! - axis-major-dms (major axis in DMS format)
+	//! - axis-minor (minor axis in radians)
+	//! - axis-minor-dd (minor axis in decimal degrees)
+	//! - axis-minor-deg (minor axis in decimal degrees (formatted string))
+	//! - axis-minor-dms (minor axis in DMS format)
+	//! - orientation-angle (in degrees)
 	//! A few entries are optional
 	//! - bV (B-V index)
 	//! - redshift
-	virtual QVariantMap getInfoMap(const StelCore *core) const Q_DECL_OVERRIDE;
-	virtual QString getType() const Q_DECL_OVERRIDE {return NEBULA_TYPE;}
-	virtual QString getObjectType() const Q_DECL_OVERRIDE
+	QVariantMap getInfoMap(const StelCore *core) const override;
+	QString getType() const override {return NEBULA_TYPE;}
+	QString getObjectType() const override
 	{
 		return typeEnglishStringMap.value(nType, "undocumented type");
 	}
-	virtual QString getObjectTypeI18n() const Q_DECL_OVERRIDE
+	QString getObjectTypeI18n() const override
 	{
-		return getTypeString();
+		return q_(typeEnglishStringMap.value(nType, q_("undocumented type")));
 	}
-	virtual QString getID() const Q_DECL_OVERRIDE {return getDSODesignation(); } //this depends on the currently shown catalog flags, should this be changed?
-	virtual Vec3d getJ2000EquatorialPos(const StelCore* core) const Q_DECL_OVERRIDE;
-	virtual double getCloseViewFov(const StelCore* core = Q_NULLPTR) const Q_DECL_OVERRIDE;
-	virtual float getVMagnitude(const StelCore* core) const Q_DECL_OVERRIDE;
-	virtual float getSelectPriority(const StelCore* core) const Q_DECL_OVERRIDE;
-	virtual Vec3f getInfoColor() const Q_DECL_OVERRIDE;
-	virtual QString getNameI18n() const Q_DECL_OVERRIDE {return nameI18;}
-	virtual QString getEnglishName() const Q_DECL_OVERRIDE {return englishName;}
+	QString getID() const override {return getDSODesignation(); } //this depends on the currently shown catalog flags, should this be changed?
+	Vec3d getJ2000EquatorialPos(const StelCore* core) const override;
+	double getCloseViewFov(const StelCore* core = Q_NULLPTR) const override;
+	float getVMagnitude(const StelCore* core) const override;
+	float getSelectPriority(const StelCore* core) const override;
+	Vec3f getInfoColor() const override;
+	QString getNameI18n() const override {return nameI18;}
+	QString getEnglishName() const override {return englishName;}
 	QString getEnglishAliases() const;
 	QString getI18nAliases() const;
-	virtual double getAngularRadius(const StelCore*) const Q_DECL_OVERRIDE;
-	virtual SphericalRegionP getRegion() const Q_DECL_OVERRIDE {return pointRegion;}
+	double getAngularRadius(const StelCore*) const override;
+	SphericalRegionP getRegion() const override {return pointRegion;}
 
 	// Methods specific to Nebula
 	void setLabelColor(const Vec3f& v) {labelColor = v;}
 	// void setCircleColor(const Vec3f& v) {hintColorMap.insert(NebUnknown, v);}
 
-	//! Get the printable nebula Type.
-	//! @return the nebula type code.
-	QString getTypeString() const {return getTypeString(nType);}
-	static QString getTypeString(Nebula::NebulaType nType);
+	//! Get the printable localized nebula Type for @arg nType.
+	//! @return the localized nebula type code.
+	//! @note for actual objects, use getObjectTypeI18n()
+	static QString getTypeStringI18n(Nebula::NebulaType nType);
 
 	NebulaType getDSOType() const {return nType;}
 
@@ -222,14 +231,17 @@ public:
 	float getSurfaceArea(void) const;
 
 	void setProperName(QString name) { englishName = name; }
+	void setDiscoveryData(QString name, QString year) { discoverer = name; discoveryYear = year; }
 	void addNameAlias(QString name) { englishAliases.append(name); englishAliases.removeDuplicates(); }
 	void removeAllNames() { englishName=""; englishAliases.clear(); }
 
 	//! Get designation for DSO (with priority: M, C, NGC, IC, B, Sh2, vdB, RCW, LDN, LBN, Cr, Mel, PGC, UGC, Ced, Arp, VV, PK, PN G, SNR G, ACO, HCG, ESO, vdBH, DWB, Tr, St, Ru, vdB-Ha)
-	//! @return a designation
+	//! from the first catalog that is activated.
+	//! @return a designation for DSO
 	QString getDSODesignation() const;
-	//! Get designation for DSO with priority and ignorance of availability of catalogs
-	//! @return a designation
+	//! Get designation for DSO (with priority: M, C, NGC, IC, B, Sh2, vdB, RCW, LDN, LBN, Cr, Mel, PGC, UGC, Ced, Arp, VV, PK, PN G, SNR G, ACO, HCG, ESO, vdBH, DWB, Tr, St, Ru, vdB-Ha)
+	//! without accounting for activation of catalogs. This should be preferred to retrieve the most common designation regardless of settings.
+	//! @return a designation for DSO
 	QString getDSODesignationWIC() const;	
 
 	bool objectInDisplayedCatalog() const;
@@ -238,7 +250,7 @@ public:
 
 protected:
 	//! Format the magnitude info string for the object
-	virtual QString getMagnitudeInfoString(const StelCore *core, const InfoStringGroup& flags, const int decimals=1) const Q_DECL_OVERRIDE;
+	QString getMagnitudeInfoString(const StelCore *core, const InfoStringGroup& flags, const int decimals=1) const override;
 
 private:
 	friend struct DrawNebulaFuncObject;
@@ -257,88 +269,81 @@ private:
 	void drawLabel(StelPainter& sPainter, float maxMagLabel) const;
 	void drawHints(StelPainter& sPainter, float maxMagHints, StelCore *core) const;
 	void drawOutlines(StelPainter& sPainter, float maxMagHints) const;
+	void renderDarkNebulaMarker(StelPainter& sPainter, float x, float y, float size, Vec3f color) const;
+	void renderRoundMarker(StelPainter& sPainter, float x, float y, float size, Vec3f color, bool crossed) const;
+	void renderEllipticMarker(StelPainter& sPainter, float x, float y, float size, float aspectRatio, float angle, Vec3f color) const;
+	void renderMarkerRoundedRect(StelPainter& sPainter, float x, float y, float size, Vec3f color) const;
+	void renderMarkerPointedCircle(StelPainter& sPainter, float x, float y, float size, Vec3f color, bool insideRect) const;
 
 	bool objectInDisplayedType() const;
 
 	static Vec3f getHintColor(Nebula::NebulaType nType);
 	float getVisibilityLevelByMagnitude() const;
+	float getHintSize(StelPainter& sPainter) const;
 
 	//! Get the printable description of morphological nebula type.
 	//! @return the nebula morphological type string.
 	QString getMorphologicalTypeDescription() const;
 
 	unsigned int DSO_nb;
-	unsigned int M_nb;			// Messier Catalog number
-	unsigned int NGC_nb;		// New General Catalog number
-	unsigned int IC_nb;			// Index Catalog number
-	unsigned int C_nb;			// Caldwell Catalog number
-	unsigned int B_nb;			// Barnard Catalog number (Dark Nebulae)
-	unsigned int Sh2_nb;		// Sharpless Catalog number (Catalogue of HII Regions (Sharpless, 1959))
-	unsigned int VdB_nb;		// van den Bergh Catalog number (Catalogue of Reflection Nebulae (van den Bergh, 1966))
-	unsigned int RCW_nb;		// RCW Catalog number (H-α emission regions in Southern Milky Way (Rodgers+, 1960))
-	unsigned int LDN_nb;		// LDN Catalog number (Lynds' Catalogue of Dark Nebulae (Lynds, 1962))
-	unsigned int LBN_nb;		// LBN Catalog number (Lynds' Catalogue of Bright Nebulae (Lynds, 1965))
-	unsigned int Cr_nb;			// Collinder Catalog number
-	unsigned int Mel_nb;		// Melotte Catalog number
-	unsigned int PGC_nb;		// PGC number (Catalog of galaxies)
-	unsigned int UGC_nb;		// UGC number (The Uppsala General Catalogue of Galaxies)
-	unsigned int Arp_nb;		// Arp number (Atlas of Peculiar Galaxies (Arp, 1966))
-	unsigned int VV_nb;			// VV number (The Catalogue of Interacting Galaxies (Vorontsov-Velyaminov+, 2001))	
-	unsigned int DWB_nb;		// DWB number (Catalogue and distances of optically visible H II regions (Dickel+, 1969))
-	unsigned int Tr_nb;			// Tr number (Trumpler Catalogue)
-	unsigned int St_nb;			// St number (Stock Catalogue)
-	unsigned int Ru_nb;			// Ru number (Ruprecht Catalogue)
-	unsigned int VdBHa_nb;		// vdB-Ha number (van den Bergh-Hagen Catalogue)
-	QString Ced_nb;			// Ced number (Cederblad Catalog of bright diffuse Galactic nebulae)	
-	QString PK_nb;				// PK number (Catalogue of Galactic Planetary Nebulae)
-	QString PNG_nb;			// PN G number (Strasbourg-ESO Catalogue of Galactic Planetary Nebulae (Acker+, 1992))
-	QString SNRG_nb;			// SNR G number (A catalogue of Galactic supernova remnants (Green, 2014))
-	QString ACO_nb;			// ACO number (Rich Clusters of Galaxies (Abell+, 1989))
-	QString HCG_nb;			// HCG number (Hickson Compact Group (Hickson, 1989))
-	QString ESO_nb;			// ESO number (ESO/Uppsala Survey of the ESO(B) Atlas (Lauberts, 1982))
-	QString VdBH_nb;			// VdBH number (Southern Stars embedded in nebulosity (van den Bergh+, 1975))
+	unsigned int M_nb;          // Messier Catalog number
+	unsigned int NGC_nb;        // New General Catalog number
+	unsigned int IC_nb;         // Index Catalog number
+	unsigned int C_nb;          // Caldwell Catalog number
+	unsigned int B_nb;          // Barnard Catalog number (Dark Nebulae)
+	unsigned int Sh2_nb;        // Sharpless Catalog number (Catalogue of HII Regions (Sharpless, 1959))
+	unsigned int VdB_nb;        // van den Bergh Catalog number (Catalogue of Reflection Nebulae (van den Bergh, 1966))
+	unsigned int RCW_nb;        // RCW Catalog number (H-α emission regions in Southern Milky Way (Rodgers+, 1960))
+	unsigned int LDN_nb;        // LDN Catalog number (Lynds' Catalogue of Dark Nebulae (Lynds, 1962))
+	unsigned int LBN_nb;        // LBN Catalog number (Lynds' Catalogue of Bright Nebulae (Lynds, 1965))
+	unsigned int Cr_nb;         // Collinder Catalog number
+	unsigned int Mel_nb;        // Melotte Catalog number
+	unsigned int PGC_nb;        // PGC number (Catalog of galaxies)
+	unsigned int UGC_nb;        // UGC number (The Uppsala General Catalogue of Galaxies)
+	unsigned int Arp_nb;        // Arp number (Atlas of Peculiar Galaxies (Arp, 1966))
+	unsigned int VV_nb;         // VV number (The Catalogue of Interacting Galaxies (Vorontsov-Velyaminov+, 2001))
+	unsigned int DWB_nb;        // DWB number (Catalogue and distances of optically visible H II regions (Dickel+, 1969))
+	unsigned int Tr_nb;         // Tr number (Trumpler Catalogue)
+	unsigned int St_nb;         // St number (Stock Catalogue)
+	unsigned int Ru_nb;         // Ru number (Ruprecht Catalogue)
+	unsigned int VdBHa_nb;      // vdB-Ha number (van den Bergh-Hagen Catalogue)
+	QString Ced_nb;             // Ced number (Cederblad Catalog of bright diffuse Galactic nebulae)
+	QString PK_nb;              // PK number (Catalogue of Galactic Planetary Nebulae)
+	QString PNG_nb;             // PN G number (Strasbourg-ESO Catalogue of Galactic Planetary Nebulae (Acker+, 1992))
+	QString SNRG_nb;            // SNR G number (A catalogue of Galactic supernova remnants (Green, 2014))
+	QString ACO_nb;             // ACO number (Rich Clusters of Galaxies (Abell+, 1989))
+	QString HCG_nb;             // HCG number (Hickson Compact Group (Hickson, 1989))
+	QString ESO_nb;             // ESO number (ESO/Uppsala Survey of the ESO(B) Atlas (Lauberts, 1982))
+	QString VdBH_nb;            // VdBH number (Southern Stars embedded in nebulosity (van den Bergh+, 1975))
 	bool withoutID;
-	QString englishName;		// English name
-	QStringList englishAliases;	// English aliases
-	QString nameI18;			// Nebula name
-	QStringList nameI18Aliases;	// Nebula aliases
-	QString mTypeString;		// Morphological type of object (as string)
-	float bMag;				// B magnitude
-	float vMag;				// V magnitude. For Dark Nebulae, opacity is stored here.
-	float majorAxisSize;			// Major axis size in degrees
-	float minorAxisSize;			// Minor axis size in degrees
-	int orientationAngle;			// Orientation angle in degrees
-	float oDistance;				// distance (kpc)
-	float oDistanceErr;			// Error of distance (kpc)
+	QString englishName;        // English name
+	QStringList englishAliases; // English aliases
+	QString nameI18;            // Nebula name
+	QStringList nameI18Aliases; // Nebula aliases
+	QString discoverer;         // The name of discoverer
+	QString discoveryYear;      // Year(s) of discovery
+	QString mTypeString;        // Morphological type of object (as string)
+	float bMag;                 // B magnitude
+	float vMag;                 // V magnitude. For Dark Nebulae, opacity is stored here.
+	float majorAxisSize;        // Major axis size in degrees
+	float minorAxisSize;        // Minor axis size in degrees
+	int orientationAngle;       // Orientation angle in degrees
+	float oDistance;            // distance (kpc)
+	float oDistanceErr;         // Error of distance (kpc)
 	float redshift;
 	float redshiftErr;
 	float parallax;
 	float parallaxErr;
-	Vec3d XYZ;			// Cartesian equatorial position (J2000.0)
-	Vec3d XY;				// Store temporary 2D position
+	Vec3d XYZ;                  // Cartesian equatorial position (J2000.0)
+	Vec3d XY;                   // Store temporary 2D position
 	NebulaType nType;
 
 	SphericalRegionP pointRegion;
 	QStringList designations;       // List of Catalog number entries
 
-	static StelTextureSP texCircle;				// The symbolic circle texture
-	static StelTextureSP texCircleLarge;			// The symbolic circle texture for large objects
 	static StelTextureSP texRegion;				// The symbolic dashed shape texture
-	static StelTextureSP texGalaxy;				// Type 0
-	static StelTextureSP texGalaxyLarge;			// Type 0_large
-	static StelTextureSP texOpenCluster;			// Type 1
-	static StelTextureSP texOpenClusterLarge;		// Type 1_large
-	static StelTextureSP texOpenClusterXLarge;	// Type 1_extralarge
-	static StelTextureSP texGlobularCluster;		// Type 2
-	static StelTextureSP texGlobularClusterLarge;	// Type 2_large
+	static StelTextureSP texPointElement;
 	static StelTextureSP texPlanetaryNebula;		// Type 3
-	static StelTextureSP texDiffuseNebula;		// Type 4
-	static StelTextureSP texDiffuseNebulaLarge;	// Type 4_large
-	static StelTextureSP texDiffuseNebulaXLarge;	// Type 4_extralarge
-	static StelTextureSP texDarkNebula;			// Type 5
-	static StelTextureSP texDarkNebulaLarge;		// Type 5_large
-	static StelTextureSP texOpenClusterWithNebulosity;	// Type 6
-	static StelTextureSP texOpenClusterWithNebulosityLarge;	// Type 6_large
 	static float hintsBrightness;
 
 	static Vec3f labelColor;				// The color of labels

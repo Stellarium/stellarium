@@ -38,7 +38,7 @@ ShortcutsFilterModel::ShortcutsFilterModel(QObject* parent) :
 
 bool ShortcutsFilterModel::filterAcceptsRow(int source_row, const QModelIndex &source_parent) const
 {
-#if (QT_VERSION>=QT_VERSION_CHECK(5,12,0))
+#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
 	if (filterRegularExpression().pattern().isEmpty())
 #else
 	if (filterRegExp().pattern().isEmpty())
@@ -49,7 +49,7 @@ bool ShortcutsFilterModel::filterAcceptsRow(int source_row, const QModelIndex &s
 	{
 		QModelIndex index = source_parent.model()->index(source_row, filterKeyColumn(), source_parent);
 		QString data = sourceModel()->data(index, filterRole()).toString();
-#if (QT_VERSION>=QT_VERSION_CHECK(5,12,0))
+#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
 		return data.contains(filterRegularExpression());
 #else
 		return data.contains(filterRegExp());
@@ -87,7 +87,7 @@ ShortcutsDialog::~ShortcutsDialog()
 void ShortcutsDialog::drawCollisions()
 {
 	QBrush brush(Qt::red);
-	for (auto* item : qAsConst(collisionItems))
+	for (auto* item : std::as_const(collisionItems))
 	{
 		// change colors of all columns for better visibility
 		item->setForeground(brush);
@@ -105,7 +105,7 @@ void ShortcutsDialog::resetCollisions()
 #else
 		ui->shortcutsTreeView->palette().brush(QPalette::Foreground);
 #endif
-	for (auto* item : qAsConst(collisionItems))
+	for (auto* item : std::as_const(collisionItems))
 	{
 		item->setForeground(brush);
 		QModelIndex index = item->index();
@@ -292,7 +292,7 @@ void ShortcutsDialog::switchToEditors(const QModelIndex& index)
 void ShortcutsDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
-	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
+	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	resetModel();
 	filterModel->setSourceModel(mainModel);

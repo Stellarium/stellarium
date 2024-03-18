@@ -28,6 +28,7 @@
 #include <QLocale>
 #include <QDebug>
 
+#include "VecMath.hpp"
 #include "StelUtils.hpp"
 
 #define IGREG 2299161
@@ -420,35 +421,35 @@ void TestDates::testNumberOfDaysInMonthInYear()
 {
 	QVariantList data;
 
-	data << 2019 << 1		<< 31;
-	data << 2019 << 2		<< 28;
-	data << 2019 << 3		<< 31;
-	data << 2019 << 4		<< 30;
-	data << 2019 << 5		<< 31;
-	data << 2019 << 6		<< 30;
-	data << 2019 << 7		<< 31;
-	data << 2019 << 8		<< 31;
-	data << 2019 << 9		<< 30;
+	data << 2019 <<  1	<< 31;
+	data << 2019 <<  2	<< 28;
+	data << 2019 <<  3	<< 31;
+	data << 2019 <<  4	<< 30;
+	data << 2019 <<  5	<< 31;
+	data << 2019 <<  6	<< 30;
+	data << 2019 <<  7	<< 31;
+	data << 2019 <<  8	<< 31;
+	data << 2019 <<  9	<< 30;
 	data << 2019 << 10	<< 31;
 	data << 2019 << 11	<< 30;
 	data << 2019 << 12	<< 31;
-	data << 2020 << 1		<< 31;
-	data << 2020 << 2		<< 29;
-	data << 2020 << 3		<< 31;
-	data << 2020 << 4		<< 30;
-	data << 2020 << 5		<< 31;
-	data << 2020 << 6		<< 30;
-	data << 2020 << 7		<< 31;
-	data << 2020 << 8		<< 31;
-	data << 2020 << 9		<< 30;
+	data << 2020 <<  1	<< 31;
+	data << 2020 <<  2	<< 29;
+	data << 2020 <<  3	<< 31;
+	data << 2020 <<  4	<< 30;
+	data << 2020 <<  5	<< 31;
+	data << 2020 <<  6	<< 30;
+	data << 2020 <<  7	<< 31;
+	data << 2020 <<  8	<< 31;
+	data << 2020 <<  9	<< 30;
 	data << 2020 << 10	<< 31;
 	data << 2020 << 11	<< 30;
 	data << 2020 << 12	<< 31;
-	data << 2020 << 0		<< 31;
+	data << 2020 <<  0	<< 31;
 	data << 2020 << 13	<< 31;
-	data << 1852 << 1		<< 31;
-	data << 1852 << 2		<< 29;
-	data << 1851 << 2		<< 28;
+	data << 1852 <<  1	<< 31;
+	data << 1852 <<  2	<< 29;
+	data << 1851 <<  2	<< 28;
 
 	while (data.count()>=3)
 	{
@@ -468,13 +469,13 @@ void TestDates::testNumberOfDaysInMonthInYear()
 void TestDates::testFixedFromGregorian()
 {
 	QVariantList data;
-	//            year	  month	day	        days
-	data <<       1 <<   1 <<   1 <<           1;
-	data <<       8 <<   8 << 27 <<     2796;
-	data <<   632 <<   6 << 19 << 230638;
-	data << 1792 <<   9 << 22 << 654415;
+	//      year   month  day     days
+	data <<    1 <<  1 <<  1 <<      1;
+	data <<    8 <<  8 << 27 <<   2796;
+	data <<  632 <<  6 << 19 << 230638;
+	data << 1792 <<  9 << 22 << 654415;
 	data << 1858 << 11 << 17 << 678576;
-	data << 1970 <<   1 <<   1 << 719163;
+	data << 1970 <<  1 <<  1 << 719163;
 	data << 1945 << 11 << 12 << 710347;
 
 	while (data.count()>=4)
@@ -554,6 +555,18 @@ void TestDates::testDatesFromJD()
 						  .arg(yout).arg(mout).arg(dout)
 						  .arg(year).arg(month).arg(day)));
 	}
+}
+
+void TestDates::testDayInYear()
+{
+	QVERIFY2(StelUtils::dayInYear(1978, 11, 14)==318, qPrintable(QString("dayInYear(1978, 11, 14)=%1, not 318").arg(QString::number(StelUtils::dayInYear(1978, 11, 14)))));
+	QVERIFY2(StelUtils::dayInYear(1988,  4, 22)==113, qPrintable(QString("dayInYear(1988,  4, 22)=%1, not 113").arg(QString::number(StelUtils::dayInYear(1988,  4, 22)))));
+}
+
+void TestDates::testDateFromDayYear()
+{
+	QVERIFY2(StelUtils::dateFromDayYear(318, 1978) == Vec3i(1978, 11, 14), qPrintable(QString("dateFromDayYear(318, 1978) =%1, not 1978, 11, 14").arg(StelUtils::dateFromDayYear(318, 1978).toString() )));
+	QVERIFY2(StelUtils::dateFromDayYear(113, 1988) == Vec3i(1988,  4, 22), qPrintable(QString("dateFromDayYear(113, 1988) =%1, not 1988,  4, 22").arg(StelUtils::dateFromDayYear(113, 1988).toString() )));
 }
 
 #define TJ1 (2450000)

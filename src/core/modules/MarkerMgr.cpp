@@ -103,12 +103,12 @@ public:
 	//! @param style determines type of marker
 	SkyMarker(Vec3d pos, const float& size, const Vec3f& color, SkyMarker::MarkerType style=Cross, const bool withAberration=true);
 
-	virtual ~SkyMarker() Q_DECL_OVERRIDE;
+	~SkyMarker() override;
 
 	//! Draw the marker on the sky
 	//! @param core the StelCore object
 	//! @param sPainter the StelPainter to use for drawing operations
-	virtual bool draw(StelCore* core, StelPainter& sPainter) Q_DECL_OVERRIDE;
+	bool draw(StelCore* core, StelPainter& sPainter) override;
 
 	static SkyMarker::MarkerType stringToMarkerType(const QString& s);
 
@@ -131,12 +131,12 @@ public:
 	//! @param color the color for the label
 	//! @param style determines type of marker
 	HorizonMarker(const float az, const float alt, const float& size, const Vec3f& color, SkyMarker::MarkerType style=SkyMarker::Cross);
-	virtual ~HorizonMarker() Q_DECL_OVERRIDE;
+	~HorizonMarker() override;
 
 	//! draw the marker on the screen
 	//! @param core the StelCore object
 	//! @param sPainter the StelPainter to use for drawing operations
-	virtual bool draw(StelCore* core, StelPainter& sPainter) Q_DECL_OVERRIDE;
+	bool draw(StelCore* core, StelPainter& sPainter) override;
 private:
 	StelTextureSP markerTexture;
 	SkyMarker::MarkerType markerType;
@@ -334,7 +334,7 @@ void MarkerMgr::init()
 void MarkerMgr::draw(StelCore* core)
 {
 	StelPainter sPainter(core->getProjection(StelCore::FrameJ2000));
-	for (auto* m : qAsConst(allMarkers))
+	for (auto* m : std::as_const(allMarkers))
 	{
 		m->draw(core, sPainter);
 	}
@@ -343,7 +343,7 @@ void MarkerMgr::draw(StelCore* core)
 void MarkerMgr::markerDeleteTimeout()
 {
 	QObject* obj = QObject::sender();
-	for (auto* m : qAsConst(allMarkers))
+	for (auto* m : std::as_const(allMarkers))
 	{
 		if (m->timer == obj)
 		{
@@ -356,7 +356,7 @@ void MarkerMgr::markerDeleteTimeout()
 void MarkerMgr::markerVisibleTimeout()
 {
 	QObject* obj = QObject::sender();
-	for (auto* m : qAsConst(allMarkers))
+	for (auto* m : std::as_const(allMarkers))
 	{
 		if (m->timer == obj)
 		{
@@ -501,7 +501,7 @@ void MarkerMgr::deleteMarker(int id)
 	
 void MarkerMgr::update(double deltaTime)
 {
-	for (auto* m : qAsConst(allMarkers))
+	for (auto* m : std::as_const(allMarkers))
 		m->update(deltaTime);
 }
 	
@@ -515,7 +515,7 @@ double MarkerMgr::getCallOrder(StelModuleActionName actionName) const
 int MarkerMgr::deleteAllMarkers(void)
 {
 	int count=0;
-	for (auto* m : qAsConst(allMarkers))
+	for (auto* m : std::as_const(allMarkers))
 	{
 		delete m;
 		count++;

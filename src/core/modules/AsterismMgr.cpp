@@ -797,7 +797,7 @@ void AsterismMgr::deselectAsterisms(void)
 		}
 
 		// If any asterism is selected at the moment, then let's do not touch to it!
-		if (omgr->getWasSelected() && selected.size()>0)
+		if (omgr->getWasSelected() && !selected.empty())
 			selected.pop_back();
 
 		// Let's hide all previously selected asterisms

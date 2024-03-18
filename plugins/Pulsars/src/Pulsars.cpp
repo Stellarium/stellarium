@@ -192,11 +192,11 @@ void Pulsars::init()
 	}
 	else
 	{
-		qDebug() << "[Pulsars] pulsars.json does not exist - copying default file to" << QDir::toNativeSeparators(jsonCatalogPath);
+		qDebug().noquote() << "[Pulsars] pulsars.json does not exist - copying default file to" << QDir::toNativeSeparators(jsonCatalogPath);
 		restoreDefaultJsonFile();
 	}
 
-	qDebug() << "[Pulsars] Loading catalog file:" << QDir::toNativeSeparators(jsonCatalogPath);
+	qDebug().noquote() << "[Pulsars] Loading catalog file:" << QDir::toNativeSeparators(jsonCatalogPath);
 
 	readJsonFile();
 
@@ -228,7 +228,7 @@ void Pulsars::draw(StelCore* core)
 	StelPainter painter(prj);
 	painter.setFont(font);
 	
-	for (const auto& pulsar : qAsConst(psr))
+	for (const auto& pulsar : std::as_const(psr))
 	{
 		if (pulsar && pulsar->initialized)
 			pulsar->draw(core, &painter);
@@ -334,7 +334,7 @@ QStringList Pulsars::listMatchingObjects(const QString& objPrefix, int maxNbItem
 		}
 
 		QString fullMatch = "";
-		for (const auto& name : qAsConst(names))
+		for (const auto& name : std::as_const(names))
 		{
 			if (!matchObjectName(name, objPrefix, useStartOfWords))
 				continue;
@@ -699,7 +699,7 @@ void Pulsars::startDownload(QString urlString)
 	request.setUrl(QUrl(updateUrl));
 	request.setRawHeader("User-Agent", StelUtils::getUserAgentString().toUtf8());
 #if (QT_VERSION<QT_VERSION_CHECK(6,0,0))
-	request.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);
+	request.setAttribute(QNetworkRequest::RedirectPolicyAttribute, true);
 #endif
 	downloadReply = networkManager->get(request);
 	connect(downloadReply, SIGNAL(downloadProgress(qint64,qint64)), this, SLOT(updateDownloadProgress(qint64,qint64)));

@@ -26,6 +26,7 @@
 #include <QSettings>
 #include <QWidget>
 #include "StelApp.hpp"
+#include "StelTranslator.hpp"
 
 class QAbstractButton;
 class QGroupBox;
@@ -39,27 +40,27 @@ class QToolButton;
 class AngleSpinBox;
 
 //! Base class for all the GUI windows in Stellarium.
-//! 
+//!
 //! Windows in Stellarium are actually basic QWidgets that have to be wrapped in
 //! a QGraphicsProxyWidget (CustomProxy) to be displayed by StelMainView
 //! (which is derived from QGraphicsView). See the %Qt documentation for details.
-//! 
+//!
 //! The base widget needs to be populated with controls in the implementation
 //! of the createDialogContent() function. This can be done either manually, or
 //! by using a .ui file. See the %Qt documentation on using %Qt Designer .ui files
 //! for details.
-//! 
+//!
 //! The createDialogContent() function itself is called automatically the first
 //! time setVisible() is called with "true".
-//! 
-//! Moving a window is done by dragging its title bar, defined in the BarFrame
-//! class. Every derived window class needs a BarFrame object - it
+//!
+//! Moving a window is done by dragging its title bar, defined in the TitleBar
+//! class. Every derived window class needs a TitleBar object - it
 //! has to be either included in a .ui file, or manually instantiated in
 //! createDialogContent().
 //!
 //! The screen location of the StelDialog can be stored in config.ini. This requires
 //! setting dialogName (must be a unique name, should be set in the constructor),
-//! and setting a connect() from the BarFrame's movedTo() signal to handleMovedTo()
+//! and setting a connect() from the TitleBar's movedTo() signal to handleMovedTo()
 //! in createDialogContent().
 //! If the dialog is called and the stored location is off-screen, the dialog is
 //! shifted to become visible.
@@ -95,7 +96,7 @@ public slots:
 	//! based on a Qt Designer file (.ui)</a>, the implementation needs to call
 	//! the generated class' retranslateUi() method, like this:
 	//! \code
-	//! if (dialog) 
+	//! if (dialog)
 	//! 	ui->retranslateUi(dialog);
 	//! \endcode
 	virtual void retranslate() = 0;
@@ -194,15 +195,6 @@ protected:
 	//Q_DECL_DEPRECATED_X("Use functor-based connections. https://doc.qt.io/qt-5/signalsandslots-syntaxes.html")
 	static void connectBoolProperty(QGroupBox *checkBox, const QString &propName);
 
-	//! Prepare a QToolButton so that it can receive and handle askColor() connections properly.
-	//! @param toolButton the QToolButton which shows the color
-	//! @param propertyName a StelProperty name which must represent a color (coded as Vec3f)
-	//! @param iniName the associated entry for config.ini, in the form group/name. Usually "color/some_feature_name_color".
-	//! @param moduleName if the iniName is for a module (plugin)-specific ini file, add the module name here. The module needs an implementation of getSettings()
-	//! @warning If the action with \c propName is invalid/unregistered, or cannot be converted
-	//! to the required datatype, the application will crash
-	void connectColorButton(QToolButton* button, QString propertyName, QString iniName, QString moduleName="");
-
 	//! The main dialog
 	QWidget* dialog;
 	class CustomProxy* proxy;
@@ -214,10 +206,9 @@ protected:
 	QList<QWidget *> kineticScrollingList;
 
 protected slots:
-	bool askConfirmation();
-	//! To be called by a connected QToolButton with a color background.
-	//! This QToolButton needs properties "propName" and "iniName" which should be prepared using connectColorButton().
-	void askColor();
+	bool askConfirmation(const QString &message = q_("Are you sure? This will delete your customized data."));
+	void messageBox(const QString &title, const QString &message);
+
 	//! enable kinetic scrolling. This should be connected to StelApp's StelGui signal flagUseKineticScrollingChanged.
 	void enableKineticScrolling(bool b);
 	//! connect from StelApp to handle font and font size changes.
@@ -257,9 +248,7 @@ class CustomProxy : public QGraphicsProxyWidget
 						widget()->setWindowOpacity(0.4);
 						break;
 					case QEvent::WindowActivate:
-					case QEvent::GrabMouse:
 						widget()->setWindowOpacity(0.9);
-						break;
 					default:
 						break;
 				}
@@ -269,9 +258,7 @@ class CustomProxy : public QGraphicsProxyWidget
 		void resizeEvent(QGraphicsSceneResizeEvent *event) override
 		{
 			if (event->newSize() != event->oldSize())
-			{
 				emit sizeChanged(event->newSize());
-			}
 			QGraphicsProxyWidget::resizeEvent(event);
 		}
 };

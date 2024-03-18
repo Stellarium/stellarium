@@ -33,9 +33,9 @@ public:
 	ErrorMessage();
 	ErrorMessage(const QString& msg);
 
-	SyncProtocol::SyncMessageType getMessageType() const Q_DECL_OVERRIDE { return SyncProtocol::ERROR; }
-	void serialize(QDataStream& stream) const Q_DECL_OVERRIDE;
-	bool deserialize(QDataStream& stream, SyncProtocol::tPayloadSize dataSize) Q_DECL_OVERRIDE;
+	SyncProtocol::SyncMessageType getMessageType() const override { return SyncProtocol::SYNC_ERROR; }
+	void serialize(QDataStream& stream) const override;
+	bool deserialize(QDataStream& stream, SyncProtocol::tPayloadSize dataSize) override;
 
 	QString message;
 };
@@ -46,9 +46,9 @@ public:
 	//! Sets all values except clientId to the compile-time values
 	ServerChallenge();
 
-	SyncProtocol::SyncMessageType getMessageType() const Q_DECL_OVERRIDE { return SyncProtocol::SERVER_CHALLENGE; }
-	void serialize(QDataStream &stream) const Q_DECL_OVERRIDE;
-	bool deserialize(QDataStream &stream, SyncProtocol::tPayloadSize dataSize) Q_DECL_OVERRIDE;
+	SyncProtocol::SyncMessageType getMessageType() const override { return SyncProtocol::SERVER_CHALLENGE; }
+	void serialize(QDataStream &stream) const override;
+	bool deserialize(QDataStream &stream, SyncProtocol::tPayloadSize dataSize) override;
 
 	quint8 protocolVersion;
 	quint32 remoteSyncVersion;
@@ -62,9 +62,9 @@ public:
 	//! Sets all values except clientId to the compile-time values
 	ClientChallengeResponse();
 
-	SyncProtocol::SyncMessageType getMessageType() const Q_DECL_OVERRIDE { return SyncProtocol::CLIENT_CHALLENGE_RESPONSE; }
-	void serialize(QDataStream &stream) const Q_DECL_OVERRIDE;
-	bool deserialize(QDataStream &stream, SyncProtocol::tPayloadSize dataSize) Q_DECL_OVERRIDE;
+	SyncProtocol::SyncMessageType getMessageType() const override { return SyncProtocol::CLIENT_CHALLENGE_RESPONSE; }
+	void serialize(QDataStream &stream) const override;
+	bool deserialize(QDataStream &stream, SyncProtocol::tPayloadSize dataSize) override;
 
 	//basically the same as the challenge, without magic string and proto version
 	quint32 remoteSyncVersion;
@@ -76,16 +76,16 @@ public:
 class ServerChallengeResponseValid : public SyncMessage
 {
 public:
-	SyncProtocol::SyncMessageType getMessageType() const Q_DECL_OVERRIDE { return SyncProtocol::SERVER_CHALLENGERESPONSEVALID; }
+	SyncProtocol::SyncMessageType getMessageType() const override { return SyncProtocol::SERVER_CHALLENGERESPONSEVALID; }
 };
 
 class Time : public SyncMessage
 {
 public:
-	SyncProtocol::SyncMessageType getMessageType() const Q_DECL_OVERRIDE { return SyncProtocol::TIME; }
+	SyncProtocol::SyncMessageType getMessageType() const override { return SyncProtocol::TIME; }
 
-	void serialize(QDataStream &stream) const Q_DECL_OVERRIDE;
-	bool deserialize(QDataStream &stream, SyncProtocol::tPayloadSize dataSize) Q_DECL_OVERRIDE;
+	void serialize(QDataStream &stream) const override;
+	bool deserialize(QDataStream &stream, SyncProtocol::tPayloadSize dataSize) override;
 
 	//TODO implement network delay compensation (also for other message types where it makes sense)
 	//TODO maybe split up so that each message is only for 1 thing?
@@ -99,10 +99,10 @@ class Location : public SyncMessage
 public:
 	Location();
 
-	SyncProtocol::SyncMessageType getMessageType() const Q_DECL_OVERRIDE { return SyncProtocol::LOCATION; }
+	SyncProtocol::SyncMessageType getMessageType() const override { return SyncProtocol::LOCATION; }
 
-	void serialize(QDataStream &stream) const Q_DECL_OVERRIDE;
-	bool deserialize(QDataStream &stream, SyncProtocol::tPayloadSize dataSize) Q_DECL_OVERRIDE;
+	void serialize(QDataStream &stream) const override;
+	bool deserialize(QDataStream &stream, SyncProtocol::tPayloadSize dataSize) override;
 
 	StelLocation stelLocation;
 	double totalDuration;
@@ -112,14 +112,21 @@ public:
 class Selection : public SyncMessage
 {
 public:
-	SyncProtocol::SyncMessageType getMessageType() const Q_DECL_OVERRIDE { return SyncProtocol::SELECTION; }
+	SyncProtocol::SyncMessageType getMessageType() const override { return SyncProtocol::SELECTION; }
 
-	void serialize(QDataStream &stream) const Q_DECL_OVERRIDE;
-	bool deserialize(QDataStream &stream, SyncProtocol::tPayloadSize dataSize) Q_DECL_OVERRIDE;
+	void serialize(QDataStream &stream) const override;
+	bool deserialize(QDataStream &stream, SyncProtocol::tPayloadSize dataSize) override;
 
-	QDebug debugOutput(QDebug dbg) const Q_DECL_OVERRIDE
+	QString toString() const override
 	{
-		return dbg<<selectedObjects;
+		QString s("{");
+		foreach (auto &o, selectedObjects)
+		{
+			s.append(QString("[%1, %2], ").arg(o.first, o.second));
+		}
+		s.chop(2); // remove last comma/space
+		s.append("}");
+		return s;
 	}
 
 	//list of type/ID pairs
@@ -129,22 +136,21 @@ public:
 class Alive : public SyncMessage
 {
 public:
-	SyncProtocol::SyncMessageType getMessageType() const Q_DECL_OVERRIDE  { return SyncProtocol::ALIVE; }
+	SyncProtocol::SyncMessageType getMessageType() const override  { return SyncProtocol::ALIVE; }
 };
 
 class StelPropertyUpdate : public SyncMessage
 {
 public:
-	SyncMessageType getMessageType() const Q_DECL_OVERRIDE { return SyncProtocol::STELPROPERTY; }
+	SyncMessageType getMessageType() const override { return SyncProtocol::STELPROPERTY; }
 
-	void serialize(QDataStream &stream) const Q_DECL_OVERRIDE;
-	bool deserialize(QDataStream &stream, SyncProtocol::tPayloadSize dataSize) Q_DECL_OVERRIDE;
+	void serialize(QDataStream &stream) const override;
+	bool deserialize(QDataStream &stream, SyncProtocol::tPayloadSize dataSize) override;
 
-	QDebug debugOutput(QDebug dbg) const Q_DECL_OVERRIDE
+	QString toString() const override
 	{
-		return dbg<<propId<<value;
+		return 	QString("[%1, %2]").arg(propId, value.toString());
 	}
-
 	QString propId;
 	QVariant value;
 };
@@ -152,23 +158,12 @@ public:
 class View : public SyncMessage
 {
 public:
-	SyncMessageType getMessageType() const Q_DECL_OVERRIDE { return SyncProtocol::VIEW; }
+	SyncMessageType getMessageType() const override { return SyncProtocol::VIEW; }
 
-	void serialize(QDataStream& stream) const Q_DECL_OVERRIDE;
-	bool deserialize(QDataStream &stream, tPayloadSize dataSize) Q_DECL_OVERRIDE;
+	void serialize(QDataStream& stream) const override;
+	bool deserialize(QDataStream &stream, tPayloadSize dataSize) override;
 
 	Vec3d viewAltAz;
-};
-
-class Fov : public SyncMessage
-{
-public:
-	SyncMessageType getMessageType() const Q_DECL_OVERRIDE { return SyncProtocol::FOV; }
-
-	void serialize(QDataStream& stream) const Q_DECL_OVERRIDE;
-	bool deserialize(QDataStream &stream, tPayloadSize dataSize) Q_DECL_OVERRIDE;
-
-	double fov;
 };
 
 }

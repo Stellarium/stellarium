@@ -1,5 +1,6 @@
 #
 # Implementation of Continuous Integration process for linux and macOS by Github actions (with extra additionals...)
+# See https://github.com/actions/runner-images
 #
 name: "CI"
 
@@ -10,44 +11,83 @@ on:
     branches: [master]
 
 jobs:
-  # CI on Linux
-  ci-linux:
-    name: "Linux"
+  # CI on Linux (Qt5)
+  ci-linux-qt5:
+    name: "Linux (amd64; qt5)"
     runs-on: ubuntu-latest
     if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.actor, 'transifex')"
 
     steps:
     - name: Install dependencies
       run: |
+        sudo apt remove php7.* -y
+        sudo apt remove php8.* -y
         sudo apt update
         # using force-overwrite due to
         # https://github.com/actions/virtual-environments/issues/2703
-        sudo ACCEPT_EULA=Y apt upgrade -o Dpkg::Options::="--force-overwrite" --yes
-        sudo apt install -y qtbase5-private-dev qtscript5-dev libqt5svg5-dev qttools5-dev-tools qttools5-dev libqt5opengl5-dev qtmultimedia5-dev libqt5multimedia5-plugins libqt5serialport5 libqt5serialport5-dev qtpositioning5-dev libgps-dev libqt5positioning5 libqt5positioning5-plugins qtwebengine5-dev libqt5charts5-dev zlib1g-dev libgl1-mesa-dev libdrm-dev cmake
+        #sudo ACCEPT_EULA=Y apt upgrade -o Dpkg::Options::="--force-overwrite" --yes
+        sudo apt install -y qtbase5-private-dev qtscript5-dev libqt5svg5-dev qttools5-dev-tools qttools5-dev libqt5opengl5-dev qtmultimedia5-dev libqt5multimedia5-plugins libqt5serialport5 libqt5serialport5-dev qtpositioning5-dev libgps-dev libqt5positioning5 libqt5positioning5-plugins qtwebengine5-dev libqt5charts5-dev zlib1g-dev libgl1-mesa-dev libdrm-dev cmake libexiv2-dev libnlopt-cxx-dev
 
     - name: Checkout repository
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Configure CMake
       shell: bash
       run: |
         mkdir -p build
         cd build
-        cmake -DCMAKE_BUILD_TYPE=Debug -DENABLE_TESTING=On "${{ github.workspace }}"
+        cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DENABLE_TESTING=On "${{ github.workspace }}"
 
     - name: Compile
       working-directory: build
       run: make -j3
 
     - name: Run unit tests
-      uses: GabrielBB/xvfb-action@v1
+      uses: coactions/setup-xvfb@v1
       with:
         working-directory: build
         run: ctest --output-on-failure
 
-  # CI on macOS
-  ci-macos:
-    name: "macOS"
+  # CI on Linux (Qt6)
+  ci-linux-qt6:
+    name: "Linux (amd64; qt6)"
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.actor, 'transifex')"
+
+    steps:
+    - name: Install dependencies
+      run: |
+        sudo apt remove php7.* -y
+        sudo apt remove php8.* -y
+        sudo apt update
+        # using force-overwrite due to
+        # https://github.com/actions/virtual-environments/issues/2703
+        #sudo ACCEPT_EULA=Y apt upgrade -o Dpkg::Options::="--force-overwrite" --yes
+        sudo apt install -y qt6-base-private-dev qt6-multimedia-dev qt6-positioning-dev qt6-tools-dev qt6-tools-dev-tools qt6-base-dev-tools qt6-qpa-plugins qt6-image-formats-plugins qt6-l10n-tools qt6-webengine-dev qt6-webengine-dev-tools libqt6charts6-dev libqt6charts6 libqt6opengl6-dev libqt6positioning6-plugins libqt6serialport6-dev qt6-base-dev libqt6webenginecore6-bin libqt6webengine6-data libexiv2-dev libnlopt-cxx-dev zlib1g-dev libgl1-mesa-dev libdrm-dev libglx-dev libxkbcommon-x11-dev libgps-dev
+
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Configure CMake
+      shell: bash
+      run: |
+        mkdir -p build
+        cd build
+        cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DENABLE_TESTING=On "${{ github.workspace }}"
+
+    - name: Compile
+      working-directory: build
+      run: make -j3
+
+    - name: Run unit tests
+      uses: coactions/setup-xvfb@v1
+      with:
+        working-directory: build
+        run: ctest --output-on-failure
+
+  # CI on macOS (Qt5)
+  ci-macos-qt5:
+    name: "macOS (x86_64; qt5)"
     runs-on: macos-latest
     if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.actor, 'transifex')"
 
@@ -55,10 +95,16 @@ jobs:
     # @BODY At the moment after installing gpsd (brew install gpsd) library can be found by cmake, but not headers! Apparently we should add some magic for environment variables or something else on macOS Catalina to make headers available for cmake/make
     steps:
     - name: Install dependencies
-      run: brew install qt@5
+      env:
+        HOMEBREW_NO_INSTALLED_DEPENDENTS_CHECK: 1
+        HOMEBREW_NO_AUTO_UPDATE: 1
+      run: |
+        # brew update
+        # brew upgrade
+        brew install qt@5 nlopt exiv2
 
     - name: Checkout repository
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Configure CMake
       shell: bash
@@ -66,14 +112,129 @@ jobs:
         export PATH="/usr/local/opt/qt@5/bin:$PATH"
         mkdir -p build
         cd build
-        cmake -DCMAKE_BUILD_TYPE=Debug -DENABLE_TESTING=On ${{ github.workspace }}
+        cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DENABLE_TESTING=On ${{ github.workspace }}
 
     - name: Compile
       working-directory: build
       run: make -j3
 
     - name: Run unit tests
-      uses: GabrielBB/xvfb-action@v1
+      uses: coactions/setup-xvfb@v1
       with:
         working-directory: build
         run: ctest --output-on-failure
+
+  # CI on macOS (Qt6)
+  ci-macos-intel-qt6:
+    name: "macOS (x86_64; qt6)"
+    runs-on: macos-latest
+    if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.actor, 'transifex')"
+
+    # @TODO Enable gpsd on macOS instance for CI testing
+    # @BODY At the moment after installing gpsd (brew install gpsd) library can be found by cmake, but not headers! Apparently we should add some magic for environment variables or something else on macOS Catalina to make headers available for cmake/make
+    steps:
+    - name: Install dependencies
+      env:
+        HOMEBREW_NO_INSTALLED_DEPENDENTS_CHECK: 1
+        HOMEBREW_NO_AUTO_UPDATE: 1
+      run: |
+        # brew update
+        # brew upgrade
+        brew install qt@6 nlopt exiv2
+
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Configure CMake
+      shell: bash
+      run: |
+        export PATH="/usr/local/opt/qt@6/bin:$PATH"
+        mkdir -p build
+        cd build
+        cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DENABLE_TESTING=On ${{ github.workspace }}
+
+    - name: Compile
+      working-directory: build
+      run: make -j3
+
+    - name: Run unit tests
+      uses: coactions/setup-xvfb@v1
+      with:
+        working-directory: build
+        run: ctest --output-on-failure
+
+  # CI on macOS (Qt6)
+  ci-macos-silicon-qt6:
+    name: "macOS (arm64; qt6)"
+    runs-on: macos-14
+    if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.actor, 'transifex')"
+
+    # @TODO Enable gpsd on macOS instance for CI testing
+    # @BODY At the moment after installing gpsd (brew install gpsd) library can be found by cmake, but not headers! Apparently we should add some magic for environment variables or something else on macOS Catalina to make headers available for cmake/make
+    steps:
+    - name: Install dependencies
+      env:
+        HOMEBREW_NO_INSTALLED_DEPENDENTS_CHECK: 1
+        HOMEBREW_NO_ANALYTICS: 1
+        HOMEBREW_NO_AUTO_UPDATE: 1
+        HOMEBREW_NO_INSTALL_CLEANUP: 1
+        PYTHONSTRICTEXTENSIONBUILD: 1
+      run: |
+        # brew update
+        # brew upgrade
+        brew install qt@6 nlopt exiv2
+
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Configure CMake
+      shell: bash
+      run: |
+        export PATH="/usr/local/opt/qt@6/bin:$PATH"
+        mkdir -p build
+        cd build
+        cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DENABLE_TESTING=On ${{ github.workspace }}
+
+    - name: Compile
+      working-directory: build
+      run: make -j3
+
+    - name: Run unit tests
+      uses: coactions/setup-xvfb@v1
+      with:
+        working-directory: build
+        run: ctest --output-on-failure
+
+  # CI on FreeBSD (Qt6)
+  ci-freebsd-qt6:
+    name: "FreeBSD (x86_64; qt6)"
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.actor, 'transifex')"
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Build and run unit tests in FreeBSD
+      uses: vmactions/freebsd-vm@v1
+      id: freebsd-qt6
+      with:
+        # Use sh shell
+        usesh: true
+        # When using rsync, you can define copyback: false to not copy files back from the VM in to the host.
+        copyback: false
+        prepare: |
+          pkg install -y cmake git eigen glm exiv2 nlopt perl5 xorg-vfbserver gettext qt6-webengine qt6-base qt6-tools qt6-serialport qt6-location qt6-positioning qt6-multimedia qt6-charts
+
+        run: |
+          set -e -x
+          export DISPLAY=:0
+          mkdir builds
+          cd builds
+          cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DENABLE_TESTING=On "${{ github.workspace }}"
+          make -j3
+          Xvfb :0 -ac -screen 0 1024x768x24+32 >/dev/null 2>&1 &
+          sleep 3
+          ctest --output-on-failure
+          sleep 1
+          pkill Xvfb

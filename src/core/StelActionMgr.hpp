@@ -124,16 +124,10 @@ private:
 	StelProperty* boolProperty;
 	QMetaMethod slot;
 
-	// Currently, there is no proper way to handle shortcuts with non latin
-	// keyboards layouts.  So for the moment, if we don't use QuickView, we
-	// create a QAction added to the main view that will trigger the
-	// StelAction when the shortcut is typed.
-#ifndef USE_QUICKVIEW
 private slots:
 	void onChanged();
 private:
 	class QAction* qAction;
-#endif
 };
 
 //! Manager for StelAction instances. Allows registration of new actions, and finding an existing one by name.
@@ -142,7 +136,7 @@ class StelActionMgr : public QObject
 	Q_OBJECT
 public:
 	StelActionMgr();
-	~StelActionMgr() Q_DECL_OVERRIDE;
+	~StelActionMgr() override;
 	//! Create and add a new StelAction, connected to an object property or slot.
 	//! @param id Global identifier.
 	//! @param groupId Group identifier.

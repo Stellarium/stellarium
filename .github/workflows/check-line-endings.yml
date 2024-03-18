@@ -1,0 +1,21 @@
+#
+# See https://github.com/marketplace/actions/check-crlf
+#
+name: "Maintenance"
+on:
+  push:
+  pull_request_target:
+    types: [synchronize]
+
+jobs:
+  main:
+    name: "Check CRLF line endings"
+    runs-on: ubuntu-latest
+    if: "!contains(github.actor, 'transifex')"
+    steps:
+      - name: Checkout repository contents
+        uses: actions/checkout@v4
+
+      - name: Check CRLF line endings
+        uses: erclu/check-crlf@v1
+            

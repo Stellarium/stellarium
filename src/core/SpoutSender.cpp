@@ -88,25 +88,11 @@ void SpoutSender::captureAndSendFrame(GLuint fbo)
 	if(fbo)
 	{
 		//if there is a FBO, try to use its texture directly to avoid a copy
-		//the Qt GL widget classes hide their FBO internally,
-		//so this seems like the only way to find out the texture ID
-		//I don't know the performance implications of these queries yet
-		GLint objType;
-		glGetFramebufferAttachmentParameteriv(GL_FRAMEBUFFER,GL_COLOR_ATTACHMENT0,GL_FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE,&objType);
-		if(objType == GL_TEXTURE) //we can only do this directly if it is a texture, not an RB
-		{
-			GLint texId;
-			glGetFramebufferAttachmentParameteriv(GL_FRAMEBUFFER,GL_COLOR_ATTACHMENT0,GL_FRAMEBUFFER_ATTACHMENT_OBJECT_NAME,&texId);
-			if(texId)
-			{
-				//use the texture directly
-				spoutLib->SendTexture(static_cast<GLuint>(texId), GL_TEXTURE_2D, width, height, true, fbo);
-				return;
-			}
-		}
+		spoutLib->SendFbo(fbo, width, height, true);
+		return;
 	}
 
-	//if no FBO is bound, or the above method failed, we have
+	//if no FBO is bound, we have
 	//to copy from the framebuffer to a local texture first
 	glBindTexture(GL_TEXTURE_2D, localTexture);
 	if(textureDirty)

@@ -170,7 +170,7 @@ panel. If they are missing, the parameters do not change to defaults.
 \subsection{Polygonal landscape}
 \label{sec:landscapes:Polygonal}
 
-This landscape type has been added \newFeature{0.13} to allow
+This landscape type has been added\newFeature{0.13} to allow
 the use of measured horizons. Users of \program{Cartes du
   Ciel}\footnote{SkyChart / Cartes du Ciel planetarium:
   \url{https://www.ap-i.net/skychart/en/start}} will be happy to hear
@@ -183,8 +183,13 @@ present there, it will be used to define object visibility (instead of
 the opacity of the landscape photo textures) and, if
 \var{horizon\_line\_color} is defined, will be plotted.
 
-There are two little caveats:
+There are a few little caveats:
 \begin{itemize}
+\item If you create a polygonal line with vertex azimuths 0, 90, 180, 270 (exactly), 
+the horizon may not show up at all. Add a tiny nonzero value to the global rotation, like 
+\begin{configfile}
+polygonal_angle_rotatez = 0.0000001
+\end{configfile}
 \item Sometimes, there may appear vertical lines
 from some corners towards the zenith or the mathematical horizon,
 e.g.\ if there is a vertex including azimuth 0 or 180. If this
@@ -285,6 +290,11 @@ which does just this work for you.
   installation in Stellarium (see section
   \ref{sec:gui:view:landscape}).
 \end{enumerate}
+
+A similar web service, \program{PeakFinder}\footnote{\url{https://www.peakfinder.com}}, 
+meanwhile also allows downloading the horizon polygon as installable landscape for Stellarium. 
+Unfortunately, currently (early 2024) the excellent gazetteer (peak identification) visible on the website 
+is not exported.
 
 
 \subsection{Spherical landscape}

@@ -2,11 +2,11 @@ labels:
   - name: invalid
     labeled:
       issue:
-        body: Sorry, but this report seems invalid (or we just do not understand your problem - so, please follow the issue templates).
+        body: Sorry, but this issue seems out of our hands.
         action: close
       pr:
         body: |
-          Hello @{{ pull_request.user.login }}! 
+          Hello @{{ pull_request.user.login }}!
 
           Thank you for suggesting this, but please follow the pull request templates.
         action: draft
@@ -58,41 +58,61 @@ labels:
     labeled:
       issue:
         body: |
-          Hello @{{ issue.user.login }}! 
+          Hello @{{ issue.user.login }}!
 
           Thank you for suggesting this enhancement.
   - name: feature
     labeled:
       issue:
         body: |
-          Hello @{{ issue.user.login }}! 
+          Hello @{{ issue.user.login }}!
 
           Thank you for suggesting this feature.
   - name: wishlist
     labeled:
       issue:
         body: |
-          Hello @{{ issue.user.login }}! 
+          Hello @{{ issue.user.login }}!
 
           Thank you for this suggestion.
+  - name: "state: waiting feedback"
+    labeled:
+      issue:
+        body: |
+          Hello @{{ issue.user.login }}!
+ 
+          We really need your feedback.
+    unlabeled:
+      issue:
+        body: |
+          Hello @{{ issue.user.login }}!
+
+          Thank you for your feedback.
+  - name: "state: blocked"
+    labeled:
+      issue:
+        body: |
+          Hello @{{ issue.user.login }}!
+
+          This issue being blocked by another PR or issue. Thanks for the report!
   - name: "state: confirmed"
     labeled:
       issue:
         body: |
-          Hello @{{ issue.user.login }}! 
+          Hello @{{ issue.user.login }}!
 
           OK, developers can reproduce the issue. Thanks for the report!
   - name: "state: won't fix"
     labeled:
       issue:
         body: |
-          We have a strong reason not to do it! Some reasons for it in the FAQ:
+          We have a strong reason not to do it! Some reasons for it can be found in the FAQ:
           https://github.com/Stellarium/stellarium/wiki/FAQ#Why_dont_you_implement
         action: close
     unlabeled:
       issue:
         body: |
-          Hello @{{ issue.user.login }}! 
+          Hello @{{ issue.user.login }}!
 
           This has become active again.
         action: open
@@ -100,7 +120,7 @@ labels:
     labeled:
       issue:
         body: |
-          Hello @{{ issue.user.login }}! 
+          Hello @{{ issue.user.login }}!
 
           Please see FAQ in the wiki:
           https://github.com/Stellarium/stellarium/wiki/FAQ or https://github.com/Stellarium/stellarium/wiki/Common-Problems-for-the-current-version
@@ -120,58 +140,58 @@ labels:
     labeled:
       issue:
         body: |
-          Thank you @{{ issue.user.login }}! 
+          Thank you @{{ issue.user.login }}!
 
           In future please use Transifex to fix and improve translations:
-          https://www.transifex.com/stellarium/stellarium/dashboard/
+          https://app.transifex.com/stellarium/stellarium/dashboard/
   - name: "state: implemented"
     labeled:
       issue:
         body: |
           Hello @{{ issue.user.login }}!
 
-          The enhancement or feature has been implemented! You may test it via building Stellarium from source code or wait the weekly development snapshot...
+          The enhancement or feature has been implemented! You can test it by building Stellarium from source code or wait for the weekly development snapshot.
       pr:
         body: |
           Hello @{{ pull_request.user.login }}!
 
-          The enhancement or feature has been merged into source code and you may test it via building Stellarium from source code or wait the weekly development snapshot...
+          The enhancement or feature has been merged into source code and you can test it by building Stellarium from source code or wait for the weekly development snapshot.
   - name: "state: fixed"
     labeled:
       issue:
         body: |
           Hello @{{ issue.user.login }}!
 
-          The bug or issue has been fixed! You may test it via building Stellarium from source code or wait the weekly development snapshot...
+          The bug or issue has been fixed! You can test it by building Stellarium from source code or wait for the weekly development snapshot.
       pr:
         body: |
           Hello @{{ pull_request.user.login }}!
 
-          The fix has been merged into source code and you may test it via building Stellarium from source code or wait the weekly development snapshot...
+          The fix has been merged into source code and you can test it by building Stellarium from source code or wait for the weekly development snapshot.
   - name: "state: published"
     labeled:
       issue:
         body: |
-          Hello @{{ issue.user.login }}! 
+          Hello @{{ issue.user.login }}!
 
           Please check the fresh version (development snapshot) of Stellarium:
           https://github.com/Stellarium/stellarium-data/releases/tag/weekly-snapshot
       pr:
         body: |
-          Hello @{{ pull_request.user.login }}! 
+          Hello @{{ pull_request.user.login }}!
 
           Please check the fresh version (development snapshot) of Stellarium:
           https://github.com/Stellarium/stellarium-data/releases/tag/weekly-snapshot
     unlabeled:
       issue:
         body: |
-          Hello @{{ issue.user.login }}! 
+          Hello @{{ issue.user.login }}!
 
           Please check the latest stable version of Stellarium:
           https://github.com/Stellarium/stellarium/releases/latest
       pr:
         body: |
-          Hello @{{ pull_request.user.login }}! 
+          Hello @{{ pull_request.user.login }}!
 
           Please check the latest stable version of Stellarium:
           https://github.com/Stellarium/stellarium/releases/latest

@@ -102,11 +102,7 @@ void SporadicMeteorMgr::update(double deltaTime)
 	float rate = mpf / static_cast<float>(maxMpf);
 	for (int i = 0; i < maxMpf; ++i)
 	{
-#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
 		float prob = StelApp::getInstance().getRandF();
-#else
-		float prob = static_cast<float>(qrand()) / static_cast<float>(RAND_MAX);
-#endif
 		if (prob < rate)
 		{
 			SporadicMeteor* m = new SporadicMeteor(core, m_maxVelocity, m_bolideTexture);
@@ -137,7 +133,7 @@ void SporadicMeteorMgr::draw(StelCore* core)
 
 	// step through and draw all active meteors
 	StelPainter sPainter(core->getProjection(StelCore::FrameAltAz));
-	for (auto* m: qAsConst(activeMeteors))
+	for (auto* m: std::as_const(activeMeteors))
 	{
 		m->draw(core, sPainter);
 	}

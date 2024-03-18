@@ -91,15 +91,15 @@ public:
 	//! A pre-defined "shortest useful" set of specifiers for the getInfoString flags argument to getInfoString
 	static constexpr InfoStringGroup ShortInfo = static_cast<InfoStringGroup>(Name|CatalogNumber|Magnitude|RaDecJ2000);
 
-	virtual ~StelObject() Q_DECL_OVERRIDE {}
+	~StelObject() override {}
 
 	//! Default implementation of the getRegion method.
 	//! Return the spatial region of the object.
-	virtual SphericalRegionP getRegion() const Q_DECL_OVERRIDE {return SphericalRegionP(new SphericalPoint(getJ2000EquatorialPos(Q_NULLPTR)));}
+	SphericalRegionP getRegion() const override {return SphericalRegionP(new SphericalPoint(getJ2000EquatorialPos(Q_NULLPTR)));}
 
 	//! Default implementation of the getPointInRegion method.
 	//! Return the J2000 Equatorial Position of the object.
-	virtual Vec3d getPointInRegion() const Q_DECL_OVERRIDE {return getJ2000EquatorialPos(Q_NULLPTR);}
+	Vec3d getPointInRegion() const override {return getJ2000EquatorialPos(Q_NULLPTR);}
 	
 	//! Write I18n information about the object in QString.
 	//! @param core the StelCore object to use
@@ -133,6 +133,7 @@ public:
 	//! - glat : galactic latitude in decimal degrees
 	//! - sglong : supergalactic longitude in decimal degrees
 	//! - sglat : supergalactic latitude in decimal degrees
+	//! - ecliptic-obliquity : mean ecliptic obliquity of date in decimal degrees
 	//! - elong : ecliptic longitude in decimal degrees (on Earth only!)
 	//! - elat : ecliptic latitude in decimal degrees (on Earth only!)
 	//! - elongJ2000 : ecliptic longitude (Earth's J2000 frame) in decimal degrees
@@ -159,7 +160,10 @@ public:
 	//! Return object's type. It should be the name of the class.
 	virtual QString getType() const = 0;
 
-	//! Return object's type. It should be English lowercase name of the type of the object.
+	//! Return object's type. It should be English lowercase name of the astronomical type of the object.
+	//! The purpose of this string is a distinction or further refinement over object class name retrieved with getType():
+	//! Planet objects can be planets, moons, or even the Sun. The Sun should however return "star".
+	//! Nebula objects should return their actual type like "open cluster", "galaxy", "nebula", ...
 	virtual QString getObjectType() const = 0;
 	//! Return object's type. It should be translated lowercase name of the type of the object.
 	virtual QString getObjectTypeI18n() const = 0;
@@ -184,7 +188,7 @@ public:
 	//! Return translated object's name
 	virtual QString getNameI18n() const = 0;
 
-	//! Get observer-centered equatorial coordinates at equinox J2000
+	//! Get observer-centered equatorial coordinates at equinox J2000, including aberration
 	virtual Vec3d getJ2000EquatorialPos(const StelCore* core) const = 0;
 
 	//! Get observer-centered equatorial coordinate at the current equinox
@@ -247,7 +251,11 @@ public:
 	//!       *  +100. for circumpolar objects. Rise and set give lower culmination times.
 	//!       *  -100. for objects never rising. Rise and set give transit times.
 	//!       * -1000. is used as "invalid" value. The result should then not be used.
+	//!       *   +20. (Planet objects only) no transit time on current date.
+	//!       *   +30. (Planet objects only) no rise time on current date.
+	//!       *   +40. (Planet objects only) no set time on current date.
 	//! @note This is an abbreviated version of the method implemented in the Planet class.
+
 	virtual Vec4d getRTSTime(const StelCore* core, const double altitude=0.) const;
 
 	//! Return object's apparent V magnitude as seen from observer, without including extinction.

@@ -73,7 +73,7 @@ public:
 	Q_ENUM(Series)
 
 	AstroCalcChart(QSet<AstroCalcChart::Series> which);
-	virtual ~AstroCalcChart() Q_DECL_OVERRIDE;
+	~AstroCalcChart() override;
 
 	//! Append one pair of data values to series s. x must be some QDateTime.toMSecsSinceEpoch()
 	void append(Series s, qint64 x, qreal y);
@@ -122,7 +122,7 @@ public slots:
 
 protected:
 	//! Override. This sets the time from the click point to the main application.
-	virtual void mousePressEvent(QGraphicsSceneMouseEvent *event) Q_DECL_OVERRIDE;
+	void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
 
 private:
 	//! Find range of dates for the respective series plot.

@@ -60,8 +60,8 @@ void ArchaeoLinesDialogLocations::createDialogContent()
 	connect(gui, SIGNAL(flagUseKineticScrollingChanged(bool)), this, SLOT(enableKineticScrolling(bool)));
 
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
-	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
-	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
+	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
+	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	//initialize list model
 	allModel = new QStringListModel(this);
@@ -85,13 +85,13 @@ void ArchaeoLinesDialogLocations::setLocationFromList(const QModelIndex& index)
 	switch (modalContext)
 	{
 		case 1:
-			al->setGeographicLocation1Latitude(static_cast<double>(loc.latitude));
-			al->setGeographicLocation1Longitude(static_cast<double>(loc.longitude));
+			al->setGeographicLocation1Latitude(static_cast<double>(loc.getLatitude()));
+			al->setGeographicLocation1Longitude(static_cast<double>(loc.getLongitude()));
 			al->setGeographicLocation1Label(loc.name);
 			break;
 		case 2:
-			al->setGeographicLocation2Latitude(static_cast<double>(loc.latitude));
-			al->setGeographicLocation2Longitude(static_cast<double>(loc.longitude));
+			al->setGeographicLocation2Latitude(static_cast<double>(loc.getLatitude()));
+			al->setGeographicLocation2Longitude(static_cast<double>(loc.getLongitude()));
 			al->setGeographicLocation2Label(loc.name);
 			break;
 		default:

@@ -27,6 +27,7 @@
 #include "StelMovementMgr.hpp"
 #include "StelSkyDrawer.hpp"
 #include "Planet.hpp"
+#include "StelActionMgr.hpp"
 
 #include <QMouseEvent>
 #include <QString>
@@ -48,6 +49,8 @@ void StelObjectMgr::init()
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
 	setFlagSelectedObjectPointer(conf->value("viewing/flag_show_selection_marker", true).toBool());
+
+	addAction("actionToggle_Selected_Object_Pointer", N_("Miscellaneous"), N_("Toggle visibility of pointers for selected objects"), "objectPointerVisibility", "");
 }
 
 StelObject::InfoStringGroup StelObjectMgr::getCustomInfoStrings()
@@ -408,10 +411,10 @@ bool StelObjectMgr::findAndSelectI18n(const QString &nameI18n, StelModule::StelM
 		return setSelectedObject(obj, action);
 }
 
-bool StelObjectMgr::findAndSelectI18n(const QString &name, const QString &objtype, StelModule::StelModuleSelectAction action)
+bool StelObjectMgr::findAndSelectI18n(const QString &nameI18n, const QString &objtype, StelModule::StelModuleSelectAction action)
 {
 	// Then look for another object
-	StelObjectP obj = searchByNameI18n(name, objtype);
+	StelObjectP obj = searchByNameI18n(nameI18n, objtype);
 	if (!obj)
 		return false;
 	else
@@ -472,7 +475,7 @@ StelObjectP StelObjectMgr::cleverFind(const StelCore* core, const Vec3d& v) cons
 				static_cast<float>(core->getSkyDrawer()->getCustomStarMagnitudeLimit()) :
 				core->getSkyDrawer()->getLimitMagnitude();
 	QList<StelObjectP> tmp;
-	for (const auto& obj : qAsConst(candidates))
+	for (const auto& obj : std::as_const(candidates))
 	{
 		if (obj->getSelectPriority(core)<=limitMag)
 			tmp.append(obj);
@@ -487,7 +490,7 @@ StelObjectP StelObjectMgr::cleverFind(const StelCore* core, const Vec3d& v) cons
 
 	StelObjectP sobj;
 	float best_object_value = 100000.f;
-	for (const auto& obj : qAsConst(candidates))
+	for (const auto& obj : std::as_const(candidates))
 	{
 		prj->project(obj->getJ2000EquatorialPos(core), winpos);
 		float distance = static_cast<float>(std::sqrt((xpos-winpos[0])*(xpos-winpos[0]) + (ypos-winpos[1])*(ypos-winpos[1])))*distanceWeight;
@@ -620,16 +623,16 @@ QStringList StelObjectMgr::listAllModuleObjects(const QString &moduleId, bool in
 {
 	// search for module
 	StelObjectModule* module = Q_NULLPTR;
-	QStringList result, list;
+	QStringList result;
 	QString objModule, objType;
 	bool subSet = false;
 	if (moduleId.contains(":"))
 	{
 		subSet = true;
 		#if (QT_VERSION>=QT_VERSION_CHECK(5, 14, 0))
-		list = moduleId.split(":", Qt::SkipEmptyParts);
+		QStringList list = moduleId.split(":", Qt::SkipEmptyParts);
 		#else
-		list = moduleId.split(":", QString::SkipEmptyParts);
+		QStringList list = moduleId.split(":", QString::SkipEmptyParts);
 		#endif
 		objModule = list.at(0);
 		objType = list.at(1);
@@ -683,7 +686,7 @@ QVariantMap StelObjectMgr::getObjectInfo(const StelObjectP obj)
 void StelObjectMgr::setExtraInfoString(const StelObject::InfoStringGroup& flags, const QString &str)
 {
 	extraInfoStrings.remove(flags); // delete all entries with these flags
-	if (str.length()>0)
+	if (!str.isEmpty())
 		extraInfoStrings.insert(flags, str);
 }
 void StelObjectMgr::addToExtraInfoString(const StelObject::InfoStringGroup &flags, const QString &str)

@@ -20,22 +20,45 @@
 #include <QDebug>
 
 #include "Dialog.hpp"
+#include <QHBoxLayout>
 #include "StelMainView.hpp"
+#include "StelCloseButton.hpp"
 
-void BarFrame::mousePressEvent(QMouseEvent *event)
+TitleBar::TitleBar(QWidget* parent)
+	: QFrame(parent)
+	, label(new QLabel("unnamed window"))
+{
+	setFrameStyle(QFrame::StyledPanel);
+
+	const auto layout = new QHBoxLayout(this);
+
+	label->setObjectName("stelWindowTitle");
+	label->setAlignment(Qt::AlignCenter);
+	label->setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::Preferred);
+	layout->addWidget(label);
+	layout->setContentsMargins(0,0,0,0);
+
+	const auto close = new StelCloseButton;
+	close->setFocusPolicy(Qt::NoFocus);
+	layout->addWidget(close);
+
+	connect(close, &QAbstractButton::clicked, this, &TitleBar::closeClicked);
+}
+
+void TitleBar::mousePressEvent(QMouseEvent *event)
 {
 	mousePos = event->pos();
 	moving = true;
 }
 
-void BarFrame::mouseReleaseEvent(QMouseEvent *)
+void TitleBar::mouseReleaseEvent(QMouseEvent *)
 {
 	moving = false;
 	QWidget* p = dynamic_cast<QWidget*>(QFrame::parent());
 	emit movedTo(p->pos());
 }
 
-void BarFrame::mouseMoveEvent(QMouseEvent *event)
+void TitleBar::mouseMoveEvent(QMouseEvent *event)
 {
 	if (!moving) return;
 	QPoint dpos = event->pos() - mousePos;

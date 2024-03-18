@@ -152,15 +152,11 @@ double ConstellationMgr::getCallOrder(StelModuleActionName actionName) const
 
 void ConstellationMgr::reloadSkyCulture()
 {
-	updateSkyCulture(StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureID());
+	StelApp::getInstance().getSkyCultureMgr().reloadSkyCulture();
 }
 
 void ConstellationMgr::updateSkyCulture(const QString& skyCultureDir)
 {
-	// Check if the sky culture changed since last load, if not don't load anything
-	if (lastLoadedSkyCulture == skyCultureDir)
-		return;
-
 	// Find constellation art.  If this doesn't exist, warn, but continue using ""
 	// the loadLinesAndArt function knows how to handle this (just loads lines).
 	QString conArtFile = StelFileMgr::findFile("skycultures/"+skyCultureDir+"/constellationsart.fab");
@@ -193,11 +189,11 @@ void ConstellationMgr::updateSkyCulture(const QString& skyCultureDir)
 
 	// load constellation boundaries
 	StelApp *app = &StelApp::getInstance();
-	int idx = app->getSkyCultureMgr().getCurrentSkyCultureBoundariesIdx();
-	if (idx>=0)
+	const auto idx = app->getSkyCultureMgr().getCurrentSkyCultureBoundariesType();
+	if (idx != StelSkyCulture::BoundariesType::None)
 	{
 		// OK, the current sky culture has boundaries!
-		if (idx==1)
+		if (idx == StelSkyCulture::BoundariesType::Own)
 		{
 			// boundaries = own
 			fic = StelFileMgr::findFile("skycultures/" + skyCultureDir + "/constellation_boundaries.dat");
@@ -259,7 +255,7 @@ void ConstellationMgr::selectedObjectChange(StelModule::StelModuleSelectAction a
 	else
 	{
 		QList<StelObjectP> newSelectedObject;
-		if (StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureBoundariesIdx()==0) // generic IAU boundaries
+		if (StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureBoundariesType()==StelSkyCulture::BoundariesType::IAU)
 			newSelectedObject = omgr->getSelectedObject();
 		else
 			newSelectedObject = omgr->getSelectedObject("Star");
@@ -295,7 +291,7 @@ void ConstellationMgr::deselectConstellations(void)
 		}
 
 		// If any constellation is selected at the moment, then let's do not touch to it!
-		if (omgr->getWasSelected() && selected.size()>0)
+		if (omgr->getWasSelected() && !selected.empty())
 			selected.pop_back();
 
 		// Let's hide all previously selected constellations
@@ -347,7 +343,7 @@ void ConstellationMgr::selectConstellationByObjectName(const QString &englishNam
 	if (!getFlagIsolateSelected())
 		setFlagIsolateSelected(true); // Enable isolated selection
 
-	if (StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureBoundariesIdx()==0) // generic IAU boundaries
+	if (StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureBoundariesType()==StelSkyCulture::BoundariesType::IAU)
 		setSelectedConst(isObjectIn(GETSTELMODULE(StelObjectMgr)->searchByName(englishName).data()));
 	else
 		setSelectedConst(isStarIn(GETSTELMODULE(StelObjectMgr)->searchByName(englishName).data()));
@@ -655,7 +651,7 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 
 			QVector<Vec3d> contour;
 			contour.reserve(texCoords.size());
-			for (const auto& v : qAsConst(texCoords))
+			for (const auto& v : std::as_const(texCoords))
 			{
 				Vec3d vertex = X * Vec3d(static_cast<double>(v[0]) * texSizeX, static_cast<double>(v[1]) * texSizeY, 0.);
 				// Originally the projected texture plane remained as tangential plane.
@@ -1521,7 +1517,7 @@ void ConstellationMgr::setSelected(const StelObject *s)
 		setSelectedConst(Q_NULLPTR);
 	else
 	{
-		if (StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureBoundariesIdx()==0) // generic IAU boundaries
+		if (StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureBoundariesType()==StelSkyCulture::BoundariesType::IAU)
 			setSelectedConst(isObjectIn(s));
 		else
 			setSelectedConst(isStarIn(s));

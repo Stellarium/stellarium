@@ -373,7 +373,7 @@ void ArchaeoLines::update(double deltaTime)
 
 	static const double b_over_a=0.99664719;
 	const bool useGeocentric = !core->getUseTopocentricCoordinates();
-	const double latRad=useGeocentric ? 0.0 : static_cast<double>(loc.latitude)*M_PI_180;
+	const double latRad=useGeocentric ? 0.0 : static_cast<double>(loc.getLatitude())*M_PI_180;
 	const double u=std::atan(b_over_a*std::tan(latRad));
 	const double rhoSinPhiP=useGeocentric ? 0. : b_over_a*std::sin(u)+loc.altitude/6378140.0*std::sin(latRad);
 	const double rhoCosPhiP=useGeocentric ? 1. :          std::cos(u)+loc.altitude/6378140.0*std::cos(latRad);
@@ -418,8 +418,8 @@ void ArchaeoLines::update(double deltaTime)
 	southernMajorStandstillLine6->setDefiningAngle(lunarDEtopo[6] *180.0/M_PI);
 	southernMajorStandstillLine7->setDefiningAngle(lunarDEtopo[7] *180.0/M_PI);
 
-	zenithPassageLine->setDefiningAngle(static_cast<double>(loc.latitude));
-	nadirPassageLine->setDefiningAngle(static_cast<double>(-loc.latitude));
+	zenithPassageLine->setDefiningAngle(static_cast<double>(loc.getLatitude()));
+	nadirPassageLine->setDefiningAngle(static_cast<double>(-loc.getLatitude()));
 
 	// Selected object?
 	if (objMgr->getWasSelected())
@@ -1368,6 +1368,8 @@ void alViewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& direct
 	direc.normalize();
 	//const Vec4f tmpColor = d->sPainter->getColor();
 	//d->sPainter->setColor(d->textColor[0], d->textColor[1], d->textColor[2], d->textColor[3]);
+	const int viewportWidth  = d->sPainter->getProjector()->getViewportWidth();
+	const int viewportHeight = d->sPainter->getProjector()->getViewportHeight();
 
 	QString text = d->text; // original text-from-coordinates taken out!
 	if (text.isEmpty())
@@ -1380,6 +1382,23 @@ void alViewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& direct
 		angleDeg+=180.f;
 		xshift=-d->sPainter->getFontMetrics().boundingRect(text).width()-6.f;
 	}
+
+	// Copy tweak from GridlineMgr
+	if ((fabs(screenPos[0])<1.) && (angleDeg>0.f )) // LEFT
+	{
+		xshift+=0.5f*tan(angleDeg*M_PI_180f)*d->sPainter->getFontMetrics().boundingRect(text).height();
+	}
+	else if ((fabs(screenPos[0]-viewportWidth)<1.) && (angleDeg>180.f )) // RIGHT
+	{
+		xshift += 0.5 * tan(angleDeg*M_PI_180f)*d->sPainter->getFontMetrics().boundingRect(text).height();
+	}
+	else if ((fabs(screenPos[1]-viewportHeight)<1.) && fabs(angleDeg)>5.f) // TOP
+	{
+		const float sign = angleDeg<-90.f ? 0.5f : -0.5f;
+		xshift += sign * (1./tan(angleDeg*M_PI_180f))*d->sPainter->getFontMetrics().boundingRect(text).height();
+	}
+	// It seems bottom edge is always OK!
+
 
 	d->sPainter->drawText(static_cast<float>(screenPos[0]), static_cast<float>(screenPos[1]), text, angleDeg, xshift, 3);
 	//d->sPainter->setColor(tmpColor[0], tmpColor[1], tmpColor[2], tmpColor[3]); // RESTORE

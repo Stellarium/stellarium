@@ -34,6 +34,6 @@ void main(void)
 	//transforms are assumed to be identity matrices
 	vec4 oldVert = ftransform();
 	//we do the "real" transform ourselves using the same matrices as the other shaders use
-    gl_Position = u_mMVP * oldVert;
+	gl_Position = u_mMVP * oldVert;
 	gl_FrontColor = gl_Color;
 }
