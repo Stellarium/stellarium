@@ -26,6 +26,7 @@
 #include "StelUtils.hpp"
 #include "StelTranslator.hpp"
 #include "CustomObjectMgr.hpp"
+#include "StelJsonParser.hpp"
 
 #include <QSettings>
 #include <QKeyEvent>
@@ -130,7 +131,69 @@ void CustomObjectMgr::init()
 	setActiveRadiusLimit(conf->value("gui/custom_marker_radius_limit", 15).toInt());
 	setSelectPriority(conf->value("gui/custom_marker_priority", -2.f).toFloat());
 
+	// Custom objects for Search Tool
+	persistentCOFile = StelFileMgr::getUserDir()+"/data/persistentCustomObjects.json";
+	if(QFileInfo::exists(persistentCOFile))
+	{
+		//qWarning().noquote() << "CustomObjectMgr: loading file:" << QDir::toNativeSeparators(persistentCOFile);
+		// Loading list of saved custom objects
+		loadPersistentObjects();
+	}
+	else
+	{
+		//qWarning().noquote() << "CustomObjectMgr: persistentCustomObjects.json does not exist - creating an empty file:" << QDir::toNativeSeparators(persistentCOFile);
+		// Create a file with empty list of custom objects
+		savePersistentObjects();
+	}
+
 	GETSTELMODULE(StelObjectMgr)->registerStelObjectMgr(this);
+}
+
+void CustomObjectMgr::loadPersistentObjects()
+{
+	QFile dataFile;
+	dataFile.setFileName(persistentCOFile);
+	if (dataFile.open(QIODevice::ReadOnly | QIODevice::Text))
+	{
+		QVariantMap map = StelJsonParser::parse(dataFile.readAll()).toMap();
+		dataFile.close();
+
+		QVariantMap pcoMap = map.value("customObjects").toMap();
+		for (auto &pcoKey : pcoMap.keys())
+		{
+			Vec3d coordinates(pcoMap.value(pcoKey).toString());
+			CustomObjectP custObj(new CustomObject(pcoKey, coordinates, false));
+			if (custObj->initialized)
+				persistentObjects.append(custObj);
+		}
+	}
+	else
+		qWarning().noquote() << "CustomObjectMgr: cannot open" << QDir::toNativeSeparators(persistentCOFile);
+}
+
+void CustomObjectMgr::savePersistentObjects()
+{
+	QFile dataFile;
+	dataFile.setFileName(persistentCOFile);
+	if (dataFile.open(QIODevice::WriteOnly | QIODevice::Truncate | QIODevice::Text | QIODevice::Unbuffered))
+	{
+		StelCore* core = StelApp::getInstance().getCore();
+		QVariantMap map, pcObjects;
+		for (const auto& cObj : std::as_const(persistentObjects))
+		{
+			if (cObj && cObj->initialized)
+			{
+				pcObjects[cObj->getID()] = cObj->getJ2000EquatorialPos(core).toStr();
+			}
+		}
+		map["customObjects"] = pcObjects;
+
+		StelJsonParser::write(map, &dataFile);
+		dataFile.flush();
+		dataFile.close();
+	}
+	else
+		qDebug().noquote() << "CustomObjectMgr: can't create a file:" << QDir::toNativeSeparators(persistentCOFile);
 }
 
 void CustomObjectMgr::deinit()
@@ -152,9 +215,9 @@ float CustomObjectMgr::getSelectPriority() const
 
 void CustomObjectMgr::removePersistentObjects()
 {
-	setSelected("");
+	GETSTELMODULE(StelObjectMgr)->unSelect();
 	persistentObjects.clear();
-	// TODO: Flush empty list to disk
+	savePersistentObjects();
 	emit StelApp::getInstance().getCore()->updateSearchLists();
 }
 
@@ -166,7 +229,7 @@ void CustomObjectMgr::addPersistentObject(const QString& designation, Vec3d coor
 		if (custObj->initialized)
 			persistentObjects.append(custObj);
 
-		// TODO: Flush list of object to disk
+		savePersistentObjects();
 		emit StelApp::getInstance().getCore()->updateSearchLists();
 	}
 }
@@ -223,7 +286,7 @@ void CustomObjectMgr::addCustomObjectAltAzi(const QString& designation, const QS
 
 void CustomObjectMgr::removeCustomObjects()
 {
-	setSelected("");
+	GETSTELMODULE(StelObjectMgr)->unSelect();
 	customObjects.clear();
 	//This marker count can be set to 0 because there will be no markers left and a duplicate will be impossible
 	countMarkers = 0;
@@ -232,14 +295,14 @@ void CustomObjectMgr::removeCustomObjects()
 
 void CustomObjectMgr::removeCustomObject(CustomObjectP obj)
 {
-	setSelected("");
+	GETSTELMODULE(StelObjectMgr)->unSelect();
 	customObjects.removeOne(obj);
 	emit StelApp::getInstance().getCore()->updateSearchLists();
 }
 
 void CustomObjectMgr::removeCustomObject(QString englishName)
 {
-	setSelected("");
+	GETSTELMODULE(StelObjectMgr)->unSelect();
 	for (const auto& cObj : std::as_const(customObjects))
 	{
 		//If we have a match for the thing we want to delete
@@ -402,7 +465,7 @@ void CustomObjectMgr::selectedObjectChange(StelModule::StelModuleSelectAction)
 		setSelected(qSharedPointerCast<CustomObject>(newSelected[0]));
 	}
 	else
-		setSelected("");
+		GETSTELMODULE(StelObjectMgr)->unSelect();
 }
 
 // Set selected planets by englishName

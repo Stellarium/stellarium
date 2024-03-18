@@ -180,6 +180,12 @@ private:
 	int countMarkers;
 	int radiusLimit;
 
+	QString persistentCOFile;
+	//! Loading list of saved custom objects (all of them are available in history of Search Tool)
+	void loadPersistentObjects();
+	//! Saving list of found via Search Tool custom objects
+	void savePersistentObjects();
+
 	//! Set the size of active radius around custom object markers.
 	void setActiveRadiusLimit(const int radius);
 
