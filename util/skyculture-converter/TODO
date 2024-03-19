@@ -1,0 +1,3 @@
+This converter currently doesn't process the following items
+ * Chinese names with "Added <number>": in the new format these phrases are expected to be separated from the names, which would reduce the number of msgid's
+ * Consider extracting asterisms' and constellations' ids (their 3rd parts) to .po files so that they could be translatable (see https://github.com/Stellarium/stellarium/pull/3751#issuecomment-2653797232 for context)
