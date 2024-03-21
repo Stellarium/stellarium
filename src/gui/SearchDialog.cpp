@@ -615,6 +615,9 @@ void SearchDialog::recentSearchClearDataClicked()
 	// Save empty list to user's data file
 	saveRecentSearches();
 
+	// Remove all SIMBAD's objects and save empty list to user's data file
+	GETSTELMODULE(CustomObjectMgr)->removePersistentObjects();
+
 	// Update search result on "Object" tab
 	onSearchTextChanged(ui->lineEditSearchSkyObject->text());
 }
@@ -1267,7 +1270,7 @@ void SearchDialog::gotoObject(const QString &nameI18n)
 		else
 		{
 			close();
-			GETSTELMODULE(CustomObjectMgr)->addCustomObject(nameI18n, simbadResults[nameI18n]);
+			GETSTELMODULE(CustomObjectMgr)->addPersistentObject(nameI18n, simbadResults[nameI18n]);
 			ui->lineEditSearchSkyObject->clear();
 			searchListModel->clearValues();
 			if (objectMgr->findAndSelect(nameI18n))
