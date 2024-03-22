@@ -24,8 +24,8 @@ namespace StelContributors {
     static const QStringList contributorsList =
     {
         "Fabien Chereau", "Georg Zotti", "Alexander V. Wolf", "Matthew Gates", "Bogdan Marinov", 
-        "Rob Spearman", "Marcos Cardinot", "Guillaume Chereau", "Florian Schaukowitsch", "Ferdinand Majerech", 
-        "Johannes Gajdosik", "Ruslan Kabatsayev", "Timothy Reaves", "Susanne M Hoffmann", "Tony Furr", 
+        "Rob Spearman", "Marcos Cardinot", "Ruslan Kabatsayev", "Guillaume Chereau", "Florian Schaukowitsch", 
+        "Ferdinand Majerech", "Johannes Gajdosik", "Timothy Reaves", "Susanne M Hoffmann", "Tony Furr", 
         "Eleni Maria Stea", "Andrei Borza", "sunshuwei", "Teresa Huertas", "Diego Marcos", 
         "Johan Meuris", "J.L.Canales", "Worachate Boonplod", "Andras Mohari", "Ivan Marti-Vidal", 
         "Nicolas Martignoni", "Michael Storm", "Petr Kubánek", "Holger Nießner", "Yuri Chornoivan", 
