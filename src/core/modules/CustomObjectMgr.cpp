@@ -28,8 +28,10 @@
 #include "CustomObjectMgr.hpp"
 #include "StelJsonParser.hpp"
 
+#include <QDir>
 #include <QSettings>
 #include <QKeyEvent>
+#include <QFileInfo>
 
 CustomObjectMgr::CustomObjectMgr()
 	: countMarkers(0)
