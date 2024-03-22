@@ -8,6 +8,7 @@
 # Nattee <ntte.pon@gmail.com>, 2022
 # Chaiyapong Ruangsuwan <chaiyapg@kku.ac.th>, 2022
 # cardinot <mcardinot@gmail.com>, 2022
+# NSP6213 YT, 2024
 # Worachate Boonplod, 2024
 # 
 #, fuzzy
@@ -15,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2024-03-01 08:54+0700\n"
+"POT-Creation-Date: 2024-03-15 12:19+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Worachate Boonplod, 2024\n"
 "Language-Team: Thai (https://app.transifex.com/stellarium/teams/80998/th/)\n"
@@ -42,7 +43,7 @@ msgstr ""
 #: plugins/Supernovae/src/Supernova.cpp:144 plugins/Novae/src/Nova.cpp:150
 #: plugins/Quasars/src/Quasar.cpp:125 plugins/Pulsars/src/Pulsar.cpp:189
 #: plugins/Pulsars/src/Pulsar.cpp:191 plugins/Exoplanets/src/Exoplanet.cpp:320
-#: plugins/MeteorShowers/src/MeteorShower.cpp:525
+#: plugins/MeteorShowers/src/MeteorShower.cpp:549
 #: plugins/MissingStars/src/MissingStar.cpp:130
 msgid "Type"
 msgstr "ชนิด"
@@ -67,7 +68,7 @@ msgstr "ดาวเรียงเด่น"
 #: src/core/modules/ConstellationMgr.cpp:131 src/core/modules/StarMgr.cpp:461
 #: src/core/modules/GridLinesMgr.cpp:2033
 #: src/core/modules/SpecialMarkersMgr.cpp:310
-#: src/core/modules/LandscapeMgr.cpp:870
+#: src/core/modules/LandscapeMgr.cpp:872
 #: src/core/modules/NomenclatureMgr.cpp:84 src/core/modules/NebulaMgr.cpp:358
 #: src/core/modules/NebulaMgr.cpp:359 src/core/modules/SolarSystem.cpp:307
 #: src/core/modules/MilkyWay.cpp:107 src/core/modules/ZodiacalLight.cpp:112
@@ -336,7 +337,7 @@ msgstr "จุดตรงข้ามเอเพกซ์"
 #: src/core/modules/Planet.cpp:1232 src/gui/AstroCalcDialog.cpp:9134
 #: plugins/Satellites/src/Satellite.cpp:360
 #: plugins/Satellites/src/Satellite.cpp:403
-#: plugins/MeteorShowers/src/MeteorShower.cpp:556
+#: plugins/MeteorShowers/src/MeteorShower.cpp:580
 msgctxt "speed"
 msgid "km/s"
 msgstr "กิโลเมตร/วินาที"
@@ -640,104 +641,104 @@ msgstr "ตก/น/น"
 #: src/core/modules/LandscapeMgr.cpp:311
 msgctxt "compass direction"
 msgid "NbE"
-msgstr ""
+msgstr "น-บ-ตอ"
 
 #. TRANSLATORS: Northeast by north
 #: src/core/modules/LandscapeMgr.cpp:313
 msgctxt "compass direction"
 msgid "NEbN"
-msgstr ""
+msgstr "ตอ/น-บ-น"
 
 #. TRANSLATORS: Northeast by east
 #: src/core/modules/LandscapeMgr.cpp:315
 msgctxt "compass direction"
 msgid "NEbE"
-msgstr ""
+msgstr "ตอ/น-บ-ตอ"
 
 #. TRANSLATORS: East by north
 #: src/core/modules/LandscapeMgr.cpp:317
 msgctxt "compass direction"
 msgid "EbN"
-msgstr ""
+msgstr "ตอ-บ-น"
 
 #. TRANSLATORS: East by south
 #: src/core/modules/LandscapeMgr.cpp:319
 msgctxt "compass direction"
 msgid "EbS"
-msgstr ""
+msgstr "ตอ-บ-ต"
 
 #. TRANSLATORS: Southeast by east
 #: src/core/modules/LandscapeMgr.cpp:321
 msgctxt "compass direction"
 msgid "SEbE"
-msgstr ""
+msgstr "ตอ/ต-บ-ตอ"
 
 #. TRANSLATORS: Southeast by south
 #: src/core/modules/LandscapeMgr.cpp:323
 msgctxt "compass direction"
 msgid "SEbS"
-msgstr ""
+msgstr "ตอ/ต-บ-ต"
 
 #. TRANSLATORS: South by east
 #: src/core/modules/LandscapeMgr.cpp:325
 msgctxt "compass direction"
 msgid "SbE"
-msgstr ""
+msgstr "ต-บ-ตอ"
 
 #. TRANSLATORS: South by west
 #: src/core/modules/LandscapeMgr.cpp:327
 msgctxt "compass direction"
 msgid "SbW"
-msgstr ""
+msgstr "ต-บ-ตต"
 
 #. TRANSLATORS: Southwest by south
 #: src/core/modules/LandscapeMgr.cpp:329
 msgctxt "compass direction"
 msgid "SWbS"
-msgstr ""
+msgstr "ตต/ต-บ-ต"
 
 #. TRANSLATORS: Southwest by west
 #: src/core/modules/LandscapeMgr.cpp:331
 msgctxt "compass direction"
 msgid "SWbW"
-msgstr ""
+msgstr "ตต/ต-บ-ตต"
 
 #. TRANSLATORS: West by south
 #: src/core/modules/LandscapeMgr.cpp:333
 msgctxt "compass direction"
 msgid "WbS"
-msgstr ""
+msgstr "ตต-บ-ต"
 
 #. TRANSLATORS: West by north
 #: src/core/modules/LandscapeMgr.cpp:335
 msgctxt "compass direction"
 msgid "WbN"
-msgstr ""
+msgstr "ตต-บ-น"
 
 #. TRANSLATORS: Northwest by west
 #: src/core/modules/LandscapeMgr.cpp:337
 msgctxt "compass direction"
 msgid "NWbW"
-msgstr ""
+msgstr "ตต/น-บ-ตต"
 
 #. TRANSLATORS: Northwest by north
 #: src/core/modules/LandscapeMgr.cpp:339
 msgctxt "compass direction"
 msgid "NWbN"
-msgstr ""
+msgstr "ตต/น-บ-น"
 
 #. TRANSLATORS: North by west
 #: src/core/modules/LandscapeMgr.cpp:341
 msgctxt "compass direction"
 msgid "NbW"
-msgstr ""
+msgstr "น-บ-ตต"
 
-#: src/core/modules/LandscapeMgr.cpp:434 src/core/modules/LandscapeMgr.cpp:751
+#: src/core/modules/LandscapeMgr.cpp:434 src/core/modules/LandscapeMgr.cpp:753
 #: src/gui/ViewDialog.cpp:649
 msgid "Loading..."
 msgstr "กำลังโหลด..."
 
-#: src/core/modules/LandscapeMgr.cpp:434 src/core/modules/LandscapeMgr.cpp:751
+#: src/core/modules/LandscapeMgr.cpp:434 src/core/modules/LandscapeMgr.cpp:753
 msgctxt "percentage of done"
 msgid "done"
 msgstr "เสร็จสิ้น"
@@ -746,7 +747,7 @@ msgstr "เสร็จสิ้น"
 msgid "Switching models..."
 msgstr "กำลังสลับแบบจำลอง..."
 
-#: src/core/modules/LandscapeMgr.cpp:480 src/core/modules/LandscapeMgr.cpp:746
+#: src/core/modules/LandscapeMgr.cpp:480 src/core/modules/LandscapeMgr.cpp:748
 msgid "Loaded successfully"
 msgstr "โหลดสำเร็จ"
 
@@ -757,61 +758,61 @@ msgstr ""
 "การเรียกใช้แบบจำลองบรรยากาศแบบ ShowMySky ล้มเหลว กำลังเรียกใช้แบบจำลอง "
 "Preetham"
 
-#: src/core/modules/LandscapeMgr.cpp:871
+#: src/core/modules/LandscapeMgr.cpp:873
 msgid "Atmosphere"
 msgstr "บรรยากาศ"
 
-#: src/core/modules/LandscapeMgr.cpp:872
+#: src/core/modules/LandscapeMgr.cpp:874
 msgid "Fog"
 msgstr "หมอก"
 
-#: src/core/modules/LandscapeMgr.cpp:873 src/ui_viewDialog.h:4274
+#: src/core/modules/LandscapeMgr.cpp:875 src/ui_viewDialog.h:4274
 #: src/ui_configurationDialog.h:1886
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:343
 msgid "Cardinal points"
 msgstr "จุดทิศหลัก"
 
-#: src/core/modules/LandscapeMgr.cpp:874
+#: src/core/modules/LandscapeMgr.cpp:876
 msgid "Ordinal (Intercardinal) points"
 msgstr "จุดทิศหลัก"
 
-#: src/core/modules/LandscapeMgr.cpp:875
+#: src/core/modules/LandscapeMgr.cpp:877
 msgid "Secondary Intercardinal points"
 msgstr "จุดทิศรอง"
 
-#: src/core/modules/LandscapeMgr.cpp:876
+#: src/core/modules/LandscapeMgr.cpp:878
 msgid "Tertiary Intercardinal points"
 msgstr "จุดทิศย่อย"
 
-#: src/core/modules/LandscapeMgr.cpp:877
+#: src/core/modules/LandscapeMgr.cpp:879
 msgid "Ground"
 msgstr "พื้น"
 
-#: src/core/modules/LandscapeMgr.cpp:878
+#: src/core/modules/LandscapeMgr.cpp:880
 msgid "Landscape illumination"
 msgstr "แสงจากแหล่งอื่นในภูมิทัศน์"
 
-#: src/core/modules/LandscapeMgr.cpp:879
+#: src/core/modules/LandscapeMgr.cpp:881
 msgid "Landscape labels"
 msgstr "ชื่อภูมิทัศน์"
 
-#: src/core/modules/LandscapeMgr.cpp:880
+#: src/core/modules/LandscapeMgr.cpp:882
 msgid "Light pollution data from locations database"
 msgstr "ข้อมูลมลพิษทางแสงจากฐานข้อมูลสถานที่"
 
-#: src/core/modules/LandscapeMgr.cpp:882
+#: src/core/modules/LandscapeMgr.cpp:884
 msgid "Increase light pollution"
 msgstr "เพิ่มมลพิษทางแสง"
 
-#: src/core/modules/LandscapeMgr.cpp:883
+#: src/core/modules/LandscapeMgr.cpp:885
 msgid "Reduce light pollution"
 msgstr "ลดมลพิษทางแสง"
 
-#: src/core/modules/LandscapeMgr.cpp:884
+#: src/core/modules/LandscapeMgr.cpp:886
 msgid "Cyclic change in light pollution"
 msgstr "การเปลี่ยนแปลงเป็นวัฏจักรของมลพิษทางแสง"
 
-#: src/core/modules/LandscapeMgr.cpp:1374 src/scripting/StelScriptMgr.cpp:647
+#: src/core/modules/LandscapeMgr.cpp:1376 src/scripting/StelScriptMgr.cpp:647
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:101
 #: plugins/Oculars/src/gui/OcularDialog.cpp:627
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:257
@@ -834,7 +835,7 @@ msgid "Author"
 msgstr "ผู้สร้าง"
 
 #. TRANSLATORS: Unit of measure for distance - meter
-#: src/core/modules/LandscapeMgr.cpp:1380 src/gui/StelGuiItems.cpp:866
+#: src/core/modules/LandscapeMgr.cpp:1382 src/gui/StelGuiItems.cpp:866
 #: plugins/Satellites/src/Satellite.cpp:433
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1191
 #: plugins/Satellites/src/gui/SatellitesFilterDialog.cpp:134
@@ -842,7 +843,7 @@ msgctxt "distance"
 msgid "m"
 msgstr "ม."
 
-#: src/core/modules/LandscapeMgr.cpp:1383 src/gui/ObsListDialog.cpp:298
+#: src/core/modules/LandscapeMgr.cpp:1385 src/gui/ObsListDialog.cpp:298
 #: src/ui_locationDialogGui.h:414 src/ui_obsListDialog.h:424
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:144
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:444
@@ -850,36 +851,36 @@ msgid "Location"
 msgstr "ตำแหน่งที่ตั้ง"
 
 #. TRANSLATORS: Unit of measure for pressure - hectopascals
-#: src/core/modules/LandscapeMgr.cpp:1405
+#: src/core/modules/LandscapeMgr.cpp:1407
 msgctxt "pressure"
 msgid "hPa"
 msgstr "เฮกโตปาสกาล"
 
-#: src/core/modules/LandscapeMgr.cpp:1415
+#: src/core/modules/LandscapeMgr.cpp:1417
 msgid "extinction coefficient"
 msgstr "สัมประสิทธิ์การสูญหาย"
 
-#: src/core/modules/LandscapeMgr.cpp:1418
+#: src/core/modules/LandscapeMgr.cpp:1420
 msgid "Atmospheric conditions"
 msgstr "สภาพบรรยากาศ"
 
-#: src/core/modules/LandscapeMgr.cpp:1425
+#: src/core/modules/LandscapeMgr.cpp:1427
 msgid "cd/m<sup>2</sup>"
 msgstr "แคนเดลา/ม.<sup>2</sup>"
 
-#: src/core/modules/LandscapeMgr.cpp:1429
+#: src/core/modules/LandscapeMgr.cpp:1431
 msgid "ncd/m<sup>2</sup>"
 msgstr "นาโนแคนเดลา/ม.<sup>2</sup>"
 
-#: src/core/modules/LandscapeMgr.cpp:1434
+#: src/core/modules/LandscapeMgr.cpp:1436
 msgid "&mu;cd/m<sup>2</sup>"
 msgstr "ไมโครแคนเดลา/ม.<sup>2</sup>"
 
-#: src/core/modules/LandscapeMgr.cpp:1439
+#: src/core/modules/LandscapeMgr.cpp:1441
 msgid "mcd/m<sup>2</sup>"
 msgstr "ไมโครแคนเดลา/ม.<sup>2</sup>"
 
-#: src/core/modules/LandscapeMgr.cpp:1441
+#: src/core/modules/LandscapeMgr.cpp:1443
 #, qt-format
 msgid "<b>Light pollution</b>: %1 %2 (NELM: %3; Bortle class: %4)"
 msgstr ""
@@ -992,44 +993,44 @@ msgstr "อาร์คัส"
 #: src/core/modules/NomenclatureItem.cpp:608
 msgctxt "landform"
 msgid "astrum"
-msgstr ""
+msgstr "แอสทรัม"
 
 #. TRANSLATORS: Chain of craters
 #: src/core/modules/NomenclatureItem.cpp:610
 msgctxt "landform"
 msgid "catena"
-msgstr ""
+msgstr "แคทีนา"
 
 #. TRANSLATORS: Hollows, irregular steep-sided depressions usually in arrays
 #. or clusters
 #: src/core/modules/NomenclatureItem.cpp:612
 msgctxt "landform"
 msgid "cavus"
-msgstr ""
+msgstr "เควัส"
 
 #. TRANSLATORS: Distinctive area of broken terrain
 #: src/core/modules/NomenclatureItem.cpp:614
 msgctxt "landform"
 msgid "chaos"
-msgstr ""
+msgstr "เคออส"
 
 #. TRANSLATORS: A deep, elongated, steep-sided depression
 #: src/core/modules/NomenclatureItem.cpp:616
 msgctxt "landform"
 msgid "chasma"
-msgstr ""
+msgstr "แคสมา"
 
 #. TRANSLATORS: Small hills or knobs
 #: src/core/modules/NomenclatureItem.cpp:618
 msgctxt "landform"
 msgid "collis"
-msgstr ""
+msgstr "คอลลิส"
 
 #. TRANSLATORS: Ovoid-shaped feature
 #: src/core/modules/NomenclatureItem.cpp:620
 msgctxt "landform"
 msgid "corona"
-msgstr ""
+msgstr "คอโรนา"
 
 #. TRANSLATORS: A circular depression
 #: src/core/modules/NomenclatureItem.cpp:622
@@ -1047,25 +1048,25 @@ msgstr "สันเขา"
 #: src/core/modules/NomenclatureItem.cpp:626
 msgctxt "landform"
 msgid "eruptive center"
-msgstr ""
+msgstr "ศูนย์กลางการปะทุ"
 
 #. TRANSLATORS: Bright spot
 #: src/core/modules/NomenclatureItem.cpp:628
 msgctxt "landform"
 msgid "facula"
-msgstr ""
+msgstr "จุดสว่าง"
 
 #. TRANSLATORS: Pancake-like structure, or a row of such structures
 #: src/core/modules/NomenclatureItem.cpp:630
 msgctxt "landform"
 msgid "farrum"
-msgstr ""
+msgstr "แฟร์รัม"
 
 #. TRANSLATORS: A very low curvilinear ridge with a scalloped pattern
 #: src/core/modules/NomenclatureItem.cpp:632
 msgctxt "landform"
 msgid "flexus"
-msgstr ""
+msgstr "เฟล็กซัส"
 
 #. TRANSLATORS: Flow terrain
 #: src/core/modules/NomenclatureItem.cpp:634
@@ -1077,14 +1078,14 @@ msgstr "รอยน้ำไหล"
 #: src/core/modules/NomenclatureItem.cpp:636
 msgctxt "landform"
 msgid "flumen"
-msgstr ""
+msgstr "ฟลูมิน"
 
 #. TRANSLATORS: Strait, a narrow passage of liquid connecting two larger areas
 #. of liquid
 #: src/core/modules/NomenclatureItem.cpp:638
 msgctxt "landform"
 msgid "fretum"
-msgstr ""
+msgstr "ฟรีทัม"
 
 #. TRANSLATORS: Long, narrow depression
 #: src/core/modules/NomenclatureItem.cpp:640
@@ -1097,26 +1098,26 @@ msgstr "ร่องยาวตื้น"
 #: src/core/modules/NomenclatureItem.cpp:642
 msgctxt "landform"
 msgid "insula"
-msgstr ""
+msgstr "อินซูลา"
 
 #. TRANSLATORS: Landslide
 #: src/core/modules/NomenclatureItem.cpp:644
 msgctxt "landform"
 msgid "labes"
-msgstr ""
+msgstr "เลบีส"
 
 #. TRANSLATORS: Complex of intersecting valleys or ridges
 #: src/core/modules/NomenclatureItem.cpp:646
 msgctxt "landform"
 msgid "labyrinthus"
-msgstr ""
+msgstr "แลบิรินทัส"
 
 #. TRANSLATORS: Irregularly shaped depression on Titan having the appearance
 #. of a dry lake bed
 #: src/core/modules/NomenclatureItem.cpp:648
 msgctxt "landform"
 msgid "lacuna"
-msgstr ""
+msgstr "ลาคูนา"
 
 #. TRANSLATORS: "Lake" or small plain; on Titan, a "lake" or small, dark plain
 #. with discrete, sharp boundaries
@@ -1135,26 +1136,26 @@ msgstr "ภูมิลักษณ์รูปวงแหวนขนาดใ
 #: src/core/modules/NomenclatureItem.cpp:654
 msgctxt "landform"
 msgid "lenticula"
-msgstr ""
+msgstr "เลนทิคูลา"
 
 #. TRANSLATORS: A dark or bright elongate marking, may be curved or straight
 #: src/core/modules/NomenclatureItem.cpp:656
 msgctxt "landform"
 msgid "linea"
-msgstr ""
+msgstr "ลิเนีย"
 
 #. TRANSLATORS: Extension of plateau having rounded lobate or tongue-like
 #. boundaries
 #: src/core/modules/NomenclatureItem.cpp:658
 msgctxt "landform"
 msgid "lingula"
-msgstr ""
+msgstr "ลิงกิวลา"
 
 #. TRANSLATORS: Dark spot, may be irregular
 #: src/core/modules/NomenclatureItem.cpp:660
 msgctxt "landform"
 msgid "macula"
-msgstr ""
+msgstr "แมคิวลา"
 
 #. TRANSLATORS: "Sea"; on the Moon, low albedo, relatively smooth plain,
 #. generally of large extent; on Mars, dark albedo areas of no known
@@ -1169,7 +1170,7 @@ msgstr "ทะเล"
 #: src/core/modules/NomenclatureItem.cpp:664
 msgctxt "landform"
 msgid "mensa"
-msgstr ""
+msgstr "เมนซา"
 
 #. TRANSLATORS: Mountain
 #: src/core/modules/NomenclatureItem.cpp:666
@@ -1193,7 +1194,7 @@ msgstr "บึง"
 #: src/core/modules/NomenclatureItem.cpp:672
 msgctxt "landform"
 msgid "patera"
-msgstr ""
+msgstr "แพเทอรา"
 
 #. TRANSLATORS: Low plain
 #: src/core/modules/NomenclatureItem.cpp:674
@@ -1211,26 +1212,26 @@ msgstr "ที่ราบสูง"
 #: src/core/modules/NomenclatureItem.cpp:678
 msgctxt "landform"
 msgid "plume"
-msgstr ""
+msgstr "ไอพ่น"
 
 #. TRANSLATORS: "Cape"; headland promontoria
 #: src/core/modules/NomenclatureItem.cpp:680
 msgctxt "landform"
 msgid "promontorium"
-msgstr ""
+msgstr "พรอมอนทอเรียม"
 
 #. TRANSLATORS: A large area marked by reflectivity or color distinctions from
 #. adjacent areas, or a broad geographic region
 #: src/core/modules/NomenclatureItem.cpp:682
 msgctxt "landform"
 msgid "regio"
-msgstr ""
+msgstr "รีจิโอ"
 
 #. TRANSLATORS: Reticular (netlike) pattern on Venus
 #: src/core/modules/NomenclatureItem.cpp:684
 msgctxt "landform"
 msgid "reticulum"
-msgstr ""
+msgstr "ริทิคิวลัม"
 
 #. TRANSLATORS: Fissure
 #: src/core/modules/NomenclatureItem.cpp:686
@@ -1254,26 +1255,26 @@ msgstr "ภูมิลักษณ์รายรอบ"
 #: src/core/modules/NomenclatureItem.cpp:692
 msgctxt "landform"
 msgid "saxum"
-msgstr ""
+msgstr "แซกซัม"
 
 #. TRANSLATORS: Lobate or irregular scarp
 #: src/core/modules/NomenclatureItem.cpp:694
 msgctxt "landform"
 msgid "scopulus"
-msgstr ""
+msgstr "สกอพิวลัส"
 
 #. TRANSLATORS: Sinuous feature with segments of positive and negative relief
 #. along its length
 #: src/core/modules/NomenclatureItem.cpp:696
 msgctxt "landform"
 msgid "serpens"
-msgstr ""
+msgstr "เซอร์เพนส์"
 
 #. TRANSLATORS: Subparallel furrows and ridges
 #: src/core/modules/NomenclatureItem.cpp:698
 msgctxt "landform"
 msgid "sulcus"
-msgstr ""
+msgstr "ซัลคัส"
 
 #. TRANSLATORS: "Bay"; small plain; on Titan, bays within seas or lakes of
 #. liquid hydrocarbons
@@ -1286,19 +1287,19 @@ msgstr "อ่าว"
 #: src/core/modules/NomenclatureItem.cpp:702
 msgctxt "landform"
 msgid "terra"
-msgstr ""
+msgstr "เทอรา"
 
 #. TRANSLATORS: Tile-like, polygonal terrain
 #: src/core/modules/NomenclatureItem.cpp:704
 msgctxt "landform"
 msgid "tessera"
-msgstr ""
+msgstr "เทสเซอรา"
 
 #. TRANSLATORS: Small domical mountain or hill
 #: src/core/modules/NomenclatureItem.cpp:706
 msgctxt "landform"
 msgid "tholus"
-msgstr ""
+msgstr "โทลัส"
 
 #. TRANSLATORS: Dunes
 #: src/core/modules/NomenclatureItem.cpp:708
@@ -1316,13 +1317,13 @@ msgstr "หุบเขา"
 #: src/core/modules/NomenclatureItem.cpp:712
 msgctxt "landform"
 msgid "vastitas"
-msgstr ""
+msgstr "แวสทิตัส"
 
 #. TRANSLATORS: A streak or stripe of color
 #: src/core/modules/NomenclatureItem.cpp:714
 msgctxt "landform"
 msgid "virga"
-msgstr ""
+msgstr "เวอร์กา"
 
 #. TRANSLATORS: Lunar features at or near Apollo landing sites
 #: src/core/modules/NomenclatureItem.cpp:716
@@ -1354,12 +1355,12 @@ msgstr "หลุมซึ่งเรียงต่อกันเป็นข
 #: src/core/modules/NomenclatureItem.cpp:728
 msgid ""
 "Hollows, irregular steep-sided depressions usually in arrays or clusters."
-msgstr ""
+msgstr "แอ่งที่มีขอบชันรูปร่างแปลก มักเป็นสายหรือเป็นกระจุก"
 
 #. TRANSLATORS: Description for landform 'chaos'
 #: src/core/modules/NomenclatureItem.cpp:730
 msgid "Distinctive area of broken terrain."
-msgstr ""
+msgstr "พื้นที่แตกระแหงหรือขรุขระ"
 
 #. TRANSLATORS: Description for landform 'chasma'
 #: src/core/modules/NomenclatureItem.cpp:732
@@ -1399,17 +1400,17 @@ msgstr "จุดสว่าง"
 #. TRANSLATORS: Description for landform 'farrum'
 #: src/core/modules/NomenclatureItem.cpp:746
 msgid "Pancake-like structure, or a row of such structures."
-msgstr ""
+msgstr "โครงสร้างรูปกระทะคว่ำ หรือโครงสร้างแบบเดียวกันเรียงเป็นแถว"
 
 #. TRANSLATORS: Description for landform 'flexus'
 #: src/core/modules/NomenclatureItem.cpp:748
 msgid "A very low curvilinear ridge with a scalloped pattern."
-msgstr ""
+msgstr "สันเขาเตี้ยที่หยักเป็นลอน"
 
 #. TRANSLATORS: Description for landform 'fluctus'
 #: src/core/modules/NomenclatureItem.cpp:750
 msgid "Flow terrain."
-msgstr ""
+msgstr "พื้นที่ที่มีของเหลวไหลท่วมผ่าน"
 
 #. TRANSLATORS: Description for landform 'flumen'
 #: src/core/modules/NomenclatureItem.cpp:752
@@ -1442,13 +1443,13 @@ msgstr "แผ่นดินถล่ม"
 #. TRANSLATORS: Description for landform 'labyrinthus'
 #: src/core/modules/NomenclatureItem.cpp:762
 msgid "Complex of intersecting valleys or ridges."
-msgstr ""
+msgstr "บริเวณที่เต็มไปด้วยหุบเขาหรือสันเขาตัดไขว้กัน"
 
 #. TRANSLATORS: Description for landform 'lacuna'
 #: src/core/modules/NomenclatureItem.cpp:764
 msgid ""
 "Irregularly shaped depression, having the appearance of a dry lake bed."
-msgstr ""
+msgstr "แอ่งรูปร่างแปลกที่มีลักษณะคล้ายก้นทะเลสาบแห้ง"
 
 #. TRANSLATORS: Description for landform 'lacus'
 #: src/core/modules/NomenclatureItem.cpp:766
@@ -1473,7 +1474,7 @@ msgstr "รอยมืดหรือสว่างเป็นแนวยา
 #. TRANSLATORS: Description for landform 'lingula'
 #: src/core/modules/NomenclatureItem.cpp:774
 msgid "Extension of plateau having rounded lobate or tongue-like boundaries."
-msgstr ""
+msgstr "ส่วนยื่นบนที่ราบสูงที่มีขอบโค้งหรือเป็นรูปลิ้น"
 
 #. TRANSLATORS: Description for landform 'macula'
 #: src/core/modules/NomenclatureItem.cpp:776
@@ -1483,12 +1484,12 @@ msgstr "จุดมืด อาจมีรูปร่างไม่แน�
 #. TRANSLATORS: Description for landform 'mare' on the Moon
 #: src/core/modules/NomenclatureItem.cpp:778
 msgid "'Sea'; low albedo, relatively smooth plain, generally of large extent."
-msgstr ""
+msgstr "แอ่งกว้างใหญ่ลึก เห็นเป็นสีเทาคล้ำ ผิวเรียบเป็นส่วนใหญ่"
 
 #. TRANSLATORS: Description for landform 'mensa'
 #: src/core/modules/NomenclatureItem.cpp:780
 msgid "A flat-topped prominence with cliff-like edges."
-msgstr ""
+msgstr "ภูเขาที่มียอดราบเหมือนโต๊ะและขอบเป็นผาชัน"
 
 #. TRANSLATORS: Description for landform 'mons'
 #: src/core/modules/NomenclatureItem.cpp:782
@@ -1536,6 +1537,7 @@ msgid ""
 "A large area marked by reflectivity or color distinctions from adjacent "
 "areas, or a broad geographic region."
 msgstr ""
+"พื้นที่กว้างใหญ่ที่มีความแตกต่างของการสะท้อนแสงหรือสีเมื่อเทียบกับพื้นที่ใกล้เคียงหรือบริเวณที่กว้างกว่า"
 
 #. TRANSLATORS: Description for landform 'reticulum'
 #: src/core/modules/NomenclatureItem.cpp:800
@@ -1565,14 +1567,14 @@ msgstr "ก้อนหินมนใหญ่หรือก้อนหิน
 #. TRANSLATORS: Description for landform 'scopulus'
 #: src/core/modules/NomenclatureItem.cpp:810
 msgid "Lobate or irregular scarp."
-msgstr ""
+msgstr "ผาชันที่มีรอยหยักหรือมีรูปร่างไม่แน่นอน"
 
 #. TRANSLATORS: Description for landform 'serpens'
 #: src/core/modules/NomenclatureItem.cpp:812
 msgid ""
 "Sinuous feature with segments of positive and negative relief along its "
 "length."
-msgstr ""
+msgstr "ภูมิลักษณ์รูปคดเคี้ยวที่มีส่วนนูนและส่วนเว้าสลับกันตลอดสาย"
 
 #. TRANSLATORS: Description for landform 'sinus'
 #: src/core/modules/NomenclatureItem.cpp:814
@@ -1582,7 +1584,7 @@ msgstr "'อ่าว'; ที่ราบขนาดเล็ก"
 #. TRANSLATORS: Description for landform 'sulcus'
 #: src/core/modules/NomenclatureItem.cpp:816
 msgid "Subparallel furrows and ridges."
-msgstr ""
+msgstr "ร่องยาวและสันสลับกันคล้ายรอยคราด"
 
 #. TRANSLATORS: Description for landform 'terra'
 #: src/core/modules/NomenclatureItem.cpp:818
@@ -1625,7 +1627,7 @@ msgstr "ชื่อเรียก"
 
 #: src/core/modules/NomenclatureMgr.cpp:86
 msgid "Special nomenclature points only"
-msgstr ""
+msgstr "จุดที่มีการตั้งชื่อเป็นพิเศษเท่านั้น"
 
 #: src/core/modules/NomenclatureMgr.cpp:105
 msgid "North Pole"
@@ -3649,6 +3651,12 @@ msgid ""
 "Solar Eclipses 1501 to 2500</em> (2014). This formula is also used in the "
 "solar, lunar and planetary ephemeris program SOLEX."
 msgstr ""
+"วิธีการคำนวณโดย F. Espenak และ J. Meeus โดยมีพื้นฐานจากผลงานของ Morrison & "
+"Stephenson (2004) และปรับสมการพหุนามให้เข้ากับค่าจริงในตารางสำหรับ ค.ศ. "
+"1600-2000 ใช้ใน%1เว็บไซต์อุปราคาของนาซา%2 ใน <em>Five Millennium Canon of "
+"Solar Eclipses: -1900 to +3000</em> (2006) และ <em>Thousand Year Canon of "
+"Solar Eclipses 1501 to 2500</em> (2014) รวมไปถึง SOLEX "
+"ซึ่งเป็นโปรแกรมคำนวณตำแหน่งดวงอาทิตย์ ดวงจันทร์ และดาวเคราะห์"
 
 #: src/core/StelCore.cpp:2616
 msgid ""
@@ -3657,6 +3665,11 @@ msgid ""
 "1600-2000. Values for 2015-2033 are interpolated from observations and "
 "predictions by IERS Rapid Service/Prediction Center."
 msgstr ""
+"วิธีการคำนวณนี้ดัดแปรจากวิธีของ F. Espenak และ J. Meeus "
+"โดยมีพื้นฐานจากผลงานของ Morrison & Stephenson (2004) "
+"และปรับสมการพหุนามให้เข้ากับค่าจริงในตารางสำหรับ ค.ศ. 1600-2000 "
+"ค่าที่อยู่ระหว่าง ค.ศ. 2015-2033 "
+"เป็นการประมาณค่าให้เข้ากับผลการสังเกตการณ์และการพยากรณ์โดย IERS"
 
 #: src/core/StelCore.cpp:2616
 msgid "Used by default."
@@ -3853,9 +3866,9 @@ msgid ""
 "centre of the field of view (like the distortions seen with very wide angle "
 "camera lenses)."
 msgstr ""
-"ในมุมมองตาปลาหรือ<i>มุมมองทิศทางของดาววัดบนพื้นโลกที่มีระยะเท่ากัน</i> "
-"แนวเส้นตรงกลายเป็นแนวเส้นโค้งเมื่อพวกมันปรากฎระยะทางเชิงมุมจากศูนย์กลางของมุมมอง"
-" (เหมือนการทำให้รูปบิดเบือนทำให้มองเป็นมุมกล้องที่กว้างมาก)"
+"ในเส้นโครงแผนที่แบบตาปลาหรือ<i>เส้นโครงแผนที่แบบคงทิศทางและระยะห่าง</i> "
+"แนวเส้นตรงจะกลายเป็นเส้นโค้งเมื่ออยู่ไกลจากจุดศูนย์กลางของมุมมอง "
+"(เหมือนการบิดเบี้ยวของภาพที่เกิดกับเลนส์มุมกว้าง)"
 
 #: src/core/StelProjectorClasses.cpp:460
 msgid "Hammer-Aitoff"
@@ -3883,7 +3896,7 @@ msgstr ""
 
 #: src/core/StelProjectorClasses.cpp:633
 msgid "Equirectangular"
-msgstr ""
+msgstr "ตาหมากรุก"
 
 #: src/core/StelProjectorClasses.cpp:638
 msgid ""
@@ -3893,6 +3906,9 @@ msgid ""
 "360x180° field of view in a fixed view direction. It is provided for "
 "specialized setups."
 msgstr ""
+"การฉายแผนที่ทรงกระบอกชนิดนี้เรียกว่า <i>plate carr&eacute;e</i> "
+"(ภาษาฝรั่งเศสที่แปลว่า 'จัตุรัสแบน') เส้นขนานทุกเส้นห่างเท่ากัน "
+"ขอบเขตภาพจะตรึงไว้ที่ 360x180°"
 
 #: src/core/StelProjectorClasses.cpp:644
 msgid "Mercator"
@@ -5761,7 +5777,7 @@ msgstr "เฟรมต่อวินาที"
 
 #: src/gui/StelDialog.hpp:209
 msgid "Are you sure? This will delete your customized data."
-msgstr "แน่ใจหรือไม่? การกระทำนี้จะลบข้อมูลที่คุณได้ทำการเปลี่ยนแปลงแก้ไข"
+msgstr "แน่ใจหรือไม่? การกระทำนี้จะลบข้อมูลที่คุณได้เปลี่ยนแปลงแก้ไข"
 
 #: src/gui/ViewDialog.cpp:702
 msgid "properties"
@@ -6225,46 +6241,46 @@ msgstr "ลองจิจูด"
 msgid "Latitude"
 msgstr "ละติจูด"
 
-#: src/gui/SearchDialog.cpp:492
+#: src/gui/SearchDialog.cpp:496
 msgctxt "search tool"
 msgid "Default"
 msgstr "ค่าปริยาย"
 
-#: src/gui/SearchDialog.cpp:494
+#: src/gui/SearchDialog.cpp:498
 msgctxt "search tool"
 msgid "Range"
 msgstr "พิสัย"
 
-#: src/gui/SearchDialog.cpp:497
+#: src/gui/SearchDialog.cpp:501
 msgctxt "search tool"
 msgid "searches"
 msgstr "ค้นหา"
 
-#: src/gui/SearchDialog.cpp:623
+#: src/gui/SearchDialog.cpp:628
 msgid "Clear search history: delete all search objects data"
 msgstr "ล้างประวัติการค้นหา: ลบข้อมูลวัตถุที่ค้นหาทั้งหมด"
 
-#: src/gui/SearchDialog.cpp:623
+#: src/gui/SearchDialog.cpp:628
 msgid "Clear search history: no data to delete"
 msgstr "ล้างประวัติการค้นหา: ไม่มีข้อมูลที่ต้องลบ"
 
-#: src/gui/SearchDialog.cpp:1107
+#: src/gui/SearchDialog.cpp:1175
 msgid "Simbad Lookup Error"
 msgstr "เกิดข้อผิดพลาดในการค้นหาบน Simbad"
 
-#: src/gui/SearchDialog.cpp:1114
+#: src/gui/SearchDialog.cpp:1182
 msgid "Simbad Lookup"
 msgstr "การค้นหาบน Simbad"
 
-#: src/gui/SearchDialog.cpp:1408
+#: src/gui/SearchDialog.cpp:1476
 msgid "University of Strasbourg (France)"
 msgstr "มหาวิทยาลัยสทราซบูร์ (ฝรั่งเศส)"
 
-#: src/gui/SearchDialog.cpp:1409
+#: src/gui/SearchDialog.cpp:1477
 msgid "Harvard University (USA)"
 msgstr "มหาวิทยาลัยฮาร์วาร์ด (สหรัฐอเมริกา)"
 
-#: src/gui/SearchDialog.cpp:1491
+#: src/gui/SearchDialog.cpp:1559
 msgid "Paste and Search"
 msgstr "วางและค้นหา"
 
@@ -6450,7 +6466,7 @@ msgstr "วัตถุในระบบสุริยะ : ดาวเคร
 
 #: src/gui/AstroCalcDialog.cpp:1010
 msgid "Almanac: Sun, Moon and naked-eye planets"
-msgstr ""
+msgstr "อัลมาแนก: ดวงอาทิตย์, ดวงจันทร์ และดาวเคราะห์ที่เห็นได้ด้วยตาเปล่า"
 
 #: src/gui/AstroCalcDialog.cpp:1073
 msgid "Elevation of object at moment of upper culmination"
@@ -8065,7 +8081,7 @@ msgstr "รายชื่อใหม่"
 
 #: src/gui/ObsListDialog.cpp:223
 msgid "Select observing lists directory"
-msgstr ""
+msgstr "เลือกโฟลเดอร์สำหรับรายชื่อเพื่อการสังเกตการณ์"
 
 #: src/gui/ObsListDialog.cpp:290
 msgid "Object designation"
@@ -8088,6 +8104,7 @@ msgstr "ภูมิทัศน์"
 #: src/gui/ObsListDialog.cpp:589
 msgid "Error during conversion. Please see logfile for details."
 msgstr ""
+"เกิดข้อผิดพลาดระหว่างการแปลง โปรดดูไฟล์บันทึกสำหรับรายละเอียดเพิ่มเติม"
 
 #: src/gui/ObsListDialog.cpp:701
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:219
@@ -8097,7 +8114,7 @@ msgstr "หมายเหตุ"
 
 #: src/gui/ObsListDialog.cpp:701
 msgid "Some bookmarked objects were not found. See logfile for details."
-msgstr ""
+msgstr "ไม่พบวัตถุที่ได้ทำคั่นหน้าไว้ ดูแฟ้มบันทึกสำหรับรายละเอียด"
 
 #: src/gui/ObsListDialog.cpp:943
 msgid "New Observation List"
@@ -8141,6 +8158,9 @@ msgid ""
 "A list named '%1', created %2 and last modified %3 would overwrite your "
 "existing list '%4', dated %5 and last modified %6. Accept?"
 msgstr ""
+"รายชื่อที่ใช้ชื่อว่า '%1' สร้างเมื่อ %2 และแก้ไขล่าสุดเมื่อ %3 "
+"จะเขียนทับรายชื่อที่มีอยู่แล้ว '%4' สร้างเมื่อ %5 และแก้ไขล่าสุดเมื่อ %6 "
+"ยอมรับใช่ไหม?"
 
 #: src/gui/ObsListDialog.cpp:1092
 msgid "The file is empty or doesn't contain legacy bookmarks."
@@ -8148,7 +8168,7 @@ msgstr "แฟ้มว่างเปล่าหรือไม่มีที
 
 #: src/gui/ObsListDialog.cpp:1104
 msgid "File does not contain observing lists or legacy bookmarks"
-msgstr ""
+msgstr "ไม่มีรายชื่อเพื่อการสังเกตการณ์หรือที่คั่นหน้าเดิมในแฟ้ม"
 
 #: src/gui/ObsListDialog.cpp:1131
 msgid "File format is wrong!"
@@ -8367,47 +8387,47 @@ msgstr "จุดลงจอด"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:73
 msgid "Geological features: albedo features"
-msgstr ""
+msgstr "ภูมิลักษณ์: แอลบีโด"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:75
 msgid "Geological features: arcūs"
-msgstr ""
+msgstr "ภูมิลักษณ์: อาร์คัส"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:77
 msgid "Geological features: astra"
-msgstr ""
+msgstr "ภูมิลักษณ์: แอสทรัม"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:79
 msgid "Geological features: catenae"
-msgstr ""
+msgstr "ภูมิลักษณ์: แคทีนา"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:81
 msgid "Geological features: cavi"
-msgstr ""
+msgstr "ภูมิลักษณ์: เควัส"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:83
 msgid "Geological features: chaoses"
-msgstr ""
+msgstr "ภูมิลักษณ์: เคออส"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:85
 msgid "Geological features: chasmata"
-msgstr ""
+msgstr "ภูมิลักษณ์: แคสมา"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:87
 msgid "Geological features: colles"
-msgstr ""
+msgstr "ภูมิลักษณ์: คอลลีส"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:89
 msgid "Geological features: coronae"
-msgstr ""
+msgstr "ภูมิลักษณ์: คอโรนา"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:91
@@ -8417,67 +8437,67 @@ msgstr "ภูมิลักษณ์: หลุม"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:93
 msgid "Geological features: dorsa"
-msgstr ""
+msgstr "ภูมิลักษณ์: ดอร์ซัม"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:95
 msgid "Geological features: eruptive centers"
-msgstr ""
+msgstr "ภูมิลักษณ์: ศูนย์กลางการปะทุ"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:97
 msgid "Geological features: faculae"
-msgstr ""
+msgstr "ภูมิลักษณ์: จุดสว่าง"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:99
 msgid "Geological features: farra"
-msgstr ""
+msgstr "ภูมิลักษณ์: แฟร์รัม"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:101
 msgid "Geological features: flexūs"
-msgstr ""
+msgstr "ภูมิลักษณ์: เฟล็กซัส"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:103
 msgid "Geological features: fluctūs"
-msgstr ""
+msgstr "ภูมิลักษณ์: ฟลักทัส"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:105
 msgid "Geological features: flumina"
-msgstr ""
+msgstr "ภูมิลักษณ์: ฟลูมิน"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:107
 msgid "Geological features: freta"
-msgstr ""
+msgstr "ภูมิลักษณ์: ฟรีทัม"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:109
 msgid "Geological features: fossae"
-msgstr ""
+msgstr "ภูมิลักษณ์: ฟอสซา"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:111
 msgid "Geological features: insulae"
-msgstr ""
+msgstr "ภูมิลักษณ์: อินซูลา"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:113
 msgid "Geological features: labēs"
-msgstr ""
+msgstr "ภูมิลักษณ์: เลบีส"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:115
 msgid "Geological features: labyrinthi"
-msgstr ""
+msgstr "ภูมิลักษณ์: แลบิรินทัส"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:117
 msgid "Geological features: lacunae"
-msgstr ""
+msgstr "ภูมิลักษณ์: ลาคูนา"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:119
@@ -8487,22 +8507,22 @@ msgstr "ภูมิลักษณ์: ทะเลสาบ"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:121
 msgid "Geological features: large ringed features"
-msgstr ""
+msgstr "ภูมิลักษณ์: วงแหวนขนาดใหญ่"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:123
 msgid "Geological features: lineae"
-msgstr ""
+msgstr "ภูมิลักษณ์: ลิเนีย"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:125
 msgid "Geological features: lingulae"
-msgstr ""
+msgstr "ภูมิลักษณ์: ลิงกิวลา"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:127
 msgid "Geological features: maculae"
-msgstr ""
+msgstr "ภูมิลักษณ์: แมคิวลา"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:129
@@ -8512,7 +8532,7 @@ msgstr "ภูมิลักษณ์: ทะเล"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:131
 msgid "Geological features: mensae"
-msgstr ""
+msgstr "ภูมิลักษณ์: เมนซา"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:133
@@ -8527,12 +8547,12 @@ msgstr "ภูมิลักษณ์: มหาสมุทร"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:137
 msgid "Geological features: paludes"
-msgstr ""
+msgstr "ภูมิลักษณ์: บึง"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:139
 msgid "Geological features: paterae"
-msgstr ""
+msgstr "ภูมิลักษณ์: แพเทอรา"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:141
@@ -8547,12 +8567,12 @@ msgstr "ภูมิลักษณ์: ที่ราบสูง"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:145
 msgid "Geological features: plumes"
-msgstr ""
+msgstr "ภูมิลักษณ์: ไอพ่น"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:147
 msgid "Geological features: promontoria"
-msgstr ""
+msgstr "ภูมิลักษณ์: พรอมอนทอเรียม"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:149
@@ -8562,7 +8582,7 @@ msgstr "ภูมิลักษณ์: บริเวณ"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:151
 msgid "Geological features: rimae"
-msgstr ""
+msgstr "ภูมิลักษณ์: ไรมา"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:153
@@ -8572,32 +8592,32 @@ msgstr "ภูมิลักษณ์: ผาชัน"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:155
 msgid "Geological features: scopuli"
-msgstr ""
+msgstr "ภูมิลักษณ์: สกอพิวลัส"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:157
 msgid "Geological features: serpentes"
-msgstr ""
+msgstr "ภูมิลักษณ์: เซอร์เพนส์"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:159
 msgid "Geological features: sulci"
-msgstr ""
+msgstr "ภูมิลักษณ์: ซัลคัส"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:161
 msgid "Geological features: sinūs"
-msgstr ""
+msgstr "ภูมิลักษณ์: อ่าว"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:163
 msgid "Geological features: terrae"
-msgstr ""
+msgstr "ภูมิลักษณ์: เทอรา"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:165
 msgid "Geological features: tholi"
-msgstr ""
+msgstr "ภูมิลักษณ์: โทลัส"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:167
@@ -8612,12 +8632,12 @@ msgstr "ภูมิลักษณ์: หุบเขา"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:171
 msgid "Geological features: vastitates"
-msgstr ""
+msgstr "ภูมิลักษณ์: แวสทิตัส"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:173
 msgid "Geological features: virgae"
-msgstr ""
+msgstr "ภูมิลักษณ์: เวอร์กา"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:175
@@ -8627,22 +8647,22 @@ msgstr "ภูมิลักษณ์: จุดลงจอด"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:177
 msgid "Geological features: lenticulae"
-msgstr ""
+msgstr "ภูมิลักษณ์: เลนทิคูลา"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:179
 msgid "Geological features: reticula"
-msgstr ""
+msgstr "ภูมิลักษณ์: ริทิคิวลัม"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:181
 msgid "Geological features: tesserae"
-msgstr ""
+msgstr "ภูมิลักษณ์: เทสเซอรา"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:183
 msgid "Geological features: saxa"
-msgstr ""
+msgstr "ภูมิลักษณ์: แซกซัม"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
@@ -9036,7 +9056,7 @@ msgstr "บัญชีชาร์ปเลส"
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:355
 msgid "van den Bergh Catalogue"
-msgstr "บัญชีแวนเดนเบิร์ก"
+msgstr "van den Bergh Catalogue"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:357
@@ -9076,7 +9096,7 @@ msgstr " บัญชีเนบิวลามืดของลินด์"
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:371
 msgid "Cederblad Catalog"
-msgstr "บัญชีของ Cederblad"
+msgstr "Cederblad Catalog"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:373
@@ -9106,7 +9126,7 @@ msgstr "บัญชีซากซูเปอร์โนวา"
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:383
 msgid "A Catalog of Rich Clusters of Galaxies"
-msgstr "บัญชีกระจุกดาราจักรของ Abell"
+msgstr "A Catalog of Rich Clusters of Galaxies"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:385
@@ -9161,12 +9181,12 @@ msgstr "บัญชีของสต็อก"
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:405 src/ui_viewDialog.h:3662
 msgid "Ruprecht Catalogue"
-msgstr ""
+msgstr "Ruprecht Catalogue"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:407
 msgid "van den Bergh-Hagen Catalogue"
-msgstr ""
+msgstr "van den Bergh-Hagen Catalogue"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
 #: src/translations.h:412
@@ -9862,10 +9882,10 @@ msgstr "&คัดลอก"
 msgid "&Paste"
 msgstr "&วาง"
 
-#: src/translations.h:627 plugins/Oculars/src/ui_ocularDialog.h:1536
-#: plugins/Oculars/src/ui_ocularDialog.h:1545
-#: plugins/Oculars/src/ui_ocularDialog.h:1551
-#: plugins/Oculars/src/ui_ocularDialog.h:1570
+#: src/translations.h:627 plugins/Oculars/src/ui_ocularDialog.h:1529
+#: plugins/Oculars/src/ui_ocularDialog.h:1538
+#: plugins/Oculars/src/ui_ocularDialog.h:1544
+#: plugins/Oculars/src/ui_ocularDialog.h:1563
 msgid "Delete"
 msgstr "ลบ"
 
@@ -9969,15 +9989,15 @@ msgstr "&เพิ่มไปยังสีที่กำหนดเอง"
 
 #: src/translations.h:652
 msgid "Hu&e:"
-msgstr ""
+msgstr "&สีสัน:"
 
 #: src/translations.h:653
 msgid "&Sat:"
-msgstr ""
+msgstr "ค&วามอิ่มตัว:"
 
 #: src/translations.h:654
 msgid "&Val:"
-msgstr ""
+msgstr "&ค่า:"
 
 #: src/translations.h:655
 msgid "&Red:"
@@ -10298,7 +10318,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Suisei_Planitia
 #: src/translations_regions.h:135
 msgid "Suisei Planitia"
-msgstr ""
+msgstr "แอ่งซุยเซ"
 
 #. TRANSLATORS: Name of region on Mercury
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Tir_Planitia
@@ -11198,7 +11218,7 @@ msgstr "แอ่งแอซิดาเลีย"
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Amazonis_Planitia
 #: src/translations_regions.h:521
 msgid "Amazonis Planitia"
-msgstr ""
+msgstr "แอ่งแอมะซอน"
 
 #. TRANSLATORS: Name of region on Mars
 #. TRANSLATORS: See also MOLA global image showing boundaries of regional
@@ -11543,7 +11563,7 @@ msgstr "แอซเทก"
 #: skycultures/translations_skycultures.fab:24
 msgctxt "sky culture"
 msgid "Babylonian (MUL.APIN)"
-msgstr "บาบิโลน (MUL.APIN)"
+msgstr "บาบิโลเนีย (MUL.APIN)"
 
 #: skycultures/translations_skycultures.fab:26
 msgctxt "sky culture"
@@ -11598,7 +11618,7 @@ msgstr "กรีก (ฟาร์เนเซ + อัลมาเจสต์)
 #: skycultures/translations_skycultures.fab:46
 msgctxt "sky culture"
 msgid "Greek (Leiden Aratea + Almagest)"
-msgstr "กรีก (Leiden Aratea + อัลมาเจสต์)"
+msgstr "กรีก (ไลเดินอราที + อัลมาเจสต์)"
 
 #: skycultures/translations_skycultures.fab:48
 msgctxt "sky culture"
@@ -11738,12 +11758,12 @@ msgstr "ซาร์ดิเนีย"
 #: skycultures/translations_skycultures.fab:102
 msgctxt "sky culture"
 msgid "Seri"
-msgstr ""
+msgstr "เซรี"
 
 #: skycultures/translations_skycultures.fab:104
 msgctxt "sky culture"
 msgid "Tibetan"
-msgstr ""
+msgstr "ทิเบต"
 
 #: skycultures/translations_skycultures.fab:106
 msgctxt "sky culture"
@@ -11758,7 +11778,7 @@ msgstr "ทูคาโน"
 #: skycultures/translations_skycultures.fab:110
 msgctxt "sky culture"
 msgid "Tikuna"
-msgstr ""
+msgstr "ทิคูนา"
 
 #: skycultures/translations_skycultures.fab:112
 msgctxt "sky culture"
@@ -12119,7 +12139,7 @@ msgstr "ใช้การเติมคำอัตโนมัติเฉพ
 
 #: src/ui_searchDialogGui.h:867
 msgid "Use sorting by string length"
-msgstr ""
+msgstr "ใช้การเรียงตามความยาวของสายอักขระ"
 
 #: src/ui_searchDialogGui.h:868
 msgid "Lock position when coordinates are used"
@@ -12451,7 +12471,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:3555
 msgid "Only for N latest selected objects:"
-msgstr "เฉพาะวัตถุที่เลือกล่าสุดจำนวน"
+msgstr "เฉพาะวัตถุที่เลือกล่าสุดจำนวน:"
 
 #: src/ui_viewDialog.h:3557
 msgid "Hide orbits of minor bodies."
@@ -12595,7 +12615,7 @@ msgstr "แนวขอบของหลุมอุกกาบาต"
 
 #: src/ui_viewDialog.h:3619
 msgid "Show special nomenclature points only"
-msgstr ""
+msgstr "แสดงจุดที่มีการตั้งชื่อแบบพิเศษเท่านั้น"
 
 #: src/ui_viewDialog.h:3623
 msgid "Simulate self-shadowing"
@@ -12647,7 +12667,7 @@ msgstr "Atlas of Peculiar Galaxies (Arp, 1966)"
 
 #: src/ui_viewDialog.h:3644
 msgid "The Uppsala General Catalogue of Galaxies"
-msgstr "บัญชีดาราจักร"
+msgstr "The Uppsala General Catalogue of Galaxies"
 
 #: src/ui_viewDialog.h:3647
 msgid "Lynds' Catalogue of Bright Nebulae (Lynds, 1965)"
@@ -12658,7 +12678,8 @@ msgid ""
 "A catalogue of Hα-emission regions in the southern Milky Way (Rodgers+, "
 "1960)"
 msgstr ""
-"บัญชีบริเวณเปล่งแสงเอชแอลฟาในทางช้างเผือกของซีกฟ้าใต้ (Rodgers+, 1960)"
+"A catalogue of Hα-emission regions in the southern Milky Way (Rodgers+, "
+"1960)"
 
 #: src/ui_viewDialog.h:3653
 msgid "Catalogue of HII Regions (Sharpless, 1959)"
@@ -12734,7 +12755,7 @@ msgstr "บัญชีวัตถุมืด 349 แห่ง โดยบา
 
 #: src/ui_viewDialog.h:3707
 msgid "Index Catalogue of Nebulae and Clusters of Stars"
-msgstr "บัญชีเนบิวลาและกระจุกดาว"
+msgstr "Index Catalogue of Nebulae and Clusters of Stars"
 
 #: src/ui_viewDialog.h:3709
 msgctxt "other catalogs"
@@ -13380,7 +13401,7 @@ msgstr "ป้ายแสดงทิศย่อย (16 ทิศ)"
 #: src/ui_viewDialog.h:4282
 msgid ""
 "Labels for the tertiary intercardinal directions (32-wind compass rose)."
-msgstr ""
+msgstr "ป้ายแสดงทิศย่อย (32 ทิศ)"
 
 #: src/ui_viewDialog.h:4285
 msgid "Color of cardinal points"
@@ -14819,6 +14840,7 @@ msgid ""
 "Show magnitudes of current celestial body (may be affected by atmosphere "
 "setting!)"
 msgstr ""
+"แสดงโชติมาตรของวัตถุท้องฟ้าปัจจุบัน (อาจได้รับผลจากการตั้งค่าบรรยากาศ!)"
 
 #: src/ui_astroCalcDialog.h:2212
 msgid "magnitudes"
@@ -14893,6 +14915,10 @@ msgid ""
 "aberration, etc. Magnitudes are affected by current atmosphere settings. For"
 " almanac-like data, disable atmosphere and topocentric corrections!"
 msgstr ""
+"หมายเหตุ: ตำแหน่งขึ้นกับการตั้งค่าของคุณ เช่น การสังเกตการณ์ที่ผิวโลก "
+"การเบนของแสง เป็นต้น การคำนวณโชติมาตรคิดผลจากการตั้งค่าบรรยากาศ "
+"หากคุณต้องการข้อมูลแบบที่ใช้ในปฏิทินดาราศาสตร์ "
+"ให้ปิดการใช้งานบรรยากาศและปิดการสังเกตการณ์จากผิวโลก!"
 
 #: src/ui_astroCalcDialog.h:2260
 msgid "Cleanup data"
@@ -15391,11 +15417,11 @@ msgstr "ขอบเขตภาพ"
 
 #: src/ui_obsListDialog.h:434
 msgid "Observing Lists Directory"
-msgstr ""
+msgstr "โฟลเดอร์สำหรับรายชื่อเพื่อการสังเกตการณ์"
 
 #: src/ui_obsListDialog.h:436
 msgid "Dir"
-msgstr ""
+msgstr "โฟลเดอร์"
 
 #: src/ui_dsoColorsDialog.h:494 src/ui_orbitColorsDialog.h:352
 msgid "Color settings"
@@ -15858,7 +15884,7 @@ msgstr "ขอบฟ้าสว่าง/มืด"
 
 #: src/ui_skylightDialog.h:1178
 msgid "Hor.Gradient"
-msgstr "เกรเดียนต์ของขอบฟ้า"
+msgstr "เกรเดียนต์ในแนวราบ"
 
 #: src/ui_skylightDialog.h:1179
 msgid "circumsolar Intensity"
@@ -16136,7 +16162,7 @@ msgid "Allow snap to selected object"
 msgstr "เปิดใช้งานโยงกับวัตถุที่เลือก"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:316
-#: plugins/Oculars/src/ui_ocularDialog.h:1578
+#: plugins/Oculars/src/ui_ocularDialog.h:1571
 #: plugins/Satellites/src/ui_satellitesDialog.h:1390
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:420
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:234
@@ -16161,7 +16187,7 @@ msgid "About"
 msgstr "เกี่ยวกับ"
 
 #: plugins/Oculars/src/Oculars.cpp:75 plugins/Oculars/src/Oculars.cpp:1490
-#: plugins/Oculars/src/ui_ocularDialog.h:1419
+#: plugins/Oculars/src/ui_ocularDialog.h:1412
 msgid "Oculars"
 msgstr "เลนส์ใกล้ตา"
 
@@ -16243,7 +16269,7 @@ msgstr ""
 "ไม่สามารถแสดงขอบเขตของเซนเซอร์: ไม่พบการตั้งค่าเซนเซอร์หรือกล้องโทรทรรศน์"
 
 #: plugins/Oculars/src/Oculars.cpp:1491
-#: plugins/Oculars/src/ui_ocularDialog.h:1453
+#: plugins/Oculars/src/ui_ocularDialog.h:1446
 msgid "Ocular view"
 msgstr "มุมมองเลนส์ใกล้ตา"
 
@@ -16671,11 +16697,11 @@ msgstr "เกณฑ์การแยกชัดของเรย์ลี"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:926
 msgid "Dawes' limit"
-msgstr "ขีดจำกัดของ Dawes"
+msgstr "ขีดจำกัดของดอส์"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:928
 msgid "Dawes' resolution criterion"
-msgstr "เกณฑ์การแยกชัดของ Dawes"
+msgstr "เกณฑ์การแยกชัดของดอส์"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:933
 msgid "Abbe's limit"
@@ -16724,26 +16750,26 @@ msgid "Magnification factor:"
 msgstr "ตัวประกอบกำลังขยาย:"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:583
-#: plugins/Oculars/src/ui_ocularDialog.h:1575
+#: plugins/Oculars/src/ui_ocularDialog.h:1568
 msgid "Diameter:"
 msgstr "เส้นผ่านศูนย์กลาง:"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:588
-#: plugins/Oculars/src/ui_ocularDialog.h:1540
+#: plugins/Oculars/src/ui_ocularDialog.h:1533
 msgid "aFOV:"
 msgstr "ขอบเขตภาพปรากฏ:"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:589
-#: plugins/Oculars/src/ui_ocularDialog.h:1541
-#: plugins/Oculars/src/ui_ocularDialog.h:1576
+#: plugins/Oculars/src/ui_ocularDialog.h:1534
+#: plugins/Oculars/src/ui_ocularDialog.h:1569
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:764
 msgid "Focal length:"
 msgstr "ความยาวโฟกัส:"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:590
-#: plugins/Oculars/src/ui_ocularDialog.h:1537
+#: plugins/Oculars/src/ui_ocularDialog.h:1530
 msgid "Field stop:"
-msgstr "ขั้นช่องจำกัดแสง"
+msgstr "ขั้นช่องจำกัดแสง:"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:624
 msgid "Oculars Plug-in"
@@ -16795,8 +16821,8 @@ msgid ""
 "The same eyepiece in two different telescopes of differing focal length will"
 " produce two different exit pupils, changing the view somewhat."
 msgstr ""
-"เลนส์ใกล้ตาที่ใช้ในกล้องโทรทรรศน์ซึ่งมีความยาวโฟกัสต่างกัน "
-"ทำให้ได้มุมมองภาพที่ค่อนข้างต่างกันตามขนาดของรูรับแสงที่เปลี่ยนไป"
+"เลนส์ใกล้ตาที่ใช้ในกล้องโทรทรรศน์ซึ่งมีความยาวโฟกัสต่างกันจะให้รูแสงออกที่ต่างกัน"
+" ซึ่งทำให้มุมมองภาพต่างกันเล็กน้อย"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:644
 msgid ""
@@ -16848,7 +16874,8 @@ msgid ""
 "The plug-in's key bindings can be edited in the Keyboard shortcuts editor "
 "(F7)."
 msgstr ""
-"คุณสามารถแก้ไขปุ่มลัดของโปรแกรมเสริมนี้ได้ด้วยตัวแก้ไขปุ่มลัดแป้นพิมพ์ (F7)"
+"คุณสามารถแก้ไขปุ่มลัดของโปรแกรมเสริมนี้ได้ด้วยเครื่องมือแก้ไขปุ่มลัดแป้นพิมพ์"
+" (F7)"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:656
 #: plugins/Pulsars/src/Pulsar.cpp:297
@@ -16889,281 +16916,281 @@ msgstr ""
 " (ฐานยึดเปิดใช้งานความเร็วแบบดาราคติ) "
 "เพื่อหลีกเลี่ยงการเคลื่อนที่ซึ่งกว้างกว่า 1 จุดภาพ"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1420
+#: plugins/Oculars/src/ui_ocularDialog.h:1413
 msgid "Interface"
 msgstr "ส่วนติดต่อกับผู้ใช้"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1424
+#: plugins/Oculars/src/ui_ocularDialog.h:1417
 msgid "Arrow button scale (requires restart)"
 msgstr "ปรับขนาดของปุ่มลูกศร (ต้องเริ่มโปรแกรมใหม่)"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1426
+#: plugins/Oculars/src/ui_ocularDialog.h:1419
 msgid ""
 "Mark it if you want the FOV value the same like at the startup of "
 "Stellarium."
 msgstr "ทำเครื่องหมาย หากคุณต้องการใช้ขอบเขตภาพเช่นเดียวกับเมื่อเริ่มโปรแกรม"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1428
+#: plugins/Oculars/src/ui_ocularDialog.h:1421
 msgid "Restore FOV to initial values"
 msgstr "คืนค่าเริ่มต้นของขอบเขตภาพ"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1429
+#: plugins/Oculars/src/ui_ocularDialog.h:1422
 msgid "Show resolution criteria"
 msgstr "แสดงเกณฑ์การแยกชัด"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1430
+#: plugins/Oculars/src/ui_ocularDialog.h:1423
 msgid "On-screen control panel"
 msgstr "แผงควบคุมบนหน้าจอ"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1432
-#: plugins/Oculars/src/ui_ocularDialog.h:1436
+#: plugins/Oculars/src/ui_ocularDialog.h:1425
+#: plugins/Oculars/src/ui_ocularDialog.h:1429
 msgid "Font size of text on on-screen control panel"
 msgstr "ขนาดของแบบอักษรบนหน้าจอแผงควบคุม"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1434
+#: plugins/Oculars/src/ui_ocularDialog.h:1427
 msgid "...font size"
 msgstr "...ขนาดฟอนต์"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1439
+#: plugins/Oculars/src/ui_ocularDialog.h:1432
 msgid ""
 "Mark it if you want the direction value the same like at the startup of "
 "Stellarium."
 msgstr "ทำเครื่องหมายหากคุณต้องการใช้ทิศทางเหมือนกับค่าเริ่มต้นของ Stellarium"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1441
+#: plugins/Oculars/src/ui_ocularDialog.h:1434
 msgid "Restore direction to initial values"
 msgstr "เรียกคืนทิศทางไปยังค่าเริ่มต้น"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1443
+#: plugins/Oculars/src/ui_ocularDialog.h:1436
 msgid "Color for ocular circles and sensor frames"
 msgstr "สีของวงกลมเลนส์ใกล้ตาและกรอบของเซนเซอร์"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1446
+#: plugins/Oculars/src/ui_ocularDialog.h:1439
 msgid "Line Color"
 msgstr "สีของเส้น"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1448
+#: plugins/Oculars/src/ui_ocularDialog.h:1441
 msgid "Color for text which is shown only when GUI is switched off."
 msgstr "สีของข้อความ แสดงเมื่อ GUI ถูกปิด"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1451
+#: plugins/Oculars/src/ui_ocularDialog.h:1444
 msgid "Text Color"
 msgstr "สีของข้อความ"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1452
+#: plugins/Oculars/src/ui_ocularDialog.h:1445
 msgid "Show oculars button on toolbar"
 msgstr "แสดงปุ่มเลนส์ใกล้ตาบนแถบเครื่องมือ"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1455
+#: plugins/Oculars/src/ui_ocularDialog.h:1448
 msgid ""
 "Show FOV circles relative to the apparent FOV of the widest-angle ocular"
 msgstr "แสดงวงกลมขอบเขตภาพซึ่งสัมพัทธ์กับขอบเขตภาพปรากฏที่กว้างที่สุดของเลนส์"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1457
+#: plugins/Oculars/src/ui_ocularDialog.h:1450
 msgid "Scale image circle"
 msgstr "วงกลมมาตราส่วนภาพ"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1458
+#: plugins/Oculars/src/ui_ocularDialog.h:1451
 msgid "Hide grids and lines when enabled"
 msgstr "ซ่อนกริดและเส้นเมื่อเปิดใช้งาน"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1459
+#: plugins/Oculars/src/ui_ocularDialog.h:1452
 msgid "Enable only if an object is selected"
 msgstr "เปิดใช้งานเฉพาะเมื่อเลือกวัตถุใดวัตถุหนึ่ง"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1461
+#: plugins/Oculars/src/ui_ocularDialog.h:1454
 msgid "Show border circle"
 msgstr "แสดงขอบเขตของวงกลม"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1463
+#: plugins/Oculars/src/ui_ocularDialog.h:1456
 msgid "Show FOV outline"
 msgstr "แสดงเส้นขอบเขตภาพ"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1465
+#: plugins/Oculars/src/ui_ocularDialog.h:1458
 msgid "Apply limit for stellar magnitude based on telescope aperture"
 msgstr "จำกัดขอบเขตโชติมาตรของดาวตามขนาดหน้ากล้องโทรทรรศน์"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1467
+#: plugins/Oculars/src/ui_ocularDialog.h:1460
 msgid "Auto-limit stellar magnitude"
 msgstr "จำกัดขอบเขตโชติมาตรของดาวโดยอัตโนมัติ"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1469
+#: plugins/Oculars/src/ui_ocularDialog.h:1462
 msgid "Show cardinal directions in equatorial coordinate system"
 msgstr "แสดงทิศหลักในระบบพิกัดศูนย์สูตร"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1471
+#: plugins/Oculars/src/ui_ocularDialog.h:1464
 msgid "Show compass rose"
 msgstr "แสดงเข็มทิศ"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1473
+#: plugins/Oculars/src/ui_ocularDialog.h:1466
 msgid "Align the crosshair in equatorial coordinate system"
 msgstr "จัดแนวของสายใยเล็งในระบบพิกัดศูนย์สูตร"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1475
+#: plugins/Oculars/src/ui_ocularDialog.h:1468
 msgid "Align crosshair"
 msgstr "จัดแนวของสายใยเล็ง"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1477
+#: plugins/Oculars/src/ui_ocularDialog.h:1470
 msgid "In ocular mode, allow some visibility outside ocular circle."
 msgstr "ในโหมดเลนส์ใกล้ตา แสดงพื้นที่บริเวณที่อยู่นอกวงกลมเลนส์ใกล้ตาด้วย"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1479
+#: plugins/Oculars/src/ui_ocularDialog.h:1472
 msgid "Use semi-transparent mask"
 msgstr "ใช้หน้ากากกึ่งโปร่งใส"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1481
+#: plugins/Oculars/src/ui_ocularDialog.h:1474
 msgid "Opacity of semi-transparent mask"
 msgstr "ความทึบของหน้ากากกึ่งโปร่งใส"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1483
+#: plugins/Oculars/src/ui_ocularDialog.h:1476
 msgid "Sensor view"
 msgstr "มุมมองเซนเซอร์"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1485
+#: plugins/Oculars/src/ui_ocularDialog.h:1478
 msgid "Color for focuser overlay line"
 msgstr "สีสำหรับเส้นของตัวโฟกัส"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1487
+#: plugins/Oculars/src/ui_ocularDialog.h:1480
 msgid "Show focuser overlay"
 msgstr "การแสดงตัวโฟกัส"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1488
+#: plugins/Oculars/src/ui_ocularDialog.h:1481
 msgid "Use degrees and minutes for FOV of CCD"
 msgstr "ใช้หน่วยองศาและลิปดาสำหรับขอบเขตการมองเห็นของซีซีดี"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1490
+#: plugins/Oculars/src/ui_ocularDialog.h:1483
 msgid ""
 "Enable automatic switch of mount type from the telescope settings for "
 "horizontal orientation of CCD frame."
 msgstr ""
 "เปิดใช้งานสลับชนิดของฐานยึดจากการตั้งค่าของกล้องโทรทรรศน์สำหรับการวางตัวในแนวนอนของซีซีดีโดยอัตโนมัติ"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1492
+#: plugins/Oculars/src/ui_ocularDialog.h:1485
 msgid "Enable automatic switch of mount type"
 msgstr "เปิดใช้การสลับชนิดของฐานยึดโดยอัตโนมัติ"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1493
+#: plugins/Oculars/src/ui_ocularDialog.h:1486
 msgid "Use size of focuser:"
 msgstr "ขนาดของตัวโฟกัส:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1494
+#: plugins/Oculars/src/ui_ocularDialog.h:1487
 msgid "Use horizontal coordinates instead equatorial coordinates"
 msgstr "ใช้พิกัดขอบฟ้าแทนพิกัดศูนย์สูตร"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1495
+#: plugins/Oculars/src/ui_ocularDialog.h:1488
 msgid "Overlay size (px)"
 msgstr "ขนาดตัวซ้อนทับ (จุดภาพ)"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1497
+#: plugins/Oculars/src/ui_ocularDialog.h:1490
 msgid "Horizontal size (width)"
 msgstr "ขนาดตามแนวนอน (ความกว้าง)"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1500
+#: plugins/Oculars/src/ui_ocularDialog.h:1493
 msgid "Vertical size (height)"
 msgstr "ขนาดตามแนวตั้ง (ความสูง)"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1503
+#: plugins/Oculars/src/ui_ocularDialog.h:1496
 msgid "Enable pixel grid of sensor binned pixels within sensor crop overlay."
 msgstr "เปิดใช้งานกริดของการรวมจุดภาพภายในคร็อปของเซนเซอร์"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1505
+#: plugins/Oculars/src/ui_ocularDialog.h:1498
 msgid "Show pixel grid"
 msgstr "แสดงกริดจุดภาพ"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1507
+#: plugins/Oculars/src/ui_ocularDialog.h:1500
 msgid ""
 "Enable a rectangular overlay showing the effective size of a number of "
 "pixels."
 msgstr "เปิดใช้งานกรอบสี่เหลี่ยมผืนผ้าซึ่งแสดงขนาดยังผลของจำนวนจุดภาพ"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1509
+#: plugins/Oculars/src/ui_ocularDialog.h:1502
 msgid "Show sensor crop overlay"
 msgstr "แสดงตัวซ้อนทับกรอบเซนเซอร์"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1510
+#: plugins/Oculars/src/ui_ocularDialog.h:1503
 msgid "Enable autozoom when switching CCD"
 msgstr "เปิดใช้งานการซูมอัตโนมัติเมื่อเปลี่ยนซีซีดี"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1512
+#: plugins/Oculars/src/ui_ocularDialog.h:1505
 msgid ""
 "Show maximum exposure time for Solar system objects to avoid movement streak"
 msgstr ""
 "แสดงเวลาของการเปิดรับแสงสูงสุดสำหรับวัตถุในระบบสุริยะเพื่อหลีกเลี่ยงเส้นของการเคลื่อนที่"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1514
+#: plugins/Oculars/src/ui_ocularDialog.h:1507
 msgid "Show max exposure time for moving objects"
 msgstr "แสดงเวลาของการเปิดรับแสงสูงสุดสำหรับวัตถุเคลื่อนที่"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1515
+#: plugins/Oculars/src/ui_ocularDialog.h:1508
 msgid "Telrad view"
 msgstr "มุมมอง Telrad"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1519
+#: plugins/Oculars/src/ui_ocularDialog.h:1512
 msgctxt "abbreviation"
 msgid "FOV:"
 msgstr "ขอบเขตภาพ:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1521
+#: plugins/Oculars/src/ui_ocularDialog.h:1514
 msgid "FOV for circle 1"
 msgstr "ขอบเขตภาพสำหรับวง 1"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1524
+#: plugins/Oculars/src/ui_ocularDialog.h:1517
 msgid "FOV for circle 2"
 msgstr "ขอบเขตภาพสำหรับวง 2"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1527
+#: plugins/Oculars/src/ui_ocularDialog.h:1520
 msgid "FOV for circle 3"
 msgstr "ขอบเขตภาพสำหรับวง 3"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1530
+#: plugins/Oculars/src/ui_ocularDialog.h:1523
 msgid "FOV for circle 4"
 msgstr "ขอบเขตภาพสำหรับวง 4"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1532
+#: plugins/Oculars/src/ui_ocularDialog.h:1525
 msgid "Restore original Telrad FOV"
 msgstr "ย้อนไปที่มุมมอง Telrad เดิม"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1533
+#: plugins/Oculars/src/ui_ocularDialog.h:1526
 msgid "Enable autozoom when switching Telrad"
 msgstr "เปิดใช้งานการซูมอัตโนมัติเมื่อเปลี่ยน Telrad"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1534
+#: plugins/Oculars/src/ui_ocularDialog.h:1527
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:226
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:401
 msgid "General"
 msgstr "ทั่วไป"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1535
-#: plugins/Oculars/src/ui_ocularDialog.h:1544
-#: plugins/Oculars/src/ui_ocularDialog.h:1550
-#: plugins/Oculars/src/ui_ocularDialog.h:1569
+#: plugins/Oculars/src/ui_ocularDialog.h:1528
+#: plugins/Oculars/src/ui_ocularDialog.h:1537
+#: plugins/Oculars/src/ui_ocularDialog.h:1543
+#: plugins/Oculars/src/ui_ocularDialog.h:1562
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:174
 msgid "Add"
 msgstr "เพิ่ม"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1538
+#: plugins/Oculars/src/ui_ocularDialog.h:1531
 msgid "Has permanent cross-hairs"
 msgstr "มีสายใยเล็งอย่างถาวร"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1539
+#: plugins/Oculars/src/ui_ocularDialog.h:1532
 msgid "Binoculars"
 msgstr "กล้องสองตา"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1542
-#: plugins/Oculars/src/ui_ocularDialog.h:1546
-#: plugins/Oculars/src/ui_ocularDialog.h:1556
-#: plugins/Oculars/src/ui_ocularDialog.h:1571
+#: plugins/Oculars/src/ui_ocularDialog.h:1535
+#: plugins/Oculars/src/ui_ocularDialog.h:1539
+#: plugins/Oculars/src/ui_ocularDialog.h:1549
+#: plugins/Oculars/src/ui_ocularDialog.h:1564
 #: plugins/Satellites/src/ui_satellitesDialog.h:1301
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:559
 #: plugins/TelescopeControl/src/gui/ui_storedPointsDialog.h:203
 msgid "Name:"
 msgstr "ชื่อ:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1543
+#: plugins/Oculars/src/ui_ocularDialog.h:1536
 msgid "Eyepieces"
 msgstr "เลนส์ใกล้ตา"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1547
+#: plugins/Oculars/src/ui_ocularDialog.h:1540
 msgid ""
 "Values of multiplicity >1 expand the focal length (Barlow lens). Values of "
 "multiplicity <1 reduce the focal length (Shapley lens)."
@@ -17171,85 +17198,85 @@ msgstr ""
 "ค่าตัวคูณ >1 จะขยายความยาวโฟกัส (เลนส์บาร์โลว์) ค่าตัวคูณ <1 "
 "จะลดความยาวโฟกัส (เลนส์แชปลีย์)"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1548
+#: plugins/Oculars/src/ui_ocularDialog.h:1541
 msgid "Multiplier:"
 msgstr "ตัวคูณ :"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1549
+#: plugins/Oculars/src/ui_ocularDialog.h:1542
 msgid "Lenses"
 msgstr "เลนส์"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1552
+#: plugins/Oculars/src/ui_ocularDialog.h:1545
 msgid "Off-Axis guider"
 msgstr "ตัวนำนอกแกน"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1553
+#: plugins/Oculars/src/ui_ocularDialog.h:1546
 msgid "Resolution y:"
 msgstr "ความละเอียดแกน y:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1554
+#: plugins/Oculars/src/ui_ocularDialog.h:1547
 msgid "Binning x:"
 msgstr "การรวมในแกน x:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1555
+#: plugins/Oculars/src/ui_ocularDialog.h:1548
 msgid "Resolution x:"
 msgstr "ความละเอียดแกน x:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1557
+#: plugins/Oculars/src/ui_ocularDialog.h:1550
 msgid "Prism/CCD height:"
 msgstr "ความสูงของปริซึม/ซีซีดี:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1559
+#: plugins/Oculars/src/ui_ocularDialog.h:1552
 msgid ""
 "This is the distance from the center of the Imaging Sensor to the center of "
 "the Prism"
-msgstr ""
+msgstr "นี่คือระยะห่างจากศูนย์กลางของเซนเซอร์ถ่ายภาพไปยังศูนย์กลางของปริซึม"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1561
+#: plugins/Oculars/src/ui_ocularDialog.h:1554
 msgid "Prism/CCD distance:"
 msgstr "ระยะห่างของปริซึม/ซีซีดี:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1562
+#: plugins/Oculars/src/ui_ocularDialog.h:1555
 msgid "Rotation Angle:"
 msgstr "มุมการหมุน:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1563
+#: plugins/Oculars/src/ui_ocularDialog.h:1556
 msgid "Binning y:"
 msgstr "การรวมในแกน y:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1564
+#: plugins/Oculars/src/ui_ocularDialog.h:1557
 msgid "Prism/CCD width:"
 msgstr "ความกว้างของปริซึม/ซีซีดี:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1565
+#: plugins/Oculars/src/ui_ocularDialog.h:1558
 msgid "Chip height:"
 msgstr "ความสูงของชิป:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1566
+#: plugins/Oculars/src/ui_ocularDialog.h:1559
 msgid "Chip width:"
 msgstr "ความกว้างของชิป:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1567
+#: plugins/Oculars/src/ui_ocularDialog.h:1560
 msgid "Position angle:"
 msgstr "มุมตำแหน่ง:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1568
+#: plugins/Oculars/src/ui_ocularDialog.h:1561
 msgid "Sensors"
 msgstr "เซนเซอร์"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1572
+#: plugins/Oculars/src/ui_ocularDialog.h:1565
 msgid "Horizontal flip"
 msgstr "พลิกในแนวนอน"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1573
+#: plugins/Oculars/src/ui_ocularDialog.h:1566
 msgid "Vertical flip"
 msgstr "พลิกในแนวตั้ง"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1574
+#: plugins/Oculars/src/ui_ocularDialog.h:1567
 msgid "Equatorial Mount"
 msgstr "ฐานยึดแบบศูนย์สูตร"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1577
+#: plugins/Oculars/src/ui_ocularDialog.h:1570
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:395
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:406
 msgid "Telescopes"
@@ -17326,7 +17353,7 @@ msgstr "หอสังเกตการณ์รังสีเอกซ์จ
 #. TRANSLATORS: Satellite description.
 #: plugins/Satellites/src/Satellites.cpp:1410
 msgid "X-ray Multi-Mirror Mission"
-msgstr ""
+msgstr "X-ray Multi-Mirror Mission"
 
 #. TRANSLATORS: Satellite description.
 #: plugins/Satellites/src/Satellites.cpp:1412
@@ -17346,12 +17373,12 @@ msgstr "The Microvariability and Oscillations of Stars telescope"
 #. TRANSLATORS: Satellite description.
 #: plugins/Satellites/src/Satellites.cpp:1418
 msgid "Neil Gehrels Swift Observatory (Swift Gamma-Ray Burst Explorer)"
-msgstr ""
+msgstr "Neil Gehrels Swift Observatory (Swift Gamma-Ray Burst Explorer)"
 
 #. TRANSLATORS: Satellite description.
 #: plugins/Satellites/src/Satellites.cpp:1420
 msgid "Astro‐Rivelatore Gamma a Immagini Leggero"
-msgstr ""
+msgstr "Astro‐Rivelatore Gamma a Immagini Leggero"
 
 #. TRANSLATORS: Satellite description.
 #: plugins/Satellites/src/Satellites.cpp:1422
@@ -17366,7 +17393,7 @@ msgstr "ดาวเทียมสำรวจอินฟราเรดมุ
 #. TRANSLATORS: Satellite description.
 #: plugins/Satellites/src/Satellites.cpp:1426
 msgid "Interplanetary Kite-craft Accelerated by Radiation Of the Sun"
-msgstr ""
+msgstr "Interplanetary Kite-craft Accelerated by Radiation Of the Sun"
 
 #. TRANSLATORS: Satellite description.
 #: plugins/Satellites/src/Satellites.cpp:1428
@@ -17376,7 +17403,7 @@ msgstr "RadioAstron กล้องโทรทรรศน์วิทยุใ
 #. TRANSLATORS: Satellite description.
 #: plugins/Satellites/src/Satellites.cpp:1430
 msgid "Nuclear Spectroscopic Telescope Array"
-msgstr ""
+msgstr "Nuclear Spectroscopic Telescope Array"
 
 #. TRANSLATORS: Satellite description.
 #: plugins/Satellites/src/Satellites.cpp:1432
@@ -17405,7 +17432,7 @@ msgstr "ดาวเทียมสำรวจอนุภาคของสส
 #. TRANSLATORS: Satellite description.
 #: plugins/Satellites/src/Satellites.cpp:1440
 msgid "Hard X-ray Modulation Telescope"
-msgstr ""
+msgstr "Hard X-ray Modulation Telescope"
 
 #. TRANSLATORS: Satellite description.
 #: plugins/Satellites/src/Satellites.cpp:1442
@@ -17420,7 +17447,7 @@ msgstr "ดาวเทียมสำรวจดาวเคราะห์ต
 #. TRANSLATORS: Satellite description.
 #: plugins/Satellites/src/Satellites.cpp:1446
 msgid "Spectrum-X-Gamma"
-msgstr ""
+msgstr "Spectrum-X-Gamma"
 
 #. TRANSLATORS: Satellite description.
 #: plugins/Satellites/src/Satellites.cpp:1448
@@ -17435,7 +17462,7 @@ msgstr "สถานีอวกาศเทียนกง (สถานีอ�
 #. TRANSLATORS: Satellite description.
 #: plugins/Satellites/src/Satellites.cpp:1452
 msgid "Imaging X-ray Polarimetry Explorer"
-msgstr ""
+msgstr "Imaging X-ray Polarimetry Explorer"
 
 #. TRANSLATORS: Satellite description. "James Webb" is a person's name.
 #: plugins/Satellites/src/Satellites.cpp:1454
@@ -18078,7 +18105,7 @@ msgstr "SPEKTR-R"
 #. TRANSLATORS: Satellite name: Spektr-RG Space Observatory
 #: plugins/Satellites/src/Satellites.cpp:3558
 msgid "SPEKTR-RG"
-msgstr "หอสังเกตการณ์อวกาศสเปกเตอร์-อาร์จี"
+msgstr "SPEKTR-RG"
 
 #. TRANSLATORS: Satellite name: International Gamma-Ray Astrophysics
 #. Laboratory (INTEGRAL)
@@ -18089,7 +18116,7 @@ msgstr "INTEGRAL"
 #. TRANSLATORS: Satellite name: China's first space station name
 #: plugins/Satellites/src/Satellites.cpp:3562
 msgid "TIANGONG 1"
-msgstr "TIANGONG 1"
+msgstr "เทียนกง 1"
 
 #. TRANSLATORS: Satellite name: name of China's space station module
 #: plugins/Satellites/src/Satellites.cpp:3564
@@ -18107,14 +18134,14 @@ msgstr "เทียนกง (เทียนเหอ)"
 #: plugins/Satellites/src/Satellites.cpp:3571
 msgctxt "comms"
 msgid "uplink"
-msgstr ""
+msgstr "การเชื่อมโยงขึ้น"
 
 #. TRANSLATORS: A downlink (DL) is the link from a satellite to a ground
 #. station
 #: plugins/Satellites/src/Satellites.cpp:3573
 msgctxt "comms"
 msgid "downlink"
-msgstr ""
+msgstr "การเชื่อมโยงลง"
 
 #. TRANSLATORS: The beacon (or radio beacon) is a device in the satellite,
 #. which emit one or more signals (normally on a fixed frequency) whose
@@ -18131,58 +18158,58 @@ msgstr ""
 #: plugins/Satellites/src/Satellites.cpp:3577
 msgctxt "comms"
 msgid "telemetry"
-msgstr ""
+msgstr "โทรมาตร"
 
 #. TRANSLATORS: The channel for transmission of video data
 #: plugins/Satellites/src/Satellites.cpp:3579
 msgctxt "comms"
 msgid "video"
-msgstr ""
+msgstr "วีดิทัศน์"
 
 #. TRANSLATORS: The broadband is wide bandwidth data transmission which
 #. transports multiple signals at a wide range of frequencies
 #: plugins/Satellites/src/Satellites.cpp:3581
 msgctxt "comms"
 msgid "broadband"
-msgstr ""
+msgstr "แถบความถี่กว้าง"
 
 #. TRANSLATORS: The channel for transmission of commands
 #: plugins/Satellites/src/Satellites.cpp:3583
 msgctxt "comms"
 msgid "command"
-msgstr ""
+msgstr "ช่องของการส่งคำสั่ง"
 
 #. TRANSLATORS: Meteorological is a service on the satellite for transmitting
 #. meteorological data to a ground station
 #: plugins/Satellites/src/Satellites.cpp:3585
 msgctxt "comms"
 msgid "meteorological"
-msgstr ""
+msgstr "อุตุนิยมวิทยา"
 
 #. TRANSLATORS: Maritime is a service on the satellite
 #: plugins/Satellites/src/Satellites.cpp:3587
 msgctxt "comms"
 msgid "maritime"
-msgstr ""
+msgstr "ภาคพื้นสมุทร"
 
 #. TRANSLATORS: Mobile is a service on the satellite
 #: plugins/Satellites/src/Satellites.cpp:3589
 msgctxt "comms"
 msgid "mobile"
-msgstr ""
+msgstr "เคลื่อนที่"
 
 #. TRANSLATORS: Mobile telephony is a service on the satellite
 #: plugins/Satellites/src/Satellites.cpp:3591
 msgctxt "comms"
 msgid "mobile telephony"
-msgstr ""
+msgstr "โทรศัพท์เคลื่อนที่"
 
 #. TRANSLATORS: A repeater is an electronic device that receives a signal and
 #. retransmits it.
 #: plugins/Satellites/src/Satellites.cpp:3593
 msgctxt "comms"
 msgid "repeater"
-msgstr ""
+msgstr "ทวนสัญญาณ"
 
 #. TRANSLATORS: The digital repeater (or digipiter) is used in channels that
 #. transmit data by binary digital signals
@@ -18202,12 +18229,12 @@ msgstr ""
 #: plugins/Satellites/src/Satellites.cpp:3598
 msgctxt "comms"
 msgid "crew voice"
-msgstr ""
+msgstr "เสียงลูกเรือ"
 
 #: plugins/Satellites/src/Satellites.cpp:3599
 msgctxt "comms"
 msgid "imaging"
-msgstr ""
+msgstr "ถ่ายภาพ"
 
 #. TRANSLATORS: Some mode of communication via radio channel
 #: plugins/Satellites/src/Satellites.cpp:3601
@@ -18577,7 +18604,7 @@ msgstr ""
 #. TRANSLATORS: Title of a section in the About tab of the Satellites window
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:820
 msgid "Communication links"
-msgstr ""
+msgstr "การเชื่อมโยงการสื่อสาร"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:821
 msgid ""
@@ -18588,19 +18615,19 @@ msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:823
 msgid "Automatic Picture Transmission"
-msgstr ""
+msgstr "การส่งผ่านภาพแบบอัตโนมัติ"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:824
 msgid "Low Resolution Picture Transmission"
-msgstr ""
+msgstr "การส่งผ่านภาพความคมชัดต่ำ"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:825
 msgid "High Resolution Picture Transmission"
-msgstr ""
+msgstr "การส่งผ่านภาพความคมชัดสูง"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:826
 msgid "Advanced High Resolution Picture Transmission"
-msgstr ""
+msgstr "การส่งผ่านภาพความคมชัดสูงขั้นสูง"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:827
 msgid "Amateur Radio adaptation of X.25 packet protocol"
@@ -18608,15 +18635,15 @@ msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:828
 msgid "Continuous Wave, Morse Code"
-msgstr ""
+msgstr "คลื่นต่อเนื่อง, รหัสมอร์ส"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:829
 msgid "Amplitude Modulation"
-msgstr ""
+msgstr "การกล้ำแอมพลิจูด"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:830
 msgid "Frequency Modulation"
-msgstr ""
+msgstr "การกล้ำความถี่"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:831
 msgid "Data Under Voice"
@@ -18938,17 +18965,17 @@ msgstr "[ดาวเทียม GEO/GSO]"
 #. TRANSLATORS: MEO = Medium Earth orbit
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1147
 msgid "[MEO satellites]"
-msgstr "[ดาวเทียม MEO]"
+msgstr "[ดาวเทียมในวงโคจรระดับกลาง]"
 
 #. TRANSLATORS: HEO = Highly elliptical orbit
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1149
 msgid "[HEO satellites]"
-msgstr "[ดาวเทียม HEO]"
+msgstr "[ดาวเทียมที่วงโคจรมีความรีสูง]"
 
 #. TRANSLATORS: HGEO = High geosynchronous orbit
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1151
 msgid "[HGSO satellites]"
-msgstr "[ดาวเทียม HGSO]"
+msgstr "[ดาวเทียมในวงโคจรพ้องคาบโลกระดับสูง]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1152
 msgid "[polar orbit satellites]"
@@ -18985,49 +19012,49 @@ msgstr "[ผู้ใช้กำหนดทั้งหมด]"
 #. Active is any satellite with an operational status of +, P, B, S, or X.
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1163
 msgid "[active satellites]"
-msgstr ""
+msgstr "[ดาวเทียมที่ใช้งานอยู่]"
 
 #. TRANSLATORS: Satellite group [SATCAT Operational Status]: Satellites that
 #. are fully functioning
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1165
 msgid "[operational satellites]"
-msgstr ""
+msgstr "[ดาวเทียมที่ปฏิบัติงานอยู่]"
 
 #. TRANSLATORS: Satellite group [SATCAT Operational Status]: Satellites that
 #. are no longer functioning
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1167
 msgid "[non-operational satellites]"
-msgstr ""
+msgstr "[ดาวเทียมที่ไม่สามารถปฏิบัติงานได้]"
 
 #. TRANSLATORS: Satellite group [SATCAT Operational Status]: Satellites that
 #. are partially fulfilling primary mission or secondary mission(s)
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1169
 msgid "[partially operational satellites]"
-msgstr ""
+msgstr "[ดาวเทียมที่ปฏิบัติงานได้บางส่วน]"
 
 #. TRANSLATORS: Satellite group [SATCAT Operational Status]: Previously
 #. operational satellite put into reserve status
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1171
 msgid "[backup / standby satellites]"
-msgstr ""
+msgstr "[ดาวเทียมสำรอง/รอปฏิบัติงาน]"
 
 #. TRANSLATORS: Satellite group [SATCAT Operational Status]: New satellite
 #. awaiting full activation
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1173
 msgid "[spare satellites]"
-msgstr ""
+msgstr "[ดาวเทียมสำรอง]"
 
 #. TRANSLATORS: Satellite group [SATCAT Operational Status]: Satellites with
 #. extended mission(s)
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1175
 msgid "[extended mission]"
-msgstr ""
+msgstr "[ภารกิจขยาย]"
 
 #. TRANSLATORS: Satellite group [SATCAT Operational Status]: Satellites that
 #. are decayed
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1177
 msgid "[decayed satellites]"
-msgstr ""
+msgstr "[ดาวเทียมที่กลับสู่บรรยากาศ]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1179
 msgid "[all]"
@@ -19062,7 +19089,7 @@ msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1208
 msgid "Altitude of imagined satellite"
-msgstr ""
+msgstr "ระดับของดาวเทียมสมมุติ"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1209
 msgid "Number of segments: number of segments used to draw the line"
@@ -20452,7 +20479,8 @@ msgstr ""
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:421
 msgid ""
 "In the telescope configuration window, click on 'User Interface Settings'."
-msgstr "ในหน้าต่างการปรับแต่งกล้องโทรทรรศน์ ดูตัวเลือกในกรอบ 'กุย (GUI)'"
+msgstr ""
+"ในหน้าต่างการปรับแต่งกล้องโทรทรรศน์ คลิก 'การตั้งค่าส่วนประสานกับผู้ใช้'"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:422
 msgid ""
@@ -21318,11 +21346,11 @@ msgstr "ปิดโปรแกรม"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:579
 msgid "Toggle TUI date&time"
-msgstr ""
+msgstr "สลับการใช้งานวันที่และเวลาใน TUI"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:580
 msgid "Toggle TUI object info"
-msgstr ""
+msgstr "สลับการใช้งานข้อมูลวัตถุใน TUI"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:649
 msgid "[no TUI node]"
@@ -21369,7 +21397,7 @@ msgstr "นำเข้าองค์ประกอบวงโคจรใน
 
 #: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:766
 msgid "Anonymous"
-msgstr ""
+msgstr "ไม่มีชื่อ"
 
 #. TRANSLATORS: A link showing the text "Minor Planet & Comet Ephemeris
 #. Service" is inserted.
@@ -21447,19 +21475,19 @@ msgstr "บันทึกวัตถุขนาดเล็กในระบ
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:224
 msgid "Cannot overwrite"
-msgstr ""
+msgstr "ไม่สามารถเขียนทับได้"
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:225
 msgid "Cannot remove existing file. Do you have permissions?"
-msgstr ""
+msgstr "ไม่สามารถลบแฟ้มที่มีอยู่แล้วได้ ตรวจสอบดูว่าคุณได้รับสิทธิ์หรือไม่?"
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:231
 msgid "Cannot store"
-msgstr ""
+msgstr "ไม่สามารถจัดเก็บได้"
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:232
 msgid "File cannot be written. Do you have permissions?"
-msgstr ""
+msgstr "ไม่สามารถเขียนแฟ้มได้ ตรวจสอบดูว่าคุณได้รับสิทธิ์หรือไม่?"
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:237
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:245
@@ -21793,6 +21821,8 @@ msgid ""
 "The 80 stars that are listed in the German Nautical Almanac published by the"
 " Federal Maritime and Hydrographic Agency of Germany."
 msgstr ""
+"ดาวฤกษ์ 80 ดวง ในปฏิทินเดินเรือของเยอรมนี ตีพิมพ์โดย Federal Maritime and "
+"Hydrographic Agency"
 
 #: plugins/NavStars/src/NavStars.cpp:388
 msgid "The 160 stars that are listed in the Russian Nautical Almanac."
@@ -21822,6 +21852,8 @@ msgid ""
 "These 37 stars were used by the Apollo space program to navigate to the Moon"
 " from 1969-1972, Apollo 11 through Apollo 17."
 msgstr ""
+"ดาวฤกษ์ 37 ดวง ใช้นำทางไปดวงจันทร์ในโครงการอะพอลโลระหว่าง ค.ศ. 1969-1972 "
+"ได้แก่ ยานอะพอลโล 11 ถึง 17"
 
 #: plugins/NavStars/src/NavStars.cpp:393
 msgid ""
@@ -21880,19 +21912,19 @@ msgstr ""
 
 #: plugins/NavStars/src/NavStars.cpp:400
 msgid "Alignment stars for Vixen Starbook mounts."
-msgstr ""
+msgstr "ดาวที่ใช้ในการปรับแนวสำหรับฐานยึด Vixen Starbook"
 
 #: plugins/NavStars/src/NavStars.cpp:401
 msgid "Alignment stars for Argo Navis digital setting circles."
-msgstr ""
+msgstr "ดาวที่ใช้ในการปรับแนวสำหรับวงมาตรปรับมุม Argo Navis"
 
 #: plugins/NavStars/src/NavStars.cpp:402
 msgid "Alignment stars for Orion Intelliscope mounts."
-msgstr ""
+msgstr "ดาวที่ใช้ในการปรับแนวสำหรับฐานยึด Orion Intelliscope"
 
 #: plugins/NavStars/src/NavStars.cpp:403
 msgid "Alignment stars for Sky Commander digital setting circles."
-msgstr ""
+msgstr "ดาวที่ใช้ในการปรับแนวสำหรับวงมาตรปรับมุมดิจิทัล Sky Commander"
 
 #. TRANSLATORS: The full phrase: The original almanac title is
 #. NAME_OF_THE_ALMANAC
@@ -21996,7 +22028,7 @@ msgstr "อยู่ใต้ขอบฟ้า"
 msgid ""
 "The sum of the daytime duration and duration of morning and evening "
 "twilights"
-msgstr ""
+msgstr "ผลรวมของระยะเวลากลางวันและระยะเวลาที่มีแสงสนธยา"
 
 #. TRANSLATORS: Part of full phrase: Anglo-American set of navigational stars
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:243
@@ -22027,7 +22059,7 @@ msgstr "เยอรมัน"
 #. set of navigational stars
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:254
 msgid "Voskhod and Soyuz manned space programs"
-msgstr ""
+msgstr "โครงการอวกาศวอสคอดและโซยุซที่มีมนุษย์"
 
 #. TRANSLATORS: Part of full phrase: Apollo space program set of navigational
 #. stars
@@ -23179,7 +23211,7 @@ msgstr "ชั้นดาวเคราะห์"
 #. TRANSLATORS: Full phrase is "Surface Temperature"
 #: plugins/Exoplanets/src/Exoplanet.cpp:372
 msgid "Surface temp."
-msgstr ""
+msgstr "อุณหภูมิพื้นผิว"
 
 #. TRANSLATORS: Average stellar flux of the planet
 #: plugins/Exoplanets/src/Exoplanet.cpp:374
@@ -23194,7 +23226,7 @@ msgstr "ESI"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:499
 msgid "Surface temperature on Earth"
-msgstr ""
+msgstr "อุณหภูมิบนผิวโลก"
 
 #: plugins/Exoplanets/src/Exoplanet.hpp:86
 msgid "planetary system"
@@ -23355,19 +23387,23 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:318
 msgid "Surface Temperature"
-msgstr ""
+msgstr "อุณหภูมิพื้นผิว"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:319
 msgid ""
 "The estimated surface temperature in Kelvins (K) assuming an Earth-like "
 "atmosphere (i.e., same bond albedo and greenhouse)."
 msgstr ""
+"อุณหภูมิพื้นผิวโดยประมาณในหน่วยเคลวิน (K) โดยสมมุติให้มีบรรยากาศเหมือนโลก "
+"(เช่นมีอัตราส่วนสะท้อนและสภาวะเรือนกระจกเหมือนกัน)"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:320
 msgid ""
 "Temperatures could be much larger for thicker atmospheres (Earth = 288 K or "
 "15°C)."
 msgstr ""
+"อุณหภูมิอาจสูงกว่านี้มากสำหรับบรรยากาศที่หนา (โลก = 288 เคลวิน หรือ "
+"15°เซลเซียส)"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:323
 msgid ""
@@ -25871,7 +25907,7 @@ msgstr "โปรแกรมเสริมนี้ใช้แสดงผล
 
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:91
 msgid "Show value of the equation of time"
-msgstr ""
+msgstr "แสดงปริมาณของสมการเวลา"
 
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:85
 msgid "Equation of Time plug-in"
@@ -25979,70 +26015,70 @@ msgstr "ยืนยันแล้ว"
 msgid "Generic"
 msgstr "ทั่วไป"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:511
+#: plugins/MeteorShowers/src/MeteorShower.cpp:535
 msgid "generic data"
 msgstr "ข้อมูลทั่วไป"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:512
+#: plugins/MeteorShowers/src/MeteorShower.cpp:536
 msgid "confirmed data"
 msgstr "ข้อมูลที่ยืนยันแล้ว"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:513
+#: plugins/MeteorShowers/src/MeteorShower.cpp:537
 msgid "inactive"
 msgstr "ไม่ได้กำลังเกิดอยู่"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:546
+#: plugins/MeteorShowers/src/MeteorShower.cpp:570
 msgid "IAU shower number"
 msgstr "หมายเลขฝนดาวตกของไอเอยู"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:547
+#: plugins/MeteorShowers/src/MeteorShower.cpp:571
 msgid "Radiant drift (per solar longitude)"
 msgstr "การเลื่อนของจุดกระจาย (ต่อลองจิจูดสุริยะ)"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:553
+#: plugins/MeteorShowers/src/MeteorShower.cpp:577
 msgid "Geocentric meteoric velocity"
 msgstr "ความเร็วของดาวตกสัมพัทธ์กับจุดศูนย์กลางโลก"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:561
+#: plugins/MeteorShowers/src/MeteorShower.cpp:585
 msgid "The population index"
 msgstr "ดัชนีประชากรดาวตก"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:564
+#: plugins/MeteorShowers/src/MeteorShower.cpp:588
 msgid "Parent body"
 msgstr "วัตถุต้นกำเนิด"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:566
+#: plugins/MeteorShowers/src/MeteorShower.cpp:590
 msgid "Activity"
 msgstr "ช่วงที่ตก"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:614
-#: plugins/MeteorShowers/src/MeteorShower.cpp:639
+#: plugins/MeteorShowers/src/MeteorShower.cpp:638
+#: plugins/MeteorShowers/src/MeteorShower.cpp:663
 msgid "Solar longitude "
 msgstr "ลองจิจูดสุริยะ"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:622
+#: plugins/MeteorShowers/src/MeteorShower.cpp:646
 msgctxt "meteor shower activity"
 msgid "Maximum"
 msgstr "ตกถี่ที่สุด"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:699
-#: plugins/MeteorShowers/src/MeteorShower.cpp:722
+#: plugins/MeteorShowers/src/MeteorShower.cpp:723
+#: plugins/MeteorShowers/src/MeteorShower.cpp:746
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:276
 msgid "Current ZHR"
 msgstr "ZHR ในขณะนี้"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:702
-#: plugins/MeteorShowers/src/MeteorShower.cpp:732
+#: plugins/MeteorShowers/src/MeteorShower.cpp:726
+#: plugins/MeteorShowers/src/MeteorShower.cpp:756
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:279
 msgid "Local Hourly Rate"
 msgstr "อัตราตกรายชั่วโมงท้องถิ่น"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:704
-#: plugins/MeteorShowers/src/MeteorShower.cpp:735
+#: plugins/MeteorShowers/src/MeteorShower.cpp:728
+#: plugins/MeteorShowers/src/MeteorShower.cpp:759
 msgid "Limiting magnitude"
-msgstr ""
+msgstr "ขอบเขตโชติมาตร"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:710
+#: plugins/MeteorShowers/src/MeteorShower.cpp:734
 msgid "variable"
 msgstr "แปรผันได้"
 
@@ -26453,7 +26489,7 @@ msgstr "ดาวหาง ซี/1861 จี 1 (แทตเชอร์)"
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:195
 msgid "Comet 26P/Grigg-Skjellerup"
-msgstr "ดาวหาง 26P/Grigg-Skjellerup"
+msgstr "ดาวหาง 26พี/กริกก์-สเกลเลอรัป"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:197
@@ -27484,7 +27520,7 @@ msgstr "ระยะแสงไฟ:"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:470
 msgid "Directional light enhancement"
-msgstr ""
+msgstr "การปรับปรุงแสงตามทิศทางให้ดีขึ้น"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:472
 msgid ""
@@ -27499,19 +27535,19 @@ msgstr "แสดงพิกัดกริด (%1)"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:476
 msgid "Show coordinates in the top right screen corner"
-msgstr ""
+msgstr "แสดงพิกัดที่มุมขวาบนของจอ"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:478
 msgid "Top Right"
-msgstr ""
+msgstr "ขวาบน"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:480
 msgid "Show coordinates centered in the bottom of the screen"
-msgstr ""
+msgstr "แสดงพิกัดที่กลางจอด้านล่าง"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:482
 msgid "Bottom Center"
-msgstr ""
+msgstr "กลางล่าง"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:484
 msgid ""
@@ -27532,7 +27568,7 @@ msgstr ""
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:490
 msgid "Ignore initial view settings"
-msgstr ""
+msgstr "ละการตั้งค่ามุมมองเริ่มต้น"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:491
 msgid "Visual options"
@@ -28173,12 +28209,12 @@ msgstr "เปอร์เซีย (ดาราศาสตร์)"
 #: plugins/Calendars/src/Calendars.cpp:376
 msgctxt "calendar"
 msgid "Bahá’í (Arithm.)"
-msgstr ""
+msgstr "บาไฮ (เลขคณิต)"
 
 #: plugins/Calendars/src/Calendars.cpp:377
 msgctxt "calendar"
 msgid "Bahá’í (Astron.)"
-msgstr ""
+msgstr "บาไฮ (ดาราศาสตร์)"
 
 #: plugins/Calendars/src/Calendars.cpp:378
 #: plugins/Calendars/src/ui_calendarsDialog.h:910
@@ -28235,7 +28271,7 @@ msgstr "จีน"
 #: plugins/Calendars/src/Calendars.cpp:389
 msgctxt "calendar"
 msgid "Chinese Solar Terms"
-msgstr ""
+msgstr "ช่วงสุริยคติจีน"
 
 #: plugins/Calendars/src/Calendars.cpp:392
 #: plugins/Calendars/src/ui_calendarsDialog.h:911
@@ -28246,7 +28282,7 @@ msgstr "ญี่ปุ่น"
 #: plugins/Calendars/src/Calendars.cpp:393
 msgctxt "calendar"
 msgid "Japanese Solar Terms"
-msgstr ""
+msgstr "ช่วงสุริยคติญี่ปุ่น"
 
 #: plugins/Calendars/src/Calendars.cpp:396
 #: plugins/Calendars/src/ui_calendarsDialog.h:938
@@ -28257,7 +28293,7 @@ msgstr "เกาหลี"
 #: plugins/Calendars/src/Calendars.cpp:397
 msgctxt "calendar"
 msgid "Korean Solar Terms"
-msgstr ""
+msgstr "ช่วงสุริยคติเกาหลี"
 
 #: plugins/Calendars/src/Calendars.cpp:400
 #: plugins/Calendars/src/ui_calendarsDialog.h:940
@@ -28268,7 +28304,7 @@ msgstr "เวียดนาม"
 #: plugins/Calendars/src/Calendars.cpp:401
 msgctxt "calendar"
 msgid "Vietnamese Solar Terms"
-msgstr ""
+msgstr "ช่วงสุริยคติเวียดนาม"
 
 #: plugins/Calendars/src/Calendars.cpp:403
 #: plugins/Calendars/src/ui_calendarsDialog.h:918
@@ -31448,70 +31484,70 @@ msgstr ""
 #: plugins/Calendars/src/VietnameseCalendar.cpp:94
 msgctxt "Chinese calendar, celestial stem element"
 msgid "Tree, male"
-msgstr ""
+msgstr "ต้นไม้, ชาย"
 
 #: plugins/Calendars/src/ChineseCalendar.cpp:81
 #: plugins/Calendars/src/KoreanCalendar.cpp:82
 #: plugins/Calendars/src/VietnameseCalendar.cpp:95
 msgctxt "Chinese calendar, celestial stem element"
 msgid "Tree, female"
-msgstr ""
+msgstr "ต้นไม้, หญิง"
 
 #: plugins/Calendars/src/ChineseCalendar.cpp:82
 #: plugins/Calendars/src/KoreanCalendar.cpp:83
 #: plugins/Calendars/src/VietnameseCalendar.cpp:96
 msgctxt "Chinese calendar, celestial stem element"
 msgid "Fire, male"
-msgstr ""
+msgstr "ไฟ, ชาย"
 
 #: plugins/Calendars/src/ChineseCalendar.cpp:83
 #: plugins/Calendars/src/KoreanCalendar.cpp:84
 #: plugins/Calendars/src/VietnameseCalendar.cpp:97
 msgctxt "Chinese calendar, celestial stem element"
 msgid "Fire, female"
-msgstr ""
+msgstr "ไฟ, หญิง"
 
 #: plugins/Calendars/src/ChineseCalendar.cpp:84
 #: plugins/Calendars/src/KoreanCalendar.cpp:85
 #: plugins/Calendars/src/VietnameseCalendar.cpp:98
 msgctxt "Chinese calendar, celestial stem element"
 msgid "Earth, male"
-msgstr ""
+msgstr "ดิน, ชาย"
 
 #: plugins/Calendars/src/ChineseCalendar.cpp:85
 #: plugins/Calendars/src/KoreanCalendar.cpp:86
 #: plugins/Calendars/src/VietnameseCalendar.cpp:99
 msgctxt "Chinese calendar, celestial stem element"
 msgid "Earth, female"
-msgstr ""
+msgstr "ดิน, หญิง"
 
 #: plugins/Calendars/src/ChineseCalendar.cpp:86
 #: plugins/Calendars/src/KoreanCalendar.cpp:87
 #: plugins/Calendars/src/VietnameseCalendar.cpp:100
 msgctxt "Chinese calendar, celestial stem element"
 msgid "Metal, male"
-msgstr ""
+msgstr "โลหะ, ชาย"
 
 #: plugins/Calendars/src/ChineseCalendar.cpp:87
 #: plugins/Calendars/src/KoreanCalendar.cpp:88
 #: plugins/Calendars/src/VietnameseCalendar.cpp:101
 msgctxt "Chinese calendar, celestial stem element"
 msgid "Metal, female"
-msgstr ""
+msgstr "โลหะ, หญิง"
 
 #: plugins/Calendars/src/ChineseCalendar.cpp:88
 #: plugins/Calendars/src/KoreanCalendar.cpp:89
 #: plugins/Calendars/src/VietnameseCalendar.cpp:102
 msgctxt "Chinese calendar, celestial stem element"
 msgid "Water, male"
-msgstr ""
+msgstr "น้ำ, ชาย"
 
 #: plugins/Calendars/src/ChineseCalendar.cpp:89
 #: plugins/Calendars/src/KoreanCalendar.cpp:90
 #: plugins/Calendars/src/VietnameseCalendar.cpp:103
 msgctxt "Chinese calendar, celestial stem element"
 msgid "Water, female"
-msgstr ""
+msgstr "น้ำ, หญิง"
 
 #: plugins/Calendars/src/ChineseCalendar.cpp:91
 msgctxt "Chinese calendar, terrestrial branch name"
@@ -31578,80 +31614,80 @@ msgstr ""
 #: plugins/Calendars/src/VietnameseCalendar.cpp:119
 msgctxt "Chinese calendar, terrestrial branch animal totem"
 msgid "Rat"
-msgstr ""
+msgstr "ชวด"
 
 #: plugins/Calendars/src/ChineseCalendar.cpp:105
 #: plugins/Calendars/src/KoreanCalendar.cpp:107
 msgctxt "Chinese calendar, terrestrial branch animal totem"
 msgid "Ox"
-msgstr ""
+msgstr "ฉลู"
 
 #: plugins/Calendars/src/ChineseCalendar.cpp:106
 #: plugins/Calendars/src/KoreanCalendar.cpp:108
 #: plugins/Calendars/src/VietnameseCalendar.cpp:121
 msgctxt "Chinese calendar, terrestrial branch animal totem"
 msgid "Tiger"
-msgstr ""
+msgstr "ขาล"
 
 #: plugins/Calendars/src/ChineseCalendar.cpp:107
 #: plugins/Calendars/src/KoreanCalendar.cpp:109
 msgctxt "Chinese calendar, terrestrial branch animal totem"
 msgid "Hare"
-msgstr ""
+msgstr "เถาะ"
 
 #: plugins/Calendars/src/ChineseCalendar.cpp:108
 #: plugins/Calendars/src/KoreanCalendar.cpp:110
 #: plugins/Calendars/src/VietnameseCalendar.cpp:123
 msgctxt "Chinese calendar, terrestrial branch animal totem"
 msgid "Dragon"
-msgstr ""
+msgstr "มะโรง"
 
 #: plugins/Calendars/src/ChineseCalendar.cpp:109
 #: plugins/Calendars/src/KoreanCalendar.cpp:111
 #: plugins/Calendars/src/VietnameseCalendar.cpp:124
 msgctxt "Chinese calendar, terrestrial branch animal totem"
 msgid "Snake"
-msgstr ""
+msgstr "มะเส็ง"
 
 #: plugins/Calendars/src/ChineseCalendar.cpp:110
 #: plugins/Calendars/src/KoreanCalendar.cpp:112
 #: plugins/Calendars/src/VietnameseCalendar.cpp:125
 msgctxt "Chinese calendar, terrestrial branch animal totem"
 msgid "Horse"
-msgstr ""
+msgstr "มะเมีย"
 
 #: plugins/Calendars/src/ChineseCalendar.cpp:111
 #: plugins/Calendars/src/KoreanCalendar.cpp:113
 msgctxt "Chinese calendar, terrestrial branch animal totem"
 msgid "Sheep"
-msgstr ""
+msgstr "มะแม"
 
 #: plugins/Calendars/src/ChineseCalendar.cpp:112
 #: plugins/Calendars/src/KoreanCalendar.cpp:114
 #: plugins/Calendars/src/VietnameseCalendar.cpp:127
 msgctxt "Chinese calendar, terrestrial branch animal totem"
 msgid "Monkey"
-msgstr ""
+msgstr "วอก"
 
 #: plugins/Calendars/src/ChineseCalendar.cpp:113
 #: plugins/Calendars/src/KoreanCalendar.cpp:115
 msgctxt "Chinese calendar, terrestrial branch animal totem"
 msgid "Fowl"
-msgstr ""
+msgstr "ระกา"
 
 #: plugins/Calendars/src/ChineseCalendar.cpp:114
 #: plugins/Calendars/src/KoreanCalendar.cpp:116
 #: plugins/Calendars/src/VietnameseCalendar.cpp:129
 msgctxt "Chinese calendar, terrestrial branch animal totem"
 msgid "Dog"
-msgstr ""
+msgstr "จอ"
 
 #: plugins/Calendars/src/ChineseCalendar.cpp:115
 #: plugins/Calendars/src/KoreanCalendar.cpp:117
 #: plugins/Calendars/src/VietnameseCalendar.cpp:130
 msgctxt "Chinese calendar, terrestrial branch animal totem"
 msgid "Pig"
-msgstr ""
+msgstr "กุน"
 
 #: plugins/Calendars/src/ChineseCalendar.cpp:146
 #: plugins/Calendars/src/JapaneseCalendar.cpp:94
@@ -31659,7 +31695,7 @@ msgstr ""
 #: plugins/Calendars/src/VietnameseCalendar.cpp:162
 msgctxt "calendar term like leap year or leap day"
 msgid "leap"
-msgstr ""
+msgstr "อธิก"
 
 #. TRANSLATORS: Chinese Calendar output string
 #: plugins/Calendars/src/ChineseCalendar.cpp:159
@@ -32384,12 +32420,12 @@ msgstr "วัน %1 (%2) - เดือน %3 (%4)<sub>%5</sub> (%6) <br/>ป�
 #: plugins/Calendars/src/VietnameseCalendar.cpp:199
 msgctxt "Vietnamese calendar: Major Solar Term"
 msgid "Major"
-msgstr ""
+msgstr "หลัก"
 
 #: plugins/Calendars/src/VietnameseCalendar.cpp:199
 msgctxt "Vietnamese calendar: Minor Solar Term"
 msgid "Minor"
-msgstr ""
+msgstr "รอง"
 
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:184
 msgid "Calendars Plug-in"
@@ -32475,11 +32511,11 @@ msgstr "ปฏิทินเปอร์เซีย (เชิงดารา�
 
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:211
 msgid "Bahá’í calendar (arithmetic version)"
-msgstr ""
+msgstr "ปฏิทินบาไฮ (แบบเลขคณิต)"
 
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:212
 msgid "Bahá’í calendar (astronomical version)"
-msgstr ""
+msgstr "ปฏิทินบาไฮ (แบบดาราศาสตร์)"
 
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:214
 msgid "Old Hindu Solar and Lunar calendars"
@@ -32580,7 +32616,7 @@ msgstr "สัปดาห์ ISO"
 #: plugins/Calendars/src/ui_calendarsDialog.h:922
 msgctxt "calendar"
 msgid "Bahá’í (arithmetic)"
-msgstr ""
+msgstr "บาไฮ (เลขคณิต)"
 
 #: plugins/Calendars/src/ui_calendarsDialog.h:926
 msgctxt "calendar"
@@ -32600,7 +32636,7 @@ msgstr "จันทรคติแบบฮินดูใหม่"
 #: plugins/Calendars/src/ui_calendarsDialog.h:935
 msgctxt "calendar"
 msgid "Bahá’í (astronomical)"
-msgstr ""
+msgstr "บาไฮ (ดาราศาสตร์)"
 
 #: plugins/Calendars/src/ui_calendarsDialog.h:942
 msgid "Override automatic text color"
@@ -32913,6 +32949,8 @@ msgid ""
 "Estimates lens distortion by letting the user match stars to a photo and "
 "computing a fit."
 msgstr ""
+"ประมาณการบิดเบี้ยวของภาพเนื่องจากเลนส์โดยผู้ใช้ปรับดาวต่าง ๆ "
+"ให้เข้ากับภาพถ่าย แล้วทำการคำนวณ"
 
 #: plugins/LensDistortionEstimator/src/LensDistortionEstimator.cpp:401
 #: plugins/LensDistortionEstimator/src/LensDistortionEstimator.cpp:404
@@ -32923,32 +32961,32 @@ msgstr "เครื่องมือประมาณการบิดเบ
 
 #: plugins/LensDistortionEstimator/src/LensDistortionEstimator.cpp:402
 msgid "Toggle pick-a-point mode"
-msgstr ""
+msgstr "สลับการใช้งานโหมดเลือกจุด"
 
 #: plugins/LensDistortionEstimator/src/LensDistortionEstimator.cpp:405
 msgid "Show lens distortion estimator dialog"
-msgstr ""
+msgstr "แสดงกล่องโต้ตอบของเครื่องมือประมาณการบิดเบี้ยวที่เกิดจากเลนส์"
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:320
 msgid ""
 "Sets simulation date/time to image EXIF date/time, and freezes simulation "
 "time"
-msgstr ""
+msgstr "ตั้งค่าวันที่/เวลาของโปรแกรมให้ตรงกับที่แสดงใน EXIF แล้วหยุดเวลาไว้"
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:352
 #, qt-format
 msgid "Stellarium time differs from image EXIF time %1 by %2 seconds"
-msgstr ""
+msgstr "เวลาใน Stellarium ต่างจาก EXIF ในภาพ %1 เป็นเวลา %2 วินาที"
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:373
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:429
 msgid "Save points to file"
-msgstr ""
+msgstr "บันทึกจุดลงในแฟ้มข้อมูล"
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:374
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:430
 msgid "Comma-separated values (*.csv)"
-msgstr ""
+msgstr "ค่าที่คั่นด้วยจุลภาค (*.csv)"
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:379
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:413
@@ -32961,6 +32999,8 @@ msgid ""
 "Failed to open output file for writing:\n"
 "%1"
 msgstr ""
+"การเปิดแฟ้มเพื่อเขียนล้มเหลว:\n"
+"%1"
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:414
 #, qt-format
@@ -32968,10 +33008,12 @@ msgid ""
 "Failed to write the output file:\n"
 "%1"
 msgstr ""
+"การเขียนลงแฟ้มล้มเหลว:\n"
+"%1"
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:422
 msgid "Confirm deletion of old points"
-msgstr ""
+msgstr "ยืนยันการลบจุดเก่า"
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:423
 msgid ""
@@ -32989,6 +33031,8 @@ msgid ""
 "Failed to open input file for reading:\n"
 "%1"
 msgstr ""
+"การเปิดแฟ้มเพื่ออ่านล้มเหลว:\n"
+"%1"
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:452
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:462
@@ -33003,21 +33047,22 @@ msgid ""
 "Can't import file: expected to find at least %1 entries at line %2, but got "
 "%3."
 msgstr ""
+"ไม่สามารถนำเข้าแฟ้มได้: ต้องมีอย่างน้อย %1 รายการบนบรรทัดที่ %2, แต่พบ %3"
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:463
 #, qt-format
 msgid "Can't import file: object \"%1\" not found at line %2."
-msgstr ""
+msgstr "ไม่สามารถนำเข้าได้: ไม่พบวัตถุ \"%1\" ที่บรรทัด %2"
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:472
 #, qt-format
 msgid "Can't import file: failed to parse image position X at line %1."
-msgstr ""
+msgstr "ไม่สามารถนำเข้าได้: การวางภาพที่ตำแหน่ง X บนบรรทัด %1 ล้มเหลว"
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:479
 #, qt-format
 msgid "Can't import file: failed to parse image position Y at line %1."
-msgstr ""
+msgstr "ไม่สามารถนำเข้าได้: การวางภาพที่ตำแหน่ง Y บนบรรทัด %1 ล้มเหลว"
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:675
 msgid "Distance from center, °"
@@ -33025,19 +33070,19 @@ msgstr "ระยะห่างจากศูนย์กลาง, °"
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:681
 msgid "Error estimate, °"
-msgstr ""
+msgstr "การประมาณความผิดพลาด, °"
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:968
 msgid "Confirm resetting image placement"
-msgstr ""
+msgstr "ยืนยันการวางภาพใหม่"
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:969
 msgid "This will move the image to the center of the screen. Proceed?"
-msgstr ""
+msgstr "ภาพจะย้ายไปที่กลางจอ ดำเนินการต่อ?"
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:978
 msgid "Confirm resetting distortion"
-msgstr ""
+msgstr "ยืนยันการตั้งค่าการบิดเบี้ยวใหม่"
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:979
 msgid "This will zero out all distortion and shift coefficients. Proceed?"
@@ -33048,12 +33093,16 @@ msgid ""
 "Can't get EXIF date from the image, please make sure current date and time "
 "setting is correct."
 msgstr ""
+"ไม่สามารถอ่านวันที่ใน EXIF จากภาพได้ "
+"โปรดแน่ใจว่าการตั้งค่าวันที่และเวลาปัจจุบันถูกต้อง"
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1342
 msgid ""
 "Failed to parse EXIF date/time, please make sure current date and time "
 "setting is correct."
 msgstr ""
+"ประสบความล้มเหลวในการแจงส่วนวันที่ใน EXIF "
+"โปรดแน่ใจว่าการตั้งค่าวันที่และเวลาปัจจุบันถูกต้อง"
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1382
 msgid "Open image file"
@@ -33064,6 +33113,8 @@ msgid ""
 "Image files (*.png *.bmp *.jpg *.jpeg *.tif *.tiff *.webm *.pbm *.pgm *.ppm "
 "*.xbm *.xpm)"
 msgstr ""
+"แฟ้มภาพ (*.png *.bmp *.jpg *.jpeg *.tif *.tiff *.webm *.pbm *.pgm *.ppm "
+"*.xbm *.xpm)"
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1657
 msgid "Make, model and mount fields must be filled"
@@ -33071,11 +33122,11 @@ msgstr ""
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1688
 msgid "Internal error: bad distortion model chosen"
-msgstr ""
+msgstr "เกิดข้อผิดพลาดภายใน: แบบจำลองการบิดเบี้ยวที่เลือกไม่สามารถใช้ได้"
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1746
 msgid "Lens Distortion Estimator Plug-in"
-msgstr ""
+msgstr "โปรแกรมเสริมเครื่องมือประมาณการบิดเบี้ยวที่เกิดจากเลนส์"
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1755
 msgid ""
@@ -33134,7 +33185,7 @@ msgstr "เตรียมภาพถ่าย"
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1782
 msgid "To make a useful shot, you should follow some guidelines:\n"
-msgstr ""
+msgstr "เพื่อให้ได้ภาพที่ใช้งานได้ คุณควรทำตามคำแนะนำ:\n"
 
 #: plugins/LensDistortionEstimator/src/gui/LensDistortionEstimatorDialog.cpp:1784
 msgid ""
@@ -33219,6 +33270,7 @@ msgstr ""
 msgid ""
 "Keyboard hotkeys can be configured in the Keyboard shortcuts editor (F7)."
 msgstr ""
+"ปุ่มลัดสามารถแก้ไขเปลี่ยนปลงได้ด้วยเครื่องมือแก้ไขปุ่มลัดแป้นพิมพ์ (F7)"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:719
 msgid "Image placement"
@@ -33239,7 +33291,7 @@ msgstr ""
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:724
 msgid "Image rotation angle:"
-msgstr ""
+msgstr "มุมการหมุนภาพ:"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:725
 msgid "Center of projection elevation:"
@@ -33247,11 +33299,11 @@ msgstr ""
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:726
 msgid "3rd order polynomial"
-msgstr ""
+msgstr "พหุนามดีกรี 3"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:727
 msgid "5th order polynomial"
-msgstr ""
+msgstr "พหุนามดีกรี 5"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:728
 msgid "PTLens"
@@ -33259,7 +33311,7 @@ msgstr ""
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:730
 msgid "Image center shift:"
-msgstr ""
+msgstr "การเลื่อนของศูนย์กลางภาพ:"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:731
 msgid "Center of projection azimuth:"
@@ -33283,20 +33335,20 @@ msgstr ""
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:737
 msgid "Image to load:"
-msgstr ""
+msgstr "ภาพที่จะโหลด:"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:739
 msgid "Browse for an image..."
-msgstr ""
+msgstr "เลือกภาพจากรายชื่อ..."
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:743
-msgctxt "A verb in imperative, used on a button that fixes a problem."
+msgctxt "A verb used on a button that fixes a problem."
 msgid "Fix"
-msgstr ""
+msgstr "ตรึง"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:744
 msgid "Subtract background RGB:"
-msgstr ""
+msgstr "ลบ RGB พื้นหลัง:"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:745
 msgid "Image brightness:"
@@ -33304,19 +33356,19 @@ msgstr "ความสว่างของภาพ:"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:746
 msgid "Image Loading"
-msgstr ""
+msgstr "กำลังโหลดภาพ"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:747
 msgid "Reposition image by first two points"
-msgstr ""
+msgstr "วางตำแหน่งภาพใหม่โดยใช้ 2 ตำแหน่งแรก"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:748
 msgid "Pick an image point for selected object..."
-msgstr ""
+msgstr "กำหนดจุดบนภาพสำหรับวัตถุที่เลือก..."
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:749
 msgid "Optimize"
-msgstr ""
+msgstr "ปรับแต่ง"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:751
 msgid "y, px"
@@ -33336,7 +33388,7 @@ msgstr ""
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:758
 msgid " mm"
-msgstr ""
+msgstr "มม."
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:759
 msgid "Make:"
@@ -33357,7 +33409,7 @@ msgstr "แบบจำลอง:"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:767
 msgid "Model for lensfun"
-msgstr ""
+msgstr "แบบจำลองสำหรับ lensfun"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:768
 msgid "Show image"
@@ -33366,21 +33418,21 @@ msgstr "แสดงภาพ"
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:770
 msgctxt "As in \"normal\" points, the opposite being \"selected\""
 msgid "normal"
-msgstr ""
+msgstr "ปรกติ"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:771
 msgid "Mark image axes"
-msgstr ""
+msgstr "ทำเครื่องหมายแกนของภาพ"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:772
 msgctxt "As in \"selected points\""
 msgid "selected"
-msgstr ""
+msgstr "ที่เลือกไว้"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:773
 msgid "Mark picked points"
-msgstr ""
+msgstr "ทำเครื่องหมายจุดที่เลือก"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:776
 msgid "Mark center of projection"
-msgstr ""
+msgstr "ทำเครื่องหมายศูนย์กลางของการฉายภาพ"
