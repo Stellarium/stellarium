@@ -493,11 +493,11 @@ void HelpDialog::updateAboutText(void) const
 	typedef QPair<QString, int> donator;
 	QVector<donator> financialContributors = {
 		// Individuals
-		{ "Laurence Holt", 1000 }, { "John Bellora", 570 }, { "Jeff Moe", 512 }, { "Marla Pinaire", 430 },
+		{ "Laurence Holt", 1000 }, { "John Bellora", 570 }, { "Jeff Moe", 512 }, { "Marla Pinaire", 440 },
 		{ "Vernon Hermsen", 324 }, { "Walter Dörfler", 300 }, { "Satish Mallesh", 260 }, { "Vlad Magdalin", 250  },
-		{ "Philippe Renoux", 250 }, { "Fito Martin", 250 }, { "SuEllen Shepard", 250 },
+		{ "Philippe Renoux", 250 }, { "Fito Martin", 250 }, { "SuEllen Shepard", 250 }, { "Daniel", 700 },
 		// Organizations
-		{ "Astronomie-Werkstatt \"Sterne ohne Grenzen\"", 690 }, { "BairesDev", 4500 }, { "SSSTwitter", 500 }, { "Triplebyte", 280 }
+		{ "Astronomie-Werkstatt \"Sterne ohne Grenzen\"", 700 }, { "BairesDev", 5000 }, { "SSSTwitter", 500 }, { "Triplebyte", 280 }
 	};
 	std::sort(financialContributors.begin(), financialContributors.end(), [](donator i, donator j){ return i.second > j.second; });
 	QStringList bestFinancialContributors;
