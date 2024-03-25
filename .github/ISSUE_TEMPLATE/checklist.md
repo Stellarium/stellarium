@@ -94,6 +94,6 @@ This is checklist for maintainer of Stellarium (a release master)
 - [ ] Update the catalog of exoplanets on the website
 - [ ] Update Stellarium User Guide on the website
 - [ ] Set `STELLARIUM_RELEASE_BUILD 0` in CMakeLists.txt file
-- [ ] Upload Stellarium User Guide on [Zenodo](https://zenodo.org/doi/10.5281/zenodo.8377210) and update DOI on the website
+- [ ] Check Stellarium data on [Zenodo](https://zenodo.org/doi/10.5281/zenodo.8377210) and update DOI on the website
 - [ ] Upload Stellarium User Guide on [ResearchGate](https://www.researchgate.net)
 - [ ] Close this issue
