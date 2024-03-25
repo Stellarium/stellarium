@@ -22,7 +22,7 @@ SET_PROPERTY(GLOBAL PROPERTY USE_FOLDERS ON)
 ########### Project name ###########
 PROJECT(Stellarium C CXX)
 
-SET(STELLARIUM_RELEASE_BUILD 1 CACHE BOOL "Set 1 to build as an official release (0 for development snapshots).")
+SET(STELLARIUM_RELEASE_BUILD 0 CACHE BOOL "Set 1 to build as an official release (0 for development snapshots).")
 
 ########### Detect Qt version
 SET(ENABLE_QT6 1 CACHE BOOL "Whether to try building with Qt6. If Qt6 is not found, Qt5 will be used.")
@@ -967,7 +967,7 @@ IF(GENERATE_PACKAGE_TARGET)
      SET(CPACK_PACKAGE_CHECKSUM "SHA256")
      SET(CPACK_STRIP_FILES "bin/stellarium")
      SET(CPACK_PACKAGE_EXECUTABLES "stellarium" "Stellarium")
-     SET(CPACK_SOURCE_IGNORE_FILES "/.git/" "/.github/" "builds/" "installers/" "po/stellarium-landscapes-descriptions" "po/stellarium-scenery3d-descriptions" "po/stellarium-skycultures-descriptions" "po/stellarium-desktop" "po/stellarium-metainfo" "util/spout2" "util/DSSToStellarium/toastForShape$" "Stellarium.tag$" "Stellarium.kdevelop.pcs$" "/CMakeLists.txt.user$" "\\\\.gitignore$" "\\\\.clang-format$" "\\\\.yml$" "~$" "\\\\.swp$" "\\\\.#" "/#")
+     SET(CPACK_SOURCE_IGNORE_FILES "/.git/" "/.github/" "builds/" "installers/" "po/stellarium-landscapes-descriptions" "po/stellarium-scenery3d-descriptions" "po/stellarium-skycultures-descriptions" "po/stellarium-desktop" "po/stellarium-metainfo" "util/spout2" "util/DSSToStellarium/toastForShape$" "Stellarium.tag$" "Stellarium.kdevelop.pcs$" "/CMakeLists.txt.user$" "/CITATION*" "\\\\.gitignore$" "\\\\.clang-format$" "\\\\.yml$" "~$" "\\\\.swp$" "\\\\.#" "/#")
      SET(CPACK_RPM_PACKAGE_LICENSE "GNU GPLv2 or later")
      SET(CPACK_RPM_PACKAGE_GROUP "Amusements/Graphics")
      SET(CPACK_RPM_PACKAGE_URL "${STELLARIUM_URL}")

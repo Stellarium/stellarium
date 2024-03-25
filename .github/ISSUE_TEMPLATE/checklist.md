@@ -70,7 +70,6 @@ This is checklist for maintainer of Stellarium (a release master)
 - [ ] Update translations for landscapes descriptions (`util\landscapes\translate.sh`)
 - [ ] Update translations for skycultures descriptions (`util\skycultures\translate.sh`)
 - [ ] Update translations for scenery3d descriptions (`util\scenery3d\translate.sh`)
-- [ ] Update `CITATION.cff` and `CITATION` files
 
 ## Step 4: release
 
@@ -82,6 +81,7 @@ This is checklist for maintainer of Stellarium (a release master)
 - [ ] Upload Stellarium User Guide on the GitHub
 - [ ] Close milestone on the GitHub
 - [ ] Remove label `state: published` for all items from closed milestone on the GitHub
+- [ ] Update `CITATION.cff` and `CITATION` files
 
 ## Step 5: immediately after release
 
@@ -94,6 +94,6 @@ This is checklist for maintainer of Stellarium (a release master)
 - [ ] Update the catalog of exoplanets on the website
 - [ ] Update Stellarium User Guide on the website
 - [ ] Set `STELLARIUM_RELEASE_BUILD 0` in CMakeLists.txt file
-- [ ] Upload Stellarium User Guide on [Zenodo](https://zenodo.org/doi/10.5281/zenodo.8377210) and update DOI on the website
+- [ ] Check Stellarium data on [Zenodo](https://zenodo.org/doi/10.5281/zenodo.8377210) and update DOI on the website
 - [ ] Upload Stellarium User Guide on [ResearchGate](https://www.researchgate.net)
 - [ ] Close this issue
