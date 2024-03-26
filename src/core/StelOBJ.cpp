@@ -25,11 +25,17 @@
 
 #if USE_FAST_FLOAT
 # include <fast_float/fast_float.h>
+namespace sys
+{
 using fast_float::from_chars;
+}
 using fast_float::from_chars_result;
 #else
 # include <charconv>
+namespace sys
+{
 using std::from_chars;
+}
 using std::from_chars_result;
 #endif
 
@@ -45,6 +51,34 @@ Q_LOGGING_CATEGORY(stelOBJ,"stel.OBJ")
 
 namespace
 {
+
+// Forward int and double versions
+auto from_chars(const char* first, const char* last, double& value) { return sys::from_chars(first, last, value); }
+auto from_chars(const char* first, const char* last, int& value) { return sys::from_chars(first, last, value); }
+// Override the float version
+from_chars_result from_chars(const char* first, const char* last, float& value)
+{
+#if USE_FAST_FLOAT
+	auto res = fast_float::from_chars(first, last, value);
+#else
+	auto res = std::from_chars(first, last, value);
+#endif
+	if(res.ec == std::errc{}) return res;
+	// If we have an error, this may be underflow (see a paper about this issue:
+	// https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2023/p2827r0.html ),
+	// in which case we want to simply get zero. So, try reading it as a
+	// double, and if successful, convert it to the output float.
+	double d;
+#if USE_FAST_FLOAT
+	res = fast_float::from_chars(first, last, d);
+#else
+	res = std::from_chars(first, last, d);
+#endif
+	if(res.ec != std::errc{}) return res;
+	value = d;
+	return res;
+}
+
 // Split line by spaces without allocating memory, including allocation for storing
 // the result (we assume that the output vector has a reasonable amount of space reserved)
 void splitBySpacesWithoutEmptyParts(const QByteArray& line, std::vector<std::string_view>& splits)
