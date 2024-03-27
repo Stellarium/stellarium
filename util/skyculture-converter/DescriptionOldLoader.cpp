@@ -215,21 +215,22 @@ QString readReferencesFile(const QString& inDir)
 	return reference;
 }
 
+void cleanupWhitespace(QString& markdown)
+{
+	// Clean too long chains of newlines
+	markdown.replace(QRegularExpression("\n\n\n+"), "\n\n");
+
+	// Make lists a bit denser
+	const QRegularExpression listSpaceListPattern("(\n \\*[^\n]+)\n+(\n \\*)");
+	//  1. Remove space between odd and even entries
+	markdown.replace(listSpaceListPattern, "\\1\\2");
+	//  2. Remove space between even and odd entries (same replacement rule)
+	markdown.replace(listSpaceListPattern, "\\1\\2");
+
 }
 
-void DescriptionOldLoader::load(const QString& inDir, const QString& author, const QString& credit, const QString& license)
+void convertHTMLToMarkdown(QString& markdown)
 {
-	const auto path = inDir+"/description.en.utf8";
-	QFile file(path);
-	if(!file.open(QFile::ReadOnly))
-	{
-		qCritical().noquote() << "Failed to open file" << path << "\n";
-		return;
-	}
-
-	const auto html = file.readAll();
-	markdown = html;
-
 	// Replace <notr> and </notr> tags with placeholders that don't
 	// look like tags, so as not to confuse the replacements below.
 	const QString notrOpenPlaceholder = "[22c35d6a-5ec3-4405-aeff-e79998dc95f7]";
@@ -258,15 +259,28 @@ void DescriptionOldLoader::load(const QString& inDir, const QString& author, con
 	// Replace simple HTML paragraphs with the Markdown ones
 	markdown.replace(QRegularExpression("<p>([^<]+)</p>"), "\n\\1\n");
 
-	// Add missing "Introduction" heading if we have a headingless intro text
-	markdown.replace(QRegularExpression("^(\\s*# [^\n]+\n+)(\\s*[^#])"), "\\1## Introduction\n\n\\2");
-
 	htmlTablesToMarkdown(markdown);
+
+	htmlListsToMarkdown(markdown);
+
+	cleanupWhitespace(markdown);
+
+	// Restore <notr> and </notr> tags
+	markdown.replace(notrOpenPlaceholder,  "<notr>");
+	markdown.replace(notrClosePlaceholder, "</notr>");
+}
+
+void addMissingTextToMarkdown(QString& markdown, const QString& inDir, const QString& author, const QString& credit, const QString& license)
+{
+	// Add missing "Introduction" heading if we have a headingless intro text
+	if(!markdown.contains(QRegularExpression("^\\s*# [^\n]+\n+\\s*##\\s*Introduction\n")))
+		markdown.replace(QRegularExpression("^(\\s*# [^\n]+\n+)(\\s*[^#])"), "\\1## Introduction\n\n\\2");
 
 	// Add some sections the info for which is contained in info.ini in the old format
 	if(markdown.contains(QRegularExpression("\n##\\s+(?:References|External\\s+links)\\s*\n")))
 		markdown.replace(QRegularExpression("(\n##[ \t]+)External[ \t]+links([ \t]*\n)"), "\\1References\\2");
-	const auto referencesFromFile = readReferencesFile(inDir);
+	auto referencesFromFile = readReferencesFile(inDir);
+	convertHTMLToMarkdown(referencesFromFile);
 
 	if(markdown.contains(QRegularExpression("\n##\\s+Authors?\\s*\n")))
 	{
@@ -274,7 +288,7 @@ void DescriptionOldLoader::load(const QString& inDir, const QString& author, con
 
 		// But do add references before this section
 		if(!referencesFromFile.isEmpty())
-			markdown.replace(QRegularExpression("(\n##\\s+Authors?\\s*\n)"), referencesFromFile + "\n\\1");
+			markdown.replace(QRegularExpression("(\n##\\s+Authors?\\s*\n)"), "\n"+referencesFromFile + "\n\\1");
 	}
 	else
 	{
@@ -293,21 +307,26 @@ void DescriptionOldLoader::load(const QString& inDir, const QString& author, con
 	else
 		markdown += "\n## License\n\n" + license + "\n";
 
-	htmlListsToMarkdown(markdown);
+	cleanupWhitespace(markdown);
+}
 
-	// Clean too long chains of newlines
-	markdown.replace(QRegularExpression("\n\n\n+"), "\n\n");
+}
 
-	// Make lists a bit denser
-	const QRegularExpression listSpaceListPattern("(\n \\*[^\n]+)\n+(\n \\*)");
-	//  1. Remove space between odd and even entries
-	markdown.replace(listSpaceListPattern, "\\1\\2");
-	//  2. Remove space between even and odd entries (same replacement rule)
-	markdown.replace(listSpaceListPattern, "\\1\\2");
+void DescriptionOldLoader::load(const QString& inDir, const QString& author, const QString& credit, const QString& license)
+{
+	const auto path = inDir+"/description.en.utf8";
+	QFile file(path);
+	if(!file.open(QFile::ReadOnly))
+	{
+		qCritical().noquote() << "Failed to open file" << path << "\n";
+		return;
+	}
 
-	// Restore <notr> and </notr> tags
-	markdown.replace(notrOpenPlaceholder,  "<notr>");
-	markdown.replace(notrClosePlaceholder, "</notr>");
+	const auto html = file.readAll();
+	markdown = html;
+
+	convertHTMLToMarkdown(markdown);
+	addMissingTextToMarkdown(markdown, inDir, author, credit, license);
 }
 
 bool DescriptionOldLoader::dump(const QString& outDir) const
