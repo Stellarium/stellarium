@@ -258,7 +258,7 @@ void cleanupWhitespace(QString& markdown)
 	markdown.replace(QRegularExpression("<em>\\s*([^<]+)\\s*</em>"), "*\\1*");
 
 	// Replace simple HTML images with the Markdown ones
-	markdown.replace(QRegularExpression(R"reg(<img(?:\s+alt="([^"]+)")?\s+src="([^"]+)"(?:\s+alt="([^"]+)")?/>)reg"),
+	markdown.replace(QRegularExpression(R"reg(<img(?:\s+alt="([^"]+)")?\s+src="([^"]+)"(?:\s+alt="([^"]+)")?/?>)reg"),
 	                 R"rep(![\1\3](\2))rep");
 
 	// Replace simple HTML hyperlinks with the Markdown ones
