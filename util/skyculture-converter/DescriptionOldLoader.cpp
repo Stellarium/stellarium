@@ -320,23 +320,95 @@ void addMissingTextToMarkdown(QString& markdown, const QString& inDir, const QSt
 	cleanupWhitespace(markdown);
 }
 
+// Convert a string into a C-like string literal (without surrounding quotes)
+QString escapeForPO(const QString& s)
+{
+	QByteArray out;
+	for(const unsigned char c : s.toUtf8())
+	{
+		switch(c)
+		{
+		case '\a': out += "\\a"; break;
+		case '\b': out += "\\b"; break;
+		case '\f': out += "\\f"; break;
+		case '\n': out += "\\n\"\n\""; break;
+		case '\r': out += "\\r"; break;
+		case '\t': out += "\\t"; break;
+		case '\v': out += "\\v"; break;
+		case '\\': out += "\\\\"; break;
+		case '\'': out += "\\'"; break;
+		case '\"': out += "\\\""; break;
+		default:
+			   if(std::isprint(c))
+				   out += c;
+			   else if(c > 0x7f)
+				   out += c; // UTF-8 multibyte code unit
+			   else
+				   out += QString("\\%1").arg(static_cast<int>(c), 3, 8, QChar('0'));
+			   break;
+		}
+	}
+	if(out.size() > 88)
+		return "\"\n\"" + out;
+	return out;
+}
+
 }
 
 void DescriptionOldLoader::load(const QString& inDir, const QString& author, const QString& credit, const QString& license)
 {
-	const auto path = inDir+"/description.en.utf8";
-	QFile file(path);
-	if(!file.open(QFile::ReadOnly))
+	const auto englishDescrPath = inDir+"/description.en.utf8";
+	QFile englishDescrFile(englishDescrPath);
+	if(!englishDescrFile.open(QFile::ReadOnly))
 	{
-		qCritical().noquote() << "Failed to open file" << path << "\n";
+		qCritical().noquote() << "Failed to open file" << englishDescrPath << "\n";
 		return;
 	}
+	markdown = convertHTMLToMarkdown(englishDescrFile.readAll());
 
-	markdown = convertHTMLToMarkdown(file.readAll());
+	const QRegularExpression sectionSeparator("\n\\s*## [^\n]+\n");
+	const auto englishSections = markdown.split(sectionSeparator);
+
+	const QRegularExpression localePattern("description\\.([^.]+)\\.utf8");
+	for(const auto& fileName : QDir(inDir).entryList({"description.*.utf8"}))
+	{
+		if(fileName == "description.en.utf8") continue;
+
+		const auto localeMatch = localePattern.match(fileName);
+		if(!localeMatch.isValid())
+		{
+			qCritical() << "Failed to extract locale from file name" << fileName;
+			continue;
+		}
+		const auto locale = localeMatch.captured(1);
+		const auto path = inDir + "/" + fileName;
+		QFile file(path);
+		if(!file.open(QFile::ReadOnly))
+		{
+			qCritical().noquote() << "Failed to open file" << path << "\n";
+			continue;
+		}
+		const auto translationMD = convertHTMLToMarkdown(file.readAll());
+		const auto sections = translationMD.split(sectionSeparator);
+		if(sections.size() != englishSections.size())
+		{
+			qCritical().nospace().noquote() << "Number of sections (" << sections.size()
+			                                << ") in description for locale " << locale
+			                                << " doesn't match that of the English description ("
+			                                << englishSections.size() << "). Skipping this translation.";
+			continue;
+		}
+
+		TranslationDict dict;
+		for(int n = 0; n < englishSections.size(); ++n)
+			dict[englishSections[n].trimmed()] = sections[n].trimmed();
+		translations[locale] = std::move(dict);
+	}
+
 	addMissingTextToMarkdown(markdown, inDir, author, credit, license);
 }
 
-bool DescriptionOldLoader::dump(const QString& outDir) const
+bool DescriptionOldLoader::dumpMarkdown(const QString& outDir) const
 {
 	const auto path = outDir+"/description.md";
 	QFile file(path);
@@ -354,5 +426,52 @@ bool DescriptionOldLoader::dump(const QString& outDir) const
 		return false;
 	}
 
+	return true;
+}
+
+bool DescriptionOldLoader::dump(const QString& outDir) const
+{
+	if(!dumpMarkdown(outDir)) return false;
+
+	const auto poDir = outDir + "/po";
+	if(!QDir().mkpath(poDir))
+	{
+		qCritical() << "Failed to create po directory\n";
+		return false;
+	}
+
+	for(auto dictIt = translations.begin(); dictIt != translations.end(); ++dictIt)
+	{
+		const auto& locale = dictIt.key();
+		const auto path = poDir + "/" + locale + ".po";
+		QFile file(path);
+		if(!file.open(QFile::WriteOnly))
+		{
+			qCritical().noquote() << "Failed to open file" << path << "\n";
+			return false;
+		}
+
+		QTextStream s(&file);
+		s << 1+R"(
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: 1.0\n"
+"Last-Translator: ???\n"
+"Language-Team: ???\n"
+"Language: )" + locale + R"(\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+)";
+		const auto& dict = dictIt.value();
+		for(auto entryIt = dict.begin(); entryIt != dict.end(); ++entryIt)
+		{
+			s << "\nmsgid \"" << escapeForPO(entryIt.key())
+			  << "\"\nmsgstr \"" << escapeForPO(entryIt.value())
+			  << "\"\n\n";
+		}
+
+	}
 	return true;
 }
