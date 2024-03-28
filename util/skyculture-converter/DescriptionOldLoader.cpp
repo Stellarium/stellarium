@@ -229,8 +229,9 @@ void cleanupWhitespace(QString& markdown)
 
 }
 
-void convertHTMLToMarkdown(QString& markdown)
+[[nodiscard]] QString convertHTMLToMarkdown(const QString& html)
 {
+	QString markdown = html;
 	// Replace <notr> and </notr> tags with placeholders that don't
 	// look like tags, so as not to confuse the replacements below.
 	const QString notrOpenPlaceholder = "[22c35d6a-5ec3-4405-aeff-e79998dc95f7]";
@@ -268,6 +269,8 @@ void convertHTMLToMarkdown(QString& markdown)
 	// Restore <notr> and </notr> tags
 	markdown.replace(notrOpenPlaceholder,  "<notr>");
 	markdown.replace(notrClosePlaceholder, "</notr>");
+
+	return markdown;
 }
 
 void addMissingTextToMarkdown(QString& markdown, const QString& inDir, const QString& author, const QString& credit, const QString& license)
@@ -280,7 +283,7 @@ void addMissingTextToMarkdown(QString& markdown, const QString& inDir, const QSt
 	if(markdown.contains(QRegularExpression("\n##\\s+(?:References|External\\s+links)\\s*\n")))
 		markdown.replace(QRegularExpression("(\n##[ \t]+)External[ \t]+links([ \t]*\n)"), "\\1References\\2");
 	auto referencesFromFile = readReferencesFile(inDir);
-	convertHTMLToMarkdown(referencesFromFile);
+	referencesFromFile = convertHTMLToMarkdown(referencesFromFile);
 
 	if(markdown.contains(QRegularExpression("\n##\\s+Authors?\\s*\n")))
 	{
@@ -322,10 +325,7 @@ void DescriptionOldLoader::load(const QString& inDir, const QString& author, con
 		return;
 	}
 
-	const auto html = file.readAll();
-	markdown = html;
-
-	convertHTMLToMarkdown(markdown);
+	markdown = convertHTMLToMarkdown(file.readAll());
 	addMissingTextToMarkdown(markdown, inDir, author, credit, license);
 }
 
