@@ -1384,8 +1384,8 @@ void AstroCalcDialog::currentCelestialPositions()
 	}
 
 	adjustCelestialPositionsColumns();
-	// sort-by-name
-	ui->celestialPositionsTreeWidget->sortItems(CColumnName, Qt::AscendingOrder);
+	// sort-by-name	(by default)
+	ui->celestialPositionsTreeWidget->sortItems(ui->celestialPositionsTreeWidget->sortColumn(), Qt::AscendingOrder);
 }
 
 QPair<QString, QString> AstroCalcDialog::getStringCoordinates(const Vec3d &coord, const bool horizontal, const bool southAzimuth, const bool decimalDegrees)
