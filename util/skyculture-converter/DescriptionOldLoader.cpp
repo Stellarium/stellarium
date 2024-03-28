@@ -220,6 +220,9 @@ void cleanupWhitespace(QString& markdown)
 	// Clean too long chains of newlines
 	markdown.replace(QRegularExpression("\n\n\n+"), "\n\n");
 
+	// Remove trailing spaces
+	markdown.replace(QRegularExpression("[ \t]+\n"), "\n");
+
 	// Make lists a bit denser
 	const QRegularExpression listSpaceListPattern("(\n \\*[^\n]+)\n+(\n \\*)");
 	//  1. Remove space between odd and even entries
@@ -227,11 +230,15 @@ void cleanupWhitespace(QString& markdown)
 	//  2. Remove space between even and odd entries (same replacement rule)
 	markdown.replace(listSpaceListPattern, "\\1\\2");
 
+	markdown = markdown.trimmed();
 }
 
 [[nodiscard]] QString convertHTMLToMarkdown(const QString& html)
 {
 	QString markdown = html;
+
+	markdown.replace(QRegularExpression("[\n\t ]+"), " ");
+
 	// Replace <notr> and </notr> tags with placeholders that don't
 	// look like tags, so as not to confuse the replacements below.
 	const QString notrOpenPlaceholder = "[22c35d6a-5ec3-4405-aeff-e79998dc95f7]";
@@ -241,7 +248,7 @@ void cleanupWhitespace(QString& markdown)
 
 	// Replace simple HTML headings with corresponding Markdown ones
 	for(int n = 1; n <= 6; ++n)
-		markdown.replace(QRegularExpression(QString("<h%1>([^<]+)</h%1>").arg(n)), QString(n, QChar('#'))+" \\1");
+		markdown.replace(QRegularExpression(QString("<h%1>([^<]+)</h%1>").arg(n)), "\n" + QString(n, QChar('#'))+" \\1\n");
 
 	// Replace HTML line breaks with the Markdown ones
 	markdown.replace(QRegularExpression("<br\\s*/?>"), "\n\n");
