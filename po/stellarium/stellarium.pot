@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2024-03-15 12:19+0700\n"
+"POT-Creation-Date: 2024-03-30 15:07+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -47,7 +47,7 @@ msgstr ""
 msgid "custom object"
 msgstr ""
 
-#: src/core/modules/CustomObjectMgr.cpp:68
+#: src/core/modules/CustomObjectMgr.cpp:71
 msgid "Marker"
 msgstr ""
 
@@ -5982,31 +5982,31 @@ msgctxt "search tool"
 msgid "searches"
 msgstr ""
 
-#: src/gui/SearchDialog.cpp:628
+#: src/gui/SearchDialog.cpp:631
 msgid "Clear search history: delete all search objects data"
 msgstr ""
 
-#: src/gui/SearchDialog.cpp:628
+#: src/gui/SearchDialog.cpp:631
 msgid "Clear search history: no data to delete"
 msgstr ""
 
-#: src/gui/SearchDialog.cpp:1175
+#: src/gui/SearchDialog.cpp:1178
 msgid "Simbad Lookup Error"
 msgstr ""
 
-#: src/gui/SearchDialog.cpp:1182
+#: src/gui/SearchDialog.cpp:1185
 msgid "Simbad Lookup"
 msgstr ""
 
-#: src/gui/SearchDialog.cpp:1476
+#: src/gui/SearchDialog.cpp:1479
 msgid "University of Strasbourg (France)"
 msgstr ""
 
-#: src/gui/SearchDialog.cpp:1477
+#: src/gui/SearchDialog.cpp:1480
 msgid "Harvard University (USA)"
 msgstr ""
 
-#: src/gui/SearchDialog.cpp:1559
+#: src/gui/SearchDialog.cpp:1562
 msgid "Paste and Search"
 msgstr ""
 
@@ -18409,7 +18409,8 @@ msgstr ""
 #: plugins/Satellites/src/ui_satellitesDialog.h:1363
 msgid ""
 "Satellites in the marked source lists will be automatically added on the "
-"next update if they are not already in the collection."
+"next update if they are not already in the collection. Unmarked entries will "
+"also be fetched to update only previously included satellites."
 msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1368
