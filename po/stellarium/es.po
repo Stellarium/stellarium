@@ -7,16 +7,16 @@
 # María José Fernández Pintelos, 2022
 # cardinot <mcardinot@gmail.com>, 2022
 # Alexander V. Wolf <alex.v.wolf@gmail.com>, 2023
-# Víctor Vega <transifex.757ab@simplelogin.com>, 2023
+# Víctor Vega <transifex.757ab@simplelogin.com>, 2024
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2024-03-15 12:19+0700\n"
+"POT-Creation-Date: 2024-03-30 15:07+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
-"Last-Translator: Víctor Vega <transifex.757ab@simplelogin.com>, 2023\n"
+"Last-Translator: Víctor Vega <transifex.757ab@simplelogin.com>, 2024\n"
 "Language-Team: Spanish (https://app.transifex.com/stellarium/teams/80998/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -54,7 +54,7 @@ msgstr "marcador personalizado"
 msgid "custom object"
 msgstr "objeto personalizado"
 
-#: src/core/modules/CustomObjectMgr.cpp:68
+#: src/core/modules/CustomObjectMgr.cpp:71
 msgid "Marker"
 msgstr "Marcador"
 
@@ -6315,33 +6315,33 @@ msgctxt "search tool"
 msgid "searches"
 msgstr "búsquedas"
 
-#: src/gui/SearchDialog.cpp:628
+#: src/gui/SearchDialog.cpp:631
 msgid "Clear search history: delete all search objects data"
 msgstr ""
 "Borrar historial de búsqueda: eliminar todos los datos de los objetos de "
 "búsqueda"
 
-#: src/gui/SearchDialog.cpp:628
+#: src/gui/SearchDialog.cpp:631
 msgid "Clear search history: no data to delete"
 msgstr "Borrar historial de búsqueda: no hay datos para eliminar"
 
-#: src/gui/SearchDialog.cpp:1175
+#: src/gui/SearchDialog.cpp:1178
 msgid "Simbad Lookup Error"
 msgstr "Error de Búsqueda Simbad"
 
-#: src/gui/SearchDialog.cpp:1182
+#: src/gui/SearchDialog.cpp:1185
 msgid "Simbad Lookup"
 msgstr "Búsqueda Simbad"
 
-#: src/gui/SearchDialog.cpp:1476
+#: src/gui/SearchDialog.cpp:1479
 msgid "University of Strasbourg (France)"
 msgstr "Universidad Strasbourg (Francia)"
 
-#: src/gui/SearchDialog.cpp:1477
+#: src/gui/SearchDialog.cpp:1480
 msgid "Harvard University (USA)"
 msgstr "Universidad Harvard (EUA)"
 
-#: src/gui/SearchDialog.cpp:1559
+#: src/gui/SearchDialog.cpp:1562
 msgid "Paste and Search"
 msgstr "Pegar y buscar"
 
@@ -8177,7 +8177,7 @@ msgstr "Paisaje"
 
 #: src/gui/ObsListDialog.cpp:589
 msgid "Error during conversion. Please see logfile for details."
-msgstr ""
+msgstr "Error durante la conversión. Revise logfile para más detalles."
 
 #: src/gui/ObsListDialog.cpp:701
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:219
@@ -8188,6 +8188,8 @@ msgstr "Nota"
 #: src/gui/ObsListDialog.cpp:701
 msgid "Some bookmarked objects were not found. See logfile for details."
 msgstr ""
+"No se encontraron algunos objetos favoritos. Revise logfile para más "
+"detalles."
 
 #: src/gui/ObsListDialog.cpp:943
 msgid "New Observation List"
@@ -15004,6 +15006,8 @@ msgid ""
 "Show magnitudes of current celestial body (may be affected by atmosphere "
 "setting!)"
 msgstr ""
+"Muestra las magnitudes del cuerpo celeste actual (¡puede verse afectado por "
+"los ajustes de la atmósfera!)"
 
 #: src/ui_astroCalcDialog.h:2212
 msgid "magnitudes"
@@ -15080,6 +15084,10 @@ msgid ""
 "aberration, etc. Magnitudes are affected by current atmosphere settings. For"
 " almanac-like data, disable atmosphere and topocentric corrections!"
 msgstr ""
+"Nota: Las posiciones dependen de sus ajustes para corrección topocéntrica, "
+"aberración, etc. Las magnitudes se ven afectadas por la configuración "
+"atmosférica actual. Para obtener datos tipo almanaque, desactive las "
+"correcciones atmosféricas y topocéntricas."
 
 #: src/ui_astroCalcDialog.h:2260
 msgid "Cleanup data"
@@ -17509,13 +17517,15 @@ msgstr "Soporte para Oculus Rift"
 
 #: plugins/Oculus/src/Oculus.cpp:214
 msgid "Oculus Plugin"
-msgstr ""
+msgstr "Complemento Oculus"
 
 #: plugins/Oculus/src/Oculus.cpp:215
 msgid ""
 "Initialisation failed. Please see logfile for details. Continue without "
 "headset?"
 msgstr ""
+"Falló la inicialización. Consulte logfile para obtener más detalles. "
+"¿Continuar sin auriculares?"
 
 #: plugins/Satellites/src/Satellites.cpp:71
 #: plugins/Satellites/src/Satellites.cpp:163
@@ -19734,10 +19744,13 @@ msgstr "Edad:"
 #: plugins/Satellites/src/ui_satellitesDialog.h:1363
 msgid ""
 "Satellites in the marked source lists will be automatically added on the "
-"next update if they are not already in the collection."
+"next update if they are not already in the collection. Unmarked entries will"
+" also be fetched to update only previously included satellites."
 msgstr ""
-"Los satélites en la lista de fuentes marcadas automáticamente se agregan en "
-"la siguiente actualización si aún no están en la colección."
+"Los satélites en las listas de fuentes marcadas se agregarán automáticamente"
+" en la próxima actualización si aún no están en la colección. Las entradas "
+"no marcadas también se recuperarán para actualizar solo los satélites "
+"incluidos previamente."
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1368
 msgid "Add new source"
@@ -21790,19 +21803,19 @@ msgstr "Guardar los cuerpos menores del Sistema Solar como ..."
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:224
 msgid "Cannot overwrite"
-msgstr ""
+msgstr "No se puede sobreescribir"
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:225
 msgid "Cannot remove existing file. Do you have permissions?"
-msgstr ""
+msgstr "No se puede eliminar el archivo existente. ¿Tiene los permisos?"
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:231
 msgid "Cannot store"
-msgstr ""
+msgstr "No se puede almacenar"
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:232
 msgid "File cannot be written. Do you have permissions?"
-msgstr ""
+msgstr "No se puede escribir el archivo. ¿Tiene los permisos?"
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:237
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:245
@@ -23573,7 +23586,7 @@ msgstr "Clase planetaria"
 #. TRANSLATORS: Full phrase is "Surface Temperature"
 #: plugins/Exoplanets/src/Exoplanet.cpp:372
 msgid "Surface temp."
-msgstr ""
+msgstr "Temp. superficial"
 
 #. TRANSLATORS: Average stellar flux of the planet
 #: plugins/Exoplanets/src/Exoplanet.cpp:374
@@ -23588,7 +23601,7 @@ msgstr "IST"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:499
 msgid "Surface temperature on Earth"
-msgstr ""
+msgstr "Temperatura superficial en La Tierra."
 
 #: plugins/Exoplanets/src/Exoplanet.hpp:86
 msgid "planetary system"
@@ -23752,19 +23765,24 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:318
 msgid "Surface Temperature"
-msgstr ""
+msgstr "Temperatura superficial"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:319
 msgid ""
 "The estimated surface temperature in Kelvins (K) assuming an Earth-like "
 "atmosphere (i.e., same bond albedo and greenhouse)."
 msgstr ""
+"La temperatura superficial estimada en Kelvins (K) suponiendo una atmósfera "
+"similar a la de la Tierra (es decir, el mismo albedo de enlace y efecto "
+"invernadero)."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:320
 msgid ""
 "Temperatures could be much larger for thicker atmospheres (Earth = 288 K or "
 "15°C)."
 msgstr ""
+"Las temperaturas podrían ser mucho mayores en atmósferas más espesas (Tierra"
+" = 288 K o 15°C)."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:323
 msgid ""
@@ -26967,7 +26985,7 @@ msgstr "Tasa Horaria Local"
 #: plugins/MeteorShowers/src/MeteorShower.cpp:728
 #: plugins/MeteorShowers/src/MeteorShower.cpp:759
 msgid "Limiting magnitude"
-msgstr ""
+msgstr "Magnitud límite"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:734
 msgid "variable"
@@ -34375,7 +34393,7 @@ msgstr "Buscar una imagen..."
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:743
 msgctxt "A verb used on a button that fixes a problem."
 msgid "Fix"
-msgstr ""
+msgstr "Reparar"
 
 #: plugins/LensDistortionEstimator/src/ui_lensDistortionEstimatorDialog.h:744
 msgid "Subtract background RGB:"
