@@ -4286,9 +4286,9 @@ auto AstroCalcDialog::generateEclipseMap(const double JDMid) -> EclipseMapData
 	QPair<double, double> coordinates;
 	// Check northern/southern limits of penumbra at greatest eclipse
 	bool bothPenumbralLimits = false;
-	coordinates = getNSLimitofShadow(JDMid,true,true);
+	coordinates = getNSLimitOfShadow(JDMid,true,true);
 	double latPL1 = coordinates.first;
-	coordinates = getNSLimitofShadow(JDMid,false,true);
+	coordinates = getNSLimitOfShadow(JDMid,false,true);
 	double latPL2 = coordinates.first;
 	if (latPL1 <= 90. && latPL2 <= 90.)
 		bothPenumbralLimits = true;
@@ -4321,7 +4321,7 @@ auto AstroCalcDialog::generateEclipseMap(const double JDMid) -> EclipseMapData
 		while (JD < JDP4)
 		{
 			JD = JDP1 + i/1440.0;
-			coordinates = getNSLimitofShadow(JD,north,true);
+			coordinates = getNSLimitOfShadow(JD,north,true);
 			if (coordinates.first <= 90.)
 				data.penumbraLimits[j].emplace_back(coordinates.second, coordinates.first);
 			i++;
@@ -4605,12 +4605,12 @@ auto AstroCalcDialog::generateEclipseMap(const double JDMid) -> EclipseMapData
 		}
 
 		// Extreme northern/southern limits of umbra/antumbra at C1
-		QPair<double, double> C1a = getExtremeNSLimitofShadow(JDC1,true,false,true);
-		QPair<double, double> C1b = getExtremeNSLimitofShadow(JDC1,false,false,true);
+		QPair<double, double> C1a = getExtremeNSLimitOfShadow(JDC1,true,false,true);
+		QPair<double, double> C1b = getExtremeNSLimitOfShadow(JDC1,false,false,true);
 
 		// Extreme northern/southern limits of umbra/antumbra at C2
-		QPair<double, double> C2a = getExtremeNSLimitofShadow(JDC2,true,false,false);
-		QPair<double, double> C2b = getExtremeNSLimitofShadow(JDC2,false,false,false);
+		QPair<double, double> C2a = getExtremeNSLimitOfShadow(JDC2,true,false,false);
+		QPair<double, double> C2b = getExtremeNSLimitOfShadow(JDC2,false,false,false);
 
 		double dRatio,altitude,pathWidth,duration,magnitude;
 		SolarEclipseData(JDC1,dRatio,latDeg,lngDeg,altitude,pathWidth,duration,magnitude);
@@ -4635,7 +4635,7 @@ auto AstroCalcDialog::generateEclipseMap(const double JDMid) -> EclipseMapData
 		while (JD < JDC2+20./1440.)
 		{
 			JD = JDC1+(i-20.)/1440.;
-			coordinates = getNSLimitofShadow(JD,true,false);
+			coordinates = getNSLimitOfShadow(JD,true,false);
 			if (coordinates.first <= 90.)
 				extremeLimit1.curve.emplace_back(coordinates.second, coordinates.first);
 			i++;
@@ -4672,7 +4672,7 @@ auto AstroCalcDialog::generateEclipseMap(const double JDMid) -> EclipseMapData
 		while (JD < JDC2+20./1440.)
 		{
 			JD = JDC1+(i-20.)/1440.;
-			coordinates = getNSLimitofShadow(JD,false,false);
+			coordinates = getNSLimitOfShadow(JD,false,false);
 			if (coordinates.first <= 90.)
 				extremeLimit2.curve.emplace_back(coordinates.second, coordinates.first);
 			i++;
@@ -4743,7 +4743,7 @@ void AstroCalcDialog::saveSolarEclipseKML()
 	QGuiApplication::restoreOverrideCursor();
 }
 
-QPair<double, double> AstroCalcDialog::getNSLimitofShadow(double JD, bool northernLimit, bool penumbra)
+QPair<double, double> AstroCalcDialog::getNSLimitOfShadow(double JD, bool northernLimit, bool penumbra)
 {
 	// Source: Explanatory Supplement to the Astronomical Ephemeris 
 	// and the American Ephemeris and Nautical Almanac (1961)
@@ -4837,7 +4837,7 @@ QPair<double, double> AstroCalcDialog::getNSLimitofShadow(double JD, bool northe
 	return coordinates;
 }
 
-QPair<double, double> AstroCalcDialog::getExtremeNSLimitofShadow(double JD, bool northernLimit, bool penumbra, bool begin)
+QPair<double, double> AstroCalcDialog::getExtremeNSLimitOfShadow(double JD, bool northernLimit, bool penumbra, bool begin)
 {
 	// Source: Explanatory Supplement to the Astronomical Ephemeris 
 	// and the American Ephemeris and Nautical Almanac (1961)

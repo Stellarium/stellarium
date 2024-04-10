@@ -614,9 +614,9 @@ private:
 	//! Geographic coordinates of shadow outline
 	QPair<double, double> getShadowOutlineCoordinates(double angle, double x, double y, double d, double L, double tf,double mu);
 	//! Geographic coordinates of northern and southern limit of shadow
-	QPair<double, double> getNSLimitofShadow(double JD, bool northernLimit, bool penumbra);
+	QPair<double, double> getNSLimitOfShadow(double JD, bool northernLimit, bool penumbra);
 	//! Geographic coordinates of extreme northern and southern limits of shadow
-	QPair<double, double> getExtremeNSLimitofShadow(double JD, bool northernLimit, bool penumbra, bool begin);
+	QPair<double, double> getExtremeNSLimitOfShadow(double JD, bool northernLimit, bool penumbra, bool begin);
 	//! Geographic coordinates of extreme contact
 	QPair<double, double> getContactCoordinates(double x, double y, double d, double mu);
 	//! Init header and list of local solar eclipse
