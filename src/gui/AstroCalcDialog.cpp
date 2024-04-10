@@ -4325,16 +4325,77 @@ auto AstroCalcDialog::generateEclipseMap(const double JDMid) -> EclipseMapData
 	for (int j = 0; j < 2; j++)
 	{
 		if (j != 0) north = false;
+		auto& points = data.penumbraLimits[j];
 		double JD = JDP1;
 		int i = 0;
 		while (JD < JDP4)
 		{
 			JD = JDP1 + i/1440.0;
 			coordinates = getNSLimitOfShadow(JD,north,true);
-			if (coordinates.first <= 90.)
-				data.penumbraLimits[j].emplace_back(coordinates.second, coordinates.first);
+			points.emplace_back(JD, coordinates.second, coordinates.first);
 			i++;
 		}
+
+		if(points.empty()) continue;
+
+		// Refine at the beginning and the end of the line so as to find the precise endpoints
+
+		// 1. Beginning of the line
+		const auto firstValidIt = std::find_if(points.begin(), points.end(),
+		                                       [](const auto& p){ return p.latitude <= 90; });
+		if (firstValidIt == points.end()) continue;
+		const int firstValidPos = firstValidIt - points.begin();
+		if (firstValidPos > 0)
+		{
+			double lastInvalidTime = points[firstValidPos - 1].JD;
+			double firstValidTime = points[firstValidPos].JD;
+			// Bisect between these times. The sufficient number of iterations was found empirically.
+			for (int n = 0; n < 15; ++n)
+			{
+				const auto currTime = (lastInvalidTime + firstValidTime) / 2;
+				const auto coords = getNSLimitOfShadow(currTime,north,true);
+				if (coords.first > 90)
+				{
+					lastInvalidTime = currTime;
+				}
+				else
+				{
+					firstValidTime = currTime;
+					points.emplace_front(currTime, coords.second, coords.first);
+				}
+			}
+		}
+
+		// 2. End of the line
+		const auto lastValidIt = std::find_if(points.rbegin(), points.rend(),
+		                                      [](const auto& p){ return p.latitude <= 90; });
+		if (lastValidIt == points.rend()) continue;
+		const int lastValidPos = points.size() - 1 - (lastValidIt - points.rbegin());
+		if (lastValidPos + 1u < points.size())
+		{
+			double firstInvalidTime = points[lastValidPos + 1].JD;
+			double lastValidTime = points[lastValidPos].JD;
+			// Bisect between these times. The sufficient number of iterations was found empirically.
+			for (int n = 0; n < 15; ++n)
+			{
+				const auto currTime = (firstInvalidTime + lastValidTime) / 2;
+				const auto coords = getNSLimitOfShadow(currTime,north,true);
+				if (coords.first > 90)
+				{
+					firstInvalidTime = currTime;
+				}
+				else
+				{
+					lastValidTime = currTime;
+					points.emplace_back(currTime, coords.second, coords.first);
+				}
+			}
+		}
+
+		// 3. Cleanup: remove invalid points, sort by time increase
+		points.erase(std::remove_if(points.begin(), points.end(), [](const auto& p) { return p.latitude > 90; }),
+		             points.end());
+		std::sort(points.begin(), points.end(), [](const auto& a, const auto& b) { return a.JD < b.JD; });
 	}
 
 	// Eclipse begins/ends at sunrise/sunset curve

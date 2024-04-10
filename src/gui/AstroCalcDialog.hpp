@@ -23,6 +23,7 @@
 #ifndef ASTROCALCDIALOG_HPP
 #define ASTROCALCDIALOG_HPP
 
+#include <deque>
 #include <variant>
 #include <QObject>
 #include <QTreeWidget>
@@ -127,7 +128,7 @@ class AstroCalcDialog : public StelDialog
 		GeoTimePoint centralEclipseEnd;     // AKA C2
 
 		// The array elements are {northLimit, southLimit}
-		std::vector<GeoPoint> penumbraLimits[2];
+		std::deque<GeoTimePoint> penumbraLimits[2];
 
 		// The curves in arrays are split into two lines by the computation algorithm
 		struct TwoLimits
