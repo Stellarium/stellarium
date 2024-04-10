@@ -23,6 +23,7 @@
 #ifndef ASTROCALCDIALOG_HPP
 #define ASTROCALCDIALOG_HPP
 
+#include <variant>
 #include <QObject>
 #include <QTreeWidget>
 #include <QTreeWidgetItem>
@@ -75,6 +76,81 @@ Q_DECLARE_METATYPE(HECPosition)
 class AstroCalcDialog : public StelDialog
 {
 	Q_OBJECT
+
+	struct EclipseMapData
+	{
+		enum class EclipseType
+		{
+			Undefined,
+			Total,
+			Annular,
+			Hybrid,
+		};
+		struct GeoPoint
+		{
+			double longitude;
+			double latitude;
+
+			GeoPoint() = default;
+			GeoPoint(double lon, double lat)
+				: longitude(lon), latitude(lat)
+			{
+			}
+		};
+		struct GeoTimePoint
+		{
+			double JD = -1;
+			double longitude;
+			double latitude;
+
+			GeoTimePoint() = default;
+			GeoTimePoint(double JD, double lon, double lat)
+				: JD(JD), longitude(lon), latitude(lat)
+			{
+			}
+		};
+		struct UmbraLimit
+		{
+			std::vector<GeoPoint> curve;
+			EclipseType eclipseType = EclipseType::Undefined;
+		};
+		struct UmbraOutline
+		{
+			std::vector<GeoPoint> curve;
+			double JD;
+			EclipseType eclipseType = EclipseType::Undefined;
+		};
+		GeoTimePoint greatestEclipse;
+		GeoTimePoint firstContactWithEarth; // AKA P1
+		GeoTimePoint lastContactWithEarth;  // AKA P4
+		GeoTimePoint centralEclipseStart;   // AKA C1
+		GeoTimePoint centralEclipseEnd;     // AKA C2
+
+		// The array elements are {northLimit, southLimit}
+		std::vector<GeoPoint> penumbraLimits[2];
+
+		// The curves in arrays are split into two lines by the computation algorithm
+		struct TwoLimits
+		{
+			std::vector<GeoPoint> p12curve;
+			std::vector<GeoPoint> p34curve;
+		};
+		struct SingleLimit
+		{
+			std::vector<GeoPoint> curve;
+		};
+		std::variant<SingleLimit,TwoLimits> riseSetLimits[2];
+
+		// These curves appear to be split generally in multiple sections
+		std::vector<std::vector<GeoPoint>> maxEclipseAtRiseSet;
+
+		std::vector<GeoPoint> centerLine;
+		std::vector<UmbraOutline> umbraOutlines;
+		std::vector<UmbraLimit> extremeUmbraLimit1;
+		std::vector<UmbraLimit> extremeUmbraLimit2;
+
+		EclipseType eclipseType;
+	};
 
 public:
 	//! Defines the number and the order of the columns in the table that lists celestial bodies positions
@@ -651,6 +727,9 @@ private:
 	//! Make sure that no tabs icons are outside of the viewport.
 	//! @todo Limit the width to the width of the screen *available to the window*.
 	void updateTabBarListWidgetWidth();
+
+	EclipseMapData generateEclipseMap(double JDMid);
+	void generateKML(const EclipseMapData& data, const QString& dateString, QTextStream& stream) const;
 
 	void enableAngularLimits(bool enable);
 
