@@ -1079,13 +1079,9 @@ private:
 	}
 };
 
-// Class to compute parameters from Besselian elements
-class BesselParameters
-{
-public:
-	BesselParameters(double &xdot, double &ydot, double &ddot, double &mudot,
-	double &ldot, double &etadot, double &bdot, double &cdot, bool penumbra);
-};
+// Compute parameters from Besselian elements
+void calcBesselParameters(double &xdot, double &ydot, double &ddot, double &mudot, double &ldot,
+                          double &etadot, double &bdot, double &cdot, bool penumbra);
 
 //! Derived from QTreeWidgetItem class with customized sort
 class ACSolarEclipseLocalTreeWidgetItem : public QTreeWidgetItem
