@@ -77,7 +77,15 @@ public:
 	StelTextureSP tex;
 };
 
-// Calculate Besselian elements of solar eclipse
+//! Calculate Besselian elements of solar eclipse
+//! @param besX x coordinate of the shadow axis in the fundamental plane (in units of equatorial Earth radius)
+//! @param besY y coordinate of the shadow axis in the fundamental plane (in units of equatorial Earth radius)
+//! @param besDec declination of the shadow axis direction in the celestial sphere
+//! @param besTf1 angle of the penumbral shadow cone with the shadow axis
+//! @param besTf2 angle of the umbral shadow cone with the shadow axis
+//! @param besL1 radius of the penumbral shadow on the fundamental plane (in units of equatorial Earth radius)
+//! @param besL2 radius of the umbral shadow on the fundamental plane (in units of equatorial Earth radius)
+//! @param besMu hour angle of the shadow axis direction in the celestial sphere
 void calcSolarEclipseBessel(double &besX, double &besY, double &besDec, double &besTf1,
                             double &besTf2, double &besL1, double &besL2, double &besMu);
 
