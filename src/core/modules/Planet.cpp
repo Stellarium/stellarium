@@ -984,8 +984,8 @@ Vec4d Planet::getHourlyProperMotion(const StelCore *core) const
 	}
 }
 
-SolarEclipseBessel::SolarEclipseBessel(double &besX, double &besY,
-	double &besD, double &bestf1, double &bestf2, double &besL1, double &besL2, double &besMu)
+void calcSolarEclipseBessel(double &besX, double &besY, double &besD, double &bestf1,
+                            double &bestf2, double &besL1, double &besL2, double &besMu)
 {
 	// Besselian elements
 	// Source: Explanatory Supplement to the Astronomical Ephemeris 
@@ -1056,8 +1056,8 @@ SolarEclipseBessel::SolarEclipseBessel(double &besX, double &besY,
 };
 
 // Solar eclipse data at given time
-SolarEclipseData::SolarEclipseData(double JD, double &dRatio, double &latDeg,
-	double &lngDeg, double &altitude, double &pathWidth, double &duration, double &magnitude)
+void calcSolarEclipseData(double JD, double &dRatio, double &latDeg, double &lngDeg, double &altitude,
+                          double &pathWidth, double &duration, double &magnitude)
 {
 	StelCore* core = StelApp::getInstance().getCore();  
 	const double currentJD = core->getJDOfLastJDUpdate(); // save current JD
@@ -1075,7 +1075,7 @@ SolarEclipseData::SolarEclipseData(double JD, double &dRatio, double &latDeg,
 	static const double ff = 1./(1.-f);
 
 	double x,y,d,tf1,tf2,L1,L2,mu;
-	SolarEclipseBessel(x,y,d,tf1,tf2,L1,L2,mu);
+	calcSolarEclipseBessel(x,y,d,tf1,tf2,L1,L2,mu);
 	const double rho1 = sqrt(1. - e2 * cos(d) * cos(d));
 	const double eta1 = y / rho1;
 	const double sd1 = sin(d) / rho1;
@@ -1106,13 +1106,13 @@ SolarEclipseData::SolarEclipseData(double JD, double &dRatio, double &latDeg,
 		core->update(0);
 
 		double x1,y1,d1,mu1;
-		SolarEclipseBessel(x1,y1,d1,tf1,tf2,L1,L2,mu1);
+		calcSolarEclipseBessel(x1,y1,d1,tf1,tf2,L1,L2,mu1);
 
 		core->setJD(JD + 5./1440.);
 		core->update(0);
 
 		double x2,y2,d2,mu2;
-		SolarEclipseBessel(x2,y2,d2,tf1,tf2,L1,L2,mu2);
+		calcSolarEclipseBessel(x2,y2,d2,tf1,tf2,L1,L2,mu2);
 
 		// Hourly rate
 		const double xdot = (x2 - x1) * 6.;
@@ -1499,7 +1499,7 @@ QString Planet::getInfoStringExtra(const StelCore *core, const InfoStringGroup& 
 				{
 					double JD = core1->getJD();
 					double dRatio,latDeg,lngDeg,altitude,pathWidth,duration,magnitude;
-					SolarEclipseData(JD,dRatio,latDeg,lngDeg,altitude,pathWidth,duration,magnitude);
+					calcSolarEclipseData(JD,dRatio,latDeg,lngDeg,altitude,pathWidth,duration,magnitude);
 
 					if (pathWidth > 0.) // only display when shadow axis is touching Earth
 					{

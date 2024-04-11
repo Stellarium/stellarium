@@ -3014,9 +3014,9 @@ LocalSEparams localSolarEclipse(double JD,int contact,bool central) {
 	core->update(0);
 
 	double xdot,ydot,ddot,mudot,ldot,etadot,bdot,cdot;
-	BesselParameters(xdot,ydot,ddot,mudot,ldot,etadot,bdot,cdot,true);
+	calcBesselParameters(xdot,ydot,ddot,mudot,ldot,etadot,bdot,cdot,true);
 	double x,y,d,tf1,tf2,L1,L2,mu;
-	SolarEclipseBessel(x,y,d,tf1,tf2,L1,L2,mu);
+	calcSolarEclipseBessel(x,y,d,tf1,tf2,L1,L2,mu);
 	double theta = (mu + lon) * M_PI_180;
 	theta = StelUtils::fmodpos(theta, 2.*M_PI);
 	const double xi = rc*std::sin(theta);
@@ -3059,9 +3059,9 @@ double AstroCalcDialog::getDeltaTimeofContact(double JD, bool beginning, bool pe
 	core->setJD(JD);
 	core->update(0);
 	double xdot,ydot,ddot,mudot,ldot,etadot,bdot,cdot;
-	BesselParameters(xdot,ydot,ddot,mudot,ldot,etadot,bdot,cdot,penumbra);
+	calcBesselParameters(xdot,ydot,ddot,mudot,ldot,etadot,bdot,cdot,penumbra);
 	double x,y,d,tf1,tf2,L1,L2,mu;
-	SolarEclipseBessel(x,y,d,tf1,tf2,L1,L2,mu);
+	calcSolarEclipseBessel(x,y,d,tf1,tf2,L1,L2,mu);
 	const double rho1 = std::sqrt(1.-e2*std::cos(d)*std::cos(d));
 	double s,dt;
 	if (!penumbra)
@@ -3121,8 +3121,8 @@ double AstroCalcDialog::getJDofMinimumDistance(double JD)
 	{
 		core->setJD(JD);
 		core->update(0);
-		BesselParameters(xdot,ydot,ddot,mudot,ldot,etadot,bdot,cdot,false);
-		SolarEclipseBessel(x,y,d,tf1,tf2,L1,L2,mu);
+		calcBesselParameters(xdot,ydot,ddot,mudot,ldot,etadot,bdot,cdot,false);
+		calcSolarEclipseBessel(x,y,d,tf1,tf2,L1,L2,mu);
 		double n2 = xdot*xdot + ydot*ydot;
 		dt = -(x*xdot + y*ydot)/n2;
 		JD += dt/24.;
@@ -3178,11 +3178,11 @@ void AstroCalcDialog::generateSolarEclipses()
 				core->update(0);
 
 				double x,y,d,tf1,tf2,L1,L2,mu;
-				SolarEclipseBessel(x,y,d,tf1,tf2,L1,L2,mu);
+				calcSolarEclipseBessel(x,y,d,tf1,tf2,L1,L2,mu);
 				double gamma = sqrt(x * x + y * y);
 				if (y<0.) gamma = -(gamma);
 				double dRatio,latDeg,lngDeg,altitude,pathWidth,duration,magnitude;
-				SolarEclipseData(JD,dRatio,latDeg,lngDeg,altitude,pathWidth,duration,magnitude);
+				calcSolarEclipseData(JD,dRatio,latDeg,lngDeg,altitude,pathWidth,duration,magnitude);
 
 				bool noncentraleclipse = false; // Non-central includes partial and total/annular eclipses that shadow axis miss Earth
 
@@ -3407,7 +3407,7 @@ void AstroCalcDialog::generateSolarEclipsesLocal()
 				core->setJD(JD);
 				core->update(0);
 				double x,y,d,tf1,tf2,L1,L2,mu;
-				SolarEclipseBessel(x,y,d,tf1,tf2,L1,L2,mu);
+				calcSolarEclipseBessel(x,y,d,tf1,tf2,L1,L2,mu);
 				double gamma = sqrt(x * x + y * y);
 				if (y<0.) gamma *= -1.;
 				if (abs(gamma) <= (1.5433 + L2)) // Solar eclipse occurs on this date
@@ -3672,7 +3672,7 @@ void AstroCalcDialog::selectCurrentSolarEclipse(const QModelIndex& modelIndex)
 	core->setJD(JD);
 	core->update(0);
 	double x,y,d,tf1,tf2,L1,L2,mu;
-	SolarEclipseBessel(x,y,d,tf1,tf2,L1,L2,mu);
+	calcSolarEclipseBessel(x,y,d,tf1,tf2,L1,L2,mu);
 	double gamma = std::sqrt(x*x+y*y);
 	QPair<double, double> coordinates;
 	if ((gamma > 0.9972) && (gamma < (1.5433 + L2)))
@@ -3685,7 +3685,7 @@ void AstroCalcDialog::selectCurrentSolarEclipse(const QModelIndex& modelIndex)
 		if (i==0) // P1
 		{
 			JD = getJDofContact(JDMid,true,true,true,true);
-			SolarEclipseData(JD,dRatio,latDeg,lngDeg,altitude,pathWidth,duration,magnitude);
+			calcSolarEclipseData(JD,dRatio,latDeg,lngDeg,altitude,pathWidth,duration,magnitude);
 			event = true;
 		}
 		if (i==1 && !nonCentralEclipse) // C1
@@ -3694,19 +3694,19 @@ void AstroCalcDialog::selectCurrentSolarEclipse(const QModelIndex& modelIndex)
 			// Workaround to mostly eliminate 0.1 second of fluctuation
 			// that can noticebly move coordinates of shadow.
 			JD = int(JD)+(int((JD-int(JD))*86400.)-1)/86400.;
-			SolarEclipseData(JD,dRatio,latDeg,lngDeg,altitude,pathWidth,duration,magnitude);
+			calcSolarEclipseData(JD,dRatio,latDeg,lngDeg,altitude,pathWidth,duration,magnitude);
 			// Make sure that the shadow axis is really touching Earth,
 			// otherwise path width and duration will be zero.
 			int steps = 0;
 			while (pathWidth<0.0001 && steps<20)
 			{
 				JD += .1/86400.;
-				SolarEclipseData(JD,dRatio,latDeg,lngDeg,altitude,pathWidth,duration,magnitude);
+				calcSolarEclipseData(JD,dRatio,latDeg,lngDeg,altitude,pathWidth,duration,magnitude);
 				steps += 1;
 			}
 			core->setJD(JD);
 			core->update(0);
-			SolarEclipseBessel(x,y,d,tf1,tf2,L1,L2,mu);
+			calcSolarEclipseBessel(x,y,d,tf1,tf2,L1,L2,mu);
 			coordinates = getContactCoordinates(x,y,d,mu);
 			latDeg = coordinates.first;
 			lngDeg = coordinates.second;
@@ -3715,7 +3715,7 @@ void AstroCalcDialog::selectCurrentSolarEclipse(const QModelIndex& modelIndex)
 		else if (i==2) // Greatest Eclipse
 		{
 			JD = JDMid;
-			SolarEclipseData(JD,dRatio,latDeg,lngDeg,altitude,pathWidth,duration,magnitude);
+			calcSolarEclipseData(JD,dRatio,latDeg,lngDeg,altitude,pathWidth,duration,magnitude);
 			event = true;
 		}
 		else if (i==3 && !nonCentralEclipse) // C2
@@ -3724,19 +3724,19 @@ void AstroCalcDialog::selectCurrentSolarEclipse(const QModelIndex& modelIndex)
 			// Workaround to mostly eliminate 0.1 second of fluctuation
 			// that can noticebly move coordinates of shadow.
 			JD = int(JD)+(int((JD-int(JD))*86400.)+1)/86400.;
-			SolarEclipseData(JD,dRatio,latDeg,lngDeg,altitude,pathWidth,duration,magnitude);
+			calcSolarEclipseData(JD,dRatio,latDeg,lngDeg,altitude,pathWidth,duration,magnitude);
 			// Make sure that the shadow axis is really touching Earth,
 			// otherwise path width and duration will be zero.
 			int steps = 0;
 			while (pathWidth<0.0001 && steps<20)
 			{
 				JD -= .1/86400.;
-				SolarEclipseData(JD,dRatio,latDeg,lngDeg,altitude,pathWidth,duration,magnitude);
+				calcSolarEclipseData(JD,dRatio,latDeg,lngDeg,altitude,pathWidth,duration,magnitude);
 				steps += 1;
 			}
 			core->setJD(JD);
 			core->update(0);
-			SolarEclipseBessel(x,y,d,tf1,tf2,L1,L2,mu);
+			calcSolarEclipseBessel(x,y,d,tf1,tf2,L1,L2,mu);
 			coordinates = getContactCoordinates(x,y,d,mu);
 			latDeg = coordinates.first;
 			lngDeg = coordinates.second;
@@ -3745,7 +3745,7 @@ void AstroCalcDialog::selectCurrentSolarEclipse(const QModelIndex& modelIndex)
 		else if (i==4) // P4
 		{
 			JD = getJDofContact(JDMid,false,true,true,true);
-			SolarEclipseData(JD,dRatio,latDeg,lngDeg,altitude,pathWidth,duration,magnitude);
+			calcSolarEclipseData(JD,dRatio,latDeg,lngDeg,altitude,pathWidth,duration,magnitude);
 			event = true;
 		}	
 		if (event)
@@ -4010,9 +4010,9 @@ QPair<double, double> AstroCalcDialog::getMaximumEclipseAtRiseSet(bool first, do
 	core->setJD(JD);
 	core->update(0);
 	double xdot,ydot,ddot,mudot,ldot,etadot,bdot,cdot;
-	BesselParameters(xdot,ydot,ddot,mudot,ldot,etadot,bdot,cdot,true);
+	calcBesselParameters(xdot,ydot,ddot,mudot,ldot,etadot,bdot,cdot,true);
 	double x,y,d,tf1,tf2,L1,L2,mu;
-	SolarEclipseBessel(x,y,d,tf1,tf2,L1,L2,mu);
+	calcSolarEclipseBessel(x,y,d,tf1,tf2,L1,L2,mu);
 
 	double qa = std::atan2(bdot,cdot);
 	if (!first) // there are two parts of the curve
@@ -4042,8 +4042,8 @@ QPair<double, double> AstroCalcDialog::getMaximumEclipseAtRiseSet(bool first, do
 	return coordinates;
 }
 
-BesselParameters::BesselParameters(double &xdot, double &ydot, double &ddot, double &mudot,
-	double &ldot, double &etadot, double &bdot, double &cdot, bool penumbra)
+void calcBesselParameters(double &xdot, double &ydot, double &ddot, double &mudot, double &ldot,
+                          double &etadot, double &bdot, double &cdot, bool penumbra)
 {
 	StelCore* core = StelApp::getInstance().getCore();
 	double JD = core->getJD();
@@ -4051,11 +4051,11 @@ BesselParameters::BesselParameters(double &xdot, double &ydot, double &ddot, dou
 	core->setJD(JD - 5./1440.);
 	core->update(0);
 	double x1,y1,d1,mu1,L11,L21;
-	SolarEclipseBessel(x1,y1,d1,tf1,tf2,L11,L21,mu1);
+	calcSolarEclipseBessel(x1,y1,d1,tf1,tf2,L11,L21,mu1);
 	core->setJD(JD + 5./1440.);
 	core->update(0);
 	double x2,y2,d2,mu2,L12,L22;
-	SolarEclipseBessel(x2,y2,d2,tf1,tf2,L12,L22,mu2);
+	calcSolarEclipseBessel(x2,y2,d2,tf1,tf2,L12,L22,mu2);
 
 	xdot = (x2-x1)*6.;
 	ydot = (y2-y1)*6.;
@@ -4066,7 +4066,7 @@ BesselParameters::BesselParameters(double &xdot, double &ydot, double &ddot, dou
 	core->setJD(JD);
 	core->update(0);
 	double x,y,d,L1,L2,mu;
-	SolarEclipseBessel(x,y,d,tf1,tf2,L1,L2,mu);
+	calcSolarEclipseBessel(x,y,d,tf1,tf2,L1,L2,mu);
 	if (penumbra)
 	{
 		L = L1;
@@ -4266,7 +4266,7 @@ auto AstroCalcDialog::generateEclipseMap(const double JDMid) -> EclipseMapData
 	double dRatio,latDeg,lngDeg,altitude,pathWidth,duration,magnitude;
 	core->setJD(JDMid);
 	core->update(0);
-	SolarEclipseBessel(x,y,d,tf1,tf2,L1,L2,mu);
+	calcSolarEclipseBessel(x,y,d,tf1,tf2,L1,L2,mu);
 	double gamma = std::sqrt(x*x+y*y);
 	// Type of eclipse
 	if (abs(gamma) > 0.9972 && abs(gamma) < (1.5433 + L2))
@@ -4286,9 +4286,9 @@ auto AstroCalcDialog::generateEclipseMap(const double JDMid) -> EclipseMapData
 	QPair<double, double> coordinates;
 	// Check northern/southern limits of penumbra at greatest eclipse
 	bool bothPenumbralLimits = false;
-	coordinates = getNSLimitofShadow(JDMid,true,true);
+	coordinates = getNSLimitOfShadow(JDMid,true,true);
 	double latPL1 = coordinates.first;
-	coordinates = getNSLimitofShadow(JDMid,false,true);
+	coordinates = getNSLimitOfShadow(JDMid,false,true);
 	double latPL2 = coordinates.first;
 	if (latPL1 <= 90. && latPL2 <= 90.)
 		bothPenumbralLimits = true;
@@ -4301,15 +4301,15 @@ auto AstroCalcDialog::generateEclipseMap(const double JDMid) -> EclipseMapData
 
 	// Generate GE
 	data.greatestEclipse.JD = JDMid;
-	SolarEclipseData(JDMid,dRatio,data.greatestEclipse.latitude,data.greatestEclipse.longitude,altitude,pathWidth,duration,magnitude);
+	calcSolarEclipseData(JDMid,dRatio,data.greatestEclipse.latitude,data.greatestEclipse.longitude,altitude,pathWidth,duration,magnitude);
 
 	// Generate P1
 	data.firstContactWithEarth.JD = JDP1;
-	SolarEclipseData(JDP1,dRatio,data.firstContactWithEarth.latitude,data.firstContactWithEarth.longitude,altitude,pathWidth,duration,magnitude);
+	calcSolarEclipseData(JDP1,dRatio,data.firstContactWithEarth.latitude,data.firstContactWithEarth.longitude,altitude,pathWidth,duration,magnitude);
 
 	// Generate P4
 	data.lastContactWithEarth.JD = JDP4;
-	SolarEclipseData(JDP4,dRatio,data.lastContactWithEarth.latitude,data.lastContactWithEarth.longitude,altitude,pathWidth,duration,magnitude);
+	calcSolarEclipseData(JDP4,dRatio,data.lastContactWithEarth.latitude,data.lastContactWithEarth.longitude,altitude,pathWidth,duration,magnitude);
 
 	// Northern/southern Limits of penumbra
 	bool north = true;
@@ -4321,7 +4321,7 @@ auto AstroCalcDialog::generateEclipseMap(const double JDMid) -> EclipseMapData
 		while (JD < JDP4)
 		{
 			JD = JDP1 + i/1440.0;
-			coordinates = getNSLimitofShadow(JD,north,true);
+			coordinates = getNSLimitOfShadow(JD,north,true);
 			if (coordinates.first <= 90.)
 				data.penumbraLimits[j].emplace_back(coordinates.second, coordinates.first);
 			i++;
@@ -4339,7 +4339,7 @@ auto AstroCalcDialog::generateEclipseMap(const double JDMid) -> EclipseMapData
 			// P1 to P2 curve
 			core->setJD(JDP2);
 			core->update(0);
-			SolarEclipseBessel(x,y,d,tf1,tf2,L1,L2,mu);
+			calcSolarEclipseBessel(x,y,d,tf1,tf2,L1,L2,mu);
 			coordinates = getContactCoordinates(x,y,d,mu);
 			latP2 = coordinates.first;
 			lngP2 = coordinates.second;
@@ -4354,7 +4354,7 @@ auto AstroCalcDialog::generateEclipseMap(const double JDMid) -> EclipseMapData
 				JD = JDP1 + i/1440.0;
 				core->setJD(JD);
 				core->update(0);
-				SolarEclipseBessel(x,y,d,tf1,tf2,L1,L2,mu);
+				calcSolarEclipseBessel(x,y,d,tf1,tf2,L1,L2,mu);
 				coordinates = getRiseSetLineCoordinates(first,x,y,d,L1,mu);
 				if (coordinates.first <= 90.)
 					limit.p12curve.emplace_back(coordinates.second, coordinates.first);
@@ -4365,7 +4365,7 @@ auto AstroCalcDialog::generateEclipseMap(const double JDMid) -> EclipseMapData
 			// P3 to P4 curve
 			core->setJD(JDP3);
 			core->update(0);
-			SolarEclipseBessel(x,y,d,tf1,tf2,L1,L2,mu);
+			calcSolarEclipseBessel(x,y,d,tf1,tf2,L1,L2,mu);
 			coordinates = getContactCoordinates(x,y,d,mu);
 			latP3 = coordinates.first;
 			lngP3 = coordinates.second;
@@ -4377,7 +4377,7 @@ auto AstroCalcDialog::generateEclipseMap(const double JDMid) -> EclipseMapData
 				JD = JDP3 + i/1440.0;
 				core->setJD(JD);
 				core->update(0);
-				SolarEclipseBessel(x,y,d,tf1,tf2,L1,L2,mu);
+				calcSolarEclipseBessel(x,y,d,tf1,tf2,L1,L2,mu);
 				coordinates = getRiseSetLineCoordinates(first,x,y,d,L1,mu);
 				if (coordinates.first <= 90.)
 					limit.p34curve.emplace_back(coordinates.second, coordinates.first);
@@ -4405,7 +4405,7 @@ auto AstroCalcDialog::generateEclipseMap(const double JDMid) -> EclipseMapData
 				JD = JDP1 + i/1440.0;
 				core->setJD(JD);
 				core->update(0);
-				SolarEclipseBessel(x,y,d,tf1,tf2,L1,L2,mu);
+				calcSolarEclipseBessel(x,y,d,tf1,tf2,L1,L2,mu);
 				coordinates = getRiseSetLineCoordinates(first,x,y,d,L1,mu);
 				if (coordinates.first <= 90.)
 					limit.curve.emplace_back(coordinates.second, coordinates.first);
@@ -4475,24 +4475,24 @@ auto AstroCalcDialog::generateEclipseMap(const double JDMid) -> EclipseMapData
 		double JDC1 = JDMid, JDC2 = JDMid;
 		const double JDU1 = getJDofContact(JDMid,true,false,true,true); // beginning of external (ant)umbral contact
 		const double JDU4 = getJDofContact(JDMid,false,false,true,true); // end of external (ant)umbral contact
-		SolarEclipseData(JDC1,dRatio,latDeg,lngDeg,altitude,pathWidth,duration,magnitude);
+		calcSolarEclipseData(JDC1,dRatio,latDeg,lngDeg,altitude,pathWidth,duration,magnitude);
 		if (!nonCentralEclipse)
 		{
 			// C1
 			double JD = getJDofContact(JDMid,true,false,false,true);
 			JD = int(JD)+(int((JD-int(JD))*86400.)-1)/86400.;
-			SolarEclipseData(JD,dRatio,latDeg,lngDeg,altitude,pathWidth,duration,magnitude);
+			calcSolarEclipseData(JD,dRatio,latDeg,lngDeg,altitude,pathWidth,duration,magnitude);
 			int steps = 0;
 			while (pathWidth<0.0001 && steps<20)
 			{
 				JD += .1/86400.;
-				SolarEclipseData(JD,dRatio,latDeg,lngDeg,altitude,pathWidth,duration,magnitude);
+				calcSolarEclipseData(JD,dRatio,latDeg,lngDeg,altitude,pathWidth,duration,magnitude);
 				steps += 1;
 			}
 			JDC1 = JD;
 			core->setJD(JDC1);
 			core->update(0);
-			SolarEclipseBessel(x,y,d,tf1,tf2,L1,L2,mu);
+			calcSolarEclipseBessel(x,y,d,tf1,tf2,L1,L2,mu);
 			coordinates = getContactCoordinates(x,y,d,mu);
 			double latC1 = coordinates.first;
 			double lngC1 = coordinates.second;
@@ -4505,18 +4505,18 @@ auto AstroCalcDialog::generateEclipseMap(const double JDMid) -> EclipseMapData
 			// C2
 			JD = getJDofContact(JDMid,false,false,false,true);
 			JD = int(JD)+(int((JD-int(JD))*86400.)+1)/86400.;
-			SolarEclipseData(JD,dRatio,latDeg,lngDeg,altitude,pathWidth,duration,magnitude);
+			calcSolarEclipseData(JD,dRatio,latDeg,lngDeg,altitude,pathWidth,duration,magnitude);
 			steps = 0;
 			while (pathWidth<0.0001 && steps<20)
 			{
 				JD -= .1/86400.;
-				SolarEclipseData(JD,dRatio,latDeg,lngDeg,altitude,pathWidth,duration,magnitude);
+				calcSolarEclipseData(JD,dRatio,latDeg,lngDeg,altitude,pathWidth,duration,magnitude);
 				steps += 1;
 			}
 			JDC2 = JD;
 			core->setJD(JDC2);
 			core->update(0);
-			SolarEclipseBessel(x,y,d,tf1,tf2,L1,L2,mu);
+			calcSolarEclipseBessel(x,y,d,tf1,tf2,L1,L2,mu);
 			coordinates = getContactCoordinates(x,y,d,mu);
 			double latC2 = coordinates.first;
 			double lngC2 = coordinates.second;
@@ -4530,9 +4530,9 @@ auto AstroCalcDialog::generateEclipseMap(const double JDMid) -> EclipseMapData
 			JD = JDC1;
 			int i = 0;
 			double dRatioC1 = dRatio;
-			SolarEclipseData(JDMid,dRatio,latDeg,lngDeg,altitude,pathWidth,duration,magnitude);
+			calcSolarEclipseData(JDMid,dRatio,latDeg,lngDeg,altitude,pathWidth,duration,magnitude);
 			double dRatioMid = dRatio;
-			SolarEclipseData(JDC2,dRatio,latDeg,lngDeg,altitude,pathWidth,duration,magnitude);
+			calcSolarEclipseData(JDC2,dRatio,latDeg,lngDeg,altitude,pathWidth,duration,magnitude);
 			double dRatioC2 = dRatio;
 			if (dRatioC1 >= 1. && dRatioMid >= 1. && dRatioC2 >= 1.)
 				data.eclipseType = EclipseMapData::EclipseType::Total;
@@ -4544,7 +4544,7 @@ auto AstroCalcDialog::generateEclipseMap(const double JDMid) -> EclipseMapData
 			while (JD+(1./1440.) < JDC2)
 			{
 				JD = JDC1 + i/1440.; // generate every one minute
-				SolarEclipseData(JD,dRatio,latDeg,lngDeg,altitude,pathWidth,duration,magnitude);
+				calcSolarEclipseData(JD,dRatio,latDeg,lngDeg,altitude,pathWidth,duration,magnitude);
 				data.centerLine.emplace_back(lngDeg, latDeg);
 				i++;
 			}
@@ -4557,9 +4557,9 @@ auto AstroCalcDialog::generateEclipseMap(const double JDMid) -> EclipseMapData
 		}
 
 		double dRatioC1 = dRatio;
-		SolarEclipseData(JDMid,dRatio,latDeg,lngDeg,altitude,pathWidth,duration,magnitude);
+		calcSolarEclipseData(JDMid,dRatio,latDeg,lngDeg,altitude,pathWidth,duration,magnitude);
 		double dRatioMid = dRatio;
-		SolarEclipseData(JDC2,dRatio,latDeg,lngDeg,altitude,pathWidth,duration,magnitude);
+		calcSolarEclipseData(JDC2,dRatio,latDeg,lngDeg,altitude,pathWidth,duration,magnitude);
 		double dRatioC2 = dRatio;
 		// Umbra/antumbra outline
 		// we want to draw (ant)umbral shadow on world map at exact times like 09:00, 09:10, 09:20, ...
@@ -4573,8 +4573,8 @@ auto AstroCalcDialog::generateEclipseMap(const double JDMid) -> EclipseMapData
 			JD = beginJD + i/144.; // generate every 10 minutes
 			core->setJD(JD);
 			core->update(0);
-			SolarEclipseBessel(x,y,d,tf1,tf2,L1,L2,mu);
-			SolarEclipseData(JD,dRatio,latDeg,lngDeg,altitude,pathWidth,duration,magnitude);
+			calcSolarEclipseBessel(x,y,d,tf1,tf2,L1,L2,mu);
+			calcSolarEclipseData(JD,dRatio,latDeg,lngDeg,altitude,pathWidth,duration,magnitude);
 			double angle = 0.;
 			bool firstPoint = false;
 			auto& outline = data.umbraOutlines.emplace_back();
@@ -4605,15 +4605,15 @@ auto AstroCalcDialog::generateEclipseMap(const double JDMid) -> EclipseMapData
 		}
 
 		// Extreme northern/southern limits of umbra/antumbra at C1
-		QPair<double, double> C1a = getExtremeNSLimitofShadow(JDC1,true,false,true);
-		QPair<double, double> C1b = getExtremeNSLimitofShadow(JDC1,false,false,true);
+		QPair<double, double> C1a = getExtremeNSLimitOfShadow(JDC1,true,false,true);
+		QPair<double, double> C1b = getExtremeNSLimitOfShadow(JDC1,false,false,true);
 
 		// Extreme northern/southern limits of umbra/antumbra at C2
-		QPair<double, double> C2a = getExtremeNSLimitofShadow(JDC2,true,false,false);
-		QPair<double, double> C2b = getExtremeNSLimitofShadow(JDC2,false,false,false);
+		QPair<double, double> C2a = getExtremeNSLimitOfShadow(JDC2,true,false,false);
+		QPair<double, double> C2b = getExtremeNSLimitOfShadow(JDC2,false,false,false);
 
 		double dRatio,altitude,pathWidth,duration,magnitude;
-		SolarEclipseData(JDC1,dRatio,latDeg,lngDeg,altitude,pathWidth,duration,magnitude);
+		calcSolarEclipseData(JDC1,dRatio,latDeg,lngDeg,altitude,pathWidth,duration,magnitude);
 
 		auto& extremeLimit1 = data.extremeUmbraLimit1.emplace_back();
 		if (dRatioC1 >= 1. && dRatioMid >= 1. && dRatioC2 >= 1.)
@@ -4635,13 +4635,13 @@ auto AstroCalcDialog::generateEclipseMap(const double JDMid) -> EclipseMapData
 		while (JD < JDC2+20./1440.)
 		{
 			JD = JDC1+(i-20.)/1440.;
-			coordinates = getNSLimitofShadow(JD,true,false);
+			coordinates = getNSLimitOfShadow(JD,true,false);
 			if (coordinates.first <= 90.)
 				extremeLimit1.curve.emplace_back(coordinates.second, coordinates.first);
 			i++;
 		}
 
-		SolarEclipseData(JDC2,dRatio,latDeg,lngDeg,altitude,pathWidth,duration,magnitude);
+		calcSolarEclipseData(JDC2,dRatio,latDeg,lngDeg,altitude,pathWidth,duration,magnitude);
 		// 1st extreme limit at C2
 		if (C2a.first <= 90. || C2b.first <= 90.)
 		{
@@ -4659,7 +4659,7 @@ auto AstroCalcDialog::generateEclipseMap(const double JDMid) -> EclipseMapData
 			extremeLimit2.eclipseType = EclipseMapData::EclipseType::Annular;
 		else
 			extremeLimit2.eclipseType = EclipseMapData::EclipseType::Hybrid;
-		SolarEclipseData(JDC1,dRatio,latDeg,lngDeg,altitude,pathWidth,duration,magnitude);
+		calcSolarEclipseData(JDC1,dRatio,latDeg,lngDeg,altitude,pathWidth,duration,magnitude);
 		if (C1a.first <= 90. || C1b.first <= 90.)
 		{
 			if (dRatio>=1.)
@@ -4672,12 +4672,12 @@ auto AstroCalcDialog::generateEclipseMap(const double JDMid) -> EclipseMapData
 		while (JD < JDC2+20./1440.)
 		{
 			JD = JDC1+(i-20.)/1440.;
-			coordinates = getNSLimitofShadow(JD,false,false);
+			coordinates = getNSLimitOfShadow(JD,false,false);
 			if (coordinates.first <= 90.)
 				extremeLimit2.curve.emplace_back(coordinates.second, coordinates.first);
 			i++;
 		}
-		SolarEclipseData(JDC2,dRatio,latDeg,lngDeg,altitude,pathWidth,duration,magnitude);
+		calcSolarEclipseData(JDC2,dRatio,latDeg,lngDeg,altitude,pathWidth,duration,magnitude);
 		// 2nd extreme limit at C2
 		if (C2a.first <= 90. || C2b.first <= 90.)
 		{
@@ -4743,7 +4743,7 @@ void AstroCalcDialog::saveSolarEclipseKML()
 	QGuiApplication::restoreOverrideCursor();
 }
 
-QPair<double, double> AstroCalcDialog::getNSLimitofShadow(double JD, bool northernLimit, bool penumbra)
+QPair<double, double> AstroCalcDialog::getNSLimitOfShadow(double JD, bool northernLimit, bool penumbra)
 {
 	// Source: Explanatory Supplement to the Astronomical Ephemeris 
 	// and the American Ephemeris and Nautical Almanac (1961)
@@ -4756,9 +4756,9 @@ QPair<double, double> AstroCalcDialog::getNSLimitofShadow(double JD, bool northe
 	core->setJD(JD);
 	core->update(0);
 	double xdot,ydot,ddot,mudot,ldot,etadot,bdot,cdot;
-	BesselParameters(xdot,ydot,ddot,mudot,ldot,etadot,bdot,cdot,penumbra);
+	calcBesselParameters(xdot,ydot,ddot,mudot,ldot,etadot,bdot,cdot,penumbra);
 	double x,y,d,L1,L2,mu,tf;
-	SolarEclipseBessel(x,y,d,tf1,tf2,L1,L2,mu);
+	calcSolarEclipseBessel(x,y,d,tf1,tf2,L1,L2,mu);
 	const double rho1 = std::sqrt(1.-e2*std::cos(d)*std::cos(d));
 	const double y1 = y/rho1;
 	double eta1 = y1;
@@ -4837,7 +4837,7 @@ QPair<double, double> AstroCalcDialog::getNSLimitofShadow(double JD, bool northe
 	return coordinates;
 }
 
-QPair<double, double> AstroCalcDialog::getExtremeNSLimitofShadow(double JD, bool northernLimit, bool penumbra, bool begin)
+QPair<double, double> AstroCalcDialog::getExtremeNSLimitOfShadow(double JD, bool northernLimit, bool penumbra, bool begin)
 {
 	// Source: Explanatory Supplement to the Astronomical Ephemeris 
 	// and the American Ephemeris and Nautical Almanac (1961)
@@ -4849,18 +4849,18 @@ QPair<double, double> AstroCalcDialog::getExtremeNSLimitofShadow(double JD, bool
 	core->setJD(JD+0.1);
 	core->update(0);
 	double xdot,ydot,ddot,mudot,ldot,etadot,bdot1,cdot1,bdot2,cdot2;
-	BesselParameters(xdot,ydot,ddot,mudot,ldot,etadot,bdot1,cdot1,penumbra);
+	calcBesselParameters(xdot,ydot,ddot,mudot,ldot,etadot,bdot1,cdot1,penumbra);
 	core->setJD(JD-0.1);
 	core->update(0);
-	BesselParameters(xdot,ydot,ddot,mudot,ldot,etadot,bdot2,cdot2,penumbra);
+	calcBesselParameters(xdot,ydot,ddot,mudot,ldot,etadot,bdot2,cdot2,penumbra);
 	const double bdd = 5.*(bdot1-bdot2);
 	const double cdd = 5.*(cdot1-cdot2);
 	core->setJD(JD);
 	core->update(0);
 	double x,y,d,tf1,tf2,L1,L2,mu;
-	SolarEclipseBessel(x,y,d,tf1,tf2,L1,L2,mu);
+	calcSolarEclipseBessel(x,y,d,tf1,tf2,L1,L2,mu);
 	double bdot,cdot,xidot;
-	BesselParameters(xdot,ydot,ddot,mudot,ldot,etadot,bdot,cdot,penumbra);
+	calcBesselParameters(xdot,ydot,ddot,mudot,ldot,etadot,bdot,cdot,penumbra);
 	double e = std::sqrt(bdot*bdot+cdot*cdot);
 	double rho1 = std::sqrt(1-e2*std::cos(d)*std::cos(d));
 	double scq = e/cdot;
@@ -4903,8 +4903,8 @@ QPair<double, double> AstroCalcDialog::getExtremeNSLimitofShadow(double JD, bool
 		double tc = (czi/std::sqrt(n2))-(xi*xidot+eta*etadot)/n2;
 		core->setJD(JD+tc/24.);
 		core->update(0);
-		SolarEclipseBessel(x,y,d,tf1,tf2,L1,L2,mu);
-		BesselParameters(xdot,ydot,ddot,mudot,ldot,etadot,bdot,cdot,penumbra);
+		calcSolarEclipseBessel(x,y,d,tf1,tf2,L1,L2,mu);
+		calcBesselParameters(xdot,ydot,ddot,mudot,ldot,etadot,bdot,cdot,penumbra);
 		//tq = bdot/cdot;
 		e = std::sqrt(bdot*bdot+cdot*cdot);
 		rho1 = std::sqrt(1.-e2*std::cos(d)*std::cos(d));
