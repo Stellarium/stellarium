@@ -993,8 +993,12 @@ void calcSolarEclipseBessel(double &besX, double &besY, double &besD, double &be
 
 	StelCore* core = StelApp::getInstance().getCore();
 	static SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
-	core->setUseTopocentricCoordinates(false);
-	core->update(0);
+	const bool topocentricWereEnabled = core->getUseTopocentricCoordinates();
+	if(topocentricWereEnabled)
+	{
+		core->setUseTopocentricCoordinates(false);
+		core->update(0);
+	}
 
 	double raMoon, deMoon, raSun, deSun;
 	StelUtils::rectToSphe(&raSun, &deSun, ssystem->getSun()->getEquinoxEquatorialPos(core));
@@ -1053,6 +1057,12 @@ void calcSolarEclipseBessel(double &besX, double &besY, double &besD, double &be
 	besL2 = z * bestf2 - (s / cos(f2));
 	besMu = gast - a * M_180_PI;
 	besMu = StelUtils::fmodpos(besMu, 360.);
+
+	if(topocentricWereEnabled)
+	{
+		core->setUseTopocentricCoordinates(true);
+		core->update(0);
+	}
 };
 
 // Solar eclipse data at given time
