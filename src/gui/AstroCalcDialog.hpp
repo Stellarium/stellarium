@@ -1080,6 +1080,15 @@ private:
 };
 
 // Compute parameters from Besselian elements
+// @param xdot rate of change of X in Earth radii per second
+// @param ydot rate of change of Y in Earth radii per second
+// @param ddot rate of change of d in radians per second
+// @param mudot rate of change of mu in radians per second
+// @param ldot rate of change of L1 (if @p penumbra is true) or L2 (otherwise) in Earth radii per second
+// @param etadot 
+// @param bdot 
+// @param cdot 
+// @param penumbra determines whether L1 or L2 is used for computation of @p ldot
 void calcBesselParameters(double &xdot, double &ydot, double &ddot, double &mudot, double &ldot,
                           double &etadot, double &bdot, double &cdot, bool penumbra);
 
