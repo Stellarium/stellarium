@@ -984,12 +984,13 @@ Vec4d Planet::getHourlyProperMotion(const StelCore *core) const
 	}
 }
 
-void calcSolarEclipseBessel(double &besX, double &besY, double &besD, double &bestf1,
-                            double &bestf2, double &besL1, double &besL2, double &besMu)
+EclipseBesselElements calcSolarEclipseBessel()
 {
 	// Besselian elements
 	// Source: Explanatory Supplement to the Astronomical Ephemeris 
 	// and the American Ephemeris and Nautical Almanac (1961)
+
+	EclipseBesselElements out;
 
 	StelCore* core = StelApp::getInstance().getCore();
 	static SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
@@ -1030,14 +1031,14 @@ void calcSolarEclipseBessel(double &besX, double &besY, double &besD, double &be
 	const double rss = sdistanceAu * 23454.7925; // from 1 AU/Earth's radius : 149597870.8/6378.1366
 	const double b = mdistanceER / rss;
 	const double a = raSun - ((b * cos(deMoon) * raDiff) / ((1 - b) * cos(deSun)));
-	besD = deSun - (b * (deMoon - deSun) / (1 - b));
-	besX = cos(deMoon) * sin((raMoon - a));
-	besX *= mdistanceER;
-	besY = cos(besD) * sin(deMoon);
-	besY -= cos(deMoon) * sin(besD) * cos((raMoon - a));
-	besY *= mdistanceER;
-	double z = sin(deMoon) * sin(besD);
-	z += cos(deMoon) * cos(besD) * cos((raMoon - a));
+	out.d = deSun - (b * (deMoon - deSun) / (1 - b));
+	out.x = cos(deMoon) * sin((raMoon - a));
+	out.x *= mdistanceER;
+	out.y = cos(out.d) * sin(deMoon);
+	out.y -= cos(deMoon) * sin(out.d) * cos((raMoon - a));
+	out.y *= mdistanceER;
+	double z = sin(deMoon) * sin(out.d);
+	z += cos(deMoon) * cos(out.d) * cos((raMoon - a));
 	z *= mdistanceER;
 	const double k = 0.2725076;
 	const double s = 0.272281;
@@ -1050,20 +1051,22 @@ void calcSolarEclipseBessel(double &besX, double &besY, double &besD, double &be
 
 	// Parameters of the shadow cone
 	const double f1 = asin((SunEarth + k) / (rss * (1. - b)));
-	bestf1 = tan(f1);
+	out.tf1 = tan(f1);
 	const double f2 = asin((SunEarth - s) / (rss * (1. - b)));  
-	bestf2 = tan(f2);
-	besL1 = z * bestf1 + (k / cos(f1));
-	besL2 = z * bestf2 - (s / cos(f2));
-	besMu = gast - a * M_180_PI;
-	besMu = StelUtils::fmodpos(besMu, 360.);
+	out.tf2 = tan(f2);
+	out.L1 = z * out.tf1 + (k / cos(f1));
+	out.L2 = z * out.tf2 - (s / cos(f2));
+	out.mu = gast - a * M_180_PI;
+	out.mu = StelUtils::fmodpos(out.mu, 360.);
 
 	if(topocentricWereEnabled)
 	{
 		core->setUseTopocentricCoordinates(true);
 		core->update(0);
 	}
-};
+
+	return out;
+}
 
 // Solar eclipse data at given time
 void calcSolarEclipseData(double JD, double &dRatio, double &latDeg, double &lngDeg, double &altitude,
@@ -1084,62 +1087,59 @@ void calcSolarEclipseData(double JD, double &dRatio, double &latDeg, double &lng
 	static const double e2 = f*(2.-f);
 	static const double ff = 1./(1.-f);
 
-	double x,y,d,tf1,tf2,L1,L2,mu;
-	calcSolarEclipseBessel(x,y,d,tf1,tf2,L1,L2,mu);
-	const double rho1 = sqrt(1. - e2 * cos(d) * cos(d));
-	const double eta1 = y / rho1;
-	const double sd1 = sin(d) / rho1;
-	const double cd1 = sqrt(1. - e2) * cos(d) / rho1;
-	const double rho2 = sqrt(1.- e2 * sin(d) * sin(d));
-	const double sd1d2 = e2*sin(d)*cos(d) / (rho1*rho2);
+	const auto ep = calcSolarEclipseBessel();
+	const double rho1 = sqrt(1. - e2 * cos(ep.d) * cos(ep.d));
+	const double eta1 = ep.y / rho1;
+	const double sd1 = sin(ep.d) / rho1;
+	const double cd1 = sqrt(1. - e2) * cos(ep.d) / rho1;
+	const double rho2 = sqrt(1.- e2 * sin(ep.d) * sin(ep.d));
+	const double sd1d2 = e2*sin(ep.d)*cos(ep.d) / (rho1*rho2);
 	const double cd1d2 = sqrt(1. - sd1d2 * sd1d2);
-	const double p = 1. - x * x - eta1 * eta1;
+	const double p = 1. - ep.x * ep.x - eta1 * eta1;
 
 	if (p > 0.) // Central eclipse : Moon's shadow axis is touching Earth
 	{
 		const double zeta1 = sqrt(p);
 		const double zeta = rho2 * (zeta1 * cd1d2 - eta1 * sd1d2);
-		const double L2a = L2 - zeta * tf2;
-		const double b = -y * sin(d) + zeta * cos(d);
-		const double theta = atan2(x, b) * M_180_PI;
-		lngDeg = theta - mu;
+		const double L2a = ep.L2 - zeta * ep.tf2;
+		const double b = -ep.y * sin(ep.d) + zeta * cos(ep.d);
+		const double theta = atan2(ep.x, b) * M_180_PI;
+		lngDeg = theta - ep.mu;
 		lngDeg = StelUtils::fmodpos(lngDeg, 360.);
 		if (lngDeg > 180.) lngDeg -= 360.;
 		const double sfn1 = eta1 * cd1 + zeta1 * sd1;
 		const double cfn1 = sqrt(1. - sfn1 * sfn1);
 		latDeg = atan(ff * sfn1 / cfn1) / M_PI_180;
-		const double L1a = L1 - zeta * tf1;
+		const double L1a = ep.L1 - zeta * ep.tf1;
 		magnitude = L1a / (L1a + L2a);
 		dRatio = 1.+(magnitude-1.)*2.;
 
 		core->setJD(JD - 5./1440.);
 		core->update(0);
 
-		double x1,y1,d1,mu1;
-		calcSolarEclipseBessel(x1,y1,d1,tf1,tf2,L1,L2,mu1);
+		const auto ep1 = calcSolarEclipseBessel();
 
 		core->setJD(JD + 5./1440.);
 		core->update(0);
 
-		double x2,y2,d2,mu2;
-		calcSolarEclipseBessel(x2,y2,d2,tf1,tf2,L1,L2,mu2);
+		const auto ep2 = calcSolarEclipseBessel();
 
 		// Hourly rate
-		const double xdot = (x2 - x1) * 6.;
-		const double ydot = (y2 - y1) * 6.;
-		const double ddot = (d2 - d1) * 6.;
-		double mudot = (mu2 - mu1);
-		if (mudot<0.) mudot += 360.; // make sure it is positive in case mu2 < mu1
+		const double xdot = (ep2.x - ep1.x) * 6.;
+		const double ydot = (ep2.y - ep1.y) * 6.;
+		const double ddot = (ep2.d - ep1.d) * 6.;
+		double mudot = (ep2.mu - ep1.mu);
+		if (mudot<0.) mudot += 360.; // make sure it is positive in case ep2.mu < ep1.mu
 		mudot = mudot * 6.* M_PI_180;
 
 		// Duration of central eclipse in minutes
-		const double etadot = mudot * x * sin(d) - ddot * zeta;
-		const double xidot = mudot * (-y * sin(d) + zeta * cos(d));
+		const double etadot = mudot * ep.x * sin(ep.d) - ddot * zeta;
+		const double xidot = mudot * (-ep.y * sin(ep.d) + zeta * cos(ep.d));
 		const double n = sqrt((xdot - xidot) * (xdot - xidot) + (ydot - etadot) * (ydot - etadot));
 		duration = L2a*120./n; // positive = annular eclipse, negative = total eclipse
 
 		// Approximate altitude
-		altitude = asin(cfn1*cos(d)*cos(theta * M_PI_180)+sfn1*sin(d)) / M_PI_180;
+		altitude = asin(cfn1*cos(ep.d)*cos(theta * M_PI_180)+sfn1*sin(ep.d)) / M_PI_180;
 
 		// Path width in kilometers
 		// Explanatory Supplement to the Astronomical Almanac
@@ -1151,20 +1151,20 @@ void calcSolarEclipseData(double JD, double &dRatio, double &latDeg, double &lng
 		// Don't show the path width if there is no northern limit or southern limit.
 		// We will eventually have to calculate both limits, if we want to draw eclipse path on world map.
 		const double p1 = zeta * zeta;
-		const double p2 = x * (xdot - xidot) / n;
+		const double p2 = ep.x * (xdot - xidot) / n;
 		const double p3 = eta1 * (ydot - etadot) / n;
 		const double p4 = (p2 + p3) * (p2 + p3);
 		pathWidth = abs(earthRadius*2.*L2a/sqrt(p1+p4));
 	}
 	else  // Partial eclipse or non-central eclipse
 	{
-		const double yy1 = y / rho1;
-		double xi = x / sqrt(x * x + yy1 * yy1);
-		const double eta1 = yy1 / sqrt(x * x + yy1 * yy1);
-		const double sd1 = sin(d) / rho1;
-		const double cd1 = sqrt(1.- e2) * cos(d) / rho1;
-		const double rho2 = sqrt(1.- e2 * sin(d) * sin(d));
-		const double sd1d2 = e2 * sin(d) * cos(d) / (rho1 * rho2);
+		const double yy1 = ep.y / rho1;
+		double xi = ep.x / sqrt(ep.x * ep.x + yy1 * yy1);
+		const double eta1 = yy1 / sqrt(ep.x * ep.x + yy1 * yy1);
+		const double sd1 = sin(ep.d) / rho1;
+		const double cd1 = sqrt(1.- e2) * cos(ep.d) / rho1;
+		const double rho2 = sqrt(1.- e2 * sin(ep.d) * sin(ep.d));
+		const double sd1d2 = e2 * sin(ep.d) * cos(ep.d) / (rho1 * rho2);
 		double zeta = rho2 * (-(eta1) * sd1d2);
 		const double b = -eta1 * sd1;
 		double theta = atan2(xi, b);
@@ -1172,20 +1172,20 @@ void calcSolarEclipseData(double JD, double &dRatio, double &latDeg, double &lng
 		const double cfn1 = sqrt(1.- sfn1 * sfn1);
 		double lat = ff * sfn1 / cfn1;
 		lat = atan(lat);
-		L1 = L1 - zeta * tf1;
-		L2 = L2 - zeta * tf2;
+		const double L1 = ep.L1 - zeta * ep.tf1;
+		const double L2 = ep.L2 - zeta * ep.tf2;
 		const double c = 1. / sqrt(1.- e2 * sin(lat) * sin(lat));
 		const double s = (1.- e2) * c;
 		const double rs = s * sin(lat);
 		const double rc = c * cos(lat);
 		xi = rc * sin(theta);
-		const double eta = rs * cos(d) - rc * sin(d) * cos(theta);
-		const double u = x - xi;
-		const double v = y - eta;
+		const double eta = rs * cos(ep.d) - rc * sin(ep.d) * cos(theta);
+		const double u = ep.x - xi;
+		const double v = ep.y - eta;
 		magnitude = (L1 - sqrt(u * u + v * v)) / (L1 + L2);
 		dRatio = 1.+ (magnitude - 1.)* 2.;
 		theta = theta / M_PI_180;
-		lngDeg = theta - mu;
+		lngDeg = theta - ep.mu;
 		lngDeg = StelUtils::fmodpos(lngDeg, 360.);
 		if (lngDeg > 180.) lngDeg -= 360.;
 		latDeg = lat / M_PI_180;
