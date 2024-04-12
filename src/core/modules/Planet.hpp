@@ -77,17 +77,20 @@ public:
 	StelTextureSP tex;
 };
 
+struct EclipseBesselElements
+{
+	double x;   //!< x coordinate of the shadow axis in the fundamental plane (in units of equatorial Earth radius)
+	double y;   //!< y coordinate of the shadow axis in the fundamental plane (in units of equatorial Earth radius)
+	double d;   //!< declination of the shadow axis direction in the celestial sphere
+	double mu;  //!< hour angle of the shadow axis direction in the celestial sphere
+	double tf1; //!< tangent of the angle of the penumbral shadow cone with the shadow axis
+	double tf2; //!< tangent of the angle of the umbral shadow cone with the shadow axis
+	double L1;  //!< radius of the penumbral shadow on the fundamental plane (in units of equatorial Earth radius)
+	double L2;  //!< radius of the umbral shadow on the fundamental plane (in units of equatorial Earth radius)
+};
+
 //! Calculate Besselian elements of solar eclipse
-//! @param besX x coordinate of the shadow axis in the fundamental plane (in units of equatorial Earth radius)
-//! @param besY y coordinate of the shadow axis in the fundamental plane (in units of equatorial Earth radius)
-//! @param besDec declination of the shadow axis direction in the celestial sphere
-//! @param besTf1 tangent of the angle of the penumbral shadow cone with the shadow axis
-//! @param besTf2 tangent of the angle of the umbral shadow cone with the shadow axis
-//! @param besL1 radius of the penumbral shadow on the fundamental plane (in units of equatorial Earth radius)
-//! @param besL2 radius of the umbral shadow on the fundamental plane (in units of equatorial Earth radius)
-//! @param besMu hour angle of the shadow axis direction in the celestial sphere
-void calcSolarEclipseBessel(double &besX, double &besY, double &besDec, double &besTf1,
-                            double &besTf2, double &besL1, double &besL2, double &besMu);
+EclipseBesselElements calcSolarEclipseBessel();
 
 // Calculate solar eclipse data at given time
 void calcSolarEclipseData(double JD, double &dRatio, double &latDeg, double &lngDeg, double &altitude,
