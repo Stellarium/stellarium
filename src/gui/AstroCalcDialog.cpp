@@ -3013,18 +3013,18 @@ LocalSEparams localSolarEclipse(double JD,int contact,bool central) {
 	core->setJD(JD);
 	core->update(0);
 
-	double xdot,ydot,ddot,mudot,ldot,etadot,bdot,cdot;
-	calcBesselParameters(xdot,ydot,ddot,mudot,ldot,etadot,bdot,cdot,true);
-	const auto ep = calcSolarEclipseBessel();
-	const double x = ep.x, y = ep.y, d = ep.d, tf1 = ep.tf1, tf2 = ep.tf2, mu = ep.mu;
-	double L1 = ep.L1, L2 = ep.L2;
+	const auto bp = calcBesselParameters(true);
+	const double xdot = bp.xdot, ydot = bp.ydot, ddot = bp.ddot, mudot = bp.mudot;
+	const double x = bp.elems.x, y = bp.elems.y, d = bp.elems.d,
+	             tf1 = bp.elems.tf1, tf2 = bp.elems.tf2, mu = bp.elems.mu;
+	double L1 = bp.elems.L1, L2 = bp.elems.L2;
 	double theta = (mu + lon) * M_PI_180;
 	theta = StelUtils::fmodpos(theta, 2.*M_PI);
 	const double xi = rc*std::sin(theta);
 	const double eta = rs*std::cos(d)-rc*std::sin(d)*std::cos(theta);
 	const double zeta = rs*std::sin(d)+rc*std::cos(d)*std::cos(theta);
 	const double xidot = mudot*rc*std::cos(theta);
-	etadot = mudot*xi*std::sin(d)-zeta*ddot;
+	double etadot = mudot*xi*std::sin(d)-zeta*ddot;
 	const double u = x - xi;
 	const double v = y - eta;
 	const double udot = xdot - xidot;
@@ -3059,10 +3059,10 @@ double AstroCalcDialog::getDeltaTimeOfContact(double JD, bool beginning, bool pe
 	const int sign = outerContact ? 1 : -1; // there are outer & inner contacts
 	core->setJD(JD);
 	core->update(0);
-	double xdot,ydot,ddot,mudot,ldot,etadot,bdot,cdot;
-	calcBesselParameters(xdot,ydot,ddot,mudot,ldot,etadot,bdot,cdot,penumbra);
-	const auto ep = calcSolarEclipseBessel();
-	const double x = ep.x, y = ep.y, d = ep.d, L1 = ep.L1, L2 = ep.L2;
+	const auto bp = calcBesselParameters(true);
+	const double xdot = bp.xdot;
+	double ydot = bp.ydot;
+	const double x = bp.elems.x, y = bp.elems.y, d = bp.elems.d, L1 = bp.elems.L1, L2 = bp.elems.L2;
 	const double rho1 = std::sqrt(1.-e2*std::cos(d)*std::cos(d));
 	double s,dt;
 	if (!penumbra)
@@ -3116,14 +3116,13 @@ double AstroCalcDialog::getJDofMinimumDistance(double JD)
 	const double currentJD = core->getJD(); // save current JD
 	double dt = 1.;
 	int iterations = 0;
-	double xdot,ydot,ddot,mudot,ldot,etadot,bdot,cdot;
 	while (std::abs(dt)>(0.1/86400.) && (iterations < 20)) // 0.1 second of accuracy
 	{
 		core->setJD(JD);
 		core->update(0);
-		calcBesselParameters(xdot,ydot,ddot,mudot,ldot,etadot,bdot,cdot,false);
-		const auto ep = calcSolarEclipseBessel();
-		const double x = ep.x, y = ep.y;
+		const auto bp = calcBesselParameters(true);
+		const double xdot = bp.xdot, ydot = bp.ydot;
+		const double x = bp.elems.x, y = bp.elems.y;
 		double n2 = xdot*xdot + ydot*ydot;
 		dt = -(x*xdot + y*ydot)/n2;
 		JD += dt/24.;
@@ -4018,10 +4017,9 @@ QPair<double, double> AstroCalcDialog::getMaximumEclipseAtRiseSet(bool first, do
 	static const double ff = 1./(1.-f);
 	core->setJD(JD);
 	core->update(0);
-	double xdot,ydot,ddot,mudot,ldot,etadot,bdot,cdot;
-	calcBesselParameters(xdot,ydot,ddot,mudot,ldot,etadot,bdot,cdot,true);
-	const auto ep = calcSolarEclipseBessel();
-	const double x = ep.x, y = ep.y, d = ep.d, L1 = ep.L1, mu = ep.mu;
+	const auto bp = calcBesselParameters(true);
+	const double bdot = bp.bdot, cdot = bp.cdot;
+	const double x = bp.elems.x, y = bp.elems.y, d = bp.elems.d, L1 = bp.elems.L1, mu = bp.elems.mu;
 
 	double qa = std::atan2(bdot,cdot);
 	if (!first) // there are two parts of the curve
@@ -4051,9 +4049,9 @@ QPair<double, double> AstroCalcDialog::getMaximumEclipseAtRiseSet(bool first, do
 	return coordinates;
 }
 
-void calcBesselParameters(double &xdot, double &ydot, double &ddot, double &mudot, double &ldot,
-                          double &etadot, double &bdot, double &cdot, bool penumbra)
+EclipseBesselParameters calcBesselParameters(bool penumbra)
 {
+	EclipseBesselParameters out;
 	StelCore* core = StelApp::getInstance().getCore();
 	double JD = core->getJD();
 	core->setJD(JD - 5./1440.);
@@ -4065,32 +4063,34 @@ void calcBesselParameters(double &xdot, double &ydot, double &ddot, double &mudo
 	const auto ep2 = calcSolarEclipseBessel();
 	const double x2 = ep2.x, y2 = ep2.y, d2 = ep2.d, mu2 = ep2.mu, L12 = ep2.L1, L22 = ep2.L2;
 
-	xdot = (x2-x1)*6.;
-	ydot = (y2-y1)*6.;
-	ddot = (d2-d1)*6.*M_PI_180;
-	mudot = (mu2-mu1);
-	if (mudot<0.) mudot += 360.; // make sure it is positive in case mu2 < mu1
-	mudot = mudot*6.* M_PI_180;
+	out.xdot = (x2-x1)*6.;
+	out.ydot = (y2-y1)*6.;
+	out.ddot = (d2-d1)*6.*M_PI_180;
+	out.mudot = (mu2-mu1);
+	if (out.mudot<0.) out.mudot += 360.; // make sure it is positive in case mu2 < mu1
+	out.mudot = out.mudot*6.* M_PI_180;
 	core->setJD(JD);
 	core->update(0);
-	const auto ep = calcSolarEclipseBessel();
-	const double x = ep.x, y = ep.y, d = ep.d, tf1 = ep.tf1, tf2 = ep.tf2, L1 = ep.L1, L2 = ep.L2;
+	out.elems = calcSolarEclipseBessel();
+	const auto& ep = out.elems;
 	double tf,L;
 	if (penumbra)
 	{
-		L = L1;
-		tf = tf1;
-		ldot = (L12-L11)*6.;
+		L = ep.L1;
+		tf = ep.tf1;
+		out.ldot = (L12-L11)*6.;
 	}
 	else
 	{
-		L = L2;
-		tf = tf2;
-		ldot = (L22-L21)*6.;
+		L = ep.L2;
+		tf = ep.tf2;
+		out.ldot = (L22-L21)*6.;
 	}
-	etadot = mudot*x*std::sin(d);
-	bdot = -(ydot-etadot);
-	cdot = xdot+mudot*y*std::sin(d)+mudot*L*tf*std::cos(d);
+	out.etadot = out.mudot * ep.x * std::sin(ep.d);
+	out.bdot = -(out.ydot-out.etadot);
+	out.cdot = out.xdot + out.mudot * ep.y * std::sin(ep.d) + out.mudot * L * tf * std::cos(ep.d);
+
+	return out;
 }
 
 void AstroCalcDialog::generateKML(const EclipseMapData& data, const QString& dateString, QTextStream& stream) const
@@ -4763,10 +4763,9 @@ QPair<double, double> AstroCalcDialog::getNSLimitOfShadow(double JD, bool northe
 	static const double ff = 1./(1.-f);
 	core->setJD(JD);
 	core->update(0);
-	double xdot,ydot,ddot,mudot,ldot,etadot,bdot,cdot;
-	calcBesselParameters(xdot,ydot,ddot,mudot,ldot,etadot,bdot,cdot,penumbra);
-	const auto ep = calcSolarEclipseBessel();
-	const double x = ep.x, y = ep.y, d = ep.d, tf1 = ep.tf1, tf2 = ep.tf2, L1 = ep.L1, L2 = ep.L2, mu = ep.mu;
+	const auto bp = calcBesselParameters(penumbra);
+	const double x = bp.elems.x, y = bp.elems.y, d = bp.elems.d, tf1 = bp.elems.tf1,
+	             tf2 = bp.elems.tf2, L1 = bp.elems.L1, L2 = bp.elems.L2, mu = bp.elems.mu;
 	const double rho1 = std::sqrt(1.-e2*std::cos(d)*std::cos(d));
 	const double y1 = y/rho1;
 	double eta1 = y1;
@@ -4788,8 +4787,8 @@ QPair<double, double> AstroCalcDialog::getNSLimitOfShadow(double JD, bool northe
 		tf = tf2;
 	}
 	double Lb = L-zeta*tf;
-	double xidot = mudot*(-y*std::sin(d)+zeta*std::cos(d));
-	double tq = -(ydot-etadot)/(xdot-xidot);
+	double xidot = bp.mudot*(-y*std::sin(d)+zeta*std::cos(d));
+	double tq = -(bp.ydot-bp.etadot)/(bp.xdot-xidot);
 	double sq = std::sin(std::atan(tq));
 	double cq = std::cos(std::atan(tq));
 	if (!northernLimit)
@@ -4810,8 +4809,8 @@ QPair<double, double> AstroCalcDialog::getNSLimitOfShadow(double JD, bool northe
 	{
 		double zeta1 = std::sqrt(zeta);
 		zeta = rho2*(zeta1*cd1d2-eta1*sd1d2);
-		double adot = -ldot-mudot*x*tf*std::cos(d);
-		double tq = (bdot-zeta*ddot-(adot/cq))/(cdot-zeta*mudot*std::cos(d));
+		double adot = -bp.ldot-bp.mudot*x*tf*std::cos(d);
+		double tq = (bp.bdot-zeta*bp.ddot-(adot/cq))/(bp.cdot-zeta*bp.mudot*std::cos(d));
 		double Lb = L-zeta*tf;
 		sq = std::sin(std::atan(tq));
 		cq = std::cos(std::atan(tq));
@@ -4832,8 +4831,8 @@ QPair<double, double> AstroCalcDialog::getNSLimitOfShadow(double JD, bool northe
 		{
 			zeta1 = std::sqrt(zeta);
 			zeta = rho2*(zeta1*cd1d2-eta1*sd1d2);
-			//tq = bdot-zeta*ddot-adot/cq;
-			//tq = tq/(cdot-zeta*mudot*std::cos(d));
+			//tq = bp.bdot-zeta*ddot-adot/cq;
+			//tq = tq/(bp.cdot-zeta*bp.mudot*std::cos(d));
 			double b = -eta1*sd1+zeta1*cd1;
 			double lngDeg = StelUtils::fmodpos(std::atan2(xi,b)*M_180_PI - mu + 180., 360.) - 180.;
 			double sfn1 = eta1*cd1+zeta1*sd1;
@@ -4855,21 +4854,25 @@ QPair<double, double> AstroCalcDialog::getExtremeNSLimitOfShadow(double JD, bool
 	static const double f = 1.0 - ssystem->getEarth()->getOneMinusOblateness(); // flattening
 	static const double e2 = f*(2.-f);
 	static const double ff = 1./(1.-f);
+
 	core->setJD(JD+0.1);
 	core->update(0);
-	double xdot,ydot,ddot,mudot,ldot,etadot,bdot1,cdot1,bdot2,cdot2;
-	calcBesselParameters(xdot,ydot,ddot,mudot,ldot,etadot,bdot1,cdot1,penumbra);
+	const auto bpPlus = calcBesselParameters(penumbra);
+	const double bdot1 = bpPlus.bdot, cdot1 = bpPlus.cdot;
+
 	core->setJD(JD-0.1);
 	core->update(0);
-	calcBesselParameters(xdot,ydot,ddot,mudot,ldot,etadot,bdot2,cdot2,penumbra);
+	const auto bpMinus = calcBesselParameters(penumbra);
+	const double bdot2 = bpMinus.bdot, cdot2 = bpMinus.cdot;
+
 	const double bdd = 5.*(bdot1-bdot2);
 	const double cdd = 5.*(cdot1-cdot2);
+
 	core->setJD(JD);
 	core->update(0);
-	const auto ep = calcSolarEclipseBessel();
-	const double x = ep.x, y = ep.y, d = ep.d, L1 = ep.L1, L2 = ep.L2;
-	double bdot,cdot,xidot;
-	calcBesselParameters(xdot,ydot,ddot,mudot,ldot,etadot,bdot,cdot,penumbra);
+	const auto bp = calcBesselParameters(penumbra);
+	const double xdot = bp.xdot, ydot = bp.ydot, bdot = bp.bdot, cdot = bp.cdot;
+	const double x = bp.elems.x, y = bp.elems.y, d = bp.elems.d, L1 = bp.elems.L1, L2 = bp.elems.L2;
 	double e = std::sqrt(bdot*bdot+cdot*cdot);
 	double rho1 = std::sqrt(1-e2*std::cos(d)*std::cos(d));
 	double scq = e/cdot;
@@ -4891,6 +4894,7 @@ QPair<double, double> AstroCalcDialog::getExtremeNSLimitOfShadow(double JD, bool
 			cq = std::abs(cq);
 	}
 	double sq = tq*cq;
+	double xidot, etadot;
 	if (cq>0.)
 	{
 		xidot = xdot-L*bdd/e;
@@ -4912,9 +4916,10 @@ QPair<double, double> AstroCalcDialog::getExtremeNSLimitOfShadow(double JD, bool
 		double tc = (czi/std::sqrt(n2))-(xi*xidot+eta*etadot)/n2;
 		core->setJD(JD+tc/24.);
 		core->update(0);
-		const auto ep = calcSolarEclipseBessel();
-		const double x = ep.x, y = ep.y, d = ep.d, L1 = ep.L1, L2 = ep.L2, mu = ep.mu;
-		calcBesselParameters(xdot,ydot,ddot,mudot,ldot,etadot,bdot,cdot,penumbra);
+		const auto bp = calcBesselParameters(penumbra);
+		const double bdot = bp.bdot, cdot = bp.cdot;
+		const double x = bp.elems.x, y = bp.elems.y, d = bp.elems.d,
+		             L1 = bp.elems.L1, L2 = bp.elems.L2, mu = bp.elems.mu;
 		//tq = bdot/cdot;
 		e = std::sqrt(bdot*bdot+cdot*cdot);
 		rho1 = std::sqrt(1.-e2*std::cos(d)*std::cos(d));
