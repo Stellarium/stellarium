@@ -3925,11 +3925,17 @@ QPair<double, double> AstroCalcDialog::getRiseSetLineCoordinates(bool first, dou
 	static const double f = 1.0 - ssystem->getEarth()->getOneMinusOblateness(); // flattening
 	static const double ff = 1./(1.-f);
 	const double m2 = x*x+y*y;
+	// Cosine of the angle between (0,0)-(x,y) line and the intersection
+	// of the penumbra circle and the Earth circle in the fundamental plane.
 	const double cgm = (m2+1.-L*L)/(2.*std::sqrt(m2));
+
 	QPair<double, double> coordinates(99., 0.);
 	if (std::abs(cgm)<=1.)
 	{
-		const double gamma = first ? std::acos(cgm)+std::atan2(x,y) : M_PI*2.-std::acos(cgm)+std::atan2(x,y);
+		// Angle from Y axis clockwise to the direction towards one of the points of intersection
+		const double gamma = first ? std::acos(cgm)+std::atan2(x,y)
+		                           : M_PI*2.-std::acos(cgm)+std::atan2(x,y);
+
 		const double xi = std::sin(gamma);
 		const double eta = std::cos(gamma);
 		const double b = -eta*std::sin(d);
@@ -3939,8 +3945,8 @@ QPair<double, double> AstroCalcDialog::getRiseSetLineCoordinates(bool first, dou
 		if (lngDeg > 180.) lngDeg -= 360.;
 		double sfn1 = eta*std::cos(d);
 		double cfn1 = std::sqrt(1.-sfn1*sfn1);
-		double latDeg = ff*sfn1/cfn1;
-		coordinates.first = std::atan(latDeg)*M_180_PI;
+		double tanLatDeg = ff*sfn1/cfn1;
+		coordinates.first = std::atan(tanLatDeg)*M_180_PI;
 		coordinates.second = lngDeg;
 	}
 	return coordinates;
