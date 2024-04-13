@@ -518,6 +518,16 @@ private slots:
 	void saveGraph(QChartView *graph);
 
 private:
+	struct GeoPoint
+	{
+		double latitude;
+		double longitude;
+		GeoPoint() = default;
+		GeoPoint(double latitude, double longitude)
+			: latitude(latitude), longitude(longitude)
+		{
+		}
+	};
 	class AstroCalcExtraEphemerisDialog* extraEphemerisDialog;
 	class AstroCalcCustomStepsDialog* customStepsDialog;
 	class StelCore* core;
@@ -609,17 +619,17 @@ private:
 	//! Iteration to calculate contact times of solar eclipse
 	double getDeltaTimeOfContact(double JD, bool beginning, bool penumbra, bool external, bool outerContact);
 	//! Geographic coordinates where solar eclipse begins/ends at sunrise/sunset
-	QPair<double, double> getRiseSetLineCoordinates(bool first, double x, double y, double d, double L, double mu);
+	GeoPoint getRiseSetLineCoordinates(bool first, double x, double y, double d, double L, double mu);
 	//! Geographic coordinates where maximum solar eclipse occurs at sunrise/sunset
-	QPair<double, double> getMaximumEclipseAtRiseSet(bool first, double JD);
+	GeoPoint getMaximumEclipseAtRiseSet(bool first, double JD);
 	//! Geographic coordinates of shadow outline
-	QPair<double, double> getShadowOutlineCoordinates(double angle, double x, double y, double d, double L, double tf,double mu);
+	GeoPoint getShadowOutlineCoordinates(double angle, double x, double y, double d, double L, double tf,double mu);
 	//! Geographic coordinates of northern and southern limit of shadow
-	QPair<double, double> getNSLimitOfShadow(double JD, bool northernLimit, bool penumbra);
+	GeoPoint getNSLimitOfShadow(double JD, bool northernLimit, bool penumbra);
 	//! Geographic coordinates of extreme northern and southern limits of shadow
-	QPair<double, double> getExtremeNSLimitOfShadow(double JD, bool northernLimit, bool penumbra, bool begin);
+	GeoPoint getExtremeNSLimitOfShadow(double JD, bool northernLimit, bool penumbra, bool begin);
 	//! Geographic coordinates of extreme contact
-	QPair<double, double> getContactCoordinates(double x, double y, double d, double mu);
+	GeoPoint getContactCoordinates(double x, double y, double d, double mu);
 	//! Init header and list of local solar eclipse
 	void initListSolarEclipseLocal();
 	//! Init header and list of transit
