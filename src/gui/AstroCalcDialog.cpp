@@ -3975,7 +3975,7 @@ QPair<double, double> AstroCalcDialog::getShadowOutlineCoordinates(double angle,
 	QPair<double, double> coordinates(99., 0.);
 	if (zeta0 >= 0)
 	{
-		double L1 = L-zeta0*tf;
+		double L1 = L-std::sqrt(zeta0)*tf;
 		double xi = x-L1*sinAngle;
 		double eta1 = (y-L1*cosAngle)/rho1;
 		double pp = 1.-xi*xi-eta1*eta1;
