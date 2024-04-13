@@ -4095,43 +4095,32 @@ auto AstroCalcDialog::getShadowOutlineCoordinates(double angle,double x,double y
 	const double rho1 = std::sqrt(1.-e2*cosD*cosD);
 	const double sd1 = std::sin(d)/rho1;
 	const double cd1 = std::sqrt(1.-e2)*cosD/rho1;
-	const double xi0 = x-L*sinAngle;
-	const double eta0 = y-L*cosAngle;
-	double zeta0 = 1.-xi0*xi0-eta0*eta0;
 
 	GeoPoint coordinates(99., 0.);
-	if (zeta0 >= 0)
+
+	double L1, xi, eta1, zeta1 = 0;
+	for(int n = 0; n < 3; ++n)
 	{
-		double L1 = L-std::sqrt(zeta0)*tf;
-		double xi = x-L1*sinAngle;
-		double eta1 = (y-L1*cosAngle)/rho1;
-		double pp = 1.-xi*xi-eta1*eta1;
-
-		if (pp >= 0)
-		{
-			zeta0 = std::sqrt(pp);
-			L1 = L-zeta0*tf;
-			xi = x-L1*sinAngle;
-			eta1 = (y-L1*cosAngle)/rho1;
-			pp = 1.-xi*xi-eta1*eta1;
-
-			if (pp >= 0)
-			{
-				double zeta1 = std::sqrt(pp);
-				double b = -eta1*sd1+zeta1*cd1;
-				double theta = std::atan2(xi,b)*M_180_PI;
-				double lngDeg = theta-mu;
-				lngDeg = StelUtils::fmodpos(lngDeg, 360.);
-				if (lngDeg > 180.) lngDeg -= 360.;
-
-				double sfn1 = eta1*cd1+zeta1*sd1;
-				double cfn1 = std::sqrt(1.-sfn1*sfn1);
-				double latDeg = ff*sfn1/cfn1;
-				coordinates.latitude = std::atan(latDeg)*M_180_PI;
-				coordinates.longitude = lngDeg;
-			}
-		}
+		L1 = L-zeta1*tf;
+		xi = x-L1*sinAngle;
+		eta1 = (y-L1*cosAngle)/rho1;
+		const double zeta1sqr = 1.-xi*xi-eta1*eta1;
+		if (zeta1sqr < 0) return coordinates;
+		zeta1 = std::sqrt(zeta1sqr);
 	}
+
+	double b = -eta1*sd1+zeta1*cd1;
+	double theta = std::atan2(xi,b)*M_180_PI;
+	double lngDeg = theta-mu;
+	lngDeg = StelUtils::fmodpos(lngDeg, 360.);
+	if (lngDeg > 180.) lngDeg -= 360.;
+
+	double sfn1 = eta1*cd1+zeta1*sd1;
+	double cfn1 = std::sqrt(1.-sfn1*sfn1);
+	double tanLat = ff*sfn1/cfn1;
+	coordinates.latitude = std::atan(tanLat)*M_180_PI;
+	coordinates.longitude = lngDeg;
+
 	return coordinates;
 }
 
