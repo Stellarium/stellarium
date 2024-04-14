@@ -3013,17 +3013,18 @@ LocalSEparams localSolarEclipse(double JD,int contact,bool central) {
 	core->setJD(JD);
 	core->update(0);
 
-	double xdot,ydot,ddot,mudot,ldot,etadot,bdot,cdot;
-	calcBesselParameters(xdot,ydot,ddot,mudot,ldot,etadot,bdot,cdot,true);
-	double x,y,d,tf1,tf2,L1,L2,mu;
-	calcSolarEclipseBessel(x,y,d,tf1,tf2,L1,L2,mu);
+	const auto bp = calcBesselParameters(true);
+	const double xdot = bp.xdot, ydot = bp.ydot, ddot = bp.ddot, mudot = bp.mudot;
+	const double x = bp.elems.x, y = bp.elems.y, d = bp.elems.d,
+	             tf1 = bp.elems.tf1, tf2 = bp.elems.tf2, mu = bp.elems.mu;
+	double L1 = bp.elems.L1, L2 = bp.elems.L2;
 	double theta = (mu + lon) * M_PI_180;
 	theta = StelUtils::fmodpos(theta, 2.*M_PI);
 	const double xi = rc*std::sin(theta);
 	const double eta = rs*std::cos(d)-rc*std::sin(d)*std::cos(theta);
 	const double zeta = rs*std::sin(d)+rc*std::cos(d)*std::cos(theta);
 	const double xidot = mudot*rc*std::cos(theta);
-	etadot = mudot*xi*std::sin(d)-zeta*ddot;
+	double etadot = mudot*xi*std::sin(d)-zeta*ddot;
 	const double u = x - xi;
 	const double v = y - eta;
 	const double udot = xdot - xidot;
@@ -3058,10 +3059,10 @@ double AstroCalcDialog::getDeltaTimeOfContact(double JD, bool beginning, bool pe
 	const int sign = outerContact ? 1 : -1; // there are outer & inner contacts
 	core->setJD(JD);
 	core->update(0);
-	double xdot,ydot,ddot,mudot,ldot,etadot,bdot,cdot;
-	calcBesselParameters(xdot,ydot,ddot,mudot,ldot,etadot,bdot,cdot,penumbra);
-	double x,y,d,tf1,tf2,L1,L2,mu;
-	calcSolarEclipseBessel(x,y,d,tf1,tf2,L1,L2,mu);
+	const auto bp = calcBesselParameters(true);
+	const double xdot = bp.xdot;
+	double ydot = bp.ydot;
+	const double x = bp.elems.x, y = bp.elems.y, d = bp.elems.d, L1 = bp.elems.L1, L2 = bp.elems.L2;
 	const double rho1 = std::sqrt(1.-e2*std::cos(d)*std::cos(d));
 	double s,dt;
 	if (!penumbra)
@@ -3115,14 +3116,13 @@ double AstroCalcDialog::getJDofMinimumDistance(double JD)
 	const double currentJD = core->getJD(); // save current JD
 	double dt = 1.;
 	int iterations = 0;
-	double xdot,ydot,ddot,mudot,ldot,etadot,bdot,cdot;
-	double x,y,d,tf1,tf2,L1,L2,mu;
 	while (std::abs(dt)>(0.1/86400.) && (iterations < 20)) // 0.1 second of accuracy
 	{
 		core->setJD(JD);
 		core->update(0);
-		calcBesselParameters(xdot,ydot,ddot,mudot,ldot,etadot,bdot,cdot,false);
-		calcSolarEclipseBessel(x,y,d,tf1,tf2,L1,L2,mu);
+		const auto bp = calcBesselParameters(true);
+		const double xdot = bp.xdot, ydot = bp.ydot;
+		const double x = bp.elems.x, y = bp.elems.y;
 		double n2 = xdot*xdot + ydot*ydot;
 		dt = -(x*xdot + y*ydot)/n2;
 		JD += dt/24.;
@@ -3177,8 +3177,8 @@ void AstroCalcDialog::generateSolarEclipses()
 				core->setJD(JD);
 				core->update(0);
 
-				double x,y,d,tf1,tf2,L1,L2,mu;
-				calcSolarEclipseBessel(x,y,d,tf1,tf2,L1,L2,mu);
+				const auto ep = calcSolarEclipseBessel();
+				const double x = ep.x, y = ep.y, L2 = ep.L2;
 				double gamma = sqrt(x * x + y * y);
 				if (y<0.) gamma = -(gamma);
 				double dRatio,latDeg,lngDeg,altitude,pathWidth,duration,magnitude;
@@ -3406,8 +3406,8 @@ void AstroCalcDialog::generateSolarEclipsesLocal()
 				JD = getJDofMinimumDistance(JD);
 				core->setJD(JD);
 				core->update(0);
-				double x,y,d,tf1,tf2,L1,L2,mu;
-				calcSolarEclipseBessel(x,y,d,tf1,tf2,L1,L2,mu);
+				const auto ep = calcSolarEclipseBessel();
+				const double x = ep.x, y = ep.y, L2 = ep.L2;
 				double gamma = sqrt(x * x + y * y);
 				if (y<0.) gamma *= -1.;
 				if (abs(gamma) <= (1.5433 + L2)) // Solar eclipse occurs on this date
@@ -3671,8 +3671,8 @@ void AstroCalcDialog::selectCurrentSolarEclipse(const QModelIndex& modelIndex)
 	bool nonCentralEclipse = false;
 	core->setJD(JD);
 	core->update(0);
-	double x,y,d,tf1,tf2,L1,L2,mu;
-	calcSolarEclipseBessel(x,y,d,tf1,tf2,L1,L2,mu);
+	const auto ep = calcSolarEclipseBessel();
+	const double x = ep.x, y = ep.y, L2 = ep.L2;
 	double gamma = std::sqrt(x*x+y*y);
 	QPair<double, double> coordinates;
 	if ((gamma > 0.9972) && (gamma < (1.5433 + L2)))
@@ -3706,7 +3706,8 @@ void AstroCalcDialog::selectCurrentSolarEclipse(const QModelIndex& modelIndex)
 			}
 			core->setJD(JD);
 			core->update(0);
-			calcSolarEclipseBessel(x,y,d,tf1,tf2,L1,L2,mu);
+			const auto ep = calcSolarEclipseBessel();
+			const double x = ep.x, y = ep.y, d = ep.d, mu = ep.mu;
 			coordinates = getContactCoordinates(x,y,d,mu);
 			latDeg = coordinates.first;
 			lngDeg = coordinates.second;
@@ -3736,7 +3737,8 @@ void AstroCalcDialog::selectCurrentSolarEclipse(const QModelIndex& modelIndex)
 			}
 			core->setJD(JD);
 			core->update(0);
-			calcSolarEclipseBessel(x,y,d,tf1,tf2,L1,L2,mu);
+			const auto ep = calcSolarEclipseBessel();
+			const double x = ep.x, y = ep.y, d = ep.d, mu = ep.mu;
 			coordinates = getContactCoordinates(x,y,d,mu);
 			latDeg = coordinates.first;
 			lngDeg = coordinates.second;
@@ -3973,7 +3975,7 @@ QPair<double, double> AstroCalcDialog::getShadowOutlineCoordinates(double angle,
 	QPair<double, double> coordinates(99., 0.);
 	if (zeta0 >= 0)
 	{
-		double L1 = L-zeta0*tf;
+		double L1 = L-std::sqrt(zeta0)*tf;
 		double xi = x-L1*sinAngle;
 		double eta1 = (y-L1*cosAngle)/rho1;
 		double pp = 1.-xi*xi-eta1*eta1;
@@ -4015,10 +4017,9 @@ QPair<double, double> AstroCalcDialog::getMaximumEclipseAtRiseSet(bool first, do
 	static const double ff = 1./(1.-f);
 	core->setJD(JD);
 	core->update(0);
-	double xdot,ydot,ddot,mudot,ldot,etadot,bdot,cdot;
-	calcBesselParameters(xdot,ydot,ddot,mudot,ldot,etadot,bdot,cdot,true);
-	double x,y,d,tf1,tf2,L1,L2,mu;
-	calcSolarEclipseBessel(x,y,d,tf1,tf2,L1,L2,mu);
+	const auto bp = calcBesselParameters(true);
+	const double bdot = bp.bdot, cdot = bp.cdot;
+	const double x = bp.elems.x, y = bp.elems.y, d = bp.elems.d, L1 = bp.elems.L1, mu = bp.elems.mu;
 
 	double qa = std::atan2(bdot,cdot);
 	if (!first) // there are two parts of the curve
@@ -4048,46 +4049,48 @@ QPair<double, double> AstroCalcDialog::getMaximumEclipseAtRiseSet(bool first, do
 	return coordinates;
 }
 
-void calcBesselParameters(double &xdot, double &ydot, double &ddot, double &mudot, double &ldot,
-                          double &etadot, double &bdot, double &cdot, bool penumbra)
+EclipseBesselParameters calcBesselParameters(bool penumbra)
 {
+	EclipseBesselParameters out;
 	StelCore* core = StelApp::getInstance().getCore();
 	double JD = core->getJD();
-	double tf,tf1,tf2,L;
 	core->setJD(JD - 5./1440.);
 	core->update(0);
-	double x1,y1,d1,mu1,L11,L21;
-	calcSolarEclipseBessel(x1,y1,d1,tf1,tf2,L11,L21,mu1);
+	const auto ep1 = calcSolarEclipseBessel();
+	const double x1 = ep1.x, y1 = ep1.y, d1 = ep1.d, mu1 = ep1.mu, L11 = ep1.L1, L21 = ep1.L2;
 	core->setJD(JD + 5./1440.);
 	core->update(0);
-	double x2,y2,d2,mu2,L12,L22;
-	calcSolarEclipseBessel(x2,y2,d2,tf1,tf2,L12,L22,mu2);
+	const auto ep2 = calcSolarEclipseBessel();
+	const double x2 = ep2.x, y2 = ep2.y, d2 = ep2.d, mu2 = ep2.mu, L12 = ep2.L1, L22 = ep2.L2;
 
-	xdot = (x2-x1)*6.;
-	ydot = (y2-y1)*6.;
-	ddot = (d2-d1)*6.*M_PI_180;
-	mudot = (mu2-mu1);
-	if (mudot<0.) mudot += 360.; // make sure it is positive in case mu2 < mu1
-	mudot = mudot*6.* M_PI_180;
+	out.xdot = (x2-x1)*6.;
+	out.ydot = (y2-y1)*6.;
+	out.ddot = (d2-d1)*6.*M_PI_180;
+	out.mudot = (mu2-mu1);
+	if (out.mudot<0.) out.mudot += 360.; // make sure it is positive in case mu2 < mu1
+	out.mudot = out.mudot*6.* M_PI_180;
 	core->setJD(JD);
 	core->update(0);
-	double x,y,d,L1,L2,mu;
-	calcSolarEclipseBessel(x,y,d,tf1,tf2,L1,L2,mu);
+	out.elems = calcSolarEclipseBessel();
+	const auto& ep = out.elems;
+	double tf,L;
 	if (penumbra)
 	{
-		L = L1;
-		tf = tf1;
-		ldot = (L12-L11)*6.;
+		L = ep.L1;
+		tf = ep.tf1;
+		out.ldot = (L12-L11)*6.;
 	}
 	else
 	{
-		L = L2;
-		tf = tf2;
-		ldot = (L22-L21)*6.;
+		L = ep.L2;
+		tf = ep.tf2;
+		out.ldot = (L22-L21)*6.;
 	}
-	etadot = mudot*x*std::sin(d);
-	bdot = -(ydot-etadot);
-	cdot = xdot+mudot*y*std::sin(d)+mudot*L*tf*std::cos(d);
+	out.etadot = out.mudot * ep.x * std::sin(ep.d);
+	out.bdot = -(out.ydot-out.etadot);
+	out.cdot = out.xdot + out.mudot * ep.y * std::sin(ep.d) + out.mudot * L * tf * std::cos(ep.d);
+
+	return out;
 }
 
 void AstroCalcDialog::generateKML(const EclipseMapData& data, const QString& dateString, QTextStream& stream) const
@@ -4268,16 +4271,16 @@ auto AstroCalcDialog::generateEclipseMap(const double JDMid) -> EclipseMapData
 
 	bool partialEclipse = false;
 	bool nonCentralEclipse = false;
-	double x,y,d,tf1,tf2,L1,L2,mu;
 	double dRatio,latDeg,lngDeg,altitude,pathWidth,duration,magnitude;
 	core->setJD(JDMid);
 	core->update(0);
-	calcSolarEclipseBessel(x,y,d,tf1,tf2,L1,L2,mu);
+	const auto ep = calcSolarEclipseBessel();
+	const double x = ep.x, y = ep.y;
 	double gamma = std::sqrt(x*x+y*y);
 	// Type of eclipse
-	if (abs(gamma) > 0.9972 && abs(gamma) < (1.5433 + L2))
+	if (abs(gamma) > 0.9972 && abs(gamma) < (1.5433 + ep.L2))
 	{
-		if (abs(gamma) < 0.9972 + abs(L2))
+		if (abs(gamma) < 0.9972 + abs(ep.L2))
 		{
 			partialEclipse = false;
 			nonCentralEclipse = true; // non-central total/annular eclipse
@@ -4322,16 +4325,77 @@ auto AstroCalcDialog::generateEclipseMap(const double JDMid) -> EclipseMapData
 	for (int j = 0; j < 2; j++)
 	{
 		if (j != 0) north = false;
+		auto& points = data.penumbraLimits[j];
 		double JD = JDP1;
 		int i = 0;
 		while (JD < JDP4)
 		{
 			JD = JDP1 + i/1440.0;
 			coordinates = getNSLimitOfShadow(JD,north,true);
-			if (coordinates.first <= 90.)
-				data.penumbraLimits[j].emplace_back(coordinates.second, coordinates.first);
+			points.emplace_back(JD, coordinates.second, coordinates.first);
 			i++;
 		}
+
+		if(points.empty()) continue;
+
+		// Refine at the beginning and the end of the line so as to find the precise endpoints
+
+		// 1. Beginning of the line
+		const auto firstValidIt = std::find_if(points.begin(), points.end(),
+		                                       [](const auto& p){ return p.latitude <= 90; });
+		if (firstValidIt == points.end()) continue;
+		const int firstValidPos = firstValidIt - points.begin();
+		if (firstValidPos > 0)
+		{
+			double lastInvalidTime = points[firstValidPos - 1].JD;
+			double firstValidTime = points[firstValidPos].JD;
+			// Bisect between these times. The sufficient number of iterations was found empirically.
+			for (int n = 0; n < 15; ++n)
+			{
+				const auto currTime = (lastInvalidTime + firstValidTime) / 2;
+				const auto coords = getNSLimitOfShadow(currTime,north,true);
+				if (coords.first > 90)
+				{
+					lastInvalidTime = currTime;
+				}
+				else
+				{
+					firstValidTime = currTime;
+					points.emplace_front(currTime, coords.second, coords.first);
+				}
+			}
+		}
+
+		// 2. End of the line
+		const auto lastValidIt = std::find_if(points.rbegin(), points.rend(),
+		                                      [](const auto& p){ return p.latitude <= 90; });
+		if (lastValidIt == points.rend()) continue;
+		const int lastValidPos = points.size() - 1 - (lastValidIt - points.rbegin());
+		if (lastValidPos + 1u < points.size())
+		{
+			double firstInvalidTime = points[lastValidPos + 1].JD;
+			double lastValidTime = points[lastValidPos].JD;
+			// Bisect between these times. The sufficient number of iterations was found empirically.
+			for (int n = 0; n < 15; ++n)
+			{
+				const auto currTime = (firstInvalidTime + lastValidTime) / 2;
+				const auto coords = getNSLimitOfShadow(currTime,north,true);
+				if (coords.first > 90)
+				{
+					firstInvalidTime = currTime;
+				}
+				else
+				{
+					lastValidTime = currTime;
+					points.emplace_back(currTime, coords.second, coords.first);
+				}
+			}
+		}
+
+		// 3. Cleanup: remove invalid points, sort by time increase
+		points.erase(std::remove_if(points.begin(), points.end(), [](const auto& p) { return p.latitude > 90; }),
+		             points.end());
+		std::sort(points.begin(), points.end(), [](const auto& a, const auto& b) { return a.JD < b.JD; });
 	}
 
 	// Eclipse begins/ends at sunrise/sunset curve
@@ -4345,8 +4409,8 @@ auto AstroCalcDialog::generateEclipseMap(const double JDMid) -> EclipseMapData
 			// P1 to P2 curve
 			core->setJD(JDP2);
 			core->update(0);
-			calcSolarEclipseBessel(x,y,d,tf1,tf2,L1,L2,mu);
-			coordinates = getContactCoordinates(x,y,d,mu);
+			auto ep = calcSolarEclipseBessel();
+			coordinates = getContactCoordinates(ep.x, ep.y, ep.d, ep.mu);
 			latP2 = coordinates.first;
 			lngP2 = coordinates.second;
 			auto& limit = data.riseSetLimits[j].emplace<EclipseMapData::TwoLimits>();
@@ -4360,8 +4424,8 @@ auto AstroCalcDialog::generateEclipseMap(const double JDMid) -> EclipseMapData
 				JD = JDP1 + i/1440.0;
 				core->setJD(JD);
 				core->update(0);
-				calcSolarEclipseBessel(x,y,d,tf1,tf2,L1,L2,mu);
-				coordinates = getRiseSetLineCoordinates(first,x,y,d,L1,mu);
+				ep = calcSolarEclipseBessel();
+				coordinates = getRiseSetLineCoordinates(first, ep.x, ep.y, ep.d, ep.L1, ep.mu);
 				if (coordinates.first <= 90.)
 					limit.p12curve.emplace_back(coordinates.second, coordinates.first);
 				i++;
@@ -4371,8 +4435,8 @@ auto AstroCalcDialog::generateEclipseMap(const double JDMid) -> EclipseMapData
 			// P3 to P4 curve
 			core->setJD(JDP3);
 			core->update(0);
-			calcSolarEclipseBessel(x,y,d,tf1,tf2,L1,L2,mu);
-			coordinates = getContactCoordinates(x,y,d,mu);
+			ep = calcSolarEclipseBessel();
+			coordinates = getContactCoordinates(ep.x, ep.y, ep.d, ep.mu);
 			latP3 = coordinates.first;
 			lngP3 = coordinates.second;
 			limit.p34curve.emplace_back(lngP3, latP3);
@@ -4383,8 +4447,8 @@ auto AstroCalcDialog::generateEclipseMap(const double JDMid) -> EclipseMapData
 				JD = JDP3 + i/1440.0;
 				core->setJD(JD);
 				core->update(0);
-				calcSolarEclipseBessel(x,y,d,tf1,tf2,L1,L2,mu);
-				coordinates = getRiseSetLineCoordinates(first,x,y,d,L1,mu);
+				ep = calcSolarEclipseBessel();
+				coordinates = getRiseSetLineCoordinates(first, ep.x, ep.y, ep.d, ep.L1, ep.mu);
 				if (coordinates.first <= 90.)
 					limit.p34curve.emplace_back(coordinates.second, coordinates.first);
 				i++;
@@ -4411,8 +4475,8 @@ auto AstroCalcDialog::generateEclipseMap(const double JDMid) -> EclipseMapData
 				JD = JDP1 + i/1440.0;
 				core->setJD(JD);
 				core->update(0);
-				calcSolarEclipseBessel(x,y,d,tf1,tf2,L1,L2,mu);
-				coordinates = getRiseSetLineCoordinates(first,x,y,d,L1,mu);
+				const auto ep = calcSolarEclipseBessel();
+				coordinates = getRiseSetLineCoordinates(first, ep.x, ep.y, ep.d, ep.L1, ep.mu);
 				if (coordinates.first <= 90.)
 					limit.curve.emplace_back(coordinates.second, coordinates.first);
 				i++;
@@ -4498,8 +4562,8 @@ auto AstroCalcDialog::generateEclipseMap(const double JDMid) -> EclipseMapData
 			JDC1 = JD;
 			core->setJD(JDC1);
 			core->update(0);
-			calcSolarEclipseBessel(x,y,d,tf1,tf2,L1,L2,mu);
-			coordinates = getContactCoordinates(x,y,d,mu);
+			auto ep = calcSolarEclipseBessel();
+			coordinates = getContactCoordinates(ep.x, ep.y, ep.d, ep.mu);
 			double latC1 = coordinates.first;
 			double lngC1 = coordinates.second;
 
@@ -4522,8 +4586,8 @@ auto AstroCalcDialog::generateEclipseMap(const double JDMid) -> EclipseMapData
 			JDC2 = JD;
 			core->setJD(JDC2);
 			core->update(0);
-			calcSolarEclipseBessel(x,y,d,tf1,tf2,L1,L2,mu);
-			coordinates = getContactCoordinates(x,y,d,mu);
+			ep = calcSolarEclipseBessel();
+			coordinates = getContactCoordinates(ep.x, ep.y, ep.d, ep.mu);
 			double latC2 = coordinates.first;
 			double lngC2 = coordinates.second;
 
@@ -4579,7 +4643,7 @@ auto AstroCalcDialog::generateEclipseMap(const double JDMid) -> EclipseMapData
 			JD = beginJD + i/144.; // generate every 10 minutes
 			core->setJD(JD);
 			core->update(0);
-			calcSolarEclipseBessel(x,y,d,tf1,tf2,L1,L2,mu);
+			const auto ep = calcSolarEclipseBessel();
 			calcSolarEclipseData(JD,dRatio,latDeg,lngDeg,altitude,pathWidth,duration,magnitude);
 			double angle = 0.;
 			bool firstPoint = false;
@@ -4593,7 +4657,7 @@ auto AstroCalcDialog::generateEclipseMap(const double JDMid) -> EclipseMapData
 			while (pointNumber < 60)
 			{
 				angle = pointNumber*M_PI*2./60.;
-				coordinates = getShadowOutlineCoordinates(angle,x,y,d,L2,tf2,mu);
+				coordinates = getShadowOutlineCoordinates(angle, ep.x, ep.y, ep.d, ep.L2, ep.tf2, ep.mu);
 				if (coordinates.first <= 90.)
 				{
 					outline.curve.emplace_back(coordinates.second, coordinates.first);
@@ -4758,13 +4822,11 @@ QPair<double, double> AstroCalcDialog::getNSLimitOfShadow(double JD, bool northe
 	static const double f = 1.0 - ssystem->getEarth()->getOneMinusOblateness(); // flattening
 	static const double e2 = f*(2.-f);
 	static const double ff = 1./(1.-f);
-	double tf1,tf2,L;
 	core->setJD(JD);
 	core->update(0);
-	double xdot,ydot,ddot,mudot,ldot,etadot,bdot,cdot;
-	calcBesselParameters(xdot,ydot,ddot,mudot,ldot,etadot,bdot,cdot,penumbra);
-	double x,y,d,L1,L2,mu,tf;
-	calcSolarEclipseBessel(x,y,d,tf1,tf2,L1,L2,mu);
+	const auto bp = calcBesselParameters(penumbra);
+	const double x = bp.elems.x, y = bp.elems.y, d = bp.elems.d, tf1 = bp.elems.tf1,
+	             tf2 = bp.elems.tf2, L1 = bp.elems.L1, L2 = bp.elems.L2, mu = bp.elems.mu;
 	const double rho1 = std::sqrt(1.-e2*std::cos(d)*std::cos(d));
 	const double y1 = y/rho1;
 	double eta1 = y1;
@@ -4774,6 +4836,7 @@ QPair<double, double> AstroCalcDialog::getNSLimitOfShadow(double JD, bool northe
 	const double sd1d2 = e2*std::sin(d)*std::cos(d)/(rho1*rho2);
 	const double cd1d2 = std::sqrt(1.-sd1d2*sd1d2);
 	double zeta = rho2*(-eta1*sd1d2);
+	double tf, L;
 	if (penumbra)
 	{
 		L = L1;
@@ -4785,8 +4848,8 @@ QPair<double, double> AstroCalcDialog::getNSLimitOfShadow(double JD, bool northe
 		tf = tf2;
 	}
 	double Lb = L-zeta*tf;
-	double xidot = mudot*(-y*std::sin(d)+zeta*std::cos(d));
-	double tq = -(ydot-etadot)/(xdot-xidot);
+	double xidot = bp.mudot*(-y*std::sin(d)+zeta*std::cos(d));
+	double tq = -(bp.ydot-bp.etadot)/(bp.xdot-xidot);
 	double sq = std::sin(std::atan(tq));
 	double cq = std::cos(std::atan(tq));
 	if (!northernLimit)
@@ -4807,8 +4870,8 @@ QPair<double, double> AstroCalcDialog::getNSLimitOfShadow(double JD, bool northe
 	{
 		double zeta1 = std::sqrt(zeta);
 		zeta = rho2*(zeta1*cd1d2-eta1*sd1d2);
-		double adot = -ldot-mudot*x*tf*std::cos(d);
-		double tq = (bdot-zeta*ddot-(adot/cq))/(cdot-zeta*mudot*std::cos(d));
+		double adot = -bp.ldot-bp.mudot*x*tf*std::cos(d);
+		double tq = (bp.bdot-zeta*bp.ddot-(adot/cq))/(bp.cdot-zeta*bp.mudot*std::cos(d));
 		double Lb = L-zeta*tf;
 		sq = std::sin(std::atan(tq));
 		cq = std::cos(std::atan(tq));
@@ -4829,8 +4892,8 @@ QPair<double, double> AstroCalcDialog::getNSLimitOfShadow(double JD, bool northe
 		{
 			zeta1 = std::sqrt(zeta);
 			zeta = rho2*(zeta1*cd1d2-eta1*sd1d2);
-			//tq = bdot-zeta*ddot-adot/cq;
-			//tq = tq/(cdot-zeta*mudot*std::cos(d));
+			//tq = bp.bdot-zeta*ddot-adot/cq;
+			//tq = tq/(bp.cdot-zeta*bp.mudot*std::cos(d));
 			double b = -eta1*sd1+zeta1*cd1;
 			double lngDeg = StelUtils::fmodpos(std::atan2(xi,b)*M_180_PI - mu + 180., 360.) - 180.;
 			double sfn1 = eta1*cd1+zeta1*sd1;
@@ -4852,21 +4915,25 @@ QPair<double, double> AstroCalcDialog::getExtremeNSLimitOfShadow(double JD, bool
 	static const double f = 1.0 - ssystem->getEarth()->getOneMinusOblateness(); // flattening
 	static const double e2 = f*(2.-f);
 	static const double ff = 1./(1.-f);
+
 	core->setJD(JD+0.1);
 	core->update(0);
-	double xdot,ydot,ddot,mudot,ldot,etadot,bdot1,cdot1,bdot2,cdot2;
-	calcBesselParameters(xdot,ydot,ddot,mudot,ldot,etadot,bdot1,cdot1,penumbra);
+	const auto bpPlus = calcBesselParameters(penumbra);
+	const double bdot1 = bpPlus.bdot, cdot1 = bpPlus.cdot;
+
 	core->setJD(JD-0.1);
 	core->update(0);
-	calcBesselParameters(xdot,ydot,ddot,mudot,ldot,etadot,bdot2,cdot2,penumbra);
+	const auto bpMinus = calcBesselParameters(penumbra);
+	const double bdot2 = bpMinus.bdot, cdot2 = bpMinus.cdot;
+
 	const double bdd = 5.*(bdot1-bdot2);
 	const double cdd = 5.*(cdot1-cdot2);
+
 	core->setJD(JD);
 	core->update(0);
-	double x,y,d,tf1,tf2,L1,L2,mu;
-	calcSolarEclipseBessel(x,y,d,tf1,tf2,L1,L2,mu);
-	double bdot,cdot,xidot;
-	calcBesselParameters(xdot,ydot,ddot,mudot,ldot,etadot,bdot,cdot,penumbra);
+	const auto bp = calcBesselParameters(penumbra);
+	const double xdot = bp.xdot, ydot = bp.ydot, bdot = bp.bdot, cdot = bp.cdot;
+	const double x = bp.elems.x, y = bp.elems.y, d = bp.elems.d, L1 = bp.elems.L1, L2 = bp.elems.L2;
 	double e = std::sqrt(bdot*bdot+cdot*cdot);
 	double rho1 = std::sqrt(1-e2*std::cos(d)*std::cos(d));
 	double scq = e/cdot;
@@ -4888,6 +4955,7 @@ QPair<double, double> AstroCalcDialog::getExtremeNSLimitOfShadow(double JD, bool
 			cq = std::abs(cq);
 	}
 	double sq = tq*cq;
+	double xidot, etadot;
 	if (cq>0.)
 	{
 		xidot = xdot-L*bdd/e;
@@ -4909,8 +4977,10 @@ QPair<double, double> AstroCalcDialog::getExtremeNSLimitOfShadow(double JD, bool
 		double tc = (czi/std::sqrt(n2))-(xi*xidot+eta*etadot)/n2;
 		core->setJD(JD+tc/24.);
 		core->update(0);
-		calcSolarEclipseBessel(x,y,d,tf1,tf2,L1,L2,mu);
-		calcBesselParameters(xdot,ydot,ddot,mudot,ldot,etadot,bdot,cdot,penumbra);
+		const auto bp = calcBesselParameters(penumbra);
+		const double bdot = bp.bdot, cdot = bp.cdot;
+		const double x = bp.elems.x, y = bp.elems.y, d = bp.elems.d,
+		             L1 = bp.elems.L1, L2 = bp.elems.L2, mu = bp.elems.mu;
 		//tq = bdot/cdot;
 		e = std::sqrt(bdot*bdot+cdot*cdot);
 		rho1 = std::sqrt(1.-e2*std::cos(d)*std::cos(d));

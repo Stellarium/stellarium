@@ -23,6 +23,7 @@
 #ifndef ASTROCALCDIALOG_HPP
 #define ASTROCALCDIALOG_HPP
 
+#include <deque>
 #include <variant>
 #include <QObject>
 #include <QTreeWidget>
@@ -127,7 +128,7 @@ class AstroCalcDialog : public StelDialog
 		GeoTimePoint centralEclipseEnd;     // AKA C2
 
 		// The array elements are {northLimit, southLimit}
-		std::vector<GeoPoint> penumbraLimits[2];
+		std::deque<GeoTimePoint> penumbraLimits[2];
 
 		// The curves in arrays are split into two lines by the computation algorithm
 		struct TwoLimits
@@ -1079,18 +1080,21 @@ private:
 	}
 };
 
+struct EclipseBesselParameters
+{
+	double xdot;  //!< rate of change of X in Earth radii per second
+	double ydot;  //!< rate of change of Y in Earth radii per second
+	double ddot;  //!< rate of change of d in radians per second
+	double mudot; //!< rate of change of mu in radians per second
+	double ldot;  //!< rate of change of L1 (for penumbra) or L2 (for umbra) in Earth radii per second
+	double etadot;
+	double bdot;
+	double cdot;
+	EclipseBesselElements elems;
+};
+
 // Compute parameters from Besselian elements
-// @param xdot rate of change of X in Earth radii per second
-// @param ydot rate of change of Y in Earth radii per second
-// @param ddot rate of change of d in radians per second
-// @param mudot rate of change of mu in radians per second
-// @param ldot rate of change of L1 (if @p penumbra is true) or L2 (otherwise) in Earth radii per second
-// @param etadot 
-// @param bdot 
-// @param cdot 
-// @param penumbra determines whether L1 or L2 is used for computation of @p ldot
-void calcBesselParameters(double &xdot, double &ydot, double &ddot, double &mudot, double &ldot,
-                          double &etadot, double &bdot, double &cdot, bool penumbra);
+EclipseBesselParameters calcBesselParameters(bool penumbra);
 
 //! Derived from QTreeWidgetItem class with customized sort
 class ACSolarEclipseLocalTreeWidgetItem : public QTreeWidgetItem
