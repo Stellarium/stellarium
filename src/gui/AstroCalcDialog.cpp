@@ -40,6 +40,9 @@
 #include "StelJsonParser.hpp"
 #include "planetsephems/sidereal_time.h"
 
+#include <QImage>
+#include <QPainter>
+
 #ifdef USE_STATIC_PLUGIN_SATELLITES
 #include "../plugins/Satellites/src/Satellites.hpp"
 #endif
@@ -85,6 +88,130 @@ int AstroCalcDialog::DisplayedPositionIndex = -1;
 double AstroCalcDialog::brightLimit = 10.;
 const QString AstroCalcDialog::dash = QChar(0x2014);
 const QString AstroCalcDialog::delimiter(", ");
+
+namespace
+{
+
+void drawContinuousEquirectGeoLine(QPainter& painter, QPointF pointA, QPointF pointB)
+{
+	using namespace std;
+	const auto lineLengthDeg = hypot(pointB.x() - pointA.x(), pointB.y() - pointA.y());
+	// For short enough lines go the simple way
+	if(lineLengthDeg < 2)
+	{
+		painter.drawLine(pointA, pointB);
+		return;
+	}
+
+	// Order them west to east
+	if(pointA.x() > pointB.x())
+		swap(pointA, pointB);
+
+	Vec3d dirA;
+	StelUtils::spheToRect(M_PI/180 * pointA.x(), M_PI/180 * pointA.y(), dirA);
+
+	Vec3d dirB;
+	StelUtils::spheToRect(M_PI/180 * pointB.x(), M_PI/180 * pointB.y(), dirB);
+
+	const auto cosAngleBetweenDirs = dot(dirA, dirB);
+	const auto angleMax = acos(cosAngleBetweenDirs);
+
+	// Create an orthonormal pair of vectors that will define a plane in which we'll
+	// rotate from one of the vectors towards the second one, thus creating the
+	// shortest line on a unit sphere between the previous and the current directions.
+	const auto firstDir = dirA;
+	const auto secondDir = normalize(dirB - cosAngleBetweenDirs*firstDir);
+
+	auto prevPoint = firstDir;
+	// Keep the step no greater than 2°
+	const double numPoints = max(3., ceil(lineLengthDeg / 2.));
+	for(double n = 1; n < numPoints; ++n)
+	{
+		const auto alpha = n / (numPoints-1) * angleMax;
+		const auto currPoint = cos(alpha)*firstDir + sin(alpha)*secondDir;
+
+		double lon1, lat1;
+		StelUtils::rectToSphe(&lon1, &lat1, prevPoint);
+
+		double lon2, lat2;
+		StelUtils::rectToSphe(&lon2, &lat2, currPoint);
+
+		// If current point happens to have wrapped around 180°, bring it back to
+		// the eastern side (the check relies on the ordering of the endpoints).
+		if(pointA.x() > 0 && lon2 < 0)
+			lon2 += 2*M_PI;
+
+		painter.drawLine(180/M_PI * QPointF(lon1,lat1), 180/M_PI * QPointF(lon2,lat2));
+		prevPoint = currPoint;
+	}
+}
+
+void drawGeoLinesForEquirectMap(QPainter& painter, const std::vector<QPointF>& points)
+{
+	if(points.empty()) return;
+
+	using namespace std;
+
+	double prevLon = M_PI/180 * points.front().x();
+	double prevLat = M_PI/180 * points.front().y();
+	Vec3d prevDir;
+	StelUtils::spheToRect(prevLon, prevLat, prevDir);
+	for(unsigned n = 1; n < points.size(); ++n)
+	{
+		const auto currLon = M_PI/180 * points[n].x();
+		const auto currLat = M_PI/180 * points[n].y();
+		Vec3d currDir;
+		StelUtils::spheToRect(currLon, currLat, currDir);
+
+		const auto cosAngleBetweenDirs = dot(prevDir, currDir);
+		// Create an orthonormal pair of vectors that will define a plane in which we'll
+		// rotate from one of the vectors towards the second one, thus creating the
+		// shortest line on a unit sphere between the previous and the current directions.
+		const auto firstDir = prevDir;
+		const auto secondDir = normalize(currDir - cosAngleBetweenDirs*firstDir);
+		// The parametric equation for the connecting line is:
+		//  P(alpha) = cos(alpha)*firstDir+sin(alpha)*secondDir.
+		// Here we assume alpha>0 (otherwise we'll go the longer route over the sphere).
+		//
+		// Now we need to find out if this line crosses the 180° meridian. This happens
+		// if there exists an alpha such that P(alpha).y==0 && P(alpha).x<0.
+		// These are the solutions of this equation for alpha.
+		const auto alpha1 = atan2(firstDir[1], -secondDir[1]);
+		const auto alpha2 = atan2(-firstDir[1], secondDir[1]);
+		const bool firstSolutionBad  = alpha1 < 0 || cos(alpha1) < cosAngleBetweenDirs;
+		const bool secondSolutionBad = alpha2 < 0 || cos(alpha2) < cosAngleBetweenDirs;
+		// If the line doesn't cross 180°, we are not splitting it
+		if(firstSolutionBad && secondSolutionBad)
+		{
+			drawContinuousEquirectGeoLine(painter, points[n-1], points[n]);
+			prevDir = currDir;
+			continue;
+		}
+
+		const auto alpha = firstSolutionBad ? alpha2 : alpha1;
+		const auto P = cos(alpha)*firstDir + sin(alpha)*secondDir;
+		// Ignore the crossing of 0°
+		if(P[0] > 0)
+		{
+			drawContinuousEquirectGeoLine(painter, points[n-1], points[n]);
+			prevDir = currDir;
+			continue;
+		}
+
+		// So, we've found the crossing. Let's split our line by the crossing point.
+		double crossLon, crossLat;
+		StelUtils::rectToSphe(&crossLon, &crossLat, P);
+		crossLon *= 180/M_PI;
+		crossLat *= 180/M_PI;
+		const bool sameSign = (crossLon < 0 && prevLon < 0) || (crossLon >= 0 && prevLon >= 0);
+		drawContinuousEquirectGeoLine(painter, points[n-1], QPointF(sameSign ? crossLon : -crossLon, crossLat));
+		drawContinuousEquirectGeoLine(painter, points[n], QPointF(sameSign ? -crossLon : crossLon, crossLat));
+
+		prevDir = currDir;
+	}
+}
+
+}
 
 AstroCalcDialog::AstroCalcDialog(QObject* parent)
 	: StelDialog("AstroCalc", parent)
@@ -382,7 +509,7 @@ void AstroCalcDialog::createDialogContent()
 	initListSolarEclipseContact();
 	enableSolarEclipsesCircumstancesButtons(buttonState);
 	connect(ui->solareclipsescontactsSaveButton, SIGNAL(clicked()), this, SLOT(saveSolarEclipseCircumstances()));
-	connect(ui->solareclipsesKMLSaveButton, SIGNAL(clicked()), this, SLOT(saveSolarEclipseKML()));
+	connect(ui->solareclipsesMapSaveButton, SIGNAL(clicked()), this, SLOT(saveSolarEclipseMap()));
 	connect(ui->solareclipseTreeWidget, SIGNAL(clicked(QModelIndex)), this, SLOT(selectCurrentSolarEclipse(QModelIndex)));
 	connect(ui->solareclipseTreeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentSolarEclipseDate(QModelIndex)));
 	connect(ui->solareclipsecontactsTreeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentSolarEclipseContact(QModelIndex)));
@@ -3651,7 +3778,7 @@ void AstroCalcDialog::enableSolarEclipsesButtons(bool enable)
 
 void AstroCalcDialog::enableSolarEclipsesCircumstancesButtons(bool enable)
 {
-	ui->solareclipsesKMLSaveButton->setEnabled(enable);
+	ui->solareclipsesMapSaveButton->setEnabled(enable);
 	ui->solareclipsescontactsSaveButton->setEnabled(enable);
 }
 
@@ -4260,6 +4387,148 @@ void AstroCalcDialog::generateKML(const EclipseMapData& data, const QString& dat
 	stream << "</Document>\n</kml>\n";
 }
 
+void AstroCalcDialog::generatePNGMap(const EclipseMapData& data, const QString& filePath) const
+{
+	QImage img(":/graphicGui/miscWorldMap.jpg");
+
+	QPainter painter(&img);
+	painter.setRenderHint(QPainter::Antialiasing);
+	painter.translate(img.width() / 2., img.height() / 2.);
+	painter.scale(1,-1); // latitude grows upwards
+
+	const double scale = img.width() / 360.;
+	const double penWidth = std::lround(img.width() / 2048.) / scale;
+	painter.scale(scale, scale);
+
+	const auto updatePen = [&painter,penWidth](const EclipseMapData::EclipseType type =
+	                                                   EclipseMapData::EclipseType::Undefined)
+	{
+		static const QColor hybridEclipseColor ("#800080");
+		static const QColor totalEclipseColor  ("#0000ff");
+		static const QColor annularEclipseColor("#ff0000");
+		static const QColor limitsColor        ("#00ff00");
+
+		switch(type)
+		{
+		case EclipseMapData::EclipseType::Total:
+			painter.setPen(QPen(totalEclipseColor, penWidth));
+			break;
+		case EclipseMapData::EclipseType::Annular:
+			painter.setPen(QPen(annularEclipseColor, penWidth));
+			break;
+		case EclipseMapData::EclipseType::Hybrid:
+			painter.setPen(QPen(hybridEclipseColor, penWidth));
+			break;
+		default:
+			painter.setPen(QPen(limitsColor, penWidth));
+			break;
+		}
+	};
+
+	updatePen();
+	std::vector<QPointF> points;
+	for(const auto& penumbraLimit : data.penumbraLimits)
+	{
+		points.clear();
+		points.reserve(penumbraLimit.size());
+		for(const auto& p : penumbraLimit)
+			points.emplace_back(p.longitude, p.latitude);
+		drawGeoLinesForEquirectMap(painter, points);
+	}
+
+	for(const auto& riseSetLimit : data.riseSetLimits)
+	{
+		struct RiseSetLimitVisitor
+		{
+			QPainter& painter;
+			RiseSetLimitVisitor(QPainter& painter)
+				: painter(painter)
+			{
+			}
+			void operator()(const EclipseMapData::TwoLimits& limits) const
+			{
+				// P1-P2 curve
+				std::vector<QPointF> points;
+				points.reserve(limits.p12curve.size());
+				for(const auto& p : limits.p12curve)
+					points.emplace_back(p.longitude, p.latitude);
+				drawGeoLinesForEquirectMap(painter, points);
+
+				// P3-P4 curve
+				points.clear();
+				points.reserve(limits.p34curve.size());
+				for(const auto& p : limits.p34curve)
+					points.emplace_back(p.longitude, p.latitude);
+				drawGeoLinesForEquirectMap(painter, points);
+			}
+			void operator()(const EclipseMapData::SingleLimit& limit) const
+			{
+				std::vector<QPointF> points;
+				points.reserve(limit.curve.size());
+				for(const auto& p : limit.curve)
+					points.emplace_back(p.longitude, p.latitude);
+				drawGeoLinesForEquirectMap(painter, points);
+			}
+		};
+		std::visit(RiseSetLimitVisitor{painter}, riseSetLimit);
+	}
+
+	for(const auto& curve : data.maxEclipseAtRiseSet)
+	{
+		points.clear();
+		points.reserve(curve.size());
+		for(const auto& p : curve)
+			points.emplace_back(p.longitude, p.latitude);
+		drawGeoLinesForEquirectMap(painter, points);
+	}
+
+	if(!data.centerLine.empty())
+	{
+		updatePen(data.eclipseType);
+		points.clear();
+		points.reserve(data.centerLine.size());
+		for(const auto& p : data.centerLine)
+			points.emplace_back(p.longitude, p.latitude);
+		drawGeoLinesForEquirectMap(painter, points);
+	}
+
+	for(const auto& outline : data.umbraOutlines)
+	{
+		updatePen(outline.eclipseType);
+		points.clear();
+		points.reserve(outline.curve.size());
+		for(const auto& p : outline.curve)
+			points.emplace_back(p.longitude, p.latitude);
+		drawGeoLinesForEquirectMap(painter, points);
+	}
+
+	for(const auto& outline : data.extremeUmbraLimit1)
+	{
+		updatePen(outline.eclipseType);
+		points.clear();
+		points.reserve(outline.curve.size());
+		for(const auto& p : outline.curve)
+			points.emplace_back(p.longitude, p.latitude);
+		drawGeoLinesForEquirectMap(painter, points);
+	}
+
+	for(const auto& outline : data.extremeUmbraLimit2)
+	{
+		updatePen(outline.eclipseType);
+		points.clear();
+		points.reserve(outline.curve.size());
+		for(const auto& p : outline.curve)
+			points.emplace_back(p.longitude, p.latitude);
+		drawGeoLinesForEquirectMap(painter, points);
+	}
+
+	if(!img.save(filePath, "PNG"))
+	{
+		QMessageBox::critical(&StelMainView::getInstance(), q_("Failed to save image"),
+		                      q_("Failed to save PNG map image"), QMessageBox::Ok);
+	}
+}
+
 auto AstroCalcDialog::generateEclipseMap(const double JDMid) -> EclipseMapData
 {
 	const bool savedTopocentric = core->getUseTopocentricCoordinates();
@@ -4765,7 +5034,7 @@ auto AstroCalcDialog::generateEclipseMap(const double JDMid) -> EclipseMapData
 	return data;
 }
 
-void AstroCalcDialog::saveSolarEclipseKML()
+void AstroCalcDialog::saveSolarEclipseMap()
 {
 	// Make sure that we have circumstances of an eclipse in the table
 	if (ui->solareclipsecontactsTreeWidget->topLevelItemCount() == 0)
@@ -4787,29 +5056,36 @@ void AstroCalcDialog::saveSolarEclipseKML()
 
 	// Use year-month-day in the file name
 	const auto eclipseDateStr = QString("-%1-%2-%3").arg(year).arg(month).arg(day);
-	QString filter = "KML";
-	filter.append(" (*.kml)");
-	QString defaultFilter("(*.kml)");
+	QString selectedFilter("(*.kml)");
 	QString filePath = QFileDialog::getSaveFileName(&StelMainView::getInstance(),
 	                                                q_("Save KML as..."),
 	                                                QDir::homePath() + "/solareclipse"+eclipseDateStr+".kml",
-	                                                filter,
-	                                                &defaultFilter);
+	                                                q_("KML map (*.kml);;PNG equirectangular map (*.png)"),
+	                                                &selectedFilter);
 	if (filePath.isEmpty()) return;
 
-	QFile file(filePath);
-	if(!file.open(QIODevice::WriteOnly | QIODevice::Text))
+	if(selectedFilter.contains("*.kml"))
 	{
-		QMessageBox::critical(&StelMainView::getInstance(), q_("Failed to open output file"),
-		                      q_("Failed to open output KML file: %1").arg(file.errorString()), QMessageBox::Ok);
-		return;
-	}
+		QFile file(filePath);
+		if(!file.open(QIODevice::WriteOnly | QIODevice::Text))
+		{
+			QMessageBox::critical(&StelMainView::getInstance(), q_("Failed to open output file"),
+			                      q_("Failed to open output KML file: %1").arg(file.errorString()), QMessageBox::Ok);
+			return;
+		}
 
-	QGuiApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
-	const auto data = generateEclipseMap(JDMid);
-	QTextStream stream(&file);
-	generateKML(data, eclipseDateStr, stream);
-	file.close();
+		QGuiApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+		const auto data = generateEclipseMap(JDMid);
+		QTextStream stream(&file);
+		generateKML(data, eclipseDateStr, stream);
+		file.close();
+	}
+	else if(selectedFilter.contains("*.png"))
+	{
+		QGuiApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+		const auto data = generateEclipseMap(JDMid);
+		generatePNGMap(data, filePath);
+	}
 	QGuiApplication::restoreOverrideCursor();
 }
 
