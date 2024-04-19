@@ -412,7 +412,7 @@ private slots:
 	void selectCurrentSolarEclipseContact(const QModelIndex &modelIndex);
 	void saveSolarEclipses();
 	void saveSolarEclipseCircumstances();
-	void saveSolarEclipseKML();
+	void saveSolarEclipseMap();
 
 	//! Calculating local solar eclipses to fill the list.
 	//! Algorithm taken from calculating the rises, transits and sets.
@@ -741,6 +741,7 @@ private:
 
 	EclipseMapData generateEclipseMap(double JDMid);
 	void generateKML(const EclipseMapData& data, const QString& dateString, QTextStream& stream) const;
+	void generatePNGMap(const EclipseMapData& data, const QString& filePath) const;
 
 	void enableAngularLimits(bool enable);
 
