@@ -4487,16 +4487,6 @@ void AstroCalcDialog::generatePNGMap(const EclipseMapData& data, const QString& 
 		drawGeoLinesForEquirectMap(painter, points);
 	}
 
-	for(const auto& outline : data.umbraOutlines)
-	{
-		updatePen(outline.eclipseType);
-		points.clear();
-		points.reserve(outline.curve.size());
-		for(const auto& p : outline.curve)
-			points.emplace_back(p.longitude, p.latitude);
-		drawGeoLinesForEquirectMap(painter, points);
-	}
-
 	for(const auto& outline : data.extremeUmbraLimit1)
 	{
 		updatePen(outline.eclipseType);
@@ -4508,6 +4498,16 @@ void AstroCalcDialog::generatePNGMap(const EclipseMapData& data, const QString& 
 	}
 
 	for(const auto& outline : data.extremeUmbraLimit2)
+	{
+		updatePen(outline.eclipseType);
+		points.clear();
+		points.reserve(outline.curve.size());
+		for(const auto& p : outline.curve)
+			points.emplace_back(p.longitude, p.latitude);
+		drawGeoLinesForEquirectMap(painter, points);
+	}
+
+	for(const auto& outline : data.umbraOutlines)
 	{
 		updatePen(outline.eclipseType);
 		points.clear();
