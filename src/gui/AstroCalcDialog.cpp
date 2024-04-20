@@ -92,6 +92,19 @@ const QString AstroCalcDialog::delimiter(", ");
 namespace
 {
 
+static const QColor hybridEclipseColor ("#800080");
+static const QColor totalEclipseColor  ("#ff0000");
+static const QColor annularEclipseColor("#0000ff");
+static const QColor eclipseLimitsColor ("#00ff00");
+
+QString toKMLColorString(const QColor& c)
+{
+	return QString("%1%2%3%4").arg(c.alpha(),2,16,QChar('0'))
+	                          .arg(c.blue (),2,16,QChar('0'))
+	                          .arg(c.green(),2,16,QChar('0'))
+	                          .arg(c.red  (),2,16,QChar('0'));
+}
+
 void drawContinuousEquirectGeoLine(QPainter& painter, QPointF pointA, QPointF pointB)
 {
 	using namespace std;
@@ -4215,14 +4228,14 @@ void AstroCalcDialog::generateKML(const EclipseMapData& data, const QString& dat
 
 	stream << "<?xml version='1.0' encoding='UTF-8'?>\n<kml xmlns='http://www.opengis.net/kml/2.2'>\n<Document>" << '\n';
 	stream << "<name>"+q_("Solar Eclipse")+dateString+"</name>\n<description>"+q_("Created by Stellarium")+"</description>\n";
-	stream << "<Style id='Hybrid'>\n<LineStyle>\n<color>ff800080</color>\n<width>1</width>\n</LineStyle>\n";
-	stream << "<PolyStyle>\n<color>ff800080</color>\n</PolyStyle>\n</Style>\n";
-	stream << "<Style id='Total'>\n<LineStyle>\n<color>ff0000ff</color>\n<width>1</width>\n</LineStyle>\n";
-	stream << "<PolyStyle>\n<color>ff0000ff</color>\n</PolyStyle>\n</Style>\n";
-	stream << "<Style id='Annular'>\n<LineStyle>\n<color>ffff0000</color>\n<width>1</width>\n</LineStyle>\n";
-	stream << "<PolyStyle>\n<color>ffff0000</color>\n</PolyStyle>\n</Style>\n";
-	stream << "<Style id='PLimits'>\n<LineStyle>\n<color>ff00ff00</color>\n<width>1</width>\n</LineStyle>\n";
-	stream << "<PolyStyle>\n<color>ff00ff00</color>\n</PolyStyle>\n</Style>\n";
+	stream << "<Style id='Hybrid'>\n<LineStyle>\n<color>" << toKMLColorString(hybridEclipseColor) << "</color>\n<width>1</width>\n</LineStyle>\n";
+	stream << "<PolyStyle>\n<color>" << toKMLColorString(hybridEclipseColor) << "</color>\n</PolyStyle>\n</Style>\n";
+	stream << "<Style id='Total'>\n<LineStyle>\n<color>" << toKMLColorString(totalEclipseColor) << "</color>\n<width>1</width>\n</LineStyle>\n";
+	stream << "<PolyStyle>\n<color>" << toKMLColorString(totalEclipseColor) << "</color>\n</PolyStyle>\n</Style>\n";
+	stream << "<Style id='Annular'>\n<LineStyle>\n<color>" << toKMLColorString(annularEclipseColor) << "</color>\n<width>1</width>\n</LineStyle>\n";
+	stream << "<PolyStyle>\n<color>" << toKMLColorString(annularEclipseColor) << "</color>\n</PolyStyle>\n</Style>\n";
+	stream << "<Style id='PLimits'>\n<LineStyle>\n<color>" << toKMLColorString(eclipseLimitsColor) << "</color>\n<width>1</width>\n</LineStyle>\n";
+	stream << "<PolyStyle>\n<color>" << toKMLColorString(eclipseLimitsColor) << "</color>\n</PolyStyle>\n</Style>\n";
 
 	{
 		const auto timeStr = localeMgr->getPrintableTimeLocal(data.greatestEclipse.JD);
@@ -4392,11 +4405,6 @@ void AstroCalcDialog::generatePNGMap(const EclipseMapData& data, const QString& 
 	const auto updatePen = [&painter,penWidth](const EclipseMapData::EclipseType type =
 	                                                   EclipseMapData::EclipseType::Undefined)
 	{
-		static const QColor hybridEclipseColor ("#800080");
-		static const QColor totalEclipseColor  ("#0000ff");
-		static const QColor annularEclipseColor("#ff0000");
-		static const QColor limitsColor        ("#00ff00");
-
 		switch(type)
 		{
 		case EclipseMapData::EclipseType::Total:
@@ -4409,7 +4417,7 @@ void AstroCalcDialog::generatePNGMap(const EclipseMapData& data, const QString& 
 			painter.setPen(QPen(hybridEclipseColor, penWidth));
 			break;
 		default:
-			painter.setPen(QPen(limitsColor, penWidth));
+			painter.setPen(QPen(eclipseLimitsColor, penWidth));
 			break;
 		}
 	};
