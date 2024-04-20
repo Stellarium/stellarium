@@ -4225,7 +4225,7 @@ void AstroCalcDialog::generateKML(const EclipseMapData& data, const QString& dat
 	using EclipseType = EclipseMapData::EclipseType;
 
 	stream << "<?xml version='1.0' encoding='UTF-8'?>\n<kml xmlns='http://www.opengis.net/kml/2.2'>\n<Document>" << '\n';
-	stream << "<name>"+q_("Solar Eclipse")+dateString+"</name>\n<description>"+q_("Created by Stellarium")+"</description>\n";
+	stream << "<name>"+q_("Solar Eclipse")+" "+dateString+"</name>\n<description>"+q_("Created by Stellarium")+"</description>\n";
 	stream << "<Style id='Hybrid'>\n<LineStyle>\n<color>" << toKMLColorString(hybridEclipseColor) << "</color>\n<width>1</width>\n</LineStyle>\n";
 	stream << "<PolyStyle>\n<color>" << toKMLColorString(hybridEclipseColor) << "</color>\n</PolyStyle>\n</Style>\n";
 	stream << "<Style id='Total'>\n<LineStyle>\n<color>" << toKMLColorString(totalEclipseColor) << "</color>\n<width>1</width>\n</LineStyle>\n";
@@ -4487,16 +4487,6 @@ void AstroCalcDialog::generatePNGMap(const EclipseMapData& data, const QString& 
 		drawGeoLinesForEquirectMap(painter, points);
 	}
 
-	for(const auto& outline : data.umbraOutlines)
-	{
-		updatePen(outline.eclipseType);
-		points.clear();
-		points.reserve(outline.curve.size());
-		for(const auto& p : outline.curve)
-			points.emplace_back(p.longitude, p.latitude);
-		drawGeoLinesForEquirectMap(painter, points);
-	}
-
 	for(const auto& outline : data.extremeUmbraLimit1)
 	{
 		updatePen(outline.eclipseType);
@@ -4508,6 +4498,16 @@ void AstroCalcDialog::generatePNGMap(const EclipseMapData& data, const QString& 
 	}
 
 	for(const auto& outline : data.extremeUmbraLimit2)
+	{
+		updatePen(outline.eclipseType);
+		points.clear();
+		points.reserve(outline.curve.size());
+		for(const auto& p : outline.curve)
+			points.emplace_back(p.longitude, p.latitude);
+		drawGeoLinesForEquirectMap(painter, points);
+	}
+
+	for(const auto& outline : data.umbraOutlines)
 	{
 		updatePen(outline.eclipseType);
 		points.clear();
@@ -5043,18 +5043,16 @@ void AstroCalcDialog::saveSolarEclipseMap()
 	// Find exact time of minimum distance between axis of lunar shadow cone to the center of Earth
 	const double JDMid = getJDofMinimumDistance(eclipseJD);
 
-	int year, month, day;
-	StelUtils::getDateFromJulianDay(JDMid, &year, &month, &day);
-
 	core->setUseTopocentricCoordinates(savedTopocentric);
 	core->update(0);
 
 	// Use year-month-day in the file name
-	const auto eclipseDateStr = QString("-%1-%2-%3").arg(year).arg(month,2,10,QChar('0')).arg(day,2,10,QChar('0'));
+	const auto eclipseDateStr = localeMgr->getPrintableDateLocal(JDMid);
+	const auto fileBaseName = q_("Solar Eclipse") + " " + eclipseDateStr;
 	QString selectedFilter("(*.kml)");
 	QString filePath = QFileDialog::getSaveFileName(&StelMainView::getInstance(),
 	                                                q_("Save map as..."),
-	                                                QDir::homePath() + "/solareclipse"+eclipseDateStr+".kml",
+	                                                QDir::homePath() + "/"+fileBaseName+".kml",
 	                                                q_("KML map (*.kml);;PNG equirectangular map (*.png)"),
 	                                                &selectedFilter);
 	if (filePath.isEmpty()) return;
