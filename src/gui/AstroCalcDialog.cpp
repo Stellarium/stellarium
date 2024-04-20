@@ -5052,7 +5052,7 @@ void AstroCalcDialog::saveSolarEclipseMap()
 	core->update(0);
 
 	// Use year-month-day in the file name
-	const auto eclipseDateStr = QString("-%1-%2-%3").arg(year).arg(month).arg(day);
+	const auto eclipseDateStr = QString("-%1-%2-%3").arg(year).arg(month,2,10,QChar('0')).arg(day,2,10,QChar('0'));
 	QString selectedFilter("(*.kml)");
 	QString filePath = QFileDialog::getSaveFileName(&StelMainView::getInstance(),
 	                                                q_("Save map as..."),
