@@ -4753,55 +4753,224 @@ auto AstroCalcDialog::generateEclipseMap(const double JDMid) -> EclipseMapData
 	// Curve of maximum eclipse at sunrise/sunset
 	// There are two parts of the curve
 	bool first = true;
-	double startLat1 = 0., startLon1 = 0., endLat1 = 0., endLon1 = 0.;
-	double endJD1 = JDMid, startJD1 = JDMid, endJD2 = JDMid, startJD2 = JDMid;
 	for (int j = 0; j < 2; j++)
 	{
-		if ( j!= 0) first = false;
-		data.maxEclipseAtRiseSet.emplace_back();
-		auto* curve = &data.maxEclipseAtRiseSet.back();
-		double JD = JDP1;
-		int i = 0, count = 0;
-		double lat0 = 0., lon0 = 0., dlat, dlon, diff;
-		while (JD < JDP4)
+		if (j!= 0) first = false;
+		if(bothPenumbralLimits)
 		{
-			JD = JDP1 + i/1440.0;
-			coordinates = getMaximumEclipseAtRiseSet(first,JD);
-			if (abs(coordinates.latitude) <= 90.)
+			// The curve corresponding to P1-P2 time interval
+			data.maxEclipseAtRiseSet.emplace_back();
+			auto* curve = &data.maxEclipseAtRiseSet.back();
+			auto JDmin = JDP1;
+			auto JDmax = JDP2;
+			int numPoints = 5;
+			bool goodPointFound = false;
+			do
 			{
-				count += 1;
-				dlat = lat0-coordinates.latitude;
-				dlon = lon0-coordinates.longitude;
-				diff = std::sqrt(dlat*dlat+dlon*dlon);
-				if (diff>10.)
+				curve->clear();
+				numPoints = 2*numPoints+1;
+				const auto step = (JDmax-JDmin)/numPoints;
+				// We use an extended interval of n to include min and max values of JD. The internal
+				// values of JD are chosen in such a way that after increasing numPoints at the next
+				// iteration we'd check the points between the ones we checked in the previous
+				// iteration, thus more efficiently searching for good points, avoiding rechecking
+				// the same JD values.
+				for(int n = -1; n < numPoints+1; ++n)
 				{
-					data.maxEclipseAtRiseSet.emplace_back();
-					curve = &data.maxEclipseAtRiseSet.back();
+					const auto JD = std::clamp(JDmin + step*(n+0.5), JDmin, JDmax);
+					const auto coordinates = getMaximumEclipseAtRiseSet(first,JD);
+					curve->emplace_back(JD, coordinates.longitude, coordinates.latitude);
+					if (abs(coordinates.latitude) <= 90.)
+						goodPointFound = true;
+					else if(goodPointFound)
+						break; // we've obtained a bad point after a good one, can refine now
 				}
-				if (!first && count == 1) startJD2 = JD;
-				if (!first && count == 1 && bothPenumbralLimits && (startJD1 < JDMid) && (startJD2 < JDMid))
-					curve->emplace_back(startLon1, startLat1); // connect start of part 1 to start of part 2
-				curve->emplace_back(coordinates.longitude, coordinates.latitude);
-				if (first && bothPenumbralLimits)
-				{
-					endJD1 = JD;
-					endLat1 = coordinates.latitude;
-					endLon1 = coordinates.longitude;
-				}
-				if (first && count == 1 && bothPenumbralLimits)
-				{
-					startJD1 = JD;
-					startLat1 = coordinates.latitude;
-					startLon1 = coordinates.longitude;
-				}
-				lat0 = coordinates.latitude;
-				lon0 = coordinates.longitude;
 			}
-			i++;
+			while(!goodPointFound && numPoints < 500);
+
+			// We can't refine the curve if we have no usable points, so clear it (don't
+			// remove because we need it to match first and second branches).
+			if(!goodPointFound) curve->clear();
+
+			// The curve corresponding to P3-P4 time interval
+			data.maxEclipseAtRiseSet.emplace_back();
+			curve = &data.maxEclipseAtRiseSet.back();
+			JDmin = JDP3;
+			JDmax = JDP4;
+			numPoints = 5;
+			goodPointFound = false;
+			do
+			{
+				curve->clear();
+				numPoints = 2*numPoints+1;
+				const auto step = (JDmax-JDmin)/numPoints;
+				// We use an extended interval of n to include min and max values of JD. The internal
+				// values of JD are chosen in such a way that after increasing numPoints at the next
+				// iteration we'd check the points between the ones we checked in the previous
+				// iteration, thus more efficiently searching for good points, avoiding rechecking
+				// the same JD values.
+				for(int n = -1; n < numPoints+1; ++n)
+				{
+					const auto JD = std::clamp(JDmin + step*(n+0.5), JDmin, JDmax);
+					const auto coordinates = getMaximumEclipseAtRiseSet(first,JD);
+					curve->emplace_back(JD, coordinates.longitude, coordinates.latitude);
+					if (abs(coordinates.latitude) <= 90.)
+						goodPointFound = true;
+					else if(goodPointFound)
+						break; // we've obtained a bad point after a good one, can refine now
+				}
+			}
+			while(!goodPointFound && numPoints < 500);
+
+			// We can't refine the curve if we have no usable points, so clear it (don't
+			// remove because we need it to match first and second branches).
+			if(!goodPointFound) curve->clear();
 		}
-		if (!first && bothPenumbralLimits) endJD2 = JD;
-		if (!first && bothPenumbralLimits && (endJD1 > JDMid) && (endJD2 > JDMid))
-			curve->emplace_back(endLon1, endLat1); // connect end of part 2 to end of part 1
+		else
+		{
+			// The curve corresponding to P1-P4 time interval
+			data.maxEclipseAtRiseSet.emplace_back();
+			auto*const curve = &data.maxEclipseAtRiseSet.back();
+			const auto JDmin = JDP1;
+			const auto JDmax = JDP4;
+			int numPoints = 5;
+			bool goodPointFound = false;
+			do
+			{
+				curve->clear();
+				numPoints = 2*numPoints+1;
+				const auto step = (JDmax-JDmin)/numPoints;
+				// We use an extended interval of n to include min and max values of JD. The internal
+				// values of JD are chosen in such a way that after increasing numPoints at the next
+				// iteration we'd check the points between the ones we checked in the previous
+				// iteration, thus more efficiently searching for good points, avoiding rechecking
+				// the same JD values.
+				for(int n = -1; n < numPoints+1; ++n)
+				{
+					const auto JD = std::clamp(JDmin + step*(n+0.5), JDmin, JDmax);
+					const auto coordinates = getMaximumEclipseAtRiseSet(first,JD);
+					curve->emplace_back(JD, coordinates.longitude, coordinates.latitude);
+					if (abs(coordinates.latitude) <= 90.)
+						goodPointFound = true;
+					else if(goodPointFound)
+						break; // we've obtained a bad point after a good one, can refine now
+				}
+			}
+			while(!goodPointFound && numPoints < 500);
+
+			// We can't refine the curve if we have no usable points, so clear it (don't
+			// remove because we need it to match first and second branches).
+			if(!goodPointFound) curve->clear();
+		}
+
+	}
+	// Refine at the beginnings and the ends of the lines so as to find the precise endpoints
+	for(unsigned c = 0; c < data.maxEclipseAtRiseSet.size(); ++c)
+	{
+		auto& points = data.maxEclipseAtRiseSet[c];
+		const bool first = c < data.maxEclipseAtRiseSet.size() / 2;
+
+		// 1. Beginning of the line
+		const auto firstValidIt = std::find_if(points.begin(), points.end(),
+						       [](const auto& p){ return p.latitude <= 90; });
+		if (firstValidIt == points.end()) continue;
+		const int firstValidPos = firstValidIt - points.begin();
+		if (firstValidPos > 0)
+		{
+			double lastInvalidTime = points[firstValidPos - 1].JD;
+			double firstValidTime = points[firstValidPos].JD;
+			// Bisect between these times. The sufficient number of iterations was found empirically.
+			for (int n = 0; n < 15; ++n)
+			{
+				const auto currTime = (lastInvalidTime + firstValidTime) / 2;
+				const auto coords = getMaximumEclipseAtRiseSet(first, currTime);
+				if (coords.latitude > 90)
+				{
+					lastInvalidTime = currTime;
+				}
+				else
+				{
+					firstValidTime = currTime;
+					points.emplace_front(currTime, coords.longitude, coords.latitude);
+				}
+			}
+		}
+
+		// 2. End of the line
+		const auto lastValidIt = std::find_if(points.rbegin(), points.rend(),
+						      [](const auto& p){ return p.latitude <= 90; });
+		if (lastValidIt == points.rend()) continue;
+		const int lastValidPos = points.size() - 1 - (lastValidIt - points.rbegin());
+		if (lastValidPos + 1u < points.size())
+		{
+			double firstInvalidTime = points[lastValidPos + 1].JD;
+			double lastValidTime = points[lastValidPos].JD;
+			// Bisect between these times. The sufficient number of iterations was found empirically.
+			for (int n = 0; n < 15; ++n)
+			{
+				const auto currTime = (firstInvalidTime + lastValidTime) / 2;
+				const auto coords = getMaximumEclipseAtRiseSet(first, currTime);
+				if (coords.latitude > 90)
+				{
+					firstInvalidTime = currTime;
+				}
+				else
+				{
+					lastValidTime = currTime;
+					points.emplace_back(currTime, coords.longitude, coords.latitude);
+				}
+			}
+		}
+
+		// 3. Cleanup: remove invalid points, sort by time increase
+		points.erase(std::remove_if(points.begin(), points.end(), [](const auto& p) { return p.latitude > 90; }),
+			     points.end());
+		std::sort(points.begin(), points.end(), [](const auto& a, const auto& b) { return a.JD < b.JD; });
+
+		// Refine too long internal segments
+		bool newPointsInserted;
+		do
+		{
+			newPointsInserted = false;
+			const unsigned origNumPoints = points.size();
+			for(unsigned n = 1; n < origNumPoints; ++n)
+			{
+				const auto prevLat = points[n-1].latitude;
+				const auto currLat = points[n].latitude;
+				const auto prevLon = points[n-1].longitude;
+				const auto currLon = points[n].longitude;
+				auto lonDiff = currLon - prevLon;
+				while(lonDiff >  180) lonDiff -= 360;
+				while(lonDiff < -180) lonDiff += 360;
+				constexpr double admissibleStepDeg = 5;
+				constexpr double admissibleStepDegSqr = admissibleStepDeg*admissibleStepDeg;
+				// We want to sample more densely near the pole, where the rise/set curve may have
+				// more features, so using unscaled longitude as one of the coordinates is on purpose.
+				if(Vec2d(prevLat - currLat, lonDiff).normSquared() < admissibleStepDegSqr)
+					continue;
+
+				const auto JD = (points[n-1].JD + points[n].JD) / 2;
+				const auto coordinates = getMaximumEclipseAtRiseSet(first,JD);
+				points.emplace_back(JD, coordinates.longitude, coordinates.latitude);
+				newPointsInserted = true;
+			}
+			std::sort(points.begin(), points.end(), [](const auto& a, const auto& b) { return a.JD < b.JD; });
+		} while(newPointsInserted);
+
+		// Connect the first and second branches of the lines
+		if(!first)
+		{
+			const auto firstBranchIndex = c - data.maxEclipseAtRiseSet.size() / 2;
+			auto& firstBranch  = data.maxEclipseAtRiseSet[firstBranchIndex];
+			auto& secondBranch = data.maxEclipseAtRiseSet[c];
+			if(firstBranch.empty() || secondBranch.empty())
+				continue;
+			// Connect the points that are closer to each other by time
+			if(std::abs(secondBranch.back().JD - firstBranch.back().JD) < std::abs(secondBranch.front().JD - firstBranch.front().JD))
+				secondBranch.emplace_back(firstBranch.back());
+			else
+				secondBranch.emplace_front(firstBranch.front());
+		}
 	}
 
 	if (!partialEclipse)

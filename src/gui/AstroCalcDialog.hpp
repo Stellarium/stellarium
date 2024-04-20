@@ -143,7 +143,7 @@ class AstroCalcDialog : public StelDialog
 		std::variant<SingleLimit,TwoLimits> riseSetLimits[2];
 
 		// These curves appear to be split generally in multiple sections
-		std::vector<std::vector<GeoPoint>> maxEclipseAtRiseSet;
+		std::vector<std::deque<GeoTimePoint>> maxEclipseAtRiseSet;
 
 		std::vector<GeoPoint> centerLine;
 		std::vector<UmbraOutline> umbraOutlines;
