@@ -4074,8 +4074,8 @@ auto AstroCalcDialog::getRiseSetLineCoordinates(bool first, double x,double y,do
 		if (lngDeg > 180.) lngDeg -= 360.;
 		double sfn1 = eta*std::cos(d);
 		double cfn1 = std::sqrt(1.-sfn1*sfn1);
-		double tanLatDeg = ff*sfn1/cfn1;
-		coordinates.latitude = std::atan(tanLatDeg)*M_180_PI;
+		double tanLat = ff*sfn1/cfn1;
+		coordinates.latitude = std::atan(tanLat)*M_180_PI;
 		coordinates.longitude = lngDeg;
 	}
 	return coordinates;
