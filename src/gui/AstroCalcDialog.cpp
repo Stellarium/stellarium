@@ -5055,7 +5055,7 @@ void AstroCalcDialog::saveSolarEclipseMap()
 	const auto eclipseDateStr = QString("-%1-%2-%3").arg(year).arg(month).arg(day);
 	QString selectedFilter("(*.kml)");
 	QString filePath = QFileDialog::getSaveFileName(&StelMainView::getInstance(),
-	                                                q_("Save KML as..."),
+	                                                q_("Save map as..."),
 	                                                QDir::homePath() + "/solareclipse"+eclipseDateStr+".kml",
 	                                                q_("KML map (*.kml);;PNG equirectangular map (*.png)"),
 	                                                &selectedFilter);
