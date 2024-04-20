@@ -165,10 +165,8 @@ void drawGeoLinesForEquirectMap(QPainter& painter, const std::vector<QPointF>& p
 
 	using namespace std;
 
-	double prevLon = M_PI/180 * points.front().x();
-	double prevLat = M_PI/180 * points.front().y();
 	Vec3d prevDir;
-	StelUtils::spheToRect(prevLon, prevLat, prevDir);
+	StelUtils::spheToRect(M_PI/180 * points[0].x(), M_PI/180 * points[0].y(), prevDir);
 	for(unsigned n = 1; n < points.size(); ++n)
 	{
 		const auto currLon = M_PI/180 * points[n].x();
@@ -216,7 +214,7 @@ void drawGeoLinesForEquirectMap(QPainter& painter, const std::vector<QPointF>& p
 		StelUtils::rectToSphe(&crossLon, &crossLat, P);
 		crossLon *= 180/M_PI;
 		crossLat *= 180/M_PI;
-		const bool sameSign = (crossLon < 0 && prevLon < 0) || (crossLon >= 0 && prevLon >= 0);
+		const bool sameSign = (crossLon < 0 && points[n-1].x() < 0) || (crossLon >= 0 && points[n-1].x() >= 0);
 		drawContinuousEquirectGeoLine(painter, points[n-1], QPointF(sameSign ? crossLon : -crossLon, crossLat));
 		drawContinuousEquirectGeoLine(painter, points[n], QPointF(sameSign ? -crossLon : crossLon, crossLat));
 
