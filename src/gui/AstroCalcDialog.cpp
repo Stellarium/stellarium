@@ -4154,25 +4154,26 @@ auto AstroCalcDialog::getMaximumEclipseAtRiseSet(bool first, double JD) -> GeoPo
 	const double sgqa = x*std::cos(qa)-y*std::sin(qa);
 
 	GeoPoint coordinates(99., 0.);
-	if (std::abs(sgqa)<1.)
-	{
-		const double gqa = std::asin(sgqa);
-		const double ga = gqa+qa;
-		const double xxia = x-std::sin(ga);
-		const double yetaa = y-std::cos(ga);
-		if (xxia*xxia+yetaa*yetaa < L1*L1)
-		{
-			double b = -std::cos(ga)*std::sin(d);
-			double theta = std::atan2(std::sin(ga),b)*M_180_PI;
-			double lngDeg = StelUtils::fmodpos(theta-mu, 360.);
-			if (lngDeg > 180.) lngDeg -= 360.;
-			double sfn1 = std::cos(ga)*std::cos(d);
-			double cfn1 = std::sqrt(1.-sfn1*sfn1);
-			double latDeg = ff*sfn1/cfn1;
-			coordinates.latitude = std::atan(latDeg)*M_180_PI;
-			coordinates.longitude = lngDeg;
-		}
-	}
+	if (std::abs(sgqa) > 1.) return coordinates;
+
+	const double gqa = std::asin(sgqa);
+	const double gamma = gqa+qa;
+	const double xi = std::sin(gamma);
+	const double eta = std::cos(gamma);
+	const double xxia = x-xi;
+	const double yetaa = y-eta;
+	if (xxia*xxia+yetaa*yetaa > L1*L1) return coordinates;
+
+	const double b = -eta*std::sin(d);
+	const double theta = std::atan2(xi,b)*M_180_PI;
+	double lngDeg = StelUtils::fmodpos(theta-mu, 360.);
+	if (lngDeg > 180.) lngDeg -= 360.;
+	const double sfn1 = std::cos(gamma)*std::cos(d);
+	const double cfn1 = std::sqrt(1.-sfn1*sfn1);
+	const double tanLat = ff*sfn1/cfn1;
+	coordinates.latitude = std::atan(tanLat)*M_180_PI;
+	coordinates.longitude = lngDeg;
+
 	return coordinates;
 }
 
