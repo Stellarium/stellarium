@@ -127,6 +127,8 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	fieldTelescopeName = new QGraphicsTextItem(telescopeControls);
 	fieldMagnification = new QGraphicsTextItem(telescopeControls);
 	fieldExitPupil = new QGraphicsTextItem(telescopeControls);
+	fieldTwilightFactor = new QGraphicsTextItem(telescopeControls);
+	fieldRelativeBrightness = new QGraphicsTextItem(telescopeControls);
 	fieldFov = new QGraphicsTextItem(telescopeControls);
 	fieldRayleighCriterion = new QGraphicsTextItem(telescopeControls);
 	fieldDawesCriterion = new QGraphicsTextItem(telescopeControls);
@@ -159,6 +161,8 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	fieldTelescopeName->setTextWidth(maxWidth);
 	fieldMagnification->setTextWidth(maxWidth);
 	fieldExitPupil->setTextWidth(maxWidth);
+	fieldTwilightFactor->setTextWidth(maxWidth);
+	fieldRelativeBrightness->setTextWidth(maxWidth);
 	fieldFov->setTextWidth(maxWidth);
 	fieldRayleighCriterion->setTextWidth(maxWidth);
 	fieldDawesCriterion->setTextWidth(maxWidth);
@@ -350,7 +354,9 @@ OcularsGuiPanel::~OcularsGuiPanel()
 	delete fieldPrismRotation; fieldPrismRotation = Q_NULLPTR;
 	delete fieldTelescopeName; fieldTelescopeName = Q_NULLPTR;
 	delete fieldMagnification; fieldMagnification = Q_NULLPTR;
-	delete fieldExitPupil; fieldExitPupil = Q_NULLPTR;
+	delete fieldExitPupil; fieldExitPupil = Q_NULLPTR;	
+	delete fieldTwilightFactor; fieldTwilightFactor = Q_NULLPTR;
+	delete fieldRelativeBrightness; fieldRelativeBrightness = Q_NULLPTR;
 	delete fieldFov; fieldFov = Q_NULLPTR;
 	delete fieldRayleighCriterion; fieldRayleighCriterion = Q_NULLPTR;
 	delete fieldDawesCriterion; fieldDawesCriterion = Q_NULLPTR;
@@ -816,8 +822,8 @@ void OcularsGuiPanel::updateTelescopeControls()
 
 	if (ocularsPlugin->flagShowCCD)
 	{
-		int index = ocularsPlugin->selectedCCDIndex;
-		CCD* ccd = ocularsPlugin->ccds[index];
+		int indexCCD = ocularsPlugin->selectedCCDIndex;
+		CCD* ccd = ocularsPlugin->ccds[indexCCD];
 		Q_ASSERT(ccd);
 
 		const double fovX = ccd->getActualFOVx(telescope, lens);
@@ -842,28 +848,32 @@ void OcularsGuiPanel::updateTelescopeControls()
 
 		fieldMagnification->setVisible(false);
 		fieldExitPupil->setVisible(false);
-		fieldFov->setVisible(false);
+		fieldTwilightFactor->setVisible(false);
+		fieldRelativeBrightness->setVisible(false);
+		fieldFov->setVisible(false);		
 	}
 
 	if (ocularsPlugin->flagShowOculars)
 	{
 		//We need the current ocular
-		int index = ocularsPlugin->selectedOcularIndex;
-		Ocular* ocular = ocularsPlugin->oculars[index];
+		int indexOcular = ocularsPlugin->selectedOcularIndex;
+		Ocular* ocular = ocularsPlugin->oculars[indexOcular];
+		bool showBinoFactors = false;
 		Q_ASSERT(ocular);
 
 		if (ocular->isBinoculars())
 		{
 			prevTelescopeButton->setVisible(false);
 			nextTelescopeButton->setVisible(false);
-			fieldTelescopeName->setVisible(false);
-			fieldExitPupil->setVisible(false);
+			fieldTelescopeName->setVisible(false);			
 			posY = 0.;
 			widgetHeight = 0.;
 
 			fieldMagnification->setToolTip(q_("Magnification provided by these binoculars"));
 			fieldFov->setToolTip(q_("Actual field of view provided by these binoculars"));
 			fieldExitPupil->setToolTip(q_("Exit pupil provided by these binoculars"));
+			fieldTwilightFactor->setToolTip(q_("Twilight factor provided by these binoculars"));
+			fieldRelativeBrightness->setToolTip(q_("Relative brightness provided by these binoculars"));
 		}
 		else
 		{
@@ -896,6 +906,21 @@ void OcularsGuiPanel::updateTelescopeControls()
 			fieldExitPupil->setPos(posX, posY);
 			posY += fieldExitPupil->boundingRect().height();
 			widgetHeight += fieldExitPupil->boundingRect().height();
+			if (ocular->isBinoculars())
+			{
+				showBinoFactors = true;
+				QString twilightFactorLabel = QString(q_("Twilight factor: %1")).arg(QString::number(::sqrt(exitPupil), 'f', 2));
+				fieldTwilightFactor->setPlainText(twilightFactorLabel);
+				fieldTwilightFactor->setPos(posX, posY);
+				posY += fieldTwilightFactor->boundingRect().height();
+				widgetHeight += fieldTwilightFactor->boundingRect().height();
+
+				QString relativeBrightnessLabel = QString(q_("Relative brightness: %1")).arg(QString::number(exitPupil*exitPupil, 'f', 2));
+				fieldRelativeBrightness->setPlainText(relativeBrightnessLabel);
+				fieldRelativeBrightness->setPos(posX, posY);
+				posY += fieldRelativeBrightness->boundingRect().height();
+				widgetHeight += fieldRelativeBrightness->boundingRect().height();
+			}
 		}
 
 		QString fovString = QString::number(ocular->actualFOV(telescope, lens), 'f', 4) + QChar(0x00B0);
@@ -911,6 +936,8 @@ void OcularsGuiPanel::updateTelescopeControls()
 			fieldExitPupil->setVisible(true);
 		else
 			fieldExitPupil->setVisible(false);
+		fieldTwilightFactor->setVisible(showBinoFactors);
+		fieldRelativeBrightness->setVisible(showBinoFactors);
 	}	
 
 	double diameter = telescope->diameter();
@@ -969,7 +996,7 @@ void OcularsGuiPanel::updateTelescopeControls()
 		fieldVisualResolution->setPlainText(visualResolutionLabel);
 		fieldVisualResolution->setToolTip(q_("Visual resolution is based on eye properties and magnification"));
 		fieldVisualResolution->setPos(posX, posY);
-		posY += fieldVisualResolution->boundingRect().height();
+		//posY += fieldVisualResolution->boundingRect().height();
 		widgetHeight += fieldVisualResolution->boundingRect().height();
 
 		fieldVisualResolution->setVisible(true);
@@ -1131,6 +1158,8 @@ void OcularsGuiPanel::setControlsColor(const QColor& color)
 	Q_ASSERT(fieldTelescopeName);
 	Q_ASSERT(fieldMagnification);
 	Q_ASSERT(fieldExitPupil);
+	Q_ASSERT(fieldTwilightFactor);
+	Q_ASSERT(fieldRelativeBrightness);
 	Q_ASSERT(fieldFov);
 	Q_ASSERT(fieldRayleighCriterion);
 	Q_ASSERT(fieldDawesCriterion);
@@ -1154,6 +1183,8 @@ void OcularsGuiPanel::setControlsColor(const QColor& color)
 	fieldMagnification->setDefaultTextColor(color);
 	fieldFov->setDefaultTextColor(color);
 	fieldExitPupil->setDefaultTextColor(color);
+	fieldTwilightFactor->setDefaultTextColor(color);
+	fieldRelativeBrightness->setDefaultTextColor(color);
 	fieldRayleighCriterion->setDefaultTextColor(color);
 	fieldDawesCriterion->setDefaultTextColor(color);
 	fieldAbbeyCriterion->setDefaultTextColor(color);
@@ -1178,6 +1209,8 @@ void OcularsGuiPanel::setControlsFont(const QFont& font)
 	Q_ASSERT(fieldTelescopeName);
 	Q_ASSERT(fieldMagnification);
 	Q_ASSERT(fieldExitPupil);
+	Q_ASSERT(fieldTwilightFactor);
+	Q_ASSERT(fieldRelativeBrightness);
 	Q_ASSERT(fieldFov);
 	Q_ASSERT(fieldRayleighCriterion);
 	Q_ASSERT(fieldDawesCriterion);
@@ -1201,6 +1234,8 @@ void OcularsGuiPanel::setControlsFont(const QFont& font)
 	fieldMagnification->setFont(font);
 	fieldFov->setFont(font);
 	fieldExitPupil->setFont(font);
+	fieldTwilightFactor->setFont(font);
+	fieldRelativeBrightness->setFont(font);
 	fieldRayleighCriterion->setFont(font);
 	fieldDawesCriterion->setFont(font);
 	fieldAbbeyCriterion->setFont(font);
