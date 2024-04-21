@@ -116,6 +116,8 @@ private:
 	QGraphicsTextItem* fieldTelescopeName;
 	QGraphicsTextItem* fieldMagnification;
 	QGraphicsTextItem* fieldExitPupil;
+	QGraphicsTextItem* fieldTwilightFactor;
+	QGraphicsTextItem* fieldRelativeBrightness;
 	QGraphicsTextItem* fieldFov;
 	QGraphicsTextItem* fieldRayleighCriterion;
 	QGraphicsTextItem* fieldDawesCriterion;
