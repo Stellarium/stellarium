@@ -518,8 +518,8 @@ the file will be written to \file{\textless{}user\ directory\textgreater{}/my\_l
 -\/-screenshot-dir   & path       & Specify the directory to which screenshots will be saved. \\\midrule
 -\/-full-screen      & yes or no  & Overrides the full screen setting in the config file. \\\midrule
 -\/-home-planet      & planet     & Specify observer planet (English name). \\
--\/-longitude        & longitude  & Specify latitude, e.g. +53d58'16.65" \\
--\/-latitude         & latitude   & Specify longitude, e.g. -1d4'27.48" \\
+-\/-longitude        & longitude  & Specify latitude, e.g. +53d58'16.65" \footnote{\label{FN:escapes}You may have to escape the minute/second characters, like +53d58\textbackslash{}'16.65\textbackslash{}"}\\
+-\/-latitude         & latitude   & Specify longitude, e.g. -1d4'27.48" \footref{FN:escapes}\\
 -\/-altitude         & altitude   & Specify observer altitude in meters. \\\midrule
 -\/-list-landscapes  & {[}none{]} & Print a list of available landscape IDs and exit. \\
 -\/-landscape        & landscape ID & Start using landscape whose ID matches the passed parameter (dir name of landscape). \\\midrule
