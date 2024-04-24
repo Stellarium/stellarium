@@ -784,6 +784,21 @@ innerbottommargin=5pt]{cBox}
 %	HYPERLINKS IN THE DOCUMENTS. These packages should be last, else some PDF bookmarks fail!
 %----------------------------------------------------------------------------------------
 
+% Redefines to create commas between footnote marks. Does not always work, though, and causes missing PDF links. TODO: Fix this! 
+% https://tex.stackexchange.com/questions/554074/what-is-the-correct-way-to-have-commas-between-footnotes-and-prevent-footnote
+% \let\oldFootnote\footnote
+% \let\oldFootref\footref
+% \newcommand\nextToken\relax
+% \renewcommand\footnote[1]{%
+%     \oldFootnote{#1}\futurelet\nextToken\isFootnoteOrFootref}
+% \renewcommand\footref[1]{%
+%     \oldFootref{#1}\futurelet\nextToken\isFootnoteOrFootref}
+% \newcommand\isFootnoteOrFootref{%
+%     \ifx\footnote\nextToken\textsuperscript{,}\fi%
+% 	\ifx\footref\nextToken\textsuperscript{,}\fi}
+
+%\usepackage[dont-mess-around]{fnpct}
+
 \ifpdf
 \usepackage{xurl}% will break long URLs also with pdflatex.
 \usepackage{hyperref}

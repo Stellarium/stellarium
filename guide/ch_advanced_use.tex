@@ -518,8 +518,8 @@ the file will be written to \file{\textless{}user\ directory\textgreater{}/my\_l
 -\/-screenshot-dir   & path       & Specify the directory to which screenshots will be saved. \\\midrule
 -\/-full-screen      & yes or no  & Overrides the full screen setting in the config file. \\\midrule
 -\/-home-planet      & planet     & Specify observer planet (English name). \\
--\/-longitude        & longitude  & Specify latitude, e.g. +53d58'16.65" \footnote{\label{FN:escapes}You may have to escape the minute/second characters, like +53d58\textbackslash{}'16.65\textbackslash{}"}\\
--\/-latitude         & latitude   & Specify longitude, e.g. -1d4'27.48" \footref{FN:escapes}\\
+-\/-latitude         & latitude   & Specify latitude, e.g. 41.1 or +53d58'16.6" \footnote{\label{FN:escapes}You may have to escape the minute/second characters, like +53d58\textbackslash{}'16.6\textbackslash{}"}\\
+-\/-longitude        & longitude  & Specify longitude, e.g. 16.2 or -1d4'27.48" \footref{FN:escapes}\\
 -\/-altitude         & altitude   & Specify observer altitude in meters. \\\midrule
 -\/-list-landscapes  & {[}none{]} & Print a list of available landscape IDs and exit. \\
 -\/-landscape        & landscape ID & Start using landscape whose ID matches the passed parameter (dir name of landscape). \\\midrule
@@ -529,18 +529,20 @@ the file will be written to \file{\textless{}user\ directory\textgreater{}/my\_l
 -\/-fov              & angle (degrees) & The initial vertical field of view in degrees. \\\midrule
 -\/-scale-gui        & scale factor & Scaling the GUI according to scale factor\\
 -\/-gui-css style    & name       & Use \file{name.css} to define GUI style\\\midrule
--\/-projection-type  & ptype      & The initial projection type (e.g. \texttt{perspective}). \\\midrule
+-\/-projection-type  & ptype      & The initial projection type: one of  \\
+                     &            & \texttt{ProjectionPerspective  ProjectionEqualArea  ProjectionStereographic   ProjectionFisheye}\\
+					 &            & \texttt{ProjectionCylinder ProjectionCylinderFill  ProjectionMercator  ProjectionMiller ProjectionOrthographic  ProjectionHammer ProjectionSinusoidal  } \\\midrule
 -\/-spout  or -S     & all or sky & Act as Spout sender (See section \ref{sec:CommandLineOptions:Special:Spout}).%
-                                    \footnote{On Windows only}\footnote{This function requires running in OpenGL mode.}\\
--\/-spout-name       & name       & Use \texttt{name} as name of the Spout sender. Default name: \texttt{Stellarium}.\footnotemark[1]\\\midrule									
+                                    \footnote{\label{FN:WinOnly}On Windows only}\textsuperscript{,}\footnote{This function requires running in OpenGL mode.}\\
+-\/-spout-name       & name       & Use \texttt{name} as name of the Spout sender. Default name: \texttt{Stellarium}.\footref{FN:WinOnly}\\\midrule									
 -\/-verbose          &            & Even more diagnostic output in logfile (esp.\ multimedia handling)\\
 -\/-dump-opengl-details or -d     & {[}none{]} & Dump information about OpenGL support to logfile. 
                                                  Use this is you have graphics problems and want to send a bug report. \\\midrule
--\/-angle-mode or -a & {[}none{]} & Use ANGLE as OpenGL ES2 rendering engine (autodetect Direct3D version).\footnotemark[1]\footnote{Stellarium 0.* series only}\\
--\/-angle-d3d9 or -9 & {[}none{]} & Force use Direct3D 9 for ANGLE OpenGL ES2 rendering engine.\footnotemark[1]\footnotemark[3]\\
--\/-angle-d3d11      & {[}none{]} & Force use Direct3D 11 for ANGLE OpenGL ES2 rendering engine.\footnotemark[1]\footnotemark[3]\\
--\/-angle-warp       & {[}none{]} & Force use the Direct3D 11 software rasterizer for ANGLE OpenGL ES2 rendering engine.\footnotemark[1]\footnotemark[3]\\
--\/-mesa-mode or -m  & {[}none{]} & Use MESA as software OpenGL rendering engine.\footnotemark[1]\\
+-\/-angle-mode or -a & {[}none{]} & Use ANGLE as OpenGL ES2 rendering engine (autodetect Direct3D version).\footref{FN:WinOnly}\textsuperscript{,}\footnote{\label{FN:Qt5only}Qt5-based Stellarium versions only}\\
+-\/-angle-d3d9 or -9 & {[}none{]} & Force use Direct3D 9 for ANGLE OpenGL ES2 rendering engine.\footref{FN:WinOnly}\textsuperscript{,}\footref{FN:Qt5only}\\
+-\/-angle-d3d11      & {[}none{]} & Force use Direct3D 11 for ANGLE OpenGL ES2 rendering engine.\footref{FN:WinOnly}\textsuperscript{,}\footref{FN:Qt5only}\\
+-\/-angle-warp       & {[}none{]} & Force use the Direct3D 11 software rasterizer for ANGLE OpenGL ES2 rendering engine.\footref{FN:WinOnly}\textsuperscript{,}\footref{FN:Qt5only}\\
+-\/-mesa-mode or -m  & {[}none{]} & Use MESA as software OpenGL rendering engine.\footref{FN:WinOnly}\\
 -\/-single-buffer    & {[}none{]} & Use single-buffering. This reportedly avoids screen blanking problems with some Intel GPUs. \\
 -\/-opengl-compat or -C & {[}none{]} & Request OpenGL 3.3 Compatibility Profile. Might fix graphics problems in some driver configurations.\\
 -\/-low-graphics or -L & {[}none{]} & Force low-graphics mode. May be useful on old GPUs that do support OpenGL 3.3 but perform too slowly.\\
@@ -556,7 +558,7 @@ default options.
 \label{sec:CommandLineOptions:Examples}
 
 \begin{itemize}
-\item To start Stellarium using the configuration file,
+\item To start Stellarium using the configuration file
   \file{configuration\_one.ini} situated in the user directory (use either of
   these):
 
@@ -573,11 +575,15 @@ stellarium --landscape=ocean
 \end{commands}
 \end{itemize}
 
-%% GZ found in 2015:
-\noindent Note that console output (like \command{-\/-list-landscapes}) on Windows is not possible. 
+%% GZ found in 2015, but worked in 2024:
+\noindent Note that console output (like \command{-\/-list-landscapes}) may not be possible on some Windows systems. 
 
 \section{Special Options}
 \label{sec:CommandLineOptions:Special}
+
+In addition to some troubleshooting options (see section \ref{sec:GettingStarted:Running:Troubleshooting}), 
+there are also a few options mostly geared to advanced users.
+
 \subsection{Spout}\newFeature{0.15.1} 
 \label{sec:CommandLineOptions:Special:Spout}
 Apart from stand-alone use, Stellarium can be used as multimedia source in larger installations, in museums or science exhibitions. 
@@ -617,9 +623,9 @@ problems.
 \item[STEL\_OPTS] may contain a default commandline with options in the syntax of the table above.
 \item[STEL\_USERDIR] may contain the path to a user data directory
   deviating from the default (see section \ref{sec:Directories}).
-\item[QT\_OPENGL]\footnote{Windows only} May be one of \texttt{desktop} (native OpenGL for your GPU, recommended),
-  \texttt{angle}\footnote{Stellarium 0.* series only} or \texttt{software}. The last activates pure software rendering using the MESA OpenGL library. Note that command line options take precedence over this environment variable.
-\item[QT\_ANGLE\_PLATFORM]\footnote{Windows and Stellarium 0.* series only} May be one of \texttt{d3d9} (DirectX~9) or \texttt{d3d11} (DirectX~11),
+\item[QT\_OPENGL]\footref{FN:WinOnly} May be one of \texttt{desktop} (native OpenGL for your GPU, recommended),
+  \texttt{angle}\footref{FN:Qt5only} or \texttt{software}. The last activates pure software rendering using the MESA OpenGL library. Note that command line options take precedence over this environment variable.
+\item[QT\_ANGLE\_PLATFORM]\footref{FN:WinOnly}\textsuperscript{,}\footref{FN:Qt5only} May be one of \texttt{d3d9} (DirectX~9) or \texttt{d3d11} (DirectX~11),
   or \texttt{warp} for another software-only solution. Note that command line options take precedence over this environment variable.
 \end{description}
 
