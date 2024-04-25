@@ -250,7 +250,7 @@ int main(int argc, char **argv)
 	// Parse for first set of CLI arguments - stuff we want to process before other
 	// output, such as --help and --version
 	#ifdef Q_OS_WIN
-	if (argList.contains("--help") || argList.contains("--version"))
+	if (argList.contains("--help") || argList.contains("--version") || argList.contains("--list-landscapes"))
 	{
 		// attach console of parent process and redirect output stream
 		AttachConsole(ATTACH_PARENT_PROCESS);

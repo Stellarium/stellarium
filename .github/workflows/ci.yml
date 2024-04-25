@@ -146,7 +146,7 @@ jobs:
     - name: Configure CMake
       shell: bash
       run: |
-        export PATH="/usr/local/opt/qt@5/bin:$PATH"
+        export PATH="/opt/homebrew/opt/qt@5/bin:/usr/local/opt/qt@5/bin:$PATH"
         mkdir -p build
         cd build
         cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DENABLE_TESTING=On ${{ github.workspace }}

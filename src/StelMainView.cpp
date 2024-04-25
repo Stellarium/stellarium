@@ -875,6 +875,7 @@ void StelMainView::init()
 	glInfo.isCoreProfile = format.profile() == QSurfaceFormat::CoreProfile;
 	glInfo.isHighGraphicsMode = !qApp->property("onetime_force_low_graphics").toBool() &&
 	                            !!StelOpenGL::highGraphicsFunctions();
+	qDebug() << "Running in" << (glInfo.isHighGraphicsMode ? "High" : "Low") << "Graphics Mode";
 
 	auto& gl = *QOpenGLContext::currentContext()->functions();
 	if(format.majorVersion() * 1000 + format.minorVersion() >= 4006 ||
