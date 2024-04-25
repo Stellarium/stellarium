@@ -1018,15 +1018,12 @@ EclipseBesselElements calcSolarEclipseBessel()
 
 	constexpr double SunEarth = 109.12278;
 	// ratio of Sun-Earth radius : 109.12278 = 696000/6378.1366
-	// Another value is 109.075744787 = 695700/6378.1366
 	// Earth's equatorial radius = 6378.1366
 	// Source: IERS Conventions (2003)
 	// https://www.iers.org/IERS/EN/Publications/TechnicalNotes/tn32.html
 
-	// NASA's solar eclipse predictions use larger Sun with radius 696,000 km
-	// calculated from arctan of IAU 1976 solar radius (959.63 arcsec at 1 au)
-	// This value affects duration of total/annular eclipse ~ 2-3 seconds
-	// Stellarium's solar radius is 695,700 km, this may create discrepancies between prediction & visualization
+	// NASA's solar eclipse predictions use solar radius of 696,000 km
+	// calculated from arctan of IAU 1976 solar radius (959.63 arcsec at 1 au).
 
 	const double rss = sdistanceAu * 23454.7925; // from 1 AU/Earth's radius : 149597870.8/6378.1366
 	const double b = mdistanceER / rss;
