@@ -1487,7 +1487,7 @@ QString Nebula::getMorphologicalTypeDescription(void) const
 		if (!OClMatch.captured(4).trimmed().isEmpty())
 			rtxt << qc_("the cluster lies within nebulosity", "nebulosity factor of open clusters");
 
-		r = rtxt.join(",<br />");
+		r = rtxt.join(", ");
 	}
 
 	static const QRegularExpression VdBRx("\\.*(I|II|I-II|II P|P),\\s+(VBR|VB|BR|M|F|VF|:)\\.*");
@@ -1590,14 +1590,14 @@ QString Nebula::getMorphologicalTypeDescription(void) const
 		morph << structureList.value(structure-1, q_("undocumented structure"));
 		morph << brightnessList.value(brightness-1, q_("undocumented brightness"));
 
-		r = morph.join(",<br />");
+		r = morph.join(", ");
 	}
 
 	if (nType==NebSNR)
 	{
 		QString delim = "";
 		if (!r.isEmpty())
-			delim = ";<br />";
+			delim = "; ";
 
 		if (mTypeString.contains("S") && !mTypeString.contains("S?"))
 			r = qc_("remnant shows a shell radio structure", "supernova remnant structure classification") + delim + r;
