@@ -3721,6 +3721,7 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 		Vec3d sunPos = ssm->getSun()->getEclipticPos() + ssm->getSun()->getAberrationPush();
 		core->getHeliocentricEclipticModelViewTransform()->forward(sunPos);
 		light.position=sunPos;
+		const double eclipseFactor = static_cast<float>(ssm->getSolarEclipseFactor(core).first);
 
 		// Set the light parameters taking sun as the light source
 		light.diffuse.set(1.f,  magFactorGreen*1.f,  magFactorBlue*1.f);
@@ -3733,10 +3734,11 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 			// This approach here is again pretty ad-hoc.
 			// We have 5000cd/m^2 at sunset returned (Note this may be unnaturally much. Should be rather 10, but the 5000 may include the sun).
 			// When atm.brightness has fallen to 2000cd/m^2, we allow earthshine to appear visible. Its impact is full when atm.brightness is below 1000.
+			// In case of high-percentage partial or annular solar eclipse, earthshine shall not be enhanced, though, even when atmosphere luminance is dimmed by the eclipse.
 			LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
 			Q_ASSERT(lmgr);
 			const float atmLum=(lmgr->getFlagAtmosphere() ? lmgr->getAtmosphereAverageLuminance() : 0.0f);
-			if (atmLum<2000.0f)
+			if (atmLum<2000.0f && ( eclipseFactor<=0 || eclipseFactor==1.))
 			{
 				float atmScaling=1.0f - (qMax(1000.0f, atmLum)-1000.0f)*0.001f; // full impact when atmLum<1000.
 				float earthshineFactor=(1.0f-getPhase(ssm->getEarth()->getHeliocentricEclipticPos())); // We really mean the Earth for this! (Try observing from Mars ;-)
