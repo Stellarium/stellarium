@@ -298,7 +298,7 @@ void SolarSystem::init()
 	
 	StelApp *app = &StelApp::getInstance();
 	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
-	connect(&app->getSkyCultureMgr(), SIGNAL(currentSkyCultureChanged(QString)), this, SLOT(updateSkyCulture(QString)));
+	connect(&app->getSkyCultureMgr(), &StelSkyCultureMgr::currentSkyCultureIDChanged, this, &SolarSystem::updateSkyCulture);
 	connect(&StelMainView::getInstance(), SIGNAL(reloadShadersRequested()), this, SLOT(reloadShaders()));
 	StelCore *core = app->getCore();
 	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(recreateTrails()));

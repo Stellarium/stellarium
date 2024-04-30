@@ -90,7 +90,7 @@ void AsterismMgr::init()
 			this, SLOT(selectedObjectChange(StelModule::StelModuleSelectAction)));
 	StelApp *app = &StelApp::getInstance();
 	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
-	connect(&app->getSkyCultureMgr(), SIGNAL(currentSkyCultureChanged(QString)), this, SLOT(updateSkyCulture(const QString&)));
+	connect(&app->getSkyCultureMgr(), &StelSkyCultureMgr::currentSkyCultureIDChanged, this, &AsterismMgr::updateSkyCulture);
 
 	QString displayGroup = N_("Display Options");
 	addAction("actionShow_Asterism_Lines", displayGroup, N_("Asterism lines"), "linesDisplayed", "Alt+A");	
