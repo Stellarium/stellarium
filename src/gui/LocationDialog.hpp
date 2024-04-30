@@ -139,9 +139,6 @@ private slots:
 	//! @arg state false to store current location as startup location.
 	void ipQueryLocation(bool state);
 
-	// Esp. for signals from StelSkyCultureMgr
-	void populatePlanetList(QString) { populatePlanetList(); }
-
 	void setDisplayFormatForSpins(bool flagDecimalDegrees);
 
 #ifdef ENABLE_GPS
