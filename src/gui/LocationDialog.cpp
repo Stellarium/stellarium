@@ -90,7 +90,7 @@ void LocationDialog::createDialogContent()
 	StelApp *app = &StelApp::getInstance();
 	connect(app, SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	connect(app, SIGNAL(flagShowDecimalDegreesChanged(bool)), this, SLOT(setDisplayFormatForSpins(bool)));
-	connect(&app->getSkyCultureMgr(), SIGNAL(currentSkyCultureChanged(QString)), this, SLOT(populatePlanetList(QString)));
+	connect(&app->getSkyCultureMgr(), &StelSkyCultureMgr::currentSkyCultureIDChanged, this, &LocationDialog::populatePlanetList);
 	// Init the SpinBox entries
 	ui->longitudeSpinBox->setPrefixType(AngleSpinBox::Longitude);
 	ui->longitudeSpinBox->setMinimum(-180.0, true);

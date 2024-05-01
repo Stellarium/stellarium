@@ -108,7 +108,7 @@ void StelSkyCultureMgr::init()
 
 void StelSkyCultureMgr::reloadSkyCulture()
 {
-	emit currentSkyCultureChanged(currentSkyCultureDir);
+	emit currentSkyCultureIDChanged(currentSkyCultureDir);
 }
 
 //! Set the current sky culture from the passed directory
@@ -131,7 +131,7 @@ bool StelSkyCultureMgr::setCurrentSkyCultureID(const QString& cultureDir)
 	currentSkyCultureDir = scID;
 	currentSkyCulture = dirToNameEnglish[scID];
 
-	emit currentSkyCultureChanged(currentSkyCultureDir);
+	emit currentSkyCultureIDChanged(currentSkyCultureDir);
 	return result;
 }
 
@@ -149,7 +149,7 @@ bool StelSkyCultureMgr::setDefaultSkyCultureID(const QString& id)
 	Q_ASSERT(conf);
 	conf->setValue("localization/sky_culture", id);
 
-	emit defaultSkyCultureChanged(id);
+	emit defaultSkyCultureIDChanged(id);
 	return true;
 }
 	
