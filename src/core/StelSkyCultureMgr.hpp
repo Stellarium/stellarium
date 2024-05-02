@@ -86,6 +86,10 @@ public:
 	};
 	Q_ENUM(CLASSIFICATION)
 
+	//! Sky culture identifier (usually same as directory name)
+	QString id;
+	//! Full directory path
+	QString path;
 	//! English name
 	QString englishName;
 	//! Name of the author
@@ -142,7 +146,7 @@ public slots:
 	bool setCurrentSkyCultureNameI18(const QString& cultureName);
 	
 	//! Get the current sky culture ID.
-	QString getCurrentSkyCultureID() const {return currentSkyCultureDir;}
+	QString getCurrentSkyCultureID() const {return currentSkyCulture.id;}
 	//! Set the current sky culture from the ID.
 	//! @param id the sky culture ID.
 	//! @return true on success; else false.
@@ -207,6 +211,9 @@ signals:
 
 	//! Emitted when the current sky culture changes
 	void currentSkyCultureIDChanged(const QString& id);
+
+	//! Emitted when the current sky culture changes
+	void currentSkyCultureChanged(const StelSkyCulture& culture);
 	
 private:
 	//! Get the culture name in English associated with a specified directory.
@@ -227,8 +234,6 @@ private:
 	
 	QMap<QString, StelSkyCulture> dirToNameEnglish;
 	
-	// The directory containing data for the culture used for constellations, etc.. 
-	QString currentSkyCultureDir;
 	StelSkyCulture currentSkyCulture;
 	
 	QString defaultSkyCultureID;

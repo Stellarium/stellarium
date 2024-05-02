@@ -29,6 +29,7 @@
 
 class StelObject;
 class StelToneReproducer;
+class StelSkyCulture;
 class StelProjector;
 class StelPainter;
 class QSettings;
@@ -410,8 +411,7 @@ private slots:
 
 	//! Called when the sky culture is updated.
 	//! Loads common and scientific names of stars for a given sky culture.
-	//! @param skyCultureDir the name of the directory containing the sky culture to use.
-	void updateSkyCulture(const QString& skyCultureDir);
+	void updateSkyCulture(const StelSkyCulture& skyCulture);
 
 	//! increase artificial cutoff magnitude slightly (can be linked to an action/hotkey)
 	void increaseStarsMagnitudeLimit();

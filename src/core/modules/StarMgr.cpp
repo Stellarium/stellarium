@@ -457,7 +457,7 @@ void StarMgr::init()
 	StelApp::getInstance().getCore()->getGeodesicGrid(maxGeodesicGridLevel)->visitTriangles(maxGeodesicGridLevel,initTriangleFunc,this);
 	StelApp *app = &StelApp::getInstance();
 	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
-	connect(&app->getSkyCultureMgr(), &StelSkyCultureMgr::currentSkyCultureIDChanged, this, &StarMgr::updateSkyCulture);
+	connect(&app->getSkyCultureMgr(), &StelSkyCultureMgr::currentSkyCultureChanged, this, &StarMgr::updateSkyCulture);
 
 	QString displayGroup = N_("Display Options");
 	addAction("actionShow_Stars", displayGroup, N_("Stars"), "flagStarsDisplayed", "S");
@@ -2025,17 +2025,17 @@ void StarMgr::setFlagAdditionalNames(bool flag)
 	}
 }
 
-void StarMgr::updateSkyCulture(const QString& skyCultureDir)
+void StarMgr::updateSkyCulture(const StelSkyCulture& skyCulture)
 {
 	// Load culture star names in english
-	QString fic = StelFileMgr::findFile("skycultures/" + skyCultureDir + "/star_names.fab");
-	if (fic.isEmpty())
-		qDebug() << "Could not load star_names.fab for sky culture " << QDir::toNativeSeparators(skyCultureDir);
-
-	loadCommonNames(fic);
+	const QString fic = skyCulture.path + "/star_names.fab";
+	if (QFileInfo(fic).exists())
+		loadCommonNames(fic);
+	else
+		qDebug() << "Could not load star_names.fab for sky culture " << QDir::toNativeSeparators(skyCulture.id);
 
 	// Turn on sci names/catalog names for modern cultures only
-	setFlagSciNames(skyCultureDir.contains("modern", Qt::CaseInsensitive));
+	setFlagSciNames(skyCulture.id.contains("modern", Qt::CaseInsensitive));
 	updateI18n();
 }
 
