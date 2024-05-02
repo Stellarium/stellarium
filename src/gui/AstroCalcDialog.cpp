@@ -773,7 +773,7 @@ void AstroCalcDialog::saveGraph(QChartView *graph)
 	}
 }
 
-void AstroCalcDialog::populateCelestialNames(QString)
+void AstroCalcDialog::populateCelestialNames()
 {
 	populateCelestialBodyList();
 	populatePlanetList();
