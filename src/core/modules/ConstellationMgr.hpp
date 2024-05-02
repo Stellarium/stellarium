@@ -34,6 +34,7 @@ class StarMgr;
 class Constellation;
 class StelProjector;
 class StelPainter;
+class StelSkyCulture;
 
 //! @class ConstellationMgr
 //! Display and manage the constellations.
@@ -337,8 +338,7 @@ private slots:
 	void selectedObjectChange(StelModule::StelModuleSelectAction action);
 
 	//! Loads new constellation data and art if the SkyCulture has changed.
-	//! @param skyCultureDir the name of the directory containing the sky culture to use.
-	void updateSkyCulture(const QString& skyCultureDir);
+	void updateSkyCulture(const StelSkyCulture& skyCulture);
 
 	//! Update i18n names from English names according to current
 	//! locale, and update font for locale.
@@ -361,9 +361,9 @@ private:
 	//! Load constellation line shapes, art textures and boundaries shapes from data files.
 	//! @param fileName The name of the constellation data file
 	//! @param artFileName The name of the constellation art data file
-	//! @param cultureName A string ID of the current skyculture
+	//! @param culture The current skyculture
 	//! @note The abbreviation used in @param filename is required for cross-identifying translatable names in @name loadNames():
-	void loadLinesAndArt(const QString& fileName, const QString& artfileName, const QString& cultureName);
+	void loadLinesAndArt(const QString& fileName, const QString& artfileName, const StelSkyCulture& culture);
 
 	//! Load the constellation boundary file.
 	//! This function deletes any currently loaded constellation boundaries

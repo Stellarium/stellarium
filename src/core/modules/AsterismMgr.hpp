@@ -31,6 +31,7 @@
 class StelToneReproducer;
 class StarMgr;
 class Asterism;
+class StelSkyCulture;
 class StelProjector;
 class StelPainter;
 
@@ -237,8 +238,7 @@ signals:
 
 private slots:
 	//! Loads new asterism data and art if the SkyCulture has changed.
-	//! @param skyCultureDir the name of the directory containing the sky culture to use.
-	void updateSkyCulture(const QString& skyCultureDir);
+	void updateSkyCulture(const StelSkyCulture& skyCulture);
 
 	//! Update i18n names from English names according to current
 	//! locale, and update font for locale.
