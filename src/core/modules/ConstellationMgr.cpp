@@ -121,7 +121,7 @@ void ConstellationMgr::init()
 			this, SLOT(selectedObjectChange(StelModule::StelModuleSelectAction)));
 	StelApp *app = &StelApp::getInstance();
 	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
-	connect(&app->getSkyCultureMgr(), &StelSkyCultureMgr::currentSkyCultureIDChanged, this, &ConstellationMgr::updateSkyCulture);
+	connect(&app->getSkyCultureMgr(), &StelSkyCultureMgr::currentSkyCultureChanged, this, &ConstellationMgr::updateSkyCulture);
 
 	QString displayGroup = N_("Display Options");
 	addAction("actionShow_Constellation_Lines", displayGroup, N_("Constellation lines"), "linesDisplayed", "C");
@@ -150,34 +150,34 @@ void ConstellationMgr::reloadSkyCulture()
 	StelApp::getInstance().getSkyCultureMgr().reloadSkyCulture();
 }
 
-void ConstellationMgr::updateSkyCulture(const QString& skyCultureDir)
+void ConstellationMgr::updateSkyCulture(const StelSkyCulture& skyCulture)
 {
 	// Find constellation art.  If this doesn't exist, warn, but continue using ""
 	// the loadLinesAndArt function knows how to handle this (just loads lines).
-	QString conArtFile = StelFileMgr::findFile("skycultures/"+skyCultureDir+"/constellationsart.fab");
-	if (conArtFile.isEmpty())
+	QString conArtFile = skyCulture.path+"/constellationsart.fab";
+	if (!QFileInfo(conArtFile).exists())
 	{
-		qDebug() << "No constellationsart.fab file found for sky culture dir" << QDir::toNativeSeparators(skyCultureDir);
+		qDebug() << "No constellationsart.fab file found for sky culture dir" << QDir::toNativeSeparators(skyCulture.id);
 	}
 
 	// first of all, remove constellations from the list of selected objects in StelObjectMgr, since we are going to delete them
 	deselectConstellations();
 
-	QString fic = StelFileMgr::findFile("skycultures/"+skyCultureDir+"/constellationship.fab");
-	if (fic.isEmpty())
-		qWarning() << "ERROR loading constellation lines and art from file: " << fic;
+	QString fic = skyCulture.path+"/constellationship.fab";
+	if (QFileInfo(fic).exists())
+		loadLinesAndArt(fic, conArtFile, skyCulture);
 	else
-		loadLinesAndArt(fic, conArtFile, skyCultureDir);
+		qWarning() << "ERROR loading constellation lines and art from file: " << fic;
 
 	// load constellation names
-	fic = StelFileMgr::findFile("skycultures/" + skyCultureDir + "/constellation_names.eng.fab");
-	if (fic.isEmpty())
-		qWarning() << "ERROR loading constellation names from file: " << fic;
-	else
+	fic = skyCulture.path + "/constellation_names.eng.fab";
+	if (QFileInfo(fic).exists())
 		loadNames(fic);
+	else
+		qWarning() << "ERROR loading constellation names from file: " << fic;
 
 	// load seasonal rules
-	loadSeasonalRules(StelFileMgr::findFile("skycultures/" + skyCultureDir + "/seasonal_rules.fab"));
+	loadSeasonalRules(skyCulture.path + "/seasonal_rules.fab");
 
 	// Translate constellation names for the new sky culture
 	updateI18n();
@@ -191,9 +191,9 @@ void ConstellationMgr::updateSkyCulture(const QString& skyCultureDir)
 		if (idx == StelSkyCulture::BoundariesType::Own)
 		{
 			// boundaries = own
-			fic = StelFileMgr::findFile("skycultures/" + skyCultureDir + "/constellation_boundaries.dat");
-			if (fic.isEmpty()) // Check old file name (backward compatibility)
-				fic = StelFileMgr::findFile("skycultures/" + skyCultureDir + "/constellations_boundaries.dat");
+			fic = skyCulture.path + "/constellation_boundaries.dat";
+			if (!QFileInfo(fic).exists()) // Check old file name (backward compatibility)
+				fic = skyCulture.path + "/constellations_boundaries.dat";
 		}
 		else
 		{
@@ -201,13 +201,13 @@ void ConstellationMgr::updateSkyCulture(const QString& skyCultureDir)
 			fic = StelFileMgr::findFile("data/constellation_boundaries.dat");
 		}
 
-		if (fic.isEmpty())
-			qWarning() << "ERROR loading constellation boundaries file: " << fic;
-		else
+		if (QFileInfo(fic).exists())
 			loadBoundaries(fic);
+		else
+			qWarning() << "ERROR loading constellation boundaries file: " << fic;
 	}
 
-	lastLoadedSkyCulture = skyCultureDir;
+	lastLoadedSkyCulture = skyCulture.id;
 
 	if (getFlagCheckLoadingData())
 	{
@@ -473,12 +473,12 @@ void ConstellationMgr::setConstellationBoundariesThickness(const int thickness)
 	}
 }
 
-void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &artfileName, const QString& cultureName)
+void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &artfileName, const StelSkyCulture& culture)
 {
 	QFile in(fileName);
 	if (!in.open(QIODevice::ReadOnly | QIODevice::Text))
 	{
-		qWarning() << "Can't open constellation data file" << QDir::toNativeSeparators(fileName)  << "for culture" << cultureName;
+		qWarning() << "Can't open constellation data file" << QDir::toNativeSeparators(fileName)  << "for culture" << culture.id;
 		Q_ASSERT(0);
 	}
 
@@ -524,12 +524,12 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 		}
 		else
 		{
-			qWarning() << "ERROR reading constellation lines record at line " << currentLineNumber << "for culture" << cultureName;
+			qWarning() << "ERROR reading constellation lines record at line " << currentLineNumber << "for culture" << culture.id;
 			delete cons;
 		}
 	}
 	in.close();
-	qDebug() << "Loaded" << readOk << "/" << totalRecords << "constellation records successfully for culture" << cultureName;
+	qDebug() << "Loaded" << readOk << "/" << totalRecords << "constellation records successfully for culture" << culture.id;
 
 	// Set current states
 	setFlagArt(artDisplayed);
@@ -543,7 +543,7 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 	QFile fic(artfileName);
 	if (!fic.open(QIODevice::ReadOnly | QIODevice::Text))
 	{
-		qWarning() << "Can't open constellation art file" << QDir::toNativeSeparators(fileName)  << "for culture" << cultureName;
+		qWarning() << "Can't open constellation art file" << QDir::toNativeSeparators(fileName)  << "for culture" << culture.id;
 		return;
 	}
 
@@ -584,7 +584,7 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 		rStr >> shortname >> texfile >> x1 >> y1 >> hp1 >> x2 >> y2 >> hp2 >> x3 >> y3 >> hp3;
 		if (rStr.status()!=QTextStream::Ok)
 		{
-			qWarning() << "ERROR parsing constellation art record at line" << currentLineNumber << "of art file for culture" << cultureName;
+			qWarning() << "ERROR parsing constellation art record at line" << currentLineNumber << "of art file for culture" << culture.id;
 			continue;
 		}
 
@@ -596,15 +596,16 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 		cons = findFromAbbreviation(shortname);
 		if (!cons)
 		{
-			qWarning() << "ERROR in constellation art file at line" << currentLineNumber << "for culture" << cultureName
+			qWarning() << "ERROR in constellation art file at line" << currentLineNumber << "for culture" << culture.id
 					   << "constellation" << shortname << "unknown";
 		}
 		else
 		{
-			QString texturePath = StelFileMgr::findFile("skycultures/"+cultureName+"/"+texfile);
-			if (texturePath.isEmpty())
+			QString texturePath = culture.path+"/"+texfile;
+			if (!QFileInfo(texturePath).exists())
 			{
 				qWarning() << "ERROR: could not find texture, " << QDir::toNativeSeparators(texfile);
+				texturePath.clear();
 			}
 
 			cons->artTexture = StelApp::getInstance().getTextureManager().createTextureThread(texturePath, StelTexture::StelTextureParams(true));
@@ -671,7 +672,7 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 		}
 	}
 
-	qDebug() << "Loaded" << readOk << "/" << totalRecords << "constellation art records successfully for culture" << cultureName;
+	qDebug() << "Loaded" << readOk << "/" << totalRecords << "constellation art records successfully for culture" << culture.id;
 	fic.close();
 }
 
@@ -880,7 +881,7 @@ void ConstellationMgr::loadSeasonalRules(const QString& rulesFile)
 	if (constellations.empty()) return;
 
 	bool flag = true;
-	if (rulesFile.isEmpty())
+	if (!QFileInfo(rulesFile).exists())
 		flag = false;
 
 	// clear previous rules

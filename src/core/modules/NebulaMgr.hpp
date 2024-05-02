@@ -34,6 +34,7 @@
 #include <QFont>
 
 class StelTranslator;
+class StelSkyCulture;
 class StelToneReproducer;
 class QSettings;
 class StelPainter;
@@ -960,8 +961,7 @@ private slots:
 	
 	//! Called when the sky culture is updated.
 	//! Loads native names of deep-sky objects for a given sky culture.
-	//! @param skyCultureDir the name of the directory containing the sky culture to use.
-	void updateSkyCulture(const QString& skyCultureDir);
+	void updateSkyCulture(const StelSkyCulture& skyCulture);
 
 	//! Connect from StelApp to reflect font size change.
 	void setFontSizeFromApp(int size){nebulaFont.setPixelSize(size);}

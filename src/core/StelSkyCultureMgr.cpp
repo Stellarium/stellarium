@@ -49,6 +49,8 @@ StelSkyCultureMgr::StelSkyCultureMgr()
 			continue;
 		}
 		QSettings pd(pdFile, StelIniFormat);
+		dirToNameEnglish[dir].id = dir;
+		dirToNameEnglish[dir].path = StelFileMgr::dirName(pdFile);
 		dirToNameEnglish[dir].englishName = pd.value("info/name").toString();
 		dirToNameEnglish[dir].author = pd.value("info/author").toString();
 		dirToNameEnglish[dir].credit = pd.value("info/credit").toString();		
@@ -108,14 +110,15 @@ void StelSkyCultureMgr::init()
 
 void StelSkyCultureMgr::reloadSkyCulture()
 {
-	emit currentSkyCultureIDChanged(currentSkyCultureDir);
+	emit currentSkyCultureIDChanged(currentSkyCulture.id);
+	emit currentSkyCultureChanged(currentSkyCulture);
 }
 
 //! Set the current sky culture from the passed directory
 bool StelSkyCultureMgr::setCurrentSkyCultureID(const QString& cultureDir)
 {
 	//prevent unnecessary changes
-	if(cultureDir==currentSkyCultureDir)
+	if(cultureDir==currentSkyCulture.id)
 		return false;
 
 	QString scID = cultureDir;
@@ -128,10 +131,10 @@ bool StelSkyCultureMgr::setCurrentSkyCultureID(const QString& cultureDir)
 		result = false;
 	}
 
-	currentSkyCultureDir = scID;
 	currentSkyCulture = dirToNameEnglish[scID];
 
-	emit currentSkyCultureIDChanged(currentSkyCultureDir);	
+	emit currentSkyCultureChanged(currentSkyCulture);
+	emit currentSkyCultureIDChanged(currentSkyCulture.id);
 	return result;
 }
 
@@ -355,18 +358,17 @@ QStringList StelSkyCultureMgr::getSkyCultureListIDs(void) const
 
 QString StelSkyCultureMgr::getCurrentSkyCultureHtmlDescription() const
 {
-	QString skyCultureId = getCurrentSkyCultureID();
 	QString lang = StelApp::getInstance().getLocaleMgr().getAppLanguage();
 	if (!QString("pt_BR zh_CN zh_HK zh_TW").contains(lang))
 	{
 		lang = lang.split("_").at(0);
 	}
-	QString descPath = StelFileMgr::findFile("skycultures/" + skyCultureId + "/description."+lang+".utf8");
-	if (descPath.isEmpty())
+	QString descPath = currentSkyCulture.path + "/description."+lang+".utf8";
+	if (!QFileInfo(descPath).exists())
 	{
-		descPath = StelFileMgr::findFile("skycultures/" + skyCultureId + "/description.en.utf8");
-		if (descPath.isEmpty())
-			qWarning() << "WARNING: can't find description for skyculture" << skyCultureId;
+		descPath = currentSkyCulture.path + "/description.en.utf8";
+		if (!QFileInfo(descPath).exists())
+			qWarning() << "WARNING: can't find description for skyculture" << currentSkyCulture.id;
 	}
 
 	QString description;
@@ -395,8 +397,8 @@ QString StelSkyCultureMgr::getCurrentSkyCultureHtmlDescription() const
 QString StelSkyCultureMgr::getCurrentSkyCultureHtmlReferences() const
 {
 	QString reference = "";
-	QString referencePath = StelFileMgr::findFile("skycultures/" + getCurrentSkyCultureID() + "/reference.fab");
-	if (!referencePath.isEmpty())
+	QString referencePath = currentSkyCulture.path + "/reference.fab";
+	if (QFileInfo(referencePath).exists())
 	{
 		QFile refFile(referencePath);
 		if (!refFile.open(QIODevice::ReadOnly | QIODevice::Text))

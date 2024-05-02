@@ -91,7 +91,7 @@ void AsterismMgr::init()
 			this, SLOT(selectedObjectChange(StelModule::StelModuleSelectAction)));
 	StelApp *app = &StelApp::getInstance();
 	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
-	connect(&app->getSkyCultureMgr(), &StelSkyCultureMgr::currentSkyCultureIDChanged, this, &AsterismMgr::updateSkyCulture);
+	connect(&app->getSkyCultureMgr(), &StelSkyCultureMgr::currentSkyCultureChanged, this, &AsterismMgr::updateSkyCulture);
 
 	QString displayGroup = N_("Display Options");
 	addAction("actionShow_Asterism_Lines", displayGroup, N_("Asterism lines"), "linesDisplayed", "Alt+A");	
@@ -110,9 +110,9 @@ double AsterismMgr::getCallOrder(StelModuleActionName actionName) const
 	return 0;
 }
 
-void AsterismMgr::updateSkyCulture(const QString& skyCultureDir)
+void AsterismMgr::updateSkyCulture(const StelSkyCulture& skyCulture)
 {
-	currentSkyCultureID = skyCultureDir;
+	currentSkyCultureID = skyCulture.id;
 
 	StelObjectMgr* objMgr = GETSTELMODULE(StelObjectMgr);
 	const QList<StelObjectP> selectedObject = objMgr->getSelectedObject("Asterism");
@@ -120,11 +120,16 @@ void AsterismMgr::updateSkyCulture(const QString& skyCultureDir)
 		objMgr->unSelect();
 
 	// Check if the sky culture changed since last load, if not don't load anything
-	if (lastLoadedSkyCulture == skyCultureDir)
+	if (lastLoadedSkyCulture == skyCulture.id)
 		return;
 
-	QString fic = StelFileMgr::findFile("skycultures/"+skyCultureDir+"/asterism_lines.fab");
-	if (fic.isEmpty())
+	QString fic = skyCulture.path+"/asterism_lines.fab";
+	if (QFileInfo(fic).exists())
+	{
+		hasAsterism = true;
+		loadLines(fic);
+	}
+	else
 	{
 		// No data!
 		asterisms.clear();
@@ -132,21 +137,16 @@ void AsterismMgr::updateSkyCulture(const QString& skyCultureDir)
 		hasAsterism = false;
 		qWarning() << "No asterisms for skyculture" << currentSkyCultureID;
 	}
-	else
-	{
-		hasAsterism = true;
-		loadLines(fic);
-	}
 
 	// load asterism names
-	fic = StelFileMgr::findFile("skycultures/" + skyCultureDir + "/asterism_names.eng.fab");
-	if (!fic.isEmpty())
+	fic = skyCulture.path + "/asterism_names.eng.fab";
+	if (QFileInfo(fic).exists())
 		loadNames(fic);
 
 	// Translate asterism names for the new sky culture
 	updateI18n();
 
-	lastLoadedSkyCulture = skyCultureDir;
+	lastLoadedSkyCulture = skyCulture.id;
 }
 
 void AsterismMgr::setLinesColor(const Vec3f& color)
