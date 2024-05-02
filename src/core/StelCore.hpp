@@ -673,6 +673,11 @@ public slots:
 	//! Add one tropical year to the simulation time.
 	void addTropicalYear();
 
+	//! Add one great year
+	//! Great Year [NASA SP-7, 1965] - the period of one complete cycle of the equinoxes around the ecliptic, about 25,800 years.
+	//! https://web.archive.org/web/20050421192849/http://www.hq.nasa.gov/office/hqlibrary/aerospacedictionary/aerodictall/g.html
+	void addGreatYear();
+
 	//! Add one calendar month to the simulation time.
 	void addCalendarMonth();
 	//! Add one calendar year to the simulation time.
@@ -717,6 +722,11 @@ public slots:
 	void subtractMeanTropicalYears(double n=100.);
 	//! Subtract one tropical year from the simulation time.
 	void subtractTropicalYear();
+
+	//! Subtract one great year
+	//! Great Year [NASA SP-7, 1965] - the period of one complete cycle of the equinoxes around the ecliptic, about 25,800 years.
+	//! https://web.archive.org/web/20050421192849/http://www.hq.nasa.gov/office/hqlibrary/aerospacedictionary/aerodictall/g.html
+	void subtractGreatYear();
 
 	//! Subtract one calendar month from the simulation time.
 	void subtractCalendarMonth();
