@@ -55,6 +55,7 @@
 #include <QDir>
 #include <QTemporaryFile>
 #include <QRegularExpression>
+#include <QBuffer>
 
 StelModule* SatellitesStelPluginInterface::getStelModule() const
 {
@@ -2729,37 +2730,38 @@ QString Satellites::getSatIdFromLine2(const QString& line)
 
 void Satellites::loadExtraData()
 {
-	// Description of file and some additional information you can find here:
-	// 1) https://mmccants.org/tles/mccdesc.html
-	// 2) https://mmccants.org/tles/intrmagdef.html
-	QFile qsmFile(":/satellites/qs.mag");	
-	qsMagList.clear();	
-	if (qsmFile.open(QFile::ReadOnly))
-	{
-		while (!qsmFile.atEnd())
-		{
-			QString line = QString(qsmFile.readLine());
-			int id   = line.mid(0,5).trimmed().toInt();
-			QString smag = line.mid(33,4).trimmed();
-			if (!smag.isEmpty())
-				qsMagList.insert(id, smag.toDouble());
-		}
-		qsmFile.close();
-	}
+	// regular expression to find the comments and empty lines
+	static const QRegularExpression commentRx("^(\\s*#.*|\\s*)$");
 
-	QFile rcsFile(":/satellites/rcs");
+	// Details: https://github.com/Stellarium/stellarium-data/tree/master/satellites
+	QFile satFile(":/satellites/satellites.dat");
+	qsMagList.clear();
 	rcsList.clear();
-	if (rcsFile.open(QFile::ReadOnly))
+
+	if (satFile.open(QIODevice::ReadOnly))
 	{
-		while (!rcsFile.atEnd())
+		QByteArray data = StelUtils::uncompress(satFile);
+		satFile.close();
+
+		QBuffer buf(&data);
+		buf.open(QIODevice::ReadOnly);
+		while (!buf.atEnd())
 		{
-			QString line = QString(rcsFile.readLine());
-			int id   = line.mid(0,5).trimmed().toInt();
-			QString srcs = line.mid(5,5).trimmed();
+			QString line = QString::fromUtf8(buf.readLine());
+
+			// Skip comments
+			if (commentRx.match(line).hasMatch())
+				continue;
+
+			int noradID = line.mid(0,5).trimmed().toInt();
+			QString smag = line.mid(6,6).trimmed();
+			if (!smag.isEmpty())
+				qsMagList.insert(noradID, smag.toDouble());
+
+			QString srcs = line.mid(13,7).trimmed();
 			if (!srcs.isEmpty())
-				rcsList.insert(id, srcs.toDouble());
+				rcsList.insert(noradID, srcs.toDouble());
 		}
-		rcsFile.close();
 	}
 
 	QFile commFile(":/satellites/communications.json");
