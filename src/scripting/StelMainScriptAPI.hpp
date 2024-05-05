@@ -275,6 +275,7 @@ public slots:
 	//! - scale: scale factor for Solar system bodies (for Solar system objects only!)
 	//! - eclipse-obscuration: value of obscuration for solar eclipse (for Sun only!)
 	//! - eclipse-magnitude: value of magnitude for solar eclipse (for Sun only!)
+	//! - eclipse-crescent-angle (degrees; for Sun only!)
 	//! - heliocentric-distance: distance to object from the Sun in AU (for Solar system objects, except the Sun)
 	//! - heliocentric-distance-km: distance to object from the Sun in kilometers (for Solar system objects, except the Sun)
 	//! - distance: distance to object in AU (for Solar system objects only!)

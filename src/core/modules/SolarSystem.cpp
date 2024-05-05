@@ -3580,6 +3580,18 @@ QPair<double, PlanetP> SolarSystem::getSolarEclipseFactor(const StelCore* core) 
 	return QPair<double, PlanetP>(final_illumination, p);
 }
 
+// Opening angle of the bright Solar crescent, radians
+// From: J. Meeus, Morsels IV, ch.15
+// lunarSize: apparent Lunar radius or diameter, angular units of your preference
+// solarSize: apparent Solar radius or diameter, resp., same angular units
+// eclipseMagnitude: covered fraction of the Solar diameter.
+double SolarSystem::getEclipseCrescentAngle(const double lunarSize, const double solarSize, const double eclipseMagnitude)
+{
+	const double R = lunarSize/solarSize;
+	const double cosAhalf = 2.*eclipseMagnitude * (R-eclipseMagnitude)/(1.+R-2.*eclipseMagnitude) - 1.;
+	return (std::fabs(cosAhalf) <= 1. ? 2.*acos(cosAhalf) : 0.);
+}
+
 // Retrieve Radius of Umbra and Penumbra at the distance of the Moon.
 // Returns a pair (umbra, penumbra) in (geocentric_arcseconds, AU, geometric_AU).
 // * sizes in arcseconds are the usual result found as Bessel element in eclipse literature.
