@@ -456,36 +456,36 @@ void SatellitesDialog::filterListByGroup(int index)
 		return;
 
 	const QMap<QString, SatFlag> secondaryFilter = {
-		{ "all",			SatNoFlags },
+		{ "all",				SatNoFlags },
 		{ "[displayed]",		SatDisplayed },
-		{ "[userdefined]",	SatUser },
-		{ "[undisplayed]",	SatNotDisplayed },
-		{ "[newlyadded]",	SatNew },
+		{ "[userdefined]",		SatUser },
+		{ "[undisplayed]",		SatNotDisplayed },
+		{ "[newlyadded]",		SatNew },
 		{ "[orbiterror]",		SatError },
-		{ "[reentry]",		SatReentry },
+		{ "[reentry]",			SatReentry },
 		{ "[smallsize]",		SatSmallSize },
-		{ "[mediumsize]",	SatMediumSize },
+		{ "[mediumsize]",		SatMediumSize },
 		{ "[largesize]",		SatLargeSize },
 		{ "[LEO]",			SatLEO },
 		{ "[GSO]",			SatGSO },
 		{ "[MEO]",			SatMEO },
 		{ "[HEO]",			SatHEO },
-		{ "[HGSO]",		SatHGSO },
+		{ "[HGSO]",			SatHGSO },
 		{ "[polarorbit]",		SatPolarOrbit },
 		{ "[equatorialorbit]",	SatEquatOrbit },
-		{ "[PSSO]",		SatPSSO },
+		{ "[PSSO]",			SatPSSO },
 		{ "[HEarthO]",		SatHEarthO },
-		{ "[outdatedTLE]",	SatOutdatedTLE },
-		{ "[custom]",		SatCustomFilter },
+		{ "[outdatedTLE]",		SatOutdatedTLE },
+		{ "[custom]",			SatCustomFilter },
 		{ "[communication]",	SatCommunication },
 		{ "[activeOS]",		SatActiveOS },
 		{ "[operationalOS]",	SatOperationalOS },
 		{ "[nonopOS]",		SatNonoperationalOS },
 		{ "[partiallyopOS]",	SatPartiallyOperationalOS },
-		{ "[standbyOS]",	SatStandbyOS },
+		{ "[standbyOS]",		SatStandbyOS },
 		{ "[spareOS]",		SatSpareOS },
 		{ "[extmissionOS]",	SatExtendedMissionOS },
-		{ "[decayedOS]",	SatDecayedOS }
+		{ "[decayedOS]",		SatDecayedOS }
 	};
 
 	ui->customFilterButton->setEnabled(false);
@@ -630,7 +630,7 @@ void SatellitesDialog::updateSatelliteData()
 		float stdMagnitude = index.data(SatStdMagnitudeRole).toFloat();
 		QString stdMagString = (stdMagnitude<99.f) ? QString::number(stdMagnitude, 'f', 2) : dash;
 		float rcs = index.data(SatRCSRole).toFloat();
-		QString rcsString = (rcs > 0.f) ? QString::number(rcs, 'f', 3) : dash;
+		QString rcsString = (rcs > 0.f) ? QString::number(rcs, 'f', 4) : dash;
 		int perigee = qRound(index.data(SatPerigeeRole).toFloat());
 		QString perigeeString = (perigee>0) ? QString::number(perigee) : dash;
 		int apogee = qRound(index.data(SatApogeeRole).toFloat());
@@ -857,10 +857,10 @@ void SatellitesDialog::populateAboutPage()
 	html += "<h3>" + q_("Technical notes") + "</h3>";
 	html += "<p>" + q_("Positions are calculated using the SGP4 & SDP4 methods, using NORAD TLE data as the input.") + " ";
 	html +=         q_("The orbital calculation code is written by Jose Luis Canales according to the revised Spacetrack Report #3 (including Spacetrack Report #6)") + " <a href=\"https://celestrak.org/publications/AIAA/2006-6753\">[*]</a>. ";
-	html +=         q_("To calculate an approximate visual magnitude of satellites we use data from Mike McCants' database (with permissions) of the radar cross-section (RCS) and standard magnitudes.") + " ";
-	html +=         q_("Formula to calculate an approximate visual magnitude of satellites from the standard magnitude may be found at Mike McCants website") + " <a href=\"https://mmccants.org/tles/mccdesc.html\">[**]</a>. ";
-	html +=         q_("We use a spherical shape of satellite to calculate an approximate visual magnitude from RCS values.") + " ";
-	html +=         q_("For modelling Starlink magnitudes we use Anthony Mallama's formula") + " <a href=\"http://www.satobs.org/seesat/Aug-2020/0079.html\">[***]</a>.</p>";
+	html +=         q_("To calculate an approximated visual magnitude of satellites we use the radar cross-section (RCS) and standard magnitudes from Mike McCants' database (with permissions); the radar cross-section (RCS) from CelesTrack database; the standard magnitudes from Mini-MegaTORTORA database (Kazan Federal University)") + " <a href=\"http://mmt.favor2.info/satellites\">[**]</a>. ";
+	html +=         q_("Formula to calculate an approximated visual magnitude of satellites from the standard magnitude may be found at Mike McCants website") + " <a href=\"https://mmccants.org/tles/mccdesc.html\">[***]</a>. ";
+	html +=         q_("We use a spherical shape of satellite to calculate an approximated visual magnitude from RCS values.") + " ";
+	html +=         q_("For modelling Starlink magnitudes we use Anthony Mallama's formula") + " <a href=\"http://www.satobs.org/seesat/Aug-2020/0079.html\">[****]</a>.</p>";
 
 	html += StelApp::getInstance().getModuleMgr().getStandardSupportLinksInfo("Satellites plugin");
 	html += "</body></html>";

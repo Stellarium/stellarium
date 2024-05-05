@@ -1472,7 +1472,7 @@ QPair<double, double> Satellites::getStdMagRCS(const TleData& tleData)
 		stdMag = 0.87; // see details: http://www.satobs.org/seesat/Aug-2022/0030.html
 
 	// special case: starlink satellites; details: http://satobs.org/seesat/Apr-2020/0174.html
-	if (!rcsList.contains(sid) && tleData.name.startsWith("STARLINK"))
+	if (!qsMagList.contains(sid) && !rcsList.contains(sid) && tleData.name.startsWith("STARLINK"))
 	{
 		RCS = 22.68; // Starlink's solar array is 8.1 x 2.8 metres.
 		// Source: Anthony Mallama. Starlink Satellite Brightness -- Characterized From 100,000 Visible Light Magnitudes; https://arxiv.org/abs/2111.09735
@@ -2753,12 +2753,13 @@ void Satellites::loadExtraData()
 			if (commentRx.match(line).hasMatch())
 				continue;
 
-			int noradID = line.mid(0,5).trimmed().toInt();
-			QString smag = line.mid(6,6).trimmed();
+			QStringList list = line.split("\t");
+			int noradID = list.at(0).trimmed().toInt();
+			QString smag = list.at(1).trimmed();
 			if (!smag.isEmpty())
 				qsMagList.insert(noradID, smag.toDouble());
 
-			QString srcs = line.mid(13,7).trimmed();
+			QString srcs = list.at(2).trimmed();
 			if (!srcs.isEmpty())
 				rcsList.insert(noradID, srcs.toDouble());
 		}
