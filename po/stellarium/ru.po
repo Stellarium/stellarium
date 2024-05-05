@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2024-05-05 15:29+0700\n"
+"POT-Creation-Date: 2024-05-05 22:41+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Alexander V. Wolf <alex.v.wolf@gmail.com>, 2024\n"
 "Language-Team: Russian (https://app.transifex.com/stellarium/teams/80998/ru/)\n"
@@ -930,7 +930,7 @@ msgstr "Диаметр"
 #. TRANSLATORS: Unit of measure for distance - kilometers
 #: src/core/modules/NomenclatureItem.cpp:248 src/core/modules/Planet.cpp:687
 #: src/core/modules/Planet.cpp:708 src/core/modules/Planet.cpp:825
-#: src/core/modules/Planet.cpp:1555 src/core/modules/Comet.cpp:193
+#: src/core/modules/Planet.cpp:1562 src/core/modules/Comet.cpp:193
 #: src/core/modules/Comet.cpp:203 src/gui/StelGuiItems.cpp:894
 #: src/gui/AstroCalcDialog.cpp:3291 src/gui/AstroCalcDialog.cpp:3804
 #: src/gui/AstroCalcDialog.cpp:9558 plugins/Satellites/src/Satellites.cpp:2933
@@ -2511,42 +2511,42 @@ msgstr "Период вращения хаотичен"
 msgid "Equatorial rotation velocity"
 msgstr "Экваториальная скорость вращения"
 
-#: src/core/modules/Planet.cpp:1304 src/core/modules/Planet.cpp:1706
+#: src/core/modules/Planet.cpp:1304 src/core/modules/Planet.cpp:1713
 msgctxt "Moon phase"
 msgid "New Moon"
 msgstr "Новолуние"
 
-#: src/core/modules/Planet.cpp:1306 src/core/modules/Planet.cpp:1708
+#: src/core/modules/Planet.cpp:1306 src/core/modules/Planet.cpp:1715
 msgctxt "Moon phase"
 msgid "Waxing Crescent"
 msgstr "Молодой месяц"
 
-#: src/core/modules/Planet.cpp:1308 src/core/modules/Planet.cpp:1710
+#: src/core/modules/Planet.cpp:1308 src/core/modules/Planet.cpp:1717
 msgctxt "Moon phase"
 msgid "First Quarter"
 msgstr "Первая четверть"
 
-#: src/core/modules/Planet.cpp:1310 src/core/modules/Planet.cpp:1712
+#: src/core/modules/Planet.cpp:1310 src/core/modules/Planet.cpp:1719
 msgctxt "Moon phase"
 msgid "Waxing Gibbous"
 msgstr "Нарастающая Луна"
 
-#: src/core/modules/Planet.cpp:1312 src/core/modules/Planet.cpp:1714
+#: src/core/modules/Planet.cpp:1312 src/core/modules/Planet.cpp:1721
 msgctxt "Moon phase"
 msgid "Full Moon"
 msgstr "Полнолуние"
 
-#: src/core/modules/Planet.cpp:1314 src/core/modules/Planet.cpp:1716
+#: src/core/modules/Planet.cpp:1314 src/core/modules/Planet.cpp:1723
 msgctxt "Moon phase"
 msgid "Waning Gibbous"
 msgstr "Убывающая Луна"
 
-#: src/core/modules/Planet.cpp:1316 src/core/modules/Planet.cpp:1718
+#: src/core/modules/Planet.cpp:1316 src/core/modules/Planet.cpp:1725
 msgctxt "Moon phase"
 msgid "Third Quarter"
 msgstr "Третья четверть"
 
-#: src/core/modules/Planet.cpp:1318 src/core/modules/Planet.cpp:1720
+#: src/core/modules/Planet.cpp:1318 src/core/modules/Planet.cpp:1727
 msgctxt "Moon phase"
 msgid "Waning Crescent"
 msgstr "Старый месяц"
@@ -2586,77 +2586,81 @@ msgstr "Ко-долгота"
 msgid "Center point"
 msgstr "Центральная точка"
 
-#: src/core/modules/Planet.cpp:1486
+#: src/core/modules/Planet.cpp:1490
 msgid "Eclipse magnitude"
 msgstr "Линейная фаза затмения"
 
-#: src/core/modules/Planet.cpp:1488
+#: src/core/modules/Planet.cpp:1493
 msgid "Eclipse obscuration"
 msgstr "Поверхностная фаза затмения"
 
-#: src/core/modules/Planet.cpp:1514
+#: src/core/modules/Planet.cpp:1495
+msgid "Crescent angle"
+msgstr "Угол наклона полумесяца"
+
+#: src/core/modules/Planet.cpp:1521
 msgid "Moon/Sun diameter ratio"
 msgstr "Отношение диаметров Луны/Солнца"
 
-#: src/core/modules/Planet.cpp:1517
+#: src/core/modules/Planet.cpp:1524
 msgctxt "type of solar eclipse"
 msgid "(annular)"
 msgstr "(кольцеобразное)"
 
-#: src/core/modules/Planet.cpp:1519
+#: src/core/modules/Planet.cpp:1526
 msgctxt "type of solar eclipse"
 msgid "(total)"
 msgstr "(полное)"
 
-#: src/core/modules/Planet.cpp:1530
+#: src/core/modules/Planet.cpp:1537
 msgid "Central eclipse duration"
 msgstr "Длительность максимальной фазы"
 
 #. TRANSLATORS: Short for "minutes".
-#: src/core/modules/Planet.cpp:1532
+#: src/core/modules/Planet.cpp:1539
 #: plugins/Observability/src/Observability.cpp:153
 msgid "m"
 msgstr "м"
 
 #. TRANSLATORS: Short for "seconds".
-#: src/core/modules/Planet.cpp:1534
+#: src/core/modules/Planet.cpp:1541
 #: plugins/Observability/src/Observability.cpp:155
 msgid "s"
 msgstr "с"
 
-#: src/core/modules/Planet.cpp:1535
+#: src/core/modules/Planet.cpp:1542
 msgid "Center of solar eclipse (Lat./Long.)"
 msgstr "Центр солнечного затмения (Шир./Долг.)"
 
-#: src/core/modules/Planet.cpp:1545
+#: src/core/modules/Planet.cpp:1552
 msgid "Shadow center point is"
 msgstr "Центр тени"
 
-#: src/core/modules/Planet.cpp:1547
+#: src/core/modules/Planet.cpp:1554
 msgid "km towards azimuth"
 msgstr "км в направлении азимута"
 
-#: src/core/modules/Planet.cpp:1550
+#: src/core/modules/Planet.cpp:1557
 msgid "Width of antumbra"
 msgstr "Ширина тени (antumbra)"
 
-#: src/core/modules/Planet.cpp:1552
+#: src/core/modules/Planet.cpp:1559
 msgid "Width of umbra"
 msgstr "Ширина тени (umbra)"
 
-#: src/core/modules/Planet.cpp:1569
+#: src/core/modules/Planet.cpp:1576
 msgid "Penumbral eclipse magnitude"
 msgstr "Полутеневая линейная фаза затмения"
 
-#: src/core/modules/Planet.cpp:1572
+#: src/core/modules/Planet.cpp:1579
 msgid "Umbral eclipse magnitude"
 msgstr "Теневая линейная фаза затмения"
 
-#: src/core/modules/Planet.cpp:1579
+#: src/core/modules/Planet.cpp:1586
 msgid "Albedo"
 msgstr "Альбедо"
 
-#: src/core/modules/Planet.cpp:1582 src/core/modules/MinorPlanet.cpp:211
+#: src/core/modules/Planet.cpp:1589 src/core/modules/MinorPlanet.cpp:211
 #: src/core/modules/Comet.cpp:244
 msgid "Discovered"
 msgstr "Небесное тело открыто"
