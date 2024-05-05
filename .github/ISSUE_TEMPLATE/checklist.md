@@ -54,6 +54,7 @@ This is checklist for maintainer of Stellarium (a release master)
 
 ### Plugins
 - [ ] Update the default list of satellites
+- [ ] Update the standard magnitudes and RCS of satellites
 - [ ] Update the default catalog of pulsars
 - [ ] Update the default catalog of exoplanets
 - [ ] Update the discovery circumstances for minor planets (Solar System Editor)

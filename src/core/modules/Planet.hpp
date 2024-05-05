@@ -228,6 +228,7 @@ public:
 	//! - scale
 	//! - eclipse-obscuration (for Sun only)
 	//! - eclipse-magnitude (for Sun only)
+	//! - eclipse-crescent-angle (for Sun only; degrees)
 	//! - central_l (on Earth only; degrees)
 	//! - central_b (on Earth only; degrees)
 	//! - pa_axis (on Earth only; degrees)

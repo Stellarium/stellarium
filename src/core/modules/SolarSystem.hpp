@@ -871,6 +871,13 @@ public:
 	//! In the unlikely event of multiple objects in front of the sun, only the largest will be reported.
 	QPair<double, PlanetP> getSolarEclipseFactor(const StelCore *core) const;
 
+	//! Opening angle of the bright Solar crescent, radians
+	//! From: J. Meeus, Morsels IV, ch.15
+	//! @param lunarSize: apparent Lunar angular size (radius or diameter), angular units of your preference
+	//! @param solarSize: apparent Solar angular size (radius or diameter, resp.), same angular units
+	//! @param eclipseMagnitude: covered fraction of the Solar diameter.
+	static double getEclipseCrescentAngle(const double lunarSize, const double solarSize, const double eclipseMagnitude);
+
 	//! Retrieve Radius of Umbra and Penumbra at the distance of the Moon.
 	//! Returns a pair (umbra, penumbra) in (geocentric_arcseconds, AU, geometric_AU).
 	//! * sizes in arcseconds are the usual result found as Bessel element in eclipse literature.

@@ -1248,13 +1248,11 @@ selected satellite, or at a fixed (configurable) altitude from Earth's surface.
 \item[Standard magnitude] The \indexterm[standard magnitude
   (satellites)]{standard magnitude} may be an estimate based on the
   mean cross-sectional area derived from its dimensions, or it may be
-  a mean value derived from visual observations.\footnote{The standard
-    magnitude and RCS data were obtained from Mike McCants' quicksat
-    catalog with his kind permission.}
+  a mean value derived from visual observations (see section \ref{sec:plugins:Satellites:VisualMagnitude}).
 \item[RCS] The \indexterm[RCS, Radar Cross Section]{Radar Cross
   Section} is a median value derived from the last several years of
   values in the Satellite Situation Report. The units of the RCS are
-  square meters.
+  square meters (see section \ref{sec:plugins:Satellites:VisualMagnitude}).
 \item[Perigee] The \indexterm{perigee} is the nearest point respectively of a
   satellite's direct orbit around the Earth. The unit of perigee is
   kilometers.
@@ -1294,6 +1292,7 @@ The group names also can be used as an additional filters for the satellites (se
 
 \item[Epoch of the TLE] Human-readable epoch of current TLE set.
 \end{description}
+
 
 On the left side of this tab you may see tools for filtering the
 satellites. The upper part shows a drop-down list with many predefined
@@ -1422,6 +1421,24 @@ You can edit the tags for a satellite, modify the description and comms data, an
 %\label{sec:plugins:Satellites:configuration}
 
 The plug-in's configuration data is stored in Stellarium's main configuration file.
+
+\subsection{The approximated visual magnitude}
+\label{sec:plugins:Satellites:VisualMagnitude}
+
+To calculate an approximated visual magnitude of satellites we use the 
+radar cross section (RCS) data and standard magnitudes from Mike McCants' 
+database (with permissions)\footnote{Mike McCants' Satellite Tracking 
+Web Pages --- \url{https://mmccants.org}}; the radar cross section (RCS) 
+data from CelesTrack database\footnote{Satellite Catalog (SATCAT) --- 
+\url{https://celestrak.org/satcat/search.php}}; the standard magnitudes 
+from database of the MMT-9 observatory (belongs to Kazan 
+Federal University) \citep{MMT-9:Karpov, MMT-9:Beskin}.
+
+We use a spherical shape of satellite to calculate an approximated visual 
+magnitude from RCS values. For modelling Starlink visual magnitudes we use 
+Anthony Mallama's formula\footnote{\url{http://www.satobs.org/seesat/Aug-2020/0079.html}} 
+\citep{mallama2020starlink} and Mike McCants' formula\footnote{\url{https://mmccants.org/tles/mccdesc.html}} 
+for other satellites.
 
 \subsection{Sources for TLE data}
 

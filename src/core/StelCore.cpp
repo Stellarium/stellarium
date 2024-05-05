@@ -333,7 +333,7 @@ void StelCore::init()
 	actionsMgr->addAction("actionAdd_Calendar_Year", timeGroup, N_("Add 1 calendar year"), this, "addCalendarYear()");
 	actionsMgr->addAction("actionAdd_Calendar_Decade", timeGroup, N_("Add 10 calendar years"), this, "addCalendarDecade()");
 	actionsMgr->addAction("actionAdd_Calendar_Century", timeGroup, N_("Add 100 calendar years"), this, "addCalendarCentury()");
-	actionsMgr->addAction("actionAdd_Great_Year", timeGroup, N_("Add 1 great year"), this, "addGreatYear()");
+	actionsMgr->addAction("actionAdd_Great_Year", timeGroup, N_("Add 1 Great year"), this, "addGreatYear()");
 	actionsMgr->addAction("actionSubtract_Sidereal_Day", timeGroup, N_("Subtract 1 sidereal day"), this, "subtractSiderealDay()", "Alt+-");
 	actionsMgr->addAction("actionSubtract_Sidereal_Week", timeGroup, N_("Subtract 7 sidereal days"), this, "subtractSiderealWeek()");
 	actionsMgr->addAction("actionSubtract_Sidereal_Year", timeGroup, N_("Subtract 1 sidereal year"), this, "subtractSiderealYear()", "Ctrl+Alt+Shift+[");
@@ -356,7 +356,7 @@ void StelCore::init()
 	actionsMgr->addAction("actionSubtract_Calendar_Year", timeGroup, N_("Subtract 1 calendar year"), this, "subtractCalendarYear()");
 	actionsMgr->addAction("actionSubtract_Calendar_Decade", timeGroup, N_("Subtract 10 calendar years"), this, "subtractCalendarDecade()");
 	actionsMgr->addAction("actionSubtract_Calendar_Century", timeGroup, N_("Subtract 100 calendar years"), this, "subtractCalendarCentury()");
-	actionsMgr->addAction("actionSubtract_Great_Year", timeGroup, N_("Subtract 1 great year"), this, "subtractGreatYear()");
+	actionsMgr->addAction("actionSubtract_Great_Year", timeGroup, N_("Subtract 1 Great year"), this, "subtractGreatYear()");
 
 	actionsMgr->addAction("actionSet_Home_Planet_To_Selected", movementGroup, N_("Set home planet to selected planet"), this, "moveObserverToSelected()", "Ctrl+G");
 	actionsMgr->addAction("actionGo_Home_Global", movementGroup, N_("Go to home"), this, "returnToHome()", "Ctrl+H");

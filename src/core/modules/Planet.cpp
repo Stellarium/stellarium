@@ -1475,17 +1475,24 @@ QString Planet::getInfoStringExtra(const StelCore *core, const InfoStringGroup& 
 			const double eclipseObscuration = 100.*(1.-eclObj.first);
 			if (eclipseObscuration>1.e-7) // needed to avoid false display of 1e-14 or so.
 			{
+				double crescentAngle = 0.;
 				PlanetP obj = eclObj.second;
 				if (onEarth && obj == ssystem->getMoon())
 				{
+					const double solarRadiusRadians = 0.5 * angularSize;
+					const double lunarRadiusRadians = (obj->getAngularRadius(core) * M_PI_180) / obj->getSphereScale();
+
 					const double eclipseMagnitude =
-							(0.5 * angularSize
-							 + (obj->getAngularRadius(core) * M_PI_180) / obj->getSphereScale()
+							(solarRadiusRadians
+							 + lunarRadiusRadians
 							- getJ2000EquatorialPos(core).angle(obj->getJ2000EquatorialPos(core)))
 							/ angularSize;
 					oss << QString("%1: %2<br />").arg(q_("Eclipse magnitude"), QString::number(eclipseMagnitude, 'f', 3));
+					crescentAngle = ssystem->getEclipseCrescentAngle(lunarRadiusRadians, solarRadiusRadians, eclipseMagnitude) * M_180_PI;
 				}
 				oss << QString("%1: %2%<br />").arg(q_("Eclipse obscuration"), QString::number(eclipseObscuration, 'f', 2));
+				if (crescentAngle > 0.)
+					oss << QString("%1: %2°<br />").arg(q_("Crescent angle"), QString::number(crescentAngle, 'f', 1));
 			}
 
 			if (onEarth)
@@ -1622,24 +1629,24 @@ QVariantMap Planet::getInfoMap(const StelCore *core) const
 	{
 		QPair<double, PlanetP> eclObj = ssystem->getSolarEclipseFactor(core);
 		const double eclipseObscuration = 100.*(1.-eclObj.first);
+		double eclipseMagnitude = 0.;
+		double crescentAngle = 0.;
 		if (eclipseObscuration>1.e-7)
 		{
-			map.insert("eclipse-obscuration", eclipseObscuration);
 			PlanetP obj = eclObj.second;
 			if (core->getCurrentPlanet()==ssystem->getEarth() && obj==ssystem->getMoon())
 			{
-				double angularSize = 2.*getAngularRadius(core)*M_PI_180;
-				const double eclipseMagnitude = (0.5*angularSize + (obj->getAngularRadius(core)*M_PI_180)/obj->getSphereScale() - getJ2000EquatorialPos(core).angle(obj->getJ2000EquatorialPos(core)))/angularSize;
-				map.insert("eclipse-magnitude", eclipseMagnitude);
+				const double angularSize = 2.*getAngularRadius(core)*M_PI_180;
+				const double solarRadiusRadians = 0.5 * angularSize;
+				const double lunarRadiusRadians = (obj->getAngularRadius(core) * M_PI_180) / obj->getSphereScale();
+
+				eclipseMagnitude = (solarRadiusRadians + lunarRadiusRadians - getJ2000EquatorialPos(core).angle(obj->getJ2000EquatorialPos(core)))/angularSize;
+				crescentAngle = ssystem->getEclipseCrescentAngle(lunarRadiusRadians, solarRadiusRadians, eclipseMagnitude) * M_180_PI;
 			}
-			else
-				map.insert("eclipse-magnitude", 0.0);
 		}
-		else
-		{
-			map.insert("eclipse-obscuration", 0.0);
-			map.insert("eclipse-magnitude", 0.0);
-		}
+		map.insert("eclipse-obscuration", eclipseObscuration > 1.e-7 ? eclipseObscuration : 0.0);
+		map.insert("eclipse-magnitude", eclipseMagnitude);
+		map.insert("eclipse-crescent-angle", crescentAngle);
 	}
 	map.insert("type", getType());
 	map.insert("object-type", getObjectType());

@@ -55,6 +55,7 @@
 #include <QDir>
 #include <QTemporaryFile>
 #include <QRegularExpression>
+#include <QBuffer>
 
 StelModule* SatellitesStelPluginInterface::getStelModule() const
 {
@@ -1471,7 +1472,7 @@ QPair<double, double> Satellites::getStdMagRCS(const TleData& tleData)
 		stdMag = 0.87; // see details: http://www.satobs.org/seesat/Aug-2022/0030.html
 
 	// special case: starlink satellites; details: http://satobs.org/seesat/Apr-2020/0174.html
-	if (!rcsList.contains(sid) && tleData.name.startsWith("STARLINK"))
+	if (!qsMagList.contains(sid) && !rcsList.contains(sid) && tleData.name.startsWith("STARLINK"))
 	{
 		RCS = 22.68; // Starlink's solar array is 8.1 x 2.8 metres.
 		// Source: Anthony Mallama. Starlink Satellite Brightness -- Characterized From 100,000 Visible Light Magnitudes; https://arxiv.org/abs/2111.09735
@@ -2729,37 +2730,39 @@ QString Satellites::getSatIdFromLine2(const QString& line)
 
 void Satellites::loadExtraData()
 {
-	// Description of file and some additional information you can find here:
-	// 1) https://mmccants.org/tles/mccdesc.html
-	// 2) https://mmccants.org/tles/intrmagdef.html
-	QFile qsmFile(":/satellites/qs.mag");	
-	qsMagList.clear();	
-	if (qsmFile.open(QFile::ReadOnly))
-	{
-		while (!qsmFile.atEnd())
-		{
-			QString line = QString(qsmFile.readLine());
-			int id   = line.mid(0,5).trimmed().toInt();
-			QString smag = line.mid(33,4).trimmed();
-			if (!smag.isEmpty())
-				qsMagList.insert(id, smag.toDouble());
-		}
-		qsmFile.close();
-	}
+	// regular expression to find the comments and empty lines
+	static const QRegularExpression commentRx("^(\\s*#.*|\\s*)$");
 
-	QFile rcsFile(":/satellites/rcs");
+	// Details: https://github.com/Stellarium/stellarium-data/tree/master/satellites
+	QFile satFile(":/satellites/satellites.dat");
+	qsMagList.clear();
 	rcsList.clear();
-	if (rcsFile.open(QFile::ReadOnly))
+
+	if (satFile.open(QIODevice::ReadOnly))
 	{
-		while (!rcsFile.atEnd())
+		QByteArray data = StelUtils::uncompress(satFile);
+		satFile.close();
+
+		QBuffer buf(&data);
+		buf.open(QIODevice::ReadOnly);
+		while (!buf.atEnd())
 		{
-			QString line = QString(rcsFile.readLine());
-			int id   = line.mid(0,5).trimmed().toInt();
-			QString srcs = line.mid(5,5).trimmed();
+			QString line = QString::fromUtf8(buf.readLine());
+
+			// Skip comments
+			if (commentRx.match(line).hasMatch())
+				continue;
+
+			QStringList list = line.split("\t");
+			int noradID = list.at(0).trimmed().toInt();
+			QString smag = list.at(1).trimmed();
+			if (!smag.isEmpty())
+				qsMagList.insert(noradID, smag.toDouble());
+
+			QString srcs = list.at(2).trimmed();
 			if (!srcs.isEmpty())
-				rcsList.insert(id, srcs.toDouble());
+				rcsList.insert(noradID, srcs.toDouble());
 		}
-		rcsFile.close();
 	}
 
 	QFile commFile(":/satellites/communications.json");
