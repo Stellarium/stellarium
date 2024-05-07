@@ -32,6 +32,7 @@
 
 class StarMgr;
 class StelPainter;
+class QJsonObject;
 
 //! @class Asterism
 //! The Asterism class models a grouping of stars in a Sky Culture.
@@ -73,7 +74,7 @@ private:
 	//! asterism.
 	//! @param starMgr a pointer to the StarManager object.
 	//! @return false if can't parse record, else true.
-	bool read(const QString& record, StarMgr *starMgr);
+	bool read(const QJsonObject& data, StarMgr *starMgr);
 
 	//! Draw the asterism name
 	void drawName(StelPainter& sPainter) const;
@@ -122,13 +123,17 @@ private:
 	//! Direction vector pointing on constellation name drawing position
 	Vec3d XYZname;
 	Vec3d XYname;
-	//! Number of segments in the lines
-	unsigned int numberOfSegments;
+	enum class Type
+	{
+		RayHelper,     //!< Ray helper
+		BigAsterism,   //!< A big asterism with lines by HIP stars
+		SmallAsterism, //!< A small asterism with lines by J2000.0 coordinates
+	};
 	//! Type of asterism
-	int typeOfAsterism;
+	Type typeOfAsterism = Type::BigAsterism;
 	bool flagAsterism;
 	//! List of stars forming the segments
-	StelObjectP* asterism;
+	std::vector<StelObjectP> asterism;
 
 	SphericalCap boundingCap;
 

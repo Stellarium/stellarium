@@ -256,17 +256,6 @@ private slots:
 	void switchSelectionMode();
 
 private:
-	//! Read asterism names from the given file.
-	//! @param namesFile Name of the file containing the asterism names
-	//!        in a format consisting of abbreviation and translatable english name.
-	//! @note The abbreviation must occur in the lines file loaded first in @name loadLines()!
-	void loadNames(const QString& namesFile);
-
-	//! Load asterism line shapes from data files.
-	//! @param fileName The name of the asterism data file
-	//! @note The abbreviation used in @param filename is required for cross-identifying translatable names in @name loadNames():
-	void loadLines(const QString& fileName);
-
 	//! Draw the asterism lines at the epoch given by the StelCore.
 	void drawLines(StelPainter& sPainter, const StelCore* core) const;
 	//! Draw the ray helpers at the epoch given by the StelCore.
