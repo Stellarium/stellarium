@@ -11,17 +11,17 @@
 # Xavier PG, 2023
 # Susanna Pujol, 2023
 # Pascual Martínez Reig <pascualmralcoi@gmail.com>, 2024
-# Daniel Alomar <daniel.adastra@gmail.com>, 2024
 # Pep Pujols Puigdesens, 2024
+# Daniel Alomar <daniel.adastra@gmail.com>, 2024
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2024-05-05 15:29+0700\n"
+"POT-Creation-Date: 2024-05-05 22:41+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
-"Last-Translator: Pep Pujols Puigdesens, 2024\n"
+"Last-Translator: Daniel Alomar <daniel.adastra@gmail.com>, 2024\n"
 "Language-Team: Catalan (https://app.transifex.com/stellarium/teams/80998/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -935,7 +935,7 @@ msgstr "Diàmetre"
 #. TRANSLATORS: Unit of measure for distance - kilometers
 #: src/core/modules/NomenclatureItem.cpp:248 src/core/modules/Planet.cpp:687
 #: src/core/modules/Planet.cpp:708 src/core/modules/Planet.cpp:825
-#: src/core/modules/Planet.cpp:1555 src/core/modules/Comet.cpp:193
+#: src/core/modules/Planet.cpp:1562 src/core/modules/Comet.cpp:193
 #: src/core/modules/Comet.cpp:203 src/gui/StelGuiItems.cpp:894
 #: src/gui/AstroCalcDialog.cpp:3291 src/gui/AstroCalcDialog.cpp:3804
 #: src/gui/AstroCalcDialog.cpp:9558 plugins/Satellites/src/Satellites.cpp:2933
@@ -2519,42 +2519,42 @@ msgstr "El període de rotació és caòtic"
 msgid "Equatorial rotation velocity"
 msgstr "Velocitat de rotació equatorial"
 
-#: src/core/modules/Planet.cpp:1304 src/core/modules/Planet.cpp:1706
+#: src/core/modules/Planet.cpp:1304 src/core/modules/Planet.cpp:1713
 msgctxt "Moon phase"
 msgid "New Moon"
 msgstr "Lluna nova"
 
-#: src/core/modules/Planet.cpp:1306 src/core/modules/Planet.cpp:1708
+#: src/core/modules/Planet.cpp:1306 src/core/modules/Planet.cpp:1715
 msgctxt "Moon phase"
 msgid "Waxing Crescent"
 msgstr "Nova visible"
 
-#: src/core/modules/Planet.cpp:1308 src/core/modules/Planet.cpp:1710
+#: src/core/modules/Planet.cpp:1308 src/core/modules/Planet.cpp:1717
 msgctxt "Moon phase"
 msgid "First Quarter"
 msgstr "Quart creixent"
 
-#: src/core/modules/Planet.cpp:1310 src/core/modules/Planet.cpp:1712
+#: src/core/modules/Planet.cpp:1310 src/core/modules/Planet.cpp:1719
 msgctxt "Moon phase"
 msgid "Waxing Gibbous"
 msgstr "Gibosa creixent"
 
-#: src/core/modules/Planet.cpp:1312 src/core/modules/Planet.cpp:1714
+#: src/core/modules/Planet.cpp:1312 src/core/modules/Planet.cpp:1721
 msgctxt "Moon phase"
 msgid "Full Moon"
 msgstr "Lluna plena"
 
-#: src/core/modules/Planet.cpp:1314 src/core/modules/Planet.cpp:1716
+#: src/core/modules/Planet.cpp:1314 src/core/modules/Planet.cpp:1723
 msgctxt "Moon phase"
 msgid "Waning Gibbous"
 msgstr "Gibosa Minvant"
 
-#: src/core/modules/Planet.cpp:1316 src/core/modules/Planet.cpp:1718
+#: src/core/modules/Planet.cpp:1316 src/core/modules/Planet.cpp:1725
 msgctxt "Moon phase"
 msgid "Third Quarter"
 msgstr "Minvant"
 
-#: src/core/modules/Planet.cpp:1318 src/core/modules/Planet.cpp:1720
+#: src/core/modules/Planet.cpp:1318 src/core/modules/Planet.cpp:1727
 msgctxt "Moon phase"
 msgid "Waning Crescent"
 msgstr "Quart minvant"
@@ -2594,77 +2594,81 @@ msgstr "colongitud"
 msgid "Center point"
 msgstr "Punt central"
 
-#: src/core/modules/Planet.cpp:1486
+#: src/core/modules/Planet.cpp:1490
 msgid "Eclipse magnitude"
 msgstr "Magnitud de l'eclipsi"
 
-#: src/core/modules/Planet.cpp:1488
+#: src/core/modules/Planet.cpp:1493
 msgid "Eclipse obscuration"
 msgstr "Enfosquiment de l'eclipsi"
 
-#: src/core/modules/Planet.cpp:1514
+#: src/core/modules/Planet.cpp:1495
+msgid "Crescent angle"
+msgstr "Angle creixent"
+
+#: src/core/modules/Planet.cpp:1521
 msgid "Moon/Sun diameter ratio"
 msgstr "relació diàmetre: Lluna/Sol "
 
-#: src/core/modules/Planet.cpp:1517
+#: src/core/modules/Planet.cpp:1524
 msgctxt "type of solar eclipse"
 msgid "(annular)"
 msgstr "(amb forma d'anell)"
 
-#: src/core/modules/Planet.cpp:1519
+#: src/core/modules/Planet.cpp:1526
 msgctxt "type of solar eclipse"
 msgid "(total)"
 msgstr "(total)"
 
-#: src/core/modules/Planet.cpp:1530
+#: src/core/modules/Planet.cpp:1537
 msgid "Central eclipse duration"
 msgstr "Duració eclipse central"
 
 #. TRANSLATORS: Short for "minutes".
-#: src/core/modules/Planet.cpp:1532
+#: src/core/modules/Planet.cpp:1539
 #: plugins/Observability/src/Observability.cpp:153
 msgid "m"
 msgstr "m"
 
 #. TRANSLATORS: Short for "seconds".
-#: src/core/modules/Planet.cpp:1534
+#: src/core/modules/Planet.cpp:1541
 #: plugins/Observability/src/Observability.cpp:155
 msgid "s"
 msgstr "s"
 
-#: src/core/modules/Planet.cpp:1535
+#: src/core/modules/Planet.cpp:1542
 msgid "Center of solar eclipse (Lat./Long.)"
 msgstr "Centre d'eclipsi solar (Lat./Long.)"
 
-#: src/core/modules/Planet.cpp:1545
+#: src/core/modules/Planet.cpp:1552
 msgid "Shadow center point is"
 msgstr "El punt central de l’ombra és"
 
-#: src/core/modules/Planet.cpp:1547
+#: src/core/modules/Planet.cpp:1554
 msgid "km towards azimuth"
 msgstr "km cap a l’azimut"
 
-#: src/core/modules/Planet.cpp:1550
+#: src/core/modules/Planet.cpp:1557
 msgid "Width of antumbra"
 msgstr "Amplada de l'antumbra"
 
-#: src/core/modules/Planet.cpp:1552
+#: src/core/modules/Planet.cpp:1559
 msgid "Width of umbra"
 msgstr "Amplada de l'umbra"
 
-#: src/core/modules/Planet.cpp:1569
+#: src/core/modules/Planet.cpp:1576
 msgid "Penumbral eclipse magnitude"
 msgstr "Magnitud de l’eclipsi penumbral"
 
-#: src/core/modules/Planet.cpp:1572
+#: src/core/modules/Planet.cpp:1579
 msgid "Umbral eclipse magnitude"
 msgstr "Magnitud de l’eclipsi umbral"
 
-#: src/core/modules/Planet.cpp:1579
+#: src/core/modules/Planet.cpp:1586
 msgid "Albedo"
 msgstr "Albedo"
 
-#: src/core/modules/Planet.cpp:1582 src/core/modules/MinorPlanet.cpp:211
+#: src/core/modules/Planet.cpp:1589 src/core/modules/MinorPlanet.cpp:211
 #: src/core/modules/Comet.cpp:244
 msgid "Discovered"
 msgstr "Descobert"
@@ -3393,7 +3397,7 @@ msgstr "Resta 100 anys naturals"
 
 #: src/core/StelCore.cpp:359
 msgid "Subtract 1 Great year"
-msgstr "Resten 1 al Gran any"
+msgstr "Resta 1 al Gran any"
 
 #: src/core/StelCore.cpp:361
 msgid "Set home planet to selected planet"
@@ -16926,12 +16930,12 @@ msgstr ""
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:912
 #, qt-format
 msgid "Twilight factor: %1"
-msgstr "Factor crepuscular\\: %1"
+msgstr "Factor crepuscular: %1"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:918
 #, qt-format
 msgid "Relative brightness: %1"
-msgstr "Brillantor relativa\\: %1"
+msgstr "Brillantor relativa: %1"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:946
 msgid "Rayleigh criterion"
