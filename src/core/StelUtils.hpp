@@ -117,6 +117,18 @@ namespace StelUtils
 	//! Return the user agent name, i.e. "Stellarium/0.15.0 (Linux)"
 	QString getUserAgentString();
 
+	/*! \brief Get a long integer from a JSON value
+	 *
+	 *  QJsonValue stores JSON numbers as double-precision floating-point values. This means
+	 *  that numbers greater than 2^53-1 will be rounded, which is unacceptable for e.g. ids
+	 *  like those of the Gaia catalog.
+	 *  This function supports, in addition to normal JSON numbers, also representations of
+	 *  numbers by JSON strings. If the value passed is a JSON string, it will be parsed to a
+	 *  number. If it's a JSON number less than 2^53, it will be returned as is. Otherwise it
+	 *  will return 0, as QJsonValue's getters would in case of a type mismatch.
+	 */
+	qint64 getLongLong(const class QJsonValue& v);
+
 	inline const QString getEndLineChar() {
 		#ifdef Q_OS_WIN
 		const QString stelEndl="\r\n";

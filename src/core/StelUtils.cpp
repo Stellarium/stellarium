@@ -30,7 +30,9 @@
 #include <QRegularExpression>
 #include <QProcess>
 #include <QSysInfo>
+#include <QJsonValue>
 #include <cmath> // std::fmod
+#include <limits>
 #include <zlib.h>
 
 #ifdef CYGWIN
@@ -2790,6 +2792,32 @@ QByteArray uncompress(QIODevice& device, qint64 maxBytes)
 	return out;
 }
 
+qint64 getLongLong(const QJsonValue& v)
+{
+	const auto reportError = [&v]{
+		qWarning().nospace() << "Cannot obtain an integer from JSON value "
+		                     << v << ". Please format it as a JSON string or"
+		                     " make sure it's an integer smaller than 2^53.";
+		return 0;
+	};
+
+	bool ok = false;
+	if(v.isString())
+	{
+		const auto integer = v.toString().toLongLong(&ok);
+		if(!ok) return reportError();
+		return integer;
+	}
+	const auto value = v.toDouble();
+	constexpr qint64 max = (1LL<<std::numeric_limits<double>::digits) - 1;
+
+	if(std::abs(value) > max) return reportError();
+
+	const auto integer = static_cast<qint64>(value);
+	if(value != integer) // fractional part must be zero
+		return reportError();
+	return integer;
+}
 
 } // end of the StelUtils namespace
 
