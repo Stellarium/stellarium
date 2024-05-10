@@ -229,7 +229,8 @@ public:
 
 	//! Set vision direction
 	void lookAtJ2000(const Vec3d& pos, const Vec3d& up);
-	void setMatAltAzModelView(const Mat4d& mat);
+	// Unused as of 24.1
+	//void setMatAltAzModelView(const Mat4d& mat);
 
 	Vec3d altAzToEquinoxEqu(const Vec3d& v, RefractionMode refMode=RefractionAuto) const;
 	Vec3d equinoxEquToAltAz(const Vec3d& v, RefractionMode refMode=RefractionAuto) const;

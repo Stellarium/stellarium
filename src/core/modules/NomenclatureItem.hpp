@@ -255,6 +255,9 @@ private:
 	double size;                //  km
 
 	static LinearFader labelsFader;
+	// Flag to be set by our friend class NomenclatureMgr.
+	// Usually drawing avoids recomputation when time is frozen. However, changing location then needs a redraw. (GH#3706)
+	static bool forceItems;
 };
 
 #endif // NOMENCLATUREITEM_HPP
