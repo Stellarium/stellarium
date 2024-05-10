@@ -3,13 +3,20 @@ a {
 }
 
 /* style for tables with nomenclature (first usage in Tongan starlore) */
-table.nomenclature {
+table {
         margin: 3px auto;
         border-color: black;
         border-style: solid;
         border-width: 1px;
+        border-collapse: collapse;
 }
 
-table.nomenclature tr td, table.nomenclature tr th {
+table tr td, table tr th {
         padding: 3px;
+}
+
+table.layout, table.layout tr td, table.layout tr th {
+        margin: 0;
+        padding: 0;
+        border-style: none;
 }
