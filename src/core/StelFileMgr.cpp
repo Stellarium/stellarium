@@ -131,7 +131,7 @@ void StelFileMgr::init()
 		QFileInfo checkFile(QFile::decodeName(INSTALL_DATADIR "/" CHECK_FILE));
 	#endif
 
-	#ifdef DEBUG
+	#ifndef NDEBUG
 		if (!checkFile.exists())
 		{	// for DEBUG use sources location 
 			QString debugDataPath = INSTALL_DATADIR_FOR_DEBUG;
