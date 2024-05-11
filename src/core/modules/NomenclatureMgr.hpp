@@ -139,6 +139,8 @@ public slots:
 	void updateI18n();
 
 	void updateNomenclatureData();
+	//! trigger in a lambda connected from StelCore::locationChanged
+	void setForceItems(bool b);
 
 signals:
 	void flagShowNomenclatureChanged(bool b);

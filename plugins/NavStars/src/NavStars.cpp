@@ -231,7 +231,13 @@ void NavStars::setNavStarsMarks(const bool b)
 	if (b==getNavStarsMarks())
 		return;
 
-	propMgr->setStelPropertyValue("StarMgr.flagLabelsDisplayed", b ? !b : starLabelsState);
+	if (b)
+	{
+		starLabelsState = propMgr->getStelPropertyValue("StarMgr.flagLabelsDisplayed").toBool();
+		propMgr->setStelPropertyValue("StarMgr.flagLabelsDisplayed", false);
+	}
+	else
+		propMgr->setStelPropertyValue("StarMgr.flagLabelsDisplayed", starLabelsState);
 
 	if (getFlagUseUTCTime())
 		propMgr->setStelPropertyValue("StelCore.currentTimeZone", b ? "UTC" : timeZone);
@@ -425,7 +431,7 @@ QString NavStars::getCurrentNavigationalStarsSetDescription() const
 
 void NavStars::populateNavigationalStarsSet(void)
 {
-	bool currentState = getNavStarsMarks();
+	const bool currentState = getNavStarsMarks();
 
 	setNavStarsMarks(false);
 	stars.clear();

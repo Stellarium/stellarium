@@ -303,7 +303,7 @@ Vec3f NomenclatureItem::getInfoColor(void) const
 
 Vec3d NomenclatureItem::getJ2000EquatorialPos(const StelCore* core) const
 {
-	if (fuzzyEquals(jde, core->getJDE())) return XYZ;
+	if (!forceItems && fuzzyEquals(jde, core->getJDE())) return XYZ;
 	jde = core->getJDE();
 	const Vec3d equPos = planet->getJ2000EquatorialPos(core);
 	// East/West points are assumed to be along the equator, on the planet rim. Start with sub-observer point
@@ -849,3 +849,5 @@ Vec4d NomenclatureItem::getRTSTime(const StelCore* core, const double altitude) 
 {
 	return planet->getRTSTime(core, altitude);
 }
+
+bool NomenclatureItem::forceItems;

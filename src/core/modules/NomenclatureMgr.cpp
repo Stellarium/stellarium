@@ -42,6 +42,7 @@ NomenclatureMgr::NomenclatureMgr() : StelObjectModule()
 	font.setPixelSize(StelApp::getInstance().getScreenFontSize());
 	connect(&StelApp::getInstance(), SIGNAL(screenFontSizeChanged(int)), this, SLOT(setFontSize(int)));
 	ssystem = GETSTELMODULE(SolarSystem);
+	setForceItems(true);
 }
 
 NomenclatureMgr::~NomenclatureMgr()
@@ -80,6 +81,9 @@ void NomenclatureMgr::init()
 	StelApp *app = &StelApp::getInstance();
 	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));	
 	connect(ssystem, SIGNAL(solarSystemDataReloaded()), this, SLOT(updateNomenclatureData()));
+
+	StelCore *core=app->getCore();
+	connect(core, &StelCore::locationChanged, this, [=](){setForceItems(true);});
 
 	QString displayGroup = N_("Display Options");
 	addAction("actionShow_Planets_Nomenclature", displayGroup, N_("Nomenclature labels"), "flagShowNomenclature", "Alt+N");
@@ -312,6 +316,13 @@ void NomenclatureMgr::draw(StelCore* core)
 				nItem->draw(core, &painter);
 		}
 	}
+	// avoid further forcing
+	setForceItems(false);
+}
+
+void NomenclatureMgr::setForceItems(bool b)
+{
+	NomenclatureItem::forceItems=b;
 }
 
 void NomenclatureMgr::drawPointer(StelCore* core, StelPainter& painter)
