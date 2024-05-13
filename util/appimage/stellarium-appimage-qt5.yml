@@ -1,7 +1,7 @@
 version: 1
 
 script:
-    - cmake ../.. -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release -DENABLE_QTWEBENGINE=Off
+    - cmake ../.. -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release -DENABLE_QTWEBENGINE=Off -DENABLE_MEDIA=Off
     - make -j3
     - make install DESTDIR=AppDir
 
@@ -26,9 +26,9 @@ AppDir:
     include:
       - libqt5core5a
       - libqt5gui5
-      - libqt5multimedia5
-      - libqt5multimediawidgets5
-      - libqt5multimedia5-plugins
+#      - libqt5multimedia5
+#      - libqt5multimediawidgets5
+#      - libqt5multimedia5-plugins
       - libqt5network5
       - libqt5positioning5
       - libqt5positioning5-plugins
