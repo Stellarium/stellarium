@@ -1,7 +1,7 @@
 version: 1
 
 script:
-    - cmake ../.. -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release -DENABLE_QTWEBENGINE=Off
+    - cmake ../.. -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release -DENABLE_QTWEBENGINE=Off -DENABLE_MEDIA=Off
     - make -j3
     - make install DESTDIR=AppDir
 
@@ -26,8 +26,8 @@ AppDir:
     include:
       - libqt6core6
       - libqt6gui6
-      - libqt6multimedia6
-      - libqt6multimediawidgets6
+#      - libqt6multimedia6
+#      - libqt6multimediawidgets6
       - libqt6network6
       - libqt6positioning6
       - libqt6positioning6-plugins
