@@ -289,7 +289,7 @@ void HelpDialog::updateHelpText(void) const
 		    "</a></p>\n";
 
 	htmlText += "<h2 id='keys'>" + q_("Keys").toHtmlEscaped() + "</h2>\n";
-	htmlText += "<table cellpadding='10%' width='100%'>\n";
+	htmlText += "<table class='layout' cellpadding='10%' width='100%'>\n";
 	// Describe keys for those keys which do not have actions.
 	// navigate
 	htmlText += "<tr><td>" + q_("Pan view around the sky").toHtmlEscaped() + "</td>";
@@ -351,7 +351,7 @@ void HelpDialog::updateHelpText(void) const
 	htmlText += "</table>\n<p>" +
 			q_("Below are listed only the actions with assigned keys. Further actions may be available via the \"%1\" button.")
 			.arg(ui->editShortcutsButton->text()).toHtmlEscaped() +
-			"</p><table cellpadding='10%' width='100%'>\n";
+			"</p><table class='layout' cellpadding='10%' width='100%'>\n";
 
 	// Append all StelAction shortcuts.
 	StelActionMgr* actionMgr = StelApp::getInstance().getStelActionManager();
