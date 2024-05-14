@@ -295,6 +295,15 @@ for (i=0; i<250; i++)
 }
 \end{script}
 
+\noindent\textbf{Note:}
+The \texttt{wait(delay\_seconds)} instruction inside the loop is important: 
+when you are just setting the time in rapid succession, there is no guarantee 
+that the view is updated, or a textual result has been updated when writing ephemerides, 
+before executing the next time update! 
+The \texttt{wait()} ensures the program can update the main simulation loop and 
+put the planets where they should be at that set time. 
+The minimum delay required may depend on your computer's speed. 
+
 OK, Stellarium is doing something, but what exactly is it
 doing? The ground and atmosphere is enabled and any 
 motion of Mars is invisible. Let's add an another few 
