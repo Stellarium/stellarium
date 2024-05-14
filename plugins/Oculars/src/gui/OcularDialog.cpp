@@ -621,7 +621,7 @@ void OcularDialog::initAboutText()
 	//BM: Most of the text for now is the original contents of the About widget.
 	QString html = "<html><head><title></title></head><body>";
 
-	html += "<h2>" + q_("Oculars Plug-in") + "</h2><table width=\"90%\">";
+	html += "<h2>" + q_("Oculars Plug-in") + "</h2><table class='layout' width=\"90%\">";
 	html += "<tr width=\"30%\"><td><strong>" + q_("Version") + ":</strong></td><td>" + OCULARS_PLUGIN_VERSION + "</td></tr>";
 	html += "<tr><td><strong>" + q_("License") + ":</strong></td><td>" + OCULARS_PLUGIN_LICENSE + "</td></tr>";
 	html += "<tr><td><strong>" + q_("Author") + ":</strong></td><td>Timothy Reaves &lt;treaves@silverfieldstech.com&gt;</td></tr>";

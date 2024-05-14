@@ -774,7 +774,7 @@ void SatellitesDialog::populateAboutPage()
 	QString jsonFileName("<tt>satellites.json</tt>");
 	QString oldJsonFileName("<tt>satellites.json.old</tt>");
 	QString html = "<html><head></head><body>";
-	html += "<h2>" + q_("Stellarium Satellites Plugin") + "</h2><table width=\"90%\">";
+	html += "<h2>" + q_("Stellarium Satellites Plugin") + "</h2><table class='layout' width=\"90%\">";
 	html += "<tr width=\"30%\"><td><strong>" + q_("Version") + "</strong></td><td>" + SATELLITES_PLUGIN_VERSION + "</td></td>";
 	html += "<tr><td><strong>" + q_("License") + ":</strong></td><td>" + SATELLITES_PLUGIN_LICENSE + "</td></tr>";
 	html += "<tr><td rowspan=\"2\"><strong>" + q_("Authors") + "</strong></td><td>Matthew Gates &lt;matthewg42@gmail.com&gt;</td></td>";

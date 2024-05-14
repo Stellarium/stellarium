@@ -253,7 +253,7 @@ void TelescopeDialog::setAboutText()
 
 	//TODO: Expand
 	QString aboutPage = "<html><head></head><body>";
-	aboutPage += "<h2>" + q_("Telescope Control plug-in") + "</h2><table width=\"90%\">";
+	aboutPage += "<h2>" + q_("Telescope Control plug-in") + "</h2><table class='layout' width=\"90%\">";
 	aboutPage += "<tr width=\"30%\"><td><strong>" + q_("Version") + ":</strong></td><td>" + TELESCOPE_CONTROL_PLUGIN_VERSION + "</td></tr>";
 	aboutPage += "<tr><td><strong>" + q_("License") + ":</strong></td><td>" + TELESCOPE_CONTROL_PLUGIN_LICENSE + "</td></tr>";
 	aboutPage += "<tr><td rowspan=5><strong>" + q_("Authors") + "</strong></td><td>Johannes Gajdosik</td></td>";

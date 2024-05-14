@@ -181,7 +181,7 @@ void CalendarsDialog::setAboutHtml(void)
 	static const QRegularExpression a_rx("[{]([^{]*)[}]");
 
 	QString html = "<html><head></head><body>";
-	html += "<h2>" + q_("Calendars Plug-in") + "</h2><table width=\"90%\">";
+	html += "<h2>" + q_("Calendars Plug-in") + "</h2><table class='layout' width=\"90%\">";
 	html += "<tr width=\"30%\"><td><strong>" + q_("Version") + ":</strong></td><td>" + CALENDARS_PLUGIN_VERSION + "</td></tr>";
 	html += "<tr><td><strong>" + q_("License") + ":</strong></td><td>" + CALENDARS_PLUGIN_LICENSE + "</td></tr>";
 	html += "<tr><td><strong>" + q_("Author") + ":</strong></td><td>Georg Zotti</td></tr>";

@@ -1744,7 +1744,7 @@ void LensDistortionEstimatorDialog::setAboutText()
 {
 	QString html = "<html><head></head><body>"
 	"<h2>" + q_("Lens Distortion Estimator Plug-in") + "</h2>"
-	"<table width=\"90%\">"
+	"<table class='layout' width=\"90%\">"
 		"<tr width=\"30%\"><td><strong>" + q_("Version") + ":</strong></td><td>" + LENSDISTORTIONESTIMATOR_PLUGIN_VERSION + "</td></tr>"
 		"<tr><td><strong>" + q_("License") + ":</strong></td><td>" + LENSDISTORTIONESTIMATOR_PLUGIN_LICENSE + "</td></tr>"
 		"<tr><td><strong>" + q_("Author") + ":</strong></td><td>Ruslan Kabatsayev &lt;b7.10110111+stellarium@gmail.com&gt;</td></tr>"

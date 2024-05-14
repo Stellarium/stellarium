@@ -190,7 +190,7 @@ void MSConfigDialog::setAboutHtml()
 {
 	QString html = "<html><head></head><body>"
 	"<h2>" + q_("Meteor Showers Plug-in") + "</h2>"
-	"<table width=\"90%\">"
+	"<table class='layout' width=\"90%\">"
 		"<tr width=\"30%\"><td><strong>" + q_("Version") + ":</strong></td><td>" + METEORSHOWERS_PLUGIN_VERSION + "</td></tr>"
 		"<tr><td><strong>" + q_("License") + ":</strong></td><td>" + METEORSHOWERS_PLUGIN_LICENSE + "</td></tr>"
 		"<tr><td><strong>" + q_("Author") + ":</strong></td><td>Marcos Cardinot &lt;mcardinot@gmail.com&gt;</td></tr>"
