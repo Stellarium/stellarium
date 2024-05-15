@@ -1223,7 +1223,10 @@ the unaided eye.
 You can display\newFeature{0.22.2} circles representing the Earth's
 shadow (penumbra and umbra, defined just like for Lunar eclipses, see
 section~\ref{sec:Eclipses:lunar}), at the altitude of the currently
-selected satellite, or at a fixed (configurable) altitude from Earth's surface.
+selected satellite, or at a fixed (configurable) altitude from Earth's surface.\footnote{%
+The height of the selected satellite is computed above the WGS84 ellipsoid, 
+while the fixed (configurable) altitude from Earth's surface is computed over the sphere. 
+You may note these circles will deviate slightly from each other when displayed altitudes are equal.}
 
 \subsection{Satellite Properties}
 \label{sec:plugins:Satellites:properties}
