@@ -20,6 +20,7 @@
 #ifndef STELLOCALEMGR_HPP
 #define STELLOCALEMGR_HPP
 
+#include <memory>
 #include "StelTranslator.hpp"
 #include "StelCore.hpp"
 
@@ -171,9 +172,9 @@ private:
 	//! Call this at program start and then after each language change.
 	static void createNameLists();
 	// The translator used for astronomical object naming
-	StelTranslator* skyTranslator;
-	StelTranslator* planetaryFeaturesTranslator;
-	StelTranslator* scriptsTranslator;
+	std::unique_ptr<StelTranslator> skyTranslator;
+	std::unique_ptr<StelTranslator> planetaryFeaturesTranslator;
+	std::unique_ptr<StelTranslator> scriptsTranslator;
 	StelCore* core;
 	
 	// Date and time variables
