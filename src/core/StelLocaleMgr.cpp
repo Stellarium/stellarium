@@ -31,10 +31,7 @@
 #include <ctime>
 
 StelLocaleMgr::StelLocaleMgr()
-	: skyTranslator(Q_NULLPTR)
-	, planetaryFeaturesTranslator(Q_NULLPTR)
-	, scriptsTranslator(Q_NULLPTR)
-	, timeFormat()
+	: timeFormat()
 	, dateFormat()
 {
 	core = StelApp::getInstance().getCore();
@@ -44,12 +41,6 @@ StelLocaleMgr::StelLocaleMgr()
 
 StelLocaleMgr::~StelLocaleMgr()
 {
-	delete skyTranslator;
-	skyTranslator = Q_NULLPTR;
-	delete planetaryFeaturesTranslator;
-	planetaryFeaturesTranslator = Q_NULLPTR;
-	delete scriptsTranslator;
-	scriptsTranslator = Q_NULLPTR;
 }
 
 void StelLocaleMgr::init()
@@ -75,9 +66,8 @@ void StelLocaleMgr::setAppLanguage(const QString& newAppLanguageName, bool refre
 	StelTranslator::globalTranslator = new StelTranslator("stellarium", newAppLanguageName);
 	qDebug().noquote() << "Application language:" << StelTranslator::globalTranslator->getTrueLocaleName();
 
-	delete scriptsTranslator;
 	// Update the translator with new locale name
-	scriptsTranslator = new StelTranslator("stellarium-scripts", newAppLanguageName);
+	scriptsTranslator.reset(new StelTranslator("stellarium-scripts", newAppLanguageName));
 	qDebug().noquote() << "Scripts language:" << scriptsTranslator->getTrueLocaleName();
 
 	createNameLists();
@@ -95,14 +85,12 @@ bool StelLocaleMgr::isAppRTL() const
 *************************************************************************/
 void StelLocaleMgr::setSkyLanguage(const QString& newSkyLanguageName, bool refreshAll)
 {
-	delete skyTranslator;
 	// Update the translator with new locale name
-	skyTranslator = new StelTranslator("stellarium-skycultures", newSkyLanguageName);
+	skyTranslator.reset(new StelTranslator("stellarium-skycultures", newSkyLanguageName));
 	qDebug().noquote() << "Sky language:" << skyTranslator->getTrueLocaleName();
 
-	delete planetaryFeaturesTranslator;
 	// Update the translator with new locale name
-	planetaryFeaturesTranslator = new StelTranslator("stellarium-planetary-features", newSkyLanguageName);
+	planetaryFeaturesTranslator.reset(new StelTranslator("stellarium-planetary-features", newSkyLanguageName));
 	qDebug().noquote() << "Planetary features language:" << planetaryFeaturesTranslator->getTrueLocaleName();
 
 	if (refreshAll)
