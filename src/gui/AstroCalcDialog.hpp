@@ -528,33 +528,33 @@ private:
 		{
 		}
 	};
-	class AstroCalcExtraEphemerisDialog* extraEphemerisDialog;
-	class AstroCalcCustomStepsDialog* customStepsDialog;
-	class StelCore* core;
-	class SolarSystem* solarSystem;
-	class NebulaMgr* dsoMgr;
-	class StarMgr* starMgr;
-	class StelObjectMgr* objectMgr;
-	class StelLocaleMgr* localeMgr;
-	class StelMovementMgr* mvMgr;
-	class StelPropertyMgr* propMgr;
-	//QStringListModel* wutModel;
-	//QSortFilterProxyModel *proxyModel;
-	AstroCalcChart *altVsTimeChart;
+	class AstroCalcExtraEphemerisDialog* extraEphemerisDialog = nullptr;
+	class AstroCalcCustomStepsDialog* customStepsDialog = nullptr;
+	class StelCore* core = nullptr;
+	class SolarSystem* solarSystem = nullptr;
+	class NebulaMgr* dsoMgr = nullptr;
+	class StarMgr* starMgr = nullptr;
+	class StelObjectMgr* objectMgr = nullptr;
+	class StelLocaleMgr* localeMgr = nullptr;
+	class StelMovementMgr* mvMgr = nullptr;
+	class StelPropertyMgr* propMgr = nullptr;
+	//QStringListModel* wutModel = nulpltr;
+	//QSortFilterProxyModel *proxyModel = nullptr;
+	AstroCalcChart *altVsTimeChart = nullptr;
 	mutable QMutex altVsTimeChartMutex;
-	AstroCalcChart *azVsTimeChart;
+	AstroCalcChart *azVsTimeChart = nullptr;
 	mutable QMutex azVsTimeChartMutex;
-	AstroCalcChart *monthlyElevationChart;
+	AstroCalcChart *monthlyElevationChart = nullptr;
 	mutable QMutex monthlyElevationChartMutex;
-	AstroCalcChart *curvesChart;
+	AstroCalcChart *curvesChart = nullptr;
 	mutable QMutex curvesChartMutex;
-	AstroCalcChart *lunarElongationChart;
+	AstroCalcChart *lunarElongationChart = nullptr;
 	mutable QMutex lunarElongationChartMutex;
-	AstroCalcChart *pcChart;
+	AstroCalcChart *pcChart = nullptr;
 	mutable QMutex pcChartMutex;
 
 	QSettings* conf;
-	QTimer *currentTimeLine;
+	QTimer *currentTimeLine = nullptr;
 	QHash<QString,int> wutCategories;
 	QList<HECPosition> hecObjects;
 
@@ -729,8 +729,17 @@ private:
 	bool isSecondObjectRight(double JD, PlanetP object1, StelObjectP object2);
 
 	// Signal that a plot has to be redone
-	bool plotAltVsTime, plotAltVsTimeSun, plotAltVsTimeMoon, plotAltVsTimePositive, plotMonthlyElevation, plotMonthlyElevationPositive, plotDistanceGraph, plotLunarElongationGraph, plotAziVsTime, computeRTS;
-	int altVsTimePositiveLimit, monthlyElevationPositiveLimit, graphsDuration, graphsStep;
+	bool plotAltVsTime = false;
+	bool plotAltVsTimeSun = false;
+	bool plotAltVsTimeMoon = false;
+	bool plotAltVsTimePositive = false;
+	bool plotMonthlyElevation = false;
+	bool plotMonthlyElevationPositive = false;
+	bool plotDistanceGraph = false;
+	bool plotLunarElongationGraph = false;
+	bool plotAziVsTime = false;
+	bool computeRTS = false;
+	int altVsTimePositiveLimit = 0, monthlyElevationPositiveLimit = 0, graphsDuration = 1, graphsStep = 24;
 	QStringList ephemerisHeader, phenomenaHeader, positionsHeader, hecPositionsHeader, wutHeader, rtsHeader, lunareclipseHeader, lunareclipsecontactsHeader, solareclipseHeader, solareclipsecontactsHeader, solareclipselocalHeader, transitHeader;
 	static double brightLimit;
 	static const QString dash, delimiter;
@@ -748,10 +757,10 @@ private:
 	QString getSelectedObjectNameI18n(StelObjectP selectedObject);
 
 	//! Memorize day for detecting rollover to next/prev one
-	int oldGraphJD;
+	int oldGraphJD = 0;
 
 	//! Remember to redraw active plot when dialog becomes visible
-	bool graphPlotNeedsRefresh;
+	bool graphPlotNeedsRefresh = false;
 
 	enum PhenomenaCategory {
 		PHCLatestSelectedObject     = -1,

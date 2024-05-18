@@ -226,44 +226,17 @@ void drawGeoLinesForEquirectMap(QPainter& painter, const std::vector<QPointF>& p
 
 AstroCalcDialog::AstroCalcDialog(QObject* parent)
 	: StelDialog("AstroCalc", parent)
-	, extraEphemerisDialog(nullptr)
-	, customStepsDialog(nullptr)
-	, altVsTimeChart(nullptr)
-	, azVsTimeChart(nullptr)
-	, monthlyElevationChart(nullptr)
-	, curvesChart(nullptr)
-	, lunarElongationChart(nullptr)
-	, pcChart(nullptr)
-	//, wutModel(nullptr)
-	//, proxyModel(nullptr)
-	, currentTimeLine(nullptr)
-	, plotAltVsTime(false)	
-	, plotAltVsTimeSun(false)
-	, plotAltVsTimeMoon(false)
-	, plotAltVsTimePositive(false)
-	, plotMonthlyElevation(false)
-	, plotMonthlyElevationPositive(false)
-	, plotDistanceGraph(false)
-	, plotLunarElongationGraph(false)
-	, plotAziVsTime(false)
-	, computeRTS(false)
-	, altVsTimePositiveLimit(0)
-	, monthlyElevationPositiveLimit(0)
-	, graphsDuration(1)
-	, graphsStep(24)
-	, oldGraphJD(0)
-	, graphPlotNeedsRefresh(false)
+	, ui(new Ui_astroCalcDialogForm)
+	, core(StelApp::getInstance().getCore())
+	, solarSystem(GETSTELMODULE(SolarSystem))
+	, dsoMgr(GETSTELMODULE(NebulaMgr))
+	, starMgr(GETSTELMODULE(StarMgr))
+	, objectMgr(GETSTELMODULE(StelObjectMgr))
+	, localeMgr(&StelApp::getInstance().getLocaleMgr())
+	, mvMgr(GETSTELMODULE(StelMovementMgr))
+	, propMgr(StelApp::getInstance().getStelPropertyManager())
+	, conf(StelApp::getInstance().getSettings())
 {
-	ui = new Ui_astroCalcDialogForm;
-	core = StelApp::getInstance().getCore();
-	solarSystem = GETSTELMODULE(SolarSystem);
-	dsoMgr = GETSTELMODULE(NebulaMgr);
-	starMgr = GETSTELMODULE(StarMgr);
-	objectMgr = GETSTELMODULE(StelObjectMgr);
-	localeMgr = &StelApp::getInstance().getLocaleMgr();
-	mvMgr = GETSTELMODULE(StelMovementMgr);
-	propMgr = StelApp::getInstance().getStelPropertyManager();
-	conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(ephemerisHeader.isEmpty());
 	Q_ASSERT(phenomenaHeader.isEmpty());
 	Q_ASSERT(positionsHeader.isEmpty());
