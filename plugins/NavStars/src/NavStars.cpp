@@ -390,6 +390,8 @@ QString NavStars::getCurrentNavigationalStarsSetDescription() const
 		// TRANSLATORS: The emphasis tags mark a title.
 		{ AngloAmerican, N_("The 57 \"selected stars\" that are listed in <em>The Nautical Almanac</em> jointly published by Her Majesty's Nautical Almanac Office and the US Naval Observatory since 1958; consequently, these stars are also used in navigational aids such as the <em>2102D Star Finder</em> and <em>Identifier</em>.") },
 		{        French, N_("The 81 stars that are listed in the French Nautical Almanac published by the French Bureau des Longitudes.") },
+		// TRANSLATORS: The emphasis tags mark a title.
+		{        British, N_("The 47 navigational stars that are listed in the Nevil Maskelyne's <em>The British Mariner's Guide</em> published in 1764.") },
 		{        German, N_("The 80 stars that are listed in the German Nautical Almanac published by the Federal Maritime and Hydrographic Agency of Germany.") },
 		{       Russian, N_("The 160 stars that are listed in the Russian Nautical Almanac.") },
 		// TRANSLATORS: The emphasis tags mark a title.
@@ -471,6 +473,18 @@ void NavStars::populateNavigationalStarsSet(void)
 				 85927,  86032,  87833,  90185,  91262,  92855,	 97649, 100453,
 				100751, 102098, 105199, 107315, 109268,	112122, 113368, 113881,
 				113963
+			};
+			break;
+		}
+		case British:
+		{
+			// 47 stars from British Mariner's Guide
+			starNumbers = {
+				    1067,     2081,     3419,       5447,     7588,   14135,  14576, 15863, 21421, 24608,
+				  24436,   25428,   25336,    26634,   27989,   30438,  32349, 36850, 37279, 37826,
+				  45238,   46390,   49669,    54061,   57632,   60718,  65474, 67301, 68702, 69673,
+				  71683,   72622,   74785,    76267,   78820,   80763,  84012, 86032, 91262, 97649,
+				100751, 102098, 109268, 113368, 113881, 113963,      677
 			};
 			break;
 		}

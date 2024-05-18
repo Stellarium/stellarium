@@ -243,6 +243,8 @@ void NavStarsWindow::populateNavigationalStarsSets()
 	nsSets->addItem(q_("Anglo-American"), "AngloAmerican");
 	// TRANSLATORS: Part of full phrase: French set of navigational stars
 	nsSets->addItem(q_("French"), "French");
+	// TRANSLATORS: Part of full phrase: British (XVIII century) set of navigational stars
+	nsSets->addItem(q_("British (XVIII century)"), "British");
 	// TRANSLATORS: Part of full phrase: Russian set of navigational stars
 	nsSets->addItem(q_("Russian"), "Russian");
 	// TRANSLATORS: Part of full phrase: Soviet aviation set of navigational stars
