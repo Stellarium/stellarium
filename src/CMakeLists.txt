@@ -44,6 +44,8 @@ SET(stellarium_lib_SRCS
      core/MultiLevelJsonBase.cpp
      core/StelSkyImageTile.hpp
      core/StelSkyImageTile.cpp
+     core/SolarEclipseComputer.hpp
+     core/SolarEclipseComputer.cpp
      core/SphericMirrorCalculator.cpp
      core/SphericMirrorCalculator.hpp
      core/StelApp.cpp
