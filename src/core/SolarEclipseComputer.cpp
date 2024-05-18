@@ -26,10 +26,13 @@
 #include "StelCore.hpp"
 #include "sidereal_time.h"
 
+#include <utility>
 #include <QPainter>
 
 namespace
 {
+
+double sqr(const double x) { return x*x; }
 
 static const QColor hybridEclipseColor ("#800080");
 static const QColor totalEclipseColor  ("#ff0000");
@@ -1333,36 +1336,159 @@ auto SolarEclipseComputer::getContactCoordinates(double x, double y, double d, d
 
 auto SolarEclipseComputer::getRiseSetLineCoordinates(bool first, double x,double y,double d,double L,double mu) const -> GeoPoint
 {
-	// Source: Explanatory Supplement to the Astronomical Ephemeris 
-	// and the American Ephemeris and Nautical Almanac (1961)
+	// Reference for terminology and variable naming:
+	// Explanatory Supplement to the Astronomical Ephemeris and the
+	// American Ephemeris and Nautical Almanac, 3rd Edition (2013).
+	//
+	// The computation of the intersection is my own derivation, I haven't found it in the book.
 	static SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
 	static const double f = 1.0 - ssystem->getEarth()->getOneMinusOblateness(); // flattening
 	static const double ff = 1./(1.-f);
-	const double m2 = x*x+y*y;
-	// Cosine of the angle between (0,0)-(x,y) line and the intersection
-	// of the penumbra circle and the Earth circle in the fundamental plane.
-	const double cgm = (m2+1.-L*L)/(2.*std::sqrt(m2));
 
 	GeoPoint coordinates(99., 0.);
-	if (std::abs(cgm)<=1.)
-	{
-		// Angle from Y axis clockwise to the direction towards one of the points of intersection
-		const double gamma = first ? std::acos(cgm)+std::atan2(x,y)
-		                           : M_PI*2.-std::acos(cgm)+std::atan2(x,y);
+	using namespace std;
+	const double sind = sin(d);
+	const double cosd = cos(d);
+	static const double e2 = f*(2.-f);
+	const double rho1 = sqrt(1-e2*sqr(cosd));
+	const double rho2 = sqrt(1-e2*sqr(sind));
+	const double sd1 = sind/rho1;
+	const double cd1 = sqrt(1-e2)*cosd/rho1;
+	const double sdd = e2*sind*cosd/(rho1*rho2);   // sin(d1-d2)
+	const double cdd = sqrt(1-sqr(sdd));           // cos(d1-d2)
 
-		const double xi = std::sin(gamma);
-		const double eta = std::cos(gamma);
-		const double b = -eta*std::sin(d);
-		const double theta = std::atan2(xi,b)*M_180_PI;
-		double lngDeg = theta-mu;
-		lngDeg = StelUtils::fmodpos(lngDeg, 360.);
-		if (lngDeg > 180.) lngDeg -= 360.;
-		double sfn1 = eta*std::cos(d);
-		double cfn1 = std::sqrt(1.-sfn1*sfn1);
-		double tanLat = ff*sfn1/cfn1;
-		coordinates.latitude = std::atan(tanLat)*M_180_PI;
-		coordinates.longitude = lngDeg;
+	// Semi-minor axis of the elliptic cross section of the
+	// Earth in the fundamental plane (in Earth radii).
+	const double k = 1/sqrt(sqr(sind)+sqr(cosd)/(1-e2));
+	/*
+	   We solve simultaneous equations: one for the ellipse of the Earth's border as
+	   crossed by the fundamental plane, and the other is the circle of the shadow edge:
+
+	                        ⎧ xi^2+eta^2/k^2=1
+	                        ⎨
+	                        ⎩ (xi-x)^2+(eta-y)^2=L^2
+
+	    If we parametrize the solution for the Earth's border equation as
+
+	                              xi=cos(t),
+	                              eta=k*sin(t),
+
+	    we'll get a single equation for the shadow border in terms of t:
+
+	                    (cos(t)-x)^2+(k*sin(t)-y)^2=L^2.
+
+	    This equation can be solved using Newton's method, which we'll now do.
+	*/
+	const auto lhsAndDerivative = [=](const double t) -> std::pair<double,double>
+	{
+		const auto cost = cos(t);
+		const auto sint = sin(t);
+		const auto lhs = sqr(cost-x) + sqr(k*sint-y) - sqr(L);
+		const auto lhsPrime = 2*x*sint + 2*cost*((k*k-1)*sint - k*y);
+		return std::make_pair(lhs,lhsPrime);
+	};
+
+	std::vector<double> ts;
+	double t = 0;
+	bool rootFound = false;
+	do
+	{
+		if(ts.size() == 2) break; // there can't be more than 2 roots, so don't spend time uselessly
+
+		rootFound = false;
+		bool finalIteration = false;
+		for(int n = 0; n < 50; ++n)
+		{
+			const auto [lhs, lhsPrime] = lhsAndDerivative(t);
+
+			// Cancel the known roots to avoid finding them instead of the remaining ones
+			auto newLHSPrime = lhsPrime;
+			auto newLHS = lhs;
+			for(const auto rootT : ts)
+			{
+				// We need a 2pi-periodic root-canceling function,
+				// so take a sine of half the difference.
+				const auto sinDiff = sin((t - rootT)/2);
+				const auto cosDiff = cos((t - rootT)/2);
+
+				newLHS /= sinDiff;
+				newLHSPrime = (newLHSPrime - 0.5*cosDiff*newLHS)/sinDiff;
+			}
+
+			if(abs(newLHS) < 1e-10)
+				finalIteration = true;
+
+			const auto deltaT = newLHS / newLHSPrime;
+			if(newLHSPrime==0 || abs(deltaT) > 1000)
+			{
+				// We are shooting too far away, convergence may be too slow.
+				// Let's try perturbing t and retrying.
+				t += 0.01;
+				finalIteration = false;
+				continue;
+			}
+			t -= deltaT;
+			t = StelUtils::fmodpos(t, 2*M_PI);
+
+			if(finalIteration)
+			{
+				ts.emplace_back(t);
+				// Set a new initial value, but try to avoid setting it to 0 if the current
+				// root is close to it (all values here are arbitrary in other respects).
+				t = abs(t) > 0.5 ? 0 : -M_PI/2;
+
+				rootFound = true;
+				break;
+			}
+		}
 	}
+	while(rootFound);
+
+	if(ts.empty()) return coordinates;
+
+	double xi, eta;
+	if(ts.size() == 1)
+	{
+		const auto t = ts[0];
+		xi = cos(t);
+		eta = k*sin(t);
+	}
+	else
+	{
+		// Whether a solution is "first" or "second" depends on which side from the
+		// (0,0)-(x,y) line it is. To find this out we'll use the z component of
+		// the vector product (x,y,0)×(xi,eta,0).
+		const auto sin_t0 = sin(ts[0]);
+		const auto cos_t0 = cos(ts[0]);
+		const auto sin_t1 = sin(ts[1]);
+		const auto cos_t1 = cos(ts[1]);
+
+		const auto xi0 = cos_t0;
+		const auto xi1 = cos_t1;
+		const auto eta0 = k*sin_t0;
+		const auto eta1 = k*sin_t1;
+
+		const auto vecProdZ0 = x * eta0 - y * xi0;
+
+		const bool use0 = first ? vecProdZ0 < 0 : vecProdZ0 > 0;
+
+		xi  = use0 ? xi0  : xi1;
+		eta = use0 ? eta0 : eta1;
+	}
+
+	const double eta1 = eta / rho1;
+	const double zeta1 = (0 + eta1 * sdd) / cdd;
+
+	const double b = -eta1*sd1+zeta1*cd1;
+	const double theta = atan2(xi,b)*M_180_PI;
+	double lngDeg = theta-mu;
+	lngDeg = StelUtils::fmodpos(lngDeg, 360.);
+	if (lngDeg > 180.) lngDeg -= 360.;
+	const double sfn1 = eta1*cd1+zeta1*sd1;
+	const double cfn1 = sqrt(1.-sfn1*sfn1);
+	const double tanLat = ff*sfn1/cfn1;
+	coordinates.latitude = atan(tanLat)*M_180_PI;
+	coordinates.longitude = lngDeg;
 	return coordinates;
 }
 
