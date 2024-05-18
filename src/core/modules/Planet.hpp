@@ -31,6 +31,7 @@
 #include "StelFader.hpp"
 #include "StelTextureTypes.hpp"
 #include "RotationElements.hpp"
+#include "SolarEclipseComputer.hpp"
 
 #include <QCache>
 #include <QString>
@@ -76,26 +77,6 @@ public:
 	const float radiusMax;
 	StelTextureSP tex;
 };
-
-struct EclipseBesselElements
-{
-	double x;   //!< x coordinate of the shadow axis in the fundamental plane (in units of equatorial Earth radius)
-	double y;   //!< y coordinate of the shadow axis in the fundamental plane (in units of equatorial Earth radius)
-	double d;   //!< declination of the shadow axis direction in the celestial sphere (in radians)
-	double mu;  //!< Greenwich hour angle of the shadow axis direction in the celestial sphere (in degrees)
-	double tf1; //!< tangent of the angle of the penumbral shadow cone with the shadow axis
-	double tf2; //!< tangent of the angle of the umbral shadow cone with the shadow axis
-	double L1;  //!< radius of the penumbral shadow on the fundamental plane (in units of equatorial Earth radius)
-	double L2;  //!< radius of the umbral shadow on the fundamental plane (in units of equatorial Earth radius)
-};
-
-//! Calculate Besselian elements of solar eclipse
-EclipseBesselElements calcSolarEclipseBessel();
-
-// Calculate solar eclipse data at given time
-void calcSolarEclipseData(double JD, double &dRatio, double &latDeg, double &lngDeg, double &altitude,
-                          double &pathWidth, double &duration, double &magnitude);
-
 
 //! @class Planet
 //! The Planet class is used for the major planets, moons, "Observer" planets, and artificial objects ("Spaceship").

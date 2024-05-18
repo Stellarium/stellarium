@@ -24,6 +24,7 @@
 #include "SolarSystem.hpp"
 #include "StelUtils.hpp"
 #include "StelCore.hpp"
+#include "sidereal_time.h"
 
 #include <QPainter>
 
@@ -162,6 +163,87 @@ void drawGeoLinesForEquirectMap(QPainter& painter, const std::vector<QPointF>& p
 
 }
 
+EclipseBesselElements calcSolarEclipseBessel()
+{
+	// Besselian elements
+	// Source: Explanatory Supplement to the Astronomical Ephemeris
+	// and the American Ephemeris and Nautical Almanac (1961)
+
+	EclipseBesselElements out;
+
+	StelCore* core = StelApp::getInstance().getCore();
+	static SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
+	const bool topocentricWereEnabled = core->getUseTopocentricCoordinates();
+	if(topocentricWereEnabled)
+	{
+		core->setUseTopocentricCoordinates(false);
+		core->update(0);
+	}
+
+	double raMoon, deMoon, raSun, deSun;
+	StelUtils::rectToSphe(&raSun, &deSun, ssystem->getSun()->getEquinoxEquatorialPos(core));
+	StelUtils::rectToSphe(&raMoon, &deMoon, ssystem->getMoon()->getEquinoxEquatorialPos(core));
+
+	double sdistanceAu = ssystem->getSun()->getEquinoxEquatorialPos(core).norm();
+	const double earthRadius = ssystem->getEarth()->getEquatorialRadius()*AU;
+	// Moon's distance in Earth's radius
+	double mdistanceER = ssystem->getMoon()->getEquinoxEquatorialPos(core).norm() * AU / earthRadius;
+	// Greenwich Apparent Sidereal Time
+	const double gast = get_apparent_sidereal_time(core->getJD(), core->getJDE());
+
+	// Avoid bug for special cases happen around Vernal Equinox
+	double raDiff = StelUtils::fmodpos(raMoon-raSun, 2.*M_PI);
+	if (raDiff>M_PI) raDiff-=2.*M_PI;
+
+	constexpr double SunEarth = 109.12278;
+	// ratio of Sun-Earth radius : 109.12278 = 696000/6378.1366
+	// Earth's equatorial radius = 6378.1366
+	// Source: IERS Conventions (2003)
+	// https://www.iers.org/IERS/EN/Publications/TechnicalNotes/tn32.html
+
+	// NASA's solar eclipse predictions use solar radius of 696,000 km
+	// calculated from arctan of IAU 1976 solar radius (959.63 arcsec at 1 au).
+
+	const double rss = sdistanceAu * 23454.7925; // from 1 AU/Earth's radius : 149597870.8/6378.1366
+	const double b = mdistanceER / rss;
+	const double a = raSun - ((b * cos(deMoon) * raDiff) / ((1 - b) * cos(deSun)));
+	out.d = deSun - (b * (deMoon - deSun) / (1 - b));
+	out.x = cos(deMoon) * sin((raMoon - a));
+	out.x *= mdistanceER;
+	out.y = cos(out.d) * sin(deMoon);
+	out.y -= cos(deMoon) * sin(out.d) * cos((raMoon - a));
+	out.y *= mdistanceER;
+	double z = sin(deMoon) * sin(out.d);
+	z += cos(deMoon) * cos(out.d) * cos((raMoon - a));
+	z *= mdistanceER;
+	const double k = 0.2725076;
+	const double s = 0.272281;
+	// Ratio of Moon/Earth's radius 0.2725076 is recommended by IAU for both k & s
+	// s = 0.272281 is used by Fred Espenak/NASA for total eclipse to eliminate extreme cases
+	// when the Moon's apparent diameter is very close to the Sun but cannot completely cover it.
+	// we will use two values (same with NASA), because durations seem to agree with NASA.
+	// Source: Solar Eclipse Predictions and the Mean Lunar Radius
+	// http://eclipsewise.com/solar/SEhelp/SEradius.html
+
+	// Parameters of the shadow cone
+	const double f1 = asin((SunEarth + k) / (rss * (1. - b)));
+	out.tf1 = tan(f1);
+	const double f2 = asin((SunEarth - s) / (rss * (1. - b)));
+	out.tf2 = tan(f2);
+	out.L1 = z * out.tf1 + (k / cos(f1));
+	out.L2 = z * out.tf2 - (s / cos(f2));
+	out.mu = gast - a * M_180_PI;
+	out.mu = StelUtils::fmodpos(out.mu, 360.);
+
+	if(topocentricWereEnabled)
+	{
+		core->setUseTopocentricCoordinates(true);
+		core->update(0);
+	}
+
+	return out;
+}
+
 EclipseBesselParameters calcBesselParameters(bool penumbra)
 {
 	EclipseBesselParameters out;
@@ -204,6 +286,135 @@ EclipseBesselParameters calcBesselParameters(bool penumbra)
 	out.cdot = out.xdot + out.mudot * ep.y * std::sin(ep.d) + out.mudot * L * tf * std::cos(ep.d);
 
 	return out;
+}
+
+void calcSolarEclipseData(double JD, double &dRatio, double &latDeg, double &lngDeg, double &altitude,
+                          double &pathWidth, double &duration, double &magnitude)
+{
+	StelCore* core = StelApp::getInstance().getCore();
+	const double currentJD = core->getJDOfLastJDUpdate(); // save current JD
+	const qint64 millis = core->getMilliSecondsOfLastJDUpdate(); // keep time in sync
+	const bool saveTopocentric = core->getUseTopocentricCoordinates();
+
+	core->setUseTopocentricCoordinates(false);
+	core->setJD(JD);
+	core->update(0);
+
+	static SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
+	static const double earthRadius = ssystem->getEarth()->getEquatorialRadius()*AU;
+	static const double f = 1.0 - ssystem->getEarth()->getOneMinusOblateness(); // flattening
+	static const double e2 = f*(2.-f);
+	static const double ff = 1./(1.-f);
+
+	const auto ep = calcSolarEclipseBessel();
+	const double rho1 = sqrt(1. - e2 * cos(ep.d) * cos(ep.d));
+	const double eta1 = ep.y / rho1;
+	const double sd1 = sin(ep.d) / rho1;
+	const double cd1 = sqrt(1. - e2) * cos(ep.d) / rho1;
+	const double rho2 = sqrt(1.- e2 * sin(ep.d) * sin(ep.d));
+	const double sd1d2 = e2*sin(ep.d)*cos(ep.d) / (rho1*rho2);
+	const double cd1d2 = sqrt(1. - sd1d2 * sd1d2);
+	const double p = 1. - ep.x * ep.x - eta1 * eta1;
+
+	if (p > 0.) // Central eclipse : Moon's shadow axis is touching Earth
+	{
+		const double zeta1 = sqrt(p);
+		const double zeta = rho2 * (zeta1 * cd1d2 - eta1 * sd1d2);
+		const double L2a = ep.L2 - zeta * ep.tf2;
+		const double b = -ep.y * sin(ep.d) + zeta * cos(ep.d);
+		const double theta = atan2(ep.x, b) * M_180_PI;
+		lngDeg = theta - ep.mu;
+		lngDeg = StelUtils::fmodpos(lngDeg, 360.);
+		if (lngDeg > 180.) lngDeg -= 360.;
+		const double sfn1 = eta1 * cd1 + zeta1 * sd1;
+		const double cfn1 = sqrt(1. - sfn1 * sfn1);
+		latDeg = atan(ff * sfn1 / cfn1) / M_PI_180;
+		const double L1a = ep.L1 - zeta * ep.tf1;
+		magnitude = L1a / (L1a + L2a);
+		dRatio = 1.+(magnitude-1.)*2.;
+
+		core->setJD(JD - 5./1440.);
+		core->update(0);
+
+		const auto ep1 = calcSolarEclipseBessel();
+
+		core->setJD(JD + 5./1440.);
+		core->update(0);
+
+		const auto ep2 = calcSolarEclipseBessel();
+
+		// Hourly rate
+		const double xdot = (ep2.x - ep1.x) * 6.;
+		const double ydot = (ep2.y - ep1.y) * 6.;
+		const double ddot = (ep2.d - ep1.d) * 6.;
+		double mudot = (ep2.mu - ep1.mu);
+		if (mudot<0.) mudot += 360.; // make sure it is positive in case ep2.mu < ep1.mu
+		mudot = mudot * 6.* M_PI_180;
+
+		// Duration of central eclipse in minutes
+		const double etadot = mudot * ep.x * sin(ep.d) - ddot * zeta;
+		const double xidot = mudot * (-ep.y * sin(ep.d) + zeta * cos(ep.d));
+		const double n = sqrt((xdot - xidot) * (xdot - xidot) + (ydot - etadot) * (ydot - etadot));
+		duration = L2a*120./n; // positive = annular eclipse, negative = total eclipse
+
+		// Approximate altitude
+		altitude = asin(cfn1*cos(ep.d)*cos(theta * M_PI_180)+sfn1*sin(ep.d)) / M_PI_180;
+
+		// Path width in kilometers
+		// Explanatory Supplement to the Astronomical Almanac
+		// Seidelmann, P. Kenneth, ed. (1992). University Science Books. ISBN 978-0-935702-68-2
+		// https://archive.org/details/131123ExplanatorySupplementAstronomicalAlmanac
+		// Path width for central solar eclipses which only part of umbra/antumbra touches Earth
+		// are too wide and could give a false impression, annular eclipse of 2003 May 31, for example.
+		// We have to check this in the next step by calculating northern/southern limit of umbra/antumbra.
+		// Don't show the path width if there is no northern limit or southern limit.
+		// We will eventually have to calculate both limits, if we want to draw eclipse path on world map.
+		const double p1 = zeta * zeta;
+		const double p2 = ep.x * (xdot - xidot) / n;
+		const double p3 = eta1 * (ydot - etadot) / n;
+		const double p4 = (p2 + p3) * (p2 + p3);
+		pathWidth = abs(earthRadius*2.*L2a/sqrt(p1+p4));
+	}
+	else  // Partial eclipse or non-central eclipse
+	{
+		const double yy1 = ep.y / rho1;
+		double xi = ep.x / sqrt(ep.x * ep.x + yy1 * yy1);
+		const double eta1 = yy1 / sqrt(ep.x * ep.x + yy1 * yy1);
+		const double sd1 = sin(ep.d) / rho1;
+		const double cd1 = sqrt(1.- e2) * cos(ep.d) / rho1;
+		const double rho2 = sqrt(1.- e2 * sin(ep.d) * sin(ep.d));
+		const double sd1d2 = e2 * sin(ep.d) * cos(ep.d) / (rho1 * rho2);
+		double zeta = rho2 * (-(eta1) * sd1d2);
+		const double b = -eta1 * sd1;
+		double theta = atan2(xi, b);
+		const double sfn1 = eta1*cd1;
+		const double cfn1 = sqrt(1.- sfn1 * sfn1);
+		double lat = ff * sfn1 / cfn1;
+		lat = atan(lat);
+		const double L1 = ep.L1 - zeta * ep.tf1;
+		const double L2 = ep.L2 - zeta * ep.tf2;
+		const double c = 1. / sqrt(1.- e2 * sin(lat) * sin(lat));
+		const double s = (1.- e2) * c;
+		const double rs = s * sin(lat);
+		const double rc = c * cos(lat);
+		xi = rc * sin(theta);
+		const double eta = rs * cos(ep.d) - rc * sin(ep.d) * cos(theta);
+		const double u = ep.x - xi;
+		const double v = ep.y - eta;
+		magnitude = (L1 - sqrt(u * u + v * v)) / (L1 + L2);
+		dRatio = 1.+ (magnitude - 1.)* 2.;
+		theta = theta / M_PI_180;
+		lngDeg = theta - ep.mu;
+		lngDeg = StelUtils::fmodpos(lngDeg, 360.);
+		if (lngDeg > 180.) lngDeg -= 360.;
+		latDeg = lat / M_PI_180;
+		duration = 0.;
+		pathWidth = 0.;
+	}
+	core->setJD(currentJD);
+	core->setMilliSecondsOfLastJDUpdate(millis); // restore millis.
+	core->setUseTopocentricCoordinates(saveTopocentric);
+	core->update(0);
 }
 
 SolarEclipseComputer::SolarEclipseComputer(StelCore* core, StelLocaleMgr* localeMgr)
