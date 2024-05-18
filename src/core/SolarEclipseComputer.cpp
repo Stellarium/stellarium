@@ -426,6 +426,18 @@ SolarEclipseComputer::SolarEclipseComputer(StelCore* core, StelLocaleMgr* locale
 {
 }
 
+bool SolarEclipseComputer::bothPenumbraLimitsPresent(const double JDMid) const
+{
+	core->setJD(JDMid);
+	core->update(0);
+	const auto ep = calcSolarEclipseBessel();
+	// FIXME: can the rise-set line exist at greatest eclipse but not exist at some other phase?
+	// It seems that ellipticity of the Earth could result in this, because greatest eclipse is
+	// defined relative to Earth's center rather than to its rim.
+	const auto coordinates = getRiseSetLineCoordinates(true, ep.x, ep.y, ep.d, ep.L1, ep.mu);
+	return coordinates.latitude > 90;
+}
+
 auto SolarEclipseComputer::generateEclipseMap(const double JDMid) const -> EclipseMapData
 {
 	const bool savedTopocentric = core->getUseTopocentricCoordinates();
@@ -460,13 +472,7 @@ auto SolarEclipseComputer::generateEclipseMap(const double JDMid) const -> Eclip
 	double JDP2 = 0., JDP3 = 0.;
 	GeoPoint coordinates;
 	// Check northern/southern limits of penumbra at greatest eclipse
-	bool bothPenumbralLimits = false;
-	coordinates = getNSLimitOfShadow(JDMid,true,true);
-	double latPL1 = coordinates.latitude;
-	coordinates = getNSLimitOfShadow(JDMid,false,true);
-	double latPL2 = coordinates.latitude;
-	if (latPL1 <= 90. && latPL2 <= 90.)
-		bothPenumbralLimits = true;
+	const bool bothPenumbralLimits = bothPenumbraLimitsPresent(JDMid);
 
 	if (bothPenumbralLimits)
 	{

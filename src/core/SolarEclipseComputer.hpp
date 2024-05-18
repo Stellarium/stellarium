@@ -180,6 +180,11 @@ public:
 	bool generatePNGMap(const EclipseMapData& data, const QString& filePath) const;
 
 private:
+	//! Check whether both northern and southern penumbra limits exist for a given eclipsee
+	//! @param JDMid time of greatest eclipse
+	bool bothPenumbraLimitsPresent(double JDMid) const;
+
+private:
 	StelCore* core = nullptr;
 	StelLocaleMgr* localeMgr = nullptr;
 };
