@@ -35,6 +35,7 @@
 #include <QMutex>
 #include <QtCharts/qchartview.h>
 
+#include "SolarEclipseComputer.hpp"
 #include "AstroCalcChart.hpp"
 #include "StelDialog.hpp"
 #include "StelCore.hpp"
@@ -78,82 +79,10 @@ class AstroCalcDialog : public StelDialog
 {
 	Q_OBJECT
 
-	struct EclipseMapData
-	{
-		enum class EclipseType
-		{
-			Undefined,
-			Total,
-			Annular,
-			Hybrid,
-		};
-		struct GeoPoint
-		{
-			double longitude;
-			double latitude;
-
-			GeoPoint() = default;
-			GeoPoint(double lon, double lat)
-				: longitude(lon), latitude(lat)
-			{
-			}
-		};
-		struct GeoTimePoint
-		{
-			double JD = -1;
-			double longitude;
-			double latitude;
-
-			GeoTimePoint() = default;
-			GeoTimePoint(double JD, double lon, double lat)
-				: JD(JD), longitude(lon), latitude(lat)
-			{
-			}
-		};
-		struct UmbraLimit
-		{
-			std::vector<GeoPoint> curve;
-			EclipseType eclipseType = EclipseType::Undefined;
-		};
-		struct UmbraOutline
-		{
-			std::vector<GeoPoint> curve;
-			double JD;
-			EclipseType eclipseType = EclipseType::Undefined;
-		};
-		GeoTimePoint greatestEclipse;
-		GeoTimePoint firstContactWithEarth; // AKA P1
-		GeoTimePoint lastContactWithEarth;  // AKA P4
-		GeoTimePoint centralEclipseStart;   // AKA C1
-		GeoTimePoint centralEclipseEnd;     // AKA C2
-
-		// The array elements are {northLimit, southLimit}
-		std::deque<GeoTimePoint> penumbraLimits[2];
-
-		// The curves in arrays are split into two lines by the computation algorithm
-		struct TwoLimits
-		{
-			std::vector<GeoPoint> p12curve;
-			std::vector<GeoPoint> p34curve;
-		};
-		struct SingleLimit
-		{
-			std::vector<GeoPoint> curve;
-		};
-		std::variant<SingleLimit,TwoLimits> riseSetLimits[2];
-
-		// These curves appear to be split generally in multiple sections
-		std::vector<std::deque<GeoTimePoint>> maxEclipseAtRiseSet;
-
-		std::vector<GeoPoint> centerLine;
-		std::vector<UmbraOutline> umbraOutlines;
-		std::vector<UmbraLimit> extremeUmbraLimit1;
-		std::vector<UmbraLimit> extremeUmbraLimit2;
-
-		EclipseType eclipseType;
-	};
-
 public:
+	using EclipseMapData = SolarEclipseComputer::EclipseMapData;
+	using GeoPoint = SolarEclipseComputer::GeoPoint;
+
 	//! Defines the number and the order of the columns in the table that lists celestial bodies positions
 	//! @enum CPositionsColumns
 	enum CPositionsColumns {
@@ -518,16 +447,6 @@ private slots:
 	void saveGraph(QChartView *graph);
 
 private:
-	struct GeoPoint
-	{
-		double latitude;
-		double longitude;
-		GeoPoint() = default;
-		GeoPoint(double latitude, double longitude)
-			: latitude(latitude), longitude(longitude)
-		{
-		}
-	};
 	class AstroCalcExtraEphemerisDialog* extraEphemerisDialog = nullptr;
 	class AstroCalcCustomStepsDialog* customStepsDialog = nullptr;
 	class StelCore* core = nullptr;
@@ -557,6 +476,7 @@ private:
 	QTimer *currentTimeLine = nullptr;
 	QHash<QString,int> wutCategories;
 	QList<HECPosition> hecObjects;
+	SolarEclipseComputer ecliptor;
 
 	void saveTableAsCSV(const QString& fileName, QTreeWidget* tWidget, QStringList& headers);
 	void saveTableAsXLSX(const QString& fileName, QTreeWidget* tWidget, QStringList& headers, const QString& title, const QString& sheetName, const QString &note = "");
@@ -612,24 +532,6 @@ private:
 	void initListSolarEclipse();
 	//! Init header and list of solar eclipse contact
 	void initListSolarEclipseContact();
-	//! Iteration to calculate minimum distance from Besselian elements
-	double getJDofMinimumDistance(double JD);
-	//! Iteration to calculate JD of solar eclipse contacts
-	double getJDofContact(double JD, bool beginning, bool penumbral, bool external, bool outerContact);
-	//! Iteration to calculate contact times of solar eclipse
-	double getDeltaTimeOfContact(double JD, bool beginning, bool penumbra, bool external, bool outerContact);
-	//! Geographic coordinates where solar eclipse begins/ends at sunrise/sunset
-	GeoPoint getRiseSetLineCoordinates(bool first, double x, double y, double d, double L, double mu);
-	//! Geographic coordinates where maximum solar eclipse occurs at sunrise/sunset
-	GeoPoint getMaximumEclipseAtRiseSet(bool first, double JD);
-	//! Geographic coordinates of shadow outline
-	GeoPoint getShadowOutlineCoordinates(double angle, double x, double y, double d, double L, double tf,double mu);
-	//! Geographic coordinates of northern and southern limit of shadow
-	GeoPoint getNSLimitOfShadow(double JD, bool northernLimit, bool penumbra);
-	//! Geographic coordinates of extreme northern and southern limits of shadow
-	GeoPoint getExtremeNSLimitOfShadow(double JD, bool northernLimit, bool penumbra, bool begin);
-	//! Geographic coordinates of extreme contact
-	GeoPoint getContactCoordinates(double x, double y, double d, double mu);
 	//! Init header and list of local solar eclipse
 	void initListSolarEclipseLocal();
 	//! Init header and list of transit
@@ -747,10 +649,6 @@ private:
 	//! Make sure that no tabs icons are outside of the viewport.
 	//! @todo Limit the width to the width of the screen *available to the window*.
 	void updateTabBarListWidgetWidth();
-
-	EclipseMapData generateEclipseMap(double JDMid);
-	void generateKML(const EclipseMapData& data, const QString& dateString, QTextStream& stream) const;
-	void generatePNGMap(const EclipseMapData& data, const QString& filePath) const;
 
 	void enableAngularLimits(bool enable);
 
@@ -1099,22 +997,6 @@ private:
 		}
 	}
 };
-
-struct EclipseBesselParameters
-{
-	double xdot;  //!< rate of change of X in Earth radii per second
-	double ydot;  //!< rate of change of Y in Earth radii per second
-	double ddot;  //!< rate of change of d in radians per second
-	double mudot; //!< rate of change of mu in radians per second
-	double ldot;  //!< rate of change of L1 (for penumbra) or L2 (for umbra) in Earth radii per second
-	double etadot;
-	double bdot;
-	double cdot;
-	EclipseBesselElements elems;
-};
-
-// Compute parameters from Besselian elements
-EclipseBesselParameters calcBesselParameters(bool penumbra);
 
 //! Derived from QTreeWidgetItem class with customized sort
 class ACSolarEclipseLocalTreeWidgetItem : public QTreeWidgetItem
