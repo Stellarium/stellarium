@@ -422,10 +422,7 @@ void Planet::setIAUMoonNumber(const QString &designation)
 
 QString Planet::getEnglishName() const
 {
-	if (!iauMoonNumber.isEmpty())
-		return QString("(%1) %2").arg(iauMoonNumber, englishName);
-	else
-		return englishName;
+	return englishName;
 }
 
 QString Planet::getIAUDesignation() const
@@ -443,10 +440,7 @@ QString Planet::getIAUDesignation() const
 
 QString Planet::getNameI18n() const
 {
-	if (!iauMoonNumber.isEmpty())
-		return QString("(%1) %2").arg(iauMoonNumber, nameI18);
-	else
-		return nameI18;
+	return nameI18;
 }
 
 QString Planet::getDiscoveryCircumstances() const
@@ -520,7 +514,13 @@ QString Planet::getInfoStringName(const StelCore *core, const InfoStringGroup& f
 	Q_UNUSED(core) Q_UNUSED(flags)
 	QString str;
 	QTextStream oss(&str);
-	oss << "<h2>" << getPlanetLabel();
+	oss << "<h2>";
+
+	// NOTE: currently only moons have an IAU designation
+	if (!iauMoonNumber.isEmpty())
+		oss << QString("(%1) ").arg(iauMoonNumber);
+
+	oss << getPlanetLabel();
 
 	// NOTE: currently only moons have an IAU designation
 	QString iau = getIAUDesignation();
