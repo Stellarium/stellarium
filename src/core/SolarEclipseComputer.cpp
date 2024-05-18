@@ -1543,10 +1543,11 @@ auto SolarEclipseComputer::getShadowOutlineCoordinates(double angle,double x,dou
 
 auto SolarEclipseComputer::getMaximumEclipseAtRiseSet(bool first, double JD) const -> GeoPoint
 {
-	// Source: Explanatory Supplement to the Astronomical Ephemeris 
-	// and the American Ephemeris and Nautical Almanac (1961)
+	// Reference: Explanatory Supplement to the Astronomical Ephemeris
+	// and the American Ephemeris and Nautical Almanac, 3rd Edition (2013)
 	static SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
 	static const double f = 1.0 - ssystem->getEarth()->getOneMinusOblateness(); // flattening
+	static const double e2 = f*(2.-f);
 	static const double ff = 1./(1.-f);
 	core->setJD(JD);
 	core->update(0);
@@ -1554,32 +1555,56 @@ auto SolarEclipseComputer::getMaximumEclipseAtRiseSet(bool first, double JD) con
 	const double bdot = bp.bdot, cdot = bp.cdot;
 	const double x = bp.elems.x, y = bp.elems.y, d = bp.elems.d, L1 = bp.elems.L1, mu = bp.elems.mu;
 
-	double qa = std::atan2(bdot,cdot);
+	using namespace std;
+
+	const double sind = sin(d);
+	const double cosd = cos(d);
+	const double rho1 = sqrt(1-e2*sqr(cosd));
+	const double rho2 = sqrt(1-e2*sqr(sind));
+	const double sd1 = sind/rho1;
+	const double cd1 = sqrt(1-e2)*cosd/rho1;
+	const double sdd = e2*sind*cosd/(rho1*rho2);   // sin(d1-d2)
+	const double cdd = sqrt(1-sqr(sdd));           // cos(d1-d2)
+
+	double qa = atan2(bdot,cdot);
 	if (!first) // there are two parts of the curve
 		qa += M_PI;
-	const double sgqa = x*std::cos(qa)-y*std::sin(qa);
+	const double sgqa = x*cos(qa)-y*sin(qa);
 
 	GeoPoint coordinates(99., 0.);
-	if (std::abs(sgqa) > 1.) return coordinates;
 
-	const double gqa = std::asin(sgqa);
-	const double gamma = gqa+qa;
-	const double xi = std::sin(gamma);
-	const double eta = std::cos(gamma);
-	const double xxia = x-xi;
-	const double yetaa = y-eta;
-	if (xxia*xxia+yetaa*yetaa > L1*L1) return coordinates;
+	// Iteration as described in equations (11.89) and (11.94) in the reference book
+	double rho = 1, gamma;
+	for(int n = 0; n < 3; ++n)
+	{
+		if(abs(sgqa / rho) > 1) return coordinates;
+		const double gqa = asin(sgqa / rho);
+		gamma = gqa+qa;
+		const double cosGamma = cos(gamma);
+		const double rho1sinGamma = rho1 * sin(gamma);
+		// simplified sin(atan2(rho1 * sin(gamma), cos(gamma)))
+		const double sinGammaPrime = rho1sinGamma / sqrt(sqr(rho1sinGamma)+sqr(cosGamma));
+		rho = sinGammaPrime / sin(gamma);
+	}
 
-	const double b = -eta*std::sin(d);
-	const double theta = std::atan2(xi,b)*M_180_PI;
-	double lngDeg = StelUtils::fmodpos(theta-mu, 360.);
+	const double xi = rho * sin(gamma);
+	const double eta = rho * cos(gamma);
+
+	if (sqr(x-xi)+sqr(y-eta) > sqr(L1)) return coordinates;
+
+	const double eta1 = eta / rho1;
+	const double zeta1 = (0 + eta1 * sdd) / cdd;
+
+	const double b = -eta1*sd1+zeta1*cd1;
+	const double theta = atan2(xi,b)*M_180_PI;
+	double lngDeg = theta-mu;
+	lngDeg = StelUtils::fmodpos(lngDeg, 360.);
 	if (lngDeg > 180.) lngDeg -= 360.;
-	const double sfn1 = std::cos(gamma)*std::cos(d);
-	const double cfn1 = std::sqrt(1.-sfn1*sfn1);
+	const double sfn1 = eta1*cd1+zeta1*sd1;
+	const double cfn1 = sqrt(1.-sfn1*sfn1);
 	const double tanLat = ff*sfn1/cfn1;
-	coordinates.latitude = std::atan(tanLat)*M_180_PI;
+	coordinates.latitude = atan(tanLat)*M_180_PI;
 	coordinates.longitude = lngDeg;
-
 	return coordinates;
 }
 
