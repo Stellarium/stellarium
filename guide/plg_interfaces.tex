@@ -738,14 +738,18 @@ File \file{data/ssystem\_major.ini} in the installation directory contains data 
 File \file{data/ssystem\_minor.ini} contains data for minor bodies, i.e., planetoids and comets.
 The file will be taken from the user data directory if it also exists there, which means that users can add minor planets or comets as they become observable by editing this file.
 
-The orbits of minor bodies (minor planets and comets) are specified with \indexterm{orbital elements} for 
+The orbits of minor bodies (minor planets and comets) are specified with \indexterm[orbital elements, osculating]{orbital elements} for 
 \indexterm{Kepler orbits} (after \name[Johannes]{Kepler} (1572--1630) who found the true shape of the orbit 
 of a small body around a large one being a conic section, i.e., circle, ellipse, parabola or hyperbola). These elements 
 describe the instantaneous shape and orientation of the object's orbit around the Sun at a particular time 
-called the \indexterm{epoch}.  See Appendix~\ref{sec:ssystem.ini} for more details. 
-We compute positions from these unperturbed orbits, but the result is only valid for 
+called the \indexterm{epoch}.  
+We compute positions from these \indexterm[orbital elements, osculating]{osculating elements} of minor body orbits, but the result is only valid for 
 a moderately short timespan around the epoch, because the major planets can exert noticeable gravitational perturbations 
-on the objects when they come close, and so these orbital elements need to be updated on a regular basis. 
+on the objects when they come close, and so these orbital elements, which are mere snapshots in time, need to be updated on a regular basis. 
+Stellarium does not perform numerical integration that could work out the orbital changes automatically, 
+and so the element file needs to be modified to compute positions further away from the orbit's epoch. 
+See Appendix~\ref{sec:ssystem.ini} for more details, 
+and see e.g.\ \citet{Meeus:Morsels4} for a discussion of a few interesting examples of orbital development.
 When you go out hunting for asteroids and comets, this plugin is for you.
 
 This plugin provides access to the Minor Planet Center (MPC\footnote{\url{https://www.minorplanetcenter.net}}) server where the latest Solar System information can be found. When this plugin is
