@@ -80,7 +80,7 @@ switching it off on a computer which does not move, to save network bandwidth.
 
 To set your location more accurately, or if the lookup service fails,
 press \key{F6} to open the location window (Fig.~\ref{fig:gui:location}). 
-There are a few ways you can set your location:
+There are a few ways you can set your location in this dialog:
 
 \begin{enumerate}
 \item Just click on the map.
@@ -92,7 +92,7 @@ There are a few ways you can set your location:
 \item Enter a new location using the longitude, latitude and other
   data.
 \item Click on \menu{Get Location from GPS} if you have a GPS
-  receiver. \newFeature{0.16/0.18.1} You activate a periodic request
+  receiver.\newFeature{0.16/0.18.1} You activate a periodic request
   for GPS fixes. After a few seconds, the button should change color
   and give a textual feedback. Green indicates a good position, yellow
   indicates a 2D-fix only, which means altitudes are not
@@ -107,6 +107,8 @@ There are a few ways you can set your location:
   Sometimes you have to try several times or let it run for a while to get a
   green button indicating a valid 3D fix including altitude.
   See section~\ref{sec:ExtraData:GPS} for configuration details.
+  
+  On Windows, if there is no GPS device, a system location service will be queried as fallback.\newFeature{1.0}
 \end{enumerate}
 
 \noindent If you want to use the current location permanently, click on the
@@ -122,6 +124,8 @@ a zero-altitude landscape is displayed in the approximate color of that location
 \item[Auto-enable atmosphere] When changing planet during
   location change, the atmosphere will be switched as required.
 \end{description}
+
+As a reverse functionality, loading landscapes may also change location. See section~\ref{sec:gui:view:landscape}.
 
 \subsection{Time Zones}
 \label{sec:gui:location:timezones}
@@ -823,11 +827,11 @@ website\footnote{\url{https://stellarium.org/landscapes.html}}
 or create yourself (see ch.~\ref{ch:landscapes} Landscapes), or remove
 these custom landscapes.
 
-Loading large landscapes may take several seconds. \newFeature{0.15.2}
+Loading large landscapes may take several seconds.\newFeature{0.15.2}
 If you like to switch rapidly between several landscapes and have enough memory, 
 you can increase the default cache size to keep more landscapes loaded previously 
 available in memory. Note that a large landscape can take up 200MB or more! 
-See section \ref{sec:configini:landscape}.
+See section~\ref{sec:configini:landscape}.
 
 \subsection{The Starlore Tab}
 \label{sec:gui:view:starlore}
