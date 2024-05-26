@@ -3258,16 +3258,26 @@ void Oculars::toggleFocuserOverlay()
 double Oculars::computeLimitMagnitude(Ocular *ocular, Telescope *telescope)
 {
 	// Simplified calculation of the penetrating power of the telescope
-	double diameter = 0.;
 	if (ocular->isBinoculars())
-		diameter = ocular->fieldStop();
+	{
+		// Harald Lang's modified version of Carlin's formula (see below)
+		// 3 log A + 2 log X + 0.6 + v
+		// A = aperture in cm
+		// X = magnification
+		// 0.6 = constant of exit pupil
+		// v = Naked Eye Lim Mag
+		// https://www.cloudynights.com/topic/99013-binocular-limiting-magnitude/
+		const auto drawer = StelApp::getInstance().getCore()->getSkyDrawer();
+		const float nelm = StelCore::luminanceToNELM(drawer->getLightPollutionLuminance());
+		return 3.0*std::log10(ocular->fieldStop()/10) + 2.0*std::log10(ocular->effectiveFocalLength()) + 0.6 + nelm;
+	}
 	else
-		diameter = telescope!=Q_NULLPTR ? telescope->diameter() : 0.1; // Avoid a potential call of null pointer, and a log(0) error.
-
-	// A better formula for telescopic limiting magnitudes?
-	// North, G.; Journal of the British Astronomical Association, vol.107, no.2, p.82
-	// http://adsabs.harvard.edu/abs/1997JBAA..107...82N
-	return 4.5 + 4.4*std::log10(diameter);
+	{
+		// A better formula for telescopic limiting magnitudes?
+		// North, G.; Journal of the British Astronomical Association, vol.107, no.2, p.82
+		// http://adsabs.harvard.edu/abs/1997JBAA..107...82N
+		return 4.5 + 4.4*std::log10((telescope!=Q_NULLPTR) ? telescope->diameter() : 0.1); // Avoid a potential call of null pointer, and a log(0) error.
+	}
 }
 
 void Oculars::handleAutoLimitToggle(bool on)

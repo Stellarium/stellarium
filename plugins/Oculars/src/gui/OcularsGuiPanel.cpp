@@ -137,6 +137,7 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	fieldAbbeyCriterion = new QGraphicsTextItem(telescopeControls);
 	fieldSparrowCriterion = new QGraphicsTextItem(telescopeControls);
 	fieldVisualResolution = new QGraphicsTextItem(telescopeControls);
+	fieldLimitMagnitude = new QGraphicsTextItem(telescopeControls);
 
 	fieldLensName = new QGraphicsTextItem(lensControls);
 	fieldLensMultipler = new QGraphicsTextItem(lensControls);
@@ -369,6 +370,7 @@ OcularsGuiPanel::~OcularsGuiPanel()
 	delete fieldAbbeyCriterion; fieldAbbeyCriterion = Q_NULLPTR;
 	delete fieldSparrowCriterion; fieldSparrowCriterion = Q_NULLPTR;
 	delete fieldVisualResolution; fieldVisualResolution = Q_NULLPTR;
+	delete fieldLimitMagnitude; fieldLimitMagnitude = Q_NULLPTR;
 	delete fieldLensName; fieldLensName = Q_NULLPTR;
 	delete fieldLensMultipler; fieldLensMultipler = Q_NULLPTR;
 }
@@ -1022,13 +1024,32 @@ void OcularsGuiPanel::updateTelescopeControls()
 		fieldVisualResolution->setPlainText(visualResolutionLabel);
 		fieldVisualResolution->setToolTip(q_("Visual resolution is based on eye properties and magnification"));
 		fieldVisualResolution->setPos(posX, posY);
-		//posY += fieldVisualResolution->boundingRect().height();
+		posY += fieldVisualResolution->boundingRect().height();
 		widgetHeight += fieldVisualResolution->boundingRect().height();
 
 		fieldVisualResolution->setVisible(true);
 	}
 	else
 		fieldVisualResolution->setVisible(false);
+
+	// Limiting magnitude of binocular or ocular/lens/telescope combination
+	if (ocularsPlugin->flagShowOculars)
+	{
+		Ocular* ocular = ocularsPlugin->oculars[ocularsPlugin->selectedOcularIndex];
+		QString limitMagnitudeLabel = QString("%1: %2").arg(qc_("Limiting magnitude", "Limiting magnitude of device"), QString::number(ocularsPlugin->getLimitMagnitude(ocular, telescope), 'f', 2));
+		fieldLimitMagnitude->setPlainText(limitMagnitudeLabel);
+		if (isBinocular)
+			fieldLimitMagnitude->setToolTip(q_("Approximate limiting magnitude of this binocular"));
+		else
+			fieldLimitMagnitude->setToolTip(q_("Approximate limiting magnitude of this ocular/lens/telescope combination"));
+		fieldLimitMagnitude->setPos(posX, posY);
+		//posY += fieldLimitMagnitude->boundingRect().height();
+		widgetHeight += fieldLimitMagnitude->boundingRect().height();
+
+		fieldLimitMagnitude->setVisible(true);
+	}
+	else
+		fieldLimitMagnitude->setVisible(false);
 
 	telescopeControls->setMinimumSize(widgetWidth, widgetHeight);
 	telescopeControls->resize(widgetWidth, widgetHeight);
@@ -1194,6 +1215,7 @@ void OcularsGuiPanel::setControlsColor(const QColor& color)
 	Q_ASSERT(fieldAbbeyCriterion);
 	Q_ASSERT(fieldSparrowCriterion);
 	Q_ASSERT(fieldVisualResolution);
+	Q_ASSERT(fieldLimitMagnitude);
 	Q_ASSERT(fieldLensName);
 	Q_ASSERT(fieldLensMultipler);
 
@@ -1220,6 +1242,7 @@ void OcularsGuiPanel::setControlsColor(const QColor& color)
 	fieldAbbeyCriterion->setDefaultTextColor(color);
 	fieldSparrowCriterion->setDefaultTextColor(color);
 	fieldVisualResolution->setDefaultTextColor(color);
+	fieldLimitMagnitude->setDefaultTextColor(color);
 	fieldLensName->setDefaultTextColor(color);
 	fieldLensMultipler->setDefaultTextColor(color);
 }
@@ -1249,6 +1272,7 @@ void OcularsGuiPanel::setControlsFont(const QFont& font)
 	Q_ASSERT(fieldAbbeyCriterion);
 	Q_ASSERT(fieldSparrowCriterion);
 	Q_ASSERT(fieldVisualResolution);
+	Q_ASSERT(fieldLimitMagnitude);
 	Q_ASSERT(fieldLensName);
 	Q_ASSERT(fieldLensMultipler);
 
@@ -1275,6 +1299,7 @@ void OcularsGuiPanel::setControlsFont(const QFont& font)
 	fieldAbbeyCriterion->setFont(font);
 	fieldSparrowCriterion->setFont(font);
 	fieldVisualResolution->setFont(font);
+	fieldLimitMagnitude->setFont(font);
 	fieldLensName->setFont(font);
 	fieldLensMultipler->setFont(font);
 }
