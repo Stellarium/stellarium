@@ -882,7 +882,7 @@ void OcularsGuiPanel::updateTelescopeControls()
 			fieldMagnification->setToolTip(q_("Magnification provided by these binoculars"));
 			fieldFov->setToolTip(q_("Actual field of view provided by these binoculars"));
 			fieldExitPupil->setToolTip(q_("Exit pupil provided by these binoculars"));
-			fieldTwilightFactor->setToolTip(q_("Twilight factor (or dust index) provided by these binoculars"));
+			fieldTwilightFactor->setToolTip(q_("Twilight factor (or dusk index) provided by these binoculars"));
 			fieldRelativeBrightness->setToolTip(q_("Relative brightness provided by these binoculars"));
 			fieldAdlerIndex->setToolTip(q_("Alan Adler's Index (or Astro Index) provided by these binoculars"));
 			fieldBishopIndex->setToolTip(q_("Roy Bishop's Index (or Visibility Factor) provided by these binoculars"));
