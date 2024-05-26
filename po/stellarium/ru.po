@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2024-05-24 19:26+0700\n"
+"POT-Creation-Date: 2024-05-26 18:29+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Alexander V. Wolf <alex.v.wolf@gmail.com>, 2024\n"
 "Language-Team: Russian (https://app.transifex.com/stellarium/teams/80998/ru/)\n"
@@ -16476,42 +16476,42 @@ msgid "Toggle Oculars button bar"
 msgstr "Переключить панель инструментов плагина \"Окуляры\""
 
 #: plugins/Oculars/src/Oculars.cpp:1499
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:205
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:208
 msgid "Select next telescope"
 msgstr "Выбрать следующий телескоп"
 
 #: plugins/Oculars/src/Oculars.cpp:1501
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:203
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:206
 msgid "Select previous telescope"
 msgstr "Выбрать предыдущий телескоп"
 
 #: plugins/Oculars/src/Oculars.cpp:1503
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:193
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:196
 msgid "Select next eyepiece"
 msgstr "Выбрать следующий окуляр"
 
 #: plugins/Oculars/src/Oculars.cpp:1505
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:191
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:194
 msgid "Select previous eyepiece"
 msgstr "Выбрать предыдущий окуляр"
 
 #: plugins/Oculars/src/Oculars.cpp:1507
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:197
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:200
 msgid "Select next lens"
 msgstr "Выбрать следующую линзу"
 
 #: plugins/Oculars/src/Oculars.cpp:1509
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:195
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:198
 msgid "Select previous lens"
 msgstr "Выбрать предыдущую линзу"
 
 #: plugins/Oculars/src/Oculars.cpp:1511
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:201
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:204
 msgid "Select next CCD frame"
 msgstr "Выбрать следующую камеру"
 
 #: plugins/Oculars/src/Oculars.cpp:1513
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:199
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:202
 msgid "Select previous CCD frame"
 msgstr "Выбрать предыдущую камеру"
 
@@ -16536,12 +16536,12 @@ msgid "Toggle focuser overlay"
 msgstr "Переключить наложение фокусёра"
 
 #: plugins/Oculars/src/Oculars.cpp:1521
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:257
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:260
 msgid "Reset the sensor frame rotation"
 msgstr "Сбросить поворот рамки сенсора"
 
 #: plugins/Oculars/src/Oculars.cpp:1522
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:259
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:262
 msgid "Reset the prism rotation"
 msgstr "Сбросить поворот призмы"
 
@@ -16557,8 +16557,8 @@ msgstr "П.В./Скл. (J2000.0) перекрестия"
 
 #. TRANSLATORS: Unit of measure for scale - arc-seconds per pixel
 #: plugins/Oculars/src/Oculars.cpp:1977
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:654
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:842
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:659
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:847
 msgid "\"/px"
 msgstr "\"/пкс"
 
@@ -16578,37 +16578,37 @@ msgid "s"
 msgstr "с"
 
 #: plugins/Oculars/src/Oculars.cpp:2259
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:444
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:449
 msgid "Binocular"
 msgstr "Бинокль"
 
 #: plugins/Oculars/src/Oculars.cpp:2259
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:442
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:447
 msgid "Ocular"
 msgstr "Окуляр"
 
 #. TRANSLATORS: FL = Focal length
 #: plugins/Oculars/src/Oculars.cpp:2279
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:487
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:492
 #, qt-format
 msgid "Ocular FL: %1 mm"
 msgstr "ФР окуляра: %1 мм"
 
 #. TRANSLATORS: aFOV = apparent field of view
 #: plugins/Oculars/src/Oculars.cpp:2286
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:496
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:501
 #, qt-format
 msgid "Ocular aFOV: %1"
 msgstr "Видимое ПЗ окуляра: %1"
 
 #: plugins/Oculars/src/Oculars.cpp:2297
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:526
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:531
 #, qt-format
 msgid "Lens #%1"
 msgstr "Линза #%1"
 
 #: plugins/Oculars/src/Oculars.cpp:2301
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:530
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:535
 #, qt-format
 msgid "Lens #%1: %2"
 msgstr "Линза #%1: %2"
@@ -16618,56 +16618,55 @@ msgid "Lens: none"
 msgstr "Линза: нет"
 
 #: plugins/Oculars/src/Oculars.cpp:2321 plugins/Oculars/src/Oculars.cpp:2382
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:790
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:795
 #, qt-format
 msgid "Telescope #%1"
 msgstr "Телескоп #%1"
 
 #: plugins/Oculars/src/Oculars.cpp:2330
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:898
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:908
 #, qt-format
 msgid "Magnification: %1"
 msgstr "Увеличение: %1"
 
 #: plugins/Oculars/src/Oculars.cpp:2337
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:909
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:917
 #, qt-format
 msgid "Exit pupil: %1 mm"
 msgstr "Выходной зрачок: %1 мм"
 
 #: plugins/Oculars/src/Oculars.cpp:2344
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:939
 #, qt-format
 msgid "FOV: %1"
 msgstr "Поле зрения: %1"
 
 #: plugins/Oculars/src/Oculars.cpp:2365
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:642
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:834
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:647
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:839
 #, qt-format
 msgid "Dimensions: %1"
 msgstr "Размеры: %1"
 
 #: plugins/Oculars/src/Oculars.cpp:2366
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:648
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:838
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:653
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:843
 msgid "Binning"
 msgstr "Биннинг"
 
 #: plugins/Oculars/src/Oculars.cpp:2370
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:602
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:607
 #, qt-format
 msgid "Sensor #%1"
 msgstr "Сенсор #%1"
 
 #: plugins/Oculars/src/Oculars.cpp:2374
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:606
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:611
 #, qt-format
 msgid "Sensor #%1: %2"
 msgstr "Сенсор #%1: %2"
 
 #: plugins/Oculars/src/Oculars.cpp:2387
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:794
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:799
 #, qt-format
 msgid "Telescope #%1: %2"
 msgstr "Телескоп #%1: %2"
@@ -16700,226 +16699,253 @@ msgstr "&Предыдущий телескоп"
 msgid "&Next telescope"
 msgstr "&Следующий телескоп"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:217
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:220
 msgid "Rotate the sensor frame 90 degrees counterclockwise"
 msgstr "Повернуть рамку сенсора на 90 градусов против часовой стрелки"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:219
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:222
 msgid "Rotate the prism 90 degrees counterclockwise"
 msgstr "Повернуть призму на 90 градусов против часовой стрелки"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:227
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:230
 msgid "Rotate the sensor frame 15 degrees counterclockwise"
 msgstr "Повернуть рамку сенсора на 15 градусов против часовой стрелки"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:229
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:232
 msgid "Rotate the prism 15 degrees counterclockwise"
 msgstr "Повернуть призму на 15 градусов против часовой стрелки"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:237
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:240
 msgid "Rotate the sensor frame 5 degrees counterclockwise"
 msgstr "Повернуть рамку сенсора на 5 градусов против часовой стрелки"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:239
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:242
 msgid "Rotate the prism 5 degrees counterclockwise"
 msgstr "Повернуть призму на 5 градусов против часовой стрелки"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:247
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:250
 msgid "Rotate the sensor frame 1 degree counterclockwise"
 msgstr "Повернуть рамку сенсора на градус против часовой стрелки"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:249
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:252
 msgid "Rotate the prism 1 degree counterclockwise"
 msgstr "Повернуть призму на градус против часовой стрелки"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:267
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:270
 msgid "Rotate the sensor frame 1 degree clockwise"
 msgstr "Повернуть рамку сенсора на градус по часовой стрелке"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:269
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:272
 msgid "Rotate the prism 1 degree clockwise"
 msgstr "Повернуть призму на градус по часовой стрелке"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:277
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:280
 msgid "Rotate the sensor frame 5 degrees clockwise"
 msgstr "Повернуть рамку сенсора на 5 градусов по часовой стрелке"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:279
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:282
 msgid "Rotate the prism 5 degrees clockwise"
 msgstr "Повернуть призму на 5 градусов по часовой стрелке"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:287
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:290
 msgid "Rotate the sensor frame 15 degrees clockwise"
 msgstr "Повернуть рамку сенсора на 15 градусов по часовой стрелке"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:289
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:292
 msgid "Rotate the prism 15 degrees clockwise"
 msgstr "Повернуть призму на 15 градусов по часовой стрелке"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:297
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:300
 msgid "Rotate the sensor frame 90 degrees clockwise"
 msgstr "Повернуть рамку сенсора на 90 градусов по часовой стрелке"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:299
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:302
 msgid "Rotate the prism 90 degrees clockwise"
 msgstr "Повернуть призму на 90 градусов по часовой стрелке"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:489
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:494
 msgid "Effective focal length of the ocular"
 msgstr "Эффективный фокус окуляра"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:499
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:504
 msgid "Apparent field of view of the ocular"
 msgstr "Видимое поле зрения окуляра"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:532
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:537
 #, qt-format
 msgid "Multiplicity: %1"
 msgstr "Кратность: %1"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:537
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:542
 msgid "Lens: None"
 msgstr "Линза: нет"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:538
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:543
 msgid "Multiplicity: N/A"
 msgstr "Кратность: н/д"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:542
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:547
 msgid "Focal length of eyepiece"
 msgstr "Фокусное расстояние окуляра"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:644
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:836
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:649
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:841
 msgid "Dimensions field of view"
 msgstr "Размеры поля зрения"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:655
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:843
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:660
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:848
 msgid "X scale"
 msgstr "Масштаб по x"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:656
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:844
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:661
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:849
 msgid "Horizontal scale"
 msgstr "Горизонтальный масштаб"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:660
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:845
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:665
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:850
 msgid "Y scale"
 msgstr "Масштаб по y"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:661
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:846
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:666
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:851
 msgid "Vertical scale"
 msgstr "Вертикальный масштаб"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:667
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:672
 #, qt-format
 msgid "Rotation: %1"
 msgstr "Поворот: %1"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:711
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:716
 #, qt-format
 msgid "PA of prism: %1"
 msgstr "ПУ призмы: %1"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:714
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:719
 msgid "Position angle of the off-axis guider' prism"
 msgstr "Позиционный угол призмы внеосевого гида"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:876
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:884
 msgid "Magnification provided by these binoculars"
 msgstr "Увеличение, даваемое этим биноклем"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:877
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:885
 msgid "Actual field of view provided by these binoculars"
 msgstr "Актуальное поле зрения, даваемое биноклем"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:878
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:886
 msgid "Exit pupil provided by these binoculars"
 msgstr "Выходной зрачок, даваемый этим биноклем"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:879
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:887
 msgid "Twilight factor (or dusk index) provided by these binoculars"
 msgstr "Сумеречный фактор (или индекс сумерек), даваемый этим биноклем"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:880
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:888
 msgid "Relative brightness provided by these binoculars"
 msgstr "Относительная яркость, даваемая этим биноклем"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:881
-msgid "Adler-Index provided by these binoculars"
-msgstr "Индекс Адлера, даваемый этим биноклем"
-
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:889
+msgid "Alan Adler's Index (or Astro Index) provided by these binoculars"
+msgstr ""
+"Индекс Алана Адлера (или астрономический индекс), даваемый этим биноклем"
+
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:890
+msgid "Roy Bishop's Index (or Visibility Factor) provided by these binoculars"
+msgstr "Индекс Роя Бишопа (или фактор видимости), даваемый этим биноклем"
+
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:898
 msgid "Magnification provided by this ocular/lens/telescope combination"
 msgstr "Увеличение определяется комбинацией окуляра/линзы/телескопа"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:890
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:899
 msgid ""
 "Actual field of view provided by this ocular/lens/telescope combination"
 msgstr ""
 "Фактическое поле зрения определяется комбинацией окуляра/линзы/телекскопа"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:891
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:900
 msgid "Exit pupil provided by this ocular/lens/telescope combination"
 msgstr "Выходной зрачок определяется комбинацией окуляра/линзы/телекскопа"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:917
-#, qt-format
-msgid "Twilight factor: %1"
-msgstr "Сумеречный фактор: %1"
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:925
+msgid "Twilight factor"
+msgstr "Сумеречный фактор"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:923
-#, qt-format
-msgid "Relative brightness: %1"
-msgstr "Относительная яркость: %1"
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:931
+msgid "Relative brightness"
+msgstr "Относительная яркость"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:929
-#, qt-format
-msgid "Adler-Index: %1"
-msgstr "Индекс Адлера: %1"
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:937
+msgid "Adler index"
+msgstr "Индекс Адлера"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:959
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:943
+msgid "Bishop index"
+msgstr "Индекс Бишопа"
+
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:953
+msgctxt "field of view"
+msgid "FOV"
+msgstr "Поле зрения"
+
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:974
 msgid "Rayleigh criterion"
 msgstr "Критерий Рэлея"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:961
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:976
 msgid "The Rayleigh resolution criterion"
 msgstr "Критерий разрешения Рэлея"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:966
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:981
 msgid "Dawes' limit"
 msgstr "Предел Дейвса"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:968
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:983
 msgid "Dawes' resolution criterion"
 msgstr "Критерий разрешения Дейвса"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:973
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:988
 msgid "Abbe's limit"
 msgstr "Предел Аббе"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:975
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:990
 msgid "Abbe’s diffraction resolution limit"
 msgstr "Предел дифракционного разрешения Аббе"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:980
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:995
 msgid "Sparrow's limit"
 msgstr "Предел Спарроу"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:982
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:997
 msgid "Sparrow's resolution limit"
 msgstr "Предел разрешения Спарроу"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1008
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1023
 msgid "Visual resolution"
 msgstr "Визуальное разрешение"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1010
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1025
 msgid "Visual resolution is based on eye properties and magnification"
 msgstr "Визуальное разрешение основано на свойствах глаза и увеличении"
+
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1039
+msgctxt "Limiting magnitude of device"
+msgid "Limiting magnitude"
+msgstr "Предельная зв. велич."
+
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1042
+msgid "Approximate limiting magnitude of this binocular"
+msgstr "Приблизительная предельная звёздная величина этого бинокля"
+
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1044
+msgid ""
+"Approximate limiting magnitude of this ocular/lens/telescope combination"
+msgstr ""
+"Приблизительная предельная звёздная величина этой комбинации "
+"окуляра/линзы/телескопа"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:118
 msgid "Cannot delete the last sensor."
@@ -19010,8 +19036,8 @@ msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:860
 msgid ""
-"To calculate an approximated visual magnitude of satellites we use the radar"
-" cross-section (RCS) and standard magnitudes from Mike McCants' database "
+"To calculate an approximate visual magnitude of satellites we use the radar "
+"cross-section (RCS) and standard magnitudes from Mike McCants' database "
 "(with permissions); the radar cross-section (RCS) from CelesTrack database; "
 "the standard magnitudes from the database of the MMT-9 observatory (Kazan "
 "Federal University)"
@@ -19024,15 +19050,15 @@ msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:861
 msgid ""
-"Formula to calculate an approximated visual magnitude of satellites from the"
-" standard magnitude may be found at Mike McCants website"
+"Formula to calculate an approximate visual magnitude of satellites from the "
+"standard magnitude may be found at Mike McCants website"
 msgstr ""
 "Формулу для расчета приблизительной визуальной звёздной величины спутников "
 "из стандартной звёздной величины можно найти на вебсайте Майка МакКантса"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:862
 msgid ""
-"We use a spherical shape of satellite to calculate an approximated visual "
+"We use a spherical shape of satellite to calculate an approximate visual "
 "magnitude from RCS values."
 msgstr ""
 "Мы используем сферическую форму спутника, чтобы рассчитать приблизительную "

@@ -150,6 +150,7 @@ public:
 
 	QString getDimensionsString(double fovX, double fovY) const;
 	QString getFOVString(double fov) const;
+	double getLimitMagnitude(Ocular *ocular, Telescope *telescope) { return computeLimitMagnitude(ocular, telescope); }
 
 public slots:
 	//! return the plugin's own settings (these do not include the settings from the main application)
