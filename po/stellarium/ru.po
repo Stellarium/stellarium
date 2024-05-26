@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2024-05-26 14:44+0700\n"
+"POT-Creation-Date: 2024-05-26 14:49+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Alexander V. Wolf <alex.v.wolf@gmail.com>, 2024\n"
 "Language-Team: Russian (https://app.transifex.com/stellarium/teams/80998/ru/)\n"
@@ -15563,7 +15563,7 @@ msgstr "Сохранить/загрузить с ландшафтом"
 msgid "Store/load with field of view"
 msgstr "Сохранить/загрузить с полем зрения"
 
-#: src/ui_obsListDialog.h:432 plugins/Oculars/src/gui/OcularsGuiPanel.cpp:951
+#: src/ui_obsListDialog.h:432
 msgid "FOV"
 msgstr "ПЗ"
 
@@ -16885,6 +16885,11 @@ msgstr "Индекс Адлера"
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:941
 msgid "Bishop index"
 msgstr "Индекс Бишопа"
+
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:951
+msgctxt "field of view"
+msgid "FOV"
+msgstr "Поле зрения"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:972
 msgid "Rayleigh criterion"
