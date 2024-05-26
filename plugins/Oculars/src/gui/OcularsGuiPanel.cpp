@@ -948,7 +948,7 @@ void OcularsGuiPanel::updateTelescopeControls()
 
 		QString fovString = QString::number(ocular->actualFOV(telescope, lens), 'f', 4) + QChar(0x00B0);
 		// TRANSLATIONS: Label in Oculars plug-in
-		QString fovLabel = QString("%1: %2").arg(q_("FOV"), fovString);
+		QString fovLabel = QString("%1: %2").arg(qc_("FOV", "field of view"), fovString);
 		fieldFov->setPlainText(fovLabel);
 		fieldFov->setPos(posX, posY);
 		posY += fieldFov->boundingRect().height();
