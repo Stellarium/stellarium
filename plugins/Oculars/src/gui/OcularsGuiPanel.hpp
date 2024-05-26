@@ -119,6 +119,7 @@ private:
 	QGraphicsTextItem* fieldTwilightFactor;
 	QGraphicsTextItem* fieldRelativeBrightness;
 	QGraphicsTextItem* fieldAdlerIndex;
+	QGraphicsTextItem* fieldBishopIndex;
 	QGraphicsTextItem* fieldFov;
 	QGraphicsTextItem* fieldRayleighCriterion;
 	QGraphicsTextItem* fieldDawesCriterion;
