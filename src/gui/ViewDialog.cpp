@@ -333,7 +333,7 @@ void ViewDialog::createDialogContent()
 	connectCheckBox(ui->landscapeIlluminationCheckBox, "actionShow_LandscapeIllumination");
 	connectCheckBox(ui->landscapeLabelsCheckBox, "actionShow_LandscapeLabels");
 
-	connectBoolProperty(ui->landscapePositionCheckBox, "LandscapeMgr.flagLandscapeSetsLocation");
+	connectBoolProperty(ui->landscapeLocationCheckBox, "LandscapeMgr.flagLandscapeSetsLocation");
 	ui->labelsColorButton->setup("LandscapeMgr.labelColor", "landscape/label_color");
 	connectIntProperty(ui->labelsFontSizeSpinBox, "LandscapeMgr.labelFontSize");
 

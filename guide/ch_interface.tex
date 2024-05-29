@@ -94,7 +94,7 @@ There are a few ways you can set your location in this dialog:
 \item Click on \menu{Get Location from GPS} if you have a GPS
   receiver.\newFeature{0.16/0.18.1} You activate a periodic request
   for GPS fixes. After a few seconds, the button should change color
-  and give a textual feedback. Green indicates a good position, yellow
+  and give a textual feedback. Green indicates a good location fix, yellow
   indicates a 2D-fix only, which means altitudes are not
   available. (Leave the GPS device running for a few minutes and/or
   search a place with better sky view.) You could leave it running if
@@ -804,7 +804,7 @@ The controls at the bottom right of the window operate as follows:
 \item[Show landscape labels] Landscapes can be configured with a
   gazetteer of interesting points, e.g., mountain peaks, which can be
   labeled with this option. Color and font size can also be configured.
-\item[Position from landscape] When enabled, selecting a
+\item[Location from landscape] When enabled, selecting a
   new landscape will automatically update the observer location.
   Use this if the landscape is not just decoration, but a true
   representation of a particular site you wish to visit in the simulation.
@@ -1235,7 +1235,7 @@ two objects at the same time and define custom time step for the ephemeris
 
 Note: The ephemeris is computed with the current settings for atmosphere, topocentric correction etc. 
 In consequence, e.g.\ magnitudes may be affected by atmospheric absorption and may show unexpected values. 
-Remember to switch off atmosphere etc.\ to create geocentric mean positions as found in almanachs.
+Remember to switch off atmosphere etc.\ to create extinction free geocentric mean positions as found in almanachs.
 
 \subsection{The ``Risings, Transits, and Settings'' (RTS) Tab}
 \label{sec:gui:AstroCalc:RTS}
