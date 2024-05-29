@@ -350,6 +350,7 @@ private:
 	QDateTime lastUpdated;
 
 	bool isISS;
+	bool isStarlink;
 	PlanetP moon;
 	PlanetP sun;
 
