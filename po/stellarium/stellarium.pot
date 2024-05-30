@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2024-05-26 18:29+0700\n"
+"POT-Creation-Date: 2024-05-30 19:07+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -28,7 +28,7 @@ msgstr ""
 #: src/gui/AstroCalcDialog.cpp:2897 src/gui/AstroCalcDialog.cpp:2929
 #: src/gui/AstroCalcDialog.cpp:3231 src/gui/AstroCalcDialog.cpp:7290
 #: src/gui/ObsListDialog.cpp:292 src/ui_configurationDialog.h:1806
-#: plugins/Satellites/src/Satellite.cpp:339
+#: plugins/Satellites/src/Satellite.cpp:341
 #: plugins/TelescopeControl/src/TelescopeClient.cpp:136
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:516
 #: plugins/Supernovae/src/Supernova.cpp:144 plugins/Novae/src/Nova.cpp:150
@@ -203,7 +203,7 @@ msgstr ""
 #: src/gui/AstroCalcDialog.cpp:818 src/gui/AstroCalcDialog.cpp:1724
 #: src/gui/AstroCalcDialog.cpp:2076 src/gui/AstroCalcDialog.cpp:2348
 #: src/gui/AstroCalcChart.cpp:80 src/gui/AstroCalcChart.cpp:418
-#: src/ui_viewDialog.h:4186 plugins/Satellites/src/Satellite.cpp:362
+#: src/ui_viewDialog.h:4186 plugins/Satellites/src/Satellite.cpp:364
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1545
 msgid "Altitude"
 msgstr ""
@@ -326,8 +326,8 @@ msgstr ""
 #. TRANSLATORS: Unit of measure for speed - kilometers per second
 #: src/core/modules/GridLinesMgr.cpp:1629 src/core/modules/Planet.cpp:736
 #: src/core/modules/Planet.cpp:1028 src/gui/AstroCalcDialog.cpp:8177
-#: plugins/Satellites/src/Satellite.cpp:360
-#: plugins/Satellites/src/Satellite.cpp:403
+#: plugins/Satellites/src/Satellite.cpp:362
+#: plugins/Satellites/src/Satellite.cpp:405
 #: plugins/MeteorShowers/src/MeteorShower.cpp:580
 msgctxt "speed"
 msgid "km/s"
@@ -825,7 +825,7 @@ msgstr ""
 
 #. TRANSLATORS: Unit of measure for distance - meter
 #: src/core/modules/LandscapeMgr.cpp:1382 src/gui/StelGuiItems.cpp:866
-#: plugins/Satellites/src/Satellite.cpp:433
+#: plugins/Satellites/src/Satellite.cpp:435
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1191
 #: plugins/Satellites/src/gui/SatellitesFilterDialog.cpp:134
 msgctxt "distance"
@@ -923,8 +923,8 @@ msgstr ""
 #: src/core/modules/Comet.cpp:203 src/gui/StelGuiItems.cpp:894
 #: src/gui/AstroCalcDialog.cpp:3048 src/gui/AstroCalcDialog.cpp:3561
 #: src/gui/AstroCalcDialog.cpp:8112 plugins/Satellites/src/Satellites.cpp:2933
-#: plugins/Satellites/src/Satellite.cpp:356
-#: plugins/Satellites/src/Satellite.cpp:399
+#: plugins/Satellites/src/Satellite.cpp:358
+#: plugins/Satellites/src/Satellite.cpp:401
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1200
 #: plugins/Satellites/src/gui/SatellitesFilterDialog.cpp:133
 msgctxt "distance"
@@ -1792,17 +1792,17 @@ msgid "photometric passband"
 msgstr ""
 
 #: src/core/modules/Nebula.cpp:194 src/core/StelObject.cpp:351
-#: plugins/Satellites/src/Satellite.cpp:347
+#: plugins/Satellites/src/Satellite.cpp:349
 msgid "reduced to"
 msgstr ""
 
 #: src/core/modules/Nebula.cpp:194 src/core/StelObject.cpp:351
-#: plugins/Satellites/src/Satellite.cpp:347
+#: plugins/Satellites/src/Satellite.cpp:349
 msgid "by"
 msgstr ""
 
 #: src/core/modules/Nebula.cpp:194 src/core/StelObject.cpp:351
-#: plugins/Satellites/src/Satellite.cpp:347
+#: plugins/Satellites/src/Satellite.cpp:349
 msgid "Airmasses"
 msgstr ""
 
@@ -2411,7 +2411,7 @@ msgstr ""
 #: src/core/modules/Planet.cpp:890 src/core/modules/Planet.cpp:899
 #: src/gui/AstroCalcChart.cpp:96 src/gui/AstroCalcChart.cpp:106
 #: src/gui/AstroCalcChart.cpp:439 src/gui/AstroCalcChart.cpp:465
-#: plugins/Satellites/src/Satellite.cpp:408
+#: plugins/Satellites/src/Satellite.cpp:410
 msgid "Phase angle"
 msgstr ""
 
@@ -12791,11 +12791,11 @@ msgid "Use this landscape as default"
 msgstr ""
 
 #: src/ui_viewDialog.h:4324
-msgid "Set the planet and position as specified for the selected landscape"
+msgid "Set the planet and location as specified for the selected landscape"
 msgstr ""
 
 #: src/ui_viewDialog.h:4326
-msgid "Position from landscape"
+msgid "Location from landscape"
 msgstr ""
 
 #: src/ui_viewDialog.h:4328
@@ -14083,7 +14083,7 @@ msgid "First celestial body"
 msgstr ""
 
 #: src/ui_astroCalcDialog.h:2187 src/ui_astroCalcDialog.h:2270
-#: plugins/Satellites/src/Satellite.cpp:490
+#: plugins/Satellites/src/Satellite.cpp:492
 msgid "and"
 msgstr ""
 
@@ -17346,184 +17346,184 @@ msgctxt "comms"
 msgid "mode"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:218
+#: plugins/Satellites/src/Satellite.cpp:220
 msgid "The satellite and the observer are in sunlight"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:219
+#: plugins/Satellites/src/Satellite.cpp:221
 msgid "The satellite is sunlit and the observer is in the dark"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:220
+#: plugins/Satellites/src/Satellite.cpp:222
 msgid "The satellite isn't sunlit"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:221
+#: plugins/Satellites/src/Satellite.cpp:223
 msgid "The satellite is in penumbra"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:222
+#: plugins/Satellites/src/Satellite.cpp:224
 msgid "The satellite is eclipsed"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:223
+#: plugins/Satellites/src/Satellite.cpp:225
 msgid "The satellite is below the horizon"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:334
+#: plugins/Satellites/src/Satellite.cpp:336
 msgid "International Designator"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:345
+#: plugins/Satellites/src/Satellite.cpp:347
 msgid "Approx. magnitude"
 msgstr ""
 
 #. TRANSLATORS: Slant range: distance between the satellite and the observer
-#: plugins/Satellites/src/Satellite.cpp:358
+#: plugins/Satellites/src/Satellite.cpp:360
 msgid "Range"
 msgstr ""
 
 #. TRANSLATORS: Rate at which the distance changes
-#: plugins/Satellites/src/Satellite.cpp:360
+#: plugins/Satellites/src/Satellite.cpp:362
 msgid "Range rate"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:363
+#: plugins/Satellites/src/Satellite.cpp:365
 msgid "Perigee/apogee altitudes"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:374
+#: plugins/Satellites/src/Satellite.cpp:376
 msgid "Approx. angular size"
 msgstr ""
 
 #. TRANSLATORS: Revolutions per day - measurement of the frequency of a rotation
-#: plugins/Satellites/src/Satellite.cpp:383
+#: plugins/Satellites/src/Satellite.cpp:385
 msgctxt "frequency"
 msgid "rpd"
 msgstr ""
 
 #. TRANSLATORS: minutes - orbital period for artificial satellites
-#: plugins/Satellites/src/Satellite.cpp:385
+#: plugins/Satellites/src/Satellite.cpp:387
 msgctxt "period"
 msgid "min"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:387
+#: plugins/Satellites/src/Satellite.cpp:389
 msgid "Orbital period"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:392
+#: plugins/Satellites/src/Satellite.cpp:394
 #: plugins/Satellites/src/ui_satellitesFilterDialog.h:257
 #: plugins/Exoplanets/src/Exoplanet.cpp:366
 msgid "Inclination"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:393
+#: plugins/Satellites/src/Satellite.cpp:395
 msgid "SubPoint (Lat./Long.)"
 msgstr ""
 
 #. TRANSLATORS: TEME (True Equator, Mean Equinox) is an Earth-centered inertial coordinate system
-#: plugins/Satellites/src/Satellite.cpp:399
+#: plugins/Satellites/src/Satellite.cpp:401
 msgid "TEME coordinates"
 msgstr ""
 
 #. TRANSLATORS: TEME (True Equator, Mean Equinox) is an Earth-centered inertial coordinate system
-#: plugins/Satellites/src/Satellite.cpp:403
+#: plugins/Satellites/src/Satellite.cpp:405
 msgid "TEME velocity"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:413
+#: plugins/Satellites/src/Satellite.cpp:415
 msgid "Sun reflection angle"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:421
-#: plugins/Satellites/src/Satellite.cpp:533
+#: plugins/Satellites/src/Satellite.cpp:423
+#: plugins/Satellites/src/Satellite.cpp:535
 msgctxt "unknown date"
 msgid "unknown"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:428
+#: plugins/Satellites/src/Satellite.cpp:430
 msgctxt "at time"
 msgid "at"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:430
+#: plugins/Satellites/src/Satellite.cpp:432
 msgid "Last updated TLE"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:431
+#: plugins/Satellites/src/Satellite.cpp:433
 msgid "Epoch of the TLE"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:433
+#: plugins/Satellites/src/Satellite.cpp:435
 msgid "Radar cross-section (RCS)"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:442
+#: plugins/Satellites/src/Satellite.cpp:444
 msgid "Group"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:442
+#: plugins/Satellites/src/Satellite.cpp:444
 msgid "Groups"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:447
+#: plugins/Satellites/src/Satellite.cpp:449
 msgid "Operational status"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:453
+#: plugins/Satellites/src/Satellite.cpp:455
 msgid "Radio communication"
 msgstr ""
 
 #. TRANSLATORS: Unit of measurement of frequency
-#: plugins/Satellites/src/Satellite.cpp:503
+#: plugins/Satellites/src/Satellite.cpp:505
 #: plugins/Satellites/src/gui/SatellitesCommDialog.cpp:83
 #: plugins/Pulsars/src/Pulsar.cpp:283
 msgctxt "frequency"
 msgid "MHz"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:503
+#: plugins/Satellites/src/Satellite.cpp:505
 msgctxt "frequency"
 msgid "kHz"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:760
+#: plugins/Satellites/src/Satellite.cpp:763
 msgctxt "operational status"
 msgid "operational"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:761
+#: plugins/Satellites/src/Satellite.cpp:764
 msgctxt "operational status"
 msgid "non-operational"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:762
+#: plugins/Satellites/src/Satellite.cpp:765
 msgctxt "operational status"
 msgid "partially operational"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:763
+#: plugins/Satellites/src/Satellite.cpp:766
 msgctxt "operational status"
 msgid "standby"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:764
+#: plugins/Satellites/src/Satellite.cpp:767
 msgctxt "operational status"
 msgid "spare"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:765
+#: plugins/Satellites/src/Satellite.cpp:768
 msgctxt "operational status"
 msgid "extended mission"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:766
+#: plugins/Satellites/src/Satellite.cpp:769
 msgctxt "operational status"
 msgid "decayed"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:768
+#: plugins/Satellites/src/Satellite.cpp:771
 msgctxt "operational status"
 msgid "unknown"
 msgstr ""
