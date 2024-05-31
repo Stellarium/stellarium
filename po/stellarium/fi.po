@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2024-05-24 19:26+0700\n"
+"POT-Creation-Date: 2024-05-30 19:07+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Ilpo Kantonen, 2024\n"
 "Language-Team: Finnish (https://app.transifex.com/stellarium/teams/80998/fi/)\n"
@@ -38,7 +38,7 @@ msgstr ""
 #: src/gui/AstroCalcDialog.cpp:2897 src/gui/AstroCalcDialog.cpp:2929
 #: src/gui/AstroCalcDialog.cpp:3231 src/gui/AstroCalcDialog.cpp:7290
 #: src/gui/ObsListDialog.cpp:292 src/ui_configurationDialog.h:1806
-#: plugins/Satellites/src/Satellite.cpp:339
+#: plugins/Satellites/src/Satellite.cpp:341
 #: plugins/TelescopeControl/src/TelescopeClient.cpp:136
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:516
 #: plugins/Supernovae/src/Supernova.cpp:144 plugins/Novae/src/Nova.cpp:150
@@ -213,7 +213,7 @@ msgstr "Ensivertikaali"
 #: src/gui/AstroCalcDialog.cpp:818 src/gui/AstroCalcDialog.cpp:1724
 #: src/gui/AstroCalcDialog.cpp:2076 src/gui/AstroCalcDialog.cpp:2348
 #: src/gui/AstroCalcChart.cpp:80 src/gui/AstroCalcChart.cpp:418
-#: src/ui_viewDialog.h:4186 plugins/Satellites/src/Satellite.cpp:362
+#: src/ui_viewDialog.h:4186 plugins/Satellites/src/Satellite.cpp:364
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1545
 msgid "Altitude"
 msgstr "Korkeus"
@@ -336,8 +336,8 @@ msgstr "Antapeksi"
 #. TRANSLATORS: Unit of measure for speed - kilometers per second
 #: src/core/modules/GridLinesMgr.cpp:1629 src/core/modules/Planet.cpp:736
 #: src/core/modules/Planet.cpp:1028 src/gui/AstroCalcDialog.cpp:8177
-#: plugins/Satellites/src/Satellite.cpp:360
-#: plugins/Satellites/src/Satellite.cpp:403
+#: plugins/Satellites/src/Satellite.cpp:362
+#: plugins/Satellites/src/Satellite.cpp:405
 #: plugins/MeteorShowers/src/MeteorShower.cpp:580
 msgctxt "speed"
 msgid "km/s"
@@ -836,7 +836,7 @@ msgstr "Tekijä"
 
 #. TRANSLATORS: Unit of measure for distance - meter
 #: src/core/modules/LandscapeMgr.cpp:1382 src/gui/StelGuiItems.cpp:866
-#: plugins/Satellites/src/Satellite.cpp:433
+#: plugins/Satellites/src/Satellite.cpp:435
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1191
 #: plugins/Satellites/src/gui/SatellitesFilterDialog.cpp:134
 msgctxt "distance"
@@ -937,8 +937,8 @@ msgstr "Halkaisija"
 #: src/core/modules/Comet.cpp:203 src/gui/StelGuiItems.cpp:894
 #: src/gui/AstroCalcDialog.cpp:3048 src/gui/AstroCalcDialog.cpp:3561
 #: src/gui/AstroCalcDialog.cpp:8112 plugins/Satellites/src/Satellites.cpp:2933
-#: plugins/Satellites/src/Satellite.cpp:356
-#: plugins/Satellites/src/Satellite.cpp:399
+#: plugins/Satellites/src/Satellite.cpp:358
+#: plugins/Satellites/src/Satellite.cpp:401
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1200
 #: plugins/Satellites/src/gui/SatellitesFilterDialog.cpp:133
 msgctxt "distance"
@@ -1834,17 +1834,17 @@ msgid "photometric passband"
 msgstr "fotometrinen päästökaista"
 
 #: src/core/modules/Nebula.cpp:194 src/core/StelObject.cpp:351
-#: plugins/Satellites/src/Satellite.cpp:347
+#: plugins/Satellites/src/Satellite.cpp:349
 msgid "reduced to"
 msgstr "ekstinktiokorjattu mag."
 
 #: src/core/modules/Nebula.cpp:194 src/core/StelObject.cpp:351
-#: plugins/Satellites/src/Satellite.cpp:347
+#: plugins/Satellites/src/Satellite.cpp:349
 msgid "by"
 msgstr "(korjaus"
 
 #: src/core/modules/Nebula.cpp:194 src/core/StelObject.cpp:351
-#: plugins/Satellites/src/Satellite.cpp:347
+#: plugins/Satellites/src/Satellite.cpp:349
 msgid "Airmasses"
 msgstr "ilmamassaa)"
 
@@ -2462,7 +2462,7 @@ msgstr "Elongaatio"
 #: src/core/modules/Planet.cpp:890 src/core/modules/Planet.cpp:899
 #: src/gui/AstroCalcChart.cpp:96 src/gui/AstroCalcChart.cpp:106
 #: src/gui/AstroCalcChart.cpp:439 src/gui/AstroCalcChart.cpp:465
-#: plugins/Satellites/src/Satellite.cpp:408
+#: plugins/Satellites/src/Satellite.cpp:410
 msgid "Phase angle"
 msgstr "Vaihekulma"
 
@@ -13577,11 +13577,11 @@ msgid "Use this landscape as default"
 msgstr "Käytä tätä maisemaa oletuksena"
 
 #: src/ui_viewDialog.h:4324
-msgid "Set the planet and position as specified for the selected landscape"
+msgid "Set the planet and location as specified for the selected landscape"
 msgstr "Aseta planeetta ja sijainti valitun maiseman mukaisesti"
 
 #: src/ui_viewDialog.h:4326
-msgid "Position from landscape"
+msgid "Location from landscape"
 msgstr "Sijainti maisemasta"
 
 #: src/ui_viewDialog.h:4328
@@ -14925,7 +14925,7 @@ msgid "First celestial body"
 msgstr "Ensimmäinen taivaankappale"
 
 #: src/ui_astroCalcDialog.h:2187 src/ui_astroCalcDialog.h:2270
-#: plugins/Satellites/src/Satellite.cpp:490
+#: plugins/Satellites/src/Satellite.cpp:492
 msgid "and"
 msgstr "ja"
 
@@ -16466,42 +16466,42 @@ msgid "Toggle Oculars button bar"
 msgstr "Okulaari-paneeli päälle/pois"
 
 #: plugins/Oculars/src/Oculars.cpp:1499
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:205
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:208
 msgid "Select next telescope"
 msgstr "Valitse seuraava kaukoputki"
 
 #: plugins/Oculars/src/Oculars.cpp:1501
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:203
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:206
 msgid "Select previous telescope"
 msgstr "Valitse edellinen kaukoputki"
 
 #: plugins/Oculars/src/Oculars.cpp:1503
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:193
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:196
 msgid "Select next eyepiece"
 msgstr "Valitse seuraava okulaari"
 
 #: plugins/Oculars/src/Oculars.cpp:1505
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:191
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:194
 msgid "Select previous eyepiece"
 msgstr "Valitse edellinen okulaari"
 
 #: plugins/Oculars/src/Oculars.cpp:1507
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:197
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:200
 msgid "Select next lens"
 msgstr "Valitse seuraava objektiivi"
 
 #: plugins/Oculars/src/Oculars.cpp:1509
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:195
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:198
 msgid "Select previous lens"
 msgstr "Valitse edellinen objektiivi"
 
 #: plugins/Oculars/src/Oculars.cpp:1511
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:201
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:204
 msgid "Select next CCD frame"
 msgstr "Valitse seuraava CCD-kehys"
 
 #: plugins/Oculars/src/Oculars.cpp:1513
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:199
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:202
 msgid "Select previous CCD frame"
 msgstr "Valitse edellinen CCD-kehys"
 
@@ -16526,12 +16526,12 @@ msgid "Toggle focuser overlay"
 msgstr "Vaihda kohdistimen peittokuvaa"
 
 #: plugins/Oculars/src/Oculars.cpp:1521
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:257
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:260
 msgid "Reset the sensor frame rotation"
 msgstr "Palauta ilmaisimen kierto"
 
 #: plugins/Oculars/src/Oculars.cpp:1522
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:259
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:262
 msgid "Reset the prism rotation"
 msgstr "Nollaa prisman kierto"
 
@@ -16547,8 +16547,8 @@ msgstr "Ristikon rekt./dekl. (J2000.0)"
 
 #. TRANSLATORS: Unit of measure for scale - arc-seconds per pixel
 #: plugins/Oculars/src/Oculars.cpp:1977
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:654
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:842
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:659
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:847
 msgid "\"/px"
 msgstr "″/px"
 
@@ -16568,37 +16568,37 @@ msgid "s"
 msgstr "s"
 
 #: plugins/Oculars/src/Oculars.cpp:2259
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:444
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:449
 msgid "Binocular"
 msgstr "Kiikari"
 
 #: plugins/Oculars/src/Oculars.cpp:2259
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:442
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:447
 msgid "Ocular"
 msgstr "Okulaari"
 
 #. TRANSLATORS: FL = Focal length
 #: plugins/Oculars/src/Oculars.cpp:2279
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:487
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:492
 #, qt-format
 msgid "Ocular FL: %1 mm"
 msgstr "Okulaarin polttoväli: %1 mm"
 
 #. TRANSLATORS: aFOV = apparent field of view
 #: plugins/Oculars/src/Oculars.cpp:2286
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:496
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:501
 #, qt-format
 msgid "Ocular aFOV: %1"
 msgstr "Okulaarin näenn. näkökenttä: %1"
 
 #: plugins/Oculars/src/Oculars.cpp:2297
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:526
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:531
 #, qt-format
 msgid "Lens #%1"
 msgstr "Linssi #%1"
 
 #: plugins/Oculars/src/Oculars.cpp:2301
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:530
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:535
 #, qt-format
 msgid "Lens #%1: %2"
 msgstr "Linssi #%1: %2"
@@ -16608,56 +16608,55 @@ msgid "Lens: none"
 msgstr "Linssi: ei mitään"
 
 #: plugins/Oculars/src/Oculars.cpp:2321 plugins/Oculars/src/Oculars.cpp:2382
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:790
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:795
 #, qt-format
 msgid "Telescope #%1"
 msgstr "Kaukoputki n:o %1"
 
 #: plugins/Oculars/src/Oculars.cpp:2330
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:898
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:908
 #, qt-format
 msgid "Magnification: %1"
 msgstr "Suurennus: %1"
 
 #: plugins/Oculars/src/Oculars.cpp:2337
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:909
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:917
 #, qt-format
 msgid "Exit pupil: %1 mm"
 msgstr "Lähtöpupilli: %1 mm"
 
 #: plugins/Oculars/src/Oculars.cpp:2344
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:939
 #, qt-format
 msgid "FOV: %1"
 msgstr "Näkökenttä: %1"
 
 #: plugins/Oculars/src/Oculars.cpp:2365
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:642
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:834
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:647
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:839
 #, qt-format
 msgid "Dimensions: %1"
 msgstr "Mitat: %1"
 
 #: plugins/Oculars/src/Oculars.cpp:2366
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:648
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:838
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:653
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:843
 msgid "Binning"
 msgstr "Lokerointi"
 
 #: plugins/Oculars/src/Oculars.cpp:2370
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:602
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:607
 #, qt-format
 msgid "Sensor #%1"
 msgstr "Ilmaisin n:o %1"
 
 #: plugins/Oculars/src/Oculars.cpp:2374
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:606
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:611
 #, qt-format
 msgid "Sensor #%1: %2"
 msgstr "Ilmaisin n:o %1: %2"
 
 #: plugins/Oculars/src/Oculars.cpp:2387
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:794
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:799
 #, qt-format
 msgid "Telescope #%1: %2"
 msgstr "Kaukoputki n:o %1: %2"
@@ -16690,227 +16689,253 @@ msgstr "&Edellinen kaukoputki"
 msgid "&Next telescope"
 msgstr "&Seuraava kaukoputki"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:217
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:220
 msgid "Rotate the sensor frame 90 degrees counterclockwise"
 msgstr "Kierrä ilmaisimen kenttää 90 astetta vastapäivään"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:219
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:222
 msgid "Rotate the prism 90 degrees counterclockwise"
 msgstr "Kierrä prismaa 90 astetta vastapäivään"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:227
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:230
 msgid "Rotate the sensor frame 15 degrees counterclockwise"
 msgstr "Kierrä ilmaisimen kenttää 15 astetta vastapäivään"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:229
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:232
 msgid "Rotate the prism 15 degrees counterclockwise"
 msgstr "Kierrä prismaa 15 astetta vastapäivään"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:237
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:240
 msgid "Rotate the sensor frame 5 degrees counterclockwise"
 msgstr "Kierrä ilmaisimen kenttää 5 astetta vastapäivään"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:239
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:242
 msgid "Rotate the prism 5 degrees counterclockwise"
 msgstr "Kierrä prismaa 5 astetta vastapäivään"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:247
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:250
 msgid "Rotate the sensor frame 1 degree counterclockwise"
 msgstr "Kierrä ilmaisimen kenttää 1 aste vastapäivään"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:249
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:252
 msgid "Rotate the prism 1 degree counterclockwise"
 msgstr "Kierrä prismaa 1 aste vastapäivään"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:267
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:270
 msgid "Rotate the sensor frame 1 degree clockwise"
 msgstr "Kierrä ilmaisimen kenttää 1 aste myötäpäivään"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:269
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:272
 msgid "Rotate the prism 1 degree clockwise"
 msgstr "Kierrä prismaa 1 aste myötäpäivään"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:277
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:280
 msgid "Rotate the sensor frame 5 degrees clockwise"
 msgstr "Kierrä ilmaisimen kenttää 5 astetta myötäpäivään"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:279
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:282
 msgid "Rotate the prism 5 degrees clockwise"
 msgstr "Kierrä prismaa 5 astetta myötäpäivään"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:287
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:290
 msgid "Rotate the sensor frame 15 degrees clockwise"
 msgstr "Kierrä ilmaisimen kenttää 15 astetta myötäpäivään"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:289
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:292
 msgid "Rotate the prism 15 degrees clockwise"
 msgstr "Kierrä prismaa 15 astetta myötäpäivään"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:297
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:300
 msgid "Rotate the sensor frame 90 degrees clockwise"
 msgstr "Kierrä ilmaisimen kenttää 90 astetta myötäpäivään"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:299
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:302
 msgid "Rotate the prism 90 degrees clockwise"
 msgstr "Kierrä prismaa 90 astetta myötäpäivään"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:489
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:494
 msgid "Effective focal length of the ocular"
 msgstr "Okulaarin tehokas polttoväli"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:499
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:504
 msgid "Apparent field of view of the ocular"
 msgstr "Okulaarin näennäinen näkökenttä"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:532
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:537
 #, qt-format
 msgid "Multiplicity: %1"
 msgstr "Suurennuskerroin: %1"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:537
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:542
 msgid "Lens: None"
 msgstr "Linssi: ei mitään"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:538
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:543
 msgid "Multiplicity: N/A"
 msgstr "Suurennuskerroin: ei mitään"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:542
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:547
 msgid "Focal length of eyepiece"
 msgstr "Okulaarin polttoväli"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:644
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:836
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:649
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:841
 msgid "Dimensions field of view"
 msgstr "Näkökentän mitat"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:655
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:843
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:660
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:848
 msgid "X scale"
 msgstr "X-mittakaava"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:656
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:844
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:661
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:849
 msgid "Horizontal scale"
 msgstr "Vaakaskaalaus"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:660
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:845
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:665
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:850
 msgid "Y scale"
 msgstr "Y-mittakaava"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:661
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:846
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:666
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:851
 msgid "Vertical scale"
 msgstr "Pystyskaalaus"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:667
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:672
 #, qt-format
 msgid "Rotation: %1"
 msgstr "Kierto: %1"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:711
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:716
 #, qt-format
 msgid "PA of prism: %1"
 msgstr "Prisman: %1 PA"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:714
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:719
 msgid "Position angle of the off-axis guider' prism"
 msgstr "Akselin ulkopuolisen ohjaimen prisman sijaintikulma"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:876
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:884
 msgid "Magnification provided by these binoculars"
 msgstr "Näiden kiikarien antama suurennus"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:877
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:885
 msgid "Actual field of view provided by these binoculars"
 msgstr "Näiden kiikarien antama todellinen näkökenttä"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:878
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:886
 msgid "Exit pupil provided by these binoculars"
 msgstr "Näiden kiikarien lähtöpupilli"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:879
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:887
 msgid "Twilight factor (or dusk index) provided by these binoculars"
 msgstr "Hämärätekijä (tai hämäräindeksi), jonka nämä kiikarit tarjoavat"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:880
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:888
 msgid "Relative brightness provided by these binoculars"
 msgstr "Näiden kiikarien tarjoama suhteellinen kirkkaus"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:881
-msgid "Adler-Index provided by these binoculars"
-msgstr "Näiden kiikarien tarjoama Adler-indeksi"
-
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:889
+msgid "Alan Adler's Index (or Astro Index) provided by these binoculars"
+msgstr "Alan Adlerin indeksi (tai Astro Index), jonka nämä kiikarit tarjoavat"
+
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:890
+msgid "Roy Bishop's Index (or Visibility Factor) provided by these binoculars"
+msgstr "Näiden kiikarien tarjoama Roy Bishopin indeksi (tai näkyvyystekijä)."
+
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:898
 msgid "Magnification provided by this ocular/lens/telescope combination"
 msgstr "Tämän okulaari/barlow/kaukoputki-yhdistelmän antama suurennus"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:890
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:899
 msgid ""
 "Actual field of view provided by this ocular/lens/telescope combination"
 msgstr ""
 "Tämän okulaari/barlow/kaukoputki-yhdistelmän antama todellinen näkökenttä"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:891
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:900
 msgid "Exit pupil provided by this ocular/lens/telescope combination"
 msgstr "Tämän okulaari/linssi/kaukoputki-yhdistelmän lähtöpupilli"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:917
-#, qt-format
-msgid "Twilight factor: %1"
-msgstr "Hämäräkerroin: %1"
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:925
+msgid "Twilight factor"
+msgstr "Hämärätekijä"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:923
-#, qt-format
-msgid "Relative brightness: %1"
-msgstr "Suhteellinen kirkkaus: %1"
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:931
+msgid "Relative brightness"
+msgstr "Suhteellinen kirkkaus"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:929
-#, qt-format
-msgid "Adler-Index: %1"
-msgstr "Adler-indeksi: %1"
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:937
+msgid "Adler index"
+msgstr "Adlerin indeksi"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:959
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:943
+msgid "Bishop index"
+msgstr "Piispan indeksi"
+
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:953
+msgctxt "field of view"
+msgid "FOV"
+msgstr "FOV"
+
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:974
 msgid "Rayleigh criterion"
 msgstr "Rayleighin kriteeri"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:961
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:976
 msgid "The Rayleigh resolution criterion"
 msgstr "Rayleighin erotuskykykriteeri"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:966
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:981
 msgid "Dawes' limit"
 msgstr "Dawesin raja"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:968
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:983
 msgid "Dawes' resolution criterion"
 msgstr "Dawesin erotuskykykriteeri"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:973
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:988
 msgid "Abbe's limit"
 msgstr "Abben raja"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:975
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:990
 msgid "Abbe’s diffraction resolution limit"
 msgstr "Abben diffraktioraja erotuskyvylle"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:980
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:995
 msgid "Sparrow's limit"
 msgstr "Sparrow'n raja"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:982
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:997
 msgid "Sparrow's resolution limit"
 msgstr "Sparrow'n erotuskykyraja"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1008
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1023
 msgid "Visual resolution"
 msgstr "Visuaalinen eortuskyky"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1010
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1025
 msgid "Visual resolution is based on eye properties and magnification"
 msgstr ""
 "Visuaalinen erotuskyky perustuu silmän ominaisuuksiin ja suurennukseen"
+
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1039
+msgctxt "Limiting magnitude of device"
+msgid "Limiting magnitude"
+msgstr "Suuruusrajoitus"
+
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1042
+msgid "Approximate limiting magnitude of this binocular"
+msgstr "Tämän kiikarin likimääräinen rajoittava suuruus"
+
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1044
+msgid ""
+"Approximate limiting magnitude of this ocular/lens/telescope combination"
+msgstr ""
+"Tämän silmän/linssin/teleskoopin yhdistelmän likimääräinen rajoittava "
+"suuruus"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:118
 msgid "Cannot delete the last sensor."
@@ -18455,187 +18480,187 @@ msgctxt "comms"
 msgid "mode"
 msgstr "tila"
 
-#: plugins/Satellites/src/Satellite.cpp:218
+#: plugins/Satellites/src/Satellite.cpp:220
 msgid "The satellite and the observer are in sunlight"
 msgstr "Satelliitti ja tarkkailija ovat auringonvalossa"
 
-#: plugins/Satellites/src/Satellite.cpp:219
+#: plugins/Satellites/src/Satellite.cpp:221
 msgid "The satellite is sunlit and the observer is in the dark"
 msgstr "Satelliitti on auringonvalossa ja tarkkailija on pimeässä"
 
-#: plugins/Satellites/src/Satellite.cpp:220
+#: plugins/Satellites/src/Satellite.cpp:222
 msgid "The satellite isn't sunlit"
 msgstr "Satelliitti ei ole aurinkoinen"
 
-#: plugins/Satellites/src/Satellite.cpp:221
+#: plugins/Satellites/src/Satellite.cpp:223
 msgid "The satellite is in penumbra"
 msgstr "Satelliitti on puolivarjossa"
 
-#: plugins/Satellites/src/Satellite.cpp:222
+#: plugins/Satellites/src/Satellite.cpp:224
 msgid "The satellite is eclipsed"
 msgstr "Satelliitti on pimennossa"
 
-#: plugins/Satellites/src/Satellite.cpp:223
+#: plugins/Satellites/src/Satellite.cpp:225
 msgid "The satellite is below the horizon"
 msgstr "Satelliitti on horisontin alapuolella"
 
-#: plugins/Satellites/src/Satellite.cpp:334
+#: plugins/Satellites/src/Satellite.cpp:336
 msgid "International Designator"
 msgstr "kansainvälinen tunnus"
 
-#: plugins/Satellites/src/Satellite.cpp:345
+#: plugins/Satellites/src/Satellite.cpp:347
 msgid "Approx. magnitude"
 msgstr "Likim. magnitudi"
 
 #. TRANSLATORS: Slant range: distance between the satellite and the observer
-#: plugins/Satellites/src/Satellite.cpp:358
+#: plugins/Satellites/src/Satellite.cpp:360
 msgid "Range"
 msgstr "Etäisyys"
 
 #. TRANSLATORS: Rate at which the distance changes
-#: plugins/Satellites/src/Satellite.cpp:360
+#: plugins/Satellites/src/Satellite.cpp:362
 msgid "Range rate"
 msgstr "Etäisyyden muutosnopeus"
 
-#: plugins/Satellites/src/Satellite.cpp:363
+#: plugins/Satellites/src/Satellite.cpp:365
 msgid "Perigee/apogee altitudes"
 msgstr "Perigeumin/apogeumin korkeus"
 
-#: plugins/Satellites/src/Satellite.cpp:374
+#: plugins/Satellites/src/Satellite.cpp:376
 msgid "Approx. angular size"
 msgstr "Likim. kulmaläpimitta"
 
 #. TRANSLATORS: Revolutions per day - measurement of the frequency of a
 #. rotation
-#: plugins/Satellites/src/Satellite.cpp:383
+#: plugins/Satellites/src/Satellite.cpp:385
 msgctxt "frequency"
 msgid "rpd"
 msgstr "kierrosta/vrk"
 
 #. TRANSLATORS: minutes - orbital period for artificial satellites
-#: plugins/Satellites/src/Satellite.cpp:385
+#: plugins/Satellites/src/Satellite.cpp:387
 msgctxt "period"
 msgid "min"
 msgstr "min"
 
-#: plugins/Satellites/src/Satellite.cpp:387
+#: plugins/Satellites/src/Satellite.cpp:389
 msgid "Orbital period"
 msgstr "Kiertoaika"
 
-#: plugins/Satellites/src/Satellite.cpp:392
+#: plugins/Satellites/src/Satellite.cpp:394
 #: plugins/Satellites/src/ui_satellitesFilterDialog.h:257
 #: plugins/Exoplanets/src/Exoplanet.cpp:366
 msgid "Inclination"
 msgstr "Inklinaatio"
 
-#: plugins/Satellites/src/Satellite.cpp:393
+#: plugins/Satellites/src/Satellite.cpp:395
 msgid "SubPoint (Lat./Long.)"
 msgstr "Nadiiripiste (pit./lev.)"
 
 #. TRANSLATORS: TEME (True Equator, Mean Equinox) is an Earth-centered
 #. inertial coordinate system
-#: plugins/Satellites/src/Satellite.cpp:399
+#: plugins/Satellites/src/Satellite.cpp:401
 msgid "TEME coordinates"
 msgstr "TEME-koordinaatit"
 
 #. TRANSLATORS: TEME (True Equator, Mean Equinox) is an Earth-centered
 #. inertial coordinate system
-#: plugins/Satellites/src/Satellite.cpp:403
+#: plugins/Satellites/src/Satellite.cpp:405
 msgid "TEME velocity"
 msgstr "TEME-nopeus"
 
-#: plugins/Satellites/src/Satellite.cpp:413
+#: plugins/Satellites/src/Satellite.cpp:415
 msgid "Sun reflection angle"
 msgstr "Auringon heijastuskulma"
 
-#: plugins/Satellites/src/Satellite.cpp:421
-#: plugins/Satellites/src/Satellite.cpp:533
+#: plugins/Satellites/src/Satellite.cpp:423
+#: plugins/Satellites/src/Satellite.cpp:535
 msgctxt "unknown date"
 msgid "unknown"
 msgstr "tuntematon"
 
-#: plugins/Satellites/src/Satellite.cpp:428
+#: plugins/Satellites/src/Satellite.cpp:430
 msgctxt "at time"
 msgid "at"
 msgstr "kello"
 
-#: plugins/Satellites/src/Satellite.cpp:430
+#: plugins/Satellites/src/Satellite.cpp:432
 msgid "Last updated TLE"
 msgstr "Rataelementit päivitetty"
 
-#: plugins/Satellites/src/Satellite.cpp:431
+#: plugins/Satellites/src/Satellite.cpp:433
 msgid "Epoch of the TLE"
 msgstr "Rataelementtien epookki"
 
-#: plugins/Satellites/src/Satellite.cpp:433
+#: plugins/Satellites/src/Satellite.cpp:435
 msgid "Radar cross-section (RCS)"
 msgstr "Tutkapoikkipinta-ala (RCS)"
 
-#: plugins/Satellites/src/Satellite.cpp:442
+#: plugins/Satellites/src/Satellite.cpp:444
 msgid "Group"
 msgstr "Ryhmä"
 
-#: plugins/Satellites/src/Satellite.cpp:442
+#: plugins/Satellites/src/Satellite.cpp:444
 msgid "Groups"
 msgstr "Ryhmät"
 
-#: plugins/Satellites/src/Satellite.cpp:447
+#: plugins/Satellites/src/Satellite.cpp:449
 msgid "Operational status"
 msgstr "Toimintatila"
 
-#: plugins/Satellites/src/Satellite.cpp:453
+#: plugins/Satellites/src/Satellite.cpp:455
 msgid "Radio communication"
 msgstr "Radioyhteys"
 
 #. TRANSLATORS: Unit of measurement of frequency
-#: plugins/Satellites/src/Satellite.cpp:503
+#: plugins/Satellites/src/Satellite.cpp:505
 #: plugins/Satellites/src/gui/SatellitesCommDialog.cpp:83
 #: plugins/Pulsars/src/Pulsar.cpp:283
 msgctxt "frequency"
 msgid "MHz"
 msgstr "MHz"
 
-#: plugins/Satellites/src/Satellite.cpp:503
+#: plugins/Satellites/src/Satellite.cpp:505
 msgctxt "frequency"
 msgid "kHz"
 msgstr "kHz"
 
-#: plugins/Satellites/src/Satellite.cpp:760
+#: plugins/Satellites/src/Satellite.cpp:763
 msgctxt "operational status"
 msgid "operational"
 msgstr "käytössä"
 
-#: plugins/Satellites/src/Satellite.cpp:761
+#: plugins/Satellites/src/Satellite.cpp:764
 msgctxt "operational status"
 msgid "non-operational"
 msgstr "ei toiminnassa"
 
-#: plugins/Satellites/src/Satellite.cpp:762
+#: plugins/Satellites/src/Satellite.cpp:765
 msgctxt "operational status"
 msgid "partially operational"
 msgstr "osittain käytössä"
 
-#: plugins/Satellites/src/Satellite.cpp:763
+#: plugins/Satellites/src/Satellite.cpp:766
 msgctxt "operational status"
 msgid "standby"
 msgstr "valmiustilassa"
 
-#: plugins/Satellites/src/Satellite.cpp:764
+#: plugins/Satellites/src/Satellite.cpp:767
 msgctxt "operational status"
 msgid "spare"
 msgstr "varalla"
 
-#: plugins/Satellites/src/Satellite.cpp:765
+#: plugins/Satellites/src/Satellite.cpp:768
 msgctxt "operational status"
 msgid "extended mission"
 msgstr "pidennetty tehtävä"
 
-#: plugins/Satellites/src/Satellite.cpp:766
+#: plugins/Satellites/src/Satellite.cpp:769
 msgctxt "operational status"
 msgid "decayed"
 msgstr "ei enää toimintakuntoinen"
 
-#: plugins/Satellites/src/Satellite.cpp:768
+#: plugins/Satellites/src/Satellite.cpp:771
 msgctxt "operational status"
 msgid "unknown"
 msgstr "tuntematon"
@@ -18992,8 +19017,8 @@ msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:860
 msgid ""
-"To calculate an approximated visual magnitude of satellites we use the radar"
-" cross-section (RCS) and standard magnitudes from Mike McCants' database "
+"To calculate an approximate visual magnitude of satellites we use the radar "
+"cross-section (RCS) and standard magnitudes from Mike McCants' database "
 "(with permissions); the radar cross-section (RCS) from CelesTrack database; "
 "the standard magnitudes from the database of the MMT-9 observatory (Kazan "
 "Federal University)"
@@ -19001,20 +19026,20 @@ msgstr ""
 "Satelliittien likimääräisen visuaalisen magnitudin laskemiseen käytämme Mike"
 " McCantsin tietokannan tutkan poikkileikkausta (RCS) ja standardimagnitudeja"
 " (luvalla); tutkan poikkileikkaus (RCS) CelesTrack-tietokannasta; "
-"standardimagnitudit MMT-9-observatorion tietokannasta (Kazanin liittovaltion"
-" yliopisto)"
+"standardimagneetit MMT-9-observatorion tietokannasta (Kazanin liittovaltion "
+"yliopisto)"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:861
 msgid ""
-"Formula to calculate an approximated visual magnitude of satellites from the"
-" standard magnitude may be found at Mike McCants website"
+"Formula to calculate an approximate visual magnitude of satellites from the "
+"standard magnitude may be found at Mike McCants website"
 msgstr ""
 "Kaava satelliittien likimääräisen visuaalisen magnitudin laskemiseksi "
 "standardimagnitudista löytyy Mike McCantsin verkkosivuilta"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:862
 msgid ""
-"We use a spherical shape of satellite to calculate an approximated visual "
+"We use a spherical shape of satellite to calculate an approximate visual "
 "magnitude from RCS values."
 msgstr ""
 "Käytämme satelliitin pallomaista muotoa laskeaksemme likimääräisen "
