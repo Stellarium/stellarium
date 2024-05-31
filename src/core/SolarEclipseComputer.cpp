@@ -26,10 +26,13 @@
 #include "StelCore.hpp"
 #include "sidereal_time.h"
 
+#include <utility>
 #include <QPainter>
 
 namespace
 {
+
+double sqr(const double x) { return x*x; }
 
 static const QColor hybridEclipseColor ("#800080");
 static const QColor totalEclipseColor  ("#ff0000");
@@ -159,6 +162,359 @@ void drawGeoLinesForEquirectMap(QPainter& painter, const std::vector<QPointF>& p
 
 		prevDir = currDir;
 	}
+}
+
+double zetaFromQ(const double cosQ, const double sinQ, const double tf, const EclipseBesselParameters& bp)
+{
+	// Reference: Explanatory Supplement to the Astronomical Ephemeris
+	// and the American Ephemeris and Nautical Almanac, 3rd Edition (2013)
+
+	const double x = bp.elems.x, y = bp.elems.y, d = bp.elems.d,
+	             mudot = bp.mudot, bdot = bp.bdot, cdot = bp.cdot, ddot = bp.ddot;
+	const double cosd = cos(d);
+	const double adot = -bp.ldot-mudot*x*tf*cosd + y*ddot*tf;
+
+	// From equation (11.81), restoring the missing dots over a,b,c in the book (cf. eq. (11.78)).
+	return (-adot + bdot * cosQ - cdot * sinQ) / ((1 + sqr(tf)) * (ddot * cosQ - mudot * cosd * sinQ));
+}
+
+struct ShadowLimitPoints
+{
+	EclipseBesselParameters bp;
+	double JD;
+	struct Point
+	{
+		double Q;
+		double zeta;
+	};
+	QVarLengthArray<Point, 8> values;
+
+	ShadowLimitPoints(const EclipseBesselParameters& bp, const double JD)
+		: bp(bp)
+		, JD(JD)
+	{
+	}
+};
+
+ShadowLimitPoints getShadowLimitQs(StelCore*const core, const double JD, const double e2, const bool penumbra)
+{
+	/*
+	 * Reference: Explanatory Supplement to the Astronomical Ephemeris and the American Ephemeris and Nautical Almanac,
+	 * 3rd Edition (2013).
+	 *
+	 * This function computes Q values for shadow limit points. The equation being solved here is obtained from the
+	 * main identity (11.56):
+	 *
+	 *                                            xi^2+eta1^2+zeta1^2=1,
+	 *
+	 * and (11.60):
+	 *
+	 *                                  zeta=rho2*[zeta1*cos(d1-d2)-eta1*sin(d1-d2)].
+	 *
+	 * Solve the latter equation for zeta1 and substitute the result into the former equation.  Then multiply both
+	 * sides of the result by rho1^2*rho2^2*cos(d1-d2)^2, and after a rearrangement you'll get:
+	 *
+	 *   zeta^2*rho1^2 + 2*zeta*eta*sin(d1-d2)*rho1*rho2 +
+	 *                              + eta^2*rho2^2 - cos(d1-d2)^2*rho1^2*rho2^2 + xi^2*cos(d1-d2)^2*rho1^2*rho2^2 = 0.
+	 *
+	 * Now substitute xi and eta with (eq. (11.82))
+	 *
+	 *                                              xi = x - L*sin(Q),
+	 *                                             eta = x - L*cos(Q),
+	 *
+	 * where (eq. (11.65))
+	 *
+	 *                                             L = l - zeta*tan(f).
+	 *
+	 * The result will be a bit more complicated:
+	 *
+	 *  zeta^2*rho1^2 - cos(d1-d2)^2*rho1^2*rho2^2 + 2*zeta*sin(d1-d2)*rho1*rho2*(y - cos(Q)*(l - zeta*tan(f))) +
+	 *    + rho2^2*(y - cos(Q)*(l - zeta*tan(f)))^2 + cos(d1-d2)^2*rho1^2*rho2^2*(x - sin(Q)*(l - zeta*tan(f)))^2 = 0.
+	 *
+	 * Now replace zeta by the expression obtainable from (11.78),
+	 *
+	 *                                              -adot + bdot*cos(Q) - cdot*sin(Q)
+	 *                               zeta = -------------------------------------------------,
+	 *                                      (1 + tan(f)^2)*(ddot*cos(Q) - mudot*cos(d)*sin(Q)
+	 *
+	 * yielding, after multiplying both sides of the result by (1+tan(f))^2, the final equation:
+	 *
+	 * (-adot + bdot*cos(Q) - cdot*sin(Q))^2*(rho1^2 + 2*cos(Q)*sin(d1 - d2)*rho1*rho2*tan(f) +
+	 *  + (cos(Q)^2 + cos(d1 - d2)^2*sin(Q)^2*rho1^2)*rho2^2*tan(f)^2) +
+	 *  + 2*(-adot + bdot*cos(Q) - cdot*sin(Q))*rho2*(sin(d1 - d2)*(y - cos(Q)*l)*rho1 +
+	 *    + cos(Q)*(y - cos(Q)*l)*rho2*tan(f) + cos(d1 - d2)^2*sin(Q)*(x - sin(Q)*l)*rho1^2*rho2*tan(f)) *
+	 *       * (1 + tan(f)^2)*(cos(Q)*ddot - cos(d)*sin(Q)*mudot) +
+	 *    + ((y - cos(Q)*l)^2 + cos(d1 - d2)^2*(-1 + x - sin(Q)*l)*(1 + x - sin(Q)*l)*rho1^2)*rho2^2 *
+	 *       * (1 + tan(f)^2)^2*(cos(Q)*ddot - cos(d)*sin(Q)*mudot)^2 = 0.
+	 *
+	 * As we are using the Newton's method to solve it, we need to separate the different powers of sin(Q)^n*cos(Q)^m
+	 * to be able to find a derivative. This will then yield the final result implemented in the code below.
+	 */
+
+	core->setJD(JD);
+	core->update(0);
+	const auto bp = calcBesselParameters(penumbra);
+	const double x = bp.elems.x, y = bp.elems.y, d = bp.elems.d, tf1 = bp.elems.tf1,
+	             bdot = bp.bdot, cdot = bp.cdot, ddot = bp.ddot, mudot = bp.mudot,
+	             tf2 = bp.elems.tf2, L1 = bp.elems.L1, L2 = bp.elems.L2;
+	const double tf = penumbra ? tf1 : tf2;
+	const double L = penumbra ? L1 : L2;
+	const double adot = -bp.ldot-mudot*x*tf*std::cos(d) + y*ddot*tf;
+
+	using namespace std;
+	const double sind = sin(d);
+	const double cosd = cos(d);
+	const double rho1 = sqrt(1-e2*sqr(cosd));
+	const double rho2 = sqrt(1-e2*sqr(sind));
+	const double sdd = e2*sind*cosd/(rho1*rho2);   // sin(d1-d2)
+	const double cdd = sqrt(1-sqr(sdd));           // cos(d1-d2)
+
+	// Some convenience variables to shorten the expressions below
+	const double tfSp1 = 1 + sqr(tf);
+	const double tfSp12 = sqr(tfSp1);
+	const double x2 = x*x;
+	const double y2 = y*y;
+	const double adot2 = sqr(adot);
+	const double bdot2 = sqr(bdot);
+	const double cdot2 = sqr(cdot);
+	const double rho12 = sqr(rho1);
+	const double rho22 = sqr(rho2);
+	const double cdd2 = sqr(cdd);
+
+	// Coefficients of the LHS of the equation we are going to solve.
+
+	//  * Constant term
+	const double cC0S0 = adot2 * rho12;
+
+	//  * coefficient for cos(Q)
+	const double cC1S0 = 2*adot*rho1*(-(bdot*rho1) + rho2*sdd*(adot*tf - ddot*tfSp1*y));
+	//  * coefficient for cos(Q)^2
+	const double cC2S0 = bdot2*rho12 + 2*bdot*rho1*rho2*sdd*(-2*adot*tf + ddot*tfSp1*y) +
+	                     rho2*(2*adot*ddot*tfSp1*(L*rho1*sdd - rho2*tf*y) + adot2*rho2*sqr(tf) +
+	                           cdd2*rho12*rho2*tfSp12*sqr(ddot)*(-1 + x2) +
+	                           rho2*tfSp12*sqr(ddot)*y2);
+	//  * coefficient for cos(Q)^3
+	const double cC3S0 = -2*rho2*(-(bdot*tf) + ddot*L*tfSp1)*(bdot*rho1*sdd - adot*rho2*tf +
+	                                                          ddot*rho2*tfSp1*y);
+	//  * coefficient for cos(Q)^4
+	const double cC4S0 = rho22*sqr(bdot*tf - ddot*L*tfSp1);
+
+	//  * coefficient for sin(Q)
+	const double cC0S1 = 2*adot*rho1*(cdot*rho1 + cosd*mudot*rho2*sdd*tfSp1*y);
+	//  * coefficient for sin(Q)^2
+	const double cC0S2 = cdot2*rho12 + 2*cdot*cosd*mudot*rho1*rho2*sdd*tfSp1*y +
+	                     rho22*(cdd2*rho12*(adot*tf + cosd*mudot*tfSp1*(-1 + x)) *
+	                            (adot*tf + cosd*mudot*tfSp1*(1 + x)) +
+	                            tfSp12*sqr(cosd)*sqr(mudot)*y2);
+	//  * coefficient for sin(Q)^3
+	const double cC0S3 = -2*cdd2*rho12*rho22*(-(cdot*tf) + cosd*L*mudot*tfSp1) *
+	                     (adot*tf + cosd*mudot*tfSp1*x);
+	//  * coefficient for sin(Q)^4
+	const double cC0S4 = cdd2*rho12*rho22*sqr(cdot*tf - cosd*L*mudot*tfSp1);
+
+	//  * coefficient for cos(Q)*sin(Q)
+	const double cC1S1 = -2*bdot*rho1*(cdot*rho1 + cosd*mudot*rho2*sdd*tfSp1*y) -
+	                     2*rho2*(ddot*tfSp1*y*(cdot*rho1*sdd + cosd*mudot*rho2*tfSp1*y) +
+	                             adot*(-2*cdot*rho1*sdd*tf + cosd*mudot*tfSp1*(L*rho1*sdd - rho2*tf*y)) +
+	                             cdd2*ddot*rho12*rho2*tfSp1*(adot*tf*x + cosd*mudot*tfSp1*(-1 + x2)));
+
+	//  * coefficient for cos(Q)^2*sin(Q)^2
+	const double cC2S2 = rho22*(-2*cdot*cosd*L*mudot*tf*tfSp1 + tfSp12*sqr(cosd)*sqr(L)*sqr(mudot) +
+	                            cdot2*sqr(tf) + cdd2*rho12*sqr(bdot*tf - ddot*L*tfSp1));
+
+	//  * coefficient for cos(Q)*sin(Q)^2
+	const double cC1S2 = 2*rho2*(cdot2*rho1*sdd*tf + adot*cdd2*rho12*rho2*tf*(-(bdot*tf) + ddot*L*tfSp1) +
+	                             cdot*tfSp1*(-(rho1*(cosd*L*mudot*sdd + cdd2*ddot*rho1*rho2*tf*x)) +
+	                                         cosd*mudot*rho2*tf*y) + cosd*mudot*rho2*tfSp1*
+	                             (cdd2*rho12*(-(bdot*tf) + 2*ddot*L*tfSp1)*x - cosd*L*mudot*tfSp1*y));
+	//  * coefficient for cos(Q)^2*sin(Q)
+	const double cC2S1 = 2*rho2*(tfSp1*(-(adot*cosd*L*mudot*rho2*tf) + bdot*cdd2*ddot*rho12*rho2*tf*x +
+	                                    ddot*L*rho2*tfSp1*(-(cdd2*ddot*rho12*x) + 2*cosd*mudot*y) +
+	                                    bdot*cosd*mudot*(L*rho1*sdd - rho2*tf*y)) +
+	                             cdot*(tf*(-2*bdot*rho1*sdd + adot*rho2*tf) +
+	                                   ddot*tfSp1*(L*rho1*sdd - rho2*tf*y)));
+
+	//  * coefficient for cos(Q)^3*sin(Q)
+	const double cC3S1 = -2*rho22*(-(bdot*tf) + ddot*L*tfSp1)*(-(cdot*tf) + cosd*L*mudot*tfSp1);
+	//  * coefficient for cos(Q)*sin(Q)^3
+	const double cC1S3 = -2*cdd2*rho12*rho22*(-(bdot*tf) + ddot*L*tfSp1)*(-(cdot*tf) + cosd*L*mudot*tfSp1);
+
+	const double lhsScale = max({abs(cC0S0),
+	                             abs(cC1S0),
+	                             abs(cC2S0),
+	                             abs(cC3S0),
+	                             abs(cC4S0),
+	                             abs(cC0S1),
+	                             abs(cC0S2),
+	                             abs(cC0S3),
+	                             abs(cC0S4),
+	                             abs(cC1S1),
+	                             abs(cC2S2),
+	                             abs(cC1S2),
+	                             abs(cC2S1),
+	                             abs(cC3S1),
+	                             abs(cC1S3)});
+
+	// LHS(Q) of the equation and its derivative
+	const auto lhsAndDerivative = [=](const double Q) -> std::pair<double,double>
+	{
+		const auto sinQ = std::sin(Q);
+		const auto cosQ = std::cos(Q);
+		const auto sinQ_2 = sqr(sinQ);
+		const auto cosQ_2 = sqr(cosQ);
+		const auto sinQ_3 = sinQ_2 * sinQ;
+		const auto cosQ_3 = cosQ_2 * cosQ;
+		const auto sinQ_4 = sqr(sinQ_2);
+		const auto cosQ_4 = sqr(cosQ_2);
+		const auto lhs = cC0S0 +
+		                 cC1S0*cosQ + cC2S0*cosQ_2 + cC3S0*cosQ_3 + cC4S0*cosQ_4 +
+		                 cC0S1*sinQ + cC0S2*sinQ_2 + cC0S3*sinQ_3 + cC0S4*sinQ_4 +
+		                 cC1S1*cosQ*sinQ + cC1S2*cosQ*sinQ_2 + cC1S3*cosQ*sinQ_3 +
+		                 cC2S1*cosQ_2*sinQ + cC2S2*cosQ_2*sinQ_2 +
+		                 cC3S1*cosQ_3*sinQ;
+		const auto lhsPrime =
+		    -cC1S0*sinQ -2*cC2S0*cosQ*sinQ - 3*cC3S0*cosQ_2*sinQ - 4*cC4S0*cosQ_3*sinQ +
+		     cC0S1*cosQ + 2*cC0S2*sinQ*cosQ + 3*cC0S3*sinQ_2*cosQ + 4*cC0S4*sinQ_3*cosQ +
+		     cC1S1*(cosQ_2-sinQ_2) + cC1S2*(2*cosQ_2*sinQ-sinQ_3) + cC1S3*(3*cosQ_2*sinQ_2-sinQ_4) +
+		     cC2S1*(cosQ_3-2*cosQ*sinQ_2) + cC2S2*(2*cosQ_3*sinQ-2*cosQ*sinQ_3) +
+		     cC3S1*(cosQ_4-3*cosQ_2*sinQ_2);
+		return std::make_pair(lhs, lhsPrime);
+	};
+
+	// Find roots using Newton's method. The LHS of the equation is divided
+	// by sin((Q-rootQ)/2) for all known roots to find subsequent roots.
+	ShadowLimitPoints points(bp, JD);
+	double Q = 0;
+	bool rootFound = false;
+	do
+	{
+		rootFound = false;
+		bool finalIteration = false;
+		// Max retry count is chosen with the idea that we'll scan the (periodic) domain [-pi,pi] with 4
+		// extrema approximately evenly distributed over the domain, aiming to hit each slope, with an extra
+		// sample just to make sure that we've not missed anything.
+		// If we don't do these retries, we may lose roots when Newton's method gets stuck at an extremum that
+		// doesn't reach zero.
+		const double maxRetries = 9;
+		for(double retryCount = 0; retryCount < maxRetries && !rootFound; ++retryCount)
+		{
+			Q = 2*M_PI*retryCount/maxRetries;
+
+			for(int n = 0; n < 50; ++n)
+			{
+				const auto [lhs, lhsPrime] = lhsAndDerivative(Q);
+
+				// Cancel the known roots to avoid finding them instead of the remaining ones
+				auto newLHSPrime = lhsPrime;
+				auto newLHS = lhs;
+				for(const auto root : points.values)
+				{
+					const auto rootQ = root.Q;
+					// We need a 2pi-periodic root-canceling function,
+					// so take a sine of half the difference.
+					const auto sinDiff = sin((Q - rootQ)/2);
+					const auto cosDiff = cos((Q - rootQ)/2);
+
+					newLHS /= sinDiff;
+					newLHSPrime = (newLHSPrime - 0.5*cosDiff*newLHS)/sinDiff;
+				}
+				if(!isfinite(newLHS) || !isfinite(newLHSPrime))
+				{
+					qWarning().nospace() << "Hit infinite/NaN values: LHS = " << newLHS
+					                     << ", LHS'(Q) = " << newLHSPrime << " at Q = " << Q;
+					break;
+				}
+
+				if(abs(newLHS) < 1e-10*lhsScale)
+					finalIteration = true;
+
+				const auto deltaQ = newLHS / newLHSPrime;
+				if(newLHSPrime==0 || abs(deltaQ) > 1000)
+				{
+					// We are shooting too far away, convergence may be too slow.
+					// Let's try perturbing Q and retrying.
+					Q += 0.01;
+					finalIteration = false;
+					continue;
+				}
+				Q -= deltaQ;
+				Q = StelUtils::fmodpos(Q, 2*M_PI);
+
+				if(finalIteration)
+				{
+					points.values.push_back({Q, zetaFromQ(cos(Q),sin(Q),tf,bp)});
+					// Set a new initial value, but try to avoid setting it to 0 if the current
+					// root is close to it (all values here are arbitrary in other respects).
+					Q = abs(Q) > 0.5 ? 0 : -M_PI/2;
+
+					rootFound = true;
+					break;
+				}
+			}
+		}
+	}
+	while(rootFound);
+
+	std::sort(points.values.begin(), points.values.end(), [](auto& p1, auto& p2){ return p1.Q < p2.Q; });
+
+	return points;
+}
+
+SolarEclipseComputer::GeoPoint computeTimePoint(const EclipseBesselParameters& bp, const double earthOblateness,
+                                                const double Q, const double zeta, const bool penumbra)
+{
+	// Reference: Explanatory Supplement to the Astronomical Ephemeris
+	// and the American Ephemeris and Nautical Almanac, 3rd Edition (2013)
+
+	const double f = earthOblateness;
+	const double e2 = f*(2.-f);
+	const double ff = 1./(1.-f);
+	const double x = bp.elems.x, y = bp.elems.y, d = bp.elems.d, tf1 = bp.elems.tf1,
+	             tf2 = bp.elems.tf2, L1 = bp.elems.L1, L2 = bp.elems.L2, mu = bp.elems.mu;
+
+	using namespace std;
+	const double sind = sin(d);
+	const double cosd = cos(d);
+	const double rho1 = sqrt(1-e2*sqr(cosd));
+	const double rho2 = sqrt(1-e2*sqr(sind));
+	const double sd1 = sind/rho1;
+	const double cd1 = sqrt(1-e2)*cosd/rho1;
+	const double sdd = e2*sind*cosd/(rho1*rho2);   // sin(d1-d2)
+	const double cdd = sqrt(1-sqr(sdd));           // cos(d1-d2)
+	const double tf = penumbra ? tf1 : tf2;
+	const double L = penumbra ? L1 : L2;
+
+	SolarEclipseComputer::GeoPoint coordinates{99., 0.};
+
+	const double sinQ = sin(Q);
+	const double cosQ = cos(Q);
+
+	const double Lz = L - zeta*tf; // radius of shadow at distance zeta from the fundamental plane
+	const double xi  = x - Lz * sinQ;
+	const double eta = y - Lz * cosQ;
+
+	const double eta1 = eta / rho1;
+	const double zeta1 = (zeta / rho2 + eta1 * sdd) / cdd;
+
+	if(abs(eta) > 1.0001 || abs(xi) > 1.0001 || abs(zeta) > 1.0001)
+	{
+		qWarning().noquote() << QString("Unnormalized vector (xi,eta,zeta) found: (%1, %2, %3); Q = %4°")
+		                            .arg(xi,0,'g',17).arg(eta,0,'g',17).arg(zeta,0,'g',17)
+		                            .arg(StelUtils::fmodpos(Q*180/M_PI, 360), 0,'g',17);
+	}
+
+	const double b = -eta1*sd1+zeta1*cd1;
+	const double theta = atan2(xi,b)*M_180_PI;
+	double lngDeg = theta-mu;
+	lngDeg = StelUtils::fmodpos(lngDeg, 360.);
+	if (lngDeg > 180.) lngDeg -= 360.;
+	const double sfn1 = eta1*cd1+zeta1*sd1;
+	const double cfn1 = sqrt(1.-sfn1*sfn1);
+	const double tanLat = ff*sfn1/cfn1;
+	coordinates.latitude = atan(tanLat)*M_180_PI;
+	coordinates.longitude = lngDeg;
+
+	return coordinates;
 }
 
 }
@@ -423,6 +779,18 @@ SolarEclipseComputer::SolarEclipseComputer(StelCore* core, StelLocaleMgr* locale
 {
 }
 
+bool SolarEclipseComputer::bothPenumbraLimitsPresent(const double JDMid) const
+{
+	core->setJD(JDMid);
+	core->update(0);
+	const auto ep = calcSolarEclipseBessel();
+	// FIXME: can the rise-set line exist at greatest eclipse but not exist at some other phase?
+	// It seems that ellipticity of the Earth could result in this, because greatest eclipse is
+	// defined relative to Earth's center rather than to its rim.
+	const auto coordinates = getRiseSetLineCoordinates(true, ep.x, ep.y, ep.d, ep.L1, ep.mu);
+	return coordinates.latitude > 90;
+}
+
 auto SolarEclipseComputer::generateEclipseMap(const double JDMid) const -> EclipseMapData
 {
 	const bool savedTopocentric = core->getUseTopocentricCoordinates();
@@ -457,13 +825,7 @@ auto SolarEclipseComputer::generateEclipseMap(const double JDMid) const -> Eclip
 	double JDP2 = 0., JDP3 = 0.;
 	GeoPoint coordinates;
 	// Check northern/southern limits of penumbra at greatest eclipse
-	bool bothPenumbralLimits = false;
-	coordinates = getNSLimitOfShadow(JDMid,true,true);
-	double latPL1 = coordinates.latitude;
-	coordinates = getNSLimitOfShadow(JDMid,false,true);
-	double latPL2 = coordinates.latitude;
-	if (latPL1 <= 90. && latPL2 <= 90.)
-		bothPenumbralLimits = true;
+	const bool bothPenumbralLimits = bothPenumbraLimitsPresent(JDMid);
 
 	if (bothPenumbralLimits)
 	{
@@ -483,83 +845,8 @@ auto SolarEclipseComputer::generateEclipseMap(const double JDMid) const -> Eclip
 	data.lastContactWithEarth.JD = JDP4;
 	calcSolarEclipseData(JDP4,dRatio,data.lastContactWithEarth.latitude,data.lastContactWithEarth.longitude,altitude,pathWidth,duration,magnitude);
 
-	// Northern/southern Limits of penumbra
-	bool north = true;
-	for (int j = 0; j < 2; j++)
-	{
-		if (j != 0) north = false;
-		auto& points = data.penumbraLimits[j];
-		double JD = JDP1;
-		int i = 0;
-		while (JD < JDP4)
-		{
-			JD = JDP1 + i/1440.0;
-			coordinates = getNSLimitOfShadow(JD,north,true);
-			points.emplace_back(JD, coordinates.longitude, coordinates.latitude);
-			i++;
-		}
-
-		if(points.empty()) continue;
-
-		// Refine at the beginning and the end of the line so as to find the precise endpoints
-
-		// 1. Beginning of the line
-		const auto firstValidIt = std::find_if(points.begin(), points.end(),
-		                                       [](const auto& p){ return p.latitude <= 90; });
-		if (firstValidIt == points.end()) continue;
-		const int firstValidPos = firstValidIt - points.begin();
-		if (firstValidPos > 0)
-		{
-			double lastInvalidTime = points[firstValidPos - 1].JD;
-			double firstValidTime = points[firstValidPos].JD;
-			// Bisect between these times. The sufficient number of iterations was found empirically.
-			for (int n = 0; n < 15; ++n)
-			{
-				const auto currTime = (lastInvalidTime + firstValidTime) / 2;
-				const auto coords = getNSLimitOfShadow(currTime,north,true);
-				if (coords.latitude > 90)
-				{
-					lastInvalidTime = currTime;
-				}
-				else
-				{
-					firstValidTime = currTime;
-					points.emplace_front(currTime, coords.longitude, coords.latitude);
-				}
-			}
-		}
-
-		// 2. End of the line
-		const auto lastValidIt = std::find_if(points.rbegin(), points.rend(),
-		                                      [](const auto& p){ return p.latitude <= 90; });
-		if (lastValidIt == points.rend()) continue;
-		const int lastValidPos = points.size() - 1 - (lastValidIt - points.rbegin());
-		if (lastValidPos + 1u < points.size())
-		{
-			double firstInvalidTime = points[lastValidPos + 1].JD;
-			double lastValidTime = points[lastValidPos].JD;
-			// Bisect between these times. The sufficient number of iterations was found empirically.
-			for (int n = 0; n < 15; ++n)
-			{
-				const auto currTime = (firstInvalidTime + lastValidTime) / 2;
-				const auto coords = getNSLimitOfShadow(currTime,north,true);
-				if (coords.latitude > 90)
-				{
-					firstInvalidTime = currTime;
-				}
-				else
-				{
-					lastValidTime = currTime;
-					points.emplace_back(currTime, coords.longitude, coords.latitude);
-				}
-			}
-		}
-
-		// 3. Cleanup: remove invalid points, sort by time increase
-		points.erase(std::remove_if(points.begin(), points.end(), [](const auto& p) { return p.latitude > 90; }),
-		             points.end());
-		std::sort(points.begin(), points.end(), [](const auto& a, const auto& b) { return a.JD < b.JD; });
-	}
+	// Northern/southern limits of penumbra
+	computeNSLimitsOfShadow(JDP1, JDP4, true, data.penumbraLimits);
 
 	// Eclipse begins/ends at sunrise/sunset curve
 	if (bothPenumbralLimits)
@@ -957,11 +1244,6 @@ auto SolarEclipseComputer::generateEclipseMap(const double JDMid) const -> Eclip
 			JDC2 = JDMid;
 		}
 
-		double dRatioC1 = dRatio;
-		calcSolarEclipseData(JDMid,dRatio,latDeg,lngDeg,altitude,pathWidth,duration,magnitude);
-		double dRatioMid = dRatio;
-		calcSolarEclipseData(JDC2,dRatio,latDeg,lngDeg,altitude,pathWidth,duration,magnitude);
-		double dRatioC2 = dRatio;
 		// Umbra/antumbra outline
 		// we want to draw (ant)umbral shadow on world map at exact times like 09:00, 09:10, 09:20, ...
 		double beginJD = int(JDU1)+(10.*int(1440.*(JDU1-int(JDU1))/10.)+10.)/1440.;
@@ -1005,88 +1287,8 @@ auto SolarEclipseComputer::generateEclipseMap(const double JDMid) const -> Eclip
 			i++;
 		}
 
-		// Extreme northern/southern limits of umbra/antumbra at C1
-		const auto C1a = getExtremeNSLimitOfShadow(JDC1,true,false,true);
-		const auto C1b = getExtremeNSLimitOfShadow(JDC1,false,false,true);
-
-		// Extreme northern/southern limits of umbra/antumbra at C2
-		const auto C2a = getExtremeNSLimitOfShadow(JDC2,true,false,false);
-		const auto C2b = getExtremeNSLimitOfShadow(JDC2,false,false,false);
-
-		double dRatio,altitude,pathWidth,duration,magnitude;
-		calcSolarEclipseData(JDC1,dRatio,latDeg,lngDeg,altitude,pathWidth,duration,magnitude);
-
-		auto& extremeLimit1 = data.extremeUmbraLimit1.emplace_back();
-		if (dRatioC1 >= 1. && dRatioMid >= 1. && dRatioC2 >= 1.)
-			extremeLimit1.eclipseType = EclipseMapData::EclipseType::Total;
-		else if (dRatioC1 < 1. && dRatioMid < 1. && dRatioC2 < 1.)
-			extremeLimit1.eclipseType = EclipseMapData::EclipseType::Annular;
-		else
-			extremeLimit1.eclipseType = EclipseMapData::EclipseType::Hybrid;
-		// 1st extreme limit at C1
-		if (C1a.latitude <= 90. || C1b.latitude <= 90.)
-		{
-			if (dRatio>=1.)
-				extremeLimit1.curve.emplace_back(C1a.longitude, C1a.latitude);
-			else
-				extremeLimit1.curve.emplace_back(C1b.longitude, C1b.latitude);
-		}
-		JD = JDC1-20./1440.;
-		i = 0;
-		while (JD < JDC2+20./1440.)
-		{
-			JD = JDC1+(i-20.)/1440.;
-			coordinates = getNSLimitOfShadow(JD,true,false);
-			if (coordinates.latitude <= 90.)
-				extremeLimit1.curve.emplace_back(coordinates.longitude, coordinates.latitude);
-			i++;
-		}
-
-		calcSolarEclipseData(JDC2,dRatio,latDeg,lngDeg,altitude,pathWidth,duration,magnitude);
-		// 1st extreme limit at C2
-		if (C2a.latitude <= 90. || C2b.latitude <= 90.)
-		{
-			if (dRatio>=1.)
-				extremeLimit1.curve.emplace_back(C2a.longitude, C2a.latitude);
-			else
-				extremeLimit1.curve.emplace_back(C2b.longitude, C2b.latitude);
-		}
-
-		auto& extremeLimit2 = data.extremeUmbraLimit1.emplace_back();
-		// 2nd extreme limit at C1
-		if (dRatioC1 >= 1. && dRatioMid >= 1. && dRatioC2 >= 1.)
-			extremeLimit2.eclipseType = EclipseMapData::EclipseType::Total;
-		else if (dRatioC1 < 1. && dRatioMid < 1. && dRatioC2 < 1.)
-			extremeLimit2.eclipseType = EclipseMapData::EclipseType::Annular;
-		else
-			extremeLimit2.eclipseType = EclipseMapData::EclipseType::Hybrid;
-		calcSolarEclipseData(JDC1,dRatio,latDeg,lngDeg,altitude,pathWidth,duration,magnitude);
-		if (C1a.latitude <= 90. || C1b.latitude <= 90.)
-		{
-			if (dRatio>=1.)
-				extremeLimit2.curve.emplace_back(C1b.longitude, C1b.latitude);
-			else
-				extremeLimit2.curve.emplace_back(C1a.longitude, C1a.latitude);
-		}
-		JD = JDC1-20./1440.;
-		i = 0;
-		while (JD < JDC2+20./1440.)
-		{
-			JD = JDC1+(i-20.)/1440.;
-			coordinates = getNSLimitOfShadow(JD,false,false);
-			if (coordinates.latitude <= 90.)
-				extremeLimit2.curve.emplace_back(coordinates.longitude, coordinates.latitude);
-			i++;
-		}
-		calcSolarEclipseData(JDC2,dRatio,latDeg,lngDeg,altitude,pathWidth,duration,magnitude);
-		// 2nd extreme limit at C2
-		if (C2a.latitude <= 90. || C2b.latitude <= 90.)
-		{
-			if (dRatio>=1.)
-				extremeLimit2.curve.emplace_back(C2b.longitude, C2b.latitude);
-			else
-				extremeLimit2.curve.emplace_back(C2a.longitude, C2a.latitude);
-		}
+		// Northern/southern limits of umbra
+		computeNSLimitsOfShadow(JDP1, JDP4, false, data.umbraLimits);
 	}
 
 	core->setJD(currentJD);
@@ -1096,216 +1298,199 @@ auto SolarEclipseComputer::generateEclipseMap(const double JDMid) const -> Eclip
 	return data;
 }
 
-auto SolarEclipseComputer::getNSLimitOfShadow(double JD, bool northernLimit, bool penumbra) const -> GeoPoint
+void SolarEclipseComputer::computeNSLimitsOfShadow(const double JDP1, const double JDP4, const bool penumbra,
+                                                   std::vector<std::vector<EclipseMapData::GeoTimePoint>>& limits) const
 {
-	// Source: Explanatory Supplement to the Astronomical Ephemeris 
-	// and the American Ephemeris and Nautical Almanac (1961)
-	GeoPoint coordinates;
+	// Reference: Explanatory Supplement to the Astronomical Ephemeris
+	// and the American Ephemeris and Nautical Almanac, 3rd Edition (2013)
+
 	static SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
 	static const double f = 1.0 - ssystem->getEarth()->getOneMinusOblateness(); // flattening
 	static const double e2 = f*(2.-f);
-	static const double ff = 1./(1.-f);
-	core->setJD(JD);
-	core->update(0);
-	const auto bp = calcBesselParameters(penumbra);
-	const double x = bp.elems.x, y = bp.elems.y, d = bp.elems.d, tf1 = bp.elems.tf1,
-	             tf2 = bp.elems.tf2, L1 = bp.elems.L1, L2 = bp.elems.L2, mu = bp.elems.mu;
-	const double rho1 = std::sqrt(1.-e2*std::cos(d)*std::cos(d));
-	const double y1 = y/rho1;
-	double eta1 = y1;
-	const double sd1 = std::sin(d)/rho1;
-	const double cd1 = std::sqrt(1.-e2)*std::cos(d)/rho1;
-	const double rho2 = std::sqrt(1.-e2*std::sin(d)*std::sin(d));
-	const double sd1d2 = e2*std::sin(d)*std::cos(d)/(rho1*rho2);
-	const double cd1d2 = std::sqrt(1.-sd1d2*sd1d2);
-	double zeta = rho2*(-eta1*sd1d2);
-	double tf, L;
-	if (penumbra)
-	{
-		L = L1;
-		tf = tf1;
-	}
-	else
-	{
-		L = L2;
-		tf = tf2;
-	}
-	double Lb = L-zeta*tf;
-	double xidot = bp.mudot*(-y*std::sin(d)+zeta*std::cos(d));
-	double tq = -(bp.ydot-bp.etadot)/(bp.xdot-xidot);
-	double sq = std::sin(std::atan(tq));
-	double cq = std::cos(std::atan(tq));
-	if (!northernLimit)
-	{
-		sq *= -1.;
-		cq *= -1.;
-	}
-	double xi = x-Lb*sq;
-	eta1 = y1-Lb*cq/rho1;
-	zeta = 1.-xi*xi-eta1*eta1;
 
-	if (zeta < 0.)
+	const int iMax = std::ceil((JDP4-JDP1)*1440);
+	std::vector<ShadowLimitPoints> solutionsPerTime;
+	solutionsPerTime.reserve(iMax);
+
+	constexpr double minutesToDays = 1./(24*60);
+	constexpr double secondsToDays = 1./(24*3600);
+
+	// First sample the sets of Q values over all the time of the eclipse.
+	for(int i = 0; i < iMax; ++i)
 	{
-		coordinates.latitude = 99.;
-		coordinates.longitude = 0.;
+		const double JD = JDP1 + i*minutesToDays;
+		solutionsPerTime.emplace_back(getShadowLimitQs(core, JD, e2, penumbra));
 	}
-	else
+
+	// Check that each set of solutions has an even number of solutions.
+	// If it's odd, the set is broken so should be removed.
+	for(unsigned i = 0; i < solutionsPerTime.size(); )
 	{
-		double zeta1 = std::sqrt(zeta);
-		zeta = rho2*(zeta1*cd1d2-eta1*sd1d2);
-		double adot = -bp.ldot-bp.mudot*x*tf*std::cos(d);
-		double tq = (bp.bdot-zeta*bp.ddot-(adot/cq))/(bp.cdot-zeta*bp.mudot*std::cos(d));
-		double Lb = L-zeta*tf;
-		sq = std::sin(std::atan(tq));
-		cq = std::cos(std::atan(tq));
-		if (!northernLimit)
+		if(solutionsPerTime[i].values.size() % 2)
 		{
-			sq *= -1.;
-			cq *= -1.;
+			qWarning() << "Found an odd number of values of Q:" << solutionsPerTime[i].values.size();
+			solutionsPerTime.erase(solutionsPerTime.begin()+i);
 		}
-		xi = x-Lb*sq;
-		eta1 = y1-Lb*cq/rho1;
-		zeta = 1.-xi*xi-eta1*eta1;
-		if (zeta < 0.)
-		{
-			coordinates.latitude = 99.;
-			coordinates.longitude = 0.;
-		}	
 		else
 		{
-			zeta1 = std::sqrt(zeta);
-			zeta = rho2*(zeta1*cd1d2-eta1*sd1d2);
-			//tq = bp.bdot-zeta*ddot-adot/cq;
-			//tq = tq/(bp.cdot-zeta*bp.mudot*std::cos(d));
-			double b = -eta1*sd1+zeta1*cd1;
-			double lngDeg = StelUtils::fmodpos(std::atan2(xi,b)*M_180_PI - mu + 180., 360.) - 180.;
-			double sfn1 = eta1*cd1+zeta1*sd1;
-			double cfn1 = std::sqrt(1.-sfn1*sfn1);
-			double latDeg = ff*sfn1/cfn1;
-			coordinates.latitude = std::atan(latDeg)*M_180_PI;
-			coordinates.longitude = lngDeg;
+			++i;
 		}
 	}
-	return coordinates;
-}
 
-auto SolarEclipseComputer::getExtremeNSLimitOfShadow(double JD, bool northernLimit, bool penumbra, bool begin) const -> GeoPoint
-{
-	// Source: Explanatory Supplement to the Astronomical Ephemeris 
-	// and the American Ephemeris and Nautical Almanac (1961)
-	GeoPoint coordinates;
-	static SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
-	static const double f = 1.0 - ssystem->getEarth()->getOneMinusOblateness(); // flattening
-	static const double e2 = f*(2.-f);
-	static const double ff = 1./(1.-f);
-
-	core->setJD(JD+0.1);
-	core->update(0);
-	const auto bpPlus = calcBesselParameters(penumbra);
-	const double bdot1 = bpPlus.bdot, cdot1 = bpPlus.cdot;
-
-	core->setJD(JD-0.1);
-	core->update(0);
-	const auto bpMinus = calcBesselParameters(penumbra);
-	const double bdot2 = bpMinus.bdot, cdot2 = bpMinus.cdot;
-
-	const double bdd = 5.*(bdot1-bdot2);
-	const double cdd = 5.*(cdot1-cdot2);
-
-	core->setJD(JD);
-	core->update(0);
-	const auto bp = calcBesselParameters(penumbra);
-	const double xdot = bp.xdot, ydot = bp.ydot, bdot = bp.bdot, cdot = bp.cdot;
-	const double x = bp.elems.x, y = bp.elems.y, d = bp.elems.d, L1 = bp.elems.L1, L2 = bp.elems.L2;
-	double e = std::sqrt(bdot*bdot+cdot*cdot);
-	double rho1 = std::sqrt(1-e2*std::cos(d)*std::cos(d));
-	double scq = e/cdot;
-	double tq = bdot/cdot;
-	double cq = 1./scq;
-	const double L = penumbra ? L1 : L2;
-	if (northernLimit)
+	// Search for time points where number of Q values changes and
+	// refine each case to get closer to the point of the jump.
+	for(unsigned i = 1; i < solutionsPerTime.size(); ++i)
 	{
-		if (L<0.)
-			cq = std::abs(cq);
+		const auto& solA = solutionsPerTime[i-1];
+		const auto& solB = solutionsPerTime[i];
+		if(std::abs(solA.JD - solB.JD) <= 0.001*secondsToDays)
+		{
+			// Already fine enough.
+			continue;
+		}
+
+		if(solA.values.size() != solB.values.size())
+		{
+			const auto midJD = (solA.JD + solB.JD)/2;
+			solutionsPerTime.insert(solutionsPerTime.begin()+i,
+			                        getShadowLimitQs(core, midJD, e2, penumbra));
+			if(solutionsPerTime[i].values.size() % 2)
+			{
+				qWarning() << "Found an odd number of values of Q while searching for "
+					      "JD of change in number of solutions:"
+					   << solutionsPerTime[i].values.size();
+			}
+			// Retry with the first of the new intervals at the next iteration
+			--i;
+		}
+	}
+
+	// Search for time points where sign of zeta switches and
+	// refine each case to get closer to the zero crossing.
+	for(unsigned i = 1; i < solutionsPerTime.size(); ++i)
+	{
+		const auto& solA = solutionsPerTime[i-1];
+		const auto& solB = solutionsPerTime[i];
+		if(solA.values.size() != solB.values.size())
+		{
+			// Even if there's a sign change, we've already refined these
+			// points, so it's not a problem that we skip this case here.
+			continue;
+		}
+
+		if(std::abs(solA.JD - solB.JD) <= 0.001*secondsToDays)
+		{
+			// Already fine enough.
+			continue;
+		}
+
+		for(int n = 0; n < solA.values.size(); ++n)
+		{
+			if(solA.values[n].zeta * solB.values[n].zeta < 0)
+			{
+				const auto midJD = (solA.JD + solB.JD)/2;
+				solutionsPerTime.insert(solutionsPerTime.begin()+i,
+				                        getShadowLimitQs(core, midJD, e2, penumbra));
+				if(solutionsPerTime[i].values.size() % 2)
+				{
+					qWarning() << "Found an odd number of values of Q while searching for "
+					              "JD of zeta sign change:"
+					           << solutionsPerTime[i].values.size();
+				}
+				// Retry with the first of the new intervals at the next iteration
+				--i;
+			}
+		}
+	}
+
+	if(solutionsPerTime.empty()) return;
+
+	// Now treat all runs of the same solution counts as simultaneous runs of multiple lines, where for each
+	// JD the point belonging to line n is the solution number n (the solutions are already sorted by Q).
+
+	// 1. Compute the lines ignoring the sign of zeta
+	struct Point
+	{
+		GeoPoint geo;
+		double JD;
+		double zeta;
+		Point(const GeoPoint& geo, double JD, double zeta) : geo(geo), JD(JD), zeta(zeta) {}
+	};
+	std::vector<std::vector<Point>> lines;
+	lines.resize(solutionsPerTime[0].values.size());
+	for(unsigned i = 0, startN = 0; i < solutionsPerTime.size(); ++i)
+	{
+		const auto& sol = solutionsPerTime[i];
+		if(i > 0 && sol.values.size() != solutionsPerTime[i-1].values.size())
+		{
+			startN = lines.size();
+			lines.resize(lines.size() + sol.values.size());
+		}
+		for(unsigned n = 0; n < sol.values.size(); ++n)
+		{
+			const double JD = sol.JD;
+			const double Q = sol.values[n].Q;
+			const double zeta = sol.values[n].zeta;
+			const auto tp = computeTimePoint(sol.bp, f, Q, zeta, penumbra);
+			lines[startN + n].emplace_back(tp, JD, zeta);
+		}
+	}
+
+	// 2. Remove the points under the horizon (i.e. where zeta < 0)
+	for(unsigned n = 0; n < lines.size(); ++n)
+	{
+		auto& line = lines[n];
+		if(line.empty()) continue;
+
+		const auto negZetaIt = std::find_if(line.begin(), line.end(), [](auto& p){ return p.zeta < 0; });
+		if(negZetaIt == line.end()) continue; // whole line is visible
+
+		const auto nonNegZetaIt = std::find_if(line.begin(), line.end(),
+		                                       [](auto& p){ return p.zeta >= 0; });
+		if(nonNegZetaIt == line.end())
+		{
+			// Whole line is under the horizon
+			line.clear();
+			continue;
+		}
+
+		if(nonNegZetaIt == line.begin())
+		{
+			// Line starts with non-negative zetas, then gets under the horizon.  Move the second
+			// part of the line to a new line, skipping all leading points with negative zeta.
+			const auto nextNonNegZetaIt = std::find_if(negZetaIt, line.end(),
+			                                           [](auto& p){ return p.zeta >= 0; });
+			if(nextNonNegZetaIt != line.end())
+				lines.emplace_back(nextNonNegZetaIt, line.end());
+			line.erase(negZetaIt, line.end());
+		}
 		else
-			cq = -std::abs(cq);
+		{
+			// Line starts with negative zetas and then there appear positive-zeta points.
+			// Remove the negative-zeta head.
+			const auto nextNonNegZetaIt = std::find_if(negZetaIt, line.end(),
+			                                           [](auto& p){ return p.zeta >= 0; });
+			line.erase(negZetaIt, nextNonNegZetaIt);
+			if(!line.empty())
+			{
+				// The remaining points may still contain negative zetas,
+				// so restart processing from the same line.
+				--n;
+			}
+		}
 	}
-	else
+
+	// Finally, fill in the limits
+	limits.clear();
+	for(const auto& line : lines)
 	{
-		if (L<0.)
-			cq = -std::abs(cq);
-		else
-			cq = std::abs(cq);
+		if(line.empty()) continue;
+		auto& limit = limits.emplace_back();
+		for(const auto& p : line)
+		{
+			limit.emplace_back(p.JD, p.geo.longitude, p.geo.latitude);
+		}
 	}
-	double sq = tq*cq;
-	double xidot, etadot;
-	if (cq>0.)
-	{
-		xidot = xdot-L*bdd/e;
-		etadot = (ydot-L*cdd/e)/rho1;
-	}
-	else
-	{
-		xidot = xdot+L*bdd/e;
-		etadot = (ydot+L*cdd/e)/rho1;
-	}
-	const double n2 = xidot*xidot+etadot*etadot;
-	double xi = x-L*sq;
-	double eta = (y-L*cq)/rho1;
-	double szi = (xi*etadot-xidot*eta)/std::sqrt(n2);
-	if (std::abs(szi)<=1.)
-	{
-		double czi = -std::sqrt(1.-szi*szi);
-		if (!begin) czi *= -1.;
-		double tc = (czi/std::sqrt(n2))-(xi*xidot+eta*etadot)/n2;
-		core->setJD(JD+tc/24.);
-		core->update(0);
-		const auto bp = calcBesselParameters(penumbra);
-		const double bdot = bp.bdot, cdot = bp.cdot;
-		const double x = bp.elems.x, y = bp.elems.y, d = bp.elems.d,
-		             L1 = bp.elems.L1, L2 = bp.elems.L2, mu = bp.elems.mu;
-		//tq = bdot/cdot;
-		e = std::sqrt(bdot*bdot+cdot*cdot);
-		rho1 = std::sqrt(1.-e2*std::cos(d)*std::cos(d));
-		scq = e/cdot;
-		tq = bdot/cdot;
-		cq = 1./scq;
-		const double L = penumbra ? L1 : L2;
-		if (northernLimit)
-			cq = (L<0.) ?  std::abs(cq) : -std::abs(cq);
-		else
-			cq = (L<0.) ? -std::abs(cq) :  std::abs(cq);
-		sq = tq*cq;
-		// clazy warns n2 below and therefore this all is unused!
-		//if (cq>0.)
-		//{
-		//	xidot = xdot-L*bdd/e;
-		//	etadot = (ydot-L*cdd/e)/rho1;
-		//}
-		//else
-		//{
-		//	xidot = xdot+L*bdd/e;
-		//	etadot = (ydot+L*cdd/e)/rho1;
-		//}
-		//n2 = xidot*xidot+etadot*etadot;
-		xi = x-L*sq;
-		eta = (y-L*cq)/rho1;
-		double sd1 = std::sin(d)/rho1;
-		double cd1 = std::sqrt(1.-e2)*std::cos(d)/rho1;
-		double b = -eta*sd1;
-		double lngDeg = StelUtils::fmodpos(std::atan2(xi,b)*M_180_PI - mu +180., 360.) - 180.;
-		double sfn1 = eta*cd1;
-		double cfn1 = std::sqrt(1.-sfn1*sfn1);
-		double latDeg = ff*sfn1/cfn1;
-		coordinates.latitude = std::atan(latDeg)*M_180_PI;
-		coordinates.longitude = lngDeg;
-	}
-	else
-	{
-		coordinates.latitude = 99.;
-		coordinates.longitude = 0.;
-	}
-	return coordinates;
 }
 
 auto SolarEclipseComputer::getContactCoordinates(double x, double y, double d, double mu) const -> GeoPoint
@@ -1333,36 +1518,159 @@ auto SolarEclipseComputer::getContactCoordinates(double x, double y, double d, d
 
 auto SolarEclipseComputer::getRiseSetLineCoordinates(bool first, double x,double y,double d,double L,double mu) const -> GeoPoint
 {
-	// Source: Explanatory Supplement to the Astronomical Ephemeris 
-	// and the American Ephemeris and Nautical Almanac (1961)
+	// Reference for terminology and variable naming:
+	// Explanatory Supplement to the Astronomical Ephemeris and the
+	// American Ephemeris and Nautical Almanac, 3rd Edition (2013).
+	//
+	// The computation of the intersection is my own derivation, I haven't found it in the book.
 	static SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
 	static const double f = 1.0 - ssystem->getEarth()->getOneMinusOblateness(); // flattening
 	static const double ff = 1./(1.-f);
-	const double m2 = x*x+y*y;
-	// Cosine of the angle between (0,0)-(x,y) line and the intersection
-	// of the penumbra circle and the Earth circle in the fundamental plane.
-	const double cgm = (m2+1.-L*L)/(2.*std::sqrt(m2));
 
 	GeoPoint coordinates(99., 0.);
-	if (std::abs(cgm)<=1.)
-	{
-		// Angle from Y axis clockwise to the direction towards one of the points of intersection
-		const double gamma = first ? std::acos(cgm)+std::atan2(x,y)
-		                           : M_PI*2.-std::acos(cgm)+std::atan2(x,y);
+	using namespace std;
+	const double sind = sin(d);
+	const double cosd = cos(d);
+	static const double e2 = f*(2.-f);
+	const double rho1 = sqrt(1-e2*sqr(cosd));
+	const double rho2 = sqrt(1-e2*sqr(sind));
+	const double sd1 = sind/rho1;
+	const double cd1 = sqrt(1-e2)*cosd/rho1;
+	const double sdd = e2*sind*cosd/(rho1*rho2);   // sin(d1-d2)
+	const double cdd = sqrt(1-sqr(sdd));           // cos(d1-d2)
 
-		const double xi = std::sin(gamma);
-		const double eta = std::cos(gamma);
-		const double b = -eta*std::sin(d);
-		const double theta = std::atan2(xi,b)*M_180_PI;
-		double lngDeg = theta-mu;
-		lngDeg = StelUtils::fmodpos(lngDeg, 360.);
-		if (lngDeg > 180.) lngDeg -= 360.;
-		double sfn1 = eta*std::cos(d);
-		double cfn1 = std::sqrt(1.-sfn1*sfn1);
-		double tanLat = ff*sfn1/cfn1;
-		coordinates.latitude = std::atan(tanLat)*M_180_PI;
-		coordinates.longitude = lngDeg;
+	// Semi-minor axis of the elliptic cross section of the
+	// Earth in the fundamental plane (in Earth radii).
+	const double k = 1/sqrt(sqr(sind)+sqr(cosd)/(1-e2));
+	/*
+	   We solve simultaneous equations: one for the ellipse of the Earth's border as
+	   crossed by the fundamental plane, and the other is the circle of the shadow edge:
+
+	                        ⎧ xi^2+eta^2/k^2=1
+	                        ⎨
+	                        ⎩ (xi-x)^2+(eta-y)^2=L^2
+
+	    If we parametrize the solution for the Earth's border equation as
+
+	                              xi=cos(t),
+	                              eta=k*sin(t),
+
+	    we'll get a single equation for the shadow border in terms of t:
+
+	                    (cos(t)-x)^2+(k*sin(t)-y)^2=L^2.
+
+	    This equation can be solved using Newton's method, which we'll now do.
+	*/
+	const auto lhsAndDerivative = [=](const double t) -> std::pair<double,double>
+	{
+		const auto cost = cos(t);
+		const auto sint = sin(t);
+		const auto lhs = sqr(cost-x) + sqr(k*sint-y) - sqr(L);
+		const auto lhsPrime = 2*x*sint + 2*cost*((k*k-1)*sint - k*y);
+		return std::make_pair(lhs,lhsPrime);
+	};
+
+	std::vector<double> ts;
+	double t = 0;
+	bool rootFound = false;
+	do
+	{
+		if(ts.size() == 2) break; // there can't be more than 2 roots, so don't spend time uselessly
+
+		rootFound = false;
+		bool finalIteration = false;
+		for(int n = 0; n < 50; ++n)
+		{
+			const auto [lhs, lhsPrime] = lhsAndDerivative(t);
+
+			// Cancel the known roots to avoid finding them instead of the remaining ones
+			auto newLHSPrime = lhsPrime;
+			auto newLHS = lhs;
+			for(const auto rootT : ts)
+			{
+				// We need a 2pi-periodic root-canceling function,
+				// so take a sine of half the difference.
+				const auto sinDiff = sin((t - rootT)/2);
+				const auto cosDiff = cos((t - rootT)/2);
+
+				newLHS /= sinDiff;
+				newLHSPrime = (newLHSPrime - 0.5*cosDiff*newLHS)/sinDiff;
+			}
+
+			if(abs(newLHS) < 1e-10)
+				finalIteration = true;
+
+			const auto deltaT = newLHS / newLHSPrime;
+			if(newLHSPrime==0 || abs(deltaT) > 1000)
+			{
+				// We are shooting too far away, convergence may be too slow.
+				// Let's try perturbing t and retrying.
+				t += 0.01;
+				finalIteration = false;
+				continue;
+			}
+			t -= deltaT;
+			t = StelUtils::fmodpos(t, 2*M_PI);
+
+			if(finalIteration)
+			{
+				ts.emplace_back(t);
+				// Set a new initial value, but try to avoid setting it to 0 if the current
+				// root is close to it (all values here are arbitrary in other respects).
+				t = abs(t) > 0.5 ? 0 : -M_PI/2;
+
+				rootFound = true;
+				break;
+			}
+		}
 	}
+	while(rootFound);
+
+	if(ts.empty()) return coordinates;
+
+	double xi, eta;
+	if(ts.size() == 1)
+	{
+		const auto t = ts[0];
+		xi = cos(t);
+		eta = k*sin(t);
+	}
+	else
+	{
+		// Whether a solution is "first" or "second" depends on which side from the
+		// (0,0)-(x,y) line it is. To find this out we'll use the z component of
+		// the vector product (x,y,0)×(xi,eta,0).
+		const auto sin_t0 = sin(ts[0]);
+		const auto cos_t0 = cos(ts[0]);
+		const auto sin_t1 = sin(ts[1]);
+		const auto cos_t1 = cos(ts[1]);
+
+		const auto xi0 = cos_t0;
+		const auto xi1 = cos_t1;
+		const auto eta0 = k*sin_t0;
+		const auto eta1 = k*sin_t1;
+
+		const auto vecProdZ0 = x * eta0 - y * xi0;
+
+		const bool use0 = first ? vecProdZ0 < 0 : vecProdZ0 > 0;
+
+		xi  = use0 ? xi0  : xi1;
+		eta = use0 ? eta0 : eta1;
+	}
+
+	const double eta1 = eta / rho1;
+	const double zeta1 = (0 + eta1 * sdd) / cdd;
+
+	const double b = -eta1*sd1+zeta1*cd1;
+	const double theta = atan2(xi,b)*M_180_PI;
+	double lngDeg = theta-mu;
+	lngDeg = StelUtils::fmodpos(lngDeg, 360.);
+	if (lngDeg > 180.) lngDeg -= 360.;
+	const double sfn1 = eta1*cd1+zeta1*sd1;
+	const double cfn1 = sqrt(1.-sfn1*sfn1);
+	const double tanLat = ff*sfn1/cfn1;
+	coordinates.latitude = atan(tanLat)*M_180_PI;
+	coordinates.longitude = lngDeg;
 	return coordinates;
 }
 
@@ -1411,10 +1719,11 @@ auto SolarEclipseComputer::getShadowOutlineCoordinates(double angle,double x,dou
 
 auto SolarEclipseComputer::getMaximumEclipseAtRiseSet(bool first, double JD) const -> GeoPoint
 {
-	// Source: Explanatory Supplement to the Astronomical Ephemeris 
-	// and the American Ephemeris and Nautical Almanac (1961)
+	// Reference: Explanatory Supplement to the Astronomical Ephemeris
+	// and the American Ephemeris and Nautical Almanac, 3rd Edition (2013)
 	static SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
 	static const double f = 1.0 - ssystem->getEarth()->getOneMinusOblateness(); // flattening
+	static const double e2 = f*(2.-f);
 	static const double ff = 1./(1.-f);
 	core->setJD(JD);
 	core->update(0);
@@ -1422,32 +1731,56 @@ auto SolarEclipseComputer::getMaximumEclipseAtRiseSet(bool first, double JD) con
 	const double bdot = bp.bdot, cdot = bp.cdot;
 	const double x = bp.elems.x, y = bp.elems.y, d = bp.elems.d, L1 = bp.elems.L1, mu = bp.elems.mu;
 
-	double qa = std::atan2(bdot,cdot);
+	using namespace std;
+
+	const double sind = sin(d);
+	const double cosd = cos(d);
+	const double rho1 = sqrt(1-e2*sqr(cosd));
+	const double rho2 = sqrt(1-e2*sqr(sind));
+	const double sd1 = sind/rho1;
+	const double cd1 = sqrt(1-e2)*cosd/rho1;
+	const double sdd = e2*sind*cosd/(rho1*rho2);   // sin(d1-d2)
+	const double cdd = sqrt(1-sqr(sdd));           // cos(d1-d2)
+
+	double qa = atan2(bdot,cdot);
 	if (!first) // there are two parts of the curve
 		qa += M_PI;
-	const double sgqa = x*std::cos(qa)-y*std::sin(qa);
+	const double sgqa = x*cos(qa)-y*sin(qa);
 
 	GeoPoint coordinates(99., 0.);
-	if (std::abs(sgqa) > 1.) return coordinates;
 
-	const double gqa = std::asin(sgqa);
-	const double gamma = gqa+qa;
-	const double xi = std::sin(gamma);
-	const double eta = std::cos(gamma);
-	const double xxia = x-xi;
-	const double yetaa = y-eta;
-	if (xxia*xxia+yetaa*yetaa > L1*L1) return coordinates;
+	// Iteration as described in equations (11.89) and (11.94) in the reference book
+	double rho = 1, gamma;
+	for(int n = 0; n < 3; ++n)
+	{
+		if(abs(sgqa / rho) > 1) return coordinates;
+		const double gqa = asin(sgqa / rho);
+		gamma = gqa+qa;
+		const double cosGamma = cos(gamma);
+		const double rho1sinGamma = rho1 * sin(gamma);
+		// simplified sin(atan2(rho1 * sin(gamma), cos(gamma)))
+		const double sinGammaPrime = rho1sinGamma / sqrt(sqr(rho1sinGamma)+sqr(cosGamma));
+		rho = sinGammaPrime / sin(gamma);
+	}
 
-	const double b = -eta*std::sin(d);
-	const double theta = std::atan2(xi,b)*M_180_PI;
-	double lngDeg = StelUtils::fmodpos(theta-mu, 360.);
+	const double xi = rho * sin(gamma);
+	const double eta = rho * cos(gamma);
+
+	if (sqr(x-xi)+sqr(y-eta) > sqr(L1)) return coordinates;
+
+	const double eta1 = eta / rho1;
+	const double zeta1 = (0 + eta1 * sdd) / cdd;
+
+	const double b = -eta1*sd1+zeta1*cd1;
+	const double theta = atan2(xi,b)*M_180_PI;
+	double lngDeg = theta-mu;
+	lngDeg = StelUtils::fmodpos(lngDeg, 360.);
 	if (lngDeg > 180.) lngDeg -= 360.;
-	const double sfn1 = std::cos(gamma)*std::cos(d);
-	const double cfn1 = std::sqrt(1.-sfn1*sfn1);
+	const double sfn1 = eta1*cd1+zeta1*sd1;
+	const double cfn1 = sqrt(1.-sfn1*sfn1);
 	const double tanLat = ff*sfn1/cfn1;
-	coordinates.latitude = std::atan(tanLat)*M_180_PI;
+	coordinates.latitude = atan(tanLat)*M_180_PI;
 	coordinates.longitude = lngDeg;
-
 	return coordinates;
 }
 
@@ -1633,22 +1966,12 @@ bool SolarEclipseComputer::generatePNGMap(const EclipseMapData& data, const QStr
 		drawGeoLinesForEquirectMap(painter, points);
 	}
 
-	for(const auto& outline : data.extremeUmbraLimit1)
+	for(const auto& umbraLimit : data.umbraLimits)
 	{
-		updatePen(outline.eclipseType);
+		updatePen(data.eclipseType);
 		points.clear();
-		points.reserve(outline.curve.size());
-		for(const auto& p : outline.curve)
-			points.emplace_back(p.longitude, p.latitude);
-		drawGeoLinesForEquirectMap(painter, points);
-	}
-
-	for(const auto& outline : data.extremeUmbraLimit2)
-	{
-		updatePen(outline.eclipseType);
-		points.clear();
-		points.reserve(outline.curve.size());
-		for(const auto& p : outline.curve)
+		points.reserve(umbraLimit.size());
+		for(const auto& p : umbraLimit)
 			points.emplace_back(p.longitude, p.latitude);
 		drawGeoLinesForEquirectMap(painter, points);
 	}
@@ -1812,20 +2135,11 @@ void SolarEclipseComputer::generateKML(const EclipseMapData& data, const QString
 		stream << "</coordinates>\n</LineString>\n</Placemark>\n";
 	}
 
-	for(const auto& outline : data.extremeUmbraLimit1)
+	for(const auto& umbraLimit : data.umbraLimits)
 	{
-		startLinePlaceMark("Limit", outline.eclipseType);
+		startLinePlaceMark("Limit", data.eclipseType);
 		stream << "<tessellate>1</tessellate>\n<altitudeMode>absoluto</altitudeMode>\n<coordinates>\n";
-		for(const auto& p : outline.curve)
-			stream << p.longitude << "," << p.latitude << ",0.0\n";
-		stream << "</coordinates>\n</LineString>\n</Placemark>\n";
-	}
-
-	for(const auto& outline : data.extremeUmbraLimit2)
-	{
-		startLinePlaceMark("Limit", outline.eclipseType);
-		stream << "<tessellate>1</tessellate>\n<altitudeMode>absoluto</altitudeMode>\n<coordinates>\n";
-		for(const auto& p : outline.curve)
+		for(const auto& p : umbraLimit)
 			stream << p.longitude << "," << p.latitude << ",0.0\n";
 		stream << "</coordinates>\n</LineString>\n</Placemark>\n";
 	}

@@ -100,11 +100,6 @@ public:
 			{
 			}
 		};
-		struct UmbraLimit
-		{
-			std::vector<GeoPoint> curve;
-			EclipseType eclipseType = EclipseType::Undefined;
-		};
 		struct UmbraOutline
 		{
 			std::vector<GeoPoint> curve;
@@ -117,8 +112,10 @@ public:
 		GeoTimePoint centralEclipseStart;   // AKA C1
 		GeoTimePoint centralEclipseEnd;     // AKA C2
 
-		// The array elements are {northLimit, southLimit}
-		std::deque<GeoTimePoint> penumbraLimits[2];
+		// Generally these lines are supposed to represent the north and south limits of
+		// penumbra. But in practice they are computed in smaller segments, so there'll
+		// usually be more than two.
+		std::vector<std::vector<GeoTimePoint>> penumbraLimits;
 
 		// The curves in arrays are split into two lines by the computation algorithm
 		struct TwoLimits
@@ -137,8 +134,7 @@ public:
 
 		std::vector<GeoPoint> centerLine;
 		std::vector<UmbraOutline> umbraOutlines;
-		std::vector<UmbraLimit> extremeUmbraLimit1;
-		std::vector<UmbraLimit> extremeUmbraLimit2;
+		std::vector<std::vector<GeoTimePoint>> umbraLimits;
 
 		EclipseType eclipseType;
 	};
@@ -157,10 +153,6 @@ public:
 	SolarEclipseComputer(StelCore* core, StelLocaleMgr* localeMgr);
 	EclipseMapData generateEclipseMap(const double JDMid) const;
 
-	//! Geographic coordinates of northern and southern limit of shadow
-	GeoPoint getNSLimitOfShadow(double JD, bool northernLimit, bool penumbra) const;
-	//! Geographic coordinates of extreme northern and southern limits of shadow
-	GeoPoint getExtremeNSLimitOfShadow(double JD, bool northernLimit, bool penumbra, bool begin) const;
 	//! Geographic coordinates of extreme contact
 	GeoPoint getContactCoordinates(double x, double y, double d, double mu) const;
 	//! Geographic coordinates where solar eclipse begins/ends at sunrise/sunset
@@ -178,6 +170,14 @@ public:
 
 	void generateKML(const EclipseMapData& data, const QString& dateString, QTextStream& stream) const;
 	bool generatePNGMap(const EclipseMapData& data, const QString& filePath) const;
+
+private:
+	//! Check whether both northern and southern penumbra limits exist for a given eclipsee
+	//! @param JDMid time of greatest eclipse
+	bool bothPenumbraLimitsPresent(double JDMid) const;
+
+	void computeNSLimitsOfShadow(double JDP1, double JDP4, bool penumbra,
+	                             std::vector<std::vector<EclipseMapData::GeoTimePoint>>& limits) const;
 
 private:
 	StelCore* core = nullptr;
