@@ -1502,7 +1502,7 @@
                   <double>1.000000000000000</double>
                  </property>
                  <property name="maximum">
-                  <double>100.000000000000000</double>
+                  <double>1000.000000000000000</double>
                  </property>
                  <property name="singleStep">
                   <double>0.500000000000000</double>
@@ -1527,7 +1527,7 @@
                   <double>1.000000000000000</double>
                  </property>
                  <property name="maximum">
-                  <double>20.000000000000000</double>
+                  <double>100.000000000000000</double>
                  </property>
                  <property name="singleStep">
                   <double>0.100000000000000</double>
@@ -1549,7 +1549,7 @@
                   <double>1.000000000000000</double>
                  </property>
                  <property name="maximum">
-                  <double>500.000000000000000</double>
+                  <double>100.000000000000000</double>
                  </property>
                  <property name="singleStep">
                   <double>0.500000000000000</double>
@@ -1578,7 +1578,7 @@
                   <double>1.000000000000000</double>
                  </property>
                  <property name="maximum">
-                  <double>1000.000000000000000</double>
+                  <double>500.000000000000000</double>
                  </property>
                 </widget>
                </item>
@@ -5286,12 +5286,12 @@
  </resources>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroupDisplayedDSOCatalogs">
+  <buttongroup name="buttonGroupDisplayedDSOTypes">
    <property name="exclusive">
     <bool>false</bool>
    </property>
   </buttongroup>
-  <buttongroup name="buttonGroupDisplayedDSOTypes">
+  <buttongroup name="buttonGroupDisplayedDSOCatalogs">
    <property name="exclusive">
     <bool>false</bool>
    </property>
