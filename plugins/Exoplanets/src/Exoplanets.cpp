@@ -170,8 +170,15 @@ void Exoplanets::init()
 		Exoplanet::markerTexture = StelApp::getInstance().getTextureManager().createTexture(":/Exoplanets/exoplanet.png");
 
 		// key bindings and other actions
-		addAction("actionShow_Exoplanets", N_("Exoplanets"), N_("Show exoplanets"), "showExoplanets", "Ctrl+Alt+E");
-		addAction("actionShow_Exoplanets_ConfigDialog", N_("Exoplanets"), N_("Show settings dialog"), exoplanetsConfigDialog, "visible", "Alt+E");
+		QString section = N_("Exoplanets");
+		addAction("actionShow_Exoplanets", section, N_("Show exoplanets"), "showExoplanets", "Ctrl+Alt+E");
+		addAction("actionShow_Exoplanets_ConfigDialog", section, N_("Show settings dialog"), exoplanetsConfigDialog, "visible", "Alt+E");
+		// no default hotkeys
+		addAction("actionShow_Exoplanets_Distribution", section, N_("Enable display of distribution for exoplanets"), "flagDisplayMode");
+		addAction("actionShow_Exoplanets_Timeline", section, N_("Enable timeline discovery of exoplanets"), "flagTimelineMode");
+		addAction("actionShow_Exoplanets_Habitable", section, N_("Enable display of the potential habitable exoplanets only"), "flagHabitableMode");
+		addAction("actionShow_Exoplanets_Designations", section, N_("Enable display of designations for exoplanets"), "flagShowExoplanetsDesignations");
+		addAction("actionShow_Exoplanets_Numbers", section, N_("Enable display number of exoplanets in the system"), "flagShowExoplanetsNumbers");
 
 		setFlagShowExoplanets(getEnableAtStartup());
 		setFlagShowExoplanetsButton(flagShowExoplanetsButton);
