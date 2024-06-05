@@ -24,6 +24,10 @@
 #include <QOpenGLContext>
 #include <QOpenGLFunctions_1_0>
 
+#if defined(_WIN32)
+#include <qt_windows.h>
+#endif
+
 #if !QT_CONFIG(opengles2)
 //! Defines some OpenGL functions not resolved through StelOpenGL (which only contains base OpenGL ES2 functions)
 //! Using the QOpenGLFunctions_*_* directly would solve this better, but it conflicts with the
@@ -34,8 +38,8 @@ public:
 	//! Since 3.2
 	PFNGLFRAMEBUFFERTEXTUREPROC glFramebufferTexture;
 	//! Since 1.0 but not found by QOpenGLFunctions_1_0 when in Core profile
-   void (__stdcall* glDrawBuffer)(GLenum);
-   void (__stdcall* glReadBuffer)(GLenum);
+   void (APIENTRYP glDrawBuffer)(GLenum);
+   void (APIENTRYP glReadBuffer)(GLenum);
 
 	void init(QOpenGLContext* ctx)
 	{
