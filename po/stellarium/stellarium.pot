@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2024-05-30 19:07+0700\n"
+"POT-Creation-Date: 2024-06-05 09:35+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2729,7 +2729,7 @@ msgid "variable star"
 msgstr ""
 
 #: src/core/modules/StarWrapper.cpp:304
-#: plugins/Satellites/src/ui_satellitesDialog.h:1269
+#: plugins/Satellites/src/ui_satellitesDialog.h:1264
 msgid "Magnitude range"
 msgstr ""
 
@@ -2809,31 +2809,31 @@ msgstr ""
 msgid "Toggle Hierarchical Progressive Surveys"
 msgstr ""
 
-#: src/core/SolarEclipseComputer.cpp:1674 src/gui/AstroCalcDialog.cpp:3836
+#: src/core/SolarEclipseComputer.cpp:1997 src/gui/AstroCalcDialog.cpp:3836
 msgid "Solar Eclipse"
 msgstr ""
 
-#: src/core/SolarEclipseComputer.cpp:1674
+#: src/core/SolarEclipseComputer.cpp:1997
 msgid "Created by Stellarium"
 msgstr ""
 
-#: src/core/SolarEclipseComputer.cpp:1686 src/gui/AstroCalcDialog.cpp:3662
+#: src/core/SolarEclipseComputer.cpp:2009 src/gui/AstroCalcDialog.cpp:3662
 msgid "Greatest eclipse"
 msgstr ""
 
-#: src/core/SolarEclipseComputer.cpp:1693
+#: src/core/SolarEclipseComputer.cpp:2016
 msgid "First contact with Earth"
 msgstr ""
 
-#: src/core/SolarEclipseComputer.cpp:1700
+#: src/core/SolarEclipseComputer.cpp:2023
 msgid "Last contact with Earth"
 msgstr ""
 
-#: src/core/SolarEclipseComputer.cpp:1783
+#: src/core/SolarEclipseComputer.cpp:2106
 msgid "Central eclipse begins"
 msgstr ""
 
-#: src/core/SolarEclipseComputer.cpp:1791
+#: src/core/SolarEclipseComputer.cpp:2114
 msgid "Central eclipse ends"
 msgstr ""
 
@@ -13021,7 +13021,7 @@ msgid ""
 msgstr ""
 
 #: src/ui_configurationDialog.h:1739
-#: plugins/Satellites/src/ui_satellitesDialog.h:1271
+#: plugins/Satellites/src/ui_satellitesDialog.h:1267
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:206
 #: plugins/NavStars/src/ui_navStarsWindow.h:507
 #: plugins/Novae/src/ui_novaeDialog.h:209
@@ -13042,7 +13042,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1743
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:314
-#: plugins/Satellites/src/ui_satellitesDialog.h:1270
+#: plugins/Satellites/src/ui_satellitesDialog.h:1266
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:222
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:205
 #: plugins/NavStars/src/ui_navStarsWindow.h:506
@@ -13950,7 +13950,7 @@ msgstr ""
 msgid "Allow scripts to store output to arbitrary directories"
 msgstr ""
 
-#: src/ui_scriptConsole.h:397 plugins/Satellites/src/ui_satellitesDialog.h:1272
+#: src/ui_scriptConsole.h:397 plugins/Satellites/src/ui_satellitesDialog.h:1268
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:207
 #: plugins/NavStars/src/ui_navStarsWindow.h:498
 #: plugins/Novae/src/ui_novaeDialog.h:210
@@ -14070,7 +14070,7 @@ msgid "Export ephemeris..."
 msgstr ""
 
 #: src/ui_astroCalcDialog.h:2179 src/ui_astroCalcDialog.h:2280
-#: plugins/Satellites/src/ui_satellitesDialog.h:1385
+#: plugins/Satellites/src/ui_satellitesDialog.h:1381
 msgid "Calculations require time, please be patient"
 msgstr ""
 
@@ -14570,7 +14570,7 @@ msgstr ""
 msgid "Save list"
 msgstr ""
 
-#: src/ui_obsListDialog.h:374 plugins/Satellites/src/ui_satellitesDialog.h:1350
+#: src/ui_obsListDialog.h:374 plugins/Satellites/src/ui_satellitesDialog.h:1346
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:156
 msgid "Description:"
 msgstr ""
@@ -15408,7 +15408,7 @@ msgstr ""
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:316
 #: plugins/Oculars/src/ui_ocularDialog.h:1571
-#: plugins/Satellites/src/ui_satellitesDialog.h:1390
+#: plugins/Satellites/src/ui_satellitesDialog.h:1386
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:420
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:234
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:208
@@ -16442,7 +16442,7 @@ msgstr ""
 #: plugins/Oculars/src/ui_ocularDialog.h:1539
 #: plugins/Oculars/src/ui_ocularDialog.h:1549
 #: plugins/Oculars/src/ui_ocularDialog.h:1564
-#: plugins/Satellites/src/ui_satellitesDialog.h:1301
+#: plugins/Satellites/src/ui_satellitesDialog.h:1297
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:559
 #: plugins/TelescopeControl/src/gui/ui_storedPointsDialog.h:203
 msgid "Name:"
@@ -16563,7 +16563,7 @@ msgstr ""
 #: plugins/Satellites/src/Satellites.cpp:72
 #: plugins/Satellites/src/Satellites.cpp:164
 #: plugins/Satellites/src/Satellites.cpp:257
-#: plugins/Satellites/src/ui_satellitesDialog.h:1362
+#: plugins/Satellites/src/ui_satellitesDialog.h:1358
 msgid "Satellites"
 msgstr ""
 
@@ -17927,7 +17927,7 @@ msgid "[new source]"
 msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1103
-#: plugins/Satellites/src/ui_satellitesDialog.h:1223
+#: plugins/Satellites/src/ui_satellitesDialog.h:1219
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:195
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:204
 #: plugins/Novae/src/gui/NovaeDialog.cpp:190
@@ -18244,22 +18244,22 @@ msgstr ""
 msgid "Please select a line first!"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1218
-#: plugins/Satellites/src/ui_satellitesDialog.h:1219
+#: plugins/Satellites/src/ui_satellitesDialog.h:1214
+#: plugins/Satellites/src/ui_satellitesDialog.h:1215
 msgid "Satellites Configuration"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1220
+#: plugins/Satellites/src/ui_satellitesDialog.h:1216
 msgid "Updates"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1221
+#: plugins/Satellites/src/ui_satellitesDialog.h:1217
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:532
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:426
 msgid "Update frequency:"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1222
+#: plugins/Satellites/src/ui_satellitesDialog.h:1218
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:201
 #: plugins/Novae/src/ui_novaeDialog.h:204
 #: plugins/Quasars/src/ui_quasarsDialog.h:258
@@ -18268,44 +18268,46 @@ msgstr ""
 msgid "Last update:"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1224
+#: plugins/Satellites/src/ui_satellitesDialog.h:1220
 msgid "On update, add all new satellites from the selected source(s)"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1225
+#: plugins/Satellites/src/ui_satellitesDialog.h:1221
 msgid "Update satellite data from Internet sources"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1226
+#: plugins/Satellites/src/ui_satellitesDialog.h:1222
 msgid ""
 "On update, remove the satellites that are no longer listed in the update "
 "sources"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1227
+#: plugins/Satellites/src/ui_satellitesDialog.h:1223
 msgid "Visualisation settings"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1229
-msgid ""
-"Distance to the center of umbra from Earth's surface (height of imagined "
-"satellite)"
+#: plugins/Satellites/src/ui_satellitesDialog.h:1224
+msgid "Show Earth's umbra"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1231
-msgid "Show umbra/penumbra at altitude:"
+#: plugins/Satellites/src/ui_satellitesDialog.h:1226
+msgid "The color of Earth's umbra circle"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1232
+#: plugins/Satellites/src/ui_satellitesDialog.h:1228
 msgid "Orbit lines"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1242
-msgid "Show Earth's penumbra"
+#: plugins/Satellites/src/ui_satellitesDialog.h:1239
+msgid "Use special color for all invisible satellites"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1244
-msgid "The color of Earth's penumbra circle"
+#: plugins/Satellites/src/ui_satellitesDialog.h:1241
+msgid "Set color for invisible satellites"
+msgstr ""
+
+#: plugins/Satellites/src/ui_satellitesDialog.h:1243
+msgid "Color of markers, labels and orbits for invisible satellites"
 msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1248
@@ -18313,228 +18315,226 @@ msgid "Font size for labels"
 msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1251
+msgid "Hide invisible satellites"
+msgstr ""
+
+#: plugins/Satellites/src/ui_satellitesDialog.h:1252
 msgid "Show satellites as markers"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1253
+#: plugins/Satellites/src/ui_satellitesDialog.h:1254
 msgid "Color of satellite markers in transit through the Sun or the Moon"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1256
-msgid "Use special color for all invisible satellites"
+#: plugins/Satellites/src/ui_satellitesDialog.h:1257
+msgid ""
+"Distance to the center of umbra from Earth's surface (height of imagined "
+"satellite)"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1258
-msgid "Set color for invisible satellites"
+#: plugins/Satellites/src/ui_satellitesDialog.h:1259
+msgid "Show umbra/penumbra at altitude:"
 msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1260
-msgid "Color of markers, labels and orbits for invisible satellites"
+msgid "Show Earth's penumbra"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1263
+#: plugins/Satellites/src/ui_satellitesDialog.h:1262
+msgid "The color of Earth's penumbra circle"
+msgstr ""
+
+#: plugins/Satellites/src/ui_satellitesDialog.h:1265
 msgid "Altitude range"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1264
-msgid "Show Earth's umbra"
-msgstr ""
-
-#: plugins/Satellites/src/ui_satellitesDialog.h:1266
-msgid "The color of Earth's umbra circle"
-msgstr ""
-
-#: plugins/Satellites/src/ui_satellitesDialog.h:1268
-msgid "Hide invisible artificial satellites"
-msgstr ""
-
-#: plugins/Satellites/src/ui_satellitesDialog.h:1274
+#: plugins/Satellites/src/ui_satellitesDialog.h:1270
 #: plugins/Satellites/src/ui_satellitesFilterDialog.h:256
 msgid "Settings of custom filter"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1276
+#: plugins/Satellites/src/ui_satellitesDialog.h:1272
 msgid "Search ..."
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1278
+#: plugins/Satellites/src/ui_satellitesDialog.h:1274
 msgid "Double-click a satellite to start tracking it."
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1281
+#: plugins/Satellites/src/ui_satellitesDialog.h:1277
 msgid "Add more satellites"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1284
+#: plugins/Satellites/src/ui_satellitesDialog.h:1280
 msgid "Remove the selected satellites"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1287
+#: plugins/Satellites/src/ui_satellitesDialog.h:1283
 msgid "Edit communication data for the selected satellite"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1290
+#: plugins/Satellites/src/ui_satellitesDialog.h:1286
 msgid "Select all satellites in list"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1293
+#: plugins/Satellites/src/ui_satellitesDialog.h:1289
 msgid "Change markers color for selected satellites"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1296
+#: plugins/Satellites/src/ui_satellitesDialog.h:1292
 msgid "Change orbits color for selected satellites"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1299
+#: plugins/Satellites/src/ui_satellitesDialog.h:1295
 msgid "Change info color for selected satellites"
 msgstr ""
 
+#: plugins/Satellites/src/ui_satellitesDialog.h:1299
 #: plugins/Satellites/src/ui_satellitesDialog.h:1303
-#: plugins/Satellites/src/ui_satellitesDialog.h:1307
 msgid ""
 "The Satellite Catalog Number (also known as NORAD (North American Aerospace "
 "Defense) Catalog Number, NORAD ID)"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1305
+#: plugins/Satellites/src/ui_satellitesDialog.h:1301
 msgid "Catalog number:"
 msgstr ""
 
+#: plugins/Satellites/src/ui_satellitesDialog.h:1306
 #: plugins/Satellites/src/ui_satellitesDialog.h:1310
-#: plugins/Satellites/src/ui_satellitesDialog.h:1314
 msgid "The International Designator, also known as COSPAR ID"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1312
+#: plugins/Satellites/src/ui_satellitesDialog.h:1308
 msgid "I.D.:"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1316
+#: plugins/Satellites/src/ui_satellitesDialog.h:1312
 msgid "Standard magnitude:"
 msgstr ""
 
+#: plugins/Satellites/src/ui_satellitesDialog.h:1314
 #: plugins/Satellites/src/ui_satellitesDialog.h:1318
-#: plugins/Satellites/src/ui_satellitesDialog.h:1322
 msgid "Perigee altitude in kilometers"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1320
+#: plugins/Satellites/src/ui_satellitesDialog.h:1316
 msgid "Perigee:"
 msgstr ""
 
+#: plugins/Satellites/src/ui_satellitesDialog.h:1321
 #: plugins/Satellites/src/ui_satellitesDialog.h:1325
-#: plugins/Satellites/src/ui_satellitesDialog.h:1329
 msgid "Apogee altitude in kilometers"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1327
+#: plugins/Satellites/src/ui_satellitesDialog.h:1323
 msgid "Apogee:"
 msgstr ""
 
+#: plugins/Satellites/src/ui_satellitesDialog.h:1328
 #: plugins/Satellites/src/ui_satellitesDialog.h:1332
-#: plugins/Satellites/src/ui_satellitesDialog.h:1336
 msgid "Orbital period in minutes"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1334
+#: plugins/Satellites/src/ui_satellitesDialog.h:1330
 msgid "Period:"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1339
+#: plugins/Satellites/src/ui_satellitesDialog.h:1335
 msgid "Display orbit line(s) for the selected satellite(s)"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1341
+#: plugins/Satellites/src/ui_satellitesDialog.h:1337
 msgid "Orbit"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1343
+#: plugins/Satellites/src/ui_satellitesDialog.h:1339
 msgid "Display the selected satellite(s)"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1345
+#: plugins/Satellites/src/ui_satellitesDialog.h:1341
 msgid "Displayed"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1347
+#: plugins/Satellites/src/ui_satellitesDialog.h:1343
 msgid "Do not update TLE of selected satellite(s)"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1349
+#: plugins/Satellites/src/ui_satellitesDialog.h:1345
 msgid "Do not update"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1351
+#: plugins/Satellites/src/ui_satellitesDialog.h:1347
 msgid "(add personal notes here)"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1352
+#: plugins/Satellites/src/ui_satellitesDialog.h:1348
 msgid "Groups:"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1353
+#: plugins/Satellites/src/ui_satellitesDialog.h:1349
 msgid "TLE set:"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1354
+#: plugins/Satellites/src/ui_satellitesDialog.h:1350
 msgid "Epoch of the TLE:"
 msgstr ""
 
+#: plugins/Satellites/src/ui_satellitesDialog.h:1352
 #: plugins/Satellites/src/ui_satellitesDialog.h:1356
-#: plugins/Satellites/src/ui_satellitesDialog.h:1360
 msgid ""
 "The valid time range for epoch of TLE in days, used in filtering of "
 "satellites"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1358
+#: plugins/Satellites/src/ui_satellitesDialog.h:1354
 msgid "Age:"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1363
+#: plugins/Satellites/src/ui_satellitesDialog.h:1359
 msgid ""
 "Satellites in the marked source lists will be automatically added on the "
 "next update if they are not already in the collection. Unmarked entries will "
 "also be fetched to update only previously included satellites."
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1368
+#: plugins/Satellites/src/ui_satellitesDialog.h:1364
 msgid "Add new source"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1371
+#: plugins/Satellites/src/ui_satellitesDialog.h:1367
 msgid "Edit selected source"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1374
+#: plugins/Satellites/src/ui_satellitesDialog.h:1370
 msgid "Save source"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1377
+#: plugins/Satellites/src/ui_satellitesDialog.h:1373
 msgid "Remove selected source"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1380
+#: plugins/Satellites/src/ui_satellitesDialog.h:1376
 msgid "Reset sources list to it defaults"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1382
+#: plugins/Satellites/src/ui_satellitesDialog.h:1378
 msgid "Sources"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1383
+#: plugins/Satellites/src/ui_satellitesDialog.h:1379
 msgid "Flare prediction (days):"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1387
+#: plugins/Satellites/src/ui_satellitesDialog.h:1383
 msgid "Predict Iridium flares"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1388
+#: plugins/Satellites/src/ui_satellitesDialog.h:1384
 msgid "Save predictions..."
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1389
+#: plugins/Satellites/src/ui_satellitesDialog.h:1385
 msgid "Iridium flares"
 msgstr ""
 

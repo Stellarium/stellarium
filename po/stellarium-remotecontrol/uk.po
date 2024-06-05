@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-remotecontrol\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2024-03-15 12:19+0700\n"
+"POT-Creation-Date: 2024-06-05 09:35+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>, 2024\n"
 "Language-Team: Ukrainian (https://app.transifex.com/stellarium/teams/80998/uk/)\n"
@@ -82,8 +82,8 @@ msgstr "Помилка (%1)"
 msgid "Error performing Simbad lookup"
 msgstr "Помилка під час спроби виконати пошук Simbad"
 
-#: plugins/RemoteControl/webroot/js/api/search.js:79 index.html:223
-#: tablet7in.html:240
+#: plugins/RemoteControl/webroot/js/api/search.js:79 index.html:225
+#: tablet7in.html:242
 msgid "idle"
 msgstr "бездіяльність"
 
@@ -109,8 +109,8 @@ msgid "Could not retrieve landscape list"
 msgstr "Не вдалося отримати список ландшафтів"
 
 #: plugins/RemoteControl/webroot/js/plugins/scenery3d.js:22
-#: plugins/RemoteControl/webroot/js/ui/scripts.js:76 index.html:687
-#: index.html:749 tablet7in.html:746 tablet7in.html:806
+#: plugins/RemoteControl/webroot/js/ui/scripts.js:76 index.html:731
+#: index.html:793 tablet7in.html:828 tablet7in.html:888
 msgid "-none-"
 msgstr "-немає-"
 
@@ -144,243 +144,271 @@ msgstr "Введене не відповідає жодному з елемен�
 msgid "No current selection"
 msgstr "Зараз нічого не позначено"
 
-#: index.html:5 tablet7in.html:5
+#: index.html:7 tablet7in.html:7
 msgid "Stellarium remote control plugin"
 msgstr "Додаток віддаленого керування Stellarium"
 
-#: index.html:17 tablet7in.html:18
+#: index.html:19 tablet7in.html:20
 msgid "Please wait, loading"
 msgstr "Будь ласка, зачекайте, завантажуємо"
 
-#: index.html:26 tablet7in.html:27
+#: index.html:28 tablet7in.html:29
 msgid "Stellarium remote control"
 msgstr "Віддалене керування Stellarium"
 
-#: index.html:30 tablet7in.html:31
+#: index.html:32 tablet7in.html:33
 msgid "Main controls"
 msgstr "Основні засоби керування"
 
-#: index.html:33 tablet7in.html:38
+#: index.html:35 tablet7in.html:40
 msgid "DSO"
 msgstr "Віддалений об’єкт"
 
-#: index.html:36
+#: index.html:38
 msgid "Actions and scripts"
 msgstr "Дії і сценарії"
 
-#: index.html:39 tablet7in.html:45
+#: index.html:41 tablet7in.html:47
 msgid "Scenery3d"
 msgstr "Scenery3d"
 
-#: index.html:77
+#: index.html:79
 msgid "Pause"
 msgstr "Пауза"
 
-#: index.html:82 tablet7in.html:183
+#: index.html:84 tablet7in.html:185
 msgid "Time jumps"
 msgstr "Переходи за часом"
 
-#: index.html:86 tablet7in.html:187
+#: index.html:88 tablet7in.html:189
 msgid "Solar hour"
 msgstr "Сонячна година"
 
-#: index.html:87 tablet7in.html:188
+#: index.html:89 tablet7in.html:190
 msgid "Solar day"
 msgstr "Солярний день"
 
-#: index.html:88 tablet7in.html:189
+#: index.html:90 tablet7in.html:191
 msgid "Solar week"
 msgstr "Сонячний тиждень"
 
-#: index.html:90 tablet7in.html:191
+#: index.html:92 tablet7in.html:193
 msgid "Calendar year"
 msgstr "Календарний рік"
 
-#: index.html:91 tablet7in.html:192
+#: index.html:93 tablet7in.html:194
 msgid "10 Calendar years"
 msgstr "10 календарних років"
 
-#: index.html:92 tablet7in.html:193
+#: index.html:94 tablet7in.html:195
 msgid "100 Calendar years"
 msgstr "100 календарних років"
 
-#: index.html:95 tablet7in.html:196
+#: index.html:97 tablet7in.html:198
 msgid "Sidereal year"
 msgstr "Сидеричний рік"
 
-#: index.html:96 tablet7in.html:197
+#: index.html:98 tablet7in.html:199
 msgid "Sidereal century"
 msgstr "Сидеричне століття"
 
-#: index.html:98 tablet7in.html:199
+#: index.html:100 tablet7in.html:201
 msgid "Synodic month"
 msgstr "Синодичний місяць"
 
-#: index.html:99 tablet7in.html:200
+#: index.html:101 tablet7in.html:202
 msgid "Draconic month"
 msgstr "Драконічний місяць"
 
-#: index.html:100 tablet7in.html:201
+#: index.html:102 tablet7in.html:203
 msgid "Draconic year"
 msgstr "Драконічний рік"
 
-#: index.html:103 tablet7in.html:204
+#: index.html:105 tablet7in.html:206
 msgid "Anomalistic month"
 msgstr "Аномалістичний місяць"
 
-#: index.html:104 tablet7in.html:205
+#: index.html:106 tablet7in.html:207
 msgid "Anomalistic year"
 msgstr "Аномалістичний рік"
 
-#: index.html:105 tablet7in.html:206
+#: index.html:107 tablet7in.html:208
 msgid "Anomalistic century"
 msgstr "Аномалістичне століття"
 
-#: index.html:107 tablet7in.html:208
+#: index.html:109 tablet7in.html:210
 msgid "Mean tropical month"
 msgstr "Середній тропічний місяць"
 
-#: index.html:108 tablet7in.html:209
+#: index.html:110 tablet7in.html:211
 msgid "Mean tropical year"
 msgstr "Середній тропічний рік"
 
-#: index.html:109 tablet7in.html:210
+#: index.html:111 tablet7in.html:212
 msgid "Mean tropical century"
 msgstr "Середнє тропічне століття"
 
-#: index.html:111 tablet7in.html:212
+#: index.html:113 tablet7in.html:214
 msgid "Tropical year"
 msgstr "Тропічний рік"
 
-#: index.html:112 tablet7in.html:213
+#: index.html:114 tablet7in.html:215
 msgid "Julian year"
 msgstr "Юліанський рік"
 
-#: index.html:113 tablet7in.html:214
+#: index.html:115 tablet7in.html:216
 msgid "Julian century"
 msgstr "Юліанське століття"
 
-#: index.html:115 tablet7in.html:216
+#: index.html:117 tablet7in.html:218
 msgid "Gaussian year"
 msgstr "Гаусів рік"
 
-#: index.html:127 tablet7in.html:101
+#: index.html:129 tablet7in.html:103
 msgid "View towards horizon at Azimuth"
 msgstr "Погляд на горизонт за азимутом"
 
-#: index.html:148 tablet7in.html:123
+#: index.html:150 tablet7in.html:125
 msgid "Vertical View offset"
 msgstr "Зсув вертикального перегляду"
 
-#: index.html:217 tablet7in.html:234
+#: index.html:219 tablet7in.html:236
 msgid "Enter search term. Use TAB to navigate results."
 msgstr "Вкажіть ключ пошуку. Для навігації результатами використовуйте Tab."
 
-#: index.html:218 tablet7in.html:235
+#: index.html:220 tablet7in.html:237
 msgid "Select and focus"
 msgstr "Позначити і фокусувати"
 
-#: index.html:243 tablet7in.html:263
+#: index.html:245 tablet7in.html:265
 msgid "Selection of the current item"
 msgstr "Позначення поточного пункту"
 
-#: index.html:247 tablet7in.html:267
+#: index.html:249 tablet7in.html:269
 msgid "Selection mode"
 msgstr "Режим вибору"
 
-#: index.html:247 tablet7in.html:267
+#: index.html:249 tablet7in.html:269
 msgid "Center on object"
 msgstr "Центрувати на об’єкті"
 
-#: index.html:247 tablet7in.html:267
+#: index.html:249 tablet7in.html:269
 msgid "Center and zoom to object"
 msgstr "Центрувати і збільшити об’єкт"
 
-#: index.html:247 tablet7in.html:267
+#: index.html:249 tablet7in.html:269
 msgid "Just mark the object"
 msgstr "Лише позначити об’єкт"
 
-#: index.html:249 tablet7in.html:269
+#: index.html:251 tablet7in.html:271
 msgid "Quick select"
 msgstr "Швидке позначення"
 
-#: index.html:253 tablet7in.html:273
+#: index.html:255 tablet7in.html:275
 msgid "Earth"
 msgstr "Земля"
 
-#: index.html:253 tablet7in.html:273
+#: index.html:255 tablet7in.html:275
 msgid "Pluto"
 msgstr "Плутон"
 
-#: index.html:259 tablet7in.html:302
+#: index.html:261 tablet7in.html:304
 msgid "Current selection"
 msgstr "Поточне позначене"
 
-#: index.html:276 tablet7in.html:329
+#: index.html:278 tablet7in.html:332
 msgid "Milky Way brightness:"
 msgstr "Яскравість Чумацького Шляху:"
 
-#: index.html:281 tablet7in.html:341
+#: index.html:289 tablet7in.html:351
+msgid "Dbl. stars"
+msgstr "Подв. зірки"
+
+#: index.html:290 tablet7in.html:352
+msgid "Var. stars"
+msgstr "Змін. зірки"
+
+#: index.html:291 tablet7in.html:353
+msgid "HIP"
+msgstr "ГІП"
+
+#: index.html:294 tablet7in.html:357
 msgid "Digitized Sky Survey"
 msgstr "Цифровий огляд неба (DSS)"
 
-#: index.html:282 tablet7in.html:342
+#: index.html:295 tablet7in.html:358
 msgid "HiPS Survey"
 msgstr "Огляд HiPS"
 
-#: index.html:295 tablet7in.html:358
+#: index.html:304 tablet7in.html:369
+msgid "Include nutation"
+msgstr "Включити нутацію"
+
+#: index.html:306 tablet7in.html:371
+msgid "Include aberration"
+msgstr "Включити аберацію"
+
+#: index.html:314 tablet7in.html:385
 msgid "Show planet markers"
 msgstr "Показати позначки планет"
 
-#: index.html:296 tablet7in.html:359
+#: index.html:315 tablet7in.html:386
 msgid "Show planet orbits"
 msgstr "Показати орбіти планет"
 
-#: index.html:297 tablet7in.html:360
+#: index.html:316 tablet7in.html:387
 msgid "Show planet orbits only"
 msgstr "Показувати лише орбіти планет"
 
-#: index.html:298 tablet7in.html:361
+#: index.html:317 tablet7in.html:388
 msgid "Show orbit for selected planet"
 msgstr "Показати орбіту позначеної планети"
 
-#: index.html:299 tablet7in.html:362
+#: index.html:318 tablet7in.html:389
 msgid "Show planet trails"
 msgstr "Показувати траєкторії планет"
 
-#: index.html:300 tablet7in.html:363
+#: index.html:319 tablet7in.html:390
 msgid "Show trail only for selected planet"
 msgstr "Показати траєкторію лише для позначеної планети"
 
-#: index.html:305 tablet7in.html:367
+#: index.html:324 tablet7in.html:394
 msgid "Scale Moon:"
 msgstr "Масштаб Місяця:"
 
-#: index.html:306
+#: index.html:325 tablet7in.html:398
 msgid "Scale Sun:"
 msgstr "Масштаб Сонця:"
 
-#: index.html:307
+#: index.html:326 tablet7in.html:402
 msgid "Scale Planets:"
 msgstr "Масштаб планет:"
 
-#: index.html:308 tablet7in.html:371
+#: index.html:327 tablet7in.html:406
 msgid "Scale minor bodies:"
 msgstr "Масштабування малих тіл:"
 
-#: index.html:339 tablet7in.html:417
+#: index.html:358 tablet7in.html:453
 msgid "Extinction Coefficient:"
 msgstr "Коефіцієнт поглинання:"
 
-#: index.html:343 tablet7in.html:422
+#: index.html:359 tablet7in.html:454
+msgid "Only extinction/refraction, no blue skylight"
+msgstr "Лише зникнення/рефракція, без небесної синяви"
+
+#: index.html:360 tablet7in.html:455
+msgid "Suppress scattering"
+msgstr "Придушити розсіювання"
+
+#: index.html:365 tablet7in.html:460
 msgid "Shooting Stars"
 msgstr "Метеори"
 
-#: index.html:344 tablet7in.html:423
+#: index.html:366 tablet7in.html:461
 msgid "ZHR:"
 msgstr "ЗГЧ:"
 
-#: index.html:387 tablet7in.html:480
+#: index.html:413 tablet7in.html:513
 msgid ""
 "Instantaneous circles of earth´s axis on its motion around ecliptical poles."
 " Displayed on Earth only."
@@ -388,333 +416,341 @@ msgstr ""
 "Кола на вісі Землі під час її руху навколо полюсів екліптики. Буде показано "
 "лише на Землі."
 
-#: index.html:403
+#: index.html:430 tablet7in.html:530
 msgid "Center"
 msgstr "Центр"
 
-#: index.html:421 tablet7in.html:489
+#: index.html:448 tablet7in.html:548
 msgid "Solstices"
 msgstr "Солнцестояння"
 
-#: index.html:422 tablet7in.html:490
+#: index.html:449 tablet7in.html:549
 msgid "Crossquarters"
 msgstr "Квартальні дні"
 
-#: index.html:423 tablet7in.html:491
+#: index.html:450 tablet7in.html:550
 msgid "Major Standstill"
 msgstr "Основна зупинка"
 
-#: index.html:424 tablet7in.html:492
+#: index.html:451 tablet7in.html:551
 msgid "Minor Standstill"
 msgstr "Мінорна зупинка"
 
-#: index.html:434 tablet7in.html:501
+#: index.html:455 tablet7in.html:556
+msgid "Line width:"
+msgstr "Товщина лінії:"
+
+#: index.html:465 tablet7in.html:566
 msgid "Current Planet:"
 msgstr "Поточна планета:"
 
-#: index.html:472 tablet7in.html:537
+#: index.html:505 tablet7in.html:606
 msgid "Catalogue of Reflection Nebulae (Van den Bergh, 1966)"
 msgstr "Каталог відбивних туманностей (Ван ден Берг, 1966)"
 
-#: index.html:519 tablet7in.html:555
+#: index.html:552 tablet7in.html:624
 msgid ""
 "Catalogue of southern stars embedded in nebulosity (van den Bergh+, 1975)"
 msgstr ""
 "Каталог зірок південного неба, які вбудовано у туманності (Van den Bergh та "
 "інші, 1975)"
 
-#: index.html:557
+#: index.html:590
 msgid "Objects without identifier"
 msgstr "Об'єкти без ідентифікатора"
 
-#: index.html:575
+#: index.html:608
 msgid "Open Star clusters"
 msgstr "Розсіяні скупчення"
 
-#: index.html:576
+#: index.html:609 tablet7in.html:692
 msgid "Globular Star clusters"
 msgstr "Кулясті скупчення"
 
-#: index.html:583 tablet7in.html:629
+#: index.html:615 tablet7in.html:698
 msgid "Bright Nebulae"
 msgstr "Яскраві туманності"
 
-#: index.html:584 tablet7in.html:630
+#: index.html:616 tablet7in.html:699
 msgid "Dark Nebulae"
 msgstr "Темні туманності"
 
-#: index.html:585 tablet7in.html:631
+#: index.html:617 tablet7in.html:700
 msgid "Planetary Nebulae"
 msgstr "Планетарні туманності"
 
-#: index.html:587
-msgid "Galaxy clusters"
-msgstr "Скупчення галактик"
-
-#: index.html:595 tablet7in.html:640
+#: index.html:627 tablet7in.html:710
 msgid "Labels and markers"
 msgstr "Мітки і позначки"
 
-#: index.html:608 tablet7in.html:653
+#: index.html:646 tablet7in.html:729
 msgid "Limit angular size (arcmin):"
 msgstr "Обмеження на кутовий розмір (кут. мін.):"
 
-#: index.html:620 tablet7in.html:665
+#: index.html:658 tablet7in.html:743
 msgid "Use associated planet and position"
 msgstr "Використовувати пов'язані планети та позиції"
 
-#: index.html:631 tablet7in.html:674
+#: index.html:669 tablet7in.html:752
 msgid "Show illumination"
 msgstr "Показати освітлення"
 
-#: index.html:636 tablet7in.html:680
+#: index.html:674 tablet7in.html:758
 msgid "Current landscape"
 msgstr "Поточний ландшафт"
 
-#: index.html:648 tablet7in.html:693
+#: index.html:685 tablet7in.html:770
+msgid "Label constellations with font size"
+msgstr "Мітки сузір'їв із розміром шрифту"
+
+#: index.html:689 tablet7in.html:774
 msgid "Show lines with thickness"
 msgstr "Показувати лінії із товщиною"
 
-#: index.html:653 tablet7in.html:698
+#: index.html:693 tablet7in.html:778
+msgid "Label asterisms with font size"
+msgstr "Мітки астеризмів із розміром шрифту"
+
+#: index.html:697 tablet7in.html:782
 msgid "Show asterisms with thickness"
 msgstr "Показувати астеризми із товщиною"
 
-#: index.html:657 tablet7in.html:702
+#: index.html:701 tablet7in.html:786
 msgid "Show ray helpers with thickness"
 msgstr "Показувати лінії променів із товщиною"
 
-#: index.html:665 tablet7in.html:712
+#: index.html:709 tablet7in.html:794
 msgid "Show boundaries with thickness"
 msgstr "Показувати межі із товщиною"
 
-#: index.html:670 tablet7in.html:717
+#: index.html:714 tablet7in.html:799
 msgid "Constellation selection isolated"
 msgstr "Окремий вибір сузір’їв"
 
-#: index.html:674 tablet7in.html:721
+#: index.html:718 tablet7in.html:803
 msgid "Current sky culture"
 msgstr "Поточна картина неба"
 
-#: index.html:687 tablet7in.html:746
+#: index.html:731 tablet7in.html:828
 msgid "Active script:"
 msgstr "Поточний сценарій:"
 
-#: index.html:688 tablet7in.html:747
+#: index.html:732 tablet7in.html:829
 msgid "Run selected script"
 msgstr "Виконати позначений сценарій"
 
-#: index.html:688 tablet7in.html:747
+#: index.html:732 tablet7in.html:829
 msgid "Stop current script"
 msgstr "Припинити виконання поточного сценарію"
 
-#: index.html:693 tablet7in.html:41 tablet7in.html:731
+#: index.html:737 tablet7in.html:43 tablet7in.html:813
 msgid "Actions"
 msgstr "Дії"
 
-#: index.html:697 tablet7in.html:735
+#: index.html:741 tablet7in.html:817
 msgid "Run/toggle action"
 msgstr "Виконати/Перемкнути дію"
 
-#: index.html:708 tablet7in.html:770
+#: index.html:752 tablet7in.html:852
 msgid "Planet map"
 msgstr "Карта планети"
 
-#: index.html:709 tablet7in.html:771
+#: index.html:753 tablet7in.html:853
 msgid "Planet map pointer"
 msgstr "Вказівник на карті планети"
 
-#: index.html:713 tablet7in.html:775
+#: index.html:757 tablet7in.html:857
 msgid "Type to search location"
 msgstr "Введіть щось, щоб знайти місце"
 
-#: index.html:747 tablet7in.html:804
+#: index.html:791 tablet7in.html:886
 msgid "Interaction"
 msgstr "Взаємодія"
 
-#: index.html:748 tablet7in.html:805
+#: index.html:792 tablet7in.html:887
 msgid "Current scene:"
 msgstr "Поточна сцена:"
 
-#: index.html:751 tablet7in.html:808
+#: index.html:795 tablet7in.html:890
 msgid "View controls"
 msgstr "Керування переглядом"
 
-#: index.html:757 tablet7in.html:814
+#: index.html:801 tablet7in.html:896
 msgid "Movement controls"
 msgstr "Керування рухом"
 
-#: index.html:769 tablet7in.html:826
+#: index.html:813 tablet7in.html:908
 msgid "Torchlight"
 msgstr "Місцеве освітлення"
 
-#: index.html:776 tablet7in.html:833
+#: index.html:820 tablet7in.html:915
 msgid "Scene selection"
 msgstr "Вибір сцени"
 
-#: index.html:780 tablet7in.html:837
+#: index.html:824 tablet7in.html:919
 msgid "Load selected scene"
 msgstr "Завантажити позначену сцену"
 
-#: index.html:805 tablet7in.html:863
+#: index.html:849 tablet7in.html:945
 msgid "No response from server"
 msgstr "Немає відповіді від сервера"
 
-#: index.html:806 tablet7in.html:864
+#: index.html:850 tablet7in.html:946
 msgid "No response from server for %1 seconds. Is Stellarium still running?"
 msgstr "Сервер не відповідає уже протягом %1 секунд. Stellarium ще працює?"
 
-#: tablet7in.html:32
+#: tablet7in.html:34
 msgid "Time Jump"
 msgstr "Часовий перехід"
 
-#: tablet7in.html:37
+#: tablet7in.html:39
 msgid "Grids"
 msgstr "Сітки"
 
-#: tablet7in.html:97
+#: tablet7in.html:99
 msgid "Up/Left"
 msgstr "Вгору/Ліворуч"
 
-#: tablet7in.html:97
+#: tablet7in.html:99
 msgid "Up"
 msgstr "Вгору"
 
-#: tablet7in.html:97
+#: tablet7in.html:99
 msgid "Up/Right"
 msgstr "Вгору/Праворуч"
 
-#: tablet7in.html:97
+#: tablet7in.html:99
 msgid "Left"
 msgstr "Ліворуч"
 
-#: tablet7in.html:97
+#: tablet7in.html:99
 msgid "Focus on selected object"
 msgstr "Фокусувати на позначеному об’єкті"
 
-#: tablet7in.html:97
+#: tablet7in.html:99
 msgid "Focus on selection"
 msgstr "Фокусувати на позначеному"
 
-#: tablet7in.html:97
+#: tablet7in.html:99
 msgid "Right"
 msgstr "Праворуч"
 
-#: tablet7in.html:97
+#: tablet7in.html:99
 msgid "Down/Left"
 msgstr "Вниз/Ліворуч"
 
-#: tablet7in.html:97
+#: tablet7in.html:99
 msgid "Down"
 msgstr "Вниз"
 
-#: tablet7in.html:97
+#: tablet7in.html:99
 msgid "Down/Right"
 msgstr "Вниз/Праворуч"
 
-#: tablet7in.html:274
+#: tablet7in.html:276
 msgid "Sirius"
 msgstr "Сіріус"
 
-#: tablet7in.html:275
+#: tablet7in.html:277
 msgid "Arcturus"
 msgstr "Арктур"
 
-#: tablet7in.html:276
+#: tablet7in.html:278
 msgid "Capella"
 msgstr "Капелла"
 
-#: tablet7in.html:277
+#: tablet7in.html:279
 msgid "Vega"
 msgstr "Вега"
 
-#: tablet7in.html:278
+#: tablet7in.html:280
 msgid "Deneb"
 msgstr "Денеб"
 
-#: tablet7in.html:279
+#: tablet7in.html:281
 msgid "Altair"
 msgstr "Альтаїр"
 
-#: tablet7in.html:280
+#: tablet7in.html:282
 msgid "Andromeda Galaxy"
 msgstr "Туманність Андромеди"
 
-#: tablet7in.html:281
+#: tablet7in.html:283
 msgid "Hercules Cluster"
 msgstr "Скупчення у Геркулесі"
 
-#: tablet7in.html:282
+#: tablet7in.html:284
 msgid "Orion Nebula"
 msgstr "Туманність Оріона"
 
-#: tablet7in.html:283
+#: tablet7in.html:285
 msgid "Eta Carinae Nebula"
 msgstr "Туманність Киля"
 
-#: tablet7in.html:284
+#: tablet7in.html:286
 msgid "47 Tucanae Cluster"
 msgstr "Скупчення 47 Тукана"
 
-#: tablet7in.html:285
+#: tablet7in.html:287
 msgid "Aries"
 msgstr "Овен"
 
-#: tablet7in.html:286
+#: tablet7in.html:288
 msgid "Taurus"
 msgstr "Телець"
 
-#: tablet7in.html:287
+#: tablet7in.html:289
 msgid "Gemini"
 msgstr "Близнюки"
 
-#: tablet7in.html:288
+#: tablet7in.html:290
 msgid "Cancer"
 msgstr "Рак"
 
-#: tablet7in.html:289
+#: tablet7in.html:291
 msgid "Leo"
 msgstr "Лев"
 
-#: tablet7in.html:290
+#: tablet7in.html:292
 msgid "Virgo"
 msgstr "Діва"
 
-#: tablet7in.html:291
+#: tablet7in.html:293
 msgid "Libra"
 msgstr "Терези"
 
-#: tablet7in.html:292
+#: tablet7in.html:294
 msgid "Scorpius"
 msgstr "Скорпіон"
 
-#: tablet7in.html:293
+#: tablet7in.html:295
 msgid "Sagittarius"
 msgstr "Стрілець"
 
-#: tablet7in.html:294
+#: tablet7in.html:296
 msgid "Capricornus"
 msgstr "Козоріг"
 
-#: tablet7in.html:295
+#: tablet7in.html:297
 msgid "Aquarius"
 msgstr "Водолій"
 
-#: tablet7in.html:296
+#: tablet7in.html:298
 msgid "Pisces"
 msgstr "Риби"
 
-#: tablet7in.html:755
+#: tablet7in.html:837
 msgid "Favorites"
 msgstr "Вибране"
 
-#: tablet7in.html:757
+#: tablet7in.html:839
 msgid "Show 1"
 msgstr "Перший показ"
 
-#: tablet7in.html:758
+#: tablet7in.html:840
 msgid "Remove Labels and Images"
 msgstr "Вилучити мітки і зображення"
 
-#: tablet7in.html:758
+#: tablet7in.html:840
 msgid "Cleanup Screen"
 msgstr "Очистити екран"
