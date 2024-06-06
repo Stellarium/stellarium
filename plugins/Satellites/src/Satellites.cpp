@@ -2832,7 +2832,7 @@ void Satellites::draw(StelCore* core)
 	painter.setFont(labelFont);
 	Satellite::hintBrightness = hintFader.getInterstate();
 
-	painter.setBlending(true);
+	painter.setBlending(true, GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
 	Satellite::hintTexture->bind();
 	Satellite::viewportHalfspace = painter.getProjector()->getBoundingCap();
 	for (const auto& sat : std::as_const(satellites))

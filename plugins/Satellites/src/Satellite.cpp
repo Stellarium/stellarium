@@ -19,11 +19,10 @@
 
 #include "Satellite.hpp"
 #include "StelObject.hpp"
-#include "StelObjectMgr.hpp"
+//#include "StelObjectMgr.hpp"
 #include "StelPainter.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
-#include "StelTexture.hpp"
 #include "VecMath.hpp"
 #include "StelUtils.hpp"
 #include "StelTranslator.hpp"
@@ -1148,11 +1147,7 @@ void Satellite::draw(StelCore* core, StelPainter& painter)
 				painter.setColor(transitSatelliteColor, 1.f);
 				int screenSizeSat = static_cast<int>((getAngularRadius(core)*(2.*M_PI_180))*static_cast<double>(painter.getProjector()->getPixelPerRadAtCenter()));
 				if (screenSizeSat>0)
-				{
-					painter.setBlending(true, GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
-					hintTexture->bind();
 					painter.drawSprite2dMode(XYZ, qMin(screenSizeSat, 15));
-				}
 
 				if (showLabels)
 				{
@@ -1204,8 +1199,6 @@ void Satellite::draw(StelCore* core, StelPainter& painter)
 			if (showLabels)
 				painter.drawText(XYZ, name, 0, 10, 10, false);
 
-			painter.setBlending(true, GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
-			hintTexture->bind();
 			painter.drawSprite2dMode(XYZ, 11);
 		}
 	}
