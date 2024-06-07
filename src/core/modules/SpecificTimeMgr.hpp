@@ -171,6 +171,7 @@ public slots:
 signals:
 	//! Signal that the configurable twilight altitude for the sun has changed.
 	void twilightAltitudeChanged(double alt);
+	void eventYearChanged();
 
 private:
 	QSettings* conf;
