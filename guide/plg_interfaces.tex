@@ -478,6 +478,51 @@ curl -G -d 'propId=-2&actionId=-2' http://localhost:8090/api/main/status | \
      python -m json.tool 
 \end{commandsScr} 
 
+
+If you want to use \program{node.js} to build your own interface app, you may find the following example helpful.%
+\footnote{Thanks to user FogoVoar}
+It sets the view direction in one of 3 coordinate systems, depending on the argument:
+
+\begin{commandsScr}
+    "j2000" : "[x,y,z]",
+    "jNow"  : "[x,y,z]",
+    "altAz" : "[x,y,z]"
+\end{commandsScr}
+
+\noindent The vector $[x, y, z]$ should be a normalized vector (unit length), derived from 
+either J2000.0 or current equatorial coordinates $(\alpha, \delta)$, 
+or from alt-azimuthal coordinates $(\mathit{Az}, \mathit{alt})$ which are however always counted from south ($[1,0,0]$) towards east ($[0,1,0]$), 
+with the azimuth $\mathit{Az}'$ counted from South towards East, $\mathit{Az}'=180-\mathit{Az}$.
+
+\begin{minipage}{0.3\textwidth}
+\begin{align*}
+x & = & \cos(\delta)*\cos(\alpha)\\
+y & = & \cos(\delta)*\sin(\alpha)\\
+z & = & \sin(\delta)
+\end{align*}
+\end{minipage}\hspace{1cm}
+\begin{minipage}{0.3\textwidth}
+\begin{align*}
+x & = & \cos(\mathit{alt})*\cos(\mathit{Az}')\\
+y & = & \cos(\mathit{alt})*\sin(\mathit{Az}')\\
+z & = & \sin(\mathit{alt}) 
+\end{align*}
+\end{minipage}
+	
+\begin{commandsScr}
+const url = 'http://192.168.xxx.xxx:8090/api/main/view?j2000=[0.5,0.3,0.2]';
+fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+  .then(response => {
+    response.text().then(text => console.log('Raw response:', text));
+    return response.json();
+  })
+\end{commandsScr}
+
   
 \subsection{Developer information}
 \label{sec:plugins:RemoteControl:developer}
