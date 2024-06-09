@@ -524,7 +524,7 @@
             <item row="1" column="0">
              <widget class="QCheckBox" name="umbraAtAltitude">
               <property name="toolTip">
-               <string>Distance to the center of umbra from Earth's surface (height of imagined satellite)</string>
+               <string>Distance to the center of umbra from Earth's surface (height of imagined satellite above a spherical Earth)</string>
               </property>
               <property name="text">
                <string>Show umbra/penumbra at altitude:</string>
@@ -538,6 +538,9 @@
                 <width>120</width>
                 <height>0</height>
                </size>
+              </property>
+              <property name="toolTip">
+               <string>Distance to the center of umbra from Earth's surface (height of imagined satellite above a spherical Earth)</string>
               </property>
               <property name="alignment">
                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
