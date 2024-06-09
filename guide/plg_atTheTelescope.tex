@@ -288,17 +288,62 @@ The fields on this tab are:
 \item[Binoculars] -- selecting this checkbox tells the system that this eyepiece is binoculars or finders; this means that this eyepiece can be used without defining a telescope.
 \item[Has permanent cross-hairs] -- selecting this checkbox tells the system that this eyepiece or binocular (finder) has also simple cross-hairs\footnote{The Oculars plugin supports eyepieces with reticle patterns -- both special eyepieces are available in the default list of eyepieces, and the option \emph{Has permanent cross-hairs} is not related to those eyepieces.}.
 \end{description}
+
 When Binoculars are described, the relevant fields change to
 \begin{description}
-\item[tFOV] -- true field of view in degrees.
+\item[tFOV] -- true field of view in degrees. The true field of view can be given as \textbf{meters at 1000 m}. The approximate conversion of this to degrees is to divide by 17.5. Thus, 87 m at 1000 m $=(87/17.5)\degree \thickapprox 5\degree$.
 \item[Magnification factor] -- the magnification of the binocular.
 \item[Diameter] -- the diameter of the binocular objective in \mm.
 \end{description}
 
-For binoculars, we're computed two important factors in additional to exit pupil -- twilight factor and relative brightness. 
-Twilight factor is a number used to compare the effectiveness of binoculars used in low light. The larger the twilight factor, 
-the more detail you can see in low light. Relative brightness is a number used to compare the brightness of binoculars of similar 
-magnification. The larger the relative brightness number, the brighter the image.
+For binoculars, we're computed a few important factors in additional to the exit pupil\footnote{The exit pupil diameter is calculated by dividing the aperture by the magnification.} (these factors are visible in an on-screen control panel):
+\begin{description}
+\item[Relative Brightness.] This is the square of the diameter of the exit pupil. 
+For example, for a 10x50 binocular, the exit pupil is 5 $\mm$ and relative brightness 
+is $(50/10)^2=5^2=25$. However, the calculation for a 20x100 binocular, through which 
+a great deal more can be seen, gives exactly the same relative brightness: $(100/20)^2=5^2=25$, 
+so this is an inadequate rating to use for astronomical binoculars. Relative brightness 
+is a number used to compare the brightness of binoculars of similar magnification. 
+The larger the relative brightness number, the brighter the image. 
+\item[Twilight Factor] (\textbf{Twilight Index} or \textbf{Twilight Performance Factor}). 
+This was used by \textit{Carl Zeiss International} as an indication of the \textit{distance} 
+at which comparable detail would be seen in different binoculars. It's calculated by 
+finding the square root of the product of the magnification and aperture. For the 
+two binoculars above, the calculations are:
+
+\begin{center}
+$\sqrt{(10*50)}=\sqrt{(500)}=22.36$
+
+$\sqrt{(20*100)}=\sqrt{(2000)}=44.72$
+\end{center}
+
+In this instance, the larger binocular has an index that is double that of the smaller 
+binocular. Twilight factor is a number used to compare the effectiveness of binoculars 
+used in low light. The larger the twilight factor, the more detail you can see in low 
+light. 
+\item[Bishop Index] (or \textbf{Visibility Factor}). This is due to Roy Bishop \citep{Bishop:2002} 
+and is evaluated simply by multiplying the magnification by the aperture in \mm. For 
+our two binocular above, we obtain:
+
+\begin{center}
+$10*50=500$
+
+$20*100=2000$
+\end{center}
+
+The larger binocular has a visibility factor four times greater than the smaller one.
+\item[Adler Index] (or \textbf{Astro Index}). This is due to Alan Adler \citep{Adler:2002} and 
+is evaluated as the product of the magnification and the square root of the aperture in \mm.
+For our two binocular above, we obtain:
+\begin{center}
+$10*\sqrt{50}=10*7.1=71$
+
+$20*\sqrt{100}=20*10=200$
+\end{center}
+This gives the larger binocular an Astro Index of 2.8x the smaller one. At the moment 
+this is the best index to comparison of astronomical binoculars (of course for the 
+simplest indexes, because others have tried to expand on these by including the effect of coatings, baffles, and other aspects of individual quality).
+\end{description}
 
 \paragraph{Lenses}
 
