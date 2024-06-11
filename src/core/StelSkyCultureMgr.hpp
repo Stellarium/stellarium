@@ -27,6 +27,8 @@
 #include <QJsonObject>
 #include <QJsonArray>
 
+class StelTranslator;
+
 //! @class StelSkyCulture
 //! Store basic info about a sky culture for Stellarium.
 //! Different human cultures have used different names for stars, and visualised
@@ -245,7 +247,8 @@ private:
 	QString skyCultureI18ToDirectory(const QString& cultureName) const;
 
 	QString descriptionMarkdownToHTML(const QString& markdown, const QString& descrPath);
-	QString convertMarkdownLevel2Section(const QString& markdown, const QString& sectionName, qsizetype bodyStartPos, qsizetype bodyEndPos);
+	QString convertMarkdownLevel2Section(const QString& markdown, const QString& sectionName,
+	                                     qsizetype bodyStartPos, qsizetype bodyEndPos, const StelTranslator& trans);
 	std::pair<QString/*color*/,QString/*info*/> getLicenseDescription(const QString& license, const bool singleLicenseForAll) const;
 
 	QMap<QString, StelSkyCulture> dirToNameEnglish;
