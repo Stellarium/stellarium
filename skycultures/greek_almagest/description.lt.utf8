@@ -1,0 +1,528 @@
+<h1>Graikų (Almagestas)</h1>
+
+<p>Ši senovės graikų dangaus kultūra yra surinkta knygoje, kuri šiandien žinoma
+pagal savo arabų pavadinimą "Almagest". Ši knyga buvo parašyta Romos laikais
+(Romos imperatoriaus Adriano valdymo laikotarpiu) Aleksandrijoje (Afrika)
+graikų kalba, su datomis, pateiktomis egiptiečių mėnesių pavadinimais ir
+metais, skaičiuojamais po babiloniečių karaliaus, todėl tai aiškiai yra
+daugiakultūris žinių kompendiumas. Tai yra ankstesnių astronomų astronomijos
+žinių, įskaitant stebėjimų rezultatus ir matematinę astronomiją,
+kompiliacija. Claudius Ptolemėjus, naudodamas senesnius, taip pat savo pačio
+stebėjimus, sudėjo ją iš graikų kalbos, išleido II amžiuje ir liko
+pagrindiniu astronomijos darbu kitus 1500 metų. Ji buvo pradžioje parašyta
+pavadinimu <i>Mathematike Syntaxis</i>, senovės graikų kalba. Pavadinimas
+<i>Almagest</i>, reiškiantis „Didžiausią [Knygą]“, buvo sukurtas iš arabų
+vertimų. Norėdami sukurti šią dangaus kultūrą, naudojome Toomer (1984) anglų
+kalbos vertimą, kai kuriais aspektais jį perdirbome (pvz., naudojant daugiau
+tiesioginių graikų kalbos vertimų vietoje lotyniškų terminų, kurie šiandien
+yra paplitę) ir naudojomės kompiuteryje skaitomomis lentelėmis, parengtomis
+Ernie Wright.</p>
+
+<p>Almagestas sudarytas iš 13 skyrių, vadinamų knygomis. Septintojoje ir
+aštuntojoje knygoje Ptolemėjus išvardijo iš viso 1022 žvaigždes 48
+žvaigždynuose (tarp jų yra apie 5 žvaigždės panašūs objektai, tokie kaip
+sferinės žvaigždžių sankaupos). Tai yra žvaigždžių koordinačių lentelė su
+aprašymu jų padėties žvaigždynuose (tokiu kaip "žvaigždė ant alkūnės X,
+ilguma, platumos, didumas"). Kalbant apie precesiją, Ptolemėjus naudojo
+ekliptikos koordinates. Kaip vienas iš pirmųjų savo laikotarpiu, Ptolemėjus
+įtraukė ryškį, kiekybinį žvaigždžių šviesumo mastelį, tikriausiai paimtą iš
+Hiparchauso (kas nėra tikra, nes Hiparchauso katalogas nebuvo
+išlikęs). Skalė prasideda ryškiausia žvaigžde, turinčia ryškį 1, ir mažėja
+iki 6 ryškumo, silpniausioms matomoms žvaigždėms.</p>
+
+<p>Skaičiuojant planetų padėtis Ptolemėjus naudojo geocentrinį modelį (kas yra
+leistina, nes stebėtojas visada stovi ant Žemės) ir taip prisidėjo prie
+mokslinio įsitikinimo, kad Aristarcho heliocentrinio modelio
+nereikia. Tačiau žvaigždžių katalogui <i>Almagest</i> tai visiškai nesvarbu,
+nes žvaigždžių katalogas visada atstovauja tam tikrą dangaus fiksuotų taškų
+inventorių, o Ptolemėjaus paskelbtas katalogo tikslas yra pateikti sąrašą,
+skirtą padaryti dangaus gaublį (žr. Alm., VIII, 3). Žinodamas precesiją, jis
+nori palengvinti ateities gaublio gamintojų darbą, naudodamas ekliptikos
+koordinates: Ptolemėjui žinoma precesija visus žvaigždes pastumia
+lygiagrečiai ekliptikai, todėl atnaujinimai iki atitinkamo gaublio gamintojo
+epochos galėjo būti taikomi paprastu ekliptikos ilgumos reikšmės atimtimi.</p>
+
+<h2>Kaip buvo sukurtas šis dangaus kultūra</h2>
+
+<h3>Žvaigždžių pavadinimai</h3>
+
+Iš daugiau nei 1 000 žvaigždžių, Ptolemėjus paminėjo tik 15 tinkamų
+vardų. Likusios yra identifikuojamos pagal gana ilgus aprašymus, tokius kaip
+"Žvaigždė ant uodegos galo" Šiaurinei. Norint išvengti tokio ilgo eilučių
+rodymo ekrane Stellarium, mes sukūrėme trumpus žymėjimus visoms Almagesto
+žvaigždėms, remiantis žvaigždynu ir jų pasirodymo tvarka
+kataloge. Pavyzdžiui, Šiaurinei suteikiamas žymėjimas "UMi 1", nes tai
+pirmoji žvaigždė Mažojo Lokio (UMi) žvaigždyne. Žr. lentelę žemiau dėl
+atitikimo tarp Ptolemėjaus žvaigždynų ir IAU santrumpų. Be to, jei
+Ptolemėjus aprašo žvaigždę kaip esančią už figūros ribų, atitinkamame
+žymėjime naudojame mažąsias raides. Norint pamatyti ilgą aprašymą tam tikrai
+žvaigždei, vartotojai turėtų įjungti "Naudoti papildomus žvaigždžių
+pavadinimus" "Peržiūrėti [F4]/Dangus" nustatymuose ir paspausti ant
+žvaigždės. Ilgas aprašymas tada bus rodomas viršuje ekrano.
+
+<h3>Žvaigždynų kontūrai</h3>
+
+<p>Procesą galima aprašyti kaip čia nubrėžta pavyzdžiu su Varnu:</p>
+
+<p>Varno (Raven) žvaigždyno viduryje yra žvaigždė &alpha; Crv, esanti
+&quot;Varno galvoje&quot;. Ji yra susijusi su &quot;žvaigžde kakle &quot;,
+&epsilon; Crv. Ši yra susijusi su &quot;žvaigžde krūtinėje&quot; &zeta;
+Crv. Iš ten eina dvi linijos į sparnų galiukus. &gamma; Crv yra žvaigždė
+priekinėje sparno dalyje, o &delta; Crv - žvaigždė galinėje sparno
+dalyje. Iš žvaigždės krūtinėje eina dar viena linija į &quot;Varno
+koją&quot;, žvaigždę &beta; Crv.</p>
+
+<p><img width="800" src="corvus_s.png" /></p>
+
+<p>Po žvaigždžių identifikavimo pagal jų koordinates ir pavadinimus, mes
+sujungiame žvaigždes pagal aprašymus lentelėje, pateiktoje <i>Almageste</i>.</p>
+
+<p>Žvaigždžių ir giliųjų kosmoso objektų pavadinimai remiasi tik Almagesto,
+pvz., Ptolemėjus savo kitame darbe, Tetrabiblose, naudoja pavadinimą
+„λαμπαδαία (Panaši į žibintuvėlį)“ Aldebaranui, bet tai nėra įgyvendinta
+šioje dangaus kultūroje, nes tai nepasirodo Almageste.</p>
+
+<p>Šioje lentelėje pateikiamas originalus graikų kalbos žvaigždyno pavadinimas
+ir jo anglų kalbos vertimas (2 ir 3 stulpeliai) bei nurodomi mūsų
+neapibrėžtumai atkūrimo metu (6 stulpelis).</p>
+
+<table>
+<tr valign="top">
+	<td><b>Santrumpa</b></td>
+	<td><b>Originalus pavadinimas</b></td>
+	<td><b>Vertimas</b> (tiesioginis)</td>
+	<td><b>IAU (Lotyniškas) pavadinimas</b></td>
+	<td><b>pastabos žvaigždynui</b></td>
+	<td><b>laisvė menui</b></td>
+</tr>
+<tr valign="top">
+	<td><notr>UMi</notr></td>
+	<td><notr>&Mu;&iota;&kappa;&rho;&#942; &#702;&#714;&Alpha;&rho;&kappa;&tau;&omicron;&sigmaf;</notr></td>
+	<td>Maža Meškutė</td>
+	<td><notr>Ursa Minor</notr></td>
+	<td>kaip IAU žvaigždynas</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>UMa</notr></td>
+	<td><notr>&Mu;&epsilon;&gamma;&alpha;&lambda;&#942; &#702;&#714;&Alpha;&rho;&kappa;&tau;&omicron;&sigmaf;</notr></td>
+	<td>Didžioji Meška</td>
+	<td><notr>Ursa Major</notr></td>
+	<td>kaip IAU žvaigždynas</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>Dra</notr></td>
+	<td><notr>&Delta;&rho;&#940;&kappa;&omega;&nu;</notr></td>
+	<td>Drakonas</td>
+	<td><notr>Draco</notr></td>
+	<td>visi trikampiai arba kvadratai yra slanksteliai arba kūno dalys; linija ties
+galva yra liežuvis.</td>
+	<td></td>
+</tr>
+	<tr valign="top">
+	<td><notr>Cep</notr></td>
+	<td><notr>&Kappa;&eta;&phi;&epsilon;&#973;&sigmaf;</notr></td>
+	<td>Kepheus</td>
+	<td><notr>Cepheus</notr></td>
+	<td>karalius, aukštyn kojomis </td>
+	<td>trys galvos žvaigždės yra tiara; &beta; matoma kaip dalis diržo, nors
+Almagestas sako po diržu</td>
+</tr>
+<tr valign="top">
+	<td><notr>Boo</notr></td>
+	<td><notr>&Beta;&omicron;&#974;&tau;&eta;&sigmaf;</notr></td>
+	<td>Žemdirbys</td>
+	<td><notr>Bo&ouml;tes</notr></td>
+	<td>has a shepherd's staff in his hand (&omega;)</td>
+	<td>žvaigždė HIP 72582 pridėta kaip kaklo žvaigždė</td>
+</tr>
+<tr valign="top">
+	<td><notr>CrB</notr></td>
+	<td><notr>&Sigma;&tau;&#941;&phi;&alpha;&nu;&omicron;&sigmaf;</notr></td>
+	<td>Karūna</td>
+	<td><notr>Corona Borealis</notr></td>
+	<td>kaip IAU žvaigždynas; jokios informacijos apie eilutes tekste</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>Her</notr></td>
+	<td><notr>&#703;&Epsilon;&nu;&gamma;&#972;&nu;&alpha;&sigma;&iota;&nu;</notr></td>
+	<td>Klūpintysis</td>
+	<td><notr>Hercules</notr></td>
+	<td>viena iš pėdų žvaigždžių yra viršuje Jaučiaganio personalo</td>
+	<td>žvaigždė HIP 82764 pridėta kaip kaklo žvaigždė</td>
+</tr>
+<tr valign="top">
+	<td><notr>Lyr</notr></td>
+	<td><notr>&Lambda;&#973;&rho;&alpha;</notr></td>
+	<td>Lyra</td>
+	<td><notr>Lyra</notr></td>
+	<td></td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>Cyg</notr></td>
+	<td><notr>&#702;&#714;&Omicron;&rho;&nu;&iota;&sigmaf;</notr></td>
+	<td>Paukštis</td>
+	<td><notr>Cygnus</notr></td>
+	<td>gulbė su kojomis</td>
+	<td>Sparnų galiukai sujungti su uodega</td>
+</tr>
+<tr valign="top">
+	<td><notr>Cas</notr></td>
+	<td><notr>&Kappa;&alpha;&sigma;&sigma;&iota;&#941;&pi;&epsilon;&iota;&alpha;</notr></td>
+	<td>Kassiepeia</td>
+	<td><notr>Cassiopeia</notr></td>
+	<td>Karalienė sėdi soste.</td>
+	<td>vengiant painiavos mes nepaišėme sosto</td>
+</tr>
+<tr valign="top">
+	<td><notr>Per</notr></td>
+	<td><notr>&Pi;&epsilon;&rho;&sigma;&epsilon;&#973;&sigmaf;</notr></td>
+	<td>Persėjas</td>
+	<td><notr>Perseus</notr></td>
+	<td>Dvigubas žvaigždynų spiečius NGC 869 ir NGC 884 kaip giliojo kosmoso
+objektas - &gt;viena iš žvaigždžių buvo naudojama piešimui</td>
+	<td>viena iš žvaigždžių Gorgonos galvoje pridedama, kad galva atrodytų daugiau
+sferinė.</td>
+</tr>
+<tr valign="top">
+	<td><notr>Aur</notr></td>
+	<td><notr>&#703;&Eta;&nu;&#943;&omicron;&chi;&omicron;&sigmaf;</notr></td>
+	<td>Važnyčiotojas</td>
+	<td><notr>Auriga</notr></td>
+	<td>vilki ilgą drabužį; drabužis ribotas per pečius ir apatinę juostą</td>
+	<td>o Aur pridėta kaip kaklo žvaigždė; 1 Aur pridėta kaip juostos žvaigždė</td>
+</tr>
+<tr valign="top">
+	<td><notr>Oph</notr></td>
+	<td><notr>&#702;&Omicron;&phi;&iota;&omicron;&#973;&chi;&omicron;&sigmaf;</notr></td>
+	<td>Gyvatnešis</td>
+	<td><notr>Ophiuchus</notr></td>
+	<td>turi gyvatę rankoje</td>
+	<td>pridėta žvaigždė kaip kaklo žvaigždė</td>
+</tr>
+<tr valign="top">
+	<td><notr>Ser</notr></td>
+	<td><notr>&#702;&#714;&Omicron;&phi;&iota;&sigmaf;</notr></td>
+	<td>Gyvatė</td>
+	<td><notr>Serpens</notr></td>
+	<td>dvi atskiros gyvatės dalys (galva ir uodega); kvadratas yra galva</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>Sge</notr></td>
+	<td><notr>&#702;&Omicron;&iota;&sigma;&tau;&#972;&sigmaf;</notr></td>
+	<td>Strėlė</td>
+	<td><notr>Sagitta</notr></td>
+	<td>Kaip ir IAU žvaigždynas, &eta; Sge trūkstama </td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>Aql</notr></td>
+	<td><notr>&#702;&Alpha;&epsilon;&tau;&#972;&sigmaf;</notr></td>
+	<td>Erelis</td>
+	<td><notr>Aquila</notr></td>
+	<td>&tau; Aql kaip galvos žvaigždė, &beta; kaip kaklas, Altayras yra tarp pečių,
+&gamma; ir &mu; yra pečiai</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>Del</notr></td>
+	<td><notr>&Delta;&epsilon;&lambda;&phi;&#943;&sigmaf;</notr></td>
+	<td>Delfinas</td>
+	<td><notr>Delphinus</notr></td>
+	<td></td>
+	<td>pataisyta forma</td>
+</tr>
+<tr valign="top">
+	<td><notr>Equ</notr></td>
+	<td><notr>&Pi;&rho;&omicron;&tau;&omicron;&mu;&#942;</notr></td>
+	<td>Biustas [arklio]</td>
+	<td><notr>Equuleus</notr></td>
+	<td></td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>Peg</notr></td>
+	<td><notr>&#703;&#714;&Iota;&pi;&pi;&omicron;&sigmaf;</notr></td>
+	<td>Arklys</td>
+	<td><notr>Pegasus</notr></td>
+	<td>su karčiais ir vienu sparnu</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>And</notr></td>
+	<td><notr>&#702;&Alpha;&nu;&delta;&rho;&omicron;&mu;&#941;&delta;&alpha;</notr></td>
+	<td>Andromeda</td>
+	<td class='latin'><notr>Andromeda</notr></td>
+	<td>suknelė ir diržas</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>Tri</notr></td>
+	<td><notr>&Tau;&rho;&#943;&gamma;&omega;&nu;&omicron;&sigmaf;</notr></td>
+	<td>Trikampis</td>
+	<td><notr>Triangulum</notr></td>
+	<td>keturios duotos žvaigždės &#61664; vidurinė žvaigždė vienoje pusėje</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>Ari</notr></td>
+	<td><notr>&Kappa;&rho;&iota;&#972;&sigmaf;</notr></td>
+	<td>Avinas</td>
+	<td><notr>Aries</notr></td>
+	<td>pasukta galva; tik vienas ragas</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>Tau</notr></td>
+	<td><notr>&Tau;&alpha;&upsilon;&#771;&rho;&omicron;&sigmaf;</notr></td>
+	<td>Bulius</td>
+	<td><notr>Taurus</notr></td>
+	<td>pusė kūno, matomos tik dvi kojos; kryptis į stebėtoją </td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>Gem</notr></td>
+	<td><notr>&Delta;&#943;&delta;&upsilon;&mu;&omicron;&iota;</notr></td>
+	<td>Dvyniai</td>
+	<td><notr>Gemini</notr></td>
+	<td>vienas žvaigždė bendra; liečia vienas kitą rankomis</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>Cnc</notr></td>
+	<td><notr>&Kappa;&alpha;&rho;&kappa;&#943;&nu;&omicron;&sigmaf;</notr></td>
+	<td>Krabas</td>
+	<td><notr>Cancer</notr></td>
+	<td>kvadratinis kūnas</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>Leo</notr></td>
+	<td><notr>&Lambda;&#941;&omega;&nu;</notr></td>
+	<td>Liūtas</td>
+	<td><notr>Leo</notr></td>
+	<td>atverti nasrai</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>Vir</notr></td>
+	<td><notr>&Pi;&alpha;&rho;&theta;&#941;&nu;&omicron;&sigmaf;</notr></td>
+	<td>Mergelė</td>
+	<td><notr>Virgo</notr></td>
+	<td>nėra atskiros galvos</td>
+	<td>silpnesnės žvaigždės pridėtos, kad būtų galima nupiešti sparnus</td>
+</tr>
+<tr valign="top">
+	<td><notr>Lib</notr></td>
+	<td><notr>&Chi;&eta;&lambda;&alpha;&#943;</notr></td>
+	<td>Žnyplės [Skorpiono]</td>
+	<td><notr>Libra</notr></td>
+	<td>Ptolemėjus visada naudoja terminą &quot;žnyplės&quot;, niekada
+&quot;svarstyklės&quot;.</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>Sco</notr></td>
+	<td><notr>&Sigma;&kappa;&omicron;&rho;&pi;&#943;&omicron;&sigmaf;</notr></td>
+	<td>Skorpionas</td>
+	<td><notr>Scorpius</notr></td>
+	<td></td>
+	<td> rankos pridėtos aplink galvą: &nu; ir &rho;</td>
+</tr>
+<tr valign="top">
+	<td><notr>Sgr</notr></td>
+	<td><notr>&Tau;&omicron;&xi;&#972;&tau;&eta;&sigmaf;</notr></td>
+	<td>Lankininkas</td>
+	<td><notr>Sagittarius</notr></td>
+	<td>Kentauras su lanku priekyje; &bdquo;apsiaustas&ldquo; už nugaros"</td>
+	<td>Įtraukėme daug silpnų žvaigždžių į mūsų piešinį, kad paveikslėlis būtų
+aiškus.</td>
+</tr>
+<tr valign="top">
+	<td><notr>Cap</notr></td>
+	<td><notr>&Alpha;&#943;&gamma;&#972;&kappa;&epsilon;&rho;&omicron;&sigmaf;</notr></td>
+	<td>Vienas su ožio ragu</td>
+	<td><notr>Capricornus</notr></td>
+	<td>žuvies uodega; matomos dvi kojos</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>Aqr</notr></td>
+	<td><notr>&#703;&Upsilon;&delta;&rho;&omicron;&chi;&#972;&omicron;&sigmaf;</notr></td>
+	<td>Vandens nešėjas</td>
+	<td><notr>Aquarius</notr></td>
+	<td>vanduo teka iš ąsočio</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>Psc</notr></td>
+	<td><notr>&#702;&Iota;&chi;&theta;&#973;&epsilon;&sigmaf;</notr></td>
+	<td>[2] Žuvis</td>
+	<td><notr>Pisces</notr></td>
+	<td></td>
+	<td>šiaurinė žuvis: 68(h), 67(k) ir 65(i) aprašytos kaip galva Almageste, bet
+mes jas laikėme uodega, nes burna turėtų būti g ir &tau; Psc. Papildoma
+pakeitimas uodegos uodegoje: išplėsta iki &rho;</td>
+</tr>
+<tr valign="top">
+	<td><notr>Cet</notr></td>
+	<td><notr>&Kappa;&eta;&#771;&tau;&omicron;&sigmaf;</notr></td>
+	<td>Jūros pabaisa</td>
+	<td><notr>Cetus</notr></td>
+	<td></td>
+	<td>Body does not go through star &tau;, but through star &upsilon;</td>
+</tr>
+<tr valign="top">
+	<td><notr>Ori</notr></td>
+	<td><notr>&#702;&Omega;&rho;&#943;&omega;&nu;</notr></td>
+	<td>Orionas</td>
+	<td class='latin'><notr>Orion</notr></td>
+	<td></td>
+	<td>The &quot;head&quot; is labeled as &quot;nebulous&quot; which means Ptolemy
+interpreted &phi;<sub>1</sub>, &phi;<sub>2</sub>, and &lambda;, together
+with fainter stars between them as a &quot;cluster&quot; (or association
+which is more extended than the modern &quot;&lambda; Ori
+Assoc.&quot;). Head does not have direct connection to the shoulder stars
+anymore, but a connection to a star between the stars in the shoulders.</td>
+</tr>
+<tr valign="top">
+	<td><notr>Eri</notr></td>
+	<td><notr>&Pi;&omicron;&tau;&alpha;&mu;&omicron;&#972;&sigmaf;</notr></td>
+	<td>Upė [bevardė]</td>
+	<td><notr>Eridanus</notr></td>
+	<td>Kaip IAU žvaigždynas, bet trumpesnis</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>Lep</notr></td>
+	<td><notr>&Lambda;&alpha;&gamma;&omega;&#771;&sigmaf;</notr></td>
+	<td>Kiškis</td>
+	<td><notr>Lepus</notr></td>
+	<td></td>
+	<td>took the "4 stars over the ear" as ear</td>
+</tr>
+<tr valign="top">
+	<td><notr>CMa</notr></td>
+	<td><notr>&Kappa;&#973;&omega;&nu;</notr></td>
+	<td>Šuo</td>
+	<td><notr>Canis Major</notr></td>
+	<td></td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>CMi</notr></td>
+	<td><notr>&Pi;&rho;&omicron;&kappa;&#973;&omega;&nu;</notr></td>
+	<td>Esantis prieš Šunį</td>
+	<td><notr>Canis Minor</notr></td>
+	<td></td>
+	<td>In Almagest, the name of the constellation is &quot;The One before the
+Dog&quot; or &quot;Harbinger of Sirius&quot; as Toomer puts it. However,
+&beta; CMi is called &quot;the neck&quot; (of whom is unknown). We drew a
+little dog with &gamma; and &epsilon; as head; &alpha;, &beta;, &eta; and
+HIP36889 as body; forelegs with HIP 35509 and HIP 35614; hindlegs with
+&delta;<sub>2</sub> and &delta;<sub>3</sub>; tail with HIP 37634</td>
+</tr>
+<tr valign="top">
+	<td><notr>Arg</notr></td>
+	<td><notr>&#702;&Alpha;&rho;&gamma;&omega;</notr></td>
+	<td>Ship &quot;Argo&quot;</td>
+	<td><notr>Argo</notr></td>
+	<td>smaller than the sum of the IAU-constellations Pup+Pyx+Car+Vel</td>
+	<td>Many stars not integrated in the constellation, to create a boat-like shape;
+in many depictions (including the ancient Farnese globe), only a half of a
+ship is painted.</td>
+</tr>
+<tr valign="top">
+	<td><notr>Hya</notr></td>
+	<td><notr>&#703;&#714;&Upsilon;&delta;&rho;&omicron;&sigmaf;</notr></td>
+	<td>Vandens gyvatė</td>
+	<td><notr>Hydra</notr></td>
+	<td>kaip IAU žvaigždynas</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>Crt</notr></td>
+	<td><notr>&Kappa;&rho;&alpha;&tau;&#768;&eta;&rho;</notr></td>
+	<td>Krater (vessel)</td>
+	<td><notr>Crater</notr></td>
+	<td></td>
+	<td>a Krater is special Greek wine mixing vessel which looks like an amphora or
+vase: <a
+href="https://en.wikipedia.org/wiki/Krater">https://en.wikipedia.org/wiki/Krater</a>
+Ptolemy describes only one star in the foot (&alpha; Crt) and two handles
+(&eta;, &theta; Crt)</td>
+</tr>
+<tr valign="top">
+	<td><notr>Crv</notr></td>
+	<td><notr>&Kappa;&oacute;&rho;&alpha;&xi;</notr></td>
+	<td>Varnas</td>
+	<td><notr>Corvus</notr></td>
+	<td>kaip IAU žvaigždynas</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>Cen</notr></td>
+	<td><notr>&Kappa;&#941;&nu;&tau;&alpha;&upsilon;&rho;&omicron;&sigmaf;</notr></td>
+	<td>Kentauros</td>
+	<td><notr>Centaurus</notr></td>
+	<td></td>
+	<td>deviation from description: HIP 65373 instead of &omega; Cen (cluster) taken
+as star on the back. &lsquo;Thyrsus&lsquo; not drawn (to avoid confusion),
+backward arm added.</td>
+</tr>
+<tr valign="top">
+	<td><notr>Lup</notr></td>
+	<td><notr>&Theta;&eta;&rho;&#943;&omicron;&nu;</notr></td>
+	<td>Žvėris</td>
+	<td><notr>Lupus</notr></td>
+	<td></td>
+	<td>&beta; described as &lsquo;End of hind leg&lsquo; -> taken as star in the
+belly; &tau;<sub>1</sub> as hindleg &Chi; removed from head, because
+otherwise shapelessness arises; HIP 73493 taken as foreleg</td>
+</tr>
+<tr valign="top">
+	<td><notr>Ara</notr></td>
+	<td><notr>&Theta;&upsilon;&mu;&iota;&alpha;&tau;&#942;&rho;&iota;&omicron;&nu;</notr></td>
+	<td>Altorius</td>
+	<td><notr>Ara</notr></td>
+	<td>kaip IAU žvaigždynas</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>CrA</notr></td>
+	<td><notr>&Sigma;&tau;&#941;&phi;&alpha;&nu;&omicron;&sigmaf; &Nu;&#972;&tau;&iota;&omicron;&sigmaf;</notr></td>
+	<td>Pietinė karūna</td>
+	<td><notr>Corona Australis</notr></td>
+	<td>like IAU constellation; only uncertainty with stars that only got a BSC
+number in the Almagest, because these are not clearly to identify in
+Stellarium</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>PsA</notr></td>
+	<td><notr>&Nu;&#972;&tau;&iota;&omicron;&sigmaf; &#702;&Iota;&chi;&theta;&#973;&sigmaf;</notr></td>
+	<td>Pietinė žuvis</td>
+	<td><notr>Piscis Austrinus</notr></td>
+	<td>žuvis guli ant jo nugaros</td>
+	<td>we added a few stars to mark the tail as such (&beta; should be the tip of
+the tail but we used it as its root)</td>
+</tr>
+</table>
+
+<h2>Fair Use</h2>
+<p>This sky culture originates from a student's year of research. We provide
+this for free but authors of contributions certainly deserve to be cited
+according to the common rules. Thank you!</p>
+
+<h2>Thanks</h2>
+<p>The authors thank Patrick Gleason and Georg Zotti for English proofreading
+and interesting discussions.</p>
+
+<h2>Autoriai</h2>
+<p>Šią dangaus kultūrą sudarė ir į Stellarium įtraukė Alina Šmit , Lėja
+Jabšinski, Marija Fon Seggern ir Suzana M. Hofman: service@uhura-uraniae.com</p>
+<p>Written in English: the authors</p>
