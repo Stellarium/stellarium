@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2024-05-30 19:07+0700\n"
+"POT-Creation-Date: 2024-06-09 22:51+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Ilpo Kantonen, 2024\n"
 "Language-Team: Finnish (https://app.transifex.com/stellarium/teams/80998/fi/)\n"
@@ -38,7 +38,7 @@ msgstr ""
 #: src/gui/AstroCalcDialog.cpp:2897 src/gui/AstroCalcDialog.cpp:2929
 #: src/gui/AstroCalcDialog.cpp:3231 src/gui/AstroCalcDialog.cpp:7290
 #: src/gui/ObsListDialog.cpp:292 src/ui_configurationDialog.h:1806
-#: plugins/Satellites/src/Satellite.cpp:341
+#: plugins/Satellites/src/Satellite.cpp:340
 #: plugins/TelescopeControl/src/TelescopeClient.cpp:136
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:516
 #: plugins/Supernovae/src/Supernova.cpp:144 plugins/Novae/src/Nova.cpp:150
@@ -213,7 +213,7 @@ msgstr "Ensivertikaali"
 #: src/gui/AstroCalcDialog.cpp:818 src/gui/AstroCalcDialog.cpp:1724
 #: src/gui/AstroCalcDialog.cpp:2076 src/gui/AstroCalcDialog.cpp:2348
 #: src/gui/AstroCalcChart.cpp:80 src/gui/AstroCalcChart.cpp:418
-#: src/ui_viewDialog.h:4186 plugins/Satellites/src/Satellite.cpp:364
+#: src/ui_viewDialog.h:4186 plugins/Satellites/src/Satellite.cpp:363
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1545
 msgid "Altitude"
 msgstr "Korkeus"
@@ -336,8 +336,8 @@ msgstr "Antapeksi"
 #. TRANSLATORS: Unit of measure for speed - kilometers per second
 #: src/core/modules/GridLinesMgr.cpp:1629 src/core/modules/Planet.cpp:736
 #: src/core/modules/Planet.cpp:1028 src/gui/AstroCalcDialog.cpp:8177
-#: plugins/Satellites/src/Satellite.cpp:362
-#: plugins/Satellites/src/Satellite.cpp:405
+#: plugins/Satellites/src/Satellite.cpp:361
+#: plugins/Satellites/src/Satellite.cpp:404
 #: plugins/MeteorShowers/src/MeteorShower.cpp:580
 msgctxt "speed"
 msgid "km/s"
@@ -836,7 +836,7 @@ msgstr "Tekijä"
 
 #. TRANSLATORS: Unit of measure for distance - meter
 #: src/core/modules/LandscapeMgr.cpp:1382 src/gui/StelGuiItems.cpp:866
-#: plugins/Satellites/src/Satellite.cpp:435
+#: plugins/Satellites/src/Satellite.cpp:434
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1191
 #: plugins/Satellites/src/gui/SatellitesFilterDialog.cpp:134
 msgctxt "distance"
@@ -937,8 +937,8 @@ msgstr "Halkaisija"
 #: src/core/modules/Comet.cpp:203 src/gui/StelGuiItems.cpp:894
 #: src/gui/AstroCalcDialog.cpp:3048 src/gui/AstroCalcDialog.cpp:3561
 #: src/gui/AstroCalcDialog.cpp:8112 plugins/Satellites/src/Satellites.cpp:2933
-#: plugins/Satellites/src/Satellite.cpp:358
-#: plugins/Satellites/src/Satellite.cpp:401
+#: plugins/Satellites/src/Satellite.cpp:357
+#: plugins/Satellites/src/Satellite.cpp:400
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1200
 #: plugins/Satellites/src/gui/SatellitesFilterDialog.cpp:133
 msgctxt "distance"
@@ -1834,17 +1834,17 @@ msgid "photometric passband"
 msgstr "fotometrinen päästökaista"
 
 #: src/core/modules/Nebula.cpp:194 src/core/StelObject.cpp:351
-#: plugins/Satellites/src/Satellite.cpp:349
+#: plugins/Satellites/src/Satellite.cpp:348
 msgid "reduced to"
 msgstr "ekstinktiokorjattu mag."
 
 #: src/core/modules/Nebula.cpp:194 src/core/StelObject.cpp:351
-#: plugins/Satellites/src/Satellite.cpp:349
+#: plugins/Satellites/src/Satellite.cpp:348
 msgid "by"
 msgstr "(korjaus"
 
 #: src/core/modules/Nebula.cpp:194 src/core/StelObject.cpp:351
-#: plugins/Satellites/src/Satellite.cpp:349
+#: plugins/Satellites/src/Satellite.cpp:348
 msgid "Airmasses"
 msgstr "ilmamassaa)"
 
@@ -2462,7 +2462,7 @@ msgstr "Elongaatio"
 #: src/core/modules/Planet.cpp:890 src/core/modules/Planet.cpp:899
 #: src/gui/AstroCalcChart.cpp:96 src/gui/AstroCalcChart.cpp:106
 #: src/gui/AstroCalcChart.cpp:439 src/gui/AstroCalcChart.cpp:465
-#: plugins/Satellites/src/Satellite.cpp:410
+#: plugins/Satellites/src/Satellite.cpp:409
 msgid "Phase angle"
 msgstr "Vaihekulma"
 
@@ -2780,7 +2780,7 @@ msgid "variable star"
 msgstr "muuttuva tähti"
 
 #: src/core/modules/StarWrapper.cpp:304
-#: plugins/Satellites/src/ui_satellitesDialog.h:1269
+#: plugins/Satellites/src/ui_satellitesDialog.h:1226
 msgid "Magnitude range"
 msgstr "Magnitudiväli"
 
@@ -2860,31 +2860,31 @@ msgstr "Digitized Sky Survey (TOAST)"
 msgid "Toggle Hierarchical Progressive Surveys"
 msgstr "Aseta Hierarchical Progressive Surveys -luettelo"
 
-#: src/core/SolarEclipseComputer.cpp:1674 src/gui/AstroCalcDialog.cpp:3836
+#: src/core/SolarEclipseComputer.cpp:1997 src/gui/AstroCalcDialog.cpp:3836
 msgid "Solar Eclipse"
 msgstr "Auringonpimennys"
 
-#: src/core/SolarEclipseComputer.cpp:1674
+#: src/core/SolarEclipseComputer.cpp:1997
 msgid "Created by Stellarium"
 msgstr "Stellariumin luoma"
 
-#: src/core/SolarEclipseComputer.cpp:1686 src/gui/AstroCalcDialog.cpp:3662
+#: src/core/SolarEclipseComputer.cpp:2009 src/gui/AstroCalcDialog.cpp:3662
 msgid "Greatest eclipse"
 msgstr "Suurin pimennys"
 
-#: src/core/SolarEclipseComputer.cpp:1693
+#: src/core/SolarEclipseComputer.cpp:2016
 msgid "First contact with Earth"
 msgstr "Ensimmäinen kontakti maan kanssa"
 
-#: src/core/SolarEclipseComputer.cpp:1700
+#: src/core/SolarEclipseComputer.cpp:2023
 msgid "Last contact with Earth"
 msgstr "Viimeinen kontakti maan kanssa"
 
-#: src/core/SolarEclipseComputer.cpp:1783
+#: src/core/SolarEclipseComputer.cpp:2106
 msgid "Central eclipse begins"
 msgstr "Keskipimennys alkaa"
 
-#: src/core/SolarEclipseComputer.cpp:1791
+#: src/core/SolarEclipseComputer.cpp:2114
 msgid "Central eclipse ends"
 msgstr "Keskipimennys päättyy"
 
@@ -12908,7 +12908,7 @@ msgstr ""
 msgid "Use proportional hints"
 msgstr "Käytä kulmaläpimitan mukaisia osoittimia"
 
-#: src/ui_viewDialog.h:3752 plugins/Satellites/src/ui_satellitesDialog.h:1246
+#: src/ui_viewDialog.h:3752 plugins/Satellites/src/ui_satellitesDialog.h:1244
 msgid "Labels"
 msgstr "Nimet"
 
@@ -13821,7 +13821,7 @@ msgstr ""
 "seuraavalla Stellariumin käynnistyskerralla"
 
 #: src/ui_configurationDialog.h:1739
-#: plugins/Satellites/src/ui_satellitesDialog.h:1271
+#: plugins/Satellites/src/ui_satellitesDialog.h:1258
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:206
 #: plugins/NavStars/src/ui_navStarsWindow.h:507
 #: plugins/Novae/src/ui_novaeDialog.h:209
@@ -13842,7 +13842,7 @@ msgstr "Palauta Stellariumin mukana tulleet oletusasetukset"
 
 #: src/ui_configurationDialog.h:1743
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:314
-#: plugins/Satellites/src/ui_satellitesDialog.h:1270
+#: plugins/Satellites/src/ui_satellitesDialog.h:1257
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:222
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:205
 #: plugins/NavStars/src/ui_navStarsWindow.h:506
@@ -14792,7 +14792,7 @@ msgid "Allow scripts to store output to arbitrary directories"
 msgstr "Salli komentosarjojen tallentaa tulos mielivaltaisiin kansioihin"
 
 #: src/ui_scriptConsole.h:397
-#: plugins/Satellites/src/ui_satellitesDialog.h:1272
+#: plugins/Satellites/src/ui_satellitesDialog.h:1259
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:207
 #: plugins/NavStars/src/ui_navStarsWindow.h:498
 #: plugins/Novae/src/ui_novaeDialog.h:210
@@ -14912,7 +14912,7 @@ msgid "Export ephemeris..."
 msgstr "Vie efemeridit..."
 
 #: src/ui_astroCalcDialog.h:2179 src/ui_astroCalcDialog.h:2280
-#: plugins/Satellites/src/ui_satellitesDialog.h:1385
+#: plugins/Satellites/src/ui_satellitesDialog.h:1372
 msgid "Calculations require time, please be patient"
 msgstr "Laskenta vie aikaa, ole kärsivällinen"
 
@@ -14925,7 +14925,7 @@ msgid "First celestial body"
 msgstr "Ensimmäinen taivaankappale"
 
 #: src/ui_astroCalcDialog.h:2187 src/ui_astroCalcDialog.h:2270
-#: plugins/Satellites/src/Satellite.cpp:492
+#: plugins/Satellites/src/Satellite.cpp:491
 msgid "and"
 msgstr "ja"
 
@@ -15411,7 +15411,7 @@ msgstr "Efemeridin viivojen paksuus:"
 #: plugins/Oculars/src/Oculars.cpp:1996
 #: plugins/Oculars/src/gui/OcularDialog.cpp:598
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1201
-#: plugins/Satellites/src/ui_satellitesDialog.h:1250
+#: plugins/Satellites/src/ui_satellitesDialog.h:1248
 msgctxt "pixels"
 msgid "px"
 msgstr "px"
@@ -15445,7 +15445,7 @@ msgid "Save list"
 msgstr "Tallenna luettelo"
 
 #: src/ui_obsListDialog.h:374
-#: plugins/Satellites/src/ui_satellitesDialog.h:1350
+#: plugins/Satellites/src/ui_satellitesDialog.h:1337
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:156
 msgid "Description:"
 msgstr "Kuvaus:"
@@ -16318,7 +16318,7 @@ msgstr "Salli napsautus valittuun kohteeseen"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:316
 #: plugins/Oculars/src/ui_ocularDialog.h:1571
-#: plugins/Satellites/src/ui_satellitesDialog.h:1390
+#: plugins/Satellites/src/ui_satellitesDialog.h:1377
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:420
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:234
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:208
@@ -16450,7 +16450,7 @@ msgstr "Telrad-näkymä"
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:206
 #: plugins/NavStars/src/NavStars.cpp:120 plugins/Quasars/src/Quasars.cpp:172
 #: plugins/Pulsars/src/Pulsars.cpp:170
-#: plugins/Exoplanets/src/Exoplanets.cpp:174
+#: plugins/Exoplanets/src/Exoplanets.cpp:175
 #: plugins/Observability/src/Observability.cpp:198
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:92
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:151
@@ -17402,7 +17402,7 @@ msgstr "Kiikarit"
 #: plugins/Oculars/src/ui_ocularDialog.h:1539
 #: plugins/Oculars/src/ui_ocularDialog.h:1549
 #: plugins/Oculars/src/ui_ocularDialog.h:1564
-#: plugins/Satellites/src/ui_satellitesDialog.h:1301
+#: plugins/Satellites/src/ui_satellitesDialog.h:1288
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:559
 #: plugins/TelescopeControl/src/gui/ui_storedPointsDialog.h:203
 msgid "Name:"
@@ -17527,7 +17527,7 @@ msgstr ""
 #: plugins/Satellites/src/Satellites.cpp:72
 #: plugins/Satellites/src/Satellites.cpp:164
 #: plugins/Satellites/src/Satellites.cpp:257
-#: plugins/Satellites/src/ui_satellitesDialog.h:1362
+#: plugins/Satellites/src/ui_satellitesDialog.h:1349
 msgid "Satellites"
 msgstr "Satelliitit"
 
@@ -18480,187 +18480,187 @@ msgctxt "comms"
 msgid "mode"
 msgstr "tila"
 
-#: plugins/Satellites/src/Satellite.cpp:220
+#: plugins/Satellites/src/Satellite.cpp:219
 msgid "The satellite and the observer are in sunlight"
 msgstr "Satelliitti ja tarkkailija ovat auringonvalossa"
 
-#: plugins/Satellites/src/Satellite.cpp:221
+#: plugins/Satellites/src/Satellite.cpp:220
 msgid "The satellite is sunlit and the observer is in the dark"
 msgstr "Satelliitti on auringonvalossa ja tarkkailija on pimeässä"
 
-#: plugins/Satellites/src/Satellite.cpp:222
+#: plugins/Satellites/src/Satellite.cpp:221
 msgid "The satellite isn't sunlit"
 msgstr "Satelliitti ei ole aurinkoinen"
 
-#: plugins/Satellites/src/Satellite.cpp:223
+#: plugins/Satellites/src/Satellite.cpp:222
 msgid "The satellite is in penumbra"
 msgstr "Satelliitti on puolivarjossa"
 
-#: plugins/Satellites/src/Satellite.cpp:224
+#: plugins/Satellites/src/Satellite.cpp:223
 msgid "The satellite is eclipsed"
 msgstr "Satelliitti on pimennossa"
 
-#: plugins/Satellites/src/Satellite.cpp:225
+#: plugins/Satellites/src/Satellite.cpp:224
 msgid "The satellite is below the horizon"
 msgstr "Satelliitti on horisontin alapuolella"
 
-#: plugins/Satellites/src/Satellite.cpp:336
+#: plugins/Satellites/src/Satellite.cpp:335
 msgid "International Designator"
 msgstr "kansainvälinen tunnus"
 
-#: plugins/Satellites/src/Satellite.cpp:347
+#: plugins/Satellites/src/Satellite.cpp:346
 msgid "Approx. magnitude"
 msgstr "Likim. magnitudi"
 
 #. TRANSLATORS: Slant range: distance between the satellite and the observer
-#: plugins/Satellites/src/Satellite.cpp:360
+#: plugins/Satellites/src/Satellite.cpp:359
 msgid "Range"
 msgstr "Etäisyys"
 
 #. TRANSLATORS: Rate at which the distance changes
-#: plugins/Satellites/src/Satellite.cpp:362
+#: plugins/Satellites/src/Satellite.cpp:361
 msgid "Range rate"
 msgstr "Etäisyyden muutosnopeus"
 
-#: plugins/Satellites/src/Satellite.cpp:365
+#: plugins/Satellites/src/Satellite.cpp:364
 msgid "Perigee/apogee altitudes"
 msgstr "Perigeumin/apogeumin korkeus"
 
-#: plugins/Satellites/src/Satellite.cpp:376
+#: plugins/Satellites/src/Satellite.cpp:375
 msgid "Approx. angular size"
 msgstr "Likim. kulmaläpimitta"
 
 #. TRANSLATORS: Revolutions per day - measurement of the frequency of a
 #. rotation
-#: plugins/Satellites/src/Satellite.cpp:385
+#: plugins/Satellites/src/Satellite.cpp:384
 msgctxt "frequency"
 msgid "rpd"
 msgstr "kierrosta/vrk"
 
 #. TRANSLATORS: minutes - orbital period for artificial satellites
-#: plugins/Satellites/src/Satellite.cpp:387
+#: plugins/Satellites/src/Satellite.cpp:386
 msgctxt "period"
 msgid "min"
 msgstr "min"
 
-#: plugins/Satellites/src/Satellite.cpp:389
+#: plugins/Satellites/src/Satellite.cpp:388
 msgid "Orbital period"
 msgstr "Kiertoaika"
 
-#: plugins/Satellites/src/Satellite.cpp:394
+#: plugins/Satellites/src/Satellite.cpp:393
 #: plugins/Satellites/src/ui_satellitesFilterDialog.h:257
 #: plugins/Exoplanets/src/Exoplanet.cpp:366
 msgid "Inclination"
 msgstr "Inklinaatio"
 
-#: plugins/Satellites/src/Satellite.cpp:395
+#: plugins/Satellites/src/Satellite.cpp:394
 msgid "SubPoint (Lat./Long.)"
 msgstr "Nadiiripiste (pit./lev.)"
 
 #. TRANSLATORS: TEME (True Equator, Mean Equinox) is an Earth-centered
 #. inertial coordinate system
-#: plugins/Satellites/src/Satellite.cpp:401
+#: plugins/Satellites/src/Satellite.cpp:400
 msgid "TEME coordinates"
 msgstr "TEME-koordinaatit"
 
 #. TRANSLATORS: TEME (True Equator, Mean Equinox) is an Earth-centered
 #. inertial coordinate system
-#: plugins/Satellites/src/Satellite.cpp:405
+#: plugins/Satellites/src/Satellite.cpp:404
 msgid "TEME velocity"
 msgstr "TEME-nopeus"
 
-#: plugins/Satellites/src/Satellite.cpp:415
+#: plugins/Satellites/src/Satellite.cpp:414
 msgid "Sun reflection angle"
 msgstr "Auringon heijastuskulma"
 
-#: plugins/Satellites/src/Satellite.cpp:423
-#: plugins/Satellites/src/Satellite.cpp:535
+#: plugins/Satellites/src/Satellite.cpp:422
+#: plugins/Satellites/src/Satellite.cpp:534
 msgctxt "unknown date"
 msgid "unknown"
 msgstr "tuntematon"
 
-#: plugins/Satellites/src/Satellite.cpp:430
+#: plugins/Satellites/src/Satellite.cpp:429
 msgctxt "at time"
 msgid "at"
 msgstr "kello"
 
-#: plugins/Satellites/src/Satellite.cpp:432
+#: plugins/Satellites/src/Satellite.cpp:431
 msgid "Last updated TLE"
 msgstr "Rataelementit päivitetty"
 
-#: plugins/Satellites/src/Satellite.cpp:433
+#: plugins/Satellites/src/Satellite.cpp:432
 msgid "Epoch of the TLE"
 msgstr "Rataelementtien epookki"
 
-#: plugins/Satellites/src/Satellite.cpp:435
+#: plugins/Satellites/src/Satellite.cpp:434
 msgid "Radar cross-section (RCS)"
 msgstr "Tutkapoikkipinta-ala (RCS)"
 
-#: plugins/Satellites/src/Satellite.cpp:444
+#: plugins/Satellites/src/Satellite.cpp:443
 msgid "Group"
 msgstr "Ryhmä"
 
-#: plugins/Satellites/src/Satellite.cpp:444
+#: plugins/Satellites/src/Satellite.cpp:443
 msgid "Groups"
 msgstr "Ryhmät"
 
-#: plugins/Satellites/src/Satellite.cpp:449
+#: plugins/Satellites/src/Satellite.cpp:448
 msgid "Operational status"
 msgstr "Toimintatila"
 
-#: plugins/Satellites/src/Satellite.cpp:455
+#: plugins/Satellites/src/Satellite.cpp:454
 msgid "Radio communication"
 msgstr "Radioyhteys"
 
 #. TRANSLATORS: Unit of measurement of frequency
-#: plugins/Satellites/src/Satellite.cpp:505
+#: plugins/Satellites/src/Satellite.cpp:504
 #: plugins/Satellites/src/gui/SatellitesCommDialog.cpp:83
 #: plugins/Pulsars/src/Pulsar.cpp:283
 msgctxt "frequency"
 msgid "MHz"
 msgstr "MHz"
 
-#: plugins/Satellites/src/Satellite.cpp:505
+#: plugins/Satellites/src/Satellite.cpp:504
 msgctxt "frequency"
 msgid "kHz"
 msgstr "kHz"
 
-#: plugins/Satellites/src/Satellite.cpp:763
+#: plugins/Satellites/src/Satellite.cpp:762
 msgctxt "operational status"
 msgid "operational"
 msgstr "käytössä"
 
-#: plugins/Satellites/src/Satellite.cpp:764
+#: plugins/Satellites/src/Satellite.cpp:763
 msgctxt "operational status"
 msgid "non-operational"
 msgstr "ei toiminnassa"
 
-#: plugins/Satellites/src/Satellite.cpp:765
+#: plugins/Satellites/src/Satellite.cpp:764
 msgctxt "operational status"
 msgid "partially operational"
 msgstr "osittain käytössä"
 
-#: plugins/Satellites/src/Satellite.cpp:766
+#: plugins/Satellites/src/Satellite.cpp:765
 msgctxt "operational status"
 msgid "standby"
 msgstr "valmiustilassa"
 
-#: plugins/Satellites/src/Satellite.cpp:767
+#: plugins/Satellites/src/Satellite.cpp:766
 msgctxt "operational status"
 msgid "spare"
 msgstr "varalla"
 
-#: plugins/Satellites/src/Satellite.cpp:768
+#: plugins/Satellites/src/Satellite.cpp:767
 msgctxt "operational status"
 msgid "extended mission"
 msgstr "pidennetty tehtävä"
 
-#: plugins/Satellites/src/Satellite.cpp:769
+#: plugins/Satellites/src/Satellite.cpp:768
 msgctxt "operational status"
 msgid "decayed"
 msgstr "ei enää toimintakuntoinen"
 
-#: plugins/Satellites/src/Satellite.cpp:771
+#: plugins/Satellites/src/Satellite.cpp:770
 msgctxt "operational status"
 msgid "unknown"
 msgstr "tuntematon"
@@ -19140,7 +19140,7 @@ msgid "[new source]"
 msgstr "[uusi lähde]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1103
-#: plugins/Satellites/src/ui_satellitesDialog.h:1223
+#: plugins/Satellites/src/ui_satellitesDialog.h:1207
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:195
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:204
 #: plugins/Novae/src/gui/NovaeDialog.cpp:190
@@ -19474,22 +19474,22 @@ msgstr "Mitään ei poistettu"
 msgid "Please select a line first!"
 msgstr "Valitse ensin rivi!"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1218
-#: plugins/Satellites/src/ui_satellitesDialog.h:1219
+#: plugins/Satellites/src/ui_satellitesDialog.h:1202
+#: plugins/Satellites/src/ui_satellitesDialog.h:1203
 msgid "Satellites Configuration"
 msgstr "Satelliittien asetukset"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1220
+#: plugins/Satellites/src/ui_satellitesDialog.h:1204
 msgid "Updates"
 msgstr "Päivitykset"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1221
+#: plugins/Satellites/src/ui_satellitesDialog.h:1205
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:532
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:426
 msgid "Update frequency:"
 msgstr "Päivitä frekvenssi:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1222
+#: plugins/Satellites/src/ui_satellitesDialog.h:1206
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:201
 #: plugins/Novae/src/ui_novaeDialog.h:204
 #: plugins/Quasars/src/ui_quasarsDialog.h:258
@@ -19498,132 +19498,133 @@ msgstr "Päivitä frekvenssi:"
 msgid "Last update:"
 msgstr "Viimeisin päivitys:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1224
+#: plugins/Satellites/src/ui_satellitesDialog.h:1208
 msgid "On update, add all new satellites from the selected source(s)"
 msgstr "Päivittäessä lisää kaikki uudet satelliitit valituista lähteistä"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1225
+#: plugins/Satellites/src/ui_satellitesDialog.h:1209
 msgid "Update satellite data from Internet sources"
 msgstr "Päivitä satelliittien tiedot internetlähteistä"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1226
+#: plugins/Satellites/src/ui_satellitesDialog.h:1210
 msgid ""
 "On update, remove the satellites that are no longer listed in the update "
 "sources"
 msgstr "Päivittäessä poista satelliitit joita ei ole enää listattu lähteissä"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1227
+#: plugins/Satellites/src/ui_satellitesDialog.h:1211
 msgid "Visualisation settings"
 msgstr "Visualisointiasetukset"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1229
-msgid ""
-"Distance to the center of umbra from Earth's surface (height of imagined "
-"satellite)"
-msgstr ""
-"Etäisyys täysvarjon keskipisteeseen Maan pinnasta (kuvitellun satelliitin "
-"korkeus)"
-
-#: plugins/Satellites/src/ui_satellitesDialog.h:1231
-msgid "Show umbra/penumbra at altitude:"
-msgstr "Näytä umbra/penumbra korkeudessa:"
-
-#: plugins/Satellites/src/ui_satellitesDialog.h:1232
+#: plugins/Satellites/src/ui_satellitesDialog.h:1212
 msgid "Orbit lines"
 msgstr "Radat"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1242
+#: plugins/Satellites/src/ui_satellitesDialog.h:1222
+msgid "Show Earth's umbra"
+msgstr "Näytä Maan täysvarjo"
+
+#: plugins/Satellites/src/ui_satellitesDialog.h:1224
+msgid "The color of Earth's umbra circle"
+msgstr "Maan täysvarjon ympyrän väri"
+
+#: plugins/Satellites/src/ui_satellitesDialog.h:1227
+msgid "Altitude range"
+msgstr "Korkeusalue"
+
+#: plugins/Satellites/src/ui_satellitesDialog.h:1228
 msgid "Show Earth's penumbra"
 msgstr "Näytä Maan puolivarjo"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1244
+#: plugins/Satellites/src/ui_satellitesDialog.h:1230
 msgid "The color of Earth's penumbra circle"
 msgstr "Maan puolivarjoympyrän väri"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1248
-msgid "Font size for labels"
-msgstr "Nimilappujen kirjasinkoko"
+#: plugins/Satellites/src/ui_satellitesDialog.h:1233
+#: plugins/Satellites/src/ui_satellitesDialog.h:1237
+msgid ""
+"Distance to the center of umbra from Earth's surface (height of imagined "
+"satellite above a spherical Earth)"
+msgstr ""
+"Etäisyys umbran keskipisteeseen Maan pinnasta (kuvitellun satelliitin "
+"korkeus pallomaisen Maan yläpuolella)"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1251
+#: plugins/Satellites/src/ui_satellitesDialog.h:1235
+msgid "Show umbra/penumbra at altitude:"
+msgstr "Näytä umbra/penumbra korkeudessa:"
+
+#: plugins/Satellites/src/ui_satellitesDialog.h:1239
 msgid "Show satellites as markers"
 msgstr "Näytä satelliitit merkkeinä"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1253
+#: plugins/Satellites/src/ui_satellitesDialog.h:1241
 msgid "Color of satellite markers in transit through the Sun or the Moon"
 msgstr "Auringon tai Kuun läpi kulkevien satelliittimerkkien väri"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1256
+#: plugins/Satellites/src/ui_satellitesDialog.h:1243
+msgid "Hide invisible satellites"
+msgstr "Piilota näkymättömät satelliitit"
+
+#: plugins/Satellites/src/ui_satellitesDialog.h:1246
+msgid "Font size for labels"
+msgstr "Nimilappujen kirjasinkoko"
+
+#: plugins/Satellites/src/ui_satellitesDialog.h:1250
 msgid "Use special color for all invisible satellites"
 msgstr "Käytä erikoisvärejä kaikille näkymättömille satelliiteille"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1258
+#: plugins/Satellites/src/ui_satellitesDialog.h:1252
 msgid "Set color for invisible satellites"
 msgstr "Aseta värit näkymättömille satelliiteille"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1260
+#: plugins/Satellites/src/ui_satellitesDialog.h:1254
 msgid "Color of markers, labels and orbits for invisible satellites"
 msgstr ""
 "Merkkien, tarrojen ja kiertoratojen väri näkymättömille satelliiteille"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1263
-msgid "Altitude range"
-msgstr "Korkeusalue"
-
-#: plugins/Satellites/src/ui_satellitesDialog.h:1264
-msgid "Show Earth's umbra"
-msgstr "Näytä Maan täysvarjo"
-
-#: plugins/Satellites/src/ui_satellitesDialog.h:1266
-msgid "The color of Earth's umbra circle"
-msgstr "Maan täysvarjon ympyrän väri"
-
-#: plugins/Satellites/src/ui_satellitesDialog.h:1268
-msgid "Hide invisible artificial satellites"
-msgstr "Piilota näkymättömät satelliitit."
-
-#: plugins/Satellites/src/ui_satellitesDialog.h:1274
+#: plugins/Satellites/src/ui_satellitesDialog.h:1261
 #: plugins/Satellites/src/ui_satellitesFilterDialog.h:256
 msgid "Settings of custom filter"
 msgstr "Mukautetun suodattimen asetukset"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1276
+#: plugins/Satellites/src/ui_satellitesDialog.h:1263
 msgid "Search ..."
 msgstr "Etsii..."
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1278
+#: plugins/Satellites/src/ui_satellitesDialog.h:1265
 msgid "Double-click a satellite to start tracking it."
 msgstr "Tuplaklikkaa satelliittia seurataksesi sitä."
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1281
+#: plugins/Satellites/src/ui_satellitesDialog.h:1268
 msgid "Add more satellites"
 msgstr "Lisää enemmän satelliitteja"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1284
+#: plugins/Satellites/src/ui_satellitesDialog.h:1271
 msgid "Remove the selected satellites"
 msgstr "Poista valitut satelliitit"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1287
+#: plugins/Satellites/src/ui_satellitesDialog.h:1274
 msgid "Edit communication data for the selected satellite"
 msgstr "Muokkaa valitun satelliitin viestintätietoja"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1290
+#: plugins/Satellites/src/ui_satellitesDialog.h:1277
 msgid "Select all satellites in list"
 msgstr "Valitse kaikki satelliitit luettelosta"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1293
+#: plugins/Satellites/src/ui_satellitesDialog.h:1280
 msgid "Change markers color for selected satellites"
 msgstr "Muuta valittujen satelliittien merkkien väriä"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1296
+#: plugins/Satellites/src/ui_satellitesDialog.h:1283
 msgid "Change orbits color for selected satellites"
 msgstr "Muuta valittujen satelliittien kiertoradan väriä"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1299
+#: plugins/Satellites/src/ui_satellitesDialog.h:1286
 msgid "Change info color for selected satellites"
 msgstr "Muuta valittujen satelliittien tietoväriä"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1303
-#: plugins/Satellites/src/ui_satellitesDialog.h:1307
+#: plugins/Satellites/src/ui_satellitesDialog.h:1290
+#: plugins/Satellites/src/ui_satellitesDialog.h:1294
 msgid ""
 "The Satellite Catalog Number (also known as NORAD (North American Aerospace "
 "Defense) Catalog Number, NORAD ID)"
@@ -19631,92 +19632,92 @@ msgstr ""
 "Satelliitin luettelonumero (tunnetaan myös nimellä NORAD (North American "
 "Aerospace Defense) luettelonumero, NORAD ID)"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1305
+#: plugins/Satellites/src/ui_satellitesDialog.h:1292
 msgid "Catalog number:"
 msgstr "Luettelonumero:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1310
-#: plugins/Satellites/src/ui_satellitesDialog.h:1314
+#: plugins/Satellites/src/ui_satellitesDialog.h:1297
+#: plugins/Satellites/src/ui_satellitesDialog.h:1301
 msgid "The International Designator, also known as COSPAR ID"
 msgstr "International Designator, joka tunnetaan myös nimellä COSPAR ID"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1312
+#: plugins/Satellites/src/ui_satellitesDialog.h:1299
 msgid "I.D.:"
 msgstr "I.D.:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1316
+#: plugins/Satellites/src/ui_satellitesDialog.h:1303
 msgid "Standard magnitude:"
 msgstr "Standardimagnitudi:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1318
-#: plugins/Satellites/src/ui_satellitesDialog.h:1322
+#: plugins/Satellites/src/ui_satellitesDialog.h:1305
+#: plugins/Satellites/src/ui_satellitesDialog.h:1309
 msgid "Perigee altitude in kilometers"
 msgstr "Perihelin korkeus kilometreissä"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1320
+#: plugins/Satellites/src/ui_satellitesDialog.h:1307
 msgid "Perigee:"
 msgstr "Periheli:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1325
-#: plugins/Satellites/src/ui_satellitesDialog.h:1329
+#: plugins/Satellites/src/ui_satellitesDialog.h:1312
+#: plugins/Satellites/src/ui_satellitesDialog.h:1316
 msgid "Apogee altitude in kilometers"
 msgstr "Aphelin korkeus kilometreissä"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1327
+#: plugins/Satellites/src/ui_satellitesDialog.h:1314
 msgid "Apogee:"
 msgstr "Apheli"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1332
-#: plugins/Satellites/src/ui_satellitesDialog.h:1336
+#: plugins/Satellites/src/ui_satellitesDialog.h:1319
+#: plugins/Satellites/src/ui_satellitesDialog.h:1323
 msgid "Orbital period in minutes"
 msgstr "Kiertoaika minuuteissa"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1334
+#: plugins/Satellites/src/ui_satellitesDialog.h:1321
 msgid "Period:"
 msgstr "Aikajakso:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1339
+#: plugins/Satellites/src/ui_satellitesDialog.h:1326
 msgid "Display orbit line(s) for the selected satellite(s)"
 msgstr "Näytä valittujen satelliittien kiertoradat"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1341
+#: plugins/Satellites/src/ui_satellitesDialog.h:1328
 msgid "Orbit"
 msgstr "Rata"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1343
+#: plugins/Satellites/src/ui_satellitesDialog.h:1330
 msgid "Display the selected satellite(s)"
 msgstr "Näytä valitut satelliitit"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1345
+#: plugins/Satellites/src/ui_satellitesDialog.h:1332
 msgid "Displayed"
 msgstr "Näytettävät"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1347
+#: plugins/Satellites/src/ui_satellitesDialog.h:1334
 msgid "Do not update TLE of selected satellite(s)"
 msgstr "Älä päivitä valittujen satelliittien TLE:tä"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1349
+#: plugins/Satellites/src/ui_satellitesDialog.h:1336
 msgid "Do not update"
 msgstr "Älä päivitä"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1351
+#: plugins/Satellites/src/ui_satellitesDialog.h:1338
 msgid "(add personal notes here)"
 msgstr "(lisää henkilökohtaiset muistiinpanosi tähän)"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1352
+#: plugins/Satellites/src/ui_satellitesDialog.h:1339
 msgid "Groups:"
 msgstr "Ryhmät:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1353
+#: plugins/Satellites/src/ui_satellitesDialog.h:1340
 msgid "TLE set:"
 msgstr "TLE-asetus:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1354
+#: plugins/Satellites/src/ui_satellitesDialog.h:1341
 msgid "Epoch of the TLE:"
 msgstr "TLE Epoch:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1356
-#: plugins/Satellites/src/ui_satellitesDialog.h:1360
+#: plugins/Satellites/src/ui_satellitesDialog.h:1343
+#: plugins/Satellites/src/ui_satellitesDialog.h:1347
 msgid ""
 "The valid time range for epoch of TLE in days, used in filtering of "
 "satellites"
@@ -19724,11 +19725,11 @@ msgstr ""
 "Kelvollinen aikaväli TLE:n aikakaudelle päivinä, käytetty satelliittien "
 "suodatuksessa"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1358
+#: plugins/Satellites/src/ui_satellitesDialog.h:1345
 msgid "Age:"
 msgstr "Ikä:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1363
+#: plugins/Satellites/src/ui_satellitesDialog.h:1350
 msgid ""
 "Satellites in the marked source lists will be automatically added on the "
 "next update if they are not already in the collection. Unmarked entries will"
@@ -19739,43 +19740,43 @@ msgstr ""
 "Merkitsemättömät merkinnät noudetaan myös, jotta vain aiemmin mukana olleet "
 "satelliitit päivitetään."
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1368
+#: plugins/Satellites/src/ui_satellitesDialog.h:1355
 msgid "Add new source"
 msgstr "Lisää uusi lähde"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1371
+#: plugins/Satellites/src/ui_satellitesDialog.h:1358
 msgid "Edit selected source"
 msgstr "Muokkaa valittua lähdettä"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1374
+#: plugins/Satellites/src/ui_satellitesDialog.h:1361
 msgid "Save source"
 msgstr "Tallenna lähde"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1377
+#: plugins/Satellites/src/ui_satellitesDialog.h:1364
 msgid "Remove selected source"
 msgstr "Poista valittu lähde"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1380
+#: plugins/Satellites/src/ui_satellitesDialog.h:1367
 msgid "Reset sources list to it defaults"
 msgstr "Palauta lähteiden luettelo sen oletuksen mukaiseksi"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1382
+#: plugins/Satellites/src/ui_satellitesDialog.h:1369
 msgid "Sources"
 msgstr "Lähteet"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1383
+#: plugins/Satellites/src/ui_satellitesDialog.h:1370
 msgid "Flare prediction (days):"
 msgstr "Ennusteen pituus (päivää):"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1387
+#: plugins/Satellites/src/ui_satellitesDialog.h:1374
 msgid "Predict Iridium flares"
 msgstr "Ennusta Iridium-välähdykset"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1388
+#: plugins/Satellites/src/ui_satellitesDialog.h:1375
 msgid "Save predictions..."
 msgstr "Tallenna ennusteet..."
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1389
+#: plugins/Satellites/src/ui_satellitesDialog.h:1376
 msgid "Iridium flares"
 msgstr "Iridium-välähdykset"
 
@@ -23361,7 +23362,6 @@ msgstr "Ohjelmaasetukset"
 
 #: plugins/Exoplanets/src/Exoplanets.cpp:76
 #: plugins/Exoplanets/src/Exoplanets.cpp:173
-#: plugins/Exoplanets/src/Exoplanets.cpp:174
 msgid "Exoplanets"
 msgstr "Eksoplaneetat"
 
@@ -23374,102 +23374,129 @@ msgstr ""
 "Eksoplaneettojen tiedot on koottu  ”Extrasolar Planets Encyclopaedia” "
 "-sivustolta osoitteessa exoplanet.eu"
 
-#: plugins/Exoplanets/src/Exoplanets.cpp:173
+#: plugins/Exoplanets/src/Exoplanets.cpp:174
 msgid "Show exoplanets"
 msgstr "Näytä eksoplaneetat"
 
+#: plugins/Exoplanets/src/Exoplanets.cpp:177
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:539
+msgid "Enable display of distribution for exoplanets"
+msgstr "Näytä eksoplaneettojen jakauma"
+
+#: plugins/Exoplanets/src/Exoplanets.cpp:178
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:543
+msgid "Enable timeline discovery of exoplanets"
+msgstr "Eksoplaneettojen löytämisen aikajana"
+
+#: plugins/Exoplanets/src/Exoplanets.cpp:179
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:547
+msgid "Enable display of the potential habitable exoplanets only"
+msgstr ""
+"Näytä vain ne planeettakunnat, jotka sisältävät mahdollisesti elinkelpoisia "
+"eksoplaneettoja"
+
+#: plugins/Exoplanets/src/Exoplanets.cpp:180
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:548
+msgid "Enable display of designations for exoplanets"
+msgstr "Näytä eksoplaneettojen tunnukset"
+
+#: plugins/Exoplanets/src/Exoplanets.cpp:181
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:549
+msgid "Enable display number of exoplanets in the system"
+msgstr "Ota käyttöön järjestelmän eksoplaneettojen lukumäärän näyttö"
+
 #. TRANSLATORS: Habitable zone
-#: plugins/Exoplanets/src/Exoplanets.cpp:1037
+#: plugins/Exoplanets/src/Exoplanets.cpp:1044
 msgid "Hot"
 msgstr "Kuuma"
 
 #. TRANSLATORS: Habitable zone
-#: plugins/Exoplanets/src/Exoplanets.cpp:1039
+#: plugins/Exoplanets/src/Exoplanets.cpp:1046
 msgid "Warm"
 msgstr "Lämmin"
 
 #. TRANSLATORS: Habitable zone
-#: plugins/Exoplanets/src/Exoplanets.cpp:1041
+#: plugins/Exoplanets/src/Exoplanets.cpp:1048
 msgid "Cold"
 msgstr "Kylmä"
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:1044
+#: plugins/Exoplanets/src/Exoplanets.cpp:1051
 msgid "Miniterran"
 msgstr "Miniterraaninen"
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:1046
+#: plugins/Exoplanets/src/Exoplanets.cpp:1053
 msgid "Subterran"
 msgstr "Subterraaninen"
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:1048
+#: plugins/Exoplanets/src/Exoplanets.cpp:1055
 msgid "Terran"
 msgstr "Terraaninen"
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:1050
+#: plugins/Exoplanets/src/Exoplanets.cpp:1057
 msgid "Superterran"
 msgstr "Superterraaninen"
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:1052
+#: plugins/Exoplanets/src/Exoplanets.cpp:1059
 msgid "Jovian"
 msgstr "Joviaaninen"
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:1054
+#: plugins/Exoplanets/src/Exoplanets.cpp:1061
 msgid "Neptunian"
 msgstr "Neptuniaaninen"
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:1057
+#: plugins/Exoplanets/src/Exoplanets.cpp:1064
 msgid "Primary Transit"
 msgstr "Pääylikulku"
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:1059
+#: plugins/Exoplanets/src/Exoplanets.cpp:1066
 msgid "Microlensing"
 msgstr "Mikrolinssi"
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:1061
+#: plugins/Exoplanets/src/Exoplanets.cpp:1068
 msgid "Radial Velocity"
 msgstr "Säteisnopeus"
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:1063
+#: plugins/Exoplanets/src/Exoplanets.cpp:1070
 msgid "Imaging"
 msgstr "Kuva"
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:1065
+#: plugins/Exoplanets/src/Exoplanets.cpp:1072
 msgid "Astrometry"
 msgstr "Astrometria"
 
 #. TRANSLATORS: Exoplanet detection method. TTV=Transit Timing Variation
-#: plugins/Exoplanets/src/Exoplanets.cpp:1067
+#: plugins/Exoplanets/src/Exoplanets.cpp:1074
 msgid "TTV"
 msgstr "TTV"
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:1069
+#: plugins/Exoplanets/src/Exoplanets.cpp:1076
 msgid "Timing"
 msgstr "Ajoitus"
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:1071
+#: plugins/Exoplanets/src/Exoplanets.cpp:1078
 msgid "Default"
 msgstr "Oletus"
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:1073
+#: plugins/Exoplanets/src/Exoplanets.cpp:1080
 msgid "Secondary Transit"
 msgstr "Toissijainen ylikulku"
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:1075
+#: plugins/Exoplanets/src/Exoplanets.cpp:1082
 msgid "Disk Kinematics"
 msgstr "Levyn kinematiikka"
 
@@ -26209,17 +26236,9 @@ msgid "Plot all systems with exoplanets without labels"
 msgstr ""
 "Näytä kaikki kaikki eksoplaneettoja sisältävät järjestelmät ilman merkintöjä"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:539
-msgid "Enable display of distribution for exoplanets"
-msgstr "Näytä eksoplaneettojen jakauma"
-
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:541
 msgid "Display exoplanets since their discovery"
 msgstr "Näytä eksoplaneetat niiden löytöpäivästä alkaen"
-
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:543
-msgid "Enable timeline discovery of exoplanets"
-msgstr "Eksoplaneettojen löytämisen aikajana"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:545
 msgid ""
@@ -26228,20 +26247,6 @@ msgid ""
 msgstr ""
 "Näytä ne planeettakunnat, jotka sisältävät mahdollisesti elinkelpoisia "
 "eksoplaneettoja"
-
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:547
-msgid "Enable display of the potential habitable exoplanets only"
-msgstr ""
-"Näytä vain ne planeettakunnat, jotka sisältävät mahdollisesti elinkelpoisia "
-"eksoplaneettoja"
-
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:548
-msgid "Enable display of designations for exoplanets"
-msgstr "Näytä eksoplaneettojen tunnukset"
-
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:549
-msgid "Enable display number of exoplanets in the system"
-msgstr "Ota käyttöön järjestelmän eksoplaneettojen lukumäärän näyttö"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:551
 msgid "Show exoplanets button on toolbar"
