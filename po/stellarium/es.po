@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2024-05-26 18:29+0700\n"
+"POT-Creation-Date: 2024-06-09 22:51+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Víctor Vega <transifex.757ab@simplelogin.com>, 2024\n"
 "Language-Team: Spanish (https://app.transifex.com/stellarium/teams/80998/es/)\n"
@@ -36,7 +36,7 @@ msgstr ""
 #: src/gui/AstroCalcDialog.cpp:2897 src/gui/AstroCalcDialog.cpp:2929
 #: src/gui/AstroCalcDialog.cpp:3231 src/gui/AstroCalcDialog.cpp:7290
 #: src/gui/ObsListDialog.cpp:292 src/ui_configurationDialog.h:1806
-#: plugins/Satellites/src/Satellite.cpp:339
+#: plugins/Satellites/src/Satellite.cpp:340
 #: plugins/TelescopeControl/src/TelescopeClient.cpp:136
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:516
 #: plugins/Supernovae/src/Supernova.cpp:144 plugins/Novae/src/Nova.cpp:150
@@ -211,7 +211,7 @@ msgstr "Primera vertical"
 #: src/gui/AstroCalcDialog.cpp:818 src/gui/AstroCalcDialog.cpp:1724
 #: src/gui/AstroCalcDialog.cpp:2076 src/gui/AstroCalcDialog.cpp:2348
 #: src/gui/AstroCalcChart.cpp:80 src/gui/AstroCalcChart.cpp:418
-#: src/ui_viewDialog.h:4186 plugins/Satellites/src/Satellite.cpp:362
+#: src/ui_viewDialog.h:4186 plugins/Satellites/src/Satellite.cpp:363
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1545
 msgid "Altitude"
 msgstr "Altitud"
@@ -334,8 +334,8 @@ msgstr "Antapex"
 #. TRANSLATORS: Unit of measure for speed - kilometers per second
 #: src/core/modules/GridLinesMgr.cpp:1629 src/core/modules/Planet.cpp:736
 #: src/core/modules/Planet.cpp:1028 src/gui/AstroCalcDialog.cpp:8177
-#: plugins/Satellites/src/Satellite.cpp:360
-#: plugins/Satellites/src/Satellite.cpp:403
+#: plugins/Satellites/src/Satellite.cpp:361
+#: plugins/Satellites/src/Satellite.cpp:404
 #: plugins/MeteorShowers/src/MeteorShower.cpp:580
 msgctxt "speed"
 msgid "km/s"
@@ -836,7 +836,7 @@ msgstr "Autor"
 
 #. TRANSLATORS: Unit of measure for distance - meter
 #: src/core/modules/LandscapeMgr.cpp:1382 src/gui/StelGuiItems.cpp:866
-#: plugins/Satellites/src/Satellite.cpp:433
+#: plugins/Satellites/src/Satellite.cpp:434
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1191
 #: plugins/Satellites/src/gui/SatellitesFilterDialog.cpp:134
 msgctxt "distance"
@@ -936,8 +936,8 @@ msgstr "Diámetro"
 #: src/core/modules/Comet.cpp:203 src/gui/StelGuiItems.cpp:894
 #: src/gui/AstroCalcDialog.cpp:3048 src/gui/AstroCalcDialog.cpp:3561
 #: src/gui/AstroCalcDialog.cpp:8112 plugins/Satellites/src/Satellites.cpp:2933
-#: plugins/Satellites/src/Satellite.cpp:356
-#: plugins/Satellites/src/Satellite.cpp:399
+#: plugins/Satellites/src/Satellite.cpp:357
+#: plugins/Satellites/src/Satellite.cpp:400
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1200
 #: plugins/Satellites/src/gui/SatellitesFilterDialog.cpp:133
 msgctxt "distance"
@@ -1832,17 +1832,17 @@ msgid "photometric passband"
 msgstr "banda fotométrica"
 
 #: src/core/modules/Nebula.cpp:194 src/core/StelObject.cpp:351
-#: plugins/Satellites/src/Satellite.cpp:347
+#: plugins/Satellites/src/Satellite.cpp:348
 msgid "reduced to"
 msgstr "reducida a"
 
 #: src/core/modules/Nebula.cpp:194 src/core/StelObject.cpp:351
-#: plugins/Satellites/src/Satellite.cpp:347
+#: plugins/Satellites/src/Satellite.cpp:348
 msgid "by"
 msgstr "por"
 
 #: src/core/modules/Nebula.cpp:194 src/core/StelObject.cpp:351
-#: plugins/Satellites/src/Satellite.cpp:347
+#: plugins/Satellites/src/Satellite.cpp:348
 msgid "Airmasses"
 msgstr "Masas de aire"
 
@@ -2462,7 +2462,7 @@ msgstr "Elongación"
 #: src/core/modules/Planet.cpp:890 src/core/modules/Planet.cpp:899
 #: src/gui/AstroCalcChart.cpp:96 src/gui/AstroCalcChart.cpp:106
 #: src/gui/AstroCalcChart.cpp:439 src/gui/AstroCalcChart.cpp:465
-#: plugins/Satellites/src/Satellite.cpp:408
+#: plugins/Satellites/src/Satellite.cpp:409
 msgid "Phase angle"
 msgstr "Ángulo de fase"
 
@@ -2780,7 +2780,7 @@ msgid "variable star"
 msgstr "estrella variable"
 
 #: src/core/modules/StarWrapper.cpp:304
-#: plugins/Satellites/src/ui_satellitesDialog.h:1269
+#: plugins/Satellites/src/ui_satellitesDialog.h:1226
 msgid "Magnitude range"
 msgstr "Rango magnitud"
 
@@ -2860,31 +2860,31 @@ msgstr "Estudio Digital del Cielo (TOAST)"
 msgid "Toggle Hierarchical Progressive Surveys"
 msgstr "Alternar estudios jerárquicos progresivos"
 
-#: src/core/SolarEclipseComputer.cpp:1674 src/gui/AstroCalcDialog.cpp:3836
+#: src/core/SolarEclipseComputer.cpp:1997 src/gui/AstroCalcDialog.cpp:3836
 msgid "Solar Eclipse"
 msgstr "Eclipse solar"
 
-#: src/core/SolarEclipseComputer.cpp:1674
+#: src/core/SolarEclipseComputer.cpp:1997
 msgid "Created by Stellarium"
 msgstr "Creado por Stellarium"
 
-#: src/core/SolarEclipseComputer.cpp:1686 src/gui/AstroCalcDialog.cpp:3662
+#: src/core/SolarEclipseComputer.cpp:2009 src/gui/AstroCalcDialog.cpp:3662
 msgid "Greatest eclipse"
 msgstr "Máximo del eclipse"
 
-#: src/core/SolarEclipseComputer.cpp:1693
+#: src/core/SolarEclipseComputer.cpp:2016
 msgid "First contact with Earth"
 msgstr "Primer contacto con la Tierra"
 
-#: src/core/SolarEclipseComputer.cpp:1700
+#: src/core/SolarEclipseComputer.cpp:2023
 msgid "Last contact with Earth"
 msgstr "Último contacto con la Tierra"
 
-#: src/core/SolarEclipseComputer.cpp:1783
+#: src/core/SolarEclipseComputer.cpp:2106
 msgid "Central eclipse begins"
 msgstr "Inicio del eclipse central"
 
-#: src/core/SolarEclipseComputer.cpp:1791
+#: src/core/SolarEclipseComputer.cpp:2114
 msgid "Central eclipse ends"
 msgstr "Fin del eclipse central"
 
@@ -12952,7 +12952,7 @@ msgstr ""
 msgid "Use proportional hints"
 msgstr "Usar pistas proporcionales"
 
-#: src/ui_viewDialog.h:3752 plugins/Satellites/src/ui_satellitesDialog.h:1246
+#: src/ui_viewDialog.h:3752 plugins/Satellites/src/ui_satellitesDialog.h:1244
 msgid "Labels"
 msgstr "Etiquetas"
 
@@ -13626,14 +13626,14 @@ msgid "Use this landscape as default"
 msgstr "Usar este paisaje como predeterminado"
 
 #: src/ui_viewDialog.h:4324
-msgid "Set the planet and position as specified for the selected landscape"
+msgid "Set the planet and location as specified for the selected landscape"
 msgstr ""
-"‎Establecer‎‎ el ‎‎planeta‎‎ y la ‎‎posición‎‎ según lo especificado para el"
-" ‎‎paisaje‎‎ seleccionado‎"
+"‎Establecer‎‎ el ‎‎planeta‎‎ y la ubicación según lo especificado para el "
+"‎‎paisaje‎‎ seleccionado‎"
 
 #: src/ui_viewDialog.h:4326
-msgid "Position from landscape"
-msgstr "Posición desde el paisaje"
+msgid "Location from landscape"
+msgstr "Ubicación desde el paisaje"
 
 #: src/ui_viewDialog.h:4328
 msgid "Show illumination layer (bright windows, light pollution, etc.)"
@@ -13872,7 +13872,7 @@ msgstr ""
 "misma la próxima vez que inicies Stellarium"
 
 #: src/ui_configurationDialog.h:1739
-#: plugins/Satellites/src/ui_satellitesDialog.h:1271
+#: plugins/Satellites/src/ui_satellitesDialog.h:1258
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:206
 #: plugins/NavStars/src/ui_navStarsWindow.h:507
 #: plugins/Novae/src/ui_novaeDialog.h:209
@@ -13893,7 +13893,7 @@ msgstr "Restaurar la configuración predeterminada"
 
 #: src/ui_configurationDialog.h:1743
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:314
-#: plugins/Satellites/src/ui_satellitesDialog.h:1270
+#: plugins/Satellites/src/ui_satellitesDialog.h:1257
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:222
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:205
 #: plugins/NavStars/src/ui_navStarsWindow.h:506
@@ -14854,7 +14854,7 @@ msgstr ""
 "Permitir scripts para almacenar capturas de pantalla en carpetas arbitrarias"
 
 #: src/ui_scriptConsole.h:397
-#: plugins/Satellites/src/ui_satellitesDialog.h:1272
+#: plugins/Satellites/src/ui_satellitesDialog.h:1259
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:207
 #: plugins/NavStars/src/ui_navStarsWindow.h:498
 #: plugins/Novae/src/ui_novaeDialog.h:210
@@ -14974,7 +14974,7 @@ msgid "Export ephemeris..."
 msgstr "Exportar efemérides..."
 
 #: src/ui_astroCalcDialog.h:2179 src/ui_astroCalcDialog.h:2280
-#: plugins/Satellites/src/ui_satellitesDialog.h:1385
+#: plugins/Satellites/src/ui_satellitesDialog.h:1372
 msgid "Calculations require time, please be patient"
 msgstr "Los cálculos necesitan tiempo, por favor, tener paciencia"
 
@@ -14987,7 +14987,7 @@ msgid "First celestial body"
 msgstr "Primer cuerpo celeste"
 
 #: src/ui_astroCalcDialog.h:2187 src/ui_astroCalcDialog.h:2270
-#: plugins/Satellites/src/Satellite.cpp:490
+#: plugins/Satellites/src/Satellite.cpp:491
 msgid "and"
 msgstr "y"
 
@@ -15479,7 +15479,7 @@ msgstr "Grosor de línea de efemérides:"
 #: plugins/Oculars/src/Oculars.cpp:1996
 #: plugins/Oculars/src/gui/OcularDialog.cpp:598
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1201
-#: plugins/Satellites/src/ui_satellitesDialog.h:1250
+#: plugins/Satellites/src/ui_satellitesDialog.h:1248
 msgctxt "pixels"
 msgid "px"
 msgstr "px"
@@ -15513,7 +15513,7 @@ msgid "Save list"
 msgstr "Guardar lista"
 
 #: src/ui_obsListDialog.h:374
-#: plugins/Satellites/src/ui_satellitesDialog.h:1350
+#: plugins/Satellites/src/ui_satellitesDialog.h:1337
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:156
 msgid "Description:"
 msgstr "Descripción:"
@@ -16392,7 +16392,7 @@ msgstr "Permitir ajuste al objeto seleccionado"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:316
 #: plugins/Oculars/src/ui_ocularDialog.h:1571
-#: plugins/Satellites/src/ui_satellitesDialog.h:1390
+#: plugins/Satellites/src/ui_satellitesDialog.h:1377
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:420
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:234
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:208
@@ -16524,7 +16524,7 @@ msgstr "Mira telrad"
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:206
 #: plugins/NavStars/src/NavStars.cpp:120 plugins/Quasars/src/Quasars.cpp:172
 #: plugins/Pulsars/src/Pulsars.cpp:170
-#: plugins/Exoplanets/src/Exoplanets.cpp:174
+#: plugins/Exoplanets/src/Exoplanets.cpp:175
 #: plugins/Observability/src/Observability.cpp:198
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:92
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:151
@@ -17493,7 +17493,7 @@ msgstr "Binoculares"
 #: plugins/Oculars/src/ui_ocularDialog.h:1539
 #: plugins/Oculars/src/ui_ocularDialog.h:1549
 #: plugins/Oculars/src/ui_ocularDialog.h:1564
-#: plugins/Satellites/src/ui_satellitesDialog.h:1301
+#: plugins/Satellites/src/ui_satellitesDialog.h:1288
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:559
 #: plugins/TelescopeControl/src/gui/ui_storedPointsDialog.h:203
 msgid "Name:"
@@ -17620,7 +17620,7 @@ msgstr ""
 #: plugins/Satellites/src/Satellites.cpp:72
 #: plugins/Satellites/src/Satellites.cpp:164
 #: plugins/Satellites/src/Satellites.cpp:257
-#: plugins/Satellites/src/ui_satellitesDialog.h:1362
+#: plugins/Satellites/src/ui_satellitesDialog.h:1349
 msgid "Satellites"
 msgstr "Satélites"
 
@@ -18566,188 +18566,188 @@ msgctxt "comms"
 msgid "mode"
 msgstr "modo"
 
-#: plugins/Satellites/src/Satellite.cpp:218
+#: plugins/Satellites/src/Satellite.cpp:219
 msgid "The satellite and the observer are in sunlight"
 msgstr "El satélite y el observador están al sol"
 
-#: plugins/Satellites/src/Satellite.cpp:219
+#: plugins/Satellites/src/Satellite.cpp:220
 msgid "The satellite is sunlit and the observer is in the dark"
 msgstr ""
 "El satélite está iluminado por el Sol y el observador está en la oscuridad"
 
-#: plugins/Satellites/src/Satellite.cpp:220
+#: plugins/Satellites/src/Satellite.cpp:221
 msgid "The satellite isn't sunlit"
 msgstr "El satélite no está iluminado por el Sol"
 
-#: plugins/Satellites/src/Satellite.cpp:221
+#: plugins/Satellites/src/Satellite.cpp:222
 msgid "The satellite is in penumbra"
 msgstr "El satélite está en penumbra"
 
-#: plugins/Satellites/src/Satellite.cpp:222
+#: plugins/Satellites/src/Satellite.cpp:223
 msgid "The satellite is eclipsed"
 msgstr "El satélite está eclipsado"
 
-#: plugins/Satellites/src/Satellite.cpp:223
+#: plugins/Satellites/src/Satellite.cpp:224
 msgid "The satellite is below the horizon"
 msgstr "El satélite está bajo el horizonte"
 
-#: plugins/Satellites/src/Satellite.cpp:334
+#: plugins/Satellites/src/Satellite.cpp:335
 msgid "International Designator"
 msgstr "Designador Internacional"
 
-#: plugins/Satellites/src/Satellite.cpp:345
+#: plugins/Satellites/src/Satellite.cpp:346
 msgid "Approx. magnitude"
 msgstr "Magnitud aproximada"
 
 #. TRANSLATORS: Slant range: distance between the satellite and the observer
-#: plugins/Satellites/src/Satellite.cpp:358
+#: plugins/Satellites/src/Satellite.cpp:359
 msgid "Range"
 msgstr "Rango"
 
 #. TRANSLATORS: Rate at which the distance changes
-#: plugins/Satellites/src/Satellite.cpp:360
+#: plugins/Satellites/src/Satellite.cpp:361
 msgid "Range rate"
 msgstr "Rango"
 
-#: plugins/Satellites/src/Satellite.cpp:363
+#: plugins/Satellites/src/Satellite.cpp:364
 msgid "Perigee/apogee altitudes"
 msgstr "Altitudes perigeo/apogeo"
 
-#: plugins/Satellites/src/Satellite.cpp:374
+#: plugins/Satellites/src/Satellite.cpp:375
 msgid "Approx. angular size"
 msgstr "Tamaño angular aprox."
 
 #. TRANSLATORS: Revolutions per day - measurement of the frequency of a
 #. rotation
-#: plugins/Satellites/src/Satellite.cpp:383
+#: plugins/Satellites/src/Satellite.cpp:384
 msgctxt "frequency"
 msgid "rpd"
 msgstr "rpd"
 
 #. TRANSLATORS: minutes - orbital period for artificial satellites
-#: plugins/Satellites/src/Satellite.cpp:385
+#: plugins/Satellites/src/Satellite.cpp:386
 msgctxt "period"
 msgid "min"
 msgstr "min"
 
-#: plugins/Satellites/src/Satellite.cpp:387
+#: plugins/Satellites/src/Satellite.cpp:388
 msgid "Orbital period"
 msgstr "Periodo orbital"
 
-#: plugins/Satellites/src/Satellite.cpp:392
+#: plugins/Satellites/src/Satellite.cpp:393
 #: plugins/Satellites/src/ui_satellitesFilterDialog.h:257
 #: plugins/Exoplanets/src/Exoplanet.cpp:366
 msgid "Inclination"
 msgstr "Inclinación"
 
-#: plugins/Satellites/src/Satellite.cpp:393
+#: plugins/Satellites/src/Satellite.cpp:394
 msgid "SubPoint (Lat./Long.)"
 msgstr "SubPunto (Lat./Long.)"
 
 #. TRANSLATORS: TEME (True Equator, Mean Equinox) is an Earth-centered
 #. inertial coordinate system
-#: plugins/Satellites/src/Satellite.cpp:399
+#: plugins/Satellites/src/Satellite.cpp:400
 msgid "TEME coordinates"
 msgstr "Coordenadas TEME"
 
 #. TRANSLATORS: TEME (True Equator, Mean Equinox) is an Earth-centered
 #. inertial coordinate system
-#: plugins/Satellites/src/Satellite.cpp:403
+#: plugins/Satellites/src/Satellite.cpp:404
 msgid "TEME velocity"
 msgstr "Velocidad TEME"
 
-#: plugins/Satellites/src/Satellite.cpp:413
+#: plugins/Satellites/src/Satellite.cpp:414
 msgid "Sun reflection angle"
 msgstr "Ángulo de reflexión del sol"
 
-#: plugins/Satellites/src/Satellite.cpp:421
-#: plugins/Satellites/src/Satellite.cpp:533
+#: plugins/Satellites/src/Satellite.cpp:422
+#: plugins/Satellites/src/Satellite.cpp:534
 msgctxt "unknown date"
 msgid "unknown"
 msgstr "desconocido"
 
-#: plugins/Satellites/src/Satellite.cpp:428
+#: plugins/Satellites/src/Satellite.cpp:429
 msgctxt "at time"
 msgid "at"
 msgstr "a las"
 
-#: plugins/Satellites/src/Satellite.cpp:430
+#: plugins/Satellites/src/Satellite.cpp:431
 msgid "Last updated TLE"
 msgstr "Última actualización TLE"
 
-#: plugins/Satellites/src/Satellite.cpp:431
+#: plugins/Satellites/src/Satellite.cpp:432
 msgid "Epoch of the TLE"
 msgstr "Época del TLE"
 
-#: plugins/Satellites/src/Satellite.cpp:433
+#: plugins/Satellites/src/Satellite.cpp:434
 msgid "Radar cross-section (RCS)"
 msgstr "Sección radar equivalente (RCS)"
 
-#: plugins/Satellites/src/Satellite.cpp:442
+#: plugins/Satellites/src/Satellite.cpp:443
 msgid "Group"
 msgstr "Grupo"
 
-#: plugins/Satellites/src/Satellite.cpp:442
+#: plugins/Satellites/src/Satellite.cpp:443
 msgid "Groups"
 msgstr "Grupos"
 
-#: plugins/Satellites/src/Satellite.cpp:447
+#: plugins/Satellites/src/Satellite.cpp:448
 msgid "Operational status"
 msgstr "Estado operativo"
 
-#: plugins/Satellites/src/Satellite.cpp:453
+#: plugins/Satellites/src/Satellite.cpp:454
 msgid "Radio communication"
 msgstr "Comunicación por radio"
 
 #. TRANSLATORS: Unit of measurement of frequency
-#: plugins/Satellites/src/Satellite.cpp:503
+#: plugins/Satellites/src/Satellite.cpp:504
 #: plugins/Satellites/src/gui/SatellitesCommDialog.cpp:83
 #: plugins/Pulsars/src/Pulsar.cpp:283
 msgctxt "frequency"
 msgid "MHz"
 msgstr "MHz"
 
-#: plugins/Satellites/src/Satellite.cpp:503
+#: plugins/Satellites/src/Satellite.cpp:504
 msgctxt "frequency"
 msgid "kHz"
 msgstr "kHz"
 
-#: plugins/Satellites/src/Satellite.cpp:760
+#: plugins/Satellites/src/Satellite.cpp:762
 msgctxt "operational status"
 msgid "operational"
 msgstr "Operacional"
 
-#: plugins/Satellites/src/Satellite.cpp:761
+#: plugins/Satellites/src/Satellite.cpp:763
 msgctxt "operational status"
 msgid "non-operational"
 msgstr "no operacional"
 
-#: plugins/Satellites/src/Satellite.cpp:762
+#: plugins/Satellites/src/Satellite.cpp:764
 msgctxt "operational status"
 msgid "partially operational"
 msgstr "Parcialmente operativo"
 
-#: plugins/Satellites/src/Satellite.cpp:763
+#: plugins/Satellites/src/Satellite.cpp:765
 msgctxt "operational status"
 msgid "standby"
 msgstr "poner en espera"
 
-#: plugins/Satellites/src/Satellite.cpp:764
+#: plugins/Satellites/src/Satellite.cpp:766
 msgctxt "operational status"
 msgid "spare"
 msgstr "de repuesto"
 
-#: plugins/Satellites/src/Satellite.cpp:765
+#: plugins/Satellites/src/Satellite.cpp:767
 msgctxt "operational status"
 msgid "extended mission"
 msgstr "mision extendida"
 
-#: plugins/Satellites/src/Satellite.cpp:766
+#: plugins/Satellites/src/Satellite.cpp:768
 msgctxt "operational status"
 msgid "decayed"
 msgstr "deteriorado"
 
-#: plugins/Satellites/src/Satellite.cpp:768
+#: plugins/Satellites/src/Satellite.cpp:770
 msgctxt "operational status"
 msgid "unknown"
 msgstr "desconocido"
@@ -19239,7 +19239,7 @@ msgid "[new source]"
 msgstr "[nueva fuente]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1103
-#: plugins/Satellites/src/ui_satellitesDialog.h:1223
+#: plugins/Satellites/src/ui_satellitesDialog.h:1207
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:195
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:204
 #: plugins/Novae/src/gui/NovaeDialog.cpp:190
@@ -19577,22 +19577,22 @@ msgstr "Nada eliminado"
 msgid "Please select a line first!"
 msgstr "¡Seleccione una línea primero!"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1218
-#: plugins/Satellites/src/ui_satellitesDialog.h:1219
+#: plugins/Satellites/src/ui_satellitesDialog.h:1202
+#: plugins/Satellites/src/ui_satellitesDialog.h:1203
 msgid "Satellites Configuration"
 msgstr "Configuración de Satélites"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1220
+#: plugins/Satellites/src/ui_satellitesDialog.h:1204
 msgid "Updates"
 msgstr "Actualizaciones"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1221
+#: plugins/Satellites/src/ui_satellitesDialog.h:1205
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:532
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:426
 msgid "Update frequency:"
 msgstr "Frecuencia de actualización:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1222
+#: plugins/Satellites/src/ui_satellitesDialog.h:1206
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:201
 #: plugins/Novae/src/ui_novaeDialog.h:204
 #: plugins/Quasars/src/ui_quasarsDialog.h:258
@@ -19601,17 +19601,17 @@ msgstr "Frecuencia de actualización:"
 msgid "Last update:"
 msgstr "Última actualización:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1224
+#: plugins/Satellites/src/ui_satellitesDialog.h:1208
 msgid "On update, add all new satellites from the selected source(s)"
 msgstr ""
 "Al actualizar, agregar todos los satélites nuevos de fuente(s) "
 "seleccionada(s)"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1225
+#: plugins/Satellites/src/ui_satellitesDialog.h:1209
 msgid "Update satellite data from Internet sources"
 msgstr "Actualizar datos satelitales desde fuentes de internet"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1226
+#: plugins/Satellites/src/ui_satellitesDialog.h:1210
 msgid ""
 "On update, remove the satellites that are no longer listed in the update "
 "sources"
@@ -19619,117 +19619,118 @@ msgstr ""
 "Al actualizar, eliminar los satélites que ya no estén enlistados en las "
 "fuentes de actualización."
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1227
+#: plugins/Satellites/src/ui_satellitesDialog.h:1211
 msgid "Visualisation settings"
 msgstr "Ajustes de visualización"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1229
-msgid ""
-"Distance to the center of umbra from Earth's surface (height of imagined "
-"satellite)"
-msgstr ""
-"Distancia al centro de la umbra desde la superficie de la Tierra (altura del"
-" satélite imaginado)"
-
-#: plugins/Satellites/src/ui_satellitesDialog.h:1231
-msgid "Show umbra/penumbra at altitude:"
-msgstr "Mostrar umbra/penumbra en la altitud:"
-
-#: plugins/Satellites/src/ui_satellitesDialog.h:1232
+#: plugins/Satellites/src/ui_satellitesDialog.h:1212
 msgid "Orbit lines"
 msgstr "Líneas orbitales"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1242
-msgid "Show Earth's penumbra"
-msgstr "Mostrar penumbra de la Tierra"
-
-#: plugins/Satellites/src/ui_satellitesDialog.h:1244
-msgid "The color of Earth's penumbra circle"
-msgstr "Color del círculo de la penumbra de la Tierra"
-
-#: plugins/Satellites/src/ui_satellitesDialog.h:1248
-msgid "Font size for labels"
-msgstr "Tamaño de letra para las etiquetas"
-
-#: plugins/Satellites/src/ui_satellitesDialog.h:1251
-msgid "Show satellites as markers"
-msgstr "Mostrar satélites como marcadores"
-
-#: plugins/Satellites/src/ui_satellitesDialog.h:1253
-msgid "Color of satellite markers in transit through the Sun or the Moon"
-msgstr "Color de los marcadores de satélite en tránsito por el Sol o la Luna"
-
-#: plugins/Satellites/src/ui_satellitesDialog.h:1256
-msgid "Use special color for all invisible satellites"
-msgstr "Usar color especial para todos los satélites visibles"
-
-#: plugins/Satellites/src/ui_satellitesDialog.h:1258
-msgid "Set color for invisible satellites"
-msgstr "Establecer color para los satélites invisibles"
-
-#: plugins/Satellites/src/ui_satellitesDialog.h:1260
-msgid "Color of markers, labels and orbits for invisible satellites"
-msgstr "Color de marcadores, etiquetas y órbitas para satélites no visibles"
-
-#: plugins/Satellites/src/ui_satellitesDialog.h:1263
-msgid "Altitude range"
-msgstr "Rango de altitud"
-
-#: plugins/Satellites/src/ui_satellitesDialog.h:1264
+#: plugins/Satellites/src/ui_satellitesDialog.h:1222
 msgid "Show Earth's umbra"
 msgstr "Mostrar umbra de la Tierra"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1266
+#: plugins/Satellites/src/ui_satellitesDialog.h:1224
 msgid "The color of Earth's umbra circle"
 msgstr "Color del círculo de la umbra de la Tierra"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1268
-msgid "Hide invisible artificial satellites"
-msgstr "Ocultar satélites artificiales invisibles"
+#: plugins/Satellites/src/ui_satellitesDialog.h:1227
+msgid "Altitude range"
+msgstr "Rango de altitud"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1274
+#: plugins/Satellites/src/ui_satellitesDialog.h:1228
+msgid "Show Earth's penumbra"
+msgstr "Mostrar penumbra de la Tierra"
+
+#: plugins/Satellites/src/ui_satellitesDialog.h:1230
+msgid "The color of Earth's penumbra circle"
+msgstr "Color del círculo de la penumbra de la Tierra"
+
+#: plugins/Satellites/src/ui_satellitesDialog.h:1233
+#: plugins/Satellites/src/ui_satellitesDialog.h:1237
+msgid ""
+"Distance to the center of umbra from Earth's surface (height of imagined "
+"satellite above a spherical Earth)"
+msgstr ""
+"Distancia al centro de la umbra desde la superficie de la Tierra (altura del"
+" satélite imaginado arriba de una Tierra esférica)"
+
+#: plugins/Satellites/src/ui_satellitesDialog.h:1235
+msgid "Show umbra/penumbra at altitude:"
+msgstr "Mostrar umbra/penumbra en la altitud:"
+
+#: plugins/Satellites/src/ui_satellitesDialog.h:1239
+msgid "Show satellites as markers"
+msgstr "Mostrar satélites como marcadores"
+
+#: plugins/Satellites/src/ui_satellitesDialog.h:1241
+msgid "Color of satellite markers in transit through the Sun or the Moon"
+msgstr "Color de los marcadores de satélite en tránsito por el Sol o la Luna"
+
+#: plugins/Satellites/src/ui_satellitesDialog.h:1243
+msgid "Hide invisible satellites"
+msgstr "Ocultar satélites invisibles"
+
+#: plugins/Satellites/src/ui_satellitesDialog.h:1246
+msgid "Font size for labels"
+msgstr "Tamaño de letra para las etiquetas"
+
+#: plugins/Satellites/src/ui_satellitesDialog.h:1250
+msgid "Use special color for all invisible satellites"
+msgstr "Usar color especial para todos los satélites visibles"
+
+#: plugins/Satellites/src/ui_satellitesDialog.h:1252
+msgid "Set color for invisible satellites"
+msgstr "Establecer color para los satélites invisibles"
+
+#: plugins/Satellites/src/ui_satellitesDialog.h:1254
+msgid "Color of markers, labels and orbits for invisible satellites"
+msgstr "Color de marcadores, etiquetas y órbitas para satélites no visibles"
+
+#: plugins/Satellites/src/ui_satellitesDialog.h:1261
 #: plugins/Satellites/src/ui_satellitesFilterDialog.h:256
 msgid "Settings of custom filter"
 msgstr "Ajustes del filtro personalizado"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1276
+#: plugins/Satellites/src/ui_satellitesDialog.h:1263
 msgid "Search ..."
 msgstr "Buscar ..."
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1278
+#: plugins/Satellites/src/ui_satellitesDialog.h:1265
 msgid "Double-click a satellite to start tracking it."
 msgstr "Haga doble clic en un satélite para comenzar a seguirlo."
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1281
+#: plugins/Satellites/src/ui_satellitesDialog.h:1268
 msgid "Add more satellites"
 msgstr "Agregar más satélites"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1284
+#: plugins/Satellites/src/ui_satellitesDialog.h:1271
 msgid "Remove the selected satellites"
 msgstr "Eliminar los satélites seleccionados"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1287
+#: plugins/Satellites/src/ui_satellitesDialog.h:1274
 msgid "Edit communication data for the selected satellite"
 msgstr "Editar datos de comunicación para el satélite seleccionado"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1290
+#: plugins/Satellites/src/ui_satellitesDialog.h:1277
 msgid "Select all satellites in list"
 msgstr "Seleccionar todos los satélites de la lista"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1293
+#: plugins/Satellites/src/ui_satellitesDialog.h:1280
 msgid "Change markers color for selected satellites"
 msgstr "Cambiar color de marcadores para los satélites seleccionados"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1296
+#: plugins/Satellites/src/ui_satellitesDialog.h:1283
 msgid "Change orbits color for selected satellites"
 msgstr "Cambiar color de órbitas para los satélites seleccionados"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1299
+#: plugins/Satellites/src/ui_satellitesDialog.h:1286
 msgid "Change info color for selected satellites"
 msgstr "Cambiar color de información para los satélites seleccionados"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1303
-#: plugins/Satellites/src/ui_satellitesDialog.h:1307
+#: plugins/Satellites/src/ui_satellitesDialog.h:1290
+#: plugins/Satellites/src/ui_satellitesDialog.h:1294
 msgid ""
 "The Satellite Catalog Number (also known as NORAD (North American Aerospace "
 "Defense) Catalog Number, NORAD ID)"
@@ -19738,92 +19739,92 @@ msgstr ""
 "NORAD (Defensa Aeroespacial de América del Norte por sus siglas en inglés), "
 "ID de NORAD)"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1305
+#: plugins/Satellites/src/ui_satellitesDialog.h:1292
 msgid "Catalog number:"
 msgstr "Número de catálogo:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1310
-#: plugins/Satellites/src/ui_satellitesDialog.h:1314
+#: plugins/Satellites/src/ui_satellitesDialog.h:1297
+#: plugins/Satellites/src/ui_satellitesDialog.h:1301
 msgid "The International Designator, also known as COSPAR ID"
 msgstr "El Designador Internacional, también conocido como ID de COSPAR"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1312
+#: plugins/Satellites/src/ui_satellitesDialog.h:1299
 msgid "I.D.:"
 msgstr "I.D.:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1316
+#: plugins/Satellites/src/ui_satellitesDialog.h:1303
 msgid "Standard magnitude:"
 msgstr "Magnitud estándar:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1318
-#: plugins/Satellites/src/ui_satellitesDialog.h:1322
+#: plugins/Satellites/src/ui_satellitesDialog.h:1305
+#: plugins/Satellites/src/ui_satellitesDialog.h:1309
 msgid "Perigee altitude in kilometers"
 msgstr "Altitud del perigeo en kilómetros"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1320
+#: plugins/Satellites/src/ui_satellitesDialog.h:1307
 msgid "Perigee:"
 msgstr "Perigeo:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1325
-#: plugins/Satellites/src/ui_satellitesDialog.h:1329
+#: plugins/Satellites/src/ui_satellitesDialog.h:1312
+#: plugins/Satellites/src/ui_satellitesDialog.h:1316
 msgid "Apogee altitude in kilometers"
 msgstr "Altitud del apogeo en kilómetros"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1327
+#: plugins/Satellites/src/ui_satellitesDialog.h:1314
 msgid "Apogee:"
 msgstr "Apogeo:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1332
-#: plugins/Satellites/src/ui_satellitesDialog.h:1336
+#: plugins/Satellites/src/ui_satellitesDialog.h:1319
+#: plugins/Satellites/src/ui_satellitesDialog.h:1323
 msgid "Orbital period in minutes"
 msgstr "Período orbital en minutos"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1334
+#: plugins/Satellites/src/ui_satellitesDialog.h:1321
 msgid "Period:"
 msgstr "Período:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1339
+#: plugins/Satellites/src/ui_satellitesDialog.h:1326
 msgid "Display orbit line(s) for the selected satellite(s)"
 msgstr "Mostrar linea(s) de órbita para satélite(s) seleccionado(s)"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1341
+#: plugins/Satellites/src/ui_satellitesDialog.h:1328
 msgid "Orbit"
 msgstr "Órbita"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1343
+#: plugins/Satellites/src/ui_satellitesDialog.h:1330
 msgid "Display the selected satellite(s)"
 msgstr "Mostrar satelite(s) seleccionado(s)"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1345
+#: plugins/Satellites/src/ui_satellitesDialog.h:1332
 msgid "Displayed"
 msgstr "Mostrados"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1347
+#: plugins/Satellites/src/ui_satellitesDialog.h:1334
 msgid "Do not update TLE of selected satellite(s)"
 msgstr "No actualizar TLE del satélite seleccionado(s)"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1349
+#: plugins/Satellites/src/ui_satellitesDialog.h:1336
 msgid "Do not update"
 msgstr "No actualizar"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1351
+#: plugins/Satellites/src/ui_satellitesDialog.h:1338
 msgid "(add personal notes here)"
 msgstr "(añadir notas personales aquí)"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1352
+#: plugins/Satellites/src/ui_satellitesDialog.h:1339
 msgid "Groups:"
 msgstr "Grupos:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1353
+#: plugins/Satellites/src/ui_satellitesDialog.h:1340
 msgid "TLE set:"
 msgstr "Conjunto TLE:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1354
+#: plugins/Satellites/src/ui_satellitesDialog.h:1341
 msgid "Epoch of the TLE:"
 msgstr "Época del TLE:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1356
-#: plugins/Satellites/src/ui_satellitesDialog.h:1360
+#: plugins/Satellites/src/ui_satellitesDialog.h:1343
+#: plugins/Satellites/src/ui_satellitesDialog.h:1347
 msgid ""
 "The valid time range for epoch of TLE in days, used in filtering of "
 "satellites"
@@ -19831,11 +19832,11 @@ msgstr ""
 "El rango de tiempo válido para la época de TLE en días, usado en filtrar "
 "satélites"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1358
+#: plugins/Satellites/src/ui_satellitesDialog.h:1345
 msgid "Age:"
 msgstr "Edad:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1363
+#: plugins/Satellites/src/ui_satellitesDialog.h:1350
 msgid ""
 "Satellites in the marked source lists will be automatically added on the "
 "next update if they are not already in the collection. Unmarked entries will"
@@ -19846,43 +19847,43 @@ msgstr ""
 "no marcadas también se recuperarán para actualizar solo los satélites "
 "incluidos previamente."
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1368
+#: plugins/Satellites/src/ui_satellitesDialog.h:1355
 msgid "Add new source"
 msgstr "Añadir fuente nueva"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1371
+#: plugins/Satellites/src/ui_satellitesDialog.h:1358
 msgid "Edit selected source"
 msgstr "Editar fuente seleccionada"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1374
+#: plugins/Satellites/src/ui_satellitesDialog.h:1361
 msgid "Save source"
 msgstr "Guardar fuente"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1377
+#: plugins/Satellites/src/ui_satellitesDialog.h:1364
 msgid "Remove selected source"
 msgstr "Remover fuente seleccionada"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1380
+#: plugins/Satellites/src/ui_satellitesDialog.h:1367
 msgid "Reset sources list to it defaults"
 msgstr "Restablecer lista de fuentes por defecto"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1382
+#: plugins/Satellites/src/ui_satellitesDialog.h:1369
 msgid "Sources"
 msgstr "Fuentes"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1383
+#: plugins/Satellites/src/ui_satellitesDialog.h:1370
 msgid "Flare prediction (days):"
 msgstr "Prediccion del reflejo (dias):"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1387
+#: plugins/Satellites/src/ui_satellitesDialog.h:1374
 msgid "Predict Iridium flares"
 msgstr "Predecir destellos Iridium"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1388
+#: plugins/Satellites/src/ui_satellitesDialog.h:1375
 msgid "Save predictions..."
 msgstr "Guardar predicciones ..."
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1389
+#: plugins/Satellites/src/ui_satellitesDialog.h:1376
 msgid "Iridium flares"
 msgstr "Destellos de Iridium"
 
@@ -23529,7 +23530,6 @@ msgstr "Configuración cliente"
 
 #: plugins/Exoplanets/src/Exoplanets.cpp:76
 #: plugins/Exoplanets/src/Exoplanets.cpp:173
-#: plugins/Exoplanets/src/Exoplanets.cpp:174
 msgid "Exoplanets"
 msgstr "Exoplanetas"
 
@@ -23542,102 +23542,128 @@ msgstr ""
 " los exoplanetas se derivan de la \"Enciclopedia de Planetas Extrasolares\" "
 "de exoplanet.eu"
 
-#: plugins/Exoplanets/src/Exoplanets.cpp:173
+#: plugins/Exoplanets/src/Exoplanets.cpp:174
 msgid "Show exoplanets"
 msgstr "Mostrar exoplanetas"
 
+#: plugins/Exoplanets/src/Exoplanets.cpp:177
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:539
+msgid "Enable display of distribution for exoplanets"
+msgstr "Activar la visualización de la distribución de exoplanetas"
+
+#: plugins/Exoplanets/src/Exoplanets.cpp:178
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:543
+msgid "Enable timeline discovery of exoplanets"
+msgstr "Activar la línea del tiempo de descubrimiento de exoplanetas"
+
+#: plugins/Exoplanets/src/Exoplanets.cpp:179
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:547
+msgid "Enable display of the potential habitable exoplanets only"
+msgstr ""
+"Habilitar únicamente la vista de exoplanetas potencialmente habitables"
+
+#: plugins/Exoplanets/src/Exoplanets.cpp:180
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:548
+msgid "Enable display of designations for exoplanets"
+msgstr "Permitir la visualización de designaciones para exoplanetas"
+
+#: plugins/Exoplanets/src/Exoplanets.cpp:181
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:549
+msgid "Enable display number of exoplanets in the system"
+msgstr "Habilitar mostrar número de exoplanetas en el sistema"
+
 #. TRANSLATORS: Habitable zone
-#: plugins/Exoplanets/src/Exoplanets.cpp:1037
+#: plugins/Exoplanets/src/Exoplanets.cpp:1044
 msgid "Hot"
 msgstr "Cálido"
 
 #. TRANSLATORS: Habitable zone
-#: plugins/Exoplanets/src/Exoplanets.cpp:1039
+#: plugins/Exoplanets/src/Exoplanets.cpp:1046
 msgid "Warm"
 msgstr "Templado"
 
 #. TRANSLATORS: Habitable zone
-#: plugins/Exoplanets/src/Exoplanets.cpp:1041
+#: plugins/Exoplanets/src/Exoplanets.cpp:1048
 msgid "Cold"
 msgstr "Frío"
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:1044
+#: plugins/Exoplanets/src/Exoplanets.cpp:1051
 msgid "Miniterran"
 msgstr "Miniterrestre"
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:1046
+#: plugins/Exoplanets/src/Exoplanets.cpp:1053
 msgid "Subterran"
 msgstr "Subterrestre"
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:1048
+#: plugins/Exoplanets/src/Exoplanets.cpp:1055
 msgid "Terran"
 msgstr "Terrestre"
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:1050
+#: plugins/Exoplanets/src/Exoplanets.cpp:1057
 msgid "Superterran"
 msgstr "Superterrestre"
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:1052
+#: plugins/Exoplanets/src/Exoplanets.cpp:1059
 msgid "Jovian"
 msgstr "Joviano"
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:1054
+#: plugins/Exoplanets/src/Exoplanets.cpp:1061
 msgid "Neptunian"
 msgstr "Neptuniano"
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:1057
+#: plugins/Exoplanets/src/Exoplanets.cpp:1064
 msgid "Primary Transit"
 msgstr "Tránsito Primario"
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:1059
+#: plugins/Exoplanets/src/Exoplanets.cpp:1066
 msgid "Microlensing"
 msgstr "Microlente"
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:1061
+#: plugins/Exoplanets/src/Exoplanets.cpp:1068
 msgid "Radial Velocity"
 msgstr "Velocidad Radial"
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:1063
+#: plugins/Exoplanets/src/Exoplanets.cpp:1070
 msgid "Imaging"
 msgstr "Imágenes"
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:1065
+#: plugins/Exoplanets/src/Exoplanets.cpp:1072
 msgid "Astrometry"
 msgstr "Astrometría"
 
 #. TRANSLATORS: Exoplanet detection method. TTV=Transit Timing Variation
-#: plugins/Exoplanets/src/Exoplanets.cpp:1067
+#: plugins/Exoplanets/src/Exoplanets.cpp:1074
 msgid "TTV"
 msgstr "TTV"
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:1069
+#: plugins/Exoplanets/src/Exoplanets.cpp:1076
 msgid "Timing"
 msgstr "Sincronización"
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:1071
+#: plugins/Exoplanets/src/Exoplanets.cpp:1078
 msgid "Default"
 msgstr "Por defecto"
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:1073
+#: plugins/Exoplanets/src/Exoplanets.cpp:1080
 msgid "Secondary Transit"
 msgstr "Tránsito secundario"
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:1075
+#: plugins/Exoplanets/src/Exoplanets.cpp:1082
 msgid "Disk Kinematics"
 msgstr "Cinemática de disco"
 
@@ -26397,17 +26423,9 @@ msgstr "Configuración para exoplanetas"
 msgid "Plot all systems with exoplanets without labels"
 msgstr "Trazar todos los sistemas con exoplanetas sin etiquetas"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:539
-msgid "Enable display of distribution for exoplanets"
-msgstr "Activar la visualización de la distribución de exoplanetas"
-
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:541
 msgid "Display exoplanets since their discovery"
 msgstr "Muestra exoplanetas desde su descubrimiento"
-
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:543
-msgid "Enable timeline discovery of exoplanets"
-msgstr "Activar la línea del tiempo de descubrimiento de exoplanetas"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:545
 msgid ""
@@ -26416,19 +26434,6 @@ msgid ""
 msgstr ""
 "Vista de sistemas planetarios, que contengan exoplanetas potencialmente "
 "habitables"
-
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:547
-msgid "Enable display of the potential habitable exoplanets only"
-msgstr ""
-"Habilitar únicamente la vista de exoplanetas potencialmente habitables"
-
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:548
-msgid "Enable display of designations for exoplanets"
-msgstr "Permitir la visualización de designaciones para exoplanetas"
-
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:549
-msgid "Enable display number of exoplanets in the system"
-msgstr "Habilitar mostrar número de exoplanetas en el sistema"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:551
 msgid "Show exoplanets button on toolbar"
