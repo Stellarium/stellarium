@@ -168,8 +168,12 @@ void Quasars::init()
 		Quasar::markerTexture = StelApp::getInstance().getTextureManager().createTexture(":/Quasars/quasar.png");
 
 		// key bindings and other actions
-		addAction("actionShow_Quasars", N_("Quasars"), N_("Show quasars"), "quasarsVisible", "Ctrl+Alt+Q");
-		addAction("actionShow_Quasars_dialog", N_("Quasars"), N_("Show settings dialog"), configDialog, "visible", ""); // Allow assign shortkey
+		QString section = N_("Quasars");
+		addAction("actionShow_Quasars", section, N_("Show quasars"), "quasarsVisible", "Ctrl+Alt+Q");
+		addAction("actionShow_Quasars_dialog", section, N_("Show settings dialog"), configDialog, "visible", ""); // Allow assign shortkey
+		// no default hotkeys
+		addAction("actionShow_Quasars_Distribution", section, N_("Enable display of distribution for quasars"), "flagDisplayMode");
+		addAction("actionShow_Quasars_Markers", section, N_("Use markers for quasars"), "flagMarkersMode");
 
 		GlowIcon = new QPixmap(":/graphicGui/miscGlow32x32.png");
 		OnIcon = new QPixmap(":/Quasars/btQuasars-on.png");
@@ -790,6 +794,7 @@ bool Quasars::getDisplayMode()
 void Quasars::setDisplayMode(bool b)
 {
 	Quasar::distributionMode=b;
+	emit displayModeChanged(b);
 }
 
 bool Quasars::getFlagUseQuasarMarkers()
@@ -800,6 +805,7 @@ bool Quasars::getFlagUseQuasarMarkers()
 void Quasars::setFlagUseQuasarMarkers(bool b)
 {
 	Quasar::useMarkers = b;
+	emit markersModeChanged(b);
 }
 
 Vec3f Quasars::getMarkerColor()

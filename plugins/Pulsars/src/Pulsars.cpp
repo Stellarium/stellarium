@@ -166,8 +166,12 @@ void Pulsars::init()
 		Pulsar::markerTexture = StelApp::getInstance().getTextureManager().createTexture(":/Pulsars/pulsar.png");
 
 		// key bindings and other actions
-		addAction("actionShow_Pulsars", N_("Pulsars"), N_("Show pulsars"), "pulsarsVisible", "Ctrl+Alt+P");
-		addAction("actionShow_Pulsars_dialog", N_("Pulsars"), N_("Show settings dialog"), configDialog, "visible", ""); // Allow assign shortkey
+		QString section = N_("Pulsars");
+		addAction("actionShow_Pulsars", section, N_("Show pulsars"), "pulsarsVisible", "Ctrl+Alt+P");
+		addAction("actionShow_Pulsars_dialog", section, N_("Show settings dialog"), configDialog, "visible", ""); // Allow assign shortkey
+		// no default hotkeys
+		addAction("actionShow_Pulsars_Distribution", section, N_("Enable display of distribution for pulsars"), "flagDisplayMode");
+		addAction("actionShow_Pulsars_Glitch", section, N_("Use separate color for pulsars with glitches"), "flagGlitchMode");
 
 		GlowIcon = new QPixmap(":/graphicGui/miscGlow32x32.png");
 		OnIcon = new QPixmap(":/Pulsars/btPulsars-on.png");
@@ -832,6 +836,7 @@ bool Pulsars::getDisplayMode() const
 void Pulsars::setDisplayMode(bool b)
 {
 	Pulsar::distributionMode=b;
+	emit displayModeChanged(b);
 }
 
 bool Pulsars::getGlitchFlag() const
@@ -842,6 +847,7 @@ bool Pulsars::getGlitchFlag() const
 void Pulsars::setGlitchFlag(bool b)
 {
 	Pulsar::glitchFlag=b;
+	emit glitchFlagChanged(b);
 }
 
 bool Pulsars::getFilteredMode() const
