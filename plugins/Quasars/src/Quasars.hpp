@@ -69,15 +69,10 @@ typedef QSharedPointer<Quasar> QuasarP;
 class Quasars : public StelObjectModule
 {
 	Q_OBJECT
-	Q_PROPERTY(bool quasarsVisible
-		   READ getFlagShowQuasars
-		   WRITE setFlagShowQuasars
-		   NOTIFY flagQuasarsVisibilityChanged
-		   )
-	Q_PROPERTY(Vec3f quasarsColor
-		   READ getMarkerColor
-		   WRITE setMarkerColor
-		   NOTIFY quasarsColorChanged)
+	Q_PROPERTY(bool quasarsVisible   READ getFlagShowQuasars       WRITE setFlagShowQuasars       NOTIFY flagQuasarsVisibilityChanged)
+	Q_PROPERTY(Vec3f quasarsColor    READ getMarkerColor           WRITE setMarkerColor           NOTIFY quasarsColorChanged)
+	Q_PROPERTY(bool flagDisplayMode  READ getDisplayMode           WRITE setDisplayMode           NOTIFY displayModeChanged)
+	Q_PROPERTY(bool flagMarkersMode  READ getFlagUseQuasarMarkers  WRITE setFlagUseQuasarMarkers  NOTIFY markersModeChanged)
 public:
 	//! @enum UpdateState
 	//! Used for keeping for track of the download/update status
@@ -190,6 +185,8 @@ signals:
 	void jsonUpdateComplete(void);
 
 	void flagQuasarsVisibilityChanged(bool b);
+	void displayModeChanged(bool b);
+	void markersModeChanged(bool b);
 	void quasarsColorChanged(Vec3f);
 
 public slots:

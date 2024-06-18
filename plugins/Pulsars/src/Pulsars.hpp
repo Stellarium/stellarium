@@ -72,21 +72,11 @@ typedef QSharedPointer<Pulsar> PulsarP;
 class Pulsars : public StelObjectModule
 {
 	Q_OBJECT
-	Q_PROPERTY(bool pulsarsVisible
-		   READ getFlagShowPulsars
-		   WRITE setFlagShowPulsars
-		   NOTIFY flagPulsarsVisibilityChanged
-		   )
-	Q_PROPERTY(Vec3f markerColor
-		   READ getMarkerColor
-		   WRITE setMarkerColor
-		   NOTIFY markerColorChanged
-		   )
-	Q_PROPERTY(Vec3f glitchColor
-		   READ getGlitchColor
-		   WRITE setGlitchColor
-		   NOTIFY glitchColorChanged
-		   )
+	Q_PROPERTY(bool pulsarsVisible  READ getFlagShowPulsars  WRITE setFlagShowPulsars   NOTIFY flagPulsarsVisibilityChanged)
+	Q_PROPERTY(Vec3f markerColor    READ getMarkerColor      WRITE setMarkerColor       NOTIFY markerColorChanged)
+	Q_PROPERTY(Vec3f glitchColor    READ getGlitchColor      WRITE setGlitchColor       NOTIFY glitchColorChanged)
+	Q_PROPERTY(bool flagDisplayMode READ getDisplayMode      WRITE setDisplayMode       NOTIFY displayModeChanged)
+	Q_PROPERTY(bool flagGlitchMode  READ getGlitchFlag       WRITE setGlitchFlag        NOTIFY glitchFlagChanged)
 public:
 	//! @enum UpdateState
 	//! Used for keeping for track of the download/update status
@@ -197,6 +187,8 @@ signals:
 
 	void flagPulsarsVisibilityChanged(bool b);
 	void flagUsingFilterChanged(bool b);
+	void displayModeChanged(bool b);
+	void glitchFlagChanged(bool b);
 	void markerColorChanged(Vec3f);
 	void glitchColorChanged(Vec3f);
 
