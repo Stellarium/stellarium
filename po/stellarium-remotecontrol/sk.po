@@ -4,18 +4,18 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# cardinot <mcardinot@gmail.com>, 2022
 # Juraj Kubica <juraj.kubica@seznam.cz>, 2022
 # Lubomir Hambalek <lubomir.hambalek@gmail.com>, 2024
+# cardinot <mcardinot@gmail.com>, 2024
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-remotecontrol\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2024-03-15 12:19+0700\n"
+"POT-Creation-Date: 2024-06-09 22:51+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
-"Last-Translator: Lubomir Hambalek <lubomir.hambalek@gmail.com>, 2024\n"
+"Last-Translator: cardinot <mcardinot@gmail.com>, 2024\n"
 "Language-Team: Slovak (https://app.transifex.com/stellarium/teams/80998/sk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -82,8 +82,8 @@ msgstr "Chyba (%1)"
 msgid "Error performing Simbad lookup"
 msgstr "Chyba pri vyhľadávaní v Simbade"
 
-#: plugins/RemoteControl/webroot/js/api/search.js:79 index.html:223
-#: tablet7in.html:240
+#: plugins/RemoteControl/webroot/js/api/search.js:79 index.html:225
+#: tablet7in.html:242
 msgid "idle"
 msgstr "nečinný"
 
@@ -109,8 +109,8 @@ msgid "Could not retrieve landscape list"
 msgstr "Nie je možné načítať zoznam terénov"
 
 #: plugins/RemoteControl/webroot/js/plugins/scenery3d.js:22
-#: plugins/RemoteControl/webroot/js/ui/scripts.js:76 index.html:687
-#: index.html:749 tablet7in.html:746 tablet7in.html:806
+#: plugins/RemoteControl/webroot/js/ui/scripts.js:76 index.html:731
+#: index.html:793 tablet7in.html:828 tablet7in.html:888
 msgid "-none-"
 msgstr "-nič-"
 
@@ -144,243 +144,271 @@ msgstr "Vstup sa nezhoduje so žiadnou položkou"
 msgid "No current selection"
 msgstr "Žiaden výber"
 
-#: index.html:5 tablet7in.html:5
+#: index.html:7 tablet7in.html:7
 msgid "Stellarium remote control plugin"
 msgstr "Modul diaľkového ovládania Stellaria"
 
-#: index.html:17 tablet7in.html:18
+#: index.html:19 tablet7in.html:20
 msgid "Please wait, loading"
 msgstr "Čakajte, načítavam"
 
-#: index.html:26 tablet7in.html:27
+#: index.html:28 tablet7in.html:29
 msgid "Stellarium remote control"
 msgstr "Diaľkové ovládanie Stellaria"
 
-#: index.html:30 tablet7in.html:31
+#: index.html:32 tablet7in.html:33
 msgid "Main controls"
 msgstr "Hlavné ovládanie"
 
-#: index.html:33 tablet7in.html:38
+#: index.html:35 tablet7in.html:40
 msgid "DSO"
 msgstr "Objekty"
 
-#: index.html:36
+#: index.html:38
 msgid "Actions and scripts"
 msgstr "Akcie a skripty"
 
-#: index.html:39 tablet7in.html:45
+#: index.html:41 tablet7in.html:47
 msgid "Scenery3d"
 msgstr "3D terén"
 
-#: index.html:77
+#: index.html:79
 msgid "Pause"
 msgstr "Pauza"
 
-#: index.html:82 tablet7in.html:183
+#: index.html:84 tablet7in.html:185
 msgid "Time jumps"
 msgstr "Časové skoky"
 
-#: index.html:86 tablet7in.html:187
+#: index.html:88 tablet7in.html:189
 msgid "Solar hour"
 msgstr "Slnečná hodina"
 
-#: index.html:87 tablet7in.html:188
+#: index.html:89 tablet7in.html:190
 msgid "Solar day"
 msgstr "Slnečný deň"
 
-#: index.html:88 tablet7in.html:189
+#: index.html:90 tablet7in.html:191
 msgid "Solar week"
 msgstr "Slnečný týždeň"
 
-#: index.html:90 tablet7in.html:191
+#: index.html:92 tablet7in.html:193
 msgid "Calendar year"
 msgstr "Kalendárny rok"
 
-#: index.html:91 tablet7in.html:192
+#: index.html:93 tablet7in.html:194
 msgid "10 Calendar years"
 msgstr "10 kalendárnych rokov"
 
-#: index.html:92 tablet7in.html:193
+#: index.html:94 tablet7in.html:195
 msgid "100 Calendar years"
 msgstr "100 kalendárnych rokov"
 
-#: index.html:95 tablet7in.html:196
+#: index.html:97 tablet7in.html:198
 msgid "Sidereal year"
 msgstr "Siderický rok"
 
-#: index.html:96 tablet7in.html:197
+#: index.html:98 tablet7in.html:199
 msgid "Sidereal century"
 msgstr "Siderické storočie"
 
-#: index.html:98 tablet7in.html:199
+#: index.html:100 tablet7in.html:201
 msgid "Synodic month"
 msgstr "Synodický mesiac"
 
-#: index.html:99 tablet7in.html:200
+#: index.html:101 tablet7in.html:202
 msgid "Draconic month"
 msgstr "Drakonický mesiac"
 
-#: index.html:100 tablet7in.html:201
+#: index.html:102 tablet7in.html:203
 msgid "Draconic year"
 msgstr "Drakonický rok"
 
-#: index.html:103 tablet7in.html:204
+#: index.html:105 tablet7in.html:206
 msgid "Anomalistic month"
 msgstr "Anomalistický mesiac"
 
-#: index.html:104 tablet7in.html:205
+#: index.html:106 tablet7in.html:207
 msgid "Anomalistic year"
 msgstr "Anomalistický rok"
 
-#: index.html:105 tablet7in.html:206
+#: index.html:107 tablet7in.html:208
 msgid "Anomalistic century"
 msgstr "Anomalistické storočie"
 
-#: index.html:107 tablet7in.html:208
+#: index.html:109 tablet7in.html:210
 msgid "Mean tropical month"
 msgstr "Stredný tropický mesiac"
 
-#: index.html:108 tablet7in.html:209
+#: index.html:110 tablet7in.html:211
 msgid "Mean tropical year"
 msgstr "Stredný tropický rok"
 
-#: index.html:109 tablet7in.html:210
+#: index.html:111 tablet7in.html:212
 msgid "Mean tropical century"
 msgstr "Stredné tropické storočie"
 
-#: index.html:111 tablet7in.html:212
+#: index.html:113 tablet7in.html:214
 msgid "Tropical year"
 msgstr "Tropický rok"
 
-#: index.html:112 tablet7in.html:213
+#: index.html:114 tablet7in.html:215
 msgid "Julian year"
 msgstr "Juliánsky rok"
 
-#: index.html:113 tablet7in.html:214
+#: index.html:115 tablet7in.html:216
 msgid "Julian century"
 msgstr "Juliánske storočie"
 
-#: index.html:115 tablet7in.html:216
+#: index.html:117 tablet7in.html:218
 msgid "Gaussian year"
 msgstr "Gaussov rok"
 
-#: index.html:127 tablet7in.html:101
+#: index.html:129 tablet7in.html:103
 msgid "View towards horizon at Azimuth"
 msgstr "Pohľad na horizont v smere azimutu"
 
-#: index.html:148 tablet7in.html:123
+#: index.html:150 tablet7in.html:125
 msgid "Vertical View offset"
 msgstr "Vertikálny posun pohľadu"
 
-#: index.html:217 tablet7in.html:234
+#: index.html:219 tablet7in.html:236
 msgid "Enter search term. Use TAB to navigate results."
 msgstr "Zadajte hľadaný výraz. Klávesom TAB prezriete výsledky."
 
-#: index.html:218 tablet7in.html:235
+#: index.html:220 tablet7in.html:237
 msgid "Select and focus"
 msgstr "Vybrať a zacieliť"
 
-#: index.html:243 tablet7in.html:263
-msgid "Selection of the current item"
-msgstr "Výber aktuálného prvku"
+#: index.html:245 tablet7in.html:265
+msgid "Select current item"
+msgstr ""
 
-#: index.html:247 tablet7in.html:267
+#: index.html:249 tablet7in.html:269
 msgid "Selection mode"
 msgstr "Režim výberu"
 
-#: index.html:247 tablet7in.html:267
+#: index.html:249 tablet7in.html:269
 msgid "Center on object"
 msgstr "Zacieliť na objekt"
 
-#: index.html:247 tablet7in.html:267
+#: index.html:249 tablet7in.html:269
 msgid "Center and zoom to object"
 msgstr "Zacieliť a priblížiť objekt"
 
-#: index.html:247 tablet7in.html:267
+#: index.html:249 tablet7in.html:269
 msgid "Just mark the object"
 msgstr "Objekt len označiť"
 
-#: index.html:249 tablet7in.html:269
+#: index.html:251 tablet7in.html:271
 msgid "Quick select"
 msgstr "Rýchly výber"
 
-#: index.html:253 tablet7in.html:273
+#: index.html:255 tablet7in.html:275
 msgid "Earth"
 msgstr "Zem"
 
-#: index.html:253 tablet7in.html:273
+#: index.html:255 tablet7in.html:275
 msgid "Pluto"
 msgstr "Pluto"
 
-#: index.html:259 tablet7in.html:302
+#: index.html:261 tablet7in.html:304
 msgid "Current selection"
 msgstr "Aktuálny výber"
 
-#: index.html:276 tablet7in.html:329
+#: index.html:278 tablet7in.html:332
 msgid "Milky Way brightness:"
 msgstr "Jas Mliečnej cesty"
 
-#: index.html:281 tablet7in.html:341
+#: index.html:289 tablet7in.html:351
+msgid "Dbl. stars"
+msgstr ""
+
+#: index.html:290 tablet7in.html:352
+msgid "Var. stars"
+msgstr ""
+
+#: index.html:291 tablet7in.html:353
+msgid "HIP"
+msgstr ""
+
+#: index.html:294 tablet7in.html:357
 msgid "Digitized Sky Survey"
 msgstr "Digitalizovaná prehliadka oblohy (DSS)"
 
-#: index.html:282 tablet7in.html:342
+#: index.html:295 tablet7in.html:358
 msgid "HiPS Survey"
 msgstr "Prehliadka HiPS"
 
-#: index.html:295 tablet7in.html:358
+#: index.html:304 tablet7in.html:369
+msgid "Include nutation"
+msgstr "Zahrnúť nutáciu"
+
+#: index.html:306 tablet7in.html:371
+msgid "Include aberration"
+msgstr "Počítať s aberáciou"
+
+#: index.html:314 tablet7in.html:385
 msgid "Show planet markers"
 msgstr "Zobraziť značky planét"
 
-#: index.html:296 tablet7in.html:359
+#: index.html:315 tablet7in.html:386
 msgid "Show planet orbits"
 msgstr "Zobraziť dráhy planét"
 
-#: index.html:297 tablet7in.html:360
+#: index.html:316 tablet7in.html:387
 msgid "Show planet orbits only"
 msgstr "Zobraziť len obežné dráhy planét"
 
-#: index.html:298 tablet7in.html:361
+#: index.html:317 tablet7in.html:388
 msgid "Show orbit for selected planet"
 msgstr "Zobraziť dráhu vybratej planéty"
 
-#: index.html:299 tablet7in.html:362
+#: index.html:318 tablet7in.html:389
 msgid "Show planet trails"
 msgstr "Zobraziť stopy planét"
 
-#: index.html:300 tablet7in.html:363
+#: index.html:319 tablet7in.html:390
 msgid "Show trail only for selected planet"
 msgstr "Zobraziť stopu len pre vybratú planétu"
 
-#: index.html:305 tablet7in.html:367
+#: index.html:324 tablet7in.html:394
 msgid "Scale Moon:"
 msgstr "Škála Mesiaca:"
 
-#: index.html:306
+#: index.html:325 tablet7in.html:398
 msgid "Scale Sun:"
 msgstr "Škálovať Slnko:"
 
-#: index.html:307
+#: index.html:326 tablet7in.html:402
 msgid "Scale Planets:"
 msgstr "Škálovať planéty:"
 
-#: index.html:308 tablet7in.html:371
+#: index.html:327 tablet7in.html:406
 msgid "Scale minor bodies:"
 msgstr "Škála malých telies:"
 
-#: index.html:339 tablet7in.html:417
+#: index.html:358 tablet7in.html:453
 msgid "Extinction Coefficient:"
 msgstr "Koeficient extinkcie:"
 
-#: index.html:343 tablet7in.html:422
+#: index.html:359 tablet7in.html:454
+msgid "Only extinction/refraction, no blue skylight"
+msgstr ""
+
+#: index.html:360 tablet7in.html:455
+msgid "Suppress scattering"
+msgstr ""
+
+#: index.html:365 tablet7in.html:460
 msgid "Shooting Stars"
 msgstr "Meteory"
 
-#: index.html:344 tablet7in.html:423
+#: index.html:366 tablet7in.html:461
 msgid "ZHR:"
 msgstr "ZHR:"
 
-#: index.html:387 tablet7in.html:480
+#: index.html:413 tablet7in.html:513
 msgid ""
 "Instantaneous circles of earth´s axis on its motion around ecliptical poles."
 " Displayed on Earth only."
@@ -388,331 +416,339 @@ msgstr ""
 "Okamžité kružnice zemskej osi pri jej pohybe okolo pólov ekliptiky. "
 "Zobrazuje sa iba na Zemi."
 
-#: index.html:403
+#: index.html:430 tablet7in.html:530
 msgid "Center"
 msgstr "Stred"
 
-#: index.html:421 tablet7in.html:489
+#: index.html:448 tablet7in.html:548
 msgid "Solstices"
 msgstr "Slnovraty"
 
-#: index.html:422 tablet7in.html:490
+#: index.html:449 tablet7in.html:549
 msgid "Crossquarters"
 msgstr "Deliace dni"
 
-#: index.html:423 tablet7in.html:491
+#: index.html:450 tablet7in.html:550
 msgid "Major Standstill"
 msgstr "Hlavná zastávka"
 
-#: index.html:424 tablet7in.html:492
+#: index.html:451 tablet7in.html:551
 msgid "Minor Standstill"
 msgstr "Vedľajšia zastávka"
 
-#: index.html:434 tablet7in.html:501
+#: index.html:455 tablet7in.html:556
+msgid "Line width:"
+msgstr ""
+
+#: index.html:465 tablet7in.html:566
 msgid "Current Planet:"
 msgstr "Aktuálna planéta:"
 
-#: index.html:472 tablet7in.html:537
+#: index.html:505 tablet7in.html:606
 msgid "Catalogue of Reflection Nebulae (Van den Bergh, 1966)"
 msgstr "Katalóg reflexných hmlovín (Van den Bergh, 1966)"
 
-#: index.html:519 tablet7in.html:555
+#: index.html:552 tablet7in.html:624
 msgid ""
 "Catalogue of southern stars embedded in nebulosity (van den Bergh+, 1975)"
 msgstr "Katalóg južných hviezd zahalených v hmlovine (van den Bergh+, 1975)"
 
-#: index.html:557
+#: index.html:590
 msgid "Objects without identifier"
 msgstr "Objekty bez identifikátora"
 
-#: index.html:575
+#: index.html:608
 msgid "Open Star clusters"
 msgstr "Otvorené hviezdokopy"
 
-#: index.html:576
+#: index.html:609 tablet7in.html:692
 msgid "Globular Star clusters"
 msgstr "Guľové hviezdokopy"
 
-#: index.html:583 tablet7in.html:629
+#: index.html:615 tablet7in.html:698
 msgid "Bright Nebulae"
 msgstr "Jasné hmloviny"
 
-#: index.html:584 tablet7in.html:630
+#: index.html:616 tablet7in.html:699
 msgid "Dark Nebulae"
 msgstr "Tmavé hmloviny"
 
-#: index.html:585 tablet7in.html:631
+#: index.html:617 tablet7in.html:700
 msgid "Planetary Nebulae"
 msgstr "Planetárne hmloviny"
 
-#: index.html:587
-msgid "Galaxy clusters"
-msgstr "Kopy galaxií"
-
-#: index.html:595 tablet7in.html:640
+#: index.html:627 tablet7in.html:710
 msgid "Labels and markers"
 msgstr "Menovky a značky"
 
-#: index.html:608 tablet7in.html:653
+#: index.html:646 tablet7in.html:729
 msgid "Limit angular size (arcmin):"
 msgstr "Obmedziť uhlovú veľkosť (uhl. min.):"
 
-#: index.html:620 tablet7in.html:665
+#: index.html:658 tablet7in.html:743
 msgid "Use associated planet and position"
 msgstr "Použiť vybratú planétu a zemepisnú polohu"
 
-#: index.html:631 tablet7in.html:674
+#: index.html:669 tablet7in.html:752
 msgid "Show illumination"
 msgstr "Zobraziť osvetlenie"
 
-#: index.html:636 tablet7in.html:680
+#: index.html:674 tablet7in.html:758
 msgid "Current landscape"
 msgstr "Aktuálny terén"
 
-#: index.html:648 tablet7in.html:693
+#: index.html:685 tablet7in.html:770
+msgid "Label constellations with font size"
+msgstr ""
+
+#: index.html:689 tablet7in.html:774
 msgid "Show lines with thickness"
 msgstr "Zobraziť čiary s hrúbkou"
 
-#: index.html:653 tablet7in.html:698
+#: index.html:693 tablet7in.html:778
+msgid "Label asterisms with font size"
+msgstr ""
+
+#: index.html:697 tablet7in.html:782
 msgid "Show asterisms with thickness"
 msgstr "Zobraziť asterizmy s hrúbkou"
 
-#: index.html:657 tablet7in.html:702
+#: index.html:701 tablet7in.html:786
 msgid "Show ray helpers with thickness"
 msgstr "Zobraziť pomocné čiary s hrúbkou"
 
-#: index.html:665 tablet7in.html:712
+#: index.html:709 tablet7in.html:794
 msgid "Show boundaries with thickness"
 msgstr "Zobraziť hranice s hrúbkou"
 
-#: index.html:670 tablet7in.html:717
+#: index.html:714 tablet7in.html:799
 msgid "Constellation selection isolated"
 msgstr "Izolovaný výber súhvezdia"
 
-#: index.html:674 tablet7in.html:721
+#: index.html:718 tablet7in.html:803
 msgid "Current sky culture"
 msgstr "Aktuálna kultúra oblohy"
 
-#: index.html:687 tablet7in.html:746
+#: index.html:731 tablet7in.html:828
 msgid "Active script:"
 msgstr "Aktívny skript:"
 
-#: index.html:688 tablet7in.html:747
+#: index.html:732 tablet7in.html:829
 msgid "Run selected script"
 msgstr "Spustiť označený skript"
 
-#: index.html:688 tablet7in.html:747
+#: index.html:732 tablet7in.html:829
 msgid "Stop current script"
 msgstr "Zastaviť aktuálny skript"
 
-#: index.html:693 tablet7in.html:41 tablet7in.html:731
+#: index.html:737 tablet7in.html:43 tablet7in.html:813
 msgid "Actions"
 msgstr "Akcie"
 
-#: index.html:697 tablet7in.html:735
+#: index.html:741 tablet7in.html:817
 msgid "Run/toggle action"
 msgstr "Spustiť/prepnúť akciu"
 
-#: index.html:708 tablet7in.html:770
+#: index.html:752 tablet7in.html:852
 msgid "Planet map"
 msgstr "Mapa planéty"
 
-#: index.html:709 tablet7in.html:771
+#: index.html:753 tablet7in.html:853
 msgid "Planet map pointer"
 msgstr "Ukazovateľ mapy planéty"
 
-#: index.html:713 tablet7in.html:775
+#: index.html:757 tablet7in.html:857
 msgid "Type to search location"
 msgstr "Písaním vyhľadáte lokalitu"
 
-#: index.html:747 tablet7in.html:804
+#: index.html:791 tablet7in.html:886
 msgid "Interaction"
 msgstr "Interakcia"
 
-#: index.html:748 tablet7in.html:805
+#: index.html:792 tablet7in.html:887
 msgid "Current scene:"
 msgstr "Súčasná scéna:"
 
-#: index.html:751 tablet7in.html:808
+#: index.html:795 tablet7in.html:890
 msgid "View controls"
 msgstr "Zobraziť ovládanie"
 
-#: index.html:757 tablet7in.html:814
+#: index.html:801 tablet7in.html:896
 msgid "Movement controls"
 msgstr "Ovládanie pohybu"
 
-#: index.html:769 tablet7in.html:826
+#: index.html:813 tablet7in.html:908
 msgid "Torchlight"
 msgstr "Baterka"
 
-#: index.html:776 tablet7in.html:833
+#: index.html:820 tablet7in.html:915
 msgid "Scene selection"
 msgstr "Výber scény"
 
-#: index.html:780 tablet7in.html:837
+#: index.html:824 tablet7in.html:919
 msgid "Load selected scene"
 msgstr "Načítať vybranú scénu"
 
-#: index.html:805 tablet7in.html:863
+#: index.html:849 tablet7in.html:945
 msgid "No response from server"
 msgstr "Server neodpovedá"
 
-#: index.html:806 tablet7in.html:864
+#: index.html:850 tablet7in.html:946
 msgid "No response from server for %1 seconds. Is Stellarium still running?"
 msgstr "Server neodpovedá %1 sekúnd. Je Stellarium stále spustené?"
 
-#: tablet7in.html:32
+#: tablet7in.html:34
 msgid "Time Jump"
 msgstr "Časový skok"
 
-#: tablet7in.html:37
+#: tablet7in.html:39
 msgid "Grids"
 msgstr "Mriežky"
 
-#: tablet7in.html:97
+#: tablet7in.html:99
 msgid "Up/Left"
 msgstr "Hore/Vľavo"
 
-#: tablet7in.html:97
+#: tablet7in.html:99
 msgid "Up"
 msgstr "Hore"
 
-#: tablet7in.html:97
+#: tablet7in.html:99
 msgid "Up/Right"
 msgstr "Hore/Vpravo"
 
-#: tablet7in.html:97
+#: tablet7in.html:99
 msgid "Left"
 msgstr "Vľavo"
 
-#: tablet7in.html:97
+#: tablet7in.html:99
 msgid "Focus on selected object"
 msgstr "Zacieliť na označený objekt"
 
-#: tablet7in.html:97
+#: tablet7in.html:99
 msgid "Focus on selection"
 msgstr "Zacieliť na výber"
 
-#: tablet7in.html:97
+#: tablet7in.html:99
 msgid "Right"
 msgstr "Vpravo"
 
-#: tablet7in.html:97
+#: tablet7in.html:99
 msgid "Down/Left"
 msgstr "Dole/Vľavo"
 
-#: tablet7in.html:97
+#: tablet7in.html:99
 msgid "Down"
 msgstr "Dole"
 
-#: tablet7in.html:97
+#: tablet7in.html:99
 msgid "Down/Right"
 msgstr "Dole/Vpravo"
 
-#: tablet7in.html:274
+#: tablet7in.html:276
 msgid "Sirius"
 msgstr "Sírius"
 
-#: tablet7in.html:275
+#: tablet7in.html:277
 msgid "Arcturus"
 msgstr "Arktúr"
 
-#: tablet7in.html:276
+#: tablet7in.html:278
 msgid "Capella"
 msgstr "Capella"
 
-#: tablet7in.html:277
+#: tablet7in.html:279
 msgid "Vega"
 msgstr "Vega"
 
-#: tablet7in.html:278
+#: tablet7in.html:280
 msgid "Deneb"
 msgstr "Deneb"
 
-#: tablet7in.html:279
+#: tablet7in.html:281
 msgid "Altair"
 msgstr "Altair"
 
-#: tablet7in.html:280
+#: tablet7in.html:282
 msgid "Andromeda Galaxy"
 msgstr "Galaxia v Androméde"
 
-#: tablet7in.html:281
+#: tablet7in.html:283
 msgid "Hercules Cluster"
 msgstr "Kopa galaxií v Herkulovi"
 
-#: tablet7in.html:282
+#: tablet7in.html:284
 msgid "Orion Nebula"
 msgstr "Hmlovina v Orióne"
 
-#: tablet7in.html:283
+#: tablet7in.html:285
 msgid "Eta Carinae Nebula"
 msgstr "Hmlovina Éta Carinae"
 
-#: tablet7in.html:284
+#: tablet7in.html:286
 msgid "47 Tucanae Cluster"
 msgstr "Hviezdokopa 47 Tucanae"
 
-#: tablet7in.html:285
+#: tablet7in.html:287
 msgid "Aries"
 msgstr "Aries"
 
-#: tablet7in.html:286
+#: tablet7in.html:288
 msgid "Taurus"
 msgstr "Býk"
 
-#: tablet7in.html:287
+#: tablet7in.html:289
 msgid "Gemini"
 msgstr "Gemini"
 
-#: tablet7in.html:288
+#: tablet7in.html:290
 msgid "Cancer"
 msgstr "Cancer"
 
-#: tablet7in.html:289
+#: tablet7in.html:291
 msgid "Leo"
 msgstr "Leo"
 
-#: tablet7in.html:290
+#: tablet7in.html:292
 msgid "Virgo"
 msgstr "Panna"
 
-#: tablet7in.html:291
+#: tablet7in.html:293
 msgid "Libra"
 msgstr "Váhy"
 
-#: tablet7in.html:292
+#: tablet7in.html:294
 msgid "Scorpius"
 msgstr "Scorpius"
 
-#: tablet7in.html:293
+#: tablet7in.html:295
 msgid "Sagittarius"
 msgstr "Sagittarius"
 
-#: tablet7in.html:294
+#: tablet7in.html:296
 msgid "Capricornus"
 msgstr "Kozorožec"
 
-#: tablet7in.html:295
+#: tablet7in.html:297
 msgid "Aquarius"
 msgstr "Aquarius"
 
-#: tablet7in.html:296
+#: tablet7in.html:298
 msgid "Pisces"
 msgstr "Ryby"
 
-#: tablet7in.html:755
+#: tablet7in.html:837
 msgid "Favorites"
 msgstr "Obľúbené"
 
-#: tablet7in.html:757
+#: tablet7in.html:839
 msgid "Show 1"
 msgstr "Ukázať 1"
 
-#: tablet7in.html:758
+#: tablet7in.html:840
 msgid "Remove Labels and Images"
 msgstr "Skryť menovky a obrázky"
 
-#: tablet7in.html:758
+#: tablet7in.html:840
 msgid "Cleanup Screen"
 msgstr "Vyčistiť obrazovku"
