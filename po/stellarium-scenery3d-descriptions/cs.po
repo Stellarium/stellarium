@@ -5,7 +5,7 @@
 # 
 # Translators:
 # cardinot <mcardinot@gmail.com>, 2022
-# Zdeněk Moravec <moravec@hapteplice.cz>, 2022
+# Zdeněk Moravec <moravec@hapteplice.cz>, 2024
 # 
 #, fuzzy
 msgid ""
@@ -14,7 +14,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
 "POT-Creation-Date: 2023-11-28 13:04+0700\n"
 "PO-Revision-Date: 2022-10-05 17:03+0000\n"
-"Last-Translator: Zdeněk Moravec <moravec@hapteplice.cz>, 2022\n"
+"Last-Translator: Zdeněk Moravec <moravec@hapteplice.cz>, 2024\n"
 "Language-Team: Czech (https://app.transifex.com/stellarium/teams/80998/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -35,11 +35,16 @@ msgid ""
 "or some other details to find out how this plugin behaves. Then build and "
 "present your own work!"
 msgstr ""
+"Tato scéna je užitečná zpravidla jako testovací prostředí pro váš vlastní "
+"vývoj. Můžete si vytvořit kopii složky této scény a upravit ji podle "
+"libosti. Vyzkoušejte nastavení materiálů nebo dalších detailů a zjistěte, "
+"jak se tento zásuvný modul chová. Pak vytvořte a prezentujte své vlastní "
+"dílo!"
 
 #. type: Content of: <h4>
 #: ../../scenery3d/Testscene/description.en.utf8:8
 msgid "Coordinate and orientation tests"
-msgstr ""
+msgstr "Testy souřadnic a orientace"
 
 #. type: Content of: <p>
 #: ../../scenery3d/Testscene/description.en.utf8:10
@@ -53,6 +58,15 @@ msgid ""
 "absolutely and always point west-east, the grid lines hit the northern "
 "horizon slightly (4.2 deg) left of north!"
 msgstr ""
+"Zde zobrazené sloupy poskytují při pohledu ze středu struktury přibližný "
+"pohled (tedy nikoliv s vysokou přesností!) na polohy "
+"slunovratu/rovnodennosti a východu/západu Slunce ve středoevropských "
+"zeměpisných šířkách. Centrální pilíře poskytují východo-západní linii. Síť "
+"souřadnic viditelná na podlaze není srovnaná se zeměpisným severem. Potočení"
+" o -4,2 stupně musí být vykompenzováno (test konvergence poledníků), což "
+"znamená, že zatímco středové pilíře musí absolutně a vždy směřovat na západ-"
+"východ, čáry poledníkové sítě zasahují do severního horizontu mírně (4,2 "
+"stupně) vlevo od severu!"
 
 #. type: Content of: <p>
 #: ../../scenery3d/Testscene/description.en.utf8:19
@@ -60,11 +74,13 @@ msgid ""
 "Walkaround ground coordinates (Ctrl-R, T) should display the coordinates "
 "visible along the south and west border of the ground."
 msgstr ""
+"Pozemní souřadnice (Ctrl-R, T) by měly zobrazovat souřadnice viditelné podél"
+" jižní a západní hranice terénu."
 
 #. type: Content of: <h4>
 #: ../../scenery3d/Testscene/description.en.utf8:23
 msgid "Material test"
-msgstr ""
+msgstr "Test materiálů"
 
 #. type: Content of: <p>
 #: ../../scenery3d/Testscene/description.en.utf8:25
@@ -73,6 +89,9 @@ msgid ""
 " can play with material parameters to create funny effects like "
 "semitransparent or glow-in-the-dark brick spheres."
 msgstr ""
+"Tento model se také používá pro testování grafických schopností zásuvného "
+"modulu. Můžete si pohrát s nastavením materiálů a vytvářet vtipné efekty, "
+"jako jsou poloprůhledné nebo ve tmě zářící cihlové koule."
 
 #. type: Content of: <p>
 #: ../../scenery3d/Testscene/description.en.utf8:29
@@ -80,12 +99,14 @@ msgid ""
 "To test temporal features, the pillars and spheres are visible only from the"
 " years 2000 until 2020.  Edit the material file to change that!"
 msgstr ""
+"Kvůli testování časových prvků jsou pilíře a koule viditelné pouze od roku "
+"2000 do roku 2020. Změnit to lze úpravou souboru s materiály!"
 
 #. type: Content of: <h4>
 #: ../../scenery3d/Testscene/description.en.utf8:32
 #: ../../scenery3d/Sterngarten/description.en.utf8:56
 msgid "Model"
-msgstr ""
+msgstr "Model"
 
 #. type: Content of: <p>
 #: ../../scenery3d/Testscene/description.en.utf8:33
@@ -93,6 +114,8 @@ msgid ""
 "Testscene for Stellarium/scenery3d development. Export from SU8-Kerkythea-"
 "KT2OBJ."
 msgstr ""
+"Testovací scéna pro vývoj zásuvného modulu Stellarium/scenery3d. Export z "
+"SU8-Kerkythea-KT2OBJ."
 
 #. type: Content of: <h2>
 #: ../../scenery3d/Sterngarten/description.en.utf8:1
@@ -105,11 +128,13 @@ msgid ""
 "Sterngarten (\"Star Garden\") is an open-air planetarium in the south-west "
 "of Vienna, demonstrating the solar year."
 msgstr ""
+"Sterngarten („Hvězdná zahrada“) je planetárium pod širým nebem na jihozápadě"
+" Vídně, které demonstruje sluneční rok."
 
 #. type: Content of: <h4>
 #: ../../scenery3d/Sterngarten/description.en.utf8:7
 msgid "Idea"
-msgstr ""
+msgstr "Myšlenka"
 
 #. type: Content of: <p>
 #: ../../scenery3d/Sterngarten/description.en.utf8:9
@@ -118,11 +143,14 @@ msgid ""
 "Astronomical Bureau (1907) and Austrian Astronomical Society (1924). "
 "Director of first Vienna Planetarium (1927) and Urania observatory."
 msgstr ""
+"Univ. prof. Dr. Oswald Thomas (1882 Kronstadt - 1963 Vídeň). Zakladatel "
+"Astronomické kanceláře (1907) a Rakouské astronomické společnosti (1924). "
+"Ředitel prvního vídeňského planetária (1927) a Observatoře Urania."
 
 #. type: Content of: <h4>
 #: ../../scenery3d/Sterngarten/description.en.utf8:14
 msgid "Construction"
-msgstr ""
+msgstr "Výstavba"
 
 #. type: Content of: <p>
 #: ../../scenery3d/Sterngarten/description.en.utf8:16
@@ -136,6 +164,13 @@ msgid ""
 "Calendar)  and the monthly journal \"Der Sternenbote\" (The Starry "
 "Messenger)."
 msgstr ""
+"Sterngarten byla navržena Thomasovým studentem a nástupcem v Astronomické "
+"kanceláři prof. Hermannem Muckem (1935-2019) a jeho spolupracovníky. Mucke "
+"byl také tajemníkem Rakouské astronomické společnosti v letech 1963-2018, "
+"ředitelem vídeňského planetária v letech 1963-2001 a vídeňské hvězdárny pro "
+"veřejnost Urania v letech 1971-2001. Po více než 60 let Mucke a společnost "
+"vydávali „Österreichischer Himmelskalender“ (Rakouský nebeský kalendář) a "
+"měsíčník „Der Sternenbote“ (Hvězdný posel)."
 
 #. type: Content of: <p>
 #: ../../scenery3d/Sterngarten/description.en.utf8:22
@@ -143,11 +178,13 @@ msgid ""
 "It was built 1997-2001 by the Austrian Astronomical Society, supported by "
 "public and private sponsors."
 msgstr ""
+"Byla postavena v letech 1997-2001 Rakouskou astronomickou společností za "
+"podpory veřejných a soukromých sponzorů."
 
 #. type: Content of: <h4>
 #: ../../scenery3d/Sterngarten/description.en.utf8:24
 msgid "Purpose"
-msgstr ""
+msgstr "Účel"
 
 #. type: Content of: <p>
 #: ../../scenery3d/Sterngarten/description.en.utf8:26
@@ -158,11 +195,16 @@ msgid ""
 "southwest of Vienna; always open privately for everybody free of charge. "
 "Frequently guided tours."
 msgstr ""
+"Prohloubení základních astronomických znalostí u široké veřejnosti. "
+"Instalace má za cíl objasnit děje na skutečné obloze a jejich změny při "
+"pohledu pouhým okem, případně malým dalekohledem. Nachází se na úplném "
+"jihozápadě Vídně; vždy otevřeno soukromě pro všechny zdarma. Časté prohlídky"
+" s průvodcem."
 
 #. type: Content of: <h4>
 #: ../../scenery3d/Sterngarten/description.en.utf8:32
 msgid "Components"
-msgstr ""
+msgstr "Součásti"
 
 #. type: Content of: <ul><li>
 #: ../../scenery3d/Sterngarten/description.en.utf8:35
@@ -170,17 +212,19 @@ msgid ""
 "Pyramid with platform 7x7m. Seen from 1.5m above Center Plate all angles "
 "fit."
 msgstr ""
+"Pyramida s plošinou 7x7m. Při pohledu z 1,5 m nad středovou deskou všechny "
+"úhly souhlasí."
 
 #. type: Content of: <ul><li>
 #: ../../scenery3d/Sterngarten/description.en.utf8:36
 msgid "Horizon Railing, representing the mathematical horizon."
-msgstr ""
+msgstr "Horizontální zábradlí, představující matematický horizont."
 
 #. type: Content of: <ul><li>
 #: ../../scenery3d/Sterngarten/description.en.utf8:37
 msgid ""
 "Surrounding Steps; 200 seats. Entrance by staircase and wheelchair ramp."
-msgstr ""
+msgstr "Okolní schody; 200 míst. Vstup po schodišti a rampě pro vozíčkáře."
 
 #. type: Content of: <ul><li>
 #: ../../scenery3d/Sterngarten/description.en.utf8:38
@@ -191,6 +235,10 @@ msgid ""
 "rising/setting on the mathematical horizon is not possible in the field due "
 "to vegetation and landscape)."
 msgstr ""
+"Stožáry pro východ a západ slunce na začátku ročních období. Polohy stožárů "
+"jsou přímo na azimutech rovnodenností a slunovratů. Ramena indikují horizont"
+" a efekt posunu v důsledku refrakce. (Pozorování východu/západu na "
+"matematickém horizontu není v terénu možné kvůli vegetaci a krajině)."
 
 #. type: Content of: <ul><li>
 #: ../../scenery3d/Sterngarten/description.en.utf8:42
@@ -198,6 +246,8 @@ msgid ""
 "South Pillar, marked (10&deg;/10&deg; altitude); Transit marks for sun at "
 "seasons' beginning."
 msgstr ""
+"Jižní stožár, značky (10&deg;/10&deg; altitude); značky pro průchody Slunce "
+"na začátku každé sezóny."
 
 #. type: Content of: <ul><li>
 #: ../../scenery3d/Sterngarten/description.en.utf8:43
@@ -205,6 +255,8 @@ msgid ""
 "North Pillar, marked (10&deg;/10&deg; altitude); on top Shadow Disc with "
 "central hole: North celestial Pole."
 msgstr ""
+"Severní stožár, značky (10&deg;/10&deg; nadmořská výška); na vrcholu má disk"
+" s otvorem ve středu, který představuje severní nebeský pól."
 
 #. type: Content of: <ul><li>
 #: ../../scenery3d/Sterngarten/description.en.utf8:44
@@ -214,26 +266,29 @@ msgid ""
 " longitude, with zodiacal signs. Ascending part serves as polar gnomon for "
 "the"
 msgstr ""
+"Prohnutá analema, dělená. Jarní a letní data na vodorovné části, podzimní a "
+"zimní data na vzestupné, značení (10&deg;/10&deg;) ekliptikální délka Slunce"
+" a znamení zvěrokruhu. Vzestupná část slouží jako polární gnómon pro"
 
 #. type: Content of: <ul><li>
 #: ../../scenery3d/Sterngarten/description.en.utf8:45
 msgid "Sundial, full hours Vh to VIIh marked."
-msgstr ""
+msgstr "sluneční hodiny, vyznačeny celé hodiny Vh až VIIh."
 
 #. type: Content of: <ul><li>
 #: ../../scenery3d/Sterngarten/description.en.utf8:46
 msgid "Information panels."
-msgstr ""
+msgstr "Informační panely."
 
 #. type: Content of: <h4>
 #: ../../scenery3d/Sterngarten/description.en.utf8:49
 msgid "Further Information"
-msgstr ""
+msgstr "Další informace"
 
 #. type: Content of: <p>
 #: ../../scenery3d/Sterngarten/description.en.utf8:50
 msgid "Websites in German only."
-msgstr ""
+msgstr "Webové stránky pouze v němčině."
 
 #. type: Content of: <ul><li>
 #: ../../scenery3d/Sterngarten/description.en.utf8:52
@@ -241,6 +296,8 @@ msgid ""
 "Österreichischer Astronomischer Verein: <a "
 "href=\"https://www.astroverein.at\">https://www.astroverein.at</a>"
 msgstr ""
+"Österreichischer Astronomischer Verein: <a "
+"href=\"https://www.astroverein.at\">https://www.astroverein.at</a>"
 
 #. type: Content of: <ul><li>
 #: ../../scenery3d/Sterngarten/description.en.utf8:53
@@ -248,6 +305,8 @@ msgid ""
 "German Wikipedia article on the <a "
 "href=\"https://de.wikipedia.org/wiki/Sterngarten\">Sterngarten</a>"
 msgstr ""
+"Článek v německé Wikipedii o <a "
+"href=\"https://de.wikipedia.org/wiki/Sterngarten\">Sterngarten</a>"
 
 #. type: Content of: <p>
 #: ../../scenery3d/Sterngarten/description.en.utf8:57
@@ -257,6 +316,10 @@ msgid ""
 "by Mucke in his primary school days. Mucke's spirit will remain alive in the"
 " Sterngarten."
 msgstr ""
+"Vytvořil Georg Zotti podle plánů H. Muckeho. Stejně jako nespočet "
+"amatérských a profesionálních astronomů v Rakousku i Zottiho seznámil s "
+"astronomií Mucke na základní škole. Muckeho duch bude ve Sterngarten žít i "
+"nadále."
 
 #. type: Content of: <p>
 #: ../../scenery3d/Sterngarten/description.en.utf8:60
@@ -264,3 +327,5 @@ msgid ""
 "Model created in 2010 with Google Sketchup 8, exported from Google Sketchup "
 "8.0.14346."
 msgstr ""
+"Model vytvořený v roce 2010 pomocí Google Sketchup 8, exportovaný z Google "
+"Sketchup 8.0.14346."
