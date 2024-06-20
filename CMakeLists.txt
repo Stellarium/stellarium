@@ -393,7 +393,7 @@ IF(ENABLE_NLS)
 ENDIF()
 
 # Activate media support
-SET(ENABLE_MEDIA 0 CACHE BOOL "Define whether media support should be activated.")
+SET(ENABLE_MEDIA 1 CACHE BOOL "Define whether media support should be activated.")
 
 # Activate QtWebEngine support
 SET(ENABLE_QTWEBENGINE 1 CACHE BOOL "Define whether QtWebEngine module should be supported if it installed.")
