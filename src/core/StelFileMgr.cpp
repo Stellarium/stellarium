@@ -91,6 +91,15 @@ void StelFileMgr::init()
 		qFatal("Error: cannot create user config directory: %s", e.what());
 	}
 
+	// There is still a chance that userDir is just a relative path!
+	QFileInfo fi(userDir);
+	if (fi.isRelative() && fi.isDir())
+	{
+		qDebug() << userDir << "looks like a relative path";
+		userDir=fi.absoluteFilePath();
+		qDebug() << "userDir now " << userDir ;
+	}
+
 	// OK, now we have the userDir set, add it to the search path
 	fileLocations.append(userDir);
 	
@@ -515,7 +524,7 @@ void StelFileMgr::makeSureDirExistsAndIsWritable(const QString& dirFullPath)
 	{
 		// The modules directory doesn't exist, lets create it.
 		qDebug() << "Creating directory " << QDir::toNativeSeparators(uDir.filePath());
-		if (!QDir("/").mkpath(uDir.filePath()))
+		if (!QDir("/").mkpath(uDir.absoluteFilePath()))
 		{
 			throw std::runtime_error(QString("Could not create directory: " +uDir.filePath()).toStdString());
 		}
@@ -525,6 +534,8 @@ void StelFileMgr::makeSureDirExistsAndIsWritable(const QString& dirFullPath)
 			throw std::runtime_error(QString("Directory is not writable: " +uDir2.filePath()).toStdString());
 		}
 	}
+	else if (!uDir.isDir())
+		throw std::runtime_error(QString("File given instead of directory name: " +uDir.filePath()).toStdString());
 	else if (!uDir.isWritable())
 	{
 		throw std::runtime_error(QString("Directory is not writable: " +uDir.filePath()).toStdString());
