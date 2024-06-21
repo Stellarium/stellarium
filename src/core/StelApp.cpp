@@ -563,12 +563,13 @@ void StelApp::init(QSettings* conf)
 
 	// Init audio manager
 	SplashScreen::showMessage(q_("Initializing audio..."));
-	const bool audioOK = !(qApp->property("onetime_no-audio").toBool());
-	audioMgr = new StelAudioMgr(audioOK && confSettings->value("audio/enabled", true).toBool());
+	const bool audioOK = !(qApp->property("onetime_no-audio").toBool())
+			&& confSettings->value("audio/enabled", true).toBool();
+	audioMgr = new StelAudioMgr(audioOK);
 
 	// Init video manager
 	SplashScreen::showMessage(q_("Initializing video..."));
-	videoMgr = new StelVideoMgr();
+	videoMgr = new StelVideoMgr(audioOK);
 	videoMgr->init();
 	getModuleMgr().registerModule(videoMgr);
 
