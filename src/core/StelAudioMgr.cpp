@@ -191,7 +191,7 @@ void StelAudioMgr::loadSound(const QString& filename, const QString& id)
 {
 	qWarning() << "This build of Stellarium does not support sound - cannot load audio" << QDir::toNativeSeparators(filename) << id;
 }
-StelAudioMgr::StelAudioMgr() {}
+StelAudioMgr::StelAudioMgr(bool){}
 StelAudioMgr::~StelAudioMgr() {;}
 void StelAudioMgr::playSound(const QString&) {;}
 void StelAudioMgr::pauseSound(const QString&) {;}

@@ -283,9 +283,9 @@ private:
 		int lastPos;               //!< This should not be required: We must track a bug in QtMultimedia where the QMediaPlayer is in playing state but does not progress the video position. In update() we try to let it run again.
 	} VideoPlayer;
 	QMap<QString, VideoPlayer*> videoObjects;
-	bool audioEnabled;                 //!< Allow audio output. May be disabled by command line or config arguments.
 	bool verbose;                      //!< true to write many more log entries (useful for script debugging) Activate with command-line option "--verbose"
 #endif
+	bool audioEnabled;                 //!< Allow audio output. May be disabled by command line or config arguments.
 };
 
 #endif // STELVIDEOMGR_HPP
