@@ -10,9 +10,10 @@
 # Frank Tönies <fraies@web.de>, 2022
 # Susanne Hoffmann <service@urania-uhura.de>, 2022
 # Alexander V. Wolf <alex.v.wolf@gmail.com>, 2023
-# Georg Zotti <Georg.Zotti@univie.ac.at>, 2023
 # cardinot <mcardinot@gmail.com>, 2023
 # Latein Lebt, 2023
+# Georg Zotti <Georg.Zotti@univie.ac.at>, 2024
+# Ruslan Kabatsaev, 2024
 # 
 #, fuzzy
 msgid ""
@@ -21,7 +22,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
 "POT-Creation-Date: 2024-03-22 10:22+0700\n"
 "PO-Revision-Date: 2022-10-05 17:12+0000\n"
-"Last-Translator: Latein Lebt, 2023\n"
+"Last-Translator: Ruslan Kabatsaev, 2024\n"
 "Language-Team: German (https://app.transifex.com/stellarium/teams/80998/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -10471,6 +10472,10 @@ msgid ""
 "century AD, i.e. Roman times. However, it is a copy of an older Greek model,"
 " which itself has not survived."
 msgstr ""
+"Diese antike griechische Himmelskultur basiert auf dem Marmorglobus der "
+"Atlas Statue in der Villa Farnese (Neapel). Die Statue datiert auf das 2. "
+"Jahrhundert n. Chr., also in römische Zeit. Sie ist aber eine Kopie einer "
+"älteren griechischen Vorlage, die selbst nicht erhalten ist."
 
 #. type: Content of: <p>
 #: ../../skycultures/greek_farnese/description.en.utf8:3
@@ -10483,6 +10488,14 @@ msgid ""
 "provide a four-way division in \"longitude circles\". Ancient globe makers "
 "used this very coarse-meshed grid to adjust the figure drawings."
 msgstr ""
+"Der Marmorglobus bildet nur Figuren ab und keine Sterne. Der Globus hat "
+"einen Durchmesser von etwa 65 cm. Die Figuren wurden nicht nach genauen "
+"Punktkoordinaten ausgerichtet, sondern in einem Gitternetz: Ekliptik, "
+"Himmelsäquator, die Wendekreise und die Polarkreise geben eine Orientierung "
+"hinsichtlich der Lage in \"Breitenkreisen\" auf der Himmelskugel, während "
+"die Kolurkreise eine Vierteilung in \"Längenkreisen\" bieten. Antike "
+"Globenmachen nutzten dieses sehr grobmaschige Netz, um die Figurzeichnungen "
+"zu justieren."
 
 #. type: Content of: <p>
 #: ../../skycultures/greek_farnese/description.en.utf8:4
@@ -10495,6 +10508,14 @@ msgid ""
 "but regularly dismissed: Both mathematical arguments and artistic "
 "representations speak against it."
 msgstr ""
+"Die Abbildungen des Globus zeigen daher klar, dass der Steinmetz, der den "
+"Globus erstellte, das populäre Lehrgedicht von Aratos von Soloi (~300 "
+"v.Chr.) im Kopf hatte. Es gibt keinen Grund für die - oft "
+"populärwissenschaftlich aufgebauschte - Behauptung, dass dieser Marmorglobus"
+" nach dem Sternkatalog von Hipparch gemeißelt worden wäre. Diese These "
+"wurden in den vergangenen ~200 Jahren wiederholt aufgeworfen, jedoch "
+"regelmäßig wieder verworfen: Sowohl mathematische Argumente, als auch "
+"künstlerische Darstellungen sprechen dagegen."
 
 #. type: Content of: <p>
 #: ../../skycultures/greek_farnese/description.en.utf8:6
@@ -10502,6 +10523,8 @@ msgid ""
 "<i>Photograph of the reconstructed statue of the Atlas Farnese (Gabriel "
 "Seah, CC BY-SA-3.0, 9. Juli 2006, Museo Archeologico Nazionale, Naples).</i>"
 msgstr ""
+"<i>Foto der rekonstruierten Statue des Atlas Farnese (Gabriel Seah, CC BY-"
+"SA-3.0, 9. Juli 2006, Museo Archeologico Nazionale, Neapel).</i>"
 
 #. type: Content of: <p>
 #: ../../skycultures/greek_farnese/description.en.utf8:7
@@ -10514,6 +10537,12 @@ msgid ""
 "Therefore, the circumpolar constellations of the two she-bears and parts of "
 "the dragon are missing."
 msgstr ""
+"Erhalten war nur der Torso des Mannes mit abgebrochenen Schultern: alles "
+"unterhalb der Hüfte ist modern ergänzt. In dieser Form hat die Skulptur eine"
+" Höhe von 2,10 m. Die für uns wichtige Skulptur des Globus mit Sternbildern "
+"ist original, hat aber am Nordpol ein großes Loch - vermutlich war sie dort "
+"an anderen Teilen der Architektur verankert. Daher fehlen die zirkumpolaren "
+"Sternbilder der beiden Bärinnen und Teile des Drachen."
 
 #. type: Content of: <h2>
 #: ../../skycultures/greek_farnese/description.en.utf8:9
@@ -10532,6 +10561,14 @@ msgid ""
 "point coordinates), this was done here \"by eye\" - just as by the "
 "historical stonemason."
 msgstr ""
+"Die Abbildungen der einzelnen Figuren wurden als Bleistiftskizze vom "
+"Marmorglobus kopiert. Stellarium arbeitet mit Punkt-Koordinaten für Sterne "
+"im Katalog des Astrometrie-Satelliten HIPPARCOS, so dass die historischen "
+"Zeichnungen an je drei Punkten arretiert werden müssen. Da dies bei "
+"historischen Figuren mitunter zu Verzerrungen führt (der Marmorglobus ist "
+"keine perfekte Kugel, die Figuren wurden nicht nach Punktkoordinaten "
+"eingepasst), geschah dies hier - ebenso wie durch den historischen Steinmetz"
+" - \"nach Augenmaß\"."
 
 #. type: Content of: <p>
 #: ../../skycultures/greek_farnese/description.en.utf8:11
@@ -10541,6 +10578,10 @@ msgid ""
 "reign of the Roman Emperor Hadrian) and - as was customary at the time - was"
 " written in Greek as scientific literature."
 msgstr ""
+"Die Namen der Sternbilder und Einzelsterne fügten wir aus dem Almagest ein, "
+"der ebenfalls ins 2. Jahrhundert datiert (also in die Regentschaft des "
+"römischen Kaisers Hadrian) und - wie damals üblich - als wissenschaftliche "
+"Fachliteratur auf Griechisch geschrieben wurde."
 
 #. type: Content of: <p>
 #: ../../skycultures/greek_farnese/description.en.utf8:12
@@ -10553,6 +10594,13 @@ msgid ""
 "would be covered by the hand of the Atlas statue. There are similar "
 "distortions in the Scorpion."
 msgstr ""
+"Der Marmorglobus war ein dekoratives Element in einem Gebäude, vermutlich "
+"ein besonders aufwändig gestaltetes Kapitell. Er hat keine wissenschaftliche"
+" Genauigkeit. Daher weichen einige Zeichnungen im Relief von den exakten "
+"Sternpositionen des Sternkatalogs ab: z.B. sind die Zwillinge etwas zur "
+"Seite gerückt, um die Figur vollständig darzustellen, obwohl der untere Teil"
+" dieser Himmelsgegend von der Hand der Atlas-Statue verdeckt wäre. Ähnliche "
+"Verzerrungen gibt es beim Skorpion."
 
 #. type: Content of: <p>
 #: ../../skycultures/greek_farnese/description.en.utf8:13
@@ -10560,6 +10608,8 @@ msgid ""
 "The following table lists the original Greek names of the constellations in "
 "columns 2 and 3, and in column 4 the image on the globe."
 msgstr ""
+"Die folgende Tabelle listet in Spalte 2 und 3 die Originalnamen der "
+"Sternbilder auf, in Spalte 4 die Abbildung auf dem Globus."
 
 #. type: Content of: <p><table><tr><td>
 #: ../../skycultures/greek_farnese/description.en.utf8:18
@@ -10599,7 +10649,7 @@ msgstr "fehlt"
 #. type: Content of: <p><table><tr><td>
 #: ../../skycultures/greek_farnese/description.en.utf8:38
 msgid "only the head and one bend are depicted"
-msgstr ""
+msgstr "nur der Kopf und eine Windung sind dargestellt"
 
 #. type: Content of: <p><table><tr><td>
 #: ../../skycultures/greek_farnese/description.en.utf8:43
@@ -10609,12 +10659,12 @@ msgstr "König Kepheus"
 #. type: Content of: <p><table><tr><td>
 #: ../../skycultures/greek_farnese/description.en.utf8:49
 msgid "Ploughing Man"
-msgstr ""
+msgstr "Pflüger"
 
 #. type: Content of: <p><table><tr><td>
 #: ../../skycultures/greek_farnese/description.en.utf8:55
 msgid "Wreath"
-msgstr ""
+msgstr "Kranz"
 
 #. type: Content of: <p><table><tr><td>
 #: ../../skycultures/greek_farnese/description.en.utf8:67
@@ -10681,12 +10731,12 @@ msgstr ""
 #. type: Content of: <p><table><tr><td>
 #: ../../skycultures/greek_farnese/description.en.utf8:199
 msgid "the One with Horns of a Goat"
-msgstr ""
+msgstr "der Ziegengehörnte"
 
 #. type: Content of: <p><table><tr><td>
 #: ../../skycultures/greek_farnese/description.en.utf8:205
 msgid "Water-Pourer"
-msgstr ""
+msgstr "Wasserträger"
 
 #. type: Content of: <p><table><tr><td>
 #: ../../skycultures/greek_farnese/description.en.utf8:211
@@ -10711,7 +10761,7 @@ msgstr "fehlt [verdeckt von der Hand des Atlas]"
 #. type: Content of: <p><table><tr><td>
 #: ../../skycultures/greek_farnese/description.en.utf8:259
 msgid "Watersnake + Crater + Raven"
-msgstr ""
+msgstr "Wasserschlange + Krater + Rabe"
 
 #. type: Content of: <p><table><tr><td>
 #: ../../skycultures/greek_farnese/description.en.utf8:271
@@ -10721,12 +10771,12 @@ msgstr "Ungeheuer"
 #. type: Content of: <p><table><tr><td>
 #: ../../skycultures/greek_farnese/description.en.utf8:283
 msgid "Southern Wreath"
-msgstr ""
+msgstr "Südlicher Kranz"
 
 #. type: Content of: <p><table><tr><td>
 #: ../../skycultures/greek_farnese/description.en.utf8:290
 msgid "missing [covered by the shoulder of Atlas]"
-msgstr "fehlt {verdeckt von der Schulter des Atlas]"
+msgstr "fehlt [verdeckt von der Schulter des Atlas]"
 
 #. type: Content of: <p>
 #: ../../skycultures/greek_farnese/description.en.utf8:298
@@ -15707,6 +15757,13 @@ msgid ""
 "figures they were named after and appeared incomprehensible to beginning "
 "stargazers in the middle of the 20th century."
 msgstr ""
+"Im Laufe des 19. Jahrhunderts kam die Verwendung und weitere Ausgaben von "
+"mit mythologischen Figuren überladenen und aufwendig illustrierten "
+"Sternatlanten aus der Mode. Die Sterne in Atlanten aus dieser Zeit wurden "
+"mit Linienzügen verbunden, die jedoch oft nur andeuten, welche Sterne zu "
+"welchem Sternbild gehören, ohne jedoch der Figur zu folgen. Nach mehreren "
+"Jahrzehnten solcher Atlastradition waren die Linienzüge bis zur Mitte des "
+"20. Jahrhunderts für angehende Sternfreunde völlig unverständlich geworden."
 
 #. type: Content of: <p>
 #: ../../skycultures/modern_rey/description.en.utf8:16
@@ -15750,6 +15807,16 @@ msgid ""
 "spelling used in his book. Also the stars named here are limited to those "
 "included in the book."
 msgstr ""
+"Reys neue Linienzüge erleichtern das Erkennen der Figuren tatsächlich. Rey "
+"hat in seiner Arbeit keine zusätzlichen Bilder verwendet, die Figuren aus "
+"den Linienzügen sprechen für sich. Daher wäre eine Darstellung in "
+"Stellarium, die über die Linienzüge hinaus noch gemalte Figuren zeigte, "
+"nicht angebracht. Rey bestand auch auf die Bezeichnung in der Sprache des "
+"Volkes (USA: Englisch) statt der Verwendung lateinischer Bezeichnungen. Bei "
+"Einstellung der Namensdarstellung auf \"Original\" wird die Schreibweise von"
+" Rey dargestellt: Zu den Sternbildernamen in Blockschrift hat er auch noch "
+"Sternbilderteile erklärend beschriftet. Auch die benannten Sterne sind auf "
+"die im Buch genannten Namen beschränkt."
 
 #. type: Content of: <h2>
 #: ../../skycultures/modern_rey/description.en.utf8:37
@@ -15767,6 +15834,13 @@ msgid ""
 " the stars in their constellations had been described in their names. For "
 "example,"
 msgstr ""
+"Rey hält sich in Anzahl und Benennung im Wesentlichen an die Tradition der "
+"Westlichen Sternsagen und beschreibt die 88 offiziell anerkannten Bilder, "
+"mit Ergänzungen um die beiden Wagen und ein \"Großes Quadrat\" (im Pegasus)."
+" Allerdings weicht seine Sichtweise doch in einigen Fällen sehr markant von "
+"den Bildern ab, die Ptolemäus in seinem Almagest (Mitte des 2. Jh n.Chr.) "
+"durch Bezeichnung der Sternörter wie \"der an der Schulter\", \"Kopf\" etc. "
+"festgelegt hatte. Einige Beispiele:"
 
 #. type: Content of: <p><ul><li>
 #: ../../skycultures/modern_rey/description.en.utf8:47
