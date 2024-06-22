@@ -104,6 +104,8 @@ void StelVideoMgr::loadVideo(const QString& filename, const QString& id, const f
 #else
 	videoObjects[id]->player = new QMediaPlayer(nullptr, QMediaPlayer::VideoSurface);
 	videoObjects[id]->player->setAudioRole(audioEnabled ? QAudio::VideoRole : QAudio::UnknownRole);
+	if (!audioEnabled)
+		videoObjects[id]->player->setMuted(true);
 	videoObjects[id]->resolution=QSize(); // initialize with "invalid" empty resolution, we must detect this when player is starting!
 	videoObjects[id]->targetFrameSize=QSizeF(); // start with invalid, depends on parameters given in playVideo(), playPopoutVideo() and resolution detected only after playing started.
 #endif
