@@ -24,9 +24,8 @@
 
 #include <QMediaPlayer>
 
-StelAudioMgr::StelAudioMgr(bool enable)
+StelAudioMgr::StelAudioMgr(bool enable): enabled(enable)
 {
-	enabled = enable;
 #if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
 	audioOutput=(enabled ? new QAudioOutput() : nullptr);
 #endif

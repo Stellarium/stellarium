@@ -36,10 +36,9 @@
 #endif
 
 
-StelVideoMgr::StelVideoMgr(bool withAudio) : StelModule()
+StelVideoMgr::StelVideoMgr(bool withAudio) : StelModule(), audioEnabled(withAudio)
 {
 	setObjectName("StelVideoMgr");
-	audioEnabled = withAudio;
 #ifdef ENABLE_MEDIA
 	// in case the property has not been set, getProperty() returns invalid.
 	verbose= (qApp->property("verbose") == true);
