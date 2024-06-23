@@ -283,9 +283,9 @@ https://github.com/Stellarium/stellarium/releases
 Do this command in a terminal (if you prefer, you might use arK or some other graphical archive tool): 
 
 ```
-$ tar zxf stellarium-24.1.tar.gz
+$ tar zxf stellarium-24.2.tar.gz
 ```
-You should now have a directory `stellarium-24.1` with the source code in it.
+You should now have a directory `stellarium-24.2` with the source code in it.
 
 
 ### Clone project from GitHub
@@ -324,7 +324,7 @@ GitHub by web.
 
 #### Windows specifics
 
-On Windows save the file (`master.zip` or `stellarium-24.1.tar.gz`) to the `C:/Devel` directory as 
+On Windows save the file (`master.zip` or `stellarium-24.2.tar.gz`) to the `C:/Devel` directory as 
 example. You will need a decompression program installed in Windows, for example [7-Zip](http://www.7-zip.org/). 
 The root of the source tree will be `C:/Devel/stellarium` for simplicity.
 
