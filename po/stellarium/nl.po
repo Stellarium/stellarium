@@ -14,9 +14,9 @@
 # Dirk Devlies <dirk.devlies@telenet.be>, 2022
 # Alexander V. Wolf <alex.v.wolf@gmail.com>, 2023
 # Erwin Dondorp, 2024
-# Alex Rijckaert, 2024
 # alex <alex.a.nder.duy.tschaever@gmail.com>, 2024
 # Harry Mensch, 2024
+# Alex Rijckaert, 2024
 # 
 #, fuzzy
 msgid ""
@@ -25,7 +25,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
 "POT-Creation-Date: 2024-06-09 22:51+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
-"Last-Translator: Harry Mensch, 2024\n"
+"Last-Translator: Alex Rijckaert, 2024\n"
 "Language-Team: Dutch (https://app.transifex.com/stellarium/teams/80998/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2608,7 +2608,7 @@ msgstr "Eclips verduistering"
 
 #: src/core/modules/Planet.cpp:1284
 msgid "Crescent angle"
-msgstr ""
+msgstr "Sikkelhoek"
 
 #: src/core/modules/Planet.cpp:1310
 msgid "Moon/Sun diameter ratio"
@@ -3336,7 +3336,7 @@ msgstr "Voeg 100 kalenderjaren toe"
 
 #: src/core/StelCore.cpp:336
 msgid "Add 1 Great year"
-msgstr ""
+msgstr "Voeg 1 Geweldig jaar toe"
 
 #: src/core/StelCore.cpp:337
 msgid "Subtract 1 sidereal day"
@@ -3428,7 +3428,7 @@ msgstr "Trek 100 kalenderjaren af"
 
 #: src/core/StelCore.cpp:359
 msgid "Subtract 1 Great year"
-msgstr ""
+msgstr "Trek 1 Geweldig jaar af"
 
 #: src/core/StelCore.cpp:361
 msgid "Set home planet to selected planet"
@@ -5846,7 +5846,7 @@ msgstr "temperatuur"
 #: src/gui/StelGuiItems.cpp:920 src/gui/StelGuiItems.cpp:922
 msgctxt "abbreviation"
 msgid "FOV"
-msgstr "FOV"
+msgstr "Gezichtsveld"
 
 #: src/gui/StelGuiItems.cpp:930
 msgid "Field of view"
@@ -7079,7 +7079,7 @@ msgstr "Kaart opslaan als..."
 
 #: src/gui/AstroCalcDialog.cpp:3841
 msgid "KML map (*.kml);;PNG equirectangular map (*.png)"
-msgstr ""
+msgstr "KML map (*.kml);;PNG equirectangular map (*.png)"
 
 #: src/gui/AstroCalcDialog.cpp:3850
 msgid "Failed to open output file"
@@ -7096,7 +7096,7 @@ msgstr "Kon beeld niet opslaan"
 
 #: src/gui/AstroCalcDialog.cpp:3868
 msgid "Failed to save PNG map image"
-msgstr ""
+msgstr "PNG-kaartafbeelding niet opgeslagen"
 
 #: src/gui/AstroCalcDialog.cpp:3905
 msgctxt "column name"
@@ -13604,10 +13604,12 @@ msgstr "Dit landschap als standaard gebruiken"
 #: src/ui_viewDialog.h:4324
 msgid "Set the planet and location as specified for the selected landscape"
 msgstr ""
+"Stel de planeet en locatie in zoals gespecificeerd voor het geselecteerde "
+"landschap"
 
 #: src/ui_viewDialog.h:4326
 msgid "Location from landscape"
-msgstr ""
+msgstr "Locatie in landschapsstijl"
 
 #: src/ui_viewDialog.h:4328
 msgid "Show illumination layer (bright windows, light pollution, etc.)"
@@ -15331,7 +15333,7 @@ msgstr "Exporteer omstandigheden..."
 
 #: src/ui_astroCalcDialog.h:2375
 msgid "Export a visibility map of the selected eclipse"
-msgstr ""
+msgstr "Exporteer een zichtbaarheidskaart van de geselecteerde eclips"
 
 #: src/ui_astroCalcDialog.h:2377
 msgid "Export map..."
@@ -16863,19 +16865,20 @@ msgstr "Uittredepupil van deze verrekijkers"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:887
 msgid "Twilight factor (or dusk index) provided by these binoculars"
-msgstr ""
+msgstr "Schemerfactor (of schemerindex) die deze verrekijker biedt"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:888
 msgid "Relative brightness provided by these binoculars"
-msgstr ""
+msgstr "Relatieve helderheid verstrekt door deze verrekijker"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:889
 msgid "Alan Adler's Index (or Astro Index) provided by these binoculars"
-msgstr ""
+msgstr "Alan Adler's Index (of Astro Index) geleverd door deze verrekijker"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:890
 msgid "Roy Bishop's Index (or Visibility Factor) provided by these binoculars"
 msgstr ""
+"Roy Bishop's Index (of zichtbaarheidsfactor) die deze verrekijker biedt"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:898
 msgid "Magnification provided by this ocular/lens/telescope combination"
@@ -16892,24 +16895,24 @@ msgstr "Uittredepupil van deze oculair/lens/telescoop combinatie"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:925
 msgid "Twilight factor"
-msgstr ""
+msgstr "Schemerfactor"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:931
 msgid "Relative brightness"
-msgstr ""
+msgstr "Relatieve helderheid"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:937
 msgid "Adler index"
-msgstr ""
+msgstr "Adler index"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:943
 msgid "Bishop index"
-msgstr ""
+msgstr "Bishop index"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:953
 msgctxt "field of view"
 msgid "FOV"
-msgstr ""
+msgstr "Gezichtsveld"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:974
 msgid "Rayleigh criterion"
@@ -16954,16 +16957,16 @@ msgstr "Visuele resolutie is gebaseerd op oogeigenschappen en vergroting"
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1039
 msgctxt "Limiting magnitude of device"
 msgid "Limiting magnitude"
-msgstr ""
+msgstr "Grensmagnitude"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1042
 msgid "Approximate limiting magnitude of this binocular"
-msgstr ""
+msgstr "Geschatte grensmagnitude van deze verrekijker"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1044
 msgid ""
 "Approximate limiting magnitude of this ocular/lens/telescope combination"
-msgstr ""
+msgstr "Geschatte grensmagnitude van deze oculair/lenzen/telescoopcombinatie"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:118
 msgid "Cannot delete the last sensor."
@@ -19057,6 +19060,11 @@ msgid ""
 "the standard magnitudes from the database of the MMT-9 observatory (Kazan "
 "Federal University)"
 msgstr ""
+"Om bij benadering de visuele magnitude van satellieten te berekenen "
+"gebruiken we de radardoorsnede (RCS) en standaardmagnituden uit de database "
+"van Mike McCants (met toestemming); de radardoorsnede (RCS) uit de "
+"CelesTrack database; de standaardmagnituden uit de database van het MMT-9 "
+"observatorium (Kazan Federale Universiteit)"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:861
 msgid ""
@@ -19584,6 +19592,8 @@ msgid ""
 "Distance to the center of umbra from Earth's surface (height of imagined "
 "satellite above a spherical Earth)"
 msgstr ""
+"Afstand tot het middelpunt van de kernschaduw vanaf het aardoppervlak "
+"(hoogte van de verbeelde satelliet boven een bolvormige Aarde)"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1235
 msgid "Show umbra/penumbra at altitude:"
@@ -19599,7 +19609,7 @@ msgstr "Kleur voor satellieten in overgang voor Zon of Maan"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1243
 msgid "Hide invisible satellites"
-msgstr ""
+msgstr "Verberg onzichtbare satellieten"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1246
 msgid "Font size for labels"
@@ -19768,6 +19778,10 @@ msgid ""
 "next update if they are not already in the collection. Unmarked entries will"
 " also be fetched to update only previously included satellites."
 msgstr ""
+"Satellieten in de gemarkeerde bronlijsten worden automatisch toegevoegd bij "
+"de volgende update als ze nog niet in de collectie zitten. Niet-gemarkeerde "
+"items worden ook opgehaald om alleen eerder opgenomen satellieten bij te "
+"werken."
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1355
 msgid "Add new source"
@@ -22175,6 +22189,8 @@ msgid ""
 "The 47 navigational stars that are listed in the Nevil Maskelyne's <em>The "
 "British Mariner's Guide</em> published in 1764."
 msgstr ""
+"De 47 navigatiesterren die worden genoemd in Nevil Maskelyne's <em>The "
+"British Mariner's Guide</em> gepubliceerd in 1764."
 
 #: plugins/NavStars/src/NavStars.cpp:395
 msgid ""
@@ -22408,7 +22424,7 @@ msgstr "Frans"
 #. navigational stars
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:247
 msgid "British (XVIII century)"
-msgstr ""
+msgstr "Brits (XVIIIe eeuw)"
 
 #. TRANSLATORS: Part of full phrase: Russian set of navigational stars
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:249
