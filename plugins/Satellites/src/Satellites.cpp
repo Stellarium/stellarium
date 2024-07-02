@@ -197,11 +197,11 @@ void Satellites::init()
 	}
 	else
 	{
-		qDebug() << "[Satellites] satellites.json does not exist - copying default file to " << QDir::toNativeSeparators(catalogPath);
+		qDebug().noquote() << "[Satellites] satellites.json does not exist - copying default file to " << QDir::toNativeSeparators(catalogPath);
 		restoreDefaultCatalog();
 	}
 
-	qDebug() << "[Satellites] loading catalogue file:" << QDir::toNativeSeparators(catalogPath);
+	qDebug().noquote() << "[Satellites] loading catalogue file:" << QDir::toNativeSeparators(catalogPath);
 
 	// create satellites according to content of satellites.json file
 	loadCatalog();

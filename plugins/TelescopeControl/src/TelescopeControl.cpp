@@ -730,7 +730,7 @@ void TelescopeControl::loadTelescopes()
 	}
 	if(!QFileInfo::exists(telescopesJsonPath))
 	{
-		qWarning() << "[TelescopeControl] loadTelescopes(): No telescopes loaded. File is missing:" << QDir::toNativeSeparators(telescopesJsonPath);
+		qWarning().noquote() << "[TelescopeControl] loadTelescopes(): No telescopes loaded. File is missing:" << QDir::toNativeSeparators(telescopesJsonPath);
 		telescopeDescriptions = result;
 		return;
 	}
@@ -741,7 +741,7 @@ void TelescopeControl::loadTelescopes()
 
 	if(!telescopesJsonFile.open(QFile::ReadOnly))
 	{
-		qWarning() << "[TelescopeControl] No telescopes loaded. Can't open for reading" << QDir::toNativeSeparators(telescopesJsonPath);
+		qWarning().noquote() << "[TelescopeControl] No telescopes loaded. Can't open for reading" << QDir::toNativeSeparators(telescopesJsonPath);
 		telescopeDescriptions = result;
 		return;
 	}
