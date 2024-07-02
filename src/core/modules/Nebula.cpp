@@ -1362,6 +1362,51 @@ QString Nebula::getMorphologicalTypeString(void) const
 	return mTypeString;
 }
 
+QString Nebula::getConcentrationClass(QString cc) const
+{
+	QString r = "";
+	static const QStringList glclass = {"I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII"};
+	switch(glclass.indexOf(cc))
+	{
+		case 0:
+			r = qc_("high concentration of stars toward the center", "Shapley-Sawyer Concentration Class");
+			break;
+		case 1:
+			r = qc_("dense central concentration of stars", "Shapley-Sawyer Concentration Class");
+			break;
+		case 2:
+			r = qc_("strong inner core of stars", "Shapley-Sawyer Concentration Class");
+			break;
+		case 3:
+			r = qc_("intermediate rich concentrations of stars", "Shapley-Sawyer Concentration Class");
+			break;
+		case 4:
+		case 5:
+		case 6:
+			r = qc_("intermediate concentrations of stars", "Shapley-Sawyer Concentration Class");
+			break;
+		case 7:
+			r = qc_("rather loose concentration of stars towards the center", "Shapley-Sawyer Concentration Class");
+			break;
+		case 8:
+			r = qc_("loose concentration of stars towards the center", "Shapley-Sawyer Concentration Class");
+			break;
+		case 9:
+			r = qc_("loose concentration of stars", "Shapley-Sawyer Concentration Class");
+			break;
+		case 10:
+			r = qc_("very loose concentration of stars towards the center", "Shapley-Sawyer Concentration Class");
+			break;
+		case 11:
+			r = qc_("almost no concentration towards the center", "Shapley-Sawyer Concentration Class");
+			break;
+		default:
+			r = qc_("undocumented concentration class", "Shapley-Sawyer Concentration Class");
+			break;
+	}
+	return r;
+}
+
 QString Nebula::getMorphologicalTypeDescription(void) const
 {
 	QString m, r = "";
@@ -1371,56 +1416,23 @@ QString Nebula::getMorphologicalTypeDescription(void) const
 	if (nType==NebGx || nType==NebAGx || nType==NebRGx || nType==NebIGx || nType==NebQSO || nType==NebPossQSO || nType==NebBLA || nType==NebBLL || nType==NebGxCl)
 		return QString();
 
-	static const QRegularExpression GlClRx("\\.*(I|II|III|IV|V|VI|VI|VII|VIII|IX|X|XI|XII)\\.*");
+	static const QRegularExpression GlClRx("\\.*(I|II|III|IV|V|VI|VII|VIII|IX|X|XI|XII)\\.*");
 	int idx = mTypeString.indexOf(GlClRx);
 	if (idx>0)
 		m = mTypeString.mid(idx);
 	else
 		m = mTypeString;
 
-	static const QStringList glclass = {"I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII"};
-
 	QRegularExpressionMatch GlClMatch=GlClRx.match(m);
 	if (GlClMatch.hasMatch()) // Globular Clusters
 	{
-		switch(glclass.indexOf(GlClMatch.captured(1).trimmed()))
+		if (m.contains("-")) // middle concentration class
 		{
-			case 0:
-				r = qc_("high concentration of stars toward the center", "Shapley-Sawyer Concentration Class");
-				break;
-			case 1:
-				r = qc_("dense central concentration of stars", "Shapley-Sawyer Concentration Class");
-				break;
-			case 2:
-				r = qc_("strong inner core of stars", "Shapley-Sawyer Concentration Class");
-				break;
-			case 3:
-				r = qc_("intermediate rich concentrations of stars", "Shapley-Sawyer Concentration Class");
-				break;
-			case 4:
-			case 5:
-			case 6:
-				r = qc_("intermediate concentrations of stars", "Shapley-Sawyer Concentration Class");
-				break;
-			case 7:
-				r = qc_("rather loose concentration of stars towards the center", "Shapley-Sawyer Concentration Class");
-				break;
-			case 8:
-				r = qc_("loose concentration of stars towards the center", "Shapley-Sawyer Concentration Class");
-				break;
-			case 9:
-				r = qc_("loose concentration of stars", "Shapley-Sawyer Concentration Class");
-				break;
-			case 10:
-				r = qc_("very loose concentration of stars towards the center", "Shapley-Sawyer Concentration Class");
-				break;
-			case 11:
-				r = qc_("almost no concentration towards the center", "Shapley-Sawyer Concentration Class");
-				break;
-			default:
-				r = qc_("undocumented concentration class", "Shapley-Sawyer Concentration Class");
-				break;
+			QStringList cc = m.split("-");
+			r = QString("%1 -> %2").arg(getConcentrationClass(cc.at(0)), getConcentrationClass(cc.at(1)));
 		}
+		else
+			r = getConcentrationClass(m);
 	}
 
 	static const QRegularExpression OClRx("\\.*(I|II|III|IV)(\\d)(p|m|r)(n*|N*|u*|U*|e*|E*)\\.*");
