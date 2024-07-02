@@ -146,6 +146,10 @@ void TelescopeClientDirectNexStar::telescopeSync(const Vec3d &j2000Pos, StelObje
 	syncReceived(ra_int, dec_int);
 }
 
+void TelescopeClientDirectNexStar::telescopeAbortSlew()
+{
+	nexstar->sendAbort();
+}
 
 void TelescopeClientDirectNexStar::gotoReceived(unsigned int ra_int, int dec_int)
 {

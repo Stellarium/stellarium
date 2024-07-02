@@ -85,7 +85,9 @@ public:
 	// Methods specific to telescope
 	virtual void telescopeGoto(const Vec3d &j2000Pos, StelObjectP selectObject) = 0;
 	virtual void telescopeSync(const Vec3d &j2000Pos, StelObjectP selectObject) = 0;
-	virtual void telescopeAbortSlew() { qWarning() << "Telescope" << getID() << "does not support AbortSlew()!"; }
+	//! Send command to abort slew. Not all telescopes support this, base implementation only gives a warning.
+	//! After abort, the current position should be retrieved and displayed.
+	virtual void telescopeAbortSlew();
 
 	//!
 	//! \brief move

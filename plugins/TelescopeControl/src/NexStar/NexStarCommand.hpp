@@ -80,6 +80,16 @@ private:
 	int ra, dec;
 };
 
+//! Celestron NexStar command: abort a slew.
+class NexStarCommandAbort : public NexStarCommand
+{
+public:
+	NexStarCommandAbort(Server &server) : NexStarCommand(server){};
+	bool writeCommandToBuffer(char *&buff, char *end) override;
+	int readAnswerFromBuffer(const char *&buff, const char *end) const override;
+	void print(QTextStream &o) const override;
+};
+
 //! Celestron NexStar command: Get the current position.
 class NexStarCommandGetRaDec : public NexStarCommand
 {
