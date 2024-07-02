@@ -110,7 +110,17 @@ protected:
 	QString nameI18n;
 	const QString name;
 
-	virtual QString getTelescopeInfoString(const StelCore* core, const InfoStringGroup& flags) const
+   /*!
+    * \brief Get the alt/az in rad from the j2000 position
+    * \param j2000Pos
+    * \param equinox
+    * \param alt [out]
+    * \param az  [out]
+    * \return true/false if successful or not
+    */
+   bool GetAltAzFromJ2000Position(const Vec3d &j2000Pos,TelescopeControl::Equinox equinox,double& alt, double &az) const;
+
+   virtual QString getTelescopeInfoString(const StelCore* core, const InfoStringGroup& flags) const
 	{
 		Q_UNUSED(core)
 		Q_UNUSED(flags)
@@ -231,7 +241,7 @@ private:
 	char writeBuffer[120];
 	char *writeBufferEnd;
 	int time_delay;
-
+   static constexpr int packetLength{28};
 	InterpolatedPosition interpolatedPosition;
 	bool hasKnownPosition(void) const override
 	{
