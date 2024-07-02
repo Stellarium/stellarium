@@ -331,28 +331,10 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 			}			
 			default:			
 			{
-				raAngle = M_PI-d->raAngle;
-				lon = M_PI-lon;
-
-				if (raAngle<0)
-					raAngle+=2.*M_PI;
-
-				if (lon<0)
-					lon+=2.*M_PI;
-
-				if (std::fabs(2.*M_PI-lon)<0.01) // We are at meridian 0
-					lon = 0.;
-
-				if (std::fabs(lon-raAngle) < 0.01)
-					textAngle = -raAngle+M_PI;
-				else
-				{
-					const double delta = raAngle<M_PI ? M_PI : -M_PI;
-					textAngle = -raAngle-delta+M_PI;
-				}
-
 				if (d->frameType==StelCore::FrameFixedEquatorial)
-					textAngle=2.*M_PI-textAngle;
+					textAngle = 2.*M_PI-d->raAngle;
+				else
+					textAngle = d->raAngle;
 
 				if (withDecimalDegree)
 					text = StelUtils::radToDecDegStr(textAngle, 4, false, true);
