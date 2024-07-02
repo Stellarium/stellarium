@@ -561,13 +561,23 @@ void StelApp::init(QSettings* conf)
 	toasts->init();
 	getModuleMgr().registerModule(toasts);
 
-	// Init audio manager
-	SplashScreen::showMessage(q_("Initializing audio..."));
-	audioMgr = new StelAudioMgr();
+	// Init audio manager. When media support is disabled,
+	// we silently create dummy managers.
+#ifdef ENABLE_MEDIA
+	const bool audioOK = !(qApp->property("onetime_no-audio").toBool())
+			&& confSettings->value("audio/enabled", true).toBool();
+#else
+	const bool audioOK = false;
+#endif
+	if (audioOK)
+		SplashScreen::showMessage(q_("Initializing audio..."));
+	audioMgr = new StelAudioMgr(audioOK);
 
 	// Init video manager
+#ifdef ENABLE_MEDIA
 	SplashScreen::showMessage(q_("Initializing video..."));
-	videoMgr = new StelVideoMgr();
+#endif
+	videoMgr = new StelVideoMgr(audioOK);
 	videoMgr->init();
 	getModuleMgr().registerModule(videoMgr);
 

@@ -191,6 +191,8 @@ void CLIProcessor::parseCLIArgsPostConfig(const QStringList& argList, QSettings*
 	{
 		bool dumpOpenGLDetails = argsGetOption(argList, "-d", "--dump-opengl-details");
 		qApp->setProperty("dump_OpenGL_details", dumpOpenGLDetails);
+		bool no_audio = argsGetOption(argList, "", "--no-audio");
+		qApp->setProperty("onetime_no-audio", no_audio);
 		fullScreen = argsGetYesNoOption(argList, "-f", "--full-screen", -1);
 		landscapeId = argsGetOptionWithArg(argList, "", "--landscape", "").toString();
 		homePlanet = argsGetOptionWithArg(argList, "", "--home-planet", "").toString();
