@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2024-06-09 22:51+0700\n"
+"POT-Creation-Date: 2024-07-02 11:50+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -7545,7 +7545,7 @@ msgid "Bright supernova stars"
 msgstr ""
 
 #: src/gui/AstroCalcDialog.cpp:7204 plugins/Pulsars/src/Pulsars.cpp:71
-#: plugins/Pulsars/src/Pulsars.cpp:169 plugins/Pulsars/src/Pulsars.cpp:170
+#: plugins/Pulsars/src/Pulsars.cpp:169
 msgid "Pulsars"
 msgstr ""
 
@@ -13126,7 +13126,8 @@ msgstr ""
 msgid "Displayed fields"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1774 src/ui_configurationDialog.h:1794
+#: src/ui_configurationDialog.h:1774
+msgctxt "hour angle"
 msgid "Equatorial coordinates, equinox of date"
 msgstr ""
 
@@ -13169,6 +13170,11 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1792
 msgid "Velocity"
+msgstr ""
+
+#: src/ui_configurationDialog.h:1794
+msgctxt "right ascension"
+msgid "Equatorial coordinates, equinox of date"
 msgstr ""
 
 #: src/ui_configurationDialog.h:1796
@@ -14842,7 +14848,7 @@ msgid "Color of markers of radio galaxies"
 msgstr ""
 
 #: src/ui_dsoColorsDialog.h:616 plugins/Quasars/src/Quasars.cpp:72
-#: plugins/Quasars/src/Quasars.cpp:171 plugins/Quasars/src/Quasars.cpp:172
+#: plugins/Quasars/src/Quasars.cpp:171
 msgid "Quasars"
 msgstr ""
 
@@ -15533,8 +15539,8 @@ msgstr ""
 #: plugins/Oculars/src/Oculars.cpp:1496
 #: plugins/Satellites/src/Satellites.cpp:167
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:206
-#: plugins/NavStars/src/NavStars.cpp:120 plugins/Quasars/src/Quasars.cpp:172
-#: plugins/Pulsars/src/Pulsars.cpp:170
+#: plugins/NavStars/src/NavStars.cpp:120 plugins/Quasars/src/Quasars.cpp:173
+#: plugins/Pulsars/src/Pulsars.cpp:171
 #: plugins/Exoplanets/src/Exoplanets.cpp:175
 #: plugins/Observability/src/Observability.cpp:198
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:92
@@ -21118,8 +21124,18 @@ msgid ""
 "Nuclei' (13th Ed.) (Veron+ 2010)"
 msgstr ""
 
-#: plugins/Quasars/src/Quasars.cpp:171
+#: plugins/Quasars/src/Quasars.cpp:172
 msgid "Show quasars"
+msgstr ""
+
+#: plugins/Quasars/src/Quasars.cpp:175
+#: plugins/Quasars/src/ui_quasarsDialog.h:266
+msgid "Enable display of distribution for quasars"
+msgstr ""
+
+#: plugins/Quasars/src/Quasars.cpp:176
+#: plugins/Quasars/src/ui_quasarsDialog.h:269
+msgid "Use markers for quasars"
 msgstr ""
 
 #. TRANSLATORS: Jy is Jansky(10-26W/m2/Hz)
@@ -21176,16 +21192,8 @@ msgstr ""
 msgid "Plot all quasars without labels"
 msgstr ""
 
-#: plugins/Quasars/src/ui_quasarsDialog.h:266
-msgid "Enable display of distribution for quasars"
-msgstr ""
-
 #: plugins/Quasars/src/ui_quasarsDialog.h:268
 msgid "Show quasars button on toolbar"
-msgstr ""
-
-#: plugins/Quasars/src/ui_quasarsDialog.h:269
-msgid "Use markers for quasars"
 msgstr ""
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:270
@@ -21199,8 +21207,18 @@ msgid ""
 "about each one."
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsars.cpp:169
+#: plugins/Pulsars/src/Pulsars.cpp:170
 msgid "Show pulsars"
+msgstr ""
+
+#: plugins/Pulsars/src/Pulsars.cpp:173
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:302
+msgid "Enable display of distribution for pulsars"
+msgstr ""
+
+#: plugins/Pulsars/src/Pulsars.cpp:174
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:309
+msgid "Use separate color for pulsars with glitches"
 msgstr ""
 
 #: plugins/Pulsars/src/Pulsar.cpp:191
@@ -21385,10 +21403,6 @@ msgstr ""
 msgid "Plot all pulsars without labels"
 msgstr ""
 
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:302
-msgid "Enable display of distribution for pulsars"
-msgstr ""
-
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:304
 msgid "Show pulsars button on toolbar"
 msgstr ""
@@ -21399,10 +21413,6 @@ msgstr ""
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:307
 msgid "Marker Color for pulsars"
-msgstr ""
-
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:309
-msgid "Use separate color for pulsars with glitches"
 msgstr ""
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:311

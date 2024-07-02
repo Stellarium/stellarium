@@ -667,7 +667,7 @@
              <item row="5" column="0">
               <widget class="QCheckBox" name="checkBoxHourAngle">
                <property name="toolTip">
-                <string>Equatorial coordinates, equinox of date</string>
+                <string comment="hour angle">Equatorial coordinates, equinox of date</string>
                </property>
                <property name="text">
                 <string>Hour angle/Declination</string>
@@ -759,7 +759,7 @@
              <item row="4" column="0">
               <widget class="QCheckBox" name="checkBoxRaDecOfDate">
                <property name="toolTip">
-                <string>Equatorial coordinates, equinox of date</string>
+                <string comment="right ascension">Equatorial coordinates, equinox of date</string>
                </property>
                <property name="text">
                 <string>Right ascension/Declination (of date)</string>

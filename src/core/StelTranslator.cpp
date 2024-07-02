@@ -92,6 +92,8 @@ void StelTranslator::initSystemLanguage()
 	if (pos != -1) systemLangName.resize(pos);
 	pos = systemLangName.indexOf('.', 0);
 	if (pos != -1) systemLangName.resize(pos);
+
+	qWarning().noquote() << "System language (ISO 639 / ISO 3166):" << systemLangName;
 }
 
 

@@ -244,7 +244,7 @@ void TextUserInterface::init()
 					SLOT(setAppLanguage(QString)),
 					StelTranslator::globalTranslator->getAvailableLanguagesNamesNative(StelFileMgr::getLocaleDir()),
 					StelTranslator::iso639_1CodeToNativeName(localeMgr.getAppLanguage()),
-					m3, m3_1);
+					m3, m3_2);
 	m3_1->setNextNode(m3_2);
 	m3_2->setNextNode(m3_3);
 	m3_3->setNextNode(m3_1);

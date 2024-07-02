@@ -680,7 +680,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		const QString secname = sections.at(i);
 		const QString englishName = pd.value(secname+"/name", pd.value(secname+"/iau_designation")).toString();
 		if (englishName.isEmpty())
-			qWarning() << "SSO without proper name found in" << filePath << "section" << secname;
+			qWarning().noquote() << "SSO without proper name found in" << QDir::toNativeSeparators(filePath) << "section" << secname;
 		const QString strParent = pd.value(secname+"/parent", "Sun").toString();
 		// Only for sorting here we must find our own temporary object name. This is similar but not equal to IAU practice, and must be exactly repeated in the next loop in Stage 2a.
 		QString obName=englishName;
@@ -689,7 +689,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		{
 			const QString designation = pd.value(secname+"/iau_designation", pd.value(secname+"/minor_planet_number")).toString();
 			if (designation.isEmpty() && (pd.value(secname+"/type") != "comet"))
-				qWarning() << "Minor body " << englishName << "has incomplete data (missing iau_designation or minor_planet_number) in" << filePath << "section" << secname;
+				qWarning().noquote() << "Minor body " << englishName << "has incomplete data (missing iau_designation or minor_planet_number) in" << QDir::toNativeSeparators(filePath) << "section" << secname;
 			obName=(QString("%1 (%2)").arg(designation, englishName));
 		}
 		if (secNameMap.contains(obName))
