@@ -22,8 +22,6 @@
 
 #include <QObject>
 #include <QtTest>
-#include "precession.h"
-#include "sidereal_time.h"
 
 class TestSiderealTime : public QObject
 {

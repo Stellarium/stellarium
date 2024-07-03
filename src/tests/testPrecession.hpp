@@ -22,7 +22,6 @@
 
 #include <QObject>
 #include <QtTest>
-#include "precession.h"
 
 class TestPrecession : public QObject
 {

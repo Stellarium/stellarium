@@ -447,17 +447,16 @@ void getNutationAngles(const double JDE, double *deltaPsi, double *deltaEpsilon)
 					nut2000Btable.end(),
 					std::pair<double, double>{0.0,0.0},
 					[](std::pair<double, double>sum, std::pair<double, double>addon){
-						return std::pair<double, double>{sum.first+addon.first, sum.second+addon.second };
+						return std::make_pair(sum.first+addon.first, sum.second+addon.second);
 						},
-					[=](struct nut2000B nut){
+					[=](const struct nut2000B &nut){
 						double theta=nut.l_factor*l + nut.ls_factor*ls + nut.F_factor*F + nut.D_factor*D + nut.Omega_factor*Omega;
 						theta *=arcSec2Rad;
 						const double sinTheta=sin(theta);
 						const double cosTheta=cos(theta);
-						return std::pair<double, double>{(nut.B + nut.Bp*t)*cosTheta + nut.Bpp*sinTheta,
-										 (nut.A + nut.Ap*t)*sinTheta + nut.App*cosTheta};
+						return std::make_pair((nut.B + nut.Bp*t)*cosTheta + nut.Bpp*sinTheta,
+								      (nut.A + nut.Ap*t)*sinTheta + nut.App*cosTheta);
 										}
-		//std::plus<>{}
 					);
 		dEpsDPsi.first  *= 1e-7; // convert from units of 0.1uas to arcsec. (The paper says mas, but this is an error!)
 		dEpsDPsi.second *= 1e-7;
