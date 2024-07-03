@@ -149,10 +149,10 @@ SET(stellarium_lib_SRCS
      core/planetsephems/marssat.h
      core/planetsephems/pluto.c
      core/planetsephems/pluto.h
-     core/planetsephems/precession.c
-     core/planetsephems/precession.h
-     core/planetsephems/sidereal_time.c
-     core/planetsephems/sidereal_time.h
+     core/planetsephems/precession.cpp
+     core/planetsephems/precession.hpp
+     core/planetsephems/sidereal_time.cpp
+     core/planetsephems/sidereal_time.hpp
      core/planetsephems/jpl_int.h
      core/planetsephems/jpleph.h
      core/planetsephems/jpleph.cpp

@@ -15,12 +15,9 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 */
-#ifndef PRECESSION_H
-#define PRECESSION_H
+#ifndef PRECESSION_HPP
+#define PRECESSION_HPP
 
-#ifdef __cplusplus
-extern "C" {
-#endif
 
 //! Precession modelled from:
 //! J. Vondrák, N. Capitaine, and P. Wallace: New precession expressions, valid for long time intervals
@@ -68,8 +65,5 @@ double getPrecessionAngleVondrakCurrentEpsilonA(void);
 //! TODO: find out drift rate behaviour e.g. in 17./18. century, maybe use nutation only e.g. 1610-2200?
 void getNutationAngles(const double JDE, double *deltaPsi, double *deltaEpsilon);
 
-#ifdef __cplusplus
-}
-#endif
 
 #endif

@@ -24,7 +24,7 @@
 #include "SolarSystem.hpp"
 #include "StelUtils.hpp"
 #include "StelCore.hpp"
-#include "sidereal_time.h"
+#include "sidereal_time.hpp"
 
 #include <utility>
 #include <QPainter>

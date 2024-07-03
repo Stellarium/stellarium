@@ -38,7 +38,7 @@
 #include "Nebula.hpp"
 #include "StelSkyCultureMgr.hpp"
 #include "StelJsonParser.hpp"
-#include "planetsephems/sidereal_time.h"
+#include "planetsephems/sidereal_time.hpp"
 
 #include <QImage>
 #include <QPainter>

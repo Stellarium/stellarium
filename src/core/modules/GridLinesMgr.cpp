@@ -33,7 +33,7 @@
 #include "StelTextureMgr.hpp"
 #include "StelFileMgr.hpp"
 #include "StelMovementMgr.hpp"
-#include "precession.h"
+#include "precession.hpp"
 
 #include <set>
 #include <vector>

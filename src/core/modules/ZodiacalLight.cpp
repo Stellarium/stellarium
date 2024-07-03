@@ -38,7 +38,6 @@
 #include "StelSkyDrawer.hpp"
 #include "StelPainter.hpp"
 #include "StelTranslator.hpp"
-#include "precession.h"
 
 #include <QDebug>
 #include <QSettings>

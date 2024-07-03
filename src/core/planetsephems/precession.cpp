@@ -31,8 +31,11 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  * This is by far enough for Stellarium as of 2015, but just to make sure I added a few asserts.
  */
 
-#include <math.h>
-#include <assert.h>
+#include <cassert>
+#include <cmath>
+#include <execution>
+#include <numeric>
+#include <vector>
 
 #ifndef M_PI
 #define M_PI 3.14159265358979323846264338327950288
@@ -51,7 +54,7 @@ static double c_psi_A=0.0, c_omega_A=0.0, c_chi_A=0.0, /*c_p_A=0.0, */ c_epsilon
 
 static const double arcSec2Rad=M_PI*2.0/(360.0*3600.0);
 
-static const double PQvals[8][5]=
+static const std::vector<std::vector<double>> PQvals=
 { //  1/Pn         P_A:Cn       Q_A:Cn        P_A:Sn        Q_A:Sn
   { 1.0/ 708.15, -5486.751211, -684.661560,   667.666730, -5523.863691 },
   { 1.0/2309.00,   -17.127623, 2446.283880, -2354.886252,  -549.747450 },
@@ -62,7 +65,7 @@ static const double PQvals[8][5]=
   { 1.0/ 882.00,   -87.676083,  198.296701,  -185.138669,   -34.744450 },
   { 1.0/ 547.00,    46.140315,  101.135679,  -120.972830,    22.885731 }};
 
-static const double XYvals[14][5]=
+static const std::vector<std::vector<double>> XYvals=
 { //  1/Pn          Xa:Cn          Ya:Cn         Xa:Sn         Ya:Sn
   { 1.0/ 256.75,  -819.940624,  75004.344875, 81491.287984,  1558.515853 },
   { 1.0/ 708.15, -8444.676815,    624.033993,   787.163481,  7774.939698 },
@@ -80,7 +83,7 @@ static const double XYvals[14][5]=
   { 1.0/1200.00,    -9.814756,      9.344131,   -44.919798,   -22.899655 }};
 
 
-static const double precVals[18][7]=
+static const std::vector<std::vector<double>> precVals=
 { // 1/Pn         psi_A:Cn       om_A:Cn       chi_A:Cn         psi_A:Sn       om_A:Sn       chi_A:Sn
 
   { 1.0/402.90,  -22206.325946,  1267.727824, -13765.924050,    -3243.236469, -8571.476251,  -2206.967126 },
@@ -102,7 +105,7 @@ static const double precVals[18][7]=
   { 1.0/136.32,       0.0     ,     0.0     ,    585.492621,        0.0     ,     0.0     ,     41.348740 },
   { 1.0/490.00,       0.0     ,     0.0     ,    110.512834,        0.0     ,     0.0     ,    142.525186 }};
 
-static const double p_epsVals[10][5]=
+static const std::vector<std::vector<double>> p_epsVals=
 { //  1/Pn         p_A:Cn     eps_A:Cn        p_A:Sn      eps_A:Sn
   { 1.0/ 409.90, -6908.287473,  753.872780, -2845.175469, -1704.720302},
   { 1.0/ 396.15, -3198.706291, -247.805823,   449.844989,  -862.308358},
@@ -291,7 +294,8 @@ struct nut2000B
 	double Bpp;          // B''[0.1 mas]
 };
 
-static const struct nut2000B nut2000Btable[78] = {
+// 78 elements
+static const std::vector<struct nut2000B> nut2000Btable = {
 {  0,  0,  0,  0,  1, -6798.35, -172064161, -174666, 92052331,  9086,  33386, 15377},
 {  0,  0,  2, -2,  2,   182.62,  -13170906,   -1675,  5730336, -3015, -13696, -4587},
 {  0,  0,  2,  0,  2,    13.66,   -2276413,    -234,   978459,  -485,   2796,  1374},
@@ -412,36 +416,55 @@ void getNutationAngles(const double JDE, double *deltaPsi, double *deltaEpsilon)
 	if (fabs(JDE-c_jdeLastNut)>NUTATION_EPOCH_THRESHOLD)
 	{
 		c_jdeLastNut=JDE;
-		double t=(JDE-2451545.0)/36525.0;
+		const double t=(JDE-2451545.0)/36525.0;
 		// F1 : l = mean anomaly of the Moon ['']
-		double     l  =  (485868.249036 + 1717915923.2178*t);//*arcSec2Rad;
+		const double     l  =  (485868.249036 + 1717915923.2178*t);//*arcSec2Rad;
 		// F2 : l' = mean anomaly of the Sun ['']
-		double     ls = (1287104.79305 + 129596581.0481*t);//*arcSec2Rad;
+		const double     ls = (1287104.79305 + 129596581.0481*t);//*arcSec2Rad;
 		// F3 : F = L - Omega (L is the mean longitude of the Moon)
-		double      F = (335779.526232 + 1739527262.8478*t);//*arcSec2Rad;
+		const double      F = (335779.526232 + 1739527262.8478*t);//*arcSec2Rad;
 		// F4 : D = mean elongation of the Moon from the Sun
-		double      D =  (1072260.70369 + 1602961601.2090*t);//*arcSec2Rad;
+		const double      D =  (1072260.70369 + 1602961601.2090*t);//*arcSec2Rad;
 		// F5 : Omega = mean longitude of the ascending node of the lunar orbit
-		double Omega  = (450160.398036 - 6962890.5431*t);//*arcSec2Rad;
+		const double Omega  = (450160.398036 - 6962890.5431*t);//*arcSec2Rad;
 
-		double deltaEps=0.0, deltaPsi=0.0; // lgtm [cpp/declaration-hides-parameter]
-		int i;
-		for (i=0; i<78; ++i)
-		{
-			const struct nut2000B *nut=&nut2000Btable[i];
-			double theta=nut->l_factor*l + nut->ls_factor*ls + nut->F_factor*F + nut->D_factor*D + nut->Omega_factor*Omega;
-			theta *=arcSec2Rad;
-			double sinTheta=sin(theta);
-			double cosTheta=cos(theta);
-			deltaPsi+=(nut->A + nut->Ap*t)*sinTheta + nut->App*cosTheta;
-			deltaEps+=(nut->B + nut->Bp*t)*cosTheta + nut->Bpp*sinTheta;
-		}
-		deltaPsi *= 1e-7; // convert from units of 0.1uas to arcsec. (The paper says mas, but this is an error!)
-		deltaEps *= 1e-7;
-		deltaPsi -= (0.29965*t + 0.0417750 + 0.0015835);
-		deltaEps -= (0.02524*t + 0.0068192 - 0.0016339);
-		c_deltaPsi = deltaPsi * arcSec2Rad;
-		c_deltaEps = deltaEps * arcSec2Rad;
+		//std::pair<double, double> dEpsDPsi={0.0, 0.0};
+//		double deltaEps=0.0, deltaPsi=0.0; // lgtm [cpp/declaration-hides-parameter]
+//		int i;
+//		for (i=0; i<78; ++i)
+//		{
+//			const struct nut2000B *nut=&nut2000Btable[i];
+//			double theta=nut->l_factor*l + nut->ls_factor*ls + nut->F_factor*F + nut->D_factor*D + nut->Omega_factor*Omega;
+//			theta *=arcSec2Rad;
+//			double sinTheta=sin(theta);
+//			double cosTheta=cos(theta);
+//			deltaPsi+=(nut->A + nut->Ap*t)*sinTheta + nut->App*cosTheta;
+//			deltaEps+=(nut->B + nut->Bp*t)*cosTheta + nut->Bpp*sinTheta;
+//		}
+		std::pair<double, double> dEpsDPsi = std::transform_reduce(
+					std::execution::par,
+					nut2000Btable.begin(),
+					nut2000Btable.end(),
+					std::pair<double, double>{0.0,0.0},
+					[](std::pair<double, double>sum, std::pair<double, double>addon){
+						return std::pair<double, double>{sum.first+addon.first, sum.second+addon.second };
+						},
+					[=](struct nut2000B nut){
+						double theta=nut.l_factor*l + nut.ls_factor*ls + nut.F_factor*F + nut.D_factor*D + nut.Omega_factor*Omega;
+						theta *=arcSec2Rad;
+						const double sinTheta=sin(theta);
+						const double cosTheta=cos(theta);
+						return std::pair<double, double>{(nut.B + nut.Bp*t)*cosTheta + nut.Bpp*sinTheta,
+										 (nut.A + nut.Ap*t)*sinTheta + nut.App*cosTheta};
+										}
+		//std::plus<>{}
+					);
+		dEpsDPsi.first  *= 1e-7; // convert from units of 0.1uas to arcsec. (The paper says mas, but this is an error!)
+		dEpsDPsi.second *= 1e-7;
+		dEpsDPsi.second -= (0.29965*t + 0.0417750 + 0.0015835);
+		dEpsDPsi.first  -= (0.02524*t + 0.0068192 - 0.0016339);
+		c_deltaPsi = dEpsDPsi.second * arcSec2Rad;
+		c_deltaEps = dEpsDPsi.first * arcSec2Rad;
 	}
 	double limiter=1.0;
 	if (JDE<NUT_BEGIN)

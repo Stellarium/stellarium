@@ -18,9 +18,8 @@ Copyright (C) 2015 Georg Zotti (deactivated old IAU-1980 Nutation functions, upd
 
 */
 
-#include <math.h>
-#include <assert.h>
-#include "precession.h"
+#include <cmath>
+#include "precession.hpp"
 
 #ifndef M_PI
 #define M_PI           3.14159265358979323846
@@ -79,9 +78,7 @@ double get_mean_sidereal_time (double JD, double JDE)
 	sidereal *= 1./240.;
 
 	/* add again a convenient multiple of 360 degrees */
-	sidereal = range_degrees (sidereal);
-
-	return sidereal;
+	return range_degrees (sidereal);
 } 
 
 

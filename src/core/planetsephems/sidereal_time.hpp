@@ -18,26 +18,15 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 */
 
-#ifndef STELLASTRO_H
-#define STELLASTRO_H
+#ifndef SIDEREAL_TIME_HPP
+#define SIDEREAL_TIME_HPP
 
-#ifdef __cplusplus
-extern "C" {
-#endif
 
 /* Calculate mean sidereal time (degrees) from date. */
 double get_mean_sidereal_time (double JD, double JDE);
 
 /* Calculate apparent sidereal time (degrees) from date. We need JD(UT) and JDE(TT) here to accurately compute nutation. */
 double get_apparent_sidereal_time (double JD, double JDE);
-/* Calculate mean ecliptical obliquity in degrees. */
-// double get_mean_ecliptical_obliquity(double JDE);
-/* Calculate nutation in longitude in degrees. */
-//double get_nutation_longitude(double JDE);
-
-#ifdef __cplusplus
-}
-#endif
 
 
-#endif /* STELLASTRO_H */
+#endif /* SIDEREAL_TIME_HPP */

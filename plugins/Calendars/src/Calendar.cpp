@@ -24,7 +24,7 @@
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelUtils.hpp"
-#include "precession.h"
+#include "precession.hpp"
 #include "StelModuleMgr.hpp"
 #include "SolarSystem.hpp"
 #include "StelLocationMgr.hpp"
