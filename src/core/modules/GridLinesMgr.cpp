@@ -34,6 +34,7 @@
 #include "StelFileMgr.hpp"
 #include "StelMovementMgr.hpp"
 #include "precession.h"
+#include "StelObjectMgr.hpp"
 
 #include <set>
 #include <vector>
@@ -264,6 +265,8 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 	QString text;
 	if (d->text.isEmpty())
 	{
+		StelObjectMgr* omgr=GETSTELMODULE(StelObjectMgr);
+		omgr->removeExtraInfoStrings(StelObject::DebugAid);
 		// We are in the case of meridians, we need to determine which of the 2 labels (3h or 15h) to use
 		Vec3d tmpV;
 		d->sPainter->getProjector()->unProject(screenPos, tmpV);
@@ -331,10 +334,34 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 			}			
 			default:			
 			{
-				if (d->frameType==StelCore::FrameFixedEquatorial)
-					textAngle = 2.*M_PI-d->raAngle;
+				raAngle = M_PI-d->raAngle;
+				lon = M_PI-lon;
+
+				if (raAngle<0)
+					raAngle+=2.*M_PI;
+
+				if (lon<0)
+					lon+=2.*M_PI;
+
+				omgr->addToExtraInfoString(StelObject::DebugAid, QString("d->raAngle: %1 raAngle: %2 lon: %3<br/>").arg(QString::number(M_180_PI * d->raAngle, 'f', 3), QString::number(M_180_PI * raAngle, 'f', 3), QString::number(M_180_PI * lon, 'f', 3)));
+				if (std::fabs(2.*M_PI-lon)<0.01) // We are at meridian 0
+					lon = 0.;
+
+				if (std::fabs(lon-raAngle) < 0.01)
+				{
+					textAngle = -raAngle+M_PI;
+					omgr->addToExtraInfoString(StelObject::DebugAid, QString("textAngle: %1<br/>").arg(QString::number(M_180_PI * textAngle, 'f', 3)));
+				}
 				else
-					textAngle = d->raAngle;
+				{
+					const double delta = raAngle<M_PI ? M_PI : -M_PI;
+					textAngle = -raAngle-delta+M_PI;
+					omgr->addToExtraInfoString(StelObject::DebugAid, QString("delta: %1 textAngle: %2<br/>").arg(QString::number(M_180_PI * delta, 'f', 3), QString::number(M_180_PI * textAngle, 'f', 3)));
+				}
+
+				if (d->frameType==StelCore::FrameFixedEquatorial)
+					textAngle=2.*M_PI-textAngle;
+
 
 				if (withDecimalDegree)
 					text = StelUtils::radToDecDegStr(textAngle, 4, false, true);
