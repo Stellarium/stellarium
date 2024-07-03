@@ -35,7 +35,7 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 #include <cmath>
 #include <execution>
 #include <numeric>
-#include <vector>
+#include <array>
 
 #ifndef M_PI
 #define M_PI 3.14159265358979323846264338327950288
@@ -54,8 +54,8 @@ static double c_psi_A=0.0, c_omega_A=0.0, c_chi_A=0.0, /*c_p_A=0.0, */ c_epsilon
 
 static const double arcSec2Rad=M_PI*2.0/(360.0*3600.0);
 
-static const std::vector<std::vector<double>> PQvals=
-{ //  1/Pn         P_A:Cn       Q_A:Cn        P_A:Sn        Q_A:Sn
+static const std::array<std::array<double, 5>, 8> PQvals=
+{{ //  1/Pn         P_A:Cn       Q_A:Cn        P_A:Sn        Q_A:Sn
   { 1.0/ 708.15, -5486.751211, -684.661560,   667.666730, -5523.863691 },
   { 1.0/2309.00,   -17.127623, 2446.283880, -2354.886252,  -549.747450 },
   { 1.0/1620.00,  -617.517403,  399.671049,  -428.152441,  -310.998056 },
@@ -63,10 +63,10 @@ static const std::vector<std::vector<double>> PQvals=
   { 1.0/1183.00,    78.614193, -186.387003,   184.778874,   -36.776172 },
   { 1.0/ 622.00,  -180.732815, -316.800070,   335.321713,  -145.278396 },
   { 1.0/ 882.00,   -87.676083,  198.296701,  -185.138669,   -34.744450 },
-  { 1.0/ 547.00,    46.140315,  101.135679,  -120.972830,    22.885731 }};
+  { 1.0/ 547.00,    46.140315,  101.135679,  -120.972830,    22.885731 }}};
 
-static const std::vector<std::vector<double>> XYvals=
-{ //  1/Pn          Xa:Cn          Ya:Cn         Xa:Sn         Ya:Sn
+static const std::array<std::array<double, 5>, 14> XYvals=
+{{ //  1/Pn          Xa:Cn          Ya:Cn         Xa:Sn         Ya:Sn
   { 1.0/ 256.75,  -819.940624,  75004.344875, 81491.287984,  1558.515853 },
   { 1.0/ 708.15, -8444.676815,    624.033993,   787.163481,  7774.939698 },
   { 1.0/ 274.20,  2600.009459,   1251.136893,  1251.296102, -2219.534038 },
@@ -80,11 +80,11 @@ static const std::vector<std::vector<double>> XYvals=
   { 1.0/ 620.00,  -189.793622,    558.116553,   524.429630,   235.934465 },
   { 1.0/ 157.87,  -402.922932,    -23.923029,   -13.549067,   374.049623 },
   { 1.0/ 220.30,   179.516345,   -165.405086,  -210.157124,  -171.330180 },
-  { 1.0/1200.00,    -9.814756,      9.344131,   -44.919798,   -22.899655 }};
+  { 1.0/1200.00,    -9.814756,      9.344131,   -44.919798,   -22.899655 }}};
 
 
-static const std::vector<std::vector<double>> precVals=
-{ // 1/Pn         psi_A:Cn       om_A:Cn       chi_A:Cn         psi_A:Sn       om_A:Sn       chi_A:Sn
+static const std::array<std::array<double, 7>, 18> precVals=
+{{ // 1/Pn         psi_A:Cn       om_A:Cn       chi_A:Cn         psi_A:Sn       om_A:Sn       chi_A:Sn
 
   { 1.0/402.90,  -22206.325946,  1267.727824, -13765.924050,    -3243.236469, -8571.476251,  -2206.967126 },
   { 1.0/256.75,   12236.649447,  1702.324248,  13511.858383,    -3969.723769,  5309.796459,  -4186.752711 },
@@ -103,10 +103,10 @@ static const std::vector<std::vector<double>> precVals=
   { 1.0/202.00,       0.0     ,     0.0     ,    327.517465,        0.0     ,     0.0     ,  -1049.071786 },
   { 1.0/315.00,       0.0     ,     0.0     ,   -494.780332,        0.0     ,     0.0     ,   -301.504189 },
   { 1.0/136.32,       0.0     ,     0.0     ,    585.492621,        0.0     ,     0.0     ,     41.348740 },
-  { 1.0/490.00,       0.0     ,     0.0     ,    110.512834,        0.0     ,     0.0     ,    142.525186 }};
+  { 1.0/490.00,       0.0     ,     0.0     ,    110.512834,        0.0     ,     0.0     ,    142.525186 }}};
 
-static const std::vector<std::vector<double>> p_epsVals=
-{ //  1/Pn         p_A:Cn     eps_A:Cn        p_A:Sn      eps_A:Sn
+static const std::array<std::array<double, 5>, 10> p_epsVals=
+{{ //  1/Pn         p_A:Cn     eps_A:Cn        p_A:Sn      eps_A:Sn
   { 1.0/ 409.90, -6908.287473,  753.872780, -2845.175469, -1704.720302},
   { 1.0/ 396.15, -3198.706291, -247.805823,   449.844989,  -862.308358},
   { 1.0/ 537.22,  1453.674527,  379.471484, -1255.915323,   447.832178},
@@ -116,7 +116,7 @@ static const std::vector<std::vector<double>> p_epsVals=
   { 1.0/4043.00,   371.836550,  -63.115353,  -240.979710,  -296.222622},
   { 1.0/ 306.00,  -216.619040,  -28.248187,    76.541307,   -75.859952},
   { 1.0/ 277.00,   193.691479,   17.703387,   -36.788069,    67.473503},
-  { 1.0/ 203.00,    11.891524,   38.911307,  -170.964086,     3.014055}};
+  { 1.0/ 203.00,    11.891524,   38.911307,  -170.964086,     3.014055}}};
 
 // compute angles for the series we are in fact using.
 // jde: date JD_TT
@@ -128,53 +128,89 @@ void getPrecessionAnglesVondrak(const double jde, double *epsilon_A, double *chi
 		c_lastJDE=jde;
 		double T=(jde-2451545.0)* (1.0/36525.0); // Julian centuries from J2000.0
 		assert(fabs(T)<=2000); // MAKES SURE YOU NEVER OVERSTRETCH THIS!
-		double T2pi= T*(2.0*M_PI); // Julian centuries from J2000.0, premultiplied by 2Pi
+		const double T2pi= T*(2.0*M_PI); // Julian centuries from J2000.0, premultiplied by 2Pi
 		// these are actually small greek letters in the papers.
-		double Psi_A=0.0;
-		double Omega_A=0.0;
-		double Chi_A=0.0;
-		double Epsilon_A=0.0;
-		//double p_A=0.0; // currently unused. The data don't disturb.
-		int i;
-		for (i=0; i<18; ++i)
-		{
-			double invP=precVals[i][0];
-			double sin2piT_P, cos2piT_P;
-#ifdef _GNU_SOURCE
-			sincos(T2pi*invP, &sin2piT_P, &cos2piT_P);
-#else
-			double phase=T2pi*invP;
-			sin2piT_P= sin(phase);
-			cos2piT_P= cos(phase);
-#endif
-			Psi_A   += precVals[i][1]*cos2piT_P + precVals[i][4]*sin2piT_P;
-			Omega_A += precVals[i][2]*cos2piT_P + precVals[i][5]*sin2piT_P;
-			Chi_A   += precVals[i][3]*cos2piT_P + precVals[i][6]*sin2piT_P;
-		}
+//		double Psi_A=0.0;
+//		double Omega_A=0.0;
+//		double Chi_A=0.0;
+//		int i;
+//		for (i=0; i<18; ++i)
+//		{
+//			double invP=precVals[i][0];
+//			double sin2piT_P, cos2piT_P;
+//#ifdef _GNU_SOURCE
+//			sincos(T2pi*invP, &sin2piT_P, &cos2piT_P);
+//#else
+//			double phase=T2pi*invP;
+//			sin2piT_P= sin(phase);
+//			cos2piT_P= cos(phase);
+//#endif
+//			Psi_A   += precVals[i][1]*cos2piT_P + precVals[i][4]*sin2piT_P;
+//			Omega_A += precVals[i][2]*cos2piT_P + precVals[i][5]*sin2piT_P;
+//			Chi_A   += precVals[i][3]*cos2piT_P + precVals[i][6]*sin2piT_P;
+//		}
+		std::array<double, 3>Psi_Omega_Chi_A = std::transform_reduce(
+					precVals.begin(), precVals.end(), std::array<double, 3>({0.0, 0.0, 0.0}),
+					[](std::array<double, 3>sum, std::array<double, 3>addon){sum[0] += addon[0]; sum[1] += addon[1]; sum[2] += addon[2]; return sum;},
+					[=](const std::array<double, 7>&precVal){
+						const double invP=precVal[0];
+						double sin2piT_P, cos2piT_P;
+			#ifdef _GNU_SOURCE
+						sincos(T2pi*invP, &sin2piT_P, &cos2piT_P);
+			#else
+						double phase=T2pi*invP;
+						sin2piT_P= sin(phase);
+						cos2piT_P= cos(phase);
+			#endif
+						// return one summand of Psi_Omega_Chi_A
+						return std::array<double, 3>({  precVal[1]*cos2piT_P + precVal[4]*sin2piT_P,
+										precVal[2]*cos2piT_P + precVal[5]*sin2piT_P,
+										precVal[3]*cos2piT_P + precVal[6]*sin2piT_P});
+					}
+		);
 
-		for (i=0; i<10; ++i)
-		{
-			double invP=p_epsVals[i][0];
-			double sin2piT_P, cos2piT_P;
-#ifdef _GNU_SOURCE
-			sincos(T2pi*invP, &sin2piT_P, &cos2piT_P);
-#else
-			double phase=T2pi*invP;
-			sin2piT_P= sin(phase);
-			cos2piT_P= cos(phase);
-#endif
-			//p_A       += p_epsVals[i][1]*cos2piT_P + p_epsVals[i][3]*sin2piT_P;
-			Epsilon_A += p_epsVals[i][2]*cos2piT_P + p_epsVals[i][4]*sin2piT_P;
-		}
 
-		Psi_A     += (( 289.e-9*T - 0.00740913)*T + 5042.7980307)*T +  8473.343527;
-		Omega_A   += (( 151.e-9*T + 0.00000146)*T -    0.4436568)*T + 84283.175915;
-		Chi_A     += (( -61.e-9*T + 0.00001472)*T +    0.0790159)*T -    19.657270;
+		//double p_A=0.0; // currently unused. The data don't critically disturb. We could modify this into returning a pair.
+//		double Epsilon_A=0.0;
+//		for (i=0; i<10; ++i)
+//		{
+//			double invP=p_epsVals[i][0];
+//			double sin2piT_P, cos2piT_P;
+//#ifdef _GNU_SOURCE
+//			sincos(T2pi*invP, &sin2piT_P, &cos2piT_P);
+//#else
+//			double phase=T2pi*invP;
+//			sin2piT_P= sin(phase);
+//			cos2piT_P= cos(phase);
+//#endif
+//			//p_A       += p_epsVals[i][1]*cos2piT_P + p_epsVals[i][3]*sin2piT_P;
+//			Epsilon_A += p_epsVals[i][2]*cos2piT_P + p_epsVals[i][4]*sin2piT_P;
+//		}
+		double Epsilon_A = std::transform_reduce(p_epsVals.begin(), p_epsVals.end(), 0.,
+							 std::plus<>(),
+							 [=](const std::array<double, 5>&p_epsVal){
+								const double invP=p_epsVal[0];
+								double sin2piT_P, cos2piT_P;
+						#ifdef _GNU_SOURCE
+								sincos(T2pi*invP, &sin2piT_P, &cos2piT_P);
+						#else
+								const double phase=T2pi*invP;
+								sin2piT_P= sin(phase);
+								cos2piT_P= cos(phase);
+						#endif
+								//p_A       += p_epsVal[1]*cos2piT_P + p_epsVal[3]*sin2piT_P; // summand of p_A
+								return p_epsVal[2]*cos2piT_P + p_epsVal[4]*sin2piT_P; // summand of Epsilon_A
+							 }
+							);
+
+		Psi_Omega_Chi_A[0]     += (( 289.e-9*T - 0.00740913)*T + 5042.7980307)*T +  8473.343527;
+		Psi_Omega_Chi_A[1]     += (( 151.e-9*T + 0.00000146)*T -    0.4436568)*T + 84283.175915;
+		Psi_Omega_Chi_A[2]     += (( -61.e-9*T + 0.00001472)*T +    0.0790159)*T -    19.657270;
 		//p_A       += ((271.e-9*T - 0.00710733)*T + 5043.0520035)*T +  8134.017132;
 		Epsilon_A += ((-110.e-9*T - 0.00004039)*T +    0.3624445)*T + 84028.206305;
-		c_psi_A     = arcSec2Rad*Psi_A;
-		c_omega_A   = arcSec2Rad*Omega_A;
-		c_chi_A     = arcSec2Rad*Chi_A;
+		c_psi_A     = arcSec2Rad*Psi_Omega_Chi_A[0];
+		c_omega_A   = arcSec2Rad*Psi_Omega_Chi_A[1];
+		c_chi_A     = arcSec2Rad*Psi_Omega_Chi_A[2];
 		// c_p_A     = arcSec2Rad*p_A;
 		c_epsilon_A = arcSec2Rad*Epsilon_A;
 	}
@@ -193,65 +229,81 @@ void getPrecessionAnglesVondrakPQXYe(const double jde, double *vP_A, double *vQ_
 		assert(fabs(T)<=2000); // MAKES SURE YOU NEVER OVERSTRETCH THIS!
 		double T2pi= T*(2.0*M_PI); // Julian centuries from J2000.0, premultiplied by 2Pi
 		// these are actually small greek letters in the papers.
-		double P_A=0.0;
-		double Q_A=0.0;
-		double X_A=0.0;
-		double Y_A=0.0;
-		double Epsilon_A=0.0;
-		int i;
-		for (i=0; i<8; ++i)
-		{
-			double invP=PQvals[i][0];
-			double sin2piT_P, cos2piT_P;
-#ifdef _GNU_SOURCE
-			sincos(T2pi*invP, &sin2piT_P, &cos2piT_P);
-#else
-			double phase=T2pi*invP;
-			sin2piT_P= sin(phase);
-			cos2piT_P= cos(phase);
-#endif
-			P_A += PQvals[i][1]*cos2piT_P + PQvals[i][3]*sin2piT_P;
-			Q_A += PQvals[i][2]*cos2piT_P + PQvals[i][4]*sin2piT_P;
-		}
-		for (i=0; i<14; ++i)
-		{
-			double invP=XYvals[i][0];
-			double sin2piT_P, cos2piT_P;
-#ifdef _GNU_SOURCE
-			sincos(T2pi*invP, &sin2piT_P, &cos2piT_P);
-#else
-			double phase=T2pi*invP;
-			sin2piT_P= sin(phase);
-			cos2piT_P= cos(phase);
-#endif
-			X_A += XYvals[i][1]*cos2piT_P + XYvals[i][3]*sin2piT_P;
-			Y_A += XYvals[i][2]*cos2piT_P + XYvals[i][4]*sin2piT_P;
-		}
-		for (i=0; i<10; ++i)
-		{
-			double invP=p_epsVals[i][0];
-			double sin2piT_P, cos2piT_P;
-#ifdef _GNU_SOURCE
-			sincos(T2pi*invP, &sin2piT_P, &cos2piT_P);
-#else
-			double phase=T2pi*invP;
-			sin2piT_P= sin(phase);
-			cos2piT_P= cos(phase);
-#endif
-			//p_A       += p_epsVals[i][1]*cos2piT_P + p_epsVals[i][3]*sin2piT_P;
-			Epsilon_A += p_epsVals[i][2]*cos2piT_P + p_epsVals[i][4]*sin2piT_P;
-		}
+//		double P_A=0.0;
+//		double Q_A=0.0;
+//		double X_A=0.0;
+//		double Y_A=0.0;
+//		double Epsilon_A=0.0;
+//		int i;
+//		for (i=0; i<8; ++i)
+		std::pair<double, double>P_Q_A =
+			std::transform_reduce(PQvals.begin(), PQvals.end(), std::pair<double, double>({0.0, 0.0}),
+					     [](std::pair<double, double>sum, std::pair<double, double>addon){
+						return std::make_pair(sum.first+addon.first, sum.second+addon.second);
+					     },
+					[=](const std::array<double, 5>&PQval){
+						const double invP=PQval[0];
+			#ifdef _GNU_SOURCE
+						double sin2piT_P, cos2piT_P;
+						sincos(T2pi*invP, &sin2piT_P, &cos2piT_P);
+			#else
+						const double phase=T2pi*invP;
+						const double sin2piT_P= sin(phase);
+						const double cos2piT_P= cos(phase);
+			#endif
+						return std::make_pair( PQval[1]*cos2piT_P + PQval[3]*sin2piT_P,
+								       PQval[2]*cos2piT_P + PQval[4]*sin2piT_P);
+					}
+					);
+
+
+		//for (i=0; i<14; ++i)
+		std::pair<double, double>X_Y_A =
+			std::transform_reduce(XYvals.begin(), XYvals.end(), std::pair<double, double>({0.0, 0.0}),
+					[](std::pair<double, double>sum, std::pair<double, double>addon){
+						return std::make_pair(sum.first+addon.first, sum.second+addon.second);
+					},
+					[=](const std::array<double, 5>&XYval){
+						const double invP=XYval[0];
+			#ifdef _GNU_SOURCE
+						double sin2piT_P, cos2piT_P;
+						sincos(T2pi*invP, &sin2piT_P, &cos2piT_P);
+			#else
+						const double phase=T2pi*invP;
+						const double sin2piT_P= sin(phase);
+						const double cos2piT_P= cos(phase);
+			#endif
+						return std::make_pair(  XYval[1]*cos2piT_P + XYval[3]*sin2piT_P,
+									XYval[2]*cos2piT_P + XYval[4]*sin2piT_P);
+					    });
+//		for (i=0; i<10; ++i)
+		double Epsilon_A =
+			std::transform_reduce(p_epsVals.begin(), p_epsVals.end(), 0.0,
+					      std::plus<>(),
+					      [=](const std::array<double, 5>&p_epsVal){
+						const double invP=p_epsVal[0];
+			#ifdef _GNU_SOURCE
+						double sin2piT_P, cos2piT_P;
+						sincos(T2pi*invP, &sin2piT_P, &cos2piT_P);
+			#else
+						const double phase=T2pi*invP;
+						const double sin2piT_P= sin(phase);
+						const double cos2piT_P= cos(phase);
+			#endif
+						//p_A       += p_epsVals[i][1]*cos2piT_P + p_epsVals[i][3]*sin2piT_P;
+						return p_epsVal[2]*cos2piT_P + p_epsVal[4]*sin2piT_P; // one summand of Epsilon_A
+					});
 
 		// Now the polynomial terms in T. Horner's scheme is best again.
-		P_A       += (( 110.e-9*T - 0.00028913)*T -    0.1189000)*T +  5851.607687;
-		Q_A       += ((-437.e-9*T - 0.00000020)*T +    1.1689818)*T -  1600.886300;
-		X_A       += ((-152.e-9*T - 0.00037173)*T +    0.4252841)*T +  5453.282155;
-		Y_A       += ((+231.e-9*T - 0.00018725)*T -    0.7675452)*T - 73750.930350;
+		P_Q_A.first       += (( 110.e-9*T - 0.00028913)*T -    0.1189000)*T +  5851.607687;
+		P_Q_A.second      += ((-437.e-9*T - 0.00000020)*T +    1.1689818)*T -  1600.886300;
+		X_Y_A.first       += ((-152.e-9*T - 0.00037173)*T +    0.4252841)*T +  5453.282155;
+		X_Y_A.second      += ((+231.e-9*T - 0.00018725)*T -    0.7675452)*T - 73750.930350;
 		Epsilon_A += (( 110.e-9*T - 0.00004039)*T +    0.3624445)*T + 84028.206305;
-		c_P_A       = arcSec2Rad*P_A;
-		c_Q_A       = arcSec2Rad*Q_A;
-		c_X_A       = arcSec2Rad*X_A;
-		c_Y_A       = arcSec2Rad*Y_A;
+		c_P_A       = arcSec2Rad*P_Q_A.first;
+		c_Q_A       = arcSec2Rad*P_Q_A.second;
+		c_X_A       = arcSec2Rad*X_Y_A.first;
+		c_Y_A       = arcSec2Rad*X_Y_A.second;
 		c_epsilon_A = arcSec2Rad*Epsilon_A;
 	}
 	*vP_A       = c_P_A;
@@ -295,7 +347,7 @@ struct nut2000B
 };
 
 // 78 elements
-static const std::vector<struct nut2000B> nut2000Btable = {
+static const std::array<struct nut2000B, 78> nut2000Btable = {{
 {  0,  0,  0,  0,  1, -6798.35, -172064161, -174666, 92052331,  9086,  33386, 15377},
 {  0,  0,  2, -2,  2,   182.62,  -13170906,   -1675,  5730336, -3015, -13696, -4587},
 {  0,  0,  2,  0,  2,    13.66,   -2276413,    -234,   978459,  -485,   2796,  1374},
@@ -376,7 +428,7 @@ static const std::vector<struct nut2000B> nut2000Btable = {
 { -1,  0,  0,  0,  2,   -27.33,       1405,       0,     -610,     0,      4,     2},
 {  1,  1,  2, -2,  2,    22.47,       1290,       0,     -556,     0,      0,     0},
 { -2,  0,  2,  4,  2,     7.35,      -1214,       0,      518,     0,      5,     2},
-{ -1,  0,  4,  0,  2,     9.06,       1146,       0,     -490,     0,     -3,    -1}};
+{ -1,  0,  4,  0,  2,     9.06,       1146,       0,     -490,     0,     -3,    -1}}};
 
 /* cache results for retrieval if recomputation is not required */
 static double c_deltaEps=0.0;
