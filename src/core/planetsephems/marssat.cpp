@@ -348,44 +348,44 @@ static void CalcMarsSatElem(double t,int body,double elem[6]) {
     const struct MarsSatBody *bp = mars_sat_bodies + body;
     memcpy(elem, bp->constants, 6*sizeof(double));
 
-    for (j=0;j<2;j++) {
-        const struct MarsSatTerm *const begin = bp->lists[j].terms;
-        const struct MarsSatTerm *p = begin + bp->lists[j].size;
-        while (--p >= begin) {
-            const double d = p->phase + t*p->frequency;
-            elem[j] += p->amplitude * cos(d);
-        }
-    }
+//    for (j=0;j<2;j++) {
+//        const struct MarsSatTerm *const begin = bp->lists[j].terms;
+//        const struct MarsSatTerm *p = begin + bp->lists[j].size;
+//        while (--p >= begin) {
+//            const double d = p->phase + t*p->frequency;
+//            elem[j] += p->amplitude * cos(d);
+//        }
+//    }
 
-    /* HOW TO CONFIGURE THE BEGIN/END ITERATORS?
+    // TODO: The summing should be backwards to avoid rounding issues!
     for (j=0;j<2;j++) {
         elem[j] += std::transform_reduce(
                        std::execution::par,
-                       bp->lists[j].terms[0], bp->lists[j].terms[bp->lists[j].size], 0.0,
+                       bp->lists[j].terms, bp->lists[j].terms + bp->lists[j].size, 0.0,
                        std::plus<>(),
                        [=](const struct MarsSatTerm &trm){
                         const double d = trm.phase + t*trm.frequency;
                         return trm.amplitude * cos(d);
                         });
     }
-    */
 
-    for (j=2;j<4;j++) {
-        const struct MarsSatTerm *const begin = bp->lists[j].terms;
-        const struct MarsSatTerm *p = begin + bp->lists[j].size;
-        while (--p >= begin) {
-            const double d = p->phase + t*p->frequency;
-            elem[2*j-2] += p->amplitude * cos(d);
-            elem[2*j-1] += p->amplitude * sin(d);
-        }
-    }
 
-    /* HOW TO CONFIGURE THE BEGIN/END ITERATORS?
+//    for (j=2;j<4;j++) {
+//        const struct MarsSatTerm *const begin = bp->lists[j].terms;
+//        const struct MarsSatTerm *p = begin + bp->lists[j].size;
+//        while (--p >= begin) {
+//            const double d = p->phase + t*p->frequency;
+//            elem[2*j-2] += p->amplitude * cos(d);
+//            elem[2*j-1] += p->amplitude * sin(d);
+//        }
+//    }
+
+    // TODO: The summing should be backwards to avoid rounding issues!
     for (j=2;j<4;j++) {
         std::pair<double, double>el3456_add=
                 std::transform_reduce(
                     std::execution::par,
-                    bp->lists[j].terms[0], bp->lists[j].terms[bp->lists[j].size],
+                    bp->lists[j].terms, bp->lists[j].terms+bp->lists[j].size,
                     std::pair<double, double>({0.0, 0.0}),
                     [](const std::pair<double, double>&sum, const std::pair<double, double>&addon){
                         return std::make_pair(sum.first+addon.first, sum.second+addon.second);
@@ -397,7 +397,6 @@ static void CalcMarsSatElem(double t,int body,double elem[6]) {
         elem[2*j-2] += el3456_add.first;
         elem[2*j-1] += el3456_add.second;
     }
-    */
 
     elem[1] += (bp->l + bp->acc * t) * t;
 }
@@ -499,14 +498,14 @@ void GetMarsSatOsculatingCoor(const double jd0,const double jd,
          + mars_sat_to_vsop87[8]*x[2];
   // GZ This is a guess, based on the structure of other operations...
   xyz[3] = mars_sat_to_vsop87[0]*x[3]
-	 + mars_sat_to_vsop87[1]*x[4]
-	 + mars_sat_to_vsop87[2]*x[5];
+         + mars_sat_to_vsop87[1]*x[4]
+         + mars_sat_to_vsop87[2]*x[5];
   xyz[4] = mars_sat_to_vsop87[3]*x[3]
-	 + mars_sat_to_vsop87[4]*x[4]
-	 + mars_sat_to_vsop87[5]*x[5];
+         + mars_sat_to_vsop87[4]*x[4]
+         + mars_sat_to_vsop87[5]*x[5];
   xyz[5] = mars_sat_to_vsop87[6]*x[3]
-	 + mars_sat_to_vsop87[7]*x[4]
-	 + mars_sat_to_vsop87[8]*x[5];
+         + mars_sat_to_vsop87[7]*x[4]
+         + mars_sat_to_vsop87[8]*x[5];
 /*
   printf("%d %18.9lf %15.12lf %15.12lf %15.12lf\n",
          body,jd,xyz[0],xyz[1],xyz[2]);
