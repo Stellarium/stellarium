@@ -24,7 +24,7 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 #include "vsop87.h"
 #include "elp82b.h"
 #include "marssat.h"
-#include "l12.h"
+#include "l12.hpp"
 #include "tass17.h"
 #include "gust86.h"
 #include "de431.hpp"
