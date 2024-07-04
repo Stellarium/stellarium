@@ -31,8 +31,8 @@
 #include "de431.hpp"
 #include "de440.hpp"
 #include "de441.hpp"
-#include "l12.h"
-#include "marssat.h"
+#include "l12.hpp"
+#include "marssat.hpp"
 #include "htc20b.h"
 #include "gust86.h"
 

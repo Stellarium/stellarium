@@ -24,6 +24,7 @@ For documentation see the header file.
 
 ****************************************************************/
 
+#include <string.h>
 #include "calc_interpolated_elements.h"
 
 void CalcInterpolatedElements(const double t,double elem[],
@@ -44,7 +45,7 @@ printf("CalcInterpolatedElements: %12.9f %12.9f %12.9f %12.9f\n",t,*t0,*t1,*t2);
     *t2 = -1e100;
     *t1 = t;
     (*calc_func)(*t1,e1,user);
-    for (i=0;i<dim;i++) elem[i] = e1[i];
+    memcpy_s(&elem[0], dim*sizeof(double), &e1[0], dim*sizeof(double));
     return;
   }
   if (t <= *t1) {
@@ -59,7 +60,8 @@ printf("CalcInterpolatedElements: %12.9f %12.9f %12.9f %12.9f\n",t,*t0,*t1,*t2);
         (*calc_func)(*t0,e0,user);
       }
       *t2 = *t1;*t1 = *t0;
-      for (i=0;i<dim;i++) {e2[i] = e1[i];e1[i] = e0[i];}
+      memcpy_s(&e2[0], dim*sizeof(double), &e1[0], dim*sizeof(double));
+      memcpy_s(&e1[0], dim*sizeof(double), &e0[0], dim*sizeof(double));
       *t0 = *t1 - delta_t;
       (*calc_func)(*t0,e0,user);
     } else {
@@ -67,7 +69,7 @@ printf("CalcInterpolatedElements: %12.9f %12.9f %12.9f %12.9f\n",t,*t0,*t1,*t2);
       *t2 = -1e100;
       *t1 = t;
       (*calc_func)(*t1,e1,user);
-      for (i=0;i<dim;i++) elem[i] = e1[i];
+      memcpy_s(&elem[0], dim*sizeof(double), &e1[0], dim*sizeof(double));
       return;
     }
     {
@@ -88,7 +90,8 @@ printf("CalcInterpolatedElements: %12.9f %12.9f %12.9f %12.9f\n",t,*t0,*t1,*t2);
         (*calc_func)(*t2,e2,user);
       }
       *t0 = *t1;*t1 = *t2;
-      for (i=0;i<dim;i++) {e0[i] = e1[i];e1[i] = e2[i];}
+      memcpy_s(&e0[0], dim*sizeof(double), &e1[0], dim*sizeof(double));
+      memcpy_s(&e1[0], dim*sizeof(double), &e2[0], dim*sizeof(double));
       *t2 = *t1 + delta_t;
       (*calc_func)(*t2,e2,user);
     } else {
@@ -96,7 +99,7 @@ printf("CalcInterpolatedElements: %12.9f %12.9f %12.9f %12.9f\n",t,*t0,*t1,*t2);
       *t2 = -1e100;
       *t1 = t;
       (*calc_func)(*t1,e1,user);
-      for (i=0;i<dim;i++) elem[i] = e1[i];
+      memcpy_s(&elem[0], dim*sizeof(double), &e1[0], dim*sizeof(double));
       return;
     }
     {

@@ -48,12 +48,16 @@ in MarsSatV1-0.f are
 
 ****************************************************************/
 
-#include "marssat.h"
+#include "marssat.hpp"
 #include "calc_interpolated_elements.h"
 #include "elliptic_to_rectangular.h"
 
-#include <math.h>
-#include <string.h> /* memcpy */
+#include <array>
+#include <cmath>
+#include <execution>
+#include <iterator>
+#include <numeric>
+//#include <string.h> /* memcpy */
 
 #ifndef M_PI
 #define M_PI           3.14159265358979323846
@@ -74,9 +78,10 @@ struct MarsSatBody {
   double mu,l,acc;
   double constants[6];
   const struct MarsSatTermList lists[4];
+  //const std::vector<std::array<struct MarsSatTerm>
 };
 
-static const struct MarsSatTerm mars_sat_phobos_0[16] = {
+static const std::array<struct MarsSatTerm, 16> mars_sat_phobos_0 = {{
   { 5.013490350126586e+00, 2.715567382195733e+01, 4.537539999999999e-09},
   { 6.839910590780000e-01, 1.969446151585829e+01, 7.312000000000000e-10},
   { 4.514031245592586e+00, 4.073350897245015e+01, 7.785599999999993e-10},
@@ -93,9 +98,9 @@ static const struct MarsSatTerm mars_sat_phobos_0[16] = {
   { 2.601539199675000e-01, 7.446011234647927e+00, 1.328000000000000e-11},
   { 5.903845687100000e-02, 3.941932465627423e+01, 8.559999999999978e-12},
   { 6.179310844209586e+00, 5.911910805492755e+01, 7.240000000000000e-12},
-};
+}};
 
-static const struct MarsSatTerm mars_sat_phobos_1[42] = {
+static const std::array<struct MarsSatTerm, 42> mars_sat_phobos_1 = {{
   { 5.334169568271586e+00, 9.145914066599032e-03, 5.016848130000000e-05},
   { 5.334169148295587e+00, 9.145914113327495e-03, 5.016848130000000e-05},
   { 3.805345265960000e-01, 1.540952541904328e-03, 3.350264970000000e-05},
@@ -138,9 +143,9 @@ static const struct MarsSatTerm mars_sat_phobos_1[42] = {
   { 4.628882088425586e+00, 3.327230135427769e+01, 2.539272800000000e-07},
   { 4.736462571780586e+00, 1.224558395734566e-02, 1.254715400000000e-07},
   { 4.736462588777586e+00, 1.224558396211886e-02, 1.254715500000000e-07},
-};
+}};
 
-static const struct MarsSatTerm mars_sat_phobos_2[27] = {
+static const std::array<struct MarsSatTerm, 27> mars_sat_phobos_2 = {{
   { 1.404382124885000e+00, 7.595588511174286e-03, 1.514110912521000e-02},
   { 2.088385523034000e+00, 1.970205682773437e+01, 3.849620867400000e-04},
   { 3.895377361148586e+00, 1.069670280268190e-02, 6.903413242000000e-05},
@@ -168,9 +173,9 @@ static const struct MarsSatTerm mars_sat_phobos_2[27] = {
   { 5.063879137454586e+00, 2.589097180762378e-02, 3.581949800000000e-07},
   { 2.558639707373000e+00, 6.064928432880783e-03, 3.808881200000000e-07},
   { 5.292499025555586e+00, 3.075065445597794e-03, 4.055739200000000e-07},
-};
+}};
 
-static const struct MarsSatTerm mars_sat_phobos_3[28] = {
+static const std::array<struct MarsSatTerm, 28> mars_sat_phobos_3 = {{
   { 2.058107128488000e+00,-7.604861328578004e-03, 9.408605183120001e-03},
   { 3.248856489376586e+00,-9.145863467943084e-03, 5.699538102000000e-05},
   { 4.557280987272586e+00, 1.829238959116374e-02, 2.474369483000000e-05},
@@ -199,9 +204,9 @@ static const struct MarsSatTerm mars_sat_phobos_3[28] = {
   { 3.742380849210000e-01, 3.327989343110183e+01, 1.015004500000000e-07},
   { 1.374678754422000e+00,-1.970206671243377e+01, 8.259149000000001e-08},
   { 1.140160118874000e+00,-6.108652383295211e-03, 8.504923000000000e-08},
-};
+}};
 
-static const struct MarsSatTerm mars_sat_deimos_0[25] = {
+static const std::array<struct MarsSatTerm, 25> mars_sat_deimos_0 = {{
   { 6.146803530569087e+00, 2.294413036846356e+00, 5.398360000000000e-09},
   { 3.432805186019586e+00, 9.935735425667586e+00, 7.095199999999997e-10},
   { 4.356581106602587e+00, 3.441619555269535e+00, 3.737800000000000e-10},
@@ -227,9 +232,9 @@ static const struct MarsSatTerm mars_sat_deimos_0[25] = {
   { 5.271781540988586e+00, 3.441934988580561e+00, 2.640000000000000e-12},
   { 5.382287205930000e-01, 9.926905039305762e+00, 2.039999999999966e-12},
   { 3.629187963751586e+00, 2.303558945733479e+00, 1.090000000000000e-12},
-};
+}};
 
-static const struct MarsSatTerm mars_sat_deimos_1[21] = {
+static const std::array<struct MarsSatTerm, 21> mars_sat_deimos_1 = {{
   { 2.488175621789000e+00, 3.153377646687549e-04, 2.483031660190000e-03},
   { 2.488175634463000e+00, 3.153377641537758e-04, 2.483031659490000e-03},
   { 5.336889264964586e+00, 9.145915158660612e-03, 2.023426978200000e-04},
@@ -251,9 +256,9 @@ static const struct MarsSatTerm mars_sat_deimos_1[21] = {
   { 2.221013917980000e-01, 9.464721723028089e-03, 3.117801830000000e-06},
   { 4.485218622895586e+00, 8.828439971019056e-03, 3.905064210000000e-06},
   { 2.221013944660000e-01, 9.464721722885516e-03, 3.117801830000000e-06},
-};
+}};
 
-static const struct MarsSatTerm mars_sat_deimos_2[15] = {
+static const std::array<struct MarsSatTerm, 15> mars_sat_deimos_2 = {{
   { 2.198649419514000e+00, 3.148401892560942e-04, 2.744131534600000e-04},
   { 4.366636518977586e+00, 4.977013897776327e+00, 6.015912711000000e-05},
   { 1.463816210370000e+00,-3.153164045300449e-04, 3.614585349000000e-05},
@@ -269,9 +274,9 @@ static const struct MarsSatTerm mars_sat_deimos_2[15] = {
   { 5.155432690964586e+00, 3.881877876517008e-01, 1.015648880000000e-06},
   { 2.250768124831000e+00,-4.940429834739583e+00, 5.090989300000000e-07},
   { 3.422251338868586e+00,-4.977013897776327e+00, 6.537077500000000e-07},
-};
+}};
 
-static const struct MarsSatTerm mars_sat_deimos_3[27] = {
+static const std::array<struct MarsSatTerm, 27> mars_sat_deimos_3 = {{
   { 2.981506933511000e+00,-3.154811355556041e-04, 1.562693319959000e-02},
   { 4.557500894366586e+00, 1.829233626168517e-02, 1.321818631100000e-04},
   { 3.248124065112586e+00,-9.145934570587952e-03, 3.833652719000000e-05},
@@ -299,7 +304,7 @@ static const struct MarsSatTerm mars_sat_deimos_3[27] = {
   { 2.259603352363000e+00,-3.660152378331885e-02, 2.213788200000000e-07},
   { 1.108725025984000e+00, 9.935732440466172e+00, 2.449950300000000e-07},
   { 1.680391963791000e+00, 9.076040299352415e-03, 1.652416600000000e-07},
-};
+}};
 
 static const struct MarsSatBody mars_sat_bodies[2] = {
   {
@@ -313,10 +318,10 @@ static const struct MarsSatBody mars_sat_bodies[2] = {
           -0.0000540676493351,
     },
     {
-      {mars_sat_phobos_0,16},
-      {mars_sat_phobos_1,42},
-      {mars_sat_phobos_2,27},
-      {mars_sat_phobos_3,28}
+      {mars_sat_phobos_0.data(),16},
+      {mars_sat_phobos_1.data(),42},
+      {mars_sat_phobos_2.data(),27},
+      {mars_sat_phobos_3.data(),28}
     }
   },
   {
@@ -330,42 +335,75 @@ static const struct MarsSatBody mars_sat_bodies[2] = {
           -0.0053121806978560,
     },
     {
-      {mars_sat_deimos_0,25},
-      {mars_sat_deimos_1,21},
-      {mars_sat_deimos_2,15},
-      {mars_sat_deimos_3,27}
+      {mars_sat_deimos_0.data(),25},
+      {mars_sat_deimos_1.data(),21},
+      {mars_sat_deimos_2.data(),15},
+      {mars_sat_deimos_3.data(),27}
     }
   },
 };
 
-static
-void CalcMarsSatElem(double t,int body,double elem[6]) {
-  int j;
-  const struct MarsSatBody *bp = mars_sat_bodies + body;
-  memcpy(elem, bp->constants, 6*sizeof(double));
-  for (j=0;j<2;j++) {
-    const struct MarsSatTerm *const begin = bp->lists[j].terms;
-    const struct MarsSatTerm *p = begin + bp->lists[j].size;
-    while (--p >= begin) {
-      const double d = p->phase + t*p->frequency;
-      elem[j] += p->amplitude * cos(d);
+static void CalcMarsSatElem(double t,int body,double elem[6]) {
+    int j;
+    const struct MarsSatBody *bp = mars_sat_bodies + body;
+    memcpy(elem, bp->constants, 6*sizeof(double));
+
+    for (j=0;j<2;j++) {
+        const struct MarsSatTerm *const begin = bp->lists[j].terms;
+        const struct MarsSatTerm *p = begin + bp->lists[j].size;
+        while (--p >= begin) {
+            const double d = p->phase + t*p->frequency;
+            elem[j] += p->amplitude * cos(d);
+        }
     }
-  }
-  for (j=2;j<4;j++) {
-    const struct MarsSatTerm *const begin = bp->lists[j].terms;
-    const struct MarsSatTerm *p = begin + bp->lists[j].size;
-    while (--p >= begin) {
-      const double d = p->phase + t*p->frequency;
-      elem[2*j-2] += p->amplitude * cos(d);
-      elem[2*j-1] += p->amplitude * sin(d);
+
+    /* HOW TO CONFIGURE THE BEGIN/END ITERATORS?
+    for (j=0;j<2;j++) {
+        elem[j] += std::transform_reduce(
+                       std::execution::par,
+                       bp->lists[j].terms[0], bp->lists[j].terms[bp->lists[j].size], 0.0,
+                       std::plus<>(),
+                       [=](const struct MarsSatTerm &trm){
+                        const double d = trm.phase + t*trm.frequency;
+                        return trm.amplitude * cos(d);
+                        });
     }
-  }
-  elem[1] += (bp->l + bp->acc * t) * t;
+    */
+
+    for (j=2;j<4;j++) {
+        const struct MarsSatTerm *const begin = bp->lists[j].terms;
+        const struct MarsSatTerm *p = begin + bp->lists[j].size;
+        while (--p >= begin) {
+            const double d = p->phase + t*p->frequency;
+            elem[2*j-2] += p->amplitude * cos(d);
+            elem[2*j-1] += p->amplitude * sin(d);
+        }
+    }
+
+    /* HOW TO CONFIGURE THE BEGIN/END ITERATORS?
+    for (j=2;j<4;j++) {
+        std::pair<double, double>el3456_add=
+                std::transform_reduce(
+                    std::execution::par,
+                    bp->lists[j].terms[0], bp->lists[j].terms[bp->lists[j].size],
+                    std::pair<double, double>({0.0, 0.0}),
+                    [](const std::pair<double, double>&sum, const std::pair<double, double>&addon){
+                        return std::make_pair(sum.first+addon.first, sum.second+addon.second);
+                    },
+                    [=](const struct MarsSatTerm &trm){
+                        const double d = trm.phase + t*trm.frequency;
+                        return std::make_pair(trm.amplitude * cos(d), trm.amplitude * sin(d));
+                    });
+        elem[2*j-2] += el3456_add.first;
+        elem[2*j-1] += el3456_add.second;
+    }
+    */
+
+    elem[1] += (bp->l + bp->acc * t) * t;
 }
 
 
-static
-void MultMat(const double a[9],const double b[9],double c[9]) {
+static void MultMat(const double a[9],const double b[9],double c[9]) {
   int i,j;
   for (i=0;i<3;i++) {
     for (j=0;j<3;j++) {
@@ -384,8 +422,7 @@ static const double inc0 = 37.1135;
 static const double dome = -0.1061;
 static const double dinc =  0.0609;
 
-static
-void GenerateMarsSatToVSOP87(double t,double mat_mars_sat_to_vsop87[9]) {
+static void GenerateMarsSatToVSOP87(double t,double mat_mars_sat_to_vsop87[9]) {
   t -= 6491.5;
   {
     const double ome = (ome0 + dome * t / 36525.) * (M_PI/180.0);
@@ -394,16 +431,17 @@ void GenerateMarsSatToVSOP87(double t,double mat_mars_sat_to_vsop87[9]) {
     const double so = sin(ome);
     const double ci = cos(inc);
     const double si = sin(inc);
-#if defined __GNUC__ && !defined __STRICT_ANSI__
+    // GZ: I hope the next construct is meanwhile understood on all platforms
+//#if defined __GNUC__ && !defined __STRICT_ANSI__
     const double m[9] = {co,-ci*so, si*so,
                          so, ci*co,-si*co,
                          0.0,si,ci};
-#else
-    double m[9];
-    m[0] = co;  m[1] = -ci*so; m[2] =  si*so;
-    m[3] = so;  m[4] =  ci*co; m[5] = -si*co;
-    m[6] = 0.0; m[7] =  si;    m[8] =  ci;
-#endif
+//#else
+//    double m[9];
+//    m[0] = co;  m[1] = -ci*so; m[2] =  si*so;
+//    m[3] = so;  m[4] =  ci*co; m[5] = -si*co;
+//    m[6] = 0.0; m[7] =  si;    m[8] =  ci;
+//#endif
     MultMat(J2000_to_VSOP87,m,mat_mars_sat_to_vsop87);
   }
 }

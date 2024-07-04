@@ -25,7 +25,10 @@ SOFTWARE.
 #ifndef CALC_INTERPOLATED_ELEMENTS_H
 #define CALC_INTERPOLATED_ELEMENTS_H
 
-extern
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 void CalcInterpolatedElements(const double t,double elem[],
                               const int dim,
                               void (*calc_func)(const double t,double elem[],
@@ -59,5 +62,10 @@ and of course the same dim and calc_func.
 
 The user argument is passed to the calc_func callback.
 */
+
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif // CALC_INTERPOLATED_ELEMENTS_H

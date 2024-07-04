@@ -23,7 +23,7 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 #include "StelCore.hpp"
 #include "vsop87.h"
 #include "elp82b.h"
-#include "marssat.h"
+#include "marssat.hpp"
 #include "l12.hpp"
 #include "tass17.h"
 #include "gust86.h"
