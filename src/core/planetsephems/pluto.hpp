@@ -22,7 +22,7 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 #define PLUTO_HPP
 
 //! Meeus, Astron. Algorithms 2nd ed (1998). Chap 37. Equ 37.1
-//! @param in: JD Julian day (ephemeris time),
+//! @param in: JDE Julian day (ephemeris time),
 //! @param out: X, Y, Z in AU.
 //!
 //! Calculate Pluto heliocentric rectangular ecliptical coordinates for given julian day.
@@ -31,6 +31,6 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 //! @note: This function is not valid outside the period of 1885-2099!
 //!
 
-void get_pluto_helio_coords (double JD, double * X, double * Y, double * Z);
+void get_pluto_helio_coords (double JDE, double * X, double * Y, double * Z);
 
 #endif

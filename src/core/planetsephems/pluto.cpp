@@ -121,10 +121,10 @@ void sphe_to_rect(const double lng, const double lat, const double r, double *x,
  Note: This function is not valid outside the period of 1885-2099.
  Longitude and Latitude are in radians, radius in AU.
 */
-void get_pluto_helio_coords (double JD, double * X, double * Y, double * Z)
+void get_pluto_helio_coords (double JDE, double * X, double * Y, double * Z)
 {
     /* get julian centuries since J2000 */
-    const double t = (JD - 2451545) / 36525;
+    const double t = (JDE - 2451545) / 36525;
 
     /* calculate mean longitudes for jupiter, saturn and pluto */
     const double J =  34.35 + 3034.9057 * t;
