@@ -31,7 +31,7 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 #include "de430.hpp"
 #include "de441.hpp"
 #include "de440.hpp"
-#include "pluto.h"
+#include "pluto.hpp"
 #include "htc20b.h"
 #include "StelUtils.hpp"
 

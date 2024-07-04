@@ -129,19 +129,20 @@ void getPrecessionAnglesVondrak(const double jde, double *epsilon_A, double *chi
 		double T=(jde-2451545.0)* (1.0/36525.0); // Julian centuries from J2000.0
 		assert(fabs(T)<=2000); // MAKES SURE YOU NEVER OVERSTRETCH THIS!
 		const double T2pi= T*(2.0*M_PI); // Julian centuries from J2000.0, premultiplied by 2Pi
-		// these are actually Psi_A, Omega_A, Chi_A in small greek letters in the papers.
-		std::array<double, 3>Psi_Omega_Chi_A = std::transform_reduce(std::execution::par,
+        // these are actually Psi_A, Omega_A, Chi_A in small greek letters in the papers.
+        std::array<double, 3>Psi_Omega_Chi_A = std::transform_reduce(std::execution::par,
 					precVals.begin(), precVals.end(), std::array<double, 3>({0.0, 0.0, 0.0}),
-					[](std::array<double, 3>sum, const std::array<double, 3>addon){sum[0] += addon[0]; sum[1] += addon[1]; sum[2] += addon[2]; return sum;},
+                    [](const std::array<double, 3>&sum, const std::array<double, 3>&addon){
+                        return std::array<double, 3>{sum[0] + addon[0], sum[1] + addon[1], sum[2] + addon[2]};},
 					[=](const std::array<double, 7>&precVal){
 						const double invP=precVal[0];
 			#ifdef _GNU_SOURCE
-						double sin2piT_P, cos2piT_P;
+                        double sin2piT_P, cos2piT_P;
 						sincos(T2pi*invP, &sin2piT_P, &cos2piT_P);
 			#else
-						const double phase=T2pi*invP;
-						const double sin2piT_P= sin(phase);
-						const double cos2piT_P= cos(phase);
+                        const double phase=T2pi*invP;
+                        const double sin2piT_P= sin(phase);
+                        const double cos2piT_P= cos(phase);
 			#endif
 						// return one summand of Psi_Omega_Chi_A
 						return std::array<double, 3>({  precVal[1]*cos2piT_P + precVal[4]*sin2piT_P,
@@ -150,17 +151,17 @@ void getPrecessionAnglesVondrak(const double jde, double *epsilon_A, double *chi
 					}
 		);
 		//double p_A=0.0; // currently unused. The data don't critically disturb. We could modify this into returning a pair.
-		double Epsilon_A = std::transform_reduce(std::execution::par, p_epsVals.begin(), p_epsVals.end(), 0.,
+        double Epsilon_A = std::transform_reduce(std::execution::par, p_epsVals.begin(), p_epsVals.end(), 0.,
 							 std::plus<>(),
 							 [=](const std::array<double, 5>&p_epsVal){
 								const double invP=p_epsVal[0];
 						#ifdef _GNU_SOURCE
-								double sin2piT_P, cos2piT_P;
+                                double sin2piT_P, cos2piT_P;
 								sincos(T2pi*invP, &sin2piT_P, &cos2piT_P);
 						#else
 								const double phase=T2pi*invP;
-								const double sin2piT_P= sin(phase);
-								const double cos2piT_P= cos(phase);
+                                const double sin2piT_P= sin(phase);
+                                const double cos2piT_P= cos(phase);
 						#endif
 								//p_A       += p_epsVal[1]*cos2piT_P + p_epsVal[3]*sin2piT_P; // summand of p_A
 								return p_epsVal[2]*cos2piT_P + p_epsVal[4]*sin2piT_P; // summand of Epsilon_A
@@ -192,10 +193,10 @@ void getPrecessionAnglesVondrakPQXYe(const double jde, double *vP_A, double *vQ_
 		double T=(jde-2451545.0)* (1.0/36525.0);
 		assert(fabs(T)<=2000); // MAKES SURE YOU NEVER OVERSTRETCH THIS!
 		double T2pi= T*(2.0*M_PI); // Julian centuries from J2000.0, premultiplied by 2Pi
-		// these are actually P_A, Q_A in the papers.
+        // these are actually P_A, Q_A in the papers.
 		std::pair<double, double>P_Q_A =
-			std::transform_reduce(std::execution::par, PQvals.begin(), PQvals.end(), std::pair<double, double>({0.0, 0.0}),
-					     [](const std::pair<double, double>&sum, const std::pair<double, double>&addon){
+            std::transform_reduce(std::execution::par, PQvals.begin(), PQvals.end(), std::pair<double, double>({0.0, 0.0}),
+                         [](const std::pair<double, double>&sum, const std::pair<double, double>&addon){
 						return std::make_pair(sum.first+addon.first, sum.second+addon.second);
 					     },
 					[=](const std::array<double, 5>&PQval){
@@ -212,10 +213,10 @@ void getPrecessionAnglesVondrakPQXYe(const double jde, double *vP_A, double *vQ_
 								       PQval[2]*cos2piT_P + PQval[4]*sin2piT_P);
 					}
 					);
-		// these are actually X_A, Y_A in the papers.
-		std::pair<double, double>X_Y_A =
-			std::transform_reduce(std::execution::par, XYvals.begin(), XYvals.end(), std::pair<double, double>({0.0, 0.0}),
-					[](const std::pair<double, double>&sum, const std::pair<double, double>&addon){
+        // these are actually X_A, Y_A in the papers.
+        std::pair<double, double>X_Y_A =
+            std::transform_reduce(std::execution::par, XYvals.begin(), XYvals.end(), std::pair<double, double>({0.0, 0.0}),
+                    [](const std::pair<double, double>&sum, const std::pair<double, double>&addon){
 						return std::make_pair(sum.first+addon.first, sum.second+addon.second);
 					},
 					[=](const std::array<double, 5>&XYval){
@@ -232,7 +233,7 @@ void getPrecessionAnglesVondrakPQXYe(const double jde, double *vP_A, double *vQ_
 									XYval[2]*cos2piT_P + XYval[4]*sin2piT_P);
 					    });
 		double Epsilon_A =
-			std::transform_reduce(std::execution::par, p_epsVals.begin(), p_epsVals.end(), 0.0,
+            std::transform_reduce(std::execution::par, p_epsVals.begin(), p_epsVals.end(), 0.0,
 					      std::plus<>(),
 					      [=](const std::array<double, 5>&p_epsVal){
 						const double invP=p_epsVal[0];
@@ -249,11 +250,11 @@ void getPrecessionAnglesVondrakPQXYe(const double jde, double *vP_A, double *vQ_
 					});
 
 		// Now the polynomial terms in T. Horner's scheme is best again.
-		P_Q_A.first   += (( 110.e-9*T - 0.00028913)*T - 0.1189000)*T +  5851.607687;
-		P_Q_A.second  += ((-437.e-9*T - 0.00000020)*T + 1.1689818)*T -  1600.886300;
-		X_Y_A.first   += ((-152.e-9*T - 0.00037173)*T + 0.4252841)*T +  5453.282155;
-		X_Y_A.second  += ((+231.e-9*T - 0.00018725)*T - 0.7675452)*T - 73750.930350;
-		Epsilon_A     += (( 110.e-9*T - 0.00004039)*T + 0.3624445)*T + 84028.206305;
+        P_Q_A.first   += (( 110.e-9*T - 0.00028913)*T - 0.1189000)*T +  5851.607687;
+        P_Q_A.second  += ((-437.e-9*T - 0.00000020)*T + 1.1689818)*T -  1600.886300;
+        X_Y_A.first   += ((-152.e-9*T - 0.00037173)*T + 0.4252841)*T +  5453.282155;
+        X_Y_A.second  += ((+231.e-9*T - 0.00018725)*T - 0.7675452)*T - 73750.930350;
+        Epsilon_A     += (( 110.e-9*T - 0.00004039)*T + 0.3624445)*T + 84028.206305;
 		c_P_A       = arcSec2Rad*P_Q_A.first;
 		c_Q_A       = arcSec2Rad*P_Q_A.second;
 		c_X_A       = arcSec2Rad*X_Y_A.first;
@@ -434,7 +435,7 @@ void getNutationAngles(const double JDE, double *deltaPsi, double *deltaEpsilon)
 		// F5 : Omega = mean longitude of the ascending node of the lunar orbit
 		const double Omega  = (450160.398036 - 6962890.5431*t);//*arcSec2Rad;
 
-		// (deltaEps, deltaPsi)
+        // (deltaEps, deltaPsi)
 		std::pair<double, double> dEpsDPsi = std::transform_reduce(
 					std::execution::par,
 					nut2000Btable.begin(),
@@ -457,7 +458,7 @@ void getNutationAngles(const double JDE, double *deltaPsi, double *deltaEpsilon)
 		dEpsDPsi.second -= (0.29965*t + 0.0417750 + 0.0015835);
 		dEpsDPsi.first  -= (0.02524*t + 0.0068192 - 0.0016339);
 		c_deltaPsi = dEpsDPsi.second * arcSec2Rad;
-		c_deltaEps = dEpsDPsi.first  * arcSec2Rad;
+        c_deltaEps = dEpsDPsi.first  * arcSec2Rad;
 	}
 	double limiter=1.0;
 	if (JDE<NUT_BEGIN)

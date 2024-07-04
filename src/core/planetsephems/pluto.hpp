@@ -1,6 +1,7 @@
 /*
 Copyright (C) 2001 Liam Girdwood <liam@nova-ioe.org>
 Copyright (C) 2003 Fabien Chereau
+Copyright (C) 2024 Georg Zotti (C++ changes)
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU Library General Public License as published by
@@ -17,39 +18,19 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 */
 
-#ifndef PLUTO_H
-#define PLUTO_H
+#ifndef PLUTO_HPP
+#define PLUTO_HPP
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-
-struct pluto_argument
-{
-	double J, S, P;
-};
-
-struct pluto_longitude
-{
-	double A,B;
-};
-
-struct pluto_latitude
-{
-	double A,B;
-};
-
-struct pluto_radius
-{
-	double A,B;
-};
+//! Meeus, Astron. Algorithms 2nd ed (1998). Chap 37. Equ 37.1
+//! @param in: JD Julian day (ephemeris time),
+//! @param out: X, Y, Z in AU.
+//!
+//! Calculate Pluto heliocentric rectangular ecliptical coordinates for given julian day.
+//! This function is accurate to within 0.07" in longitude, 0.02" in latitude
+//! and 0.000006 AU in radius.
+//! @note: This function is not valid outside the period of 1885-2099!
+//!
 
 void get_pluto_helio_coords (double JD, double * X, double * Y, double * Z);
-
-#ifdef __cplusplus
-}
-#endif
-
 
 #endif

@@ -57,7 +57,7 @@ in MarsSatV1-0.f are
 #include <execution>
 #include <iterator>
 #include <numeric>
-//#include <string.h> /* memcpy */
+#include <cstring> /* memcpy */
 
 #ifndef M_PI
 #define M_PI           3.14159265358979323846
