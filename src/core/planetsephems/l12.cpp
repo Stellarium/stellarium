@@ -18,6 +18,7 @@
  */
 
 #include "l12.hpp"
+#include "StelUtils.hpp"
 
 #include <cmath>
 #include <execution>
@@ -681,7 +682,7 @@ void GetL12Coor(double jd, int ks, double p[3], double v[3])
 	//	arg = sat->a[k].phas + sat->a[k].freq * t;
 	//	s += sat->a[k].ampl * cos(arg);
 	//    }
-	s = std::transform_reduce(std::execution::par,
+    s = std::transform_reduce(STD_EXECUTION_PAR_COMMA
 				  sat->a.begin(), sat->a.begin()+sat->a_len, 0.0,
 				  std::plus<>(),
 				  [=](const struct term &satA){double arg = satA.phas + satA.freq * t;
@@ -697,7 +698,7 @@ void GetL12Coor(double jd, int ks, double p[3], double v[3])
 	//	arg = sat->l[k].phas + sat->l[k].freq * t;
 	//	s += sat->l[k].ampl * sin(arg);
 	//    }
-	s += std::transform_reduce(std::execution::par,
+    s += std::transform_reduce(STD_EXECUTION_PAR_COMMA
 				   sat->l.begin(), sat->l.begin()+sat->l_len, 0.0,
 				   std::plus<>(),
 				   [=](const struct term &satL){double arg = satL.phas + satL.freq * t;
@@ -719,7 +720,7 @@ void GetL12Coor(double jd, int ks, double p[3], double v[3])
 	//    elem[2] = s1 + val[1];
 	//    elem[3] = s2 + val[2];
 	std::pair<double, double>s1_s2 =
-		std::transform_reduce(std::execution::par,
+        std::transform_reduce(STD_EXECUTION_PAR_COMMA
 				      sat->z.begin(), sat->z.begin()+sat->z_len, std::pair<double, double>({0.0, 0.0}),
 				      [](const std::pair<double, double>&sum, const std::pair<double, double>&addon){
 					return std::make_pair(sum.first+addon.first, sum.second+addon.second);
@@ -741,7 +742,7 @@ void GetL12Coor(double jd, int ks, double p[3], double v[3])
 //	}
 //	elem[4] = s1 + val[3];
 //	elem[5] = s2 + val[4];
-	s1_s2 = std::transform_reduce(std::execution::par,
+    s1_s2 = std::transform_reduce(STD_EXECUTION_PAR_COMMA
 				      sat->zeta.begin(), sat->zeta.begin()+sat->zeta_len, std::pair<double, double>({0.0, 0.0}),
 				      [](const std::pair<double, double>&sum, const std::pair<double, double>&addon){
 					return std::make_pair(sum.first+addon.first, sum.second+addon.second);

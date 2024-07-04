@@ -31,6 +31,8 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  * This is by far enough for Stellarium as of 2015, but just to make sure I added a few asserts.
  */
 
+#include "StelUtils.hpp"
+
 #include <cassert>
 #include <cmath>
 #include <execution>
@@ -130,7 +132,7 @@ void getPrecessionAnglesVondrak(const double jde, double *epsilon_A, double *chi
 		assert(fabs(T)<=2000); // MAKES SURE YOU NEVER OVERSTRETCH THIS!
 		const double T2pi= T*(2.0*M_PI); // Julian centuries from J2000.0, premultiplied by 2Pi
         // these are actually Psi_A, Omega_A, Chi_A in small greek letters in the papers.
-        std::array<double, 3>Psi_Omega_Chi_A = std::transform_reduce(std::execution::par,
+        std::array<double, 3>Psi_Omega_Chi_A = std::transform_reduce(STD_EXECUTION_PAR_COMMA
 					precVals.begin(), precVals.end(), std::array<double, 3>({0.0, 0.0, 0.0}),
                     [](const std::array<double, 3>&sum, const std::array<double, 3>&addon){
                         return std::array<double, 3>{sum[0] + addon[0], sum[1] + addon[1], sum[2] + addon[2]};},
@@ -151,7 +153,7 @@ void getPrecessionAnglesVondrak(const double jde, double *epsilon_A, double *chi
 					}
 		);
 		//double p_A=0.0; // currently unused. The data don't critically disturb. We could modify this into returning a pair.
-        double Epsilon_A = std::transform_reduce(std::execution::par, p_epsVals.begin(), p_epsVals.end(), 0.,
+        double Epsilon_A = std::transform_reduce(STD_EXECUTION_PAR_COMMA p_epsVals.begin(), p_epsVals.end(), 0.,
 							 std::plus<>(),
 							 [=](const std::array<double, 5>&p_epsVal){
 								const double invP=p_epsVal[0];
@@ -195,7 +197,7 @@ void getPrecessionAnglesVondrakPQXYe(const double jde, double *vP_A, double *vQ_
 		double T2pi= T*(2.0*M_PI); // Julian centuries from J2000.0, premultiplied by 2Pi
         // these are actually P_A, Q_A in the papers.
 		std::pair<double, double>P_Q_A =
-            std::transform_reduce(std::execution::par, PQvals.begin(), PQvals.end(), std::pair<double, double>({0.0, 0.0}),
+            std::transform_reduce(STD_EXECUTION_PAR_COMMA PQvals.begin(), PQvals.end(), std::pair<double, double>({0.0, 0.0}),
                          [](const std::pair<double, double>&sum, const std::pair<double, double>&addon){
 						return std::make_pair(sum.first+addon.first, sum.second+addon.second);
 					     },
@@ -215,7 +217,7 @@ void getPrecessionAnglesVondrakPQXYe(const double jde, double *vP_A, double *vQ_
 					);
         // these are actually X_A, Y_A in the papers.
         std::pair<double, double>X_Y_A =
-            std::transform_reduce(std::execution::par, XYvals.begin(), XYvals.end(), std::pair<double, double>({0.0, 0.0}),
+            std::transform_reduce(STD_EXECUTION_PAR_COMMA XYvals.begin(), XYvals.end(), std::pair<double, double>({0.0, 0.0}),
                     [](const std::pair<double, double>&sum, const std::pair<double, double>&addon){
 						return std::make_pair(sum.first+addon.first, sum.second+addon.second);
 					},
@@ -233,7 +235,7 @@ void getPrecessionAnglesVondrakPQXYe(const double jde, double *vP_A, double *vQ_
 									XYval[2]*cos2piT_P + XYval[4]*sin2piT_P);
 					    });
 		double Epsilon_A =
-            std::transform_reduce(std::execution::par, p_epsVals.begin(), p_epsVals.end(), 0.0,
+            std::transform_reduce(STD_EXECUTION_PAR_COMMA p_epsVals.begin(), p_epsVals.end(), 0.0,
 					      std::plus<>(),
 					      [=](const std::array<double, 5>&p_epsVal){
 						const double invP=p_epsVal[0];
@@ -437,7 +439,7 @@ void getNutationAngles(const double JDE, double *deltaPsi, double *deltaEpsilon)
 
         // (deltaEps, deltaPsi)
 		std::pair<double, double> dEpsDPsi = std::transform_reduce(
-					std::execution::par,
+                    STD_EXECUTION_PAR_COMMA
 					nut2000Btable.begin(),
 					nut2000Btable.end(),
 					std::pair<double, double>{0.0,0.0},

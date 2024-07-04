@@ -51,6 +51,7 @@ in MarsSatV1-0.f are
 #include "marssat.hpp"
 #include "calc_interpolated_elements.h"
 #include "elliptic_to_rectangular.h"
+#include "StelUtils.hpp"
 
 #include <array>
 #include <cmath>
@@ -360,7 +361,7 @@ static void CalcMarsSatElem(double t,int body,double elem[6]) {
     // TODO: The summing should be backwards to avoid rounding issues!
     for (j=0;j<2;j++) {
         elem[j] += std::transform_reduce(
-                       std::execution::par,
+                       STD_EXECUTION_PAR_COMMA
                        bp->lists[j].terms, bp->lists[j].terms + bp->lists[j].size, 0.0,
                        std::plus<>(),
                        [=](const struct MarsSatTerm &trm){
@@ -384,7 +385,7 @@ static void CalcMarsSatElem(double t,int body,double elem[6]) {
     for (j=2;j<4;j++) {
         std::pair<double, double>el3456_add=
                 std::transform_reduce(
-                    std::execution::par,
+                    STD_EXECUTION_PAR_COMMA
                     bp->lists[j].terms, bp->lists[j].terms+bp->lists[j].size,
                     std::pair<double, double>({0.0, 0.0}),
                     [](const std::pair<double, double>&sum, const std::pair<double, double>&addon){

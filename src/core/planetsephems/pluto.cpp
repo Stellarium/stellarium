@@ -19,6 +19,7 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 */
 
 #include "pluto.hpp"
+#include "StelUtils.hpp"
 #include <array>
 #include <cmath>
 #include <execution>
@@ -149,7 +150,7 @@ void get_pluto_helio_coords (double JDE, double * X, double * Y, double * Z)
     //		sum_radius += radius[i].A * sin_a + radius[i].B * cos_a;
     //	}
     std::array<double, 3>sum_lon_at_rad =
-            std::transform_reduce(std::execution::par,
+            std::transform_reduce(STD_EXECUTION_PAR_COMMA
                                   data.begin(), data.end(), std::array<double, 3>({0.0, 0.0, 0.0}),
                                   [](const std::array<double, 3>&sum, const std::array<double, 3>&addon){
         return std::array<double, 3>{sum[0] + addon[0], sum[1] + addon[1], sum[2] + addon[2]};},
