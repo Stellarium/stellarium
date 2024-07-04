@@ -24,10 +24,10 @@
 
 #include <QMediaPlayer>
 
-StelAudioMgr::StelAudioMgr()
+StelAudioMgr::StelAudioMgr(bool enable): enabled(enable)
 {
 #if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
-	audioOutput=new QAudioOutput();
+	audioOutput=(enabled ? new QAudioOutput() : nullptr);
 #endif
 }
 
@@ -37,7 +37,7 @@ StelAudioMgr::~StelAudioMgr()
 	while (it.hasNext())
 	{
 		it.next();
-		if (it.value()!=Q_NULLPTR)
+		if (it.value()!=nullptr)
 		{
 			it.value()->stop();
 			it.remove();
@@ -45,12 +45,18 @@ StelAudioMgr::~StelAudioMgr()
 	}
 #if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
 	delete audioOutput;
-	audioOutput=Q_NULLPTR;
+	audioOutput=nullptr;
 #endif
 }
 
 void StelAudioMgr::loadSound(const QString& filename, const QString& id)
 {
+	if (!enabled)
+	{
+		qWarning() << "Not loading sound -- audio system disabled by configuration.";
+		return;
+	}
+
 	if (audioObjects.contains(id))
 	{
 		qWarning() << "Audio object with ID" << id << "already exists, dropping it";
@@ -69,9 +75,12 @@ void StelAudioMgr::loadSound(const QString& filename, const QString& id)
 
 void StelAudioMgr::playSound(const QString& id)
 {
+	if (!enabled)
+		return;
+
 	if (audioObjects.contains(id))
 	{
-		if (audioObjects[id]!=Q_NULLPTR)
+		if (audioObjects[id]!=nullptr)
 		{
 			// if already playing, stop and play from the start
 			#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
@@ -94,9 +103,12 @@ void StelAudioMgr::playSound(const QString& id)
 
 void StelAudioMgr::pauseSound(const QString& id)
 {
+	if (!enabled)
+		return;
+
 	if (audioObjects.contains(id))
 	{
-		if (audioObjects[id]!=Q_NULLPTR)
+		if (audioObjects[id]!=nullptr)
 			audioObjects[id]->pause();
 		else
 			qDebug() << "StelAudioMgr: Cannot pause sound, " << id << "not correctly loaded.";
@@ -107,9 +119,12 @@ void StelAudioMgr::pauseSound(const QString& id)
 
 void StelAudioMgr::stopSound(const QString& id)
 {
+	if (!enabled)
+		return;
+
 	if (audioObjects.contains(id))
 	{
-		if (audioObjects[id]!=Q_NULLPTR)
+		if (audioObjects[id]!=nullptr)
 			audioObjects[id]->stop();
 		else
 			qDebug() << "StelAudioMgr: Cannot stop sound, " << id << "not correctly loaded.";
@@ -120,12 +135,15 @@ void StelAudioMgr::stopSound(const QString& id)
 
 void StelAudioMgr::dropSound(const QString& id)
 {
+	if (!enabled)
+		return;
+
 	if (!audioObjects.contains(id))
 	{
 		qDebug() << "StelAudioMgr: Cannot drop sound, " << id << "not loaded.";
 		return;
 	}
-	if (audioObjects[id]!=Q_NULLPTR)
+	if (audioObjects[id]!=nullptr)
 	{
 		audioObjects[id]->stop();
 		delete audioObjects[id];
@@ -136,12 +154,15 @@ void StelAudioMgr::dropSound(const QString& id)
 
 qint64 StelAudioMgr::position(const QString& id)
 {
+	if (!enabled)
+		return -1;
+
 	if (!audioObjects.contains(id))
 	{
 		qDebug() << "StelAudioMgr: Cannot report position for sound, " << id << "not loaded.";
 		return(-1);
 	}
-	if (audioObjects[id]!=Q_NULLPTR)
+	if (audioObjects[id]!=nullptr)
 	{
 		return audioObjects[id]->position();
 	}
@@ -150,12 +171,15 @@ qint64 StelAudioMgr::position(const QString& id)
 
 qint64 StelAudioMgr::duration(const QString& id)
 {
+	if (!enabled)
+		return -1;
+
 	if (!audioObjects.contains(id))
 	{
 		qDebug() << "StelAudioMgr: Cannot report duration for sound, " << id << "not loaded.";
 		return(-1);
 	}
-	if (audioObjects[id]!=Q_NULLPTR)
+	if (audioObjects[id]!=nullptr)
 	{
 		return audioObjects[id]->duration();
 	}
@@ -167,7 +191,7 @@ void StelAudioMgr::loadSound(const QString& filename, const QString& id)
 {
 	qWarning() << "This build of Stellarium does not support sound - cannot load audio" << QDir::toNativeSeparators(filename) << id;
 }
-StelAudioMgr::StelAudioMgr() {}
+StelAudioMgr::StelAudioMgr(bool){}
 StelAudioMgr::~StelAudioMgr() {;}
 void StelAudioMgr::playSound(const QString&) {;}
 void StelAudioMgr::pauseSound(const QString&) {;}

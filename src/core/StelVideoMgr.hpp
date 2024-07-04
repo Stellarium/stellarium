@@ -114,7 +114,9 @@ class StelVideoMgr : public StelModule
 	Q_OBJECT
 
 public:
-	StelVideoMgr();
+	//! Constructor.
+	//! @param withAudio usually true to allow audio output.
+	StelVideoMgr(bool withAudio);
 	~StelVideoMgr() override;
 
 public slots:
@@ -283,6 +285,7 @@ private:
 	QMap<QString, VideoPlayer*> videoObjects;
 	bool verbose;                      //!< true to write many more log entries (useful for script debugging) Activate with command-line option "--verbose"
 #endif
+	bool audioEnabled;                 //!< Allow audio output. May be disabled by command line or config arguments.
 };
 
 #endif // STELVIDEOMGR_HPP
