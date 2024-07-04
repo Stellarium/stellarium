@@ -47,12 +47,6 @@
        <layout class="QHBoxLayout" name="horizontalLayout_editButtons">
         <item>
          <widget class="QPushButton" name="addObjectButton">
-          <property name="toolTip">
-           <string>Highlight all the objects of the selected list</string>
-          </property>
-          <property name="toolTipDuration">
-           <number>3</number>
-          </property>
           <property name="text">
            <string>Add object</string>
           </property>
@@ -60,12 +54,6 @@
         </item>
         <item>
          <widget class="QPushButton" name="removeObjectButton">
-          <property name="toolTip">
-           <string>Clear all the highlight objects</string>
-          </property>
-          <property name="toolTipDuration">
-           <number>3</number>
-          </property>
           <property name="text">
            <string>Remove object</string>
           </property>
