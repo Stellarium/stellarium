@@ -572,7 +572,7 @@ void StelPainter::drawTextGravity180(float x, float y, const QString& ws, float 
 
 	const float ppx = static_cast<float>(prj->getDevicePixelsPerPixel());
 	const float cWidth = static_cast<float>(getFontMetrics().boundingRect(ws).width())/ws.length(); // average character width
-	const float stdWidth = static_cast<float>(getFontMetrics().boundingRect("m").width());
+	const float stdWidth = static_cast<float>(getFontMetrics().boundingRect("n").width());
 	const float theta_o = M_PIf + std::atan2(dx, dy - 1);
 	float theta = std::atan2(dy - 1, dx);
 	float psi = std::atan2(ppx*cWidth*1.2, d + 1) * M_180_PIf; // Factor 1.2 is empirical.
@@ -586,14 +586,16 @@ void StelPainter::drawTextGravity180(float x, float y, const QString& ws, float 
 	float xom = x + xshift*cosr - yshift*sinr;
 	float yom = y + yshift*sinr + xshift*cosr;
 	float width;
+	QChar s;
 
-	if (!StelApp::getInstance().getLocaleMgr().isAppRTL())
+	if (!StelApp::getInstance().getLocaleMgr().isSkyRTL())
 	{
 		for (int i=0; i<ws.length(); ++i)
 		{
+			s = ws[i];
 			if (d<limit)
 			{
-				drawText(xom, yom, ws[i], -theta_o*M_180_PIf+psi*static_cast<float>(i), 0., 0.);
+				drawText(xom, yom, s, -theta_o*M_180_PIf+psi*static_cast<float>(i), 0., 0.);
 				xom += cWidth*std::cos(-theta_o+psi*static_cast<float>(i) * M_PI_180f);
 				yom += cWidth*std::sin(-theta_o+psi*static_cast<float>(i) * M_PI_180f);
 			}
@@ -601,12 +603,12 @@ void StelPainter::drawTextGravity180(float x, float y, const QString& ws, float 
 			{
 				x = d * std::cos(theta) + xVc ;
 				y = d * std::sin(theta) + yVc ;
-				drawText(x, y, ws[i], 90.f + theta*M_180_PIf, 0., 0.);
+				drawText(x, y, s, 90.f + theta*M_180_PIf, 0., 0.);
 				// Compute how much the character contributes to the angle
-				if (ws[i].isSpace())
+				if (s.isSpace())
 					width = stdWidth;
 				else
-					width = static_cast<float>(getFontMetrics().boundingRect(ws[i]).width());
+					width = static_cast<float>(getFontMetrics().boundingRect(s).width());
 				theta += psi * M_PI_180f * (1 + (width - cWidth)/ cWidth);
 			}
 		}
@@ -616,9 +618,10 @@ void StelPainter::drawTextGravity180(float x, float y, const QString& ws, float 
 		int slen = ws.length();
 		for (int i=0;i<slen;i++)
 		{
+			s = ws[slen-1-i];
 			if (d<limit)
 			{
-				drawText(xom, yom, ws[slen-1-i], -theta_o*M_180_PIf+psi*static_cast<float>(i), 0., 0.);
+				drawText(xom, yom, s, -theta_o*M_180_PIf+psi*static_cast<float>(i), 0., 0.);
 				xom += cWidth*std::cos(-theta_o+psi*static_cast<float>(i) * M_PI_180f);
 				yom += cWidth*std::sin(-theta_o+psi*static_cast<float>(i) * M_PI_180f);
 			}
@@ -626,11 +629,11 @@ void StelPainter::drawTextGravity180(float x, float y, const QString& ws, float 
 			{
 				x = d * std::cos(theta) + xVc;
 				y = d * std::sin(theta) + yVc;
-				drawText(x, y, ws[slen-1-i], 90.f + theta*M_180_PIf, 0., 0.);
-				if (ws[slen-1-i].isSpace())
+				drawText(x, y, s, 90.f + theta*M_180_PIf, 0., 0.);
+				if (s.isSpace())
 					width = stdWidth;
 				else
-					width = static_cast<float>(getFontMetrics().boundingRect(ws[slen-1-i]).width());
+					width = static_cast<float>(getFontMetrics().boundingRect(s).width());
 				theta += psi * M_PI_180f * (1 + (width - cWidth)/ cWidth);
 			}
 		}
