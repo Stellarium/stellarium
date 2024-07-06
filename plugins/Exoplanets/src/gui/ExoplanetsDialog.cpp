@@ -213,7 +213,17 @@ void ExoplanetsDialog::fillExoplanetsTable()
 		for (auto &eps : map["exoplanets"].toList())
 		{
 			auto epdata = eps.toMap();
-			QString dm = epdata.contains("detectionMethod") ? epdata["detectionMethod"].toString().trimmed() : dash;
+			QString dm = dash;
+			if ( epdata.contains("detectionMethod"))
+			{
+				QStringList dmlist = epdata["detectionMethod"].toString().trimmed().split(",");
+				QStringList dmloc;
+				for (int i=0;i<dmlist.count();i++)
+				{
+					dmloc << qc_(dmlist.at(i).trimmed(), "Exoplanet detection method");
+				}
+				dm = dmloc.join(", ");
+			}
 			EPSTreeWidgetItem* treeItem = new EPSTreeWidgetItem(ui->exoplanetsTreeWidget);
 			treeItem->setText(EPSExoplanetName, QString("%1 %2").arg(trans.qtranslate(map["designation"].toString().trimmed()), epdata["planetName"].toString()).trimmed());
 			treeItem->setData(EPSExoplanetName, Qt::UserRole, map["designation"].toString());
@@ -246,7 +256,7 @@ void ExoplanetsDialog::fillExoplanetsTable()
 			treeItem->setText(EPSStarRadius, sradius);
 			treeItem->setToolTip(EPSStarRadius,  q_("Radius of star in solar radii"));
 			treeItem->setTextAlignment(EPSStarRadius,  Qt::AlignRight);
-			treeItem->setText(EPSExoplanetDetectionMethod, q_(dm));
+			treeItem->setText(EPSExoplanetDetectionMethod, dm);
 			treeItem->setToolTip(EPSExoplanetDetectionMethod,  q_("Detection method of exoplanet"));
 		}
 	}
