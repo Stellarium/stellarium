@@ -1061,29 +1061,23 @@ void Exoplanets::translations()
 	NC_("Neptunian", "Exoplanet size");
 
 	// TRANSLATORS: Exoplanet detection method
-	NC_("Primary Transit", "Exoplanet detection method");
-	// TRANSLATORS: Exoplanet detection method
-	NC_("Microlensing", "Exoplanet detection method");
-	// TRANSLATORS: Exoplanet detection method
-	NC_("Radial Velocity", "Exoplanet detection method");
+	NC_("Astrometry", "Exoplanet detection method");
 	// TRANSLATORS: Exoplanet detection method
 	NC_("Imaging", "Exoplanet detection method");
 	// TRANSLATORS: Exoplanet detection method
-	NC_("Astrometry", "Exoplanet detection method");
+	NC_("Kinematic", "Exoplanet detection method");
+	// TRANSLATORS: Exoplanet detection method
+	NC_("Microlensing", "Exoplanet detection method");
+	// TRANSLATORS: Exoplanet detection method
+	NC_("Other", "Exoplanet detection method");
+	// TRANSLATORS: Exoplanet detection method
+	NC_("Primary Transit", "Exoplanet detection method");	
+	// TRANSLATORS: Exoplanet detection method
+	NC_("Radial Velocity", "Exoplanet detection method");
 	// TRANSLATORS: Exoplanet detection method. TTV=Transit Timing Variation
 	NC_("TTV", "Exoplanet detection method");
 	// TRANSLATORS: Exoplanet detection method
 	NC_("Timing", "Exoplanet detection method");
-	// TRANSLATORS: Exoplanet detection method
-	NC_("Default", "Exoplanet detection method");
-	// TRANSLATORS: Exoplanet detection method
-	NC_("Secondary Transit", "Exoplanet detection method");
-	// TRANSLATORS: Exoplanet detection method
-	NC_("Disk Kinematics", "Exoplanet detection method");
-	// TRANSLATORS: Exoplanet detection method
-	NC_("Kinematic", "Exoplanet detection method");
-	// TRANSLATORS: Exoplanet detection method
-	NC_("Other", "Exoplanet detection method");
 
 	/* For copy/paste:
 	// TRANSLATORS:
