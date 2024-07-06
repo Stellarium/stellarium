@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2024-07-06 20:29+0700\n"
+"POT-Creation-Date: 2024-07-07 00:31+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>, 2024\n"
 "Language-Team: Ukrainian (https://app.transifex.com/stellarium/teams/80998/uk/)\n"
@@ -32,7 +32,7 @@ msgstr ""
 #: src/core/modules/StarWrapper.cpp:270 src/core/modules/StarWrapper.cpp:272
 #: src/gui/AstroCalcDialog.cpp:880 src/gui/AstroCalcDialog.cpp:2325
 #: src/gui/AstroCalcDialog.cpp:2897 src/gui/AstroCalcDialog.cpp:2929
-#: src/gui/AstroCalcDialog.cpp:3231 src/gui/AstroCalcDialog.cpp:7290
+#: src/gui/AstroCalcDialog.cpp:3231 src/gui/AstroCalcDialog.cpp:7341
 #: src/gui/ObsListDialog.cpp:292 src/ui_configurationDialog.h:1806
 #: plugins/Satellites/src/Satellite.cpp:340
 #: plugins/TelescopeControl/src/TelescopeClient.cpp:136
@@ -331,7 +331,7 @@ msgstr "Антапекс"
 
 #. TRANSLATORS: Unit of measure for speed - kilometers per second
 #: src/core/modules/GridLinesMgr.cpp:1629 src/core/modules/Planet.cpp:736
-#: src/core/modules/Planet.cpp:1028 src/gui/AstroCalcDialog.cpp:8177
+#: src/core/modules/Planet.cpp:1028 src/gui/AstroCalcDialog.cpp:8228
 #: plugins/Satellites/src/Satellite.cpp:361
 #: plugins/Satellites/src/Satellite.cpp:404
 #: plugins/MeteorShowers/src/MeteorShower.cpp:580
@@ -932,7 +932,7 @@ msgstr "Діаметр"
 #: src/core/modules/Planet.cpp:1351 src/core/modules/Comet.cpp:193
 #: src/core/modules/Comet.cpp:203 src/gui/StelGuiItems.cpp:894
 #: src/gui/AstroCalcDialog.cpp:3048 src/gui/AstroCalcDialog.cpp:3561
-#: src/gui/AstroCalcDialog.cpp:8112 plugins/Satellites/src/Satellites.cpp:2933
+#: src/gui/AstroCalcDialog.cpp:8163 plugins/Satellites/src/Satellites.cpp:2933
 #: plugins/Satellites/src/Satellite.cpp:357
 #: plugins/Satellites/src/Satellite.cpp:400
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1200
@@ -2387,7 +2387,7 @@ msgstr "до"
 #: src/core/modules/Planet.cpp:676 src/gui/AstroCalcDialog.cpp:861
 #: src/gui/AstroCalcDialog.cpp:1173 src/gui/AstroCalcDialog.cpp:1471
 #: src/gui/AstroCalcDialog.cpp:1738 src/gui/AstroCalcDialog.cpp:1797
-#: src/gui/AstroCalcDialog.cpp:8137 src/gui/AstroCalcChart.cpp:428
+#: src/gui/AstroCalcDialog.cpp:8188 src/gui/AstroCalcChart.cpp:428
 #: src/gui/AstroCalcChart.cpp:432 src/gui/AstroCalcChart.cpp:447
 #: src/gui/AstroCalcChart.cpp:454 src/gui/AstroCalcChart.cpp:458
 #: plugins/Exoplanets/src/Exoplanet.cpp:364
@@ -2405,7 +2405,7 @@ msgstr "Світла пора доби"
 #. TRANSLATORS: Unit of measure for distance - milliones kilometers
 #. TRANSLATORS: Unit of measure for distance - millions kilometers
 #: src/core/modules/Planet.cpp:694 src/core/modules/Planet.cpp:715
-#: src/core/modules/Comet.cpp:195 src/gui/AstroCalcDialog.cpp:8114
+#: src/core/modules/Comet.cpp:195 src/gui/AstroCalcDialog.cpp:8165
 msgctxt "distance"
 msgid "M km"
 msgstr "млн. км"
@@ -2468,14 +2468,14 @@ msgstr "Освітлено"
 msgid "Elong. in Ecl.Long."
 msgstr "Елонг. у екл. довг."
 
-#: src/core/modules/Planet.cpp:913 src/gui/AstroCalcDialog.cpp:8347
+#: src/core/modules/Planet.cpp:913 src/gui/AstroCalcDialog.cpp:8398
 #: src/gui/AstroCalcChart.cpp:473
 msgid "Angular distance"
 msgstr "Кутова відстань"
 
 #. TRANSLATORS: Unit of measure for period - days
 #: src/core/modules/Planet.cpp:931 src/core/modules/StarWrapper.cpp:362
-#: src/gui/AstroCalcDialog.cpp:8148
+#: src/gui/AstroCalcDialog.cpp:8199
 msgctxt "duration"
 msgid "days"
 msgstr "днів"
@@ -4094,19 +4094,19 @@ msgstr "Видимий сидеричний час"
 
 #. TRANSLATORS: time of transit
 #: src/core/StelObject.cpp:752 src/gui/AstroCalcDialog.cpp:874
-#: src/gui/AstroCalcDialog.cpp:2073 src/gui/AstroCalcDialog.cpp:7274
+#: src/gui/AstroCalcDialog.cpp:2073 src/gui/AstroCalcDialog.cpp:7325
 msgctxt "celestial event; passage across a meridian"
 msgid "Transit"
 msgstr "Проходження"
 
 #: src/core/StelObject.cpp:753 src/gui/AstroCalcDialog.cpp:2072
-#: src/gui/AstroCalcDialog.cpp:7273
+#: src/gui/AstroCalcDialog.cpp:7324
 msgctxt "celestial event"
 msgid "Rise"
 msgstr "Схід"
 
 #: src/core/StelObject.cpp:754 src/gui/AstroCalcDialog.cpp:2074
-#: src/gui/AstroCalcDialog.cpp:7277
+#: src/gui/AstroCalcDialog.cpp:7328
 msgctxt "celestial event"
 msgid "Set"
 msgstr "Захід"
@@ -4178,7 +4178,7 @@ msgstr "Макс. елонгація на захід"
 msgid "Parallactic Angle"
 msgstr "Паралактичний кут"
 
-#: src/core/StelObject.cpp:968 src/gui/AstroCalcDialog.cpp:7372
+#: src/core/StelObject.cpp:968 src/gui/AstroCalcDialog.cpp:7423
 msgid "IAU Constellation"
 msgstr "Сузір’я МАО"
 
@@ -6468,7 +6468,7 @@ msgstr "Будь ласка, виберіть об’єкт для кресле�
 #. TRANSLATORS: name of object
 #: src/gui/AstroCalcDialog.cpp:812 src/gui/AstroCalcDialog.cpp:908
 #: src/gui/AstroCalcDialog.cpp:1717 src/gui/AstroCalcDialog.cpp:2071
-#: src/gui/AstroCalcDialog.cpp:7262 src/ui_configurationDialog.h:1826
+#: src/gui/AstroCalcDialog.cpp:7313 src/ui_configurationDialog.h:1826
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:517
 #: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:103
 #: plugins/Exoplanets/src/Exoplanet.cpp:360
@@ -6487,13 +6487,13 @@ msgid "Dec (J2000)"
 msgstr "Схил (J2000)"
 
 #. TRANSLATORS: opacity
-#: src/gui/AstroCalcDialog.cpp:830 src/gui/AstroCalcDialog.cpp:7271
+#: src/gui/AstroCalcDialog.cpp:830 src/gui/AstroCalcDialog.cpp:7322
 msgid "Opac."
 msgstr "Непр."
 
 #. TRANSLATORS: magnitude
 #: src/gui/AstroCalcDialog.cpp:835 src/gui/AstroCalcDialog.cpp:1734
-#: src/gui/AstroCalcDialog.cpp:2078 src/gui/AstroCalcDialog.cpp:7266
+#: src/gui/AstroCalcDialog.cpp:2078 src/gui/AstroCalcDialog.cpp:7317
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:184
 msgid "Mag."
 msgstr "Вел."
@@ -6506,7 +6506,7 @@ msgstr "К.Р."
 
 #. TRANSLATORS: separation, arc-seconds
 #. TRANSLATORS: separation
-#: src/gui/AstroCalcDialog.cpp:851 src/gui/AstroCalcDialog.cpp:7281
+#: src/gui/AstroCalcDialog.cpp:851 src/gui/AstroCalcDialog.cpp:7332
 msgid "Sep."
 msgstr "Розд."
 
@@ -6541,7 +6541,7 @@ msgid "S.B."
 msgstr "Я.П."
 
 #. TRANSLATORS: elevation
-#: src/gui/AstroCalcDialog.cpp:876 src/gui/AstroCalcDialog.cpp:7276
+#: src/gui/AstroCalcDialog.cpp:876 src/gui/AstroCalcDialog.cpp:7327
 msgid "Elev."
 msgstr "Вис."
 
@@ -7935,82 +7935,82 @@ msgid "Exoplanetary systems"
 msgstr "Екзопланетні системи"
 
 #. TRANSLATORS: angular size
-#: src/gui/AstroCalcDialog.cpp:7286
+#: src/gui/AstroCalcDialog.cpp:7337
 msgid "Ang. Size"
 msgstr "Кут. розмір"
 
 #. TRANSLATORS: IAU Constellation
-#: src/gui/AstroCalcDialog.cpp:7289
+#: src/gui/AstroCalcDialog.cpp:7340
 msgctxt "IAU Constellation"
 msgid "Const."
 msgstr "Сузір."
 
-#: src/gui/AstroCalcDialog.cpp:7409 src/ui_viewDialog.h:3762
+#: src/gui/AstroCalcDialog.cpp:7460 src/ui_viewDialog.h:3762
 #: src/ui_astroCalcDialog.h:2347
 msgid "Limit angular size:"
 msgstr "Обмеження на кутовий розмір:"
 
-#: src/gui/AstroCalcDialog.cpp:7410 src/ui_astroCalcDialog.h:2345
+#: src/gui/AstroCalcDialog.cpp:7461 src/ui_astroCalcDialog.h:2345
 msgid "Set limits for angular size for visible celestial objects"
 msgstr "Встановити обмеження для кутового розміру видимих небесних об'єктів"
 
-#: src/gui/AstroCalcDialog.cpp:7411 src/ui_astroCalcDialog.h:2339
+#: src/gui/AstroCalcDialog.cpp:7462 src/ui_astroCalcDialog.h:2339
 msgid "Minimal angular size for visible celestial objects"
 msgstr "Мінімальний кутовий розмір видимих небесних об'єктів"
 
-#: src/gui/AstroCalcDialog.cpp:7412 src/ui_astroCalcDialog.h:2342
+#: src/gui/AstroCalcDialog.cpp:7463 src/ui_astroCalcDialog.h:2342
 msgid "Maximum angular size for visible celestial objects"
 msgstr "Максимальний кутовий розмір видимих небесних об'єктів"
 
-#: src/gui/AstroCalcDialog.cpp:7684
+#: src/gui/AstroCalcDialog.cpp:7735
 msgid "Limit angular separation:"
 msgstr "Обмеження кутової роздільності:"
 
-#: src/gui/AstroCalcDialog.cpp:7685
+#: src/gui/AstroCalcDialog.cpp:7736
 msgid "Set limits for angular separation for visible double stars"
 msgstr ""
 "Встановити обмеження для кутової роздільності для видимих подвійних зірок"
 
-#: src/gui/AstroCalcDialog.cpp:7686
+#: src/gui/AstroCalcDialog.cpp:7737
 msgid "Minimal angular separation for visible double stars"
 msgstr "Мінімальна кутова роздільність для видимих подвійних зірок"
 
-#: src/gui/AstroCalcDialog.cpp:7687
+#: src/gui/AstroCalcDialog.cpp:7738
 msgid "Maximum angular separation for visible double stars"
 msgstr "Максимальна кутова роздільність для видимих подвійних зірок"
 
-#: src/gui/AstroCalcDialog.cpp:8062
+#: src/gui/AstroCalcDialog.cpp:8113
 msgid "Save list of objects as..."
 msgstr "Зберегти список об'єктів як…"
 
-#: src/gui/AstroCalcDialog.cpp:8068 src/ui_astroCalcDialog.h:2134
+#: src/gui/AstroCalcDialog.cpp:8119 src/ui_astroCalcDialog.h:2134
 msgid "What's Up Tonight"
 msgstr "Сьогодні ввечері"
 
 #. TRANSLATORS: Part of unit of measure for mean motion - degrees per day
-#: src/gui/AstroCalcDialog.cpp:8146
+#: src/gui/AstroCalcDialog.cpp:8197
 msgctxt "mean motion"
 msgid "day"
 msgstr "день"
 
-#: src/gui/AstroCalcDialog.cpp:8210
+#: src/gui/AstroCalcDialog.cpp:8261
 msgid "Linear and angular distances between selected objects"
 msgstr "Лінійна і кутова відстані між позначеними об'єктами"
 
-#: src/gui/AstroCalcDialog.cpp:8280
+#: src/gui/AstroCalcDialog.cpp:8331
 msgid "Angular distance between the Moon and selected object"
 msgstr "Кутова відстань між Місяцем і позначеним об'єктом"
 
-#: src/gui/AstroCalcDialog.cpp:8346
+#: src/gui/AstroCalcDialog.cpp:8397
 msgid "Angular distance between the Moon and celestial object"
 msgstr "Кутова відстань між Місяцем і небесним об'єктом"
 
-#: src/gui/AstroCalcDialog.cpp:8497
+#: src/gui/AstroCalcDialog.cpp:8548
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1621
 msgid "CSV (Comma delimited)"
 msgstr "CSV (із відокремленням комами)"
 
-#: src/gui/AstroCalcDialog.cpp:8500
+#: src/gui/AstroCalcDialog.cpp:8551
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1622
 msgid "Microsoft Excel Open XML Spreadsheet"
 msgstr "Електронна таблиця Microsoft Excel Open XML"
@@ -23613,74 +23613,56 @@ msgstr "Як Нептун"
 #. TRANSLATORS: Exoplanet detection method
 #: plugins/Exoplanets/src/Exoplanets.cpp:1064
 msgctxt "Exoplanet detection method"
-msgid "Primary Transit"
-msgstr "Основне проходження"
+msgid "Astrometry"
+msgstr "Астрометрія"
 
 #. TRANSLATORS: Exoplanet detection method
 #: plugins/Exoplanets/src/Exoplanets.cpp:1066
-msgctxt "Exoplanet detection method"
-msgid "Microlensing"
-msgstr "Мікролінзування"
-
-#. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:1068
-msgctxt "Exoplanet detection method"
-msgid "Radial Velocity"
-msgstr "Радіальна швидкість"
-
-#. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:1070
 msgctxt "Exoplanet detection method"
 msgid "Imaging"
 msgstr "Знімки"
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:1072
-msgctxt "Exoplanet detection method"
-msgid "Astrometry"
-msgstr "Астрометрія"
-
-#. TRANSLATORS: Exoplanet detection method. TTV=Transit Timing Variation
-#: plugins/Exoplanets/src/Exoplanets.cpp:1074
-msgctxt "Exoplanet detection method"
-msgid "TTV"
-msgstr "ВЧК"
-
-#. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:1076
-msgctxt "Exoplanet detection method"
-msgid "Timing"
-msgstr "Синхронізація"
-
-#. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:1078
-msgctxt "Exoplanet detection method"
-msgid "Default"
-msgstr "Типовий"
-
-#. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:1080
-msgctxt "Exoplanet detection method"
-msgid "Secondary Transit"
-msgstr "Вторинне проходження"
-
-#. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:1082
-msgctxt "Exoplanet detection method"
-msgid "Disk Kinematics"
-msgstr "Кінематика диска"
-
-#. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:1084
+#: plugins/Exoplanets/src/Exoplanets.cpp:1068
 msgctxt "Exoplanet detection method"
 msgid "Kinematic"
 msgstr "Кінематика"
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:1086
+#: plugins/Exoplanets/src/Exoplanets.cpp:1070
+msgctxt "Exoplanet detection method"
+msgid "Microlensing"
+msgstr "Мікролінзування"
+
+#. TRANSLATORS: Exoplanet detection method
+#: plugins/Exoplanets/src/Exoplanets.cpp:1072
 msgctxt "Exoplanet detection method"
 msgid "Other"
 msgstr "Інше"
+
+#. TRANSLATORS: Exoplanet detection method
+#: plugins/Exoplanets/src/Exoplanets.cpp:1074
+msgctxt "Exoplanet detection method"
+msgid "Primary Transit"
+msgstr "Основне проходження"
+
+#. TRANSLATORS: Exoplanet detection method
+#: plugins/Exoplanets/src/Exoplanets.cpp:1076
+msgctxt "Exoplanet detection method"
+msgid "Radial Velocity"
+msgstr "Радіальна швидкість"
+
+#. TRANSLATORS: Exoplanet detection method. TTV=Transit Timing Variation
+#: plugins/Exoplanets/src/Exoplanets.cpp:1078
+msgctxt "Exoplanet detection method"
+msgid "TTV"
+msgstr "ВЧК"
+
+#. TRANSLATORS: Exoplanet detection method
+#: plugins/Exoplanets/src/Exoplanets.cpp:1080
+msgctxt "Exoplanet detection method"
+msgid "Timing"
+msgstr "Синхронізація"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:342
 msgid "Metallicity"
