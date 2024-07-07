@@ -473,7 +473,15 @@ QString Exoplanet::getInfoString(const StelCore* core, const InfoStringGroup& fl
 				if (p.detectionMethod.isEmpty())
 					detectionMethodLabel.append(emptyRow);
 				else
-					detectionMethodLabel.append(row.arg(q_(p.detectionMethod)));
+				{
+					QStringList dmlist = p.detectionMethod.split(",");
+					QStringList dmloc;
+					for (int i=0;i<dmlist.count();i++)
+					{
+						dmloc << qc_(dmlist.at(i).trimmed(), "Exoplanet detection method");
+					}
+					detectionMethodLabel.append(row.arg(dmloc.join(", ")));
+				}
 			}
 			oss << "<table style='margin-left: -2px;'>"; // Cosmetic fix
 			oss << "<tr>" << planetNameLabel << "</tr>";
@@ -566,15 +574,15 @@ QVariantMap Exoplanet::getInfoMap(const StelCore *core) const
 QString Exoplanet::getPlanetaryClassI18n(QString ptype) const
 {
 	QString result = "";
-	static const QRegularExpression dataRx("^(\\w)-(\\w+)\\s(\\w+)$");
+	static const QRegularExpression dataRx("^(\\w)[-\\s]+(\\w+)\\s(\\w+)$");
 	QRegularExpressionMatch dataMatch=dataRx.match(ptype);
 	if (dataMatch.hasMatch())
 	{
-		QString spectral = dataMatch.captured(1).trimmed();
+		QString spectral = dataMatch.captured(1).trimmed();		
 		QString zone = dataMatch.captured(2).trimmed();
 		QString size = dataMatch.captured(3).trimmed();
 
-		result = QString("%1-%2 %3").arg(spectral, q_(zone), q_(size));
+		result = QString("%1-%2 %3").arg(spectral, qc_(zone, "Habitable zone"), qc_(size, "Exoplanet size"));
 	}
 	return result;
 }

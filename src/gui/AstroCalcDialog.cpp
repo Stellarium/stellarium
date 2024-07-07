@@ -7213,6 +7213,57 @@ void AstroCalcDialog::populateWutGroups()
 	category->blockSignals(false);
 }
 
+QString AstroCalcDialog::getWUTObjectType()
+{
+	static const QMap<int, QString> wutObjectTypes = {
+		{ EWPlanets,							"Planet" },
+		{ EWBrightStars,						"Star" },
+		{ EWBrightNebulae,					"Nebula" },
+		{ EWDarkNebulae,						"Nebula" },
+		{ EWGalaxies,						"Nebula" },
+		{ EWOpenStarClusters,				 	"Nebula" },
+		{ EWAsteroids,						"Planet" },
+		{ EWComets,							"Planet" },
+		{ EWPlutinos,							"Planet" },
+		{ EWDwarfPlanets,					"Planet" },
+		{ EWCubewanos,						"Planet" },
+		{ EWScatteredDiscObjects,				"Planet" },
+		{ EWOortCloudObjects,					"Planet" },
+		{ EWSednoids,						"Planet" },
+		{ EWPlanetaryNebulae,					"Nebula" },
+		{ EWBrightDoubleStars,				"Star" },
+		{ EWBrightVariableStars,				"Star" },
+		{ EWBrightStarsWithHighProperMotion,	"Star" },
+		{ EWSymbioticStars,					"Nebula" },
+		{ EWEmissionLineStars,				"Nebula" },
+		{ EWSupernovaeCandidates,			"Nebula" },
+		{ EWSupernovaeRemnantCandidates,	"Nebula" },
+		{ EWSupernovaeRemnants,				"Nebula" },
+		{ EWClustersOfGalaxies,				"Nebula" },
+		{ EWInterstellarObjects,				"Planet" },
+		{ EWGlobularStarClusters,				"Nebula" },
+		{ EWRegionsOfTheSky,					"Nebula" },
+		{ EWActiveGalaxies,					"Nebula" },
+		{ EWInteractingGalaxies,				"Nebula" },
+		{ EWDeepSkyObjects,					"Nebula" },
+		{ EWMessierObjects,					"Nebula" },
+		{ EWNGCICObjects,					"Nebula" },
+		{ EWCaldwellObjects,					"Nebula" },
+		{ EWHerschel400Objects,				"Nebula" },
+		{ EWAlgolTypeVariableStars,			"Star" },
+		{ EWClassicalCepheidsTypeVariableStars,	"Star" },
+		{ EWCarbonStars,						"Star" },
+		{ EWBariumStars,						"Star" },
+		// plug-ins
+		{ EWBrightNovaStars,					"Nova" },
+		{ EWBrightSupernovaStars,				"Supernova" },
+		{ EWPulsars,							"Pulsar" },
+		{ EWExoplanetarySystems,				"Exoplanet" }
+	};
+
+	return wutObjectTypes.value(wutCategories.value(ui->wutCategoryListWidget->currentItem()->text()), QString());
+}
+
 void AstroCalcDialog::saveWutMagnitudeLimit(double mag)
 {
 	conf->setValue("astrocalc/wut_magnitude_limit", QString::number(mag, 'f', 2));
@@ -8039,7 +8090,7 @@ void AstroCalcDialog::selectWutObject(const QModelIndex &index)
 	{
 		// Find the object
 		QString wutObjectEnglishName = index.sibling(index.row(), WUTObjectName).data(Qt::UserRole).toString();
-		if (objectMgr->findAndSelect(wutObjectEnglishName))
+		if (objectMgr->findAndSelect(wutObjectEnglishName, getWUTObjectType()) || objectMgr->findAndSelectI18n(wutObjectEnglishName, getWUTObjectType()))
 		{
 			const QList<StelObjectP> newSelected = objectMgr->getSelectedObject();
 			if (!newSelected.empty())

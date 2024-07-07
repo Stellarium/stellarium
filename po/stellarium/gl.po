@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2024-06-09 22:51+0700\n"
+"POT-Creation-Date: 2024-07-02 11:50+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Manuel Rosales <manuel.rosales.gr@gmail.com>, 2024\n"
 "Language-Team: Galician (https://app.transifex.com/stellarium/teams/80998/gl/)\n"
@@ -7888,7 +7888,7 @@ msgid "Bright supernova stars"
 msgstr "Estrelas Supernova Brillantes"
 
 #: src/gui/AstroCalcDialog.cpp:7204 plugins/Pulsars/src/Pulsars.cpp:71
-#: plugins/Pulsars/src/Pulsars.cpp:169 plugins/Pulsars/src/Pulsars.cpp:170
+#: plugins/Pulsars/src/Pulsars.cpp:169
 msgid "Pulsars"
 msgstr "Púlsares"
 
@@ -13920,7 +13920,8 @@ msgstr "Por defecto"
 msgid "Displayed fields"
 msgstr "Campos amosados"
 
-#: src/ui_configurationDialog.h:1774 src/ui_configurationDialog.h:1794
+#: src/ui_configurationDialog.h:1774
+msgctxt "hour angle"
 msgid "Equatorial coordinates, equinox of date"
 msgstr "Coordenadas ecuatoriais, equinoccio de data"
 
@@ -13964,6 +13965,11 @@ msgstr "Coordenadas da eclíptica (J2000)"
 #: src/ui_configurationDialog.h:1792
 msgid "Velocity"
 msgstr "Velocidade"
+
+#: src/ui_configurationDialog.h:1794
+msgctxt "right ascension"
+msgid "Equatorial coordinates, equinox of date"
+msgstr "Coordenadas ecuatoriais, equinoccio de data"
 
 #: src/ui_configurationDialog.h:1796
 msgid "Right ascension/Declination (of date)"
@@ -15710,7 +15716,7 @@ msgid "Color of markers of radio galaxies"
 msgstr "Cor dos marcadores de radiogalaxias"
 
 #: src/ui_dsoColorsDialog.h:616 plugins/Quasars/src/Quasars.cpp:72
-#: plugins/Quasars/src/Quasars.cpp:171 plugins/Quasars/src/Quasars.cpp:172
+#: plugins/Quasars/src/Quasars.cpp:171
 msgid "Quasars"
 msgstr "Quásares"
 
@@ -16441,8 +16447,8 @@ msgstr "Vista Telrad"
 #: plugins/Oculars/src/Oculars.cpp:1496
 #: plugins/Satellites/src/Satellites.cpp:167
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:206
-#: plugins/NavStars/src/NavStars.cpp:120 plugins/Quasars/src/Quasars.cpp:172
-#: plugins/Pulsars/src/Pulsars.cpp:170
+#: plugins/NavStars/src/NavStars.cpp:120 plugins/Quasars/src/Quasars.cpp:173
+#: plugins/Pulsars/src/Pulsars.cpp:171
 #: plugins/Exoplanets/src/Exoplanets.cpp:175
 #: plugins/Observability/src/Observability.cpp:198
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:92
@@ -22726,9 +22732,19 @@ msgstr ""
 "visual 18. O catálogo de quásares foi compilado a partir de 'Quasars and "
 "Active Galactic Nuclei' (13º Ed.) (Veron + 2010)"
 
-#: plugins/Quasars/src/Quasars.cpp:171
+#: plugins/Quasars/src/Quasars.cpp:172
 msgid "Show quasars"
 msgstr "Amosar quásares"
+
+#: plugins/Quasars/src/Quasars.cpp:175
+#: plugins/Quasars/src/ui_quasarsDialog.h:266
+msgid "Enable display of distribution for quasars"
+msgstr "Activar a visualización da distribución de quásares"
+
+#: plugins/Quasars/src/Quasars.cpp:176
+#: plugins/Quasars/src/ui_quasarsDialog.h:269
+msgid "Use markers for quasars"
+msgstr "Usar marcadores para os quásares"
 
 #. TRANSLATORS: Jy is Jansky(10-26W/m2/Hz)
 #: plugins/Quasars/src/Quasar.cpp:144
@@ -22787,17 +22803,9 @@ msgstr "Axustes para quásares"
 msgid "Plot all quasars without labels"
 msgstr "Debuxa todos os quásares sen etiquetas"
 
-#: plugins/Quasars/src/ui_quasarsDialog.h:266
-msgid "Enable display of distribution for quasars"
-msgstr "Activar a visualización da distribución de quásares"
-
 #: plugins/Quasars/src/ui_quasarsDialog.h:268
 msgid "Show quasars button on toolbar"
 msgstr "Amosar botón de quásares na barra de ferramentas"
-
-#: plugins/Quasars/src/ui_quasarsDialog.h:269
-msgid "Use markers for quasars"
-msgstr "Usar marcadores para os quásares"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:270
 msgid "Quasars marker color"
@@ -22812,9 +22820,19 @@ msgstr ""
 "Este plugin indica a posición de diversos púlsares, con información sobre "
 "cada un dos obxectos."
 
-#: plugins/Pulsars/src/Pulsars.cpp:169
+#: plugins/Pulsars/src/Pulsars.cpp:170
 msgid "Show pulsars"
 msgstr "Amosar púlsares"
+
+#: plugins/Pulsars/src/Pulsars.cpp:173
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:302
+msgid "Enable display of distribution for pulsars"
+msgstr "Activar visualización de distribución para os púlsares"
+
+#: plugins/Pulsars/src/Pulsars.cpp:174
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:309
+msgid "Use separate color for pulsars with glitches"
+msgstr "Usar unha cor distinta para púlsares con fallos"
 
 #: plugins/Pulsars/src/Pulsar.cpp:191
 msgid "registered glitches"
@@ -23005,10 +23023,6 @@ msgstr "Axustes para púlsares"
 msgid "Plot all pulsars without labels"
 msgstr "Debuxa todos os púlsares sen etiquetas"
 
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:302
-msgid "Enable display of distribution for pulsars"
-msgstr "Activar visualización de distribución para os púlsares"
-
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:304
 msgid "Show pulsars button on toolbar"
 msgstr "Amosar botón de púlsares na barra de ferramentas"
@@ -23020,10 +23034,6 @@ msgstr "Cor do marcador de púlsares"
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:307
 msgid "Marker Color for pulsars"
 msgstr "Cor do marcador para púlsares"
-
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:309
-msgid "Use separate color for pulsars with glitches"
-msgstr "Usar unha cor distinta para púlsares con fallos"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:311
 msgid "Marker Color for pulsars with glitches"
