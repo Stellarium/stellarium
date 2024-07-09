@@ -227,7 +227,6 @@ void AstroCalcDialog::createDialogContent()
 	initListWUT();
 	populateTimeIntervalsList();
 	populateWutGroups();
-	populateToolTips();
 	// Default buttons state
 	bool buttonState = false;
 
@@ -580,6 +579,9 @@ void AstroCalcDialog::createDialogContent()
 	connect(ui->exportGraphsPushButton, &QPushButton::clicked, this, [=]{ saveGraph(ui->twoGraphsChartView); });
 	connect(ui->exportLunarElongationPushButton, &QPushButton::clicked, this, [=]{ saveGraph(ui->lunarElongationChartView); });
 	connect(ui->exportPCPushButton, &QPushButton::clicked, this, [=]{ saveGraph(ui->pcChartView); });
+
+	// NOTE: populating tooltips should be doing after initialization and setting the values for all spinboxes
+	populateToolTips();
 }
 
 void AstroCalcDialog::populateToolTips()
