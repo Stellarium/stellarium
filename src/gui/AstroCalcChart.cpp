@@ -31,7 +31,7 @@
 #include <QPen>
 #include <QColor>
 
-AstroCalcChart::AstroCalcChart(QSet<Series> which) : QChart(), yAxisR(Q_NULLPTR), yMin(-90), yMax(90.)
+AstroCalcChart::AstroCalcChart(QSet<Series> which) : QChart(), yAxisR(nullptr), yMin(-90), yMax(90.)
 {
 	// Configure with all series you want to potentially use later.
 	for (Series s: which)
@@ -166,7 +166,7 @@ void AstroCalcChart::append(Series s, qint64 x, qreal y)
 		qWarning() << "Series " << s << "invalid for append()!";
 }
 
-void AstroCalcChart::replace(Series s, int index, qreal x, qreal y)
+void AstroCalcChart::replace(const Series s, const int index, const qreal x, const qreal y)
 {
 	if (map.value(s))
 	{
@@ -222,7 +222,7 @@ void AstroCalcChart::drawTrivialLineY(Series s, const qreal y)
 		qWarning() << "No series" << s << "to add trivial Y line";
 }
 
-int AstroCalcChart::lengthOfSeries(Series s) const
+int AstroCalcChart::lengthOfSeries(const Series s) const
 {
 	if (!(map.value(s)))
 		return -1;
@@ -242,7 +242,7 @@ void AstroCalcChart::show(Series s)
 	connect(map.value(s), SIGNAL(hovered(const QPointF &, bool)), this, SLOT(showToolTip(const QPointF &, bool)));
 }
 
-void AstroCalcChart::showToolTip(const QPointF &point, bool show)
+void AstroCalcChart::showToolTip(const QPointF &point, const bool show)
 {
 	if (show)
 	{
@@ -280,14 +280,14 @@ void AstroCalcChart::showToolTip(const QPointF &point, bool show)
 		setToolTip(QString());
 }
 
-void AstroCalcChart::clear(Series s)
+void AstroCalcChart::clear(const Series s)
 {
 	map.value(s)->clear();
 	if (series().contains(map.value(s)))
 		removeSeries(map.value(s)); // updates legend to not show entries
 }
 
-QPair<QDateTime, QDateTime> AstroCalcChart::findXRange(const double JD, const Series series, const int periods)
+QPair<QDateTime, QDateTime> AstroCalcChart::findXRange(const double JD, const Series series, const int periods) const
 {
 	const double utcOffset=StelApp::getInstance().getCore()->getUTCOffset(JD) / 24.;
 
@@ -538,7 +538,7 @@ void AstroCalcChart::setupAxes(const double jd, const int periods, const QString
 	}
 }
 
-void AstroCalcChart::setYrange(Series series, qreal min, qreal max, bool strictMin)
+void AstroCalcChart::setYrange(const Series series, qreal min, qreal max, const bool strictMin)
 {
 	bufferYrange(series, &min, &max, strictMin);
 	yMin=min;
@@ -565,7 +565,7 @@ void AstroCalcChart::setYrange(Series series, qreal min, qreal max, bool strictM
 	}
 }
 
-void AstroCalcChart::setYrangeR(Series series, qreal min, qreal max)
+void AstroCalcChart::setYrangeR(const Series series, qreal min, qreal max)
 {
 	bufferYrange(series, &min, &max);
 	yMinR=min;
@@ -592,7 +592,7 @@ void AstroCalcChart::setYrangeR(Series series, qreal min, qreal max)
 	}
 }
 
-void AstroCalcChart::bufferYrange(Series series, double *min, double *max, bool strictMin)
+void AstroCalcChart::bufferYrange(const Series series, double *min, double *max, const bool strictMin) const
 {
 	// Decide, per-case, buffer values and true limits (0...360, 0..24, -90..+90, etc.)
 	// Most curves are Splines which may exceed the actual X/Y point range somewhat, requiring a buffer. A better algorithm should compute the actual max values for the spline!
