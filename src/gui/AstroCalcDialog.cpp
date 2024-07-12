@@ -305,7 +305,7 @@ void AstroCalcDialog::createDialogContent()
 	initEphemerisFlagNakedEyePlanets();
 	enableEphemerisButtons(buttonState);
 	ui->ephemerisIgnoreDateTestCheckBox->setChecked(conf->value("astrocalc/flag_ephemeris_ignore_date_test", true).toBool());
-	connect(ui->ephemerisIgnoreDateTestCheckBox, SIGNAL(toggled(bool)), this, SLOT(saveIgnoreDateTestFlag(bool)));
+	connect(ui->ephemerisIgnoreDateTestCheckBox, SIGNAL(toggled(bool)), this, SLOT(saveIgnoreDateTestFlag(bool)));	
 	connect(ui->ephemerisHorizontalCoordinatesCheckBox, SIGNAL(toggled(bool)), this, SLOT(reGenerateEphemeris()));
 	connect(ui->allNakedEyePlanetsCheckBox, SIGNAL(toggled(bool)), this, SLOT(saveEphemerisFlagNakedEyePlanets(bool)));
 	connect(ui->ephemerisPushButton, SIGNAL(clicked()), this, SLOT(generateEphemeris()));
@@ -1777,7 +1777,7 @@ void AstroCalcDialog::saveIgnoreDateTestFlag(bool b)
 
 void AstroCalcDialog::reGenerateEphemeris(bool withSelection)
 {
-	if (!EphemerisList.isEmpty())
+	if (computeEphemeris)
 	{
 		int row = ui->ephemerisTreeWidget->currentIndex().row();
 		generateEphemeris(); // Update list of ephemeris
@@ -2013,6 +2013,7 @@ void AstroCalcDialog::generateEphemeris()
 	// sort-by-date
 	ui->ephemerisTreeWidget->sortItems(EphemerisDate, Qt::AscendingOrder);
 	enableEphemerisButtons(true);
+	computeEphemeris = true;
 
 	emit solarSystem->requestEphemerisVisualization();
 }

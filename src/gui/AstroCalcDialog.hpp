@@ -643,6 +643,7 @@ private:
 	bool plotLunarElongationGraph = false;
 	bool plotAziVsTime = false;
 	bool computeRTS = false;
+	bool computeEphemeris = false;
 	int altVsTimePositiveLimit = 0, monthlyElevationPositiveLimit = 0, graphsDuration = 1, graphsStep = 24;
 	QStringList ephemerisHeader, phenomenaHeader, positionsHeader, hecPositionsHeader, wutHeader, rtsHeader, lunareclipseHeader, lunareclipsecontactsHeader, solareclipseHeader, solareclipsecontactsHeader, solareclipselocalHeader, transitHeader;
 	static double brightLimit;
@@ -845,13 +846,18 @@ private:
 		{
 			return data(column, Qt::UserRole).toFloat() < other.data(column, Qt::UserRole).toFloat();
 		}
-		else if (column == AstroCalcDialog::EphemerisRA || column == AstroCalcDialog::EphemerisDec)
+		else if (column == AstroCalcDialog::EphemerisRA || column == AstroCalcDialog::EphemerisDec || column == AstroCalcDialog::EphemerisElongation)
 		{
 			return StelUtils::getDecAngle(text(column)) < StelUtils::getDecAngle(other.text(column));
 		}
 		else if (column == AstroCalcDialog::EphemerisMagnitude || column == AstroCalcDialog::EphemerisDistance)
 		{
 			return text(column).toFloat() < other.text(column).toFloat();
+		}
+		else if (column == AstroCalcDialog::EphemerisPhase)
+		{
+			// a bit hackish sorting rule as a quick solution for sorting percentages
+			return text(column).replace("%","").toFloat() < other.text(column).replace("%","").toFloat();
 		}
 		else
 		{
