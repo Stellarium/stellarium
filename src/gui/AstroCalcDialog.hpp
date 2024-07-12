@@ -845,13 +845,18 @@ private:
 		{
 			return data(column, Qt::UserRole).toFloat() < other.data(column, Qt::UserRole).toFloat();
 		}
-		else if (column == AstroCalcDialog::EphemerisRA || column == AstroCalcDialog::EphemerisDec)
+		else if (column == AstroCalcDialog::EphemerisRA || column == AstroCalcDialog::EphemerisDec || column == AstroCalcDialog::EphemerisElongation)
 		{
 			return StelUtils::getDecAngle(text(column)) < StelUtils::getDecAngle(other.text(column));
 		}
 		else if (column == AstroCalcDialog::EphemerisMagnitude || column == AstroCalcDialog::EphemerisDistance)
 		{
 			return text(column).toFloat() < other.text(column).toFloat();
+		}
+		else if (column == AstroCalcDialog::EphemerisPhase)
+		{
+			// a bit hackish sorting rule as a quick solution for sorting percentages
+			return text(column).replace("%","").toFloat() < other.text(column).replace("%","").toFloat();
 		}
 		else
 		{
