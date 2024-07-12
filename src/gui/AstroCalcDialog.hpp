@@ -643,6 +643,7 @@ private:
 	bool plotLunarElongationGraph = false;
 	bool plotAziVsTime = false;
 	bool computeRTS = false;
+	bool computeEphemeris = false;
 	int altVsTimePositiveLimit = 0, monthlyElevationPositiveLimit = 0, graphsDuration = 1, graphsStep = 24;
 	QStringList ephemerisHeader, phenomenaHeader, positionsHeader, hecPositionsHeader, wutHeader, rtsHeader, lunareclipseHeader, lunareclipsecontactsHeader, solareclipseHeader, solareclipsecontactsHeader, solareclipselocalHeader, transitHeader;
 	static double brightLimit;
