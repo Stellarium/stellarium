@@ -2066,7 +2066,7 @@ QStringList StarMgr::listAllObjectsByType(const QString &objType, bool inEnglish
 		{
 			static const QStringList doubleStars = {
 				"21 Tau", "27 Tau", "77 Tau", "δ1 Tau", "V1016 Ori",
-				"42 Ori", "ι Ori", "ζ Crv", "ζ UMa", "α2 Lib",
+				"42 Ori", "ι Ori", "ζ Crv", "ζ UMa", "α2 Lib", "α1 Cru",
 				"ω1 Sco", "λ Sco", "μ1 Sco", "ζ1 Sco", "ε1 Lyr", "δ1 Lyr",
 				"ν1 Sgr", "ο1 Cyg", "ο2 Cyg", "α2 Cap", "β1 Cyg", "β Ori",
 				"γ1 And", "ξ Boo", "α1 Her", "T Dra", "ν1 Dra", "70 Oph",
@@ -2094,11 +2094,11 @@ QStringList StarMgr::listAllObjectsByType(const QString &objType, bool inEnglish
 				"δ Cep", "β Per", "ο Cet", "λ Tau", "β Lyr", "ζ Gem", "μ Cep",
 				"α1 Her", "η Gem", "η Aql", "γ Cas", "α Ori", "R And",
 				"U Ant", "θ Aps", "R Aql", "V Aql", "R Aqr", "ε Aur", "R Aur",
-				"AE Aur", "W Boo", "VZ Cam", "l Car", "γ Cas", "WZ Cas",
-				"S Cen", "α Cen C", "T Cep", "U Cep", "R CMa", "VY CMa",
+				"AE Aur", "W Boo", "VZ Cam", "l Car", "WZ Cas",	"S Cen",
+				"α Cen A", "α Cen C", "T Cep", "U Cep", "R CMa", "VY CMa",
 				"S Cnc", "α CrB", "R CrB", "T CrB", "U CrB", "R Cru",
 				"SU Cyg", "EU Del", "β Dor", "R Gem", "30 Her", "68 Her",
-				"R Hor", "R Lep", "R Leo", "RR Lyr", "U Mon",
+				"R Hor", "R Lep", "R Leo", "RR Lyr", "U Mon", "R Hya", "χ Cyg",
 				"δ Ori", "VV Ori", "κ Pav", "β Peg", "ε Peg", "ζ Phe", "R Sct",
 				"U Sgr", "RY Sgr", "W UMa", "α UMi"};
 			if (inEnglish)
