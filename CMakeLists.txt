@@ -805,6 +805,14 @@ ELSE()
      MESSAGE(STATUS "Using system-provided zlib at ${ZLIB_LIBRARIES}")
 ENDIF()
 
+SET(USE_BUNDLED_QTCOMPRESS 1 CACHE BOOL "Use bundled version of qtcompress")
+IF(USE_BUNDLED_QTCOMPRESS)
+     ADD_DEFINITIONS(-DUSE_BUNDLED_QTCOMPRESS)
+     MESSAGE(STATUS "Using bundled qtcompress at ${CMAKE_SOURCE_DIR}/src/external/qtcompress")
+ELSE()
+     MESSAGE(STATUS "Using Qt-provided qtcompress")
+ENDIF()
+
 IF(ENABLE_XLSX)
      # TODO: switch to something like vcpkg or conan, and plain find_package,
      # without the fallback of cmake downloading the dep itself.
