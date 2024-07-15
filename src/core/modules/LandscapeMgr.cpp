@@ -38,7 +38,11 @@
 #include "StelPropertyMgr.hpp"
 #include "StelUtils.hpp"
 
+#if USE_BUNDLED_QTCOMPRESS
+#include "external/qtcompress/qzipreader.h"
+#else
 #include <private/qzipreader_p.h>
+#endif
 #include <QTimer>
 #include <QDebug>
 #include <QSettings>
@@ -1835,8 +1839,13 @@ QString LandscapeMgr::installLandscapeFromArchive(QString sourceFilePath, const 
 	}
 	QDir destinationDir (parentDestinationDir.absoluteFilePath("landscapes"));
 
+	#if USE_BUNDLED_QTCOMPRESS
+	Stel::QZipReader reader(sourceFilePath);
+	if (reader.status() != Stel::QZipReader::NoError)
+	#else
 	QZipReader reader(sourceFilePath);
 	if (reader.status() != QZipReader::NoError)
+	#endif
 	{
 		qWarning() << "LandscapeMgr: Unable to open as a ZIP archive:" << QDir::toNativeSeparators(sourceFilePath);
 		emit errorNotArchive();

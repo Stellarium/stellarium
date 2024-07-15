@@ -70,6 +70,22 @@ target_include_directories(zlib_stel PUBLIC zlib)
 set_target_properties(zlib_stel PROPERTIES AUTOMOC 0)
 SET_TARGET_PROPERTIES(zlib_stel PROPERTIES FOLDER "src/external")
 
+IF(USE_BUNDLED_QTCOMPRESS)
+    # QtCompress library under LGPL 2.1
+    set(qtcompress_SRCS
+        qtcompress/qzip.cpp
+        qtcompress/qzipreader.h
+        qtcompress/qzipwriter.h
+        )
+    add_library(qtcompress_stel STATIC EXCLUDE_FROM_ALL ${qtcompress_SRCS})
+    target_include_directories(qtcompress_stel PUBLIC qtcompress)
+    #this can use the system zlib, or our zlib
+    target_link_libraries(qtcompress_stel ${ZLIB_LIBRARIES} Qt${QT_VERSION_MAJOR}::Core)
+    #turn off automoc, not needed here
+    set_target_properties(qtcompress_stel PROPERTIES AUTOMOC 0)
+    SET_TARGET_PROPERTIES(qtcompress_stel PROPERTIES FOLDER "src/external")
+ENDIF()
+
 ################################# INDI ################################
 IF(USE_PLUGIN_TELESCOPECONTROL)
     SET(PREFER_SYSTEM_INDILIB 1 CACHE BOOL

@@ -41,7 +41,11 @@
 #include "StelUtils.hpp"
 #include "StelActionMgr.hpp"
 
+#if USE_BUNDLED_QTCOMPRESS
+#include "external/qtcompress/qzipreader.h"
+#else
 #include <private/qzipreader_p.h>
+#endif
 
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
@@ -2349,9 +2353,16 @@ void Satellites::saveDownloadedUpdate(QNetworkReply* reply)
 					QString archive = zip.fileName();
 					QByteArray data;
 
+					#if USE_BUNDLED_QTCOMPRESS
+					Stel::QZipReader reader(archive);
+					if (reader.status() != Stel::QZipReader::NoError)
+					#else
 					QZipReader reader(archive);
 					if (reader.status() != QZipReader::NoError)
+					#endif
+					{
 						qWarning() << "[Satellites] Unable to open as a ZIP archive";
+					}
 					else
 					{
 						for (const auto& info : reader.fileInfoList())
