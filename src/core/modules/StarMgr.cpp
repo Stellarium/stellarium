@@ -2067,25 +2067,16 @@ QStringList StarMgr::listAllObjectsByType(const QString &objType, bool inEnglish
 			static const QStringList doubleStars = {
 				"21 Tau", "27 Tau", "77 Tau", "δ1 Tau", "V1016 Ori",
 				"42 Ori", "ι Ori", "ζ Crv", "ζ UMa", "α2 Lib", "α1 Cru",
-				"ω1 Sco", "λ Sco", "μ1 Sco", "ζ1 Sco", "ε1 Lyr", "δ1 Lyr",
-				"ν1 Sgr", "ο1 Cyg", "ο2 Cyg", "α2 Cap", "β1 Cyg", "β Ori",
-				"γ1 And", "ξ Boo", "α1 Her", "T Dra", "ν1 Dra", "70 Oph",
-				"α Gem", "ζ Her", "ο2 Eri", "γ1 Ari", "γ Vir", "γ1 Leo",
-				"β Mon", "ε Boo", "44 Boo", "β1 Sco", "ζ1 Cnc", "φ2 Cnc",
-				"α Leo", "α2 CVn", "ι Cas", "ε Ari", "κ Vel", "γ1 Del",
+				"ω1 Sco", "λ Sco", "μ1 Sco", "ζ1 Sco", "ε1 Lyr", "ε2 Lyr",
+				"δ1 Lyr", 	"ν1 Sgr", "ο1 Cyg", "ο2 Cyg", "α2 Cap", "β1 Cyg",
+				"β Ori", "γ1 And", "ξ Boo", "α1 Her", "T Dra", "ν1 Dra",
+				"70 Oph", "α Gem", "ζ Her", "ο2 Eri", "γ1 Ari", "γ Vir",
+				"γ1 Leo", "β Mon", "ε Boo", "44 Boo", "β1 Sco", "ζ1 Cnc",
+				"φ2 Cnc", "α Leo", "α2 CVn", "ι Cas", "ε Ari", "κ Vel", "γ1 Del",
 				"61 Cyg B", "55 Aqr", "σ Cas", "η Cas", "α UMi", "36 Oph",
-				"65 UMa", "σ2 UMa", "55 Cnc", "16 Cyg", "HIP 28393", "HIP 84709"};
-			if (inEnglish)
-			{
-				result = doubleStars;
-			}
-			else
-			{
-				for (const auto &star : doubleStars)
-				{
-					result << trans.qtranslate(star);
-				}
-			}
+				"α1 Cen",  "65 UMa", "σ2 UMa", "55 Cnc", "16 Cyg A",
+				"HIP 28393", "HIP 84709"};
+			result = doubleStars;
 			break;
 		}
 		case 1: // Interesting variable stars
@@ -2095,23 +2086,13 @@ QStringList StarMgr::listAllObjectsByType(const QString &objType, bool inEnglish
 				"α1 Her", "η Gem", "η Aql", "γ Cas", "α Ori", "R And",
 				"U Ant", "θ Aps", "R Aql", "V Aql", "R Aqr", "ε Aur", "R Aur",
 				"AE Aur", "W Boo", "VZ Cam", "l Car", "WZ Cas",	"S Cen",
-				"α Cen A", "α Cen C", "T Cep", "U Cep", "R CMa", "VY CMa",
+				"α Cen C", "T Cep", "U Cep", "R CMa", "VY CMa",
 				"S Cnc", "α CrB", "R CrB", "T CrB", "U CrB", "R Cru",
 				"SU Cyg", "EU Del", "β Dor", "R Gem", "30 Her", "68 Her",
 				"R Hor", "R Lep", "R Leo", "RR Lyr", "U Mon", "R Hya", "χ Cyg",
 				"δ Ori", "VV Ori", "κ Pav", "β Peg", "ε Peg", "ζ Phe", "R Sct",
 				"U Sgr", "RY Sgr", "W UMa", "α UMi"};
-			if (inEnglish)
-			{
-				result = variableStars;
-			}
-			else
-			{
-				for (const auto &star : variableStars)
-				{
-					result << trans.qtranslate(star);
-				}
-			}
+			result = variableStars;
 			break;
 		}
 		case 2: // Bright double stars
