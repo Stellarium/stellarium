@@ -2057,9 +2057,7 @@ QStringList StarMgr::listAllObjectsByType(const QString &objType, bool inEnglish
 	// type 2
 	bool isStarT2 = false;
 	QList<QMap<StelObjectP, float>> starsT2;
-	int type = objType.toInt();
-	// Use SkyTranslator for translation star names
-	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
+	int type = objType.toInt();	
 	switch (type)
 	{
 		case 0: // Interesting double stars
