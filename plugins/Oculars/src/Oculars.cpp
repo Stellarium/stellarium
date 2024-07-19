@@ -2680,6 +2680,8 @@ void Oculars::zoomOcular()
 			// TODO: Is it really good to apply the star formula to DSO?
 			skyDrawer->setFlagNebulaMagnitudeLimit(true);
 			skyDrawer->setCustomNebulaMagnitudeLimit(limitMag);
+			skyDrawer->setFlagPlanetMagnitudeLimit(true);
+			skyDrawer->setCustomPlanetMagnitudeLimit(limitMag);
 		}
 		else
 		{	// It's possible that the user changes the custom magnitude while viewing, and then changes the ocular.
