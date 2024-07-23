@@ -55,19 +55,21 @@ details of the implementation encapsulated.
 // Make Large File Support work also on ARM boards, explicitly.
 #define _FILE_OFFSET_BITS 64
 
-#include <stdio.h>
+#include "jpleph.h"
+#include "jpl_int.h"
+
 #include <assert.h>
+#include <errno.h>
 #include <math.h>
+#include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 #include <stdint.h>
-#include <errno.h>
 #include <QDebug>
+#include <QMutex>
 
 /**** include variable and type definitions, specific for this C version */
 
-#include "jpleph.h"
-#include "jpl_int.h"
 
 // GZ patches for Large File Support for DE431 past AD10100...
 #if defined(Q_OS_WIN)
@@ -76,6 +78,7 @@ details of the implementation encapsulated.
 #define FSeek(__FILE, __OFFSET, _MODE) fseeko(__FILE, __OFFSET, _MODE)
 #endif
 
+static QMutex mutex;
 
 double DLL_FUNC jpl_get_double(const void *ephem, const int value)
 {
@@ -578,12 +581,13 @@ int DLL_FUNC jpl_state(void *ephem, const double et, const int list[14],
 {
 	struct jpl_eph_data *eph = static_cast<struct jpl_eph_data *>(ephem);
 	unsigned i, j, n_intervals;
-	uint32_t nr;
 	double *buf = eph->cache;
 	double t[2];
 	const double block_loc = (et - eph->ephem_start) / eph->ephem_step;
 	bool recompute_pvsun;
 	const double aufac = 1.0 / eph->au;
+
+	mutex.lock();
 
 	/*   error return for epoch out of range  */
 	if(et < eph->ephem_start || et > eph->ephem_end)
@@ -591,7 +595,7 @@ int DLL_FUNC jpl_state(void *ephem, const double et, const int list[14],
 
 	/*   calculate record # and relative time in interval   */
 
-	nr = static_cast<uint32_t>(block_loc);
+	uint32_t nr = static_cast<uint32_t>(block_loc);
 	t[0] = block_loc - static_cast<double>(nr);
 	if(t[0]==0.0 && nr)
 	{
@@ -604,15 +608,19 @@ int DLL_FUNC jpl_state(void *ephem, const double et, const int list[14],
 	{
 		eph->curr_cache_loc = nr;
 		/* Read two blocks ahead to account for header: */
-		if(FSeek(eph->ifile, static_cast<unsigned long>(nr + 2) * eph->recsize, SEEK_SET)) // lgtm [cpp/integer-multiplication-cast-to-long]
+		if(FSeek(eph->ifile, static_cast<unsigned long long>(nr + 2) * eph->recsize, SEEK_SET)) // lgtm [cpp/integer-multiplication-cast-to-long]
 		{
 			// GZ: Make sure we will try again on next call...
 			eph->curr_cache_loc=0;
+			mutex.unlock();
 			return(JPL_EPH_FSEEK_ERROR);
 		}
 		if(fread(buf, sizeof(double), static_cast<size_t>(eph->ncoeff), eph->ifile)
 				!= static_cast<size_t>(eph->ncoeff))
+		{
+			mutex.unlock();
 			return(JPL_EPH_READ_ERROR);
+		}
 
 		if(eph->swap_bytes)
 			swap_64_bit_val(buf, eph->ncoeff);
@@ -674,6 +682,7 @@ int DLL_FUNC jpl_state(void *ephem, const double et, const int list[14],
 		for(i = 0; i < 9; i++)            /* the solar system barycenter */
 			for(j = 0; j < static_cast<unsigned>(list[i]) * 3; j++)
 				pv[i][j] -= eph->pvsun[j];
+	mutex.unlock();
 	return(0);
 }
 
