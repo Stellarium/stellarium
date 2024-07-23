@@ -37,13 +37,8 @@ THE SOFTWARE.
 
 static void * ephem;
    
-static Vec3d tempECLpos = Vec3d(0,0,0);
-static Vec3d tempECLspd = Vec3d(0,0,0);
-static Vec3d tempICRFpos = Vec3d(0,0,0);
-static Vec3d tempICRFspd = Vec3d(0,0,0);
 static char nams[JPL_MAX_N_CONSTANTS][6];
 static double vals[JPL_MAX_N_CONSTANTS];
-static double tempXYZ[6];
 #ifdef UNIT_TEST
 // NOTE: Added hook for unit testing
 static const Mat4d matJ2000ToVsop87(Mat4d::xrotation(-23.4392803055555555556*(M_PI/180)) * Mat4d::zrotation(0.0000275*(M_PI/180)));
@@ -81,6 +76,7 @@ bool GetDe431Coor(const double jde, const int planet_id, double * xyz, const int
 {
     if(initDone)
     {
+	double tempXYZ[6];
 	// This may return some error code!
 	int jplresult=jpl_pleph(ephem, jde, planet_id, centralBody_id, tempXYZ, 1);
 
@@ -108,14 +104,14 @@ bool GetDe431Coor(const double jde, const int planet_id, double * xyz, const int
 			return false;
 	}
 
-	tempICRFpos = Vec3d(tempXYZ[0], tempXYZ[1], tempXYZ[2]);
-	tempICRFspd = Vec3d(tempXYZ[3], tempXYZ[4], tempXYZ[5]);
+	const Vec3d tempICRFpos = Vec3d(tempXYZ[0], tempXYZ[1], tempXYZ[2]);
+	const Vec3d tempICRFspd = Vec3d(tempXYZ[3], tempXYZ[4], tempXYZ[5]);
 	#ifdef UNIT_TEST
-	tempECLpos = matJ2000ToVsop87 * tempICRFpos;
-	tempECLspd = matJ2000ToVsop87 * tempICRFspd;
+	Vec3d tempECLpos = matJ2000ToVsop87 * tempICRFpos;
+	Vec3d tempECLspd = matJ2000ToVsop87 * tempICRFspd;
 	#else
-	tempECLpos = StelCore::matJ2000ToVsop87 * tempICRFpos;
-	tempECLspd = StelCore::matJ2000ToVsop87 * tempICRFspd;
+	Vec3d tempECLpos = StelCore::matJ2000ToVsop87 * tempICRFpos;
+	Vec3d tempECLspd = StelCore::matJ2000ToVsop87 * tempICRFspd;
 	#endif
 
 	xyz[0] = tempECLpos[0];
