@@ -47,8 +47,10 @@ so that for given T the functions cos and sin have only to be called 12 times.
 #include "calc_interpolated_elements.h"
 #include "elliptic_to_rectangular.h"
 
-#include <string.h>
 #include <math.h>
+#include <string.h>
+
+#define VSOP87_DIM (8*6)
 
 static
 const int vsop87_max_lambda_factor[12] = {
@@ -137196,15 +137198,14 @@ void PrepareLambdaArray(int nr_of_lambdas,
 	   (cos,sin)(1*lambda[0]),(cos,sin)(-1*lambda[0]),(cos,sin)(2*lambda[0]),...
 	   (cos,sin)(1*lambda[1]),(cos,sin)(-1*lambda[1]),(cos,sin)(2*lambda[1]),...
 	*/
-  int i,m;
-  for (i=0;i<nr_of_lambdas;i++) {
+  for (int i=0;i<nr_of_lambdas;i++) {
 	const int max_factor = max_lambda_factor[i];
 	double *cslp = cos_sin_lambda;
 	cslp[0] = cos(lambda[i]);
 	cslp[1] = sin(lambda[i]);
 	cslp[2] =  cslp[0];
 	cslp[3] = -cslp[1];
-	for (m=2;m<=max_factor;m++) {
+	for (int m=2;m<=max_factor;m++) {
 		/* addition theorem:
 		   cos(m*l) = cos(m0*l+m1*l) = cos(m0*l)*cos(m1*l)-sin(m0*l)*sin(m1*l)
 		   sin(m*l) = sin(m0*l+m1*l) = cos(m0*l)*sin(m1*l)+sin(m0*l)*cos(m1*l)
@@ -137272,20 +137273,17 @@ void CalcVsop87Elem(const double t,double elem[8*6], void *user) {
   double use_polynomials;
   for (i=0;i<12;i++) lambda[i] = lambda_0[i] + lambda_1[i] * t;
   PrepareLambdaArray(12,vsop87_max_lambda_factor,lambda,cos_sin_lambda);
-  for (i=0;i<(sizeof(vsop87_constants)/sizeof(vsop87_constants[0]));++i) {
-	accu[i] = 0.0;
-  }
+  // Could be written as 'sizeof(vsop87_constants)', as the latter cancel out, it's here for documentation.
+  memset(accu, 0, sizeof(vsop87_constants)/sizeof(vsop87_constants[0])*sizeof(double));
   AccumulateVsop87Terms(vsop87_instructions,vsop87_coefficients,cos_sin_lambda,
 						accu,stack);
 
-  for (i=0;i<8*6;i++) {
-	elem[i] = 0.0;
-  }
+  memset(elem, 0, VSOP87_DIM*sizeof(double));
 	/* terms of order t^alpha: */
   use_polynomials = (6.1 - fabs(t)) / 0.1;
   if (use_polynomials > 0) {
 	if (use_polynomials > 1.0) use_polynomials = 1.0;
-	for (i=0;i<8*6;i++) {
+	for (i=0;i<VSOP87_DIM;i++) {
 	  unsigned int alpha;
 	  for (alpha=5;alpha>0;alpha--) {
 		const int j = vsop87_index_translation_table[i*6+alpha];
@@ -137317,38 +137315,35 @@ void CalcVsop87Elem(const double t,double elem[8*6], void *user) {
 */
 }
 
-/* dirty caching in static variables
-   If you ever want to allow parallel execution,
-   make a struct from these and malloc such structs and add pointer arguments to the calls as needed.
+/* dirty caching in static variables. This is now thread safe as long as arg 'body' is different.
 */
-#define VSOP87_DIM (8*6)
-static double t_0 = -1e100;
-static double t_1 = -1e100;
-static double t_2 = -1e100;
-static double vsop87_elem_0[VSOP87_DIM];
-static double vsop87_elem_1[VSOP87_DIM];
-static double vsop87_elem_2[VSOP87_DIM];
+static double t_0[8] = {-1e100, -1e100, -1e100, -1e100, -1e100, -1e100, -1e100, -1e100};
+static double t_1[8] = {-1e100, -1e100, -1e100, -1e100, -1e100, -1e100, -1e100, -1e100};
+static double t_2[8] = {-1e100, -1e100, -1e100, -1e100, -1e100, -1e100, -1e100, -1e100};
+static double vsop87_elem_0[8][VSOP87_DIM];
+static double vsop87_elem_1[8][VSOP87_DIM];
+static double vsop87_elem_2[8][VSOP87_DIM];
 /* 10 days: */
 #define DELTA_T (10.0/365250.0)
 
-static double vsop87_jd0 = -1e100;
-static double vsop87_elem[VSOP87_DIM];
+static double vsop87_jd0[8] = {-1e100, -1e100, -1e100, -1e100, -1e100, -1e100, -1e100, -1e100};
+static double vsop87_elem[8][VSOP87_DIM];
 
-void GetVsop87Coor(double jd,int body,double *xyz) {
-  GetVsop87OsculatingCoor(jd,jd,body,xyz);
+void GetVsop87Coor(double jde, int body, double *xyz) {
+  GetVsop87OsculatingCoor(jde,jde,body,xyz);
 }
 
-void GetVsop87OsculatingCoor(const double jd0,const double jd,const int body,double *xyz) {
-  if (jd0 != vsop87_jd0) {
-	const double t0 = (jd0 - 2451545.0) / 365250.0;
-	vsop87_jd0 = jd0;
-	CalcInterpolatedElements(t0,vsop87_elem,
+void GetVsop87OsculatingCoor(const double jde0, const double jde, const int body, double *xyz) {
+  if (jde0 != vsop87_jd0[body]) {
+	const double t0 = (jde0 - 2451545.0) / 365250.0;
+	vsop87_jd0[body] = jde0;
+	CalcInterpolatedElements(t0,vsop87_elem[body],
 							 VSOP87_DIM,
 							 &CalcVsop87Elem,DELTA_T,
-							 &t_0,vsop87_elem_0,
-							 &t_1,vsop87_elem_1,
-							 &t_2,vsop87_elem_2,
+							 &t_0[body],vsop87_elem_0[body],
+							 &t_1[body],vsop87_elem_1[body],
+							 &t_2[body],vsop87_elem_2[body],
 							 0);
   }
-  EllipticToRectangularA(vsop87_mu[body],vsop87_elem+(body*6),jd-jd0,xyz);
+  EllipticToRectangularA(vsop87_mu[body],vsop87_elem[body]+(body*6),jde-jde0,xyz);
 }
