@@ -1493,7 +1493,7 @@ void SolarEclipseComputer::computeNSLimitsOfShadow(const double JDP1, const doub
 	}
 }
 
-auto SolarEclipseComputer::getContactCoordinates(double x, double y, double d, double mu) const -> GeoPoint
+auto SolarEclipseComputer::getContactCoordinates(double x, double y, double d, double mu) -> GeoPoint
 {
 	// Source: Explanatory Supplement to the Astronomical Ephemeris 
 	// and the American Ephemeris and Nautical Almanac (1961)
@@ -1516,7 +1516,7 @@ auto SolarEclipseComputer::getContactCoordinates(double x, double y, double d, d
 	return coordinates;
 }
 
-auto SolarEclipseComputer::getRiseSetLineCoordinates(bool first, double x,double y,double d,double L,double mu) const -> GeoPoint
+auto SolarEclipseComputer::getRiseSetLineCoordinates(bool first, double x,double y,double d,double L,double mu) -> GeoPoint
 {
 	// Reference for terminology and variable naming:
 	// Explanatory Supplement to the Astronomical Ephemeris and the
@@ -1674,7 +1674,7 @@ auto SolarEclipseComputer::getRiseSetLineCoordinates(bool first, double x,double
 	return coordinates;
 }
 
-auto SolarEclipseComputer::getShadowOutlineCoordinates(double angle,double x,double y,double d,double L,double tf,double mu) const -> GeoPoint
+auto SolarEclipseComputer::getShadowOutlineCoordinates(double angle,double x,double y,double d,double L,double tf,double mu) -> GeoPoint
 {
 	// Source: Explanatory Supplement to the Astronomical Ephemeris 
 	// and the American Ephemeris and Nautical Almanac (1961)
