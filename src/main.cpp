@@ -49,6 +49,8 @@
 #include <QTranslator>
 #include <QNetworkDiskCache>
 #include <QThread>
+#include <QThreadPool>
+
 
 #ifdef Q_OS_MACOS
 #include <QEvent>
@@ -466,6 +468,9 @@ int main(int argc, char **argv)
 
 	mainWin.show();
 	SplashScreen::finish(&mainWin);
+	qDebug() << "Max thread count (Global Pool): " << QThreadPool::globalInstance()->maxThreadCount();
+	// Experimental. Use a crazily high number of threads.
+	//QThreadPool::globalInstance()->setMaxThreadCount(1000);
 	app.exec();
 	mainWin.deinit();
 
