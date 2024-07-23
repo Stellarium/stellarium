@@ -25,7 +25,6 @@
 #include <deque>
 #include <vector>
 #include <variant>
-#include "Planet.hpp"
 
 class StelCore;
 class StelLocaleMgr;
