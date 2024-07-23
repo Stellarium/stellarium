@@ -26,6 +26,7 @@
 #include <variant>
 #include <vector>
 #include <QString>
+#include <QTextStream>
 
 class StelCore;
 class StelLocaleMgr;
