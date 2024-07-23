@@ -60,6 +60,7 @@
 #include <QDebug>
 #include <QDir>
 #include <QHash>
+#include <QtConcurrent>
 
 SolarSystem::SolarSystem() : StelObjectModule()
 	, shadowPlanetCount(0)
@@ -1404,10 +1405,14 @@ void SolarSystem::computePositions(double dateJDE, PlanetP observerPlanet)
 	const bool withAberration=core->getUseAberration();
 	if (flagLightTravelTime) // switching off light time correction implies no aberration for the planets.
 	{
-		for (const auto& p : std::as_const(systemPlanets))
-		{
-			p->computePosition(dateJDE, Vec3d(0.));
-		}
+		//for (const auto& p : std::as_const(systemPlanets))
+		//{
+		//	p->computePosition(dateJDE, Vec3d(0.));
+		//}
+		// TODO(GZ): make sure VSOP and JPL ephems can be run concurrently!
+		std::function<void (QSharedPointer<Planet> &)> plCompPosJDEZero = [=](QSharedPointer<Planet> &pl){pl->computePosition(dateJDE, Vec3d(0.));};
+		QtConcurrent::blockingMap(systemPlanets, plCompPosJDEZero);
+
 		const Vec3d obsPosJDE=observerPlanet->getHeliocentricEclipticPos();
 
 		// For higher accuracy, we now make two iterations of light time and aberration correction. In the final
@@ -1416,19 +1421,52 @@ void SolarSystem::computePositions(double dateJDE, PlanetP observerPlanet)
 		// discussion in GH:#1626) we do not add anything for the Moon when observed from Earth!  Presumably the
 		// used ephemerides already provide aberration-corrected positions for the Moon?
 		const Vec3d aberrationPushSpeed=observerPlanet->getHeliocentricEclipticVelocity() * core->getAberrationFactor();
-		for (const auto& p : std::as_const(systemPlanets))
-		{
-			//p->setExtraInfoString(StelObject::DebugAid, "");
+		//for (const auto& p : std::as_const(systemPlanets))
+		//{
+		//	//p->setExtraInfoString(StelObject::DebugAid, "");
+		//	const auto planetPos = p->getHeliocentricEclipticPos();
+		//	const double lightTimeDays = (planetPos-obsPosJDE).norm() * (AU / (SPEED_OF_LIGHT * 86400.));
+		//	Vec3d aberrationPush(0.);
+		//	if (withAberration && (observerPlanet->englishName!="Earth" || p->englishName!="Moon"))
+		//		aberrationPush=lightTimeDays*aberrationPushSpeed;
+		//	p->computePosition(dateJDE-lightTimeDays, aberrationPush);
+		//}
+		std::function<void (QSharedPointer<Planet> &)> plCompPosJDEOne = [=](QSharedPointer<Planet> &p){
 			const auto planetPos = p->getHeliocentricEclipticPos();
 			const double lightTimeDays = (planetPos-obsPosJDE).norm() * (AU / (SPEED_OF_LIGHT * 86400.));
 			Vec3d aberrationPush(0.);
 			if (withAberration && (observerPlanet->englishName!=L1S("Earth") || p->englishName!=L1S("Moon")))
 				aberrationPush=lightTimeDays*aberrationPushSpeed;
 			p->computePosition(dateJDE-lightTimeDays, aberrationPush);
-		}
+		};
+		QtConcurrent::blockingMap(systemPlanets, plCompPosJDEOne);
+
 		// Extra accuracy with another round. Not sure if useful. Maybe hide behind a new property flag?
-		for (const auto& p : std::as_const(systemPlanets))
-		{
+		//for (const auto& p : std::as_const(systemPlanets))
+		//{
+		//	//p->setExtraInfoString(StelObject::DebugAid, "");
+		//	const auto planetPos = p->getHeliocentricEclipticPos();
+		//	const double lightTimeDays = (planetPos-obsPosJDE).norm() * (AU / (SPEED_OF_LIGHT * 86400.));
+		//	Vec3d aberrationPush(0.);
+		//	if (withAberration && (observerPlanet->englishName!="Earth" || p->englishName!="Moon"))
+		//		aberrationPush=lightTimeDays*aberrationPushSpeed;
+		//	// The next call may already do nothing if the time difference to the previous round is not large enough.
+		//	p->computePosition(dateJDE-lightTimeDays, aberrationPush);
+//		//	p->setExtraInfoString(StelObject::DebugAid, QString("LightTime %1d; obsSpeed %2/%3/%4 AU/d")
+//		//			      .arg(QString::number(lightTimeDays, 'f', 3))
+//		//			      .arg(QString::number(aberrationPushSpeed[0], 'f', 3))
+//		//			      .arg(QString::number(aberrationPushSpeed[0], 'f', 3))
+//		//			      .arg(QString::number(aberrationPushSpeed[0], 'f', 3)));
+
+		//	const auto update = &RotationElements::updatePlanetCorrections;
+		//	if      (p->englishName=="Moon")    update(dateJDE-lightTimeDays, RotationElements::EarthMoon);
+		//	else if (p->englishName=="Mars")    update(dateJDE-lightTimeDays, RotationElements::Mars);
+		//	else if (p->englishName=="Jupiter") update(dateJDE-lightTimeDays, RotationElements::Jupiter);
+		//	else if (p->englishName=="Saturn")  update(dateJDE-lightTimeDays, RotationElements::Saturn);
+		//	else if (p->englishName=="Uranus")  update(dateJDE-lightTimeDays, RotationElements::Uranus);
+		//	else if (p->englishName=="Neptune") update(dateJDE-lightTimeDays, RotationElements::Neptune);
+		//}
+		std::function<void (QSharedPointer<Planet> &)> plCompPosJDETwo = [=](QSharedPointer<Planet> &p){
 			//p->setExtraInfoString(StelObject::DebugAid, "");
 			const auto planetPos = p->getHeliocentricEclipticPos();
 			const double lightTimeDays = (planetPos-obsPosJDE).norm() * (AU / (SPEED_OF_LIGHT * 86400.));
@@ -1450,7 +1488,9 @@ void SolarSystem::computePositions(double dateJDE, PlanetP observerPlanet)
 			else if (p->englishName==L1S("Saturn"))  update(dateJDE-lightTimeDays, RotationElements::Saturn);
 			else if (p->englishName==L1S("Uranus"))  update(dateJDE-lightTimeDays, RotationElements::Uranus);
 			else if (p->englishName==L1S("Neptune")) update(dateJDE-lightTimeDays, RotationElements::Neptune);
-		}
+		};
+		QtConcurrent::blockingMap(systemPlanets, plCompPosJDETwo);
+
 	}
 	else
 	{
