@@ -1439,7 +1439,7 @@ void SolarSystem::computePositions(double dateJDE, PlanetP observerPlanet)
 			f.waitForFinished();
 		futures.clear();
 
-		const Vec3d obsPosJDE=observerPlanet->getHeliocentricEclipticPos();
+		const Vec3d &obsPosJDE=observerPlanet->getHeliocentricEclipticPos();
 
 		// 2. For higher accuracy, we now make two iterations of light time and aberration correction. In the final
 		// round, we also compute rotation data.  May fix sub-arcsecond inaccuracies, and optionally apply
@@ -1516,6 +1516,7 @@ void SolarSystem::computePositions(double dateJDE, PlanetP observerPlanet)
 		//	else if (p->englishName=="Uranus")  update(dateJDE-lightTimeDays, RotationElements::Uranus);
 		//	else if (p->englishName=="Neptune") update(dateJDE-lightTimeDays, RotationElements::Neptune);
 		//}
+
 		//std::function<void (QSharedPointer<Planet> &)> plCompPosJDETwo = [=](QSharedPointer<Planet> &p){
 		//	//p->setExtraInfoString(StelObject::DebugAid, "");
 		//	const auto planetPos = p->getHeliocentricEclipticPos();
