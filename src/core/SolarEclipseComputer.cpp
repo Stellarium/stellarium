@@ -793,6 +793,8 @@ bool SolarEclipseComputer::bothPenumbraLimitsPresent(const double JDMid) const
 
 auto SolarEclipseComputer::generateEclipseMap(const double JDMid) const -> EclipseMapData
 {
+	const QDateTime beginDateTime = QDateTime::currentDateTimeUtc();
+
 	const bool savedTopocentric = core->getUseTopocentricCoordinates();
 	const double currentJD = core->getJD(); // save current JD
 	core->setUseTopocentricCoordinates(false);
@@ -1294,6 +1296,10 @@ auto SolarEclipseComputer::generateEclipseMap(const double JDMid) const -> Eclip
 	core->setJD(currentJD);
 	core->setUseTopocentricCoordinates(savedTopocentric);
 	core->update(0);
+
+	const QDateTime endDateTime = QDateTime::currentDateTimeUtc();
+	qDebug() << "generateEclipseMap timing: ending at " << endDateTime;
+	qDebug() << "Duration" << QString::number((endDateTime.toMSecsSinceEpoch() - beginDateTime.toMSecsSinceEpoch())/1000., 'f', 3);
 
 	return data;
 }
