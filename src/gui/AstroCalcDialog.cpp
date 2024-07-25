@@ -3292,6 +3292,7 @@ void AstroCalcDialog::generateSolarEclipsesLocal()
 		bool centraleclipse = false;
 
 		const bool saveTopocentric = core->getUseTopocentricCoordinates();
+		core->setUseTopocentricCoordinates(false); // no immediate force-update here.
 		const double approxJD = 2451550.09765;
 		const double synodicMonth = 29.530588853;
 		int elements = static_cast<int>((stopJD - startJD) / synodicMonth);
@@ -3306,9 +3307,6 @@ void AstroCalcDialog::generateSolarEclipsesLocal()
 			double JD = InitJD + synodicMonth * i;
 			if (JD > startJD)
 			{
-				core->setUseTopocentricCoordinates(false);
-				core->update(0);
-
 				// Find exact time of minimum distance between axis of lunar shadow cone to the center of Earth
 				JD = ecliptor.getJDofMinimumDistance(JD);
 				core->setJD(JD);
