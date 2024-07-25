@@ -1406,7 +1406,12 @@ void SolarSystem::computePositions(double dateJDE, PlanetP observerPlanet)
 	StelCore *core=StelApp::getInstance().getCore();
 	const bool withAberration=core->getUseAberration();
 	const int availableThreads=qMax(1, QThreadPool::globalInstance()->maxThreadCount()-QThreadPool::globalInstance()->activeThreadCount());
-	//qDebug() << "We should have " << availableThreads << "threads available";
+	static bool threadMessage=true;
+	if (threadMessage)
+	{
+		qDebug() << "SolarSystem: We should have " << availableThreads << "threads available for computePositions()";
+		threadMessage=false;
+	}
 
 	if (flagLightTravelTime) // switching off light time correction implies no aberration for the planets.
 	{
