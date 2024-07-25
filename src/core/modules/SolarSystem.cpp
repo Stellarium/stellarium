@@ -1413,7 +1413,7 @@ void SolarSystem::computePositions(double dateJDE, PlanetP observerPlanet)
 		//}
 		// TODO(GZ): make sure VSOP and JPL ephems can be run concurrently!
 		std::function<void (QSharedPointer<Planet> &)> plCompPosJDEZero = [=](QSharedPointer<Planet> &pl){pl->computePosition(dateJDE, Vec3d(0.));};
-		QtConcurrent::blockingMap(systemPlanets, plCompPosJDEZero);
+		QtConcurrent::map(systemPlanets, plCompPosJDEZero).waitForFinished();
 
 		const Vec3d obsPosJDE=observerPlanet->getHeliocentricEclipticPos();
 
@@ -1423,6 +1423,7 @@ void SolarSystem::computePositions(double dateJDE, PlanetP observerPlanet)
 		// discussion in GH:#1626) we do not add anything for the Moon when observed from Earth!  Presumably the
 		// used ephemerides already provide aberration-corrected positions for the Moon?
 		const Vec3d aberrationPushSpeed=observerPlanet->getHeliocentricEclipticVelocity() * core->getAberrationFactor();
+
 		//for (const auto& p : std::as_const(systemPlanets))
 		//{
 		//	//p->setExtraInfoString(StelObject::DebugAid, "");
@@ -1441,7 +1442,7 @@ void SolarSystem::computePositions(double dateJDE, PlanetP observerPlanet)
 				aberrationPush=lightTimeDays*aberrationPushSpeed;
 			p->computePosition(dateJDE-lightTimeDays, aberrationPush);
 		};
-		QtConcurrent::blockingMap(systemPlanets, plCompPosJDEOne);
+		QtConcurrent::map(systemPlanets, plCompPosJDEOne).waitForFinished();
 
 		// Extra accuracy with another round. Not sure if useful. Maybe hide behind a new property flag?
 		//for (const auto& p : std::as_const(systemPlanets))
@@ -1491,7 +1492,7 @@ void SolarSystem::computePositions(double dateJDE, PlanetP observerPlanet)
 			else if (p->englishName=="Uranus")  update(dateJDE-lightTimeDays, RotationElements::Uranus);
 			else if (p->englishName=="Neptune") update(dateJDE-lightTimeDays, RotationElements::Neptune);
 		};
-		QtConcurrent::blockingMap(systemPlanets, plCompPosJDETwo);
+		QtConcurrent::map(systemPlanets, plCompPosJDETwo).waitForFinished();
 
 
 	}
