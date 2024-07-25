@@ -1405,19 +1405,43 @@ void SolarSystem::computePositions(double dateJDE, PlanetP observerPlanet)
 {
 	StelCore *core=StelApp::getInstance().getCore();
 	const bool withAberration=core->getUseAberration();
+	const int availableThreads=qMax(1, QThreadPool::globalInstance()->maxThreadCount()-QThreadPool::globalInstance()->activeThreadCount());
+	//qDebug() << "We should have " << availableThreads << "threads available";
+
 	if (flagLightTravelTime) // switching off light time correction implies no aberration for the planets.
 	{
+		// 1. First approximation.
 		//for (const auto& p : std::as_const(systemPlanets))
 		//{
 		//	p->computePosition(dateJDE, Vec3d(0.));
 		//}
-		// TODO(GZ): make sure VSOP and JPL ephems can be run concurrently!
-		std::function<void (QSharedPointer<Planet> &)> plCompPosJDEZero = [=](QSharedPointer<Planet> &pl){pl->computePosition(dateJDE, Vec3d(0.));};
-		QtConcurrent::map(systemPlanets, plCompPosJDEZero).waitForFinished();
+
+		//std::function<void (QSharedPointer<Planet> &)> plCompPosJDEZero = [=](QSharedPointer<Planet> &pl){pl->computePosition(dateJDE, Vec3d(0.));};
+		//QtConcurrent::map(systemPlanets, plCompPosJDEZero).waitForFinished();
+
+		QList<QFuture<void>> futures;
+
+		// This defines a function to be thrown onto a pool thread that computes every 'incr'th element.
+		std::function<void (int)> plCompLoopZero = [=](int offset){
+			for (auto it=systemPlanets.cbegin()+offset, end=systemPlanets.cend(); it<end; it+=availableThreads)
+			{
+				it->data()->computePosition(dateJDE, Vec3d(0.));
+			}
+		};
+
+		for (int stride=0; stride<availableThreads; stride++)
+		{
+			auto future=QtConcurrent::run(plCompLoopZero, stride);
+			futures.append(future);
+		}
+		// Now the list is being computed by other threads. we can just wait sequentially for completion.
+		for(auto f: futures)
+			f.waitForFinished();
+		futures.clear();
 
 		const Vec3d obsPosJDE=observerPlanet->getHeliocentricEclipticPos();
 
-		// For higher accuracy, we now make two iterations of light time and aberration correction. In the final
+		// 2. For higher accuracy, we now make two iterations of light time and aberration correction. In the final
 		// round, we also compute rotation data.  May fix sub-arcsecond inaccuracies, and optionally apply
 		// aberration in the way described in Explanatory Supplement (2013), 7.55.  For reasons unknown (See
 		// discussion in GH:#1626) we do not add anything for the Moon when observed from Earth!  Presumably the
@@ -1434,17 +1458,40 @@ void SolarSystem::computePositions(double dateJDE, PlanetP observerPlanet)
 		//		aberrationPush=lightTimeDays*aberrationPushSpeed;
 		//	p->computePosition(dateJDE-lightTimeDays, aberrationPush);
 		//}
-		std::function<void (QSharedPointer<Planet> &)> plCompPosJDEOne = [=](QSharedPointer<Planet> &p){
-			const auto planetPos = p->getHeliocentricEclipticPos();
-			const double lightTimeDays = (planetPos-obsPosJDE).norm() * (AU / (SPEED_OF_LIGHT * 86400.));
-			Vec3d aberrationPush(0.);
-			if (withAberration && (observerPlanet->englishName!="Earth" || p->englishName!="Moon"))
-				aberrationPush=lightTimeDays*aberrationPushSpeed;
-			p->computePosition(dateJDE-lightTimeDays, aberrationPush);
-		};
-		QtConcurrent::map(systemPlanets, plCompPosJDEOne).waitForFinished();
 
-		// Extra accuracy with another round. Not sure if useful. Maybe hide behind a new property flag?
+		//std::function<void (QSharedPointer<Planet> &)> plCompPosJDEOne = [=](QSharedPointer<Planet> &p){
+		//	const auto planetPos = p->getHeliocentricEclipticPos();
+		//	const double lightTimeDays = (planetPos-obsPosJDE).norm() * (AU / (SPEED_OF_LIGHT * 86400.));
+		//	Vec3d aberrationPush(0.);
+		//	if (withAberration && (observerPlanet->englishName!="Earth" || p->englishName!="Moon"))
+		//		aberrationPush=lightTimeDays*aberrationPushSpeed;
+		//	p->computePosition(dateJDE-lightTimeDays, aberrationPush);
+		//};
+		//QtConcurrent::map(systemPlanets, plCompPosJDEOne).waitForFinished();
+
+		std::function<void (int)> plCompLoopOne = [=](int offset){
+			for (auto it=systemPlanets.cbegin()+offset, end=systemPlanets.cend(); it<end; it+=availableThreads)
+				{
+					//p->setExtraInfoString(StelObject::DebugAid, "");
+					const auto planetPos = it->data()->getHeliocentricEclipticPos();
+					const double lightTimeDays = (planetPos-obsPosJDE).norm() * (AU / (SPEED_OF_LIGHT * 86400.));
+					Vec3d aberrationPush(0.);
+					if (withAberration && (observerPlanet->englishName!="Earth" || it->data()->englishName!="Moon"))
+						aberrationPush=lightTimeDays*aberrationPushSpeed;
+					it->data()->computePosition(dateJDE-lightTimeDays, aberrationPush);
+				}
+		};
+		for (int stride=0; stride<availableThreads; stride++)
+		{
+			auto future=QtConcurrent::run(plCompLoopOne, stride);
+			futures.append(future);
+		}
+		// Now the list is being computed by other threads. we can just wait sequentially for completion.
+		for(auto f: futures)
+			f.waitForFinished();
+		futures.clear();
+
+		// 3. Extra accuracy with another round. Not sure if useful. Maybe hide behind a new property flag?
 		//for (const auto& p : std::as_const(systemPlanets))
 		//{
 		//	//p->setExtraInfoString(StelObject::DebugAid, "");
@@ -1458,8 +1505,8 @@ void SolarSystem::computePositions(double dateJDE, PlanetP observerPlanet)
 //		//	p->setExtraInfoString(StelObject::DebugAid, QString("LightTime %1d; obsSpeed %2/%3/%4 AU/d")
 //		//			      .arg(QString::number(lightTimeDays, 'f', 3))
 //		//			      .arg(QString::number(aberrationPushSpeed[0], 'f', 3))
-//		//			      .arg(QString::number(aberrationPushSpeed[0], 'f', 3))
-//		//			      .arg(QString::number(aberrationPushSpeed[0], 'f', 3)));
+//		//			      .arg(QString::number(aberrationPushSpeed[1], 'f', 3))
+//		//			      .arg(QString::number(aberrationPushSpeed[2], 'f', 3)));
 
 		//	const auto update = &RotationElements::updatePlanetCorrections;
 		//	if      (p->englishName=="Moon")    update(dateJDE-lightTimeDays, RotationElements::EarthMoon);
@@ -1469,32 +1516,65 @@ void SolarSystem::computePositions(double dateJDE, PlanetP observerPlanet)
 		//	else if (p->englishName=="Uranus")  update(dateJDE-lightTimeDays, RotationElements::Uranus);
 		//	else if (p->englishName=="Neptune") update(dateJDE-lightTimeDays, RotationElements::Neptune);
 		//}
-		std::function<void (QSharedPointer<Planet> &)> plCompPosJDETwo = [=](QSharedPointer<Planet> &p){
-			//p->setExtraInfoString(StelObject::DebugAid, "");
-			const auto planetPos = p->getHeliocentricEclipticPos();
-			const double lightTimeDays = (planetPos-obsPosJDE).norm() * (AU / (SPEED_OF_LIGHT * 86400.));
-			Vec3d aberrationPush(0.);
-			if (withAberration && (observerPlanet->englishName!="Earth" || p->englishName!="Moon"))
-				aberrationPush=lightTimeDays*aberrationPushSpeed;
-			// The next call may already do nothing if the time difference to the previous round is not large enough.
-			p->computePosition(dateJDE-lightTimeDays, aberrationPush);
-//			p->setExtraInfoString(StelObject::DebugAid, QString("LightTime %1d; obsSpeed %2/%3/%4 AU/d")
-//					      .arg(QString::number(lightTimeDays, 'f', 3))
-//					      .arg(QString::number(aberrationPushSpeed[0], 'f', 3))
-//					      .arg(QString::number(aberrationPushSpeed[0], 'f', 3))
-//					      .arg(QString::number(aberrationPushSpeed[0], 'f', 3)));
+		//std::function<void (QSharedPointer<Planet> &)> plCompPosJDETwo = [=](QSharedPointer<Planet> &p){
+		//	//p->setExtraInfoString(StelObject::DebugAid, "");
+		//	const auto planetPos = p->getHeliocentricEclipticPos();
+		//	const double lightTimeDays = (planetPos-obsPosJDE).norm() * (AU / (SPEED_OF_LIGHT * 86400.));
+		//	Vec3d aberrationPush(0.);
+		//	if (withAberration && (observerPlanet->englishName!="Earth" || p->englishName!="Moon"))
+		//		aberrationPush=lightTimeDays*aberrationPushSpeed;
+		//	// The next call may already do nothing if the time difference to the previous round is not large enough.
+		//	p->computePosition(dateJDE-lightTimeDays, aberrationPush);
+//		//	p->setExtraInfoString(StelObject::DebugAid, QString("LightTime %1d; obsSpeed %2/%3/%4 AU/d")
+//		//			      .arg(QString::number(lightTimeDays, 'f', 3))
+//		//			      .arg(QString::number(aberrationPushSpeed[0], 'f', 3))
+//		//			      .arg(QString::number(aberrationPushSpeed[1], 'f', 3))
+//		//			      .arg(QString::number(aberrationPushSpeed[2], 'f', 3)));
 
-			const auto update = &RotationElements::updatePlanetCorrections;
-			if      (p->englishName=="Moon")    update(dateJDE-lightTimeDays, RotationElements::EarthMoon);
-			else if (p->englishName=="Mars")    update(dateJDE-lightTimeDays, RotationElements::Mars);
-			else if (p->englishName=="Jupiter") update(dateJDE-lightTimeDays, RotationElements::Jupiter);
-			else if (p->englishName=="Saturn")  update(dateJDE-lightTimeDays, RotationElements::Saturn);
-			else if (p->englishName=="Uranus")  update(dateJDE-lightTimeDays, RotationElements::Uranus);
-			else if (p->englishName=="Neptune") update(dateJDE-lightTimeDays, RotationElements::Neptune);
+		//	const auto update = &RotationElements::updatePlanetCorrections;
+		//	if      (p->englishName=="Moon")    update(dateJDE-lightTimeDays, RotationElements::EarthMoon);
+		//	else if (p->englishName=="Mars")    update(dateJDE-lightTimeDays, RotationElements::Mars);
+		//	else if (p->englishName=="Jupiter") update(dateJDE-lightTimeDays, RotationElements::Jupiter);
+		//	else if (p->englishName=="Saturn")  update(dateJDE-lightTimeDays, RotationElements::Saturn);
+		//	else if (p->englishName=="Uranus")  update(dateJDE-lightTimeDays, RotationElements::Uranus);
+		//	else if (p->englishName=="Neptune") update(dateJDE-lightTimeDays, RotationElements::Neptune);
+		//};
+		//QtConcurrent::map(systemPlanets, plCompPosJDETwo).waitForFinished();
+
+		std::function<void (int)> plCompLoopTwo = [=](int offset){
+			for (auto it=systemPlanets.cbegin()+offset, end=systemPlanets.cend(); it<end; it+=availableThreads)
+			{
+				//it->data()->setExtraInfoString(StelObject::DebugAid, "");
+				const auto planetPos = it->data()->getHeliocentricEclipticPos();
+				const double lightTimeDays = (planetPos-obsPosJDE).norm() * (AU / (SPEED_OF_LIGHT * 86400.));
+				Vec3d aberrationPush(0.);
+				if (withAberration && (observerPlanet->englishName!="Earth" || it->data()->englishName!="Moon"))
+					aberrationPush=lightTimeDays*aberrationPushSpeed;
+				// The next call may already do nothing if the time difference to the previous round is not large enough.
+				it->data()->computePosition(dateJDE-lightTimeDays, aberrationPush);
+				//			it->data()->setExtraInfoString(StelObject::DebugAid, QString("LightTime %1d; obsSpeed %2/%3/%4 AU/d")
+				//					      .arg(QString::number(lightTimeDays, 'f', 3))
+				//					      .arg(QString::number(aberrationPushSpeed[0], 'f', 3))
+				//					      .arg(QString::number(aberrationPushSpeed[1], 'f', 3))
+				//					      .arg(QString::number(aberrationPushSpeed[2], 'f', 3)));
+
+				const auto update = &RotationElements::updatePlanetCorrections;
+				if      (it->data()->englishName=="Moon")    update(dateJDE-lightTimeDays, RotationElements::EarthMoon);
+				else if (it->data()->englishName=="Mars")    update(dateJDE-lightTimeDays, RotationElements::Mars);
+				else if (it->data()->englishName=="Jupiter") update(dateJDE-lightTimeDays, RotationElements::Jupiter);
+				else if (it->data()->englishName=="Saturn")  update(dateJDE-lightTimeDays, RotationElements::Saturn);
+				else if (it->data()->englishName=="Uranus")  update(dateJDE-lightTimeDays, RotationElements::Uranus);
+				else if (it->data()->englishName=="Neptune") update(dateJDE-lightTimeDays, RotationElements::Neptune);
+			}
 		};
-		QtConcurrent::map(systemPlanets, plCompPosJDETwo).waitForFinished();
-
-
+		for (int stride=0; stride<availableThreads; stride++)
+		{
+			auto future=QtConcurrent::run(plCompLoopTwo, stride);
+			futures.append(future);
+		}
+		// Now the list is being computed by other threads. we can just wait sequentially for completion.
+		for(auto f: futures)
+			f.waitForFinished();
 	}
 	else
 	{
