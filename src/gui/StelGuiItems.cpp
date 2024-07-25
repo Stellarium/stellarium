@@ -774,7 +774,10 @@ void BottomStelBar::updateText(bool updatePos, bool updateTopocentric)
 	}
 
 	QString planetName = core->getCurrentLocation().planetName;
-	QString planetNameI18n;
+	if (planetName!=planetNameEnglish)
+	{
+		planetNameEnglish=planetName;
+	//QString planetNameI18n;
 	if (planetName=="SpaceShip") // Avoid crash
 	{
 		const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
@@ -782,7 +785,7 @@ void BottomStelBar::updateText(bool updatePos, bool updateTopocentric)
 	}
 	else
 		planetNameI18n = GETSTELMODULE(SolarSystem)->searchByEnglishName(planetName)->getNameI18n();
-
+	}
 	QString tzName = core->getCurrentTimeZone();
 	if (tzName.contains("system_default") || (tzName.isEmpty() && planetName=="Earth"))
 		tzName = q_("System default");
