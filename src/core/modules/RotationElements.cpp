@@ -25,6 +25,7 @@
 #include <limits>
 #include <QString>
 #include <QDebug>
+#include <QMutexLocker>
 
 // Also include the GRS corrections here
 double RotationElements::grsJD = 2456901.5;
@@ -33,6 +34,12 @@ double RotationElements::grsDrift = 15.;
 
 RotationElements::PlanetCorrections RotationElements::planetCorrections;
 
+QMutex RotationElements::mutex_E;
+QMutex RotationElements::mutex_M;
+QMutex RotationElements::mutex_J;
+QMutex RotationElements::mutex_S;
+QMutex RotationElements::mutex_U;
+QMutex RotationElements::mutex_N;
 
 void RotationElements::updatePlanetCorrections(const double JDE, const PlanetCorrection planet)
 {
@@ -44,6 +51,8 @@ void RotationElements::updatePlanetCorrections(const double JDE, const PlanetCor
 		case EarthMoon:
 			if (fabs(JDE-planetCorrections.JDE_E)>StelCore::JD_MINUTE)
 			{ // Moon/Earth correction terms. This is from WGCCRE2009. We must fmod them, else we have sin(LARGE)>>1
+				QMutexLocker lock(&mutex_E);
+
 				planetCorrections.JDE_E=JDE; // keep record of when these values are valid.
 				planetCorrections.E1= M_PI_180* (125.045 - remainder( 0.0529921*d, 360.0));
 				planetCorrections.E2= M_PI_180* (250.089 - remainder( 0.1059842*d, 360.0));
@@ -61,8 +70,10 @@ void RotationElements::updatePlanetCorrections(const double JDE, const PlanetCor
 			}
 			break;
 		case Mars:
-			if (fabs(JDE-planetCorrections.JDE_E)>5*StelCore::JD_MINUTE)
+			if (fabs(JDE-planetCorrections.JDE_M)>5*StelCore::JD_MINUTE)
 			{ // Mars correction terms. This is from WGCCRE2015. We must fmod them, else we have sin(LARGE)>>1
+				QMutexLocker lock(&mutex_M);
+
 				planetCorrections.JDE_M=JDE; // keep record of when these values are valid.
 				planetCorrections.M1= M_PI_180* (190.72646643 + remainder(   15917.10818695*T, 360.0));
 				planetCorrections.M2= M_PI_180* ( 21.46892470 + remainder(   31834.27934054*T, 360.0));
@@ -79,6 +90,8 @@ void RotationElements::updatePlanetCorrections(const double JDE, const PlanetCor
 		case Jupiter:
 			if (fabs(JDE-planetCorrections.JDE_J)>0.025) // large changes in the values below :-(
 			{
+				QMutexLocker lock(&mutex_J);
+
 				planetCorrections.JDE_J=JDE; // keep record of when these values are valid.
 				planetCorrections.Ja =M_PI_180* ( 99.360714+remainder( 4850.4046*T, 360.0)); // Jupiter axis terms, Table 10.1
 				planetCorrections.Jb =M_PI_180* (175.895369+remainder( 1191.9605*T, 360.0));
@@ -98,6 +111,8 @@ void RotationElements::updatePlanetCorrections(const double JDE, const PlanetCor
 		case Saturn:
 			if (fabs(JDE-planetCorrections.JDE_S)>0.025) // large changes in the values below :-(
 			{
+				QMutexLocker lock(&mutex_S);
+
 				planetCorrections.JDE_S=JDE; // keep record of when these values are valid.
 				planetCorrections.S1=M_PI_180* (353.32+remainder( 75706.7*T, 360.0)); // corrective terms for Saturn's moons, Table 10.12
 				planetCorrections.S2=M_PI_180* ( 28.72+remainder( 75706.7*T, 360.0));
@@ -110,6 +125,8 @@ void RotationElements::updatePlanetCorrections(const double JDE, const PlanetCor
 		case Uranus:
 			if (fabs(JDE-planetCorrections.JDE_U)>0.025) // large changes in the values below :-(
 			{
+				QMutexLocker lock(&mutex_U);
+
 				planetCorrections.JDE_U=JDE; // keep record of when these values are valid.
 				planetCorrections.U1 =M_PI_180* (115.75+remainder(54991.87*T, 360.0)); // corrective terms for Uranus's moons, Table 10.14.
 				planetCorrections.U2 =M_PI_180* (141.69+remainder(41887.66*T, 360.0));
@@ -132,6 +149,8 @@ void RotationElements::updatePlanetCorrections(const double JDE, const PlanetCor
 		case Neptune:
 			if (fabs(JDE-planetCorrections.JDE_N)>0.025) // large changes in the values below :-(
 			{
+				QMutexLocker lock(&mutex_N);
+
 				planetCorrections.JDE_N=JDE; // keep record of when these values are valid.
 				planetCorrections.Na=M_PI_180* (357.85+remainder(   52.316*T, 360.0)); // Neptune axis term
 				planetCorrections.N1=M_PI_180* (323.92+remainder(62606.6*T, 360.0)); // corrective terms for Neptune's moons, Table 10.15 (N=Na!)
@@ -236,6 +255,8 @@ const QMap<QString, RotationElements::axisOriFuncType>RotationElements::axisOriC
 double RotationElements::corrWMoon(const double d, const double T)
 {
 	Q_UNUSED(T)
+	QMutexLocker lock(&mutex_E);
+
 	return -1.4e-12*d*d                        + 3.5610*sin(planetCorrections.E1)
 		+0.1208*sin(planetCorrections.E2)  - 0.0642*sin(planetCorrections.E3)  +  0.0158*sin(planetCorrections.E4)
 		+0.0252*sin(planetCorrections.E5)  - 0.0066*sin(planetCorrections.E6)  -  0.0047*sin(planetCorrections.E7)
@@ -298,12 +319,15 @@ double RotationElements::corrWJupiter(const double d, const double T)
 double RotationElements::corrWNeptune(const double d, const double T)
 {
 	Q_UNUSED(d) Q_UNUSED(T)
+	QMutexLocker lock(&mutex_N);
+
 	return  -0.48 * sin(planetCorrections.Na);
 }
 
 double RotationElements::corrWPhobos(const double d, const double T)
 {
 	Q_UNUSED(d) Q_UNUSED(T)
+	QMutexLocker lock(&mutex_M);
 	return 12.72192797*T*T
 	 +1.42421769*sin(planetCorrections.M1)
 	 -0.02273783*sin(planetCorrections.M2)
@@ -315,6 +339,7 @@ double RotationElements::corrWPhobos(const double d, const double T)
 double RotationElements::corrWDeimos(const double d, const double T)
 {
 	Q_UNUSED(d) Q_UNUSED(T)
+	QMutexLocker lock(&mutex_M);
 	return
 	 -2.73954829*sin(planetCorrections.M6)
 	 -0.39968606*sin(planetCorrections.M7)
@@ -326,155 +351,182 @@ double RotationElements::corrWDeimos(const double d, const double T)
 double RotationElements::corrWIo(const double d, const double T)
 {
 	Q_UNUSED(d) Q_UNUSED(T)
+	QMutexLocker lock(&mutex_J);
+
 	return (-0.085)*sin(planetCorrections.J3) - (0.022)*sin(planetCorrections.J4);
 }
 
 double RotationElements::corrWEuropa(const double d, const double T)
 {
 	Q_UNUSED(d) Q_UNUSED(T)
+	QMutexLocker lock(&mutex_J);
 	return (-0.980)*sin(planetCorrections.J4) - (0.054)*sin(planetCorrections.J5) - (0.014)*sin(planetCorrections.J6) - (0.008)*sin(planetCorrections.J7);
 }
 
 double RotationElements::corrWGanymede(const double d, const double T)
 {
 	Q_UNUSED(d) Q_UNUSED(T)
+	QMutexLocker lock(&mutex_J);
 	return (0.033)*sin(planetCorrections.J4) - (0.389)*sin(planetCorrections.J5) - (0.082)*sin(planetCorrections.J6);
 }
 
 double RotationElements::corrWCallisto(const double d, const double T)
 {
 	Q_UNUSED(d) Q_UNUSED(T)
+	QMutexLocker lock(&mutex_J);
 	return (0.061)*sin(planetCorrections.J5) - (0.533)*sin(planetCorrections.J6) - (0.009)*sin(planetCorrections.J8);
 }
 
 double RotationElements::corrWAmalthea(const double d, const double T)
 {
 	Q_UNUSED(d) Q_UNUSED(T)
+	QMutexLocker lock(&mutex_J);
 	return (0.76)*sin(planetCorrections.J1) - (0.01)*sin(2.*planetCorrections.J1);
 }
 
 double RotationElements::corrWThebe(const double d, const double T)
 {
 	Q_UNUSED(d) Q_UNUSED(T)
+	QMutexLocker lock(&mutex_J);
 	return (1.91)*sin(planetCorrections.J2) - (0.04)*sin(2.*planetCorrections.J2);
 }
 
 double RotationElements::corrWMimas(const double d, const double T)
 {
 	Q_UNUSED(d) Q_UNUSED(T)
+	QMutexLocker lock(&mutex_S);
 	return (-13.48)*sin(planetCorrections.S3) - (44.85)*sin(planetCorrections.S5);
 }
 
 double RotationElements::corrWTethys(const double d, const double T){
 	Q_UNUSED(d) Q_UNUSED(T)
+			QMutexLocker lock(&mutex_S);
 	return (-9.60)*sin(planetCorrections.S4) + (2.23)*sin(planetCorrections.S5);
 }
 
 double RotationElements::corrWRhea(const double d, const double T)
 {
 	Q_UNUSED(d) Q_UNUSED(T)
+	QMutexLocker lock(&mutex_S);
 	return (-3.08)*sin(planetCorrections.S6);
 }
 
 double RotationElements::corrWJanus(const double d, const double T)
 {
 	Q_UNUSED(d) Q_UNUSED(T)
+	QMutexLocker lock(&mutex_S);
 	return (1.613)*sin(planetCorrections.S2) - (0.023)*sin(2.*planetCorrections.S2);
 }
 
 double RotationElements::corrWEpimetheus(const double d, const double T)
 {
 	Q_UNUSED(d) Q_UNUSED(T)
+	QMutexLocker lock(&mutex_S);
 	return 3.133 * sin(planetCorrections.S1) - (0.086)*sin(2.*planetCorrections.S1);
 }
 
 double RotationElements::corrWCordelia(const double d, const double T)
 {
 	Q_UNUSED(d) Q_UNUSED(T)
+	QMutexLocker lock(&mutex_U);
 	return (-0.04)*sin(planetCorrections.U1);
 }
 
 double RotationElements::corrWOphelia(const double d, const double T)
 {
 	Q_UNUSED(d) Q_UNUSED(T)
+	QMutexLocker lock(&mutex_U);
 	return (-0.03)*sin(planetCorrections.U2);
 }
 
 double RotationElements::corrWBianca(const double d, const double T)
 {
 	Q_UNUSED(d) Q_UNUSED(T)
+	QMutexLocker lock(&mutex_U);
 	return (-0.04)*sin(planetCorrections.U3);
 }
 
 double RotationElements::corrWCressida(const double d, const double T)
 {
 	Q_UNUSED(d) Q_UNUSED(T)
+	QMutexLocker lock(&mutex_U);
 	return (-0.01)*sin(planetCorrections.U4);
 }
 
 double RotationElements::corrWDesdemona(const double d, const double T)
 {
 	Q_UNUSED(d) Q_UNUSED(T)
+	QMutexLocker lock(&mutex_U);
 	return -0.04 * sin(planetCorrections.U5);
 }
 
 double RotationElements::corrWJuliet(const double d, const double T)
 {
 	Q_UNUSED(d) Q_UNUSED(T)
+	QMutexLocker lock(&mutex_U);
 	return -0.02 * sin(planetCorrections.U6);
 }
 
 double RotationElements::corrWPortia(const double d, const double T)
 {
 	Q_UNUSED(d) Q_UNUSED(T)
+	QMutexLocker lock(&mutex_U);
 	return -0.02 * sin(planetCorrections.U7);
 }
 
 double RotationElements::corrWRosalind(const double d, const double T)
 {
 	Q_UNUSED(d) Q_UNUSED(T)
+	QMutexLocker lock(&mutex_U);
 	return -0.08 * sin(planetCorrections.U8);
 }
 
 double RotationElements::corrWBelinda(const double d, const double T)
 {
 	Q_UNUSED(d) Q_UNUSED(T)
+	QMutexLocker lock(&mutex_U);
 	return -0.01 * sin(planetCorrections.U9);
 }
 
 double RotationElements::corrWPuck(const double d, const double T)
 {
 	Q_UNUSED(d) Q_UNUSED(T)
+	QMutexLocker lock(&mutex_U);
 	return -0.09 * sin(planetCorrections.U10);
 }
 
 double RotationElements::corrWAriel(const double d, const double T)
 {
 	Q_UNUSED(d) Q_UNUSED(T)
+	QMutexLocker lock(&mutex_U);
 	return 0.05 * sin(planetCorrections.U12) + 0.08 * sin(planetCorrections.U13);
 }
 
 double RotationElements::corrWUmbriel(const double d, const double T)
 {
 	Q_UNUSED(d) Q_UNUSED(T)
+	QMutexLocker lock(&mutex_U);
 	return -0.09 * sin(planetCorrections.U12) + 0.06 * sin(planetCorrections.U14);
 }
 
 double RotationElements::corrWTitania(const double d, const double T)
 {
 	Q_UNUSED(d) Q_UNUSED(T)
+	QMutexLocker lock(&mutex_U);
 	return 0.08 * sin(planetCorrections.U15);
 }
 
 double RotationElements::corrWOberon(const double d, const double T)
 {
 	Q_UNUSED(d) Q_UNUSED(T)
+	QMutexLocker lock(&mutex_U);
 	return 0.04 * sin(planetCorrections.U16);
 }
 
 double RotationElements::corrWMiranda(const double d, const double T)
 {
 	Q_UNUSED(d) Q_UNUSED(T)
+	QMutexLocker lock(&mutex_U);
 	return   -1.27 * sin(planetCorrections.U12) + 0.15 * sin(2.*planetCorrections.U12)
 		+ 1.15 * sin(planetCorrections.U11) - 0.09 * sin(2.*planetCorrections.U11);
 }
@@ -482,6 +534,7 @@ double RotationElements::corrWMiranda(const double d, const double T)
 double RotationElements::corrWTriton(const double d, const double T)
 {
 	Q_UNUSED(d) Q_UNUSED(T)
+	QMutexLocker lock(&mutex_N);
 	return   22.25 * sin(   planetCorrections.N7) + 6.73 * sin(2.*planetCorrections.N7)
 		+ 2.05 * sin(3.*planetCorrections.N7) + 0.74 * sin(4.*planetCorrections.N7)
 		+ 0.28 * sin(5.*planetCorrections.N7) + 0.11 * sin(6.*planetCorrections.N7)
@@ -492,36 +545,42 @@ double RotationElements::corrWTriton(const double d, const double T)
 double RotationElements::corrWNaiad(const double d, const double T)
 {
 	Q_UNUSED(d) Q_UNUSED(T)
+	QMutexLocker lock(&mutex_N);
 	return (-0.48)*sin(planetCorrections.Na) + (4.40)*sin(planetCorrections.N1) - (0.27)*sin(2.*planetCorrections.N1);
 }
 
 double RotationElements::corrWThalassa(const double d, const double T)
 {
 	Q_UNUSED(d) Q_UNUSED(T)
+	QMutexLocker lock(&mutex_N);
 	return (-0.48)*sin(planetCorrections.Na) + (0.19)*sin(planetCorrections.N2);
 }
 
 double RotationElements::corrWDespina(const double d, const double T)
 {
 	Q_UNUSED(d) Q_UNUSED(T)
+	QMutexLocker lock(&mutex_N);
 	return (-0.49)*sin(planetCorrections.Na) + (0.06)*sin(planetCorrections.N3);
 }
 
 double RotationElements::corrWGalatea(const double d, const double T)
 {
 	Q_UNUSED(d) Q_UNUSED(T)
+	QMutexLocker lock(&mutex_N);
 	return (-0.48)*sin(planetCorrections.Na) + (0.05)*sin(planetCorrections.N4);
 }
 
 double RotationElements::corrWLarissa(const double d, const double T)
 {
 	Q_UNUSED(d) Q_UNUSED(T)
+	QMutexLocker lock(&mutex_N);
 	return (-0.48)*sin(planetCorrections.Na) + (0.19)*sin(planetCorrections.N5);
 }
 
 double RotationElements::corrWProteus(const double d, const double T)
 {
 	Q_UNUSED(d) Q_UNUSED(T)
+	QMutexLocker lock(&mutex_N);
 	return (-0.48)*sin(planetCorrections.Na) + (0.04)*sin(planetCorrections.N6);
 }
 
@@ -529,6 +588,7 @@ void RotationElements::corrOriMoon(const double d, const double T, double* J2000
 {
 	// This is from WGCCRE2009.
 	Q_UNUSED(d) Q_UNUSED(T)
+	QMutexLocker lock(&mutex_E);
 	*J2000NPoleRA += - (3.8787*M_PI_180)*sin(planetCorrections.E1)  - (0.1204*M_PI_180)*sin(planetCorrections.E2) + (0.0700*M_PI_180)*sin(planetCorrections.E3)
 			- (0.0172*M_PI_180)*sin(planetCorrections.E4)  + (0.0072*M_PI_180)*sin(planetCorrections.E6) - (0.0052*M_PI_180)*sin(planetCorrections.E10)
 			+ (0.0043*M_PI_180)*sin(planetCorrections.E13);
@@ -555,6 +615,8 @@ void RotationElements::corrOriMars(const double d, const double T, double* J2000
 void RotationElements::corrOriJupiter(const double d, const double T, double* J2000NPoleRA, double* J2000NPoleDE)
 {
 	Q_UNUSED(d) Q_UNUSED(T)
+	QMutexLocker lock(&mutex_J);
+
 	*J2000NPoleRA+=	 (0.000117*M_PI_180)*sin(planetCorrections.Ja)
 			+(0.000938*M_PI_180)*sin(planetCorrections.Jb)
 			+(0.001432*M_PI_180)*sin(planetCorrections.Jc)
@@ -570,6 +632,7 @@ void RotationElements::corrOriJupiter(const double d, const double T, double* J2
 void RotationElements::corrOriNeptune(const double d, const double T, double* J2000NPoleRA, double* J2000NPoleDE)
 {
 	Q_UNUSED(d) Q_UNUSED(T)
+	QMutexLocker lock(&mutex_N);
 	*J2000NPoleRA+= (0.7 *M_PI_180)*sin(planetCorrections.Na);
 	*J2000NPoleDE-= (0.51*M_PI_180)*cos(planetCorrections.Na);
 }
@@ -577,6 +640,8 @@ void RotationElements::corrOriNeptune(const double d, const double T, double* J2
 void RotationElements::corrOriPhobos(const double d, const double T, double* J2000NPoleRA, double* J2000NPoleDE)
 {
 	Q_UNUSED(d) Q_UNUSED(T)
+	QMutexLocker lock(&mutex_M);
+
 	*J2000NPoleRA+=
 			+(-1.78428399*M_PI_180)*sin(planetCorrections.M1)
 			+(+0.02212824*M_PI_180)*sin(planetCorrections.M2)
@@ -592,6 +657,7 @@ void RotationElements::corrOriPhobos(const double d, const double T, double* J20
 void RotationElements::corrOriDeimos(const double d, const double T, double* J2000NPoleRA, double* J2000NPoleDE)
 {
 	Q_UNUSED(d) Q_UNUSED(T)
+	QMutexLocker lock(&mutex_M);
 	*J2000NPoleRA+=   (3.09217726*M_PI_180)*sin(planetCorrections.M6)
 			+(0.22980637*M_PI_180)*sin(planetCorrections.M7)
 			+(0.06418655*M_PI_180)*sin(planetCorrections.M8)
@@ -608,6 +674,8 @@ void RotationElements::corrOriDeimos(const double d, const double T, double* J20
 void RotationElements::corrOriIo(const double d, const double T, double* J2000NPoleRA, double* J2000NPoleDE)
 {
 	Q_UNUSED(d) Q_UNUSED(T)
+	QMutexLocker lock(&mutex_J);
+
 	*J2000NPoleRA+=(M_PI_180*0.094)*sin(planetCorrections.J3) + (M_PI_180*0.024)*sin(planetCorrections.J4);
 	*J2000NPoleDE+=(M_PI_180*0.040)*cos(planetCorrections.J3) + (M_PI_180*0.011)*cos(planetCorrections.J4);
 }
@@ -615,6 +683,7 @@ void RotationElements::corrOriIo(const double d, const double T, double* J2000NP
 void RotationElements::corrOriEuropa(const double d, const double T, double* J2000NPoleRA, double* J2000NPoleDE)
 {
 	Q_UNUSED(d) Q_UNUSED(T)
+	QMutexLocker lock(&mutex_J);
 	*J2000NPoleRA+=(M_PI_180*1.086)*sin(planetCorrections.J4) + (M_PI_180*0.060)*sin(planetCorrections.J5) + (M_PI_180*0.015)*sin(planetCorrections.J6) + (M_PI_180*0.009)*sin(planetCorrections.J7);
 	*J2000NPoleDE+=(M_PI_180*0.468)*cos(planetCorrections.J4) + (M_PI_180*0.026)*cos(planetCorrections.J5) + (M_PI_180*0.007)*cos(planetCorrections.J6) + (M_PI_180*0.002)*cos(planetCorrections.J7);
 }
@@ -622,6 +691,7 @@ void RotationElements::corrOriEuropa(const double d, const double T, double* J20
 void RotationElements::corrOriGanymede(const double d, const double T, double* J2000NPoleRA, double* J2000NPoleDE)
 {
 	Q_UNUSED(d) Q_UNUSED(T)
+	QMutexLocker lock(&mutex_J);
 	*J2000NPoleRA+=(M_PI_180*-.037)*sin(planetCorrections.J4) + (M_PI_180*0.431)*sin(planetCorrections.J5) + (M_PI_180*0.091)*sin(planetCorrections.J6);
 	*J2000NPoleDE+=(M_PI_180*-.016)*cos(planetCorrections.J4) + (M_PI_180*0.186)*cos(planetCorrections.J5) + (M_PI_180*0.039)*cos(planetCorrections.J6);
 }
@@ -629,6 +699,7 @@ void RotationElements::corrOriGanymede(const double d, const double T, double* J
 void RotationElements::corrOriCallisto(const double d, const double T, double* J2000NPoleRA, double* J2000NPoleDE)
 {
 	Q_UNUSED(d) Q_UNUSED(T)
+	QMutexLocker lock(&mutex_J);
 	*J2000NPoleRA+=(M_PI_180*-.068)*sin(planetCorrections.J5) + (M_PI_180*0.590)*sin(planetCorrections.J6) + (M_PI_180*0.010)*sin(planetCorrections.J8);
 	*J2000NPoleDE+=(M_PI_180*-.029)*cos(planetCorrections.J5) + (M_PI_180*0.254)*cos(planetCorrections.J6) - (M_PI_180*0.004)*cos(planetCorrections.J8);
 }
@@ -636,6 +707,7 @@ void RotationElements::corrOriCallisto(const double d, const double T, double* J
 void RotationElements::corrOriAmalthea(const double d, const double T, double* J2000NPoleRA, double* J2000NPoleDE)
 {
 	Q_UNUSED(d) Q_UNUSED(T)
+	QMutexLocker lock(&mutex_J);
 	*J2000NPoleRA+=(M_PI_180*0.01)*sin(2.*planetCorrections.J1) - (M_PI_180*0.84)*sin(planetCorrections.J1);
 	*J2000NPoleDE-=(M_PI_180*0.36)*cos(planetCorrections.J1);
 }
@@ -643,6 +715,7 @@ void RotationElements::corrOriAmalthea(const double d, const double T, double* J
 void RotationElements::corrOriThebe(const double d, const double T, double* J2000NPoleRA, double* J2000NPoleDE)
 {
 	Q_UNUSED(d) Q_UNUSED(T)
+	QMutexLocker lock(&mutex_J);
 	*J2000NPoleRA+=(M_PI_180*-2.11)*sin(planetCorrections.J2) + (M_PI_180*0.04)*sin(2.*planetCorrections.J2);
 	*J2000NPoleDE+=(M_PI_180*-0.91)*cos(planetCorrections.J2) + (M_PI_180*0.01)*cos(2.*planetCorrections.J2);
 }
@@ -650,6 +723,7 @@ void RotationElements::corrOriThebe(const double d, const double T, double* J200
 void RotationElements::corrOriMimas(const double d, const double T, double* J2000NPoleRA, double* J2000NPoleDE)
 {
 	Q_UNUSED(d) Q_UNUSED(T)
+	QMutexLocker lock(&mutex_S);
 	*J2000NPoleRA+=(M_PI_180*13.56)*sin(planetCorrections.S3);
 	*J2000NPoleDE+=(M_PI_180*-1.53)*cos(planetCorrections.S3);
 }
@@ -657,6 +731,7 @@ void RotationElements::corrOriMimas(const double d, const double T, double* J200
 void RotationElements::corrOriTethys(const double d, const double T, double* J2000NPoleRA, double* J2000NPoleDE)
 {
 	Q_UNUSED(d) Q_UNUSED(T)
+	QMutexLocker lock(&mutex_S);
 	*J2000NPoleRA+=(M_PI_180* 9.66)*sin(planetCorrections.S4);
 	*J2000NPoleDE+=(M_PI_180*-1.09)*cos(planetCorrections.S4);
 }
@@ -664,6 +739,7 @@ void RotationElements::corrOriTethys(const double d, const double T, double* J20
 void RotationElements::corrOriRhea(const double d, const double T, double* J2000NPoleRA, double* J2000NPoleDE)
 {
 	Q_UNUSED(d) Q_UNUSED(T)
+	QMutexLocker lock(&mutex_S);
 	*J2000NPoleRA+=(M_PI/180.* 3.10)*sin(planetCorrections.S6);
 	*J2000NPoleDE+=(M_PI/180.*-0.35)*cos(planetCorrections.S6);
 }
@@ -671,6 +747,7 @@ void RotationElements::corrOriRhea(const double d, const double T, double* J2000
 void RotationElements::corrOriJanus(const double d, const double T, double* J2000NPoleRA, double* J2000NPoleDE)
 {
 	Q_UNUSED(d) Q_UNUSED(T)
+	QMutexLocker lock(&mutex_S);
 	*J2000NPoleRA+=(M_PI_180*0.023)*sin(2.*planetCorrections.S2)-(M_PI_180*1.623)*sin(planetCorrections.S2);
 	*J2000NPoleDE+=(M_PI_180*0.001)*cos(2.*planetCorrections.S2)-(M_PI_180*0.183)*cos(planetCorrections.S2);
 }
@@ -678,6 +755,7 @@ void RotationElements::corrOriJanus(const double d, const double T, double* J200
 void RotationElements::corrOriEpimetheus(const double d, const double T, double* J2000NPoleRA, double* J2000NPoleDE)
 {
 	Q_UNUSED(d) Q_UNUSED(T)
+	QMutexLocker lock(&mutex_S);
 	*J2000NPoleRA+=(M_PI_180*0.086)*sin(2.*planetCorrections.S1)-(M_PI_180*3.153)*sin(planetCorrections.S1);
 	*J2000NPoleDE+=(M_PI_180*0.005)*cos(2.*planetCorrections.S1)-(M_PI_180*0.356)*cos(planetCorrections.S1);
 }
@@ -685,6 +763,7 @@ void RotationElements::corrOriEpimetheus(const double d, const double T, double*
 void RotationElements::corrOriAriel(const double d, const double T, double* J2000NPoleRA, double* J2000NPoleDE)
 {
 	Q_UNUSED(d) Q_UNUSED(T)
+	QMutexLocker lock(&mutex_U);
 	*J2000NPoleRA+=(M_PI_180* 0.29)*sin(planetCorrections.U13);
 	*J2000NPoleDE+=(M_PI_180* 0.28)*cos(planetCorrections.U13);
 }
@@ -692,6 +771,7 @@ void RotationElements::corrOriAriel(const double d, const double T, double* J200
 void RotationElements::corrOriUmbriel(const double d, const double T, double* J2000NPoleRA, double* J2000NPoleDE)
 {
 	Q_UNUSED(d) Q_UNUSED(T)
+	QMutexLocker lock(&mutex_U);
 	*J2000NPoleRA+=(M_PI_180* 0.21)*sin(planetCorrections.U14);
 	*J2000NPoleDE+=(M_PI_180* 0.2 )*cos(planetCorrections.U14);
 }
@@ -699,6 +779,7 @@ void RotationElements::corrOriUmbriel(const double d, const double T, double* J2
 void RotationElements::corrOriTitania(const double d, const double T, double* J2000NPoleRA, double* J2000NPoleDE)
 {
 	Q_UNUSED(d) Q_UNUSED(T)
+	QMutexLocker lock(&mutex_U);
 	*J2000NPoleRA+=(M_PI_180* 0.29)*sin(planetCorrections.U15);
 	*J2000NPoleDE+=(M_PI_180* 0.28)*cos(planetCorrections.U15);
 }
@@ -706,6 +787,7 @@ void RotationElements::corrOriTitania(const double d, const double T, double* J2
 void RotationElements::corrOriOberon(const double d, const double T, double* J2000NPoleRA, double* J2000NPoleDE)
 {
 	Q_UNUSED(d) Q_UNUSED(T)
+	QMutexLocker lock(&mutex_U);
 	*J2000NPoleRA+=(M_PI_180* 0.16)*sin(planetCorrections.U16);
 	*J2000NPoleDE+=(M_PI_180* 0.16)*cos(planetCorrections.U16);
 }
@@ -713,6 +795,7 @@ void RotationElements::corrOriOberon(const double d, const double T, double* J20
 void RotationElements::corrOriMiranda(const double d, const double T, double* J2000NPoleRA, double* J2000NPoleDE)
 {
 	Q_UNUSED(d) Q_UNUSED(T)
+	QMutexLocker lock(&mutex_U);
 	*J2000NPoleRA+=(M_PI_180* 4.41)*sin(planetCorrections.U11) - (M_PI_180* 0.04)*sin(2.*planetCorrections.U11);
 	*J2000NPoleDE+=(M_PI_180* 4.25)*cos(planetCorrections.U11) - (M_PI_180* 0.02)*cos(2.*planetCorrections.U11);
 }
@@ -720,6 +803,7 @@ void RotationElements::corrOriMiranda(const double d, const double T, double* J2
 void RotationElements::corrOriCordelia(const double d, const double T, double* J2000NPoleRA, double* J2000NPoleDE)
 {
 	Q_UNUSED(d) Q_UNUSED(T)
+	QMutexLocker lock(&mutex_U);
 	*J2000NPoleRA+=(M_PI_180*-0.15)*sin(planetCorrections.U1);
 	*J2000NPoleDE+=(M_PI_180* 0.14)*cos(planetCorrections.U1);
 }
@@ -727,6 +811,7 @@ void RotationElements::corrOriCordelia(const double d, const double T, double* J
 void RotationElements::corrOriOphelia(const double d, const double T, double* J2000NPoleRA, double* J2000NPoleDE)
 {
 	Q_UNUSED(d) Q_UNUSED(T)
+	QMutexLocker lock(&mutex_U);
 	*J2000NPoleRA+=(M_PI_180*-0.09)*sin(planetCorrections.U2);
 	*J2000NPoleDE+=(M_PI_180* 0.09)*cos(planetCorrections.U2);
 }
@@ -734,6 +819,7 @@ void RotationElements::corrOriOphelia(const double d, const double T, double* J2
 void RotationElements::corrOriBianca(const double d, const double T, double* J2000NPoleRA, double* J2000NPoleDE)
 {
 	Q_UNUSED(d) Q_UNUSED(T)
+	QMutexLocker lock(&mutex_U);
 	*J2000NPoleRA+=(M_PI_180*-0.16)*sin(planetCorrections.U3);
 	*J2000NPoleDE+=(M_PI_180* 0.16)*cos(planetCorrections.U3);
 }
@@ -741,6 +827,7 @@ void RotationElements::corrOriBianca(const double d, const double T, double* J20
 void RotationElements::corrOriCressida(const double d, const double T, double* J2000NPoleRA, double* J2000NPoleDE)
 {
 	Q_UNUSED(d) Q_UNUSED(T)
+	QMutexLocker lock(&mutex_U);
 	*J2000NPoleRA+=(M_PI_180*-0.04)*sin(planetCorrections.U4);
 	*J2000NPoleDE+=(M_PI_180* 0.04)*cos(planetCorrections.U4);
 }
@@ -748,6 +835,7 @@ void RotationElements::corrOriCressida(const double d, const double T, double* J
 void RotationElements::corrOriDesdemona(const double d, const double T, double* J2000NPoleRA, double* J2000NPoleDE)
 {
 	Q_UNUSED(d) Q_UNUSED(T)
+	QMutexLocker lock(&mutex_U);
 	*J2000NPoleRA+=(M_PI_180*-0.17)*sin(planetCorrections.U5);
 	*J2000NPoleDE+=(M_PI_180* 0.16)*cos(planetCorrections.U5);
 }
@@ -755,6 +843,7 @@ void RotationElements::corrOriDesdemona(const double d, const double T, double* 
 void RotationElements::corrOriJuliet(const double d, const double T, double* J2000NPoleRA, double* J2000NPoleDE)
 {
 	Q_UNUSED(d) Q_UNUSED(T)
+	QMutexLocker lock(&mutex_U);
 	*J2000NPoleRA+=(M_PI_180*-0.06)*sin(planetCorrections.U6);
 	*J2000NPoleDE+=(M_PI_180* 0.06)*cos(planetCorrections.U6);
 }
@@ -762,6 +851,7 @@ void RotationElements::corrOriJuliet(const double d, const double T, double* J20
 void RotationElements::corrOriPortia(const double d, const double T, double* J2000NPoleRA, double* J2000NPoleDE)
 {
 	Q_UNUSED(d) Q_UNUSED(T)
+	QMutexLocker lock(&mutex_U);
 	*J2000NPoleRA+=(M_PI_180*-0.09)*sin(planetCorrections.U7);
 	*J2000NPoleDE+=(M_PI_180* 0.09)*cos(planetCorrections.U7);
 }
@@ -769,6 +859,7 @@ void RotationElements::corrOriPortia(const double d, const double T, double* J20
 void RotationElements::corrOriRosalind(const double d, const double T, double* J2000NPoleRA, double* J2000NPoleDE)
 {
 	Q_UNUSED(d) Q_UNUSED(T)
+	QMutexLocker lock(&mutex_U);
 	*J2000NPoleRA+=(M_PI_180*-0.29)*sin(planetCorrections.U8);
 	*J2000NPoleDE+=(M_PI_180* 0.28)*cos(planetCorrections.U8);
 }
@@ -776,6 +867,7 @@ void RotationElements::corrOriRosalind(const double d, const double T, double* J
 void RotationElements::corrOriBelinda(const double d, const double T, double* J2000NPoleRA, double* J2000NPoleDE)
 {
 	Q_UNUSED(d) Q_UNUSED(T)
+	QMutexLocker lock(&mutex_U);
 	*J2000NPoleRA+=(M_PI_180*-0.03)*sin(planetCorrections.U9);
 	*J2000NPoleDE+=(M_PI_180* 0.03)*cos(planetCorrections.U9);
 }
@@ -783,6 +875,7 @@ void RotationElements::corrOriBelinda(const double d, const double T, double* J2
 void RotationElements::corrOriPuck(const double d, const double T, double* J2000NPoleRA, double* J2000NPoleDE)
 {
 	Q_UNUSED(d) Q_UNUSED(T)
+	QMutexLocker lock(&mutex_U);
 	*J2000NPoleRA+=(M_PI_180*-0.33)*sin(planetCorrections.U10);
 	*J2000NPoleDE+=(M_PI_180* 0.31)*cos(planetCorrections.U10);
 }
@@ -790,6 +883,7 @@ void RotationElements::corrOriPuck(const double d, const double T, double* J2000
 void RotationElements::corrOriTriton(const double d, const double T, double* J2000NPoleRA, double* J2000NPoleDE)
 {
 	Q_UNUSED(d) Q_UNUSED(T)
+	QMutexLocker lock(&mutex_N);
 	*J2000NPoleRA+=    (M_PI_180*-32.35)*sin(planetCorrections.N7)  - (M_PI_180*6.28)*sin(2.*planetCorrections.N7)
 			- (M_PI_180*2.08)*sin(3.*planetCorrections.N7) - (M_PI_180*0.74)*sin(4.*planetCorrections.N7)
 			- (M_PI_180*0.28)*sin(5.*planetCorrections.N7) - (M_PI_180*0.11)*sin(6.*planetCorrections.N7)
@@ -804,6 +898,7 @@ void RotationElements::corrOriTriton(const double d, const double T, double* J20
 void RotationElements::corrOriNaiad(const double d, const double T, double* J2000NPoleRA, double* J2000NPoleDE)
 {
 	Q_UNUSED(d) Q_UNUSED(T)
+	QMutexLocker lock(&mutex_N);
 	*J2000NPoleRA+=(M_PI_180* 0.70)*sin(planetCorrections.Na) - (M_PI_180* 6.49)*sin(planetCorrections.N1) + (M_PI_180* 0.25)*sin(2.*planetCorrections.N1);
 	*J2000NPoleDE+=(M_PI_180*-0.51)*cos(planetCorrections.Na) - (M_PI_180* 4.75)*cos(planetCorrections.N1) + (M_PI_180* 0.09)*cos(2.*planetCorrections.N1);
 }
@@ -811,6 +906,7 @@ void RotationElements::corrOriNaiad(const double d, const double T, double* J200
 void RotationElements::corrOriThalassa(const double d, const double T, double* J2000NPoleRA, double* J2000NPoleDE)
 {
 	Q_UNUSED(d) Q_UNUSED(T)
+	QMutexLocker lock(&mutex_N);
 	*J2000NPoleRA+=(M_PI_180* 0.70)*sin(planetCorrections.Na) - (M_PI_180* 0.28)*sin(planetCorrections.N2);
 	*J2000NPoleDE+=(M_PI_180*-0.51)*cos(planetCorrections.Na) - (M_PI_180* 0.21)*cos(planetCorrections.N2);
 }
@@ -818,6 +914,7 @@ void RotationElements::corrOriThalassa(const double d, const double T, double* J
 void RotationElements::corrOriDespina(const double d, const double T, double* J2000NPoleRA, double* J2000NPoleDE)
 {
 	Q_UNUSED(d) Q_UNUSED(T)
+	QMutexLocker lock(&mutex_N);
 	*J2000NPoleRA+=(M_PI_180* 0.70)*sin(planetCorrections.Na) - (M_PI_180* 0.09)*sin(planetCorrections.N3);
 	*J2000NPoleDE+=(M_PI_180*-0.51)*cos(planetCorrections.Na) - (M_PI_180* 0.07)*cos(planetCorrections.N3);
 }
@@ -825,6 +922,7 @@ void RotationElements::corrOriDespina(const double d, const double T, double* J2
 void RotationElements::corrOriGalatea(const double d, const double T, double* J2000NPoleRA, double* J2000NPoleDE)
 {
 	Q_UNUSED(d) Q_UNUSED(T)
+	QMutexLocker lock(&mutex_N);
 	*J2000NPoleRA+=(M_PI_180* 0.70)*sin(planetCorrections.Na) - (M_PI_180* 0.07)*sin(planetCorrections.N4);
 	*J2000NPoleDE+=(M_PI_180*-0.51)*cos(planetCorrections.Na) - (M_PI_180* 0.05)*cos(planetCorrections.N4);
 }
@@ -832,6 +930,7 @@ void RotationElements::corrOriGalatea(const double d, const double T, double* J2
 void RotationElements::corrOriLarissa(const double d, const double T, double* J2000NPoleRA, double* J2000NPoleDE)
 {
 	Q_UNUSED(d) Q_UNUSED(T)
+	QMutexLocker lock(&mutex_N);
 	*J2000NPoleRA+=(M_PI_180* 0.70)*sin(planetCorrections.Na) - (M_PI_180* 0.27)*sin(planetCorrections.N5);
 	*J2000NPoleDE+=(M_PI_180*-0.51)*cos(planetCorrections.Na) - (M_PI_180* 0.20)*cos(planetCorrections.N5);
 }
@@ -839,6 +938,7 @@ void RotationElements::corrOriLarissa(const double d, const double T, double* J2
 void RotationElements::corrOriProteus(const double d, const double T, double* J2000NPoleRA, double* J2000NPoleDE)
 {
 	Q_UNUSED(d) Q_UNUSED(T)
+	QMutexLocker lock(&mutex_N);
 	*J2000NPoleRA+=(M_PI_180* 0.70)*sin(planetCorrections.Na) - (M_PI_180* 0.05)*sin(planetCorrections.N6);
 	*J2000NPoleDE+=(M_PI_180*-0.51)*cos(planetCorrections.Na) - (M_PI_180* 0.04)*cos(planetCorrections.N6);
 }

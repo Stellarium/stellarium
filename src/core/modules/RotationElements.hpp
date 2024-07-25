@@ -57,6 +57,7 @@
 //! rot_pole_W0  [degrees]     re.W0  [degrees]     constant term fo W.
 //! rot_pole_W1  [degrees/day] re.W1  [degrees/day] d factor for W
 
+#include <QMutex>
 #include <QString>
 #include "VecMath.hpp"
 
@@ -293,6 +294,14 @@ public:
 	//! @arg albedo true  to return longitudinal albedo correction, Ls=the average of sub-earth and sub-solar planetographic longitudes
 	//!             false for the Orbital Longitude correction. Ls here is the apparent solar longitude along Mars' "ecliptic". (0=Martian Vernal Equinox)
 	static double getMarsMagLs(const double Ls, const bool albedo);
+
+	//! We may need a bunch of Mutexes for correct parallelism.
+	static QMutex mutex_E;
+	static QMutex mutex_M;
+	static QMutex mutex_J;
+	static QMutex mutex_S;
+	static QMutex mutex_U;
+	static QMutex mutex_N;
 private:
 	static const QList<Vec3d> marsMagLs;
 };
