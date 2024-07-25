@@ -670,19 +670,17 @@ static std::array<struct sat, 4>SATS = {{
 void GetL12Coor(double jd, int ks, double p[3], double v[3])
 {
 	const struct sat *sat = &SATS[ks];
-	double t, arg, s, s1, s2;
 	double elem[6];
 	double val[5] = {0.0};
 	double xv[2][3];
-	int k;
 
-	t = jd - 2433282.5;
+	const double t = jd - 2433282.5;
 	//    s = 0.0;
-	//    for (k = 0; k < sat->a_len; k++) {
+	//    for (int k = 0; k < sat->a_len; k++) {
 	//	arg = sat->a[k].phas + sat->a[k].freq * t;
 	//	s += sat->a[k].ampl * cos(arg);
 	//    }
-    s = std::transform_reduce(STD_EXECUTION_PAR_COMMA
+    double s = std::transform_reduce(STD_EXECUTION_PAR_COMMA
 				  sat->a.begin(), sat->a.begin()+sat->a_len, 0.0,
 				  std::plus<>(),
 				  [=](const struct term &satA){double arg = satA.phas + satA.freq * t;
@@ -694,7 +692,7 @@ void GetL12Coor(double jd, int ks, double p[3], double v[3])
 	elem[0] = s;
 
 	s = sat->al[0] + sat->al[1] * t;
-	//    for (k = 0; k < sat->l_len; k++) {
+	//    for (int k = 0; k < sat->l_len; k++) {
 	//	arg = sat->l[k].phas + sat->l[k].freq * t;
 	//	s += sat->l[k].ampl * sin(arg);
 	//    }
@@ -712,7 +710,7 @@ void GetL12Coor(double jd, int ks, double p[3], double v[3])
 
 	//    s1 = 0.0;
 	//    s2 = 0.0;
-	//    for (k = 0; k < sat->z_len; k++) {
+	//    for (int k = 0; k < sat->z_len; k++) {
 	//	arg = sat->z[k].phas + sat->z[k].freq * t;
 	//	s1 += sat->z[k].ampl * cos(arg);
 	//	s2 += sat->z[k].ampl * sin(arg);
@@ -735,7 +733,7 @@ void GetL12Coor(double jd, int ks, double p[3], double v[3])
 
 //	s1 = 0.0;
 //	s2 = 0.0;
-//	for (k = 0; k < sat->zeta_len; k++) {
+//	for (int k = 0; k < sat->zeta_len; k++) {
 //		arg = sat->zeta[k].phas + sat->zeta[k].freq * t;
 //		s1 += sat->zeta[k].ampl * cos(arg);
 //		s2 += sat->zeta[k].ampl * sin(arg);
