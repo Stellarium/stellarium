@@ -48,6 +48,7 @@
 #include "StelObserver.hpp"
 
 #include <algorithm>
+#include <execution>
 
 #include <QTextStream>
 #include <QSettings>
@@ -115,6 +116,7 @@ SolarSystem::SolarSystem() : StelObjectModule()
 	, ephemerisSaturnMarkerColor(Vec3f(0.0f, 1.0f, 0.0f))
 	, allTrails(Q_NULLPTR)
 	, conf(StelApp::getInstance().getSettings())
+	, extraThreads(0)
 {
 	planetNameFont.setPixelSize(StelApp::getInstance().getScreenFontSize());
 	connect(&StelApp::getInstance(), SIGNAL(screenFontSizeChanged(int)), this, SLOT(setFontSize(int)));
@@ -188,7 +190,8 @@ void SolarSystem::init()
 	loadPlanets();	// Load planets data
 
 	// Compute position and matrix of sun and all the satellites (ie planets)
-	// for the first initialization Q_ASSERT that center is sun center (only impacts on light speed correction)	
+	// for the first initialization Q_ASSERT that center is sun center (only impacts on light speed correction)
+	setExtraThreads(conf->value("astro/solar_system_threads", 0).toInt());
 	computePositions(StelApp::getInstance().getCore()->getJDE(), getSun());
 
 	setSelected("");	// Fix a bug on macosX! Thanks Fumio!
@@ -1405,13 +1408,18 @@ void SolarSystem::computePositions(double dateJDE, PlanetP observerPlanet)
 {
 	StelCore *core=StelApp::getInstance().getCore();
 	const bool withAberration=core->getUseAberration();
-	const int availableThreads=qMax(1, QThreadPool::globalInstance()->maxThreadCount()-QThreadPool::globalInstance()->activeThreadCount());
+	// We distribute computing over a few threads from the current threadpool, but also compute one stride in the main thread so that this does not starve.
+	// Given the comparably low impact of planetary positions on the overall frame time, we don't need more than 4 extra threads. (Profiled with 12.000 objects.)
+//	const int availablePoolThreads=qBound(0, QThreadPool::globalInstance()->maxThreadCount()-QThreadPool::globalInstance()->activeThreadCount(), 4); // qMax(1, QThreadPool::globalInstance()->maxThreadCount()-QThreadPool::globalInstance()->activeThreadCount());
+	const int availablePoolThreads=extraThreads;
 	static bool threadMessage=true;
 	if (threadMessage)
 	{
-		qDebug() << "SolarSystem: We should have " << availableThreads << "threads available for computePositions()";
+		qDebug() << "SolarSystem: We should have " << availablePoolThreads << "threads (plus main thread) available for computePositions()";
 		threadMessage=false;
 	}
+	static StelObjectMgr* omgr=GETSTELMODULE(StelObjectMgr);
+	omgr->removeExtraInfoStrings(StelObject::DebugAid);
 
 	if (flagLightTravelTime) // switching off light time correction implies no aberration for the planets.
 	{
@@ -1428,17 +1436,20 @@ void SolarSystem::computePositions(double dateJDE, PlanetP observerPlanet)
 
 		// This defines a function to be thrown onto a pool thread that computes every 'incr'th element.
 		std::function<void (int)> plCompLoopZero = [=](int offset){
-			for (auto it=systemPlanets.cbegin()+offset, end=systemPlanets.cend(); it<end; it+=availableThreads)
+			for (auto it=systemPlanets.cbegin()+offset, end=systemPlanets.cend(); it<end; it+=(availablePoolThreads+1))
 			{
 				it->data()->computePosition(dateJDE, Vec3d(0.));
 			}
 		};
 
-		for (int stride=0; stride<availableThreads; stride++)
+		// Move to external threads, but also run a part in the main thread. The index 'availableThreads' is just the last group of objects.
+		for (int stride=0; stride<availablePoolThreads; stride++)
 		{
 			auto future=QtConcurrent::run(plCompLoopZero, stride);
 			futures.append(future);
 		}
+		plCompLoopZero(availablePoolThreads);
+
 		// Now the list is being computed by other threads. we can just wait sequentially for completion.
 		for(auto f: futures)
 			f.waitForFinished();
@@ -1475,7 +1486,7 @@ void SolarSystem::computePositions(double dateJDE, PlanetP observerPlanet)
 		//QtConcurrent::map(systemPlanets, plCompPosJDEOne).waitForFinished();
 
 		std::function<void (int)> plCompLoopOne = [=](int offset){
-			for (auto it=systemPlanets.cbegin()+offset, end=systemPlanets.cend(); it<end; it+=availableThreads)
+			for (auto it=systemPlanets.cbegin()+offset, end=systemPlanets.cend(); it<end; it+=availablePoolThreads+1)
 				{
 					//p->setExtraInfoString(StelObject::DebugAid, "");
 					const auto planetPos = it->data()->getHeliocentricEclipticPos();
@@ -1486,11 +1497,12 @@ void SolarSystem::computePositions(double dateJDE, PlanetP observerPlanet)
 					it->data()->computePosition(dateJDE-lightTimeDays, aberrationPush);
 				}
 		};
-		for (int stride=0; stride<availableThreads; stride++)
+		for (int stride=0; stride<availablePoolThreads; stride++)
 		{
 			auto future=QtConcurrent::run(plCompLoopOne, stride);
 			futures.append(future);
 		}
+		plCompLoopOne(availablePoolThreads);
 		// Now the list is being computed by other threads. we can just wait sequentially for completion.
 		for(auto f: futures)
 			f.waitForFinished();
@@ -1547,8 +1559,9 @@ void SolarSystem::computePositions(double dateJDE, PlanetP observerPlanet)
 		//};
 		//QtConcurrent::map(systemPlanets, plCompPosJDETwo).waitForFinished();
 
+
 		std::function<void (int)> plCompLoopTwo = [=](int offset){
-			for (auto it=systemPlanets.cbegin()+offset, end=systemPlanets.cend(); it<end; it+=availableThreads)
+			for (auto it=systemPlanets.cbegin()+offset, end=systemPlanets.cend(); it<end; it+=availablePoolThreads+1)
 			{
 				//it->data()->setExtraInfoString(StelObject::DebugAid, "");
 				const auto planetPos = it->data()->getHeliocentricEclipticPos();
@@ -1573,11 +1586,19 @@ void SolarSystem::computePositions(double dateJDE, PlanetP observerPlanet)
 				else if (it->data()->englishName==L1S("Neptune")) update(dateJDE-lightTimeDays, RotationElements::Neptune);
 			}
 		};
-		for (int stride=0; stride<availableThreads; stride++)
+		for (int stride=0; stride<availablePoolThreads; stride++)
 		{
 			auto future=QtConcurrent::run(plCompLoopTwo, stride);
 			futures.append(future);
 		}
+		// At this point all available theads from the global ThreadPool should be active.
+		omgr->addToExtraInfoString(StelObject::DebugAid, QString("Threads: Ideal: %1, Pool max %2/active %3, SolarSystem using %4<br/>").
+					   arg(QString::number(QThread::idealThreadCount()),
+					       QString::number(QThreadPool::globalInstance()->maxThreadCount()),
+					       QString::number(QThreadPool::globalInstance()->activeThreadCount()),
+					       QString::number(availablePoolThreads)));
+		// and we still run the last stride in the main thread.
+		plCompLoopTwo(availablePoolThreads);
 		// Now the list is being computed by other threads. we can just wait sequentially for completion.
 		for(auto f: futures)
 			f.waitForFinished();
@@ -1652,8 +1673,9 @@ void SolarSystem::draw(StelCore* core)
 		p->computeDistance(obsHelioPos);
 	}
 
-	// And sort them from the furthest to the closest
-	std::sort(systemPlanets.begin(),systemPlanets.end(),biggerDistance());
+	// And sort them from the furthest to the closest. std::sort can split this into parallel threads!
+	std::sort(STD_EXECUTION_PAR_COMMA
+		  systemPlanets.begin(),systemPlanets.end(),biggerDistance());
 
 	if (trailFader.getInterstate()>0.0000001f)
 	{
