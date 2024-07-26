@@ -1588,12 +1588,13 @@ void SolarSystem::computePositions(double dateJDE, PlanetP observerPlanet)
 			auto future=QtConcurrent::run(plCompLoopTwo, stride);
 			futures.append(future);
 		}
+		// At this point all available theads from the global ThreadPool should be active.
 		omgr->addToExtraInfoString(StelObject::DebugAid, QString("Threads: Ideal: %1, Pool max %2/active %3, SolarSystem using %4<br/>").
 					   arg(QString::number(QThread::idealThreadCount()),
 					       QString::number(QThreadPool::globalInstance()->maxThreadCount()),
 					       QString::number(QThreadPool::globalInstance()->activeThreadCount()),
 					       QString::number(availableThreads)));
-
+		// and we still run the last stride in the main thread.
 		plCompLoopTwo(availableThreads);
 		// Now the list is being computed by other threads. we can just wait sequentially for completion.
 		for(auto f: futures)

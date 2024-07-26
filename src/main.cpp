@@ -472,7 +472,7 @@ int main(int argc, char **argv)
 	// Experimental. Use a crazily high number of threads.
 	//QThreadPool::globalInstance()->setMaxThreadCount(1000);
 	// Share available cores with the TextureLoader
-	QThreadPool::globalInstance()->setMaxThreadCount(qMax(1,QThread::idealThreadCount()/2-1));
+	QThreadPool::globalInstance()->setMaxThreadCount(qMax(1,QThread::idealThreadCount()-4));
 	app.exec();
 	mainWin.deinit();
 
