@@ -204,6 +204,7 @@ void SolarSystem::init()
 	setSunScale(conf->value("viewing/sun_scale", 4.0).toDouble());
 	setFlagPlanets(conf->value("astro/flag_planets").toBool());
 	setFlagHints(conf->value("astro/flag_planets_hints").toBool());
+	setFlagMarkers(conf->value("astro/flag_planets_markers", false).toBool());
 	setFlagLabels(conf->value("astro/flag_planets_labels", true).toBool());
 	setLabelsAmount(conf->value("astro/labels_amount", 3.).toDouble());
 	setFlagOrbits(conf->value("astro/flag_planets_orbits").toBool());
@@ -299,7 +300,8 @@ void SolarSystem::init()
 	texEphemerisNowMarker = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/gear.png");
 	texEphemerisCometMarker = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/cometIcon.png");
 	Planet::hintCircleTex = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/planet-indicator.png");
-	
+	Planet::markerCircleTex = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/planet-marker.png");
+
 	StelApp *app = &StelApp::getInstance();
 	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
 	connect(&app->getSkyCultureMgr(), &StelSkyCultureMgr::currentSkyCultureIDChanged, this, &SolarSystem::updateSkyCulture);
@@ -2283,7 +2285,7 @@ void SolarSystem::setFlagHints(bool b)
 
 bool SolarSystem::getFlagHints(void) const
 {
-	for (const auto& p : systemPlanets)
+	for (const auto& p : std::as_const(systemPlanets))
 	{
 		if (p->getFlagHints())
 			return true;
@@ -2303,9 +2305,30 @@ void SolarSystem::setFlagLabels(bool b)
 
 bool SolarSystem::getFlagLabels() const
 {
-	for (const auto& p : systemPlanets)
+	for (const auto& p : std::as_const(systemPlanets))
 	{
 		if (p->getFlagLabels())
+			return true;
+	}
+	return false;
+}
+
+void SolarSystem::setFlagMarkers(bool b)
+{
+	if (getFlagMarkers() != b)
+	{
+		for (const auto& p : std::as_const(systemPlanets))
+			p->setFlagMarker(b);
+		emit markersDisplayedChanged(b);
+	}
+}
+
+// A bit weird. Currently this returns true if only one marker has been set. However, we keep markers/hints private to the planets, in case particular objects should be marked.
+bool SolarSystem::getFlagMarkers() const
+{
+	for (const auto& p : std::as_const(systemPlanets))
+	{
+		if (p->getFlagMarker())
 			return true;
 	}
 	return false;
@@ -3793,6 +3816,7 @@ bool SolarSystem::removeMinorPlanet(QString name)
 		qWarning() << "Cannot remove planet " << name << ": Not found.";
 		return false;
 	}
+
 	Orbit* orbPtr=static_cast<Orbit*>(candidate->orbitPtr);
 	if (orbPtr)
 		orbits.removeOne(orbPtr);
