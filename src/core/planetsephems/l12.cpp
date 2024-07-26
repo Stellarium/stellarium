@@ -667,20 +667,20 @@ static std::array<struct sat, 4>SATS = {{
     }
 }};
 
-void GetL12Coor(double jd, int ks, double p[3], double v[3])
+void GetL12Coor(double jd, int body, double p[3], double v[3])
 {
-	const struct sat *sat = &SATS[ks];
-	double elem[6];
-	double val[5] = {0.0};
-	double xv[2][3];
+	const struct sat *sat = &SATS[body];
+	thread_local double elem[6];
+	thread_local double val[5] = {0.0};
+	thread_local double xv[2][3];
 
-	const double t = jd - 2433282.5;
+	thread_local const double t = jd - 2433282.5;
 	//    s = 0.0;
 	//    for (int k = 0; k < sat->a_len; k++) {
 	//	arg = sat->a[k].phas + sat->a[k].freq * t;
 	//	s += sat->a[k].ampl * cos(arg);
 	//    }
-    double s = std::transform_reduce(STD_EXECUTION_PAR_COMMA
+	thread_local double s = std::transform_reduce(STD_EXECUTION_PAR_COMMA
 				  sat->a.begin(), sat->a.begin()+sat->a_len, 0.0,
 				  std::plus<>(),
 				  [=](const struct term &satA){double arg = satA.phas + satA.freq * t;
@@ -717,8 +717,8 @@ void GetL12Coor(double jd, int ks, double p[3], double v[3])
 	//    }
 	//    elem[2] = s1 + val[1];
 	//    elem[3] = s2 + val[2];
-	std::pair<double, double>s1_s2 =
-        std::transform_reduce(STD_EXECUTION_PAR_COMMA
+	thread_local std::pair<double, double>s1_s2 =
+	std::transform_reduce(STD_EXECUTION_PAR_COMMA
 				      sat->z.begin(), sat->z.begin()+sat->z_len, std::pair<double, double>({0.0, 0.0}),
 				      [](const std::pair<double, double>&sum, const std::pair<double, double>&addon){
 					return std::make_pair(sum.first+addon.first, sum.second+addon.second);
