@@ -669,44 +669,47 @@ static std::array<struct sat, 4>SATS = {{
 
 void GetL12Coor(double jd, int body, double p[3], double v[3])
 {
+	// The variables with 4 elements provide room for parallel execution for all 4 moons.
 	const struct sat *sat = &SATS[body];
-	thread_local double elem[6];
-	thread_local double val[5] = {0.0};
-	thread_local double xv[2][3];
+	double elem[4][6];
+	double val[4][5] = {0.0};
+	double xv[4][2][3];
+	double t[4];
+	double s[4];
 
-	thread_local const double t = jd - 2433282.5;
+	t[body] = jd - 2433282.5;
 	//    s = 0.0;
 	//    for (int k = 0; k < sat->a_len; k++) {
 	//	arg = sat->a[k].phas + sat->a[k].freq * t;
 	//	s += sat->a[k].ampl * cos(arg);
 	//    }
-	thread_local double s = std::transform_reduce(STD_EXECUTION_PAR_COMMA
+	s[body] = std::transform_reduce(STD_EXECUTION_PAR_COMMA
 				  sat->a.begin(), sat->a.begin()+sat->a_len, 0.0,
 				  std::plus<>(),
-				  [=](const struct term &satA){double arg = satA.phas + satA.freq * t;
+				  [=](const struct term &satA){double arg = satA.phas + satA.freq * t[body];
 		return satA.ampl * cos(arg);}
 	);
 
 
 
-	elem[0] = s;
+	elem[body][0] = s[body];
 
-	s = sat->al[0] + sat->al[1] * t;
+	s[body] = sat->al[0] + sat->al[1] * t[body];
 	//    for (int k = 0; k < sat->l_len; k++) {
 	//	arg = sat->l[k].phas + sat->l[k].freq * t;
 	//	s += sat->l[k].ampl * sin(arg);
 	//    }
-    s += std::transform_reduce(STD_EXECUTION_PAR_COMMA
+    s[body] += std::transform_reduce(STD_EXECUTION_PAR_COMMA
 				   sat->l.begin(), sat->l.begin()+sat->l_len, 0.0,
 				   std::plus<>(),
-				   [=](const struct term &satL){double arg = satL.phas + satL.freq * t;
+				   [=](const struct term &satL){double arg = satL.phas + satL.freq * t[body];
 		return satL.ampl * sin(arg);}
 	);
 
 
-	s = fmod(s + val[0], M_PI * 2);
-	if (s < 0.0) s += M_PI * 2;
-	elem[1] = s;
+	s[body] = fmod(s[body] + val[body][0], M_PI * 2);
+	if (s[body] < 0.0) s[body] += M_PI * 2;
+	elem[body][1] = s[body];
 
 	//    s1 = 0.0;
 	//    s2 = 0.0;
@@ -717,19 +720,20 @@ void GetL12Coor(double jd, int body, double p[3], double v[3])
 	//    }
 	//    elem[2] = s1 + val[1];
 	//    elem[3] = s2 + val[2];
-	thread_local std::pair<double, double>s1_s2 =
+	std::array<std::pair<double, double>, 4>s1_s2;
+	s1_s2[body] =
 	std::transform_reduce(STD_EXECUTION_PAR_COMMA
 				      sat->z.begin(), sat->z.begin()+sat->z_len, std::pair<double, double>({0.0, 0.0}),
 				      [](const std::pair<double, double>&sum, const std::pair<double, double>&addon){
 					return std::make_pair(sum.first+addon.first, sum.second+addon.second);
 					},
 				      [=](const struct term &satZ){
-					const double arg = satZ.phas + satZ.freq * t;
+					const double arg = satZ.phas + satZ.freq * t[body];
 					return std::make_pair(satZ.ampl * cos(arg), satZ.ampl * sin(arg));
 					}
 				);
-	elem[2] = s1_s2.first  + val[1];
-	elem[3] = s1_s2.second + val[2];
+	elem[body][2] = s1_s2[body].first  + val[body][1];
+	elem[body][3] = s1_s2[body].second + val[body][2];
 
 //	s1 = 0.0;
 //	s2 = 0.0;
@@ -740,27 +744,27 @@ void GetL12Coor(double jd, int body, double p[3], double v[3])
 //	}
 //	elem[4] = s1 + val[3];
 //	elem[5] = s2 + val[4];
-    s1_s2 = std::transform_reduce(STD_EXECUTION_PAR_COMMA
+    s1_s2[body] = std::transform_reduce(STD_EXECUTION_PAR_COMMA
 				      sat->zeta.begin(), sat->zeta.begin()+sat->zeta_len, std::pair<double, double>({0.0, 0.0}),
 				      [](const std::pair<double, double>&sum, const std::pair<double, double>&addon){
 					return std::make_pair(sum.first+addon.first, sum.second+addon.second);
 					},
 				      [=](const struct term &satZeta){
-					const double arg = satZeta.phas + satZeta.freq * t;
+					const double arg = satZeta.phas + satZeta.freq * t[body];
 					return std::make_pair(satZeta.ampl * cos(arg), satZeta.ampl * sin(arg));
 					}
 				);
-		elem[4] = s1_s2.first  + val[3];
-		elem[5] = s1_s2.second + val[4];
+		elem[body][4] = s1_s2[body].first  + val[body][3];
+		elem[body][5] = s1_s2[body].second + val[body][4];
 
 	// computing cartesian coordinates from elements
-	elem2pv(sat->mu, elem, xv);
+	elem2pv(sat->mu, elem[body], xv[body]);
 
-	p[0] = L1toVsop87[0]*xv[0][0]+L1toVsop87[1]*xv[0][1]+L1toVsop87[2]*xv[0][2];
-	p[1] = L1toVsop87[3]*xv[0][0]+L1toVsop87[4]*xv[0][1]+L1toVsop87[5]*xv[0][2];
-	p[2] = L1toVsop87[6]*xv[0][0]+L1toVsop87[7]*xv[0][1]+L1toVsop87[8]*xv[0][2];
+	p[0] = L1toVsop87[0]*xv[body][0][0]+L1toVsop87[1]*xv[body][0][1]+L1toVsop87[2]*xv[body][0][2];
+	p[1] = L1toVsop87[3]*xv[body][0][0]+L1toVsop87[4]*xv[body][0][1]+L1toVsop87[5]*xv[body][0][2];
+	p[2] = L1toVsop87[6]*xv[body][0][0]+L1toVsop87[7]*xv[body][0][1]+L1toVsop87[8]*xv[body][0][2];
 	// GZ Pure guesswork. I hope these make sense...
-	v[0] = L1toVsop87[0]*xv[1][0]+L1toVsop87[1]*xv[1][1]+L1toVsop87[2]*xv[1][2];
-	v[1] = L1toVsop87[3]*xv[1][0]+L1toVsop87[4]*xv[1][1]+L1toVsop87[5]*xv[1][2];
-	v[2] = L1toVsop87[6]*xv[1][0]+L1toVsop87[7]*xv[1][1]+L1toVsop87[8]*xv[1][2];
+	v[0] = L1toVsop87[0]*xv[body][1][0]+L1toVsop87[1]*xv[body][1][1]+L1toVsop87[2]*xv[body][1][2];
+	v[1] = L1toVsop87[3]*xv[body][1][0]+L1toVsop87[4]*xv[body][1][1]+L1toVsop87[5]*xv[body][1][2];
+	v[2] = L1toVsop87[6]*xv[body][1][0]+L1toVsop87[7]*xv[body][1][1]+L1toVsop87[8]*xv[body][1][2];
 }
