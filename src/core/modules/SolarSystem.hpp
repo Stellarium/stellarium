@@ -59,6 +59,7 @@ class SolarSystem : public StelObjectModule
 	Q_PROPERTY(int trailsThickness			READ getTrailsThickness			WRITE setTrailsThickness		NOTIFY trailsThicknessChanged)
 	// This is a "forwarding property" only, without own variable.
 	Q_PROPERTY(bool flagHints			READ getFlagHints			WRITE setFlagHints			NOTIFY flagHintsChanged)
+	Q_PROPERTY(bool flagMarkers			READ getFlagMarkers			WRITE setFlagMarkers			NOTIFY markersDisplayedChanged)
 	Q_PROPERTY(bool flagPointer			READ getFlagPointer			WRITE setFlagPointer			NOTIFY flagPointerChanged)
 	Q_PROPERTY(bool flagNativePlanetNames		READ getFlagNativePlanetNames		WRITE setFlagNativePlanetNames		NOTIFY flagNativePlanetNamesChanged)
 	Q_PROPERTY(bool planetsDisplayed		READ getFlagPlanets			WRITE setFlagPlanets			NOTIFY flagPlanetsDisplayedChanged)
@@ -247,6 +248,11 @@ public slots:
 	void setFlagHints(bool b);
 	//! Get the current value of the flag which determines if planet hints are drawn or hidden along labels
 	bool getFlagHints() const;
+
+	//! Set flag which determines if planet markers are drawn for minor bodies
+	void setFlagMarkers(bool b);
+	//! Get the current value of the flag which determines if planet markers are drawn for minor bodies
+	bool getFlagMarkers() const;
 
 	//! Set flag which determines if planet labels are drawn or hidden.
 	void setFlagLabels(bool b);
@@ -745,6 +751,7 @@ signals:
 	void labelsDisplayedChanged(bool b);
 	void flagOrbitsChanged(bool b);
 	void flagHintsChanged(bool b);
+	void markersDisplayedChanged(bool b);
 	void flagDrawMoonHaloChanged(bool b);
 	void flagDrawSunHaloChanged(bool b);
 	void trailsDisplayedChanged(bool b);

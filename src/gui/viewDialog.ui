@@ -1425,6 +1425,16 @@
                  </property>
                 </widget>
                </item>
+               <item row="1" column="0">
+                <widget class="QCheckBox" name="minorPlanetMarkersCheckBox">
+                 <property name="toolTip">
+                  <string>Show tiny circles for minor bodies regardless of magnitude</string>
+                 </property>
+                 <property name="text">
+                  <string>Minor Planet Markers</string>
+                 </property>
+                </widget>
+               </item>
               </layout>
              </item>
              <item row="0" column="0">
