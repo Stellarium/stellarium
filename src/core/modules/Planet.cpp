@@ -3141,7 +3141,7 @@ bool Planet::initShader()
 	if(objShadowShaderProgram)
 	{
 		objShadowShaderProgram->bind();
-		const float poissonDisk[] ={
+		static const float poissonDisk[] ={
 			-0.610470f, -0.702763f,
 			 0.609267f,  0.765488f,
 			-0.817537f, -0.412950f,
