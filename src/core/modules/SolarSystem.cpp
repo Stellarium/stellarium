@@ -1408,7 +1408,7 @@ void SolarSystem::computePositions(double dateJDE, PlanetP observerPlanet)
 	StelCore *core=StelApp::getInstance().getCore();
 	const bool withAberration=core->getUseAberration();
 	// We distribute computing over all available treads fromt he current threadpool, but also compute one stride in the main thread to that this does not starve.
-	const int availableThreads=qMax(1, QThreadPool::globalInstance()->maxThreadCount()-QThreadPool::globalInstance()->activeThreadCount()+1);
+	const int availableThreads=qMax(1, QThreadPool::globalInstance()->maxThreadCount()-QThreadPool::globalInstance()->activeThreadCount());
 	static bool threadMessage=true;
 	if (threadMessage)
 	{
