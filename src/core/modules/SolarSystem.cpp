@@ -3697,6 +3697,11 @@ QPair<double, PlanetP> SolarSystem::getSolarEclipseFactor(const StelCore* core) 
 		if(planet == sun || planet == core->getCurrentPlanet())
 			continue;
 
+		// Seen from Earth, only Moon, Venus or Mercury are relevant. The rest can be thrown away. There is no asteroid to go in front of the sun...
+		static const QStringList fromEarth({"Moon", "Mercury", "Venus"});
+		if ((core->getCurrentPlanet() == earth) && !fromEarth.contains(planet->englishName))
+			continue;
+
 		Mat4d trans;
 		planet->computeModelMatrix(trans, true);
 
