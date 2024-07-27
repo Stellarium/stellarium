@@ -297,11 +297,11 @@ public:
 
 	//! We may need a bunch of Mutexes for correct parallelism.
 	static QMutex mutex_E;
-	static QMutex mutex_M;
-	static QMutex mutex_J;
-	static QMutex mutex_S;
-	static QMutex mutex_U;
-	static QMutex mutex_N;
+	//static QMutex mutex_M;
+	//static QMutex mutex_J;
+	//static QMutex mutex_S;
+	//static QMutex mutex_U;
+	//static QMutex mutex_N;
 private:
 	static const QList<Vec3d> marsMagLs;
 };
