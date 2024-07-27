@@ -84,7 +84,6 @@ static const std::array<std::array<double, 5>, 14> XYvals=
   { 1.0/ 220.30,   179.516345,   -165.405086,  -210.157124,  -171.330180 },
   { 1.0/1200.00,    -9.814756,      9.344131,   -44.919798,   -22.899655 }}};
 
-
 static const std::array<std::array<double, 7>, 18> precVals=
 {{ // 1/Pn         psi_A:Cn       om_A:Cn       chi_A:Cn         psi_A:Sn       om_A:Sn       chi_A:Sn
 
@@ -268,7 +267,6 @@ void getPrecessionAnglesVondrakPQXYe(const double jde, double *vP_A, double *vQ_
 	*vX_A       = c_X_A;
 	*vY_A       = c_Y_A;
 	*vepsilon_A = c_epsilon_A;
-
 }
 
 //! Just return (presumably precomputed) ecliptic obliquity.

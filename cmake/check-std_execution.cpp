@@ -9,5 +9,4 @@ int main()
 {
 	double res = std::reduce(std::execution::par, 
 		a.begin(), a.end(), 0.0, std::plus<>());
-
 }
