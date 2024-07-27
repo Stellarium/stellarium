@@ -4709,7 +4709,7 @@ void Planet::drawMarker(const StelCore* core)
 	sPainter.setBlending(true);
 	Planet::markerCircleTex->bind();
 	//Planet::hintCircleTex->bind();
-	sPainter.drawSprite2dMode(static_cast<float>(screenPos[0]), static_cast<float>(screenPos[1]), 3);
+	sPainter.drawSprite2dMode(static_cast<float>(screenPos[0]), static_cast<float>(screenPos[1]), 2);
 }
 
 Ring::Ring(float radiusMin, float radiusMax, const QString &texname)
