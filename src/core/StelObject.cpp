@@ -1012,6 +1012,7 @@ void StelObject::postProcessInfoString(QString& str, const InfoStringGroup& flag
 		str.replace(tdRe1, "");
 		str.replace(tdRe2, "");
 		str.replace(tdRe3, "");
+		str.replace("</td>", "");
 		str.replace("</tr>", "\n");
 		str.replace(tableRe2, "");
 		str.replace(tableRe3, "");
