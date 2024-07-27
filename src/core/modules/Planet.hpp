@@ -726,9 +726,9 @@ protected:
 	void drawSurvey(StelCore* core, StelPainter* painter);
 
 	//! Draw the circle and name of the Planet
-	void drawHints(const StelCore* core, const QFont& planetNameFont);
+	void drawHints(const StelCore* core, StelPainter &sPainter, const QFont& planetNameFont);
 	//! Draw a small mark for the planet. This can be used to mark "something" in the sky, for showing distribution of minor bodies.
-	void drawMarker(const StelCore* core);
+	void drawMarker(const StelCore* core, StelPainter &sPainter);
 
 	PlanetOBJModel* loadObjModel() const;
 

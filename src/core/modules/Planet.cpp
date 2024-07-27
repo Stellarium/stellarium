@@ -2919,12 +2919,15 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 			labelsFader=true;
 		else
 			labelsFader=false;
-		drawHints(core, planetNameFont);
+
+		const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
+		StelPainter sPainter(prj);
+		drawHints(core, sPainter, planetNameFont);
 		// TODO: Decide whether isComet should be moved up in the enum list to allow exclusion!
 		if (getPlanetType()>=Planet::isAsteroid)
 		{
 			//qDebug() << getEnglishName();
-			drawMarker(core);
+			drawMarker(core, sPainter);
 		}
 
 		draw3dModel(core,transfo,static_cast<float>(screenRd));
@@ -4667,16 +4670,16 @@ bool Planet::drawObjShadowMap(StelPainter *painter, QMatrix4x4& shadowMatrix)
 	return true;
 }
 
-void Planet::drawHints(const StelCore* core, const QFont& planetNameFont)
+void Planet::drawHints(const StelCore* core, StelPainter &sPainter, const QFont& planetNameFont)
 {
 	if (labelsFader.getInterstate()<=0.f)
 		return;
 
-	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
-	StelPainter sPainter(prj);
+	//const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
+	//StelPainter sPainter(prj);
 	sPainter.setFont(planetNameFont);
 	// Draw nameI18 + scaling if it's not == 1.
-	float tmp = (hintFader.getInterstate()<=0.f ? 7.f : 10.f) + static_cast<float>(getAngularRadius(core)*M_PI/180.)*prj->getPixelPerRadAtCenter()/1.44f; // Shift for nameI18 printing
+	float tmp = (hintFader.getInterstate()<=0.f ? 7.f : 10.f) + static_cast<float>(getAngularRadius(core)*M_PI/180.)*sPainter.getProjector()->getPixelPerRadAtCenter()/1.44f; // Shift for nameI18 printing
 	sPainter.setColor(labelColor,labelsFader.getInterstate());
 	const QString label = (sphereScale != 1.) ? QString("%1 (\xC3\x97%2)").arg(getPlanetLabel(), QString::number(sphereScale, 'f', 2)) : getPlanetLabel();
 	sPainter.drawText(static_cast<float>(screenPos[0]),static_cast<float>(screenPos[1]), label, 0, tmp, tmp, false);
@@ -4694,14 +4697,14 @@ void Planet::drawHints(const StelCore* core, const QFont& planetNameFont)
 }
 
 // Draw a little marker. Useful for minor bodies to just show "something out there".
-void Planet::drawMarker(const StelCore* core)
+void Planet::drawMarker(const StelCore* core, StelPainter &sPainter)
 {
 	// TODO: Consider smoothing out the marker when zooming in far enough to make object "naturally" visible.
 	if (markerFader.getInterstate()<=0)
 		return;
 
-	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
-	StelPainter sPainter(prj);
+	//const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
+	//StelPainter sPainter(prj);
 
 	sPainter.setColor(labelColor,markerFader.getInterstate());
 
