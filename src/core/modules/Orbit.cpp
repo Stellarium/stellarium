@@ -23,6 +23,9 @@
 #include <QDebug>
 
 #define EPSILON 1e-10
+// Or be happy with 0.01 arcsecond accuracy? Maybe 2-3 iterations less?
+// #define EPSILON 4.848e-8
+
 //#define EPSILON 1e-4
 // Gaussian gravitation constant k, also used by Heafner, 5.3.12.
 // From the definition (see https://de.wikipedia.org/wiki/Vis-Viva-Gleichung):
@@ -89,14 +92,13 @@ void KeplerOrbit::InitEll(double M, double &rCosNu, double &rSinNu)
 //	qDebug() << "InitEll";
 	Q_ASSERT(e<1.0);
 	const double a = q/(1.0-e); // semimajor axis
-	M = fmod(M,2*M_PI);  // Mean Anomaly [0...2pi]
-	if (M < 0.0) M += 2.0*M_PI;
+	M = StelUtils::fmodpos(M, 2*M_PI);  // Mean Anomaly [0...2pi]
 //	GZ: Comet orbits are quite often near-parabolic, where this may still only converge slowly.
 //	Better always use Laguerre-Conway. See Heafner, Ch. 5.3
 //	Ouch! https://bugs.launchpad.net/stellarium/+bug/1465112 ==>It seems we still need an escape counter!
 //      Debug line in test case fabs(E-Ep) indicates it usually takes 2-3, occasionally up to 6 cycles.
 //	It seems safe to assume 10 should not be exceeded. N.B.: A GPU fixed-loopcount implementation could go for 8 passes.
-	double E=M+0.85*e*StelUtils::sign(sin(M));
+	double E = M + 0.85 * e * (M>M_PI ? -1. : 1.);
 	int escape=0;
 	for (;;)
 	{
@@ -234,8 +236,8 @@ double KeplerOrbit::eccentricAnomaly(double M)
 	}
 	else if (e > 1.0)
 	{
-		const double a = q/(e-1.0);
-		Q_ASSERT(a>0.0);
+		//const double a = q/(e-1.0);
+		//Q_ASSERT(a>0.0);
 		//	Heafner, ch.5.4
 		double E=StelUtils::sign(M)*log(2.0*fabs(M)/e + 1.85);
 		for (;;)
