@@ -469,10 +469,8 @@ int main(int argc, char **argv)
 	mainWin.show();
 	SplashScreen::finish(&mainWin);
 	qDebug() << "Max thread count (Global Pool): " << QThreadPool::globalInstance()->maxThreadCount();
-	// Experimental. Use a crazily high number of threads.
-	//QThreadPool::globalInstance()->setMaxThreadCount(1000);
-	// Share available cores with the TextureLoader
-	QThreadPool::globalInstance()->setMaxThreadCount(qMax(1,QThread::idealThreadCount()-4));
+	// Share available cores with the TextureLoader and other jobs
+	QThreadPool::globalInstance()->setMaxThreadCount(qMax(1,QThread::idealThreadCount()/2-1));
 	app.exec();
 	mainWin.deinit();
 

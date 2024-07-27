@@ -48,6 +48,7 @@
 #include "StelObserver.hpp"
 
 #include <algorithm>
+#include <execution>
 
 #include <QTextStream>
 #include <QSettings>
@@ -1407,8 +1408,9 @@ void SolarSystem::computePositions(double dateJDE, PlanetP observerPlanet)
 {
 	StelCore *core=StelApp::getInstance().getCore();
 	const bool withAberration=core->getUseAberration();
-	// We distribute computing over all available treads fromt he current threadpool, but also compute one stride in the main thread to that this does not starve.
-	const int availablePoolThreads=qMax(1, QThreadPool::globalInstance()->maxThreadCount()-QThreadPool::globalInstance()->activeThreadCount());
+	// We distribute computing over a few threads from the current threadpool, but also compute one stride in the main thread so that this does not starve.
+	// Given the comparably low impact of planetary positions on the overall frame time, we don't need more than 4 extra threads. (Profiled with 12.000 objects.)
+	const int availablePoolThreads=qBound(0, QThreadPool::globalInstance()->maxThreadCount()-QThreadPool::globalInstance()->activeThreadCount(), 4); // qMax(1, QThreadPool::globalInstance()->maxThreadCount()-QThreadPool::globalInstance()->activeThreadCount());
 	static bool threadMessage=true;
 	if (threadMessage)
 	{
@@ -1669,8 +1671,9 @@ void SolarSystem::draw(StelCore* core)
 		p->computeDistance(obsHelioPos);
 	}
 
-	// And sort them from the furthest to the closest
-	std::sort(systemPlanets.begin(),systemPlanets.end(),biggerDistance());
+	// And sort them from the furthest to the closest. std::sort can split this into parallel threads!
+	std::sort(STD_EXECUTION_PAR_COMMA
+		  systemPlanets.begin(),systemPlanets.end(),biggerDistance());
 
 	if (trailFader.getInterstate()>0.0000001f)
 	{
