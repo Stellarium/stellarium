@@ -115,6 +115,7 @@ SolarSystem::SolarSystem() : StelObjectModule()
 	, ephemerisSaturnMarkerColor(Vec3f(0.0f, 1.0f, 0.0f))
 	, allTrails(Q_NULLPTR)
 	, conf(StelApp::getInstance().getSettings())
+	, extraThreads(0)
 {
 	planetNameFont.setPixelSize(StelApp::getInstance().getScreenFontSize());
 	connect(&StelApp::getInstance(), SIGNAL(screenFontSizeChanged(int)), this, SLOT(setFontSize(int)));
@@ -187,7 +188,8 @@ void SolarSystem::init()
 	loadPlanets();	// Load planets data
 
 	// Compute position and matrix of sun and all the satellites (ie planets)
-	// for the first initialization Q_ASSERT that center is sun center (only impacts on light speed correction)	
+	// for the first initialization Q_ASSERT that center is sun center (only impacts on light speed correction)
+	setExtraThreads(conf->value("astro/solar_system_threads", 0).toInt());
 	computePositions(StelApp::getInstance().getCore()->getJDE(), getSun());
 
 	setSelected("");	// Fix a bug on macosX! Thanks Fumio!
@@ -1410,7 +1412,8 @@ void SolarSystem::computePositions(double dateJDE, PlanetP observerPlanet)
 	const bool withAberration=core->getUseAberration();
 	// We distribute computing over a few threads from the current threadpool, but also compute one stride in the main thread so that this does not starve.
 	// Given the comparably low impact of planetary positions on the overall frame time, we don't need more than 4 extra threads. (Profiled with 12.000 objects.)
-	const int availablePoolThreads=qBound(0, QThreadPool::globalInstance()->maxThreadCount()-QThreadPool::globalInstance()->activeThreadCount(), 4); // qMax(1, QThreadPool::globalInstance()->maxThreadCount()-QThreadPool::globalInstance()->activeThreadCount());
+//	const int availablePoolThreads=qBound(0, QThreadPool::globalInstance()->maxThreadCount()-QThreadPool::globalInstance()->activeThreadCount(), 4); // qMax(1, QThreadPool::globalInstance()->maxThreadCount()-QThreadPool::globalInstance()->activeThreadCount());
+	const int availablePoolThreads=extraThreads;
 	static bool threadMessage=true;
 	if (threadMessage)
 	{

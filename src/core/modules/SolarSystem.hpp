@@ -143,6 +143,7 @@ class SolarSystem : public StelObjectModule
 	Q_PROPERTY(int orbitsThickness			READ getOrbitsThickness			WRITE setOrbitsThickness		NOTIFY orbitsThicknessChanged)
 	Q_PROPERTY(bool flagDrawMoonHalo		READ getFlagDrawMoonHalo		WRITE setFlagDrawMoonHalo		NOTIFY flagDrawMoonHaloChanged)
 	Q_PROPERTY(bool flagDrawSunHalo			READ getFlagDrawSunHalo			WRITE setFlagDrawSunHalo		NOTIFY flagDrawSunHaloChanged)
+	Q_PROPERTY(int extraThreads                     READ getExtraThreads                    WRITE setExtraThreads                   NOTIFY extraThreadsChanged)
 
 public:
 	SolarSystem();
@@ -747,6 +748,9 @@ public slots:
 	//! The texture path starts in the scripts directory.
 	void setTextureForPlanet(const QString &planetName, const QString &texName);
 
+	int getExtraThreads() const {return extraThreads;}
+	void setExtraThreads(int n){extraThreads=n;}
+
 signals:
 	void labelsDisplayedChanged(bool b);
 	void flagOrbitsChanged(bool b);
@@ -838,6 +842,8 @@ signals:
 
 	void solarSystemDataReloaded();
 	void requestEphemerisVisualization();
+
+	void extraThreadsChanged(const int);
 
 public:
 	///////////////////////////////////////////////////////////////////////////
@@ -1164,6 +1170,9 @@ private:
 	// note that we must also always compensate to light time travel, so likely each computation has to be done twice,
 	// with current JDE and JDE-lightTime(distance).
 	QList<Orbit*> orbits;           // Pointers on created elliptical orbits. 0.16pre: WHY DO WE NEED THIS???
+
+	//! Number of additional threads. This could be automatically derived, but for now we can experiment.
+	int extraThreads;
 };
 
 
