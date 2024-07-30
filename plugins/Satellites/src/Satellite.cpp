@@ -440,7 +440,7 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 
 		if (!groupList.isEmpty())
 		{
-			QString group = groups.count()>1 ? q_("Group") : q_("Groups");
+			QString group = groups.count()==1 ? q_("Group") : q_("Groups");
 			oss << QString("%1: %2").arg(group, groupList.join(", ")) << "<br />";
 		}
 
