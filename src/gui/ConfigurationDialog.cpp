@@ -328,6 +328,7 @@ void ConfigurationDialog::createDialogContent()
 	connectBoolProperty(ui->showCompassButtonCheckBox,			"StelGui.flagShowCompassButton");
 
 	connectBoolProperty(ui->showConstellationBoundariesButtonCheckBox, "StelGui.flagShowConstellationBoundariesButton");
+	connectBoolProperty(ui->showConstellationArtsButtonCheckBox, "StelGui.flagShowConstellationArtsButton");
 	connectBoolProperty(ui->showAsterismLinesButtonCheckBox,		"StelGui.flagShowAsterismLinesButton");
 	connectBoolProperty(ui->showAsterismLabelsButtonCheckBox,	"StelGui.flagShowAsterismLabelsButton");
 
@@ -1141,6 +1142,7 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("gui/flag_show_galactic_grid_button",		propMgr->getStelPropertyValue("StelGui.flagShowGalacticGridButton").toBool());
 	conf->setValue("gui/flag_show_ecliptic_grid_button",		propMgr->getStelPropertyValue("StelGui.flagShowEclipticGridButton").toBool());
 	conf->setValue("gui/flag_show_boundaries_button",		propMgr->getStelPropertyValue("StelGui.flagShowConstellationBoundariesButton").toBool());
+	conf->setValue("gui/flag_show_constellation_arts_button",	propMgr->getStelPropertyValue("StelGui.flagShowConstellationArtsButton").toBool());
 	conf->setValue("gui/flag_show_asterism_lines_button",	propMgr->getStelPropertyValue("StelGui.flagShowAsterismLinesButton").toBool());
 	conf->setValue("gui/flag_show_asterism_labels_button",	propMgr->getStelPropertyValue("StelGui.flagShowAsterismLabelsButton").toBool());
 	conf->setValue("gui/flag_show_decimal_degrees",		propMgr->getStelPropertyValue("StelApp.flagShowDecimalDegrees").toBool());

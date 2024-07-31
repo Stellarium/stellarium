@@ -69,6 +69,7 @@ class StelGui : public QObject, public StelGuiBase
 	Q_PROPERTY(bool flagShowGalacticGridButton READ getFlagShowGalacticGridButton WRITE setFlagShowGalacticGridButton NOTIFY flagShowGalacticGridButtonChanged )
 	Q_PROPERTY(bool flagShowEclipticGridButton READ getFlagShowEclipticGridButton WRITE setFlagShowEclipticGridButton NOTIFY flagShowEclipticGridButtonChanged )
 	Q_PROPERTY(bool flagShowConstellationBoundariesButton READ getFlagShowConstellationBoundariesButton WRITE setFlagShowConstellationBoundariesButton NOTIFY flagShowConstellationBoundariesButtonChanged )
+	Q_PROPERTY(bool flagShowConstellationArtsButton READ getFlagShowConstellationArtsButton WRITE setFlagShowConstellationArtsButton NOTIFY flagShowConstellationArtsButtonChanged )
 	Q_PROPERTY(bool flagShowAsterismLinesButton READ getFlagShowAsterismLinesButton WRITE setFlagShowAsterismLinesButton NOTIFY flagShowAsterismLinesButtonChanged )
 	Q_PROPERTY(bool flagShowAsterismLabelsButton READ getFlagShowAsterismLabelsButton WRITE setFlagShowAsterismLabelsButton NOTIFY flagShowAsterismLabelsButtonChanged )
 	Q_PROPERTY(bool flagUseButtonsBackground   READ getFlagUseButtonsBackground   WRITE setFlagUseButtonsBackground   NOTIFY flagUseButtonsBackgroundChanged)
@@ -182,6 +183,9 @@ public slots:
 	//! Define whether the button toggling constellation boundaries should be visible
 	void setFlagShowConstellationBoundariesButton(bool b);
 
+	//! Define whether the button toggling constellation arts should be visible
+	void setFlagShowConstellationArtsButton(bool b);
+
 	//! Define whether the button toggling asterism lines should be visible
 	void setFlagShowAsterismLinesButton(bool b);
 
@@ -262,6 +266,8 @@ public slots:
 	bool getFlagShowEclipticGridButton() const;
 	//! Get whether the button toggling constellation boundaries is visible
 	bool getFlagShowConstellationBoundariesButton() const;
+	//! Get whether the button toggling constellation arts is visible
+	bool getFlagShowConstellationArtsButton() const;
 	//! Get whether the button toggling asterism lines is visible
 	bool getFlagShowAsterismLinesButton() const;
 	//! Get whether the button toggling asterism labels is visible
@@ -291,6 +297,7 @@ signals:
 	void flagShowGalacticGridButtonChanged(bool b);
 	void flagShowEclipticGridButtonChanged(bool b);
 	void flagShowConstellationBoundariesButtonChanged(bool b);
+	void flagShowConstellationArtsButtonChanged(bool b);
 	void flagShowAsterismLinesButtonChanged(bool b);
 	void flagShowAsterismLabelsButtonChanged(bool b);
 	void flagShowCardinalButtonChanged(bool b);
@@ -384,6 +391,9 @@ private:
 
 	bool flagShowConstellationBoundariesButton;
 	StelButton* btShowConstellationBoundaries;
+
+	bool flagShowConstellationArtsButton;
+	StelButton* btShowConstellationArts;
 
 	bool flagShowAsterismLinesButton;
 	StelButton* btShowAsterismLines;
