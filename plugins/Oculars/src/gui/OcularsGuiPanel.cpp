@@ -1033,7 +1033,7 @@ void OcularsGuiPanel::updateTelescopeControls()
 		fieldVisualResolution->setVisible(false);
 
 	// Limiting magnitude of binocular or ocular/lens/telescope combination
-	if (ocularsPlugin->flagShowOculars)
+	if (ocularsPlugin->flagShowOculars && ocularsPlugin->getFlagAutoLimitMagnitude())
 	{
 		Ocular* ocular = ocularsPlugin->oculars[ocularsPlugin->selectedOcularIndex];
 		QString limitMagnitudeLabel = QString("%1: %2").arg(qc_("Limiting magnitude", "Limiting magnitude of device"), QString::number(ocularsPlugin->getLimitMagnitude(ocular, telescope), 'f', 2));
