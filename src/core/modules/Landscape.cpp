@@ -1048,6 +1048,7 @@ void main(void)
 	}
 	StelPainter painter(prj);
 	drawHorizonLine(core, painter);
+	drawLabels(core, &painter);
 }
 
 
