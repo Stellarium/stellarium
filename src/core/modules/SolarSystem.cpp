@@ -1862,16 +1862,16 @@ void SolarSystem::postDrawAsteroidMarkers(StelPainter *sPainter)
 // Draw a point source halo.
 bool SolarSystem::drawAsteroidMarker(StelCore* core, StelPainter* sPainter, const float x, const float y, Vec3f &color)
 {
-	if (!getFlagMarkers())
+	const float reducer=markerFader.getInterstate();
+	if (reducer==0.)
 		return false;
 
 	Q_ASSERT(sPainter);
 	const float radius = 3.f * static_cast<float>(sPainter->getProjector()->getDevicePixelsPerPixel());
-
 	unsigned char markerColor[3] = {
-		static_cast<unsigned char>(std::min(static_cast<int>(color[0]*255+0.5f), 255)),
-		static_cast<unsigned char>(std::min(static_cast<int>(color[1]*255+0.5f), 255)),
-		static_cast<unsigned char>(std::min(static_cast<int>(color[2]*255+0.5f), 255))};
+		static_cast<unsigned char>(std::min(static_cast<int>(color[0]*reducer*255+0.5f), 255)),
+		static_cast<unsigned char>(std::min(static_cast<int>(color[1]*reducer*255+0.5f), 255)),
+		static_cast<unsigned char>(std::min(static_cast<int>(color[2]*reducer*255+0.5f), 255))};
 	// Store the drawing instructions in the vertex arrays
 	MarkerVertex* vx = &(markerArray[nbMarkers*6]);
 	vx->pos.set(x-radius,y-radius); std::memcpy(vx->color, markerColor, 3); ++vx;

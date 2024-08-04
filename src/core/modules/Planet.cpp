@@ -2858,7 +2858,7 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 	// If asteroid is too faint to be seen, don't bother rendering. (Massive speedup if people have hundreds of orbital elements!)
 	// AW: Added a special case for educational purpose to drawing orbits for the Solar System Observer
 	// Details: https://sourceforge.net/p/stellarium/discussion/278769/thread/4828ebe4/
-	if (!ss->getFlagMarkers() && ((getVMagnitude(core)-5.0f) > core->getSkyDrawer()->getLimitMagnitude()) && pType>=Planet::isAsteroid && !core->getCurrentLocation().planetName.contains("Observer", Qt::CaseInsensitive))
+	if ((ss->getMarkerValue()==0.) && ((getVMagnitude(core)-5.0f) > core->getSkyDrawer()->getLimitMagnitude()) && pType>=Planet::isAsteroid && !core->getCurrentLocation().planetName.contains("Observer", Qt::CaseInsensitive))
 	{
 		return;
 	}
@@ -2903,7 +2903,6 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 	const double viewportBufferSz= (englishName=="Sun" ? screenRd+125. : screenRd);	// enlarge if this is sun with its huge halo.
 	const double viewport_left = prj->getViewportPosX();
 	const double viewport_bottom = prj->getViewportPosY();
-	const float markerValue=ss->getMarkerValue();
 
 	if ((prj->project(Vec3d(0.), screenPos)
 	     && screenPos[1]>viewport_bottom - viewportBufferSz && screenPos[1] < viewport_bottom + prj->getViewportHeight()+viewportBufferSz
@@ -2942,7 +2941,7 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 				{isInterstellar, Vec3f(1   , 0.25, 0.25)},
 				{isUNDEFINED,    Vec3f(1   , 0   , 0   )}};
 
-				Vec3f color=colorMap.value(getPlanetType(), Vec3f(1, 0, 0))*markerValue;
+				Vec3f color=colorMap.value(getPlanetType(), Vec3f(1, 0, 0));
 
 				ss->drawAsteroidMarker(core, &sPainter, screenPos[0], screenPos[1], color); // This does not draw directly, but record an entry to be drawn in a batch.
 			}
