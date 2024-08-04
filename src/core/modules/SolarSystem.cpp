@@ -62,6 +62,11 @@
 #include <QDir>
 #include <QHash>
 #include <QtConcurrent>
+#include <QOpenGLBuffer>
+#include <QOpenGLFunctions>
+#include <QOpenGLShaderProgram>
+#include <QOpenGLVertexArrayObject>
+
 
 SolarSystem::SolarSystem() : StelObjectModule()
 	, shadowPlanetCount(0)
@@ -117,6 +122,9 @@ SolarSystem::SolarSystem() : StelObjectModule()
 	, allTrails(Q_NULLPTR)
 	, conf(StelApp::getInstance().getSettings())
 	, extraThreads(0)
+	, nbMarkers(0)
+	, vao(new QOpenGLVertexArrayObject)
+	, vbo(new QOpenGLBuffer(QOpenGLBuffer::VertexBuffer))
 {
 	planetNameFont.setPixelSize(StelApp::getInstance().getScreenFontSize());
 	connect(&StelApp::getInstance(), SIGNAL(screenFontSizeChanged(int)), this, SLOT(setFontSize(int)));
@@ -126,6 +134,15 @@ SolarSystem::SolarSystem() : StelObjectModule()
 	connect(this, SIGNAL(flagPlanetsOrbitsOnlyChanged(bool)), this, SLOT(reconfigureOrbits()));
 	connect(this, SIGNAL(flagIsolatedOrbitsChanged(bool)),    this, SLOT(reconfigureOrbits()));
 	connect(this, SIGNAL(flagOrbitsWithMoonsChanged(bool)),   this, SLOT(reconfigureOrbits()));
+
+	markerArray=new MarkerVertex[maxMarkers*6];
+	textureCoordArray = new unsigned char[maxMarkers*6*2];
+	for (unsigned int i=0;i<maxMarkers; ++i)
+	{
+		static const unsigned char texElems[] = {0, 0, 255, 0, 255, 255, 0, 0, 255, 255, 0, 255};
+		unsigned char* elem = &textureCoordArray[i*6*2];
+		std::memcpy(elem, texElems, 12);
+	}
 }
 
 void SolarSystem::setFontSize(int newFontSize)
@@ -148,6 +165,14 @@ SolarSystem::~SolarSystem()
 	earth.clear();
 	Planet::hintCircleTex.clear();
 	Planet::texEarthShadow.clear();
+
+	delete[] markerArray;
+	markerArray = nullptr;
+	delete[] textureCoordArray;
+	textureCoordArray = nullptr;
+	delete markerShaderProgram;
+	markerShaderProgram = nullptr;
+
 
 	texEphemerisMarker.clear();
 	texEphemerisCometMarker.clear();
@@ -184,6 +209,8 @@ double SolarSystem::getCallOrder(StelModuleActionName actionName) const
 // Init and load the solar system data
 void SolarSystem::init()
 {
+	initializeOpenGLFunctions();
+
 	Q_ASSERT(conf);
 
 	Planet::init();
@@ -303,7 +330,7 @@ void SolarSystem::init()
 	texEphemerisNowMarker = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/gear.png");
 	texEphemerisCometMarker = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/cometIcon.png");
 	Planet::hintCircleTex = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/planet-indicator.png");
-	Planet::markerCircleTex = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/planet-marker.png");
+	markerCircleTex = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/planet-marker.png");
 
 	StelApp *app = &StelApp::getInstance();
 	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
@@ -337,6 +364,95 @@ void SolarSystem::init()
 	connect(this, SIGNAL(ephemerisSkipDataChanged(bool)), this, SLOT(fillEphemerisDates()));
 	connect(this, SIGNAL(ephemerisSkipMarkersChanged(bool)), this, SLOT(fillEphemerisDates()));
 	connect(this, SIGNAL(ephemerisSmartDatesChanged(bool)), this, SLOT(fillEphemerisDates()));
+
+
+	// Create shader program for mass drawing of asteroid markers
+	QOpenGLShader vshader(QOpenGLShader::Vertex);
+	const char *vsrc =
+		"ATTRIBUTE mediump vec2 pos;\n"
+		"ATTRIBUTE mediump vec2 texCoord;\n"
+		"ATTRIBUTE mediump vec3 color;\n"
+		"uniform mediump mat4 projectionMatrix;\n"
+		"VARYING mediump vec2 texc;\n"
+		"VARYING mediump vec3 outColor;\n"
+		"void main(void)\n"
+		"{\n"
+		"    gl_Position = projectionMatrix * vec4(pos.x, pos.y, 0, 1);\n"
+		"    texc = texCoord;\n"
+		"    outColor = color;\n"
+		"}\n";
+	vshader.compileSourceCode(StelOpenGL::globalShaderPrefix(StelOpenGL::VERTEX_SHADER) + vsrc);
+	if (!vshader.log().isEmpty()) { qWarning() << "SolarSystem::init(): Warnings while compiling vshader: " << vshader.log(); }
+
+	QOpenGLShader fshader(QOpenGLShader::Fragment);
+	const char *fsrc =
+		"VARYING mediump vec2 texc;\n"
+		"VARYING mediump vec3 outColor;\n"
+		"uniform sampler2D tex;\n"
+		"void main(void)\n"
+		"{\n"
+		"    FRAG_COLOR = texture2D(tex, texc)*vec4(outColor, 1.);\n"
+		"}\n";
+	fshader.compileSourceCode(StelOpenGL::globalShaderPrefix(StelOpenGL::FRAGMENT_SHADER) + fsrc);
+	if (!fshader.log().isEmpty()) { qWarning() << "SolarSystem::init(): Warnings while compiling fshader: " << fshader.log(); }
+
+	markerShaderProgram = new QOpenGLShaderProgram(QOpenGLContext::currentContext());
+	markerShaderProgram->addShader(&vshader);
+	markerShaderProgram->addShader(&fshader);
+	StelPainter::linkProg(markerShaderProgram, "starShader");
+	markerShaderVars.projectionMatrix = markerShaderProgram->uniformLocation("projectionMatrix");
+	markerShaderVars.texCoord = markerShaderProgram->attributeLocation("texCoord");
+	markerShaderVars.pos = markerShaderProgram->attributeLocation("pos");
+	markerShaderVars.color = markerShaderProgram->attributeLocation("color");
+	markerShaderVars.texture = markerShaderProgram->uniformLocation("tex");
+
+	vbo->create();
+	vbo->bind();
+	vbo->setUsagePattern(QOpenGLBuffer::StreamDraw);
+	vbo->allocate(maxMarkers*6*sizeof(MarkerVertex) + maxMarkers*6*2);
+
+	if(vao->create())
+	{
+		vao->bind();
+		setupCurrentVAO();
+		vao->release();
+	}
+
+	vbo->release();
+}
+
+void SolarSystem::setupCurrentVAO()
+{
+	vbo->bind();
+	markerShaderProgram->setAttributeBuffer(markerShaderVars.pos, GL_FLOAT, 0, 2, sizeof(MarkerVertex));
+	markerShaderProgram->setAttributeBuffer(markerShaderVars.color, GL_UNSIGNED_BYTE, offsetof(MarkerVertex,color), 3, sizeof(MarkerVertex));
+	markerShaderProgram->setAttributeBuffer(markerShaderVars.texCoord, GL_UNSIGNED_BYTE, maxMarkers*6*sizeof(MarkerVertex), 2, 0);
+	vbo->release();
+	markerShaderProgram->enableAttributeArray(markerShaderVars.pos);
+	markerShaderProgram->enableAttributeArray(markerShaderVars.color);
+	markerShaderProgram->enableAttributeArray(markerShaderVars.texCoord);
+}
+
+void SolarSystem::bindVAO()
+{
+	if(vao->isCreated())
+		vao->bind();
+	else
+		setupCurrentVAO();
+}
+
+void SolarSystem::releaseVAO()
+{
+	if(vao->isCreated())
+	{
+		vao->release();
+	}
+	else
+	{
+		markerShaderProgram->disableAttributeArray(markerShaderVars.pos);
+		markerShaderProgram->disableAttributeArray(markerShaderVars.color);
+		markerShaderProgram->disableAttributeArray(markerShaderVars.texCoord);
+	}
 }
 
 void SolarSystem::deinit()
@@ -1673,7 +1789,7 @@ void SolarSystem::draw(StelCore* core)
 		p->computeDistance(obsHelioPos);
 	}
 
-	// And sort them from the furthest to the closest. std::sort can split this into parallel threads!
+	// And sort them from the farthest to the closest. std::sort can split this into parallel threads!
 	std::sort(STD_EXECUTION_PAR_COMMA
 		  systemPlanets.begin(),systemPlanets.end(),biggerDistance());
 
@@ -1700,9 +1816,76 @@ void SolarSystem::draw(StelCore* core)
 		if ( (p != sun) || (/* (p == sun) && */ !(core->getSkyDrawer()->getFlagDrawSunAfterAtmosphere())))
 			p->draw(core, maxMagLabel, planetNameFont);
 	}
+	if (nbMarkers>0)
+	{
+		StelPainter sPainter(core->getProjection2d());
+		postDrawAsteroidMarkers(&sPainter);
+	}
+
 
 	if (sObjMgr->getFlagSelectedObjectPointer() && getFlagPointer())
 		drawPointer(core);
+}
+
+// Finalize the drawing of asteroid markers (inspired from StelSkyDrawer)
+void SolarSystem::postDrawAsteroidMarkers(StelPainter *sPainter)
+{
+	Q_ASSERT(sPainter);
+
+	if (nbMarkers==0)
+		return;
+
+	markerCircleTex->bind();
+	sPainter->setBlending(true, GL_ONE, GL_ONE);
+
+	const QMatrix4x4 qMat=sPainter->getProjector()->getProjectionMatrix().toQMatrix();
+
+	vbo->bind();
+	vbo->write(0, markerArray, nbMarkers*6*sizeof(MarkerVertex));
+	vbo->write(maxMarkers*6*sizeof(MarkerVertex), textureCoordArray, nbMarkers*6*2);
+	vbo->release();
+
+	markerShaderProgram->bind();
+	markerShaderProgram->setUniformValue(markerShaderVars.projectionMatrix, qMat);
+
+	bindVAO();
+	glDrawArrays(GL_TRIANGLES, 0, static_cast<GLsizei>(nbMarkers)*6);
+	releaseVAO();
+
+	markerShaderProgram->release();
+
+	nbMarkers = 0;
+}
+
+// Draw a point source halo.
+bool SolarSystem::drawAsteroidMarker(StelCore* core, StelPainter* sPainter, const float x, const float y, Vec3f &color)
+{
+	const float reducer=markerFader.getInterstate();
+	if (reducer==0.)
+		return false;
+
+	Q_ASSERT(sPainter);
+	const float radius = 3.f * static_cast<float>(sPainter->getProjector()->getDevicePixelsPerPixel());
+	unsigned char markerColor[3] = {
+		static_cast<unsigned char>(std::min(static_cast<int>(color[0]*reducer*255+0.5f), 255)),
+		static_cast<unsigned char>(std::min(static_cast<int>(color[1]*reducer*255+0.5f), 255)),
+		static_cast<unsigned char>(std::min(static_cast<int>(color[2]*reducer*255+0.5f), 255))};
+	// Store the drawing instructions in the vertex arrays
+	MarkerVertex* vx = &(markerArray[nbMarkers*6]);
+	vx->pos.set(x-radius,y-radius); std::memcpy(vx->color, markerColor, 3); ++vx;
+	vx->pos.set(x+radius,y-radius); std::memcpy(vx->color, markerColor, 3); ++vx;
+	vx->pos.set(x+radius,y+radius); std::memcpy(vx->color, markerColor, 3); ++vx;
+	vx->pos.set(x-radius,y-radius); std::memcpy(vx->color, markerColor, 3); ++vx;
+	vx->pos.set(x+radius,y+radius); std::memcpy(vx->color, markerColor, 3); ++vx;
+	vx->pos.set(x-radius,y+radius); std::memcpy(vx->color, markerColor, 3); ++vx;
+
+	++nbMarkers;
+	if (nbMarkers>=maxMarkers)
+	{
+		// Flush the buffer (draw all buffered markers)
+		postDrawAsteroidMarkers(sPainter);
+	}
+	return true;
 }
 
 void SolarSystem::drawEphemerisItems(const StelCore* core)
@@ -2339,21 +2522,14 @@ void SolarSystem::setFlagMarkers(bool b)
 {
 	if (getFlagMarkers() != b)
 	{
-		for (const auto& p : std::as_const(systemPlanets))
-			p->setFlagMarker(b);
+		markerFader = b;
 		emit markersDisplayedChanged(b);
 	}
 }
 
-// A bit weird. Currently this returns true if only one marker has been set. However, we keep markers/hints private to the planets, in case particular objects should be marked.
 bool SolarSystem::getFlagMarkers() const
 {
-	for (const auto& p : std::as_const(systemPlanets))
-	{
-		if (p->getFlagMarker())
-			return true;
-	}
-	return false;
+	return markerFader;
 }
 
 void SolarSystem::setFlagLightTravelTime(bool b)
@@ -2403,6 +2579,7 @@ void SolarSystem::update(double deltaTime)
 	{
 		p->update(static_cast<int>(deltaTime*1000));
 	}
+	markerFader.update(deltaTime*1000);
 }
 
 // is a lunar eclipse close at hand?
