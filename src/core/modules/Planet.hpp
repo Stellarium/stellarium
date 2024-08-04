@@ -31,7 +31,6 @@
 #include "StelFader.hpp"
 #include "StelTextureTypes.hpp"
 #include "RotationElements.hpp"
-#include "SolarEclipseComputer.hpp"
 
 #include <QCache>
 #include <QString>
@@ -507,9 +506,6 @@ public:
 	void setFlagHints(bool b){hintFader = b;}
 	bool getFlagHints(void) const {return hintFader;}
 
-	void setFlagMarker(bool b){markerFader = b;}
-	bool getFlagMarker(void) const {return markerFader;}
-
 	void setFlagLabels(bool b){flagLabels = b;}
 	bool getFlagLabels(void) const {return flagLabels;}
 
@@ -727,8 +723,6 @@ protected:
 
 	//! Draw the circle and name of the Planet
 	void drawHints(const StelCore* core, StelPainter &sPainter, const QFont& planetNameFont);
-	//! Draw a small mark for the planet. This can be used to mark "something" in the sky, for showing distribution of minor bodies.
-	void drawMarker(const StelCore* core, StelPainter &sPainter);
 
 	PlanetOBJModel* loadObjModel() const;
 
@@ -798,7 +792,6 @@ protected:
 	QSharedPointer<Planet> parent;           // Planet parent i.e. sun for earth
 	QList<QSharedPointer<Planet> > satellites;      // satellites of the Planet
 	LinearFader hintFader;
-	LinearFader markerFader;         // Useful for markers displayed for minor bodies regardless of magnitude
 	LinearFader labelsFader;         // Store the current state of the label for this planet
 	bool flagLabels;                 // Define whether labels should be displayed
 	bool hidden;                     // useful for fake planets used as observation positions - not drawn or labeled
@@ -814,7 +807,6 @@ protected:
 
 	static Vec3f labelColor;
 	static StelTextureSP hintCircleTex; // The circle around an SSO
-	static StelTextureSP markerCircleTex; // An optional marker to have "something" in the sky even if object not visible.
 	static const QMap<PlanetType, QString> pTypeMap; // Maps fast type to english name.
 	static const QMap<QString, QString> nPlanetMap; // Maps fast IAU number to IAU designation.
 	static const QMap<ApparentMagnitudeAlgorithm, QString> vMagAlgorithmMap;

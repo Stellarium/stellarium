@@ -88,6 +88,12 @@ StelTextureSP StelTextureMgr::createTexture(const QString& afilename, const Stel
 			qWarning() << "Loading Fuchsia replacement failed.";
 	}
 
+	if ((image.width()<16) && (image.height()<16))
+	{
+		qWarning() << "Undersize texture image" << tex->fullPath << "needs rescaling to 16x16 ...";
+		image=image.scaled(qMax(image.width(), 16), qMax(image.height(), 16), Qt::IgnoreAspectRatio, Qt::FastTransformation);
+	}
+
 	// Try to use a texture image even if of excessive size.
 	if ((image.width()>maxTexSize) || (image.height()>maxTexSize))
 	{

@@ -30,6 +30,7 @@
 #include "Orbit.hpp"
 #include "planetsephems/precession.hpp"
 #include "planetsephems/EphemWrapper.hpp"
+#include "SolarEclipseComputer.hpp"
 #include "StelObserver.hpp"
 #include "StelProjector.hpp"
 #include "sidereal_time.hpp"
@@ -92,7 +93,6 @@ Vec3f Planet::orbitSaturnColor = Vec3f(1.0f,0.6f,1.0f);
 Vec3f Planet::orbitUranusColor = Vec3f(1.0f,0.6f,1.0f);
 Vec3f Planet::orbitNeptuneColor = Vec3f(1.0f,0.6f,1.0f);
 StelTextureSP Planet::hintCircleTex;
-StelTextureSP Planet::markerCircleTex;
 StelTextureSP Planet::texEarthShadow;
 
 bool Planet::drawMoonHalo = true;
@@ -2838,12 +2838,14 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 	if (hidden)
 		return;
 
+	static SolarSystem *ss=GETSTELMODULE(SolarSystem);
+
 	// Exclude drawing if user set a hard limit magnitude.
 	if (core->getSkyDrawer()->getFlagPlanetMagnitudeLimit() && (getVMagnitude(core) > static_cast<float>(core->getSkyDrawer()->getCustomPlanetMagnitudeLimit())))
 	{
 		// Get the eclipse factor to avoid hiding the Moon during a total solar eclipse, or planets in transit over the Solar disk.
 		// Details: https://answers.launchpad.net/stellarium/+question/395139
-		if (GETSTELMODULE(SolarSystem)->getSolarEclipseFactor(core).first==1.0)
+		if (ss->getSolarEclipseFactor(core).first==1.0)
 			return;
 	}
 
@@ -2856,7 +2858,7 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 	// If asteroid is too faint to be seen, don't bother rendering. (Massive speedup if people have hundreds of orbital elements!)
 	// AW: Added a special case for educational purpose to drawing orbits for the Solar System Observer
 	// Details: https://sourceforge.net/p/stellarium/discussion/278769/thread/4828ebe4/
-	if (!markerFader && ((getVMagnitude(core)-5.0f) > core->getSkyDrawer()->getLimitMagnitude()) && pType>=Planet::isAsteroid && !core->getCurrentLocation().planetName.contains("Observer", Qt::CaseInsensitive))
+	if (!ss->getFlagMarkers() && ((getVMagnitude(core)-5.0f) > core->getSkyDrawer()->getLimitMagnitude()) && pType>=Planet::isAsteroid && !core->getCurrentLocation().planetName.contains("Observer", Qt::CaseInsensitive))
 	{
 		return;
 	}
@@ -2901,6 +2903,7 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 	const double viewportBufferSz= (englishName=="Sun" ? screenRd+125. : screenRd);	// enlarge if this is sun with its huge halo.
 	const double viewport_left = prj->getViewportPosX();
 	const double viewport_bottom = prj->getViewportPosY();
+	const float markerValue=ss->getMarkerValue();
 
 	if ((prj->project(Vec3d(0.), screenPos)
 	     && screenPos[1]>viewport_bottom - viewportBufferSz && screenPos[1] < viewport_bottom + prj->getViewportHeight()+viewportBufferSz
@@ -2920,14 +2923,29 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 		else
 			labelsFader=false;
 
-		const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
-		StelPainter sPainter(prj);
-		drawHints(core, sPainter, planetNameFont);
-		// TODO: Decide whether isComet should be moved up in the enum list to allow exclusion!
-		if (getPlanetType()>=Planet::isAsteroid)
-		{
-			//qDebug() << getEnglishName();
-			drawMarker(core, sPainter);
+		{ // scope the StelPainter here!
+			const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
+			StelPainter sPainter(prj);
+			drawHints(core, sPainter, planetNameFont);
+			// TODO: Decide whether isComet should be moved up in the enum list to allow exclusion!
+			if (getPlanetType()>=Planet::isAsteroid)
+			{
+				static const QMap<Planet::PlanetType, Vec3f> colorMap={
+				{isAsteroid,     Vec3f(0.35, 0.35, .35 )},
+				{isPlutino,      Vec3f(1   , 1   , 0   )},
+				{isComet,        Vec3f(0.25, 0.75, 1   )},
+				{isDwarfPlanet,  Vec3f(1   , 1   , 1   )},
+				{isCubewano,     Vec3f(1   , 0   , 0.8 )},
+				{isSDO,          Vec3f(0.5 , 1   , 0.5 )},
+				{isOCO,          Vec3f(0.75, 0.75, 1   )},
+				{isSednoid,      Vec3f(0.75, 1   , 0.75)},
+				{isInterstellar, Vec3f(1   , 0.25, 0.25)},
+				{isUNDEFINED,    Vec3f(1   , 0   , 0   )}};
+
+				Vec3f color=colorMap.value(getPlanetType(), Vec3f(1, 0, 0))*markerValue;
+
+				ss->drawAsteroidMarker(core, &sPainter, screenPos[0], screenPos[1], color); // This does not draw directly, but record an entry to be drawn in a batch.
+			}
 		}
 
 		draw3dModel(core,transfo,static_cast<float>(screenRd));
@@ -4696,25 +4714,6 @@ void Planet::drawHints(const StelCore* core, StelPainter &sPainter, const QFont&
 	sPainter.drawSprite2dMode(static_cast<float>(screenPos[0]), static_cast<float>(screenPos[1]), 11);
 }
 
-// Draw a little marker. Useful for minor bodies to just show "something out there".
-void Planet::drawMarker(const StelCore* core, StelPainter &sPainter)
-{
-	// TODO: Consider smoothing out the marker when zooming in far enough to make object "naturally" visible.
-	if (markerFader.getInterstate()<=0)
-		return;
-
-	//const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
-	//StelPainter sPainter(prj);
-
-	sPainter.setColor(labelColor,markerFader.getInterstate());
-
-	// Draw the 2D small circle
-	sPainter.setBlending(true);
-	Planet::markerCircleTex->bind();
-	//Planet::hintCircleTex->bind();
-	sPainter.drawSprite2dMode(static_cast<float>(screenPos[0]), static_cast<float>(screenPos[1]), 2);
-}
-
 Ring::Ring(float radiusMin, float radiusMax, const QString &texname)
 	:radiusMin(radiusMin),radiusMax(radiusMax)
 {
@@ -4918,7 +4917,6 @@ Vec2d Planet::getValidPositionalDataRange(const PositionQuality purpose) const
 void Planet::update(int deltaTime)
 {
 	hintFader.update(deltaTime);
-	markerFader.update(deltaTime);
 	labelsFader.update(deltaTime);
 	orbitFader.update(deltaTime);
 }

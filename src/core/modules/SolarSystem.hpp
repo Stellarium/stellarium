@@ -48,7 +48,7 @@ typedef QSharedPointer<Planet> PlanetP;
 //! This class and the handling of solar system data has seen many changes, and unfortunately, not much has been consistently documented.
 //! The following is a reverse-engineered analysis.
 //!
-class SolarSystem : public StelObjectModule
+class SolarSystem : public StelObjectModule, protected QOpenGLFunctions
 {
 	Q_OBJECT
 	// This is a "forwarding property" which sets labeling into all planets.
@@ -1173,6 +1173,56 @@ private:
 
 	//! Number of additional threads. This could be automatically derived, but for now we can experiment.
 	int extraThreads;
+
+	// BEGIN OF BLOCK RELATED TO MASS MARKER DISPLAY
+	// Variables used for GL optimization when displaying little markers for the minor bodies.
+	// These data structures were borrowed from StelSkyDrawer. However, we need only one color.
+	// Maybe, to extend the idea, have several such Arrays for category-colored main belt, Jupiter Trojans, NEA, KBO etc.
+	//! Vertex format for a minor body marker.
+	//! Texture pos is stored in another separately.
+	struct MarkerVertex {
+		Vec2f pos;
+		unsigned char color[4]; // can we remove that?
+	};
+	static_assert(sizeof(MarkerVertex) == 2*4+4, "Size of MarkerVertex must be 12 bytes");
+
+	//! Buffer for storing the marker positions
+	MarkerVertex* markerArray;
+	//! Buffer for storing the texture coordinate array data.
+	unsigned char* textureCoordArray;
+
+	class QOpenGLShaderProgram* markerShaderProgram;
+	struct MarkerShaderVars {
+		int projectionMatrix;
+		int texCoord;
+		int pos;
+		int color; // Can we remove that?
+		int texture;
+	};
+	MarkerShaderVars markerShaderVars;
+
+	//! Current number of sources stored in the buffer (still to display)
+	unsigned int nbMarkers;
+	std::unique_ptr<QOpenGLVertexArrayObject> vao;
+	std::unique_ptr<QOpenGLBuffer> vbo;
+	//! Binds actual VAO if it's supported, sets up the relevant state manually otherwise.
+	void bindVAO();
+	//! Sets the vertex attribute states for the currently bound VAO so that glDraw* commands can work.
+	void setupCurrentVAO();
+	//! Binds zero VAO if VAO is supported, manually disables the relevant vertex attributes otherwise.
+	void releaseVAO();
+
+	//! Maximum number of markers which can be stored in the buffers
+	constexpr static unsigned int maxMarkers=2048;
+	void postDrawAsteroidMarkers(StelPainter *sPainter);
+	StelTextureSP markerCircleTex; // An optional marker to have "something" in the sky even if object not visible.
+	LinearFader markerFader;         // Useful for markers displayed for minor bodies regardless of magnitude
+
+public:
+	bool drawAsteroidMarker(StelCore* core, StelPainter* sPainter, const float x, const float y, Vec3f &color);
+	float getMarkerValue() const {return markerFader.getInterstate();}
+
+	// END OF BLOCK RELATED TO MASS MARKER DISPLAY
 };
 
 

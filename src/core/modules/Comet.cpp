@@ -493,9 +493,11 @@ void Comet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont
 
 		labelsFader = (flagLabels && ang_dist>0.25f && maxMagLabels>getVMagnitude(core));
 
-		const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
-		StelPainter sPainter(prj);
-		drawHints(core, sPainter, planetNameFont);
+		{ // encapsulate painter!
+			const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
+			StelPainter sPainter(prj);
+			drawHints(core, sPainter, planetNameFont);
+		}
 
 		draw3dModel(core,transfo,static_cast<float>(screenRd));
 	}
