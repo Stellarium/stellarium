@@ -1048,9 +1048,9 @@ ENDIF()
 
 include("cmake/Check-from_chars.cmake")
 IF(NOT FROM_CHARS_WORKS)
-    CPMFindPackage(NAME fast_float
+    CPMFindPackage(NAME FastFloat
                    GIT_REPOSITORY https://github.com/fastfloat/fast_float
-                   VERSION 6.1.0
+                   VERSION 6.1.3
                    EXCLUDE_FROM_ALL yes)
     GET_TARGET_PROPERTY(fast_float_INCLUDE_DIRECTORIES
                         FastFloat::fast_float INTERFACE_INCLUDE_DIRECTORIES)
