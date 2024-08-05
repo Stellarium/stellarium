@@ -1495,14 +1495,6 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		readOk++;
 	}
 
-	if (systemPlanets.isEmpty())
-	{
-		qWarning().noquote() << "No Solar System objects loaded from" << QDir::toNativeSeparators(filePath);
-		return false;
-	}
-	else
-		qDebug() << "Solar System has" << systemPlanets.count() << "entries.";
-
 	// special case: load earth shadow texture
 	if (!Planet::texEarthShadow)
 		Planet::texEarthShadow = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/earth-shadow.png");
@@ -1514,10 +1506,12 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 	if (!Comet::tailTexture)
 		Comet::tailTexture = StelApp::getInstance().getTextureManager().createTextureThread(StelFileMgr::getInstallationDir()+"/textures/cometTail.png", StelTexture::StelTextureParams(true, GL_LINEAR, GL_CLAMP_TO_EDGE));
 
-	if (readOk>0)
-		qDebug() << "Loaded" << readOk << "Solar System bodies";
-
-	return true;
+	if (readOk==0)
+		qWarning().noquote() << "No Solar System objects loaded from" << QDir::toNativeSeparators(filePath);
+	else
+		qDebug() << "Loaded" << readOk << "Solar System bodies from " << filePath;
+	qDebug() << "Solar System now has" << systemPlanets.count() << "entries.";
+	return readOk>0;
 }
 
 // Compute the position for every elements of the solar system.
