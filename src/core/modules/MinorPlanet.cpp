@@ -227,6 +227,11 @@ double MinorPlanet::getSiderealPeriod() const
 	return static_cast<KeplerOrbit*>(orbitPtr)->calculateSiderealPeriod();
 }
 
+float MinorPlanet::getVMagnitude(const StelCore* core, const double eclipseFactor) const
+{
+	Q_UNUSED(eclipseFactor)
+	return getVMagnitude(core);
+}
 float MinorPlanet::getVMagnitude(const StelCore* core) const
 {
 	//If the H-G system is not used, use the default radius/albedo mechanism

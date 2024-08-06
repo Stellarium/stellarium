@@ -271,13 +271,20 @@ double Comet::getSiderealPeriod() const
 	return ((semiMajorAxis>0) ? KeplerOrbit::calculateSiderealPeriod(semiMajorAxis, 1.0) : 0.);
 }
 
+
 float Comet::getVMagnitude(const StelCore* core) const
 {
+	return getVMagnitude(core, 1.0);
+}
+
+float Comet::getVMagnitude(const StelCore* core, const double eclipseFactor) const
+{
+	Q_UNUSED(eclipseFactor)
 	//If the two parameter system is not used,
 	//use the default radius/albedo mechanism
 	if (slopeParameter < -9.0f)
 	{
-		return Planet::getVMagnitude(core);
+		return Planet::getVMagnitude(core, 1.);
 	}
 
 	//Calculate distances
@@ -443,12 +450,14 @@ void Comet::update(int deltaTime)
 
 
 // Draw the Comet and all the related infos: name, circle etc... GZ: Taken from Planet.cpp 2013-11-05 and extended
-void Comet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont)
+void Comet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont, const double eclipseFactor)
 {
+	Q_UNUSED(eclipseFactor)
 	if (hidden)
 		return;
 
 	static SolarSystem *ss=GETSTELMODULE(SolarSystem);
+	const float vMagnitude=getVMagnitude(core);
 
 	// Exclude drawing if user set a hard limit magnitude.
 	if (core->getSkyDrawer()->getFlagPlanetMagnitudeLimit() && (getVMagnitude(core) > core->getSkyDrawer()->getCustomPlanetMagnitudeLimit()))
@@ -504,7 +513,7 @@ void Comet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont
 			ss->drawAsteroidMarker(core, &sPainter, screenPos[0], screenPos[1], color); // This does not draw directly, but record an entry to be drawn in a batch.
 		}
 
-		draw3dModel(core,transfo,static_cast<float>(screenRd));
+		draw3dModel(core,transfo,static_cast<float>(screenRd), 1.0);
 	}
 	else
 		if (!projectionValid && prj.data()->getNameI18() == q_("Orthographic"))

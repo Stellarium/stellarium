@@ -230,6 +230,7 @@ public:
 	double getSatellitesFov(const StelCore* core) const override;
 	double getParentSatellitesFov(const StelCore* core) const override;
 	float getVMagnitude(const StelCore* core) const override;
+	virtual float getVMagnitude(const StelCore* core, double eclipseFactor) const;
 	float getSelectPriority(const StelCore* core) const override;
 	Vec3f getInfoColor(void) const override;
 	//! @return "Planet". For technical reasons this is also returned by Comets and MinorPlanets and the Sun. A better type is returned by getObjectType()
@@ -280,8 +281,8 @@ public:
 	virtual void translateName(const StelTranslator &trans);
 
 	// Draw the Planet
-	// GZ Made that virtual to allow comets having their own draw().
-	virtual void draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont);
+	// @param eclipseFactor should be precomputed via SolarSystem::getSolarEclipseFactor().
+	virtual void draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont, const double eclipseFactor);
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods specific to Planet
@@ -702,7 +703,10 @@ protected:
 
 	//! Draw the 3d model. Call the proper functions if there are rings etc..
 	//! @param screenRd radius in screen pixels
-	void draw3dModel(StelCore* core, StelProjector::ModelViewTranformP transfo, float screenRd, bool drawOnlyRing=false);
+	//! @param solarEclipseFactor Full sun is 1.0, fully covered sun is 0.0.
+	//! This should be determined beforehand so that repeated calls to this function can be avoided.
+	//! It is usually safe to use 1.0 when eclipses are rare and umimportant.
+	void draw3dModel(StelCore* core, StelProjector::ModelViewTranformP transfo, float screenRd, double solarEclipseFactor, bool drawOnlyRing=false);
 
 	//! Draws the OBJ model, assuming it is available
 	//! @param screenRd radius in screen pixels.

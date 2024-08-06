@@ -1804,12 +1804,13 @@ void SolarSystem::draw(StelCore* core)
 	const float sdLimitMag=static_cast<float>(core->getSkyDrawer()->getLimitMagnitude());
 	const float maxMagLabel = (sdLimitMag<5.f ? sdLimitMag :
 			5.f+(sdLimitMag-5.f)*1.2f) +(static_cast<float>(labelsAmount)-3.f)*1.2f;
+	const double eclipseFactor=getSolarEclipseFactor(core).first;
 
 	// Draw the elements
 	for (const auto& p : std::as_const(systemPlanets))
 	{
 		if ( (p != sun) || (/* (p == sun) && */ !(core->getSkyDrawer()->getFlagDrawSunAfterAtmosphere())))
-			p->draw(core, maxMagLabel, planetNameFont);
+			p->draw(core, maxMagLabel, planetNameFont, eclipseFactor);
 	}
 	if (nbMarkers>0)
 	{
@@ -2266,14 +2267,14 @@ StelObjectP SolarSystem::searchByName(const QString& name) const
 
 float SolarSystem::getPlanetVMagnitude(QString planetName, bool withExtinction) const
 {
+	StelCore *core=StelApp::getInstance().getCore();
+	double eclipseFactor=getSolarEclipseFactor(core).first;
 	PlanetP p = searchByEnglishName(planetName);
 	if (p.isNull()) // Possible was asked the common name of minor planet?
 		p = searchMinorPlanetByEnglishName(planetName);
-	float r = 0.f;
+	float r = p->getVMagnitude(core, eclipseFactor);
 	if (withExtinction)
-		r = p->getVMagnitudeWithExtinction(StelApp::getInstance().getCore());
-	else
-		r = p->getVMagnitude(StelApp::getInstance().getCore());
+		r = p->getVMagnitudeWithExtinction(core, r);
 	return r;
 }
 

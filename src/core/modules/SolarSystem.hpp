@@ -881,6 +881,7 @@ public:
 	bool removeMinorPlanet(QString name);
 
 	//! Determines relative amount of sun visible from the observer's position (first element) and the Planet object pointer for eclipsing celestial body (second element).
+	//! Full sun is 1.0, fully covered sun is 0.0.
 	//! In the unlikely event of multiple objects in front of the sun, only the largest will be reported.
 	QPair<double, PlanetP> getSolarEclipseFactor(const StelCore *core) const;
 
