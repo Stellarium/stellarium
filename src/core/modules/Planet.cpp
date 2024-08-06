@@ -2339,6 +2339,10 @@ float Planet::getMeanOppositionMagnitude() const
 // Computation of the visual magnitude (V band) of the planet.
 float Planet::getVMagnitude(const StelCore* core) const
 {
+	return getVMagnitude(core, 1.);
+}
+float Planet::getVMagnitude(const StelCore* core, double eclipseFactor) const
+{
 	if (parent == Q_NULLPTR)
 	{
 		// Sun, compute the apparent magnitude for the absolute mag (V: 4.83) and observer's distance
@@ -2346,7 +2350,7 @@ float Planet::getVMagnitude(const StelCore* core) const
 		const double distParsec = std::sqrt(core->getObserverHeliocentricEclipticPos().normSquared())*AU/PARSEC;
 
 		// check how much of it is visible
-		const double shadowFactor = qMax(0.000128, GETSTELMODULE(SolarSystem)->getSolarEclipseFactor(core).first);
+		const double shadowFactor = qMax(0.000128, eclipseFactor);
 		// See: Hughes, D. W., Brightness during a solar eclipse // Journal of the British Astronomical Association, vol.110, no.4, p.203-205
 		// URL: http://adsabs.harvard.edu/abs/2000JBAA..110..203H
 
@@ -2829,20 +2833,20 @@ double Planet::getSpheroidAngularRadius(const StelCore* core) const
 }
 
 //the Planet and all the related infos : name, circle etc..
-void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont)
+void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont, const double eclipseFactor)
 {
 	if (hidden)
 		return;
 
 	static SolarSystem *ss=GETSTELMODULE(SolarSystem);
-	const float vMagnitude=getVMagnitude(core);
+	const float vMagnitude=getVMagnitude(core, eclipseFactor);
 
 	// Exclude drawing if user set a hard limit magnitude.
 	if (core->getSkyDrawer()->getFlagPlanetMagnitudeLimit() && ( vMagnitude > static_cast<float>(core->getSkyDrawer()->getCustomPlanetMagnitudeLimit())))
 	{
 		// Get the eclipse factor to avoid hiding the Moon during a total solar eclipse, or planets in transit over the Solar disk.
 		// Details: https://answers.launchpad.net/stellarium/+question/395139
-		if (ss->getSolarEclipseFactor(core).first==1.0)
+		if (eclipseFactor==1.0)
 			return;
 	}
 
@@ -2920,7 +2924,7 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 	{
 		// Draw the rings if we are located on a planet with rings, but not the planet itself.
 		if (rings)
-			draw3dModel(core, transfo, 1024, true);
+			draw3dModel(core, transfo, 1024, eclipseFactor, true);
 		return;
 	}
 
@@ -2968,14 +2972,13 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 				{isInterstellar, Vec3f(1   , 0.25, 0.25)},
 				{isUNDEFINED,    Vec3f(1   , 0   , 0   )}};
 
-				Vec3f color=colorMap.value(getPlanetType(), Vec3f(1, 0, 0));
+				Vec3f color=colorMap.value(pType, Vec3f(1, 0, 0));
 
 				ss->drawAsteroidMarker(core, &sPainter, screenPos[0], screenPos[1], color); // This does not draw directly, but record an entry to be drawn in a batch.
 			}
 		}
 
-		//if (pType<Planet::isAsteroid)
-			draw3dModel(core,transfo,static_cast<float>(screenRd));
+		draw3dModel(core,transfo,static_cast<float>(screenRd), eclipseFactor);
 	}
 	else if (permanentDrawingOrbits) // A special case for demos
 		drawOrbit(core);
@@ -3461,7 +3464,7 @@ void Planet::deinitFBO()
 	shadowInitialized = false;
 }
 
-void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP transfo, float screenRd, bool drawOnlyRing)
+void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP transfo, float screenRd, double solarEclipseFactor, bool drawOnlyRing)
 {
 	// This is the main method drawing a planet 3d model
 	// Some work has to be done on this method to make the rendering nicer
@@ -3473,7 +3476,7 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 	static SolarSystem* ssm = GETSTELMODULE(SolarSystem);
 
 	// Find extinction settings to change colors. The method is rather ad-hoc.
-	const float vMagnitude=getVMagnitude(core);
+	const float vMagnitude=getVMagnitude(core, solarEclipseFactor);
 	const float vMagnitudeWithExtinction=getVMagnitudeWithExtinction(core, vMagnitude);
 
 	const float extinctedMag=vMagnitudeWithExtinction-vMagnitude; // this is net value of extinction, in mag.
@@ -3483,7 +3486,7 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 	const bool isSun  = this==ssm->getSun();
 	const bool isMoon = this==ssm->getMoon();
 	const bool currentLocationIsEarth = core->getCurrentLocation().planetName == L1S("Earth");
-	const float eclipseFactor = (screenRd>1.f || (isSun && currentLocationIsEarth)) ? static_cast<float>(ssm->getSolarEclipseFactor(core).first) : 1.f;
+	const float eclipseFactor = (screenRd>1.f || (isSun && currentLocationIsEarth)) ? static_cast<float>(solarEclipseFactor) : 1.;
 
 	if (isSun && currentLocationIsEarth)
 	{

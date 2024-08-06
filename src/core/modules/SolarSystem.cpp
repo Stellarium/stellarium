@@ -1524,6 +1524,8 @@ void SolarSystem::computePositions(double dateJDE, PlanetP observerPlanet)
 {
 	StelCore *core=StelApp::getInstance().getCore();
 	const bool withAberration=core->getUseAberration();
+	const bool observerPlanetIsEarth = observerPlanet==getEarth();
+
 	// We distribute computing over a few threads from the current threadpool, but also compute one stride in the main thread so that this does not starve.
 	// Given the comparably low impact of planetary positions on the overall frame time, we don't need more than 4 extra threads. (Profiled with 12.000 objects.)
 //	const int availablePoolThreads=qBound(0, QThreadPool::globalInstance()->maxThreadCount()-QThreadPool::globalInstance()->activeThreadCount(), 4); // qMax(1, QThreadPool::globalInstance()->maxThreadCount()-QThreadPool::globalInstance()->activeThreadCount());
@@ -1608,7 +1610,7 @@ void SolarSystem::computePositions(double dateJDE, PlanetP observerPlanet)
 					const auto planetPos = it->data()->getHeliocentricEclipticPos();
 					const double lightTimeDays = (planetPos-obsPosJDE).norm() * (AU / (SPEED_OF_LIGHT * 86400.));
 					Vec3d aberrationPush(0.);
-					if (withAberration && (observerPlanet->englishName!="Earth" || it->data()->englishName!="Moon"))
+					if (withAberration && (!observerPlanetIsEarth || it->data() != getMoon()))
 						aberrationPush=lightTimeDays*aberrationPushSpeed;
 					it->data()->computePosition(dateJDE-lightTimeDays, aberrationPush);
 				}
@@ -1683,7 +1685,7 @@ void SolarSystem::computePositions(double dateJDE, PlanetP observerPlanet)
 				const auto planetPos = it->data()->getHeliocentricEclipticPos();
 				const double lightTimeDays = (planetPos-obsPosJDE).norm() * (AU / (SPEED_OF_LIGHT * 86400.));
 				Vec3d aberrationPush(0.);
-				if (withAberration && (observerPlanet->englishName!="Earth" || it->data()->englishName!="Moon"))
+				if (withAberration && (!observerPlanetIsEarth || it->data() != getMoon()))
 					aberrationPush=lightTimeDays*aberrationPushSpeed;
 				// The next call may already do nothing if the time difference to the previous round is not large enough.
 				it->data()->computePosition(dateJDE-lightTimeDays, aberrationPush);
@@ -1809,19 +1811,19 @@ void SolarSystem::draw(StelCore* core)
 	const float sdLimitMag=static_cast<float>(core->getSkyDrawer()->getLimitMagnitude());
 	const float maxMagLabel = (sdLimitMag<5.f ? sdLimitMag :
 			5.f+(sdLimitMag-5.f)*1.2f) +(static_cast<float>(labelsAmount)-3.f)*1.2f;
+	const double eclipseFactor=getSolarEclipseFactor(core).first;
 
 	// Draw the elements
 	for (const auto& p : std::as_const(systemPlanets))
 	{
 		if ( (p != sun) || (/* (p == sun) && */ !(core->getSkyDrawer()->getFlagDrawSunAfterAtmosphere())))
-			p->draw(core, maxMagLabel, planetNameFont);
+			p->draw(core, maxMagLabel, planetNameFont, eclipseFactor);
 	}
 	if (nbMarkers>0)
 	{
 		StelPainter sPainter(core->getProjection2d());
 		postDrawAsteroidMarkers(&sPainter);
 	}
-
 
 	if (sObjMgr->getFlagSelectedObjectPointer() && getFlagPointer())
 		drawPointer(core);
@@ -2271,14 +2273,14 @@ StelObjectP SolarSystem::searchByName(const QString& name) const
 
 float SolarSystem::getPlanetVMagnitude(QString planetName, bool withExtinction) const
 {
+	StelCore *core=StelApp::getInstance().getCore();
+	double eclipseFactor=getSolarEclipseFactor(core).first;
 	PlanetP p = searchByEnglishName(planetName);
 	if (p.isNull()) // Possible was asked the common name of minor planet?
 		p = searchMinorPlanetByEnglishName(planetName);
-	float r = 0.f;
+	float r = p->getVMagnitude(core, eclipseFactor);
 	if (withExtinction)
-		r = p->getVMagnitudeWithExtinction(StelApp::getInstance().getCore());
-	else
-		r = p->getVMagnitude(StelApp::getInstance().getCore());
+		r = p->getVMagnitudeWithExtinction(core, r);
 	return r;
 }
 
