@@ -229,7 +229,12 @@ public:
 	double getCloseViewFov(const StelCore* core) const override;
 	double getSatellitesFov(const StelCore* core) const override;
 	double getParentSatellitesFov(const StelCore* core) const override;
+	//! This actually calls getVMagnitude(core, 1.0);
+	//! If there is danger the object is partly obscured (eclipsed), prefer to use getVMagnitude(core, eclipseFactor).
 	float getVMagnitude(const StelCore* core) const override;
+	//! Compute visual magnitude following the algorithm set in setApparentMagnitudeAlgorithm().
+	//! This is most important to compute Solar magnitude during a solar eclipse.
+	//! @param eclipseFactor can be computed with SolarSystem::getSolarEclipseFactor(core)
 	virtual float getVMagnitude(const StelCore* core, double eclipseFactor) const;
 	float getSelectPriority(const StelCore* core) const override;
 	Vec3f getInfoColor(void) const override;

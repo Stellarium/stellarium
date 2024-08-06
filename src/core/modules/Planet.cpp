@@ -2339,8 +2339,7 @@ float Planet::getMeanOppositionMagnitude() const
 // Computation of the visual magnitude (V band) of the planet.
 float Planet::getVMagnitude(const StelCore* core) const
 {
-	double ef=GETSTELMODULE(SolarSystem)->getSolarEclipseFactor(core).first;
-	return getVMagnitude(core, ef);
+	return getVMagnitude(core, 1.);
 }
 float Planet::getVMagnitude(const StelCore* core, double eclipseFactor) const
 {
@@ -2948,7 +2947,7 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 				{isInterstellar, Vec3f(1   , 0.25, 0.25)},
 				{isUNDEFINED,    Vec3f(1   , 0   , 0   )}};
 
-				Vec3f color=colorMap.value(getPlanetType(), Vec3f(1, 0, 0));
+				Vec3f color=colorMap.value(pType, Vec3f(1, 0, 0));
 
 				ss->drawAsteroidMarker(core, &sPainter, screenPos[0], screenPos[1], color); // This does not draw directly, but record an entry to be drawn in a batch.
 			}
