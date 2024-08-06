@@ -2839,9 +2839,10 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 		return;
 
 	static SolarSystem *ss=GETSTELMODULE(SolarSystem);
+	const float vMagnitude=getVMagnitude(core);
 
 	// Exclude drawing if user set a hard limit magnitude.
-	if (core->getSkyDrawer()->getFlagPlanetMagnitudeLimit() && (getVMagnitude(core) > static_cast<float>(core->getSkyDrawer()->getCustomPlanetMagnitudeLimit())))
+	if (core->getSkyDrawer()->getFlagPlanetMagnitudeLimit() && ( vMagnitude > static_cast<float>(core->getSkyDrawer()->getCustomPlanetMagnitudeLimit())))
 	{
 		// Get the eclipse factor to avoid hiding the Moon during a total solar eclipse, or planets in transit over the Solar disk.
 		// Details: https://answers.launchpad.net/stellarium/+question/395139
@@ -2858,7 +2859,7 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 	// If asteroid is too faint to be seen, don't bother rendering. (Massive speedup if people have hundreds of orbital elements!)
 	// AW: Added a special case for educational purpose to drawing orbits for the Solar System Observer
 	// Details: https://sourceforge.net/p/stellarium/discussion/278769/thread/4828ebe4/
-	if ((ss->getMarkerValue()==0.) && ((getVMagnitude(core)-5.0f) > core->getSkyDrawer()->getLimitMagnitude()) && pType>=Planet::isAsteroid && !core->getCurrentLocation().planetName.contains("Observer", Qt::CaseInsensitive))
+	if ((ss->getMarkerValue()==0.) && ((vMagnitude-5.0f) > core->getSkyDrawer()->getLimitMagnitude()) && pType>=Planet::isAsteroid && !core->getCurrentLocation().planetName.contains("Observer", Qt::CaseInsensitive))
 	{
 		return;
 	}
@@ -2917,7 +2918,7 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 		// by putting here, only draw orbit if Planet is visible for clarity
 		drawOrbit(core);  // TODO - fade in here also...
 
-		if (flagLabels && ang_dist>0.25f && maxMagLabels>getVMagnitudeWithExtinction(core))
+		if (flagLabels && ang_dist>0.25f && maxMagLabels>getVMagnitudeWithExtinction(core, vMagnitude))
 			labelsFader=true;
 		else
 			labelsFader=false;
@@ -2927,7 +2928,7 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 			StelPainter sPainter(prj);
 			drawHints(core, sPainter, planetNameFont);
 			// TODO: Decide whether isComet should be moved up in the enum list to allow exclusion!
-			if (getPlanetType()>=Planet::isAsteroid)
+			if (pType>=Planet::isAsteroid)
 			{
 				static const QMap<Planet::PlanetType, Vec3f> colorMap={
 				{isAsteroid,     Vec3f(0.35, 0.35, .35 )},
@@ -2947,7 +2948,8 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 			}
 		}
 
-		draw3dModel(core,transfo,static_cast<float>(screenRd));
+		//if (pType<Planet::isAsteroid)
+			draw3dModel(core,transfo,static_cast<float>(screenRd));
 	}
 	else if (permanentDrawingOrbits) // A special case for demos
 		drawOrbit(core);
@@ -3445,21 +3447,24 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 	static SolarSystem* ssm = GETSTELMODULE(SolarSystem);
 
 	// Find extinction settings to change colors. The method is rather ad-hoc.
-	const float extinctedMag=getVMagnitudeWithExtinction(core)-getVMagnitude(core); // this is net value of extinction, in mag.
+	const float vMagnitude=getVMagnitude(core);
+	const float vMagnitudeWithExtinction=getVMagnitudeWithExtinction(core, vMagnitude);
+
+	const float extinctedMag=vMagnitudeWithExtinction-vMagnitude; // this is net value of extinction, in mag.
 	const float magFactorGreen=powf(0.85f, 0.6f*extinctedMag);
 	const float magFactorBlue=powf(0.6f, 0.5f*extinctedMag);
 
 	const bool isSun  = this==ssm->getSun();
 	const bool isMoon = this==ssm->getMoon();
 	const bool currentLocationIsEarth = core->getCurrentLocation().planetName == "Earth";
+	const double eclipseFactor = (screenRd>1.f || (isSun && currentLocationIsEarth)) ? ssm->getSolarEclipseFactor(core).first : 1.;
 
 	if (isSun && currentLocationIsEarth)
 	{
 		LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
-		const float eclipseFactor = static_cast<float>(ssm->getSolarEclipseFactor(core).first);
 		// This alpha ensures 0 for complete sun, 1 for eclipse better 1e-10, with a strong increase towards full eclipse. We still need to square it.
 		// But without atmosphere we should indeed draw a visible corona by default!
-		const float alpha= ( !lmgr->getFlagAtmosphere() && ssm->getFlagPermanentSolarCorona() ? 0.7f : -0.1f*qMax(-10.0f, log10f(eclipseFactor)));
+		const float alpha= ( !lmgr->getFlagAtmosphere() && ssm->getFlagPermanentSolarCorona() ? 0.7f : -0.1f*qMax(-10.0f, log10f(static_cast<float>(eclipseFactor))));
 		StelMovementMgr* mmgr = GETSTELMODULE(StelMovementMgr);
 		float rotationAngle=(mmgr->getEquatorialMount() ? 0.0f : getParallacticAngle(core) * M_180_PIf);
 
@@ -3496,7 +3501,7 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 		// For the sun, we have again to use the stronger extinction to avoid color mismatch.
 		Vec3f haloColorToDraw(haloColor[0], powf(0.75f, extinctedMag) * haloColor[1], powf(0.42f, 0.9f*extinctedMag) * haloColor[2]);
 
-		float haloMag=qMin(-18.f, getVMagnitudeWithExtinction(core)); // for sun on horizon, mag can go quite low, shrinking the halo too much.
+		float haloMag=qMin(-18.f, vMagnitudeWithExtinction); // for sun on horizon, mag can go quite low, shrinking the halo too much.
 		core->getSkyDrawer()->postDrawSky3dModel(&sPainter, tmp, surfArcMin2, haloMag, haloColorToDraw, isSun);
 	}
 
@@ -3544,7 +3549,6 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 		Vec3d sunPos = ssm->getSun()->getEclipticPos() + ssm->getSun()->getAberrationPush();
 		core->getHeliocentricEclipticModelViewTransform()->forward(sunPos);
 		light.position=sunPos;
-		const double eclipseFactor = static_cast<float>(ssm->getSolarEclipseFactor(core).first);
 
 		// Set the light parameters taking sun as the light source
 		light.diffuse.set(1.f,  magFactorGreen*1.f,  magFactorBlue*1.f);
@@ -3660,7 +3664,7 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 
 		if (!isSun || drawSunHalo)
 		{
-			float haloMag=getVMagnitudeWithExtinction(core);
+			float haloMag=vMagnitudeWithExtinction;
 			// EXPERIMENTAL: for sun on horizon, mag can go quite low, shrinking the halo too much.
 			if (isSun)
 				haloMag=qMin(haloMag, -18.f);
