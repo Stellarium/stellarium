@@ -2888,13 +2888,11 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 	// This removed totally the Planet shaking bug!!!
 	StelProjector::ModelViewTranformP transfo = core->getHeliocentricEclipticModelViewTransform();
 	transfo->combine(mat);
-	if (getEnglishName() == core->getCurrentLocation().planetName)
+	// The first test is much cheaper than getEnglishName() when having many minor bodies. Only major planets can have rings.
+	if (pType==isPlanet && getEnglishName() == core->getCurrentLocation().planetName && rings)
 	{
 		// Draw the rings if we are located on a planet with rings, but not the planet itself.
-		if (rings)
-		{
-			draw3dModel(core, transfo, 1024, true);
-		}
+		draw3dModel(core, transfo, 1024, true);
 		return;
 	}
 
@@ -4749,17 +4747,16 @@ Vec3f Planet::getCurrentOrbitColor() const
 		}
 		case ocsMajorPlanets:
 		{
-			const QString pName = getEnglishName().toLower();
 			const QMap<QString, Vec3f>majorPlanetColorMap = {
-				{ "mercury", orbitMercuryColor},
-				{ "venus",   orbitVenusColor  },
-				{ "earth",   orbitEarthColor  },
-				{ "mars",    orbitMarsColor   },
-				{ "jupiter", orbitJupiterColor},
-				{ "saturn",  orbitSaturnColor },
-				{ "uranus",  orbitUranusColor },
-				{ "neptune", orbitNeptuneColor}};
-			orbColor=majorPlanetColorMap.value(pName, orbitColor);
+				{ "Mercury", orbitMercuryColor},
+				{ "Venus",   orbitVenusColor  },
+				{ "Earth",   orbitEarthColor  },
+				{ "Mars",    orbitMarsColor   },
+				{ "Jupiter", orbitJupiterColor},
+				{ "Saturn",  orbitSaturnColor },
+				{ "Uranus",  orbitUranusColor },
+				{ "Neptune", orbitNeptuneColor}};
+			orbColor=majorPlanetColorMap.value(englishName, orbitColor);
 			break;
 		}
 		case ocsOneColor:
