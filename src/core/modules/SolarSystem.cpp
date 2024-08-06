@@ -1543,8 +1543,7 @@ void SolarSystem::draw(StelCore* core)
 	// Draw the elements
 	for (const auto& p : std::as_const(systemPlanets))
 	{
-		if ( p->getEnglishName() != L1S("Sun") ||
-				(p->getEnglishName() == L1S("Sun") && !core->getSkyDrawer()->getFlagDrawSunAfterAtmosphere()))
+		if ( (p != sun) || (/* (p == sun) && */ !(core->getSkyDrawer()->getFlagDrawSunAfterAtmosphere())))
 			p->draw(core, maxMagLabel, planetNameFont);
 	}
 

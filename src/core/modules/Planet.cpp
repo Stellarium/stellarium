@@ -2915,13 +2915,12 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 	// This removed totally the Planet shaking bug!!!
 	StelProjector::ModelViewTranformP transfo = core->getHeliocentricEclipticModelViewTransform();
 	transfo->combine(mat);
+
 	if (getEnglishName() == core->getCurrentLocation().planetName)
 	{
 		// Draw the rings if we are located on a planet with rings, but not the planet itself.
 		if (rings)
-		{
 			draw3dModel(core, transfo, 1024, true);
-		}
 		return;
 	}
 
