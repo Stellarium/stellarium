@@ -2894,10 +2894,11 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 	StelProjector::ModelViewTranformP transfo = core->getHeliocentricEclipticModelViewTransform();
 	transfo->combine(mat);
 	// The first test is much cheaper than getEnglishName() when having many minor bodies. Only major planets can have rings.
-	if (pType==isPlanet && getEnglishName() == core->getCurrentLocation().planetName && rings)
+	if (pType==isPlanet && getEnglishName() == core->getCurrentLocation().planetName)
 	{
 		// Draw the rings if we are located on a planet with rings, but not the planet itself.
-		draw3dModel(core, transfo, 1024, eclipseFactor, true);
+		if (rings)
+			draw3dModel(core, transfo, 1024, eclipseFactor, true);
 		return;
 	}
 
