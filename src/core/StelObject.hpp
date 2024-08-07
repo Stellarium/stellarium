@@ -263,7 +263,9 @@ public:
 	
 	//! Return object's apparent V magnitude as seen from observer including extinction.
 	//! Extinction obviously only if atmosphere=on.
-	float getVMagnitudeWithExtinction(const StelCore* core) const;
+	//! If you already know vMag, it is wise to provide it in the optional @param knownVMag.
+	//! Else it is called from getVMagnitude() which may be costly.
+	float getVMagnitudeWithExtinction(const StelCore* core, const float knownVMag=-1000.f) const;
 
 	//! Return a priority value which is used to discriminate objects by priority
 	//! As for magnitudes, the lower is the higher priority

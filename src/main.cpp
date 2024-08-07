@@ -49,6 +49,8 @@
 #include <QTranslator>
 #include <QNetworkDiskCache>
 #include <QThread>
+#include <QThreadPool>
+
 
 #ifdef Q_OS_MACOS
 #include <QEvent>
@@ -466,6 +468,9 @@ int main(int argc, char **argv)
 
 	mainWin.show();
 	SplashScreen::finish(&mainWin);
+	qDebug() << "Max thread count (Global Pool): " << QThreadPool::globalInstance()->maxThreadCount();
+	// Share available cores with the TextureLoader and other jobs
+	QThreadPool::globalInstance()->setMaxThreadCount(qMax(1,QThread::idealThreadCount()/2-1));
 	app.exec();
 	mainWin.deinit();
 

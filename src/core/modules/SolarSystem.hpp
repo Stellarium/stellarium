@@ -48,7 +48,7 @@ typedef QSharedPointer<Planet> PlanetP;
 //! This class and the handling of solar system data has seen many changes, and unfortunately, not much has been consistently documented.
 //! The following is a reverse-engineered analysis.
 //!
-class SolarSystem : public StelObjectModule
+class SolarSystem : public StelObjectModule, protected QOpenGLFunctions
 {
 	Q_OBJECT
 	// This is a "forwarding property" which sets labeling into all planets.
@@ -59,6 +59,7 @@ class SolarSystem : public StelObjectModule
 	Q_PROPERTY(int trailsThickness			READ getTrailsThickness			WRITE setTrailsThickness		NOTIFY trailsThicknessChanged)
 	// This is a "forwarding property" only, without own variable.
 	Q_PROPERTY(bool flagHints			READ getFlagHints			WRITE setFlagHints			NOTIFY flagHintsChanged)
+	Q_PROPERTY(bool flagMarkers			READ getFlagMarkers			WRITE setFlagMarkers			NOTIFY markersDisplayedChanged)
 	Q_PROPERTY(bool flagPointer			READ getFlagPointer			WRITE setFlagPointer			NOTIFY flagPointerChanged)
 	Q_PROPERTY(bool flagNativePlanetNames		READ getFlagNativePlanetNames		WRITE setFlagNativePlanetNames		NOTIFY flagNativePlanetNamesChanged)
 	Q_PROPERTY(bool planetsDisplayed		READ getFlagPlanets			WRITE setFlagPlanets			NOTIFY flagPlanetsDisplayedChanged)
@@ -142,6 +143,7 @@ class SolarSystem : public StelObjectModule
 	Q_PROPERTY(int orbitsThickness			READ getOrbitsThickness			WRITE setOrbitsThickness		NOTIFY orbitsThicknessChanged)
 	Q_PROPERTY(bool flagDrawMoonHalo		READ getFlagDrawMoonHalo		WRITE setFlagDrawMoonHalo		NOTIFY flagDrawMoonHaloChanged)
 	Q_PROPERTY(bool flagDrawSunHalo			READ getFlagDrawSunHalo			WRITE setFlagDrawSunHalo		NOTIFY flagDrawSunHaloChanged)
+	Q_PROPERTY(int extraThreads                     READ getExtraThreads                    WRITE setExtraThreads                   NOTIFY extraThreadsChanged)
 
 public:
 	SolarSystem();
@@ -247,6 +249,11 @@ public slots:
 	void setFlagHints(bool b);
 	//! Get the current value of the flag which determines if planet hints are drawn or hidden along labels
 	bool getFlagHints() const;
+
+	//! Set flag which determines if planet markers are drawn for minor bodies
+	void setFlagMarkers(bool b);
+	//! Get the current value of the flag which determines if planet markers are drawn for minor bodies
+	bool getFlagMarkers() const;
 
 	//! Set flag which determines if planet labels are drawn or hidden.
 	void setFlagLabels(bool b);
@@ -741,10 +748,14 @@ public slots:
 	//! The texture path starts in the scripts directory.
 	void setTextureForPlanet(const QString &planetName, const QString &texName);
 
+	int getExtraThreads() const {return extraThreads;}
+	void setExtraThreads(int n){extraThreads=n;}
+
 signals:
 	void labelsDisplayedChanged(bool b);
 	void flagOrbitsChanged(bool b);
 	void flagHintsChanged(bool b);
+	void markersDisplayedChanged(bool b);
 	void flagDrawMoonHaloChanged(bool b);
 	void flagDrawSunHaloChanged(bool b);
 	void trailsDisplayedChanged(bool b);
@@ -832,6 +843,8 @@ signals:
 	void solarSystemDataReloaded();
 	void requestEphemerisVisualization();
 
+	void extraThreadsChanged(const int);
+
 public:
 	///////////////////////////////////////////////////////////////////////////
 	// Other public methods
@@ -868,6 +881,7 @@ public:
 	bool removeMinorPlanet(QString name);
 
 	//! Determines relative amount of sun visible from the observer's position (first element) and the Planet object pointer for eclipsing celestial body (second element).
+	//! Full sun is 1.0, fully covered sun is 0.0.
 	//! In the unlikely event of multiple objects in front of the sun, only the largest will be reported.
 	QPair<double, PlanetP> getSolarEclipseFactor(const StelCore *core) const;
 
@@ -1157,6 +1171,59 @@ private:
 	// note that we must also always compensate to light time travel, so likely each computation has to be done twice,
 	// with current JDE and JDE-lightTime(distance).
 	QList<Orbit*> orbits;           // Pointers on created elliptical orbits. 0.16pre: WHY DO WE NEED THIS???
+
+	//! Number of additional threads. This could be automatically derived, but for now we can experiment.
+	int extraThreads;
+
+	// BEGIN OF BLOCK RELATED TO MASS MARKER DISPLAY
+	// Variables used for GL optimization when displaying little markers for the minor bodies.
+	// These data structures were borrowed from StelSkyDrawer. However, we need only one color.
+	// Maybe, to extend the idea, have several such Arrays for category-colored main belt, Jupiter Trojans, NEA, KBO etc.
+	//! Vertex format for a minor body marker.
+	//! Texture pos is stored in another separately.
+	struct MarkerVertex {
+		Vec2f pos;
+		unsigned char color[4]; // can we remove that?
+	};
+	static_assert(sizeof(MarkerVertex) == 2*4+4, "Size of MarkerVertex must be 12 bytes");
+
+	//! Buffer for storing the marker positions
+	MarkerVertex* markerArray;
+	//! Buffer for storing the texture coordinate array data.
+	unsigned char* textureCoordArray;
+
+	class QOpenGLShaderProgram* markerShaderProgram;
+	struct MarkerShaderVars {
+		int projectionMatrix;
+		int texCoord;
+		int pos;
+		int color; // Can we remove that?
+		int texture;
+	};
+	MarkerShaderVars markerShaderVars;
+
+	//! Current number of sources stored in the buffer (still to display)
+	unsigned int nbMarkers;
+	std::unique_ptr<QOpenGLVertexArrayObject> vao;
+	std::unique_ptr<QOpenGLBuffer> vbo;
+	//! Binds actual VAO if it's supported, sets up the relevant state manually otherwise.
+	void bindVAO();
+	//! Sets the vertex attribute states for the currently bound VAO so that glDraw* commands can work.
+	void setupCurrentVAO();
+	//! Binds zero VAO if VAO is supported, manually disables the relevant vertex attributes otherwise.
+	void releaseVAO();
+
+	//! Maximum number of markers which can be stored in the buffers
+	constexpr static unsigned int maxMarkers=2048;
+	void postDrawAsteroidMarkers(StelPainter *sPainter);
+	StelTextureSP markerCircleTex; // An optional marker to have "something" in the sky even if object not visible.
+	LinearFader markerFader;         // Useful for markers displayed for minor bodies regardless of magnitude
+
+public:
+	bool drawAsteroidMarker(StelCore* core, StelPainter* sPainter, const float x, const float y, Vec3f &color);
+	float getMarkerValue() const {return markerFader.getInterstate();}
+
+	// END OF BLOCK RELATED TO MASS MARKER DISPLAY
 };
 
 

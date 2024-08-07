@@ -31,7 +31,7 @@
 #include "SolarSystem.hpp"
 #include "PointerCoordinates.hpp"
 #include "PointerCoordinatesWindow.hpp"
-#include "planetsephems/precession.h"
+#include "planetsephems/precession.hpp"
 
 #include <QFontMetrics>
 #include <QSettings>

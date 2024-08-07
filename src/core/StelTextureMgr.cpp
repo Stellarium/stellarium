@@ -34,8 +34,8 @@ StelTextureMgr::StelTextureMgr(QObject *parent)
 	: QObject(parent), glMemoryUsage(0), loaderThreadPool(new QThreadPool(this))
 {
 #ifdef Q_PROCESSOR_X86_64
-	//allow up to 16 textures to be loaded in parallel. Do not use more than half of the cores, as this may cause issues (#3148)
-	loaderThreadPool->setMaxThreadCount(qBound(1,QThread::idealThreadCount()/2-1, 16));
+	//allow up to 8 textures to be loaded in parallel. Do not use more than half of the cores, as this may cause issues (#3148)
+	loaderThreadPool->setMaxThreadCount(qBound(1,QThread::idealThreadCount()/2-1, 8));
 #else
 	//on other archs, for now ensure that just 1 texture is at once in background
 	//otherwise, for large textures loaded in parallel (some scenery3d scenes), the risk of an out-of-memory error is greater on 32bit systems
@@ -86,6 +86,12 @@ StelTextureSP StelTextureMgr::createTexture(const QString& afilename, const Stel
 		image=QImage(fuchsia_xpm);
 		if (image.isNull())
 			qWarning() << "Loading Fuchsia replacement failed.";
+	}
+
+	if ((image.width()<16) && (image.height()<16))
+	{
+		qWarning() << "Undersize texture image" << tex->fullPath << "needs rescaling to 16x16 ...";
+		image=image.scaled(qMax(image.width(), 16), qMax(image.height(), 16), Qt::IgnoreAspectRatio, Qt::FastTransformation);
 	}
 
 	// Try to use a texture image even if of excessive size.

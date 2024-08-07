@@ -345,6 +345,7 @@ void ConfigurationDialog::createDialogContent()
 	connectBoolProperty(ui->focusOnDaySpinnerCheckBox,			"StelGui.flagEnableFocusOnDaySpinner");
 	ui->overwriteTextColorButton->setup("StelApp.overwriteInfoColor", "color/info_text_color");
 	ui->daylightTextColorButton ->setup("StelApp.daylightInfoColor",  "color/daylight_text_color");
+	connectIntProperty(ui->solarSystemThreadNumberSpinBox, "SolarSystem.extraThreads");
 
 	// Font selection. We use a hidden, but documented entry in config.ini to optionally show a font selection option.
 	connectIntProperty(ui->screenFontSizeSpinBox, "StelApp.screenFontSize");
@@ -865,6 +866,7 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("viewing/use_luminance_adaptation",		propMgr->getStelPropertyValue("StelSkyDrawer.flagLuminanceAdaptation").toBool());
 	conf->setValue("astro/flag_planets",					propMgr->getStelPropertyValue("SolarSystem.planetsDisplayed").toBool());
 	conf->setValue("astro/flag_planets_hints",				propMgr->getStelPropertyValue("SolarSystem.flagHints").toBool());
+	conf->setValue("astro/flag_planets_markers",				propMgr->getStelPropertyValue("SolarSystem.flagMarkers").toBool());
 	conf->setValue("astro/flag_planets_orbits",				propMgr->getStelPropertyValue("SolarSystem.flagOrbits").toBool());
 	conf->setValue("astro/flag_permanent_orbits",			propMgr->getStelPropertyValue("SolarSystem.flagPermanentOrbits").toBool());
 	conf->setValue("astro/object_orbits_thickness",			propMgr->getStelPropertyValue("SolarSystem.orbitsThickness").toInt());
@@ -1054,6 +1056,8 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("astro/flag_aberration",			core->getUseAberration());
 	conf->setValue("astro/aberration_factor",		core->getAberrationFactor());
 	conf->setValue("astro/flag_topocentric_coordinates",	core->getUseTopocentricCoordinates());
+
+	conf->setValue("astro/solar_system_threads",            propMgr->getStelPropertyValue("SolarSystem.extraThreads").toInt());
 
 	// view dialog / DSO tag settings
 	nmgr->storeCatalogFilters();

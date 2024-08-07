@@ -32,8 +32,8 @@
 #include "StelModuleMgr.hpp"
 #include "LandscapeMgr.hpp"
 #include "SpecificTimeMgr.hpp"
-#include "planetsephems/sidereal_time.h"
-#include "planetsephems/precession.h"
+#include "planetsephems/sidereal_time.hpp"
+#include "planetsephems/precession.hpp"
 
 #include <QRegularExpression>
 #include <QDebug>
@@ -315,11 +315,11 @@ float StelObject::getSelectPriority(const StelCore* core) const
 	return qMin(getVMagnitudeWithExtinction(core), 15.0f);
 }
 
-float StelObject::getVMagnitudeWithExtinction(const StelCore* core) const
+float StelObject::getVMagnitudeWithExtinction(const StelCore* core, const float knownVMag) const
 {
 	Vec3d altAzPos = getAltAzPosGeometric(core);
 	altAzPos.normalize();
-	float vMag = getVMagnitude(core);
+	float vMag = (knownVMag>-1000.f ? knownVMag : getVMagnitude(core));
 	// without the test, planets flicker stupidly in fullsky atmosphere-less view.
 	if (core->getSkyDrawer()->getFlagHasAtmosphere())
 		core->getSkyDrawer()->getExtinction().forward(altAzPos, &vMag);

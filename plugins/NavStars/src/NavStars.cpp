@@ -39,7 +39,7 @@
 #include <QSharedPointer>
 #include <QMetaEnum>
 
-#include "planetsephems/sidereal_time.h"
+#include "planetsephems/sidereal_time.hpp"
 
 StelModule* NavStarsStelPluginInterface::getStelModule() const
 {

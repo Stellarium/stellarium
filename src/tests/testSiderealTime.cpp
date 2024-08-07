@@ -23,8 +23,8 @@
 
 #include "tests/testSiderealTime.hpp"
 #include "StelUtils.hpp"
-#include "VecMath.hpp"
 #include "Orbit.hpp"
+#include "sidereal_time.hpp"
 
 QTEST_GUILESS_MAIN(TestSiderealTime)
 

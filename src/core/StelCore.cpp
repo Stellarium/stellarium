@@ -40,7 +40,7 @@
 #include "StelMainView.hpp"
 #include "EphemWrapper.hpp"
 #include "NomenclatureItem.hpp"
-#include "precession.h"
+#include "precession.hpp"
 
 #include <QSettings>
 #include <QDebug>

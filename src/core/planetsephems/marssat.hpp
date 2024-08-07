@@ -48,12 +48,9 @@ in MarsSatV1-0.f are
 
 ****************************************************************/
 
-#ifndef MARSSAT_H
-#define MARSSAT_H
+#ifndef MARSSAT_HPP
+#define MARSSAT_HPP
 
-#ifdef __cplusplus
-extern "C" {
-#endif
 
 #define MARS_SAT_PHOBOS 0
 #define MARS_SAT_DEIMOS 1
@@ -71,8 +68,5 @@ void GetMarsSatOsculatingCoor(const double jd0, const double jd, const int body,
    * xyz is a 6-vector
   */
 
-#ifdef __cplusplus
-}
-#endif
 
 #endif

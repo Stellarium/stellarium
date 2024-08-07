@@ -229,10 +229,14 @@ double MinorPlanet::getSiderealPeriod() const
 
 float MinorPlanet::getVMagnitude(const StelCore* core) const
 {
+	return getVMagnitude(core, 1.);
+}
+float MinorPlanet::getVMagnitude(const StelCore* core, const double eclipseFactor) const
+{
 	//If the H-G system is not used, use the default radius/albedo mechanism
 	if (slopeParameter < -9.99f) // G can be somewhat <0! Set to -10 to mark invalid.
 	{
-		return Planet::getVMagnitude(core);
+		return Planet::getVMagnitude(core, eclipseFactor);
 	}
 
 	//Calculate phase angle

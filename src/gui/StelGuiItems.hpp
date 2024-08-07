@@ -338,6 +338,9 @@ private:
 	bool flagFovDms;
 	bool flagTimeJd;
 	bool flagShowTZ;
+	// Store these names. They can potentially be changed each frame, but lookup from SolarSystem is very costly.
+	QString planetNameEnglish;
+	QString planetNameI18n;
 
 	QGraphicsSimpleTextItem* helpLabel;
 };

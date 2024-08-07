@@ -79,6 +79,14 @@
 
 #define stelpow10f(x) std::exp((x) * 2.3025850930f)
 
+// Allow parallel evaluation of std::transform_reduce(std::execution::par, ...) where known.
+// Not all compilers know it. Use std::transform_reduce(STD_EXECUTION_PAR_COMMA ...) for the general case.
+#if STD_EXECUTION_KNOWN
+# define STD_EXECUTION_PAR_COMMA std::execution::par,
+#else
+# define STD_EXECUTION_PAR_COMMA
+#endif
+
 //! @namespace StelUtils contains general purpose utility functions.
 namespace StelUtils
 {

@@ -1,6 +1,7 @@
 /*
-Copyright (C) 2001 Liam Girdwood <liam@nova-ioe.org>
+Copyright (C) 2000 Liam Girdwood <liam@nova-ioe.org>
 Copyright (C) 2003 Fabien Chereau
+Copyright (C) 2010 Georg Zotti (parts)
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU Library General Public License as published by
@@ -17,39 +18,15 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 */
 
-#ifndef PLUTO_H
-#define PLUTO_H
-
-#ifdef __cplusplus
-extern "C" {
-#endif
+#ifndef SIDEREAL_TIME_HPP
+#define SIDEREAL_TIME_HPP
 
 
-struct pluto_argument
-{
-	double J, S, P;
-};
+/* Calculate mean sidereal time (degrees) from date. */
+double get_mean_sidereal_time (double JD, double JDE);
 
-struct pluto_longitude
-{
-	double A,B;
-};
-
-struct pluto_latitude
-{
-	double A,B;
-};
-
-struct pluto_radius
-{
-	double A,B;
-};
-
-void get_pluto_helio_coords (double JD, double * X, double * Y, double * Z);
-
-#ifdef __cplusplus
-}
-#endif
+/* Calculate apparent sidereal time (degrees) from date. We need JD(UT) and JDE(TT) here to accurately compute nutation. */
+double get_apparent_sidereal_time (double JD, double JDE);
 
 
-#endif
+#endif /* SIDEREAL_TIME_HPP */

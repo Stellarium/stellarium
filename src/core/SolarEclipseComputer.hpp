@@ -23,9 +23,10 @@
 #define SOLARECLIPSE_HPP
 
 #include <deque>
-#include <vector>
 #include <variant>
-#include "Planet.hpp"
+#include <vector>
+#include <QString>
+#include <QTextStream>
 
 class StelCore;
 class StelLocaleMgr;
@@ -154,13 +155,13 @@ public:
 	EclipseMapData generateEclipseMap(const double JDMid) const;
 
 	//! Geographic coordinates of extreme contact
-	GeoPoint getContactCoordinates(double x, double y, double d, double mu) const;
+	static GeoPoint getContactCoordinates(double x, double y, double d, double mu);
 	//! Geographic coordinates where solar eclipse begins/ends at sunrise/sunset
-	GeoPoint getRiseSetLineCoordinates(bool first, double x, double y, double d, double L, double mu) const;
+	static GeoPoint getRiseSetLineCoordinates(bool first, double x, double y, double d, double L, double mu);
 	//! Geographic coordinates where maximum solar eclipse occurs at sunrise/sunset
 	GeoPoint getMaximumEclipseAtRiseSet(bool first, double JD) const;
 	//! Geographic coordinates of shadow outline
-	GeoPoint getShadowOutlineCoordinates(double angle, double x, double y, double d, double L, double tf,double mu) const;
+	static GeoPoint getShadowOutlineCoordinates(double angle, double x, double y, double d, double L, double tf,double mu);
 	//! Iteration to calculate minimum distance from Besselian elements
 	double getJDofMinimumDistance(double JD) const;
 	//! Iteration to calculate JD of solar eclipse contacts
@@ -179,7 +180,6 @@ private:
 	void computeNSLimitsOfShadow(double JDP1, double JDP4, bool penumbra,
 	                             std::vector<std::vector<EclipseMapData::GeoTimePoint>>& limits) const;
 
-private:
 	StelCore* core = nullptr;
 	StelLocaleMgr* localeMgr = nullptr;
 };

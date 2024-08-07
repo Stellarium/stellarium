@@ -677,7 +677,7 @@ void LandscapeMgr::draw(StelCore* core)
 		PlanetP sun=ssys->getSun();
 		QFont font;
 		font.setPixelSize(StelApp::getInstance().getScreenFontSize());
-		sun->draw(core, 0, font);
+		sun->draw(core, 0, font, 1.0);
 	}
 
 	// Draw the landscape

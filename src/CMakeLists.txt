@@ -143,16 +143,16 @@ SET(stellarium_lib_SRCS
      core/planetsephems/elp82b.h
      core/planetsephems/gust86.c
      core/planetsephems/gust86.h
-     core/planetsephems/l12.c
-     core/planetsephems/l12.h
-     core/planetsephems/marssat.c
-     core/planetsephems/marssat.h
-     core/planetsephems/pluto.c
-     core/planetsephems/pluto.h
-     core/planetsephems/precession.c
-     core/planetsephems/precession.h
-     core/planetsephems/sidereal_time.c
-     core/planetsephems/sidereal_time.h
+     core/planetsephems/l12.cpp
+     core/planetsephems/l12.hpp
+     core/planetsephems/marssat.cpp
+     core/planetsephems/marssat.hpp
+     core/planetsephems/pluto.cpp
+     core/planetsephems/pluto.hpp
+     core/planetsephems/precession.cpp
+     core/planetsephems/precession.hpp
+     core/planetsephems/sidereal_time.cpp
+     core/planetsephems/sidereal_time.hpp
      core/planetsephems/jpl_int.h
      core/planetsephems/jpleph.h
      core/planetsephems/jpleph.cpp

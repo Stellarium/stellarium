@@ -115,6 +115,14 @@ public:
 		return drawPointSource(sPainter, v, rcMag, colorTable[bVindex], checkInScreen, twinkleFactor);
 	}
 
+	//! Draw a point source halo.
+	//! @param sPainter the StelPainter to use for drawing.
+	//! @param v the 3d position of the source in J2000 reference frame
+	//! @param rcMag the radius and luminance of the source as computed by computeRCMag()
+	//! @param color the RGB color value (0...1, 0...1, 0...1)
+	//! @param checkInScreen whether source in screen should be checked to avoid unnecessary drawing.
+	//! @param twinkleFactor allows height-dependent twinkling. Recommended value: min(1,1-0.9*sin(altitude)). Allowed values [0..1]
+	//! @return true if the source was actually visible and drawn
 	bool drawPointSource(StelPainter* sPainter, const Vec3d& v, const RCMag &rcMag, const Vec3f& bcolor, bool checkInScreen=false, float twinkleFactor=1.0f);
 
 	//! Draw an image of the solar corona onto the screen at position v.
@@ -540,7 +548,7 @@ private:
 	//! Current number of sources stored in the buffers (still to display)
 	unsigned int nbPointSources;
 	//! Maximum number of sources which can be stored in the buffers
-	unsigned int maxPointSources;
+	constexpr static unsigned int maxPointSources=1000;
 
 	//! The maximum transformed luminance to apply at the next update
 	float maxLum;

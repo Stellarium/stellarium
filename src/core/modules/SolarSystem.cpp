@@ -48,6 +48,7 @@
 #include "StelObserver.hpp"
 
 #include <algorithm>
+#include <execution>
 
 #include <QTextStream>
 #include <QSettings>
@@ -60,6 +61,12 @@
 #include <QDebug>
 #include <QDir>
 #include <QHash>
+#include <QtConcurrent>
+#include <QOpenGLBuffer>
+#include <QOpenGLFunctions>
+#include <QOpenGLShaderProgram>
+#include <QOpenGLVertexArrayObject>
+
 
 SolarSystem::SolarSystem() : StelObjectModule()
 	, shadowPlanetCount(0)
@@ -113,6 +120,10 @@ SolarSystem::SolarSystem() : StelObjectModule()
 	, ephemerisSaturnMarkerColor(Vec3f(0.0f, 1.0f, 0.0f))
 	, allTrails(Q_NULLPTR)
 	, conf(StelApp::getInstance().getSettings())
+	, extraThreads(0)
+	, nbMarkers(0)
+	, vao(new QOpenGLVertexArrayObject)
+	, vbo(new QOpenGLBuffer(QOpenGLBuffer::VertexBuffer))
 {
 	planetNameFont.setPixelSize(StelApp::getInstance().getScreenFontSize());
 	connect(&StelApp::getInstance(), SIGNAL(screenFontSizeChanged(int)), this, SLOT(setFontSize(int)));
@@ -121,6 +132,15 @@ SolarSystem::SolarSystem() : StelObjectModule()
 	connect(this, SIGNAL(flagPlanetsOrbitsOnlyChanged(bool)), this, SLOT(reconfigureOrbits()));
 	connect(this, SIGNAL(flagIsolatedOrbitsChanged(bool)),    this, SLOT(reconfigureOrbits()));
 	connect(this, SIGNAL(flagOrbitsWithMoonsChanged(bool)),   this, SLOT(reconfigureOrbits()));
+
+	markerArray=new MarkerVertex[maxMarkers*6];
+	textureCoordArray = new unsigned char[maxMarkers*6*2];
+	for (unsigned int i=0;i<maxMarkers; ++i)
+	{
+		static const unsigned char texElems[] = {0, 0, 255, 0, 255, 255, 0, 0, 255, 255, 0, 255};
+		unsigned char* elem = &textureCoordArray[i*6*2];
+		std::memcpy(elem, texElems, 12);
+	}
 }
 
 void SolarSystem::setFontSize(int newFontSize)
@@ -143,6 +163,14 @@ SolarSystem::~SolarSystem()
 	earth.clear();
 	Planet::hintCircleTex.clear();
 	Planet::texEarthShadow.clear();
+
+	delete[] markerArray;
+	markerArray = nullptr;
+	delete[] textureCoordArray;
+	textureCoordArray = nullptr;
+	delete markerShaderProgram;
+	markerShaderProgram = nullptr;
+
 
 	texEphemerisMarker.clear();
 	texEphemerisCometMarker.clear();
@@ -179,13 +207,16 @@ double SolarSystem::getCallOrder(StelModuleActionName actionName) const
 // Init and load the solar system data
 void SolarSystem::init()
 {
+	initializeOpenGLFunctions();
+
 	Q_ASSERT(conf);
 
 	Planet::init();
 	loadPlanets();	// Load planets data
 
 	// Compute position and matrix of sun and all the satellites (ie planets)
-	// for the first initialization Q_ASSERT that center is sun center (only impacts on light speed correction)	
+	// for the first initialization Q_ASSERT that center is sun center (only impacts on light speed correction)
+	setExtraThreads(conf->value("astro/solar_system_threads", 0).toInt());
 	computePositions(StelApp::getInstance().getCore()->getJDE(), getSun());
 
 	setSelected("");	// Fix a bug on macosX! Thanks Fumio!
@@ -201,6 +232,7 @@ void SolarSystem::init()
 	setSunScale(conf->value("viewing/sun_scale", 4.0).toDouble());
 	setFlagPlanets(conf->value("astro/flag_planets").toBool());
 	setFlagHints(conf->value("astro/flag_planets_hints").toBool());
+	setFlagMarkers(conf->value("astro/flag_planets_markers", false).toBool());
 	setFlagLabels(conf->value("astro/flag_planets_labels", true).toBool());
 	setLabelsAmount(conf->value("astro/labels_amount", 3.).toDouble());
 	setFlagOrbits(conf->value("astro/flag_planets_orbits").toBool());
@@ -295,7 +327,8 @@ void SolarSystem::init()
 	texEphemerisNowMarker = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/gear.png");
 	texEphemerisCometMarker = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/cometIcon.png");
 	Planet::hintCircleTex = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/planet-indicator.png");
-	
+	markerCircleTex = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/planet-marker.png");
+
 	StelApp *app = &StelApp::getInstance();
 	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
 	connect(&app->getSkyCultureMgr(), &StelSkyCultureMgr::currentSkyCultureIDChanged, this, &SolarSystem::updateSkyCulture);
@@ -328,6 +361,95 @@ void SolarSystem::init()
 	connect(this, SIGNAL(ephemerisSkipDataChanged(bool)), this, SLOT(fillEphemerisDates()));
 	connect(this, SIGNAL(ephemerisSkipMarkersChanged(bool)), this, SLOT(fillEphemerisDates()));
 	connect(this, SIGNAL(ephemerisSmartDatesChanged(bool)), this, SLOT(fillEphemerisDates()));
+
+
+	// Create shader program for mass drawing of asteroid markers
+	QOpenGLShader vshader(QOpenGLShader::Vertex);
+	const char *vsrc =
+		"ATTRIBUTE mediump vec2 pos;\n"
+		"ATTRIBUTE mediump vec2 texCoord;\n"
+		"ATTRIBUTE mediump vec3 color;\n"
+		"uniform mediump mat4 projectionMatrix;\n"
+		"VARYING mediump vec2 texc;\n"
+		"VARYING mediump vec3 outColor;\n"
+		"void main(void)\n"
+		"{\n"
+		"    gl_Position = projectionMatrix * vec4(pos.x, pos.y, 0, 1);\n"
+		"    texc = texCoord;\n"
+		"    outColor = color;\n"
+		"}\n";
+	vshader.compileSourceCode(StelOpenGL::globalShaderPrefix(StelOpenGL::VERTEX_SHADER) + vsrc);
+	if (!vshader.log().isEmpty()) { qWarning() << "SolarSystem::init(): Warnings while compiling vshader: " << vshader.log(); }
+
+	QOpenGLShader fshader(QOpenGLShader::Fragment);
+	const char *fsrc =
+		"VARYING mediump vec2 texc;\n"
+		"VARYING mediump vec3 outColor;\n"
+		"uniform sampler2D tex;\n"
+		"void main(void)\n"
+		"{\n"
+		"    FRAG_COLOR = texture2D(tex, texc)*vec4(outColor, 1.);\n"
+		"}\n";
+	fshader.compileSourceCode(StelOpenGL::globalShaderPrefix(StelOpenGL::FRAGMENT_SHADER) + fsrc);
+	if (!fshader.log().isEmpty()) { qWarning() << "SolarSystem::init(): Warnings while compiling fshader: " << fshader.log(); }
+
+	markerShaderProgram = new QOpenGLShaderProgram(QOpenGLContext::currentContext());
+	markerShaderProgram->addShader(&vshader);
+	markerShaderProgram->addShader(&fshader);
+	StelPainter::linkProg(markerShaderProgram, "starShader");
+	markerShaderVars.projectionMatrix = markerShaderProgram->uniformLocation("projectionMatrix");
+	markerShaderVars.texCoord = markerShaderProgram->attributeLocation("texCoord");
+	markerShaderVars.pos = markerShaderProgram->attributeLocation("pos");
+	markerShaderVars.color = markerShaderProgram->attributeLocation("color");
+	markerShaderVars.texture = markerShaderProgram->uniformLocation("tex");
+
+	vbo->create();
+	vbo->bind();
+	vbo->setUsagePattern(QOpenGLBuffer::StreamDraw);
+	vbo->allocate(maxMarkers*6*sizeof(MarkerVertex) + maxMarkers*6*2);
+
+	if(vao->create())
+	{
+		vao->bind();
+		setupCurrentVAO();
+		vao->release();
+	}
+
+	vbo->release();
+}
+
+void SolarSystem::setupCurrentVAO()
+{
+	vbo->bind();
+	markerShaderProgram->setAttributeBuffer(markerShaderVars.pos, GL_FLOAT, 0, 2, sizeof(MarkerVertex));
+	markerShaderProgram->setAttributeBuffer(markerShaderVars.color, GL_UNSIGNED_BYTE, offsetof(MarkerVertex,color), 3, sizeof(MarkerVertex));
+	markerShaderProgram->setAttributeBuffer(markerShaderVars.texCoord, GL_UNSIGNED_BYTE, maxMarkers*6*sizeof(MarkerVertex), 2, 0);
+	vbo->release();
+	markerShaderProgram->enableAttributeArray(markerShaderVars.pos);
+	markerShaderProgram->enableAttributeArray(markerShaderVars.color);
+	markerShaderProgram->enableAttributeArray(markerShaderVars.texCoord);
+}
+
+void SolarSystem::bindVAO()
+{
+	if(vao->isCreated())
+		vao->bind();
+	else
+		setupCurrentVAO();
+}
+
+void SolarSystem::releaseVAO()
+{
+	if(vao->isCreated())
+	{
+		vao->release();
+	}
+	else
+	{
+		markerShaderProgram->disableAttributeArray(markerShaderVars.pos);
+		markerShaderProgram->disableAttributeArray(markerShaderVars.color);
+		markerShaderProgram->disableAttributeArray(markerShaderVars.texCoord);
+	}
 }
 
 void SolarSystem::deinit()
@@ -1373,14 +1495,6 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		readOk++;
 	}
 
-	if (systemPlanets.isEmpty())
-	{
-		qWarning().noquote() << "No Solar System objects loaded from" << QDir::toNativeSeparators(filePath);
-		return false;
-	}
-	else
-		qDebug() << "Solar System has" << systemPlanets.count() << "entries.";
-
 	// special case: load earth shadow texture
 	if (!Planet::texEarthShadow)
 		Planet::texEarthShadow = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/earth-shadow.png");
@@ -1392,10 +1506,12 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 	if (!Comet::tailTexture)
 		Comet::tailTexture = StelApp::getInstance().getTextureManager().createTextureThread(StelFileMgr::getInstallationDir()+"/textures/cometTail.png", StelTexture::StelTextureParams(true, GL_LINEAR, GL_CLAMP_TO_EDGE));
 
-	if (readOk>0)
-		qDebug() << "Loaded" << readOk << "Solar System bodies";
-
-	return true;
+	if (readOk==0)
+		qWarning().noquote() << "No Solar System objects loaded from" << QDir::toNativeSeparators(filePath);
+	else
+		qDebug() << "Loaded" << readOk << "Solar System bodies from " << filePath;
+	qDebug() << "Solar System now has" << systemPlanets.count() << "entries.";
+	return readOk>0;
 }
 
 // Compute the position for every elements of the solar system.
@@ -1404,55 +1520,200 @@ void SolarSystem::computePositions(double dateJDE, PlanetP observerPlanet)
 {
 	StelCore *core=StelApp::getInstance().getCore();
 	const bool withAberration=core->getUseAberration();
+	// We distribute computing over a few threads from the current threadpool, but also compute one stride in the main thread so that this does not starve.
+	// Given the comparably low impact of planetary positions on the overall frame time, we don't need more than 4 extra threads. (Profiled with 12.000 objects.)
+//	const int availablePoolThreads=qBound(0, QThreadPool::globalInstance()->maxThreadCount()-QThreadPool::globalInstance()->activeThreadCount(), 4); // qMax(1, QThreadPool::globalInstance()->maxThreadCount()-QThreadPool::globalInstance()->activeThreadCount());
+	const int availablePoolThreads=extraThreads;
+	static bool threadMessage=true;
+	if (threadMessage)
+	{
+		qDebug() << "SolarSystem: We should have " << availablePoolThreads << "threads (plus main thread) available for computePositions()";
+		threadMessage=false;
+	}
+	static StelObjectMgr* omgr=GETSTELMODULE(StelObjectMgr);
+	omgr->removeExtraInfoStrings(StelObject::DebugAid);
+
 	if (flagLightTravelTime) // switching off light time correction implies no aberration for the planets.
 	{
-		for (const auto& p : std::as_const(systemPlanets))
-		{
-			p->computePosition(dateJDE, Vec3d(0.));
-		}
-		const Vec3d obsPosJDE=observerPlanet->getHeliocentricEclipticPos();
+		// 1. First approximation.
+		//for (const auto& p : std::as_const(systemPlanets))
+		//{
+		//	p->computePosition(dateJDE, Vec3d(0.));
+		//}
 
-		// For higher accuracy, we now make two iterations of light time and aberration correction. In the final
+		//std::function<void (QSharedPointer<Planet> &)> plCompPosJDEZero = [=](QSharedPointer<Planet> &pl){pl->computePosition(dateJDE, Vec3d(0.));};
+		//QtConcurrent::map(systemPlanets, plCompPosJDEZero).waitForFinished();
+
+		QList<QFuture<void>> futures;
+
+		// This defines a function to be thrown onto a pool thread that computes every 'incr'th element.
+		std::function<void (int)> plCompLoopZero = [=](int offset){
+			for (auto it=systemPlanets.cbegin()+offset, end=systemPlanets.cend(); it<end; it+=(availablePoolThreads+1))
+			{
+				it->data()->computePosition(dateJDE, Vec3d(0.));
+			}
+		};
+
+		// Move to external threads, but also run a part in the main thread. The index 'availableThreads' is just the last group of objects.
+		for (int stride=0; stride<availablePoolThreads; stride++)
+		{
+			auto future=QtConcurrent::run(plCompLoopZero, stride);
+			futures.append(future);
+		}
+		plCompLoopZero(availablePoolThreads);
+
+		// Now the list is being computed by other threads. we can just wait sequentially for completion.
+		for(auto f: futures)
+			f.waitForFinished();
+		futures.clear();
+
+		const Vec3d &obsPosJDE=observerPlanet->getHeliocentricEclipticPos();
+
+		// 2. For higher accuracy, we now make two iterations of light time and aberration correction. In the final
 		// round, we also compute rotation data.  May fix sub-arcsecond inaccuracies, and optionally apply
 		// aberration in the way described in Explanatory Supplement (2013), 7.55.  For reasons unknown (See
 		// discussion in GH:#1626) we do not add anything for the Moon when observed from Earth!  Presumably the
 		// used ephemerides already provide aberration-corrected positions for the Moon?
 		const Vec3d aberrationPushSpeed=observerPlanet->getHeliocentricEclipticVelocity() * core->getAberrationFactor();
-		for (const auto& p : std::as_const(systemPlanets))
-		{
-			//p->setExtraInfoString(StelObject::DebugAid, "");
-			const auto planetPos = p->getHeliocentricEclipticPos();
-			const double lightTimeDays = (planetPos-obsPosJDE).norm() * (AU / (SPEED_OF_LIGHT * 86400.));
-			Vec3d aberrationPush(0.);
-			if (withAberration && (observerPlanet->englishName!="Earth" || p->englishName!="Moon"))
-				aberrationPush=lightTimeDays*aberrationPushSpeed;
-			p->computePosition(dateJDE-lightTimeDays, aberrationPush);
-		}
-		// Extra accuracy with another round. Not sure if useful. Maybe hide behind a new property flag?
-		for (const auto& p : std::as_const(systemPlanets))
-		{
-			//p->setExtraInfoString(StelObject::DebugAid, "");
-			const auto planetPos = p->getHeliocentricEclipticPos();
-			const double lightTimeDays = (planetPos-obsPosJDE).norm() * (AU / (SPEED_OF_LIGHT * 86400.));
-			Vec3d aberrationPush(0.);
-			if (withAberration && (observerPlanet->englishName!="Earth" || p->englishName!="Moon"))
-				aberrationPush=lightTimeDays*aberrationPushSpeed;
-			// The next call may already do nothing if the time difference to the previous round is not large enough.
-			p->computePosition(dateJDE-lightTimeDays, aberrationPush);
-//			p->setExtraInfoString(StelObject::DebugAid, QString("LightTime %1d; obsSpeed %2/%3/%4 AU/d")
-//					      .arg(QString::number(lightTimeDays, 'f', 3))
-//					      .arg(QString::number(aberrationPushSpeed[0], 'f', 3))
-//					      .arg(QString::number(aberrationPushSpeed[0], 'f', 3))
-//					      .arg(QString::number(aberrationPushSpeed[0], 'f', 3)));
 
-			const auto update = &RotationElements::updatePlanetCorrections;
-			if      (p->englishName=="Moon")    update(dateJDE-lightTimeDays, RotationElements::EarthMoon);
-			else if (p->englishName=="Mars")    update(dateJDE-lightTimeDays, RotationElements::Mars);
-			else if (p->englishName=="Jupiter") update(dateJDE-lightTimeDays, RotationElements::Jupiter);
-			else if (p->englishName=="Saturn")  update(dateJDE-lightTimeDays, RotationElements::Saturn);
-			else if (p->englishName=="Uranus")  update(dateJDE-lightTimeDays, RotationElements::Uranus);
-			else if (p->englishName=="Neptune") update(dateJDE-lightTimeDays, RotationElements::Neptune);
+		//for (const auto& p : std::as_const(systemPlanets))
+		//{
+		//	//p->setExtraInfoString(StelObject::DebugAid, "");
+		//	const auto planetPos = p->getHeliocentricEclipticPos();
+		//	const double lightTimeDays = (planetPos-obsPosJDE).norm() * (AU / (SPEED_OF_LIGHT * 86400.));
+		//	Vec3d aberrationPush(0.);
+		//	if (withAberration && (observerPlanet->englishName!="Earth" || p->englishName!="Moon"))
+		//		aberrationPush=lightTimeDays*aberrationPushSpeed;
+		//	p->computePosition(dateJDE-lightTimeDays, aberrationPush);
+		//}
+
+		//std::function<void (QSharedPointer<Planet> &)> plCompPosJDEOne = [=](QSharedPointer<Planet> &p){
+		//	const auto planetPos = p->getHeliocentricEclipticPos();
+		//	const double lightTimeDays = (planetPos-obsPosJDE).norm() * (AU / (SPEED_OF_LIGHT * 86400.));
+		//	Vec3d aberrationPush(0.);
+		//	if (withAberration && (observerPlanet->englishName!="Earth" || p->englishName!="Moon"))
+		//		aberrationPush=lightTimeDays*aberrationPushSpeed;
+		//	p->computePosition(dateJDE-lightTimeDays, aberrationPush);
+		//};
+		//QtConcurrent::map(systemPlanets, plCompPosJDEOne).waitForFinished();
+
+		std::function<void (int)> plCompLoopOne = [=](int offset){
+			for (auto it=systemPlanets.cbegin()+offset, end=systemPlanets.cend(); it<end; it+=availablePoolThreads+1)
+				{
+					//p->setExtraInfoString(StelObject::DebugAid, "");
+					const auto planetPos = it->data()->getHeliocentricEclipticPos();
+					const double lightTimeDays = (planetPos-obsPosJDE).norm() * (AU / (SPEED_OF_LIGHT * 86400.));
+					Vec3d aberrationPush(0.);
+					if (withAberration && (observerPlanet->englishName!="Earth" || it->data()->englishName!="Moon"))
+						aberrationPush=lightTimeDays*aberrationPushSpeed;
+					it->data()->computePosition(dateJDE-lightTimeDays, aberrationPush);
+				}
+		};
+		for (int stride=0; stride<availablePoolThreads; stride++)
+		{
+			auto future=QtConcurrent::run(plCompLoopOne, stride);
+			futures.append(future);
 		}
+		plCompLoopOne(availablePoolThreads);
+		// Now the list is being computed by other threads. we can just wait sequentially for completion.
+		for(auto f: futures)
+			f.waitForFinished();
+		futures.clear();
+
+		// 3. Extra accuracy with another round. Not sure if useful. Maybe hide behind a new property flag?
+		//for (const auto& p : std::as_const(systemPlanets))
+		//{
+		//	//p->setExtraInfoString(StelObject::DebugAid, "");
+		//	const auto planetPos = p->getHeliocentricEclipticPos();
+		//	const double lightTimeDays = (planetPos-obsPosJDE).norm() * (AU / (SPEED_OF_LIGHT * 86400.));
+		//	Vec3d aberrationPush(0.);
+		//	if (withAberration && (observerPlanet->englishName!="Earth" || p->englishName!="Moon"))
+		//		aberrationPush=lightTimeDays*aberrationPushSpeed;
+		//	// The next call may already do nothing if the time difference to the previous round is not large enough.
+		//	p->computePosition(dateJDE-lightTimeDays, aberrationPush);
+//		//	p->setExtraInfoString(StelObject::DebugAid, QString("LightTime %1d; obsSpeed %2/%3/%4 AU/d")
+//		//			      .arg(QString::number(lightTimeDays, 'f', 3))
+//		//			      .arg(QString::number(aberrationPushSpeed[0], 'f', 3))
+//		//			      .arg(QString::number(aberrationPushSpeed[1], 'f', 3))
+//		//			      .arg(QString::number(aberrationPushSpeed[2], 'f', 3)));
+
+		//	const auto update = &RotationElements::updatePlanetCorrections;
+		//	if      (p->englishName=="Moon")    update(dateJDE-lightTimeDays, RotationElements::EarthMoon);
+		//	else if (p->englishName=="Mars")    update(dateJDE-lightTimeDays, RotationElements::Mars);
+		//	else if (p->englishName=="Jupiter") update(dateJDE-lightTimeDays, RotationElements::Jupiter);
+		//	else if (p->englishName=="Saturn")  update(dateJDE-lightTimeDays, RotationElements::Saturn);
+		//	else if (p->englishName=="Uranus")  update(dateJDE-lightTimeDays, RotationElements::Uranus);
+		//	else if (p->englishName=="Neptune") update(dateJDE-lightTimeDays, RotationElements::Neptune);
+		//}
+
+		//std::function<void (QSharedPointer<Planet> &)> plCompPosJDETwo = [=](QSharedPointer<Planet> &p){
+		//	//p->setExtraInfoString(StelObject::DebugAid, "");
+		//	const auto planetPos = p->getHeliocentricEclipticPos();
+		//	const double lightTimeDays = (planetPos-obsPosJDE).norm() * (AU / (SPEED_OF_LIGHT * 86400.));
+		//	Vec3d aberrationPush(0.);
+		//	if (withAberration && (observerPlanet->englishName!="Earth" || p->englishName!="Moon"))
+		//		aberrationPush=lightTimeDays*aberrationPushSpeed;
+		//	// The next call may already do nothing if the time difference to the previous round is not large enough.
+		//	p->computePosition(dateJDE-lightTimeDays, aberrationPush);
+//		//	p->setExtraInfoString(StelObject::DebugAid, QString("LightTime %1d; obsSpeed %2/%3/%4 AU/d")
+//		//			      .arg(QString::number(lightTimeDays, 'f', 3))
+//		//			      .arg(QString::number(aberrationPushSpeed[0], 'f', 3))
+//		//			      .arg(QString::number(aberrationPushSpeed[1], 'f', 3))
+//		//			      .arg(QString::number(aberrationPushSpeed[2], 'f', 3)));
+
+		//	const auto update = &RotationElements::updatePlanetCorrections;
+		//	if      (p->englishName=="Moon")    update(dateJDE-lightTimeDays, RotationElements::EarthMoon);
+		//	else if (p->englishName=="Mars")    update(dateJDE-lightTimeDays, RotationElements::Mars);
+		//	else if (p->englishName=="Jupiter") update(dateJDE-lightTimeDays, RotationElements::Jupiter);
+		//	else if (p->englishName=="Saturn")  update(dateJDE-lightTimeDays, RotationElements::Saturn);
+		//	else if (p->englishName=="Uranus")  update(dateJDE-lightTimeDays, RotationElements::Uranus);
+		//	else if (p->englishName=="Neptune") update(dateJDE-lightTimeDays, RotationElements::Neptune);
+		//};
+		//QtConcurrent::map(systemPlanets, plCompPosJDETwo).waitForFinished();
+
+
+		std::function<void (int)> plCompLoopTwo = [=](int offset){
+			for (auto it=systemPlanets.cbegin()+offset, end=systemPlanets.cend(); it<end; it+=availablePoolThreads+1)
+			{
+				//it->data()->setExtraInfoString(StelObject::DebugAid, "");
+				const auto planetPos = it->data()->getHeliocentricEclipticPos();
+				const double lightTimeDays = (planetPos-obsPosJDE).norm() * (AU / (SPEED_OF_LIGHT * 86400.));
+				Vec3d aberrationPush(0.);
+				if (withAberration && (observerPlanet->englishName!="Earth" || it->data()->englishName!="Moon"))
+					aberrationPush=lightTimeDays*aberrationPushSpeed;
+				// The next call may already do nothing if the time difference to the previous round is not large enough.
+				it->data()->computePosition(dateJDE-lightTimeDays, aberrationPush);
+				//			it->data()->setExtraInfoString(StelObject::DebugAid, QString("LightTime %1d; obsSpeed %2/%3/%4 AU/d")
+				//					      .arg(QString::number(lightTimeDays, 'f', 3))
+				//					      .arg(QString::number(aberrationPushSpeed[0], 'f', 3))
+				//					      .arg(QString::number(aberrationPushSpeed[1], 'f', 3))
+				//					      .arg(QString::number(aberrationPushSpeed[2], 'f', 3)));
+
+				const auto update = &RotationElements::updatePlanetCorrections;
+				if      (it->data()->englishName=="Moon")    update(dateJDE-lightTimeDays, RotationElements::EarthMoon);
+				else if (it->data()->englishName=="Mars")    update(dateJDE-lightTimeDays, RotationElements::Mars);
+				else if (it->data()->englishName=="Jupiter") update(dateJDE-lightTimeDays, RotationElements::Jupiter);
+				else if (it->data()->englishName=="Saturn")  update(dateJDE-lightTimeDays, RotationElements::Saturn);
+				else if (it->data()->englishName=="Uranus")  update(dateJDE-lightTimeDays, RotationElements::Uranus);
+				else if (it->data()->englishName=="Neptune") update(dateJDE-lightTimeDays, RotationElements::Neptune);
+			}
+		};
+		for (int stride=0; stride<availablePoolThreads; stride++)
+		{
+			auto future=QtConcurrent::run(plCompLoopTwo, stride);
+			futures.append(future);
+		}
+		// At this point all available theads from the global ThreadPool should be active.
+		omgr->addToExtraInfoString(StelObject::DebugAid, QString("Threads: Ideal: %1, Pool max %2/active %3, SolarSystem using %4<br/>").
+					   arg(QString::number(QThread::idealThreadCount()),
+					       QString::number(QThreadPool::globalInstance()->maxThreadCount()),
+					       QString::number(QThreadPool::globalInstance()->activeThreadCount()),
+					       QString::number(availablePoolThreads)));
+		// and we still run the last stride in the main thread.
+		plCompLoopTwo(availablePoolThreads);
+		// Now the list is being computed by other threads. we can just wait sequentially for completion.
+		for(auto f: futures)
+			f.waitForFinished();
 	}
 	else
 	{
@@ -1523,8 +1784,9 @@ void SolarSystem::draw(StelCore* core)
 		p->computeDistance(obsHelioPos);
 	}
 
-	// And sort them from the furthest to the closest
-	std::sort(systemPlanets.begin(),systemPlanets.end(),biggerDistance());
+	// And sort them from the furthest to the closest. std::sort can split this into parallel threads!
+	std::sort(STD_EXECUTION_PAR_COMMA
+		  systemPlanets.begin(),systemPlanets.end(),biggerDistance());
 
 	if (trailFader.getInterstate()>0.0000001f)
 	{
@@ -1542,17 +1804,84 @@ void SolarSystem::draw(StelCore* core)
 	const float sdLimitMag=static_cast<float>(core->getSkyDrawer()->getLimitMagnitude());
 	const float maxMagLabel = (sdLimitMag<5.f ? sdLimitMag :
 			5.f+(sdLimitMag-5.f)*1.2f) +(static_cast<float>(labelsAmount)-3.f)*1.2f;
+	const double eclipseFactor=getSolarEclipseFactor(core).first;
 
 	// Draw the elements
 	for (const auto& p : std::as_const(systemPlanets))
 	{
-		if ( (p->getEnglishName() != "Sun") ||
-				((p->getEnglishName() == "Sun") && !(core->getSkyDrawer()->getFlagDrawSunAfterAtmosphere())))
-			p->draw(core, maxMagLabel, planetNameFont);
+		if ( (p != sun) || (/* (p == sun) && */ !(core->getSkyDrawer()->getFlagDrawSunAfterAtmosphere())))
+			p->draw(core, maxMagLabel, planetNameFont, eclipseFactor);
 	}
+	if (nbMarkers>0)
+	{
+		StelPainter sPainter(core->getProjection2d());
+		postDrawAsteroidMarkers(&sPainter);
+	}
+
 
 	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer() && getFlagPointer())
 		drawPointer(core);
+}
+
+// Finalize the drawing of asteroid markers (inspired from StelSkyDrawer)
+void SolarSystem::postDrawAsteroidMarkers(StelPainter *sPainter)
+{
+	Q_ASSERT(sPainter);
+
+	if (nbMarkers==0)
+		return;
+
+	markerCircleTex->bind();
+	sPainter->setBlending(true, GL_ONE, GL_ONE);
+
+	const QMatrix4x4 qMat=sPainter->getProjector()->getProjectionMatrix().toQMatrix();
+
+	vbo->bind();
+	vbo->write(0, markerArray, nbMarkers*6*sizeof(MarkerVertex));
+	vbo->write(maxMarkers*6*sizeof(MarkerVertex), textureCoordArray, nbMarkers*6*2);
+	vbo->release();
+
+	markerShaderProgram->bind();
+	markerShaderProgram->setUniformValue(markerShaderVars.projectionMatrix, qMat);
+
+	bindVAO();
+	glDrawArrays(GL_TRIANGLES, 0, static_cast<GLsizei>(nbMarkers)*6);
+	releaseVAO();
+
+	markerShaderProgram->release();
+
+	nbMarkers = 0;
+}
+
+// Draw a point source halo.
+bool SolarSystem::drawAsteroidMarker(StelCore* core, StelPainter* sPainter, const float x, const float y, Vec3f &color)
+{
+	const float reducer=markerFader.getInterstate();
+	if (reducer==0.)
+		return false;
+
+	Q_ASSERT(sPainter);
+	const float radius = 3.f * static_cast<float>(sPainter->getProjector()->getDevicePixelsPerPixel());
+	unsigned char markerColor[3] = {
+		static_cast<unsigned char>(std::min(static_cast<int>(color[0]*reducer*255+0.5f), 255)),
+		static_cast<unsigned char>(std::min(static_cast<int>(color[1]*reducer*255+0.5f), 255)),
+		static_cast<unsigned char>(std::min(static_cast<int>(color[2]*reducer*255+0.5f), 255))};
+	// Store the drawing instructions in the vertex arrays
+	MarkerVertex* vx = &(markerArray[nbMarkers*6]);
+	vx->pos.set(x-radius,y-radius); std::memcpy(vx->color, markerColor, 3); ++vx;
+	vx->pos.set(x+radius,y-radius); std::memcpy(vx->color, markerColor, 3); ++vx;
+	vx->pos.set(x+radius,y+radius); std::memcpy(vx->color, markerColor, 3); ++vx;
+	vx->pos.set(x-radius,y-radius); std::memcpy(vx->color, markerColor, 3); ++vx;
+	vx->pos.set(x+radius,y+radius); std::memcpy(vx->color, markerColor, 3); ++vx;
+	vx->pos.set(x-radius,y+radius); std::memcpy(vx->color, markerColor, 3); ++vx;
+
+	++nbMarkers;
+	if (nbMarkers>=maxMarkers)
+	{
+		// Flush the buffer (draw all buffered markers)
+		postDrawAsteroidMarkers(sPainter);
+	}
+	return true;
 }
 
 void SolarSystem::drawEphemerisItems(const StelCore* core)
@@ -1938,14 +2267,14 @@ StelObjectP SolarSystem::searchByName(const QString& name) const
 
 float SolarSystem::getPlanetVMagnitude(QString planetName, bool withExtinction) const
 {
+	StelCore *core=StelApp::getInstance().getCore();
+	double eclipseFactor=getSolarEclipseFactor(core).first;
 	PlanetP p = searchByEnglishName(planetName);
 	if (p.isNull()) // Possible was asked the common name of minor planet?
 		p = searchMinorPlanetByEnglishName(planetName);
-	float r = 0.f;
+	float r = p->getVMagnitude(core, eclipseFactor);
 	if (withExtinction)
-		r = p->getVMagnitudeWithExtinction(StelApp::getInstance().getCore());
-	else
-		r = p->getVMagnitude(StelApp::getInstance().getCore());
+		r = p->getVMagnitudeWithExtinction(core, r);
 	return r;
 }
 
@@ -2157,7 +2486,7 @@ void SolarSystem::setFlagHints(bool b)
 
 bool SolarSystem::getFlagHints(void) const
 {
-	for (const auto& p : systemPlanets)
+	for (const auto& p : std::as_const(systemPlanets))
 	{
 		if (p->getFlagHints())
 			return true;
@@ -2177,12 +2506,26 @@ void SolarSystem::setFlagLabels(bool b)
 
 bool SolarSystem::getFlagLabels() const
 {
-	for (const auto& p : systemPlanets)
+	for (const auto& p : std::as_const(systemPlanets))
 	{
 		if (p->getFlagLabels())
 			return true;
 	}
 	return false;
+}
+
+void SolarSystem::setFlagMarkers(bool b)
+{
+	if (getFlagMarkers() != b)
+	{
+		markerFader = b;
+		emit markersDisplayedChanged(b);
+	}
+}
+
+bool SolarSystem::getFlagMarkers() const
+{
+	return markerFader;
 }
 
 void SolarSystem::setFlagLightTravelTime(bool b)
@@ -2232,6 +2575,7 @@ void SolarSystem::update(double deltaTime)
 	{
 		p->update(static_cast<int>(deltaTime*1000));
 	}
+	markerFader.update(deltaTime*1000);
 }
 
 // is a lunar eclipse close at hand?
@@ -3526,6 +3870,11 @@ QPair<double, PlanetP> SolarSystem::getSolarEclipseFactor(const StelCore* core) 
 		if(planet == sun || planet == core->getCurrentPlanet())
 			continue;
 
+		// Seen from Earth, only Moon, Venus or Mercury are relevant. The rest can be thrown away. There is no asteroid to go in front of the sun...
+		static const QStringList fromEarth({"Moon", "Mercury", "Venus"});
+		if ((core->getCurrentPlanet() == earth) && !fromEarth.contains(planet->englishName))
+			continue;
+
 		Mat4d trans;
 		planet->computeModelMatrix(trans, true);
 
@@ -3645,6 +3994,7 @@ bool SolarSystem::removeMinorPlanet(QString name)
 		qWarning() << "Cannot remove planet " << name << ": Not found.";
 		return false;
 	}
+
 	Orbit* orbPtr=static_cast<Orbit*>(candidate->orbitPtr);
 	if (orbPtr)
 		orbits.removeOne(orbPtr);

@@ -42,7 +42,7 @@ Furthermore I used the addition formulas
 so that for given T the functions cos and sin have only to be called 12 times.
 
 
-ATTENTION! Due to static caching this solution is not reentrant and cannot be parallelized to run in several threads.
+ATTENTION! Due to static caching the parallelization to run in several threads works only as long as 'body' (the planet number) is different.
 
 ****************************************************************/
 
@@ -54,7 +54,7 @@ ATTENTION! Due to static caching this solution is not reentrant and cannot be pa
 extern "C" {
 #endif
 
-void GetVsop87Coor(double jd,int body,double *xyz);
+void GetVsop87Coor(double jde,int body,double *xyz);
   /* Return the rectangular coordinates of the given planet
      and the given julian date jd expressed in dynamical time (TAI+32.184s).
      The origin of the xyz-coordinates is the center of the sun.
@@ -62,8 +62,8 @@ void GetVsop87Coor(double jd,int body,double *xyz);
      which is the reference frame in VSOP87 and VSOP87A.
   */
 
-void GetVsop87OsculatingCoor(const double jd0,const double jd, const int body,double *xyz);
-  /* The oculating orbit of epoch jd0, evaluated at jd, is returned.
+void GetVsop87OsculatingCoor(const double jde0,const double jde, const int body,double *xyz);
+  /* The oculating orbit of epoch jde0, evaluated at jde, is returned.
   */
 
 #ifdef __cplusplus

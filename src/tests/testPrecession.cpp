@@ -24,6 +24,7 @@
 #include "tests/testPrecession.hpp"
 #include "StelUtils.hpp"
 #include "VecMath.hpp"
+#include "precession.hpp"
 
 QTEST_GUILESS_MAIN(TestPrecession)
 

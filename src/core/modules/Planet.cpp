@@ -28,11 +28,12 @@
 #include "LandscapeMgr.hpp"
 #include "Planet.hpp"
 #include "Orbit.hpp"
-#include "planetsephems/precession.h"
+#include "planetsephems/precession.hpp"
 #include "planetsephems/EphemWrapper.hpp"
+#include "SolarEclipseComputer.hpp"
 #include "StelObserver.hpp"
 #include "StelProjector.hpp"
-#include "sidereal_time.h"
+#include "sidereal_time.hpp"
 #include "StelTextureMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelMovementMgr.hpp"
@@ -2338,6 +2339,10 @@ float Planet::getMeanOppositionMagnitude() const
 // Computation of the visual magnitude (V band) of the planet.
 float Planet::getVMagnitude(const StelCore* core) const
 {
+	return getVMagnitude(core, 1.);
+}
+float Planet::getVMagnitude(const StelCore* core, double eclipseFactor) const
+{
 	if (parent == Q_NULLPTR)
 	{
 		// Sun, compute the apparent magnitude for the absolute mag (V: 4.83) and observer's distance
@@ -2345,7 +2350,7 @@ float Planet::getVMagnitude(const StelCore* core) const
 		const double distParsec = std::sqrt(core->getObserverHeliocentricEclipticPos().normSquared())*AU/PARSEC;
 
 		// check how much of it is visible
-		const double shadowFactor = qMax(0.000128, GETSTELMODULE(SolarSystem)->getSolarEclipseFactor(core).first);
+		const double shadowFactor = qMax(0.000128, eclipseFactor);
 		// See: Hughes, D. W., Brightness during a solar eclipse // Journal of the British Astronomical Association, vol.110, no.4, p.203-205
 		// URL: http://adsabs.harvard.edu/abs/2000JBAA..110..203H
 
@@ -2832,17 +2837,20 @@ double Planet::getSpheroidAngularRadius(const StelCore* core) const
 }
 
 //the Planet and all the related infos : name, circle etc..
-void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont)
+void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont, const double eclipseFactor)
 {
 	if (hidden)
 		return;
 
+	static SolarSystem *ss=GETSTELMODULE(SolarSystem);
+	const float vMagnitude=getVMagnitude(core, eclipseFactor);
+
 	// Exclude drawing if user set a hard limit magnitude.
-	if (core->getSkyDrawer()->getFlagPlanetMagnitudeLimit() && (getVMagnitude(core) > static_cast<float>(core->getSkyDrawer()->getCustomPlanetMagnitudeLimit())))
+	if (core->getSkyDrawer()->getFlagPlanetMagnitudeLimit() && ( vMagnitude > static_cast<float>(core->getSkyDrawer()->getCustomPlanetMagnitudeLimit())))
 	{
 		// Get the eclipse factor to avoid hiding the Moon during a total solar eclipse, or planets in transit over the Solar disk.
 		// Details: https://answers.launchpad.net/stellarium/+question/395139
-		if (GETSTELMODULE(SolarSystem)->getSolarEclipseFactor(core).first==1.0)
+		if (eclipseFactor==1.0)
 			return;
 	}
 
@@ -2855,7 +2863,8 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 	// If asteroid is too faint to be seen, don't bother rendering. (Massive speedup if people have hundreds of orbital elements!)
 	// AW: Added a special case for educational purpose to drawing orbits for the Solar System Observer
 	// Details: https://sourceforge.net/p/stellarium/discussion/278769/thread/4828ebe4/
-	if (((getVMagnitude(core)-5.0f) > core->getSkyDrawer()->getLimitMagnitude()) && pType>=Planet::isAsteroid && !core->getCurrentLocation().planetName.contains("Observer", Qt::CaseInsensitive))
+	const bool cutDimObjects=((getVMagnitude(core)-5.0f) > core->getSkyDrawer()->getLimitMagnitude()) && pType>=Planet::isAsteroid;
+	if ((ss->getMarkerValue()==0.) && cutDimObjects && !core->getCurrentLocation().planetName.contains("Observer", Qt::CaseInsensitive))
 	{
 		return;
 	}
@@ -2884,13 +2893,12 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 	// This removed totally the Planet shaking bug!!!
 	StelProjector::ModelViewTranformP transfo = core->getHeliocentricEclipticModelViewTransform();
 	transfo->combine(mat);
-	if (getEnglishName() == core->getCurrentLocation().planetName)
+	// The first test is much cheaper than getEnglishName() when having many minor bodies. Only major planets can have rings.
+	if (pType==isPlanet && getEnglishName() == core->getCurrentLocation().planetName)
 	{
 		// Draw the rings if we are located on a planet with rings, but not the planet itself.
 		if (rings)
-		{
-			draw3dModel(core, transfo, 1024, true);
-		}
+			draw3dModel(core, transfo, 1024, eclipseFactor, true);
 		return;
 	}
 
@@ -2900,10 +2908,12 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 	const double viewportBufferSz= (englishName=="Sun" ? screenRd+125. : screenRd);	// enlarge if this is sun with its huge halo.
 	const double viewport_left = prj->getViewportPosX();
 	const double viewport_bottom = prj->getViewportPosY();
+	const double viewport_width = prj->getViewportWidth();
+	const double viewport_height = prj->getViewportHeight();
 
 	if ((prj->project(Vec3d(0.), screenPos)
-	     && screenPos[1]>viewport_bottom - viewportBufferSz && screenPos[1] < viewport_bottom + prj->getViewportHeight()+viewportBufferSz
-	     && screenPos[0]>viewport_left - viewportBufferSz && screenPos[0] < viewport_left + prj->getViewportWidth() + viewportBufferSz))
+	     && screenPos[1]>viewport_bottom - viewportBufferSz && screenPos[1] < viewport_bottom + viewport_height+viewportBufferSz
+	     && screenPos[0]>viewport_left - viewportBufferSz && screenPos[0] < viewport_left + viewport_width + viewportBufferSz))
 	{
 		// Draw the name, and the circle if it's not too close from the body it's turning around
 		// this prevents name overlapping (e.g. for Jupiter's satellites)
@@ -2914,13 +2924,38 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 		// by putting here, only draw orbit if Planet is visible for clarity
 		drawOrbit(core);  // TODO - fade in here also...
 
-		if (flagLabels && ang_dist>0.25f && maxMagLabels>getVMagnitudeWithExtinction(core))
+		if (flagLabels && ang_dist>0.25f && maxMagLabels>getVMagnitudeWithExtinction(core, vMagnitude))
 			labelsFader=true;
 		else
 			labelsFader=false;
-		drawHints(core, planetNameFont);
 
-		draw3dModel(core,transfo,static_cast<float>(screenRd));
+		{ // scope the StelPainter here!
+			const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
+			StelPainter sPainter(prj);
+			drawHints(core, sPainter, planetNameFont);
+			// TODO: Decide whether isComet should be moved up in the enum list to allow exclusion!
+			if (pType>=Planet::isAsteroid)
+			{
+				static const QMap<Planet::PlanetType, Vec3f> colorMap={
+				{isAsteroid,     Vec3f(0.35, 0.35, .35 )},
+				{isPlutino,      Vec3f(1   , 1   , 0   )},
+				{isComet,        Vec3f(0.25, 0.75, 1   )},
+				{isDwarfPlanet,  Vec3f(1   , 1   , 1   )},
+				{isCubewano,     Vec3f(1   , 0   , 0.8 )},
+				{isSDO,          Vec3f(0.5 , 1   , 0.5 )},
+				{isOCO,          Vec3f(0.75, 0.75, 1   )},
+				{isSednoid,      Vec3f(0.75, 1   , 0.75)},
+				{isInterstellar, Vec3f(1   , 0.25, 0.25)},
+				{isUNDEFINED,    Vec3f(1   , 0   , 0   )}};
+
+				Vec3f color=colorMap.value(pType, Vec3f(1, 0, 0));
+
+				ss->drawAsteroidMarker(core, &sPainter, screenPos[0], screenPos[1], color); // This does not draw directly, but record an entry to be drawn in a batch.
+			}
+		}
+
+		if (!cutDimObjects)
+			draw3dModel(core,transfo,static_cast<float>(screenRd), eclipseFactor);
 	}
 	else if (permanentDrawingOrbits) // A special case for demos
 		drawOrbit(core);
@@ -3134,7 +3169,7 @@ bool Planet::initShader()
 	if(objShadowShaderProgram)
 	{
 		objShadowShaderProgram->bind();
-		const float poissonDisk[] ={
+		static const float poissonDisk[] ={
 			-0.610470f, -0.702763f,
 			 0.609267f,  0.765488f,
 			-0.817537f, -0.412950f,
@@ -3406,7 +3441,7 @@ void Planet::deinitFBO()
 	shadowInitialized = false;
 }
 
-void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP transfo, float screenRd, bool drawOnlyRing)
+void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP transfo, float screenRd, double solarEclipseFactor, bool drawOnlyRing)
 {
 	// This is the main method drawing a planet 3d model
 	// Some work has to be done on this method to make the rendering nicer
@@ -3415,24 +3450,27 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 	// Else the yellowish halo may be drawn on top of the reddened solar disk which looks bad.
 	// For the other Planets, draw halo after to cover the (possibly dark-contrasting) sphere.
 
-	SolarSystem* ssm = GETSTELMODULE(SolarSystem);
+	static SolarSystem* ssm = GETSTELMODULE(SolarSystem);
 
 	// Find extinction settings to change colors. The method is rather ad-hoc.
-	const float extinctedMag=getVMagnitudeWithExtinction(core)-getVMagnitude(core); // this is net value of extinction, in mag.
+	const float vMagnitude=getVMagnitude(core, solarEclipseFactor);
+	const float vMagnitudeWithExtinction=getVMagnitudeWithExtinction(core, vMagnitude);
+
+	const float extinctedMag=vMagnitudeWithExtinction-vMagnitude; // this is net value of extinction, in mag.
 	const float magFactorGreen=powf(0.85f, 0.6f*extinctedMag);
 	const float magFactorBlue=powf(0.6f, 0.5f*extinctedMag);
 
 	const bool isSun  = this==ssm->getSun();
 	const bool isMoon = this==ssm->getMoon();
 	const bool currentLocationIsEarth = core->getCurrentLocation().planetName == "Earth";
+	const double eclipseFactor = (screenRd>1.f || (isSun && currentLocationIsEarth)) ? solarEclipseFactor : 1.;
 
 	if (isSun && currentLocationIsEarth)
 	{
 		LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
-		const float eclipseFactor = static_cast<float>(ssm->getSolarEclipseFactor(core).first);
 		// This alpha ensures 0 for complete sun, 1 for eclipse better 1e-10, with a strong increase towards full eclipse. We still need to square it.
 		// But without atmosphere we should indeed draw a visible corona by default!
-		const float alpha= ( !lmgr->getFlagAtmosphere() && ssm->getFlagPermanentSolarCorona() ? 0.7f : -0.1f*qMax(-10.0f, log10f(eclipseFactor)));
+		const float alpha= ( !lmgr->getFlagAtmosphere() && ssm->getFlagPermanentSolarCorona() ? 0.7f : -0.1f*qMax(-10.0f, log10f(static_cast<float>(eclipseFactor))));
 		StelMovementMgr* mmgr = GETSTELMODULE(StelMovementMgr);
 		float rotationAngle=(mmgr->getEquatorialMount() ? 0.0f : getParallacticAngle(core) * M_180_PIf);
 
@@ -3469,7 +3507,7 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 		// For the sun, we have again to use the stronger extinction to avoid color mismatch.
 		Vec3f haloColorToDraw(haloColor[0], powf(0.75f, extinctedMag) * haloColor[1], powf(0.42f, 0.9f*extinctedMag) * haloColor[2]);
 
-		float haloMag=qMin(-18.f, getVMagnitudeWithExtinction(core)); // for sun on horizon, mag can go quite low, shrinking the halo too much.
+		float haloMag=qMin(-18.f, vMagnitudeWithExtinction); // for sun on horizon, mag can go quite low, shrinking the halo too much.
 		core->getSkyDrawer()->postDrawSky3dModel(&sPainter, tmp, surfArcMin2, haloMag, haloColorToDraw, isSun);
 	}
 
@@ -3517,7 +3555,6 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 		Vec3d sunPos = ssm->getSun()->getEclipticPos() + ssm->getSun()->getAberrationPush();
 		core->getHeliocentricEclipticModelViewTransform()->forward(sunPos);
 		light.position=sunPos;
-		const double eclipseFactor = static_cast<float>(ssm->getSolarEclipseFactor(core).first);
 
 		// Set the light parameters taking sun as the light source
 		light.diffuse.set(1.f,  magFactorGreen*1.f,  magFactorBlue*1.f);
@@ -3633,7 +3670,7 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 
 		if (!isSun || drawSunHalo)
 		{
-			float haloMag=getVMagnitudeWithExtinction(core);
+			float haloMag=vMagnitudeWithExtinction;
 			// EXPERIMENTAL: for sun on horizon, mag can go quite low, shrinking the halo too much.
 			if (isSun)
 				haloMag=qMin(haloMag, -18.f);
@@ -4660,16 +4697,16 @@ bool Planet::drawObjShadowMap(StelPainter *painter, QMatrix4x4& shadowMatrix)
 	return true;
 }
 
-void Planet::drawHints(const StelCore* core, const QFont& planetNameFont)
+void Planet::drawHints(const StelCore* core, StelPainter &sPainter, const QFont& planetNameFont)
 {
 	if (labelsFader.getInterstate()<=0.f)
 		return;
 
-	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
-	StelPainter sPainter(prj);
+	//const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
+	//StelPainter sPainter(prj);
 	sPainter.setFont(planetNameFont);
 	// Draw nameI18 + scaling if it's not == 1.
-	float tmp = (hintFader.getInterstate()<=0.f ? 7.f : 10.f) + static_cast<float>(getAngularRadius(core)*M_PI/180.)*prj->getPixelPerRadAtCenter()/1.44f; // Shift for nameI18 printing
+	float tmp = (hintFader.getInterstate()<=0.f ? 7.f : 10.f) + static_cast<float>(getAngularRadius(core)*M_PI/180.)*sPainter.getProjector()->getPixelPerRadAtCenter()/1.44f; // Shift for nameI18 printing
 	sPainter.setColor(labelColor,labelsFader.getInterstate());
 	const QString label = (sphereScale != 1.) ? QString("%1 (\xC3\x97%2)").arg(getPlanetLabel(), QString::number(sphereScale, 'f', 2)) : getPlanetLabel();
 	sPainter.drawText(static_cast<float>(screenPos[0]),static_cast<float>(screenPos[1]), label, 0, tmp, tmp, false);
@@ -4677,8 +4714,7 @@ void Planet::drawHints(const StelCore* core, const QFont& planetNameFont)
 	// hint disappears smoothly on close view
 	if (hintFader.getInterstate()<=0)
 		return;
-	tmp -= 10.f;
-	if (tmp<1) tmp=1;
+	tmp = qMax(1.0f, tmp - 10.f);
 	sPainter.setColor(labelColor,labelsFader.getInterstate()*hintFader.getInterstate()/tmp*0.7f);
 
 	// Draw the 2D small circle
@@ -4719,17 +4755,16 @@ Vec3f Planet::getCurrentOrbitColor() const
 		}
 		case ocsMajorPlanets:
 		{
-			const QString pName = getEnglishName().toLower();
 			const QMap<QString, Vec3f>majorPlanetColorMap = {
-				{ "mercury", orbitMercuryColor},
-				{ "venus",   orbitVenusColor  },
-				{ "earth",   orbitEarthColor  },
-				{ "mars",    orbitMarsColor   },
-				{ "jupiter", orbitJupiterColor},
-				{ "saturn",  orbitSaturnColor },
-				{ "uranus",  orbitUranusColor },
-				{ "neptune", orbitNeptuneColor}};
-			orbColor=majorPlanetColorMap.value(pName, orbitColor);
+				{ "Mercury", orbitMercuryColor},
+				{ "Venus",   orbitVenusColor  },
+				{ "Earth",   orbitEarthColor  },
+				{ "Mars",    orbitMarsColor   },
+				{ "Jupiter", orbitJupiterColor},
+				{ "Saturn",  orbitSaturnColor },
+				{ "Uranus",  orbitUranusColor },
+				{ "Neptune", orbitNeptuneColor}};
+			orbColor=majorPlanetColorMap.value(englishName, orbitColor);
 			break;
 		}
 		case ocsOneColor:

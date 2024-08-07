@@ -28,10 +28,6 @@
 #ifndef L12_H
 #define L12_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 #define L12_IO            0
 #define L12_EUROPA        1
 #define L12_GANYMEDE      2
@@ -50,9 +46,5 @@ extern "C" {
  *          and in the VSOP87 plan. in AU/d.
  */
 void GetL12Coor(double jd, int body, double p[3], double v[3]);
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif

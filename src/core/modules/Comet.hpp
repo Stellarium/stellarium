@@ -72,6 +72,8 @@ public:
 	//virtual QString getType() const {return "Comet";}
 	//! \todo Find better sources for the g,k system
 	float getVMagnitude(const StelCore* core) const override;
+	//! Override with additional @param eclipseFactor. The factor is ignored.
+	float getVMagnitude(const StelCore* core, const double eclipseFactor) const override;
 	//! sets the nameI18 property with the appropriate translation.
 	//! Function overridden to handle the problem with name conflicts.
 	void translateName(const StelTranslator& trans) override;
@@ -109,7 +111,7 @@ public:
 	double getSiderealPeriod() const override;
 
 	//! re-implementation of Planet's draw()
-	void draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont) override;
+	void draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont, const double eclipseFactor) override;
 
 	// re-implementation of Planet's update() to prepare tails (extinction etc). @param deltaTime: ms (since last call)
 	void update(int deltaTime) override;
