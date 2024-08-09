@@ -1,0 +1,7 @@
+message(STATUS "Checking that std::execution::par is supported by the C++ library")
+try_compile(STD_EXECUTION_KNOWN "${CMAKE_BINARY_DIR}" "${CMAKE_CURRENT_LIST_DIR}/check-std_execution.cpp")
+if(STD_EXECUTION_KNOWN)
+	message(STATUS "Checking that std::execution::par is supported by the C++ library - yes")
+else()
+	message(STATUS "Checking that std::execution::par is supported by the C++ library - NO")
+endif()
