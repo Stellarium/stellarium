@@ -60,7 +60,8 @@ double SporadicMeteorMgr::getCallOrder(StelModuleActionName actionName) const
 {
 	if (actionName == StelModule::ActionDraw)
 	{
-		return GETSTELMODULE(SolarSystem)->getCallOrder(actionName) + 10.;
+		static SolarSystem *ss=GETSTELMODULE(SolarSystem);
+		return ss->getCallOrder(actionName) + 10.;
 	}
 	return 0;
 }
@@ -125,7 +126,7 @@ void SporadicMeteorMgr::draw(StelCore* core)
 		return;
 	}
 
-	LandscapeMgr* landmgr = GETSTELMODULE(LandscapeMgr);
+	static LandscapeMgr* landmgr = GETSTELMODULE(LandscapeMgr);
 	if (landmgr->getFlagAtmosphere() && landmgr->getLuminance() > 5.f)
 	{
 		return;

@@ -403,7 +403,8 @@ void Comet::update(int deltaTime)
 		// I consider sky brightness over 1cd/m^2 as reason to shorten tail.
 		// Below this brightness, the tail brightness loss by this method is insignificant:
 		// Just counting through the vertices might make a spiral appearance. Maybe even better than stackwise? Let's see...
-		const float avgAtmLum=GETSTELMODULE(LandscapeMgr)->getAtmosphereAverageLuminance();
+		static LandscapeMgr *lMgr=GETSTELMODULE(LandscapeMgr);
+		const float avgAtmLum=lMgr->getAtmosphereAverageLuminance();
 		const float brightnessDecreasePerVertexFromHead=1.0f/(COMET_TAIL_SLICES*COMET_TAIL_STACKS)  * avgAtmLum;
 		float brightnessPerVertexFromHead=1.0f;
 

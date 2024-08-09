@@ -331,7 +331,8 @@ void CustomObjectMgr::draw(StelCore* core)
 			pObj->draw(core, &painter);
 	}
 
-	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer())
+	static StelObjectMgr *sObjMgr=GETSTELMODULE(StelObjectMgr);
+	if (sObjMgr->getFlagSelectedObjectPointer())
 		drawPointer(core, painter);
 }
 
@@ -339,7 +340,8 @@ void CustomObjectMgr::drawPointer(StelCore* core, StelPainter& painter)
 {
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 
-	const QList<StelObjectP> newSelected = GETSTELMODULE(StelObjectMgr)->getSelectedObject("CustomObject");
+	static StelObjectMgr *sObjMgr=GETSTELMODULE(StelObjectMgr);
+	const QList<StelObjectP> newSelected = sObjMgr->getSelectedObject("CustomObject");
 	if (!newSelected.empty())
 	{
 		const StelObjectP obj = newSelected[0];

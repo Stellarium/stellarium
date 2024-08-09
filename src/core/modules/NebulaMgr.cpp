@@ -692,10 +692,13 @@ float NebulaMgr::computeMaxMagHint(const StelSkyDrawer* skyDrawer) const
 // Draw all the Nebulae
 void NebulaMgr::draw(StelCore* core)
 {
+	if(hintsFader.getInterstate()<=0.f)
+		return;
+
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 	StelPainter sPainter(prj);
 
-	StelSkyDrawer* skyDrawer = core->getSkyDrawer();
+	static StelSkyDrawer* skyDrawer = core->getSkyDrawer();
 
 	Nebula::hintsBrightness = hintsFader.getInterstate()*flagShow.getInterstate();
 
@@ -710,7 +713,8 @@ void NebulaMgr::draw(StelCore* core)
 	DrawNebulaFuncObject func(maxMagHints, maxMagLabels, &sPainter, core, hintsFader.getInterstate()<=0.f);
 	nebGrid.processIntersectingPointInRegions(p.data(), func);
 
-	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer())
+	static StelObjectMgr *som=GETSTELMODULE(StelObjectMgr);
+	if (som->getFlagSelectedObjectPointer())
 		drawPointer(core, sPainter);
 }
 

@@ -419,6 +419,7 @@ void NomenclatureItem::draw(StelCore* core, StelPainter *painter, const float fo
 				// Exclude further ellipses which would overshoot limb.
 				if (getAngularRadius(core)*qMax(0.0001,aspectRatio)+distDegrees < plRadiusDeg )
 				{
+					static StelMovementMgr *sMMgr=GETSTELMODULE(StelMovementMgr);
 					const Vec3d equPosNow = planet->getEquinoxEquatorialPos(core);
 					const Vec3d XYZNow = getEquinoxEquatorialPos(core);
 					double ra, de, raPl, dePl;
@@ -428,7 +429,7 @@ void NomenclatureItem::draw(StelCore* core, StelPainter *painter, const float fo
 					if(dRA>M_PI)
 						dRA-=2.*M_PI;
 					const double angle=atan2(dRA, de-dePl);
-					StelMovementMgr::MountMode mountMode=GETSTELMODULE(StelMovementMgr)->getMountMode();
+					StelMovementMgr::MountMode mountMode=sMMgr->getMountMode();
 					const double par = mountMode==StelMovementMgr::MountAltAzimuthal ? static_cast<double>(getParallacticAngle(core)) : 0.;
 					painter->drawEllipse(srcPos[0], srcPos[1], screenRadius, screenRadius*qMax(0.0001,aspectRatio), angle-par );
 				}

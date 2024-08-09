@@ -498,8 +498,9 @@ void SolarSystem::reloadShaders()
 void SolarSystem::drawPointer(const StelCore* core)
 {
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
+	static StelObjectMgr *sObjMgr=GETSTELMODULE(StelObjectMgr);
 
-	const QList<StelObjectP> newSelected = GETSTELMODULE(StelObjectMgr)->getSelectedObject("Planet");
+	const QList<StelObjectP> newSelected = sObjMgr->getSelectedObject("Planet");
 	if (!newSelected.empty())
 	{
 		const StelObjectP obj = newSelected[0];
@@ -1511,6 +1512,7 @@ void SolarSystem::draw(StelCore* core)
 
 	if (!flagShow)
 		return;
+	static StelObjectMgr *sObjMgr=GETSTELMODULE(StelObjectMgr);
 
 	// Compute each Planet distance to the observer
 	const Vec3d obsHelioPos = core->getObserverHeliocentricEclipticPos();
@@ -1547,7 +1549,7 @@ void SolarSystem::draw(StelCore* core)
 			p->draw(core, maxMagLabel, planetNameFont);
 	}
 
-	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer() && getFlagPointer())
+	if (sObjMgr->getFlagSelectedObjectPointer() && getFlagPointer())
 		drawPointer(core);
 }
 
