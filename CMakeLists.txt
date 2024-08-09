@@ -1058,6 +1058,11 @@ IF(NOT FROM_CHARS_WORKS)
     ADD_DEFINITIONS(-DUSE_FAST_FLOAT)
 ENDIF()
 
+include("cmake/Check-std_execution.cmake")
+IF(STD_EXECUTION_KNOWN)
+ADD_DEFINITIONS(-DSTD_EXECUTION_KNOWN)
+ENDIF()
+
 ########### Top level include directories ###########
 # This will be used for all compilations in sub-directories
 INCLUDE_DIRECTORIES(
