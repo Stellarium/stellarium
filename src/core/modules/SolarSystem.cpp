@@ -125,6 +125,7 @@ SolarSystem::SolarSystem() : StelObjectModule()
 	, nbMarkers(0)
 	, vao(new QOpenGLVertexArrayObject)
 	, vbo(new QOpenGLBuffer(QOpenGLBuffer::VertexBuffer))
+	, markerMagThreshold(15.)
 {
 	planetNameFont.setPixelSize(StelApp::getInstance().getScreenFontSize());
 	connect(&StelApp::getInstance(), SIGNAL(screenFontSizeChanged(int)), this, SLOT(setFontSize(int)));
@@ -235,6 +236,7 @@ void SolarSystem::init()
 	setFlagPlanets(conf->value("astro/flag_planets").toBool());
 	setFlagHints(conf->value("astro/flag_planets_hints").toBool());
 	setFlagMarkers(conf->value("astro/flag_planets_markers", false).toBool());
+	setMarkerMagThreshold(conf->value("astro/planet_markers_mag_threshold", 15.).toDouble());
 	setFlagLabels(conf->value("astro/flag_planets_labels", true).toBool());
 	setLabelsAmount(conf->value("astro/labels_amount", 3.).toDouble());
 	setFlagOrbits(conf->value("astro/flag_planets_orbits").toBool());
@@ -354,6 +356,7 @@ void SolarSystem::init()
 	addAction("actionShow_Planets_EnlargePlanets", displayGroup, N_("Enlarge Planets"), "flagPlanetScale");
 	addAction("actionShow_Planets_EnlargeSun", displayGroup, N_("Enlarge Sun"), "flagSunScale");
 	addAction("actionShow_Skyculture_NativePlanetNames", displayGroup, N_("Native planet names (from starlore)"), "flagNativePlanetNames", "Ctrl+Shift+N");
+	addAction("actionShow_Planets_ShowAsteroidMarkers", displayGroup, N_("Minor Planet Markers"), "flagMarkers");
 
 	connect(StelApp::getInstance().getModule("HipsMgr"), SIGNAL(gotNewSurvey(HipsSurveyP)),
 			this, SLOT(onNewSurvey(HipsSurveyP)));

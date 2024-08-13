@@ -145,6 +145,7 @@ class SolarSystem : public StelObjectModule, protected QOpenGLFunctions
 	Q_PROPERTY(bool flagDrawMoonHalo		READ getFlagDrawMoonHalo		WRITE setFlagDrawMoonHalo		NOTIFY flagDrawMoonHaloChanged)
 	Q_PROPERTY(bool flagDrawSunHalo			READ getFlagDrawSunHalo			WRITE setFlagDrawSunHalo		NOTIFY flagDrawSunHaloChanged)
 	Q_PROPERTY(int extraThreads                     READ getExtraThreads                    WRITE setExtraThreads                   NOTIFY extraThreadsChanged)
+	Q_PROPERTY(double markerMagThreshold            READ getMarkerMagThreshold              WRITE setMarkerMagThreshold             NOTIFY markerMagThresholdChanged)
 
 public:
 	SolarSystem();
@@ -754,8 +755,15 @@ public slots:
 	//! The texture path starts in the scripts directory.
 	void setTextureForPlanet(const QString &planetName, const QString &texName);
 
+	//! Return the number of additional threads (in addition to the main thread) configured to compute planet positions.
 	int getExtraThreads() const {return extraThreads;}
-	void setExtraThreads(int n){extraThreads=n;}
+	//! Configure the number of additional threads (in addition to the main thread) to compute planet positions.
+	void setExtraThreads(int n){extraThreads=n; emit extraThreadsChanged(n);}
+
+	//! Return the limiting absolute magnitude configured for plotting minor bodies. 30 means "all".
+	double getMarkerMagThreshold() const {return markerMagThreshold;}
+	//! Configure the limiting absolute magnitude for plotting minor bodies. Configured value is clamped to -2..30, 30 means "all".
+	void setMarkerMagThreshold(double m) {markerMagThreshold=qBound(-2.,m,35.); emit markerMagThresholdChanged(markerMagThreshold);}
 
 signals:
 	void labelsDisplayedChanged(bool b);
@@ -851,6 +859,8 @@ signals:
 	void requestEphemerisVisualization();
 
 	void extraThreadsChanged(const int);
+
+	void markerMagThresholdChanged(double m);
 
 public:
 	///////////////////////////////////////////////////////////////////////////
@@ -1231,6 +1241,9 @@ public:
 	bool drawAsteroidMarker(StelCore* core, StelPainter* sPainter, const float x, const float y, Vec3f &color);
 	float getMarkerValue() const {return markerFader.getInterstate();}
 
+private:
+	//! absolute value of the dimmest SSO drawn by drawAsteroidMarker()
+	double markerMagThreshold;
 	// END OF BLOCK RELATED TO MASS MARKER DISPLAY
 };
 
