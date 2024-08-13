@@ -1583,9 +1583,13 @@ QPair<double,double> Planet::getLunarEclipseMagnitudes() const
 
 float Planet::getSelectPriority(const StelCore* core) const
 {
-	if( (static_cast<SolarSystem*>(StelApp::getInstance().getModuleMgr().getModule("SolarSystem")))->getFlagHints() )
+	static SolarSystem *ss=GETSTELMODULE(SolarSystem);
+	if (pType>=isAsteroid && ss->getFlagMarkers())
+		return getVMagnitude(core)-25.f;
+
+	if( ss->getFlagHints() )
 	{
-		// easy to select, especially pluto
+		// easy to select, especially Pluto
 		return getVMagnitudeWithExtinction(core)-15.f;
 	}
 	else
