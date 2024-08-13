@@ -1397,23 +1397,6 @@
              </item>
              <item row="3" column="1">
               <layout class="QGridLayout" name="gridLayout_9">
-               <item row="0" column="2">
-                <widget class="QCheckBox" name="drawSunGlareCheckBox">
-                 <property name="toolTip">
-                  <string>Toggle drawing Sun's glare</string>
-                 </property>
-                 <property name="text">
-                  <string>Sun's glare</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="0">
-                <widget class="QLabel" name="labelShow">
-                 <property name="text">
-                  <string>Show:</string>
-                 </property>
-                </widget>
-               </item>
                <item row="0" column="1">
                 <widget class="QCheckBox" name="drawMoonHaloCheckBox">
                  <property name="toolTip">
@@ -1424,15 +1407,55 @@
                  </property>
                 </widget>
                </item>
-               <item row="1" column="2">
-                <widget class="QCheckBox" name="drawSunCoronaCheckBox">
-                 <property name="toolTip">
-                  <string>Toggle permanent drawing of Sun's corona when atmosphere is disabled</string>
-                 </property>
+               <item row="0" column="0">
+                <widget class="QLabel" name="labelShow">
                  <property name="text">
-                  <string>Sun's corona</string>
+                  <string>Show:</string>
                  </property>
                 </widget>
+               </item>
+               <item row="0" column="2">
+                <widget class="QCheckBox" name="drawSunGlareCheckBox">
+                 <property name="toolTip">
+                  <string>Toggle drawing Sun's glare</string>
+                 </property>
+                 <property name="text">
+                  <string>Sun's glare</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="0">
+                <layout class="QHBoxLayout" name="horizontalLayout_2">
+                 <item>
+                  <widget class="QCheckBox" name="minorPlanetMarkersCheckBox">
+                   <property name="toolTip">
+                    <string>Show tiny circles for minor bodies regardless of magnitude</string>
+                   </property>
+                   <property name="text">
+                    <string>Minor Planet Markers</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QDoubleSpinBox" name="minorPlanetMarkerMagThresholdSpinBox">
+                   <property name="toolTip">
+                    <string>Draw markers for objects with magnitude brighter than this</string>
+                   </property>
+                   <property name="maximum">
+                    <double>35.000000000000000</double>
+                   </property>
+                   <property name="minimum">
+                    <double>5.000000000000000</double>
+                   </property>
+                   <property name="singleStep">
+                    <double>0.100000000000000</double>
+                   </property>
+                   <property name="value">
+                    <double>15.000000000000000</double>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
                </item>
                <item row="1" column="1">
                 <widget class="QCheckBox" name="planetMarkerCheckBox">
@@ -1441,13 +1464,13 @@
                  </property>
                 </widget>
                </item>
-               <item row="1" column="0">
-                <widget class="QCheckBox" name="minorPlanetMarkersCheckBox">
+               <item row="1" column="2">
+                <widget class="QCheckBox" name="drawSunCoronaCheckBox">
                  <property name="toolTip">
-                  <string>Show tiny circles for minor bodies regardless of magnitude</string>
+                  <string>Toggle permanent drawing of Sun's corona when atmosphere is disabled</string>
                  </property>
                  <property name="text">
-                  <string>Minor Planet Markers</string>
+                  <string>Sun's corona</string>
                  </property>
                 </widget>
                </item>

@@ -2890,11 +2890,13 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 	// If asteroid is too faint to be seen, don't bother rendering. (Massive speedup if people have hundreds of orbital elements!)
 	// AW: Added a special case for educational purpose to drawing orbits for the Solar System Observer
 	// Details: https://sourceforge.net/p/stellarium/discussion/278769/thread/4828ebe4/
-	const bool cutDimObjects=((getVMagnitude(core)-5.0f) > core->getSkyDrawer()->getLimitMagnitude()) && pType>=Planet::isAsteroid;
+	const bool cutDimObjects=((vMagnitude-5.0f) > core->getSkyDrawer()->getLimitMagnitude()) && pType>=Planet::isAsteroid;
 	if ((ss->getMarkerValue()==0.) && cutDimObjects && !core->getCurrentLocation().planetName.contains("Observer", Qt::CaseInsensitive))
 	{
 		return;
 	}
+	if (pType>=Planet::isAsteroid && (vMagnitude > ss->getMarkerMagThreshold()))
+		return;
 
 	Mat4d mat = Mat4d::translation(eclipticPos) * rotLocalToParent;
 
