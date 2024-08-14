@@ -391,6 +391,20 @@ disabled) or by dragging the text itself (enabled), as it is known
 from touch-enabled devices like smartphones. 
 \end{description}
 
+\paragraph{Multithreading} \label{sec:gui:configuration:tools:threads} 
+For every frame, the positions of all planets and minor bodies of the Solar system are computed. 
+Most of the other time between frame updates is needed for the actual frame drawing, 
+and waiting for the next frame cycle if you have deliberately set a low frame rate (useful to conserve energy; see below). 
+If you have many thousands of solar system objects and a moderately new computer, 
+you may feel that Stellarium becomes slow (few frames/second) but see that mostly only one core of your CPU seems to be busy.  
+You can try\newFeature{24.3} to distribute the computation of solar system bodies to more CPU cores. 
+But take note, thread synchronization (combining all results ahead of drawing) takes its time, 
+so it pays off only when your solar system is really large. 
+With more than 1000 objects, we recommend starting with 1 additional thread. 
+Even with 25.000 objects, assigning more than 4 additional threads on a 20-core CPU does not show any further gain. 
+Frame drawing is still performed by the main thread, and too many objects still slow down the program. 
+Just try out what works best on your system.
+
 \paragraph{Framerate intent} \label{sec:gui:configuration:tools:fps} The pace of screen updates (frames per second, FPS) depends on several factors: 
 CPU speed, graphics card speed, screen size, number of displayed objects and grids, etc. 
 As is common for interactive programs, the main program thread runs on a single core also on a multicore system. 
@@ -679,6 +693,17 @@ for changing the general appearance of the view of Solar system objects. Some hi
     in the sky, which can be nice for didactic purposes or demonstrations.
   \item[Planets] will increase the apparent size of major planets.
   \end{description}
+\item[Show minor body markers]\newFeature{24.3} Show a little circle at the location of every minor body (comet,
+  asteroid, \ldots), down to the configured visual magnitude.
+  The marks are shown regardless of sky brightness, even in daytime. Also, in this mode, markers for objects 
+  with highly outdated orbital elements are still plotted (see \ref{sec:plugins:SolarSystemEditor} 
+  and Appendix~\ref{sec:ssystem.ini:minor}). 
+  This is useful to show the distribution of asteroids and comets on the sky, 
+  or especially when viewed from the Solar System Observer (see \ref{sec:gui:location:observers}). 
+
+  From the ``Observer'' viewpoints, the visual magnitude is computed as seen from the Sun,
+  so that objects in inferior conjunction ae not dimmed down and filtered away by effects of phase angle. 
+  
 \item[Show orbits] adds a rendition of the orbit or trajectory of an SSO. 
 For efficiency, orbits are not displayed when the object is not inside the screen, 
 unless you set the ``permanently'' option. You can further fine-tune the selection 
