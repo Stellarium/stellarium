@@ -70,6 +70,9 @@ public:
 	//The Comet class inherits the "Planet" type because the SolarSystem class
 	//was not designed to handle different types of objects.
 	//virtual QString getType() const {return "Comet";}
+	//! Override for comets.
+	//! When observer is on an "Observer" planet, the magnitude reported is heliocentric (seen from the Sun).
+	//! This allows observing comets belt from far away while still seeing the tail.
 	//! \todo Find better sources for the g,k system
 	float getVMagnitude(const StelCore* core) const override;
 	//! Override with additional @param eclipseFactor. The factor is ignored.
