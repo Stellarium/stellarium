@@ -233,7 +233,6 @@ QString Comet::getInfoStringSize(const StelCore *core, const InfoStringGroup &fl
 	return str;
 }
 
-// Nothing interesting?
 QString Comet::getInfoStringExtra(const StelCore *core, const InfoStringGroup &flags) const
 {
 	Q_UNUSED(core)
@@ -288,7 +287,13 @@ float Comet::getVMagnitude(const StelCore* core, const double eclipseFactor) con
 	}
 
 	//Calculate distances
-	const Vec3d& observerHeliocentricPosition = core->getObserverHeliocentricEclipticPos();
+	Vec3d observerHeliocentricPosition;
+	if (core->getCurrentPlanet()->getPlanetType()==Planet::isObserver)
+
+		observerHeliocentricPosition = Vec3d(0.f,0.f,0.f);
+	else
+		observerHeliocentricPosition = core->getObserverHeliocentricEclipticPos();
+
 	const Vec3d& cometHeliocentricPosition = getHeliocentricEclipticPos();
 	const float cometSunDistance = static_cast<float>(cometHeliocentricPosition.norm());
 	const float observerCometDistance = static_cast<float>((observerHeliocentricPosition - cometHeliocentricPosition).norm());
