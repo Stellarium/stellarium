@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2024-08-16 11:11+0700\n"
+"POT-Creation-Date: 2024-08-16 21:46+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>, 2024\n"
 "Language-Team: Ukrainian (https://app.transifex.com/stellarium/teams/80998/uk/)\n"
@@ -101,7 +101,7 @@ msgstr "сузір'я"
 msgid "Constellation lines"
 msgstr "Лінії сузір'їв"
 
-#: src/core/modules/ConstellationMgr.cpp:133
+#: src/core/modules/ConstellationMgr.cpp:133 src/ui_configurationDialog.h:1873
 msgid "Constellation art"
 msgstr "Зображення сузір’їв"
 
@@ -14151,10 +14151,6 @@ msgstr "Увімкніть для збереження вибраних пере
 #: src/ui_configurationDialog.h:1869
 msgid "A button to toggle galactic grid"
 msgstr "Кнопка для вмикання або вимикання галактичної сітки"
-
-#: src/ui_configurationDialog.h:1873
-msgid "Constellation arts"
-msgstr "Зображення сузір’їв"
 
 #: src/ui_configurationDialog.h:1875
 msgid "A button to toggle equatorial J2000 grid"

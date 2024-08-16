@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2024-08-16 11:11+0700\n"
+"POT-Creation-Date: 2024-08-16 21:46+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -95,7 +95,7 @@ msgstr ""
 msgid "Constellation lines"
 msgstr ""
 
-#: src/core/modules/ConstellationMgr.cpp:133
+#: src/core/modules/ConstellationMgr.cpp:133 src/ui_configurationDialog.h:1873
 msgid "Constellation art"
 msgstr ""
 
@@ -13300,10 +13300,6 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1869
 msgid "A button to toggle galactic grid"
-msgstr ""
-
-#: src/ui_configurationDialog.h:1873
-msgid "Constellation arts"
 msgstr ""
 
 #: src/ui_configurationDialog.h:1875
