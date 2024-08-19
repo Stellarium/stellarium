@@ -453,11 +453,16 @@ supported.
 \item[Projection] Switch the projection method used, like \autoref{sec:gui:view:markings}.
 \end{description}
 
-\subsection{Remote Control Commandline API}
-\label{sec:plugins:RemoteControl:CLI}
+\subsection{Remote Control API}
+\label{sec:plugins:RemoteControl:API}
 
 Apart from retrieving quick object info in your browser with e.g.\ \url{http://localhost:8090/api/objects/info?format=json&name=Sun},
-it is also possible to send commands via command line\footnote{%
+you can access a running instance of Stellarium with various programming languages. A few examples:
+
+\subsubsection{Commandline}
+\label{sec:plugins:RemoteControl:API:CLI}
+
+It is possible to send commands via command line\footnote{%
   Depending on your operating system or command shell,
   you may have to use double quotes in the \texttt{-\/-data} argument to \command{curl}.}%
 , e.g.,
@@ -478,6 +483,8 @@ curl -G -d 'propId=-2&actionId=-2' http://localhost:8090/api/main/status | \
      python -m json.tool 
 \end{commandsScr} 
 
+\subsubsection{Node.js}
+\label{sec:plugins:RemoteControl:API:node.js}
 
 If you want to use \program{node.js} to build your own interface app, you may find the following example helpful.%
 \footnote{Thanks to user FogoVoar}
@@ -521,6 +528,32 @@ fetch(url, {
     response.text().then(text => console.log('Raw response:', text));
     return response.json();
   })
+\end{commandsScr}
+
+\subsubsection{Python}
+\label{sec:plugins:RemoteControl:API:Python}
+
+An example for time control:
+\begin{commandsScr}
+import requests
+STELLARIUM_URL='http://192.168.1.100:8090/api/main'
+def set_time(julian_day,timerate):
+    url = f"{STELLARIUM_URL}/time"
+    data = "time="+str(julian_day)+"&timerate="+str(timerate)
+    print(f"Request URL: {url}")
+    print(f"Request Data: {data}")
+    try:
+        response = requests.post(url, data=data)
+        print(f"Response Status Code: {response.status_code}")
+        print(f"Response Content: {response.text}")
+        response.raise_for_status()
+        if response.text.strip() == "ok":
+            return {"status": "success", "message": "Time set successfully"}
+        else:
+            return {"status": "error", "message": response.text}
+    except requests.exceptions.RequestException as e:
+        print(f"Error setting time: {e}")
+        return {"status": "error", "message": str(e)}
 \end{commandsScr}
 
   
