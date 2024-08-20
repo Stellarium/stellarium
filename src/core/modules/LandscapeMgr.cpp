@@ -365,6 +365,7 @@ LandscapeMgr::LandscapeMgr()
 	, flagEnvironmentAutoEnabling(false)
 	, flagLandscapeUseTransparency(false)
 	, landscapeTransparency(0.)
+        , landscapeTint(1.f, 1.f, 1.f)
 {
 	setObjectName("LandscapeMgr"); // should be done by StelModule's constructor.
 
@@ -542,6 +543,7 @@ void LandscapeMgr::update(double deltaTime)
 	if (currentPlanet->getID() == sun->getID())
 	{
 		landscape->setBrightness(1.0, 1.0);
+                landscape->setTint(Vec3f(1.f));
 		return;
 	}
 
@@ -652,6 +654,17 @@ void LandscapeMgr::update(double deltaTime)
 		lightscapeBrightness= static_cast<double>(landscape->getOpacity(sunPos));
 	}
 	landscape->setBrightness(landscapeBrightness, lightscapeBrightness);
+
+        // extra colorful sunrise/sunset management. Only if sun is above horizon!
+        double sunVisible= static_cast<double>(landscape->getOpacity(sunPos));
+        float red  =landscapeTint[0];
+        float green=landscapeTint[1];
+        float blue =landscapeTint[2];
+
+        landscape->setTint(Vec3f(red+(1.f-red)*sunVisible,
+                                 green+(1.f-green)*sunVisible,
+                                 blue+(1.f-blue)*sunVisible));
+
 
 	messageFader.update(static_cast<int>(deltaTime*1000));
 }

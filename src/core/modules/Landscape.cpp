@@ -1110,11 +1110,13 @@ void LandscapeOldStyle::drawDecor(StelCore*const core, const int firstFreeTexSam
 					       (1.f-landscapeTransparency)*landFader.getInterstate());
 	}
 	else
-	{
-		renderProgram->setUniformValue(shaderVars.brightness,
-					       landscapeBrightness, landscapeBrightness, landscapeBrightness,
-					       (1.f-landscapeTransparency)*landFader.getInterstate());
-	}
+        {
+                renderProgram->setUniformValue(shaderVars.brightness,
+                                                landscapeBrightness*landscapeTint[0],
+                                                landscapeBrightness*landscapeTint[1],
+                                                landscapeBrightness*landscapeTint[2],
+                                                (1.f-landscapeTransparency)*landFader.getInterstate());
+        }
 
 	renderProgram->setUniformValue(shaderVars.tanMode, tanMode);
 	renderProgram->setUniformValue(shaderVars.calibrated, calibrated);
@@ -1479,8 +1481,12 @@ void LandscapePolygonal::draw(StelCore* core, bool onlyPolygon)
 	sPainter.setCullFace(true);
 
 	if (!onlyPolygon) // The only useful application of the onlyPolygon is a demo which does not fill the polygon
-	{
-		sPainter.setColor(landscapeBrightness*groundColor, (1.f-landscapeTransparency)*landFader.getInterstate());
+        {
+                sPainter.setColor(
+                                landscapeBrightness*groundColor[0]*landscapeTint[0],
+                                landscapeBrightness*groundColor[1]*landscapeTint[1],
+                                landscapeBrightness*groundColor[2]*landscapeTint[2],
+                                (1.f-landscapeTransparency)*landFader.getInterstate());
 #ifdef GL_MULTISAMPLE
 		const auto gl = sPainter.glFuncs();
 		if (multisamplingEnabled_)
@@ -1686,9 +1692,11 @@ void main(void)
 	if (!onlyPolygon || !horizonPolygon) // Make sure to draw the regular pano when there is no polygon
 	{
 		renderProgram->bind();
-		renderProgram->setUniformValue(shaderVars.brightness,
-					       landscapeBrightness, landscapeBrightness,
-					       landscapeBrightness, landFader.getInterstate());
+                renderProgram->setUniformValue(shaderVars.brightness,
+                                                landscapeBrightness*landscapeTint[0],
+                                                landscapeBrightness*landscapeTint[1],
+                                                landscapeBrightness*landscapeTint[2],
+                                                landFader.getInterstate());
 		const int mainTexSampler = 0;
 		mapTex->bind(mainTexSampler);
 		renderProgram->setUniformValue(shaderVars.mapTex, mainTexSampler);
@@ -2045,9 +2053,11 @@ void main(void)
 					       landscapeBrightness*bottomCapColor[2],
 					       bottomCapColor[0] < 0 ? 0 : landFader.getInterstate());
 
-		renderProgram->setUniformValue(shaderVars.brightness,
-					       landscapeBrightness, landscapeBrightness,
-					       landscapeBrightness, (1.f-landscapeTransparency)*landFader.getInterstate());
+                renderProgram->setUniformValue(shaderVars.brightness,
+                                               landscapeBrightness*landscapeTint[0],
+                                               landscapeBrightness*landscapeTint[1],
+                                               landscapeBrightness*landscapeTint[2],
+                                               (1.f-landscapeTransparency)*landFader.getInterstate());
 		const int mainTexSampler = 0;
 		mapTex->bind(mainTexSampler);
 		renderProgram->setUniformValue(shaderVars.mapTex, mainTexSampler);

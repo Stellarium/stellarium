@@ -3453,6 +3453,8 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 		// For the sun, we have again to use the stronger extinction to avoid color mismatch.
 		Vec3f color(haloColor[0], powf(0.75f, extinctedMag) * haloColor[1], powf(0.42f, 0.9f*extinctedMag) * haloColor[2]);
 		core->getSkyDrawer()->drawSunCorona(&sPainter, pos, 512.f/192.f*screenRd, color, alpha*alpha, rotationAngle);
+		//lmgr->setLandscapeTint(Vec3f(1.f, magFactorGreen, magFactorBlue)); // TODO: or simply apply color?
+		lmgr->setLandscapeTint(color);
 	}
 
 	// Draw the halo if it enabled in the ssystem.ini file (+ special case for backward compatible for the Sun)

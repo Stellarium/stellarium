@@ -578,6 +578,10 @@ public slots:
 		}
 	}
 
+	//! Set a discoloration to simulate sunrise/sunset colors.
+	//! These should then be used only when the sun is actually above the horizon.
+	void setLandscapeTint(const Vec3f &c){landscapeTint=c;}
+
 	/*
 	//This method has been removed, use StelSkyDrawer::getBortleScaleIndex instead, or StelMainScriptAPI::getBortleScaleIndex in scripts
 	//Also, if required, please use StelSkyDrawer::setBortleScaleIndex or StelMainScriptAPI::setBortleScaleIndex instead of LandscapeMgr::setAtmosphereBortleLightPollution
@@ -836,8 +840,10 @@ private:
 
 	//! Indicate use of the default transparency value specified in config.ini.
 	bool flagLandscapeUseTransparency;
-	//! A transparency value
+	//! A transparency value to make landscpe partially see-through and let objects below the horizon be visible
 	double landscapeTransparency;
+	//! Color tint to draw the landscape in. Can be useful for sunrise/sunset scenes.
+	Vec3f landscapeTint;
 
 	//! The ID of the currently loaded landscape
 	QString currentLandscapeID;
