@@ -125,6 +125,9 @@ void AsterismMgr::updateSkyCulture(const QString& skyCultureDir)
 	QString fic = StelFileMgr::findFile("skycultures/"+skyCultureDir+"/asterism_lines.fab");
 	if (fic.isEmpty())
 	{
+		// No data!
+		asterisms.clear();
+		selected.clear();
 		hasAsterism = false;
 		qWarning() << "No asterisms for skyculture" << currentSkyCultureID;
 	}
