@@ -131,8 +131,7 @@ bool StelSkyCultureMgr::setCurrentSkyCultureID(const QString& cultureDir)
 	currentSkyCultureDir = scID;
 	currentSkyCulture = dirToNameEnglish[scID];
 
-	emit currentSkyCultureIDChanged(currentSkyCultureDir);
-	emit StelApp::getInstance().getCore()->updateSearchLists();
+	emit currentSkyCultureIDChanged(currentSkyCultureDir);	
 	return result;
 }
 
