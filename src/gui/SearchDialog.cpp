@@ -1517,12 +1517,10 @@ void SearchDialog::updateListView(int index)
 void SearchDialog::updateListTab()
 {
 	QVariant selectedObjectId;
+	QVariant defaultObjectId = QVariant("ConstellationMgr"); // Let's enable "Constellations" by default!
 	QComboBox* objects = ui->objectTypeComboBox;
 	int index = objects->currentIndex();
-	if (index < 0)
-		selectedObjectId = QVariant("AsterismMgr"); // Let's enable "Asterisms" by default!
-	else
-		selectedObjectId = objects->itemData(index, Qt::UserRole);
+	selectedObjectId = (index < 0) ? defaultObjectId : objects->itemData(index, Qt::UserRole);
 
 	if (StelApp::getInstance().getLocaleMgr().getAppLanguage().startsWith("en"))
 		ui->searchInEnglishCheckBox->hide(); // hide "names in English" checkbox
@@ -1536,6 +1534,8 @@ void SearchDialog::updateListTab()
 		// List of objects is not empty, let's add name of module or section!
 		if (!objectMgr->listAllModuleObjects(it.key(), ui->searchInEnglishCheckBox->isChecked()).isEmpty())
 			objects->addItem(q_(it.value()), QVariant(it.key()));
+		else if (it.key()==selectedObjectId) // empty list is selected...
+			selectedObjectId = defaultObjectId; // ...switch to default list
 	}
 	index = objects->findData(selectedObjectId, Qt::UserRole, Qt::MatchCaseSensitive);
 	objects->setCurrentIndex(index);

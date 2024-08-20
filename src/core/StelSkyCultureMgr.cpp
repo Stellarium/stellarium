@@ -103,7 +103,7 @@ void StelSkyCultureMgr::init()
 	defaultSkyCultureID = StelApp::getInstance().getSettings()->value("localization/sky_culture", "modern").toString();
 	if (defaultSkyCultureID=="western") // switch to new Sky Culture ID
 		defaultSkyCultureID = "modern";
-	setCurrentSkyCultureID(defaultSkyCultureID);
+	setCurrentSkyCultureID(defaultSkyCultureID);	
 }
 
 void StelSkyCultureMgr::reloadSkyCulture()
@@ -132,6 +132,7 @@ bool StelSkyCultureMgr::setCurrentSkyCultureID(const QString& cultureDir)
 	currentSkyCulture = dirToNameEnglish[scID];
 
 	emit currentSkyCultureIDChanged(currentSkyCultureDir);
+	emit StelApp::getInstance().getCore()->updateSearchLists();
 	return result;
 }
 
