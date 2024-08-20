@@ -31,6 +31,7 @@
 #include "CustomObjectMgr.hpp"
 #include "SolarSystem.hpp"
 #include "NomenclatureMgr.hpp"
+#include "StelSkyCultureMgr.hpp"
 
 #include "StelObjectMgr.hpp"
 #include "StelGui.hpp"
@@ -469,6 +470,7 @@ void SearchDialog::createDialogContent()
 	connect(this, SIGNAL(visibleChanged(bool)), this, SLOT(refreshFocus(bool)));
 	connect(StelApp::getInstance().getCore(), SIGNAL(updateSearchLists()), this, SLOT(updateListTab()));
 	connect(GETSTELMODULE(NomenclatureMgr), SIGNAL(flagShowNomenclatureChanged(bool)), this, SLOT(updateListTab()));
+	connect(&StelApp::getInstance().getSkyCultureMgr(), &StelSkyCultureMgr::currentSkyCultureIDChanged, this, &SearchDialog::updateListTab);
 
 	// Get data from previous session
 	loadRecentSearches();
