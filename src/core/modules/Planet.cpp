@@ -3458,7 +3458,8 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 		//lmgr->setLandscapeTint(Vec3f(color[0]*color[0], color[1]*color[1], color[2]*color[2])); // stronger tint: UGLY!
 		//lmgr->setLandscapeTint(Vec3f(sqrtf(color[0]), sqrtf(color[1]), sqrtf(color[2])));       // weaker tint
 		//lmgr->setLandscapeTint(0.5f*Vec3f(1.f+sqrtf(color[0]), 1.f+sqrtf(color[1]), 1.f+sqrtf(color[2]))); // even weaker tint
-		lmgr->setLandscapeTint(0.25f*Vec3f(3.f+sqrtf(color[0]), 3.f+sqrtf(color[1]), 3.f+sqrtf(color[2]))); // even weaker tint
+		//lmgr->setLandscapeTint(0.25f*Vec3f(3.f+sqrtf(color[0]), 3.f+sqrtf(color[1]), 3.f+sqrtf(color[2]))); // even weaker tint
+		lmgr->setLandscapeTint(0.25f*Vec3f(4.f, 3.f+sqrtf(magFactorGreen), 3.f+sqrtf(magFactorBlue))); // even weaker tint
 
 	}
 
