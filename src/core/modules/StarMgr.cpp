@@ -743,105 +743,108 @@ int StarMgr::loadCommonNames(const QString& commonNameFile)
 	additionalNamesIndex.clear();
 	additionalNamesIndexI18n.clear();
 
-	qDebug().noquote() << "Loading star names from" << QDir::toNativeSeparators(commonNameFile);
-	QFile cnFile(commonNameFile);
-	if (!cnFile.open(QIODevice::ReadOnly | QIODevice::Text))
+	if (!commonNameFile.isEmpty()) // OK, list of common names is exist!
 	{
-		qWarning().noquote() << "WARNING - could not open" << QDir::toNativeSeparators(commonNameFile);
-		return 0;
-	}
-
-	int readOk=0;
-	int totalRecords=0;
-	int lineNumber=0;
-	QString record;
-	// Allow empty and comment lines where first char (after optional blanks) is #
-	static const QRegularExpression commentRx("^(\\s*#.*|\\s*)$");
-	// record structure is delimited with a | character.  We will
-	// use a QRegularExpression to extract the fields. with white-space padding permitted
-	// (i.e. it will be stripped automatically) Example record strings:
-	// "   677|_("Alpheratz")"
-	// "113368|_("Fomalhaut")"
-	// Note: Stellarium doesn't support sky cultures made prior to version 0.10.6 now!
-	static const QRegularExpression recordRx("^\\s*(\\d+)\\s*\\|[_]*[(]\"(.*)\"[)]\\s*([\\,\\d\\s]*)");
-
-	while(!cnFile.atEnd())
-	{
-		record = QString::fromUtf8(cnFile.readLine()).trimmed();
-		lineNumber++;
-		if (commentRx.match(record).hasMatch())
-			continue;
-
-		totalRecords++;
-		QRegularExpressionMatch recMatch=recordRx.match(record);
-		if (!recMatch.hasMatch())
+		qDebug().noquote() << "Loading star names from" << QDir::toNativeSeparators(commonNameFile);
+		QFile cnFile(commonNameFile);
+		if (!cnFile.open(QIODevice::ReadOnly | QIODevice::Text))
 		{
-			qWarning().noquote() << "WARNING - parse error at line" << lineNumber << "in" << QDir::toNativeSeparators(commonNameFile)
-				   << " - record does not match record pattern";
-			qWarning().noquote() << "Problematic record:" << record;
-			continue;
+			qWarning().noquote() << "WARNING - could not open" << QDir::toNativeSeparators(commonNameFile);
+			return 0;
 		}
-		else
-		{
-			// The record is the right format.  Extract the fields
-			bool ok;
-			int hip = recMatch.captured(1).toInt(&ok);
-			if (!ok)
-			{
-				qWarning().noquote() << "WARNING - parse error at line" << lineNumber << "in" << QDir::toNativeSeparators(commonNameFile)
-					   << " - failed to convert " << recMatch.captured(1) << "to a number";
-				continue;
-			}
-			QString englishCommonName = recMatch.captured(2).trimmed();
-			if (englishCommonName.isEmpty())
-			{
-				qWarning().noquote() << "WARNING - parse error at line" << lineNumber << "in" << QDir::toNativeSeparators(commonNameFile)
-					   << " - empty name field";
-				continue;
-			}
 
-			const QString englishNameCap = englishCommonName.toUpper();
-			if (commonNamesMap.find(hip)!=commonNamesMap.end())
+		int readOk=0;
+		int totalRecords=0;
+		int lineNumber=0;
+		QString record;
+		// Allow empty and comment lines where first char (after optional blanks) is #
+		static const QRegularExpression commentRx("^(\\s*#.*|\\s*)$");
+		// record structure is delimited with a | character.  We will
+		// use a QRegularExpression to extract the fields. with white-space padding permitted
+		// (i.e. it will be stripped automatically) Example record strings:
+		// "   677|_("Alpheratz")"
+		// "113368|_("Fomalhaut")"
+		// Note: Stellarium doesn't support sky cultures made prior to version 0.10.6 now!
+		static const QRegularExpression recordRx("^\\s*(\\d+)\\s*\\|[_]*[(]\"(.*)\"[)]\\s*([\\,\\d\\s]*)");
+
+		while(!cnFile.atEnd())
+		{
+			record = QString::fromUtf8(cnFile.readLine()).trimmed();
+			lineNumber++;
+			if (commentRx.match(record).hasMatch())
+				continue;
+
+			totalRecords++;
+			QRegularExpressionMatch recMatch=recordRx.match(record);
+			if (!recMatch.hasMatch())
 			{
-				if (additionalNamesMap.find(hip)!=additionalNamesMap.end())
-				{
-					QString sname = additionalNamesMap[hip].append(" - " + englishCommonName);
-					additionalNamesMap[hip] = sname;
-					additionalNamesMapI18n[hip] = sname;
-					additionalNamesIndex[englishNameCap] = hip;
-					additionalNamesIndexI18n[englishNameCap] = hip;
-				}
-				else
-				{
-					additionalNamesMap[hip] = englishCommonName;
-					additionalNamesMapI18n[hip] = englishCommonName;
-					additionalNamesIndex[englishNameCap] = hip;
-					additionalNamesIndexI18n[englishNameCap] = hip;
-				}
+				qWarning().noquote() << "WARNING - parse error at line" << lineNumber << "in" << QDir::toNativeSeparators(commonNameFile)
+					   << " - record does not match record pattern";
+				qWarning().noquote() << "Problematic record:" << record;
+				continue;
 			}
 			else
 			{
-				commonNamesMap[hip] = englishCommonName;
-				commonNamesMapI18n[hip] = englishCommonName;
-				commonNamesIndexI18n[englishNameCap] = hip;
-				commonNamesIndex[englishNameCap] = hip;
-			}
+				// The record is the right format.  Extract the fields
+				bool ok;
+				int hip = recMatch.captured(1).toInt(&ok);
+				if (!ok)
+				{
+					qWarning().noquote() << "WARNING - parse error at line" << lineNumber << "in" << QDir::toNativeSeparators(commonNameFile)
+						   << " - failed to convert " << recMatch.captured(1) << "to a number";
+					continue;
+				}
+				QString englishCommonName = recMatch.captured(2).trimmed();
+				if (englishCommonName.isEmpty())
+				{
+					qWarning().noquote() << "WARNING - parse error at line" << lineNumber << "in" << QDir::toNativeSeparators(commonNameFile)
+						   << " - empty name field";
+					continue;
+				}
 
-			QString reference = recMatch.captured(3).trimmed();
-			if (!reference.isEmpty())
-			{
-				if (referenceMap.find(hip)!=referenceMap.end())
-					referenceMap[hip] = referenceMap[hip].append("," + reference);
+				const QString englishNameCap = englishCommonName.toUpper();
+				if (commonNamesMap.find(hip)!=commonNamesMap.end())
+				{
+					if (additionalNamesMap.find(hip)!=additionalNamesMap.end())
+					{
+						QString sname = additionalNamesMap[hip].append(" - " + englishCommonName);
+						additionalNamesMap[hip] = sname;
+						additionalNamesMapI18n[hip] = sname;
+						additionalNamesIndex[englishNameCap] = hip;
+						additionalNamesIndexI18n[englishNameCap] = hip;
+					}
+					else
+					{
+						additionalNamesMap[hip] = englishCommonName;
+						additionalNamesMapI18n[hip] = englishCommonName;
+						additionalNamesIndex[englishNameCap] = hip;
+						additionalNamesIndexI18n[englishNameCap] = hip;
+					}
+				}
 				else
-					referenceMap[hip] = reference;
+				{
+					commonNamesMap[hip] = englishCommonName;
+					commonNamesMapI18n[hip] = englishCommonName;
+					commonNamesIndexI18n[englishNameCap] = hip;
+					commonNamesIndex[englishNameCap] = hip;
+				}
+
+				QString reference = recMatch.captured(3).trimmed();
+				if (!reference.isEmpty())
+				{
+					if (referenceMap.find(hip)!=referenceMap.end())
+						referenceMap[hip] = referenceMap[hip].append("," + reference);
+					else
+						referenceMap[hip] = reference;
+				}
+
+				readOk++;
 			}
-
-			readOk++;
 		}
-	}
-	cnFile.close();
+		cnFile.close();
 
-	qDebug().noquote() << "Loaded" << readOk << "/" << totalRecords << "common star names";
+		qDebug().noquote() << "Loaded" << readOk << "/" << totalRecords << "common star names";
+	}
 	return 1;
 }
 
@@ -1958,8 +1961,8 @@ void StarMgr::updateSkyCulture(const QString& skyCultureDir)
 	QString fic = StelFileMgr::findFile("skycultures/" + skyCultureDir + "/star_names.fab");
 	if (fic.isEmpty())
 		qDebug() << "Could not load star_names.fab for sky culture " << QDir::toNativeSeparators(skyCultureDir);
-	else
-		loadCommonNames(fic);
+
+	loadCommonNames(fic);
 
 	// Turn on sci names/catalog names for modern cultures only
 	setFlagSciNames(skyCultureDir.contains("modern", Qt::CaseInsensitive));
