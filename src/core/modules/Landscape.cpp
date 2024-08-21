@@ -1211,7 +1211,9 @@ void LandscapeOldStyle::drawGround(StelCore*const core, const int firstFreeTexSa
 	renderProgram->setUniformValue(shaderVars.vshift, vshift);
 	renderProgram->setUniformValue(shaderVars.projectionMatrixInverse, prj->getProjectionMatrix().toQMatrix().inverted());
 	renderProgram->setUniformValue(shaderVars.brightness,
-				       landscapeBrightness, landscapeBrightness, landscapeBrightness,
+				       landscapeBrightness*landscapeTint[0],
+				       landscapeBrightness*landscapeTint[1],
+				       landscapeBrightness*landscapeTint[2],
 				       (1.f-landscapeTransparency)*landFader.getInterstate());
 	prj->setUnProjectUniforms(*renderProgram);
 	gl.glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
