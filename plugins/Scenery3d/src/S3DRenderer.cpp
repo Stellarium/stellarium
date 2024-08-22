@@ -985,11 +985,13 @@ void S3DRenderer::calculateLighting()
 	}
 	else
 	{
-		//for now, lighting is only white
+		static LandscapeMgr *lmgr=GETSTELMODULE(LandscapeMgr);
+		QVector3D solarTint=lmgr->getLandscapeTint().toQVector();
+		//for now, ambient is only whitish. Directional and specular are tinted with possibly reddened sun.
 		lightInfo.ambient = QVector3D(ambientBrightness,ambientBrightness, ambientBrightness);
-		lightInfo.directional = QVector3D(directionalBrightness,directionalBrightness,directionalBrightness);
+		lightInfo.directional = directionalBrightness*solarTint;
 		lightInfo.emissive = QVector3D(emissiveFactor,emissiveFactor,emissiveFactor);
-		lightInfo.specular = QVector3D(specular,specular,specular);
+		lightInfo.specular = specular*solarTint;
 		lightInfo.torchDiffuse = QVector3D(torchDiff,torchDiff,torchDiff);
 	}
 }

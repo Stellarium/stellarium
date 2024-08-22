@@ -581,6 +581,7 @@ public slots:
 	//! Set a discoloration to simulate sunrise/sunset colors.
 	//! These should then be used only when the sun is actually above the horizon.
 	void setLandscapeTint(const Vec3f &c){landscapeTint=c;}
+	Vec3f getLandscapeTint() const {return landscapeTint;}
 
 	/*
 	//This method has been removed, use StelSkyDrawer::getBortleScaleIndex instead, or StelMainScriptAPI::getBortleScaleIndex in scripts
