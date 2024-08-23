@@ -246,7 +246,8 @@ float MinorPlanet::getVMagnitude(const StelCore* core, const double eclipseFacto
 	//(Code copied from Planet::getVMagnitude())
 	//(this is actually vector subtraction + the cosine theorem :))
 	Vec3d observerHelioPos;
-	if (core->getCurrentObserver()->getCurrentLocation().planetName.contains("Observer"))
+	if (core->getCurrentPlanet()->getPlanetType()==Planet::isObserver)
+
 		observerHelioPos = Vec3d(0.f,0.f,0.f);
 	else
 		observerHelioPos = core->getObserverHeliocentricEclipticPos();

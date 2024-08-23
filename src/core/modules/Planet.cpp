@@ -2928,7 +2928,7 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 	StelProjector::ModelViewTranformP transfo = core->getHeliocentricEclipticModelViewTransform();
 	transfo->combine(mat);
 
-	if (getEnglishName() == core->getCurrentLocation().planetName)
+	if (this == core->getCurrentPlanet())
 	{
 		// Draw the rings if we are located on a planet with rings, but not the planet itself.
 		if (rings)
