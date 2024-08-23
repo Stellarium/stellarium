@@ -74,11 +74,11 @@ RemoteControl::RemoteControl()
 	, minThreads(1)
 	, maxThreads(30)
 	, toolbarButton(nullptr)
+	, conf(StelApp::getInstance().getSettings())
 {
 	setObjectName("RemoteControl");
 
 	configDialog = new RemoteControlDialog();
-	conf = StelApp::getInstance().getSettings();
 
 	//needed to ensure clean shutdown of server before threading errors can occur
 	connect(&StelApp::getInstance(), &StelApp::aboutToQuit, this, &RemoteControl::stopServer, Qt::DirectConnection);

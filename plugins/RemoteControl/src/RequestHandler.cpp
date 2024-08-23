@@ -45,9 +45,9 @@ const QByteArray RequestHandler::AUTH_REALM = "Basic realm=\"Stellarium remote c
 class HtmlTranslationProvider : public ITemplateTranslationProvider
 {
 public:
-	HtmlTranslationProvider(StelTranslator* localInstance)
+	HtmlTranslationProvider(StelTranslator* localInstance):
+		rcTranslator(localInstance)
 	{
-		rcTranslator = localInstance;
 	}
 	QString getTranslation(const QString &key) override
 	{
@@ -65,9 +65,9 @@ private:
 class JsTranslationProvider : public ITemplateTranslationProvider
 {
 public:
-	JsTranslationProvider(StelTranslator* localInstance)
+	JsTranslationProvider(StelTranslator* localInstance):
+		rcTranslator(localInstance)
 	{
-		rcTranslator = localInstance;
 	}
 
 	QString getTranslation(const QString &key) override

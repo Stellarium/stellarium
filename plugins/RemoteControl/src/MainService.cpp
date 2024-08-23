@@ -29,7 +29,7 @@
 #include "StelMovementMgr.hpp"
 #include "StelObjectMgr.hpp"
 #include "StelPropertyMgr.hpp"
-#include "StelSkyCultureMgr.hpp"
+//#include "StelSkyCultureMgr.hpp"
 #include "StelUtils.hpp"
 
 #include <QJsonDocument>
@@ -39,23 +39,23 @@
 
 MainService::MainService(QObject *parent)
 	: AbstractAPIService(parent),
+	  core(StelApp::getInstance().getCore()),
+	  actionMgr(StelApp::getInstance().getStelActionManager()),
+	  lsMgr(GETSTELMODULE(LandscapeMgr)),
+	  localeMgr(&StelApp::getInstance().getLocaleMgr()),
+	  mvmgr(GETSTELMODULE(StelMovementMgr)),
+	  objMgr(&StelApp::getInstance().getStelObjectMgr()),
+	  propMgr(StelApp::getInstance().getStelPropertyManager()),
+  #ifdef ENABLE_SCRIPTING
+	  scriptMgr(&StelApp::getInstance().getScriptMgr()),
+  #endif
+	  skyCulMgr(&StelApp::getInstance().getSkyCultureMgr()),
 	  moveX(0),moveY(0),lastMoveUpdateTime(0),
 	  //100 should be more than enough
 	  //this only has to encompass events that occur between 2 status updates
 	  actionCache(100), propCache(100)
 {
 	//this is run in the main thread
-	core = StelApp::getInstance().getCore();
-	actionMgr =  StelApp::getInstance().getStelActionManager();
-	lsMgr = GETSTELMODULE(LandscapeMgr);
-	localeMgr = &StelApp::getInstance().getLocaleMgr();
-	objMgr = &StelApp::getInstance().getStelObjectMgr();
-	mvmgr = GETSTELMODULE(StelMovementMgr);
-	propMgr = StelApp::getInstance().getStelPropertyManager();
-#ifdef ENABLE_SCRIPTING
-	scriptMgr = &StelApp::getInstance().getScriptMgr();
-#endif
-	skyCulMgr = &StelApp::getInstance().getSkyCultureMgr();
 
 	connect(actionMgr,SIGNAL(actionToggled(QString,bool)),this,SLOT(actionToggled(QString,bool)));
 	connect(propMgr,SIGNAL(stelPropertyChanged(StelProperty*,QVariant)),this,SLOT(propertyChanged(StelProperty*,QVariant)));
