@@ -34,12 +34,12 @@
 #include <QJsonObject>
 #include <QStringListModel>
 
-LocationService::LocationService(QObject *parent) : AbstractAPIService(parent)
+LocationService::LocationService(QObject *parent) : AbstractAPIService(parent),
+	core(StelApp::getInstance().getCore()),
+	locMgr(&StelApp::getInstance().getLocationMgr()),
+	ssys(GETSTELMODULE(SolarSystem))
 {
 	//this is run in the main thread
-	core = StelApp::getInstance().getCore();
-	locMgr = &StelApp::getInstance().getLocationMgr();
-	ssys = GETSTELMODULE(SolarSystem);
 }
 
 void LocationService::get(const QByteArray& operation, const APIParameters &parameters, APIServiceResponse &response)

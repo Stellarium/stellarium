@@ -19,31 +19,22 @@
 
 #include "ObjectService.hpp"
 
+#include "LandscapeMgr.hpp"
 #include "SearchDialog.hpp"
 #include "StelApp.hpp"
-#include "StelCore.hpp"
-#include "StelObjectMgr.hpp"
-#include "StelTranslator.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelObjectMgr.hpp"
-#include "LandscapeMgr.hpp"
+#include "StelTranslator.hpp"
 
-#include <QEventLoop>
 #include <QJsonArray>
 #include <QJsonDocument>
-#include <QJsonObject>
-#include <QSettings>
-#include <QMutex>
-#include <QThreadPool>
-#include <QRunnable>
-#include <QWaitCondition>
 
-ObjectService::ObjectService(QObject *parent) : AbstractAPIService(parent)
+ObjectService::ObjectService(QObject *parent) : AbstractAPIService(parent),
+      core(StelApp::getInstance().getCore()),
+      objMgr(&StelApp::getInstance().getStelObjectMgr()),
+      useStartOfWords(StelApp::getInstance().getSettings()->value("search/flag_start_words", false).toBool())
 {
 	//this is run in the main thread
-	core = StelApp::getInstance().getCore();
-	objMgr = &StelApp::getInstance().getStelObjectMgr();
-	useStartOfWords = StelApp::getInstance().getSettings()->value("search/flag_start_words", false).toBool();
 }
 
 QStringList ObjectService::performSearch(const QString &text)
