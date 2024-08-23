@@ -1548,9 +1548,10 @@ void SolarSystem::computePositions(double dateJDE, PlanetP observerPlanet)
 		const bool observerIsEarth = observerPlanet->englishName==L1S("Earth");
 		const Vec3d &obsPosJDE=observerPlanet->getHeliocentricEclipticPos();
 		const Vec3d aberrationPushSpeed=observerPlanet->getHeliocentricEclipticVelocity() * core->getAberrationFactor();
+		const double dateJD = dateJDE - (StelApp::getInstance().getCore()->computeDeltaT(dateJDE))/86400.0;
 
-		const auto processPlanet = [this,dateJDE,observerIsEarth,withAberration,
-		                            &obsPosJDE,&aberrationPushSpeed](const PlanetP& p)
+		const auto processPlanet = [this,dateJD,dateJDE,observerIsEarth,withAberration,observerPlanet,
+		                            obsPosJDE,aberrationPushSpeed](const PlanetP& p, const Vec3d& observerPosFinal)
 		{
 			// 1. First approximation.
 			p->computePosition(dateJDE, Vec3d(0.));
@@ -1583,12 +1584,25 @@ void SolarSystem::computePositions(double dateJDE, PlanetP observerPlanet)
 			else if (p->englishName==L1S("Saturn"))  update(dateJDE-lightTimeDays, RotationElements::Saturn);
 			else if (p->englishName==L1S("Uranus"))  update(dateJDE-lightTimeDays, RotationElements::Uranus);
 			else if (p->englishName==L1S("Neptune")) update(dateJDE-lightTimeDays, RotationElements::Neptune);
+
+			if(p != observerPlanet)
+			{
+				const double light_speed_correction = (AU / (SPEED_OF_LIGHT * 86400)) *
+					(p->getHeliocentricEclipticPos()-observerPosFinal).norm();
+				p->computeTransMatrix(dateJD-light_speed_correction, dateJDE-light_speed_correction);
+			}
 		};
 
-		const auto loop = [&planets=systemPlanets,&processPlanet](const int indexMin, const int indexMax)
+		// This will be used for computation of transformation matrices
+		processPlanet(observerPlanet, Vec3d(0.));
+		observerPlanet->computeTransMatrix(dateJD, dateJDE);
+		const Vec3d observerPosFinal = observerPlanet->getHeliocentricEclipticPos();
+
+		const auto loop = [&planets=systemPlanets,processPlanet,
+		                   observerPosFinal](const int indexMin, const int indexMax)
 		{
 			for(int i = indexMin; i <= indexMax; ++i)
-				processPlanet(planets[i]);
+				processPlanet(planets[i], observerPosFinal);
 		};
 
 		QList<QFuture<void>> futures;
@@ -1619,8 +1633,8 @@ void SolarSystem::computePositions(double dateJDE, PlanetP observerPlanet)
 			else if (p->englishName==L1S("Uranus"))  update(dateJDE, RotationElements::Uranus);
 			else if (p->englishName==L1S("Neptune")) update(dateJDE, RotationElements::Neptune);
 		}
+		computeTransMatrices(dateJDE, observerPlanet->getHeliocentricEclipticPos());
 	}
-	computeTransMatrices(dateJDE, observerPlanet->getHeliocentricEclipticPos());
 }
 
 // Compute the transformation matrix for every elements of the solar system.
