@@ -132,9 +132,9 @@ const StelTranslator& StelLocaleMgr::getScriptsTranslator() const
 }
 
 // Return the time in ISO 8601 format that is : %Y-%m-%d %H:%M:%S
-QString StelLocaleMgr::getISO8601TimeLocal(double JD) const
+QString StelLocaleMgr::getISO8601TimeLocal(double JD, double utcOffsetHrs) const
 {
-	return StelUtils::julianDayToISO8601String(JD + core->getUTCOffset(JD)*StelCore::JD_HOUR);
+	return StelUtils::julianDayToISO8601String(JD + utcOffsetHrs*StelCore::JD_HOUR);
 }
 
 //! get the six ints from an ISO8601 date time, understood to be local time, make a jdate out
@@ -154,10 +154,10 @@ double StelLocaleMgr::getJdFromISO8601TimeLocal(const QString& t, bool* ok) cons
 
 
 // Return a string with the local date formatted according to the dateFormat variable
-QString StelLocaleMgr::getPrintableDateLocal(double JD) const
+QString StelLocaleMgr::getPrintableDateLocal(double JD, double utcOffsetHrs) const
 {
 	int year, month, day, dayOfWeek;
-	const double shift = core->getUTCOffset(JD)*StelCore::JD_HOUR;
+	const double shift = utcOffsetHrs*StelCore::JD_HOUR;
 	StelUtils::getDateFromJulianDay(JD+shift, &year, &month, &day);
 	dayOfWeek = StelUtils::getDayOfWeek(year, month, day);
 	QString str;
@@ -193,10 +193,10 @@ QString StelLocaleMgr::getPrintableDateLocal(double JD) const
 
 // Return a string with the local time (according to timeZoneMode variable) formatted
 // according to the timeFormat variable
-QString StelLocaleMgr::getPrintableTimeLocal(double JD) const
+QString StelLocaleMgr::getPrintableTimeLocal(double JD, double utcOffsetHrs) const
 {
 	int hour, minute, second, millsec;
-	const double shift = core->getUTCOffset(JD)*StelCore::JD_HOUR;
+	const double shift = utcOffsetHrs*StelCore::JD_HOUR;
 	StelUtils::getTimeFromJulianDay(JD+shift, &hour, &minute, &second, &millsec);
 	QTime t(hour, minute, second, millsec);
 	switch (timeFormat)
@@ -218,7 +218,7 @@ QString StelLocaleMgr::getPrintableTimeLocal(double JD) const
 	}
 }
 
-QString StelLocaleMgr::getPrintableTimeZoneLocal(double JD) const
+QString StelLocaleMgr::getPrintableTimeZoneLocal(double JD, double utcOffsetHrs) const
 {
 	QString timeZone = "";
 	QString timeZoneST = "";
@@ -238,7 +238,7 @@ QString StelLocaleMgr::getPrintableTimeZoneLocal(double JD) const
 			timeZoneST = qc_("LTST", "solar time");
 		}
 
-		const double shift = core->getUTCOffset(JD);
+		const double shift = utcOffsetHrs;
 		QTime tz = QTime(0, 0, 0).addSecs(static_cast<int>(3600*qAbs(shift)));
 		if(shift<0.0)
 			timeZone = QString("UTC-%1").arg(tz.toString("hh:mm"));
@@ -251,7 +251,7 @@ QString StelLocaleMgr::getPrintableTimeZoneLocal(double JD) const
 	else
 	{
 		// TODO: Make sure LMST/LTST would make sense on other planet, or inhibit it?
-		const double shift = core->getUTCOffset(JD);
+		const double shift = utcOffsetHrs;
 		QTime tz = QTime(0, 0, 0).addSecs(static_cast<int>(3600*qAbs(shift)));
 		if(shift<0.0)
 			timeZone = QString("UTC-%1").arg(tz.toString("hh:mm"));

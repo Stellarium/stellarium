@@ -1965,14 +1965,15 @@ void SolarSystem::fillEphemerisDates()
 	const int fsize = AstroCalcDialog::EphemerisList.count();
 	if (fsize==0) return;
 
-	StelLocaleMgr* localeMgr = &StelApp::getInstance().getLocaleMgr();
+	static StelLocaleMgr* localeMgr = &StelApp::getInstance().getLocaleMgr();
+	static StelCore *core = StelApp::getInstance().getCore();
 	const bool showSmartDates = getFlagEphemerisSmartDates();
 	double JD = AstroCalcDialog::EphemerisList.first().objDate;
 	bool withTime = (fsize>1 && (AstroCalcDialog::EphemerisList[1].objDate-JD<1.0));
 
 	int fYear, fMonth, fDay, sYear, sMonth, sDay, h, m, s;
 	QString info;
-	const double shift = StelApp::getInstance().getCore()->getUTCOffset(JD)*StelCore::JD_HOUR;
+	const double shift = core->getUTCOffset(JD)*StelCore::JD_HOUR;
 	StelUtils::getDateFromJulianDay(JD+shift, &fYear, &fMonth, &fDay);
 	bool sFlag = true;
 	sYear = fYear;
@@ -1983,7 +1984,7 @@ void SolarSystem::fillEphemerisDates()
 
 	for (int i = 0; i < fsize; i++)
 	{
-		JD = AstroCalcDialog::EphemerisList[i].objDate;
+		const double JD = AstroCalcDialog::EphemerisList[i].objDate;
 		StelUtils::getDateFromJulianDay(JD+shift, &fYear, &fMonth, &fDay);
 
 		if (showSkippedData && ((i + 1)%dataStep)!=1 && dataStep!=1)
@@ -2031,10 +2032,11 @@ void SolarSystem::fillEphemerisDates()
 		else
 		{
 			// OK, let's use standard formats for date and time (as defined for whole planetarium)
+			const double utcOffsetHrs = core->getUTCOffset(JD);
 			if (withTime)
-				AstroCalcDialog::EphemerisList[i].objDateStr = QString("%1 %2").arg(localeMgr->getPrintableDateLocal(JD), localeMgr->getPrintableTimeLocal(JD));
+				AstroCalcDialog::EphemerisList[i].objDateStr = QString("%1 %2").arg(localeMgr->getPrintableDateLocal(JD, utcOffsetHrs), localeMgr->getPrintableTimeLocal(JD, utcOffsetHrs));
 			else
-				AstroCalcDialog::EphemerisList[i].objDateStr = localeMgr->getPrintableDateLocal(JD);
+				AstroCalcDialog::EphemerisList[i].objDateStr = localeMgr->getPrintableDateLocal(JD, utcOffsetHrs);
 		}
 	}
 }
