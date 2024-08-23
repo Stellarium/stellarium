@@ -749,22 +749,25 @@ void BottomStelBar::updateButtonsGroups()
 // This is also called when button groups have been updated.
 void BottomStelBar::updateText(bool updatePos, bool updateTopocentric)
 {
-	StelCore* core = StelApp::getInstance().getCore();
+	static StelCore* core = StelApp::getInstance().getCore();
 	const double jd = core->getJD();
+	const double utcOffsetHrs=core->getUTCOffset(jd);
 	const double deltaT = core->getDeltaT();
 	const double sigma = StelUtils::getDeltaTStandardError(jd);
 	QString validRangeMarker = "";
 	core->getCurrentDeltaTAlgorithmValidRangeDescription(jd, &validRangeMarker);
 
-	const StelLocaleMgr& locmgr = StelApp::getInstance().getLocaleMgr();
-	QString tz = locmgr.getPrintableTimeZoneLocal(jd);
+	static StelLocaleMgr& locmgr = StelApp::getInstance().getLocaleMgr();
 	QString newDateInfo = " ";
 	if (getFlagShowTime())
 	{
 		if (getFlagShowTz())
-			newDateInfo = QString("%1 %2 %3").arg(locmgr.getPrintableDateLocal(jd), locmgr.getPrintableTimeLocal(jd), tz);
+		{
+			QString tz = locmgr.getPrintableTimeZoneLocal(jd, utcOffsetHrs);
+			newDateInfo = QString("%1 %2 %3").arg(locmgr.getPrintableDateLocal(jd, utcOffsetHrs), locmgr.getPrintableTimeLocal(jd, utcOffsetHrs), tz);
+		}
 		else
-			newDateInfo = QString("%1 %2").arg(locmgr.getPrintableDateLocal(jd), locmgr.getPrintableTimeLocal(jd));
+			newDateInfo = QString("%1 %2").arg(locmgr.getPrintableDateLocal(jd, utcOffsetHrs), locmgr.getPrintableTimeLocal(jd, utcOffsetHrs));
 	}
 	QString newDateAppx = QString("JD %1").arg(jd, 0, 'f', 5); // up to seconds
 	if (getFlagTimeJd())

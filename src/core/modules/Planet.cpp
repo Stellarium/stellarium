@@ -757,8 +757,9 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		if (orbitPtr && pType>=isArtificial)
 		{
 			StelLocaleMgr* localeMgr = &StelApp::getInstance().getLocaleMgr();
-			double JDE = static_cast<KeplerOrbit*>(orbitPtr)->getEpochJDE();
-			oss << q_("NOTE: elements for epoch %1 probably outdated. Consider updating data!").arg(localeMgr->getPrintableDateLocal(JDE)) << "<br/>";
+			const double JDE = static_cast<KeplerOrbit*>(orbitPtr)->getEpochJDE();
+			const double utcOffsetHrs = core->getUTCOffset(JDE);
+			oss << q_("NOTE: elements for epoch %1 probably outdated. Consider updating data!").arg(localeMgr->getPrintableDateLocal(JDE, utcOffsetHrs)) << "<br/>";
 		}
 	}
 	postProcessInfoString(str, flags);

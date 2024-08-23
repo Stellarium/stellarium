@@ -118,7 +118,7 @@ private:
 
 	static bool syncShowLabels;
 
-	QString getMaxBrightnessDate(const double JD) const;
+	QString getMaxBrightnessDate(const StelCore *core, const double JD) const;
 };
 
 #endif // NOVA_HPP

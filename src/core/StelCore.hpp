@@ -314,6 +314,7 @@ public:
 	//! Get the information on the current location
 	const StelLocation& getCurrentLocation() const;
 	//! Get the UTC offset on the current location (in hours)
+	//! N.B. This is a rather costly operation. Re-use where possible!
 	double getUTCOffset(const double JD) const;
 
 	QString getCurrentTimeZone() const;

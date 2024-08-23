@@ -2005,21 +2005,21 @@ void SolarEclipseComputer::generateKML(const EclipseMapData& data, const QString
 	stream << "<PolyStyle>\n<color>" << toKMLColorString(eclipseLimitsColor) << "</color>\n</PolyStyle>\n</Style>\n";
 
 	{
-		const auto timeStr = localeMgr->getPrintableTimeLocal(data.greatestEclipse.JD);
+		const auto timeStr = localeMgr->getPrintableTimeLocal(data.greatestEclipse.JD, core->getUTCOffset(data.greatestEclipse.JD));
 		stream << "<Placemark>\n<name>"+q_("Greatest eclipse")+" ("+timeStr+")</name>\n<Point>\n<coordinates>";
 		stream << data.greatestEclipse.longitude << "," << data.greatestEclipse.latitude << ",0.0\n";
 		stream << "</coordinates>\n</Point>\n</Placemark>\n";
 	}
 
 	{
-		const auto timeStr = localeMgr->getPrintableTimeLocal(data.firstContactWithEarth.JD);
+		const auto timeStr = localeMgr->getPrintableTimeLocal(data.firstContactWithEarth.JD, core->getUTCOffset(data.firstContactWithEarth.JD));
 		stream << "<Placemark>\n<name>"+q_("First contact with Earth")+" ("+timeStr+")</name>\n<Point>\n<coordinates>";
 		stream << data.firstContactWithEarth.longitude << "," << data.firstContactWithEarth.latitude << ",0.0\n";
 		stream << "</coordinates>\n</Point>\n</Placemark>\n";
 	}
 
 	{
-		const auto timeStr = localeMgr->getPrintableTimeLocal(data.lastContactWithEarth.JD);
+		const auto timeStr = localeMgr->getPrintableTimeLocal(data.lastContactWithEarth.JD, core->getUTCOffset(data.lastContactWithEarth.JD));
 		stream << "<Placemark>\n<name>"+q_("Last contact with Earth")+" ("+timeStr+")</name>\n<Point>\n<coordinates>";
 		stream << data.lastContactWithEarth.longitude << "," << data.lastContactWithEarth.latitude << ",0.0\n";
 		stream << "</coordinates>\n</Point>\n</Placemark>\n";
@@ -2102,7 +2102,7 @@ void SolarEclipseComputer::generateKML(const EclipseMapData& data, const QString
 
 	if(data.centralEclipseStart.JD > 0)
 	{
-		const auto timeStr = localeMgr->getPrintableTimeLocal(data.centralEclipseStart.JD);
+		const auto timeStr = localeMgr->getPrintableTimeLocal(data.centralEclipseStart.JD, core->getUTCOffset(data.centralEclipseStart.JD));
 		stream << "<Placemark>\n<name>"+q_("Central eclipse begins")+" ("+timeStr+")</name>\n<Point>\n<coordinates>";
 		stream << data.centralEclipseStart.longitude << "," << data.centralEclipseStart.latitude << ",0.0\n";
 		stream << "</coordinates>\n</Point>\n</Placemark>\n";
@@ -2110,7 +2110,7 @@ void SolarEclipseComputer::generateKML(const EclipseMapData& data, const QString
 
 	if(data.centralEclipseEnd.JD > 0)
 	{
-		const auto timeStr = localeMgr->getPrintableTimeLocal(data.centralEclipseEnd.JD);
+		const auto timeStr = localeMgr->getPrintableTimeLocal(data.centralEclipseEnd.JD, core->getUTCOffset(data.centralEclipseEnd.JD));
 		stream << "<Placemark>\n<name>"+q_("Central eclipse ends")+" ("+timeStr+")</name>\n<Point>\n<coordinates>";
 		stream << data.centralEclipseEnd.longitude << "," << data.centralEclipseEnd.latitude << ",0.0\n";
 		stream << "</coordinates>\n</Point>\n</Placemark>\n";
@@ -2127,7 +2127,7 @@ void SolarEclipseComputer::generateKML(const EclipseMapData& data, const QString
 
 	for(const auto& outline : data.umbraOutlines)
 	{
-		const auto timeStr = localeMgr->getPrintableTimeLocal(outline.JD);
+		const auto timeStr = localeMgr->getPrintableTimeLocal(outline.JD, core->getUTCOffset(outline.JD));
 		startLinePlaceMark(timeStr, outline.eclipseType);
 		stream << "<tessellate>1</tessellate>\n<altitudeMode>absoluto</altitudeMode>\n<coordinates>\n";
 		for(const auto& p : outline.curve)
