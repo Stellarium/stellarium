@@ -2237,7 +2237,7 @@
                <item>
                 <widget class="QLabel" name="label_4">
                  <property name="text">
-                  <string>SolarSystem Extra Threads</string>
+                  <string>Additional threads for solar system</string>
                  </property>
                 </widget>
                </item>
@@ -2260,7 +2260,7 @@
                   <string>A few additional threads may improve speed with many solar system objects. Observe what works best on your multicore system.</string>
                  </property>
                  <property name="maximum">
-                  <number>16</number>
+                  <number>31</number>
                  </property>
                 </widget>
                </item>

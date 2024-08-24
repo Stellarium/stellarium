@@ -63,6 +63,7 @@
 #endif
 #include <QImageWriter>
 #include <QScreen>
+#include <QThreadPool>
 
 //! Simple helper extension class which can guarantee int inputs in a useful range.
 class MinMaxIntValidator: public QIntValidator
@@ -346,6 +347,7 @@ void ConfigurationDialog::createDialogContent()
 	ui->overwriteTextColorButton->setup("StelApp.overwriteInfoColor", "color/info_text_color");
 	ui->daylightTextColorButton ->setup("StelApp.daylightInfoColor",  "color/daylight_text_color");
 	connectIntProperty(ui->solarSystemThreadNumberSpinBox, "SolarSystem.extraThreads");
+	ui->solarSystemThreadNumberSpinBox->setMaximum(QThreadPool::globalInstance()->maxThreadCount()-1);
 
 	// Font selection. We use a hidden, but documented entry in config.ini to optionally show a font selection option.
 	connectIntProperty(ui->screenFontSizeSpinBox, "StelApp.screenFontSize");
@@ -1058,8 +1060,6 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("astro/flag_aberration",			core->getUseAberration());
 	conf->setValue("astro/aberration_factor",		core->getAberrationFactor());
 	conf->setValue("astro/flag_topocentric_coordinates",	core->getUseTopocentricCoordinates());
-
-	conf->setValue("astro/solar_system_threads",            propMgr->getStelPropertyValue("SolarSystem.extraThreads").toInt());
 
 	// view dialog / DSO tag settings
 	nmgr->storeCatalogFilters();
