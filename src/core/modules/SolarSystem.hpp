@@ -758,7 +758,8 @@ public slots:
 	//! Return the number of additional threads (in addition to the main thread) configured to compute planet positions.
 	int getExtraThreads() const {return extraThreads;}
 	//! Configure the number of additional threads (in addition to the main thread) to compute planet positions.
-	void setExtraThreads(int n){extraThreads=n; emit extraThreadsChanged(n);}
+	//! The argument will be bounded by 0 and QThreadPool::globalInstance()->maxThreadCount()-1
+	void setExtraThreads(int n);
 
 	//! Return the limiting absolute magnitude configured for plotting minor bodies. 30 means "all".
 	double getMarkerMagThreshold() const {return markerMagThreshold;}

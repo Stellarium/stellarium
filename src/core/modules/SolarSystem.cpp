@@ -1527,31 +1527,31 @@ void SolarSystem::computePositions(StelCore *core, double dateJDE, PlanetP obser
 {
 	const StelObserver *obs=core->getCurrentObserver();
 	const bool withAberration=core->getUseAberration();
-	// We distribute computing over a few threads from the current threadpool, but also compute one stride in the main thread so that this does not starve.
-	// Given the comparably low impact of planetary positions on the overall frame time, we don't need more than 4 extra threads. (Profiled with 12.000 objects.)
-//	const int availablePoolThreads=qBound(0, QThreadPool::globalInstance()->maxThreadCount()-QThreadPool::globalInstance()->activeThreadCount(), 4); // qMax(1, QThreadPool::globalInstance()->maxThreadCount()-QThreadPool::globalInstance()->activeThreadCount());
-	const int availablePoolThreads=extraThreads;
+	// We distribute computing over a few threads from the current threadpool, but also compute one block in the main thread so that this does not starve.
+	// Given the comparably low impact of planetary positions on the overall frame time, we usually don't need more than about 4 extra threads. (Profiled with 12.000 objects.)
 	static bool threadMessage=true;
 	if (threadMessage)
 	{
-		qDebug() << "SolarSystem: We should have " << availablePoolThreads << "threads (plus main thread) available for computePositions()";
+		qDebug() << "SolarSystem: We have configured" << extraThreads << "threads (plus main thread) for computePositions().";
+		if (extraThreads > QThreadPool::globalInstance()->maxThreadCount()-1)
+		{
+			qDebug() << "This is more than the maximum additional thread count (" << QThreadPool::globalInstance()->maxThreadCount()-1 << ").";
+			qDebug() << "Consider reducing this number to avoid oversubscription.";
+		}
 		threadMessage=false;
 	}
-	// Activate this to show debug aid strings in screen InfoString
-	//static StelObjectMgr* omgr=GETSTELMODULE(StelObjectMgr);
-	//omgr->removeExtraInfoStrings(StelObject::DebugAid);
 
 	if (flagLightTravelTime) // switching off light time correction implies no aberration for the planets.
 	{
 		// Position of this planet will be used in the subsequent computations
 		observerPlanet->computePosition(obs, dateJDE, Vec3d(0.));
 		const bool observerIsEarth = observerPlanet->englishName==L1S("Earth");
-		Vec3d obsPosJDE=observerPlanet->getHeliocentricEclipticPos();
+		const Vec3d obsPosJDE=observerPlanet->getHeliocentricEclipticPos();
 		const Vec3d aberrationPushSpeed=observerPlanet->getHeliocentricEclipticVelocity() * core->getAberrationFactor();
 		const double dateJD = dateJDE - (core->computeDeltaT(dateJDE))/86400.0;
 
 		const auto processPlanet = [this,dateJD,dateJDE,observerIsEarth,withAberration,observerPlanet,
-					    obsPosJDE,aberrationPushSpeed,obs](const PlanetP& p) // , const Vec3d& observerPosFinal)
+					    obsPosJDE,aberrationPushSpeed,obs](const PlanetP& p, const Vec3d& observerPosFinal)
 		{
 			// 1. First approximation.
 			p->computePosition(obs, dateJDE, Vec3d(0.));
@@ -1594,36 +1594,31 @@ void SolarSystem::computePositions(StelCore *core, double dateJDE, PlanetP obser
 		};
 
 		// This will be used for computation of transformation matrices
-		processPlanet(observerPlanet); //, Vec3d(0.));
+		processPlanet(observerPlanet, Vec3d(0.));
 		observerPlanet->computeTransMatrix(dateJD, dateJDE);
-		//const Vec3d observerPosFinal = observerPlanet->getHeliocentricEclipticPos();
-		// Update this. It will be available in the threaded function
-		obsPosJDE = observerPlanet->getHeliocentricEclipticPos();
+		const Vec3d observerPosFinal = observerPlanet->getHeliocentricEclipticPos();
 
-		//const auto loop = [&planets=systemPlanets,processPlanet,
-		//                   observerPosFinal](const int indexMin, const int indexMax)
-		//{
-		//	for(int i = indexMin; i <= indexMax; ++i)
-		//		processPlanet(planets[i], observerPosFinal);
-		//};
+		// Threadable loop function for self-set number of additional worker threads
+		const auto loop = [&planets=systemPlanets,processPlanet,
+				   observerPosFinal](const int indexMin, const int indexMax)
+		{
+			for(int i = indexMin; i <= indexMax; ++i)
+				processPlanet(planets[i], observerPosFinal);
+		};
 
-		//QList<QFuture<void>> futures;
-		//const auto totalThreads = availablePoolThreads+1;
-		//const auto blockSize = systemPlanets.size() / totalThreads;
-		//for(int threadN=0; threadN<totalThreads-1; ++threadN)
-		//{
-		//	const int indexMin = blockSize*threadN;
-		//	const int indexMax = blockSize*(threadN+1)-1;
-		//	futures.append(QtConcurrent::run(loop, indexMin,indexMax));
-		//}
-		//// and the last thread is the current one
-		//loop(blockSize*(totalThreads-1), systemPlanets.size()-1);
-		//for(auto& f : futures)
-		//	f.waitForFinished();
-
-		QtConcurrent::blockingMap(systemPlanets, processPlanet);
-
-
+		QList<QFuture<void>> futures;
+		const int totalThreads = extraThreads+1;
+		const auto blockSize = systemPlanets.size() / totalThreads;
+		for(int threadN=0; threadN<totalThreads-1; ++threadN)
+		{
+			const int indexMin = blockSize*threadN;
+			const int indexMax = blockSize*(threadN+1)-1;
+			futures.append(QtConcurrent::run(loop, indexMin,indexMax));
+		}
+		// and the last thread is the current one
+		loop(blockSize*(totalThreads-1), systemPlanets.size()-1);
+		for(auto& f : futures)
+			f.waitForFinished();
 	}
 	else
 	{
@@ -1696,7 +1691,7 @@ void SolarSystem::draw(StelCore* core)
 	}
 
 	// And sort them from the farthest to the closest. std::sort can split this into parallel threads!
-	std::sort(//STD_EXECUTION_PAR_COMMA
+	std::sort(STD_EXECUTION_PAR_COMMA
 		  systemPlanets.begin(),systemPlanets.end(),biggerDistance());
 
 	if (trailFader.getInterstate()>0.0000001f)
@@ -3951,4 +3946,11 @@ void SolarSystem::onNewSurvey(HipsSurveyP survey)
 	survey->setProperty("planet", pl->getCommonEnglishName());
 	// Not visible by default for the moment.
 	survey->setProperty("visible", false);
+}
+
+void SolarSystem::setExtraThreads(int n)
+{
+	extraThreads=qBound(0,n,QThreadPool::globalInstance()->maxThreadCount()-1);
+	StelApp::immediateSave("astro/solar_system_threads", extraThreads);
+	emit extraThreadsChanged(extraThreads);
 }
