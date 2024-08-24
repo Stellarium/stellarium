@@ -1526,6 +1526,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 void SolarSystem::computePositions(double dateJDE, PlanetP observerPlanet)
 {
 	StelCore *core=StelApp::getInstance().getCore();
+	const StelObserver *obs=core->getCurrentObserver();
 	const bool withAberration=core->getUseAberration();
 	// We distribute computing over a few threads from the current threadpool, but also compute one stride in the main thread so that this does not starve.
 	// Given the comparably low impact of planetary positions on the overall frame time, we don't need more than 4 extra threads. (Profiled with 12.000 objects.)
@@ -1544,17 +1545,17 @@ void SolarSystem::computePositions(double dateJDE, PlanetP observerPlanet)
 	if (flagLightTravelTime) // switching off light time correction implies no aberration for the planets.
 	{
 		// Position of this planet will be used in the subsequent computations
-		observerPlanet->computePosition(dateJDE, Vec3d(0.));
+		observerPlanet->computePosition(obs, dateJDE, Vec3d(0.));
 		const bool observerIsEarth = observerPlanet->englishName==L1S("Earth");
 		const Vec3d &obsPosJDE=observerPlanet->getHeliocentricEclipticPos();
 		const Vec3d aberrationPushSpeed=observerPlanet->getHeliocentricEclipticVelocity() * core->getAberrationFactor();
 		const double dateJD = dateJDE - (StelApp::getInstance().getCore()->computeDeltaT(dateJDE))/86400.0;
 
 		const auto processPlanet = [this,dateJD,dateJDE,observerIsEarth,withAberration,observerPlanet,
-		                            obsPosJDE,aberrationPushSpeed](const PlanetP& p, const Vec3d& observerPosFinal)
+					    obsPosJDE,aberrationPushSpeed,obs](const PlanetP& p, const Vec3d& observerPosFinal)
 		{
 			// 1. First approximation.
-			p->computePosition(dateJDE, Vec3d(0.));
+			p->computePosition(obs, dateJDE, Vec3d(0.));
 
 			// For higher accuracy, we now make two iterations of light time and aberration correction. In the final
 			// round, we also compute rotation data.  May fix sub-arcsecond inaccuracies, and optionally apply
@@ -1567,7 +1568,7 @@ void SolarSystem::computePositions(double dateJDE, PlanetP observerPlanet)
 			Vec3d aberrationPush(0.);
 			if(needToApplyAberration)
 				aberrationPush=lightTimeDays*aberrationPushSpeed;
-			p->computePosition(dateJDE-lightTimeDays, aberrationPush);
+			p->computePosition(obs, dateJDE-lightTimeDays, aberrationPush);
 
 			// Extra accuracy with another round. Not sure if useful. Maybe hide behind a new property flag?
 			planetPos = p->getHeliocentricEclipticPos();
@@ -1575,7 +1576,7 @@ void SolarSystem::computePositions(double dateJDE, PlanetP observerPlanet)
 			if(needToApplyAberration)
 				aberrationPush=lightTimeDays*aberrationPushSpeed;
 			// The next call may already do nothing if the time difference to the previous round is not large enough.
-			p->computePosition(dateJDE-lightTimeDays, aberrationPush);
+			p->computePosition(obs, dateJDE-lightTimeDays, aberrationPush);
 
 			const auto update = &RotationElements::updatePlanetCorrections;
 			if      (p->englishName==L1S("Moon"))    update(dateJDE-lightTimeDays, RotationElements::EarthMoon);
@@ -1624,7 +1625,7 @@ void SolarSystem::computePositions(double dateJDE, PlanetP observerPlanet)
 		for (const auto& p : std::as_const(systemPlanets))
 		{
 			p->setExtraInfoString(StelObject::DebugAid, "");
-			p->computePosition(dateJDE, Vec3d(0.));
+			p->computePosition(obs, dateJDE, Vec3d(0.));
 			const auto update = &RotationElements::updatePlanetCorrections;
 			if      (p->englishName==L1S("Moon"))    update(dateJDE, RotationElements::EarthMoon);
 			else if (p->englishName==L1S("Mars"))    update(dateJDE, RotationElements::Mars);
@@ -1690,7 +1691,7 @@ void SolarSystem::draw(StelCore* core)
 	}
 
 	// And sort them from the farthest to the closest. std::sort can split this into parallel threads!
-	std::sort(STD_EXECUTION_PAR_COMMA
+	std::sort(//STD_EXECUTION_PAR_COMMA
 		  systemPlanets.begin(),systemPlanets.end(),biggerDistance());
 
 	if (trailFader.getInterstate()>0.0000001f)
@@ -2055,7 +2056,7 @@ void SolarSystem::fillEphemerisDates()
 	}
 }
 
-PlanetP SolarSystem::searchByEnglishName(QString planetEnglishName) const
+PlanetP SolarSystem::searchByEnglishName(const QString &planetEnglishName) const
 {
 	for (const auto& p : systemPlanets)
 	{
@@ -2088,7 +2089,7 @@ PlanetP SolarSystem::searchByEnglishName(QString planetEnglishName) const
 	return PlanetP();
 }
 
-PlanetP SolarSystem::searchMinorPlanetByEnglishName(QString planetEnglishName) const
+PlanetP SolarSystem::searchMinorPlanetByEnglishName(const QString &planetEnglishName) const
 {
 	for (const auto& p : systemMinorBodies)
 	{
@@ -2171,7 +2172,7 @@ StelObjectP SolarSystem::searchByName(const QString& name) const
 	return StelObjectP();
 }
 
-float SolarSystem::getPlanetVMagnitude(QString planetName, bool withExtinction) const
+float SolarSystem::getPlanetVMagnitude(const QString &planetName, bool withExtinction) const
 {
 	StelCore *core=StelApp::getInstance().getCore();
 	double eclipseFactor=getSolarEclipseFactor(core).first;
@@ -2184,7 +2185,7 @@ float SolarSystem::getPlanetVMagnitude(QString planetName, bool withExtinction) 
 	return r;
 }
 
-QString SolarSystem::getPlanetType(QString planetName) const
+QString SolarSystem::getPlanetType(const QString &planetName) const
 {
 	PlanetP p = searchByEnglishName(planetName);
 	if (p.isNull()) // Possible was asked the common name of minor planet?
@@ -2194,7 +2195,7 @@ QString SolarSystem::getPlanetType(QString planetName) const
 	return p->getObjectType();
 }
 
-double SolarSystem::getDistanceToPlanet(QString planetName) const
+double SolarSystem::getDistanceToPlanet(const QString &planetName) const
 {
 	PlanetP p = searchByEnglishName(planetName);
 	if (p.isNull()) // Possible was asked the common name of minor planet?
@@ -2202,7 +2203,7 @@ double SolarSystem::getDistanceToPlanet(QString planetName) const
 	return p->getDistance();
 }
 
-double SolarSystem::getElongationForPlanet(QString planetName) const
+double SolarSystem::getElongationForPlanet(const QString &planetName) const
 {
 	PlanetP p = searchByEnglishName(planetName);
 	if (p.isNull()) // Possible was asked the common name of minor planet?
@@ -2210,7 +2211,7 @@ double SolarSystem::getElongationForPlanet(QString planetName) const
 	return p->getElongation(StelApp::getInstance().getCore()->getObserverHeliocentricEclipticPos());
 }
 
-double SolarSystem::getPhaseAngleForPlanet(QString planetName) const
+double SolarSystem::getPhaseAngleForPlanet(const QString &planetName) const
 {
 	PlanetP p = searchByEnglishName(planetName);
 	if (p.isNull()) // Possible was asked the common name of minor planet?
@@ -2218,7 +2219,7 @@ double SolarSystem::getPhaseAngleForPlanet(QString planetName) const
 	return p->getPhaseAngle(StelApp::getInstance().getCore()->getObserverHeliocentricEclipticPos());
 }
 
-float SolarSystem::getPhaseForPlanet(QString planetName) const
+float SolarSystem::getPhaseForPlanet(const QString &planetName) const
 {
 	PlanetP p = searchByEnglishName(planetName);
 	if (p.isNull()) // Possible was asked the common name of minor planet?
@@ -3648,7 +3649,7 @@ void SolarSystem::reloadPlanets()
 }
 
 // Set the algorithm for computation of apparent magnitudes for planets in case  observer on the Earth
-void SolarSystem::setApparentMagnitudeAlgorithmOnEarth(QString algorithm)
+void SolarSystem::setApparentMagnitudeAlgorithmOnEarth(const QString &algorithm)
 {
 	Planet::setApparentMagnitudeAlgorithm(algorithm);
 	emit apparentMagnitudeAlgorithmOnEarthChanged(algorithm);
@@ -3762,7 +3763,7 @@ bool SolarSystem::getFlagEarthShadowEnlargementDanjon() const
 	return earthShadowEnlargementDanjon;
 }
 
-void SolarSystem::setOrbitColorStyle(QString style)
+void SolarSystem::setOrbitColorStyle(const QString &style)
 {
 	static const QMap<QString, Planet::PlanetOrbitColorStyle>map={
 		{ QString("groups"),                    Planet::ocsGroups},
@@ -3914,7 +3915,7 @@ QPair<Vec3d,Vec3d> SolarSystem::getEarthShadowRadiiAtLunarDistance() const
 	return QPair<Vec3d,Vec3d>(Vec3d(f2, f2_AU, rUmbraAU), Vec3d(f1, f1_AU, rPenumbraAU));
 }
 
-bool SolarSystem::removeMinorPlanet(QString name)
+bool SolarSystem::removeMinorPlanet(const QString &name)
 {
 	PlanetP candidate = searchMinorPlanetByEnglishName(name);
 	if (!candidate)
