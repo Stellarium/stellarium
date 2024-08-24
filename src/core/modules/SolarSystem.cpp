@@ -685,17 +685,17 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		// Only for sorting here we must find our own temporary object name. This is similar but not equal to IAU practice, and must be exactly repeated in the next loop in Stage 2a.
 		QString obName=englishName;
 		const bool isMinor=QStringList({"asteroid", "plutino", "comet", "dwarf planet", "cubewano", "scattered disc object", "oco", "sednoid", "interstellar object"}).contains(pd.value(secname+"/type").toString());
-		if (isMinor && englishName!="Pluto")
+		if (isMinor && englishName!=L1S("Pluto"))
 		{
 			const QString designation = pd.value(secname+"/iau_designation", pd.value(secname+"/minor_planet_number")).toString();
-			if (designation.isEmpty() && (pd.value(secname+"/type") != "comet"))
+			if (designation.isEmpty() && pd.value(secname+"/type") != L1S("comet"))
 				qWarning().noquote() << "Minor body " << englishName << "has incomplete data (missing iau_designation or minor_planet_number) in" << QDir::toNativeSeparators(filePath) << "section" << secname;
 			obName=(QString("%1 (%2)").arg(designation, englishName));
 		}
 		if (secNameMap.contains(obName))
 			qWarning() << "secNameMap already contains " << obName << ". Overwriting data.";
 		secNameMap[obName] = secname;
-		if (strParent!="none" && !strParent.isEmpty() && !englishName.isEmpty())
+		if (strParent!=L1S("none") && !strParent.isEmpty() && !englishName.isEmpty())
 		{
 			parentMap[obName] = strParent;
 			// qDebug() << "parentmap[" << obName << "] = " << strParent;
@@ -710,7 +710,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		const QString englishName = pd.value(secname+"/name", pd.value(secname+"/iau_designation")).toString();
 		QString obName=englishName;
 		const bool isMinor=QStringList({"asteroid", "plutino", "comet", "dwarf planet", "cubewano", "scattered disc object", "oco", "sednoid", "interstellar object"}).contains(pd.value(secname+"/type").toString());
-		if (isMinor && englishName!="Pluto")
+		if (isMinor && englishName!=L1S("Pluto"))
 		{
 			const QString designation = pd.value(secname+"/iau_designation", pd.value(secname+"/minor_planet_number")).toString();
 			obName=(QString("%1 (%2)").arg(designation, englishName));
@@ -718,7 +718,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		// follow dependencies, incrementing level when we have one till we run out.
 		QString p=obName;
 		int level = 0;
-		while(parentMap.contains(p) && parentMap[p]!="none")
+		while(parentMap.contains(p) && parentMap[p]!=L1S("none"))
 		{
 			level++;
 			p = parentMap[p];
@@ -757,7 +757,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		const QString type = pd.value(secname+"/type").toString();
 		QString englishName = pd.value(secname+"/name").toString().simplified();
 		// englishName alone may be a combination of several elements...
-		if (type=="comet" || type == "interstellar object")
+		if (type==L1S("comet") || type == L1S("interstellar object"))
 		{
 			static const QRegularExpression periodicRe("^([1-9][0-9]*[PD](-\\w+)?)"); // No "/" at end, there are nameless numbered comets! (e.g. 362P, 396P)
 			QRegularExpressionMatch periodMatch=periodicRe.match(englishName);
@@ -866,7 +866,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		const double bV = pd.value(secname+"/color_index_bv", 99.).toDouble();
 		const QString strParent = pd.value(secname+"/parent", "Sun").toString(); // Obvious default, keep file entries simple.
 		PlanetP parent;
-		if (strParent!="none")
+		if (strParent!=L1S("none"))
 		{
 			// Look in the other planets the one named with strParent
 			for (const auto& p : std::as_const(systemPlanets))
@@ -884,7 +884,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 				continue;
 			}
 		}
-		Q_ASSERT(parent || englishName=="Sun");
+		Q_ASSERT(parent || englishName==L1S("Sun"));
 
 		const QString coordFuncName = pd.value(secname+"/coord_func", "kepler_orbit").toString(); // 0.20: new default for all non *_special.
 		// qDebug() << "englishName:" << englishName << ", parent:" << strParent <<  ", coord_func:" << coordFuncName;
@@ -898,11 +898,11 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 #ifdef USE_GIMBAL_ORBIT
 		// undefine the flag in Orbit.h to disable and use the old, static observer solution (on an infinitely slow KeplerOrbit)
 		// Note that for now we ignore any orbit-related config values except orbit_SemiMajorAxis from the ini file.
-		if (type=="observer")
+		if (type==L1S("observer"))
 		{
 			double unit = 1; // AU
 			double defaultSemiMajorAxis = 1;
-			if (strParent!="Sun")
+			if (strParent!=L1S("Sun"))
 			{
 				unit /= AU;  // Planet moons have distances given in km in the .ini file! But all further computation done in AU.
 				defaultSemiMajorAxis *= AU;
@@ -918,9 +918,9 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		}
 		else
 #endif
-		if ((coordFuncName=="kepler_orbit") || (coordFuncName=="comet_orbit") || (coordFuncName=="ell_orbit")) // ell_orbit used for planet moons. TBD in V1.0: remove non-kepler_orbit!
+		if (coordFuncName==L1S("kepler_orbit") || coordFuncName==L1S("comet_orbit") || coordFuncName==L1S("ell_orbit")) // ell_orbit used for planet moons. TBD in V1.0: remove non-kepler_orbit!
 		{
-			if (coordFuncName!="kepler_orbit")
+			if (coordFuncName!=L1S("kepler_orbit"))
 				qDebug() << "Old-fashioned entry" << coordFuncName << "found. Please delete line from " << filePath << "section" << secname;
 			// ell_orbit was used for planet moons, comet_orbit for minor bodies. The only difference is that pericenter distance for moons is given in km, not AU.
 			// Read the orbital elements			
@@ -942,7 +942,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 								? 0.0 // parabolic orbits have no semi_major_axis
 								: pericenterDistance / (1.0-eccentricity);
 			}
-			if (strParent!="Sun")
+			if (strParent!=L1S("Sun"))
 				pericenterDistance /= AU;  // Planet moons have distances given in km in the .ini file! But all further computation done in AU.
 
 			double meanMotion = pd.value(secname+"/orbit_MeanMotion",-1e100).toDouble(); // degrees/day
@@ -981,7 +981,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			// In earlier times (up to 0.21.2) we did not care much to store orbital epoch for comets but silently assumed T for it in various places.
 			// However, the distinction is relevant to discern element sets for various valid ranges.
 			// Comet orbits epoch should default to T while planets or moons default to J2000.
-			const double epoch = pd.value(secname+"/orbit_Epoch", type=="comet" ? time_at_pericenter : J2000).toDouble();
+			const double epoch = pd.value(secname+"/orbit_Epoch", type==L1S("comet") ? time_at_pericenter : J2000).toDouble();
 			if (time_at_pericenter <= -1e100) {
 				double mean_anomaly = pd.value(secname+"/orbit_MeanAnomaly",-1e100).toDouble()*(M_PI/180.0);
 				if (mean_anomaly <= -1e10) {
@@ -1033,7 +1033,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 				parent_rot_j2000_longitude = atan2(J2000NodeOrigin*OrbitAxis1,J2000NodeOrigin*OrbitAxis0);
 			}
 
-			const double orbitGoodDays=pd.value(secname+"/orbit_good", parent->englishName!="Sun" ? 0. : -1.).toDouble(); // "Moons" have permanently good orbits.
+			const double orbitGoodDays=pd.value(secname+"/orbit_good", parent->englishName!=L1S("Sun") ? 0. : -1.).toDouble(); // "Moons" have permanently good orbits.
 			const double inclination = pd.value(secname+"/orbit_Inclination", 0.0).toDouble()*(M_PI/180.0);
 
 			// Create a Keplerian orbit. This has been called CometOrbit before 0.20.
@@ -1120,7 +1120,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		// New class objects, named "plutino", "cubewano", "dwarf planet", "SDO", "OCO", has properties
 		// similar to asteroids and we should calculate their positions like for asteroids. Dwarf planets
 		// have one exception: Pluto - as long as we use a special function for calculation of Pluto's orbit.
-		if ((type == "asteroid" || type == "dwarf planet" || type == "cubewano" || type=="sednoid" || type == "plutino" || type == "scattered disc object" || type == "Oort cloud object" || type == "interstellar object") && !englishName.contains("Pluto"))
+		if ((type == L1S("asteroid") || type == L1S("dwarf planet") || type == L1S("cubewano") || type==L1S("sednoid") || type == L1S("plutino") || type == L1S("scattered disc object") || type == L1S("Oort cloud object") || type == L1S("interstellar object")) && !englishName.contains("Pluto"))
 		{
 			minorBodies << englishName;
 
@@ -1182,12 +1182,12 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 
 			if (semi_major_axis>0)
 				mp->deltaJDE = 2.0*semi_major_axis*StelCore::JD_SECOND;
-			 else if ((semi_major_axis<=0.0) && (type!="interstellar object"))
+			 else if (semi_major_axis<=0.0 && type!=L1S("interstellar object"))
 				qWarning().noquote() << "WARNING: Minor body" << englishName << "has no semimajor axis!";
 
 			systemMinorBodies.push_back(newP);
 		}
-		else if (type == "comet")
+		else if (type == L1S("comet"))
 		{
 			minorBodies << englishName;
 			newP = PlanetP(new Comet(englishName,
@@ -1240,7 +1240,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		else // type==star|planet|moon|dwarf planet|observer|artificial
 		{
 			//qDebug() << type;
-			Q_ASSERT(type=="star" || type=="planet" || type=="moon" || type=="artificial" || type=="observer" || type=="dwarf planet"); // TBD: remove Pluto...
+			Q_ASSERT(type==L1S("star") || type==L1S("planet") || type==L1S("moon") || type==L1S("artificial") || type==L1S("observer") || type==L1S("dwarf planet")); // TBD: remove Pluto...
 			// Set possible default name of the normal map for avoiding yin-yang shaped moon
 			// phase when normal map key not exists. Example: moon_normals.png
 			// Details: https://bugs.launchpad.net/stellarium/+bug/1335609			
@@ -1282,9 +1282,9 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			parent->satellites.append(newP);
 			newP->parent = parent;
 		}
-		if (secname=="earth") earth = newP;
-		if (secname=="sun") sun = newP;
-		if (secname=="moon") moon = newP;
+		if (secname==L1S("earth")) earth = newP;
+		if (secname==L1S("sun")) sun = newP;
+		if (secname==L1S("moon")) moon = newP;
 
 		// At this point the orbit and object type (class Planet and subclasses) have been fixed.
 		// For many objects we have oriented spheroids with rotational parameters.
@@ -1424,7 +1424,7 @@ void SolarSystem::computePositions(double dateJDE, PlanetP observerPlanet)
 			const auto planetPos = p->getHeliocentricEclipticPos();
 			const double lightTimeDays = (planetPos-obsPosJDE).norm() * (AU / (SPEED_OF_LIGHT * 86400.));
 			Vec3d aberrationPush(0.);
-			if (withAberration && (observerPlanet->englishName!="Earth" || p->englishName!="Moon"))
+			if (withAberration && (observerPlanet->englishName!=L1S("Earth") || p->englishName!=L1S("Moon")))
 				aberrationPush=lightTimeDays*aberrationPushSpeed;
 			p->computePosition(dateJDE-lightTimeDays, aberrationPush);
 		}
@@ -1435,7 +1435,7 @@ void SolarSystem::computePositions(double dateJDE, PlanetP observerPlanet)
 			const auto planetPos = p->getHeliocentricEclipticPos();
 			const double lightTimeDays = (planetPos-obsPosJDE).norm() * (AU / (SPEED_OF_LIGHT * 86400.));
 			Vec3d aberrationPush(0.);
-			if (withAberration && (observerPlanet->englishName!="Earth" || p->englishName!="Moon"))
+			if (withAberration && (observerPlanet->englishName!=L1S("Earth") || p->englishName!=L1S("Moon")))
 				aberrationPush=lightTimeDays*aberrationPushSpeed;
 			// The next call may already do nothing if the time difference to the previous round is not large enough.
 			p->computePosition(dateJDE-lightTimeDays, aberrationPush);
@@ -1446,12 +1446,12 @@ void SolarSystem::computePositions(double dateJDE, PlanetP observerPlanet)
 //					      .arg(QString::number(aberrationPushSpeed[0], 'f', 3)));
 
 			const auto update = &RotationElements::updatePlanetCorrections;
-			if      (p->englishName=="Moon")    update(dateJDE-lightTimeDays, RotationElements::EarthMoon);
-			else if (p->englishName=="Mars")    update(dateJDE-lightTimeDays, RotationElements::Mars);
-			else if (p->englishName=="Jupiter") update(dateJDE-lightTimeDays, RotationElements::Jupiter);
-			else if (p->englishName=="Saturn")  update(dateJDE-lightTimeDays, RotationElements::Saturn);
-			else if (p->englishName=="Uranus")  update(dateJDE-lightTimeDays, RotationElements::Uranus);
-			else if (p->englishName=="Neptune") update(dateJDE-lightTimeDays, RotationElements::Neptune);
+			if      (p->englishName==L1S("Moon"))    update(dateJDE-lightTimeDays, RotationElements::EarthMoon);
+			else if (p->englishName==L1S("Mars"))    update(dateJDE-lightTimeDays, RotationElements::Mars);
+			else if (p->englishName==L1S("Jupiter")) update(dateJDE-lightTimeDays, RotationElements::Jupiter);
+			else if (p->englishName==L1S("Saturn"))  update(dateJDE-lightTimeDays, RotationElements::Saturn);
+			else if (p->englishName==L1S("Uranus"))  update(dateJDE-lightTimeDays, RotationElements::Uranus);
+			else if (p->englishName==L1S("Neptune")) update(dateJDE-lightTimeDays, RotationElements::Neptune);
 		}
 	}
 	else
@@ -1461,12 +1461,12 @@ void SolarSystem::computePositions(double dateJDE, PlanetP observerPlanet)
 			p->setExtraInfoString(StelObject::DebugAid, "");
 			p->computePosition(dateJDE, Vec3d(0.));
 			const auto update = &RotationElements::updatePlanetCorrections;
-			if      (p->englishName=="Moon")    update(dateJDE, RotationElements::EarthMoon);
-			else if (p->englishName=="Mars")    update(dateJDE, RotationElements::Mars);
-			else if (p->englishName=="Jupiter") update(dateJDE, RotationElements::Jupiter);
-			else if (p->englishName=="Saturn")  update(dateJDE, RotationElements::Saturn);
-			else if (p->englishName=="Uranus")  update(dateJDE, RotationElements::Uranus);
-			else if (p->englishName=="Neptune") update(dateJDE, RotationElements::Neptune);
+			if      (p->englishName==L1S("Moon"))    update(dateJDE, RotationElements::EarthMoon);
+			else if (p->englishName==L1S("Mars"))    update(dateJDE, RotationElements::Mars);
+			else if (p->englishName==L1S("Jupiter")) update(dateJDE, RotationElements::Jupiter);
+			else if (p->englishName==L1S("Saturn"))  update(dateJDE, RotationElements::Saturn);
+			else if (p->englishName==L1S("Uranus"))  update(dateJDE, RotationElements::Uranus);
+			else if (p->englishName==L1S("Neptune")) update(dateJDE, RotationElements::Neptune);
 		}
 	}
 	computeTransMatrices(dateJDE, observerPlanet->getHeliocentricEclipticPos());
@@ -1546,8 +1546,8 @@ void SolarSystem::draw(StelCore* core)
 	// Draw the elements
 	for (const auto& p : std::as_const(systemPlanets))
 	{
-		if ( (p->getEnglishName() != "Sun") ||
-				((p->getEnglishName() == "Sun") && !(core->getSkyDrawer()->getFlagDrawSunAfterAtmosphere())))
+		if ( p->getEnglishName() != L1S("Sun") ||
+				(p->getEnglishName() == L1S("Sun") && !core->getSkyDrawer()->getFlagDrawSunAfterAtmosphere()))
 			p->draw(core, maxMagLabel, planetNameFont);
 	}
 
@@ -1994,7 +1994,7 @@ float SolarSystem::getPhaseForPlanet(QString planetName) const
 QStringList SolarSystem::getObjectsList(QString objType) const
 {
 	QStringList r;
-	if (objType.toLower()=="all")
+	if (objType.toLower()==L1S("all"))
 	{
 		r = listAllObjects(true);
 		// Remove the Sun
@@ -2207,7 +2207,7 @@ void SolarSystem::setFlagShowObjSelfShadows(bool b)
 
 void SolarSystem::setSelected(PlanetP obj)
 {
-	if (obj && obj->getType() == "Planet")
+	if (obj && obj->getType() == L1S("Planet"))
 	{
 		selected = obj;
 		selectedSSO.push_back(obj);
@@ -3493,9 +3493,9 @@ bool SolarSystem::getFlagEarthShadowEnlargementDanjon() const
 
 void SolarSystem::setOrbitColorStyle(QString style)
 {
-	if (style.toLower()=="groups")
+	if (style.toLower()==L1S("groups"))
 		Planet::orbitColorStyle = Planet::ocsGroups;
-	else if (style.toLower()=="major_planets")
+	else if (style.toLower()==L1S("major_planets"))
 		Planet::orbitColorStyle = Planet::ocsMajorPlanets;
 	else
 		Planet::orbitColorStyle = Planet::ocsOneColor;
