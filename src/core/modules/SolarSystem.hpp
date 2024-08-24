@@ -918,9 +918,10 @@ public:
 	QPair<Vec3d,Vec3d> getEarthShadowRadiiAtLunarDistance() const;
 
 	//! Compute the position and transform matrix for every element of the solar system.
+	//! @param core the central StelCore instance
 	//! @param dateJDE the Julian Day in JDE (Ephemeris Time or equivalent)	
 	//! @param observerPlanet planet of the observer (Required for light travel time or aberration computation).
-	void computePositions(double dateJDE, PlanetP observerPlanet);
+	void computePositions(StelCore *core, double dateJDE, PlanetP observerPlanet);
 
 	//! Get the list of all the bodies of the solar system.	
 	const QList<PlanetP>& getAllPlanets() const {return systemPlanets;}

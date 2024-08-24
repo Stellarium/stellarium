@@ -213,6 +213,8 @@ void SolarSystem::init()
 	initializeOpenGLFunctions();
 
 	Q_ASSERT(conf);
+	StelApp *app = &StelApp::getInstance();
+	StelCore *core=app->getCore();
 
 	Planet::init();
 	loadPlanets();	// Load planets data
@@ -220,7 +222,7 @@ void SolarSystem::init()
 	// Compute position and matrix of sun and all the satellites (ie planets)
 	// for the first initialization Q_ASSERT that center is sun center (only impacts on light speed correction)
 	setExtraThreads(conf->value("astro/solar_system_threads", 0).toInt());
-	computePositions(StelApp::getInstance().getCore()->getJDE(), getSun());
+	computePositions(core, core->getJDE(), getSun());
 
 	setSelected("");	// Fix a bug on macosX! Thanks Fumio!
 	setFlagDrawMoonHalo(conf->value("viewing/flag_draw_moon_halo", true).toBool());
@@ -334,11 +336,9 @@ void SolarSystem::init()
 	Planet::hintCircleTex = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/planet-indicator.png");
 	markerCircleTex = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/planet-marker.png");
 
-	StelApp *app = &StelApp::getInstance();
 	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
 	connect(&app->getSkyCultureMgr(), &StelSkyCultureMgr::currentSkyCultureIDChanged, this, &SolarSystem::updateSkyCulture);
 	connect(&StelMainView::getInstance(), SIGNAL(reloadShadersRequested()), this, SLOT(reloadShaders()));
-	StelCore *core = app->getCore();
 	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(recreateTrails()));
 	connect(core, SIGNAL(dateChangedForTrails()), this, SLOT(recreateTrails()));
 
@@ -1523,9 +1523,8 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 
 // Compute the position for every elements of the solar system.
 // The order is not important since the position is computed relatively to the mother body
-void SolarSystem::computePositions(double dateJDE, PlanetP observerPlanet)
+void SolarSystem::computePositions(StelCore *core, double dateJDE, PlanetP observerPlanet)
 {
-	StelCore *core=StelApp::getInstance().getCore();
 	const StelObserver *obs=core->getCurrentObserver();
 	const bool withAberration=core->getUseAberration();
 	// We distribute computing over a few threads from the current threadpool, but also compute one stride in the main thread so that this does not starve.
@@ -1547,12 +1546,12 @@ void SolarSystem::computePositions(double dateJDE, PlanetP observerPlanet)
 		// Position of this planet will be used in the subsequent computations
 		observerPlanet->computePosition(obs, dateJDE, Vec3d(0.));
 		const bool observerIsEarth = observerPlanet->englishName==L1S("Earth");
-		const Vec3d &obsPosJDE=observerPlanet->getHeliocentricEclipticPos();
+		Vec3d obsPosJDE=observerPlanet->getHeliocentricEclipticPos();
 		const Vec3d aberrationPushSpeed=observerPlanet->getHeliocentricEclipticVelocity() * core->getAberrationFactor();
-		const double dateJD = dateJDE - (StelApp::getInstance().getCore()->computeDeltaT(dateJDE))/86400.0;
+		const double dateJD = dateJDE - (core->computeDeltaT(dateJDE))/86400.0;
 
 		const auto processPlanet = [this,dateJD,dateJDE,observerIsEarth,withAberration,observerPlanet,
-					    obsPosJDE,aberrationPushSpeed,obs](const PlanetP& p, const Vec3d& observerPosFinal)
+					    obsPosJDE,aberrationPushSpeed,obs](const PlanetP& p) // , const Vec3d& observerPosFinal)
 		{
 			// 1. First approximation.
 			p->computePosition(obs, dateJDE, Vec3d(0.));
@@ -1589,36 +1588,42 @@ void SolarSystem::computePositions(double dateJDE, PlanetP observerPlanet)
 			if(p != observerPlanet)
 			{
 				const double light_speed_correction = (AU / (SPEED_OF_LIGHT * 86400)) *
-					(p->getHeliocentricEclipticPos()-observerPosFinal).norm();
+					(p->getHeliocentricEclipticPos()-obsPosJDE).norm();
 				p->computeTransMatrix(dateJD-light_speed_correction, dateJDE-light_speed_correction);
 			}
 		};
 
 		// This will be used for computation of transformation matrices
-		processPlanet(observerPlanet, Vec3d(0.));
+		processPlanet(observerPlanet); //, Vec3d(0.));
 		observerPlanet->computeTransMatrix(dateJD, dateJDE);
-		const Vec3d observerPosFinal = observerPlanet->getHeliocentricEclipticPos();
+		//const Vec3d observerPosFinal = observerPlanet->getHeliocentricEclipticPos();
+		// Update this. It will be available in the threaded function
+		obsPosJDE = observerPlanet->getHeliocentricEclipticPos();
 
-		const auto loop = [&planets=systemPlanets,processPlanet,
-		                   observerPosFinal](const int indexMin, const int indexMax)
-		{
-			for(int i = indexMin; i <= indexMax; ++i)
-				processPlanet(planets[i], observerPosFinal);
-		};
+		//const auto loop = [&planets=systemPlanets,processPlanet,
+		//                   observerPosFinal](const int indexMin, const int indexMax)
+		//{
+		//	for(int i = indexMin; i <= indexMax; ++i)
+		//		processPlanet(planets[i], observerPosFinal);
+		//};
 
-		QList<QFuture<void>> futures;
-		const auto totalThreads = availablePoolThreads+1;
-		const auto blockSize = systemPlanets.size() / totalThreads;
-		for(int threadN=0; threadN<totalThreads-1; ++threadN)
-		{
-			const int indexMin = blockSize*threadN;
-			const int indexMax = blockSize*(threadN+1)-1;
-			futures.append(QtConcurrent::run(loop, indexMin,indexMax));
-		}
-		// and the last thread is the current one
-		loop(blockSize*(totalThreads-1), systemPlanets.size()-1);
-		for(auto& f : futures)
-			f.waitForFinished();
+		//QList<QFuture<void>> futures;
+		//const auto totalThreads = availablePoolThreads+1;
+		//const auto blockSize = systemPlanets.size() / totalThreads;
+		//for(int threadN=0; threadN<totalThreads-1; ++threadN)
+		//{
+		//	const int indexMin = blockSize*threadN;
+		//	const int indexMax = blockSize*(threadN+1)-1;
+		//	futures.append(QtConcurrent::run(loop, indexMin,indexMax));
+		//}
+		//// and the last thread is the current one
+		//loop(blockSize*(totalThreads-1), systemPlanets.size()-1);
+		//for(auto& f : futures)
+		//	f.waitForFinished();
+
+		QtConcurrent::blockingMap(systemPlanets, processPlanet);
+
+
 	}
 	else
 	{
@@ -3616,7 +3621,7 @@ void SolarSystem::reloadPlanets()
 
 	// Re-load the ssystem_major.ini and ssystem_minor.ini file
 	loadPlanets();	
-	computePositions(core->getJDE(), getSun());
+	computePositions(core, core->getJDE(), getSun());
 	setSelected("");
 	recreateTrails();
 	

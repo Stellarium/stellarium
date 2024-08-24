@@ -2125,7 +2125,7 @@ void StelCore::updateTime(double deltaTime)
 	// GZ maybe setting this static can speedup a bit?
 	static SolarSystem* solsystem = static_cast<SolarSystem*>(StelApp::getInstance().getModuleMgr().getModule("SolarSystem"));
 	// Likely the most important location where we need JDE:
-	solsystem->computePositions(getJDE(), getCurrentPlanet());
+	solsystem->computePositions(this, getJDE(), getCurrentPlanet());
 }
 
 void StelCore::resetSync()
