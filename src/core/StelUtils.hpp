@@ -79,6 +79,8 @@
 
 #define stelpow10f(x) std::exp((x) * 2.3025850930f)
 
+#define L1S(x) QLatin1String(x)
+
 //! @namespace StelUtils contains general purpose utility functions.
 namespace StelUtils
 {
