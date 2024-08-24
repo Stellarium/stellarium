@@ -600,32 +600,32 @@ public slots:
 	//! @param planetName the case in-sensitive English planet name.
 	//! @param withExtinction the flag for use extinction effect for magnitudes (default not use)
 	//! @return a magnitude
-	float getPlanetVMagnitude(QString planetName, bool withExtinction=false) const;
+	float getPlanetVMagnitude(const QString &planetName, bool withExtinction=false) const;
 
 	//! Get type for Solar system bodies for scripts
 	//! @param planetName the case in-sensitive English planet name.
 	//! @return a type of planet (star, planet, moon, observer, artificial, asteroid, plutino, comet, dwarf planet, cubewano, scattered disc object, Oort cloud object, sednoid, interstellar object)
-	QString getPlanetType(QString planetName) const;
+	QString getPlanetType(const QString &planetName) const;
 
 	//! Get distance to Solar system bodies for scripts
 	//! @param planetName the case in-sensitive English planet name.
 	//! @return a distance (in AU)
-	double getDistanceToPlanet(QString planetName) const;
+	double getDistanceToPlanet(const QString &planetName) const;
 
 	//! Get elongation for Solar system bodies for scripts
 	//! @param planetName the case in-sensitive English planet name.
 	//! @return a elongation (in radians)
-	double getElongationForPlanet(QString planetName) const;
+	double getElongationForPlanet(const QString &planetName) const;
 
 	//! Get phase angle for Solar system bodies for scripts
 	//! @param planetName the case in-sensitive English planet name.
 	//! @return a phase angle (in radians)
-	double getPhaseAngleForPlanet(QString planetName) const;
+	double getPhaseAngleForPlanet(const QString &planetName) const;
 
 	//! Get phase for Solar system bodies for scripts
 	//! @param planetName the case in-sensitive English planet name.
 	//! @return phase, i.e. illuminated fraction [0..1]
-	float getPhaseForPlanet(QString planetName) const;
+	float getPhaseForPlanet(const QString &planetName) const;
 
 	//! Set the algorithm for computation of apparent magnitudes for planets in case observer on the Earth.
 	//! Possible values:
@@ -646,7 +646,7 @@ public slots:
 	//! @param algorithm the case in-sensitive algorithm name
 	//! @note: The structure of algorithms is almost identical, just the numbers are different!
 	//!        You should activate Mueller's algorithm to simulate the eye's impression. (Esp. Venus!)
-	void setApparentMagnitudeAlgorithmOnEarth(QString algorithm);
+	void setApparentMagnitudeAlgorithmOnEarth(const QString &algorithm);
 
 	//! Get the algorithm used for computation of apparent magnitudes for planets in case observer on the Earth
 	//! @see setApparentMagnitudeAlgorithmOnEarth()
@@ -718,7 +718,7 @@ public slots:
 	bool getFlagEarthShadowEnlargementDanjon() const;
 
 	//! Set style of colors of orbits for Solar system bodies
-	void setOrbitColorStyle(QString style);
+	void setOrbitColorStyle(const QString &style);
 	//! Get style of colors of orbits for Solar system bodies
 	QString getOrbitColorStyle() const;
 
@@ -852,8 +852,8 @@ signals:
 	void ephemerisJupiterMarkerColorChanged(const Vec3f & color);
 	void ephemerisSaturnMarkerColorChanged(const Vec3f & color);
 
-	void orbitColorStyleChanged(QString style);
-	void apparentMagnitudeAlgorithmOnEarthChanged(QString algorithm);
+	void orbitColorStyleChanged(const QString &style);
+	void apparentMagnitudeAlgorithmOnEarthChanged(const QString &algorithm);
 
 	void solarSystemDataReloaded();
 	void requestEphemerisVisualization();
@@ -868,9 +868,9 @@ public:
 	//! Get a pointer to a Planet object.
 	//! @param planetEnglishName the English name of the desired planet.
 	//! @return The matching planet pointer if exists or Q_NULLPTR.
-	PlanetP searchByEnglishName(QString planetEnglishName) const;
+	PlanetP searchByEnglishName(const QString &planetEnglishName) const;
 
-	PlanetP searchMinorPlanetByEnglishName(QString planetEnglishName) const;
+	PlanetP searchMinorPlanetByEnglishName(const QString &planetEnglishName) const;
 
 	//! Get the Planet object pointer for the Sun.
 	PlanetP getSun() const {return sun;}
@@ -895,7 +895,7 @@ public:
 
 
 	//! New 0.16: delete a planet from the solar system. Writes a warning to log if this is not a minor object.
-	bool removeMinorPlanet(QString name);
+	bool removeMinorPlanet(const QString &name);
 
 	//! Determines relative amount of sun visible from the observer's position (first element) and the Planet object pointer for eclipsing celestial body (second element).
 	//! Full sun is 1.0, fully covered sun is 0.0.

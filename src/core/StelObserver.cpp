@@ -41,7 +41,7 @@ public:
 	//! @param f1 mixing factor. [0...1]. 1 means dest.
 	void computeAverage(double f1);
 	//! This does nothing, but avoids a crash.
-	void computePosition(const double dateJDE, const Vec3d &aberrationPush) override;
+	void computePosition(const StelObserver *observer, const double dateJDE, const Vec3d &aberrationPush) override;
 private:
 	void setRot(const Vec3d &r);
 	static Vec3d getRot(const Planet* p);
@@ -139,8 +139,9 @@ Vec3d ArtificialPlanet::getRot(const Planet* p)
 	return r;
 }
 
-void ArtificialPlanet::computePosition(const double dateJDE, const Vec3d &aberrationpush)
+void ArtificialPlanet::computePosition(const StelObserver *observer, const double dateJDE, const Vec3d &aberrationpush)
 {
+	Q_UNUSED(observer)
 	Q_UNUSED(dateJDE)
 	Q_UNUSED(aberrationpush)
 }

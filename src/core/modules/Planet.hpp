@@ -51,6 +51,7 @@ class KeplerOrbit;
 class StelFont;
 class StelPainter;
 class StelTranslator;
+class StelObserver;
 class StelOBJ;
 class StelOpenGLArray;
 class HipsSurvey;
@@ -394,9 +395,10 @@ public:
 	//! Note: The only place where this is not used for Earth is to build up orbits for planet moons w.r.t. the parent planet orientation.
 	double getRotObliquity(double JDE) const;
 
-	//! Compute the position and orbital velocity in the parent Planet coordinate system
+	//! Compute the position and orbital velocity in the parent Planet coordinate system and set aberrationPush
+	//! Does not compute new position when dateJDE is less than deltaJDE away from lastJDE
 	//! You can add the aberrationPush value according to Edot*lightTime in Explanatory Supplement (2013) formula 7.55.
-	virtual void computePosition(const double dateJDE, const Vec3d &aberrationPush);
+	virtual void computePosition(const StelObserver *observer, const double dateJDE, const Vec3d &aberrationPush);
 	//! Compute the position and orbital velocity in the parent Planet coordinate system, and return them in eclPosition and eclVelocity
 	//! These may be preferred when we want to avoid setting the actual position (e.g., RTS computation)
 	virtual void computePosition(const double dateJDE, Vec3d &eclPosition, Vec3d &eclVelocity) const;
