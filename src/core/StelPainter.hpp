@@ -487,10 +487,6 @@ private:
 	ArrayDesc normalArray;
 	//! The descriptor for the current opengl color array
 	ArrayDesc colorArray;
-
-	std::unique_ptr<QOpenGLVertexArrayObject> vao;
-	std::unique_ptr<QOpenGLBuffer> verticesVBO;
-	std::unique_ptr<QOpenGLBuffer> indicesVBO;
 };
 
 #endif // STELPAINTER_HPP

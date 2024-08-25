@@ -43,7 +43,18 @@
 #include <QOpenGLTexture>
 #include <QApplication>
 
+namespace
+{
 static const int TEX_CACHE_LIMIT = 7000000;
+
+// These raw pointers are never deleted, because the only time their pointees
+// need to be destroyed is when the whole program is exiting, and at this point
+// we may not even have an OpenGL context anymore, so we'll never need to
+// delete these objects manually.
+QOpenGLVertexArrayObject* vao;
+QOpenGLBuffer* verticesVBO;
+QOpenGLBuffer* indicesVBO;
+}
 
 #ifndef NDEBUG
 QMutex* StelPainter::globalMutex = new QMutex();
@@ -124,9 +135,6 @@ bool StelPainter::linkProg(QOpenGLShaderProgram* prog, const QString& name)
 StelPainter::StelPainter(const StelProjectorP& proj)
 	: QOpenGLFunctions(QOpenGLContext::currentContext())
 	, glState(this)
-	, vao(new QOpenGLVertexArrayObject)
-	, verticesVBO(new QOpenGLBuffer(QOpenGLBuffer::VertexBuffer))
-	, indicesVBO(new QOpenGLBuffer(QOpenGLBuffer::IndexBuffer))
 {
 	Q_ASSERT(proj);
 
@@ -153,11 +161,19 @@ StelPainter::StelPainter(const StelProjectorP& proj)
 	glState.apply(); //apply default OpenGL state
 	setProjector(proj);
 
-	vao->create();
-	indicesVBO->create();
-	indicesVBO->setUsagePattern(QOpenGLBuffer::StreamDraw);
-	verticesVBO->create();
-	verticesVBO->setUsagePattern(QOpenGLBuffer::StreamDraw);
+	if(!vao)
+	{
+		// First ever creation of StelPainter, initialize the objects
+		vao = new QOpenGLVertexArrayObject;
+		verticesVBO = new QOpenGLBuffer(QOpenGLBuffer::VertexBuffer);
+		indicesVBO = new QOpenGLBuffer(QOpenGLBuffer::IndexBuffer);
+
+		vao->create();
+		indicesVBO->create();
+		indicesVBO->setUsagePattern(QOpenGLBuffer::StreamDraw);
+		verticesVBO->create();
+		verticesVBO->setUsagePattern(QOpenGLBuffer::StreamDraw);
+	}
 }
 
 void StelPainter::setProjector(const StelProjectorP& p)
