@@ -3954,3 +3954,10 @@ void SolarSystem::setExtraThreads(int n)
 	StelApp::immediateSave("astro/solar_system_threads", extraThreads);
 	emit extraThreadsChanged(extraThreads);
 }
+
+void SolarSystem::setMarkerMagThreshold(double m)
+{
+	markerMagThreshold=qBound(-2.,m,37.);
+	StelApp::immediateSave("astro/planet_markers_mag_threshold", markerMagThreshold);
+	emit markerMagThresholdChanged(markerMagThreshold);
+}

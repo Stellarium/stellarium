@@ -1441,11 +1441,14 @@
                    <property name="toolTip">
                     <string>Draw markers for objects with magnitude brighter than this</string>
                    </property>
-                   <property name="maximum">
-                    <double>35.000000000000000</double>
+                   <property name="decimals">
+                    <number>1</number>
                    </property>
                    <property name="minimum">
                     <double>5.000000000000000</double>
+                   </property>
+                   <property name="maximum">
+                    <double>37.000000000000000</double>
                    </property>
                    <property name="singleStep">
                     <double>0.100000000000000</double>

@@ -761,10 +761,10 @@ public slots:
 	//! The argument will be bounded by 0 and QThreadPool::globalInstance()->maxThreadCount()-1
 	void setExtraThreads(int n);
 
-	//! Return the limiting absolute magnitude configured for plotting minor bodies. 30 means "all".
+	//! Return the limiting absolute magnitude configured for plotting minor bodies. (min. mag. 37 includes de facto "all".)
 	double getMarkerMagThreshold() const {return markerMagThreshold;}
-	//! Configure the limiting absolute magnitude for plotting minor bodies. Configured value is clamped to -2..30, 30 means "all".
-	void setMarkerMagThreshold(double m) {markerMagThreshold=qBound(-2.,m,35.); emit markerMagThresholdChanged(markerMagThreshold);}
+	//! Configure the limiting absolute magnitude for plotting minor bodies. Configured value is clamped to -2..37 (practical limit)
+	void setMarkerMagThreshold(double m);
 
 signals:
 	void labelsDisplayedChanged(bool b);
