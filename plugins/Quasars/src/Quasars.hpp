@@ -291,7 +291,7 @@ private:
 	int updateFrequencyDays;	
 	bool enableAtStartup;
 
-	void startDownload(QString url);
+	void startDownload(const QString &url);
 	void deleteDownloadProgressBar();
 
 	QSettings* conf;
@@ -316,7 +316,7 @@ private slots:
 	void downloadComplete(QNetworkReply * reply);
 
 	//! Display a message. This is used for plugin-specific warnings and such
-	void displayMessage(const QString& message, const QString hexColor="#999999");
+	void displayMessage(const QString& message, const QString &hexColor="#999999");
 
 	void reloadCatalog(void);
 	//! Call when button "Save settings" in main GUI are pressed

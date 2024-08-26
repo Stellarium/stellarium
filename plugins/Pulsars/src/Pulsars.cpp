@@ -684,7 +684,7 @@ void Pulsars::deleteDownloadProgressBar()
 	}
 }
 
-void Pulsars::startDownload(QString urlString)
+void Pulsars::startDownload(const QString &urlString)
 {
 	QUrl url(urlString);
 	if (!url.isValid() || url.isRelative() || !url.scheme().startsWith("http", Qt::CaseInsensitive))
@@ -792,7 +792,7 @@ void Pulsars::downloadComplete(QNetworkReply *reply)
 }
 
 
-void Pulsars::displayMessage(const QString& message, const QString hexColor)
+void Pulsars::displayMessage(const QString& message, const QString &hexColor)
 {
 	messageIDs << GETSTELMODULE(LabelMgr)->labelScreen(message, 30, 30 + (20*messageIDs.count()), true, 16, hexColor, false, 9000);
 }

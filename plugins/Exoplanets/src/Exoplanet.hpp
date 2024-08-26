@@ -159,7 +159,7 @@ public:
 	}
 
 private:
-	QString getPlanetaryClassI18n(QString ptype) const;
+	QString getPlanetaryClassI18n(const QString &ptype) const;
 
 	bool initialized;
 

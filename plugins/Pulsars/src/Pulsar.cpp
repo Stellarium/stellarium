@@ -377,7 +377,7 @@ double Pulsar::getP1(double p0, double f1) const
 }
 
 
-QString Pulsar::getPulsarTypeInfoString(QString pcode) const
+QString Pulsar::getPulsarTypeInfoString(const QString &pcode) const
 {
 	QStringList out;
 
