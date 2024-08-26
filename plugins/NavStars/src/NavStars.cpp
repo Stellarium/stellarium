@@ -366,7 +366,7 @@ void NavStars::saveConfiguration(void)
 	conf->endGroup();
 }
 
-void NavStars::setCurrentNavigationalStarsSetKey(QString key)
+void NavStars::setCurrentNavigationalStarsSetKey(const QString &key)
 {
 	const QMetaEnum& en = metaObject()->enumerator(metaObject()->indexOfEnumerator("NavigationalStarsSet"));
 	NavigationalStarsSet nsSet = static_cast<NavigationalStarsSet>(en.keyToValue(key.toLatin1().data()));
