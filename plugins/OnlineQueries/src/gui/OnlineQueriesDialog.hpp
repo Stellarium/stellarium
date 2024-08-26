@@ -35,8 +35,8 @@ public:
 
 public slots:
 	void retranslate() override;
-	void setOutputHtml(QString html) const;
-	void setOutputUrl(QUrl url) const;
+	void setOutputHtml(const QString &html) const;
+	void setOutputUrl(const QUrl &url) const;
 
 protected:
 	void createDialogContent() override;

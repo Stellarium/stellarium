@@ -43,7 +43,7 @@ protected:
 	void createDialogContent() override;
 
 private slots:
-	void printErrorMessage(const QString error);
+	void printErrorMessage(const QString &error);
 	void updateState();
 	void updateIPlabel(bool running);
 

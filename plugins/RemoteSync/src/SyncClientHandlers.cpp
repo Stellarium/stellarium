@@ -216,7 +216,7 @@ bool ClientLocationHandler::handleMessage(QDataStream &stream, SyncProtocol::tPa
 	// When attempting to e.g. return to default location, LocationDialog sets a new landscapeID (property message), then resets location (this locationHandler message) which overwrites the landscapeID.
 	// We must first find out whether currentLandscapeID is sync'ed, and if yes, just reset the just-set currentLandscapeID. And if that is zero, do the ZeroColor stuff.
 
-	const bool dontSyncLandscape= (client->isPropertyFilteredAway("LandscapeMgr.currentLandscapeID"));
+	const bool dontSyncLandscape= (client->isPropertyFilteredAway(QString("LandscapeMgr.currentLandscapeID")));
 
 	QString landscapeID=dontSyncLandscape? QString() : GETSTELMODULE(LandscapeMgr)->getCurrentLandscapeID();
 

@@ -98,7 +98,7 @@ bool RemoteSync::configureGui(bool show)
 	return true;
 }
 
-QVariant RemoteSync::argsGetOptionWithArg(const QStringList& args, QString shortOpt, QString longOpt, QVariant defaultValue)
+QVariant RemoteSync::argsGetOptionWithArg(const QStringList& args, const QString &shortOpt, const QString &longOpt, const QVariant &defaultValue)
 {
 	// Don't see anything after a -- as an option
 	int lastOptIdx = args.indexOf("--");
@@ -412,12 +412,12 @@ void RemoteSync::saveSettings()
 	conf->endGroup();
 }
 
-QString RemoteSync::packStringList(const QStringList props)
+QString RemoteSync::packStringList(const QStringList &props)
 {
 	return props.join("|");
 }
 
-QStringList RemoteSync::unpackStringList(const QString packedProps)
+QStringList RemoteSync::unpackStringList(const QString &packedProps)
 {
 	return packedProps.split("|");
 }

@@ -144,7 +144,7 @@ public slots:
 	bool isLabelVisible() const {return flagLabel;}
 	void setLineType(const ArchaeoLine::Line line) {lineType=line; updateLabel();} // Meaningful only for CurrentPlanet... types
 	//! change label. Used only for selected-object line - the other labels should not be changed!
-	void setLabel(const QString newLabel){label=newLabel;}
+	void setLabel(const QString &newLabel){label=newLabel;}
 	QString getLabel() const {return label;}
 
 private:

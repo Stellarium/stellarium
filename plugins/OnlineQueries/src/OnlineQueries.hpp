@@ -102,10 +102,10 @@ private slots:
 
 private:
 	//! The actual query worker: build name or HIP number from currently selected object
-	void query(QString url, bool useHip);
+	void query(const QString &url, bool useHip);
 	void createToolbarButton() const;
-	void setOutputHtml(QString html); //!< Forward html to GUI dialog
-	void setOutputUrl(QUrl url);      //!< Forward URL to GUI dialog
+	void setOutputHtml(const QString &html); //!< Forward html to GUI dialog
+	void setOutputUrl(const QUrl &url);      //!< Forward URL to GUI dialog
 	OnlineQueriesDialog* dialog;
 	QSettings* conf;
 	bool enabled;                     //!< show dialog?

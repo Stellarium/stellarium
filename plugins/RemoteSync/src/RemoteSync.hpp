@@ -165,12 +165,12 @@ private slots:
 private:
 	void setState(RemoteSync::SyncState state);
 	void setError(const QString& errorString);
-	QVariant argsGetOptionWithArg(const QStringList &args, QString shortOpt, QString longOpt, QVariant defaultValue);
+	QVariant argsGetOptionWithArg(const QStringList &args, const QString &shortOpt, const QString &longOpt, const QVariant &defaultValue);
 
 	SyncState applyClientBehavior(ClientBehavior bh);
 
-	static QString packStringList(const QStringList props);
-	static QStringList unpackStringList(const QString packedProps);
+	static QString packStringList(const QStringList &props);
+	static QStringList unpackStringList(const QString &packedProps);
 
 	//The host string/IP addr to connect to
 	QString clientServerHost;

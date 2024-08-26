@@ -145,7 +145,7 @@ void OnlineQueriesDialog::createDialogContent()
 #endif
 }
 
-void OnlineQueriesDialog::setOutputHtml(QString html) const
+void OnlineQueriesDialog::setOutputHtml(const QString &html) const
 {
 	if (plugin->webEngineDisabled())
 	{
@@ -157,7 +157,7 @@ void OnlineQueriesDialog::setOutputHtml(QString html) const
 	}
 }
 
-void OnlineQueriesDialog::setOutputUrl(QUrl url) const
+void OnlineQueriesDialog::setOutputUrl(const QUrl &url) const
 {
 #ifdef WITH_QTWEBENGINE
 	if (plugin->webEngineDisabled())
