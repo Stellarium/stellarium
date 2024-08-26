@@ -744,7 +744,7 @@ void TextUserInterface::handleKeys(QKeyEvent* event)
 	}
 }
 
-void TextUserInterface::setHomePlanet(QString planetName)
+void TextUserInterface::setHomePlanet(const QString &planetName)
 {
 	StelCore* core = StelApp::getInstance().getCore();
 	if (core->getCurrentLocation().planetName != planetName)
@@ -798,33 +798,33 @@ double TextUserInterface::getLongitude(void)
 	return static_cast<double>(StelApp::getInstance().getCore()->getCurrentLocation().getLongitude());
 }
 
-void TextUserInterface::setStartupDateMode(QString mode)
+void TextUserInterface::setStartupDateMode(const QString &mode)
 {
 	StelApp::getInstance().getCore()->setStartupTimeMode(mode);
 }
 
-void TextUserInterface::setDateFormat(QString format)
+void TextUserInterface::setDateFormat(const QString &format)
 {
 	StelApp::getInstance().getLocaleMgr().setDateFormatStr(format);
 }
 
-void TextUserInterface::setTimeFormat(QString format)
+void TextUserInterface::setTimeFormat(const QString &format)
 {
 	StelApp::getInstance().getLocaleMgr().setTimeFormatStr(format);
 }
 
-void TextUserInterface::setSkyCulture(QString i18)
+void TextUserInterface::setSkyCulture(const QString &i18)
 {
 	StelApp::getInstance().getSkyCultureMgr().setCurrentSkyCultureNameI18(i18);
 }
 
-void TextUserInterface::setAppLanguage(QString lang)
+void TextUserInterface::setAppLanguage(const QString &lang)
 {
 	QString code = StelTranslator::nativeNameToIso639_1Code(lang);
 	StelApp::getInstance().getLocaleMgr().setAppLanguage(code);
 }
 
-void TextUserInterface::setSkyLanguage(QString lang)
+void TextUserInterface::setSkyLanguage(const QString &lang)
 {
 	QString code = StelTranslator::nativeNameToIso639_1Code(lang);
 	StelApp::getInstance().getLocaleMgr().setSkyLanguage(code);

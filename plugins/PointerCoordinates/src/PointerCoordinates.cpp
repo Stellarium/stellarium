@@ -448,7 +448,7 @@ void PointerCoordinates::setFlagShowCoordinatesButton(bool b)
 }
 
 // Set the current place of the string with coordinates from its key
-void PointerCoordinates::setCurrentCoordinatesPlaceKey(QString key)
+void PointerCoordinates::setCurrentCoordinatesPlaceKey(const QString &key)
 {
 	const QMetaEnum& en = metaObject()->enumerator(metaObject()->indexOfEnumerator("CoordinatesPlace"));
 	CoordinatesPlace coordPlace = static_cast<CoordinatesPlace>(qMax(0, en.keyToValue(key.toLatin1().data())));
@@ -461,7 +461,7 @@ QString PointerCoordinates::getCurrentCoordinatesPlaceKey() const
 	return metaObject()->enumerator(metaObject()->indexOfEnumerator("CoordinatesPlace")).key(currentPlace);
 }
 
-void PointerCoordinates::setCurrentCoordinateSystemKey(QString key)
+void PointerCoordinates::setCurrentCoordinateSystemKey(const QString &key)
 {
 	const QMetaEnum& en = metaObject()->enumerator(metaObject()->indexOfEnumerator("CoordinateSystem"));
 	CoordinateSystem coordSystem = static_cast<CoordinateSystem>(qMax(0, en.keyToValue(key.toLatin1().data())));
@@ -473,12 +473,12 @@ QString PointerCoordinates::getCurrentCoordinateSystemKey() const
 	return metaObject()->enumerator(metaObject()->indexOfEnumerator("CoordinateSystem")).key(currentCoordinateSystem);
 }
 
-QPair<int, int> PointerCoordinates::getCoordinatesPlace(QString text, int line)
+QPair<int, int> PointerCoordinates::getCoordinatesPlace(const QString &text, int line)
 {
 	int height, x = 0, y = 0, shift = 0;
 	static const float coeff = 1.5;
 	QFontMetrics fm(font);
-	QSize fs = fm.size(Qt::TextSingleLine, text);
+	const QSize fs = fm.size(Qt::TextSingleLine, text);
 	height = (line>1) ? static_cast<int>((line-1)*fs.height() + fs.height()*coeff) : static_cast<int>(fs.height()*coeff);
 	switch(getCurrentCoordinatesPlace())
 	{

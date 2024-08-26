@@ -50,7 +50,7 @@ private:
 
 	void setAboutHtml();
 	void populateValues();
-	void setCustomCoordinatesAccess(QString place);
+	void setCustomCoordinatesAccess(const QString &place);
 
 private slots:
 	void saveCoordinatesSettings();

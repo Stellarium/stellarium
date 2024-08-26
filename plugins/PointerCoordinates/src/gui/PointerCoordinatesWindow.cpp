@@ -225,7 +225,7 @@ void PointerCoordinatesWindow::setCustomCoordinatesPlace()
 	coord->setCustomCoordinatesPlace(ui->spinBoxX->value(), ui->spinBoxY->value());
 }
 
-void PointerCoordinatesWindow::setCustomCoordinatesAccess(QString place)
+void PointerCoordinatesWindow::setCustomCoordinatesAccess(const QString &place)
 {
 	if (place.contains("Custom"))
 	{

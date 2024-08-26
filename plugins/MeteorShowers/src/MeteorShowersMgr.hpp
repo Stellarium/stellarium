@@ -287,7 +287,7 @@ public slots:
 	void restoreDefaultSettings();
 
 	//! Display a message. This is used for plugin-specific warnings and such
-	void displayMessage(const QString& message, const QString hexColor="#999999");
+	void displayMessage(const QString& message, const QString &hexColor="#999999");
 
 private slots:
 	void checkForUpdates();
@@ -341,7 +341,7 @@ private:
 	void loadTextures();
 	bool loadCatalog(const QString& jsonPath);
 
-	void startDownload(QString url);
+	void startDownload(const QString &url);
 	void deleteDownloadProgressBar();
 
 	//! Enable/disable the Meteor Showers plugin.

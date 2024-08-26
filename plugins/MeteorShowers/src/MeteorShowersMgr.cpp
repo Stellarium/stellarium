@@ -333,7 +333,7 @@ void MeteorShowersMgr::deleteDownloadProgressBar()
 	}
 }
 
-void MeteorShowersMgr::startDownload(QString urlString)
+void MeteorShowersMgr::startDownload(const QString &urlString)
 {
 	QUrl url(urlString);
 	if (!url.isValid() || url.isRelative() || !url.scheme().startsWith("http", Qt::CaseInsensitive))
@@ -609,7 +609,7 @@ QDateTime MeteorShowersMgr::getNextUpdate()
 	return m_lastUpdate.addSecs(m_updateFrequencyHours * 3600);
 }
 
-void MeteorShowersMgr::displayMessage(const QString& message, const QString hexColor)
+void MeteorShowersMgr::displayMessage(const QString& message, const QString &hexColor)
 {
 	m_messageIDs << GETSTELMODULE(LabelMgr)->labelScreen(message, 30, 30 + (20 * m_messageIDs.count()), true, 16, hexColor, false, 9000);
 }
