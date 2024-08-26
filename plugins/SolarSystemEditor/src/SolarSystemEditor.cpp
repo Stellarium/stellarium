@@ -275,7 +275,7 @@ void SolarSystemEditor::resetSolarSystemToDefault()
 	}
 }
 
-bool SolarSystemEditor::copySolarSystemConfigurationFileTo(QString filePath)
+bool SolarSystemEditor::copySolarSystemConfigurationFileTo(const QString &filePath)
 {
 	if (QFile::exists(customSolarSystemFilePath))
 	{
@@ -288,7 +288,7 @@ bool SolarSystemEditor::copySolarSystemConfigurationFileTo(QString filePath)
 	}
 }
 
-bool SolarSystemEditor::isFileEncodingValid(QString filePath) const
+bool SolarSystemEditor::isFileEncodingValid(const QString &filePath) const
 {
 	QFile checkFile(filePath);
 	if (!checkFile.open(QIODevice::ReadOnly))
@@ -324,7 +324,7 @@ bool SolarSystemEditor::isFileEncodingValid(QString filePath) const
 	}
 }
 
-bool SolarSystemEditor::replaceSolarSystemConfigurationFileWith(QString filePath)
+bool SolarSystemEditor::replaceSolarSystemConfigurationFileWith(const QString &filePath)
 {
 	if (!QFile::exists(filePath))
 	{
@@ -378,7 +378,7 @@ bool SolarSystemEditor::replaceSolarSystemConfigurationFileWith(QString filePath
 	}
 }
 
-bool SolarSystemEditor::addFromSolarSystemConfigurationFile(QString filePath)
+bool SolarSystemEditor::addFromSolarSystemConfigurationFile(const QString &filePath)
 {
 	if (!QFile::exists(filePath))
 	{
@@ -448,7 +448,7 @@ bool SolarSystemEditor::addFromSolarSystemConfigurationFile(QString filePath)
 	}
 }
 
-QHash<QString,QString> SolarSystemEditor::listAllLoadedObjectsInFile(QString filePath) const
+QHash<QString,QString> SolarSystemEditor::listAllLoadedObjectsInFile(const QString &filePath) const
 {
 	if (!QFile::exists(filePath))
 		return QHash<QString,QString>();
@@ -592,7 +592,7 @@ QHash<QString,QString> SolarSystemEditor::listAllLoadedSsoIdentifiers() const
 	}
 }
 
-bool SolarSystemEditor::removeSsoWithName(QString name)
+bool SolarSystemEditor::removeSsoWithName(const QString &name)
 {
 	if (name.isEmpty())
 		return false;
@@ -656,7 +656,7 @@ bool SolarSystemEditor::removeSsoWithName(QString name)
   "0128P      b  2007 06 13.8064  3.062504  0.320891  210.3319  214.3583    4.3606  20100723   8.5  4.0  128P/Shoemaker-Holt                                      MPC 51822" -> fragment, fixed
   "0141P      d  2010 05 29.7106  0.757809  0.749215  149.3298  246.0849   12.8032  20100723  12.0 12.0  141P/Machholz                                            MPC 59599" -> fragment, fixed
 */
-SsoElements SolarSystemEditor::readMpcOneLineCometElements(QString oneLineElements) const
+SsoElements SolarSystemEditor::readMpcOneLineCometElements(const QString &oneLineElements) const
 {
 	static const QRegularExpression leadingZerosExpr("^0*");
 	SsoElements result;
@@ -941,7 +941,7 @@ SsoElements SolarSystemEditor::readMpcOneLineCometElements(QString oneLineElemen
 	return result;
 }
 
-SsoElements SolarSystemEditor::readMpcOneLineMinorPlanetElements(QString oneLineElements) const
+SsoElements SolarSystemEditor::readMpcOneLineMinorPlanetElements(const QString &oneLineElements) const
 {
 	SsoElements result;
 
@@ -1200,7 +1200,7 @@ SsoElements SolarSystemEditor::readMpcOneLineMinorPlanetElements(QString oneLine
 	return result;
 }
 
-QList<SsoElements> SolarSystemEditor::readMpcOneLineCometElementsFromFile(QString filePath) const
+QList<SsoElements> SolarSystemEditor::readMpcOneLineCometElementsFromFile(const QString &filePath) const
 {
 	QList<SsoElements> objectList;
 
@@ -1252,7 +1252,7 @@ QList<SsoElements> SolarSystemEditor::readMpcOneLineCometElementsFromFile(QStrin
 	}
 }
 
-QList<SsoElements> SolarSystemEditor::readMpcOneLineMinorPlanetElementsFromFile(QString filePath) const
+QList<SsoElements> SolarSystemEditor::readMpcOneLineMinorPlanetElementsFromFile(const QString &filePath) const
 {
 	QList<SsoElements> objectList;
 
@@ -1304,7 +1304,7 @@ QList<SsoElements> SolarSystemEditor::readMpcOneLineMinorPlanetElementsFromFile(
 	}
 }
 
-bool SolarSystemEditor::appendToSolarSystemConfigurationFile(QList<SsoElements> objectList)
+bool SolarSystemEditor::appendToSolarSystemConfigurationFile(const QList<SsoElements> &objectList)
 {
 	qDebug() << "appendToSolarSystemConfigurationFile begin ... ";
 	if (objectList.isEmpty())
@@ -1450,7 +1450,7 @@ bool SolarSystemEditor::appendToSolarSystemConfigurationFile(QList<SsoElements> 
 	}
 }
 
-bool SolarSystemEditor::appendToSolarSystemConfigurationFile(SsoElements object)
+bool SolarSystemEditor::appendToSolarSystemConfigurationFile(const SsoElements &object)
 {
 	if (!object.contains("section_name") || object.value("section_name").toString().isEmpty())
 	{
@@ -1463,7 +1463,7 @@ bool SolarSystemEditor::appendToSolarSystemConfigurationFile(SsoElements object)
 	return appendToSolarSystemConfigurationFile(list);
 }
 
-bool SolarSystemEditor::updateSolarSystemConfigurationFile(QList<SsoElements> objectList, UpdateFlags flags)
+bool SolarSystemEditor::updateSolarSystemConfigurationFile(const QList<SsoElements> &objectList, UpdateFlags flags)
 {
 	if (objectList.isEmpty())
 	{
@@ -1623,7 +1623,7 @@ bool SolarSystemEditor::updateSolarSystemConfigurationFile(QList<SsoElements> ob
 	return true;
 }
 
-void SolarSystemEditor::updateSsoProperty(QSettings & settings, SsoElements & properties, QString key)
+void SolarSystemEditor::updateSsoProperty(QSettings & settings, const SsoElements & properties, const QString &key)
 {
 	if (properties.contains(key))
 	{
@@ -1631,7 +1631,7 @@ void SolarSystemEditor::updateSsoProperty(QSettings & settings, SsoElements & pr
 	}
 }
 
-QString SolarSystemEditor::convertToGroupName(QString &name, int minorPlanetNumber)
+QString SolarSystemEditor::convertToGroupName(const QString &name, int minorPlanetNumber)
 {
 	//TODO: Should I remove all non-alphanumeric, or only the obviously problematic?
 	QString groupName(name);
@@ -1653,7 +1653,7 @@ QString SolarSystemEditor::convertToGroupName(QString &name, int minorPlanetNumb
 	return groupName;
 }
 
-QString SolarSystemEditor::fixGroupName(QString &name)
+QString SolarSystemEditor::fixGroupName(const QString &name)
 {
 	QString groupName(name);
 	groupName.replace("%25", "%");

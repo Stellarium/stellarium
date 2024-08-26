@@ -97,7 +97,7 @@ public:
 	//! \todo Recognise the long form packed designations (to handle fragments)
 	//! \todo Handle better any unusual symbols in section names (URL encoding?)
 	//! \todo Use column cuts instead of a regular expression?
-	SsoElements readMpcOneLineCometElements(QString oneLineElements) const;
+	SsoElements readMpcOneLineCometElements(const QString &oneLineElements) const;
 
 	//! Reads a single minor planet's orbital elements from a string.
 	//! This function converts a line of minor planet orbital elements in
@@ -108,7 +108,7 @@ public:
 	//! \returns an empty hash if there is an error or the source string is not
 	//! a valid line in MPC format.
 	//! \todo Handle better any unusual symbols in section names (URL encoding?)
-	SsoElements readMpcOneLineMinorPlanetElements(QString oneLineElements) const;
+	SsoElements readMpcOneLineMinorPlanetElements(const QString &oneLineElements) const;
 
 	//! Reads a list of comet orbital elements from a file.
 	//! This function reads a list of comet orbital elements in MPC's one-line
@@ -117,7 +117,7 @@ public:
 	//! Example source file is the list of observable comets on the MPC's site:
 	//! http://www.minorplanetcenter.org/iau/Ephemerides/Comets/Soft00Cmt.txt
 	//! readMpcOneLineCometElements() is used internally to parse each line.
-	QList<SsoElements> readMpcOneLineCometElementsFromFile(QString filePath) const;
+	QList<SsoElements> readMpcOneLineCometElementsFromFile(const QString &filePath) const;
 
 	//! Reads a list of minor planet orbital elements from a file.
 	//! This function reads a list of minor planets orbital elements in MPC's
@@ -126,7 +126,7 @@ public:
 	//! Example source file is the list of bright asteroids on the MPC's site:
 	//! http://www.minorplanetcenter.org/iau/Ephemerides/Bright/2010/Soft00Bright.txt
 	//! readMpcOneLineMinorPlanetElements() is used internally to parse each line.
-	QList<SsoElements> readMpcOneLineMinorPlanetElementsFromFile(QString filePath) const;
+	QList<SsoElements> readMpcOneLineMinorPlanetElementsFromFile(const QString &filePath) const;
 
 	//! Adds a new entry at the end of the user solar system configuration file.
 	//! This function writes directly to the file. See the note on why QSettings
@@ -134,7 +134,7 @@ public:
 	//! appendToSolarSystemConfigurationFile(QList<SsoElements>)
 	//! Duplicates are removed: If any section in the file matches the
 	//! "section_name" value of the inserted entry, it is removed.
-	bool appendToSolarSystemConfigurationFile(SsoElements object);
+	bool appendToSolarSystemConfigurationFile(const SsoElements &object);
 
 	//! Adds new entries at the end of the user solar system configuration file.
 	//! XXX Also updates existing objects (by removing and then appending)
@@ -160,7 +160,7 @@ public:
 	//! continues from the next entry.
 	//! \todo Protect the default Solar System configuration?
 	//! \todo At least warn when overwriting old entries?
-	bool appendToSolarSystemConfigurationFile(QList<SsoElements>);
+	bool appendToSolarSystemConfigurationFile(const QList<SsoElements> &objectList);
 
 	//! Flags to control the updateSolarSystemConfigurationFile() function.
 	enum UpdateFlag {
@@ -175,7 +175,7 @@ public:
 	//! \param objects a list of data for already existing objects (non-existing ones are skipped);
 	//! \param flags flags controlling what is being updated. See UpdateFlag.
 	//! \returns false if the operation has failed for some reason.
-	bool updateSolarSystemConfigurationFile(QList<SsoElements> objects, UpdateFlags flags);
+	bool updateSolarSystemConfigurationFile(const QList<SsoElements> &objects, UpdateFlags flags);
 
 	//! Returns the names of the objects listed in the default ssystem_major.ini.
 	//! The default solar system configuration file is assumed to be the one
@@ -192,19 +192,19 @@ public:
 	//! \returns true if the entry has been removed successfully or there is
 	//! no such entry
 	//! \returns false if there was an error
-	bool removeSsoWithName(QString name);
+	bool removeSsoWithName(const QString &name);
 
 	//! Export current minor bodies file from user data directory (if it exists) to filePath. Return true on success.
-	bool copySolarSystemConfigurationFileTo(QString filePath);
+	bool copySolarSystemConfigurationFileTo(const QString &filePath);
 
 	//! Replace current minor bodies file in the user data directory.
 	//! Writes warning to logfile and returns false in case of problems.
-	bool replaceSolarSystemConfigurationFileWith(QString filePath);
+	bool replaceSolarSystemConfigurationFileWith(const QString &filePath);
 
 	//! (new 0.16)
 	//! Loads all new objects from filePath (an .ini file), and updates existing objects
 	//! Default proposal is ssystem_1000comets.ini in the installation dir.
-	bool addFromSolarSystemConfigurationFile(QString filePath);
+	bool addFromSolarSystemConfigurationFile(const QString &filePath);
 
 	//! returns the path
 	QString getCustomSolarSystemFilePath() const {return customSolarSystemFilePath;}
@@ -271,7 +271,7 @@ private:
 	//! Gets the names of the minor planet objects listed in a ssystem.ini-formatted file.
 	//! Used internally in readAllCurrentSsoNames() and in init() to initialize
 	//! defaultSsoNames.
-	QHash<QString,QString> listAllLoadedObjectsInFile(QString filePath) const;
+	QHash<QString,QString> listAllLoadedObjectsInFile(const QString &filePath) const;
 
 	//! Creates a copy of the default ssystem.ini file in the user data directory.
 	//! \returns true if a file already exists or the copying has been successful
@@ -284,7 +284,7 @@ private:
 	bool resetSolarSystemConfigurationFile() const;
 
 	//! Check encoding of the file
-	bool isFileEncodingValid(QString filePath) const;
+	bool isFileEncodingValid(const QString &filePath) const;
 
 	//! Load data for comets: designations and discovery circumstances
 	void initCometCrossref();
@@ -309,13 +309,13 @@ private:
 
 
 	//! Updates a value in a configuration file with a value with the same key in a SsoElements hash.
-	static void updateSsoProperty(QSettings& configuration, SsoElements& properties, QString key);
+	static void updateSsoProperty(QSettings& configuration, const SsoElements& properties, const QString &key);
 
 	//! Converts an object name to a key (group) name in a configuration file.
-	static QString convertToGroupName(QString& name, int minorPlanetNumber = 0);
+	static QString convertToGroupName(const QString &name, int minorPlanetNumber = 0);
 	
 	//! replaces "%25" by "%", then replaces "%28" by "(" and "%29" by ")".
-	static QString fixGroupName(QString &name);
+	static QString fixGroupName(const QString &name);
 };
 
 
