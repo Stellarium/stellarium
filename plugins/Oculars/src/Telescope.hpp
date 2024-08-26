@@ -46,7 +46,7 @@ public:
 	double focalLength() const;
 	void setFocalLength(double theValue);
 	const QString name() const;
-	void setName(QString theValue);
+	void setName(const QString &theValue);
 	bool isHFlipped() const;
 	void setHFlipped(bool flipped);
 	bool isVFlipped() const;

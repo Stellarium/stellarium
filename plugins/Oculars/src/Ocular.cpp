@@ -91,7 +91,7 @@ QString Ocular::name(void) const
 	return m_name;
 }
 
-void Ocular::setName(const QString aName)
+void Ocular::setName(const QString &aName)
 {
 	m_name = aName;
 }
@@ -150,7 +150,7 @@ QString Ocular::reticlePath(void) const
 {
 	return m_reticlePath;
 }
-void Ocular::setReticlePath(const QString path)
+void Ocular::setReticlePath(const QString &path)
 {
 	m_reticlePath = path;
 }

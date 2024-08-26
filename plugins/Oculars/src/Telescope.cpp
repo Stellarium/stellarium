@@ -62,7 +62,7 @@ const QString Telescope::name() const
 	return m_name;
 }
 
-void Telescope::setName(QString theValue)
+void Telescope::setName(const QString &theValue)
 {
 	m_name = theValue;
 }

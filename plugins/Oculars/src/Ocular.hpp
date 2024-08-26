@@ -57,9 +57,9 @@ public:
 	double fieldStop(void) const;
 	void setFieldStop(const double fs);
 	QString name(void) const;
-	void setName(const QString aName);
+	void setName(const QString &aName);
 	QString reticlePath(void) const;
-	void setReticlePath(const QString path);
+	void setReticlePath(const QString &path);
 
 	double actualFOV(const Telescope * telescope, const Lens *lens) const;
 	double magnification(const Telescope * telescope, const Lens *lens) const;
