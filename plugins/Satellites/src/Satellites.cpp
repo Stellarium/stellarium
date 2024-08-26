@@ -1799,7 +1799,7 @@ int Satellites::getSecondsToUpdate(void)
 	return QDateTime::currentDateTime().secsTo(nextUpdate);
 }
 
-void Satellites::setTleSources(QStringList tleSources)
+void Satellites::setTleSources(const QStringList &tleSources)
 {
 	updateUrls = tleSources;
 	saveTleSources(updateUrls);
@@ -2471,18 +2471,18 @@ void Satellites::recalculateOrbitLines(void)
 	}
 }
 
-void Satellites::displayMessage(const QString& message, const QString hexColor)
+void Satellites::displayMessage(const QString& message, const QString &hexColor)
 {
 	messageIDs << GETSTELMODULE(LabelMgr)->labelScreen(message, 30, 30 + (20*messageIDs.count()), true, 16, hexColor, false, 9000);
 }
 
 
-void Satellites::saveCatalog(QString path)
+void Satellites::saveCatalog(const QString &path)
 {
 	saveDataMap(createDataMap(), path);
 }
 
-void Satellites::updateFromFiles(QStringList paths, bool deleteFiles)
+void Satellites::updateFromFiles(const QStringList &paths, bool deleteFiles)
 {
 	// Container for the new data.
 	TleDataHash newTleSets;

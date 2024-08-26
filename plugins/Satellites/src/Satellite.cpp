@@ -467,7 +467,7 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 	return str;
 }
 
-QString Satellite::getCommLinkInfo(CommLink comm) const
+QString Satellite::getCommLinkInfo(const CommLink &comm) const
 {
 	QString commLinkData;
 	if (!comm.modulation.isEmpty()) // OK, the signal modulation mode is exist
@@ -506,7 +506,7 @@ QString Satellite::getCommLinkInfo(CommLink comm) const
 }
 
 // Calculate perigee and apogee altitudes for mean Earth radius
-void Satellite::calculateSatDataFromLine2(QString tle)
+void Satellite::calculateSatDataFromLine2(const QString &tle)
 {
 	// Details: http://www.satobs.org/seesat/Dec-2002/0197.html
 	const double k = 8681663.653;
@@ -519,7 +519,7 @@ void Satellite::calculateSatDataFromLine2(QString tle)
 }
 
 // Calculate epoch of TLE
-void Satellite::calculateEpochFromLine1(QString tle)
+void Satellite::calculateEpochFromLine1(const QString &tle)
 {
 	QString epochStr;
 	// Details: https://celestrak.org/columns/v04n03/ or https://en.wikipedia.org/wiki/Two-line_element_set

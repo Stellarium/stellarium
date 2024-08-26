@@ -49,7 +49,7 @@ public slots:
 	void setVisible(bool visible = true) override;
 
 private slots:
-	void updateSatID(QString satID);
+	void updateSatID(const QString &satID);
 	void selectCurrentCommLink();
 
 	void addCommData();
@@ -68,7 +68,7 @@ private:
 	void adjustCommunicationsColumns();
 	//! Init header and list of communications
 	void initListCommunications();
-	void fillCommunicationsTable(QString satID, QString description, double frequency, QString modulation);
+	void fillCommunicationsTable(const QString &satID, const QString &description, double frequency, const QString &modulation);
 
 	void getSatCommData();
 

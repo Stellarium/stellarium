@@ -284,14 +284,14 @@ private:
 	//! returns 0 - 1.0 for the DRAWORBIT_FADE_NUMBER segments at
 	//! each end of an orbit, with 1 in the middle.
 	float calculateOrbitSegmentIntensity(int segNum);
-	void calculateSatDataFromLine2(QString tle);
+	void calculateSatDataFromLine2(const QString &tle);
 	//! Parse TLE line to extract International Designator and launch year.
 	//! Sets #internationalDesignator and #jdLaunchYearJan1.
 	void parseInternationalDesignator(const QString& tle1);
-	void calculateEpochFromLine1(QString tle);
+	void calculateEpochFromLine1(const QString &tle);
 
 	bool getCustomFiltersFlag() const;
-	QString getCommLinkInfo(CommLink comm) const;
+	QString getCommLinkInfo(const CommLink &comm) const;
 
 	bool initialized;
 	//! Flag indicating whether the satellite should be displayed.

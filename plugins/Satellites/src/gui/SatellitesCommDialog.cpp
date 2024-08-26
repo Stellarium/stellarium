@@ -87,7 +87,7 @@ void SatellitesCommDialog::populateTexts()
 	ui->addCommLinkButton->setToolTip(q_("Add communication data"));
 }
 
-void SatellitesCommDialog::updateSatID(QString satID)
+void SatellitesCommDialog::updateSatID(const QString &satID)
 {
 	satelliteID = satID;
 	ui->communicationsTreeWidget->clearSelection();
@@ -150,7 +150,7 @@ void SatellitesCommDialog::initListCommunications()
 	//ui->communicationsTreeWidget->setSelectionBehavior(QAbstractItemView::SelectRows);
 }
 
-void SatellitesCommDialog::fillCommunicationsTable(QString satID, QString description, double frequency, QString modulation)
+void SatellitesCommDialog::fillCommunicationsTable(const QString &satID, const QString &description, double frequency, const QString &modulation)
 {
 	CommsTreeWidgetItem* treeItem = new CommsTreeWidgetItem(ui->communicationsTreeWidget);
 	treeItem->setText(CommsDescription, description);
