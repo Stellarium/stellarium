@@ -458,7 +458,7 @@ void MpcImportWindow::enableInterface(bool enable)
 	ui->pushButtonAcquire->setEnabled(enable);
 }
 
-SsoElements MpcImportWindow::readElementsFromString(QString elements)
+SsoElements MpcImportWindow::readElementsFromString(const QString &elements)
 {
 	Q_ASSERT(ssoManager);
 
@@ -472,7 +472,7 @@ SsoElements MpcImportWindow::readElementsFromString(QString elements)
 	}
 }
 
-QList<SsoElements> MpcImportWindow::readElementsFromFile(ImportType type, QString filePath)
+QList<SsoElements> MpcImportWindow::readElementsFromFile(ImportType type, const QString &filePath)
 {
 	Q_ASSERT(ssoManager);
 
@@ -568,7 +568,7 @@ void MpcImportWindow::updateQueryProgress(qint64, qint64)
 	queryProgressBar->setRange(0, 0);
 }
 
-void MpcImportWindow::startDownload(QString urlString)
+void MpcImportWindow::startDownload(const QString &urlString)
 {
 	if (downloadReply)
 	{
@@ -1082,7 +1082,7 @@ void MpcImportWindow::loadBookmarks()
 	saveBookmarks();
 }
 
-void MpcImportWindow::loadBookmarksGroup(QVariantMap source, Bookmarks & bookmarkGroup)
+void MpcImportWindow::loadBookmarksGroup(const QVariantMap &source, Bookmarks & bookmarkGroup)
 {
 	if (source.isEmpty())
 		return;

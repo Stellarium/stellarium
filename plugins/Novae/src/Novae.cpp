@@ -607,7 +607,7 @@ void Novae::deleteDownloadProgressBar()
 	}
 }
 
-void Novae::startDownload(QString urlString)
+void Novae::startDownload(const QString &urlString)
 {
 	QUrl url(urlString);
 	if (!url.isValid() || url.isRelative() || !url.scheme().startsWith("http", Qt::CaseInsensitive))
@@ -715,7 +715,7 @@ void Novae::downloadComplete(QNetworkReply *reply)
 }
 
 
-void Novae::displayMessage(const QString& message, const QString hexColor)
+void Novae::displayMessage(const QString& message, const QString &hexColor)
 {
 	messageIDs << GETSTELMODULE(LabelMgr)->labelScreen(message, 30, 30 + (20*messageIDs.count()), true, 16, hexColor, false, 9000);
 }

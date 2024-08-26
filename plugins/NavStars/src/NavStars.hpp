@@ -167,7 +167,7 @@ public slots:
 	QString getCurrentNavigationalStarsSetKey(void) const;
 	QString getCurrentNavigationalStarsSetDescription(void) const;
 	//! Set the set of navigational stars from its key
-	void setCurrentNavigationalStarsSetKey(QString key);
+	void setCurrentNavigationalStarsSetKey(const QString &key);
 
 	//! Adds StelObject::ExtraInfo for selected object.
 	void addExtraInfo(StelCore* core);

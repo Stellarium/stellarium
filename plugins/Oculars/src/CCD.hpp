@@ -61,7 +61,7 @@ public:
 	static CCD* ccdModel();
 
 	QString name() const;
-	void setName(QString name);
+	void setName(const QString &name);
 	int getCCDID();
 	int resolutionX() const;
 	void setResolutionX(int resolution);

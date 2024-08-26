@@ -144,7 +144,7 @@ void SyncClient::emitServerError(const QString &errorStr)
 	this->errorStr = errorStr;
 }
 
-bool SyncClient::isPropertyFilteredAway(QString property) const
+bool SyncClient::isPropertyFilteredAway(const QString &property) const
 {
 	return stelPropFilter.contains(property);
 }

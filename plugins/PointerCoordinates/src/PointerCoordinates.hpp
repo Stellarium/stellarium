@@ -117,7 +117,7 @@ public:
 	bool getFlagShowElongation(void) const { return flagShowElongation; }
 	bool getFlagShowConstellation(void) const { return flagShowConstellation; }
 
-	QPair<int, int> getCoordinatesPlace(QString text, int line = 1);
+	QPair<int, int> getCoordinatesPlace(const QString &text, int line = 1);
 	QPair<int, int> getCustomCoordinatesPlace() { return customPosition; }
 
 signals:
@@ -153,7 +153,7 @@ public slots:
 	//! Get the current place of the string with coordinates
 	QString getCurrentCoordinatesPlaceKey(void) const;
 	//! Set the current place of the string with coordinates from its key
-	void setCurrentCoordinatesPlaceKey(QString key);
+	void setCurrentCoordinatesPlaceKey(const QString &key);
 
 	//! Set the current coordinate system
 	void setCurrentCoordinateSystem(PointerCoordinates::CoordinateSystem cs) { currentCoordinateSystem = cs; }
@@ -162,7 +162,7 @@ public slots:
 	//! Get the current coordinate system key
 	QString getCurrentCoordinateSystemKey(void) const;
 	//! Set the current coordinate system from its key
-	void setCurrentCoordinateSystemKey(QString key);
+	void setCurrentCoordinateSystemKey(const QString &key);
 
 	void setCustomCoordinatesPlace(int x, int y);
 

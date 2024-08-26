@@ -773,7 +773,7 @@ void Exoplanets::updateJSON(void)
 	startDownload(updateUrl);
 }
 
-void Exoplanets::displayMessage(const QString& message, const QString hexColor)
+void Exoplanets::displayMessage(const QString& message, const QString &hexColor)
 {
 	GETSTELMODULE(LabelMgr)->labelScreen(message, 30, 30, true, 16, hexColor, false, 9000);
 }
@@ -903,7 +903,7 @@ void Exoplanets::setFlagShowExoplanets(bool b)
 	}
 }
 
-void Exoplanets::setCurrentTemperatureScaleKey(QString key)
+void Exoplanets::setCurrentTemperatureScaleKey(const QString &key)
 {
 	const QMetaEnum& en = metaObject()->enumerator(metaObject()->indexOfEnumerator("TemperatureScale"));
 	TemperatureScale ts = static_cast<TemperatureScale>(en.keyToValue(key.toLatin1().data()));
@@ -931,7 +931,7 @@ void Exoplanets::deleteDownloadProgressBar()
 	}
 }
 
-void Exoplanets::startDownload(QString urlString)
+void Exoplanets::startDownload(const QString &urlString)
 {
 	QUrl url(urlString);
 	if (!url.isValid() || url.isRelative() || !url.scheme().startsWith("http", Qt::CaseInsensitive))

@@ -40,7 +40,7 @@
 #include <QDebug>
 #include <QByteArray>
 
-gSatWrapper::gSatWrapper(QString designation, QString tle1,QString tle2)
+gSatWrapper::gSatWrapper(const QString &designation, const QString &tle1, const QString &tle2)
 {
 	// The TLE library actually modifies the TLE strings, which is annoying (because
 	// when we get updates, we want to check if there has been a change by using ==

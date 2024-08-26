@@ -571,7 +571,7 @@ QVariantMap Exoplanet::getInfoMap(const StelCore *core) const
 	return map;
 }
 
-QString Exoplanet::getPlanetaryClassI18n(QString ptype) const
+QString Exoplanet::getPlanetaryClassI18n(const QString &ptype) const
 {
 	QString result = "";
 	static const QRegularExpression dataRx("^(\\w)[-\\s]+(\\w+)\\s(\\w+)$");

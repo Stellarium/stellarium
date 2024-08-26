@@ -68,16 +68,16 @@ public slots:
 	void setLightPollutionLevel(int level);
 
 private slots:
-	void setHomePlanet(QString planetName);
+	void setHomePlanet(const QString &planetName);
 	void setAltitude(int altitude);
 	void setLatitude(double latitude);
 	void setLongitude(double longitude);
-	void setStartupDateMode(QString mode);
-	void setDateFormat(QString format);
-	void setTimeFormat(QString format);
-	void setSkyCulture(QString i18);
-	void setAppLanguage(QString lang);
-	void setSkyLanguage(QString lang);
+	void setStartupDateMode(const QString &mode);
+	void setDateFormat(const QString &format);
+	void setTimeFormat(const QString &format);
+	void setSkyCulture(const QString &i18);
+	void setAppLanguage(const QString &lang);
+	void setSkyLanguage(const QString &lang);
 	void saveDefaultSettings(void);
 	void shutDown(void);
 

@@ -106,9 +106,9 @@ private:
 	void updateTexts();
 
 	//! wrapper for the single object function to allow multiple formats.
-	SsoElements readElementsFromString(QString elements);
+	SsoElements readElementsFromString(const QString &elements);
 	//! wrapper for the file function to allow multiple formats
-	QList<SsoElements> readElementsFromFile(ImportType type, QString filePath);
+	QList<SsoElements> readElementsFromFile(ImportType type, const QString &filePath);
 
 	void populateBookmarksList();
 
@@ -122,14 +122,14 @@ private:
 	QNetworkReply * queryReply;
 	class StelProgressController * downloadProgressBar;
 	class StelProgressController * queryProgressBar;
-	void startDownload(QString url);
+	void startDownload(const QString &url);
 	void deleteDownloadProgressBar();
 	void deleteQueryProgressBar();
 
 	typedef QHash<QString,QString> Bookmarks;
 	QHash<ImportType, Bookmarks> bookmarks;
 	void loadBookmarks();
-	void loadBookmarksGroup(QVariantMap source, Bookmarks & bookmarkGroup);
+	void loadBookmarksGroup(const QVariantMap &source, Bookmarks & bookmarkGroup);
 	void saveBookmarks();
 	void saveBookmarksGroup(Bookmarks & bookmarkGroup, QVariantMap & output);
 

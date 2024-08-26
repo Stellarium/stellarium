@@ -52,7 +52,7 @@ public:
 		ANNULAR		= 5,
 		BELOW_HORIZON   = 6
 	};
-	gSatWrapper(QString designation, QString tle1,QString tle2);
+	gSatWrapper(const QString &designation, const QString &tle1, const QString &tle2);
 	~gSatWrapper();
 
 	// Operation setEpoch

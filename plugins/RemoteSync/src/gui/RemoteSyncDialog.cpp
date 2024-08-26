@@ -127,7 +127,7 @@ void RemoteSyncDialog::restoreDefaults()
 		qCDebug(remoteSync) << "restore defaults is canceled...";
 }
 
-void RemoteSyncDialog::printErrorMessage(const QString error)
+void RemoteSyncDialog::printErrorMessage(const QString &error)
 {
 	ui->statusLabel->setText(QString(q_("ERROR: %1")).arg(error));
 	ui->statusLabel->setStyleSheet("color: Red;");

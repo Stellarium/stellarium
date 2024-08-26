@@ -273,7 +273,7 @@ void OnlineQueries::queryCustomSite3()
 	query(customUrl3, custom3UseHip);
 }
 
-void OnlineQueries::query(QString url, bool useHip)
+void OnlineQueries::query(const QString &url, bool useHip)
 {
 	// dissect url and set output.
 	QUrl htmlUrl(url);
@@ -429,13 +429,13 @@ void OnlineQueries::onAavsoHipQueryStatusChanged()
 	}
 }
 
-void OnlineQueries::setOutputHtml(QString html)
+void OnlineQueries::setOutputHtml(const QString &html)
 {
 	if (dialog)
 		dialog->setOutputHtml(html);
 }
 
-void OnlineQueries::setOutputUrl(QUrl url)
+void OnlineQueries::setOutputUrl(const QUrl &url)
 {
 	if (dialog)
 		dialog->setOutputUrl(url);

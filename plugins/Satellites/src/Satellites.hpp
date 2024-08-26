@@ -356,7 +356,7 @@ public:
 	//! @see updateUrls
 	//! @param tleSources a list of valid URLs (http://, ftp://, file://),
 	//! allowed prefixes are "0,", "1," or no prefix.
-	void setTleSources(QStringList tleSources);
+	void setTleSources(const QStringList &tleSources);
 	
 	//! Saves the current list of update URLs to the configuration file.
 	void saveTleSources(const QStringList& urls);
@@ -369,7 +369,7 @@ public:
 	//! @param paths a list of paths to update files
 	//! @param deleteFiles if set, the update files are deleted after
 	//!        they are used, else they are left alone
-	void updateFromFiles(QStringList paths, bool deleteFiles=false);
+	void updateFromFiles(const QStringList &paths, bool deleteFiles=false);
 	
 	//! Updates the loaded satellite collection from the provided data.
 	//! Worker function called by updateFromFiles() and saveDownloadedUpdate().
@@ -491,7 +491,7 @@ signals:
 
 	void satGroupVisibleChanged();
 
-	void satSelectionChanged(QString satID);
+	void satSelectionChanged(const QString &satID);
 
 public slots:
 	//! get whether or not the plugin will try to update TLE data from the internet
@@ -641,10 +641,10 @@ public slots:
 
 	//! Display a message on the screen for a few seconds.
 	//! This is used for plugin-specific warnings and such.
-	void displayMessage(const QString& message, const QString hexColor="#999999");
+	void displayMessage(const QString& message, const QString &hexColor="#999999");
 
 	//! Save the current satellite catalog to disk.
-	void saveCatalog(QString path=QString());
+	void saveCatalog(const QString &path=QString());
 
 	//! Set whether custom filter 'known standard magnitude' enabled.
 	//! Emits customFilterChanged()
@@ -956,7 +956,7 @@ private slots:
 	//! can be modified to read directly form QNetworkReply-s. --BM
 	void saveDownloadedUpdate(QNetworkReply* reply);
 	void updateObserverLocation(const StelLocation &loc);
-	void changeSelectedSatellite(QString id) { lastSelectedSatellite = id; }
+	void changeSelectedSatellite(const QString &id) { lastSelectedSatellite = id; }
 };
 
 

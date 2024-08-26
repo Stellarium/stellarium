@@ -86,7 +86,7 @@ void ManualImportWindow::selectColor()
 	setColorButtonColor(color);
 }
 
-void ManualImportWindow::parseColorString(QString colorCode)
+void ManualImportWindow::parseColorString(const QString &colorCode)
 {
 	QStringList colorComponents = colorCode.split(QChar(','));
 	int count = colorComponents.count();
@@ -121,7 +121,7 @@ void ManualImportWindow::parseColorString(QString colorCode)
 	setColorButtonColor(color);
 }
 
-void ManualImportWindow::setColorButtonColor(QColor newColor)
+void ManualImportWindow::setColorButtonColor(const QColor &newColor)
 {
 	qDebug() << "setColorButtonColor()";
 	QPixmap pixmap(16, 16);
@@ -208,7 +208,7 @@ void ManualImportWindow::selectTextureFile(QLineEdit * filePathLineEdit)
 		filePathLineEdit->setText(newFileInfo.fileName());
 }
 
-bool ManualImportWindow::verifyTextureFile(QString filePath)
+bool ManualImportWindow::verifyTextureFile(const QString &filePath)
 {
 	//TODO: Absolute path? File exists?
 
