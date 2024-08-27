@@ -224,7 +224,9 @@ Satellite::Satellite(const QString& identifier, const QVariantMap& map)
 		{ gSatWrapper::BELOW_HORIZON,   N_("The satellite is below the horizon") }
 	};
 
-	update(0.);
+	StelCore *core = StelApp::getInstance().getCore();
+	double JD=core->getJD();
+	update(core, JD, 0.);
 }
 
 Satellite::~Satellite()
@@ -810,12 +812,12 @@ void Satellite::recomputeSatData()
 	calculateSatDataFromLine2(tleElements.second);
 }
 
-void Satellite::update(double)
+void Satellite::update(StelCore *core, double JD, double deltaTime)
 {
+	Q_UNUSED(deltaTime)
 	if (pSatWrapper && orbitValid)
 	{
-		StelCore* core = StelApp::getInstance().getCore();
-		epochTime = core->getJD(); // + timeShift; // We have "true" JD (UTC) from core, satellites don't need JDE!
+		epochTime = JD; // + timeShift; // We have "true" JD (UTC) from core, satellites don't need JDE!
 
 		pSatWrapper->setEpoch(epochTime);
 		position                 = pSatWrapper->getTEMEPos();

@@ -2809,7 +2809,8 @@ void Satellites::update(double deltaTime)
 	if (!hintFader && hintFader.getInterstate() <= 0.f)
 		return;
 
-	StelCore *core = StelApp::getInstance().getCore();
+	static StelCore *core = StelApp::getInstance().getCore();
+	double JD=core->getJD();
 
 	if (qAbs(core->getTimeRate())>=Satellite::timeRateLimit) // Do not show satellites when time rate is over limit
 		return;
@@ -2822,7 +2823,7 @@ void Satellites::update(double deltaTime)
 	for (const auto& sat : std::as_const(satellites))
 	{
 		if (sat->initialized && sat->displayed)
-			sat->update(deltaTime);
+			sat->update(core, JD, deltaTime);
 	}
 }
 

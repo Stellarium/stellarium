@@ -226,8 +226,11 @@ public:
 	//! the tleElements values and configures internal orbit parameters.
 	void setNewTleElements(const QString& tle1, const QString& tle2);
 
-	// calculate faders, new position
-	void update(double deltaTime);
+	//! calculate faders, new position
+	//! @param core current StelCore
+	//! @param JD Julian day, UTC. (Satellites don't use JDE!)
+	//! @param deltaTime (currently unused)
+	void update(StelCore *core, double JD, double deltaTime);
 
 	double getDoppler(double freq) const;
 	static bool showLabels;
