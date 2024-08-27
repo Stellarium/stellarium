@@ -693,7 +693,7 @@ for changing the general appearance of the view of Solar system objects. Some hi
     in the sky, which can be nice for didactic purposes or demonstrations.
   \item[Planets] will increase the apparent size of major planets.
   \end{description}
-\item[Show minor body markers]\newFeature{24.3} Show a little circle at the location of every minor body (comet,
+\item[Mark minor bodies] Show\newFeature{24.3} a little circle at the location of every minor body (comet,
   asteroid, \ldots), down to the configured visual magnitude.
   The marks are shown regardless of sky brightness, even in daytime. Also, in this mode, markers for objects 
   with highly outdated orbital elements are still plotted (see \ref{sec:plugins:SolarSystemEditor} 
@@ -701,8 +701,9 @@ for changing the general appearance of the view of Solar system objects. Some hi
   This is useful to show the distribution of asteroids and comets on the sky, 
   or especially when viewed from the Solar System Observer (see \ref{sec:gui:location:observers}). 
 
-  From the ``Observer'' viewpoints, the visual magnitude is computed as seen from the Sun,
-  so that objects in inferior conjunction ae not dimmed down and filtered away by effects of phase angle. 
+  From the ``Observer'' viewpoints, the visual magnitude for minor bodies is computed as seen from the Sun,
+  so that objects in inferior conjunction ae not dimmed down and filtered away by effects of phase angle, 
+  and comet tails are better visible. 
   
 \item[Show orbits] adds a rendition of the orbit or trajectory of an SSO. 
 For efficiency, orbits are not displayed when the object is not inside the screen, 
