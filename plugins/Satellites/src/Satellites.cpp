@@ -60,6 +60,7 @@
 #include <QTemporaryFile>
 #include <QRegularExpression>
 #include <QBuffer>
+#include <QtConcurrent>
 
 StelModule* SatellitesStelPluginInterface::getStelModule() const
 {
@@ -2809,7 +2810,7 @@ void Satellites::update(double deltaTime)
 	if (!hintFader && hintFader.getInterstate() <= 0.f)
 		return;
 
-	static StelCore *core = StelApp::getInstance().getCore();
+	static const StelCore *core = StelApp::getInstance().getCore();
 	double JD=core->getJD();
 
 	if (qAbs(core->getTimeRate())>=Satellite::timeRateLimit) // Do not show satellites when time rate is over limit
@@ -2820,11 +2821,11 @@ void Satellites::update(double deltaTime)
 
 	hintFader.update(static_cast<int>(deltaTime*1000));
 
-	for (const auto& sat : std::as_const(satellites))
-	{
+	const auto updateSat = [this, JD](QSharedPointer<Satellite>& sat){
 		if (sat->initialized && sat->displayed)
-			sat->update(core, JD, deltaTime);
-	}
+			sat->update(core, JD);
+	};
+	QtConcurrent::blockingMap(QThreadPool::globalInstance(), satellites, updateSat);
 }
 
 void Satellites::draw(StelCore* core)

@@ -109,8 +109,8 @@ void gSatWrapper::calcObserverECIPosition(Vec3d& ao_position, Vec3d& ao_velocity
 	{
 		StelLocation loc   = StelApp::getInstance().getCore()->getCurrentLocation();
 
-		double radLatitude	= loc.getLatitude() * M_PI_180;
-		double theta		= epoch.toThetaLMST(loc.getLongitude() * M_PI_180);
+		const double radLatitude	= loc.getLatitude() * M_PI_180;
+		const double theta		= epoch.toThetaLMST(loc.getLongitude() * M_PI_180);
 
 		/* Reference:  Explanatory supplement to the Astronomical Almanac 1992, page 209-210. */
 		/* Ellipsoid earth model*/
@@ -132,8 +132,7 @@ void gSatWrapper::calcObserverECIPosition(Vec3d& ao_position, Vec3d& ao_velocity
 
 Vec3d gSatWrapper::getAltAz() const
 {
-	StelLocation loc   = StelApp::getInstance().getCore()->getCurrentLocation();
-	Vec3d topoSatPos;
+	const StelLocation loc   = StelApp::getInstance().getCore()->getCurrentLocation();
 
 	const double radLatitude    = loc.getLatitude() * M_PI_180;
 	const double sinRadLatitude = sin(radLatitude);
@@ -145,9 +144,10 @@ Vec3d gSatWrapper::getAltAz() const
 	// This now only updates if required.
 	calcObserverECIPosition(observerECIPos, observerECIVel);
 
-	Vec3d satECIPos	= getTEMEPos();
-	Vec3d slantRange	= satECIPos - observerECIPos;
+	const Vec3d satECIPos	= getTEMEPos();
+	const Vec3d slantRange	= satECIPos - observerECIPos;
 
+	Vec3d topoSatPos;
 	//top_s
 	topoSatPos[0] = (sinRadLatitude * cosTheta*slantRange[0]
 			 + sinRadLatitude* sinTheta*slantRange[1]
@@ -168,10 +168,10 @@ void  gSatWrapper::getSlantRange(double &ao_slantRange, double &ao_slantRangeRat
 {
 	calcObserverECIPosition(observerECIPos, observerECIVel);
 
-	Vec3d satECIPos		= getTEMEPos();
-	Vec3d satECIVel		= getTEMEVel();
-	Vec3d slantRange		= satECIPos - observerECIPos;
-	Vec3d slantRangeVelocity = satECIVel - observerECIVel;
+	const Vec3d satECIPos		= getTEMEPos();
+	const Vec3d satECIVel		= getTEMEVel();
+	const Vec3d slantRange		= satECIPos - observerECIPos;
+	const Vec3d slantRangeVelocity = satECIVel - observerECIVel;
 
 	ao_slantRange		= slantRange.norm();
 	ao_slantRangeRate	= slantRange.dot(slantRangeVelocity)/ao_slantRange;
@@ -205,7 +205,7 @@ Vec3d gSatWrapper::getSunECIPos()
 gSatWrapper::Visibility gSatWrapper::getVisibilityPredict() const
 {
 	gSatWrapper::Visibility rval = BELOW_HORIZON;
-	Vec3d satAltAzPos = getAltAz();
+	const Vec3d satAltAzPos = getAltAz();
 	if (satAltAzPos[2] > 0)
 	{
 		static const SolarSystem* solsystem = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("SolarSystem");
@@ -216,20 +216,20 @@ gSatWrapper::Visibility gSatWrapper::getVisibilityPredict() const
 		}
 		else
 		{
-			Vec3d sunECIPos = getSunECIPos();
-			Vec3d satECIPos = getTEMEPos();
+			const Vec3d sunECIPos = getSunECIPos();
+			const Vec3d satECIPos = getTEMEPos();
 			rval = VISIBLE;
 			/*
 			Satellites in umbra/penumbra based on:-
 			Visually Observing Earth Satellites By Dr. T.S. Kelso
 			https://celestrak.org/columns/v03n01/
 			*/
-			double psun = std::sqrt(pow(satECIPos[0] - sunECIPos[0], 2) + pow(satECIPos[1] - sunECIPos[1], 2) + pow(satECIPos[2] - sunECIPos[2], 2) );
-			double pearth = std::sqrt(std::pow(satECIPos[0], 2) + std::pow(satECIPos[1], 2) + std::pow(satECIPos[2], 2));
-			double theta_e = std::asin((12742. / 2.) / pearth);
-			double theta_s = std::asin((1391000. / 2.) / psun);
-			double dotproduct_peps = std::abs((satECIPos[0] * sunECIPos[0]) + (satECIPos[1] * sunECIPos[1]) + (satECIPos[2] * sunECIPos[2]));
-			double theta = std::acos(dotproduct_peps / (psun * pearth));
+			const double psun = std::sqrt(pow(satECIPos[0] - sunECIPos[0], 2) + pow(satECIPos[1] - sunECIPos[1], 2) + pow(satECIPos[2] - sunECIPos[2], 2) );
+			const double pearth = std::sqrt(std::pow(satECIPos[0], 2) + std::pow(satECIPos[1], 2) + std::pow(satECIPos[2], 2));
+			const double theta_e = std::asin((12742. / 2.) / pearth);
+			const double theta_s = std::asin((1391000. / 2.) / psun);
+			const double dotproduct_peps = std::abs((satECIPos[0] * sunECIPos[0]) + (satECIPos[1] * sunECIPos[1]) + (satECIPos[2] * sunECIPos[2]));
+			const double theta = std::acos(dotproduct_peps / (psun * pearth));
 			if (theta_e > theta_s && theta < (theta_e - theta_s))
 			{
 				rval = RADAR_NIGHT;

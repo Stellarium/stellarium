@@ -229,8 +229,7 @@ public:
 	//! calculate faders, new position
 	//! @param core current StelCore
 	//! @param JD Julian day, UTC. (Satellites don't use JDE!)
-	//! @param deltaTime (currently unused)
-	void update(StelCore *core, double JD, double deltaTime);
+	void update(const StelCore *core, const double JD);
 
 	double getDoppler(double freq) const;
 	static bool showLabels;

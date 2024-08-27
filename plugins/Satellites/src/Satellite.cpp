@@ -18,22 +18,16 @@
  */
 
 #include "Satellite.hpp"
-#include "StelObject.hpp"
-//#include "StelObjectMgr.hpp"
-#include "StelPainter.hpp"
+
 #include "StelApp.hpp"
 #include "StelCore.hpp"
-#include "VecMath.hpp"
-#include "StelUtils.hpp"
-#include "StelTranslator.hpp"
-#include "StelModuleMgr.hpp"
 #include "StelLocaleMgr.hpp"
-
-#include <QTextStream>
-#include <QDebug>
-#include <QVariant>
-#include <QSettings>
-#include <QByteArray>
+#include "StelModuleMgr.hpp"
+#include "StelObject.hpp"
+#include "StelPainter.hpp"
+#include "StelTranslator.hpp"
+#include "StelUtils.hpp"
+#include "VecMath.hpp"
 
 #include <QVector3D>
 #include <QMatrix4x4>
@@ -104,9 +98,14 @@ Satellite::Satellite(const QString& identifier, const QVariantMap& map)
 	, userDefined(false)
 	, newlyAdded(false)
 	, orbitValid(false)
+	, tleEpochJD(0.)
 	, jdLaunchYearJan1(0)
 	, stdMag(99.)
 	, RCS(-1.)
+	, perigee(0.)
+	, apogee(0.)
+	, inclination(0.)
+	, eccentricity(0.)
 	, status(StatusUnknown)
 	, height(0.)
 	, range(0.)
@@ -226,7 +225,7 @@ Satellite::Satellite(const QString& identifier, const QVariantMap& map)
 
 	StelCore *core = StelApp::getInstance().getCore();
 	double JD=core->getJD();
-	update(core, JD, 0.);
+	update(core, JD);
 }
 
 Satellite::~Satellite()
@@ -315,7 +314,7 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 {
 	QString str;
 	QTextStream oss(&str);
-	QString degree = QChar(0x00B0);
+	static const QString degree = QChar(0x00B0);
 	const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
 	
 	if (flags & Name)
@@ -369,7 +368,7 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 	if (flags&Size && RCS>0.)
 	{
 		const double angularSize = getAngularRadius(core)*2.*M_PI_180;
-		QString sizeStr = "";
+		QString sizeStr;
 		if (withDecimalDegree)
 			sizeStr = StelUtils::radToDecDegStr(angularSize, 5, false, true);
 		else
@@ -379,7 +378,7 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 
 	if (flags & Extra)
 	{
-		double orbitalPeriod = pSatWrapper->getOrbitalPeriod();
+		const double orbitalPeriod = pSatWrapper->getOrbitalPeriod();
 		if (orbitalPeriod>0.0)
 		{
 			// TRANSLATORS: Revolutions per day - measurement of the frequency of a rotation
@@ -391,7 +390,7 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 			       .arg(mins, StelUtils::hoursToHmsStr(orbitalPeriod/60.0, true))
 			       .arg(1440.0/orbitalPeriod, 9, 'f', 5).arg(rpd) << "<br/>";
 		}
-		double inclination = pSatWrapper->getOrbitalInclination();
+		const double inclination = pSatWrapper->getOrbitalInclination();
 		oss << QString("%1: %2 (%3%4)").arg(q_("Inclination"), StelUtils::decDegToDmsStr(inclination), QString::number(inclination, 'f', 4), degree) << "<br/>";
 		oss << QString("%1: %2&deg;/%3&deg;").arg(q_("SubPoint (Lat./Long.)")).arg(latLongSubPointPosition[0], 5, 'f', 2).arg(latLongSubPointPosition[1], 5, 'f', 3) << "<br/>";
 		
@@ -424,8 +423,8 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 			updDate = qc_("unknown", "unknown date");
 		else
 		{
-			QDate sd = lastUpdated.date();
-			double hours = lastUpdated.time().hour() + lastUpdated.time().minute()/60. + lastUpdated.time().second()/3600.;
+			const QDate sd = lastUpdated.date();
+			const double hours = lastUpdated.time().hour() + lastUpdated.time().minute()/60. + lastUpdated.time().second()/3600.;
 			updDate = QString("%1 %2 %3 %4 %5").arg(sd.day())
 					.arg(StelLocaleMgr::longGenitiveMonthName(sd.month())).arg(sd.year())
 					.arg(qc_("at","at time"), StelUtils::hoursToHmsStr(hours, true));
@@ -492,16 +491,14 @@ QString Satellite::getCommLinkInfo(const CommLink &comm) const
 	}
 	commLinkData.replace("&", q_("and"));
 
-	double dop = getDoppler(comm.frequency);
+	const double dop = getDoppler(comm.frequency);
 	double ddop = dop;
-	QString sign;
+	QString sign("+");
 	if (dop<0.)
 	{
 		sign='-';
 		ddop*=-1;
 	}
-	else
-		sign='+';
 
 	commLinkData.append(QString(": %1 %2 (%3%4 %5)<br />").arg(QString::number(comm.frequency, 'f', 3), qc_("MHz", "frequency"), sign, QString::number(ddop, 'f', 3), qc_("kHz", "frequency")));
 	return commLinkData;
@@ -743,8 +740,8 @@ float Satellite::getVMagnitude(const StelCore* core) const
 			else if (1.745<=phaseAngle && phaseAngle<=2.618)
 				albedo = ((0.510905*phaseAngle - 2.72607)*phaseAngle + 4.96646)*phaseAngle - 3.02085;
 
-			double rm = range*1000.;
-			double fdiff = (std::sin(phaseAngle) + (M_PI - phaseAngle)*std::cos(phaseAngle))*(2.*albedo*RCS)/(3.* M_PI * M_PI * rm * rm);
+			const double rm = range*1000.;
+			const double fdiff = (std::sin(phaseAngle) + (M_PI - phaseAngle)*std::cos(phaseAngle))*(2.*albedo*RCS)/(3.* M_PI * M_PI * rm * rm);
 
 			vmag = static_cast<float>(-26.74 - 2.5*std::log10(fdiff));
 		}
@@ -812,9 +809,8 @@ void Satellite::recomputeSatData()
 	calculateSatDataFromLine2(tleElements.second);
 }
 
-void Satellite::update(StelCore *core, double JD, double deltaTime)
+void Satellite::update(const StelCore *core, const double JD)
 {
-	Q_UNUSED(deltaTime)
 	if (pSatWrapper && orbitValid)
 	{
 		epochTime = JD; // + timeShift; // We have "true" JD (UTC) from core, satellites don't need JDE!
@@ -871,15 +867,16 @@ Vec4d Satellite::getUmbraData()
 //! Vec4d(umbraDistance, umbraRadius, penumbraDistance, penumbraRadius);
 Vec4d Satellite::getUmbraData(const double rhoE)
 {
-	static PlanetP earth=GETSTELMODULE(SolarSystem)->getEarth();
-	static PlanetP sun = GETSTELMODULE(SolarSystem)->getSun();
+	static StelCore *core = StelApp::getInstance().getCore();
+	static PlanetP earth  = GETSTELMODULE(SolarSystem)->getEarth();
+	static PlanetP sun    = GETSTELMODULE(SolarSystem)->getSun();
 
 	// Compute locations of umbra and penumbra circles. These should show where the satellite enters/exits umbra/penumbra.
 	// The computation follows ideas from https://celestrak.org/columns/v03n01/
 	// These sources mention ECI coordinates (Earth Centered Inertial). Presumably TEME (True Equator Mean Equinox) are equivalent, at least for our purposes.
 	const double rS=earth->getHeliocentricEclipticPos().norm()*AU; // distance earth...sun
 	const double thetaE=asin((earth->getEquatorialRadius()*AU)/(rhoE));
-	Vec3d sunEquinoxEqPos = sun->getEquinoxEquatorialPos(StelApp::getInstance().getCore());
+	Vec3d sunEquinoxEqPos = sun->getEquinoxEquatorialPos(core);
 	Vec3d sunTEME=sunEquinoxEqPos*AU;
 	const double thetaS=asin((sun->getEquatorialRadius()*AU)/(sunTEME.norm()));
 	Q_ASSERT(thetaE>thetaS);
@@ -891,9 +888,9 @@ Vec4d Satellite::getUmbraData(const double rhoE)
 	// complement
 	const double mu=M_PI-eta;
 	// geocentric distance of shadow circle towards antisun
-	double umbraDistance=rhoE*cos(mu);
+	const double umbraDistance=rhoE*cos(mu);
 	// radius of shadow circle
-	double umbraRadius=rhoE*sin(mu);
+	const double umbraRadius=rhoE*sin(mu);
 	// Repeat for penumbra
 	const double thetaP=thetaE+thetaS; // angle so that satellite touches penumbra
 	// angle at Sun:
@@ -903,9 +900,9 @@ Vec4d Satellite::getUmbraData(const double rhoE)
 	// complement
 	const double muP=M_PI-etaP;
 	// geocentric distance of shadow circle towards antisun
-	double penumbraDistance=rhoE*cos(muP);
+	const double penumbraDistance=rhoE*cos(muP);
 	// radius of shadow circle
-	double penumbraRadius=rhoE*sin(muP);
+	const double penumbraRadius=rhoE*sin(muP);
 	//// DBG OUT
 	//StelObjectMgr *om=GETSTELMODULE(StelObjectMgr);
 	//om->setExtraInfoString(StelObject::DebugAid, QString("&rho;<sub>E</sub> %1, r<sub>S</sub> %2, &theta;<sub>E</sub> %3°, &theta;<sub>S</sub> %4° <br/>")
@@ -1142,7 +1139,7 @@ void Satellite::draw(StelCore* core, StelPainter& painter)
 	{
 		if (!iconicModeFlag)
 		{
-			Vec3f color(1.f,1.f,1.f);
+			static const Vec3f color(1.f,1.f,1.f);
 			// Special case: crossing of the satellite of the Moon or the Sun
 			if (XYZ.angle(moon->getJ2000EquatorialPos(core))*M_180_PI <= moon->getSpheroidAngularRadius(core) || XYZ.angle(sun->getJ2000EquatorialPos(core))*M_180_PI <= sun->getSpheroidAngularRadius(core))
 			{
@@ -1160,7 +1157,7 @@ void Satellite::draw(StelCore* core, StelPainter& painter)
 			}
 			else
 			{
-				StelSkyDrawer* sd = core->getSkyDrawer();
+				static StelSkyDrawer* sd = core->getSkyDrawer();
 				RCMag rcMag;
 
 				// Draw the satellite
@@ -1193,7 +1190,7 @@ void Satellite::draw(StelCore* core, StelPainter& painter)
 		}
 		else if (!(hideInvisibleSatellitesFlag && visibility != gSatWrapper::VISIBLE))
 		{
-			Vec3f drawColor = (coloredInvisibleSatellitesFlag && visibility != gSatWrapper::VISIBLE) ? invisibleSatelliteColor : hintColor; // Use hintColor for visible satellites only when coloredInvisibleSatellitesFlag is true
+			const Vec3f drawColor = (coloredInvisibleSatellitesFlag && visibility != gSatWrapper::VISIBLE) ? invisibleSatelliteColor : hintColor; // Use hintColor for visible satellites only when coloredInvisibleSatellitesFlag is true
 			painter.setColor(drawColor*hintBrightness, hintBrightness);
 			if (XYZ.angle(moon->getJ2000EquatorialPos(core))*M_180_PI <= moon->getSpheroidAngularRadius(core) || XYZ.angle(sun->getJ2000EquatorialPos(core))*M_180_PI <= sun->getSpheroidAngularRadius(core))
 				painter.setColor(transitSatelliteColor, 1.f);
@@ -1265,7 +1262,7 @@ void Satellite::drawOrbit(StelCore *core, StelPainter& painter)
 
 float Satellite::calculateOrbitSegmentIntensity(int segNum)
 {
-	int endDist = (orbitLineSegments/2) - abs(segNum-1 - (orbitLineSegments/2) % orbitLineSegments);
+	const int endDist = (orbitLineSegments/2) - abs(segNum-1 - (orbitLineSegments/2) % orbitLineSegments);
 	if (endDist > orbitLineFadeSegments)
 		return 1.0;
 	else
