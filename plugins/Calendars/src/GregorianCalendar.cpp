@@ -38,7 +38,7 @@ void GregorianCalendar::setJD(double JD)
 
 // set date from a vector of calendar date elements sorted from the largest to the smallest.
 // Year-Month[1...12]-Day[1...31]
-void GregorianCalendar::setDate(QVector<int> parts)
+void GregorianCalendar::setDate(const QVector<int> &parts)
 {
 	//qDebug() << "GregorianCalendar::setDate:" << parts;
 	this->parts=parts;
@@ -91,7 +91,7 @@ bool GregorianCalendar::isLeap(int year)
  * Functions from CC.UE ch2
  */
 
-int GregorianCalendar::fixedFromGregorian(QVector<int> gregorian)
+int GregorianCalendar::fixedFromGregorian(const QVector<int> &gregorian)
 {
 	const int year =gregorian.value(0);
 	const int month=gregorian.value(1);

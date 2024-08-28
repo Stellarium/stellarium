@@ -42,7 +42,7 @@ public slots:
 	//! set date from a vector of calendar date elements sorted from the largest to the smallest.
 	//! dayNumber[1..13]-nameIndex[1..20]
 	//! We face a problem as the date is not unique. We can only find the date before current JD which matches the parts.
-	void setDate(QVector<int> parts) override;
+	void setDate(const QVector<int> &parts) override;
 
 	//! get a stringlist of calendar date elements sorted from the largest to the smallest.
 	//! dayNumber[1..13]-name
@@ -55,9 +55,9 @@ public slots:
 	static QString tzolkinName(int i) {return tzolkinNames.value(i);}
 
 	// ordinal of {number, name}
-	inline static int mayanTzolkinOrdinal(QVector<int> tzolkin) {return StelUtils::imod((tzolkin.at(0) - 1 + 39*(tzolkin.at(0)-tzolkin.at(1))), 260);}
+	inline static int mayanTzolkinOrdinal(const QVector<int> &tzolkin) {return StelUtils::imod((tzolkin.at(0) - 1 + 39*(tzolkin.at(0)-tzolkin.at(1))), 260);}
 
-	static int mayanTzolkinOnOrBefore(QVector<int> tzolkin, int rd);
+	static int mayanTzolkinOnOrBefore(const QVector<int> &tzolkin, int rd);
 public:
 	static const int mayanTzolkinEpoch;
 private:

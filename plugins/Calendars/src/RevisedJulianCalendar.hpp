@@ -43,13 +43,13 @@ public slots:
 
 	//! set date from a vector of calendar date elements sorted from the largest to the smallest.
 	//! Year-Month[1...12]-Day[1...31]
-	void setDate(QVector<int> parts) override;
+	void setDate(const QVector<int> &parts) override;
 
 	//! returns true for leap years. We handle years prior to 325 like in the regular Julian calendar.
 	static bool isLeap(int year);
 
 	//! find RD number for date in the Revised Julian calendar. Dates before AD325 are handled as dates in the regular Julian calendar.
-	static int fixedFromRevisedJulian(QVector<int> revisedJulian);
+	static int fixedFromRevisedJulian(const QVector<int> &revisedJulian);
 	//! find date in the Revised Julian calendar from RD number. If date is earlier than AD325,
 	//! the returned date is in the standard Julian Calendar.
 	static QVector<int> revisedJulianFromFixed(int rd);

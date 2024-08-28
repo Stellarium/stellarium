@@ -108,7 +108,7 @@ QString RomanCalendar::getFormattedDateString() const
 // set date from a vector of calendar date elements sorted from the largest to the smallest.
 // JulianYear-Month[1...12]-event-count-leap
 // Time is not changed!
-void RomanCalendar::setDate(QVector<int> parts)
+void RomanCalendar::setDate(const QVector<int> &parts)
 {
 	this->parts=parts;
 
@@ -145,7 +145,7 @@ int RomanCalendar::julianYearFromAUC(int aucYear)
 		return aucYear + yearRomeFounded;
 }
 
-int RomanCalendar::fixedFromRoman(QVector<int> roman)
+int RomanCalendar::fixedFromRoman(const QVector<int> &roman)
 {
 	const int year =roman.value(0);
 	const int month=roman.value(1);

@@ -97,7 +97,7 @@ QString JulianCalendar::getFormattedDateString() const
 // set date from a vector of calendar date elements sorted from the largest to the smallest.
 // Year-Month[1...12]-Day[1...31]
 // Time is not changed!
-void JulianCalendar::setDate(QVector<int> parts)
+void JulianCalendar::setDate(const QVector<int> &parts)
 {
 	//qDebug() << "JulianCalendar::setDate:" << parts;
 	this->parts=parts;
@@ -125,7 +125,7 @@ QString JulianCalendar::weekday(double jd)
 	return weekDayNames.value(dow);
 }
 
-int JulianCalendar::fixedFromJulian(QVector<int> julian)
+int JulianCalendar::fixedFromJulian(const QVector<int> &julian)
 {
 	const int year =julian.value(0);
 	const int month=julian.value(1);

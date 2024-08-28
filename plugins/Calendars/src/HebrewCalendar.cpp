@@ -109,7 +109,7 @@ QString HebrewCalendar::getFormattedDateString() const
 // set date from a vector of calendar date elements sorted from the largest to the smallest.
 // Year-Month[1...12]-Day[1...31]
 // Time is not changed!
-void HebrewCalendar::setDate(QVector<int> parts)
+void HebrewCalendar::setDate(const QVector<int> &parts)
 {
 	//qDebug() << "JulianCalendar::setDate:" << parts;
 	this->parts=parts;
@@ -211,7 +211,7 @@ int HebrewCalendar::lastDayOfHebrewMonth(int hYear, int hMonth)
 	return 30;
 }
 
-int HebrewCalendar::fixedFromHebrew(QVector<int> hebrew)
+int HebrewCalendar::fixedFromHebrew(const QVector<int> &hebrew)
 {
 	const int year =hebrew.value(0);
 	const int month=hebrew.value(1);

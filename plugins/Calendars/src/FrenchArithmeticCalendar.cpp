@@ -140,7 +140,7 @@ QString FrenchArithmeticCalendar::getFormattedDateString() const
 // set date from a vector of calendar date elements sorted from the largest to the smallest.
 // Year-Month[1...13]-Day[1...30]
 // Time is not changed!
-void FrenchArithmeticCalendar::setDate(QVector<int> parts)
+void FrenchArithmeticCalendar::setDate(const QVector<int> &parts)
 {
 	//qDebug() << "FrenchArithmeticCalendar::setDate:" << parts;
 	this->parts=parts;
@@ -161,7 +161,7 @@ bool FrenchArithmeticCalendar::isLeap(int fYear)
 		&& StelUtils::imod(fYear, 4000) !=0 );
 }
 
-int FrenchArithmeticCalendar::fixedFromFrenchArithmetic(QVector<int> french)
+int FrenchArithmeticCalendar::fixedFromFrenchArithmetic(const QVector<int> &french)
 {
 	const int year =french.value(0);
 	const int month=french.value(1);

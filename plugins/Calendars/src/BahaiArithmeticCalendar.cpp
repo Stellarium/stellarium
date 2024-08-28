@@ -100,7 +100,7 @@ void BahaiArithmeticCalendar::setJD(double JD)
 
 // set date from a vector of calendar date elements sorted from the largest to the smallest.
 // Major-Cycle-Year-Month[0...19]-Day[1...19]
-void BahaiArithmeticCalendar::setDate(QVector<int> parts)
+void BahaiArithmeticCalendar::setDate(const QVector<int> &parts)
 {
 	//qDebug() << "BahaiArithmeticCalendar::setDate:" << parts;
 	this->parts=parts;
@@ -158,7 +158,7 @@ QString BahaiArithmeticCalendar::getFormattedDateString() const
  * Functions from CC.UE ch16.2
  */
 
-int BahaiArithmeticCalendar::fixedFromBahaiArithmetic(QVector<int> bahai5)
+int BahaiArithmeticCalendar::fixedFromBahaiArithmetic(const QVector<int> &bahai5)
 {
 	const int major=bahai5.value(0);
 	const int cycle=bahai5.value(1);

@@ -98,7 +98,7 @@ QString AztecXihuitlCalendar::getFormattedDateString() const
 // set date from a vector of calendar date elements sorted from the largest to the smallest.
 // month-day
 // We face a problem as the year is not unique. We can only find the date before current JD which matches the parts.
-void AztecXihuitlCalendar::setDate(QVector<int> parts)
+void AztecXihuitlCalendar::setDate(const QVector<int> &parts)
 {
 	this->parts=parts;
 
@@ -119,13 +119,13 @@ QVector<int> AztecXihuitlCalendar::aztecXihuitlFromFixed(int rd)
 	return {month, day};
 }
 
-int AztecXihuitlCalendar::aztecXihuitlOnOrBefore(QVector<int> xihuitl, int rd)
+int AztecXihuitlCalendar::aztecXihuitlOnOrBefore(const QVector<int> &xihuitl, int rd)
 {
 	return modInterval(aztecXihuitlCorrelation+aztecXihuitlOrdinal(xihuitl), rd, rd-365);
 }
 
 // get RD of a combined date
-int AztecXihuitlCalendar::aztecXihuitlTonalpohualliOnOrBefore(QVector<int>xihuitl, QVector<int>tonalpohualli, int rd)
+int AztecXihuitlCalendar::aztecXihuitlTonalpohualliOnOrBefore(const QVector<int> &xihuitl, const QVector<int> &tonalpohualli, int rd)
 {
 	const int xihuitlCount=aztecXihuitlOrdinal(xihuitl)+aztecXihuitlCorrelation;
 	const int tonalpohualliCount=AztecTonalpohualliCalendar::aztecTonalpohualliOrdinal(tonalpohualli)+AztecTonalpohualliCalendar::aztecTonalpohualliCorrelation;

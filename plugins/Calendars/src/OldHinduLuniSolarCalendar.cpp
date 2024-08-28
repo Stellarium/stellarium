@@ -102,7 +102,7 @@ QString OldHinduLuniSolarCalendar::getFormattedDateString() const
 // set date from a vector of calendar date elements sorted from the largest to the smallest.
 // Year-Month[1...12]-Day[1...31]
 // Time is not changed!
-void OldHinduLuniSolarCalendar::setDate(QVector<int> parts)
+void OldHinduLuniSolarCalendar::setDate(const QVector<int> &parts)
 {
 	this->parts=parts;
 	double rd=fixedFromOldHinduSolar(parts);
@@ -115,7 +115,7 @@ void OldHinduLuniSolarCalendar::setDate(QVector<int> parts)
 
 
 // parts={ year, month, leap, day}
-int OldHinduLuniSolarCalendar::fixedFromOldHinduLunar(QVector<int> parts)
+int OldHinduLuniSolarCalendar::fixedFromOldHinduLunar(const QVector<int> &parts)
 {
 	const int year =parts.value(0);
 	const int month=parts.value(1);

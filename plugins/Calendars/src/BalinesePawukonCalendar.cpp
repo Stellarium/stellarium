@@ -42,7 +42,7 @@ void BalinesePawukonCalendar::setJD(double JD)
 
 // set date from a vector of calendar date elements in canonical order.
 // Given that we cannot set a date directly, this sets the date of these elements on or before the current JD
-void BalinesePawukonCalendar::setDate(QVector<int> parts)
+void BalinesePawukonCalendar::setDate(const QVector<int> &parts)
 {
 	// Problem: This sets time to midnight. We need to keep and reset the fractional day.
 	//const double dayFraction=JD-std::floor(JD-.5);
@@ -170,7 +170,7 @@ int BalinesePawukonCalendar::baliCaturwaraFromFixed(const int rd)
 	return StelUtils::amod(baliAsatawaraFromFixed(rd), 4);
 }
 
-int BalinesePawukonCalendar::baliOnOrBefore(const QVector<int>baliDate, const int rd)
+int BalinesePawukonCalendar::baliOnOrBefore(const QVector<int> &baliDate, const int rd)
 {
 	const int a5=baliDate.value(4)-1;
 	const int a6=baliDate.value(5)-1;

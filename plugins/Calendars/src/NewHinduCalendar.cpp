@@ -129,7 +129,7 @@ void NewHinduCalendar::setJD(double JD)
 // set date from a vector of calendar date elements sorted from the largest to the smallest.
 // Year-Month[1...12]-Day[1...31]
 // Time is not changed!
-void NewHinduCalendar::setDate(QVector<int> parts)
+void NewHinduCalendar::setDate(const QVector<int> &parts)
 {
 	this->parts=parts;
 	double rd=fixedFromHinduSolar(parts);
@@ -192,7 +192,7 @@ QVector<int> NewHinduCalendar::hinduSolarFromFixed(int rd)
 }
 
 // parts={ year, month, day}
-int NewHinduCalendar::fixedFromHinduSolar(QVector<int> parts)
+int NewHinduCalendar::fixedFromHinduSolar(const QVector<int> &parts)
 {
 	const int year =parts.value(0);
 	const int month=parts.value(1);
@@ -226,7 +226,7 @@ QVector<int> NewHinduCalendar::hinduLunarFromFixed(int rd)
 }
 // return RD date from a New Hindu Lunar date (CC:UE 20.24)
 // parts={ year, month, leapMonth, day, leapDay }
-int NewHinduCalendar::fixedFromHinduLunar(QVector<int> parts)
+int NewHinduCalendar::fixedFromHinduLunar(const QVector<int> &parts)
 {
 	const int  year      = parts.value(0);
 	const int  month     = parts.value(1);
@@ -436,7 +436,7 @@ QVector<int> NewHinduCalendar::hinduFullMoonFromFixed(int rd)
 }
 // return RD date from a New Hindu Lunar date counted from full to full moon (CC:UE 20.37)
 // parts={ year, month, leapMonth, day, leapDay }
-int NewHinduCalendar::fixedFromHinduFullMoon(QVector<int> parts)
+int NewHinduCalendar::fixedFromHinduFullMoon(const QVector<int> &parts)
 {
 	const int year=parts.value(0);
 	const int month=parts.value(1);
@@ -516,7 +516,7 @@ QVector<int> NewHinduCalendar::astroHinduSolarFromFixed(const int rd)
 }
 // return RD from astronomically defined date in the Solar calendar (CC:UE 20.46)
 // arg is { year, month, day}
-int NewHinduCalendar::fixedFromAstroHinduSolar(const QVector<int>date)
+int NewHinduCalendar::fixedFromAstroHinduSolar(const QVector<int> &date)
 {
 	const int  year      = date.value(0);
 	const int  month     = date.value(1);
@@ -551,7 +551,7 @@ QVector<int> NewHinduCalendar::astroHinduLunarFromFixed(const int rd)
 }
 // return RD date from an astronomically defined New Hindu Lunar date (CC:UE 20.49)
 // parts={ year, month, leapMonth, day, leapDay }
-int NewHinduCalendar::fixedFromAstroHinduLunar(const QVector<int> parts)
+int NewHinduCalendar::fixedFromAstroHinduLunar(const QVector<int> &parts)
 {
 	const int  year      = parts.value(0);
 	const int  month     = parts.value(1);
@@ -684,7 +684,7 @@ double NewHinduCalendar::hinduLunarNewYear(const int gYear)
 }
 // return comparison of two lunar dates (CC:UE 20.54)
 // date1 and date2 are {year, month, leapMonth, day, leapDay}
-bool NewHinduCalendar::hinduLunarOnOrBefore(const QVector<int>date1, const QVector<int>date2)
+bool NewHinduCalendar::hinduLunarOnOrBefore(const QVector<int> &date1, const QVector<int> &date2)
 {
 	const int  year1      = date1.value(0);
 	const int  month1     = date1.value(1);
@@ -820,7 +820,7 @@ QVector<int> NewHinduCalendar::sacredWednesdays(const int gYear)
 	return sacredWednesdaysInRange(GregorianCalendar::gregorianYearRange(gYear));
 }
 // return the sacred Wednesdays in a certain range of RDs. (CC:UE 20.66)
-QVector<int> NewHinduCalendar::sacredWednesdaysInRange(const QVector<int> range)
+QVector<int> NewHinduCalendar::sacredWednesdaysInRange(const QVector<int> &range)
 {
 	const int a=range.value(0);
 	const int b=range.value(1);

@@ -134,7 +134,7 @@ QString JapaneseCalendar::getFormattedSolarTermsString() const
 // set date from a vector of calendar date elements sorted from the largest to the smallest.
 // {cycle, year, month, leap-month, day}
 // Time is not changed!
-void JapaneseCalendar::setDate(QVector<int> parts)
+void JapaneseCalendar::setDate(const QVector<int> &parts)
 {
 	this->parts=parts;
 
@@ -147,7 +147,7 @@ void JapaneseCalendar::setDate(QVector<int> parts)
 }
 
 //! @arg parts5={cycle, year, month, leapMonth, day}
-int JapaneseCalendar::fixedFromJapanese(QVector<int> parts5)
+int JapaneseCalendar::fixedFromJapanese(const QVector<int> &parts5)
 {
 	const int cycle = parts5.value(0);
 	const int year  = parts5.value(1);

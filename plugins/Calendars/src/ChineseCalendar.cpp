@@ -190,7 +190,7 @@ QString ChineseCalendar::getFormattedSolarTermsString() const
 // set date from a vector of calendar date elements sorted from the largest to the smallest.
 // {cycle, year, month, leap-month, day}
 // Time is not changed!
-void ChineseCalendar::setDate(QVector<int> parts)
+void ChineseCalendar::setDate(const QVector<int> &parts)
 {
 	this->parts=parts;
 
@@ -203,7 +203,7 @@ void ChineseCalendar::setDate(QVector<int> parts)
 }
 
 //! @arg parts5={cycle, year, month, leapMonth, day}
-int ChineseCalendar::fixedFromChinese(QVector<int> parts5)
+int ChineseCalendar::fixedFromChinese(const QVector<int> &parts5)
 {
 	const int cycle = parts5.value(0);
 	const int year  = parts5.value(1);
@@ -388,7 +388,7 @@ QPair<QString, QString> ChineseCalendar::sexagesimalNames(int n)
 }
 
 // Retrieve year difference between name pairs. [1..60].  (CC:UE 19.19)
-int ChineseCalendar::chineseNameDifference(QPair<int,int>stemBranch1, QPair<int,int>stemBranch2)
+int ChineseCalendar::chineseNameDifference(const QPair<int, int> &stemBranch1, const QPair<int, int> &stemBranch2)
 {
 	const int stem1=stemBranch1.first;
 	const int branch1=stemBranch1.second;
@@ -431,7 +431,7 @@ QPair<QString, QString> ChineseCalendar::dayName(int rd)
 }
 
 // Retrieve RD of day number (1...60) on or before rd. (after CC:UE 19.25)
-int ChineseCalendar::dayNumberOnOrBefore(QPair<int,int>stemBranch, int rd)
+int ChineseCalendar::dayNumberOnOrBefore(const QPair<int, int> &stemBranch, int rd)
 {
 	return StelUtils::amod(chineseNameDifference(dayNumbers(0), stemBranch), rd, rd-60);
 }
@@ -459,7 +459,7 @@ int ChineseCalendar::qingMing(int gYear)
 
 // Return age of someone born on birthdate on date rd as expressed by Chinese (CC:UE 19.29)
 // Returns bogus on error
-int ChineseCalendar::chineseAge(QVector<int>birthdate, int rd)
+int ChineseCalendar::chineseAge(const QVector<int> &birthdate, int rd)
 {
 	const QVector<int>today=chineseFromFixed(rd);
 	const int todayCycle=today.at(0);

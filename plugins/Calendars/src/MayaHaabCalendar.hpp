@@ -42,7 +42,7 @@ public slots:
 	//! set date from a vector of calendar date elements sorted from the largest to the smallest.
 	//! month[1..19]-day[0..19]
 	//! We face a problem as the year is not counted. We can only find the date before current JD which matches the parts.
-	void setDate(QVector<int> parts) override;
+	void setDate(const QVector<int> &parts) override;
 
 	//! get a stringlist of calendar date elements sorted from the largest to the smallest.
 	//! monthName-day[0..19]
@@ -56,10 +56,10 @@ public slots:
 	static int mayanYearBearerFromFixed(int rd);
 
 	//! get RD of a given calendar round date on or before rd. They repeat every 18980 days.
-	static int mayanCalendarRoundOnOrBefore(QVector<int>haab, QVector<int>tzolkin, int rd);
+	static int mayanCalendarRoundOnOrBefore(const QVector<int> &haab, const QVector<int> &tzolkin, int rd);
 
-	inline static int mayanHaabOrdinal(QVector<int> haab) {return (haab.at(0)-1)*20+haab.at(1);}
-	static int mayanHaabOnOrBefore(QVector<int> haab, int rd);
+	inline static int mayanHaabOrdinal(const QVector<int> &haab) {return (haab.at(0)-1)*20+haab.at(1);}
+	static int mayanHaabOnOrBefore(const QVector<int> &haab, int rd);
 	static QVector<int> mayanHaabFromFixed(int rd);
 private:
 	static QMap<int, QString> monthNames;
