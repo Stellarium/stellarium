@@ -39,7 +39,7 @@ void BahaiAstronomicalCalendar::setJD(double JD)
 
 // set date from a vector of calendar date elements sorted from the largest to the smallest.
 // Major-Cycle-Year-Month[0...19]-Day[1...19]
-void BahaiAstronomicalCalendar::setDate(QVector<int> parts)
+void BahaiAstronomicalCalendar::setDate(const QVector<int> &parts)
 {
 	//qDebug() << "BahaiAstronomicalCalendar::setDate:" << parts;
 	this->parts=parts;
@@ -102,7 +102,7 @@ int BahaiAstronomicalCalendar::astroBahaiNewYearOnOrBefore(int rd)
 }
 
 // Return R.D. of date given in the Bahai Astronomical calendar. (CC:UE 16.8)
-int BahaiAstronomicalCalendar::fixedFromBahaiAstronomical(QVector<int> bahai5)
+int BahaiAstronomicalCalendar::fixedFromBahaiAstronomical(const QVector<int> &bahai5)
 {
 	const int major=bahai5.value(0);
 	const int cycle=bahai5.value(1);

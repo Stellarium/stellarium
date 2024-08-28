@@ -135,7 +135,7 @@ QString ZoroastrianCalendar::getFormattedDateString() const
 // set date from a vector of calendar date elements sorted from the largest to the smallest.
 // Year-Month[1...13]-Day[1...30]
 // Time is not changed!
-void ZoroastrianCalendar::setDate(QVector<int> parts)
+void ZoroastrianCalendar::setDate(const QVector<int> &parts)
 {
 	this->parts=parts;
 
@@ -148,7 +148,7 @@ void ZoroastrianCalendar::setDate(QVector<int> parts)
 }
 
 // actually implementation of alt-fixed-from-egyptian
-int ZoroastrianCalendar::fixedFromZoroastrian(QVector<int> zoroastrian)
+int ZoroastrianCalendar::fixedFromZoroastrian(const QVector<int> &zoroastrian)
 {
 	return zoroastrianEpoch + fixedFromEgyptian(zoroastrian)-EgyptianCalendar::egyptianEpoch;
 }

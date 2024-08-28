@@ -47,7 +47,7 @@ public slots:
 
 	//! set date from a vector of calendar date elements sorted from the largest to the smallest.
 	//! Year-Month[1...12]-leap[0|1]-Day[1...30]
-	void setDate(QVector<int> parts) override;
+	void setDate(const QVector<int> &parts) override;
 
 	//! get a stringlist of calendar date elements sorted from the largest to the smallest.
 	//! {Year, Month, MonthName, leap[0|1], Day, DayName}
@@ -58,7 +58,7 @@ public slots:
 
 	//! compute RD date from an Old Hindu Lunisolar date
 	//! parts={ year, month, leap, day}
-	static int fixedFromOldHinduLunar(QVector<int> parts);
+	static int fixedFromOldHinduLunar(const QVector<int> &parts);
 	//! return { year, month, leap, day}
 	static QVector<int> oldHinduLunarFromFixed(int rd);
 

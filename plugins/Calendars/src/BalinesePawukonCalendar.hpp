@@ -46,7 +46,7 @@ public slots:
 	//! This triggers the jdChanged() signal
 	//! Note that this must not change the time of day! You must retrieve the time from the current JD before recomputing a new JD.
 	//! This actually sets bali-on-or-before()
-	void setDate(QVector<int> parts) override;
+	void setDate(const QVector<int> &parts) override;
 
 	//! get a stringlist of calendar date elements sorted from the largest to the smallest.
 	//! The order depends on the actual calendar
@@ -69,7 +69,7 @@ public slots:
 	static int baliAsatawaraFromFixed(const int rd);
 	static int baliCaturwaraFromFixed(const int rd);
 
-	static int baliOnOrBefore(const QVector<int>baliDate, const int rd);
+	static int baliOnOrBefore(const QVector<int>&baliDate, const int rd);
 public:
 	static const int baliEpoch;
 

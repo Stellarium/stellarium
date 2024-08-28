@@ -41,7 +41,7 @@ public slots:
 
 	//! set date from a vector of calendar date elements sorted from the largest to the smallest.
 	//! Year-Month[1...13]-Day[1...30]
-	void setDate(QVector<int> parts) override;
+	void setDate(const QVector<int> &parts) override;
 
 	//! get a stringlist of calendar date elements sorted from the largest to the smallest.
 	//! Year, Month, MonthName, Day, DayName
@@ -54,7 +54,7 @@ public slots:
 	static bool isLeap(int pYear);
 
 	//! find RD number for date in the Persian arithmetic calendar
-	static int fixedFromPersianArithmetic(QVector<int> persian);
+	static int fixedFromPersianArithmetic(const QVector<int> &persian);
 	//! find date in the Persian calendar from RD number
 	static QVector<int> persianArithmeticFromFixed(int rd);
 

@@ -51,7 +51,7 @@ public slots:
 
 	//! set date from a vector of calendar date elements sorted from the largest to the smallest.
 	//! {year, month, leap-month, day, leap-day}
-	void setDate(QVector<int> parts5) override;
+	void setDate(const QVector<int> &parts5) override;
 
 	//! get a stringlist of calendar date elements sorted from the largest to the smallest.
 	//! {Cycle, Year, Month, MonthName, "leap"|"", Day, WeekDayName}
@@ -70,7 +70,7 @@ public slots:
 
 	//! find RD number for date in the Chinese calendar (CC:UE 19.17)
 	//! @arg parts5={cycle, year, month, leap, day}
-	static int fixedFromKorean(QVector<int> parts5);
+	static int fixedFromKorean(const QVector<int> &parts5);
 	//! find date in the Chinese calendar from RD number (CC:UE 19.16)
 	//! @return {cycle, year, month, leap, day}
 	static QVector<int> koreanFromFixed(int rd);
@@ -167,7 +167,7 @@ public slots:
 	//! core.output(KoreanCalendar.koreanAge(KoreanCalendar.koreanFromFixed(GregorianCalendar.fixedFromGregorian([1975, 3, 14])),
 	//!                                      GregorianCalendar.fixedFromGregorian([2022, 12, 10]));
 	//! @endcode
-	static int koreanAge(QVector<int>birthdate, int rd);
+	static int koreanAge(const QVector<int> &birthdate, int rd);
 
 	//! Return Korean Year in the Danki system, counting from 2333BCE. (CC:UE 19.37)
 	static int koreanYear(int cycle, int year);

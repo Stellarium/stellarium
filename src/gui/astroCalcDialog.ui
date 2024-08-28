@@ -1210,15 +1210,31 @@
                </widget>
               </item>
               <item>
-               <widget class="QDateEdit" name="phenomenFromDateEdit">
-                <property name="wrapping">
-                 <bool>true</bool>
+               <widget class="QSpinBox" name="phenomenFromYearSpinBox">
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                 </property>
-                <property name="displayFormat">
-                 <string notr="true">yyyy.MM.dd</string>
+                <property name="minimum">
+                 <number>-13000</number>
                 </property>
-                <property name="calendarPopup">
-                 <bool>true</bool>
+                <property name="maximum">
+                 <number>17000</number>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QSpinBox" name="phenomenFromMonthSpinBox">
+                <property name="toolTip">
+                 <string>Month</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+                <property name="minimum">
+                 <number>1</number>
+                </property>
+                <property name="maximum">
+                 <number>12</number>
                 </property>
                </widget>
               </item>
@@ -1232,20 +1248,30 @@
               <item>
                <widget class="QLabel" name="phenomenToLabel">
                 <property name="text">
-                 <string>To:</string>
+                 <string>to the next</string>
                 </property>
                </widget>
               </item>
               <item>
-               <widget class="QDateEdit" name="phenomenToDateEdit">
-                <property name="wrapping">
-                 <bool>true</bool>
+               <widget class="QSpinBox" name="phenomenToMonthSpinBox">
+                <property name="toolTip">
+                 <string>Duration in months</string>
                 </property>
-                <property name="displayFormat">
-                 <string notr="true">yyyy.MM.dd</string>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                 </property>
-                <property name="calendarPopup">
-                 <bool>true</bool>
+                <property name="minimum">
+                 <number>1</number>
+                </property>
+                <property name="maximum">
+                 <number>60</number>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="phenomenToMonthsLabel">
+                <property name="text">
+                 <string comment="duration, short form">mths</string>
                 </property>
                </widget>
               </item>
@@ -2847,6 +2873,9 @@
               </item>
               <item>
                <widget class="QSpinBox" name="eclipseYearsSpinBox">
+                <property name="toolTip">
+                 <string>Duration in years</string>
+                </property>
                 <property name="alignment">
                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                 </property>
@@ -2858,6 +2887,13 @@
                 </property>
                 <property name="value">
                  <number>10</number>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="eclipseYearsFinalLabel">
+                <property name="text">
+                 <string comment="duration, short form">yrs</string>
                 </property>
                </widget>
               </item>

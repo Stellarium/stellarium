@@ -41,7 +41,7 @@ public slots:
 
 	//! set date from a vector of calendar date elements sorted from the largest to the smallest.
 	//! Year-Month[1...13]-Day[1...30]
-	void setDate(QVector<int> parts) override;
+	void setDate(const QVector<int> &parts) override;
 
 	//! get a stringlist of calendar date elements sorted from the largest to the smallest.
 	//! Year, Month, MonthName, Day, DayName
@@ -51,7 +51,7 @@ public slots:
 	QString getFormattedDateString() const override;
 
 	//! find RD number for date in the Coptic calendar (may be used in other calendars!)
-	static int fixedFromCoptic(QVector<int> coptic);
+	static int fixedFromCoptic(const QVector<int> &coptic);
 	//! find date in the Coptic calendar from RD number (may be used in other calendars!)
 	static QVector<int> copticFromFixed(int rd);
 

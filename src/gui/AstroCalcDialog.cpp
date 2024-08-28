@@ -246,19 +246,19 @@ void AstroCalcDialog::createDialogContent()
 	QDateTime currentDT = StelUtils::jdToQDateTime(JD, Qt::LocalTime);
 	ui->dateFromDateTimeEdit->setDateTime(currentDT);
 	ui->dateToDateTimeEdit->setDateTime(currentDT.addMonths(1));
-	ui->phenomenFromDateEdit->setDateTime(currentDT);
-	ui->phenomenToDateEdit->setDateTime(currentDT.addMonths(1));
 	ui->rtsFromDateEdit->setDateTime(currentDT);
 	ui->rtsToDateEdit->setDateTime(currentDT.addMonths(1));
-	ui->eclipseFromYearSpinBox->setValue(currentDT.date().year());
+	int year, month, day;
+	StelUtils::getDateFromJulianDay(JD, &year, &month, &day);
+	ui->phenomenFromYearSpinBox->setValue(year);
+	ui->phenomenFromMonthSpinBox->setValue(month);
+	ui->eclipseFromYearSpinBox->setValue(year);
 
 	// TODO: Replace QDateTimeEdit by a new StelDateTimeEdit widget to apply full range of dates
 	// NOTE: https://github.com/Stellarium/stellarium/issues/711
 	const QDate minDate = QDate(1582, 10, 15); // QtDateTime's minimum date is 1.1.100AD, but appears to be always Gregorian.
 	ui->dateFromDateTimeEdit->setMinimumDate(minDate);
-	ui->dateToDateTimeEdit->setMinimumDate(minDate);
-	ui->phenomenFromDateEdit->setMinimumDate(minDate);
-	ui->phenomenToDateEdit->setMinimumDate(minDate);
+	ui->dateToDateTimeEdit->setMinimumDate(minDate);	
 	ui->rtsFromDateEdit->setMinimumDate(minDate);
 	ui->rtsToDateEdit->setMinimumDate(minDate);
 
@@ -589,10 +589,9 @@ void AstroCalcDialog::populateToolTips()
 	QString validDates = QString("%1 1582/10/15 - 9999/12/31").arg(q_("Gregorian dates. Valid range:"));
 	ui->dateFromDateTimeEdit->setToolTip(validDates);
 	ui->dateToDateTimeEdit->setToolTip(validDates);
-	ui->phenomenFromDateEdit->setToolTip(validDates);
-	ui->phenomenToDateEdit->setToolTip(validDates);
 	ui->rtsFromDateEdit->setToolTip(validDates);
 	ui->rtsToDateEdit->setToolTip(validDates);
+	ui->phenomenFromYearSpinBox->setToolTip(QString("%1 %2..%3").arg(q_("Valid range years:"), QString::number(ui->phenomenFromYearSpinBox->minimum()), QString::number(ui->phenomenFromYearSpinBox->maximum())));
 	ui->eclipseFromYearSpinBox->setToolTip(QString("%1 %2..%3").arg(q_("Valid range years:"), QString::number(ui->eclipseFromYearSpinBox->minimum()), QString::number(ui->eclipseFromYearSpinBox->maximum())));
 	ui->allowedSeparationSpinBox->setToolTip(QString("%1: %2..%3").arg(q_("Valid range"), StelUtils::decDegToDmsStr(ui->allowedSeparationSpinBox->getMinimum(true)), StelUtils::decDegToDmsStr(ui->allowedSeparationSpinBox->getMaximum(true))));
 	ui->allowedSeparationLabel->setToolTip(QString("<p>%1</p>").arg(q_("This is a tolerance for the angular distance for conjunctions and oppositions from 0 and 180 degrees respectively.")));
@@ -5560,15 +5559,9 @@ void AstroCalcDialog::calculatePhenomena()
 
 	initListPhenomena();
 
-#if QT_VERSION >= QT_VERSION_CHECK(5,14,0)
-	double startJD = StelUtils::qDateTimeToJd(ui->phenomenFromDateEdit->date().startOfDay(Qt::UTC));
-	double stopJD = StelUtils::qDateTimeToJd(ui->phenomenToDateEdit->date().endOfDay(Qt::UTC));
-#else
-	double startJD = StelUtils::qDateTimeToJd(QDateTime(ui->phenomenFromDateEdit->date()));
-	double stopJD = StelUtils::qDateTimeToJd(QDateTime(ui->phenomenToDateEdit->date().addDays(1)));
-#endif
-	if (stopJD<=startJD) // Stop warming atmosphere!..
-		return;
+	double startJD;
+	StelUtils::getJDFromDate(&startJD, ui->phenomenFromYearSpinBox->value(), ui->phenomenFromMonthSpinBox->value(), 1, 0, 0, 1);
+	double stopJD = startJD + ui->phenomenToMonthSpinBox->value()*30.4375; // month = 1/12 of year in days
 
 	QVector<PlanetP> objects;
 	Q_ASSERT(objects.isEmpty());
@@ -5781,8 +5774,8 @@ void AstroCalcDialog::calculatePhenomena()
 	if (planet)
 	{
 		const double currentJD = core->getJD();   // save current JD
-		startJD = startJD - core->getUTCOffset(startJD) / 24.;
-		stopJD = stopJD - core->getUTCOffset(stopJD) / 24.;
+		startJD -= core->getUTCOffset(startJD) / 24.;
+		stopJD -= core->getUTCOffset(stopJD) / 24.;
 
 		if (obj2Type == PHCLatestSelectedObject)
 		{

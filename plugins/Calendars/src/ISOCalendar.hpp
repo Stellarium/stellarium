@@ -38,7 +38,7 @@ public slots:
 
 	//! set date from a vector of calendar date elements sorted from the largest to the smallest.
 	//! Year-Week[1...53]-Day[1...7]
-	void setDate(QVector<int> parts) override;
+	void setDate(const QVector<int> &parts) override;
 
 //	//! get a stringlist of calendar date elements sorted from the largest to the smallest.
 //	//! The order depends on the actual calendar
@@ -48,7 +48,7 @@ public slots:
 	QString getFormattedDateString() const override;
 
 	static QVector<int> isoFromFixed(int rd);
-	static int fixedFromISO(QVector<int> iso);
+	static int fixedFromISO(const QVector<int> &iso);
 };
 
 #endif

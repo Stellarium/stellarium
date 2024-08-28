@@ -204,7 +204,7 @@ QString VietnameseCalendar::getFormattedSolarTermsString() const
 // set date from a vector of calendar date elements sorted from the largest to the smallest.
 // {cycle, year, month, leap-month, day}
 // Time is not changed!
-void VietnameseCalendar::setDate(QVector<int> parts)
+void VietnameseCalendar::setDate(const QVector<int> &parts)
 {
 	this->parts=parts;
 
@@ -217,7 +217,7 @@ void VietnameseCalendar::setDate(QVector<int> parts)
 }
 
 //! @arg parts5={cycle, year, month, leapMonth, day}
-int VietnameseCalendar::fixedFromVietnamese(QVector<int> parts5)
+int VietnameseCalendar::fixedFromVietnamese(const QVector<int> &parts5)
 {
 	const int cycle = parts5.value(0);
 	const int year  = parts5.value(1);

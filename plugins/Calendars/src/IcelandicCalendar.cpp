@@ -53,7 +53,7 @@ void IcelandicCalendar::setJD(double JD)
 
 // set date from a vector of calendar date elements sorted from the largest to the smallest.
 // Year-Season[summer=90 | winter=270]-Week[1...12]-WeekDay[0=Sunday...6]
-void IcelandicCalendar::setDate(QVector<int> parts)
+void IcelandicCalendar::setDate(const QVector<int> &parts)
 {
 	this->parts=parts;
 
@@ -111,7 +111,7 @@ QString IcelandicCalendar::getFormattedDateString() const
  */
 
 // RD from {year, season, week[1...27], weekday[0...6]}
-int IcelandicCalendar::fixedFromIcelandic(QVector<int> icelandic)
+int IcelandicCalendar::fixedFromIcelandic(const QVector<int> &icelandic)
 {
 	const int year=icelandic.value(0);
 	const Calendar::Season season=static_cast<Calendar::Season>(icelandic.value(1));
@@ -142,7 +142,7 @@ bool IcelandicCalendar::isLeap(int iyear)
 	return (icelandicSummer(iyear+1)-icelandicSummer(iyear)) != 364;
 }
 
-QPair<int,int> IcelandicCalendar::icelandicMonth(QVector<int>iDate)
+QPair<int,int> IcelandicCalendar::icelandicMonth(const QVector<int> &iDate)
 {
 	const int rd=fixedFromIcelandic(iDate);
 	const int year=iDate.at(0);

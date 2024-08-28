@@ -40,7 +40,7 @@ void RevisedJulianCalendar::setJD(double JD)
 // set date from a vector of calendar date elements sorted from the largest to the smallest.
 // Year-Month[1...12]-Day[1...31]
 // Time is not changed!
-void RevisedJulianCalendar::setDate(QVector<int> parts)
+void RevisedJulianCalendar::setDate(const QVector<int> &parts)
 {
 	//qDebug() << "RevisedJulianCalendar::setDate:" << parts;
 	this->parts=parts;
@@ -71,7 +71,7 @@ bool RevisedJulianCalendar::isLeap(int year)
 	return leap;
 }
 
-int RevisedJulianCalendar::fixedFromRevisedJulian(QVector<int> revisedJulian)
+int RevisedJulianCalendar::fixedFromRevisedJulian(const QVector<int> &revisedJulian)
 {
 	const int year =revisedJulian.value(0);
 	const int month=revisedJulian.value(1);

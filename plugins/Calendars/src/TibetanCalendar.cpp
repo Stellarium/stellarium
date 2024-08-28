@@ -205,7 +205,7 @@ QString TibetanCalendar::getFormattedDateString() const
 // set date from a vector of calendar date elements sorted from the largest to the smallest.
 // {year, month, leap-month, day, leap-day}
 // Time is not changed!
-void TibetanCalendar::setDate(QVector<int> parts)
+void TibetanCalendar::setDate(const QVector<int> &parts)
 {
 	this->parts=parts;
 
@@ -218,7 +218,7 @@ void TibetanCalendar::setDate(QVector<int> parts)
 }
 
 //! @arg tibetan={year, month, leapMonth, day, leapDay}
-int TibetanCalendar::fixedFromTibetan(QVector<int> tibetan)
+int TibetanCalendar::fixedFromTibetan(const QVector<int> &tibetan)
 {
 	const int year      = tibetan.value(0);
 	const int month     = tibetan.value(1);
@@ -334,7 +334,7 @@ double TibetanCalendar::tibetanMoonEquation(const double alpha)
 
 // Holidays
 // return true for a Tibetan leap month (CC:UE 21.6)
-bool TibetanCalendar::tibetanLeapMonth(const QVector<int> tYM)
+bool TibetanCalendar::tibetanLeapMonth(const QVector<int> &tYM)
 {
 	const int tYear  = tYM.value(0);
 	const int tMonth = tYM.value(1);
@@ -342,11 +342,11 @@ bool TibetanCalendar::tibetanLeapMonth(const QVector<int> tYM)
 }
 
 // return true for a Tibetan leap day (CC:UE 21.7)
-bool TibetanCalendar::tibetanLeapDay(const QVector<int> tYMD)
+bool TibetanCalendar::tibetanLeapDay(const QVector<int> &tYMD)
 {
 	const int tYear  = tYMD.value(0);
 	const int tMonth = tYMD.value(1);
-	const int tDay   = tYMD.value(1);
+	const int tDay   = tYMD.value(2);
 	return (tDay==tibetanFromFixed(fixedFromTibetan({tYear, tMonth, false, tDay, true})).value(3))
 		|| (tDay==tibetanFromFixed(fixedFromTibetan({tYear, tMonth, tibetanLeapMonth({tYear, tMonth}), tDay, true})).value(3));
 }

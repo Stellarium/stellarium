@@ -47,7 +47,7 @@ public slots:
 
 	//! set date from a vector of calendar date elements sorted from the largest to the smallest.
 	//! Year-Month[1...12]-Day[1...31]
-	void setDate(QVector<int> parts) override;
+	void setDate(const QVector<int> &parts) override;
 
 	//! get a stringlist of calendar date elements sorted from the largest to the smallest.
 	//! Year, Month, MonthName, Day, DayName
@@ -61,7 +61,7 @@ public slots:
 
 	//! auxiliary functions from CC.UE ch2.5
 	//! Return R.D. of date in the Gregorian calendar.
-	static int fixedFromGregorian(QVector<int> gregorian);
+	static int fixedFromGregorian(const QVector<int> &gregorian);
 
 	//! Orthodox Easter sunday (RD) from chapter 9.1
 	static int orthodoxEaster(int gYear);

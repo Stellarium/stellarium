@@ -45,7 +45,7 @@ public slots:
 
 	//! set date from a vector of calendar date elements sorted from the largest to the smallest.
 	//! Year-Month[1...12]-Day[1...31]
-	void setDate(QVector<int> parts) override;
+	void setDate(const QVector<int> &parts) override;
 
 	//! get a stringlist of calendar date elements sorted from the largest to the smallest.
 	//! Year, Month, MonthName, Day, DayName
@@ -61,7 +61,7 @@ public slots:
 	static int astroBahaiNewYearOnOrBefore(int rd);
 
 	//! Return R.D. of date given in the Bahai Astronomical calendar. (CC:UE 16.8)
-	static int fixedFromBahaiAstronomical(QVector<int> bahai5);
+	static int fixedFromBahaiAstronomical(const QVector<int> &bahai5);
 
 	//! Return R.D. of date given in the Bahai Astronomical calendar. (CC:UE 16.9)
 	//! return major-cycle-year-month-day for RD date

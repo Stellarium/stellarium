@@ -103,7 +103,7 @@ QString EthiopicCalendar::getFormattedDateString() const
 // set date from a vector of calendar date elements sorted from the largest to the smallest.
 // Year-Month[1...12]-Day[1...31]
 // Time is not changed!
-void EthiopicCalendar::setDate(QVector<int> parts)
+void EthiopicCalendar::setDate(const QVector<int> &parts)
 {
 	this->parts=parts;
 
@@ -115,7 +115,7 @@ void EthiopicCalendar::setDate(QVector<int> parts)
 	emit jdChanged(JD);
 }
 
-int EthiopicCalendar::fixedFromEthiopic(QVector<int> ethiopic)
+int EthiopicCalendar::fixedFromEthiopic(const QVector<int> &ethiopic)
 {
 	return ethiopicEpoch +CopticCalendar::fixedFromCoptic(ethiopic)-CopticCalendar::copticEpoch;
 }

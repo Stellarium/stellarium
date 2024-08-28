@@ -103,7 +103,7 @@ QString CopticCalendar::getFormattedDateString() const
 // set date from a vector of calendar date elements sorted from the largest to the smallest.
 // Year-Month[1...12]-Day[1...30]
 // Time is not changed!
-void CopticCalendar::setDate(QVector<int> parts)
+void CopticCalendar::setDate(const QVector<int> &parts)
 {
 	this->parts=parts;
 
@@ -115,7 +115,7 @@ void CopticCalendar::setDate(QVector<int> parts)
 	emit jdChanged(JD);
 }
 
-int CopticCalendar::fixedFromCoptic(QVector<int> coptic)
+int CopticCalendar::fixedFromCoptic(const QVector<int> &coptic)
 {
 	const int year =coptic.value(0);
 	const int month=coptic.value(1);

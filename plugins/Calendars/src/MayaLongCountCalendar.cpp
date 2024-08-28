@@ -62,7 +62,7 @@ QString MayaLongCountCalendar::getFormattedDateString() const
 
 // set date from a vector of calendar date elements sorted from the largest to the smallest.
 // baktun-katun-tun-uinal-kin
-void MayaLongCountCalendar::setDate(QVector<int> parts)
+void MayaLongCountCalendar::setDate(const QVector<int> &parts)
 {
 	// Problem: This sets time to midnight. We need to keep and reset the fractional day.
 	//const double dayFraction=JD-std::floor(JD-.5);
@@ -79,7 +79,7 @@ void MayaLongCountCalendar::setDate(QVector<int> parts)
 }
 
 //! get RD date from Long Count date
-int MayaLongCountCalendar::fixedFromMayanLongCount(QVector<int> longCount)
+int MayaLongCountCalendar::fixedFromMayanLongCount(const QVector<int> &longCount)
 {
 	const int baktun=longCount.value(0);
 	const int katun =longCount.value(1);

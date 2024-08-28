@@ -190,7 +190,7 @@ QString KoreanCalendar::getFormattedSolarTermsString() const
 // set date from a vector of calendar date elements sorted from the largest to the smallest.
 // {cycle, year, month, leap-month, day}
 // Time is not changed!
-void KoreanCalendar::setDate(QVector<int> parts)
+void KoreanCalendar::setDate(const QVector<int> &parts)
 {
 	this->parts=parts;
 
@@ -203,7 +203,7 @@ void KoreanCalendar::setDate(QVector<int> parts)
 }
 
 //! @arg parts5={cycle, year, month, leapMonth, day}
-int KoreanCalendar::fixedFromKorean(QVector<int> parts5)
+int KoreanCalendar::fixedFromKorean(const QVector<int> &parts5)
 {
 	const int cycle = parts5.value(0);
 	const int year  = parts5.value(1);
@@ -466,7 +466,7 @@ int KoreanCalendar::koreanNewYearInGregorianYear(int gYear)
 // This is a mix of Chinese Age and Western calendar, as Koreans consider January 1
 // as turn of the Year in this calculation (https://www.90daykorean.com/korean-age-all-about-age-in-korea/)
 // Therefore: A new-born is aged 1. Age increases at Gregorian New Year.
-int KoreanCalendar::koreanAge(QVector<int>birthdate, int rd)
+int KoreanCalendar::koreanAge(const QVector<int> &birthdate, int rd)
 {
 	const int gYearRD=GregorianCalendar::gregorianFromFixed(rd).at(0);
 	const int rdBirth=fixedFromKorean(birthdate);

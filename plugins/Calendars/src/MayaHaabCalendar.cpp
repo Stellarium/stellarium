@@ -95,7 +95,7 @@ QString MayaHaabCalendar::getFormattedDateString() const
 // set date from a vector of calendar date elements sorted from the largest to the smallest.
 // month-day
 // We face a problem as the year is not unique. We can only find the date before current JD which matches the parts.
-void MayaHaabCalendar::setDate(QVector<int> parts)
+void MayaHaabCalendar::setDate(const QVector<int> &parts)
 {
 	this->parts=parts;
 
@@ -108,7 +108,7 @@ void MayaHaabCalendar::setDate(QVector<int> parts)
 	emit jdChanged(JD);
 }
 
-int MayaHaabCalendar::mayanHaabOnOrBefore(QVector<int> haab, int rd)
+int MayaHaabCalendar::mayanHaabOnOrBefore(const QVector<int> &haab, int rd)
 {
 	return modInterval(mayanHaabOrdinal(haab)+mayanHaabEpoch, rd, rd-365);
 }
@@ -135,7 +135,7 @@ int MayaHaabCalendar::mayanYearBearerFromFixed(int rd)
 }
 
 // get RD of a calendar round date
-int MayaHaabCalendar::mayanCalendarRoundOnOrBefore(QVector<int>haab, QVector<int>tzolkin, int rd)
+int MayaHaabCalendar::mayanCalendarRoundOnOrBefore(const QVector<int> &haab, const QVector<int> &tzolkin, int rd)
 {
 	const int haabCount=mayanHaabOrdinal(haab)+mayanHaabEpoch;
 	const int tzolkinCount=MayaTzolkinCalendar::mayanTzolkinOrdinal(tzolkin)+MayaTzolkinCalendar::mayanTzolkinEpoch;

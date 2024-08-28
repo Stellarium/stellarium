@@ -42,7 +42,7 @@ void FrenchAstronomicalCalendar::setJD(double JD)
 // set date from a vector of calendar date elements sorted from the largest to the smallest.
 // Year-Month[1...13]-Day[1...30]
 // Time is not changed!
-void FrenchAstronomicalCalendar::setDate(QVector<int> parts)
+void FrenchAstronomicalCalendar::setDate(const QVector<int> &parts)
 {
 	//qDebug() << "FrenchAstronomicalCalendar::setDate:" << parts;
 	this->parts=parts;
@@ -61,7 +61,7 @@ bool FrenchAstronomicalCalendar::isLeap(int fYear)
 	return fixedFromFrenchAstronomical({fYear+1, 1, 1})-fixedFromFrenchAstronomical({fYear, 1, 1}) > 365;
 }
 
-int FrenchAstronomicalCalendar::fixedFromFrenchAstronomical(QVector<int> french)
+int FrenchAstronomicalCalendar::fixedFromFrenchAstronomical(const QVector<int> &french)
 {
 	const int year =french.value(0);
 	const int month=french.value(1);

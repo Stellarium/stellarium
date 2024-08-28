@@ -48,7 +48,7 @@ public slots:
 
 	//! set date from a vector of calendar date elements sorted from the largest to the smallest.
 	//! {year, month, leap-month, day, leap-day}
-	void setDate(QVector<int> parts5) override;
+	void setDate(const QVector<int> &parts5) override;
 
 	//! get a stringlist of calendar date elements sorted from the largest to the smallest.
 	//! {Cycle, Year, Month, MonthName, "leap"|"", Day, WeekDayName}
@@ -67,7 +67,7 @@ public slots:
 
 	//! find RD number for date in the Chinese calendar (CC:UE 19.17)
 	//! @arg parts5={cycle, year, month, leap, day}
-	static int fixedFromChinese(QVector<int> parts5);
+	static int fixedFromChinese(const QVector<int> &parts5);
 	//! find date in the Chinese calendar from RD number (CC:UE 19.16)
 	//! @return {cycle, year, month, leap, day}
 	static QVector<int> chineseFromFixed(int rd);
@@ -134,7 +134,7 @@ public slots:
 	static QPair<QString, QString> sexagesimalNames(int n);
 
 	//! Retrieve year difference between name pairs. [1..60].  (CC:UE 19.19)
-	static int chineseNameDifference(QPair<int,int>stemBranch1, QPair<int,int>stemBranch2);
+	static int chineseNameDifference(const QPair<int,int>&stemBranch1, const QPair<int,int>&stemBranch2);
 
 	//! Retrieve pair of names (chinese stem_branch, translated stem_branch) for Chinese year year (CC:UE 19.20)
 	//! @note this is called chinese-year-name in the CC:UE book, but we overwrite this name in the derived classes.
@@ -157,7 +157,7 @@ public slots:
 
 	//! Retrieve RD of day number (1...60) on or before rd. (after CC:UE 19.25)
 	//! @note this is called chinese-day-number-on-or-before in the CC:UE book, but we use this name in favour of the derived classes.
-	static int dayNumberOnOrBefore(QPair<int,int>stemBranch, int rd);
+	static int dayNumberOnOrBefore(const QPair<int,int>&stemBranch, int rd);
 
 	//! Return Chinese year number beginning in Winter of Gregorian year gYear (CC:UE before 19.27)
 	static int ChineseNewYearInGregorianYear(int gYear);
@@ -171,7 +171,7 @@ public slots:
 	//! Return age of someone born on birthdate on date rd as expressed by Chinese (CC:UE 19.29)
 	//! A new-born is aged 1. Age increases at Chinese New Year.
 	//! Returns bogus on error
-	static int chineseAge(QVector<int>birthdate, int rd);
+	static int chineseAge(const QVector<int> &birthdate, int rd);
 
 	//! Determine marriage augury based on year number within a cycle. widows are worst, double-bright are best years.
 	static int chineseYearMarriageAugury(int cycle, int year);
