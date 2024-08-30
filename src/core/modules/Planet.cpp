@@ -2870,7 +2870,8 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 			const float extinctedMag=getVMagnitudeWithExtinction(core)-getVMagnitude(core); // this is net value of extinction, in mag.
 			//const float magFactorGreen=powf(0.85f, 0.6f*extinctedMag);
 			//const float magFactorBlue=powf(0.6f, 0.5f*extinctedMag);
-			Vec3f color(haloColor[0], powf(0.75f, extinctedMag) * haloColor[1], powf(0.42f, 0.9f*extinctedMag) * haloColor[2]);
+			//Vec3f color(haloColor[0], powf(0.75f, extinctedMag) * haloColor[1], powf(0.42f, 0.9f*extinctedMag) * haloColor[2]);
+			Vec3f color(haloColor[0], powf(0.75f, extinctedMag) * haloColor[1], powf(0.25f, extinctedMag) * haloColor[2]);
 
 			Vec3f fullTint(0.25f*Vec3f(3.f+sqrtf(color[0]), 3.f+sqrtf(color[1]), 3.f+sqrtf(color[2])));
 
