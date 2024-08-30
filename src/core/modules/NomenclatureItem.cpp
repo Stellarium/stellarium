@@ -138,7 +138,7 @@ QString NomenclatureItem::getNomenclatureTypeLatinString(NomenclatureItemType nT
 		return map.value(nType, "");
 }
 
-QString NomenclatureItem::getNomenclatureTypeDescription(NomenclatureItemType nType, QString englishName)
+QString NomenclatureItem::getNomenclatureTypeDescription(NomenclatureItemType nType, const QString &englishName)
 {
 	Q_ASSERT(niTypeDescriptionMap.size()>20); // should be filled, not sure how many.
 	QString ret=niTypeDescriptionMap.value(nType, q_("Undocumented landform type."));
@@ -175,7 +175,7 @@ float NomenclatureItem::getSelectPriority(const StelCore* core) const
 	// so that clicking on the planet in halo does not select any feature point.
 	float priority=planet->getSelectPriority(core)+5.f;
 	// check visibility of feature
-	const float scale = getAngularDiameterRatio(core);
+	const float scale = getAngularDiameterRatio(core, core->getProjection(StelCore::FrameJ2000)->getFov());
 	const float planetScale = 2.f*static_cast<float>(planet->getAngularRadius(core))/core->getProjection(StelCore::FrameJ2000)->getFov();
 
 	// Require the planet to cover 1/10 of the screen to make it worth clicking on features.
@@ -359,12 +359,12 @@ double NomenclatureItem::getAngularRadius(const StelCore* core) const
 	return std::atan2(0.5*size*planet->getSphereScale()/AU, getJ2000EquatorialPos(core).norm()) * M_180_PI;
 }
 
-float NomenclatureItem::getAngularDiameterRatio(const StelCore *core) const
+float NomenclatureItem::getAngularDiameterRatio(const StelCore *core, const float fov) const
 {
-    return static_cast<float>(2.*getAngularRadius(core))/core->getProjection(StelCore::FrameJ2000)->getFov();
+    return static_cast<float>(2.*getAngularRadius(core))/fov;
 }
 
-void NomenclatureItem::draw(StelCore* core, StelPainter *painter)
+void NomenclatureItem::draw(StelCore* core, StelPainter *painter, const float fov) const
 {
 	// show special points only?
 	if (getFlagShowSpecialNomenclatureOnly() && nType<NomenclatureItem::niSpecialPointPole)
@@ -390,7 +390,7 @@ void NomenclatureItem::draw(StelCore* core, StelPainter *painter)
 
 	// check visibility of feature
 	Vec3d srcPos;
-	const float scale = getAngularDiameterRatio(core);
+	const float scale = getAngularDiameterRatio(core, fov);
 
 	if (painter->getProjector()->projectCheck(XYZ, srcPos) && (equPos.normSquared() >= XYZ.normSquared())
 	    && (scale>0.04f && (scale<0.5f || nType>=NomenclatureItem::niSpecialPointPole )))
@@ -451,7 +451,7 @@ double NomenclatureItem::getSolarAltitude(const StelCore *core) const
 	return h*M_180_PI;
 }
 
-NomenclatureItem::NomenclatureItemType NomenclatureItem::getNomenclatureItemType(const QString abbrev)
+NomenclatureItem::NomenclatureItemType NomenclatureItem::getNomenclatureItemType(const QString &abbrev)
 {
 	// codes for types of features (details: https://planetarynames.wr.usgs.gov/DescriptorTerms)
 	static const QMap<QString, NomenclatureItem::NomenclatureItemType> niTypes = {
@@ -516,7 +516,7 @@ NomenclatureItem::NomenclatureItemType NomenclatureItem::getNomenclatureItemType
 }
 QMap<NomenclatureItem::NomenclatureItemType, QString> NomenclatureItem::niTypeStringMap;
 QMap<NomenclatureItem::NomenclatureItemType, QString> NomenclatureItem::niTypeDescriptionMap;
-NomenclatureItem::PlanetCoordinateOrientation NomenclatureItem::getPlanetCoordinateOrientation(QString planetName)
+NomenclatureItem::PlanetCoordinateOrientation NomenclatureItem::getPlanetCoordinateOrientation(const QString &planetName)
 {
 	// data from https://planetarynames.wr.usgs.gov/TargetCoordinates.
 	// Commented away where they are equal to te default value.

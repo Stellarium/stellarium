@@ -291,6 +291,7 @@ void NomenclatureMgr::draw(StelCore* core)
 
 	painter.setFont(font);
 	const SphericalCap& viewportRegion = painter.getProjector()->getBoundingCap();
+	const float fov=core->getProjection(StelCore::FrameJ2000)->getFov();
 
 	for (const auto& p : nomenclatureItems.uniqueKeys())
 	{
@@ -313,7 +314,7 @@ void NomenclatureMgr::draw(StelCore* core)
 		{
 			const NomenclatureItemP& nItem = i.value();
 			if (nItem)
-				nItem->draw(core, &painter);
+				nItem->draw(core, &painter, fov);
 		}
 	}
 	// avoid further forcing

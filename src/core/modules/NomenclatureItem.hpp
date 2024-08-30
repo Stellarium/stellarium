@@ -183,7 +183,7 @@ public:
 	//!       * -1000. is used as "invalid" value. The result should then not be used.
 	Vec4d getRTSTime(const StelCore* core, const double altitude=0.) const override;
 
-	void draw(StelCore* core, StelPainter *painter);
+	void draw(StelCore* core, StelPainter *painter, const float fov) const;
 	NomenclatureItemType getNomenclatureType() const { return nType;}
 
 	static void setFlagLabels(bool b){ labelsFader = b; }
@@ -203,7 +203,7 @@ public:
 
 protected:
 	//! returns a type enum for a given 2-letter code
-	static NomenclatureItemType getNomenclatureItemType(const QString abbrev);
+	static NomenclatureItemType getNomenclatureItemType(const QString &abbrev);
 	//! Should be triggered once at start and then whenever program language setting changes.
 	static void createNameLists();
 
@@ -220,14 +220,14 @@ private:
 	static bool showSpecialNomenclatureOnly;
 
 	// ratio of angular size of feature to the FOV
-	float getAngularDiameterRatio(const StelCore *core) const;
+	float getAngularDiameterRatio(const StelCore *core, const float fov) const;
 
 	static QString getNomenclatureTypeLatinString(NomenclatureItemType nType);
 	static QString getNomenclatureTypeString(NomenclatureItemType nType);
-	static QString getNomenclatureTypeDescription(NomenclatureItemType nType, QString englishName);
+	static QString getNomenclatureTypeDescription(NomenclatureItemType nType, const QString &englishName);
 	//! Returns the description of the feature coordinates where available, or pcoPlanetographicWest360.
 	//! The default value ensures valid central meridian data for the gas giants.
-	static PlanetCoordinateOrientation getPlanetCoordinateOrientation(QString planetName);
+	static PlanetCoordinateOrientation getPlanetCoordinateOrientation(const QString &planetName);
 	PlanetCoordinateOrientation getPlanetCoordinateOrientation() const;
 	//! return whether counting sense of the coordinates is positive towards the east
 	static bool isEastPositive(PlanetCoordinateOrientation pco);
