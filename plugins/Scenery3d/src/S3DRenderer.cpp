@@ -975,8 +975,8 @@ void S3DRenderer::calculateLighting()
 	static LandscapeMgr *lmgr=GETSTELMODULE(LandscapeMgr);
 	QVector3D solarTint=lmgr->getLandscapeTint().toQVector();
 	//ambient tries to neutralize sunrise reddening a bit to model collecting light more of the blue sky. Directional and specular are tinted with possibly reddened sun.
-	lightInfo.ambient = ambientBrightness*(QVector3D(0.25,0.25,0.25)+0.75*solarTint);
-	lightInfo.directional = directionalBrightness*solarTint;
+	lightInfo.ambient = ambientBrightness*(QVector3D(0.4,0.4,0.4)+0.6*solarTint);
+	lightInfo.directional = directionalBrightness*QVector3D(powf(solarTint[0],2.5f), powf(solarTint[1], 2.5f), powf(solarTint[2], 2.5f));
 	lightInfo.emissive = QVector3D(emissiveFactor,emissiveFactor,emissiveFactor);
 	lightInfo.specular = specular*solarTint;
 	lightInfo.torchDiffuse = QVector3D(torchDiff,torchDiff,torchDiff);
