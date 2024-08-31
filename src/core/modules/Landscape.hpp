@@ -245,8 +245,6 @@ protected:
 	float minBrightness;   //! Read from landscape.ini:[landscape]minimal_brightness. Allows minimum visibility that cannot be underpowered.
 	float landscapeBrightness;  //! brightness [0..1] to draw the landscape. Computed by the LandscapeMgr.
         Vec3f landscapeTint;   //! color tint to draw the landscape (daylight texture only). Nice for sunrise/sunset.
-                               //! Note that reddening should only occur with sun visible, i.e. when above visual horizon.
-
 	float lightScapeBrightness; //! can be used to draw nightscape texture (e.g. city light pollution), if available. Computed by the LandscapeMgr.
 	bool validLandscape;   //! was a landscape loaded properly?
 	LinearFader landFader; //! Used to slowly fade in/out landscape painting.

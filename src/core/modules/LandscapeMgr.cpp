@@ -655,17 +655,8 @@ void LandscapeMgr::update(double deltaTime)
 	}
 	landscape->setBrightness(landscapeBrightness, lightscapeBrightness);
 
-        // extra colorful sunrise/sunset management. Only if sun is above horizon!
-//        double sunVisible= static_cast<double>(landscape->getOpacity(sunPos));
-//        float red  =landscapeTint[0];
-//        float green=landscapeTint[1];
-//        float blue =landscapeTint[2];
-//
-//        landscape->setTint(Vec3f(red+(1.f-red)*sunVisible,
-//                                 green+(1.f-green)*sunVisible,
-//                                 blue+(1.f-blue)*sunVisible));
+	// extra colorful sunrise/sunset management.
 	landscape->setTint(landscapeTint);
-
 
 	messageFader.update(static_cast<int>(deltaTime*1000));
 }

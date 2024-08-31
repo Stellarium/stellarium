@@ -579,7 +579,6 @@ public slots:
 	}
 
 	//! Set a discoloration to simulate sunrise/sunset colors.
-	//! These should then be used only when the sun is actually above the horizon.
 	void setLandscapeTint(const Vec3f &c){landscapeTint=c;}
 	Vec3f getLandscapeTint() const {return landscapeTint;}
 
@@ -841,7 +840,7 @@ private:
 
 	//! Indicate use of the default transparency value specified in config.ini.
 	bool flagLandscapeUseTransparency;
-	//! A transparency value to make landscpe partially see-through and let objects below the horizon be visible
+	//! A user-configurable transparency value to make landscape partially see-through and let objects below the horizon be visible
 	double landscapeTransparency;
 	//! Color tint to draw the landscape in. Can be useful for sunrise/sunset scenes.
 	Vec3f landscapeTint;
