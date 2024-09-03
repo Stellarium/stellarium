@@ -123,7 +123,7 @@ void SupernovaeDialog::setAboutHtml(void)
 	html += " " + q_("All those supernovae are brighter %1 at peak of brightness.").arg(QString::number(sn->getLowerLimitBrightness(), 'f', 2) + "<sup>m</sup>") + "</p>";
 
 	html += "<h3>" + q_("Light curves") + "</h3>";
-	html += "<p>" + QString(q_("This plugin implements a simple model of light curves for different supernovae. Typical views of light curves for type I and type II supernova can be seen %1here%2 (right scale in days), and this model is used for this plugin.")).arg("<a href=\"http://stellarium.sourceforge.net/wiki/index.php/Historical_Supernovae_plugin#Light_curves\">").arg("</a>") + "</p>";
+	html += "<p>" + QString(q_("This plugin implements a simple model of light curves for type I and type II supernovae. Figures and a description of the model can be found in the Stellarium User Guide.")) + "</p>";
 
 	html += "<h3>" + q_("Acknowledgments") + "</h3>";
 	html += "<p>" + q_("We thank the following people for their contribution and valuable comments:") + "</p><ul>";

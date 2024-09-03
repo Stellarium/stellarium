@@ -1036,6 +1036,26 @@ One anonymous user sent a troubleshooting solution when connecting Stellarium to
 \end{quote}
 
 
+
+\subsubsection{Stellarium Telescope Protocol}
+\label{sec:plugins:TelescopeControl:Other:Protocol}
+
+In the early days of Stellarium, telescope control required standalone server programs. 
+These were later integrated in the plugin. However, there are situations where external control servers are still useful, 
+e.g.\ when they are running on some tiny telescope computer while the user sits in the warm control room in front of the powerful PC running Stellarium. 
+For you DIYers out there, figure~\ref{fig:plugins:TelescopeControl:Other:Protocol} shows the original protocol.
+
+
+\begin{figure}[bp]
+\begin{center}
+\VerbatimInput[fontsize=\scriptsize]{pictures/Stellarium_telescope_protocol.txt}
+\end{center}
+\caption{The Stellarium Telescope Protocol, version 1.0}
+\label{fig:plugins:TelescopeControl:Other:Protocol}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \newpage
 \section{Observability Plugin}
 \label{sec:plugins:Observability}

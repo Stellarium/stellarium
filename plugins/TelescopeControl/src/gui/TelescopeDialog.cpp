@@ -279,7 +279,7 @@ void TelescopeDialog::setAboutText()
 	
 	QString helpPage = "<html><head></head><body>";
 	// TRANSLATORS: The text between braces is the text of an HTML link.
-	helpPage += "<p>" + q_("A more complete and up-to-date documentation for this plug-in can be found on the {Telescope Control} page in the Stellarium Wiki.").replace(a_rx, "<a href=\"http://stellarium.sourceforge.net/wiki/index.php/Telescope_Control_plug-in\">\\1</a>") + "</p>";
+	helpPage += "<p>" + q_("A more complete and up-to-date documentation for this plug-in can be found in the Stellarium User Guide.") + "</p>";
 	helpPage += "<h3><a name=\"top\" />" + q_("Contents") + "</h3><ul>";
 	helpPage += "<li><a href=\"#Abilities_and_limitations\">" + q_("Abilities and limitations") + "</a></li>";
 	helpPage += "<li><a href=\"#originalfeature\">" + q_("The original telescope control feature") + "</a></li>";
@@ -318,9 +318,9 @@ void TelescopeDialog::setAboutText()
 	helpPage += "<li><b>" + q_("INDIRECT CONNECTION") + "</b>: <ul>";
 	helpPage += "<li>";
 	// TRANSLATORS: The text between braces is the text of an HTML link.
-	helpPage += q_("A device is connected to the same computer but it is driven by a {stand-alone telescope server program}").replace(a_rx, "<a href=\"http://stellarium.sourceforge.net/wiki/index.php/Telescope_Control_%28client-server%29\">\\1</a>") + " ";
+	helpPage += q_("A device is connected to the same computer but it is driven by a stand-alone telescope server program") + " ";
 	// TRANSLATORS: The text between braces is the text of an HTML link.
-	helpPage += q_("or a {third-party application} <b>that can 'talk' to Stellarium</b>;").replace(a_rx, "<a href=\"http://stellarium.sourceforge.net/wiki/index.php/Telescope_Control#Third_party_applications\">\\1</a>");
+	helpPage += q_("or a third-party application <b>that can 'talk' to Stellarium</b>;");
 	helpPage += "</li>";
 	helpPage += "<li>" + q_("A device is connected to a remote computer and the software that drives it can 'talk' to Stellarium <i>over the network</i>; this software can be either one of Stellarium's stand-alone telescope servers, or a third party application.") + "</li></ul></li></ul>";
 	helpPage += "<p>";
@@ -490,7 +490,7 @@ void TelescopeDialog::setAboutText()
 	helpPage += "</p>";
 	helpPage += "<p>";
 	// TRANSLATORS: The text between braces is the text of an HTML link.
-	helpPage += q_("This feature is equivalent to the 'Dummy' type of telescope supported by {Stellarium's original telescope control feature}.").replace(a_rx, "<a href=\"http://stellarium.sourceforge.net/wiki/index.php/Telescope_Control_%28client-server%29\">\\1</a>");
+	helpPage += q_("This feature is equivalent to the 'Dummy' type of telescope supported by Stellarium's original telescope control feature (~2006).");
 	helpPage += "</p>";
 	helpPage += "<p><a href=\"#top\"><small>[" + q_("Back to top") + "]</small></a></p>";
 
