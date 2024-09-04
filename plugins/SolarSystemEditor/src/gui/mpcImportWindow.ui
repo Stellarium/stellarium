@@ -525,6 +525,9 @@
            <widget class="QLineEdit" name="lineEditSearch"/>
           </item>
           <item>
+           <widget class="QLabel" name="labelNumberOfObjects"/>
+          </item>
+          <item>
            <widget class="QListView" name="listViewObjects">
             <property name="selectionMode">
              <enum>QAbstractItemView::NoSelection</enum>

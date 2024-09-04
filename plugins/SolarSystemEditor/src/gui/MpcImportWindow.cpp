@@ -375,6 +375,8 @@ void MpcImportWindow::populateCandidateObjects(QList<SsoElements> objects)
 	model->clear();
 	model->setColumnCount(1);
 
+	ui->labelNumberOfObjects->setText(QString("%1: %2").arg(q_("Total objects in selected source"), QString::number(objects.count())));
+
 	for (auto object : objects)
 	{
 		QString name = object.value("name").toString();
@@ -1031,7 +1033,7 @@ void MpcImportWindow::loadBookmarks()
 	while (it.hasNext())
 	{
 		it.next();
-		if (it.value().contains("dss.stellarium.org") || it.value().contains("2018/Soft00Bright.txt"))
+		if (it.value().contains("dss.stellarium.org") || it.value().contains("2018/Soft00Bright.txt") || it.value().contains("2023/Soft00Bright.txt") || it.value().contains("iau/ECS/MPCAT/mpn.txt"))
 			bookmarks[MpcMinorPlanets].remove(it.key());
 	}
 
@@ -1041,7 +1043,7 @@ void MpcImportWindow::loadBookmarks()
 	bookmarks[MpcMinorPlanets].insert("MPC's list of observable critical-list numbered minor planets", 	"https://www.minorplanetcenter.net/iau/Ephemerides/CritList/Soft00CritList.txt");
 	bookmarks[MpcMinorPlanets].insert("MPC's list of observable distant minor planets", 			"https://www.minorplanetcenter.net/iau/Ephemerides/Distant/Soft00Distant.txt");
 	bookmarks[MpcMinorPlanets].insert("MPC's list of observable unusual minor planets", 			"https://www.minorplanetcenter.net/iau/Ephemerides/Unusual/Soft00Unusual.txt");
-	bookmarks[MpcMinorPlanets].insert("MPC's list of bright minor planets for 2023",			"https://www.minorplanetcenter.net/iau/Ephemerides/Bright/2023/Soft00Bright.txt");
+	bookmarks[MpcMinorPlanets].insert("MPC's list of bright minor planets at opposition in 2024",		"https://www.minorplanetcenter.net/iau/Ephemerides/Bright/2024/Soft00Bright.txt");
 
 	bookmarks[MpcMinorPlanets].insert("MPCORB: near-Earth asteroids (NEAs)", 				"https://www.minorplanetcenter.net/iau/MPCORB/NEA.txt");
 	bookmarks[MpcMinorPlanets].insert("MPCORB: potentially hazardous asteroids (PHAs)", 			"https://www.minorplanetcenter.net/iau/MPCORB/PHA.txt");
@@ -1052,23 +1054,35 @@ void MpcImportWindow::loadBookmarks()
 
 	bookmarks[MpcMinorPlanets].insert("MPCAT: Unusual minor planets (including NEOs)", 			"https://www.minorplanetcenter.net/iau/ECS/MPCAT/unusual.txt");
 	bookmarks[MpcMinorPlanets].insert("MPCAT: Distant minor planets (Centaurs and transneptunians)", 	"https://www.minorplanetcenter.net/iau/ECS/MPCAT/distant.txt");
+	bookmarks[MpcMinorPlanets].insert("MPCAT: One-opposition objects (perturbed solutions)",		"https://www.minorplanetcenter.net/iau/ECS/MPCAT/mpo.txt");
+	bookmarks[MpcMinorPlanets].insert("MPCAT: One-opposition objects (unperturbed solutions)",		"https://www.minorplanetcenter.net/iau/ECS/MPCAT/mp1.txt");
 
 	const int start = 0;
-	const int finish = 61;
+	const int mpn = 73; // number of files for numbered minor planets
+	const int mpu = 65; // number of files for unnumbered minor planets
 	const int nsize = 6;
 	const QChar dash = QChar(0x2014);
 
 	QString limits, idx, leftLimit, rightLimit;
 
-	for (int i=start; i<=finish; i++)
+	for (int i=start; i<mpn; i++)
 	{
-		leftLimit = (i==start) ? QString::number(1).rightJustified(nsize) : QString::number(i*10000).rightJustified(nsize);
-		rightLimit = (i==finish) ? "..." : QString::number(i*10000 + 9999).rightJustified(nsize);
+		leftLimit = (i==start) ? QString::number(1).rightJustified(nsize, '0') : QString::number(i*10000).rightJustified(nsize, '0');
+		rightLimit = (i==(mpn-1)) ? "..." : QString::number(i*10000 + 9999).rightJustified(nsize, '0');
 		limits = QString("%1%2%3").arg(leftLimit, dash, rightLimit);
 		idx = QString::number(i+1).rightJustified(2, '0');
 		bookmarks[MpcMinorPlanets].insert(
 			QString("MPCAT: Numbered objects (%1)").arg(limits), 
 			QString("http://dss.stellarium.org/MPC/mpn-%1.txt").arg(idx)
+			);
+	}
+
+	for (int i=start; i<mpu; i++)
+	{
+		idx = QString::number(i+1).rightJustified(2, '0');
+		bookmarks[MpcMinorPlanets].insert(
+			QString("MPCAT: Multi-opposition unnumbered objects (part %1)").arg(idx),
+			QString("http://dss.stellarium.org/MPC/mpu-%1.txt").arg(idx)
 			);
 	}
 
