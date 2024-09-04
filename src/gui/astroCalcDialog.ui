@@ -832,6 +832,22 @@
                </widget>
               </item>
               <item>
+               <widget class="QDoubleSpinBox" name="dateFromDoubleSpinBox">
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+                <property name="decimals">
+                 <number>5</number>
+                </property>
+                <property name="minimum">
+                 <double>-3027192.732689999975264</double>
+                </property>
+                <property name="maximum">
+                 <double>7930547.208320000208914</double>
+                </property>
+               </widget>
+              </item>
+              <item>
                <widget class="QToolButton" name="pushButtonNow">
                 <property name="toolTip">
                  <string>Now</string>
@@ -870,7 +886,33 @@
                 </property>
                </widget>
               </item>
+              <item>
+               <widget class="QDoubleSpinBox" name="dateToDoubleSpinBox">
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+                <property name="decimals">
+                 <number>5</number>
+                </property>
+                <property name="minimum">
+                 <double>-3027192.732689999975264</double>
+                </property>
+                <property name="maximum">
+                 <double>7930547.208320000208914</double>
+                </property>
+               </widget>
+              </item>
              </layout>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="wrdCheckBox">
+              <property name="toolTip">
+               <string>Using a wide range of dates</string>
+              </property>
+              <property name="text">
+               <string extracomment="W.R.D. = wide range of dates">W.R.D.</string>
+              </property>
+             </widget>
             </item>
             <item>
              <spacer name="horizontalSpacer_8">

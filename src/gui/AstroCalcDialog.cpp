@@ -246,7 +246,9 @@ void AstroCalcDialog::createDialogContent()
 	const double JD = core->getJD() + core->getUTCOffset(core->getJD()) / 24;
 	QDateTime currentDT = StelUtils::jdToQDateTime(JD, Qt::LocalTime);
 	ui->dateFromDateTimeEdit->setDateTime(currentDT);
-	ui->dateToDateTimeEdit->setDateTime(currentDT.addMonths(1));	
+	ui->dateToDateTimeEdit->setDateTime(currentDT.addMonths(1));
+	ui->dateFromDoubleSpinBox->setValue(JD);
+	ui->dateToDoubleSpinBox->setValue(JD + 30.4375); // month = 1/12 of year in days
 	int year, month, day;
 	StelUtils::getDateFromJulianDay(JD, &year, &month, &day);
 	ui->phenomenFromYearSpinBox->setValue(year);
@@ -304,9 +306,12 @@ void AstroCalcDialog::createDialogContent()
 	initEphemerisFlagNakedEyePlanets();
 	enableEphemerisButtons(buttonState);
 	ui->ephemerisIgnoreDateTestCheckBox->setChecked(conf->value("astrocalc/flag_ephemeris_ignore_date_test", true).toBool());
-	connect(ui->ephemerisIgnoreDateTestCheckBox, SIGNAL(toggled(bool)), this, SLOT(saveIgnoreDateTestFlag(bool)));	
-	connect(ui->ephemerisHorizontalCoordinatesCheckBox, SIGNAL(toggled(bool)), this, SLOT(reGenerateEphemeris()));
+	usingWideRangeDates = conf->value("astrocalc/flag_ephemeris_wide_range_dates", false).toBool();
+	ui->wrdCheckBox->setChecked(usingWideRangeDates);
+	connect(ui->ephemerisIgnoreDateTestCheckBox, SIGNAL(toggled(bool)), this, SLOT(saveIgnoreDateTestFlag(bool)));
+	connect(ui->ephemerisHorizontalCoordinatesCheckBox, SIGNAL(toggled(bool)), this, SLOT(reGenerateEphemeris()));	
 	connect(ui->allNakedEyePlanetsCheckBox, SIGNAL(toggled(bool)), this, SLOT(saveEphemerisFlagNakedEyePlanets(bool)));
+	connect(ui->wrdCheckBox, SIGNAL(toggled(bool)), this, SLOT(saveEphemerisFlagWideRangeDates(bool)));
 	connect(ui->ephemerisPushButton, SIGNAL(clicked()), this, SLOT(generateEphemeris()));
 	connect(ui->ephemerisCleanupButton, SIGNAL(clicked()), this, SLOT(cleanupEphemeris()));
 	connect(ui->ephemerisSaveButton, SIGNAL(clicked()), this, SLOT(saveEphemeris()));
@@ -316,6 +321,7 @@ void AstroCalcDialog::createDialogContent()
 	connect(ui->celestialBodyComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(saveEphemerisCelestialBody(int)));
 	connect(ui->secondaryCelestialBodyComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(saveEphemerisSecondaryCelestialBody(int)));
 	connect(ui->pushButtonNow, SIGNAL(clicked()), this, SLOT(setDateTimeNow()));
+	enableEphemerisWideRangeGUI(usingWideRangeDates);
 
 	ui->genericMarkerColor->setup("SolarSystem.ephemerisGenericMarkerColor", "color/ephemeris_generic_marker_color");
 	ui->secondaryMarkerColor->setup("SolarSystem.ephemerisSecondaryMarkerColor", "color/ephemeris_secondary_marker_color");
@@ -587,9 +593,11 @@ void AstroCalcDialog::createDialogContent()
 
 void AstroCalcDialog::populateToolTips()
 {
-	QString validDates = QString("%1 1582/10/15 - 9999/12/31").arg(q_("Gregorian dates. Valid range:"));
+	QString validDates = QString("%1 1582/10/15 - 9999/12/31").arg(q_("Gregorian dates. Valid range:"));	
 	ui->dateFromDateTimeEdit->setToolTip(validDates);
 	ui->dateToDateTimeEdit->setToolTip(validDates);
+	ui->dateFromDoubleSpinBox->setToolTip(QString("%1 %2..%3").arg(q_("Julian day. Valid range:"), QString::number(ui->dateFromDoubleSpinBox->minimum(), 'f', 5), QString::number(ui->dateFromDoubleSpinBox->maximum(), 'f', 5)));
+	ui->dateToDoubleSpinBox->setToolTip(QString("%1 %2..%3").arg(q_("Julian day. Valid range:"), QString::number(ui->dateToDoubleSpinBox->minimum(), 'f', 5), QString::number(ui->dateToDoubleSpinBox->maximum(), 'f', 5)));
 	ui->phenomenFromYearSpinBox->setToolTip(QString("%1 %2..%3").arg(q_("Valid range years:"), QString::number(ui->phenomenFromYearSpinBox->minimum()), QString::number(ui->phenomenFromYearSpinBox->maximum())));
 	ui->rtsFromYearSpinBox->setToolTip(QString("%1 %2..%3").arg(q_("Valid range years:"), QString::number(ui->rtsFromYearSpinBox->minimum()), QString::number(ui->rtsFromYearSpinBox->maximum())));
 	ui->eclipseFromYearSpinBox->setToolTip(QString("%1 %2..%3").arg(q_("Valid range years:"), QString::number(ui->eclipseFromYearSpinBox->minimum()), QString::number(ui->eclipseFromYearSpinBox->maximum())));
@@ -1783,7 +1791,11 @@ void AstroCalcDialog::reGenerateEphemeris()
 void AstroCalcDialog::setDateTimeNow()
 {
 	const double JD = core->getJD() + core->getUTCOffset(core->getJD()) / 24;
-	ui->dateFromDateTimeEdit->setDateTime(StelUtils::jdToQDateTime(JD, Qt::LocalTime));
+	if (usingWideRangeDates)
+		ui->dateFromDoubleSpinBox->setValue(JD);
+	else
+		ui->dateFromDateTimeEdit->setDateTime(StelUtils::jdToQDateTime(JD, Qt::LocalTime));
+
 }
 
 void AstroCalcDialog::saveIgnoreDateTestFlag(bool b)
@@ -1887,11 +1899,11 @@ void AstroCalcDialog::generateEphemeris()
 	const double currentJD = core->getJD(); // save current JD
 	QDateTime fdt = ui->dateFromDateTimeEdit->dateTime();
 	fdt.setTimeSpec(Qt::UTC);
-	double firstJD = StelUtils::qDateTimeToJd(fdt);
+	double firstJD = usingWideRangeDates ? ui->dateFromDoubleSpinBox->value() : StelUtils::qDateTimeToJd(fdt);
 	firstJD -= core->getUTCOffset(firstJD) / 24.;
 	QDateTime sdt = ui->dateToDateTimeEdit->dateTime();
 	sdt.setTimeSpec(Qt::UTC);
-	double secondJD = StelUtils::qDateTimeToJd(sdt);
+	double secondJD = usingWideRangeDates ? ui->dateToDoubleSpinBox->value() : StelUtils::qDateTimeToJd(sdt);
 	secondJD -= core->getUTCOffset(secondJD) / 24.;
 
 	const int elements = static_cast<int>((secondJD - firstJD) / currentStep);
@@ -4811,6 +4823,21 @@ void AstroCalcDialog::saveEphemerisFlagNakedEyePlanets(bool flag)
 	ui->secondaryCelestialBodyComboBox->setEnabled(!flag);
 	conf->setValue("astrocalc/ephemeris_nakedeye_planets", flag);
 	reGenerateEphemeris(false);
+}
+
+void AstroCalcDialog::saveEphemerisFlagWideRangeDates(bool flag)
+{
+	usingWideRangeDates = flag;
+	conf->setValue("astrocalc/flag_ephemeris_wide_range_dates", flag);
+	enableEphemerisWideRangeGUI(flag);
+}
+
+void AstroCalcDialog::enableEphemerisWideRangeGUI(bool enable)
+{
+	ui->dateFromDoubleSpinBox->setVisible(enable);
+	ui->dateToDoubleSpinBox->setVisible(enable);
+	ui->dateFromDateTimeEdit->setVisible(!enable);
+	ui->dateToDateTimeEdit->setVisible(!enable);
 }
 
 void AstroCalcDialog::enableCustomEphemerisTimeStepButton()

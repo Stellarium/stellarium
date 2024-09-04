@@ -362,6 +362,7 @@ private slots:
 	void saveEphemerisTimeStep(int index);
 	void initEphemerisFlagNakedEyePlanets(void);
 	void saveEphemerisFlagNakedEyePlanets(bool flag);
+	void saveEphemerisFlagWideRangeDates(bool flag);
 
 	//! Calculating phenomena for selected celestial body and fill the list.
 	void calculatePhenomena();
@@ -575,7 +576,8 @@ private:
 	void enableTransitsButtons(bool enable);
 
 	void enableCustomEphemerisTimeStepButton();
-	double getCustomTimeStep();
+	void enableEphemerisWideRangeGUI(bool enable);
+	double getCustomTimeStep();	
 	void reGenerateEphemeris(bool withSelection);
 
 	//! Finding and selecting an object by its name in specific JD
@@ -646,6 +648,7 @@ private:
 	bool plotAziVsTime = false;
 	bool computeRTS = false;
 	bool computeEphemeris = false;
+	bool usingWideRangeDates = false;
 	int altVsTimePositiveLimit = 0, monthlyElevationPositiveLimit = 0, graphsDuration = 1, graphsStep = 24;
 	QStringList ephemerisHeader, phenomenaHeader, positionsHeader, hecPositionsHeader, wutHeader, rtsHeader, lunareclipseHeader, lunareclipsecontactsHeader, solareclipseHeader, solareclipsecontactsHeader, solareclipselocalHeader, transitHeader;
 	static double brightLimit;
