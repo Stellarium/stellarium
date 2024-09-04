@@ -17,12 +17,6 @@
 */
 
 #include "StelApp.hpp"
-#include "StelCore.hpp"
-#include "StelPropertyMgr.hpp"
-#include "StelLocaleMgr.hpp"
-#include "StelModuleMgr.hpp"
-#include "StelTranslator.hpp"
-#include "StelUtils.hpp"
 #include "ConfigureOrbitColorsDialog.hpp"
 #include "ui_orbitColorsDialog.h"
 
@@ -61,11 +55,14 @@ void ConfigureOrbitColorsDialog::createDialogContent()
 		ui->groupsRadioButton->setChecked(true);
 	else if (activeColorStyle=="major_planets")
 		ui->majorPlanetsRadioButton->setChecked(true);
+	else if (activeColorStyle=="major_planets_minor_types")
+		ui->majorPlanetsAndMinorTypeRadioButton->setChecked(true);
 	else
 		ui->oneColorRadioButton->setChecked(true);
 	connect(ui->oneColorRadioButton, SIGNAL(clicked(bool)), this, SLOT(setColorStyle()));
 	connect(ui->groupsRadioButton, SIGNAL(clicked(bool)), this, SLOT(setColorStyle()));
 	connect(ui->majorPlanetsRadioButton, SIGNAL(clicked(bool)), this, SLOT(setColorStyle()));
+	connect(ui->majorPlanetsAndMinorTypeRadioButton, SIGNAL(clicked(bool)), this, SLOT(setColorStyle()));
 
 	ui->colorGenericOrbits           ->setup("SolarSystem.orbitsColor",                     "color/sso_orbits_color");
 	ui->colorGroupsMajorPlanetsOrbits->setup("SolarSystem.majorPlanetsOrbitsColor",         "color/major_planet_orbits_color");
@@ -94,6 +91,8 @@ void ConfigureOrbitColorsDialog::setColorStyle()
 	QString colorStyle;
 	if (ui->majorPlanetsRadioButton->isChecked())
 		colorStyle = "major_planets";
+	else if (ui->majorPlanetsAndMinorTypeRadioButton->isChecked())
+		colorStyle = "major_planets_minor_types";
 	else if (ui->groupsRadioButton->isChecked())
 		colorStyle = "groups";
 	else

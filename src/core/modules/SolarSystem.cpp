@@ -87,6 +87,7 @@ SolarSystem::SolarSystem() : StelObjectModule()
 	, maxTrailTimeExtent(1)
 	, trailsThickness(1)
 	, flagIsolatedOrbits(true)
+	, flagPlanetsOrbits(false)
 	, flagPlanetsOrbitsOnly(false)
 	, flagOrbitsWithMoons(false)
 	, ephemerisMarkersDisplayed(true)
@@ -118,6 +119,7 @@ SolarSystem::SolarSystem() : StelObjectModule()
 	connect(&StelApp::getInstance(), SIGNAL(screenFontSizeChanged(int)), this, SLOT(setFontSize(int)));
 	setObjectName("SolarSystem");
 	connect(this, SIGNAL(flagOrbitsChanged(bool)),            this, SLOT(reconfigureOrbits()));
+	connect(this, SIGNAL(flagPlanetsOrbitsChanged(bool)),     this, SLOT(reconfigureOrbits()));
 	connect(this, SIGNAL(flagPlanetsOrbitsOnlyChanged(bool)), this, SLOT(reconfigureOrbits()));
 	connect(this, SIGNAL(flagIsolatedOrbitsChanged(bool)),    this, SLOT(reconfigureOrbits()));
 	connect(this, SIGNAL(flagOrbitsWithMoonsChanged(bool)),   this, SLOT(reconfigureOrbits()));
@@ -218,6 +220,7 @@ void SolarSystem::init()
 	setMaxTrailPoints(conf->value("viewing/max_trail_points", 5000).toInt());
 	setMaxTrailTimeExtent(conf->value("viewing/max_trail_time_extent", 1).toInt());
 	setFlagIsolatedOrbits(conf->value("viewing/flag_isolated_orbits", true).toBool());
+	setFlagPlanetsOrbits(conf->value("viewing/flag_planets_orbits", false).toBool());
 	setFlagPlanetsOrbitsOnly(conf->value("viewing/flag_planets_orbits_only", false).toBool());
 	setFlagOrbitsWithMoons(conf->value("viewing/flag_orbits_with_moons", false).toBool());
 	setFlagPermanentOrbits(conf->value("astro/flag_permanent_orbits", false).toBool());
@@ -2755,6 +2758,8 @@ void SolarSystem::setFlagOrbits(bool b)
 // This method goes through all planets and sets orbit drawing as configured by several flags
 void SolarSystem::reconfigureOrbits()
 {
+	// State of before 24.3: You could display planet orbits only, selected object's orbit, but not mix selected minor body in relation to all planets.
+	// The first
 	// we have: flagOrbits O, flagIsolatedOrbits I, flagPlanetsOrbitsOnly P, flagOrbitsWithMoons M, flagPermanentOrbits and a possibly selected planet S
 	// permanentOrbits only influences local drawing of a single planet and can be ignored here.
 	// O S I P M
@@ -2780,7 +2785,6 @@ void SolarSystem::reconfigureOrbits()
 	{
 		for (const auto& p : std::as_const(systemPlanets))
 			p->setFlagOrbits(!flagPlanetsOrbitsOnly || (p->getPlanetType()==Planet::isPlanet || (flagOrbitsWithMoons && p->parent && p->parent->getPlanetType()==Planet::isPlanet) ));
-		return;
 	}
 	else // flagIsolatedOrbits && selected
 	{
@@ -2788,7 +2792,13 @@ void SolarSystem::reconfigureOrbits()
 		for (const auto& p : std::as_const(systemPlanets))
 			p->setFlagOrbits(   (p==selected && (  !flagPlanetsOrbitsOnly ||  p->getPlanetType()==Planet::isPlanet ) )
 					 || (flagOrbitsWithMoons && p->getPlanetType()==Planet::isMoon && p->parent==selected ) );
-		return;
+	}
+	// 24.3: With new flag, we can override to see the orbits of major planets together with that of a single selected minor body.
+	if (flagPlanetsOrbits && !flagPlanetsOrbitsOnly)
+	{
+		for (const auto& p : std::as_const(systemPlanets))
+			if ((p->getPlanetType()==Planet::isPlanet) || (flagOrbitsWithMoons && p->getPlanetType()==Planet::isMoon ))
+				p->setFlagOrbits(true);
 	}
 }
 
@@ -2805,6 +2815,21 @@ void SolarSystem::setFlagIsolatedOrbits(bool b)
 bool SolarSystem::getFlagIsolatedOrbits() const
 {
 	return flagIsolatedOrbits;
+}
+
+void SolarSystem::setFlagPlanetsOrbits(bool b)
+{
+	if(b!=flagPlanetsOrbits)
+	{
+		flagPlanetsOrbits = b;
+		StelApp::immediateSave("viewing/flag_planets_orbits", b);
+		emit flagPlanetsOrbitsChanged(b);
+	}
+}
+
+bool SolarSystem::getFlagPlanetsOrbits() const
+{
+	return flagPlanetsOrbits;
 }
 
 void SolarSystem::setFlagPlanetsOrbitsOnly(bool b)
@@ -3493,20 +3518,21 @@ bool SolarSystem::getFlagEarthShadowEnlargementDanjon() const
 
 void SolarSystem::setOrbitColorStyle(QString style)
 {
-	if (style.toLower()==L1S("groups"))
-		Planet::orbitColorStyle = Planet::ocsGroups;
-	else if (style.toLower()==L1S("major_planets"))
-		Planet::orbitColorStyle = Planet::ocsMajorPlanets;
-	else
-		Planet::orbitColorStyle = Planet::ocsOneColor;
+	static const QMap<QString, Planet::PlanetOrbitColorStyle>map={
+		{ QString("groups"),                    Planet::ocsGroups},
+		{ QString("major_planets"),             Planet::ocsMajorPlanets},
+		{ QString("major_planets_minor_types"), Planet::ocsMajorPlanetsMinorTypes}
+	};
+	Planet::orbitColorStyle = map.value(style.toLower(), Planet::ocsOneColor);
 }
 
 QString SolarSystem::getOrbitColorStyle() const
 {
 	static const QMap<Planet::PlanetOrbitColorStyle, QString>map={
-		{ Planet::ocsOneColor,     "one_color"},
-		{ Planet::ocsGroups,       "groups"},
-		{ Planet::ocsMajorPlanets, "major_planets"}
+		{ Planet::ocsOneColor,               "one_color"},
+		{ Planet::ocsGroups,                 "groups"},
+		{ Planet::ocsMajorPlanets,           "major_planets"},
+		{ Planet::ocsMajorPlanetsMinorTypes, "major_planets_minor_types"},
 	};
 	return map.value(Planet::orbitColorStyle, "one_color");
 }

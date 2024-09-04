@@ -217,6 +217,7 @@ void ViewDialog::createDialogContent()
 	connectCheckBox(ui->planetMarkerCheckBox, "actionShow_Planets_Hints");
 	connectCheckBox(ui->planetOrbitCheckBox, "actionShow_Planets_Orbits");
 	connectBoolProperty(ui->planetIsolatedOrbitCheckBox, "SolarSystem.flagIsolatedOrbits");
+	connectBoolProperty(ui->planetOrbitMajorPlanetsCheckBox, "SolarSystem.flagPlanetsOrbits");
 	connectBoolProperty(ui->planetOrbitOnlyCheckBox, "SolarSystem.flagPlanetsOrbitsOnly");
 	connectBoolProperty(ui->planetOrbitsMoonCheckBox, "SolarSystem.flagOrbitsWithMoons");
 	connectBoolProperty(ui->planetOrbitPermanentCheckBox, "SolarSystem.flagPermanentOrbits");
