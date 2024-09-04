@@ -106,6 +106,7 @@ StelCore::StelCore()
 	, de441Available(false)
 	, de440Active(false)
 	, de441Active(false)
+	, flagClearSky(true)
 {
 	setObjectName("StelCore");
 	registerMathMetaTypes();
@@ -363,6 +364,9 @@ void StelCore::init()
 
 	actionsMgr->addAction("actionHorizontal_Flip", displayGroup, N_("Flip scene horizontally"), this, "flipHorz", "Ctrl+Shift+H", "", true);
 	actionsMgr->addAction("actionVertical_Flip", displayGroup, N_("Flip scene vertically"), this, "flipVert", "Ctrl+Shift+V", "", true);
+
+	actionsMgr->addAction("actionClear_Background", displayGroup, N_("Toggle background clearing"), this, "flagClearSky", "Ctrl+Alt+C", "", true);
+
 }
 
 QString StelCore::getDefaultProjectionTypeKey() const
@@ -538,7 +542,13 @@ void StelCore::preDraw()
 	Vec3f backColor = StelMainView::getInstance().getSkyBackgroundColor();
 	QOpenGLFunctions* gl = QOpenGLContext::currentContext()->functions();
 	gl->glClearColor(backColor[0], backColor[1], backColor[2], 0.f);
-	gl->glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+	if (flagClearSky)
+		gl->glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+	else
+	{
+		// TODO: dim whole framebuffer to 90%, else we are overexposed much too fast.
+		gl->glClear(GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+	}
 
 	skyDrawer->preDraw();
 }
@@ -3121,4 +3131,11 @@ void StelCore::setAberrationUniforms(QOpenGLShaderProgram& program) const
 		velocity = Vec3d(0,0,0);
 	}
 	program.setUniformValue("STELCORE_currentPlanetHeliocentricEclipticVelocity", velocity.toQVector());
+}
+
+void StelCore::setFlagClearSky(const bool state)
+{
+	flagClearSky = state;
+	qDebug() << "flagClearSky now" << state;
+	emit flagClearSkyChanged(state);
 }

@@ -148,7 +148,7 @@ StelViewportDistorterFisheyeToSphericMirror::StelViewportDistorterFisheyeToSpher
 
 				// sharp image up to the border of the fisheye image, at the cost of
 				// accepting clamping artefacts. You can get rid of the clamping
-				// artefacts by specifying a viewport size a little less then
+				// artefacts by specifying a viewport size a little less than
 				// (1<<n)*(1<<n), for instance 1022*1022. With a viewport size
 				// of 512*512 and viewportFovDiameter=512 you will get clamping
 				// artefacts in the 3 otherwise black hills on the bottom of the image.
@@ -177,7 +177,7 @@ StelViewportDistorterFisheyeToSphericMirror::StelViewportDistorterFisheyeToSpher
 		QTextStream in;
 		QString fName = StelFileMgr::findFile(custom_distortion_file);
 		if (fName.isEmpty()) {
-			qWarning() << "WARNING: could not open custom_distortion_file:" << custom_distortion_file;
+			qWarning() << "WARNING: could not find custom_distortion_file:" << custom_distortion_file;
 		} else {
 			file.setFileName(fName);
 			if(file.open(QIODevice::ReadOnly))
@@ -345,3 +345,13 @@ void StelViewportDistorterFisheyeToSphericMirror::paintViewportBuffer(const QOpe
 	GL(gl->glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST));
 }
 
+void StelViewportFaderEffect::paintViewportBuffer(const QOpenGLFramebufferObject* buf) const
+{
+	StelPainter sPainter(StelApp::getInstance().getCore()->getProjection2d());
+	QOpenGLFunctions* gl = sPainter.glFuncs();
+	sPainter.setColor(1,1,1);
+	GL(gl->glBindTexture(GL_TEXTURE_2D, buf->texture()));
+	GL(gl->glBlendColor(1, 1, 1, 0.08));
+	sPainter.setBlending(true, GL_CONSTANT_ALPHA, GL_ONE_MINUS_CONSTANT_ALPHA);
+	sPainter.drawRect2d(0, 0, buf->width(), buf->height());
+}
