@@ -2778,10 +2778,9 @@ void SolarSystem::reconfigureOrbits()
 	{
 		for (const auto& p : std::as_const(systemPlanets))
 			p->setFlagOrbits(false);
-		return;
 	}
 	// from here, flagOrbits is certainly on
-	if (!flagIsolatedOrbits)
+	else if (!flagIsolatedOrbits)
 	{
 		for (const auto& p : std::as_const(systemPlanets))
 			p->setFlagOrbits(!flagPlanetsOrbitsOnly || (p->getPlanetType()==Planet::isPlanet || (flagOrbitsWithMoons && p->parent && p->parent->getPlanetType()==Planet::isPlanet) ));
@@ -2794,7 +2793,7 @@ void SolarSystem::reconfigureOrbits()
 					 || (flagOrbitsWithMoons && p->getPlanetType()==Planet::isMoon && p->parent==selected ) );
 	}
 	// 24.3: With new flag, we can override to see the orbits of major planets together with that of a single selected minor body.
-	if (flagPlanetsOrbits && !flagPlanetsOrbitsOnly)
+	if (flagOrbits && flagPlanetsOrbits)
 	{
 		for (const auto& p : std::as_const(systemPlanets))
 			if ((p->getPlanetType()==Planet::isPlanet) || (flagOrbitsWithMoons && p->getPlanetType()==Planet::isMoon ))

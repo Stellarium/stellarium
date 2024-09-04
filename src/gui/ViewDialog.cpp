@@ -594,6 +594,7 @@ void ViewDialog::setDisplayFormatForSpins(bool flagDecimalDegrees)
 void ViewDialog::populateOrbitsControls(bool flag)
 {
 	ui->planetIsolatedOrbitCheckBox->setEnabled(flag);
+	ui->planetOrbitMajorPlanetsCheckBox->setEnabled(flag);
 	ui->planetOrbitOnlyCheckBox->setEnabled(flag);
 	ui->planetOrbitsMoonCheckBox->setEnabled(flag);
 	ui->planetOrbitPermanentCheckBox->setEnabled(flag);
