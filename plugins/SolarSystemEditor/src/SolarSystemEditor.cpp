@@ -984,7 +984,10 @@ SsoElements SolarSystemEditor::readMpcOneLineMinorPlanetElements(const QString &
 		const int q2 = base62.indexOf(column[3]);
 		const int q1 = base62.indexOf(column[4]);
 		if (QList<int>({q4, q3, q2, q1}).contains(-1))
+		{
 			qCritical() << "Error in MPC large number decoding of " << column;
+			return result;
+		}
 		minorPlanetNumber=((q4*62 + q3)*62 + q2)*62 + q1;
 	}
 	else
