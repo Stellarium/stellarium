@@ -445,6 +445,7 @@ private slots:
 	void showCustomStepsDialog();
 
 	void saveGraph(QChartView *graph);
+	void updateMinMaxDateRange();
 
 private:
 	class AstroCalcExtraEphemerisDialog* extraEphemerisDialog = nullptr;
@@ -484,6 +485,7 @@ private:
 	QPair<QString, QString> askTableFilePath(const QString& caption, const QString& fileName);
 
 	void populateToolTips();
+	void populateMinMaxDateRange();
 	//! Get the list of selected dwarf and minor planets
 	QList<PlanetP> getSelectedMinorPlanets();
 

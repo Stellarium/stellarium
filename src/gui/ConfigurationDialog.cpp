@@ -1734,6 +1734,7 @@ void ConfigurationDialog::de441ButtonClicked()
 
 void ConfigurationDialog::resetEphemControls()
 {
+	QPair<int, int> mm = qMakePair(-4000, 8000); // VSOP87
 	StelCore *core=StelApp::getInstance().getCore();
 	ui->de430checkBox->setEnabled(core->de430IsAvailable());
 	ui->de431checkBox->setEnabled(core->de431IsAvailable());
@@ -1745,7 +1746,10 @@ void ConfigurationDialog::resetEphemControls()
 	ui->de441checkBox->setChecked(core->de441IsActive());
 
 	if(core->de430IsActive())
+	{
 		ui->de430label->setText("1550..2650");
+		mm = qMakePair(1550, 2650);
+	}
 	else
 	{
 		if (core->de430IsAvailable())
@@ -1754,7 +1758,10 @@ void ConfigurationDialog::resetEphemControls()
 			ui->de430label->setText(q_("Not Available"));
 	}
 	if(core->de431IsActive())
+	{
 		ui->de431label->setText("-13000..17000");
+		mm = qMakePair(-13000, 17000);
+	}
 	else
 	{
 		if (core->de431IsAvailable())
@@ -1763,7 +1770,10 @@ void ConfigurationDialog::resetEphemControls()
 			ui->de431label->setText(q_("Not Available"));
 	}
 	if(core->de440IsActive())
+	{
 		ui->de440label->setText("1550..2650");
+		mm = qMakePair(1550, 2650);
+	}
 	else
 	{
 		if (core->de440IsAvailable())
@@ -1772,7 +1782,10 @@ void ConfigurationDialog::resetEphemControls()
 			ui->de440label->setText(q_("Not Available"));
 	}
 	if(core->de441IsActive())
+	{
 		ui->de441label->setText("-13000..17000");
+		mm = qMakePair(-13000, 17000);
+	}
 	else
 	{
 		if (core->de441IsAvailable())
@@ -1780,6 +1793,8 @@ void ConfigurationDialog::resetEphemControls()
 		else
 			ui->de441label->setText(q_("Not Available"));
 	}
+	core->setMinMaxEphemRange(mm);
+	emit core->ephemAlgorithmChanged();
 }
 
 void ConfigurationDialog::updateSelectedInfoCheckBoxes()
