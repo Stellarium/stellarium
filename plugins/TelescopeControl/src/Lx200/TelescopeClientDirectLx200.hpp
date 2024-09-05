@@ -73,6 +73,7 @@ private:
 	void telescopeSync(const Vec3d &j2000Pos, StelObjectP selectObject) override;
 	bool isTelescopeSyncSupported() const override {return true;}
 	void telescopeAbortSlew() override;
+	bool isAbortSlewSupported() const override {return true;}
 	bool isInitialized(void) const override;
 	
 	//======================================================================
