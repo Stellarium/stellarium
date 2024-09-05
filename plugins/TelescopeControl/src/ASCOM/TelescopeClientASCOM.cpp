@@ -174,12 +174,6 @@ bool TelescopeClientASCOM::hasKnownPosition() const
 	return true;
 }
 
-void TelescopeClientASCOM::move(double angle, double speed)
-{
-	Q_UNUSED(angle)
-	Q_UNUSED(speed)
-}
-
 bool TelescopeClientASCOM::useJNow(ASCOMDevice::ASCOMEquatorialCoordinateType coordinateType, bool ascomUseDeviceEqCoordType, TelescopeControl::Equinox equinox)
 {
 	if (ascomUseDeviceEqCoordType)
