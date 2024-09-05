@@ -242,6 +242,7 @@ void AstroCalcDialog::createDialogContent()
 	ui->jupiterMarkerColor->setText(QChar(0x2643));
 	ui->saturnMarkerColor->setText(QChar(0x2644));
 
+	populateMinMaxDateRange();
 	const double JD = core->getJD() + core->getUTCOffset(core->getJD()) / 24;
 	QDateTime currentDT = StelUtils::jdToQDateTime(JD, Qt::LocalTime);
 	ui->dateFromDateTimeEdit->setDateTime(currentDT);
@@ -578,6 +579,8 @@ void AstroCalcDialog::createDialogContent()
 	connect(ui->exportLunarElongationPushButton, &QPushButton::clicked, this, [=]{ saveGraph(ui->lunarElongationChartView); });
 	connect(ui->exportPCPushButton, &QPushButton::clicked, this, [=]{ saveGraph(ui->pcChartView); });
 
+	connect(core, SIGNAL(ephemAlgorithmChanged()), this, SLOT(updateMinMaxDateRange()));
+
 	// NOTE: populating tooltips should be doing after initialization and setting the values for all spinboxes
 	populateToolTips();
 }
@@ -593,6 +596,24 @@ void AstroCalcDialog::populateToolTips()
 	ui->allowedSeparationSpinBox->setToolTip(QString("%1: %2..%3").arg(q_("Valid range"), StelUtils::decDegToDmsStr(ui->allowedSeparationSpinBox->getMinimum(true)), StelUtils::decDegToDmsStr(ui->allowedSeparationSpinBox->getMaximum(true))));
 	ui->allowedSeparationLabel->setToolTip(QString("<p>%1</p>").arg(q_("This is a tolerance for the angular distance for conjunctions and oppositions from 0 and 180 degrees respectively.")));
 	ui->hecMagnitudeLimitSpinBox->setToolTip(QString("%1 %2..%3").arg(q_("Valid range magnitudes:"), QString::number(ui->hecMagnitudeLimitSpinBox->minimum(), 'f', 2), QString::number(ui->hecMagnitudeLimitSpinBox->maximum(), 'f', 2)));
+}
+
+void AstroCalcDialog::populateMinMaxDateRange()
+{
+	QPair<int, int> mm = core->getMinMaxEphemRange();
+	ui->phenomenFromYearSpinBox->setMinimum(mm.first);
+	ui->phenomenFromYearSpinBox->setMaximum(mm.second);
+	ui->rtsFromYearSpinBox->setMinimum(mm.first);
+	ui->rtsFromYearSpinBox->setMaximum(mm.second);
+	ui->eclipseFromYearSpinBox->setMinimum(mm.first);
+	ui->eclipseFromYearSpinBox->setMaximum(mm.second);
+}
+
+void AstroCalcDialog::updateMinMaxDateRange()
+{
+	populateMinMaxDateRange();
+	// populating tooltips after setting limits for some spinboxes
+	populateToolTips();
 }
 
 void AstroCalcDialog::saveGraph(QChartView *graph)

@@ -2894,6 +2894,12 @@ void StelCore::initEphemeridesFunctions()
 		EphemWrapper::init_de441(de441FilePath.toStdString().c_str());
 	}
 	setDe441Active(de441Available && conf->value("astro/flag_use_de441", false).toBool());
+
+	minMaxEphemRange = qMakePair(-4000, 8000); // VSOP87
+	if (de430Active || de440Active)
+		minMaxEphemRange = qMakePair(1550, 2650);
+	if (de431Active || de441Active)
+		minMaxEphemRange = qMakePair(-13000, 17000);
 }
 
 // Methods for finding constellation from J2000 position.

@@ -120,40 +120,40 @@ public:
 	//! Available DeltaT algorithms
 	enum DeltaTAlgorithm
 	{
-		WithoutCorrection,			//!< Without correction, DeltaT is Zero. Like Stellarium versions before 0.12.
-		Schoch,					//!< Schoch (1931) algorithm for DeltaT
-		Clemence,					//!< Clemence (1948) algorithm for DeltaT
-		IAU,						//!< IAU (1952) algorithm for DeltaT (based on observations by Spencer Jones (1939))
-		AstronomicalEphemeris,		//!< Astronomical Ephemeris (1960) algorithm for DeltaT
-		TuckermanGoldstine,		//!< Tuckerman (1962, 1964) & Goldstine (1973) algorithm for DeltaT
-		MullerStephenson,			//!< Muller & Stephenson (1975) algorithm for DeltaT
-		Stephenson1978,                     //!< Stephenson (1978) algorithm for DeltaT
-		SchmadelZech1979,			//!< Schmadel & Zech (1979) algorithm for DeltaT
-		MorrisonStephenson1982,	//!< Morrison & Stephenson (1982) algorithm for DeltaT (used by RedShift)
-		StephensonMorrison1984,	//!< Stephenson & Morrison (1984) algorithm for DeltaT
-		StephensonHoulden,			//!< Stephenson & Houlden (1986) algorithm for DeltaT
-		Espenak,					//!< Espenak (1987, 1989) algorithm for DeltaT
-		Borkowski,				//!< Borkowski (1988) algorithm for DeltaT
-		SchmadelZech1988,			//!< Schmadel & Zech (1988) algorithm for DeltaT
-		ChaprontTouze,			//!< Chapront-Touzé & Chapront (1991) algorithm for DeltaT
-		StephensonMorrison1995,	//!< Stephenson & Morrison (1995) algorithm for DeltaT
-		Stephenson1997,                     //!< Stephenson (1997) algorithm for DeltaT
-		ChaprontMeeus,			//!< Chapront, Chapront-Touze & Francou (1997) & Meeus (1998) algorithm for DeltaT
-		JPLHorizons,				//!< JPL Horizons algorithm for DeltaT
-		MeeusSimons,				//!< Meeus & Simons (2000) algorithm for DeltaT
-		MontenbruckPfleger,                 //!< Montenbruck & Pfleger (2000) algorithm for DeltaT
-		ReingoldDershowitz,                 //!< Reingold & Dershowitz (2002, 2007) algorithm for DeltaT
-		MorrisonStephenson2004,	//!< Morrison & Stephenson (2004, 2005) algorithm for DeltaT
-		Reijs,					//!< Reijs (2006) algorithm for DeltaT
-		EspenakMeeus,				//!< Espenak & Meeus (2006) algorithm for DeltaT
-		EspenakMeeusModified,				//!< Espenak & Meeus (2006) algorithm with modified formulae for DeltaT (Recommended, default)
-		EspenakMeeusZeroMoonAccel,	//!< Espenak & Meeus (2006) algorithm for DeltaT (but without additional Lunar acceleration. FOR TESTING ONLY, NONPUBLIC)
-		Banjevic,					//!< Banjevic (2006) algorithm for DeltaT
-		IslamSadiqQureshi,			//!< Islam, Sadiq & Qureshi (2008 + revisited 2013) algorithm for DeltaT (6 polynomials)
-		KhalidSultanaZaidi,			//!< M. Khalid, Mariam Sultana and Faheem Zaidi polynomial approximation of time period 1620-2013 (2014)
-		StephensonMorrisonHohenkerk2016,    //!< Stephenson, Morrison, Hohenkerk (2016) RSPA paper provides spline fit to observations for -720..2019 and else parabolic fit.
-		Henriksson2017,			//!< Henriksson (2017) algorithm for DeltaT (The solution for Schoch formula for DeltaT (1931), but with ndot=-30.128"/cy^2)
-		Custom					//!< User defined coefficients for quadratic equation for DeltaT
+		WithoutCorrection,               //!< Without correction, DeltaT is Zero. Like Stellarium versions before 0.12.
+		Schoch,                          //!< Schoch (1931) algorithm for DeltaT
+		Clemence,                        //!< Clemence (1948) algorithm for DeltaT
+		IAU,                             //!< IAU (1952) algorithm for DeltaT (based on observations by Spencer Jones (1939))
+		AstronomicalEphemeris,           //!< Astronomical Ephemeris (1960) algorithm for DeltaT
+		TuckermanGoldstine,              //!< Tuckerman (1962, 1964) & Goldstine (1973) algorithm for DeltaT
+		MullerStephenson,                //!< Muller & Stephenson (1975) algorithm for DeltaT
+		Stephenson1978,                  //!< Stephenson (1978) algorithm for DeltaT
+		SchmadelZech1979,                //!< Schmadel & Zech (1979) algorithm for DeltaT
+		MorrisonStephenson1982,          //!< Morrison & Stephenson (1982) algorithm for DeltaT (used by RedShift)
+		StephensonMorrison1984,          //!< Stephenson & Morrison (1984) algorithm for DeltaT
+		StephensonHoulden,               //!< Stephenson & Houlden (1986) algorithm for DeltaT
+		Espenak,                         //!< Espenak (1987, 1989) algorithm for DeltaT
+		Borkowski,                       //!< Borkowski (1988) algorithm for DeltaT
+		SchmadelZech1988,                //!< Schmadel & Zech (1988) algorithm for DeltaT
+		ChaprontTouze,                   //!< Chapront-Touzé & Chapront (1991) algorithm for DeltaT
+		StephensonMorrison1995,          //!< Stephenson & Morrison (1995) algorithm for DeltaT
+		Stephenson1997,                  //!< Stephenson (1997) algorithm for DeltaT
+		ChaprontMeeus,                   //!< Chapront, Chapront-Touze & Francou (1997) & Meeus (1998) algorithm for DeltaT
+		JPLHorizons,                     //!< JPL Horizons algorithm for DeltaT
+		MeeusSimons,                     //!< Meeus & Simons (2000) algorithm for DeltaT
+		MontenbruckPfleger,              //!< Montenbruck & Pfleger (2000) algorithm for DeltaT
+		ReingoldDershowitz,              //!< Reingold & Dershowitz (2002, 2007) algorithm for DeltaT
+		MorrisonStephenson2004,          //!< Morrison & Stephenson (2004, 2005) algorithm for DeltaT
+		Reijs,                           //!< Reijs (2006) algorithm for DeltaT
+		EspenakMeeus,                    //!< Espenak & Meeus (2006) algorithm for DeltaT
+		EspenakMeeusModified,            //!< Espenak & Meeus (2006) algorithm with modified formulae for DeltaT (Recommended, default)
+		EspenakMeeusZeroMoonAccel,       //!< Espenak & Meeus (2006) algorithm for DeltaT (but without additional Lunar acceleration. FOR TESTING ONLY, NONPUBLIC)
+		Banjevic,                        //!< Banjevic (2006) algorithm for DeltaT
+		IslamSadiqQureshi,               //!< Islam, Sadiq & Qureshi (2008 + revisited 2013) algorithm for DeltaT (6 polynomials)
+		KhalidSultanaZaidi,              //!< M. Khalid, Mariam Sultana and Faheem Zaidi polynomial approximation of time period 1620-2013 (2014)
+		StephensonMorrisonHohenkerk2016, //!< Stephenson, Morrison, Hohenkerk (2016) RSPA paper provides spline fit to observations for -720..2019 and else parabolic fit.
+		Henriksson2017,                  //!< Henriksson (2017) algorithm for DeltaT (The solution for Schoch formula for DeltaT (1931), but with ndot=-30.128"/cy^2)
+		Custom                           //!< User defined coefficients for quadratic equation for DeltaT
 	};
 	Q_ENUM(DeltaTAlgorithm)
 
@@ -794,6 +794,11 @@ public slots:
 	void setDe440Active(bool status);   //!< switch DE440 use to @param status (if de440IsAvailable()). DE440 is only used if date is within range of DE440.
 	void setDe441Active(bool status);   //!< switch DE441 use to @param status (if de441IsAvailable()). DE441 is only used if DE440 is not used and the date is within range of DE441.
 
+	//! Set min and max range of dates for ephemeris
+	void setMinMaxEphemRange(QPair<int, int> mm) { minMaxEphemRange = mm; }
+	//! Get min and max range of dates for ephemeris
+	QPair<int, int> getMinMaxEphemRange(void) { return minMaxEphemRange; }
+
 	//! Return 3-letter abbreviation of IAU constellation name for position in equatorial coordinates on the current epoch.
 	//! Follows 1987PASP...99..695R: Nancy Roman: Identification of a Constellation from a Position
 	//! Data file from ADC catalog VI/42 with its amendment from 1999-12-30.
@@ -871,6 +876,9 @@ signals:
 	void updateSearchLists();
 	void ditheringModeChanged(DitheringMode mode);
 
+	//! Called just after algorithm/theory for ephemeris is changed in the GUI
+	void ephemAlgorithmChanged();
+
 private slots:
 	//! Call this whenever latitude changes. I.e., just connect it to the locationChanged() signal.
 	void updateFixedEquatorialTransformMatrices();
@@ -903,7 +911,6 @@ private:
 	void resetSync();
 
 	void registerMathMetaTypes();
-
 
 	// Matrices used for every coordinate transfo
 	Mat4d matHeliocentricEclipticJ2000ToAltAz; // Transform from heliocentric ecliptic Cartesian (VSOP87A) to topocentric (StelObserver) altazimuthal coordinate
@@ -974,6 +981,7 @@ private:
 	bool de441Available; // ephem file found
 	bool de440Active;    // available and user-activated.
 	bool de441Active;    // available and user-activated.
+	QPair<int, int> minMaxEphemRange;
 };
 
 #endif // STELCORE_HPP
