@@ -975,6 +975,18 @@ SsoElements SolarSystemEditor::readMpcOneLineMinorPlanetElements(const QString &
 	{
 		minorPlanetNumber = column.toInt();
 	}
+	else if (column[0]==QChar('~'))
+	{
+		// permanent number >= 620000. https://minorplanetcenter.net/iau/info/PackedDes.html
+		static const QString base62("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz");
+		const int q4 = base62.indexOf(column[1]);
+		const int q3 = base62.indexOf(column[2]);
+		const int q2 = base62.indexOf(column[3]);
+		const int q1 = base62.indexOf(column[4]);
+		if (QList<int>({q4, q3, q2, q1}).contains(-1))
+			qCritical() << "Error in MPC large number decoding of " << column;
+		minorPlanetNumber=((q4*62 + q3)*62 + q2)*62 + q1;
+	}
 	else
 	{
 		//See if it is a number, but packed
