@@ -35,6 +35,7 @@ public:
 	void move(double angle, double speed) override;
 	void telescopeGoto(const Vec3d &j2000Pos, StelObjectP selectObject) override;
 	void telescopeSync(const Vec3d &j2000Pos, StelObjectP selectObject) override;
+	bool isTelescopeSyncSupported() const override {return true;}
 	bool isConnected() const override;
 	bool hasKnownPosition() const override;
 	QWidget *createControlWidget(QSharedPointer<TelescopeClient> telescope, QWidget* parent = nullptr) const override;

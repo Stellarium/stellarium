@@ -366,6 +366,7 @@ void SlewDialog::onCurrentTelescopeChanged()
 	if (!telescope)
 		return;
 
+	ui->pushButtonSync->setEnabled(telescope->isTelescopeSyncSupported());
 	auto controlWidget = telescope->createControlWidget(telescope);
 	if (!controlWidget)
 		return;
