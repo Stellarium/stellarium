@@ -91,7 +91,7 @@ public:
 	//! \brief move
 	//! \param angle [0,360). 0=South, 90=West, 180=North, 270=East
 	//! \param speed [0,1]
-	//!
+	//! The default implementation does nothing but emit a warning.
 	virtual void move(double angle, double speed);
 	virtual bool isConnected(void) const = 0;
 	virtual bool hasKnownPosition(void) const = 0;

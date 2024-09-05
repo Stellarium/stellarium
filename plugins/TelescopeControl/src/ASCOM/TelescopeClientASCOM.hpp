@@ -33,7 +33,6 @@ public:
 	~TelescopeClientASCOM() override;
 
 	Vec3d getJ2000EquatorialPos(const StelCore *core) const override;
-	void move(double angle, double speed) override;
 	void telescopeGoto(const Vec3d &j2000Pos, StelObjectP selectObject) override;
 	void telescopeSync(const Vec3d& j2000Pos, StelObjectP selectObject) override;
 	void telescopeAbortSlew() override;
