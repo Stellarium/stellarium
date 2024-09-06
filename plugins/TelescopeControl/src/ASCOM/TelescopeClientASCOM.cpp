@@ -54,6 +54,7 @@ TelescopeClientASCOM::TelescopeClientASCOM(const QString& name, const QString& p
 TelescopeClientASCOM::~TelescopeClientASCOM()
 {
 	mAscomDevice->disconnect();
+	delete mAscomDevice;
 }
 
 void TelescopeClientASCOM::performCommunication()

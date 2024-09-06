@@ -89,7 +89,7 @@ TelescopeClient *TelescopeClient::create(const QString &url)
 	{
 		newTelescope = new TelescopeClientJsonRts2(name, params, eq);
 	}
-	else if (type == "TelescopeServerLx200") //BM: One of the rare occasions of painless extension
+	else if (type == "TelescopeServerLx200")
 	{
 		newTelescope= new TelescopeClientDirectLx200(name, params, eq);
 	}
@@ -327,13 +327,6 @@ void TelescopeTCP::telescopeGoto(const Vec3d &j2000Pos, StelObjectP selectObject
 	{
 		qDebug() << "TelescopeTCP(" << name << ")::telescopeGoto: "<< "communication is too slow, I will ignore this command";
 	}
-}
-
-void TelescopeTCP::telescopeSync(const Vec3d &j2000Pos, StelObjectP selectObject)
-{
-	Q_UNUSED(j2000Pos)
-	Q_UNUSED(selectObject)
-	return;
 }
 
 void TelescopeTCP::performWriting(void)

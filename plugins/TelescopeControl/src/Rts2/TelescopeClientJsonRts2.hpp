@@ -43,7 +43,9 @@ public:
 	Vec3d getJ2000EquatorialPos(const StelCore* core=nullptr) const override;
 
 	void telescopeGoto(const Vec3d &j2000Pos, StelObjectP selectObject) override;
-	void telescopeSync(const Vec3d &j2000Pos, StelObjectP selectObject) override;
+	// TODO: Fix the meaningless implementation
+	//void telescopeSync(const Vec3d &j2000Pos, StelObjectP selectObject) override;
+	//bool isTelescopeSyncSupported() const override {return true;}
 	bool hasKnownPosition(void) const override;
 
 protected:
