@@ -1,4 +1,7 @@
-if(WIN32)
+# Due to incomprehensible errors between ASCOM and Qt6OpenGL!QOpenGL2PaintEngineEx::setState(), we must disable ASCOM in QT6-based builds.
+# No other code change related to Qt6 has been done so far, only the ASCOM selector has been greyed out.
+# Rather sooner than later ASCOM must be replaced by Alpaca.
+if(WIN32 AND (${QT_VERSION_MAJOR} EQUAL "5"))
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
@@ -11,9 +14,9 @@ SET(TelescopeControl_ASCOM_UIS
 
 IF (${QT_VERSION_MAJOR} EQUAL "5")
      QT5_WRAP_UI(TelescopeControl_ASCOM_UIS_H ${TelescopeControl_ASCOM_UIS})
-ELSE()
+ELSE(${QT_VERSION_MAJOR} EQUAL "5")
      QT_WRAP_UI(TelescopeControl_ASCOM_UIS_H ${TelescopeControl_ASCOM_UIS})
-ENDIF()
+ENDIF(${QT_VERSION_MAJOR} EQUAL "5")
 
 add_library(TelescopeControl_ASCOM STATIC
     ASCOMDevice.hpp
@@ -40,4 +43,4 @@ ENDIF(ENABLE_TESTING)
 
 SET_TARGET_PROPERTIES(TelescopeControl_ASCOM PROPERTIES FOLDER "plugins/TelescopeControl")
 
-ENDIF(WIN32)
+ENDIF(WIN32 AND (${QT_VERSION_MAJOR} EQUAL "5"))

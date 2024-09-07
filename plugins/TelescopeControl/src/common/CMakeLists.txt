@@ -1,14 +1,14 @@
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
 
-IF(WIN32)
+IF(WIN32 AND (${QT_VERSION_MAJOR} EQUAL "5"))
     SET(TelescopeControl_ASCOM_common_SRC
         ASCOMSupport.hpp
         ASCOMSupport.cpp
         OLE.hpp
         OLE.cpp
     )
-ENDIF()
+ENDIF(WIN32 AND (${QT_VERSION_MAJOR} EQUAL "5"))
 
 add_library(TelescopeControl_common STATIC
     LogFile.hpp
