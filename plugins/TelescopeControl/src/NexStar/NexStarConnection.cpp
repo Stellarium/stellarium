@@ -61,7 +61,18 @@ void NexStarConnection::sendSync(unsigned int ra_int, int dec_int)
 
 void NexStarConnection::sendAbort()
 {
-	command_list.clear(); // remove any queued commands
+#ifdef DEBUG4
+	*log_file << Now()
+		  << "NexStarConnection::sendAbort()"
+		  << StelUtils::getEndLineChar();
+#endif
+	// Remove queued commands (pointers, so delete their objects!)
+	while (!command_list.empty())
+	{
+		delete command_list.front();
+		command_list.pop_front();
+	}
+
 	sendCommand(new NexStarCommandAbort(server));
 }
 

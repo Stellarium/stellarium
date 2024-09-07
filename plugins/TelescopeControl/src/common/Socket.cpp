@@ -40,7 +40,7 @@ long long int GetNow(void)
 		qint64 t;
 	} tmp;
 	GetSystemTimeAsFileTime(&tmp.file_time);
-	t = (tmp.t/10) - 86400000000LL*(369*365+89);
+	t = (tmp.t/10) - 86400000000LL*(369*365+89); // TODO: Explain this magic please!
 #else
 	struct timeval tv;
 	gettimeofday(&tv, 0);

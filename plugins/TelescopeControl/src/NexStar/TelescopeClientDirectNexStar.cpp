@@ -90,6 +90,7 @@ TelescopeClientDirectNexStar::TelescopeClientDirectNexStar(const QString &name, 
 	}
 	
 	//This connection will be deleted in the destructor of Server
+	// TODO: GZ2024: Server destructor is empty. Who deletes nexstar in version 24.2? Someone please clarify and fix documentation, then delete this note.
 	addConnection(nexstar);
 	
 	last_ra = 0;
