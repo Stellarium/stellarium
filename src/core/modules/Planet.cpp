@@ -2859,12 +2859,12 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 		// Down to 0 degree, this tint is derived from the halo color.
 		// Below that, we must find a smooth transition (adapted cosine). Below -3 degrees,
 		// it is assumed the reddish tint should have dissipated, and the blue sky is illuminating the landscape in a neutral tone.
-		if (posAltAz[2]<sinf(-3.f*M_PI_180f))
+		if (posAltAz[2]<sinf(-1.f*M_PI_180f))
 			lmgr->setLandscapeTint(Vec3f(1.f));
 		else
 		{
 			const float sunAlt=asinf(posAltAz[2]);
-			const float angleFactor=sunAlt>0 ? 1.f : 0.5f*(cosf(60.f*sunAlt)+1.f);
+			const float angleFactor=sunAlt>0 ? 1.f : 0.5f*(cosf(180.f*sunAlt)+1.f);
 
 			// Find extinction settings to change colors. The method is rather ad-hoc.
 			const float extinctedMag=getVMagnitudeWithExtinction(core)-getVMagnitude(core); // this is net value of extinction, in mag.
