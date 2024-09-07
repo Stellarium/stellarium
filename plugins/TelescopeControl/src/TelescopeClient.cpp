@@ -44,8 +44,10 @@
 #include <QTextStream>
 #include <QMessageBox>
 
-#ifdef Q_OS_WIN
+#if defined(Q_OS_WIN)
+#if QT_VERSION<QT_VERSION_CHECK(6,0,0)
 	#include "ASCOM/TelescopeClientASCOM.hpp"
+#endif
 	#include <Windows.h> // GetSystemTimeAsFileTime()
 #else
 	#include <sys/time.h>
@@ -103,7 +105,7 @@ TelescopeClient *TelescopeClient::create(const QString &url)
 	{
 		newTelescope = new TelescopeClientINDI(name, params);
 	}
-	#ifdef Q_OS_WIN
+	#if defined(Q_OS_WIN) && QT_VERSION<QT_VERSION_CHECK(6,0,0)
 	else if (type == "ASCOM")
 	{
 		newTelescope = new TelescopeClientASCOM(name, params, eq);
