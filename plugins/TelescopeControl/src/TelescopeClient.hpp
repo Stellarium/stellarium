@@ -92,7 +92,12 @@ public:
 	//! report whether this client can respond to sync commands.
 	//! Can be used for GUI tweaks
 	virtual bool isTelescopeSyncSupported() const {return false;}
-	virtual void telescopeAbortSlew() { qWarning() << "Telescope" << getID() << "does not support AbortSlew()!"; }
+	//! Send command to abort slew. Not all telescopes support this, base implementation only gives a warning.
+	//! After abort, the current position should be retrieved and displayed.
+	virtual void telescopeAbortSlew();
+	//! report whether this client can abort a running slew.
+	//! Can be used for GUI tweaks
+	virtual bool isAbortSlewSupported() const {return false;}
 
 	//!
 	//! \brief move
@@ -175,6 +180,7 @@ public:
 		desired_pos=XYZ;
 		qDebug() << "Telescope" << getID() << "Slew aborted";
 	}
+	bool isAbortSlewSupported() const override {return true;}
 	bool hasKnownPosition(void) const override
 	{
 		return true;

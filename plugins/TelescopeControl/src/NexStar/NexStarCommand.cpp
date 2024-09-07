@@ -192,6 +192,46 @@ void NexStarCommandSync::print(QTextStream &o) const
 	  << ra << "," << dec <<')';
 }
 
+bool NexStarCommandAbort::writeCommandToBuffer(char *&p,char *end)
+{
+	#ifdef DEBUG5
+	char *b = p;
+	#endif
+
+	if (end-p < 1)
+		return false;
+	// Only one char:
+	*p = 'M';
+
+	has_been_written_to_buffer = true;
+	#ifdef DEBUG5
+	*log_file << Now() << "NexStarCommandAbort::writeCommandToBuffer:"
+		  << b << StelUtils::getEndLineChar();
+	#endif
+
+	return true;
+}
+
+int NexStarCommandAbort::readAnswerFromBuffer(const char *&buff, const char *end) const
+{
+	if (buff >= end)
+		return 0;
+
+#ifdef DEBUG4
+	if (*buff=='#')
+		*log_file << Now() << "NexStarCommandAbort::readAnswerFromBuffer: answer ok" << StelUtils::getEndLineChar();
+	else
+		*log_file << Now() << "NexStarCommandSync::readAnswerFromBuffer: abort failed." << StelUtils::getEndLineChar();
+#endif
+	buff++;
+	return 1;
+}
+
+void NexStarCommandAbort::print(QTextStream &o) const
+{
+	o << "NexStarCommandAbort()";
+}
+
 bool NexStarCommandGetRaDec::writeCommandToBuffer(char *&p, char *end)
 {
 	if (end-p < 1)

@@ -361,9 +361,10 @@ public slots:
 	void slewTelescopeToViewDirection(const int idx);
 
 	//! abort the current slew command of a telescope at slot idx.
+	//! @note ATTENTION! Not all telescopes support this call! A warning panel may be shown instead. Then it's jump and run to prevent damage.
 	//! @code
 	//! // example of usage in scripts
-	//! TelescopeControl.syncTelescopeToSelectedObject(1);
+	//! TelescopeControl.abortTelescopeSlew(1);
 	//! @endcode
 	void abortTelescopeSlew(const int idx);
 

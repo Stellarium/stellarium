@@ -77,6 +77,8 @@ static inline int SetNonblocking(int s)
 
 #endif //Q_OS_WIN
 
+// retrieve system time in milliseconds
+// TODO: Specify epoch?
 long long int GetNow(void);
 
 class Server;

@@ -31,6 +31,7 @@
 #include "INDI/TelescopeClientINDI.hpp"
 #include "StelTranslator.hpp"
 #include "StelCore.hpp"
+#include "StelMainView.hpp"
 
 #include <cmath>
 
@@ -41,6 +42,7 @@
 #include <QString>
 #include <QTcpSocket>
 #include <QTextStream>
+#include <QMessageBox>
 
 #ifdef Q_OS_WIN
 	#include "ASCOM/TelescopeClientASCOM.hpp"
@@ -140,6 +142,12 @@ QString TelescopeClient::getInfoString(const StelCore* core, const InfoStringGro
 	postProcessInfoString(str, flags);
 
 	return str;
+}
+
+void TelescopeClient::telescopeAbortSlew()
+{
+	qWarning() << "Telescope" << getID() << "does not support AbortSlew()!";
+	QMessageBox::critical(&StelMainView::getInstance(), q_("QUICK!"), q_("This Telescope does not support Abort command!"));
 }
 
 void TelescopeClient::move(double angle, double speed)
