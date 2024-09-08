@@ -246,6 +246,7 @@ struct ViewportEdgeIntersectCallbackData
 	Vec4f textColor;
 	QString text;		// Label to display at the intersection of the lines and screen side
 	double raAngle;		// Used for meridians
+	double gridStepMeridianRad; // used as rounding threshold
 	StelCore::FrameType frameType;
 };
 
@@ -306,7 +307,7 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 				raAngle = StelUtils::fmodpos(d->raAngle, 2.*M_PI);
 				lon = StelUtils::fmodpos(lon, 2.*M_PI);
 
-				if (std::fabs(2.*M_PI-lon)<0.001) // We are at meridian 0
+				if (std::fabs(2.*M_PI-lon)<d->gridStepMeridianRad/250.) // We are at meridian 0
 					lon = 0.;
 
 				const double delta = raAngle<M_PI ? M_PI : -M_PI;
@@ -333,6 +334,15 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 					else
 						text = StelUtils::radToHmsStrAdapt(textAngle);
 				}
+				// DEBUG ONLY
+				//text=QString("%1 d.raAngle: %2 grid: %3 raAngle: %4 lon: %5 delta: %6 textAngle: %7").arg(text,
+				//								   QString::number(d->raAngle*M_180_PI, 'e', 4),
+				//								   QString::number(d->gridStepMeridianRad, 'f', 4),
+				//								   QString::number(raAngle*M_180_PI, 'f', 4),
+				//								   QString::number(lon*M_180_PI, 'f', 3),
+				//								   QString::number(delta*M_180_PI, 'f', 3),
+				//								   QString::number(textAngle*M_180_PI, 'f', 3)
+				//								   );
 			}
 		}
 	}
@@ -432,6 +442,7 @@ void SkyGrid::draw(const StelCore* core) const
 	ViewportEdgeIntersectCallbackData userData(&sPainter);
 	userData.textColor = textColor;
 	userData.frameType = frameType;
+	userData.gridStepMeridianRad = gridStepMeridianRad;
 
 	/////////////////////////////////////////////////
 	// Draw all the meridians (great circles)
@@ -444,7 +455,7 @@ void SkyGrid::draw(const StelCore* core) const
 	for (i=0; i<maxNbIter; ++i)
 	{
 		StelUtils::rectToSphe(&lon2, &lat2, fpt);
-		userData.raAngle = lon2;
+		userData.raAngle = fabs(lon2)<1.e-12 ? 0. : lon2; // Get rid of stupid noise
 
 		meridianSphericalCap.n = fpt^Vec3d(0,0,1);
 		meridianSphericalCap.n.normalize();
@@ -488,7 +499,7 @@ void SkyGrid::draw(const StelCore* core) const
 		for (int j=0; j<maxNbIter-i; ++j)
 		{
 			StelUtils::rectToSphe(&lon2, &lat2, fpt);
-			userData.raAngle = lon2;
+			userData.raAngle = fabs(lon2)<1.e-12 ? 0. : lon2; // Get rid of stupid noise
 
 			meridianSphericalCap.n = fpt^Vec3d(0,0,1);
 			meridianSphericalCap.n.normalize();
