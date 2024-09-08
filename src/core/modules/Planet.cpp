@@ -2869,15 +2869,10 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 			// Find extinction settings to change colors. The method is rather ad-hoc.
 			const float extinctedMag=getVMagnitudeWithExtinction(core)-getVMagnitude(core); // this is net value of extinction, in mag.
 			//Vec3f color(haloColor[0], powf(0.75f, extinctedMag) * haloColor[1], powf(0.42f, 0.9f*extinctedMag) * haloColor[2]);
-			//Vec3f color(haloColor[0], powf(0.75f, extinctedMag) * haloColor[1], powf(0.25f, extinctedMag) * haloColor[2]);
 			Vec3f color(haloColor[0], powf(0.80f, extinctedMag) * haloColor[1], powf(0.25f, extinctedMag) * haloColor[2]);
 
 			Vec3f fullTint(0.25f*Vec3f(3.f+sqrtf(color[0]), 3.f+sqrtf(color[1]), 3.f+sqrtf(color[2])));
 
-			//lmgr->setLandscapeTint(color);
-			//lmgr->setLandscapeTint(Vec3f(sqrtf(color[0]), sqrtf(color[1]), sqrtf(color[2])));       // weaker tint
-			//lmgr->setLandscapeTint(0.5f*Vec3f(1.f+sqrtf(color[0]), 1.f+sqrtf(color[1]), 1.f+sqrtf(color[2]))); // even weaker tint
-			//lmgr->setLandscapeTint(0.25f*Vec3f(4.f, 3.f+sqrtf(magFactorGreen), 3.f+sqrtf(magFactorBlue))); // even weaker tint
 			lmgr->setLandscapeTint(angleFactor*fullTint + (1.f-angleFactor)*Vec3f(1.f)); // final tint
 		}
 	}
