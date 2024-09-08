@@ -217,6 +217,7 @@ void ViewDialog::createDialogContent()
 	connectCheckBox(ui->planetMarkerCheckBox, "actionShow_Planets_Hints");
 	connectCheckBox(ui->planetOrbitCheckBox, "actionShow_Planets_Orbits");
 	connectBoolProperty(ui->planetIsolatedOrbitCheckBox, "SolarSystem.flagIsolatedOrbits");
+	connectBoolProperty(ui->planetOrbitMajorPlanetsCheckBox, "SolarSystem.flagPlanetsOrbits");
 	connectBoolProperty(ui->planetOrbitOnlyCheckBox, "SolarSystem.flagPlanetsOrbitsOnly");
 	connectBoolProperty(ui->planetOrbitsMoonCheckBox, "SolarSystem.flagOrbitsWithMoons");
 	connectBoolProperty(ui->planetOrbitPermanentCheckBox, "SolarSystem.flagPermanentOrbits");
@@ -593,6 +594,7 @@ void ViewDialog::setDisplayFormatForSpins(bool flagDecimalDegrees)
 void ViewDialog::populateOrbitsControls(bool flag)
 {
 	ui->planetIsolatedOrbitCheckBox->setEnabled(flag);
+	ui->planetOrbitMajorPlanetsCheckBox->setEnabled(flag);
 	ui->planetOrbitOnlyCheckBox->setEnabled(flag);
 	ui->planetOrbitsMoonCheckBox->setEnabled(flag);
 	ui->planetOrbitPermanentCheckBox->setEnabled(flag);

@@ -121,9 +121,10 @@ public:
 
 	enum PlanetOrbitColorStyle
 	{
-		ocsOneColor,            // One color for all orbits
-		ocsGroups,              // Separate colors for each group of Solar system bodies
-		ocsMajorPlanets         // Separate colors for each of major planets of Solar system
+		ocsOneColor,               // One color for all orbits
+		ocsGroups,                 // Separate colors for each group of Solar system bodies
+		ocsMajorPlanets,           // Separate colors for each of major planets of Solar system
+		ocsMajorPlanetsMinorTypes  // Separate colors for each of major planets of Solar system
 	};
 	Q_ENUM(PlanetOrbitColorStyle)
 
