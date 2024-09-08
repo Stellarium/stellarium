@@ -2576,7 +2576,7 @@ msgstr "食的遮蔽率"
 
 #: src/core/modules/Planet.cpp:1284
 msgid "Crescent angle"
-msgstr ""
+msgstr "眉月形角度"
 
 #: src/core/modules/Planet.cpp:1310
 msgid "Moon/Sun diameter ratio"
@@ -3304,7 +3304,7 @@ msgstr "增加 100 個日曆年"
 
 #: src/core/StelCore.cpp:336
 msgid "Add 1 Great year"
-msgstr ""
+msgstr "增加 1 歲差年"
 
 #: src/core/StelCore.cpp:337
 msgid "Subtract 1 sidereal day"
@@ -3396,7 +3396,7 @@ msgstr "減少 100 個日曆年"
 
 #: src/core/StelCore.cpp:359
 msgid "Subtract 1 Great year"
-msgstr ""
+msgstr "減少 1 歲差年"
 
 #: src/core/StelCore.cpp:361
 msgid "Set home planet to selected planet"
@@ -6864,28 +6864,28 @@ msgstr "日食的過程"
 
 #: src/gui/AstroCalcDialog.cpp:3841
 msgid "Save map as..."
-msgstr ""
+msgstr "將地圖另存為..."
 
 #: src/gui/AstroCalcDialog.cpp:3843
 msgid "KML map (*.kml);;PNG equirectangular map (*.png)"
-msgstr ""
+msgstr "KML 圖形(*.kml);;PNG 等距長方圖形 (*.png)"
 
 #: src/gui/AstroCalcDialog.cpp:3852
 msgid "Failed to open output file"
-msgstr ""
+msgstr "無法開啟輸出檔"
 
 #: src/gui/AstroCalcDialog.cpp:3853
 #, qt-format
 msgid "Failed to open output KML file: %1"
-msgstr ""
+msgstr "無法開啟 KML 輸出檔: %1"
 
 #: src/gui/AstroCalcDialog.cpp:3869
 msgid "Failed to save image"
-msgstr ""
+msgstr "無法儲存影像"
 
 #: src/gui/AstroCalcDialog.cpp:3870
 msgid "Failed to save PNG map image"
-msgstr ""
+msgstr "無法儲存 PNG 地圖影像"
 
 #: src/gui/AstroCalcDialog.cpp:3907
 msgctxt "column name"
@@ -13224,11 +13224,11 @@ msgstr "將此地景設為預設值"
 
 #: src/ui_viewDialog.h:4324
 msgid "Set the planet and location as specified for the selected landscape"
-msgstr ""
+msgstr "取自所選地景的描述資料來設定行星與位置"
 
 #: src/ui_viewDialog.h:4326
 msgid "Location from landscape"
-msgstr ""
+msgstr "使用該地景的位置"
 
 #: src/ui_viewDialog.h:4328
 msgid "Show illumination layer (bright windows, light pollution, etc.)"
@@ -13561,7 +13561,7 @@ msgstr "顯示區域"
 #: src/ui_configurationDialog.h:1780
 msgctxt "hour angle"
 msgid "Equatorial coordinates, equinox of date"
-msgstr ""
+msgstr "當前二分點的赤道座標系統"
 
 #: src/ui_configurationDialog.h:1782
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:197
@@ -13607,7 +13607,7 @@ msgstr "速度"
 #: src/ui_configurationDialog.h:1800
 msgctxt "right ascension"
 msgid "Equatorial coordinates, equinox of date"
-msgstr ""
+msgstr "當前二分點的赤道座標系統"
 
 #: src/ui_configurationDialog.h:1802
 msgid "Right ascension/Declination (of date)"
@@ -14693,12 +14693,12 @@ msgstr "到下次年份"
 
 #: src/ui_astroCalcDialog.h:2302
 msgid "Duration in months"
-msgstr ""
+msgstr "以月為單位的期間"
 
 #: src/ui_astroCalcDialog.h:2304
 msgctxt "duration, short form"
 msgid "mths"
-msgstr ""
+msgstr "月"
 
 #: src/ui_astroCalcDialog.h:2305
 msgid "Cleanup of phenomena"
@@ -14896,11 +14896,11 @@ msgstr "匯出食的過程..."
 
 #: src/ui_astroCalcDialog.h:2403
 msgid "Export a visibility map of the selected eclipse"
-msgstr ""
+msgstr "匯出所選食事件的顯示地圖"
 
 #: src/ui_astroCalcDialog.h:2405
 msgid "Export map..."
-msgstr ""
+msgstr "匯出地圖..."
 
 #: src/ui_astroCalcDialog.h:2406 src/ui_astroCalcDialog.h:2411
 #: src/ui_astroCalcDialog.h:2418
@@ -14959,12 +14959,12 @@ msgstr "開始年份"
 
 #: src/ui_astroCalcDialog.h:2429
 msgid "Duration in years"
-msgstr ""
+msgstr "以年為單位的期間"
 
 #: src/ui_astroCalcDialog.h:2431
 msgctxt "duration, short form"
 msgid "yrs"
-msgstr ""
+msgstr "年"
 
 #: src/ui_astroCalcExtraEphemerisDialog.h:165
 msgid "Extra options"
@@ -16384,19 +16384,19 @@ msgstr "這些雙筒望遠鏡提拱的出射光瞳"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:887
 msgid "Twilight factor (or dusk index) provided by these binoculars"
-msgstr ""
+msgstr "這些雙筒望遠鏡所提供的曙暮光係數(或晨昏係數)"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:888
 msgid "Relative brightness provided by these binoculars"
-msgstr ""
+msgstr "這些雙筒望遠鏡所提供的相對亮度"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:889
 msgid "Alan Adler's Index (or Astro Index) provided by these binoculars"
-msgstr ""
+msgstr "這些雙筒望遠鏡所提供的 Alan Adler 指數(或天文指數)"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:890
 msgid "Roy Bishop's Index (or Visibility Factor) provided by these binoculars"
-msgstr ""
+msgstr "這些雙筒望遠鏡所提供的 Roy Bishop 指數(或可見係數)"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:898
 msgid "Magnification provided by this ocular/lens/telescope combination"
@@ -16413,24 +16413,24 @@ msgstr "由這組目鏡/鏡片/望遠鏡組合所提供的出射光瞳"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:925
 msgid "Twilight factor"
-msgstr ""
+msgstr "曙暮光係數"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:931
 msgid "Relative brightness"
-msgstr ""
+msgstr "相對亮度"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:937
 msgid "Adler index"
-msgstr ""
+msgstr "Adler 指數"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:943
 msgid "Bishop index"
-msgstr ""
+msgstr "Bishop 指數"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:953
 msgctxt "field of view"
 msgid "FOV"
-msgstr ""
+msgstr "視野"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:974
 msgid "Rayleigh criterion"
@@ -16475,16 +16475,16 @@ msgstr "目視鑑別率是基於人眼的特性與大小"
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1039
 msgctxt "Limiting magnitude of device"
 msgid "Limiting magnitude"
-msgstr ""
+msgstr "極限星等"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1042
 msgid "Approximate limiting magnitude of this binocular"
-msgstr ""
+msgstr "這隻雙筒望遠鏡的大約極限星等"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1044
 msgid ""
 "Approximate limiting magnitude of this ocular/lens/telescope combination"
-msgstr ""
+msgstr "這組 目鏡/鏡片/望遠鏡 組合的大約極限星等"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:118
 msgid "Cannot delete the last sensor."
@@ -18474,6 +18474,8 @@ msgid ""
 "the standard magnitudes from the database of the MMT-9 observatory (Kazan "
 "Federal University)"
 msgstr ""
+"為了計算衛星的近似可見星等，我們（經許可）使用來自 Mike McCants 資料庫的雷達截面 (RCS) 和標準星等；來自 CelesTrack "
+"資料庫的雷達截面 (RCS)；來自 MMT-9 天文台（Kazan 聯邦大學）資料庫的標準星等"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:858
 msgid ""
@@ -18979,7 +18981,7 @@ msgstr "地球半影圈的顏色"
 msgid ""
 "Distance to the center of umbra from Earth's surface (height of imagined "
 "satellite above a spherical Earth)"
-msgstr ""
+msgstr "從地球表面到本影中心的距離(假想衛星在球形地球上的高度)"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1235
 msgid "Show umbra/penumbra at altitude:"
@@ -18995,7 +18997,7 @@ msgstr "衛星標記在凌日或凌月時的顏色"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1243
 msgid "Hide invisible satellites"
-msgstr ""
+msgstr "隱藏不可見的衛星"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1246
 msgid "Font size for labels"
@@ -19161,7 +19163,7 @@ msgid ""
 "Satellites in the marked source lists will be automatically added on the "
 "next update if they are not already in the collection. Unmarked entries will"
 " also be fetched to update only previously included satellites."
-msgstr ""
+msgstr "如果標記的來源清單中的衛星尚未在集合中，則會在下次更新時自動新增。僅更新先前包含的衛星的未標記清單。"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1355
 msgid "Add new source"
@@ -21321,6 +21323,8 @@ msgid ""
 "The 47 navigational stars that are listed in the Nevil Maskelyne's <em>The "
 "British Mariner's Guide</em> published in 1764."
 msgstr ""
+"這 47 顆導航恆星是取自1764年 Nevil Maskelyne 所出版的 <em>The British Mariner's Guide</em>"
+" "
 
 #: plugins/NavStars/src/NavStars.cpp:395
 msgid ""
@@ -21530,7 +21534,7 @@ msgstr "法國"
 #. navigational stars
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:247
 msgid "British (XVIII century)"
-msgstr ""
+msgstr "英國 (18世紀)"
 
 #. TRANSLATORS: Part of full phrase: Russian set of navigational stars
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:249
@@ -22541,109 +22545,109 @@ msgstr "允許顯示系統中的系外行星數量"
 #: plugins/Exoplanets/src/Exoplanets.cpp:1044
 msgctxt "Habitable zone"
 msgid "Hot"
-msgstr ""
+msgstr "炎熱區"
 
 #. TRANSLATORS: Habitable zone
 #: plugins/Exoplanets/src/Exoplanets.cpp:1046
 msgctxt "Habitable zone"
 msgid "Warm"
-msgstr ""
+msgstr "溫暖區"
 
 #. TRANSLATORS: Habitable zone
 #: plugins/Exoplanets/src/Exoplanets.cpp:1048
 msgctxt "Habitable zone"
 msgid "Cold"
-msgstr ""
+msgstr "寒冷區"
 
 #. TRANSLATORS: Exoplanet size
 #: plugins/Exoplanets/src/Exoplanets.cpp:1051
 msgctxt "Exoplanet size"
 msgid "Miniterran"
-msgstr ""
+msgstr "迷你型地球"
 
 #. TRANSLATORS: Exoplanet size
 #: plugins/Exoplanets/src/Exoplanets.cpp:1053
 msgctxt "Exoplanet size"
 msgid "Subterran"
-msgstr ""
+msgstr "小型地球"
 
 #. TRANSLATORS: Exoplanet size
 #: plugins/Exoplanets/src/Exoplanets.cpp:1055
 msgctxt "Exoplanet size"
 msgid "Terran"
-msgstr ""
+msgstr "類地球"
 
 #. TRANSLATORS: Exoplanet size
 #: plugins/Exoplanets/src/Exoplanets.cpp:1057
 msgctxt "Exoplanet size"
 msgid "Superterran"
-msgstr ""
+msgstr "超級地球"
 
 #. TRANSLATORS: Exoplanet size
 #: plugins/Exoplanets/src/Exoplanets.cpp:1059
 msgctxt "Exoplanet size"
 msgid "Jovian"
-msgstr ""
+msgstr "類木星"
 
 #. TRANSLATORS: Exoplanet size
 #: plugins/Exoplanets/src/Exoplanets.cpp:1061
 msgctxt "Exoplanet size"
 msgid "Neptunian"
-msgstr ""
+msgstr "類海王星"
 
 #. TRANSLATORS: Exoplanet detection method
 #: plugins/Exoplanets/src/Exoplanets.cpp:1064
 msgctxt "Exoplanet detection method"
 msgid "Astrometry"
-msgstr ""
+msgstr "天體測量法"
 
 #. TRANSLATORS: Exoplanet detection method
 #: plugins/Exoplanets/src/Exoplanets.cpp:1066
 msgctxt "Exoplanet detection method"
 msgid "Imaging"
-msgstr ""
+msgstr "直接拍攝法"
 
 #. TRANSLATORS: Exoplanet detection method
 #: plugins/Exoplanets/src/Exoplanets.cpp:1068
 msgctxt "Exoplanet detection method"
 msgid "Kinematic"
-msgstr ""
+msgstr "運動學分析法"
 
 #. TRANSLATORS: Exoplanet detection method
 #: plugins/Exoplanets/src/Exoplanets.cpp:1070
 msgctxt "Exoplanet detection method"
 msgid "Microlensing"
-msgstr ""
+msgstr "重力微透鏡法"
 
 #. TRANSLATORS: Exoplanet detection method
 #: plugins/Exoplanets/src/Exoplanets.cpp:1072
 msgctxt "Exoplanet detection method"
 msgid "Other"
-msgstr ""
+msgstr "其他"
 
 #. TRANSLATORS: Exoplanet detection method
 #: plugins/Exoplanets/src/Exoplanets.cpp:1074
 msgctxt "Exoplanet detection method"
 msgid "Primary Transit"
-msgstr ""
+msgstr "基本凌星法"
 
 #. TRANSLATORS: Exoplanet detection method
 #: plugins/Exoplanets/src/Exoplanets.cpp:1076
 msgctxt "Exoplanet detection method"
 msgid "Radial Velocity"
-msgstr ""
+msgstr "徑向速度"
 
 #. TRANSLATORS: Exoplanet detection method. TTV=Transit Timing Variation
 #: plugins/Exoplanets/src/Exoplanets.cpp:1078
 msgctxt "Exoplanet detection method"
 msgid "TTV"
-msgstr ""
+msgstr "凌星時間變化"
 
 #. TRANSLATORS: Exoplanet detection method
 #: plugins/Exoplanets/src/Exoplanets.cpp:1080
 msgctxt "Exoplanet detection method"
 msgid "Timing"
-msgstr ""
+msgstr "定時法"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:342
 msgid "Metallicity"
