@@ -2855,9 +2855,9 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 		Vec3f posAltAz = getAltAzPosAuto(core).toVec3f();
 		posAltAz.normalize();
 
-		// If sun is higher than -3 degrees, tint the landscape.
+		// If sun is higher than -1 degrees, tint the landscape.
 		// Down to 0 degree, this tint is derived from the halo color.
-		// Below that, we must find a smooth transition (adapted cosine). Below -3 degrees,
+		// Below that, we must find a smooth transition (adapted cosine). Below -1 degrees,
 		// it is assumed the reddish tint should have dissipated, and the blue sky is illuminating the landscape in a neutral tone.
 		if (posAltAz[2]<sinf(-1.f*M_PI_180f))
 			lmgr->setLandscapeTint(Vec3f(1.f));
@@ -2869,7 +2869,8 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 			// Find extinction settings to change colors. The method is rather ad-hoc.
 			const float extinctedMag=getVMagnitudeWithExtinction(core)-getVMagnitude(core); // this is net value of extinction, in mag.
 			//Vec3f color(haloColor[0], powf(0.75f, extinctedMag) * haloColor[1], powf(0.42f, 0.9f*extinctedMag) * haloColor[2]);
-			Vec3f color(haloColor[0], powf(0.75f, extinctedMag) * haloColor[1], powf(0.25f, extinctedMag) * haloColor[2]);
+			//Vec3f color(haloColor[0], powf(0.75f, extinctedMag) * haloColor[1], powf(0.25f, extinctedMag) * haloColor[2]);
+			Vec3f color(haloColor[0], powf(0.80f, extinctedMag) * haloColor[1], powf(0.25f, extinctedMag) * haloColor[2]);
 
 			Vec3f fullTint(0.25f*Vec3f(3.f+sqrtf(color[0]), 3.f+sqrtf(color[1]), 3.f+sqrtf(color[2])));
 
