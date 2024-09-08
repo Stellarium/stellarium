@@ -34,7 +34,6 @@
 #include "StelFileMgr.hpp"
 #include "StelMovementMgr.hpp"
 #include "precession.h"
-#include "StelObjectMgr.hpp"
 
 #include <set>
 #include <vector>
@@ -266,8 +265,6 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 	QString text;
 	if (d->text.isEmpty())
 	{
-		StelObjectMgr* omgr=GETSTELMODULE(StelObjectMgr);
-		omgr->removeExtraInfoStrings(StelObject::DebugAid);
 		// We are in the case of meridians, we need to determine which of the 2 labels (3h or 15h) to use
 		Vec3d tmpV;
 		d->sPainter->getProjector()->unProject(screenPos, tmpV);
@@ -334,15 +331,6 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 					else
 						text = StelUtils::radToHmsStrAdapt(textAngle);
 				}
-				// DEBUG ONLY
-				//text=QString("%1 d.raAngle: %2 grid: %3 raAngle: %4 lon: %5 delta: %6 textAngle: %7").arg(text,
-				//								   QString::number(d->raAngle*M_180_PI, 'e', 4),
-				//								   QString::number(d->gridStepMeridianRad, 'f', 4),
-				//								   QString::number(raAngle*M_180_PI, 'f', 4),
-				//								   QString::number(lon*M_180_PI, 'f', 3),
-				//								   QString::number(delta*M_180_PI, 'f', 3),
-				//								   QString::number(textAngle*M_180_PI, 'f', 3)
-				//								   );
 			}
 		}
 	}
