@@ -2846,6 +2846,37 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 			return;
 	}
 
+	static SolarSystem* ssm = GETSTELMODULE(SolarSystem);
+	const bool isSun  = this==ssm->getSun();
+	const bool currentLocationIsEarth = core->getCurrentLocation().planetName == "Earth";
+	if (isSun && currentLocationIsEarth)
+	{
+		static LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
+		Vec3f posAltAz = getAltAzPosAuto(core).toVec3f();
+		posAltAz.normalize();
+
+		// If sun is higher than -1 degrees, tint the landscape.
+		// Down to 0 degree, this tint is derived from the halo color.
+		// Below that, we must find a smooth transition (adapted cosine). Below -1 degrees,
+		// it is assumed the reddish tint should have dissipated, and the blue sky is illuminating the landscape in a neutral tone.
+		if (posAltAz[2]<sinf(-1.f*M_PI_180f))
+			lmgr->setLandscapeTint(Vec3f(1.f));
+		else
+		{
+			const float sunAlt=asinf(posAltAz[2]);
+			const float angleFactor=sunAlt>0 ? 1.f : 0.5f*(cosf(180.f*sunAlt)+1.f);
+
+			// Find extinction settings to change colors. The method is rather ad-hoc.
+			const float extinctedMag=getVMagnitudeWithExtinction(core)-getVMagnitude(core); // this is net value of extinction, in mag.
+			//Vec3f color(haloColor[0], powf(0.75f, extinctedMag) * haloColor[1], powf(0.42f, 0.9f*extinctedMag) * haloColor[2]);
+			Vec3f color(haloColor[0], powf(0.80f, extinctedMag) * haloColor[1], powf(0.25f, extinctedMag) * haloColor[2]);
+
+			Vec3f fullTint(0.25f*Vec3f(3.f+sqrtf(color[0]), 3.f+sqrtf(color[1]), 3.f+sqrtf(color[2])));
+
+			lmgr->setLandscapeTint(angleFactor*fullTint + (1.f-angleFactor)*Vec3f(1.f)); // final tint
+		}
+	}
+
 	// Try to improve speed for minor planets: test if visible at all.
 	// For a full catalog of NEAs (11000 objects), with this and resetting deltaJD according to distance, rendering time went 4.5fps->12fps.
 	// TBD: Note that taking away the asteroids at this stage breaks dim-asteroid occultation of stars!
@@ -3447,7 +3478,7 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 		rotationAngle -= q0*static_cast<float>(180.0/M_PI);
 
 		StelPainter sPainter(core->getProjection(StelCore::FrameJ2000));
-		const auto pos = getJ2000EquatorialPos(core).toVec3f();
+		const Vec3f pos = getJ2000EquatorialPos(core).toVec3f();
 
 		// Find new extincted color for halo. The method is again rather ad-hoc, but does not look too bad.
 		// For the sun, we have again to use the stronger extinction to avoid color mismatch.

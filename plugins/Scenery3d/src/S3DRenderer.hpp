@@ -251,10 +251,10 @@ private:
 		Vec3f lightDirectionV3f;
 		//same as lightDirectionV3f, but as QVector3D
 		QVector3D lightDirectionWorld;
-		QVector3D ambient;
-		QVector3D directional;
-		QVector3D specular;
-		QVector3D emissive;
+		QVector3D ambient;		// color [0...1]
+		QVector3D directional;		// color [0...1]
+		QVector3D specular;		// color [0...1]
+		QVector3D emissive;		// color [0...1]
 
 		QVector3D torchDiffuse;
 		float torchAttenuation;
