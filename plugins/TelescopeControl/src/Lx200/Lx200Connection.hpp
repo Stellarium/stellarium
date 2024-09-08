@@ -39,6 +39,8 @@ public:
 	void sendGoto(unsigned int ra_int, int dec_int);
 	void sendSync(unsigned int ra_int, int dec_int);
 	void sendCommand(Lx200Command * command);
+	//! Delete pending commands and send abort signal.
+	void sendAbort();
 	void setTimeBetweenCommands(long long int micro_seconds)
 	{
 		time_between_commands = micro_seconds;

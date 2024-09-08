@@ -31,6 +31,7 @@
 #include "INDI/TelescopeClientINDI.hpp"
 #include "StelTranslator.hpp"
 #include "StelCore.hpp"
+#include "StelMainView.hpp"
 
 #include <cmath>
 
@@ -41,9 +42,12 @@
 #include <QString>
 #include <QTcpSocket>
 #include <QTextStream>
+#include <QMessageBox>
 
-#ifdef Q_OS_WIN
+#if defined(Q_OS_WIN)
+#if QT_VERSION<QT_VERSION_CHECK(6,0,0)
 	#include "ASCOM/TelescopeClientASCOM.hpp"
+#endif
 	#include <Windows.h> // GetSystemTimeAsFileTime()
 #else
 	#include <sys/time.h>
@@ -101,7 +105,7 @@ TelescopeClient *TelescopeClient::create(const QString &url)
 	{
 		newTelescope = new TelescopeClientINDI(name, params);
 	}
-	#ifdef Q_OS_WIN
+	#if defined(Q_OS_WIN) && QT_VERSION<QT_VERSION_CHECK(6,0,0)
 	else if (type == "ASCOM")
 	{
 		newTelescope = new TelescopeClientASCOM(name, params, eq);
@@ -140,6 +144,12 @@ QString TelescopeClient::getInfoString(const StelCore* core, const InfoStringGro
 	postProcessInfoString(str, flags);
 
 	return str;
+}
+
+void TelescopeClient::telescopeAbortSlew()
+{
+	qWarning() << "Telescope" << getID() << "does not support AbortSlew()!";
+	QMessageBox::critical(&StelMainView::getInstance(), q_("QUICK!"), q_("This Telescope does not support Abort command!"));
 }
 
 void TelescopeClient::move(double angle, double speed)

@@ -514,7 +514,7 @@ Some users are running Stellarium on little, low-power ``Telescope computers'' c
 their powerful indoor PCs via RemoteDesktop or similar setups. Keep in mind that Stellarium 
 is a graphics-heavy program that may challenge the outdoor computer's graphics subsystem or network.
 See framerate intent settings on page~\pageref{sec:gui:configuration:tools:fps} for optimizing your screen refresh rates. 
-Better, run Stellarium on your indoor system and use INDI or ASCOM protocols.
+Better, run Stellarium on your indoor system and use INDI or ASCOM network protocols.
 
 \subsection{Using this plug-in}
 \label{sec:plugins:TelescopeControl:using}
@@ -921,7 +921,7 @@ List of telescope types supported by INDI\footnote{\url{https://indilib.org/devi
 \item IOptron GotoNova Upgrade Kit 8400
 \end{itemize}
 
-\subsection{ASCOM (Windows only)}
+\subsection{ASCOM (Windows, Qt5-based builds only)}
 \label{sec:plugins:TelescopeControl:ASCOM}
 
 \indexterm{ASCOM} \newFeature{0.19.3}is probably the most widely used
@@ -933,7 +933,10 @@ applications. Almost every telescope mount comes with an ASCOM driver
 and most of the astronomy software and tools can communicate with
 ASCOM compatible devices.
 
-The ASCOM telescope support has been added to Stellarium's Telescope Control plugin by Gion Kunz in version 0.19.3.
+The ASCOM telescope support has been added to Stellarium's Telescope Control plugin by Gion Kunz in version 0.19.3.\footnote{%
+Unfortunately traditional ASCOM seems to be incompatible with Qt6. 
+Starting with version 24.3 ASCOM support is no longer available on Qt6-based builds.
+If you depend on ASCOM support, please use a Qt5-based build of the same version.}
 
 Note that in order for Stellarium to communicate with your ASCOM
 compatible mount, you will need to have the ASCOM platform installed

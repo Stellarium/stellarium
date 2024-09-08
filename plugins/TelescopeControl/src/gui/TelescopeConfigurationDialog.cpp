@@ -26,7 +26,7 @@
 #include "TelescopeControl.hpp"
 #include "ui_telescopeConfigurationDialog.h"
 
-#ifdef Q_OS_WIN
+#if defined(Q_OS_WIN) && QT_VERSION<QT_VERSION_CHECK(6,0,0)
 	#include "../common/ASCOMSupport.hpp"
 #endif
 
@@ -132,7 +132,7 @@ void TelescopeConfigurationDialog::createDialogContent()
 	ui->setupUi(dialog);
 
 	// ASCOM Telescope client widget needs to be dynamically added in order to make use of preprocessors to exclude for non-windows
-	#ifdef Q_OS_WIN
+	#if defined(Q_OS_WIN) && QT_VERSION<QT_VERSION_CHECK(6,0,0)
 	ascomWidget = new TelescopeClientASCOMWidget(ui->scrollAreaWidgetContents);
 	ui->ASCOMLayout->addWidget(ascomWidget);
 
@@ -155,7 +155,12 @@ void TelescopeConfigurationDialog::createDialogContent()
 	connect(ui->radioButtonTelescopeRTS2, SIGNAL(toggled(bool)), this, SLOT(toggleTypeRTS2(bool)));
 	connect(ui->radioButtonTelescopeINDI, SIGNAL(toggled(bool)), this, SLOT(toggleTypeINDI(bool)));
 	#ifdef Q_OS_WIN
-	connect(ui->radioButtonTelescopeASCOM, SIGNAL(toggled(bool)), this, SLOT(toggleTypeASCOM(bool)));
+	#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+		ui->radioButtonTelescopeASCOM->setToolTip(q_("Disabled due to apparent incompatibility. Please use the Qt5-based build of Stellarium."));
+		ui->radioButtonTelescopeASCOM->setDisabled(true);
+	#else
+		connect(ui->radioButtonTelescopeASCOM, SIGNAL(toggled(bool)), this, SLOT(toggleTypeASCOM(bool)));
+	#endif
 	#else
 	ui->radioButtonTelescopeASCOM->hide();
 	#endif
@@ -193,7 +198,7 @@ void TelescopeConfigurationDialog::initConfigurationDialog()
 	ui->groupBoxDeviceSettings->hide();
 	ui->groupBoxRTS2Settings->hide();
 	ui->INDIProperties->hide();
-	#ifdef Q_OS_WIN
+	#if defined(Q_OS_WIN) && QT_VERSION<QT_VERSION_CHECK(6,0,0)
 	ascomWidget->hide();
 	#endif
 
@@ -347,7 +352,7 @@ void TelescopeConfigurationDialog::initExistingTelescopeConfiguration(int slot)
 		ui->INDIProperties->setPort(portTCP);
 		ui->INDIProperties->setSelectedDevice(deviceModelName);
 	}
-	#ifdef Q_OS_WIN
+	#if defined(Q_OS_WIN) && QT_VERSION<QT_VERSION_CHECK(6,0,0)
 	else if (connectionType == TelescopeControl::ConnectionASCOM)
 	{
 		ui->radioButtonTelescopeASCOM->setChecked(true);
@@ -456,7 +461,7 @@ void TelescopeConfigurationDialog::toggleTypeINDI(bool enabled)
 	ui->INDIProperties->setVisible(enabled);
 }
 
-#ifdef Q_OS_WIN
+#if defined(Q_OS_WIN) && QT_VERSION<QT_VERSION_CHECK(6,0,0)
 void TelescopeConfigurationDialog::toggleTypeASCOM(bool enabled)
 {
 	ascomWidget->setVisible(enabled);	
@@ -545,7 +550,7 @@ void TelescopeConfigurationDialog::buttonSavePressed()
 		telescopeManager->addTelescopeAtSlot(configuredSlot, type, name, equinox, ui->INDIProperties->host(),
 		  ui->INDIProperties->port(), delay, connectAtStartup, circles, ui->INDIProperties->selectedDevice());
 	}
-	#ifdef Q_OS_WIN
+	#if defined(Q_OS_WIN) && QT_VERSION<QT_VERSION_CHECK(6,0,0)
 	else if (ui->radioButtonTelescopeASCOM->isChecked())
 	{
 		type = TelescopeControl::ConnectionASCOM;

@@ -969,29 +969,17 @@ void S3DRenderer::calculateLighting()
 	//specular factor is calculated from other values for now
 	float specular = std::min(ambientBrightness*directionalBrightness*5.0f,1.0f);
 
-	//if the night vision mode is on, use red-tinted lighting
-	bool red=StelApp::getInstance().getVisionModeNight();
-
 	float torchDiff = shaderParameters.torchLight ? torchBrightness : 0.0f;
 	lightInfo.torchAttenuation = 1.0f / (torchRange * torchRange);
 
-	if(red)
-	{
-		lightInfo.ambient = QVector3D(ambientBrightness,0, 0);
-		lightInfo.directional = QVector3D(directionalBrightness,0,0);
-		lightInfo.emissive = QVector3D(emissiveFactor,0,0);
-		lightInfo.specular = QVector3D(specular,0,0);
-		lightInfo.torchDiffuse = QVector3D(torchDiff,0,0);
-	}
-	else
-	{
-		//for now, lighting is only white
-		lightInfo.ambient = QVector3D(ambientBrightness,ambientBrightness, ambientBrightness);
-		lightInfo.directional = QVector3D(directionalBrightness,directionalBrightness,directionalBrightness);
-		lightInfo.emissive = QVector3D(emissiveFactor,emissiveFactor,emissiveFactor);
-		lightInfo.specular = QVector3D(specular,specular,specular);
-		lightInfo.torchDiffuse = QVector3D(torchDiff,torchDiff,torchDiff);
-	}
+	static LandscapeMgr *lmgr=GETSTELMODULE(LandscapeMgr);
+	QVector3D solarTint=lmgr->getLandscapeTint().toQVector();
+	//ambient tries to neutralize sunrise reddening a bit to model collecting light more of the blue sky. Directional and specular are tinted with possibly reddened sun.
+	lightInfo.ambient = ambientBrightness*(QVector3D(0.4,0.4,0.4)+0.6*solarTint);
+	lightInfo.directional = directionalBrightness*QVector3D(powf(solarTint[0],2.5f), powf(solarTint[1], 2.5f), powf(solarTint[2], 2.5f));
+	lightInfo.emissive = QVector3D(emissiveFactor,emissiveFactor,emissiveFactor);
+	lightInfo.specular = specular*solarTint;
+	lightInfo.torchDiffuse = QVector3D(torchDiff,torchDiff,torchDiff);
 }
 
 void S3DRenderer::calcCubeMVP(const Vec3d translation)
@@ -1497,10 +1485,12 @@ void S3DRenderer::drawDebug()
 	Q_ASSERT(lightInfo.directionalSource<=LightParameters::DS_Venus_Ambient);
 	directionalSourceString = directionalSourceStrings.at(lightInfo.directionalSource);
 
-	const QString lightMessage=QString("Ambient: %1 Directional: %2. Shadows cast by: %3 from %4/%5/%6")
-			.arg(lightInfo.ambient[0], 6, 'f', 4).arg(lightInfo.directional[0], 6, 'f', 4)
-			.arg(shadowCasterName).arg(lightInfo.lightDirectionV3f.v[0], 6, 'f', 4)
-			.arg(lightInfo.lightDirectionV3f.v[1], 6, 'f', 4).arg(lightInfo.lightDirectionV3f.v[2], 6, 'f', 4);
+	QString lightMessage=QString("Ambient: %1/%2/%3 Directional: %4/%5/%6. Shadows cast by: %7")
+			.arg(QString::number(lightInfo.ambient[0], 'f', 1), QString::number(lightInfo.ambient[1], 'f', 1), QString::number(lightInfo.ambient[2], 'f', 1),
+			     QString::number(lightInfo.directional[0], 'f', 4), QString::number(lightInfo.directional[1], 'f', 4), QString::number(lightInfo.directional[2], 'f', 4))
+			.arg(shadowCasterName);
+	if (lightInfo.shadowCaster>LightParameters::SC_None)
+			     lightMessage.append(QString(" from %1/%2/%3").arg(QString::number(lightInfo.lightDirectionV3f.v[0],'f', 4), QString::number(lightInfo.lightDirectionV3f.v[1], 'f', 4), QString::number(lightInfo.lightDirectionV3f.v[2],'f', 4)));
 	const QString lightMessage2=QString("Contributions: Ambient     Sun: %1, Moon: %2, Background+^L: %3")
 			.arg(lightInfo.sunAmbient, 6, 'f', 4).arg(lightInfo.moonAmbient, 6, 'f', 4).arg(lightInfo.backgroundAmbient, 6, 'f', 4);
 	const QString lightMessage3=QString("               Directional %1 by: %2, emissive factor: %3, landscape opacity: %4")
@@ -1510,15 +1500,15 @@ void S3DRenderer::drawDebug()
 	painter.setFont(debugTextFont);
 	painter.setColor(1.f,0.f,1.f,1.f);
 	// For now, these messages print light mixture values.
-	painter.drawText(20, 160, lightMessage);
-	painter.drawText(20, 145, lightMessage2);
-	painter.drawText(20, 130, lightMessage3);
-	painter.drawText(20, 115, QString("Torch range %1, brightness %2/%3/%4").arg(torchRange).arg(lightInfo.torchDiffuse[0]).arg(lightInfo.torchDiffuse[1]).arg(lightInfo.torchDiffuse[2]));
+	painter.drawText(70, 160, lightMessage);
+	painter.drawText(70, 145, lightMessage2);
+	painter.drawText(70, 130, lightMessage3);
+	painter.drawText(70, 115, QString("Torch range %1, brightness %2/%3/%4").arg(torchRange).arg(lightInfo.torchDiffuse[0]).arg(lightInfo.torchDiffuse[1]).arg(lightInfo.torchDiffuse[2]));
 
 	const AABBox& bbox = currentScene->getSceneAABB();
 	QString str = QString("BB: %1/%2/%3 %4/%5/%6").arg(bbox.min.v[0], 7, 'f', 2).arg(bbox.min.v[1], 7, 'f', 2).arg(bbox.min.v[2], 7, 'f', 2)
 			.arg(bbox.max.v[0], 7, 'f', 2).arg(bbox.max.v[1], 7, 'f', 2).arg(bbox.max.v[2], 7, 'f', 2);
-	painter.drawText(10, 100, str);
+	painter.drawText(70, 100, str);
 	// PRINT OTHER MESSAGES HERE:
 
 	float screen_x = altAzProjector->getViewportWidth()  - 500.0f;

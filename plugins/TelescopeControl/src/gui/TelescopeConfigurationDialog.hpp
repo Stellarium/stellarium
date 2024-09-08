@@ -29,7 +29,7 @@
 #include "StelDialog.hpp"
 #include "TelescopeControl.hpp"
 
-#ifdef Q_OS_WIN
+#if defined(Q_OS_WIN) && QT_VERSION<QT_VERSION_CHECK(6,0,0)
 #include "../ASCOM/TelescopeClientASCOMWidget.hpp"
 #endif
 
@@ -68,7 +68,7 @@ private slots:
 	void toggleTypeVirtual(bool);
 	void toggleTypeRTS2(bool);
 	void toggleTypeINDI(bool enabled);
-	#ifdef Q_OS_WIN
+	#if defined(Q_OS_WIN) && QT_VERSION<QT_VERSION_CHECK(6,0,0)
 	void toggleTypeASCOM(bool enabled);
 	#endif
 	
@@ -87,7 +87,7 @@ private:
 	QRegularExpressionValidator * circleListValidator;
 	QRegularExpressionValidator * serialPortValidator;
 
-	#ifdef Q_OS_WIN
+	#if defined(Q_OS_WIN) && QT_VERSION<QT_VERSION_CHECK(6,0,0)
 	TelescopeClientASCOMWidget* ascomWidget;
 	#endif
 	

@@ -350,3 +350,24 @@ void Lx200Connection::sendCommand(Lx200Command *command)
 	}
 }
 
+void Lx200Connection::sendAbort()
+{
+#ifdef DEBUG4
+	*log_file << Now()
+		  << "Lx200Connection::sendAbort()"
+		  << StelUtils::getEndLineChar();
+#endif
+	// Remove queued commands (pointers, so delete their objects!)
+	while (!command_list.empty())
+	{
+		delete command_list.front();
+		command_list.pop_front();
+	}
+
+	read_buff_end = read_buff;
+	write_buff_end = write_buff;
+	command_list.push_back(new Lx200CommandStopSlew(server));
+	flushCommandList();
+	//*log_file << Now() << "Lx200Connection::sendAbort() end"
+	//          << StelUtils::getEndLineChar();
+}

@@ -102,6 +102,9 @@ public:
 	//! This is called in each draw().
 	void setBrightness(const double b, const double pollutionBrightness=0.0) {landscapeBrightness = static_cast<float>(b); lightScapeBrightness=static_cast<float>(pollutionBrightness); }
 
+        //! Set a tint to render the landscape. Useful for low-sun scenes
+        void setTint(Vec3f color){landscapeTint=color;}
+
 	//! Returns the current brightness level
 	double getBrightness() const { return static_cast<double>(landscapeBrightness); }
 	//! Returns the lightscape brightness
@@ -241,6 +244,7 @@ protected:
 
 	float minBrightness;   //! Read from landscape.ini:[landscape]minimal_brightness. Allows minimum visibility that cannot be underpowered.
 	float landscapeBrightness;  //! brightness [0..1] to draw the landscape. Computed by the LandscapeMgr.
+        Vec3f landscapeTint;   //! color tint to draw the landscape (daylight texture only). Nice for sunrise/sunset.
 	float lightScapeBrightness; //! can be used to draw nightscape texture (e.g. city light pollution), if available. Computed by the LandscapeMgr.
 	bool validLandscape;   //! was a landscape loaded properly?
 	LinearFader landFader; //! Used to slowly fade in/out landscape painting.

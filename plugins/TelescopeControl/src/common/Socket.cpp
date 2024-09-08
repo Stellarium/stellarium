@@ -40,6 +40,10 @@ long long int GetNow(void)
 		qint64 t;
 	} tmp;
 	GetSystemTimeAsFileTime(&tmp.file_time);
+	// convert from NT/NTFS time epoch (1601-01-01 0:00:00 UTC) in μs to UNIX epoch (1970-01-01 0:00:00 UTC) in μs. The difference is:
+	// 24 hour/day × 3600 s/hour × 10^6 μs/s × ((369×365+89) day).
+	// Here 369=1970-1601, and 89 is the number of leap years in the interval.
+	// The division by 10 in the minuend is to convert from 100-nanosecond intervals to microseconds.
 	t = (tmp.t/10) - 86400000000LL*(369*365+89);
 #else
 	struct timeval tv;

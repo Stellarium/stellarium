@@ -6,9 +6,9 @@ add_subdirectory(Lx200)
 add_subdirectory(NexStar)
 add_subdirectory(Rts2)
 add_subdirectory(INDI)
-if(WIN32)
+if(WIN32 AND (${QT_VERSION_MAJOR} EQUAL "5"))
     add_subdirectory(ASCOM)
-endif(WIN32)
+endif(WIN32 AND (${QT_VERSION_MAJOR} EQUAL "5"))
 
 SET(TelescopeControl_RES ../resources/TelescopeControl.qrc)
 IF (${QT_VERSION_MAJOR} EQUAL "5")
@@ -49,10 +49,11 @@ TARGET_LINK_LIBRARIES(TelescopeControl-static
     Qt${QT_VERSION_MAJOR}::SerialPort
     )
 
-IF(WIN32)
-TARGET_LINK_LIBRARIES(TelescopeControl-static
-    TelescopeControl_ASCOM)
-ENDIF(WIN32)
+# Due to incomprehensible errors between ASCOM and Qt6OpenGL!QOpenGL2PaintEngineEx::setState(), we must disable in QT6-based builds.
+if(WIN32 AND (${QT_VERSION_MAJOR} EQUAL "5"))
+#TARGET_LINK_LIBRARIES(TelescopeControl-static
+#    TelescopeControl_ASCOM)
+ENDIF(WIN32 AND (${QT_VERSION_MAJOR} EQUAL "5"))
 
 SET_TARGET_PROPERTIES(TelescopeControl-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")
 ADD_DEPENDENCIES(AllStaticPlugins TelescopeControl-static)

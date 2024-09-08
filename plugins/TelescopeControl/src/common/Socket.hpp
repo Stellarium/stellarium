@@ -77,6 +77,7 @@ static inline int SetNonblocking(int s)
 
 #endif //Q_OS_WIN
 
+//! retrieve system time in microseconds from the UNIX epoch (1970)
 long long int GetNow(void);
 
 class Server;
