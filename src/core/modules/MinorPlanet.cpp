@@ -117,7 +117,9 @@ void MinorPlanet::setAbsoluteMagnitudeAndSlope(const float magnitude, const floa
 	if ((slope < -1.0f) || (slope > 2.0f))
 	{
 		// G "should" be between 0 and 1, but may be somewhat outside.
-		qDebug() << "MinorPlanet::setAbsoluteMagnitudeAndSlope(): Invalid slope parameter value (must be between -1 and 2, mostly [0..1])";
+		qWarning() << "MinorPlanet::setAbsoluteMagnitudeAndSlope(): Suspect slope parameter value" <<
+			    QString::number(slope, 'f', 2) << "for" << getEnglishName() <<
+			    ", expected between -1 and 2, mostly [0..1])";
 		return;
 	}
 	absoluteMagnitude = magnitude;

@@ -287,7 +287,8 @@ void main(void)
 
 	// We must also adjust milky way to light pollution.
 	// Is there any way to calibrate this?
-	float atmFadeIntensity = GETSTELMODULE(LandscapeMgr)->getAtmosphereFadeIntensity();
+	static LandscapeMgr *lMgr=GETSTELMODULE(LandscapeMgr);
+	const float atmFadeIntensity = lMgr->getAtmosphereFadeIntensity();
 	const float nelm = StelCore::luminanceToNELM(drawer->getLightPollutionLuminance());
 	const float bortleIntensity = 1.f+(15.5f-2*nelm)*atmFadeIntensity; // smoothed Bortle index moderated by atmosphere fader.
 
@@ -307,12 +308,12 @@ void main(void)
 	//Q_ASSERT(omgr);
 	// TODO: Find an even better balance with sky brightness, MW should be hard to see during Full Moon and at least somewhat reduced in smaller phases.
 	// adapt brightness by atmospheric brightness. This block developed for ZodiacalLight, hopefully similarly applicable...
-	const float atmLum = GETSTELMODULE(LandscapeMgr)->getAtmosphereAverageLuminance();
+	const float atmLum = lMgr->getAtmosphereAverageLuminance();
 	// Approximate values for Preetham: 10cd/m^2 at sunset, 3.3 at civil twilight (sun at -6deg). 0.0145 sun at -12, 0.0004 sun at -18,  0.01 at Full Moon!?
 	//omgr->setExtraInfoString(StelObject::DebugAid, QString("AtmLum: %1<br/>").arg(QString::number(atmLum, 'f', 4)));
 	// The atmLum of Bruneton's model is about 1/2 higher than that of Preetham/Schaefer. We must rebalance that!
 	float atmFactor=0.35;
-	if (GETSTELMODULE(LandscapeMgr)->getAtmosphereModel()=="showmysky")
+	if (lMgr->getAtmosphereModel()=="showmysky")
 	{
 		atmFactor=qMax(0.35f, 50.0f*(0.02f-0.2f*atmLum)); // The factor 0.2f was found empirically. Nominally it should be 0.667, but 0.2 or at least 0.4 looks better.
 	}

@@ -273,7 +273,7 @@ void ConstellationMgr::selectedObjectChange(StelModule::StelModuleSelectAction a
 
 void ConstellationMgr::deselectConstellations(void)
 {
-	StelObjectMgr* omgr = GETSTELMODULE(StelObjectMgr);
+	static StelObjectMgr* omgr = GETSTELMODULE(StelObjectMgr);
 	Q_ASSERT(omgr);
 	if (getFlagIsolateSelected())
 	{

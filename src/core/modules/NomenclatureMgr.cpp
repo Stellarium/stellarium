@@ -76,7 +76,8 @@ void NomenclatureMgr::init()
 	setFlagHideLocalNomenclature(      conf->value("astro/flag_hide_local_nomenclature", true).toBool());
 	setFlagShowSpecialNomenclatureOnly(conf->value("astro/flag_special_nomenclature_only", false).toBool());
 
-	GETSTELMODULE(StelObjectMgr)->registerStelObjectMgr(this);
+	sObjMgr=GETSTELMODULE(StelObjectMgr);
+	sObjMgr->registerStelObjectMgr(this);
 
 	StelApp *app = &StelApp::getInstance();
 	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));	
@@ -283,7 +284,7 @@ void NomenclatureMgr::draw(StelCore* core)
 	StelPainter painter(prj);
 	painter.setBlending(true);
 
-	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer())
+	if (sObjMgr->getFlagSelectedObjectPointer())
 	    drawPointer(core, painter);
 
 	if (NomenclatureItem::labelsFader.getInterstate()<=0.f)
@@ -328,7 +329,7 @@ void NomenclatureMgr::setForceItems(bool b)
 
 void NomenclatureMgr::drawPointer(StelCore* core, StelPainter& painter)
 {
-	const QList<StelObjectP> newSelected = GETSTELMODULE(StelObjectMgr)->getSelectedObject("NomenclatureItem");
+	const QList<StelObjectP> newSelected = sObjMgr->getSelectedObject("NomenclatureItem");
 	if (!newSelected.empty())
 	{
 		const StelObjectP obj = newSelected[0];

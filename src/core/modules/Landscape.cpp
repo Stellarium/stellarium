@@ -335,6 +335,7 @@ void Landscape::drawHorizonLine(StelCore* core, StelPainter& painter)
 	if (!horizonPolygon || horizonPolygonLineColor == Vec3f(-1.f,0.f,0.f))
 		return;
 
+	static LandscapeMgr *lMgr=GETSTELMODULE(LandscapeMgr);
 	StelProjector::ModelViewTranformP transfo = core->getAltAzModelViewTransform(StelCore::RefractionOff);
 	transfo->combine(Mat4d::zrotation(static_cast<double>(-angleRotateZOffset)));
 	const StelProjectorP prj = core->getProjection(transfo);
@@ -344,7 +345,7 @@ void Landscape::drawHorizonLine(StelCore* core, StelPainter& painter)
 	painter.setColor(horizonPolygonLineColor, landFader.getInterstate());
 	const float lineWidth=painter.getLineWidth();
 	const float ppx = static_cast<float>(prj->getDevicePixelsPerPixel());
-	painter.setLineWidth(GETSTELMODULE(LandscapeMgr)->getPolyLineThickness()*ppx);
+	painter.setLineWidth(lMgr->getPolyLineThickness()*ppx);
 	painter.drawSphericalRegion(horizonPolygon.data(), StelPainter::SphericalPolygonDrawModeBoundary);
 	painter.setLineWidth(lineWidth);
 	painter.setLineSmooth(false);

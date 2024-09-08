@@ -678,7 +678,7 @@ void LandscapeMgr::draw(StelCore* core)
 	//if (atmosphere->getFlagShow())
 	if (drawer->getFlagDrawSunAfterAtmosphere())
 	{
-		SolarSystem* ssys = GETSTELMODULE(SolarSystem);
+		static SolarSystem* ssys = GETSTELMODULE(SolarSystem);
 		PlanetP sun=ssys->getSun();
 		QFont font;
 		font.setPixelSize(StelApp::getInstance().getScreenFontSize());

@@ -81,14 +81,13 @@ void twoline2rv
       elsetrec& satrec
      )
      {
-       const double deg2rad  =   M_PI / 180.0;         //   0.0174532925199433
-       const double xpdotp   =  1440.0 / (2.0 *M_PI);  // 229.1831180523293
+       static const double deg2rad  =   M_PI / 180.0;         //   0.0174532925199433
+       static const double xpdotp   =  1440.0 / (2.0 *M_PI);  // 229.1831180523293
 
        double sec, mu, radiusearthkm, tumin, xke, j2, j3, j4, j3oj2;
        int cardnumb, numb, j;
        long revnum = 0, elnum = 0;
        char classification, intldesg[11];
-       int year = 0;
        int mon, day, hr, minute, nexp, ibexp;
 
        getgravconst( whichconst, tumin, mu, radiusearthkm, xke, j2, j3, j4, j3oj2 );
@@ -184,6 +183,7 @@ void twoline2rv
 
        // ---------------- temp fix for years from 1957-2056 -------------------
        // --------- correct fix will occur when year is 4-digit in tle ---------
+       int year = 0;
        if (satrec.epochyr < 57)
            year= satrec.epochyr + 2000;
          else

@@ -245,6 +245,7 @@ struct ViewportEdgeIntersectCallbackData
 	Vec4f textColor;
 	QString text;		// Label to display at the intersection of the lines and screen side
 	double raAngle;		// Used for meridians
+	double gridStepMeridianRad; // used as rounding threshold
 	StelCore::FrameType frameType;
 };
 
@@ -255,7 +256,7 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 	const Vec4f tmpColor = d->sPainter->getColor();
 	d->sPainter->setColor(d->textColor);
 	const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
-	const bool useOldAzimuth = StelApp::getInstance().getFlagSouthAzimuthUsage();
+	const bool useSouthAzimuth = StelApp::getInstance().getFlagSouthAzimuthUsage();
 	const float ppx = static_cast<float>(d->sPainter->getProjector()->getDevicePixelsPerPixel());
 
 	const int viewportWidth  = d->sPainter->getProjector()->getViewportWidth();
@@ -288,7 +289,7 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 				if (qFuzzyCompare(raAngle, 2*M_PI) && qFuzzyCompare(delta, -M_PI))
 					textAngle = 0;
 
-				if (useOldAzimuth)
+				if (useSouthAzimuth)
 					textAngle += M_PI;
 
 				if (withDecimalDegree)
@@ -298,19 +299,12 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 
 				break;			
 			}
-			case StelCore::FrameObservercentricEclipticJ2000:
-			case StelCore::FrameObservercentricEclipticOfDate:
-			case StelCore::FrameGalactic:
-			case StelCore::FrameSupergalactic:
+			default:
 			{
-				raAngle = d->raAngle;
-				if (raAngle<0.)
-					raAngle += 2.*M_PI;
+				raAngle = StelUtils::fmodpos(d->raAngle, 2.*M_PI);
+				lon = StelUtils::fmodpos(lon, 2.*M_PI);
 
-				if (lon<0.)
-					lon += 2*M_PI;
-
-				if (std::fabs(2.*M_PI-lon)<0.001) // We are at meridian 0
+				if (std::fabs(2.*M_PI-lon)<d->gridStepMeridianRad/250.) // We are at meridian 0
 					lon = 0.;
 
 				const double delta = raAngle<M_PI ? M_PI : -M_PI;
@@ -322,42 +316,21 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 				if (qFuzzyCompare(raAngle, 2*M_PI) && qFuzzyCompare(delta, -M_PI))
 					textAngle = 0;
 
-				if (withDecimalDegree)
-					text = StelUtils::radToDecDegStr(textAngle, 4, false, true);
-				else
-					text = StelUtils::radToDmsStrAdapt(textAngle);
-
-				break;			
-			}			
-			default:			
-			{
-				raAngle = M_PI-d->raAngle;
-				lon = M_PI-lon;
-
-				if (raAngle<0)
-					raAngle+=2.*M_PI;
-
-				if (lon<0)
-					lon+=2.*M_PI;
-
-				if (std::fabs(2.*M_PI-lon)<0.01) // We are at meridian 0
-					lon = 0.;
-
-				if (std::fabs(lon-raAngle) < 0.01)
-					textAngle = -raAngle+M_PI;
-				else
-				{
-					const double delta = raAngle<M_PI ? M_PI : -M_PI;
-					textAngle = -raAngle-delta+M_PI;
-				}
-
 				if (d->frameType==StelCore::FrameFixedEquatorial)
 					textAngle=2.*M_PI-textAngle;
 
+
+				textAngle=StelUtils::fmodpos(textAngle, 2.*M_PI);
 				if (withDecimalDegree)
 					text = StelUtils::radToDecDegStr(textAngle, 4, false, true);
 				else
-					text = StelUtils::radToHmsStrAdapt(textAngle);
+				{
+					if (QList<StelCore::FrameType>{StelCore::FrameObservercentricEclipticJ2000, StelCore::FrameObservercentricEclipticOfDate,
+						StelCore::FrameGalactic, StelCore::FrameSupergalactic}.contains(d->frameType))
+						text = StelUtils::radToDmsStrAdapt(textAngle);
+					else
+						text = StelUtils::radToHmsStrAdapt(textAngle);
+				}
 			}
 		}
 	}
@@ -400,21 +373,17 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 //! Draw the sky grid in the current frame
 void SkyGrid::draw(const StelCore* core) const
 {
-	const StelProjectorP prj = core->getProjection(frameType, (frameType!=StelCore::FrameAltAz && frameType!=StelCore::FrameFixedEquatorial) ? StelCore::RefractionAuto : StelCore::RefractionOff);
 	if (fader.getInterstate() <= 0.f)
 		return;
 
+	const StelProjectorP prj = core->getProjection(frameType, (frameType!=StelCore::FrameAltAz && frameType!=StelCore::FrameFixedEquatorial) ? StelCore::RefractionAuto : StelCore::RefractionOff);
 	const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
 
 	// Look for all meridians and parallels intersecting with the disk bounding the viewport
 	// Check whether the pole are in the viewport
-	bool northPoleInViewport = false;
-	bool southPoleInViewport = false;
 	Vec3f win;
-	if (prj->project(Vec3f(0,0,1), win) && prj->checkInViewport(win))
-		northPoleInViewport = true;
-	if (prj->project(Vec3f(0,0,-1), win) && prj->checkInViewport(win))
-		southPoleInViewport = true;
+	const bool northPoleInViewport = (prj->project(Vec3f(0,0,1), win) && prj->checkInViewport(win));
+	const bool southPoleInViewport = (prj->project(Vec3f(0,0,-1), win) && prj->checkInViewport(win));
 	// Get the longitude and latitude resolution at the center of the viewport
 	Vec3d centerV;
 	prj->unProject(prj->getViewportPosX()+prj->getViewportWidth()/2., prj->getViewportPosY()+prj->getViewportHeight()/2.+1., centerV);
@@ -461,6 +430,7 @@ void SkyGrid::draw(const StelCore* core) const
 	ViewportEdgeIntersectCallbackData userData(&sPainter);
 	userData.textColor = textColor;
 	userData.frameType = frameType;
+	userData.gridStepMeridianRad = gridStepMeridianRad;
 
 	/////////////////////////////////////////////////
 	// Draw all the meridians (great circles)
@@ -473,7 +443,7 @@ void SkyGrid::draw(const StelCore* core) const
 	for (i=0; i<maxNbIter; ++i)
 	{
 		StelUtils::rectToSphe(&lon2, &lat2, fpt);
-		userData.raAngle = lon2;
+		userData.raAngle = fabs(lon2)<1.e-12 ? 0. : lon2; // Get rid of stupid noise
 
 		meridianSphericalCap.n = fpt^Vec3d(0,0,1);
 		meridianSphericalCap.n.normalize();
@@ -487,9 +457,9 @@ void SkyGrid::draw(const StelCore* core) const
 				rotFpt.transfo4d(rotLon120);
 				Vec3d rotFpt2=rotFpt;
 				rotFpt2.transfo4d(rotLon120);
-				sPainter.drawGreatCircleArc(fpt, rotFpt, Q_NULLPTR, viewportEdgeIntersectCallback, &userData);
-				sPainter.drawGreatCircleArc(rotFpt, rotFpt2, Q_NULLPTR, viewportEdgeIntersectCallback, &userData);
-				sPainter.drawGreatCircleArc(rotFpt2, fpt, Q_NULLPTR, viewportEdgeIntersectCallback, &userData);
+				sPainter.drawGreatCircleArc(fpt, rotFpt, nullptr, viewportEdgeIntersectCallback, &userData);
+				sPainter.drawGreatCircleArc(rotFpt, rotFpt2, nullptr, viewportEdgeIntersectCallback, &userData);
+				sPainter.drawGreatCircleArc(rotFpt2, fpt, nullptr, viewportEdgeIntersectCallback, &userData);
 				fpt.transfo4d(rotLon);
 				continue;
 			}
@@ -503,8 +473,8 @@ void SkyGrid::draw(const StelCore* core) const
 			middlePoint*=-1.;
 
 		// Draw the arc in 2 sub-arcs to avoid lengths > 180 deg
-		sPainter.drawGreatCircleArc(p1, middlePoint, Q_NULLPTR, viewportEdgeIntersectCallback, &userData);
-		sPainter.drawGreatCircleArc(p2, middlePoint, Q_NULLPTR, viewportEdgeIntersectCallback, &userData);
+		sPainter.drawGreatCircleArc(p1, middlePoint, nullptr, viewportEdgeIntersectCallback, &userData);
+		sPainter.drawGreatCircleArc(p2, middlePoint, nullptr, viewportEdgeIntersectCallback, &userData);
 
 		fpt.transfo4d(rotLon);
 	}
@@ -517,7 +487,7 @@ void SkyGrid::draw(const StelCore* core) const
 		for (int j=0; j<maxNbIter-i; ++j)
 		{
 			StelUtils::rectToSphe(&lon2, &lat2, fpt);
-			userData.raAngle = lon2;
+			userData.raAngle = fabs(lon2)<1.e-12 ? 0. : lon2; // Get rid of stupid noise
 
 			meridianSphericalCap.n = fpt^Vec3d(0,0,1);
 			meridianSphericalCap.n.normalize();
@@ -529,8 +499,8 @@ void SkyGrid::draw(const StelCore* core) const
 			if (!viewPortSphericalCap.contains(middlePoint))
 				middlePoint*=-1;
 
-			sPainter.drawGreatCircleArc(p1, middlePoint, Q_NULLPTR, viewportEdgeIntersectCallback, &userData);
-			sPainter.drawGreatCircleArc(p2, middlePoint, Q_NULLPTR, viewportEdgeIntersectCallback, &userData);
+			sPainter.drawGreatCircleArc(p1, middlePoint, nullptr, viewportEdgeIntersectCallback, &userData);
+			sPainter.drawGreatCircleArc(p2, middlePoint, nullptr, viewportEdgeIntersectCallback, &userData);
 
 			fpt.transfo4d(rotLon);
 		}
@@ -688,7 +658,7 @@ void SkyLine::init()
 
 void SkyLine::computeEclipticDatePartitions(int year)
 {
-	GridLinesMgr* gMgr=GETSTELMODULE_SILENT(GridLinesMgr);
+	static GridLinesMgr* gMgr=GETSTELMODULE_SILENT(GridLinesMgr);
 	if (gMgr && (! gMgr->getFlagEclipticDatesLabeled()))
 		return;
 
@@ -745,9 +715,9 @@ void SkyLine::setSolarSystem(SolarSystem* ss)
 
 void SkyLine::deinit()
 {
-	earth = Q_NULLPTR;
-	sun   = Q_NULLPTR;
-	moon  = Q_NULLPTR;
+	earth = nullptr;
+	sun   = nullptr;
+	moon  = nullptr;
 }
 
 SkyLine::~SkyLine()
@@ -862,6 +832,8 @@ void SkyLine::draw(StelCore *core) const
 	if (fader.getInterstate() <= 0.f)
 		return;
 
+	static StelMovementMgr *sMvMgr=GETSTELMODULE(StelMovementMgr);
+	Q_ASSERT(sMvMgr);
 	StelProjectorP prj = core->getProjection(frameType, (frameType!=StelCore::FrameAltAz && frameType!=StelCore::FrameFixedEquatorial) ? StelCore::RefractionAuto : StelCore::RefractionOff);
 
 	// Get the bounding halfspace
@@ -912,14 +884,15 @@ void SkyLine::draw(StelCore *core) const
 		{
 			// resizing the shadow together with the Moon would require considerable trickery.
 			// It seems better to just switch it off.
-			if (GETSTELMODULE(SolarSystem)->getFlagMoonScale()) return;
+			static SolarSystem *sSystem=GETSTELMODULE(SolarSystem);
+			if (sSystem->getFlagMoonScale()) return;
 
 			// We compute the shadow circle attached to the geocenter, but must point it in the opposite direction of the sun's aberrated position.
 			const Vec3d pos=earth->getEclipticPos();
 			const Vec3d dir= - sun->getAberrationPush() + pos;
 			double lambda, beta;
 			StelUtils::rectToSphe(&lambda, &beta, dir);
-			const QPair<Vec3d, Vec3d> radii=GETSTELMODULE(SolarSystem)->getEarthShadowRadiiAtLunarDistance();
+			const QPair<Vec3d, Vec3d> radii=sSystem->getEarthShadowRadiiAtLunarDistance();
 			const double radius=(line_type==EARTH_UMBRA ? radii.first[1] : radii.second[1]);
 			const double dist=moon->getEclipticPos().norm();  // geocentric Lunar distance [AU]
 			const Mat4d rot=Mat4d::zrotation(lambda)*Mat4d::yrotation(-beta);
@@ -1014,7 +987,7 @@ void SkyLine::draw(StelCore *core) const
 					{
 						ptTgt=part1000; ptTgt.transfo4d(Mat4d::rotation(partZAxis, tickAngle));
 						if (viewPortSphericalCap.contains(pt0) || viewPortSphericalCap.contains(ptTgt))
-							sPainter.drawGreatCircleArc(pt0, ptTgt, Q_NULLPTR, Q_NULLPTR, Q_NULLPTR);
+							sPainter.drawGreatCircleArc(pt0, ptTgt, nullptr, nullptr, nullptr);
 						if (showLabel)
 						{
 							Vec3d ptTgtL=part1000l; ptTgtL.transfo4d(Mat4d::rotation(partZAxis, tickAngle));
@@ -1036,7 +1009,7 @@ void SkyLine::draw(StelCore *core) const
 						ptTgt=(y%500 == 0 ? part500 : part100);
 						ptTgt.transfo4d(Mat4d::rotation(partZAxis, tickAngle));
 						if (viewPortSphericalCap.contains(pt0) || viewPortSphericalCap.contains(ptTgt))
-							sPainter.drawGreatCircleArc(pt0, ptTgt, Q_NULLPTR, Q_NULLPTR, Q_NULLPTR);
+							sPainter.drawGreatCircleArc(pt0, ptTgt, nullptr, nullptr, nullptr);
 					}
 				}
 
@@ -1071,7 +1044,7 @@ void SkyLine::draw(StelCore *core) const
 					{
 						ptTgt=part1000; ptTgt.transfo4d(Mat4d::rotation(partZAxis, tickAngle));
 						if (viewPortSphericalCap.contains(pt0) || viewPortSphericalCap.contains(ptTgt))
-							sPainter.drawGreatCircleArc(pt0, ptTgt, Q_NULLPTR, Q_NULLPTR, Q_NULLPTR);
+							sPainter.drawGreatCircleArc(pt0, ptTgt, nullptr, nullptr, nullptr);
 						if (showLabel)
 						{
 							Vec3d ptTgtL=part1000l; ptTgtL.transfo4d(Mat4d::rotation(partZAxis, tickAngle));
@@ -1093,7 +1066,7 @@ void SkyLine::draw(StelCore *core) const
 						ptTgt=(y%500 == 0 ? part500 : part100);
 						ptTgt.transfo4d(Mat4d::rotation(partZAxis, tickAngle));
 						if (viewPortSphericalCap.contains(pt0) || viewPortSphericalCap.contains(ptTgt))
-							sPainter.drawGreatCircleArc(pt0, ptTgt, Q_NULLPTR, Q_NULLPTR, Q_NULLPTR);
+							sPainter.drawGreatCircleArc(pt0, ptTgt, nullptr, nullptr, nullptr);
 					}
 				}
 
@@ -1122,7 +1095,7 @@ void SkyLine::draw(StelCore *core) const
 	}
 	else if (line_type==CURRENT_VERTICAL)
 	{
-		Vec3d coordJ2000=GETSTELMODULE(StelMovementMgr)->getViewDirectionJ2000();
+		Vec3d coordJ2000=sMvMgr->getViewDirectionJ2000();
 		Vec3d coordAltAz=core->j2000ToAltAz(coordJ2000, StelCore::RefractionAuto);
 		StelUtils::rectToSphe(&az, &alt, coordAltAz);
 		sphericalCap.n.set(sin(-az), cos(-az), 0.);
@@ -1210,7 +1183,7 @@ void SkyLine::draw(StelCore *core) const
 		// Limit altitude marks to the displayed range
 		int i_min= 0;
 		int i_max=(line_type==CURRENT_VERTICAL ? 181 : 360);
-		if ((line_type==CURRENT_VERTICAL) && (GETSTELMODULE(StelMovementMgr)->getMountMode()==StelMovementMgr::MountAltAzimuthal) &&
+		if ((line_type==CURRENT_VERTICAL) && (sMvMgr->getMountMode()==StelMovementMgr::MountAltAzimuthal) &&
 		    (core->getCurrentProjectionType()!=StelCore::ProjectionEqualArea) && (core->getCurrentProjectionType()!=StelCore::ProjectionStereographic) && (core->getCurrentProjectionType()!=StelCore::ProjectionFisheye))
 		{
 			// Avoid marks creeping sideways
@@ -1248,7 +1221,7 @@ void SkyLine::draw(StelCore *core) const
 				end.transfo4d(rotDay);
 				end10.transfo4d(rotDay);
 
-				sPainter.drawGreatCircleArc(start, end, Q_NULLPTR, Q_NULLPTR, Q_NULLPTR);
+				sPainter.drawGreatCircleArc(start, end, nullptr, nullptr, nullptr);
 
 				if (!label.isEmpty() && (
 					currentFoV<60. // all labels
@@ -1274,7 +1247,7 @@ void SkyLine::draw(StelCore *core) const
 			{
 				if (i%30 == 0 && (viewPortSphericalCap.contains(part0) || viewPortSphericalCap.contains(part30)))
 				{
-					sPainter.drawGreatCircleArc(part0, part30, Q_NULLPTR, Q_NULLPTR, Q_NULLPTR);
+					sPainter.drawGreatCircleArc(part0, part30, nullptr, nullptr, nullptr);
 
 					if (showLabel)
 					{
@@ -1382,11 +1355,11 @@ void SkyLine::draw(StelCore *core) const
 				}
 
 				else if (i%10 == 0 && (viewPortSphericalCap.contains(part0) || viewPortSphericalCap.contains(part10)))
-					sPainter.drawGreatCircleArc(part0, part10, Q_NULLPTR, Q_NULLPTR, Q_NULLPTR);
+					sPainter.drawGreatCircleArc(part0, part10, nullptr, nullptr, nullptr);
 				else if (i%5 == 0 && (viewPortSphericalCap.contains(part0) || viewPortSphericalCap.contains(part5)))
-					sPainter.drawGreatCircleArc(part0, part5, Q_NULLPTR, Q_NULLPTR, Q_NULLPTR);
+					sPainter.drawGreatCircleArc(part0, part5, nullptr, nullptr, nullptr);
 				else if( viewPortSphericalCap.contains(part0) || viewPortSphericalCap.contains(part1))
-					sPainter.drawGreatCircleArc(part0, part1, Q_NULLPTR, Q_NULLPTR, Q_NULLPTR);
+					sPainter.drawGreatCircleArc(part0, part1, nullptr, nullptr, nullptr);
 			}
 			part0.transfo4d(rotZ1);
 			part1.transfo4d(rotZ1);
@@ -1406,7 +1379,7 @@ void SkyLine::draw(StelCore *core) const
 		p2.set(0.,0.,-1.);
 		Vec3d pHori;
 		StelUtils::spheToRect(az, 0., pHori);
-		if (GETSTELMODULE(StelMovementMgr)->getMountMode()==StelMovementMgr::MountAltAzimuthal)
+		if (sMvMgr->getMountMode()==StelMovementMgr::MountAltAzimuthal)
 		{
 			switch (core->getCurrentProjectionType())
 			{
@@ -1431,8 +1404,8 @@ void SkyLine::draw(StelCore *core) const
 			}
 		}
 		// Now draw through a middle point.
-		sPainter.drawGreatCircleArc(p1, pHori, Q_NULLPTR, viewportEdgeIntersectCallback, &userData);
-		sPainter.drawGreatCircleArc(p2, pHori, Q_NULLPTR, viewportEdgeIntersectCallback, &userData);
+		sPainter.drawGreatCircleArc(p1, pHori, nullptr, viewportEdgeIntersectCallback, &userData);
+		sPainter.drawGreatCircleArc(p2, pHori, nullptr, viewportEdgeIntersectCallback, &userData);
 	}
 	else if (line_type!=ECLIPTIC_WITH_DATE) // Exclude the pseudo-line ecliptic with date marks: This has only partitions!
 	{
@@ -1447,9 +1420,9 @@ void SkyLine::draw(StelCore *core) const
 				rotFpt.transfo4d(rotLon120);
 				Vec3d rotFpt2=rotFpt;
 				rotFpt2.transfo4d(rotLon120);
-				sPainter.drawGreatCircleArc(fpt, rotFpt, Q_NULLPTR, viewportEdgeIntersectCallback, &userData);
-				sPainter.drawGreatCircleArc(rotFpt, rotFpt2, Q_NULLPTR, viewportEdgeIntersectCallback, &userData);
-				sPainter.drawGreatCircleArc(rotFpt2, fpt, Q_NULLPTR, viewportEdgeIntersectCallback, &userData);
+				sPainter.drawGreatCircleArc(fpt, rotFpt, nullptr, viewportEdgeIntersectCallback, &userData);
+				sPainter.drawGreatCircleArc(rotFpt, rotFpt2, nullptr, viewportEdgeIntersectCallback, &userData);
+				sPainter.drawGreatCircleArc(rotFpt2, fpt, nullptr, viewportEdgeIntersectCallback, &userData);
 			}
 		}
 		else
@@ -1460,8 +1433,8 @@ void SkyLine::draw(StelCore *core) const
 				middlePoint*=-1.;
 
 			// Draw the arc in 2 sub-arcs to avoid lengths > 180 deg
-			sPainter.drawGreatCircleArc(p1, middlePoint, Q_NULLPTR, viewportEdgeIntersectCallback, &userData);
-			sPainter.drawGreatCircleArc(p2, middlePoint, Q_NULLPTR, viewportEdgeIntersectCallback, &userData);
+			sPainter.drawGreatCircleArc(p1, middlePoint, nullptr, viewportEdgeIntersectCallback, &userData);
+			sPainter.drawGreatCircleArc(p2, middlePoint, nullptr, viewportEdgeIntersectCallback, &userData);
 		}
 	}
 
@@ -1726,11 +1699,12 @@ void SkyPoint::draw(StelCore *core) const
 		case EARTH_UMBRA_CENTER:
 		{
 			// We compute the shadow center attached to the geocenter, but must point it in the opposite direction of the sun's aberrated position.
+			static PlanetP moon=GETSTELMODULE(SolarSystem)->getMoon();
 			const Vec3d pos=earth->getEclipticPos();
 			const Vec3d dir= - sun->getAberrationPush() + pos;
 			double lambda, beta;
 			StelUtils::rectToSphe(&lambda, &beta, dir);
-			const double dist=GETSTELMODULE(SolarSystem)->getMoon()->getEclipticPos().norm();
+			const double dist=moon->getEclipticPos().norm();
 			const Mat4d rot=Mat4d::zrotation(lambda)*Mat4d::yrotation(-beta);
 
 			Vec3d point(dist, 0.0, 0.0);

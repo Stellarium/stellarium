@@ -158,6 +158,7 @@ private slots:
 
 private:
 	SolarSystem* ssystem;
+	StelObjectMgr* sObjMgr;
 
 	//! Load nomenclature for solar system bodies
 	void loadNomenclature();

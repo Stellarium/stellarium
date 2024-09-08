@@ -63,6 +63,7 @@ class SolarSystem : public StelObjectModule
 	Q_PROPERTY(bool flagNativePlanetNames		READ getFlagNativePlanetNames		WRITE setFlagNativePlanetNames		NOTIFY flagNativePlanetNamesChanged)
 	Q_PROPERTY(bool planetsDisplayed		READ getFlagPlanets			WRITE setFlagPlanets			NOTIFY flagPlanetsDisplayedChanged)
 	Q_PROPERTY(bool flagOrbits			READ getFlagOrbits			WRITE setFlagOrbits			NOTIFY flagOrbitsChanged)
+	Q_PROPERTY(bool flagPlanetsOrbits		READ getFlagPlanetsOrbits		WRITE setFlagPlanetsOrbits		NOTIFY flagPlanetsOrbitsChanged)
 	Q_PROPERTY(bool flagPlanetsOrbitsOnly		READ getFlagPlanetsOrbitsOnly		WRITE setFlagPlanetsOrbitsOnly		NOTIFY flagPlanetsOrbitsOnlyChanged)
 	Q_PROPERTY(bool flagPermanentOrbits		READ getFlagPermanentOrbits		WRITE setFlagPermanentOrbits		NOTIFY flagPermanentOrbitsChanged)
 	Q_PROPERTY(bool flagIsolatedOrbits		READ getFlagIsolatedOrbits		WRITE setFlagIsolatedOrbits		NOTIFY flagIsolatedOrbitsChanged)
@@ -663,6 +664,11 @@ public slots:
 	//! Get the current value of the flag which enables showing of isolated orbits for selected objects only or not.
 	bool getFlagIsolatedOrbits(void) const;
 
+	//! Set flag which enabled the showing of planets orbits, regardless of the other orbit settings
+	void setFlagPlanetsOrbits(bool b);
+	//! Get the current value of the flag which enables showing of planets orbits, regardless of the other orbit settings.
+	bool getFlagPlanetsOrbits(void) const;
+
 	//! Set flag which enabled the showing of planets orbits only or not
 	void setFlagPlanetsOrbitsOnly(bool b);
 	//! Get the current value of the flag which enables showing of planets orbits only or not.
@@ -755,6 +761,7 @@ signals:
 	void flagPointerChanged(bool b);
 	void flagNativePlanetNamesChanged(bool b);
 	void flagPlanetsDisplayedChanged(bool b);
+	void flagPlanetsOrbitsChanged(bool b);
 	void flagPlanetsOrbitsOnlyChanged(bool b);
 	void flagPermanentOrbitsChanged(bool b);
 	void flagIsolatedOrbitsChanged(bool b);
@@ -1115,8 +1122,9 @@ private:
 	int maxTrailTimeExtent;
 	int trailsThickness;
 	bool flagIsolatedOrbits;
-	bool flagPlanetsOrbitsOnly;
-	bool flagOrbitsWithMoons;
+	bool flagPlanetsOrbits;				// Show orbits of the major planets, regardless of other orbit settings
+	bool flagPlanetsOrbitsOnly;			// show orbits of the major planets only (no minor bodies in any case)
+	bool flagOrbitsWithMoons;			// Show moon systems if planet orbits are displayed
 	bool ephemerisMarkersDisplayed;
 	bool ephemerisDatesDisplayed;
 	bool ephemerisMagnitudesDisplayed;

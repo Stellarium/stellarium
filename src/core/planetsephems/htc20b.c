@@ -53,6 +53,7 @@ Calyp -278795.483  -66349.449   64265.081   292171.217 -836964.572  420403.505
 
 #include <math.h>
 #include <stdint.h>
+#include <string.h>
 #include "htc20b.h"
 
 int htc20( const double jd, const int sat_no, double *xyz, double *vxyz)
@@ -191,12 +192,9 @@ int htc20( const double jd, const int sat_no, double *xyz, double *vxyz)
          return( -1);
       }
 
-   for (i = 0; i < 3; ++i)
-      {
-      xyz[i] = 0.;
-      if( vxyz)
-         vxyz[i] = 0.;
-      }
+   memset(xyz, 0, 3*sizeof(double));
+   if(vxyz)
+        memset(vxyz, 0, 3*sizeof(double));
 
    arg1 = rnu1[sat_no] * t + phi1[sat_no];
    arg2 = rnu2[sat_no] * t + phi2[sat_no];

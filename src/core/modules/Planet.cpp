@@ -1733,7 +1733,7 @@ static bool willCastShadow(const Planet* thisPlanet, const Planet* p, const Plan
 QVector<const Planet*> Planet::getCandidatesForShadow() const
 {
 	QVector<const Planet*> res;
-	const SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
+	static SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
 	const Planet* sun = ssystem->getSun().data();
 	if (this==sun || (parent.data()==sun && satellites.empty()))
 		return res;
@@ -2326,7 +2326,7 @@ float Planet::getMeanOppositionMagnitude() const
 		if (orbitPtr)
 			semimajorAxis=static_cast<KeplerOrbit*>(orbitPtr)->getSemimajorAxis();
 		else
-			qDebug() << "WARNING: No orbitPtr for " << englishName;
+			qWarning() << "WARNING: No orbitPtr for " << englishName;
 	}
 
 	if (semimajorAxis>0.)
@@ -2352,6 +2352,7 @@ float Planet::getVMagnitude(const StelCore* core) const
 		return static_cast<float>(4.83 + 5.*(std::log10(distParsec)-1.) - 2.5*(std::log10(shadowFactor)));
 	}
 
+	static SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
 	// Compute the phase angle i. We need the intermediate results also below, therefore we don't just call getPhaseAngle.
 	const Vec3d& observerHelioPos = core->getObserverHeliocentricEclipticPos();
 	const double observerRq = observerHelioPos.normSquared();
@@ -2375,15 +2376,14 @@ float Planet::getVMagnitude(const StelCore* core) const
 			if (englishName==L1S("Moon"))
 			{
 				static const double totalityFactor=2.710e-5; // defined previously by AW
-				const SolarSystem* ssm = GETSTELMODULE(SolarSystem);
-				const QPair<Vec3d,Vec3d>shadowRadii=ssm->getEarthShadowRadiiAtLunarDistance();
+				const QPair<Vec3d,Vec3d>shadowRadii=ssystem->getEarthShadowRadiiAtLunarDistance();
 				const double dist=getEclipticPos().norm();  // Lunar distance [AU]
 				const double u=shadowRadii.first[0]  / 3600.; // geocentric angle of earth umbra radius at lunar distance [degrees]
 				const double p=shadowRadii.second[0] / 3600.; // geocentric angle of earth penumbra radius at lunar distance [degrees]
 				const double r=atan(getEquatorialRadius()/dist) * M_180_PI; // geocentric angle of Lunar radius at lunar distance [degrees]
 
 				// We must compute an elongation from the aberrated sun. The following is adapted from getElongation(), with a tweak to move the Sun to its apparent position.
-				PlanetP sun=ssm->getSun();
+				PlanetP sun=ssystem->getSun();
 				const Vec3d obsPos=parent->eclipticPos-sun->getAberrationPush();
 				const double observerRq = obsPos.normSquared();
 				const Vec3d& planetHelioPos = getHeliocentricEclipticPos() - sun->getAberrationPush();
@@ -2632,7 +2632,6 @@ float Planet::getVMagnitude(const StelCore* core) const
 					const double T=(jde-2451545.0)/36525.0;
 					const double i=((0.000004*T-0.012998)*T+28.075216)*M_PI/180.0;
 					const double Omega=((0.000412*T+1.394681)*T+169.508470)*M_PI/180.0;
-					static SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
 					const Vec3d saturnEarth=getHeliocentricEclipticPos() - ssystem->getEarth()->getHeliocentricEclipticPos();
 					const double lambda=atan2(saturnEarth[1], saturnEarth[0]);
 					const double beta=atan2(saturnEarth[2], std::sqrt(saturnEarth[0]*saturnEarth[0]+saturnEarth[1]*saturnEarth[1]));
@@ -2703,7 +2702,6 @@ float Planet::getVMagnitude(const StelCore* core) const
 					const double T=(jde-2451545.0)/36525.0;
 					const double i=((0.000004*T-0.012998)*T+28.075216)*M_PI/180.0;
 					const double Omega=((0.000412*T+1.394681)*T+169.508470)*M_PI/180.0;
-					static SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
 					const Vec3d saturnEarth=getHeliocentricEclipticPos() - ssystem->getEarth()->getHeliocentricEclipticPos();
 					const double lambda=atan2(saturnEarth[1], saturnEarth[0]);
 					const double beta=atan2(saturnEarth[2], std::sqrt(saturnEarth[0]*saturnEarth[0]+saturnEarth[1]*saturnEarth[1]));
@@ -2743,7 +2741,6 @@ float Planet::getVMagnitude(const StelCore* core) const
 					const double T=(jde-2451545.0)/36525.0;
 					const double i=((0.000004*T-0.012998)*T+28.075216)*M_PI/180.0;
 					const double Omega=((0.000412*T+1.394681)*T+169.508470)*M_PI/180.0;
-					SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
 					const Vec3d saturnEarth=getHeliocentricEclipticPos() - ssystem->getEarth()->getHeliocentricEclipticPos();
 					const double lambda=atan2(saturnEarth[1], saturnEarth[0]);
 					const double beta=atan2(saturnEarth[2], std::sqrt(saturnEarth[0]*saturnEarth[0]+saturnEarth[1]*saturnEarth[1]));
@@ -2788,7 +2785,6 @@ float Planet::getVMagnitude(const StelCore* core) const
 					const double T=(jde-2451545.0)/36525.0;
 					const double i=((0.000004*T-0.012998)*T+28.075216)*M_PI/180.0;
 					const double Omega=((0.000412*T+1.394681)*T+169.508470)*M_PI/180.0;
-					static SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
 					const Vec3d saturnEarth=getHeliocentricEclipticPos() - ssystem->getEarth()->getHeliocentricEclipticPos();
 					const double lambda=atan2(saturnEarth[1], saturnEarth[0]);
 					const double beta=atan2(saturnEarth[2], std::sqrt(saturnEarth[0]*saturnEarth[0]+saturnEarth[1]*saturnEarth[1]));
@@ -2915,13 +2911,12 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 	// This removed totally the Planet shaking bug!!!
 	StelProjector::ModelViewTranformP transfo = core->getHeliocentricEclipticModelViewTransform();
 	transfo->combine(mat);
+
 	if (getEnglishName() == core->getCurrentLocation().planetName)
 	{
 		// Draw the rings if we are located on a planet with rings, but not the planet itself.
 		if (rings)
-		{
 			draw3dModel(core, transfo, 1024, true);
-		}
 		return;
 	}
 
@@ -3459,17 +3454,17 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 
 	if (isSun && currentLocationIsEarth)
 	{
-		LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
+		static LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
 		const float eclipseFactor = static_cast<float>(ssm->getSolarEclipseFactor(core).first);
 		// This alpha ensures 0 for complete sun, 1 for eclipse better 1e-10, with a strong increase towards full eclipse. We still need to square it.
 		// But without atmosphere we should indeed draw a visible corona by default!
 		const float alpha= ( !lmgr->getFlagAtmosphere() && ssm->getFlagPermanentSolarCorona() ? 0.7f : -0.1f*qMax(-10.0f, log10f(eclipseFactor)));
-		StelMovementMgr* mmgr = GETSTELMODULE(StelMovementMgr);
+		static StelMovementMgr* mmgr = GETSTELMODULE(StelMovementMgr);
 		float rotationAngle=(mmgr->getEquatorialMount() ? 0.0f : getParallacticAngle(core) * M_180_PIf);
 
 		// Add ecliptic/equator angle. Meeus, Astr. Alg. 2nd, p100.
 		const double jde=core->getJDE();
-		const double eclJDE = GETSTELMODULE(SolarSystem)->getEarth()->getRotObliquity(jde);
+		const double eclJDE = ssm->getEarth()->getRotObliquity(jde);
 		double ra_equ, dec_equ, lambdaJDE, betaJDE;
 		StelUtils::rectToSphe(&ra_equ,&dec_equ,getEquinoxEquatorialPos(core));
 		StelUtils::equToEcl(ra_equ, dec_equ, eclJDE, &lambdaJDE, &betaJDE);
@@ -3562,7 +3557,7 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 			// We have 5000cd/m^2 at sunset returned (Note this may be unnaturally much. Should be rather 10, but the 5000 may include the sun).
 			// When atm.brightness has fallen to 2000cd/m^2, we allow earthshine to appear visible. Its impact is full when atm.brightness is below 1000.
 			// In case of high-percentage partial or annular solar eclipse, earthshine shall not be enhanced, though, even when atmosphere luminance is dimmed by the eclipse.
-			LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
+			static LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
 			Q_ASSERT(lmgr);
 			const float atmLum=(lmgr->getFlagAtmosphere() ? lmgr->getAtmosphereAverageLuminance() : 0.0f);
 			if (atmLum<2000.0f && ( eclipseFactor<=0 || eclipseFactor==1.))
@@ -3804,7 +3799,7 @@ void Planet::computeModelMatrix(Mat4d &result, bool solarEclipseCase) const
 	// Maybe SolarSystem::getSolarEclipseFactor() can be implemented without Planet::computeModelMatrix()
 	if (englishName==L1S("Moon") && !solarEclipseCase)
 	{
-		PlanetP sun=GETSTELMODULE(SolarSystem)->getSun();
+		static PlanetP sun=GETSTELMODULE(SolarSystem)->getSun();
 		// in our program we have no aberration push for the moon. We must take that info from the Sun's push instead
 		// It seems that a distance proportional to the distance lunarDistance/solarDistance may be the right way (?)
 		const double earthSunDistance=parent->eclipticPos.norm();
@@ -3821,7 +3816,7 @@ Planet::RenderData Planet::setCommonShaderUniforms(const StelPainter& painter, Q
 {
 	RenderData data;
 
-	const PlanetP sun = GETSTELMODULE(SolarSystem)->getSun();
+	static PlanetP sun = GETSTELMODULE(SolarSystem)->getSun();
 	const StelProjectorP& projector = painter.getProjector();
 
 	const Mat4f& m = projector->getProjectionMatrix();
@@ -3862,7 +3857,7 @@ Planet::RenderData Planet::setCommonShaderUniforms(const StelPainter& painter, Q
 	projector->getModelViewTransform()->backward(data.eyePos);
 	data.eyePos.normalize();
 	//qDebug() << " -->" << eyePos[0] << " " << eyePos[1] << " " << eyePos[2];
-	LandscapeMgr* lmgr=GETSTELMODULE(LandscapeMgr);
+	static LandscapeMgr* lmgr=GETSTELMODULE(LandscapeMgr);
 	Q_ASSERT(lmgr);
 
 	GL(shader->setUniformValue(shaderVars.projectionMatrix, qMat));
@@ -3951,7 +3946,7 @@ void Planet::drawSphere(StelPainter* painter, float screenRd, bool drawOnlyRing)
 		painter->getProjector()->project(p, *(reinterpret_cast<Vec3f*>(projectedVertexArr.data()+i*3)));
 	}
 	
-	const SolarSystem* ssm = GETSTELMODULE(SolarSystem);
+	static SolarSystem* ssm = GETSTELMODULE(SolarSystem);
 
 	//cancel out if shaders are invalid
 	if(shaderError)
@@ -4218,7 +4213,7 @@ void Planet::drawSphere(StelPainter* painter, float screenRd, bool drawOnlyRing)
 void Planet::drawSurvey(StelCore* core, StelPainter* painter)
 {
 	if (!Planet::initShader()) return;
-	const SolarSystem* ssm = GETSTELMODULE(SolarSystem);
+	static SolarSystem* ssm = GETSTELMODULE(SolarSystem);
 
 	painter->setDepthMask(true);
 	painter->setDepthTest(true);
@@ -4438,7 +4433,7 @@ bool Planet::drawObjModel(StelPainter *painter, float screenRd)
 		return false;
 	}
 
-	const SolarSystem* ssm = GETSTELMODULE(SolarSystem);
+	static SolarSystem* ssm = GETSTELMODULE(SolarSystem);
 
 	QMatrix4x4 shadowMatrix;
 	bool shadowmapping = false;
@@ -4728,39 +4723,49 @@ Ring::Ring(float radiusMin, float radiusMax, const QString &texname)
 
 Vec3f Planet::getCurrentOrbitColor() const
 {
+	static const QMap<Planet::PlanetType, Vec3f> typeColorMap = {
+		{ isMoon,         orbitMoonsColor       },
+		{ isPlanet,       orbitMajorPlanetsColor},
+		{ isAsteroid,     orbitMinorPlanetsColor},
+		{ isDwarfPlanet,  orbitDwarfPlanetsColor},
+		{ isCubewano,     orbitCubewanosColor   },
+		{ isPlutino,      orbitPlutinosColor    },
+		{ isSDO,          orbitScatteredDiscObjectsColor},
+		{ isOCO,          orbitOortCloudObjectsColor},
+		{ isComet,        orbitCometsColor      },
+		{ isSednoid,      orbitSednoidsColor    },
+		{ isInterstellar, orbitInterstellarColor}};
+	static const QMap<QString, Vec3f>majorPlanetColorMap = {
+		{ "mercury", orbitMercuryColor},
+		{ "venus",   orbitVenusColor  },
+		{ "earth",   orbitEarthColor  },
+		{ "mars",    orbitMarsColor   },
+		{ "jupiter", orbitJupiterColor},
+		{ "saturn",  orbitSaturnColor },
+		{ "uranus",  orbitUranusColor },
+		{ "neptune", orbitNeptuneColor}};
+
 	Vec3f orbColor = orbitColor;
 	switch(orbitColorStyle)
 	{
 		case ocsGroups:
 		{
-			const QMap<Planet::PlanetType, Vec3f> typeColorMap = {
-				{ isMoon,         orbitMoonsColor       },
-				{ isPlanet,       orbitMajorPlanetsColor},
-				{ isAsteroid,     orbitMinorPlanetsColor},
-				{ isDwarfPlanet,  orbitDwarfPlanetsColor},
-				{ isCubewano,     orbitCubewanosColor   },
-				{ isPlutino,      orbitPlutinosColor    },
-				{ isSDO,          orbitScatteredDiscObjectsColor},
-				{ isOCO,          orbitOortCloudObjectsColor},
-				{ isComet,        orbitCometsColor      },
-				{ isSednoid,      orbitSednoidsColor    },
-				{ isInterstellar, orbitInterstellarColor}};
 			orbColor = typeColorMap.value(pType, orbitColor);
 			break;
 		}
 		case ocsMajorPlanets:
 		{
 			const QString pName = getEnglishName().toLower();
-			const QMap<QString, Vec3f>majorPlanetColorMap = {
-				{ "mercury", orbitMercuryColor},
-				{ "venus",   orbitVenusColor  },
-				{ "earth",   orbitEarthColor  },
-				{ "mars",    orbitMarsColor   },
-				{ "jupiter", orbitJupiterColor},
-				{ "saturn",  orbitSaturnColor },
-				{ "uranus",  orbitUranusColor },
-				{ "neptune", orbitNeptuneColor}};
 			orbColor=majorPlanetColorMap.value(pName, orbitColor);
+			break;
+		}
+		case ocsMajorPlanetsMinorTypes:
+		{
+			const QString pName = getEnglishName().toLower();
+			if (majorPlanetColorMap.contains(pName))
+				orbColor=majorPlanetColorMap.value(pName, orbitColor);
+			else
+				orbColor = typeColorMap.value(pType, orbitColor);
 			break;
 		}
 		case ocsOneColor:

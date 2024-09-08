@@ -178,9 +178,12 @@ void ZodiacalLight::update(double deltaTime)
 
 		if (core->getCurrentLocation().planetName=="Earth")
 		{
-			double eclJDE = GETSTELMODULE(SolarSystem)->getEarth()->getRotObliquity(core->getJDE());
+			static SolarSystem *ss=GETSTELMODULE(SolarSystem);
+			static PlanetP earth=ss->getEarth();
+			static PlanetP sun=ss->getSun();
+			double eclJDE = earth->getRotObliquity(core->getJDE());
 			double ra_equ, dec_equ, betaJDE;
-			StelUtils::rectToSphe(&ra_equ,&dec_equ,GETSTELMODULE(SolarSystem)->getSun()->getEquinoxEquatorialPos(core));
+			StelUtils::rectToSphe(&ra_equ,&dec_equ,sun->getEquinoxEquatorialPos(core));
 			StelUtils::equToEcl(ra_equ, dec_equ, eclJDE, &lambdaSun, &betaJDE);
 			lambdaSun+= M_PI*0.5;
 		}
@@ -330,7 +333,8 @@ void main(void)
 	// Test for light pollution, return if too bad.
 	if ( (drawer->getFlagHasAtmosphere()) && (bortle > 5) ) return;
 
-	float atmFadeIntensity = GETSTELMODULE(LandscapeMgr)->getAtmosphereFadeIntensity();
+	static LandscapeMgr *lMgr=GETSTELMODULE(LandscapeMgr);
+	const float atmFadeIntensity = lMgr->getAtmosphereFadeIntensity();
 	const float nelm = StelCore::luminanceToNELM(drawer->getLightPollutionLuminance());
 	const float bortleIntensity = 1.f+(15.5f-2*nelm)*atmFadeIntensity; // smoothed Bortle index moderated by atmosphere fader.
 
@@ -355,11 +359,11 @@ void main(void)
 	c*=aLum*static_cast<float>(intensity*intensityFovScale);
 
 	// Better: adapt brightness by atmospheric brightness
-	const float atmLum = GETSTELMODULE(LandscapeMgr)->getAtmosphereAverageLuminance();
+	const float atmLum = lMgr->getAtmosphereAverageLuminance();
 	if (atmLum>0.05f) return; // Approximate values for Preetham: 10cd/m^2 at sunset, 3.3 at civil twilight (sun at -6deg). 0.0145 sun at -12, 0.0004 sun at -18,  0.01 at Full Moon!?
 	// The atmLum of Bruneton's model is about 1/2 higher than that of Preetham/Schaefer. We must rebalance that!
 	float atmFactor=20.0f;
-	if (GETSTELMODULE(LandscapeMgr)->getAtmosphereModel()=="showmysky")
+	if (lMgr->getAtmosphereModel()=="showmysky")
 		atmFactor=20.0f*(0.05f-0.2f*atmLum); // The factor 0.2f was found empirically. Nominally it should be 0.667, but 0.2 or at least 0.4 looks better.
 	else
 		atmFactor=20.0f*(0.05f-atmLum);
