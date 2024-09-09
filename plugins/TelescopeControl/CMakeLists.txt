@@ -1,7 +1,6 @@
-SET(TELESCOPE_CONTROL_MAJOR "0")
-SET(TELESCOPE_CONTROL_MINOR "4")
-SET(TELESCOPE_CONTROL_PATCH "2")
-SET(TELESCOPE_CONTROL_VERSION "${TELESCOPE_CONTROL_MAJOR}.${TELESCOPE_CONTROL_MINOR}.${TELESCOPE_CONTROL_PATCH}")
+# This is the cmake config file for the Telescope Control plugin
+# Further: Use program version number. (Static plugin, why bother?)
+SET(TELESCOPE_CONTROL_VERSION "${VERSION}")
 
 #SET(TELESCOPE_SERVERS_SOURCE_DIR "$ENV{STELROOT}/../telescope_server/src"
 #	CACHE PATH "Should point to the /src/ directory where the stellarium telescope servers source tree is located")

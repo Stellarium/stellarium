@@ -1,7 +1,6 @@
-SET(MSP_MAJOR "0")
-SET(MSP_MINOR "1")
-SET(MSP_PATCH "1")
-SET(MSP_VERSION "${MSP_MAJOR}.${MSP_MINOR}.${MSP_PATCH}")
+# This is the cmake config file for the Missing Stars plugin
+# Further: Use program version number. (Static plugin, why bother?)
+SET(MSP_VERSION "${VERSION}")
 
 ADD_DEFINITIONS(-DMISSINGSTARS_PLUGIN_VERSION="${MSP_VERSION}")
 ADD_DEFINITIONS(-DMISSINGSTARS_PLUGIN_LICENSE="GNU GPLv2 or later")
