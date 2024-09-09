@@ -1,3 +1,4 @@
+# This is the cmake config file for the Text User Interface plugin
 # Further: Use program version number. (Static plugin, why bother?)
 SET(TEXT_USER_INTERFACE_VERSION "${VERSION}")
 
