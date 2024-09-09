@@ -870,7 +870,7 @@ void Satellites::loadSettings()
 	Satellite::orbitLineThickness = conf->value("orbit_line_thickness", 1).toInt();
 	setInvisibleSatelliteColor(Vec3f(conf->value("invisible_satellite_color", "0.2,0.2,0.2").toString()));
 	setTransitSatelliteColor(Vec3f(conf->value("transit_satellite_color", "0.0,0.0,0.0").toString()));
-	Satellite::timeRateLimit = conf->value("time_rate_limit", 1.0).toDouble();
+	Satellite::timeRateLimit = conf->value("time_rate_limit", 0.1).toDouble();
 	Satellite::tleEpochAge = conf->value("valid_epoch_age", 30).toInt();
 
 	// umbra/penumbra

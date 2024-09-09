@@ -1,7 +1,6 @@
-SET(SNE_MAJOR "0")
-SET(SNE_MINOR "2")
-SET(SNE_PATCH "23")
-SET(SNE_VERSION "${SNE_MAJOR}.${SNE_MINOR}.${SNE_PATCH}")
+# This is the cmake config file for the Historical Supernovae plugin
+# Further: Use program version number. (Static plugin, why bother?)
+SET(SNE_VERSION "${VERSION}")
 
 ADD_DEFINITIONS(-DSUPERNOVAE_PLUGIN_VERSION="${SNE_VERSION}")
 ADD_DEFINITIONS(-DSUPERNOVAE_PLUGIN_LICENSE="GNU GPLv2 or later")

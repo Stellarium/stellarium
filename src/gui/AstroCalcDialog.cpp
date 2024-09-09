@@ -2166,7 +2166,7 @@ void AstroCalcDialog::generateRTS()
 			for (int i = 0; i <= elements; i++)
 			{
 				JD = startJD + i * currentStep;
-				JDn = JD +.5 - core->getUTCOffset(JD) / 24.; // JD at noon of local date
+				JDn = JD +.5 - core->getUTCOffset(JD)*StelCore::JD_HOUR; // JD at noon of local date
 				core->setJD(JDn); // start the calculation 
 				core->update(0); // force update to get new coordinates
 				Vec4d rts = selectedObject->getRTSTime(core);
@@ -2192,7 +2192,7 @@ void AstroCalcDialog::generateRTS()
 				magStr = (magnitude > 50.f || selectedObject->getEnglishName().contains("marker", Qt::CaseInsensitive)? dash : QString::number(magnitude, 'f', 2));
 
 				int year, month, day, currentdate;
-				const double utcShift = core->getUTCOffset(rts[1]) / 24.;
+				const double utcShift = core->getUTCOffset(rts[1])*StelCore::JD_HOUR;
 				StelUtils::getDateFromJulianDay(JDn+utcShift, &year, &month, &currentdate);
 				StelUtils::getDateFromJulianDay(rts[1]+utcShift, &year, &month, &day);
 
@@ -2206,18 +2206,18 @@ void AstroCalcDialog::generateRTS()
 				}
 				else
 				{
-					transitStr = QString("%1 %2").arg(localeMgr->getPrintableDateLocal(JD), localeMgr->getPrintableTimeLocal(JD));
+					transitStr = QString("%1 %2").arg(localeMgr->getPrintableDateLocal(JD), StelUtils::getHoursMinutesFromJulianDay(JD+utcShift));
 				}
 
 				if (rts[3]==30 || rts[3]<0 || rts[3]>50) // no rise time
 					riseStr = dash;
 				else
-					riseStr = QString("%1 %2").arg(localeMgr->getPrintableDateLocal(rts[0]), localeMgr->getPrintableTimeLocal(rts[0]));
+					riseStr = QString("%1 %2").arg(localeMgr->getPrintableDateLocal(rts[0]), StelUtils::getHoursMinutesFromJulianDay(rts[0]+utcShift));
 
 				if (rts[3]==40 || rts[3]<0 || rts[3]>50) // no set time
 					setStr = dash;
 				else
-					setStr = QString("%1 %2").arg(localeMgr->getPrintableDateLocal(rts[2]), localeMgr->getPrintableTimeLocal(rts[2]));
+					setStr = QString("%1 %2").arg(localeMgr->getPrintableDateLocal(rts[2]), StelUtils::getHoursMinutesFromJulianDay(rts[2]+utcShift));
 
 				ACRTSTreeWidgetItem* treeItem = new ACRTSTreeWidgetItem(ui->rtsTreeWidget);
 				treeItem->setText(RTSCOName, name);
@@ -5894,7 +5894,8 @@ void AstroCalcDialog::fillPhenomenaTableVis(const QString &phenomenType, double 
 	ACPhenTreeWidgetItem* treeItem = new ACPhenTreeWidgetItem(ui->phenomenaTreeWidget);
 	treeItem->setText(PhenomenaType, phenomenType);
 	// local date and time
-	treeItem->setText(PhenomenaDate, QString("%1 %2").arg(localeMgr->getPrintableDateLocal(JD), localeMgr->getPrintableTimeLocal(JD)));
+	const double shift = core->getUTCOffset(JD)*StelCore::JD_HOUR;
+	treeItem->setText(PhenomenaDate, QString("%1 %2").arg(localeMgr->getPrintableDateLocal(JD), StelUtils::getHoursMinutesFromJulianDay(JD+shift)));
 	treeItem->setData(PhenomenaDate, Qt::UserRole, JD);
 	treeItem->setText(PhenomenaObject1, firstObjectName);
 	treeItem->setText(PhenomenaMagnitude1, (firstObjectMagnitude > 90.f ? dash : QString::number(firstObjectMagnitude, 'f', 2)));
