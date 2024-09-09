@@ -1294,6 +1294,23 @@ bool getDateTimeFromISO8601String(const QString& iso8601Date, int* y, int* m, in
 	return false;
 }
 
+QString getHoursMinutesFromJulianDay(const double julianDay)
+{
+	int hr, min, sec, millis;
+	getTimeFromJulianDay(julianDay, &hr, &min, &sec, &millis);
+	int m = qRound(min + sec/60.);
+	if (m==60)
+	{
+		hr += 1;
+		m = 0;
+	}
+	if (hr>=24)
+	{
+		hr -= 24;
+	}
+	return QString("%1:%2").arg(hr, 2, 10, QChar('0')).arg(m, 2, 10, QChar('0'));
+}
+
 QString hoursToHmsStr(const double hours, const bool lowprecision)
 {
 	int h = static_cast<int>(hours);

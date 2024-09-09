@@ -586,6 +586,9 @@ namespace StelUtils
 	QString hoursToHmsStr(const double hours, const bool lowprecision = false);
 	QString hoursToHmsStr(const float hours, const bool lowprecision = false);
 
+	//! Convert JD to hours and minutes
+	QString getHoursMinutesFromJulianDay(const double julianDay);
+
 	//! Convert a hms formatted string to decimal hours
 	double hmsStrToHours(const QString& s);
 
