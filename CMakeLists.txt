@@ -353,13 +353,18 @@ ENDIF()
 IF("${CMAKE_CXX_COMPILER_ID}" MATCHES "Clang")
      # using regular Clang or AppleClang
      SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Woverloaded-virtual -Wno-unused-private-field -Wno-uninitialized -Wno-tautological-constant-out-of-range-compare")
-     # The cosmetic fix for Clang 3.4
+     # The cosmetic fix for Clang 3.4+
      IF(${CMAKE_CXX_COMPILER_VERSION} VERSION_GREATER 3.3)
           SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-unused-const-variable -Wno-unused-result")
      ENDIF()
+     # The cosmetic fix for Clang 3.5+
+     IF(${CMAKE_CXX_COMPILER_VERSION} VERSION_GREATER 3.4)
+          SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wno-string-plus-int")
+	  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-string-plus-int")
+     ENDIF()
      IF(APPLE)
-	  SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fno-common -Wall -Wextra -Wno-unused-parameter -Wno-string-plus-int")
-	  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-common -Wall -Wextra -Wno-unknown-warning-option -Wno-string-plus-int")
+	  SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fno-common -Wall -Wextra -Wno-unused-parameter")
+	  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-common -Wall -Wextra -Wno-unknown-warning-option")
      ENDIF()
 ENDIF()
 
