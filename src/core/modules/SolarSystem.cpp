@@ -1561,7 +1561,7 @@ void SolarSystem::computePositions(StelCore *core, double dateJDE, PlanetP obser
 			// aberration in the way described in Explanatory Supplement (2013), 7.55.  For reasons unknown (See
 			// discussion in GH:#1626) we do not add anything for the Moon when observed from Earth!  Presumably the
 			// used ephemerides already provide aberration-corrected positions for the Moon?
-			auto planetPos = p->getHeliocentricEclipticPos();
+			Vec3d planetPos = p->getHeliocentricEclipticPos();
 			double lightTimeDays = (planetPos-obsPosJDE).norm() * (AU / (SPEED_OF_LIGHT * 86400.));
 			const bool needToApplyAberration = withAberration && (!observerIsEarth || p != getMoon());
 			Vec3d aberrationPush(0.);
@@ -1599,7 +1599,7 @@ void SolarSystem::computePositions(StelCore *core, double dateJDE, PlanetP obser
 		const Vec3d observerPosFinal = observerPlanet->getHeliocentricEclipticPos();
 
 		// Threadable loop function for self-set number of additional worker threads
-		const auto loop = [&planets=systemPlanets,processPlanet,
+		const auto loop = [&planets=std::as_const(systemPlanets),processPlanet,
 				   observerPosFinal](const int indexMin, const int indexMax)
 		{
 			for(int i = indexMin; i <= indexMax; ++i)
