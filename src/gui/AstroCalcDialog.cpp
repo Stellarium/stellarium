@@ -1936,7 +1936,6 @@ void AstroCalcDialog::generateEphemeris()
 	StelUtils::getJDFromDate(&firstJD, ui->dateFromYearSpinBox->value(), ui->dateFromMonthSpinBox->value(), ui->dateFromDaySpinBox->value(), ui->dateFromHourSpinBox->value(), ui->dateFromMinuteSpinBox->value(), 0.0);
 	firstJD -= core->getUTCOffset(firstJD) / 24.;
 	double secondJD = firstJD + ui->dateToDurationSpinBox->value()*getEphemerisTimeDuration();
-	secondJD -= core->getUTCOffset(secondJD) / 24.;
 
 	const int elements = static_cast<int>((secondJD - firstJD) / currentStep);
 	EphemerisList.clear();
