@@ -1838,39 +1838,20 @@ void AstroCalcDialog::reGenerateEphemeris(bool withSelection)
 		initListEphemeris(); // Just update headers
 }
 
-void AstroCalcDialog::generateEphemeris()
+double AstroCalcDialog::getEphemerisTimeStep(const PlanetP &planet)
 {
-	const QString currentPlanet = ui->celestialBodyComboBox->currentData(Qt::UserRole).toString();
-	const QString secondaryPlanet = ui->secondaryCelestialBodyComboBox->currentData(Qt::UserRole).toString();
-	const QString distanceInfo = (core->getUseTopocentricCoordinates() ? q_("Topocentric distance") : q_("Planetocentric distance"));
-	const QString distanceUM = qc_("AU", "distance, astronomical unit");
-	QString englishName, nameI18n, elongStr = "", phaseStr = "";
-	const bool useHorizontalCoords = ui->ephemerisHorizontalCoordinatesCheckBox->isChecked();
-	const bool ignoreDateTest = ui->ephemerisIgnoreDateTestCheckBox->isChecked();
-	const bool useSouthAzimuth = StelApp::getInstance().getFlagSouthAzimuthUsage();
-	const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
-
-	DisplayedPositionIndex = -1; // deselect an ephemeris marker
-	initListEphemeris();
-
-	if (currentPlanet.isEmpty()) // avoid crash
-		return;
-
-	int idxRow = 0, colorIndex = 0;
 	double solarDay = 1.0, siderealDay = 1.0, siderealYear = 365.256363004; // days
-	const PlanetP& cplanet = core->getCurrentPlanet();
-	const PlanetP& sun = solarSystem->getSun();
-	if (!cplanet->getEnglishName().contains("observer", Qt::CaseInsensitive))
+	if (planet->getPlanetType()!=Planet::isObserver)
 	{
-		if (cplanet==solarSystem->getEarth())
+		if (planet==solarSystem->getEarth())
 			solarDay = 1.0; // Special case: OK, it's Earth, let's use standard duration of the solar day
 		else
-			solarDay = cplanet->getMeanSolarDay();
-		siderealDay = cplanet->getSiderealDay();
-		siderealYear = cplanet->getSiderealPeriod();
+			solarDay = planet->getMeanSolarDay();
+		siderealDay = planet->getSiderealDay();
+		siderealYear = planet->getSiderealPeriod();
 	}
 	const QMap<int, double>timeStepMap = {
-		{ 0, getCustomTimeStep() },		// custom time step
+		{ 0, getCustomTimeStep() },	 // custom time step
 		{ 1, 10. * StelCore::JD_MINUTE },
 		{ 2, 30. * StelCore::JD_MINUTE },
 		{ 3, StelCore::JD_HOUR },
@@ -1912,8 +1893,11 @@ void AstroCalcDialog::generateEphemeris()
 		{39, 3. * siderealDay },
 		{40, 3. * solarDay }
 	};
-	double currentStep = timeStepMap.value(ui->ephemerisStepComboBox->currentData().toInt(), solarDay);
+	return timeStepMap.value(ui->ephemerisStepComboBox->currentData().toInt(), solarDay);
+}
 
+double AstroCalcDialog::getEphemerisTimeDuration()
+{
 	const QMap<int, double>timeUnitMap = {
 		{ 1, StelCore::JD_MINUTE },
 		{ 2, StelCore::JD_HOUR },
@@ -1922,13 +1906,36 @@ void AstroCalcDialog::generateEphemeris()
 		{ 5, 30.4375 }, // month = 1/12 of year in days
 		{ 6, 365.25 }	// year
 	};
-	double currentUnit = timeUnitMap.value(ui->dateToUnitsComboBox->currentData().toInt(), 30.4375);
+	return timeUnitMap.value(ui->dateToUnitsComboBox->currentData().toInt(), 30.4375);
+}
 
+void AstroCalcDialog::generateEphemeris()
+{
+	const QString currentPlanet = ui->celestialBodyComboBox->currentData(Qt::UserRole).toString();
+	const QString secondaryPlanet = ui->secondaryCelestialBodyComboBox->currentData(Qt::UserRole).toString();
+	const QString distanceInfo = (core->getUseTopocentricCoordinates() ? q_("Topocentric distance") : q_("Planetocentric distance"));
+	const QString distanceUM = qc_("AU", "distance, astronomical unit");
+	QString englishName, nameI18n, elongStr = "", phaseStr = "";
+	const bool useHorizontalCoords = ui->ephemerisHorizontalCoordinatesCheckBox->isChecked();
+	const bool ignoreDateTest = ui->ephemerisIgnoreDateTestCheckBox->isChecked();
+	const bool useSouthAzimuth = StelApp::getInstance().getFlagSouthAzimuthUsage();
+	const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
+
+	DisplayedPositionIndex = -1; // deselect an ephemeris marker
+	initListEphemeris();
+
+	if (currentPlanet.isEmpty()) // avoid crash
+		return;
+
+	int idxRow = 0, colorIndex = 0;
+	const PlanetP& cplanet = core->getCurrentPlanet();
+	const PlanetP& sun = solarSystem->getSun();
+	const double currentStep = getEphemerisTimeStep(cplanet);
 	const double currentJD = core->getJD(); // save current JD
 	double firstJD;
 	StelUtils::getJDFromDate(&firstJD, ui->dateFromYearSpinBox->value(), ui->dateFromMonthSpinBox->value(), ui->dateFromDaySpinBox->value(), ui->dateFromHourSpinBox->value(), ui->dateFromMinuteSpinBox->value(), 0.0);
 	firstJD -= core->getUTCOffset(firstJD) / 24.;
-	double secondJD = firstJD + ui->dateToDurationSpinBox->value()*currentUnit;
+	double secondJD = firstJD + ui->dateToDurationSpinBox->value()*getEphemerisTimeDuration();
 	secondJD -= core->getUTCOffset(secondJD) / 24.;
 
 	const int elements = static_cast<int>((secondJD - firstJD) / currentStep);
