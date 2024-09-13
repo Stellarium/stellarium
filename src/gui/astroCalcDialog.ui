@@ -819,31 +819,76 @@
                </widget>
               </item>
               <item>
-               <widget class="QDateTimeEdit" name="dateFromDateTimeEdit">
-                <property name="wrapping">
-                 <bool>true</bool>
+               <widget class="QSpinBox" name="dateFromYearSpinBox">
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                 </property>
-                <property name="displayFormat">
-                 <string notr="true">yyyy.MM.dd hh:mm:ss</string>
+                <property name="minimum">
+                 <number>-13000</number>
                 </property>
-                <property name="calendarPopup">
-                 <bool>true</bool>
+                <property name="maximum">
+                 <number>17000</number>
                 </property>
                </widget>
               </item>
               <item>
-               <widget class="QDoubleSpinBox" name="dateFromDoubleSpinBox">
+               <widget class="QSpinBox" name="dateFromMonthSpinBox">
+                <property name="toolTip">
+                 <string>Month</string>
+                </property>
                 <property name="alignment">
                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                 </property>
-                <property name="decimals">
-                 <number>5</number>
-                </property>
                 <property name="minimum">
-                 <double>-3027192.732689999975264</double>
+                 <number>1</number>
                 </property>
                 <property name="maximum">
-                 <double>7930547.208320000208914</double>
+                 <number>12</number>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QSpinBox" name="dateFromDaySpinBox">
+                <property name="toolTip">
+                 <string>Day</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+                <property name="minimum">
+                 <number>1</number>
+                </property>
+                <property name="maximum">
+                 <number>31</number>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QSpinBox" name="dateFromHourSpinBox">
+                <property name="toolTip">
+                 <string>Hours</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+                <property name="minimum">
+                 <number>0</number>
+                </property>
+                <property name="maximum">
+                 <number>23</number>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QSpinBox" name="dateFromMinuteSpinBox">
+                <property name="toolTip">
+                 <string>Minutes</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+                <property name="maximum">
+                 <number>59</number>
                 </property>
                </widget>
               </item>
@@ -869,50 +914,27 @@
               <item>
                <widget class="QLabel" name="dateToLabel">
                 <property name="text">
-                 <string>To:</string>
+                 <string>to the next</string>
                 </property>
                </widget>
               </item>
               <item>
-               <widget class="QDateTimeEdit" name="dateToDateTimeEdit">
-                <property name="wrapping">
-                 <bool>true</bool>
-                </property>
-                <property name="displayFormat">
-                 <string notr="true">yyyy.MM.dd hh:mm:ss</string>
-                </property>
-                <property name="calendarPopup">
-                 <bool>true</bool>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QDoubleSpinBox" name="dateToDoubleSpinBox">
+               <widget class="QSpinBox" name="dateToDurationSpinBox">
                 <property name="alignment">
                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                 </property>
-                <property name="decimals">
-                 <number>5</number>
-                </property>
                 <property name="minimum">
-                 <double>-3027192.732689999975264</double>
+                 <number>1</number>
                 </property>
                 <property name="maximum">
-                 <double>7930547.208320000208914</double>
+                 <number>100</number>
                 </property>
                </widget>
               </item>
+              <item>
+               <widget class="QComboBox" name="dateToUnitsComboBox"/>
+              </item>
              </layout>
-            </item>
-            <item>
-             <widget class="QCheckBox" name="wrdCheckBox">
-              <property name="toolTip">
-               <string>Using a wide range of dates</string>
-              </property>
-              <property name="text">
-               <string extracomment="W.R.D. = wide range of dates">W.R.D.</string>
-              </property>
-             </widget>
             </item>
             <item>
              <spacer name="horizontalSpacer_8">
