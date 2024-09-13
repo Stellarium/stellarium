@@ -319,6 +319,8 @@ void AstroCalcDialog::createDialogContent()
 	connect(ui->pushButtonNow, SIGNAL(clicked()), this, SLOT(setDateTimeNow()));
 	connect(ui->dateFromYearSpinBox, SIGNAL(valueChanged(int)), this, SLOT(setMonthDuration()));
 	connect(ui->dateFromMonthSpinBox, SIGNAL(valueChanged(int)), this, SLOT(setMonthDuration()));
+	ui->dateToDurationSpinBox->setValue(conf->value("astrocalc/ephemeris_time_duration", 1).toInt());
+	connect(ui->dateToDurationSpinBox, SIGNAL(valueChanged(int)), this, SLOT(saveEphemerisTimeDuration(int)));
 
 	ui->genericMarkerColor->setup("SolarSystem.ephemerisGenericMarkerColor", "color/ephemeris_generic_marker_color");
 	ui->secondaryMarkerColor->setup("SolarSystem.ephemerisSecondaryMarkerColor", "color/ephemeris_secondary_marker_color");
@@ -4861,6 +4863,11 @@ void AstroCalcDialog::saveEphemerisTimeUnit(int index)
 	Q_ASSERT(ui->dateToUnitsComboBox);
 	QComboBox* units = ui->dateToUnitsComboBox;
 	conf->setValue("astrocalc/ephemeris_time_unit", units->itemData(index).toInt());
+}
+
+void AstroCalcDialog::saveEphemerisTimeDuration(int duration)
+{
+	conf->setValue("astrocalc/ephemeris_time_duration", duration);
 }
 
 void AstroCalcDialog::initEphemerisFlagNakedEyePlanets(void)

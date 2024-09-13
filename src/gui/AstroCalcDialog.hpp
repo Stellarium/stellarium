@@ -361,6 +361,7 @@ private slots:
 	void saveEphemerisSecondaryCelestialBody(int index);
 	void saveEphemerisTimeStep(int index);
 	void saveEphemerisTimeUnit(int index);
+	void saveEphemerisTimeDuration(int duration);
 	void initEphemerisFlagNakedEyePlanets(void);
 	void saveEphemerisFlagNakedEyePlanets(bool flag);
 	void setMonthDuration();
