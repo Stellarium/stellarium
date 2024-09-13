@@ -163,6 +163,7 @@ void AstroCalcDialog::retranslate()
 		populateCelestialCategoryList();
 		populateEphemerisTimeUnitsList();
 		populateEphemerisTimeStepsList();
+		populateEphemerisTimeDurationTooltip();
 		populatePlanetList();
 		populateGroupCelestialBodyList();
 		currentCelestialPositions();
@@ -219,6 +220,7 @@ void AstroCalcDialog::createDialogContent()
 	populateCelestialCategoryList();
 	populateEphemerisTimeUnitsList();
 	populateEphemerisTimeStepsList();
+	populateEphemerisTimeDurationTooltip();
 	setMonthDuration();
 	populatePlanetList();
 	populateGroupCelestialBodyList();
@@ -1909,6 +1911,19 @@ double AstroCalcDialog::getEphemerisTimeDuration()
 		{ 6, 365.25 }	// year
 	};
 	return timeUnitMap.value(ui->dateToUnitsComboBox->currentData().toInt(), 30.4375);
+}
+
+void AstroCalcDialog::populateEphemerisTimeDurationTooltip()
+{
+	const QMap<int, QString> timeTooltipMap = {
+		{ 1, q_("Duration in minutes") },
+		{ 2, q_("Duration in hours") },
+		{ 3, q_("Duration in days") },
+		{ 4, q_("Duration in weeks") },
+		{ 5, q_("Duration in months") },
+		{ 6, q_("Duration in years") }
+	};
+	ui->dateToDurationSpinBox->setToolTip(timeTooltipMap.value(ui->dateToUnitsComboBox->currentData().toInt(), q_("Duration in months")));
 }
 
 void AstroCalcDialog::generateEphemeris()
@@ -4863,6 +4878,7 @@ void AstroCalcDialog::saveEphemerisTimeUnit(int index)
 	Q_ASSERT(ui->dateToUnitsComboBox);
 	QComboBox* units = ui->dateToUnitsComboBox;
 	conf->setValue("astrocalc/ephemeris_time_unit", units->itemData(index).toInt());
+	populateEphemerisTimeDurationTooltip();
 }
 
 void AstroCalcDialog::saveEphemerisTimeDuration(int duration)
