@@ -4831,9 +4831,9 @@ void AstroCalcDialog::populateEphemerisTimeUnitsList()
 {
 	typedef QPair<QString, QString> itemPairs;
 	const QList<itemPairs> items = {
-		{qc_("minutes","unit measurement"), "1"}, {qc_("hours","unit measurement"), "2"},
-		{qc_("days","unit measurement"), "3"}, {qc_("weeks","unit measurement"), "4"},
-		{qc_("months","unit measurement"), "5"}, {qc_("years","unit measurement"), "6"}
+		{qc_("minutes", "time unit measurement"), "1"}, {qc_( "hours", "time unit measurement"), "2"},
+		{qc_(      "days", "time unit measurement"), "3"}, {qc_("weeks", "time unit measurement"), "4"},
+		{qc_( "months", "time unit measurement"), "5"}, {qc_( "years", "time unit measurement"), "6"}
 	};
 	Q_ASSERT(ui->dateToUnitsComboBox);
 	QComboBox* units = ui->dateToUnitsComboBox;

@@ -174,7 +174,7 @@ void ExoplanetsDialog::setColumnNames()
 	exoplanetsHeader << q_("Exoplanet");
 	exoplanetsHeader << QString("%1, M%2").arg(q_("Mass")).arg(QChar(0x2643));
 	exoplanetsHeader << QString("%1, R%2").arg(q_("Radius")).arg(QChar(0x2643));
-	exoplanetsHeader << QString("%1, %2").arg(q_("Period"),qc_("day","time period"));
+	exoplanetsHeader << QString("%1, %2").arg(q_("Period"),qc_("days", "time period"));
 	exoplanetsHeader << QString("a, %1").arg(qc_("AU", "distance, astronomical unit"));
 	exoplanetsHeader << QString("e");
 	exoplanetsHeader << QString("i, %1").arg(QChar(0x00B0));
