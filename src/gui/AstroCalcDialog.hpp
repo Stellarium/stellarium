@@ -360,8 +360,10 @@ private slots:
 	void saveEphemerisCelestialBody(int index);
 	void saveEphemerisSecondaryCelestialBody(int index);
 	void saveEphemerisTimeStep(int index);
+	void saveEphemerisTimeUnit(int index);
 	void initEphemerisFlagNakedEyePlanets(void);
 	void saveEphemerisFlagNakedEyePlanets(bool flag);
+	void setMonthDuration();
 
 	//! Calculating phenomena for selected celestial body and fill the list.
 	void calculatePhenomena();
@@ -546,6 +548,12 @@ private:
 	void populateCelestialBodyList();	
 	//! Populates the drop-down list of time steps.
 	void populateEphemerisTimeStepsList();
+	//! Populates the drop-down list of time units for Ephemeris tool.
+	void populateEphemerisTimeUnitsList();
+	//! Get time step for Ephemeris tool
+	double getEphemerisTimeStep(const PlanetP& planet);
+	//! Get time limit at right side for Ephemeris tool
+	double getEphemerisTimeDuration();
 	//! Populates the drop-down list of planets.
 	void populatePlanetList();
 	//! Prepare graph settings

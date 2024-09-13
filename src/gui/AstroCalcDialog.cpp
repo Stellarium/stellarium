@@ -161,6 +161,7 @@ void AstroCalcDialog::retranslate()
 		setTransitHeaderNames();
 		populateCelestialBodyList();
 		populateCelestialCategoryList();
+		populateEphemerisTimeUnitsList();
 		populateEphemerisTimeStepsList();
 		populatePlanetList();
 		populateGroupCelestialBodyList();
@@ -173,7 +174,7 @@ void AstroCalcDialog::retranslate()
 		drawLunarElongationGraph();
 		drawDistanceGraph();
 		drawXVsTimeGraphs();
-		populateTimeIntervalsList();
+		populateTimeIntervalsList();		
 		populateWutGroups();
 		// Hack to shrink the tabs to optimal size after language change
 		// by causing the list items to be laid out again.
@@ -216,7 +217,9 @@ void AstroCalcDialog::createDialogContent()
 	initListPhenomena();	
 	populateCelestialBodyList();
 	populateCelestialCategoryList();
+	populateEphemerisTimeUnitsList();
 	populateEphemerisTimeStepsList();
+	setMonthDuration();
 	populatePlanetList();
 	populateGroupCelestialBodyList();
 	// Altitude vs. Time feature
@@ -244,22 +247,19 @@ void AstroCalcDialog::createDialogContent()
 
 	populateMinMaxDateRange();
 	const double JD = core->getJD() + core->getUTCOffset(core->getJD()) / 24;
-	QDateTime currentDT = StelUtils::jdToQDateTime(JD, Qt::LocalTime);
-	ui->dateFromDateTimeEdit->setDateTime(currentDT);
-	ui->dateToDateTimeEdit->setDateTime(currentDT.addMonths(1));	
-	int year, month, day;
+	int year, month, day, hour, minute, second, ms;
 	StelUtils::getDateFromJulianDay(JD, &year, &month, &day);
+	StelUtils::getTimeFromJulianDay(JD, &hour, &minute, &second, &ms);
 	ui->phenomenFromYearSpinBox->setValue(year);
 	ui->phenomenFromMonthSpinBox->setValue(month);
 	ui->rtsFromYearSpinBox->setValue(year);
 	ui->rtsFromMonthSpinBox->setValue(month);
 	ui->eclipseFromYearSpinBox->setValue(year);
-
-	// TODO: Replace QDateTimeEdit by a new StelDateTimeEdit widget to apply full range of dates
-	// NOTE: https://github.com/Stellarium/stellarium/issues/711
-	const QDate minDate = QDate(1582, 10, 15); // QtDateTime's minimum date is 1.1.100AD, but appears to be always Gregorian.
-	ui->dateFromDateTimeEdit->setMinimumDate(minDate);
-	ui->dateToDateTimeEdit->setMinimumDate(minDate);	
+	ui->dateFromYearSpinBox->setValue(year);
+	ui->dateFromMonthSpinBox->setValue(month);
+	ui->dateFromDaySpinBox->setValue(day);
+	ui->dateFromHourSpinBox->setValue(hour);
+	ui->dateFromMinuteSpinBox->setValue(minute);
 
 	// bug #1350669 (https://bugs.launchpad.net/stellarium/+bug/1350669)
 	connect(ui->celestialPositionsTreeWidget, SIGNAL(currentItemChanged(QTreeWidgetItem*, QTreeWidgetItem*)), ui->celestialPositionsTreeWidget, SLOT(repaint()));
@@ -304,8 +304,8 @@ void AstroCalcDialog::createDialogContent()
 	initEphemerisFlagNakedEyePlanets();
 	enableEphemerisButtons(buttonState);
 	ui->ephemerisIgnoreDateTestCheckBox->setChecked(conf->value("astrocalc/flag_ephemeris_ignore_date_test", true).toBool());
-	connect(ui->ephemerisIgnoreDateTestCheckBox, SIGNAL(toggled(bool)), this, SLOT(saveIgnoreDateTestFlag(bool)));	
-	connect(ui->ephemerisHorizontalCoordinatesCheckBox, SIGNAL(toggled(bool)), this, SLOT(reGenerateEphemeris()));
+	connect(ui->ephemerisIgnoreDateTestCheckBox, SIGNAL(toggled(bool)), this, SLOT(saveIgnoreDateTestFlag(bool)));
+	connect(ui->ephemerisHorizontalCoordinatesCheckBox, SIGNAL(toggled(bool)), this, SLOT(reGenerateEphemeris()));	
 	connect(ui->allNakedEyePlanetsCheckBox, SIGNAL(toggled(bool)), this, SLOT(saveEphemerisFlagNakedEyePlanets(bool)));
 	connect(ui->ephemerisPushButton, SIGNAL(clicked()), this, SLOT(generateEphemeris()));
 	connect(ui->ephemerisCleanupButton, SIGNAL(clicked()), this, SLOT(cleanupEphemeris()));
@@ -313,9 +313,12 @@ void AstroCalcDialog::createDialogContent()
 	connect(ui->ephemerisTreeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentEphemeride(QModelIndex)));	
 	connect(ui->ephemerisTreeWidget, SIGNAL(itemSelectionChanged()), this, SLOT(onChangedEphemerisPosition()));
 	connect(ui->ephemerisStepComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(saveEphemerisTimeStep(int)));
+	connect(ui->dateToUnitsComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(saveEphemerisTimeUnit(int)));
 	connect(ui->celestialBodyComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(saveEphemerisCelestialBody(int)));
 	connect(ui->secondaryCelestialBodyComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(saveEphemerisSecondaryCelestialBody(int)));
 	connect(ui->pushButtonNow, SIGNAL(clicked()), this, SLOT(setDateTimeNow()));
+	connect(ui->dateFromYearSpinBox, SIGNAL(valueChanged(int)), this, SLOT(setMonthDuration()));
+	connect(ui->dateFromMonthSpinBox, SIGNAL(valueChanged(int)), this, SLOT(setMonthDuration()));
 
 	ui->genericMarkerColor->setup("SolarSystem.ephemerisGenericMarkerColor", "color/ephemeris_generic_marker_color");
 	ui->secondaryMarkerColor->setup("SolarSystem.ephemerisSecondaryMarkerColor", "color/ephemeris_secondary_marker_color");
@@ -587,9 +590,7 @@ void AstroCalcDialog::createDialogContent()
 
 void AstroCalcDialog::populateToolTips()
 {
-	QString validDates = QString("%1 1582/10/15 - 9999/12/31").arg(q_("Gregorian dates. Valid range:"));
-	ui->dateFromDateTimeEdit->setToolTip(validDates);
-	ui->dateToDateTimeEdit->setToolTip(validDates);
+	ui->dateFromYearSpinBox->setToolTip(QString("%1 %2..%3").arg(q_("Valid range years:"), QString::number(ui->dateFromYearSpinBox->minimum()), QString::number(ui->dateFromYearSpinBox->maximum())));
 	ui->phenomenFromYearSpinBox->setToolTip(QString("%1 %2..%3").arg(q_("Valid range years:"), QString::number(ui->phenomenFromYearSpinBox->minimum()), QString::number(ui->phenomenFromYearSpinBox->maximum())));
 	ui->rtsFromYearSpinBox->setToolTip(QString("%1 %2..%3").arg(q_("Valid range years:"), QString::number(ui->rtsFromYearSpinBox->minimum()), QString::number(ui->rtsFromYearSpinBox->maximum())));
 	ui->eclipseFromYearSpinBox->setToolTip(QString("%1 %2..%3").arg(q_("Valid range years:"), QString::number(ui->eclipseFromYearSpinBox->minimum()), QString::number(ui->eclipseFromYearSpinBox->maximum())));
@@ -607,6 +608,8 @@ void AstroCalcDialog::populateMinMaxDateRange()
 	ui->rtsFromYearSpinBox->setMaximum(mm.second);
 	ui->eclipseFromYearSpinBox->setMinimum(mm.first);
 	ui->eclipseFromYearSpinBox->setMaximum(mm.second);
+	ui->dateFromYearSpinBox->setMinimum(mm.first);
+	ui->dateFromYearSpinBox->setMaximum(mm.second);
 }
 
 void AstroCalcDialog::updateMinMaxDateRange()
@@ -1783,7 +1786,34 @@ void AstroCalcDialog::reGenerateEphemeris()
 void AstroCalcDialog::setDateTimeNow()
 {
 	const double JD = core->getJD() + core->getUTCOffset(core->getJD()) / 24;
-	ui->dateFromDateTimeEdit->setDateTime(StelUtils::jdToQDateTime(JD, Qt::LocalTime));
+	int year, month, day, hour, minute, second, ms;
+	StelUtils::getDateFromJulianDay(JD, &year, &month, &day);
+	StelUtils::getTimeFromJulianDay(JD, &hour, &minute, &second, &ms);
+	ui->dateFromYearSpinBox->setValue(year);
+	ui->dateFromMonthSpinBox->setValue(month);
+	ui->dateFromDaySpinBox->setValue(day);
+	ui->dateFromHourSpinBox->setValue(hour);
+	ui->dateFromMinuteSpinBox->setValue(minute);
+}
+
+void AstroCalcDialog::setMonthDuration()
+{
+	const int year  = ui->dateFromYearSpinBox->value();
+	const int month = ui->dateFromMonthSpinBox->value();
+	int maxday = 31;
+	switch (month)
+	{
+		case 2:
+			maxday = StelUtils::isLeapYear(year) ? 29 : 28;
+			break;
+		case 4:
+		case 6:
+		case 9:
+		case 11:
+			maxday = 30;
+			break;
+	}
+	ui->dateFromDaySpinBox->setMaximum(maxday);
 }
 
 void AstroCalcDialog::saveIgnoreDateTestFlag(bool b)
@@ -1808,39 +1838,20 @@ void AstroCalcDialog::reGenerateEphemeris(bool withSelection)
 		initListEphemeris(); // Just update headers
 }
 
-void AstroCalcDialog::generateEphemeris()
+double AstroCalcDialog::getEphemerisTimeStep(const PlanetP &planet)
 {
-	const QString currentPlanet = ui->celestialBodyComboBox->currentData(Qt::UserRole).toString();
-	const QString secondaryPlanet = ui->secondaryCelestialBodyComboBox->currentData(Qt::UserRole).toString();
-	const QString distanceInfo = (core->getUseTopocentricCoordinates() ? q_("Topocentric distance") : q_("Planetocentric distance"));
-	const QString distanceUM = qc_("AU", "distance, astronomical unit");
-	QString englishName, nameI18n, elongStr = "", phaseStr = "";
-	const bool useHorizontalCoords = ui->ephemerisHorizontalCoordinatesCheckBox->isChecked();
-	const bool ignoreDateTest = ui->ephemerisIgnoreDateTestCheckBox->isChecked();
-	const bool useSouthAzimuth = StelApp::getInstance().getFlagSouthAzimuthUsage();
-	const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
-
-	DisplayedPositionIndex = -1; // deselect an ephemeris marker
-	initListEphemeris();
-
-	if (currentPlanet.isEmpty()) // avoid crash
-		return;
-
-	int idxRow = 0, colorIndex = 0;
 	double solarDay = 1.0, siderealDay = 1.0, siderealYear = 365.256363004; // days
-	const PlanetP& cplanet = core->getCurrentPlanet();
-	const PlanetP& sun = solarSystem->getSun();
-	if (!cplanet->getEnglishName().contains("observer", Qt::CaseInsensitive))
+	if (planet->getPlanetType()!=Planet::isObserver)
 	{
-		if (cplanet==solarSystem->getEarth())
+		if (planet==solarSystem->getEarth())
 			solarDay = 1.0; // Special case: OK, it's Earth, let's use standard duration of the solar day
 		else
-			solarDay = cplanet->getMeanSolarDay();
-		siderealDay = cplanet->getSiderealDay();
-		siderealYear = cplanet->getSiderealPeriod();
+			solarDay = planet->getMeanSolarDay();
+		siderealDay = planet->getSiderealDay();
+		siderealYear = planet->getSiderealPeriod();
 	}
 	const QMap<int, double>timeStepMap = {
-		{ 0, getCustomTimeStep() },		// custom time step
+		{ 0, getCustomTimeStep() },	 // custom time step
 		{ 1, 10. * StelCore::JD_MINUTE },
 		{ 2, 30. * StelCore::JD_MINUTE },
 		{ 3, StelCore::JD_HOUR },
@@ -1868,13 +1879,13 @@ void AstroCalcDialog::generateEphemeris()
 		{25, 100. * siderealDay },
 		{26, 100. * StelCore::JD_DAY },
 		{27, siderealYear*solarDay },
-		{28, 365.25*solarDay },			// 1 Julian year
-		{29, 365.2568983*solarDay },		// 1 Gaussian year
+		{28, 365.25*solarDay },		// 1 Julian year
+		{29, 365.2568983*solarDay },	// 1 Gaussian year
 		{30, 29.530588853*solarDay },	// 1 synodic month
 		{31, 27.212220817*solarDay },	// 1 draconic month
 		{32, 27.321582241*solarDay },	// 1 mean tropical month
 		{33, 27.554549878*solarDay },	// 1 anomalistic month
-		{34, 365.259636*solarDay },		// 1 anomalistic year
+		{34, 365.259636*solarDay },	// 1 anomalistic year
 		{35, 6585.321314219*solarDay },	// 1 saros (223 synodic months)
 		{36, 500. * siderealDay },
 		{37, 500. * solarDay },
@@ -1882,17 +1893,49 @@ void AstroCalcDialog::generateEphemeris()
 		{39, 3. * siderealDay },
 		{40, 3. * solarDay }
 	};
-	double currentStep = timeStepMap.value(ui->ephemerisStepComboBox->currentData().toInt(), solarDay);
+	return timeStepMap.value(ui->ephemerisStepComboBox->currentData().toInt(), solarDay);
+}
 
+double AstroCalcDialog::getEphemerisTimeDuration()
+{
+	const QMap<int, double>timeUnitMap = {
+		{ 1, StelCore::JD_MINUTE },
+		{ 2, StelCore::JD_HOUR },
+		{ 3, StelCore::JD_DAY },
+		{ 4, 7.0 },
+		{ 5, 30.4375 }, // month = 1/12 of year in days
+		{ 6, 365.25 }	// year
+	};
+	return timeUnitMap.value(ui->dateToUnitsComboBox->currentData().toInt(), 30.4375);
+}
+
+void AstroCalcDialog::generateEphemeris()
+{
+	const QString currentPlanet = ui->celestialBodyComboBox->currentData(Qt::UserRole).toString();
+	const QString secondaryPlanet = ui->secondaryCelestialBodyComboBox->currentData(Qt::UserRole).toString();
+	const QString distanceInfo = (core->getUseTopocentricCoordinates() ? q_("Topocentric distance") : q_("Planetocentric distance"));
+	const QString distanceUM = qc_("AU", "distance, astronomical unit");
+	QString englishName, nameI18n, elongStr = "", phaseStr = "";
+	const bool useHorizontalCoords = ui->ephemerisHorizontalCoordinatesCheckBox->isChecked();
+	const bool ignoreDateTest = ui->ephemerisIgnoreDateTestCheckBox->isChecked();
+	const bool useSouthAzimuth = StelApp::getInstance().getFlagSouthAzimuthUsage();
+	const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
+
+	DisplayedPositionIndex = -1; // deselect an ephemeris marker
+	initListEphemeris();
+
+	if (currentPlanet.isEmpty()) // avoid crash
+		return;
+
+	int idxRow = 0, colorIndex = 0;
+	const PlanetP& cplanet = core->getCurrentPlanet();
+	const PlanetP& sun = solarSystem->getSun();
+	const double currentStep = getEphemerisTimeStep(cplanet);
 	const double currentJD = core->getJD(); // save current JD
-	QDateTime fdt = ui->dateFromDateTimeEdit->dateTime();
-	fdt.setTimeSpec(Qt::UTC);
-	double firstJD = StelUtils::qDateTimeToJd(fdt);
+	double firstJD;
+	StelUtils::getJDFromDate(&firstJD, ui->dateFromYearSpinBox->value(), ui->dateFromMonthSpinBox->value(), ui->dateFromDaySpinBox->value(), ui->dateFromHourSpinBox->value(), ui->dateFromMinuteSpinBox->value(), 0.0);
 	firstJD -= core->getUTCOffset(firstJD) / 24.;
-	QDateTime sdt = ui->dateToDateTimeEdit->dateTime();
-	sdt.setTimeSpec(Qt::UTC);
-	double secondJD = StelUtils::qDateTimeToJd(sdt);
-	secondJD -= core->getUTCOffset(secondJD) / 24.;
+	double secondJD = firstJD + ui->dateToDurationSpinBox->value()*getEphemerisTimeDuration();
 
 	const int elements = static_cast<int>((secondJD - firstJD) / currentStep);
 	EphemerisList.clear();
@@ -4784,6 +4827,42 @@ void AstroCalcDialog::saveEphemerisTimeStep(int index)
 	enableCustomEphemerisTimeStepButton();
 }
 
+void AstroCalcDialog::populateEphemerisTimeUnitsList()
+{
+	typedef QPair<QString, QString> itemPairs;
+	const QList<itemPairs> items = {
+		{qc_("minutes","unit measurement"), "1"}, {qc_("hours","unit measurement"), "2"},
+		{qc_("days","unit measurement"), "3"}, {qc_("weeks","unit measurement"), "4"},
+		{qc_("months","unit measurement"), "5"}, {qc_("years","unit measurement"), "6"}
+	};
+	Q_ASSERT(ui->dateToUnitsComboBox);
+	QComboBox* units = ui->dateToUnitsComboBox;
+	units->blockSignals(true);
+	units->clear();
+	int index = units->currentIndex();
+	QVariant selectedUnitId = units->itemData(index);
+	for (const auto& f : items)
+	{
+		units->addItem(f.first, f.second);
+	}
+
+	index = units->findData(selectedUnitId, Qt::UserRole, Qt::MatchCaseSensitive);
+	if (index < 0)
+	{
+		// default step: one month
+		index = units->findData(conf->value("astrocalc/ephemeris_time_unit", "5").toString(), Qt::UserRole, Qt::MatchCaseSensitive);
+	}
+	units->setCurrentIndex(index);
+	units->blockSignals(false);
+}
+
+void AstroCalcDialog::saveEphemerisTimeUnit(int index)
+{
+	Q_ASSERT(ui->dateToUnitsComboBox);
+	QComboBox* units = ui->dateToUnitsComboBox;
+	conf->setValue("astrocalc/ephemeris_time_unit", units->itemData(index).toInt());
+}
+
 void AstroCalcDialog::initEphemerisFlagNakedEyePlanets(void)
 {
 	bool nep = conf->value("astrocalc/ephemeris_nakedeye_planets", "false").toBool();
@@ -6963,12 +7042,7 @@ void AstroCalcDialog::changePage(QListWidgetItem* current, QListWidgetItem* prev
 
 	// special case - ephemeris
 	if (ui->stackListWidget->row(current) == 1)
-	{
-		double JD = core->getJD() + core->getUTCOffset(core->getJD()) / 24;
-		QDateTime currentDT = StelUtils::jdToQDateTime(JD, Qt::LocalTime);
-		ui->dateFromDateTimeEdit->setDateTime(currentDT);
-		ui->dateToDateTimeEdit->setDateTime(currentDT.addMonths(1));
-	}
+		setDateTimeNow();
 
 	// special case - RTS
 	if (ui->stackListWidget->row(current) == 2)
