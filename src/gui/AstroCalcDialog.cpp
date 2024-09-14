@@ -2099,7 +2099,7 @@ double AstroCalcDialog::getCustomTimeStep()
 {
 	double solarDay = 1.0, siderealDay = 1.0, siderealYear = 365.256363004; // days
 	const PlanetP& cplanet = core->getCurrentPlanet();
-	if (!cplanet->getEnglishName().contains("observer", Qt::CaseInsensitive))
+	if (cplanet->getPlanetType()!=Planet::isObserver)
 	{
 		if (cplanet==solarSystem->getEarth())
 			solarDay = 1.0; // Special case: OK, it's Earth, let's use standard duration of the solar day
@@ -2205,7 +2205,7 @@ void AstroCalcDialog::generateRTS()
 			const PlanetP sun = solarSystem->getSun();
 			const PlanetP moon = solarSystem->getMoon();
 			const PlanetP earth = solarSystem->getEarth();
-			if (!planet->getEnglishName().contains("observer", Qt::CaseInsensitive))
+			if (planet->getPlanetType()!=Planet::isObserver)
 			{
 				if (planet==earth)
 					currentStep = 1.0; // Special case: OK, it's Earth, let's use standard duration of the solar day
@@ -4688,7 +4688,7 @@ void AstroCalcDialog::populateCelestialBodyList()
 	// data. Unfortunately, there's no other way to do this than with a cycle.
 	for (const auto& p : ss)
 	{
-		if (!p->getEnglishName().contains("Observer", Qt::CaseInsensitive))
+		if (p->getPlanetType()!=Planet::isObserver)
 		{
 			if (p->getEnglishName() != core->getCurrentPlanet()->getEnglishName())
 			{
