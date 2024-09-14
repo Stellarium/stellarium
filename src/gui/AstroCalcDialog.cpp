@@ -1804,20 +1804,7 @@ void AstroCalcDialog::setMonthDuration()
 {
 	const int year  = ui->dateFromYearSpinBox->value();
 	const int month = ui->dateFromMonthSpinBox->value();
-	int maxday = 31;
-	switch (month)
-	{
-		case 2:
-			maxday = StelUtils::isLeapYear(year) ? 29 : 28;
-			break;
-		case 4:
-		case 6:
-		case 9:
-		case 11:
-			maxday = 30;
-			break;
-	}
-	ui->dateFromDaySpinBox->setMaximum(maxday);
+	ui->dateFromDaySpinBox->setMaximum(StelUtils::numberOfDaysInMonthInYear(month, year));
 }
 
 void AstroCalcDialog::saveIgnoreDateTestFlag(bool b)
