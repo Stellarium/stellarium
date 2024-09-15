@@ -243,7 +243,7 @@ QString Pulsar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 				       q_("Binary period of pulsar"),
 				       QString::number(bperiod, 'f', 12),
 				       //TRANSLATORS: Unit of measure for period - days
-				       qc_("days", "period"));
+				       qc_("days", "time period"));
 		}
 		if (eccentricity>0)
 			oss << QString("%1: %2<br />").arg(q_("Eccentricity"), QString::number(eccentricity, 'f', 10));

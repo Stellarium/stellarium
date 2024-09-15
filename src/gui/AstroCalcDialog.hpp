@@ -361,6 +361,7 @@ private slots:
 	void saveEphemerisSecondaryCelestialBody(int index);
 	void saveEphemerisTimeStep(int index);
 	void saveEphemerisTimeUnit(int index);
+	void saveEphemerisTimeDuration(int duration);
 	void initEphemerisFlagNakedEyePlanets(void);
 	void saveEphemerisFlagNakedEyePlanets(bool flag);
 	void setMonthDuration();
@@ -554,6 +555,8 @@ private:
 	double getEphemerisTimeStep(const PlanetP& planet);
 	//! Get time limit at right side for Ephemeris tool
 	double getEphemerisTimeDuration();
+	//! Populating the tooltip for the time limit at right side for Ephemeris tool.
+	void populateEphemerisTimeDurationTooltip();
 	//! Populates the drop-down list of planets.
 	void populatePlanetList();
 	//! Prepare graph settings

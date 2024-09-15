@@ -163,6 +163,7 @@ void AstroCalcDialog::retranslate()
 		populateCelestialCategoryList();
 		populateEphemerisTimeUnitsList();
 		populateEphemerisTimeStepsList();
+		populateEphemerisTimeDurationTooltip();
 		populatePlanetList();
 		populateGroupCelestialBodyList();
 		currentCelestialPositions();
@@ -219,6 +220,7 @@ void AstroCalcDialog::createDialogContent()
 	populateCelestialCategoryList();
 	populateEphemerisTimeUnitsList();
 	populateEphemerisTimeStepsList();
+	populateEphemerisTimeDurationTooltip();
 	setMonthDuration();
 	populatePlanetList();
 	populateGroupCelestialBodyList();
@@ -319,6 +321,8 @@ void AstroCalcDialog::createDialogContent()
 	connect(ui->pushButtonNow, SIGNAL(clicked()), this, SLOT(setDateTimeNow()));
 	connect(ui->dateFromYearSpinBox, SIGNAL(valueChanged(int)), this, SLOT(setMonthDuration()));
 	connect(ui->dateFromMonthSpinBox, SIGNAL(valueChanged(int)), this, SLOT(setMonthDuration()));
+	ui->dateToDurationSpinBox->setValue(conf->value("astrocalc/ephemeris_time_duration", 1).toInt());
+	connect(ui->dateToDurationSpinBox, SIGNAL(valueChanged(int)), this, SLOT(saveEphemerisTimeDuration(int)));
 
 	ui->genericMarkerColor->setup("SolarSystem.ephemerisGenericMarkerColor", "color/ephemeris_generic_marker_color");
 	ui->secondaryMarkerColor->setup("SolarSystem.ephemerisSecondaryMarkerColor", "color/ephemeris_secondary_marker_color");
@@ -1800,20 +1804,7 @@ void AstroCalcDialog::setMonthDuration()
 {
 	const int year  = ui->dateFromYearSpinBox->value();
 	const int month = ui->dateFromMonthSpinBox->value();
-	int maxday = 31;
-	switch (month)
-	{
-		case 2:
-			maxday = StelUtils::isLeapYear(year) ? 29 : 28;
-			break;
-		case 4:
-		case 6:
-		case 9:
-		case 11:
-			maxday = 30;
-			break;
-	}
-	ui->dateFromDaySpinBox->setMaximum(maxday);
+	ui->dateFromDaySpinBox->setMaximum(StelUtils::numberOfDaysInMonthInYear(month, year));
 }
 
 void AstroCalcDialog::saveIgnoreDateTestFlag(bool b)
@@ -1907,6 +1898,19 @@ double AstroCalcDialog::getEphemerisTimeDuration()
 		{ 6, 365.25 }	// year
 	};
 	return timeUnitMap.value(ui->dateToUnitsComboBox->currentData().toInt(), 30.4375);
+}
+
+void AstroCalcDialog::populateEphemerisTimeDurationTooltip()
+{
+	const QMap<int, QString> timeTooltipMap = {
+		{ 1, q_("Duration in minutes") },
+		{ 2, q_("Duration in hours") },
+		{ 3, q_("Duration in days") },
+		{ 4, q_("Duration in weeks") },
+		{ 5, q_("Duration in months") },
+		{ 6, q_("Duration in years") }
+	};
+	ui->dateToDurationSpinBox->setToolTip(timeTooltipMap.value(ui->dateToUnitsComboBox->currentData().toInt(), q_("Duration in months")));
 }
 
 void AstroCalcDialog::generateEphemeris()
@@ -2082,7 +2086,7 @@ double AstroCalcDialog::getCustomTimeStep()
 {
 	double solarDay = 1.0, siderealDay = 1.0, siderealYear = 365.256363004; // days
 	const PlanetP& cplanet = core->getCurrentPlanet();
-	if (!cplanet->getEnglishName().contains("observer", Qt::CaseInsensitive))
+	if (cplanet->getPlanetType()!=Planet::isObserver)
 	{
 		if (cplanet==solarSystem->getEarth())
 			solarDay = 1.0; // Special case: OK, it's Earth, let's use standard duration of the solar day
@@ -2188,7 +2192,7 @@ void AstroCalcDialog::generateRTS()
 			const PlanetP sun = solarSystem->getSun();
 			const PlanetP moon = solarSystem->getMoon();
 			const PlanetP earth = solarSystem->getEarth();
-			if (!planet->getEnglishName().contains("observer", Qt::CaseInsensitive))
+			if (planet->getPlanetType()!=Planet::isObserver)
 			{
 				if (planet==earth)
 					currentStep = 1.0; // Special case: OK, it's Earth, let's use standard duration of the solar day
@@ -4671,7 +4675,7 @@ void AstroCalcDialog::populateCelestialBodyList()
 	// data. Unfortunately, there's no other way to do this than with a cycle.
 	for (const auto& p : ss)
 	{
-		if (!p->getEnglishName().contains("Observer", Qt::CaseInsensitive))
+		if (p->getPlanetType()!=Planet::isObserver)
 		{
 			if (p->getEnglishName() != core->getCurrentPlanet()->getEnglishName())
 			{
@@ -4831,9 +4835,9 @@ void AstroCalcDialog::populateEphemerisTimeUnitsList()
 {
 	typedef QPair<QString, QString> itemPairs;
 	const QList<itemPairs> items = {
-		{qc_("minutes","unit measurement"), "1"}, {qc_("hours","unit measurement"), "2"},
-		{qc_("days","unit measurement"), "3"}, {qc_("weeks","unit measurement"), "4"},
-		{qc_("months","unit measurement"), "5"}, {qc_("years","unit measurement"), "6"}
+		{qc_("minutes", "time unit measurement"), "1"}, {qc_( "hours", "time unit measurement"), "2"},
+		{qc_(      "days", "time unit measurement"), "3"}, {qc_("weeks", "time unit measurement"), "4"},
+		{qc_( "months", "time unit measurement"), "5"}, {qc_( "years", "time unit measurement"), "6"}
 	};
 	Q_ASSERT(ui->dateToUnitsComboBox);
 	QComboBox* units = ui->dateToUnitsComboBox;
@@ -4861,6 +4865,12 @@ void AstroCalcDialog::saveEphemerisTimeUnit(int index)
 	Q_ASSERT(ui->dateToUnitsComboBox);
 	QComboBox* units = ui->dateToUnitsComboBox;
 	conf->setValue("astrocalc/ephemeris_time_unit", units->itemData(index).toInt());
+	populateEphemerisTimeDurationTooltip();
+}
+
+void AstroCalcDialog::saveEphemerisTimeDuration(int duration)
+{
+	conf->setValue("astrocalc/ephemeris_time_duration", duration);
 }
 
 void AstroCalcDialog::initEphemerisFlagNakedEyePlanets(void)

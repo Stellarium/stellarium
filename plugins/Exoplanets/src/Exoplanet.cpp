@@ -358,7 +358,7 @@ QString Exoplanet::getInfoString(const StelCore* core, const InfoStringGroup& fl
 			QString qss = "padding: 0 2px 0 0;";
 			QString planetNameLabel = QString("<td style=\"%2\">%1</td>").arg(q_("Exoplanet"), qss);
 			QString planetProperNameLabel = QString("<td style=\"%2\">%1</td>").arg(q_("Name"), qss);
-			QString periodLabel = QString("<td style=\"%3\">%1 (%2)</td>").arg(q_("Period"), qc_("days", "period"),qss);
+			QString periodLabel = QString("<td style=\"%3\">%1 (%2)</td>").arg(q_("Period"), qc_("days", "time period"),qss);
 			QString massLabel = QString("<td style=\"%3\">%1 (M<sub>%2</sub>)</td>").arg(q_("Mass"), QChar(0x2643), qss); // QChar 0x2643=Jupiter
 			QString radiusLabel = QString("<td style=\"%3\">%1 (R<sub>%2</sub>)</td>").arg(q_("Radius"), QChar(0x2643), qss);
 			QString semiAxisLabel = QString("<td style=\"%3\">%1 (%2)</td>").arg(q_("Semi-Major Axis"), qc_("AU", "distance, astronomical unit"), qss);

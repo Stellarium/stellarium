@@ -947,7 +947,7 @@ void BottomStelBar::updateText(bool updatePos, bool updateTopocentric)
 
 	// build fps tooltip
 	// TRANSLATORS: Frames per second. Please use abbreviation.
-	QString fpsText = QString("%1 %2").arg(QString::number(StelApp::getInstance().getFps(), 'g', 3), qc_("FPS", "abbreviation"));;
+	QString fpsText = QString("%1 %2").arg(QString::number(StelApp::getInstance().getFps(), 'g', 4), qc_("FPS", "abbreviation"));
 	if (fps->text()!=fpsText)
 	{
 		updatePos = true;
