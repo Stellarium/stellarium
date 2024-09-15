@@ -1735,6 +1735,7 @@ void SolarSystem::computePositions(StelCore *core, double dateJDE, PlanetP obser
 			// Now the list is being computed by other threads. we can just wait sequentially for completion.
 			for(auto f: futures)
 				f.waitForFinished();
+			computeTransMatrices(dateJDE, observerPlanet->getHeliocentricEclipticPos());
 		}
 		break;
 		case 1: // Simple multithreading with QtConcurrent::blockingMap(). 3-loop solution. This is closely following the original solution:
@@ -1790,6 +1791,7 @@ void SolarSystem::computePositions(StelCore *core, double dateJDE, PlanetP obser
 				else if (p->englishName==L1S("Neptune")) update(dateJDE-lightTimeDays, RotationElements::Neptune);
 			};
 			QtConcurrent::blockingMap(systemPlanets, plCompPosJDETwo);
+			computeTransMatrices(dateJDE, observerPlanet->getHeliocentricEclipticPos());
 		}
 		break;
 		case 0:
@@ -1846,6 +1848,7 @@ void SolarSystem::computePositions(StelCore *core, double dateJDE, PlanetP obser
 				else if (p->englishName==L1S("Uranus"))  update(dateJDE-lightTimeDays, RotationElements::Uranus);
 				else if (p->englishName==L1S("Neptune")) update(dateJDE-lightTimeDays, RotationElements::Neptune);
 			}
+			computeTransMatrices(dateJDE, observerPlanet->getHeliocentricEclipticPos());
 		} // end of default (original single-threaded) solution
 
 		}
