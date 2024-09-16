@@ -356,7 +356,7 @@ signals:
 	void languageChanged();
 	void screenFontSizeChanged(int);
 	void guiFontSizeChanged(int);
-	void fontChanged(QFont);
+	void fontChanged(const QFont&);
 	void overwriteInfoColorChanged(const Vec3f & color);
 	void daylightInfoColorChanged(const Vec3f & color);
 	void flagImmediateSaveChanged(bool);

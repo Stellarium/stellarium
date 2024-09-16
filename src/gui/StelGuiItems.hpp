@@ -219,7 +219,7 @@ private slots:
 	//! connect from StelApp to resize fonts on the fly.
 	void setFontSizeFromApp(int size);
 	//! connect from StelApp to set font on the fly.
-	void setFont(QFont font);
+	void setFont(const QFont &cfont);
 private:
 	QTimeLine* hideTimeLine;
 	QGraphicsSimpleTextItem* helpLabel;
@@ -292,7 +292,7 @@ private slots:
 	//! connect from StelApp to resize fonts on the fly.
 	void setFontSizeFromApp(int size);
 	//! connect from StelApp to set font on the fly.
-	void setFont(QFont font);
+	void setFont(const QFont &cfont);
 
 private:
 	// updateTopocentric: regardless of topocentric setting, reformat the string if true

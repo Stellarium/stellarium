@@ -63,6 +63,16 @@ InfoPanel::InfoPanel(QGraphicsItem* parent) : QGraphicsTextItem("", parent),
 	}
 	if (qApp->property("text_texture")==true) // CLI option -t given?
 		infoPixmap=new QGraphicsPixmapItem(this);
+
+	QFont font=QGuiApplication::font();
+	font.setPixelSize(StelApp::getInstance().getScreenFontSize());
+	setFont(font);
+	connect(&StelApp::getInstance(), &StelApp::fontChanged, this, &QGraphicsTextItem::setFont);
+	connect(&StelApp::getInstance(), &StelApp::screenFontSizeChanged, this, [=](int size){
+		QFont font=QGuiApplication::font();
+		font.setPixelSize(StelApp::getInstance().getScreenFontSize());
+		setFont(font);
+	});
 }
 
 InfoPanel::~InfoPanel()
@@ -137,9 +147,6 @@ void InfoPanel::setTextFromObjects(const QList<StelObjectP>& selected)
 		StelCore *core=StelApp::getInstance().getCore();
 		QString s = selected[0]->getInfoString(core, infoTextFilters);
 		selected[0]->removeExtraInfoStrings(StelObject::AllInfo);
-		QFont font;
-		font.setPixelSize(StelApp::getInstance().getScreenFontSize());
-		setFont(font);
 		setHtml(s);
 		if (qApp->property("text_texture")==true) // CLI option -t given?
 		{
