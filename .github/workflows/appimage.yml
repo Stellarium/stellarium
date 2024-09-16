@@ -10,7 +10,7 @@ jobs:
   # AppImage x86_64/Qt5
   appimage-amd64-qt5:
     name: "x86_64 (qt5)"
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     if: "contains(github.event.head_commit.message, '[publish]') || contains(github.ref, 'heads/stellarium-next') || contains(github.ref, 'heads/stellarium-stable')"
 
     steps:
