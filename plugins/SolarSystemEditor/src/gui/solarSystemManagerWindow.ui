@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>498</width>
-    <height>478</height>
+    <width>394</width>
+    <height>422</height>
    </rect>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
@@ -78,6 +78,12 @@
           </property>
           <item>
            <widget class="QLabel" name="labelFileWarning">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <property name="text">
              <string>This plug-in edits a custom Solar System configuration file for the minor bodies. If something goes wrong and Stellarium crashes and/or doesn't start, you can delete manually that file from:</string>
             </property>
@@ -119,6 +125,18 @@
           <string>Export/replace the Solar System minor objects file</string>
          </property>
          <layout class="QVBoxLayout" name="verticalLayoutImportExport">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
           <item>
            <widget class="QLabel" name="label">
             <property name="text">

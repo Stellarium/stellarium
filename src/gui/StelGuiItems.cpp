@@ -360,8 +360,8 @@ LeftStelBar::LeftStelBar(QGraphicsItem* parent)
 	helpLabel->setBrush(QBrush(QColor::fromRgbF(1,1,1,1)));
 
 	setFontSizeFromApp(StelApp::getInstance().getScreenFontSize());
-	connect(&StelApp::getInstance(), SIGNAL(screenFontSizeChanged(int)), this, SLOT(setFontSizeFromApp(int)));
-	connect(&StelApp::getInstance(), SIGNAL(fontChanged(QFont)), this, SLOT(setFont(QFont)));
+	connect(&StelApp::getInstance(), &StelApp::screenFontSizeChanged, this, &LeftStelBar::setFontSizeFromApp);
+	connect(&StelApp::getInstance(), &StelApp::fontChanged, this, &LeftStelBar::setFont);
 }
 
 LeftStelBar::~LeftStelBar()
@@ -465,8 +465,9 @@ void LeftStelBar::setFontSizeFromApp(int size)
 }
 
 //! connect from StelApp to resize fonts on the fly.
-void LeftStelBar::setFont(QFont font)
+void LeftStelBar::setFont(const QFont &cfont)
 {
+	QFont font(cfont);
 	font.setPixelSize(StelApp::getInstance().getScreenFontSize()-1);
 	helpLabel->setFont(font);
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
@@ -506,7 +507,7 @@ BottomStelBar::BottomStelBar(QGraphicsItem* parent,
 
 	setFontSizeFromApp(StelApp::getInstance().getScreenFontSize());
 	connect(&StelApp::getInstance(), &StelApp::screenFontSizeChanged, this, [=](int fontsize){setFontSizeFromApp(fontsize); setFontSizeFromApp(fontsize);}); // We must call that twice to force all geom. updates
-	connect(&StelApp::getInstance(), SIGNAL(fontChanged(QFont)), this, SLOT(setFont(QFont)));
+	connect(&StelApp::getInstance(), &StelApp::fontChanged, this, &BottomStelBar::setFont);
 	connect(StelApp::getInstance().getCore(), &StelCore::flagUseTopocentricCoordinatesChanged, this, [=](bool){updateText(false, true);});
 
 	QSettings* confSettings = StelApp::getInstance().getSettings();
@@ -545,8 +546,9 @@ void BottomStelBar::setFontSizeFromApp(int size)
 }
 
 //! connect from StelApp to resize fonts on the fly.
-void BottomStelBar::setFont(QFont font)
+void BottomStelBar::setFont(const QFont &cfont)
 {
+	QFont font(cfont);
 	font.setPixelSize(StelApp::getInstance().getScreenFontSize()-1);
 	datetime->setFont(font);
 	location->setFont(font);

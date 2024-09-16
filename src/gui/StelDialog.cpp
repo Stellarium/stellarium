@@ -52,9 +52,9 @@ StelDialog::StelDialog(const QString &dialogName, QObject* parent)
 	if (parent == nullptr)
 		setParent(StelMainView::getInstance().getGuiWidget());
 
-	connect(&StelApp::getInstance(), SIGNAL(fontChanged(QFont)), this, SLOT(handleFontChanged()));
-	connect(&StelApp::getInstance(), SIGNAL(guiFontSizeChanged(int)), this, SLOT(handleFontChanged()));
-	connect(&StelApp::getInstance(), SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(handleColorSchemeChanged()));
+	connect(&StelApp::getInstance(), &StelApp::fontChanged, this, &StelDialog::handleFontChanged);
+	connect(&StelApp::getInstance(), &StelApp::guiFontSizeChanged, this, &StelDialog::handleFontChanged);
+	connect(&StelApp::getInstance(), &StelApp::colorSchemeChanged, this, &StelDialog::handleColorSchemeChanged);
 	connect((dynamic_cast<StelGui*>(StelApp::getInstance().getGui())), SIGNAL(guiStyleChanged(const QString &)), this, SLOT(styleChanged(const QString &)));
 }
 
