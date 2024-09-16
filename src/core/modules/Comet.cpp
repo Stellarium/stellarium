@@ -20,6 +20,7 @@
  
 #include "Comet.hpp"
 #include "Orbit.hpp"
+#include "SolarSystem.hpp"
 
 #include "StelApp.hpp"
 #include "StelCore.hpp"
@@ -232,7 +233,6 @@ QString Comet::getInfoStringSize(const StelCore *core, const InfoStringGroup &fl
 	return str;
 }
 
-// Nothing interesting?
 QString Comet::getInfoStringExtra(const StelCore *core, const InfoStringGroup &flags) const
 {
 	Q_UNUSED(core)
@@ -270,17 +270,30 @@ double Comet::getSiderealPeriod() const
 	return ((semiMajorAxis>0) ? KeplerOrbit::calculateSiderealPeriod(semiMajorAxis, 1.0) : 0.);
 }
 
+
 float Comet::getVMagnitude(const StelCore* core) const
 {
+	return getVMagnitude(core, 1.0);
+}
+
+float Comet::getVMagnitude(const StelCore* core, const double eclipseFactor) const
+{
+	Q_UNUSED(eclipseFactor)
 	//If the two parameter system is not used,
 	//use the default radius/albedo mechanism
 	if (slopeParameter < -9.0f)
 	{
-		return Planet::getVMagnitude(core);
+		return Planet::getVMagnitude(core, 1.);
 	}
 
 	//Calculate distances
-	const Vec3d& observerHeliocentricPosition = core->getObserverHeliocentricEclipticPos();
+	Vec3d observerHeliocentricPosition;
+	if (core->getCurrentPlanet()->getPlanetType()==Planet::isObserver)
+
+		observerHeliocentricPosition = Vec3d(0.f,0.f,0.f);
+	else
+		observerHeliocentricPosition = core->getObserverHeliocentricEclipticPos();
+
 	const Vec3d& cometHeliocentricPosition = getHeliocentricEclipticPos();
 	const float cometSunDistance = static_cast<float>(cometHeliocentricPosition.norm());
 	const float observerCometDistance = static_cast<float>((observerHeliocentricPosition - cometHeliocentricPosition).norm());
@@ -443,10 +456,14 @@ void Comet::update(int deltaTime)
 
 
 // Draw the Comet and all the related infos: name, circle etc... GZ: Taken from Planet.cpp 2013-11-05 and extended
-void Comet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont)
+void Comet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont, const double eclipseFactor)
 {
+	Q_UNUSED(eclipseFactor)
 	if (hidden)
 		return;
+
+	static SolarSystem *ss=GETSTELMODULE(SolarSystem);
+	const float vMagnitude=getVMagnitude(core);
 
 	// Exclude drawing if user set a hard limit magnitude.
 	if (core->getSkyDrawer()->getFlagPlanetMagnitudeLimit() && (getVMagnitude(core) > core->getSkyDrawer()->getCustomPlanetMagnitudeLimit()))
@@ -461,7 +478,7 @@ void Comet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont
 	// Problematic: Early-out here of course disables the wanted hint circles for dim comets.
 	// The line makes hints for comets 5 magnitudes below sky limiting magnitude visible.
 	// If comet is too faint to be seen, don't bother rendering. (Massive speedup if people have hundreds of comet elements!)
-	if ((getVMagnitude(core)-5.0f) > core->getSkyDrawer()->getLimitMagnitude() && !core->getCurrentLocation().planetName.contains("Observer", Qt::CaseInsensitive))
+	if ((ss->getMarkerValue()==0.) && ((getVMagnitude(core)-5.0f) > core->getSkyDrawer()->getLimitMagnitude()) && !core->getCurrentLocation().planetName.contains("Observer", Qt::CaseInsensitive))
 	{
 		return;
 	}
@@ -493,9 +510,16 @@ void Comet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont
 		drawOrbit(core);  // TODO - fade in here also...
 
 		labelsFader = (flagLabels && ang_dist>0.25f && maxMagLabels>getVMagnitude(core));
-		drawHints(core, planetNameFont);
 
-		draw3dModel(core,transfo,static_cast<float>(screenRd));
+		{ // encapsulate painter!
+			const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
+			StelPainter sPainter(prj);
+			drawHints(core, sPainter, planetNameFont);
+			Vec3f color=Vec3f(0.25, 0.75, 1);
+			ss->drawAsteroidMarker(core, &sPainter, screenPos[0], screenPos[1], color); // This does not draw directly, but record an entry to be drawn in a batch.
+		}
+
+		draw3dModel(core,transfo,static_cast<float>(screenRd), 1.0);
 	}
 	else
 		if (!projectionValid && prj.data()->getNameI18() == q_("Orthographic"))

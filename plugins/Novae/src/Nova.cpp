@@ -22,7 +22,7 @@
 #include "StelCore.hpp"
 #include "StelUtils.hpp"
 #include "StelTranslator.hpp"
-#include "StelModuleMgr.hpp"
+//#include "StelModuleMgr.hpp"
 #include "StelSkyDrawer.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelPainter.hpp"
@@ -130,9 +130,9 @@ QString Nova::getDesignation() const
 	return designation;
 }
 
-QString Nova::getMaxBrightnessDate(const double JD) const
+QString Nova::getMaxBrightnessDate(const StelCore *core, const double JD) const
 {
-	return StelApp::getInstance().getLocaleMgr().getPrintableDateLocal(JD);
+	return StelApp::getInstance().getLocaleMgr().getPrintableDateLocal(JD, core->getUTCOffset(JD));
 }
 
 QString Nova::getInfoString(const StelCore* core, const InfoStringGroup& flags) const
@@ -157,7 +157,7 @@ QString Nova::getInfoString(const StelCore* core, const InfoStringGroup& flags) 
 
 	if (flags&Extra)
 	{
-		oss << QString("%1: %2").arg(q_("Maximum brightness"), getMaxBrightnessDate(peakJD)) << "<br />";
+		oss << QString("%1: %2").arg(q_("Maximum brightness"), getMaxBrightnessDate(core, peakJD)) << "<br />";
 		if (distance>0)
 		{
 			//TRANSLATORS: Unit of measure for distance - Light Years

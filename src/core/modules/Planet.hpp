@@ -31,7 +31,6 @@
 #include "StelFader.hpp"
 #include "StelTextureTypes.hpp"
 #include "RotationElements.hpp"
-#include "SolarEclipseComputer.hpp"
 
 #include <QCache>
 #include <QString>
@@ -52,6 +51,7 @@ class KeplerOrbit;
 class StelFont;
 class StelPainter;
 class StelTranslator;
+class StelObserver;
 class StelOBJ;
 class StelOpenGLArray;
 class HipsSurvey;
@@ -231,7 +231,13 @@ public:
 	double getCloseViewFov(const StelCore* core) const override;
 	double getSatellitesFov(const StelCore* core) const override;
 	double getParentSatellitesFov(const StelCore* core) const override;
+	//! This actually calls getVMagnitude(core, 1.0);
+	//! If there is danger the object is partly obscured (eclipsed), prefer to use getVMagnitude(core, eclipseFactor).
 	float getVMagnitude(const StelCore* core) const override;
+	//! Compute visual magnitude following the algorithm set in setApparentMagnitudeAlgorithm().
+	//! This is most important to compute Solar magnitude during a solar eclipse.
+	//! @param eclipseFactor can be computed with SolarSystem::getSolarEclipseFactor(core)
+	virtual float getVMagnitude(const StelCore* core, double eclipseFactor) const;
 	float getSelectPriority(const StelCore* core) const override;
 	Vec3f getInfoColor(void) const override;
 	//! @return "Planet". For technical reasons this is also returned by Comets and MinorPlanets and the Sun. A better type is returned by getObjectType()
@@ -282,8 +288,8 @@ public:
 	virtual void translateName(const StelTranslator &trans);
 
 	// Draw the Planet
-	// GZ Made that virtual to allow comets having their own draw().
-	virtual void draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont);
+	// @param eclipseFactor should be precomputed via SolarSystem::getSolarEclipseFactor().
+	virtual void draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont, const double eclipseFactor);
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods specific to Planet
@@ -389,9 +395,10 @@ public:
 	//! Note: The only place where this is not used for Earth is to build up orbits for planet moons w.r.t. the parent planet orientation.
 	double getRotObliquity(double JDE) const;
 
-	//! Compute the position and orbital velocity in the parent Planet coordinate system
+	//! Compute the position and orbital velocity in the parent Planet coordinate system and set aberrationPush
+	//! Does not compute new position when dateJDE is less than deltaJDE away from lastJDE
 	//! You can add the aberrationPush value according to Edot*lightTime in Explanatory Supplement (2013) formula 7.55.
-	virtual void computePosition(const double dateJDE, const Vec3d &aberrationPush);
+	virtual void computePosition(const StelObserver *observer, const double dateJDE, const Vec3d &aberrationPush);
 	//! Compute the position and orbital velocity in the parent Planet coordinate system, and return them in eclPosition and eclVelocity
 	//! These may be preferred when we want to avoid setting the actual position (e.g., RTS computation)
 	virtual void computePosition(const double dateJDE, Vec3d &eclPosition, Vec3d &eclVelocity) const;
@@ -704,7 +711,10 @@ protected:
 
 	//! Draw the 3d model. Call the proper functions if there are rings etc..
 	//! @param screenRd radius in screen pixels
-	void draw3dModel(StelCore* core, StelProjector::ModelViewTranformP transfo, float screenRd, bool drawOnlyRing=false);
+	//! @param solarEclipseFactor Full sun is 1.0, fully covered sun is 0.0.
+	//! This should be determined beforehand so that repeated calls to this function can be avoided.
+	//! It is usually safe to use 1.0 when eclipses are rare and umimportant.
+	void draw3dModel(StelCore* core, StelProjector::ModelViewTranformP transfo, float screenRd, double solarEclipseFactor, bool drawOnlyRing=false);
 
 	//! Draws the OBJ model, assuming it is available
 	//! @param screenRd radius in screen pixels.
@@ -724,7 +734,7 @@ protected:
 	void drawSurvey(StelCore* core, StelPainter* painter);
 
 	//! Draw the circle and name of the Planet
-	void drawHints(const StelCore* core, const QFont& planetNameFont);
+	void drawHints(const StelCore* core, StelPainter &sPainter, const QFont& planetNameFont);
 
 	PlanetOBJModel* loadObjModel() const;
 
@@ -808,7 +818,7 @@ protected:
 	QOpenGLFunctions* gl;
 
 	static Vec3f labelColor;
-	static StelTextureSP hintCircleTex;
+	static StelTextureSP hintCircleTex; // The circle around an SSO
 	static const QMap<PlanetType, QString> pTypeMap; // Maps fast type to english name.
 	static const QMap<QString, QString> nPlanetMap; // Maps fast IAU number to IAU designation.
 	static const QMap<ApparentMagnitudeAlgorithm, QString> vMagAlgorithmMap;

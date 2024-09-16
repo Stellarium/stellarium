@@ -236,8 +236,10 @@ public:
 	static void initStatic();
 	static void deinitStatic();
 
-	//! Allow immediate storing of config.ini entries.
-	//! Storing only takes place if property StelApp.flagImmediateSave is set.
+	//! Power feature: allow immediate storing of config.ini entries.
+	//! Storing only takes place if property StelApp.flagImmediateSave is set,
+	//! a flag activated with a manual config.ini entry gui/immediate_save_details=true
+	//! Items saved with this method still need to be saved as well with ConfigurationDialog::saveAllSettings()!
 	static void immediateSave(const QString &key, const QVariant &value);
 
 	//! Add a progression indicator to the GUI (if applicable).

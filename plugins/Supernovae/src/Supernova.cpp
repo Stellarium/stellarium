@@ -109,9 +109,9 @@ QString Supernova::getEnglishName(void) const
 	return name;
 }
 
-QString Supernova::getMaxBrightnessDate(const double JD) const
+QString Supernova::getMaxBrightnessDate(const StelCore *core, const double JD) const
 {
-	return StelApp::getInstance().getLocaleMgr().getPrintableDateLocal(JD);
+	return StelApp::getInstance().getLocaleMgr().getPrintableDateLocal(JD, core->getUTCOffset(JD));
 }
 
 QString Supernova::getMagnitudeInfoString(const StelCore *core, const InfoStringGroup& flags, const int decimals) const
@@ -152,7 +152,7 @@ QString Supernova::getInfoString(const StelCore* core, const InfoStringGroup& fl
 	if (flags&Extra)
 	{
 		oss << QString("%1: %2").arg(q_("Type of supernova"), sntype) << "<br />";
-		oss << QString("%1: %2").arg(q_("Maximum brightness"), getMaxBrightnessDate(peakJD)) << "<br />";
+		oss << QString("%1: %2").arg(q_("Maximum brightness"), getMaxBrightnessDate(core, peakJD)) << "<br />";
 		if (distance>0)
 		{
 			//TRANSLATORS: Unit of measure for distance - Light Years

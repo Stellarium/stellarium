@@ -140,7 +140,7 @@ void MainService::get(const QByteArray& operation, const APIParameters &paramete
 			QString localIso = StelUtils::julianDayToISO8601String(jday+gmtShift,true);
 
 			//time zone string
-			QString timeZone = localeMgr->getPrintableTimeZoneLocal(jday);
+			QString timeZone = localeMgr->getPrintableTimeZoneLocal(jday, core->getUTCOffset(jday));
 
 			QJsonObject obj2;
 			obj2.insert("jday",jday);

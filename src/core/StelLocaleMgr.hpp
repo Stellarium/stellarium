@@ -130,17 +130,21 @@ public:
 	};
 	
 	//! Get a localized, formatted string representation of the date component of a Julian date.
-	QString getPrintableDateLocal(double JD) const;
+	//! @param utcOffsetHrs from StelCore::getUTCOffset(JD)
+	QString getPrintableDateLocal(double JD, double utcOffsetHrs) const;
 	
 	//! Get a localized, formatted string representation of the time component of a Julian date.
-	QString getPrintableTimeLocal(double JD) const;
+	//! @param utcOffsetHrs from StelCore::getUTCOffset(JD)
+	QString getPrintableTimeLocal(double JD, double utcOffsetHrs) const;
 
 	//! Get a localized, formatted string representation of the time zone of a Julian date.
-	QString getPrintableTimeZoneLocal(double JD) const;
+	//! @param utcOffsetHrs from StelCore::getUTCOffset(JD)
+	QString getPrintableTimeZoneLocal(double JD, double utcOffsetHrs) const;
 
 	//! Return the time in ISO 8601 format that is : %Y-%m-%dT%H:%M:%S
 	//! @param JD the time and date expressed as a Julian date value.
-	QString getISO8601TimeLocal(double JD) const;
+	//! @param utcOffsetHrs from StelCore::getUTCOffset(JD)
+	QString getISO8601TimeLocal(double JD, double utcOffsetHrs) const;
 
 	//! Return the JD time for a local time ISO 8601 format that is:
 	//! %Y-%m-%dT%H:%M:%S, but %Y can be a large number with sign, and

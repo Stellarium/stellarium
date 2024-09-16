@@ -81,6 +81,15 @@
 
 #define L1S(x) QLatin1String(x)
 
+// Allow parallel evaluation of std::transform_reduce(std::execution::par, ...) or
+// std::sort(std::execution::par, ...) where known. Not all compilers know it.
+// Use std::transform_reduce(STD_EXECUTION_PAR_COMMA ...) for the general case.
+#if STD_EXECUTION_KNOWN
+# define STD_EXECUTION_PAR_COMMA std::execution::par,
+#else
+# define STD_EXECUTION_PAR_COMMA
+#endif
+
 //! @namespace StelUtils contains general purpose utility functions.
 namespace StelUtils
 {

@@ -24,6 +24,7 @@
 #include "StelCore.hpp"
 #include "StelTranslator.hpp"
 #include "StelLocaleMgr.hpp"
+#include "StelObserver.hpp"
 
 #include <QRegularExpression>
 #include <QDebug>
@@ -231,16 +232,25 @@ double MinorPlanet::getSiderealPeriod() const
 
 float MinorPlanet::getVMagnitude(const StelCore* core) const
 {
+	return getVMagnitude(core, 1.);
+}
+float MinorPlanet::getVMagnitude(const StelCore* core, const double eclipseFactor) const
+{
 	//If the H-G system is not used, use the default radius/albedo mechanism
 	if (slopeParameter < -9.99f) // G can be somewhat <0! Set to -10 to mark invalid.
 	{
-		return Planet::getVMagnitude(core);
+		return Planet::getVMagnitude(core, eclipseFactor);
 	}
 
 	//Calculate phase angle
 	//(Code copied from Planet::getVMagnitude())
 	//(this is actually vector subtraction + the cosine theorem :))
-	const Vec3d& observerHelioPos = core->getObserverHeliocentricEclipticPos();
+	Vec3d observerHelioPos;
+	if (core->getCurrentPlanet()->getPlanetType()==Planet::isObserver)
+
+		observerHelioPos = Vec3d(0.f,0.f,0.f);
+	else
+		observerHelioPos = core->getObserverHeliocentricEclipticPos();
 	const float observerRq = static_cast<float>(observerHelioPos.normSquared());
 	const Vec3d& planetHelioPos = getHeliocentricEclipticPos();
 	const float planetRq = static_cast<float>(planetHelioPos.normSquared());

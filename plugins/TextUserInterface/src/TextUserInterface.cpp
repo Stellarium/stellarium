@@ -661,9 +661,10 @@ void TextUserInterface::draw(StelCore* core)
 	{
 		double jd = core->getJD();
 		int text_x = x + xVc*2/3, text_y = y + pixOffset;
+		const double utcOffsetHrs=core->getUTCOffset(jd);
 
-		QString newDate = StelApp::getInstance().getLocaleMgr().getPrintableDateLocal(jd) + "   "
-                       +StelApp::getInstance().getLocaleMgr().getPrintableTimeLocal(jd);
+		QString newDate = StelApp::getInstance().getLocaleMgr().getPrintableDateLocal(jd, utcOffsetHrs) + "   "
+		       +StelApp::getInstance().getLocaleMgr().getPrintableTimeLocal(jd, utcOffsetHrs);
 		 
 		if (fovMaskDisk) {
 			text_x = xVc + fovOffsetY - pixOffset;

@@ -57,11 +57,16 @@ public:
 
 	~MinorPlanet() override;
 
-	//The Comet class inherits the "Planet" type because the SolarSystem class
+	//The MinorPlanet class inherits the "Planet" type because the SolarSystem class
 	//was not designed to handle different types of objects.
 	// \todo Decide if this is going to be "MinorPlanet" or "Asteroid"
 	//virtual QString getType() const {return "MinorPlanet";}
+	//! Override for minor planets.
+	//! When observer is on an "Observer" planet, the magnitude reported is heliocentric (seen from the Sun).
+	//! This allows observing the asteroid belt freom the side without nearer objects being obscured by phase angle.
 	float getVMagnitude(const StelCore* core) const override;
+	//! Convenience method, necessary override. @param eclipseFactor is ignored.
+	float getVMagnitude(const StelCore* core, const double eclipseFactor) const override;
 	//! sets the nameI18 property with the appropriate translation.
 	//! Function overridden to handle the problem with name conflicts.
 	void translateName(const StelTranslator& trans) override;

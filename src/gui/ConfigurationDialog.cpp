@@ -63,6 +63,7 @@
 #endif
 #include <QImageWriter>
 #include <QScreen>
+#include <QThreadPool>
 
 //! Simple helper extension class which can guarantee int inputs in a useful range.
 class MinMaxIntValidator: public QIntValidator
@@ -345,6 +346,8 @@ void ConfigurationDialog::createDialogContent()
 	connectBoolProperty(ui->focusOnDaySpinnerCheckBox,			"StelGui.flagEnableFocusOnDaySpinner");
 	ui->overwriteTextColorButton->setup("StelApp.overwriteInfoColor", "color/info_text_color");
 	ui->daylightTextColorButton ->setup("StelApp.daylightInfoColor",  "color/daylight_text_color");
+	connectIntProperty(ui->solarSystemThreadNumberSpinBox, "SolarSystem.extraThreads");
+	ui->solarSystemThreadNumberSpinBox->setMaximum(QThreadPool::globalInstance()->maxThreadCount()-1);
 
 	// Font selection. We use a hidden, but documented entry in config.ini to optionally show a font selection option.
 	connectIntProperty(ui->screenFontSizeSpinBox, "StelApp.screenFontSize");
@@ -865,6 +868,8 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("viewing/use_luminance_adaptation",		propMgr->getStelPropertyValue("StelSkyDrawer.flagLuminanceAdaptation").toBool());
 	conf->setValue("astro/flag_planets",					propMgr->getStelPropertyValue("SolarSystem.planetsDisplayed").toBool());
 	conf->setValue("astro/flag_planets_hints",				propMgr->getStelPropertyValue("SolarSystem.flagHints").toBool());
+	conf->setValue("astro/flag_planets_markers",				propMgr->getStelPropertyValue("SolarSystem.flagMarkers").toBool());
+	conf->setValue("astro/planet_markers_mag_threshold",			propMgr->getStelPropertyValue("SolarSystem.markerMagThreshold").toDouble());
 	conf->setValue("astro/flag_planets_orbits",				propMgr->getStelPropertyValue("SolarSystem.flagOrbits").toBool());
 	conf->setValue("astro/flag_permanent_orbits",			propMgr->getStelPropertyValue("SolarSystem.flagPermanentOrbits").toBool());
 	conf->setValue("astro/object_orbits_thickness",			propMgr->getStelPropertyValue("SolarSystem.orbitsThickness").toInt());
@@ -912,6 +917,7 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("astro/flag_planets_nomenclature_terminator_only",propMgr->getStelPropertyValue("NomenclatureMgr.flagShowTerminatorZoneOnly").toBool());
 	conf->setValue("astro/planet_nomenclature_solar_altitude_min",	propMgr->getStelPropertyValue("NomenclatureMgr.terminatorMinAltitude").toInt());
 	conf->setValue("astro/planet_nomenclature_solar_altitude_max",	propMgr->getStelPropertyValue("NomenclatureMgr.terminatorMaxAltitude").toInt());
+	conf->setValue("astro/planet_markers_mag_threshold",		propMgr->getStelPropertyValue("SolarSystem.markerMagThreshold").toDouble());
 
 	// view dialog / markings tab settings
 	conf->setValue("viewing/flag_gridlines",				propMgr->getStelPropertyValue("GridLinesMgr.gridlinesDisplayed").toBool());
@@ -1055,6 +1061,7 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("astro/flag_aberration",			core->getUseAberration());
 	conf->setValue("astro/aberration_factor",		core->getAberrationFactor());
 	conf->setValue("astro/flag_topocentric_coordinates",	core->getUseTopocentricCoordinates());
+	conf->setValue("astro/solar_system_threads",		propMgr->getStelPropertyValue("SolarSystem.extraThreads").toInt());
 
 	// view dialog / DSO tag settings
 	nmgr->storeCatalogFilters();
@@ -1112,19 +1119,15 @@ void ConfigurationDialog::saveAllSettings()
 
 	// configuration dialog / selected object info tab
 	const StelObject::InfoStringGroup& flags = gui->getInfoTextFilters();
-	if (flags == StelObject::InfoStringGroup(StelObject::None))
-		conf->setValue("gui/selected_object_info", "none");
-	else if (flags == StelObject::InfoStringGroup(StelObject::DefaultInfo))
-	    conf->setValue("gui/selected_object_info", "default");
-	else if (flags == StelObject::InfoStringGroup(StelObject::ShortInfo))
-		conf->setValue("gui/selected_object_info", "short");
-	else if (flags == StelObject::InfoStringGroup(StelObject::AllInfo))
-		conf->setValue("gui/selected_object_info", "all");
-	else
-	{
-		conf->setValue("gui/selected_object_info", "custom");
+	static const QMap<StelObject::InfoStringGroup, QString>selectedObjectInfoMap={
+		{StelObject::InfoStringGroup(StelObject::None),		"none"},
+		{StelObject::InfoStringGroup(StelObject::DefaultInfo),	"default"},
+		{StelObject::InfoStringGroup(StelObject::ShortInfo),	"short"},
+		{StelObject::InfoStringGroup(StelObject::AllInfo),	"all"}
+	};
+	QString selectedObjectInfo=selectedObjectInfoMap.value(flags, "custom");
+	if (selectedObjectInfo=="custom")
 		saveCustomSelectedInfo();
-	}
 
 	// toolbar auto-hide status
 	conf->setValue("gui/auto_hide_horizontal_toolbar",		propMgr->getStelPropertyValue("StelGui.autoHideHorizontalButtonBar").toBool());

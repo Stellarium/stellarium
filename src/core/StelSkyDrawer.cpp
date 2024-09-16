@@ -75,7 +75,6 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) :
 	starShaderProgram(Q_NULLPTR),
 	starShaderVars(StarShaderVars()),
 	nbPointSources(0),
-	maxPointSources(1000),
 	maxLum(0.f),
 	oldLum(-1.f),
 	flagLuminanceAdaptation(false),
@@ -446,9 +445,8 @@ void StelSkyDrawer::postDrawPointSource(StelPainter* sPainter)
 		texHalo->bind();
 	sPainter->setBlending(true, GL_ONE, GL_ONE);
 
-	const Mat4f& m = sPainter->getProjector()->getProjectionMatrix();
-	const QMatrix4x4 qMat(m[0], m[4], m[8], m[12], m[1], m[5], m[9], m[13], m[2], m[6], m[10], m[14], m[3], m[7], m[11], m[15]);
-	
+	const QMatrix4x4 qMat=sPainter->getProjector()->getProjectionMatrix().toQMatrix();
+
 	vbo->bind();
 	vbo->write(0, vertexArray, nbPointSources*6*sizeof(StarVertex));
 	vbo->write(maxPointSources*6*sizeof(StarVertex), textureCoordArray, nbPointSources*6*2);
@@ -496,10 +494,10 @@ bool StelSkyDrawer::drawPointSource(StelPainter* sPainter, const Vec3d& v, const
 		sPainter->drawSprite2dModeNoDeviceScale(win[0], win[1], rmag);
 	}
 
-	unsigned char starColor[3] = {0, 0, 0};
-	starColor[0] = static_cast<unsigned char>(std::min(static_cast<int>(color[0]*tw*255+0.5f), 255));
-	starColor[1] = static_cast<unsigned char>(std::min(static_cast<int>(color[1]*tw*255+0.5f), 255));
-	starColor[2] = static_cast<unsigned char>(std::min(static_cast<int>(color[2]*tw*255+0.5f), 255));
+	unsigned char starColor[3] = {
+		static_cast<unsigned char>(std::min(static_cast<int>(color[0]*tw*255+0.5f), 255)),
+		static_cast<unsigned char>(std::min(static_cast<int>(color[1]*tw*255+0.5f), 255)),
+		static_cast<unsigned char>(std::min(static_cast<int>(color[2]*tw*255+0.5f), 255))};
 	
 	// Store the drawing instructions in the vertex arrays
 	StarVertex* vx = &(vertexArray[nbPointSources*6]);

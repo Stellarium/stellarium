@@ -199,7 +199,8 @@ void NavStarsWindow::populateToday()
 	astronomicalTwilightDuration = StelUtils::hoursToHmsStr(duration, true);
 
 	// fill the data
-	ui->labelToday->setText(localeMgr->getPrintableDateLocal(core->getJD()));
+	const double JD=core->getJD();
+	ui->labelToday->setText(localeMgr->getPrintableDateLocal(JD, core->getUTCOffset(JD)));
 	ui->labelDayBegin->setText(dayBegin);
 	ui->labelDayEnd->setText(dayEnd);
 	ui->labelDayDuration->setText(dayDuration);
