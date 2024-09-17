@@ -96,6 +96,10 @@ class StelMovementMgr : public StelModule
 		   READ getFlagEnableZoomKeys
 		   WRITE setFlagEnableZoomKeys
 		   NOTIFY flagEnableZoomKeysChanged)
+	Q_PROPERTY(bool flagEnableMoveAtScreenEdge
+		   READ getFlagEnableMoveAtScreenEdge
+		   WRITE setFlagEnableMoveAtScreenEdge
+		   NOTIFY flagEnableMoveAtScreenEdgeChanged)
 	Q_PROPERTY(double userMaxFov
 		   READ getUserMaxFov
 		   WRITE setUserMaxFov
@@ -230,7 +234,7 @@ public slots:
 	//! Get whether being at the edge of the screen activates movement
 	bool getFlagEnableMoveAtScreenEdge() const {return flagEnableMoveAtScreenEdge;}
 	//! Set whether being at the edge of the screen activates movement
-	void setFlagEnableMoveAtScreenEdge(bool b) {flagEnableMoveAtScreenEdge=b;}
+	void setFlagEnableMoveAtScreenEdge(bool b) {flagEnableMoveAtScreenEdge=b; emit flagEnableMoveAtScreenEdgeChanged(b);}
 
 	//! Get whether mouse can control movement
 	bool getFlagEnableMouseNavigation() const {return flagEnableMouseNavigation;}
@@ -478,6 +482,7 @@ signals:
 	void flagEnableMouseZoomingChanged(bool b);
 	void flagEnableMoveKeysChanged(bool b);
 	void flagEnableZoomKeysChanged(bool b);
+	void flagEnableMoveAtScreenEdgeChanged(bool b);
 	void userMaxFovChanged(double fov);
 	void currentFovChanged(double fov);
 	void currentDirectionChanged();
