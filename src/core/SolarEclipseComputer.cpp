@@ -1386,6 +1386,21 @@ void SolarEclipseComputer::computeNSLimitsOfShadow(const double JDP1, const doub
 
 		for(int n = 0; n < solA.values.size(); ++n)
 		{
+			// Refresh the references since they may have been
+			// invalidated in a previous iteration by insertion
+			const auto& solA = solutionsPerTime[i-1];
+			const auto& solB = solutionsPerTime[i];
+			if(solA.values.size() != solB.values.size())
+			{
+				// This can happen due to insertion of new points.
+				// Let's skip this case for now.
+				// FIXME: maybe we shouldn't.
+				++i;
+				if(i >= solutionsPerTime.size())
+					break;
+				continue;
+			}
+
 			if(solA.values[n].zeta * solB.values[n].zeta < 0)
 			{
 				const auto midJD = (solA.JD + solB.JD)/2;

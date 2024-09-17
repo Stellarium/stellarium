@@ -85,7 +85,7 @@ sudo apt install build-essential cmake zlib1g-dev libgl1-mesa-dev libdrm-dev gcc
                  qttools5-dev libqt5opengl5-dev qtmultimedia5-dev libqt5multimedia5-plugins \
                  libqt5serialport5 libqt5serialport5-dev qtpositioning5-dev libqt5positioning5 \
                  libqt5positioning5-plugins qtwebengine5-dev libqt5charts5-dev \
-                 libexiv2-dev libnlopt-cxx-dev
+                 libexiv2-dev libnlopt-cxx-dev libtbb-dev libtbb2
 ```
 
 ##### Qt6
