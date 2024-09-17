@@ -59,6 +59,8 @@
 #include "SpecialMarkersMgr.hpp"
 #include "StelViewportEffect.hpp"
 #include "StelGuiBase.hpp"
+#include "StelGui.hpp"
+#include "StelGuiItems.hpp"
 #include "StelPainter.hpp"
 #ifdef ENABLE_SCRIPTING
  #include "StelScriptMgr.hpp"
@@ -1468,6 +1470,11 @@ void StelApp::setAppFont(QFont font)
 
 QString StelApp::getVersion() const
 {
-	QStringList ver = StelUtils::getApplicationVersion().split(".");
-	return QString("%1.%2.%3").arg(ver[0], ver[1], ver[2]);
+	return StelUtils::getApplicationVersion();
+}
+
+void StelApp::enableBottomStelBarUpdates(bool enable)
+{
+	StelGui *gui=dynamic_cast<StelGui*>(getGui());
+	gui->getButtonBar()->enableTopoCentricUpdate(enable);
 }

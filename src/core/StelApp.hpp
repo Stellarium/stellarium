@@ -226,6 +226,12 @@ public:
 	//! The caller is responsible for destroying the GUI.
 	void setGui(StelGuiBase* b) {stelGui=b;}
 
+	//! Enable/disable updates to StelBottomBar
+	//! This may be important for temporary changes which should not cause two costly redraws of the texts.
+	//! After program launch, the bottom bar is updating according to signal connections.
+	//! This means, enclose the temporary state change with 2 calls (false/true) per such method.
+	void enableBottomStelBarUpdates(bool enable);
+
 #ifdef ENABLE_SCRIPTING
 	//! Get the script API proxy (for signal handling)
 	StelMainScriptAPIProxy* getMainScriptAPIProxy() const {return scriptAPIProxy;}
