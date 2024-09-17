@@ -1351,40 +1351,55 @@ void StelCore::moveObserverTo(const StelLocation& target, double duration, doubl
 	emit locationChanged(getCurrentLocation());
 }
 
+QCache<size_t, qint64> StelCore::utcOffsetCache;
+
 double StelCore::getUTCOffset(const double JD) const
 {
-	int year, month, day, hour, minute, second;
-	StelUtils::getDateTimeFromJulianDay(JD, &year, &month, &day, &hour, &minute, &second);
+	// This method takes a significant amount of time. Try to cache a few entries.
+	// All these elements can influence UTCOffset, so we must include them in the cache.
+	// Presumably, offset does not change during a minute, so we can exclude seconds here.
+	struct UTCOffsetHashData {
+		int year;
+		int month;
+		int day;
+		int hour;
+		int minute;
+		//int second;
+		StelLocation *loc;
+		QTimeZone *tz;
+	} u;
+	int second;
+	StelUtils::getDateTimeFromJulianDay(JD, &u.year, &u.month, &u.day, &u.hour, &u.minute, &second);
 	// as analogous to second statement in getJDFromDate, nkerr
-	if ( year <= 0 )
+	if ( u.year <= 0 )
 	{
-		year = year - 1;
+		u.year = u.year - 1;
 	}
 	//getTime/DateFromJulianDay returns UTC time, not local time
-	QDateTime universal(QDate(year, month, day), QTime(hour, minute, second), Qt::UTC);
+	QDateTime universal(QDate(u.year, u.month, u.day), QTime(u.hour, u.minute, second), Qt::UTC);
 	if (!universal.isValid())
 	{
 		//qWarning() << "JD " << QString("%1").arg(JD) << " out of bounds of QT help with GMT shift, using current datetime";
 		// Assumes the GMT shift was always the same before year -4710
 		// NOTE: QDateTime has no year 0, and therefore likely different leap year rules.
 		// Under which circumstances do we get invalid universal?
-		universal = QDateTime(QDate(-4710, month, day), QTime(hour, minute, second), Qt::UTC);
+		universal = QDateTime(QDate(-4710, u.month, u.day), QTime(u.hour, u.minute, second), Qt::UTC);
 	}
 
 #if defined(Q_OS_WIN)
-	if (abs(year)<3)
+	if (abs(u.year)<3)
 	{
 		// Mitigate a QTBUG on Windows (GH #594).
 		// This bug causes offset to be MIN_INT in January to March, 1AD.
 		// We assume a constant offset in this remote history,
 		// so we construct yet another date to get a valid offset.
 		// Application of the named time zones is inappropriate in any case.
-		universal = QDateTime(QDate(3, month, day), QTime(hour, minute, second), Qt::UTC);
+		universal = QDateTime(QDate(3, u.month, u.day), QTime(u.hour, u.minute, second), Qt::UTC);
 	}
 #endif
-	StelLocation loc = getCurrentLocation();
-	QString tzName = getCurrentTimeZone();
-	QTimeZone tz(tzName.toUtf8());
+	const StelLocation &loc = getCurrentLocation();
+	const QString tzName(getCurrentTimeZone());
+	const QTimeZone tz(tzName.toUtf8());
 	// We must fight a bug in Qt6.2 on Linux. For some reason tz.isValid() is true even for our self-named zones LMST,LTST,system_default.
 	// We must use an intermediate Boolean which we set to false where needed.
 	bool tzValid=tz.isValid();
@@ -1395,83 +1410,98 @@ double StelCore::getUTCOffset(const double JD) const
 		qWarning() << "Invalid timezone: " << tzName;
 	}
 
-	qint64 shiftInSeconds = 0;
-	if (tzName=="system_default" || (loc.planetName=="Earth" && !tzValid && !QString("LMST LTST").contains(tzName)))
+	// Complete the cache object and hash it.
+	u.loc= & const_cast<StelLocation &>(loc);
+	u.tz = & const_cast<QTimeZone&>(tz);
+	size_t dateLocHash=qHash(&u);
+
+	qint64 shiftInSeconds;
+	qint64 *shiftInSecondsCached=utcOffsetCache.object(dateLocHash);
+
+	if (shiftInSecondsCached) // found in cache
 	{
-		QDateTime local = universal.toLocalTime();
-		//Both timezones should be interpreted as UTC because secsTo() converts both
-		//times to UTC if their zones have different daylight saving time rules.
-		local.setTimeSpec(Qt::UTC);
-		shiftInSeconds = universal.secsTo(local);
-		if (abs(shiftInSeconds)>50000 || shiftInSeconds==INT_MIN)
-		{
-			qDebug() << "TZ system_default or invalid, At JD" << QString::number(JD, 'g', 11) << ", shift:" << shiftInSeconds;
-		}
+		shiftInSeconds=*shiftInSecondsCached;
 	}
 	else
 	{
-		// The first adoption of a standard time was on December 1, 1847 in Great Britain
-		if (tzValid && loc.planetName=="Earth" && (JD>=StelCore::TZ_ERA_BEGINNING || getUseCustomTimeZone()))
+		if (tzName==L1S("system_default") || (loc.planetName==L1S("Earth") && !tzValid && !QString("LMST LTST").contains(tzName)))
 		{
-			if (getUseDST())
-				shiftInSeconds = tz.offsetFromUtc(universal);
-			else
-				shiftInSeconds = tz.standardTimeOffset(universal);
-			if (abs(shiftInSeconds)>500000 || shiftInSeconds==INT_MIN)
+			QDateTime local = universal.toLocalTime();
+			//Both timezones should be interpreted as UTC because secsTo() converts both
+			//times to UTC if their zones have different daylight saving time rules.
+			local.setTimeSpec(Qt::UTC);
+			shiftInSeconds = universal.secsTo(local);
+			if (abs(shiftInSeconds)>50000 || shiftInSeconds==INT_MIN)
 			{
-				// Something very strange has happened. The Windows-only clause above already mitigated GH #594.
-				// Trigger this with a named custom TZ like Europe/Stockholm.
-				// Then try to wheel back some date in January-March from year 10 to 0. Instead of year 1, it jumps to 70,
-				// an offset of INT_MIN
-				qWarning() << "ERROR TRAPPED! --- Please submit a bug report with this logfile attached.";
-				qWarning() << "TZ" << tz << "valid, but at JD" << QString::number(JD, 'g', 11) << ", shift:" << shiftInSeconds;
-				qWarning() << "Universal reference date: " << universal.toString();
+				qDebug() << "TZ system_default or invalid, At JD" << QString::number(JD, 'g', 11) << ", shift:" << shiftInSeconds;
 			}
 		}
 		else
 		{
-			shiftInSeconds = qRound((loc.getLongitude()/15.f)*3600.f); // Local Mean Solar Time
-		}
-		if (tzName=="LTST")
-			shiftInSeconds += qRound(getSolutionEquationOfTime()*60);
-	}
-	//qDebug() << "ShiftInSeconds:" << shiftInSeconds;
-	#ifdef Q_OS_WIN
-	// A dirty hack for report: https://github.com/Stellarium/stellarium/issues/686
-	// TODO: switch to IANA TZ on all operating systems
-	if (tzName=="Europe/Volgograd")
-		shiftInSeconds = 4*3600; // UTC+04:00
-	#endif
-
-	// Extraterrestrial: Either use the configured Terrestrial timezone, or even a pseudo-LMST based on planet's rotation speed?
-	if (loc.planetName!="Earth")
-	{
-		if (tzValid && (JD>=StelCore::TZ_ERA_BEGINNING || getUseCustomTimeZone()))
-		{
-			if (getUseDST())
-				shiftInSeconds = tz.offsetFromUtc(universal);
-			else
-				shiftInSeconds = tz.standardTimeOffset(universal);
-			if (shiftInSeconds==INT_MIN) // triggered error
+			// The first adoption of a standard time was on December 1, 1847 in Great Britain
+			if (tzValid && loc.planetName==L1S("Earth") && (JD>=StelCore::TZ_ERA_BEGINNING || getUseCustomTimeZone()))
 			{
-				// Something very strange has happened. The Windows-only clause above already mitigated GH #594.
-				// Trigger this with a named custom TZ like Europe/Stockholm.
-				// Then try to wheel back some date in January-March from year 10 to 0. Instead of year 1, it jumps to 70,
-				// an offset of INT_MIN
-				qWarning() << "ERROR TRAPPED! --- Please submit a bug report with this logfile attached.";
-				qWarning() << "TZ" << tz << "valid, but at JD" << QString::number(JD, 'g', 11) << ", shift:" << shiftInSeconds;
-				qWarning() << "Universal reference date: " << universal.toString();
+				if (getUseDST())
+					shiftInSeconds = tz.offsetFromUtc(universal);
+				else
+					shiftInSeconds = tz.standardTimeOffset(universal);
+				if (abs(shiftInSeconds)>500000 || shiftInSeconds==INT_MIN)
+				{
+					// Something very strange has happened. The Windows-only clause above already mitigated GH #594.
+					// Trigger this with a named custom TZ like Europe/Stockholm.
+					// Then try to wheel back some date in January-March from year 10 to 0. Instead of year 1, it jumps to 70,
+					// an offset of INT_MIN
+					qWarning() << "ERROR TRAPPED! --- Please submit a bug report with this logfile attached.";
+					qWarning() << "TZ" << tz << "valid, but at JD" << QString::number(JD, 'g', 11) << ", shift:" << shiftInSeconds;
+					qWarning() << "Universal reference date: " << universal.toString();
+				}
+			}
+			else
+			{
+				shiftInSeconds = qRound((loc.getLongitude()/15.f)*3600.f); // Local Mean Solar Time
+			}
+			if (tzName==L1S("LTST"))
+				shiftInSeconds += qRound(getSolutionEquationOfTime()*60);
+		}
+		//qDebug() << "ShiftInSeconds:" << shiftInSeconds;
+		#ifdef Q_OS_WIN
+		// A dirty hack for report: https://github.com/Stellarium/stellarium/issues/686
+		// TODO: switch to IANA TZ on all operating systems
+		if (tzName==L1S("Europe/Volgograd"))
+			shiftInSeconds = 4*3600; // UTC+04:00
+		#endif
+
+		// Extraterrestrial: Either use the configured Terrestrial timezone, or even a pseudo-LMST based on planet's rotation speed?
+		if (loc.planetName!=L1S("Earth"))
+		{
+			if (tzValid && (JD>=StelCore::TZ_ERA_BEGINNING || getUseCustomTimeZone()))
+			{
+				if (getUseDST())
+					shiftInSeconds = tz.offsetFromUtc(universal);
+				else
+					shiftInSeconds = tz.standardTimeOffset(universal);
+				if (shiftInSeconds==INT_MIN) // triggered error
+				{
+					// Something very strange has happened. The Windows-only clause above already mitigated GH #594.
+					// Trigger this with a named custom TZ like Europe/Stockholm.
+					// Then try to wheel back some date in January-March from year 10 to 0. Instead of year 1, it jumps to 70,
+					// an offset of INT_MIN
+					qWarning() << "ERROR TRAPPED! --- Please submit a bug report with this logfile attached.";
+					qWarning() << "TZ" << tz << "valid, but at JD" << QString::number(JD, 'g', 11) << ", shift:" << shiftInSeconds;
+					qWarning() << "Universal reference date: " << universal.toString();
+				}
+			}
+			else
+			{
+				// TODO: This should give "mean solar time" for any planet.
+				// Combine rotation and orbit, or (for moons) rotation and orbit of parent planet.
+				// LTST is even worse, needs equation of time for other planets.
+				shiftInSeconds = 0; // For now, give UT
 			}
 		}
-		else
-		{
-			// TODO: This should give "mean solar time" for any planet.
-			// Combine rotation and orbit, or (for moons) rotation and orbit of parent planet.
-			// LTST is even worse, needs equation of time for other planets.
-			shiftInSeconds = 0; // For now, give UT
-		}
+		shiftInSecondsCached = new qint64(shiftInSeconds);
+		utcOffsetCache.insert(dateLocHash, shiftInSecondsCached);
 	}
-
 	return shiftInSeconds / 3600.0;
 }
 

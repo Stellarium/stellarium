@@ -27,6 +27,7 @@
 #include "StelSkyDrawer.hpp"
 #include "StelPropertyMgr.hpp"
 #include "Dithering.hpp"
+#include <QCache>
 #include <QString>
 #include <QStringList>
 #include <QTime>
@@ -315,8 +316,13 @@ public:
 	const StelLocation& getCurrentLocation() const;
 	//! Get the UTC offset on the current location (in hours)
 	//! N.B. This is a rather costly operation. Re-use where possible!
+	//! In addition, this is now cached with 1-minute granularity.
 	double getUTCOffset(const double JD) const;
+private:
+	// Cache is over qHash(&UTCOffsetHashData).
+	static QCache<size_t, qint64> utcOffsetCache;
 
+public:
 	QString getCurrentTimeZone() const;
 	void setCurrentTimeZone(const QString& tz);
 
