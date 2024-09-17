@@ -464,7 +464,7 @@ ShadowLimitPoints getShadowLimitQs(StelCore*const core, const double JD, const d
 		{
 			const auto [lhs, lhsPrime] = lhsAndDerivative(p.Q);
 			const auto denom = ddot*cos(p.Q) - mudot*cosd*sin(p.Q);
-			const bool toBeRemoved = abs(lhs / denom) > 1e-10*lhsScale;
+			const bool toBeRemoved = abs(lhs / sqr(denom)) > 1e-10*lhsScale;
 			return toBeRemoved;
 		}), points.values.end());
 
