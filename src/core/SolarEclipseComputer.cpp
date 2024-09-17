@@ -234,10 +234,11 @@ ShadowLimitPoints getShadowLimitQs(StelCore*const core, const double JD, const d
 	 * Now replace zeta by the expression obtainable from (11.78),
 	 *
 	 *                                              -adot + bdot*cos(Q) - cdot*sin(Q)
-	 *                               zeta = -------------------------------------------------,
-	 *                                      (1 + tan(f)^2)*(ddot*cos(Q) - mudot*cos(d)*sin(Q)
+	 *                               zeta = --------------------------------------------------,
+	 *                                      (1 + tan(f)^2)*(ddot*cos(Q) - mudot*cos(d)*sin(Q))
 	 *
-	 * yielding, after multiplying both sides of the result by (1+tan(f))^2, the final equation:
+	 * yielding, after multiplying both sides of the result by the square of the denominator of the above expression,
+	 * the final equation:
 	 *
 	 * (-adot + bdot*cos(Q) - cdot*sin(Q))^2*(rho1^2 + 2*cos(Q)*sin(d1 - d2)*rho1*rho2*tan(f) +
 	 *  + (cos(Q)^2 + cos(d1 - d2)^2*sin(Q)^2*rho1^2)*rho2^2*tan(f)^2) +
