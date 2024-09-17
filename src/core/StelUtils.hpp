@@ -77,7 +77,7 @@
 	#define M_180_PIf   (180.f/M_PIf)
 #endif
 
-#define stelpow10f(x) std::exp((x) * 2.3025850930f)
+#define stelpow10f(x) std::expf((x) * 2.3025850930f)
 
 #define L1S(x) QLatin1String(x)
 

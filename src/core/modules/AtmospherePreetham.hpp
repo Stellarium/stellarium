@@ -61,10 +61,10 @@ private:
 	Skybright skyb;
 	unsigned int skyResolutionY,skyResolutionX;
 
-	Vec2f* posGrid;
+	QVarLengthArray<Vec2f> posGrid;
 	QOpenGLBuffer posGridBuffer;
 	QOpenGLBuffer indicesBuffer;
-	Vec4f* colorGrid;
+	QVarLengthArray<Vec4f> colorGrid;
 	QOpenGLBuffer colorGridBuffer;
 	QOpenGLVertexArrayObject vao;
 
