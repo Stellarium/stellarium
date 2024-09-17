@@ -39,10 +39,8 @@ AtmospherePreetham::AtmospherePreetham(Skylight& sky)
 	, sky(sky)
 	, skyResolutionY(44)
 	, skyResolutionX(44)
-	, posGrid(Q_NULLPTR)
 	, posGridBuffer(QOpenGLBuffer::VertexBuffer)
 	, indicesBuffer(QOpenGLBuffer::IndexBuffer)
-	, colorGrid(Q_NULLPTR)
 	, colorGridBuffer(QOpenGLBuffer::VertexBuffer)
 {
 	setFadeDuration(1.5f);
@@ -114,10 +112,6 @@ AtmospherePreetham::AtmospherePreetham(Skylight& sky)
 
 AtmospherePreetham::~AtmospherePreetham(void)
 {
-	delete [] posGrid;
-	posGrid = Q_NULLPTR;
-	delete[] colorGrid;
-	colorGrid = Q_NULLPTR;
 	delete atmoShaderProgram;
 	atmoShaderProgram = Q_NULLPTR;
 }
@@ -165,12 +159,10 @@ void AtmospherePreetham::computeColor(StelCore* core, const double JD, const Pla
 	{
 		// The viewport changed: update the number of point of the grid
 		viewport = prj->getViewport();
-		delete[] colorGrid;
-		delete [] posGrid;
 		skyResolutionY = StelApp::getInstance().getSettings()->value("landscape/atmosphereybin", 44).toUInt();
 		skyResolutionX = static_cast<unsigned int>(floorf(0.5f+static_cast<float>(skyResolutionY)*(0.5f*sqrtf(3.0f))*static_cast<float>(prj->getViewportWidth())/static_cast<float>(prj->getViewportHeight())));
-		posGrid = new Vec2f[static_cast<size_t>((1+skyResolutionX)*(1+skyResolutionY))];
-		colorGrid = new Vec4f[static_cast<size_t>((1+skyResolutionX)*(1+skyResolutionY))];
+		posGrid.resize(static_cast<size_t>((1+skyResolutionX)*(1+skyResolutionY)));
+		colorGrid.resize(static_cast<size_t>((1+skyResolutionX)*(1+skyResolutionY)));
 		float stepX = static_cast<float>(prj->getViewportWidth()) / (static_cast<float>(skyResolutionX)-0.5f);
 		float stepY = static_cast<float>(prj->getViewportHeight()) / static_cast<float>(skyResolutionY);
 		float viewport_left = static_cast<float>(prj->getViewportPosX());
@@ -191,7 +183,7 @@ void AtmospherePreetham::computeColor(StelCore* core, const double JD, const Pla
 		posGridBuffer.setUsagePattern(QOpenGLBuffer::StaticDraw);
 		posGridBuffer.create();
 		posGridBuffer.bind();
-		posGridBuffer.allocate(posGrid, static_cast<int>((1+skyResolutionX)*(1+skyResolutionY))*8);
+		posGridBuffer.allocate(posGrid.constData(), static_cast<int>((1+skyResolutionX)*(1+skyResolutionY))*8);
 		posGridBuffer.release();
 		
 		// Generate the indices used to draw the quads
@@ -222,7 +214,7 @@ void AtmospherePreetham::computeColor(StelCore* core, const double JD, const Pla
 		colorGridBuffer.setUsagePattern(QOpenGLBuffer::DynamicDraw);
 		colorGridBuffer.create();
 		colorGridBuffer.bind();
-		colorGridBuffer.allocate(colorGrid, static_cast<int>((1+skyResolutionX)*(1+skyResolutionY)*4*4));
+		colorGridBuffer.allocate(colorGrid.constData(), static_cast<int>((1+skyResolutionX)*(1+skyResolutionY)*4*4));
 		colorGridBuffer.release();
 
 		bindVAO();
@@ -386,7 +378,7 @@ void AtmospherePreetham::computeColor(StelCore* core, const double JD, const Pla
 	}
 	
 	colorGridBuffer.bind();
-	colorGridBuffer.write(0, colorGrid, static_cast<int>((1+skyResolutionX)*(1+skyResolutionY)*4*4));
+	colorGridBuffer.write(0, colorGrid.constData(), static_cast<int>((1+skyResolutionX)*(1+skyResolutionY)*4*4));
 	colorGridBuffer.release();
 	
 	// Update average luminance
