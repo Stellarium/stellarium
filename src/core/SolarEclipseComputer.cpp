@@ -457,6 +457,16 @@ ShadowLimitPoints getShadowLimitQs(StelCore*const core, const double JD, const d
 	while(rootFound);
 
 	std::sort(points.values.begin(), points.values.end(), [](auto& p1, auto& p2){ return p1.Q < p2.Q; });
+	// Remove spurious solutions that appeared due to multiplication by
+	// a possibly vanishing denominator of the expression for zeta.
+	points.values.erase(std::remove_if(points.values.begin(), points.values.end(),
+		[&lhsAndDerivative,cosd,ddot,mudot,lhsScale](const auto& p)
+		{
+			const auto [lhs, lhsPrime] = lhsAndDerivative(p.Q);
+			const auto denom = ddot*cos(p.Q) - mudot*cosd*sin(p.Q);
+			const bool toBeRemoved = abs(lhs / denom) > 1e-10*lhsScale;
+			return toBeRemoved;
+		}), points.values.end());
 
 	return points;
 }
