@@ -396,10 +396,16 @@ private:
 
 	void drawTextGravity180(float x, float y, const QString& str, float xshift = 0, float yshift = 0);
 
-	// Used by the method below
-	static QVector<Vec3f> smallCircleVertexArray;
-	static QVector<Vec4f> smallCircleColorArray;
+	// Used by the method below.
+	static QVarLengthArray<Vec3f, 128> smallCircleVertexArray;
+	static QVarLengthArray<Vec4f, 128> smallCircleColorArray;
 	void drawSmallCircleVertexArray();
+
+	// more arrays
+	static QVarLengthArray<Vec3f, 4096> polygonVertexArray;
+	static QVarLengthArray<Vec2f, 4096> polygonTextureCoordArray;
+	static QVarLengthArray<Vec3f, 4096> polygonColorArray;
+	static QVarLengthArray<unsigned int, 4096> indexArray;
 
 	//! The associated instance of projector
 	StelProjectorP prj;

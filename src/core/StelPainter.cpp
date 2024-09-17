@@ -846,9 +846,10 @@ inline void fIter(const StelProjectorP& prj, const Vec3d& p1, const Vec3d& p2, V
 	}
 }
 
-// Used by the method below
-QVector<Vec3f> StelPainter::smallCircleVertexArray;
-QVector<Vec4f> StelPainter::smallCircleColorArray;
+// Used by the method below. A test before 24.3 showed no more than 64 vertices ever used.
+// This uses much faster stack allocation if specified max length is not exceeded, else falls back to heap allocation.
+QVarLengthArray<Vec3f, 128> StelPainter::smallCircleVertexArray;
+QVarLengthArray<Vec4f, 128> StelPainter::smallCircleColorArray;
 
 void StelPainter::drawSmallCircleVertexArray()
 {
@@ -860,6 +861,8 @@ void StelPainter::drawSmallCircleVertexArray()
 	}
 	if (smallCircleVertexArray.isEmpty())
 		return;
+	//if (smallCircleVertexArray.length()>64)
+	//	qDebug() << "Size: " << smallCircleVertexArray.length();
 
 	enableClientStates(true, false, !smallCircleColorArray.isEmpty());
 	setVertexPointer(3, GL_FLOAT, smallCircleVertexArray.constData());
@@ -1488,10 +1491,10 @@ void StelPainter::projectSphericalTriangle(const SphericalCap* clippingCap, cons
 	return;
 }
 
-static QVarLengthArray<Vec3f, 4096> polygonVertexArray;
-static QVarLengthArray<Vec2f, 4096> polygonTextureCoordArray;
-static QVarLengthArray<Vec3f, 4096> polygonColorArray;
-static QVarLengthArray<unsigned int, 4096> indexArray;
+QVarLengthArray<Vec3f, 4096> StelPainter::polygonVertexArray;
+QVarLengthArray<Vec2f, 4096> StelPainter::polygonTextureCoordArray;
+QVarLengthArray<Vec3f, 4096> StelPainter::polygonColorArray;
+QVarLengthArray<unsigned int, 4096> StelPainter::indexArray;
 
 void StelPainter::drawGreatCircleArcs(const StelVertexArray& va, const SphericalCap* clippingCap)
 {
