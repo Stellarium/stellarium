@@ -1469,8 +1469,7 @@ void StelApp::setAppFont(QFont font)
 
 QString StelApp::getVersion() const
 {
-	QStringList ver = StelUtils::getApplicationVersion().split(".");
-	return QString("%1.%2.%3").arg(ver[0], ver[1], ver[2]);
+	return StelUtils::getApplicationVersion();
 }
 
 void StelApp::enableBottomStelBarUpdates(bool enable)
