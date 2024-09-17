@@ -319,8 +319,8 @@ public:
 	//! In addition, this is now cached with 1-minute granularity.
 	double getUTCOffset(const double JD) const;
 private:
-	// Cache is over qHash(&UTCOffsetHashData).
-	static QCache<size_t, qint64> utcOffsetCache;
+	// Cache is over size_t qHash(&UTCOffsetHashData).
+	mutable QCache<size_t, qint64> utcOffsetCache;
 
 public:
 	QString getCurrentTimeZone() const;

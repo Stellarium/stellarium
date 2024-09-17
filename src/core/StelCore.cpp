@@ -1351,8 +1351,6 @@ void StelCore::moveObserverTo(const StelLocation& target, double duration, doubl
 	emit locationChanged(getCurrentLocation());
 }
 
-QCache<size_t, qint64> StelCore::utcOffsetCache;
-
 double StelCore::getUTCOffset(const double JD) const
 {
 	// This method takes a significant amount of time. Try to cache a few entries.
