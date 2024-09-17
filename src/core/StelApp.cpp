@@ -59,6 +59,7 @@
 #include "SpecialMarkersMgr.hpp"
 #include "StelViewportEffect.hpp"
 #include "StelGuiBase.hpp"
+#include "StelGuiItems.hpp"
 #include "StelPainter.hpp"
 #ifdef ENABLE_SCRIPTING
  #include "StelScriptMgr.hpp"
@@ -1470,4 +1471,10 @@ QString StelApp::getVersion() const
 {
 	QStringList ver = StelUtils::getApplicationVersion().split(".");
 	return QString("%1.%2.%3").arg(ver[0], ver[1], ver[2]);
+}
+
+void StelApp::enableBottomStelBarUpdates(bool enable)
+{
+	StelGui *gui=dynamic_cast<StelGui*>(getGui());
+	gui->getButtonBar()->enableTopoCentricUpdate(enable);
 }

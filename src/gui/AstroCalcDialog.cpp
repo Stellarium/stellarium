@@ -2553,6 +2553,7 @@ void AstroCalcDialog::generateLunarEclipses()
 	{
 		initListLunarEclipse();
 
+		StelApp::getInstance().enableBottomStelBarUpdates(false);
 		const double currentJD = core->getJD();   // save current JD
 		double startyear = ui->eclipseFromYearSpinBox->value();
 		double years = ui->eclipseYearsSpinBox->value();
@@ -2568,10 +2569,9 @@ void AstroCalcDialog::generateLunarEclipses()
 		static const double approxJD = 2451550.09765;
 		static const double synodicMonth = 29.530588853;
 
-		static SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
-		PlanetP moon = ssystem->getMoon();
-		PlanetP sun = ssystem->getSun();
-		PlanetP earth = ssystem->getEarth();
+		PlanetP moon  = solarSystem->getMoon();
+		PlanetP sun   = solarSystem->getSun();
+		PlanetP earth = solarSystem->getEarth();
 
 		// Find approximate JD of Full Moon = Geocentric opposition in longitude
 		double tmp = (startJD - approxJD - (synodicMonth * 0.5)) / synodicMonth;
@@ -2743,6 +2743,7 @@ void AstroCalcDialog::generateLunarEclipses()
 		ui->lunareclipseTreeWidget->sortItems(LunarEclipseDate, Qt::AscendingOrder);
 		enableLunarEclipsesButtons(true);
 		enableLunarEclipsesCircumstancesButtons(false);
+		StelApp::getInstance().enableBottomStelBarUpdates(true);
 	}
 	else
 		cleanupLunarEclipses();
@@ -3130,14 +3131,15 @@ void AstroCalcDialog::generateSolarEclipses()
 		double tmp = (startJD - approxJD - synodicMonth) / synodicMonth;
 		double InitJD = approxJD + int(tmp) * synodicMonth;
 
+		StelApp::getInstance().enableBottomStelBarUpdates(false);
+		core->setUseTopocentricCoordinates(false);
+		core->update(0);
 		// Search for solar eclipses at each New Moon
 		for (int i = 0; i <= elements+2; i++)
 		{
 			double JD = InitJD + synodicMonth * i;
 			if (JD > startJD)
 			{
-				core->setUseTopocentricCoordinates(false);
-				core->update(0);
 
 				// Find exact time of minimum distance between axis of lunar shadow cone to the center of Earth
 				JD = ecliptor.getJDofMinimumDistance(JD);
@@ -3281,6 +3283,7 @@ void AstroCalcDialog::generateSolarEclipses()
 		core->setJD(currentJD);
 		core->setUseTopocentricCoordinates(saveTopocentric);
 		core->update(0); // enforce update cache to avoid odd selection of Moon details!
+		StelApp::getInstance().enableBottomStelBarUpdates(true);
 
 		// adjust the column width
 		for (int i = 0; i < SolarEclipseCount; ++i)
@@ -3352,6 +3355,7 @@ void AstroCalcDialog::generateSolarEclipsesLocal()
 		QString eclipseTypeStr, magStr, durationStr;
 		bool centraleclipse = false;
 
+		StelApp::getInstance().enableBottomStelBarUpdates(false);
 		const bool saveTopocentric = core->getUseTopocentricCoordinates();
 		core->setUseTopocentricCoordinates(false); // no immediate force-update here.
 		const double approxJD = 2451550.09765;
@@ -3586,6 +3590,7 @@ void AstroCalcDialog::generateSolarEclipsesLocal()
 		core->setJD(currentJD);
 		core->setUseTopocentricCoordinates(saveTopocentric);
 		core->update(0); // enforce update cache to avoid odd selection of Moon details!
+		StelApp::getInstance().enableBottomStelBarUpdates(true);
 
 		// adjust the column width
 		for (int i = 0; i < SolarEclipseLocalCount; ++i)
@@ -3892,6 +3897,7 @@ void AstroCalcDialog::saveSolarEclipseMap()
 	if (ui->solareclipsecontactsTreeWidget->topLevelItemCount() == 0)
 		return;
 
+	StelApp::getInstance().enableBottomStelBarUpdates(false);
 	const bool savedTopocentric = core->getUseTopocentricCoordinates();
 	core->setUseTopocentricCoordinates(false);
 	core->update(0);
@@ -3902,6 +3908,7 @@ void AstroCalcDialog::saveSolarEclipseMap()
 
 	core->setUseTopocentricCoordinates(savedTopocentric);
 	core->update(0);
+	StelApp::getInstance().enableBottomStelBarUpdates(true);
 
 	// Use year-month-day in the file name
 	const auto eclipseDateStr = localeMgr->getPrintableDateLocal(JDMid, core->getUTCOffset(JDMid));
@@ -4157,6 +4164,7 @@ void AstroCalcDialog::generateTransits()
 	const bool onEarth = core->getCurrentPlanet()==solarSystem->getEarth();
 	if (onEarth)
 	{
+		StelApp::getInstance().enableBottomStelBarUpdates(false);
 		initListTransit();
 		const double currentJD = core->getJD(); // save current JD
 		const bool saveTopocentric = core->getUseTopocentricCoordinates();
@@ -4605,6 +4613,8 @@ void AstroCalcDialog::generateTransits()
 		// sort-by-date
 		ui->transitTreeWidget->sortItems(TransitDate, Qt::AscendingOrder);
 		enableTransitsButtons(true);
+
+		StelApp::getInstance().enableBottomStelBarUpdates(true);
 	}
 	else
 		cleanupTransits();

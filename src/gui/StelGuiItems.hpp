@@ -282,6 +282,10 @@ public:
 	QRectF getButtonsBoundingRect() const;
 	//! @return height of vertical gap (pixels)
 	int getGap() const {return gap;}
+
+	//! enable connection to StelCore::flagUseTopocentricCoordinatesChanged()
+	//! Recommended in operations that temporarily switch off and back on.
+	void enableTopoCentricUpdate(bool enable);
 signals:
 	void sizeChanged();
 

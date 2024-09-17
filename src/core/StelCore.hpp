@@ -553,7 +553,7 @@ public slots:
 
 	//! @return whether topocentric coordinates are currently used.
 	bool getUseTopocentricCoordinates() const {return flagUseTopocentricCoordinates;}
-	//! Set whether you want computation and simulation of nutation (a slight wobble of Earth's axis, just a few arcseconds).
+	//! Set whether you want topocentric or planetocentric data
 	void setUseTopocentricCoordinates(bool use) { if (flagUseTopocentricCoordinates!= use) { flagUseTopocentricCoordinates=use; emit flagUseTopocentricCoordinatesChanged(use); }}
 
 	//! Return the preset sky time in JD

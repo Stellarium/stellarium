@@ -1053,6 +1053,18 @@ void BottomStelBar::buttonHoverChanged(bool b)
 	StelMainView::getInstance().thereWasAnEvent();
 }
 
+void BottomStelBar::enableTopoCentricUpdate(bool enable)
+{
+	bool ok;
+	if (enable)
+		ok=connect(StelApp::getInstance().getCore(), &StelCore::flagUseTopocentricCoordinatesChanged, this, [=](bool){updateText(false, true);});
+	else
+		ok=disconnect(StelApp::getInstance().getCore(), &StelCore::flagUseTopocentricCoordinatesChanged, nullptr, nullptr); //, this, [=](bool b, bool update){if (update) updateText(false, true);});
+
+	if (!ok)
+		qCritical() << "BottomStelBar: enableTopoCentricUpdate failed.";
+}
+
 StelBarsFrame::StelBarsFrame(QGraphicsItem* parent) : QGraphicsPathItem(parent), roundSize(6)
 {
 	setBrush(QBrush(QColor::fromRgbF(0.22, 0.22, 0.23, 0.2)));

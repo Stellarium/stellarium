@@ -991,13 +991,14 @@ QString Planet::getInfoStringExtra(const StelCore *core, const InfoStringGroup& 
 	if (core->getCurrentObserver()->isTraveling()) // transition to elsewhere: report nothing.
 		return QString();
 
+	static StelApp &app = StelApp::getInstance();
 	QString str;
 	QTextStream oss(&str);
 
 	if (flags&Extra)
 	{
-		const bool withTables = StelApp::getInstance().getFlagUseFormattingOutput();
-		const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
+		const bool withTables = app.getFlagUseFormattingOutput();
+		const bool withDecimalDegree = app.getFlagShowDecimalDegrees();
 		const double angularSize = getAngularRadius(core)*(2.*M_PI_180);
 		const double siderealPeriod = getSiderealPeriod(); // days required for revolution around parent.
 		const double siderealDay = getSiderealDay(); // =re.period
@@ -1077,7 +1078,8 @@ QString Planet::getInfoStringExtra(const StelCore *core, const InfoStringGroup& 
 		if (englishName==L1S("Moon") && onEarth)
 		{
 			// For computing the Moon age we use geocentric coordinates
-			StelCore* core1 = StelApp::getInstance().getCore(); // we need non-const reference here.
+			app.enableBottomStelBarUpdates(false);
+			StelCore* core1 = app.getCore(); // we need non-const reference here.
 			const bool useTopocentric = core1->getUseTopocentricCoordinates();
 			core1->setUseTopocentricCoordinates(false);
 			core1->update(0); // enforce update cache!
@@ -1089,6 +1091,7 @@ QString Planet::getInfoStringExtra(const StelCore *core, const InfoStringGroup& 
 			StelUtils::equToEcl(raSun, deSun, eclJDE, &lambdaSun, &betaSun);
 			core1->setUseTopocentricCoordinates(useTopocentric);
 			core1->update(0); // enforce update cache to avoid odd selection of Moon details!
+			app.enableBottomStelBarUpdates(true);
 			const double deltaLong = StelUtils::fmodpos((lambdaMoon-lambdaSun)*M_180_PI, 360.);
 			QString moonPhase = "";
 			if ((deltaLong<0.5) || (deltaLong>359.5))
@@ -1290,6 +1293,8 @@ QString Planet::getInfoStringExtra(const StelCore *core, const InfoStringGroup& 
 			{
 				// Solar eclipse information
 				// Use geocentric coordinates
+				app.enableBottomStelBarUpdates(false);
+
 				StelCore* core1 = StelApp::getInstance().getCore();
 				const bool useTopocentric = core1->getUseTopocentricCoordinates();
 				core1->setUseTopocentricCoordinates(false);
@@ -1355,6 +1360,7 @@ QString Planet::getInfoStringExtra(const StelCore *core, const InfoStringGroup& 
 				}
 				core1->setUseTopocentricCoordinates(useTopocentric);
 				core1->update(0); // enforce update cache to avoid odd selection of Moon details!
+				app.enableBottomStelBarUpdates(true);
 			}
 		}
 
@@ -1534,14 +1540,17 @@ QVariantMap Planet::getInfoMap(const StelCore *core) const
 
 QPair<double,double> Planet::getLunarEclipseMagnitudes() const
 {
-	QPair<double,double> magnitudes;
+	static StelApp &app=StelApp::getInstance();
 	// Use geocentric coordinates
-	StelCore* core = StelApp::getInstance().getCore();
+	static StelCore* core = app.getCore();
 	static SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
+	app.enableBottomStelBarUpdates(false);
+
 	const bool saveTopocentric = core->getUseTopocentricCoordinates();
 	core->setUseTopocentricCoordinates(false);
 	core->update(0);
 
+	QPair<double,double> magnitudes;
 	double raMoon, deMoon, raSun, deSun;
 	StelUtils::rectToSphe(&raMoon, &deMoon, getEquinoxEquatorialPos(core));
 	StelUtils::rectToSphe(&raSun, &deSun, ssystem->getSun()->getEquinoxEquatorialPos(core));
@@ -1579,6 +1588,8 @@ QPair<double,double> Planet::getLunarEclipseMagnitudes() const
 	}
 	core->setUseTopocentricCoordinates(saveTopocentric);
 	core->update(0); // enforce update cache to avoid odd selection of Moon details!
+	app.enableBottomStelBarUpdates(true);
+
 	return magnitudes;
 }
 
