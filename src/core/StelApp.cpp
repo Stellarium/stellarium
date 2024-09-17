@@ -59,6 +59,7 @@
 #include "SpecialMarkersMgr.hpp"
 #include "StelViewportEffect.hpp"
 #include "StelGuiBase.hpp"
+#include "StelGui.hpp"
 #include "StelGuiItems.hpp"
 #include "StelPainter.hpp"
 #ifdef ENABLE_SCRIPTING
