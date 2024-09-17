@@ -1413,6 +1413,7 @@ double StelCore::getUTCOffset(const double JD) const
 	// Complete the cache object and hash it.
 	u.loc= & const_cast<StelLocation &>(loc);
 	u.tz = & const_cast<QTimeZone&>(tz);
+	// TODO FIXME ERROR: We must hash the contents, not the pointer!
 	size_t dateLocHash=qHash(&u);
 
 	qint64 shiftInSeconds;
