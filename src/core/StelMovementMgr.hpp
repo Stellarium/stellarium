@@ -498,15 +498,15 @@ private slots:
 	void bindingFOVActions();
 
 private:
-	double currentFov; // The current FOV in degrees
+	StelCore* core;          // The core on which the movement are applied
+	QSettings* conf;
+	class StelObjectMgr* objectMgr;
 	double initFov;    // The FOV at startup
+	double currentFov; // The current FOV in degrees
 	double minFov;     // Minimum FOV in degrees
 	double maxFov;     // Maximum FOV in degrees. Depends on projection.
 	double userMaxFov; // Custom setting. Can be useful in a planetarium context.
 	double deltaFov;   // requested change of FOV (degrees) used during zooming.
-	StelCore* core;          // The core on which the movement are applied
-	QSettings* conf;
-	class StelObjectMgr* objectMgr;
 
 	// immediately add deltaFov argument to FOV - does not change private var.
 	void changeFov(double deltaFov);
