@@ -440,6 +440,15 @@ ShadowLimitPoints getShadowLimitQs(StelCore*const core, const double JD, const d
 				}
 				Q -= deltaQ;
 				Q = StelUtils::fmodpos(Q, 2*M_PI);
+				if(Q > M_PI/2)
+				{
+					// We want to avoid jumps at 0 or 2pi, because these values are likely to be
+					// crossed during the course of an eclipse, unlike the values of +pi or -pi.
+					// This jump would mess up our sorting by Q, leading to connecting lines from
+					// the north border to the south one.  So we make sure that the discontinuity
+					// is at ±pi instead of 2pi.
+					Q -= 2*M_PI;
+				}
 
 				if(finalIteration)
 				{
