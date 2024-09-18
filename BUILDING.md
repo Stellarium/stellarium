@@ -106,9 +106,9 @@ sudo apt install build-essential cmake zlib1g-dev libgl1-mesa-dev libdrm-dev lib
 ```
 
 
-#### Fedora / CentOS / Alma / Rocky
+#### Fedora / CentOS / AlmaLinux / Rocky Linux
 
-Note: This should work on RHEL/CentOS 8 or later and recent versions of Fedora. To build on CentOS 7 or older,
+Note: This should work on RHEL/CentOS/AlmaLinux/Rocky Linux 8 or later and recent versions of Fedora. To build on CentOS 7 or older,
 see [Linux with outdated Qt](#linux-with-outdated-qt).
 
 ```
