@@ -366,6 +366,10 @@ IF("${CMAKE_CXX_COMPILER_ID}" MATCHES "Clang")
 	  SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fno-common -Wall -Wextra -Wno-unused-parameter -Wno-string-plus-int")
 	  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-common -Wall -Wextra -Wno-unknown-warning-option -Wno-string-plus-int")
      ENDIF()
+     # Parallel algorithms support for Clang 17+ and operating systems with libc++
+     IF((${CMAKE_CXX_COMPILER_VERSION} VERSION_GREATER 16.0) AND (APPLE OR ${CMAKE_SYSTEM_NAME} STREQUAL "FreeBSD"))
+          SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fexperimental-library")
+     ENDIF()
 ENDIF()
 
 # FreeBSD-specific compiler flags
