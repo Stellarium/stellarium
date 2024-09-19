@@ -54,6 +54,7 @@ endif()
 
 TARGET_COMPILE_OPTIONS(LensDistortionEstimator-static PRIVATE "-DHAVE_NLOPT")
 IF(NLopt_ADDED)
+	SET_TARGET_PROPERTIES(nlopt PROPERTIES C_EXTENSIONS ON)
 	ADD_DEPENDENCIES(LensDistortionEstimator-static generate-cpp)
 	TARGET_INCLUDE_DIRECTORIES(LensDistortionEstimator-static
 	                           PRIVATE ${CPM_PACKAGE_NLopt_BINARY_DIR} ${CPM_PACKAGE_NLopt_SOURCE_DIR}/src/api)
