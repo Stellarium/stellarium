@@ -220,7 +220,8 @@ void AstroCalcAlmanacWidget::setTodayTimes()
 		return;
 
 	const double JD = core->getJD();
-	const double utcShift = core->getUTCOffset(JD) / 24.; // Fix DST shift...
+	const double utcOffsetHrs = core->getUTCOffset(JD);
+	const double utcShift = utcOffsetHrs / 24.; // Fix DST shift...
 	PlanetP sun = GETSTELMODULE(SolarSystem)->getSun();
 	double duration, duration1, duration2;
 	bool astronomicalTwilightBtn, nauticalTwilightBtn, civilTwilightBtn, sunBtn;
@@ -367,7 +368,7 @@ void AstroCalcAlmanacWidget::setTodayTimes()
 	civilTwilightDuration = StelUtils::hoursToHmsStr(duration, true);
 
 	// fill the data
-	ui->labelToday->setText(QString("%1 (%2)").arg(q_("Today"), localeMgr->getPrintableDateLocal(JD)));
+	ui->labelToday->setText(QString("%1 (%2)").arg(q_("Today"), localeMgr->getPrintableDateLocal(JD, utcOffsetHrs)));
 
 	ui->labelDayDuration->setText(dayDuration);
 	ui->labelCivilTwilightBegin->setText(civilTwilightBegin);
