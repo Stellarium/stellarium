@@ -61,6 +61,11 @@ labels:
           Hello @{{ issue.user.login }}!
 
           Thank you for suggesting this enhancement.
+      pr:
+        body: |
+          Hello @{{ pull_request.user.login }}!
+
+          Thank you for the suggested improvement.
   - name: feature
     labeled:
       issue:
@@ -68,6 +73,11 @@ labels:
           Hello @{{ issue.user.login }}!
 
           Thank you for suggesting this feature.
+      pr:
+        body: |
+          Hello @{{ pull_request.user.login }}!
+
+          Thank you for proposing of the feature.
   - name: wishlist
     labeled:
       issue:
@@ -82,10 +92,20 @@ labels:
           Hello @{{ issue.user.login }}!
  
           We really need your feedback.
+      pr:
+        body: |
+          Hello @{{ pull_request.user.login }}!
+ 
+          We really need your feedback.
     unlabeled:
       issue:
         body: |
           Hello @{{ issue.user.login }}!
+
+          Thank you for your feedback.
+      pr:
+        body: |
+          Hello @{{ pull_request.user.login }}!
 
           Thank you for your feedback.
   - name: "state: blocked"
