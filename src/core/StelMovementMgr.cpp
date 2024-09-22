@@ -124,6 +124,7 @@ StelMovementMgr::StelMovementMgr(StelCore* acore)
 	, flagAutoZoom(false)
 	, flagAutoZoomOutResetsDirection(conf->value("navigation/auto_zoom_out_resets_direction", true).toBool())
 	, mountMode(MountAltAzimuthal)
+	, flagIndicationMountMode(conf->value("gui/flag_indication_mount_mode", false).toBool())
 	, initViewPos(1., 0., 0.)
 	, initViewUp(0., 0., 1.)
 	, viewDirectionJ2000(0., 1., 0.)
@@ -133,7 +134,6 @@ StelMovementMgr::StelMovementMgr(StelCore* acore)
 	, viewportOffsetTimeline(new QTimeLine(1000, this))
 	, oldViewportOffset(0.0, 0.0)
 	, targetViewportOffset(0.0, 0.0)
-	, flagIndicationMountMode(conf->value("gui/flag_indication_mount_mode", false).toBool())
 	, lastMessageID(0)
 {
 	setObjectName("StelMovementMgr");
@@ -1736,6 +1736,16 @@ void StelMovementMgr::setUserMaxFov(double max)
 	}
 	StelApp::immediateSave("navigation/max_fov", userMaxFov);
 	emit userMaxFovChanged(userMaxFov);
+}
+
+void StelMovementMgr::setFov(double f)
+{
+	if (core->getCurrentProjectionType()==StelCore::ProjectionCylinderFill)
+		currentFov=180.0;
+	else
+		currentFov=qBound(minFov, f, maxFov);
+
+	emit currentFovChanged(currentFov);
 }
 
 void StelMovementMgr::moveViewport(double offsetX, double offsetY, const float duration)
