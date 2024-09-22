@@ -1748,6 +1748,7 @@ Campo Alegre	Alagoas	08	N	16.785	9.78194S	36.35083W	181	5	America/Maceio
 Campina Grande	Paraiba	08	N	348.936	7.23056S	35.88111W	508	7	America/Fortaleza
 Camocim	Ceara	08	N	44.481	2.90222S	40.84111W	6	5	America/Fortaleza
 Cameta	Para	08	N	45.2	2.24444S	49.49583W	11	5	America/Belem
+Camaragibe	Pernambuco	08	N	156.736	8.02167S	34.98111W	43	7	America/Recife
 Cajueiro	Alagoas	08	N	15.062	9.70926S	36.44785W	306	5	America/Maceio
 Cajazeiras	Paraiba	08	N	43.913	6.89028S	38.55528W	305	5	America/Fortaleza
 Caico	Rio Grande do Norte	08	N	54.934	6.45833S	37.09778W	161	6	America/Fortaleza
@@ -1989,7 +1990,7 @@ Santa Rosa	Rio Grande do Sul	08	N	58.957	27.87083S	54.48139W	284	6	America/Sao_P
 Santa Rita do Sapucai	Minas Gerais	08	N	28.765	22.25222S	45.70333W	826	5	America/Sao_Paulo
 Santa Rita do Passa Quatro	Sao Paulo	08	N	24.578	21.71028S	47.47806W	759	5	America/Sao_Paulo
 Santana do Paraiso	Minas Gerais	08	N	25.515	19.36361S	42.56861W	566	5	America/Sao_Paulo
-Santana do Livramento	Rio Grande do Sul	08	N	89.694	30.89083S	55.53278W	213	6	America/Sao_Paulo
+Sant'Ana do Livramento	Rio Grande do Sul	08	N	89.694	30.89083S	55.53278W	213	6	America/Sao_Paulo
 Santana de Parnaiba	Sao Paulo	08	N	98.989	23.44417S	46.91778W	711	6	America/Sao_Paulo
 Santana	Sao Paulo	08	N	115.689	23.53333S	46.61667W	736	7	America/Sao_Paulo
 Santa Maria da Vitoria	Bahia	08	N	23.488	13.38814S	44.19868W	464	5	America/Bahia
@@ -16578,7 +16579,7 @@ Meru	Meru County	02	R	80.191	0.04626N	37.65587E	1579	6	Africa/Nairobi
 Mbale	Vihiga County	02	R	60	0.08213N	34.72139E	1628	6	Africa/Nairobi
 Mazeras	Kwale County	02	N	16.254	3.96426S	39.5498E	158	5	Africa/Nairobi
 Maua	Meru County	02	N	22.121	0.2332N	37.94086E	1629	5	Africa/Nairobi
-Masalani	Tana River County	02	N	43.642	1.69746S	40.12186E	45	5	Africa/Nairobi
+Masalani	Tana River County	02	N	43.642	1.69405S	40.17015E	71	5	Africa/Nairobi
 Marsabit	Marsabit County	02	R	36.289	2.33468N	37.99086E	1364	5	Africa/Nairobi
 Mariakani	Kilifi County	02	N	31.715	3.86261S	39.47458E	206	5	Africa/Nairobi
 Maralal	Samburu County	02	R	31.35	1.09667N	36.69806E	1941	5	Africa/Nairobi
@@ -18681,6 +18682,7 @@ Batu Berendam	Melaka	14	N	25.028	2.2487N	102.246E	5	5	Asia/Kuala_Lumpur
 Ayer Itam	Penang	14	N	16.974	5.40158N	100.27815E	118	5	Asia/Kuala_Lumpur
 Kampung Teluk Kumbar	Penang	14	N	21.481	5.28769N	100.23379E	8	5	Asia/Kuala_Lumpur
 Putrajaya	Putrajaya	14	N	50	2.93527N	101.69112E	35	6	Asia/Kuala_Lumpur
+Kampung Baru Ulu Melaka	Kedah	14	N	18.898	6.35196N	99.78791E	30	5	Asia/Kuala_Lumpur
 Sik	Kedah	14	N	32.565	5.83333N	100.75E	76	5	Asia/Kuala_Lumpur
 Kampung Hutan Arau	Perlis	14	N	20	6.42942N	100.28174E	16	5	Asia/Kuala_Lumpur
 Glugor	Penang	14	N	18.662	5.37215N	100.30708E	29	5	Asia/Kuala_Lumpur
@@ -20201,7 +20203,7 @@ Chuhar Jamali	Sindh	15	N	15.781	24.3944N	67.99298E	9	5	Asia/Karachi
 Rawalakot	Azad Jammu and Kashmir(POK)	15	N	50	33.85782N	73.76043E	1640	6	Asia/Karachi
 Pir Jo Goth	Sindh	15	N	35.537	27.59178N	68.61848E	63	5	Asia/Karachi
 Khairpur Mir's	Sindh	15	N	124.602	27.52948N	68.75915E	60	7	Asia/Karachi
-Zhob	Balochistan	15	N	50.537	31.34082N	69.4493E	1409	6	Asia/Karachi
+Zhob		15	N	50.537	31.34082N	69.4493E	1409	6	Asia/Karachi
 Zaida	Khyber Pakhtunkhwa	15	N	26.787	34.0595N	72.4669E	320	5	Asia/Karachi
 Zahir Pir	Punjab	15	N	34.121	28.81284N	70.52341E	93	5	Asia/Karachi
 Zafarwal	Punjab	15	N	23.078	32.34464N	74.8999E	273	5	Asia/Karachi
@@ -20211,11 +20213,11 @@ Chak Five Hundred Seventy-five	Punjab	15	N	24.295	31.54514N	73.82891E	202	5	Asia
 Warah	Sindh	15	N	18.724	27.44805N	67.79654E	51	5	Asia/Karachi
 Vihari	Punjab	15	N	112.84	30.0445N	72.3556E	140	7	Asia/Karachi
 Utmanzai	Khyber Pakhtunkhwa	15	N	29.423	34.18775N	71.76274E	304	5	Asia/Karachi
-Uthal	Balochistan	15	N	16.483	25.80722N	66.62194E	43	5	Asia/Karachi
-Usta Muhammad	Balochistan	15	N	43.983	28.17723N	68.04367E	57	5	Asia/Karachi
+Uthal		15	N	16.483	25.80722N	66.62194E	43	5	Asia/Karachi
+Usta Muhammad		15	N	43.983	28.17723N	68.04367E	57	5	Asia/Karachi
 Umarkot	Sindh	15	N	42.074	25.36329N	69.74184E	20	5	Asia/Karachi
 Ubauro	Sindh	15	N	23.462	28.16429N	69.73114E	74	5	Asia/Karachi
-Turbat	Balochistan	15	N	75.694	26.00122N	63.04849E	146	6	Asia/Karachi
+Turbat		15	N	75.694	26.00122N	63.04849E	146	6	Asia/Karachi
 Tordher	Khyber Pakhtunkhwa	15	N	150	33.99047N	72.2863E	298	7	Asia/Karachi
 Topi	Khyber Pakhtunkhwa	15	N	36.34	34.07034N	72.62147E	348	5	Asia/Karachi
 Toba Tek Singh	Punjab	15	N	69.064	30.97127N	72.48275E	161	6	Asia/Karachi
@@ -20242,7 +20244,7 @@ Sodhri	Punjab	15	N	15.977	32.46211N	74.18207E	238	5	Asia/Karachi
 Sita Road	Sindh	15	N	27.587	27.03333N	67.85E	44	5	Asia/Karachi
 Sinjhoro	Sindh	15	N	15.97	26.03008N	68.80867E	25	5	Asia/Karachi
 Sillanwali	Punjab	15	N	27.023	31.82539N	72.54064E	182	5	Asia/Karachi
-Sibi	Balochistan	15	N	64.069	29.54299N	67.87726E	136	6	Asia/Karachi
+Sibi		15	N	64.069	29.54299N	67.87726E	136	6	Asia/Karachi
 Sialkot	Punjab	15	N	477.396	32.49268N	74.53134E	250	7	Asia/Karachi
 Shujaabad	Punjab	15	N	65.952	29.88092N	71.29344E	123	6	Asia/Karachi
 Shorkot	Khyber Pakhtunkhwa	15	N	67.439	31.91023N	70.87757E	182	6	Asia/Karachi
@@ -20279,10 +20281,10 @@ Raiwind	Punjab	15	N	31.592	31.24895N	74.21534E	209	5	Asia/Karachi
 Rahim Yar Khan	Punjab	15	N	788.915	28.41987N	70.30345E	85	8	Asia/Karachi
 Goth Radhan	Sindh	15	N	16.786	27.19846N	67.95348E	50	5	Asia/Karachi
 Rabwah	Punjab	15	N	70	31.75511N	72.91403E	183	6	Asia/Karachi
-Quetta	Balochistan	15	R	733.675	30.18414N	67.00141E	1683	8	Asia/Karachi
+Quetta		15	R	733.675	30.18414N	67.00141E	1683	8	Asia/Karachi
 Kambar	Sindh	15	N	77.481	27.58753N	68.00066E	53	6	Asia/Karachi
 Qadirpur Ran	Punjab	15	N	20.407	30.29184N	71.67164E	131	5	Asia/Karachi
-Pishin	Balochistan	15	N	24.239	30.58176N	66.99406E	1541	5	Asia/Karachi
+Pishin		15	N	24.239	30.58176N	66.99406E	1541	5	Asia/Karachi
 Pir Mahal	Punjab	15	N	35.343	30.76663N	72.43455E	158	5	Asia/Karachi
 Pindi Gheb	Punjab	15	N	34.301	33.24095N	72.2648E	325	5	Asia/Karachi
 Pindi Bhattian	Punjab	15	N	35.088	31.89844N	73.27339E	194	5	Asia/Karachi
@@ -20291,14 +20293,14 @@ Phalia	Punjab	15	N	24.789	32.43104N	73.579E	211	5	Asia/Karachi
 Peshawar	Khyber Pakhtunkhwa	15	R	1218.773	34.008N	71.57849E	340	9	Asia/Karachi
 Pattoki	Punjab	15	N	70.436	31.02021N	73.85333E	197	6	Asia/Karachi
 Pasrur	Punjab	15	N	53.364	32.26286N	74.66327E	251	6	Asia/Karachi
-Pasni	Balochistan	15	N	33.11	25.26302N	63.46921E	7	5	Asia/Karachi
+Pasni		15	N	33.11	25.26302N	63.46921E	7	5	Asia/Karachi
 Pano Aqil	Sindh	15	N	72.881	27.85619N	69.11111E	69	6	Asia/Karachi
 Pakpattan	Punjab	15	N	126.706	30.34314N	73.38944E	188	7	Asia/Karachi
 Paharpur	Khyber Pakhtunkhwa	15	N	17.294	32.10502N	70.97055E	182	5	Asia/Karachi
 Pad Idan	Sindh	15	N	20.919	26.77455N	68.30094E	49	5	Asia/Karachi
 Pabbi	Khyber Pakhtunkhwa	15	N	37.307	34.00968N	71.79445E	299	5	Asia/Karachi
 Okara	Punjab	15	N	223.648	30.81029N	73.45155E	181	7	Asia/Karachi
-Nushki	Balochistan	15	N	27.68	29.55218N	66.02288E	997	5	Asia/Karachi
+Nushki		15	N	27.68	29.55218N	66.02288E	997	5	Asia/Karachi
 New Mirpur	Azad Jammu and Kashmir(POK)	15	N	124.352	33.14782N	73.75187E	436	7	Asia/Karachi
 Nawabshah	Sindh	15	N	229.504	26.23939N	68.40369E	32	7	Asia/Karachi
 Naushahro Firoz	Sindh	15	N	17.631	26.8401N	68.12265E	51	5	Asia/Karachi
@@ -20325,11 +20327,11 @@ Minchianabad	Punjab	15	N	29.253	30.16356N	73.56858E	168	5	Asia/Karachi
 Mianwali	Punjab	15	N	89.57	32.57756N	71.52847E	208	6	Asia/Karachi
 Mian Sahib	Sindh	15	N	25	28.15341N	68.64182E	67	5	Asia/Karachi
 Mian Channun	Punjab	15	N	76.226	30.44067N	72.35679E	154	6	Asia/Karachi
-Mehrabpur	Balochistan	15	N	35.263	28.10773N	68.02554E	53	5	Asia/Karachi
+Mehrabpur		15	N	35.263	28.10773N	68.02554E	53	5	Asia/Karachi
 Mehar	Sindh	15	N	30.429	27.18027N	67.82051E	48	5	Asia/Karachi
 Matli	Sindh	15	N	50.398	25.0429N	68.65591E	20	6	Asia/Karachi
 Matiari	Sindh	15	N	18.929	25.59709N	68.4467E	36	5	Asia/Karachi
-Mastung	Balochistan	15	N	29.082	29.79966N	66.84553E	1682	5	Asia/Karachi
+Mastung		15	N	29.082	29.79966N	66.84553E	1682	5	Asia/Karachi
 Mardan	Khyber Pakhtunkhwa	15	N	300.424	34.19794N	72.04965E	311	7	Asia/Karachi
 Mansehra	Khyber Pakhtunkhwa	15	N	66.486	34.33023N	73.19679E	1079	6	Asia/Karachi
 Mangla	Punjab	15	N	16.264	31.89306N	72.38167E	171	5	Asia/Karachi
@@ -20339,8 +20341,8 @@ Mamu Kanjan	Punjab	15	N	31.914	30.83044N	72.79943E	167	5	Asia/Karachi
 Malir Cantonment	Sindh	15	N	300	24.94343N	67.20591E	52	7	Asia/Karachi
 Malakwal	Punjab	15	N	34.589	32.55449N	73.21274E	209	5	Asia/Karachi
 Mailsi	Punjab	15	N	64.545	29.80123N	72.17398E	132	6	Asia/Karachi
-Mach	Balochistan	15	N	16.93	29.86371N	67.33018E	977	5	Asia/Karachi
-Loralai	Balochistan	15	N	37.787	30.37051N	68.59795E	1440	5	Asia/Karachi
+Mach		15	N	16.93	29.86371N	67.33018E	977	5	Asia/Karachi
+Loralai		15	N	37.787	30.37051N	68.59795E	1440	5	Asia/Karachi
 Lodhran	Punjab	15	N	97.249	29.5339N	71.63244E	116	6	Asia/Karachi
 Layyah	Punjab	15	N	78.954	30.96128N	70.93904E	151	6	Asia/Karachi
 Larkana	Sindh	15	N	364.033	27.55898N	68.21204E	52	7	Asia/Karachi
@@ -20358,19 +20360,19 @@ Kot Samaba	Punjab	15	N	22.953	28.55207N	70.46837E	83	5	Asia/Karachi
 Kotri	Sindh	15	N	72.672	25.36566N	68.30831E	25	6	Asia/Karachi
 Kot Radha Kishan	Punjab	15	N	45.938	31.17068N	74.10126E	208	5	Asia/Karachi
 Kot Mumin	Punjab	15	N	38.355	32.18843N	73.02987E	197	5	Asia/Karachi
-Kot Malik Barkhurdar	Balochistan	15	N	69.359	30.20379N	66.98723E	1651	6	Asia/Karachi
+Kot Malik Barkhurdar		15	N	69.359	30.20379N	66.98723E	1651	6	Asia/Karachi
 Kotli Loharan	Punjab	15	N	21.463	32.58893N	74.49466E	243	5	Asia/Karachi
 Kotli	Azad Jammu and Kashmir(POK)	15	N	640	33.51836N	73.9022E	609	8	Asia/Karachi
 Kot Ghulam Muhammad	Punjab	15	N	20.897	32.33311N	74.54694E	238	5	Asia/Karachi
 Kot Diji	Sindh	15	N	25.616	27.34156N	68.70821E	57	5	Asia/Karachi
 Kot Addu	Punjab	15	N	104.217	30.46907N	70.96699E	136	7	Asia/Karachi
 Kohat	Khyber Pakhtunkhwa	15	N	151.427	33.58196N	71.44929E	503	7	Asia/Karachi
-Khuzdar	Balochistan	15	N	141.227	27.81193N	66.61096E	1233	7	Asia/Karachi
+Khuzdar		15	N	141.227	27.81193N	66.61096E	1233	7	Asia/Karachi
 Khushab	Punjab	15	N	102.793	32.29667N	72.3525E	186	7	Asia/Karachi
 Khurrianwala	Punjab	15	N	35.292	31.49936N	73.26763E	190	5	Asia/Karachi
 Khewra	Punjab	15	N	32.62	32.6491N	73.01059E	374	5	Asia/Karachi
 Kharian	Punjab	15	N	81.435	32.81612N	73.88697E	285	6	Asia/Karachi
-Kharan	Balochistan	15	N	30.841	28.58459N	65.41501E	722	5	Asia/Karachi
+Kharan		15	N	30.841	28.58459N	65.41501E	722	5	Asia/Karachi
 Khanpur	Punjab	15	N	142.426	28.64739N	70.65694E	90	7	Asia/Karachi
 Khanpur Mahar	Sindh	15	N	22.273	27.84088N	69.41302E	74	5	Asia/Karachi
 Khangarh	Punjab	15	N	19.698	29.91446N	71.16067E	120	5	Asia/Karachi
@@ -20394,14 +20396,14 @@ Kamalia	Punjab	15	N	112.426	30.72708N	72.64607E	160	7	Asia/Karachi
 Kalur Kot	Punjab	15	N	25.574	32.15512N	71.26631E	191	5	Asia/Karachi
 Kallar Kahar	Punjab	15	N	15.8	32.77998N	72.69793E	644	5	Asia/Karachi
 Kaleke Mandi	Punjab	15	N	16.361	31.97597N	73.59999E	202	5	Asia/Karachi
-Kalat	Balochistan	15	N	26.701	29.02663N	66.59361E	2014	5	Asia/Karachi
+Kalat		15	N	26.701	29.02663N	66.59361E	2014	5	Asia/Karachi
 Kalabagh	Punjab	15	N	15.976	32.96164N	71.54638E	218	5	Asia/Karachi
 Kahuta	Punjab	15	N	22.551	33.59183N	73.38736E	610	5	Asia/Karachi
 Kahror Pakka	Punjab	15	N	69.743	29.6243N	71.91437E	132	6	Asia/Karachi
 Kahna Nau	Punjab	15	N	45.888	31.36709N	74.36899E	211	5	Asia/Karachi
 Kabirwala	Punjab	15	N	60.782	30.40472N	71.86269E	138	6	Asia/Karachi
 Johi	Sindh	15	N	16.311	26.69225N	67.61431E	43	5	Asia/Karachi
-Jiwani	Balochistan	15	N	16.322	25.04852N	61.74573E	10	5	Asia/Karachi
+Jiwani		15	N	16.322	25.04852N	61.74573E	10	5	Asia/Karachi
 Chak Jhumra	Punjab	15	N	37.214	31.56808N	73.18317E	190	5	Asia/Karachi
 Jhol	Sindh	15	N	16.067	25.95533N	68.88871E	25	5	Asia/Karachi
 Jhelum	Punjab	15	N	145	32.93448N	73.73102E	230	7	Asia/Karachi
@@ -20432,7 +20434,7 @@ Hangu	Khyber Pakhtunkhwa	15	N	36.15	33.53198N	71.0595E	840	5	Asia/Karachi
 Hala	Sindh	15	N	47.915	25.81459N	68.42198E	30	5	Asia/Karachi
 Hafizabad	Punjab	15	N	153.656	32.07095N	73.68802E	210	7	Asia/Karachi
 Hadali	Punjab	15	N	49.663	32.64043N	74.56898E	252	5	Asia/Karachi
-Gwadar	Balochistan	15	N	51.901	25.12163N	62.32541E	7	6	Asia/Karachi
+Gwadar		15	N	51.901	25.12163N	62.32541E	7	6	Asia/Karachi
 Gujrat	Punjab	15	N	301.506	32.5742N	74.07542E	237	7	Asia/Karachi
 Gujranwala	Punjab	15	N	1384.471	32.15567N	74.18705E	230	9	Asia/Karachi
 Gujar Khan	Punjab	15	N	69.374	33.25411N	73.30433E	461	6	Asia/Karachi
@@ -20461,14 +20463,14 @@ Dhoro Naro	Sindh	15	N	19.907	25.50484N	69.5709E	17	5	Asia/Karachi
 Dhanot	Punjab	15	N	18.729	29.57991N	71.75213E	120	5	Asia/Karachi
 Dera Ismail Khan	Khyber Pakhtunkhwa	15	N	101.616	31.83129N	70.9017E	177	7	Asia/Karachi
 Dera Ghazi Khan	Punjab	15	N	236.093	30.04587N	70.64029E	125	7	Asia/Karachi
-Dera Bugti	Balochistan	15	N	18.12	29.03619N	69.15849E	473	5	Asia/Karachi
+Dera Bugti		15	N	18.12	29.03619N	69.15849E	473	5	Asia/Karachi
 Daur	Sindh	15	N	17.577	26.45528N	68.31835E	37	5	Asia/Karachi
 Daud Khel	Punjab	15	N	26.395	32.87533N	71.57118E	216	5	Asia/Karachi
 Daska Kalan	Punjab	15	N	126.924	32.32422N	74.35039E	242	7	Asia/Karachi
 Darya Khan	Punjab	15	N	15.048	31.78447N	71.10197E	176	5	Asia/Karachi
 Dajal	Punjab	15	N	17.63	29.55769N	70.37614E	124	5	Asia/Karachi
 Dadu	Sindh	15	N	139.784	26.73033N	67.7769E	45	7	Asia/Karachi
-Dadhar	Balochistan	15	N	15.09	29.47489N	67.65167E	160	5	Asia/Karachi
+Dadhar		15	N	15.09	29.47489N	67.65167E	160	5	Asia/Karachi
 Chunian	Punjab	15	N	57.312	30.96621N	73.97908E	195	6	Asia/Karachi
 Chuhar Kana	Punjab	15	N	69.321	31.75N	73.8E	206	6	Asia/Karachi
 Chhor	Sindh	15	N	16.301	25.5126N	69.78437E	6	5	Asia/Karachi
@@ -20478,7 +20480,7 @@ Chiniot	Punjab	15	N	201.781	31.72091N	72.97836E	189	7	Asia/Karachi
 Chichawatni	Punjab	15	N	82.762	30.5301N	72.69155E	165	6	Asia/Karachi
 Chawinda	Punjab	15	N	23.599	32.34434N	74.70507E	255	5	Asia/Karachi
 Charsadda	Khyber Pakhtunkhwa	15	N	95.319	34.14822N	71.7406E	301	6	Asia/Karachi
-Chaman	Balochistan	15	N	88.568	30.91769N	66.45259E	1336	6	Asia/Karachi
+Chaman		15	N	88.568	30.91769N	66.45259E	1336	6	Asia/Karachi
 Chakwal	Punjab	15	N	101.2	32.93286N	72.85394E	523	7	Asia/Karachi
 Chak Azam Sahu	Punjab	15	N	38.216	30.75202N	73.02834E	170	5	Asia/Karachi
 Burewala	Punjab	15	N	183.915	30.16667N	72.65E	146	7	Asia/Karachi
@@ -20491,7 +20493,7 @@ Bhan	Sindh	15	N	16.961	26.55831N	67.72139E	40	5	Asia/Karachi
 Bhalwal	Punjab	15	N	74.744	32.26576N	72.89809E	196	6	Asia/Karachi
 Bhakkar	Punjab	15	N	81.95	31.62685N	71.06471E	171	6	Asia/Karachi
 Mianke Mor	Punjab	15	N	86.9	31.2024N	73.94857E	200	6	Asia/Karachi
-Bela	Balochistan	15	N	20.119	26.22718N	66.31178E	92	5	Asia/Karachi
+Bela		15	N	20.119	26.22718N	66.31178E	92	5	Asia/Karachi
 Bat Khela	Khyber Pakhtunkhwa	15	N	46.079	34.6178N	71.97247E	673	5	Asia/Karachi
 Battagram	Khyber Pakhtunkhwa	15	N	700	34.67719N	73.02329E	1031	8	Asia/Karachi
 Basirpur	Punjab	15	N	41.617	30.57759N	73.83912E	181	5	Asia/Karachi
@@ -22736,7 +22738,7 @@ Keat Hong Village		14	N	38.18	1.37778N	103.74417E	19	5	Asia/Singapore
 Kampong Pasir Ris		14	N	147.11	1.37833N	103.93194E	5	7	Asia/Singapore
 Kampong Loyang		14	N	15.34	1.37778N	103.95944E	15	5	Asia/Singapore
 Kembangan		14	N	130.252	1.32228N	103.91135E	13	7	Asia/Singapore
-Kalang		14	N	101.29	1.33333N	103.86667E	18	7	Asia/Singapore
+Kallang		14	N	101.29	1.33333N	103.86667E	18	7	Asia/Singapore
 Hong Kah		14	N	26.15	1.35944N	103.72278E	3	5	Asia/Singapore
 Geylang		14	N	110.201	1.31953N	103.88689E	8	7	Asia/Singapore
 Bukit Timah Estate		14	N	77.86	1.34028N	103.77583E	20	6	Asia/Singapore
@@ -23598,6 +23600,7 @@ Kozan	Adana	16	N	88.115	37.45517N	35.81573E	140	6	Europe/Istanbul
 Kovancilar	Elazig	16	N	22.976	38.71882N	39.86268E	971	5	Europe/Istanbul
 Korkuteli	Antalya	16	N	20.465	37.06498N	30.19565E	994	5	Europe/Istanbul
 Konya	Konya	16	R	1390.051	37.87135N	32.48464E	1030	9	Europe/Istanbul
+Konakli	Antalya	16	N	17.966	36.59251N	31.89539E	70	5	Europe/Istanbul
 Kiziltepe	Mardin	16	N	150.174	37.18836N	40.57723E	480	7	Europe/Istanbul
 Serinhisar	Denizli	16	N	17.169	37.58105N	29.26639E	958	5	Europe/Istanbul
 Kirsehir	Kirsehir	16	R	150.7	39.14583N	34.16389E	997	7	Europe/Istanbul
@@ -23681,6 +23684,7 @@ Ceyhan	Adana	16	N	96.303	37.02472N	35.8175E	30	6	Europe/Istanbul
 Cesme	Izmir Province	16	N	21.316	38.32614N	26.30574E	9	5	Europe/Istanbul
 Cermik	Diyarbakir Province	16	N	20.975	38.13538N	39.445E	690	5	Europe/Istanbul
 Cay	Afyonkarahisar Province	16	N	34.215	38.59167N	31.02861E	1039	5	Europe/Istanbul
+Kestel	Antalya	16	N	15.445	36.50861N	32.08278E	8	5	Europe/Istanbul
 Caglayancerit	Kahramanmaras	16	N	15.53	37.74523N	37.28618E	1086	5	Europe/Istanbul
 Burhaniye	Balikesir	16	N	38.083	39.50041N	26.97269E	21	5	Europe/Istanbul
 Burdur	Burdur	16	R	95.436	37.72028N	30.29083E	956	6	Europe/Istanbul
@@ -23894,6 +23898,8 @@ Sultangazi	Istanbul	16	N	436.935	41.10652N	28.86847E	144	7	Europe/Istanbul
 Sultanbeyli	Istanbul	16	N	286.622	40.96072N	29.27067E	151	7	Europe/Istanbul
 Sancaktepe	Istanbul	16	N	241	41.00244N	29.23187E	114	7	Europe/Istanbul
 Karabaglar	Izmir Province	16	N	458	38.37396N	27.1352E	66	7	Europe/Istanbul
+Oba	Antalya	16	N	28.864	36.55013N	32.0596E	20	5	Europe/Istanbul
+Cikcilli	Antalya	16	N	21.449	36.54967N	32.03672E	54	5	Europe/Istanbul
 Muratpasa	Antalya	16	N	450	36.89157N	30.76498E	53	7	Europe/Istanbul
 Merkezefendi	Denizli	16	N	280.341	37.80544N	29.04236E	439	7	Europe/Istanbul
 Tunapuna	Tunapuna/Piarco	06	R	17.758	10.65245N	61.38878W	55	5	America/Port_of_Spain
