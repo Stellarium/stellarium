@@ -330,7 +330,11 @@ public:
 	void remove(const QStringList& idList);
 
 	//! get the date and time the TLE elements were updated
-	QDateTime getLastUpdate(void) const {return lastUpdate;}
+	QPair<QDateTime, double> getLastUpdate(void) const {return lastUpdate;}
+	//! set the date and time the TLE elements were updated
+	void setLastUpdate(QDateTime last);
+	void setLastUpdate(double last);
+
 
 	//! get the update frequency in hours
 	int getUpdateFrequencyHours(void) const {return updateFrequencyHours;}
@@ -906,7 +910,7 @@ private:
 	bool autoAddEnabled;
 	//! Flag enabling the automatic removal of missing satellites on update.
 	bool autoRemoveEnabled;
-	QDateTime lastUpdate;
+	QPair<QDateTime, double> lastUpdate; // Combines previous QDateTime (slow!) with efficient JD (to be checked each frame in isValidRangeDates()) of the same time.
 	int updateFrequencyHours;
 	//@}
 
