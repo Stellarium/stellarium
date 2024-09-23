@@ -19,6 +19,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
+#include <execution> // must be included before Qt because some versions of libtbb use "emit" identifier for their needs
+
 #include "SolarSystem.hpp"
 #include "StelTexture.hpp"
 #include "EphemWrapper.hpp"
@@ -48,7 +50,6 @@
 #include "StelObserver.hpp"
 
 #include <algorithm>
-#include <execution>
 
 #include <QTextStream>
 #include <QSettings>
