@@ -564,15 +564,15 @@ void ConfigurationDialog::updateSelectedInfoGui()
 	{
 		ui->noSelectedInfoRadio->setChecked(true);
 	}
-	else if (flags == StelObject::DefaultInfo)
+	else if (flags == StelObject::InfoStringGroup(StelObject::DefaultInfo))
 	{
-	    ui->defaultSelectedInfoRadio->setChecked(true);
+		ui->defaultSelectedInfoRadio->setChecked(true);
 	}
-	else if (flags == StelObject::ShortInfo)
+	else if (flags == StelObject::InfoStringGroup(StelObject::ShortInfo))
 	{
 		ui->briefSelectedInfoRadio->setChecked(true);
 	}
-	else if (flags == StelObject::AllInfo)
+	else if (flags == StelObject::InfoStringGroup(StelObject::AllInfo))
 	{
 		ui->allSelectedInfoRadio->setChecked(true);
 	}
@@ -1123,9 +1123,10 @@ void ConfigurationDialog::saveAllSettings()
 		{StelObject::InfoStringGroup(StelObject::None),		"none"},
 		{StelObject::InfoStringGroup(StelObject::DefaultInfo),	"default"},
 		{StelObject::InfoStringGroup(StelObject::ShortInfo),	"short"},
-		{StelObject::InfoStringGroup(StelObject::AllInfo),	"all"}
+		{StelObject::InfoStringGroup(StelObject::AllInfo),		"all"}
 	};
 	QString selectedObjectInfo=selectedObjectInfoMap.value(flags, "custom");
+	conf->setValue("gui/selected_object_info", selectedObjectInfo);
 	if (selectedObjectInfo=="custom")
 		saveCustomSelectedInfo();
 
