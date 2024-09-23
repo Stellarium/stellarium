@@ -1768,8 +1768,11 @@
                  </item>
                  <item>
                   <widget class="QCheckBox" name="showSpecialNomenclatureOnlyCheckBox">
-                   <property name="text">
+                   <property name="toolTip">
                     <string>Show special nomenclature points only</string>
+                   </property>
+                   <property name="text">
+                    <string>Show special points only</string>
                    </property>
                   </widget>
                  </item>

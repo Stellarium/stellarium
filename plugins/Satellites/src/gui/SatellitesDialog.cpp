@@ -926,7 +926,7 @@ void SatellitesDialog::showUpdateCompleted(int updated, int total, int added, in
 	ui->nextUpdateLabel->setText(message.arg(updated).arg(total).arg(added).arg(missing));
 	// display the status for another full interval before refreshing status
 	updateTimer->start();
-	ui->lastUpdateDateTimeEdit->setDateTime(plugin->getLastUpdate());
+	ui->lastUpdateDateTimeEdit->setDateTime(plugin->getLastUpdate().first);
 	populateFilterMenu();
 }
 
@@ -1100,7 +1100,7 @@ void SatellitesDialog::updateSettingsPage()
 		ui->updateButton->setText(q_("Update now"));
 	else
 		ui->updateButton->setText(q_("Update from files"));
-	ui->lastUpdateDateTimeEdit->setDateTime(plugin->getLastUpdate());
+	ui->lastUpdateDateTimeEdit->setDateTime(plugin->getLastUpdate().first);
 
 	updateCountdown();
 }

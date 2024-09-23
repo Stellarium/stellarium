@@ -217,12 +217,12 @@ void Satellites::init()
 
 	// Set up download manager and the update schedule
 	downloadMgr = new QNetworkAccessManager(this);
-	connect(downloadMgr, SIGNAL(finished(QNetworkReply*)), this, SLOT(saveDownloadedUpdate(QNetworkReply*)));
+	connect(downloadMgr, &QNetworkAccessManager::finished, this, &Satellites::saveDownloadedUpdate);
 	updateState = CompleteNoUpdates;
 	updateTimer = new QTimer(this);
 	updateTimer->setSingleShot(false);   // recurring check for update
 	updateTimer->setInterval(13000);     // check once every 13 seconds to see if it is time for an update
-	connect(updateTimer, SIGNAL(timeout()), this, SLOT(checkForUpdate()));
+	connect(updateTimer, &QTimer::timeout, this, &Satellites::checkForUpdate);
 	updateTimer->start();
 
 	SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
@@ -232,13 +232,24 @@ void Satellites::init()
 
 	// Handle changes to the observer location or wide range of dates:
 	StelCore* core = StelApp::getInstance().getCore();
-	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(updateObserverLocation(StelLocation)));
-	connect(core, SIGNAL(configurationDataSaved()), this, SLOT(saveSettings()));
+	connect(core, &StelCore::locationChanged, this, &Satellites::updateObserverLocation);
+	connect(core, &StelCore::configurationDataSaved, this, &Satellites::saveSettings);
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(translateData()));
 
-	connect(this, SIGNAL(satSelectionChanged(QString)), this, SLOT(changeSelectedSatellite(QString)));
+	connect(this, &Satellites::satSelectionChanged, this, &Satellites::changeSelectedSatellite);
 
 	bindingGroups();
+}
+
+void Satellites::setLastUpdate(QDateTime last)
+{
+	lastUpdate.first = last;
+	lastUpdate.second = StelUtils::qDateTimeToJd(lastUpdate.first);
+}
+void Satellites::setLastUpdate(double last)
+{
+	lastUpdate.second = last;
+	lastUpdate.first = StelUtils::jdToQDateTime(lastUpdate.second, Qt::UTC);
 }
 
 void Satellites::translateData()
@@ -747,7 +758,7 @@ void Satellites::restoreDefaultCatalog()
 		// the json file has been manually removed, that an update is scheduled in a timely
 		// manner
 		StelApp::getInstance().getSettings()->remove("Satellites/last_update");
-		lastUpdate = QDateTime::fromString("2015-05-01T12:00:00", Qt::ISODate);
+		setLastUpdate(QDateTime::fromString("2015-05-01T12:00:00", Qt::ISODate));
 	}
 }
 
@@ -849,7 +860,7 @@ void Satellites::loadSettings()
 	// updater related settings...
 	updateFrequencyHours = conf->value("update_frequency_hours", 72).toInt();
 	// last update default is the first Towel Day.  <3 DA
-	lastUpdate = QDateTime::fromString(conf->value("last_update", "2001-05-25T12:00:00").toString(), Qt::ISODate);
+	setLastUpdate(QDateTime::fromString(conf->value("last_update", "2001-05-25T12:00:00").toString(), Qt::ISODate));
 	setFlagHintsVisible(conf->value("show_satellite_hints", true).toBool());
 	Satellite::showLabels = conf->value("show_satellite_labels", false).toBool();
 	updatesEnabled = conf->value("updates_enabled", true).toBool();
@@ -1250,9 +1261,9 @@ QVariantMap Satellites::createDataMap(void)
 
 void Satellites::markLastUpdate()
 {
-	lastUpdate = QDateTime::currentDateTime();
+	setLastUpdate(QDateTime::currentDateTime());
 	QSettings* conf = StelApp::getInstance().getSettings();
-	conf->setValue("Satellites/last_update", lastUpdate.toString(Qt::ISODate));
+	conf->setValue("Satellites/last_update", lastUpdate.first.toString(Qt::ISODate));
 }
 
 QSet<QString> Satellites::getGroups() const
@@ -1798,7 +1809,7 @@ void Satellites::remove(const QStringList& idList)
 
 int Satellites::getSecondsToUpdate(void)
 {
-	QDateTime nextUpdate = lastUpdate.addSecs(updateFrequencyHours * 3600);
+	QDateTime nextUpdate = lastUpdate.first.addSecs(updateFrequencyHours * 3600);
 	return QDateTime::currentDateTime().secsTo(nextUpdate);
 }
 
@@ -2252,7 +2263,7 @@ void Satellites::setUpdateFrequencyHours(int hours)
 void Satellites::checkForUpdate(void)
 {
 	if (updatesEnabled && (updateState != Updating)
-	    && (lastUpdate.addSecs(updateFrequencyHours * 3600) <= QDateTime::currentDateTime()))
+	    && (lastUpdate.first.addSecs(updateFrequencyHours * 3600) <= QDateTime::currentDateTime()))
 	{
 		updateFromOnlineSources();
 	}
@@ -2560,7 +2571,7 @@ void Satellites::updateSatellites(TleDataHash& newTleSets)
 				sat->status = newTle.status;
 
 				// we reset this to "now" when we started the update.
-				sat->lastUpdated = lastUpdate;
+				sat->lastUpdated = lastUpdate.first;
 
 				QPair<double, double> stdMagRCS = getStdMagRCS(newTle);
 				if (stdMagRCS.first < 99.)
@@ -2813,15 +2824,15 @@ void Satellites::update(double deltaTime)
 		return;
 
 	static const StelCore *core = StelApp::getInstance().getCore();
-	double JD=core->getJD();
 
 	if (qAbs(core->getTimeRate())>=Satellite::timeRateLimit) // Do not show satellites when time rate is over limit
 		return;
 
-	if (core->getCurrentPlanet() != earth || !isValidRangeDates(core))
+	if (core->getCurrentPlanet()!=earth || !isValidRangeDates(core))
 		return;
 
 	hintFader.update(static_cast<int>(deltaTime*1000));
+	const double JD=core->getJD();
 #if (QT_VERSION<QT_VERSION_CHECK(6,0,0))
 	for (const auto& sat : std::as_const(satellites))
 	{
@@ -2998,17 +3009,12 @@ bool Satellites::checkJsonFileFormat()
 
 bool Satellites::isValidRangeDates(const StelCore *core) const
 {
-	bool ok;
 	double tJD = core->getJD();
-	double uJD = StelUtils::getJulianDayFromISO8601String(lastUpdate.toString(Qt::ISODate), &ok);
-	if (lastUpdate.isNull()) // No updates yet?
-		uJD = tJD;
+	double uJD = lastUpdate.first.isNull() ?  // No updates yet?
+			tJD : lastUpdate.second;
 	// do not draw anything before Oct 4, 1957, 19:28:34GMT ;-)
 	// upper limit for drawing is +5 years after latest update of TLE
-	if ((tJD<2436116.3115) || (tJD>(uJD+1825)))
-		return false;
-	else
-		return true;
+	return ((tJD>=2436116.3115) && (tJD<=(uJD+5*365)));
 }
 
 #if(SATELLITES_PLUGIN_IRIDIUM == 1)
