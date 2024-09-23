@@ -55,6 +55,7 @@ MeteorShower::MeteorShower(MeteorShowersMgr* mgr, const QVariantMap& map)
 	m_showerID = map.value("showerID").toString();
 	m_designation  = map.value("designation").toString();
 	m_IAUNumber = map.value("IAUNo").toString();
+	m_class = map.value("class").toInt();
 	m_speed = map.value("speed").toInt();
 	m_radiantAlpha = map.value("radiantAlpha").toFloat()*M_PI_180;
 	m_radiantDelta = map.value("radiantDelta").toFloat()*M_PI_180;
@@ -537,6 +538,11 @@ QString MeteorShower::getInfoString(const StelCore* core, const InfoStringGroup&
 		{ INACTIVE, q_("inactive")}};
 	QString mstdata = mstMap.value(m_status, "");
 
+	const QMap<int, QString>classMap={
+		{ 1,  "I" }, { 2,  "II" }, { 3,  "III" },	{ 4, "IV" }
+	};
+	QString mClass = classMap.value(m_class, "");
+
 	if (flags&Name)
 	{
 		oss << "<h2>" << getNameI18n();
@@ -546,8 +552,12 @@ QString MeteorShower::getInfoString(const StelCore* core, const InfoStringGroup&
 	}
 
 	if (flags&ObjectType)
-		oss << QString("%1: <b>%2</b> (%3)").arg(q_("Type"), getObjectTypeI18n(), mstdata) << "<br />";
-	
+	{
+		if (m_class==0)
+			oss << QString("%1: <b>%2</b> (%3)").arg(q_("Type"), getObjectTypeI18n(), mstdata) << "<br />";
+		else
+			oss << QString("%1: <b>%2</b> (%3; %4 %5)").arg(q_("Type"), getObjectTypeI18n(), mstdata, qc_("class","class of meteor shower"), mClass) << "<br />";
+	}
 
 	// Ra/Dec etc.
 	oss << getCommonInfoString(core, flags);
@@ -762,11 +772,34 @@ QString MeteorShower::getInfoString(const StelCore* core, const InfoStringGroup&
 				}
 			}
 		}
+
+		if (m_class>0)
+			oss << QString("%1: %2").arg(q_("Description of class"), getClassDescription(m_class)) << "<br />";
 	}
 
 	oss << getSolarLunarInfoString(core, flags);
 	postProcessInfoString(str, flags);
 	return str;
+}
+
+QString MeteorShower::getClassDescription(int mclass) const
+{
+	QString mcdesc;
+	switch (mclass) {
+		case 1:
+			mcdesc = qc_("the strongest annual showers with ZHR’s normally ten or better.", "description of meteor shower class");
+			break;
+		case 2:
+			mcdesc = qc_("reliable minor showers with ZHR’s normally two to ten.", "description of meteor shower class");
+			break;
+		case 3:
+			mcdesc = qc_("showers that do not provide annual activity. These showers are rarely active yet have the potential to produce a major display on occasion.", "description of meteor shower class");
+			break;
+		case 4:
+			mcdesc = qc_("weak minor showers with ZHR’s rarely exceeding two. These showers are also good targets for video and photographic work.", "description of meteor shower class");
+			break;
+	}
+	return StelUtils::wrapText(mcdesc);
 }
 
 QVariantMap MeteorShower::getInfoMap(const StelCore *core) const
