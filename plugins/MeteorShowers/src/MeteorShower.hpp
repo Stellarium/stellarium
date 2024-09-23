@@ -39,25 +39,25 @@ public:
 
 	//! @brief Meteor Shower status.
 	enum Status {
-		INVALID,          // not initialized properly
-		UNDEFINED,        // it's loaded but with 'activity' undefined
-		INACTIVE,         // inactive radiant
-		ACTIVE_CONFIRMED, // active radiant - confirmed data
-		ACTIVE_GENERIC    // active radiant - generic data
+		INVALID,			// not initialized properly
+		UNDEFINED,			// it's loaded but with 'activity' undefined
+		INACTIVE,			// inactive radiant
+		ACTIVE_CONFIRMED,	// active radiant - confirmed data
+		ACTIVE_GENERIC	// active radiant - generic data
 	};
 
 	//! @struct Activity
 	struct Activity
 	{
-		int year;                  //! The catalog year (0 for generic)
-		int zhr;                   //! The ZHR on peak
-		QList<int> variable;       //! The ZHR range when it's variable
-		double start;              //! Initial solar longitude (J2000) of activity
-		double finish;             //! Last solar longitude (J2000) of activity
-		double peak;               //! Peak solar longitude (J2000) of activity
-		int disttype;              //! Distribution type (0 for Gauss, 1 for Lorentz)
-		float b1;                  //! B slope before peak
-		float b2;                  //! B slope after peak
+		int year;				//! The catalog year (0 for generic)
+		int zhr;				//! The ZHR on peak
+		QList<int> variable;	//! The ZHR range when it's variable
+		double start;			//! Initial solar longitude (J2000) of activity
+		double finish;		//! Last solar longitude (J2000) of activity
+		double peak;			//! Peak solar longitude (J2000) of activity
+		int disttype;			//! Distribution type (0 for Gauss, 1 for Lorentz)
+		float b1;				//! B slope before peak
+		float b2;				//! B slope after peak
 	};
 
 	//! Constructor
@@ -129,32 +129,33 @@ public:
 	static double JDfromSolarLongitude(double solarLong, int year);
 
 private:
-	MeteorShowersMgr* m_mgr;           //! MeteorShowersMgr instance
-	Status m_status;                   //! Meteor shower status
+	MeteorShowersMgr* m_mgr;	//! MeteorShowersMgr instance
+	Status m_status;				//! Meteor shower status
 
 	// data from catalog
-	QString m_showerID;                //! The ID of the meteor shower
-	QString m_designation;             //! The designation of the meteor shower
-	QString m_IAUNumber;               //! IAU Number of the meteor shower
-	QList<Activity> m_activities;      //! Activity list
-	int m_speed;                       //! Speed of meteors
-	float m_rAlphaPeak;                //! R.A. for radiant of meteor shower on the peak day
-	float m_rDeltaPeak;                //! Dec. for radiant of meteor shower on the peak day
-	float m_driftAlpha;                //! Drift of R.A. for each degree of solar longitude from peak
-	float m_driftDelta;                //! Drift of Dec. for each degree of solar longitude from peak
-	QString m_parentObj;               //! Parent object for meteor shower
-	float m_pidx;                      //! The population index
-	QList<Meteor::ColorPair> m_colors; //! <colorName, 0-100>
+	QString m_showerID;					//! The ID of the meteor shower
+	QString m_designation;				//! The designation of the meteor shower
+	QString m_IAUNumber;				//! IAU Number of the meteor shower
+	int m_class;							//! Robert Lunsford's class of meteor shower intensity
+	QList<Activity> m_activities;			//! Activity list
+	int m_speed;							//! Speed of meteors
+	float m_rAlphaPeak;					//! R.A. for radiant of meteor shower on the peak day
+	float m_rDeltaPeak;					//! Dec. for radiant of meteor shower on the peak day
+	float m_driftAlpha;					//! Drift of R.A. for each degree of solar longitude from peak
+	float m_driftDelta;					//! Drift of Dec. for each degree of solar longitude from peak
+	QString m_parentObj;				//! Parent object for meteor shower
+	float m_pidx;							//! The population index
+	QList<Meteor::ColorPair> m_colors;		//! <colorName, 0-100>
 
 	//current information
-	Vec3d m_position;                  //! Cartesian equatorial position
-	double m_radiantAlpha;             //! Current R.A. for radiant of meteor shower
-	double m_radiantDelta;             //! Current Dec. for radiant of meteor shower
-	Activity m_activity;               //! Current activity
+	Vec3d m_position;					//! Cartesian equatorial position
+	double m_radiantAlpha;				//! Current R.A. for radiant of meteor shower
+	double m_radiantDelta;				//! Current Dec. for radiant of meteor shower
+	Activity m_activity;					//! Current activity
 
-	QList<MeteorObj*> m_activeMeteors; //! List with all the active meteors
+	QList<MeteorObj*> m_activeMeteors;	//! List with all the active meteors
 
-	double eclJ2000;                   //! Ecliptic on J2000.0 epoch
+	double eclJ2000;						//! Ecliptic on J2000.0 epoch
 
 	//! Draws the radiant
 	void drawRadiant(StelCore* core);
@@ -164,6 +165,8 @@ private:
 
 	//! Calculates the ZHR using two types of distribution function
 	int calculateZHR(StelCore* core);
+
+	QString getClassDescription(int mclass) const;
 };
 
 #endif /* METEORSHOWER_HPP */
