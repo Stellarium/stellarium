@@ -564,15 +564,15 @@ void ConfigurationDialog::updateSelectedInfoGui()
 	{
 		ui->noSelectedInfoRadio->setChecked(true);
 	}
-	else if (flags == StelObject::DefaultInfo)
+	else if (flags == StelObject::InfoStringGroup(StelObject::DefaultInfo))
 	{
-	    ui->defaultSelectedInfoRadio->setChecked(true);
+		ui->defaultSelectedInfoRadio->setChecked(true);
 	}
-	else if (flags == StelObject::ShortInfo)
+	else if (flags == StelObject::InfoStringGroup(StelObject::ShortInfo))
 	{
 		ui->briefSelectedInfoRadio->setChecked(true);
 	}
-	else if (flags == StelObject::AllInfo)
+	else if (flags == StelObject::InfoStringGroup(StelObject::AllInfo))
 	{
 		ui->allSelectedInfoRadio->setChecked(true);
 	}
@@ -1085,24 +1085,24 @@ void ConfigurationDialog::saveAllSettings()
 	// view dialog / landscape tab settings
 	// DO NOT SAVE CURRENT LANDSCAPE ID! There is a dedicated button in the landscape tab of the View dialog.
 	//conf->setValue("init_location/landscape_name",                     propMgr->getStelPropertyValue("LandscapeMgr.currentLandscapeID").toString());
-	conf->setValue("landscape/flag_landscape_sets_location",           propMgr->getStelPropertyValue("LandscapeMgr.flagLandscapeSetsLocation").toBool());
-	conf->setValue("landscape/flag_landscape",                         propMgr->getStelPropertyValue("LandscapeMgr.landscapeDisplayed").toBool());
-	conf->setValue("landscape/flag_atmosphere",                        propMgr->getStelPropertyValue("LandscapeMgr.atmosphereDisplayed").toBool());
-	conf->setValue("landscape/flag_fog",                               propMgr->getStelPropertyValue("LandscapeMgr.fogDisplayed").toBool());
-	conf->setValue("landscape/flag_enable_illumination_layer",         propMgr->getStelPropertyValue("LandscapeMgr.illuminationDisplayed").toBool());
-	conf->setValue("landscape/flag_enable_labels",                     propMgr->getStelPropertyValue("LandscapeMgr.labelsDisplayed").toBool());
-	conf->setValue("landscape/label_font_size",			   propMgr->getStelPropertyValue("LandscapeMgr.labelFontSize").toInt());
-	conf->setValue("landscape/flag_minimal_brightness",                propMgr->getStelPropertyValue("LandscapeMgr.flagLandscapeUseMinimalBrightness").toBool());
-	conf->setValue("landscape/flag_landscape_sets_minimal_brightness", propMgr->getStelPropertyValue("LandscapeMgr.flagLandscapeSetsMinimalBrightness").toBool());
-	conf->setValue("landscape/minimal_brightness",                     propMgr->getStelPropertyValue("LandscapeMgr.defaultMinimalBrightness").toFloat());
-	conf->setValue("landscape/flag_transparency",                      propMgr->getStelPropertyValue("LandscapeMgr.flagLandscapeUseTransparency").toBool());
-	conf->setValue("landscape/transparency",                           propMgr->getStelPropertyValue("LandscapeMgr.landscapeTransparency").toFloat());
-	conf->setValue("landscape/flag_polyline_only",                     propMgr->getStelPropertyValue("LandscapeMgr.flagPolyLineDisplayedOnly").toBool());
-	conf->setValue("landscape/polyline_thickness",                     propMgr->getStelPropertyValue("LandscapeMgr.polyLineThickness").toInt());
-	conf->setValue("stars/init_light_pollution_luminance",             propMgr->getStelPropertyValue("StelSkyDrawer.lightPollutionLuminance").toFloat());
-	conf->setValue("landscape/atmospheric_extinction_coefficient",     propMgr->getStelPropertyValue("StelSkyDrawer.extinctionCoefficient").toFloat());
-	conf->setValue("landscape/pressure_mbar",                          propMgr->getStelPropertyValue("StelSkyDrawer.atmospherePressure").toFloat());
-	conf->setValue("landscape/temperature_C",                          propMgr->getStelPropertyValue("StelSkyDrawer.atmosphereTemperature").toFloat());
+	conf->setValue("landscape/flag_landscape_sets_location",			propMgr->getStelPropertyValue("LandscapeMgr.flagLandscapeSetsLocation").toBool());
+	conf->setValue("landscape/flag_landscape",						propMgr->getStelPropertyValue("LandscapeMgr.landscapeDisplayed").toBool());
+	conf->setValue("landscape/flag_atmosphere",						propMgr->getStelPropertyValue("LandscapeMgr.atmosphereDisplayed").toBool());
+	conf->setValue("landscape/flag_fog",								propMgr->getStelPropertyValue("LandscapeMgr.fogDisplayed").toBool());
+	conf->setValue("landscape/flag_enable_illumination_layer",			propMgr->getStelPropertyValue("LandscapeMgr.illuminationDisplayed").toBool());
+	conf->setValue("landscape/flag_enable_labels",					propMgr->getStelPropertyValue("LandscapeMgr.labelsDisplayed").toBool());
+	conf->setValue("landscape/label_font_size",						propMgr->getStelPropertyValue("LandscapeMgr.labelFontSize").toInt());
+	conf->setValue("landscape/flag_minimal_brightness",				propMgr->getStelPropertyValue("LandscapeMgr.flagLandscapeUseMinimalBrightness").toBool());
+	conf->setValue("landscape/flag_landscape_sets_minimal_brightness",	propMgr->getStelPropertyValue("LandscapeMgr.flagLandscapeSetsMinimalBrightness").toBool());
+	conf->setValue("landscape/minimal_brightness",					propMgr->getStelPropertyValue("LandscapeMgr.defaultMinimalBrightness").toFloat());
+	conf->setValue("landscape/flag_transparency",					propMgr->getStelPropertyValue("LandscapeMgr.flagLandscapeUseTransparency").toBool());
+	conf->setValue("landscape/transparency",							propMgr->getStelPropertyValue("LandscapeMgr.landscapeTransparency").toFloat());
+	conf->setValue("landscape/flag_polyline_only",					propMgr->getStelPropertyValue("LandscapeMgr.flagPolyLineDisplayedOnly").toBool());
+	conf->setValue("landscape/polyline_thickness",					propMgr->getStelPropertyValue("LandscapeMgr.polyLineThickness").toInt());
+	conf->setValue("stars/init_light_pollution_luminance",				propMgr->getStelPropertyValue("StelSkyDrawer.lightPollutionLuminance").toFloat());
+	conf->setValue("landscape/atmospheric_extinction_coefficient",		propMgr->getStelPropertyValue("StelSkyDrawer.extinctionCoefficient").toFloat());
+	conf->setValue("landscape/pressure_mbar",						propMgr->getStelPropertyValue("StelSkyDrawer.atmospherePressure").toFloat());
+	conf->setValue("landscape/temperature_C",						propMgr->getStelPropertyValue("StelSkyDrawer.atmosphereTemperature").toFloat());
 
 	// view dialog / starlore tab
 	QObject* scmgr = reinterpret_cast<QObject*>(&StelApp::getInstance().getSkyCultureMgr());
@@ -1123,90 +1123,91 @@ void ConfigurationDialog::saveAllSettings()
 		{StelObject::InfoStringGroup(StelObject::None),		"none"},
 		{StelObject::InfoStringGroup(StelObject::DefaultInfo),	"default"},
 		{StelObject::InfoStringGroup(StelObject::ShortInfo),	"short"},
-		{StelObject::InfoStringGroup(StelObject::AllInfo),	"all"}
+		{StelObject::InfoStringGroup(StelObject::AllInfo),		"all"}
 	};
 	QString selectedObjectInfo=selectedObjectInfoMap.value(flags, "custom");
+	conf->setValue("gui/selected_object_info", selectedObjectInfo);
 	if (selectedObjectInfo=="custom")
 		saveCustomSelectedInfo();
 
 	// toolbar auto-hide status
-	conf->setValue("gui/auto_hide_horizontal_toolbar",		propMgr->getStelPropertyValue("StelGui.autoHideHorizontalButtonBar").toBool());
-	conf->setValue("gui/auto_hide_vertical_toolbar",			propMgr->getStelPropertyValue("StelGui.autoHideVerticalButtonBar").toBool());
-	conf->setValue("gui/flag_show_quit_button",				propMgr->getStelPropertyValue("StelGui.flagShowQuitButton").toBool());
-	conf->setValue("gui/flag_show_nebulae_background_button",propMgr->getStelPropertyValue("StelGui.flagShowNebulaBackgroundButton").toBool());
-	conf->setValue("gui/flag_show_dss_button",				propMgr->getStelPropertyValue("StelGui.flagShowDSSButton").toBool());
-	conf->setValue("gui/flag_show_hips_button",				propMgr->getStelPropertyValue("StelGui.flagShowHiPSButton").toBool());
-	conf->setValue("gui/flag_show_goto_selected_button",	propMgr->getStelPropertyValue("StelGui.flagShowGotoSelectedObjectButton").toBool());
-	conf->setValue("gui/flag_show_nightmode_button",		propMgr->getStelPropertyValue("StelGui.flagShowNightmodeButton").toBool());
-	conf->setValue("gui/flag_show_fullscreen_button",		propMgr->getStelPropertyValue("StelGui.flagShowFullscreenButton").toBool());
-	
-    conf->setValue("gui/flag_show_obslist_button",		propMgr->getStelPropertyValue("StelGui.flagShowObsListButton").toBool());
-    
-    conf->setValue("gui/flag_show_icrs_grid_button",			propMgr->getStelPropertyValue("StelGui.flagShowICRSGridButton").toBool());
-	conf->setValue("gui/flag_show_galactic_grid_button",		propMgr->getStelPropertyValue("StelGui.flagShowGalacticGridButton").toBool());
-	conf->setValue("gui/flag_show_ecliptic_grid_button",		propMgr->getStelPropertyValue("StelGui.flagShowEclipticGridButton").toBool());
-	conf->setValue("gui/flag_show_boundaries_button",		propMgr->getStelPropertyValue("StelGui.flagShowConstellationBoundariesButton").toBool());
-	conf->setValue("gui/flag_show_constellation_arts_button",	propMgr->getStelPropertyValue("StelGui.flagShowConstellationArtsButton").toBool());
-	conf->setValue("gui/flag_show_asterism_lines_button",	propMgr->getStelPropertyValue("StelGui.flagShowAsterismLinesButton").toBool());
-	conf->setValue("gui/flag_show_asterism_labels_button",	propMgr->getStelPropertyValue("StelGui.flagShowAsterismLabelsButton").toBool());
-	conf->setValue("gui/flag_show_decimal_degrees",		propMgr->getStelPropertyValue("StelApp.flagShowDecimalDegrees").toBool());
-	conf->setValue("gui/flag_use_azimuth_from_south",		propMgr->getStelPropertyValue("StelApp.flagUseAzimuthFromSouth").toBool());
-	conf->setValue("gui/flag_use_formatting_output",			propMgr->getStelPropertyValue("StelApp.flagUseFormattingOutput").toBool());
-	conf->setValue("gui/flag_use_ccs_designations",			propMgr->getStelPropertyValue("StelApp.flagUseCCSDesignation").toBool());
-	conf->setValue("gui/flag_overwrite_info_color",			propMgr->getStelPropertyValue("StelApp.flagOverwriteInfoColor").toBool());
-	conf->setValue("gui/flag_time_jd",						gui->getButtonBar()->getFlagTimeJd());
-	conf->setValue("gui/flag_show_buttons_background",		propMgr->getStelPropertyValue("StelGui.flagUseButtonsBackground").toBool());
-	conf->setValue("gui/flag_indication_mount_mode",		mvmgr->getFlagIndicationMountMode());
+	conf->setValue("gui/auto_hide_horizontal_toolbar",				propMgr->getStelPropertyValue("StelGui.autoHideHorizontalButtonBar").toBool());
+	conf->setValue("gui/auto_hide_vertical_toolbar",				propMgr->getStelPropertyValue("StelGui.autoHideVerticalButtonBar").toBool());
+	conf->setValue("gui/flag_show_quit_button",					propMgr->getStelPropertyValue("StelGui.flagShowQuitButton").toBool());
+	conf->setValue("gui/flag_show_nebulae_background_button",	propMgr->getStelPropertyValue("StelGui.flagShowNebulaBackgroundButton").toBool());
+	conf->setValue("gui/flag_show_dss_button",					propMgr->getStelPropertyValue("StelGui.flagShowDSSButton").toBool());
+	conf->setValue("gui/flag_show_hips_button",					propMgr->getStelPropertyValue("StelGui.flagShowHiPSButton").toBool());
+	conf->setValue("gui/flag_show_goto_selected_button",			propMgr->getStelPropertyValue("StelGui.flagShowGotoSelectedObjectButton").toBool());
+	conf->setValue("gui/flag_show_nightmode_button",				propMgr->getStelPropertyValue("StelGui.flagShowNightmodeButton").toBool());
+	conf->setValue("gui/flag_show_fullscreen_button",				propMgr->getStelPropertyValue("StelGui.flagShowFullscreenButton").toBool());
+
+	conf->setValue("gui/flag_show_obslist_button",				propMgr->getStelPropertyValue("StelGui.flagShowObsListButton").toBool());
+
+	conf->setValue("gui/flag_show_icrs_grid_button",				propMgr->getStelPropertyValue("StelGui.flagShowICRSGridButton").toBool());
+	conf->setValue("gui/flag_show_galactic_grid_button",			propMgr->getStelPropertyValue("StelGui.flagShowGalacticGridButton").toBool());
+	conf->setValue("gui/flag_show_ecliptic_grid_button",			propMgr->getStelPropertyValue("StelGui.flagShowEclipticGridButton").toBool());
+	conf->setValue("gui/flag_show_boundaries_button",			propMgr->getStelPropertyValue("StelGui.flagShowConstellationBoundariesButton").toBool());
+	conf->setValue("gui/flag_show_constellation_arts_button",		propMgr->getStelPropertyValue("StelGui.flagShowConstellationArtsButton").toBool());
+	conf->setValue("gui/flag_show_asterism_lines_button",			propMgr->getStelPropertyValue("StelGui.flagShowAsterismLinesButton").toBool());
+	conf->setValue("gui/flag_show_asterism_labels_button",			propMgr->getStelPropertyValue("StelGui.flagShowAsterismLabelsButton").toBool());
+	conf->setValue("gui/flag_show_decimal_degrees",				propMgr->getStelPropertyValue("StelApp.flagShowDecimalDegrees").toBool());
+	conf->setValue("gui/flag_use_azimuth_from_south",			propMgr->getStelPropertyValue("StelApp.flagUseAzimuthFromSouth").toBool());
+	conf->setValue("gui/flag_use_formatting_output",				propMgr->getStelPropertyValue("StelApp.flagUseFormattingOutput").toBool());
+	conf->setValue("gui/flag_use_ccs_designations",				propMgr->getStelPropertyValue("StelApp.flagUseCCSDesignation").toBool());
+	conf->setValue("gui/flag_overwrite_info_color",				propMgr->getStelPropertyValue("StelApp.flagOverwriteInfoColor").toBool());
+	conf->setValue("gui/flag_time_jd",							gui->getButtonBar()->getFlagTimeJd());
+	conf->setValue("gui/flag_show_buttons_background",			propMgr->getStelPropertyValue("StelGui.flagUseButtonsBackground").toBool());
+	conf->setValue("gui/flag_indication_mount_mode",				mvmgr->getFlagIndicationMountMode());
 
 	// configuration dialog / navigation tab
-	conf->setValue("navigation/flag_enable_zoom_keys",		mvmgr->getFlagEnableZoomKeys());
-	conf->setValue("navigation/flag_enable_mouse_navigation",	mvmgr->getFlagEnableMouseNavigation());
+	conf->setValue("navigation/flag_enable_zoom_keys",			mvmgr->getFlagEnableZoomKeys());
+	conf->setValue("navigation/flag_enable_mouse_navigation",		mvmgr->getFlagEnableMouseNavigation());
 	conf->setValue("navigation/flag_enable_mouse_zooming",		mvmgr->getFlagEnableMouseZooming());
-	conf->setValue("navigation/flag_enable_move_keys",		mvmgr->getFlagEnableMoveKeys());
-	conf->setValue("navigation/startup_time_mode",			core->getStartupTimeMode());
-	conf->setValue("navigation/startup_time_stop",			core->getStartupTimeStop());
-	conf->setValue("navigation/today_time",				core->getInitTodayTime());
-	conf->setValue("navigation/preset_sky_time",			core->getPresetSkyTime());
-	conf->setValue("navigation/time_correction_algorithm",	core->getCurrentDeltaTAlgorithmKey());
+	conf->setValue("navigation/flag_enable_move_keys",			mvmgr->getFlagEnableMoveKeys());
+	conf->setValue("navigation/startup_time_mode",				core->getStartupTimeMode());
+	conf->setValue("navigation/startup_time_stop",				core->getStartupTimeStop());
+	conf->setValue("navigation/today_time",						core->getInitTodayTime());
+	conf->setValue("navigation/preset_sky_time",					core->getPresetSkyTime());
+	conf->setValue("navigation/time_correction_algorithm",			core->getCurrentDeltaTAlgorithmKey());
 	if (mvmgr->getMountMode() == StelMovementMgr::MountAltAzimuthal)
 		conf->setValue("navigation/viewing_mode", "horizon");
 	else
 		conf->setValue("navigation/viewing_mode", "equator");
 
 	StelLocaleMgr & localeManager = StelApp::getInstance().getLocaleMgr();
-	conf->setValue("localization/time_display_format",	localeManager.getTimeFormatStr());
-	conf->setValue("localization/date_display_format",	localeManager.getDateFormatStr());
+	conf->setValue("localization/time_display_format",				localeManager.getTimeFormatStr());
+	conf->setValue("localization/date_display_format",				localeManager.getDateFormatStr());
 
 	// configuration dialog / tools tab
-	conf->setValue("gui/flag_show_flip_buttons",			propMgr->getStelPropertyValue("StelGui.flagShowFlipButtons").toBool());
-	conf->setValue("video/viewport_effect",				StelApp::getInstance().getViewportEffect());
+	conf->setValue("gui/flag_show_flip_buttons",					propMgr->getStelPropertyValue("StelGui.flagShowFlipButtons").toBool());
+	conf->setValue("video/viewport_effect",						StelApp::getInstance().getViewportEffect());
 
-	conf->setValue("projection/viewport",				StelProjector::maskTypeToString(proj->getMaskType()));
-	conf->setValue("projection/viewport_center_offset_x",		core->getCurrentStelProjectorParams().viewportCenterOffset[0]);
-	conf->setValue("projection/viewport_center_offset_y",		core->getCurrentStelProjectorParams().viewportCenterOffset[1]);
-	conf->setValue("projection/flip_horz",				core->getCurrentStelProjectorParams().flipHorz);
-	conf->setValue("projection/flip_vert",				core->getCurrentStelProjectorParams().flipVert);
-	conf->setValue("navigation/max_fov",				mvmgr->getUserMaxFov());
+	conf->setValue("projection/viewport",							StelProjector::maskTypeToString(proj->getMaskType()));
+	conf->setValue("projection/viewport_center_offset_x",			core->getCurrentStelProjectorParams().viewportCenterOffset[0]);
+	conf->setValue("projection/viewport_center_offset_y",			core->getCurrentStelProjectorParams().viewportCenterOffset[1]);
+	conf->setValue("projection/flip_horz",							core->getCurrentStelProjectorParams().flipHorz);
+	conf->setValue("projection/flip_vert",							core->getCurrentStelProjectorParams().flipVert);
+	conf->setValue("navigation/max_fov",						mvmgr->getUserMaxFov());
 
-	conf->setValue("viewing/flag_gravity_labels",			proj->getFlagGravityLabels());
+	conf->setValue("viewing/flag_gravity_labels",					proj->getFlagGravityLabels());
 	conf->setValue("navigation/auto_zoom_out_resets_direction",	mvmgr->getFlagAutoZoomOutResetsDirection());
 
-	conf->setValue("gui/flag_mouse_cursor_timeout",			propMgr->getStelPropertyValue("MainView.flagCursorTimeout").toBool());
-	conf->setValue("gui/mouse_cursor_timeout",			propMgr->getStelPropertyValue("MainView.cursorTimeout").toFloat());
-	conf->setValue("gui/base_font_name",				QGuiApplication::font().family());
-	conf->setValue("gui/screen_font_size",				propMgr->getStelPropertyValue("StelApp.screenFontSize").toInt());
-	conf->setValue("gui/gui_font_size",				propMgr->getStelPropertyValue("StelApp.guiFontSize").toInt());
+	conf->setValue("gui/flag_mouse_cursor_timeout",				propMgr->getStelPropertyValue("MainView.flagCursorTimeout").toBool());
+	conf->setValue("gui/mouse_cursor_timeout",					propMgr->getStelPropertyValue("MainView.cursorTimeout").toFloat());
+	conf->setValue("gui/base_font_name",						QGuiApplication::font().family());
+	conf->setValue("gui/screen_font_size",						propMgr->getStelPropertyValue("StelApp.screenFontSize").toInt());
+	conf->setValue("gui/gui_font_size",							propMgr->getStelPropertyValue("StelApp.guiFontSize").toInt());
 
-	conf->setValue("video/minimum_fps",				propMgr->getStelPropertyValue("MainView.minFps").toInt());
-	conf->setValue("video/maximum_fps",				propMgr->getStelPropertyValue("MainView.maxFps").toInt());
+	conf->setValue("video/minimum_fps",						propMgr->getStelPropertyValue("MainView.minFps").toInt());
+	conf->setValue("video/maximum_fps",						propMgr->getStelPropertyValue("MainView.maxFps").toInt());
 
-	conf->setValue("main/screenshot_dir",				StelFileMgr::getScreenshotDir());
-	conf->setValue("main/invert_screenshots_colors",		propMgr->getStelPropertyValue("MainView.flagInvertScreenShotColors").toBool());
-	conf->setValue("main/screenshot_datetime_filename",		propMgr->getStelPropertyValue("MainView.flagScreenshotDateFileName").toBool());
-	conf->setValue("main/screenshot_datetime_filemask",		propMgr->getStelPropertyValue("MainView.screenShotFileMask").toString());
-	conf->setValue("main/screenshot_custom_size",			propMgr->getStelPropertyValue("MainView.flagUseCustomScreenshotSize").toBool());
-	conf->setValue("main/screenshot_custom_width",			propMgr->getStelPropertyValue("MainView.customScreenshotWidth").toInt());
-	conf->setValue("main/screenshot_custom_height",			propMgr->getStelPropertyValue("MainView.customScreenshotHeight").toInt());
+	conf->setValue("main/screenshot_dir",						StelFileMgr::getScreenshotDir());
+	conf->setValue("main/invert_screenshots_colors",				propMgr->getStelPropertyValue("MainView.flagInvertScreenShotColors").toBool());
+	conf->setValue("main/screenshot_datetime_filename",			propMgr->getStelPropertyValue("MainView.flagScreenshotDateFileName").toBool());
+	conf->setValue("main/screenshot_datetime_filemask",			propMgr->getStelPropertyValue("MainView.screenShotFileMask").toString());
+	conf->setValue("main/screenshot_custom_size",				propMgr->getStelPropertyValue("MainView.flagUseCustomScreenshotSize").toBool());
+	conf->setValue("main/screenshot_custom_width",				propMgr->getStelPropertyValue("MainView.customScreenshotWidth").toInt());
+	conf->setValue("main/screenshot_custom_height",				propMgr->getStelPropertyValue("MainView.customScreenshotHeight").toInt());
 
 	QWidget& mainWindow = StelMainView::getInstance();
 #if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
