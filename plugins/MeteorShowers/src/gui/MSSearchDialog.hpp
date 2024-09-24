@@ -43,6 +43,7 @@ public:
 		ColumnZHR,		//! zhr column
 		ColumnDataType,		//! data type column
 		ColumnPeak,		//! peak date column
+		ColumnClass,		//! activity class column
 		ColumnCount		//! total number of columns
 	};
 
@@ -95,7 +96,7 @@ private:
 	{
 		const int column = treeWidget()->sortColumn();
 
-		if (column == MSSearchDialog::ColumnZHR)
+		if (column == MSSearchDialog::ColumnZHR || column == MSSearchDialog::ColumnClass)
 			return this->data(column, Qt::UserRole).toInt() < other.data(column, Qt::UserRole).toInt();
 		else if (column == MSSearchDialog::ColumnPeak)
 			return this->data(column, Qt::UserRole).toDouble() < other.data(column, Qt::UserRole).toDouble();
