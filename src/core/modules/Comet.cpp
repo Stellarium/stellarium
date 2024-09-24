@@ -466,7 +466,7 @@ void Comet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont
 	const float vMagnitude=getVMagnitude(core);
 
 	// Exclude drawing if user set a hard limit magnitude.
-	if (core->getSkyDrawer()->getFlagPlanetMagnitudeLimit() && (getVMagnitude(core) > core->getSkyDrawer()->getCustomPlanetMagnitudeLimit()))
+	if (core->getSkyDrawer()->getFlagPlanetMagnitudeLimit() && (vMagnitude > core->getSkyDrawer()->getCustomPlanetMagnitudeLimit()))
 		return;
 
 	if (getEnglishName() == core->getCurrentLocation().planetName)
@@ -478,7 +478,7 @@ void Comet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont
 	// Problematic: Early-out here of course disables the wanted hint circles for dim comets.
 	// The line makes hints for comets 5 magnitudes below sky limiting magnitude visible.
 	// If comet is too faint to be seen, don't bother rendering. (Massive speedup if people have hundreds of comet elements!)
-	if ((ss->getMarkerValue()==0.) && ((getVMagnitude(core)-5.0f) > core->getSkyDrawer()->getLimitMagnitude()) && !core->getCurrentLocation().planetName.contains("Observer", Qt::CaseInsensitive))
+	if ((ss->getMarkerValue()==0.) && ((vMagnitude-5.0f) > core->getSkyDrawer()->getLimitMagnitude()) && !core->getCurrentLocation().planetName.contains("Observer", Qt::CaseInsensitive))
 	{
 		return;
 	}
@@ -509,11 +509,11 @@ void Comet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont
 		// by putting here, only draw orbit if Comet is visible for clarity
 		drawOrbit(core);  // TODO - fade in here also...
 
-		labelsFader = (flagLabels && ang_dist>0.25f && maxMagLabels>getVMagnitude(core));
+		labelsFader = (flagLabels && ang_dist>0.25f && maxMagLabels>vMagnitude);
 
 		{ // encapsulate painter!
-			const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
-			StelPainter sPainter(prj);
+			const StelProjectorP prjin = core->getProjection(StelCore::FrameJ2000);
+			StelPainter sPainter(prjin);
 			drawHints(core, sPainter, planetNameFont);
 			Vec3f color=Vec3f(0.25, 0.75, 1);
 			ss->drawAsteroidMarker(core, &sPainter, screenPos[0], screenPos[1], color); // This does not draw directly, but record an entry to be drawn in a batch.
@@ -530,7 +530,7 @@ void Comet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont
 
 	// If comet is too faint to be seen, don't bother rendering. (Massive speedup if people have hundreds of comets!)
 	// This test moved here so that hints are still drawn.
-	if ((getVMagnitude(core)-5.0f) > core->getSkyDrawer()->getLimitMagnitude())
+	if ((vMagnitude-5.0f) > core->getSkyDrawer()->getLimitMagnitude())
 	{
 		return;
 	}
