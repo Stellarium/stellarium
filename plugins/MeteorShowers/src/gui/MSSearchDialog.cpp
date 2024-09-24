@@ -122,6 +122,7 @@ void MSSearchDialog::searchEvents()
 			treeItem->setText(ColumnZHR, QString("%1-%2").arg(r.zhrMin).arg(r.zhrMax));
 		else
 			treeItem->setText(ColumnZHR, QString::number(r.zhrMax));
+		treeItem->setText(ColumnClass, r.activityClass.first>0 ? r.activityClass.second : QChar(0x2014));
 
 		// let's store the stuff in the UserRole to allow easier sorting
 		// check MSTreeWidgetItem::operator <()
@@ -130,6 +131,7 @@ void MSSearchDialog::searchEvents()
 		treeItem->setData(ColumnDataType, Qt::UserRole, r.type);
 		treeItem->setData(ColumnPeak, Qt::UserRole, peakJD);
 		treeItem->setData(ColumnZHR, Qt::UserRole, r.zhrMax);
+		treeItem->setData(ColumnClass, Qt::UserRole, r.activityClass.first);
 	}
 
 	// adjust the column width
@@ -181,9 +183,10 @@ void MSSearchDialog::setHeaderNames()
 	QStringList headerStrings;
 	headerStrings << q_("Code");
 	headerStrings << q_("Name");
-	headerStrings << q_("ZHR");
+	headerStrings << qc_("ZHR","column name");
 	headerStrings << q_("Data Type");
 	headerStrings << q_("Peak");
+	headerStrings << q_("Class");
 	m_ui->listEvents->setHeaderLabels(headerStrings);
 
 	// adjust the column width
