@@ -538,11 +538,6 @@ QString MeteorShower::getInfoString(const StelCore* core, const InfoStringGroup&
 		{ INACTIVE, q_("inactive")}};
 	QString mstdata = mstMap.value(m_status, "");
 
-	const QMap<int, QString>classMap={
-		{ 1,  "I" }, { 2,  "II" }, { 3,  "III" },	{ 4, "IV" }
-	};
-	QString mClass = classMap.value(m_class, "");
-
 	if (flags&Name)
 	{
 		oss << "<h2>" << getNameI18n();
@@ -556,7 +551,7 @@ QString MeteorShower::getInfoString(const StelCore* core, const InfoStringGroup&
 		if (m_class==0)
 			oss << QString("%1: <b>%2</b> (%3)").arg(q_("Type"), getObjectTypeI18n(), mstdata) << "<br />";
 		else
-			oss << QString("%1: <b>%2</b> (%3; %4 %5)").arg(q_("Type"), getObjectTypeI18n(), mstdata, qc_("class","class of meteor shower"), mClass) << "<br />";
+			oss << QString("%1: <b>%2</b> (%3; %4 %5)").arg(q_("Type"), getObjectTypeI18n(), mstdata, qc_("class","activity class of meteor shower"), getActivityClass().second) << "<br />";
 	}
 
 	// Ra/Dec etc.
@@ -774,7 +769,7 @@ QString MeteorShower::getInfoString(const StelCore* core, const InfoStringGroup&
 		}
 
 		if (m_class>0)
-			oss << QString("%1: %2").arg(q_("Description of class"), getClassDescription(m_class)) << "<br />";
+			oss << QString("%1: %2").arg(q_("Description of class"), getClassDescription()) << "<br />";
 	}
 
 	oss << getSolarLunarInfoString(core, flags);
@@ -782,10 +777,18 @@ QString MeteorShower::getInfoString(const StelCore* core, const InfoStringGroup&
 	return str;
 }
 
-QString MeteorShower::getClassDescription(int mclass) const
+QPair<int, QString> MeteorShower::getActivityClass() const
+{
+	const QMap<int, QString>activityClassMap={
+		{ 1,  "I" }, { 2,  "II" }, { 3,  "III" }, { 4, "IV" }
+	};
+	return qMakePair(m_class, activityClassMap.value(m_class, ""));
+}
+
+QString MeteorShower::getClassDescription() const
 {
 	QString mcdesc;
-	switch (mclass) {
+	switch (m_class) {
 		case 1:
 			mcdesc = qc_("the strongest annual showers with ZHR’s normally ten or better.", "description of meteor shower class");
 			break;
