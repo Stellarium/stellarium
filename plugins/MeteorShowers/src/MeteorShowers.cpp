@@ -149,6 +149,7 @@ QList<MeteorShowers::SearchResult> MeteorShowers::searchEvents(int year) const
 			if (found)
 			{
 				r.code = ms->getID();
+				r.activityClass = ms->getActivityClass();
 				if (r.code!="ANT")
 				{
 					r.name = ms->getNameI18n();
