@@ -125,6 +125,8 @@ public:
 	float getSelectPriority(const StelCore*) const override { return -4.0; }
 	Vec3f getInfoColor(void) const override;
 
+	QPair<int, QString> getActivityClass() const;
+
 	//! @return approximate Julian day calculated from solar longitude (J2000)
 	static double JDfromSolarLongitude(double solarLong, int year);
 
@@ -166,7 +168,7 @@ private:
 	//! Calculates the ZHR using two types of distribution function
 	int calculateZHR(StelCore* core);
 
-	QString getClassDescription(int mclass) const;
+	QString getClassDescription() const;
 };
 
 #endif /* METEORSHOWER_HPP */

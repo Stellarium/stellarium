@@ -46,6 +46,7 @@ public:
 		int peakyear;
 		int zhrMax;
 		int zhrMin;
+		QPair<int, QString> activityClass;
 	};
 
 	//! Constructor
