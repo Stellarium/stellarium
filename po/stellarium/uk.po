@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2024-09-23 23:03+0700\n"
+"POT-Creation-Date: 2024-09-24 06:59+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>, 2024\n"
 "Language-Team: Ukrainian (https://app.transifex.com/stellarium/teams/80998/uk/)\n"
@@ -67,7 +67,7 @@ msgstr "астеризм"
 #: src/core/modules/SpecialMarkersMgr.cpp:310
 #: src/core/modules/LandscapeMgr.cpp:881
 #: src/core/modules/NomenclatureMgr.cpp:89 src/core/modules/NebulaMgr.cpp:358
-#: src/core/modules/NebulaMgr.cpp:359 src/core/modules/SolarSystem.cpp:346
+#: src/core/modules/NebulaMgr.cpp:359 src/core/modules/SolarSystem.cpp:347
 #: src/core/modules/MilkyWay.cpp:107 src/core/modules/ZodiacalLight.cpp:112
 #: src/core/modules/ToastMgr.cpp:62 src/core/modules/HipsMgr.cpp:156
 #: src/core/StelApp.cpp:681 src/core/StelCore.cpp:296
@@ -2692,59 +2692,59 @@ msgid "Orthographic"
 msgstr "Ортографічна проєкція"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/core/modules/SolarSystem.cpp:347 src/gui/AstroCalcDialog.cpp:5008
+#: src/core/modules/SolarSystem.cpp:348 src/gui/AstroCalcDialog.cpp:5008
 #: src/gui/AstroCalcDialog.cpp:7275 src/translations.h:34
 msgid "Planets"
 msgstr "Планети"
 
-#: src/core/modules/SolarSystem.cpp:348
+#: src/core/modules/SolarSystem.cpp:349
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:348
 msgid "Planet labels"
 msgstr "Мітки планет"
 
-#: src/core/modules/SolarSystem.cpp:349
+#: src/core/modules/SolarSystem.cpp:350
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:352
 msgid "Planet orbits"
 msgstr "Орбіти планет"
 
-#: src/core/modules/SolarSystem.cpp:350
+#: src/core/modules/SolarSystem.cpp:351
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:356
 msgid "Planet trails"
 msgstr "Траєкторії планет"
 
-#: src/core/modules/SolarSystem.cpp:351
+#: src/core/modules/SolarSystem.cpp:352
 msgid "Planet trails reset"
 msgstr "Скинути траєкторії планет"
 
-#: src/core/modules/SolarSystem.cpp:353 src/ui_viewDialog.h:3609
+#: src/core/modules/SolarSystem.cpp:354 src/ui_viewDialog.h:3609
 msgid "Planet markers"
 msgstr "Позначки планет"
 
-#: src/core/modules/SolarSystem.cpp:354
+#: src/core/modules/SolarSystem.cpp:355
 msgid "Planet selection marker"
 msgstr "Позначка вибору планети"
 
-#: src/core/modules/SolarSystem.cpp:355
+#: src/core/modules/SolarSystem.cpp:356
 msgid "Enlarge Moon"
 msgstr "Збільшити Місяць"
 
-#: src/core/modules/SolarSystem.cpp:356
+#: src/core/modules/SolarSystem.cpp:357
 msgid "Enlarge minor bodies"
 msgstr "Збільшити малі тіла"
 
-#: src/core/modules/SolarSystem.cpp:357
+#: src/core/modules/SolarSystem.cpp:358
 msgid "Enlarge Planets"
 msgstr "Збільшити планети"
 
-#: src/core/modules/SolarSystem.cpp:358
+#: src/core/modules/SolarSystem.cpp:359
 msgid "Enlarge Sun"
 msgstr "Збільшити Сонце"
 
-#: src/core/modules/SolarSystem.cpp:359
+#: src/core/modules/SolarSystem.cpp:360
 msgid "Native planet names (from starlore)"
 msgstr "Початкові назви планет (зі starlore)"
 
-#: src/core/modules/SolarSystem.cpp:360 src/ui_viewDialog.h:3626
+#: src/core/modules/SolarSystem.cpp:361 src/ui_viewDialog.h:3626
 msgid "Mark minor bodies"
 msgstr "Позначати малі тіла"
 
@@ -12823,8 +12823,8 @@ msgid "Show special nomenclature points only"
 msgstr "Показувати лише точки спеціальної номенклатури"
 
 #: src/ui_viewDialog.h:3670
-msgid "Show special points only"
-msgstr "Показувати лише особливі точки"
+msgid "Special points only"
+msgstr "Лише особливі точки"
 
 #: src/ui_viewDialog.h:3674
 msgid "Simulate self-shadowing"
