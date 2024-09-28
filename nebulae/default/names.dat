@@ -12,12 +12,14 @@
 #         Typically annotated for naked-eye or Messier-like bright objects with names given until the late 20th century. 
 #         "Common knowledge" for average amateurs, and the preferred name when alternative names are given.
 #   B500: The 500 Best Deep Sky Objects' by Don Pensack; https://www.cloudynights.com/topic/472872-500-best-dso-list/
-#   ST1: The Summer Triangle Makes its Midnight Debut; http://www.skyandtelescope.com/observing/the-summer-triangle-makes-its-midnight-debut/
-#   ST2: Galaxies in Collision // Sky & Telescope, Vol. 133, N5, p.28-33 (May 2017)
-#   ST3: Aquila's Gems // Sky & Telescope, Vol. 136, N2, p.34-39 (August 2018)
-#   ST4: The Best Abell Planetary Nebulae // Sky & Telescope, p.98-102 (May 2002)
-#   ST5: Come the Night  // Sky & Telescope, p.54-56 (Nov 2019)
-#   ST6: Paddle the Milky Way's Dark River - Sky & Telescope; https://skyandtelescope.org/observing/a-trip-down-the-great-rift/
+#   ST: 
+#      - The Summer Triangle Makes its Midnight Debut; http://www.skyandtelescope.com/observing/the-summer-triangle-makes-its-midnight-debut/
+#      - Galaxies in Collision // Sky & Telescope, Vol. 133, N5, p.28-33 (May 2017)
+#      - Aquila's Gems // Sky & Telescope, Vol. 136, N2, p.34-39 (August 2018)
+#      - The Best Abell Planetary Nebulae // Sky & Telescope, p.98-102 (May 2002)
+#      - Come the Night  // Sky & Telescope, p.54-56 (Nov 2019)
+#      - Paddle the Milky Way's Dark River - Sky & Telescope; https://skyandtelescope.org/observing/a-trip-down-the-great-rift/
+#      - The Cosmic Bat Nebula - LDN43; https://skyandtelescope.org/online-gallery/the-cosmic-bat-nebula-ldn43/
 #   NED: Named Galaxies; https://ned.ipac.caltech.edu/level5/CATALOGS/naga.html
 #   SEDS: A Collection of Some Common Names for Deep Sky Objects; http://messier.seds.org/xtra/supp/d-names.html
 #   SEDSM: Common Names for Messier Objects; http://www.messier.seds.org/m-names.html
@@ -57,6 +59,7 @@
 #      - NGC 2327: Parrot Nebula; https://apod.nasa.gov/apod/ap120308.html
 #      - NGC 7822: Cosmic Question Mark ; https://apod.nasa.gov/apod/ap211013.html
 #      - NGC 6823: Cloud Sculpting Star Cluster; https://apod.nasa.gov/apod/ap041004.html
+#      - LDN 43: The Cosmic Bat Nebula; https://apod.nasa.gov/apod/ap221031.html
 #   HST:
 #      - Hubble offers a dazzling necklace; https://spacetelescope.org/images/potw1133a/
 #   ABIN: 
@@ -68,6 +71,7 @@
 #      - Sh2-123 Tick Nebula; https://www.astrobin.com/tllta5/
 #      - Sh2-123 The Tick Nebula "One Tough little Bug!"; https://www.astrobin.com/evgldr/C/
 #      - NGC 7822 - The Question Mark Nebula; https://www.astrobin.com/mfyqzh/
+#      - LDN 43 The Cosmic Bat Nebula; https://www.astrobin.com/7z89it/E/
 #   AAPOD2:
 #      - Dolphin Head Nebula - Sh2-308; https://www.aapod2.com/blog/dolphin-head-nebula-sh2-308
 #      - Bubble Galaxy - NGC 3521; https://www.aapod2.com/blog/ngc-3521
@@ -462,9 +466,9 @@ NGC  2769            _("NGC 2769 Group") # SIMBAD
 NGC  2770            _("Supernova Factory")
 NGC  2841            _("Tiger's Eye Galaxy") # B500, HT
 NGC  2899            _("Flying Jaw Nebula") # ISS
-NGC  2936            _("The Penguin Galaxy") # ST2
+NGC  2936            _("The Penguin Galaxy") # S&T
 NGC  2936            _("The Porpoise Galaxy") # APOD
-NGC  2937            _("The Egg Galaxy") # ST2
+NGC  2937            _("The Egg Galaxy") # S&T
 NGC  3031            _("Bode's Galaxy") # WK, SIMBAD, PAS, SEDSM
 NGC  3031            _("Bode's Nebula") # WK, WSO, WSG, PSA, B500, RNGCIC, SEDSM, U2K
 NGC  3031            _("The Great Spiral") # SOG
@@ -682,8 +686,8 @@ NGC  5236            _("Seashell Galaxy") # B500
 NGC  5281            _("Little Scorpion Cluster") # SG, HT
 NGC  5291            _("Seashell Galaxy") # ESKY
 NGC  5353            _("NGC 5353 group") # WSG
-NGC  5394            _("The Heron Galaxy") # ST2, DSW
-NGC  5395            _("The Heron Galaxy") # ST2, DSW
+NGC  5394            _("The Heron Galaxy") # S&T, DSW
+NGC  5395            _("The Heron Galaxy") # S&T, DSW
 NGC  5416            _("NGC 5416 group") # WSG
 NGC  5421            _("Flying Ant Galaxies") # SGN
 NGC  5457            _("Pinwheel Galaxy") # SIMBAD, DSW, B500, PAS, TLO, RNGCIC, SEDSM
@@ -787,8 +791,8 @@ NGC  6618            _("Swan Nebula") # WK, SIMBAD, DSW, TSS, BCH, CC, B500, TLO
 NGC  6618            _("Horseshoe Nebula") # WP, SIMBAD, SOG, ANCMB, PGH, SEDSM
 NGC  6618            _("Checkmark Nebula") # WP, SIMBAD, B500, SEDSM
 NGC  6618            _("Lobster Nebula") # SIMBAD, SEDSM
-NGC  6621            _("Edward's Galaxy") # ST2
-NGC  6622            _("Edward's Galaxy") # ST2
+NGC  6621            _("Edward's Galaxy") # S&T
+NGC  6622            _("Edward's Galaxy") # S&T
 NGC  6633            _("Tweedledum Cluster") # ESKY, HT
 NGC  6633            _("Captain Hook Cluster") # HT
 NGC  6633            _("Wasp-Waist Cluster") # HT
@@ -805,7 +809,7 @@ NGC  6720            _("Annular Nebula") # ABALL, AFL
 NGC  6723            _("Chandelier Cluster") # B500
 NGC  6726            _("Anteater Nebula") # ISS
 NGC  6729            _("R CrA Nebula") # PAS
-NGC  6741            _("Phantom Streak Nebula") # SIMBAD, ST3
+NGC  6741            _("Phantom Streak Nebula") # SIMBAD, S&T
 NGC  6745            _("Bird's Head")
 NGC  6751            _("Dandelion Puffball Nebula") # WP, SD
 NGC  6751            _("Glowing Eye Nebula") # WP, SD
@@ -1164,7 +1168,7 @@ SH2  264             _("λ Ori Molecular Ring") # SIMBAD
 SH2  264             _("Angelfish Nebula")
 SH2  264             _("Orion's Head Nebula")
 SH2  264             _("North Orion Bubble")
-SH2  274             _("Medusa Nebula") # DSW, PSA, DN, ST4, SIMBAD
+SH2  274             _("Medusa Nebula") # DSW, PSA, DN, S&T, SIMBAD
 SH2  275             _("Rosette Nebula") # WK, SIMBAD
 SH2  276             _("Barnard's Loop") # WK, DWH, SD, SIMBAD, U2K
 SH2  276             _("Barnard's Arc") # SIMBAD
@@ -1187,8 +1191,9 @@ LBN  531             _("Cave Nebula") # SIMBAD
 LBN  777             _("Vulture Head Nebula")
 LBN  777             _("Baby Eagle Nebula")
 LBN  953             _("Orion B")
+LDN  43              _("The Cosmic Bat Nebula") # APOD, ABIN, S&T
 LDN  810             _("Coalman Nebula") # DSW
-LDN  906             _("Northern Coalsack Nebula") # ST1, HT, PSA
+LDN  906             _("Northern Coalsack Nebula") # S&T, HT, PSA
 LDN  935             _("Gulf of Mexico Nebula")
 LDN  1235            _("Dark Shark Nebula") # WK
 LDN  1529            _("Kutner's Cloud") # SIMBAD
@@ -1353,7 +1358,7 @@ UGC  3087            _("BW Tauri") # RASC
 UGC  3697            _("Integral Sign Galaxy") # RASC, U2K
 UGC  4305            _("Holmberg II") # RASC
 UGC  4841            _("Holmberg III") # RASC
-UGC  4881            _("The Grasshopper Galaxy") # ST2
+UGC  4881            _("The Grasshopper Galaxy") # S&T
 UGC  5139            _("Holmberg I") # RASC
 UGC  5336            _("Holmberg IX") # RASC
 UGC  5364            _("Leo A") # NED, SIMBAD, RASC
@@ -1384,7 +1389,7 @@ UGC  9792            _("Serpens Dwarf Galaxy") # NED, RASC
 UGC  10214           _("Tadpole Galaxy") # SIMBAD, WSG
 UGC  10586           _("Zwicky's Triplet") # RASC
 UGC  10822           _("Draco Dwarf Galaxy") # RASC, U2K
-UGC  11668           _("Egg Nebula") # SIMBAD, PSA, ST5
+UGC  11668           _("Egg Nebula") # SIMBAD, PSA, S&T
 UGC  11668           _("Cygnus Egg") # SIMBAD
 UGC  12613           _("Pegasus Dwarf Irregular Galaxy") # SIMBAD, RASC
 UGC  12613           _("Pegasus Dwarf") # U2K
@@ -1397,10 +1402,10 @@ VV   689             _("Angel Wing") # ESA-Hubble
 VV   786             _("Lemon Galaxy") # SIMBAD
 PK   010+18.2        _("Minkowski's Butterfly") # DSW
 PK   010+18.2        _("Twin Jet Nebula")
-PK   064+05.1        _("Campbell's Hydrogen Star") # SIMBAD, ST4
+PK   064+05.1        _("Campbell's Hydrogen Star") # SIMBAD, S&T
 PK   080-06.1        _("Egg Nebula") # U2K
 PK   080-10.1        _("Methuselah Nebula") # APOD
-PK   086-08.1        _("Baby Dumbbell Nebula") # ST5
+PK   086-08.1        _("Baby Dumbbell Nebula") # S&T
 PK   164+31.1        _("Headphone Nebula") # WP
 PK   164+31.1        _("Jones-Emberson 1") # WP
 PK   166-06.1        _("Westbrook Nebula") # SIMBAD
@@ -1528,14 +1533,14 @@ ST   23              _("Pazmino's Cluster") # SBSX, U2K
      38              _("Dark Doodad Nebula") # WK, PSA, DN
 # Center of Baade's Window is NGC 6522
      39              _("Baade's Window") # WP, SIMBAD
-     40              _("Funnel Cloud Nebula") # ST6
-     41              _("Northern Coalsack") # ST6
-     42              _("The Great Rift") # ST6
-     43              _("Scutum Star Cloud") # ST6
-     44              _("Small Sagittarius Star Cloud") # ST6
-     45              _("Patchy unnamed cloud") # ST6
-     46              _("Large Sagittarius Star Cloud") # ST6
-     47              _("Cygnus Star Cloud") # ST6
+     40              _("Funnel Cloud Nebula") # S&T
+     41              _("Northern Coalsack") # S&T
+     42              _("The Great Rift") # S&T
+     43              _("Scutum Star Cloud") # S&T
+     44              _("Small Sagittarius Star Cloud") # S&T
+     45              _("Patchy unnamed cloud") # S&T
+     46              _("Large Sagittarius Star Cloud") # S&T
+     47              _("Cygnus Star Cloud") # S&T
      48              _("Dark Horse Nebula") # WP
      48              _("Prancing Horse Nebula") # WP
      49              _("Norma Star Cloud") # WK
