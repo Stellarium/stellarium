@@ -109,6 +109,9 @@ var requirejs, require, define;
     function mixin(target, source, force, deepStringMixin) {
         if (source) {
             eachProp(source, function (value, prop) {
+                if (prop === '__proto__' || prop === 'constructor') {
+                    return;
+                }
                 if (force || !hasProp(target, prop)) {
                     if (deepStringMixin && typeof value === 'object' && value &&
                         !isArray(value) && !isFunction(value) &&
