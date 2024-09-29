@@ -70,6 +70,8 @@
 	text-indent: -99999px;
 	overflow: hidden;
 	background-repeat: no-repeat;
+	width: 16px;
+	height: 16px;
 }
 
 .ui-widget-icon-block {
@@ -88,7 +90,10 @@
 	left: 0;
 	width: 100%;
 	height: 100%;
+	background: #aaaaaa;
+	opacity: .3;
 }
+
 .ui-accordion .ui-accordion-header {
 	display: block;
 	cursor: pointer;
@@ -1031,10 +1036,6 @@ a.ui-button:active,
 ----------------------------------*/
 
 /* states and images */
-.ui-icon {
-	width: 16px;
-	height: 16px;
-}
 .ui-icon,
 .ui-widget-content .ui-icon {
 	background-image: url("images/ui-icons_444444_256x240.png");
@@ -1276,10 +1277,6 @@ a.ui-button:active,
 }
 
 /* Overlays */
-.ui-widget-overlay {
-	background: #aaaaaa;
-	opacity: .3;
-}
 .ui-widget-shadow {
 	box-shadow: 0px 0px 5px #666666;
 }
