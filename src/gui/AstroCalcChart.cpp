@@ -20,6 +20,7 @@
 #include "StelTranslator.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
+#include "StelLocaleMgr.hpp"
 #include "StelUtils.hpp"
 #include <QGraphicsSceneEvent>
 #include <QGraphicsLayout>
@@ -76,6 +77,7 @@ AstroCalcChart::~AstroCalcChart()
 }
 
 void AstroCalcChart::retranslate(){
+	setLocale(QLocale(StelApp::getInstance().getLocaleMgr().getAppLanguage()));
 	// We need to configure every enum Series here!
 	if (map.contains(AltVsTime            )) map.value(AltVsTime            )->setName(q_("Altitude"));
 	if (map.contains(CurrentTime          )) map.value(CurrentTime          )->setName(q_("Now"));
