@@ -313,7 +313,7 @@
             <h3><input type="checkbox" class="stelaction" name="actionShow_Planets" /><?= tr("Solar System objects")?></h3>
             <label><input type="checkbox" class="stelaction" name="actionShow_Planets_Hints" /><?= tr("Show planet markers")?></label>
             <label><input type="checkbox" class="stelaction" name="actionShow_Planets_Orbits" /><?= tr("Show planet orbits")?></label>
-			<label><input class="stelproperty" name="SolarSystem.flagPlanetsOrbitsOnly" type="checkbox"/><?= tr("Show planet orbits only")?></label>
+  	    <label><input class="stelproperty" name="SolarSystem.flagPlanetsOrbitsOnly" type="checkbox"/><?= tr("Show planet orbits only")?></label>
             <label><input class="stelproperty" name="SolarSystem.flagIsolatedOrbits" type="checkbox"/><?= tr("Show orbit for selected planet")?></label>
             <label><input class="stelproperty" name="SolarSystem.trailsDisplayed" type="checkbox"/><?= tr("Show planet trails")?></label>
             <label><input class="stelproperty" name="SolarSystem.flagIsolatedTrails" type="checkbox"/><?= tr("Show trail only for selected planet")?></label>
@@ -327,8 +327,17 @@
               <td><label><input class="stelproperty" name="SolarSystem.flagMinorBodyScale" type="checkbox"/><?= tr("Scale minor bodies:")?></label></td><td><input class="spinner stelproperty" name="SolarSystem.minorBodyScale" data-min="1" data-max="1000" data-step="0.5" data-numberformat="n1"/></td>
 			  </tr>
 			  </table>
-              <p><label><input class="stelproperty" name="StelSkyDrawer.flagPlanetMagnitudeLimit" type="checkbox"/><?= tr("Limit magnitude:")?></label><input class="spinner stelproperty" name="StelSkyDrawer.customPlanetMagLimit" data-min="0" data-max="22" data-step="0.1" data-numberformat="n2"/></p>
             </div>
+  	    <div class="flex flex-baseline">
+               <label><input class="stelproperty" name="SolarSystem.flagMarkers" type="checkbox"/><?= tr("Mark minor bodies:")?>
+	          <span class="stelproperty" data-prop="SolarSystem.markerMagThreshold" data-numberformat="n2"/> -- </label>
+		  <div class="slider stelproperty flex-expand" data-prop="SolarSystem.markerMagThreshold" data-min="-5" data-max="37" data-step="0.1" data-numberformat="n2"></div>
+  	    </div>
+  	    <div class="flex flex-baseline">
+               <label><input class="stelproperty" name="StelSkyDrawer.flagPlanetMagnitudeLimit" type="checkbox"/><?= tr("Limit magnitude:")?>
+	          <span class="stelproperty" data-prop="StelSkyDrawer.customPlanetMagLimit" data-numberformat="n2"/> -- </label>
+		  <div class="slider stelproperty flex-expand" data-prop="StelSkyDrawer.customPlanetMagLimit" data-min="0" data-max="22" data-step="0.1" data-numberformat="n2"></div>
+  	    </div>
             <div class="flex flex-baseline">
               <label><input type="checkbox" class="stelaction" name="actionShow_Planets_Labels"/><?= tr("Labels and Markers")?></label><div class="slider stelproperty flex-expand" data-prop="SolarSystem.labelsAmount" data-min="0" data-max="10" data-step="0.1"></div>
             </div>
@@ -637,15 +646,14 @@
             <label><input class="stelproperty" name="NebulaMgr.flagSurfaceBrightnessUsage" type="checkbox"/><?= tr("Use surface brightness")?></label>
             <label><input class="stelproperty" name="NebulaMgr.flagAdditionalNamesDisplayed" type="checkbox"/><?= tr("Use additional names of DSO")?></label>
             <!--p><label><input class="stelproperty" name="StelSkyDrawer.flagNebulaMagnitudeLimit" type="checkbox"/><?= tr("Limit magnitude:")?></label><input class="spinner stelproperty" name="StelSkyDrawer.customNebulaMagLimit" data-min="3" data-max="21" data-step="0.25" data-numberformat="n2"/></p-->
-			<div class="flex flex-baseline">
+  	    <div class="flex flex-baseline">
                <label><input class="stelproperty" name="StelSkyDrawer.flagNebulaMagnitudeLimit" type="checkbox"/><?= tr("Limit magnitude:")?>
-			          <span class="stelproperty" data-prop="StelSkyDrawer.customNebulaMagLimit" data-numberformat="n2"/> -- </label>
-					  <div class="slider stelproperty flex-expand" data-prop="StelSkyDrawer.customNebulaMagLimit" data-min="3" data-max="21" data-step="0.25" data-numberformat="n2"></div>
-			</div>
-			
+	          <span class="stelproperty" data-prop="StelSkyDrawer.customNebulaMagLimit" data-numberformat="n2"/> -- </label>
+		  <div class="slider stelproperty flex-expand" data-prop="StelSkyDrawer.customNebulaMagLimit" data-min="3" data-max="21" data-step="0.25" data-numberformat="n2"></div>
+  	    </div>
             <p><label><input class="stelproperty" name="NebulaMgr.flagUseSizeLimits" type="checkbox"/><?= tr("Limit angular size (arcmin):")?></label>
-					<input class="spinner stelproperty" name="NebulaMgr.minSizeLimit" data-min="1" data-max="600" data-step="1" data-numberformat="n2"/>
-					<input class="spinner stelproperty" name="NebulaMgr.maxSizeLimit" data-min="1" data-max="1200" data-step="1" data-numberformat="n2"/></p>
+  		      <input class="spinner stelproperty" name="NebulaMgr.minSizeLimit" data-min="1" data-max="600" data-step="1" data-numberformat="n2"/>
+		      <input class="spinner stelproperty" name="NebulaMgr.maxSizeLimit" data-min="1" data-max="1200" data-step="1" data-numberformat="n2"/></p>
           </div>
         </div>
       </div>
