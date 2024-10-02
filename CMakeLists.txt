@@ -252,8 +252,7 @@ IF(${CMAKE_BUILD_TYPE} MATCHES "Fuzzer")
      ENDIF()
 ENDIF()
 
-IF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
-     SET(APPLE 1)
+IF(APPLE)
      SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++")
      # share data location:
      SET(SDATALOC "Resources")
