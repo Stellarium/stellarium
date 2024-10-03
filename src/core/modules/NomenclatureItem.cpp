@@ -595,7 +595,7 @@ bool NomenclatureItem::is180() const
 
 void NomenclatureItem::createNameLists()
 {
-    niTypeStringMap = {
+	niTypeStringMap = {
 	{ niSpecialPointPole, qc_("point", "special point") },
 	{ niSpecialPointEast, qc_("point", "special point") },
 	{ niSpecialPointWest, qc_("point", "special point") },
