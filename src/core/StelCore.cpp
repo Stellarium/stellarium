@@ -1130,6 +1130,7 @@ void StelCore::returnToHome()
 	// between planets using SpaceShip and second method give does not exist data
 	StelLocationMgr& locationMgr = StelApp::getInstance().getLocationMgr();
 	StelLocation loc;
+	QSettings* conf = StelApp::getInstance().getSettings();
 	if (defaultLocationID == "auto")
 	{
 		locationMgr.locationFromIP();
@@ -1139,10 +1140,9 @@ void StelCore::returnToHome()
 		loc = locationMgr.locationForString(defaultLocationID);
 
 	if (loc.isValid())
-		moveObserverTo(loc, 0.);
+		moveObserverTo(loc, conf->value("navigation/return_home_duration", 0.).toDouble()); // ability set a duration of movement (for a demo)
 
 	PlanetP p = GETSTELMODULE(SolarSystem)->searchByEnglishName(loc.planetName);
-	QSettings* conf = StelApp::getInstance().getSettings();
 
 	LandscapeMgr* landscapeMgr = GETSTELMODULE(LandscapeMgr);
 	landscapeMgr->setCurrentLandscapeID(landscapeMgr->getDefaultLandscapeID());
@@ -1154,7 +1154,7 @@ void StelCore::returnToHome()
 
 	StelMovementMgr* smmgr = getMovementMgr();
 	smmgr->setViewDirectionJ2000(altAzToJ2000(smmgr->getInitViewingDirection(), StelCore::RefractionOff));
-	smmgr->zoomTo(smmgr->getInitFov(), 1.);
+	smmgr->zoomTo(smmgr->getInitFov(), conf->value("navigation/return_fov_duration", 1.).toDouble()); // ability set a duration of zooming (for a demo)
 }
 
 double StelCore::getJDOfLastJDUpdate() const
