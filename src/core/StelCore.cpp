@@ -1384,16 +1384,14 @@ double StelCore::getUTCOffset(const double JD) const
 #endif
 	StelLocation loc = getCurrentLocation();
 	QString tzName = getCurrentTimeZone();
+	bool tzSpecial = QString("LMST LTST system_default").contains(tzName);
 	QTimeZone tz(tzName.toUtf8());
 	// We must fight a bug in Qt6.2 on Linux. For some reason tz.isValid() is true even for our self-named zones LMST,LTST,system_default.
 	// We must use an intermediate Boolean which we set to false where needed.
-	bool tzValid=tz.isValid();
-	if (QString("LMST LTST system_default").contains(tzName))
-		tzValid=false;
-	if (!tzValid && !QString("LMST LTST system_default").contains(tzName))
-	{
-		qWarning() << "Invalid timezone: " << tzName;
-	}
+	bool tzValid = tzSpecial ? false : tz.isValid();
+
+	if (!tzValid && !tzSpecial)
+		qWarning().noquote() << "Invalid timezone: " << tzName;
 
 	qint64 shiftInSeconds = 0;
 	if (tzName=="system_default" || (loc.planetName=="Earth" && !tzValid && !QString("LMST LTST").contains(tzName)))
@@ -1436,12 +1434,6 @@ double StelCore::getUTCOffset(const double JD) const
 			shiftInSeconds += qRound(getSolutionEquationOfTime()*60);
 	}
 	//qDebug() << "ShiftInSeconds:" << shiftInSeconds;
-	#ifdef Q_OS_WIN
-	// A dirty hack for report: https://github.com/Stellarium/stellarium/issues/686
-	// TODO: switch to IANA TZ on all operating systems
-	if (tzName=="Europe/Volgograd")
-		shiftInSeconds = 4*3600; // UTC+04:00
-	#endif
 
 	// Extraterrestrial: Either use the configured Terrestrial timezone, or even a pseudo-LMST based on planet's rotation speed?
 	if (loc.planetName!="Earth")
