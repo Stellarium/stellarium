@@ -435,15 +435,17 @@
             <h3><label><input type="checkbox" class="stelaction valign-middle" name="actionShow_Atmosphere"/><?= tr("Atmosphere")?></label></h3>
             <label><input type="checkbox" class="stelaction" name="actionShow_LightPollutionFromDatabase" /><?= tr("Light pollution data from locations database")?></label>
             <div class="table">
-			
-	         <p><div class="flex flex-baseline">
-			      <label><?= tr("Light pollution:")?></label><span class="stelproperty" data-prop="StelSkyDrawer.bortleScaleIndex"></span>
-			      <div class="slider stelproperty flex-expand" data-prop="StelSkyDrawer.bortleScaleIndex" data-min="1" data-max="9" data-step="1"></div>
-				</div>
-			 </p>
-
-			
-              <!--p><label for="atmosphere_bortlescaleindex"><?= tr("Light pollution:")?></label><input id="atmosphere_bortlescaleindex" class="spinner stelproperty" name="StelSkyDrawer.bortleScaleIndex" data-min="1" data-max="9" data-step="1" data-numberformat="n0" readonly="readonly"/></p-->
+              <label><?= tr("Bortle class:")?> 
+                 <button type="button" class="stelssc" value="core.setBortleScaleIndex(1)" title='<?= tr("excellent dark-sky site")?>'>1</button>
+                 <button type="button" class="stelssc" value="core.setBortleScaleIndex(2)" title='<?= tr("typical truly dark site")?>'>2</button>
+                 <button type="button" class="stelssc" value="core.setBortleScaleIndex(3)" title='<?= tr("rural sky")?>'>3</button>
+                 <button type="button" class="stelssc" value="core.setBortleScaleIndex(4)" title='<?= tr("rural/suburban transition")?>'>4</button>
+                 <button type="button" class="stelssc" value="core.setBortleScaleIndex(5)" title='<?= tr("suburban sky")?>'>5</button>
+                 <button type="button" class="stelssc" value="core.setBortleScaleIndex(6)" title='<?= tr("bright suburban sky")?>'>6</button>
+                 <button type="button" class="stelssc" value="core.setBortleScaleIndex(7)" title='<?= tr("suburban/urban transition")?>'>7</button>
+                 <button type="button" class="stelssc" value="core.setBortleScaleIndex(8)" title='<?= tr("city sky")?>'>8</button>
+                 <button type="button" class="stelssc" value="core.setBortleScaleIndex(9)" title='<?= tr("inner-city sky")?>'>9</button>
+              </label>
             </div>
             <div id="vo_refraction" class="innerblock">
               <h3><?= tr("Refraction Settings")?></h3>
@@ -939,6 +941,7 @@
       <li title="<?= tr("Center on selected object")?>"><button class="stelaction icon32 btGotoSelectedObject" name="actionSet_Tracking"></button></li>
       <li title="<?= tr("Night mode")?>"><button class="stelaction icon32 btNightView" name="actionShow_Night_Mode"></button></li>
       <li title="<?= tr("Full-screen mode")?>"><button class="stelaction icon32 btFullScreen" name="actionSet_Full_Screen_Global"></button></li>
+      <li title="<?= tr("Go to home")?>"><button class="stelaction icon32 btGotoHome" name="actionGo_Home_Global"></button></li>
     </ul>
   </div>
   <!-- handled by mainui.js -->
