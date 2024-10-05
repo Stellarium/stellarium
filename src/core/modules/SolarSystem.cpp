@@ -4191,7 +4191,7 @@ void SolarSystem::setExtraThreads(int n)
 
 void SolarSystem::setMarkerMagThreshold(double m)
 {
-	markerMagThreshold=qBound(-2.,m,37.);
+	markerMagThreshold=qBound(-5.,m,37.); // sync with GUI & WUI!
 	StelApp::immediateSave("astro/planet_markers_mag_threshold", markerMagThreshold);
 	emit markerMagThresholdChanged(markerMagThreshold);
 }
