@@ -34,7 +34,7 @@ jobs:
         mkdir -p ../../../.stellarium/ephem
         mkdir -p build
         cd build
-        cmake -DCMAKE_BUILD_TYPE=Debug -DENABLE_TESTING=On -DENABLE_NLS=Off ${{ github.workspace }}
+        cmake -DCMAKE_BUILD_TYPE=Debug -DSTELLARIUM_RELEASE_BUILD=Off -DENABLE_TESTING=On -DENABLE_NLS=Off ${{ github.workspace }}
 
     - name: Compile
       working-directory: build

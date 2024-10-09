@@ -26,7 +26,10 @@ jobs:
         # using force-overwrite due to
         # https://github.com/actions/virtual-environments/issues/2703
         #sudo ACCEPT_EULA=Y apt upgrade -o Dpkg::Options::="--force-overwrite" --yes
-        sudo apt install -y qtbase5-private-dev qtscript5-dev libqt5svg5-dev qttools5-dev-tools qttools5-dev libqt5opengl5-dev qtmultimedia5-dev libqt5multimedia5-plugins libqt5serialport5 libqt5serialport5-dev qtpositioning5-dev libgps-dev libqt5positioning5 libqt5positioning5-plugins qtwebengine5-dev libqt5charts5-dev zlib1g-dev libgl1-mesa-dev libdrm-dev cmake libexiv2-dev libnlopt-cxx-dev
+        sudo apt install -y qtbase5-private-dev qtscript5-dev libqt5svg5-dev qttools5-dev-tools qttools5-dev libqt5opengl5-dev qtmultimedia5-dev \
+			    libqt5multimedia5-plugins libqt5serialport5 libqt5serialport5-dev qtpositioning5-dev libgps-dev libqt5positioning5 \
+			    libqt5positioning5-plugins qtwebengine5-dev libqt5charts5-dev zlib1g-dev libgl1-mesa-dev libdrm-dev cmake libexiv2-dev \
+		            libnlopt-cxx-dev 
 
     - name: Checkout repository
       uses: actions/checkout@v4
@@ -36,7 +39,7 @@ jobs:
       run: |
         mkdir -p build
         cd build
-        cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DENABLE_TESTING=On "${{ github.workspace }}"
+        cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DSTELLARIUM_RELEASE_BUILD=Off -DENABLE_TESTING=On "${{ github.workspace }}"
 
     - name: Compile
       working-directory: build
@@ -63,7 +66,11 @@ jobs:
         # using force-overwrite due to
         # https://github.com/actions/virtual-environments/issues/2703
         #sudo ACCEPT_EULA=Y apt upgrade -o Dpkg::Options::="--force-overwrite" --yes
-        sudo apt install -y qt6-base-private-dev qt6-multimedia-dev qt6-positioning-dev qt6-tools-dev qt6-tools-dev-tools qt6-base-dev-tools qt6-qpa-plugins qt6-image-formats-plugins qt6-l10n-tools qt6-webengine-dev qt6-webengine-dev-tools libqt6charts6-dev libqt6charts6 libqt6opengl6-dev libqt6positioning6-plugins libqt6serialport6-dev qt6-base-dev libqt6webenginecore6-bin libqt6webengine6-data libexiv2-dev libnlopt-cxx-dev zlib1g-dev libgl1-mesa-dev libdrm-dev libglx-dev libxkbcommon-x11-dev libgps-dev
+        sudo apt install -y qt6-base-private-dev qt6-multimedia-dev qt6-positioning-dev qt6-tools-dev qt6-tools-dev-tools qt6-base-dev-tools \
+			    qt6-qpa-plugins qt6-image-formats-plugins qt6-l10n-tools qt6-webengine-dev qt6-webengine-dev-tools libqt6charts6-dev \
+			    libqt6charts6 libqt6opengl6-dev libqt6positioning6-plugins libqt6serialport6-dev qt6-base-dev libqt6webenginecore6-bin \
+			    libqt6webengine6-data libexiv2-dev libnlopt-cxx-dev zlib1g-dev libgl1-mesa-dev libdrm-dev libglx-dev libxkbcommon-x11-dev \
+ 			    libgps-dev
 
     - name: Checkout repository
       uses: actions/checkout@v4
@@ -73,7 +80,7 @@ jobs:
       run: |
         mkdir -p build
         cd build
-        cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DENABLE_TESTING=On "${{ github.workspace }}"
+        cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DSTELLARIUM_RELEASE_BUILD=Off -DENABLE_TESTING=On "${{ github.workspace }}"
 
     - name: Compile
       working-directory: build
@@ -87,7 +94,7 @@ jobs:
 
   # CI on Linux (Qt6)
   ci-linux-qt6-pch:
-    name: "Linux (amd64; qt6; no PCH)"
+    name: "Linux (amd64; qt6; core)"
     runs-on: ubuntu-latest
     if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.actor, 'transifex')"
 
@@ -100,7 +107,10 @@ jobs:
         # using force-overwrite due to
         # https://github.com/actions/virtual-environments/issues/2703
         #sudo ACCEPT_EULA=Y apt upgrade -o Dpkg::Options::="--force-overwrite" --yes
-        sudo apt install -y qt6-base-private-dev qt6-multimedia-dev qt6-positioning-dev qt6-tools-dev qt6-tools-dev-tools qt6-base-dev-tools qt6-qpa-plugins qt6-image-formats-plugins qt6-l10n-tools qt6-webengine-dev qt6-webengine-dev-tools libqt6charts6-dev libqt6charts6 libqt6opengl6-dev libqt6positioning6-plugins libqt6serialport6-dev qt6-base-dev libqt6webenginecore6-bin libqt6webengine6-data libexiv2-dev libnlopt-cxx-dev zlib1g-dev libgl1-mesa-dev libdrm-dev libglx-dev libxkbcommon-x11-dev libgps-dev
+        sudo apt install -y qt6-base-private-dev qt6-multimedia-dev qt6-positioning-dev qt6-tools-dev qt6-tools-dev-tools qt6-base-dev-tools qt6-qpa-plugins \
+			    qt6-image-formats-plugins qt6-l10n-tools qt6-webengine-dev qt6-webengine-dev-tools libqt6charts6-dev libqt6charts6 libqt6opengl6-dev \
+			    libqt6positioning6-plugins libqt6serialport6-dev qt6-base-dev libqt6webenginecore6-bin libqt6webengine6-data libexiv2-dev libnlopt-cxx-dev \
+			    zlib1g-dev libgl1-mesa-dev libdrm-dev libglx-dev libxkbcommon-x11-dev libgps-dev
 
     - name: Checkout repository
       uses: actions/checkout@v4
@@ -110,7 +120,14 @@ jobs:
       run: |
         mkdir -p build
         cd build
-        cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DENABLE_TESTING=On -DENABLE_PCH=Off "${{ github.workspace }}"
+        cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DSTELLARIUM_RELEASE_BUILD=Off -DENABLE_TESTING=On -DENABLE_PCH=Off -DENABLE_NLS=Off -DENABLE_SHOWMYSKY=Off \
+	      -DENABLE_GPS=Off -DENABLE_LIBGPS=Off -DENABLE_MEDIA=Off -DENABLE_XLSX=Off -DENABLE_SCRIPTING=Off -DENABLE_QTWEBENGINE=Off -DUSE_PLUGIN_ANGLEMEASURE=Off \
+	      -DUSE_PLUGIN_ARCHAEOLINES=Off -DUSE_PLUGIN_CALENDARS=Off -DUSE_PLUGIN_EQUATIONOFTIME=Off -DUSE_PLUGIN_EXOPLANETS=Off -DUSE_PLUGIN_METEORSHOWERS=Off \
+ 	      -DUSE_PLUGIN_LENSDISTORTIONESTIMATOR=Off -DUSE_PLUGIN_MISSINGSTARS=Off -DUSE_PLUGIN_NAVSTARS=Off -DUSE_PLUGIN_NOVAE=Off -DUSE_PLUGIN_OBSERVABILITY=Off \
+	      -DUSE_PLUGIN_OCULARS=Off -DUSE_PLUGIN_ONLINEQUERIES=Off -DUSE_PLUGIN_POINTERCOORDINATES=Off -DUSE_PLUGIN_PULSARS=Off -DUSE_PLUGIN_QUASARS=Off \
+	      -DUSE_PLUGIN_REMOTECONTROL=Off -DUSE_PLUGIN_REMOTESYNC=Off -DUSE_PLUGIN_SATELLITES=Off -DUSE_PLUGIN_SCENERY3D=Off -DUSE_PLUGIN_SOLARSYSTEMEDITOR=Off \
+	      -DUSE_PLUGIN_SUPERNOVAE=Off -DUSE_PLUGIN_TELESCOPECONTROL=Off -DUSE_PLUGIN_TEXTUSERINTERFACE=Off \
+	      "${{ github.workspace }}"
 
     - name: Compile
       working-directory: build
@@ -149,7 +166,7 @@ jobs:
         export PATH="/opt/homebrew/opt/qt@5/bin:/usr/local/opt/qt@5/bin:$PATH"
         mkdir -p build
         cd build
-        cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DENABLE_TESTING=On ${{ github.workspace }}
+        cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DSTELLARIUM_RELEASE_BUILD=Off -DENABLE_TESTING=On ${{ github.workspace }}
 
     - name: Compile
       working-directory: build
@@ -188,7 +205,7 @@ jobs:
         export PATH="/usr/local/opt/qt@6/bin:$PATH"
         mkdir -p build
         cd build
-        cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DENABLE_TESTING=On ${{ github.workspace }}
+        cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DSTELLARIUM_RELEASE_BUILD=Off -DENABLE_TESTING=On ${{ github.workspace }}
 
     - name: Compile
       working-directory: build
@@ -230,7 +247,7 @@ jobs:
         export PATH="/usr/local/opt/qt@6/bin:$PATH"
         mkdir -p build
         cd build
-        cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DENABLE_TESTING=On ${{ github.workspace }}
+        cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DSTELLARIUM_RELEASE_BUILD=Off -DENABLE_TESTING=On ${{ github.workspace }}
 
     - name: Compile
       working-directory: build
@@ -261,14 +278,15 @@ jobs:
         # When using rsync, you can define copyback: false to not copy files back from the VM in to the host.
         copyback: false
         prepare: |
-          pkg install -y cmake git eigen glm exiv2 nlopt perl5 xorg-vfbserver gettext qt5-charts qt5-concurrent qt5-core qt5-gui qt5-network qt5-opengl qt5-widgets qt5-multimedia qt5-webengine qt5-buildtools qt5-qmake qt5-script qt5-testlib qt5-linguisttools
+          pkg install -y cmake git eigen glm exiv2 nlopt perl5 xorg-vfbserver gettext qt5-charts qt5-concurrent qt5-core qt5-gui qt5-network qt5-opengl \
+			 qt5-widgets qt5-multimedia qt5-webengine qt5-buildtools qt5-qmake qt5-script qt5-testlib qt5-linguisttools
 
         run: |
           set -e -x
           export DISPLAY=:0
           mkdir builds
           cd builds
-          cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DENABLE_TESTING=On "${{ github.workspace }}"
+          cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DSTELLARIUM_RELEASE_BUILD=Off -DENABLE_TESTING=On "${{ github.workspace }}"
           make -j3
           Xvfb :0 -ac -screen 0 1024x768x24+32 >/dev/null 2>&1 &
           sleep 3
