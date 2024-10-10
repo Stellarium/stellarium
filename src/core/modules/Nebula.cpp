@@ -980,7 +980,7 @@ float Nebula::getHintSize(StelPainter& sPainter) const
 	const float size = 6.0f;
 	float scaledSize = 0.0f;
 	if (drawHintProportional)
-		scaledSize = static_cast<float>(getAngularRadius(Q_NULLPTR)) *(M_PI_180f*2.f)*static_cast<float>(sPainter.getProjector()->getPixelPerRadAtCenter());
+		scaledSize = static_cast<float>(getAngularRadius(Q_NULLPTR)) *(M_PI_180f/2.f)*static_cast<float>(sPainter.getProjector()->getPixelPerRadAtCenter());
 	if (nType==NebRegion)
 		scaledSize = 12.f;
 
