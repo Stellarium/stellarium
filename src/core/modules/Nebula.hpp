@@ -347,7 +347,8 @@ private:
 	static StelTextureSP texRegion;				// The symbolic dashed shape texture
 	static StelTextureSP texPointElement;
 	static StelTextureSP texPlanetaryNebula;		// Type 3
-	static float hintsBrightness;
+	static double hintsBrightness;
+	static double labelsBrightness;
 
 	static Vec3f labelColor;				// The color of labels
 	static QMap<Nebula::NebulaType, Vec3f>hintColorMap;	// map for rapid lookup. Updated by NebulaMgr whenever a color changes.
