@@ -196,6 +196,9 @@ public:
 	QString getEnglishName() const override {return englishName;}
 	QString getEnglishAliases() const;
 	QString getI18nAliases() const;
+	//! Return the angular radius of a circle containing the object as seen from the observer
+	//! with the circle center assumed to be at getJ2000EquatorialPos().
+	//! @return radius in degree. This value is the apparent angular size of the object, and is independent of the current FOV.
 	double getAngularRadius(const StelCore*) const override;
 	SphericalRegionP getRegion() const override {return pointRegion;}
 
