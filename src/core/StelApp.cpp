@@ -1256,6 +1256,7 @@ void StelApp::setFlagUseFormattingOutput(bool b)
 	if (flagUseFormattingOutput!=b)
 	{
 		flagUseFormattingOutput = b;
+		StelApp::immediateSave("gui/flag_use_formatting_output", flagUseFormattingOutput);
 		emit flagUseFormattingOutputChanged(b);
 	}
 }
@@ -1265,6 +1266,7 @@ void StelApp::setFlagUseCCSDesignation(bool b)
 	if (flagUseCCSDesignation!=b)
 	{
 		flagUseCCSDesignation = b;
+		StelApp::immediateSave("gui/flag_use_ccs_designations", flagUseCCSDesignation);
 		emit flagUseCCSDesignationChanged(b);
 	}
 }
