@@ -238,7 +238,7 @@ public slots:
 	//! Toggle the application of user-defined deep-sky object magnitude limit.
 	//! If enabled, deep-sky objects fainter than the magnitude set with
 	//! setCustomNebulaMagnitudeLimit() will not be displayed.
-	void setFlagNebulaMagnitudeLimit(bool b) {if(b!=flagNebulaMagnitudeLimit){ flagNebulaMagnitudeLimit = b; emit flagNebulaMagnitudeLimitChanged(b);}}
+	void setFlagNebulaMagnitudeLimit(bool b) {if(b!=flagNebulaMagnitudeLimit){ flagNebulaMagnitudeLimit = b; StelApp::immediateSave("astro/flag_nebula_magnitude_limit", b); emit flagNebulaMagnitudeLimitChanged(b);}}
 	//! @return true if the user-defined nebula magnitude limit is in force.
 	bool getFlagNebulaMagnitudeLimit() const {return flagNebulaMagnitudeLimit;}
 	//! Toggle the application of user-defined solar system object magnitude limit.
@@ -257,7 +257,7 @@ public slots:
 	double getCustomNebulaMagnitudeLimit() const {return customNebulaMagLimit;}
 	//! Sets a lower limit for nebula magnitudes (anything fainter is ignored).
 	//! In force only if flagNebulaMagnitudeLimit is set.
-	void setCustomNebulaMagnitudeLimit(double limit) { customNebulaMagLimit=limit; emit customNebulaMagLimitChanged(limit);}
+	void setCustomNebulaMagnitudeLimit(double limit) { customNebulaMagLimit=limit; StelApp::immediateSave("astro/nebula_magnitude_limit", limit); emit customNebulaMagLimitChanged(limit);}
 	//! Get the value used for forced solar system object magnitude limiting.
 	double getCustomPlanetMagnitudeLimit() const {return customPlanetMagLimit;}
 	//! Sets a lower limit for solar system object magnitudes (anything fainter is ignored).

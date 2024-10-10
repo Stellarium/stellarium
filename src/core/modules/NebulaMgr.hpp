@@ -131,6 +131,16 @@ class NebulaMgr : public StelObjectModule
 		   NOTIFY maxSizeLimitChanged
 		   )
 	// Colors
+	Q_PROPERTY(double hintsBrightness
+		   READ getHintsBrightness
+		   WRITE setHintsBrightness
+		   NOTIFY hintsBrightnessChanged
+		   )
+	Q_PROPERTY(double labelsBrightness
+		   READ getLabelsBrightness
+		   WRITE setLabelsBrightness
+		   NOTIFY labelsBrightnessChanged
+		   )
 	Q_PROPERTY(Vec3f labelsColor
 		   READ getLabelsColor
 		   WRITE setLabelsColor
@@ -855,6 +865,21 @@ public slots:
 	//! @return the amount between 0 and 10. 0 is no hints, 10 is maximum of hints
 	double getHintsAmount(void) const;
 
+	//! Set the brightness used to paint nebulae labels.
+	//! @param a the amount between 0 and 1. 0 is black, 1 is maximum brightness
+	void setLabelsBrightness(double b);
+	//! Get the brightness used to paint nebulae labels.
+	//! @return the amount between 0 and 1. 0 is dark (no labels), 1 is maximum brightness of labels
+	double getLabelsBrightness(void) const;
+
+	//! Set the brightness of nebulae hints.
+	//! @param f the amount between 0 and 10. 0 is no hints, 10 is maximum of hints
+	void setHintsBrightness(double b);
+	//! Get the brightness of nebulae labels.
+	//! @return the amount between 0 and 1. 0 is dark (no hints), 1 is maximum brigthness of hints
+	double getHintsBrightness(void) const;
+
+
 signals:
 	//! Emitted when hints are toggled.
 	void flagHintsDisplayedChanged(bool b);
@@ -876,6 +901,8 @@ signals:
 	void maxSizeLimitChanged(double s);
 	void labelsAmountChanged(double a);
 	void hintsAmountChanged(double f);
+	void labelsBrightnessChanged(double b);
+	void hintsBrightnessChanged(double b);
 
 	void labelsColorChanged(const Vec3f & color) const;
 	void circlesColorChanged(const Vec3f & color) const;
@@ -1004,6 +1031,11 @@ private:
 	double hintsAmount;
 	//! The amount of labels (between 0 and 10)
 	double labelsAmount;
+
+	//! The max brightness setting of hints (between 0 and 1)
+	double hintsBrightness;
+	//! The max brightness setting of labels (between 0 and 1)
+	double labelsBrightness;
 
 	//! The selection pointer texture
 	StelTextureSP texPointer;

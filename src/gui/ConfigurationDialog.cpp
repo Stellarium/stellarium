@@ -1041,6 +1041,9 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("stars/labels_amount",			propMgr->getStelPropertyValue("StarMgr.labelsAmount").toDouble());
 	conf->setValue("astro/nebula_hints_amount",		propMgr->getStelPropertyValue("NebulaMgr.hintsAmount").toDouble());
 	conf->setValue("astro/nebula_labels_amount",		propMgr->getStelPropertyValue("NebulaMgr.labelsAmount").toDouble());
+	conf->setValue("astro/nebula_hints_brightness",		propMgr->getStelPropertyValue("NebulaMgr.hintsBrightness").toDouble());
+	conf->setValue("astro/nebula_labels_brightness",	propMgr->getStelPropertyValue("NebulaMgr.labelsBrightness").toDouble());
+
 	conf->setValue("astro/flag_nebula_hints_proportional",	propMgr->getStelPropertyValue("NebulaMgr.hintsProportional").toBool());
 	conf->setValue("astro/flag_surface_brightness_usage",	propMgr->getStelPropertyValue("NebulaMgr.flagSurfaceBrightnessUsage").toBool());
 	conf->setValue("gui/flag_surface_brightness_arcsec",	propMgr->getStelPropertyValue("NebulaMgr.flagSurfaceBrightnessArcsecUsage").toBool());
