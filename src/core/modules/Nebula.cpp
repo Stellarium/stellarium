@@ -47,8 +47,8 @@ StelTextureSP Nebula::texPlanetaryNebula;
 bool  Nebula::drawHintProportional = false;
 bool  Nebula::surfaceBrightnessUsage = false;
 bool  Nebula::designationUsage = false;
-double Nebula::hintsBrightness = 1.;
-double Nebula::labelsBrightness = 1.;
+float Nebula::hintsBrightness = 1.f;
+float Nebula::labelsBrightness = 1.f;
 Vec3f Nebula::labelColor = Vec3f(0.4f,0.3f,0.5f);
 QMap<Nebula::NebulaType, Vec3f>Nebula::hintColorMap;
 bool Nebula::flagUseTypeFilters = false;
@@ -979,8 +979,10 @@ float Nebula::getHintSize(StelPainter& sPainter) const
 {
 	const float size = 6.0f;
 	float scaledSize = 0.0f;
+	// Should getPixelPerRadAtCenter() not adjust for HiDPI? Apparently it does not!
 	if (drawHintProportional)
-		scaledSize = static_cast<float>(getAngularRadius(Q_NULLPTR)) *(M_PI_180f)*static_cast<float>(sPainter.getProjector()->getPixelPerRadAtCenter());
+		scaledSize = static_cast<float>(getAngularRadius(Q_NULLPTR)) *(M_PI_180f)*static_cast<float>(sPainter.getProjector()->getPixelPerRadAtCenter()) / static_cast<float>(sPainter.getProjector()->getDevicePixelsPerPixel());
+	// TODO: Is it correct that for NebRegions any catalog data for getAngularRadius() is ignored? And that NebRegions are ALWAYS drawn with larger symbol?
 	if (nType==NebRegion)
 		scaledSize = 12.f;
 
@@ -1031,6 +1033,7 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints, StelCore *core)
 		case NebSA:
 		case NebSC:
 		case NebCl:
+		case NebPartOfGx:
 			renderMarkerPointedCircle(sPainter, XY[0], XY[1], finalSize, color, false);
 			return;
 		case NebGc:
@@ -1038,6 +1041,7 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints, StelCore *core)
 			return;
 		case NebN:
 		case NebHII:
+		case NebISM:
 		case NebMolCld:
 		case NebYSO:
 		case NebRn:
@@ -1065,11 +1069,12 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints, StelCore *core)
 		case NebRegion:
 			Nebula::texRegion->bind();
 			break;
-		//case NebEMO:
-		//case NebStar:
-		//case NebSymbioticStar:
-		//case NebEmissionLineStar:
-		default:
+		case NebEMO:
+		case NebStar:
+		case NebSymbioticStar:
+		case NebEmissionLineStar:
+		case NebUnknown:
+		//default: // keep this commented out to let clangd warn us of unhandled cases!
 			renderRoundMarker(sPainter, XY[0], XY[1], finalSize, color, false);
 			return;
 	}
@@ -1182,9 +1187,9 @@ QString Nebula::getDSODesignationWIC() const
 void Nebula::readDSO(QDataStream &in)
 {
 	float	ra, dec;
-	unsigned int oType;
+	//unsigned int oType;
 
-	in	>> DSO_nb >> ra >> dec >> bMag >> vMag >> oType >> mTypeString >> majorAxisSize >> minorAxisSize
+	in	>> DSO_nb >> ra >> dec >> bMag >> vMag >> nType >> mTypeString >> majorAxisSize >> minorAxisSize
 		>> orientationAngle >> redshift >> redshiftErr >> parallax >> parallaxErr >> oDistance >> oDistanceErr
 		>> NGC_nb >> IC_nb >> M_nb >> C_nb >> B_nb >> Sh2_nb >> VdB_nb >> RCW_nb >> LDN_nb >> LBN_nb >> Cr_nb
 		>> Mel_nb >> PGC_nb >> UGC_nb >> Ced_nb >> Arp_nb >> VV_nb >> PK_nb >> PNG_nb >> SNRG_nb >> ACO_nb
@@ -1226,7 +1231,7 @@ void Nebula::readDSO(QDataStream &in)
 
 	StelUtils::spheToRect(ra,dec,XYZ);
 	Q_ASSERT(fabs(XYZ.normSquared()-1.)<1e-9);
-	nType = static_cast<Nebula::NebulaType>(oType);
+	//nType = static_cast<Nebula::NebulaType>(oType);
 	pointRegion = SphericalRegionP(new SphericalPoint(getJ2000EquatorialPos(Q_NULLPTR)));
 }
 
@@ -1257,7 +1262,7 @@ bool Nebula::objectInDisplayedType() const
 		{NebHII			,  4 },  // HII Region
 		{NebSNR			,  8 },  // Supernova remnant
 		{NebISM			,  4 },  // Interstellar matter
-		//{NebEMO		,    },  // Emission object
+		{NebEMO			,  5 },  // Emission object (from 24.4)
 		{NebBLL			,  1 },  // BL Lac object
 		{NebBLA			,  1 },  // Blazar
 		{NebMolCld	        ,  6 },  // Molecular Cloud
@@ -1271,7 +1276,7 @@ bool Nebula::objectInDisplayedType() const
 		{NebSNC			,  8 },  // Supernova Candidate
 		{NebSNRC		,  8 },  // Supernova Remnant Candidate
 		{NebGxCl		, 10 },  // Cluster of Galaxies
-		//{NebPartOfGx		,    },  // Part of a Galaxy
+		{NebPartOfGx		,  3 },  // Part of a Galaxy (from 24.4)
 		//{NebRegion		,    },  // Region of the sky
 		{NebUnknown		, 12 }   // m Unknown type, catalog errors, "Unidentified Southern Objects" etc.
 	};
@@ -1336,13 +1341,13 @@ bool Nebula::objectInDisplayedCatalog() const
 		|| ((catalogFilters&CatESO)   && (!ESO_nb.isEmpty()))
 		|| ((catalogFilters&CatVdBH)  && (!VdBH_nb.isEmpty()))
 		|| ((catalogFilters&CatDWB)   && (DWB_nb>0))
-		|| ((catalogFilters&CatTr)	   && (Tr_nb>0))
-		|| ((catalogFilters&CatSt)	   && (St_nb>0))
-		|| ((catalogFilters&CatRu	)   && (Ru_nb>0))
-		|| ((catalogFilters&CatVdBHa)   && (VdBHa_nb>0)))
+		|| ((catalogFilters&CatTr)    && (Tr_nb>0))
+		|| ((catalogFilters&CatSt)    && (St_nb>0))
+		|| ((catalogFilters&CatRu)    && (Ru_nb>0))
+		|| ((catalogFilters&CatVdBHa) && (VdBHa_nb>0)))
 
 		// Special case: objects without ID from current catalogs
-		|| ((catalogFilters&CatOther)   && withoutID);
+		|| ((catalogFilters&CatOther) && withoutID);
 
 	return r;
 }
@@ -1414,7 +1419,7 @@ QString Nebula::getMorphologicalTypeDescription(void) const
 
 	// Let's avoid showing a wrong morphological description for galaxies
 	// NOTE: Is required the morphological description for galaxies?
-	if (nType==NebGx || nType==NebAGx || nType==NebRGx || nType==NebIGx || nType==NebQSO || nType==NebPossQSO || nType==NebBLA || nType==NebBLL || nType==NebGxCl)
+	if (QList<NebulaType>({NebGx, NebAGx, NebRGx, NebIGx, NebQSO, NebPossQSO, NebBLA, NebBLL, NebGxCl}).contains(nType))
 		return QString();
 
 	static const QRegularExpression GlClRx("\\.*(I|II|III|IV|V|VI|VII|VIII|IX|X|XI|XII)\\.*");

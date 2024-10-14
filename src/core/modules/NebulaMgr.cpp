@@ -779,8 +779,8 @@ void NebulaMgr::draw(StelCore* core)
 
 	static StelSkyDrawer* skyDrawer = core->getSkyDrawer();
 
-	Nebula::hintsBrightness  = hintsFader.getInterstate()*flagShow.getInterstate()*hintsBrightness;
-	Nebula::labelsBrightness = hintsFader.getInterstate()*flagShow.getInterstate()*labelsBrightness;
+	Nebula::hintsBrightness  = hintsFader.getInterstate()*flagShow.getInterstate()*static_cast<float>(hintsBrightness);
+	Nebula::labelsBrightness = hintsFader.getInterstate()*flagShow.getInterstate()*static_cast<float>(labelsBrightness);
 
 	// Use a 4 degree margin (esp. for wide outlines)
 	const float margin = 4.f*M_PI_180f*prj->getPixelPerRadAtCenter();
