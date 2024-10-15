@@ -337,7 +337,6 @@ void StelViewportDistorterFisheyeToSphericMirror::paintViewportBuffer(const QOpe
 	sPainter.setTexCoordPointer(2, GL_FLOAT, displayTexCoordList.constData());
 	for (int j=0;j<max_y;j++)
 	{
-		GL(gl->glDrawArrays(GL_TRIANGLE_STRIP, j*(max_x+1)*2, (max_x+1)*2));
 		sPainter.drawFromArray(StelPainter::TriangleStrip, (max_x+1)*2, j*(max_x+1)*2, false);
 	}
 	sPainter.enableClientStates(false);
