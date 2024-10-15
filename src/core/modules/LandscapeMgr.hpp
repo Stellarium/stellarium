@@ -220,6 +220,10 @@ class LandscapeMgr : public StelModule
 		   READ getPolyLineThickness
 		   WRITE setPolyLineThickness
 		   NOTIFY polyLineThicknessChanged)
+	Q_PROPERTY(Vec3f polyLineColor
+		   READ getPolyLineColor
+		   WRITE setPolyLineColor
+		   NOTIFY polyLineColorChanged)
 	Q_PROPERTY(bool flagUseLightPollutionFromDatabase
 		   READ getFlagUseLightPollutionFromDatabase
 		   WRITE setFlagUseLightPollutionFromDatabase
@@ -274,6 +278,10 @@ class LandscapeMgr : public StelModule
 		   READ getLabelColor
 		   WRITE setLabelColor
 		   NOTIFY labelColorChanged)
+	Q_PROPERTY(int labelAngle
+		   READ getLabelAngle
+		   WRITE setLabelAngle
+		   NOTIFY labelAngleChanged)
 	Q_PROPERTY(double landscapeTransparency
 		   READ getLandscapeTransparency
 		   WRITE setLandscapeTransparency
@@ -459,6 +467,10 @@ public slots:
 	int getLabelFontSize() const;
 	//! Set the fontsize for landscape labels
 	void setLabelFontSize(const int size);
+	//! Get the rotation angle for landscape labels (degrees)
+	int getLabelAngle() const;
+	//! Set the rotation angle for landscape labels (degrees)
+	void setLabelAngle(const int angleDeg);
 	//! Get color for landscape labels
 	Vec3f getLabelColor() const;
 	//! Set color for landscape labels
@@ -472,6 +484,11 @@ public slots:
 	int getPolyLineThickness() const {return polyLineThickness;}
 	//! Set thickness for rendering polygonal line (if one is defined)
 	void setPolyLineThickness(int thickness) {polyLineThickness=thickness; emit polyLineThicknessChanged(thickness);}
+	//! Get color for landscape polygon
+	Vec3f getPolyLineColor() const;
+	//! Set color for landscape polygon
+	void setPolyLineColor(const Vec3f& c);
+
 
 	//! Return the value of the flag determining if a change of landscape will update the observer location.
 	bool getFlagLandscapeSetsLocation() const {return flagLandscapeSetsLocation;}
@@ -719,8 +736,10 @@ signals:
 	void labelsDisplayedChanged(const bool displayed);
 	void labelFontSizeChanged(const int size);
 	void labelColorChanged(const Vec3f &c);
+	void labelAngleChanged(const int angleDeg);
 	void flagPolyLineDisplayedChanged(const bool enabled);
 	void polyLineThicknessChanged(const int thickness);
+	void polyLineColorChanged(const Vec3f& c);
 	void flagUseLightPollutionFromDatabaseChanged(const bool usage);
 	void flagLandscapeAutoSelectionChanged(const bool value);
 	void flagLandscapeSetsLocationChanged(const bool value);

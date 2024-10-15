@@ -855,6 +855,7 @@ void LandscapeMgr::init()
 	setPolyLineThickness(conf->value("landscape/polyline_thickness", 1).toInt());
 	setLabelFontSize(conf->value("landscape/label_font_size", 18).toInt());
 	setLabelColor(Vec3f(conf->value("landscape/label_color", "0.2,0.8,0.2").toString()));
+	setLabelAngle(conf->value("landscape/label_angle", 45).toInt());
 
 	setFlagLandscapeUseTransparency(conf->value("landscape/flag_transparency", false).toBool());
 	setLandscapeTransparency(conf->value("landscape/transparency", 0.5).toDouble());
@@ -949,13 +950,13 @@ bool LandscapeMgr::setCurrentLandscapeID(const QString& id, const double changeL
 	// This prevents subhorizon sun or grid becoming briefly visible.
 	if (landscape)
 	{
-		// Copy display parameters from previous landscape to new one
+		// Copy display parameters from previous landscape to new one. TODO: Sort out possible static ones!
 		newLandscape->setFlagShow(landscape->getFlagShow());
 		newLandscape->setFlagShowFog(landscape->getFlagShowFog());
 		newLandscape->setFlagShowIllumination(landscape->getFlagShowIllumination());
 		newLandscape->setFlagShowLabels(landscape->getFlagShowLabels());
-		newLandscape->setLabelFontSize(landscape->getLabelFontSize());
-		newLandscape->setLabelColor(landscape->getLabelColor());
+		//newLandscape->setLabelFontSize(landscape->getLabelFontSize());
+		//newLandscape->setLabelColor(landscape->getLabelColor());
 
 		// If we have an oldLandscape that is not just swapped back, put that into cache.
 		if (oldLandscape && oldLandscape!=newLandscape)
@@ -1296,12 +1297,25 @@ bool LandscapeMgr::getFlagLabels() const
 void LandscapeMgr::setLabelFontSize(const int size)
 {
 	landscape->setLabelFontSize(size);
+	StelApp::immediateSave("landscape/label_font_size", size);
 	emit labelFontSizeChanged(size);
 }
 
 int LandscapeMgr::getLabelFontSize() const
 {
 	return landscape->getLabelFontSize();
+}
+
+void LandscapeMgr::setLabelAngle(const int angleDeg)
+{
+	Landscape::labelAngle = angleDeg;
+	StelApp::immediateSave("landscape/label_angle", angleDeg);
+	emit labelAngleChanged(angleDeg);
+}
+
+int LandscapeMgr::getLabelAngle() const
+{
+	return Landscape::labelAngle;
 }
 
 void LandscapeMgr::setLabelColor(const Vec3f& c)
@@ -1313,6 +1327,17 @@ void LandscapeMgr::setLabelColor(const Vec3f& c)
 Vec3f LandscapeMgr::getLabelColor() const
 {
 	return landscape->getLabelColor();
+}
+
+void LandscapeMgr::setPolyLineColor(const Vec3f& c)
+{
+	Landscape::horizonPolygonLineColor = c;
+	emit polyLineColorChanged(c);
+}
+
+Vec3f LandscapeMgr::getPolyLineColor() const
+{
+	return Landscape::horizonPolygonLineColor;
 }
 
 void LandscapeMgr::setFlagLandscapeAutoSelection(bool enableAutoSelect)

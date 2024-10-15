@@ -36,6 +36,7 @@
 #include <QFont>
 #include <QVariant>
 
+class LandscapeMgr;
 class QSettings;
 class StelLocation;
 class StelCore;
@@ -66,6 +67,7 @@ class QOpenGLVertexArrayObject;
 //!   @param name: The landscape name as specified in the LandscapeIni (may contain spaces, translatable, UTF8, ...)
 class Landscape
 {
+	friend LandscapeMgr;
 public:
 	typedef struct
 	{
@@ -273,12 +275,13 @@ protected:
 	SphericalRegionP horizonPolygon;   //! Optional element describing the horizon line.
 					   //! Data shall be read from the file given as landscape.ini[landscape]polygonal_horizon_list
 					   //! For LandscapePolygonal, this is the only horizon data item.
-	Vec3f horizonPolygonLineColor;     //! for all horizon types, the horizonPolygon line, if specified, will be drawn in this color
-					   //! specified in landscape.ini[landscape]horizon_line_color. Negative red (default) indicated "don't draw".
+	static Vec3f horizonPolygonLineColor;     //! for all horizon types, the horizonPolygon line, if specified, will be drawn in this color
+					   //! DEPRECATED PER-LANDSCAPE: if still specified in landscape.ini[landscape]horizon_line_color, it will be ignored. Negative red (default) indicated "don't draw".
 	// Optional element: labels for landscape features.
 	QList<LandscapeLabel> landscapeLabels;
-	int fontSize;     //! Used for landscape labels (optionally indicating landscape features)
-	Vec3f labelColor; //! Color for the landscape labels.
+	static int fontSize;     //! Used for landscape labels (optionally indicating landscape features)
+	static Vec3f labelColor; //! Color for the landscape labels.
+	static int labelAngle; //! Rotation angle for landscape labels, degrees. Useful for landscapes with many labels.
 	unsigned int memorySize;   //!< holds an approximate value of memory consumption (for cache cost estimate)
 	bool multisamplingEnabled_;
 	bool initialized = false;
