@@ -31,6 +31,19 @@
 #include <QFile>
 #include <QDir>
 
+namespace
+{
+constexpr int SPHERIC_MIRROR_COORDS_PER_VERTEX = 2;
+constexpr int SPHERIC_MIRROR_COORDS_PER_COLOR = 4;
+constexpr int SPHERIC_MIRROR_COORDS_PER_TEXCOORD = 2;
+enum
+{
+	VERTEX_ATTRIB_INDEX,
+	COLOR_ATTRIB_INDEX,
+	TEXCOORD_ATTRIB_INDEX,
+};
+}
+
 void StelViewportEffect::paintViewportBuffer(const QOpenGLFramebufferObject* buf) const
 {
 	StelPainter sPainter(StelApp::getInstance().getCore()->getProjection2d());
@@ -51,6 +64,8 @@ StelViewportDistorterFisheyeToSphericMirror::StelViewportDistorterFisheyeToSpher
 	, screen_h(screen_h)
 	, originalProjectorParams(StelApp::getInstance().getCore()->getCurrentStelProjectorParams())
 	, texture_point_array(Q_NULLPTR)
+	, vao(new QOpenGLVertexArrayObject)
+	, verticesVBO(new QOpenGLBuffer(QOpenGLBuffer::VertexBuffer))
 {
 	QSettings& conf = *StelApp::getInstance().getSettings();
 	StelCore* core = StelApp::getInstance().getCore();
@@ -236,12 +251,132 @@ StelViewportDistorterFisheyeToSphericMirror::StelViewportDistorterFisheyeToSpher
 		}
 	}
 	delete[] vertex_point_array;
+
+	StelApp::getInstance().ensureGLContextCurrent();
+	setupBuffers();
+	setupShaders();
 }
 
+void StelViewportDistorterFisheyeToSphericMirror::setupShaders()
+{
+	QOpenGLShader vsh(QOpenGLShader::Vertex);
+	const auto vsrc =
+		StelOpenGL::globalShaderPrefix(StelOpenGL::VERTEX_SHADER) +
+		"ATTRIBUTE highp vec3 vertex;\n"
+		"ATTRIBUTE mediump vec2 texCoord;\n"
+		"ATTRIBUTE mediump vec4 color;\n"
+		"uniform mediump mat4 projectionMatrix;\n"
+		"VARYING mediump vec2 texc;\n"
+		"VARYING mediump vec4 outColor;\n"
+		"void main()\n"
+		"{\n"
+		"    gl_Position = projectionMatrix * vec4(vertex, 1.);\n"
+		"    texc = texCoord;\n"
+		"    outColor = color;\n"
+		"}\n";
+	vsh.compileSourceCode(vsrc);
+	if (!vsh.log().isEmpty())
+		qWarning().noquote() << "StelViewportDistorterFisheyeToSphericMirror: Warnings while compiling vertex shader: " << vsh.log();
+
+	QOpenGLShader fsh(QOpenGLShader::Fragment);
+	const auto fsrc =
+		StelOpenGL::globalShaderPrefix(StelOpenGL::FRAGMENT_SHADER) +
+		"VARYING mediump vec2 texc;\n"
+		"VARYING mediump vec4 outColor;\n"
+		"uniform sampler2D tex;\n"
+		"void main()\n"
+		"{\n"
+		"    FRAG_COLOR = texture2D(tex, texc)*outColor;\n"
+		"}\n";
+	fsh.compileSourceCode(fsrc);
+	if (!fsh.log().isEmpty())
+		qWarning().noquote() << "StelViewportDistorterFisheyeToSphericMirror: Warnings while compiling fragment shader: " << fsh.log();
+
+	shaderProgram.reset(new QOpenGLShaderProgram(QOpenGLContext::currentContext()));
+	shaderProgram->addShader(&vsh);
+	shaderProgram->addShader(&fsh);
+	shaderProgram->bindAttributeLocation("vertex", VERTEX_ATTRIB_INDEX);
+	shaderProgram->bindAttributeLocation("color", COLOR_ATTRIB_INDEX);
+	shaderProgram->bindAttributeLocation("texCoord", TEXCOORD_ATTRIB_INDEX);
+	StelPainter::linkProg(shaderProgram.get(), "spheric mirror distortion shader program");
+	shaderVars.projectionMatrix = shaderProgram->uniformLocation("projectionMatrix");
+	shaderVars.texture = shaderProgram->uniformLocation("tex");
+}
+
+void StelViewportDistorterFisheyeToSphericMirror::setupBuffers()
+{
+	verticesVBO->create();
+	verticesVBO->setUsagePattern(QOpenGLBuffer::StaticDraw);
+	verticesVBO->bind();
+	const int colorElemSize = SPHERIC_MIRROR_COORDS_PER_COLOR * sizeof(GLfloat);
+	const int vertElemSize = SPHERIC_MIRROR_COORDS_PER_VERTEX * sizeof(GLfloat);
+	const int texCoordElemSize = SPHERIC_MIRROR_COORDS_PER_TEXCOORD * sizeof(GLfloat);
+	const int numberOfVerticesToCopy = displayVertexList.size();
+	const auto bufferSize = vertElemSize*numberOfVerticesToCopy +
+	                        texCoordElemSize*numberOfVerticesToCopy +
+	                        colorElemSize*numberOfVerticesToCopy;
+	verticesVBO->allocate(bufferSize);
+	vboVertexDataOffset = 0;
+	const auto vertexDataSize = vertElemSize*numberOfVerticesToCopy;
+	verticesVBO->write(vboVertexDataOffset, displayVertexList.constData(), vertexDataSize);
+	vboTexCoordDataOffset = vertexDataSize;
+	const auto texCoordDataSize = texCoordElemSize*numberOfVerticesToCopy;
+	verticesVBO->write(vboTexCoordDataOffset, displayTexCoordList.constData(), texCoordDataSize);
+	vboColorDataOffset = vertexDataSize + texCoordDataSize;
+	const auto colorDataSize = colorElemSize*numberOfVerticesToCopy;
+	verticesVBO->write(vboColorDataOffset, displayColorList.constData(), colorDataSize);
+	verticesVBO->release();
+
+	vao->create();
+	bindVAO();
+	setupCurrentVAO();
+	releaseVAO();
+}
+
+void StelViewportDistorterFisheyeToSphericMirror::setupCurrentVAO() const
+{
+	auto& gl = *QOpenGLContext::currentContext()->functions();
+	verticesVBO->bind();
+	gl.glVertexAttribPointer(VERTEX_ATTRIB_INDEX, SPHERIC_MIRROR_COORDS_PER_VERTEX, GL_FLOAT,
+	                         false, 0, reinterpret_cast<const void*>(vboVertexDataOffset));
+	gl.glVertexAttribPointer(COLOR_ATTRIB_INDEX, SPHERIC_MIRROR_COORDS_PER_COLOR, GL_FLOAT,
+	                         false, 0, reinterpret_cast<const void*>(vboColorDataOffset));
+	gl.glVertexAttribPointer(TEXCOORD_ATTRIB_INDEX, SPHERIC_MIRROR_COORDS_PER_TEXCOORD, GL_FLOAT,
+	                         false, 0, reinterpret_cast<const void*>(vboTexCoordDataOffset));
+	verticesVBO->release();
+	gl.glEnableVertexAttribArray(VERTEX_ATTRIB_INDEX);
+	gl.glEnableVertexAttribArray(COLOR_ATTRIB_INDEX);
+	gl.glEnableVertexAttribArray(TEXCOORD_ATTRIB_INDEX);
+}
+
+void StelViewportDistorterFisheyeToSphericMirror::bindVAO() const
+{
+	if(vao->isCreated())
+		vao->bind();
+	else
+		setupCurrentVAO();
+}
+
+void StelViewportDistorterFisheyeToSphericMirror::releaseVAO() const
+{
+	if(vao->isCreated())
+	{
+		vao->release();
+	}
+	else
+	{
+		auto& gl = *QOpenGLContext::currentContext()->functions();
+		gl.glDisableVertexAttribArray(VERTEX_ATTRIB_INDEX);
+		gl.glDisableVertexAttribArray(COLOR_ATTRIB_INDEX);
+		gl.glDisableVertexAttribArray(TEXCOORD_ATTRIB_INDEX);
+	}
+}
 
 
 StelViewportDistorterFisheyeToSphericMirror::~StelViewportDistorterFisheyeToSphericMirror(void)
 {
+	StelApp::getInstance().ensureGLContextCurrent(); // Make sure that VBO & VAO will be properly deleted
+
 	if (texture_point_array)
 		delete[] texture_point_array;
 	StelApp::getInstance().getCore()->setCurrentStelProjectorParams(originalProjectorParams);
@@ -323,24 +458,30 @@ void StelViewportDistorterFisheyeToSphericMirror::distortXY(qreal &x, qreal &y) 
 
 void StelViewportDistorterFisheyeToSphericMirror::paintViewportBuffer(const QOpenGLFramebufferObject* buf) const
 {
-	StelPainter sPainter(StelApp::getInstance().getCore()->getProjection2d());
-	QOpenGLFunctions* gl = sPainter.glFuncs();
-	GL(gl->glActiveTexture(GL_TEXTURE0));
-	GL(gl->glBindTexture(GL_TEXTURE_2D, buf->texture()));
-	GL(gl->glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR));
-	GL(gl->glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR));
-	sPainter.setBlending(false);
+	const auto prj = StelApp::getInstance().getCore()->getProjection2d();
+	auto& gl = *QOpenGLContext::currentContext()->functions();
+	const int texUnit = 0;
+	GL(gl.glActiveTexture(GL_TEXTURE0 + texUnit));
+	GL(gl.glBindTexture(GL_TEXTURE_2D, buf->texture()));
+	GL(gl.glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR));
+	GL(gl.glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR));
 
-	sPainter.enableClientStates(true, true, true);
-	sPainter.setColorPointer(4, GL_FLOAT, displayColorList.constData());
-	sPainter.setVertexPointer(2, GL_FLOAT, displayVertexList.constData());
-	sPainter.setTexCoordPointer(2, GL_FLOAT, displayTexCoordList.constData());
+	shaderProgram->bind();
+	const Mat4f& m = prj->getProjectionMatrix();
+	const QMatrix4x4 qMat(m[0], m[4], m[8], m[12], m[1], m[5], m[9], m[13], m[2], m[6], m[10], m[14], m[3], m[7], m[11], m[15]);
+	shaderProgram->setUniformValue(shaderVars.projectionMatrix, qMat);
+	shaderProgram->setUniformValue(shaderVars.texture, texUnit);
+
+	bindVAO();
 	for (int j=0;j<max_y;j++)
 	{
-		sPainter.drawFromArray(StelPainter::TriangleStrip, (max_x+1)*2, j*(max_x+1)*2, false);
+		GL(gl.glDrawArrays(GL_TRIANGLE_STRIP, j*(max_x+1)*2, (max_x+1)*2));
 	}
-	sPainter.enableClientStates(false);
-	GL(gl->glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST));
-	GL(gl->glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST));
+	releaseVAO();
+
+	shaderProgram->release();
+
+	GL(gl.glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST));
+	GL(gl.glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST));
 }
 
