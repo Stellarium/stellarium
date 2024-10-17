@@ -4,6 +4,7 @@ CPMFindPackage(NAME NLopt
                URL https://github.com/stevengj/nlopt/archive/refs/tags/v2.7.1.tar.gz
                URL_HASH SHA256=db88232fa5cef0ff6e39943fc63ab6074208831dc0031cf1545f6ecd31ae2a1a
                EXCLUDE_FROM_ALL yes
+               OPTIONS "NLOPT_CXX ON" "NLOPT_FORTRAN OFF" "NLOPT_GUILE OFF" "NLOPT_MATLAB OFF" "NLOPT_OCTAVE OFF" "NLOPT_PYTHON OFF" "NLOPT_SWIG OFF" "NLOPT_TESTS OFF"
               )
 
 INCLUDE_DIRECTORIES(
