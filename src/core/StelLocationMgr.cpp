@@ -476,6 +476,8 @@ StelLocationMgr::StelLocationMgr()
 		locationDBToIANAtranslations.insert("America/Punta_Arenas",  "UTC-03:00"); // no DST; https://www.zeitverschiebung.net/en/timezone/america--punta_arenas
 		// Missing on Qt5.15.2/Win10
 		locationDBToIANAtranslations.insert("America/Nuuk",      "America/Godthab");
+		// GH: #3953
+		locationDBToIANAtranslations.insert("Asia/Choibalsan",   "Asia/Ulaanbaatar");
 		// N.B. Further missing TZ names will be printed out in the log.txt. Resolve these by adding into this list.
 		// TODO later: create a text file in user data directory, and auto-update it weekly.
 	}
