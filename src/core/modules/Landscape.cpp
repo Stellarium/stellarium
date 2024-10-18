@@ -65,7 +65,7 @@ Landscape::Landscape(float _radius)
 	, defaultTemperature(-1000.)
 	, defaultPressure(-2.)
 	, horizonPolygon(Q_NULLPTR)
-	, fontSize(18)
+	//, fontSize(18)
 	, memorySize(sizeof(Landscape))
 	, multisamplingEnabled_(StelApp::getInstance().getSettings()->value("video/multisampling", 0).toUInt() != 0)
 {
@@ -456,6 +456,12 @@ void Landscape::drawLabels(StelCore* core, StelPainter *painter)
 		if (prj->getFlagGravityLabels())
 		{
 			painter->drawText(landscapeLabels.at(i).labelPoint, landscapeLabels.at(i).name, 0, 0, 0, false);
+		}
+		else if (labelAngle>0)
+		{
+			painter->drawText(landscapeLabels.at(i).labelPoint, landscapeLabels.at(i).name, labelAngle, 0.5f*getLabelFontSize()*sinf(labelAngle*M_PI_180f),
+					  -0.5f*getLabelFontSize()*sinf(labelAngle*M_PI_180f), true);
+
 		}
 		else
 		{
@@ -2176,3 +2182,8 @@ float LandscapeSpherical::getOpacity(Vec3d azalt) const
 */
 	return qAlpha(pixVal)/255.0f;
 }
+
+Vec3f Landscape::horizonPolygonLineColor=Vec3f(1,0,0);
+int Landscape::labelAngle=45;
+int Landscape::fontSize=12;     //! Used for landscape labels (optionally indicating landscape features)
+Vec3f Landscape::labelColor=Vec3f(0,1,0); //! Color for the landscape labels.
