@@ -119,29 +119,17 @@ public:
 	//! Set whether landscape is displayed (does not concern fog)
 	void setFlagShow(const bool b) {landFader=b;}
 	//! Get whether landscape is displayed (does not concern fog)
-	bool getFlagShow() const {return static_cast<bool>(landFader);}
+	bool getFlagShow() {return static_cast<bool>(landFader);}
 	//! Returns the currently effective land fade value
-	float getEffectiveLandFadeValue() const { return landFader.getInterstate(); }
+	float getEffectiveLandFadeValue() { return landFader.getInterstate(); }
 	//! Set whether fog is displayed
 	void setFlagShowFog(const bool b) {fogFader=b;}
 	//! Get whether fog is displayed
-	bool getFlagShowFog() const {return static_cast<bool>(fogFader);}
+	bool getFlagShowFog() {return static_cast<bool>(fogFader);}
 	//! Set whether illumination is displayed
-	void setFlagShowIllumination(const bool b) {illumFader=b;}
+	static void setFlagShowIllumination(const bool b) {illumFader=b;}
 	//! Get whether illumination is displayed
-	bool getFlagShowIllumination() const {return static_cast<bool>(illumFader);}
-	//! Set whether labels are displayed
-	void setFlagShowLabels(const bool b) {labelFader=b;}
-	//! Get whether labels are displayed
-	bool getFlagShowLabels() const {return static_cast<bool>(labelFader);}
-	//! Change font and fontsize for landscape labels
-	void setLabelFontSize(const int size){ fontSize=size; }
-	//! Get fontsize for landscape labels
-	int getLabelFontSize() { return fontSize; }
-	//! Get color for landscape labels
-	Vec3f getLabelColor() const { return labelColor; }
-	//! Set color for landscape labels
-	void setLabelColor(const Vec3f& c) { labelColor=c; }
+	static bool getFlagShowIllumination() {return static_cast<bool>(illumFader);}
 
 	//! Get landscape name
 	QString getName() const {return name;}
@@ -251,8 +239,8 @@ protected:
 	bool validLandscape;   //! was a landscape loaded properly?
 	LinearFader landFader; //! Used to slowly fade in/out landscape painting.
 	LinearFader fogFader;  //! Used to slowly fade in/out fog painting.
-	LinearFader illumFader;//! Used to slowly fade in/out illumination painting.
-	LinearFader labelFader;//! Used to slowly fade in/out landscape feature labels.
+	static LinearFader illumFader;//! Used to slowly fade in/out illumination painting.
+	static LinearFader labelFader;//! Used to slowly fade in/out landscape feature labels.
 	unsigned int rows;     //! horizontal rows.  May be given in landscape.ini:[landscape]tesselate_rows. More indicates higher accuracy, but is slower.
 	unsigned int cols;     //! vertical columns. May be given in landscape.ini:[landscape]tesselate_cols. More indicates higher accuracy, but is slower.
 	float angleRotateZ;    //! [radians] if pano does not have its left border in the east, rotate in azimuth. Configured in landscape.ini[landscape]angle_rotatez (or decor_angle_rotatez for old_style landscapes)

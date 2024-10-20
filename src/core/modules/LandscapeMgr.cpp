@@ -851,6 +851,7 @@ void LandscapeMgr::init()
 	setFlagLabels(conf->value("landscape/flag_enable_labels", true).toBool());
 	setFlagPolyLineOnlyDisplayed(conf->value("landscape/flag_polyline_only", false).toBool());
 	setPolyLineThickness(conf->value("landscape/polyline_thickness", 1).toInt());
+	setPolyLineColor(Vec3f(conf->value("landscape/polyline_color", "1.0,0.0,0.0").toString()));
 	setLabelFontSize(conf->value("landscape/label_font_size", 18).toInt());
 	setLabelColor(Vec3f(conf->value("landscape/label_color", "0.2,0.8,0.2").toString()));
 	setLabelAngle(conf->value("landscape/label_angle", 45).toInt());
@@ -951,10 +952,6 @@ bool LandscapeMgr::setCurrentLandscapeID(const QString& id, const double changeL
 		// Copy display parameters from previous landscape to new one. TODO: Sort out possible static ones!
 		newLandscape->setFlagShow(landscape->getFlagShow());
 		newLandscape->setFlagShowFog(landscape->getFlagShowFog());
-		newLandscape->setFlagShowIllumination(landscape->getFlagShowIllumination());
-		newLandscape->setFlagShowLabels(landscape->getFlagShowLabels());
-		//newLandscape->setLabelFontSize(landscape->getLabelFontSize());
-		//newLandscape->setLabelColor(landscape->getLabelColor());
 
 		// If we have an oldLandscape that is not just swapped back, put that into cache.
 		if (oldLandscape && oldLandscape!=newLandscape)
@@ -1260,8 +1257,8 @@ bool LandscapeMgr::getFlagFog() const
 
 void LandscapeMgr::setFlagIllumination(const bool displayed)
 {
-	if (landscape->getFlagShowIllumination() != displayed) {
-		landscape->setFlagShowIllumination(displayed);
+	if (Landscape::getFlagShowIllumination() != displayed) {
+		Landscape::setFlagShowIllumination(displayed);
 		StelApp::immediateSave("landscape/flag_enable_illumination_layer", displayed);
 		emit illuminationDisplayedChanged(displayed);
 	}
@@ -1302,8 +1299,8 @@ void LandscapeMgr::setFlagLandscapeUseTransparency(bool b)
 
 void LandscapeMgr::setFlagLabels(const bool displayed)
 {
-	if (landscape->getFlagShowLabels() != displayed) {
-		landscape->setFlagShowLabels(displayed);
+	if (static_cast<bool>(Landscape::labelFader) != displayed) {
+		Landscape::labelFader=displayed;
 		StelApp::immediateSave("landscape/flag_enable_labels", displayed);
 		emit labelsDisplayedChanged(displayed);
 	}
@@ -1311,19 +1308,19 @@ void LandscapeMgr::setFlagLabels(const bool displayed)
 
 bool LandscapeMgr::getFlagLabels() const
 {
-	return landscape->getFlagShowLabels();
+	return static_cast<bool>(Landscape::labelFader);
 }
 
 void LandscapeMgr::setLabelFontSize(const int size)
 {
-	landscape->setLabelFontSize(size);
+	Landscape::fontSize=size;
 	StelApp::immediateSave("landscape/label_font_size", size);
 	emit labelFontSizeChanged(size);
 }
 
 int LandscapeMgr::getLabelFontSize() const
 {
-	return landscape->getLabelFontSize();
+	return Landscape::fontSize;
 }
 
 void LandscapeMgr::setLabelAngle(const int angleDeg)
@@ -1340,13 +1337,13 @@ int LandscapeMgr::getLabelAngle() const
 
 void LandscapeMgr::setLabelColor(const Vec3f& c)
 {
-	landscape->setLabelColor(c);
+	Landscape::labelColor=c;
 	emit labelColorChanged(c);
 }
 
 Vec3f LandscapeMgr::getLabelColor() const
 {
-	return landscape->getLabelColor();
+	return Landscape::labelColor;
 }
 
 //! Retrieve flag for rendering polygonal line (if one is defined)

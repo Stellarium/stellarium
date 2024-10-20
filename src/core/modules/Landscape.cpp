@@ -224,9 +224,6 @@ void Landscape::loadCommon(const QSettings& landscapeIni, const QString& landsca
 					landscapeIni.value("landscape/polygonal_angle_rotatez", 0.f).toFloat(),
 					landscapeIni.value("landscape/polygonal_horizon_list_mode", "azDeg_altDeg").toString()
 					);
-		// This line can then be drawn in all classes with the color specified here.
-		// If not specified, don't draw it! (flagged by negative red)
-		horizonPolygonLineColor=Vec3f(landscapeIni.value("landscape/horizon_line_color", "-1,0,0" ).toString());
 	}
 	loadLabels(landscapeId);
 }
@@ -332,7 +329,7 @@ void Landscape::createPolygonalHorizon(const QString& lineFileName, const float 
 
 void Landscape::drawHorizonLine(StelCore* core, StelPainter& painter)
 {
-	if (!horizonPolygon || horizonPolygonLineThickness<1 ||  horizonPolygonLineColor == Vec3f(-1.f,0.f,0.f))
+	if (!horizonPolygon || horizonPolygonLineThickness<1 )
 		return;
 
 	StelProjector::ModelViewTranformP transfo = core->getAltAzModelViewTransform(StelCore::RefractionOff);
@@ -458,8 +455,8 @@ void Landscape::drawLabels(StelCore* core, StelPainter *painter)
 		}
 		else if (labelAngle>0)
 		{
-			painter->drawText(landscapeLabels.at(i).labelPoint, landscapeLabels.at(i).name, labelAngle, 0.5f*getLabelFontSize()*sinf(labelAngle*M_PI_180f),
-					  -0.5f*getLabelFontSize()*sinf(labelAngle*M_PI_180f), true);
+			painter->drawText(landscapeLabels.at(i).labelPoint, landscapeLabels.at(i).name, labelAngle, 0.5f*fontSize*sinf(labelAngle*M_PI_180f),
+					  -0.5f*fontSize*sinf(labelAngle*M_PI_180f), true);
 
 		}
 		else
@@ -2188,3 +2185,5 @@ int Landscape::labelAngle=45;             // text tilt angle
 int Landscape::fontSize=12;               // Used for landscape labels (optionally indicating landscape features)
 Vec3f Landscape::labelColor=Vec3f(0,1,0); // Color for the landscape labels.
 double Landscape::landscapeTransparency=0.0;
+LinearFader Landscape::illumFader;//! Used to slowly fade in/out illumination painting.
+LinearFader Landscape::labelFader;//! Used to slowly fade in/out landscape feature labels.
