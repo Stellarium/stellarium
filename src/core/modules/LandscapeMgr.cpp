@@ -849,7 +849,7 @@ void LandscapeMgr::init()
 	setFlagFog(conf->value("landscape/flag_fog",true).toBool());
 	setFlagIllumination(conf->value("landscape/flag_enable_illumination_layer", true).toBool());
 	setFlagLabels(conf->value("landscape/flag_enable_labels", true).toBool());
-	setFlagPolyLineDisplayed(conf->value("landscape/flag_polyline_only", false).toBool());
+	setFlagPolyLineOnlyDisplayed(conf->value("landscape/flag_polyline_only", false).toBool());
 	setPolyLineThickness(conf->value("landscape/polyline_thickness", 1).toInt());
 	setLabelFontSize(conf->value("landscape/label_font_size", 18).toInt());
 	setLabelColor(Vec3f(conf->value("landscape/label_color", "0.2,0.8,0.2").toString()));
@@ -1350,12 +1350,12 @@ Vec3f LandscapeMgr::getLabelColor() const
 }
 
 //! Retrieve flag for rendering polygonal line (if one is defined)
-bool LandscapeMgr::getFlagPolyLineDisplayed() const
+bool LandscapeMgr::getFlagPolyLineOnlyDisplayed() const
 {
 	return flagPolyLineDisplayedOnly;
 }
 //! Set flag for rendering polygonal line (if one is defined)
-void LandscapeMgr::setFlagPolyLineDisplayed(bool b)
+void LandscapeMgr::setFlagPolyLineOnlyDisplayed(bool b)
 {
 	if(b!=flagPolyLineDisplayedOnly)
 	{

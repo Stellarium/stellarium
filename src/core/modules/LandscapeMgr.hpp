@@ -213,8 +213,8 @@ class LandscapeMgr : public StelModule
 		   WRITE setFlagLabels
 		   NOTIFY labelsDisplayedChanged)
 	Q_PROPERTY(bool flagPolyLineDisplayedOnly
-		   READ getFlagPolyLineDisplayed
-		   WRITE setFlagPolyLineDisplayed
+		   READ getFlagPolyLineOnlyDisplayed
+		   WRITE setFlagPolyLineOnlyDisplayed
 		   NOTIFY flagPolyLineDisplayedChanged)
 	Q_PROPERTY(int polyLineThickness
 		   READ getPolyLineThickness
@@ -476,10 +476,10 @@ public slots:
 	//! Set color for landscape labels
 	void setLabelColor(const Vec3f& c);
 
-	//! Retrieve flag for rendering polygonal line (if one is defined)
-	bool getFlagPolyLineDisplayed() const;
-	//! Set flag for rendering polygonal line (if one is defined)
-	void setFlagPolyLineDisplayed(bool b);
+	//! Retrieve flag for rendering polygonal line only (if one is defined), suppressing any panorama image
+	bool getFlagPolyLineOnlyDisplayed() const;
+	//! Set flag for rendering polygonal line only (if one is defined), suppressing any panorama image
+	void setFlagPolyLineOnlyDisplayed(bool b);
 	//! Retrieve thickness for rendering polygonal line (if one is defined)
 	int getPolyLineThickness() const;
 	//! Set thickness for rendering polygonal line (if one is defined)
