@@ -184,7 +184,7 @@ public:
 	//! Get the sine of the limiting altitude (can be used to short-cut drawing below horizon, like star fields). There is no set here, value is only from landscape.ini
 	double getSinMinAltitudeLimit() const {return sinMinAltitudeLimit;}
 
-	void setTransparency(const double f) { landscapeTransparency=f; }
+	static void setTransparency(const double f) { landscapeTransparency=f; }
 
 	//! Find opacity in a certain direction. (New in V0.13 series)
 	//! can be used to find sunrise or visibility questions on the real-world landscape horizon.
@@ -260,7 +260,7 @@ protected:
 				  //! Not in landscape.ini: Used in special cases where the horizon may rotate, e.g. on a ship.
 
 	double sinMinAltitudeLimit; //! Minimal altitude of landscape cover. Can be used to construct bounding caps, so that e.g. no stars are drawn below this altitude. Default -0.035, i.e. sin(-2 degrees).
-	double landscapeTransparency;
+	static double landscapeTransparency;
 
 	StelLocation location; //! OPTIONAL. If present, can be used to set location.
 	/** May be given in landscape.ini:light_pollution_luminance in cd/m². Default: no change.
@@ -277,6 +277,7 @@ protected:
 					   //! For LandscapePolygonal, this is the only horizon data item.
 	static Vec3f horizonPolygonLineColor;     //! for all horizon types, the horizonPolygon line, if specified, will be drawn in this color
 					   //! DEPRECATED PER-LANDSCAPE: if still specified in landscape.ini[landscape]horizon_line_color, it will be ignored. Negative red (default) indicated "don't draw".
+	static int horizonPolygonLineThickness; //! [0...5] used to draw the horizon polygon, if defined. Set 0 to switch off.
 	// Optional element: labels for landscape features.
 	QList<LandscapeLabel> landscapeLabels;
 	static int fontSize;     //! Used for landscape labels (optionally indicating landscape features)

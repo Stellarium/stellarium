@@ -332,10 +332,9 @@ void Landscape::createPolygonalHorizon(const QString& lineFileName, const float 
 
 void Landscape::drawHorizonLine(StelCore* core, StelPainter& painter)
 {
-	if (!horizonPolygon || horizonPolygonLineColor == Vec3f(-1.f,0.f,0.f))
+	if (!horizonPolygon || horizonPolygonLineThickness<1 ||  horizonPolygonLineColor == Vec3f(-1.f,0.f,0.f))
 		return;
 
-	static LandscapeMgr *lMgr=GETSTELMODULE(LandscapeMgr);
 	StelProjector::ModelViewTranformP transfo = core->getAltAzModelViewTransform(StelCore::RefractionOff);
 	transfo->combine(Mat4d::zrotation(static_cast<double>(-angleRotateZOffset)));
 	const StelProjectorP prj = core->getProjection(transfo);
@@ -345,7 +344,7 @@ void Landscape::drawHorizonLine(StelCore* core, StelPainter& painter)
 	painter.setColor(horizonPolygonLineColor, landFader.getInterstate());
 	const float lineWidth=painter.getLineWidth();
 	const float ppx = static_cast<float>(prj->getDevicePixelsPerPixel());
-	painter.setLineWidth(lMgr->getPolyLineThickness()*ppx);
+	painter.setLineWidth(horizonPolygonLineThickness*ppx);
 	painter.drawSphericalRegion(horizonPolygon.data(), StelPainter::SphericalPolygonDrawModeBoundary);
 	painter.setLineWidth(lineWidth);
 	painter.setLineSmooth(false);
@@ -2184,6 +2183,8 @@ float LandscapeSpherical::getOpacity(Vec3d azalt) const
 }
 
 Vec3f Landscape::horizonPolygonLineColor=Vec3f(1,0,0);
-int Landscape::labelAngle=45;
-int Landscape::fontSize=12;     //! Used for landscape labels (optionally indicating landscape features)
-Vec3f Landscape::labelColor=Vec3f(0,1,0); //! Color for the landscape labels.
+int Landscape::horizonPolygonLineThickness=1;
+int Landscape::labelAngle=45;             // text tilt angle
+int Landscape::fontSize=12;               // Used for landscape labels (optionally indicating landscape features)
+Vec3f Landscape::labelColor=Vec3f(0,1,0); // Color for the landscape labels.
+double Landscape::landscapeTransparency=0.0;
