@@ -509,6 +509,8 @@ void LandscapeMgr::update(double deltaTime)
 	}
 	landscape->update(deltaTime);
 	cardinalPoints->update(deltaTime);
+	Landscape::illumFader.update(static_cast<int>(deltaTime*1000));
+	Landscape::labelFader.update(static_cast<int>(deltaTime*1000));
 
 	// Compute the atmosphere color and intensity
 	// Compute the sun position in local coordinate
