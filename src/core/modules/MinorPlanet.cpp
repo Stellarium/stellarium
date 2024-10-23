@@ -127,6 +127,24 @@ void MinorPlanet::setAbsoluteMagnitudeAndSlope(const float magnitude, const floa
 	slopeParameter = slope;
 }
 
+void MinorPlanet::updateEquatorialRadius(void)
+{
+	if (absoluteMagnitude <= -99.f)
+	{
+		qWarning() << "MinorPlanet::updateEquatorialRadius():" <<
+				"invalid absoluteMagnitude for" << getEnglishName();
+		return;
+	}
+	if (equatorialRadius <= 0.)
+	{
+		if (albedo <= 0.0f)
+			albedo = 0.15f; // assumed
+		// Estimate as described at http://www.physics.sfasu.edu/astro/asteroids/sizemagnitude.html
+		float diameterKm = 1329.f / std::sqrt(albedo) * std::pow(10.f, -0.2f * absoluteMagnitude);
+		equatorialRadius = 0.5 * diameterKm / AU;
+	}
+}
+
 void MinorPlanet::setIAUDesignation(const QString &designation)
 {
 	//TODO: This feature has to be implemented better, anyway.
