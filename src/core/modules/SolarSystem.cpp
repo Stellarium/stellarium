@@ -1269,7 +1269,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 						    pd.value(secname+"/radius", 0.0).toDouble()/AU,
 						    pd.value(secname+"/oblateness", 0.0).toDouble(),
 						    color, // halo color
-						    pd.value(secname+"/albedo", 0.15f).toFloat(),
+						    pd.value(secname+"/albedo", 0.0f).toFloat(),
 						    pd.value(secname+"/roughness",0.9f).toFloat(),
 						    pd.value(secname+"/tex_map", "nomap.png").toString(),
 						    pd.value(secname+"/normals_map", normalMapName).toString(),

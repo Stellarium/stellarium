@@ -1195,7 +1195,7 @@ SsoElements SolarSystemEditor::readMpcOneLineMinorPlanetElements(const QString &
 	if (q > 30 && semiMajorAxis > 250)
 		objectType = "sednoid";
 
-	// don't save estimated albedo and radius
+	// Loader will estimate albedo and radius
 
 	DiscoveryCircumstances dc = numberedMinorPlanets.value(minorPlanetNumber, DiscoveryCircumstances("",""));
 	if (!dc.first.isEmpty())
