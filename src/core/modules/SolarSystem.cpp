@@ -1266,10 +1266,10 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			const QString horizonMapName = ( hidden ? "" : englishName.toLower().append("_normals.png")); // no normal maps for invisible objects!
 
 			newP = PlanetP(new MinorPlanet(englishName,
-						    pd.value(secname+"/radius", 1.0).toDouble()/AU,
+						    pd.value(secname+"/radius", 0.0).toDouble()/AU,
 						    pd.value(secname+"/oblateness", 0.0).toDouble(),
 						    color, // halo color
-						    pd.value(secname+"/albedo", 0.25f).toFloat(),
+						    pd.value(secname+"/albedo", 0.15f).toFloat(),
 						    pd.value(secname+"/roughness",0.9f).toFloat(),
 						    pd.value(secname+"/tex_map", "nomap.png").toString(),
 						    pd.value(secname+"/normals_map", normalMapName).toString(),
@@ -1292,6 +1292,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			if (magnitude > -99.f)
 			{
 				mp->setAbsoluteMagnitudeAndSlope(magnitude, qBound(0.0f, slope, 1.0f));
+				mp->updateEquatorialRadius();
 			}
 
 			mp->setColorIndexBV(static_cast<float>(bV));
