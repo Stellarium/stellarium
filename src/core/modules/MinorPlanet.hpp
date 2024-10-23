@@ -93,7 +93,7 @@ public:
 	//! @param slope Slope parameter G. This is usually [0..1], sometimes slightly outside. Allowed here [-1..2].
 	void setAbsoluteMagnitudeAndSlope(const float magnitude, const float slope);
 
-	//! sets radius based on absolute magnitude.
+	//! sets radius based on absolute magnitude and albedo.
 	void updateEquatorialRadius(void);
 
 	//! renders the subscript in a minor planet IAU provisional designation with HTML.
