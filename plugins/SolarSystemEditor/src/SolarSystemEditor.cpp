@@ -1195,13 +1195,7 @@ SsoElements SolarSystemEditor::readMpcOneLineMinorPlanetElements(const QString &
 	if (q > 30 && semiMajorAxis > 250)
 		objectType = "sednoid";
 
-	//Radius and albedo
-	//Assume albedo of 0.15 and calculate a radius based on the absolute magnitude
-	//as described here: http://www.physics.sfasu.edu/astro/asteroids/sizemagnitude.html
-	double albedo = 0.15; //Assumed
-	double radius = std::ceil(0.5*(1329 / std::sqrt(albedo)) * std::pow(10., -0.2 * absoluteMagnitude)); // Original formula is for diameter!
-	result.insert("albedo", albedo);
-	result.insert("radius", radius);
+	// Loader will estimate albedo and radius
 
 	DiscoveryCircumstances dc = numberedMinorPlanets.value(minorPlanetNumber, DiscoveryCircumstances("",""));
 	if (!dc.first.isEmpty())
