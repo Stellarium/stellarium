@@ -91,16 +91,16 @@ public:
 	void updateI18n();
 	void update(double deltaTime);
 	void setFadeDuration(float duration);
-	void setFlagShowCardinals(bool b) { fader4WCR = b; }
+	void setFlagShowCardinals(bool b) { fader4WCR = b; StelApp::immediateSave("viewing/flag_cardinal_points", b);}
 	bool getFlagShowCardinals() const { return fader4WCR; }
 
-	void setFlagShow4WCRLabels(bool b) { fader4WCR = b; }
+	void setFlagShow4WCRLabels(bool b) { fader4WCR = b; StelApp::immediateSave("viewing/flag_cardinal_points", b);}
 	bool getFlagShow4WCRLabels() const { return fader4WCR; }
-	void setFlagShow8WCRLabels(bool b) { fader8WCR = b; }
+	void setFlagShow8WCRLabels(bool b) { fader8WCR = b; StelApp::immediateSave("viewing/flag_ordinal_points", b);}
 	bool getFlagShow8WCRLabels() const { return fader8WCR; }
-	void setFlagShow16WCRLabels(bool b) { fader16WCR = b; }
+	void setFlagShow16WCRLabels(bool b) { fader16WCR = b; StelApp::immediateSave("viewing/flag_16wcr_points", b);}
 	bool getFlagShow16WCRLabels() const { return fader16WCR; }
-	void setFlagShow32WCRLabels(bool b) { fader32WCR = b; }
+	void setFlagShow32WCRLabels(bool b) { fader32WCR = b; StelApp::immediateSave("viewing/flag_32wcr_points", b);}
 	bool getFlagShow32WCRLabels() const { return fader32WCR; }
 private:
 	class StelPropertyMgr* propMgr;
@@ -213,13 +213,17 @@ class LandscapeMgr : public StelModule
 		   WRITE setFlagLabels
 		   NOTIFY labelsDisplayedChanged)
 	Q_PROPERTY(bool flagPolyLineDisplayedOnly
-		   READ getFlagPolyLineDisplayed
-		   WRITE setFlagPolyLineDisplayed
-		   NOTIFY flagPolyLineDisplayedChanged)
+		   READ getFlagPolyLineOnlyDisplayed
+		   WRITE setFlagPolyLineOnlyDisplayed
+		   NOTIFY flagPolyLineOnlyDisplayedChanged)
 	Q_PROPERTY(int polyLineThickness
 		   READ getPolyLineThickness
 		   WRITE setPolyLineThickness
 		   NOTIFY polyLineThicknessChanged)
+	Q_PROPERTY(Vec3f polyLineColor
+		   READ getPolyLineColor
+		   WRITE setPolyLineColor
+		   NOTIFY polyLineColorChanged)
 	Q_PROPERTY(bool flagUseLightPollutionFromDatabase
 		   READ getFlagUseLightPollutionFromDatabase
 		   WRITE setFlagUseLightPollutionFromDatabase
@@ -274,6 +278,10 @@ class LandscapeMgr : public StelModule
 		   READ getLabelColor
 		   WRITE setLabelColor
 		   NOTIFY labelColorChanged)
+	Q_PROPERTY(int labelAngle
+		   READ getLabelAngle
+		   WRITE setLabelAngle
+		   NOTIFY labelAngleChanged)
 	Q_PROPERTY(double landscapeTransparency
 		   READ getLandscapeTransparency
 		   WRITE setLandscapeTransparency
@@ -459,37 +467,45 @@ public slots:
 	int getLabelFontSize() const;
 	//! Set the fontsize for landscape labels
 	void setLabelFontSize(const int size);
+	//! Get the rotation angle for landscape labels (degrees)
+	int getLabelAngle() const;
+	//! Set the rotation angle for landscape labels (degrees)
+	void setLabelAngle(const int angleDeg);
 	//! Get color for landscape labels
 	Vec3f getLabelColor() const;
 	//! Set color for landscape labels
 	void setLabelColor(const Vec3f& c);
 
-	//! Retrieve flag for rendering polygonal line (if one is defined)
-	bool getFlagPolyLineDisplayed() const {return flagPolyLineDisplayedOnly;}
-	//! Set flag for rendering polygonal line (if one is defined)
-	void setFlagPolyLineDisplayed(bool b) {if(b!=flagPolyLineDisplayedOnly){ flagPolyLineDisplayedOnly=b; emit flagPolyLineDisplayedChanged(b);}}
+	//! Retrieve flag for rendering polygonal line only (if one is defined), suppressing any panorama image
+	bool getFlagPolyLineOnlyDisplayed() const;
+	//! Set flag for rendering polygonal line only (if one is defined), suppressing any panorama image
+	void setFlagPolyLineOnlyDisplayed(bool b);
 	//! Retrieve thickness for rendering polygonal line (if one is defined)
-	int getPolyLineThickness() const {return polyLineThickness;}
+	int getPolyLineThickness() const;
 	//! Set thickness for rendering polygonal line (if one is defined)
-	void setPolyLineThickness(int thickness) {polyLineThickness=thickness; emit polyLineThicknessChanged(thickness);}
+	void setPolyLineThickness(int thickness);
+	//! Get color for landscape polygon
+	Vec3f getPolyLineColor() const;
+	//! Set color for landscape polygon
+	void setPolyLineColor(const Vec3f& c);
 
 	//! Return the value of the flag determining if a change of landscape will update the observer location.
-	bool getFlagLandscapeSetsLocation() const {return flagLandscapeSetsLocation;}
+	bool getFlagLandscapeSetsLocation() const;
 	//! Set the value of the flag determining if a change of landscape will update the observer location.
-	void setFlagLandscapeSetsLocation(bool b) {if(b!=flagLandscapeSetsLocation){ flagLandscapeSetsLocation=b; emit flagLandscapeSetsLocationChanged(b);}}
+	void setFlagLandscapeSetsLocation(bool b);
 
 	//! Return the value of the flag determining if a minimal brightness should be used to keep landscape visible.
-	bool getFlagLandscapeUseMinimalBrightness() const {return flagLandscapeUseMinimalBrightness; }
+	bool getFlagLandscapeUseMinimalBrightness() const;
 	//! Set the value of the flag determining if a minimal brightness should be used to keep landscape visible.
-	void setFlagLandscapeUseMinimalBrightness(bool b) {if(b!=flagLandscapeUseMinimalBrightness){ flagLandscapeUseMinimalBrightness=b; emit flagLandscapeUseMinimalBrightnessChanged(b);}}
+	void setFlagLandscapeUseMinimalBrightness(bool b);
 	//! Return the value of the flag determining if the minimal brightness should be taken from landscape.ini
-	bool getFlagLandscapeSetsMinimalBrightness() const {return flagLandscapeSetsMinimalBrightness;}
+	bool getFlagLandscapeSetsMinimalBrightness() const;
 	//! Sets the value of the flag determining if the minimal brightness should be taken from landscape.ini
-	void setFlagLandscapeSetsMinimalBrightness(bool b) {if(b!=flagLandscapeSetsMinimalBrightness){ flagLandscapeSetsMinimalBrightness=b; emit flagLandscapeSetsMinimalBrightnessChanged(b);}}
+	void setFlagLandscapeSetsMinimalBrightness(bool b);
 	//! Return the minimal brightness value of the landscape
-	double getDefaultMinimalBrightness() const {return defaultMinimalBrightness;}
+	double getDefaultMinimalBrightness() const;
 	//! Set the minimal brightness value of the landscape.
-	void setDefaultMinimalBrightness(const double b) {if(fabs(b-defaultMinimalBrightness)>0.0){ defaultMinimalBrightness=b; emit defaultMinimalBrightnessChanged(b);}}
+	void setDefaultMinimalBrightness(const double b);
 	//! Sets the value of the flag usage light pollution (and bortle index) from locations database.
 	void setFlagUseLightPollutionFromDatabase(const bool usage);
 	//! Return the value of flag usage light pollution (and bortle index) from locations database.
@@ -567,16 +583,9 @@ public slots:
 	double getLandscapeTransparency() const;
 	void setLandscapeTransparency(const double f);
 	//! Return the value of the flag determining if a transparency should be used.
-	bool getFlagLandscapeUseTransparency() const {return flagLandscapeUseTransparency; }
+	bool getFlagLandscapeUseTransparency() const;
 	//! Set the value of the flag determining if a transparency should be used.
-	void setFlagLandscapeUseTransparency(bool b)
-	{
-		if (b!=flagLandscapeUseTransparency)
-		{
-			flagLandscapeUseTransparency=b;
-			emit flagLandscapeUseTransparencyChanged(b);
-		}
-	}
+	void setFlagLandscapeUseTransparency(bool b);
 
 	//! Set a discoloration to simulate sunrise/sunset colors.
 	void setLandscapeTint(const Vec3f &c){landscapeTint=c;}
@@ -719,8 +728,10 @@ signals:
 	void labelsDisplayedChanged(const bool displayed);
 	void labelFontSizeChanged(const int size);
 	void labelColorChanged(const Vec3f &c);
-	void flagPolyLineDisplayedChanged(const bool enabled);
+	void labelAngleChanged(const int angleDeg);
+	void flagPolyLineOnlyDisplayedChanged(const bool enabled);
 	void polyLineThicknessChanged(const int thickness);
+	void polyLineColorChanged(const Vec3f& c);
 	void flagUseLightPollutionFromDatabaseChanged(const bool usage);
 	void flagLandscapeAutoSelectionChanged(const bool value);
 	void flagLandscapeSetsLocationChanged(const bool value);
@@ -826,8 +837,6 @@ private:
 
 	//! control drawing of a Polygonal line, if one is defined.
 	bool flagPolyLineDisplayedOnly;
-	//! thickness of polygonal horizon line
-	int polyLineThickness;
 
 	//! Indicate use of the default minimal brightness value specified in config.ini.
 	bool flagLandscapeUseMinimalBrightness;

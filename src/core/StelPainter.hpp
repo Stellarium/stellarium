@@ -86,7 +86,7 @@ public:
 	//! @param x horizontal position of the lower left corner of the first character of the text in pixel.
 	//! @param y vertical position of the lower left corner of the first character of the text in pixel.
 	//! @param str the text to print.
-	//! @param angleDeg rotation angle in degree. Rotation is around x,y.
+	//! @param angleDeg rotation angle in degree. Rotation is around x,y. Only used if noGravity=true
 	//! @param xshift shift in pixel in the rotated x direction.
 	//! @param yshift shift in pixel in the rotated y direction.
 	//! @param noGravity don't take into account the fact that the text should be written with gravity.
