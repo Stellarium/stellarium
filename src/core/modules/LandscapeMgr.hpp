@@ -215,7 +215,7 @@ class LandscapeMgr : public StelModule
 	Q_PROPERTY(bool flagPolyLineDisplayedOnly
 		   READ getFlagPolyLineOnlyDisplayed
 		   WRITE setFlagPolyLineOnlyDisplayed
-		   NOTIFY flagPolyLineDisplayedChanged)
+		   NOTIFY flagPolyLineOnlyDisplayedChanged)
 	Q_PROPERTY(int polyLineThickness
 		   READ getPolyLineThickness
 		   WRITE setPolyLineThickness
@@ -729,7 +729,7 @@ signals:
 	void labelFontSizeChanged(const int size);
 	void labelColorChanged(const Vec3f &c);
 	void labelAngleChanged(const int angleDeg);
-	void flagPolyLineDisplayedChanged(const bool enabled);
+	void flagPolyLineOnlyDisplayedChanged(const bool enabled);
 	void polyLineThicknessChanged(const int thickness);
 	void polyLineColorChanged(const Vec3f& c);
 	void flagUseLightPollutionFromDatabaseChanged(const bool usage);

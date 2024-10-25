@@ -1093,7 +1093,6 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("landscape/flag_enable_labels",					propMgr->getStelPropertyValue("LandscapeMgr.labelsDisplayed").toBool());
 	conf->setValue("landscape/label_font_size",						propMgr->getStelPropertyValue("LandscapeMgr.labelFontSize").toInt());
 	conf->setValue("landscape/label_angle",						propMgr->getStelPropertyValue("LandscapeMgr.labelAngle").toInt());
-
 	conf->setValue("landscape/flag_minimal_brightness",				propMgr->getStelPropertyValue("LandscapeMgr.flagLandscapeUseMinimalBrightness").toBool());
 	conf->setValue("landscape/flag_landscape_sets_minimal_brightness",	propMgr->getStelPropertyValue("LandscapeMgr.flagLandscapeSetsMinimalBrightness").toBool());
 	conf->setValue("landscape/minimal_brightness",					propMgr->getStelPropertyValue("LandscapeMgr.defaultMinimalBrightness").toFloat());

@@ -1360,7 +1360,7 @@ void LandscapeMgr::setFlagPolyLineOnlyDisplayed(bool b)
 	{
 		flagPolyLineDisplayedOnly=b;
 		StelApp::immediateSave("landscape/flag_polyline_only", b);
-		emit flagPolyLineDisplayedChanged(b);
+		emit flagPolyLineOnlyDisplayedChanged(b);
 	}
 }
 
