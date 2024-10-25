@@ -951,7 +951,7 @@ bool LandscapeMgr::setCurrentLandscapeID(const QString& id, const double changeL
 	// This prevents subhorizon sun or grid becoming briefly visible.
 	if (landscape)
 	{
-		// Copy display parameters from previous landscape to new one. TODO: Sort out possible static ones!
+		// Copy display parameters from previous landscape to new one.
 		newLandscape->setFlagShow(landscape->getFlagShow());
 		newLandscape->setFlagShowFog(landscape->getFlagShowFog());
 
