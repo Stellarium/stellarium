@@ -1072,11 +1072,13 @@ QVariantMap StelObject::getInfoMap(const StelCore *core) const
 		sidereal=fmod(sidereal, 24.);
 		if (sidereal < 0.) sidereal+=24.;
 		map.insert("meanSidTm", StelUtils::hoursToHmsStr(sidereal));
+		map.insert("meanSidTm-dd", sidereal * 15.);
 
 		sidereal=(get_apparent_sidereal_time(core->getJD(), core->getJDE()) + longitude) / 15.;
 		sidereal=fmod(sidereal, 24.);
 		if (sidereal < 0.) sidereal+=24.;
 		map.insert("appSidTm", StelUtils::hoursToHmsStr(sidereal));
+		map.insert("appSidTm-dd", sidereal * 15.);
 
 		double ha = sidereal * 15.0 - ra * M_180_PI;
 		ha=fmod(ha, 360.0);

@@ -127,8 +127,10 @@ public:
 	//! - hourAngle-dd : hour angle in decimal degrees
 	//! - hourAngle-hms : hour angle in HMS format (formatted string)
 	//! - iauConstellation : 3-letter abbreviation of IAU constellation (string)
-	//! - meanSidTm : mean sidereal time, in decimal degrees (on Earth only!)
-	//! - appSidTm : mean sidereal time, in decimal degrees (on Earth only!)
+	//! - meanSidTm : mean sidereal time, as time string (on Earth only!)
+	//! - meanSidTm-dd : mean sidereal time, in decimal degrees (on Earth only!)
+	//! - appSidTm : mean sidereal time, as time string (on Earth only!)
+	//! - appSidTm-dd : mean sidereal time, in decimal degrees (on Earth only!)
 	//! - glong : galactic longitude in decimal degrees
 	//! - glat : galactic latitude in decimal degrees
 	//! - sglong : supergalactic longitude in decimal degrees
