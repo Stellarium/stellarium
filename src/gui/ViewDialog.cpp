@@ -338,7 +338,9 @@ void ViewDialog::createDialogContent()
 
 	connectBoolProperty(ui->landscapeLocationCheckBox, "LandscapeMgr.flagLandscapeSetsLocation");
 	ui->labelsColorButton->setup("LandscapeMgr.labelColor", "landscape/label_color");
-	connectIntProperty(ui->labelsFontSizeSpinBox, "LandscapeMgr.labelFontSize");
+	ui->polygonColorButton->setup("LandscapeMgr.polyLineColor", "landscape/polyline_color");
+	connectIntProperty(ui->landscapeLabelsFontSizeSpinBox, "LandscapeMgr.labelFontSize");
+	connectIntProperty(ui->landscapeLabelsAngleSpinBox, "LandscapeMgr.labelAngle");
 
 	connectBoolProperty(ui->landscapeBrightnessCheckBox,"LandscapeMgr.flagLandscapeUseMinimalBrightness");
 	connect(lmgr,SIGNAL(flagLandscapeUseMinimalBrightnessChanged(bool)),ui->localLandscapeBrightnessCheckBox,SLOT(setEnabled(bool)));

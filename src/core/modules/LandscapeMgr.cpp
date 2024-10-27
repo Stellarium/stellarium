@@ -358,7 +358,6 @@ LandscapeMgr::LandscapeMgr()
 	, flagLightPollutionFromDatabase(false)
 	, atmosphereNoScatter(false)
 	, flagPolyLineDisplayedOnly(false)
-	, polyLineThickness(1)
 	, flagLandscapeUseMinimalBrightness(false)
 	, defaultMinimalBrightness(0.01)
 	, flagLandscapeSetsMinimalBrightness(false)
@@ -510,6 +509,8 @@ void LandscapeMgr::update(double deltaTime)
 	}
 	landscape->update(deltaTime);
 	cardinalPoints->update(deltaTime);
+	Landscape::illumFader.update(static_cast<int>(deltaTime*1000));
+	Landscape::labelFader.update(static_cast<int>(deltaTime*1000));
 
 	// Compute the atmosphere color and intensity
 	// Compute the sun position in local coordinate
@@ -686,11 +687,10 @@ void LandscapeMgr::draw(StelCore* core)
 	}
 
 	// Draw the landscape
-	landscape->setTransparency( getFlagLandscapeUseTransparency() ? landscapeTransparency : 0.0);
+	Landscape::setTransparency( getFlagLandscapeUseTransparency() ? landscapeTransparency : 0.0);
 
 	if (oldLandscape)
 	{
-		oldLandscape->setTransparency( getFlagLandscapeUseTransparency() ? landscapeTransparency : 0.0);
 		oldLandscape->draw(core, flagPolyLineDisplayedOnly);
 	}
 	landscape->draw(core, flagPolyLineDisplayedOnly);
@@ -851,10 +851,12 @@ void LandscapeMgr::init()
 	setFlagFog(conf->value("landscape/flag_fog",true).toBool());
 	setFlagIllumination(conf->value("landscape/flag_enable_illumination_layer", true).toBool());
 	setFlagLabels(conf->value("landscape/flag_enable_labels", true).toBool());
-	setFlagPolyLineDisplayed(conf->value("landscape/flag_polyline_only", false).toBool());
+	setFlagPolyLineOnlyDisplayed(conf->value("landscape/flag_polyline_only", false).toBool());
 	setPolyLineThickness(conf->value("landscape/polyline_thickness", 1).toInt());
+	setPolyLineColor(Vec3f(conf->value("landscape/polyline_color", "1.0,0.0,0.0").toString()));
 	setLabelFontSize(conf->value("landscape/label_font_size", 18).toInt());
 	setLabelColor(Vec3f(conf->value("landscape/label_color", "0.2,0.8,0.2").toString()));
+	setLabelAngle(conf->value("landscape/label_angle", 45).toInt());
 
 	setFlagLandscapeUseTransparency(conf->value("landscape/flag_transparency", false).toBool());
 	setLandscapeTransparency(conf->value("landscape/transparency", 0.5).toDouble());
@@ -949,13 +951,9 @@ bool LandscapeMgr::setCurrentLandscapeID(const QString& id, const double changeL
 	// This prevents subhorizon sun or grid becoming briefly visible.
 	if (landscape)
 	{
-		// Copy display parameters from previous landscape to new one
+		// Copy display parameters from previous landscape to new one.
 		newLandscape->setFlagShow(landscape->getFlagShow());
 		newLandscape->setFlagShowFog(landscape->getFlagShowFog());
-		newLandscape->setFlagShowIllumination(landscape->getFlagShowIllumination());
-		newLandscape->setFlagShowLabels(landscape->getFlagShowLabels());
-		newLandscape->setLabelFontSize(landscape->getLabelFontSize());
-		newLandscape->setLabelColor(landscape->getLabelColor());
 
 		// If we have an oldLandscape that is not just swapped back, put that into cache.
 		if (oldLandscape && oldLandscape!=newLandscape)
@@ -1108,6 +1106,7 @@ void LandscapeMgr::setFlagLandscape(const bool displayed)
 		landscape->setFlagShow(displayed);
 		emit landscapeDisplayedChanged(displayed);
 	}
+	StelApp::immediateSave("landscape/flag_landscape", displayed);
 }
 
 bool LandscapeMgr::getFlagLandscape() const
@@ -1138,6 +1137,7 @@ void LandscapeMgr::setFlagUseLightPollutionFromDatabase(const bool usage)
 	if (flagLightPollutionFromDatabase != usage)
 	{
 		flagLightPollutionFromDatabase = usage;
+		StelApp::immediateSave("viewing/flag_light_pollution_database", usage);
 
 		StelCore* core = StelApp::getInstance().getCore();
 
@@ -1247,6 +1247,7 @@ void LandscapeMgr::setFlagFog(const bool displayed)
 {
 	if (landscape->getFlagShowFog() != displayed) {
 		landscape->setFlagShowFog(displayed);
+		StelApp::immediateSave("landscape/flag_fog", displayed);
 		emit fogDisplayedChanged(displayed);
 	}
 }
@@ -1258,8 +1259,9 @@ bool LandscapeMgr::getFlagFog() const
 
 void LandscapeMgr::setFlagIllumination(const bool displayed)
 {
-	if (landscape->getFlagShowIllumination() != displayed) {
-		landscape->setFlagShowIllumination(displayed);
+	if (Landscape::getFlagShowIllumination() != displayed) {
+		Landscape::setFlagShowIllumination(displayed);
+		StelApp::immediateSave("landscape/flag_enable_illumination_layer", displayed);
 		emit illuminationDisplayedChanged(displayed);
 	}
 }
@@ -1272,6 +1274,7 @@ bool LandscapeMgr::getFlagIllumination() const
 void LandscapeMgr::setLandscapeTransparency(const double f)
 {
 	landscapeTransparency = f;
+	StelApp::immediateSave("landscape/transparency", f);
 	emit landscapeTransparencyChanged(f);
 }
 
@@ -1280,46 +1283,168 @@ double LandscapeMgr::getLandscapeTransparency() const
 	return landscapeTransparency;
 }
 
+// Return the value of the flag determining if a transparency should be used.
+bool LandscapeMgr::getFlagLandscapeUseTransparency() const
+{
+	return flagLandscapeUseTransparency;
+}
+// Set the value of the flag determining if a transparency should be used.
+void LandscapeMgr::setFlagLandscapeUseTransparency(bool b)
+{
+	if (b!=flagLandscapeUseTransparency)
+	{
+		flagLandscapeUseTransparency=b;
+		StelApp::immediateSave("landscape/flag_transparency", b);
+		emit flagLandscapeUseTransparencyChanged(b);
+	}
+}
+
 void LandscapeMgr::setFlagLabels(const bool displayed)
 {
-	if (landscape->getFlagShowLabels() != displayed) {
-		landscape->setFlagShowLabels(displayed);
+	if (static_cast<bool>(Landscape::labelFader) != displayed) {
+		Landscape::labelFader=displayed;
+		StelApp::immediateSave("landscape/flag_enable_labels", displayed);
 		emit labelsDisplayedChanged(displayed);
 	}
 }
 
 bool LandscapeMgr::getFlagLabels() const
 {
-	return landscape->getFlagShowLabels();
+	return static_cast<bool>(Landscape::labelFader);
 }
 
 void LandscapeMgr::setLabelFontSize(const int size)
 {
-	landscape->setLabelFontSize(size);
+	Landscape::fontSize=size;
+	StelApp::immediateSave("landscape/label_font_size", size);
 	emit labelFontSizeChanged(size);
 }
 
 int LandscapeMgr::getLabelFontSize() const
 {
-	return landscape->getLabelFontSize();
+	return Landscape::fontSize;
+}
+
+void LandscapeMgr::setLabelAngle(const int angleDeg)
+{
+	Landscape::labelAngle = angleDeg;
+	StelApp::immediateSave("landscape/label_angle", angleDeg);
+	emit labelAngleChanged(angleDeg);
+}
+
+int LandscapeMgr::getLabelAngle() const
+{
+	return Landscape::labelAngle;
 }
 
 void LandscapeMgr::setLabelColor(const Vec3f& c)
 {
-	landscape->setLabelColor(c);
+	Landscape::labelColor=c;
 	emit labelColorChanged(c);
 }
 
 Vec3f LandscapeMgr::getLabelColor() const
 {
-	return landscape->getLabelColor();
+	return Landscape::labelColor;
 }
+
+//! Retrieve flag for rendering polygonal line (if one is defined)
+bool LandscapeMgr::getFlagPolyLineOnlyDisplayed() const
+{
+	return flagPolyLineDisplayedOnly;
+}
+//! Set flag for rendering polygonal line (if one is defined)
+void LandscapeMgr::setFlagPolyLineOnlyDisplayed(bool b)
+{
+	if(b!=flagPolyLineDisplayedOnly)
+	{
+		flagPolyLineDisplayedOnly=b;
+		StelApp::immediateSave("landscape/flag_polyline_only", b);
+		emit flagPolyLineOnlyDisplayedChanged(b);
+	}
+}
+
+//! Retrieve thickness for rendering polygonal line (if one is defined)
+int LandscapeMgr::getPolyLineThickness() const
+{
+	return Landscape::horizonPolygonLineThickness;
+}
+
+//! Set thickness for rendering polygonal line (if one is defined)
+void LandscapeMgr::setPolyLineThickness(int thickness)
+{
+	Landscape::horizonPolygonLineThickness=thickness;
+	StelApp::immediateSave("landscape/polyline_thickness", thickness);
+	emit polyLineThicknessChanged(thickness);
+}
+
+void LandscapeMgr::setPolyLineColor(const Vec3f& c)
+{
+	Landscape::horizonPolygonLineColor = c;
+	emit polyLineColorChanged(c);
+}
+
+Vec3f LandscapeMgr::getPolyLineColor() const
+{
+	return Landscape::horizonPolygonLineColor;
+}
+
+// Return the value of the flag determining if a change of landscape will update the observer location.
+bool LandscapeMgr::getFlagLandscapeSetsLocation() const
+{
+	return flagLandscapeSetsLocation;
+}
+// Set the value of the flag determining if a change of landscape will update the observer location.
+void LandscapeMgr::setFlagLandscapeSetsLocation(bool b)
+{
+	if(b!=flagLandscapeSetsLocation)
+	{
+		flagLandscapeSetsLocation=b;
+		StelApp::immediateSave("landscape/flag_landscape_sets_location", b);
+		emit flagLandscapeSetsLocationChanged(b);
+	}
+}
+
+// Return the value of the flag determining if a minimal brightness should be used to keep landscape visible.
+bool LandscapeMgr::getFlagLandscapeUseMinimalBrightness() const
+{
+	return flagLandscapeUseMinimalBrightness;
+}
+
+// Set the value of the flag determining if a minimal brightness should be used to keep landscape visible.
+void LandscapeMgr::setFlagLandscapeUseMinimalBrightness(bool b)
+{
+	if(b!=flagLandscapeUseMinimalBrightness)
+	{
+		flagLandscapeUseMinimalBrightness=b;
+		StelApp::immediateSave("landscape/flag_minimal_brightness", b);
+		emit flagLandscapeUseMinimalBrightnessChanged(b);
+	}
+}
+
+// Return the value of the flag determining if the minimal brightness should be taken from landscape.ini
+bool LandscapeMgr::getFlagLandscapeSetsMinimalBrightness() const
+{
+	return flagLandscapeSetsMinimalBrightness;
+}
+// Sets the value of the flag determining if the minimal brightness should be taken from landscape.ini
+void LandscapeMgr::setFlagLandscapeSetsMinimalBrightness(bool b)
+{
+	if(b!=flagLandscapeSetsMinimalBrightness)
+	{
+		flagLandscapeSetsMinimalBrightness=b;
+		StelApp::immediateSave("landscape/flag_landscape_sets_minimal_brightness", b);
+		emit flagLandscapeSetsMinimalBrightnessChanged(b);
+	}
+}
+
 
 void LandscapeMgr::setFlagLandscapeAutoSelection(bool enableAutoSelect)
 {
 	if(enableAutoSelect != flagLandscapeAutoSelection)
 	{
 		flagLandscapeAutoSelection = enableAutoSelect;
+		StelApp::immediateSave("viewing/flag_landscape_autoselection", enableAutoSelect);
 		emit flagLandscapeAutoSelectionChanged(enableAutoSelect);
 	}
 }
@@ -1334,6 +1459,7 @@ void LandscapeMgr::setFlagEnvironmentAutoEnable(bool b)
 	if(b != flagEnvironmentAutoEnabling)
 	{
 		flagEnvironmentAutoEnabling = b;
+		StelApp::immediateSave("viewing/flag_environment_auto_enable", b);
 		emit setFlagEnvironmentAutoEnableChanged(b);
 	}
 }
@@ -1341,6 +1467,22 @@ void LandscapeMgr::setFlagEnvironmentAutoEnable(bool b)
 bool LandscapeMgr::getFlagEnvironmentAutoEnable() const
 {
 	return flagEnvironmentAutoEnabling;
+}
+
+// Return the minimal brightness value of the landscape
+double LandscapeMgr::getDefaultMinimalBrightness() const
+{
+	return defaultMinimalBrightness;
+}
+// Set the minimal brightness value of the landscape.
+void LandscapeMgr::setDefaultMinimalBrightness(const double b)
+{
+	if(fabs(b-defaultMinimalBrightness)>0.0)
+	{
+		defaultMinimalBrightness=b;
+		StelApp::immediateSave("landscape/minimal_brightness", b);
+		emit defaultMinimalBrightnessChanged(b);
+	}
 }
 
 /*********************************************************************

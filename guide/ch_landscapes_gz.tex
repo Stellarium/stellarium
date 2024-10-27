@@ -216,7 +216,6 @@ description = Horizon line of Geneve.
 polygonal_horizon_list = horizon_Geneve.txt
 polygonal_angle_rotatez = 0
 ground_color = .15,.45,.45
-horizon_line_color = .75,.45,.45
 \end{configfile}
 %
 Where:
@@ -242,9 +241,6 @@ Where:
 \item[\var{ground\_color}] (optional, default=\var{0,0,0}, i.e.,
   black) Color for the area below the horizon line. Each R,G,B
   component is a float within 0..1.
-\item[\var{horizon\_line\_color}] (optional, default: invisible) used
-  to draw a polygonal horizon line. Each R,G,B component is a float
-  within 0..1.
 \item[\var{minimal\_brightness}] (optional) Some minimum brightness to
   keep landscape visible. Default=-1, i.e., use
   \var{minimal\_brightness} from the \var{[landscape]} section in the
@@ -257,6 +253,13 @@ Where:
   only required in v0.15.0--0.20.2) In rare cases like horizon lines
   for high mountain peaks with many negative horizon values this
   should be set to true.
+\end{description}
+No longer used:
+\begin{description}
+\item[\var{horizon\_line\_color}] (optional, default: invisible) used
+  to draw a polygonal horizon line. 
+  %Each R,G,B component is a float within 0..1. 
+  This is now\newFeature{24.4} a global setting, \var{config.ini:landscape/polygon\_color}.
 \end{description}
 
 \subsubsection{Artificial Polygonal Panoramas}
@@ -293,8 +296,7 @@ which does just this work for you.
 
 A similar web service, \program{PeakFinder}\footnote{\url{https://www.peakfinder.com}}, 
 meanwhile also allows downloading the horizon polygon as installable landscape for Stellarium. 
-Unfortunately, currently (early 2024) the excellent gazetteer (peak identification) visible on the website 
-is not exported.
+A great feature of this service is the excellent gazetteer (peak identification) also visible on the website.
 
 
 \subsection{Spherical landscape}
@@ -335,7 +337,6 @@ angle_rotatez=-89.1
 minimal_brightness = 0.0075
 polygonal_horizon_list = horizon_grossmugl.txt
 polygonal_angle_rotatez=0
-horizon_line_color =  .75,.45,.45
 minimal_altitude = -1
 \end{configfile}
 Where:
@@ -389,7 +390,6 @@ Where:
   rising/setting times)
 \item[\var{polygonal\_horizon\_list\_mode}] (optional) see \ref{sec:landscapes:Polygonal}
 \item[\var{polygonal\_angle\_rotatez}] (optional, default=0) see \ref{sec:landscapes:Polygonal}
-\item[\var{horizon\_line\_color}] see \ref{sec:landscapes:Polygonal}
 \item[\var{minimal\_brightness}]  see \ref{sec:landscapes:Polygonal}
 \item[\var{minimal\_altitude}] (optional, default=-2) \newFeature{0.14.0} Some sky
   elements, e.g.\ stars, are not drawn below this altitude for
@@ -592,7 +592,6 @@ Where:
 \item[\var{polygonal\_horizon\_list}] (optional) see \ref{sec:landscapes:Spherical}
 \item[\var{polygonal\_horizon\_list\_mode}] (optional) see \ref{sec:landscapes:Polygonal}
 \item[\var{polygonal\_angle\_rotatez}] (optional, default=0) see \ref{sec:landscapes:Polygonal}
-\item[\var{horizon\_line\_color}] (optional) see \ref{sec:landscapes:Polygonal}
 \item[\var{minimal\_brightness}]  (optional) see \ref{sec:landscapes:Polygonal}
 \item[\var{minimal\_altitude}] (optional) see \ref{sec:landscapes:Polygonal}
 \end{description}
@@ -659,7 +658,6 @@ Where:
 \item[\var{polygonal\_horizon\_list}] (optional) see \ref{sec:landscapes:Spherical}
 \item[\var{polygonal\_horizon\_list\_mode}] (optional) see \ref{sec:landscapes:Polygonal}
 \item[\var{polygonal\_angle\_rotatez}] (optional, default=0) see \ref{sec:landscapes:Polygonal}
-\item[\var{horizon\_line\_color}] (optional) see \ref{sec:landscapes:Polygonal}
 \item[\var{minimal\_brightness}] (optional)  see \ref{sec:landscapes:Polygonal}
 \item[\var{minimal\_altitude}] (optional) see \ref{sec:landscapes:Polygonal}
 \end{description}
