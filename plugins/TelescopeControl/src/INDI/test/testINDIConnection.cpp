@@ -62,9 +62,9 @@ void TestINDIConnection::listDevices()
     INDI::BaseDevice device;
     device.setDeviceName("dummy");
 
-    instance.newDevice(&device);
+    instance.newDevice(device);
     QVERIFY(instance.devices().size() == 1);
-    instance.removeDevice(&device);
+    instance.removeDevice(device);
     QVERIFY(instance.devices().empty());
 }
 
