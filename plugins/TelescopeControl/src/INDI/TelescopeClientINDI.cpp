@@ -25,7 +25,7 @@
 
 #include "StelCore.hpp"
 #include "StelUtils.hpp"
-#include "libindi/inditelescope.h"
+#include <libs/indibase/inditelescope.h>
 #include "INDIControlWidget.hpp"
 
 TelescopeClientINDI::TelescopeClientINDI(const QString &name, const QString &params):
