@@ -26,6 +26,7 @@
 
 #include "StelCore.hpp"
 #include "StelUtils.hpp"
+#include "StelMainView.hpp"
 #include "StelTranslator.hpp"
 
 TelescopeClientASCOM::TelescopeClientASCOM(const QString& name, const QString& params, TelescopeControl::Equinox eq)
@@ -53,6 +54,7 @@ TelescopeClientASCOM::TelescopeClientASCOM(const QString& name, const QString& p
 TelescopeClientASCOM::~TelescopeClientASCOM()
 {
 	mAscomDevice->disconnect();
+	delete mAscomDevice;
 }
 
 void TelescopeClientASCOM::performCommunication()
@@ -138,7 +140,7 @@ void TelescopeClientASCOM::telescopeGoto(const Vec3d& j2000Pos, StelObjectP sele
 
 	if (mAscomDevice->isParked())
 	{
-		QMessageBox::warning(nullptr, "Stellarium",
+		QMessageBox::warning(&StelMainView::getInstance(), "Stellarium",
 		  q_("Can't slew a telescope which is parked. Unpark before performing any goto command."));
 		return;
 	}
@@ -171,12 +173,6 @@ bool TelescopeClientASCOM::isConnected() const
 bool TelescopeClientASCOM::hasKnownPosition() const
 {
 	return true;
-}
-
-void TelescopeClientASCOM::move(double angle, double speed)
-{
-	Q_UNUSED(angle)
-	Q_UNUSED(speed)
 }
 
 bool TelescopeClientASCOM::useJNow(ASCOMDevice::ASCOMEquatorialCoordinateType coordinateType, bool ascomUseDeviceEqCoordType, TelescopeControl::Equinox equinox)

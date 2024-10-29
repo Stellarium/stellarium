@@ -15,6 +15,7 @@ Fixes # (issue)
 - [ ] New feature (non-breaking change which adds functionality)
 - [ ] Breaking change (fix or feature that would cause existing functionality to change)
 - [ ] This change requires a documentation update
+- [ ] Housekeeping
 
 ### How Has This Been Tested?
 <!--- Please describe in detail how you tested your changes. -->

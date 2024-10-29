@@ -114,17 +114,19 @@ class StelVideoMgr : public StelModule
 	Q_OBJECT
 
 public:
-	StelVideoMgr();
-	~StelVideoMgr() Q_DECL_OVERRIDE;
+	//! Constructor.
+	//! @param withAudio usually true to allow audio output.
+	StelVideoMgr(bool withAudio);
+	~StelVideoMgr() override;
 
 public slots:
 
 	// Methods from StelModule: only update() needed.
-	virtual void init() Q_DECL_OVERRIDE {;} // Or do something?
+	void init() override {;} // Or do something?
 
 	//! Update the module with respect to the time. This allows the special effects in playVideoPopout(), and may evaluate things like video resolution when they become available.
 	//! @param deltaTime the time increment in second since last call.
-	virtual void update(double deltaTime) Q_DECL_OVERRIDE;
+	void update(double deltaTime) override;
 
 	//! load a video from filename, assign an id for it for later reference.
 	//! If id is already in use, replace it.
@@ -283,6 +285,7 @@ private:
 	QMap<QString, VideoPlayer*> videoObjects;
 	bool verbose;                      //!< true to write many more log entries (useful for script debugging) Activate with command-line option "--verbose"
 #endif
+	bool audioEnabled;                 //!< Allow audio output. May be disabled by command line or config arguments.
 };
 
 #endif // STELVIDEOMGR_HPP

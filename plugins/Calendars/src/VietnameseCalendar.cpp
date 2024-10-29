@@ -204,7 +204,7 @@ QString VietnameseCalendar::getFormattedSolarTermsString() const
 // set date from a vector of calendar date elements sorted from the largest to the smallest.
 // {cycle, year, month, leap-month, day}
 // Time is not changed!
-void VietnameseCalendar::setDate(QVector<int> parts)
+void VietnameseCalendar::setDate(const QVector<int> &parts)
 {
 	this->parts=parts;
 
@@ -217,7 +217,7 @@ void VietnameseCalendar::setDate(QVector<int> parts)
 }
 
 //! @arg parts5={cycle, year, month, leapMonth, day}
-int VietnameseCalendar::fixedFromVietnamese(QVector<int> parts5)
+int VietnameseCalendar::fixedFromVietnamese(const QVector<int> &parts5)
 {
 	const int cycle = parts5.value(0);
 	const int year  = parts5.value(1);
@@ -225,7 +225,7 @@ int VietnameseCalendar::fixedFromVietnamese(QVector<int> parts5)
 	const int leap  = parts5.value(3);
 	const int day   = parts5.value(4);
 
-	const int midYear=qRound(floor(ChineseCalendar::chineseEpoch+((cycle-1)*60+year-1+0.5)*meanTropicalYear));
+	const int midYear=qRound(std::floor(ChineseCalendar::chineseEpoch+((cycle-1)*60+year-1+0.5)*meanTropicalYear));
 	const int newYear=newYearOnOrBefore(midYear);
 	const int p = newMoonOnOrAfter(newYear+(month-1)*29);
 	const QVector<int>d = vietnameseFromFixed(p);
@@ -252,7 +252,7 @@ QVector<int> VietnameseCalendar::vietnameseFromFixed(int rd)
 		month--;
 	month=StelUtils::amod(month, 12);
 	const bool leapMonth=leapYear && noMajorSolarTerm(m) && !priorLeapMonth(m12, newMoonBefore(m));
-	const int elapsedYears=qRound(floor(1.5-month/12.+(rd-ChineseCalendar::chineseEpoch)/meanTropicalYear));
+	const int elapsedYears=qRound(std::floor(1.5-month/12.+(rd-ChineseCalendar::chineseEpoch)/meanTropicalYear));
 	const int cycle = StelUtils::intFloorDiv(elapsedYears-1, 60)+1;
 	const int year = StelUtils::amod(elapsedYears, 60);
 	const int day = rd-m+1;
@@ -263,13 +263,13 @@ QVector<int> VietnameseCalendar::vietnameseFromFixed(int rd)
 int VietnameseCalendar::currentMajorSolarTerm(int rd)
 {
 	double s=solarLongitude(universalFromStandard(rd, vietnameseLocation(rd)));
-	return StelUtils::amod(2+qRound(floor(s/30.)), 12);
+	return StelUtils::amod(2+qRound(std::floor(s/30.)), 12);
 }
 
 // Return location of Vietnamese calendar computations (Hanoi). CC:UE 19.38
 StelLocation VietnameseCalendar::vietnameseLocation(double rd_t)
 {	
-	const int year=GregorianCalendar::gregorianYearFromFixed(qRound(floor(rd_t)));
+	const int year=GregorianCalendar::gregorianYearFromFixed(qRound(std::floor(rd_t)));
 
 	// Presumably the Timezone database caters for time switches better than described in the book. However, on Windows these data extras are not available.
 	StelLocation loc("Hanoi", "Vietnam", "Eastern Asia", 105.+(51./60.), 21.+(2./60.), 12, 4000, "Asia/Hanoi", 8);
@@ -298,7 +298,7 @@ int VietnameseCalendar::majorSolarTermOnOrAfter(int rd)
 int VietnameseCalendar::currentMinorSolarTerm(int rd)
 {
 	const double s=solarLongitude(universalFromStandard(rd, vietnameseLocation(rd)));
-	return StelUtils::amod(3+qRound(floor((s-15.)/30.)), 12);
+	return StelUtils::amod(3+qRound(std::floor((s-15.)/30.)), 12);
 }
 
 // Return minor solar term (CC:UE 19.6)
@@ -321,7 +321,7 @@ int VietnameseCalendar::winterSolsticeOnOrBefore(int rd)
 {
 	const double approx=estimatePriorSolarLongitude(double(Calendar::winter), midnightInVietnam(rd+1));
 
-	int day=qRound(floor(approx))-2;
+	int day=qRound(std::floor(approx))-2;
 	double lng;
 	do {
 		day++;
@@ -335,14 +335,14 @@ int VietnameseCalendar::winterSolsticeOnOrBefore(int rd)
 int VietnameseCalendar::newMoonOnOrAfter(int rd)
 {
 	const double t=Calendar::newMoonAtOrAfter(midnightInVietnam(rd));
-	return qRound(floor(standardFromUniversal(t, vietnameseLocation(t))));
+	return qRound(std::floor(standardFromUniversal(t, vietnameseLocation(t))));
 }
 
 // Return Korean New Moon (CC:UE 19.10)
 int VietnameseCalendar::newMoonBefore(int rd)
 {
 	const double t=Calendar::newMoonBefore(midnightInVietnam(rd));
-	return qRound(floor(standardFromUniversal(t, vietnameseLocation(t))));
+	return qRound(std::floor(standardFromUniversal(t, vietnameseLocation(t))));
 }
 
 // Auxiliary function (CC:UE 19.11)

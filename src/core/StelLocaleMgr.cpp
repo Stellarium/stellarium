@@ -31,10 +31,7 @@
 #include <ctime>
 
 StelLocaleMgr::StelLocaleMgr()
-	: skyTranslator(Q_NULLPTR)
-	, planetaryFeaturesTranslator(Q_NULLPTR)
-	, scriptsTranslator(Q_NULLPTR)
-	, timeFormat()
+	: timeFormat()
 	, dateFormat()
 {
 	core = StelApp::getInstance().getCore();
@@ -44,12 +41,6 @@ StelLocaleMgr::StelLocaleMgr()
 
 StelLocaleMgr::~StelLocaleMgr()
 {
-	delete skyTranslator;
-	skyTranslator = Q_NULLPTR;
-	delete planetaryFeaturesTranslator;
-	planetaryFeaturesTranslator = Q_NULLPTR;
-	delete scriptsTranslator;
-	scriptsTranslator = Q_NULLPTR;
 }
 
 void StelLocaleMgr::init()
@@ -73,12 +64,11 @@ void StelLocaleMgr::setAppLanguage(const QString& newAppLanguageName, bool refre
 	Q_ASSERT(StelTranslator::globalTranslator);
 	delete StelTranslator::globalTranslator;
 	StelTranslator::globalTranslator = new StelTranslator("stellarium", newAppLanguageName);
-	qDebug() << "Application language is " << StelTranslator::globalTranslator->getTrueLocaleName();
+	qDebug().noquote() << "Application language:" << StelTranslator::globalTranslator->getTrueLocaleName();
 
-	delete scriptsTranslator;
 	// Update the translator with new locale name
-	scriptsTranslator = new StelTranslator("stellarium-scripts", newAppLanguageName);
-	qDebug() << "Scripts language is " << scriptsTranslator->getTrueLocaleName();
+	scriptsTranslator.reset(new StelTranslator("stellarium-scripts", newAppLanguageName));
+	qDebug().noquote() << "Scripts language:" << scriptsTranslator->getTrueLocaleName();
 
 	createNameLists();
 	if (refreshAll)
@@ -95,15 +85,13 @@ bool StelLocaleMgr::isAppRTL() const
 *************************************************************************/
 void StelLocaleMgr::setSkyLanguage(const QString& newSkyLanguageName, bool refreshAll)
 {
-	delete skyTranslator;
 	// Update the translator with new locale name
-	skyTranslator = new StelTranslator("stellarium-skycultures", newSkyLanguageName);
-	qDebug() << "Sky language is " << skyTranslator->getTrueLocaleName();
+	skyTranslator.reset(new StelTranslator("stellarium-skycultures", newSkyLanguageName));
+	qDebug().noquote() << "Sky language:" << skyTranslator->getTrueLocaleName();
 
-	delete planetaryFeaturesTranslator;
 	// Update the translator with new locale name
-	planetaryFeaturesTranslator = new StelTranslator("stellarium-planetary-features", newSkyLanguageName);
-	qDebug() << "Planetary features language is " << planetaryFeaturesTranslator->getTrueLocaleName();
+	planetaryFeaturesTranslator.reset(new StelTranslator("stellarium-planetary-features", newSkyLanguageName));
+	qDebug().noquote() << "Planetary features language:" << planetaryFeaturesTranslator->getTrueLocaleName();
 
 	if (refreshAll)
 		StelApp::getInstance().updateI18n();
@@ -144,9 +132,9 @@ const StelTranslator& StelLocaleMgr::getScriptsTranslator() const
 }
 
 // Return the time in ISO 8601 format that is : %Y-%m-%d %H:%M:%S
-QString StelLocaleMgr::getISO8601TimeLocal(double JD) const
+QString StelLocaleMgr::getISO8601TimeLocal(double JD, double utcOffsetHrs) const
 {
-	return StelUtils::julianDayToISO8601String(JD + core->getUTCOffset(JD)*0.041666666666);
+	return StelUtils::julianDayToISO8601String(JD + utcOffsetHrs*StelCore::JD_HOUR);
 }
 
 //! get the six ints from an ISO8601 date time, understood to be local time, make a jdate out
@@ -160,16 +148,16 @@ double StelLocaleMgr::getJdFromISO8601TimeLocal(const QString& t, bool* ok) cons
 		return 0.0;
 	}
 
-	jd -= core->getUTCOffset(jd)*0.041666666666;
+	jd -= core->getUTCOffset(jd)*StelCore::JD_HOUR;
 	return jd;
 }
 
 
 // Return a string with the local date formatted according to the dateFormat variable
-QString StelLocaleMgr::getPrintableDateLocal(double JD) const
+QString StelLocaleMgr::getPrintableDateLocal(double JD, double utcOffsetHrs) const
 {
 	int year, month, day, dayOfWeek;
-	const double shift = core->getUTCOffset(JD)*0.041666666666;
+	const double shift = utcOffsetHrs*StelCore::JD_HOUR;
 	StelUtils::getDateFromJulianDay(JD+shift, &year, &month, &day);
 	dayOfWeek = StelUtils::getDayOfWeek(year, month, day);
 	QString str;
@@ -205,10 +193,10 @@ QString StelLocaleMgr::getPrintableDateLocal(double JD) const
 
 // Return a string with the local time (according to timeZoneMode variable) formatted
 // according to the timeFormat variable
-QString StelLocaleMgr::getPrintableTimeLocal(double JD) const
+QString StelLocaleMgr::getPrintableTimeLocal(double JD, double utcOffsetHrs) const
 {
 	int hour, minute, second, millsec;
-	const double shift = core->getUTCOffset(JD)*0.041666666666;
+	const double shift = utcOffsetHrs*StelCore::JD_HOUR;
 	StelUtils::getTimeFromJulianDay(JD+shift, &hour, &minute, &second, &millsec);
 	QTime t(hour, minute, second, millsec);
 	switch (timeFormat)
@@ -230,7 +218,7 @@ QString StelLocaleMgr::getPrintableTimeLocal(double JD) const
 	}
 }
 
-QString StelLocaleMgr::getPrintableTimeZoneLocal(double JD) const
+QString StelLocaleMgr::getPrintableTimeZoneLocal(double JD, double utcOffsetHrs) const
 {
 	QString timeZone = "";
 	QString timeZoneST = "";
@@ -250,7 +238,7 @@ QString StelLocaleMgr::getPrintableTimeZoneLocal(double JD) const
 			timeZoneST = qc_("LTST", "solar time");
 		}
 
-		const double shift = core->getUTCOffset(JD);
+		const double shift = utcOffsetHrs;
 		QTime tz = QTime(0, 0, 0).addSecs(static_cast<int>(3600*qAbs(shift)));
 		if(shift<0.0)
 			timeZone = QString("UTC-%1").arg(tz.toString("hh:mm"));
@@ -263,7 +251,7 @@ QString StelLocaleMgr::getPrintableTimeZoneLocal(double JD) const
 	else
 	{
 		// TODO: Make sure LMST/LTST would make sense on other planet, or inhibit it?
-		const double shift = core->getUTCOffset(JD);
+		const double shift = utcOffsetHrs;
 		QTime tz = QTime(0, 0, 0).addSecs(static_cast<int>(3600*qAbs(shift)));
 		if(shift<0.0)
 			timeZone = QString("UTC-%1").arg(tz.toString("hh:mm"));

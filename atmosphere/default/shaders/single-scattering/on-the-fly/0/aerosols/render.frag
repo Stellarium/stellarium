@@ -254,6 +254,8 @@ void main()
             viewRayIntersectsGround=true;
     }
 
+    bool viewingPseudoMirror = false;
+    float pseudoMirrorDepth = 0;
     // Stellarium wants to display a sky-like view when ground is hidden.
     // Aside from aesthetics, this affects brightness input to Stellarium's tone mapper.
     if(pseudoMirrorSkyBelowHorizon && viewRayIntersectsGround)
@@ -279,10 +281,27 @@ void main()
             viewDir += zenith*cosViewZenithAngle;
         }
         viewRayIntersectsGround = false;
+        viewingPseudoMirror = true;
+
+        // The first factor here, with dot(view,sun), results in removal of the
+        // forward scattering peak. The second factor, with tanh, makes the
+        // transition near sunset from a bit above horizon to a bit below smoother.
+        // We limit the argument of tanh, because some GLSL implementations (e.g.
+        // AMD Radeon RX 5700 XT) overflow when computing it and yield NaN.
+        pseudoMirrorDepth = sqr(max(0, dot(viewDir, sunDirection))) *
+                               tanh(min(10, 150 * (newViewElev - horizElev) / (PI/2 - horizElev)));
     }
 
     CONST float cosSunZenithAngle =dot(zenith,sunDirection);
     CONST float dotViewSun=dot(viewDir,sunDirection);
+
+#if 1 /*RENDERING_ANY_SINGLE_SCATTERING*/
+    vec4 phaseFuncValue = currentPhaseFunction(dotViewSun);
+    if(viewingPseudoMirror)
+    {
+        phaseFuncValue = mix(phaseFuncValue, 1/vec4(4*PI), pseudoMirrorDepth);
+    }
+#endif
 
     CONST vec3 sunXYunnorm=sunDirection-dot(sunDirection,zenith)*zenith;
     CONST vec3 viewXYunnorm=viewDir-dot(viewDir,zenith)*zenith;
@@ -353,7 +372,7 @@ void main()
 #elif 0 /*RENDERING_ECLIPSED_SINGLE_SCATTERING_ON_THE_FLY*/
     CONST vec4 scattering=computeSingleScatteringEclipsed(cameraPosition,viewDir,sunDirection,moonPosition,
                                                           viewRayIntersectsGround);
-    vec4 radiance=scattering*currentPhaseFunction(dotViewSun);
+    vec4 radiance=scattering*phaseFuncValue;
     radiance*=solarIrradianceFixup;
     luminance=radianceToLuminance*radiance;
     radianceOutput=radiance;
@@ -365,7 +384,7 @@ void main()
     // 0). This happens when I simply call texture(eclipsedScatteringTexture, texCoords) without specifying LOD.
     // Apparently, the driver uses the derivative for some reason, even though it shouldn't.
     CONST vec4 scattering = textureLod(eclipsedScatteringTexture, texCoords, 0);
-    vec4 radiance=scattering*currentPhaseFunction(dotViewSun);
+    vec4 radiance=scattering*phaseFuncValue;
     radiance*=solarIrradianceFixup;
     luminance=radianceToLuminance*radiance;
     radianceOutput=radiance;
@@ -377,7 +396,7 @@ void main()
     // 0). This happens when I simply call texture(eclipsedScatteringTexture, texCoords) without specifying LOD.
     // Apparently, the driver uses the derivative for some reason, even though it shouldn't.
     CONST vec4 scattering = textureLod(eclipsedScatteringTexture, texCoords, 0);
-    luminance=scattering*currentPhaseFunction(dotViewSun);
+    luminance=scattering*phaseFuncValue;
 #elif 0 /*RENDERING_ECLIPSED_DOUBLE_SCATTERING_PRECOMPUTED_RADIANCE*/
     vec4 radiance=exp(sampleEclipseDoubleScattering3DTexture(eclipsedDoubleScatteringTexture,
                                                              cosSunZenithAngle, cosViewZenithAngle, azimuthRelativeToSun,
@@ -392,7 +411,7 @@ void main()
 #elif 1 /*RENDERING_SINGLE_SCATTERING_ON_THE_FLY*/
     CONST vec4 scattering=computeSingleScattering(cosSunZenithAngle,cosViewZenithAngle,dotViewSun,
                                                   altitude,viewRayIntersectsGround);
-    vec4 radiance=scattering*currentPhaseFunction(dotViewSun);
+    vec4 radiance=scattering*phaseFuncValue;
     radiance*=solarIrradianceFixup;
     luminance=radianceToLuminance*radiance;
     radianceOutput=radiance;
@@ -409,7 +428,7 @@ void main()
         scattering = sample3DTexture(scatteringTexture, cosSunZenithAngle, cosViewZenithAngle,
                                      dotViewSun, altitude, viewRayIntersectsGround);
     }
-    vec4 radiance=scattering*currentPhaseFunction(dotViewSun);
+    vec4 radiance=scattering*phaseFuncValue;
     radiance*=solarIrradianceFixup;
     luminance=radianceToLuminance*radiance;
     radianceOutput=radiance;
@@ -426,7 +445,7 @@ void main()
         scattering = sample3DTexture(scatteringTexture, cosSunZenithAngle, cosViewZenithAngle,
                                      dotViewSun, altitude, viewRayIntersectsGround);
     }
-    luminance=scattering * (bool(0) ? vec4(1) : currentPhaseFunction(dotViewSun));
+    luminance=scattering * (bool(0) ? vec4(1) : phaseFuncValue);
 #elif 0 /*RENDERING_MULTIPLE_SCATTERING_LUMINANCE*/
     luminance=sample3DTexture(scatteringTexture, cosSunZenithAngle, cosViewZenithAngle, dotViewSun, altitude, viewRayIntersectsGround);
 #elif 0 /*RENDERING_MULTIPLE_SCATTERING_RADIANCE*/

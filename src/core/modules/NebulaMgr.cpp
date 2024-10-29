@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Stellarium
  * Copyright (C) 2002 Fabien Chereau
  * Copyright (C) 2011 Alexander Wolf
@@ -27,6 +27,7 @@
 #include "Nebula.hpp"
 #include "StelTexture.hpp"
 #include "StelUtils.hpp"
+#include "StelMainView.hpp"
 #include "StelSkyDrawer.hpp"
 #include "StelTranslator.hpp"
 #include "StelTextureMgr.hpp"
@@ -51,7 +52,7 @@
 
 // Define version of valid Stellarium DSO Catalog
 // This number must be incremented each time the content or file format of the stars catalogs change
-static const QString StellariumDSOCatalogVersion = "3.19";
+static const QString StellariumDSOCatalogVersion = "3.20";
 
 void NebulaMgr::setLabelsColor(const Vec3f& c) {Nebula::labelColor = c; emit labelsColorChanged(c);}
 const Vec3f NebulaMgr::getLabelsColor(void) const {return Nebula::labelColor;}
@@ -299,7 +300,7 @@ void NebulaMgr::init()
 	setEmissionObjectColor(    Vec3f(conf->value("color/dso_emission_object_color", defaultStellarColor).toString()));
 	setYoungStellarObjectColor(Vec3f(conf->value("color/dso_young_stellar_object_color", defaultStellarColor).toString()));
 
-	// for DSO convertor (for developers!)
+	// for DSO converter (for developers!)
 	flagConverter = conf->value("devel/convert_dso_catalog", false).toBool();
 	flagDecimalCoordinates = conf->value("devel/convert_dso_decimal_coord", true).toBool();
 
@@ -351,7 +352,7 @@ void NebulaMgr::init()
 
 	StelApp *app = &StelApp::getInstance();
 	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
-	connect(&app->getSkyCultureMgr(), SIGNAL(currentSkyCultureChanged(QString)), this, SLOT(updateSkyCulture(const QString&)));
+	connect(&app->getSkyCultureMgr(), &StelSkyCultureMgr::currentSkyCultureIDChanged, this, &NebulaMgr::updateSkyCulture);
 	GETSTELMODULE(StelObjectMgr)->registerStelObjectMgr(this);
 
 	addAction("actionShow_Nebulas", N_("Display Options"), N_("Deep-sky objects"), "flagHintDisplayed", "D", "N");
@@ -691,14 +692,15 @@ float NebulaMgr::computeMaxMagHint(const StelSkyDrawer* skyDrawer) const
 // Draw all the Nebulae
 void NebulaMgr::draw(StelCore* core)
 {
+	if(hintsFader.getInterstate()<=0.f)
+		return;
+
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 	StelPainter sPainter(prj);
 
-	StelSkyDrawer* skyDrawer = core->getSkyDrawer();
+	static StelSkyDrawer* skyDrawer = core->getSkyDrawer();
 
 	Nebula::hintsBrightness = hintsFader.getInterstate()*flagShow.getInterstate();
-
-	sPainter.setBlending(true, GL_ONE, GL_ONE);
 
 	// Use a 4 degree margin (esp. for wide outlines)
 	const float margin = 4.f*M_PI_180f*prj->getPixelPerRadAtCenter();
@@ -711,7 +713,8 @@ void NebulaMgr::draw(StelCore* core)
 	DrawNebulaFuncObject func(maxMagHints, maxMagLabels, &sPainter, core, hintsFader.getInterstate()<=0.f);
 	nebGrid.processIntersectingPointInRegions(p.data(), func);
 
-	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer())
+	static StelObjectMgr *som=GETSTELMODULE(StelObjectMgr);
+	if (som->getFlagSelectedObjectPointer())
 		drawPointer(core, sPainter);
 }
 
@@ -753,7 +756,7 @@ NebulaP NebulaMgr::search(const QString& name)
 {
 	QString uname = name.toUpper();
 
-	for (const auto& n : qAsConst(dsoArray))
+	for (const auto& n : std::as_const(dsoArray))
 	{
 		QString testName = n->getEnglishName().toUpper();
 		if (testName==uname) return n;
@@ -805,7 +808,7 @@ NebulaP NebulaMgr::search(const Vec3d& apos)
 	pos.normalize();
 	NebulaP plusProche;
 	double anglePlusProche=0.0;
-	for (const auto& n : qAsConst(dsoArray))
+	for (const auto& n : std::as_const(dsoArray))
 	{
 		if (n->XYZ*pos>anglePlusProche)
 		{
@@ -831,7 +834,7 @@ QList<StelObjectP> NebulaMgr::searchAround(const Vec3d& av, double limitFov, con
 	v.normalize();
 	const double cosLimFov = cos(limitFov * M_PI/180.);
 	Vec3d equPos;
-	for (const auto& n : qAsConst(dsoArray))
+	for (const auto& n : std::as_const(dsoArray))
 	{
 		equPos = n->XYZ;
 		equPos.normalize();
@@ -1392,7 +1395,13 @@ bool NebulaMgr::loadDSOCatalog(const QString &filename)
 				++totalRecords;
 				qDebug().noquote() << "WARNING: Mismatch of DSO catalog version (" << version << ")! The expected version is" << StellariumDSOCatalogVersion;
 				qDebug().noquote() << "         See section 5.5 of the User Guide and install the right version of the catalog!";
-				QMessageBox::warning(Q_NULLPTR, q_("Attention!"), QString("%1. %2: %3 - %4: %5. %6").arg(q_("DSO catalog version mismatch"),  q_("Found"), version, q_("Expected"), StellariumDSOCatalogVersion, q_("See Logfile for instructions.")), QMessageBox::Ok);
+				QMessageBox::warning(&StelMainView::getInstance(), q_("Attention!"),
+				                     QString("%1. %2: %3 - %4: %5. %6").arg(q_("DSO catalog version mismatch"),
+				                                                            q_("Found"),
+				                                                            version,
+				                                                            q_("Expected"),
+				                                                            StellariumDSOCatalogVersion,
+				                                                            q_("See Logfile for instructions.")), QMessageBox::Ok);
 				break;
 			}
 		}
@@ -1721,7 +1730,7 @@ void NebulaMgr::updateSkyCulture(const QString& skyCultureDir)
 {
 	QString namesFile = StelFileMgr::findFile("skycultures/" + skyCultureDir + "/dso_names.fab");
 
-	for (const auto& n : qAsConst(dsoArray))
+	for (const auto& n : std::as_const(dsoArray))
 		n->removeAllNames();
 
 	if (namesFile.isEmpty())
@@ -1802,7 +1811,7 @@ void NebulaMgr::updateSkyCulture(const QString& skyCultureDir)
 void NebulaMgr::updateI18n()
 {
 	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
-	for (const auto& n : qAsConst(dsoArray))
+	for (const auto& n : std::as_const(dsoArray))
 		n->translateName(trans);
 }
 
@@ -1813,7 +1822,7 @@ StelObjectP NebulaMgr::searchByNameI18n(const QString& nameI18n) const
 	QString objw = nameI18n.toUpper();
 
 	// Search by common names
-	for (const auto& n : qAsConst(dsoArray))
+	for (const auto& n : std::as_const(dsoArray))
 	{
 		QString objwcap = n->nameI18.toUpper();
 		if (objwcap==objw)
@@ -1821,7 +1830,7 @@ StelObjectP NebulaMgr::searchByNameI18n(const QString& nameI18n) const
 	}
 
 	// Search by aliases of common names
-	for (const auto& n : qAsConst(dsoArray))
+	for (const auto& n : std::as_const(dsoArray))
 	{
 		for (auto &objwcapa : n->nameI18Aliases)
 		{
@@ -2549,13 +2558,13 @@ QStringList NebulaMgr::listMatchingObjects(const QString& objPrefix, int maxNbIt
 				names.append(name);
 
 			nameList = n->englishAliases;
-			for (const auto &name : qAsConst(nameList))
+			for (const auto &name : std::as_const(nameList))
 				names.append(name);
 		}
 	}
 
 	QString fullMatch = "";
-	for (const auto& name : qAsConst(names))
+	for (const auto& name : std::as_const(names))
 	{
 		if (!matchObjectName(name, objPrefix, useStartOfWords))
 			continue;

@@ -6,7 +6,8 @@ INSTALL(FILES info.ini star_names.fab dso_names.fab DESTINATION ${SDATALOC}/skyc
 
 # install constellations data, artwork and descriptions
 INSTALL(DIRECTORY ./ DESTINATION ${SDATALOC}/skycultures/chinese
-	FILES_MATCHING PATTERN "constellation*" 
-	PATTERN "*.png" 
-	PATTERN "description.*.utf8" 
+	FILES_MATCHING PATTERN "*.fab"
+	PATTERN "*.dat"
+	PATTERN "*.png"
+	PATTERN "*.utf8"
 	PATTERN "CMakeFiles" EXCLUDE )

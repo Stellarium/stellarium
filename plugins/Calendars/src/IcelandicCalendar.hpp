@@ -42,7 +42,7 @@ public slots:
 
 	//! set date from a vector of calendar date elements sorted from the largest to the smallest.
 	//! Year-Season[90=summer/270=winter]-week[1..27]-Day[1...31]
-	void setDate(QVector<int> parts) override;
+	void setDate(const QVector<int> &parts) override;
 
 	//! get a stringlist of calendar date elements sorted from the largest to the smallest.
 	//! Year, Season, Month, MonthName, Week, Day, DayName
@@ -55,7 +55,7 @@ public slots:
 	static bool isLeap(int iyear);
 
 	//! RD from {year, season, week[1...27], weekday[0...6]}
-	static int fixedFromIcelandic(QVector<int> icelandic);
+	static int fixedFromIcelandic(const QVector<int> &icelandic);
 
 	//! return year-season-week-day for RD date
 	//! N.B. This adds month over the definition given by CC
@@ -64,7 +64,7 @@ public slots:
 	//! return month number in the season.
 	//! The first number of the pair is the month number,
 	//! the second is an index to retrieve the name with icelandicMonthName(int)
-	static QPair<int,int> icelandicMonth(QVector<int>iDate);
+	static QPair<int,int> icelandicMonth(const QVector<int> &iDate);
 
 	//! Retrieve Icelandic month name. Numbers 1..6 for summer months, 7..12 for winter months.
 	static QString icelandicMonthName(int i) {return monthNames.value(i);}

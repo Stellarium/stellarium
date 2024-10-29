@@ -66,6 +66,28 @@
 #include <QAction>
 #include <QKeySequence>
 
+static QString applyScaleToCSS(const QString& css, const double scale)
+{
+	auto out = css;
+	const QRegularExpression pat("\\b([0-9.]+)px\\b");
+	QRegularExpressionMatch match;
+	int pos = 0;
+	while((pos = out.indexOf(pat, pos, &match)) >= 0)
+	{
+		const auto numStr = match.captured(1);
+		bool ok = false;
+		const auto num = numStr.toDouble(&ok);
+		assert(ok);
+		const auto scaled = num * scale;
+		const bool hasDot = numStr.contains(QLatin1Char('.'));
+		const auto newNumStr = hasDot ? QString::number(scaled,'f',3)
+		                              : QString::number(int(scaled));
+		out.replace(pos, numStr.size(), newNumStr);
+		pos += newNumStr.size() + 2; // skip the whole resulting pattern
+	}
+	return out;
+}
+
 StelGui::StelGui()
 	: topLevelGraphicsWidget(nullptr)
 	, skyGui(nullptr)
@@ -115,6 +137,8 @@ StelGui::StelGui()
 	, btShowEclipticGrid(nullptr)
 	, flagShowConstellationBoundariesButton(false)
 	, btShowConstellationBoundaries(nullptr)
+	, flagShowConstellationArtsButton(false)
+	, btShowConstellationArts(nullptr)
 	, flagShowAsterismLinesButton(false)
 	, btShowAsterismLines(nullptr)
 	, flagShowAsterismLabelsButton(false)
@@ -187,6 +211,11 @@ StelGui::~StelGui()
 		delete obsListDialog;
 		obsListDialog = nullptr;
 	}
+}
+
+void StelGui::updateStelStyle()
+{
+	setStelStyle(StelApp::getInstance().getCurrentStelStyle());
 }
 
 void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
@@ -295,7 +324,6 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 	QString groupName = "010-constellationsGroup";
 	addButtonOnBottomBar("btConstellationLines", "actionShow_Constellation_Lines", groupName);
 	addButtonOnBottomBar("btConstellationLabels", "actionShow_Constellation_Labels", groupName);
-	addButtonOnBottomBar("btConstellationArt", "actionShow_Constellation_Art", groupName);
 	// Buttons for manage grids
 	groupName = "020-gridsGroup";
 	addButtonOnBottomBar("btEquatorialGrid", "actionShow_Equatorial_Grid", groupName);
@@ -366,6 +394,7 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 	setFlagShowICRSGridButton(conf->value("gui/flag_show_icrs_grid_button", false).toBool());
 	setFlagShowGalacticGridButton(conf->value("gui/flag_show_galactic_grid_button", false).toBool());
 	setFlagShowEclipticGridButton(conf->value("gui/flag_show_ecliptic_grid_button", false).toBool());
+	setFlagShowConstellationArtsButton(conf->value("gui/flag_show_constellation_arts_button", true).toBool());
 	setFlagShowConstellationBoundariesButton(conf->value("gui/flag_show_boundaries_button", false).toBool());
 	setFlagShowAsterismLinesButton(conf->value("gui/flag_show_asterism_lines_button", false).toBool());
 	setFlagShowAsterismLabelsButton(conf->value("gui/flag_show_asterism_labels_button", false).toBool());
@@ -384,7 +413,8 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 	l->addItem(skyGui, 0, 0);
 	atopLevelGraphicsWidget->setLayout(l);
 
-	setStelStyle(StelApp::getInstance().getCurrentStelStyle());
+	connect(&StelApp::getInstance(), &StelApp::guiFontSizeChanged, this, &StelGui::updateStelStyle);
+	updateStelStyle();
 
 	int margin = conf->value("gui/space_between_groups", 5).toInt();
 	skyGui->bottomBar->setGroupMargin("020-gridsGroup", margin, 0);
@@ -461,17 +491,17 @@ void StelGui::setStelStyle(const QString& style)
 	QFile styleFile(qtStyleFileName);
 	if(styleFile.open(QIODevice::ReadOnly))
 	{
-		qDebug() << "Loading Style file" << styleFile.fileName();
+		qDebug().noquote() << "Loading style file:" << styleFile.fileName();
 		currentStelStyle.qtStyleSheet = styleFile.readAll();
 		styleFile.close();
 	}
 	else
-		qDebug() << "Cannot find style file" << qtStyleFileName;
+		qDebug().noquote() << "Cannot find style file:" << qtStyleFileName;
 
 	QString htmlStyleFileName = (style=="default" ? ":/graphicGui/normalHtml.css" : StelFileMgr::findFile(style+"Html.css"));
 	if (htmlStyleFileName.isEmpty())
 	{
-		qWarning() << "Cannot find " << style << "Html.css. Loading default HTML style.";
+		qWarning().noquote() << "Cannot find" << style << "Html.css. Loading default HTML style.";
 		htmlStyleFileName = ":/graphicGui/normalHtml.css";
 	}
 
@@ -482,8 +512,10 @@ void StelGui::setStelStyle(const QString& style)
 		htmlStyleFile.close();
 	}
 	else
-		qDebug() << "Cannot find HTML style file" << htmlStyleFileName;
+		qDebug().noquote() << "Cannot find HTML style file:" << htmlStyleFileName;
 
+	const auto scale = double(StelApp::getInstance().getGuiFontSize()) / StelApp::getDefaultGuiFontSize();
+	currentStelStyle.qtStyleSheet = applyScaleToCSS(currentStelStyle.qtStyleSheet, scale);
 	emit guiStyleChanged(currentStelStyle.qtStyleSheet);
 	emit htmlStyleChanged(currentStelStyle.htmlStyleSheet);
 }
@@ -569,6 +601,10 @@ void StelGui::update()
 	flag = propMgr->getProperty("GridLinesMgr.eclipticGridDisplayed")->getValue().toBool();
 	if (getAction("actionShow_Ecliptic_Grid")->isChecked() != flag)
 		getAction("actionShow_Ecliptic_Grid")->setChecked(flag);
+
+	flag = propMgr->getProperty("ConstellationMgr.artDisplayed")->getValue().toBool();
+	if (getAction("actionShow_Constellation_Art")->isChecked() != flag)
+		getAction("actionShow_Constellation_Art")->setChecked(flag);
 
 	flag = propMgr->getProperty("ConstellationMgr.boundariesDisplayed")->getValue().toBool();
 	if (getAction("actionShow_Constellation_Boundaries")->isChecked() != flag)
@@ -946,6 +982,37 @@ void StelGui::setFlagShowConstellationBoundariesButton(bool b)
 			skyGui->updateBarsPos();
 		}
 		emit flagShowConstellationBoundariesButtonChanged(b);
+	}
+}
+
+// Define whether the button toggling constellation arts should be visible
+void StelGui::setFlagShowConstellationArtsButton(bool b)
+{
+	if (b!=flagShowConstellationArtsButton)
+	{
+		if (b==true)
+		{
+			if (btShowConstellationArts==nullptr)
+			{
+				// Create the nebulae background button
+				QPixmap pxmapGlow32x32(":/graphicGui/miscGlow32x32.png");
+				QPixmap pxmapOn(":/graphicGui/btConstellationArt-on.png");
+				QPixmap pxmapOff(":/graphicGui/btConstellationArt-off.png");
+				btShowConstellationArts = new StelButton(nullptr, pxmapOn, pxmapOff, pxmapGlow32x32, "actionShow_Constellation_Art");
+			}
+			getButtonBar()->addButton(btShowConstellationArts, "010-constellationsGroup");
+		} else {
+			getButtonBar()->hideButton("actionShow_Constellation_Art");
+		}
+		flagShowConstellationArtsButton = b;
+		QSettings* conf = StelApp::getInstance().getSettings();
+		Q_ASSERT(conf);
+		conf->setValue("gui/flag_show_constellation_arts_button", b);
+		conf->sync();
+		if (initDone) {
+			skyGui->updateBarsPos();
+		}
+		emit flagShowConstellationArtsButtonChanged(b);
 	}
 }
 
@@ -1398,6 +1465,11 @@ bool StelGui::getFlagShowEclipticGridButton() const
 bool StelGui::getFlagShowConstellationBoundariesButton() const
 {
 	return flagShowConstellationBoundariesButton;
+}
+
+bool StelGui::getFlagShowConstellationArtsButton() const
+{
+	return flagShowConstellationArtsButton;
 }
 
 bool StelGui::getFlagShowAsterismLinesButton() const

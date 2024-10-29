@@ -146,7 +146,7 @@ LabelMgr.deleteLabel(label);
 \label{sec:scripting:differences}
 
 Qt5's QtScript module which has been used in versions 0.10 to 0.22 was more flexible and easier to fine-tune than Qt6's QJSEngine, 
-which is used in the 1.* series of the program, i.e., versions 1.0 (22.3) and later. 
+which is used in the Qt6-based 1.* series of the program, i.e., versions 1.0 (22.3) and later. 
 Still, most scripts that have been developed for Stellarium versions 0.10 to 0.22 
 still run without or with just minor modifications as described in this section. 
 
@@ -215,7 +215,7 @@ As late as in version 0.19 we added \texttt{Vec3f} and later \texttt{Vec3d} data
 These allowed addressing variables of C++ classes \texttt{Vec3f} or \texttt{Vec3d} with named sub-fields \texttt{r}, \texttt{g}, \texttt{b} 
 (if used to describe colors), or \texttt{x}, \texttt{y}, \texttt{z} (same data but contextually understood as 3D data).
 These functions may have pleased the JavaScript connoisseur when running scripts with Qt5-based builds of 
-Stellarium (series 0.*, now usually found on 32-bit systems), but we recommend to abstain from their use in new scripts.
+Stellarium (series 0.*, and now usually found on 32-bit and older systems), but we recommend to abstain from their use in new scripts.
 
 Qt6's scripting module cannot be extended that easily. The \texttt{Vec3d} and \texttt{Vec3f} data types are not directly scriptable, 
 but we can deal with method arguments of these types when they are mentioned in the API documentation (see \ref{sec:scripting:introduction}). 
@@ -294,6 +294,15 @@ for (i=0; i<250; i++)
       core.wait(0.2);
 }
 \end{script}
+
+\noindent\textbf{Note:}
+The \texttt{wait(delay\_seconds)} instruction inside the loop is important: 
+when you are just setting the time in rapid succession, there is no guarantee 
+that the view is updated, or a textual result has been updated when writing ephemerides, 
+before executing the next time update! 
+The \texttt{wait()} ensures the program can update the main simulation loop and 
+put the planets where they should be at that set time. 
+The minimum delay required may depend on your computer's speed. 
 
 OK, Stellarium is doing something, but what exactly is it
 doing? The ground and atmosphere is enabled and any 

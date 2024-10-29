@@ -34,15 +34,15 @@ class ScriptService : public AbstractAPIService
 {
 	Q_OBJECT
 public:
-	ScriptService(QObject* parent = Q_NULLPTR);
+	ScriptService(QObject* parent = nullptr);
 
-	virtual QLatin1String getPath() const Q_DECL_OVERRIDE { return QLatin1String("scripts"); }
+	QLatin1String getPath() const override { return QLatin1String("scripts"); }
 	//! @brief Implements the HTTP GET method
 	//! @see \ref rcScriptServiceGET
-	virtual void get(const QByteArray& operation,const APIParameters& parameters, APIServiceResponse& response) Q_DECL_OVERRIDE;
+	void get(const QByteArray& operation,const APIParameters& parameters, APIServiceResponse& response) override;
 	//! @brief Implements the HTTP POST method
 	//! @see \ref rcScriptServicePOST
-	virtual void post(const QByteArray &operation, const APIParameters& parameters, const QByteArray &data, APIServiceResponse &response) Q_DECL_OVERRIDE;
+	void post(const QByteArray &operation, const APIParameters& parameters, const QByteArray &data, APIServiceResponse &response) override;
 private:
 	StelScriptMgr* scriptMgr;
 };

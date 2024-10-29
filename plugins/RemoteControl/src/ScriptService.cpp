@@ -30,10 +30,10 @@
 #include <QJsonArray>
 #include <QVariant>
 
-ScriptService::ScriptService(QObject *parent) : AbstractAPIService(parent)
+ScriptService::ScriptService(QObject *parent) : AbstractAPIService(parent),
+      scriptMgr(&StelApp::getInstance().getScriptMgr())
 {
 	//this is run in the main thread
-	scriptMgr = &StelApp::getInstance().getScriptMgr();
 }
 
 void ScriptService::get(const QByteArray& operation, const APIParameters &parameters, APIServiceResponse &response)

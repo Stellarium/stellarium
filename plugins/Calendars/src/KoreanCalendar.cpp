@@ -190,7 +190,7 @@ QString KoreanCalendar::getFormattedSolarTermsString() const
 // set date from a vector of calendar date elements sorted from the largest to the smallest.
 // {cycle, year, month, leap-month, day}
 // Time is not changed!
-void KoreanCalendar::setDate(QVector<int> parts)
+void KoreanCalendar::setDate(const QVector<int> &parts)
 {
 	this->parts=parts;
 
@@ -203,7 +203,7 @@ void KoreanCalendar::setDate(QVector<int> parts)
 }
 
 //! @arg parts5={cycle, year, month, leapMonth, day}
-int KoreanCalendar::fixedFromKorean(QVector<int> parts5)
+int KoreanCalendar::fixedFromKorean(const QVector<int> &parts5)
 {
 	const int cycle = parts5.value(0);
 	const int year  = parts5.value(1);
@@ -211,7 +211,7 @@ int KoreanCalendar::fixedFromKorean(QVector<int> parts5)
 	const int leap  = parts5.value(3);
 	const int day   = parts5.value(4);
 
-	const int midYear=qRound(floor(ChineseCalendar::chineseEpoch+((cycle-1)*60+year-1+0.5)*meanTropicalYear));
+	const int midYear=qRound(std::floor(ChineseCalendar::chineseEpoch+((cycle-1)*60+year-1+0.5)*meanTropicalYear));
 	const int newYear=newYearOnOrBefore(midYear);
 	const int p = newMoonOnOrAfter(newYear+(month-1)*29);
 	const QVector<int>d = koreanFromFixed(p);
@@ -238,7 +238,7 @@ QVector<int> KoreanCalendar::koreanFromFixed(int rd)
 		month--;
 	month=StelUtils::amod(month, 12);
 	const bool leapMonth=leapYear && noMajorSolarTerm(m) && !priorLeapMonth(m12, newMoonBefore(m));
-	const int elapsedYears=qRound(floor(1.5-month/12.+(rd-ChineseCalendar::chineseEpoch)/meanTropicalYear));
+	const int elapsedYears=qRound(std::floor(1.5-month/12.+(rd-ChineseCalendar::chineseEpoch)/meanTropicalYear));
 	const int cycle = StelUtils::intFloorDiv(elapsedYears-1, 60)+1;
 	const int year = StelUtils::amod(elapsedYears, 60);
 	const int day = rd-m+1;
@@ -249,7 +249,7 @@ QVector<int> KoreanCalendar::koreanFromFixed(int rd)
 int KoreanCalendar::currentMajorSolarTerm(int rd)
 {
 	double s=solarLongitude(universalFromStandard(rd, koreanLocation(rd)));
-	return StelUtils::amod(2+qRound(floor(s/30.)), 12);
+	return StelUtils::amod(2+qRound(std::floor(s/30.)), 12);
 }
 
 // Return location of Korean calendar computations (Seoul City Hall). Before 1908, this used LMST. CC:UE 19.2
@@ -286,7 +286,7 @@ int KoreanCalendar::majorSolarTermOnOrAfter(int rd)
 int KoreanCalendar::currentMinorSolarTerm(int rd)
 {
 	const double s=solarLongitude(universalFromStandard(rd, koreanLocation(rd)));
-	return StelUtils::amod(3+qRound(floor((s-15.)/30.)), 12);
+	return StelUtils::amod(3+qRound(std::floor((s-15.)/30.)), 12);
 }
 
 // Return minor solar term (CC:UE 19.6)
@@ -309,7 +309,7 @@ int KoreanCalendar::winterSolsticeOnOrBefore(int rd)
 {
 	const double approx=estimatePriorSolarLongitude(double(Calendar::winter), midnightInKorea(rd+1));
 
-	int day=qRound(floor(approx))-2;
+	int day=qRound(std::floor(approx))-2;
 	double lng;
 	do {
 		day++;
@@ -323,14 +323,14 @@ int KoreanCalendar::winterSolsticeOnOrBefore(int rd)
 int KoreanCalendar::newMoonOnOrAfter(int rd)
 {
 	const double t=Calendar::newMoonAtOrAfter(midnightInKorea(rd));
-	return qRound(floor(standardFromUniversal(t, koreanLocation(t))));
+	return qRound(std::floor(standardFromUniversal(t, koreanLocation(t))));
 }
 
 // Return Korean New Moon (CC:UE 19.10)
 int KoreanCalendar::newMoonBefore(int rd)
 {
 	const double t=Calendar::newMoonBefore(midnightInKorea(rd));
-	return qRound(floor(standardFromUniversal(t, koreanLocation(t))));
+	return qRound(std::floor(standardFromUniversal(t, koreanLocation(t))));
 }
 
 // Auxiliary function (CC:UE 19.11)
@@ -466,7 +466,7 @@ int KoreanCalendar::koreanNewYearInGregorianYear(int gYear)
 // This is a mix of Chinese Age and Western calendar, as Koreans consider January 1
 // as turn of the Year in this calculation (https://www.90daykorean.com/korean-age-all-about-age-in-korea/)
 // Therefore: A new-born is aged 1. Age increases at Gregorian New Year.
-int KoreanCalendar::koreanAge(QVector<int>birthdate, int rd)
+int KoreanCalendar::koreanAge(const QVector<int> &birthdate, int rd)
 {
 	const int gYearRD=GregorianCalendar::gregorianFromFixed(rd).at(0);
 	const int rdBirth=fixedFromKorean(birthdate);

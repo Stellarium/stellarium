@@ -53,8 +53,8 @@ void ManualImportWindow::createDialogContent()
 	//Signals
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()),
 	        this, SLOT(retranslate()));
-	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
-	connect(ui->LocationBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
+	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
+	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	connect(ui->lineEditColor, SIGNAL(textChanged(QString)), this, SLOT(parseColorString(QString)));
 	connect(ui->pushButtonSelectColor, SIGNAL(clicked()), this, SLOT(selectColor()));
@@ -86,7 +86,7 @@ void ManualImportWindow::selectColor()
 	setColorButtonColor(color);
 }
 
-void ManualImportWindow::parseColorString(QString colorCode)
+void ManualImportWindow::parseColorString(const QString &colorCode)
 {
 	QStringList colorComponents = colorCode.split(QChar(','));
 	int count = colorComponents.count();
@@ -121,7 +121,7 @@ void ManualImportWindow::parseColorString(QString colorCode)
 	setColorButtonColor(color);
 }
 
-void ManualImportWindow::setColorButtonColor(QColor newColor)
+void ManualImportWindow::setColorButtonColor(const QColor &newColor)
 {
 	qDebug() << "setColorButtonColor()";
 	QPixmap pixmap(16, 16);
@@ -185,12 +185,12 @@ void ManualImportWindow::selectTextureFile(QLineEdit * filePathLineEdit)
 
 	//Select an existing file
 	QStringList supportedFormats;
-	for (auto format : QImageReader::supportedImageFormats())
+	for (const auto &format : QImageReader::supportedImageFormats())
 	{
 		supportedFormats.append(QString("*.%1").arg(QString(format)));//It's a wee bit long...
 	}
 	QString fileFilter = QString("Texture files (%1)").arg(supportedFormats.join(" "));
-	QString newFilePath = QFileDialog::getOpenFileName(Q_NULLPTR, QString(), texturesDirectoryPath, fileFilter);
+	QString newFilePath = QFileDialog::getOpenFileName(&StelMainView::getInstance(), QString(), texturesDirectoryPath, fileFilter);
 
 	//Is the file in one of the two "textures" directories?
 	if (newFilePath.isEmpty())
@@ -208,7 +208,7 @@ void ManualImportWindow::selectTextureFile(QLineEdit * filePathLineEdit)
 		filePathLineEdit->setText(newFileInfo.fileName());
 }
 
-bool ManualImportWindow::verifyTextureFile(QString filePath)
+bool ManualImportWindow::verifyTextureFile(const QString &filePath)
 {
 	//TODO: Absolute path? File exists?
 

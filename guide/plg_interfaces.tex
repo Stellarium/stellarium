@@ -453,11 +453,16 @@ supported.
 \item[Projection] Switch the projection method used, like \autoref{sec:gui:view:markings}.
 \end{description}
 
-\subsection{Remote Control Commandline API}
-\label{sec:plugins:RemoteControl:CLI}
+\subsection{Remote Control API}
+\label{sec:plugins:RemoteControl:API}
 
 Apart from retrieving quick object info in your browser with e.g.\ \url{http://localhost:8090/api/objects/info?format=json&name=Sun},
-it is also possible to send commands via command line\footnote{%
+you can access a running instance of Stellarium with various programming languages. A few examples:
+
+\subsubsection{Commandline}
+\label{sec:plugins:RemoteControl:API:CLI}
+
+It is possible to send commands via command line\footnote{%
   Depending on your operating system or command shell,
   you may have to use double quotes in the \texttt{-\/-data} argument to \command{curl}.}%
 , e.g.,
@@ -477,6 +482,79 @@ To get a complete pretty-printed list of properties and actions, use:
 curl -G -d 'propId=-2&actionId=-2' http://localhost:8090/api/main/status | \
      python -m json.tool 
 \end{commandsScr} 
+
+\subsubsection{Node.js}
+\label{sec:plugins:RemoteControl:API:node.js}
+
+If you want to use \program{node.js} to build your own interface app, you may find the following example helpful.%
+\footnote{Thanks to user FogoVoar}
+It sets the view direction in one of 3 coordinate systems, depending on the argument:
+
+\begin{commandsScr}
+    "j2000" : "[x,y,z]",
+    "jNow"  : "[x,y,z]",
+    "altAz" : "[x,y,z]"
+\end{commandsScr}
+
+\noindent The vector $[x, y, z]$ should be a normalized vector (unit length), derived from 
+either J2000.0 or current equatorial coordinates $(\alpha, \delta)$, 
+or from alt-azimuthal coordinates $(\mathit{Az}, \mathit{alt})$ which are however always counted from south ($[1,0,0]$) towards east ($[0,1,0]$), 
+with the azimuth $\mathit{Az}'$ counted from South towards East, $\mathit{Az}'=180-\mathit{Az}$.
+
+\begin{minipage}{0.3\textwidth}
+\begin{align*}
+x & = & \cos(\delta)*\cos(\alpha)\\
+y & = & \cos(\delta)*\sin(\alpha)\\
+z & = & \sin(\delta)
+\end{align*}
+\end{minipage}\hspace{1cm}
+\begin{minipage}{0.3\textwidth}
+\begin{align*}
+x & = & \cos(\mathit{alt})*\cos(\mathit{Az}')\\
+y & = & \cos(\mathit{alt})*\sin(\mathit{Az}')\\
+z & = & \sin(\mathit{alt}) 
+\end{align*}
+\end{minipage}
+	
+\begin{commandsScr}
+const url = 'http://192.168.xxx.xxx:8090/api/main/view?j2000=[0.5,0.3,0.2]';
+fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+  .then(response => {
+    response.text().then(text => console.log('Raw response:', text));
+    return response.json();
+  })
+\end{commandsScr}
+
+\subsubsection{Python}
+\label{sec:plugins:RemoteControl:API:Python}
+
+An example for time control:
+\begin{commandsScr}
+import requests
+STELLARIUM_URL='http://192.168.1.100:8090/api/main'
+def set_time(julian_day,timerate):
+    url = f"{STELLARIUM_URL}/time"
+    data = "time="+str(julian_day)+"&timerate="+str(timerate)
+    print(f"Request URL: {url}")
+    print(f"Request Data: {data}")
+    try:
+        response = requests.post(url, data=data)
+        print(f"Response Status Code: {response.status_code}")
+        print(f"Response Content: {response.text}")
+        response.raise_for_status()
+        if response.text.strip() == "ok":
+            return {"status": "success", "message": "Time set successfully"}
+        else:
+            return {"status": "error", "message": response.text}
+    except requests.exceptions.RequestException as e:
+        print(f"Error setting time: {e}")
+        return {"status": "error", "message": str(e)}
+\end{commandsScr}
 
   
 \subsection{Developer information}
@@ -565,7 +643,7 @@ If all your Stellarium instances run on the same device, this is of course not
 necessary.
 
 \begin{figure}[ht]
-	\centering\includegraphics[width=\columnwidth]{remotesync_client.png}
+	\centering\includegraphics[width=0.8\columnwidth]{remotesync_client.png}
 	\caption{RemoteSync client settings window}
 	\label{fig:plugins:RemoteSync:client}
 \end{figure}
@@ -613,10 +691,23 @@ versions of Stellarium. You can override this behaviour
 \newFeature{0.21.2} with an entry in the respective section of
 \file{config.ini}:
 
-\begin{configfile}
+\begin{configfile}[\scriptsize]
   [RemoteSync]
   allowVersionMismatch = true
 \end{configfile}
+
+\subsection{Finetuning}
+
+This plugin makes use of the QLoggingCategory infrastructure. By default it is very verbose and prints each transmitted property to the logfile.
+To reduce verbosity when it works, configure an environment variable with these entries (Note the closing semicolon!):
+\begin{commands}[\scriptsize]
+QT_LOGGING_RULES="stel.plugin.remoteSync.debug=true;
+		  stel.plugin.remoteSync.client.debug=false;
+		  stel.plugin.remoteSync.protocol.debug=false;"
+\end{commands}
+
+The final parts may be \texttt{debug|info|warning|critical = true|false}. Default: \texttt{true}.
+
 
 \subsection*{Author and Acknowledgements}
 
@@ -629,6 +720,90 @@ This plugin was created mostly by Florian Schaukowitsch in the 2015-16 campaigns
 % 
 % [This may come as user documentation from SoCiS2020 (?) work]
 
+\newpage
+\section{OnlineQueries Plugin}
+\label{sec:plugins:OnlineQueries}
+
+Stellarium includes and provides lots of information about many kinds
+of objects. However, there are scientific websites which provide even
+more specialized information about particular objects. This plugin 
+\newFeature{0.21.1}\citep{Zotti-etal:SEAC2021} allows online access to several websites on a
+variety of special topics. To retrieve information, select the
+first tab and press the respective button labeled with the information source. 
+The result is displayed in a browser view\footnote{%
+  For technical reasons, on some platforms the
+  result is displayed in the system's default web browser.  On some
+  other platforms, e.g. Windows/WSL with Ubuntu or some ARM computers, the
+  web view fails to work properly.  On these platforms you should
+  manually edit \file{config.ini} and set the
+  \texttt{disable\_webview} entry in the config file.}.
+
+\begin{description}
+\item[Wikipedia] The free online encyclopedia provides information
+  about many bright stars, the planets, moons and many asteroids, as
+  well as many deep-sky objects. The lookup is based on the English
+  proper name.
+\item[AAVSO] The \indexterm{International Variable Star
+  Index}\footnote{\url{https://www.aavso.org/vsx/}} of the
+  \indexterm{American Association of Variable Star Observers} (AAVSO)
+  provides data about variable stars.
+\item[GCVS] The \indexterm{General Catalogue of Variable
+  Stars}\footnote{\url{http://www.sai.msu.su/gcvs/}} of the Sternberg
+  Astronomical Institute and the Institute of Astronomy of the Russian
+  Academy of Sciences in Moscow.
+  %% N.B.: Ancient-Skies unfortunately did not resurface for now.
+%\item[Ancient-Skies] A private project founded in preparation of the
+%  \indexterm{International Year of Astronomy} 2009 which collects
+%  information about star names and their mythologies
+%  \citep{AncientSkies:2011}. The site is preparing a relaunch in 2022.
+\end{description}
+
+In addition, you can configure up to three further websites. These
+must provide some public website which takes a query for a Hipparcos
+star number or object name.  For example, the website
+\url{https://biblicalastronomy.co/playground/fetch.cfm?Hipp=n}
+provides various data and cross-references for a star with Hipparcos
+number \texttt{n}.
+
+Regardless of the current program language, the result is always
+presented in English or the language of the respective website.
+
+% \paragraph{Note:}
+
+\subsection{Section \big[OnlineQueries\big] in config.ini file}
+%\label{sec:plugins:OnlineQueries:configuration}
+
+You can edit the \file{config.ini} file to change settings of the
+OnlineQueries plugin.  The only strings you should need to touch are
+the \texttt{customN\_\ldots} entries ($\mathtt{N}\in \left\{ 1, 2,
+3\right\}$). The placeholder \texttt{\%1} will be filled by either the
+Hipparcos number (if the respective \texttt{customN\_use\_hip} is
+\texttt{true}) or by the first English name used in Stellarium. The
+\texttt{customN\_use\_hip} should be \texttt{true} to use a star's
+Hipparcos number, or \texttt{false} to use the English name as key.
+
+
+\begin{center}
+{\small
+\begin{tabular}{l|l|l}\toprule
+\emph{ID} & \emph{Type} & \emph{Default}\\\midrule
+%ancientskies\_url    &string & (don't override)\\ % https://www.ancient-skies.org/api.php?apikey=fZdn9QsNdCAY4KggkV2T\&response=HTML\&entity=star\&catalog=HIPPARCOS\&id=\%1 \\
+aavso\_hip\_url      &string & (don't override)\\ % https://www.aavso.org/vsx/index.php?view=api.object\&ident=HIP\%1 \\
+aavso\_oid\_url      &string & (don't override)\\ % https://www.aavso.org/vsx/index.php?view=detail.top\&oid=\%1      \\
+gcvs\_url            &string & (don't override)\\ % http://www.sai.msu.su/gcvs/cgi-bin/ident.cgi?cat=Hip+\&num=\%1    \\
+wikipedia\_url       &string & (don't override)\\ % https://en.wikipedia.org/wiki/\%1 \\
+\midrule
+custom1\_url         &string & https://biblicalastronomy.co/playground/fetch.cfm?Hipp=\%1 \\
+custom2\_url         &string & \\
+custom3\_url         &string & \\
+custom1\_use\_hip    &boolean& true \\
+custom2\_use\_hip    &boolean& true \\
+custom3\_use\_hip    &boolean& true \\\midrule
+disable\_webview     &boolean&false \\
+\bottomrule
+\end{tabular}
+}
+\end{center}
 
 \newpage
 
@@ -641,14 +816,18 @@ File \file{data/ssystem\_major.ini} in the installation directory contains data 
 File \file{data/ssystem\_minor.ini} contains data for minor bodies, i.e., planetoids and comets.
 The file will be taken from the user data directory if it also exists there, which means that users can add minor planets or comets as they become observable by editing this file.
 
-The orbits of minor bodies (minor planets and comets) are specified with \indexterm{orbital elements} for 
+The orbits of minor bodies (minor planets and comets) are specified with \indexterm[orbital elements, osculating]{orbital elements} for 
 \indexterm{Kepler orbits} (after \name[Johannes]{Kepler} (1572--1630) who found the true shape of the orbit 
 of a small body around a large one being a conic section, i.e., circle, ellipse, parabola or hyperbola). These elements 
 describe the instantaneous shape and orientation of the object's orbit around the Sun at a particular time 
-called the \indexterm{epoch}.  See Appendix~\ref{sec:ssystem.ini} for more details. 
-We compute positions from these unperturbed orbits, but the result is only valid for 
+called the \indexterm{epoch}.  
+We compute positions from these \indexterm[orbital elements, osculating]{osculating elements} of minor body orbits, but the result is only valid for 
 a moderately short timespan around the epoch, because the major planets can exert noticeable gravitational perturbations 
-on the objects when they come close, and so these orbital elements need to be updated on a regular basis. 
+on the objects when they come close, and so these orbital elements, which are mere snapshots in time, need to be updated on a regular basis. 
+Stellarium does not perform numerical integration that could work out the orbital changes automatically, 
+and so the element file needs to be modified to compute positions further away from the orbit's epoch. 
+See Appendix~\ref{sec:ssystem.ini} for more details, 
+and see e.g.\ \citet{Meeus:Morsels4} for a discussion of a few interesting examples of orbital development.
 When you go out hunting for asteroids and comets, this plugin is for you.
 
 This plugin provides access to the Minor Planet Center (MPC\footnote{\url{https://www.minorplanetcenter.net}}) server where the latest Solar System information can be found. When this plugin is

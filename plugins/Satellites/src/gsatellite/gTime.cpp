@@ -29,10 +29,10 @@
 // gtime
 #include "gTime.hpp"
 // GExcpt
-#include "stdsat.h"
+//#include "stdsat.h"
 #include <cmath>
-#include <cstdio>
-#include <cstdlib>
+//#include <cstdio>
+//#include <cstdlib>
 
 // Class GTimeSpan
 
@@ -69,7 +69,7 @@ gTime gTime::getCurrentTime()
 	struct tm timeinfo;
 
 	time(&rawtime);
-	#ifdef _MSC_VER
+	#if defined(_MSC_VER) || defined(__MINGW32__)
 	gmtime_s(&timeinfo, &rawtime);
 	#else
 	gmtime_r(&rawtime, &timeinfo);
@@ -88,21 +88,9 @@ gTime::gTime(int nYear, int nMonth, int nDay, int nHour, int nMin, double nSec)
 	// Calculate N, the day of the year (1..366)
 	int F1 = static_cast<int>((275.0 * nMonth) / 9.0);
 	int F2 = static_cast<int>((nMonth + 9.0) / 12.0);
-	int N;
-
-	if(isLeapYear(nYear))
-	{
-		// Leap year
-		N = F1 - F2 + nDay - 30;
-	}
-	else
-	{
-		// Common year
-		N = F1 - (2 * F2) + nDay - 30;
-	}
+	int N  = F1 + nDay - 30 - (isLeapYear(nYear) ? F2 : 2*F2);
 
 	double dDay = N + (nHour + (nMin + (nSec / 60.0)) / 60.0) / 24.0;
-
 
 	setTime(nYear, dDay);
 }
@@ -128,7 +116,7 @@ gTimeSpan gTime::getTimeToUTC()
 	time_t when   = time(nullptr);
 	struct tm utc;
 	struct tm lcl;
-	#ifdef _MSC_VER
+	#if defined(_MSC_VER) || defined(__MINGW32__)
 	gmtime_s(&utc, &when);
 	localtime_s(&lcl, &when);
 	#else
@@ -154,7 +142,7 @@ const gTime& gTime::operator=(time_t t)
 {
 	struct tm ptm;
 
-	#ifdef _MSC_VER
+	#if defined(_MSC_VER) || defined(__MINGW32__)
 	gmtime_s(&ptm, &t);
 	#else
 	gmtime_r(&t, &ptm);
@@ -194,9 +182,9 @@ void gTime::toCalendarDate(int *pYear, int *pMonth , double *pDom) const
 	assert(pMonth != nullptr);
 	assert(pDom != nullptr);
 
-	double jdAdj = m_time + 0.5;
-	int Z        = static_cast<int>(jdAdj);  // integer part
-	double F     = jdAdj - Z;   // fractional part
+	const double jdAdj = m_time + 0.5;
+	const int Z        = static_cast<int>(jdAdj);  // integer part
+	const double F     = jdAdj - Z;   // fractional part
 	double A=Z;
 
 	if(Z >= 2299161)
@@ -221,9 +209,8 @@ void gTime::toCalendarDate(int *pYear, int *pMonth , double *pDom) const
 
 double gTime::toJCenturies() const
 {
-	double jd;
-	double UT = fmod((m_time + 0.5), 1.0);
-	jd = m_time - UT;
+	const double UT = fmod((m_time + 0.5), 1.0);
+	const double jd = m_time - UT;
 	return (jd- JDAY_JAN1_12H_2000) / 36525.0;
 }
 
@@ -233,19 +220,18 @@ double gTime::toJCenturies() const
 // prime meridian.
 double gTime::toThetaGMST() const
 {
-	double jd, Theta_JD;
-	double UT = fmod((m_time + 0.5), 1.0);
-	jd = m_time - UT;
-	double TU = (jd- JDAY_JAN1_12H_2000) / 36525.0;
+	const double UT = fmod((m_time + 0.5), 1.0);
+	const double jd = m_time - UT;
+	const double TU = (jd- JDAY_JAN1_12H_2000) / 36525.0;
 
 	double GMST = 24110.54841 + TU *
 	              (8640184.812866 + TU * (0.093104 - TU * 6.2e-06));
 
 	GMST = fmod((GMST + KSEC_PER_DAY * OMEGA_E * UT),KSEC_PER_DAY);
-	Theta_JD=(K2PI * (GMST / KSEC_PER_DAY));
+	double Theta_JD=(2.*M_PI * (GMST / KSEC_PER_DAY));
 
 	if(Theta_JD <0.0)
-		Theta_JD+=K2PI;
+		Theta_JD+=2.*M_PI;
 
 	return Theta_JD;
 }
@@ -254,7 +240,7 @@ double gTime::toThetaGMST() const
 // Definition: Calculate Theta Angle at Local Mean Time for the Julian date.
 double gTime::toThetaLMST(double longitude) const
 {
-	return fmod(toThetaGMST() + longitude,  K2PI);
+	return fmod(toThetaGMST() + longitude,  2.*M_PI);
 }
 
 

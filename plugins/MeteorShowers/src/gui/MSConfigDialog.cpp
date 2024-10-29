@@ -69,8 +69,8 @@ void MSConfigDialog::createDialogContent()
 	}
 
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
-	connect(m_ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
-	connect(m_ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
+	connect(m_ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
+	connect(m_ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 	connect(m_ui->bRestoreDefaults, SIGNAL(clicked()), this, SLOT(restoreDefaults()));
 
 	// General tab
@@ -84,9 +84,9 @@ void MSConfigDialog::createDialogContent()
 	connect(m_ui->enableLabels, SIGNAL(clicked(bool)), m_mgr, SLOT(setEnableLabels(bool)));
 	connect(m_ui->fontSize, SIGNAL(valueChanged(int)), m_mgr, SLOT(setFontSize(int)));
 
-	connectColorButton(m_ui->setColorARG, "MeteorShowers.colorARG", "MeteorShowers/colorARG");
-	connectColorButton(m_ui->setColorARC, "MeteorShowers.colorARC", "MeteorShowers/colorARC");
-	connectColorButton(m_ui->setColorIR,  "MeteorShowers.colorIR",  "MeteorShowers/colorIR");
+	m_ui->setColorARG->setup("MeteorShowers.colorARG", "MeteorShowers/colorARG");
+	m_ui->setColorARC->setup("MeteorShowers.colorARC", "MeteorShowers/colorARC");
+	m_ui->setColorIR ->setup("MeteorShowers.colorIR",  "MeteorShowers/colorIR");
 
 	// Update tab
 	connect(m_ui->enableUpdates, SIGNAL(clicked(bool)), m_mgr, SLOT(setEnableAutoUpdates(bool)));
@@ -190,7 +190,7 @@ void MSConfigDialog::setAboutHtml()
 {
 	QString html = "<html><head></head><body>"
 	"<h2>" + q_("Meteor Showers Plug-in") + "</h2>"
-	"<table width=\"90%\">"
+	"<table class='layout' width=\"90%\">"
 		"<tr width=\"30%\"><td><strong>" + q_("Version") + ":</strong></td><td>" + METEORSHOWERS_PLUGIN_VERSION + "</td></tr>"
 		"<tr><td><strong>" + q_("License") + ":</strong></td><td>" + METEORSHOWERS_PLUGIN_LICENSE + "</td></tr>"
 		"<tr><td><strong>" + q_("Author") + ":</strong></td><td>Marcos Cardinot &lt;mcardinot@gmail.com&gt;</td></tr>"

@@ -31,17 +31,17 @@ class TonemappingDialog : public StelDialog
 
 public:
 	TonemappingDialog();
-	virtual ~TonemappingDialog() Q_DECL_OVERRIDE;
+	~TonemappingDialog() override;
 
 public slots:
-	virtual void retranslate() Q_DECL_OVERRIDE;
+	void retranslate() override;
 
 private slots:
 	void resetTonemapping();
 
 protected:
         //! Initialize the dialog widgets and connect the signals/slots.
-	virtual void createDialogContent() Q_DECL_OVERRIDE;
+	void createDialogContent() override;
 	Ui_TonemappingDialogForm *ui;
 };
 

@@ -38,13 +38,13 @@ public:
 	//! Most traditional skies do not have boundaries.
 	//! Some atlases in the 18th and 19th centuries had curved boundaries that differed between authors.
 	//! Only IAU implemented "approved" boundaries, but a similar technique could be used for other skycultures.
-	enum BOUNDARIES
+	enum class BoundariesType
 	{
-		NONE = -1,
+		None = -1,
 		IAU,
-		OWN
+		Own
 	};
-	Q_ENUM(BOUNDARIES)
+	Q_ENUM(BoundariesType)
 
 	//! Since V0.19. A rough classification scheme that may allow filtering and at least some rough idea of quality control.
 	//! In future versions, this scheme could be refined or changed, and external reviewers
@@ -96,8 +96,8 @@ public:
 	QString license;
 	//! The name of region
 	QString region;
-	//! Type of the boundaries (enum)
-	BOUNDARIES boundaries;
+	//! Type of the boundaries
+	BoundariesType boundariesType;
 	//! Classification of sky culture (enum)
 	CLASSIFICATION classification;
 };
@@ -114,11 +114,11 @@ class StelSkyCultureMgr : public QObject
 	Q_PROPERTY(QString currentSkyCultureID
 		   READ getCurrentSkyCultureID
 		   WRITE setCurrentSkyCultureID
-		   NOTIFY currentSkyCultureChanged)
+		   NOTIFY currentSkyCultureIDChanged)
 	Q_PROPERTY(QString defaultSkyCultureID
 		   READ getDefaultSkyCultureID
 		   WRITE setDefaultSkyCultureID
-		   NOTIFY defaultSkyCultureChanged)
+		   NOTIFY defaultSkyCultureIDChanged)
 
 public:
 	StelSkyCultureMgr();
@@ -147,14 +147,12 @@ public slots:
 	//! @param id the sky culture ID.
 	//! @return true on success; else false.
 	bool setCurrentSkyCultureID(const QString& id);
+	//! Reload the current sky culture
+	void reloadSkyCulture();
 
 	//! Get the type of boundaries of the current sky culture
 	//! Config option: info/boundaries
-	//! Keys:
-	//! - none (-1; using by default)
-	//! - generic (0)
-	//! - own (1)
-	int getCurrentSkyCultureBoundariesIdx() const;
+	StelSkyCulture::BoundariesType getCurrentSkyCultureBoundariesType() const;
 
 	//! Get the classification index for the current sky culture
 	//! Config option: info/classification
@@ -205,10 +203,10 @@ public slots:
 signals:
 	//! Emitted whenever the default sky culture changed.
 	//! @see setDefaultSkyCultureID
-	void defaultSkyCultureChanged(const QString& id);
+	void defaultSkyCultureIDChanged(const QString& id);
 
 	//! Emitted when the current sky culture changes
-	void currentSkyCultureChanged(const QString& id);
+	void currentSkyCultureIDChanged(const QString& id);
 	
 private:
 	//! Get the culture name in English associated with a specified directory.

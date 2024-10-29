@@ -58,8 +58,8 @@ void AngleMeasureDialog::createDialogContent()
 	connect(gui, SIGNAL(flagUseKineticScrollingChanged(bool)), this, SLOT(enableKineticScrolling(bool)));
 
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
-	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
-	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
+	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
+	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	connectBoolProperty(ui->panAndSelectCheckBox,			"AngleMeasure.flagPanAndSelect");
 	connectBoolProperty(ui->followCursorCheckBox, 			"AngleMeasure.flagFollowCursor");
@@ -71,10 +71,10 @@ void AngleMeasureDialog::createDialogContent()
 	connectBoolProperty(ui->azAltStartOnSkyCheckBox,		"AngleMeasure.flagShowHorizontalStartSkylinked");
 	connectBoolProperty(ui->azAltEndOnSkyCheckBox,			"AngleMeasure.flagShowHorizontalEndSkylinked");
 
-	connectColorButton(ui->equatorialLineColorToolButton,	"AngleMeasure.equatorialLineColor", "AngleMeasure/line_color");
-	connectColorButton(ui->equatorialTextColorToolButton,	"AngleMeasure.equatorialTextColor", "AngleMeasure/text_color");
-	connectColorButton(ui->horizontalLineColorToolButton,	"AngleMeasure.horizontalLineColor", "AngleMeasure/line_color_horizontal");
-	connectColorButton(ui->horizontalTextColorToolButton,	"AngleMeasure.horizontalTextColor", "AngleMeasure/text_color_horizontal");
+	ui->equatorialLineColorToolButton->setup("AngleMeasure.equatorialLineColor", "AngleMeasure/line_color");
+	ui->equatorialTextColorToolButton->setup("AngleMeasure.equatorialTextColor", "AngleMeasure/text_color");
+	ui->horizontalLineColorToolButton->setup("AngleMeasure.horizontalLineColor", "AngleMeasure/line_color_horizontal");
+	ui->horizontalTextColorToolButton->setup("AngleMeasure.horizontalTextColor", "AngleMeasure/text_color_horizontal");
 
 	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), this, SLOT(restoreDefaults()));
 
@@ -95,7 +95,7 @@ void AngleMeasureDialog::restoreDefaults()
 void AngleMeasureDialog::setAboutHtml(void)
 {
 	QString html = "<html><head></head><body>";
-	html += "<h2>" + q_("Angle Measure Plug-in") + "</h2><table width=\"90%\">";
+	html += "<h2>" + q_("Angle Measure Plug-in") + "</h2><table class='layout' width=\"90%\">";
 	html += "<tr width=\"30%\"><td><strong>" + q_("Version") + ":</strong></td><td>" + ANGLEMEASURE_PLUGIN_VERSION + "</td></tr>";
 	html += "<tr><td><strong>" + q_("License") + ":</strong></td><td>" + ANGLEMEASURE_PLUGIN_LICENSE + "</td></tr>";
 	html += "<tr><td><strong>" + q_("Author") + ":</strong></td><td>Matthew Gates</td></tr>";

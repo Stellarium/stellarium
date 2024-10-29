@@ -60,7 +60,8 @@ double SporadicMeteorMgr::getCallOrder(StelModuleActionName actionName) const
 {
 	if (actionName == StelModule::ActionDraw)
 	{
-		return GETSTELMODULE(SolarSystem)->getCallOrder(actionName) + 10.;
+		static SolarSystem *ss=GETSTELMODULE(SolarSystem);
+		return ss->getCallOrder(actionName) + 10.;
 	}
 	return 0;
 }
@@ -102,11 +103,7 @@ void SporadicMeteorMgr::update(double deltaTime)
 	float rate = mpf / static_cast<float>(maxMpf);
 	for (int i = 0; i < maxMpf; ++i)
 	{
-#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
 		float prob = StelApp::getInstance().getRandF();
-#else
-		float prob = static_cast<float>(qrand()) / static_cast<float>(RAND_MAX);
-#endif
 		if (prob < rate)
 		{
 			SporadicMeteor* m = new SporadicMeteor(core, m_maxVelocity, m_bolideTexture);
@@ -129,7 +126,7 @@ void SporadicMeteorMgr::draw(StelCore* core)
 		return;
 	}
 
-	LandscapeMgr* landmgr = GETSTELMODULE(LandscapeMgr);
+	static LandscapeMgr* landmgr = GETSTELMODULE(LandscapeMgr);
 	if (landmgr->getFlagAtmosphere() && landmgr->getLuminance() > 5.f)
 	{
 		return;
@@ -137,7 +134,7 @@ void SporadicMeteorMgr::draw(StelCore* core)
 
 	// step through and draw all active meteors
 	StelPainter sPainter(core->getProjection(StelCore::FrameAltAz));
-	for (auto* m: qAsConst(activeMeteors))
+	for (auto* m: std::as_const(activeMeteors))
 	{
 		m->draw(core, sPainter);
 	}

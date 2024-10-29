@@ -17,12 +17,6 @@
 */
 
 #include "StelApp.hpp"
-#include "StelCore.hpp"
-#include "StelPropertyMgr.hpp"
-#include "StelLocaleMgr.hpp"
-#include "StelModuleMgr.hpp"
-#include "StelTranslator.hpp"
-#include "StelUtils.hpp"
 #include "ConfigureOrbitColorsDialog.hpp"
 #include "ui_orbitColorsDialog.h"
 
@@ -52,8 +46,8 @@ void ConfigureOrbitColorsDialog::createDialogContent()
 	
 	//Signals and slots
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
-	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
-	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
+	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
+	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	QString activeColorStyle = StelApp::getInstance().getModule("SolarSystem")->property("orbitColorStyle").toString();
 
@@ -61,32 +55,35 @@ void ConfigureOrbitColorsDialog::createDialogContent()
 		ui->groupsRadioButton->setChecked(true);
 	else if (activeColorStyle=="major_planets")
 		ui->majorPlanetsRadioButton->setChecked(true);
+	else if (activeColorStyle=="major_planets_minor_types")
+		ui->majorPlanetsAndMinorTypeRadioButton->setChecked(true);
 	else
 		ui->oneColorRadioButton->setChecked(true);
 	connect(ui->oneColorRadioButton, SIGNAL(clicked(bool)), this, SLOT(setColorStyle()));
 	connect(ui->groupsRadioButton, SIGNAL(clicked(bool)), this, SLOT(setColorStyle()));
 	connect(ui->majorPlanetsRadioButton, SIGNAL(clicked(bool)), this, SLOT(setColorStyle()));
+	connect(ui->majorPlanetsAndMinorTypeRadioButton, SIGNAL(clicked(bool)), this, SLOT(setColorStyle()));
 
-	connectColorButton(ui->colorGenericOrbits,             "SolarSystem.orbitsColor",                     "color/sso_orbits_color");
-	connectColorButton(ui->colorGroupsMajorPlanetsOrbits,  "SolarSystem.majorPlanetsOrbitsColor",         "color/major_planet_orbits_color");
-	connectColorButton(ui->colorGroupsMinorPlanetsOrbits,  "SolarSystem.minorPlanetsOrbitsColor",         "color/minor_planet_orbits_color");
-	connectColorButton(ui->colorGroupsDwarfPlanetsOrbits,  "SolarSystem.dwarfPlanetsOrbitsColor",         "color/dwarf_planet_orbits_color");
-	connectColorButton(ui->colorGroupsMoonsOrbits,         "SolarSystem.moonsOrbitsColor",                "color/moon_orbits_color");
-	connectColorButton(ui->colorGroupsCubewanosOrbits,     "SolarSystem.cubewanosOrbitsColor",            "color/cubewano_orbits_color");
-	connectColorButton(ui->colorGroupsPlutinosOrbits,      "SolarSystem.plutinosOrbitsColor",             "color/plutino_orbits_color");
-	connectColorButton(ui->colorGroupsSDOOrbits,           "SolarSystem.scatteredDiskObjectsOrbitsColor", "color/sdo_orbits_color");
-	connectColorButton(ui->colorGroupsOCOOrbits,           "SolarSystem.oortCloudObjectsOrbitsColor",     "color/oco_orbits_color");
-	connectColorButton(ui->colorGroupsCometsOrbits,        "SolarSystem.cometsOrbitsColor",               "color/comet_orbits_color");
-	connectColorButton(ui->colorGroupsSednoidsOrbits,      "SolarSystem.sednoidsOrbitsColor",             "color/sednoid_orbits_color");
-	connectColorButton(ui->colorGroupsInterstellarOrbits,  "SolarSystem.interstellarOrbitsColor",         "color/interstellar_orbits_color");
-	connectColorButton(ui->colorMPMercuryOrbit,            "SolarSystem.mercuryOrbitColor",               "color/mercury_orbit_color");
-	connectColorButton(ui->colorMPVenusOrbit,              "SolarSystem.venusOrbitColor",                 "color/venus_orbit_color");
-	connectColorButton(ui->colorMPEarthOrbit,              "SolarSystem.earthOrbitColor",                 "color/earth_orbit_color");
-	connectColorButton(ui->colorMPMarsOrbit,               "SolarSystem.marsOrbitColor",                  "color/mars_orbit_color");
-	connectColorButton(ui->colorMPJupiterOrbit,            "SolarSystem.jupiterOrbitColor",               "color/jupiter_orbit_color");
-	connectColorButton(ui->colorMPSaturnOrbit,             "SolarSystem.saturnOrbitColor",                "color/saturn_orbit_color");
-	connectColorButton(ui->colorMPUranusOrbit,             "SolarSystem.uranusOrbitColor",                "color/uranus_orbit_color");
-	connectColorButton(ui->colorMPNeptuneOrbit,            "SolarSystem.neptuneOrbitColor",               "color/neptune_orbit_color");
+	ui->colorGenericOrbits           ->setup("SolarSystem.orbitsColor",                     "color/sso_orbits_color");
+	ui->colorGroupsMajorPlanetsOrbits->setup("SolarSystem.majorPlanetsOrbitsColor",         "color/major_planet_orbits_color");
+	ui->colorGroupsMinorPlanetsOrbits->setup("SolarSystem.minorPlanetsOrbitsColor",         "color/minor_planet_orbits_color");
+	ui->colorGroupsDwarfPlanetsOrbits->setup("SolarSystem.dwarfPlanetsOrbitsColor",         "color/dwarf_planet_orbits_color");
+	ui->colorGroupsMoonsOrbits       ->setup("SolarSystem.moonsOrbitsColor",                "color/moon_orbits_color");
+	ui->colorGroupsCubewanosOrbits   ->setup("SolarSystem.cubewanosOrbitsColor",            "color/cubewano_orbits_color");
+	ui->colorGroupsPlutinosOrbits    ->setup("SolarSystem.plutinosOrbitsColor",             "color/plutino_orbits_color");
+	ui->colorGroupsSDOOrbits         ->setup("SolarSystem.scatteredDiskObjectsOrbitsColor", "color/sdo_orbits_color");
+	ui->colorGroupsOCOOrbits         ->setup("SolarSystem.oortCloudObjectsOrbitsColor",     "color/oco_orbits_color");
+	ui->colorGroupsCometsOrbits      ->setup("SolarSystem.cometsOrbitsColor",               "color/comet_orbits_color");
+	ui->colorGroupsSednoidsOrbits    ->setup("SolarSystem.sednoidsOrbitsColor",             "color/sednoid_orbits_color");
+	ui->colorGroupsInterstellarOrbits->setup("SolarSystem.interstellarOrbitsColor",         "color/interstellar_orbits_color");
+	ui->colorMPMercuryOrbit          ->setup("SolarSystem.mercuryOrbitColor",               "color/mercury_orbit_color");
+	ui->colorMPVenusOrbit            ->setup("SolarSystem.venusOrbitColor",                 "color/venus_orbit_color");
+	ui->colorMPEarthOrbit            ->setup("SolarSystem.earthOrbitColor",                 "color/earth_orbit_color");
+	ui->colorMPMarsOrbit             ->setup("SolarSystem.marsOrbitColor",                  "color/mars_orbit_color");
+	ui->colorMPJupiterOrbit          ->setup("SolarSystem.jupiterOrbitColor",               "color/jupiter_orbit_color");
+	ui->colorMPSaturnOrbit           ->setup("SolarSystem.saturnOrbitColor",                "color/saturn_orbit_color");
+	ui->colorMPUranusOrbit           ->setup("SolarSystem.uranusOrbitColor",                "color/uranus_orbit_color");
+	ui->colorMPNeptuneOrbit          ->setup("SolarSystem.neptuneOrbitColor",               "color/neptune_orbit_color");
 }
 
 void ConfigureOrbitColorsDialog::setColorStyle()
@@ -94,6 +91,8 @@ void ConfigureOrbitColorsDialog::setColorStyle()
 	QString colorStyle;
 	if (ui->majorPlanetsRadioButton->isChecked())
 		colorStyle = "major_planets";
+	else if (ui->majorPlanetsAndMinorTypeRadioButton->isChecked())
+		colorStyle = "major_planets_minor_types";
 	else if (ui->groupsRadioButton->isChecked())
 		colorStyle = "groups";
 	else

@@ -17,6 +17,7 @@ IF(${XGETTEXT_FOUND})
                --keyword=_
                --keyword=N_
                --keyword=q_
+               --keyword=NC_:1,2c
                --keyword=qc_:1,2c
                --keyword=translate:2
                --keyword=translate:2,3c

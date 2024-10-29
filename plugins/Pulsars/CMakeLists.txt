@@ -1,7 +1,6 @@
-SET(PSR_MAJOR "0")
-SET(PSR_MINOR "3")
-SET(PSR_PATCH "1")
-SET(PSR_VERSION "${PSR_MAJOR}.${PSR_MINOR}.${PSR_PATCH}")
+# This is the cmake config file for the Pulsars plugin
+# Further: Use program version number. (Static plugin, why bother?)
+SET(PSR_VERSION "${VERSION}")
 
 ADD_DEFINITIONS(-DPULSARS_PLUGIN_VERSION="${PSR_VERSION}")
 ADD_DEFINITIONS(-DPULSARS_PLUGIN_LICENSE="GNU GPLv2 or later")

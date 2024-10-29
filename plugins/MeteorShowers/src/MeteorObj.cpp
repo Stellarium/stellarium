@@ -27,13 +27,7 @@ MeteorObj::MeteorObj(const StelCore* core, int speed, const float& radiantAlpha,
 {
 	// if speed is zero, use a random value
 	if (!speed)
-	{
-		#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
 		speed = StelApp::getInstance().getRandBounded(11, 73);  // abs range 11-72 km/s
-		#else
-		speed = 11 + static_cast<int>(static_cast<float>(qrand()) / (static_cast<float>(RAND_MAX) + 1) * 61);  // abs range 11-72 km/s
-		#endif
-	}
 
 	// building meteor model
 	init(radiantAlpha, radiantDelta, speed, colors);
@@ -47,14 +41,10 @@ MeteorObj::MeteorObj(const StelCore* core, int speed, const float& radiantAlpha,
 	if (pidx > 1.f)
 	{
 		// higher pidx implies a larger fraction of faint meteors than average
-		#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
 		float prob = StelApp::getInstance().getRandF();
-		#else
-		float prob = static_cast<float>(qrand()) / (static_cast<float>(RAND_MAX) + 1);
-		#endif
 		if (prob > 1.f / pidx)
 		{
-			// Increase the absolute magnitude ([-3; 4.5]) in 1.5!
+			// Increase the absolute magnitude ([-4.5; 4.5]) in 1.5!
 			// As we are working on a 0-1 scale (where 1 is brighter),
 			// more 1.5 means less 0.2!
 			setAbsMag(absMag() - 0.2f);

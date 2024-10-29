@@ -78,7 +78,7 @@ public:
 	MeteorShowersMgr();
 
 	//! Destructor.
-	virtual ~MeteorShowersMgr() Q_DECL_OVERRIDE;
+	~MeteorShowersMgr() override;
 
 	//! Restore default catalog.
 	bool restoreDefaultCatalog(const QString& destination);
@@ -126,12 +126,12 @@ public:
 	//
 	// Methods defined in the StelModule class
 	//
-	virtual void init() Q_DECL_OVERRIDE;
-	virtual void deinit() Q_DECL_OVERRIDE;
-	virtual void update(double deltaTime) Q_DECL_OVERRIDE;
-	virtual void draw(StelCore* core) Q_DECL_OVERRIDE;
-	virtual double getCallOrder(StelModuleActionName actionName) const Q_DECL_OVERRIDE;
-	virtual bool configureGui(bool show=true) Q_DECL_OVERRIDE;
+	void init() override;
+	void deinit() override;
+	void update(double deltaTime) override;
+	void draw(StelCore* core) override;
+	double getCallOrder(StelModuleActionName actionName) const override;
+	bool configureGui(bool show=true) override;
 
 signals:
 	//! @param state the new update state.
@@ -287,7 +287,7 @@ public slots:
 	void restoreDefaultSettings();
 
 	//! Display a message. This is used for plugin-specific warnings and such
-	void displayMessage(const QString& message, const QString hexColor="#999999");
+	void displayMessage(const QString& message, const QString &hexColor="#999999");
 
 private slots:
 	void checkForUpdates();
@@ -341,7 +341,7 @@ private:
 	void loadTextures();
 	bool loadCatalog(const QString& jsonPath);
 
-	void startDownload(QString url);
+	void startDownload(const QString &url);
 	void deleteDownloadProgressBar();
 
 	//! Enable/disable the Meteor Showers plugin.
@@ -359,9 +359,9 @@ class MeteorShowersStelPluginInterface : public QObject, public StelPluginInterf
 	Q_PLUGIN_METADATA(IID StelPluginInterface_iid)
 	Q_INTERFACES(StelPluginInterface)
 public:
-	virtual StelModule* getStelModule() const Q_DECL_OVERRIDE;
-	virtual StelPluginInfo getPluginInfo() const Q_DECL_OVERRIDE;
-	virtual QObjectList getExtensionList() const Q_DECL_OVERRIDE { return QObjectList(); }
+	StelModule* getStelModule() const override;
+	StelPluginInfo getPluginInfo() const override;
+	//QObjectList getExtensionList() const override { return QObjectList(); }
 };
 
 #endif /*METEORSHOWERSMGR_HPP*/

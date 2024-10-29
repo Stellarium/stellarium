@@ -804,7 +804,7 @@ SphericalRegionP SphericalPolygon::multiUnion(const QList<SphericalRegionP>& reg
 		}
 		// res now contains n list of regions to union together		
 		QList<SphericalRegionP> mappedRegions;
-		for (const auto& l : qAsConst(res))
+		for (const auto& l : std::as_const(res))
 		{
 			mappedRegions.append(SphericalPolygon::multiUnion(l));
 		}
@@ -874,7 +874,7 @@ StelVertexArray SphericalConvexPolygon::getFillVertexArray(const Vec3d &observer
 	else
 	{
 		aberratedContour.clear();
-		for (const Vec3d &v: qAsConst(contour))
+		for (const Vec3d &v: std::as_const(contour))
 		{
 			Q_ASSERT(qAbs(v.normSquared()-1.0)<0.0001);
 			Vec3d vec=v+observerVelocityForAberration;
@@ -897,7 +897,7 @@ StelVertexArray SphericalConvexPolygon::getOutlineVertexArray(Vec3d observerVelo
 	else
 	{
 		aberratedContour.clear();
-		for (const Vec3d &v: qAsConst(contour))
+		for (const Vec3d &v: std::as_const(contour))
 		{
 			Q_ASSERT(qAbs(v.normSquared()-1.0)<0.0001);
 			Vec3d vec=v+observerVelocityForAberration;
@@ -1059,11 +1059,11 @@ void SphericalConvexPolygon::updateBoundingCap()
 	Q_ASSERT(contour.size()>2);
 	// Use this crapy algorithm instead
 	cachedBoundingCap.n.set(0,0,0);
-	for (const auto& v : qAsConst(contour))
+	for (const auto& v : std::as_const(contour))
 		cachedBoundingCap.n+=v;
 	cachedBoundingCap.n.normalize();
 	cachedBoundingCap.d = 1.;
-	for (const auto& v : qAsConst(contour))
+	for (const auto& v : std::as_const(contour))
 	{
 		if (cachedBoundingCap.n*v<cachedBoundingCap.d)
 			cachedBoundingCap.d = cachedBoundingCap.n*v;
@@ -1109,7 +1109,7 @@ StelVertexArray SphericalTexturedConvexPolygon::getFillVertexArray(const Vec3d &
 	else
 	{
 		aberratedContour.clear();
-		for (const Vec3d &v: qAsConst(contour))
+		for (const Vec3d &v: std::as_const(contour))
 		{
 			Q_ASSERT(qAbs(v.normSquared()-1.0)<0.0001);
 			Vec3d vec=v+observerVelocityForAberration;
@@ -1297,7 +1297,7 @@ QVector<Vec3d> pathFromQVariantList(const QVariantList& l)
 			bool ok;
 			double angle = elemList.at(2).toDouble(&ok)*M_PI/180.;
 			if (!ok || std::fabs(angle)>2.*M_PI)
-				throw std::runtime_error(qPrintable(QString("invalid small circle rotation angle: \"%1\" (expect a double value in degree betwwen -2pi and 2pi)").arg(elemList.at(2).toString())));
+				throw std::runtime_error(qPrintable(QString("invalid small circle rotation angle: \"%1\" (expect a double value in degree between -2pi and 2pi)").arg(elemList.at(2).toString())));
 			int nbStep = 1+static_cast<int>(std::fabs(angle)/(2.*M_PI)*75);
 			Q_ASSERT(nbStep>0);
 			v = vertices.last();

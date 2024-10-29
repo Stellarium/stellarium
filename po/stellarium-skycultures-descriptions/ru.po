@@ -4,21 +4,22 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Виктор, 2022
-# cardinot <mcardinot@gmail.com>, 2022
+# Victor, 2022
 # Aleksey Kabanov <ak099@mail.ru>, 2022
 # Dmitry Broover, 2023
-# Alexander V. Wolf <alex.v.wolf@gmail.com>, 2023
+# cardinot <mcardinot@gmail.com>, 2023
+# Ruslan Kabatsaev, 2024
+# Alexander V. Wolf <alex.v.wolf@gmail.com>, 2024
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2022-12-18 15:53+0700\n"
+"POT-Creation-Date: 2024-03-22 10:22+0700\n"
 "PO-Revision-Date: 2022-10-05 17:12+0000\n"
-"Last-Translator: Alexander V. Wolf <alex.v.wolf@gmail.com>, 2023\n"
-"Language-Team: Russian (https://www.transifex.com/stellarium/teams/80998/ru/)\n"
+"Last-Translator: Alexander V. Wolf <alex.v.wolf@gmail.com>, 2024\n"
+"Language-Team: Russian (https://app.transifex.com/stellarium/teams/80998/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -203,6 +204,7 @@ msgstr "Личико или Глазки"
 #: ../../skycultures/greek_leidenAratea/description.en.utf8:129
 #: ../../skycultures/lokono/description.en.utf8:41
 #: ../../skycultures/russian_siberian/description.en.utf8:13
+#: ../../skycultures/tibetan/description.en.utf8:72
 #: ../../skycultures/tongan/description.en.utf8:66
 msgid "Pleiades"
 msgstr "Плеяды"
@@ -439,48 +441,15 @@ msgstr "Утренняя звезда (?)"
 msgid "Venus(?)"
 msgstr "Венера (?)"
 
-#. type: Content of: <h2>
-#: ../../skycultures/anutan/description.en.utf8:37
-#: ../../skycultures/greek_dante/description.en.utf8:9
-#: ../../skycultures/greek_leidenAratea/description.en.utf8:275
-#: ../../skycultures/indian/description.en.utf8:35
-#: ../../skycultures/lokono/description.en.utf8:381
-#: ../../skycultures/samoan/description.en.utf8:93
-#: ../../skycultures/tongan/description.en.utf8:30
-msgid "References"
-msgstr "Ссылки"
-
-#. type: Content of: <ul><li>
-#: ../../skycultures/anutan/description.en.utf8:39
-msgid ""
-"Feinberg, Richard. (1998). \"Polynesian seafaring and navigation: ocean "
-"travel in Anutan culture and society\" The Kent State University Press, "
-"Kent, Ohio: ISBN 0-87338-352-4."
-msgstr ""
-"Feinberg, Richard. (1998). \"Polynesian seafaring and navigation: ocean "
-"travel in Anutan culture and society\" The Kent State University Press, "
-"Kent, Ohio: ISBN 0-87338-352-4."
-
-#. type: Content of: <ul><li>
-#: ../../skycultures/anutan/description.en.utf8:41
-msgid ""
-"Rensch, K.H. (1994). \"Fish Names of Western Polynesia: Futuna, Niue, Samoa,"
-" Tokelau, Tonga, Tuvalu, Uvea, Outliers\" Archipelago Press, the University "
-"of California : ISBN 9780959378771."
-msgstr ""
-"Rensch, K.H. (1994). \"Fish Names of Western Polynesia: Futuna, Niue, Samoa,"
-" Tokelau, Tonga, Tuvalu, Uvea, Outliers\" Archipelago Press, the University "
-"of California : ISBN 9780959378771."
-
 #. type: Content of: <p><h2>
-#: ../../skycultures/anutan/description.en.utf8:45
+#: ../../skycultures/anutan/description.en.utf8:37
 #: ../../skycultures/arabic_al-sufi/description.en.utf8:66
 #: ../../skycultures/arabic_indigenous/description.en.utf8:32
 #: ../../skycultures/aztec/description.en.utf8:61
 #: ../../skycultures/babylonian_seleucid/description.en.utf8:473
 #: ../../skycultures/chinese_medieval/description.en.utf8:49
 #: ../../skycultures/egyptian/description.en.utf8:17
-#: ../../skycultures/greek_dante/description.en.utf8:15
+#: ../../skycultures/greek_dante/description.en.utf8:26
 #: ../../skycultures/greek_farnese/description.en.utf8:297
 #: ../../skycultures/greek_leidenAratea/description.en.utf8:291
 #: ../../skycultures/korean/description.en.utf8:12
@@ -492,19 +461,20 @@ msgstr ""
 #: ../../skycultures/samoan/description.en.utf8:119
 #: ../../skycultures/sardinian/description.en.utf8:11
 #: ../../skycultures/seri/description.en.utf8:174
+#: ../../skycultures/tibetan/description.en.utf8:131
 #: ../../skycultures/tongan/description.en.utf8:85
 #: ../../skycultures/tupi/description.en.utf8:23
 msgid "Author"
 msgstr "Автор"
 
 #. type: Content of: <p>
-#: ../../skycultures/anutan/description.en.utf8:46
+#: ../../skycultures/anutan/description.en.utf8:38
 msgid ""
 "This sky culture was contributed to Stellarium by <i>Dan Smale</i>, "
-"d.smale(at)niwa.co.nz"
+"smaledaniel(at)outlook.com"
 msgstr ""
 "Эта культура неба была предоставлена пользователем Stellarium'а <i>Дэном "
-"Смэлом (Dan Smale)</i>, d.smale(at)niwa.co.nz"
+"Смэлом (Dan Smale)</i>, smaledaniel(at)outlook.com"
 
 #. type: Content of: <h1>
 #: ../../skycultures/arabic_al-sufi/description.en.utf8:1
@@ -814,7 +784,7 @@ msgstr ""
 #: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:149
 #: ../../skycultures/arabic_lunar_mansions/description.en.utf8:75
 #: ../../skycultures/chinese/description.en.utf8:2960
-#: ../../skycultures/greek_dante/description.en.utf8:18
+#: ../../skycultures/greek_dante/description.en.utf8:29
 #: ../../skycultures/sami/description.en.utf8:57
 msgid "Notes"
 msgstr "Примечания"
@@ -2286,7 +2256,7 @@ msgstr "Аль-Найем 2"
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:537
 #: ../../skycultures/belarusian/description.en.utf8:42
 #: ../../skycultures/boorong/description.en.utf8:220
-#: ../../skycultures/chinese/description.en.utf8:2980
+#: ../../skycultures/chinese/description.en.utf8:2969
 #: ../../skycultures/egyptian_dendera/description.en.utf8:225
 #: ../../skycultures/greek_almagest/description.en.utf8:496
 #: ../../skycultures/inuit/description.en.utf8:31
@@ -3288,7 +3258,6 @@ msgstr ""
 #. type: Content of: <h2>
 #: ../../skycultures/aztec/description.en.utf8:31
 #: ../../skycultures/belarusian/description.en.utf8:31
-#: ../../skycultures/chinese/description.en.utf8:2969
 #: ../../skycultures/chinese_medieval/description.en.utf8:29
 #: ../../skycultures/egyptian/description.en.utf8:7
 #: ../../skycultures/hawaiian_starlines/description.en.utf8:86
@@ -3759,7 +3728,7 @@ msgstr "<sup>ЗВЕЗДА</sup><i>БАРБАРУ</i>(Волк)"
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:71
 msgid "seeder of <sup>STAR</sup><i>EPINNU</i>"
-msgstr ""
+msgstr "сеялка <sup>ЗВЕЗДЫ</sup> <i>ЭПИННУ</i>"
 
 #. type: Content of: <p><table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:76
@@ -3770,7 +3739,7 @@ msgstr "<sup>ЗВЕЗДА</sup><i>&Scaron;&#298;BU</i>(Старик)"
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:77
 msgid "<sup>GOD</sup>Enme&scaron;arra"
-msgstr "<sup>БОГ</sup>Enme&scaron;arra"
+msgstr "<sup>БОГ</sup>Энмешарр"
 
 #. type: Content of: <p><table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:82
@@ -3807,7 +3776,7 @@ msgstr ""
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:89
 msgid "<sup>GOD</sup>Lugalirra and <sup>GOD</sup>Meslamta&#702;ea"
-msgstr "<sup>БОГ</sup>Лугалирра и <sup>БОГ</sup>Meslamta&#702;ea"
+msgstr "<sup>БОГ</sup>Лугальгирра и <sup>БОГ</sup>Месламтаэа"
 
 #. type: Content of: <p><table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:94
@@ -3822,7 +3791,7 @@ msgstr ""
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:95
 msgid "<sup>GOD</sup>Alammu&scaron; and <sup>GOD</sup>Ningublaga"
-msgstr "<sup>БОГ</sup>Alammu&scaron; и <sup>БОГ</sup>Нингублага"
+msgstr "<sup>БОГ</sup>Аламмуш и <sup>БОГ</sup>Нингублага"
 
 #. type: Content of: <p><table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:100
@@ -3873,6 +3842,8 @@ msgid ""
 "&quot;date-palm spadix&quot; (jewellery?) (of) <sup>GOD</sup>Erua, "
 "<sup>GOD</sup>Zarpan&#299;tum"
 msgstr ""
+"&quot;лопатка финиковой пальмы&quot; (ювелирное изделие?) "
+"<sup>БОГИНИ</sup>Эруа, <sup>БОГИНИ</sup>Царпанит"
 
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:124
@@ -3882,7 +3853,7 @@ msgstr "<sup>ЗВЕЗДА</sup>&Scaron;U.PA (Яркий?)"
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:125
 msgid "<sup>GOD</sup>Enlil who determines the destinies of the land"
-msgstr ""
+msgstr "<sup>БОГ</sup>Энлиль, определяющий судьбу страны"
 
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:130
@@ -3895,8 +3866,8 @@ msgid ""
 "<sup>STAR</sup><i>&#7722;ENGALL&#256;YU</i>(Abundant), vizier of "
 "<sup>GOD</sup>Ninlil"
 msgstr ""
-"<sup>ЗВЕЗДА</sup><i>&#7722;ENGALL&#256;YU</i>(Обильный), визирь "
-"<sup>БОГА</sup>Ninlil"
+"<sup>ЗВЕЗДА</sup><i>НЕНГАЛЛАЙУ</i>(Обильный), визирь "
+"<sup>БОГИНИ</sup>Нинлиль"
 
 #. type: Content of: <p><table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:132
@@ -3920,8 +3891,7 @@ msgid ""
 "<sup>STAR</sup><i>B&#256;&Scaron;TUM</i>(Dignity), vizier of "
 "<sup>GOD</sup>Ti&scaron;pak"
 msgstr ""
-"<sup>ЗВЕЗДА</sup><i>B&#256;&Scaron;TUM</i>(Достоинство), визирь "
-"<sup>БОГА</sup>Ti&scaron;pak"
+"<sup>ЗВЕЗДА</sup><i>БАШТУМ</i>(Достоинство), визирь <sup>БОГА</sup>Тишпак"
 
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:142
@@ -3949,6 +3919,7 @@ msgid ""
 "<sup>STAR</sup><i>&Scaron;&#274;LEBU</i>(Fox), <sup>GOD</sup>Erra, the "
 "strong of the gods"
 msgstr ""
+"<sup>ЗВЕЗДА</sup><i>СЕЛЕБУ</i>(Лиса), <sup>БОГ</sup>Эрра, сильный из богов"
 
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:150
@@ -4032,7 +4003,7 @@ msgstr "ЗВЕЗДА перед <sup>ЗВЕЗДОЙ</sup><i>ENZU</i>"
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:195
 msgid "<sup>STAR</sup><i>KALBU</i>(Dog) (of <sup>GOD</sup>Gula)"
-msgstr ""
+msgstr "<sup>ЗВЕЗДА</sup><i>КАЛБУ</i>(Пёс) (<sup>БОГИНИ</sup>Гулы)"
 
 #. type: Content of: <p><table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:200
@@ -4046,18 +4017,19 @@ msgid ""
 "<sup>GOD</sup>Lamassatu, vizier of <sup>GOD</sup>Baba (= <sup>GOD</sup>Gu-"
 "la)"
 msgstr ""
-"<sup>БОГ</sup>Lamassatu, визирь <sup>БОГА</sup>Baba (= <sup>БОГ</sup>Gu-la)"
+"<sup>БОГИНЯ</sup>Ламашту, визирь <sup>БОГИНЯ</sup>Баба (= "
+"<sup>БОГИНЯ</sup>Гула)"
 
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:206
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:450
 msgid "2 STAR<sup>s</sup> behind it"
-msgstr ""
+msgstr "2 ЗВЕЗД<sup>ы</sup> позади"
 
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:207
 msgid "<sup>GOD</sup>Nin-SAR and <sup>GOD</sup>Errakal"
-msgstr "<sup>БОГ</sup>Nin-SAR и <sup>БОГ</sup>Errakal"
+msgstr "<sup>БОГИНЯ</sup>Ниннисинг и <sup>БОГ</sup>Эрракал"
 
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:212
@@ -4077,7 +4049,7 @@ msgstr "ЗВЕЗДА справа от неё"
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:219
 msgid "<sup>STAR</sup>&Scaron;<i>A&#7722;&Ucirc;</i>(Pig), <sup>GOD</sup>Damu"
-msgstr ""
+msgstr "<sup>ЗВЕЗДА</sup><i>САХУ</i>(Свинья), <sup>БОГ</sup>Даму"
 
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:224
@@ -4092,13 +4064,14 @@ msgstr "<sup>ЗВЕЗДЫ</sup><i>SIS&Ucirc;</i>(Конь)"
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:231
 msgid "<sup>STAR</sup><i>LULIMMU</i>, vizier of STAR.STAR (Pleiades)"
-msgstr ""
+msgstr "<sup>ЗВЕЗДА</sup><i>ЛУЛИММУ</i>, визирь ЗВЕЗДЫ.ЗВЕЗДЫ (Плеяды)"
 
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:236
 msgid ""
 "twinkling STAR<sup>s</sup> opposite <sup>STAR</sup><i>LULIMMU</i>(Stag)"
 msgstr ""
+"мерцающие ЗВЕЗД<sup>ы</sup> напротив <sup>ЗВЕЗДЫ</sup><i>ЛУЛИММУ</i>(Олень)"
 
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:237
@@ -4106,13 +4079,12 @@ msgid ""
 "<sup>GOD</sup>&#7722;arriru (Field Mouse), "
 "<sup>GOD</sup>Manz&acirc;t(Rainbow)"
 msgstr ""
-"<sup>БОГ</sup>&#7722;arriru (Полевая мышь), <sup>БОГ</sup>Manz&acirc;t "
-"(Радуга)"
+"<sup>БОГ</sup>Харриру (Полевая мышь), <sup>БОГИНЯ</sup>Манзат (Радуга)"
 
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:242
 msgid "red bright STAR in the kidney of <sup>STAR</sup><i>LULIMMU</i>"
-msgstr ""
+msgstr "красная яркая ЗВЕЗДА в почке <sup>ЗВЕЗДЫ</sup><i>ЛУЛИММУ</i>"
 
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:243
@@ -4122,12 +4094,12 @@ msgstr "<sup>ЗВЕЗДА</sup><i>P&#256;&Scaron;ITTU</i>(Удаление)"
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:248
 msgid "When the STAR<sup>s</sup> of <sup>GOD</sup>Enlil are completed:"
-msgstr ""
+msgstr "Когда ЗВЕЗ<sup>ды</sup> <sup>БОГА</sup>Энлиля завершены:"
 
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:252
 msgid "big STAR, its &quot;light&quot; is dim, it divides the sky and stands"
-msgstr ""
+msgstr "большая тусклая ЗВЕЗДА, что разделяет небо и стоит"
 
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:253
@@ -4153,7 +4125,7 @@ msgstr "Юпитер [гипсома]"
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:263
 msgid "33 STAR<sup>s</sup> of <sup>GOD</sup>Enlil"
-msgstr "33 ЗВЕЗ<sup>ды</sup> <sup>БОГА</sup>Энлиль"
+msgstr "33 ЗВЕЗ<sup>ды</sup> <sup>БОГА</sup>Энлиля"
 
 #. type: Content of: <p>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:267
@@ -4231,7 +4203,7 @@ msgstr ""
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:304
 msgid "STAR.STAR(<i>ZAPPU</i>, Bristle)"
-msgstr ""
+msgstr "ЗВЕЗДА.ЗВЕЗДА (<i>ЗАППУ</i>, Щетина)"
 
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:305
@@ -4272,7 +4244,7 @@ msgstr ""
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:323
 msgid "<sup>GOD</sup>Lulal and <sup>GOD</sup>Latarak"
-msgstr "<sup>БОГ</sup>Lulal и <sup>БОГ</sup>Latarak"
+msgstr "<sup>БОГ</sup>Лулал и <sup>БОГ</sup>Латарак"
 
 #. type: Content of: <p><table><tbody><tr><td><notr><sub>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:324
@@ -4289,7 +4261,7 @@ msgstr "4"
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:329
 msgid "<sup>STAR</sup><i>TARLUGALLU</i> (Cock)"
-msgstr "<sup>ЗВЕЗДА</sup><i>TARLUGALLU</i> (Петух)"
+msgstr "<sup>ЗВЕЗДА</sup><i>ТАРЛУГАЛЛУ</i> (Петух)"
 
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:334
@@ -4317,7 +4289,7 @@ msgstr "<sup>ЗВЕЗДА</sup><i>QA&Scaron;TU</i>(Лук)"
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:341
 msgid "<sup>GOD</sup>I&scaron;tar-of-Elam, daughter of <sup>GOD</sup>Enlil"
-msgstr "<sup>БОГИНЯ</sup>I&scaron;tar-of-Elam, дочь <sup>БОГА</sup>Enlil"
+msgstr "<sup>БОГИНЯ</sup>I&scaron;tar-of-Elam, дочь <sup>БОГА</sup>Энлиля"
 
 #. type: Content of: <table><tbody><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:346
@@ -4743,7 +4715,7 @@ msgstr ""
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:522
 #: ../../skycultures/egyptian_dendera/description.en.utf8:222
 #: ../../skycultures/greek_almagest/description.en.utf8:489
-#: ../../skycultures/greek_dante/description.en.utf8:11
+#: ../../skycultures/greek_dante/description.en.utf8:22
 #: ../../skycultures/greek_farnese/description.en.utf8:294
 #: ../../skycultures/greek_leidenAratea/description.en.utf8:288
 msgid "Fair Use"
@@ -4832,7 +4804,7 @@ msgstr ""
 #. type: Content of: <h5>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:541
 #: ../../skycultures/egyptian_dendera/description.en.utf8:228
-#: ../../skycultures/greek_dante/description.en.utf8:20
+#: ../../skycultures/greek_dante/description.en.utf8:31
 #: ../../skycultures/greek_farnese/description.en.utf8:300
 #: ../../skycultures/greek_leidenAratea/description.en.utf8:294
 msgid "written in English:"
@@ -4841,7 +4813,7 @@ msgstr "написано на английском языке:"
 #. type: Content of: <h5>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:541
 #: ../../skycultures/egyptian_dendera/description.en.utf8:228
-#: ../../skycultures/greek_dante/description.en.utf8:20
+#: ../../skycultures/greek_dante/description.en.utf8:31
 msgid "SMH"
 msgstr "SMH"
 
@@ -4980,6 +4952,8 @@ msgstr "наш комментарий"
 msgid ""
 "<sup>STAR</sup><i>BARBARU</i> (Wolf): seeder of <sup>STAR</sup><i>EPINNU</i>"
 msgstr ""
+"<sup>ЗВЕЗДА</sup><i>БАРБАРУ</i> (Волк): сеялка "
+"<sup>ЗВЕЗДЫ</sup><i>ЭПИННУ</i>"
 
 #. type: Content of: <p><table><tbody><tr><td>
 #: ../../skycultures/babylonian_seleucid/description.en.utf8:36
@@ -4994,7 +4968,7 @@ msgstr "больше не существуют (слились с Великим
 #. type: Content of: <p><table><tbody><tr><td>
 #: ../../skycultures/babylonian_seleucid/description.en.utf8:81
 msgid "STAR opposite <sup>STAR</sup><i>URGUL&Ucirc;</i>: STAR (of the) King"
-msgstr ""
+msgstr "ЗВЕЗДА напротив <sup>ЗВЕЗДЫ</sup><i>URGUL&Ucirc;</i>: ЗВЕЗДА короля"
 
 #. type: Content of: <p><table><tbody><tr><td>
 #: ../../skycultures/babylonian_seleucid/description.en.utf8:87
@@ -5012,8 +4986,7 @@ msgstr "<sup>ЗВЕЗДА</sup>&Scaron;U.PA (Светочь?) = <sup>БОГ</sup
 #: ../../skycultures/babylonian_seleucid/description.en.utf8:99
 msgid ""
 "STAR in front of it: <sup>STAR</sup><i>&#7722;ENGALL&#256;YU</i> (Abundant)"
-msgstr ""
-"ЗВЕЗДА перед ней: <sup>ЗВЕЗДА</sup><i>&#7722;ENGALL&#256;YU</i> (Обильный)"
+msgstr "ЗВЕЗДА перед ней: <sup>ЗВЕЗДА</sup><i>НЕНГАЛЛАЙУ</i> (Обильный)"
 
 #. type: Content of: <p><table><tbody><tr><td>
 #: ../../skycultures/babylonian_seleucid/description.en.utf8:105
@@ -5065,6 +5038,8 @@ msgid ""
 "STAR in its bond: <sup>STAR</sup><i>APIL-EMA&#7722;</i> (Heir of the "
 "Ema&#7723;-temple)"
 msgstr ""
+"ЗВЕЗДА в своих связях: <sup>ЗВЕЗДА</sup><i>APIL-EMA&#7722;</i> (Наследник "
+"храма Эмаа)"
 
 #. type: Content of: <p><table><tbody><tr><td>
 #: ../../skycultures/babylonian_seleucid/description.en.utf8:153
@@ -5072,6 +5047,8 @@ msgid ""
 "STAR in front of <sup>STAR</sup><i>ENZU</i>: "
 "<sup>STAR</sup><i>KALBU</i>(Dog) [of Goddess Gula]"
 msgstr ""
+"ЗВЕЗДА перед <sup>ЗВЕЗДОЙ</sup><i>ЭНЗУ</i>: "
+"<sup>ЗВЕЗДА</sup><i>КАЛБУ</i>(Пёс) [богини Гулы]"
 
 #. type: Content of: <p><table><tbody><tr><td>
 #: ../../skycultures/babylonian_seleucid/description.en.utf8:165
@@ -5079,6 +5056,8 @@ msgid ""
 "2 STAR<sup>s</sup> behind it: <sup>GOD</sup>Nin-SAR and "
 "<sup>GOD</sup>Errakal"
 msgstr ""
+"2 ЗВЕЗД<sup>ы</sup> позади этой: <sup>БОГИНЯ</sup>Ниннисинг и "
+"<sup>БОГ</sup>Эрракал"
 
 #. type: Content of: <p><table><tbody><tr><td>
 #: ../../skycultures/babylonian_seleucid/description.en.utf8:171
@@ -5103,6 +5082,8 @@ msgstr ""
 msgid ""
 "STAR to the right of it: <sup>STAR</sup>&Scaron;<i>A&#7722;&Ucirc;</i> (Pig)"
 msgstr ""
+"ЗВЕЗДА справа от неё: <sup>ЗВЕЗДА</sup>&Scaron;<i>A&#7722;&Ucirc;</i> "
+"(Свинья)"
 
 #. type: Content of: <p><table><tbody><tr><td>
 #: ../../skycultures/babylonian_seleucid/description.en.utf8:183
@@ -5112,7 +5093,7 @@ msgstr "ЗВЕЗДА слева от неё: <sup>ЗВЕЗДА</sup><i>SIS&Ucirc
 #. type: Content of: <p><table><tbody><tr><td>
 #: ../../skycultures/babylonian_seleucid/description.en.utf8:189
 msgid "STAR behind it: <sup>STAR</sup><i>LULIMMU</i> (Stag)"
-msgstr "ЗВЕЗДА позади неё: <sup>ЗВЕЗДА</sup><i>LULIMMU</i> (Олень)"
+msgstr "ЗВЕЗДА позади неё: <sup>ЗВЕЗДА</sup><i>ЛУЛИММУ</i> (Олень)"
 
 #. type: Content of: <p><table><tbody><tr><td>
 #: ../../skycultures/babylonian_seleucid/description.en.utf8:190
@@ -5133,6 +5114,8 @@ msgid ""
 "twinkling STAR<sup>s</sup> opposite <sup>STAR</sup><i>LULIMMU</i>(Stag): "
 "<sup>GOD</sup>&#7722;arriru (Field Mouse)"
 msgstr ""
+"мерцающие ЗВЕЗД<sup>ы</sup> напротив <sup>ЗВЕЗДЫ</sup><i>ЛУЛИММУ</i>(Олень):"
+" <sup>БОГ</sup>Харриру (Полевая мышь)"
 
 #. type: Content of: <p><table><tbody><tr><td>
 #: ../../skycultures/babylonian_seleucid/description.en.utf8:201
@@ -5258,7 +5241,7 @@ msgstr "и Гиады"
 #. type: Content of: <p><table><tbody><tr><td>
 #: ../../skycultures/babylonian_seleucid/description.en.utf8:277
 msgid "STAR behind it: <sup>STAR</sup><i>TARLUGALLU</i> (Cock)"
-msgstr "ЗВЕЗДА позади этой: <sup>ЗВЕЗДА</sup><i>TARLUGALLU</i> (Петух)"
+msgstr "ЗВЕЗДА позади этой: <sup>ЗВЕЗДА</sup><i>ТАРЛУГАЛЛУ</i> (Петух)"
 
 #. type: Content of: <p><table><tbody><tr><td>
 #: ../../skycultures/babylonian_seleucid/description.en.utf8:278
@@ -5743,7 +5726,7 @@ msgstr "Крест &mdash; крест Петра"
 #. type: Content of: <ul><li>
 #: ../../skycultures/belarusian/description.en.utf8:14
 msgid "The Crown &mdash; the thorn wreath that was put on Christ’s head."
-msgstr "Корона & mdash; колючий венок, возложенный на голову Христа."
+msgstr "Корона &mdash; колючий венок, возложенный на голову Христа."
 
 #. type: Content of: <ul><li>
 #: ../../skycultures/belarusian/description.en.utf8:15
@@ -5761,7 +5744,7 @@ msgid ""
 "The Kingdoms &mdash; These two stars served as a symbol of two states: the "
 "Great Lithuanian Princedom and the Polish Kingdom."
 msgstr ""
-"Королевства & mdash; эти две звезды служили символом двух государств: "
+"Королевства &mdash; эти две звезды служили символом двух государств: "
 "Великого княжества Литовского и Королевства Польского."
 
 #. type: Content of: <ul><li>
@@ -8989,61 +8972,12 @@ msgstr ""
 "Поэтому транслитерация пиньинь предназначена только для того, чтобы имена "
 "звезд были читабельными."
 
-#. type: Content of: <p><p><p><p><p><ul><li>
-#: ../../skycultures/chinese/description.en.utf8:2972
-msgid ""
-"<a "
-"href=\"http://www.lcsd.gov.hk/CE/Museum/Space/en_US/web/spm/starshine/resources/constemyth/glossary.html\">English-"
-"Chinese Glossary of Chinese Star Regions, Asterisms and Star Names</a>"
-msgstr ""
-"<a "
-"href=\"http://www.lcsd.gov.hk/CE/Museum/Space/en_US/web/spm/starshine/resources/constemyth/glossary.html\">English-"
-"Chinese Glossary of Chinese Star Regions, Asterisms and Star Names</a>"
-
-#. type: Content of: <p><p><p><p><p><ul><li>
-#: ../../skycultures/chinese/description.en.utf8:2973
-msgid ""
-"<a href=\"http://aeea.nmns.edu.tw/aeea/contents_list/star_sign.html\">AEEA "
-"Astronomy Education Information-Ancient Chinese constellation system </a>"
-msgstr ""
-"<a href=\"http://aeea.nmns.edu.tw/aeea/contents_list/star_sign.html\">AEEA "
-"Astronomy Education Information-Ancient Chinese constellation system </a>"
-
-#. type: Content of: <p><p><p><p><p><ul><li>
-#: ../../skycultures/chinese/description.en.utf8:2974
-msgid ""
-"<a href=\"http://en.wikipedia.org/wiki/Chinese_constellations\">Chinese "
-"constellations (Wikipedia)</a>"
-msgstr ""
-"<a href=\"http://en.wikipedia.org/wiki/Chinese_constellations\">Chinese "
-"constellations (Wikipedia)</a>"
-
-#. type: Content of: <p><p><p><p><p><ul><li>
-#: ../../skycultures/chinese/description.en.utf8:2975
-msgid ""
-"<a "
-"href=\"https://en.wikipedia.org/wiki/Traditional_Chinese_star_names\">Traditional"
-" Chinese star names (Wikipedia)</a>"
-msgstr ""
-"<a "
-"href=\"https://en.wikipedia.org/wiki/Traditional_Chinese_star_names\">Traditional"
-" Chinese star names (Wikipedia)</a>"
-
-#. type: Content of: <p><p><p><p><p><ul><li>
-#: ../../skycultures/chinese/description.en.utf8:2976
-msgid ""
-"<a "
-"href=\"http://www.chinapage.com/astronomy/astronomy.html\">http://www.chinapage.com/astronomy/astronomy.html</a>"
-msgstr ""
-"<a "
-"href=\"http://www.chinapage.com/astronomy/astronomy.html\">http://www.chinapage.com/astronomy/astronomy.html</a>"
-
 #.  a
 #. href="http://www.lcsd.gov.hk/CE/Museum/Space/en_US/web/spm/starshine/interactive-
 #. star-maps.html"
 #. /a
 #. type: Content of: <p><p><p><p><p><p>
-#: ../../skycultures/chinese/description.en.utf8:2982
+#: ../../skycultures/chinese/description.en.utf8:2971
 msgid ""
 "This sky culture was initially contributed by <i>Karrie Berglund</i> of "
 "Digitalis Education Solutions, Inc. based on Hong Kong Space Museum star "
@@ -9054,7 +8988,7 @@ msgstr ""
 "космического музея (больше не доступны в Интернете)."
 
 #. type: Content of: <p><p><p><p><p><p>
-#: ../../skycultures/chinese/description.en.utf8:2983
+#: ../../skycultures/chinese/description.en.utf8:2972
 msgid ""
 "Sun Shuwei <a "
 "href=\"mailto:sunshuwei.hi@foxmail.com\">sunshuwei.hi@foxmail.com</a> "
@@ -11227,9 +11161,9 @@ msgid ""
 "Jabschinski, Marie von Seggern and Susanne M. Hoffmann: service@uhura-"
 "uraniae.com"
 msgstr ""
-"Эта культура неба была скомпилирована и добавлена в Stellarium Алиной Шмидт "
-"(Alina Schmidt), Лией Ябшински (Lea Jabschinski), Мари фон Сеггерн (Marie "
-"von Seggern) и Сюзанной М. Хоффманн (Susanne M. Hoffmann): service@uhura-"
+"Эта культура неба была собрана и добавлена в Stellarium Алиной Шмидт (Alina "
+"Schmidt), Лией Ябшински (Lea Jabschinski), Мари фон Сеггерн (Marie von "
+"Seggern) и Сюзанной М. Хоффманн (Susanne M. Hoffmann): service@uhura-"
 "uraniae.com"
 
 #. type: Content of: <p>
@@ -11246,12 +11180,12 @@ msgstr "Божественная комедия Данте"
 #: ../../skycultures/greek_dante/description.en.utf8:2
 msgid ""
 "Dante Alighieri mentions several stars and a few constellations: "
-"predominantly, the zodiacal constellation of Gemini. The Twins occurs in his"
-" texts (in the comedia as well as his poems). As Dante is not an astronomer "
-"but a person with broad knowledge, his view of the constellations is highly "
-"like not based upon observations of the sky but on manuscripts that he read."
-" Therefore, we chose to take the zodiacal constellation images from Michael "
-"Scotus whose manuscript was very popular in Dante's time."
+"predominantly, the zodiacal constellation of Gemini.  The Twins occurs in "
+"his texts (in the comedia as well as his poems).  As Dante is not an "
+"astronomer but a person with broad knowledge, his view of the constellations"
+" is highly like not based upon observations of the sky but on manuscripts "
+"that he read. Therefore, we chose to take the zodiacal constellation images "
+"from Michael Scotus whose manuscript was very popular in Dante's time."
 msgstr ""
 "Данте Алигьери упоминает несколько звезд и несколько созвездий: "
 "преимущественно зодиакальное созвездие Близнецов. Близнецы встречаются в его"
@@ -11262,11 +11196,11 @@ msgstr ""
 "очень популярна во времена Данте."
 
 #. type: Content of: <p>
-#: ../../skycultures/greek_dante/description.en.utf8:3
+#: ../../skycultures/greek_dante/description.en.utf8:6
 msgid ""
 "Dante Alighieri was a citizen of Florence, Italy, who was later banned and "
-"lived at several places in Northern Italy. The comedia was written around "
-"1300 but finished only short before his death in 1321. It is commonly "
+"lived at several places in Northern Italy.  The comedia was written around "
+"1300 but finished only short before his death in 1321.  It is commonly "
 "assumed that the story plays in around the Christian festival of Easter in "
 "1300 CE."
 msgstr ""
@@ -11277,21 +11211,21 @@ msgstr ""
 "Пасхи в 1300 году нашей эры."
 
 #. type: Content of: <h2>
-#: ../../skycultures/greek_dante/description.en.utf8:5
+#: ../../skycultures/greek_dante/description.en.utf8:10
 #: ../../skycultures/greek_leidenAratea/description.en.utf8:8
 msgid "How this Sky Culture was made"
 msgstr "Как создавалась эта культура неба"
 
 #. type: Content of: <p>
-#: ../../skycultures/greek_dante/description.en.utf8:6
+#: ../../skycultures/greek_dante/description.en.utf8:11
 msgid ""
-"The Dante-experts of the German Dante Society selected some text passages "
+"The Dante experts of the German Dante Society selected some text passages "
 "with astronomical references in order to present them at Planetarium Jena in"
-" the dome. Professor Blume'ODs suggestion that Dante likely had Michael "
-"Scotus's drawings of the constellations in mind was accepted. Therefore, we "
-"copied these drawings and mapped them onto the stars. The \"16\" bright "
+" the dome.  Professor Blume's suggestion that Dante likely had Michael "
+"Scotus's drawings of the constellations in mind was accepted.  Therefore, we"
+" copied these drawings and mapped them onto the stars.  The \"16\" bright "
 "stars that are mentioned by Dante are usually interpreted by romanists as "
-"the stars of first magnitude in the Almagest. Therefore, these stars where "
+"the stars of first magnitude in the Almagest.  Therefore, these stars where "
 "highlighted with the \"star\"-symbol in Stellarium. Additionally, we painted"
 " a chariot (wagon) and a horn."
 msgstr ""
@@ -11305,11 +11239,11 @@ msgstr ""
 "Дополнительно нарисовали колесницу (повозку) и рог."
 
 #. type: Content of: <p>
-#: ../../skycultures/greek_dante/description.en.utf8:7
+#: ../../skycultures/greek_dante/description.en.utf8:16
 msgid ""
 "Dante calls the seven bright stars of Ursa Major \"The Chariot\", the "
 "constellation of Ursa Minor \"The Horn\", and possibly refers to Corona "
-"Borealis when he mentions a ring of stars. The latter interpretation is in "
+"Borealis when he mentions a ring of stars.  The latter interpretation is in "
 "our view unlikely but is discussed among researchers which is why we marked "
 "the stars of Corona Borealis as it is described in the Almagest."
 msgstr ""
@@ -11319,8 +11253,18 @@ msgstr ""
 "маловероятна, но обсуждается исследователями, поэтому мы отметили звезды "
 "Северной Короны так, как она описана в Альмагесте."
 
+#. type: Content of: <h2>
+#: ../../skycultures/greek_dante/description.en.utf8:20
+#: ../../skycultures/greek_leidenAratea/description.en.utf8:275
+#: ../../skycultures/indian/description.en.utf8:46
+#: ../../skycultures/lokono/description.en.utf8:381
+#: ../../skycultures/samoan/description.en.utf8:93
+#: ../../skycultures/tongan/description.en.utf8:30
+msgid "References"
+msgstr "Ссылки"
+
 #. type: Content of: <p>
-#: ../../skycultures/greek_dante/description.en.utf8:10
+#: ../../skycultures/greek_dante/description.en.utf8:21
 msgid ""
 "The Italian Dante Society (Societá Dantesca Italiana) provides Dante's work "
 "online: <a href=\"https://danteonline.it/opere/index.php\">Dante_Online</a>."
@@ -11330,7 +11274,7 @@ msgstr ""
 "href=\"https://danteonline.it/opere/index.php\">Dante_Online</a>."
 
 #. type: Content of: <p>
-#: ../../skycultures/greek_dante/description.en.utf8:12
+#: ../../skycultures/greek_dante/description.en.utf8:23
 #: ../../skycultures/greek_farnese/description.en.utf8:295
 #: ../../skycultures/greek_leidenAratea/description.en.utf8:289
 msgid ""
@@ -11341,7 +11285,7 @@ msgstr ""
 "чтобы их цитировали по обычным правилам. Благодарю вас!"
 
 #. type: Content of: <p>
-#: ../../skycultures/greek_dante/description.en.utf8:13
+#: ../../skycultures/greek_dante/description.en.utf8:24
 msgid ""
 "Susanne M Hoffmann, Dieter Blume, Karl Ph. Ellerbrock, Eduardo Castadura, "
 "Bodo Zöll (2022)"
@@ -11350,7 +11294,7 @@ msgstr ""
 "Цёлль (2022)"
 
 #. type: Content of: <p>
-#: ../../skycultures/greek_dante/description.en.utf8:16
+#: ../../skycultures/greek_dante/description.en.utf8:27
 msgid ""
 "This sky culture was added to Stellarium by Susanne M. Hoffmann "
 "(service@uhura-uraniae.com) as a byproduct of a collaboration with Prof. Dr."
@@ -11363,7 +11307,7 @@ msgstr ""
 "Немецким обществом Данте (Deutsche Dante Gesellschaft) и планетарием Йены."
 
 #. type: Content of: <p>
-#: ../../skycultures/greek_dante/description.en.utf8:19
+#: ../../skycultures/greek_dante/description.en.utf8:30
 msgid ""
 "region of origin: Florence, Italy; this single sky culture was made for use "
 "in research"
@@ -12345,6 +12289,17 @@ msgid ""
 " connect to create a northern pointer.  Different north/south pointers are "
 "found in the star lines and used heavily by navigators."
 msgstr ""
+"Главными звездами <em>Ке Ка о Макалии</em> с севера на юг являются "
+"<em>Хокулей</em> (Капелла), <em>Нанамуа</em> (Кастор), <em>Нанахоуп</em> "
+"(Поллукс), <em>Пуана</em> (Процион) и <em>А'а</em> (Сириус). Эти звезды "
+"соединяются вместе, образуя желонку на небе. Минтака в Орионе — важная "
+"звезда в этой линии, поскольку она восходит/заходит прямо на восток или "
+"запад, давая навигатору удобную звезду-указатель направления. Мирзим (рядом "
+"с <em>А'а</em> (Сириусом)) и <em>Ке Али Кона и Ка Лева</em> (Канопус) "
+"соединяются вместе, образуя южный указатель. <em>'Экекеуэуэху</em> (&theta; "
+"Aur, Махасим) и <em>'Экекеуэненаена</em> (&beta; Aur, Менкалинан) "
+"соединяются, образуя северный указатель. Различные указатели севера и юга "
+"находятся на звездных линиях и активно используются мореплавателями."
 
 #. type: Content of: <p><p><p>
 #: ../../skycultures/hawaiian_starlines/description.en.utf8:46
@@ -12378,6 +12333,21 @@ msgid ""
 " <em>Hanaiakamalama</em> (Southern Cross) which is the southern pointer for "
 "<em>Ka Iwikuamo’o</em>."
 msgstr ""
+"Сама звездная линия начинается с <em>Хокупаа</em> (Полярной звезды), "
+"конечного указателя севера, поскольку звезда никогда не движется по небу и "
+"всегда находится над севером. <em>Хокупаа</em> соединяется с <em>На "
+"Хику</em> (Большая Медведица). <em>На Хику</em> переводится как «Семь», "
+"поскольку в Большой Медведице семь звезд. <em>Хокулеа</em> (Арктур) и "
+"<em>Хикианалия</em> (Спика) — две звезды в середине звездной линии. Два "
+"каноэ PVS названы в честь этих двух звезд. <em>Хокулеа</em> — это «зенитная»"
+" звезда Гавайев, то есть она будет находиться прямо над головой, когда вы "
+"находитесь на широте Гавайских островов. <em>Хокулеа</em> очень важен для "
+"мореплавателей на пути обратно на Гавайи. Значение слова «<em>Хокулеа</em>» "
+"— «звезда радости», потому что эта звезда используется для того, чтобы найти"
+" дом, приносящий радость. Рядом с <em>Хикианалией</em> находится "
+"<em>Ме’э</em>, комбинация четырех звезд, образующих коробку. <em>Ме’э</em> "
+"соединяется с <em>Ханайакамаламой</em> (Южным Крестом), которая является "
+"южным указателем <em>Ка Ивикуамоо</em>."
 
 #. type: Content of: <p><p><p>
 #: ../../skycultures/hawaiian_starlines/description.en.utf8:61
@@ -12420,6 +12390,11 @@ msgid ""
 "(&delta; Sco, Dschubba) and <em>Kahe</em> (&pi; Sco, Nur), the stars on the "
 "top of the hook."
 msgstr ""
+"Северный указатель находится в Треугольнике Навигатора, когда вы соединяете "
+"<em>Гавайки</em> (Денеб) и <em>Момонапиковалу</em> (&gamma; Cyg, Садр). "
+"Южные указатели оказываются на рыболовном крючке, когда вы соединяете "
+"<em>Милиопу</em> (&delta; Sco, Джубба) и <em>Кахе</em> (&pi; Sco, Нур), "
+"звезды на вершине крючка."
 
 #. type: Content of: <p><p><p>
 #: ../../skycultures/hawaiian_starlines/description.en.utf8:74
@@ -12428,6 +12403,9 @@ msgid ""
 "great chief of Kaua’i and O’ahu and this star line represents the kite which"
 " was lost as a child."
 msgstr ""
+"<em>Ка Лупе о Кавело</em> переводится как «Воздушный змей Кавело». Кавело "
+"был великим вождем Кауаи и Оаху, и эта звездная линия представляет собой "
+"воздушного змея, потерянного в детстве."
 
 #. type: Content of: <p><p><p>
 #: ../../skycultures/hawaiian_starlines/description.en.utf8:76
@@ -12453,6 +12431,10 @@ msgid ""
 "<em>‘Iwakeli’i</em>.  The southern pointer is connected with <em>Keawe</em> "
 "(&alpha; Peg, Markab) and <em>Kukaniloko</em> (&alpha; PsA, Fomalhaut)."
 msgstr ""
+"Северный указатель находится в <em>Манокаланипо</em> (&delta; Peg, Альферац)"
+" и <em>Кеалохалани-по-кеао</em> (&beta; Cas, Каф) в <em>Ивакели</em>. Южный "
+"указатель связан с <em>Киаве</em> (&alpha; Peg, Маркаб) и "
+"<em>Куканилоко</em> (&alpha; PsA, Фомальгаут)."
 
 #. type: Content of: <p><p><ul><li>
 #: ../../skycultures/hawaiian_starlines/description.en.utf8:88
@@ -12473,7 +12455,7 @@ msgstr ""
 #. type: Content of: <p><p><ul><li>
 #: ../../skycultures/hawaiian_starlines/description.en.utf8:90
 msgid "<a href=\"http://www.imiloahawaii.org/71/star-paths\">Imiloa</a>"
-msgstr ""
+msgstr "<a href=\"http://www.imiloahawaii.org/71/star-paths\">Имилоа</a>"
 
 #. type: Content of: <p><p><ul><li>
 #: ../../skycultures/hawaiian_starlines/description.en.utf8:91
@@ -12494,6 +12476,9 @@ msgid ""
 "href=\"https://stellarium.org/landscapes.html\">Stellarium Landscapes</a> "
 "collection."
 msgstr ""
+"Ландшафт Hawaiian Star Compass, который следует использовать в этой небесной"
+" культуре, доступен в коллекции <a "
+"href=\"https://stellarium.org/landscapes.html\">ландшафтов Stellarium</a>."
 
 #. type: Content of: <p><p><h2>
 #: ../../skycultures/hawaiian_starlines/description.en.utf8:96
@@ -12580,26 +12565,26 @@ msgstr ""
 #: ../../skycultures/indian/description.en.utf8:11
 msgid ""
 "In Hindu tradition the ecliptic is divided into 27 parts of approximately "
-"13°20\", which correspond with 27 asterisms known as the nakṣatra-s (full "
-"list, with western equivalents here: https://goo.gl/2PVi28 ). In the "
+"13°20', which correspond with 27 asterisms known as the nakṣatra-s (full "
+"list, with western equivalents here: https://goo.gl/2PVi28 ).  In the "
 "earliest extant layers of the tradition this number is 28. This division is "
 "critical for several purposes including timing rituals and determining the "
-"birth lunar mansions. Since these asterisms define an area in the sky, they "
-"are also technically constellations."
+"birth lunar mansions.  Since these asterisms define an area in the sky, they"
+" are also technically constellations."
 msgstr ""
 "В индуистской традиции эклиптика делится на 27 частей примерно по 13°20\", "
 "что соответствует 27 астеризмам, известным как накшатры (полный список с "
 "западными эквивалентами здесь: https://goo.gl/2PVi28). В самых ранних "
 "сохранившихся преданиях это число 28. Это деление имеет решающее значение "
 "для нескольких целей, включая ритуалы времени и определение рождений лунных "
-"стоянок. Поскольку эти астеризмы определяют область на небе, они также "
-"технически созвездия."
+"стоянок. Поскольку эти астеризмы определяют область на небе, технически они "
+"также являются созвездиями."
 
 #. type: Content of: <p>
-#: ../../skycultures/indian/description.en.utf8:12
+#: ../../skycultures/indian/description.en.utf8:14
 msgid ""
 "sUrya-siddhAnta and vedAnga-jyotiSha specify start coordinates for the "
-"13°20\" divisions using some stars (Please see penultimate paragraph in <a "
+"13°20' divisions using some stars (Please see penultimate paragraph in <a "
 "href=\"https://archive.org/stream/HistoryOfCalendarPanchangaCommittee/History-"
 "of-Calendar-Panchanga-Committee#page/n42/mode/1up\">this page</a>)"
 msgstr ""
@@ -12609,11 +12594,11 @@ msgstr ""
 "of-Calendar-Panchanga-Committee#page/n42/mode/1up\">этой странице</a>)"
 
 #. type: Content of: <p>
-#: ../../skycultures/indian/description.en.utf8:13
+#: ../../skycultures/indian/description.en.utf8:16
 msgid ""
 "The earliest complete nakṣatra lists are found in the Taittirīya-śruti and "
 "the Atharvaveda where they are recited as part of the nakṣatreṣṭi ritual "
-"which places the deities of pantheon in these celestial compartments. Some "
+"which places the deities of pantheon in these celestial compartments.  Some "
 "scholars opine that the tradition shows that by the early medieval period, "
 "the nakṣatra identification had changed to a small degree from the Vedic "
 "period."
@@ -12625,7 +12610,7 @@ msgstr ""
 "накшатры в небольшой степени изменилась по сравнению с ведическим периодом."
 
 #. type: Content of: <p>
-#: ../../skycultures/indian/description.en.utf8:14
+#: ../../skycultures/indian/description.en.utf8:18
 msgid ""
 "There are multiple rich mythologies and symbolisms associated with the same "
 "constellations and stars (Example: <a "
@@ -12646,13 +12631,13 @@ msgstr ""
 "(См. ссылки ниже.)"
 
 #. type: Content of: <p>
-#: ../../skycultures/indian/description.en.utf8:15
+#: ../../skycultures/indian/description.en.utf8:21
 msgid ""
 "Name of the lunar months originated from those 12 divisions' names in which "
-"full moon or \"Purnimā\" occurs. Unlike a solar day which defined by a "
+"full moon or \"Purnimā\" occurs.  Unlike a solar day which defined by a "
 "sunrise to next sunrise, a lunar day or moon's position in a nakshatra "
-"doesn't depends on sun rising or moon rising. Thus a lunar day may start in "
-"any time of a solar day. Like other ancient human cultures, vedic people "
+"doesn't depends on sun rising or moon rising.  Thus a lunar day may start in"
+" any time of a solar day. Like other ancient human cultures, vedic people "
 "innovated a number of systems of which intercalary lunar months became most "
 "used, that is adding another month every 32.5 months on average or 4 months "
 "in every 11 years to correct the mismatch between lunar and solar year."
@@ -12669,7 +12654,7 @@ msgstr ""
 "солнечным годом."
 
 #. type: Content of: <p>
-#: ../../skycultures/indian/description.en.utf8:16
+#: ../../skycultures/indian/description.en.utf8:25
 msgid ""
 "A few of the yogatārā-s or prominent asterisms in the nakṣatra-s (going by "
 "their mainstream identification) lie slightly outside their constellation "
@@ -12684,16 +12669,16 @@ msgstr ""
 "люди предлагают альтернативные определения для таких йогатар)."
 
 #. type: Content of: <h2>
-#: ../../skycultures/indian/description.en.utf8:18
+#: ../../skycultures/indian/description.en.utf8:28
 msgid "Navagraha - Nine \"planets\""
 msgstr "Наваграха [Navagraha] — девять «планет»."
 
 #. type: Content of: <p>
-#: ../../skycultures/indian/description.en.utf8:19
+#: ../../skycultures/indian/description.en.utf8:29
 msgid ""
 "They observed that some celestial body moves independently relative to "
 "background stars and named them \"planets\" or \"graha\". As such The sun "
-"and moon are also treated as graha. They also named the lunar nodes as "
+"and moon are also treated as graha.  They also named the lunar nodes as "
 "graha-s as these points are very important to calculate the eclipses. Name "
 "of vedic days originated from these planet's names."
 msgstr ""
@@ -12704,145 +12689,145 @@ msgstr ""
 "произошло от названий этих планет."
 
 #. type: Content of: <table><tr><th>
-#: ../../skycultures/indian/description.en.utf8:22
+#: ../../skycultures/indian/description.en.utf8:33
 msgid "Graha"
 msgstr "Граха"
 
 #. type: Content of: <table><tr><th>
-#: ../../skycultures/indian/description.en.utf8:22
+#: ../../skycultures/indian/description.en.utf8:33
 #: ../../skycultures/tongan/description.en.utf8:45
 msgid "Designation"
 msgstr "Обозначение"
 
 #. type: Content of: <table><tr><th>
-#: ../../skycultures/indian/description.en.utf8:22
+#: ../../skycultures/indian/description.en.utf8:33
 msgid "Name of Solar days"
 msgstr "Название солнечных дней"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:23
+#: ../../skycultures/indian/description.en.utf8:34
 msgid "(Sun)"
 msgstr "(Солнце)"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:23
+#: ../../skycultures/indian/description.en.utf8:34
 msgid "Sun God"
 msgstr "Солнечный Бог"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:23
+#: ../../skycultures/indian/description.en.utf8:34
 msgid "(Sunday)"
 msgstr "(Воскресенье)"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:24
+#: ../../skycultures/indian/description.en.utf8:35
 msgid "(Moon)"
 msgstr "(Луна)"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:24
+#: ../../skycultures/indian/description.en.utf8:35
 msgid "Moon god"
 msgstr "Лунный бог"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:24
+#: ../../skycultures/indian/description.en.utf8:35
 msgid "(Monday)"
 msgstr "(Понедельник)"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:25
+#: ../../skycultures/indian/description.en.utf8:36
 msgid "(Mars)"
 msgstr "(Марс)"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:25
+#: ../../skycultures/indian/description.en.utf8:36
 msgid "God of war"
 msgstr "Бог войны"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:25
+#: ../../skycultures/indian/description.en.utf8:36
 msgid "(Tuesday)"
 msgstr "(Вторник)"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:26
+#: ../../skycultures/indian/description.en.utf8:37
 msgid "(Mercury)"
 msgstr "(Меркурий)"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:26
+#: ../../skycultures/indian/description.en.utf8:37
 msgid "Son of Moon"
 msgstr "Сын Луны"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:26
+#: ../../skycultures/indian/description.en.utf8:37
 msgid "(Wednesday)"
 msgstr "(Среда)"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:27
+#: ../../skycultures/indian/description.en.utf8:38
 msgid "(Jupiter)"
 msgstr "(Юпитер)"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:27
+#: ../../skycultures/indian/description.en.utf8:38
 msgid "Teacher of Gods"
 msgstr "Учитель богов"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:27
+#: ../../skycultures/indian/description.en.utf8:38
 msgid "(Thursday)"
 msgstr "(Четверг)"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:28
+#: ../../skycultures/indian/description.en.utf8:39
 msgid "(Venus)"
 msgstr "(Венера)"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:28
+#: ../../skycultures/indian/description.en.utf8:39
 msgid "Mentor of Demons"
 msgstr "Наставник демонов"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:28
+#: ../../skycultures/indian/description.en.utf8:39
 msgid "(Friday)"
 msgstr "(Пятница)"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:29
+#: ../../skycultures/indian/description.en.utf8:40
 msgid "(Saturn)"
 msgstr "(Сатурн)"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:29
+#: ../../skycultures/indian/description.en.utf8:40
 msgid "God of Misfortune"
 msgstr "Бог несчастья"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:29
+#: ../../skycultures/indian/description.en.utf8:40
 msgid "(Saturday)"
 msgstr "(Суббота)"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:30
-#: ../../skycultures/indian/description.en.utf8:31
+#: ../../skycultures/indian/description.en.utf8:41
+#: ../../skycultures/indian/description.en.utf8:42
 msgid "lunar node"
 msgstr "лунный узел"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/indian/description.en.utf8:30
-#: ../../skycultures/indian/description.en.utf8:31
+#: ../../skycultures/indian/description.en.utf8:41
+#: ../../skycultures/indian/description.en.utf8:42
 msgid "-"
 msgstr "-"
 
 #. type: Content of: <h3>
-#: ../../skycultures/indian/description.en.utf8:36
+#: ../../skycultures/indian/description.en.utf8:47
 msgid "General"
 msgstr "Основные"
 
 #. type: Content of: <ul><li>
-#: ../../skycultures/indian/description.en.utf8:38
+#: ../../skycultures/indian/description.en.utf8:49
 msgid ""
 "<a href=\"https://sa.wikipedia.org/wiki/नक्षत्रम्\" class='external text' "
 "rel=\"nofollow\">Nakshatra</a> article at Sanskrit Wikipedia"
@@ -12851,7 +12836,7 @@ msgstr ""
 "rel=\"nofollow\">Nakshatra</a> статья в санскритной Википедии"
 
 #. type: Content of: <ul><li>
-#: ../../skycultures/indian/description.en.utf8:39
+#: ../../skycultures/indian/description.en.utf8:50
 msgid ""
 "<a href=\"http://en.wikipedia.org/wiki/Nakshatra\" class='external text' "
 "rel=\"nofollow\">Nakshatra</a> article at English Wikipedia"
@@ -12860,7 +12845,7 @@ msgstr ""
 "rel=\"nofollow\">Nakshatra</a> статья в английской Википедии"
 
 #. type: Content of: <ul><li>
-#: ../../skycultures/indian/description.en.utf8:40
+#: ../../skycultures/indian/description.en.utf8:51
 msgid ""
 "<a "
 "href=\"https://archive.org/stream/HistoryOfCalendarPanchangaCommittee/History-"
@@ -12873,7 +12858,7 @@ msgstr ""
 "rel=\"nofollow\">Отчет комитета по истории календаря-панчанги</a>"
 
 #. type: Content of: <ul><li>
-#: ../../skycultures/indian/description.en.utf8:41
+#: ../../skycultures/indian/description.en.utf8:52
 msgid ""
 "<a "
 "href=\"http://www.tifr.res.in/~archaeo/papers/Others/Possible%20period%20of%20the%20design%20of%20Nakshatras.pdf\""
@@ -12886,17 +12871,17 @@ msgstr ""
 "абхиджитов\"</a>"
 
 #. type: Content of: <h3>
-#: ../../skycultures/indian/description.en.utf8:44
+#: ../../skycultures/indian/description.en.utf8:55
 msgid "Mythology"
 msgstr "Мифология"
 
 #. type: Content of: outside any tag (error?)
-#: ../../skycultures/indian/description.en.utf8:45
+#: ../../skycultures/indian/description.en.utf8:56
 msgid "Much of the below is available online for free at archive.org."
 msgstr "Многое из нижеприведенного доступно бесплатно на сайте archive.org."
 
 #. type: Content of: <ul><li>
-#: ../../skycultures/indian/description.en.utf8:48
+#: ../../skycultures/indian/description.en.utf8:59
 msgid ""
 "Secondary references such as: Purana Encyclopedia, Purana Index, Mahabharata"
 " Index, Vedic Indix"
@@ -12905,13 +12890,13 @@ msgstr ""
 "Махабхараты, Ведический указатель"
 
 #. type: Content of: <ul><li>
-#: ../../skycultures/indian/description.en.utf8:49
-#: ../../skycultures/indian/description.en.utf8:54
+#: ../../skycultures/indian/description.en.utf8:60
+#: ../../skycultures/indian/description.en.utf8:65
 msgid "Vedas, Agamas"
 msgstr "Веды, Агамы"
 
 #. type: Content of: <ul><li>
-#: ../../skycultures/indian/description.en.utf8:50
+#: ../../skycultures/indian/description.en.utf8:61
 msgid ""
 "<a href=\"https://archive.org/details/vedicchronologya033083mbp/page/n5\" "
 "class='external text'> Vedic Chronology And Vedanga Jyotisha by Bala "
@@ -12922,7 +12907,7 @@ msgstr ""
 "Гангадхар Тилак</a>"
 
 #. type: Content of: <ul><li>
-#: ../../skycultures/indian/description.en.utf8:51
+#: ../../skycultures/indian/description.en.utf8:62
 msgid ""
 "<a href=\"https://archive.org/details/in.gov.ignca.5110\" class='external "
 "text'> Orion The Antiquity Of The Vedas by Bala Gangadhar Tilak</a>"
@@ -12931,7 +12916,7 @@ msgstr ""
 "text'> Орион Древность Вед автора Бала Гангадхар Тилак</a>"
 
 #. type: Content of: <ul><li>
-#: ../../skycultures/indian/description.en.utf8:52
+#: ../../skycultures/indian/description.en.utf8:63
 msgid ""
 "<a href=\"https://archive.org/details/arctichm/page/n21/mode/2up\" "
 "class='external text'> The Arctic Home in the Vedas by Bal Gangadhar "
@@ -12941,7 +12926,7 @@ msgstr ""
 "class='external text'> Арктический дом в Ведах, Бал Гангадхар Тилак</a>"
 
 #. type: Content of: <ul><li>
-#: ../../skycultures/indian/description.en.utf8:53
+#: ../../skycultures/indian/description.en.utf8:64
 msgid ""
 "<a href=\"https://archive.org/details/HamletsMill\" class='external "
 "text'>Hamlet's Mill: An Essay on Myth & the Frame of Time by Giorgio de "
@@ -12952,17 +12937,17 @@ msgstr ""
 "Сантильяна, Герта фон Дехенд</a>"
 
 #. type: Content of: <h2>
-#: ../../skycultures/indian/description.en.utf8:58
+#: ../../skycultures/indian/description.en.utf8:69
 msgid "Contributors"
 msgstr "Внесшие вклад"
 
 #. type: Content of: <ul><li>
-#: ../../skycultures/indian/description.en.utf8:60
+#: ../../skycultures/indian/description.en.utf8:71
 msgid "Tanmoy Saha"
 msgstr "Tanmoy Saha"
 
 #. type: Content of: <ul><li>
-#: ../../skycultures/indian/description.en.utf8:61
+#: ../../skycultures/indian/description.en.utf8:72
 msgid ""
 "Contributors from the <a href=\"https://github.com/sanskrit-"
 "coders\">sanskrit-coders community</a> (esp <a "
@@ -13313,6 +13298,7 @@ msgstr "Огр, дьявол, возможно призрак "
 
 #. type: Content of: <h2>
 #: ../../skycultures/japanese_moon_stations/description.en.utf8:246
+#: ../../skycultures/tibetan/description.en.utf8:69
 #: ../../skycultures/vanuatu_netwar/description.en.utf8:25
 msgid "Stars"
 msgstr "Звёзды"
@@ -13600,11 +13586,15 @@ msgid ""
 "Bandaarr is either a grey or red kangaroo, depending on the culture, and has"
 " significance in ceremony."
 msgstr ""
+"Бандаарр — это «кенгуру» на языке камиларои/эуахлайи, и этот кенгуру "
+"расположен под брюхом Эму в Млечном Пути, глядя в сторону от Эму. Бандаарр —"
+" это либо серый, либо красный кенгуру, в зависимости от культуры, и он имеет"
+" значение в церемониях."
 
 #. type: Content of: <h3>
 #: ../../skycultures/kamilaroi/description.en.utf8:39
 msgid "Muraay Muyaay"
-msgstr ""
+msgstr "Мурай Муяай"
 
 #. type: Content of: <p>
 #: ../../skycultures/kamilaroi/description.en.utf8:40
@@ -13614,6 +13604,11 @@ msgid ""
 "ended up in the constellation Crux when their tree, the Yarran, was dragged "
 "into the sky with the first man to die, and they are always chasing Yarran."
 msgstr ""
+"Мураай — это на языке камиларои, а Муяай — это на языке эуахлайи, что "
+"означает какаду с серным хохолком, которые являются звездами-пойнтерами "
+"(Альфа Центавра и Хадар/Бета Центавра). Они оказались в созвездии Креста, "
+"когда их дерево Ярран было унесено в небо вместе с первым погибшим "
+"человеком, и они всегда преследуют Яррана."
 
 #. type: Content of: <h3>
 #: ../../skycultures/kamilaroi/description.en.utf8:42
@@ -14427,7 +14422,7 @@ msgstr "Небесные тела локоно"
 #. type: Content of: <p>
 #: ../../skycultures/lokono/description.en.utf8:259
 msgid "<em>Hadali</em> 'Sun'"
-msgstr ""
+msgstr "<em>Хадали</em> 'Солнце'"
 
 #. type: Content of: <p>
 #: ../../skycultures/lokono/description.en.utf8:260
@@ -14465,7 +14460,7 @@ msgstr ""
 #. type: Content of: <p>
 #: ../../skycultures/lokono/description.en.utf8:262
 msgid "<em>Kathi</em> 'Moon'"
-msgstr ""
+msgstr "<em>Кати</em> 'Луна'"
 
 #. type: Content of: <p>
 #: ../../skycultures/lokono/description.en.utf8:263
@@ -14500,7 +14495,7 @@ msgstr ""
 #. type: Content of: <p>
 #: ../../skycultures/lokono/description.en.utf8:265
 msgid "<em>Warhokoma</em> 'Venus'"
-msgstr ""
+msgstr "<em>Вархокома</em> 'Венера'"
 
 #. type: Content of: <p>
 #: ../../skycultures/lokono/description.en.utf8:266
@@ -14533,7 +14528,7 @@ msgstr ""
 #. type: Content of: <p>
 #: ../../skycultures/lokono/description.en.utf8:268
 msgid "<em>Waya nukuthi bunaha</em> 'Milky Way'"
-msgstr ""
+msgstr "<em>Вая нукутхи бунаха</em> 'Млечный Путь'"
 
 #. type: Content of: <p>
 #: ../../skycultures/lokono/description.en.utf8:269
@@ -14560,7 +14555,7 @@ msgstr ""
 #. type: Content of: <p>
 #: ../../skycultures/lokono/description.en.utf8:271
 msgid "<em>Mali</em> 'Sirius'"
-msgstr ""
+msgstr "<em>Мали</em> 'Сириус'"
 
 #. type: Content of: <p>
 #: ../../skycultures/lokono/description.en.utf8:272
@@ -14811,7 +14806,7 @@ msgstr ""
 #. type: Content of: <p>
 #: ../../skycultures/lokono/description.en.utf8:295
 msgid "<em>Yokhârhin</em> 'Hunter'"
-msgstr ""
+msgstr "<em>Йохархин</em> 'Охотник'"
 
 #. type: Content of: <p>
 #: ../../skycultures/lokono/description.en.utf8:296
@@ -14839,7 +14834,7 @@ msgstr ""
 #. type: Content of: <p>
 #: ../../skycultures/lokono/description.en.utf8:298
 msgid "<em>Alêti</em> 'Torch'"
-msgstr ""
+msgstr "<em>Алети</em> 'Факел'"
 
 #. type: Content of: <p>
 #: ../../skycultures/lokono/description.en.utf8:299
@@ -15002,7 +14997,7 @@ msgstr ""
 #. type: Content of: <p>
 #: ../../skycultures/lokono/description.en.utf8:316
 msgid "<em>Kwakoya</em> 'Spirit of the blue crab'"
-msgstr ""
+msgstr "<em>Квакоя</em> 'Дух синего краба'"
 
 #. type: Content of: <p>
 #: ../../skycultures/lokono/description.en.utf8:317
@@ -15028,7 +15023,7 @@ msgstr ""
 #. type: Content of: <p>
 #: ../../skycultures/lokono/description.en.utf8:319
 msgid "<em>Ifakoya</em> 'Spirit of the Muscovy duck'"
-msgstr ""
+msgstr "<em>Ифакоя</em> 'Дух мускусной утки'"
 
 #. type: Content of: <p>
 #: ../../skycultures/lokono/description.en.utf8:321
@@ -16130,10 +16125,10 @@ msgstr ""
 #: ../../skycultures/tongan/description.en.utf8:86
 msgid ""
 "This sky culture was contributed by Stellarium user <i>Dan Smale</i>, "
-"d.smale(at)niwa.co.nz"
+"smaledaniel(at)outlook.com"
 msgstr ""
 "Эта культура неба была предоставлена пользователем Stellarium'а <i>Дэном "
-"Смэлом (Dan Smale)</i>, d.smale(at)niwa.co.nz"
+"Смэлом (Dan Smale)</i>, smaledaniel(at)outlook.com"
 
 #. type: Content of: <h1>
 #: ../../skycultures/maya/description.en.utf8:1
@@ -20331,6 +20326,867 @@ msgstr ""
 #: ../../skycultures/russian_siberian/description.en.utf8:33
 msgid "Karpenko, Ju.A. Nazvanija zvezdnogo neba. - M.: Nauka, 1981. - 184 s."
 msgstr "Карпенко, Ю.А. Названия звездного неба. - М.: Наука, 1981. - 184 с."
+
+#. type: Content of: <h2>
+#: ../../skycultures/tibetan/description.en.utf8:1
+msgid "Tibetan (Preliminary)"
+msgstr "Тибетская (предварительная)"
+
+#. type: Content of: <p>
+#: ../../skycultures/tibetan/description.en.utf8:3
+msgid ""
+"<em>This is unfinished work and only a tentative solution. Please help us "
+"improve! (see below)</em>"
+msgstr ""
+"<em>Это незавершенная работа и лишь предварительное решение. Пожалуйста, "
+"помогите нам стать лучше! (см. ниже)</em>"
+
+#. type: Content of: <p>
+#: ../../skycultures/tibetan/description.en.utf8:5
+msgid ""
+"During a travel to the Tibetan Autonomous Region of China (TAR) in 2019, I "
+"was confronted with a highly complex system of astronomy and calendar "
+"computations which has a long tradition in Tibet."
+msgstr ""
+"Во время поездки в Тибетский автономный район Китая (ТАР) в 2019 году я "
+"столкнулся с очень сложной системой астрономических и календарных "
+"вычислений, которая имеет давнюю традицию в Тибете."
+
+#. type: Content of: <p>
+#: ../../skycultures/tibetan/description.en.utf8:8
+msgid ""
+"Traditional Tibetan astronomy is largely influenced by the Kalacakra Tantra "
+"which has been imported from India, mixed with some Chinese influence."
+msgstr ""
+"Традиционная тибетская астрономия во многом находится под влиянием "
+"Калачакра-тантры, заимствованной из Индии и смешанной с некоторым китайским "
+"влиянием."
+
+#. type: Attribute 'alt' of: <table><tr><td><img>
+#: ../../skycultures/tibetan/description.en.utf8:13
+msgid "Emblem of Men Tsee Khang"
+msgstr "Эмблема Мен Ци Кханг"
+
+#. type: Attribute 'alt' of: <table><tr><td><img>
+#: ../../skycultures/tibetan/description.en.utf8:14
+msgid "Stag Phu disk"
+msgstr "Диск Стаг Фу"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:17
+msgid "Emblem on the door sign of Men Tsee Khang institute in Lhasa"
+msgstr "Эмблема на дверной вывеске института Мен Ци Кханг в Лхасе."
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:18
+msgid ""
+"Stag Phu observatory Platform. The traditional stone for the shadow "
+"observation has been embedded in a concrete platform which shows the lunar "
+"mansions.  The outermost circle shows figures of the 12 Zodiacal signs "
+"(barely visible but enlarged below)."
+msgstr ""
+"Платформа обсерватории Стаг Фу. Традиционный камень для наблюдения за тенями"
+" был встроен в каменное основание, на которой изображены лунные стоянки. На "
+"крайнем круге изображены фигуры 12 знаков Зодиака (едва видимые, но "
+"увеличенные ниже)."
+
+#. type: Content of: <p>
+#: ../../skycultures/tibetan/description.en.utf8:23
+msgid ""
+"The Men Tsee Khang Institute for Astro and Medicine in Lhasa, TAR, is the "
+"central authority for traditional Tibetan medicine and astrology, two fields"
+" of research which are closely related in Tibetan tradition. The institute "
+"is in charge of editing the annual Tibetan calendar.  Although this can be "
+"described algorithmically, in 2009 Men Tsee Khang experts have re-erected a "
+"calendar observatory in Stag Phu monastery, where a sunrise observation is "
+"performed on each March 17th for calibrating the calendar.  On this day, "
+"just as the sun climbs over a mountain ridge, its first rays are cast "
+"through a window in the observatory tower onto a particular rock which has "
+"been embedded into a circular platform."
+msgstr ""
+"Институт астрофизики и медицины Мен Ци Кханг в Лхасе, ТАР, является "
+"центральным органом традиционной тибетской медицины и астрологии — двух "
+"областей исследований, тесно связанных в тибетской традиции. Институт "
+"отвечает за редактирование ежегодного тибетского календаря. Хотя это можно "
+"описать алгоритмически, в 2009 году специалисты Мен Це Кханг заново "
+"построили календарную обсерваторию в монастыре Стаг Фу, где каждое 17 марта "
+"проводится наблюдение восхода солнца для калибровки календаря. В этот день, "
+"когда солнце поднимается над горным хребтом, его первые лучи попадают через "
+"окно башни обсерватории на особую скалу, встроенную в круглую платформу."
+
+#. type: Content of: <h3>
+#: ../../skycultures/tibetan/description.en.utf8:30
+msgid "The Zodiac"
+msgstr "Зодиак"
+
+#. type: Content of: <p>
+#: ../../skycultures/tibetan/description.en.utf8:32
+msgid ""
+"The zodiac is partitioned into 12 figures largely identical to the classical"
+" figures of the zodiac known in Europe.  The following table is from Cornu, "
+"with photographs showing the figures illustrated in the circular platform. "
+"Note the unexpected appearance of Cancer. Is it a frog?"
+msgstr ""
+"Зодиак разделен на 12 фигур, во многом идентичных классическим фигурам "
+"зодиака, известным в Европе. Следующая таблица взята из Корню и содержит "
+"фотографии, показывающие фигуры, изображенные на круглой платформе. Обратите"
+" внимание на неожиданное появление Рака. Это лягушка?"
+
+#. type: Content of: <table><tr><th>
+#: ../../skycultures/tibetan/description.en.utf8:37
+msgid "IAU"
+msgstr "МАС"
+
+#. type: Content of: <table><tr><th>
+#: ../../skycultures/tibetan/description.en.utf8:37
+msgid "Tibetan"
+msgstr "Тибетское"
+
+#. type: Content of: <table><tr><th>
+#: ../../skycultures/tibetan/description.en.utf8:37
+msgid "Indian"
+msgstr "Индийское"
+
+#. type: Content of: <table><tr><th>
+#: ../../skycultures/tibetan/description.en.utf8:37
+msgid "Platform Illustration"
+msgstr "Иллюстрация платформы"
+
+#. type: Attribute 'alt' of: <table><tr><td><img>
+#: ../../skycultures/tibetan/description.en.utf8:38
+msgid "Ari"
+msgstr "Ari"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:38
+msgid "Luk"
+msgstr "Лук"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:38
+msgid "Meṣa"
+msgstr "Meṣa"
+
+#. type: Attribute 'alt' of: <table><tr><td><img>
+#: ../../skycultures/tibetan/description.en.utf8:39
+msgid "Tau"
+msgstr "Tau"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:39
+msgid "Lang"
+msgstr "Ланг"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:39
+msgid "Vṛṣa"
+msgstr "Vṛṣa"
+
+#. type: Attribute 'alt' of: <table><tr><td><img>
+#: ../../skycultures/tibetan/description.en.utf8:40
+msgid "Gem"
+msgstr "Gem"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:40
+msgid "Trik"
+msgstr "Трик"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:40
+msgid "Mithuna"
+msgstr "Mithuna"
+
+#. type: Attribute 'alt' of: <table><tr><td><img>
+#: ../../skycultures/tibetan/description.en.utf8:41
+msgid "Cnc"
+msgstr "Cnc"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:41
+msgid "Karkata"
+msgstr "Карката"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:41
+msgid "Karka"
+msgstr "Karka"
+
+#. type: Attribute 'alt' of: <table><tr><td><img>
+#: ../../skycultures/tibetan/description.en.utf8:42
+msgid "Leo"
+msgstr "Лев"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:42
+msgid "Senge"
+msgstr "Сенге"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:42
+msgid "Simha"
+msgstr "Simha"
+
+#. type: Attribute 'alt' of: <table><tr><td><img>
+#: ../../skycultures/tibetan/description.en.utf8:43
+msgid "Vir"
+msgstr "Vir"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:43
+msgid "Pumo"
+msgstr "Пумо"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:43
+msgid "Kanyā"
+msgstr "Kanyā"
+
+#. type: Attribute 'alt' of: <table><tr><td><img>
+#: ../../skycultures/tibetan/description.en.utf8:44
+msgid "Lib"
+msgstr "Lib"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:44
+msgid "Sangwa"
+msgstr "Сангва"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:44
+msgid "Tulā"
+msgstr "Tulā"
+
+#. type: Attribute 'alt' of: <table><tr><td><img>
+#: ../../skycultures/tibetan/description.en.utf8:45
+msgid "Sco"
+msgstr "Sco"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:45
+msgid "Dikpa"
+msgstr "Дикпа"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:45
+msgid "Vṛscika"
+msgstr "Vṛscika"
+
+#. type: Attribute 'alt' of: <table><tr><td><img>
+#: ../../skycultures/tibetan/description.en.utf8:46
+msgid "Sgr"
+msgstr "Sgr"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:46
+msgid "Zhu"
+msgstr "Жу"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:46
+msgid "Dhanus"
+msgstr "Dhanus"
+
+#. type: Attribute 'alt' of: <table><tr><td><img>
+#: ../../skycultures/tibetan/description.en.utf8:47
+msgid "Cap"
+msgstr "Cap"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:47
+msgid "Chusin"
+msgstr "Чусин"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:47
+msgid "Makara"
+msgstr "Makara"
+
+#. type: Attribute 'alt' of: <table><tr><td><img>
+#: ../../skycultures/tibetan/description.en.utf8:48
+msgid "Aqr"
+msgstr "Aqr"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:48
+msgid "Bumpa"
+msgstr "Бумпа"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:48
+msgid "Kumbha"
+msgstr "Kumbha"
+
+#. type: Attribute 'alt' of: <table><tr><td><img>
+#: ../../skycultures/tibetan/description.en.utf8:49
+msgid "Psc"
+msgstr "Psc"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:49
+msgid "Nya"
+msgstr "Ня"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:49
+msgid "Mīna"
+msgstr "Mīna"
+
+#. type: Content of: <h3>
+#: ../../skycultures/tibetan/description.en.utf8:54
+msgid "The Lunar Mansions"
+msgstr "Лунные стоянки"
+
+#. type: Content of: <p>
+#: ../../skycultures/tibetan/description.en.utf8:56
+msgid ""
+"The Men Tsee Khang emblem shows 27 stick figures for the Lunar mansions "
+"arranged in a circle around the central figure.  The same figures are also "
+"laid out in cement with bright stones connected by black lines in the "
+"circular platform which has been erected when the observatory was rebuilt.  "
+"These 27 <em>gyukar</em> figures are described as being equal to the Indian "
+"<em>Nakṣatras</em> and represent sections of 13°20' longitude along the "
+"ecliptic.  Actually, one of the <em>gyukars</em> consists of 2 "
+"constellations, therefore 28 <em>lunar constellations</em> are named."
+msgstr ""
+"На эмблеме Мен Ци Кханг изображены 27 фигурок лунных особняков, "
+"расположенных по кругу вокруг центральной фигуры. Эти же фигуры выложены из "
+"цемента яркими камнями, соединенными черными линиями, на круглой платформе, "
+"возведенной при перестройке обсерватории. Эти 27 фигур <em>гюкаров</em> "
+"описываются как равные индийским <em>накшатрам</em> и представляют собой "
+"участки 13°20' долготы вдоль эклиптики. Собственно, один из <em>гюкаров</em>"
+" состоит из 2-х созвездий, поэтому названо 28 <em>лунных созвездий</em>."
+
+#. type: Content of: <p>
+#: ../../skycultures/tibetan/description.en.utf8:62
+msgid ""
+"However, not much is known of the exact identification of the Tibetan Lunar "
+"Stations outside of Tibet.  Most literature is Tibetan or Chinese only, and "
+"there were no Tibetan star maps available. Also our guides could not explain"
+" any of the following to us."
+msgstr ""
+"Однако мало что известно о точной идентификации тибетских лунных стоянках за"
+" пределами Тибета. Большая часть литературы написана только на тибетском или"
+" китайском языке, а звездных карт Тибета не было. Также наши гиды не смогли "
+"объяснить нам ничего из следующего."
+
+#. type: Content of: <p>
+#: ../../skycultures/tibetan/description.en.utf8:66
+msgid ""
+"The following table was taken from Cornu. Note that Tibetans start counting "
+"at zero, while the Indians count from 1."
+msgstr ""
+"Следующая таблица была взята из Корню. Обратите внимание, что тибетцы "
+"начинают счет с нуля, а индийцы – с 1."
+
+#. type: Content of: <table><tr><th>
+#: ../../skycultures/tibetan/description.en.utf8:69
+msgid "Gyukar"
+msgstr "Гюкар"
+
+#. type: Content of: <table><tr><th>
+#: ../../skycultures/tibetan/description.en.utf8:69
+msgid "Nakshatra"
+msgstr "Накшатра"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:70
+msgid "Takar, Yugu"
+msgstr "Такар, Югу"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:70
+msgid "Aśvini"
+msgstr "Aśvini"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:70
+msgid "&beta; Ari Sheratan"
+msgstr "&beta; Ari (Шератан)"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:71
+msgid "Dranye"
+msgstr "Дранё"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:71
+msgid "Bharaṇī"
+msgstr "Bharaṇī"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:71
+msgid "35 Ari"
+msgstr "35 Ari"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:72
+msgid "Mindruk"
+msgstr "Миндрук"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:72
+msgid "Kṛttikā"
+msgstr "Kṛttikā"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:73
+msgid "Narma"
+msgstr "Нарма"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:73
+msgid "Rohiṇī"
+msgstr "Рохини"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:73
+msgid "&alpha; Tau Aldebaran"
+msgstr "&alpha; Tau (Альдебаран)"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:74
+msgid "Go"
+msgstr "Го"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:74
+msgid "Mṛgaśirā"
+msgstr "Mṛgaśirā"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:74
+msgid "&lambda; Ori"
+msgstr "&lambda; Ori"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:75
+msgid "Lak"
+msgstr "Лак"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:75
+msgid "Ārdrā"
+msgstr "Ардра"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:75
+msgid "&alpha; Ori Betelgeuse"
+msgstr "&alpha; Ori (Бетельзейзе)"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:76
+msgid "Nabso, Gyaltö"
+msgstr "Набсо, Гялтё"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:76
+msgid "Punarvasū"
+msgstr "Punarvasū"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:76
+msgid "&beta; Gem Pollux"
+msgstr "&beta; Gem (Поллукс)"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:77
+msgid "Gyal, Gyalme"
+msgstr "Гял, Гялме"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:77
+msgid "Puṣya"
+msgstr "Пушья"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:77
+msgid "5 Cnc"
+msgstr "5 Cnc"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:78
+msgid "Kak, Wa"
+msgstr "Как, Ва"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:78
+msgid "Aśleṣa"
+msgstr "Aśleṣa"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:78
+msgid "&alpha; Hya"
+msgstr "&alpha; Hya"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:79
+msgid "Chu, Ta chen"
+msgstr "Чу, Та чен"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:79
+msgid "Maghā"
+msgstr "Магха"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:79
+msgid "&alpha; Leo Regulus"
+msgstr "&alpha; Leo (Регул)"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:80
+msgid "Dre, Ta chung"
+msgstr "Дре, Та чун"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:80
+msgid "Purva-Phālgunī"
+msgstr "Purva-Phālgunī"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:80
+msgid "&delta; Leo Zosma"
+msgstr "&delta; Leo (Зосма)"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:81
+msgid "Wo"
+msgstr "Во"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:81
+msgid "Uttara-Phālgunī"
+msgstr "Uttara-Phālgunī"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:81
+msgid "&beta; Leo Denebola"
+msgstr "&beta; Leo (Денебола)"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:82
+msgid "Mezhi"
+msgstr "Межи"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:82
+msgid "Hasta"
+msgstr "Хаста"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:82
+msgid "&delta; Crv Algorab"
+msgstr "&delta; Crv (Альгораб)"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:83
+msgid "Nakpa"
+msgstr "Накпа"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:83
+msgid "Citrā"
+msgstr "Citrā"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:83
+msgid "&alpha; Vir Spica"
+msgstr "&alpha; Vir (Спика)"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:84
+msgid "Sari"
+msgstr "Сари"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:84
+msgid "Svātī"
+msgstr "Свати"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:84
+msgid "&alpha; Boo Arcturus"
+msgstr "&alpha; Boo (Арктур)"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:85
+msgid "Saga"
+msgstr "Сага"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:85
+msgid "Viśākhā"
+msgstr "Viśākhā"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:85
+msgid "&alpha; Lib"
+msgstr "&alpha; Lib"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:86
+msgid "Lhatsam"
+msgstr "Лхатсам"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:86
+msgid "Anurādhā"
+msgstr "Anurādhā"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:86
+msgid "&delta; Sco"
+msgstr "&delta; Sco"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:87
+msgid "Nrön, Deu"
+msgstr "Нрён, Деу"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:87
+msgid "Jyeṣṭhā"
+msgstr "Jyeṣṭhā"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:87
+msgid "&alpha; Sco Antares"
+msgstr "&alpha; Sco (Антарес)"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:88
+msgid "Nup"
+msgstr "Нуп"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:88
+msgid "Mūla"
+msgstr "Mūla"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:88
+msgid "&lambda; Sco Shaula"
+msgstr "&lambda; Sco (Шаула)"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:89
+msgid "Chutö"
+msgstr "Чутё"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:89
+msgid "Purvāṣadhā"
+msgstr "Purvāṣadhā"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:89
+msgid "&delta; Sgr"
+msgstr "&delta; Sgr"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:90
+msgid "Chume"
+msgstr "Чуме"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:90
+msgid "Uttarāṣadhā"
+msgstr "Uttarāṣadhā"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:90
+msgid "&sigma; Sgr"
+msgstr "&sigma; Sgr"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:91
+msgid "Drozhin + Jizhin"
+msgstr "Дрожин + Джижин"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:91
+msgid "Uttara-Āṣādhā + Śravaṇa"
+msgstr "Uttara-Āṣādhā + Śravaṇa"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:91
+msgid "&alpha; Lyr Vega + &alpha; Aql Altair"
+msgstr "&alpha; Lyr (Вега) + &alpha; Aql (Альтаир)"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:92
+msgid "Möndre"
+msgstr "Мёндре"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:92
+msgid "Dhaniāsṭha"
+msgstr "Dhaniāsṭha"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:92
+msgid "&beta; Del"
+msgstr "&beta; Del"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:93
+msgid "Möndru"
+msgstr "Мёндру"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:93
+msgid "Satabhiṣak"
+msgstr "Satabhiṣak"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:93
+msgid "&lambda; Aqr"
+msgstr "&lambda; Aqr"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:94
+msgid "Trumtö"
+msgstr "Трумтё"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:94
+msgid "Purvabāadrapada"
+msgstr "Purvabāadrapada"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:94
+msgid "&alpha; Peg Markab"
+msgstr "&alpha; Peg (Маркаб)"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:95
+msgid "Trume"
+msgstr "Труме"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:95
+msgid "Uttarabhādrapada"
+msgstr "Uttarabhādrapada"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:95
+msgid "&gamma; Peg, &alpha; And"
+msgstr "&gamma; Peg, &alpha; And"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:96
+msgid "Namdru, Shesa"
+msgstr "Намдру, Шеса"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:96
+msgid "Revati"
+msgstr "Ревати"
+
+#. type: Content of: <table><tr><td>
+#: ../../skycultures/tibetan/description.en.utf8:96
+msgid "&sigma; Psc"
+msgstr "&sigma; Psc"
+
+#. type: Content of: <p>
+#: ../../skycultures/tibetan/description.en.utf8:100
+msgid ""
+"The Lunar Mansions in this skyculture are shown as asterisms among the "
+"traditional 12 Ptolemaic zodiacal constellations.  It is assumed that most "
+"originate from the Indian traditions, esp. Kalacakra Tantra, but it appears "
+"that some Chinese influence is also present, e.g. Nr. 11.  Only for the "
+"Zodiacal constellations artwork is provided.  A few more constellations in "
+"Ptolemaic tradition are displayed in the northern sky to allow easier "
+"orientation, but with their names suppressed.  We have no information about "
+"their names, relevance or even publicity of these in Tibet."
+msgstr ""
+"Лунные стоянки в этой культуре неба показаны как астеризмы среди "
+"традиционных 12 птолемеевских зодиакальных созвездий. Предполагается, что "
+"большинство из них происходит из индийских традиций, особенно, Калачакра "
+"Тантра, но, похоже, присутствует и некоторое китайское влияние, например, "
+"№11. Предусмотрены иллюстрации только для зодиакальных созвездий. Еще "
+"несколько созвездий в птолемеевской традиции отображаются на северном небе, "
+"чтобы облегчить ориентацию, но их названия скрыты. У нас нет информации об "
+"их названиях, актуальности или даже известности в Тибете."
+
+#. type: Content of: <h3>
+#: ../../skycultures/tibetan/description.en.utf8:109
+msgid "Please help us"
+msgstr "Пожалуйста помогите нам"
+
+#. type: Content of: <p>
+#: ../../skycultures/tibetan/description.en.utf8:110
+msgid ""
+"The figures are my own attempt of identification of the Lunar mansion "
+"figures.  We can be sure about the placement of only those which can also be"
+" found in other sky cultures, e.g. Japanese Moon Stations.  Many stars are "
+"rather dim, and the figures in the emblem apparently have to be rotated in "
+"arbitrary ways, like <em>gyukar 3</em>=Hyades.  Others require considerable "
+"liberties to accept a topological match.  Alternative matches with stars in "
+"similar topology arranged in the orientation shown in the emblem "
+"(north=outer circle)  have been found only in neighboring areas of the sky, "
+"making a match rather unlikely.  Others appear to have been taken over from "
+"Chinese tradition, e.g. Nr. 11.  LM21 can be explained only if we accept two"
+" separate figures which are not joined as shown in the concrete figure.  "
+"Then they represent Chinese constellations <em>Ox</em> and <em>Girl</em> "
+"(which is also Japanese Lunar station <em>Woman</em>)."
+msgstr ""
+"Фигуры представляют собой мою собственную попытку идентифицировать фигуры "
+"лунных стоянок. Мы можем быть уверены в размещении только тех, которые можно"
+" встретить и в других небесных культурах, напр. Японские лунные стоянки. "
+"Многие звезды довольно тусклые, и фигуры на эмблеме, видимо, приходится "
+"вращать произвольными способами, как <em>гюкар 3</em>=Гиады. Другие требуют "
+"значительной свободы, чтобы принять топологическое соответствие. "
+"Альтернативные совпадения со звездами аналогичной топологии, расположенными "
+"в ориентации, показанной на эмблеме (север = внешний круг), были обнаружены "
+"только в соседних областях неба, что делает совпадение маловероятным. "
+"Другие, по-видимому, были заимствованы из китайской традиции, например. № "
+"11. LM21 можно объяснить, только если принять две отдельные фигуры, не "
+"соединенные так, как показано на конкретной фигуре. Тогда они представляют "
+"китайские созвездия <em>Быка</em> и <em>Девочки</em> (которые также являются"
+" японской лунной стоянкой<em>Женщиной</em>)."
+
+#. type: Content of: <p>
+#: ../../skycultures/tibetan/description.en.utf8:121
+msgid ""
+"Alternative figures can be found in the configuration files.  We would like "
+"to hear from experts of Tibetan astronomy about both confirmed and corrected"
+" identification."
+msgstr ""
+"Альтернативные рисунки можно найти в файлах конфигурации. Нам хотелось бы "
+"услышать мнение специалистов тибетской астрономии как о подтвержденной, так "
+"и об исправленной идентификации."
+
+#. type: Content of: <h4>
+#: ../../skycultures/tibetan/description.en.utf8:124
+msgid "Further reading"
+msgstr "Дополнительная информация"
+
+#. type: Content of: <p>
+#: ../../skycultures/tibetan/description.en.utf8:126
+msgid ""
+"This work accompanies a 3D model of the Stag Phu observatory for use with "
+"the Scenery3D plugin and described in:"
+msgstr ""
+"Эта работа сопровождает 3D-модель обсерватории Стаг Фу для использования с "
+"плагином Scenery3D и описана в:"
+
+#. type: Content of: <p>
+#: ../../skycultures/tibetan/description.en.utf8:128
+msgid ""
+"Georg Zotti, Guntram Hazod, Martin Gamon, Hubert Feiglstorfer: A Calendar "
+"Observatory in Tibet. Proc. SEAC2022, Timisoara University Press, 2023. (to "
+"appear)"
+msgstr ""
+"Георг Зотти, Гунтрам Хазод, Мартин Гамон, Хуберт Фейглсторфер: Календарная "
+"обсерватория в Тибете. Сборник SEAC2022, Издательство Университета "
+"Тимишоары, 2023 г. (будет опубликовано)"
+
+#. type: Content of: <p>
+#: ../../skycultures/tibetan/description.en.utf8:132
+msgid "Georg Zotti on May 21, 2019, reworked July-October 2023."
+msgstr "Георг Зотти 21 мая 2019 г., переработан в июле-октябре 2023 г."
 
 #. type: Content of: <h1>
 #: ../../skycultures/tongan/description.en.utf8:1

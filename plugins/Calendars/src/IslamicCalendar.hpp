@@ -45,7 +45,7 @@ public slots:
 
 	//! set date from a vector of calendar date elements sorted from the largest to the smallest.
 	//! Year-Month[1...12]-Day[1...31]
-	void setDate(QVector<int> parts) override;
+	void setDate(const QVector<int> &parts) override;
 
 	//! get a stringlist of calendar date elements sorted from the largest to the smallest.
 	//! Year, Month, MonthName, Day, DayName
@@ -58,7 +58,7 @@ public slots:
 	static bool isLeap(int iYear);
 
 	//! find RD number for date in the Islamic calendar
-	static int fixedFromIslamic(QVector<int> islamic);
+	static int fixedFromIslamic(const QVector<int> &islamic);
 	//! find date in the Islamic calendar from RD number
 	static QVector<int> islamicFromFixed(int rd);
 

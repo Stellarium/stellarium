@@ -793,24 +793,20 @@ void ArchaeoLines::showCurrentPlanet(ArchaeoLine::Line l)
 }
 void ArchaeoLines::showCurrentPlanetNamed(const QString &planet)
 {
-	if (planet=="none")
-		enumShowCurrentPlanet=ArchaeoLine::CurrentPlanetNone;
-	else if (planet=="Mercury")
-		enumShowCurrentPlanet=ArchaeoLine::CurrentPlanetMercury;
-	else if (planet=="Venus")
-		enumShowCurrentPlanet=ArchaeoLine::CurrentPlanetVenus;
-	else if (planet=="Mars")
-		enumShowCurrentPlanet=ArchaeoLine::CurrentPlanetMars;
-	else if (planet=="Jupiter")
-		enumShowCurrentPlanet=ArchaeoLine::CurrentPlanetJupiter;
-	else if (planet=="Saturn")
-		enumShowCurrentPlanet=ArchaeoLine::CurrentPlanetSaturn;
-	else {
-		qWarning() << "ArchaeoLines: showCurrentPlanet: Invalid planet requested: " << planet;
-		enumShowCurrentPlanet=ArchaeoLine::CurrentPlanetNone;
-	}
+	static const QMap<QString, ArchaeoLine::Line>map={
+		{"none",    ArchaeoLine::CurrentPlanetNone},
+		{"Mercury", ArchaeoLine::CurrentPlanetMercury},
+		{"Venus",   ArchaeoLine::CurrentPlanetVenus},
+		{"Mars",    ArchaeoLine::CurrentPlanetMars},
+		{"Jupiter", ArchaeoLine::CurrentPlanetJupiter},
+		{"Saturn",  ArchaeoLine::CurrentPlanetSaturn}};
+	enumShowCurrentPlanet=map.value(planet, ArchaeoLine::CurrentPlanetNone);
 
-	conf->setValue("ArchaeoLines/show_current_planet", planet);
+	if (!map.contains(planet))
+		qWarning() << "ArchaeoLines: showCurrentPlanet: Invalid planet requested: " << planet;
+
+	conf->setValue("ArchaeoLines/show_current_planet", map.key(enumShowCurrentPlanet));
+
 	currentPlanetLine->setLineType(enumShowCurrentPlanet);
 	currentPlanetLine->setDisplayed(enumShowCurrentPlanet != ArchaeoLine::CurrentPlanetNone);
 	emit currentPlanetChanged(enumShowCurrentPlanet);
@@ -971,7 +967,7 @@ void ArchaeoLines::setCustomAzimuth1(double az)
 }
 void ArchaeoLines::setCustomAzimuth2(double az)
 {
-	if (!qFuzzyCompare(az, customAzimuth1Line->getDefiningAngle()))
+	if (!qFuzzyCompare(az, customAzimuth2Line->getDefiningAngle()))
 	{
 		customAzimuth2Line->setDefiningAngle(az);
 		conf->setValue("ArchaeoLines/custom_azimuth_2_angle", az);
@@ -1033,7 +1029,7 @@ void ArchaeoLines::setCustomDeclination1(double dec)
 }
 void ArchaeoLines::setCustomDeclination2(double dec)
 {
-	if (!qFuzzyCompare(dec, customDeclination1Line->getDefiningAngle()))
+	if (!qFuzzyCompare(dec, customDeclination2Line->getDefiningAngle()))
 	{
 		customDeclination2Line->setDefiningAngle(dec);
 		conf->setValue("ArchaeoLines/custom_declination_2_angle", dec);

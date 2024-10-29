@@ -22,6 +22,7 @@
 #include "StelApp.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelStyle.hpp"
+#include "StelMainView.hpp"
 #include "StelTranslator.hpp"
 #include "TelescopeControl.hpp"
 #include "TelescopeConfigurationDialog.hpp"
@@ -109,8 +110,8 @@ void TelescopeDialog::createDialogContent()
 
 	//Inherited connect
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
-	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
-	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
+	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
+	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	//Connect: sender, signal, receiver, method
 	//Page: Telescopes
@@ -126,9 +127,9 @@ void TelescopeDialog::createDialogContent()
 	connectBoolProperty(ui->checkBoxReticles,   "TelescopeControl.flagTelescopeReticles");
 	connectBoolProperty(ui->checkBoxLabels,     "TelescopeControl.flagTelescopeLabels");
 	connectBoolProperty(ui->checkBoxCircles,    "TelescopeControl.flagTelescopeCircles");
-	connectColorButton(ui->reticleColorButton,  "TelescopeControl.reticleColor", "TelescopeControl/color_telescope_reticles");
-	connectColorButton(ui->labelColorButton,    "TelescopeControl.labelColor",   "TelescopeControl/color_telescope_labels");
-	connectColorButton(ui->circleColorButton,   "TelescopeControl.circleColor",  "TelescopeControl/color_telescope_circles");
+	ui->reticleColorButton->setup("TelescopeControl.reticleColor", "TelescopeControl/color_telescope_reticles");
+	ui->labelColorButton  ->setup("TelescopeControl.labelColor",   "TelescopeControl/color_telescope_labels");
+	ui->circleColorButton ->setup("TelescopeControl.circleColor",  "TelescopeControl/color_telescope_circles");
 	connectBoolProperty(ui->checkBoxEnableLogs, "TelescopeControl.useTelescopeServerLogs");
 
 	connect(ui->checkBoxUseExecutables, SIGNAL(toggled(bool)), ui->labelExecutablesDirectory, SLOT(setEnabled(bool)));
@@ -252,7 +253,7 @@ void TelescopeDialog::setAboutText()
 
 	//TODO: Expand
 	QString aboutPage = "<html><head></head><body>";
-	aboutPage += "<h2>" + q_("Telescope Control plug-in") + "</h2><table width=\"90%\">";
+	aboutPage += "<h2>" + q_("Telescope Control plug-in") + "</h2><table class='layout' width=\"90%\">";
 	aboutPage += "<tr width=\"30%\"><td><strong>" + q_("Version") + ":</strong></td><td>" + TELESCOPE_CONTROL_PLUGIN_VERSION + "</td></tr>";
 	aboutPage += "<tr><td><strong>" + q_("License") + ":</strong></td><td>" + TELESCOPE_CONTROL_PLUGIN_LICENSE + "</td></tr>";
 	aboutPage += "<tr><td rowspan=5><strong>" + q_("Authors") + "</strong></td><td>Johannes Gajdosik</td></td>";
@@ -278,7 +279,7 @@ void TelescopeDialog::setAboutText()
 	
 	QString helpPage = "<html><head></head><body>";
 	// TRANSLATORS: The text between braces is the text of an HTML link.
-	helpPage += "<p>" + q_("A more complete and up-to-date documentation for this plug-in can be found on the {Telescope Control} page in the Stellarium Wiki.").replace(a_rx, "<a href=\"http://stellarium.sourceforge.net/wiki/index.php/Telescope_Control_plug-in\">\\1</a>") + "</p>";
+	helpPage += "<p>" + q_("A more complete and up-to-date documentation for this plug-in can be found in the Stellarium User Guide.") + "</p>";
 	helpPage += "<h3><a name=\"top\" />" + q_("Contents") + "</h3><ul>";
 	helpPage += "<li><a href=\"#Abilities_and_limitations\">" + q_("Abilities and limitations") + "</a></li>";
 	helpPage += "<li><a href=\"#originalfeature\">" + q_("The original telescope control feature") + "</a></li>";
@@ -317,9 +318,9 @@ void TelescopeDialog::setAboutText()
 	helpPage += "<li><b>" + q_("INDIRECT CONNECTION") + "</b>: <ul>";
 	helpPage += "<li>";
 	// TRANSLATORS: The text between braces is the text of an HTML link.
-	helpPage += q_("A device is connected to the same computer but it is driven by a {stand-alone telescope server program}").replace(a_rx, "<a href=\"http://stellarium.sourceforge.net/wiki/index.php/Telescope_Control_%28client-server%29\">\\1</a>") + " ";
+	helpPage += q_("A device is connected to the same computer but it is driven by a stand-alone telescope server program") + " ";
 	// TRANSLATORS: The text between braces is the text of an HTML link.
-	helpPage += q_("or a {third-party application} <b>that can 'talk' to Stellarium</b>;").replace(a_rx, "<a href=\"http://stellarium.sourceforge.net/wiki/index.php/Telescope_Control#Third_party_applications\">\\1</a>");
+	helpPage += q_("or a third-party application <b>that can 'talk' to Stellarium</b>;");
 	helpPage += "</li>";
 	helpPage += "<li>" + q_("A device is connected to a remote computer and the software that drives it can 'talk' to Stellarium <i>over the network</i>; this software can be either one of Stellarium's stand-alone telescope servers, or a third party application.") + "</li></ul></li></ul>";
 	helpPage += "<p>";
@@ -489,7 +490,7 @@ void TelescopeDialog::setAboutText()
 	helpPage += "</p>";
 	helpPage += "<p>";
 	// TRANSLATORS: The text between braces is the text of an HTML link.
-	helpPage += q_("This feature is equivalent to the 'Dummy' type of telescope supported by {Stellarium's original telescope control feature}.").replace(a_rx, "<a href=\"http://stellarium.sourceforge.net/wiki/index.php/Telescope_Control_%28client-server%29\">\\1</a>");
+	helpPage += q_("This feature is equivalent to the 'Dummy' type of telescope supported by Stellarium's original telescope control feature (~2006).");
 	helpPage += "</p>";
 	helpPage += "<p><a href=\"#top\"><small>[" + q_("Back to top") + "]</small></a></p>";
 
@@ -1021,7 +1022,7 @@ void TelescopeDialog::updateStyle()
 
 void TelescopeDialog::buttonBrowseServerDirectoryPressed()
 {
-	QString newPath = QFileDialog::getExistingDirectory (nullptr, QString(q_("Select a directory")), telescopeManager->getServerExecutablesDirectoryPath());
+	QString newPath = QFileDialog::getExistingDirectory (&StelMainView::getInstance(), QString(q_("Select a directory")), telescopeManager->getServerExecutablesDirectoryPath());
 	//TODO: Validation? Directory exists and contains servers?
 	if(!newPath.isEmpty())
 	{

@@ -134,7 +134,7 @@ QString JapaneseCalendar::getFormattedSolarTermsString() const
 // set date from a vector of calendar date elements sorted from the largest to the smallest.
 // {cycle, year, month, leap-month, day}
 // Time is not changed!
-void JapaneseCalendar::setDate(QVector<int> parts)
+void JapaneseCalendar::setDate(const QVector<int> &parts)
 {
 	this->parts=parts;
 
@@ -147,7 +147,7 @@ void JapaneseCalendar::setDate(QVector<int> parts)
 }
 
 //! @arg parts5={cycle, year, month, leapMonth, day}
-int JapaneseCalendar::fixedFromJapanese(QVector<int> parts5)
+int JapaneseCalendar::fixedFromJapanese(const QVector<int> &parts5)
 {
 	const int cycle = parts5.value(0);
 	const int year  = parts5.value(1);
@@ -155,7 +155,7 @@ int JapaneseCalendar::fixedFromJapanese(QVector<int> parts5)
 	const int leap  = parts5.value(3);
 	const int day   = parts5.value(4);
 
-	const int midYear=qRound(floor(ChineseCalendar::chineseEpoch+((cycle-1)*60+year-1+0.5)*meanTropicalYear));
+	const int midYear=qRound(std::floor(ChineseCalendar::chineseEpoch+((cycle-1)*60+year-1+0.5)*meanTropicalYear));
 	const int newYear=newYearOnOrBefore(midYear);
 	const int p = newMoonOnOrAfter(newYear+(month-1)*29);
 	const QVector<int>d = japaneseFromFixed(p);
@@ -182,7 +182,7 @@ QVector<int> JapaneseCalendar::japaneseFromFixed(int rd)
 		month--;
 	month=StelUtils::amod(month, 12);
 	const bool leapMonth=leapYear && noMajorSolarTerm(m) && !priorLeapMonth(m12, newMoonBefore(m));
-	const int elapsedYears=qRound(floor(1.5-month/12.+(rd-ChineseCalendar::chineseEpoch)/meanTropicalYear));
+	const int elapsedYears=qRound(std::floor(1.5-month/12.+(rd-ChineseCalendar::chineseEpoch)/meanTropicalYear));
 	const int cycle = StelUtils::intFloorDiv(elapsedYears-1, 60)+1;
 	const int year = StelUtils::amod(elapsedYears, 60);
 	const int day = rd-m+1;
@@ -193,13 +193,13 @@ QVector<int> JapaneseCalendar::japaneseFromFixed(int rd)
 int JapaneseCalendar::currentMajorSolarTerm(int rd)
 {
 	double s=solarLongitude(universalFromStandard(rd, japaneseLocation(rd)));
-	return StelUtils::amod(2+qRound(floor(s/30.)), 12);
+	return StelUtils::amod(2+qRound(std::floor(s/30.)), 12);
 }
 
 // Return location of Korean calendar computations (Seoul City Hall). Before 1908, this used LMST. CC:UE 19.2
 StelLocation JapaneseCalendar::japaneseLocation(double rd_t)
 {	
-	const int year=GregorianCalendar::gregorianYearFromFixed(qRound(floor(rd_t)));
+	const int year=GregorianCalendar::gregorianYearFromFixed(qRound(std::floor(rd_t)));
 
 	if (year<1888)
 		return StelLocation("Tokyo", "Japan", "Eastern Asia", 139.+(46./60.), 35.7, 24, 800, "UTC+09:19", 5);
@@ -226,7 +226,7 @@ int JapaneseCalendar::majorSolarTermOnOrAfter(int rd)
 int JapaneseCalendar::currentMinorSolarTerm(int rd)
 {
 	const double s=solarLongitude(universalFromStandard(rd, japaneseLocation(rd)));
-	return StelUtils::amod(3+qRound(floor((s-15.)/30.)), 12);
+	return StelUtils::amod(3+qRound(std::floor((s-15.)/30.)), 12);
 }
 
 // Return minor solar term (CC:UE 19.6)
@@ -249,7 +249,7 @@ int JapaneseCalendar::winterSolsticeOnOrBefore(int rd)
 {
 	const double approx=estimatePriorSolarLongitude(double(Calendar::winter), midnightInJapan(rd+1));
 
-	int day=qRound(floor(approx))-2;
+	int day=qRound(std::floor(approx))-2;
 	double lng;
 	do {
 		day++;
@@ -263,14 +263,14 @@ int JapaneseCalendar::winterSolsticeOnOrBefore(int rd)
 int JapaneseCalendar::newMoonOnOrAfter(int rd)
 {
 	const double t=Calendar::newMoonAtOrAfter(midnightInJapan(rd));
-	return qRound(floor(standardFromUniversal(t, japaneseLocation(t))));
+	return qRound(std::floor(standardFromUniversal(t, japaneseLocation(t))));
 }
 
 // Return Japanese New Moon (CC:UE 19.10)
 int JapaneseCalendar::newMoonBefore(int rd)
 {
 	const double t=Calendar::newMoonBefore(midnightInJapan(rd));
-	return qRound(floor(standardFromUniversal(t, japaneseLocation(t))));
+	return qRound(std::floor(standardFromUniversal(t, japaneseLocation(t))));
 }
 
 // Auxiliary function (CC:UE 19.11)

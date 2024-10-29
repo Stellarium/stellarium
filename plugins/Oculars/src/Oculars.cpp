@@ -241,25 +241,25 @@ void Oculars::deinit()
 	settings->remove("telescope");
 	settings->remove("lens");
 	int index = 0;
-	for (auto* ccd : qAsConst(ccds))
+	for (auto* ccd : std::as_const(ccds))
 	{
 		ccd->writeToSettings(settings, index);
 		index++;
 	}
 	index = 0;
-	for (auto* ocular : qAsConst(oculars))
+	for (auto* ocular : std::as_const(oculars))
 	{
 		ocular->writeToSettings(settings, index);
 		index++;
 	}
 	index = 0;
-	for (auto* telescope : qAsConst(telescopes))
+	for (auto* telescope : std::as_const(telescopes))
 	{
 		telescope->writeToSettings(settings, index);
 		index++;
 	}
 	index = 0;
-	for (auto* lens : qAsConst(lenses))
+	for (auto* lens : std::as_const(lenses))
 	{
 		lens->writeToSettings(settings, index);
 		index++;
@@ -269,9 +269,9 @@ void Oculars::deinit()
 	settings->setValue("telescope_count", telescopes.count());
 	settings->setValue("ccd_count", ccds.count());
 	settings->setValue("lens_count", lenses.count());
-	settings->setValue("ocular_index", selectedOcularIndex);
-	settings->setValue("telescope_index", selectedTelescopeIndex);
-	settings->setValue("ccd_index", selectedCCDIndex);
+	settings->setValue("ocular_index", qMax(0, selectedOcularIndex));
+	settings->setValue("telescope_index", qMax(0, selectedTelescopeIndex));
+	settings->setValue("ccd_index", qMax(0, selectedCCDIndex));
 	settings->setValue("lens_index", selectedLensIndex);
 
 	StelCore *core = StelApp::getInstance().getCore();
@@ -505,7 +505,7 @@ void Oculars::init()
 		}
 		else
 		{
-			selectedOcularIndex = settings->value("ocular_index", 0).toInt();
+			selectedOcularIndex = qMax(0, settings->value("ocular_index", 0).toInt());
 		}
 
 		int ccdCount = settings->value("ccd_count", 0).toInt();
@@ -527,9 +527,9 @@ void Oculars::init()
 			qWarning() << "The Oculars ini file appears to be corrupt; delete it.";
 			ready = false;
 		}
-		selectedCCDIndex = settings->value("ccd_index", 0).toInt();
+		selectedCCDIndex = qMax(0, settings->value("ccd_index", 0).toInt());
 
-		int telescopeCount = settings->value("telescope_count", 0).toInt();
+		int telescopeCount = qMax(0, settings->value("telescope_count", 0).toInt());
 		int actualTelescopeCount = telescopeCount;
 		for (int index = 0; index < telescopeCount; index++)
 		{
@@ -660,7 +660,7 @@ void Oculars::determineMaxEyepieceAngle()
 {
 	if (ready)
 	{
-		for (const auto* ocular : qAsConst(oculars))
+		for (const auto* ocular : std::as_const(oculars))
 		{
 			if (ocular->apparentFOV() > maxEyepieceAngle)
 			{
@@ -1503,11 +1503,45 @@ void Oculars::initializeActivationActions()
 	addAction("actionShow_Ocular_Increment", ocularsGroup, N_("Select next eyepiece"), "incrementOcularIndex()");
 	// Select previous eyepiece via keyboard
 	addAction("actionShow_Ocular_Decrement", ocularsGroup, N_("Select previous eyepiece"), "decrementOcularIndex()");
+	// Select next lens via keyboard
+	addAction("actionShow_Lens_Increment", ocularsGroup, N_("Select next lens"), "incrementLensIndex()");
+	// Select previous lens via keyboard
+	addAction("actionShow_Lens_Decrement", ocularsGroup, N_("Select previous lens"), "decrementLensIndex()");
+	// Select next CCD via keyboard
+	addAction("actionShow_CCD_Increment", ocularsGroup, N_("Select next CCD frame"), "incrementCCDIndex()");
+	// Select previous CCD via keyboard
+	addAction("actionShow_CCD_Decrement", ocularsGroup, N_("Select previous CCD frame"), "decrementCCDIndex()");
 	addAction("actionShow_Ocular_Rotate_Reticle_Clockwise", ocularsGroup, N_("Rotate reticle pattern of the eyepiece clockwise"), "rotateReticleClockwise()", "Alt+M");
 	addAction("actionShow_Ocular_Rotate_Reticle_Counterclockwise", ocularsGroup, N_("Rotate reticle pattern of the eyepiece counterclockwise"), "rotateReticleCounterclockwise()", "Shift+Alt+M");
 	addAction("actionShow_Sensor_Crop_Overlay", ocularsGroup, N_("Toggle sensor crop overlay"), "toggleCropOverlay()");
 	addAction("actionShow_Sensor_Pixel_Grid", ocularsGroup, N_("Toggle sensor pixel grid"), "togglePixelGrid()");
 	addAction("actionShow_Sensor_Focuser_Overlay", ocularsGroup, N_("Toggle focuser overlay"), "toggleFocuserOverlay()");
+
+	// NOTE: GUI elements in OcularsGuiPanel
+	addAction("actionToggle_Oculars_Rotate_Frame_Reset", ocularsGroup, N_("Reset the sensor frame rotation"), this, "ccdRotationReset()", "", "");
+	addAction("actionToggle_Oculars_Rotate_Prism_Reset", ocularsGroup, N_("Reset the prism rotation"), this, "prismPositionAngleReset()", "", "");
+	QList<int> angles = { 1, 5, 15, 90 };
+	for (int i = 0; i < angles.size(); ++i)
+	{
+		QString angle = QString::number(angles.at(i));
+		QString degree = (angles.at(i)==1 ? "degree" : "degrees");
+
+		QString actionCounterclockwiseCCDName = QString("actionToggle_Oculars_Rotate_Frame_%1_Counterclockwise").arg(angle);
+		QString actionCounterclockwiseCCDDescription = QString("Rotate the sensor frame %1 %2 counterclockwise").arg(angle, degree);
+		addAction(actionCounterclockwiseCCDName, ocularsGroup, actionCounterclockwiseCCDDescription, this, [=](){rotateCCD(-1*angles.at(i));}, "");
+
+		QString actionClockwiseCCDName = QString("actionToggle_Oculars_Rotate_Frame_%1_Clockwise").arg(angle);
+		QString actionClockwiseCCDDescription = QString("Rotate the sensor frame %1 %2 clockwise").arg(angle, degree);
+		addAction(actionClockwiseCCDName, ocularsGroup, actionClockwiseCCDDescription, this, [=](){rotateCCD(angles.at(i));}, "");
+
+		QString actionCounterclockwisePrismName = QString("actionToggle_Oculars_Rotate_Prism_%1_Counterclockwise").arg(angle);
+		QString actionCounterclockwisePrismDescription = QString("Rotate the prism %1 %2 counterclockwise").arg(angle, degree);
+		addAction(actionCounterclockwisePrismName, ocularsGroup, actionCounterclockwisePrismDescription, this, [=](){rotatePrism(-1*angles.at(i));}, "");
+
+		QString actionClockwisePrismName = QString("actionToggle_Oculars_Rotate_Prism_%1_Clockwise").arg(angle);
+		QString actionClockwisePrismDescription = QString("Rotate the prism %1 %2 clockwise").arg(angle, degree);
+		addAction(actionClockwisePrismName, ocularsGroup, actionClockwisePrismDescription, this, [=](){rotatePrism(angles.at(i));}, "");
+	}
 
 	connect(this, SIGNAL(selectedCCDChanged(int)),       this, SLOT(instrumentChanged()));	
 	connect(this, SIGNAL(selectedOcularChanged(int)),    this, SLOT(instrumentChanged()));
@@ -1530,17 +1564,17 @@ bool Oculars::isBinocularDefined()
 }
 
 QRect Oculars::drawSensorFrameAndOverlay(const StelProjectorP& projector, const Mat4f& derotate,
-										 const Vec2f& frameUpDir, const Vec2f& frameRightDir,
-										 const Vec2f& frameCenter, const CCD& ccd, const Lens& lens,
-										 const QSize& overlaySize)
+                                         const Vec2f& frameUpDir, const Vec2f& frameRightDir,
+                                         const Vec2f& frameCenter, const CCD& ccd, const Lens* lens,
+                                         const QSize& overlaySize)
 {
 	StelPainter sPainter(projector);
 	sPainter.setLineSmooth(true);
 	sPainter.setColor(lineColor);
 	Telescope *telescope = telescopes[selectedTelescopeIndex];
 
-	const double fovX = ccd.getActualFOVx(telescope, &lens) * (M_PI/180);
-	const double fovY = ccd.getActualFOVy(telescope, &lens) * (M_PI/180);
+	const double fovX = ccd.getActualFOVx(telescope, lens) * (M_PI/180);
+	const double fovY = ccd.getActualFOVy(telescope, lens) * (M_PI/180);
 
 	const float tanFovX = std::tan(fovX/2);
 	const float tanFovY = std::tan(fovY/2);
@@ -1556,7 +1590,7 @@ QRect Oculars::drawSensorFrameAndOverlay(const StelProjectorP& projector, const 
 
 	int minX = INT_MAX, maxX = INT_MIN, minY = INT_MAX, maxY = INT_MIN;
 	sPainter.enableClientStates(true);
-	for(const auto [cropFactorX, cropFactorY] : cropFactors)
+	for(const auto& [cropFactorX, cropFactorY] : cropFactors)
 	{
 		const float cropTanFovX = cropFactorX * tanFovX;
 		const float cropTanFovY = cropFactorY * tanFovY;
@@ -1694,21 +1728,21 @@ void Oculars::drawCirclesOfConstantAngularRadii(StelPainter& sPainter, const Mat
 }
 
 void Oculars::drawOAG(const StelProjectorP& projector, const Mat4f& derotate,
-					  const CCD& ccd, const Lens& lens)
+                      const CCD& ccd, const Lens* lens)
 {
 	StelPainter sPainter(projector);
 	sPainter.setLineSmooth(true);
 	sPainter.setColor(lineColor);
 
 	Telescope *telescope = telescopes[selectedTelescopeIndex];
-	const float innerRadius = ccd.getInnerOAGRadius(telescope, &lens) * (M_PI/180);
-	const float outerRadius = ccd.getOuterOAGRadius(telescope, &lens) * (M_PI/180);
+	const float innerRadius = ccd.getInnerOAGRadius(telescope, lens) * (M_PI/180);
+	const float outerRadius = ccd.getOuterOAGRadius(telescope, lens) * (M_PI/180);
 
 	drawCirclesOfConstantAngularRadii(sPainter, derotate, {innerRadius,outerRadius});
 
 	const int numPointsPerLine = 30;
 
-	const float prismFovX = ccd.getOAGActualFOVx(telescope, &lens) * (M_PI/180);
+	const float prismFovX = ccd.getOAGActualFOVx(telescope, lens) * (M_PI/180);
 	const float tanFovX = std::tan(prismFovX/2);
 
 	const auto tanInnerRadius = std::tan(innerRadius);
@@ -1811,8 +1845,8 @@ void Oculars::paintCCDBounds()
 	double azimuth, elevation;
 	StelUtils::rectToSphe(&azimuth, &elevation, centerPos3d);
 	const auto derotate = Mat4f::rotation(Vec3f(0,0,1), azimuth) *
-						  Mat4f::rotation(Vec3f(0,1,0), -elevation) *
-						  Mat4f::rotation(Vec3f(1,0,0), ccd->chipRotAngle() * (M_PI/180));
+			      Mat4f::rotation(Vec3f(0,1,0), -elevation) *
+			      Mat4f::rotation(Vec3f(1,0,0), ccd->chipRotAngle() * (M_PI/180));
 
 	if (getFlagAutosetMountForCCD())
 	{
@@ -1828,20 +1862,25 @@ void Oculars::paintCCDBounds()
 	projector->project(derotate * Vec3f(1,0,0), frameCenterWin);
 	projector->project(derotate * Vec3f(1,-1,0), frameRightWin);
 	const auto frameUpWinDir = normalize(Vec2f(frameUpWin[0] - frameCenterWin[0],
-											   frameUpWin[1] - frameCenterWin[1]));
+						   frameUpWin[1] - frameCenterWin[1]));
 	const auto frameRightWinDir = normalize(Vec2f(frameRightWin[0] - frameCenterWin[0],
-											   frameRightWin[1] - frameCenterWin[1]));
+						      frameRightWin[1] - frameCenterWin[1]));
 	const auto frameCenterWin2d = Vec2f(frameCenterWin[0], frameCenterWin[1]);
 
 	const auto boundingRect = drawSensorFrameAndOverlay(projector, derotate, frameUpWinDir, frameRightWinDir,
-														frameCenterWin2d, *ccd, *lens, overlaySize);
+	                                                    frameCenterWin2d, *ccd, lens, overlaySize);
 	StelPainter painter(projector);
 	painter.setLineSmooth(true);
 	painter.setColor(lineColor);
 	painter.setFont(font);
 
 	if(ccd->hasOAG())
-		drawOAG(projector, derotate, *ccd, *lens);
+	{
+		const auto derotateOAG = Mat4f::rotation(Vec3f(0,0,1), azimuth) *
+					 Mat4f::rotation(Vec3f(0,1,0), -elevation) *
+					 Mat4f::rotation(Vec3f(1,0,0), (ccd->prismPosAngle() + ccd->chipRotAngle()) * (M_PI/180));
+		drawOAG(projector, derotateOAG, *ccd, lens);
+	}
 
 	// Tool for planning a mosaic astrophotography: shows a small cross at center of CCD's
 	// frame and equatorial coordinates for epoch J2000.0 of that center.
@@ -1936,10 +1975,9 @@ void Oculars::paintCCDBounds()
 		// Horizontal and vertical scales of visible field of view for CCD (red rectangle); below bottom-right corner
 		//TRANSLATORS: Unit of measure for scale - arc-seconds per pixel
 		QString unit = q_("\"/px");
-		QString scales = QString("%1%3 %4 %2%3")
-							.arg(QString::number(3600*ccd->getCentralAngularResolutionX(telescope, lens), 'f', 4),
-								 QString::number(3600*ccd->getCentralAngularResolutionY(telescope, lens), 'f', 4),
-								 unit, QChar(0x00D7));
+		QString scales = QString("%1%3 %4 %2%3").arg(QString::number(3600*ccd->getCentralAngularResolutionX(telescope, lens), 'f', 4),
+							     QString::number(3600*ccd->getCentralAngularResolutionY(telescope, lens), 'f', 4),
+							     unit, QChar(0x00D7));
 		const auto scalesBR = fm.boundingRect(scales);
 		a = transform.map(QPoint(rightX - std::lround(scalesBR.width() * fmPixelRatio),
 								 bottomY - std::lround(scalesBR.height() * fmPixelRatio)));
@@ -2388,15 +2426,15 @@ void Oculars::validateAndLoadIniFile()
 	}
 	else
 	{
-		qDebug() << "Oculars::validateAndLoadIniFile() ocular.ini exists at: " << QDir::toNativeSeparators(ocularIniPath) << ". Checking version...";
+		qDebug().noquote() << "Oculars::validateAndLoadIniFile() ocular.ini exists at:" << QDir::toNativeSeparators(ocularIniPath) << ". Checking version...";
 		QSettings mySettings(ocularIniPath, QSettings::IniFormat);
 		const float ocularsVersion = mySettings.value("oculars_version", 0.0).toFloat();
-		qWarning() << "Oculars::validateAndLoadIniFile() found existing ini file version " << ocularsVersion;
+		qWarning() << "Oculars::validateAndLoadIniFile() found existing ini file version" << ocularsVersion;
 
 		if (ocularsVersion < MIN_OCULARS_INI_VERSION)
 		{
-			qWarning() << "Oculars::validateAndLoadIniFile() existing ini file version " << ocularsVersion
-				   << " too old to use; required version is " << MIN_OCULARS_INI_VERSION << ". Copying over new one.";
+			qWarning() << "Oculars::validateAndLoadIniFile() existing ini file version" << ocularsVersion
+				   << "too old to use; required version is" << MIN_OCULARS_INI_VERSION << ". Copying over new one.";
 			// delete last "old" file, if it exists
 			QFile deleteFile(ocularIniPath + ".old");
 			deleteFile.remove();
@@ -2405,19 +2443,19 @@ void Oculars::validateAndLoadIniFile()
 			QFile oldFile(ocularIniPath);
 			if (!oldFile.rename(ocularIniPath + ".old"))
 			{
-				qWarning() << "Oculars::validateAndLoadIniFile() cannot move ocular.ini resource to ocular.ini.old at path  " + QDir::toNativeSeparators(ocularIniPath);
+				qWarning() << "Oculars::validateAndLoadIniFile() cannot move ocular.ini resource to ocular.ini.old at path" + QDir::toNativeSeparators(ocularIniPath);
 			}
 			else
 			{
-				qWarning() << "Oculars::validateAndLoadIniFile() ocular.ini resource renamed to ocular.ini.old at path  " + QDir::toNativeSeparators(ocularIniPath);
+				qWarning() << "Oculars::validateAndLoadIniFile() ocular.ini resource renamed to ocular.ini.old at path" + QDir::toNativeSeparators(ocularIniPath);
 				QFile src(":/ocular/default_ocular.ini");
 				if (!src.copy(ocularIniPath))
 				{
-					qWarning() << "Oculars::validateIniFile cannot copy default_ocular.ini resource to [non-existing] " + QDir::toNativeSeparators(ocularIniPath);
+					qWarning() << "Oculars::validateIniFile cannot copy default_ocular.ini resource to [non-existing]" + QDir::toNativeSeparators(ocularIniPath);
 				}
 				else
 				{
-					qDebug() << "Oculars::validateAndLoadIniFile() copied default_ocular.ini to " << QDir::toNativeSeparators(ocularIniPath);
+					qDebug() << "Oculars::validateAndLoadIniFile() copied default_ocular.ini to" << QDir::toNativeSeparators(ocularIniPath);
 					// The resource is read only, and the new file inherits this...  make sure the new file
 					// is writable by the Stellarium process so that updates can be done.
 					QFile dest(ocularIniPath);
@@ -2642,6 +2680,8 @@ void Oculars::zoomOcular()
 			// TODO: Is it really good to apply the star formula to DSO?
 			skyDrawer->setFlagNebulaMagnitudeLimit(true);
 			skyDrawer->setCustomNebulaMagnitudeLimit(limitMag);
+			skyDrawer->setFlagPlanetMagnitudeLimit(true);
+			skyDrawer->setCustomPlanetMagnitudeLimit(limitMag);
 		}
 		else
 		{	// It's possible that the user changes the custom magnitude while viewing, and then changes the ocular.
@@ -3220,16 +3260,26 @@ void Oculars::toggleFocuserOverlay()
 double Oculars::computeLimitMagnitude(Ocular *ocular, Telescope *telescope)
 {
 	// Simplified calculation of the penetrating power of the telescope
-	double diameter = 0.;
 	if (ocular->isBinoculars())
-		diameter = ocular->fieldStop();
+	{
+		// Harald Lang's modified version of Carlin's formula (see below)
+		// 3 log A + 2 log X + 0.6 + v
+		// A = aperture in cm
+		// X = magnification
+		// 0.6 = constant of exit pupil
+		// v = Naked Eye Lim Mag
+		// https://www.cloudynights.com/topic/99013-binocular-limiting-magnitude/
+		const auto drawer = StelApp::getInstance().getCore()->getSkyDrawer();
+		const float nelm = StelCore::luminanceToNELM(drawer->getLightPollutionLuminance());
+		return 3.0*std::log10(ocular->fieldStop()/10) + 2.0*std::log10(ocular->effectiveFocalLength()) + 0.6 + nelm;
+	}
 	else
-		diameter = telescope!=Q_NULLPTR ? telescope->diameter() : 0.1; // Avoid a potential call of null pointer, and a log(0) error.
-
-	// A better formula for telescopic limiting magnitudes?
-	// North, G.; Journal of the British Astronomical Association, vol.107, no.2, p.82
-	// http://adsabs.harvard.edu/abs/1997JBAA..107...82N
-	return 4.5 + 4.4*std::log10(diameter);
+	{
+		// A better formula for telescopic limiting magnitudes?
+		// North, G.; Journal of the British Astronomical Association, vol.107, no.2, p.82
+		// http://adsabs.harvard.edu/abs/1997JBAA..107...82N
+		return 4.5 + 4.4*std::log10((telescope!=Q_NULLPTR) ? telescope->diameter() : 0.1); // Avoid a potential call of null pointer, and a log(0) error.
+	}
 }
 
 void Oculars::handleAutoLimitToggle(bool on)

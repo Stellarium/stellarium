@@ -46,7 +46,7 @@ public:
 	};
 	Q_ENUM(SimbadLookupStatus)
 
-	~SimbadLookupReply() Q_DECL_OVERRIDE;
+	~SimbadLookupReply() override;
 
 	//! Get the result list of matching objectName/position.
 	QMap<QString, Vec3d> getResults() const {return resultPositions;}

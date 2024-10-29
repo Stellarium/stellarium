@@ -105,7 +105,7 @@ void StelSkyImageTile::draw(StelCore* core, StelPainter& sPainter, float opacity
 	getTilesToDraw(result, core, SphericalRegionP(new AllSkySphericalRegion()), limitLuminance, true);
 
 	int numToBeLoaded=0;
-	for (auto* t : qAsConst(result))
+	for (auto* t : std::as_const(result))
 		if (t->isReadyToDisplay()==false)
 			++numToBeLoaded;
 	updatePercent(result.size(), numToBeLoaded);
@@ -179,7 +179,7 @@ void StelSkyImageTile::getTilesToDraw(QMultiMap<double, StelSkyImageTile*>& resu
 		}
 		else
 		{
-			for (const auto& poly : qAsConst(skyConvexPolygons))
+			for (const auto& poly : std::as_const(skyConvexPolygons))
 			{
 				if (viewPortPoly->contains(poly))
 				{
@@ -232,7 +232,7 @@ void StelSkyImageTile::getTilesToDraw(QMultiMap<double, StelSkyImageTile*>& resu
 		if (subTiles.isEmpty() && !subTilesUrls.isEmpty())
 		{
 			// Load the sub tiles because we reached the maximum resolution and they are not yet loaded
-			for (const auto& s : qAsConst(subTilesUrls))
+			for (const auto& s : std::as_const(subTilesUrls))
 			{
 				StelSkyImageTile* nt;
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
@@ -254,7 +254,7 @@ void StelSkyImageTile::getTilesToDraw(QMultiMap<double, StelSkyImageTile*>& resu
 			}
 		}
 		// Try to add the subtiles
-		for (auto* tile : qAsConst(subTiles))
+		for (auto* tile : std::as_const(subTiles))
 		{
 			qobject_cast<StelSkyImageTile*>(tile)->getTilesToDraw(result, core, viewPortPoly, limitLuminance, !fullInScreen);
 		}
@@ -298,7 +298,7 @@ bool StelSkyImageTile::drawTile(StelCore* core, StelPainter& sPainter, const Vec
 
 	const bool withExtinction=(getFrameType()!=StelCore::FrameAltAz && core->getSkyDrawer()->getFlagHasAtmosphere() && core->getSkyDrawer()->getExtinction().getExtinctionCoefficient()>=0.01f);
 
-	for (const auto& poly : qAsConst(skyConvexPolygons))
+	for (const auto& poly : std::as_const(skyConvexPolygons))
 	{
 		// Not sure: Are all skyConvexPolygons in J2000 frame? This would also simplify code below...
 		// No, by scripting we can have other frames!

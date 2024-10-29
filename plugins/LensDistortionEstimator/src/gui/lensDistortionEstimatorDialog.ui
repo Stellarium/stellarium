@@ -1,0 +1,923 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>LDEDialog</class>
+ <widget class="QWidget" name="LDEDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>300</width>
+    <height>300</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Lens Distortion Estimator</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout_2">
+   <property name="spacing">
+    <number>0</number>
+   </property>
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
+   <item>
+    <widget class="TitleBar" name="titleBar">
+     <property name="title" stdset="0">
+      <string>Lens Distortion Estimator</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QTabWidget" name="tabs">
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
+     <property name="documentMode">
+      <bool>false</bool>
+     </property>
+     <widget class="QWidget" name="imageLoadTab">
+      <attribute name="title">
+       <string>Image Loading</string>
+      </attribute>
+      <layout class="QGridLayout" name="gridLayout">
+       <item row="5" column="0">
+        <spacer name="verticalSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="3" column="0">
+        <widget class="QGroupBox" name="groupBox">
+         <property name="title">
+          <string>Image placement</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_2">
+          <item row="6" column="0">
+           <widget class="QLabel" name="label_7">
+            <property name="text">
+             <string>Distortion model:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="1" colspan="3">
+           <layout class="QHBoxLayout" name="horizontalLayout_2">
+            <item>
+             <widget class="QDoubleSpinBox" name="imageCenterShiftX">
+              <property name="suffix">
+               <string> px</string>
+              </property>
+              <property name="minimum">
+               <double>-500.000000000000000</double>
+              </property>
+              <property name="maximum">
+               <double>500.000000000000000</double>
+              </property>
+              <property name="value">
+               <double>0.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_8">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="text">
+               <string notr="true">,</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QDoubleSpinBox" name="imageCenterShiftY">
+              <property name="suffix">
+               <string> px</string>
+              </property>
+              <property name="minimum">
+               <double>-500.000000000000000</double>
+              </property>
+              <property name="maximum">
+               <double>500.000000000000000</double>
+              </property>
+              <property name="value">
+               <double>0.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="0" column="1" colspan="2">
+           <widget class="QDoubleSpinBox" name="projectionCenterAzimuth">
+            <property name="suffix">
+             <string notr="true">°</string>
+            </property>
+            <property name="decimals">
+             <number>7</number>
+            </property>
+            <property name="minimum">
+             <double>-360.000000000000000</double>
+            </property>
+            <property name="maximum">
+             <double>360.000000000000000</double>
+            </property>
+            <property name="singleStep">
+             <double>0.100000000000000</double>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="0">
+           <widget class="QLabel" name="label_4">
+            <property name="text">
+             <string>Field of view in smaller direction:</string>
+            </property>
+            <property name="buddy">
+             <cstring>imageSmallerSideFoV</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="1" colspan="2">
+           <widget class="QDoubleSpinBox" name="imageSmallerSideFoV">
+            <property name="suffix">
+             <string notr="true">°</string>
+            </property>
+            <property name="decimals">
+             <number>7</number>
+            </property>
+            <property name="minimum">
+             <double>0.001000000000000</double>
+            </property>
+            <property name="maximum">
+             <double>179.000000000000000</double>
+            </property>
+            <property name="value">
+             <double>60.000000000000000</double>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <widget class="QLabel" name="label_3">
+            <property name="text">
+             <string>Image rotation angle:</string>
+            </property>
+            <property name="buddy">
+             <cstring>imageFieldRotation</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1" colspan="2">
+           <widget class="QDoubleSpinBox" name="imageFieldRotation">
+            <property name="suffix">
+             <string notr="true">°</string>
+            </property>
+            <property name="decimals">
+             <number>7</number>
+            </property>
+            <property name="minimum">
+             <double>-360.000000000000000</double>
+            </property>
+            <property name="maximum">
+             <double>360.000000000000000</double>
+            </property>
+            <property name="singleStep">
+             <double>0.100000000000000</double>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="label_2">
+            <property name="text">
+             <string>Center of projection elevation:</string>
+            </property>
+            <property name="buddy">
+             <cstring>projectionCenterElevation</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="1" colspan="3">
+           <widget class="QComboBox" name="distortionModelCB">
+            <property name="currentIndex">
+             <number>2</number>
+            </property>
+            <item>
+             <property name="text">
+              <string>3rd order polynomial</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>5th order polynomial</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>PTLens</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item row="5" column="0">
+           <widget class="QLabel" name="label_5">
+            <property name="text">
+             <string>Image center shift:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0">
+           <widget class="QLabel" name="label">
+            <property name="text">
+             <string>Center of projection azimuth:</string>
+            </property>
+            <property name="buddy">
+             <cstring>projectionCenterAzimuth</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="7" column="2">
+           <widget class="QDoubleSpinBox" name="distortionTerm2">
+            <property name="decimals">
+             <number>7</number>
+            </property>
+            <property name="minimum">
+             <double>-0.100000000000000</double>
+            </property>
+            <property name="maximum">
+             <double>0.100000000000000</double>
+            </property>
+            <property name="singleStep">
+             <double>0.001000000000000</double>
+            </property>
+           </widget>
+          </item>
+          <item row="7" column="0">
+           <widget class="QLabel" name="label_9">
+            <property name="text">
+             <string>Distortion coefficients:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1" colspan="2">
+           <widget class="QDoubleSpinBox" name="projectionCenterElevation">
+            <property name="suffix">
+             <string notr="true">°</string>
+            </property>
+            <property name="decimals">
+             <number>7</number>
+            </property>
+            <property name="minimum">
+             <double>-90.000000000000000</double>
+            </property>
+            <property name="maximum">
+             <double>90.000000000000000</double>
+            </property>
+            <property name="singleStep">
+             <double>0.100000000000000</double>
+            </property>
+           </widget>
+          </item>
+          <item row="7" column="1">
+           <widget class="QDoubleSpinBox" name="distortionTerm1">
+            <property name="decimals">
+             <number>7</number>
+            </property>
+            <property name="minimum">
+             <double>-0.100000000000000</double>
+            </property>
+            <property name="maximum">
+             <double>0.100000000000000</double>
+            </property>
+            <property name="singleStep">
+             <double>0.001000000000000</double>
+            </property>
+           </widget>
+          </item>
+          <item row="7" column="3">
+           <widget class="QDoubleSpinBox" name="distortionTerm3">
+            <property name="decimals">
+             <number>7</number>
+            </property>
+            <property name="minimum">
+             <double>-0.100000000000000</double>
+            </property>
+            <property name="maximum">
+             <double>0.100000000000000</double>
+            </property>
+            <property name="singleStep">
+             <double>0.001000000000000</double>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="3" rowspan="2">
+           <widget class="QPushButton" name="resetPlacementBtn">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text">
+             <string>Reset
+placement</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="3" rowspan="2">
+           <widget class="QPushButton" name="resetDistortionBtn">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text">
+             <string>Reset
+distortion</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <layout class="QHBoxLayout" name="horizontalLayout">
+         <item>
+          <widget class="QLabel" name="label_6">
+           <property name="text">
+            <string>Image to load:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="imageFilePath">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QToolButton" name="imageBrowseBtn">
+           <property name="toolTip">
+            <string>Browse for an image...</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset>
+             <normaloff>:/graphicGui/uibtFolder.png</normaloff>
+             <disabledoff>:/graphicGui/uibtFolder-disabled.png</disabledoff>:/graphicGui/uibtFolder.png</iconset>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="1" column="0">
+        <layout class="QHBoxLayout" name="horizontalLayout_3">
+         <item>
+          <widget class="QLabel" name="warnings">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="wordWrap">
+            <bool>true</bool>
+           </property>
+           <property name="textInteractionFlags">
+            <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="fixWarningBtn">
+           <property name="text">
+            <string comment="A verb used on a button that fixes a problem.">Fix</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="4" column="0">
+        <layout class="QHBoxLayout" name="horizontalLayout_4">
+         <item>
+          <widget class="QCheckBox" name="subtractBG">
+           <property name="text">
+            <string>Subtract background RGB:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QSpinBox" name="bgRed">
+           <property name="minimum">
+            <number>0</number>
+           </property>
+           <property name="maximum">
+            <number>255</number>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QSpinBox" name="bgGreen">
+           <property name="minimum">
+            <number>0</number>
+           </property>
+           <property name="maximum">
+            <number>255</number>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QSpinBox" name="bgBlue">
+           <property name="minimum">
+            <number>0</number>
+           </property>
+           <property name="maximum">
+            <number>255</number>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_14">
+           <property name="text">
+            <string>Image brightness:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QDoubleSpinBox" name="imageBrightness">
+           <property name="suffix">
+            <string notr="true">%</string>
+           </property>
+           <property name="decimals">
+            <number>1</number>
+           </property>
+           <property name="maximum">
+            <double>100.000000000000000</double>
+           </property>
+           <property name="value">
+            <double>100.000000000000000</double>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="fittingTab">
+      <attribute name="title">
+       <string>Fitting</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_4" stretch="0,1">
+       <item>
+        <layout class="QGridLayout" name="gridLayout_4">
+         <item row="0" column="0">
+          <widget class="QPushButton" name="repositionBtn">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="text">
+            <string>Reposition image by first two points</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QPushButton" name="pickImagePointBtn">
+           <property name="text">
+            <string>Pick an image point for selected object...</string>
+           </property>
+           <property name="checkable">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1" rowspan="2">
+          <widget class="QPushButton" name="optimizeBtn">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="text">
+            <string>Optimize</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="QSplitter" name="listChartSplitter">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <widget class="QWidget" name="layoutWidget">
+          <layout class="QGridLayout" name="gridLayout_3">
+           <item row="0" column="0" colspan="2">
+            <widget class="QTreeWidget" name="imagePointsPicked">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="dragEnabled">
+              <bool>true</bool>
+             </property>
+             <property name="dragDropMode">
+              <enum>QAbstractItemView::InternalMove</enum>
+             </property>
+             <property name="defaultDropAction">
+              <enum>Qt::MoveAction</enum>
+             </property>
+             <column>
+              <property name="text">
+               <string>Object</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>x, px</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>y, px</string>
+              </property>
+             </column>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="QPushButton" name="importPointsBtn">
+             <property name="text">
+              <string>Import list...</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0" colspan="2">
+            <widget class="QPushButton" name="removePointBtn">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+             <property name="text">
+              <string>Remove point</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="1">
+            <widget class="QPushButton" name="exportPointsBtn">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+             <property name="text">
+              <string>Export list...</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QChartView" name="errorsChartView">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+         </widget>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="lensfunModelTab">
+      <attribute name="title">
+       <string>Model for lensfun</string>
+      </attribute>
+      <layout class="QGridLayout" name="gridLayout_5">
+       <item row="6" column="0" colspan="3">
+        <widget class="QTextEdit" name="lensfunModelXML">
+         <property name="readOnly">
+          <bool>true</bool>
+         </property>
+         <property name="acceptRichText">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="2">
+        <widget class="QDoubleSpinBox" name="lensFocalLength">
+         <property name="suffix">
+          <string> mm</string>
+         </property>
+         <property name="minimum">
+          <double>1.000000000000000</double>
+         </property>
+         <property name="maximum">
+          <double>9999.000000000000000</double>
+         </property>
+         <property name="singleStep">
+          <double>0.100000000000000</double>
+         </property>
+         <property name="value">
+          <double>45.000000000000000</double>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="QLabel" name="label_12">
+         <property name="text">
+          <string>Make:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="label_15">
+         <property name="toolTip">
+          <string/>
+         </property>
+         <property name="text">
+          <string comment="Lens mount on a camera">Mount:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0">
+        <widget class="QLabel" name="label_16">
+         <property name="text">
+          <string>Focal length:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="0" colspan="3">
+        <widget class="QPushButton" name="generateLensfunModelBtn">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="text">
+          <string>Generate</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="label_13">
+         <property name="text">
+          <string>Model:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="2">
+        <widget class="QLineEdit" name="lensModel"/>
+       </item>
+       <item row="2" column="2">
+        <widget class="QLineEdit" name="lensMount"/>
+       </item>
+       <item row="0" column="2">
+        <widget class="QLineEdit" name="lensMake"/>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="settingsTab">
+      <attribute name="title">
+       <string>Settings</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <widget class="QGroupBox" name="imageEnabled">
+         <property name="title">
+          <string>Show image</string>
+         </property>
+         <property name="flat">
+          <bool>true</bool>
+         </property>
+         <property name="checkable">
+          <bool>true</bool>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_6">
+          <item row="2" column="2">
+           <widget class="ColorButton" name="imageAxesColor">
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <spacer name="horizontalSpacer_2">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="0" column="3">
+           <widget class="QLabel" name="label_10">
+            <property name="text">
+             <string comment="As in &quot;normal&quot; points, the opposite being &quot;selected&quot;">normal</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <spacer name="verticalSpacer">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="2" column="0">
+           <widget class="QCheckBox" name="imageAxesEnabled">
+            <property name="text">
+             <string>Mark image axes</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="5">
+           <widget class="QLabel" name="label_11">
+            <property name="text">
+             <string comment="As in &quot;selected points&quot;">selected</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0">
+           <widget class="QCheckBox" name="markPickedPoints">
+            <property name="text">
+             <string>Mark picked points</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="4">
+           <widget class="ColorButton" name="selectedPointMarkerColor">
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="2">
+           <widget class="ColorButton" name="pointMarkerColor">
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QCheckBox" name="markProjectionCenter">
+            <property name="text">
+             <string>Mark center of projection</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="2">
+           <widget class="ColorButton" name="projectionCenterMarkerColor">
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="restoreDefaultsBtn">
+         <property name="text">
+          <string>Restore defaults</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="aboutTab">
+      <attribute name="title">
+       <string comment="tab in plugin windows">About</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_11">
+       <property name="spacing">
+        <number>9</number>
+       </property>
+       <item>
+        <widget class="QTextBrowser" name="about">
+         <property name="openExternalLinks">
+          <bool>true</bool>
+         </property>
+         <property name="openLinks">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>TitleBar</class>
+   <extends>QFrame</extends>
+   <header>Dialog.hpp</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ColorButton</class>
+   <extends>QToolButton</extends>
+   <header>gui/ColorButton.hpp</header>
+  </customwidget>
+  <customwidget>
+   <class>QChartView</class>
+   <extends>QGraphicsView</extends>
+   <header location="global">QChartView</header>
+  </customwidget>
+ </customwidgets>
+ <tabstops>
+  <tabstop>tabs</tabstop>
+  <tabstop>imageFilePath</tabstop>
+  <tabstop>imageBrowseBtn</tabstop>
+  <tabstop>fixWarningBtn</tabstop>
+  <tabstop>projectionCenterAzimuth</tabstop>
+  <tabstop>projectionCenterElevation</tabstop>
+  <tabstop>imageFieldRotation</tabstop>
+  <tabstop>imageSmallerSideFoV</tabstop>
+  <tabstop>imageCenterShiftX</tabstop>
+  <tabstop>imageCenterShiftY</tabstop>
+  <tabstop>distortionModelCB</tabstop>
+  <tabstop>distortionTerm1</tabstop>
+  <tabstop>distortionTerm2</tabstop>
+  <tabstop>distortionTerm3</tabstop>
+  <tabstop>subtractBG</tabstop>
+  <tabstop>bgRed</tabstop>
+  <tabstop>bgGreen</tabstop>
+  <tabstop>bgBlue</tabstop>
+  <tabstop>imageBrightness</tabstop>
+  <tabstop>repositionBtn</tabstop>
+  <tabstop>optimizeBtn</tabstop>
+  <tabstop>pickImagePointBtn</tabstop>
+  <tabstop>imagePointsPicked</tabstop>
+  <tabstop>removePointBtn</tabstop>
+  <tabstop>importPointsBtn</tabstop>
+  <tabstop>exportPointsBtn</tabstop>
+  <tabstop>errorsChartView</tabstop>
+  <tabstop>imageEnabled</tabstop>
+  <tabstop>markPickedPoints</tabstop>
+  <tabstop>pointMarkerColor</tabstop>
+  <tabstop>selectedPointMarkerColor</tabstop>
+  <tabstop>markProjectionCenter</tabstop>
+  <tabstop>projectionCenterMarkerColor</tabstop>
+  <tabstop>imageAxesEnabled</tabstop>
+  <tabstop>imageAxesColor</tabstop>
+  <tabstop>restoreDefaultsBtn</tabstop>
+  <tabstop>about</tabstop>
+  <tabstop>lensMake</tabstop>
+  <tabstop>lensModel</tabstop>
+  <tabstop>lensMount</tabstop>
+  <tabstop>lensFocalLength</tabstop>
+  <tabstop>generateLensfunModelBtn</tabstop>
+  <tabstop>lensfunModelXML</tabstop>
+ </tabstops>
+ <resources/>
+ <connections/>
+</ui>

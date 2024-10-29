@@ -215,7 +215,8 @@ void TestDeltaT::initTestCase()
 
 void TestDeltaT::testDeltaTByEspenakMeeus()
 {
-	// test data from http://eclipse.gsfc.nasa.gov/SEcat5/deltat.html#tab1
+	// test data from https://eclipse.gsfc.nasa.gov/SEcat5/deltat.html#tab1
+	// and https://eclipsewise.com/solar/solar.html (2015-)
 	QVariantList data;
 
 	data << -500  << 17190 << 430;
@@ -262,14 +263,14 @@ void TestDeltaT::testDeltaTByEspenakMeeus()
 	data << 2000  << 63.8  << 0.1;
 	data << 2005  << 64.7  << 0.1;
 	data << 2010  << 66.6  << 1; // https://eclipse.gsfc.nasa.gov/SEplot/SEplot2001/SE2010Jan15A.GIF
-	data << 2015  << 67.6  << 2; // https://eclipse.gsfc.nasa.gov/SEplot/SEplot2001/SE2015Mar20T.GIF
-	data << 2020  << 77.2  << 7; // https://eclipse.gsfc.nasa.gov/SEplot/SEplot2001/SE2020Jun21A.GIF
-	data << 2030  << 87.9  << 12; // https://eclipse.gsfc.nasa.gov/SEplot/SEplot2001/SE2030Jun01A.GIF
-	data << 2050  << 111.6 << 20; // https://eclipse.gsfc.nasa.gov/SEplot/SEplot2001/SE2050May20H.GIF
-	data << 2060  << 124.6 << 15; // https://eclipse.gsfc.nasa.gov/SEplot/SEplot2051/SE2060Apr30T.GIF
-	data << 2070  << 138.5 << 15; // https://eclipse.gsfc.nasa.gov/SEplot/SEplot2051/SE2070Apr11T.GIF
-	data << 2090  << 170.3 << 15; // https://eclipse.gsfc.nasa.gov/SEplot/SEplot2051/SE2090Sep23T.GIF
-	data << 2100  << 187.3 << 20; // https://eclipse.gsfc.nasa.gov/SEplot/SEplot2051/SE2100Sep04T.GIF
+	data << 2015  << 67.7  << 2; // https://eclipsewise.com/solar/SEprime/2001-2100/SE2015Mar20Tprime.html
+	data << 2020  << 70.0  << 7; // https://eclipsewise.com/solar/SEprime/2001-2100/SE2020Jun21Aprime.html
+	data << 2030  << 74.0  << 12; // https://eclipsewise.com/solar/SEprime/2001-2100/SE2030Jun01Aprime.html
+	data << 2050  << 84.3 << 20; // https://eclipsewise.com/solar/SEprime/2001-2100/SE2050May20Hprime.html
+	data << 2060  << 90.6 << 15; // https://eclipsewise.com/solar/SEprime/2001-2100/SE2060Apr30Tprime.html
+	data << 2070  << 97.7 << 15; // https://eclipsewise.com/solar/SEprime/2001-2100/SE2070Apr11Tprime.html
+	data << 2090  << 114.8 << 15; // https://eclipsewise.com/solar/SEprime/2001-2100/SE2090Sep23Tprime.html
+	data << 2100  << 124.3 << 20; // https://eclipsewise.com/solar/SEprime/2001-2100/SE2100Sep04Tprime.html
 
 	while(data.count() >= 3) 
 	{

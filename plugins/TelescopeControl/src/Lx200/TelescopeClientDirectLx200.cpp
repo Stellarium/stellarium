@@ -93,6 +93,7 @@ TelescopeClientDirectLx200::TelescopeClientDirectLx200 (const QString &name, con
 	}
 	
 	// lx200 will be deleted in the destructor of Server
+	// TODO: GZ2024: Server destructor is empty. Who deletes lx200 in version 24.2? Someone please clarify and fix documentation, then delete this note.
 	addConnection(lx200);
 	
 	long_format_used = false; // unknown
@@ -121,8 +122,8 @@ void TelescopeClientDirectLx200::telescopeGoto(const Vec3d &j2000Pos, StelObject
 	//Workaround for the discrepancy in precision between Windows/Linux/PPC Macs and Intel Macs:
 	const double ra = (ra_signed >= 0) ? ra_signed : (ra_signed + 2.0 * M_PI);
 	const double dec = atan2(position[2], std::sqrt(position[0]*position[0]+position[1]*position[1]));
-	unsigned int ra_int = static_cast<unsigned int>(floor(0.5 + ra*(static_cast<unsigned int>(0x80000000)/M_PI)));
-	int dec_int = static_cast<int>(floor(0.5 + dec*(static_cast<unsigned int>(0x80000000)/M_PI)));
+	unsigned int ra_int = static_cast<unsigned int>(std::floor(0.5 + ra*(static_cast<unsigned int>(0x80000000)/M_PI)));
+	int dec_int = static_cast<int>(std::floor(0.5 + dec*(static_cast<unsigned int>(0x80000000)/M_PI)));
 
 	gotoReceived(ra_int, dec_int);
 }
@@ -145,10 +146,17 @@ void TelescopeClientDirectLx200::telescopeSync(const Vec3d &j2000Pos, StelObject
 	//Workaround for the discrepancy in precision between Windows/Linux/PPC Macs and Intel Macs:
 	const double ra = (ra_signed >= 0) ? ra_signed : (ra_signed + 2.0 * M_PI);
 	const double dec = atan2(position[2], std::sqrt(position[0]*position[0]+position[1]*position[1]));
-	unsigned int ra_int = static_cast<unsigned int>(floor(0.5 + ra*(static_cast<unsigned int>(0x80000000)/M_PI)));
-	int dec_int = static_cast<int>(floor(0.5 + dec*(static_cast<unsigned int>(0x80000000)/M_PI)));
+	unsigned int ra_int = static_cast<unsigned int>(std::floor(0.5 + ra*(static_cast<unsigned int>(0x80000000)/M_PI)));
+	int dec_int = static_cast<int>(std::floor(0.5 + dec*(static_cast<unsigned int>(0x80000000)/M_PI)));
 
 	syncReceived(ra_int, dec_int);
+}
+
+void TelescopeClientDirectLx200::telescopeAbortSlew()
+{
+	if (!isConnected())
+		return;
+	lx200->sendAbort();
 }
 
 void TelescopeClientDirectLx200::gotoReceived(unsigned int ra_int, int dec_int)

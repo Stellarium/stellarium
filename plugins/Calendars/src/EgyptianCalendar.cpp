@@ -92,7 +92,7 @@ QString EgyptianCalendar::getFormattedDateString() const
 // set date from a vector of calendar date elements sorted from the largest to the smallest.
 // Year-Month[1...12]-Day[1...31]
 // Time is not changed!
-void EgyptianCalendar::setDate(QVector<int> parts)
+void EgyptianCalendar::setDate(const QVector<int> &parts)
 {
 	this->parts=parts;
 
@@ -105,7 +105,7 @@ void EgyptianCalendar::setDate(QVector<int> parts)
 }
 
 // actually implementation of alt-fixed-from-egyptian
-int EgyptianCalendar::fixedFromEgyptian(QVector<int> egyptian)
+int EgyptianCalendar::fixedFromEgyptian(const QVector<int> &egyptian)
 {
 	return egyptianEpoch + rdCorrSum(egyptian, {365, 30,1}, -1);
 }

@@ -45,7 +45,7 @@ public:
 	~SerialPort(void) override;
 	//! Returns true if the connection is closed.
 	//! This method has different platform-dependent implementations.
-	virtual bool isClosed(void) const override
+	bool isClosed(void) const override
 	{
 	#ifdef Q_OS_WIN
 		return (handle == INVALID_HANDLE_VALUE);
@@ -59,15 +59,15 @@ protected:
 	
 private:
 	//! Returns false, as SerialPort implements a serial port connection.
-	virtual bool isTcpConnection(void) const override {return false;}
+	bool isTcpConnection(void) const override {return false;}
 	//! Returns true, as SerialPort implements a serial port connection.
-	virtual bool isAsciiConnection(void) const override {return true;}
+	bool isAsciiConnection(void) const override {return true;}
 	
 private:
 #ifdef Q_OS_WIN
-	virtual int readNonblocking(char *buf, int count) override;
-	virtual int writeNonblocking(const char *buf, int count) override;
-	virtual void handleSelectFds(const fd_set&, const fd_set&) override {}
+	int readNonblocking(char *buf, int count) override;
+	int writeNonblocking(const char *buf, int count) override;
+	void handleSelectFds(const fd_set&, const fd_set&) override {}
 	HANDLE handle;
 	DCB dcb_original;
 #else

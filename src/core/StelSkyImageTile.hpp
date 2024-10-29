@@ -77,10 +77,10 @@ public:
 	StelSkyImageTile(const QVariantMap& map, StelSkyImageTile* parent, int decimateBy=1);
 
 	//! Destructor
-	~StelSkyImageTile() Q_DECL_OVERRIDE;
+	~StelSkyImageTile() override;
 
 	//! Draw the image on the screen.
-	void draw(StelCore* core, StelPainter& sPainter, float opacity=1.) Q_DECL_OVERRIDE;
+	void draw(StelCore* core, StelPainter& sPainter, float opacity=1.) override;
 
 	//! Return the dataset credits to use in the progress bar
 	DataSetCredits getDataSetCredits() const {return dataSetCredits;}
@@ -99,12 +99,12 @@ public:
 	QString getAbsoluteImageURI() const {return absoluteImageURI;}
 
 	//! Return an HTML description of the image to be displayed in the GUI.
-	virtual QString getLayerDescriptionHtml() const Q_DECL_OVERRIDE {return htmlDescription;}
+	QString getLayerDescriptionHtml() const override {return htmlDescription;}
 
 protected:
 	//! Reimplement the abstract method.
 	//! Load the tile from a valid QVariantMap.
-	virtual void loadFromQVariantMap(const QVariantMap& map) Q_DECL_OVERRIDE;
+	void loadFromQVariantMap(const QVariantMap& map) override;
 
 	//! The credits of the server where this data come from
 	ServerCredits serverCredits;

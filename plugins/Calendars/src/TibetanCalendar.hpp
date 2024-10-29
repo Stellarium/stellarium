@@ -51,7 +51,7 @@ public slots:
 
 	//! set date from a vector of calendar date elements sorted from the largest to the smallest.
 	//! {year, month, leap-month, day, leap-day}
-	void setDate(QVector<int> parts) override;
+	void setDate(const QVector<int> &parts) override;
 
 	//! get a stringlist of calendar date elements sorted from the largest to the smallest.
 	//! {Year, Month, MonthName, "leap"|"", Day, "leap"|"", WeekDayName}
@@ -63,7 +63,7 @@ public slots:
 
 	//! find RD number for date in the Tibetan calendar (CC:UE 21.4)
 	//! @arg tibetan={year, month, leapMonth, day, leapDay}
-	static int fixedFromTibetan(QVector<int> tibetan);
+	static int fixedFromTibetan(const QVector<int> &tibetan);
 	//! find date in the Tibetan calendar from RD number (CC:UE 21.5)
 	static QVector<int> tibetanFromFixed(int rd);
 
@@ -75,9 +75,9 @@ public slots:
 
 	// Holidays
 	//! @return true for a Tibetan leap month (CC:UE 21.6)
-	static bool tibetanLeapMonth(const QVector<int> tYM);
+	static bool tibetanLeapMonth(const QVector<int> &tYM);
 	//! @return true for a Tibetan leap day (CC:UE 21.7)
-	static bool tibetanLeapDay(const QVector<int> tYMD);
+	static bool tibetanLeapDay(const QVector<int> &tYMD);
 	//! @return RD of Losar (New Year) with year number in Tibetan calendar (CC:UE 21.8)
 	static int losar(const int tYear);
 	//! @return a QVector<int> of possible Losar (New Year) dates in a Gregorian year (CC:UE 21.9)

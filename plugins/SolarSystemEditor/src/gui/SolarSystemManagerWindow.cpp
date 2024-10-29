@@ -29,16 +29,18 @@
 #include "StelApp.hpp"
 #include "StelGui.hpp"
 #include "StelFileMgr.hpp"
+#include "StelMainView.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelTranslator.hpp"
 #include "Planet.hpp"
 #include "SolarSystem.hpp"
 
 #include <QFileDialog>
+#include <QMessageBox>
 
 SolarSystemManagerWindow::SolarSystemManagerWindow()
 	: StelDialog("SolarSystemEditor")
-	, manualImportWindow(Q_NULLPTR)
+	, manualImportWindow(nullptr)
 {
 	ui = new Ui_solarSystemManagerWindow();
 	mpcImportWindow = new MpcImportWindow();
@@ -72,8 +74,8 @@ void SolarSystemManagerWindow::createDialogContent()
 	//Signals
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()),
 	        this, SLOT(retranslate()));
-	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
-	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
+	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
+	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 	connect(ui->pushButtonCopyFile, SIGNAL(clicked()), this, SLOT(copyConfiguration()));
 	connect(ui->pushButtonReplaceFile, SIGNAL(clicked()), this, SLOT(replaceConfiguration()));
 	connect(ui->pushButtonAddFile, SIGNAL(clicked()), this, SLOT(addConfiguration()));
@@ -130,7 +132,7 @@ void SolarSystemManagerWindow::newImportMPC()
 
 void SolarSystemManagerWindow::newImportManual()
 {
-	if (manualImportWindow == Q_NULLPTR)
+	if (manualImportWindow == nullptr)
 	{
 		manualImportWindow = new ManualImportWindow();
 		connect(manualImportWindow, SIGNAL(visibleChanged(bool)), this, SLOT(resetImportManual(bool)));
@@ -152,7 +154,7 @@ void SolarSystemManagerWindow::resetImportManual(bool show)
 		populateSolarSystemList();
 
 		delete manualImportWindow;
-		manualImportWindow = Q_NULLPTR;
+		manualImportWindow = nullptr;
 
 		//This window is in the background, bring it to the foreground
 		dialog->setVisible(true);
@@ -207,17 +209,34 @@ void SolarSystemManagerWindow::removeObjects()
 
 void SolarSystemManagerWindow::copyConfiguration()
 {
-	QString filePath = QFileDialog::getSaveFileName(Q_NULLPTR,
+	QString filePath = QFileDialog::getSaveFileName(&StelMainView::getInstance(),
 							q_("Save the minor Solar System bodies as..."),
 							QDir::homePath() + "/ssystem_minor.ini");
-	ssEditor->copySolarSystemConfigurationFileTo(filePath);
+
+	const QFileInfo targetFile(filePath);
+	// We must remove an existing file because QFile::copy() does not overwrite.
+	// Note that at least on Windows, an existing and write-protected file has been identified by the previous dialog already,
+	// so these QMessageBoxes will never be seen here.
+	if (targetFile.exists() && targetFile.isWritable())
+	{
+		if (!QFile::remove(targetFile.absoluteFilePath()))
+		{
+			QMessageBox::information(&StelMainView::getInstance(), q_("Cannot overwrite"),
+					 q_("Cannot remove existing file. Do you have permissions?"));
+			return;
+		}
+	}
+
+	if (!ssEditor->copySolarSystemConfigurationFileTo(filePath))
+			QMessageBox::information(&StelMainView::getInstance(), q_("Cannot store"),
+						 q_("File cannot be written. Do you have permissions?"));
 }
 
 void SolarSystemManagerWindow::replaceConfiguration()
 {
 	QString filter = q_("Configuration files");
 	filter.append(" (*.ini)");
-	QString filePath = QFileDialog::getOpenFileName(Q_NULLPTR, q_("Select a file to replace the Solar System minor bodies"), QDir::homePath(), filter);
+	QString filePath = QFileDialog::getOpenFileName(&StelMainView::getInstance(), q_("Select a file to replace the Solar System minor bodies"), QDir::homePath(), filter);
 	ssEditor->replaceSolarSystemConfigurationFileWith(filePath);
 }
 
@@ -225,14 +244,14 @@ void SolarSystemManagerWindow::addConfiguration()
 {
 	QString filter = q_("Configuration files");
 	filter.append(" (*.ini)");
-	QString filePath = QFileDialog::getOpenFileName(Q_NULLPTR, q_("Select a file to add the Solar System minor bodies"), QDir::toNativeSeparators(StelFileMgr::getInstallationDir()+"/data/ssystem_1000comets.ini"), filter);
+	QString filePath = QFileDialog::getOpenFileName(&StelMainView::getInstance(), q_("Select a file to add the Solar System minor bodies"), QDir::toNativeSeparators(StelFileMgr::getInstallationDir()+"/data/ssystem_1000comets.ini"), filter);
 	ssEditor->addFromSolarSystemConfigurationFile(filePath);
 }
 
 void SolarSystemManagerWindow::setAboutHtml(void)
 {
 	QString html = "<html><head></head><body>";
-	html += "<h2>" + q_("Solar System Editor") + "</h2><table width=\"90%\">";
+	html += "<h2>" + q_("Solar System Editor") + "</h2><table class='layout' width=\"90%\">";
 	html += "<tr width=\"30%\"><td><strong>" + q_("Version") + ":</strong></td><td>" + SOLARSYSTEMEDITOR_PLUGIN_VERSION + "</td></tr>";
 	html += "<tr><td><strong>" + q_("License") + ":</strong></td><td>" + SOLARSYSTEMEDITOR_PLUGIN_LICENSE + "</td></tr>";
 	html += "<tr><td><strong>" + q_("Author") + ":</strong></td><td>Bogdan Marinov &lt;bogdan.marinov84@gmail.com&gt;</td></tr>";
@@ -246,7 +265,7 @@ void SolarSystemManagerWindow::setAboutHtml(void)
 	html += "</body></html>";
 
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-	if(gui!=Q_NULLPTR)
+	if(gui!=nullptr)
 	{
 		QString htmlStyleSheet(gui->getStelStyle().htmlStyleSheet);
 		ui->aboutTextBrowser->document()->setDefaultStyleSheet(htmlStyleSheet);

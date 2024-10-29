@@ -57,8 +57,8 @@ void AddRemoveLandscapesDialog::createDialogContent()
 	
 	//Signals and slots
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
-	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
-	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
+	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
+	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	connect(ui->pushButtonBrowseForArchive, SIGNAL(clicked()), this, SLOT(browseForArchiveClicked()));
 	connect(ui->listWidgetUserLandscapes, SIGNAL(currentRowChanged(int)), this, SLOT(updateSidePane(int)));
@@ -116,7 +116,7 @@ void AddRemoveLandscapesDialog::browseForArchiveClicked()
 	// TRANSLATORS: This string is displayed in the "Files of type:" drop-down list in the standard file selection dialog.
 	QString filter = q_("ZIP archives");
 	filter += " (*.zip)";
-	QString sourceArchivePath = QFileDialog::getOpenFileName(Q_NULLPTR, caption, lastUsedDirectoryPath, filter);
+	QString sourceArchivePath = QFileDialog::getOpenFileName(&StelMainView::getInstance(), caption, lastUsedDirectoryPath, filter);
 	bool useLandscape = ui->checkBoxUseLandscape->isChecked();
 	if (!sourceArchivePath.isEmpty() && QFile::exists(sourceArchivePath))
 	{

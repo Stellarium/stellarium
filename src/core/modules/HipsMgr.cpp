@@ -106,7 +106,7 @@ void HipsMgr::loadSources()
 			<< "https://data.stellarium.org/surveys/hipslist";
 	}
 
-	for (QUrl source: qAsConst(sources))
+	for (QUrl source: std::as_const(sources))
 	{
 		if (source.scheme().isEmpty()) source.setScheme("file");
 		QNetworkRequest req = QNetworkRequest(source);

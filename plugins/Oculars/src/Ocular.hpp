@@ -41,7 +41,7 @@ class Ocular : public QObject
 public:
 	Ocular();
 	Q_INVOKABLE Ocular(const QObject& other);
-	virtual ~Ocular() Q_DECL_OVERRIDE;
+	~Ocular() override;
 	static Ocular * ocularFromSettings(const QSettings * theSettings, const int ocularIndex);
 	void writeToSettings(QSettings * settings, const int index);
 	static Ocular * ocularModel(void);
@@ -57,9 +57,9 @@ public:
 	double fieldStop(void) const;
 	void setFieldStop(const double fs);
 	QString name(void) const;
-	void setName(const QString aName);
+	void setName(const QString &aName);
 	QString reticlePath(void) const;
-	void setReticlePath(const QString path);
+	void setReticlePath(const QString &path);
 
 	double actualFOV(const Telescope * telescope, const Lens *lens) const;
 	double magnification(const Telescope * telescope, const Lens *lens) const;

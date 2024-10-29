@@ -52,7 +52,7 @@ public:
 		ANNULAR		= 5,
 		BELOW_HORIZON   = 6
 	};
-	gSatWrapper(QString designation, QString tle1,QString tle2);
+	gSatWrapper(const QString &designation, const QString &tle1, const QString &tle2);
 	~gSatWrapper();
 
 	// Operation setEpoch
@@ -119,7 +119,6 @@ public:
 	//!   David A. Vallado
 	Visibility getVisibilityPredict() const;
 
-	double getPhaseAngle() const;
 	//! Get orbital period in minutes
 	double getOrbitalPeriod() const;
 	//! Get orbital inclination in degrees

@@ -46,7 +46,7 @@ QStringList StelObjectModule::listMatchingObjects(const QString &objPrefix, int 
 	QStringList names;
 	names << listAllObjects(false) << listAllObjects(true);
 	QString fullMatch = "";
-	for (const auto& name : qAsConst(names))
+	for (const auto& name : std::as_const(names))
 	{
 		if (!matchObjectName(name, objPrefix, useStartOfWords))
 			continue;

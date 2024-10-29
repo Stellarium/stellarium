@@ -137,7 +137,7 @@ class StarMgr : public StelObjectModule
 
 public:
 	StarMgr(void);
-	~StarMgr(void) Q_DECL_OVERRIDE;
+	~StarMgr(void) override;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
@@ -148,46 +148,46 @@ public:
 	//! - Loads the star font (for labels on named stars)
 	//! - Loads the texture of the star selection indicator
 	//! - Sets various display flags from the ini parser object
-	virtual void init() Q_DECL_OVERRIDE;
+	void init() override;
 
 	//! Draw the stars and the star selection indicator if necessary.
-	virtual void draw(StelCore* core) Q_DECL_OVERRIDE;
+	void draw(StelCore* core) override;
 
 	//! Update any time-dependent features.
 	//! Includes fading in and out stars and labels when they are turned on and off.
-	virtual void update(double deltaTime) Q_DECL_OVERRIDE {labelsFader.update(static_cast<int>(deltaTime*1000)); starsFader.update(static_cast<int>(deltaTime*1000));}
+	void update(double deltaTime) override {labelsFader.update(static_cast<int>(deltaTime*1000)); starsFader.update(static_cast<int>(deltaTime*1000));}
 
 	//! Used to determine the order in which the various StelModules are drawn.
-	virtual double getCallOrder(StelModuleActionName actionName) const Q_DECL_OVERRIDE;
+	double getCallOrder(StelModuleActionName actionName) const override;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in StelObjectModule class
 	//! Return a list containing the stars located inside the limFov circle around position v
-	virtual QList<StelObjectP > searchAround(const Vec3d& v, double limitFov, const StelCore* core) const Q_DECL_OVERRIDE;
+	QList<StelObjectP > searchAround(const Vec3d& v, double limitFov, const StelCore* core) const override;
 
 	//! Return the matching Stars object's pointer if exists or Q_NULLPTR
 	//! @param nameI18n The case in-sensitive localized star common name or HIP/HP, SAO, HD, HR, GCVS or WDS number
 	//! catalog name (format can be HP1234 or HP 1234 or HIP 1234) or sci name
-	virtual StelObjectP searchByNameI18n(const QString& nameI18n) const Q_DECL_OVERRIDE;
+	StelObjectP searchByNameI18n(const QString& nameI18n) const override;
 
 	//! Return the matching star if exists or Q_NULLPTR
 	//! @param name The case in-sensitive english star name
-	virtual StelObjectP searchByName(const QString& name) const Q_DECL_OVERRIDE;
+	StelObjectP searchByName(const QString& name) const override;
 
 	//! Same as searchByName(id);
-	virtual StelObjectP searchByID(const QString &id) const Q_DECL_OVERRIDE;
+	StelObjectP searchByID(const QString &id) const override;
 
 	//! Find and return the list of at most maxNbItem objects auto-completing the passed object English name.
 	//! @param objPrefix the case insensitive first letters of the searched object
 	//! @param maxNbItem the maximum number of returned object names
 	//! @param useStartOfWords the autofill mode for returned objects names
 	//! @return a list of matching object name by order of relevance, or an empty list if nothing match
-	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const Q_DECL_OVERRIDE;
+	QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const override;
 	//! @note Loading stars with the common names only.
-	virtual QStringList listAllObjects(bool inEnglish) const Q_DECL_OVERRIDE;
-	virtual QStringList listAllObjectsByType(const QString& objType, bool inEnglish) const Q_DECL_OVERRIDE;
-	virtual QString getName() const Q_DECL_OVERRIDE { return "Stars"; }
-	virtual QString getStelObjectType() const Q_DECL_OVERRIDE;
+	QStringList listAllObjects(bool inEnglish) const override;
+	QStringList listAllObjectsByType(const QString& objType, bool inEnglish) const override;
+	QString getName() const override { return "Stars"; }
+	QString getStelObjectType() const override;
 
 public slots:
 	///////////////////////////////////////////////////////////////////////////

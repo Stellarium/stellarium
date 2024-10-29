@@ -32,7 +32,7 @@
 
 RemoteControlDialog::RemoteControlDialog()
 	: StelDialog("RemoteControl")
-	, rc(Q_NULLPTR)
+	, rc(nullptr)
 {
 	ui = new Ui_remoteControlDialog();
 }
@@ -67,8 +67,8 @@ void RemoteControlDialog::createDialogContent()
 
 
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
-	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
-	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
+	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
+	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	// TODO Fill other buttons
 
@@ -132,7 +132,7 @@ void RemoteControlDialog::restoreDefaults()
 void RemoteControlDialog::setAboutHtml(void)
 {
 	QString html = "<html><head></head><body>";
-	html += "<h2>" + q_("Remote Control Plug-in") + "</h2><table width=\"90%\">";
+	html += "<h2>" + q_("Remote Control Plug-in") + "</h2><table class='layout' width=\"90%\">";
 	html += "<tr width=\"30%\"><td><strong>" + q_("Version") + ":</strong></td><td>" + REMOTECONTROL_PLUGIN_VERSION + "</td></tr>";
 	html += "<tr><td><strong>" + q_("License") + ":</strong></td><td>" + REMOTECONTROL_PLUGIN_LICENSE + "</td></tr>";
 	html += "<tr><td rowspan=2><strong>" + q_("Authors") + ":</strong></td><td>Florian Schaukowitsch</td></tr>";
@@ -168,7 +168,7 @@ void RemoteControlDialog::setAboutHtml(void)
 	html += "</body></html>";
 
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-	if(gui!=Q_NULLPTR)
+	if(gui!=nullptr)
 	{
 		QString htmlStyleSheet(gui->getStelStyle().htmlStyleSheet);
 		ui->aboutTextBrowser->document()->setDefaultStyleSheet(htmlStyleSheet);

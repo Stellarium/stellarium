@@ -44,8 +44,8 @@ public:
 	void setMap(const QPixmap &map);
 	
 signals:
-	//! Signal emitted when we click on the map
-	void positionChanged(double longitude, double latitude);
+	//! Signal emitted when we click on the map. It also delivers the color value at the clicked point.
+	void positionChanged(double longitude, double latitude, const QColor &color);
 
 protected:
 	void mousePressEvent(QMouseEvent* event) override;

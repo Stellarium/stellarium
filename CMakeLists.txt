@@ -1,4 +1,5 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 3.16)
+# CMake 3.20+ is required if x-compiling for Windows on ARM
 MESSAGE(STATUS "Found CMake ${CMAKE_VERSION}")
 
 # Fix behavior of CMAKE_CXX_STANDARD and CMAKE_C_STANDARD when targeting macOS.
@@ -22,7 +23,6 @@ SET_PROPERTY(GLOBAL PROPERTY USE_FOLDERS ON)
 PROJECT(Stellarium C CXX)
 
 SET(STELLARIUM_RELEASE_BUILD 0 CACHE BOOL "Set 1 to build as an official release (0 for development snapshots).")
-SET(STELLARIUM_RELEASE_NUMBER 1)
 
 ########### Detect Qt version
 SET(ENABLE_QT6 1 CACHE BOOL "Whether to try building with Qt6. If Qt6 is not found, Qt5 will be used.")
@@ -36,19 +36,18 @@ ENDIF()
 # Activate this to error on all things deprecated in 5.15
 #add_compile_definitions("QT_DISABLE_DEPRECATED_BEFORE=0x050F00")
 
-# two last digits of the current year
-STRING(TIMESTAMP SHORTYEAR "%y")
-MATH(EXPR STELLARIUM_MAJOR_DIGIT "${SHORTYEAR} + 0" OUTPUT_FORMAT DECIMAL)
 # Version of Stellarium has format YY.V.YD, where:
 # -- YY (MAJOR) - two last digits of the year of release
 # -- V  (MINOR) - version of the release (0 is used before first release)
 # -- YD (PATCH) - 0 for releases and the day of the current year for snapshots
 # Example: first release in year 2023 has version 23.1.0 and short (public) version 23.1, series 23.0
 # Note: Use integer versions instead of strings for easier handling if required
-SET(STELLARIUM_MAJOR ${STELLARIUM_MAJOR_DIGIT})
-SET(STELLARIUM_MINOR ${STELLARIUM_RELEASE_NUMBER})
+SET(STELLARIUM_MAJOR 24)
+# Number of the release (0 is used before first release)
+SET(STELLARIUM_MINOR 3)
 IF(STELLARIUM_RELEASE_BUILD)
     ADD_DEFINITIONS(-DSTELLARIUM_RELEASE_BUILD)
+    SET(CMAKE_BUILD_TYPE Release)
     SET(STELLARIUM_PATCH 0)
 ELSE()
     ########### Get revision number for non-release builds ###########
@@ -71,6 +70,10 @@ SET(COPYRIGHT_YEARS "2000-${CURRENTYEAR}")
 
 SET(STELLARIUM_URL "https://stellarium.org/")
 ADD_DEFINITIONS(-DSTELLARIUM_URL="${STELLARIUM_URL}")
+
+# remembering the name and the version of compiler for StelLogger
+SET(STELLARIUM_COMPILER "${CMAKE_CXX_COMPILER_ID} ${CMAKE_CXX_COMPILER_VERSION}")
+ADD_DEFINITIONS(-DSTELLARIUM_COMPILER="${STELLARIUM_COMPILER}")
 
 # The line below is copied from src/gui/HelpDialog.cpp file
 SET(STELLARIUM_COPYRIGHT "Copyright (C) ${COPYRIGHT_YEARS} ${PROJECT_NAME} Developers")
@@ -96,7 +99,7 @@ IF(Qt6_FOUND)
          SET(QT_VERSION_MAJOR 6)
      ENDIF()
 ELSE()
-     SET(MINIMAL_QT_VERSION "5.9.0")
+     SET(MINIMAL_QT_VERSION "5.12.0")
      IF(NOT DEFINED QT_VERSION_MAJOR)
          SET(QT_VERSION_MAJOR 5)
      ENDIF()
@@ -182,6 +185,7 @@ ELSE()
      SET(STELLARIUM_BUIDING_VERSION "${STELLARIUM_PUBLIC_VERSION}+")
 ENDIF()
 MESSAGE(STATUS "Building ${PROJECT_NAME} ${STELLARIUM_BUIDING_VERSION} (v${PACKAGE_VERSION}; Mode: ${CMAKE_BUILD_TYPE})")
+ADD_DEFINITIONS(-DSTELLARIUM_BUIDING_VERSION="${STELLARIUM_BUIDING_VERSION}")
 
 # Write version and series of Stellarium to Stellarium User Guide
 CONFIGURE_FILE(${PROJECT_SOURCE_DIR}/cmake/version.tex.cmake ${PROJECT_SOURCE_DIR}/guide/version.tex @ONLY NEWLINE_STYLE LF)
@@ -248,8 +252,7 @@ IF(${CMAKE_BUILD_TYPE} MATCHES "Fuzzer")
      ENDIF()
 ENDIF()
 
-IF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
-     SET(APPLE 1)
+IF(APPLE)
      SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++")
      # share data location:
      SET(SDATALOC "Resources")
@@ -322,7 +325,7 @@ IF(WIN32)
           # C4351: "new" behaviour, member array default initialization. Required since at least C++98, but funny MSVC throws a warning.
           # C4996: deprecated POSIX names (used in zlib)
 	  # C5105: defines in macros
-          SET(STEL_MSVC_FLAGS "/wd4244 /wd4305 /wd4351 /wd4996 /wd5105")
+          SET(STEL_MSVC_FLAGS "/wd4244 /wd4305 /wd4351 /wd4996 /wd5105 /utf-8")
           # Avoid type conflict with C++17 standard
           # SET(STEL_MSVC_FLAGS "${STEL_MSVC_FLAGS} /D_HAS_STD_BYTE=0") # Don't do this in Qt6. Just avoid "using namespace std" anywhere! https://developercommunity.visualstudio.com/t/error-c2872-byte-ambiguous-symbol/93889
           # Set multiprocessing and minimal version of Windows
@@ -349,13 +352,18 @@ ENDIF()
 IF("${CMAKE_CXX_COMPILER_ID}" MATCHES "Clang")
      # using regular Clang or AppleClang
      SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Woverloaded-virtual -Wno-unused-private-field -Wno-uninitialized -Wno-tautological-constant-out-of-range-compare")
-     # The cosmetic fix for Clang 3.4
+     # The cosmetic fix for Clang 3.4+
      IF(${CMAKE_CXX_COMPILER_VERSION} VERSION_GREATER 3.3)
           SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-unused-const-variable -Wno-unused-result")
      ENDIF()
+     # The cosmetic fix for Clang 3.5+
+     IF(${CMAKE_CXX_COMPILER_VERSION} VERSION_GREATER 3.4)
+          SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wno-string-plus-int")
+	  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-string-plus-int")
+     ENDIF()
      IF(APPLE)
-          SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fno-common -Wall -Wextra -Wno-unused-parameter")
-          SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-common -Wall -Wextra -Wno-unknown-warning-option")
+	  SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fno-common -Wall -Wextra -Wno-unused-parameter -Wno-string-plus-int")
+	  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-common -Wall -Wextra -Wno-unknown-warning-option -Wno-string-plus-int")
      ENDIF()
 ENDIF()
 
@@ -411,6 +419,8 @@ ENDIF()
 # SPOUT allows relaying the Stellarium OpenGL framebuffer as DirectX texture in other programs.
 # It exists on Windows only. Syphon is a similar system for MacOS, this might be added by a Mac developer.
 IF(WIN32)
+     SET(STELLARIUM_BUILD_ARM64 0 CACHE BOOL "Build for Windows on ARM")
+
      IF(${CMAKE_SYSTEM_VERSION} LESS 6.1 ) # Need Windows 7 or later to enable support of Spout
           SET(ENABLE_SPOUT 0)
           MESSAGE(STATUS "Spout support disabled due to operating system requirement")
@@ -422,7 +432,12 @@ ELSE()
 ENDIF()
 IF(ENABLE_SPOUT)
      ADD_DEFINITIONS(-DENABLE_SPOUT)
-     IF("${CMAKE_SIZEOF_VOID_P}" EQUAL "4") # 32bit build?
+     # let spout2 be found again if SPOUT_PATH_HINT changes
+     UNSET(SPOUT_LIBRARY CACHE)
+     UNSET(SPOUT_LIBRARY_DLL CACHE)
+     IF(STELLARIUM_BUILD_ARM64) # 64bit ARM build?
+          SET(SPOUT_PATH_HINT ${CMAKE_SOURCE_DIR}/util/spout2/ARM64/)
+     ELSEIF("${CMAKE_SIZEOF_VOID_P}" EQUAL "4") # 32bit build?
           SET(SPOUT_PATH_HINT ${CMAKE_SOURCE_DIR}/util/spout2/Win32/)
      ELSEIF("${CMAKE_SIZEOF_VOID_P}" EQUAL "8") # 64bit build?
           SET(SPOUT_PATH_HINT ${CMAKE_SOURCE_DIR}/util/spout2/x64/)
@@ -492,12 +507,8 @@ IF(EXISTS "${CMAKE_SOURCE_DIR}/guide/guide.pdf")
      MESSAGE(STATUS "Found Stellarium User Guide")
      INSTALL(FILES guide/guide.pdf DESTINATION ${SDATALOC}/guide)
      SET(ISS_GUIDE "Name: \"{group}\\{cm:UserGuide}\"; Filename: \"{app}\\guide\\guide.pdf\"")
-     SET(ISS_GUIDE_CD "Name: \"{commondesktop}\\{cm:UserGuide}\"; Filename: \"{app}\\guide\\guide.pdf\"; Tasks: desktopicon\\common")
-     SET(ISS_GUIDE_UD "Name: \"{userdesktop}\\{cm:UserGuide}\"; Filename: \"{app}\\guide\\guide.pdf\"; Tasks: desktopicon\\user")
 ELSE()
      SET(ISS_GUIDE "; No link to Stellarium User Guide")
-     SET(ISS_GUIDE_CD "; No link to Stellarium User Guide")
-     SET(ISS_GUIDE_UD "; No link to Stellarium User Guide")
 ENDIF()
 
 ########### Plugin setup #############
@@ -519,6 +530,7 @@ ADD_PLUGIN(Calendars 1)
 ADD_PLUGIN(Exoplanets 1)
 ADD_PLUGIN(EquationOfTime 1)
 ADD_PLUGIN(MeteorShowers 1)
+ADD_PLUGIN(MissingStars 1)
 ADD_PLUGIN(NavStars 1)
 ADD_PLUGIN(Novae 1)
 ADD_PLUGIN(Observability 1)
@@ -538,6 +550,8 @@ ADD_PLUGIN(Satellites 1)
 ADD_PLUGIN(Scenery3d 1)
 ADD_PLUGIN(SolarSystemEditor 1)
 ADD_PLUGIN(Supernovae 1)
+ADD_PLUGIN(LensDistortionEstimator 1)
+# Candidate to removing as an archaic plugin
 ADD_PLUGIN(TextUserInterface 1)
 ADD_PLUGIN(TelescopeControl 1)
 ADD_PLUGIN(Vts 0)
@@ -554,7 +568,7 @@ SET_TARGET_PROPERTIES(AllStaticPlugins PROPERTIES FOLDER "plugins")
 FIND_PACKAGE(Qt${QT_VERSION_MAJOR} COMPONENTS Core REQUIRED)
 # Catch the real path for used Qt Framework
 GET_TARGET_PROPERTY(QMAKE_LOCATION Qt${QT_VERSION_MAJOR}::qmake LOCATION)
-IF(NOT QT_VERSION)
+IF(NOT DEFINED QT_VERSION)
      # Variable ${QT_VERSION} is not defined, but no problem - we can get it from qmake
      EXECUTE_PROCESS(COMMAND ${QMAKE_LOCATION} -query QT_VERSION OUTPUT_VARIABLE QT_VERSION OUTPUT_STRIP_TRAILING_WHITESPACE)
      STRING(REPLACE " " "" QT_VERSION ${QT_VERSION})
@@ -575,57 +589,40 @@ IF(WIN32)
           FIND_PACKAGE(Qt${QT_VERSION_MAJOR} COMPONENTS XmlPatterns REQUIRED)
      ENDIF()
 
-     # Qt 5.9 (LTS) use OpenSSL 1.0* and Qt 5.12 (LTS) and newest version of Qt use OpenSSL 1.1*
+     # Qt 5.12 (LTS) and newest version of Qt use OpenSSL 1.1*
      # Source: https://lists.qt-project.org/pipermail/releasing/2019-March/002614.html
-     IF((${QT_VERSION_MAJOR} EQUAL "5") AND (Qt5Core_VERSION VERSION_LESS "5.10"))
-          # OK, it's Qt 5.9, let's try to find OpenSSL 1.0.x DLL's on Windows
-          FIND_FILE(OPENSSL_SSLEAY32_LIBRARY_DLL ssleay32.dll)
-          FIND_FILE(OPENSSL_LIBEAY32_LIBRARY_DLL libeay32.dll)
-          FIND_FILE(OPENSSL_LIBSSL32_LIBRARY_DLL libssl32.dll)
-          SET(ISS_OPENSSL_LIBS "; OpenSSL support")
-          IF(EXISTS ${OPENSSL_SSLEAY32_LIBRARY_DLL})
-               MESSAGE(STATUS "Found ssleay32 library: ${OPENSSL_SSLEAY32_LIBRARY_DLL}")
-               SET(ISS_OPENSSL_LIBS "${ISS_OPENSSL_LIBS}\nSource: \"${OPENSSL_SSLEAY32_LIBRARY_DLL}\"; DestDir: \"{app}\"; Flags: ignoreversion")
-          ENDIF()
-          IF(EXISTS ${OPENSSL_LIBEAY32_LIBRARY_DLL})
-               MESSAGE(STATUS "Found libeay32 library: ${OPENSSL_LIBEAY32_LIBRARY_DLL}")
-               SET(ISS_OPENSSL_LIBS "${ISS_OPENSSL_LIBS}\nSource: \"${OPENSSL_LIBEAY32_LIBRARY_DLL}\"; DestDir: \"{app}\"; Flags: ignoreversion")
-          ENDIF()
-          IF(EXISTS ${OPENSSL_LIBSSL32_LIBRARY_DLL})
-               MESSAGE(STATUS "Found libssl32 library: ${OPENSSL_LIBSSL32_LIBRARY_DLL}")
-               SET(ISS_OPENSSL_LIBS "${ISS_OPENSSL_LIBS}\nSource: \"${OPENSSL_LIBSSL32_LIBRARY_DLL}\"; DestDir: \"{app}\"; Flags: ignoreversion")
-          ENDIF()
-          IF((NOT EXISTS ${OPENSSL_SSLEAY32_LIBRARY_DLL}) AND (NOT EXISTS ${OPENSSL_LIBEAY32_LIBRARY_DLL}))
-               SET(ISS_OPENSSL_LIBS "; OpenSSL libraries not found")
-          ENDIF()
-     ELSE()
-          SET(OPENSSL_LIBRARY_ARCH "")
-          IF("${CMAKE_SIZEOF_VOID_P}" EQUAL "8")
-              SET(OPENSSL_LIBRARY_ARCH "-x64")
-          ENDIF()
-          # Try found OpenSSL 3.x DLL's on Windows (newest Qt)
-          FIND_FILE(OPENSSL_SSL_LIBRARY_DLL libssl-3${OPENSSL_LIBRARY_ARCH}.dll)
-          FIND_FILE(OPENSSL_CRYPTO_LIBRARY_DLL libcrypto-3${OPENSSL_LIBRARY_ARCH}.dll)
-          # OK, OpenSSL 3.x is not exist, let's try found OpenSSL 1.1.x DLL's
-          IF(NOT EXISTS ${OPENSSL_SSL_LIBRARY_DLL})
-             FIND_FILE(OPENSSL_SSL_LIBRARY_DLL libssl-1_1${OPENSSL_LIBRARY_ARCH}.dll)
-          ENDIF()
-          IF(NOT EXISTS ${OPENSSL_CRYPTO_LIBRARY_DLL})
-             FIND_FILE(OPENSSL_CRYPTO_LIBRARY_DLL libcrypto-1_1${OPENSSL_LIBRARY_ARCH}.dll)
-          ENDIF()
+     SET(OPENSSL_LIBRARY_ARCH "")
+     IF("${CMAKE_SIZEOF_VOID_P}" EQUAL "8")
+	  SET(OPENSSL_LIBRARY_ARCH "-x64")
+     ENDIF()
+     # Try found OpenSSL 3.x DLL's on Windows (newest Qt)
+     FIND_FILE(OPENSSL_SSL_LIBRARY_DLL libssl-3${OPENSSL_LIBRARY_ARCH}.dll)
+     FIND_FILE(OPENSSL_CRYPTO_LIBRARY_DLL libcrypto-3${OPENSSL_LIBRARY_ARCH}.dll)
+     # OK, OpenSSL 3.x is not exist, let's try found OpenSSL 1.1.x DLL's
+     IF(NOT EXISTS ${OPENSSL_SSL_LIBRARY_DLL})
+	  FIND_FILE(OPENSSL_SSL_LIBRARY_DLL libssl-1_1${OPENSSL_LIBRARY_ARCH}.dll)
+     ENDIF()
+     IF(NOT EXISTS ${OPENSSL_CRYPTO_LIBRARY_DLL})
+	  FIND_FILE(OPENSSL_CRYPTO_LIBRARY_DLL libcrypto-1_1${OPENSSL_LIBRARY_ARCH}.dll)
+     ENDIF()
 
-          SET(ISS_OPENSSL_LIBS "; OpenSSL support")
-          IF(EXISTS ${OPENSSL_SSL_LIBRARY_DLL})
-             MESSAGE(STATUS "Found OpenSSL SSL library: ${OPENSSL_SSL_LIBRARY_DLL}")
-             SET(ISS_OPENSSL_LIBS "${ISS_OPENSSL_LIBS}\nSource: \"${OPENSSL_SSL_LIBRARY_DLL}\"; DestDir: \"{app}\"; Flags: ignoreversion")
-          ENDIF()
-          IF(EXISTS ${OPENSSL_CRYPTO_LIBRARY_DLL})
-             MESSAGE(STATUS "Found OpenSSL crypto library: ${OPENSSL_CRYPTO_LIBRARY_DLL}")
-             SET(ISS_OPENSSL_LIBS "${ISS_OPENSSL_LIBS}\nSource: \"${OPENSSL_CRYPTO_LIBRARY_DLL}\"; DestDir: \"{app}\"; Flags: ignoreversion")
-          ENDIF()
-          IF((NOT EXISTS ${OPENSSL_SSL_LIBRARY_DLL}) AND (NOT EXISTS ${OPENSSL_CRYPTO_LIBRARY_DLL}))
-             SET(ISS_OPENSSL_LIBS "; OpenSSL libraries not found")
-          ENDIF()
+     IF(NOT STELLARIUM_BUILD_ARM64)
+       SET(ISS_OPENSSL_LIBS "; OpenSSL support")
+       IF(EXISTS ${OPENSSL_SSL_LIBRARY_DLL})
+         MESSAGE(STATUS "Found OpenSSL SSL library: ${OPENSSL_SSL_LIBRARY_DLL}")
+         SET(ISS_OPENSSL_LIBS "${ISS_OPENSSL_LIBS}\nSource: \"${OPENSSL_SSL_LIBRARY_DLL}\"; DestDir: \"{app}\"; Flags: ignoreversion")
+       ENDIF()
+       IF(EXISTS ${OPENSSL_CRYPTO_LIBRARY_DLL})
+         MESSAGE(STATUS "Found OpenSSL crypto library: ${OPENSSL_CRYPTO_LIBRARY_DLL}")
+         SET(ISS_OPENSSL_LIBS "${ISS_OPENSSL_LIBS}\nSource: \"${OPENSSL_CRYPTO_LIBRARY_DLL}\"; DestDir: \"{app}\"; Flags: ignoreversion")
+       ENDIF()
+       IF((NOT EXISTS ${OPENSSL_SSL_LIBRARY_DLL}) AND (NOT EXISTS ${OPENSSL_CRYPTO_LIBRARY_DLL}))
+         SET(ISS_OPENSSL_LIBS "; OpenSSL libraries not found")
+       ENDIF()
+     ENDIF()
+
+     IF(STELLARIUM_BUILD_ARM64 AND ${QT_VERSION} VERSION_LESS "6.5.0")
+       MESSAGE(FATAL_ERROR "Qt 6.5.0 or later is required for Windows on ARM builds.")
      ENDIF()
 ENDIF()
 
@@ -659,24 +656,29 @@ IF(APPLE)
      ENDIF()
 ENDIF()
 
-# Since Qt 5.4, linking to OpenGL is basically not required anymore,
-# because the QtGui module re-implements the GL functions, and perhaps even
-# dispatches the calls to a dynamically selected GL library.
-#
-# The only exception where this does not work with CMake is for
-# ES2-only/ANGLE-only builds, which are seemingly not included in
-# official Qt downloads, but may be required as a custom build
-# for some embedded systems. Interestingly, this works with qmake,
-# but CMake needs an explicit link definition.
-# See also this bug: https://bugreports.qt.io/browse/QTBUG-29132
+IF(${QT_VERSION_MAJOR} EQUAL 5)
+     # Since Qt 5.4, linking to OpenGL is basically not required anymore,
+     # because the QtGui module re-implements the GL functions, and perhaps even
+     # dispatches the calls to a dynamically selected GL library.
+     #
+     # The only exception where this does not work with CMake is for
+     # ES2-only/ANGLE-only builds, which are seemingly not included in
+     # official Qt downloads, but may be required as a custom build
+     # for some embedded systems. Interestingly, this works with qmake,
+     # but CMake needs an explicit link definition.
+     # See also this bug: https://bugreports.qt.io/browse/QTBUG-29132
 
-# Check if we have a GLES-only build
-# On dynamic builds, this property is also "GL"
-IF(${Qt5Gui_OPENGL_IMPLEMENTATION} MATCHES "GLES")
-     MESSAGE(STATUS "Building an OpenGL ES build (${Qt5Gui_OPENGL_IMPLEMENTATION})")
-     SET(STEL_GLES_LIBS Qt5::Gui_EGL Qt5::Gui_GLESv2)
+     # Check if we have a GLES-only build
+     # On dynamic builds, this property is also "GL"
+     IF(${Qt5Gui_OPENGL_IMPLEMENTATION} MATCHES "GLES")
+	  MESSAGE(STATUS "Building an OpenGL ES build (${Qt5Gui_OPENGL_IMPLEMENTATION})")
+	  SET(STEL_GLES_LIBS Qt5::Gui_EGL Qt5::Gui_GLESv2)
+     ELSE()
+	  MESSAGE(STATUS "Building an OpenGL build")
+     ENDIF()
 ELSE()
-     MESSAGE(STATUS "Building an OpenGL build")
+     # See https://doc.qt.io/qt-6/qopenglcontext.html#details + https://doc.qt.io/qt-6/qtgui-overview.html#opengl-and-opengl-es-integration
+     MESSAGE(STATUS "Building an OpenGL/OpenGL ES build")
 ENDIF()
 
 # Tell CMake to run moc when necessary:
@@ -689,8 +691,8 @@ SET(CMAKE_INCLUDE_CURRENT_DIR ON)
 IF(ENABLE_SHOWMYSKY)
     ADD_DEFINITIONS(-DENABLE_SHOWMYSKY)
     CPMFindPackage(NAME ShowMySky-Qt${QT_VERSION_MAJOR}
-		URL https://github.com/10110111/CalcMySky/archive/refs/tags/v0.3.0.tar.gz
-        URL_HASH SHA256=f5ea2d3981de0d3e93a0d12b12bea9e9cfcf51b62336740be641f4ba74f98bdd
+        URL https://github.com/10110111/CalcMySky/archive/refs/tags/v0.3.3.tar.gz
+        URL_HASH SHA256=21cce3187009ce62a4a08a72b4e22ae7bc00654edfbc7fa9fe8ab65b412791df
         EXCLUDE_FROM_ALL yes
         OPTIONS "QT_VERSION ${QT_VERSION_MAJOR}")
     IF(ShowMySky-Qt${QT_VERSION_MAJOR}_ADDED)
@@ -807,6 +809,14 @@ ELSE()
      MESSAGE(STATUS "Using system-provided zlib at ${ZLIB_LIBRARIES}")
 ENDIF()
 
+SET(USE_BUNDLED_QTCOMPRESS 1 CACHE BOOL "Use bundled version of qtcompress")
+IF(USE_BUNDLED_QTCOMPRESS)
+     ADD_DEFINITIONS(-DUSE_BUNDLED_QTCOMPRESS)
+     MESSAGE(STATUS "Using bundled qtcompress at ${CMAKE_SOURCE_DIR}/src/external/qtcompress")
+ELSE()
+     MESSAGE(STATUS "Using Qt-provided qtcompress")
+ENDIF()
+
 IF(ENABLE_XLSX)
      # TODO: switch to something like vcpkg or conan, and plain find_package,
      # without the fallback of cmake downloading the dep itself.
@@ -821,8 +831,8 @@ IF(ENABLE_XLSX)
          MESSAGE(STATUS "Using system-provided QXlsx ${QXlsx_VERSION}")
      ELSE()
          CPMAddPackage(NAME QXlsxQt${QT_VERSION_MAJOR}
-             URL https://github.com/QtExcel/QXlsx/archive/refs/tags/v1.4.5.tar.gz
-             URL_HASH SHA256=1b546b28863cb86889da586c1d702f1627b9e6a946acf13d52b1f3dd65c6df8f
+             URL https://github.com/QtExcel/QXlsx/archive/refs/tags/v1.4.8.tar.gz
+             URL_HASH SHA256=5b2a5aad08f07e6b099d934c4c4f75bcd83a0421538aec1e8582d8c8596b0956
              EXCLUDE_FROM_ALL ON
              SOURCE_SUBDIR QXlsx)
      ENDIF()
@@ -887,11 +897,14 @@ IF(WIN32)
      ### Generate an Inno Setup project file
      #######################################################
 
-     IF("${CMAKE_SIZEOF_VOID_P}" EQUAL "4")
+     IF(STELLARIUM_BUILD_ARM64) # 64bit ARM build?
+	  SET(ISS_ARCHITECTURE_SPECIFIC ";Make the installer run only on arm64:\nArchitecturesAllowed=arm64\n;Switch to 64-bit install mode:\nArchitecturesInstallIn64BitMode=arm64")
+	  SET(ISS_PACKAGE_PLATFORM "qt${QT_VERSION_MAJOR}-arm64")
+     ELSEIF("${CMAKE_SIZEOF_VOID_P}" EQUAL "4")
 	  SET(ISS_ARCHITECTURE_SPECIFIC "")
 	  SET(ISS_PACKAGE_PLATFORM "qt${QT_VERSION_MAJOR}-win32")
      ELSEIF("${CMAKE_SIZEOF_VOID_P}" EQUAL "8")
-	  SET(ISS_ARCHITECTURE_SPECIFIC ";Switch to 64-bit install mode:\nArchitecturesInstallIn64BitMode=x64")
+	  SET(ISS_ARCHITECTURE_SPECIFIC ";Make the installer run only on win64:\nArchitecturesAllowed=x64\n;Switch to 64-bit install mode:\nArchitecturesInstallIn64BitMode=x64")
 	  SET(ISS_PACKAGE_PLATFORM "qt${QT_VERSION_MAJOR}-win64")
      ENDIF()
      SET(ISS_AUTOGENERATED_WARNING "Do not edit this file! It has been automatically generated by CMake. Your changes will be lost the next time CMake is run.")
@@ -945,8 +958,12 @@ IF(GENERATE_PACKAGE_TARGET)
           SET(CMAKE_INSTALL_UCRT_LIBRARIES TRUE)
      ENDIF()
      INCLUDE(InstallRequiredSystemLibraries)
-     SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Stellarium is a free open source planetarium for your computer. It shows a realistic sky in 3D, just like what you see with the naked eye, binoculars or a telescope.")
+     SET(CPACK_PACKAGE_NAME "stellarium")
+     SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Stellarium is real-time photo-realistic sky generator.")
+     SET(CPACK_PACKAGE_DESCRIPTION "Stellarium is a free open source planetarium for your computer. It shows a realistic sky in 3D, just like what you see with the naked eye, binoculars or a telescope.")
      SET(CPACK_PACKAGE_VENDOR "Stellarium's team")
+     SET(CPACK_PACKAGE_CONTACT "stellarium@googlegroups.com")
+     SET(CPACK_PACKAGE_HOMEPAGE_URL "${STELLARIUM_URL}")
      SET(CPACK_PACKAGE_DESCRIPTION_FILE "${CMAKE_CURRENT_SOURCE_DIR}/README.md")
      SET(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/COPYING")
      SET(CPACK_PACKAGE_VERSION_MAJOR "${STELLARIUM_MAJOR}")
@@ -955,23 +972,26 @@ IF(GENERATE_PACKAGE_TARGET)
      SET(CPACK_PACKAGE_INSTALL_DIRECTORY "stellarium")
      IF(STELLARIUM_RELEASE_BUILD)
 	  SET(CPACK_SOURCE_PACKAGE_FILE_NAME "stellarium-${STELLARIUM_PUBLIC_VERSION}")
+          SET(CPACK_PACKAGE_ICON "${CMAKE_CURRENT_SOURCE_DIR}/data/icons/512x512/stellarium.png")
      ELSE()
 	  SET(CPACK_SOURCE_PACKAGE_FILE_NAME "stellarium-${STELLARIUM_PUBLIC_VERSION}-${GIT_REVISION}")
+          SET(CPACK_PACKAGE_ICON "${CMAKE_CURRENT_SOURCE_DIR}/data/icons/512x512/stellarium-gray.png")
      ENDIF()
-     SET(CPACK_SOURCE_GENERATOR "TBZ2;TXZ;TGZ")
-     SET(CPACK_GENERATOR "TBZ2;TXZ;TGZ")
+     SET(CPACK_SOURCE_GENERATOR "TBZ2;TXZ;TGZ;ZIP")
+     SET(CPACK_GENERATOR "TBZ2;TXZ;TGZ;ZIP")
      SET(CPACK_PACKAGE_CHECKSUM "SHA256")
      SET(CPACK_STRIP_FILES "bin/stellarium")
      SET(CPACK_PACKAGE_EXECUTABLES "stellarium" "Stellarium")
-     SET(CPACK_SOURCE_IGNORE_FILES "/.git/" "/.github/" "builds/" "installers/" "po/stellarium-landscapes-descriptions" "po/stellarium-scenery3d-descriptions" "po/stellarium-skycultures-descriptions" "po/stellarium-desktop" "po/stellarium-metainfo" "util/spout2" "util/DSSToStellarium/toastForShape$" "Stellarium.tag$" "Stellarium.kdevelop.pcs$" "/CMakeLists.txt.user$" "\\\\.gitignore$" "\\\\.clang-format$" "\\\\.yml$" "~$" "\\\\.swp$" "\\\\.#" "/#")
+     SET(CPACK_SOURCE_IGNORE_FILES "/.git/" "/.github/" "builds/" "installers/" "po/stellarium-landscapes-descriptions" "po/stellarium-scenery3d-descriptions" "po/stellarium-skycultures-descriptions" "po/stellarium-desktop" "po/stellarium-metainfo" "util/spout2" "util/DSSToStellarium/toastForShape$" "Stellarium.tag$" "Stellarium.kdevelop.pcs$" "/CMakeLists.txt.user$" "/CITATION*" "\\\\.gitignore$" "\\\\.clang-format$" "\\\\.yml$" "~$" "\\\\.swp$" "\\\\.#" "/#")
      SET(CPACK_RPM_PACKAGE_LICENSE "GNU GPLv2 or later")
-     SET(CPACK_RPM_PACKAGE_GROUP "Amusements/Graphics")
-     SET(CPACK_RPM_PACKAGE_URL "${STELLARIUM_URL}")
+     SET(CPACK_RPM_PACKAGE_GROUP "Sciences/Astronomy")
      SET(CPACK_DEBIAN_PACKAGE_MAINTAINER "${CPACK_PACKAGE_VENDOR} <stellarium@googlegroups.com>")
      SET(CPACK_DEBIAN_PACKAGE_SECTION "science")
-     SET(CPACK_DEBIAN_PACKAGE_VERSION "${VERSION}+deb1")
-     SET(CPACK_DEBIAN_PACKAGE_HOMEPAGE "${CPACK_RPM_PACKAGE_URL}")
+     SET(CPACK_DEBIAN_PACKAGE_VERSION "${VERSION}-full-qt${QT_VERSION_MAJOR}")
      SET(CPACK_DEBIAN_PACKAGE_SHLIBDEPS ON)
+     # package name for deb. If set, then instead of stellarium-24.0.0-Linux.deb
+     # you'll get stellarium_24.0.0_amd64.deb (note the underscores too)
+     SET(CPACK_DEBIAN_FILE_NAME DEB-DEFAULT)
      INCLUDE(CPack)
 ENDIF()
 
@@ -1029,6 +1049,23 @@ IF(DOXYGEN_FOUND)
      ENDIF()
      CONFIGURE_FILE(${PROJECT_SOURCE_DIR}/cmake/Doxyfile.cmake ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile @ONLY)
      ADD_CUSTOM_TARGET(apidoc ${DOXYGEN_EXECUTABLE} ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR} COMMENT "Generate the doxygen documentation into the doc directory.")
+ENDIF()
+
+include("cmake/Check-from_chars.cmake")
+IF(NOT FROM_CHARS_WORKS)
+    CPMFindPackage(NAME FastFloat
+                   GIT_REPOSITORY https://github.com/fastfloat/fast_float
+                   VERSION 6.1.0
+                   EXCLUDE_FROM_ALL yes)
+    GET_TARGET_PROPERTY(FastFloat_INCLUDE_DIRECTORIES
+                        FastFloat::fast_float INTERFACE_INCLUDE_DIRECTORIES)
+    INCLUDE_DIRECTORIES(${FastFloat_INCLUDE_DIRECTORIES})
+    ADD_DEFINITIONS(-DUSE_FAST_FLOAT)
+ENDIF()
+
+include("cmake/Check-std_execution.cmake")
+IF(STD_EXECUTION_KNOWN)
+ADD_DEFINITIONS(-DSTD_EXECUTION_KNOWN)
 ENDIF()
 
 ########### Top level include directories ###########

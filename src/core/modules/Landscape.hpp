@@ -36,6 +36,7 @@
 #include <QFont>
 #include <QVariant>
 
+class LandscapeMgr;
 class QSettings;
 class StelLocation;
 class StelCore;
@@ -66,6 +67,7 @@ class QOpenGLVertexArrayObject;
 //!   @param name: The landscape name as specified in the LandscapeIni (may contain spaces, translatable, UTF8, ...)
 class Landscape
 {
+	friend LandscapeMgr;
 public:
 	typedef struct
 	{
@@ -94,13 +96,14 @@ public:
 	{
 		landFader.update(static_cast<int>(deltaTime*1000));
 		fogFader.update(static_cast<int>(deltaTime*1000));
-		illumFader.update(static_cast<int>(deltaTime*1000));
-		labelFader.update(static_cast<int>(deltaTime*1000));
 	}
 
 	//! Set the brightness of the landscape plus brightness of optional add-on night lightscape.
 	//! This is called in each draw().
 	void setBrightness(const double b, const double pollutionBrightness=0.0) {landscapeBrightness = static_cast<float>(b); lightScapeBrightness=static_cast<float>(pollutionBrightness); }
+
+        //! Set a tint to render the landscape. Useful for low-sun scenes
+        void setTint(Vec3f color){landscapeTint=color;}
 
 	//! Returns the current brightness level
 	double getBrightness() const { return static_cast<double>(landscapeBrightness); }
@@ -114,29 +117,17 @@ public:
 	//! Set whether landscape is displayed (does not concern fog)
 	void setFlagShow(const bool b) {landFader=b;}
 	//! Get whether landscape is displayed (does not concern fog)
-	bool getFlagShow() const {return static_cast<bool>(landFader);}
+	bool getFlagShow() {return static_cast<bool>(landFader);}
 	//! Returns the currently effective land fade value
-	float getEffectiveLandFadeValue() const { return landFader.getInterstate(); }
+	float getEffectiveLandFadeValue() { return landFader.getInterstate(); }
 	//! Set whether fog is displayed
 	void setFlagShowFog(const bool b) {fogFader=b;}
 	//! Get whether fog is displayed
-	bool getFlagShowFog() const {return static_cast<bool>(fogFader);}
+	bool getFlagShowFog() {return static_cast<bool>(fogFader);}
 	//! Set whether illumination is displayed
-	void setFlagShowIllumination(const bool b) {illumFader=b;}
+	static void setFlagShowIllumination(const bool b) {illumFader=b;}
 	//! Get whether illumination is displayed
-	bool getFlagShowIllumination() const {return static_cast<bool>(illumFader);}
-	//! Set whether labels are displayed
-	void setFlagShowLabels(const bool b) {labelFader=b;}
-	//! Get whether labels are displayed
-	bool getFlagShowLabels() const {return static_cast<bool>(labelFader);}
-	//! Change font and fontsize for landscape labels
-	void setLabelFontSize(const int size){ fontSize=size; }
-	//! Get fontsize for landscape labels
-	int getLabelFontSize() { return fontSize; }
-	//! Get color for landscape labels
-	Vec3f getLabelColor() const { return labelColor; }
-	//! Set color for landscape labels
-	void setLabelColor(const Vec3f& c) { labelColor=c; };
+	static bool getFlagShowIllumination() {return static_cast<bool>(illumFader);}
 
 	//! Get landscape name
 	QString getName() const {return name;}
@@ -178,6 +169,8 @@ public:
 	bool getIsFullyVisible() const {return landFader.getInterstate() >= 0.999f;}
 	//! Get the sine of the limiting altitude (can be used to short-cut drawing below horizon, like star fields). There is no set here, value is only from landscape.ini
 	double getSinMinAltitudeLimit() const {return sinMinAltitudeLimit;}
+
+	static void setTransparency(const double f) { landscapeTransparency=f; }
 
 	//! Find opacity in a certain direction. (New in V0.13 series)
 	//! can be used to find sunrise or visibility questions on the real-world landscape horizon.
@@ -229,7 +222,6 @@ protected:
 	std::unique_ptr<QOpenGLVertexArrayObject> vao;
 	std::unique_ptr<QOpenGLBuffer> vbo;
 	StelProjectorP prevProjector;
-	StelTextureSP ditherPatternTex;
 	std::unique_ptr<QOpenGLShaderProgram> renderProgram;
 
 	double radius;
@@ -240,12 +232,13 @@ protected:
 
 	float minBrightness;   //! Read from landscape.ini:[landscape]minimal_brightness. Allows minimum visibility that cannot be underpowered.
 	float landscapeBrightness;  //! brightness [0..1] to draw the landscape. Computed by the LandscapeMgr.
+        Vec3f landscapeTint;   //! color tint to draw the landscape (daylight texture only). Nice for sunrise/sunset.
 	float lightScapeBrightness; //! can be used to draw nightscape texture (e.g. city light pollution), if available. Computed by the LandscapeMgr.
 	bool validLandscape;   //! was a landscape loaded properly?
 	LinearFader landFader; //! Used to slowly fade in/out landscape painting.
 	LinearFader fogFader;  //! Used to slowly fade in/out fog painting.
-	LinearFader illumFader;//! Used to slowly fade in/out illumination painting.
-	LinearFader labelFader;//! Used to slowly fade in/out landscape feature labels.
+	static LinearFader illumFader;//! Used to slowly fade in/out illumination painting.
+	static LinearFader labelFader;//! Used to slowly fade in/out landscape feature labels.
 	unsigned int rows;     //! horizontal rows.  May be given in landscape.ini:[landscape]tesselate_rows. More indicates higher accuracy, but is slower.
 	unsigned int cols;     //! vertical columns. May be given in landscape.ini:[landscape]tesselate_cols. More indicates higher accuracy, but is slower.
 	float angleRotateZ;    //! [radians] if pano does not have its left border in the east, rotate in azimuth. Configured in landscape.ini[landscape]angle_rotatez (or decor_angle_rotatez for old_style landscapes)
@@ -253,6 +246,7 @@ protected:
 				  //! Not in landscape.ini: Used in special cases where the horizon may rotate, e.g. on a ship.
 
 	double sinMinAltitudeLimit; //! Minimal altitude of landscape cover. Can be used to construct bounding caps, so that e.g. no stars are drawn below this altitude. Default -0.035, i.e. sin(-2 degrees).
+	static double landscapeTransparency;
 
 	StelLocation location; //! OPTIONAL. If present, can be used to set location.
 	/** May be given in landscape.ini:light_pollution_luminance in cd/m². Default: no change.
@@ -267,12 +261,14 @@ protected:
 	SphericalRegionP horizonPolygon;   //! Optional element describing the horizon line.
 					   //! Data shall be read from the file given as landscape.ini[landscape]polygonal_horizon_list
 					   //! For LandscapePolygonal, this is the only horizon data item.
-	Vec3f horizonPolygonLineColor;     //! for all horizon types, the horizonPolygon line, if specified, will be drawn in this color
-					   //! specified in landscape.ini[landscape]horizon_line_color. Negative red (default) indicated "don't draw".
+	static Vec3f horizonPolygonLineColor;     //! for all horizon types, the horizonPolygon line, if specified, will be drawn in this color
+					   //! DEPRECATED PER-LANDSCAPE: if still specified in landscape.ini[landscape]horizon_line_color, it will be ignored. Negative red (default) indicated "don't draw".
+	static int horizonPolygonLineThickness; //! [0...5] used to draw the horizon polygon, if defined. Set 0 to switch off.
 	// Optional element: labels for landscape features.
 	QList<LandscapeLabel> landscapeLabels;
-	int fontSize;     //! Used for landscape labels (optionally indicating landscape features)
-	Vec3f labelColor; //! Color for the landscape labels.
+	static int fontSize;     //! Used for landscape labels (optionally indicating landscape features)
+	static Vec3f labelColor; //! Color for the landscape labels.
+	static int labelAngle; //! Rotation angle for landscape labels, degrees. Useful for landscapes with many labels.
 	unsigned int memorySize;   //!< holds an approximate value of memory consumption (for cache cost estimate)
 	bool multisamplingEnabled_;
 	bool initialized = false;
@@ -297,11 +293,11 @@ class LandscapeOldStyle : public Landscape
 {
 public:
 	LandscapeOldStyle(float radius = 2.0f);
-	virtual ~LandscapeOldStyle() Q_DECL_OVERRIDE;
-	virtual void load(const QSettings& landscapeIni, const QString& landscapeId) Q_DECL_OVERRIDE;
-	virtual void draw(StelCore* core, bool onlyPolygon) Q_DECL_OVERRIDE;
+	~LandscapeOldStyle() override;
+	void load(const QSettings& landscapeIni, const QString& landscapeId) override;
+	void draw(StelCore* core, bool onlyPolygon) override;
 	//void create(bool _fullpath, QMap<QString, QString> param); // still not implemented
-	virtual float getOpacity(Vec3d azalt) const Q_DECL_OVERRIDE;
+	float getOpacity(Vec3d azalt) const override;
 protected:
 	typedef struct
 	{
@@ -360,9 +356,7 @@ private:
 		int tanMode;
 		int calibrated;
 		int brightness;
-		int rgbMaxValue;
 		int whatToRender;
-		int ditherPattern;
 		int decorAngleShift;
 		int firstSideInBatch;
 		int sidePresenceMask;
@@ -389,10 +383,12 @@ class LandscapePolygonal : public Landscape
 {
 public:
 	LandscapePolygonal(float radius = 1.f);
-	virtual ~LandscapePolygonal() Q_DECL_OVERRIDE;
-	virtual void load(const QSettings& landscapeIni, const QString& landscapeId) Q_DECL_OVERRIDE;
-	virtual void draw(StelCore* core, bool onlyPolygon) Q_DECL_OVERRIDE;
-	virtual float getOpacity(Vec3d azalt) const Q_DECL_OVERRIDE;
+	~LandscapePolygonal() override;
+	void load(const QSettings& landscapeIni, const QString& landscapeId) override;
+	void draw(StelCore* core, bool onlyPolygon) override;
+	float getOpacity(Vec3d azalt) const override;
+	// To allow ad-hoc "zero" landscapes with color from map
+	void setGroundColor(const Vec3f &color);
 private:
 	// we have inherited: horizonFileName, horizonPolygon, horizonPolygonLineColor
 	Vec3f groundColor; //! specified in landscape.ini[landscape]ground_color.
@@ -408,12 +404,12 @@ class LandscapeFisheye : public Landscape
 {
 public:
 	LandscapeFisheye(float radius = 1.f);
-	virtual ~LandscapeFisheye() Q_DECL_OVERRIDE;
-	virtual void load(const QSettings& landscapeIni, const QString& landscapeId) Q_DECL_OVERRIDE;
-	virtual void draw(StelCore* core, bool onlyPolygon) Q_DECL_OVERRIDE;
+	~LandscapeFisheye() override;
+	void load(const QSettings& landscapeIni, const QString& landscapeId) override;
+	void draw(StelCore* core, bool onlyPolygon) override;
 	//! Sample landscape texture for transparency/opacity. May be used for visibility, sunrise etc.
 	//! @param azalt normalized direction in alt-az frame
-	virtual float getOpacity(Vec3d azalt) const Q_DECL_OVERRIDE;
+	float getOpacity(Vec3d azalt) const override;
 	//! create a fisheye landscape from basic parameters (no ini file needed).
 	//! @param name Landscape name
 	//! @param maptex the fisheye texture
@@ -437,8 +433,6 @@ private:
 		int texFov;
 		int mapTex;
 		int brightness;
-		int rgbMaxValue;
-		int ditherPattern;
 		int projectionMatrixInverse;
 	} shaderVars;
 };
@@ -457,13 +451,13 @@ class LandscapeSpherical : public Landscape
 {
 public:
 	LandscapeSpherical(float radius = 1.f);
-	virtual ~LandscapeSpherical() Q_DECL_OVERRIDE;
-	virtual void load(const QSettings& landscapeIni, const QString& landscapeId) Q_DECL_OVERRIDE;
-	virtual void draw(StelCore* core, bool onlyPolygon) Q_DECL_OVERRIDE;
+	~LandscapeSpherical() override;
+	void load(const QSettings& landscapeIni, const QString& landscapeId) override;
+	void draw(StelCore* core, bool onlyPolygon) override;
 	//! Sample landscape texture for transparency/opacity. May be used for visibility, sunrise etc.
 	//! @param azalt normalized direction in alt-az frame
 	//! @retval alpha (0=fully transparent, 1=fully opaque. Trees, leaves, glass etc may have intermediate values.)
-	virtual float getOpacity(Vec3d azalt) const Q_DECL_OVERRIDE;
+	float getOpacity(Vec3d azalt) const override;
 	//! create a spherical landscape from basic parameters (no ini file needed).
 	//! @param name Landscape name
 	//! @param maptex the equirectangular texture
@@ -503,9 +497,7 @@ private:
 		int mapTex;
 		int mapTexTop;
 		int brightness;
-		int rgbMaxValue;
 		int mapTexBottom;
-		int ditherPattern;
 		int bottomCapColor;
 		int projectionMatrixInverse;
 	} shaderVars;

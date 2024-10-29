@@ -39,7 +39,7 @@ void AstroHinduSolarCalendar::setJD(double JD)
 // set date from a vector of calendar date elements sorted from the largest to the smallest.
 // {Year, Month[1...12], leapMonth[0|1], Day[1...30], leapDay}
 // Time is not changed!
-void AstroHinduSolarCalendar::setDate(QVector<int> parts)
+void AstroHinduSolarCalendar::setDate(const QVector<int> &parts)
 {
 	this->parts=parts;
 	double rd=fixedFromAstroHinduSolar(parts);

@@ -70,8 +70,8 @@ RemoteSync::RemoteSync()
 	, connectionLostBehavior(ClientBehavior::RECONNECT)
 	, quitBehavior(ClientBehavior::NONE)
 	, state(IDLE)
-	, server(Q_NULLPTR)
-	, client(Q_NULLPTR)
+	, server(nullptr)
+	, client(nullptr)
 	, allowVersionMismatch(false)
 {
 	setObjectName("RemoteSync");
@@ -98,7 +98,7 @@ bool RemoteSync::configureGui(bool show)
 	return true;
 }
 
-QVariant RemoteSync::argsGetOptionWithArg(const QStringList& args, QString shortOpt, QString longOpt, QVariant defaultValue)
+QVariant RemoteSync::argsGetOptionWithArg(const QStringList& args, const QString &shortOpt, const QString &longOpt, const QVariant &defaultValue)
 {
 	// Don't see anything after a -- as an option
 	int lastOptIdx = args.indexOf("--");
@@ -282,7 +282,7 @@ void RemoteSync::startServer()
 		{
 			setError(server->errorString());
 			delete server;
-			server = Q_NULLPTR;
+			server = nullptr;
 		}
 	}
 	else
@@ -295,7 +295,7 @@ void RemoteSync::stopServer()
 	{
 		connect(server, SIGNAL(serverStopped()), server, SLOT(deleteLater()));
 		server->stop();
-		server = Q_NULLPTR;
+		server = nullptr;
 		setState(IDLE);
 	}
 	else
@@ -326,7 +326,7 @@ void RemoteSync::clientDisconnected(bool clean)
 {
 	QString errStr = client->errorString();
 	client->deleteLater();
-	client = Q_NULLPTR;
+	client = nullptr;
 
 	if(!clean)
 	{
@@ -412,12 +412,12 @@ void RemoteSync::saveSettings()
 	conf->endGroup();
 }
 
-QString RemoteSync::packStringList(const QStringList props)
+QString RemoteSync::packStringList(const QStringList &props)
 {
 	return props.join("|");
 }
 
-QStringList RemoteSync::unpackStringList(const QString packedProps)
+QStringList RemoteSync::unpackStringList(const QString &packedProps)
 {
 	return packedProps.split("|");
 }
@@ -436,32 +436,6 @@ void RemoteSync::setError(const QString &errorString)
 {
 	this->errorString = errorString;
 	emit errorOccurred(errorString);
-}
-
-QDebug operator<<(QDebug deb, RemoteSync::SyncState state)
-{
-	switch (state) {
-		case RemoteSync::IDLE:
-			deb<<"IDLE";
-			break;
-		case RemoteSync::SERVER:
-			deb<<"SERVER";
-			break;
-		case RemoteSync::CLIENT:
-			deb<<"CLIENT";
-			break;
-		case RemoteSync::CLIENT_CONNECTING:
-			deb<<"CLIENT_CONNECTING";
-			break;
-		case RemoteSync::CLIENT_WAIT_RECONNECT:
-			deb<<"CLIENT_WAIT_RECONNECT";
-			break;
-		default:
-			deb<<"RemoteSync::SyncState(" <<int(state)<<')';
-			break;
-	}
-
-	return deb;
 }
 
 bool RemoteSync::isPropertyBlacklisted(const QString &name)

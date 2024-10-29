@@ -30,7 +30,7 @@
 #include "StelLocationMgr.hpp"
 
 
-QString Calendar::getFormattedDateString(QVector<int> date, QString sep)
+QString Calendar::getFormattedDateString(const QVector<int> &date, QString sep)
 {
 	QString res;
 	QVector<int>::const_iterator it;
@@ -82,7 +82,7 @@ double Calendar::jdFromMoment(double rd, bool respectUTCoffset)
 }
 
 // Reingold-Dershowitz CC.UE 1.48
-int Calendar::rdCorrSum(QVector<int>parts, QVector<int>factors, int corr)
+int Calendar::rdCorrSum(const QVector<int> &parts, const QVector<int> &factors, int corr)
 {
 	Q_ASSERT(parts.length()==factors.length());
 
@@ -93,7 +93,7 @@ int Calendar::rdCorrSum(QVector<int>parts, QVector<int>factors, int corr)
 }
 
 // Split integer to mixed-radix vector. Reingold-Dershowitz CC.UE 1.42
-QVector<int> Calendar::toRadix(int num, QVector<int>radix)
+QVector<int> Calendar::toRadix(int num, const QVector<int>&radix)
 {
 	int div=1;
 	int rest=num;
@@ -114,7 +114,7 @@ QVector<int> Calendar::toRadix(int num, QVector<int>radix)
 
 // Intersect a collection of candidates against a range of values.
 // return a new QVector<int> with all elements from candidates which lie in range
-QVector<int> Calendar::intersectWithRange(QVector<int>cand, QVector<int>range)
+QVector<int> Calendar::intersectWithRange(const QVector<int>&cand, const QVector<int>&range)
 {
 	QVector<int>res;
 	for (int i=0; i<cand.length(); i++)

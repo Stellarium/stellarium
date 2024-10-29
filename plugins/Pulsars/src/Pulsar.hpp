@@ -30,7 +30,6 @@
 #include "StelTranslator.hpp"
 #include "StelObject.hpp"
 #include "StelTextureTypes.hpp"
-#include "StelFader.hpp"
 
 class StelPainter;
 
@@ -48,7 +47,7 @@ public:
 
 	//! @param id The official designation for a pulsar, e.g. "PSR J1919+21"
 	Pulsar(const QVariantMap& map);
-	~Pulsar() Q_DECL_OVERRIDE;
+	~Pulsar() override;
 
 	//! Get a QVariantMap which describes the pulsar. Could be used to create a duplicate.
 	//! - designation: pulsar name based on J2000 coordinates
@@ -75,49 +74,47 @@ public:
 	QVariantMap getMap(void) const;
 
 	//! Get the type of object
-	virtual QString getType(void) const Q_DECL_OVERRIDE
+	QString getType(void) const override
 	{
 		return PULSAR_TYPE;
 	}
 
 	//! Get the type of object
-	virtual QString getObjectType(void) const Q_DECL_OVERRIDE
+	QString getObjectType(void) const override
 	{
 		return (glitch==0) ? N_("pulsar") : N_("pulsar with glitches");
 	}
-	virtual QString getObjectTypeI18n(void) const Q_DECL_OVERRIDE
+	QString getObjectTypeI18n(void) const override
 	{
 		return q_(getObjectType());
 	}
 
-	virtual QString getID(void) const Q_DECL_OVERRIDE
+	QString getID(void) const override
 	{
 		return designation;
 	}
 
-	virtual float getSelectPriority(const StelCore* core) const Q_DECL_OVERRIDE;
+	float getSelectPriority(const StelCore* core) const override;
 
 	//! Get an HTML string to describe the object
 	//! @param core A pointer to the core
 	//! @flags a set of flags with information types to include.
-	virtual QString getInfoString(const StelCore* core, const InfoStringGroup& flags) const Q_DECL_OVERRIDE;
+	QString getInfoString(const StelCore* core, const InfoStringGroup& flags) const override;
 	//! Return a map like StelObject::getInfoMap(), but with a few extra tags also available in getMap(), except for designation, RA and DE fields.
-	virtual QVariantMap getInfoMap(const StelCore *core) const Q_DECL_OVERRIDE;
-	virtual Vec3f getInfoColor(void) const Q_DECL_OVERRIDE;
-	virtual Vec3d getJ2000EquatorialPos(const StelCore* core) const Q_DECL_OVERRIDE;
+	QVariantMap getInfoMap(const StelCore *core) const override;
+	Vec3f getInfoColor(void) const override;
+	Vec3d getJ2000EquatorialPos(const StelCore* core) const override;
 	//! Get the visual magnitude of pulsar
-	virtual float getVMagnitude(const StelCore* core) const Q_DECL_OVERRIDE;
+	float getVMagnitude(const StelCore* core) const override;
 	virtual float getVMagnitudeWithExtinction(const StelCore *core) const;
 	//! Get the localized name of pulsar
-	virtual QString getNameI18n(void) const Q_DECL_OVERRIDE;
+	QString getNameI18n(void) const override;
 	//! Get the english name of pulsar
-	virtual QString getEnglishName(void) const Q_DECL_OVERRIDE;
+	QString getEnglishName(void) const override;
 	//! Get the designation of pulsar (based on J2000 coordinates)
 	QString getDesignation(void) const { return designation; }
 	//! Get the designation of pulsar (based on B1950 coordinates)
 	QString getBDesignation(void) const { return bdesignation; }
-
-	void update(double deltaTime);
 
 private:
 	bool initialized;
@@ -157,8 +154,6 @@ private:
 	int glitch;		//! Number of glitches
 	QString notes;		//! Notes to pulsar (Type of pulsar)
 
-	LinearFader labelsFader;
-
 	//! Calculate and get spin down energy loss rate (ergs/s)
 	//! @param p0 - barycentric period of the pulsar (s)
 	//! @param p1 - time derivative of barcycentric period (dimensionless)
@@ -171,7 +166,7 @@ private:
 
 	//! Get type of pulsar
 	//! @param pcode - code of pulsar type
-	QString getPulsarTypeInfoString(QString pcode) const;
+	QString getPulsarTypeInfoString(const QString &pcode) const;
 };
 
 #endif // PULSAR_HPP

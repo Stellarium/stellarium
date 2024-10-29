@@ -58,7 +58,7 @@ public:
 	//! Constructor. Every derived class MUST call setObjectName(className) in its constructor.
 	StelModule();
 
-	virtual ~StelModule() Q_DECL_OVERRIDE {}
+	~StelModule() override {}
 
 	//! Initialize itself.
 	//! If the initialization takes significant time, the progress should be displayed on the loading bar.

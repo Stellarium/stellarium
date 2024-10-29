@@ -34,14 +34,14 @@ class SimbadService : public AbstractAPIService
 {
 	Q_OBJECT
 public:
-	SimbadService(QObject* parent = Q_NULLPTR);
+	SimbadService(QObject* parent = nullptr);
 
 	//! Simbad lookups dont block the main thread
-	virtual bool isThreadSafe() const Q_DECL_OVERRIDE { return true; }
-	virtual QLatin1String getPath() const Q_DECL_OVERRIDE { return QLatin1String("simbad"); }
+	bool isThreadSafe() const override { return true; }
+	QLatin1String getPath() const override { return QLatin1String("simbad"); }
 	//! @brief Implements the HTTP GET method
 	//! @see \ref rcSimbadServiceGET
-	virtual void get(const QByteArray& operation,const APIParameters& parameters, APIServiceResponse& response) Q_DECL_OVERRIDE;
+	void get(const QByteArray& operation,const APIParameters& parameters, APIServiceResponse& response) override;
 private:
 	QString simbadServerUrl;
 };

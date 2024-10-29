@@ -40,13 +40,13 @@ StelSkyCultureMgr::StelSkyCultureMgr()
 
 	QSet<QString> cultureDirNames = StelFileMgr::listContents("skycultures",StelFileMgr::Directory);
 	
-	for (const auto& dir : qAsConst(cultureDirNames))
+	for (const auto& dir : std::as_const(cultureDirNames))
 	{
 		QString pdFile = StelFileMgr::findFile("skycultures/" + dir + "/info.ini");
 		if (pdFile.isEmpty())
 		{
 			qWarning() << "WARNING: unable to successfully read info.ini file from skyculture dir" << QDir::toNativeSeparators(dir);
-			return;
+			continue;
 		}
 		QSettings pd(pdFile, StelIniFormat);
 		dirToNameEnglish[dir].englishName = pd.value("info/name").toString();
@@ -55,13 +55,13 @@ StelSkyCultureMgr::StelSkyCultureMgr()
 		dirToNameEnglish[dir].license = pd.value("info/license", "").toString();
 		dirToNameEnglish[dir].region = pd.value("info/region", "").toString();
 		QString boundariesStr = pd.value("info/boundaries", "none").toString();
-		static const QMap<QString, StelSkyCulture::BOUNDARIES>boundariesMap={
-			{ "none",    StelSkyCulture::NONE},
-			{ "iau",     StelSkyCulture::IAU},
-			{ "generic", StelSkyCulture::IAU}, // deprecated, add warning below
-			{ "own",     StelSkyCulture::OWN},
+		static const QMap<QString, StelSkyCulture::BoundariesType> boundariesMap = {
+			{ "none",    StelSkyCulture::BoundariesType::None},
+			{ "iau",     StelSkyCulture::BoundariesType::IAU},
+			{ "generic", StelSkyCulture::BoundariesType::IAU}, // deprecated, add warning below
+			{ "own",     StelSkyCulture::BoundariesType::Own},
 		};
-		StelSkyCulture::BOUNDARIES boundaries = boundariesMap.value(boundariesStr.toLower(), StelSkyCulture::NONE);
+		const auto boundariesType = boundariesMap.value(boundariesStr.toLower(), StelSkyCulture::BoundariesType::None);
 		if (boundariesStr.contains("generic", Qt::CaseInsensitive))
 		{
 			qDebug() << "Skyculture " << dir << "'s boundaries is given with deprecated 'generic'. Please edit info.ini and change to 'iau'";
@@ -71,7 +71,7 @@ StelSkyCultureMgr::StelSkyCultureMgr()
 			qDebug() << "Skyculture " << dir << "'s boundaries value unknown:" << boundariesStr;
 			qDebug() << "Please edit info.ini and change to a supported value. For now, this equals 'none'";
 		}
-		dirToNameEnglish[dir].boundaries = boundaries;
+		dirToNameEnglish[dir].boundariesType = boundariesType;
 		// Use 'traditional' as default
 		QString classificationStr = pd.value("info/classification", "traditional").toString();
 		static const QMap <QString, StelSkyCulture::CLASSIFICATION>classificationMap={
@@ -103,7 +103,12 @@ void StelSkyCultureMgr::init()
 	defaultSkyCultureID = StelApp::getInstance().getSettings()->value("localization/sky_culture", "modern").toString();
 	if (defaultSkyCultureID=="western") // switch to new Sky Culture ID
 		defaultSkyCultureID = "modern";
-	setCurrentSkyCultureID(defaultSkyCultureID);
+	setCurrentSkyCultureID(defaultSkyCultureID);	
+}
+
+void StelSkyCultureMgr::reloadSkyCulture()
+{
+	emit currentSkyCultureIDChanged(currentSkyCultureDir);
 }
 
 //! Set the current sky culture from the passed directory
@@ -126,7 +131,7 @@ bool StelSkyCultureMgr::setCurrentSkyCultureID(const QString& cultureDir)
 	currentSkyCultureDir = scID;
 	currentSkyCulture = dirToNameEnglish[scID];
 
-	emit currentSkyCultureChanged(currentSkyCultureDir);
+	emit currentSkyCultureIDChanged(currentSkyCultureDir);	
 	return result;
 }
 
@@ -144,7 +149,7 @@ bool StelSkyCultureMgr::setDefaultSkyCultureID(const QString& id)
 	Q_ASSERT(conf);
 	conf->setValue("localization/sky_culture", id);
 
-	emit defaultSkyCultureChanged(id);
+	emit defaultSkyCultureIDChanged(id);
 	return true;
 }
 	
@@ -158,9 +163,9 @@ QString StelSkyCultureMgr::getCurrentSkyCultureEnglishName() const
 	return currentSkyCulture.englishName;
 }
 
-int StelSkyCultureMgr::getCurrentSkyCultureBoundariesIdx() const
+StelSkyCulture::BoundariesType StelSkyCultureMgr::getCurrentSkyCultureBoundariesType() const
 {
-	return currentSkyCulture.boundaries;
+	return currentSkyCulture.boundariesType;
 }
 
 int StelSkyCultureMgr::getCurrentSkyCultureClassificationIdx() const

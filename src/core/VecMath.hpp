@@ -30,6 +30,7 @@
 #include <iterator>
 #include <limits>
 #include <QString>
+#include <QVector2D>
 #include <QMatrix4x4>
 #include <QColor>
 #include <QRegularExpression>
@@ -114,8 +115,8 @@ public:
 
 	inline const T& operator[](int x) const;
 	inline T& operator[](int);
-	inline operator const T*() const;
-	inline operator T*();
+	explicit inline operator const T*() const;
+	explicit inline operator T*();
 
 	inline Vector2<T>& operator+=(const Vector2<T>&);
 	inline Vector2<T>& operator-=(const Vector2<T>&);
@@ -171,6 +172,8 @@ public:
 	//! Compact comma-separated string without brackets and spaces.
 	//! The result can be restored into a Vector2 by the Vector2(QString s) constructors.
 	QString toStr() const;
+	//! Convert to a QVector2D.
+	QVector2D toQVector() const;
 
 	T v[2];
 };
@@ -214,8 +217,8 @@ public:
 
 	inline T& operator[](int);
 	inline const T& operator[](int) const;
-	inline operator const T*() const;
-	inline operator T*();
+	explicit inline operator const T*() const;
+	explicit inline operator T*();
 	inline const T* data() const {return v;}
 	inline T* data() {return v;}
 
@@ -323,8 +326,8 @@ public:
 
 	inline T& operator[](int);
 	inline const T& operator[](int) const;
-	inline operator T*();
-	inline operator const T*() const;
+	explicit inline operator T*();
+	explicit inline operator const T*() const;
 
 	inline void operator+=(const Vector4<T>&);
 	inline void operator-=(const Vector4<T>&);
@@ -387,12 +390,15 @@ public:
 	inline void set(T,T,T,T,T,T,T,T,T);
 
 	inline T& operator[](int);
-	inline operator T*();
-	inline operator const T*() const;
+	inline T operator[](int) const;
+	explicit inline operator T*();
+	explicit inline operator const T*() const;
 
 	inline Matrix3 operator-(const Matrix3<T>&) const;
 	inline Matrix3 operator+(const Matrix3<T>&) const;
 	inline Matrix3 operator*(const Matrix3<T>&) const;
+	inline Matrix3 operator*(T) const;
+	inline Matrix3 operator/(T) const;
 
 	inline Vector3<T> operator*(const Vector3<T>&) const;
 
@@ -436,8 +442,9 @@ public:
 	inline void set(T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T);
 
 	inline T& operator[](int);
-	inline operator T*();
-	inline operator const T*() const;
+	inline T operator[](int) const;
+	explicit inline operator T*();
+	explicit inline operator const T*() const;
 
 	inline Matrix4 operator-(const Matrix4<T>&) const;
 	inline Matrix4 operator+(const Matrix4<T>&) const;
@@ -1109,6 +1116,11 @@ template<class T> T& Matrix3<T>::operator[](int n)
 	return r[n];
 }
 
+template<class T> T Matrix3<T>::operator[](int n) const
+{
+	return r[n];
+}
+
 template<class T> Matrix3<T>::operator T*()
 {
 	return r;
@@ -1148,6 +1160,25 @@ template<class T> Matrix3<T> Matrix3<T>::operator*(const Matrix3<T>& a) const
 			  MATMUL(0,3), MATMUL(1,3), MATMUL(2,3),
 			  MATMUL(0,6), MATMUL(1,6), MATMUL(2,6));
 #undef MATMUL
+}
+
+template<class T> Matrix3<T> Matrix3<T>::operator*(T a) const
+{
+	return Matrix3(r[0]*a, r[1]*a, r[2]*a,
+	               r[3]*a, r[4]*a, r[5]*a,
+	               r[6]*a, r[7]*a, r[8]*a);
+}
+
+template<class T> Matrix3<T> operator*(T a, const Matrix3<T>& m)
+{
+	return m * a;
+}
+
+template<class T> Matrix3<T> Matrix3<T>::operator/(T a) const
+{
+	return Matrix3(r[0]/a, r[1]/a, r[2]/a,
+	               r[3]/a, r[4]/a, r[5]/a,
+	               r[6]/a, r[7]/a, r[8]/a);
 }
 
 
@@ -1333,6 +1364,11 @@ template<class T> void Matrix4<T>::set(T a, T b, T c, T d, T e, T f, T g, T h, T
 }
 
 template<class T> T& Matrix4<T>::operator[](int n)
+{
+	return r[n];
+}
+
+template<class T> T Matrix4<T>::operator[](int n) const
 {
 	return r[n];
 }
@@ -1753,6 +1789,20 @@ template<class T> inline
 Vector4<T> operator*(T s,const Vector4<T>&v)
 {
 	return Vector4<T>(s*v[0],s*v[1],s*v[2],s*v[3]);
+}
+
+template<class T>
+Matrix3<T> outerProduct(const Vector3<T>& a, const Vector3<T>& b)
+{
+	return Matrix3<T>(a[0]*b[0], a[1]*b[0], a[2]*b[0],
+	                  a[0]*b[1], a[1]*b[1], a[2]*b[1],
+	                  a[0]*b[2], a[1]*b[2], a[2]*b[2]);
+}
+
+template<class T>
+T dot(const Vector3<T>& a, const Vector3<T>& b)
+{
+	return a.dot(b);
 }
 
 //Make Qt handle the classes as primitive type. This optimizes performance with Qt's container classes

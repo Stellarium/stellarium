@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Stellarium
  * Copyright (C) 2008 Fabien Chereau
  *
@@ -26,7 +26,6 @@
 #include "StelSphereGeometry.hpp"
 #include "StelProjectorType.hpp"
 #include "StelTextureTypes.hpp"
-#include "StelProjector.hpp"
 #include <QString>
 #include <QVarLengthArray>
 #include <QFontMetrics>
@@ -87,7 +86,7 @@ public:
 	//! @param x horizontal position of the lower left corner of the first character of the text in pixel.
 	//! @param y vertical position of the lower left corner of the first character of the text in pixel.
 	//! @param str the text to print.
-	//! @param angleDeg rotation angle in degree. Rotation is around x,y.
+	//! @param angleDeg rotation angle in degree. Rotation is around x,y. Only used if noGravity=true
 	//! @param xshift shift in pixel in the rotated x direction.
 	//! @param yshift shift in pixel in the rotated y direction.
 	//! @param noGravity don't take into account the fact that the text should be written with gravity.
@@ -134,6 +133,12 @@ public:
 
 	//! Draw a simple circle, 2d viewport coordinates in pixel
 	void drawCircle(float x, float y, float r);
+
+	//! Draw a simple ellipse, 2d viewport coordinates in pixel
+	//! @param rx: radius in x axis
+	//! @param ry: radius in y axis
+	//! @param angle: rotation (counterclockwise), radians [0..2pi]
+	void drawEllipse(double x, double y, double rx, double ry, double angle);
 
 	//! Draw a square using the current texture at the given projected 2d position.
 	//! This method is not thread safe.
@@ -391,10 +396,16 @@ private:
 
 	void drawTextGravity180(float x, float y, const QString& str, float xshift = 0, float yshift = 0);
 
-	// Used by the method below
-	static QVector<Vec3f> smallCircleVertexArray;
-	static QVector<Vec4f> smallCircleColorArray;
+	// Used by the method below.
+	static QVarLengthArray<Vec3f, 128> smallCircleVertexArray;
+	static QVarLengthArray<Vec4f, 128> smallCircleColorArray;
 	void drawSmallCircleVertexArray();
+
+	// more arrays
+	static QVarLengthArray<Vec3f, 4096> polygonVertexArray;
+	static QVarLengthArray<Vec2f, 4096> polygonTextureCoordArray;
+	static QVarLengthArray<Vec3f, 4096> polygonColorArray;
+	static QVarLengthArray<unsigned int, 4096> indexArray;
 
 	//! The associated instance of projector
 	StelProjectorP prj;
@@ -422,6 +433,16 @@ private:
 	static QOpenGLShaderProgram* colorShaderProgram;
 	static BasicShaderVars colorShaderVars;
 
+	static QOpenGLShaderProgram* textShaderProgram;
+	struct TextShaderVars {
+		int projectionMatrix;
+		int texCoord;
+		int vertex;
+		int textColor;
+		int texture;
+	};
+	static TextShaderVars textShaderVars;
+
 	static QOpenGLShaderProgram* texturesShaderProgram;
 	struct TexturesShaderVars {
 		int projectionMatrix;
@@ -429,8 +450,6 @@ private:
 		int vertex;
 		int texColor;
 		int texture;
-		int ditherPattern;
-		int rgbMaxValue;
 	};
 	static TexturesShaderVars texturesShaderVars;
 	static QOpenGLShaderProgram* texturesColorShaderProgram;
@@ -440,8 +459,6 @@ private:
 		int vertex;
 		int color;
 		int texture;
-		int ditherPattern;
-		int rgbMaxValue;
 		int saturation;
 	};
 	static TexturesColorShaderVars texturesColorShaderVars;
@@ -466,8 +483,6 @@ private:
 	};
 	static ColorfulWideLineShaderVars colorfulWideLineShaderVars;
 
-	StelTextureSP ditherPatternTex;
-
 	static bool multisamplingEnabled;
 
 	//! The descriptor for the current opengl vertex array
@@ -478,10 +493,6 @@ private:
 	ArrayDesc normalArray;
 	//! The descriptor for the current opengl color array
 	ArrayDesc colorArray;
-
-	std::unique_ptr<QOpenGLVertexArrayObject> vao;
-	std::unique_ptr<QOpenGLBuffer> verticesVBO;
-	std::unique_ptr<QOpenGLBuffer> indicesVBO;
 };
 
 #endif // STELPAINTER_HPP

@@ -26,7 +26,6 @@
 #include "StelTextureMgr.hpp"
 #include "StelCore.hpp"
 #include "StelPainter.hpp"
-#include "Dithering.hpp"
 #include "Skylight.hpp"
 
 #include <QFile>
@@ -40,10 +39,8 @@ AtmospherePreetham::AtmospherePreetham(Skylight& sky)
 	, sky(sky)
 	, skyResolutionY(44)
 	, skyResolutionX(44)
-	, posGrid(Q_NULLPTR)
 	, posGridBuffer(QOpenGLBuffer::VertexBuffer)
 	, indicesBuffer(QOpenGLBuffer::IndexBuffer)
-	, colorGrid(Q_NULLPTR)
 	, colorGridBuffer(QOpenGLBuffer::VertexBuffer)
 {
 	setFadeDuration(1.5f);
@@ -67,11 +64,10 @@ AtmospherePreetham::AtmospherePreetham(Skylight& sky)
 	QOpenGLShader fShader(QOpenGLShader::Fragment);
 	if (!fShader.compileSourceCode(
 					StelOpenGL::globalShaderPrefix(StelOpenGL::FRAGMENT_SHADER) +
-					makeDitheringShader()+
 					"VARYING mediump vec3 resultSkyColor;\n"
 					"void main()\n"
 					"{\n"
-					 "   FRAG_COLOR = vec4(dither(resultSkyColor), 1.);\n"
+					 "   FRAG_COLOR = vec4(resultSkyColor, 1.);\n"
 					 "}"))
 	{
 		qFatal("Error while compiling Preetham atmosphere fragment shader: %s", fShader.log().toLatin1().constData());
@@ -86,8 +82,6 @@ AtmospherePreetham::AtmospherePreetham(Skylight& sky)
 	StelPainter::linkProg(atmoShaderProgram, "Preetham atmosphere");
 
 	GL(atmoShaderProgram->bind());
-	GL(shaderAttribLocations.ditherPattern = atmoShaderProgram->uniformLocation("ditherPattern"));
-	GL(shaderAttribLocations.rgbMaxValue = atmoShaderProgram->uniformLocation("rgbMaxValue"));
 	GL(shaderAttribLocations.alphaWaOverAlphaDa = atmoShaderProgram->uniformLocation("alphaWaOverAlphaDa"));
 	GL(shaderAttribLocations.oneOverGamma = atmoShaderProgram->uniformLocation("oneOverGamma"));
 	GL(shaderAttribLocations.term2TimesOneOverMaxdLpOneOverGamma = atmoShaderProgram->uniformLocation("term2TimesOneOverMaxdLpOneOverGamma"));
@@ -118,10 +112,6 @@ AtmospherePreetham::AtmospherePreetham(Skylight& sky)
 
 AtmospherePreetham::~AtmospherePreetham(void)
 {
-	delete [] posGrid;
-	posGrid = Q_NULLPTR;
-	delete[] colorGrid;
-	colorGrid = Q_NULLPTR;
 	delete atmoShaderProgram;
 	atmoShaderProgram = Q_NULLPTR;
 }
@@ -169,12 +159,10 @@ void AtmospherePreetham::computeColor(StelCore* core, const double JD, const Pla
 	{
 		// The viewport changed: update the number of point of the grid
 		viewport = prj->getViewport();
-		delete[] colorGrid;
-		delete [] posGrid;
 		skyResolutionY = StelApp::getInstance().getSettings()->value("landscape/atmosphereybin", 44).toUInt();
 		skyResolutionX = static_cast<unsigned int>(floorf(0.5f+static_cast<float>(skyResolutionY)*(0.5f*sqrtf(3.0f))*static_cast<float>(prj->getViewportWidth())/static_cast<float>(prj->getViewportHeight())));
-		posGrid = new Vec2f[static_cast<size_t>((1+skyResolutionX)*(1+skyResolutionY))];
-		colorGrid = new Vec4f[static_cast<size_t>((1+skyResolutionX)*(1+skyResolutionY))];
+		posGrid.resize(static_cast<size_t>((1+skyResolutionX)*(1+skyResolutionY)));
+		colorGrid.resize(static_cast<size_t>((1+skyResolutionX)*(1+skyResolutionY)));
 		float stepX = static_cast<float>(prj->getViewportWidth()) / (static_cast<float>(skyResolutionX)-0.5f);
 		float stepY = static_cast<float>(prj->getViewportHeight()) / static_cast<float>(skyResolutionY);
 		float viewport_left = static_cast<float>(prj->getViewportPosX());
@@ -195,7 +183,7 @@ void AtmospherePreetham::computeColor(StelCore* core, const double JD, const Pla
 		posGridBuffer.setUsagePattern(QOpenGLBuffer::StaticDraw);
 		posGridBuffer.create();
 		posGridBuffer.bind();
-		posGridBuffer.allocate(posGrid, static_cast<int>((1+skyResolutionX)*(1+skyResolutionY))*8);
+		posGridBuffer.allocate(posGrid.constData(), static_cast<int>((1+skyResolutionX)*(1+skyResolutionY))*8);
 		posGridBuffer.release();
 		
 		// Generate the indices used to draw the quads
@@ -226,7 +214,7 @@ void AtmospherePreetham::computeColor(StelCore* core, const double JD, const Pla
 		colorGridBuffer.setUsagePattern(QOpenGLBuffer::DynamicDraw);
 		colorGridBuffer.create();
 		colorGridBuffer.bind();
-		colorGridBuffer.allocate(colorGrid, static_cast<int>((1+skyResolutionX)*(1+skyResolutionY)*4*4));
+		colorGridBuffer.allocate(colorGrid.constData(), static_cast<int>((1+skyResolutionX)*(1+skyResolutionY)*4*4));
 		colorGridBuffer.release();
 
 		bindVAO();
@@ -316,7 +304,7 @@ void AtmospherePreetham::computeColor(StelCore* core, const double JD, const Pla
 	//sky.setParamsv(sunPos, qBound(2.f, turbidity, 6.f));
 	Vec3f sunPosF=sunPos.toVec3f();
 	Vec3f moonPosF=moonPos.toVec3f();
-	sky.setParamsv(sunPosF, qBound(2.f, turbidity, 16.f));  // GZ-AT allow more turbidity for testing
+	sky.setParamsv(&sunPosF[0], qBound(2.f, turbidity, 16.f));  // GZ-AT allow more turbidity for testing
 
 	skyb.setLocation(location.getLatitude() * M_PI_180f, static_cast<float>(location.altitude), temperature, relativeHumidity);
 	skyb.setSunMoon(moonPosF[2], sunPosF[2]);
@@ -390,7 +378,7 @@ void AtmospherePreetham::computeColor(StelCore* core, const double JD, const Pla
 	}
 	
 	colorGridBuffer.bind();
-	colorGridBuffer.write(0, colorGrid, static_cast<int>((1+skyResolutionX)*(1+skyResolutionY)*4*4));
+	colorGridBuffer.write(0, colorGrid.constData(), static_cast<int>((1+skyResolutionX)*(1+skyResolutionY)*4*4));
 	colorGridBuffer.release();
 	
 	// Update average luminance
@@ -446,16 +434,6 @@ void AtmospherePreetham::draw(StelCore* core)
 	GL(atmoShaderProgram->setUniformValue(shaderAttribLocations.projectionMatrix,
 					      QMatrix4x4(m[0], m[4], m[8], m[12], m[1], m[5], m[9], m[13], m[2], m[6], m[10], m[14], m[3], m[7], m[11], m[15])));
 
-	const auto rgbMaxValue=calcRGBMaxValue(core->getDitheringMode());
-	GL(atmoShaderProgram->setUniformValue(shaderAttribLocations.rgbMaxValue, rgbMaxValue[0], rgbMaxValue[1], rgbMaxValue[2]));
-
-	const int ditherTexSampler = 1;
-	if(!ditherPatternTex)
-		ditherPatternTex = StelApp::getInstance().getTextureManager().getDitheringTexture(ditherTexSampler);
-	else
-		GL(ditherPatternTex->bind(ditherTexSampler));
-	GL(atmoShaderProgram->setUniformValue(shaderAttribLocations.ditherPattern, ditherTexSampler));
-	
 
 	// And draw everything at once
 	bindVAO();

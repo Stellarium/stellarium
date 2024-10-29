@@ -41,7 +41,7 @@ public slots:
 
 	//! set date from a vector of calendar date elements sorted from the largest to the smallest.
 	//! Year-Month[1...12]-Day[1...31]
-	void setDate(QVector<int> parts) override;
+	void setDate(const QVector<int> &parts) override;
 
 	//! get a stringlist of calendar date elements sorted from the largest to the smallest.
 	//! Year, Month, MonthName, Day, DayName
@@ -51,7 +51,7 @@ public slots:
 	QString getFormattedDateString() const override;
 
 	//! find RD number for date in the Armenian calendar (may be used in other calendars!)
-	static int fixedFromArmenian(QVector<int> julian);
+	static int fixedFromArmenian(const QVector<int> &armenian);
 	//! find date in the Armenian calendar from RD number (may be used in other calendars!)
 	static QVector<int> armenianFromFixed(int rd);
 

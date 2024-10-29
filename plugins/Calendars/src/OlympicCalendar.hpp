@@ -42,7 +42,7 @@ public slots:
 	//! The elements only change years. The calendar is else based on the Julian, so
 	//! unless given explicitly, months and days in the Julian calendar will not be changed.
 	//! parts={olympiad, year [, month, day]}
-	void setDate(QVector<int> parts) override;
+	void setDate(const QVector<int> &parts) override;
 
 	//! get a stringlist of calendar date elements sorted from the largest to the smallest.
 	//! Olympiad, Year
@@ -52,7 +52,7 @@ public slots:
 	QString getFormattedDateString() const override;
 
 	//! return Julian year from { olympiad, year}
-	static int julianYearFromOlympiad(QVector<int>odate);
+	static int julianYearFromOlympiad(const QVector<int> &odate);
 
 	//! return { olympiad, year}
 	static QVector<int> olympiadFromJulianYear(int jYear);

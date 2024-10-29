@@ -9,4 +9,5 @@ INSTALL(DIRECTORY ./ DESTINATION ${SDATALOC}/skycultures/greek_almagest
 	FILES_MATCHING PATTERN "*.fab" 
 	PATTERN "*.utf8"
 	PATTERN "*.png"
+	PATTERN "*.jpg"
 	PATTERN "CMakeFiles" EXCLUDE )

@@ -48,27 +48,27 @@ typedef QSharedPointer<Planet> PlanetP;
 //! This class and the handling of solar system data has seen many changes, and unfortunately, not much has been consistently documented.
 //! The following is a reverse-engineered analysis.
 //!
-class SolarSystem : public StelObjectModule
+class SolarSystem : public StelObjectModule, protected QOpenGLFunctions
 {
 	Q_OBJECT
 	// This is a "forwarding property" which sets labeling into all planets.
 	Q_PROPERTY(bool labelsDisplayed			READ getFlagLabels			WRITE setFlagLabels			NOTIFY labelsDisplayedChanged)
-	// was bool orbitsDisplayed
-	Q_PROPERTY(bool flagOrbits			READ getFlagOrbits			WRITE setFlagOrbits			NOTIFY flagOrbitsChanged)
 	Q_PROPERTY(bool trailsDisplayed			READ getFlagTrails			WRITE setFlagTrails			NOTIFY trailsDisplayedChanged)
 	Q_PROPERTY(int maxTrailPoints			READ getMaxTrailPoints			WRITE setMaxTrailPoints			NOTIFY maxTrailPointsChanged)
 	Q_PROPERTY(int maxTrailTimeExtent		READ getMaxTrailTimeExtent		WRITE setMaxTrailTimeExtent		NOTIFY maxTrailTimeExtentChanged)
 	Q_PROPERTY(int trailsThickness			READ getTrailsThickness			WRITE setTrailsThickness		NOTIFY trailsThicknessChanged)
-	// was bool hintsDisplayed. This is a "forwarding property" only, without own variable.
+	// This is a "forwarding property" only, without own variable.
 	Q_PROPERTY(bool flagHints			READ getFlagHints			WRITE setFlagHints			NOTIFY flagHintsChanged)
-	// was bool pointersDisplayed
+	Q_PROPERTY(bool flagMarkers			READ getFlagMarkers			WRITE setFlagMarkers			NOTIFY markersDisplayedChanged)
 	Q_PROPERTY(bool flagPointer			READ getFlagPointer			WRITE setFlagPointer			NOTIFY flagPointerChanged)
-	// was bool nativeNamesDisplayed
 	Q_PROPERTY(bool flagNativePlanetNames		READ getFlagNativePlanetNames		WRITE setFlagNativePlanetNames		NOTIFY flagNativePlanetNamesChanged)
 	Q_PROPERTY(bool planetsDisplayed		READ getFlagPlanets			WRITE setFlagPlanets			NOTIFY flagPlanetsDisplayedChanged)
+	Q_PROPERTY(bool flagOrbits			READ getFlagOrbits			WRITE setFlagOrbits			NOTIFY flagOrbitsChanged)
+	Q_PROPERTY(bool flagPlanetsOrbits		READ getFlagPlanetsOrbits		WRITE setFlagPlanetsOrbits		NOTIFY flagPlanetsOrbitsChanged)
 	Q_PROPERTY(bool flagPlanetsOrbitsOnly		READ getFlagPlanetsOrbitsOnly		WRITE setFlagPlanetsOrbitsOnly		NOTIFY flagPlanetsOrbitsOnlyChanged)
 	Q_PROPERTY(bool flagPermanentOrbits		READ getFlagPermanentOrbits		WRITE setFlagPermanentOrbits		NOTIFY flagPermanentOrbitsChanged)
 	Q_PROPERTY(bool flagIsolatedOrbits		READ getFlagIsolatedOrbits		WRITE setFlagIsolatedOrbits		NOTIFY flagIsolatedOrbitsChanged)
+	Q_PROPERTY(bool flagOrbitsWithMoons		READ getFlagOrbitsWithMoons		WRITE setFlagOrbitsWithMoons		NOTIFY flagOrbitsWithMoonsChanged)
 	Q_PROPERTY(bool flagIsolatedTrails		READ getFlagIsolatedTrails		WRITE setFlagIsolatedTrails		NOTIFY flagIsolatedTrailsChanged)
 	Q_PROPERTY(int numberIsolatedTrails		READ getNumberIsolatedTrails		WRITE setNumberIsolatedTrails		NOTIFY numberIsolatedTrailsChanged)
 	Q_PROPERTY(bool flagLightTravelTime		READ getFlagLightTravelTime		WRITE setFlagLightTravelTime		NOTIFY flagLightTravelTimeChanged)
@@ -98,6 +98,7 @@ class SolarSystem : public StelObjectModule
 	Q_PROPERTY(bool ephemerisSmartDates		READ getFlagEphemerisSmartDates		WRITE setFlagEphemerisSmartDates	NOTIFY ephemerisSmartDatesChanged)
 	Q_PROPERTY(bool ephemerisScaleMarkersDisplayed	READ getFlagEphemerisScaleMarkers	WRITE setFlagEphemerisScaleMarkers	NOTIFY ephemerisScaleMarkersChanged)
 	Q_PROPERTY(bool ephemerisAlwaysOn		READ getFlagEphemerisAlwaysOn		WRITE setFlagEphemerisAlwaysOn		NOTIFY ephemerisAlwaysOnChanged)
+	Q_PROPERTY(bool ephemerisNow			READ getFlagEphemerisNow		WRITE setFlagEphemerisNow		NOTIFY ephemerisNowChanged)
 	// Great Red Spot (GRS) properties
 	Q_PROPERTY(int grsLongitude			READ getGrsLongitude			WRITE setGrsLongitude			NOTIFY grsLongitudeChanged)
 	Q_PROPERTY(double grsDrift			READ getGrsDrift			WRITE setGrsDrift			NOTIFY grsDriftChanged)
@@ -143,10 +144,12 @@ class SolarSystem : public StelObjectModule
 	Q_PROPERTY(int orbitsThickness			READ getOrbitsThickness			WRITE setOrbitsThickness		NOTIFY orbitsThicknessChanged)
 	Q_PROPERTY(bool flagDrawMoonHalo		READ getFlagDrawMoonHalo		WRITE setFlagDrawMoonHalo		NOTIFY flagDrawMoonHaloChanged)
 	Q_PROPERTY(bool flagDrawSunHalo			READ getFlagDrawSunHalo			WRITE setFlagDrawSunHalo		NOTIFY flagDrawSunHaloChanged)
+	Q_PROPERTY(int extraThreads                     READ getExtraThreads                    WRITE setExtraThreads                   NOTIFY extraThreadsChanged)
+	Q_PROPERTY(double markerMagThreshold            READ getMarkerMagThreshold              WRITE setMarkerMagThreshold             NOTIFY markerMagThresholdChanged)
 
 public:
 	SolarSystem();
-	virtual ~SolarSystem() Q_DECL_OVERRIDE;
+	~SolarSystem() override;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
@@ -155,22 +158,22 @@ public:
 	//! - loading planetary body orbital and model data from data/ssystem.ini
 	//! - perform initial planet position calculation
 	//! - set display options from application settings
-	virtual void init() Q_DECL_OVERRIDE;
+	void init() override;
 
-	virtual void deinit() Q_DECL_OVERRIDE;
+	void deinit() override;
 	
 	//! Draw SolarSystem objects (planets).
 	//! @param core The StelCore object.
 	//! @return The maximum squared distance in pixels that any SolarSystem object
 	//! has travelled since the last update.
-	virtual void draw(StelCore *core) Q_DECL_OVERRIDE;
+	void draw(StelCore *core) override;
 
 	//! Update time-varying components.
 	//! This includes planet motion trails.
-	virtual void update(double deltaTime) Q_DECL_OVERRIDE;
+	void update(double deltaTime) override;
 
 	//! Used to determine what order to draw the various StelModules.
-	virtual double getCallOrder(StelModuleActionName actionName) const Q_DECL_OVERRIDE;
+	double getCallOrder(StelModuleActionName actionName) const override;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in StelObjectModule class
@@ -181,19 +184,19 @@ public:
 	//! @param core the core object
 	//! @return QList of StelObjectP (pointers) containing all SolarSystem objects
 	//! found in the specified area. This vector is not sorted by distance from v.
-	virtual QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const Q_DECL_OVERRIDE;
+	QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const override;
 
 	//! Search for a SolarSystem object based on the localised name.
 	//! @param nameI18n the case in-sensitive translated planet name.
 	//! @return a StelObjectP for the object if found, else Q_NULLPTR.
-	virtual StelObjectP searchByNameI18n(const QString& nameI18n) const Q_DECL_OVERRIDE;
+	StelObjectP searchByNameI18n(const QString& nameI18n) const override;
 
 	//! Search for a SolarSystem object based on the English name.
 	//! @param name the case in-sensitive English planet name.
 	//! @return a StelObjectP for the object if found, else Q_NULLPTR.
-	virtual StelObjectP searchByName(const QString& name) const Q_DECL_OVERRIDE;
+	StelObjectP searchByName(const QString& name) const override;
 
-	virtual StelObjectP searchByID(const QString &id) const Q_DECL_OVERRIDE
+	StelObjectP searchByID(const QString &id) const override
 	{
 		return searchByName(id);
 	}
@@ -203,11 +206,11 @@ public:
 	//! @param maxNbItem the maximum number of returned object names
 	//! @param useStartOfWords the autofill mode for returned objects names
 	//! @return a list of matching object name by order of relevance, or an empty list if nothing match
-	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const Q_DECL_OVERRIDE;
-	virtual QStringList listAllObjects(bool inEnglish) const Q_DECL_OVERRIDE;
-	virtual QStringList listAllObjectsByType(const QString& objType, bool inEnglish) const Q_DECL_OVERRIDE;
-	virtual QString getName() const Q_DECL_OVERRIDE { return "Solar System"; }
-	virtual QString getStelObjectType() const Q_DECL_OVERRIDE { return Planet::PLANET_TYPE; }
+	QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const override;
+	QStringList listAllObjects(bool inEnglish) const override;
+	QStringList listAllObjectsByType(const QString& objType, bool inEnglish) const override;
+	QString getName() const override { return "Solar System"; }
+	QString getStelObjectType() const override { return Planet::PLANET_TYPE; }
 
 public slots:
 	///////////////////////////////////////////////////////////////////////////
@@ -248,6 +251,11 @@ public slots:
 	void setFlagHints(bool b);
 	//! Get the current value of the flag which determines if planet hints are drawn or hidden along labels
 	bool getFlagHints() const;
+
+	//! Set flag which determines if planet markers are drawn for minor bodies
+	void setFlagMarkers(bool b);
+	//! Get the current value of the flag which determines if planet markers are drawn for minor bodies
+	bool getFlagMarkers() const;
 
 	//! Set flag which determines if planet labels are drawn or hidden.
 	void setFlagLabels(bool b);
@@ -592,32 +600,32 @@ public slots:
 	//! @param planetName the case in-sensitive English planet name.
 	//! @param withExtinction the flag for use extinction effect for magnitudes (default not use)
 	//! @return a magnitude
-	float getPlanetVMagnitude(QString planetName, bool withExtinction=false) const;
+	float getPlanetVMagnitude(const QString &planetName, bool withExtinction=false) const;
 
 	//! Get type for Solar system bodies for scripts
 	//! @param planetName the case in-sensitive English planet name.
 	//! @return a type of planet (star, planet, moon, observer, artificial, asteroid, plutino, comet, dwarf planet, cubewano, scattered disc object, Oort cloud object, sednoid, interstellar object)
-	QString getPlanetType(QString planetName) const;
+	QString getPlanetType(const QString &planetName) const;
 
 	//! Get distance to Solar system bodies for scripts
 	//! @param planetName the case in-sensitive English planet name.
 	//! @return a distance (in AU)
-	double getDistanceToPlanet(QString planetName) const;
+	double getDistanceToPlanet(const QString &planetName) const;
 
 	//! Get elongation for Solar system bodies for scripts
 	//! @param planetName the case in-sensitive English planet name.
 	//! @return a elongation (in radians)
-	double getElongationForPlanet(QString planetName) const;
+	double getElongationForPlanet(const QString &planetName) const;
 
 	//! Get phase angle for Solar system bodies for scripts
 	//! @param planetName the case in-sensitive English planet name.
 	//! @return a phase angle (in radians)
-	double getPhaseAngleForPlanet(QString planetName) const;
+	double getPhaseAngleForPlanet(const QString &planetName) const;
 
 	//! Get phase for Solar system bodies for scripts
 	//! @param planetName the case in-sensitive English planet name.
 	//! @return phase, i.e. illuminated fraction [0..1]
-	float getPhaseForPlanet(QString planetName) const;
+	float getPhaseForPlanet(const QString &planetName) const;
 
 	//! Set the algorithm for computation of apparent magnitudes for planets in case observer on the Earth.
 	//! Possible values:
@@ -638,7 +646,7 @@ public slots:
 	//! @param algorithm the case in-sensitive algorithm name
 	//! @note: The structure of algorithms is almost identical, just the numbers are different!
 	//!        You should activate Mueller's algorithm to simulate the eye's impression. (Esp. Venus!)
-	void setApparentMagnitudeAlgorithmOnEarth(QString algorithm);
+	void setApparentMagnitudeAlgorithmOnEarth(const QString &algorithm);
 
 	//! Get the algorithm used for computation of apparent magnitudes for planets in case observer on the Earth
 	//! @see setApparentMagnitudeAlgorithmOnEarth()
@@ -664,10 +672,20 @@ public slots:
 	//! Get the current value of the flag which enables showing of isolated orbits for selected objects only or not.
 	bool getFlagIsolatedOrbits(void) const;
 
+	//! Set flag which enabled the showing of planets orbits, regardless of the other orbit settings
+	void setFlagPlanetsOrbits(bool b);
+	//! Get the current value of the flag which enables showing of planets orbits, regardless of the other orbit settings.
+	bool getFlagPlanetsOrbits(void) const;
+
 	//! Set flag which enabled the showing of planets orbits only or not
 	void setFlagPlanetsOrbitsOnly(bool b);
 	//! Get the current value of the flag which enables showing of planets orbits only or not.
 	bool getFlagPlanetsOrbitsOnly(void) const;
+
+	//! Set flag which enables showing of planets orbits together mith orbits of their moons.
+	void setFlagOrbitsWithMoons(bool b);
+	//! Get the current value of the flag for showing of planets orbits together mith orbits of their moons.
+	bool getFlagOrbitsWithMoons(void) const;
 
 	//! Set flag which enabled the showing of solar corona when atmosphere is disabled (true) of draw the corona when total solar eclipses is happened only (false)
 	void setFlagPermanentSolarCorona(bool b) {	if (flagPermanentSolarCorona!=b)	{ flagPermanentSolarCorona = b; emit flagPermanentSolarCoronaChanged(b); } }
@@ -700,7 +718,7 @@ public slots:
 	bool getFlagEarthShadowEnlargementDanjon() const;
 
 	//! Set style of colors of orbits for Solar system bodies
-	void setOrbitColorStyle(QString style);
+	void setOrbitColorStyle(const QString &style);
 	//! Get style of colors of orbits for Solar system bodies
 	QString getOrbitColorStyle() const;
 
@@ -721,6 +739,9 @@ public slots:
 	void setFlagDrawSunHalo(bool b);
 	bool getFlagDrawSunHalo() const;
 
+	//! Reload the planets. This can be helpful as scripting command when editing planet details, e.g. comet tails or magnitude parameters.
+	void reloadPlanets();
+
 	//! Reset and recreate trails
 	void recreateTrails();
 
@@ -734,10 +755,22 @@ public slots:
 	//! The texture path starts in the scripts directory.
 	void setTextureForPlanet(const QString &planetName, const QString &texName);
 
+	//! Return the number of additional threads (in addition to the main thread) configured to compute planet positions.
+	int getExtraThreads() const {return extraThreads;}
+	//! Configure the number of additional threads (in addition to the main thread) to compute planet positions.
+	//! The argument will be bounded by 0 and QThreadPool::globalInstance()->maxThreadCount()-1
+	void setExtraThreads(int n);
+
+	//! Return the limiting absolute magnitude configured for plotting minor bodies. (min. mag. 37 includes de facto "all".)
+	double getMarkerMagThreshold() const {return markerMagThreshold;}
+	//! Configure the limiting absolute magnitude for plotting minor bodies. Configured value is clamped to -2..37 (practical limit)
+	void setMarkerMagThreshold(double m);
+
 signals:
 	void labelsDisplayedChanged(bool b);
 	void flagOrbitsChanged(bool b);
 	void flagHintsChanged(bool b);
+	void markersDisplayedChanged(bool b);
 	void flagDrawMoonHaloChanged(bool b);
 	void flagDrawSunHaloChanged(bool b);
 	void trailsDisplayedChanged(bool b);
@@ -748,9 +781,11 @@ signals:
 	void flagPointerChanged(bool b);
 	void flagNativePlanetNamesChanged(bool b);
 	void flagPlanetsDisplayedChanged(bool b);
+	void flagPlanetsOrbitsChanged(bool b);
 	void flagPlanetsOrbitsOnlyChanged(bool b);
 	void flagPermanentOrbitsChanged(bool b);
 	void flagIsolatedOrbitsChanged(bool b);
+	void flagOrbitsWithMoonsChanged(bool b);
 	void flagIsolatedTrailsChanged(bool b);
 	void numberIsolatedTrailsChanged(int n);
 	void flagLightTravelTimeChanged(bool b);
@@ -771,6 +806,7 @@ signals:
 	void ephemerisMagnitudesChanged(bool b);
 	void ephemerisLineChanged(bool b);
 	void ephemerisAlwaysOnChanged(bool b);
+	void ephemerisNowChanged(bool b);
 	void ephemerisLineThicknessChanged(int v);
 	void ephemerisSkipDataChanged(bool b);
 	void ephemerisSkipMarkersChanged(bool b);
@@ -817,11 +853,15 @@ signals:
 	void ephemerisJupiterMarkerColorChanged(const Vec3f & color);
 	void ephemerisSaturnMarkerColorChanged(const Vec3f & color);
 
-	void orbitColorStyleChanged(QString style);
-	void apparentMagnitudeAlgorithmOnEarthChanged(QString algorithm);
+	void orbitColorStyleChanged(const QString &style);
+	void apparentMagnitudeAlgorithmOnEarthChanged(const QString &algorithm);
 
 	void solarSystemDataReloaded();
 	void requestEphemerisVisualization();
+
+	void extraThreadsChanged(const int);
+
+	void markerMagThresholdChanged(double m);
 
 public:
 	///////////////////////////////////////////////////////////////////////////
@@ -829,9 +869,9 @@ public:
 	//! Get a pointer to a Planet object.
 	//! @param planetEnglishName the English name of the desired planet.
 	//! @return The matching planet pointer if exists or Q_NULLPTR.
-	PlanetP searchByEnglishName(QString planetEnglishName) const;
+	PlanetP searchByEnglishName(const QString &planetEnglishName) const;
 
-	PlanetP searchMinorPlanetByEnglishName(QString planetEnglishName) const;
+	PlanetP searchMinorPlanetByEnglishName(const QString &planetEnglishName) const;
 
 	//! Get the Planet object pointer for the Sun.
 	PlanetP getSun() const {return sun;}
@@ -854,15 +894,21 @@ public:
 	//! Get the list of all the minor planet common english names
 	QStringList getAllMinorPlanetCommonEnglishNames() const;
 
-	//! Reload the planets
-	void reloadPlanets();
 
 	//! New 0.16: delete a planet from the solar system. Writes a warning to log if this is not a minor object.
-	bool removeMinorPlanet(QString name);
+	bool removeMinorPlanet(const QString &name);
 
 	//! Determines relative amount of sun visible from the observer's position (first element) and the Planet object pointer for eclipsing celestial body (second element).
+	//! Full sun is 1.0, fully covered sun is 0.0.
 	//! In the unlikely event of multiple objects in front of the sun, only the largest will be reported.
 	QPair<double, PlanetP> getSolarEclipseFactor(const StelCore *core) const;
+
+	//! Opening angle of the bright Solar crescent, radians
+	//! From: J. Meeus, Morsels IV, ch.15
+	//! @param lunarSize: apparent Lunar angular size (radius or diameter), angular units of your preference
+	//! @param solarSize: apparent Solar angular size (radius or diameter, resp.), same angular units
+	//! @param eclipseMagnitude: covered fraction of the Solar diameter.
+	static double getEclipseCrescentAngle(const double lunarSize, const double solarSize, const double eclipseMagnitude);
 
 	//! Retrieve Radius of Umbra and Penumbra at the distance of the Moon.
 	//! Returns a pair (umbra, penumbra) in (geocentric_arcseconds, AU, geometric_AU).
@@ -873,9 +919,10 @@ public:
 	QPair<Vec3d,Vec3d> getEarthShadowRadiiAtLunarDistance() const;
 
 	//! Compute the position and transform matrix for every element of the solar system.
+	//! @param core the central StelCore instance
 	//! @param dateJDE the Julian Day in JDE (Ephemeris Time or equivalent)	
 	//! @param observerPlanet planet of the observer (Required for light travel time or aberration computation).
-	void computePositions(double dateJDE, PlanetP observerPlanet);
+	void computePositions(StelCore *core, double dateJDE, PlanetP observerPlanet);
 
 	//! Get the list of all the bodies of the solar system.	
 	const QList<PlanetP>& getAllPlanets() const {return systemPlanets;}
@@ -910,6 +957,11 @@ private slots:
 	void setFlagEphemerisAlwaysOn(bool b);
 	//! Get the current value of the flag which makes ephemeris lines and marks always on
 	bool getFlagEphemerisAlwaysOn() const;
+
+	//! Set flag, which enables ephemeris marks on position "now"
+	void setFlagEphemerisNow(bool b);
+	//! Get the current value of the flag which makes ephemeris marks on position "now"
+	bool getFlagEphemerisNow() const;
 
 	//! Set the thickness of ephemeris line
 	void setEphemerisLineThickness(int v);
@@ -991,6 +1043,8 @@ private slots:
 	//! Taking the JD dates for each ephemeride and preparation the human readable dates according to the settings for dates
 	void fillEphemerisDates();
 
+	//! When some aspect of orbit drawing changes, update their configuration
+	void reconfigureOrbits();
 private:
 	//! Search for SolarSystem objects which are close to the position given
 	//! in earth equatorial position.
@@ -1083,6 +1137,7 @@ private:
 	StelTextureSP texPointer;
 	StelTextureSP texEphemerisMarker;
 	StelTextureSP texEphemerisCometMarker;
+	StelTextureSP texEphemerisNowMarker;
 
 	bool flagShow;
 	bool flagPointer;                           // show red cross selection pointer?
@@ -1093,13 +1148,16 @@ private:
 	int maxTrailTimeExtent;
 	int trailsThickness;
 	bool flagIsolatedOrbits;
-	bool flagPlanetsOrbitsOnly;
+	bool flagPlanetsOrbits;				// Show orbits of the major planets, regardless of other orbit settings
+	bool flagPlanetsOrbitsOnly;			// show orbits of the major planets only (no minor bodies in any case)
+	bool flagOrbitsWithMoons;			// Show moon systems if planet orbits are displayed
 	bool ephemerisMarkersDisplayed;
 	bool ephemerisDatesDisplayed;
 	bool ephemerisMagnitudesDisplayed;
 	bool ephemerisHorizontalCoordinates;
 	bool ephemerisLineDisplayed;
 	bool ephemerisAlwaysOn;
+	bool ephemerisNow;
 	int ephemerisLineThickness;
 	bool ephemerisSkipDataDisplayed;
 	bool ephemerisSkipMarkersDisplayed;
@@ -1133,6 +1191,69 @@ private:
 	// note that we must also always compensate to light time travel, so likely each computation has to be done twice,
 	// with current JDE and JDE-lightTime(distance).
 	QList<Orbit*> orbits;           // Pointers on created elliptical orbits. 0.16pre: WHY DO WE NEED THIS???
+
+	//! Number of additional threads. This could be automatically derived, but for now we can experiment.
+	int extraThreads;
+
+	// BEGIN OF BLOCK RELATED TO MASS MARKER DISPLAY
+	// Variables used for GL optimization when displaying little markers for the minor bodies.
+	// These data structures were borrowed from StelSkyDrawer. However, we need only one color.
+	// Maybe, to extend the idea, have several such Arrays for category-colored main belt, Jupiter Trojans, NEA, KBO etc.
+	//! Vertex format for a minor body marker.
+	//! Texture pos is stored in another separately.
+	struct MarkerVertex {
+		Vec2f pos;
+		unsigned char color[4]; // can we remove that?
+	};
+	static_assert(sizeof(MarkerVertex) == 2*4+4, "Size of MarkerVertex must be 12 bytes");
+
+	//! Buffer for storing the marker positions
+	MarkerVertex* markerArray;
+	//! Buffer for storing the texture coordinate array data.
+	unsigned char* textureCoordArray;
+
+	class QOpenGLShaderProgram* markerShaderProgram;
+	struct MarkerShaderVars {
+		int projectionMatrix;
+		int texCoord;
+		int pos;
+		int color; // Can we remove that?
+		int texture;
+	};
+	MarkerShaderVars markerShaderVars;
+
+	//! Current number of sources stored in the buffer (still to display)
+	unsigned int nbMarkers;
+	std::unique_ptr<QOpenGLVertexArrayObject> vao;
+	std::unique_ptr<QOpenGLBuffer> vbo;
+	//! Binds actual VAO if it's supported, sets up the relevant state manually otherwise.
+	void bindVAO();
+	//! Sets the vertex attribute states for the currently bound VAO so that glDraw* commands can work.
+	void setupCurrentVAO();
+	//! Binds zero VAO if VAO is supported, manually disables the relevant vertex attributes otherwise.
+	void releaseVAO();
+
+	//! Maximum number of markers which can be stored in the buffers
+	constexpr static unsigned int maxMarkers=2048;
+	void postDrawAsteroidMarkers(StelPainter *sPainter);
+	StelTextureSP markerCircleTex; // An optional marker to have "something" in the sky even if object not visible.
+	LinearFader markerFader;         // Useful for markers displayed for minor bodies regardless of magnitude
+
+public:
+	bool drawAsteroidMarker(StelCore* core, StelPainter* sPainter, const float x, const float y, Vec3f &color);
+	float getMarkerValue() const {return markerFader.getInterstate();}
+
+private:
+	//! absolute value of the dimmest SSO drawn by drawAsteroidMarker()
+	double markerMagThreshold;
+	//! Preliminary experimental select-per-config.ini.
+	//! 0: original single-threaded 3 loops
+	//! 1: blockingMap
+	//! 2: strided pool threads plus main thread
+	//! 3: Ruslan's 1-pass loop (suspected to have a logical error.)
+	//! To configure the experimental new solution, add [devel]/compute_positions_algorithm=0|1|2|3. Default=2
+	int computePositionsAlgorithm;
+	// END OF BLOCK RELATED TO MASS MARKER DISPLAY
 };
 
 

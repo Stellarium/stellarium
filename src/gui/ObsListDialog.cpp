@@ -24,6 +24,7 @@
 
 #include "StelTranslator.hpp"
 #include "StelApp.hpp"
+#include "StelMainView.hpp"
 #include "StelObjectMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelLocationMgr.hpp"
@@ -42,6 +43,7 @@
 #include "StelUtils.hpp"
 #include "ObsListDialog.hpp"
 #include "LabelMgr.hpp"
+#include "StelLogger.hpp"
 
 #include "ui_obsListDialog.h"
 
@@ -106,7 +108,7 @@ void ObsListDialog::createDialogContent()
 
 	//Signals and slots
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
-	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
+	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
 
 	// Standard mode buttons: NewList/EditList/DeleteList
 	connect(ui->newListButton,        SIGNAL(clicked()), this, SLOT(   newListButtonPressed()));
@@ -135,22 +137,19 @@ void ObsListDialog::createDialogContent()
 	connectBoolProperty(ui->landscapeCheckBox, "ObsListDialog.flagUseLandscape");
 	connectBoolProperty(ui->fovCheckBox,       "ObsListDialog.flagUseFov");
 
+	ui->obsListDirEdit->setText(StelFileMgr::getObsListDir());
+	connect(ui->obsListDirEdit, SIGNAL(editingFinished()), this, SLOT(selectObsListDir()));
+	connect(ui->obsListBrowseButton, SIGNAL(clicked()), this, SLOT(browseForObsListDir()));
+
+
 	//obsListCombo settings: A change in the combobox loads the list.
 	connect(ui->obsListComboBox, SIGNAL(activated(int)), this, SLOT(loadSelectedObservingList(int)));
 
 	ui->treeView->setModel(itemModel);
 	ui->treeView->header()->setSectionsMovable(false);
 	ui->treeView->hideColumn(ColumnUUID);
-	ui->treeView->header()->setSectionResizeMode(ColumnDesignation,   QHeaderView::ResizeToContents);
-	ui->treeView->header()->setSectionResizeMode(ColumnNameI18n,      QHeaderView::ResizeToContents);
-	ui->treeView->header()->setSectionResizeMode(ColumnType,          QHeaderView::ResizeToContents);
-	ui->treeView->header()->setSectionResizeMode(ColumnRa,            QHeaderView::ResizeToContents);
-	ui->treeView->header()->setSectionResizeMode(ColumnDec,           QHeaderView::ResizeToContents);
-	ui->treeView->header()->setSectionResizeMode(ColumnMagnitude,     QHeaderView::ResizeToContents);
-	ui->treeView->header()->setSectionResizeMode(ColumnConstellation, QHeaderView::ResizeToContents);
-	ui->treeView->header()->setSectionResizeMode(ColumnDate,          QHeaderView::ResizeToContents);
-	ui->treeView->header()->setSectionResizeMode(ColumnLocation,      QHeaderView::ResizeToContents);
-	ui->treeView->header()->setSectionResizeMode(ColumnLandscapeID,   QHeaderView::ResizeToContents);
+	for (int c=ColumnDesignation; c<=ColumnLandscapeID; c++)
+		ui->treeView->header()->setSectionResizeMode(c, QHeaderView::ResizeToContents);
 	ui->treeView->header()->setStretchLastSection(true);
 	//Enable the sort for columns
 	ui->treeView->setSortingEnabled(true);
@@ -177,14 +176,15 @@ void ObsListDialog::createDialogContent()
 		observingLists = QMap<QString, QVariant>();
 		// Create one default empty list
 		// Creation date
-		const double JD = core->getJD();
+		const double JD = StelUtils::getJDFromSystem();
 		const QString listCreationDate = StelUtils::julianDayToISO8601String(JD + core->getUTCOffset(JD) / 24.).replace("T", " ");
 		QVariantMap emptyList = {
 			// Name, description, current date for the list, current sorting
 			{KEY_NAME,          qc_("new list", "default name for observing list if none is available")},
 			{KEY_DESCRIPTION,   QString()},
 			{KEY_SORTING,       QString()},
-			{KEY_CREATION_DATE, listCreationDate }};
+			{KEY_CREATION_DATE, listCreationDate },
+			{KEY_LAST_EDIT,     listCreationDate }};
 
 		observingLists.insert(olud, emptyList);
 		jsonMap.insert(KEY_OBSERVING_LISTS, observingLists);
@@ -215,6 +215,38 @@ void ObsListDialog::createDialogContent()
 	defaultOlud = jsonMap.value(KEY_DEFAULT_LIST_OLUD).toString();
 	loadListNames(); // also populate Combobox and make sure at least some defaultOlud exists.
 	loadDefaultList();
+}
+
+void ObsListDialog::browseForObsListDir()
+{
+	const QString &oldObsListDir = StelFileMgr::getObsListDir();
+	QString newObsListDir = QFileDialog::getExistingDirectory(&StelMainView::getInstance(), q_("Select observing lists directory"), oldObsListDir, QFileDialog::ShowDirsOnly);
+
+	if (!newObsListDir.isEmpty()) {
+		// remove trailing slash
+		if (newObsListDir.right(1) == "/")
+			newObsListDir = newObsListDir.left(newObsListDir.length()-1);
+
+		ui->obsListDirEdit->setText(newObsListDir);
+		selectObsListDir();
+	}
+}
+
+void ObsListDialog::selectObsListDir()
+{
+	QString dir = ui->obsListDirEdit->text();
+	try
+	{
+		StelFileMgr::setObsListDir(dir);
+		QSettings* conf = StelApp::getInstance().getSettings();
+		conf->setValue("main/observinglists_dir", dir);
+	}
+	catch (std::runtime_error& e)
+	{
+		Q_UNUSED(e)
+		// nop
+		// this will happen when people are only half way through typing dirs
+	}
 }
 
 /*
@@ -333,36 +365,35 @@ void ObsListDialog::addModelRow(const QString &olud, const QString &designation,
  * Load the lists names from jsonMap,
  * Populate the list names into combo box and extract defaultOlud
 */
-void ObsListDialog::loadListNames()
+void ObsListDialog::loadListNames(const QString& listID)
 {
 	listNames.clear();
 	QVariantMap::iterator i;
-	for (i = observingLists.begin(); i != observingLists.end(); ++i) {
-		if (i.value().canConvert<QVariantMap>())
-		{
-			QVariant var = i.value();
-			QVariantMap data = var.value<QVariantMap>();
-			QString listName = data.value(KEY_NAME).toString();
-			listNames.append(listName);
-		}
-	}
-	listNames.sort(Qt::CaseInsensitive);
+	// Clean list of OL to avoid duplicates
 	ui->obsListComboBox->clear();
-	ui->obsListComboBox->addItems(listNames);
 
-	// Now add the item data into the ComboBox
+	// Add the list name and OLUD (as item data) into the ComboBox.
 	for (i = observingLists.begin(); i != observingLists.end(); ++i) {
 		const QString &listUuid = i.key();
 		if (i.value().canConvert<QVariantMap>()) // if this looks like an actual obsList?
 		{
 			QVariant var = i.value();
-			auto data = var.value<QVariantMap>();
+			QVariantMap data = var.value<QVariantMap>();
 			QString listName = data.value(KEY_NAME).toString();
-			int idx=ui->obsListComboBox->findText(listName);
-			Q_ASSERT(idx!=-1);
-			ui->obsListComboBox->setItemData(idx, listUuid);
+			listNames.append(listName);
+			ui->obsListComboBox->addItem(listName, listUuid);
 		}
 	}
+	ui->obsListComboBox->model()->sort(0);
+	if (!listID.isEmpty())
+	{
+		// select observing list by OLUD
+		int idx = ui->obsListComboBox->findData(listID, Qt::UserRole);
+		if (idx<0)
+			idx = 0;
+		ui->obsListComboBox->setCurrentIndex(idx);
+	}
+
 	// If defaultOlud list not found, set first list as default.
 	if (!observingLists.contains(defaultOlud))
 	{
@@ -412,6 +443,7 @@ void ObsListDialog::loadSelectedList()
 	// At this point selectedOlud must be set
 	Q_ASSERT(selectedOlud.length()>0);
 
+	bool conversionError=false;
 	// We must keep selection for the user. It is not enough to store/restore the existingSelection.
 	// The QList<StelObjectP> objects are apparently volatile. We must retrieve the actual object.
 	const QList<StelObjectP>&existingSelection = objectMgr->getSelectedObject();
@@ -425,6 +457,7 @@ void ObsListDialog::loadSelectedList()
 	ui->defaultListCheckBox->setChecked(selectedOlud == defaultOlud);
 
 	QVariantMap observingListMap = observingLists.value(selectedOlud).toMap();
+
 	QVariantList listOfObjects;
 
 	// Display description and creation date
@@ -432,6 +465,7 @@ void ObsListDialog::loadSelectedList()
 	ui->listNameLineEdit->setText(currentListName);
 	ui->descriptionLineEdit->setText(observingListMap.value(KEY_DESCRIPTION).toString());
 	ui->creationDateLineEdit->setText(observingListMap.value(KEY_CREATION_DATE).toString());
+	ui->lastEditLineEdit->setText(observingListMap.value(KEY_LAST_EDIT, observingListMap.value(KEY_CREATION_DATE)).toString());
 
 	if (observingListMap.value(KEY_OBJECTS).canConvert<QVariantList>())
 	{
@@ -439,7 +473,11 @@ void ObsListDialog::loadSelectedList()
 		listOfObjects = data.value<QVariantList>();
 	}
 	else
-		qCritical() << "[ObservingList] conversion error";
+	{
+		qCritical() << "[ObservingList] conversion error in list " << currentListName << "from" << observingListMap.value(KEY_CREATION_DATE).toString();
+		qCritical() << "Cannot convert this objects entry:" << observingListMap.value(KEY_OBJECTS);
+		conversionError=true;
+	}
 
 	// Clear model
 	itemModel->removeRows(0, itemModel->rowCount()); // don't use clear() here!
@@ -462,26 +500,23 @@ void ObsListDialog::loadSelectedList()
 				item.objTypeI18n  = objectMap.value(KEY_OBJECTS_TYPE).toString(); // Preliminary: Do not rely on this translated string! Re-retrieve later
 				item.ra  = objectMap.value(KEY_RA).toString();
 				item.dec = objectMap.value(KEY_DEC).toString();
+				QList<StelObjectP> selectedObject;
 
 				if (objectMgr->findAndSelect(item.designation, item.objClass) && !objectMgr->getSelectedObject().isEmpty())
 				{
 					//qDebug() << "ObsList: found an object of objClass" << item.objClass << "for" << item.designation;
-					const QList<StelObjectP> &selectedObject = objectMgr->getSelectedObject();
-					double ra, dec;
-					StelUtils::rectToSphe(&ra, &dec, selectedObject[0]->getJ2000EquatorialPos(core));
-
-					if (item.ra.isEmpty())
-						item.ra = StelUtils::radToHmsStr(ra, false).trimmed();
-					if (item.dec.isEmpty())
-						item.dec = StelUtils::radToDmsStr(dec, false).trimmed();
-					item.objTypeI18n = selectedObject[0]->getObjectTypeI18n();
-					item.name=selectedObject[0]->getEnglishName();
-					item.nameI18n=selectedObject[0]->getNameI18n();
+					selectedObject = objectMgr->getSelectedObject();
 				}
-				else // THEREFORE: repeat the same code with findAndSelect with any type.
+				else // try findAndSelect with any type. Note that this may lead to confusion!
 					if (objectMgr->findAndSelect(item.designation) && !objectMgr->getSelectedObject().isEmpty())
 				{
-					const QList<StelObjectP> &selectedObject = objectMgr->getSelectedObject();
+					selectedObject = objectMgr->getSelectedObject();
+					//qDebug() << "Changing item.objClass " << item.objClass << "to" << selectedObject[0]->getType();
+					item.objClass = selectedObject[0]->getType();
+				}
+
+				if (!selectedObject.isEmpty())
+				{
 					double ra, dec;
 					StelUtils::rectToSphe(&ra, &dec, selectedObject[0]->getJ2000EquatorialPos(core));
 
@@ -489,16 +524,15 @@ void ObsListDialog::loadSelectedList()
 						item.ra = StelUtils::radToHmsStr(ra, false).trimmed();
 					if (item.dec.isEmpty())
 						item.dec = StelUtils::radToDmsStr(dec, false).trimmed();
-					//qDebug() << "Changing item.objClass " << item.objClass << "to" << selectedObject[0]->getType();
-					item.objClass = selectedObject[0]->getType();
 					item.objTypeI18n = selectedObject[0]->getObjectTypeI18n();
 					item.name=selectedObject[0]->getEnglishName();
 					item.nameI18n=selectedObject[0]->getNameI18n();
 				}
 				else
 				{
-					qWarning() << "[ObservingList] object: " << item.designation << " not found or empty. Cannot set item.objClass !";
+					qWarning() << "[ObservingList] object: " << item.designation << " not found or empty.";
 					qWarning() << "item.objType given as:" << item.objTypeI18n;
+					qWarning() << "item.objClass given as:" << item.objClass;
 				}
 
 				item.magnitude = objectMap.value(KEY_MAGNITUDE).toString();
@@ -513,7 +547,10 @@ void ObsListDialog::loadSelectedList()
 				// Location, landscapeID, FoV (may be empty)
 				item.location = objectMap.value(KEY_LOCATION).toString();
 				item.landscapeID = objectMap.value(KEY_LANDSCAPE_ID).toString();
-				item.fov = objectMap.value(KEY_FOV).toDouble();
+
+				const QSettings* conf  = StelApp::getInstance().getSettings();
+				const double minFov=conf->value("navigation/min_fov", 1./3600.).toDouble();
+				item.fov = qBound(minFov, objectMap.value(KEY_FOV).toDouble(), 360.);
 
 				// Visible flag
 				item.isVisibleMarker = objectMap.value(KEY_IS_VISIBLE_MARKER).toBool();
@@ -541,10 +578,16 @@ void ObsListDialog::loadSelectedList()
 			}
 			else
 			{
-				qCritical() << "[ObservingList] conversion error";
-				return;
+				qCritical() << "[ObservingList] conversion error for object: "  << object;
+				conversionError=true;
 			}
 		}
+	}
+
+	if (conversionError)
+	{
+		QMessageBox::warning(&StelMainView::getInstance(), q_("Attention!"), q_("Error during conversion. Please see logfile for details."));
+		return;
 	}
 
 	// Sorting for the objects list.
@@ -564,7 +607,11 @@ void ObsListDialog::loadSelectedList()
 */
 QHash<QString, ObsListDialog::observingListItem> ObsListDialog::loadBookmarksFile(QFile &file)
 {
-	//qDebug() << "LOADING OLD BOOKMARKS...";
+	qWarning() << "DEPRECATION WARNING";
+	qWarning() << "  Loading old-style Bookmarks file. This file format is deprecated.";
+	qWarning() << "  If you are loading this as a separate file, ";
+	qWarning() << "  Please update the file (re-export the list into *.sol format).";
+	bool importWarning=false;
 
 	QHash<QString, observingListItem> bookmarksItemHash;
 
@@ -640,6 +687,18 @@ QHash<QString, ObsListDialog::observingListItem> ObsListDialog::loadBookmarksFil
 
 					bookmarksItemHash.insert(it.key(), item);
 				}
+				else
+				{
+					qWarning() << "Bookmark import: Cannot find Object " << item.designation << "(" << nameI18n << ")";
+					importWarning=true;
+				}
+			}
+			if (importWarning)
+			{
+				qWarning() << "Some bookmarked objects in file" << file.fileName() << "were not found.";
+				qWarning() << "If these are Solar System objects, make sure you have imported the respective orbital elements, "
+					      "and the file loads without warnings in the current version.";
+				messageBox(q_("Note"), q_("Some bookmarked objects were not found. See logfile for details."));
 			}
 		}
 		catch (std::runtime_error &e)
@@ -662,7 +721,7 @@ QHash<QString, ObsListDialog::observingListItem> ObsListDialog::loadBookmarksFil
 /*
  * Save the bookmarks into observingLists QVariantMap
 */
-void ObsListDialog::saveBookmarksHashInObservingLists(const QHash<QString, observingListItem> &bookmarksHash)
+QString ObsListDialog::saveBookmarksHashInObservingLists(const QHash<QString, observingListItem> &bookmarksHash)
 {
 	// Creation date
 	double JD = StelUtils::getJDFromSystem(); // Mark with current system time
@@ -672,6 +731,7 @@ void ObsListDialog::saveBookmarksHashInObservingLists(const QHash<QString, obser
 		{KEY_NAME,          BOOKMARKS_LIST_NAME},
 		{KEY_DESCRIPTION,   BOOKMARKS_LIST_DESCRIPTION},
 		{KEY_CREATION_DATE, listCreationDate},
+		{KEY_LAST_EDIT,     listCreationDate},
 		{KEY_SORTING,       SORTING_BY_NAME}};
 
 	// Add actual list of (former) bookmark entries
@@ -689,6 +749,7 @@ void ObsListDialog::saveBookmarksHashInObservingLists(const QHash<QString, obser
 	QString bookmarkListOlud= (keys.empty() ? QUuid::createUuid().toString() : keys.at(0));
 
 	observingLists.insert(bookmarkListOlud, bookmarksObsList);
+	return bookmarkListOlud;
 }
 
 /*
@@ -815,7 +876,7 @@ void ObsListDialog::highlightAll()
 	const QString color = hlMgr->getColor().toHtmlColor();
 	float distance = hlMgr->getMarkersSize();
 
-	for (const auto &item: qAsConst(currentItemCollection)) {
+	for (const auto &item: std::as_const(currentItemCollection)) {
 		const QString name = item.designation;
 		const QString raStr = item.ra.trimmed();
 		const QString decStr = item.dec.trimmed();
@@ -880,7 +941,7 @@ void ObsListDialog::newListButtonPressed()
 	switchEditMode(true, true);
 
 	ui->listNameLineEdit->setText(q_("New Observation List"));
-	ui->stelWindowTitle->setText(q_("Observing list creation mode"));
+	ui->titleBar->setTitle(q_("Observing list creation mode"));
 }
 /*
  * Slot for editButton
@@ -893,7 +954,7 @@ void ObsListDialog::editListButtonPressed()
 	{
 		switchEditMode(true, false);
 
-		ui->stelWindowTitle->setText(q_("Observing list editor mode"));
+		ui->titleBar->setTitle(q_("Observing list editor mode"));
 	}
 	else
 	{
@@ -907,9 +968,15 @@ void ObsListDialog::editListButtonPressed()
  */
 void ObsListDialog::exportListButtonPressed()
 {
-	static const QString filter = "JSON (*.json)";
-	QString exportListJsonPath = QFileDialog::getSaveFileName(nullptr, q_("Export observing list as..."),
-							     QDir::homePath() + "/" + JSON_FILE_BASENAME + "_" + currentListName + ".json", filter);
+	static const QString filter = "Stellarium Single Observing List (*.sol);;Stellarium Observing List (*.ol)";
+	const QString destinationDir=StelApp::getInstance().getSettings()->value("main/observinglists_dir", QDir::homePath()).toString();
+	QString selectedFilter = "Stellarium Single Observing List (*.sol)";
+	QString exportListJsonPath = QFileDialog::getSaveFileName(&StelMainView::getInstance(), q_("Export observing list as..."),
+							      destinationDir + "/" + JSON_FILE_BASENAME + "_" + currentListName + ".sol", filter, &selectedFilter);
+
+	if (exportListJsonPath.isEmpty()) // cancel pressed.
+		return;
+
 	QFile jsonFile(exportListJsonPath);
 	if (!jsonFile.open(QIODevice::ReadWrite | QIODevice::Text))
 	{
@@ -919,18 +986,29 @@ void ObsListDialog::exportListButtonPressed()
 		messageBox(q_("Error"), q_("Cannot export. See logfile for details."));
 		return;
 	}
-	// Prepare a new json-able map
-	QVariantMap exportJsonMap={
-		{KEY_DEFAULT_LIST_OLUD, ""}, // Do not	set a default in this list!
-		{KEY_SHORT_NAME, SHORT_NAME_VALUE},
-		{KEY_VERSION, FILE_VERSION}};
-
-	QVariantMap currentListMap={{selectedOlud, observingLists.value(selectedOlud).toMap()}};
-	QVariantMap oneListMap={{KEY_OBSERVING_LISTS, currentListMap}};
-	exportJsonMap.insert(KEY_OBSERVING_LISTS, oneListMap);
 
 	jsonFile.resize(0);
-	StelJsonParser::write(exportJsonMap, &jsonFile);
+	QFileInfo fi(exportListJsonPath);
+	if (fi.suffix()=="sol")
+	{
+		// Prepare a new json-able map
+		QVariantMap exportJsonMap={
+			{KEY_DEFAULT_LIST_OLUD, ""}, // Do not set a default in this list!
+			{KEY_SHORT_NAME, SHORT_NAME_VALUE},
+			{KEY_VERSION, FILE_VERSION}};
+
+		QVariantMap currentListMap={{selectedOlud, observingLists.value(selectedOlud).toMap()}};
+		//QVariantMap oneListMap={{KEY_OBSERVING_LISTS, currentListMap}};
+		//exportJsonMap.insert(KEY_OBSERVING_LISTS, oneListMap);
+		exportJsonMap.insert(KEY_OBSERVING_LISTS, currentListMap);
+		StelJsonParser::write(exportJsonMap, &jsonFile);
+	}
+	else
+	{
+		// just export complete map.
+		StelJsonParser::write(jsonMap, &jsonFile);
+	}
+
 	jsonFile.flush();
 	jsonFile.close();
 }
@@ -940,10 +1018,14 @@ void ObsListDialog::exportListButtonPressed()
  */
 void ObsListDialog::importListButtonPressed()
 {
-	static const QString filter = "JSON (*.json)";
-	QString fileToImportJsonPath = QFileDialog::getOpenFileName(nullptr, q_("Import observing list"),
-								    QDir::homePath(),
+	static const QString filter = "Stellarium Single Observing List (*.sol);;Stellarium Observing List (*.ol);;Stellarium Legacy JSON Observing List or Bookmarks (*.json)";
+	const QString destinationDir=StelApp::getInstance().getSettings()->value("main/observinglists_dir", QDir::homePath()).toString();
+	QString fileToImportJsonPath = QFileDialog::getOpenFileName(&StelMainView::getInstance(), q_("Import observing list"),
+								    destinationDir,
 								    filter);
+	if (fileToImportJsonPath.isEmpty()) // cancel pressed.
+		return;
+
 	QVariantMap map;
 	QFile jsonFile(fileToImportJsonPath);
 	if (!jsonFile.open(QIODevice::ReadOnly))
@@ -961,7 +1043,7 @@ void ObsListDialog::importListButtonPressed()
 
 			if (map.contains(KEY_OBSERVING_LISTS))
 			{
-				// Case of observingList import: Import all lists from that file!
+				// Case of observingList import: Import all lists from that file! A .sol only has one list but is else structured identically.
 				const QVariantMap observingListMapToImport = map.value(KEY_OBSERVING_LISTS).toMap();
 				if (observingListMapToImport.isEmpty())
 				{
@@ -977,19 +1059,25 @@ void ObsListDialog::importListButtonPressed()
 						{
 							// check here to avoid overwriting of existing lists
 							bool overwrite=true;
-							if (observingLists.contains(it.key()))
+							if (observingLists.contains(it.key())) // Same OLUD?
 							{
-								QVariantMap importedMap=it.value().toMap();
+								QVariantMap importedMap=it.value().toMap(); // This is a map of {{UUID, QMap},...}
 								QString importedName=importedMap.value(KEY_NAME).toString();
 								QString importedDate=importedMap.value(KEY_CREATION_DATE).toString();
+								QString importedLastEditDate=importedMap.value(KEY_LAST_EDIT, importedMap.value(KEY_CREATION_DATE)).toString();
+								qDebug() << "Imported Map named:" << importedName << "created" << importedDate << "changed" << importedLastEditDate << ":" << importedMap;
 								QVariantMap existingMap=observingLists.value(it.key()).toMap();
 								QString existingName=existingMap.value(KEY_NAME).toString();
 								QString existingDate=existingMap.value(KEY_CREATION_DATE).toString();
-								QString message=QString(q_("A list named '%1' and dated %2 would overwrite your existing list '%3', dated %4. Accept?")).arg(importedName, importedDate, existingName, existingDate);
+								QString existingLastEdit=existingMap.value(KEY_LAST_EDIT, existingMap.value(KEY_CREATION_DATE)).toString();
+								QString message=QString(q_("A list named '%1', created %2 and last modified %3 would overwrite your existing list '%4', dated %5 and last modified %6. Accept?")).arg(importedName, importedDate, importedLastEditDate, existingName, existingDate, existingLastEdit);
 								overwrite=askConfirmation(message);
 							}
 							if (overwrite)
+							{
 								observingLists.insert(it.key(), it.value());
+								selectedOlud=it.key();
+							}
 						}
 					}
 				}
@@ -1008,7 +1096,7 @@ void ObsListDialog::importListButtonPressed()
 				{
 					QHash<QString, ObsListDialog::observingListItem> bookmarksHash=loadBookmarksFile(jsonFile);
 					// Put them to the main list. Note that this may create another list named "bookmarks list", however, with a different OLUD than the existing.
-					saveBookmarksHashInObservingLists(bookmarksHash);
+					selectedOlud=saveBookmarksHashInObservingLists(bookmarksHash);
 				}
 			}
 			else
@@ -1032,6 +1120,12 @@ void ObsListDialog::importListButtonPressed()
 			jsonFile.flush();
 			jsonFile.close();
 			tainted=false;
+
+			// Now we have stored to file, but the program is not aware of the new lists!
+			loadListNames(selectedOlud); // also populate Combobox and make sure at least some defaultOlud exists.
+			Q_ASSERT(selectedOlud.length()>0);
+
+			loadSelectedList();
 		} catch (std::runtime_error &e) {
 			qWarning() << "[ObservingList Creation/Edition] File format is wrong! Error: " << e.what();
 			messageBox(q_("Error"), q_("File format is wrong!"));
@@ -1045,8 +1139,11 @@ void ObsListDialog::importListButtonPressed()
 */
 void ObsListDialog::deleteListButtonPressed()
 {
-	if (observingLists.count()>1 && (selectedOlud!=defaultOlud) && askConfirmation())
+	if (observingLists.count()>1 && (selectedOlud!=defaultOlud))
 	{
+		if (!askConfirmation()) // place inside to avoid error message below.
+			return;
+
 		QFile jsonFile(observingListJsonPath);
 		if (!jsonFile.open(QIODevice::ReadWrite | QIODevice::Text)) {
 			qWarning() << "[ObservingList] bookmarks list can not be saved. A file can not be open for reading and writing:"
@@ -1094,7 +1191,7 @@ void ObsListDialog::addObjectButtonPressed()
 
 	if (!selectedObject.isEmpty())
 	{
-// TBD: this test should prevent adding duplicate entries, but fails. Maybe for V23.2!
+// TBD: this test should prevent adding duplicate entries, but fails. Maybe for V23.4!
 //		// No duplicate item in the same list
 //		bool is_already_in_list = false;
 //		QHash<QString, observingListItem>::iterator i;
@@ -1253,7 +1350,7 @@ void ObsListDialog::saveButtonPressed()
 
 	tainted=false;
 	switchEditMode(false, false); // Set GUI to normal mode
-	loadListNames(); // reload Combobox
+	loadListNames(selectedOlud); // reload Combobox
 	loadSelectedList();
 }
 
@@ -1284,7 +1381,7 @@ void ObsListDialog::switchEditMode(bool enableEditMode, bool newList)
 		isCreationMode=newList;
 		// The Layout classes have no setVisible(bool), we must configure individual buttons! :-(
 
-		ui->stelWindowTitle->setText(q_("Observing lists"));
+		ui->titleBar->setTitle(q_("Observing lists"));
 		//ui->horizontalLayoutCombo->setEnabled(!isEditMode);     // disable list selection
 		ui->obsListComboLabel->setVisible(!isEditMode);
 		ui->obsListComboBox->setVisible(!isEditMode);
@@ -1301,6 +1398,8 @@ void ObsListDialog::switchEditMode(bool enableEditMode, bool newList)
 
 		ui->creationDateLabel->setVisible(!isEditMode);         // Creation date:
 		ui->creationDateLineEdit->setVisible(!isEditMode);      //
+		ui->lastEditLabel->setVisible(!isEditMode);             // Last edit date:
+		ui->lastEditLineEdit->setVisible(!isEditMode);          //
 
 		// line with optional store items
 		ui->alsoStoreLabel->setVisible(isEditMode);            // Also store
@@ -1374,19 +1473,21 @@ void ObsListDialog::setFlagUseFov(bool b)
 
 /*
  * Prepare the currently displayed/edited list for storage
- * Returns QVariantList with keys={creation date, description, name, objects, sorting}
+ * Returns QVariantList with keys={creation date, last edit, description, name, objects, sorting}
  */
 QVariantMap ObsListDialog::prepareCurrentList(QHash<QString, observingListItem> &itemHash)
 {
-	// Creation date
-	const double JD = core->getJD();
-	const QString listCreationDate = StelUtils::julianDayToISO8601String(JD + core->getUTCOffset(JD) / 24.).replace("T", " ");
+	// Edit date
+	const double JD = StelUtils::getJDFromSystem();
+	const QString lastEditDate = StelUtils::julianDayToISO8601String(JD + core->getUTCOffset(JD) / 24.).replace("T", " ");
 	QVariantMap currentList = {
 		// Name, description, current date for the list, current sorting
 		{KEY_NAME,          currentListName},
 		{KEY_DESCRIPTION,   ui->descriptionLineEdit->text()},
 		{KEY_SORTING,       sorting},
-		{KEY_CREATION_DATE, listCreationDate }};
+		{KEY_CREATION_DATE, ui->creationDateLineEdit->text()},
+		{KEY_LAST_EDIT,     lastEditDate }
+	};
 
 	// List of objects
 	QVariantList listOfObjects;
@@ -1465,6 +1566,7 @@ const QString ObsListDialog::SHORT_NAME_VALUE           = QStringLiteral("Observ
 const QString ObsListDialog::KEY_DEFAULT_LIST_OLUD = QStringLiteral("defaultListOlud");
 const QString ObsListDialog::KEY_OBSERVING_LISTS   = QStringLiteral("observingLists");
 const QString ObsListDialog::KEY_CREATION_DATE     = QStringLiteral("creation date");
+const QString ObsListDialog::KEY_LAST_EDIT         = QStringLiteral("last edit");
 const QString ObsListDialog::KEY_BOOKMARKS         = QStringLiteral("bookmarks");
 const QString ObsListDialog::KEY_NAME              = QStringLiteral("name");
 const QString ObsListDialog::KEY_NAME_I18N         = QStringLiteral("nameI18n");

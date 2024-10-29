@@ -216,4 +216,3 @@ IF(USE_PLUGIN_TELESCOPECONTROL)
         target_link_libraries(indiclient ${ZLIB_LIBRARIES})
     endif()
 ENDIF()
-

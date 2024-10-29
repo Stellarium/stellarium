@@ -393,6 +393,11 @@ void StelMainScriptAPI::setGuiVisible(bool b)
 	StelApp::getInstance().getGui()->setVisible(b);
 }
 
+void StelMainScriptAPI::setSelectedObjectMarkerVisible(bool b)
+{
+	GETSTELMODULE(StelObjectMgr)->setFlagSelectedObjectPointer(b);
+}
+
 void StelMainScriptAPI::setGuiStyle(const QString& cssStyle)
 {
 	emit StelApp::getInstance().colorSchemeChanged(cssStyle);
@@ -1469,11 +1474,7 @@ QVariantMap StelMainScriptAPI::getScreenXYFromAltAzi(const QString &alt, const Q
 
 QString StelMainScriptAPI::getEnv(const QString &var)
 {
-#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
 	return qEnvironmentVariable(var.toLocal8Bit().constData());
-#else
-	return QString::fromLocal8Bit(qgetenv(var.toLocal8Bit().constData()));
-#endif
 }
 
 // return whether a particular module has been loaded. Mostly useful to check whether a module available as plugin is active.
@@ -1540,4 +1541,11 @@ void StelMainScriptAPI::setDisplayGamma(double gamma)
 double StelMainScriptAPI::getDisplayGamma()
 {
     return static_cast<double>(StelApp::getInstance().getCore()->getToneReproducer()->getDisplayGamma());
+}
+
+Vec2d StelMainScriptAPI::setWindowSize(int width, int height)
+{
+	StelMainView &mainView=StelMainView::getInstance();
+	QRectF rect=mainView.setWindowSize(width, height);
+	return Vec2d(rect.width(), rect.height());
 }

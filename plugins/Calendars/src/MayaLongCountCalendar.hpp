@@ -40,7 +40,7 @@ public slots:
 
 	//! set date from a vector of calendar date elements sorted from the largest to the smallest.
 	//! baktun[0..19]-katun[0..19]-tun{0..19]-uinal[0..17]-kin[0..19]
-	void setDate(QVector<int> parts) override;
+	void setDate(const QVector<int> &parts) override;
 
 	//! get a stringlist of calendar date elements sorted from the largest to the smallest.
 	//! baktun[0..19]-katun[0..19]-tun[0..19]-uinal[0..17]-kin[0..19]
@@ -50,7 +50,7 @@ public slots:
 	QString getFormattedDateString() const override;
 
 	//! get RD date from Long Count date
-	static int fixedFromMayanLongCount(QVector<int> longCount);
+	static int fixedFromMayanLongCount(const QVector<int> &longCount);
 	//! get Long Count date from RD date
 	static QVector<int>mayaLongCountFromFixed(int rd);
 

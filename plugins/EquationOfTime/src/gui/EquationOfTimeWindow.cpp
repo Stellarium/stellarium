@@ -53,8 +53,8 @@ void EquationOfTimeWindow::createDialogContent()
 	ui->setupUi(dialog);
 
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
-	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
-	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
+	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
+	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	ui->checkBoxEnableAtStartup->setChecked(eq->getFlagEnableAtStartup());
 	connect(ui->checkBoxEnableAtStartup, SIGNAL(clicked(bool)), eq, SLOT(setFlagEnableAtStartup(bool)));
@@ -74,7 +74,7 @@ void EquationOfTimeWindow::createDialogContent()
 	connect(ui->pushButtonSave, SIGNAL(clicked()), this, SLOT(saveEquationOfTimeSettings()));	
 	connect(ui->pushButtonReset, SIGNAL(clicked()), this, SLOT(resetEquationOfTimeSettings()));
 
-	connectColorButton(ui->textColorButton, "EquationOfTime.textColor", "EquationOfTime/text_color");
+	ui->textColorButton->setup("EquationOfTime.textColor", "EquationOfTime/text_color");
 
 	setAboutHtml();
 }
@@ -82,7 +82,7 @@ void EquationOfTimeWindow::createDialogContent()
 void EquationOfTimeWindow::setAboutHtml()
 {
 	QString html = "<html><head></head><body>";
-	html += "<h2>" + q_("Equation of Time plug-in") + "</h2><table width=\"90%\">";
+	html += "<h2>" + q_("Equation of Time plug-in") + "</h2><table class='layout' width=\"90%\">";
 	html += "<tr width=\"30%\"><td><strong>" + q_("Version") + ":</strong></td><td>" + EQUATIONOFTIME_PLUGIN_VERSION + "</td></tr>";
 	html += "<tr><td><strong>" + q_("License") + ":</strong></td><td>" + EQUATIONOFTIME_PLUGIN_LICENSE + "</td></tr>";
 	html += "<tr><td><strong>" + q_("Author") + ":</strong></td><td>Alexander Wolf</td></tr>";

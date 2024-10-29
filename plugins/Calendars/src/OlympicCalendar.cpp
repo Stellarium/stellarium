@@ -70,7 +70,7 @@ QString OlympicCalendar::getFormattedDateString() const
 // unless given explicitly, months and days in the Julian calendar will not be changed.
 // parts={olympiad, year [, month, day]}
 
-void OlympicCalendar::setDate(QVector<int> parts)
+void OlympicCalendar::setDate(const QVector<int> &parts)
 {
 	if (parts.length()<4)
 	{
@@ -90,7 +90,7 @@ void OlympicCalendar::setDate(QVector<int> parts)
 }
 
 
-int OlympicCalendar::julianYearFromOlympiad(QVector<int>odate)
+int OlympicCalendar::julianYearFromOlympiad(const QVector<int> &odate)
 {
 	int cycle=odate.value(0);
 	int year =odate.value(1);

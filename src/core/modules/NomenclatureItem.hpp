@@ -130,44 +130,44 @@ public:
 	};
 	Q_ENUM(PlanetCoordinateOrientation)
 
-	NomenclatureItem(PlanetP nPlanet, int nId, const QString& nName, const QString& nContext, NomenclatureItemType nItemType, double nLatitude, double nLongitude, double nSize);
-	virtual ~NomenclatureItem() Q_DECL_OVERRIDE;
+	NomenclatureItem(PlanetP nPlanet, int nId, const QString& nName, const QString& nContext, const QString& nOrigin, NomenclatureItemType nItemType, double nLatitude, double nLongitude, double nSize);
+	~NomenclatureItem() override;
 
 	//! Get the type of object
-	virtual QString getType(void) const Q_DECL_OVERRIDE
+	QString getType(void) const override
 	{
 		return NOMENCLATURE_TYPE;
 	}
-	virtual QString getObjectType(void) const Q_DECL_OVERRIDE
+	QString getObjectType(void) const override
 	{
 		return getNomenclatureTypeLatinString(nType);
 	}
-	virtual QString getObjectTypeI18n(void) const Q_DECL_OVERRIDE
+	QString getObjectTypeI18n(void) const override
 	{
 		return getNomenclatureTypeString(nType);
 	}
 
-	virtual QString getID(void) const Q_DECL_OVERRIDE
+	QString getID(void) const override
 	{
 		return QString("%1").arg(identificator);
 	}
 
-	virtual float getSelectPriority(const StelCore* core) const Q_DECL_OVERRIDE;
+	float getSelectPriority(const StelCore* core) const override;
 
 	//! Get an HTML string to describe the object
 	//! @param core A pointer to the core
 	//! @flags a set of flags with information types to include.
-	virtual QString getInfoString(const StelCore* core, const InfoStringGroup& flags) const Q_DECL_OVERRIDE;
-	virtual Vec3f getInfoColor(void) const Q_DECL_OVERRIDE;
-	virtual Vec3d getJ2000EquatorialPos(const StelCore*) const Q_DECL_OVERRIDE;
+	QString getInfoString(const StelCore* core, const InfoStringGroup& flags) const override;
+	Vec3f getInfoColor(void) const override;
+	Vec3d getJ2000EquatorialPos(const StelCore*) const override;
 	//! Return the angular radius of a circle containing the feature as seen from the observer
 	//! with the circle center assumed to be at getJ2000EquatorialPos().
 	//! @return radius in degree. This value is half of the apparent angular size of the object, and is independent of the current FOV.
-	virtual double getAngularRadius(const StelCore* core) const Q_DECL_OVERRIDE;
+	double getAngularRadius(const StelCore* core) const override;
 	//! Get the localized name of nomenclature item.
-	virtual QString getNameI18n(void) const Q_DECL_OVERRIDE;
+	QString getNameI18n(void) const override;
 	//! Get the english name of nomenclature item.
-	virtual QString getEnglishName(void) const Q_DECL_OVERRIDE;
+	QString getEnglishName(void) const override;
 
 	///////////////////////////////////////////////////////////////////////////
 	//! Translate feature name using the passed translator
@@ -181,9 +181,9 @@ public:
 	//!       *  +100. for circumpolar objects. Rise and set give lower culmination times.
 	//!       *  -100. for objects never rising. Rise and set give transit times.
 	//!       * -1000. is used as "invalid" value. The result should then not be used.
-	virtual Vec4d getRTSTime(const StelCore* core, const double altitude=0.) const Q_DECL_OVERRIDE;
+	Vec4d getRTSTime(const StelCore* core, const double altitude=0.) const override;
 
-	void draw(StelCore* core, StelPainter *painter);
+	void draw(StelCore* core, StelPainter *painter, const float fov) const;
 	NomenclatureItemType getNomenclatureType() const { return nType;}
 
 	static void setFlagLabels(bool b){ labelsFader = b; }
@@ -203,7 +203,7 @@ public:
 
 protected:
 	//! returns a type enum for a given 2-letter code
-	static NomenclatureItemType getNomenclatureItemType(const QString abbrev);
+	static NomenclatureItemType getNomenclatureItemType(const QString &abbrev);
 	//! Should be triggered once at start and then whenever program language setting changes.
 	static void createNameLists();
 
@@ -212,6 +212,7 @@ private:
 	mutable Vec3d XYZ;     // holds J2000 position in space (i.e. including planet position, offset from planetocenter)
 	mutable double jde;    // jde time of XYZ value
 	static Vec3f color;
+	static bool flagOutlineCraters; // draw craters and satellite features as ellipses?
 	static bool hideLocalNomenclature;
 	static bool showTerminatorZoneOnly;
 	static int terminatorMinAltitude;
@@ -219,14 +220,14 @@ private:
 	static bool showSpecialNomenclatureOnly;
 
 	// ratio of angular size of feature to the FOV
-	float getAngularDiameterRatio(const StelCore *core) const;
+	float getAngularDiameterRatio(const StelCore *core, const float fov) const;
 
 	static QString getNomenclatureTypeLatinString(NomenclatureItemType nType);
 	static QString getNomenclatureTypeString(NomenclatureItemType nType);
-	static QString getNomenclatureTypeDescription(NomenclatureItemType nType, QString englishName);
+	static QString getNomenclatureTypeDescription(NomenclatureItemType nType, const QString &englishName);
 	//! Returns the description of the feature coordinates where available, or pcoPlanetographicWest360.
 	//! The default value ensures valid central meridian data for the gas giants.
-	static PlanetCoordinateOrientation getPlanetCoordinateOrientation(QString planetName);
+	static PlanetCoordinateOrientation getPlanetCoordinateOrientation(const QString &planetName);
 	PlanetCoordinateOrientation getPlanetCoordinateOrientation() const;
 	//! return whether counting sense of the coordinates is positive towards the east
 	static bool isEastPositive(PlanetCoordinateOrientation pco);
@@ -247,13 +248,16 @@ private:
 
 	PlanetP planet;
 	int identificator;
-	QString englishName, context, nameI18n;
+	QString englishName, context, nameI18n, origin, originI18n;
 	NomenclatureItemType nType; // Type of nomenclature item
 	mutable double latitude;    // degrees
 	mutable double longitude;   // degrees. Declared mutable to allow change in otherwise const methods (for special points)
 	double size;                //  km
 
 	static LinearFader labelsFader;
+	// Flag to be set by our friend class NomenclatureMgr.
+	// Usually drawing avoids recomputation when time is frozen. However, changing location then needs a redraw. (GH#3706)
+	static bool forceItems;
 };
 
 #endif // NOMENCLATUREITEM_HPP

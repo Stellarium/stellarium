@@ -46,7 +46,7 @@ public:
 		setAutoDelete(false);
 	}
 
-	void run() Q_DECL_OVERRIDE
+	void run() override
 	{
 		//make sure this is really a separate thread (QtConcurrent does NOT guarantee that)
 		Q_ASSERT(parentThread!=QThread::currentThread());

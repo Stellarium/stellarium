@@ -34,14 +34,14 @@ class ConfigureScreenshotsDialog : public StelDialog
 
 public:
 	ConfigureScreenshotsDialog();
-	virtual ~ConfigureScreenshotsDialog() Q_DECL_OVERRIDE;
+	~ConfigureScreenshotsDialog() override;
 
 public slots:
-	virtual void retranslate() Q_DECL_OVERRIDE;
+	void retranslate() override;
 
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots.
-	virtual void createDialogContent() Q_DECL_OVERRIDE;
+	void createDialogContent() override;
 	Ui_configureScreenshotsDialogForm *ui;
 };
 

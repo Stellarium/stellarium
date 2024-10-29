@@ -8,6 +8,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/Stellarium/stellarium/badge.svg)](https://coveralls.io/github/Stellarium/stellarium)
 [![CodeFactor](https://www.codefactor.io/repository/github/stellarium/stellarium/badge)](https://www.codefactor.io/repository/github/stellarium/stellarium)
 [![DOI:10.1558/jsa.17822](http://img.shields.io/badge/DOI-10.1558/jsa.17822-blue.svg)](https://doi.org/10.1558/jsa.17822)
+[![DOI:10.5281/zenodo.8377210](http://img.shields.io/badge/DOI-10.5281/zenodo.8377210-blue.svg)](https://doi.org/10.5281/zenodo.8377210)
 
 Stellarium is a free open source planetarium for your computer. It shows a realistic sky
 in 3D, just like what you see with the naked eye, binoculars or a telescope.
@@ -16,7 +17,7 @@ If you are new to Stellarium, go to [www.stellarium.org](https://www.stellarium.
 
 ## Installation Instructions & Quick Start
 
-Please refer to the [User Guide, Getting Started section](https://github.com/Stellarium/stellarium/releases/download/v23.1/stellarium_user_guide-23.1-1.pdf).
+Please refer to the [User Guide, Getting Started section](https://github.com/Stellarium/stellarium/releases/download/v24.3/stellarium_user_guide-24.3-1.pdf).
 
 ## Get & build the code
 

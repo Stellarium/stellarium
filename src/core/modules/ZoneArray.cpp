@@ -95,10 +95,10 @@ ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap)
 	QFile* file = new QFile(catalogFilePath);
 	if (!file->open(QIODevice::ReadOnly))
 	{
-		qWarning() << "Error while loading " << QDir::toNativeSeparators(catalogFilePath) << ": failed to open file.";
+		qWarning().noquote() << "Error while loading" << QDir::toNativeSeparators(catalogFilePath) << ": failed to open file.";
 		return Q_NULLPTR;
 	}
-	dbStr = "Loading " + QDir::toNativeSeparators(catalogFilePath) + ": ";
+	dbStr = "Loading star catalog: " + QDir::toNativeSeparators(catalogFilePath) + " - ";
 	unsigned int magic,major,minor,type,level,mag_min,mag_range,mag_steps;
 	if (ReadInt(*file,magic) < 0 ||
 			ReadInt(*file,type) < 0 ||
@@ -119,17 +119,17 @@ ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap)
 		// ok, FILE_MAGIC_OTHER_ENDIAN, must swap
 		if (use_mmap)
 		{
-			dbStr += "warning - must convert catalogue ";
+			dbStr += "warning - must convert catalogue";
 #if (!defined(__GNUC__))
-			dbStr += "to native format ";
+			dbStr += "to native format";
 #endif
 			dbStr += "before mmap loading";
-			qWarning() << dbStr;
+			qWarning().noquote() << dbStr;
 			use_mmap = false;
-			qWarning() << "Revert to not using mmmap";
+			qWarning().noquote() << "Revert to not using mmmap";
 			//return 0;
 		}
-		dbStr += "byteswap ";
+		dbStr += "byteswap";
 		type = stel_bswap_32(type);
 		major = stel_bswap_32(major);
 		minor = stel_bswap_32(minor);
@@ -159,7 +159,7 @@ ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap)
 	else
 	{
 		dbStr += "error - not a catalogue file.";
-		qDebug() << dbStr;
+		qDebug().noquote() << dbStr;
 		return Q_NULLPTR;
 	}
 	ZoneArray *rval = Q_NULLPTR;
@@ -170,7 +170,7 @@ ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap)
 		case 0:
 			if (major > MAX_MAJOR_FILE_VERSION)
 			{
-				dbStr += "warning - unsupported version ";
+				dbStr += "warning - unsupported version";
 			}
 			else
 			{
@@ -180,7 +180,7 @@ ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap)
 		case 1:
 			if (major > MAX_MAJOR_FILE_VERSION)
 			{
-				dbStr += "warning - unsupported version ";
+				dbStr += "warning - unsupported version";
 			}
 			else
 			{
@@ -190,7 +190,7 @@ ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap)
 		case 2:
 			if (major > MAX_MAJOR_FILE_VERSION)
 			{
-				dbStr += "warning - unsupported version ";
+				dbStr += "warning - unsupported version";
 			}
 			else
 			{
@@ -198,18 +198,18 @@ ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap)
 			}
 			break;
 		default:
-			dbStr += "error - bad file type ";
+			dbStr += "error - bad file type";
 			break;
 	}
 	if (rval && rval->isInitialized())
 	{
-		dbStr += QString("%1").arg(rval->getNrOfStars());
-		qDebug() << dbStr;
+		dbStr += QString("%1 entries").arg(rval->getNrOfStars());
+		qDebug().noquote() << dbStr;
 	}
 	else
 	{
-		dbStr += " - initialization failed";
-		qDebug() << dbStr;
+		dbStr += "- initialization failed";
+		qDebug().noquote() << dbStr;
 		if (rval)
 		{
 			delete rval;

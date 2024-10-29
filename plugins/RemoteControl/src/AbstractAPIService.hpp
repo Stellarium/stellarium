@@ -33,19 +33,19 @@ class AbstractAPIService : public QObject, public RemoteControlServiceInterface
 	Q_INTERFACES(RemoteControlServiceInterface)
 public:
 	//! Only calls QObject constructor
-	AbstractAPIService(QObject* parent = Q_NULLPTR) : QObject(parent)
+	AbstractAPIService(QObject* parent = nullptr) : QObject(parent)
 	{
 	}
 
 	// Provides a default implementation which returns false.
-	virtual bool isThreadSafe() const Q_DECL_OVERRIDE;
+	bool isThreadSafe() const override;
 	//! Called in the main thread each frame. Default implementation does nothing.
 	//! Can be used for ongoing actions, for example movement control.
-	virtual void update(double deltaTime) Q_DECL_OVERRIDE;
+	void update(double deltaTime) override;
 	//! Provides a default implementation which returns an error message.
-	virtual void get(const QByteArray &operation, const APIParameters &parameters, APIServiceResponse& response) Q_DECL_OVERRIDE;
+	void get(const QByteArray &operation, const APIParameters &parameters, APIServiceResponse& response) override;
 	//! Provides a default implementation which returns an error message.
-	virtual void post(const QByteArray &operation, const APIParameters &parameters, const QByteArray& data, APIServiceResponse& response) Q_DECL_OVERRIDE;
+	void post(const QByteArray &operation, const APIParameters &parameters, const QByteArray& data, APIServiceResponse& response) override;
 
 protected:
 	//! This defines the connection type QMetaObject::invokeMethod has to use inside a service: either Qt::DirectConnection for main thread handling, or

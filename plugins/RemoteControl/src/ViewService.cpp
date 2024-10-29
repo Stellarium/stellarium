@@ -32,11 +32,11 @@
 #include <QJsonArray>
 #include <QJsonDocument>
 
-ViewService::ViewService(QObject *parent) : AbstractAPIService(parent)
+ViewService::ViewService(QObject *parent) : AbstractAPIService(parent),
+	core(StelApp::getInstance().getCore()),
+	lsMgr(GETSTELMODULE(LandscapeMgr)),
+	skyCulMgr(&StelApp::getInstance().getSkyCultureMgr())
 {
-	core = StelApp::getInstance().getCore();
-	lsMgr = GETSTELMODULE(LandscapeMgr);
-	skyCulMgr = &StelApp::getInstance().getSkyCultureMgr();
 }
 
 void ViewService::get(const QByteArray &operation, const APIParameters &parameters, APIServiceResponse &response)

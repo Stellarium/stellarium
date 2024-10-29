@@ -28,6 +28,7 @@
 // It seems that inclusion of some headers is actually bad for build time, these are commented away again. More teting or other compiler combinations may have slightly other results.
 
 // Base time was 284s from first test without PCH
+#include <execution> // must be included before Qt because some versions of libtbb use "emit" identifier for their needs
 #include "StelApp.hpp"
 #include<QDebug>
 #include "StelUtils.hpp"

@@ -1,24 +1,15 @@
-<h1>Greek (Almagest)</h1>
+<h1>古代ギリシャ (アルマゲスト)</h1>
 
-<p>This ancient Greek sky culture is compiled in a book that is today known by
-its Arabic title "Almagest".  This book was written in Roman time (under the
-reign of Roman emperor Hadrian) at Alexandria (Africa) in Greek language,
-with dates given in Egyptian month names and years counted after a
-Babylonian king, so it is clearly a multi-cultural compendium of
-knowledge. It is a compilation of astronomical knowledge of former
-astronomers including results from observations and mathematical
-astronomy. Pieced together by Claudius Ptolemy, using older, as well as his
-own, observations, it was written in Greek, published in the Second Century
-and remained the main astronomical work for the following 1500 years. It was
-originally written with the title <i>Mathematike Syntaxis</i>, in Ancient
-Greek.  The name <i>Almagest</i>, meaning &ldquo;The Largest [Book]&rdquo;,
-was developed from Arabian translations. To create this sky culture we used
-the English translation by Toomer (1984), reworked it in some details
-(e.g. using more literal translations from Greek instead of Latin terms that
-are common today) and we made use of computer readable tables prepared by
-Ernie Wright.</p>
+<p>この古代ギリシャの星の文化は、今日ではアラビア語のタイトル「アルマゲスト」(Almagest)
+として知られる本にまとめられています。この本はローマ時代（ローマ皇帝ハドリアヌスの治世下）にアレクサンドリア (アフリカ)
+でギリシャ語で書かれ、日付はエジプトの月名で示され、年はバビロニアの王に基づいて数えられています。したがって、これは明らかに多文化の知識の総集編です。これは観測結果や数学天文学など、従来の天文学者の天文学的知識をまとめたものです。クラウディウス・プトレマイオスが、古い観測結果と彼自身の観測結果を使用してまとめたもので、ギリシャ語で書かれ、2世紀に出版、その後の1500年間は主要な天文学作品であり続けました。この本はもともと古代ギリシャ語で「数学の構文」(<i>Mathematike
+Syntaxis</i>)
+というタイトルで書かれました。最大の[本]を意味する「<i>アルマゲスト</i>」という名前はアラビア語の翻訳から発展しました。この星の文化を作成するために、トゥーマー
+(Toomer、1984年) による英語の翻訳を使用し、いくつかの詳細は作り直しました
+(例えば今日一般的なラテン語の代わりにギリシャ語からの直訳を使用するなどしました)。アーニー・ライト (Ernie Wright)
+が作成したコンピューター用の可読表を利用しました。</p>
 
-<p>アルマゲストは「本」と呼ばれる13巻で構成されています。7番目と8番目の本にプトレマイオスは48の星座に合計1,022個の星をリストアップしました。(そのうち約5個は球状星団のような星状の天体です)。これは星座の位置の説明を含む星表で、例えば「星座の肘にある星、黄経、黄緯、等級」などが記載されています。プトレマイオスは歳差に関して黄道座標を使用しました。彼の時代の最初の1つとして、プトレマイオスは恒星の明るさの量的尺度である等級を表記しました。等級はおそらくヒッパルコスから採用されたのでしょうが、ヒッパルコスの星表が現存しないために確かではありません。最も明るい恒星を1等とし、目で見える最も暗い星を6等としました。</p>
+<p>アルマゲストは「ブック」と呼ばれる13巻で構成されています。7番目と8番目の本にプトレマイオスは48の星座に合計1,022個の星をリストアップしました。(そのうち約5個は球状星団のような星状の天体です)。これは星座の位置の説明を含む星表で、例えば「星座の肘にある星、黄経、黄緯、等級」などが記載されています。プトレマイオスは歳差に関して黄道座標を使用しました。彼の時代の最初の1つとして、プトレマイオスは恒星の明るさの量的尺度である等級を表記しました。等級はおそらくヒッパルコスから採用されたのでしょうが、ヒッパルコスの星表が現存しないために確かではありません。最も明るい恒星を1等とし、目で見える最も暗い星を6等としました。</p>
 
 <p>惑星の位置の計算にプトレマイオスは地球中心モデル(天動説、観測者は常に地球上に居るので可能です)を使用しました。これはアリスタルコスによる太陽中心モデル(地動説)は必要ないという科学的信念に貢献しました。ただし「アルマゲスト」の星表の場合にこれはまったく問題になりません。星表は常に天球に固定された点の一種の目録であり、プトレマイオスの星表作成の目的は、天球を作るためのリストを提供することです(アルム(Alm)VIII、3を参照)。つまり歳差を認識し、黄道座標を使用して将来のグローブメーカー(地球儀などを作る職人)の仕事を緩和したいと考えています。プトレマイオスの知る歳差はすべての星が黄道に平行に移動します。したがって、それぞれのグローブメーカーの元期の更新は、黄経値の単純な減算によって計算できます。</p>
 
@@ -26,20 +17,10 @@ Ernie Wright.</p>
 
 <h3>星名</h3>
 
-Out of more than 1,000 stars, Ptolemy mentions a proper name for only 15.
-The rest are identified by fairly long descriptions such as "The star on the
-end of the tail" for the Polaris. In order to avoid displaying such long
-strings across the screen in Stellarium, we invented short labels for all
-Almagest stars based on the constellation and the order in which they appear
-in the catalogue.  For example, Polaris is given a designation "UMi 1"
-because it is the first star in the constellation of Small Bear (UMi).  See
-the table below for the correspondence between Ptolemy constellations and
-IAU abbreviations.  In addition, where Ptolemy describes a star as lying
-outside of the figure, we use lowercase letters in the corresponding
-label. To see the long description for a given star, users should enable
-"Use additional names of stars" in the "View [F4]/Sky" settings and click on
-the star. The long description will then be displayed at the top of the
-screen.
+1,000を超える恒星のうち、プトレマイオスが固有名を挙げているのは15個だけです。残りは北極星が「尾の端にある星」など、かなり長い説明によって特定されています。ステラリウムの画面全体にこのような長い文字列が表示されるのを避けるために、私たちは星座とカタログに表示される順序に基づいて、すべてのアルマゲストの恒星に短いラベルを発明しました。例えば北極星にはこぐま座
+(UMi) の最初の星であるため「UMi 1」という名前が付けられています。プトレマイオス星座と
+IAU星座の略号の対応については以下の表を参照してください。さらに恒星が星図外にある、とプトレマイオスが説明した場合は対応するラベルには小文字を使用します。特定の恒星の詳しい説明を表示するには「表示」(
+[F4]キー)、「空」のタブ内の設定で「追加の星名を使用する」にチェックを入れ、恒星をクリックする必要があります。長い説明が画面の上部に表示されます。
 
 <h3>星座線</h3>
 
@@ -51,16 +32,13 @@ screen.
 
 <p>座標と名前に基づいて恒星を特定した後、アルマゲストに掲載された表の説明に従って星を再接続しました。</p>
 
-<p>The names of stars and names of deep sky objects rely on the Almagest only,
-e.g. Ptolemy uses the name
-&quot;&lambda;&alpha;&mu;&pi;&alpha;&delta;&#943;&alpha;&sigmaf; (The
-Torch-like)&quot; for Aldebaran in his other work, the <i>Tetrabiblos</i>,
-but this is not implemented in this sky culture because it doesn't show up
-in the Almagest.</p>
+<p>恒星、星雲・星団の名前はアルマゲストのみに使用しています。例えばプトレマイオスは他の書籍「<i>テトラビブロス</i>」
+ではアルデバランを「&lambda;&alpha;&mu;&pi;&alpha;&delta;&#943;&alpha;&sigmaf;」(たいまつのような、と言う意味)
+という名前を使用しています。しかしこの名前はアルマゲスト内には現れないため、この星の文化には実装されていません。</p>
 
 <p>次の表でギリシャ語の元の星座名とその英訳(第2列と3列)を示し、再構成における不確実性を第6列に示します。</p>
 
-<table class="nomenclature">
+<table>
 <tr valign="top">
 	<td><b>略号</b></td>
 	<td><b>元名(ギリシャ語)</b></td>
@@ -72,7 +50,7 @@ in the Almagest.</p>
 <tr valign="top">
 	<td><notr>UMi</notr></td>
 	<td><notr>&Mu;&iota;&kappa;&rho;&#942; &#702;&#714;&Alpha;&rho;&kappa;&tau;&omicron;&sigmaf;</notr></td>
-	<td>Small She-Bear</td>
+	<td>小さなメスグマ</td>
 	<td><notr>Ursa Minor</notr></td>
 	<td>IAU星座と同様</td>
 	<td></td>
@@ -80,7 +58,7 @@ in the Almagest.</p>
 <tr valign="top">
 	<td><notr>UMa</notr></td>
 	<td><notr>&Mu;&epsilon;&gamma;&alpha;&lambda;&#942; &#702;&#714;&Alpha;&rho;&kappa;&tau;&omicron;&sigmaf;</notr></td>
-	<td>Great She-Bear</td>
+	<td>大きなメスグマ</td>
 	<td><notr>Ursa Major</notr></td>
 	<td>IAU星座と同様</td>
 	<td></td>
@@ -88,7 +66,7 @@ in the Almagest.</p>
 <tr valign="top">
 	<td><notr>Dra</notr></td>
 	<td><notr>&Delta;&rho;&#940;&kappa;&omega;&nu;</notr></td>
-	<td>Dragon(竜)</td>
+	<td>竜</td>
 	<td><notr>Draco</notr></td>
 	<td>すべての三角形と正方形は椎骨や体の一部です。頭の線は舌になります</td>
 	<td></td>
@@ -96,7 +74,7 @@ in the Almagest.</p>
 	<tr valign="top">
 	<td><notr>Cep</notr></td>
 	<td><notr>&Kappa;&eta;&phi;&epsilon;&#973;&sigmaf;</notr></td>
-	<td>Kepheus(ケフェウス)</td>
+	<td>ケフェウス(Kepheus)</td>
 	<td><notr>Cepheus</notr></td>
 	<td>逆さまの王 </td>
 	<td>頭の3つの星はティアラです。アルマゲストでは&beta;星をベルトの下としていますが、ベルトの一部に見えます</td>
@@ -104,7 +82,7 @@ in the Almagest.</p>
 <tr valign="top">
 	<td><notr>Boo</notr></td>
 	<td><notr>&Beta;&omicron;&#974;&tau;&eta;&sigmaf;</notr></td>
-	<td>Ploughman(農夫)</td>
+	<td>農夫</td>
 	<td><notr>Bo&ouml;tes</notr></td>
 	<td>手に羊飼いの杖を持つ (&omega;星)</td>
 	<td>首の星として「HIP 72582」星を加えた</td>
@@ -112,7 +90,7 @@ in the Almagest.</p>
 <tr valign="top">
 	<td><notr>CrB</notr></td>
 	<td><notr>&Sigma;&tau;&#941;&phi;&alpha;&nu;&omicron;&sigmaf;</notr></td>
-	<td>Crown(王冠)</td>
+	<td>王冠</td>
 	<td><notr>Corona Borealis</notr></td>
 	<td>IAU星座と同様。文章で詳細な線は無い</td>
 	<td></td>
@@ -120,7 +98,7 @@ in the Almagest.</p>
 <tr valign="top">
 	<td><notr>Her</notr></td>
 	<td><notr>&#703;&Epsilon;&nu;&gamma;&#972;&nu;&alpha;&sigma;&iota;&nu;</notr></td>
-	<td>Kneeler(ひざまずく者)</td>
+	<td>ひざまずく者</td>
 	<td><notr>Hercules</notr></td>
 	<td>足の星の1つはうしかい座の杖の先端の星です</td>
 	<td>首の星として「HIP 82764」星を加えた</td>
@@ -128,7 +106,7 @@ in the Almagest.</p>
 <tr valign="top">
 	<td><notr>Lyr</notr></td>
 	<td><notr>&Lambda;&#973;&rho;&alpha;</notr></td>
-	<td>Lyre(竪琴)</td>
+	<td>竪琴</td>
 	<td><notr>Lyra</notr></td>
 	<td></td>
 	<td></td>
@@ -136,7 +114,7 @@ in the Almagest.</p>
 <tr valign="top">
 	<td><notr>Cyg</notr></td>
 	<td><notr>&#702;&#714;&Omicron;&rho;&nu;&iota;&sigmaf;</notr></td>
-	<td>Bird(鳥)</td>
+	<td>鳥</td>
 	<td><notr>Cygnus</notr></td>
 	<td>足のある白鳥</td>
 	<td>羽根の先端は尾に繋がる</td>
@@ -144,7 +122,7 @@ in the Almagest.</p>
 <tr valign="top">
 	<td><notr>Cas</notr></td>
 	<td><notr>&Kappa;&alpha;&sigma;&sigma;&iota;&#941;&pi;&epsilon;&iota;&alpha;</notr></td>
-	<td>Kassiepeia(カッシエペイア)</td>
+	<td>カッシエペイア(Kassiepeia)</td>
 	<td><notr>Cassiopeia</notr></td>
 	<td>玉座に座る女王</td>
 	<td>混乱を避けるために玉座は描かなかった</td>
@@ -152,7 +130,7 @@ in the Almagest.</p>
 <tr valign="top">
 	<td><notr>Per</notr></td>
 	<td><notr>&Pi;&epsilon;&rho;&sigma;&epsilon;&#973;&sigmaf;</notr></td>
-	<td>Perseus(ペルセウス)</td>
+	<td>ペルセウス</td>
 	<td><notr>Perseus</notr></td>
 	<td>NGC869とNGC884の二重星団は、その星団の中の星の一つを描画に使用した</td>
 	<td>ゴルゴンの頭は星が一つ追加され、より丸く見えるようにした</td>
@@ -160,7 +138,7 @@ in the Almagest.</p>
 <tr valign="top">
 	<td><notr>Aur</notr></td>
 	<td><notr>&#703;&Eta;&nu;&#943;&omicron;&chi;&omicron;&sigmaf;</notr></td>
-	<td>Charioteer(チャリオットを駆る人)</td>
+	<td>チャリオットを駆る人</td>
 	<td><notr>Auriga</notr></td>
 	<td>長い衣装を着る。衣装は肩と裾で留められる</td>
 	<td>ぎょしゃ座o星を首の星として加えた。ぎょしゃ座1番星を裾の星として加えた</td>
@@ -168,23 +146,23 @@ in the Almagest.</p>
 <tr valign="top">
 	<td><notr>Oph</notr></td>
 	<td><notr>&#702;&Omicron;&phi;&iota;&omicron;&#973;&chi;&omicron;&sigmaf;</notr></td>
-	<td>蛇を持つ者</td>
+	<td>ヘビを持つ者</td>
 	<td><notr>Ophiuchus</notr></td>
-	<td>手に蛇を持つ</td>
+	<td>手にヘビを持つ</td>
 	<td>首の星を加えた</td>
 </tr>
 <tr valign="top">
 	<td><notr>Ser</notr></td>
 	<td><notr>&#702;&#714;&Omicron;&phi;&iota;&sigmaf;</notr></td>
-	<td>Snake(蛇)</td>
+	<td>ヘビ</td>
 	<td><notr>Serpens</notr></td>
-	<td>蛇は頭と尾の2つの部分に分かれる。四角形は頭です</td>
+	<td>ヘビは(頭と尾の)2つの部分に分かれる。四角形は頭です</td>
 	<td></td>
 </tr>
 <tr valign="top">
 	<td><notr>Sge</notr></td>
 	<td><notr>&#702;&Omicron;&iota;&sigma;&tau;&#972;&sigmaf;</notr></td>
-	<td>Arrow(矢)</td>
+	<td>矢</td>
 	<td><notr>Sagitta</notr></td>
 	<td>IAU星座と同様。&eta;星は不明 </td>
 	<td></td>
@@ -192,7 +170,7 @@ in the Almagest.</p>
 <tr valign="top">
 	<td><notr>Aql</notr></td>
 	<td><notr>&#702;&Alpha;&epsilon;&tau;&#972;&sigmaf;</notr></td>
-	<td>Eagle(ワシ)</td>
+	<td>ワシ</td>
 	<td><notr>Aquila</notr></td>
 	<td>わし座&tau;星が頭、&beta;星が首、アルタイルは肩の間、&gamma;星と&mu;星が肩になる</td>
 	<td></td>
@@ -200,7 +178,7 @@ in the Almagest.</p>
 <tr valign="top">
 	<td><notr>Del</notr></td>
 	<td><notr>&Delta;&epsilon;&lambda;&phi;&#943;&sigmaf;</notr></td>
-	<td>Dolphin(イルカ)</td>
+	<td>イルカ</td>
 	<td><notr>Delphinus</notr></td>
 	<td></td>
 	<td>形を洗練した</td>
@@ -208,7 +186,7 @@ in the Almagest.</p>
 <tr valign="top">
 	<td><notr>Equ</notr></td>
 	<td><notr>&Pi;&rho;&omicron;&tau;&omicron;&mu;&#942;</notr></td>
-	<td>Bust [of a horse]([馬の]胸)</td>
+	<td>[馬の]胸</td>
 	<td><notr>Equuleus</notr></td>
 	<td></td>
 	<td></td>
@@ -216,7 +194,7 @@ in the Almagest.</p>
 <tr valign="top">
 	<td><notr>Peg</notr></td>
 	<td><notr>&#703;&#714;&Iota;&pi;&pi;&omicron;&sigmaf;</notr></td>
-	<td>Horse(馬)</td>
+	<td>馬</td>
 	<td><notr>Pegasus</notr></td>
 	<td>たてがみと片翼を持つ</td>
 	<td></td>
@@ -224,7 +202,7 @@ in the Almagest.</p>
 <tr valign="top">
 	<td><notr>And</notr></td>
 	<td><notr>&#702;&Alpha;&nu;&delta;&rho;&omicron;&mu;&#941;&delta;&alpha;</notr></td>
-	<td>Andromeda(アンドロメダ)</td>
+	<td>アンドロメダ</td>
 	<td class='latin'><notr>Andromeda</notr></td>
 	<td>ドレスとベルト</td>
 	<td></td>
@@ -256,7 +234,7 @@ in the Almagest.</p>
 <tr valign="top">
 	<td><notr>Gem</notr></td>
 	<td><notr>&Delta;&#943;&delta;&upsilon;&mu;&omicron;&iota;</notr></td>
-	<td>Twins(双子)</td>
+	<td>双子</td>
 	<td><notr>Gemini</notr></td>
 	<td>お互いの手が触れ合う部分で一つの星が共通</td>
 	<td></td>
@@ -264,7 +242,7 @@ in the Almagest.</p>
 <tr valign="top">
 	<td><notr>Cnc</notr></td>
 	<td><notr>&Kappa;&alpha;&rho;&kappa;&#943;&nu;&omicron;&sigmaf;</notr></td>
-	<td>Crab(蟹)</td>
+	<td>カニ</td>
 	<td><notr>Cancer</notr></td>
 	<td>四角い胴体</td>
 	<td></td>
@@ -280,7 +258,7 @@ in the Almagest.</p>
 <tr valign="top">
 	<td><notr>Vir</notr></td>
 	<td><notr>&Pi;&alpha;&rho;&theta;&#941;&nu;&omicron;&sigmaf;</notr></td>
-	<td>Maiden(乙女)</td>
+	<td>乙女</td>
 	<td><notr>Virgo</notr></td>
 	<td>頭が分かれていない</td>
 	<td>翼を描くために微かな星を加えた</td>
@@ -288,7 +266,7 @@ in the Almagest.</p>
 <tr valign="top">
 	<td><notr>Lib</notr></td>
 	<td><notr>&Chi;&eta;&lambda;&alpha;&#943;</notr></td>
-	<td>Claws [of the Scorpion] ([蠍の]はさみ)</td>
+	<td>[サソリの]はさみ</td>
 	<td><notr>Libra</notr></td>
 	<td>トレミーは常に&quot;ハサミ&quot;という用語を使用し、&quot;天秤&quot;という用語を決して使用しません。</td>
 	<td></td>
@@ -296,7 +274,7 @@ in the Almagest.</p>
 <tr valign="top">
 	<td><notr>Sco</notr></td>
 	<td><notr>&Sigma;&kappa;&omicron;&rho;&pi;&#943;&omicron;&sigmaf;</notr></td>
-	<td>Scorpion(サソリ)</td>
+	<td>サソリ</td>
 	<td><notr>Scorpius</notr></td>
 	<td></td>
 	<td>&nu;星と&rho;星で頭の周りに腕を追加した</td>
@@ -304,7 +282,7 @@ in the Almagest.</p>
 <tr valign="top">
 	<td><notr>Sgr</notr></td>
 	<td><notr>&Tau;&omicron;&xi;&#972;&tau;&eta;&sigmaf;</notr></td>
-	<td>Archer(射手)</td>
+	<td>射手</td>
 	<td><notr>Sagittarius</notr></td>
 	<td>弓を構えるケンタウルス:&bdquo;マント&ldquo;が後ろ</td>
 	<td>絵をわかりやすくするために、棒線画に多くのかすかな星を含めた。</td>
@@ -320,7 +298,7 @@ in the Almagest.</p>
 <tr valign="top">
 	<td><notr>Aqr</notr></td>
 	<td><notr>&#703;&Upsilon;&delta;&rho;&omicron;&chi;&#972;&omicron;&sigmaf;</notr></td>
-	<td>Water-Carrier(水を運ぶ人)</td>
+	<td>水を運ぶ人</td>
 	<td><notr>Aquarius</notr></td>
 	<td>水差しから水が出る</td>
 	<td></td>
@@ -328,7 +306,7 @@ in the Almagest.</p>
 <tr valign="top">
 	<td><notr>Psc</notr></td>
 	<td><notr>&#702;&Iota;&chi;&theta;&#973;&epsilon;&sigmaf;</notr></td>
-	<td>[2] Fish ([2匹の]魚)</td>
+	<td>[2匹の]魚</td>
 	<td><notr>Pisces</notr></td>
 	<td></td>
 	<td>北の魚:アルマゲストではうお座68番星(h星)、67番星(k星)、65番星(i星)で頭を描くが、我々はヒレとして描いた。うお座g星と&tau;星で口を描く必要があったから。尾びれの追加変更:&rho;星に広げた</td>
@@ -336,7 +314,7 @@ in the Almagest.</p>
 <tr valign="top">
 	<td><notr>Cet</notr></td>
 	<td><notr>&Kappa;&eta;&#771;&tau;&omicron;&sigmaf;</notr></td>
-	<td>Sea Monster(海獣)</td>
+	<td>海獣</td>
 	<td><notr>Cetus</notr></td>
 	<td></td>
 	<td>胴体は &tau;星を通らずに&upsilon;星を通る</td>
@@ -344,28 +322,25 @@ in the Almagest.</p>
 <tr valign="top">
 	<td><notr>Ori</notr></td>
 	<td><notr>&#702;&Omega;&rho;&#943;&omega;&nu;</notr></td>
-	<td>Orion(オリオン)</td>
+	<td>オリオン</td>
 	<td class='latin'><notr>Orion</notr></td>
 	<td></td>
-	<td>The &quot;head&quot; is labeled as &quot;nebulous&quot; which means Ptolemy
-interpreted &phi;<sub>1</sub>, &phi;<sub>2</sub>, and &lambda;, together
-with fainter stars between them as a &quot;cluster&quot; (or association
-which is more extended than the modern &quot;&lambda; Ori
-Assoc.&quot;). Head does not have direct connection to the shoulder stars
-anymore, but a connection to a star between the stars in the shoulders.</td>
+	<td>「頭」は「星雲」とラベル付けされており、プトレマイオスが&phi;<sub>1</sub>、&phi;<sub>2</sub>、&lambda;をそれらの間にあるより暗い星と一緒に「星団」として解釈したことを意味します
+(または現代の「オリオン座アソシエーション」より広範囲のアソシエーション)
+。頭は肩の星に直接つながらなくなりましたが、肩の星の間にある星につながりました。</td>
 </tr>
 <tr valign="top">
 	<td><notr>Eri</notr></td>
 	<td><notr>&Pi;&omicron;&tau;&alpha;&mu;&omicron;&#972;&sigmaf;</notr></td>
-	<td>River [nameless] ([名の無い]川)</td>
+	<td>[名の無い]川</td>
 	<td><notr>Eridanus</notr></td>
-	<td>Like IAU constellation, but shorter</td>
+	<td>IAU星座に似ているが、より短い</td>
 	<td></td>
 </tr>
 <tr valign="top">
 	<td><notr>Lep</notr></td>
 	<td><notr>&Lambda;&alpha;&gamma;&omega;&#771;&sigmaf;</notr></td>
-	<td>Hare(野ウサギ)</td>
+	<td>野ウサギ</td>
 	<td><notr>Lepus</notr></td>
 	<td></td>
 	<td>「耳の上の4つ星」を耳にした</td>
@@ -390,15 +365,15 @@ neck)」(誰のかは不明)と呼ばれています。私たちは小犬をこ�
 <tr valign="top">
 	<td><notr>Arg</notr></td>
 	<td><notr>&#702;&Alpha;&rho;&gamma;&omega;</notr></td>
-	<td>Ship &quot;Argo&quot; (アルゴ船)</td>
+	<td>アルゴ船</td>
 	<td><notr>Argo</notr></td>
-	<td>smaller than the sum of the IAU-constellations Pup+Pyx+Car+Vel</td>
+	<td>IAU星座4つ(とも座、らしんばん座、りゅうこつ座、ほ座)を合わせたものより小さい</td>
 	<td>多くの星が星座に統合されておらず、ボートのような形をしている。多くの描写(古代ファルネーゼの地球儀を含む)では、船の半分だけが描かれている。</td>
 </tr>
 <tr valign="top">
 	<td><notr>Hya</notr></td>
 	<td><notr>&#703;&#714;&Upsilon;&delta;&rho;&omicron;&sigmaf;</notr></td>
-	<td>Water Snake(水蛇)</td>
+	<td>ミズヘビ</td>
 	<td><notr>Hydra</notr></td>
 	<td>IAU星座と同様</td>
 	<td></td>
@@ -406,7 +381,7 @@ neck)」(誰のかは不明)と呼ばれています。私たちは小犬をこ�
 <tr valign="top">
 	<td><notr>Crt</notr></td>
 	<td><notr>&Kappa;&rho;&alpha;&tau;&#768;&eta;&rho;</notr></td>
-	<td>Krater (vessel) (クラテール(容器))</td>
+	<td>クラテール(容器)</td>
 	<td><notr>Crater</notr></td>
 	<td></td>
 	<td>クラーテル(Krater)はギリシャのワインを混ぜる特別な容器で、アンフォラ(古代ギリシャの壺の一種)や花瓶のように見えます(<a
@@ -415,7 +390,7 @@ href="https://en.wikipedia.org/wiki/Krater">https://en.wikipedia.org/wiki/Krater
 <tr valign="top">
 	<td><notr>Crv</notr></td>
 	<td><notr>&Kappa;&oacute;&rho;&alpha;&xi;</notr></td>
-	<td>Raven(ワタリガラス、大型カラス)</td>
+	<td>ワタリガラス</td>
 	<td><notr>Corvus</notr></td>
 	<td>IAU星座と同様</td>
 	<td></td>
@@ -423,7 +398,7 @@ href="https://en.wikipedia.org/wiki/Krater">https://en.wikipedia.org/wiki/Krater
 <tr valign="top">
 	<td><notr>Cen</notr></td>
 	<td><notr>&Kappa;&#941;&nu;&tau;&alpha;&upsilon;&rho;&omicron;&sigmaf;</notr></td>
-	<td>Kentauros(ケンタウロス)</td>
+	<td>ケンタウロス(Kentauros)</td>
 	<td><notr>Centaurus</notr></td>
 	<td></td>
 	<td>記述との相違点:ケンタウスル座&omega;(星団)に代わってHIP
@@ -440,7 +415,7 @@ href="https://en.wikipedia.org/wiki/Krater">https://en.wikipedia.org/wiki/Krater
 <tr valign="top">
 	<td><notr>Ara</notr></td>
 	<td><notr>&Theta;&upsilon;&mu;&iota;&alpha;&tau;&#942;&rho;&iota;&omicron;&nu;</notr></td>
-	<td>Altar(祭壇)</td>
+	<td>祭壇</td>
 	<td><notr>Ara</notr></td>
 	<td>IAU星座と同様</td>
 	<td></td>
@@ -448,7 +423,7 @@ href="https://en.wikipedia.org/wiki/Krater">https://en.wikipedia.org/wiki/Krater
 <tr valign="top">
 	<td><notr>CrA</notr></td>
 	<td><notr>&Sigma;&tau;&#941;&phi;&alpha;&nu;&omicron;&sigmaf; &Nu;&#972;&tau;&iota;&omicron;&sigmaf;</notr></td>
-	<td>Southern Crown(南の王冠)</td>
+	<td>南の王冠</td>
 	<td><notr>Corona Australis</notr></td>
 	<td>IAU星座と同様;アルマゲストでBSC番号のみを取得した星の不確実性のみ。なぜならこれらはステラリウムで明確に識別できないため</td>
 	<td></td>
@@ -456,7 +431,7 @@ href="https://en.wikipedia.org/wiki/Krater">https://en.wikipedia.org/wiki/Krater
 <tr valign="top">
 	<td><notr>PsA</notr></td>
 	<td><notr>&Nu;&#972;&tau;&iota;&omicron;&sigmaf; &#702;&Iota;&chi;&theta;&#973;&sigmaf;</notr></td>
-	<td>Southern Fish(南の魚)</td>
+	<td>南の魚</td>
 	<td><notr>Piscis Austrinus</notr></td>
 	<td>魚は仰向けに寝ている</td>
 	<td>尾を描くためにいくつかの星を追加した(&beta;星は尾の先になるはずですが、根元として使いました)</td>
@@ -464,12 +439,12 @@ href="https://en.wikipedia.org/wiki/Krater">https://en.wikipedia.org/wiki/Krater
 </table>
 
 <h2>フェアユース</h2>
-<p>This sky culture originates from a student's year of research. We provide
-this for free but authors of contributions certainly deserve to be cited
-according to the common rules. Thank you!</p>
+<p>この星の文化は、ある学生の 1
+年間の研究から生まれました。私たちはこれを無料で提供していますが、寄稿者の著者は確かに共通ルールに従って引用されるに値します。サンキュー！</p>
 
 <h2>謝辞</h2>
-<p>著者は英語の校正と興味深い議論をしてくれたPatrick GleasonとGeorg Zottiに感謝します。</p>
+<p>著者は英語の校正と興味深い議論をしてくれたパトリック・グリーソン(Patrick Gleason) とゲオルグ・ゾッティ (Georg Zotti)
+に感謝します。</p>
 
 <h2>著者</h2>
 <p>この星の文化は以下の人達によりコンパイルされ、ステラリウムに追加された。アリナ・シュミット(Alina Schmidt)、リー・ヤブシンスキー(Lea

@@ -28,7 +28,6 @@
 
 #include "StelObject.hpp"
 #include "StelTextureTypes.hpp"
-#include "StelFader.hpp"
 #include "StelTranslator.hpp"
 
 //! @ingroup exoplanets
@@ -45,7 +44,7 @@ typedef struct
 	double angleDistance;			//! Exoplanet angle distance
 	int discovered;				//! Exoplanet discovered year
 	QString pclass;				//! Exoplanet classification from host star spectral type (F, G, K, M), habitable zone (hot, warm, cold) and size (miniterran, subterran, terran, superterran, jovian, neptunian)
-	int EqTemp;				//! Exoplanet equilibrium temperature in kelvins (K) assuming a 0.3 bond albedo (Earth = 255 K).
+	int SurfTemp;				//! Exoplanet surface temperature in kelvins (K) assuming a 0.3 bond albedo (Earth = 255 K).
 	int flux;				//! Average stellar flux of the planet in Earth fluxes (Earth = 1.0 SE).
 	int ESI;				//! Exoplanet Earth Similarity Index
 	QString detectionMethod;		//! Method of detection of exoplanet
@@ -69,39 +68,39 @@ public:
 
 	//! @param id The official designation for a exoplanet, e.g. "Kepler-10 b"
 	Exoplanet(const QVariantMap& map);
-	~Exoplanet() Q_DECL_OVERRIDE;
+	~Exoplanet() override;
 
 	//! Get a QVariantMap which describes the exoplanet. Could be used to
 	//! create a duplicate.
 	QVariantMap getMap(void) const;
 
 	//! Get the type of object
-	virtual QString getType(void) const Q_DECL_OVERRIDE
+	QString getType(void) const override
 	{
 		return EXOPLANET_TYPE;
 	}
 
 	//! Get the type of object
-	virtual QString getObjectType(void) const Q_DECL_OVERRIDE
+	QString getObjectType(void) const override
 	{
 		return N_("planetary system");
 	}
-	virtual QString getObjectTypeI18n(void) const Q_DECL_OVERRIDE
+	QString getObjectTypeI18n(void) const override
 	{
 		return q_(getObjectType());
 	}
 
-	virtual QString getID(void) const Q_DECL_OVERRIDE
+	QString getID(void) const override
 	{
 		return getDesignation();
 	}
 
-	virtual float getSelectPriority(const StelCore* core) const Q_DECL_OVERRIDE;
+	float getSelectPriority(const StelCore* core) const override;
 
 	//! Get an HTML string to describe the object
 	//! @param core A pointer to the core
 	//! @flags a set of flags with information types to include.
-	virtual QString getInfoString(const StelCore* core, const InfoStringGroup& flags) const Q_DECL_OVERRIDE;
+	QString getInfoString(const StelCore* core, const InfoStringGroup& flags) const override;
 	//! Return a map like StelObject, but with a few extra tags also available in getMap().
 	//! - distance = distance in pc
 	//! - stype = Spectral type of star
@@ -110,15 +109,15 @@ public:
 	//! - sradius = Radius of star in Rsun
 	//! - effectiveTemp = Effective temperature of star in K
 	//! - hasHabitablePlanets (true/false)
-	virtual QVariantMap getInfoMap(const StelCore *core) const Q_DECL_OVERRIDE;
-	virtual Vec3f getInfoColor(void) const Q_DECL_OVERRIDE;
-	virtual Vec3d getJ2000EquatorialPos(const StelCore* core) const Q_DECL_OVERRIDE;
+	QVariantMap getInfoMap(const StelCore *core) const override;
+	Vec3f getInfoColor(void) const override;
+	Vec3d getJ2000EquatorialPos(const StelCore* core) const override;
 	//! Get the visual magnitude
-	virtual float getVMagnitude(const StelCore* core) const Q_DECL_OVERRIDE;
+	float getVMagnitude(const StelCore* core) const override;
 	//! Get the localized name of host star
-	virtual QString getNameI18n(void) const Q_DECL_OVERRIDE;
+	QString getNameI18n(void) const override;
 	//! Get the english name
-	virtual QString getEnglishName(void) const Q_DECL_OVERRIDE;
+	QString getEnglishName(void) const override;
 
 	bool isVMagnitudeDefined() const;
 
@@ -130,8 +129,6 @@ public:
 
 	//! @returns whether system has been discovered by the current year.
 	bool isDiscovered(const StelCore* core);
-
-	void update(double deltaTime);
 
 	int getCountExoplanets(void) const
 	{
@@ -162,7 +159,7 @@ public:
 	}
 
 private:
-	QString getPlanetaryClassI18n(QString ptype) const;
+	QString getPlanetaryClassI18n(const QString &ptype) const;
 
 	bool initialized;
 
@@ -177,6 +174,8 @@ private:
 	static bool showDesignations;
 	static bool showNumbers;
 	static int temperatureScaleID; //!< Magic number. 0: Kelvin; 1: Celsius; 2: Fahrenheit
+
+	static bool syncShowLabels;
 
 	void draw(StelCore* core, StelPainter *painter);
 
@@ -209,8 +208,6 @@ private:
 	QList<double> eccentricityList, semiAxisList, massList, radiusList, periodList, angleDistanceList,
 		      effectiveTempHostStarList, yearDiscoveryList, metallicityHostStarList, vMagHostStarList,
 		      raHostStarList, decHostStarList, distanceHostStarList, massHostStarList, radiusHostStarList;
-
-	LinearFader labelsFader;
 };
 
 #endif // EXOPLANET_HPP

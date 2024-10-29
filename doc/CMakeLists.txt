@@ -22,11 +22,20 @@ IF(UNIX AND NOT WIN32 AND NOT APPLE)
           DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/stellarium.1
      )
 
-     IF(${CMAKE_SYSTEM_NAME} MATCHES "(DragonFly|FreeBSD|NetBSD|OpenBSD)" AND NOT ${CMAKE_SYSTEM_NAME} MATCHES "kFreeBSD")
-          INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/stellarium.1 DESTINATION man/man1)
-     ELSE(${CMAKE_SYSTEM_NAME} MATCHES "(DragonFly|FreeBSD|NetBSD|OpenBSD)" AND NOT ${CMAKE_SYSTEM_NAME} MATCHES "kFreeBSD")
-          INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/stellarium.1 DESTINATION share/man/man1)
-     ENDIF(${CMAKE_SYSTEM_NAME} MATCHES "(DragonFly|FreeBSD|NetBSD|OpenBSD)" AND NOT ${CMAKE_SYSTEM_NAME} MATCHES "kFreeBSD")
-ENDIF(UNIX AND NOT WIN32 AND NOT APPLE)
+     # default directory for manual page
+     IF(${CMAKE_SYSTEM_NAME} MATCHES "(DragonFly|NetBSD|OpenBSD)")
+          SET(STELLARIUM_MANDIR "man")
+     ELSE()
+          SET(STELLARIUM_MANDIR "share/man")
+     ENDIF()
+
+     IF(CMAKE_INSTALL_MANDIR)
+          # use custom directory for manual page
+          INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/stellarium.1 DESTINATION ${CMAKE_INSTALL_MANDIR}/man1)
+     ELSE()
+          # use default directory for manual page
+          INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/stellarium.1 DESTINATION ${STELLARIUM_MANDIR}/man1)
+     ENDIF()
+ENDIF()
 
 

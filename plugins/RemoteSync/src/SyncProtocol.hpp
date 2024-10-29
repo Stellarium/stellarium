@@ -20,10 +20,13 @@
 #ifndef SYNCPROTOCOL_HPP
 #define SYNCPROTOCOL_HPP
 
+#include <QLoggingCategory>
 #include <QByteArray>
 #include <QDataStream>
 #include <QAbstractSocket>
 #include <QUuid>
+
+Q_DECLARE_LOGGING_CATEGORY(syncProtocol)
 
 //! Contains sync protocol data definitions shared between client and server
 namespace SyncProtocol
@@ -59,7 +62,7 @@ const qint64 SYNC_MAX_MESSAGE_SIZE = SYNC_HEADER_SIZE + SYNC_MAX_PAYLOAD_SIZE;
 //! The classes handling these messages are defined in SyncMessages.hpp
 enum SyncMessageType
 {
-	ERROR, //sent to the other party on protocol/auth error with a message, connection will be dropped afterwards
+	SYNC_ERROR, //sent to the other party on protocol/auth error with a message, connection will be dropped afterwards
 	SERVER_CHALLENGE, //sent as a challenge to the client on establishment of connection
 	CLIENT_CHALLENGE_RESPONSE, //sent as a reply to the challenge
 	SERVER_CHALLENGERESPONSEVALID, //sent from the server to the client after valid client hello was received.
@@ -71,54 +74,10 @@ enum SyncMessageType
 	SELECTION, //current selection changed
 	STELPROPERTY, //stelproperty updates
 	VIEW, //view change
-	FOV, //fov change
 
-	MSGTYPE_MAX = FOV,
+	MSGTYPE_MAX = VIEW,
 	MSGTYPE_SIZE = MSGTYPE_MAX+1
 };
-
-inline QDebug& operator<<(QDebug& deb, SyncMessageType msg)
-{
-	switch (msg) {
-		case SyncProtocol::ERROR:
-			deb<<"ERROR";
-			break;
-		case SyncProtocol::SERVER_CHALLENGE:
-			deb<<"SERVER_CHALLENGE";
-			break;
-		case SyncProtocol::CLIENT_CHALLENGE_RESPONSE:
-			deb<<"CLIENT_CHALLENGE_RESPONSE";
-			break;
-		case SyncProtocol::SERVER_CHALLENGERESPONSEVALID:
-			deb<<"SERVER_CHALLENGERESPONSEVALID";
-			break;
-		case SyncProtocol::TIME:
-			deb<<"TIME";
-			break;
-		case SyncProtocol::LOCATION:
-			deb<<"LOCATION";
-			break;
-		case SyncProtocol::SELECTION:
-			deb<<"SELECTION";
-			break;
-		case SyncProtocol::STELPROPERTY:
-			deb<<"STELPROPERTY";
-			break;
-		case SyncProtocol::VIEW:
-			deb<<"VIEW";
-			break;
-		case SyncProtocol::FOV:
-			deb<<"FOV";
-			break;
-		case SyncProtocol::ALIVE:
-			deb<<"ALIVE";
-			break;
-		default:
-			deb<<"UNKNOWN("<<int(msg)<<')';
-			break;
-	}
-	return deb;
-}
 
 //! Base interface for the messages themselves, allowing to serialize/deserialize them
 class SyncMessage
@@ -142,17 +101,9 @@ public:
 
 	//! Subclasses can override this to provide proper debug output.
 	//! The default just prints the message type.
-	virtual QDebug debugOutput(QDebug dbg) const
-	{
-		return dbg;
-	}
-
-	friend QDebug operator<<(QDebug dbg, const SyncMessage& msg)
-	{
-		dbg = dbg<<msg.getMessageType()<<'[';
-		dbg = msg.debugOutput(dbg);
-		return dbg<<']';
-	}
+	virtual QString toString() const;
+	//! Print enum name for SyncMessageType type.
+	static QString toString(SyncMessageType type);
 
 protected:
 	static void writeString(QDataStream& stream, const QString& str);
@@ -168,10 +119,8 @@ class SyncRemotePeer : public QObject
 {
 	Q_OBJECT
 public:
-	SyncRemotePeer(QAbstractSocket* socket, bool isServer, const QVector<SyncMessageHandler*>& handlerList);
-	~SyncRemotePeer() Q_DECL_OVERRIDE;
-
-
+	SyncRemotePeer(QAbstractSocket* socket, bool isServer, const QHash<SyncProtocol::SyncMessageType, SyncMessageHandler*> &handlerHash);
+	~SyncRemotePeer() override;
 
 	//! Sends a message to this peer
 	void writeMessage(const SyncProtocol::SyncMessage& msg);
@@ -180,9 +129,10 @@ public:
 	//! Can be used to write an error message to the peer and drop the connection
 	void writeError(const QString& err);
 
-	//! Log a message for this peer
-	void peerLog(const QString& msg) const;
-	QDebug peerLog() const;
+	//! Log a message for this peer via qCDebug or the respective other messages
+	//! type={QtDebugMsg|QtInfoMsg|QtWarningMsg|QtCriticalMsg|QtFatalMsg}
+	//! If in doubt, use QtDebugMsg
+	void peerLog(const QtMsgType type, const QString& msg) const;
 
 	bool isAuthenticated() const { return authenticated; }
 	QUuid getID() const { return id; }
@@ -214,7 +164,8 @@ private:
 	SyncProtocol::SyncHeader msgHeader; //the last message header read/currently being processed
 	qint64 lastReceiveTime; // The time the last data of this peer was received
 	qint64 lastSendTime; //The time the last data was written to this peer
-	QVector<SyncMessageHandler*> handlerList;
+	QHash<SyncProtocol::SyncMessageType, SyncMessageHandler*> handlerHash;
+
 	QByteArray msgWriteBuffer; //Byte array used to construct messages before writing them
 
 	friend class ServerAuthHandler;
@@ -239,7 +190,7 @@ public:
 class DummyMessageHandler : public SyncMessageHandler
 {
 public:
-	virtual bool handleMessage(QDataStream &stream, SyncProtocol::tPayloadSize dataSize, SyncRemotePeer &peer) Q_DECL_OVERRIDE
+	bool handleMessage(QDataStream &stream, SyncProtocol::tPayloadSize dataSize, SyncRemotePeer &peer) override
 	{
 		Q_UNUSED(peer)
 		stream.skipRawData(dataSize);

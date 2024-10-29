@@ -65,8 +65,8 @@ void SlewDialog::createDialogContent()
 	
 	//Inherited connect
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
-	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
-	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
+	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
+	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	connect(ui->radioButtonHMS, SIGNAL(toggled(bool)), this, SLOT(setFormatHMS(bool)));
 	connect(ui->radioButtonDMS, SIGNAL(toggled(bool)), this, SLOT(setFormatDMS(bool)));
@@ -366,6 +366,8 @@ void SlewDialog::onCurrentTelescopeChanged()
 	if (!telescope)
 		return;
 
+	ui->pushButtonSync->setEnabled(telescope->isTelescopeSyncSupported());
+	ui->pushButtonAbort->setEnabled(telescope->isAbortSlewSupported());
 	auto controlWidget = telescope->createControlWidget(telescope);
 	if (!controlWidget)
 		return;

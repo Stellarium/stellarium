@@ -20,10 +20,24 @@
 #define _OCULUS_HPP_
 
 #include "StelModule.hpp"
-#include "StelOpenGL.hpp"
-#include "OVR_CAPI_GL.h"
+#include "OVR_CAPI.h"
 
 #include <QOpenGLFunctions>
+
+
+//! @class Oculus
+//! This StelModule derivative provides a simple VR view in Oculus DK2 (deprecated), Oculus Rift and Meta Quest 2 headsets.
+//! There is no interaction apart from viewing. The view is mirrored to the regular PC screen,
+//! and some tutor is required to operate the Stellarium menu.
+//!
+//! The view is not really stereoscopic. The Scenery3D plugin cannot be used.
+//!
+//! To build, you need to install the Oculus SDK and add the path for cmake.
+//! The easiest is to run cmake once and fill in the OCULUS_SDK_PATH in CMakeCache
+//! Last tested with ovr_sdk_win_32.0.0
+//!
+//! Much could be done to improve this: Some menu, gesture interaction, info panel to describe selected objects etc.
+//!
 
 class Oculus : public StelModule, protected QOpenGLFunctions
 {
@@ -31,15 +45,15 @@ class Oculus : public StelModule, protected QOpenGLFunctions
 
 public:
 	Oculus();
-	virtual ~Oculus();
+	~Oculus() override;
 
 	// Methods defined in the StelModule class
-	virtual void init() Q_DECL_OVERRIDE;
-	virtual void deinit() Q_DECL_OVERRIDE;
-	// virtual void draw(StelCore* core) Q_DECL_OVERRIDE;
-	virtual void update(double deltaTime) Q_DECL_OVERRIDE;
+	void init() override;
+	void deinit() override;
+	//void draw(StelCore* core) override;
+	void update(double deltaTime) override;
 	// Make sure we get called after everything else.
-	virtual double getCallOrder(StelModuleActionName actionName) const Q_DECL_OVERRIDE {Q_UNUSED(actionName); return 100;}
+	double getCallOrder(StelModuleActionName actionName) const override {Q_UNUSED(actionName); return 100;}
 public slots:
 	void recenter();
 private:

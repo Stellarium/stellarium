@@ -219,6 +219,15 @@ define(["jquery", "api/remotecontrol", "api/search", "./combobox"], function($, 
 			}
 		});
 
+                $("#srch_button button").click(function(evt) {
+			var e = $srch_list_objectlist[0];
+			if (e.selectedIndex >= 0) {
+				var loc = e.options[e.selectedIndex].text;
+                    		console.log("selecting " + loc);
+				selectObjectByName(loc);
+			}
+		});
+
 		$srch_tabs.tabs({
 			heightStyle: "content"
 		});

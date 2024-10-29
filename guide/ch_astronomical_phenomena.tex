@@ -672,7 +672,7 @@ century.\footnote{The first discovered asteroid, (1) Ceres, was in
 pass by the larger planets which exert gravitational forces, so that
 the orbits of the minor bodies are not stable and cannot be computed
 for long periods. The positions are computed by using
-\indexterm{osculating orbital elements}, which describe the motions on
+\indexterm[orbital elements, osculating]{osculating orbital elements}, which describe the motions on
 instantaneous \indexterm{Kepler orbits}\footnote{The mathematician and
   astronomer \name[Johannes]{Kepler} (1571--1630) discovered that
   planets do not move on circles (which had been postulated since
@@ -680,7 +680,8 @@ instantaneous \indexterm{Kepler orbits}\footnote{The mathematician and
   or even hyperbolae. The latter two can be observed for far-out
   comets and recently even interstellar objects passing the Sun.}. If
 you want to compute positions of these objects with Stellarium, you
-need to have valid (current) \indexterm{orbital elements}. See
+need to have valid (current) \indexterm[orbital elements, osculating]{orbital elements}. See
+Solar System Editor plugin (section~\ref{sec:plugins:SolarSystemEditor}) and 
 Appendix~\ref{sec:ssystem.ini:minor} for more details.
 
 \subsection{Asteroids}
@@ -960,7 +961,8 @@ it to appear just a bit smaller than the Sun.
 
 There are therefore three types of solar eclipses:
 \begin{description}
-\item[Partial] The Moon only covers part of the Sun's surface.
+\item[Partial] The Moon only covers part of the Sun's surface which, 
+for higher eclipse magnitudes, appears as crescent.\nocite{Meeus:Morsels4}%Chapt.15. 
 \item[Total] The Moon completely obscures the Sun's surface.
 \item[Annular] The Moon is at or close to apogee (furthest from Earth in its
 elliptic orbit) and its disc is too small to completely cover the Sun.
@@ -991,10 +993,10 @@ Moon's surface as observed from Earth is close to zero. Only as more
 of the Solar disk is occulted by Earth, this spot on the Lunar surface
 will receive less sunlight and will appear darker when observed from
 Earth. A rule of thumb says that 70\% of the Moon must enter the
-Earth's penumbra before a light defect can be noted by attentive human
+Earth's \indexterm{penumbra} (partial shadow) before a light defect can be noted by attentive human
 observers. 
 
-The Earth's deep shadow is then much darker. As soon as an observer on
+The Earth's \indexterm{umbra} (deep shadow) is then much darker. As soon as an observer on
 the Lunar edge experiences a Total Solar eclipse, observers on Earth
 see the begin of the partial eclipse.
 
@@ -1198,7 +1200,7 @@ the star is on the horizon, it has to pass about 40 times longer
 through the atmosphere: 40 air masses (Fig.~\ref{fig:Extinction}). The
 number of air masses increases fast in low altitudes, this is why we
 see so few stars along the horizon. Usually blue light is extinguished
-more, this is why the sun and moon (and brigher stars) appear reddish
+more, this is why the sun and moon (and brighter stars) appear reddish
 on the horizon.
 
 Stellarium can simulate extinction, and you can set the opacity of

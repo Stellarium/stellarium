@@ -1,5 +1,16 @@
 {
     "satellites": {
+        "1002": {
+            "name": "LES-1",
+            "source": "https://db.satnogs.org/satellite/AMOM-6643-5608-9156-4431#transmitters",
+            "comms": [
+            {
+                "description": "downlink",
+                "frequency": 236.997,
+                "modulation": "USB"
+            }
+            ]
+        },
         "1291": {
             "name": "SOLRAD 7B",
             "source": "https://r4uab.ru/frequency/; https://www.zarya.info/Frequencies/FrequenciesAll.php",
@@ -101,6 +112,22 @@
             }
             ]
         },
+        "15427": {
+            "name": "NOAA 9",
+            "source": "https://db.satnogs.org/satellite/RQTU-0962-4589-7454-8433#transmitters",
+            "comms": [
+            {
+                "description": "meteorological",
+                "frequency": 1707.000,
+                "modulation": "HRPT"                
+            },
+            {
+                "description": "beacon",
+                "frequency": 136.770,
+                "modulation": "BPSK"
+            }
+            ]
+        },
         "15595": {
             "name": "GEOSAT",
             "source": "https://www.ne.jp/asahi/hamradio/je9pel/satslist.htm",
@@ -141,12 +168,12 @@
             {
                 "description": "downlink",
                 "frequency": 436.795,
-                "modulation": "1200bps AFSK FM"
+                "modulation": "1k2 AFSK FM"
             },
             {
                 "description": "uplink",
                 "frequency": 145.850,
-                "modulation": "1200bps AFSK FM"
+                "modulation": "1k2 AFSK FM"
             }
             ]
         },
@@ -240,22 +267,22 @@
             {
                 "description": "4XTECH-11 12 downlink",
                 "frequency": 435.225,
-                "modulation": "9600bps FSK"
+                "modulation": "9k6 FSK"
             },
             {
                 "description": "4XTECH-11 12 downlink",
                 "frequency": 435.325,
-                "modulation": "9600bps FSK"
+                "modulation": "9k6 FSK"
             },
             {
                 "description": "4XTECH-11 12 uplink",
                 "frequency": 145.850,
-                "modulation": "9600bps FSK"
+                "modulation": "9k6 FSK"
             },
             {
                 "description": "4XTECH-11 12 uplink",
                 "frequency": 145.930,
-                "modulation": "9600bps FSK"
+                "modulation": "9k6 FSK"
             }
             ]
         },
@@ -266,7 +293,7 @@
             {
                 "description": "RS0ISS uplink & downlink",
                 "frequency": 145.825,
-                "modulation": "1200bps AFSK"
+                "modulation": "1k2 AFSK"
             },
             {
                 "description": "ARISS uplink",
@@ -376,7 +403,18 @@
             {
                 "description": "(A) W3ADO-1 uplink & downlink",
                 "frequency": 145.827,
-                "modulation": "1200bps AFSK"
+                "modulation": "1k2 AFSK"
+            }
+        ]
+        },
+        "26958": {
+            "name": "PROBA-1",
+            "source": "https://db.satnogs.org/satellite/PESU-6606-3114-9520-8906#transmitters",
+            "comms": [
+            {
+                "description": "meteorological mode S Dumps",
+                "frequency": 2235.000,
+                "modulation": "BPSK"
             }
         ]
         },
@@ -387,6 +425,37 @@
             {
                 "description": "downlink",
                 "frequency": 8160.0
+            }
+            ]
+        },
+        "27431": {
+            "name": "FENGYUN-1D",
+            "source": "https://db.satnogs.org/satellite/HXCQ-2150-9044-4954-9390#transmitters",
+            "comms": [
+            {
+                "description": "downlink",
+                "frequency": 1700.500,
+                "modulation": "HRPT"
+            },
+            {
+                "description": "downlink",
+                "frequency": 1700.500,
+                "modulation": "BPSK"
+            },
+            {
+                "description": "meteorological mode L",
+                "frequency": 2201.050,
+                "modulation": "FM"
+            },
+            {
+                "description": "mode U",
+                "frequency": 480.019,
+                "modulation": "CW"
+            },
+            {
+                "description": "mode V",
+                "frequency": 180.007,
+                "modulation": "USB"
             }
             ]
         },
@@ -451,12 +520,12 @@
             {
                 "description": "JQ1YCY downlink",
                 "frequency": 437.470,
-                "modulation": "1200bps AFSK CW"
+                "modulation": "1k2 AFSK CW"
             },
             {
                 "description": "JQ1YCY beacon",
                 "frequency": 436.838,
-                "modulation": "1200bps AFSK CW"
+                "modulation": "1k2 AFSK CW"
             }
             ]
         },
@@ -467,12 +536,12 @@
             {
                 "description": "JQ1YCW downlink",
                 "frequency": 437.490,
-                "modulation": "1200bps AFSK CW"
+                "modulation": "1k2 AFSK CW"
             },
             {
                 "description": "JQ1YCW beacon",
                 "frequency": 436.848,
-                "modulation": "1200bps AFSK CW"
+                "modulation": "1k2 AFSK CW"
             }
             ]
         },
@@ -529,12 +598,12 @@
             {
                 "description": "JQ1YGW downlink",
                 "frequency": 437.345,
-                "modulation": "1200bps AFSK CW"
+                "modulation": "1k2 AFSK CW"
             },
             {
                 "description": "JQ1YGW beacon",
                 "frequency": 437.465,
-                "modulation": "1200bps AFSK CW"
+                "modulation": "1k2 AFSK CW"
             }
             ]
         },
@@ -566,12 +635,12 @@
             {
                 "description": "PFS3-11 12 downlink",
                 "frequency": 435.103,
-                "modulation": "9600bps GMSK"
+                "modulation": "9k6 GMSK"
             },
             {
                 "description": "PFS3-11 12 uplink",
                 "frequency": 145.840,
-                "modulation": "9600bps GMSK"
+                "modulation": "9k6 GMSK"
             }
             ]
         },
@@ -582,7 +651,34 @@
             {
                 "description": "K5USL downlink",
                 "frequency": 435.245,
-                "modulation": "1200bps AFSK"
+                "modulation": "1k2 AFSK"
+            }
+            ]
+        },
+        "31589": {
+            "name": "SKYMED 1",
+            "source": "https://db.satnogs.org/satellite/BEBS-6223-1179-9603-3761#transmitters",
+            "comms": [
+            {
+                "description": "S-band telemetry",
+                "frequency": 2230.000,
+                "modulation": "BPSK"
+            }
+            ]
+        },
+        "32376": {
+            "name": "SKYMED 2",
+            "source": "https://db.satnogs.org/satellite/JXWR-7717-8415-0462-5029#transmitters",
+            "comms": [
+            {
+                "description": "S-band telemetry",
+                "frequency": 2230.019,
+                "modulation": "BPSK"
+            },
+            {
+                "description": "S-band telemetry",
+                "frequency": 2242.279,
+                "modulation": "FM"
             }
             ]
         },
@@ -593,12 +689,12 @@
             {
                 "description": "JQ1YTC downlink",
                 "frequency": 437.475,
-                "modulation": "1200bps AFSK CW"
+                "modulation": "1k2 AFSK CW"
             },
             {
                 "description": "JQ1YTC beacon",
                 "frequency": 437.275,
-                "modulation": "1200bps AFSK CW"
+                "modulation": "1k2 AFSK CW"
             }
             ]
         },
@@ -620,7 +716,7 @@
             {
                 "description": "DLFIC3 downlink",
                 "frequency": 145.870,
-                "modulation": "1200bps BPSK"
+                "modulation": "1k2 BPSK"
             },
             {
                 "description": "beacon",
@@ -637,6 +733,27 @@
                 "description": "JQ1YGU downlink",
                 "frequency": 437.485,
                 "modulation": "1k2AFSK CW DigiTalker"
+            }
+            ]
+        },
+        "32958": {
+            "name": "FENGYUN 3A",
+            "source": "https://db.satnogs.org/satellite/SHEZ-1778-3591-0474-2098#transmitters",
+            "comms": [
+            {
+                "description": "downlink",
+                "frequency": 1704.500,
+                "modulation": "AHRPT"
+            },
+            {
+                "description": "meteorological mode X",
+                "frequency": 8145.950,
+                "modulation": "QPSK"
+            },
+            {
+                "description": "meteorological MPT",
+                "frequency": 7775.000,
+                "modulation": "PSK"
             }
             ]
         },
@@ -663,22 +780,22 @@
             {
                 "description": "JR5YBN downlink",
                 "frequency": 437.485,
-                "modulation": "1200bps FM CW"
+                "modulation": "1k2 FM CW"
             },
             {
                 "description": "JR5YBN beacon",
                 "frequency": 437.305,
-                "modulation": "1200bps FM CW"
+                "modulation": "1k2 FM CW"
             },
             {
                 "description": "JR5YBO downlink",
                 "frequency": 437.465,
-                "modulation": "1200bps FM CW"
+                "modulation": "1k2 FM CW"
             },
             {
                 "description": "JR5YBO beacon",
                 "frequency": 437.275,
-                "modulation": "1200bps FM CW"
+                "modulation": "1k2 FM CW"
             }
             ]
         },
@@ -689,12 +806,12 @@
             {
                 "description": "JQ1YYY downlink",
                 "frequency": 437.445,
-                "modulation": "1200bps AFSK CW"
+                "modulation": "1k2 AFSK CW"
             },
             {
                 "description": "JQ1YYY beacon",
                 "frequency": 437.385,
-                "modulation": "1200bps AFSK CW"
+                "modulation": "1k2 AFSK CW"
             }
             ]
         },
@@ -751,7 +868,7 @@
             {
                 "description": "HB9EG1 downlink",
                 "frequency": 437.505,
-                "modulation": "1200bps BFSK CW"
+                "modulation": "1k2 BFSK CW"
             }
             ]
         },
@@ -762,7 +879,18 @@
             {
                 "description": "ITUPSAT downlink",
                 "frequency": 437.325,
-                "modulation": "19200bps GFSK CW"
+                "modulation": "19k2 GFSK CW"
+            }
+            ]
+        },
+        "36037": {
+            "name": "PROBA-2",
+            "source": "https://db.satnogs.org/satellite/XEUA-1308-9129-3386-4820#transmitters",
+            "comms": [
+            {
+                "description": "S-band downlink",
+                "frequency": 2235.000,
+                "modulation": "BPSK"
             }
             ]
         },
@@ -805,7 +933,34 @@
             {
                 "description": "JQ1ZUN downlink",
                 "frequency": 5840.000,
-                "modulation": "1200bps AFSK CW"
+                "modulation": "1k2 AFSK CW"
+            }
+            ]
+        },
+        "37216": {
+            "name": "SKYMED 4",
+            "source": "https://db.satnogs.org/satellite/WZYP-3269-9982-1368-7019#transmitters",
+            "comms": [
+            {
+                "description": "S-band telemetry",
+                "frequency": 2230.007,
+                "modulation": "FM"
+            },
+            {
+                "description": "S-band telemetry",
+                "frequency": 2244.272,
+                "modulation": "FM"
+            }
+            ]
+        },
+        "37344": {
+            "name": "ELEKTRO-L 1",
+            "source": "https://db.satnogs.org/satellite/TFCO-6065-7327-3798-1948#transmitters",
+            "comms": [
+            {
+                "description": "space research GGAK-E 1",
+                "frequency": 1693.000,
+                "modulation": "FSK"
             }
             ]
         },
@@ -816,17 +971,17 @@
             {
                 "description": "K7MSU uplink",
                 "frequency": 437.305,
-                "modulation": "1200bps AFSK_USBreceive"
+                "modulation": "1k2 AFSK_USBreceive"
             },
             {
                 "description": "K7MSU downlink",
                 "frequency": 437.498,
-                "modulation": "1200bps AFSK_USBreceive"
+                "modulation": "1k2 AFSK_USBreceive"
             },
             {
                 "description": "downlink",
                 "frequency": 437.485,
-                "modulation": "9600bps GMSK"
+                "modulation": "9k6 GMSK"
             }
             ]
         },
@@ -837,7 +992,7 @@
             {
                 "description": "downlink",
                 "frequency": 437.568,
-                "modulation": "9600bps GMSK"
+                "modulation": "9k6 GMSK"
             }
             ]
         },
@@ -848,12 +1003,12 @@
             {
                 "description": "DP0TUD downlink",
                 "frequency": 437.485,
-                "modulation": "1200bps AFSK CW"
+                "modulation": "1k2 AFSK CW"
             },
             {
                 "description": "DP0TUD beacon",
                 "frequency": 437.503,
-                "modulation": "1200bps AFSK CW"
+                "modulation": "1k2 AFSK CW"
             }
             ]
         },
@@ -865,6 +1020,53 @@
                 "description": "downlink",
                 "frequency": 910.000,
                 "modulation": "AMTV-CW SSTV"
+            }
+            ]
+        },
+        "39159": {
+            "name": "PROBA-V",
+            "source": "https://db.satnogs.org/satellite/XEUA-1308-9129-3386-4820#transmitters",
+            "comms": [
+            {
+                "description": "S-band downlink",
+                "frequency": 2235.000,
+                "modulation": "BPSK"
+            }
+            ]
+        },
+        "39260": {
+            "name": "FENGYUN 3C",
+            "source": "https://db.satnogs.org/satellite/YVMN-3096-6332-4393-7492#transmitters",
+            "comms": [
+            {
+                "description": "downlink",
+                "frequency": 1701.400,
+                "modulation": "AHRPT"
+            },
+            {
+                "description": "telemetry",
+                "frequency": 2218.566,
+                "modulation": "BPSK"
+            },
+            {
+                "description": "meteorological mode X",
+                "frequency": 8175.000,
+                "modulation": "QPSK"
+            },
+            {
+                "description": "S-band telemetry",
+                "frequency": 2252.892,
+                "modulation": "FM"
+            },
+            {
+                "description": "meteorological",
+                "frequency": 1701.300,
+                "modulation": "AHRPT"
+            },
+            {
+                "description": "MPT",
+                "frequency": 7780.000,
+                "modulation": "FM"
             }
             ]
         },
@@ -948,12 +1150,12 @@
             {
                 "description": "HUMDE downlink",
                 "frequency": 437.325,
-                "modulation": "1200bps MSK CW"
+                "modulation": "1k2 MSK CW"
             },
             {
                 "description": "HUMDE downlink",
                 "frequency": 437.525,
-                "modulation": "1200bps MSK CW"
+                "modulation": "1k2 MSK CW"
             }
             ]
         },
@@ -975,17 +1177,17 @@
             {
                 "description": "uplink",
                 "frequency": 435.130,
-                "modulation": "1200bps BPSK"
+                "modulation": "1k2 BPSK"
             },
             {
                 "description": "downlink",
                 "frequency": 145.970,
-                "modulation": "1200bps BPSK"
+                "modulation": "1k2 BPSK"
             },
             {
                 "description": "beacon",
                 "frequency": 145.935,
-                "modulation": "1200bps BPSK"
+                "modulation": "1k2 BPSK"
             }
             ]
         },
@@ -996,7 +1198,7 @@
             {
                 "description": "NOCALL downlink",
                 "frequency": 437.479,
-                "modulation": "9600bps GMSK"
+                "modulation": "9k6 GMSK"
             }
             ]
         },
@@ -1028,7 +1230,7 @@
             {
                 "description": "II0US downlink",
                 "frequency": 437.421,
-                "modulation": "9600bps GMSK"
+                "modulation": "9k6 GMSK"
             }
             ]
         },
@@ -1039,7 +1241,7 @@
             {
                 "description": "LU7AA downlink",
                 "frequency": 437.445,
-                "modulation": "9600bps GMSK"
+                "modulation": "9k6 GMSK"
             }
             ]
         },
@@ -1071,12 +1273,12 @@
             {
                 "description": "CQ downlink",
                 "frequency": 400.190,
-                "modulation": "9600bps GFSK"
+                "modulation": "9k6 GFSK"
             },
             {
                 "description": "CQ downlink",
                 "frequency": 400.221,
-                "modulation": "9600bps GFSK"
+                "modulation": "9k6 GFSK"
             }
             ]
         },
@@ -1087,12 +1289,12 @@
             {
                 "description": "CQ downlink",
                 "frequency": 400.160,
-                "modulation": "9600bps GFSK"
+                "modulation": "9k6 GFSK"
             },
             {
                 "description": "CQ downlink",
                 "frequency": 400.170,
-                "modulation": "9600bps GFSK"
+                "modulation": "9k6 GFSK"
             }
             ]
         },
@@ -1103,7 +1305,7 @@
             {
                 "description": "EM0UKP downlink",
                 "frequency": 437.677,
-                "modulation": "9600bps BFSK CW"
+                "modulation": "9k6 BFSK CW"
             }
             ]
         },
@@ -1114,7 +1316,7 @@
             {
                 "description": "HNATIG downlink",
                 "frequency": 435.000,
-                "modulation": "9600bps FSK"
+                "modulation": "9k6 FSK"
             }
             ]
         },
@@ -1141,7 +1343,7 @@
             {
                 "description": "downlink",
                 "frequency": 467.674,
-                "modulation": "1000bps Unknown"
+                "modulation": "1k Unknown"
             }
             ]
         },
@@ -1163,12 +1365,12 @@
             {
                 "description": "K7MSU downlink",
                 "frequency": 437.396,
-                "modulation": "19200bps FSK"
+                "modulation": "19k2 FSK"
             },
             {
                 "description": "K7MSU downlink",
                 "frequency": 437.405,
-                "modulation": "19200bps FSK"
+                "modulation": "19k2 FSK"
             }
             ]
         },
@@ -1179,12 +1381,12 @@
             {
                 "description": "K7MSU downlink",
                 "frequency": 437.219,
-                "modulation": "19200bps FSK"
+                "modulation": "19k2 FSK"
             },
             {
                 "description": "K7MSU downlink",
                 "frequency": 437.230,
-                "modulation": "19200bps FSK"
+                "modulation": "19k2 FSK"
             }
             ]
         },
@@ -1430,18 +1632,28 @@
             {
                 "description": "N7SKC downlink",
                 "frequency": 437.375,
-                "modulation": "9600bps GMSK"
+                "modulation": "9k6 GMSK"
             }
             ]
         },
         "41105": {
             "name": "ELEKTRO-L N2",
-            "source": "https://www.sigidwiki.com/wiki/Category:Satellite",
+            "source": "https://www.sigidwiki.com/wiki/Category:Satellite https://db.satnogs.org/satellite/KKUD-0899-6953-1494-1490#transmitters",
             "comms": [
             {
                 "description": "beacon",
                 "frequency": 1.693,
                 "modulation": "DSB"
+            },
+            {
+                "description": "LHCP",
+                "frequency": 7502.000,
+                "modulation": "FM"
+            },
+            {
+                "description": "space research GGAK-E 2",
+                "frequency": 1693.000,
+                "modulation": "FSK"
             }
             ]
         },
@@ -1490,7 +1702,7 @@
             {
                 "description": "downlink",
                 "frequency": 437.425,
-                "modulation": "1200bps FFSK"
+                "modulation": "1k2 FFSK"
             }
             ]
         },
@@ -1561,17 +1773,17 @@
             {
                 "description": "uplink",
                 "frequency": 435.015,
-                "modulation": "1200bps BPSK SSB"
+                "modulation": "1k2 BPSK SSB"
             },
             {
                 "description": "downlink",
                 "frequency": 145.990,
-                "modulation": "1200bps BPSK SSB"
+                "modulation": "1k2 BPSK SSB"
             },
             {
                 "description": "beacon",
                 "frequency": 145.940,
-                "modulation": "1200bps BPSK SSB"
+                "modulation": "1k2 BPSK SSB"
             }
             ]
         },
@@ -1602,12 +1814,12 @@
             {
                 "description": "BJ1SL downlink",
                 "frequency": 145.890,
-                "modulation": "4800bps GMSK CW"
+                "modulation": "4k8 GMSK CW"
             },
             {
                 "description": "BJ1SL beacon",
                 "frequency": 145.910,
-                "modulation": "4800bps GMSK CW"
+                "modulation": "4k8 GMSK CW"
             }
             ]
         },
@@ -1628,12 +1840,12 @@
             {
                 "description": "BJ1SK downlink",
                 "frequency": 145.835,
-                "modulation": "4800bps GMSK CW"
+                "modulation": "4k8 GMSK CW"
             },
             {
                 "description": "BJ1SK beacon",
                 "frequency": 145.855,
-                "modulation": "4800bps GMSK CW"
+                "modulation": "4k8 GMSK CW"
             }
             ]
         },
@@ -1644,12 +1856,12 @@
             {
                 "description": "NIUOBT downlink",
                 "frequency": 436.000,
-                "modulation": "1200bps FSK"
+                "modulation": "1k2 FSK"
             },
             {
                 "description": "NIUOBT downlink",
                 "frequency": 2240.000,
-                "modulation": "1200bps FSK"
+                "modulation": "1k2 FSK"
             }
             ]
         },
@@ -1660,7 +1872,7 @@
             {
                 "description": "ON06GB downlink",
                 "frequency": 437.265,
-                "modulation": "9600bps FSK"
+                "modulation": "9k6 FSK"
             }
             ]
         },
@@ -1671,12 +1883,12 @@
             {
                 "description": "OH2A1S downlink",
                 "frequency": 437.220,
-                "modulation": "9600bps FSK CW"
+                "modulation": "9k6 FSK CW"
             },
             {
                 "description": "OH2A1S downlink",
                 "frequency": 2402.000,
-                "modulation": "9600bps FSK CW"
+                "modulation": "9k6 FSK CW"
             }
             ]
         },
@@ -1774,7 +1986,7 @@
             {
                 "description": "VZLUSAT1 downlink",
                 "frequency": 437.240,
-                "modulation": "4800bps MSK CW"
+                "modulation": "4k8 MSK CW"
             }
             ]
         },
@@ -1785,7 +1997,7 @@
             {
                 "description": "FX6FR downlink",
                 "frequency": 437.325,
-                "modulation": "1200bps AFSK CW"
+                "modulation": "1k2 AFSK CW"
             }
             ]
         },
@@ -1971,7 +2183,7 @@
             {
                 "description": "downlink",
                 "frequency": 437.485,
-                "modulation": "9600bps FSK CW"
+                "modulation": "9k6 FSK CW"
             }
             ]
         },
@@ -2038,12 +2250,12 @@
             {
                 "description": "BUAABJ uplink",
                 "frequency": 145.945,
-                "modulation": "9600bps BPSK FM"
+                "modulation": "9k6 BPSK FM"
             },
             {
                 "description": "BUAABJ downlink",
                 "frequency": 435.350,
-                "modulation": "9600bps BPSK FM"
+                "modulation": "9k6 BPSK FM"
             }
             ]
         },
@@ -2076,7 +2288,48 @@
             {
                 "description": "MXSAT-1 beacon",
                 "frequency": 436.370,
-                "modulation": "9600bps BPSK"
+                "modulation": "9k6 BPSK"
+            }
+            ]
+        },
+        "43226": {
+            "name": "GOES-17",
+            "source": "https://db.satnogs.org/satellite/HQQK-4977-1513-0996-6919#transmitters",
+            "comms": [
+            {
+                "description": "meteorological downlink",
+                "frequency": 148.545,
+                "modulation": "FM"
+            },
+            {
+                "description": "mode U TLM",
+                "frequency": 468.775,
+                "modulation": "44k5 FM"
+            },
+            {
+                "description": "radiolocation SARSAT L-band",
+                "frequency": 1544.550,
+                "modulation": "2k4 BPSK"
+            },
+            {
+                "description": "meteorological CDA",
+                "frequency": 1693.000,
+                "modulation": "FM"
+            },
+            {
+                "description": "DCPD",
+                "frequency": 468.825,
+                "modulation": "44450bps FM"
+            },
+            {
+                "description": "mobile DCP",
+                "frequency": 1694.100,
+                "modulation": "1210k BPSK PMT-A3"
+            },
+            {
+                "description": "maritime SARSAT to LUT",
+                "frequency": 2211.040,
+                "modulation": "4930k PSK"
             }
             ]
         },
@@ -2162,17 +2415,17 @@
             {
                 "description": "DP0UWH uplink & downlink",
                 "frequency": 437.375,
-                "modulation": "9600bps FSK Digipeater"
+                "modulation": "9k6 FSK Digipeater"
             },
             {
                 "description": "DP0UWH downlink",
                 "frequency": 435.600,
-                "modulation": "9600bps FSK Digipeater"
+                "modulation": "9k6 FSK Digipeater"
             },
             {
                 "description": "DP0UWH downlink",
                 "frequency": 437.385,
-                "modulation": "9600bps FSK Digipeater"
+                "modulation": "9k6 FSK Digipeater"
             }
             ]
         },
@@ -2204,7 +2457,7 @@
             {
                 "description": "downlink",
                 "frequency": 437.060,
-                "modulation": "4800bps GMSK"
+                "modulation": "4k8 GMSK"
             }
             ]
         },
@@ -2355,7 +2608,7 @@
             {
                 "description": "downlink",
                 "frequency": 436.500,
-                "modulation": "4800bps mobitex"
+                "modulation": "4k8 mobitex"
             }
             ]
         },
@@ -2366,7 +2619,7 @@
             {
                 "description": "downlink",
                 "frequency": 436.250,
-                "modulation": "4800bps mobitex"
+                "modulation": "4k8 mobitex"
             }
             ]
         },
@@ -2447,7 +2700,7 @@
             {
                 "description": "KK6HIT-10 downlink",
                 "frequency": 437.025,
-                "modulation": "9600bps GMSK"
+                "modulation": "9k6 GMSK"
             }
             ]
         },
@@ -2458,7 +2711,7 @@
             {
                 "description": "DP0OPS downlink",
                 "frequency": 437.200,
-                "modulation": "9600bps GMSK"
+                "modulation": "9k6 GMSK"
             }
             ]
         },
@@ -2475,6 +2728,47 @@
                 "description": "downlink",
                 "frequency": 145.935,
                 "modulation": "SSB"
+            }
+            ]
+        },
+        "44903": {
+            "name": "ELEKTRO-L 3",
+            "source": "https://db.satnogs.org/satellite/BTEP-5467-6423-3488-4155#transmitters",
+            "comms": [
+            {
+                "description": "meteorological LRIT Bandwidth 200 kHz Rate 64/128 kbps",
+                "frequency": 1691.000,
+                "modulation": "BPSK"
+            },
+            {
+                "description": "Inter-satellite telecommand RHCP mode U",
+                "frequency": 465.000,
+                "modulation": "FM"
+            },
+            {
+                "description": "meteorological TLM RHCP mode S",
+                "frequency": 3405.703,
+                "modulation": "FM"
+            },
+            {
+                "description": "DCP Downlink RHCP mode C",
+                "frequency": 7500.000,
+                "modulation": "FM"
+            },
+            {
+                "description": "mobile DCP/Selected Data Linear mode L",
+                "frequency": 1697.000,
+                "modulation": "BPSK PMT-A3"
+            },
+            {
+                "description": "200 kHz Selected Data RHCP mode L",
+                "frequency": 1693.000,
+                "modulation": "BPSK"
+            },
+            {
+                "description": "Data Relay LHCP mode L",
+                "frequency": 1544.500,
+                "modulation": "BPSK"
             }
             ]
         },
@@ -2506,7 +2800,7 @@
             {
                 "description": "downlink",
                 "frequency": 437.465,
-                "modulation": "1200bps FSK"
+                "modulation": "1k2 FSK"
             }
             ]
         },
@@ -2517,7 +2811,7 @@
             {
                 "description": "downlink",
                 "frequency": 436.200,
-                "modulation": "9600bps BPSK"
+                "modulation": "9k6 BPSK"
             }
             ]
         },
@@ -2528,7 +2822,7 @@
             {
                 "description": "UPMST2 downlink",
                 "frequency": 437.405,
-                "modulation": "1200bps BFSK"
+                "modulation": "1k2 BFSK"
             }
             ]
         },
@@ -2602,7 +2896,7 @@
             {
                 "description": "downlink",
                 "frequency": 437.000,
-                "modulation": "4800bps mobitex"
+                "modulation": "4k8 mobitex"
             }
             ]
         },
@@ -2613,7 +2907,7 @@
             {
                 "description": "CUBSAT downlink",
                 "frequency": 436.700,
-                "modulation": "9600bps FSK/250k LoRa"
+                "modulation": "9k6 FSK/250k LoRa"
             }
             ]
         },
@@ -2624,12 +2918,12 @@
             {
                 "description": "downlink",
                 "frequency": 435.900,
-                "modulation": "1200bps AFSK"
+                "modulation": "1k2 AFSK"
             },
             {
                 "description": "downlink",
                 "frequency": 435.950,
-                "modulation": "1200bps AFSK"
+                "modulation": "1k2 AFSK"
             }
             ]
         },
@@ -2640,7 +2934,7 @@
             {
                 "description": "NPUBY3 downlink",
                 "frequency": 437.600,
-                "modulation": "9600bps BPSK"
+                "modulation": "9k6 BPSK"
             }
             ]
         },
@@ -2677,7 +2971,7 @@
             {
                 "description": "downlink",
                 "frequency": 435.100,
-                "modulation": "9600bps GMSK"
+                "modulation": "9k6 GMSK"
             }
             ]
         },
@@ -2741,7 +3035,7 @@
             {
                 "description": "DP2TUD downlink",
                 "frequency": 435.600,
-                "modulation": "9600bps GMSK"
+                "modulation": "9k6 GMSK"
             }
             ]
         },
@@ -2784,7 +3078,7 @@
             {
                 "description": "downlink & beacon",
                 "frequency": 436.400,
-                "modulation": "9600bps BPSK"
+                "modulation": "9k6 BPSK"
             }
             ]
         },
@@ -2843,7 +3137,7 @@
             {
                 "description": "downlink",
                 "frequency": 435.310,
-                "modulation": "9600bps GMSK"
+                "modulation": "9k6 GMSK"
             }
             ]
         },
@@ -2854,7 +3148,7 @@
             {
                 "description": "II0US downlink",
                 "frequency": 437.425,
-                "modulation": "9600bps FSK"
+                "modulation": "9k6 FSK"
             }
             ]
         },
@@ -2956,7 +3250,7 @@
             {
                 "description": "beacon",
                 "frequency": 435.800,
-                "modulation": "9600bps FSK"
+                "modulation": "9k6 FSK"
             }
             ]
         },
@@ -3000,7 +3294,78 @@
             {
                 "description": "downlink",
                 "frequency": 437.200,
-                "modulation": "9600bps FSK, LoRa"
+                "modulation": "9k6 FSK, LoRa"
+            }
+            ]
+        },
+        "48274": {
+            "name": "CSS (Tianhe)",
+            "source": "https://db.satnogs.org/satellite/AYDR-6527-9294-8555-4924#transmitters",
+            "comms": [
+            {
+                "description": "1A V/V crew voice NFM downlink",
+                "frequency": 145.985,
+                "modulation": "12k5 FMN"
+            },
+            {
+                "description": "1A V/V crew voice NFM uplink",
+                "frequency": 145.850,
+                "modulation": "FMN"
+            },
+            {
+                "description": "1B U/U crew voice NFM downlink",
+                "frequency": 436.510,
+                "modulation": "12k5 FMN"
+            },
+            {
+                "description": "1B U/U crew voice NFM uplink",
+                "frequency": 435.050,
+                "modulation": "FMN"
+            },
+            {
+                "description": "2A V/U FM repeater NFM downlink",
+                "frequency": 436.510,
+                "modulation": "12k5 FMN"
+            },
+            {
+                "description": "2A V/U FM repeater NFM uplink",
+                "frequency": 145.875,
+                "modulation": "FMN"
+            },
+            {
+                "description": "3A V/V digipeater",
+                "frequency": 145.825,
+                "modulation": "1k2 AFSK"
+            },
+            {
+                "description": "3B U/U digipeater",
+                "frequency": 437.550,
+                "modulation": "1k2 AFSK"
+            },
+            {
+                "description": "4A V/V imaging SSTV-FM downlink",
+                "frequency": 145.985,
+                "modulation": "SSTV"
+            },
+            {
+                "description": "4A V/V imaging SSTV-FM uplink",
+                "frequency": 145.850,
+                "modulation": "SSTV"
+            },
+            {
+                "description": "4B U/U imaging SSTV-FM downlink",
+                "frequency": 436.510,
+                "modulation": "SSTV"
+            },
+            {
+                "description": "4B U/U imaging SSTV-FM uplink",
+                "frequency": 435.050,
+                "modulation": "SSTV"
+            },
+            {
+                "description": "S TLM 1",
+                "frequency": 2232.220,
+                "modulation": "FM"
             }
             ]
         },
@@ -3011,7 +3376,7 @@
             {
                 "description": "CQ downlink",
                 "frequency": 436.300,
-                "modulation": "9600bps FSK"
+                "modulation": "9k6 FSK"
             }
             ]
         },
@@ -3022,7 +3387,7 @@
             {
                 "description": "beacon",
                 "frequency": 436.925,
-                "modulation": "9600bps GMSK"
+                "modulation": "9k6 GMSK"
             }
             ]
         },
@@ -3033,7 +3398,7 @@
             {
                 "description": "DP0TBN downlink",
                 "frequency": 435.950,
-                "modulation": "9600bps GMSK"
+                "modulation": "9k6 GMSK"
             }
             ]
         },
@@ -3044,7 +3409,7 @@
             {
                 "description": "downlink",
                 "frequency": 436.500,
-                "modulation": "9600bps GMSK, CW"
+                "modulation": "9k6 GMSK, CW"
             }
             ]
         },
@@ -3055,7 +3420,33 @@
             {
                 "description": "A68MX downlink",
                 "frequency": 436.908,
-                "modulation": "1200bps BPSK"
+                "modulation": "1k2 BPSK"
+            }
+            ]
+        },
+        "49044": {
+            "name": "ISS (NAUKA)",
+            "source": "https://db.satnogs.org/satellite/GKEP-4423-7467-9358-6493#transmitters",
+            "comms": [
+            {
+                "description": "telemetry",
+                "frequency": 631.000,
+                "modulation": "FM"
+            },
+            {
+                "description": "strong sideband",
+                "frequency": 631.129,
+                "modulation": "FM"
+            },
+            {
+                "description": "strong sideband",
+                "frequency": 630.873,
+                "modulation": "FM"
+            },
+            {
+                "description": "mode V space operation",
+                "frequency": 166.075,
+                "modulation": "FM"
             }
             ]
         },
@@ -3066,7 +3457,7 @@
             {
                 "description": "downlink",
                 "frequency": 435.190,
-                "modulation": "GMSK 1200bps/4800bps/9600bps"
+                "modulation": "GMSK 1k2/4k8/9k6"
             }
             ]
         },
@@ -3077,12 +3468,12 @@
             {
                 "description": "beacon",
                 "frequency": 437.250,
-                "modulation": "9600 GFSK, 19200 GMSK, 500000 BPSK"
+                "modulation": "9k6 GFSK, 19k2 GMSK, 500k BPSK"
             },
             {
                 "description": "beacon",
                 "frequency": 2402.000,
-                "modulation": "9600 GFSK, 19200 GMSK, 500000 BPSK"
+                "modulation": "9k6 GFSK, 19k2 GMSK, 500k BPSK"
             }
             ]
         },
@@ -3166,7 +3557,7 @@
             {
                 "description": "K7MSU downlink",
                 "frequency": 437.405,
-                "modulation": "19200bps GMSK"
+                "modulation": "19k2 GMSK"
             }
             ]
         },
@@ -3193,7 +3584,7 @@
             {
                 "description": "downlink",
                 "frequency": 437.365,
-                "modulation": "1200bps BPSK"
+                "modulation": "1k2 BPSK"
             }
             ]
         },
@@ -3257,7 +3648,7 @@
             {
                 "description": "downlink",
                 "frequency": 437.250,
-                "modulation": "9600bps FSK 62.5k LoRa"
+                "modulation": "9k6 FSK 62k5 LoRa"
             }
             ]
         },
@@ -3268,7 +3659,7 @@
             {
                 "description": "downlink",
                 "frequency": 437.250,
-                "modulation": "9600bps FSK 62.5k LoRa"
+                "modulation": "9k6 FSK 62k5 LoRa"
             }
             ]
         },
@@ -3306,12 +3697,12 @@
             {
                 "description": "BN0IOT downlink",
                 "frequency": 435.575,
-                "modulation": "9600bps GMSK LoRa"
+                "modulation": "9k6 GMSK LoRa"
             },
             {
                 "description": "BN0IOT downlink",
                 "frequency": 436.915,
-                "modulation": "9600bps GMSK LoRa"
+                "modulation": "9k6 GMSK LoRa"
             }
             ]
         },
@@ -3322,7 +3713,7 @@
             {
                 "description": "downlink",
                 "frequency": 401.735,
-                "modulation": "4800bps"
+                "modulation": "4k8"
             }
             ]
         },
@@ -3337,6 +3728,47 @@
             }
             ]
         },
+        "51850": {
+            "name": "GOES-18",
+            "source": "https://db.satnogs.org/satellite/FATA-2352-0047-2594-0636#transmitters",
+            "comms": [
+            {
+                "description": "meteorological mode L - GRB",
+                "frequency": 1686.600,
+                "modulation": "FM"
+            },
+            {
+                "description": "meteorological mode L - HRIT",
+                "frequency": 1694.100,
+                "modulation": "FM"
+            },
+            {
+                "description": "meteorological mode L - CDA",
+                "frequency": 1693.000,
+                "modulation": "FM"
+            },
+            {
+                "description": "meteorological mode S - TTC",
+                "frequency": 2211.040,
+                "modulation": "FM"
+            },
+            {
+                "description": "maritime mode L SARSAT to LUT",
+                "frequency": 1544.550,
+                "modulation": "FM"
+            },
+            {
+                "description": "mobile mode L - DCP Relay US",
+                "frequency": 1679.900,
+                "modulation": "FM"
+            },
+            {
+                "description": "mobile mode U - DCP Command 1",
+                "frequency": 468.775,
+                "modulation": "FM"
+            }
+            ]
+        },
         "51084": {
             "name": "DODONA",
             "source": "https://www.n2yo.com/satellite/?s=51084",
@@ -3344,7 +3776,7 @@
             {
                 "description": "downlink",
                 "frequency": 401.500,
-                "modulation": "19200bps GFSK"
+                "modulation": "19k2 GFSK"
             }
             ]
         },
@@ -3366,12 +3798,12 @@
             {
                 "description": "downlink",
                 "frequency": 145.000,
-                "modulation": "9600bps FSK 125k LoRa"
+                "modulation": "9k6 FSK; 125k LoRa"
             },
             {
                 "description": "downlink",
                 "frequency": 437.200,
-                "modulation": "9600bps FSK 125k LoRa"
+                "modulation": "9k6 FSK; 125k LoRa"
             }
             ]
         },
@@ -3382,7 +3814,7 @@
             {
                 "description": "downlink",
                 "frequency": 437.365,
-                "modulation": "9600bps GFSK"
+                "modulation": "9k6 GFSK"
             }
             ]
         },
@@ -3415,7 +3847,7 @@
             {
                 "description": "KK4UVG downlink",
                 "frequency": 437.175,
-                "modulation": "9600bps FSK"
+                "modulation": "9k6 FSK"
             }
             ]
         },
@@ -3426,7 +3858,7 @@
             {
                 "description": "BCT downlink",
                 "frequency": 437.500,
-                "modulation": "9600bps GFSK"
+                "modulation": "9k6 GFSK"
             }
             ]
         },
@@ -3448,7 +3880,7 @@
             {
                 "description": "downlink",
                 "frequency": 401.500,
-                "modulation": "9600bps FSK/BPSK"
+                "modulation": "9k6 FSK/BPSK"
             }
             ]
         },
@@ -3459,7 +3891,7 @@
             {
                 "description": "downlink",
                 "frequency": 436.500,
-                "modulation": "9600bps FSK/96000bps GMSK"
+                "modulation": "9k6 FSK/96k GMSK"
             }
             ]
         },
@@ -3486,12 +3918,12 @@
             {
                 "description": "JG6YNH downlink",
                 "frequency": 437.375,
-                "modulation": "4800bps GMSK CW"
+                "modulation": "4k8 GMSK CW"
             },
             {
                 "description": "JG6YNH beacon",
                 "frequency": 400.960,
-                "modulation": "4800bps GMSK CW"
+                "modulation": "4k8 GMSK CW"
             },
             {
                 "description": "downlink",
@@ -3505,14 +3937,14 @@
             "source": "https://www.n2yo.com/satellite/?s=52160",
             "comms": [
             {
-                "description": "downlink",
+                "description": "digipeater",
                 "frequency": 437.100,
-                "modulation": "4800bps FSK Digipeater"
+                "modulation": "4k8 FSK"
             },
             {
-                "description": "uplink & downlink",
+                "description": "uplink & downlink / digipeater",
                 "frequency": 437.225,
-                "modulation": "4800bps FSK Digipeater"
+                "modulation": "4k8 FSK"
             }
             ]
         },
@@ -3523,12 +3955,12 @@
             {
                 "description": "OK0BDS downlink",
                 "frequency": 145.850,
-                "modulation": "9600bps GFSK CW"
+                "modulation": "9k6 GFSK CW"
             },
             {
                 "description": "OK0BDS downlink & beacon",
                 "frequency": 436.025,
-                "modulation": "9600bps GFSK CW"
+                "modulation": "9k6 GFSK CW"
             }
             ]
         }
@@ -3672,24 +4104,24 @@
                 "modulation": "NFM PSK"
             },
             {
-                "description": "Mobile Telephony",
+                "description": "mobile telephony",
                 "frequency": 137.44,
                 "modulation": "NFM UNK"
             },
             {
-                "description": "Mobile Telephony",
+                "description": "mobile telephony",
                 "frequency": 137.46,
                 "modulation": "NFM UNK"
             },
             {
-                "description": "Mobile Telephony",
+                "description": "mobile telephony",
                 "frequency": 137.2,
                 "modulation": "NFM UNK"
 	    },
 	    {
 		"description": "downlink",
 		"frequency": 137.6275,
-		"modulation": "4800bps SDPSK 20W"
+		"modulation": "4k8 SDPSK 20W"
 	    }
             ]
         },
@@ -3720,12 +4152,12 @@
             {
                 "description": "uplink",
                 "frequency": 145.970,
-                "modulation": "9600bps BPSK FM"
+                "modulation": "9k6 BPSK FM"
             },
             {
                 "description": "downlink",
                 "frequency": 436.400,
-                "modulation": "9600bps BPSK FM"
+                "modulation": "9k6 BPSK FM"
             }
             ]
         },
@@ -3755,17 +4187,27 @@
             {
                 "description": "downlink",
                 "frequency": 401.700,
-                "modulation": "9600bps GFSK 125k LoRa"
+                "modulation": "9k6 GFSK; 125k LoRa"
             }
             ]        
         },
         "netsat": {
-            "source": "https://www.n2yo.com/satellite/?s=46504; https://www.n2yo.com/satellite/?s=46505; https://www.n2yo.com/satellite/?s=46506; https://www.n2yo.com/satellite/?s=46507",
+            "source": "https://www.n2yo.com/satellite/?s=46504; https://www.n2yo.com/satellite/?s=46505; https://www.n2yo.com/satellite/?s=46506; https://www.n2yo.com/satellite/?s=46507 https://db.satnogs.org/transmitters",
             "comms": [
             {
-                "description": "downlink",
+                "description": "telemetry downlink",
                 "frequency": 435.600,
-                "modulation": "9600bps FSK"
+                "modulation": "9k6 FSK AX.25 G3RUH"
+            }
+            ]
+        },
+        "beesat": {
+            "source": "https://db.satnogs.org/transmitters",
+            "comms": [
+            {
+                "description": "mode U - TLM (Mobitex)",
+                "frequency": 435.950,
+                "modulation": "1k2/2k4/4k8 GMSK"
             }
             ]
         },
@@ -3841,6 +4283,41 @@
 		"description": "downlink",
 		"frequency": 465.500,
 		"modulation": "HRPT"
+	    }
+	    ]
+	},
+	"meteor-m": {
+	    "source": "https://db.satnogs.org/transmitters",
+	    "comms": [
+	    {
+		"description": "meteorological downlink",
+		"frequency": 1700.000,
+		"modulation": "HRPT"
+	    }
+	    ]
+	},
+	"metop": {
+	    "source": "https://db.satnogs.org/transmitters",
+	    "comms": [
+	    {
+		"description": "downlink",
+		"frequency": 1701.300,
+		"modulation": "AHRPT"
+	    },
+	    {
+		"description": "downlink",
+		"frequency": 1707.000,
+		"modulation": "AHRPT"
+	    },
+	    {
+		"description": "telemetry",
+		"frequency": 2230.000,
+		"modulation": "PSK"
+	    },
+	    {
+		"description": "1",
+		"frequency": 137.100,
+		"modulation": "LRPT"
 	    }
 	    ]
 	},
@@ -4006,6 +4483,126 @@
                 "description": "uplink",
                 "frequency": 1633.95,
                 "modulation": "NFM GMSK"
+            }
+            ]
+        },
+        "umbra": {
+            "source": "https://db.satnogs.org/transmitters",
+            "comms": [
+            {
+                "description": "S-band TT&C downlink",
+                "frequency": 2254.000,
+                "modulation": "FM"
+            },
+            {
+                "description": "X-band downlink",
+                "frequency": 8150.000,
+                "modulation": "FM"
+            },
+            {
+                "description": "X-band SAR downlink",
+                "frequency": 9600.000,
+                "modulation": "FM"
+            }
+            ]
+        },
+        "blackjack": {
+            "source": "https://db.satnogs.org/transmitters",
+            "comms": [
+            {
+                "description": "S-band telemetry",
+                "frequency": 2264.800,
+                "modulation": "BPSK"
+            }
+            ]
+        },
+        "s-net": {
+            "source": "https://db.satnogs.org/transmitters",
+            "comms": [
+            {
+                "description": "S-Band downlink",
+                "frequency": 2263.000,
+                "modulation": "FM"
+            },
+            {
+                "description": "TLM",
+                "frequency": 435.950,
+                "modulation": "1k2 AFSK TUBiX10"
+            }
+            ]
+        },
+        "ion-scv": {
+            "source": "https://db.satnogs.org/transmitters",
+            "comms": [
+            {
+                "description": "mode U downlink",
+                "frequency": 401.415,
+                "modulation": "1k2 FSK AX.100 Mode 5"
+            }
+            ]
+        },
+        "astrocast": {
+            "source": "https://db.satnogs.org/transmitters",
+            "comms": [
+            {
+                "description": "L-band telemetry",
+                "frequency": 1530.905,
+                "modulation": "FM"
+            }
+            ]
+        },
+        "rassvet": {
+            "source": "https://db.satnogs.org/transmitters",
+            "comms": [
+            {
+                "description": "mode U downlink",
+                "frequency": 637.500,
+                "modulation": "FM"
+            }
+            ]
+        },
+        "pico-1a": {
+            "source": "https://db.satnogs.org/transmitters",
+            "comms": [
+            {
+                "description": "mode U downlink",
+                "frequency": 454.100,
+                "modulation": "LoRa"
+            },
+            {
+                "description": "mode U 2 downlink",
+                "frequency": 454.300,
+                "modulation": "LoRa"
+            }
+            ]
+        },
+        "stratosat": {
+            "source": "https://db.satnogs.org/transmitters",
+            "comms": [
+            {
+                "description": "mode U downlink",
+                "frequency": 436.260,
+                "modulation": "LoRa"
+            }
+            ]
+        },
+        "vr3x": {
+            "source": "https://db.satnogs.org/transmitters",
+            "comms": [
+            {
+                "description": "mode S downlink",
+                "frequency": 2290.000,
+                "modulation": "FM"
+            },
+            {
+                "description": "mode U downlink",
+                "frequency": 915.600,
+                "modulation": "CW"
+            },
+            {
+                "description": "mode U downlink",
+                "frequency": 915.600,
+                "modulation": "125k LoRa"
             }
             ]
         }

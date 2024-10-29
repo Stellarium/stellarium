@@ -88,7 +88,7 @@ QStringList MayaTzolkinCalendar::getDateStrings() const
 // set date from a vector of calendar date elements sorted from the largest to the smallest.
 // month-day
 // We face a problem as the year is not unique. We can only find the date before current JD which matches the parts.
-void MayaTzolkinCalendar::setDate(QVector<int> parts)
+void MayaTzolkinCalendar::setDate(const QVector<int> &parts)
 {
 	this->parts=parts;
 
@@ -100,7 +100,7 @@ void MayaTzolkinCalendar::setDate(QVector<int> parts)
 	emit jdChanged(JD);
 }
 
-int MayaTzolkinCalendar::mayanTzolkinOnOrBefore(QVector<int> tzolkin, int rd)
+int MayaTzolkinCalendar::mayanTzolkinOnOrBefore(const QVector<int> &tzolkin, int rd)
 {
 	return modInterval(mayanTzolkinOrdinal(tzolkin)+mayanTzolkinEpoch, rd, rd-260);
 }

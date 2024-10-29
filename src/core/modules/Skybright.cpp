@@ -104,7 +104,8 @@ float Skybright::getLuminance( float cosDistMoon,
 {
 	// No Sun and Moon on the sky
 	// Details: https://bugs.launchpad.net/stellarium/+bug/1499699
-	if (!GETSTELMODULE(SolarSystem)->getFlagPlanets())
+	static SolarSystem *ss=GETSTELMODULE(SolarSystem);
+	if (!ss->getFlagPlanets())
 		return 0.f;
 
 	// Air mass

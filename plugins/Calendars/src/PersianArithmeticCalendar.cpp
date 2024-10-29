@@ -100,7 +100,7 @@ QString PersianArithmeticCalendar::getFormattedDateString() const
 // set date from a vector of calendar date elements sorted from the largest to the smallest.
 // Year-Month[1...13]-Day[1...30]
 // Time is not changed!
-void PersianArithmeticCalendar::setDate(QVector<int> parts)
+void PersianArithmeticCalendar::setDate(const QVector<int> &parts)
 {
 	//qDebug() << "PersianArithmeticCalendar::setDate:" << parts;
 	this->parts=parts;
@@ -122,7 +122,7 @@ bool PersianArithmeticCalendar::isLeap(int pYear)
 	return StelUtils::imod((year+38)*31, 128) < 31;
 }
 
-int PersianArithmeticCalendar::fixedFromPersianArithmetic(QVector<int> persian)
+int PersianArithmeticCalendar::fixedFromPersianArithmetic(const QVector<int> &persian)
 {
 	const int pYear=persian.value(0);
 	const int month=persian.value(1);

@@ -205,7 +205,7 @@ QString TibetanCalendar::getFormattedDateString() const
 // set date from a vector of calendar date elements sorted from the largest to the smallest.
 // {year, month, leap-month, day, leap-day}
 // Time is not changed!
-void TibetanCalendar::setDate(QVector<int> parts)
+void TibetanCalendar::setDate(const QVector<int> &parts)
 {
 	this->parts=parts;
 
@@ -218,7 +218,7 @@ void TibetanCalendar::setDate(QVector<int> parts)
 }
 
 //! @arg tibetan={year, month, leapMonth, day, leapDay}
-int TibetanCalendar::fixedFromTibetan(QVector<int> tibetan)
+int TibetanCalendar::fixedFromTibetan(const QVector<int> &tibetan)
 {
 	const int year      = tibetan.value(0);
 	const int month     = tibetan.value(1);
@@ -226,7 +226,7 @@ int TibetanCalendar::fixedFromTibetan(QVector<int> tibetan)
 	const int day       = tibetan.value(3);
 	const int leapDay   = tibetan.value(4);
 
-	const int months=qRound(floor(804./65.*(year-1) + (67./65.)*month + (leapMonth ? -1 : 0) + (64./65.)));
+	const int months=qRound(std::floor(804./65.*(year-1) + (67./65.)*month + (leapMonth ? -1 : 0) + (64./65.)));
 	const int days = 30*months+day;
 	const double mean=days*(11135./11312.) - 30. + (leapDay ? 0. : -1.) +(1071./1616.);
 	const double solarAnomaly = StelUtils::fmodpos(days*(13./4824.)+(2117./4824.), 1.);
@@ -234,7 +234,7 @@ int TibetanCalendar::fixedFromTibetan(QVector<int> tibetan)
 	const double sun  = -tibetanSunEquation(12.*solarAnomaly);
 	const double moon =  tibetanMoonEquation(28.*lunarAnomaly);
 
-	return qRound(floor(tibetanEpoch+mean+sun+moon));
+	return qRound(std::floor(tibetanEpoch+mean+sun+moon));
 }
 
 QVector<int> TibetanCalendar::tibetanFromFixed(int rd)
@@ -295,7 +295,7 @@ double TibetanCalendar::tibetanSunEquation(const double alpha)
 		res=map.value(3.);
 	else res=map.value(alpha,
 			   StelUtils::fmodpos(alpha, 1.)*tibetanSunEquation(ceil(alpha)) +
-			   StelUtils::fmodpos(-alpha, 1.)*tibetanSunEquation(floor(alpha))
+			   StelUtils::fmodpos(-alpha, 1.)*tibetanSunEquation(std::floor(alpha))
 			   );
 	return res;
 }
@@ -327,14 +327,14 @@ double TibetanCalendar::tibetanMoonEquation(const double alpha)
 		res=map.value(7.);
 	else res= map.value(alpha,
 			    StelUtils::fmodpos(alpha, 1.)*tibetanMoonEquation(ceil(alpha)) +
-			    StelUtils::fmodpos(-alpha, 1.)*tibetanMoonEquation(floor(alpha))
+			    StelUtils::fmodpos(-alpha, 1.)*tibetanMoonEquation(std::floor(alpha))
 			   );
 	return res;
 }
 
 // Holidays
 // return true for a Tibetan leap month (CC:UE 21.6)
-bool TibetanCalendar::tibetanLeapMonth(const QVector<int> tYM)
+bool TibetanCalendar::tibetanLeapMonth(const QVector<int> &tYM)
 {
 	const int tYear  = tYM.value(0);
 	const int tMonth = tYM.value(1);
@@ -342,11 +342,11 @@ bool TibetanCalendar::tibetanLeapMonth(const QVector<int> tYM)
 }
 
 // return true for a Tibetan leap day (CC:UE 21.7)
-bool TibetanCalendar::tibetanLeapDay(const QVector<int> tYMD)
+bool TibetanCalendar::tibetanLeapDay(const QVector<int> &tYMD)
 {
 	const int tYear  = tYMD.value(0);
 	const int tMonth = tYMD.value(1);
-	const int tDay   = tYMD.value(1);
+	const int tDay   = tYMD.value(2);
 	return (tDay==tibetanFromFixed(fixedFromTibetan({tYear, tMonth, false, tDay, true})).value(3))
 		|| (tDay==tibetanFromFixed(fixedFromTibetan({tYear, tMonth, tibetanLeapMonth({tYear, tMonth}), tDay, true})).value(3));
 }

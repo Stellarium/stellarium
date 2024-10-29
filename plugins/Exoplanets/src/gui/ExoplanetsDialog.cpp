@@ -117,15 +117,15 @@ void ExoplanetsDialog::createDialogContent()
 	connectBoolProperty(ui->displayShowDesignationsCheckBox,   "Exoplanets.flagShowExoplanetsDesignations");
 	connectBoolProperty(ui->displayShowNumbersCheckBox,        "Exoplanets.flagShowExoplanetsNumbers");
 
-	connectColorButton(ui->exoplanetMarkerColor,		"Exoplanets.markerColor",    "Exoplanets/exoplanet_marker_color");
-	connectColorButton(ui->habitableExoplanetMarkerColor,	"Exoplanets.habitableColor", "Exoplanets/habitable_exoplanet_marker_color");
+	ui->exoplanetMarkerColor         ->setup("Exoplanets.markerColor",    "Exoplanets/exoplanet_marker_color");
+	ui->habitableExoplanetMarkerColor->setup("Exoplanets.habitableColor", "Exoplanets/habitable_exoplanet_marker_color");
 
 	updateTimer = new QTimer(this);
 	connect(updateTimer, SIGNAL(timeout()), this, SLOT(refreshUpdateValues()));
 	updateTimer->start(7000);
 
-	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
-	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
+	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
+	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), this, SLOT(restoreDefaults()));
 	connect(ui->saveSettingsButton, SIGNAL(clicked()), this, SLOT(saveSettings()));	
@@ -174,7 +174,7 @@ void ExoplanetsDialog::setColumnNames()
 	exoplanetsHeader << q_("Exoplanet");
 	exoplanetsHeader << QString("%1, M%2").arg(q_("Mass")).arg(QChar(0x2643));
 	exoplanetsHeader << QString("%1, R%2").arg(q_("Radius")).arg(QChar(0x2643));
-	exoplanetsHeader << QString("%1, %2").arg(q_("Period"),qc_("day","time period"));
+	exoplanetsHeader << QString("%1, %2").arg(q_("Period"),qc_("days", "time period"));
 	exoplanetsHeader << QString("a, %1").arg(qc_("AU", "distance, astronomical unit"));
 	exoplanetsHeader << QString("e");
 	exoplanetsHeader << QString("i, %1").arg(QChar(0x00B0));
@@ -213,7 +213,17 @@ void ExoplanetsDialog::fillExoplanetsTable()
 		for (auto &eps : map["exoplanets"].toList())
 		{
 			auto epdata = eps.toMap();
-			QString dm = epdata.contains("detectionMethod") ? epdata["detectionMethod"].toString().trimmed() : dash;
+			QString dm = dash;
+			if ( epdata.contains("detectionMethod"))
+			{
+				QStringList dmlist = epdata["detectionMethod"].toString().trimmed().split(",");
+				QStringList dmloc;
+				for (int i=0;i<dmlist.count();i++)
+				{
+					dmloc << qc_(dmlist.at(i).trimmed(), "Exoplanet detection method");
+				}
+				dm = dmloc.join(", ");
+			}
 			EPSTreeWidgetItem* treeItem = new EPSTreeWidgetItem(ui->exoplanetsTreeWidget);
 			treeItem->setText(EPSExoplanetName, QString("%1 %2").arg(trans.qtranslate(map["designation"].toString().trimmed()), epdata["planetName"].toString()).trimmed());
 			treeItem->setData(EPSExoplanetName, Qt::UserRole, map["designation"].toString());
@@ -246,7 +256,7 @@ void ExoplanetsDialog::fillExoplanetsTable()
 			treeItem->setText(EPSStarRadius, sradius);
 			treeItem->setToolTip(EPSStarRadius,  q_("Radius of star in solar radii"));
 			treeItem->setTextAlignment(EPSStarRadius,  Qt::AlignRight);
-			treeItem->setText(EPSExoplanetDetectionMethod, q_(dm));
+			treeItem->setText(EPSExoplanetDetectionMethod, dm);
 			treeItem->setToolTip(EPSExoplanetDetectionMethod,  q_("Detection method of exoplanet"));
 		}
 	}
@@ -259,7 +269,7 @@ void ExoplanetsDialog::selectCurrentExoplanet(const QModelIndex& modelIndex)
 		ep->setFlagShowExoplanets(true);
 	// Find the object
 	QString name = modelIndex.sibling(modelIndex.row(), EPSExoplanetName).data(Qt::UserRole).toString();
-	if (objectMgr->findAndSelectI18n(name) || objectMgr->findAndSelect(name))
+	if (objectMgr->findAndSelectI18n(name, Exoplanet::EXOPLANET_TYPE) || objectMgr->findAndSelect(name, Exoplanet::EXOPLANET_TYPE))
 	{
 		const QList<StelObjectP> newSelected = objectMgr->getSelectedObject();
 		if (!newSelected.empty())
@@ -273,7 +283,7 @@ void ExoplanetsDialog::selectCurrentExoplanet(const QModelIndex& modelIndex)
 void ExoplanetsDialog::setAboutHtml(void)
 {
 	QString html = "<html><head></head><body>";
-	html += "<h2>" + q_("Exoplanets Plug-in") + "</h2><table width=\"90%\">";
+	html += "<h2>" + q_("Exoplanets Plug-in") + "</h2><table class='layout' width=\"90%\">";
 	html += "<tr width=\"30%\"><td><strong>" + q_("Version") + ":</strong></td><td>" + EXOPLANETS_PLUGIN_VERSION + "</td></tr>";
 	html += "<tr><td><strong>" + q_("License") + ":</strong></td><td>" + EXOPLANETS_PLUGIN_LICENSE + "</td></tr>";
 	html += "<tr><td><strong>" + q_("Author") + ":</strong></td><td>Alexander Wolf</td></tr>";
@@ -314,6 +324,10 @@ void ExoplanetsDialog::setInfoHtml(void)
 			.arg(q_("Equilibrium Temperature"),
 			     q_("The planetary equilibrium temperature is a theoretical temperature in (°C) that the planet would be at when considered simply as if it were a black body being heated only by its parent star (assuming a 0.3 bond albedo). As example the planetary equilibrium temperature of Earth is -18.15°C (255 K)."),
 			     q_("Actual surface temperatures are expected to be larger than the equilibrium temperature depending on the atmosphere of the planets, which are currently unknown (e.g. Earth mean global surface temperature is about 288 K or 15°C)."));
+	html += QString("<p><b>%1</b> &mdash; %2 %3</p>")
+			.arg(q_("Surface Temperature"),
+			     q_("The estimated surface temperature in Kelvins (K) assuming an Earth-like atmosphere (i.e., same bond albedo and greenhouse)."),
+			     q_("Temperatures could be much larger for thicker atmospheres (Earth = 288 K or 15°C)."));
 	html += QString("<p><b>%1</b> &mdash; %2</p>")
 			.arg(q_("Flux"),
 			     q_("Average stellar flux of the planet in Earth fluxes (Earth = 1.0 S<sub>E</sub>)."));

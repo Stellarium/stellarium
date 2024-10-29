@@ -244,7 +244,7 @@ void TextUserInterface::init()
 					SLOT(setAppLanguage(QString)),
 					StelTranslator::globalTranslator->getAvailableLanguagesNamesNative(StelFileMgr::getLocaleDir()),
 					StelTranslator::iso639_1CodeToNativeName(localeMgr.getAppLanguage()),
-					m3, m3_1);
+					m3, m3_2);
 	m3_1->setNextNode(m3_2);
 	m3_2->setNextNode(m3_3);
 	m3_3->setNextNode(m3_1);
@@ -575,6 +575,9 @@ void TextUserInterface::init()
 
 
 	currentNode = m1;
+
+	addAction("actionShow_TUI_dateTime",   N_("Text User Interface"), N_("Toggle TUI date&time"),   this, "tuiDateTime", ""); // Recommend "Ctrl+Alt+T", but conflicts with Equation of Time.
+	addAction("actionShow_TUI_objectInfo", N_("Text User Interface"), N_("Toggle TUI object info"), this, "tuiObjInfo",  ""); // Recommend  "Ctrl+Alt+Shift+T"
 }
 
 /*************************************************************************
@@ -586,10 +589,12 @@ void TextUserInterface::loadConfiguration(void)
 	Q_ASSERT(conf);
 
 	font.setPixelSize(conf->value("tui/tui_font_size", 15).toInt());
-	tuiDateTime = conf->value("tui/flag_show_tui_datetime", false).toBool();
-	tuiObjInfo = conf->value("tui/flag_show_tui_short_obj_info", false).toBool();
-	tuiGravityUi = conf->value("tui/flag_show_gravity_ui", false).toBool();
+	setTuiDateTime(conf->value("tui/flag_show_tui_datetime", false).toBool());
+	setTuiObjInfo(conf->value("tui/flag_show_tui_short_obj_info", false).toBool());
+	setTuiGravityUi(conf->value("tui/flag_show_gravity_ui", false).toBool());
 	color = Vec3f(conf->value("tui/tui_font_color", "0.3,1,0.3").toString());
+	StelCore *core=StelApp::getInstance().getCore();
+	connect(core, SIGNAL(flagGravityLabelsChanged(bool)), this, SLOT(setTuiGravityUi(bool)));
 }
 
 /*************************************************************************
@@ -656,9 +661,10 @@ void TextUserInterface::draw(StelCore* core)
 	{
 		double jd = core->getJD();
 		int text_x = x + xVc*2/3, text_y = y + pixOffset;
+		const double utcOffsetHrs=core->getUTCOffset(jd);
 
-		QString newDate = StelApp::getInstance().getLocaleMgr().getPrintableDateLocal(jd) + "   "
-                       +StelApp::getInstance().getLocaleMgr().getPrintableTimeLocal(jd);
+		QString newDate = StelApp::getInstance().getLocaleMgr().getPrintableDateLocal(jd, utcOffsetHrs) + "   "
+		       +StelApp::getInstance().getLocaleMgr().getPrintableTimeLocal(jd, utcOffsetHrs);
 		 
 		if (fovMaskDisk) {
 			text_x = xVc + fovOffsetY - pixOffset;
@@ -739,7 +745,7 @@ void TextUserInterface::handleKeys(QKeyEvent* event)
 	}
 }
 
-void TextUserInterface::setHomePlanet(QString planetName)
+void TextUserInterface::setHomePlanet(const QString &planetName)
 {
 	StelCore* core = StelApp::getInstance().getCore();
 	if (core->getCurrentLocation().planetName != planetName)
@@ -793,33 +799,33 @@ double TextUserInterface::getLongitude(void)
 	return static_cast<double>(StelApp::getInstance().getCore()->getCurrentLocation().getLongitude());
 }
 
-void TextUserInterface::setStartupDateMode(QString mode)
+void TextUserInterface::setStartupDateMode(const QString &mode)
 {
 	StelApp::getInstance().getCore()->setStartupTimeMode(mode);
 }
 
-void TextUserInterface::setDateFormat(QString format)
+void TextUserInterface::setDateFormat(const QString &format)
 {
 	StelApp::getInstance().getLocaleMgr().setDateFormatStr(format);
 }
 
-void TextUserInterface::setTimeFormat(QString format)
+void TextUserInterface::setTimeFormat(const QString &format)
 {
 	StelApp::getInstance().getLocaleMgr().setTimeFormatStr(format);
 }
 
-void TextUserInterface::setSkyCulture(QString i18)
+void TextUserInterface::setSkyCulture(const QString &i18)
 {
 	StelApp::getInstance().getSkyCultureMgr().setCurrentSkyCultureNameI18(i18);
 }
 
-void TextUserInterface::setAppLanguage(QString lang)
+void TextUserInterface::setAppLanguage(const QString &lang)
 {
 	QString code = StelTranslator::nativeNameToIso639_1Code(lang);
 	StelApp::getInstance().getLocaleMgr().setAppLanguage(code);
 }
 
-void TextUserInterface::setSkyLanguage(QString lang)
+void TextUserInterface::setSkyLanguage(const QString &lang)
 {
 	QString code = StelTranslator::nativeNameToIso639_1Code(lang);
 	StelApp::getInstance().getLocaleMgr().setSkyLanguage(code);

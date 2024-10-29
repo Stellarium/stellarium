@@ -55,20 +55,25 @@ public:
 		    bool hidden,
 		    const QString &pTypeStr);
 
-	~MinorPlanet() Q_DECL_OVERRIDE;
+	~MinorPlanet() override;
 
-	//The Comet class inherits the "Planet" type because the SolarSystem class
+	//The MinorPlanet class inherits the "Planet" type because the SolarSystem class
 	//was not designed to handle different types of objects.
 	// \todo Decide if this is going to be "MinorPlanet" or "Asteroid"
 	//virtual QString getType() const {return "MinorPlanet";}
-	virtual float getVMagnitude(const StelCore* core) const Q_DECL_OVERRIDE;
+	//! Override for minor planets.
+	//! When observer is on an "Observer" planet, the magnitude reported is heliocentric (seen from the Sun).
+	//! This allows observing the asteroid belt freom the side without nearer objects being obscured by phase angle.
+	float getVMagnitude(const StelCore* core) const override;
+	//! Convenience method, necessary override. @param eclipseFactor is ignored.
+	float getVMagnitude(const StelCore* core, const double eclipseFactor) const override;
 	//! sets the nameI18 property with the appropriate translation.
 	//! Function overridden to handle the problem with name conflicts.
-	virtual void translateName(const StelTranslator& trans) Q_DECL_OVERRIDE;
-	virtual QString getEnglishName(void) const Q_DECL_OVERRIDE;
-	virtual QString getNameI18n(void) const Q_DECL_OVERRIDE;
+	void translateName(const StelTranslator& trans) override;
+	QString getEnglishName(void) const override;
+	QString getNameI18n(void) const override;
 	//! gets an IAU provisional designation.
-	virtual QString getIAUDesignation() const Q_DECL_OVERRIDE { return iauDesignationText; }
+	QString getIAUDesignation() const override { return iauDesignationText; }
 
 	//! set the minor planet's number, if any.
 	//! The number should be specified as an additional parameter, as
@@ -87,6 +92,9 @@ public:
 	//! @param magnitude Absolute magnitude H
 	//! @param slope Slope parameter G. This is usually [0..1], sometimes slightly outside. Allowed here [-1..2].
 	void setAbsoluteMagnitudeAndSlope(const float magnitude, const float slope);
+
+	//! sets radius based on absolute magnitude and albedo.
+	void updateEquatorialRadius(void);
 
 	//! renders the subscript in a minor planet IAU provisional designation with HTML.
 	static QString renderIAUDesignationinHtml(const QString& plainText);
@@ -109,16 +117,16 @@ public:
 	QStringList getExtraDesignations() const { return extraDesignations; }
 
 	//! get sidereal period for minor planet
-	virtual double getSiderealPeriod() const Q_DECL_OVERRIDE;
+	double getSiderealPeriod() const override;
 
 protected:
 	// components for Planet::getInfoString() that are overridden here:
-	virtual QString getInfoStringName(const StelCore *core, const InfoStringGroup& flags) const Q_DECL_OVERRIDE;
-	virtual QString getInfoStringExtraMag(const StelCore *core, const InfoStringGroup& flags) const Q_DECL_OVERRIDE;
+	QString getInfoStringName(const StelCore *core, const InfoStringGroup& flags) const override;
+	QString getInfoStringExtraMag(const StelCore *core, const InfoStringGroup& flags) const override;
 	//! Any flag=Extra information to be displayed at the end
-	virtual QString getInfoStringExtra(const StelCore *core, const InfoStringGroup& flags) const Q_DECL_OVERRIDE;
+	QString getInfoStringExtra(const StelCore *core, const InfoStringGroup& flags) const override;
 
-	virtual QString getDiscoveryCircumstances() const Q_DECL_OVERRIDE;
+	QString getDiscoveryCircumstances() const override;
 
 private:
 	int minorPlanetNumber;

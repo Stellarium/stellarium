@@ -31,7 +31,7 @@ QTEST_GUILESS_MAIN(TestJavaScripting)
 #ifdef ENABLE_SCRIPT_QML
 QString TestJavaScripting::runScript(QJSEngine *engine, QString script )
 {
-	std::cout << "Script:" << std::endl << script.toStdString() << std::endl;
+//	std::cout << "Script:" << std::endl << script.toStdString() << std::endl;
 	QJSValue result = engine->evaluate(script);
 	if (result.isError()) {
 //		int line = engine->uncaughtExceptionLineNumber();
@@ -98,7 +98,7 @@ void TestJavaScripting::testVec3fConstructor()
 		"f9.toHex()\n"
 		<< "#ffffff";
 
-	while (data.count() >= 4)
+	while (data.count() >= 2)
 	{
 		QString script = data.takeFirst().toString();
 		QString expect = data.takeFirst().toString();
@@ -118,7 +118,7 @@ void TestJavaScripting::testVec3fConstructorFail()
 		"f10.toString()\n"
 		<< "error";
 
-	while (data.count() >= 4)
+	while (data.count() >= 2)
 	{
 		QString script = data.takeFirst().toString();
 		QString expect = data.takeFirst().toString();
@@ -152,7 +152,7 @@ void TestJavaScripting::testVec3dConstructor()
 		 << "[?, ?, ?]";
 	***/
 
-	while (data.count() >= 4)
+	while (data.count() >= 2)
 	{
 		QString script = data.takeFirst().toString();
 		QString expect = data.takeFirst().toString();
@@ -177,11 +177,11 @@ void TestJavaScripting::testV3d()
 #else
 		<< "[0, 0, 0]"
 #endif
-		<< "var f9 = new V3d(f1);\n"  // still the same QScriptEngine
-		"f9.toHex()\n"
+		<< "var fa = new V3d(1.0, 1.0, 1.0);\n"
+		   "fa.toHex()\n"
 		<< "#ffffff";
 
-	while (data.count() >= 4)
+	while (data.count() >= 2)
 	{
 		QString script = data.takeFirst().toString();
 		QString expect = data.takeFirst().toString();
@@ -204,11 +204,11 @@ void TestJavaScripting::testV3f()
 #else
 		<< "[r:0, g:0, b:0]" // difference is just the r/g/b labels
 #endif
-		<< "var f9 = new V3f(f1);\n"  // still the same Engine
-		"f9.toHex()\n"
+		<< "var fa = new V3f(1.0, 1.0, 1.0);\n"
+		   "fa.toHex()\n"
 		<< "#ffffff";
 
-	while (data.count() >= 4)
+	while (data.count() >= 2)
 	{
 		QString script = data.takeFirst().toString();
 		QString expect = data.takeFirst().toString();
@@ -246,7 +246,7 @@ void TestJavaScripting::testColor()
 		"f9.toHex()\n"
 		<< "#ffffff";
 
-	while (data.count() >= 4)
+	while (data.count() >= 2)
 	{
 		QString script = data.takeFirst().toString();
 		QString expect = data.takeFirst().toString();

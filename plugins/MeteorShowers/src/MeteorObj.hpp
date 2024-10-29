@@ -40,7 +40,7 @@ public:
 	//! @param bolideTexture Bolide texture.
 	MeteorObj(const StelCore*, int speed, const float& radiantAlpha, const float& radiantDelta,
 		  const float& pidx, QList<Meteor::ColorPair> colors, const StelTextureSP& bolideTexture);
-	virtual ~MeteorObj() Q_DECL_OVERRIDE;
+	~MeteorObj() override;
 };
 
 #endif // METEOROBJ_HPP

@@ -55,13 +55,13 @@ class CCD : public QObject
 public:
 	CCD();
 	Q_INVOKABLE CCD(const QObject& other);
-	virtual ~CCD() Q_DECL_OVERRIDE;
+	~CCD() override;
 	static CCD* ccdFromSettings(QSettings* settings, int ccdIndex);
 	void writeToSettings(QSettings * settings, const int index);
 	static CCD* ccdModel();
 
 	QString name() const;
-	void setName(QString name);
+	void setName(const QString &name);
 	int getCCDID();
 	int resolutionX() const;
 	void setResolutionX(int resolution);

@@ -38,7 +38,11 @@
 #include "StelPropertyMgr.hpp"
 #include "StelUtils.hpp"
 
+#if USE_BUNDLED_QTCOMPRESS
+#include "external/qtcompress/qzipreader.h"
+#else
 #include <private/qzipreader_p.h>
+#endif
 #include <QTimer>
 #include <QDebug>
 #include <QSettings>
@@ -354,11 +358,13 @@ LandscapeMgr::LandscapeMgr()
 	, flagLightPollutionFromDatabase(false)
 	, atmosphereNoScatter(false)
 	, flagPolyLineDisplayedOnly(false)
-	, polyLineThickness(1)
 	, flagLandscapeUseMinimalBrightness(false)
 	, defaultMinimalBrightness(0.01)
 	, flagLandscapeSetsMinimalBrightness(false)
 	, flagEnvironmentAutoEnabling(false)
+	, flagLandscapeUseTransparency(false)
+	, landscapeTransparency(0.)
+        , landscapeTint(1.f, 1.f, 1.f)
 {
 	setObjectName("LandscapeMgr"); // should be done by StelModule's constructor.
 
@@ -422,7 +428,7 @@ void LandscapeMgr::update(double deltaTime)
 			// Use no more than 1/60th of a second for this batch of loading
 			QElapsedTimer timer;
 			timer.start();
-			Atmosphere::LoadingStatus status;
+			Atmosphere::LoadingStatus status={1,1};
 			while(loadingAtmosphere->isLoading() && timer.elapsed() < 1000/60)
 				status = loadingAtmosphere->stepDataLoading();
 			if(loadingAtmosphere->isLoading())
@@ -437,7 +443,7 @@ void LandscapeMgr::update(double deltaTime)
 				setAtmosphereShowMySkyStatusText(q_("Switching models..."));
 			}
 		}
-		catch(AtmosphereShowMySky::InitFailure const& error)
+		catch(Atmosphere::InitFailure const& error)
 		{
 			qWarning() << "ERROR: Failed to load atmosphere model data:" << error.what();
 			qWarning() << "WARNING: Falling back to the Preetham's model";
@@ -503,6 +509,8 @@ void LandscapeMgr::update(double deltaTime)
 	}
 	landscape->update(deltaTime);
 	cardinalPoints->update(deltaTime);
+	Landscape::illumFader.update(static_cast<int>(deltaTime*1000));
+	Landscape::labelFader.update(static_cast<int>(deltaTime*1000));
 
 	// Compute the atmosphere color and intensity
 	// Compute the sun position in local coordinate
@@ -522,7 +530,7 @@ void LandscapeMgr::update(double deltaTime)
 								 currentIsEarth ? moon.data() : nullptr, core->getCurrentLocation(),
 								 15.f, 40.f, static_cast<float>(drawer->getExtinctionCoefficient()), atmosphereNoScatter);
 	}
-	catch(AtmosphereShowMySky::InitFailure const& error)
+	catch(Atmosphere::InitFailure const& error)
 	{
 		qWarning().noquote() << "ShowMySky atmosphere model crashed:" << error.what();
 		qWarning() << "Loading Preetham model";
@@ -536,6 +544,7 @@ void LandscapeMgr::update(double deltaTime)
 	if (currentPlanet->getID() == sun->getID())
 	{
 		landscape->setBrightness(1.0, 1.0);
+                landscape->setTint(Vec3f(1.f));
 		return;
 	}
 
@@ -645,8 +654,10 @@ void LandscapeMgr::update(double deltaTime)
 		// If we have no atmosphere, we can assume windows and panels on spaceships etc. are switched on whenever the sun does not shine, i.e. when sun is blocked by landscape.
 		lightscapeBrightness= static_cast<double>(landscape->getOpacity(sunPos));
 	}
-
 	landscape->setBrightness(landscapeBrightness, lightscapeBrightness);
+
+	// extra colorful sunrise/sunset management.
+	landscape->setTint(landscapeTint);
 
 	messageFader.update(static_cast<int>(deltaTime*1000));
 }
@@ -668,16 +679,20 @@ void LandscapeMgr::draw(StelCore* core)
 	//if (atmosphere->getFlagShow())
 	if (drawer->getFlagDrawSunAfterAtmosphere())
 	{
-		SolarSystem* ssys = GETSTELMODULE(SolarSystem);
+		static SolarSystem* ssys = GETSTELMODULE(SolarSystem);
 		PlanetP sun=ssys->getSun();
 		QFont font;
 		font.setPixelSize(StelApp::getInstance().getScreenFontSize());
-		sun->draw(core, 0, font);
+		sun->draw(core, 0, font, 1.0);
 	}
 
 	// Draw the landscape
+	Landscape::setTransparency( getFlagLandscapeUseTransparency() ? landscapeTransparency : 0.0);
+
 	if (oldLandscape)
+	{
 		oldLandscape->draw(core, flagPolyLineDisplayedOnly);
+	}
 	landscape->draw(core, flagPolyLineDisplayedOnly);
 
 	// Draw the cardinal points
@@ -693,15 +708,6 @@ void LandscapeMgr::draw(StelCore* core)
 		painter.setColor(1, 0, 0, messageFader.getInterstate());
 		painter.drawText(83, 70, messageToShow);
 	}
-
-	// Workaround for a bug with spherical mirror mode when we don't show the cardinal points.
-	// I am not really sure why this seems to fix the problem.  If you want to
-	// remove this, make sure the spherical mirror mode with cardinal points
-	// toggled off works properly!
-	const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
-	QOpenGLPaintDevice device;
-	device.setSize(QSize(prj->getViewportWidth(), prj->getViewportHeight()));
-	QPainter painter(&device);
 }
 
 // Some element in drawing order behind LandscapeMgr can call this at the end of its own draw() to overdraw with the polygon line and gazetteer.
@@ -756,7 +762,7 @@ void LandscapeMgr::createAtmosphere()
 				setAtmosphereShowMySkyStatusText(QString("%1 0% %2").arg(q_("Loading..."), qc_("done","percentage of done")));
 			}
 		}
-		catch(AtmosphereShowMySky::InitFailure const& error)
+		catch(Atmosphere::InitFailure const& error)
 		{
 			qWarning() << "ERROR: Failed to initialize ShowMySky atmosphere model:" << error.what();
 			qWarning() << "WARNING: Falling back to the Preetham's model";
@@ -845,10 +851,15 @@ void LandscapeMgr::init()
 	setFlagFog(conf->value("landscape/flag_fog",true).toBool());
 	setFlagIllumination(conf->value("landscape/flag_enable_illumination_layer", true).toBool());
 	setFlagLabels(conf->value("landscape/flag_enable_labels", true).toBool());
-	setFlagPolyLineDisplayed(conf->value("landscape/flag_polyline_only", false).toBool());
+	setFlagPolyLineOnlyDisplayed(conf->value("landscape/flag_polyline_only", false).toBool());
 	setPolyLineThickness(conf->value("landscape/polyline_thickness", 1).toInt());
+	setPolyLineColor(Vec3f(conf->value("landscape/polyline_color", "1.0,0.0,0.0").toString()));
 	setLabelFontSize(conf->value("landscape/label_font_size", 18).toInt());
 	setLabelColor(Vec3f(conf->value("landscape/label_color", "0.2,0.8,0.2").toString()));
+	setLabelAngle(conf->value("landscape/label_angle", 45).toInt());
+
+	setFlagLandscapeUseTransparency(conf->value("landscape/flag_transparency", false).toBool());
+	setLandscapeTransparency(conf->value("landscape/transparency", 0.5).toDouble());
 
 	cardinalPoints = new Cardinals();
 	cardinalPoints->setFlagShow4WCRLabels(conf->value("viewing/flag_cardinal_points", true).toBool());
@@ -895,6 +906,12 @@ bool LandscapeMgr::setCurrentLandscapeID(const QString& id, const double changeL
 	if(id==currentLandscapeID)
 		return false;
 
+	if (!getAllLandscapeIDs().contains(id))
+	{
+		qDebug() << "LandscapeMgr::setCurrentLandscapeID: unknown landscape" << id << ", using 'zero'";
+		return setCurrentLandscapeID("zero", changeLocationDuration);
+	}
+
 	Landscape* newLandscape;
 
 	// There is a slight chance that we switch back to oldLandscape while oldLandscape is still fading away.
@@ -934,13 +951,9 @@ bool LandscapeMgr::setCurrentLandscapeID(const QString& id, const double changeL
 	// This prevents subhorizon sun or grid becoming briefly visible.
 	if (landscape)
 	{
-		// Copy display parameters from previous landscape to new one
+		// Copy display parameters from previous landscape to new one.
 		newLandscape->setFlagShow(landscape->getFlagShow());
 		newLandscape->setFlagShowFog(landscape->getFlagShowFog());
-		newLandscape->setFlagShowIllumination(landscape->getFlagShowIllumination());
-		newLandscape->setFlagShowLabels(landscape->getFlagShowLabels());
-		newLandscape->setLabelFontSize(landscape->getLabelFontSize());
-		newLandscape->setLabelColor(landscape->getLabelColor());
 
 		// If we have an oldLandscape that is not just swapped back, put that into cache.
 		if (oldLandscape && oldLandscape!=newLandscape)
@@ -1093,6 +1106,7 @@ void LandscapeMgr::setFlagLandscape(const bool displayed)
 		landscape->setFlagShow(displayed);
 		emit landscapeDisplayedChanged(displayed);
 	}
+	StelApp::immediateSave("landscape/flag_landscape", displayed);
 }
 
 bool LandscapeMgr::getFlagLandscape() const
@@ -1107,7 +1121,10 @@ bool LandscapeMgr::getIsLandscapeFullyVisible() const
 
 double LandscapeMgr::getLandscapeSinMinAltitudeLimit() const
 {
-	return landscape->getSinMinAltitudeLimit();
+	if (flagLandscapeUseTransparency && landscapeTransparency>0.)
+		return -1.;
+	else
+		return landscape->getSinMinAltitudeLimit();
 }
 
 bool LandscapeMgr::getFlagUseLightPollutionFromDatabase() const
@@ -1120,6 +1137,7 @@ void LandscapeMgr::setFlagUseLightPollutionFromDatabase(const bool usage)
 	if (flagLightPollutionFromDatabase != usage)
 	{
 		flagLightPollutionFromDatabase = usage;
+		StelApp::immediateSave("viewing/flag_light_pollution_database", usage);
 
 		StelCore* core = StelApp::getInstance().getCore();
 
@@ -1140,72 +1158,96 @@ void LandscapeMgr::onLocationChanged(const StelLocation &loc)
 	{
 		//this was previously logic in ViewDialog, but should really be on a non-GUI layer
 		StelCore* core = StelApp::getInstance().getCore();
-		float lum;
-		if (!loc.planetName.contains("Earth")) // location not on Earth...
-			lum = 0;
-		else if(loc.lightPollutionLuminance.isValid())
-			lum = loc.lightPollutionLuminance.toFloat();
-		else // ...or it is an observatory, or it is an unknown location
-			lum = loc.DEFAULT_LIGHT_POLLUTION_LUMINANCE;
-
+		float lum=0.; // location not on Earth...
+		if (loc.planetName.contains("Earth"))
+		{
+			if(loc.lightPollutionLuminance.isValid())
+				lum = loc.lightPollutionLuminance.toFloat();
+			else // ...or it is an observatory, or it is an unknown location
+				lum = loc.DEFAULT_LIGHT_POLLUTION_LUMINANCE;
+		}
 		core->getSkyDrawer()->setLightPollutionLuminance(lum);
 	}
 }
 
+// Load landscapeID, but do not load its associated location.
+// If landscapeID is empty but flagLandscapeAutoSelection is true, load a location fitting to loc's planet.
 void LandscapeMgr::onTargetLocationChanged(const StelLocation &loc, const QString& landscapeID)
 {
-//	if (loc.planetName != currentPlanetName)
+	//qDebug() << "LandscapeMgr::onTargetLocationChanged:" << loc.serializeToLine().replace('\t', '|') << "Landscape requested:" << landscapeID;
+	if (!landscapeID.isEmpty() && getAllLandscapeIDs().contains(landscapeID))
 	{
-		if (!landscapeID.isEmpty())
-			setCurrentLandscapeID(landscapeID);
-		else if (flagLandscapeAutoSelection)
-		{
-			// If we have a landscape for selected planet then set it, otherwise use zero horizon landscape
-			const bool landscapeSetsLocation = getFlagLandscapeSetsLocation();
-			setFlagLandscapeSetsLocation(false);
-			if (getAllLandscapeNames().indexOf(loc.planetName)>0)
-				setCurrentLandscapeName(loc.planetName);
-			else
-				setCurrentLandscapeID("zero");
-			setFlagLandscapeSetsLocation(landscapeSetsLocation);
-		}
-		currentPlanetName = loc.planetName;
-
-		if (loc.role==QChar('o')) // observer?
-		{
-			if (flagEnvironmentAutoEnabling)
-			{
-				setFlagAtmosphere(false);
-				setFlagFog(false);
-				setFlagLandscape(false);
-				setFlagCardinalPoints(false);
-				//setFlagOrdinalsPoints(false);
-				//setFlagOrdinals16WRPoints(false);
-			}
-		}
+		const bool landscapeSetsLocation = getFlagLandscapeSetsLocation();
+		setFlagLandscapeSetsLocation(false);
+		setCurrentLandscapeID(landscapeID);
+		setFlagLandscapeSetsLocation(landscapeSetsLocation);
+	}
+	else if(landscapeID.startsWith("ZeroColor("))
+	{
+		// Load a zero landscape and recolor it.
+		// This can happen when clicking on the map. The point on the map can be sampled for color (e.g., desert, greengrass, ocean blue, polar white, ...)
+		const bool landscapeSetsLocation = getFlagLandscapeSetsLocation();
+		setFlagLandscapeSetsLocation(false);
+		setCurrentLandscapeID("zero");
+		Vec3f color(0.3);
+		static const QRegularExpression zeroColor("^ZeroColor\\(([0-9].[0-9]+,[0-9].[0-9]+,[0-9].[0-9]+)\\)$");
+		QRegularExpressionMatch match=zeroColor.match(landscapeID);
+		if (match.hasMatch())
+			color=Vec3f(match.captured(1));
 		else
+			qDebug() << "Cannot extract color from landscapeID" << landscapeID;
+		LandscapePolygonal *l=static_cast<LandscapePolygonal*>(landscape);
+		l->setGroundColor(color);
+		setFlagLandscapeSetsLocation(landscapeSetsLocation);
+	}
+	else if (flagLandscapeAutoSelection && (loc.planetName != currentPlanetName))
+	{
+		//qDebug() << "landscapeID empty. Try planet name" << loc.planetName << "or zero";
+		// If we have a landscape for selected planet then set it, otherwise use zero horizon landscape
+		const bool landscapeSetsLocation = getFlagLandscapeSetsLocation();
+		setFlagLandscapeSetsLocation(false);
+		if (getAllLandscapeNames().indexOf(loc.planetName)>0)
+			setCurrentLandscapeName(loc.planetName);
+		else
+			setCurrentLandscapeID("zero");
+		setFlagLandscapeSetsLocation(landscapeSetsLocation);
+	}
+
+	if (loc.role==QChar('o')) // observer?
+	{
+		if (flagEnvironmentAutoEnabling)
 		{
-			SolarSystem* ssystem = static_cast<SolarSystem*>(StelApp::getInstance().getModuleMgr().getModule("SolarSystem"));
-			PlanetP pl = ssystem->searchByEnglishName(loc.planetName);
-			if (pl && flagEnvironmentAutoEnabling)
-			{
-				QSettings* conf = StelApp::getInstance().getSettings();
-				setFlagAtmosphere(pl->hasAtmosphere() && conf->value("landscape/flag_atmosphere", true).toBool());
-				setFlagFog(pl->hasAtmosphere() && conf->value("landscape/flag_fog", true).toBool());
-				setFlagLandscape(true);
-				setFlagCardinalPoints(conf->value("viewing/flag_cardinal_points", true).toBool());
-				setFlagOrdinalPoints(conf->value("viewing/flag_ordinal_points", true).toBool());
-				setFlagOrdinal16WRPoints(conf->value("viewing/flag_16wcr_points", false).toBool());
-				setFlagOrdinal32WRPoints(conf->value("viewing/flag_32wcr_points", false).toBool());
-			}
+			setFlagAtmosphere(false);
+			setFlagFog(false);
+			setFlagLandscape(false);
+			setFlagCardinalPoints(false); // suppresses all
 		}
 	}
+	else
+	{
+		SolarSystem* ssystem = static_cast<SolarSystem*>(StelApp::getInstance().getModuleMgr().getModule("SolarSystem"));
+		PlanetP pl = ssystem->searchByEnglishName(loc.planetName);
+		if (pl && flagEnvironmentAutoEnabling && currentPlanetName!=loc.planetName)
+		{
+			QSettings* conf = StelApp::getInstance().getSettings();
+			setFlagAtmosphere(pl->hasAtmosphere() && conf->value("landscape/flag_atmosphere", true).toBool());
+			setFlagFog(pl->hasAtmosphere() && conf->value("landscape/flag_fog", true).toBool());
+			setFlagLandscape(conf->value("landscape/flag_landscape", true).toBool());
+			setFlagCardinalPoints(conf->value("viewing/flag_cardinal_points", true).toBool());
+			setFlagOrdinalPoints(conf->value("viewing/flag_ordinal_points", true).toBool());
+			setFlagOrdinal16WRPoints(conf->value("viewing/flag_16wcr_points", false).toBool());
+			setFlagOrdinal32WRPoints(conf->value("viewing/flag_32wcr_points", false).toBool());
+		}
+	}
+	currentPlanetName = loc.planetName;
+	//qDebug() << "LandscapeMgr::onTargetLocationChanged done" ;
 }
 
 void LandscapeMgr::setFlagFog(const bool displayed)
 {
 	if (landscape->getFlagShowFog() != displayed) {
 		landscape->setFlagShowFog(displayed);
+		StelApp::immediateSave("landscape/flag_fog", displayed);
 		emit fogDisplayedChanged(displayed);
 	}
 }
@@ -1217,8 +1259,9 @@ bool LandscapeMgr::getFlagFog() const
 
 void LandscapeMgr::setFlagIllumination(const bool displayed)
 {
-	if (landscape->getFlagShowIllumination() != displayed) {
-		landscape->setFlagShowIllumination(displayed);
+	if (Landscape::getFlagShowIllumination() != displayed) {
+		Landscape::setFlagShowIllumination(displayed);
+		StelApp::immediateSave("landscape/flag_enable_illumination_layer", displayed);
 		emit illuminationDisplayedChanged(displayed);
 	}
 }
@@ -1228,46 +1271,180 @@ bool LandscapeMgr::getFlagIllumination() const
 	return landscape->getFlagShowIllumination();
 }
 
+void LandscapeMgr::setLandscapeTransparency(const double f)
+{
+	landscapeTransparency = f;
+	StelApp::immediateSave("landscape/transparency", f);
+	emit landscapeTransparencyChanged(f);
+}
+
+double LandscapeMgr::getLandscapeTransparency() const
+{
+	return landscapeTransparency;
+}
+
+// Return the value of the flag determining if a transparency should be used.
+bool LandscapeMgr::getFlagLandscapeUseTransparency() const
+{
+	return flagLandscapeUseTransparency;
+}
+// Set the value of the flag determining if a transparency should be used.
+void LandscapeMgr::setFlagLandscapeUseTransparency(bool b)
+{
+	if (b!=flagLandscapeUseTransparency)
+	{
+		flagLandscapeUseTransparency=b;
+		StelApp::immediateSave("landscape/flag_transparency", b);
+		emit flagLandscapeUseTransparencyChanged(b);
+	}
+}
+
 void LandscapeMgr::setFlagLabels(const bool displayed)
 {
-	if (landscape->getFlagShowLabels() != displayed) {
-		landscape->setFlagShowLabels(displayed);
+	if (static_cast<bool>(Landscape::labelFader) != displayed) {
+		Landscape::labelFader=displayed;
+		StelApp::immediateSave("landscape/flag_enable_labels", displayed);
 		emit labelsDisplayedChanged(displayed);
 	}
 }
 
 bool LandscapeMgr::getFlagLabels() const
 {
-	return landscape->getFlagShowLabels();
+	return static_cast<bool>(Landscape::labelFader);
 }
 
 void LandscapeMgr::setLabelFontSize(const int size)
 {
-	landscape->setLabelFontSize(size);
+	Landscape::fontSize=size;
+	StelApp::immediateSave("landscape/label_font_size", size);
 	emit labelFontSizeChanged(size);
 }
 
 int LandscapeMgr::getLabelFontSize() const
 {
-	return landscape->getLabelFontSize();
+	return Landscape::fontSize;
+}
+
+void LandscapeMgr::setLabelAngle(const int angleDeg)
+{
+	Landscape::labelAngle = angleDeg;
+	StelApp::immediateSave("landscape/label_angle", angleDeg);
+	emit labelAngleChanged(angleDeg);
+}
+
+int LandscapeMgr::getLabelAngle() const
+{
+	return Landscape::labelAngle;
 }
 
 void LandscapeMgr::setLabelColor(const Vec3f& c)
 {
-	landscape->setLabelColor(c);
+	Landscape::labelColor=c;
 	emit labelColorChanged(c);
 }
 
 Vec3f LandscapeMgr::getLabelColor() const
 {
-	return landscape->getLabelColor();
+	return Landscape::labelColor;
 }
+
+//! Retrieve flag for rendering polygonal line (if one is defined)
+bool LandscapeMgr::getFlagPolyLineOnlyDisplayed() const
+{
+	return flagPolyLineDisplayedOnly;
+}
+//! Set flag for rendering polygonal line (if one is defined)
+void LandscapeMgr::setFlagPolyLineOnlyDisplayed(bool b)
+{
+	if(b!=flagPolyLineDisplayedOnly)
+	{
+		flagPolyLineDisplayedOnly=b;
+		StelApp::immediateSave("landscape/flag_polyline_only", b);
+		emit flagPolyLineOnlyDisplayedChanged(b);
+	}
+}
+
+//! Retrieve thickness for rendering polygonal line (if one is defined)
+int LandscapeMgr::getPolyLineThickness() const
+{
+	return Landscape::horizonPolygonLineThickness;
+}
+
+//! Set thickness for rendering polygonal line (if one is defined)
+void LandscapeMgr::setPolyLineThickness(int thickness)
+{
+	Landscape::horizonPolygonLineThickness=thickness;
+	StelApp::immediateSave("landscape/polyline_thickness", thickness);
+	emit polyLineThicknessChanged(thickness);
+}
+
+void LandscapeMgr::setPolyLineColor(const Vec3f& c)
+{
+	Landscape::horizonPolygonLineColor = c;
+	emit polyLineColorChanged(c);
+}
+
+Vec3f LandscapeMgr::getPolyLineColor() const
+{
+	return Landscape::horizonPolygonLineColor;
+}
+
+// Return the value of the flag determining if a change of landscape will update the observer location.
+bool LandscapeMgr::getFlagLandscapeSetsLocation() const
+{
+	return flagLandscapeSetsLocation;
+}
+// Set the value of the flag determining if a change of landscape will update the observer location.
+void LandscapeMgr::setFlagLandscapeSetsLocation(bool b)
+{
+	if(b!=flagLandscapeSetsLocation)
+	{
+		flagLandscapeSetsLocation=b;
+		StelApp::immediateSave("landscape/flag_landscape_sets_location", b);
+		emit flagLandscapeSetsLocationChanged(b);
+	}
+}
+
+// Return the value of the flag determining if a minimal brightness should be used to keep landscape visible.
+bool LandscapeMgr::getFlagLandscapeUseMinimalBrightness() const
+{
+	return flagLandscapeUseMinimalBrightness;
+}
+
+// Set the value of the flag determining if a minimal brightness should be used to keep landscape visible.
+void LandscapeMgr::setFlagLandscapeUseMinimalBrightness(bool b)
+{
+	if(b!=flagLandscapeUseMinimalBrightness)
+	{
+		flagLandscapeUseMinimalBrightness=b;
+		StelApp::immediateSave("landscape/flag_minimal_brightness", b);
+		emit flagLandscapeUseMinimalBrightnessChanged(b);
+	}
+}
+
+// Return the value of the flag determining if the minimal brightness should be taken from landscape.ini
+bool LandscapeMgr::getFlagLandscapeSetsMinimalBrightness() const
+{
+	return flagLandscapeSetsMinimalBrightness;
+}
+// Sets the value of the flag determining if the minimal brightness should be taken from landscape.ini
+void LandscapeMgr::setFlagLandscapeSetsMinimalBrightness(bool b)
+{
+	if(b!=flagLandscapeSetsMinimalBrightness)
+	{
+		flagLandscapeSetsMinimalBrightness=b;
+		StelApp::immediateSave("landscape/flag_landscape_sets_minimal_brightness", b);
+		emit flagLandscapeSetsMinimalBrightnessChanged(b);
+	}
+}
+
 
 void LandscapeMgr::setFlagLandscapeAutoSelection(bool enableAutoSelect)
 {
 	if(enableAutoSelect != flagLandscapeAutoSelection)
 	{
 		flagLandscapeAutoSelection = enableAutoSelect;
+		StelApp::immediateSave("viewing/flag_landscape_autoselection", enableAutoSelect);
 		emit flagLandscapeAutoSelectionChanged(enableAutoSelect);
 	}
 }
@@ -1282,6 +1459,7 @@ void LandscapeMgr::setFlagEnvironmentAutoEnable(bool b)
 	if(b != flagEnvironmentAutoEnabling)
 	{
 		flagEnvironmentAutoEnabling = b;
+		StelApp::immediateSave("viewing/flag_environment_auto_enable", b);
 		emit setFlagEnvironmentAutoEnableChanged(b);
 	}
 }
@@ -1289,6 +1467,22 @@ void LandscapeMgr::setFlagEnvironmentAutoEnable(bool b)
 bool LandscapeMgr::getFlagEnvironmentAutoEnable() const
 {
 	return flagEnvironmentAutoEnabling;
+}
+
+// Return the minimal brightness value of the landscape
+double LandscapeMgr::getDefaultMinimalBrightness() const
+{
+	return defaultMinimalBrightness;
+}
+// Set the minimal brightness value of the landscape.
+void LandscapeMgr::setDefaultMinimalBrightness(const double b)
+{
+	if(fabs(b-defaultMinimalBrightness)>0.0)
+	{
+		defaultMinimalBrightness=b;
+		StelApp::immediateSave("landscape/minimal_brightness", b);
+		emit defaultMinimalBrightnessChanged(b);
+	}
 }
 
 /*********************************************************************
@@ -1792,8 +1986,13 @@ QString LandscapeMgr::installLandscapeFromArchive(QString sourceFilePath, const 
 	}
 	QDir destinationDir (parentDestinationDir.absoluteFilePath("landscapes"));
 
+	#if USE_BUNDLED_QTCOMPRESS
+	Stel::QZipReader reader(sourceFilePath);
+	if (reader.status() != Stel::QZipReader::NoError)
+	#else
 	QZipReader reader(sourceFilePath);
 	if (reader.status() != QZipReader::NoError)
+	#endif
 	{
 		qWarning() << "LandscapeMgr: Unable to open as a ZIP archive:" << QDir::toNativeSeparators(sourceFilePath);
 		emit errorNotArchive();

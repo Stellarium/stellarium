@@ -76,25 +76,15 @@ void Meteor::init(const float& radiantAlpha, const float& radiantDelta,
 	m_matAltAzToRadiant = Mat4d::zrotation(static_cast<double>(radiantAz)) * Mat4d::yrotation(M_PI_2 - static_cast<double>(radiantAlt));
 
 	// select a random initial meteor altitude in the horizontal system [MIN_ALTITUDE, MAX_ALTITUDE]
-#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
 	float initialAlt = MIN_ALTITUDE + (MAX_ALTITUDE - MIN_ALTITUDE) * StelApp::getInstance().getRandF();
-#else
-	float initialAlt = MIN_ALTITUDE + (MAX_ALTITUDE - MIN_ALTITUDE) * (static_cast<float>(qrand()) / (static_cast<float>(RAND_MAX) + 1));
-#endif
 	// calculates the max z-coordinate for the current radiant
 	float maxZ = meteorZ(M_PI_2f - radiantAlt, initialAlt);
 
 	// meteor trajectory
 	// select a random xy position in polar coordinates (radiant system)
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
 	const float xyDist = maxZ     * StelApp::getInstance().getRandF(); // [0, maxZ]
 	const float theta = 2 * M_PIf * StelApp::getInstance().getRandF(); // [0, 2pi]
-#else
-	const float xyDist = maxZ     * (static_cast<float>(qrand()) / (static_cast<float>(RAND_MAX) + 1)); // [0, maxZ]
-	const float theta = 2 * M_PIf * (static_cast<float>(qrand()) / (static_cast<float>(RAND_MAX) + 1)); // [0, 2pi]
-#endif
-
 
 	// initial meteor coordinates (radiant system)
 	m_position[0] = static_cast<double>(xyDist * std::cos(theta));
@@ -124,11 +114,7 @@ void Meteor::init(const float& radiantAlpha, const float& radiantDelta,
 	{
 		// earth-grazers are rare!
 		// introduce a probabilistic factor just to make them a bit harder to occur
-		#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
 		float prob = StelApp::getInstance().getRandF();
-		#else
-		float prob = (static_cast<float>(qrand()) / (static_cast<float>(RAND_MAX) + 1));
-		#endif
 		if (prob > 0.3f) {
 			return;
 		}
@@ -153,12 +139,8 @@ void Meteor::init(const float& radiantAlpha, const float& radiantDelta,
 		return;
 	}
 
-	// select random magnitude [-3; 4.5]
-#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
-	float Mag = StelApp::getInstance().getRandF() * 7.5f - 3.f;
-#else
-	float Mag = (static_cast<float>(qrand()) / (static_cast<float>(RAND_MAX) + 1)) * 7.5f - 3.f;
-#endif
+	// select random magnitude [-4.5; 4.5]
+	float Mag = StelApp::getInstance().getRandF() * 9.0f - 4.5f;
 	// compute RMag and CMag
 	RCMag rcMag;
 	m_core->getSkyDrawer()->computeRCMag(Mag, &rcMag);
@@ -288,11 +270,7 @@ void Meteor::buildColorVectors(const QList<ColorPair> colors)
 	// multi-color ?
 	// select a random segment to be the first (to alternate colors)
 	if (colors.size() > 1) {
-		#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
 		int firstSegment = StelApp::getInstance().getRandBounded(0, segs); // [0, segments-1]
-		#else
-		int firstSegment = qRound((segs - 1) * (static_cast<float>(qrand()) / (static_cast<float>(RAND_MAX) + 1))); // [0, segments-1]
-		#endif
 		QVector<Vec4f> lineColor2 = lineColor.mid(0, firstSegment);
 		QVector<Vec4f> lineColor1 = lineColor.mid(firstSegment);
 		lineColor.clear();

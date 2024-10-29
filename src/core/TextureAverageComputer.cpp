@@ -33,7 +33,7 @@ Vec4f TextureAverageComputer::getTextureAverageSimple(const GLuint texture, cons
 
 	using namespace std;
 	// Formula from the glspec, "Mipmapping" subsection in section 3.8.11 Texture Minification
-	const auto totalMipmapLevels = 1+floor(log2(max(width,height)));
+	const auto totalMipmapLevels = 1+std::floor(log2(max(width,height)));
 	const auto deepestLevel=totalMipmapLevels-1;
 
 #ifndef NDEBUG

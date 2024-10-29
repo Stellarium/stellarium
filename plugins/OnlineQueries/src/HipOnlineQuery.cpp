@@ -41,7 +41,7 @@ HipOnlineReply::~HipOnlineReply()
 		reply->abort();
 		//do not use delete here
 		reply->deleteLater();
-		reply = Q_NULLPTR;
+		reply = nullptr;
 	}
 }
 
@@ -53,7 +53,7 @@ void HipOnlineReply::deleteNetworkReply()
 		disconnect(reply, SIGNAL(finished()), this, SLOT(httpQueryFinished()));
 		reply->abort();
 		delete reply;
-		reply = Q_NULLPTR;
+		reply = nullptr;
 	}
 }
 
@@ -95,7 +95,7 @@ QString HipOnlineReply::getCurrentStatusString() const
 	return QString();
 }
 
-HipOnlineQuery::HipOnlineQuery(QString baseURL, QObject* parent) : QObject(parent), baseURL(baseURL)
+HipOnlineQuery::HipOnlineQuery(const QString &baseURL, QObject* parent) : QObject(parent), baseURL(baseURL)
 {
 	networkMgr = new QNetworkAccessManager(this);
 }
@@ -110,7 +110,7 @@ HipOnlineReply* HipOnlineQuery::lookup(const int hipID)
 }
 
 // Lookup in external database for the passed name.
-HipOnlineReply* HipOnlineQuery::lookup(const QString name)
+HipOnlineReply* HipOnlineQuery::lookup(const QString &name)
 {
 	// Create the Starnames query
 	QString url=QString(baseURL).arg(name);
@@ -119,7 +119,7 @@ HipOnlineReply* HipOnlineQuery::lookup(const QString name)
 }
 
 // Lookup in external database for the passed HIP number.
-HipOnlineReply* HipOnlineQuery::lookup(const QString url, const int hipID)
+HipOnlineReply* HipOnlineQuery::lookup(const QString &url, const int hipID)
 {
 	baseURL=url;
 	// Create the Star ID query
@@ -129,7 +129,7 @@ HipOnlineReply* HipOnlineQuery::lookup(const QString url, const int hipID)
 }
 
 // Lookup in external database for the passed name.
-HipOnlineReply* HipOnlineQuery::lookup(const QString url, const QString name)
+HipOnlineReply* HipOnlineQuery::lookup(const QString &url, const QString &name)
 {
 	baseURL=url;
 	// Create the Starnames query

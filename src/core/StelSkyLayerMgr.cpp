@@ -44,7 +44,7 @@ StelSkyLayerMgr::StelSkyLayerMgr(void) : flagShow(true)
 
 StelSkyLayerMgr::~StelSkyLayerMgr()
 {
-	for (auto* s : qAsConst(allSkyLayers))
+	for (auto* s : std::as_const(allSkyLayers))
 		delete s;
 }
 
@@ -168,7 +168,7 @@ void StelSkyLayerMgr::draw(StelCore* core)
 
 	StelPainter sPainter(core->getProjection(StelCore::FrameJ2000));
 	sPainter.setBlending(true, GL_ONE, GL_ONE); //additive blending
-	for (auto* s : qAsConst(allSkyLayers))
+	for (auto* s : std::as_const(allSkyLayers))
 	{
 		if (s->show) 
 		{
@@ -226,7 +226,7 @@ void StelSkyLayerMgr::percentLoadedChanged(int percentage)
 
 StelSkyLayerMgr::SkyLayerElem* StelSkyLayerMgr::skyLayerElemForLayer(const StelSkyLayer* t)
 {
-    for (auto* e : qAsConst(allSkyLayers))
+    for (auto* e : std::as_const(allSkyLayers))
 	{
 		if (e->layer==t)
 		{

@@ -66,6 +66,8 @@ private slots:
 	void updateShortcutStrings();
 
 	void updateToolTipStrings();
+	//! Connect to the RadioButtons to set coordinate text output
+	void setCoordinateTextStyle();
 
 private:
 	//! Connects the UI to update events from the Scenery3dMgr
@@ -74,7 +76,7 @@ private:
 	void setToInitialValues();
 	void updateTextBrowser(const SceneInfo& si);
 
-	QVector<QAbstractButton*> shortcutButtons;
+	QVector<QWidget*> shortcutButtons; // a collection of checkable Buttons and GroupBoxes
 	Ui_scenery3dDialogForm* ui;
 	Scenery3d* mgr;
 };

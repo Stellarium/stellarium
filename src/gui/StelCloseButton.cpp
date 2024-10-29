@@ -21,12 +21,12 @@
 
 
 StelCloseButton::StelCloseButton(QWidget* parent)
-	: QPushButton(parent)
+	: QToolButton(parent)
 	, iconNormal(":/graphicGui/uieCloseButton.png")
 	, iconHover(":/graphicGui/uieCloseButton-hover.png")
 {
 	// Qt 5.15 regression: QBushButton without borders does not respond to clicks
-	setStyleSheet("border: 1px solid rgba(0, 0, 0, 0); background: none;");
+	setStyleSheet("border: 1px solid rgba(0, 0, 0, 0);");
 
 	// In Qt 5.12.8 the icon stretches too much for some reason, so let's
 	// simply make it the expected size. This will break high-DPI scaled mode,

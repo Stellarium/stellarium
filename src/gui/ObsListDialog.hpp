@@ -29,6 +29,7 @@
 
 //! @class ObsListDialog
 //! Since V0.21.2, this class manages the ObservingLists, successor of the Bookmarks feature available since 0.15.
+//! @note The old Bookmarks.json format should now be seen as deprecated.
 //! Updated in Version 1.0: ObservingLists Version 2.0
 //! Updated in Version 23.1: ObservingLists Version 2.1
 //!
@@ -50,6 +51,7 @@
 //! "observingLists": {
 //!     "{84744f7b-c353-45b0-8394-69af2a1e0917}": { // List OLUD. This is a unique ID
 //! 	"creation date": "2022-09-29 20:05:07",
+//!	"last edit": "2022-11-29 22:15:38",
 //! 	"description": "Bookmarks of previous Stellarium version.",
 //! 	"name": "bookmarks list",
 //! 	"objects": [                                // List is stored alphabetized, but given here in contextualized order for clarity.
@@ -75,6 +77,7 @@
 //!     },                                            // end of list 84744f7b-...
 //!     "{bd40274c-a321-40c1-a6f3-bc8f11026326}": {   // List OLUD of next list.
 //! 	"creation date": "2022-12-21 11:12:39",
+//!	"last edit": "2023-07-29 22:23:38",
 //! 	"description": "test of unification",
 //! 	"name": "mine_edited",
 //! 	"objects": [
@@ -113,7 +116,7 @@
 //! Fix a confusion introduced in the 1.* series:
 //! The ObsList has entries
 //! - "designation": The catalog number (DSO), HIP number (star), or canonical name (planet).
-//! - "nameI18n": translated name for display. Actually this is bad in case of list exchange.
+//! - "nameI18n": translated name for display. Actually this is bad design in case of list exchange.
 //! - "type": As given by ObjectP->getType() or getObjectType()? This was inconsistent.
 //! FIXES:
 //! - "designation" used in combination with type as real unique object ID. For DSO, getDSODesignationWIC() must be used.
@@ -153,7 +156,7 @@ public:
 		double jd;             //!< optional: stores date of observation
 		QString location;      //!< optional: should be a full location encoded with StelLocation::serializeToLine()
 		QString landscapeID;   //!< optional: landscapeID of landscape at moment of item creation.
-		double fov;            //!< optional: Field of view
+		double fov;            //!< optional: Field of view [degrees]
 		bool isVisibleMarker;  //!< Something around user-markers or SIMBAD-retrieved objects. Test and document!
 
 		//! constructor
@@ -276,7 +279,8 @@ private:
 
 	//! Load the lists names from jsonMap,
 	//! Populate the list names into combo box and extract defaultOlud
-	void loadListNames();
+	//! Note that list names may not be unique, but the OLUDs must be.
+	void loadListNames(const QString &listID = "");
 
 	//! Load the selected observing list (selectedOlud) from the jsonMap.
 	void loadSelectedList();
@@ -292,7 +296,8 @@ private:
 	QVariantMap prepareCurrentList(QHash<QString, observingListItem> &itemHash);
 
 	//! Put the bookmarks in bookmarksHash into observingLists under the listname "bookmarks list". Does not write JSON!
-	void saveBookmarksHashInObservingLists(const QHash<QString, observingListItem> &bookmarksHash);
+	//! @return OLUD of the imported bookmarks list.
+	QString saveBookmarksHashInObservingLists(const QHash<QString, observingListItem> &bookmarksHash);
 
 	//! Sort the obsListTreeView by the column name given in parameter
 	void sortObsListTreeViewByColumnName(const QString &columnName);
@@ -367,6 +372,12 @@ private slots:
 	//! Connected to the defaultList checkbox
 	void defaultClicked(bool b);
 
+	//! open a file dialog to browse for a directory to save observing lists to or retrieve them from.
+	//! If a directory is selected (i.e. dialog not cancelled), current
+	//! value will be changed and saved to config file.
+	void browseForObsListDir();
+	void selectObsListDir();
+
 private:
 	static const QString JSON_FILE_NAME;
 	static const QString JSON_FILE_BASENAME;
@@ -380,6 +391,7 @@ private:
 	static const QString KEY_DEFAULT_LIST_OLUD;
 	static const QString KEY_OBSERVING_LISTS;
 	static const QString KEY_CREATION_DATE;
+	static const QString KEY_LAST_EDIT;
 	static const QString KEY_BOOKMARKS;
 	static const QString KEY_NAME;
 	static const QString KEY_NAME_I18N;

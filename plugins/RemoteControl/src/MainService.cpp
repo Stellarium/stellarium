@@ -29,7 +29,7 @@
 #include "StelMovementMgr.hpp"
 #include "StelObjectMgr.hpp"
 #include "StelPropertyMgr.hpp"
-#include "StelSkyCultureMgr.hpp"
+//#include "StelSkyCultureMgr.hpp"
 #include "StelUtils.hpp"
 
 #include <QJsonDocument>
@@ -39,23 +39,23 @@
 
 MainService::MainService(QObject *parent)
 	: AbstractAPIService(parent),
+	  core(StelApp::getInstance().getCore()),
+	  actionMgr(StelApp::getInstance().getStelActionManager()),
+	  lsMgr(GETSTELMODULE(LandscapeMgr)),
+	  localeMgr(&StelApp::getInstance().getLocaleMgr()),
+	  mvmgr(GETSTELMODULE(StelMovementMgr)),
+	  objMgr(&StelApp::getInstance().getStelObjectMgr()),
+	  propMgr(StelApp::getInstance().getStelPropertyManager()),
+  #ifdef ENABLE_SCRIPTING
+	  scriptMgr(&StelApp::getInstance().getScriptMgr()),
+  #endif
+	  skyCulMgr(&StelApp::getInstance().getSkyCultureMgr()),
 	  moveX(0),moveY(0),lastMoveUpdateTime(0),
 	  //100 should be more than enough
 	  //this only has to encompass events that occur between 2 status updates
 	  actionCache(100), propCache(100)
 {
 	//this is run in the main thread
-	core = StelApp::getInstance().getCore();
-	actionMgr =  StelApp::getInstance().getStelActionManager();
-	lsMgr = GETSTELMODULE(LandscapeMgr);
-	localeMgr = &StelApp::getInstance().getLocaleMgr();
-	objMgr = &StelApp::getInstance().getStelObjectMgr();
-	mvmgr = GETSTELMODULE(StelMovementMgr);
-	propMgr = StelApp::getInstance().getStelPropertyManager();
-#ifdef ENABLE_SCRIPTING
-	scriptMgr = &StelApp::getInstance().getScriptMgr();
-#endif
-	skyCulMgr = &StelApp::getInstance().getSkyCultureMgr();
 
 	connect(actionMgr,SIGNAL(actionToggled(QString,bool)),this,SLOT(actionToggled(QString,bool)));
 	connect(propMgr,SIGNAL(stelPropertyChanged(StelProperty*,QVariant)),this,SLOT(propertyChanged(StelProperty*,QVariant)));
@@ -140,7 +140,7 @@ void MainService::get(const QByteArray& operation, const APIParameters &paramete
 			QString localIso = StelUtils::julianDayToISO8601String(jday+gmtShift,true);
 
 			//time zone string
-			QString timeZone = localeMgr->getPrintableTimeZoneLocal(jday);
+			QString timeZone = localeMgr->getPrintableTimeZoneLocal(jday, core->getUTCOffset(jday));
 
 			QJsonObject obj2;
 			obj2.insert("jday",jday);
@@ -283,11 +283,16 @@ void MainService::post(const QByteArray& operation, const APIParameters &paramet
 
 		//set the time + timerate
 		{
-			const QByteArray& raw = parameters.value("time");
+			QByteArray raw = parameters.value("time");
 			if(!raw.isEmpty())
 			{
 				//parse time and set it
-				double jday = QString(raw).toDouble(&ok);
+				double jday = raw.toDouble(&ok);
+				if (!ok)
+				{
+					raw.replace(',', '.');
+					jday=raw.toDouble(&ok);
+				}
 				if(ok)
 				{
 					//check for invalid double (NaN, inf...)
@@ -304,6 +309,8 @@ void MainService::post(const QByteArray& operation, const APIParameters &paramet
 					QMetaObject::invokeMethod(core,"setJD", SERVICE_DEFAULT_INVOKETYPE,
 								  Q_ARG(double,jday));
 				}
+				else
+					qWarning() << "RC Main Service time request for invalid time string:" << raw;
 			}
 		}
 		{
@@ -311,7 +318,7 @@ void MainService::post(const QByteArray& operation, const APIParameters &paramet
 			if(!raw.isEmpty())
 			{
 				//parse timerate and set it
-				double rate = QString(raw).toDouble(&ok);
+				double rate = raw.toDouble(&ok);
 				if(ok)
 				{
 					doneSomething = true;
@@ -511,10 +518,28 @@ void MainService::post(const QByteArray& operation, const APIParameters &paramet
 
 		response.setData("ok");
 	}
+	else if(operation == "window")
+	{
+		bool wOk,hOk;
+
+		double w = parameters.value("w").toDouble(&wOk);
+		double h = parameters.value("h").toDouble(&hOk);
+
+		if(wOk && hOk)
+		{
+			QMetaObject::invokeMethod(this,"setWindowSize", SERVICE_DEFAULT_INVOKETYPE,
+						  Q_ARG(int,w),
+						  Q_ARG(int,h));
+
+			response.setData("ok");
+		}
+		else
+			response.writeRequestError("requires w and h parameters");
+	}
 	else
 	{
 		//TODO some sort of service description?
-		response.writeRequestError("unsupported operation. POST: time,focus,move,view,fov");
+		response.writeRequestError("unsupported operation. POST: time,focus,move,view,fov,window");
 	}
 }
 
@@ -619,6 +644,11 @@ void MainService::setFov(double fov)
 {
 	//TODO calculate a better move duration here
 	mvmgr->zoomTo(fov,0.25f);
+}
+
+void MainService::setWindowSize(const int width, const int height)
+{
+	StelMainView::getInstance().setWindowSize(width, height);
 }
 
 void MainService::actionToggled(const QString &id, bool val)

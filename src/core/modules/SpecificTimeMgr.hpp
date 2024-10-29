@@ -49,14 +49,14 @@ public:
 	Q_ENUM(Solstice)
 
 	SpecificTimeMgr();
-	virtual ~SpecificTimeMgr() Q_DECL_OVERRIDE;
+	~SpecificTimeMgr() override;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
-	virtual void init() Q_DECL_OVERRIDE;
-	virtual void deinit() Q_DECL_OVERRIDE;
-	//virtual void draw(StelCore* core) Q_DECL_OVERRIDE;
-	//virtual double getCallOrder(StelModuleActionName actionName) const Q_DECL_OVERRIDE;
+	void init() override;
+	void deinit() override;
+	//void draw(StelCore* core) override;
+	//double getCallOrder(StelModuleActionName actionName) const override;
 
 	//! Get twilight altitude [degrees]
 	double getTwilightAltitude() const {return twilightAltitude;}
@@ -171,6 +171,7 @@ public slots:
 signals:
 	//! Signal that the configurable twilight altitude for the sun has changed.
 	void twilightAltitudeChanged(double alt);
+	void eventYearChanged();
 
 private:
 	QSettings* conf;

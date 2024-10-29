@@ -45,7 +45,7 @@ void PersianAstronomicalCalendar::setJD(double JD)
 // set date from a vector of calendar date elements sorted from the largest to the smallest.
 // Year-Month[1...13]-Day[1...30]
 // Time is not changed!
-void PersianAstronomicalCalendar::setDate(QVector<int> parts)
+void PersianAstronomicalCalendar::setDate(const QVector<int> &parts)
 {
 	//qDebug() << "PersianAstronomicalCalendar::setDate:" << parts;
 	this->parts=parts;
@@ -58,7 +58,7 @@ void PersianAstronomicalCalendar::setDate(QVector<int> parts)
 	emit jdChanged(JD);
 }
 
-int PersianAstronomicalCalendar::fixedFromPersianAstronomical(QVector<int> persian)
+int PersianAstronomicalCalendar::fixedFromPersianAstronomical(const QVector<int> &persian)
 {
 	const int year =persian.value(0);
 	const int month=persian.value(1);
@@ -84,7 +84,7 @@ int PersianAstronomicalCalendar::persianNewYearOnOrBefore(int rd)
 {
 	double approx=estimatePriorSolarLongitude(static_cast<double>(Calendar::spring), middayInTehran(rd));
 
-	int day=qRound(floor(approx))-2;
+	int day=qRound(std::floor(approx))-2;
 	double lng;
 	do {
 		day++;

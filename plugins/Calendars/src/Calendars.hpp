@@ -154,7 +154,7 @@ public:
 	//! BahaiArithmetic, BahaiAstronomical,
 	//! MayaLongCount, MayaHaab, MayaTzolkin, AztecXihuitl, AztecTonalpohualli
 	//! TODO: ADD HERE: Chinese,  ...
-	Calendar* getCal(QString name);
+	Calendar* getCal(const QString &name);
 
 	#ifdef ENABLE_SCRIPTING
 	//! to be called after program startup, when StelScriptMgr has been set up.
@@ -364,7 +364,7 @@ class CalendarsStelPluginInterface : public QObject, public StelPluginInterface
 public:
 	StelModule* getStelModule() const override;
 	StelPluginInfo getPluginInfo() const override;
-	QObjectList getExtensionList() const override { return QObjectList(); }
+	//QObjectList getExtensionList() const override { return QObjectList(); }
 };
 
 #endif /* CALENDARS_HPP */

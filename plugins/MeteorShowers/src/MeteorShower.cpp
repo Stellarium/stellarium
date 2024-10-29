@@ -311,11 +311,7 @@ void MeteorShower::update(StelCore* core, double deltaTime)
 	float rate = mpf / static_cast<float>(maxMpf);
 	for (int i = 0; i < maxMpf; ++i)
 	{
-		#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
 		float prob = StelApp::getInstance().getRandF();
-		#else
-		float prob = static_cast<float>(qrand()) / static_cast<float>(RAND_MAX);
-		#endif
 		if (prob < rate)
 		{
 			MeteorObj *m = new MeteorObj(core, m_speed, static_cast<float>(m_radiantAlpha), static_cast<float>(m_radiantDelta),
@@ -353,11 +349,7 @@ void MeteorShower::drawRadiant(StelCore *core)
 	painter.setBlending(true, GL_SRC_ALPHA, GL_ONE);
 
 	Vec3f rgb;
-#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
 	float alpha = 0.85f + StelApp::getInstance().getRandF() / 10.f;
-#else
-	float alpha = 0.85f + (static_cast<float>(qrand()) / static_cast<float>(RAND_MAX)) / 10.f;
-#endif
 	switch(m_status)
 	{
 		case ACTIVE_CONFIRMED: //Active, confirmed data
@@ -408,7 +400,7 @@ void MeteorShower::drawMeteors(StelCore *core)
 
 	// step through and draw all active meteors
 	StelPainter painter(core->getProjection(StelCore::FrameAltAz));
-	for (auto* m : qAsConst(m_activeMeteors))
+	for (auto* m : std::as_const(m_activeMeteors))
 	{
 		m->draw(core, painter);
 	}
@@ -440,10 +432,34 @@ MeteorShower::Activity MeteorShower::hasConfirmedShower(double currentSolLong, b
 		const Activity& a = m_activities.at(i);
 		double finishLong = a.finish;
 		if (a.start > finishLong) finishLong += 360.;
-		if (currentSolLong>=(a.start) && currentSolLong<=(finishLong) && a.year==Year)
+		if (currentSolLong>=(a.start) && currentSolLong<=(finishLong))
 		{
-			found = true;
-			return a;
+			int beginMonth, endMonth, beginYear, endYear;
+			double JD = MeteorShower::JDfromSolarLongitude(a.start, Year);
+			StelUtils::getDateFromJulianDay(JD, &beginYear, &beginMonth, &Day);
+			JD = MeteorShower::JDfromSolarLongitude(a.finish, a.year);
+			StelUtils::getDateFromJulianDay(JD, &endYear, &endMonth, &Day);
+			if (endMonth < beginMonth) // For showers that start in December and end in January/February
+			{
+				if ((Year==(a.year-1)) && (Month>endMonth))
+				{
+					found = true;
+					return a;
+				}
+				if ((Year==a.year) && ((Month<endMonth) || (Month==endMonth)))
+				{
+					found = true;
+					return a;
+				}
+			}
+			else
+			{
+				if (Year==a.year)
+				{
+					found = true;
+					return a;
+				}
+			}
 		}
 	}
 	return Activity();
@@ -672,12 +688,14 @@ QString MeteorShower::getInfoString(const StelCore* core, const InfoStringGroup&
 
 		// Altitude of radiant
 		StelUtils::rectToSphe(&az,&alt,getAltAzPosGeometric(core));
-		// Limiting magnitude
-		float mlimit = core->getSkyDrawer()->getLimitMagnitude();
-		if (mlimit>6.5) mlimit = 6.5;
+		// Naked-eye Limiting Magnitude
+		float nelm = StelCore::luminanceToNELM(core->getSkyDrawer()->getLightPollutionLuminance());
+		// float mlimit = core->getSkyDrawer()->getLimitMagnitude();
+		if (nelm>6.5) nelm = 6.5;
 		// Limiting magnitude could be higher than 6.5 but we can't see very faint meteors
 		// and we should set the limit to prevent unrealistic super-high meteor rate.
 		// Hourly rate that goes higher than ZHRmax may also confuse users if we allow it.
+		// Sunlight and moonlight are not taken into account. We should include them in the future version.
 		
 		if (m_activity.zhr > 0)
 		{
@@ -699,14 +717,16 @@ QString MeteorShower::getInfoString(const StelCore* core, const InfoStringGroup&
 
 				// Local hourly rate - radiant altitude and limiting magnitude are taken into account
 				// Jenniskens P. (1994), "Meteor stream activity I. The annual streams", Astron. Astrophys., 287, 990-1013.
-				localHR = qRound(currentZHR*sin(alt) / pow(m_pidx,6.5-mlimit));
+				localHR = qRound(currentZHR*sin(alt) / pow(m_pidx,6.5-nelm));
 				if (localHR<0) localHR = 0;
 				oss << QString("%1: %2<br />")
 						.arg(q_("Current ZHR"))
 						.arg(currentZHR);
-				oss << QString("%1: %2<br />")
+				oss << QString("%1: %2 (%3: %4)<br />")
 						.arg(q_("Local Hourly Rate"))
-						.arg(localHR);
+						.arg(localHR)
+						.arg(q_("Limiting magnitude"))
+						.arg(nelm);
 			}
 		}
 		else
@@ -727,21 +747,24 @@ QString MeteorShower::getInfoString(const StelCore* core, const InfoStringGroup&
 						.arg(minvarZHR)
 						.arg(maxvarZHR);
 
-					int localminvarHR = qRound(minvarZHR*sin(alt) / pow(m_pidx,6.5-mlimit));
-					int localmaxvarHR = qRound(maxvarZHR*sin(alt) / pow(m_pidx,6.5-mlimit));
+					int localminvarHR = qRound(minvarZHR*sin(alt) / pow(m_pidx,6.5-nelm));
+					int localmaxvarHR = qRound(maxvarZHR*sin(alt) / pow(m_pidx,6.5-nelm));
 
 					if (localmaxvarHR > 0)
 					{
-						oss << QString("%1: %2-%3<br />")
+						oss << QString("%1: %2-%3 (%4: %5)<br />")
 						.arg(q_("Local Hourly Rate"))
 						.arg(localminvarHR)
-						.arg(localmaxvarHR);
+						.arg(localmaxvarHR)
+						.arg(q_("Limiting magnitude"))
+						.arg(nelm);
 					}
 				}
 			}
 		}
 	}
 
+	oss << getSolarLunarInfoString(core, flags);
 	postProcessInfoString(str, flags);
 	return str;
 }

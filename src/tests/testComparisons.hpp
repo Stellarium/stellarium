@@ -31,6 +31,7 @@ private slots:
 	void testOSReports();
 	void testUAReports();
 	void testAppName();
+	void testAppVersions();
 };
 
 #endif // _TESTCOMPARISONS_HPP

@@ -3,7 +3,7 @@
 #
 # A tool for build an AppImage package of Stellarium
 #
-# Copyright (c) 2020-2022 Alexander Wolf
+# Copyright (c) 2020-2023 Alexander Wolf
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -75,7 +75,7 @@ then
 
     printf "\nLet's try build an AppImage for version \"%s\"\n" "$version"
 
-    appimage-builder --recipe ${ROOT}/util/appimage/stellarium-appimage.yml --skip-test
+    appimage-builder --recipe ${ROOT}/util/appimage/stellarium-appimage-qt5.yml --skip-test
 
     chmod +x ./Stellarium*.AppImage
 else

@@ -28,10 +28,10 @@
 #include <QJsonObject>
 #include <QStringList>
 
-StelActionService::StelActionService(QObject *parent) : AbstractAPIService(parent)
+StelActionService::StelActionService(QObject *parent) : AbstractAPIService(parent),
+	actionMgr(StelApp::getInstance().getStelActionManager())
 {
 	//this is run in the main thread
-	actionMgr = StelApp::getInstance().getStelActionManager();
 }
 
 void StelActionService::get(const QByteArray& operation, const APIParameters &parameters, APIServiceResponse &response)

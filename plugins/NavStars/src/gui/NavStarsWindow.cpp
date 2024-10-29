@@ -60,8 +60,8 @@ void NavStarsWindow::createDialogContent()
 	ui->setupUi(dialog);
 
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
-	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
-	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
+	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
+	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	populateNavigationalStarsSets();
 	populateNavigationalStarsSetDescription();
@@ -199,7 +199,8 @@ void NavStarsWindow::populateToday()
 	astronomicalTwilightDuration = StelUtils::hoursToHmsStr(duration, true);
 
 	// fill the data
-	ui->labelToday->setText(localeMgr->getPrintableDateLocal(core->getJD()));
+	const double JD=core->getJD();
+	ui->labelToday->setText(localeMgr->getPrintableDateLocal(JD, core->getUTCOffset(JD)));
 	ui->labelDayBegin->setText(dayBegin);
 	ui->labelDayEnd->setText(dayEnd);
 	ui->labelDayDuration->setText(dayDuration);
@@ -221,6 +222,10 @@ void NavStarsWindow::populateToday()
 	ui->labelCivilTwilight->setToolTip(QString("6° %1").arg(belowHorizon));
 	ui->labelNauticalTwilight->setToolTip(QString("12° %1").arg(belowHorizon));
 	ui->labelAstronomicalTwilight->setToolTip(QString("18° %1").arg(belowHorizon));
+	QString twilights = q_("The sum of the daytime duration and duration of morning and evening twilights");
+	ui->labelCivilTwilightDuration->setToolTip(twilights);
+	ui->labelNauticalTwilightDuration->setToolTip(twilights);
+	ui->labelAstronomicalTwilightDuration->setToolTip(twilights);
 }
 
 void NavStarsWindow::populateNavigationalStarsSets()
@@ -239,14 +244,31 @@ void NavStarsWindow::populateNavigationalStarsSets()
 	nsSets->addItem(q_("Anglo-American"), "AngloAmerican");
 	// TRANSLATORS: Part of full phrase: French set of navigational stars
 	nsSets->addItem(q_("French"), "French");
+	// TRANSLATORS: Part of full phrase: British (XVIII century) set of navigational stars
+	nsSets->addItem(q_("British (XVIII century)"), "British");
 	// TRANSLATORS: Part of full phrase: Russian set of navigational stars
 	nsSets->addItem(q_("Russian"), "Russian");
+	// TRANSLATORS: Part of full phrase: Soviet aviation set of navigational stars
+	nsSets->addItem(q_("Soviet aviation"), "USSRAvia");	
 	// TRANSLATORS: Part of full phrase: German set of navigational stars
 	nsSets->addItem(q_("German"), "German");
+
+	// TRANSLATORS: Part of full phrase: Voskhod and Soyuz manned space programs set of navigational stars
+	nsSets->addItem(q_("Voskhod and Soyuz manned space programs"), "USSRSpace");
+	// TRANSLATORS: Part of full phrase: Apollo space program set of navigational stars
+	nsSets->addItem(q_("Apollo space program"), "Apollo");
+	
+	// Telescope alignment stars
 	nsSets->addItem("Gemini APS", "GeminiAPS");
 	nsSets->addItem("Meade LX200", "MeadeLX200");
 	nsSets->addItem("Meade ETX", "MeadeETX");
-	nsSets->addItem("Celestron", "Celestron");
+	nsSets->addItem("Meade Autostar #494", "MeadeAS494");
+	nsSets->addItem("Meade Autostar #497", "MeadeAS497");
+	nsSets->addItem("Celestron NexStar", "CelestronNS");
+	nsSets->addItem("Skywatcher SynScan", "SkywatcherSS");
+	nsSets->addItem("Vixen Starbook", "VixenSB");
+	nsSets->addItem("Argo Navis", "ArgoNavis");
+	nsSets->addItem("Sky Commander DSC", "SkyCommander");
 
 	//Restore the selection
 	index = nsSets->findData(selectedNsSetId, Qt::UserRole, Qt::MatchCaseSensitive);
@@ -269,7 +291,7 @@ void NavStarsWindow::populateNavigationalStarsSetDescription(void)
 void NavStarsWindow::setAboutHtml(void)
 {
 	QString html = "<html><head></head><body>";
-	html += "<h2>" + q_("Navigational Stars Plug-in") + "</h2><table width=\"90%\">";
+	html += "<h2>" + q_("Navigational Stars Plug-in") + "</h2><table class='layout' width=\"90%\">";
 	html += "<tr width=\"30%\"><td><strong>" + q_("Version") + ":</strong></td><td>" + NAVSTARS_PLUGIN_VERSION + "</td></tr>";
 	html += "<tr><td><strong>" + q_("License") + ":</strong></td><td>" + NAVSTARS_PLUGIN_LICENSE + "</td></tr>";
 	html += "<tr><td rowspan='2'><strong>" + q_("Authors") + ":</strong></td><td>Alexander Wolf</td></tr>";

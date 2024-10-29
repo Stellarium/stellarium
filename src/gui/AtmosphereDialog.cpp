@@ -24,6 +24,7 @@
 #include "AtmosphereDialog.hpp"
 #include "StelPropertyMgr.hpp"
 #include "StelFileMgr.hpp"
+#include "StelMainView.hpp"
 #include "ui_atmosphereDialog.h"
 
 #include <QFileInfo>
@@ -63,8 +64,8 @@ void AtmosphereDialog::createDialogContent()
 	
 	//Signals and slots
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
-	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
-	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
+	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
+	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	connectDoubleProperty(ui->pressureDoubleSpinBox,"StelSkyDrawer.atmospherePressure");
 	connectDoubleProperty(ui->temperatureDoubleSpinBox,"StelSkyDrawer.atmosphereTemperature");
@@ -166,7 +167,7 @@ void AtmosphereDialog::browsePathToModel()
 {
 	const auto mgr = StelApp::getInstance().getStelPropertyManager();
 	const auto dataDir = mgr->getProperty(DEFAULT_MODEL_PATH_PROPERTY)->getValue().toString() + "/..";
-	const auto path=QFileDialog::getExistingDirectory(nullptr, q_("Open ShowMySky model"), dataDir);
+	const auto path=QFileDialog::getExistingDirectory(&StelMainView::getInstance(), q_("Open ShowMySky model"), dataDir);
 	if(path.isNull()) return;
 
 	const auto currentModel = mgr->getProperty(MODEL_PROPERTY)->getValue().toString();

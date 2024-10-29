@@ -58,7 +58,7 @@ QString StelTranslator::qtranslate(const QString& s, const QString& c) const
 {
 	if (s.isEmpty())
 		return "";
-	QString res = translator->translate("", s.toUtf8().constData(), c.toUtf8().constData());
+	const auto res = tryQtranslate(s, c);
 	if (res.isEmpty())
 		return s;
 	return res;
@@ -92,6 +92,8 @@ void StelTranslator::initSystemLanguage()
 	if (pos != -1) systemLangName.resize(pos);
 	pos = systemLangName.indexOf('.', 0);
 	if (pos != -1) systemLangName.resize(pos);
+
+	qWarning().noquote() << "System language (ISO 639 / ISO 3166):" << systemLangName;
 }
 
 

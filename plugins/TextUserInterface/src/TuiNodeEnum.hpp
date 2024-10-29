@@ -40,13 +40,13 @@ public:
 	//! @param defValue the string value which is used as the initially selected value.  Note if this is not in the items list, the first item in the items list will be used instead.
 	//! @param parent the node for the parent menu item
 	//! @param prev the previous node in the current menu (typically shares the same parent)
-	TuiNodeEnum(const QString& text, QObject* receiver, const char* method, QStringList items, 
-		    QString defValue, TuiNode* parent=Q_NULLPTR, TuiNode* prev=Q_NULLPTR);
-	virtual TuiNodeResponse handleEditingKey(int key) Q_DECL_OVERRIDE;
-	virtual QString getDisplayText() const Q_DECL_OVERRIDE;
+	TuiNodeEnum(const QString& text, QObject* receiver, const char* method, const QStringList &items,
+		    const QString &defValue, TuiNode* parent=Q_NULLPTR, TuiNode* prev=Q_NULLPTR);
+	TuiNodeResponse handleEditingKey(int key) override;
+	QString getDisplayText() const override;
 
 signals:
-	void setValue(QString s);
+	void setValue(const QString &s);
 
 private:
 	int currentIdx;

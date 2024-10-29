@@ -30,6 +30,8 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 #include <unistd.h>
 #endif
 
+#include <QString>
+
 #include <cstring> // memset
 
 SerialPort::SerialPort(Server &server, const char *serial_device)
@@ -39,11 +41,7 @@ SerialPort::SerialPort(Server &server, const char *serial_device)
 	#endif
 {
 #ifdef Q_OS_WIN
-#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
-	handle = CreateFile(LPCWSTR(serial_device), GENERIC_READ|GENERIC_WRITE, 0, nullptr, OPEN_EXISTING, 0, nullptr);
-#else
-	handle = CreateFile(serial_device, GENERIC_READ|GENERIC_WRITE, 0, nullptr, OPEN_EXISTING, 0, nullptr);
-#endif
+	handle = CreateFileW(LPCWSTR(QString(serial_device).utf16()), GENERIC_READ | GENERIC_WRITE, 0, nullptr, OPEN_EXISTING, 0, nullptr);
 	if (handle == INVALID_HANDLE_VALUE)
 	{
 		*log_file << Now() << "SerialPort::SerialPort(" << serial_device << "): "
@@ -74,18 +72,14 @@ SerialPort::SerialPort(Server &server, const char *serial_device)
 				DCB dcb;
 				memset(&dcb, 0, sizeof(dcb));
 				dcb.DCBlength = sizeof(dcb);
-#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
-				if (!BuildCommDCB(LPCWSTR("9600,n,8,1"), &dcb))
-#else
-				if (!BuildCommDCB("9600,n,8,1", &dcb))
-#endif
+				if (!BuildCommDCBW(LPCWSTR(QString("9600,n,8,1").utf16()), &dcb))
 				{
 					*log_file << Now() << "SerialPort::SerialPort(" << serial_device << "): "
 							      "BuildCommDCB() failed: " << GetLastError() << StelUtils::getEndLineChar();
 				}
 				else
 				{
-					if (!SetCommState(handle,&dcb))
+					if (!SetCommState(handle, &dcb))
 					{
 						*log_file << Now() << "SerialPort::SerialPort(" << serial_device << "): "
 								      "SetCommState() failed: " << GetLastError() << StelUtils::getEndLineChar();

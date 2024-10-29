@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Stellarium
  * Copyright (C) 2008 Guillaume Chereau
  *
@@ -209,6 +209,9 @@ private slots:
 	//! Whether to use autofill for start of words or not.
 	void enableStartOfWordsAutofill(bool enable);
 
+	//! Whether to use sorting by string length or not
+	void enableSortingByLength(bool enable);
+
 	//! Whether to use lock position when coordinates are used or not.
 	void enableLockPosition(bool enable);
 
@@ -246,6 +249,9 @@ private slots:
 
 	//! Clear recent list's data
 	void recentSearchClearDataClicked();
+
+	//! Setting coordinates of the center of screen in spinboxes (following axes of current coordinate system)
+	void setCenterOfScreenCoordinates();
 
 private:
 	bool simbadSearchEnabled() const {return useSimbad;}
@@ -309,6 +315,7 @@ private:
 	bool flagHasSelectedText;
 
 	bool useStartOfWords;
+	bool useLengthSorting;
 	bool useLockPosition;
 	bool useSimbad;
 	bool useFOVCenterMarker;

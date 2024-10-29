@@ -54,7 +54,7 @@ define(["jquery", "api/scripts", "api/remotecontrol"], function($, scriptApi, rc
 		$scriptlist.change(function() {
 			var selection = $scriptlist.children("option").filter(":selected").val();
 
-			$scriptinfo.attr('src', "/api/scripts/info?html=true&id="+selection);
+			$scriptinfo.attr('src', "/api/scripts/info?html=true&id=" + encodeURIComponent(selection));
 
 
 			$bt_runscript.prop({

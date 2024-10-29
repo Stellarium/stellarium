@@ -165,8 +165,8 @@ class Satellites : public StelObjectModule
 	Q_PROPERTY(Vec3f invisibleSatelliteColor	READ getInvisibleSatelliteColor		WRITE setInvisibleSatelliteColor	NOTIFY invisibleSatelliteColorChanged)
 	Q_PROPERTY(Vec3f transitSatelliteColor		READ getTransitSatelliteColor		WRITE setTransitSatelliteColor		NOTIFY transitSatelliteColorChanged)
 	Q_PROPERTY(bool flagUmbraVisible		READ getFlagUmbraVisible		WRITE setFlagUmbraVisible		NOTIFY flagUmbraVisibleChanged)
-	Q_PROPERTY(bool flagUmbraAtFixedDistance	READ getFlagUmbraAtFixedDistance	WRITE setFlagUmbraAtFixedDistance	NOTIFY flagUmbraAtFixedDistanceChanged)
-	Q_PROPERTY(double umbraDistance			READ getUmbraDistance			WRITE setUmbraDistance			NOTIFY umbraDistanceChanged)
+	Q_PROPERTY(bool flagUmbraAtFixedAltitude	READ getFlagUmbraAtFixedAltitude	WRITE setFlagUmbraAtFixedAltitude	NOTIFY flagUmbraAtFixedAltitudeChanged)
+	Q_PROPERTY(double umbraAltitude			READ getUmbraAltitude			WRITE setUmbraAltitude			NOTIFY umbraAltitudeChanged)
 	Q_PROPERTY(Vec3f umbraColor			READ getUmbraColor			WRITE setUmbraColor			NOTIFY umbraColorChanged)
 	Q_PROPERTY(bool flagPenumbraVisible		READ getFlagPenumbraVisible		WRITE setFlagPenumbraVisible		NOTIFY flagPenumbraVisibleChanged)
 	Q_PROPERTY(Vec3f penumbraColor			READ getPenumbraColor			WRITE setPenumbraColor			NOTIFY penumbraColorChanged)
@@ -330,7 +330,11 @@ public:
 	void remove(const QStringList& idList);
 
 	//! get the date and time the TLE elements were updated
-	QDateTime getLastUpdate(void) const {return lastUpdate;}
+	QPair<QDateTime, double> getLastUpdate(void) const {return lastUpdate;}
+	//! set the date and time the TLE elements were updated
+	void setLastUpdate(QDateTime last);
+	void setLastUpdate(double last);
+
 
 	//! get the update frequency in hours
 	int getUpdateFrequencyHours(void) const {return updateFrequencyHours;}
@@ -356,7 +360,7 @@ public:
 	//! @see updateUrls
 	//! @param tleSources a list of valid URLs (http://, ftp://, file://),
 	//! allowed prefixes are "0,", "1," or no prefix.
-	void setTleSources(QStringList tleSources);
+	void setTleSources(const QStringList &tleSources);
 	
 	//! Saves the current list of update URLs to the configuration file.
 	void saveTleSources(const QStringList& urls);
@@ -369,7 +373,7 @@ public:
 	//! @param paths a list of paths to update files
 	//! @param deleteFiles if set, the update files are deleted after
 	//!        they are used, else they are left alone
-	void updateFromFiles(QStringList paths, bool deleteFiles=false);
+	void updateFromFiles(const QStringList &paths, bool deleteFiles=false);
 	
 	//! Updates the loaded satellite collection from the provided data.
 	//! Worker function called by updateFromFiles() and saveDownloadedUpdate().
@@ -435,9 +439,9 @@ signals:
 	void invisibleSatelliteColorChanged(Vec3f);
 	void transitSatelliteColorChanged(Vec3f);
 	void flagUmbraVisibleChanged(bool b);
-	void flagUmbraAtFixedDistanceChanged(bool b);
+	void flagUmbraAtFixedAltitudeChanged(bool b);
 	void umbraColorChanged(Vec3f);
-	void umbraDistanceChanged(double d);
+	void umbraAltitudeChanged(double d);
 	void flagPenumbraVisibleChanged(bool b);
 	void penumbraColorChanged(Vec3f);
 	void flagCFKnownStdMagnitudeChanged(bool b);
@@ -491,7 +495,7 @@ signals:
 
 	void satGroupVisibleChanged();
 
-	void satSelectionChanged(QString satID);
+	void satSelectionChanged(const QString &satID);
 
 public slots:
 	//! get whether or not the plugin will try to update TLE data from the internet
@@ -611,11 +615,10 @@ public slots:
 	void setFlagUmbraVisible(bool b);
 	bool getFlagUmbraVisible() { return flagUmbraVisible; }
 
-	//! Set whether ring of Earth's umbra should be displayed at fixed distance.
+	//! Set whether ring of Earth's umbra should be displayed at given satellite altitude.
 	//! Emits settingsChanged() if the value changes.
-	//! V23.1: For now this had to be disabled/set to false.
-	void setFlagUmbraAtFixedDistance(bool b);
-	bool getFlagUmbraAtFixedDistance() { return flagUmbraAtFixedDistance; }
+	void setFlagUmbraAtFixedAltitude(bool b);
+	bool getFlagUmbraAtFixedAltitude() { return flagUmbraAtFixedAltitude; }
 
 	//! Get color for ring of Earth's umbra
 	//! @return color
@@ -625,9 +628,9 @@ public slots:
 
 	//! Get the fixed distance for center of visualized Earth's umbra
 	//! @return distance, km
-	double getUmbraDistance() { return fixedUmbraDistance; }
+	double getUmbraAltitude() { return fixedUmbraAltitude; }
 	//! Set the fixed distance for center of visualized Earth's umbra
-	void setUmbraDistance(double d);
+	void setUmbraAltitude(double d);
 
 	//! Set whether ring of Earth's penumbra should be displayed.
 	//! Emits settingsChanged() if the value changes.
@@ -642,10 +645,10 @@ public slots:
 
 	//! Display a message on the screen for a few seconds.
 	//! This is used for plugin-specific warnings and such.
-	void displayMessage(const QString& message, const QString hexColor="#999999");
+	void displayMessage(const QString& message, const QString &hexColor="#999999");
 
 	//! Save the current satellite catalog to disk.
-	void saveCatalog(QString path=QString());
+	void saveCatalog(const QString &path=QString());
 
 	//! Set whether custom filter 'known standard magnitude' enabled.
 	//! Emits customFilterChanged()
@@ -778,7 +781,6 @@ private slots:
 	//! Call when button "Save settings" in main GUI are pressed
 	void saveSettings() { saveSettingsToConfig(); }	
 	void translateData();
-	void updateEarthShadowEnlargementFlag(bool state) { earthShadowEnlargementDanjon=state; }
 
 private:
 	//! Drawing the circles of Earth's umbra and penumbra
@@ -790,7 +792,7 @@ private:
 	//! @returns true if the addition was successful.
 	bool add(const TleData& tleData);
 	//! Guess the groups of satellites
-	QStringList guessGroups(const TleData& tleData);
+	QStringList guessGroups(const TleData& tleData);	
 	//! Get the standard magnitude and RCS data for satellite
 	//! @return standard magnitude, RCS
 	QPair<double, double> getStdMagRCS(const TleData& tleData);
@@ -908,7 +910,7 @@ private:
 	bool autoAddEnabled;
 	//! Flag enabling the automatic removal of missing satellites on update.
 	bool autoRemoveEnabled;
-	QDateTime lastUpdate;
+	QPair<QDateTime, double> lastUpdate; // Combines previous QDateTime (slow!) with efficient JD (to be checked each frame in isValidRangeDates()) of the same time.
 	int updateFrequencyHours;
 	//@}
 
@@ -916,17 +918,14 @@ private:
 	//@{
 	//! Flag enabling visualization the Earth's umbra.
 	bool flagUmbraVisible;
-	//! Flag enabling visualization the Earth's umbra at fixed distance
-	//! V23.1: This had to be disabled until computation will be implemented correctly.
-	bool flagUmbraAtFixedDistance; // MUST REMAIN false FOR NOW!
+	//! Flag enabling visualization the Earth's umbra at a given altitude above a spherical Earth
+	bool flagUmbraAtFixedAltitude;
 	Vec3f umbraColor;
 	//! The distance for center of visualized Earth's umbra in kilometers
-	double fixedUmbraDistance;
+	double fixedUmbraAltitude;
 	//! Flag enabling visualization the Earth's penumbra.
 	bool flagPenumbraVisible;
 	Vec3f penumbraColor;
-	//! Used to track whether earth shadow enlargement shall be computed after Danjon (1951)
-	bool earthShadowEnlargementDanjon;
 	//@}
 
 	//! @name Screen message infrastructure
@@ -961,7 +960,7 @@ private slots:
 	//! can be modified to read directly form QNetworkReply-s. --BM
 	void saveDownloadedUpdate(QNetworkReply* reply);
 	void updateObserverLocation(const StelLocation &loc);
-	void changeSelectedSatellite(QString id) { lastSelectedSatellite = id; }
+	void changeSelectedSatellite(const QString &id) { lastSelectedSatellite = id; }
 };
 
 
@@ -978,7 +977,7 @@ class SatellitesStelPluginInterface : public QObject, public StelPluginInterface
 public:
 	StelModule* getStelModule() const override;
 	StelPluginInfo getPluginInfo() const override;
-	QObjectList getExtensionList() const override { return QObjectList(); }
+	//QObjectList getExtensionList() const override { return QObjectList(); }
 };
 
 #endif /* SATELLITES_HPP */

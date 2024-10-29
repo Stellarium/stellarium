@@ -33,6 +33,9 @@ SpecificTimeMgr::SpecificTimeMgr()
 	: twilightAltitude(0.)
 {
 	setObjectName("SpecificTimeMgr");
+	core = StelApp::getInstance().getCore();
+	conf = StelApp::getInstance().getSettings();
+	objMgr = GETSTELMODULE(StelObjectMgr);
 }
 
 SpecificTimeMgr::~SpecificTimeMgr()
@@ -49,9 +52,6 @@ SpecificTimeMgr::~SpecificTimeMgr()
 
 void SpecificTimeMgr::init()
 {
-	core = StelApp::getInstance().getCore();
-	conf = StelApp::getInstance().getSettings();
-	objMgr = GETSTELMODULE(StelObjectMgr);
 	sun = GETSTELMODULE(SolarSystem)->getSun();
 
 	QString timeGroup = N_("Specific Time");
@@ -518,120 +518,136 @@ double SpecificTimeMgr::getSolstice(int year, SpecificTimeMgr::Solstice solstice
 
 void SpecificTimeMgr::currentMarchEquinox()
 {
-	double JD = core->getJDE();
+	double JD = core->getJD();
 	int year, month, day;
 	StelUtils::getDateFromJulianDay(JD, &year, &month, &day);
 	double estime = getEquinox(year, Equinox::March);
 	if (estime>0.)
-		core->setJDE(estime);
+		core->setJD(estime);
 }
 
 void SpecificTimeMgr::nextMarchEquinox()
 {
-	double JD = core->getJDE();
+	double JD = core->getJD();
 	int year, month, day;
 	StelUtils::getDateFromJulianDay(JD, &year, &month, &day);
 	double estime = getEquinox(year + 1, Equinox::March);
 	if (estime>0.)
-		core->setJDE(estime);
+		core->setJD(estime);
+
+	emit eventYearChanged();
 }
 
 void SpecificTimeMgr::previousMarchEquinox()
 {
-	double JD = core->getJDE();
+	double JD = core->getJD();
 	int year, month, day;
 	StelUtils::getDateFromJulianDay(JD, &year, &month, &day);
 	double estime = getEquinox(year - 1, Equinox::March);
 	if (estime>0.)
-		core->setJDE(estime);
+		core->setJD(estime);
+
+	emit eventYearChanged();
 }
 
 void SpecificTimeMgr::currentSeptemberEquinox()
 {
-	double JD = core->getJDE();
+	double JD = core->getJD();
 	int year, month, day;
 	StelUtils::getDateFromJulianDay(JD, &year, &month, &day);
 	double estime = getEquinox(year, Equinox::September);
 	if (estime>0.)
-		core->setJDE(estime);
+		core->setJD(estime);
 }
 
 void SpecificTimeMgr::nextSeptemberEquinox()
 {
-	double JD = core->getJDE();
+	double JD = core->getJD();
 	int year, month, day;
 	StelUtils::getDateFromJulianDay(JD, &year, &month, &day);
 	double estime = getEquinox(year + 1, Equinox::September);
 	if (estime>0.)
-		core->setJDE(estime);
+		core->setJD(estime);
+
+	emit eventYearChanged();
 }
 
 void SpecificTimeMgr::previousSeptemberEquinox()
 {
-	double JD = core->getJDE();
+	double JD = core->getJD();
 	int year, month, day;
 	StelUtils::getDateFromJulianDay(JD, &year, &month, &day);
 	double estime = getEquinox(year - 1, Equinox::September);
 	if (estime>0.)
-		core->setJDE(estime);
+		core->setJD(estime);
+
+	emit eventYearChanged();
 }
 
 void SpecificTimeMgr::currentJuneSolstice()
 {
-	double JD = core->getJDE();
+	double JD = core->getJD();
 	int year, month, day;
 	StelUtils::getDateFromJulianDay(JD, &year, &month, &day);
 	double estime = getSolstice(year, Solstice::June);
 	if (estime>0.)
-		core->setJDE(estime);
+		core->setJD(estime);
 }
 
 void SpecificTimeMgr::nextJuneSolstice()
 {
-	double JD = core->getJDE();
+	double JD = core->getJD();
 	int year, month, day;
 	StelUtils::getDateFromJulianDay(JD, &year, &month, &day);
 	double estime = getSolstice(year + 1, Solstice::June);
 	if (estime>0.)
-		core->setJDE(estime);
+		core->setJD(estime);
+
+	emit eventYearChanged();
 }
 
 void SpecificTimeMgr::previousJuneSolstice()
 {
-	double JD = core->getJDE();
+	double JD = core->getJD();
 	int year, month, day;
 	StelUtils::getDateFromJulianDay(JD, &year, &month, &day);
 	double estime = getSolstice(year - 1, Solstice::June);
 	if (estime>0.)
-		core->setJDE(estime);
+		core->setJD(estime);
+
+	emit eventYearChanged();
 }
 
 void SpecificTimeMgr::currentDecemberSolstice()
 {
-	double JD = core->getJDE();
+	double JD = core->getJD();
 	int year, month, day;
 	StelUtils::getDateFromJulianDay(JD, &year, &month, &day);
 	double estime = getSolstice(year, Solstice::December);
 	if (estime>0.)
-		core->setJDE(estime);
+		core->setJD(estime);
 }
 
 void SpecificTimeMgr::nextDecemberSolstice()
 {
-	double JD = core->getJDE();
+	double JD = core->getJD();
 	int year, month, day;
 	StelUtils::getDateFromJulianDay(JD, &year, &month, &day);
 	double estime = getSolstice(year + 1, Solstice::December);
 	if (estime>0.)
-		core->setJDE(estime);
+		core->setJD(estime);
+
+	emit eventYearChanged();
 }
 
 void SpecificTimeMgr::previousDecemberSolstice()
 {
-	double JD = core->getJDE();
+	double JD = core->getJD();
 	int year, month, day;
 	StelUtils::getDateFromJulianDay(JD, &year, &month, &day);
 	double estime = getSolstice(year - 1, Solstice::December);
 	if (estime>0.)
-		core->setJDE(estime);
+		core->setJD(estime);
+
+	emit eventYearChanged();
 }

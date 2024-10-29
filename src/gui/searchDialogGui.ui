@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>505</width>
-    <height>444</height>
+    <width>300</width>
+    <height>300</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -15,12 +15,6 @@
     <horstretch>0</horstretch>
     <verstretch>0</verstretch>
    </sizepolicy>
-  </property>
-  <property name="minimumSize">
-   <size>
-    <width>390</width>
-    <height>0</height>
-   </size>
   </property>
   <property name="focusPolicy">
    <enum>Qt::ClickFocus</enum>
@@ -51,100 +45,10 @@
     <number>0</number>
    </property>
    <item>
-    <widget class="BarFrame" name="TitleBar">
-     <property name="minimumSize">
-      <size>
-       <width>16</width>
-       <height>25</height>
-      </size>
+    <widget class="TitleBar" name="titleBar">
+     <property name="title">
+      <string>Search window</string>
      </property>
-     <property name="maximumSize">
-      <size>
-       <width>16777215</width>
-       <height>25</height>
-      </size>
-     </property>
-     <property name="focusPolicy">
-      <enum>Qt::NoFocus</enum>
-     </property>
-     <property name="autoFillBackground">
-      <bool>false</bool>
-     </property>
-     <property name="frameShape">
-      <enum>QFrame::StyledPanel</enum>
-     </property>
-     <layout class="QHBoxLayout">
-      <property name="spacing">
-       <number>0</number>
-      </property>
-      <property name="leftMargin">
-       <number>0</number>
-      </property>
-      <property name="topMargin">
-       <number>0</number>
-      </property>
-      <property name="rightMargin">
-       <number>4</number>
-      </property>
-      <property name="bottomMargin">
-       <number>0</number>
-      </property>
-      <item>
-       <spacer>
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item>
-       <widget class="QLabel" name="stelWindowTitle">
-        <property name="text">
-         <string>Search window</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <spacer>
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item>
-       <widget class="StelCloseButton" name="closeStelWindow">
-        <property name="minimumSize">
-         <size>
-          <width>16</width>
-          <height>16</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>16</width>
-          <height>16</height>
-         </size>
-        </property>
-        <property name="focusPolicy">
-         <enum>Qt::NoFocus</enum>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-       </widget>
-      </item>
-     </layout>
     </widget>
    </item>
    <item>
@@ -159,12 +63,6 @@
       <layout class="QVBoxLayout" name="verticalLayout_2">
        <item>
         <widget class="QFrame" name="horizontalSearchLayout">
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>0</height>
-          </size>
-         </property>
          <property name="frameShape">
           <enum>QFrame::StyledPanel</enum>
          </property>
@@ -184,16 +82,10 @@
           <item>
            <widget class="QLineEdit" name="lineEditSearchSkyObject">
             <property name="sizePolicy">
-             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+             <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
-            </property>
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>30</height>
-             </size>
             </property>
             <property name="font">
              <font>
@@ -218,7 +110,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="pushButtonGotoSearchSkyObject">
+           <widget class="QToolButton" name="pushButtonGotoSearchSkyObject">
             <property name="focusPolicy">
              <enum>Qt::NoFocus</enum>
             </property>
@@ -226,12 +118,6 @@
              <iconset resource="../../data/gui/guiRes.qrc">
               <normaloff>:/graphicGui/uibtSearch.png</normaloff>
               <disabledoff>:/graphicGui/uibtSearch.png</disabledoff>:/graphicGui/uibtSearch.png</iconset>
-            </property>
-            <property name="iconSize">
-             <size>
-              <width>24</width>
-              <height>24</height>
-             </size>
             </property>
             <property name="checkable">
              <bool>false</bool>
@@ -639,12 +525,6 @@
       <layout class="QGridLayout" name="gridLayout_4">
        <item row="2" column="0">
         <widget class="QPushButton" name="simbadCooQueryButton">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
          <property name="text">
           <string>Query SIMBAD about selected object</string>
          </property>
@@ -657,12 +537,6 @@
            <horstretch>35</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>4</height>
-          </size>
          </property>
          <property name="font">
           <font>
@@ -678,12 +552,6 @@
         <layout class="QHBoxLayout" name="horizontalLayout_3">
          <item>
           <widget class="QCheckBox" name="allIDsCheckBox">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
            <property name="text">
             <string>All IDs</string>
            </property>
@@ -691,12 +559,6 @@
          </item>
          <item>
           <widget class="QCheckBox" name="typesCheckBox">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
            <property name="text">
             <string>Types</string>
            </property>
@@ -704,12 +566,6 @@
          </item>
          <item>
           <widget class="QCheckBox" name="spectralClassCheckBox">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
            <property name="text">
             <string>Spectral Class</string>
            </property>
@@ -717,12 +573,6 @@
          </item>
          <item>
           <widget class="QCheckBox" name="morphoCheckBox">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
            <property name="toolTip">
             <string>Morphological description</string>
            </property>
@@ -733,12 +583,6 @@
          </item>
          <item>
           <widget class="QCheckBox" name="dimsCheckBox">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
            <property name="text">
             <string>Dimensions</string>
            </property>
@@ -748,20 +592,8 @@
        </item>
        <item row="0" column="0">
         <layout class="QHBoxLayout" name="horizontalLayout_4">
-         <property name="leftMargin">
-          <number>0</number>
-         </property>
-         <property name="topMargin">
-          <number>0</number>
-         </property>
          <item>
           <widget class="QLabel" name="searchRadiusLabel">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
            <property name="text">
             <string>Max. search radius</string>
            </property>
@@ -769,11 +601,8 @@
          </item>
          <item>
           <widget class="QSpinBox" name="searchRadiusSpinBox">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
+           <property name="suffix">
+            <string> arcsec</string>
            </property>
            <property name="minimum">
             <number>1</number>
@@ -783,19 +612,6 @@
            </property>
            <property name="value">
             <number>30</number>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLabel" name="arcsecLabel">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="text">
-            <string>arcseconds</string>
            </property>
           </widget>
          </item>
@@ -814,12 +630,6 @@
          </item>
          <item>
           <widget class="QLabel" name="maxResultsLabel">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
            <property name="text">
             <string>Max. results </string>
            </property>
@@ -830,12 +640,6 @@
          </item>
          <item>
           <widget class="QSpinBox" name="resultsSpinBox">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
            <property name="minimum">
             <number>1</number>
            </property>
@@ -960,7 +764,7 @@
              </widget>
             </item>
             <item row="1" column="2">
-             <widget class="QPushButton" name="goPushButton">
+             <widget class="QToolButton" name="goPushButton">
               <property name="toolTip">
                <string>Go to position</string>
               </property>
@@ -1009,12 +813,6 @@
        </property>
        <item row="0" column="0" colspan="2">
         <widget class="QComboBox" name="objectTypeComboBox">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
          <property name="toolTip">
           <string>Some objects may be found after activation respective plug-ins</string>
          </property>
@@ -1091,6 +889,13 @@
            </widget>
           </item>
           <item>
+           <widget class="QCheckBox" name="checkBoxUseSortingByLength">
+            <property name="text">
+             <string>Use sorting by string length</string>
+            </property>
+           </widget>
+          </item>
+          <item>
            <widget class="QCheckBox" name="checkBoxLockPosition">
             <property name="text">
              <string>Lock position when coordinates are used</string>
@@ -1161,24 +966,6 @@
             </item>
             <item>
              <widget class="QComboBox" name="serverListComboBox">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="minimumSize">
-               <size>
-                <width>0</width>
-                <height>24</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>16777215</width>
-                <height>24</height>
-               </size>
-              </property>
               <property name="editable">
                <bool>false</bool>
               </property>
@@ -1230,14 +1017,9 @@
               <property name="enabled">
                <bool>true</bool>
               </property>
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
               <property name="font">
                <font>
+                <weight>75</weight>
                 <bold>true</bold>
                </font>
               </property>
@@ -1278,7 +1060,7 @@
              </spacer>
             </item>
             <item>
-             <widget class="QPushButton" name="recentSearchClearDataPushButton">
+             <widget class="QToolButton" name="recentSearchClearDataPushButton">
               <property name="toolTip">
                <string extracomment="Deletes all recent search object data"/>
               </property>
@@ -1302,7 +1084,7 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>BarFrame</class>
+   <class>TitleBar</class>
    <extends>QFrame</extends>
    <header>Dialog.hpp</header>
    <container>1</container>

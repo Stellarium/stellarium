@@ -239,6 +239,13 @@ The last parameter style provides the view in altitude/azimuth spherical coordin
 Parameters: <tt>fov (Number)</tt>\n
 Sets the current field-of-view using StelCore::setFov
 
+\paragraph rcMainServiceWindow window
+Parameters: <tt>w (int) h (int)</tt>\n
+Sets the window size using StelMainView::setWindowSize()
+This can be useful e.g. when Stellarium provides image background inserts via spout.
+
+
+
 \subsection rcObjectService ObjectService operations (/api/objects/)
 \subsubsection rcObjectServiceGET GET operations
 Implemented by ObjectService::getImpl

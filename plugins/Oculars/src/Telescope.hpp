@@ -36,7 +36,7 @@ class Telescope : public QObject
 public:
 	Telescope();
 	Q_INVOKABLE Telescope(const QObject& other);
-	virtual ~Telescope() Q_DECL_OVERRIDE;
+	~Telescope() override;
 	static Telescope* telescopeFromSettings(QSettings* theSettings, int telescopeIndex);
 	void writeToSettings(QSettings * settings, const int index);
 	static Telescope* telescopeModel();
@@ -46,7 +46,7 @@ public:
 	double focalLength() const;
 	void setFocalLength(double theValue);
 	const QString name() const;
-	void setName(QString theValue);
+	void setName(const QString &theValue);
 	bool isHFlipped() const;
 	void setHFlipped(bool flipped);
 	bool isVFlipped() const;

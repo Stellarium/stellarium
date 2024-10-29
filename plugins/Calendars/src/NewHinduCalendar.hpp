@@ -58,7 +58,7 @@ public slots:
 
 	//! set date from a vector of calendar date elements sorted from the largest to the smallest.
 	//! Year-Month[1...12]-leap[0|1]-Day[1...30]
-	void setDate(QVector<int> parts) override;
+	void setDate(const QVector<int> &parts) override;
 
 	//! get a stringlist of calendar date elements for the New Hindu Solar calendar sorted from the largest to the smallest.
 	//! {Year, Month, MonthName, Day, WeekDayName}
@@ -86,7 +86,7 @@ public slots:
 	static int hinduZodiac(const double rd_ut);
 	//! @return lunar longitude at RD (CC:UE 20.14)
 	static double hinduLunarLongitude(const double rd_ut);
-	//! @return lunar phase at RD (CC:UE 20.15)
+	//! @return lunar phase at RD [0..360] (CC:UE 20.15)
 	static double hinduLunarPhase(const double rd_ut);
 	//! @return lunar day at RD (CC:UE 20.16)
 	static int hinduLunarDayFromMoment(const double rd_ut);
@@ -102,13 +102,13 @@ public slots:
 	static QVector<int> hinduSolarFromFixed(int rd);
 	//! @return RD date from a New Hindu Solar date (CC:UE 20.21)
 	//! parts={ year, month, day}
-	static int fixedFromHinduSolar(QVector<int> parts);
+	static int fixedFromHinduSolar(const QVector<int> &parts);
 
 	//! @return { year, month, leapMonth, day, leapDay } (CC:UE 20.23)
 	static QVector<int> hinduLunarFromFixed(int rd);
 	//! @return RD date from a New Hindu Lunar date (CC:UE 20.24)
 	//! parts={ year, month, leapMonth, day, leapDay }
-	static int fixedFromHinduLunar(QVector<int> parts);
+	static int fixedFromHinduLunar(const QVector<int> &parts);
 
 	// 20.3 Sunrise
 	//! @return the ascensional difference (CC:UE 20.27)
@@ -137,7 +137,7 @@ public slots:
 	static QVector<int> hinduFullMoonFromFixed(int rd);
 	//! @return RD date from a New Hindu Lunar date counted from full to full moon (CC:UE 20.37)
 	//! parts={ year, month, leapMonth, day, leapDay }
-	static int fixedFromHinduFullMoon(QVector<int> parts);
+	static int fixedFromHinduFullMoon(const QVector<int> &parts);
 	//! test for expunged month (CC:UE 20.38)
 	static bool hinduExpunged(const int lYear, const int lMonth);
 	//! Alternative sunrise formula (CC:UE 20.39)
@@ -162,14 +162,14 @@ public slots:
 	static QVector<int> astroHinduSolarFromFixed(const int rd);
 	//! @return RD from astronomically defined date in the Solar calendar (CC:UE 20.46)
 	//! @arg is { year, month, day}
-	static int fixedFromAstroHinduSolar(const QVector<int>date);
+	static int fixedFromAstroHinduSolar(const QVector<int>&date);
 	//! (CC:UE 20.47)
 	static int astroLunarDayFromMoment(const double rd_ut);
 	//! @return { year, month, leapMonth, day, leapDay } in an astronomically defined Lunar calendar (CC:UE 20.48)
 	static QVector<int> astroHinduLunarFromFixed(const int rd);
 	//! @return RD date from an astronomically defined New Hindu Lunar date (CC:UE 20.49)
 	//! parts={ year, month, leapMonth, day, leapDay }
-	static int fixedFromAstroHinduLunar(const QVector<int> parts);
+	static int fixedFromAstroHinduLunar(const QVector<int> &parts);
 
 	// 20.6 Holidays
 	//! binary search for the moment when solar longitude reaches lng in the time between rdA and rdB (used in CC:UE 20.50)
@@ -186,7 +186,7 @@ public slots:
 	static double hinduLunarNewYear(const int gYear);
 	//! @return comparison of two lunar dates (CC:UE 20.54)
 	//! @arg date1 and date2 are {year, month, leapMonth, day, leapDay}
-	static bool hinduLunarOnOrBefore(const QVector<int>date1, const QVector<int>date2);
+	static bool hinduLunarOnOrBefore(const QVector<int>&date1, const QVector<int>&date2);
 	//! @return RD of actually occurring date { lYear, lMonth, lDay} (CC:UE 20.55)
 	static int hinduDateOccur(const int lYear, const int lMonth, const int lDay);
 	//! @return a QVector<int> of RDs of actually occurring dates in a Gregorian year (CC:UE 20.56)
@@ -214,7 +214,7 @@ public slots:
 	//! @return the sacred Wednesdays in a Gregorian year. (CC:UE 20.65)
 	static QVector<int> sacredWednesdays(const int gYear);
 	//! @return the sacred Wednesdays in a certain range of RDs. (CC:UE 20.66)
-	static QVector<int> sacredWednesdaysInRange(const QVector<int> range);
+	static QVector<int> sacredWednesdaysInRange(const QVector<int> &range);
 
 protected:
 	constexpr static const double hinduSiderealYear=365.+279457./1080000.;   //!<  (CC:UE 20.1)

@@ -56,8 +56,8 @@ void PointerCoordinatesWindow::createDialogContent()
 	ui->setupUi(dialog);
 
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
-	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
-	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
+	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
+	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	connectBoolProperty(ui->checkBoxEnableAtStartup, "PointerCoordinates.enableAtStartup");
 	connectBoolProperty(ui->checkBoxShowButton,      "PointerCoordinates.showCoordinatesButton");
@@ -65,7 +65,7 @@ void PointerCoordinatesWindow::createDialogContent()
 	connectBoolProperty(ui->checkBoxCrossedLines,    "PointerCoordinates.showCrossedLines");
 	connectBoolProperty(ui->checkBoxElongation,      "PointerCoordinates.showElongation");
 	connectIntProperty(ui->spinBoxFontSize,          "PointerCoordinates.fontSize");
-	connectColorButton(ui->textColorButton, "PointerCoordinates.fontColor", "PointerCoordinates/text_color");
+	ui->textColorButton->setup("PointerCoordinates.fontColor", "PointerCoordinates/text_color");
 
 	// Place of the string with coordinates
 	populateCoordinatesPlacesList();
@@ -114,7 +114,7 @@ void PointerCoordinatesWindow::populateValues()
 void PointerCoordinatesWindow::setAboutHtml(void)
 {
 	QString html = "<html><head></head><body>";
-	html += "<h2>" + q_("Pointer Coordinates plug-in") + "</h2><table width=\"90%\">";
+	html += "<h2>" + q_("Pointer Coordinates plug-in") + "</h2><table class='layout' width=\"90%\">";
 	html += "<tr width=\"30%\"><td><strong>" + q_("Version") + ":</strong></td><td>" + POINTERCOORDINATES_PLUGIN_VERSION + "</td></tr>";
 	html += "<tr><td><strong>" + q_("License") + ":</strong></td><td>" + POINTERCOORDINATES_PLUGIN_LICENSE + "</td></tr>";
 	html += "<tr><td><strong>" + q_("Author") + ":</strong></td><td>Alexander Wolf</td></tr>";
@@ -225,7 +225,7 @@ void PointerCoordinatesWindow::setCustomCoordinatesPlace()
 	coord->setCustomCoordinatesPlace(ui->spinBoxX->value(), ui->spinBoxY->value());
 }
 
-void PointerCoordinatesWindow::setCustomCoordinatesAccess(QString place)
+void PointerCoordinatesWindow::setCustomCoordinatesAccess(const QString &place)
 {
 	if (place.contains("Custom"))
 	{

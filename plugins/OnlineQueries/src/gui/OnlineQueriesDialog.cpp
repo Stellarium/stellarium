@@ -31,8 +31,8 @@
 
 OnlineQueriesDialog::OnlineQueriesDialog(QObject* parent) :
 	StelDialogSeparate("OnlineQueries", parent),
-	plugin(Q_NULLPTR),
-	view(Q_NULLPTR)
+	plugin(nullptr),
+	view(nullptr)
 {
 	setObjectName("OnlineQueriesDialog");
 	ui = new Ui_onlineQueriesDialogForm;
@@ -80,8 +80,8 @@ void OnlineQueriesDialog::createDialogContent()
 	//hook up retranslate event
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	//connect UI events
-	connect(ui->closeStelWindow, &QPushButton::clicked, plugin, [=]{ plugin->setEnabled(false);});
-	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
+	connect(ui->titleBar, &TitleBar::closeClicked, plugin, [=]{ plugin->setEnabled(false);});
+	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	// Kinetic scrolling and style sheet for output
 	kineticScrollingList << view;
@@ -96,7 +96,9 @@ void OnlineQueriesDialog::createDialogContent()
 	connect(ui->wikipediaPushButton,    SIGNAL(clicked()), plugin, SLOT(queryWikipedia()));
 	connect(ui->aavsoPushButton,        SIGNAL(clicked()), plugin, SLOT(queryAAVSO()));
 	connect(ui->gcvsPushButton,         SIGNAL(clicked()), plugin, SLOT(queryGCVS()));
-	connect(ui->ancientSkiesPushButton, SIGNAL(clicked()), plugin, SLOT(queryAncientSkies()));
+	// Unfortunately, Ancient-Skies did not resurface so far. Keep this here, maybe re-activate ~2025.
+	//connect(ui->ancientSkiesPushButton, SIGNAL(clicked()), plugin, SLOT(queryAncientSkies()));
+	ui->ancientSkiesPushButton->hide();
 	// set custom tab buttons to hostnames, or deactivate unconfigured buttons
 	if (!plugin->getCustomUrl1().isEmpty())
 	{
@@ -143,7 +145,7 @@ void OnlineQueriesDialog::createDialogContent()
 #endif
 }
 
-void OnlineQueriesDialog::setOutputHtml(QString html) const
+void OnlineQueriesDialog::setOutputHtml(const QString &html) const
 {
 	if (plugin->webEngineDisabled())
 	{
@@ -155,7 +157,7 @@ void OnlineQueriesDialog::setOutputHtml(QString html) const
 	}
 }
 
-void OnlineQueriesDialog::setOutputUrl(QUrl url) const
+void OnlineQueriesDialog::setOutputUrl(const QUrl &url) const
 {
 #ifdef WITH_QTWEBENGINE
 	if (plugin->webEngineDisabled())
@@ -176,7 +178,7 @@ void OnlineQueriesDialog::setOutputUrl(QUrl url) const
 void OnlineQueriesDialog::setAboutHtml()
 {
 	QString html = "<html><head></head><body>";
-	html += "<h2>" + q_("OnlineQueries Plug-in") + "</h2><table width=\"90%\">";
+	html += "<h2>" + q_("OnlineQueries Plug-in") + "</h2><table class='layout' width=\"90%\">";
 	html += "<tr width=\"30%\"><td><strong>" + q_("Version") + ":</strong></td><td>" + ONLINEQUERIES_PLUGIN_VERSION + "</td></tr>";
 	html += "<tr><td><strong>" + q_("License") + ":</strong></td><td>" + ONLINEQUERIES_PLUGIN_LICENSE + "</td></tr>";
 	html += "<tr><td><strong>" + q_("Author") + ":</strong></td><td>Georg Zotti</td></tr>";
@@ -187,7 +189,8 @@ void OnlineQueriesDialog::setAboutHtml()
 	html += "<ul><li>" + q_("Wikipedia, the free online encyclopedia") + "</li>";
 	html += "<li>" + q_("AAVSO, the International Variable Star Index of the American Association for Variable Star Observers") + "</li>";
 	html += "<li>" + q_("GCVS, the General Catalogue of Variable Stars of the Sternberg Astronomical Institute and the Institute of Astronomy of the Russian Academy of Sciences in Moscow") + "</li>";
-	html += "<li>" + q_("Ancient-Skies, a private project which collects information about star names and their mythologies") + "</li>";
+	// Unfortunately, the website this plugin was made for has not come up again. Maybe later, though.
+	//html += "<li>" + q_("Ancient-Skies, a private project which collects information about star names and their mythologies") + "</li>";
 	html += "<li>" + q_("3 custom websites of your choice") + "</li>";
 	html += "</ul>";
 	html += "<p>" + q_("Regardless of the current program language, the result is always presented in English or the language of the respective website.") + "</p>";
@@ -195,15 +198,15 @@ void OnlineQueriesDialog::setAboutHtml()
 	html += "<h3>" + q_("Publications") + "</h3>";
 	html += "<p>"  + q_("If you use this plugin in your publications, please cite:") + "</p>";
 	html += "<ul>";
-	html += "<li>" + QString("{Georg Zotti, Susanne M. Hoffmann, Doris Vickers, Rüdiger Schultz, Alexander Wolf: Revisiting Star Names: Stellarium and the Ancient Skies Database.} Proc. SEAC2021 (in preparation)")
-			 .toHtmlEscaped() /*.replace(a_rx, "<a href=\"https://equinoxpub.com/PATH-TO.pdf\">\\1</a>")*/ + "</li>";
+	html += "<li>" + QString("Georg Zotti, Susanne M. Hoffmann, Doris Vickers, Rüdiger Schultz, Alexander Wolf: Revisiting Star Names: Stellarium and the Ancient Skies Database. "
+				 "In: P. Maglova & Alexey Stoev (eds.). Cultural Astronomy & Ancient Skywatching. Proc. SEAC2021, Plovdiv 2023.").toHtmlEscaped() + "</li>";
 	html += "</ul>";
 
 	html += StelApp::getInstance().getModuleMgr().getStandardSupportLinksInfo("OnlineQueries plugin");
 	html += "</body></html>";
 
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-	if(gui!=Q_NULLPTR)
+	if(gui!=nullptr)
 	{
 		QString htmlStyleSheet(gui->getStelStyle().htmlStyleSheet);
 		ui->aboutTextBrowser->document()->setDefaultStyleSheet(htmlStyleSheet);

@@ -33,8 +33,8 @@ class StelAudioMgr : public QObject
 	Q_OBJECT
 
 public:
-	StelAudioMgr();
-	~StelAudioMgr() Q_DECL_OVERRIDE;
+	StelAudioMgr(bool enable);
+	~StelAudioMgr() override;
 
 public slots:
 	//! Load sound file to be accessed under ID.
@@ -56,6 +56,7 @@ public slots:
 	qint64 duration(const QString& id);
 
 private:
+	bool enabled; // global switch configured by constructor
 	QMap<QString, QMediaPlayer*> audioObjects;
 #if (QT_VERSION>=QT_VERSION_CHECK(6,0,0)) && defined(ENABLE_MEDIA)
 	QAudioOutput *audioOutput;

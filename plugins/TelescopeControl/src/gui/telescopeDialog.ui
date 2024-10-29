@@ -36,106 +36,10 @@
     <number>0</number>
    </property>
    <item>
-    <widget class="BarFrame" name="TitleBar">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
+    <widget class="TitleBar" name="titleBar">
+     <property name="title">
+      <string>Telescopes</string>
      </property>
-     <property name="minimumSize">
-      <size>
-       <width>530</width>
-       <height>25</height>
-      </size>
-     </property>
-     <property name="maximumSize">
-      <size>
-       <width>16777215</width>
-       <height>25</height>
-      </size>
-     </property>
-     <property name="focusPolicy">
-      <enum>Qt::NoFocus</enum>
-     </property>
-     <property name="autoFillBackground">
-      <bool>false</bool>
-     </property>
-     <property name="frameShape">
-      <enum>QFrame::StyledPanel</enum>
-     </property>
-     <layout class="QHBoxLayout">
-      <property name="spacing">
-       <number>6</number>
-      </property>
-      <property name="leftMargin">
-       <number>0</number>
-      </property>
-      <property name="topMargin">
-       <number>0</number>
-      </property>
-      <property name="rightMargin">
-       <number>4</number>
-      </property>
-      <property name="bottomMargin">
-       <number>0</number>
-      </property>
-      <item>
-       <spacer>
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item>
-       <widget class="QLabel" name="stelWindowTitle">
-        <property name="text">
-         <string>Telescopes</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <spacer>
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item>
-       <widget class="StelCloseButton" name="closeStelWindow">
-        <property name="minimumSize">
-         <size>
-          <width>16</width>
-          <height>16</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>16</width>
-          <height>16</height>
-         </size>
-        </property>
-        <property name="focusPolicy">
-         <enum>Qt::NoFocus</enum>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-       </widget>
-      </item>
-     </layout>
     </widget>
    </item>
    <item>
@@ -504,21 +408,21 @@
            </widget>
           </item>
           <item row="1" column="0">
-           <widget class="QToolButton" name="reticleColorButton">
+           <widget class="ColorButton" name="reticleColorButton">
             <property name="text">
              <string/>
             </property>
            </widget>
           </item>
           <item row="2" column="0">
-           <widget class="QToolButton" name="circleColorButton">
+           <widget class="ColorButton" name="circleColorButton">
             <property name="text">
              <string/>
             </property>
            </widget>
           </item>
           <item row="0" column="0">
-           <widget class="QToolButton" name="labelColorButton">
+           <widget class="ColorButton" name="labelColorButton">
             <property name="text">
              <string/>
             </property>
@@ -709,15 +613,15 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>BarFrame</class>
+   <class>TitleBar</class>
    <extends>QFrame</extends>
    <header>Dialog.hpp</header>
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>StelCloseButton</class>
-   <extends>QPushButton</extends>
-   <header>gui/StelCloseButton.hpp</header>
+   <class>ColorButton</class>
+   <extends>QToolButton</extends>
+   <header>gui/ColorButton.hpp</header>
   </customwidget>
  </customwidgets>
  <resources>

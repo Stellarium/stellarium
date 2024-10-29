@@ -38,10 +38,6 @@ on *nix operating systems).
 
 Even more diagnostic output in logfile (esp. multimedia handling).
 
-=item B<-t, --fix-text>
-
-May fix text rendering problems.
-
 =item B<--scale-gui> I<scale factor>
 
 Scaling the GUI according to scale factor.

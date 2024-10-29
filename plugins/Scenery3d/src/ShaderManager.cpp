@@ -100,7 +100,7 @@ ShaderMgr::ShaderMgr()
 		featureFlagsStrings["CUBEMAP"] = CUBEMAP;
 		featureFlagsStrings["BLENDING"] = BLENDING;
 		featureFlagsStrings["TORCH"] = TORCH;
-		featureFlagsStrings["DEBUG"] = DEBUG;
+		featureFlagsStrings["DEBUG_SHADER"] = DEBUG_SHADER;
 		featureFlagsStrings["PCSS"] = PCSS;
 		featureFlagsStrings["SINGLE_SHADOW_FRUSTUM"] = SINGLE_SHADOW_FRUSTUM;
 		featureFlagsStrings["OGL_ES2"] = OGL_ES2;
@@ -225,7 +225,7 @@ QString ShaderMgr::getVShaderName(uint flags)
 	{
 		return "s3d_texture.vert";
 	}
-	else if (flags & DEBUG)
+	else if (flags & DEBUG_SHADER)
 	{
 		return "s3d_debug.vert";
 	}
@@ -272,7 +272,7 @@ QString ShaderMgr::getFShaderName(uint flags)
 	{
 		return "s3d_texture.frag";
 	}
-	else if (flags & DEBUG)
+	else if (flags & DEBUG_SHADER)
 	{
 		return "s3d_debug.frag";
 	}

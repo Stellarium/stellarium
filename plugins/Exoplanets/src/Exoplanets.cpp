@@ -170,15 +170,22 @@ void Exoplanets::init()
 		Exoplanet::markerTexture = StelApp::getInstance().getTextureManager().createTexture(":/Exoplanets/exoplanet.png");
 
 		// key bindings and other actions
-		addAction("actionShow_Exoplanets", N_("Exoplanets"), N_("Show exoplanets"), "showExoplanets", "Ctrl+Alt+E");
-		addAction("actionShow_Exoplanets_ConfigDialog", N_("Exoplanets"), N_("Show settings dialog"), exoplanetsConfigDialog, "visible", "Alt+E");
+		QString section = N_("Exoplanets");
+		addAction("actionShow_Exoplanets", section, N_("Show exoplanets"), "showExoplanets", "Ctrl+Alt+E");
+		addAction("actionShow_Exoplanets_ConfigDialog", section, N_("Show settings dialog"), exoplanetsConfigDialog, "visible", "Alt+E");
+		// no default hotkeys
+		addAction("actionShow_Exoplanets_Distribution", section, N_("Enable display of distribution for exoplanets"), "flagDisplayMode");
+		addAction("actionShow_Exoplanets_Timeline", section, N_("Enable timeline discovery of exoplanets"), "flagTimelineMode");
+		addAction("actionShow_Exoplanets_Habitable", section, N_("Enable display of the potential habitable exoplanets only"), "flagHabitableMode");
+		addAction("actionShow_Exoplanets_Designations", section, N_("Enable display of designations for exoplanets"), "flagShowExoplanetsDesignations");
+		addAction("actionShow_Exoplanets_Numbers", section, N_("Enable display number of exoplanets in the system"), "flagShowExoplanetsNumbers");
 
 		setFlagShowExoplanets(getEnableAtStartup());
 		setFlagShowExoplanetsButton(flagShowExoplanetsButton);
 	}
 	catch (std::runtime_error &e)
 	{
-		qWarning() << "[Exoplanets] init error: " << e.what();
+		qWarning() << "[Exoplanets] init error:" << e.what();
 		return;
 	}
 
@@ -192,11 +199,11 @@ void Exoplanets::init()
 	}
 	else
 	{
-		qDebug() << "[Exoplanets] exoplanets.json does not exist - copying default catalog to " << QDir::toNativeSeparators(jsonCatalogPath);
+		qDebug().noquote() << "[Exoplanets] exoplanets.json does not exist - copying default catalog to" << QDir::toNativeSeparators(jsonCatalogPath);
 		restoreDefaultJsonFile();
 	}
 
-	qDebug() << "[Exoplanets] loading catalog file:" << QDir::toNativeSeparators(jsonCatalogPath);
+	qDebug().noquote() << "[Exoplanets] loading catalog file:" << QDir::toNativeSeparators(jsonCatalogPath);
 
 	readJsonFile();
 
@@ -212,6 +219,8 @@ void Exoplanets::init()
 
 	connect(this, SIGNAL(jsonUpdateComplete(void)), this, SLOT(reloadCatalog()));
 	connect(StelApp::getInstance().getCore(), SIGNAL(configurationDataSaved()), this, SLOT(saveSettings()));
+	StarMgr* smgr = GETSTELMODULE(StarMgr);
+	connect(smgr, SIGNAL(starLabelsDisplayedChanged(bool)), this, SLOT(setFlagSyncShowLabels(bool)));
 
 	GETSTELMODULE(StelObjectMgr)->registerStelObjectMgr(this);
 }
@@ -225,7 +234,7 @@ void Exoplanets::draw(StelCore* core)
 	StelPainter painter(prj);
 	painter.setFont(font);
 	
-	for (const auto& eps : qAsConst(ep))
+	for (const auto& eps : std::as_const(ep))
 	{
 		if (eps && eps->initialized)
 			eps->draw(core, &painter);
@@ -248,8 +257,7 @@ void Exoplanets::drawPointer(StelCore* core, StelPainter& painter)
 		if (!painter.getProjector()->project(pos, screenpos))
 			return;
 
-		const Vec3f& c(obj->getInfoColor());
-		painter.setColor(c[0],c[1],c[2]);
+		painter.setColor(obj->getInfoColor());
 		texPointer->bind();
 		painter.setBlending(true);
 		painter.drawSprite2dMode(static_cast<float>(screenpos[0]), static_cast<float>(screenpos[1]), 13.f, static_cast<float>(StelApp::getInstance().getTotalRunTime())*40.f);
@@ -299,7 +307,7 @@ StelObjectP Exoplanets::searchByName(const QString& englishName) const
 		ppn << eps->getExoplanetsDesignations();
 		if (!ppn.isEmpty())
 		{
-			for (const auto& str : qAsConst(ppn))
+			for (const auto& str : std::as_const(ppn))
 			{
 				if (str.toUpper() == englishName.toUpper())
 					return qSharedPointerCast<StelObject>(eps);
@@ -416,11 +424,11 @@ void Exoplanets::restoreDefaultJsonFile(void)
 	QFile src(":/Exoplanets/exoplanets.json");
 	if (!src.copy(jsonCatalogPath))
 	{
-		qWarning() << "[Exoplanets] Cannot copy JSON resource to " + QDir::toNativeSeparators(jsonCatalogPath);
+		qWarning().noquote() << "[Exoplanets] Cannot copy JSON resource to" + QDir::toNativeSeparators(jsonCatalogPath);
 	}
 	else
 	{
-		qDebug() << "[Exoplanets] Default exoplanets.json to " << QDir::toNativeSeparators(jsonCatalogPath);
+		qDebug().noquote() << "[Exoplanets] Default exoplanets.json to" << QDir::toNativeSeparators(jsonCatalogPath);
 		// The resource is read only, and the new file inherits this...  make sure the new file
 		// is writable by the Stellarium process so that updates can be done.
 		QFile dest(jsonCatalogPath);
@@ -512,7 +520,7 @@ QVariantMap Exoplanets::loadEPMap(QString path)
 	QVariantMap map;
 	QFile jsonFile(path);
 	if (!jsonFile.open(QIODevice::ReadOnly))
-		qWarning() << "[Exoplanets] Cannot open " << QDir::toNativeSeparators(path);
+		qWarning().noquote() << "[Exoplanets] Cannot open" << QDir::toNativeSeparators(path);
 	else
 	{
 		try
@@ -522,7 +530,7 @@ QVariantMap Exoplanets::loadEPMap(QString path)
 		}
 		catch (std::runtime_error &e)
 		{
-			qDebug() << "[Exoplanets] File format is wrong! Error: " << e.what();
+			qDebug() << "[Exoplanets] File format is wrong! Error:" << e.what();
 			return QVariantMap();
 		}
 	}
@@ -610,7 +618,7 @@ int Exoplanets::getJsonFileFormatVersion(void) const
 	QFile jsonEPCatalogFile(jsonCatalogPath);
 	if (!jsonEPCatalogFile.open(QIODevice::ReadOnly))
 	{
-		qWarning() << "[Exoplanets] Cannot open " << QDir::toNativeSeparators(jsonCatalogPath);
+		qWarning().noquote() << "[Exoplanets] Cannot open" << QDir::toNativeSeparators(jsonCatalogPath);
 		return jsonVersion;
 	}
 
@@ -622,7 +630,7 @@ int Exoplanets::getJsonFileFormatVersion(void) const
 	}
 	catch (std::runtime_error &e)
 	{
-		qDebug() << "[Exoplanets] File format is wrong! Error: " << e.what();
+		qDebug() << "[Exoplanets] File format is wrong! Error:" << e.what();
 		return jsonVersion;
 	}
 	if (map.contains("version"))
@@ -639,7 +647,7 @@ bool Exoplanets::checkJsonFileFormat() const
 	QFile jsonEPCatalogFile(jsonCatalogPath);
 	if (!jsonEPCatalogFile.open(QIODevice::ReadOnly))
 	{
-		qWarning() << "[Exoplanets] Cannot open " << QDir::toNativeSeparators(jsonCatalogPath);
+		qWarning().noquote() << "[Exoplanets] Cannot open" << QDir::toNativeSeparators(jsonCatalogPath);
 		return false;
 	}
 
@@ -761,11 +769,11 @@ void Exoplanets::updateJSON(void)
 		qWarning() << "[Exoplanets] Already updating...  will not start again until current update is complete.";
 		return;
 	}
-	qDebug() << "[Exoplanets] Updating exoplanets catalog...";
+	qDebug() << "[Exoplanets] Updating exoplanets catalog ...";
 	startDownload(updateUrl);
 }
 
-void Exoplanets::displayMessage(const QString& message, const QString hexColor)
+void Exoplanets::displayMessage(const QString& message, const QString &hexColor)
 {
 	GETSTELMODULE(LabelMgr)->labelScreen(message, 30, 30, true, 16, hexColor, false, 9000);
 }
@@ -895,7 +903,7 @@ void Exoplanets::setFlagShowExoplanets(bool b)
 	}
 }
 
-void Exoplanets::setCurrentTemperatureScaleKey(QString key)
+void Exoplanets::setCurrentTemperatureScaleKey(const QString &key)
 {
 	const QMetaEnum& en = metaObject()->enumerator(metaObject()->indexOfEnumerator("TemperatureScale"));
 	TemperatureScale ts = static_cast<TemperatureScale>(en.keyToValue(key.toLatin1().data()));
@@ -923,7 +931,7 @@ void Exoplanets::deleteDownloadProgressBar()
 	}
 }
 
-void Exoplanets::startDownload(QString urlString)
+void Exoplanets::startDownload(const QString &urlString)
 {
 	QUrl url(urlString);
 	if (!url.isValid() || url.isRelative() || !url.scheme().startsWith("http", Qt::CaseInsensitive))
@@ -1033,49 +1041,47 @@ void Exoplanets::translations()
 {
 #if 0
 	// TRANSLATORS: Habitable zone
-	N_("Hot");
+	NC_("Hot", "Habitable zone");
 	// TRANSLATORS: Habitable zone
-	N_("Warm");
+	NC_("Warm", "Habitable zone");
 	// TRANSLATORS: Habitable zone
-	N_("Cold");
+	NC_("Cold", "Habitable zone");
 
-	// TRANSLATORS: Planet size
-	N_("Miniterran");
-	// TRANSLATORS: Planet size
-	N_("Subterran");
-	// TRANSLATORS: Planet size
-	N_("Terran");
-	// TRANSLATORS: Planet size
-	N_("Superterran");
-	// TRANSLATORS: Planet size
-	N_("Jovian");
-	// TRANSLATORS: Planet size
-	N_("Neptunian");
+	// TRANSLATORS: Exoplanet size
+	NC_("Miniterran", "Exoplanet size");
+	// TRANSLATORS: Exoplanet size
+	NC_("Subterran", "Exoplanet size");
+	// TRANSLATORS: Exoplanet size
+	NC_("Terran", "Exoplanet size");
+	// TRANSLATORS: Exoplanet size
+	NC_("Superterran", "Exoplanet size");
+	// TRANSLATORS: Exoplanet size
+	NC_("Jovian", "Exoplanet size");
+	// TRANSLATORS: Exoplanet size
+	NC_("Neptunian", "Exoplanet size");
 
 	// TRANSLATORS: Exoplanet detection method
-	N_("Primary Transit");
+	NC_("Astrometry", "Exoplanet detection method");
 	// TRANSLATORS: Exoplanet detection method
-	N_("Microlensing");
+	NC_("Imaging", "Exoplanet detection method");
 	// TRANSLATORS: Exoplanet detection method
-	N_("Radial Velocity");
+	NC_("Kinematic", "Exoplanet detection method");
 	// TRANSLATORS: Exoplanet detection method
-	N_("Imaging");
+	NC_("Microlensing", "Exoplanet detection method");
 	// TRANSLATORS: Exoplanet detection method
-	N_("Astrometry");
+	NC_("Other", "Exoplanet detection method");
+	// TRANSLATORS: Exoplanet detection method
+	NC_("Primary Transit", "Exoplanet detection method");	
+	// TRANSLATORS: Exoplanet detection method
+	NC_("Radial Velocity", "Exoplanet detection method");
 	// TRANSLATORS: Exoplanet detection method. TTV=Transit Timing Variation
-	N_("TTV");
+	NC_("TTV", "Exoplanet detection method");
 	// TRANSLATORS: Exoplanet detection method
-	N_("Timing");
-	// TRANSLATORS: Exoplanet detection method
-	N_("Default");
-	// TRANSLATORS: Exoplanet detection method
-	N_("Secondary Transit");
-	// TRANSLATORS: Exoplanet detection method
-	N_("Disk Kinematics");
+	NC_("Timing", "Exoplanet detection method");
 
 	/* For copy/paste:
 	// TRANSLATORS:
-	N_("");
+	NC_("", "Exoplanet detection method");
 	*/
 
 #endif

@@ -20,8 +20,8 @@
 #include "TuiNodeEnum.hpp"
 #include <QKeyEvent>
 
-TuiNodeEnum::TuiNodeEnum(const QString& text, QObject* receiver, const char* method, QStringList items,
-                         QString defValue, TuiNode* parent, TuiNode* prev)
+TuiNodeEnum::TuiNodeEnum(const QString& text, QObject* receiver, const char* method, const QStringList &items,
+			 const QString &defValue, TuiNode* parent, TuiNode* prev)
     : TuiNodeEditable(text, parent, prev), stringList(items), defValue(defValue)
 {
 	this->connect(this, SIGNAL(setValue(QString)), receiver, method);

@@ -8,7 +8,6 @@
          url('dejavusans-webfont.svg#dejavu_sansbook') format('svg');
     font-weight: normal;
     font-style: normal;
-
 }
 
 @font-face {
@@ -85,7 +84,7 @@ div#srch_tab_object {
     color: rgb(3,3,3);
     background: linear-gradient(rgb(86, 87, 90),rgb(48, 49, 52));
     border-width: 0;
-	border-radius: 0;
+    border-radius: 0;
 }
 
 /* Large vertical spinners */
@@ -575,6 +574,8 @@ button.button32:active {
 .icon32.btConstellationArt { background-position: -111px 0; }
 .icon32.btConstellationLabels { background-position: -148px 0; }
 .icon32.btConstellationLines { background-position: -185px 0; }
+.icon32.btConstellationBoundaries { background-position: -885px 0; }
+.icon32.btGotoHome { background-position: -922px 0; }
 .icon32.btDSS { background-position: -222px 0; }
 .icon32.btFlipHorizontal { background-position: -259px 0; }
 .icon32.btEquatorialGrid { background-position: -296px 0; }

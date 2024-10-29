@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>861</width>
-    <height>536</height>
+    <width>664</width>
+    <height>485</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -30,100 +30,10 @@
     <number>0</number>
    </property>
    <item>
-    <widget class="BarFrame" name="TitleBar">
-     <property name="minimumSize">
-      <size>
-       <width>530</width>
-       <height>25</height>
-      </size>
+    <widget class="TitleBar" name="titleBar">
+     <property name="title" stdset="0">
+      <string>Satellites Configuration</string>
      </property>
-     <property name="maximumSize">
-      <size>
-       <width>16777215</width>
-       <height>25</height>
-      </size>
-     </property>
-     <property name="focusPolicy">
-      <enum>Qt::NoFocus</enum>
-     </property>
-     <property name="autoFillBackground">
-      <bool>false</bool>
-     </property>
-     <property name="frameShape">
-      <enum>QFrame::StyledPanel</enum>
-     </property>
-     <layout class="QHBoxLayout">
-      <property name="spacing">
-       <number>0</number>
-      </property>
-      <property name="leftMargin">
-       <number>0</number>
-      </property>
-      <property name="topMargin">
-       <number>0</number>
-      </property>
-      <property name="rightMargin">
-       <number>4</number>
-      </property>
-      <property name="bottomMargin">
-       <number>0</number>
-      </property>
-      <item>
-       <spacer>
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item>
-       <widget class="QLabel" name="stelWindowTitle">
-        <property name="text">
-         <string>Satellites Configuration</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <spacer>
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item>
-       <widget class="StelCloseButton" name="closeStelWindow">
-        <property name="minimumSize">
-         <size>
-          <width>16</width>
-          <height>16</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>16</width>
-          <height>16</height>
-         </size>
-        </property>
-        <property name="focusPolicy">
-         <enum>Qt::NoFocus</enum>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-       </widget>
-      </item>
-     </layout>
     </widget>
    </item>
    <item>
@@ -356,37 +266,6 @@
           <property name="bottomMargin">
            <number>0</number>
           </property>
-          <item row="4" column="0">
-           <layout class="QHBoxLayout" name="horizontalLayout_14">
-            <item>
-             <widget class="QCheckBox" name="penumbraCheckBox">
-              <property name="text">
-               <string>Show Earth's penumbra</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <spacer name="horizontalSpacer_9">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>40</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item>
-             <widget class="QToolButton" name="penumbraColor">
-              <property name="toolTip">
-               <string>The color of Earth's penumbra circle</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
           <item row="1" column="0">
            <layout class="QHBoxLayout" name="horizontalLayout_16">
             <item>
@@ -481,20 +360,17 @@
             </item>
            </layout>
           </item>
-          <item row="3" column="0">
-           <layout class="QHBoxLayout" name="horizontalLayout_17">
+          <item row="2" column="0">
+           <layout class="QHBoxLayout" name="horizontalLayout_9">
             <item>
-             <widget class="QCheckBox" name="umbraAtDistance">
-              <property name="toolTip">
-               <string>Distance to the center of umbra from Earth's surface (height of imagined satellite)</string>
-              </property>
+             <widget class="QCheckBox" name="umbraCheckBox">
               <property name="text">
-               <string>Show umbra at distance:</string>
+               <string>Show Earth's umbra</string>
               </property>
              </widget>
             </item>
             <item>
-             <spacer name="horizontalSpacer_14">
+             <spacer name="horizontalSpacer_3">
               <property name="orientation">
                <enum>Qt::Horizontal</enum>
               </property>
@@ -507,12 +383,164 @@
              </spacer>
             </item>
             <item>
-             <widget class="QDoubleSpinBox" name="umbraDistance">
+             <widget class="ColorButton" name="umbraColor">
+              <property name="toolTip">
+               <string>The color of Earth's umbra circle</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="3" column="2">
+           <layout class="QGridLayout" name="gridLayout_2">
+            <property name="verticalSpacing">
+             <number>6</number>
+            </property>
+            <item row="0" column="1">
+             <widget class="QDoubleSpinBox" name="minAltitude">
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+              <property name="decimals">
+               <number>0</number>
+              </property>
+              <property name="minimum">
+               <double>1.000000000000000</double>
+              </property>
+              <property name="maximum">
+               <double>1000000.000000000000000</double>
+              </property>
+              <property name="value">
+               <double>200.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="2">
+             <widget class="QDoubleSpinBox" name="maxAltitude">
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+              <property name="decimals">
+               <number>0</number>
+              </property>
+              <property name="minimum">
+               <double>1.000000000000000</double>
+              </property>
+              <property name="maximum">
+               <double>1000000.000000000000000</double>
+              </property>
+              <property name="value">
+               <double>500.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QCheckBox" name="magnitudeCheckBox">
+              <property name="text">
+               <string>Magnitude range</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="0">
+             <widget class="QCheckBox" name="altitudeCheckBox">
+              <property name="text">
+               <string>Altitude range</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="2">
+             <widget class="QDoubleSpinBox" name="minMagnitude">
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+              <property name="minimum">
+               <double>-12.000000000000000</double>
+              </property>
+              <property name="maximum">
+               <double>20.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QDoubleSpinBox" name="maxMagnitude">
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+              <property name="minimum">
+               <double>-12.000000000000000</double>
+              </property>
+              <property name="maximum">
+               <double>20.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="0" column="1">
+           <spacer name="horizontalSpacer_12">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeType">
+             <enum>QSizePolicy::Fixed</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>5</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="3" column="0">
+           <layout class="QGridLayout" name="gridLayout_3">
+            <item row="0" column="1">
+             <spacer name="horizontalSpacer_14">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="0" column="0">
+             <widget class="QCheckBox" name="penumbraCheckBox">
+              <property name="text">
+               <string>Show Earth's penumbra</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="2">
+             <widget class="ColorButton" name="penumbraColor">
+              <property name="toolTip">
+               <string>The color of Earth's penumbra circle</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QCheckBox" name="umbraAtAltitude">
+              <property name="toolTip">
+               <string>Distance to the center of umbra from Earth's surface (height of imagined satellite above a spherical Earth)</string>
+              </property>
+              <property name="text">
+               <string>Show umbra/penumbra at altitude:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1" colspan="2">
+             <widget class="QDoubleSpinBox" name="umbraAltitude">
               <property name="minimumSize">
                <size>
                 <width>120</width>
                 <height>0</height>
                </size>
+              </property>
+              <property name="toolTip">
+               <string>Distance to the center of umbra from Earth's surface (height of imagined satellite above a spherical Earth)</string>
               </property>
               <property name="alignment">
                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -521,14 +549,58 @@
                <number>1</number>
               </property>
               <property name="minimum">
-               <double>75.000000000000000</double>
+               <double>50.000000000000000</double>
               </property>
               <property name="maximum">
                <double>400000.000000000000000</double>
               </property>
+              <property name="value">
+               <double>300.000000000000000</double>
+              </property>
              </widget>
             </item>
            </layout>
+          </item>
+          <item row="0" column="2">
+           <layout class="QHBoxLayout" name="horizontalLayout_15">
+            <item>
+             <widget class="QCheckBox" name="iconicCheckBox">
+              <property name="text">
+               <string>Show satellites as markers</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer_4">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <widget class="ColorButton" name="transitColorButton">
+              <property name="toolTip">
+               <string>Color of satellite markers in transit through the Sun or the Moon</string>
+              </property>
+              <property name="text">
+               <string notr="true"/>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="2" column="2">
+           <widget class="QCheckBox" name="hideInvisibleSatellites">
+            <property name="text">
+             <string>Hide invisible satellites</string>
+            </property>
+           </widget>
           </item>
           <item row="0" column="0">
            <layout class="QHBoxLayout" name="horizontalLayout_13">
@@ -582,40 +654,6 @@
             </item>
            </layout>
           </item>
-          <item row="0" column="2">
-           <layout class="QHBoxLayout" name="horizontalLayout_15">
-            <item>
-             <widget class="QCheckBox" name="iconicCheckBox">
-              <property name="text">
-               <string>Show satellites as markers</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <spacer name="horizontalSpacer_4">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>40</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item>
-             <widget class="QToolButton" name="transitColorButton">
-              <property name="toolTip">
-               <string>Color of satellite markers in transit through the Sun or the Moon</string>
-              </property>
-              <property name="text">
-               <string notr="true"/>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
           <item row="1" column="2">
            <layout class="QHBoxLayout" name="horizontalLayout_18">
             <item>
@@ -642,152 +680,12 @@
              </spacer>
             </item>
             <item>
-             <widget class="QToolButton" name="invisibleColorButton">
+             <widget class="ColorButton" name="invisibleColorButton">
               <property name="toolTip">
                <string>Color of markers, labels and orbits for invisible satellites</string>
               </property>
               <property name="text">
                <string/>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-          <item row="3" column="2">
-           <layout class="QHBoxLayout" name="horizontalLayout_21">
-            <item>
-             <widget class="QCheckBox" name="altitudeCheckBox">
-              <property name="text">
-               <string>Altitude range</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QDoubleSpinBox" name="minAltitude">
-              <property name="alignment">
-               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-              </property>
-              <property name="decimals">
-               <number>0</number>
-              </property>
-              <property name="minimum">
-               <double>1.000000000000000</double>
-              </property>
-              <property name="maximum">
-               <double>1000000.000000000000000</double>
-              </property>
-              <property name="value">
-               <double>200.000000000000000</double>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QDoubleSpinBox" name="maxAltitude">
-              <property name="alignment">
-               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-              </property>
-              <property name="decimals">
-               <number>0</number>
-              </property>
-              <property name="minimum">
-               <double>1.000000000000000</double>
-              </property>
-              <property name="maximum">
-               <double>1000000.000000000000000</double>
-              </property>
-              <property name="value">
-               <double>500.000000000000000</double>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-          <item row="2" column="0">
-           <layout class="QHBoxLayout" name="horizontalLayout_9">
-            <item>
-             <widget class="QCheckBox" name="umbraCheckBox">
-              <property name="text">
-               <string>Show Earth's umbra</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <spacer name="horizontalSpacer_3">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>40</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item>
-             <widget class="QToolButton" name="umbraColor">
-              <property name="toolTip">
-               <string>The color of Earth's umbra circle</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-          <item row="2" column="2">
-           <widget class="QCheckBox" name="hideInvisibleSatellites">
-            <property name="text">
-             <string>Hide invisible artificial satellites</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="1">
-           <spacer name="horizontalSpacer_12">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeType">
-             <enum>QSizePolicy::Fixed</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>5</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-          <item row="4" column="2">
-           <layout class="QHBoxLayout" name="horizontalLayout_20">
-            <item>
-             <widget class="QCheckBox" name="magnitudeCheckBox">
-              <property name="text">
-               <string>Magnitude range</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QDoubleSpinBox" name="maxMagnitude">
-              <property name="alignment">
-               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-              </property>
-              <property name="minimum">
-               <double>-12.000000000000000</double>
-              </property>
-              <property name="maximum">
-               <double>20.000000000000000</double>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QDoubleSpinBox" name="minMagnitude">
-              <property name="alignment">
-               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-              </property>
-              <property name="minimum">
-               <double>-12.000000000000000</double>
-              </property>
-              <property name="maximum">
-               <double>20.000000000000000</double>
               </property>
              </widget>
             </item>
@@ -923,7 +821,7 @@
               </widget>
              </item>
              <item>
-              <widget class="QPushButton" name="customFilterButton">
+              <widget class="QToolButton" name="customFilterButton">
                <property name="enabled">
                 <bool>false</bool>
                </property>
@@ -959,7 +857,7 @@
            <item>
             <layout class="QHBoxLayout" name="horizontalLayout_2">
              <item>
-              <widget class="QPushButton" name="addSatellitesButton">
+              <widget class="QToolButton" name="addSatellitesButton">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                  <horstretch>0</horstretch>
@@ -977,7 +875,7 @@
               </widget>
              </item>
              <item>
-              <widget class="QPushButton" name="removeSatellitesButton">
+              <widget class="QToolButton" name="removeSatellitesButton">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                  <horstretch>0</horstretch>
@@ -995,7 +893,7 @@
               </widget>
              </item>
              <item>
-              <widget class="QPushButton" name="commSatelliteButton">
+              <widget class="QToolButton" name="commSatelliteButton">
                <property name="toolTip">
                 <string>Edit communication data for the selected satellite</string>
                </property>
@@ -1007,7 +905,7 @@
               </widget>
              </item>
              <item>
-              <widget class="QPushButton" name="selectAllButton">
+              <widget class="QToolButton" name="selectAllButton">
                <property name="toolTip">
                 <string>Select all satellites in list</string>
                </property>
@@ -1033,7 +931,7 @@
               </spacer>
              </item>
              <item>
-              <widget class="QPushButton" name="satMarkerColorPickerButton">
+              <widget class="QToolButton" name="satMarkerColorPickerButton">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                  <horstretch>0</horstretch>
@@ -1049,7 +947,7 @@
               </widget>
              </item>
              <item>
-              <widget class="QPushButton" name="satOrbitColorPickerButton">
+              <widget class="QToolButton" name="satOrbitColorPickerButton">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                  <horstretch>0</horstretch>
@@ -1065,7 +963,7 @@
               </widget>
              </item>
              <item>
-              <widget class="QPushButton" name="satInfoColorPickerButton">
+              <widget class="QToolButton" name="satInfoColorPickerButton">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                  <horstretch>0</horstretch>
@@ -1522,7 +1420,7 @@
        <item>
         <widget class="QLabel" name="labelAutoAdd">
          <property name="text">
-          <string>Satellites in the marked source lists will be automatically added on the next update if they are not already in the collection.</string>
+          <string>Satellites in the marked source lists will be automatically added on the next update if they are not already in the collection. Unmarked entries will also be fetched to update only previously included satellites.</string>
          </property>
          <property name="wordWrap">
           <bool>true</bool>
@@ -1542,7 +1440,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="addSourceButton">
+          <widget class="QToolButton" name="addSourceButton">
            <property name="toolTip">
             <string>Add new source</string>
            </property>
@@ -1554,7 +1452,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="editSourceButton">
+          <widget class="QToolButton" name="editSourceButton">
            <property name="toolTip">
             <string>Edit selected source</string>
            </property>
@@ -1566,7 +1464,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="saveSourceButton">
+          <widget class="QToolButton" name="saveSourceButton">
            <property name="toolTip">
             <string>Save source</string>
            </property>
@@ -1578,7 +1476,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="deleteSourceButton">
+          <widget class="QToolButton" name="deleteSourceButton">
            <property name="toolTip">
             <string>Remove selected source</string>
            </property>
@@ -1606,7 +1504,7 @@
           </spacer>
          </item>
          <item>
-          <widget class="QPushButton" name="resetSourcesButton">
+          <widget class="QToolButton" name="resetSourcesButton">
            <property name="toolTip">
             <string>Reset sources list to it defaults</string>
            </property>
@@ -1730,15 +1628,15 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>BarFrame</class>
+   <class>TitleBar</class>
    <extends>QFrame</extends>
    <header>Dialog.hpp</header>
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>StelCloseButton</class>
-   <extends>QPushButton</extends>
-   <header>gui/StelCloseButton.hpp</header>
+   <class>ColorButton</class>
+   <extends>QToolButton</extends>
+   <header>gui/ColorButton.hpp</header>
   </customwidget>
  </customwidgets>
  <tabstops>

@@ -27,101 +27,10 @@
     <number>0</number>
    </property>
    <item>
-    <widget class="BarFrame" name="TitleBar">
-     <property name="minimumSize">
-      <size>
-       <width>16</width>
-       <height>25</height>
-      </size>
+    <widget class="TitleBar" name="titleBar">
+     <property name="title">
+      <string>Screenshots naming</string>
      </property>
-     <property name="maximumSize">
-      <size>
-       <width>16777215</width>
-       <height>25</height>
-      </size>
-     </property>
-     <property name="frameShape">
-      <enum>QFrame::StyledPanel</enum>
-     </property>
-     <layout class="QHBoxLayout">
-      <property name="leftMargin">
-       <number>0</number>
-      </property>
-      <property name="topMargin">
-       <number>0</number>
-      </property>
-      <property name="rightMargin">
-       <number>4</number>
-      </property>
-      <property name="bottomMargin">
-       <number>0</number>
-      </property>
-      <item>
-       <spacer>
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item>
-       <widget class="QLabel" name="stelWindowTitle">
-        <property name="palette">
-         <palette>
-          <active/>
-          <inactive/>
-          <disabled/>
-         </palette>
-        </property>
-        <property name="font">
-         <font/>
-        </property>
-        <property name="text">
-         <string>Screenshots naming</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <spacer>
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item>
-       <widget class="StelCloseButton" name="closeStelWindow">
-        <property name="minimumSize">
-         <size>
-          <width>16</width>
-          <height>16</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>16</width>
-          <height>16</height>
-         </size>
-        </property>
-        <property name="focusPolicy">
-         <enum>Qt::NoFocus</enum>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-       </widget>
-      </item>
-     </layout>
     </widget>
    </item>
    <item>
@@ -185,7 +94,7 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>BarFrame</class>
+   <class>TitleBar</class>
    <extends>QFrame</extends>
    <header>Dialog.hpp</header>
    <container>1</container>

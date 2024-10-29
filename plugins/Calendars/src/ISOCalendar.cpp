@@ -44,7 +44,7 @@ void ISOCalendar::setJD(double JD)
 
 // set date from a vector of calendar date elements sorted from the largest to the smallest.
 // Year-Week[1...53]-Day[1...7]
-void ISOCalendar::setDate(QVector<int> parts)
+void ISOCalendar::setDate(const QVector<int> &parts)
 {
 	this->parts=parts;
 
@@ -81,7 +81,7 @@ QString ISOCalendar::getFormattedDateString() const
 			str.at(0));// year
 }
 
-int ISOCalendar::fixedFromISO(QVector<int> iso)
+int ISOCalendar::fixedFromISO(const QVector<int> &iso)
 {
 	const int year=iso.value(0);
 	const int week=iso.value(1);

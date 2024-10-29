@@ -23,6 +23,8 @@
 #ifndef ASTROCALCDIALOG_HPP
 #define ASTROCALCDIALOG_HPP
 
+#include <deque>
+#include <variant>
 #include <QObject>
 #include <QTreeWidget>
 #include <QTreeWidgetItem>
@@ -33,6 +35,7 @@
 #include <QMutex>
 #include <QtCharts/qchartview.h>
 
+#include "SolarEclipseComputer.hpp"
 #include "AstroCalcChart.hpp"
 #include "StelDialog.hpp"
 #include "StelCore.hpp"
@@ -59,6 +62,7 @@ struct Ephemeris
 	QString objDateStr;
 	float magnitude;
 	bool isComet;
+	PlanetP sso;
 };
 Q_DECLARE_METATYPE(Ephemeris)
 
@@ -76,6 +80,9 @@ class AstroCalcDialog : public StelDialog
 	Q_OBJECT
 
 public:
+	using EclipseMapData = SolarEclipseComputer::EclipseMapData;
+	using GeoPoint = SolarEclipseComputer::GeoPoint;
+
 	//! Defines the number and the order of the columns in the table that lists celestial bodies positions
 	//! @enum CPositionsColumns
 	enum CPositionsColumns {
@@ -286,7 +293,7 @@ private slots:
 	void selectCurrentCelestialPosition(const QModelIndex &modelIndex);
 
 	void currentHECPositions();
-	void drawHECGraph(QString selectedObject = "");
+	void drawHECGraph(const QString &selectedObject = "");
 	void saveHECPositions();
 	void selectCurrentHECPosition(const QModelIndex &modelIndex);
 	void markCurrentHECPosition(const QModelIndex &modelIndex);
@@ -334,7 +341,7 @@ private slots:
 	void selectCurrentSolarEclipseContact(const QModelIndex &modelIndex);
 	void saveSolarEclipses();
 	void saveSolarEclipseCircumstances();
-	void saveSolarEclipseKML();
+	void saveSolarEclipseMap();
 
 	//! Calculating local solar eclipses to fill the list.
 	//! Algorithm taken from calculating the rises, transits and sets.
@@ -353,8 +360,11 @@ private slots:
 	void saveEphemerisCelestialBody(int index);
 	void saveEphemerisSecondaryCelestialBody(int index);
 	void saveEphemerisTimeStep(int index);
+	void saveEphemerisTimeUnit(int index);
+	void saveEphemerisTimeDuration(int duration);
 	void initEphemerisFlagNakedEyePlanets(void);
 	void saveEphemerisFlagNakedEyePlanets(bool flag);
+	void setMonthDuration();
 
 	//! Calculating phenomena for selected celestial body and fill the list.
 	void calculatePhenomena();
@@ -433,42 +443,44 @@ private slots:
 	void changePositionsTab(int index);
 
 	void updateSolarSystemData();
-	void populateCelestialNames(QString);
+	void populateCelestialNames();
 	void showExtraEphemerisDialog();
 	void showCustomStepsDialog();
 
 	void saveGraph(QChartView *graph);
+	void updateMinMaxDateRange();
 
 private:
-	class AstroCalcExtraEphemerisDialog* extraEphemerisDialog;
-	class AstroCalcCustomStepsDialog* customStepsDialog;
-	class StelCore* core;
-	class SolarSystem* solarSystem;
-	class NebulaMgr* dsoMgr;
-	class StarMgr* starMgr;
-	class StelObjectMgr* objectMgr;
-	class StelLocaleMgr* localeMgr;
-	class StelMovementMgr* mvMgr;
-	class StelPropertyMgr* propMgr;
-	//QStringListModel* wutModel;
-	//QSortFilterProxyModel *proxyModel;
-	AstroCalcChart *altVsTimeChart;
+	class AstroCalcExtraEphemerisDialog* extraEphemerisDialog = nullptr;
+	class AstroCalcCustomStepsDialog* customStepsDialog = nullptr;
+	class StelCore* core = nullptr;
+	class SolarSystem* solarSystem = nullptr;
+	class NebulaMgr* dsoMgr = nullptr;
+	class StarMgr* starMgr = nullptr;
+	class StelObjectMgr* objectMgr = nullptr;
+	class StelLocaleMgr* localeMgr = nullptr;
+	class StelMovementMgr* mvMgr = nullptr;
+	class StelPropertyMgr* propMgr = nullptr;
+	//QStringListModel* wutModel = nulpltr;
+	//QSortFilterProxyModel *proxyModel = nullptr;
+	AstroCalcChart *altVsTimeChart = nullptr;
 	mutable QMutex altVsTimeChartMutex;
-	AstroCalcChart *azVsTimeChart;
+	AstroCalcChart *azVsTimeChart = nullptr;
 	mutable QMutex azVsTimeChartMutex;
-	AstroCalcChart *monthlyElevationChart;
+	AstroCalcChart *monthlyElevationChart = nullptr;
 	mutable QMutex monthlyElevationChartMutex;
-	AstroCalcChart *curvesChart;
+	AstroCalcChart *curvesChart = nullptr;
 	mutable QMutex curvesChartMutex;
-	AstroCalcChart *lunarElongationChart;
+	AstroCalcChart *lunarElongationChart = nullptr;
 	mutable QMutex lunarElongationChartMutex;
-	AstroCalcChart *pcChart;
+	AstroCalcChart *pcChart = nullptr;
 	mutable QMutex pcChartMutex;
 
 	QSettings* conf;
-	QTimer *currentTimeLine;
-	QHash<QString,int> wutCategories;
+	QTimer *currentTimeLine = nullptr;
+	QHash<QString,int> wutCategories;	
 	QList<HECPosition> hecObjects;
+	SolarEclipseComputer ecliptor;
 
 	void saveTableAsCSV(const QString& fileName, QTreeWidget* tWidget, QStringList& headers);
 	void saveTableAsXLSX(const QString& fileName, QTreeWidget* tWidget, QStringList& headers, const QString& title, const QString& sheetName, const QString &note = "");
@@ -476,6 +488,7 @@ private:
 	QPair<QString, QString> askTableFilePath(const QString& caption, const QString& fileName);
 
 	void populateToolTips();
+	void populateMinMaxDateRange();
 	//! Get the list of selected dwarf and minor planets
 	QList<PlanetP> getSelectedMinorPlanets();
 
@@ -524,24 +537,6 @@ private:
 	void initListSolarEclipse();
 	//! Init header and list of solar eclipse contact
 	void initListSolarEclipseContact();
-	//! Iteration to calculate minimum distance from Besselian elements
-	double getJDofMinimumDistance(double JD);
-	//! Iteration to calculate JD of solar eclipse contacts
-	double getJDofContact(double JD, bool beginning, bool penumbral, bool external, bool outerContact);
-	//! Iteration to calculate contact times of solar eclipse
-	double getDeltaTimeofContact(double JD, bool beginning, bool penumbra, bool external, bool outerContact);
-	//! Geographic coordinates where solar eclipse begins/ends at sunrise/sunset
-	QPair<double, double> getRiseSetLineCoordinates(bool first, double x, double y, double d, double L, double mu);
-	//! Geographic coordinates where maximum solar eclipse occurs at sunrise/sunset
-	QPair<double, double> getMaximumEclipseAtRiseSet(bool first, double JD);
-	//! Geographic coordinates of shadow outline
-	QPair<double, double> getShadowOutlineCoordinates(double angle, double x, double y, double d, double L, double tf,double mu);
-	//! Geographic coordinates of northern and southern limit of shadow
-	QPair<double, double> getNSLimitofShadow(double JD, bool northernLimit, bool penumbra);
-	//! Geographic coordinates of extreme northern and southern limits of shadow
-	QPair<double, double> getExtremeNSLimitofShadow(double JD, bool northernLimit, bool penumbra, bool begin);
-	//! Geographic coordinates of extreme contact
-	QPair<double, double> getContactCoordinates(double x, double y, double d, double mu);
 	//! Init header and list of local solar eclipse
 	void initListSolarEclipseLocal();
 	//! Init header and list of transit
@@ -554,6 +549,14 @@ private:
 	void populateCelestialBodyList();	
 	//! Populates the drop-down list of time steps.
 	void populateEphemerisTimeStepsList();
+	//! Populates the drop-down list of time units for Ephemeris tool.
+	void populateEphemerisTimeUnitsList();
+	//! Get time step for Ephemeris tool
+	double getEphemerisTimeStep(const PlanetP& planet);
+	//! Get time limit at right side for Ephemeris tool
+	double getEphemerisTimeDuration();
+	//! Populating the tooltip for the time limit at right side for Ephemeris tool.
+	void populateEphemerisTimeDurationTooltip();
 	//! Populates the drop-down list of planets.
 	void populatePlanetList();
 	//! Prepare graph settings
@@ -570,6 +573,8 @@ private:
 	void adjustWUTColumns();
 	void adjustPhenomenaColumns();
 
+	QString getWUTObjectType();
+
 	void enableEphemerisButtons(bool enable);
 	void enableRTSButtons(bool enable);
 	void enablePhenomenaButtons(bool enable);
@@ -584,19 +589,22 @@ private:
 	double getCustomTimeStep();
 	void reGenerateEphemeris(bool withSelection);
 
+	//! Finding and selecting an object by its name in specific JD
+	void goToObject(const QString &name, const double JD);
+
 	//! Format RA/Dec or Az/Alt coordinates into nice strings.
 	//! @arg horizontal coord are horizontal (alt-azimuthal). Use degrees/degrees. Else use Hours/degrees.
 	//! @arg southAzimuth (relevant only for horizontal=true) count azimuth from south.
 	//! @arg decimalDegrees use decimal format, not DMS/HMS
 	//! @return QPair(lngStr, latStr) formatted output strings
 	static QPair<QString, QString> getStringCoordinates(const Vec3d &coord, const bool horizontal, const bool southAzimuth, const bool decimalDegrees);
-	void fillWUTTable(QString objectName, QString designation, float magnitude, Vec4d RTSTime, double maxElevation,
-			  double angularSize, QString constellation, QString otype, bool decimalDegrees = false);
-	void fillCelestialPositionTable(QString objectName, QString RA, QString Dec, double magnitude,
-					QString angularSize, QString angularSizeToolTip, QString extraData,
-					QString extraDataToolTip, QString transitTime, QString maxElevation,
-					QString sElongation, QString objectType);
-	void fillHECPositionTable(QString objectName, QChar objectSymbol, QString latitude, QString longitude, double distance);
+	void fillWUTTable(const QString &objectName, const QString &designation, float magnitude, const Vec4d &RTSTime, double maxElevation,
+			  double angularSize, const QString &constellation, const QString &otype, bool decimalDegrees = false);
+	void fillCelestialPositionTable(const QString &objectName, const QString &RA, const QString &Dec, double magnitude,
+					const QString &angularSize, const QString &angularSizeToolTip, const QString &extraData,
+					const QString &extraDataToolTip, const QString &transitTime, const QString &maxElevation,
+					QString &sElongation, const QString &objectType);
+	void fillHECPositionTable(const QString &objectName, const QChar objectSymbol, const QString &latitude, const QString &longitude, const double distance);
 
 	//! Calculation conjunctions and oppositions.
 	//! @note Ported from KStars, should be improved, because this feature calculates
@@ -607,7 +615,7 @@ private:
 	//! Finding the angular distance between two celestial bodies at some Julian date
 	double findDistance(double JD, PlanetP object1, StelObjectP object2, int mode);
 	//! Finding the initial time steps for interactions
-	double findInitialStep(double startJD, double stopJD, QStringList objects);
+	double findInitialStep(double startJD, double stopJD, QStringList &objects);
 	//! Finding the celestial event
 	bool findPrecise(QPair<double, double>* out, PlanetP object1, StelObjectP object2, double JD, double step, int prevSign, int mode);
 	//! Wrapper for filling the table of phenomena between planet and star
@@ -618,9 +626,9 @@ private:
 	//! @note modes: 0 - conjunction, 1 - opposition, 2 - greatest elongation
 	void fillPhenomenaTable(const QMap<double, double> list, const PlanetP object1, const PlanetP object2, int mode);
 	//! Filling the table of phenomena
-	void fillPhenomenaTableVis(QString phenomenType, double JD, QString firstObjectName, float firstObjectMagnitude,
-				   QString secondObjectName, float secondObjectMagnitude, QString separation, QString elevation,
-				   QString elongation, QString angularDistance, QString elongTooltip="", QString angDistTooltip="");
+	void fillPhenomenaTableVis(const QString &phenomenType, double JD, const QString &firstObjectName, float firstObjectMagnitude,
+				   const QString &secondObjectName, float secondObjectMagnitude, const QString &separation, const QString &elevation,
+				   QString &elongation, const QString &angularDistance, const QString &elongTooltip="", const QString &angDistTooltip="");
 	//! Calculation of greatest elongations
 	QMap<double, double> findGreatestElongationApproach(PlanetP& object1, StelObjectP& object2, double startJD, double stopJD);
 	bool findPreciseGreatestElongation(QPair<double, double>* out, PlanetP object1, StelObjectP object2, double JD, double stopJD, double step);
@@ -638,8 +646,18 @@ private:
 	bool isSecondObjectRight(double JD, PlanetP object1, StelObjectP object2);
 
 	// Signal that a plot has to be redone
-	bool plotAltVsTime, plotAltVsTimeSun, plotAltVsTimeMoon, plotAltVsTimePositive, plotMonthlyElevation, plotMonthlyElevationPositive, plotDistanceGraph, plotLunarElongationGraph, plotAziVsTime;
-	int altVsTimePositiveLimit, monthlyElevationPositiveLimit, graphsDuration, graphsStep;
+	bool plotAltVsTime = false;
+	bool plotAltVsTimeSun = false;
+	bool plotAltVsTimeMoon = false;
+	bool plotAltVsTimePositive = false;
+	bool plotMonthlyElevation = false;
+	bool plotMonthlyElevationPositive = false;
+	bool plotDistanceGraph = false;
+	bool plotLunarElongationGraph = false;
+	bool plotAziVsTime = false;
+	bool computeRTS = false;
+	bool computeEphemeris = false;
+	int altVsTimePositiveLimit = 0, monthlyElevationPositiveLimit = 0, graphsDuration = 1, graphsStep = 24;
 	QStringList ephemerisHeader, phenomenaHeader, positionsHeader, hecPositionsHeader, wutHeader, rtsHeader, lunareclipseHeader, lunareclipsecontactsHeader, solareclipseHeader, solareclipsecontactsHeader, solareclipselocalHeader, transitHeader;
 	static double brightLimit;
 	static const QString dash, delimiter;
@@ -653,88 +671,88 @@ private:
 	QString getSelectedObjectNameI18n(StelObjectP selectedObject);
 
 	//! Memorize day for detecting rollover to next/prev one
-	int oldGraphJD;
+	int oldGraphJD = 0;
 
 	//! Remember to redraw active plot when dialog becomes visible
-	bool graphPlotNeedsRefresh;
+	bool graphPlotNeedsRefresh = false;
 
 	enum PhenomenaCategory {
-		PHCLatestSelectedObject     = -1,
-		PHCSolarSystem              =  0,
-		PHCPlanets                  =  1,
-		PHCAsteroids                =  2,
-		PHCPlutinos                 =  3,
-		PHCComets                   =  4,
-		PHCDwarfPlanets             =  5,
-		PHCCubewanos                =  6,
-		PHCScatteredDiscObjects     =  7,
-		PHCOortCloudObjects         =  8,
-		PHCSednoids                 =  9,
-		PHCBrightStars              = 10,
-		PHCBrightDoubleStars        = 11,
-		PHCBrightVariableStars      = 12,
-		PHCBrightStarClusters       = 13,
-		PHCPlanetaryNebulae         = 14,
-		PHCBrightNebulae            = 15,
-		PHCDarkNebulae              = 16,
-		PHCBrightGalaxies           = 17,
-		PHCSymbioticStars           = 18,
-		PHCEmissionLineStars        = 19,
-		PHCInterstellarObjects      = 20,
-		PHCPlanetsSun               = 21,
-		PHCSunPlanetsMoons          = 22,
-		PHCBrightSolarSystemObjects = 23,
-		PHCSolarSystemMinorBodies   = 24,
-		PHCMoonsFirstBody           = 25,
-		PHCBrightCarbonStars        = 26,
-		PHCBrightBariumStars        = 27,
-		PHCSunPlanetsTheirMoons     = 28,
+		PHCLatestSelectedObject		=  -1,
+		PHCSolarSystem					=   0,
+		PHCPlanets						=   1,
+		PHCAsteroids					=   2,
+		PHCPlutinos						=   3,
+		PHCComets						=   4,
+		PHCDwarfPlanets				=   5,
+		PHCCubewanos					=   6,
+		PHCScatteredDiscObjects		=   7,
+		PHCOortCloudObjects			=   8,
+		PHCSednoids					=   9,
+		PHCBrightStars					= 10,
+		PHCBrightDoubleStars			= 11,
+		PHCBrightVariableStars			= 12,
+		PHCBrightStarClusters			= 13,
+		PHCPlanetaryNebulae			= 14,
+		PHCBrightNebulae				= 15,
+		PHCDarkNebulae				= 16,
+		PHCBrightGalaxies				= 17,
+		PHCSymbioticStars				= 18,
+		PHCEmissionLineStars			= 19,
+		PHCInterstellarObjects			= 20,
+		PHCPlanetsSun					= 21,
+		PHCSunPlanetsMoons			= 22,
+		PHCBrightSolarSystemObjects	= 23,
+		PHCSolarSystemMinorBodies		= 24,
+		PHCMoonsFirstBody				= 25,
+		PHCBrightCarbonStars			= 26,
+		PHCBrightBariumStars			= 27,
+		PHCSunPlanetsTheirMoons		= 28,
 		PHCNone	// stop gapper for syntax reasons
 	};
 
 	enum WUTCategory {
-		EWPlanets                            =  0,
-		EWBrightStars                        =  1,
-		EWBrightNebulae                      =  2,
-		EWDarkNebulae                        =  3,
-		EWGalaxies                           =  4,
-		EWOpenStarClusters                   =  5,
-		EWAsteroids                          =  6,
-		EWComets                             =  7,
-		EWPlutinos                           =  8,
-		EWDwarfPlanets                       =  9,
-		EWCubewanos                          = 10,
-		EWScatteredDiscObjects               = 11,
-		EWOortCloudObjects                   = 12,
-		EWSednoids                           = 13,
-		EWPlanetaryNebulae                   = 14,
-		EWBrightDoubleStars                  = 15,
-		EWBrightVariableStars                = 16,
-		EWBrightStarsWithHighProperMotion    = 17,
-		EWSymbioticStars                     = 18,
-		EWEmissionLineStars                  = 19,
-		EWSupernovaeCandidates               = 20,
-		EWSupernovaeRemnantCandidates        = 21,
-		EWSupernovaeRemnants                 = 22,
-		EWClustersOfGalaxies                 = 23,
-		EWInterstellarObjects                = 24,
-		EWGlobularStarClusters               = 25,
-		EWRegionsOfTheSky                    = 26,
-		EWActiveGalaxies                     = 27,
-		EWPulsars                            = 28,
-		EWExoplanetarySystems                = 29,
-		EWBrightNovaStars                    = 30,
-		EWBrightSupernovaStars               = 31,
-		EWInteractingGalaxies                = 32,
-		EWDeepSkyObjects                     = 33,
-		EWMessierObjects                     = 34,
-		EWNGCICObjects                       = 35,
-		EWCaldwellObjects                    = 36,
-		EWHerschel400Objects                 = 37,
-		EWAlgolTypeVariableStars             = 38, // http://www.sai.msu.su/gcvs/gcvs/vartype.htm
-		EWClassicalCepheidsTypeVariableStars = 39, // http://www.sai.msu.su/gcvs/gcvs/vartype.htm
-		EWCarbonStars                        = 40,
-		EWBariumStars                        = 41,
+		EWPlanets								=   0,
+		EWBrightStars							=   1,
+		EWBrightNebulae						=   2,
+		EWDarkNebulae							=   3,
+		EWGalaxies								=   4,
+		EWOpenStarClusters					=   5,
+		EWAsteroids								=   6,
+		EWComets								=   7,
+		EWPlutinos								=   8,
+		EWDwarfPlanets							=   9,
+		EWCubewanos							= 10,
+		EWScatteredDiscObjects					= 11,
+		EWOortCloudObjects					= 12,
+		EWSednoids								= 13,
+		EWPlanetaryNebulae					= 14,
+		EWBrightDoubleStars					= 15,
+		EWBrightVariableStars					= 16,
+		EWBrightStarsWithHighProperMotion		= 17,
+		EWSymbioticStars						= 18,
+		EWEmissionLineStars					= 19,
+		EWSupernovaeCandidates				= 20,
+		EWSupernovaeRemnantCandidates		= 21,
+		EWSupernovaeRemnants					= 22,
+		EWClustersOfGalaxies					= 23,
+		EWInterstellarObjects					= 24,
+		EWGlobularStarClusters					= 25,
+		EWRegionsOfTheSky						= 26,
+		EWActiveGalaxies						= 27,
+		EWPulsars								= 28,
+		EWExoplanetarySystems					= 29,
+		EWBrightNovaStars						= 30,
+		EWBrightSupernovaStars				= 31,
+		EWInteractingGalaxies					= 32,
+		EWDeepSkyObjects						= 33,
+		EWMessierObjects						= 34,
+		EWNGCICObjects						= 35,
+		EWCaldwellObjects						= 36,
+		EWHerschel400Objects					= 37,
+		EWAlgolTypeVariableStars				= 38, // http://www.sai.msu.su/gcvs/gcvs/vartype.htm
+		EWClassicalCepheidsTypeVariableStars	= 39, // http://www.sai.msu.su/gcvs/gcvs/vartype.htm
+		EWCarbonStars							= 40,
+		EWBariumStars							= 41,
 		EWNone	// stop gapper for syntax reasons
 	};
 };
@@ -841,13 +859,18 @@ private:
 		{
 			return data(column, Qt::UserRole).toFloat() < other.data(column, Qt::UserRole).toFloat();
 		}
-		else if (column == AstroCalcDialog::EphemerisRA || column == AstroCalcDialog::EphemerisDec)
+		else if (column == AstroCalcDialog::EphemerisRA || column == AstroCalcDialog::EphemerisDec || column == AstroCalcDialog::EphemerisElongation)
 		{
 			return StelUtils::getDecAngle(text(column)) < StelUtils::getDecAngle(other.text(column));
 		}
 		else if (column == AstroCalcDialog::EphemerisMagnitude || column == AstroCalcDialog::EphemerisDistance)
 		{
 			return text(column).toFloat() < other.text(column).toFloat();
+		}
+		else if (column == AstroCalcDialog::EphemerisPhase)
+		{
+			// a bit hackish sorting rule as a quick solution for sorting percentages
+			return text(column).replace("%","").toFloat() < other.text(column).replace("%","").toFloat();
 		}
 		else
 		{
@@ -994,14 +1017,6 @@ private:
 			return text(column).toLower() < other.text(column).toLower();
 		}
 	}
-};
-
-// Class to compute parameters from Besselian elements
-class BesselParameters
-{
-public:
-	BesselParameters(double &xdot, double &ydot, double &ddot, double &mudot,
-	double &ldot, double &etadot, double &bdot, double &cdot, bool penumbra);
 };
 
 //! Derived from QTreeWidgetItem class with customized sort

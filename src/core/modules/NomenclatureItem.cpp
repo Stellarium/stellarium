@@ -18,7 +18,10 @@
  */
 
 #include "NomenclatureItem.hpp"
+#include "StelModuleMgr.hpp"
+#include "StelMovementMgr.hpp"
 #include "StelObject.hpp"
+#include "StelObserver.hpp"
 #include "StelPainter.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
@@ -28,6 +31,7 @@
 
 const QString NomenclatureItem::NOMENCLATURE_TYPE = QStringLiteral("NomenclatureItem");
 Vec3f NomenclatureItem::color = Vec3f(0.1f,1.0f,0.1f);
+bool NomenclatureItem::flagOutlineCraters = false;
 bool NomenclatureItem::hideLocalNomenclature = false;
 bool NomenclatureItem::showTerminatorZoneOnly = false;
 int NomenclatureItem::terminatorMinAltitude=-2;
@@ -39,6 +43,7 @@ NomenclatureItem::NomenclatureItem(PlanetP nPlanet,
 				   int nId,
 				   const QString& nName,
 				   const QString& nContext,
+				   const QString& nOrigin,
 				   NomenclatureItemType nItemType,
 				   double nLatitude,
 				   double nLongitude,
@@ -50,6 +55,8 @@ NomenclatureItem::NomenclatureItem(PlanetP nPlanet,
 	, englishName(nName)
 	, context(nContext)
 	, nameI18n(nName)
+	, origin(nOrigin)
+	, originI18n(nOrigin)
 	, nType(nItemType)
 	, latitude(nLatitude)
 	, longitude(nLongitude)
@@ -131,7 +138,7 @@ QString NomenclatureItem::getNomenclatureTypeLatinString(NomenclatureItemType nT
 		return map.value(nType, "");
 }
 
-QString NomenclatureItem::getNomenclatureTypeDescription(NomenclatureItemType nType, QString englishName)
+QString NomenclatureItem::getNomenclatureTypeDescription(NomenclatureItemType nType, const QString &englishName)
 {
 	Q_ASSERT(niTypeDescriptionMap.size()>20); // should be filled, not sure how many.
 	QString ret=niTypeDescriptionMap.value(nType, q_("Undocumented landform type."));
@@ -168,7 +175,7 @@ float NomenclatureItem::getSelectPriority(const StelCore* core) const
 	// so that clicking on the planet in halo does not select any feature point.
 	float priority=planet->getSelectPriority(core)+5.f;
 	// check visibility of feature
-	const float scale = getAngularDiameterRatio(core);
+	const float scale = getAngularDiameterRatio(core, core->getProjection(StelCore::FrameJ2000)->getFov());
 	const float planetScale = 2.f*static_cast<float>(planet->getAngularRadius(core))/core->getProjection(StelCore::FrameJ2000)->getFov();
 
 	// Require the planet to cover 1/10 of the screen to make it worth clicking on features.
@@ -200,6 +207,7 @@ QString NomenclatureItem::getEnglishName() const
 void NomenclatureItem::translateName(const StelTranslator& trans)
 {
 	nameI18n = trans.qtranslate(englishName, context);
+	originI18n = trans.qtranslate(origin, "origin");
 }
 
 QString NomenclatureItem::getInfoString(const StelCore* core, const InfoStringGroup& flags) const
@@ -275,6 +283,9 @@ QString NomenclatureItem::getInfoString(const StelCore* core, const InfoStringGr
 		if (planet->getEnglishName()!="Jupiter") // we must exclude this for now due to Jupiter's "off" rotation
 			oss << QString("%1: %2°<br/>").arg(q_("Solar altitude"), QString::number(getSolarAltitude(core), 'f', 1));
 
+		if (!origin.isEmpty())
+			oss << StelUtils::wrapText(QString("%1: %2").arg(q_("Origin of name"), originI18n)) << "<br/>";
+
 		// DEBUG output. This should help defining valid criteria for selection priority.
 		// oss << QString("Planet angular size (semidiameter!): %1''<br/>").arg(QString::number(planet->getAngularSize(core)*3600.));
 		// oss << QString("Angular size: %1''<br/>").arg(QString::number(getAngularSize(core)*3600.));
@@ -292,7 +303,7 @@ Vec3f NomenclatureItem::getInfoColor(void) const
 
 Vec3d NomenclatureItem::getJ2000EquatorialPos(const StelCore* core) const
 {
-	if (fuzzyEquals(jde, core->getJDE())) return XYZ;
+	if (!forceItems && fuzzyEquals(jde, core->getJDE())) return XYZ;
 	jde = core->getJDE();
 	const Vec3d equPos = planet->getJ2000EquatorialPos(core);
 	// East/West points are assumed to be along the equator, on the planet rim. Start with sub-observer point
@@ -342,59 +353,90 @@ Vec3d NomenclatureItem::getJ2000EquatorialPos(const StelCore* core) const
 	return XYZ;
 }
 
-// Return apparent semidiameter
+// Return apparent semidiameter in degrees
 double NomenclatureItem::getAngularRadius(const StelCore* core) const
 {
 	return std::atan2(0.5*size*planet->getSphereScale()/AU, getJ2000EquatorialPos(core).norm()) * M_180_PI;
 }
 
-float NomenclatureItem::getAngularDiameterRatio(const StelCore *core) const
+float NomenclatureItem::getAngularDiameterRatio(const StelCore *core, const float fov) const
 {
-    return static_cast<float>(2.*getAngularRadius(core))/core->getProjection(StelCore::FrameJ2000)->getFov();
+    return static_cast<float>(2.*getAngularRadius(core))/fov;
 }
 
-void NomenclatureItem::draw(StelCore* core, StelPainter *painter)
+void NomenclatureItem::draw(StelCore* core, StelPainter *painter, const float fov) const
 {
+	// show special points only?
+	if (getFlagShowSpecialNomenclatureOnly() && nType<NomenclatureItem::niSpecialPointPole)
+		return;
+
+	if (getFlagHideLocalNomenclature() && planet==core->getCurrentPlanet())
+		return;
+
 	// Called by NomenclatureMgr, so we don't need to check if labelsFader is true.
 	// The painter has been set to enable blending.
 	const Vec3d equPos = planet->getJ2000EquatorialPos(core);
-	Vec3d XYZ = getJ2000EquatorialPos(core);
+	const Vec3d XYZ = getJ2000EquatorialPos(core);
 
 	// In case we are located at a labeled site, don't show this label or any labels within 150 km. Else we have bad flicker...
 	if (XYZ.normSquared() < 150.*150.*AU_KM*AU_KM )
 		return;
 
-	if (getFlagHideLocalNomenclature())
-	{
-		// Check the state when needed only!
-		if (planet==core->getCurrentPlanet())
-			return;
-	}
+	const double screenRadius = getAngularRadius(core)*M_PI_180*static_cast<double>(painter->getProjector()->getPixelPerRadAtCenter());
+
+	// We can use ratio of angular size to the FOV to checking visibility of features also!
+	// double scale = getAngularSize(core)/painter->getProjector()->getFov();
+	// if (painter->getProjector()->projectCheck(XYZ, srcPos) && (dist >= XYZ.length()) && (scale>0.04 && scale<0.5))
 
 	// check visibility of feature
 	Vec3d srcPos;
-	const float scale = getAngularDiameterRatio(core);
-	NomenclatureItem::NomenclatureItemType niType = getNomenclatureType();
-
-	if (getFlagShowSpecialNomenclatureOnly())
-	{
-		// show special points only
-		if (niType<NomenclatureItem::niSpecialPointPole)
-			return;
-	}
+	const float scale = getAngularDiameterRatio(core, fov);
 
 	if (painter->getProjector()->projectCheck(XYZ, srcPos) && (equPos.normSquared() >= XYZ.normSquared())
-	    && (scale>0.04f && (scale<0.5f || niType>=NomenclatureItem::niSpecialPointPole )))
+	    && (scale>0.04f && (scale<0.5f || nType>=NomenclatureItem::niSpecialPointPole )))
 	{
 		const float solarAltitude=getSolarAltitude(core);
 		// Throw out real items if not along the terminator?
-		if ( (niType<NomenclatureItem::niSpecialPointPole) && showTerminatorZoneOnly && (solarAltitude > terminatorMaxAltitude || solarAltitude < terminatorMinAltitude) )
+		if ( (nType<NomenclatureItem::niSpecialPointPole) && showTerminatorZoneOnly && (solarAltitude > terminatorMaxAltitude || solarAltitude < terminatorMinAltitude) )
 			return;
-		float brightness=(solarAltitude<0. ? 0.25f : 1.0f);
-		if (niType>=NomenclatureItem::niSpecialPointPole)
-			brightness = 0.5f;
+		const float brightness=(nType>=NomenclatureItem::niSpecialPointPole ? 0.5f : (solarAltitude<0. ? 0.25f : 1.0f));
 		painter->setColor(color*brightness, labelsFader.getInterstate());
 		painter->drawCircle(static_cast<float>(srcPos[0]), static_cast<float>(srcPos[1]), 2.f);
+		// Highlight a few mostly circular classes with ellipses:
+		// - Craters
+		// - Satellite features (presumably all of these are satellite craters)
+		// - Lunar Maria. Mare Frigoris is elongated, and an ellipse would look stupid.
+		if (flagOutlineCraters && (nType==niCrater || nType==niSatelliteFeature || (nType==niMare && englishName!="Mare Frigoris")))
+		{
+			// Compute aspectRatio and angle from position of planet and own position, parallactic angle, ...
+			const double distDegrees=equPos.angle(XYZ)*M_180_PI; // angular distance from planet centre position
+			const double plRadiusDeg=planet->getAngularRadius(core);
+			const double sinDistCenter= distDegrees/plRadiusDeg; // should be 0...1
+			if (sinDistCenter<0.9999) // exclude any edge ellipses which would be hanging over the limb.
+			{
+				const double angleDistCenterRad=asin(qMin(0.9999, sinDistCenter)); // 0..pi/2 on the lunar/planet sphere
+				const double aspectRatio=cos(angleDistCenterRad);
+				// Exclude further ellipses which would overshoot limb.
+				if (getAngularRadius(core)*qMax(0.0001,aspectRatio)+distDegrees < plRadiusDeg )
+				{
+					static StelMovementMgr *sMMgr=GETSTELMODULE(StelMovementMgr);
+					const Vec3d equPosNow = planet->getEquinoxEquatorialPos(core);
+					const Vec3d XYZNow = getEquinoxEquatorialPos(core);
+					double ra, de, raPl, dePl;
+					StelUtils::rectToSphe(&ra, &de, XYZNow);
+					StelUtils::rectToSphe(&raPl, &dePl, equPosNow);
+					double dRA=StelUtils::fmodpos(ra-raPl, 2.*M_PI);
+					if(dRA>M_PI)
+						dRA-=2.*M_PI;
+					const double angle=atan2(dRA, de-dePl);
+					StelMovementMgr::MountMode mountMode=sMMgr->getMountMode();
+					const double par = mountMode==StelMovementMgr::MountAltAzimuthal ? static_cast<double>(getParallacticAngle(core)) : 0.;
+					painter->drawEllipse(srcPos[0], srcPos[1], screenRadius, screenRadius*qMax(0.0001,aspectRatio), angle-par );
+				}
+			}
+			//else
+			//	qWarning() << "Sine of Distance" << sinDistCenter << ">0.99975 encountered for crater " << englishName << "at " << longitude << "/" << latitude;
+		}
 		painter->drawText(static_cast<float>(srcPos[0]), static_cast<float>(srcPos[1]), nameI18n, 0, 5.f, 5.f, false);
 	}
 }
@@ -410,7 +452,7 @@ double NomenclatureItem::getSolarAltitude(const StelCore *core) const
 	return h*M_180_PI;
 }
 
-NomenclatureItem::NomenclatureItemType NomenclatureItem::getNomenclatureItemType(const QString abbrev)
+NomenclatureItem::NomenclatureItemType NomenclatureItem::getNomenclatureItemType(const QString &abbrev)
 {
 	// codes for types of features (details: https://planetarynames.wr.usgs.gov/DescriptorTerms)
 	static const QMap<QString, NomenclatureItem::NomenclatureItemType> niTypes = {
@@ -475,7 +517,7 @@ NomenclatureItem::NomenclatureItemType NomenclatureItem::getNomenclatureItemType
 }
 QMap<NomenclatureItem::NomenclatureItemType, QString> NomenclatureItem::niTypeStringMap;
 QMap<NomenclatureItem::NomenclatureItemType, QString> NomenclatureItem::niTypeDescriptionMap;
-NomenclatureItem::PlanetCoordinateOrientation NomenclatureItem::getPlanetCoordinateOrientation(QString planetName)
+NomenclatureItem::PlanetCoordinateOrientation NomenclatureItem::getPlanetCoordinateOrientation(const QString &planetName)
 {
 	// data from https://planetarynames.wr.usgs.gov/TargetCoordinates.
 	// Commented away where they are equal to te default value.
@@ -553,7 +595,7 @@ bool NomenclatureItem::is180() const
 
 void NomenclatureItem::createNameLists()
 {
-    niTypeStringMap = {
+	niTypeStringMap = {
 	{ niSpecialPointPole, qc_("point", "special point") },
 	{ niSpecialPointEast, qc_("point", "special point") },
 	{ niSpecialPointWest, qc_("point", "special point") },
@@ -808,3 +850,5 @@ Vec4d NomenclatureItem::getRTSTime(const StelCore* core, const double altitude) 
 {
 	return planet->getRTSTime(core, altitude);
 }
+
+bool NomenclatureItem::forceItems;

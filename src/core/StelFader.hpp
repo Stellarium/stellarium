@@ -54,14 +54,14 @@ class BooleanFader : public StelFader
 public:
 	// Create and initialise
 	BooleanFader(bool initialState=false) : StelFader(initialState) {}
-	~BooleanFader() Q_DECL_OVERRIDE {}
+	~BooleanFader() override {}
 	// Increments the internal counter of deltaTime ticks
-	void update(int deltaMs) Q_DECL_OVERRIDE {Q_UNUSED(deltaMs)}
+	void update(int deltaMs) override {Q_UNUSED(deltaMs)}
 	// Gets current switch state
-	float getInterstate() const Q_DECL_OVERRIDE {return state ? 1.f : 0.f;}
+	float getInterstate() const override {return state ? 1.f : 0.f;}
 	// Switchors can be used just as bools
-	StelFader& operator=(bool s) Q_DECL_OVERRIDE {state=s; return *this;}
-	virtual float getDuration() const Q_DECL_OVERRIDE {return 0.f;}
+	StelFader& operator=(bool s) override {state=s; return *this;}
+	float getDuration() const override {return 0.f;}
 };
 
 //! @class LinearFader
@@ -79,10 +79,10 @@ public:
 		interstate = getTargetValue();
 	}
 
-	~LinearFader() Q_DECL_OVERRIDE {}
+	~LinearFader() override {}
 
 	// Increments the internal counter of deltaMs milliseconds
-	void update(int deltaMs) Q_DECL_OVERRIDE
+	void update(int deltaMs) override
 	{
 		if (!isTransiting()) return; // We are not in transition
 		counter+=deltaMs;
@@ -98,10 +98,10 @@ public:
 	}
 
 	// Get current switch state
-	float getInterstate() const Q_DECL_OVERRIDE { return interstate;}
+	float getInterstate() const override { return interstate;}
 
 	// StelFaders can be used just as bools
-	StelFader& operator=(bool s) Q_DECL_OVERRIDE
+	StelFader& operator=(bool s) override
 	{
 		if (isTransiting()) {
 			// if same end state, no changes
@@ -120,13 +120,13 @@ public:
 		return *this;
 	}
 
-	void setDuration(int _duration) Q_DECL_OVERRIDE
+	void setDuration(int _duration) override
 	{
 		if (counter >= duration)
 			counter = _duration;
 		duration = _duration;
 	}
-	virtual float getDuration() const Q_DECL_OVERRIDE {return static_cast<float>(duration);}
+	float getDuration() const override {return static_cast<float>(duration);}
 
 private:
 	bool isTransiting() const { return counter < duration; }
@@ -146,7 +146,7 @@ public:
 	}
 
 	// Get current switch state
-	float getInterstate(void) const Q_DECL_OVERRIDE { return LinearFader::getInterstate() * LinearFader::getInterstate();}
+	float getInterstate(void) const override { return LinearFader::getInterstate() * LinearFader::getInterstate();}
 };
 
 #endif // STELFADER_HPP

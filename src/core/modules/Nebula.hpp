@@ -143,7 +143,7 @@ public:
 	Q_ENUM(NebulaType)
 
 	Nebula();
-	~Nebula() Q_DECL_OVERRIDE;
+	~Nebula() override;
 
 	//! Nebula support the following InfoStringGroup flags:
 	//! - Name
@@ -158,37 +158,46 @@ public:
 	//! @param core the StelCore object
 	//! @param flags a set of InfoStringGroup items to include in the return value.
 	//! @return a QString containing an HMTL encoded description of the Nebula.
-	virtual QString getInfoString(const StelCore *core, const InfoStringGroup& flags) const Q_DECL_OVERRIDE;
+	QString getInfoString(const StelCore *core, const InfoStringGroup& flags) const override;
 	//! In addition to the entries from StelObject::getInfoMap(), Nebula objects provide
 	//! - bmag (photometric B magnitude. 99 if unknown)
 	//! - morpho (longish description; translated!)
 	//! - surface-brightness
 	//! - designations (all designations of DSO)
+	//! - axis-major (major axis in radians)
+	//! - axis-major-dd (major axis in decimal degrees)
+	//! - axis-major-deg (major axis in decimal degrees (formatted string))
+	//! - axis-major-dms (major axis in DMS format)
+	//! - axis-minor (minor axis in radians)
+	//! - axis-minor-dd (minor axis in decimal degrees)
+	//! - axis-minor-deg (minor axis in decimal degrees (formatted string))
+	//! - axis-minor-dms (minor axis in DMS format)
+	//! - orientation-angle (in degrees)
 	//! A few entries are optional
 	//! - bV (B-V index)
 	//! - redshift
-	virtual QVariantMap getInfoMap(const StelCore *core) const Q_DECL_OVERRIDE;
-	virtual QString getType() const Q_DECL_OVERRIDE {return NEBULA_TYPE;}
-	virtual QString getObjectType() const Q_DECL_OVERRIDE
+	QVariantMap getInfoMap(const StelCore *core) const override;
+	QString getType() const override {return NEBULA_TYPE;}
+	QString getObjectType() const override
 	{
 		return typeEnglishStringMap.value(nType, "undocumented type");
 	}
-	virtual QString getObjectTypeI18n() const Q_DECL_OVERRIDE
+	QString getObjectTypeI18n() const override
 	{
 		return q_(typeEnglishStringMap.value(nType, q_("undocumented type")));
 	}
-	virtual QString getID() const Q_DECL_OVERRIDE {return getDSODesignation(); } //this depends on the currently shown catalog flags, should this be changed?
-	virtual Vec3d getJ2000EquatorialPos(const StelCore* core) const Q_DECL_OVERRIDE;
-	virtual double getCloseViewFov(const StelCore* core = Q_NULLPTR) const Q_DECL_OVERRIDE;
-	virtual float getVMagnitude(const StelCore* core) const Q_DECL_OVERRIDE;
-	virtual float getSelectPriority(const StelCore* core) const Q_DECL_OVERRIDE;
-	virtual Vec3f getInfoColor() const Q_DECL_OVERRIDE;
-	virtual QString getNameI18n() const Q_DECL_OVERRIDE {return nameI18;}
-	virtual QString getEnglishName() const Q_DECL_OVERRIDE {return englishName;}
+	QString getID() const override {return getDSODesignation(); } //this depends on the currently shown catalog flags, should this be changed?
+	Vec3d getJ2000EquatorialPos(const StelCore* core) const override;
+	double getCloseViewFov(const StelCore* core = Q_NULLPTR) const override;
+	float getVMagnitude(const StelCore* core) const override;
+	float getSelectPriority(const StelCore* core) const override;
+	Vec3f getInfoColor() const override;
+	QString getNameI18n() const override {return nameI18;}
+	QString getEnglishName() const override {return englishName;}
 	QString getEnglishAliases() const;
 	QString getI18nAliases() const;
-	virtual double getAngularRadius(const StelCore*) const Q_DECL_OVERRIDE;
-	virtual SphericalRegionP getRegion() const Q_DECL_OVERRIDE {return pointRegion;}
+	double getAngularRadius(const StelCore*) const override;
+	SphericalRegionP getRegion() const override {return pointRegion;}
 
 	// Methods specific to Nebula
 	void setLabelColor(const Vec3f& v) {labelColor = v;}
@@ -241,7 +250,7 @@ public:
 
 protected:
 	//! Format the magnitude info string for the object
-	virtual QString getMagnitudeInfoString(const StelCore *core, const InfoStringGroup& flags, const int decimals=1) const Q_DECL_OVERRIDE;
+	QString getMagnitudeInfoString(const StelCore *core, const InfoStringGroup& flags, const int decimals=1) const override;
 
 private:
 	friend struct DrawNebulaFuncObject;
@@ -270,10 +279,14 @@ private:
 
 	static Vec3f getHintColor(Nebula::NebulaType nType);
 	float getVisibilityLevelByMagnitude() const;
+	float getHintSize(StelPainter& sPainter) const;
 
 	//! Get the printable description of morphological nebula type.
 	//! @return the nebula morphological type string.
 	QString getMorphologicalTypeDescription() const;
+
+	//! Get the description of concentration class of globular clusters
+	QString getConcentrationClass(QString cc) const;
 
 	unsigned int DSO_nb;
 	unsigned int M_nb;          // Messier Catalog number

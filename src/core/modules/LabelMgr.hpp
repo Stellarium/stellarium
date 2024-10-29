@@ -42,21 +42,21 @@ class LabelMgr : public StelModule
 public:
 	//! Construct a LabelMgr object.
 	LabelMgr();
-	virtual ~LabelMgr() Q_DECL_OVERRIDE;
+	~LabelMgr() override;
  
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
 	//! Initialize the LabelMgr object.
-	virtual void init() Q_DECL_OVERRIDE;
+	void init() override;
 	
 	//! Draw user labels.
-	virtual void draw(StelCore* core) Q_DECL_OVERRIDE;
+	void draw(StelCore* core) override;
 	
 	//! Update time-dependent parts of the module.
-	virtual void update(double deltaTime) Q_DECL_OVERRIDE;
+	void update(double deltaTime) override;
 
 	//! Defines the order in which the various modules are drawn.
-	virtual double getCallOrder(StelModuleActionName actionName) const Q_DECL_OVERRIDE;
+	double getCallOrder(StelModuleActionName actionName) const override;
 
 public slots:
 	//! Create a label which is attached to a StelObject.
@@ -71,11 +71,11 @@ public slots:
 	//! - "E" = to the right of the object on screen
 	//! - "W" = to the left of the object on screen
 	//! - "NE", "NW", "SE", "SW" work too.
+	//! @param style "TextOnly" | "Line"
+	//! @param autoDelete the label will be automatically deleted after it is displayed once
+	//! @param autoDeleteTimeoutMs if not zero, the label will be automatically deleted after autoDeleteTimeoutMs ms
 	//! @return a unique ID which can be used to refer to the label.
 	//! returns -1 if the label could not be created (e.g. object not found)
-	//! @param autoDelete the label will be automatically deleted after it is displayed once
-	//! @param autoDeleteTimeoutMs if not zero, the label will be automatically deleted after
-	//! autoDeleteTimeoutMs ms
 	int labelObject(const QString& text,
 			const QString& objectName,
 	                bool visible=true,
@@ -104,8 +104,7 @@ public slots:
 	//! @param fontSize size of the font to use
 	//! @param fontColor either HTML-like color spec, e.g. "#ffff00", or 3-part float vector like Vec3f(1.0f,1.0f,0.0f) for yellow
 	//! @param autoDelete the label will be automatically deleted after it is displayed once
-	//! @param autoDeleteTimeoutMs if not zero, the label will be automatically deleted after
-	//! autoDeleteTimeoutMs ms
+	//! @param autoDeleteTimeoutMs if not zero, the label will be automatically deleted after autoDeleteTimeoutMs ms
 	int labelHorizon(const QString& text,
 			float az,
 			float alt,

@@ -34,12 +34,12 @@
 #include <QJsonObject>
 #include <QStringListModel>
 
-LocationService::LocationService(QObject *parent) : AbstractAPIService(parent)
+LocationService::LocationService(QObject *parent) : AbstractAPIService(parent),
+	core(StelApp::getInstance().getCore()),
+	locMgr(&StelApp::getInstance().getLocationMgr()),
+	ssys(GETSTELMODULE(SolarSystem))
 {
 	//this is run in the main thread
-	core = StelApp::getInstance().getCore();
-	locMgr = &StelApp::getInstance().getLocationMgr();
-	ssys = GETSTELMODULE(SolarSystem);
 }
 
 void LocationService::get(const QByteArray& operation, const APIParameters &parameters, APIServiceResponse &response)
@@ -60,7 +60,7 @@ void LocationService::get(const QByteArray& operation, const APIParameters &para
 
 		QStringList allRegions = StelApp::getInstance().getLocationMgr().getRegionNames();
 		QJsonArray list;
-		for (const auto &str : qAsConst(allRegions))
+		for (const auto &str : std::as_const(allRegions))
 		{
 			QJsonObject obj;
 			obj.insert("name",str);
@@ -170,12 +170,22 @@ void LocationService::post(const QByteArray& operation, const APIParameters &par
 		bool doneSomething = false;
 		bool ok = false;
 		float latitude = sLatitude.toFloat(&ok);
+		if (!ok)
+		{
+			sLatitude.replace(",", ".");
+			latitude = sLatitude.toFloat(&ok);
+		}
 		if(ok && (latitude - loc.getLatitude()) != 0.0f)
 		{
 			loc.setLatitude(latitude);
 			doneSomething = true;
 		}
 		float longitude = sLongitude.toFloat(&ok);
+		if (!ok)
+		{
+			sLongitude.replace(",", ".");
+			longitude = sLongitude.toFloat(&ok);
+		}
 		if(ok && (longitude - loc.getLongitude()) != 0.0f)
 		{
 			loc.setLongitude(longitude);

@@ -17,11 +17,14 @@
  */
 
 #include "StelLocationMgr.hpp"
+#include "LandscapeMgr.hpp"
+#include "SolarSystem.hpp"
 #include "StelLocationMgr_p.hpp"
 
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelFileMgr.hpp"
+#include "StelModuleMgr.hpp"
 #include "StelUtils.hpp"
 #include "StelJsonParser.hpp"
 
@@ -378,7 +381,7 @@ void NMEALookupHelper::nmeaUpdated(const QGeoPositionInfo &update)
 		loc.setLongitude(static_cast<float>(coord.longitude()));
 		loc.setLatitude(static_cast<float>(coord.latitude()));
 		// 2D fix may have only long/lat, invalid altitude.
-		loc.altitude=( qIsNaN(coord.altitude()) ? 0 : static_cast<int>(floor(coord.altitude())));
+		loc.altitude=( qIsNaN(coord.altitude()) ? 0 : static_cast<int>(std::floor(coord.altitude())));
 		emit queryFinished(loc);
 	}
 	else
@@ -412,6 +415,8 @@ StelLocationMgr::StelLocationMgr()
 	// The first entry is the DB name, the second is as we display it in the program.
 	if (locationDBToIANAtranslations.isEmpty())
 	{
+		// Reported July 7, 2023 (#3316)
+		locationDBToIANAtranslations.insert("Asia/Calcutta", "Asia/Kolkata");
 		// Reported April 25, 2023. (#3200)
 		locationDBToIANAtranslations.insert("America/Yellowknife","America/Edmonton");
 		// Seen February 06, 2023.
@@ -471,6 +476,8 @@ StelLocationMgr::StelLocationMgr()
 		locationDBToIANAtranslations.insert("America/Punta_Arenas",  "UTC-03:00"); // no DST; https://www.zeitverschiebung.net/en/timezone/america--punta_arenas
 		// Missing on Qt5.15.2/Win10
 		locationDBToIANAtranslations.insert("America/Nuuk",      "America/Godthab");
+		// GH: #3953
+		locationDBToIANAtranslations.insert("Asia/Choibalsan",   "Asia/Ulaanbaatar");
 		// N.B. Further missing TZ names will be printed out in the log.txt. Resolve these by adding into this list.
 		// TODO later: create a text file in user data directory, and auto-update it weekly.
 	}
@@ -491,6 +498,10 @@ StelLocationMgr::StelLocationMgr()
 #endif
 	// Init to Paris France because it's the center of the world.
 	lastResortLocation = locationForString(conf->value("init_location/last_location", "Paris, Western Europe").toString());
+
+	planetName="Earth";
+	planetSurfaceMap=QImage(":/graphicGui/miscWorldMap.jpg");
+	connect(StelApp::getInstance().getCore(), SIGNAL(locationChanged(StelLocation)), this, SLOT(changePlanetMapForLocation(StelLocation)));
 }
 
 StelLocationMgr::~StelLocationMgr()
@@ -586,20 +597,22 @@ LocationMap StelLocationMgr::loadCitiesBin(const QString& fileName)
 			}
 			else
 			{
-				qDebug() << "StelLocationMgr::loadCitiesBin(): TimeZone for " << loc.name <<  " not found: " << loc.ianaTimeZone;
-				unknownTZlist.append(loc.ianaTimeZone);
+				if (!unknownTZlist.contains(loc.ianaTimeZone))
+				{
+					qDebug() << "StelLocationMgr::loadCitiesBin(): TimeZone for " << loc.name <<  " not found: " << loc.ianaTimeZone;
+					unknownTZlist.append(loc.ianaTimeZone);
+				}
 			}
 		}
 	}
 	if (unknownTZlist.length()>0)
 	{
-		unknownTZlist.removeDuplicates();
-		qDebug() << "StelLocationMgr::loadCitiesBin(): Summary of unknown TimeZones:";
+		qInfo() << "StelLocationMgr::loadCitiesBin(): Summary of unknown TimeZones:";
 		for (const auto& tz : unknownTZlist)
 		{
-			qDebug() << tz;
+			qInfo() << tz;
 		}
-		qDebug() << "Please report these timezone names (this logfile) to the Stellarium developers.";
+		qInfo() << "Please report these timezone names (this logfile) to the Stellarium developers.";
 		// Note to developers: Fill those names and replacements to the map above.
 	}
 
@@ -1064,19 +1077,27 @@ void StelLocationMgr::positionUpdated(QGeoPositionInfo info)
 
 void StelLocationMgr::changeLocationFromGPSQuery(const StelLocation &locin)
 {
-	bool verbose=qApp->property("verbose").toBool();
+	const bool verbose=qApp->property("verbose").toBool();
 	StelCore *core=StelApp::getInstance().getCore();
 	StelLocation loc=locin;
+	const float latitude = loc.getLatitude();
+	const float longitude = loc.getLongitude();
 	loc.lightPollutionLuminance=StelLocation::DEFAULT_LIGHT_POLLUTION_LUMINANCE;
 	// Usually you don't leave your time zone with GPS.
 	loc.ianaTimeZone=core->getCurrentTimeZone();
 	loc.isUserLocation=true;
 	loc.planetName="Earth";
 	loc.name=QString("GPS %1%2 %3%4")
-		.arg(loc.getLatitude()<0?"S":"N").arg(qRound(abs(loc.getLatitude())))
-		.arg(loc.getLongitude()<0?"W":"E").arg(qRound(abs(loc.getLongitude())));
-
-	core->moveObserverTo(loc, 0.0, 0.0);
+		.arg(latitude<0.f?"S":"N").arg(qRound(qAbs(latitude)))
+		.arg(longitude<0.f?"W":"E").arg(qRound(qAbs(longitude)));
+	LandscapeMgr *lMgr=GETSTELMODULE(LandscapeMgr);
+	QString landscapeAutoName;
+	if (lMgr->getFlagLandscapeAutoSelection())
+	{
+		QColor color=getColorForCoordinates(longitude, latitude);
+		landscapeAutoName=QString("ZeroColor(%1)").arg(Vec3f(color).toStr());
+	}
+	core->moveObserverTo(loc, 0.0, 0.0, landscapeAutoName);
 	if (nmeaHelper)
 	{
 		if (verbose)
@@ -1084,7 +1105,7 @@ void StelLocationMgr::changeLocationFromGPSQuery(const StelLocation &locin)
 	}
 	if (verbose)
 	{
-		qDebug() << "Location in progress: Long=" << loc.getLongitude() << " Lat=" << loc.getLatitude() << " Alt" << loc.altitude;
+		qDebug() << "Location in progress: Long=" << longitude << " Lat=" << latitude << " Alt" << loc.altitude;
 		qDebug() << "New location named " << loc.name;
 		qDebug() << "queryOK, resetting GUI";
 	}
@@ -1154,7 +1175,16 @@ void StelLocationMgr::changeLocationFromNetworkLookup()
 			// Ensure that ipTimeZone is a valid IANA timezone name!
 			QTimeZone ipTZ(ipTimeZone.toUtf8());
 			core->setCurrentTimeZone( !ipTZ.isValid() || ipTimeZone.isEmpty() ? "LMST" : ipTimeZone);
-			core->moveObserverTo(loc, 0.0, 0.0);
+			LandscapeMgr *lMgr=GETSTELMODULE_SILENT(LandscapeMgr); // This may fail during StelApp:init() (GH:#3550)
+			QString landscapeAutoName;
+			if (lMgr && lMgr->getFlagLandscapeAutoSelection())
+			{
+				QColor color=getColorForCoordinates(loc.getLongitude(), loc.getLatitude());
+				landscapeAutoName=QString("ZeroColor(%1)").arg(Vec3f(color).toStr());
+			}
+			core->moveObserverTo(loc, 0.0, 0.0, landscapeAutoName);
+
+
 			QSettings* conf = StelApp::getInstance().getSettings();
 			conf->setValue("init_location/last_location", QString("%1, %2").arg(latitude).arg(longitude));
 		}
@@ -1162,7 +1192,7 @@ void StelLocationMgr::changeLocationFromNetworkLookup()
 		{
 			qDebug() << "Failure getting IP-based location: answer is in not acceptable format! Error: " << e.what()
 					<< "\nLet's use Paris, France as default location...";
-			core->moveObserverTo(getLastResortLocation(), 0.0, 0.0); // Answer is not in JSON format! A possible block by DNS server or firewall
+			core->moveObserverTo(getLastResortLocation(), 0.0, 0.0, "guereins"); // Answer is not in JSON format! A possible block by DNS server or firewall
 		}
 	}
 	else
@@ -1173,7 +1203,7 @@ void StelLocationMgr::changeLocationFromNetworkLookup()
 	networkReply->deleteLater();
 }
 
-LocationMap StelLocationMgr::pickLocationsNearby(const QString planetName, const float longitude, const float latitude, const float radiusDegrees)
+LocationMap StelLocationMgr::pickLocationsNearby(const QString &planetName, const float longitude, const float latitude, const float radiusDegrees)
 {
 	QMap<QString, StelLocation> results;
 	QMapIterator<QString, StelLocation> iter(locations);
@@ -1190,7 +1220,7 @@ LocationMap StelLocationMgr::pickLocationsNearby(const QString planetName, const
 	return results;
 }
 
-LocationMap StelLocationMgr::pickLocationsInRegion(const QString region)
+LocationMap StelLocationMgr::pickLocationsInRegion(const QString &region)
 {
 	QMap<QString, StelLocation> results;
 	QMapIterator<QString, StelLocation> iter(locations);
@@ -1243,7 +1273,7 @@ void StelLocationMgr::loadCountries()
 	}
 	// aliases for some countries to backward compatibility
 	countryNameToCodeMap.insert("Russian Federation", "ru");
-	countryNameToCodeMap.insert("Taiwan (Provice of China)", "tw");
+	countryNameToCodeMap.insert("Taiwan (Province of China)", "tw");
 }
 
 void StelLocationMgr::loadRegions()
@@ -1324,13 +1354,13 @@ QStringList StelLocationMgr::getRegionNames(const QString& planet) const
 	return allregions;
 }
 
-QString StelLocationMgr::pickRegionFromCountryCode(const QString countryCode)
+QString StelLocationMgr::pickRegionFromCountryCode(const QString &countryCode)
 {
 	QMap<QString, QString>::ConstIterator i = countryCodeToRegionMap.find(countryCode);
 	return (i!=countryCodeToRegionMap.constEnd()) ? i.value() : QString();
 }
 
-QString StelLocationMgr::pickRegionFromCountry(const QString country)
+QString StelLocationMgr::pickRegionFromCountry(const QString &country)
 {
 	QMap<QString, QString>::ConstIterator i = countryNameToCodeMap.find(country);
 	QString code = (i!=countryNameToCodeMap.constEnd()) ? i.value() : QString();
@@ -1478,8 +1508,8 @@ QPair<int, QChar> StelLocationMgr::utmZone(const double longitude, const double 
 	// Everything in the middle
 	else if ( (latitude>-80.0) && (latitude<=84.0) ){
 		static const QString mid_zones("CDEFGHJKLMNPQRSTUVWX"); // C to X, skip I and O
-		letter = mid_zones[ qMin((int(floor(latitude)) + 80) / 8 , 19) ];
-		zone   = StelUtils::amod((int(floor(longitude)) + 180) / 6 , 60) + 1; // modulo in case longitude is 0 to 360 instead of -180 to 180
+		letter = mid_zones[ qMin((int(std::floor(latitude)) + 80) / 8 , 19) ];
+		zone   = StelUtils::amod((int(std::floor(longitude)) + 180) / 6 , 60) + 1; // modulo in case longitude is 0 to 360 instead of -180 to 180
 	}
 	// North + South Poles
 	else if (latitude > 84.0)
@@ -1539,7 +1569,7 @@ QStringList StelLocationMgr::getAllTimezoneNames() const
 	// Accept others after testing against sanitized names, and especially all UT+/- names!
 
 	auto tzList = QTimeZone::availableTimeZoneIds(); // System dependent set of IANA timezone names.
-	for (const auto& tz : qAsConst(tzList))
+	for (const auto& tz : std::as_const(tzList))
 	{
 		QString tzcand=sanitizeTimezoneStringFromLocationDB(tz); // try to find name as we use it in the program.
 		if (!ret.contains(tzcand))
@@ -1555,4 +1585,38 @@ QStringList StelLocationMgr::getAllTimezoneNames() const
 	ret.append("system_default");
 	ret.sort();
 	return ret;
+}
+
+// To be connected from StelCore::locationChanged(loc)
+void StelLocationMgr::changePlanetMapForLocation(StelLocation loc)
+{
+	if (loc.planetName==planetName)
+		return;
+
+	planetName=loc.planetName;
+	if (planetName=="Earth")
+		planetSurfaceMap=QImage(":/graphicGui/miscWorldMap.jpg");
+	else
+	{
+		SolarSystem *ssm=GETSTELMODULE(SolarSystem);
+		PlanetP p=ssm->searchByEnglishName(loc.planetName); // nullptr for "SpaceShip" transitions
+		QString mapName="textures/" + (p ? p->getTextMapName() : planetName) + ".png";
+
+		if (!planetSurfaceMap.load(StelFileMgr::findFile(mapName, StelFileMgr::File)))
+		{
+			// texture not found. Use a gray pixel.
+			planetSurfaceMap=QImage(16,16,QImage::Format_RGB32);
+			planetSurfaceMap.fill(QColor(64, 64, 64));
+		}
+	}
+}
+
+QColor StelLocationMgr::getColorForCoordinates(const double lng, const double lat) const
+{
+	QPoint imgPoint( (lng+180.)/ 360. * planetSurfaceMap.width(),
+			 (90.-lat) / 180. * planetSurfaceMap.height());
+
+	// Sample the map pixel color. Use a small box to avoid 1-pixel surprises.
+	QImage sampledPix=planetSurfaceMap.copy(QRect(imgPoint-QPoint(1,1), QSize(2,2))).scaled(1,1);
+	return sampledPix.pixelColor(0,0);
 }

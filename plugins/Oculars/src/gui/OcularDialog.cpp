@@ -303,8 +303,8 @@ void OcularDialog::createDialogContent()
 	}
 	
 	//Now the rest of the actions.
-	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
-	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
+	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
+	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	connectBoolProperty(ui->checkBoxControlPanel,		"Oculars.flagGuiPanelEnabled");
 	connectIntProperty(ui->guiFontSizeSpinBox,		"Oculars.guiPanelFontSize");
@@ -332,13 +332,13 @@ void OcularDialog::createDialogContent()
 	connectBoolProperty(ui->contourCheckBox,		"Oculars.flagShowContour");
 	connectBoolProperty(ui->cardinalsCheckBox,		"Oculars.flagShowCardinals");
 	connectBoolProperty(ui->alignCrosshairCheckBox,		"Oculars.flagAlignCrosshair");
-	connectColorButton(ui->textColorToolButton,             "Oculars.textColor", "text_color", "Oculars");
-	connectColorButton(ui->lineColorToolButton,             "Oculars.lineColor", "line_color", "Oculars");
-	connectColorButton(ui->focuserColorToolButton,		"Oculars.focuserColor", "focuser_color", "Oculars");
 	connectBoolProperty(ui->checkBoxShowFocuserOverlay,	"Oculars.flagShowFocuserOverlay");
 	connectBoolProperty(ui->checkBoxUseSmallFocuser,	"Oculars.flagUseSmallFocuserOverlay");
 	connectBoolProperty(ui->checkBoxUseMediumFocuser,	"Oculars.flagUseMediumFocuserOverlay");
 	connectBoolProperty(ui->checkBoxUseLargeFocuser,	"Oculars.flagUseLargeFocuserOverlay");
+	ui->textColorToolButton->setup("Oculars.textColor", "text_color", "Oculars");
+	ui->lineColorToolButton->setup("Oculars.lineColor", "line_color", "Oculars");
+	ui->focuserColorToolButton->setup("Oculars.focuserColor", "focuser_color", "Oculars");
 
 	setupTelradFOVspins(plugin->getTelradFOV());
 	connect(plugin, SIGNAL(telradFOVChanged(Vec4f)), this, SLOT(setupTelradFOVspins(Vec4f)));
@@ -490,6 +490,7 @@ void OcularDialog::createDialogContent()
 	connect(ui->semiTransparencyCheckBox, SIGNAL(toggled(bool)), this, SLOT(updateGuiOptions()));
 	connect(ui->checkBoxShowFocuserOverlay, SIGNAL(toggled(bool)), this, SLOT(updateGuiOptions()));
 	connect(ui->checkBoxShowCcdCropOverlay, SIGNAL(toggled(bool)), this, SLOT(updateGuiOptions()));
+	connect(ui->limitStellarMagnitudeCheckBox, SIGNAL(toggled(bool)), this, SLOT(updateTelescope()));
 	setLabelsDescriptionText(ui->binocularsCheckBox->isChecked());
 	updateGuiOptions();
 }
@@ -621,7 +622,7 @@ void OcularDialog::initAboutText()
 	//BM: Most of the text for now is the original contents of the About widget.
 	QString html = "<html><head><title></title></head><body>";
 
-	html += "<h2>" + q_("Oculars Plug-in") + "</h2><table width=\"90%\">";
+	html += "<h2>" + q_("Oculars Plug-in") + "</h2><table class='layout' width=\"90%\">";
 	html += "<tr width=\"30%\"><td><strong>" + q_("Version") + ":</strong></td><td>" + OCULARS_PLUGIN_VERSION + "</td></tr>";
 	html += "<tr><td><strong>" + q_("License") + ":</strong></td><td>" + OCULARS_PLUGIN_LICENSE + "</td></tr>";
 	html += "<tr><td><strong>" + q_("Author") + ":</strong></td><td>Timothy Reaves &lt;treaves@silverfieldstech.com&gt;</td></tr>";

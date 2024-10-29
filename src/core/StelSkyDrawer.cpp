@@ -75,7 +75,6 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) :
 	starShaderProgram(Q_NULLPTR),
 	starShaderVars(StarShaderVars()),
 	nbPointSources(0),
-	maxPointSources(1000),
 	maxLum(0.f),
 	oldLum(-1.f),
 	flagLuminanceAdaptation(false),
@@ -446,9 +445,8 @@ void StelSkyDrawer::postDrawPointSource(StelPainter* sPainter)
 		texHalo->bind();
 	sPainter->setBlending(true, GL_ONE, GL_ONE);
 
-	const Mat4f& m = sPainter->getProjector()->getProjectionMatrix();
-	const QMatrix4x4 qMat(m[0], m[4], m[8], m[12], m[1], m[5], m[9], m[13], m[2], m[6], m[10], m[14], m[3], m[7], m[11], m[15]);
-	
+	const QMatrix4x4 qMat=sPainter->getProjector()->getProjectionMatrix().toQMatrix();
+
 	vbo->bind();
 	vbo->write(0, vertexArray, nbPointSources*6*sizeof(StarVertex));
 	vbo->write(maxPointSources*6*sizeof(StarVertex), textureCoordArray, nbPointSources*6*2);
@@ -479,11 +477,7 @@ bool StelSkyDrawer::drawPointSource(StelPainter* sPainter, const Vec3d& v, const
 		return false;
 
 	const float radius = rcMag.radius * static_cast<float>(sPainter->getProjector()->getDevicePixelsPerPixel());
-#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
 	const float frand=StelApp::getInstance().getRandF();
-#else
-	const float frand=static_cast<float>(qrand())/static_cast<float>(RAND_MAX);
-#endif
 
 	// Random coef for star twinkling. twinkleFactor can introduce height-dependent twinkling.
 	const float tw = ((flagStarTwinkle && (flagHasAtmosphere || flagForcedTwinkle))) ? (1.f-twinkleFactor*static_cast<float>(twinkleAmount)*frand)*rcMag.luminance : rcMag.luminance;
@@ -500,10 +494,10 @@ bool StelSkyDrawer::drawPointSource(StelPainter* sPainter, const Vec3d& v, const
 		sPainter->drawSprite2dModeNoDeviceScale(win[0], win[1], rmag);
 	}
 
-	unsigned char starColor[3] = {0, 0, 0};
-	starColor[0] = static_cast<unsigned char>(std::min(static_cast<int>(color[0]*tw*255+0.5f), 255));
-	starColor[1] = static_cast<unsigned char>(std::min(static_cast<int>(color[1]*tw*255+0.5f), 255));
-	starColor[2] = static_cast<unsigned char>(std::min(static_cast<int>(color[2]*tw*255+0.5f), 255));
+	unsigned char starColor[3] = {
+		static_cast<unsigned char>(std::min(static_cast<int>(color[0]*tw*255+0.5f), 255)),
+		static_cast<unsigned char>(std::min(static_cast<int>(color[1]*tw*255+0.5f), 255)),
+		static_cast<unsigned char>(std::min(static_cast<int>(color[2]*tw*255+0.5f), 255))};
 	
 	// Store the drawing instructions in the vertex arrays
 	StarVertex* vx = &(vertexArray[nbPointSources*6]);
@@ -534,7 +528,7 @@ void StelSkyDrawer::drawSunCorona(StelPainter* painter, const Vec3f& v, float ra
 	// For some reason we must mix color with the given alpha as well, else mixing does not work.
 	painter->setColor(color*alpha, alpha);
 	// pre-compensate the automatic scaling of sprite painting on HiDPI screens
-	radius /= static_cast<float>(painter->getProjector()->getDevicePixelsPerPixel())*StelApp::getInstance().getGlobalScalingRatio();
+	radius /= static_cast<float>(painter->getProjector()->getDevicePixelsPerPixel());
 	// Our corona image was made in 2008-08-01 near Khovd, Mongolia. It shows the correct parallactic angle for its location and time, we must add this, and subtract the ecliptic/equator angle from that date of 15.43 degrees.
 	painter->drawSprite2dMode(win[0], win[1], radius, -angle+44.65f-15.43f);
 

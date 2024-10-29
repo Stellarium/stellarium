@@ -20,8 +20,12 @@
 #ifndef STELVIEWPORTEFFECT_HPP
 #define STELVIEWPORTEFFECT_HPP
 
+#include <memory>
 #include "VecMath.hpp"
 #include "StelProjector.hpp"
+#include <QOpenGLBuffer>
+#include <QOpenGLShaderProgram>
+#include <QOpenGLVertexArrayObject>
 
 class QOpenGLFramebufferObject;
 
@@ -50,10 +54,18 @@ class StelViewportDistorterFisheyeToSphericMirror : public StelViewportEffect
 {
 public:
 	StelViewportDistorterFisheyeToSphericMirror(int screen_w,int screen_h);
-	~StelViewportDistorterFisheyeToSphericMirror() Q_DECL_OVERRIDE;
-	virtual QString getName() const Q_DECL_OVERRIDE {return "sphericMirrorDistorter";}
-	virtual void paintViewportBuffer(const QOpenGLFramebufferObject* buf) const Q_DECL_OVERRIDE;
-	virtual void distortXY(qreal& x, qreal& y) const Q_DECL_OVERRIDE;
+	~StelViewportDistorterFisheyeToSphericMirror() override;
+	QString getName() const override {return "sphericMirrorDistorter";}
+	void paintViewportBuffer(const QOpenGLFramebufferObject* buf) const override;
+	void distortXY(qreal& x, qreal& y) const override;
+
+private:
+	void setupShaders();
+	void setupBuffers();
+	void bindVAO() const;
+	void releaseVAO() const;
+	void setupCurrentVAO() const;
+
 private:
 	const int screen_w;
 	const int screen_h;
@@ -68,6 +80,18 @@ private:
 	QVector<Vec2f> displayVertexList;
 	QVector<Vec4f> displayColorList;
 	QVector<Vec2f> displayTexCoordList;
+	std::unique_ptr<QOpenGLVertexArrayObject> vao;
+	std::unique_ptr<QOpenGLBuffer> verticesVBO;
+	std::unique_ptr<QOpenGLShaderProgram> shaderProgram;
+	int vboVertexDataOffset;
+	int vboTexCoordDataOffset;
+	int vboColorDataOffset;
+	struct ShaderVars
+	{
+		int projectionMatrix;
+		int texture;
+	};
+	ShaderVars shaderVars;
 };
 
 #endif // STELVIEWPORTEFFECT_HPP

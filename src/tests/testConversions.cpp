@@ -119,6 +119,9 @@ void TestConversions::testDMSStrToRad()
 	data << "-270d0'0\""	<< -3*M_PI_2;
 	data << "-0d30'0\""	<< -M_PI/360;
 	data << "-0d45'0\""	<< -M_PI/240;
+	// wrong format!
+	data << "+0d0`0\""	<< 0.;
+	data << "+1d10`10\""	<< 0.;
 
 	while (data.count() >= 2)
 	{
@@ -491,12 +494,15 @@ void TestConversions::testDDToDMS()
 	data << 10. << 10 << 0 << 0.;
 	data << -13.5 << -13 << 30 << 0.;
 	data << 30.263888889 << 30 << 15 << 50.;
+	data << 30.26666 << 30 << 16 << 0.;
 	data << -90.1 << -90 << 6 << 0.;
 	data << 128.9999 << 128 << 59 << 59.64;
 	data << 360.6 << 360 << 36 << 0.;
 	data << -180.786 << -180 << 47 << 9.6;
 	data << -0.01 << -0 << 0 << 36.;
 	data << -0.039 << -0 << 2 << 20.4;
+	// 30.999989 = 30 degrees 59 arcminutes 59.96 arcseconds, but we use rounding for arcseconds, so, = 31 degrees 0 arcminutes 0 arcseconds
+	data << 30.999989 << 31 << 0. << 0.;
 
 	while (data.count()>=4)
 	{

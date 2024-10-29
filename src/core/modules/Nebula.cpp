@@ -120,7 +120,7 @@ Nebula::Nebula()
 	, PGC_nb(0)
 	, UGC_nb(0)
 	, Arp_nb(0)
-	, VV_nb(0)		
+	, VV_nb(0)
 	, DWB_nb(0)
 	, Tr_nb(0)
 	, St_nb(0)
@@ -283,7 +283,7 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 			if (getAirmass(core)>-1.f && getSurfaceBrightnessWithExtinction(core)<99.f) // Don't show extincted surface brightness much below horizon where model is meaningless.
 			{
 				oss << QString("%1: <b>%2</b> %5 (%3: <b>%4</b> %5)").arg(sb, QString::number(getSurfaceBrightness(core, flagUseArcsecSurfaceBrightness), 'f', 2),
-											  ae, QString::number(getSurfaceBrightnessWithExtinction(core, flagUseArcsecSurfaceBrightness), 'f', 2), mu) << "<br />";
+				                                                          ae, QString::number(getSurfaceBrightnessWithExtinction(core, flagUseArcsecSurfaceBrightness), 'f', 2), mu) << "<br />";
 			}
 			else
 				oss << QString("%1: <b>%2</b> %3").arg(sb, QString::number(getSurfaceBrightness(core, flagUseArcsecSurfaceBrightness), 'f', 2), mu) << "<br />";
@@ -419,7 +419,7 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 		if (!discoverer.isEmpty())
 			oss << QString("%1: %2 (%3)").arg(q_("Discoverer"), discoverer, StelUtils::localeDiscoveryDateString(discoveryYear)) << "<br />";
 		if (!getMorphologicalTypeDescription().isEmpty())
-			oss << QString("%1: %2.").arg(q_("Morphological description"), getMorphologicalTypeDescription()) << "<br />";
+			oss << StelUtils::wrapText(QString("%1: %2.").arg(q_("Morphological description"), getMorphologicalTypeDescription())) << "<br />";
 	}
 
 	oss << getSolarLunarInfoString(core, flags);
@@ -442,6 +442,25 @@ QVariantMap Nebula::getInfoMap(const StelCore *core) const
 		map.insert("bV", bMag-vMag);
 	if (redshift<99.f)
 		map.insert("redshift", redshift);
+
+	double axisMajor = getAngularRadius(core)*(2.*M_PI_180);
+	double axisMinor = getAngularRadius(core)*(2.*M_PI_180);
+	int    axisPA    = 0;
+	if (minorAxisSize>0.f)
+	{
+		axisMajor = majorAxisSize*M_PI_180;
+		axisMinor = minorAxisSize*M_PI_180;
+		axisPA    = orientationAngle;
+	}
+	map.insert("axis-major", axisMajor);
+	map.insert("axis-major-dd", axisMajor*M_180_PI);
+	map.insert("axis-major-deg", StelUtils::radToDecDegStr(axisMajor, 5));
+	map.insert("axis-major-dms", StelUtils::radToDmsPStr(axisMajor, 2));
+	map.insert("axis-minor", axisMinor);
+	map.insert("axis-minor-dd", axisMinor*M_180_PI);
+	map.insert("axis-minor-deg", StelUtils::radToDecDegStr(axisMinor, 5));
+	map.insert("axis-minor-dms", StelUtils::radToDmsPStr(axisMinor, 2));
+	map.insert("orientation-angle", axisPA);
 
 	// TODO: more? Names? Data?
 	return map;
@@ -498,7 +517,7 @@ QString Nebula::getI18nAliases() const
 					firstLine = false;
 				}
 				if (i>3 && ((i-2) % 4)==0 && !firstLine &&  i<asize)
-						aliases.append("<br />");
+					aliases.append("<br />");
 			}
 		}
 		else
@@ -557,9 +576,9 @@ float Nebula::getSelectPriority(const StelCore* core) const
 
 	if (drawer->getFlagNebulaMagnitudeLimit() && (mag>static_cast<float>(drawer->getCustomNebulaMagnitudeLimit())))
 		return selectPriority+mLim;
-	
+
 	const float maxMagHint = nebMgr->computeMaxMagHint(drawer);
-	// make very easy to select if labeled	
+	// make very easy to select if labeled
 	if (surfaceBrightnessUsage)
 	{
 		lim = mag = getSurfaceBrightness(core);
@@ -649,7 +668,7 @@ float Nebula::getVisibilityLevelByMagnitude(void) const
 	if (surfaceBrightnessUsage)
 	{
 		lim = getSurfaceBrightness(core) - 3.f;
-		if (lim > 90.f) lim = mLim + 1.f;		
+		if (lim > 90.f) lim = mLim + 1.f;
 	}
 	else
 	{
@@ -684,16 +703,11 @@ float Nebula::getVisibilityLevelByMagnitude(void) const
 void Nebula::drawOutlines(StelPainter &sPainter, float maxMagHints) const
 {
 	size_t segments = outlineSegments.size();
-	Vec3f color = getHintColor(nType);
 
 	// tune limits for outlines
 	float oLim = getVisibilityLevelByMagnitude() - 3.f;
 
-	float lum = 1.f;
-	Vec3f col(color*lum*hintsBrightness);
-	if (!objectInDisplayedType())
-		col.set(0.f,0.f,0.f);
-	sPainter.setColor(col, 1);
+	sPainter.setColor(getHintColor(nType), objectInDisplayedType() ? hintsBrightness : 0.f);
 
 	StelCore *core=StelApp::getInstance().getCore();
 	Vec3d vel=core->getCurrentPlanet()->getHeliocentricEclipticVelocity();
@@ -733,11 +747,10 @@ void Nebula::drawOutlines(StelPainter &sPainter, float maxMagHints) const
 }
 
 void Nebula::renderDarkNebulaMarker(StelPainter& sPainter, const float x, const float y,
-									float size, const Vec3f color) const
+                                    float size, const Vec3f color) const
 {
 	// Take into account device pixel density and global scale ratio, as we are drawing 2D stuff.
-	const auto pixelRatio = sPainter.getProjector()->getDevicePixelsPerPixel();
-	const auto scale = pixelRatio * StelApp::getInstance().getGlobalScalingRatio();
+	const auto scale = sPainter.getProjector()->getDevicePixelsPerPixel();
 	size *= scale;
 
 	const float roundRadius = 0.35 * size;
@@ -754,10 +767,11 @@ void Nebula::renderDarkNebulaMarker(StelPainter& sPainter, const float x, const 
 	const float topInnerY = topOuterY - roundRadius;
 	const float gap = 0.15*size;
 	const float*const cossin = StelUtils::ComputeCosSinRhoZone((M_PIf/2)/(numPointsInArc-1),
-															   numPointsInArc-1, 0);
+	                                                           numPointsInArc-1, 0);
+	sPainter.setBlending(true);
 	sPainter.setLineSmooth(true);
 	sPainter.setLineWidth(scale * std::clamp(2*size/35, 1.f, 2.5f));
-	sPainter.setColor(color);
+	sPainter.setColor(color, hintsBrightness);
 	sPainter.enableClientStates(true);
 
 	vertexData.clear();
@@ -820,11 +834,10 @@ void Nebula::renderDarkNebulaMarker(StelPainter& sPainter, const float x, const 
 }
 
 void Nebula::renderMarkerRoundedRect(StelPainter& sPainter, const float x, const float y,
-									 float size, const Vec3f color) const
+                                     float size, const Vec3f color) const
 {
 	// Take into account device pixel density and global scale ratio, as we are drawing 2D stuff.
-	const auto pixelRatio = sPainter.getProjector()->getDevicePixelsPerPixel();
-	const auto scale = pixelRatio * StelApp::getInstance().getGlobalScalingRatio();
+	const auto scale = sPainter.getProjector()->getDevicePixelsPerPixel();
 	size *= scale;
 
 	const float roundRadius = 0.35 * size;
@@ -840,7 +853,7 @@ void Nebula::renderMarkerRoundedRect(StelPainter& sPainter, const float x, const
 	const float topOuterY = y + size;
 	const float topInnerY = topOuterY - roundRadius;
 	const float*const cossin = StelUtils::ComputeCosSinRhoZone((M_PIf/2)/(numPointsInArc-1),
-															   numPointsInArc-1, 0);
+	                                                           numPointsInArc-1, 0);
 	for(int n = 0; n < numPointsInArc; ++n)
 	{
 		const auto cosa = cossin[2*n], sina = cossin[2*n+1];
@@ -866,9 +879,10 @@ void Nebula::renderMarkerRoundedRect(StelPainter& sPainter, const float x, const
 		vertexData.push_back(bottomInnerY - roundRadius*sina);
 	}
 	const auto vertCount = vertexData.size() / 2;
+	sPainter.setBlending(true);
 	sPainter.setLineSmooth(true);
 	sPainter.setLineWidth(scale * std::clamp(2*size/35, 1.f, 2.5f));
-	sPainter.setColor(color);
+	sPainter.setColor(color, hintsBrightness);
 	sPainter.enableClientStates(true);
 	sPainter.setVertexPointer(2, GL_FLOAT, vertexData.data());
 	sPainter.drawFromArray(StelPainter::LineLoop, vertCount, 0, false);
@@ -876,25 +890,25 @@ void Nebula::renderMarkerRoundedRect(StelPainter& sPainter, const float x, const
 }
 
 void Nebula::renderRoundMarker(StelPainter& sPainter, const float x, const float y,
-							   float size, const Vec3f color, const bool crossed) const
+                               float size, const Vec3f color, const bool crossed) const
 {
 	// Take into account device pixel density and global scale ratio, as we are drawing 2D stuff.
-	const auto pixelRatio = sPainter.getProjector()->getDevicePixelsPerPixel();
-	const auto scale = pixelRatio * StelApp::getInstance().getGlobalScalingRatio();
+	const auto scale = sPainter.getProjector()->getDevicePixelsPerPixel();
 	size *= scale;
 
+	sPainter.setBlending(true);
 	sPainter.setLineSmooth(true);
 	sPainter.setLineWidth(scale * std::clamp(size/7, 1.f, 2.5f));
-	sPainter.setColor(color);
+	sPainter.setColor(color, hintsBrightness);
 
 	sPainter.drawCircle(x, y, size);
 	if(!crossed) return;
 
 	sPainter.enableClientStates(true);
 	const float vertexData[] = {x-size, y,
-								x+size, y,
-								x, y-size,
-								x, y+size};
+	                            x+size, y,
+	                            x, y-size,
+	                            x, y+size};
 	const auto vertCount = std::size(vertexData) / 2;
 	sPainter.setVertexPointer(2, GL_FLOAT, vertexData);
 	sPainter.drawFromArray(StelPainter::Lines, vertCount, 0, false);
@@ -902,11 +916,10 @@ void Nebula::renderRoundMarker(StelPainter& sPainter, const float x, const float
 }
 
 void Nebula::renderEllipticMarker(StelPainter& sPainter, const float x, const float y, float size,
-								  const float aspectRatio, const float angle, const Vec3f color) const
+                                  const float aspectRatio, const float angle, const Vec3f color) const
 {
 	// Take into account device pixel density and global scale ratio, as we are drawing 2D stuff.
-	const auto pixelRatio = sPainter.getProjector()->getDevicePixelsPerPixel();
-	const auto scale = pixelRatio * StelApp::getInstance().getGlobalScalingRatio();
+	const auto scale = sPainter.getProjector()->getDevicePixelsPerPixel();
 	size *= scale;
 
 	const float radiusY = 0.35 * size;
@@ -926,9 +939,10 @@ void Nebula::renderEllipticMarker(StelPainter& sPainter, const float x, const fl
 		vertexData.push_back(y + pointY*cosa + pointX*sina);
 	}
 	const auto vertCount = vertexData.size() / 2;
+	sPainter.setBlending(true);
 	sPainter.setLineSmooth(true);
 	sPainter.setLineWidth(scale * std::clamp(size/40, 1.f, 2.f));
-	sPainter.setColor(color);
+	sPainter.setColor(color, hintsBrightness);
 	sPainter.enableClientStates(true);
 	sPainter.setVertexPointer(2, GL_FLOAT, vertexData.data());
 	sPainter.drawFromArray(StelPainter::LineLoop, vertCount, 0, false);
@@ -936,16 +950,15 @@ void Nebula::renderEllipticMarker(StelPainter& sPainter, const float x, const fl
 }
 
 void Nebula::renderMarkerPointedCircle(StelPainter& sPainter, const float x, const float y,
-									   float size, const Vec3f color, const bool insideRect) const
+                                       float size, const Vec3f color, const bool insideRect) const
 {
 	// Take into account device pixel density and global scale ratio, as we are drawing 2D stuff.
-	const auto pixelRatio = sPainter.getProjector()->getDevicePixelsPerPixel();
-	const auto scale = pixelRatio * StelApp::getInstance().getGlobalScalingRatio();
+	const auto scale = sPainter.getProjector()->getDevicePixelsPerPixel();
 	size *= scale;
 
 	texPointElement->bind();
-	sPainter.setColor(color);
-	sPainter.setBlending(true, GL_ONE, GL_ONE);
+	sPainter.setColor(color, hintsBrightness);
+	sPainter.setBlending(true, GL_SRC_ALPHA, GL_ONE);
 	const auto numPoints = StelUtils::getSmallerPowerOfTwo(std::clamp(int(0.4f*size), 8, 4096));
 	const auto spriteSize = std::min(0.25f * 2*M_PIf*size / numPoints, 5.f);
 	if(insideRect)
@@ -956,6 +969,18 @@ void Nebula::renderMarkerPointedCircle(StelPainter& sPainter, const float x, con
 		const auto cosa = cossin[2*n], sina = cossin[2*n+1];
 		sPainter.drawSprite2dMode(x - size*sina, y - size*cosa, spriteSize);
 	}
+}
+
+float Nebula::getHintSize(StelPainter& sPainter) const
+{
+	const float size = 6.0f;
+	float scaledSize = 0.0f;
+	if (drawHintProportional)
+		scaledSize = static_cast<float>(getAngularRadius(Q_NULLPTR)) *(M_PI_180f*2.f)*static_cast<float>(sPainter.getProjector()->getPixelPerRadAtCenter());
+	if (nType==NebRegion)
+		scaledSize = 12.f;
+
+	return qMax(size, scaledSize);
 }
 
 void Nebula::drawHints(StelPainter& sPainter, float maxMagHints, StelCore *core) const
@@ -973,14 +998,8 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints, StelCore *core)
 
 	Vec3f color = getHintColor(nType);
 
-	const float size = 6.0f;
-	float scaledSize = 0.0f;
-	if (drawHintProportional)
-		scaledSize = static_cast<float>(getAngularRadius(Q_NULLPTR)) *(M_PI_180f*2.f)*static_cast<float>(sPainter.getProjector()->getPixelPerRadAtCenter());
-	float finalSize=qMax(size, scaledSize);
+	float finalSize = getHintSize(sPainter);
 
-	float lum = 1.f;
-	Vec3f col(color*lum*hintsBrightness);
 	if (!objectInDisplayedType())
 		return;
 
@@ -1003,29 +1022,29 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints, StelCore *core)
 			Vec3d XYrel;
 			sPainter.getProjector()->project(XYZrel, XYrel);
 			const auto screenAngle = atan2(XYrel[1]-XY[1], XYrel[0]-XY[0]);
-			renderEllipticMarker(sPainter, XY[0], XY[1], finalSize, 2, screenAngle + orientationAngle*M_PI_180f, col);
+			renderEllipticMarker(sPainter, XY[0], XY[1], finalSize, 2, screenAngle + orientationAngle*M_PI_180f, color);
 			return;
 		}
 		case NebOc:
 		case NebSA:
 		case NebSC:
 		case NebCl:
-			renderMarkerPointedCircle(sPainter, XY[0], XY[1], finalSize, col, false);
+			renderMarkerPointedCircle(sPainter, XY[0], XY[1], finalSize, color, false);
 			return;
 		case NebGc:
-			renderRoundMarker(sPainter, XY[0], XY[1], finalSize, col, true);
+			renderRoundMarker(sPainter, XY[0], XY[1], finalSize, color, true);
 			return;
 		case NebN:
 		case NebHII:
 		case NebMolCld:
 		case NebYSO:
-		case NebRn:		
+		case NebRn:
 		case NebSNR:
 		case NebBn:
 		case NebEn:
 		case NebSNC:
 		case NebSNRC:
-			renderMarkerRoundedRect(sPainter, XY[0], XY[1], finalSize, col);
+			renderMarkerRoundedRect(sPainter, XY[0], XY[1], finalSize, color);
 			return;
 		case NebPn:
 		case NebPossPN:
@@ -1033,18 +1052,15 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints, StelCore *core)
 			Nebula::texPlanetaryNebula->bind();
 			break;
 		case NebDn:
-			renderDarkNebulaMarker(sPainter, XY[0], XY[1], finalSize, col);
+			renderDarkNebulaMarker(sPainter, XY[0], XY[1], finalSize, color);
 			return;
 		case NebCn:
 		{
-			col = getHintColor(NebN)*lum*hintsBrightness;
-			renderMarkerRoundedRect(sPainter, XY[0], XY[1], finalSize, col);
-			col = getHintColor(NebCl)*lum*hintsBrightness;
-			renderMarkerPointedCircle(sPainter, XY[0], XY[1], finalSize, col, true);
+			renderMarkerRoundedRect(sPainter, XY[0], XY[1], finalSize, getHintColor(NebN));
+			renderMarkerPointedCircle(sPainter, XY[0], XY[1], finalSize, getHintColor(NebCl), true);
 			return;
 		}
 		case NebRegion:
-			finalSize = size*2.f;
 			Nebula::texRegion->bind();
 			break;
 		//case NebEMO:
@@ -1052,12 +1068,12 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints, StelCore *core)
 		//case NebSymbioticStar:
 		//case NebEmissionLineStar:
 		default:
-			renderRoundMarker(sPainter, XY[0], XY[1], finalSize, col, false);
+			renderRoundMarker(sPainter, XY[0], XY[1], finalSize, color, false);
 			return;
 	}
 
-	sPainter.setColor(col, 1);
-	sPainter.setBlending(true, GL_ONE, GL_ONE);
+	sPainter.setColor(color, hintsBrightness);
+	sPainter.setBlending(true, GL_SRC_ALPHA, GL_ONE);
 
 	sPainter.drawSprite2dMode(static_cast<float>(XY[0]), static_cast<float>(XY[1]), finalSize);
 }
@@ -1074,14 +1090,13 @@ void Nebula::drawLabel(StelPainter& sPainter, float maxMagLabel) const
 
 	sPainter.setColor(labelColor, objectInDisplayedType() ? hintsBrightness : 0.f);
 
-	const float size = static_cast<float>(getAngularRadius(Q_NULLPTR))*(M_PI_180f*2.f)*sPainter.getProjector()->getPixelPerRadAtCenter();
-	const float shift = 5.f + (drawHintProportional ? size*0.9f : 0.f);
+	const float shift = 15.f + (drawHintProportional ? getHintSize(sPainter) : 0.f);
 
 	QString str = getNameI18n();
 	if (str.isEmpty() || designationUsage)
 		str = getDSODesignation();
 
-	sPainter.drawText(static_cast<float>(XY[0])+shift, static_cast<float>(XY[1])+shift, str, 0, 0, 0, false);
+	sPainter.drawText(static_cast<float>(XY[0]), static_cast<float>(XY[1]), str, 0, shift, shift, false);
 }
 
 QString Nebula::getDSODesignation() const
@@ -1232,7 +1247,7 @@ bool Nebula::objectInDisplayedType() const
 		case NebIGx:
 			cntype = 2; // Interacting Galaxies
 			break;
-		case NebOc:		
+		case NebOc:
 		case NebCl:
 		case NebSA:
 		case NebSC:
@@ -1316,7 +1331,7 @@ bool Nebula::objectInDisplayedCatalog() const
 		|| ((catalogFilters&CatPNG)   && !(PNG_nb.isEmpty()))
 		|| ((catalogFilters&CatSNRG)  && !(SNRG_nb.isEmpty()))
 		|| ((catalogFilters&CatACO)   && (!ACO_nb.isEmpty()))
-		|| ((catalogFilters&CatHCG)   && (!HCG_nb.isEmpty()))		
+		|| ((catalogFilters&CatHCG)   && (!HCG_nb.isEmpty()))
 		|| ((catalogFilters&CatESO)   && (!ESO_nb.isEmpty()))
 		|| ((catalogFilters&CatVdBH)  && (!VdBH_nb.isEmpty()))
 		|| ((catalogFilters&CatDWB)   && (DWB_nb>0))
@@ -1347,6 +1362,51 @@ QString Nebula::getMorphologicalTypeString(void) const
 	return mTypeString;
 }
 
+QString Nebula::getConcentrationClass(QString cc) const
+{
+	QString r = "";
+	static const QStringList glclass = {"I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII"};
+	switch(glclass.indexOf(cc))
+	{
+		case 0:
+			r = qc_("high concentration of stars toward the center", "Shapley-Sawyer Concentration Class");
+			break;
+		case 1:
+			r = qc_("dense central concentration of stars", "Shapley-Sawyer Concentration Class");
+			break;
+		case 2:
+			r = qc_("strong inner core of stars", "Shapley-Sawyer Concentration Class");
+			break;
+		case 3:
+			r = qc_("intermediate rich concentrations of stars", "Shapley-Sawyer Concentration Class");
+			break;
+		case 4:
+		case 5:
+		case 6:
+			r = qc_("intermediate concentrations of stars", "Shapley-Sawyer Concentration Class");
+			break;
+		case 7:
+			r = qc_("rather loose concentration of stars towards the center", "Shapley-Sawyer Concentration Class");
+			break;
+		case 8:
+			r = qc_("loose concentration of stars towards the center", "Shapley-Sawyer Concentration Class");
+			break;
+		case 9:
+			r = qc_("loose concentration of stars", "Shapley-Sawyer Concentration Class");
+			break;
+		case 10:
+			r = qc_("very loose concentration of stars towards the center", "Shapley-Sawyer Concentration Class");
+			break;
+		case 11:
+			r = qc_("almost no concentration towards the center", "Shapley-Sawyer Concentration Class");
+			break;
+		default:
+			r = qc_("undocumented concentration class", "Shapley-Sawyer Concentration Class");
+			break;
+	}
+	return r;
+}
+
 QString Nebula::getMorphologicalTypeDescription(void) const
 {
 	QString m, r = "";
@@ -1356,56 +1416,23 @@ QString Nebula::getMorphologicalTypeDescription(void) const
 	if (nType==NebGx || nType==NebAGx || nType==NebRGx || nType==NebIGx || nType==NebQSO || nType==NebPossQSO || nType==NebBLA || nType==NebBLL || nType==NebGxCl)
 		return QString();
 
-	static const QRegularExpression GlClRx("\\.*(I|II|III|IV|V|VI|VI|VII|VIII|IX|X|XI|XII)\\.*");
+	static const QRegularExpression GlClRx("\\.*(I|II|III|IV|V|VI|VII|VIII|IX|X|XI|XII)\\.*");
 	int idx = mTypeString.indexOf(GlClRx);
 	if (idx>0)
 		m = mTypeString.mid(idx);
 	else
 		m = mTypeString;
 
-	static const QStringList glclass = {"I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII"};
-
 	QRegularExpressionMatch GlClMatch=GlClRx.match(m);
 	if (GlClMatch.hasMatch()) // Globular Clusters
 	{
-		switch(glclass.indexOf(GlClMatch.captured(1).trimmed()))
+		if (m.contains("-")) // middle concentration class
 		{
-			case 0:
-				r = qc_("high concentration of stars toward the center", "Shapley-Sawyer Concentration Class");
-				break;
-			case 1:
-				r = qc_("dense central concentration of stars", "Shapley-Sawyer Concentration Class");
-				break;
-			case 2:
-				r = qc_("strong inner core of stars", "Shapley-Sawyer Concentration Class");
-				break;
-			case 3:
-				r = qc_("intermediate rich concentrations of stars", "Shapley-Sawyer Concentration Class");
-				break;
-			case 4:
-			case 5:
-			case 6:
-				r = qc_("intermediate concentrations of stars", "Shapley-Sawyer Concentration Class");
-				break;
-			case 7:
-				r = qc_("rather loose concentration of stars towards the center", "Shapley-Sawyer Concentration Class");
-				break;
-			case 8:
-				r = qc_("loose concentration of stars towards the center", "Shapley-Sawyer Concentration Class");
-				break;
-			case 9:
-				r = qc_("loose concentration of stars", "Shapley-Sawyer Concentration Class");
-				break;
-			case 10:
-				r = qc_("very loose concentration of stars towards the center", "Shapley-Sawyer Concentration Class");
-				break;
-			case 11:
-				r = qc_("almost no concentration towards the center", "Shapley-Sawyer Concentration Class");
-				break;
-			default:
-				r = qc_("undocumented concentration class", "Shapley-Sawyer Concentration Class");
-				break;
+			QStringList cc = m.split("-");
+			r = QString("%1 -> %2").arg(getConcentrationClass(cc.at(0)), getConcentrationClass(cc.at(1)));
 		}
+		else
+			r = getConcentrationClass(m);
 	}
 
 	static const QRegularExpression OClRx("\\.*(I|II|III|IV)(\\d)(p|m|r)(n*|N*|u*|U*|e*|E*)\\.*");
@@ -1472,7 +1499,7 @@ QString Nebula::getMorphologicalTypeDescription(void) const
 		if (!OClMatch.captured(4).trimmed().isEmpty())
 			rtxt << qc_("the cluster lies within nebulosity", "nebulosity factor of open clusters");
 
-		r = rtxt.join(",<br />");
+		r = rtxt.join(", ");
 	}
 
 	static const QRegularExpression VdBRx("\\.*(I|II|I-II|II P|P),\\s+(VBR|VB|BR|M|F|VF|:)\\.*");
@@ -1540,7 +1567,7 @@ QString Nebula::getMorphologicalTypeDescription(void) const
 				rtx << qc_("undocumented reflection nebulae", "Reflection Nebulae Classification");
 				break;
 		}
-		r = rtx.join(",<br />");
+		r = rtx.join(", ");
 	}
 
 
@@ -1575,14 +1602,14 @@ QString Nebula::getMorphologicalTypeDescription(void) const
 		morph << structureList.value(structure-1, q_("undocumented structure"));
 		morph << brightnessList.value(brightness-1, q_("undocumented brightness"));
 
-		r = morph.join(",<br />");
+		r = morph.join(", ");
 	}
 
 	if (nType==NebSNR)
 	{
 		QString delim = "";
 		if (!r.isEmpty())
-			delim = ";<br />";
+			delim = "; ";
 
 		if (mTypeString.contains("S") && !mTypeString.contains("S?"))
 			r = qc_("remnant shows a shell radio structure", "supernova remnant structure classification") + delim + r;

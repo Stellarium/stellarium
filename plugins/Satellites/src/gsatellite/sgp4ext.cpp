@@ -193,22 +193,20 @@ double angle(double vec1[3], double vec2[3])
 
 void newtonnu(double ecc, double nu, double& e0, double& m)
 {
-	double sv, sine, cose;
-
 	// ---------------------  implementation   ---------------------
 	e0 = 999999.9;
 	m  = 999999.9;
-	sv = 0.00000001;
+	static const double sv = 0.00000001;
 
 	if ( std::fabs( ecc ) < sv  ) // circular
 	{
-		m  = nu;
 		e0 = nu;
+		m  = nu;
 	}
 	else if ( ecc < 1.0-sv  ) // elliptical
 	{
-		sine = ( std::sqrt( 1.0 -ecc*ecc ) * std::sin(nu) ) / ( 1.0 +ecc*std::cos(nu) );
-		cose = ( ecc + std::cos(nu) ) / ( 1.0  + ecc*std::cos(nu) );
+		const double sine = ( std::sqrt( 1.0 -ecc*ecc ) * std::sin(nu) ) / ( 1.0 +ecc*std::cos(nu) );
+		const double cose = ( ecc + std::cos(nu) ) / ( 1.0  + ecc*std::cos(nu) );
 		e0   = std::atan2( sine,cose );
 		m    = e0 - ecc*std::sin(e0);
 	}
@@ -216,7 +214,7 @@ void newtonnu(double ecc, double nu, double& e0, double& m)
 	{
 		if (std::fabs(nu)+0.00001 < M_PI-std::acos(1.0 /ecc))
 		{
-			sine = ( std::sqrt( ecc*ecc-1.0  ) * std::sin(nu) ) / ( 1.0  + ecc*std::cos(nu) );
+			const double sine = ( std::sqrt( ecc*ecc-1.0  ) * std::sin(nu) ) / ( 1.0  + ecc*std::cos(nu) );
 			#ifdef _MSC_BUILD
 			e0   = StelUtils::asinh( sine );
 			#else
@@ -235,7 +233,7 @@ void newtonnu(double ecc, double nu, double& e0, double& m)
 	{
 		m = std::fmod( m,2.0 *M_PI );
 		if ( m < 0.0  )
-			m = m + 2.0 *M_PI;
+			m += 2.0 *M_PI;
 
 		e0 = std::fmod( e0,2.0 *M_PI );
 	}
@@ -303,40 +301,36 @@ void rv2coe(double r[3], double v[3], double mu,
 	    double& p, double& a, double& ecc, double& incl, double& omega, double& argp,
 	    double& nu, double& m, double& arglat, double& truelon, double& lonper)
 {
-	double undefined, sv, hbar[3], nbar[3], magr, magv, magn, ebar[3], sme,
-	       rdotv, infinite, temp, c1, hk, twopi, magh, halfpi, e;
-
-	int i;
-	char typeorbit[3];
-
-	twopi     = 2.0 * M_PI;
-	halfpi    = 0.5 * M_PI;
-	sv        = 0.00000001;
-	undefined = 999999.1;
-	infinite  = 999999.9;
+	static const double twopi     = 2.0 * M_PI;
+	static const double halfpi    = 0.5 * M_PI;
+	static const double sv        = 0.00000001;
+	static const double undefined = 999999.1;
+	static const double infinite  = 999999.9;
 
 	// -------------------------  implementation   -----------------
-	magr = mag( r );
-	magv = mag( v );
+	const double magr = mag( r );
+	const double magv = mag( v );
 
 	// ------------------  find h n and e vectors   ----------------
+	double hbar[3];
 	cross( r,v, hbar );
-	magh = mag( hbar );
+	const double magh = mag( hbar );
 	if ( magh > sv )
 	{
+		double nbar[3], ebar[3];
 		nbar[0] = -hbar[1];
 		nbar[1] =  hbar[0];
 		nbar[2] =  0.0;
-		magn    = mag( nbar );
-		c1      = magv*magv - mu /magr;
-		rdotv   = dot( r,v );
-		for (i= 0; i <= 2; i++)
+		const double magn    = mag( nbar );
+		const double c1      = magv*magv - mu /magr;
+		const double rdotv   = dot( r,v );
+		for (int i= 0; i <= 2; i++)
 			ebar[i] = (c1*r[i] - rdotv*v[i])/mu;
 
 		ecc = mag( ebar );
 
 		// ------------  find a e and semi-latus rectum   ----------
-		sme = ( magv*magv*0.5  ) - ( mu /magr );
+		const double sme = ( magv*magv*0.5  ) - ( mu /magr );
 		if ( std::fabs( sme ) > sv )
 			a = -mu  / (2.0 *sme);
 		else
@@ -345,10 +339,11 @@ void rv2coe(double r[3], double v[3], double mu,
 		p = magh*magh/mu;
 
 		// -----------------  find inclination   -------------------
-		hk   = hbar[2]/magh;
+		const double hk   = hbar[2]/magh;
 		incl = std::acos( hk );
 
 		// --------  determine type of orbit for later use  --------
+		char typeorbit[3];
 		std::strcpy(typeorbit,"ei"); // elliptical, parabolic, hyperbolic inclined
 		if ( ecc < sv )
 		{
@@ -366,7 +361,7 @@ void rv2coe(double r[3], double v[3], double mu,
 		// ----------  find longitude of ascending node ------------
 		if ( magn > sv )
 		{
-			temp  = nbar[0] / magn;
+			double temp  = nbar[0] / magn;
 			if ( std::fabs(temp) > 1.0  )
 				temp = StelUtils::sign(temp);
 			omega = std::acos( temp );
@@ -410,7 +405,7 @@ void rv2coe(double r[3], double v[3], double mu,
 		// -- find longitude of perigee - elliptical equatorial ----
 		if  (( ecc>sv ) && (std::strcmp(typeorbit,"ee") == 0))
 		{
-			temp = ebar[0]/ecc;
+			double temp = ebar[0]/ecc;
 			if ( std::fabs(temp) > 1.0  )
 				temp = StelUtils::sign(temp);
 			lonper = std::acos( temp );
@@ -425,7 +420,7 @@ void rv2coe(double r[3], double v[3], double mu,
 		// -------- find true longitude - circular equatorial ------
 		if  (( magr>sv ) && ( std::strcmp(typeorbit,"ce") == 0 ))
 		{
-			temp = r[0]/magr;
+			double temp = r[0]/magr;
 			if ( std::fabs(temp) > 1.0  )
 				temp = StelUtils::sign(temp);
 			truelon = std::acos( temp );
@@ -439,6 +434,7 @@ void rv2coe(double r[3], double v[3], double mu,
 			truelon = undefined;
 
 		// ------------ find mean anomaly for all orbits -----------
+		double e;
 		if ( typeorbit[0] == 'e' )
 			newtonnu(ecc, nu, e, m);
 	}
@@ -494,7 +490,7 @@ void rv2coe(double r[3], double v[3], double mu,
 void jday(int year, int mon, int day, int hr, int minute, double sec, double& jd)
 {
 	jd = 367.0 * year -
-	     std::floor((7 * (year + floor((mon + 9) / 12.0))) * 0.25) +
+	     std::floor((7 * (year + std::floor((mon + 9) / 12.0))) * 0.25) +
 	     std::floor( 275 * mon / 9.0 ) +
 	     day + 1721013.5 +
 	     ((sec / 60.0 + minute) / 60.0 + hr) / 24.0;  // ut in days
@@ -540,17 +536,15 @@ void jday(int year, int mon, int day, int hr, int minute, double sec, double& jd
 
 void days2mdhms(int year, double days, int& mon, int& day, int& hr, int& minute, double& sec)
 {
-	int i, inttemp, dayofyr;
-	double    temp;
 	int lmonth[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
-	dayofyr = static_cast<int>(std::floor(days));
+	int dayofyr = static_cast<int>(std::floor(days));
 	/* ----------------- find month and day of month ---------------- */
 	if ( (year % 4) == 0 )
 		lmonth[1] = 29;
 
-	i = 1;
-	inttemp = 0;
+	int i = 1;
+	int inttemp = 0;
 	while ((dayofyr > inttemp + lmonth[i-1]) && (i < 12))
 	{
 		inttemp = inttemp + lmonth[i-1];
@@ -560,7 +554,7 @@ void days2mdhms(int year, double days, int& mon, int& day, int& hr, int& minute,
 	day = dayofyr - inttemp;
 
 	/* ----------------- find hours minutes and seconds ------------- */
-	temp = (days - dayofyr) * 24.0;
+	double temp = (days - dayofyr) * 24.0;
 	hr   = static_cast<int>(std::floor(temp));
 	temp = (temp - hr) * 60.0;
 	minute  = static_cast<int>(std::floor(temp));
@@ -609,17 +603,14 @@ void days2mdhms(int year, double days, int& mon, int& day, int& hr, int& minute,
 
 void invjday(double jd, int& year, int& mon, int& day, int& hr, int& minute, double& sec)
 {
-	int leapyrs;
-	double    days, tu, temp;
-
 	/* --------------- find year and days of the year --------------- */
-	temp    = jd - 2415019.5;
-	tu      = temp / 365.25;
-	year    = 1900 + static_cast<int>(std::floor(tu));
-	leapyrs = static_cast<int>(std::floor((year - 1901) * 0.25));
+	double temp    = jd - 2415019.5;
+	double tu      = temp / 365.25;
+	year	       = 1900 + static_cast<int>(std::floor(tu));
+	int leapyrs = static_cast<int>(std::floor((year - 1901) * 0.25));
 
 	// optional nudge by 8.64x10-7 sec to get even outputs
-	days    = temp - ((year - 1900) * 365.0 + leapyrs) + 0.00000000001;
+	double days    = temp - ((year - 1900) * 365.0 + leapyrs) + 0.00000000001;
 
 	/* ------------ check for case of beginning of a year ----------- */
 	if (days < 1.0)

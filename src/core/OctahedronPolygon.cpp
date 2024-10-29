@@ -192,9 +192,9 @@ void OctahedronPolygon::appendSubContour(const SubContour& inContour)
 	
 	// Re-split the contours on the plan X=0
 	QVector<SubContour> splittedVertices2[4];
-	for (const auto& subContour : qAsConst(splittedContour1[0]))
+	for (const auto& subContour : std::as_const(splittedContour1[0]))
 		splitContourByPlan(0, subContour, splittedVertices2);
-	for (const auto& subContour : qAsConst(splittedContour1[1]))
+	for (const auto& subContour : std::as_const(splittedContour1[1]))
 		splitContourByPlan(0, subContour, splittedVertices2+2);
 
 	// Now complete the contours which cross the areas from one side to another by adding poles
@@ -224,7 +224,7 @@ void OctahedronPolygon::appendSubContour(const SubContour& inContour)
 				Q_ASSERT(std::fabs(v[0])<0.0000001 || std::fabs(v[1])<0.0000001);
 			}
 		}
-		for (const auto& subContour : qAsConst(splittedVertices2[c]))
+		for (const auto& subContour : std::as_const(splittedVertices2[c]))
 		{
 			splitContourByPlan(2, subContour, resultSides.data()+c*2);
 		}
@@ -418,7 +418,7 @@ struct OctTessTrianglesCallbackData
 void errorCallback(GLenum errn)
 {
 	qWarning() << "Tessellator error:" << QString::fromLatin1(reinterpret_cast<const char*>(gluesErrorString(errn)));
-	Q_ASSERT(0);
+	//Q_ASSERT(0);
 }
 
 void vertexTrianglesCallback(Vec3d* vertexData, OctTessTrianglesCallbackData* userData)
@@ -526,7 +526,7 @@ void OctahedronPolygon::updateVertexArray()
 
 		// Now compute the outline contours, getting rid of non edge segments
 		EdgeVertex previous;
-		for (const auto& c : qAsConst(sides[sidenb]))
+		for (const auto& c : std::as_const(sides[sidenb]))
 		{
 			Q_ASSERT(!c.isEmpty());
 			previous = c.first();

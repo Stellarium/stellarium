@@ -129,7 +129,7 @@ void NewHinduCalendar::setJD(double JD)
 // set date from a vector of calendar date elements sorted from the largest to the smallest.
 // Year-Month[1...12]-Day[1...31]
 // Time is not changed!
-void NewHinduCalendar::setDate(QVector<int> parts)
+void NewHinduCalendar::setDate(const QVector<int> &parts)
 {
 	this->parts=parts;
 	double rd=fixedFromHinduSolar(parts);
@@ -179,7 +179,7 @@ QVector<int> NewHinduCalendar::hinduSolarFromFixed(int rd)
 	const double critical=hinduSunrise(rd+1);
 	const int month = hinduZodiac(critical);
 	const int year=hinduCalendarYear(critical)-hinduSolarEra;
-	const int approx=rd-3-StelUtils::imod(qRound(floor(hinduSolarLongitude(critical))), 30);
+	const int approx=rd-3-StelUtils::imod(qRound(std::floor(hinduSolarLongitude(critical))), 30);
 
 	int start=approx-1;
 	do{
@@ -192,13 +192,13 @@ QVector<int> NewHinduCalendar::hinduSolarFromFixed(int rd)
 }
 
 // parts={ year, month, day}
-int NewHinduCalendar::fixedFromHinduSolar(QVector<int> parts)
+int NewHinduCalendar::fixedFromHinduSolar(const QVector<int> &parts)
 {
 	const int year =parts.value(0);
 	const int month=parts.value(1);
 	const int day  =parts.value(2);
 
-	const int start=qRound(floor( (year+hinduSolarEra+(month-1)/12.)*hinduSiderealYear )) + hinduEpoch;
+	const int start=qRound(std::floor( (year+hinduSolarEra+(month-1)/12.)*hinduSiderealYear )) + hinduEpoch;
 
 	int d=start-4;
 	do{
@@ -216,7 +216,7 @@ QVector<int> NewHinduCalendar::hinduLunarFromFixed(int rd)
 	const int day=hinduLunarDayFromMoment(critical);
 	const bool leapDay= (day==hinduLunarDayFromMoment(hinduSunrise(rd-1)));
 	const double lastNewMoon=hinduNewMoonBefore(critical);
-	const double nextNewMoon=hinduNewMoonBefore(floor(lastNewMoon)+35.);
+	const double nextNewMoon=hinduNewMoonBefore(std::floor(lastNewMoon)+35.);
 	const int solarMonth=hinduZodiac(lastNewMoon);
 	const bool leapMonth= (solarMonth==hinduZodiac(nextNewMoon));
 	const int month=StelUtils::amod(solarMonth+1, 12);
@@ -226,7 +226,7 @@ QVector<int> NewHinduCalendar::hinduLunarFromFixed(int rd)
 }
 // return RD date from a New Hindu Lunar date (CC:UE 20.24)
 // parts={ year, month, leapMonth, day, leapDay }
-int NewHinduCalendar::fixedFromHinduLunar(QVector<int> parts)
+int NewHinduCalendar::fixedFromHinduLunar(const QVector<int> &parts)
 {
 	const int  year      = parts.value(0);
 	const int  month     = parts.value(1);
@@ -235,7 +235,7 @@ int NewHinduCalendar::fixedFromHinduLunar(QVector<int> parts)
 	const bool leapDay   = parts.value(4);
 
 	const double approx=hinduEpoch+hinduSiderealYear*(year+hinduLunarEra+(month-1)/12.);
-	const int s=qRound(floor(approx-hinduSiderealYear*modInterval(hinduSolarLongitude(approx)/360.-(month-1)/12., -0.5, 0.5)));
+	const int s=qRound(std::floor(approx-hinduSiderealYear*modInterval(hinduSolarLongitude(approx)/360.-(month-1)/12., -0.5, 0.5)));
 	const int k=hinduLunarDayFromMoment(s+0.25);
 	const QVector<int>mid=hinduLunarFromFixed(s-15); // Middle of preceding Solar month
 
@@ -270,7 +270,7 @@ double NewHinduCalendar::hinduSine(const double theta)
 {
 	const double entry=theta/(225./60.);
 	const double fraction=StelUtils::fmodpos(entry, 1.);
-	return fraction*hinduSineTable(qRound(ceil(entry)))+(1.-fraction)*hinduSineTable(qRound(floor(entry)));
+	return fraction*hinduSineTable(qRound(ceil(entry)))+(1.-fraction)*hinduSineTable(qRound(std::floor(entry)));
 }
 double NewHinduCalendar::hinduArcsin(const double amp)
 {
@@ -306,7 +306,7 @@ double NewHinduCalendar::hinduSolarLongitude(const double rd_ut)
 
 int NewHinduCalendar::hinduZodiac(const double rd_ut)
 {
-	return qRound(floor(hinduSolarLongitude(rd_ut)/30.))+1;
+	return qRound(std::floor(hinduSolarLongitude(rd_ut)/30.))+1;
 }
 
 // return lunar longitude at RD (CC:UE 20.14)
@@ -324,7 +324,7 @@ double NewHinduCalendar::hinduLunarPhase(const double rd_ut)
 // return lunar day at RD (CC:UE 20.16)
 int NewHinduCalendar::hinduLunarDayFromMoment(const double rd_ut)
 {
-	return qRound(floor(hinduLunarPhase(rd_ut)/12.))+1;
+	return qRound(std::floor(hinduLunarPhase(rd_ut)/12.))+1;
 }
 
 // return RD of New Moon before RD (CC:UE 20.17)
@@ -378,7 +378,7 @@ double NewHinduCalendar::hinduDailyMotion(const double rd_ut)
 	static const double meanMotion=360./hinduSiderealYear;
 	const double anomaly=hinduMeanPosition(rd_ut, hinduAnomalisticYear);
 	const double epicycle=(14./360.)-(1./1080.)*fabs(hinduSine(anomaly));
-	const int entry=qRound(floor(anomaly/(225./60.)));
+	const int entry=qRound(std::floor(anomaly/(225./60.)));
 	const double sineTableStep=hinduSineTable(entry+1)-hinduSineTable(entry);
 	const double factor=-(3438./225.)*sineTableStep*epicycle;
 	return meanMotion*(factor+1.);
@@ -387,7 +387,7 @@ double NewHinduCalendar::hinduDailyMotion(const double rd_ut)
 double NewHinduCalendar::hinduRisingSign(const double rd_ut)
 {
 	static const QVector<double>vec={1670., 1795., 1935., 1935., 1795., 1670.};
-	const int i=qRound(floor(hinduTropicalLongitude(rd_ut)/30.));
+	const int i=qRound(std::floor(hinduTropicalLongitude(rd_ut)/30.));
 
 	double sign=vec.at(i % 6);
 	return sign/1800.;
@@ -418,7 +418,7 @@ double NewHinduCalendar::hinduStandardFromSundial(const int rd_ut)
 {
 	const int date=fixedFromMoment(rd_ut);
 	const double time=timeFromMoment(rd_ut);
-	const int q=qRound(floor(4.*time));
+	const int q=qRound(std::floor(4.*time));
 	const double a=(q==0 ? hinduSunset(date-1) : (q==3 ? hinduSunset(date)    : hinduSunrise(date)));
 	const double b=(q==0 ? hinduSunrise(date)  : (q==3 ? hinduSunrise(date+1) : hinduSunset(date)));
 	return a+2.*(b-a)*(time-(q==3 ? 0.75 : (q==0 ? -0.25 : 0.25)));
@@ -436,7 +436,7 @@ QVector<int> NewHinduCalendar::hinduFullMoonFromFixed(int rd)
 }
 // return RD date from a New Hindu Lunar date counted from full to full moon (CC:UE 20.37)
 // parts={ year, month, leapMonth, day, leapDay }
-int NewHinduCalendar::fixedFromHinduFullMoon(QVector<int> parts)
+int NewHinduCalendar::fixedFromHinduFullMoon(const QVector<int> &parts)
 {
 	const int year=parts.value(0);
 	const int month=parts.value(1);
@@ -490,7 +490,7 @@ double NewHinduCalendar::astroHinduSunset(const int rd)
 // return sidereal zodiac sign (CC:UE 20.43)
 int NewHinduCalendar::siderealZodiac(const double rd_ut)
 {
-	return qRound(floor(siderealSolarLongitude(rd_ut)/30.))+1;
+	return qRound(std::floor(siderealSolarLongitude(rd_ut)/30.))+1;
 }
 // return astronomically defined calendar year (CC:UE 20.44)
 int NewHinduCalendar::astroHinduCalendarYear(const double rd_ut)
@@ -504,7 +504,7 @@ QVector<int> NewHinduCalendar::astroHinduSolarFromFixed(const int rd)
 	const double critical = astroHinduSunset(rd);
 	const int month=siderealZodiac(critical);
 	const int year=astroHinduCalendarYear(critical)-hinduSolarEra;
-	const int approx=rd-3-StelUtils::imod(qRound(floor(siderealSolarLongitude(critical))), 30);
+	const int approx=rd-3-StelUtils::imod(qRound(std::floor(siderealSolarLongitude(critical))), 30);
 
 	int start=approx-1;
 	do {
@@ -516,13 +516,13 @@ QVector<int> NewHinduCalendar::astroHinduSolarFromFixed(const int rd)
 }
 // return RD from astronomically defined date in the Solar calendar (CC:UE 20.46)
 // arg is { year, month, day}
-int NewHinduCalendar::fixedFromAstroHinduSolar(const QVector<int>date)
+int NewHinduCalendar::fixedFromAstroHinduSolar(const QVector<int> &date)
 {
 	const int  year      = date.value(0);
 	const int  month     = date.value(1);
 	const int  day       = date.value(2);
 
-	const int approx=hinduEpoch-3+qRound(floor((year+hinduSolarEra+(month-1)/12.)*meanSiderealYear));
+	const int approx=hinduEpoch-3+qRound(std::floor((year+hinduSolarEra+(month-1)/12.)*meanSiderealYear));
 
 	int start=approx-1;
 	do {
@@ -533,7 +533,7 @@ int NewHinduCalendar::fixedFromAstroHinduSolar(const QVector<int>date)
 // (CC:UE 20.47)
 int NewHinduCalendar::astroLunarDayFromMoment(const double rd_ut)
 {
-	return qRound(floor(lunarPhase(rd_ut)/12.))+1;
+	return qRound(std::floor(lunarPhase(rd_ut)/12.))+1;
 }
 // return { year, month, leapMonth, day, leapDay } in an astronomically defined Lunar calendar (CC:UE 20.48)
 QVector<int> NewHinduCalendar::astroHinduLunarFromFixed(const int rd)
@@ -551,7 +551,7 @@ QVector<int> NewHinduCalendar::astroHinduLunarFromFixed(const int rd)
 }
 // return RD date from an astronomically defined New Hindu Lunar date (CC:UE 20.49)
 // parts={ year, month, leapMonth, day, leapDay }
-int NewHinduCalendar::fixedFromAstroHinduLunar(const QVector<int> parts)
+int NewHinduCalendar::fixedFromAstroHinduLunar(const QVector<int> &parts)
 {
 	const int  year      = parts.value(0);
 	const int  month     = parts.value(1);
@@ -559,7 +559,7 @@ int NewHinduCalendar::fixedFromAstroHinduLunar(const QVector<int> parts)
 	const int  day       = parts.value(3);
 	const bool leapDay   = parts.value(4);
 	const double approx=hinduEpoch+meanSiderealYear*(year+hinduLunarEra+(month-1)/12.);
-	const int s=qRound(floor(approx-hinduSiderealYear*modInterval(siderealSolarLongitude(approx)/360.-(month-1)/12., -0.5, 0.5)));
+	const int s=qRound(std::floor(approx-hinduSiderealYear*modInterval(siderealSolarLongitude(approx)/360.-(month-1)/12., -0.5, 0.5)));
 	const int k = astroLunarDayFromMoment(s+0.25);
 	const QVector<int>mid=astroHinduLunarFromFixed(s-15);
 
@@ -644,7 +644,7 @@ double NewHinduCalendar::hinduLunarPhaseInv(double phase, double rdA, double rdB
 	do
 	{
 		double rdMid=(rdA+rdB)*0.5;
-		double phaseMid=lunarPhase(rdMid);
+		double phaseMid=hinduLunarPhase(rdMid);
 		// in case lngA<0 and lngB>0!
 		if ((phaseMid>phaseA) && (phaseMid>phaseB))
 			phaseMid-=360.;
@@ -675,7 +675,7 @@ double NewHinduCalendar::hinduLunarNewYear(const int gYear)
 	const int jan1=GregorianCalendar::gregorianNewYear(gYear);
 	const double mina=hinduSolarLongitudeAtOrAfter(330., jan1);
 	const double newMoon=hinduLunarDayAtOrAfter(1, mina);
-	const int hDay=qRound(floor(newMoon));
+	const int hDay=qRound(std::floor(newMoon));
 	const double critical=hinduSunrise(hDay);
 	if ((newMoon<critical) || (hinduLunarDayFromMoment(hinduSunrise(hDay+1))==2))
 		return hDay;
@@ -684,7 +684,7 @@ double NewHinduCalendar::hinduLunarNewYear(const int gYear)
 }
 // return comparison of two lunar dates (CC:UE 20.54)
 // date1 and date2 are {year, month, leapMonth, day, leapDay}
-bool NewHinduCalendar::hinduLunarOnOrBefore(const QVector<int>date1, const QVector<int>date2)
+bool NewHinduCalendar::hinduLunarOnOrBefore(const QVector<int> &date1, const QVector<int> &date2)
 {
 	const int  year1      = date1.value(0);
 	const int  month1     = date1.value(1);
@@ -741,7 +741,7 @@ QVector<int> NewHinduCalendar::diwali(const int gYear)
 // return RD of when a tithi occurs (CC:UE 20.58)
 int NewHinduCalendar::hinduTithiOccur(const int lMonth, const int tithi, const double rd_ut, const int lYear)
 {
-	const int approx=hinduDateOccur(lYear, lMonth, qRound(floor(tithi)));
+	const int approx=hinduDateOccur(lYear, lMonth, qRound(std::floor(tithi)));
 	const double lunar=hinduLunarDayAtOrAfter(tithi, approx-2);
 	const int tryy = fixedFromMoment(lunar);
 	const double th=standardFromSundial(tryy+rd_ut, ujjain);
@@ -777,7 +777,7 @@ QVector<int> NewHinduCalendar::rama(const int gYear)
 int NewHinduCalendar::hinduLunarStation(const int rd)
 {
 	const double critical=hinduSunrise(rd);
-	return qRound(floor(hinduLunarLongitude(critical)/(800./60.)))+1;
+	return qRound(std::floor(hinduLunarLongitude(critical)/(800./60.)))+1;
 }
 // return karana index (CC:UE 20.63)
 int NewHinduCalendar::karana(const int n)
@@ -812,7 +812,7 @@ int NewHinduCalendar::karanaForDay(const int rd)
 // return yoga (CC:UE 20.64)
 int NewHinduCalendar::yoga(const int rd)
 {
-	return 1+qRound(floor( StelUtils::fmodpos( (hinduSolarLongitude(rd)+hinduLunarLongitude(rd))/(800./60.), 27.)));
+	return 1+qRound(std::floor( StelUtils::fmodpos( (hinduSolarLongitude(rd)+hinduLunarLongitude(rd))/(800./60.), 27.)));
 }
 // return the sacred Wednesdays in a Gregorian year. (CC:UE 20.65)
 QVector<int> NewHinduCalendar::sacredWednesdays(const int gYear)
@@ -820,7 +820,7 @@ QVector<int> NewHinduCalendar::sacredWednesdays(const int gYear)
 	return sacredWednesdaysInRange(GregorianCalendar::gregorianYearRange(gYear));
 }
 // return the sacred Wednesdays in a certain range of RDs. (CC:UE 20.66)
-QVector<int> NewHinduCalendar::sacredWednesdaysInRange(const QVector<int> range)
+QVector<int> NewHinduCalendar::sacredWednesdaysInRange(const QVector<int> &range)
 {
 	const int a=range.value(0);
 	const int b=range.value(1);

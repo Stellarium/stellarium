@@ -90,7 +90,7 @@ QString CCD::name() const
 	return m_name;
 }
 
-void CCD::setName(QString name)
+void CCD::setName(const QString &name)
 {
 	m_name = name;
 }

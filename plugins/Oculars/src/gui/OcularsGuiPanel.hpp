@@ -40,7 +40,7 @@ public:
 	OcularsGuiPanel(Oculars* ocularsPlugin,
 			QGraphicsWidget * parent = Q_NULLPTR,
 			Qt::WindowFlags wFlags = Qt::Widget);
-	~OcularsGuiPanel() Q_DECL_OVERRIDE;
+	~OcularsGuiPanel() override;
 
 public slots:
 	//! Show only the controls used with an ocular overlay.
@@ -55,15 +55,16 @@ private slots:
 	//! Tied to the parent's geometryChanged() signal.
 	void updatePosition();
 
-	//! Updates the information shown when an ocular overlay is displayed
-	void updateOcularControls();
 	//! Updates the information shown when a sensor overlay is displayed
 	void updateCcdControls();
+	//! Updates the information that depends on the current lens
+	void updateLensControls();
+	//! Updates the information shown when an ocular overlay is displayed
+	void updateOcularControls();
 	//! Updates the information that depends on the current telescope.
 	//! Called in both updateOcularControls() and updateCcdControls().
 	void updateTelescopeControls();
-	//! Updates the information that depends on the current lens
-	void updateLensControls();
+
 	//! Sets the color scheme (day/night mode)
 	void setColorScheme(const QString& schemeName);
 
@@ -115,12 +116,17 @@ private:
 	QGraphicsTextItem* fieldTelescopeName;
 	QGraphicsTextItem* fieldMagnification;
 	QGraphicsTextItem* fieldExitPupil;
+	QGraphicsTextItem* fieldTwilightFactor;
+	QGraphicsTextItem* fieldRelativeBrightness;
+	QGraphicsTextItem* fieldAdlerIndex;
+	QGraphicsTextItem* fieldBishopIndex;
 	QGraphicsTextItem* fieldFov;
 	QGraphicsTextItem* fieldRayleighCriterion;
 	QGraphicsTextItem* fieldDawesCriterion;
 	QGraphicsTextItem* fieldAbbeyCriterion;
 	QGraphicsTextItem* fieldSparrowCriterion;
 	QGraphicsTextItem* fieldVisualResolution;
+	QGraphicsTextItem* fieldLimitMagnitude;
 
 	//Sensor frame rotation controls
 	StelButton* rotateCcdMinus90Button;

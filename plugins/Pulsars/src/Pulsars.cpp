@@ -166,8 +166,12 @@ void Pulsars::init()
 		Pulsar::markerTexture = StelApp::getInstance().getTextureManager().createTexture(":/Pulsars/pulsar.png");
 
 		// key bindings and other actions
-		addAction("actionShow_Pulsars", N_("Pulsars"), N_("Show pulsars"), "pulsarsVisible", "Ctrl+Alt+P");
-		addAction("actionShow_Pulsars_dialog", N_("Pulsars"), N_("Show settings dialog"), configDialog, "visible", ""); // Allow assign shortkey
+		QString section = N_("Pulsars");
+		addAction("actionShow_Pulsars", section, N_("Show pulsars"), "pulsarsVisible", "Ctrl+Alt+P");
+		addAction("actionShow_Pulsars_dialog", section, N_("Show settings dialog"), configDialog, "visible", ""); // Allow assign shortkey
+		// no default hotkeys
+		addAction("actionShow_Pulsars_Distribution", section, N_("Enable display of distribution for pulsars"), "flagDisplayMode");
+		addAction("actionShow_Pulsars_Glitch", section, N_("Use separate color for pulsars with glitches"), "flagGlitchMode");
 
 		GlowIcon = new QPixmap(":/graphicGui/miscGlow32x32.png");
 		OnIcon = new QPixmap(":/Pulsars/btPulsars-on.png");
@@ -192,11 +196,11 @@ void Pulsars::init()
 	}
 	else
 	{
-		qDebug() << "[Pulsars] pulsars.json does not exist - copying default file to" << QDir::toNativeSeparators(jsonCatalogPath);
+		qDebug().noquote() << "[Pulsars] pulsars.json does not exist - copying default file to" << QDir::toNativeSeparators(jsonCatalogPath);
 		restoreDefaultJsonFile();
 	}
 
-	qDebug() << "[Pulsars] Loading catalog file:" << QDir::toNativeSeparators(jsonCatalogPath);
+	qDebug().noquote() << "[Pulsars] Loading catalog file:" << QDir::toNativeSeparators(jsonCatalogPath);
 
 	readJsonFile();
 
@@ -228,7 +232,7 @@ void Pulsars::draw(StelCore* core)
 	StelPainter painter(prj);
 	painter.setFont(font);
 	
-	for (const auto& pulsar : qAsConst(psr))
+	for (const auto& pulsar : std::as_const(psr))
 	{
 		if (pulsar && pulsar->initialized)
 			pulsar->draw(core, &painter);
@@ -334,7 +338,7 @@ QStringList Pulsars::listMatchingObjects(const QString& objPrefix, int maxNbItem
 		}
 
 		QString fullMatch = "";
-		for (const auto& name : qAsConst(names))
+		for (const auto& name : std::as_const(names))
 		{
 			if (!matchObjectName(name, objPrefix, useStartOfWords))
 				continue;
@@ -680,7 +684,7 @@ void Pulsars::deleteDownloadProgressBar()
 	}
 }
 
-void Pulsars::startDownload(QString urlString)
+void Pulsars::startDownload(const QString &urlString)
 {
 	QUrl url(urlString);
 	if (!url.isValid() || url.isRelative() || !url.scheme().startsWith("http", Qt::CaseInsensitive))
@@ -788,7 +792,7 @@ void Pulsars::downloadComplete(QNetworkReply *reply)
 }
 
 
-void Pulsars::displayMessage(const QString& message, const QString hexColor)
+void Pulsars::displayMessage(const QString& message, const QString &hexColor)
 {
 	messageIDs << GETSTELMODULE(LabelMgr)->labelScreen(message, 30, 30 + (20*messageIDs.count()), true, 16, hexColor, false, 9000);
 }
@@ -832,6 +836,7 @@ bool Pulsars::getDisplayMode() const
 void Pulsars::setDisplayMode(bool b)
 {
 	Pulsar::distributionMode=b;
+	emit displayModeChanged(b);
 }
 
 bool Pulsars::getGlitchFlag() const
@@ -842,6 +847,7 @@ bool Pulsars::getGlitchFlag() const
 void Pulsars::setGlitchFlag(bool b)
 {
 	Pulsar::glitchFlag=b;
+	emit glitchFlagChanged(b);
 }
 
 bool Pulsars::getFilteredMode() const

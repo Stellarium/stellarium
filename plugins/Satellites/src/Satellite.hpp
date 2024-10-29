@@ -73,29 +73,37 @@ typedef QSet<QString> GroupSet;
 //! @ingroup satellites
 enum SatFlag
 {
-	SatNoFlags		= 0x000000,
-	SatDisplayed		= 0x000001,
-	SatNotDisplayed		= 0x000002,
-	SatUser			= 0x000004,
-	SatOrbit		= 0x000008,
-	SatNew			= 0x000010,
-	SatError		= 0x000020,
-	SatSmallSize		= 0x000040,
-	SatMediumSize		= 0x000080,
-	SatLargeSize		= 0x000100,
-	SatLEO			= 0x000200,
-	SatMEO			= 0x000400,
-	SatGSO			= 0x000800,
-	SatHEO			= 0x001000,
-	SatHGSO			= 0x002000,
-	SatPolarOrbit		= 0x004000,
-	SatEquatOrbit		= 0x008000,
-	SatPSSO			= 0x010000,
-	SatHEarthO		= 0x020000,
-	SatOutdatedTLE		= 0x040000,
-	SatCustomFilter		= 0x080000,
-	SatCommunication	= 0x100000,
-	SatReentry		= 0x200000
+	SatNoFlags				= 0x00000000,
+	SatDisplayed				= 0x00000001,
+	SatNotDisplayed			= 0x00000002,
+	SatUser					= 0x00000004,
+	SatOrbit					= 0x00000008,
+	SatNew					= 0x00000010,
+	SatError					= 0x00000020,
+	SatSmallSize				= 0x00000040,
+	SatMediumSize			= 0x00000080,
+	SatLargeSize				= 0x00000100,
+	SatLEO					= 0x00000200,
+	SatMEO					= 0x00000400,
+	SatGSO					= 0x00000800,
+	SatHEO					= 0x00001000,
+	SatHGSO					= 0x00002000,
+	SatPolarOrbit				= 0x00004000,
+	SatEquatOrbit				= 0x00008000,
+	SatPSSO					= 0x00010000,
+	SatHEarthO				= 0x00020000,
+	SatOutdatedTLE			= 0x00040000,
+	SatCustomFilter			= 0x00080000,
+	SatCommunication			= 0x00100000,
+	SatReentry				= 0x00200000,
+	SatActiveOS				= 0x00400000,
+	SatOperationalOS			= 0x00800000,
+	SatNonoperationalOS		= 0x01000000,
+	SatPartiallyOperationalOS	= 0x02000000,
+	SatStandbyOS				= 0x04000000,
+	SatSpareOS				= 0x08000000,
+	SatExtendedMissionOS		= 0x10000000,
+	SatDecayedOS			= 0x20000000
 };
 typedef QFlags<SatFlag> SatFlags;
 Q_DECLARE_OPERATORS_FOR_FLAGS(SatFlags)
@@ -124,14 +132,14 @@ public:
 	//! @enum OptStatus operational statuses
 	enum OptStatus
 	{
-		StatusOperational          = 1,
-		StatusNonoperational       = 2,
-		StatusPartiallyOperational = 3,
-		StatusStandby              = 4,
-		StatusSpare                = 5,
-		StatusExtendedMission      = 6,
-		StatusDecayed              = 7,
-		StatusUnknown              = 0
+		StatusOperational			= 1,
+		StatusNonoperational		= 2,
+		StatusPartiallyOperational	= 3,
+		StatusStandby			= 4,
+		StatusSpare				= 5,
+		StatusExtendedMission		= 6,
+		StatusDecayed			= 7,
+		StatusUnknown			= 0
 	};
 	Q_ENUM(OptStatus)
 
@@ -218,8 +226,10 @@ public:
 	//! the tleElements values and configures internal orbit parameters.
 	void setNewTleElements(const QString& tle1, const QString& tle2);
 
-	// calculate faders, new position
-	void update(double deltaTime);
+	//! calculate faders, new position
+	//! @param core current StelCore
+	//! @param JD Julian day, UTC. (Satellites don't use JDE!)
+	void update(const StelCore *core, const double JD);
 
 	double getDoppler(double freq) const;
 	static bool showLabels;
@@ -245,9 +255,24 @@ public:
 	//! Calculation of illuminated fraction of the satellite.
 	float calculateIlluminatedFraction() const;
 
-	//! Get radii and geocentric distances of shadow circles in km
-	//! Vec4d(umbraDistance, umbraRadius, penumbraDistance, penumbraRadius);
+	//! Get radii and geocentric antisolar distances of shadow circles in km from the geocenter.
+	//! @return Vec4d(umbraDistance, umbraRadius, penumbraDistance, penumbraRadius);
+	//! umbraDistance    : geocentric distance (km) of the umbra circle centre in the antisolar direction
+	//! umbraRadius      : radius (km) of the umbra circle
+	//! penumbraDistance : geocentric distance (km) of the penumbra circle in the antisolar direction
+	//! penumbraRadius   : radius (km) of the penumbra circle
 	Vec4d getUmbraData();
+
+	//! Get radii and geocentric antisolar distances of shadow circles in km for a hypothetical object in distance rhoE [km] from the geocenter.
+	//! @param rhoE distance [km] from the geocenter.
+	//! @return Vec4d(umbraDistance, umbraRadius, penumbraDistance, penumbraRadius);
+	//! umbraDistance    : geocentric distance (km) of the umbra circle centre in the antisolar direction
+	//! umbraRadius      : radius (km) of the umbra circle
+	//! penumbraDistance : geocentric distance (km) of the penumbra circle in the antisolar direction
+	//! penumbraRadius   : radius (km) of the penumbra circle
+	//! @note To gain data for an object in dist_km above (spherical) earth, use
+	//!    rhoE=earth->getEquatorialRadius()*AU+dist_km;
+	static Vec4d getUmbraData(const double rhoE);
 
 	//! Get operational status of satellite
 	QString getOperationalStatus() const;
@@ -261,14 +286,14 @@ private:
 	//! returns 0 - 1.0 for the DRAWORBIT_FADE_NUMBER segments at
 	//! each end of an orbit, with 1 in the middle.
 	float calculateOrbitSegmentIntensity(int segNum);
-	void calculateSatDataFromLine2(QString tle);
+	void calculateSatDataFromLine2(const QString &tle);
 	//! Parse TLE line to extract International Designator and launch year.
 	//! Sets #internationalDesignator and #jdLaunchYearJan1.
 	void parseInternationalDesignator(const QString& tle1);
-	void calculateEpochFromLine1(QString tle);
+	void calculateEpochFromLine1(const QString &tle);
 
 	bool getCustomFiltersFlag() const;
-	QString getCommLinkInfo(CommLink comm) const;
+	QString getCommLinkInfo(const CommLink &comm) const;
 
 	bool initialized;
 	//! Flag indicating whether the satellite should be displayed.
@@ -327,6 +352,7 @@ private:
 	QDateTime lastUpdated;
 
 	bool isISS;
+	bool isStarlink;
 	PlanetP moon;
 	PlanetP sun;
 
@@ -380,17 +406,13 @@ private:
 
 	//Satellite Orbit Position calculation
 	gSatWrapper *pSatWrapper;
-	Vec3d	position;
-	Vec3d	velocity;
-	Vec3d	latLongSubPointPosition;
+	Vec3d	position; //< holds TEME coordinates [km]
+	Vec3d	velocity; //< holds TEME velocity [km/s]
+	Vec3d	latLongSubPointPosition; //< holds WGS84 satellite coordinates: long[degrees]/lat[degrees]/altitude[km]_over_wgs84
 	Vec3d	elAzPosition;
 
 	gSatWrapper::Visibility	visibility;
 	double	phaseAngle; // phase angle for the satellite
-	double umbraDistance;    //! geocentric distance (km) of the umbra circle equivalent to the satellite distance when it would enter/exit umbra
-	double umbraRadius;      //! radius (km) of the umbra circle at satellite distance when it would enter/exit umbra
-	double penumbraDistance; //! geocentric distance (km) of the penumbra circle equivalent to the satellite distance when it would enter/exit penumbra
-	double penumbraRadius;   //! radius (km) of the penumbra circle at satellite distance when it would enter/exit penumbra
 #if(SATELLITES_PLUGIN_IRIDIUM == 1)
 	static double sunReflAngle; // for Iridium satellites
 	//static double timeShift; // for Iridium satellites UNUSED

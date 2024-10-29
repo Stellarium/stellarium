@@ -1,0 +1,35 @@
+<h2>Testovací scéna</h2>
+
+<p>Tato scéna je užitečná zpravidla jako testovací prostředí pro váš vlastní
+vývoj. Můžete si vytvořit kopii složky této scény a upravit ji podle
+libosti. Vyzkoušejte nastavení materiálů nebo dalších detailů a zjistěte,
+jak se tento zásuvný modul chová. Pak vytvořte a prezentujte své vlastní
+dílo!</p>
+
+<h4>Testy souřadnic a orientace</h4>
+
+<p>Zde zobrazené sloupy poskytují při pohledu ze středu struktury přibližný
+pohled (tedy nikoliv s vysokou přesností!) na polohy
+slunovratu/rovnodennosti a východu/západu Slunce ve středoevropských
+zeměpisných šířkách. Centrální pilíře poskytují východo-západní linii. Síť
+souřadnic viditelná na podlaze není srovnaná se zeměpisným severem. Potočení
+o -4,2 stupně musí být vykompenzováno (test konvergence poledníků), což
+znamená, že zatímco středové pilíře musí absolutně a vždy směřovat na
+západ-východ, čáry poledníkové sítě zasahují do severního horizontu mírně
+(4,2 stupně) vlevo od severu!</p>
+
+<p>Pozemní souřadnice (Ctrl-R, T) by měly zobrazovat souřadnice viditelné podél
+jižní a západní hranice terénu.</p>
+
+<h4>Test materiálů</h4>
+
+<p>Tento model se také používá pro testování grafických schopností zásuvného
+modulu. Můžete si pohrát s nastavením materiálů a vytvářet vtipné efekty,
+jako jsou poloprůhledné nebo ve tmě zářící cihlové koule.</p>
+
+<p>Kvůli testování časových prvků jsou pilíře a koule viditelné pouze od roku
+2000 do roku 2020. Změnit to lze úpravou souboru s materiály!</p>
+
+<h4>Model</h4>
+<p>Testovací scéna pro vývoj zásuvného modulu Stellarium/scenery3d. Export z
+SU8-Kerkythea-KT2OBJ.</p>

@@ -33,33 +33,35 @@ SyncClient::SyncClient(SyncOptions options, const QStringList &excludeProperties
 	  options(options),
 	  stelPropFilter(excludeProperties),
 	  isConnecting(false),
-	  server(Q_NULLPTR),
+	  server(nullptr),
 	  timeoutTimerId(-1)
 {
-	handlerList.resize(MSGTYPE_SIZE);
-	handlerList[ERROR] = new ClientErrorHandler(this);
-	handlerList[SERVER_CHALLENGE] = new ClientAuthHandler(this);
-	handlerList[SERVER_CHALLENGERESPONSEVALID] = new ClientAuthHandler(this);
-	handlerList[ALIVE] = new ClientAliveHandler();
+	handlerHash.clear();
+        handlerHash.insert(SYNC_ERROR,  new ClientErrorHandler(this));
+	handlerHash.insert(SERVER_CHALLENGE, new ClientAuthHandler(this));
+	handlerHash.insert(SERVER_CHALLENGERESPONSEVALID, new ClientAuthHandler(this));
+	handlerHash.insert(ALIVE, new ClientAliveHandler());
 
 	//these are the actual sync handlers
 	if(options.testFlag(SyncTime))
-		handlerList[TIME] = new ClientTimeHandler();
+		handlerHash[TIME] = new ClientTimeHandler(this);
 	if(options.testFlag(SyncLocation))
-		handlerList[LOCATION] = new ClientLocationHandler();
+		handlerHash[LOCATION] = new ClientLocationHandler(this);
 	if(options.testFlag(SyncSelection))
-		handlerList[SELECTION] = new ClientSelectionHandler();
+		handlerHash[SELECTION] = new ClientSelectionHandler(this);
 	if(options.testFlag(SyncStelProperty))
-		handlerList[STELPROPERTY] = new ClientStelPropertyUpdateHandler(options.testFlag(SkipGUIProps), stelPropFilter);
+		handlerHash[STELPROPERTY] = new ClientStelPropertyUpdateHandler(this, options.testFlag(SkipGUIProps), stelPropFilter);
 	if(options.testFlag(SyncView))
-		handlerList[VIEW] = new ClientViewHandler();
-	if(options.testFlag(SyncFov))
-		handlerList[FOV] = new ClientFovHandler();
+		handlerHash[VIEW] = new ClientViewHandler(this);
 
 	//fill unused handlers with dummies
 	for(int t = TIME;t<MSGTYPE_SIZE;++t)
 	{
-		if(!handlerList[t]) handlerList[t] = new DummyMessageHandler();
+		if(!handlerHash.value(static_cast<SyncMessageType>(t)))
+		{
+			qCDebug(syncClient) << "RemoteSyncClient: Adding dummy for message " << SyncMessage::toString(static_cast<SyncMessageType>(t));
+			handlerHash[static_cast<SyncMessageType>(t)] = new DummyMessageHandler();
+		}
 	}
 }
 
@@ -69,12 +71,12 @@ SyncClient::~SyncClient()
 	delete server;
 
 	//delete handlers
-	for (auto* h : qAsConst(handlerList))
+	for (auto* h : std::as_const(handlerHash))
 	{
 		if(h)
 			delete h;
 	}
-	handlerList.clear();
+	handlerHash.clear();
 
 	qCDebug(syncClient)<<"Destroyed";
 }
@@ -88,7 +90,7 @@ void SyncClient::connectToServer(const QString &host, const int port)
 
 	QTcpSocket* sock = new QTcpSocket();
 	connect(sock, SIGNAL(connected()), this, SLOT(socketConnected()));
-	server = new SyncRemotePeer(sock, true, handlerList );
+	server = new SyncRemotePeer(sock, true, handlerHash );
 	connect(server, SIGNAL(disconnected(bool)), this, SLOT(serverDisconnected(bool)));
 
 	isConnecting = true;
@@ -128,7 +130,7 @@ void SyncClient::serverDisconnected(bool clean)
 	if(!clean)
 		errorStr = server->getError();
 	server->deleteLater();
-	server = Q_NULLPTR;
+	server = nullptr;
 	emit disconnected(errorStr.isEmpty());
 }
 
@@ -140,4 +142,9 @@ void SyncClient::socketConnected()
 void SyncClient::emitServerError(const QString &errorStr)
 {
 	this->errorStr = errorStr;
+}
+
+bool SyncClient::isPropertyFilteredAway(const QString &property) const
+{
+	return stelPropFilter.contains(property);
 }

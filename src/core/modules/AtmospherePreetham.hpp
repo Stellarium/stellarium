@@ -53,7 +53,7 @@ public:
 	void update(double deltaTime) {fader.update(static_cast<int>(deltaTime*1000));}
 	bool isLoading() const override { return false; }
 	bool isReadyToRender() const override { return true; }
-	LoadingStatus stepDataLoading() override { return {0,0}; }
+	LoadingStatus stepDataLoading() override { return {1,1}; }
 
 private:
 	Vec4i viewport;
@@ -61,18 +61,16 @@ private:
 	Skybright skyb;
 	unsigned int skyResolutionY,skyResolutionX;
 
-	Vec2f* posGrid;
+	QVarLengthArray<Vec2f> posGrid;
 	QOpenGLBuffer posGridBuffer;
 	QOpenGLBuffer indicesBuffer;
-	Vec4f* colorGrid;
+	QVarLengthArray<Vec4f> colorGrid;
 	QOpenGLBuffer colorGridBuffer;
 	QOpenGLVertexArrayObject vao;
 
 	//! Vertex shader used for xyYToRGB computation
 	class QOpenGLShaderProgram* atmoShaderProgram;
 	struct {
-		int ditherPattern;
-		int rgbMaxValue;
 		int alphaWaOverAlphaDa;
 		int oneOverGamma;
 		int term2TimesOneOverMaxdLpOneOverGamma; // original
@@ -87,8 +85,6 @@ private:
 		int skyColor;
 		int doSRGB;
 	} shaderAttribLocations;
-
-	StelTextureSP ditherPatternTex;
 
 	//! Binds actual VAO if it's supported, sets up the relevant state manually otherwise.
 	void bindVAO();

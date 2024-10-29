@@ -433,7 +433,7 @@ void Calendars::draw(StelCore* core)
 }
 
 // Get a pointer to the respective calendar
-Calendar* Calendars::getCal(QString name)
+Calendar* Calendars::getCal(const QString &name)
 {
 	return calendars.value(name, nullptr);
 }

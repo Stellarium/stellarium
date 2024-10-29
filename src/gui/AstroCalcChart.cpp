@@ -20,6 +20,7 @@
 #include "StelTranslator.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
+#include "StelLocaleMgr.hpp"
 #include "StelUtils.hpp"
 #include <QGraphicsSceneEvent>
 #include <QGraphicsLayout>
@@ -31,7 +32,7 @@
 #include <QPen>
 #include <QColor>
 
-AstroCalcChart::AstroCalcChart(QSet<Series> which) : QChart(), yAxisR(Q_NULLPTR), yMin(-90), yMax(90.)
+AstroCalcChart::AstroCalcChart(QSet<Series> which) : QChart(), yAxisR(nullptr), yMin(-90), yMax(90.)
 {
 	// Configure with all series you want to potentially use later.
 	for (Series s: which)
@@ -76,6 +77,7 @@ AstroCalcChart::~AstroCalcChart()
 }
 
 void AstroCalcChart::retranslate(){
+	setLocale(QLocale(StelApp::getInstance().getLocaleMgr().getAppLanguage()));
 	// We need to configure every enum Series here!
 	if (map.contains(AltVsTime            )) map.value(AltVsTime            )->setName(q_("Altitude"));
 	if (map.contains(CurrentTime          )) map.value(CurrentTime          )->setName(q_("Now"));
@@ -166,7 +168,7 @@ void AstroCalcChart::append(Series s, qint64 x, qreal y)
 		qWarning() << "Series " << s << "invalid for append()!";
 }
 
-void AstroCalcChart::replace(Series s, int index, qreal x, qreal y)
+void AstroCalcChart::replace(const Series s, const int index, const qreal x, const qreal y)
 {
 	if (map.value(s))
 	{
@@ -222,7 +224,7 @@ void AstroCalcChart::drawTrivialLineY(Series s, const qreal y)
 		qWarning() << "No series" << s << "to add trivial Y line";
 }
 
-int AstroCalcChart::lengthOfSeries(Series s) const
+int AstroCalcChart::lengthOfSeries(const Series s) const
 {
 	if (!(map.value(s)))
 		return -1;
@@ -242,7 +244,7 @@ void AstroCalcChart::show(Series s)
 	connect(map.value(s), SIGNAL(hovered(const QPointF &, bool)), this, SLOT(showToolTip(const QPointF &, bool)));
 }
 
-void AstroCalcChart::showToolTip(const QPointF &point, bool show)
+void AstroCalcChart::showToolTip(const QPointF &point, const bool show)
 {
 	if (show)
 	{
@@ -280,14 +282,14 @@ void AstroCalcChart::showToolTip(const QPointF &point, bool show)
 		setToolTip(QString());
 }
 
-void AstroCalcChart::clear(Series s)
+void AstroCalcChart::clear(const Series s)
 {
 	map.value(s)->clear();
 	if (series().contains(map.value(s)))
 		removeSeries(map.value(s)); // updates legend to not show entries
 }
 
-QPair<QDateTime, QDateTime> AstroCalcChart::findXRange(const double JD, const Series series, const int periods)
+QPair<QDateTime, QDateTime> AstroCalcChart::findXRange(const double JD, const Series series, const int periods) const
 {
 	const double utcOffset=StelApp::getInstance().getCore()->getUTCOffset(JD) / 24.;
 
@@ -311,8 +313,8 @@ QPair<QDateTime, QDateTime> AstroCalcChart::findXRange(const double JD, const Se
 			break;
 		case AstroCalcChart::pcDistanceAU:
 		case AstroCalcChart::pcDistanceDeg:
-			startDate=StelUtils::jdToQDateTime(baseJD-300, Qt::UTC);
-			endDate=StelUtils::jdToQDateTime(baseJD+300, Qt::UTC);
+			startDate=StelUtils::jdToQDateTime(baseJD-150, Qt::UTC);
+			endDate=StelUtils::jdToQDateTime(baseJD+150, Qt::UTC);
 			break;
 		default: // 2-curves page
 			StelUtils::getDateFromJulianDay(baseJD, &year, &month, &day);
@@ -383,7 +385,7 @@ void AstroCalcChart::setupAxes(const double jd, const int periods, const QString
 		xAxis->setTickCount(13); // step is 2 hours
 		//xAxis->setFormat("<div style=\"text-align:center\">dd.MM.<br/>hh:mm</div>"); // This sets C locale with AM/PM hours! :-O
 		xAxis->setFormat("dd.MM.<br/>hh:mm");
-		xRange=findXRange(floor(jd+shift), AstroCalcChart::AltVsTime, 1);
+		xRange=findXRange(std::floor(jd+shift), AstroCalcChart::AltVsTime, 1);
 	}
 	else if (map.contains(AstroCalcChart::MonthlyElevation))
 	{
@@ -394,13 +396,14 @@ void AstroCalcChart::setupAxes(const double jd, const int periods, const QString
 	else if (map.contains(AstroCalcChart::LunarElongation))
 	{
 		xAxis->setTickCount(18+1); // step is 2 days. 16 intervals.
-		//xRange=findXRange(floor(jd)+0.5+shift, AstroCalcChart::LunarElongation, 1);
+		//xRange=findXRange(std::floor(jd)+0.5+shift, AstroCalcChart::LunarElongation, 1);
 		xRange=findXRange(jd, AstroCalcChart::LunarElongation, 1);
 	}
 	else if (map.contains(AstroCalcChart::pcDistanceAU))
 	{
 		xAxis->setTickCount(21); // step is 30 days. 20 intervals.
 		xRange=findXRange(jd, AstroCalcChart::pcDistanceAU, 1);
+		xAxis->setFormat("<div style=\"text-align:center\">dd.<br/>MMM</div>");
 	}
 	else
 	{
@@ -537,7 +540,7 @@ void AstroCalcChart::setupAxes(const double jd, const int periods, const QString
 	}
 }
 
-void AstroCalcChart::setYrange(Series series, qreal min, qreal max, bool strictMin)
+void AstroCalcChart::setYrange(const Series series, qreal min, qreal max, const bool strictMin)
 {
 	bufferYrange(series, &min, &max, strictMin);
 	yMin=min;
@@ -545,10 +548,10 @@ void AstroCalcChart::setYrange(Series series, qreal min, qreal max, bool strictM
 
 	// We have to find a scaling that has steps in an appropriate range.
 	const double logYDiff=log10(yMax-yMin);
-	const double s=pow(10., floor(logYDiff)-1.); // A power of 10 that should provide not too much buffer above/below
+	const double s=std::pow(10., std::floor(logYDiff)-1.); // A power of 10 that should provide not too much buffer above/below
 
-	qreal rMin=floor(yMin/s)*s;
-	qreal rMax=ceil(yMax/s)*s;
+	qreal rMin=std::floor(yMin/s)*s;
+	qreal rMax=std::ceil(yMax/s)*s;
 
 	//qDebug() << "Setting yrange from" << min << "/" << max << "-->" << rMin << "/" << rMax;
 	yAxis->setRange(rMin, rMax);
@@ -564,7 +567,7 @@ void AstroCalcChart::setYrange(Series series, qreal min, qreal max, bool strictM
 	}
 }
 
-void AstroCalcChart::setYrangeR(Series series, qreal min, qreal max)
+void AstroCalcChart::setYrangeR(const Series series, qreal min, qreal max)
 {
 	bufferYrange(series, &min, &max);
 	yMinR=min;
@@ -572,10 +575,10 @@ void AstroCalcChart::setYrangeR(Series series, qreal min, qreal max)
 
 	// We have to find a scaling that has steps in an appropriate range.
 	const double logYDiff=log10(yMaxR-yMinR);
-	const double s=pow(10., floor(logYDiff)-1.);
+	const double s=std::pow(10., std::floor(logYDiff)-1.);
 
-	qreal rMin=floor(yMinR/s)*s;
-	qreal rMax=ceil(yMaxR/s)*s;
+	qreal rMin=std::floor(yMinR/s)*s;
+	qreal rMax=std::ceil(yMaxR/s)*s;
 
 	//qDebug() << "Setting yrangeR from" << min << "/" << max << "-->" << rMin*s << "/" << rMax*s;
 	yAxisR->setRange(rMin, rMax);
@@ -591,7 +594,7 @@ void AstroCalcChart::setYrangeR(Series series, qreal min, qreal max)
 	}
 }
 
-void AstroCalcChart::bufferYrange(Series series, double *min, double *max, bool strictMin)
+void AstroCalcChart::bufferYrange(const Series series, double *min, double *max, const bool strictMin) const
 {
 	// Decide, per-case, buffer values and true limits (0...360, 0..24, -90..+90, etc.)
 	// Most curves are Splines which may exceed the actual X/Y point range somewhat, requiring a buffer. A better algorithm should compute the actual max values for the spline!

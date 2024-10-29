@@ -24,6 +24,7 @@
 #include "StelCore.hpp"
 #include "StelTranslator.hpp"
 #include "StelLocaleMgr.hpp"
+#include "StelObserver.hpp"
 
 #include <QRegularExpression>
 #include <QDebug>
@@ -117,11 +118,35 @@ void MinorPlanet::setAbsoluteMagnitudeAndSlope(const float magnitude, const floa
 	if ((slope < -1.0f) || (slope > 2.0f))
 	{
 		// G "should" be between 0 and 1, but may be somewhat outside.
-		qDebug() << "MinorPlanet::setAbsoluteMagnitudeAndSlope(): Invalid slope parameter value (must be between -1 and 2, mostly [0..1])";
+		qWarning() << "MinorPlanet::setAbsoluteMagnitudeAndSlope(): Suspect slope parameter value" <<
+			    QString::number(slope, 'f', 2) << "for" << getEnglishName() <<
+			    ", expected between -1 and 2, mostly [0..1])";
 		return;
 	}
 	absoluteMagnitude = magnitude;
 	slopeParameter = slope;
+}
+
+void MinorPlanet::updateEquatorialRadius(void)
+{
+	if (absoluteMagnitude <= -99.f)
+	{
+		qWarning() << "MinorPlanet::updateEquatorialRadius():" <<
+				"invalid absoluteMagnitude for" << getEnglishName();
+		return;
+	}
+	if (equatorialRadius <= 0.)
+	{
+		if (albedo <= 0.0f)
+		{
+			// ESA NEOCC and NASA CNEOS assume albedo between 0.05 and 0.25
+			// https://neo.ssa.esa.int/definitions-assumptions
+			albedo = 0.15f;
+		}
+		// Estimate as described at http://www.physics.sfasu.edu/astro/asteroids/sizemagnitude.html
+		float diameterKm = 1329.f / std::sqrt(albedo) * std::pow(10.f, -0.2f * absoluteMagnitude);
+		equatorialRadius = 0.5 * diameterKm / AU;
+	}
 }
 
 void MinorPlanet::setIAUDesignation(const QString &designation)
@@ -229,16 +254,25 @@ double MinorPlanet::getSiderealPeriod() const
 
 float MinorPlanet::getVMagnitude(const StelCore* core) const
 {
+	return getVMagnitude(core, 1.);
+}
+float MinorPlanet::getVMagnitude(const StelCore* core, const double eclipseFactor) const
+{
 	//If the H-G system is not used, use the default radius/albedo mechanism
 	if (slopeParameter < -9.99f) // G can be somewhat <0! Set to -10 to mark invalid.
 	{
-		return Planet::getVMagnitude(core);
+		return Planet::getVMagnitude(core, eclipseFactor);
 	}
 
 	//Calculate phase angle
 	//(Code copied from Planet::getVMagnitude())
 	//(this is actually vector subtraction + the cosine theorem :))
-	const Vec3d& observerHelioPos = core->getObserverHeliocentricEclipticPos();
+	Vec3d observerHelioPos;
+	if (core->getCurrentPlanet()->getPlanetType()==Planet::isObserver)
+
+		observerHelioPos = Vec3d(0.f,0.f,0.f);
+	else
+		observerHelioPos = core->getObserverHeliocentricEclipticPos();
 	const float observerRq = static_cast<float>(observerHelioPos.normSquared());
 	const Vec3d& planetHelioPos = getHeliocentricEclipticPos();
 	const float planetRq = static_cast<float>(planetHelioPos.normSquared());

@@ -46,7 +46,7 @@ class StelMainScriptAPI : public QObject
 
 public:
 	StelMainScriptAPI(QObject *parent = Q_NULLPTR);
-	~StelMainScriptAPI() Q_DECL_OVERRIDE;
+	~StelMainScriptAPI() override;
 
 #ifdef ENABLE_SCRIPT_QML
 	void setEngine(QJSEngine *eng){m_engine=eng;}
@@ -221,7 +221,9 @@ public slots:
 	//! Fetch a map with data about an object's position, magnitude and so on
 	//! @param name is the English name of the object for which data will be
 	//! returned.
-	//! @return a map of object data.  Keys:
+	//! @return a map of object data.
+	//!
+	//! Keys:
 	//! - above-horizon : true, if celestial body is above horizon
 	//! - altitude : apparent altitude angle in decimal degrees
 	//! - azimuth : apparent azimuth angle in decimal degrees
@@ -252,13 +254,14 @@ public slots:
 	//! - size-deg : angular size in decimal degrees (formatted string)
 	//! - size-dms : angular size in DMS format
 	//! - localized-name : localized name	
+	//!
 	//! The returned map can contain other information. For example, Solar System objects add:
-	//! - distance : distance to object in AU (for Solar system objects only!)
 	//! - phase : phase (illuminated fraction, 0..1) of object (for Solar system objects only!)
 	//! - illumination : phase of object in percent (0..100) (for Solar system objects only!)
 	//! - phase-angle : phase angle of object in radians (for Solar system objects only!)
 	//! - phase-angle-dms : phase angle of object in DMS (for Solar system objects only!)
 	//! - phase-angle-deg : phase angle of object in decimal degrees (for Solar system objects only!)
+	//! - is-waning : whether phase angle is increasing, signifying the waning phase (for Solar system objects only!)
 	//! - elongation : elongation of object in radians (for Solar system objects only!)
 	//! - elongation-dms : elongation of object in DMS (for Solar system objects only!)
 	//! - elongation-deg : elongation of object in decimal degrees (for Solar system objects only!)
@@ -272,11 +275,21 @@ public slots:
 	//! - scale: scale factor for Solar system bodies (for Solar system objects only!)
 	//! - eclipse-obscuration: value of obscuration for solar eclipse (for Sun only!)
 	//! - eclipse-magnitude: value of magnitude for solar eclipse (for Sun only!)
+	//! - eclipse-crescent-angle (degrees; for Sun only!)
+	//! - heliocentric-distance: distance to object from the Sun in AU (for Solar system objects, except the Sun)
+	//! - heliocentric-distance-km: distance to object from the Sun in kilometers (for Solar system objects, except the Sun)
+	//! - distance: distance to object in AU (for Solar system objects only!)
+	//! - distance-km: distance to object in kilometers (for Solar system objects only!)
+	//! - phase-name: name of phase (on Earth for Moon only!)
+	//! - age: the age of the Moon in days. This is currently "elongation angle age" only, not time since last conjunction! (on Earth for Moon only!)
+	//! - penumbral-eclipse-magnitude: the magnitude of penumbral lunar eclipse (on Earth for Moon only!)
+	//! - umbral-eclipse-magnitude: the magnitude of umbral lunar eclipse (on Earth for Moon only!)
+	//!
 	//! Other StelObject derivates, also those defined in plugins, may add more,
 	//! these fields are documented in the respective classes, or simply try what you get:
 	//! You can print a complete set of entries into output with the following commands:
 	//! @code
-	//! map=core.getSelectedObjectInfo();
+	//! map=core.getObjectInfo("Name_of_object");
 	//! core.output(core.mapToString(map));
 	//! @endcode
 	static QVariantMap getObjectInfo(const QString& name);
@@ -467,12 +480,17 @@ public slots:
 	//! @param invert whether colors have to be inverted in the output image
 	//! @param overwrite true to use exactly the prefix as filename (plus .png), and overwrite any existing file.
 	//! @param format File format. One of png|bmp|jpg|jpeg|tif|tiff|webm|pbm|pgm|ppm|xbm|xpm|ico. Use current format if left empty or invalid.
+	//!        Format tiff stores uncompressed, tif uses LZW lossless compression. Format jpeg is less compressed than jpg.
 	static void screenshot(const QString& prefix, bool invert=false, const QString& dir="", const bool overwrite=false, const QString& format="");
 
 	//! Show or hide the GUI (toolbars).  Note this only applies to GUI plugins which
 	//! provide the public slot "setGuiVisible(bool)".
 	//! @param b if true, show the GUI, if false, hide the GUI.
 	static void setGuiVisible(bool b);
+
+	//! Show or hide the selection pointers/markers
+	//! @param b if true, show the pointer/marker around selected objects, if false, hide the pointer/marker.
+	static void setSelectedObjectMarkerVisible(bool b);
 
 	//! Use a custom CSS for the GUI. This is a very advanced feature, designing CSS is an art.
 	//! To use properly, place a private copy of normalStyle.css into your user data directory and edit style, but leave structure as-is.
@@ -536,6 +554,10 @@ public slots:
 	//! - ProjectionMiller
 	void setProjectionMode(const QString& id);
 
+	//! Set size of current window. This will never exceed the current screen dimensions.
+	//! @return the actually gained size(width, height).
+	static Vec2d setWindowSize(int width, int height);
+
 	//! Get the status of the disk viewport
 	//! @return true if the disk view port is currently enabled
 	static bool getDiskViewport();
@@ -560,7 +582,7 @@ public slots:
 
 	//! Find out the current sky culture
 	//! @return the ID of the current sky culture (i.e. the name of the directory in
-	//! which the curret sky cultures files are found, e.g. "western")
+	//! which the current sky cultures files are found, e.g. "western")
 	static QString getSkyCulture();
 
 	//! Set the current sky culture

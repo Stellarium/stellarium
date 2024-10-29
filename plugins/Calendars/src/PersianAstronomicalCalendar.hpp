@@ -40,7 +40,7 @@ public slots:
 
 	//! set date from a vector of calendar date elements sorted from the largest to the smallest.
 	//! Year-Month[1...13]-Day[1...30]
-	void setDate(QVector<int> parts) override;
+	void setDate(const QVector<int> &parts) override;
 
 //	//! get a stringlist of calendar date elements sorted from the largest to the smallest.
 //	//! Year, Month, MonthName, Day, DayName
@@ -51,9 +51,9 @@ public slots:
 
 	//! find RD number for date in the Persian astronomical calendar (CC:UE 15.5)
 	//! @input {year, month, date}
-	static int fixedFromPersianAstronomical(QVector<int> persian);
+	static int fixedFromPersianAstronomical(const QVector<int> &persian);
 	//! alias for fixedFromPersianAstronomical();
-	static int fixedFromPersian(QVector<int> persian){return fixedFromPersianAstronomical(persian);}
+	static int fixedFromPersian(const QVector<int> &persian){return fixedFromPersianAstronomical(persian);}
 	//! find date in the Persian calendar from RD number
 	static QVector<int> persianAstronomicalFromFixed(int rd);
 	//! alias for persianAstronomicalFromFixed();

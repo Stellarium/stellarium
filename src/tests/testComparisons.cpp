@@ -65,3 +65,10 @@ void TestComparisons::testAppName()
 {
 	QVERIFY2(StelUtils::getApplicationName().contains("Stellarium", Qt::CaseInsensitive), "Oops... No application name exist!");
 }
+
+void TestComparisons::testAppVersions()
+{
+	QVERIFY2(!StelUtils::getApplicationVersion().isEmpty(), "Oops... version number cannot be empty!");
+	QVERIFY2(!StelUtils::getApplicationPublicVersion().isEmpty(), "Oops... public version number cannot be empty!");
+	QVERIFY2(!StelUtils::getApplicationSeries().isEmpty(), "Oops... series number cannot be empty!");
+}

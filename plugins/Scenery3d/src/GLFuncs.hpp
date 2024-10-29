@@ -34,8 +34,8 @@ public:
 	//! Since 3.2
 	PFNGLFRAMEBUFFERTEXTUREPROC glFramebufferTexture;
 	//! Since 1.0 but not found by QOpenGLFunctions_1_0 when in Core profile
-	void (APIENTRYP glDrawBuffer)(GLenum);
-	void (APIENTRYP glReadBuffer)(GLenum);
+	void (QOPENGLF_APIENTRYP glDrawBuffer)(GLenum);
+	void (QOPENGLF_APIENTRYP glReadBuffer)(GLenum);
 
 	void init(QOpenGLContext* ctx)
 	{

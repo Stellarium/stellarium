@@ -99,27 +99,40 @@ public:
 	//! Compute the object position for a specified Julian day.
 	//! @param JDE Julian Ephemeris Day
 	//! @param v double vector of at least 3 elements. The first three will receive X/Y/Z values in AU.
-	virtual void positionAtTimevInVSOP87Coordinates(double JDE, double* v) Q_DECL_OVERRIDE;
+	void positionAtTimevInVSOP87Coordinates(double JDE, double* v) override;
+	//! Compute the object position for a specified mean anomaly.
+	//! @param meanAnomaly [radians]
+	//! @param v double vector of at least 3 elements. The first three will receive X/Y/Z values in AU.
+	void positionAtMeanAnomalyInVSOP87Coordinates(const double meanAnomaly, double *v);
+	//! Compute eccentric anomaly E from mean anomaly M. [radians]
+	double eccentricAnomaly(double M);
+	//! Compute the object position for a specified eccentric anomaly.
+	//! @param E eccentricAnomaly [radians]
+	//! @param v double vector of at least 3 elements. The first three will receive X/Y/Z values in AU.
+	//! @note: Only used for orbit computation
+	void positionAtEccentricAnomalyInVSOP87Coordinates(const double E, double *v);
 	//! updating comet tails is a bit expensive. try not to overdo it.
 	bool getUpdateTails() const { return updateTails; }
 	void setUpdateTails(const bool update){ updateTails=update; }
 	//! return speed value [AU/d] last computed by positionAtTimevInVSOP87Coordinates(JDE, v)
-	virtual Vec3d getVelocity() const Q_DECL_OVERRIDE { return rdot; }
-	virtual void getVelocity(double *vel) const Q_DECL_OVERRIDE { vel[0]=rdot[0]; vel[1]=rdot[1]; vel[2]=rdot[2];}
+	Vec3d getVelocity() const override { return rdot; }
+	void getVelocity(double *vel) const override { vel[0]=rdot[0]; vel[1]=rdot[1]; vel[2]=rdot[2];}
 	//! Returns semimajor axis [AU] for elliptic orbit, 0 for a parabolic orbit, and a negative value [AU] for hyperbolic orbit.
-	virtual double getSemimajorAxis() const Q_DECL_OVERRIDE { return (e==1. ? 0. : q / (1.-e)); }
-	virtual double getEccentricity() const Q_DECL_OVERRIDE { return e; }
+	double getSemimajorAxis() const override { return (e==1. ? 0. : q / (1.-e)); }
+	double getEccentricity() const override { return e; }
+	//! Return mean anomaly M for JDE (or W, in case of parabolae)
+	inline double meanAnomaly(const double JDE) const {return (JDE-t0)*n;};
 	//! return whether a position returned for JDE can be regarded accurate enough for telescope use.
 	//! This is limited to dates within 1 year or epoch, or within orbitGood around epoch, whichever is smaller.
 	//! If orbitGood is zero, this is always true.
 	//! @note This will still return false positives after close encounters with major masses which change orbital parameters.
 	//! However, it should catch the usual case of outdated orbital elements which should be updated at least yearly.
-	bool objectDateValid(const double JDE) const { return ((orbitGood==0.) || (fabs(epochJDE-JDE)<qMin(orbitGood, 365.0))); }
+	bool objectDateValid(const double JDE) const { return ((orbitGood==0.) || (fabs(JDE-epochJDE)<qMin(orbitGood, 365.0))); }
 	//! return whether a position returned for JDE would be good enough for at least plotting the orbit.
 	//! This is true for dates within orbitGood around epoch.
 	//! If orbitGood is zero, this is always true.
 	//! @note This relieves conditions of objectDateValid(JDE) somewhat, for the sake of illustratory completeness.
-	bool objectDateGoodEnoughForOrbits(const double JDE) const { return ((orbitGood==0.) || (fabs(epochJDE-JDE)<orbitGood)); }
+	bool objectDateGoodEnoughForOrbits(const double JDE) const { return ((orbitGood==0.) || (fabs(JDE-epochJDE)<orbitGood)); }
 	//! Return minimal and maximal JDE values where this orbit should be used.
 	//! @returns the limits where objectDateValid returns true
 	Vec2d objectDateValidRange(const bool strict) const;
@@ -129,6 +142,7 @@ public:
 	//! @param centralMass in units of Solar masses
 	static double calculateSiderealPeriod(const double semiMajorAxis, const double centralMass);
 	double getEpochJDE() const { return epochJDE; }
+	double getOrbitGood() const {return orbitGood; }
 
 private:
 	const double epochJDE; //!< epoch (date of validity) of the elements.
@@ -143,9 +157,24 @@ private:
 	double orbitGood; //!< orb. elements are only valid for this time from perihel [days]. Don't draw the object outside. Values <=0 mean "always good" (objects on undisturbed elliptic orbit)
 	Vec3d rdot;       //!< velocity vector. Caches velocity from last position computation, [AU/d]
 	bool updateTails; //!< flag to signal that comet tails must be recomputed.
-	void InitEll(const double dt, double &rCosNu, double &rSinNu);
-	void InitPar(const double dt, double &rCosNu, double &rSinNu);
-	void InitHyp(const double dt, double &rCosNu, double &rSinNu);
+	//! Solve true anomaly nu for elliptical orbit with Laguerre-Conway's method. (May have high e)
+	//! @param M mean anomaly (meanMotion*daysFromPerihel) [radians]
+	//! @param rCosNu: r*cos(nu)
+	//! @param rSinNu: r*sin(nu)
+	void InitEll(const double M, double &rCosNu, double &rSinNu);
+	//! Initialize position computations for parabolic orbits
+	//! @param W equivalent of mean anomaly (meanMotion*daysFromPerihel) [radians]
+	//! @param rCosNu: r*cos(nu)
+	//! @param rSinNu: r*sin(nu)
+	void InitPar(const double W, double &rCosNu, double &rSinNu);
+	//! Solve true anomaly nu for hyperbolic "orbit" (better: trajectory) around the sun.
+	//! @param M mean anomaly (meanMotion*daysFromPerihel) [radians]
+	//! @param rCosNu: r*cos(nu)
+	//! @param rSinNu: r*sin(nu)
+	void InitHyp(const double M, double &rCosNu, double &rSinNu);
+	//! Inner part of positional computation.
+	//! Needed for position and orbit computations
+	void positionInVSOP87Coordinates(const double rCosNu, const double rSinNu, double *v, Vec3d &rdot);
 };
 
 //! A pseudo-orbit for "observers" linked to a planet's sphere. It allows setting distance and longitude/latitude in the VSOP87 frame.
@@ -157,9 +186,9 @@ public:
 	//! Constructor. @param distance in AU, @param longitude in radians, @param latitude in radians.
 	GimbalOrbit(double distance, double longitude, double latitude);
 	//! Compute position for a (unused) Julian day.
-	virtual void positionAtTimevInVSOP87Coordinates(double JDE, double* v) Q_DECL_OVERRIDE;
+	void positionAtTimevInVSOP87Coordinates(double JDE, double* v) override;
 	//! Returns (pseudo) semimajor axis [AU] of a circular "orbit", i.e., distance.
-	double getSemimajorAxis() const Q_DECL_OVERRIDE { return distance; }
+	double getSemimajorAxis() const override { return distance; }
 
 	//! Set minimum distance for observers (may depend on central object)
 	void setMinDistance(double dist) {minDistance=dist; distance=qMax(distance, minDistance);}

@@ -219,11 +219,10 @@ private slots:
 	//! connect from StelApp to resize fonts on the fly.
 	void setFontSizeFromApp(int size);
 	//! connect from StelApp to set font on the fly.
-	void setFont(QFont font);
+	void setFont(const QFont &cfont);
 private:
 	QTimeLine* hideTimeLine;
 	QGraphicsSimpleTextItem* helpLabel;
-	QGraphicsPixmapItem* helpLabelPixmap; // bad-graphics replacement.
 };
 
 // The button bar on the bottom containing actions toggle buttons
@@ -283,6 +282,10 @@ public:
 	QRectF getButtonsBoundingRect() const;
 	//! @return height of vertical gap (pixels)
 	int getGap() const {return gap;}
+
+	//! enable connection to StelCore::flagUseTopocentricCoordinatesChanged()
+	//! Recommended in operations that temporarily switch off and back on.
+	void enableTopoCentricUpdate(bool enable);
 signals:
 	void sizeChanged();
 
@@ -293,7 +296,7 @@ private slots:
 	//! connect from StelApp to resize fonts on the fly.
 	void setFontSizeFromApp(int size);
 	//! connect from StelApp to set font on the fly.
-	void setFont(QFont font);
+	void setFont(const QFont &cfont);
 
 private:
 	// updateTopocentric: regardless of topocentric setting, reformat the string if true
@@ -304,12 +307,6 @@ private:
 	QGraphicsSimpleTextItem* datetime;
 	QGraphicsSimpleTextItem* fov;
 	QGraphicsSimpleTextItem* fps;
-	// For bad graphics, show these instead. We can use location etc for font info.
-	// We use ad-hoc pixmaps instead if command-line arg. -t (--text-fix) is given.
-	QGraphicsPixmapItem* locationPixmap;
-	QGraphicsPixmapItem* datetimePixmap;
-	QGraphicsPixmapItem* fovPixmap;
-	QGraphicsPixmapItem* fpsPixmap;
 	int gap; // a pixel distance between status line and buttons. May have fixed size or could depend on status element font size QFontMetrics::descent()
 
 
@@ -345,16 +342,18 @@ private:
 	bool flagFovDms;
 	bool flagTimeJd;
 	bool flagShowTZ;
+	// Store these names. They can potentially be changed each frame, but lookup from SolarSystem is very costly.
+	QString planetNameEnglish;
+	QString planetNameI18n;
 
 	QGraphicsSimpleTextItem* helpLabel;
-	QGraphicsPixmapItem* helpLabelPixmap; // bad-graphics replacement.
 };
 
-//! @class StelBarsPath: The path around the bottom and left button bars
-class StelBarsPath : public QGraphicsPathItem
+//! @class StelBarsFrame: The path around the bottom and left button bars
+class StelBarsFrame : public QGraphicsPathItem
 {
 	public:
-		StelBarsPath(QGraphicsItem* parent);
+		StelBarsFrame(QGraphicsItem* parent);
 		//! defines a line around the two button bars
 		void updatePath(BottomStelBar* bottom, LeftStelBar* left);
 		//! return radius of corner arc

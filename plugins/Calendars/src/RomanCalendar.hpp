@@ -43,7 +43,7 @@ public slots:
 
 	//! set date from a vector of calendar date elements sorted from the largest to the smallest.
 	//! Year-Month[1...12]-[kalends|nones|ides]-[count]-[leap?]
-	void setDate(QVector<int> parts) override;
+	void setDate(const QVector<int> &parts) override;
 
 	//! get a stringlist of calendar date elements sorted from the largest to the smallest.
 	//! AUCYear [standard numbers], Month, MonthName(genitive), event, DayName
@@ -53,7 +53,7 @@ public slots:
 	QString getFormattedDateString() const override;
 
 	//! find RD number for date in the Roman calendar. Years are like in the Julian calendar.
-	static int fixedFromRoman(QVector<int> julian);
+	static int fixedFromRoman(const QVector<int> &roman);
 	//! find date in the Roman calendar from RD number
 	static QVector<int> romanFromFixed(int rd);
 

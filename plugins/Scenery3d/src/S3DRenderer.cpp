@@ -69,7 +69,7 @@ S3DRenderer::S3DRenderer(QObject *parent)
       currentScene(nullptr),
       supportsGSCubemapping(false), supportsShadows(false), supportsShadowFiltering(false), isANGLE(false), maximumFramebufferSize(0),
       defaultFBO(0),
-      torchBrightness(0.5f), torchRange(5.0f), directionalLightPush(1.0f), textEnabled(false), debugEnabled(false), fixShadowData(false),
+      torchBrightness(0.5f), torchRange(5.0f), directionalLightPush(1.0f), textEnabled(false), locationInfoStyle(S3DRenderer::LocationInfoTopRight), debugEnabled(false), fixShadowData(false),
       simpleShadows(false), fullCubemapShadows(false), cubemappingMode(S3DEnum::CM_TEXTURES), //set it to 6 textures as a safe default (Cubemap should work on ANGLE, but does not...)
       reinitCubemapping(true), reinitShadowmapping(true),
       cubemapSize(1024),shadowmapSize(1024),wasMovedInLastDrawCall(false),
@@ -969,29 +969,17 @@ void S3DRenderer::calculateLighting()
 	//specular factor is calculated from other values for now
 	float specular = std::min(ambientBrightness*directionalBrightness*5.0f,1.0f);
 
-	//if the night vision mode is on, use red-tinted lighting
-	bool red=StelApp::getInstance().getVisionModeNight();
-
 	float torchDiff = shaderParameters.torchLight ? torchBrightness : 0.0f;
 	lightInfo.torchAttenuation = 1.0f / (torchRange * torchRange);
 
-	if(red)
-	{
-		lightInfo.ambient = QVector3D(ambientBrightness,0, 0);
-		lightInfo.directional = QVector3D(directionalBrightness,0,0);
-		lightInfo.emissive = QVector3D(emissiveFactor,0,0);
-		lightInfo.specular = QVector3D(specular,0,0);
-		lightInfo.torchDiffuse = QVector3D(torchDiff,0,0);
-	}
-	else
-	{
-		//for now, lighting is only white
-		lightInfo.ambient = QVector3D(ambientBrightness,ambientBrightness, ambientBrightness);
-		lightInfo.directional = QVector3D(directionalBrightness,directionalBrightness,directionalBrightness);
-		lightInfo.emissive = QVector3D(emissiveFactor,emissiveFactor,emissiveFactor);
-		lightInfo.specular = QVector3D(specular,specular,specular);
-		lightInfo.torchDiffuse = QVector3D(torchDiff,torchDiff,torchDiff);
-	}
+	static LandscapeMgr *lmgr=GETSTELMODULE(LandscapeMgr);
+	QVector3D solarTint=lmgr->getLandscapeTint().toQVector();
+	//ambient tries to neutralize sunrise reddening a bit to model collecting light more of the blue sky. Directional and specular are tinted with possibly reddened sun.
+	lightInfo.ambient = ambientBrightness*(QVector3D(0.4,0.4,0.4)+0.6*solarTint);
+	lightInfo.directional = directionalBrightness*QVector3D(powf(solarTint[0],2.5f), powf(solarTint[1], 2.5f), powf(solarTint[2], 2.5f));
+	lightInfo.emissive = QVector3D(emissiveFactor,emissiveFactor,emissiveFactor);
+	lightInfo.specular = specular*solarTint;
+	lightInfo.torchDiffuse = QVector3D(torchDiff,torchDiff,torchDiff);
 }
 
 void S3DRenderer::calcCubeMVP(const Vec3d translation)
@@ -1358,50 +1346,75 @@ void S3DRenderer::drawCoordinatesText()
 	painter.setFont(debugTextFont);
 	painter.setColor(1.0f,0.5f,1.0f);
 
-	// Attempt at better font scaling for Macs and HiDPI.
-	int fontSize=debugTextFont.pixelSize();
+	const Vec3d &gridPos = currentScene->getGridPosition();
+	const QString& gridName = currentScene->getSceneInfo().gridName;
 
-	float devicePixelscaling = static_cast<float>(altAzProjector->getDevicePixelsPerPixel())*StelApp::getInstance().getGlobalScalingRatio();
-	float screen_x = altAzProjector->getViewportWidth()  - 240.0f*devicePixelscaling;
+	// Attempt at better font scaling for Macs and HiDPI.
+	const int fontSize=debugTextFont.pixelSize();
+	const QFontMetrics fm(debugTextFont);
+
+	const float devicePixelscaling = static_cast<float>(altAzProjector->getDevicePixelsPerPixel());
+	float screen_x = altAzProjector->getViewportWidth()  -  240.0f*devicePixelscaling;
+	float screen_x_cs=altAzProjector->getViewportWidth()-10.f-devicePixelscaling*qMax(240, painter.getFontMetrics().boundingRect(gridName).width());
 	float screen_y = altAzProjector->getViewportHeight() -  60.0f*devicePixelscaling;
+	if (locationInfoStyle!=LocationInfoTopRight)
+	{
+		screen_x = altAzProjector->getViewportWidth()*0.5  - fm.boundingRect("MMMMMMMMMM").width()*devicePixelscaling;
+		screen_x_cs = screen_x;
+		screen_y =  5*fontSize * devicePixelscaling;		// just allow 5 lines
+	}
 	QString str;
 
-	Vec3d gridPos = currentScene->getGridPosition();
+//	if (locationInfoStyle==LocationInfoBottomCenterCurved)
+//	{
+//		painter.drawText(screen_x_cs, screen_y, gridName, 0, 0, 0, false);
+//		screen_y -= (fontSize+1)*devicePixelscaling;
+//		str = QString("Easting:  %1m").arg(gridPos[0], 10, 'f', 2);
+//		painter.drawText(screen_x, screen_y, str, 0, 0, 0, false);
+//		screen_y -= (fontSize-1)*devicePixelscaling;
+//		str = QString("Northing: %1m").arg(gridPos[1], 10, 'f', 2);
+//		painter.drawText(screen_x, screen_y, str, 0, 0, 0, false);
+//		screen_y -= (fontSize-1)*devicePixelscaling;
+//		str = QString("Height: %1m").arg(gridPos[2], 10, 'f', 2);
+//		painter.drawText(screen_x, screen_y, str, 0, 0, 0, false);
+//		screen_y -= (fontSize-1)*devicePixelscaling;
+//		str = QString("Eye:   %1m").arg(currentScene->getEyeHeight(), 10, 'f', 2);
+//		painter.drawText(screen_x, screen_y, str, 0, 0, 0, false);
+//	}
+//	else
+//	{
+		// problem: long grid names!
+		painter.drawText(screen_x_cs, screen_y, gridName, 0, 0, 0, locationInfoStyle==LocationInfoTopRight);
+		screen_y -= (fontSize+1)*devicePixelscaling;
+		str = QString("Easting:  %1m").arg(gridPos[0], 10, 'f', 2);
+		painter.drawText(screen_x, screen_y, str, 0, 0, 0, locationInfoStyle==LocationInfoTopRight);
+		screen_y -= (fontSize-1)*devicePixelscaling;
+		str = QString("Northing: %1m").arg(gridPos[1], 10, 'f', 2);
+		painter.drawText(screen_x, screen_y, str, 0, 0, 0, locationInfoStyle==LocationInfoTopRight);
+		screen_y -= (fontSize-1)*devicePixelscaling;
+		str = QString("Height:   %1m").arg(gridPos[2], 10, 'f', 2);
+		painter.drawText(screen_x, screen_y, str, 0, 0, 0, locationInfoStyle==LocationInfoTopRight);
+		screen_y -= (fontSize-1)*devicePixelscaling;
+		str = QString("Eye:      %1m").arg(currentScene->getEyeHeight(), 10, 'f', 2);
+		painter.drawText(screen_x, screen_y, str, 0, 0, 0, locationInfoStyle==LocationInfoTopRight);
 
-	const SceneInfo& info = currentScene->getSceneInfo();
-
-	// problem: long grid names!
-	painter.drawText(altAzProjector->getViewportWidth()-10.f-devicePixelscaling*qMax(240, painter.getFontMetrics().boundingRect(info.gridName).width()),
-			 screen_y, info.gridName);
-	screen_y -= (fontSize+1)*devicePixelscaling;
-	str = QString("East:   %1m").arg(gridPos[0], 10, 'f', 2);
-	painter.drawText(screen_x, screen_y, str);
-	screen_y -= (fontSize-1)*devicePixelscaling;
-	str = QString("North:  %1m").arg(gridPos[1], 10, 'f', 2);
-	painter.drawText(screen_x, screen_y, str);
-	screen_y -= (fontSize-1)*devicePixelscaling;
-	str = QString("Height: %1m").arg(gridPos[2], 10, 'f', 2);
-	painter.drawText(screen_x, screen_y, str);
-	screen_y -= (fontSize-1)*devicePixelscaling;
-	str = QString("Eye:    %1m").arg(currentScene->getEyeHeight(), 10, 'f', 2);
-	painter.drawText(screen_x, screen_y, str);
-
-//	DEBUG AIDS:
-//	screen_y -= 15.0f;
-//	str = QString("model_X:%1m").arg(model_pos[0], 10, 'f', 2);
-//	painter.drawText(screen_x, screen_y, str);screen_y -= 15.0f;
-//	str = QString("model_Y:%1m").arg(model_pos[1], 10, 'f', 2);
-//	painter.drawText(screen_x, screen_y, str);screen_y -= 15.0f;
-//	str = QString("model_Z:%1m").arg(model_pos[2], 10, 'f', 2);
-//	painter.drawText(screen_x, screen_y, str);screen_y -= 15.0f;
-//	str = QString("abs_X:  %1m").arg(absolutePosition.v[0], 10, 'f', 2);
-//	painter.drawText(screen_x, screen_y, str);screen_y -= 15.0f;
-//	str = QString("abs_Y:  %1m").arg(absolutePosition.v[1], 10, 'f', 2);
-//	painter.drawText(screen_x, screen_y, str);screen_y -= 15.0f;
-//	str = QString("abs_Z:  %1m").arg(absolutePosition.v[2], 10, 'f', 2);
-//	painter.drawText(screen_x, screen_y, str);screen_y -= 15.0f;
-//	str = QString("groundNullHeight: %1m").arg(groundNullHeight, 7, 'f', 2);
-//	painter.drawText(screen_x, screen_y, str);
+		//DEBUG AIDS (only usable in top/right):
+		//screen_y -= 15.0f;
+		//str = QString("model_X:%1m").arg(model_pos[0], 10, 'f', 2);
+		//painter.drawText(screen_x, screen_y, str);screen_y -= 15.0f;
+		//str = QString("model_Y:%1m").arg(model_pos[1], 10, 'f', 2);
+		//painter.drawText(screen_x, screen_y, str);screen_y -= 15.0f;
+		//str = QString("model_Z:%1m").arg(model_pos[2], 10, 'f', 2);
+		//painter.drawText(screen_x, screen_y, str);screen_y -= 15.0f;
+		//str = QString("abs_X:  %1m").arg(absolutePosition.v[0], 10, 'f', 2);
+		//painter.drawText(screen_x, screen_y, str);screen_y -= 15.0f;
+		//str = QString("abs_Y:  %1m").arg(absolutePosition.v[1], 10, 'f', 2);
+		//painter.drawText(screen_x, screen_y, str);screen_y -= 15.0f;
+		//str = QString("abs_Z:  %1m").arg(absolutePosition.v[2], 10, 'f', 2);
+		//painter.drawText(screen_x, screen_y, str);screen_y -= 15.0f;
+		//str = QString("groundNullHeight: %1m").arg(groundNullHeight, 7, 'f', 2);
+		//painter.drawText(screen_x, screen_y, str);
+//	}
 }
 
 void S3DRenderer::drawDebug()
@@ -1472,10 +1485,12 @@ void S3DRenderer::drawDebug()
 	Q_ASSERT(lightInfo.directionalSource<=LightParameters::DS_Venus_Ambient);
 	directionalSourceString = directionalSourceStrings.at(lightInfo.directionalSource);
 
-	const QString lightMessage=QString("Ambient: %1 Directional: %2. Shadows cast by: %3 from %4/%5/%6")
-			.arg(lightInfo.ambient[0], 6, 'f', 4).arg(lightInfo.directional[0], 6, 'f', 4)
-			.arg(shadowCasterName).arg(lightInfo.lightDirectionV3f.v[0], 6, 'f', 4)
-			.arg(lightInfo.lightDirectionV3f.v[1], 6, 'f', 4).arg(lightInfo.lightDirectionV3f.v[2], 6, 'f', 4);
+	QString lightMessage=QString("Ambient: %1/%2/%3 Directional: %4/%5/%6. Shadows cast by: %7")
+			.arg(QString::number(lightInfo.ambient[0], 'f', 1), QString::number(lightInfo.ambient[1], 'f', 1), QString::number(lightInfo.ambient[2], 'f', 1),
+			     QString::number(lightInfo.directional[0], 'f', 4), QString::number(lightInfo.directional[1], 'f', 4), QString::number(lightInfo.directional[2], 'f', 4))
+			.arg(shadowCasterName);
+	if (lightInfo.shadowCaster>LightParameters::SC_None)
+			     lightMessage.append(QString(" from %1/%2/%3").arg(QString::number(lightInfo.lightDirectionV3f.v[0],'f', 4), QString::number(lightInfo.lightDirectionV3f.v[1], 'f', 4), QString::number(lightInfo.lightDirectionV3f.v[2],'f', 4)));
 	const QString lightMessage2=QString("Contributions: Ambient     Sun: %1, Moon: %2, Background+^L: %3")
 			.arg(lightInfo.sunAmbient, 6, 'f', 4).arg(lightInfo.moonAmbient, 6, 'f', 4).arg(lightInfo.backgroundAmbient, 6, 'f', 4);
 	const QString lightMessage3=QString("               Directional %1 by: %2, emissive factor: %3, landscape opacity: %4")
@@ -1485,15 +1500,15 @@ void S3DRenderer::drawDebug()
 	painter.setFont(debugTextFont);
 	painter.setColor(1.f,0.f,1.f,1.f);
 	// For now, these messages print light mixture values.
-	painter.drawText(20, 160, lightMessage);
-	painter.drawText(20, 145, lightMessage2);
-	painter.drawText(20, 130, lightMessage3);
-	painter.drawText(20, 115, QString("Torch range %1, brightness %2/%3/%4").arg(torchRange).arg(lightInfo.torchDiffuse[0]).arg(lightInfo.torchDiffuse[1]).arg(lightInfo.torchDiffuse[2]));
+	painter.drawText(70, 160, lightMessage);
+	painter.drawText(70, 145, lightMessage2);
+	painter.drawText(70, 130, lightMessage3);
+	painter.drawText(70, 115, QString("Torch range %1, brightness %2/%3/%4").arg(torchRange).arg(lightInfo.torchDiffuse[0]).arg(lightInfo.torchDiffuse[1]).arg(lightInfo.torchDiffuse[2]));
 
 	const AABBox& bbox = currentScene->getSceneAABB();
 	QString str = QString("BB: %1/%2/%3 %4/%5/%6").arg(bbox.min.v[0], 7, 'f', 2).arg(bbox.min.v[1], 7, 'f', 2).arg(bbox.min.v[2], 7, 'f', 2)
 			.arg(bbox.max.v[0], 7, 'f', 2).arg(bbox.max.v[1], 7, 'f', 2).arg(bbox.max.v[2], 7, 'f', 2);
-	painter.drawText(10, 100, str);
+	painter.drawText(70, 100, str);
 	// PRINT OTHER MESSAGES HERE:
 
 	float screen_x = altAzProjector->getViewportWidth()  - 500.0f;

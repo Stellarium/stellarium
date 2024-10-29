@@ -71,11 +71,6 @@ INSTALL(DIRECTORY shaders/ DESTINATION ${SDATALOC}/data/shaders FILES_MATCHING
 	PATTERN "s3d_*.frag")
 ENDIF()
 
-IF (BUILD_FOR_MAEMO)
-	INSTALL(FILES maemo/stellarium.desktop DESTINATION /usr/share/applications/hildon)
-	INSTALL(FILES maemo/stellarium.png DESTINATION /usr/share/icons/hicolor/48x48/apps)
-ENDIF()
-
 IF(UNIX AND NOT APPLE)
 	INSTALL(FILES org.stellarium.Stellarium.desktop DESTINATION share/applications)
 	INSTALL(FILES org.stellarium.Stellarium.appdata.xml DESTINATION share/metainfo)

@@ -84,14 +84,26 @@ public:
 		
 	// Methods specific to telescope
 	virtual void telescopeGoto(const Vec3d &j2000Pos, StelObjectP selectObject) = 0;
-	virtual void telescopeSync(const Vec3d &j2000Pos, StelObjectP selectObject) = 0;
-	virtual void telescopeAbortSlew() { qWarning() << "Telescope" << getID() << "does not support AbortSlew()!"; }
+	//! Some telescopes can synchronize the telescope with the given position or object.
+	//! The base client does nothing.
+	//! Derived classes may override this command
+	//! @todo: Properly document method and the arguments
+	virtual void telescopeSync(const Vec3d &j2000Pos, StelObjectP selectObject){};
+	//! report whether this client can respond to sync commands.
+	//! Can be used for GUI tweaks
+	virtual bool isTelescopeSyncSupported() const {return false;}
+	//! Send command to abort slew. Not all telescopes support this, base implementation only gives a warning.
+	//! After abort, the current position should be retrieved and displayed.
+	virtual void telescopeAbortSlew();
+	//! report whether this client can abort a running slew.
+	//! Can be used for GUI tweaks
+	virtual bool isAbortSlewSupported() const {return false;}
 
 	//!
 	//! \brief move
 	//! \param angle [0,360). 0=South, 90=West, 180=North, 270=East
 	//! \param speed [0,1]
-	//!
+	//! The default implementation does nothing but emit a warning.
 	virtual void move(double angle, double speed);
 	virtual bool isConnected(void) const = 0;
 	virtual bool hasKnownPosition(void) const = 0;
@@ -103,6 +115,7 @@ public:
 	virtual bool prepareCommunication() {return false;}
 	virtual void performCommunication() {}
 
+	//! Some telescope types may override this method to display additional user interface elements.
 	virtual QWidget* createControlWidget(QSharedPointer<TelescopeClient> telescope, QWidget* parent = nullptr) const { Q_UNUSED(telescope) Q_UNUSED(parent) return nullptr; }
 
 protected:
@@ -162,16 +175,12 @@ public:
 		desired_pos = j2000Pos;
 		desired_pos.normalize();
 	}
-	void telescopeSync(const Vec3d &j2000Pos, StelObjectP selectObject) override
-	{
-		Q_UNUSED(selectObject)
-		Q_UNUSED(j2000Pos)
-	}
 	void telescopeAbortSlew() override
 	{
 		desired_pos=XYZ;
 		qDebug() << "Telescope" << getID() << "Slew aborted";
 	}
+	bool isAbortSlewSupported() const override {return true;}
 	bool hasKnownPosition(void) const override
 	{
 		return true;
@@ -211,7 +220,6 @@ private:
 	bool prepareCommunication() override;
 	void performCommunication() override;
 	void telescopeGoto(const Vec3d &j2000Pos, StelObjectP selectObject) override;
-	void telescopeSync(const Vec3d &j2000Pos, StelObjectP selectObject) override;
 	bool isInitialized(void) const override
 	{
 		return (!address.isNull());

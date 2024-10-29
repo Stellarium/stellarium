@@ -39,16 +39,16 @@ class ManualImportWindow : public StelDialog
 	Q_OBJECT
 public:
 	ManualImportWindow();
-	virtual ~ManualImportWindow() Q_DECL_OVERRIDE;
+	~ManualImportWindow() override;
 
 public slots:
-	void retranslate() Q_DECL_OVERRIDE;
+	void retranslate() override;
 
 private slots:
 	//TODO: Object type
 
 	void selectColor();
-	void parseColorString(QString);
+	void parseColorString(const QString &color);
 
 	void toggleCometOrbit(bool);
 	void toggleEllipticOrbit(bool);
@@ -65,16 +65,16 @@ private:
 
 	QColor objectColor;
 
-	void setColorButtonColor(QColor newColor);
+	void setColorButtonColor(const QColor &newColor);
 
 	void selectTextureFile(QLineEdit * filePathLineEdit);
 	//! Check if a file is a valid graphics file with OpenGL texture dimensions.
 	//! OpenGL accepts only dimensions that are powers of 2 (512, 1024, etc.)
-	bool verifyTextureFile(QString filePath);
+	bool verifyTextureFile(const QString &filePath);
 	bool verifyPowerOfTwo(int value);
 
 protected:
-	virtual void createDialogContent() Q_DECL_OVERRIDE;
+	void createDialogContent() override;
 	Ui_manualImportWindow * ui;
 };
 

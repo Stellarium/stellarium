@@ -51,17 +51,17 @@ public:
 	//! Constructor
 	MeteorShowers(MeteorShowersMgr *mgr);
 
-	virtual void init(void) Q_DECL_OVERRIDE {}
+	void init(void) override {}
 
 	//! Destructor
-	virtual ~MeteorShowers() Q_DECL_OVERRIDE;
+	~MeteorShowers() override;
 
 	//! Update
 	//! @param deltaTime the time increment in seconds since the last call.
-	virtual void update(double deltaTime) Q_DECL_OVERRIDE;
+	void update(double deltaTime) override;
 
 	//! Draw
-	virtual void draw(StelCore* core) Q_DECL_OVERRIDE;
+	void draw(StelCore* core) override;
 
 	//! Loads all meteor showers contained in a QVariantMap.
 	//! @param map
@@ -76,14 +76,14 @@ public:
 	//
 	// Methods defined in StelObjectModule class
 	//
-	virtual QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const Q_DECL_OVERRIDE;
-	virtual StelObjectP searchByNameI18n(const QString& nameI18n) const Q_DECL_OVERRIDE;
-	virtual StelObjectP searchByName(const QString& name) const Q_DECL_OVERRIDE;
-	virtual StelObjectP searchByID(const QString &id) const Q_DECL_OVERRIDE;
+	QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const override;
+	StelObjectP searchByNameI18n(const QString& nameI18n) const override;
+	StelObjectP searchByName(const QString& name) const override;
+	StelObjectP searchByID(const QString &id) const override;
 
-	virtual QStringList listAllObjects(bool inEnglish) const Q_DECL_OVERRIDE;
-	virtual QString getName() const  Q_DECL_OVERRIDE{ return "Meteor Showers"; }
-	virtual QString getStelObjectType() const Q_DECL_OVERRIDE { return MeteorShower::METEORSHOWER_TYPE; }
+	QStringList listAllObjects(bool inEnglish) const override;
+	QString getName() const  override{ return "Meteor Showers"; }
+	QString getStelObjectType() const override { return MeteorShower::METEORSHOWER_TYPE; }
 
 private:
 	MeteorShowersMgr* m_mgr;

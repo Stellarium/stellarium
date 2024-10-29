@@ -44,6 +44,8 @@ StelPluginInfo SimpleDrawLineStelPluginInterface::getPluginInfo() const
 	info.authors = "Stellarium team";
 	info.contact = "www.stellarium.org";
 	info.description = "An minimal plugin example for drawing lines.";
+	info.version = SIMPLEDRAWLINE_PLUGIN_VERSION;
+	info.license = SIMPLEDRAWLINE_PLUGIN_LICENSE;
 	return info;
 }
 

@@ -79,6 +79,17 @@
 
 #define stelpow10f(x) std::exp((x) * 2.3025850930f)
 
+#define L1S(x) QLatin1String(x)
+
+// Allow parallel evaluation of std::transform_reduce(std::execution::par, ...) or
+// std::sort(std::execution::par, ...) where known. Not all compilers know it.
+// Use std::transform_reduce(STD_EXECUTION_PAR_COMMA ...) for the general case.
+#if STD_EXECUTION_KNOWN
+# define STD_EXECUTION_PAR_COMMA std::execution::par,
+#else
+# define STD_EXECUTION_PAR_COMMA
+#endif
+
 //! @namespace StelUtils contains general purpose utility functions.
 namespace StelUtils
 {
@@ -96,9 +107,6 @@ namespace StelUtils
 
 	//! Return the name and the version of operating system, i.e. "macOS 12.5"
 	QString getOperatingSystemInfo();
-
-	//! Return the name and the version of compiler, which was used for building the planetarium, i.e. "GCC 9.3.0"
-	QString getCompilerInfo();
 
 	//! Return the user agent name, i.e. "Stellarium/0.15.0 (Linux)"
 	QString getUserAgentString();
@@ -587,11 +595,17 @@ namespace StelUtils
 	QString hoursToHmsStr(const double hours, const bool lowprecision = false);
 	QString hoursToHmsStr(const float hours, const bool lowprecision = false);
 
+	//! Convert JD to hours and minutes
+	QString getHoursMinutesFromJulianDay(const double julianDay);
+
 	//! Convert a hms formatted string to decimal hours
 	double hmsStrToHours(const QString& s);
 
 	//! Convert days (float) to a time string
 	QString daysFloatToDHMS(float days);
+
+	//! The method to splitting the text by substrings by some limit of string length
+	QString wrapText(const QString& s, const int limit = 52);
 
 	//! Get Delta-T estimation for a given date.
 	//! This is just an "empty" correction function, returning 0.
@@ -860,7 +874,7 @@ namespace StelUtils
 	double getDeltaTByIslamSadiqQureshi(const double jDay);
 
 	//! Get Delta-T estimation for a given date.
-	//! Implementation of polinomial approximation of time period 1620-2013 for DeltaT by M. Khalid, Mariam Sultana and Faheem Zaidi (2014).
+	//! Implementation of polynomial approximation of time period 1620-2013 for DeltaT by M. Khalid, Mariam Sultana and Faheem Zaidi (2014).
 	//! Source: Delta T: Polynomial Approximation of Time Period 1620-2013
 	//! Journal of Astrophysics, Vol. 2014, Article ID 480964
 	//! https://doi.org/10.1155/2014/480964

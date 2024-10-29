@@ -18,6 +18,9 @@
  */
 
 #include "SyncClientHandlers.hpp"
+#include "LandscapeMgr.hpp"
+#include "StelLocationMgr.hpp"
+#include "StelModuleMgr.hpp"
 #include "SyncClient.hpp"
 
 #include "SyncMessages.hpp"
@@ -29,12 +32,6 @@
 #include "StelPropertyMgr.hpp"
 
 using namespace SyncProtocol;
-
-ClientHandler::ClientHandler()
-	: client(Q_NULLPTR)
-{
-	core = StelApp::getInstance().getCore();
-}
 
 ClientHandler::ClientHandler(SyncClient *client)
 	: client(client)
@@ -53,7 +50,7 @@ bool ClientErrorHandler::handleMessage(QDataStream &stream, SyncProtocol::tPaylo
 {
 	ErrorMessage msg;
 	bool ok = msg.deserialize(stream,dataSize);
-	peer.peerLog("Received error message from server: " + msg.message);
+	peer.peerLog(QtWarningMsg, "Received error message from server: " + msg.message);
 
 	client->emitServerError(msg.message);
 
@@ -78,7 +75,7 @@ bool ClientAuthHandler::handleMessage(QDataStream &stream, SyncProtocol::tPayloa
 		if(peer.isAuthenticated())
 		{
 			//we are already authenticated, another challenge is an error
-			qWarning()<<"[SyncClient] received server challenge when not expecting one";
+			qCWarning(syncClient)<<"received server challenge when not expecting one";
 			return false;
 		}
 
@@ -87,14 +84,14 @@ bool ClientAuthHandler::handleMessage(QDataStream &stream, SyncProtocol::tPayloa
 
 		if(!ok)
 		{
-			qWarning()<<"[SyncClient] invalid server challenge received";
+			qCWarning(syncClient)<<"invalid server challenge received";
 			return false;
 		}
 
 		//check challenge for validity
 		if(msg.protocolVersion != SYNC_PROTOCOL_VERSION)
 		{
-			qWarning()<<"[SyncClient] invalid protocol version, dropping connection";
+			qCWarning(syncClient)<<"invalid protocol version, dropping connection";
 			return false;
 		}
 
@@ -104,17 +101,17 @@ bool ClientAuthHandler::handleMessage(QDataStream &stream, SyncProtocol::tPayloa
 		if(expectedPluginVersion != msg.remoteSyncVersion)
 		{
 			//This is only a warning here
-			QString str("[SyncClient] RemoteSync plugin version mismatch! Expected: 0x%1, Got: 0x%2");
-			qWarning()<<str.arg(expectedPluginVersion,0,16).arg(msg.remoteSyncVersion,0,16);
+			QString str("RemoteSync plugin version mismatch! Expected: 0x%1, Got: 0x%2");
+			qCWarning(syncClient)<<str.arg(expectedPluginVersion,0,16).arg(msg.remoteSyncVersion,0,16);
 		}
 		if(expectedStellariumVersion != msg.stellariumVersion)
 		{
 			//This is only a warning here
-			QString str("[SyncClient] Stellarium version mismatch! Expected: 0x%1, Got: 0x%2");
-			qWarning()<<str.arg(expectedStellariumVersion,0,16).arg(msg.stellariumVersion,0,16);
+			QString str("Stellarium version mismatch! Expected: 0x%1, Got: 0x%2");
+			qCWarning(syncClient)<<str.arg(expectedStellariumVersion,0,16).arg(msg.stellariumVersion,0,16);
 		}
 
-		qDebug()<<"[SyncClient] Received server challenge, sending response";
+		qCDebug(syncClient)<<"Received server challenge, sending response";
 
 		//we have to answer with the response
 		ClientChallengeResponse response;
@@ -133,14 +130,14 @@ bool ClientAuthHandler::handleMessage(QDataStream &stream, SyncProtocol::tPayloa
 		{
 			//we authenticated correctly, yay!
 			peer.authenticated = true;
-			qDebug()<<"[SyncClient] Connection authenticated";
+			qCDebug(syncClient)<<"Connection authenticated";
 			emit authenticated();
 			return true;
 		}
 		else
 		{
 			//we got a confirmation without sending a response, error
-			qWarning()<<"[SyncClient] Got SERVER_CHALLENGERESPONSEVALID message without awaiting it";
+			qCWarning(syncClient)<<"Got SERVER_CHALLENGERESPONSEVALID message without awaiting it";
 			return false;
 		}
 	}
@@ -186,8 +183,11 @@ bool ClientLocationHandler::handleMessage(QDataStream &stream, SyncProtocol::tPa
 	if(!ok)
 		return false;
 
+	const StelLocation &loc=msg.stelLocation;
+
 	//replicated from StelCore::moveObserverTo
-	if(msg.totalDuration>0.0)
+	// N.B. This message may apparently come several times. In case a transition is already under way (planetName==SpaceShip), this would fail, so exclude it.
+	if(msg.totalDuration>0.0 && core->getCurrentLocation().planetName!="SpaceShip")
 	{
 		//for optimal results, the network latency should be subtracted from the timeToGo...
 
@@ -198,24 +198,44 @@ bool ClientLocationHandler::handleMessage(QDataStream &stream, SyncProtocol::tPa
 			curLoc.name = ".";
 		}
 
+		//qDebug() << "Attempt to create Spaceship Observer from" << curLoc.planetName << "to" << msg.stelLocation.planetName ;
 		//create a spaceship observer
-		SpaceShipObserver* newObs = new SpaceShipObserver(curLoc, msg.stelLocation, msg.totalDuration,msg.timeToGo);
+		SpaceShipObserver* newObs = new SpaceShipObserver(curLoc, loc, msg.totalDuration,msg.timeToGo);
 		core->setObserver(newObs);
 		newObs->update(0);
 	}
-	else
+	else if(msg.totalDuration<=0.0)
 	{
 		//create a normal observer
-		core->setObserver(new StelObserver(msg.stelLocation));
+		//qDebug() << "Attempt to create Normal Observer at" << msg.stelLocation.planetName ;
+		core->setObserver(new StelObserver(loc));
 	}
-	emit core->targetLocationChanged(msg.stelLocation);
-	emit core->locationChanged(core->getCurrentLocation());
 
+
+	// We run into a sync problem here:
+	// When attempting to e.g. return to default location, LocationDialog sets a new landscapeID (property message), then resets location (this locationHandler message) which overwrites the landscapeID.
+	// We must first find out whether currentLandscapeID is sync'ed, and if yes, just reset the just-set currentLandscapeID. And if that is zero, do the ZeroColor stuff.
+
+	const bool dontSyncLandscape= (client->isPropertyFilteredAway(QString("LandscapeMgr.currentLandscapeID")));
+
+	QString landscapeID=dontSyncLandscape? QString() : GETSTELMODULE(LandscapeMgr)->getCurrentLandscapeID();
+
+	if (!dontSyncLandscape && landscapeID=="zero")
+	{
+		static const StelLocationMgr &locMgr=StelApp::getInstance().getLocationMgr();
+		QColor color=locMgr.getColorForCoordinates(loc.getLongitude(), loc.getLatitude());
+		landscapeID=QString("ZeroColor(%1)").arg(Vec3f(color).toStr());
+	}
+
+	if (loc.planetName=="Earth")
+		core->moveObserverTo(loc, 0., 1., GETSTELMODULE(LandscapeMgr)->getFlagLandscapeAutoSelection() ? landscapeID : QString());
+	else
+		core->moveObserverTo(loc, 0., 1., loc.planetName); // Loads a default landscape for the planet.
 
 	return true;
 }
 
-ClientSelectionHandler::ClientSelectionHandler()
+ClientSelectionHandler::ClientSelectionHandler(SyncClient *client): ClientHandler(client)
 {
 	objMgr = &StelApp::getInstance().getStelObjectMgr();
 }
@@ -229,19 +249,19 @@ bool ClientSelectionHandler::handleMessage(QDataStream &stream, SyncProtocol::tP
 	if(!ok)
 		return false;
 
-	qDebug()<<msg;
+	qCDebug(syncProtocol)<<msg.toString();
 
 	//lookup the objects from their names
 	//this might cause problems if 2 objects of different types have the same name!
 	QList<StelObjectP> selection;
 
-	for (const auto& selectedObject : qAsConst(msg.selectedObjects))
+	for (const auto& selectedObject : std::as_const(msg.selectedObjects))
 	{
 		StelObjectP obj = objMgr->searchByID(selectedObject.first, selectedObject.second);
 		if(obj)
 			selection.append(obj);
 		else
-			qWarning() << "Object not found" << selectedObject.first << selectedObject.second;
+			qCWarning(syncClient) << "Object not found" << selectedObject.first << selectedObject.second;
 	}
 
 	if(selection.isEmpty())
@@ -255,7 +275,7 @@ bool ClientSelectionHandler::handleMessage(QDataStream &stream, SyncProtocol::tP
 	return true;
 }
 
-ClientStelPropertyUpdateHandler::ClientStelPropertyUpdateHandler(bool skipGuiProps, const QStringList &excludeProps)
+ClientStelPropertyUpdateHandler::ClientStelPropertyUpdateHandler(SyncClient *client, bool skipGuiProps, const QStringList &excludeProps): ClientHandler(client)
 {
 	propMgr = StelApp::getInstance().getStelPropertyManager();
 
@@ -293,9 +313,9 @@ ClientStelPropertyUpdateHandler::ClientStelPropertyUpdateHandler(bool skipGuiPro
 	filter.setPattern(pattern);
 
 	if(!filter.isValid())
-		qWarning()<<"Invalid StelProperty filter:"<<filter.errorString();
+		qCWarning(syncProtocol)<<"Invalid StelProperty filter:" << filter << "error:" << filter.errorString();
 	else
-		qDebug()<<"Constructed regex"<<filter;
+		qCDebug(syncProtocol)<<"Constructed regex" << filter;
 
 	filter.optimize();
 }
@@ -307,22 +327,25 @@ bool ClientStelPropertyUpdateHandler::handleMessage(QDataStream &stream, SyncPro
 	bool ok = msg.deserialize(stream, dataSize);
 
 	if(!ok)
+	{
+		qWarning() << "Problem deserializing " << msg.propId;
 		return false;
+	}
 
-	qDebug()<<msg;
+	qCDebug(syncProtocol)<<msg.toString();
 
 	QRegularExpressionMatch match = filter.match(msg.propId);
 	if(match.hasMatch())
 	{
 		//filtered property
-		qDebug()<<"Filtered"<<msg;
+		qCDebug(syncProtocol)<<"Filtered"<<msg.toString();
 		return true;
 	}
 	propMgr->setStelPropertyValue(msg.propId,msg.value);
 	return true;
 }
 
-ClientViewHandler::ClientViewHandler()
+ClientViewHandler::ClientViewHandler(SyncClient *client): ClientHandler(client)
 {
 	mvMgr = core->getMovementMgr();
 }
@@ -335,21 +358,5 @@ bool ClientViewHandler::handleMessage(QDataStream &stream, SyncProtocol::tPayloa
 	if(!ok) return false;
 
 	mvMgr->setViewDirectionJ2000(core->altAzToJ2000(msg.viewAltAz, StelCore::RefractionOff));
-	return true;
-}
-
-ClientFovHandler::ClientFovHandler()
-{
-	mvMgr = core->getMovementMgr();
-}
-
-bool ClientFovHandler::handleMessage(QDataStream &stream, SyncProtocol::tPayloadSize dataSize, SyncRemotePeer &peer)
-{
-	Q_UNUSED(peer)
-	Fov msg;
-	bool ok = msg.deserialize(stream, dataSize);
-	if(!ok) return false;
-
-	mvMgr->zoomTo(msg.fov, 0.0f);
 	return true;
 }

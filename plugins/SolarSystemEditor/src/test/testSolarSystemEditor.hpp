@@ -21,16 +21,16 @@
 
 #include <QtTest>
 
-#include "SolarSystemEditor.hpp"
 
 class TestSolarSystemEditor : public QObject
 {
 Q_OBJECT
 private slots:
-       	void testUnpackingAsteroids();
+	void testUnpackingNumbers();
+	void testUnpackingAsteroids();
 	void testUnpackingAsteroidsHTML();
 	void testRenderAsteroidsHTML();
-//	void testUnpackingComets();
+	void testUnpackingComets();
 	void testRenderCometsHTML();
 };
 

@@ -203,7 +203,7 @@ void StelScriptSyntaxHighlighter::highlightBlock(const QString &text)
 	}
 
 	// process rules which had been defined in the constructor.
-	for (const HighlightingRule &rule: qAsConst(highlightingRules))
+	for (const HighlightingRule &rule: std::as_const(highlightingRules))
 	{
 		it= rule.pattern.globalMatch(text);
 		while (it.hasNext())

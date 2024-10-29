@@ -103,15 +103,15 @@ void PulsarsDialog::createDialogContent()
 	// if the state didn't change, setUpdatesEnabled will not be called, so we force it
 	setUpdatesEnabled(ui->internetUpdatesCheckbox->checkState());
 
-	connectColorButton(ui->pulsarMarkerColor,         "Pulsars.markerColor", "Pulsars/marker_color");
-	connectColorButton(ui->pulsarGlitchesMarkerColor, "Pulsars.glitchColor", "Pulsars/glitch_color");
+	ui->pulsarMarkerColor        ->setup("Pulsars.markerColor", "Pulsars/marker_color");
+	ui->pulsarGlitchesMarkerColor->setup("Pulsars.glitchColor", "Pulsars/glitch_color");
 
 	updateTimer = new QTimer(this);
 	connect(updateTimer, SIGNAL(timeout()), this, SLOT(refreshUpdateValues()));
 	updateTimer->start(7000);
 
-	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
-	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
+	connect(ui->titleBar, &TitleBar::closeClicked, this, &StelDialog::close);
+	connect(ui->titleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), this, SLOT(restoreDefaults()));
 	connect(ui->saveSettingsButton, SIGNAL(clicked()), this, SLOT(saveSettings()));
@@ -127,7 +127,7 @@ void PulsarsDialog::createDialogContent()
 void PulsarsDialog::setAboutHtml(void)
 {
 	QString html = "<html><head></head><body>";
-	html += "<h2>" + q_("Pulsars Plug-in") + "</h2><table width=\"90%\">";
+	html += "<h2>" + q_("Pulsars Plug-in") + "</h2><table class='layout' width=\"90%\">";
 	html += "<tr width=\"30%\"><td><strong>" + q_("Version") + ":</strong></td><td>" + PULSARS_PLUGIN_VERSION + "</td></tr>";
 	html += "<tr><td><strong>" + q_("License") + ":</strong></td><td>" + PULSARS_PLUGIN_LICENSE + "</td></tr>";
 	html += "<tr><td><strong>" + q_("Author") + ":</strong></td><td>Alexander Wolf</td></tr>";

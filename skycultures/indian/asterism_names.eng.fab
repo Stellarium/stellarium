@@ -1,6 +1,13 @@
-# Comment from Gzotti: ""Asterisms" were added in the last years to show what "modern" people understand as "unofficial" star group, like the Big Dipper, Summer Triangle or Winter Hexagon. Those figures currently don't show constellation art, although clearly a Big Dipper or Sickle could be shown with an artistic rendering, so this may also change, if somebody is willing to add them. Given the uncontrolled growth of asterisms, we should also find some way of selecting favourites, e.g. there are "Winter Hexagon" and "Big G" formed by practically the same stars, seeing any of the two is a personal preference. ... I don't know whether the Indian traditional sky has non-constellational asterisms in a similar add-on concept as described above."
+# Comment from Gzotti: ""Asterisms" were added in the last years to show what "modern" people understand as "unofficial" star group, 
+# like the Big Dipper, Summer Triangle or Winter Hexagon. Those figures currently don't show constellation art, although clearly a Big Dipper or Sickle 
+# could be shown with an artistic rendering, so this may also change, if somebody is willing to add them. Given the uncontrolled growth of asterisms, 
+# we should also find some way of selecting favourites, e.g. there are "Winter Hexagon" and "Big G" formed by practically the same stars, seeing any of the two is a personal preference. ... 
+# I don't know whether the Indian traditional sky has non-constellational asterisms in a similar add-on concept as described above."
 
-# From the manual: This file consists of 2 simple columns: Abbreviation (or just a serial number) and English name of asterism. The writing _("name") allows automatic translation of the English strings to other languages. These strings will be used as asterisms labels. In addition, after a hash mark (#) marking a comment sign, some reference information can be added in comment lines, like “List found at . . . ”.... Also, you can again add a reference comment after each 2-column entry. Just add a whitespace, and then a comma-separated list of numerical references to the books listed in reference.fab. Collecting sources and giving such references is always a good idea. Some later versions of Stellarium may use and display this information.
+# From the manual: This file consists of 2 simple columns: Abbreviation (or just a serial number) and English name of asterism. The writing _("name") allows automatic translation of the English strings to other languages. 
+# These strings will be used as asterisms labels. In addition, after a hash mark (#) marking a comment sign, some reference information can be added in comment lines, like “List found at . . . ”.... 
+# Also, you can again add a reference comment after each 2-column entry. Just add a whitespace, and then a comma-separated list of numerical references to the books listed in reference.fab. 
+# Collecting sources and giving such references is always a good idea. Some later versions of Stellarium may use and display this information.
 # Example line: JbC	_("Job's Coffin","asterism") 30,32
 
 # For the column 1: We use an intuitive ITRANS/ OPTITRANS transliteration scheme for codes.

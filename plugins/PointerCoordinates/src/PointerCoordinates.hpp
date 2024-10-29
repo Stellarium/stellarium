@@ -88,12 +88,12 @@ public:
 	Q_ENUM(CoordinateSystem)
 
 	PointerCoordinates();
-	virtual ~PointerCoordinates() Q_DECL_OVERRIDE;
+	~PointerCoordinates() override;
 
-	virtual void init() Q_DECL_OVERRIDE;
-	virtual void draw(StelCore *core) Q_DECL_OVERRIDE;
-	virtual double getCallOrder(StelModuleActionName actionName) const Q_DECL_OVERRIDE;
-	virtual bool configureGui(bool show) Q_DECL_OVERRIDE;
+	void init() override;
+	void draw(StelCore *core) override;
+	double getCallOrder(StelModuleActionName actionName) const override;
+	bool configureGui(bool show) override;
 
 	//! Set up the plugin with default values.  This means clearing out the PointerCoordinates section in the
 	//! main config.ini (if one already exists), and populating it with default values.
@@ -117,7 +117,7 @@ public:
 	bool getFlagShowElongation(void) const { return flagShowElongation; }
 	bool getFlagShowConstellation(void) const { return flagShowConstellation; }
 
-	QPair<int, int> getCoordinatesPlace(QString text, int line = 1);
+	QPair<int, int> getCoordinatesPlace(const QString &text, int line = 1);
 	QPair<int, int> getCustomCoordinatesPlace() { return customPosition; }
 
 signals:
@@ -153,7 +153,7 @@ public slots:
 	//! Get the current place of the string with coordinates
 	QString getCurrentCoordinatesPlaceKey(void) const;
 	//! Set the current place of the string with coordinates from its key
-	void setCurrentCoordinatesPlaceKey(QString key);
+	void setCurrentCoordinatesPlaceKey(const QString &key);
 
 	//! Set the current coordinate system
 	void setCurrentCoordinateSystem(PointerCoordinates::CoordinateSystem cs) { currentCoordinateSystem = cs; }
@@ -162,7 +162,7 @@ public slots:
 	//! Get the current coordinate system key
 	QString getCurrentCoordinateSystemKey(void) const;
 	//! Set the current coordinate system from its key
-	void setCurrentCoordinateSystemKey(QString key);
+	void setCurrentCoordinateSystemKey(const QString &key);
 
 	void setCustomCoordinatesPlace(int x, int y);
 
@@ -215,9 +215,9 @@ class PointerCoordinatesStelPluginInterface : public QObject, public StelPluginI
 	Q_PLUGIN_METADATA(IID StelPluginInterface_iid)
 	Q_INTERFACES(StelPluginInterface)
 public:
-	virtual StelModule* getStelModule() const Q_DECL_OVERRIDE;
-	virtual StelPluginInfo getPluginInfo() const Q_DECL_OVERRIDE;
-	virtual QObjectList getExtensionList() const Q_DECL_OVERRIDE { return QObjectList(); }
+	StelModule* getStelModule() const override;
+	StelPluginInfo getPluginInfo() const override;
+	//QObjectList getExtensionList() const override { return QObjectList(); }
 };
 
 #endif /* POINTERCOORDINATES_HPP */

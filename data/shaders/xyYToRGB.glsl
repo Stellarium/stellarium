@@ -28,12 +28,27 @@ uniform highp float brightnessScale; // Only the atmosphere fader value [0...1],
 uniform bool doSRGB;
 uniform bool flagUseTmGamma;
 
+float applyTMAndGamma(highp float Y)
+{
+	if (flagUseTmGamma)
+	{
+		// Y = std::pow(adaptLuminanceScaled(Y), oneOverGamma);
+		return pow(abs(Y*pi*1e-4), alphaWaOverAlphaDa*oneOverGamma) * term2TimesOneOverMaxdLpOneOverGamma;
+	}
+	else
+	{
+		// Y = adaptLuminanceScaled(Y);
+		return pow(abs(Y*pi*1e-4), alphaWaOverAlphaDa) * term2TimesOneOverMaxdL;
+	}
+}
+
 
 vec3 xyYToRGB(highp float x, highp float y, highp float Y)
 {
 	///////////////////////////////////////////////////////////////////////////
 	// Now we have the xyY components, need to convert to RGB
 
+	vec3 color = vec3(1,0,1);
 	// 1. Hue conversion
 	// if log10Y>0.6, photopic vision only (with the cones, colors are seen)
 	// else scotopic vision if log10Y<-2 (with the rods, no colors, everything blue),
@@ -42,14 +57,8 @@ vec3 xyYToRGB(highp float x, highp float y, highp float Y)
 	{
 		// special case for s = 0 (x=0.25, y=0.25)
 		Y *= 0.5121445;
-		if (flagUseTmGamma)
-		{
-			Y = pow(abs(Y*pi*1e-4), alphaWaOverAlphaDa*oneOverGamma)* term2TimesOneOverMaxdLpOneOverGamma;
-			return vec3(0.787077, 0.9898434, 1.9256125) * Y * brightnessScale;
-		}else{
-			Y = pow(abs(Y*pi*1e-4), alphaWaOverAlphaDa) * term2TimesOneOverMaxdL;
-			return pow(vec3(0.787077, 0.9898434, 1.9256125) * abs(Y * brightnessScale), vec3(oneOverGamma));
-		}
+		Y = applyTMAndGamma(Y);
+		color = vec3(0.787077, 0.9898434, 1.9256125) * Y * brightnessScale;
 	}
 	else
 	{
@@ -68,34 +77,30 @@ vec3 xyYToRGB(highp float x, highp float y, highp float Y)
 		}
 
 		// 2. Adapt the luminance value and scale it to fit in the RGB range [2]
-		if (flagUseTmGamma)
-		{
-			// Y = std::pow(adaptLuminanceScaled(Y), oneOverGamma);
-			Y = pow(abs(Y*pi*1e-4), alphaWaOverAlphaDa*oneOverGamma)* term2TimesOneOverMaxdLpOneOverGamma;
-		}else{
-			// Y = adaptLuminanceScaled(Y);
-			Y = pow(abs(Y*pi*1e-4), alphaWaOverAlphaDa) * term2TimesOneOverMaxdL;
-		}
+		Y = applyTMAndGamma(Y);
+
 		// Convert from xyY to XYZ
 		highp vec3 XYZ = vec3(x * Y / y, Y, (1. - x - y) * Y / y);
 
 		highp mat3 XYZ2RGB;
-		if(doSRGB){
-				// Use the XYZ to sRGB matrix which uses a D65 reference white
-				// Ref: http://www.brucelindbloom.com/index.html?Eqn_RGB_XYZ_Matrix.html
-				XYZ2RGB = mat3(vec3( 3.2404542, -0.9692660,  0.0556434),
-							   vec3(-1.5371385,  1.8760108, -0.2040259),
-							   vec3(-0.4985314,  0.0415560,  1.0572252));
-		}else{
+		if(doSRGB)
+		{
+			// Use the XYZ to sRGB matrix which uses a D65 reference white
+			// Ref: http://www.brucelindbloom.com/index.html?Eqn_RGB_XYZ_Matrix.html
+			XYZ2RGB = mat3(vec3( 3.2404542, -0.9692660,  0.0556434),
+			               vec3(-1.5371385,  1.8760108, -0.2040259),
+			               vec3(-0.4985314,  0.0415560,  1.0572252));
+		}
+		else
+		{
 		        // Use a XYZ to Adobe RGB (1998) matrix which uses a D65 reference white. Use values from same source:
-                XYZ2RGB = mat3(vec3( 2.0413690, -0.9692660,  0.0134474),
-                               vec3(-0.5649464, +1.8760108, -0.1183897),
-                               vec3(-0.3446944, +0.0415560, +1.0154096));
+			XYZ2RGB = mat3(vec3( 2.0413690, -0.9692660,  0.0134474),
+			               vec3(-0.5649464, +1.8760108, -0.1183897),
+			               vec3(-0.3446944, +0.0415560, +1.0154096));
 		}
-	  	if (flagUseTmGamma){
-			return XYZ2RGB * XYZ * brightnessScale;
-		}else{
-			return pow(abs(XYZ2RGB * XYZ * brightnessScale), vec3(oneOverGamma));
-		}
+
+		color = XYZ2RGB * XYZ * brightnessScale;
 	}
+
+	return flagUseTmGamma ? color : pow(abs(color), vec3(oneOverGamma));
 }

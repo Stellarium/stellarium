@@ -89,7 +89,7 @@ public slots:
 	//! GregorianCalendar.setDate([2023, 3, 4]); // This changes the date in the program!
 	//! MayaLongCountCalendar.setDate([13, 0, 0, 0, 1]); // This changes the date in the program!
 	//! @note No check is made for the number of elements, which depends on the actual calendar.
-	virtual void setDate(QVector<int> parts){Q_UNUSED(parts)}
+	virtual void setDate(const QVector<int> &parts){Q_UNUSED(parts)}
 
 	//! get a vector of calendar date elements sorted from the largest to the smallest.
 	//! The order depends on the actual calendar
@@ -107,7 +107,7 @@ public slots:
 	virtual QString getFormattedDateString() const;
 
 	//! get a formatted complete string for a date. This implementation just converts and concatenates all ints with sep in between.
-	static QString getFormattedDateString(QVector<int> date, QString sep=" ");
+	static QString getFormattedDateString(const QVector<int> &date, QString sep=" ");
 
 public:
 	//constexpr static const double J2000=2451545.0;
@@ -167,15 +167,15 @@ public slots:
 	static int modInterval(int x, int a, int b);
 
 	//! Reingold-Dershowitz CC.UE 1.48.
-	static int rdCorrSum(QVector<int>parts, QVector<int>factors, int corr);
+	static int rdCorrSum(const QVector<int>&parts, const QVector<int>&factors, int corr);
 	int rdCorrSum(QVector<int>factors, int corr){return rdCorrSum(parts, factors, corr);}
 
 	//! Split integer to mixed-radix vector. Reingold-Dershowitz CC.UE 1.42
-	static QVector<int> toRadix(int num, QVector<int>radix);
+	static QVector<int> toRadix(int num, const QVector<int> &radix);
 
 	//! Intersect a collection of candidates against a range of values.
 	//! @return a new QVector<int> with all elements from candidates which lie in range
-	static QVector<int> intersectWithRange(QVector<int>cand, QVector<int>range);
+	static QVector<int> intersectWithRange(const QVector<int>&cand, const QVector<int>&range);
 
 	// ASTRONOMICAL FUNCTIONS AND DEFINITIONS FROM CH.14
 public:

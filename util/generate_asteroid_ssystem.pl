@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 #
-# See POD docs at end of this file for genereal info
+# See POD docs at end of this file for general info
 #
 
 use strict;

@@ -160,6 +160,18 @@ graphs\_first\_id              & int    & 1     & Identificator for left graph (
 graphs\_second\_id             & int    & 2     & Identificator for right graph (yellow line).\\\bottomrule
 \end{longtable}
 
+\subsection{\big[audio\big]}
+%\label{sec:config.ini:audio}
+
+This section includes settings for Audio features.
+
+\noindent%
+\begin{longtable}{l|l|l|p{65mm}}
+\toprule
+\emph{ID}         & \emph{Type} & \emph{Default} & \emph{Description}\\\midrule
+enabled           & bool        & true           & Enable sound output\\\bottomrule
+\end{longtable}
+
 \subsection{\big[color\big]}
 %\label{sec:config.ini:color}
 
@@ -474,6 +486,8 @@ base\_font\_name & string & Verdana     & Selects the name \\
 %safe\_font\_name               & string &      & Selects the name for safe font, e.g. \emph{Verdana}\\\midrule
 base\_font\_file                & string &      & Selects the name for font file, e.g. \emph{DejaVuSans.ttf}\\
 flag\_font\_selection           & bool  & false & Show GUI elements for font selection.\\\midrule
+immediate\_save\_details        & bool  & false & Set to \emph{true} to store some detail settings in the configuration dialog immediately, 
+                                                  instead of having to press ``Save settings'' explicitly.\\\midrule
 %% TODO: Is this required? timeout=0 also keeps cursor visible.
 flag\_mouse\_cursor\_timeout    & bool  & true  & Set to \emph{false} if you want to have cursor visible at all times.\\%\midrule
 mouse\_cursor\_timeout          & float & 10    & Set to \emph{0} if you want to keep the mouse cursor visible at all times. 
@@ -569,6 +583,13 @@ flag\_minimal\_brightness                  & bool  & Set \emph{true} to use mini
 flag\_landscape\_sets\_minimal\_brightness & bool  & Set \emph{true} to use value for minimal brightness for landscape from landscape settings.\\%\midrule
 flag\_enable\_illumination\_layer          & bool  & Set \emph{true} to use illumination layer for landscape.\\%\midrule
 flag\_enable\_labels                       & bool  & Set \emph{true} to use landscape labels from gazetteer layer.\\%\midrule
+label\_font\_size                          & int   & Font size for landscape labels. \\
+label\_color                               & \ccbox{0.0,1.0,0.0} & Color for the labels \\
+label\_angle                               & int   & Angle to display landscape labels $[0\ldots90]$. \\ 
+polyline\_thickness                        & int   & Thickness to draw polygon line, if one is defined $[0\ldots5]$\\
+polyline\_color                            & \ccbox{1.0,0.0,0.0} & Color for the polygon line, if one is defined \\
+flag\_transparency                         & bool  & Set \emph{true} to show landscape semitransparent.\\
+transparency                               & float & Use this transparency for landscapes. [0\ldots1] Typical value: \emph{0.5}\\
 atmospheric\_extinction\_coefficient       & float & Set atmospheric extinction coefficient $k$ [mag/airmass]\\%\midrule
 temperature\_C                             & float & Set atmospheric temperature [Celsius]\\%\midrule
 pressure\_mbar                             & float & Set atmospheric pressure [mbar]\\%\midrule
@@ -588,6 +609,7 @@ app\_locale           & string & Sets language used for Stellarium's user interf
                                   The value is a short locale code, e.g. \emph{en, de, en\_GB}.\\%\midrule
 time\_zone            & string & Sets the time zone. Valid values: \emph{system\_default}, 
                                  or some region/location combination, e.g. \emph{Pacific/Marquesas}\\%\midrule
+flag\_dst             & bool   & Set \emph{true} to apply daylight saving time as required by time zone.\\
 time\_display\_format & string & time display format: can be \emph{system\_default}, \emph{24h} or \emph{12h}.\\%\midrule
 date\_display\_format & string & date display format: can be \emph{system\_default}, \emph{mmddyyyy}, \emph{ddmmyyyy}, \emph{yyyymmdd} (ISO8601), \emph{wwmmddyyyy}, \emph{wwddmmyyyy}, \emph{wwyyyymmdd}.\\\bottomrule
 \end{tabularx}
@@ -604,6 +626,7 @@ screenshot\_custom\_size    & bool   & \emph{true} if you want to specify partic
 screenshot\_custom\_width   & int    & custom width of screenshots. Max.\ available size is hardware dependent!\\
 screenshot\_custom\_height  & int    & custom height of screenshots. Max.\ available size is hardware dependent!\\
 screenshot\_dpi             & int    & DPI setting for screenshots. \\\midrule
+observinglists\_dir         & string & Default path for saving and loading observing lists. Defaults to the user's home dir.\\
 version                     & string & Version of Stellarium. This parameter may be used to detect necessary changes in config.ini file, do not edit.\\%\midrule
 use\_separate\_output\_file & bool   & Set to \emph{true} if you want to create a new file for script output for each start of Stellarium\\%\midrule
 restore\_defaults           & bool   & If \emph{true}, Stellarium will restore default settings at startup. 
@@ -629,7 +652,7 @@ startup\_time\_mode             & string & Set the start-up time mode, can be \e
                                            or \emph{Preset} (start at time defined by preset\_sky\_time)\\%\midrule
 flag\_enable\_zoom\_keys        & bool   & Set to \emph{false} if you want to disable the zoom\\%\midrule
 flag\_manual\_zoom              & bool   & Set to \emph{false} for normal zoom behaviour as described in this guide. 
-                                           When set to true, the auto zoom feature only moves in a small amount and must be pressed many times\\%\midrule
+                                           When set to \emph{true}, the auto zoom feature only moves in a small amount and must be pressed many times\\%\midrule
 flag\_enable\_move\_keys        & bool   & Set to \emph{false} if you want to disable the arrow keys\\%\midrule
 flag\_enable\_mouse\_navigation & bool   & Set to \emph{false} if you want to disable the mouse pan (drag).\\%\midrule
 flag\_enable\_mouse\_zooming & bool   & Set to \emph{false} if you want to disable the mouse zooming (mousewheel).\\%\midrule
@@ -641,12 +664,13 @@ init\_view\_pos                 & floats & Initial viewing direction. This is a 
                                            To look Northwest and up at $45\degree$, use \emph{-1,-1,1} and so on.\\%\midrule
 auto\_move\_duration            & float  & Duration (seconds) for the program to move to point at an object when the space bar is pressed. 
                                            Typical value: \emph{1.4}\\%\midrule
+return\_home\_duration          & float  & Duration (seconds) of movement of returning to a home location (for a demo). Default value: \emph{0.}\\%\midrule
+return\_fov\_duration           & float  & Duration (seconds) of zooming to an initial field of view value (for a demo). Default value: \emph{1.}\\%\midrule
 mouse\_zoom                     & float  & Sets the mouse zoom amount (mouse-wheel)\\%\midrule
 move\_speed                     & float  & Sets the speed of movement\\%\midrule
 zoom\_speed                     & float  & Sets the zoom speed\\%\midrule
 viewing\_mode                   & string & If set to \emph{horizon}, the viewing mode simulate an alt/azi mount, 
                                            if set to \emph{equator}, the viewing mode simulates an equatorial mount\\%\midrule
-flag\_manual\_zoom              & bool   & Set to \emph{true} if you want to auto-zoom in incrementally.\\%\midrule
 auto\_zoom\_out\_resets\_direction & bool & Set to \emph{true} if you want to auto-zoom restoring direction.\\%\midrule
 time\_correction\_algorithm     & string & Algorithm of DeltaT correction.\\\bottomrule %% TODO: list values! And write ref. chapter!
 \end{longtable}
@@ -849,6 +873,7 @@ screen\_y        & int    & Vertical   position of the top-left corner in window
 viewport\_effect & string & This is used when the spheric mirror display mode is activated. Values include \emph{none} and \emph{sphericMirrorDistorter}.\\%\midrule
 minimum\_fps     & int    & Sets the minimum number of frames per second to display at (hardware performance permitting)\\%\midrule
 maximum\_fps     & int    & Sets the maximum number of frames per second to display at. This is useful to reduce power consumption in laptops.\\%\midrule
+min\_time\_bewteen\_frames & int & Sets the minimum time (in milliseconds) between the end of rendering and the start of the next frame. Only takes effect on Macs. Used to work around \url{https://github.com/Stellarium/stellarium/issues/2778}.\\
 multisampling    & int    & Sets the number of samples to use for multisampling antialiasing. \emph{0} disables antialiasing, \emph{1} is no-op (single sample per pixel), 
                             higher values increase smoothness and degrade performance. Too high a value may result in excessive blurriness of the GUI. A good starting value to try is \emph{4}.\\
 planet\_shadows\_supersampling & bool & Improves quality of shadows on the Moon by evaluating the color for each multisampling sample, rather than once per pixel. 
@@ -887,7 +912,9 @@ flag\_isolated\_trails        & bool & Set to \emph{true} if you only want to se
 number\_isolated\_trails      & int  & Number of isolated trails for latest selected Solar system bodies [1..5].\\%\midrule
 max\_trail\_points            & int  & Limit maximum length of trails. Trails are drawn for 1 year or this number of computing steps.
                                        Default 5000, reduce if drawing trails slows down the program too much.\\
-flag\_isolated\_orbits        & bool & Set to \emph{true} if you want to see orbits only for selected planet and their moons.\\\midrule
+flag\_planets\_orbits\_only   & bool & Set to \emph{true} if you want to suppress orbits of minor bodies and moons.\\
+flag\_isolated\_orbits        & bool & Set to \emph{true} if you want to see orbits only for selected planet.\\
+flag\_orbits\_with\_moons     & bool & Set to \emph{true} if you want to see also orbits of the selected planet.\\\midrule
 line\_thickness               & int  & Set the line thickness for grids and lines. Typical value: \emph{1}\\%\midrule
 part\_thickness               & int  & Set the line thickness for line partitions. Typical value: \emph{1}\\\midrule
 flag\_azimutal\_grid          & bool & Display azimuthal grid \\%\midrule
@@ -952,7 +979,10 @@ rayhelper\_line\_thickness         & int   & thickness of the ray helper lines [
 flag\_night                        & bool  & Enable night mode (red-only mode) on startup\\\midrule
 light\_pollution\_luminance        & float & Sets the level of the light pollution simulation\\\midrule %% TODO: WHAT IS THIS?
 use\_luminance\_adaptation         & bool  & Enable dynamic eye adaptation\\\midrule %% TODO: DESCRIBE!
-sky\_brightness\_label\_threshold  & float & Sky brightness [$cd/m^2$] to show infotext in black \\ %% 
+sky\_brightness\_label\_threshold  & float & Sky brightness [$cd/m^2$] to show infotext in black \\\midrule  %% 
+flag\_landscape\_autoselection     & bool  & load fitting landscape after changing planet (use \emph{zero} landscape when no fitting found).\\
+flag\_environment\_auto\_enable    & bool  & Enable/disable atmosphere, fog and cardinals for observer location when switching planet.\\
+flag\_show\_selection\_marker      & bool  & Enable/disable visibility of pointers for selected objects.\\
 \bottomrule
 \end{longtable}
 

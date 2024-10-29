@@ -63,19 +63,19 @@ class RemoteControl : public StelModule
 		   NOTIFY flagEnableCorsChanged)
 public:
 	RemoteControl();
-	virtual ~RemoteControl() Q_DECL_OVERRIDE;
+	~RemoteControl() override;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
-	virtual void init() Q_DECL_OVERRIDE;
-	virtual void update(double deltaTime) Q_DECL_OVERRIDE;
-	virtual void draw(StelCore* core) Q_DECL_OVERRIDE;
-	virtual double getCallOrder(StelModuleActionName actionName) const Q_DECL_OVERRIDE;
-	virtual void handleKeys(QKeyEvent* event) Q_DECL_OVERRIDE {event->setAccepted(false);}
+	void init() override;
+	void update(double deltaTime) override;
+	void draw(StelCore* core) override;
+	double getCallOrder(StelModuleActionName actionName) const override;
+	void handleKeys(QKeyEvent* event) override {event->setAccepted(false);}
 
 	//virtual void handleMouseClicks(class QMouseEvent* event);
 	//virtual bool handleMouseMoves(int x, int y, Qt::MouseButtons b);
-	virtual bool configureGui(bool show=true) Q_DECL_OVERRIDE;
+	bool configureGui(bool show=true) override;
 	///////////////////////////////////////////////////////////////////////////
 	// Property getters
 	bool getFlagEnabled() const {return enabled;}
@@ -186,9 +186,9 @@ class RemoteControlStelPluginInterface : public QObject, public StelPluginInterf
 	Q_PLUGIN_METADATA(IID StelPluginInterface_iid)
 	Q_INTERFACES(StelPluginInterface)
 public:
-	virtual StelModule* getStelModule() const Q_DECL_OVERRIDE;
-	virtual StelPluginInfo getPluginInfo() const Q_DECL_OVERRIDE;
-	virtual QObjectList getExtensionList() const Q_DECL_OVERRIDE { return QObjectList(); }
+	StelModule* getStelModule() const override;
+	StelPluginInfo getPluginInfo() const override;
+	//QObjectList getExtensionList() const override { return QObjectList(); }
 };
 
 #endif /*REMOTECONTROL_HPP*/

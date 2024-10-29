@@ -39,10 +39,10 @@ SyncServer::SyncServer(QObject* parent, bool allowVersionMismatch)
 	connect(qserver,SIGNAL(acceptError(QAbstractSocket::SocketError)),this,SLOT(connectionError(QAbstractSocket::SocketError)));
 
 	//create message handlers
-	handlerList.resize(MSGTYPE_SIZE);
-	handlerList[ERROR] =  new ServerErrorHandler();
-	handlerList[CLIENT_CHALLENGE_RESPONSE] = new ServerAuthHandler(this, allowVersionMismatch);
-	handlerList[ALIVE] = new ServerAliveHandler();
+	handlerHash.clear();
+	handlerHash[SYNC_ERROR] =  new ServerErrorHandler();
+	handlerHash[CLIENT_CHALLENGE_RESPONSE] = new ServerAuthHandler(this, allowVersionMismatch);
+	handlerHash[ALIVE] = new ServerAliveHandler();
 }
 
 SyncServer::~SyncServer()
@@ -50,12 +50,12 @@ SyncServer::~SyncServer()
 	stop();
 
 	//delete handlers
-	for (auto* h : qAsConst(handlerList))
+	for (auto* h : std::as_const(handlerHash))
 	{
 		if(h)
 			delete h;
 	}
-	handlerList.clear();
+	handlerHash.clear();
 
 	qCDebug(syncServer)<<"Destroyed";
 }
@@ -78,7 +78,6 @@ bool SyncServer::start(quint16 port)
 		addSender(new SelectionEventSender());
 		addSender(new StelPropertyEventSender());
 		addSender(new ViewEventSender());
-		addSender(new FovEventSender());
 	}
 	else
 		qCCritical(syncServer)<<"Error while starting:"<<qserver->errorString();
@@ -93,7 +92,7 @@ void SyncServer::addSender(SyncServerEventSender *snd)
 
 void SyncServer::broadcastMessage(const SyncMessage &msg)
 {
-	qCDebug(syncServer)<<"Broadcast message"<<msg;
+	qCDebug(syncServer)<<"Broadcast message"<<msg.toString();
 	qint64 size = msg.createFullMessage(broadcastBuffer);
 
 	if(!size)
@@ -107,7 +106,7 @@ void SyncServer::broadcastMessage(const SyncMessage &msg)
 		return;
 	}
 
-	for (auto* client : qAsConst(clients))
+	for (auto* client : std::as_const(clients))
 	{
 		if(client->isAuthenticated())
 		{
@@ -126,7 +125,7 @@ void SyncServer::stop()
 		qserver->close();
 
 		//delete senders
-		for (auto* s : qAsConst(senderList))
+		for (auto* s : std::as_const(senderList))
 		{
 			if(s)
 				delete s;
@@ -148,7 +147,7 @@ void SyncServer::stop()
 
 void SyncServer::update()
 {
-	for (auto* s : qAsConst(senderList))
+	for (auto* s : std::as_const(senderList))
 	{
 		s->update();
 	}
@@ -166,7 +165,7 @@ void SyncServer::timerEvent(QTimerEvent *evt)
 void SyncServer::checkTimeouts()
 {
 	//iterate over the connected clients
-	for (auto* client : qAsConst(clients))
+	for (auto* client : std::as_const(clients))
 	{
 		client->checkTimeout();
 	}
@@ -194,8 +193,8 @@ void SyncServer::handleNewConnection()
 {
 	QTcpSocket* newConn = qserver->nextPendingConnection();
 
-	SyncRemotePeer* newClient = new SyncRemotePeer(newConn,false,handlerList);
-	newClient->peerLog("New client connection");
+	SyncRemotePeer* newClient = new SyncRemotePeer(newConn,false,handlerHash);
+	newClient->peerLog(QtDebugMsg, "New client connection");
 	//add to client list
 	clients.append(newClient);
 
@@ -213,7 +212,7 @@ void SyncServer::handleNewConnection()
 void SyncServer::clientAuthenticated(SyncRemotePeer &peer)
 {
 	//we have to send the client the current app state
-	for (auto* s : qAsConst(senderList))
+	for (auto* s : std::as_const(senderList))
 	{
 		s->newClientConnected(peer);
 	}

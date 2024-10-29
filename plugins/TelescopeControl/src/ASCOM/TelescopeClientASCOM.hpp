@@ -33,10 +33,11 @@ public:
 	~TelescopeClientASCOM() override;
 
 	Vec3d getJ2000EquatorialPos(const StelCore *core) const override;
-	void move(double angle, double speed) override;
 	void telescopeGoto(const Vec3d &j2000Pos, StelObjectP selectObject) override;
 	void telescopeSync(const Vec3d& j2000Pos, StelObjectP selectObject) override;
+	bool isTelescopeSyncSupported() const override {return true;}
 	void telescopeAbortSlew() override;
+	bool isAbortSlewSupported() const override {return true;}
 	bool isConnected() const override;
 	bool hasKnownPosition() const override;
 	static bool useJNow(ASCOMDevice::ASCOMEquatorialCoordinateType coordinateType, bool ascomUseDeviceEqCoordType, TelescopeControl::Equinox equinox);

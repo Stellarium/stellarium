@@ -35,6 +35,8 @@
 # define GL(line) line
 #endif
 
+class QOpenGLFunctions_3_3_Core;
+
 //! Namespace containing some OpenGL helpers
 namespace StelOpenGL
 {
@@ -56,6 +58,8 @@ namespace StelOpenGL
 	//! Returns a prefix containing #version directive and a few defines for
 	//  the GLSL version supported in current GL context.
 	QByteArray globalShaderPrefix(ShaderType);
+	//! Returns high-graphics OpenGL functions, for use in non-ANGLE/CompatProfile/etc. modes.
+	QOpenGLFunctions_3_3_Core* highGraphicsFunctions();
 }
 
 // This is still needed for the ARM platform (armhf)

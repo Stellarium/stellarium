@@ -58,10 +58,10 @@ class OnlineQueries : public StelModule
 
 public:
 	OnlineQueries();
-	virtual ~OnlineQueries() Q_DECL_OVERRIDE;
+	virtual ~OnlineQueries() ;
 
-	virtual void init() Q_DECL_OVERRIDE;
-	virtual bool configureGui(bool show) Q_DECL_OVERRIDE;
+	void init() override;
+	bool configureGui(bool show) override;
 
 signals:
 	void flagEnabledChanged(bool b);
@@ -78,7 +78,8 @@ public slots:
 	void queryWikipedia();    //!< Connect from a button that triggers information query
 	void queryAAVSO();        //!< Connect from a button that triggers information query
 	void queryGCVS();         //!< Connect from a button that triggers information query
-	void queryAncientSkies(); //!< Connect from a button that triggers information query
+	// The Ancient-Skies.org website did not resurrect as planned in 2022. Leave it here, maybe in a few years.
+	//void queryAncientSkies(); //!< Connect from a button that triggers information query
 	void queryCustomSite1();  //!< Connect from a button that triggers information query
 	void queryCustomSite2();  //!< Connect from a button that triggers information query
 	void queryCustomSite3();  //!< Connect from a button that triggers information query
@@ -101,10 +102,10 @@ private slots:
 
 private:
 	//! The actual query worker: build name or HIP number from currently selected object
-	void query(QString url, bool useHip);
+	void query(const QString &url, bool useHip);
 	void createToolbarButton() const;
-	void setOutputHtml(QString html); //!< Forward html to GUI dialog
-	void setOutputUrl(QUrl url);      //!< Forward URL to GUI dialog
+	void setOutputHtml(const QString &html); //!< Forward html to GUI dialog
+	void setOutputUrl(const QUrl &url);      //!< Forward URL to GUI dialog
 	OnlineQueriesDialog* dialog;
 	QSettings* conf;
 	bool enabled;                     //!< show dialog?
@@ -141,9 +142,9 @@ class OnlineQueriesPluginInterface : public QObject, public StelPluginInterface
 	Q_PLUGIN_METADATA(IID StelPluginInterface_iid)
 	Q_INTERFACES(StelPluginInterface)
 public:
-	virtual StelModule* getStelModule() const Q_DECL_OVERRIDE;
-	virtual StelPluginInfo getPluginInfo() const Q_DECL_OVERRIDE;
-	virtual QObjectList getExtensionList() const Q_DECL_OVERRIDE { return QObjectList(); }
+	StelModule* getStelModule() const override;
+	StelPluginInfo getPluginInfo() const override;
+	//QObjectList getExtensionList() const override { return QObjectList(); }
 };
 
 #endif /* ONLINEQUERIES_HPP */

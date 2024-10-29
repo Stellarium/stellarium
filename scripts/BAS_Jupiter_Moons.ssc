@@ -1,0 +1,38 @@
+//
+// Name: Jupiter Moons
+// License: Public Domain
+// Author: C. Gaudion FRAS, Bridgend Astronomical Society
+// Version: 20231129.1
+// Description: Jupiter's Moons Orbital Simulation
+
+
+
+LandscapeMgr.setFlagAtmosphere(false);
+LandscapeMgr.setFlagLandscape(false);
+StelMovementMgr.setEquatorialMount(true);
+
+core.wait(2);
+
+defaultWait = 10;
+
+LabelMgr.labelScreen("BAS - Jupiter's Moons Orbital Simulation",400,50,true,25,"#ff0000");
+LabelMgr.labelScreen("Note: Jupiter may not actually be visible from your location at this time",400,100,true,25,"#ff0000");
+core.wait(5);
+
+core.selectObjectByName("Jupiter", true);
+	
+StelMovementMgr.autoZoomIn(6);
+	
+core.setTimeRate(600);
+	
+core.wait(100);
+
+LabelMgr.labelScreen("Simulation complete",800,1500,true,30,"#ff0000");
+
+core.setRealTime();
+
+core.wait(5);
+
+LabelMgr.deleteAllLabels();
+
+//End of Sim

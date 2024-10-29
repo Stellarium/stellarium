@@ -498,3 +498,48 @@ void AngleSpinBox::formatText(void)
 	lineEdit()->setCursorPosition(cursorPos);
 }
 
+QSize AngleSpinBox::minimumSizeHint() const
+{
+	QString refText;
+	const auto signPlaceholder = minRad >= 0 ? positivePrefix(currentPrefixType) : negativePrefix(currentPrefixType);
+	switch (angleSpinBoxFormat)
+	{
+		case DMSLetters:
+		case DMSSymbols:
+		case DMSLettersUnsigned:
+		case DMSSymbolsUnsigned:
+		{
+			if (angleSpinBoxFormat == DMSLetters || angleSpinBoxFormat == DMSLettersUnsigned)
+				refText = QString("%1%2d %3m %4s").arg(signPlaceholder).arg(359).arg(59)
+				                                  .arg(0, 0, 'f', decimalPlaces, ' ');
+			else
+				refText = QString("%1%2° %3' %4\"").arg(signPlaceholder).arg(359).arg(59)
+				                                   .arg(0, 0, 'f', decimalPlaces, ' ');
+			break;
+		}
+		case HMSLetters:
+		case HMSSymbols:
+		{
+			if (angleSpinBoxFormat == HMSLetters)
+				refText = QString("%1h %2m %3s").arg(23).arg(59).arg(0, 0, 'f', decimalPlaces, ' ');
+			else
+				refText = QString("%1h %2' %3\"").arg(23).arg(59).arg(0, 0, 'f', decimalPlaces, ' ');
+			break;
+		}
+		case DecimalDeg:
+		{
+			refText = QString("%1%2°").arg(signPlaceholder).arg(360, 0, 'f', decimalPlaces, ' ');
+			break;
+		}
+		default:
+		{
+			qWarning() << "AngleSpinBox::updateSizeHint - WARNING - unknown format" << static_cast<int>(angleSpinBoxFormat);
+			break;
+		}
+	}
+	const QFontMetrics fm(font());
+	const auto minWidth = fm.size(Qt::TextSingleLine, refText).width();
+	auto size = QAbstractSpinBox::minimumSizeHint();
+	size.rwidth() += minWidth;
+	return size;
+}

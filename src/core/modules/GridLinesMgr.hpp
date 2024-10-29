@@ -201,7 +201,7 @@ class GridLinesMgr : public StelModule
 	Q_PROPERTY(float partThickness			READ getPartThickness		WRITE setPartThickness			NOTIFY partThicknessChanged)
 public:
 	GridLinesMgr();
-	virtual ~GridLinesMgr() Q_DECL_OVERRIDE;
+	~GridLinesMgr() override;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
@@ -209,7 +209,7 @@ public:
 	//! application settings, and according to the settings there
 	//! sets the visibility of the Equatorial Grids, Ecliptical Grids, Azimuthal Grid, Meridian Line,
 	//! Equator Line and Ecliptic Lines.
-	virtual void init() Q_DECL_OVERRIDE;
+	void init() override;
 
 	//! Get the module ID, returns "GridLinesMgr".
 	virtual QString getModuleID() const {return "GridLinesMgr";}
@@ -218,14 +218,14 @@ public:
 	//! Draws the Equatorial Grids, Ecliptical Grids, Azimuthal Grid, Meridian Line, Equator Line,
 	//! Ecliptic Lines, Precession Circles, Conjunction-Opposition Line, east-west vertical and colures according to the
 	//! various flags which control their visibility.
-	virtual void draw(StelCore* core) Q_DECL_OVERRIDE;
+	void draw(StelCore* core) override;
 
 	//! Update time-dependent features.
 	//! Used to control fading when turning on and off the grid lines and great circles.
-	virtual void update(double deltaTime) Q_DECL_OVERRIDE;
+	void update(double deltaTime) override;
 
 	//! Used to determine the order in which the various modules are drawn.
-	virtual double getCallOrder(StelModuleActionName actionName) const Q_DECL_OVERRIDE;
+	double getCallOrder(StelModuleActionName actionName) const override;
 
 	///////////////////////////////////////////////////////////////////////////////////////
 	// Setter and getters

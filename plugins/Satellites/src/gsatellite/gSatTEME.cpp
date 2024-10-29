@@ -36,8 +36,8 @@
 
 // GKepFile
 #include "gSatTEME.hpp"
-#include <iostream>
-#include <iomanip>
+//#include <iostream>
+//#include <iomanip>
 #include <math.h>
 
 #include "mathUtils.hpp"
@@ -55,7 +55,7 @@
 // Constructors
 gSatTEME::gSatTEME(const char *pstrName, char *pstrTleLine1, char *pstrTleLine2)
 {
-	double startmfe, stopmfe, deltamin;
+	double startmfe, stopmfe, deltamin; // dummies
 
 	m_SatName = pstrName;
 
@@ -96,16 +96,16 @@ void gSatTEME::setMinSinceKepEpoch(double ai_minSinceKepEpoch)
 Vec3d gSatTEME::computeSubPoint(gTime ai_Time)
 {
 	Vec3d resultVector; // (0) Latitude, (1) Longitude, (2) altitude
-	double theta, r, e2, phi, c;
 
-	theta = atan2(m_Position[1], m_Position[0]); // radians
-	resultVector[ LONGITUDE] = fmod((theta - ai_Time.toThetaGMST()), K2PI);  //radians
+	const double theta = atan2(m_Position[1], m_Position[0]); // radians
+	resultVector[ LONGITUDE] = fmod((theta - ai_Time.toThetaGMST()), 2.*M_PI);  //radians
 
 
-	r = std::sqrt(Sqr(m_Position[0]) + Sqr(m_Position[1]));
-	e2 = __f*(2. - __f);
+	const double r = std::sqrt(Sqr(m_Position[0]) + Sqr(m_Position[1]));
+	const double e2 = __f*(2. - __f);
 	resultVector[ LATITUDE] = atan2(m_Position[2],r); /*radians*/
 
+	double phi, c;
 	do
 	{
 		phi = resultVector[ LATITUDE];
@@ -116,11 +116,11 @@ Vec3d gSatTEME::computeSubPoint(gTime ai_Time)
 
 	resultVector[ ALTITUDE] = r/cos(resultVector[ LATITUDE]) - EARTH_RADIUS*c;/*kilometers*/
 
-	if(resultVector[ LATITUDE] > (KPI/2.0)) resultVector[ LATITUDE] -= K2PI;
+	if(resultVector[ LATITUDE] > (M_PI/2.0)) resultVector[ LATITUDE] -= 2.*M_PI;
 
-	resultVector[LATITUDE]  = resultVector[LATITUDE]/KDEG2RAD;
-	resultVector[LONGITUDE] = resultVector[LONGITUDE]/KDEG2RAD;
-	if(resultVector[LONGITUDE] < -180.0) resultVector[LONGITUDE] +=360;
+	resultVector[LATITUDE]  *= M_180_PI;
+	resultVector[LONGITUDE] *= M_180_PI;
+	if(resultVector[LONGITUDE] < -180.0) resultVector[LONGITUDE] += 360;
 	else if(resultVector[LONGITUDE] > 180.0) resultVector[LONGITUDE] -= 360;
 
 	return resultVector;

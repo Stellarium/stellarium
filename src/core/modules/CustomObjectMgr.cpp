@@ -26,9 +26,12 @@
 #include "StelUtils.hpp"
 #include "StelTranslator.hpp"
 #include "CustomObjectMgr.hpp"
+#include "StelJsonParser.hpp"
 
+#include <QDir>
 #include <QSettings>
 #include <QKeyEvent>
+#include <QFileInfo>
 
 CustomObjectMgr::CustomObjectMgr()
 	: countMarkers(0)
@@ -58,8 +61,12 @@ void CustomObjectMgr::handleMouseClicks(class QMouseEvent* e)
 {
 	StelCore *core = StelApp::getInstance().getCore();
 	Vec3d mousePosition = core->getMouseJ2000Pos();
+	// Make sure the modifiers are exact, not just "Shift is pressed", but "Shift is pressed while Ctrl and Alt aren't"
+	const auto modifiers = e->modifiers() & (Qt::ShiftModifier | Qt::ControlModifier | Qt::AltModifier);
+	const bool modifierIsShift = modifiers == Qt::ShiftModifier;
+	const bool modifierIsShiftAlt = modifiers == (Qt::ShiftModifier | Qt::AltModifier);
 	// Shift + LeftClick -- Add custom marker
-	if (e->modifiers().testFlag(Qt::ShiftModifier) && e->button()==Qt::LeftButton && e->type()==QEvent::MouseButtonPress)
+	if (modifierIsShift && e->button()==Qt::LeftButton && e->type()==QEvent::MouseButtonPress)
 	{
 		addCustomObject(QString("%1 %2").arg(N_("Marker")).arg(countMarkers + 1), mousePosition, true);
 
@@ -67,8 +74,7 @@ void CustomObjectMgr::handleMouseClicks(class QMouseEvent* e)
 		return;
 	}
 	// Shift + Alt + RightClick -- Removes all custom markers
-	// Changed by snowsailor 5/04/2017
-	if(e->modifiers().testFlag(Qt::ShiftModifier) && e->modifiers().testFlag(Qt::AltModifier) && e->button() == Qt::RightButton && e->type() == QEvent::MouseButtonPress)
+	if(modifierIsShiftAlt && e->button() == Qt::RightButton && e->type() == QEvent::MouseButtonPress)
 	{
 		//Delete ALL custom markers
 		removeCustomObjects();
@@ -76,8 +82,7 @@ void CustomObjectMgr::handleMouseClicks(class QMouseEvent* e)
 		return;
 	}
 	// Shift + RightClick -- Removes the closest marker within a radius specified within
-	// Added by snowsailor 5/04/2017
-	if (e->modifiers().testFlag(Qt::ShiftModifier) && e->button()==Qt::RightButton && e->type()==QEvent::MouseButtonPress)
+	if (modifierIsShift && e->button()==Qt::RightButton && e->type()==QEvent::MouseButtonPress)
 	{
 		const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000, StelCore::RefractionAuto);
 		Vec3d winpos;
@@ -88,7 +93,7 @@ void CustomObjectMgr::handleMouseClicks(class QMouseEvent* e)
 		CustomObjectP closest;
 		//Smallest valid radius will be at most `radiusLimit`, so radiusLimit + 10 is plenty as the default
 		float smallestRad = radiusLimit + 10;
-		for (const auto& cObj : qAsConst(customObjects))
+		for (const auto& cObj : std::as_const(customObjects))
 		{
 			//Get the position of the custom object
 			Vec3d a = cObj->getJ2000EquatorialPos(core);
@@ -120,19 +125,83 @@ void CustomObjectMgr::init()
 	texPointer = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/pointeur2.png");
 
 	customObjects.clear();
+	persistentObjects.clear();
 
 	setMarkersColor(Vec3f(conf->value("color/custom_marker_color", "0.1,1.0,0.1").toString()));
 	setMarkersSize(conf->value("gui/custom_marker_size", 5.f).toFloat());
 	// Limit the click radius to 15px in any direction
 	setActiveRadiusLimit(conf->value("gui/custom_marker_radius_limit", 15).toInt());
-	setSelectPriority(conf->value("gui/custom_marker_priority", 0.f).toFloat());
+	setSelectPriority(conf->value("gui/custom_marker_priority", -2.f).toFloat());
+
+	// Custom objects for Search Tool
+	persistentCOFile = StelFileMgr::getUserDir()+"/data/persistentCustomObjects.json";
+	if(QFileInfo::exists(persistentCOFile))
+	{
+		//qWarning().noquote() << "CustomObjectMgr: loading file:" << QDir::toNativeSeparators(persistentCOFile);
+		// Loading list of saved custom objects
+		loadPersistentObjects();
+	}
+	else
+	{
+		//qWarning().noquote() << "CustomObjectMgr: persistentCustomObjects.json does not exist - creating an empty file:" << QDir::toNativeSeparators(persistentCOFile);
+		// Create a file with empty list of custom objects
+		savePersistentObjects();
+	}
 
 	GETSTELMODULE(StelObjectMgr)->registerStelObjectMgr(this);
 }
 
+void CustomObjectMgr::loadPersistentObjects()
+{
+	QFile dataFile;
+	dataFile.setFileName(persistentCOFile);
+	if (dataFile.open(QIODevice::ReadOnly | QIODevice::Text))
+	{
+		QVariantMap map = StelJsonParser::parse(dataFile.readAll()).toMap();
+		dataFile.close();
+
+		QVariantMap pcoMap = map.value("customObjects").toMap();
+		for (auto &pcoKey : pcoMap.keys())
+		{
+			Vec3d coordinates(pcoMap.value(pcoKey).toString());
+			CustomObjectP custObj(new CustomObject(pcoKey, coordinates, false));
+			if (custObj->initialized)
+				persistentObjects.append(custObj);
+		}
+	}
+	else
+		qWarning().noquote() << "CustomObjectMgr: cannot open" << QDir::toNativeSeparators(persistentCOFile);
+}
+
+void CustomObjectMgr::savePersistentObjects()
+{
+	QFile dataFile;
+	dataFile.setFileName(persistentCOFile);
+	if (dataFile.open(QIODevice::WriteOnly | QIODevice::Truncate | QIODevice::Text | QIODevice::Unbuffered))
+	{
+		StelCore* core = StelApp::getInstance().getCore();
+		QVariantMap map, pcObjects;
+		for (const auto& cObj : std::as_const(persistentObjects))
+		{
+			if (cObj && cObj->initialized)
+			{
+				pcObjects[cObj->getID()] = cObj->getJ2000EquatorialPos(core).toStr();
+			}
+		}
+		map["customObjects"] = pcObjects;
+
+		StelJsonParser::write(map, &dataFile);
+		dataFile.flush();
+		dataFile.close();
+	}
+	else
+		qDebug().noquote() << "CustomObjectMgr: can't create a file:" << QDir::toNativeSeparators(persistentCOFile);
+}
+
 void CustomObjectMgr::deinit()
 {
-	customObjects.clear();	
+	customObjects.clear();
+	persistentObjects.clear();
 	texPointer.clear();
 }
 
@@ -146,7 +215,29 @@ float CustomObjectMgr::getSelectPriority() const
 	return CustomObject::selectPriority;
 }
 
-void CustomObjectMgr::addCustomObject(QString designation, Vec3d coordinates, bool isVisible)
+void CustomObjectMgr::removePersistentObjects()
+{
+	GETSTELMODULE(StelObjectMgr)->unSelect();
+	persistentObjects.clear();
+	savePersistentObjects();
+	emit StelApp::getInstance().getCore()->updateSearchLists();
+}
+
+void CustomObjectMgr::addPersistentObject(const QString& designation, Vec3d coordinates)
+{
+	if (!designation.isEmpty())
+	{
+		CustomObjectP custObj(new CustomObject(designation, coordinates, false));
+		if (custObj->initialized)
+			persistentObjects.append(custObj);
+
+		savePersistentObjects();
+		emit StelApp::getInstance().getCore()->updateSearchLists();
+	}
+}
+
+
+void CustomObjectMgr::addCustomObject(const QString& designation, Vec3d coordinates, bool isVisible)
 {
 	if (!designation.isEmpty())
 	{
@@ -161,7 +252,7 @@ void CustomObjectMgr::addCustomObject(QString designation, Vec3d coordinates, bo
 	}
 }
 
-void CustomObjectMgr::addCustomObject(QString designation, const QString &ra, const QString &dec, bool isVisible)
+void CustomObjectMgr::addCustomObject(const QString& designation, const QString &ra, const QString &dec, bool isVisible)
 {
 	Vec3d j2000;
 	double dRa = StelUtils::getDecAngle(ra);
@@ -171,7 +262,7 @@ void CustomObjectMgr::addCustomObject(QString designation, const QString &ra, co
 	addCustomObject(designation, j2000, isVisible);
 }
 
-void CustomObjectMgr::addCustomObjectRaDec(QString designation, const QString &ra, const QString &dec, bool isVisible)
+void CustomObjectMgr::addCustomObjectRaDec(const QString& designation, const QString &ra, const QString &dec, bool isVisible)
 {
 	Vec3d aim;
 	double dRa = StelUtils::getDecAngle(ra);
@@ -181,7 +272,7 @@ void CustomObjectMgr::addCustomObjectRaDec(QString designation, const QString &r
 	addCustomObject(designation, StelApp::getInstance().getCore()->equinoxEquToJ2000(aim, StelCore::RefractionOff), isVisible);
 }
 
-void CustomObjectMgr::addCustomObjectAltAzi(QString designation, const QString &alt, const QString &azi, bool isVisible)
+void CustomObjectMgr::addCustomObjectAltAzi(const QString& designation, const QString &alt, const QString &azi, bool isVisible)
 {
 	Vec3d aim;
 	double dAlt = StelUtils::getDecAngle(alt);
@@ -197,7 +288,7 @@ void CustomObjectMgr::addCustomObjectAltAzi(QString designation, const QString &
 
 void CustomObjectMgr::removeCustomObjects()
 {
-	setSelected("");
+	GETSTELMODULE(StelObjectMgr)->unSelect();
 	customObjects.clear();
 	//This marker count can be set to 0 because there will be no markers left and a duplicate will be impossible
 	countMarkers = 0;
@@ -206,15 +297,15 @@ void CustomObjectMgr::removeCustomObjects()
 
 void CustomObjectMgr::removeCustomObject(CustomObjectP obj)
 {
-	setSelected("");
+	GETSTELMODULE(StelObjectMgr)->unSelect();
 	customObjects.removeOne(obj);
 	emit StelApp::getInstance().getCore()->updateSearchLists();
 }
 
 void CustomObjectMgr::removeCustomObject(QString englishName)
 {
-	setSelected("");
-	for (const auto& cObj : qAsConst(customObjects))
+	GETSTELMODULE(StelObjectMgr)->unSelect();
+	for (const auto& cObj : std::as_const(customObjects))
 	{
 		//If we have a match for the thing we want to delete
 		if(cObj && cObj->getEnglishName()==englishName && cObj->initialized)
@@ -228,13 +319,20 @@ void CustomObjectMgr::draw(StelCore* core)
 	StelPainter painter(prj);
 	painter.setFont(font);
 
-	for (const auto& cObj : qAsConst(customObjects))
+	for (const auto& cObj : std::as_const(customObjects))
 	{
 		if (cObj && cObj->initialized)
 			cObj->draw(core, &painter);
 	}
 
-	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer())
+	for (const auto& pObj : std::as_const(persistentObjects))
+	{
+		if (pObj && pObj->initialized)
+			pObj->draw(core, &painter);
+	}
+
+	static StelObjectMgr *sObjMgr=GETSTELMODULE(StelObjectMgr);
+	if (sObjMgr->getFlagSelectedObjectPointer())
 		drawPointer(core, painter);
 }
 
@@ -242,7 +340,8 @@ void CustomObjectMgr::drawPointer(StelCore* core, StelPainter& painter)
 {
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 
-	const QList<StelObjectP> newSelected = GETSTELMODULE(StelObjectMgr)->getSelectedObject("CustomObject");
+	static StelObjectMgr *sObjMgr=GETSTELMODULE(StelObjectMgr);
+	const QList<StelObjectP> newSelected = sObjMgr->getSelectedObject("CustomObject");
 	if (!newSelected.empty())
 	{
 		const StelObjectP obj = newSelected[0];
@@ -282,6 +381,19 @@ QList<StelObjectP> CustomObjectMgr::searchAround(const Vec3d& av, double limitFo
 		}
 	}
 
+	for (const auto& pObj : persistentObjects)
+	{
+		if (pObj->initialized)
+		{
+			equPos = pObj->getJ2000EquatorialPos(core);
+			equPos.normalize();
+			if (equPos.dot(v) >= cosLimFov)
+			{
+				result.append(qSharedPointerCast<StelObject>(pObj));
+			}
+		}
+	}
+
 	return result;
 }
 
@@ -293,6 +405,12 @@ StelObjectP CustomObjectMgr::searchByName(const QString& englishName) const
 			return qSharedPointerCast<StelObject>(cObj);
 	}
 
+	for (const auto& pObj : persistentObjects)
+	{
+		if (pObj->getEnglishName().toUpper() == englishName.toUpper())
+			return qSharedPointerCast<StelObject>(pObj);
+	}
+
 	return Q_NULLPTR;
 }
 
@@ -302,6 +420,12 @@ StelObjectP CustomObjectMgr::searchByNameI18n(const QString& nameI18n) const
 	{
 		if (cObj->getNameI18n().toUpper() == nameI18n.toUpper())
 			return qSharedPointerCast<StelObject>(cObj);
+	}
+
+	for (const auto& pObj : persistentObjects)
+	{
+		if (pObj->getNameI18n().toUpper() == nameI18n.toUpper())
+			return qSharedPointerCast<StelObject>(pObj);
 	}
 
 	return Q_NULLPTR;
@@ -317,12 +441,21 @@ QStringList CustomObjectMgr::listAllObjects(bool inEnglish) const
 		{
 			result << cObj->getEnglishName();
 		}
+		for (const auto& pObj : persistentObjects)
+		{
+			result << pObj->getEnglishName();
+		}
+
 	}
 	else
 	{
 		for (const auto& cObj : customObjects)
 		{
 			result << cObj->getNameI18n();
+		}
+		for (const auto& pObj : persistentObjects)
+		{
+			result << pObj->getNameI18n();
 		}
 	}
 	return result;
@@ -336,7 +469,7 @@ void CustomObjectMgr::selectedObjectChange(StelModule::StelModuleSelectAction)
 		setSelected(qSharedPointerCast<CustomObject>(newSelected[0]));
 	}
 	else
-		setSelected("");
+		GETSTELMODULE(StelObjectMgr)->unSelect();
 }
 
 // Set selected planets by englishName
@@ -359,6 +492,11 @@ CustomObjectP CustomObjectMgr::searchByEnglishName(QString customObjectEnglishNa
 	{
 		if (p->getEnglishName() == customObjectEnglishName)
 			return p;
+	}
+	for (const auto& po : persistentObjects)
+	{
+		if (po->getEnglishName() == customObjectEnglishName)
+			return po;
 	}
 	return CustomObjectP();
 }

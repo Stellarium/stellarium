@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>677</width>
+    <width>760</width>
     <height>448</height>
    </rect>
   </property>
@@ -27,101 +27,10 @@
     <number>0</number>
    </property>
    <item row="0" column="0">
-    <widget class="BarFrame" name="TitleBar">
-     <property name="minimumSize">
-      <size>
-       <width>16</width>
-       <height>25</height>
-      </size>
+    <widget class="TitleBar" name="titleBar">
+     <property name="title">
+      <string>Observing lists</string>
      </property>
-     <property name="maximumSize">
-      <size>
-       <width>16777215</width>
-       <height>25</height>
-      </size>
-     </property>
-     <property name="frameShape">
-      <enum>QFrame::StyledPanel</enum>
-     </property>
-     <layout class="QHBoxLayout">
-      <property name="leftMargin">
-       <number>0</number>
-      </property>
-      <property name="topMargin">
-       <number>0</number>
-      </property>
-      <property name="rightMargin">
-       <number>4</number>
-      </property>
-      <property name="bottomMargin">
-       <number>0</number>
-      </property>
-      <item>
-       <spacer>
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item>
-       <widget class="QLabel" name="stelWindowTitle">
-        <property name="palette">
-         <palette>
-          <active/>
-          <inactive/>
-          <disabled/>
-         </palette>
-        </property>
-        <property name="font">
-         <font/>
-        </property>
-        <property name="text">
-         <string>Observing lists</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <spacer>
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item>
-       <widget class="StelCloseButton" name="closeStelWindow">
-        <property name="minimumSize">
-         <size>
-          <width>16</width>
-          <height>16</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>16</width>
-          <height>16</height>
-         </size>
-        </property>
-        <property name="focusPolicy">
-         <enum>Qt::NoFocus</enum>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-       </widget>
-      </item>
-     </layout>
     </widget>
    </item>
    <item row="1" column="0">
@@ -138,12 +47,6 @@
        <layout class="QHBoxLayout" name="horizontalLayout_editButtons">
         <item>
          <widget class="QPushButton" name="addObjectButton">
-          <property name="toolTip">
-           <string>Highlight all the objects of the selected list</string>
-          </property>
-          <property name="toolTipDuration">
-           <number>3</number>
-          </property>
           <property name="text">
            <string>Add object</string>
           </property>
@@ -151,12 +54,6 @@
         </item>
         <item>
          <widget class="QPushButton" name="removeObjectButton">
-          <property name="toolTip">
-           <string>Clear all the highlight objects</string>
-          </property>
-          <property name="toolTipDuration">
-           <number>3</number>
-          </property>
           <property name="text">
            <string>Remove object</string>
           </property>
@@ -258,6 +155,16 @@
         </item>
         <item>
          <widget class="QLineEdit" name="creationDateLineEdit"/>
+        </item>
+        <item>
+         <widget class="QLabel" name="lastEditLabel">
+          <property name="text">
+           <string>Last edit:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="lastEditLineEdit"/>
         </item>
        </layout>
       </item>
@@ -494,6 +401,41 @@
           </property>
          </spacer>
         </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_obsListDir">
+          <item>
+           <widget class="QLabel" name="label">
+            <property name="toolTip">
+             <string>Observing Lists Directory</string>
+            </property>
+            <property name="text">
+             <string>Dir</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="obsListDirEdit"/>
+          </item>
+          <item>
+           <widget class="QPushButton" name="obsListBrowseButton">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset resource="../../data/gui/guiRes.qrc">
+              <normaloff>:/graphicGui/uibtFolder.png</normaloff>
+              <disabledoff>:/graphicGui/uibtFolder-disabled.png</disabledoff>:/graphicGui/uibtFolder.png</iconset>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
        </layout>
       </item>
      </layout>
@@ -503,7 +445,7 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>BarFrame</class>
+   <class>TitleBar</class>
    <extends>QFrame</extends>
    <header>Dialog.hpp</header>
    <container>1</container>
@@ -514,6 +456,8 @@
    <header>gui/StelCloseButton.hpp</header>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="../../data/gui/guiRes.qrc"/>
+ </resources>
  <connections/>
 </ui>

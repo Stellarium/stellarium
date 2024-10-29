@@ -165,11 +165,13 @@ void APIController::applyAPIResponse(const APIServiceResponse &apiresponse, Http
 	}
 
 	//apply headers
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
-	httpresponse.getHeaders().insert(apiresponse.headers);
-#else
-	httpresponse.getHeaders().unite(apiresponse.headers);
-#endif
+	QMapIterator<QByteArray,QByteArray> i(apiresponse.headers);
+	while (i.hasNext())
+	{
+		i.next();
+		httpresponse.getHeaders().insert(i.key(), i.value());
+	}
+
 	//send response data, if any
 	if(apiresponse.responseData.isEmpty())
 	{

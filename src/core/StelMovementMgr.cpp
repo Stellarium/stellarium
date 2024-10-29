@@ -632,7 +632,8 @@ void StelMovementMgr::handleMouseClicks(QMouseEvent* event)
 			}
 			else if (event->type()==QEvent::MouseButtonPress)
 			{
-				if (event->modifiers() & Qt::ControlModifier)
+				const auto modifiers = event->modifiers() & (Qt::ControlModifier|Qt::ShiftModifier|Qt::AltModifier);
+				if (modifiers == Qt::ControlModifier)
 				{
 					dragTimeMode=true;
 					beforeTimeDragTimeRate=core->getTimeRate();
@@ -1147,7 +1148,7 @@ void StelMovementMgr::updateVisionVector(double deltaTime)
 			move.coef=1.f;
 
 			//qDebug() << "Mount/Pole difference =" << fabs((fabs(viewDirectionMountFrame.v[2]) - 1.));
-			if (fabs((fabs(viewDirectionMountFrame.v[2]) - 1.)) < 0.01 )
+			if (fabs((fabs(viewDirectionMountFrame.v[2]) - 1.)) < 0.00001 )
 			{
 				//qDebug() << "ATTENTION: View towards or near the pole of the mount frame. This would cause black screen or orientation jitter.";
 				//qDebug() << "\tviewDirectionMountFrame=" << viewDirectionMountFrame;
@@ -1609,6 +1610,7 @@ void StelMovementMgr::panView(const double deltaAz, const double deltaAlt)
 		{
 			setViewUpVector(Vec3d(0., 0., 1.));
 		}
+		emit currentDirectionChanged();
 	}
 }
 

@@ -33,7 +33,7 @@ This plugin serves several purposes:
   one eyepiece may be better suited to observe a particular target than another. 
   This can also be very useful for deciding what telescope is best suited to a style of viewing. 
   And with the support for binoculars, you also have the ability to understand just about any type of optics-enhanced visual observing.
-\item to show what a particular combination of camera and lens or telescope would be able to photograph of the sky. 
+\item to show what a particular combination of camera and telescope (or photographic lens) would be able to photograph of the sky. 
 \item lastly, with the help of the Telrad sight, understand where object in the sky are in relation to each other. 
 %This can be very useful if you have a non-GOTO telescope, and to get an idea of how to star-hop from a known location to an area of interest.
 This can be helpful for star-hopping with a non-GOTO telescope. 
@@ -288,17 +288,67 @@ The fields on this tab are:
 \item[Binoculars] -- selecting this checkbox tells the system that this eyepiece is binoculars or finders; this means that this eyepiece can be used without defining a telescope.
 \item[Has permanent cross-hairs] -- selecting this checkbox tells the system that this eyepiece or binocular (finder) has also simple cross-hairs\footnote{The Oculars plugin supports eyepieces with reticle patterns -- both special eyepieces are available in the default list of eyepieces, and the option \emph{Has permanent cross-hairs} is not related to those eyepieces.}.
 \end{description}
+
 When Binoculars are described, the relevant fields change to
 \begin{description}
-\item[tFOV] -- true field of view in degrees.
+\item[tFOV] -- true field of view in degrees. The true field of view can be given as \textbf{meters at 1000 m}. The approximate conversion of this to degrees is to divide by 17.5. Thus, 87 m at 1000 m $=(87/17.5)\degree \thickapprox 5\degree$.
 \item[Magnification factor] -- the magnification of the binocular.
 \item[Diameter] -- the diameter of the binocular objective in \mm.
 \end{description}
 
+For binoculars, we're computed a few important factors in additional to the exit pupil\footnote{The exit pupil diameter is calculated by dividing the aperture by the magnification.} (these factors are visible in an on-screen control panel):
+\begin{description}
+\item[Relative Brightness.] This is the square of the diameter of the exit pupil. 
+For example, for a 10x50 binocular, the exit pupil is 5 $\mm$ and relative brightness 
+is $(50/10)^2=5^2=25$. However, the calculation for a 20x100 binocular, through which 
+a great deal more can be seen, gives exactly the same relative brightness: $(100/20)^2=5^2=25$, 
+so this is an inadequate rating to use for astronomical binoculars. Relative brightness 
+is a number used to compare the brightness of binoculars of similar magnification. 
+The larger the relative brightness number, the brighter the image. 
+\item[Twilight Factor] (\textbf{Twilight Index} or \textbf{Twilight Performance Factor}). 
+This was used by \textit{Carl Zeiss International} as an indication of the \textit{distance} 
+at which comparable detail would be seen in different binoculars. It's calculated by 
+finding the square root of the product of the magnification and aperture. For the 
+two binoculars above, the calculations are:
+
+\begin{center}
+$\sqrt{(10*50)}=\sqrt{(500)}=22.36$
+
+$\sqrt{(20*100)}=\sqrt{(2000)}=44.72$
+\end{center}
+
+In this instance, the larger binocular has an index that is double that of the smaller 
+binocular. Twilight factor is a number used to compare the effectiveness of binoculars 
+used in low light. The larger the twilight factor, the more detail you can see in low 
+light. 
+\item[Bishop Index] (or \textbf{Visibility Factor}). This is due to Roy Bishop \citep{Bishop:2002} 
+and is evaluated simply by multiplying the magnification by the aperture in \mm. For 
+our two binocular above, we obtain:
+
+\begin{center}
+$10*50=500$
+
+$20*100=2000$
+\end{center}
+
+The larger binocular has a visibility factor four times greater than the smaller one.
+\item[Adler Index] (or \textbf{Astro Index}). This is due to Alan Adler \citep{Adler:2002} and 
+is evaluated as the product of the magnification and the square root of the aperture in \mm.
+For our two binocular above, we obtain:
+\begin{center}
+$10*\sqrt{50}=10*7.1=71$
+
+$20*\sqrt{100}=20*10=200$
+\end{center}
+This gives the larger binocular an Astro Index of 2.8x the smaller one. At the moment 
+this is the best index to comparison of astronomical binoculars (of course for the 
+simplest indexes, because others have tried to expand on these by including the effect of coatings, baffles, and other aspects of individual quality).
+\end{description}
 
 \paragraph{Lenses}
 
-This is the tab used to enter your own lenses (see figure \ref{fig:plugins:Oculars:Gui:Lenses}). By default, a few sample ones have been added; feel free to delete them once you've entered your own.
+This is the tab used to enter your own focal extender or reducer lenses (see figure \ref{fig:plugins:Oculars:Gui:Lenses}). 
+By default, a few sample ones have been added; feel free to delete them once you've entered your own.
 
 \begin{figure}[ht]\centering
 \includegraphics[trim=0 350 0 0,clip,width=.75\textwidth]{oculars_gui_lenses.png}
@@ -349,7 +399,7 @@ Some cameras may have unsquare pixels.
 
 \paragraph{Telescopes}
 
-This is the tab used to enter your own telescopes (see fig.~\ref{fig:plugins:Oculars:Gui:Telescopes}). The fields on this tab are:
+This is the tab used to enter your own telescopes and photographic objectives (see fig.~\ref{fig:plugins:Oculars:Gui:Telescopes}). The fields on this tab are:
 
 \begin{figure}[ht]\centering
 \includegraphics[trim=0 325 0 0,clip,width=.75\textwidth]{oculars_gui_telescopes.png}
@@ -360,8 +410,10 @@ This is the tab used to enter your own telescopes (see fig.~\ref{fig:plugins:Ocu
 
 \begin{description}
 \item[Name] -- A free-text description of the telescope. 
-\item[Focal Length] -- telescope focal length in \mm.
-\item[Diameter] -- telescope diameter (aperture) in \mm.
+\item[Focal Length] -- telescope focal length $f$ in \mm.
+\item[Diameter] -- telescope diameter (aperture $\diameter$) in \mm. If you add a photographic objective 
+that does not provide this information but provides a largest f stop like ``100\mm~f/2.8'', you can estimate from $\diameter=f/s$, 
+where $s=2.8$ and thus $\diameter=100/2.8=35.7\mm$ in this example.
 \item[Horizontal flip] -- if the view through this telescope should flip horizontally.
 \item[Vertical flip] -- if the view through this telescope should flip vertically.
 \item[Equatorial Mount] -- select it if this telescope has an equatorial mount.
@@ -462,7 +514,7 @@ Some users are running Stellarium on little, low-power ``Telescope computers'' c
 their powerful indoor PCs via RemoteDesktop or similar setups. Keep in mind that Stellarium 
 is a graphics-heavy program that may challenge the outdoor computer's graphics subsystem or network.
 See framerate intent settings on page~\pageref{sec:gui:configuration:tools:fps} for optimizing your screen refresh rates. 
-Better, run Stellarium on your indoor system and use INDI or ASCOM protocols.
+Better, run Stellarium on your indoor system and use INDI or ASCOM network protocols.
 
 \subsection{Using this plug-in}
 \label{sec:plugins:TelescopeControl:using}
@@ -869,7 +921,7 @@ List of telescope types supported by INDI\footnote{\url{https://indilib.org/devi
 \item IOptron GotoNova Upgrade Kit 8400
 \end{itemize}
 
-\subsection{ASCOM (Windows only)}
+\subsection{ASCOM (Windows, Qt5-based builds only)}
 \label{sec:plugins:TelescopeControl:ASCOM}
 
 \indexterm{ASCOM} \newFeature{0.19.3}is probably the most widely used
@@ -881,7 +933,10 @@ applications. Almost every telescope mount comes with an ASCOM driver
 and most of the astronomy software and tools can communicate with
 ASCOM compatible devices.
 
-The ASCOM telescope support has been added to Stellarium's Telescope Control plugin by Gion Kunz in version 0.19.3.
+The ASCOM telescope support has been added to Stellarium's Telescope Control plugin by Gion Kunz in version 0.19.3.\footnote{%
+Unfortunately traditional ASCOM seems to be incompatible with Qt6. 
+Starting with version 24.3 ASCOM support is no longer available on Qt6-based builds.
+If you depend on ASCOM support, please use a Qt5-based build of the same version.}
 
 Note that in order for Stellarium to communicate with your ASCOM
 compatible mount, you will need to have the ASCOM platform installed
@@ -983,6 +1038,26 @@ One anonymous user sent a troubleshooting solution when connecting Stellarium to
   away.\footnote{\url{https://sourceforge.net/p/stellarium/discussion/278769/thread/16e4c054/?limit=25\#8ffa}}
 \end{quote}
 
+
+
+\subsubsection{Stellarium Telescope Protocol}
+\label{sec:plugins:TelescopeControl:Other:Protocol}
+
+In the early days of Stellarium, telescope control required standalone server programs. 
+These were later integrated in the plugin. However, there are situations where external control servers are still useful, 
+e.g.\ when they are running on some tiny telescope computer while the user sits in the warm control room in front of the powerful PC running Stellarium. 
+For you DIYers out there, figure~\ref{fig:plugins:TelescopeControl:Other:Protocol} shows the original protocol.
+
+
+\begin{figure}[bp]
+\begin{center}
+\VerbatimInput[fontsize=\scriptsize]{pictures/Stellarium_telescope_protocol.txt}
+\end{center}
+\caption{The Stellarium Telescope Protocol, version 1.0}
+\label{fig:plugins:TelescopeControl:Other:Protocol}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \newpage
 \section{Observability Plugin}
