@@ -22,7 +22,7 @@
 #include <cmath>
 
 #include "INDIConnection.hpp"
-#include "libindi/basedevice.h"
+#include <libs/indidevice/basedevice.h>
 
 void TestINDIConnection::deafultCoordinates()
 {
