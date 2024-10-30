@@ -485,8 +485,12 @@ You must decide whether this is really beneficial in your situation. The librari
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\chapter{Command Line Options}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Advanced Options}
 %\label{command-line-options}
+
+\section{Command Line Options} 
 \label{sec:CommandLineOptions}
 
 Stellarium's behaviour can be modified by providing parameters to the
@@ -555,7 +559,7 @@ switch every time when you start Stellarium from the command line, you
 can also set an environment variable \file{STEL\_OPTS} with your
 default options. 
 
-\section{Examples}
+\subsection{Examples}
 \label{sec:CommandLineOptions:Examples}
 
 \begin{itemize}
@@ -579,33 +583,15 @@ stellarium --landscape=ocean
 %% GZ found in 2015, but worked in 2024:
 \noindent Note that console output (like \command{-\/-list-landscapes}) may not be possible on some Windows systems. 
 
-\section{Special Options}
-\label{sec:CommandLineOptions:Special}
+%\section{Advanced Options}
+%\label{sec:CommandLineOptions:Special}
+%
+%In addition to some troubleshooting options (see section \ref{sec:GettingStarted:Running:Troubleshooting}), 
+%there are also a few options mostly geared to advanced users.
 
-In addition to some troubleshooting options (see section \ref{sec:GettingStarted:Running:Troubleshooting}), 
-there are also a few options mostly geared to advanced users.
 
-\subsection{Spout}\newFeature{0.15.1} 
-\label{sec:CommandLineOptions:Special:Spout}
-Apart from stand-alone use, Stellarium can be used as multimedia source in larger installations, in museums or science exhibitions. 
-\program{Spout}\footnote{\url{https://spout.zeal.co/}} is a technology which enables use of Stellarium's 
-output window as texture in DirectX applications on Windows. Simply start Stellarium with 
-the \texttt{-\/-spout=sky} command line option. (Currently \program{Spout} output is limited to the main window 
-without GUI panels, but this may change in future versions.) 
-Your master application must obviously embed a \program{Spout} receiver. 
-The default name of the \program{Spout} sender is \texttt{Stellarium}. If you need more than one instance of Stellarium acting as source, 
-you can use option \texttt{-\/-spout-name=StelSpout2} in addition to create another \program{Spout} sender without a name conflict. 
-In such cases, it may be useful to also have separate user data directories and use option \texttt{-\/-user-dir}. 
 
-This mode does not work in ANGLE mode and requires modern graphics hardware with the \texttt{WGL\_NV\_DX\_interop} 
-driver extension running in OpenGL mode. Some Nvidia GPUs work without this extension listed explicitly. 
-On a notebook with Nvidia Optimus technology, make sure to launch Stellarium \emph{and} \program{SpoutReceiver} 
-(or your target application) on the Nvidia hardware. 
-For permanent setting, use the Nvidia configuration dialog to configure Stellarium and the target application explicitly to run always on the Nvidia card.
-
-Note that Spout use disables any multisampling setting (see Appendix~\ref{sec:config.ini:video}). 
-
-\subsection{Environment Variables}
+\section{Environment Variables}
 \label{sec:Environment}
 
 Some command-line options can be set permanently by storing them into
@@ -630,7 +616,7 @@ problems.
   or \texttt{warp} for another software-only solution. Note that command line options take precedence over this environment variable.
 \end{description}
 
-\subsection{Customized GUI Colors}
+\section{Customized GUI Colors}
 \label{sec:CommandLineOptions:Special:CSS}
 
 Some users have difficulties to read Stellarium's rather dark user
@@ -669,6 +655,151 @@ If link colors in text panels are now difficult to read, copy
 Note that, as Stellarium evolves, these files also may change from
 version to version. We cannot give any guarantees that one customized
 file will work without adaptation on later or earlier versions of Stellarium.
+
+\section{Spout}\newFeature{0.15.1} 
+\label{sec:CommandLineOptions:Special:Spout}
+Apart from stand-alone use, Stellarium can be used as multimedia source in larger installations, in museums or science exhibitions. 
+\program{Spout}\footnote{\url{https://spout.zeal.co/}} is a technology which enables use of Stellarium's 
+output window as texture in DirectX applications on Windows. Simply start Stellarium with 
+the \texttt{-\/-spout=sky} command line option. (Currently \program{Spout} output is limited to the main window 
+without GUI panels, but this may change in future versions.) 
+Your master application must obviously embed a \program{Spout} receiver. 
+The default name of the \program{Spout} sender is \texttt{Stellarium}. If you need more than one instance of Stellarium acting as source, 
+you can use option \texttt{-\/-spout-name=StelSpout2} in addition to create another \program{Spout} sender without a name conflict. 
+In such cases, it may be useful to also have separate user data directories and use option \texttt{-\/-user-dir}. 
+
+This mode does not work in ANGLE mode and requires modern graphics hardware with the \texttt{WGL\_NV\_DX\_interop} 
+driver extension running in OpenGL mode. Some Nvidia GPUs work without this extension listed explicitly. 
+On a notebook with Nvidia Optimus technology, make sure to launch Stellarium \emph{and} \program{SpoutReceiver} 
+(or your target application) on the Nvidia hardware. 
+For permanent setting, use the Nvidia configuration dialog to configure Stellarium and the target application explicitly to run always on the Nvidia card.
+
+Note that Spout use disables any multisampling setting (see Appendix~\ref{sec:config.ini:video}). 
+
+\section{Spherical Mirror Mode for Planetarium Use}
+\label{sec:CommandLineOptions:SphericalMirror}
+\sectionauthor*{immersive-theatres.com}
+
+With Stellarium it’s very easy to project the sky on a dome and create your own planetarium.
+
+\subsubsection{360° Projection}
+You can use either a very expensive fisheye lens projector -- or a standard projector with a spherical mirror.
+Not only is spherical mirror projection less expensive, 
+but it produces a higher resolution image on the dome\footnote{\url{https://domeclub.com/#PxComp}},
+and it's very easy to upgrade the projector.
+
+A planetarium spherical mirror is curved like a security mirror (convex safety mirror) -- with the important
+difference that its `first surface', i.e., the reflective silver, is not protected by a transparent acrylic or
+polycarbonate layer. This allows light to be reflected without being refracted. Spherical mirrors are therefore
+very delicate and should never be touched with fingers or wiped with a cloth. A powerful dust blower is all
+you need to keep it clean.
+
+There are two types of spherical mirror projection boxes: compact `Newtonians' (spherical mirror with an
+additional small mirror)\footnote{\url{https://www.eplanetarium.com/projector_newtonian.php}}; 
+or full-length boxes (spherical mirror only)\footnote{\url{https://myplanetarium.com/projection-dome-system}}. 
+The former take up less space in the planetarium (but a little less light reaches the dome); 
+whereas the latter produce a slightly brighter image (but require more space in the planetarium).
+
+Although commercial projection boxes are quite expensive (mainly due to the cost of the first-surface spherical mirror); 
+it's quite easy to build your 
+own\footnote{\url{https://docs.worldwidetelescope.org/diy-planetarium-dome/1/dome/#setting-up-the-projector-and-mirrors}} 
+-- and you can use a cheap convex safety mirror for testing before investing in a first-surface mirror.
+
+\subsubsection{Projector Specifications}
+A major challenge with digital planetariums (360° cinemas) is the cross-reflection of light on the dome. 
+This is why projector \emph{contrast ratio} and \emph{colour saturation} are more important than brightness (lumens). 
+Light `bouncing' around the dome causes the planetarium image to `wash out' (lose colour) -- 
+so the higher the projector colour saturation, the better. 
+Similarly, the higher the contrast ratio, the sharper and crisper the planetarium image will be, especially the night sky.
+
+4K projectors are now very affordable, allowing you to deliver the same high-quality visuals in your small
+dome as large planetariums!
+
+\subsubsection{Computer Configuration}
+The best way to operate a planetarium is with a dual display arrangement, i.e., 
+computer screen as the primary (main) display, and projector as the secondary (extended) display.
+
+This way the Stellarium remote control window, desktop shortcuts, other applications, etc., will only be visible
+to you. The audience will only see what you want them to see. To ensure there’s always something nice on
+the dome (even with no application open), use a high-resolution image of stars as your desktop wallpaper.
+
+To function as a planetarium, Stellarium should be configured to open in full screen mode on the extended
+display (see below).
+
+\subsubsection{System Configuration}
+To minimise image distortion at the back of the dome, it’s worth carrying out the slightly complex
+\program{Meshmapper} configuration\footnote{\url{https://paulbourke.net/dome/meshmapper}}. 
+This creates a custom distortion file for your specific system (i.e., your dome
+diameter, stand height, spherical mirror dimensions); 
+and the image improvement will be remarkable\footnote{\url{https://domeclub.com/images/Meshmapper-1152w.jpg}}. 
+This custom distortion file (‘warp mesh data file’) can then be used with dome applications like Stellarium.
+
+\subsubsection{Stellarium Configuration}
+To enable planetarium spherical mirror projection, the \file{config.ini} file needs to include the following:
+
+\begin{configfile}
+[navigation]
+init_fov = 180
+[projection]
+type = ProjectionFisheye
+auto_zoom_out_resets_direction = true
+[video]
+fullscreen = true
+viewport_effect = sphericMirrorDistorter
+screen_number = 1
+[spheric_mirror]
+distorter_max_fov = 180
+dome_radius = 5.0 (note: regardless of your actual dome radius)
+image_distance_div_height = 2.67
+mirror_position_x = 0
+mirror_position_y = 5
+mirror_position_z = 0
+mirror_radius = 0.37 (regardless of your actual mirror radius)
+\end{configfile}
+
+Stellarium also has built-in options to help you project the best possible planetarium night sky.
+In a planetarium, removing the Stellarium atmosphere results in a much darker (and more beautiful) night sky.
+Yet without the atmosphere, the stars stop twinkling and meteors (shooting stars) disappear -- which is correct
+for the real sky, but not what you may desire in the planetarium. To maintain twinkling and meteors even without
+the atmosphere, manually add the following lines to the \file{config.ini} file:
+
+\begin{configfile}
+[stars]
+flag_forced_twinkle = true
+[astro]
+flag_forced_meteor_activity = true
+\end{configfile}
+
+Another useful configuration for planetariums is to completely hide the vertical and horizontal toolbars on the
+dome:
+\begin{configfile}
+[gui]
+flag_show_gui = false
+\end{configfile}
+
+The following are also recommended (adjust the values to your preference):
+\begin{configfile}
+[viewing]
+flag_moon_scaled = true
+moon_scale = 8.00
+[astro]
+meteor_zhr = 3000
+[landscape]
+flag_fog = false
+[stars]
+absolute_scale = 6.00
+flag_star_twinkle = 1.00
+flag_star_spiky = false
+relative_scale = 0.70
+star_twinkle_amount = 0.50
+\end{configfile}
+
+
+\subsubsection{Further notes}
+This feature is rarely used by the current developers and cannot be tested on standard hardware. 
+See ongoing discussion on Github\footnote{\url{https://github.com/Stellarium/stellarium/issues/1914} and \\
+\url{https://github.com/Stellarium/stellarium/issues/3535}} and get involved.
+
 
 %%% Local Variables: 
 %%% mode: latex
