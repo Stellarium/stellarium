@@ -1187,7 +1187,6 @@ QString Nebula::getDSODesignationWIC() const
 void Nebula::readDSO(QDataStream &in)
 {
 	float	ra, dec;
-	//unsigned int oType;
 
 	in	>> DSO_nb >> ra >> dec >> bMag >> vMag >> nType >> mTypeString >> majorAxisSize >> minorAxisSize
 		>> orientationAngle >> redshift >> redshiftErr >> parallax >> parallaxErr >> oDistance >> oDistanceErr
@@ -1231,7 +1230,6 @@ void Nebula::readDSO(QDataStream &in)
 
 	StelUtils::spheToRect(ra,dec,XYZ);
 	Q_ASSERT(fabs(XYZ.normSquared()-1.)<1e-9);
-	//nType = static_cast<Nebula::NebulaType>(oType);
 	pointRegion = SphericalRegionP(new SphericalPoint(getJ2000EquatorialPos(Q_NULLPTR)));
 }
 
