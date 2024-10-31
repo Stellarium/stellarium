@@ -801,6 +801,25 @@ See ongoing discussion on Github\footnote{\url{https://github.com/Stellarium/ste
 \url{https://github.com/Stellarium/stellarium/issues/3535}} and get involved.
 
 
+\section{Immediate Storage of Settings}
+\label{sec:CommandLineOptions:Special:ImmediateStorage}
+
+After changing view settings, \newFeature{24.4}clicking some checkboxes, \ldots to make your system display what you need, 
+you must call the main Settings dialog and press \button{Save Settings}. 
+This is to let beginning users just quit the program in case they moved into confusing ``settings terrain''. 
+Location and landscape settings are of such fundamental importance that they are stored only in their respective dialogs.
+
+Some users prefer to have their changes applied and stored immediately, so that they are applied also on next program launch. 
+Stellarium is on its way to support both modes, but the process is slow, there are hundreds of detail settings to convert. 
+If you already want to apply immediate mode for settings  e.g. in the DSO or Landscape dialogs, 
+you can enable a flag manually by editing \file{config.ini}:
+
+\begin{configfile}
+[gui]
+immediate_save_details = true
+\end{configfile}
+Users of this mode are expected to know where settings are and how to change them. 
+
 %%% Local Variables: 
 %%% mode: latex
 %%% TeX-master: "guide"
