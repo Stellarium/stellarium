@@ -70,7 +70,7 @@ void NebulaMgr::setInteractingGalaxyColor(const Vec3f& c) {Nebula::hintColorMap.
 const Vec3f NebulaMgr::getInteractingGalaxyColor(void) const {return Nebula::hintColorMap.value(Nebula::NebIGx);}
 void NebulaMgr::setQuasarColor(const Vec3f& c) {Nebula::hintColorMap.insert(Nebula::NebQSO, c); emit quasarsColorChanged(c); }
 const Vec3f NebulaMgr::getQuasarColor(void) const {return Nebula::hintColorMap.value(Nebula::NebQSO);}
-void NebulaMgr::setNebulaColor(const Vec3f& c) {Nebula::hintColorMap.insert(Nebula::NebN, c); emit nebulaeColorChanged(c); }
+void NebulaMgr::setNebulaColor(const Vec3f& c) {Nebula::hintColorMap.insert(Nebula::NebN, c); Nebula::hintColorMap.insert(Nebula::NebCn, c); emit nebulaeColorChanged(c); }
 const Vec3f NebulaMgr::getNebulaColor(void) const {return Nebula::hintColorMap.value(Nebula::NebN);}
 void NebulaMgr::setPlanetaryNebulaColor(const Vec3f& c) {Nebula::hintColorMap.insert(Nebula::NebPn, c); emit planetaryNebulaeColorChanged(c);}
 const Vec3f NebulaMgr::getPlanetaryNebulaColor(void) const {return Nebula::hintColorMap.value(Nebula::NebPn);}
@@ -338,6 +338,14 @@ void NebulaMgr::init()
 	setEmissionLineStarColor(  Vec3f(conf->value("color/dso_emission_star_color", defaultStellarColor).toString()));
 	setEmissionObjectColor(    Vec3f(conf->value("color/dso_emission_object_color", defaultStellarColor).toString()));
 	setYoungStellarObjectColor(Vec3f(conf->value("color/dso_young_stellar_object_color", defaultStellarColor).toString()));
+
+	// Test that all nebula types have colors!
+	QMetaEnum nType=QMetaEnum::fromType<Nebula::NebulaType>();
+	for(int t=0; t<nType.keyCount(); t++)
+	{
+		if (!Nebula::hintColorMap.contains(static_cast<Nebula::NebulaType>(nType.value(t))))
+				qDebug() << "No color assigned to Nebula Type " << nType.key(t) << ". Please report as bug!";
+	}
 
 	// for DSO converter (for developers!)
 	flagConverter = conf->value("devel/convert_dso_catalog", false).toBool();
