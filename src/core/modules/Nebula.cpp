@@ -47,7 +47,8 @@ StelTextureSP Nebula::texPlanetaryNebula;
 bool  Nebula::drawHintProportional = false;
 bool  Nebula::surfaceBrightnessUsage = false;
 bool  Nebula::designationUsage = false;
-float Nebula::hintsBrightness = 0.f;
+float Nebula::hintsBrightness = 1.f;
+float Nebula::labelsBrightness = 1.f;
 Vec3f Nebula::labelColor = Vec3f(0.4f,0.3f,0.5f);
 QMap<Nebula::NebulaType, Vec3f>Nebula::hintColorMap;
 bool Nebula::flagUseTypeFilters = false;
@@ -702,12 +703,15 @@ float Nebula::getVisibilityLevelByMagnitude(void) const
 
 void Nebula::drawOutlines(StelPainter &sPainter, float maxMagHints) const
 {
+	if (!objectInDisplayedType())
+		return;
+
 	size_t segments = outlineSegments.size();
 
 	// tune limits for outlines
 	float oLim = getVisibilityLevelByMagnitude() - 3.f;
 
-	sPainter.setColor(getHintColor(nType), objectInDisplayedType() ? hintsBrightness : 0.f);
+	sPainter.setColor(getHintColor(nType), hintsBrightness);
 
 	StelCore *core=StelApp::getInstance().getCore();
 	Vec3d vel=core->getCurrentPlanet()->getHeliocentricEclipticVelocity();
@@ -975,8 +979,10 @@ float Nebula::getHintSize(StelPainter& sPainter) const
 {
 	const float size = 6.0f;
 	float scaledSize = 0.0f;
+	// Should getPixelPerRadAtCenter() not adjust for HiDPI? Apparently it does not!
 	if (drawHintProportional)
-		scaledSize = static_cast<float>(getAngularRadius(Q_NULLPTR)) *(M_PI_180f*2.f)*static_cast<float>(sPainter.getProjector()->getPixelPerRadAtCenter());
+		scaledSize = static_cast<float>(getAngularRadius(Q_NULLPTR)) *(M_PI_180f)*static_cast<float>(sPainter.getProjector()->getPixelPerRadAtCenter()) / static_cast<float>(sPainter.getProjector()->getDevicePixelsPerPixel());
+	// TODO: Is it correct that for NebRegions any catalog data for getAngularRadius() is ignored? And that NebRegions are ALWAYS drawn with larger symbol?
 	if (nType==NebRegion)
 		scaledSize = 12.f;
 
@@ -985,9 +991,11 @@ float Nebula::getHintSize(StelPainter& sPainter) const
 
 void Nebula::drawHints(StelPainter& sPainter, float maxMagHints, StelCore *core) const
 {
-	size_t segments = outlineSegments.size();
-	if (segments>0 && flagUseOutlines)
+	if (!objectInDisplayedType())
 		return;
+	if (outlineSegments.size()>0 && flagUseOutlines)
+		return;
+
 	Vec3d win;
 	// Check visibility of DSO hints
 	if (!(sPainter.getProjector()->projectCheck(XYZ, win)))
@@ -997,11 +1005,7 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints, StelCore *core)
 		return;
 
 	Vec3f color = getHintColor(nType);
-
 	float finalSize = getHintSize(sPainter);
-
-	if (!objectInDisplayedType())
-		return;
 
 	switch (nType)
 	{
@@ -1029,6 +1033,7 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints, StelCore *core)
 		case NebSA:
 		case NebSC:
 		case NebCl:
+		case NebPartOfGx:
 			renderMarkerPointedCircle(sPainter, XY[0], XY[1], finalSize, color, false);
 			return;
 		case NebGc:
@@ -1036,6 +1041,7 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints, StelCore *core)
 			return;
 		case NebN:
 		case NebHII:
+		case NebISM:
 		case NebMolCld:
 		case NebYSO:
 		case NebRn:
@@ -1063,11 +1069,12 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints, StelCore *core)
 		case NebRegion:
 			Nebula::texRegion->bind();
 			break;
-		//case NebEMO:
-		//case NebStar:
-		//case NebSymbioticStar:
-		//case NebEmissionLineStar:
-		default:
+		case NebEMO:
+		case NebStar:
+		case NebSymbioticStar:
+		case NebEmissionLineStar:
+		case NebUnknown:
+		//default: // keep this commented out to let clangd warn us of unhandled cases!
 			renderRoundMarker(sPainter, XY[0], XY[1], finalSize, color, false);
 			return;
 	}
@@ -1080,6 +1087,9 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints, StelCore *core)
 
 void Nebula::drawLabel(StelPainter& sPainter, float maxMagLabel) const
 {
+	if (!objectInDisplayedType())
+		return;
+
 	Vec3d win;
 	// Check visibility of DSO labels
 	if (!(sPainter.getProjector()->projectCheck(XYZ, win)))
@@ -1088,7 +1098,7 @@ void Nebula::drawLabel(StelPainter& sPainter, float maxMagLabel) const
 	if (getVisibilityLevelByMagnitude()>maxMagLabel)
 		return;
 
-	sPainter.setColor(labelColor, objectInDisplayedType() ? hintsBrightness : 0.f);
+	sPainter.setColor(labelColor, labelsBrightness);
 
 	const float shift = 15.f + (drawHintProportional ? getHintSize(sPainter) : 0.f);
 
@@ -1177,7 +1187,7 @@ QString Nebula::getDSODesignationWIC() const
 void Nebula::readDSO(QDataStream &in)
 {
 	float	ra, dec;
-	unsigned int oType;
+	unsigned int oType; // Kludge for MSVC2017
 
 	in	>> DSO_nb >> ra >> dec >> bMag >> vMag >> oType >> mTypeString >> majorAxisSize >> minorAxisSize
 		>> orientationAngle >> redshift >> redshiftErr >> parallax >> parallaxErr >> oDistance >> oDistanceErr
@@ -1230,67 +1240,63 @@ bool Nebula::objectInDisplayedType() const
 	if (!flagUseTypeFilters)
 		return true;
 
-	int cntype = -1;
-	switch (nType)
-	{
-		case NebGx:
-			cntype = 0; // Galaxies
-			break;
-		case NebAGx:
-		case NebRGx:
-		case NebQSO:
-		case NebPossQSO:
-		case NebBLL:
-		case NebBLA:
-			cntype = 1; // Active Galaxies
-			break;
-		case NebIGx:
-			cntype = 2; // Interacting Galaxies
-			break;
-		case NebOc:
-		case NebCl:
-		case NebSA:
-		case NebSC:
-			cntype = 3; // Open Star Clusters
-			break;
-		case NebHII:
-		case NebISM:
-			cntype = 4; // Hydrogen regions (include interstellar matter)
-			break;
-		case NebN:
-		case NebBn:
-		case NebEn:
-		case NebRn:
-			cntype = 5; // Bright Nebulae
-			break;
-		case NebDn:
-		case NebMolCld:
-		case NebYSO:
-			cntype = 6; // Dark Nebulae
-			break;
-		case NebPn:
-		case NebPossPN:
-		case NebPPN:
-			cntype = 7; // Planetary Nebulae
-			break;
-		case NebSNR:
-		case NebSNC:
-		case NebSNRC:
-			cntype = 8; // Supernova Remnants
-			break;
-		case NebCn:
-			cntype = 9;
-			break;
-		case NebGxCl:
-			cntype = 10;
-			break;
-		case NebGc:
-			cntype = 11;
-			break;
-		default:
-			cntype = 12;
-			break;
-	}
+	// a QMap which translates all defined nTypes to yet another int for easier filtering. Note some nTypes (commented away) have not been translated so far and are just qualified as "other/unknown"!
+	static const QMap<NebulaType, int>map={
+		{NebGx			,  0 },  // m Galaxy
+		{NebAGx			,  1 },  // Active galaxy
+		{NebRGx			,  1 },  // m Radio galaxy
+		{NebIGx			,  2 },  // Interacting galaxy
+		{NebQSO			,  1 },  // Quasar
+		{NebCl			,  3 },  // Star cluster
+		{NebOc			,  3 },  // Open star cluster
+		{NebGc			, 11 },  // Globular star cluster, usually in the Milky Way Galaxy
+		{NebSA			,  3 },  // Stellar association
+		{NebSC			,  3 },  // Star cloud
+		{NebN			,  5 },  // A nebula
+		{NebPn			,  7 },  // Planetary nebula
+		{NebDn			,  6 },  // Dark Nebula
+		{NebRn			,  5 },  // Reflection nebula
+		{NebBn			,  5 },  // Bipolar nebula
+		{NebEn			,  5 },  // Emission nebula
+		{NebCn			,  9 },  // Cluster associated with nebulosity
+		{NebHII			,  4 },  // HII Region
+		{NebSNR			,  8 },  // Supernova remnant
+		{NebISM			,  4 },  // Interstellar matter
+		{NebEMO			,  5 },  // Emission object (from 24.4)
+		{NebBLL			,  1 },  // BL Lac object
+		{NebBLA			,  1 },  // Blazar
+		{NebMolCld	        ,  6 },  // Molecular Cloud
+		{NebYSO			,  6 },  // Young Stellar Object
+		{NebPossQSO		,  1 },  // Possible Quasar
+		{NebPossPN		,  7 },  // Possible Planetary Nebula
+		{NebPPN			,  7 },  // Protoplanetary Nebula
+		//{NebStar		,    },  // Star
+		//{NebSymbioticStar	,    },  // Symbiotic Star
+		//{NebEmissionLineStar	,    },  // Emission-line Star
+		{NebSNC			,  8 },  // Supernova Candidate
+		{NebSNRC		,  8 },  // Supernova Remnant Candidate
+		{NebGxCl		, 10 },  // Cluster of Galaxies
+		{NebPartOfGx		,  3 },  // Part of a Galaxy (from 24.4)
+		//{NebRegion		,    },  // Region of the sky
+		{NebUnknown		, 12 }   // m Unknown type, catalog errors, "Unidentified Southern Objects" etc.
+	};
+	const int cntype = map.value(nType, 12);
+	// These "displayed types" are now:
+	// 0 = Galaxies
+	// 1 = Active Galaxies
+	// 2 = Interacting Galaxies
+	// 3 = Open Star Clusters
+	// 4 = Hydrogen regions (include interstellar matter)
+	// 5 = Bright Nebulae
+	// 6 = Dark Nebulae
+	// 7 = Planetary Nebulae
+	// 8 = Supernova Remnants
+	// 9 = Cl. assoc.w.Neb
+	//10 = Galaxy cluster
+	//11 = Globular Cluster
+	//12 = Unknown or other
+	// TODO: Why can we not just map to TypeGroupFlags and need yet another cntype index?
+
 	bool r = ( (typeFilters&TypeGalaxies             && cntype==0)
 		|| (typeFilters&TypeActiveGalaxies       && cntype==1)
 		|| (typeFilters&TypeInteractingGalaxies  && cntype==2)
@@ -1335,13 +1341,13 @@ bool Nebula::objectInDisplayedCatalog() const
 		|| ((catalogFilters&CatESO)   && (!ESO_nb.isEmpty()))
 		|| ((catalogFilters&CatVdBH)  && (!VdBH_nb.isEmpty()))
 		|| ((catalogFilters&CatDWB)   && (DWB_nb>0))
-		|| ((catalogFilters&CatTr)	   && (Tr_nb>0))
-		|| ((catalogFilters&CatSt)	   && (St_nb>0))
-		|| ((catalogFilters&CatRu	)   && (Ru_nb>0))
-		|| ((catalogFilters&CatVdBHa)   && (VdBHa_nb>0)))
+		|| ((catalogFilters&CatTr)    && (Tr_nb>0))
+		|| ((catalogFilters&CatSt)    && (St_nb>0))
+		|| ((catalogFilters&CatRu)    && (Ru_nb>0))
+		|| ((catalogFilters&CatVdBHa) && (VdBHa_nb>0)))
 
 		// Special case: objects without ID from current catalogs
-		|| ((catalogFilters&CatOther)   && withoutID);
+		|| ((catalogFilters&CatOther) && withoutID);
 
 	return r;
 }
@@ -1413,7 +1419,7 @@ QString Nebula::getMorphologicalTypeDescription(void) const
 
 	// Let's avoid showing a wrong morphological description for galaxies
 	// NOTE: Is required the morphological description for galaxies?
-	if (nType==NebGx || nType==NebAGx || nType==NebRGx || nType==NebIGx || nType==NebQSO || nType==NebPossQSO || nType==NebBLA || nType==NebBLL || nType==NebGxCl)
+	if (QList<NebulaType>({NebGx, NebAGx, NebRGx, NebIGx, NebQSO, NebPossQSO, NebBLA, NebBLL, NebGxCl}).contains(nType))
 		return QString();
 
 	static const QRegularExpression GlClRx("\\.*(I|II|III|IV|V|VI|VII|VIII|IX|X|XI|XII)\\.*");

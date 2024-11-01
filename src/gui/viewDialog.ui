@@ -2606,6 +2606,44 @@
                    </property>
                   </widget>
                  </item>
+                 <item row="0" column="2">
+                  <widget class="QDoubleSpinBox" name="labelsBrightnessDoubleSpinBox">
+                   <property name="toolTip">
+                    <string>Brightness</string>
+                   </property>
+                   <property name="decimals">
+                    <number>1</number>
+                   </property>
+                   <property name="maximum">
+                    <double>1.000000000000000</double>
+                   </property>
+                   <property name="singleStep">
+                    <double>0.100000000000000</double>
+                   </property>
+                    <property name="value">
+                    <double>1.000000000000000</double>
+                    </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="2">
+                  <widget class="QDoubleSpinBox" name="hintsBrightnessDoubleSpinBox">
+                   <property name="toolTip">
+                    <string>Brightness</string>
+                   </property>
+                   <property name="decimals">
+                    <number>1</number>
+                   </property>
+                   <property name="maximum">
+                    <double>1.000000000000000</double>
+                   </property>
+                   <property name="singleStep">
+                    <double>0.100000000000000</double>
+                   </property>
+                   <property name="value">
+                    <double>1.000000000000000</double>
+                    </property>
+                   </widget>
+                  </item>
                  <item row="1" column="0">
                   <widget class="QLabel" name="labelHints">
                    <property name="text">

@@ -70,7 +70,7 @@ void NebulaMgr::setInteractingGalaxyColor(const Vec3f& c) {Nebula::hintColorMap.
 const Vec3f NebulaMgr::getInteractingGalaxyColor(void) const {return Nebula::hintColorMap.value(Nebula::NebIGx);}
 void NebulaMgr::setQuasarColor(const Vec3f& c) {Nebula::hintColorMap.insert(Nebula::NebQSO, c); emit quasarsColorChanged(c); }
 const Vec3f NebulaMgr::getQuasarColor(void) const {return Nebula::hintColorMap.value(Nebula::NebQSO);}
-void NebulaMgr::setNebulaColor(const Vec3f& c) {Nebula::hintColorMap.insert(Nebula::NebN, c); emit nebulaeColorChanged(c); }
+void NebulaMgr::setNebulaColor(const Vec3f& c) {Nebula::hintColorMap.insert(Nebula::NebN, c); Nebula::hintColorMap.insert(Nebula::NebCn, c); emit nebulaeColorChanged(c); }
 const Vec3f NebulaMgr::getNebulaColor(void) const {return Nebula::hintColorMap.value(Nebula::NebN);}
 void NebulaMgr::setPlanetaryNebulaColor(const Vec3f& c) {Nebula::hintColorMap.insert(Nebula::NebPn, c); emit planetaryNebulaeColorChanged(c);}
 const Vec3f NebulaMgr::getPlanetaryNebulaColor(void) const {return Nebula::hintColorMap.value(Nebula::NebPn);}
@@ -126,19 +126,56 @@ void NebulaMgr::setEmissionLineStarColor(const Vec3f& c) {Nebula::hintColorMap.i
 const Vec3f NebulaMgr::getEmissionLineStarColor(void) const {return Nebula::hintColorMap.value(Nebula::NebEmissionLineStar);}
 void NebulaMgr::setGalaxyClusterColor(const Vec3f& c) {Nebula::hintColorMap.insert(Nebula::NebGxCl, c); emit galaxyClustersColorChanged(c);}
 const Vec3f NebulaMgr::getGalaxyClusterColor(void) const {return Nebula::hintColorMap.value(Nebula::NebGxCl);}
-void NebulaMgr::setHintsProportional(const bool proportional) {if(Nebula::drawHintProportional!=proportional){ Nebula::drawHintProportional=proportional; emit hintsProportionalChanged(proportional);}}
+
 bool NebulaMgr::getHintsProportional(void) const {return Nebula::drawHintProportional;}
-void NebulaMgr::setDesignationUsage(const bool flag) {if(Nebula::designationUsage!=flag){ Nebula::designationUsage=flag; emit designationUsageChanged(flag);}}
+void NebulaMgr::setHintsProportional(const bool proportional)
+{
+	if(Nebula::drawHintProportional!=proportional)
+	{
+		Nebula::drawHintProportional=proportional;
+		StelApp::immediateSave("astro/flag_nebula_hints_proportional", proportional);
+		emit hintsProportionalChanged(proportional);
+	}
+}
+
 bool NebulaMgr::getDesignationUsage(void) const {return Nebula::designationUsage; }
-void NebulaMgr::setFlagOutlines(const bool flag) {if(Nebula::flagUseOutlines!=flag){ Nebula::flagUseOutlines=flag; emit flagOutlinesDisplayedChanged(flag);}}
-bool NebulaMgr::getFlagOutlines(void) const {return Nebula::flagUseOutlines;}
-void NebulaMgr::setFlagAdditionalNames(const bool flag) {if(Nebula::flagShowAdditionalNames!=flag){ Nebula::flagShowAdditionalNames=flag; emit flagAdditionalNamesDisplayedChanged(flag);}}
+void NebulaMgr::setDesignationUsage(const bool flag)
+{
+	if(Nebula::designationUsage!=flag)
+	{
+		Nebula::designationUsage=flag;
+		StelApp::immediateSave("astro/flag_dso_designation_usage", flag);
+		emit designationUsageChanged(flag);
+	}
+}
 bool NebulaMgr::getFlagAdditionalNames(void) const {return Nebula::flagShowAdditionalNames;}
+void NebulaMgr::setFlagAdditionalNames(const bool flag)
+{
+	if(Nebula::flagShowAdditionalNames!=flag)
+	{
+		Nebula::flagShowAdditionalNames=flag;
+		StelApp::immediateSave("astro/flag_dso_additional_names", flag);
+		emit flagAdditionalNamesDisplayedChanged(flag);
+	}
+}
+
+bool NebulaMgr::getFlagOutlines(void) const {return Nebula::flagUseOutlines;}
+void NebulaMgr::setFlagOutlines(const bool flag)
+{
+	if(Nebula::flagUseOutlines!=flag)
+	{
+		Nebula::flagUseOutlines=flag;
+		StelApp::immediateSave("astro/flag_dso_outlines_usage", flag);
+		emit flagOutlinesDisplayedChanged(flag);
+	}
+}
 
 NebulaMgr::NebulaMgr(void) : StelObjectModule()
 	, nebGrid(200)
 	, hintsAmount(0)
 	, labelsAmount(0)
+	, hintsBrightness(1.0)
+	, labelsBrightness(1.0)
 	, flagConverter(false)
 	, flagDecimalCoordinates(true)
 {
@@ -255,6 +292,8 @@ void NebulaMgr::init()
 	}
 
 	// Set colors for markers
+	setLabelsBrightness(conf->value("astro/nebula_labels_brightness", "1.0").toDouble());
+	setHintsBrightness(conf->value("astro/nebula_hints_brightness", "1.0").toDouble());
 	setLabelsColor(Vec3f(conf->value("color/dso_label_color", "0.2,0.6,0.7").toString()));
 	setCirclesColor(Vec3f(conf->value("color/dso_circle_color", "1.0,0.7,0.2").toString()));
 	setRegionsColor(Vec3f(conf->value("color/dso_region_color", "0.7,0.7,0.2").toString()));
@@ -299,6 +338,14 @@ void NebulaMgr::init()
 	setEmissionLineStarColor(  Vec3f(conf->value("color/dso_emission_star_color", defaultStellarColor).toString()));
 	setEmissionObjectColor(    Vec3f(conf->value("color/dso_emission_object_color", defaultStellarColor).toString()));
 	setYoungStellarObjectColor(Vec3f(conf->value("color/dso_young_stellar_object_color", defaultStellarColor).toString()));
+
+	// Test that all nebula types have colors!
+	QMetaEnum nType=QMetaEnum::fromType<Nebula::NebulaType>();
+	for(int t=0; t<nType.keyCount(); t++)
+	{
+		if (!Nebula::hintColorMap.contains(static_cast<Nebula::NebulaType>(nType.value(t))))
+				qDebug() << "No color assigned to Nebula Type " << nType.key(t) << ". Please report as bug!";
+	}
 
 	// for DSO converter (for developers!)
 	flagConverter = conf->value("devel/convert_dso_catalog", false).toBool();
@@ -563,6 +610,7 @@ void NebulaMgr::setFlagSurfaceBrightnessUsage(const bool usage)
 	if (usage!=Nebula::surfaceBrightnessUsage)
 	{
 		Nebula::surfaceBrightnessUsage=usage;
+		StelApp::immediateSave("astro/flag_surface_brightness_usage", Nebula::surfaceBrightnessUsage);
 		emit flagSurfaceBrightnessUsageChanged(usage);
 	}
 }
@@ -577,6 +625,7 @@ void NebulaMgr::setFlagSurfaceBrightnessArcsecUsage(const bool usage)
 	if (usage!=Nebula::flagUseArcsecSurfaceBrightness)
 	{
 		Nebula::flagUseArcsecSurfaceBrightness=usage;
+		StelApp::immediateSave("gui/flag_surface_brightness_arcsec", Nebula::flagUseArcsecSurfaceBrightness);
 		emit flagSurfaceBrightnessArcsecUsageChanged(usage);
 	}
 }
@@ -591,6 +640,7 @@ void NebulaMgr::setFlagSurfaceBrightnessShortNotationUsage(const bool usage)
 	if (usage!=Nebula::flagUseShortNotationSurfaceBrightness)
 	{
 		Nebula::flagUseShortNotationSurfaceBrightness=usage;
+		StelApp::immediateSave("gui/flag_surface_brightness_short", Nebula::flagUseShortNotationSurfaceBrightness);
 		emit flagSurfaceBrightnessShortNotationUsageChanged(usage);
 	}
 }
@@ -605,6 +655,7 @@ void NebulaMgr::setFlagSizeLimitsUsage(const bool usage)
 	if (usage!=Nebula::flagUseSizeLimits)
 	{
 		Nebula::flagUseSizeLimits=usage;
+		StelApp::immediateSave("astro/flag_size_limits_usage", Nebula::flagUseSizeLimits);
 		emit flagSizeLimitsUsageChanged(usage);
 	}
 }
@@ -619,6 +670,7 @@ void NebulaMgr::setFlagUseTypeFilters(const bool b)
 	if (Nebula::flagUseTypeFilters!=b)
 	{
 		Nebula::flagUseTypeFilters=b;
+		StelApp::immediateSave("astro/flag_use_type_filter", Nebula::flagUseTypeFilters);
 		emit flagUseTypeFiltersChanged(b);
 	}
 }
@@ -633,6 +685,7 @@ void NebulaMgr::setLabelsAmount(double a)
 	if((a-labelsAmount) != 0.)
 	{
 		labelsAmount=a;
+		StelApp::immediateSave("astro/nebula_labels_amount", labelsAmount);
 		emit labelsAmountChanged(a);
 	}
 }
@@ -647,6 +700,7 @@ void NebulaMgr::setHintsAmount(double f)
 	if((hintsAmount-f) != 0.)
 	{
 		hintsAmount = f;
+		StelApp::immediateSave("astro/nebula_hints_amount", hintsAmount);
 		emit hintsAmountChanged(f);
 	}
 }
@@ -656,11 +710,43 @@ double NebulaMgr::getHintsAmount(void) const
 	return hintsAmount;
 }
 
+void NebulaMgr::setLabelsBrightness(double b)
+{
+	if (b!=labelsBrightness)
+	{
+		labelsBrightness = b;
+		StelApp::immediateSave("astro/nebula_labels_brightness", labelsBrightness);
+		emit labelsBrightnessChanged(b);
+	}
+}
+
+double NebulaMgr::getLabelsBrightness(void) const
+{
+	return labelsBrightness;
+}
+
+void NebulaMgr::setHintsBrightness(double b)
+{
+	if (b!=hintsBrightness)
+	{
+		hintsBrightness = b;
+		StelApp::immediateSave("astro/nebula_hints_brightness", hintsBrightness);
+		emit hintsBrightnessChanged(b);
+	}
+}
+
+double NebulaMgr::getHintsBrightness(void) const
+{
+	return hintsBrightness;
+}
+
+
 void NebulaMgr::setMinSizeLimit(double s)
 {
 	if((Nebula::minSizeLimit-s) != 0.)
 	{
 		Nebula::minSizeLimit = s;
+		StelApp::immediateSave("astro/size_limit_min", Nebula::minSizeLimit);
 		emit minSizeLimitChanged(s);
 	}
 }
@@ -675,6 +761,7 @@ void NebulaMgr::setMaxSizeLimit(double s)
 	if((Nebula::maxSizeLimit-s) != 0.)
 	{
 		Nebula::maxSizeLimit = s;
+		StelApp::immediateSave("astro/size_limit_max", Nebula::maxSizeLimit);
 		emit maxSizeLimitChanged(s);
 	}
 }
@@ -700,7 +787,8 @@ void NebulaMgr::draw(StelCore* core)
 
 	static StelSkyDrawer* skyDrawer = core->getSkyDrawer();
 
-	Nebula::hintsBrightness = hintsFader.getInterstate()*flagShow.getInterstate();
+	Nebula::hintsBrightness  = hintsFader.getInterstate()*flagShow.getInterstate()*static_cast<float>(hintsBrightness);
+	Nebula::labelsBrightness = hintsFader.getInterstate()*flagShow.getInterstate()*static_cast<float>(labelsBrightness);
 
 	// Use a 4 degree margin (esp. for wide outlines)
 	const float margin = 4.f*M_PI_180f*prj->getPixelPerRadAtCenter();

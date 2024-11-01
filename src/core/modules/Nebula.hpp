@@ -196,6 +196,9 @@ public:
 	QString getEnglishName() const override {return englishName;}
 	QString getEnglishAliases() const;
 	QString getI18nAliases() const;
+	//! Return the angular radius of a circle containing the object as seen from the observer
+	//! with the circle center assumed to be at getJ2000EquatorialPos().
+	//! @return radius in degree. This value is the apparent angular size of the object, and is independent of the current FOV.
 	double getAngularRadius(const StelCore*) const override;
 	SphericalRegionP getRegion() const override {return pointRegion;}
 
@@ -348,6 +351,7 @@ private:
 	static StelTextureSP texPointElement;
 	static StelTextureSP texPlanetaryNebula;		// Type 3
 	static float hintsBrightness;
+	static float labelsBrightness;
 
 	static Vec3f labelColor;				// The color of labels
 	static QMap<Nebula::NebulaType, Vec3f>hintColorMap;	// map for rapid lookup. Updated by NebulaMgr whenever a color changes.

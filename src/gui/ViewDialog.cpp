@@ -317,6 +317,8 @@ void ViewDialog::createDialogContent()
 	connectGroupBox(ui->groupBoxDSOLabelsAndMarkers, "actionShow_Nebulas");
 	connectDoubleProperty(ui->nebulasLabelsHorizontalSlider, "NebulaMgr.labelsAmount",0.0,10.0);
 	connectDoubleProperty(ui->nebulasHintsHorizontalSlider, "NebulaMgr.hintsAmount",0.0,10.0);
+	connectDoubleProperty(ui->hintsBrightnessDoubleSpinBox, "NebulaMgr.hintsBrightness");
+	connectDoubleProperty(ui->labelsBrightnessDoubleSpinBox, "NebulaMgr.labelsBrightness");
 	connectBoolProperty(ui->checkBoxDesignationsOnlyUsage, "NebulaMgr.flagDesignationLabels");
 	connectBoolProperty(ui->checkBoxProportionalHints, "NebulaMgr.hintsProportional");
 	connectBoolProperty(ui->checkBoxOutlines, "NebulaMgr.flagOutlinesDisplayed");
@@ -890,8 +892,20 @@ void ViewDialog::setSelectedTypesFromCheckBoxes()
 		flags |= Nebula::TypeOther;
 
 	GETSTELMODULE(NebulaMgr)->setTypeFilters(flags);
-}
 
+	StelApp::immediateSave("dso_type_filters/flag_show_galaxies",             flags.testFlag(Nebula::TypeGalaxies));
+	StelApp::immediateSave("dso_type_filters/flag_show_active_galaxies",      flags.testFlag(Nebula::TypeActiveGalaxies));
+	StelApp::immediateSave("dso_type_filters/flag_show_interacting_galaxies", flags.testFlag(Nebula::TypeInteractingGalaxies));
+	StelApp::immediateSave("dso_type_filters/flag_show_open_clusters",        flags.testFlag(Nebula::TypeOpenStarClusters));
+	StelApp::immediateSave("dso_type_filters/flag_show_globular_clusters",    flags.testFlag(Nebula::TypeGlobularStarClusters));
+	StelApp::immediateSave("dso_type_filters/flag_show_bright_nebulae",       flags.testFlag(Nebula::TypeBrightNebulae));
+	StelApp::immediateSave("dso_type_filters/flag_show_dark_nebulae",         flags.testFlag(Nebula::TypeDarkNebulae));
+	StelApp::immediateSave("dso_type_filters/flag_show_planetary_nebulae",    flags.testFlag(Nebula::TypePlanetaryNebulae));
+	StelApp::immediateSave("dso_type_filters/flag_show_hydrogen_regions",     flags.testFlag(Nebula::TypeHydrogenRegions));
+	StelApp::immediateSave("dso_type_filters/flag_show_supernova_remnants",   flags.testFlag(Nebula::TypeSupernovaRemnants));
+	StelApp::immediateSave("dso_type_filters/flag_show_galaxy_clusters",      flags.testFlag(Nebula::TypeGalaxyClusters));
+	StelApp::immediateSave("dso_type_filters/flag_show_other",                flags.testFlag(Nebula::TypeOther));
+}
 
 void ViewDialog::updateSelectedCatalogsCheckBoxes()
 {
