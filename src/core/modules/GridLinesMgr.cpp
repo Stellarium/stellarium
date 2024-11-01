@@ -2234,6 +2234,7 @@ void GridLinesMgr::setFlagGridlines(const bool displayed)
 	if(displayed != gridlinesDisplayed)
 	{
 		gridlinesDisplayed=displayed;
+		StelApp::immediateSave("viewing/flag_gridlines", displayed);
 		emit gridlinesDisplayedChanged(displayed);
 	}
 }
@@ -2307,6 +2308,7 @@ void GridLinesMgr::setFlagAzimuthalGrid(const bool displayed)
 	if(displayed != aziGrid->isDisplayed())
 	{
 		aziGrid->setDisplayed(displayed);
+		StelApp::immediateSave("viewing/flag_azimuthal_grid", displayed);
 		emit azimuthalGridDisplayedChanged(displayed);
 	}
 }
@@ -2334,6 +2336,7 @@ void GridLinesMgr::setFlagEquatorGrid(const bool displayed)
 	if(displayed != equGrid->isDisplayed())
 	{
 		equGrid->setDisplayed(displayed);
+		StelApp::immediateSave("viewing/flag_equatorial_grid", displayed);
 		emit equatorGridDisplayedChanged(displayed);
 	}
 }
@@ -2361,6 +2364,7 @@ void GridLinesMgr::setFlagFixedEquatorGrid(const bool displayed)
 	if(displayed != fixedEquatorialGrid->isDisplayed())
 	{
 		fixedEquatorialGrid->setDisplayed(displayed);
+		StelApp::immediateSave("viewing/flag_fixed_equatorial_grid", displayed);
 		emit fixedEquatorGridDisplayedChanged(displayed);
 	}
 }
@@ -2388,6 +2392,7 @@ void GridLinesMgr::setFlagEquatorJ2000Grid(const bool displayed)
 	if(displayed != equJ2000Grid->isDisplayed())
 	{
 		equJ2000Grid->setDisplayed(displayed);
+		StelApp::immediateSave("viewing/flag_equatorial_J2000_grid", displayed);
 		emit equatorJ2000GridDisplayedChanged(displayed);
 	}
 }
@@ -2415,6 +2420,7 @@ void GridLinesMgr::setFlagEclipticJ2000Grid(const bool displayed)
 	if(displayed != eclJ2000Grid->isDisplayed())
 	{
 		eclJ2000Grid->setDisplayed(displayed);
+		StelApp::immediateSave("viewing/flag_ecliptic_J2000_grid", displayed);
 		emit eclipticJ2000GridDisplayedChanged(displayed);
 	}
 }
@@ -2442,6 +2448,7 @@ void GridLinesMgr::setFlagEclipticGrid(const bool displayed)
 	if(displayed != eclGrid->isDisplayed())
 	{
 		eclGrid->setDisplayed(displayed);
+		StelApp::immediateSave("viewing/flag_ecliptic_grid", displayed);
 		emit eclipticGridDisplayedChanged(displayed);
 	}
 }
@@ -2469,6 +2476,7 @@ void GridLinesMgr::setFlagGalacticGrid(const bool displayed)
 	if(displayed != galacticGrid->isDisplayed())
 	{
 		galacticGrid->setDisplayed(displayed);
+		StelApp::immediateSave("viewing/flag_galactic_grid", displayed);
 		emit galacticGridDisplayedChanged(displayed);
 	}
 }
@@ -2496,6 +2504,7 @@ void GridLinesMgr::setFlagSupergalacticGrid(const bool displayed)
 	if(displayed != supergalacticGrid->isDisplayed())
 	{
 		supergalacticGrid->setDisplayed(displayed);
+		StelApp::immediateSave("viewing/flag_supergalactic_grid", displayed);
 		emit supergalacticGridDisplayedChanged(displayed);
 	}
 }
@@ -2523,6 +2532,7 @@ void GridLinesMgr::setFlagEquatorLine(const bool displayed)
 	if(displayed != equatorLine->isDisplayed())
 	{
 		equatorLine->setDisplayed(displayed);
+		StelApp::immediateSave("viewing/flag_equator_line", displayed);
 		emit equatorLineDisplayedChanged(displayed);
 	}
 }
@@ -2537,6 +2547,7 @@ void GridLinesMgr::setFlagEquatorParts(const bool displayed)
 	if(displayed != equatorLine->showsPartitions())
 	{
 		equatorLine->setPartitions(displayed);
+		StelApp::immediateSave("viewing/flag_equator_parts", displayed);
 		emit equatorPartsDisplayedChanged(displayed);
 	}
 }
@@ -2550,6 +2561,7 @@ void GridLinesMgr::setFlagEquatorLabeled(const bool displayed)
 	if(displayed != equatorLine->isLabeled())
 	{
 		equatorLine->setLabeled(displayed);
+		StelApp::immediateSave("viewing/flag_equator_labels", displayed);
 		emit equatorPartsLabeledChanged(displayed);
 	}
 }
@@ -2576,6 +2588,7 @@ void GridLinesMgr::setFlagEquatorJ2000Line(const bool displayed)
 	if(displayed != equatorJ2000Line->isDisplayed())
 	{
 		equatorJ2000Line->setDisplayed(displayed);
+		StelApp::immediateSave("viewing/flag_equator_J2000_line", displayed);
 		emit equatorJ2000LineDisplayedChanged(displayed);
 	}
 }
@@ -2590,6 +2603,7 @@ void GridLinesMgr::setFlagEquatorJ2000Parts(const bool displayed)
 	if(displayed != equatorJ2000Line->showsPartitions())
 	{
 		equatorJ2000Line->setPartitions(displayed);
+		StelApp::immediateSave("viewing/flag_equator_J2000_parts", displayed);
 		emit equatorJ2000PartsDisplayedChanged(displayed);
 	}
 }
@@ -2603,6 +2617,7 @@ void GridLinesMgr::setFlagEquatorJ2000Labeled(const bool displayed)
 	if(displayed != equatorJ2000Line->isLabeled())
 	{
 		equatorJ2000Line->setLabeled(displayed);
+		StelApp::immediateSave("viewing/flag_equator_J2000_labels", displayed);
 		emit equatorJ2000PartsLabeledChanged(displayed);
 	}
 }
@@ -2629,6 +2644,7 @@ void GridLinesMgr::setFlagFixedEquatorLine(const bool displayed)
 	if(displayed != fixedEquatorLine->isDisplayed())
 	{
 		fixedEquatorLine->setDisplayed(displayed);
+		StelApp::immediateSave("viewing/flag_fixed_equator_line", displayed);
 		emit fixedEquatorLineDisplayedChanged(displayed);
 	}
 }
@@ -2643,6 +2659,7 @@ void GridLinesMgr::setFlagFixedEquatorParts(const bool displayed)
 	if(displayed != fixedEquatorLine->showsPartitions())
 	{
 		fixedEquatorLine->setPartitions(displayed);
+		StelApp::immediateSave("viewing/flag_fixed_equator_parts", displayed);
 		emit fixedEquatorPartsDisplayedChanged(displayed);
 	}
 }
@@ -2656,6 +2673,7 @@ void GridLinesMgr::setFlagFixedEquatorLabeled(const bool displayed)
 	if(displayed != fixedEquatorLine->isLabeled())
 	{
 		fixedEquatorLine->setLabeled(displayed);
+		StelApp::immediateSave("viewing/flag_fixed_equator_labels", displayed);
 		emit fixedEquatorPartsLabeledChanged(displayed);
 	}
 }
@@ -2683,6 +2701,7 @@ void GridLinesMgr::setFlagEclipticLine(const bool displayed)
 	{
 		eclipticLine->setDisplayed(displayed);
 		eclipticWithDateLine->setDisplayed(displayed);
+		StelApp::immediateSave("viewing/flag_ecliptic_line", displayed);
 		emit eclipticLineDisplayedChanged(displayed);
 	}
 }
@@ -2697,6 +2716,7 @@ void GridLinesMgr::setFlagEclipticParts(const bool displayed)
 	if(displayed != eclipticLine->showsPartitions())
 	{
 		eclipticLine->setPartitions(displayed);
+		StelApp::immediateSave("viewing/flag_ecliptic_parts", displayed);
 		emit eclipticPartsDisplayedChanged(displayed);
 	}
 }
@@ -2711,6 +2731,7 @@ void GridLinesMgr::setFlagEclipticLabeled(const bool displayed)
 	if(displayed != eclipticLine->isLabeled())
 	{
 		eclipticLine->setLabeled(displayed);
+		StelApp::immediateSave("viewing/flag_ecliptic_labels", displayed);
 		emit eclipticPartsLabeledChanged(displayed);
 	}
 }
@@ -2727,6 +2748,7 @@ void GridLinesMgr::setFlagEclipticDatesLabeled(const bool displayed)
 	{
 		eclipticWithDateLine->setPartitions(displayed);
 		eclipticWithDateLine->setLabeled(displayed);
+		StelApp::immediateSave("viewing/flag_ecliptic_date_labels", displayed);
 		emit eclipticDatesLabeledChanged(displayed);
 	}
 }
@@ -2755,6 +2777,7 @@ void GridLinesMgr::setFlagEclipticJ2000Line(const bool displayed)
 	if(displayed != eclipticJ2000Line->isDisplayed())
 	{
 		eclipticJ2000Line->setDisplayed(displayed);
+		StelApp::immediateSave("viewing/flag_ecliptic_J2000_line", displayed);
 		emit eclipticJ2000LineDisplayedChanged(displayed);
 	}
 }
@@ -2769,6 +2792,7 @@ void GridLinesMgr::setFlagEclipticJ2000Parts(const bool displayed)
 	if(displayed != eclipticJ2000Line->showsPartitions())
 	{
 		eclipticJ2000Line->setPartitions(displayed);
+		StelApp::immediateSave("viewing/flag_ecliptic_J2000_parts", displayed);
 		emit eclipticJ2000PartsDisplayedChanged(displayed);
 	}
 }
@@ -2783,6 +2807,7 @@ void GridLinesMgr::setFlagEclipticJ2000Labeled(const bool displayed)
 	if(displayed != eclipticJ2000Line->isLabeled())
 	{
 		eclipticJ2000Line->setLabeled(displayed);
+		StelApp::immediateSave("viewing/flag_ecliptic_J2000_labels", displayed);
 		emit eclipticJ2000PartsLabeledChanged(displayed);
 	}
 }
@@ -2810,6 +2835,7 @@ void GridLinesMgr::setFlagInvariablePlaneLine(const bool displayed)
 	if(displayed != invariablePlaneLine->isDisplayed())
 	{
 		invariablePlaneLine->setDisplayed(displayed);
+		StelApp::immediateSave("viewing/flag_invariable_plane_line", displayed);
 		emit invariablePlaneLineDisplayedChanged(displayed);
 	}
 }
@@ -2837,6 +2863,7 @@ void GridLinesMgr::setFlagSolarEquatorLine(const bool displayed)
 	if(displayed != solarEquatorLine->isDisplayed())
 	{
 		solarEquatorLine->setDisplayed(displayed);
+		StelApp::immediateSave("viewing/flag_solar_equator_line", displayed);
 		emit solarEquatorLineDisplayedChanged(displayed);
 	}
 }
@@ -2851,6 +2878,7 @@ void GridLinesMgr::setFlagSolarEquatorParts(const bool displayed)
 	if(displayed != solarEquatorLine->showsPartitions())
 	{
 		solarEquatorLine->setPartitions(displayed);
+		StelApp::immediateSave("viewing/flag_solar_equator_parts", displayed);
 		emit solarEquatorPartsDisplayedChanged(displayed);
 	}
 }
@@ -2865,6 +2893,7 @@ void GridLinesMgr::setFlagSolarEquatorLabeled(const bool displayed)
 	if(displayed != solarEquatorLine->isLabeled())
 	{
 		solarEquatorLine->setLabeled(displayed);
+		StelApp::immediateSave("viewing/flag_solar_equator_labels", displayed);
 		emit solarEquatorPartsLabeledChanged(displayed);
 	}
 }
@@ -2893,6 +2922,7 @@ void GridLinesMgr::setFlagPrecessionCircles(const bool displayed)
 	{
 		precessionCircleN->setDisplayed(displayed);
 		precessionCircleS->setDisplayed(displayed);
+		StelApp::immediateSave("viewing/flag_precession_circles", displayed);
 		emit precessionCirclesDisplayedChanged(displayed);
 	}
 }
@@ -2909,6 +2939,7 @@ void GridLinesMgr::setFlagPrecessionParts(const bool displayed)
 	{
 		precessionCircleN->setPartitions(displayed);
 		precessionCircleS->setPartitions(displayed);
+		StelApp::immediateSave("viewing/flag_precession_parts", displayed);
 		emit precessionPartsDisplayedChanged(displayed);
 	}
 }
@@ -2925,6 +2956,7 @@ void GridLinesMgr::setFlagPrecessionLabeled(const bool displayed)
 	{
 		precessionCircleN->setLabeled(displayed);
 		precessionCircleS->setLabeled(displayed);
+		StelApp::immediateSave("viewing/flag_precession_labels", displayed);
 		emit precessionPartsLabeledChanged(displayed);
 	}
 }
@@ -2954,6 +2986,7 @@ void GridLinesMgr::setFlagMeridianLine(const bool displayed)
 	if(displayed != meridianLine->isDisplayed())
 	{
 		meridianLine->setDisplayed(displayed);
+		StelApp::immediateSave("viewing/flag_meridian_line", displayed);
 		emit meridianLineDisplayedChanged(displayed);
 	}
 }
@@ -2968,6 +3001,7 @@ void GridLinesMgr::setFlagMeridianParts(const bool displayed)
 	if(displayed != meridianLine->showsPartitions())
 	{
 		meridianLine->setPartitions(displayed);
+		StelApp::immediateSave("viewing/flag_meridian_parts", displayed);
 		emit meridianPartsDisplayedChanged(displayed);
 	}
 }
@@ -2982,6 +3016,7 @@ void GridLinesMgr::setFlagMeridianLabeled(const bool displayed)
 	if(displayed != meridianLine->isLabeled())
 	{
 		meridianLine->setLabeled(displayed);
+		StelApp::immediateSave("viewing/flag_meridian_labels", displayed);
 		emit meridianPartsLabeledChanged(displayed);
 	}
 }
@@ -3009,6 +3044,7 @@ void GridLinesMgr::setFlagLongitudeLine(const bool displayed)
 	if(displayed != longitudeLine->isDisplayed())
 	{
 		longitudeLine->setDisplayed(displayed);
+		StelApp::immediateSave("viewing/flag_longitude_line", displayed);
 		emit longitudeLineDisplayedChanged(displayed);
 	}
 }
@@ -3023,6 +3059,7 @@ void GridLinesMgr::setFlagLongitudeParts(const bool displayed)
 	if(displayed != longitudeLine->showsPartitions())
 	{
 		longitudeLine->setPartitions(displayed);
+		StelApp::immediateSave("viewing/flag_longitude_parts", displayed);
 		emit longitudePartsDisplayedChanged(displayed);
 	}
 }
@@ -3037,6 +3074,7 @@ void GridLinesMgr::setFlagLongitudeLabeled(const bool displayed)
 	if(displayed != longitudeLine->isLabeled())
 	{
 		longitudeLine->setLabeled(displayed);
+		StelApp::immediateSave("viewing/flag_longitude_labels", displayed);
 		emit longitudePartsLabeledChanged(displayed);
 	}
 }
@@ -3063,6 +3101,7 @@ void GridLinesMgr::setFlagQuadratureLine(const bool displayed)
 	if(displayed != quadratureLine->isDisplayed())
 	{
 		quadratureLine->setDisplayed(displayed);
+		StelApp::immediateSave("viewing/flag_quadrature_line", displayed);
 		emit quadratureLineDisplayedChanged(displayed);
 	}
 }
@@ -3090,6 +3129,7 @@ void GridLinesMgr::setFlagHorizonLine(const bool displayed)
 	if(displayed != horizonLine->isDisplayed())
 	{
 		horizonLine->setDisplayed(displayed);
+		StelApp::immediateSave("viewing/flag_horizon_line", displayed);
 		emit horizonLineDisplayedChanged(displayed);
 	}
 }
@@ -3104,6 +3144,7 @@ void GridLinesMgr::setFlagHorizonParts(const bool displayed)
 	if(displayed != horizonLine->showsPartitions())
 	{
 		horizonLine->setPartitions(displayed);
+		StelApp::immediateSave("viewing/flag_horizon_parts", displayed);
 		emit horizonPartsDisplayedChanged(displayed);
 	}
 }
@@ -3118,6 +3159,7 @@ void GridLinesMgr::setFlagHorizonLabeled(const bool displayed)
 	if(displayed != horizonLine->isLabeled())
 	{
 		horizonLine->setLabeled(displayed);
+		StelApp::immediateSave("viewing/flag_horizon_labels", displayed);
 		emit horizonPartsLabeledChanged(displayed);
 	}
 }
@@ -3145,6 +3187,7 @@ void GridLinesMgr::setFlagGalacticEquatorLine(const bool displayed)
 	if(displayed != galacticEquatorLine->isDisplayed())
 	{
 		galacticEquatorLine->setDisplayed(displayed);
+		StelApp::immediateSave("viewing/flag_galactic_equator_line", displayed);
 		emit galacticEquatorLineDisplayedChanged(displayed);
 	}
 }
@@ -3159,6 +3202,7 @@ void GridLinesMgr::setFlagGalacticEquatorParts(const bool displayed)
 	if(displayed != galacticEquatorLine->showsPartitions())
 	{
 		galacticEquatorLine->setPartitions(displayed);
+		StelApp::immediateSave("viewing/flag_galactic_equator_parts", displayed);
 		emit galacticEquatorPartsDisplayedChanged(displayed);
 	}
 }
@@ -3173,6 +3217,7 @@ void GridLinesMgr::setFlagGalacticEquatorLabeled(const bool displayed)
 	if(displayed != galacticEquatorLine->isLabeled())
 	{
 		galacticEquatorLine->setLabeled(displayed);
+		StelApp::immediateSave("viewing/flag_galactic_equator_labels", displayed);
 		emit galacticEquatorPartsLabeledChanged(displayed);
 	}
 }
@@ -3200,6 +3245,7 @@ void GridLinesMgr::setFlagSupergalacticEquatorLine(const bool displayed)
 	if(displayed != supergalacticEquatorLine->isDisplayed())
 	{
 		supergalacticEquatorLine->setDisplayed(displayed);
+		StelApp::immediateSave("viewing/flag_supergalactic_equator_line", displayed);
 		emit supergalacticEquatorLineDisplayedChanged(displayed);
 	}
 }
@@ -3214,6 +3260,7 @@ void GridLinesMgr::setFlagSupergalacticEquatorParts(const bool displayed)
 	if(displayed != supergalacticEquatorLine->showsPartitions())
 	{
 		supergalacticEquatorLine->setPartitions(displayed);
+		StelApp::immediateSave("viewing/flag_supergalactic_equator_parts", displayed);
 		emit supergalacticEquatorPartsDisplayedChanged(displayed);
 	}
 }
@@ -3228,6 +3275,7 @@ void GridLinesMgr::setFlagSupergalacticEquatorLabeled(const bool displayed)
 	if(displayed != supergalacticEquatorLine->isLabeled())
 	{
 		supergalacticEquatorLine->setLabeled(displayed);
+		StelApp::immediateSave("viewing/flag_supergalactic_equator_labels", displayed);
 		emit supergalacticEquatorPartsLabeledChanged(displayed);
 	}
 }
@@ -3255,6 +3303,7 @@ void GridLinesMgr::setFlagPrimeVerticalLine(const bool displayed)
 	if(displayed != primeVerticalLine->isDisplayed())
 	{
 		primeVerticalLine->setDisplayed(displayed);
+		StelApp::immediateSave("viewing/flag_prime_vertical_line", displayed);
 		emit  primeVerticalLineDisplayedChanged(displayed);
 	}
 }
@@ -3269,6 +3318,7 @@ void GridLinesMgr::setFlagPrimeVerticalParts(const bool displayed)
 	if(displayed != primeVerticalLine->showsPartitions())
 	{
 		primeVerticalLine->setPartitions(displayed);
+		StelApp::immediateSave("viewing/flag_prime_vertical_parts", displayed);
 		emit  primeVerticalPartsDisplayedChanged(displayed);
 	}
 }
@@ -3283,6 +3333,7 @@ void GridLinesMgr::setFlagPrimeVerticalLabeled(const bool displayed)
 	if(displayed != primeVerticalLine->isLabeled())
 	{
 		primeVerticalLine->setLabeled(displayed);
+		StelApp::immediateSave("viewing/flag_prime_vertical_labels", displayed);
 		emit  primeVerticalPartsLabeledChanged(displayed);
 	}
 }
@@ -3310,6 +3361,7 @@ void GridLinesMgr::setFlagCurrentVerticalLine(const bool displayed)
 	if(displayed != currentVerticalLine->isDisplayed())
 	{
 		currentVerticalLine->setDisplayed(displayed);
+		StelApp::immediateSave("viewing/flag_current_vertical_line", displayed);
 		emit  currentVerticalLineDisplayedChanged(displayed);
 	}
 }
@@ -3324,6 +3376,7 @@ void GridLinesMgr::setFlagCurrentVerticalParts(const bool displayed)
 	if(displayed != currentVerticalLine->showsPartitions())
 	{
 		currentVerticalLine->setPartitions(displayed);
+		StelApp::immediateSave("viewing/flag_current_vertical_parts", displayed);
 		emit  currentVerticalPartsDisplayedChanged(displayed);
 	}
 }
@@ -3338,6 +3391,7 @@ void GridLinesMgr::setFlagCurrentVerticalLabeled(const bool displayed)
 	if(displayed != currentVerticalLine->isLabeled())
 	{
 		currentVerticalLine->setLabeled(displayed);
+		StelApp::immediateSave("viewing/flag_current_vertical_labels", displayed);
 		emit  currentVerticalPartsLabeledChanged(displayed);
 	}
 }
@@ -3366,6 +3420,7 @@ void GridLinesMgr::setFlagColureLines(const bool displayed)
 	{
 		colureLine_1->setDisplayed(displayed);
 		colureLine_2->setDisplayed(displayed);
+		StelApp::immediateSave("viewing/flag_colure_lines", displayed);
 		emit  colureLinesDisplayedChanged(displayed);
 	}
 }
@@ -3381,6 +3436,7 @@ void GridLinesMgr::setFlagColureParts(const bool displayed)
 	{
 		colureLine_1->setPartitions(displayed);
 		colureLine_2->setPartitions(displayed);
+		StelApp::immediateSave("viewing/flag_colure_parts", displayed);
 		emit  colurePartsDisplayedChanged(displayed);
 	}
 }
@@ -3395,6 +3451,7 @@ void GridLinesMgr::setFlagColureLabeled(const bool displayed)
 	{
 		colureLine_1->setLabeled(displayed);
 		colureLine_2->setLabeled(displayed);
+		StelApp::immediateSave("viewing/flag_colure_labels", displayed);
 		emit  colurePartsLabeledChanged(displayed);
 	}
 }
@@ -3424,6 +3481,7 @@ void GridLinesMgr::setFlagCircumpolarCircles(const bool displayed)
 	{
 		circumpolarCircleN->setDisplayed(displayed);
 		circumpolarCircleS->setDisplayed(displayed);
+		StelApp::immediateSave("viewing/flag_circumpolar_circles", displayed);
 		emit circumpolarCirclesDisplayedChanged(displayed);
 	}
 }
@@ -3453,6 +3511,7 @@ void GridLinesMgr::setFlagUmbraCircle(const bool displayed)
 	if(displayed != umbraCircle->isDisplayed())
 	{
 		umbraCircle->setDisplayed(displayed);
+		StelApp::immediateSave("viewing/flag_umbra_circle", displayed);
 		emit umbraCircleDisplayedChanged(displayed);
 	}
 }
@@ -3481,6 +3540,7 @@ void GridLinesMgr::setFlagPenumbraCircle(const bool displayed)
 	if(displayed != penumbraCircle->isDisplayed())
 	{
 		penumbraCircle->setDisplayed(displayed);
+		StelApp::immediateSave("viewing/flag_penumbra_circle", displayed);
 		emit penumbraCircleDisplayedChanged(displayed);
 	}
 }
@@ -3508,6 +3568,7 @@ void GridLinesMgr::setFlagCelestialJ2000Poles(const bool displayed)
 	if(displayed != celestialJ2000Poles->isDisplayed())
 	{
 		celestialJ2000Poles->setDisplayed(displayed);
+		StelApp::immediateSave("viewing/flag_celestial_J2000_poles", displayed);
 		emit celestialJ2000PolesDisplayedChanged(displayed);
 	}
 }
@@ -3535,6 +3596,7 @@ void GridLinesMgr::setFlagCelestialPoles(const bool displayed)
 	if(displayed != celestialPoles->isDisplayed())
 	{
 		celestialPoles->setDisplayed(displayed);
+		StelApp::immediateSave("viewing/flag_celestial_poles", displayed);
 		emit celestialPolesDisplayedChanged(displayed);
 	}
 }
@@ -3562,6 +3624,7 @@ void GridLinesMgr::setFlagZenithNadir(const bool displayed)
 	if(displayed != zenithNadir->isDisplayed())
 	{
 		zenithNadir->setDisplayed(displayed);
+		StelApp::immediateSave("viewing/flag_zenith_nadir", displayed);
 		emit zenithNadirDisplayedChanged(displayed);
 	}
 }
@@ -3589,6 +3652,7 @@ void GridLinesMgr::setFlagEclipticJ2000Poles(const bool displayed)
 	if(displayed != eclipticJ2000Poles->isDisplayed())
 	{
 		eclipticJ2000Poles->setDisplayed(displayed);
+		StelApp::immediateSave("viewing/flag_ecliptic_J2000_poles", displayed);
 		emit eclipticJ2000PolesDisplayedChanged(displayed);
 	}
 }
@@ -3616,6 +3680,7 @@ void GridLinesMgr::setFlagEclipticPoles(const bool displayed)
 	if(displayed != eclipticPoles->isDisplayed())
 	{
 		eclipticPoles->setDisplayed(displayed);
+		StelApp::immediateSave("viewing/flag_ecliptic_poles", displayed);
 		emit eclipticPolesDisplayedChanged(displayed);
 	}
 }
@@ -3643,6 +3708,7 @@ void GridLinesMgr::setFlagGalacticPoles(const bool displayed)
 	if(displayed != galacticPoles->isDisplayed())
 	{
 		galacticPoles->setDisplayed(displayed);
+		StelApp::immediateSave("viewing/flag_galactic_poles", displayed);
 		emit galacticPolesDisplayedChanged(displayed);
 	}
 }
@@ -3670,6 +3736,7 @@ void GridLinesMgr::setFlagGalacticCenter(const bool displayed)
 	if(displayed != galacticCenter->isDisplayed())
 	{
 		galacticCenter->setDisplayed(displayed);
+		StelApp::immediateSave("viewing//flag_galactic_center", displayed);
 		emit galacticCenterDisplayedChanged(displayed);
 	}
 }
@@ -3697,6 +3764,7 @@ void GridLinesMgr::setFlagSupergalacticPoles(const bool displayed)
 	if(displayed != supergalacticPoles->isDisplayed())
 	{
 		supergalacticPoles->setDisplayed(displayed);
+		StelApp::immediateSave("viewing/flag_supergalactic_poles", displayed);
 		emit supergalacticPolesDisplayedChanged(displayed);
 	}
 }
@@ -3724,6 +3792,7 @@ void GridLinesMgr::setFlagEquinoxJ2000Points(const bool displayed)
 	if(displayed != equinoxJ2000Points->isDisplayed())
 	{
 		equinoxJ2000Points->setDisplayed(displayed);
+		StelApp::immediateSave("viewing/flag_equinox_J2000_points", displayed);
 		emit equinoxJ2000PointsDisplayedChanged(displayed);
 	}
 }
@@ -3751,6 +3820,7 @@ void GridLinesMgr::setFlagEquinoxPoints(const bool displayed)
 	if(displayed != equinoxPoints->isDisplayed())
 	{
 		equinoxPoints->setDisplayed(displayed);
+		StelApp::immediateSave("viewing/flag_equinox_points", displayed);
 		emit equinoxPointsDisplayedChanged(displayed);
 	}
 }
@@ -3778,6 +3848,7 @@ void GridLinesMgr::setFlagSolsticeJ2000Points(const bool displayed)
 	if(displayed != solsticeJ2000Points->isDisplayed())
 	{
 		solsticeJ2000Points->setDisplayed(displayed);
+		StelApp::immediateSave("viewing/flag_solstice_J2000_points", displayed);
 		emit solsticeJ2000PointsDisplayedChanged(displayed);
 	}
 }
@@ -3805,6 +3876,7 @@ void GridLinesMgr::setFlagSolsticePoints(const bool displayed)
 	if(displayed != solsticePoints->isDisplayed())
 	{
 		solsticePoints->setDisplayed(displayed);
+		StelApp::immediateSave("viewing/flag_solstice_points", displayed);
 		emit solsticePointsDisplayedChanged(displayed);
 	}
 }
@@ -3832,6 +3904,7 @@ void GridLinesMgr::setFlagAntisolarPoint(const bool displayed)
 	if(displayed != antisolarPoint->isDisplayed())
 	{
 		antisolarPoint->setDisplayed(displayed);
+		StelApp::immediateSave("viewing/flag_antisolar_point", displayed);
 		emit antisolarPointDisplayedChanged(displayed);
 	}
 }
@@ -3858,6 +3931,7 @@ void GridLinesMgr::setFlagUmbraCenterPoint(const bool displayed)
 	if(displayed != umbraCenterPoint->isDisplayed())
 	{
 		umbraCenterPoint->setDisplayed(displayed);
+		StelApp::immediateSave("viewing/flag_umbra_center_point", displayed);
 		emit umbraCenterPointDisplayedChanged(displayed);
 	}
 }
@@ -3872,6 +3946,7 @@ void GridLinesMgr::setFlagApexPoints(const bool displayed)
 	if(displayed != apexPoints->isDisplayed())
 	{
 		apexPoints->setDisplayed(displayed);
+		StelApp::immediateSave("viewing/flag_apex_points", displayed);
 		emit apexPointsDisplayedChanged(displayed);
 	}
 }
@@ -3934,6 +4009,7 @@ void GridLinesMgr::setLineThickness(const float thickness)
 		umbraCircle->setLineThickness(lineThickness);
 		penumbraCircle->setLineThickness(lineThickness);
 
+		StelApp::immediateSave("viewing/line_thickness", lineThickness);
 		emit lineThicknessChanged(lineThickness);
 	}
 }
@@ -3972,6 +4048,7 @@ void GridLinesMgr::setPartThickness(const float thickness)
 		//circumpolarCircleN->setPartThickness(partThickness);
 		//circumpolarCircleS->setPartThickness(partThickness);
 
+		StelApp::immediateSave("viewing/part_thickness", partThickness);
 		emit partThicknessChanged(partThickness);
 	}
 }

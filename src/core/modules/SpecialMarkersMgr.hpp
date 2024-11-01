@@ -27,7 +27,7 @@
 class SpecialSkyMarker;
 
 //! @class SpecialMarkersMgr
-//! The SpecialMarkersMgr controls the drawing of the special markers, such a rectangular FOV marker
+//! The SpecialMarkersMgr controls the drawing of the special markers, such a rectangular and circular FOV marker and the compass marks
 class SpecialMarkersMgr : public StelModule
 {
 	Q_OBJECT
