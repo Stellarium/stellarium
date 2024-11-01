@@ -87,7 +87,8 @@ void SpecialSkyMarker::drawFoVRect(const StelProjectorP& projector, const Mat4f&
 {
 	StelPainter sPainter(projector);
 	sPainter.setLineSmooth(true);
-	sPainter.setColor(color);
+	sPainter.setBlending(true);
+	sPainter.setColor(color, fader.getInterstate());
 
 	const float tanFovX = std::tan(fovX/2);
 	const float tanFovY = std::tan(fovY/2);
@@ -336,6 +337,7 @@ void SpecialMarkersMgr::setFlagFOVCenterMarker(const bool displayed)
 {
 	if(displayed != fovCenterMarker->isDisplayed()) {
 		fovCenterMarker->setDisplayed(displayed);
+		StelApp::immediateSave("viewing/flag_fov_center_marker", displayed);
 		emit fovCenterMarkerDisplayedChanged(displayed);
 	}
 }
@@ -362,6 +364,7 @@ void SpecialMarkersMgr::setFlagFOVCircularMarker(const bool displayed)
 {
 	if(displayed != fovCircularMarker->isDisplayed()) {
 		fovCircularMarker->setDisplayed(displayed);
+		StelApp::immediateSave("viewing/flag_fov_circular_marker", displayed);
 		emit fovCircularMarkerDisplayedChanged(displayed);
 	}
 }
@@ -387,6 +390,7 @@ void SpecialMarkersMgr::setColorFOVCircularMarker(const Vec3f& newColor)
 void SpecialMarkersMgr::setFOVCircularMarkerSize(const double size)
 {
 	fovCircularMarker->setAngularSize(Vec2d(size, 0.));
+	StelApp::immediateSave("viewing/size_fov_circular_marker", size);
 	emit fovCircularMarkerSizeChanged(size);
 }
 
@@ -399,6 +403,7 @@ void SpecialMarkersMgr::setFlagFOVRectangularMarker(const bool displayed)
 {
 	if(displayed != fovRectangularMarker->isDisplayed()) {
 		fovRectangularMarker->setDisplayed(displayed);
+		StelApp::immediateSave("viewing/flag_fov_rectangular_marker", displayed);
 		emit fovRectangularMarkerDisplayedChanged(displayed);
 	}
 }
@@ -424,6 +429,7 @@ Vec3f SpecialMarkersMgr::getColorFOVRectangularMarker() const
 void SpecialMarkersMgr::setFOVRectangularMarkerWidth(const double size)
 {
 	fovRectangularMarker->setAngularSize(Vec2d(size, fovRectangularMarker->getAngularSize()[1]));
+	StelApp::immediateSave("viewing/width_fov_rectangular_marker", size);
 	emit fovRectangularMarkerWidthChanged(size);
 }
 
@@ -435,6 +441,7 @@ double SpecialMarkersMgr::getFOVRectangularMarkerWidth() const
 void SpecialMarkersMgr::setFOVRectangularMarkerHeight(const double size)
 {
 	fovRectangularMarker->setAngularSize(Vec2d(fovRectangularMarker->getAngularSize()[0], size));
+	StelApp::immediateSave("viewing/height_fov_rectangular_marker", size);
 	emit fovRectangularMarkerHeightChanged(size);
 }
 
@@ -446,6 +453,7 @@ double SpecialMarkersMgr::getFOVRectangularMarkerHeight() const
 void SpecialMarkersMgr::setFOVRectangularMarkerRotationAngle(const double angle)
 {
 	fovRectangularMarker->setRotationAngle(angle);
+	StelApp::immediateSave("viewing/rot_fov_rectangular_marker", angle);
 	emit fovRectangularMarkerRotationAngleChanged(angle);
 }
 
@@ -458,6 +466,7 @@ void SpecialMarkersMgr::setFlagCompassMarks(const bool displayed)
 {
 	if(displayed != compassMarks->isDisplayed()) {
 		compassMarks->setDisplayed(displayed);
+		StelApp::immediateSave("viewing/flag_compass_marks", displayed);
 		emit compassMarksDisplayedChanged(displayed);
 	}
 }
