@@ -2840,11 +2840,25 @@ void Satellites::update(double deltaTime)
 			sat->update(core, JD);
 	}
 #else
-	const auto updateSat = [this, JD](QSharedPointer<Satellite>& sat){
-		if (sat->initialized && sat->displayed)
-			sat->update(core, JD);
-	};
-	QtConcurrent::blockingMap(QThreadPool::globalInstance(), satellites, updateSat);
+	// TODO: sat->update is an obvious candidate for parallelisation and without orbits, it indeed helps a lot.
+	// Unfortunately, the call to Satellite::computeOrbitPoints(); uses static variables, which messes up the orbit lines.
+	// We can compute satellites in parallel, but only if orbits are suppressed, until this is fixed.
+	if (getFlagOrbitLines())
+	{
+		for (const auto& sat : std::as_const(satellites))
+		{
+			if (sat->initialized && sat->displayed)
+				sat->update(core, JD);
+		}
+	}
+	else
+	{
+		const auto updateSat = [this, JD](QSharedPointer<Satellite>& sat){
+			if (sat->initialized && sat->displayed)
+				sat->update(core, JD);
+		};
+		QtConcurrent::blockingMap(QThreadPool::globalInstance(), satellites, updateSat);
+	}
 #endif
 }
 

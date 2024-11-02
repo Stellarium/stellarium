@@ -852,7 +852,8 @@ void Satellite::update(const StelCore *core, const double JD)
 		phaseAngle = std::acos(-1.0*(std::sin(decSun)*std::sin(decSat) + std::cos(decSun)*std::cos(decSat)*std::cos(raSun - raSat)));
 
 		// Compute orbit points to draw orbit line.
-		if (orbitDisplayed) computeOrbitPoints();
+		// We suppress computing so that no lines are computed in parallel as long as this uses static variables.
+		if (orbitLinesFlag && orbitDisplayed) computeOrbitPoints();
 	}
 }
 
