@@ -75,5 +75,5 @@ void GreatRedSpotDialog::setGrsJD(QDateTime dt)
 void GreatRedSpotDialog::openRecentGrsMeasurement()
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
-	QDesktopServices::openUrl(QUrl(conf->value("astro/grs_measurements_url", "http://jupos.privat.t-online.de/rGrs.htm").toString()));
+	QDesktopServices::openUrl(QUrl(conf->value("astro/grs_measurements_url", "https://jupos.hier-im-netz.de/rGrs.htm").toString()));
 }

@@ -2577,6 +2577,7 @@ void SolarSystem::setFlagTrails(bool b)
 			allTrails->reset(maxTrailPoints);
 			recreateTrails();
 		}
+		StelApp::immediateSave("astro/flag_object_trails", b);
 		emit trailsDisplayedChanged(b);
 	}
 }
@@ -2593,6 +2594,7 @@ void SolarSystem::setMaxTrailPoints(int max)
 		maxTrailPoints = max;
 		allTrails->reset(max);
 		recreateTrails();
+		StelApp::immediateSave("viewing/max_trail_points", max);
 		emit maxTrailPointsChanged(max);
 	}
 }
@@ -2603,6 +2605,7 @@ void SolarSystem::setMaxTrailTimeExtent(int max)
 	{
 		maxTrailTimeExtent = max;
 		recreateTrails();
+		StelApp::immediateSave("viewing/max_trail_time_extent", max);
 		emit maxTrailTimeExtentChanged(max);
 	}
 }
@@ -2612,6 +2615,7 @@ void SolarSystem::setTrailsThickness(int v)
 	if (trailsThickness != v)
 	{
 		trailsThickness = v;
+		StelApp::immediateSave("astro/object_trails_thickness", v);
 		emit trailsThicknessChanged(v);
 	}
 }
@@ -2622,6 +2626,7 @@ void SolarSystem::setFlagHints(bool b)
 	{
 		for (const auto& p : std::as_const(systemPlanets))
 			p->setFlagHints(b);
+		StelApp::immediateSave("astro/flag_planets_hints", b);
 		emit flagHintsChanged(b);
 	}
 }
@@ -2642,6 +2647,7 @@ void SolarSystem::setFlagLabels(bool b)
 	{
 		for (const auto& p : std::as_const(systemPlanets))
 			p->setFlagLabels(b);
+		StelApp::immediateSave("astro/flag_planets_labels", b);
 		emit labelsDisplayedChanged(b);
 	}
 }
@@ -2661,6 +2667,7 @@ void SolarSystem::setFlagMarkers(bool b)
 	if (getFlagMarkers() != b)
 	{
 		markerFader = b;
+		StelApp::immediateSave("astro/flag_planets_markers", b);
 		emit markersDisplayedChanged(b);
 	}
 }
@@ -2675,6 +2682,7 @@ void SolarSystem::setFlagLightTravelTime(bool b)
 	if(b!=flagLightTravelTime)
 	{
 		flagLightTravelTime = b;
+		StelApp::immediateSave("astro/flag_light_travel_time", b);
 		emit flagLightTravelTimeChanged(b);
 	}
 }
@@ -2686,6 +2694,7 @@ void SolarSystem::setFlagShowObjSelfShadows(bool b)
 		flagShowObjSelfShadows = b;
 		if(!b)
 			Planet::deinitFBO();
+		StelApp::immediateSave("astro/flag_show_obj_self_shadows", b);
 		emit flagShowObjSelfShadowsChanged(b);
 	}
 }
@@ -2854,6 +2863,7 @@ void SolarSystem::setFlagPlanets(bool b)
 	if (b!=flagShow)
 	{
 		flagShow=b;
+		StelApp::immediateSave("astro/flag_planets", b);
 		emit flagPlanetsDisplayedChanged(b);
 	}
 }
@@ -3188,6 +3198,7 @@ void SolarSystem::setFlagNativePlanetNames(bool b)
 				p->setFlagNativeName(flagNativePlanetNames);
 		}
 		updateI18n();
+		StelApp::immediateSave("viewing/flag_planets_native_names", b);
 		emit flagNativePlanetNamesChanged(b);
 	}
 }
@@ -3203,6 +3214,7 @@ void SolarSystem::setFlagIsolatedTrails(bool b)
 	{
 		flagIsolatedTrails = b;
 		recreateTrails();
+		StelApp::immediateSave("viewing/flag_isolated_trails", b);
 		emit flagIsolatedTrailsChanged(b);
 	}
 }
@@ -3225,6 +3237,7 @@ void SolarSystem::setNumberIsolatedTrails(int n)
 	if (getFlagIsolatedTrails())
 		recreateTrails();
 
+	StelApp::immediateSave("viewing/number_isolated_trails", n);
 	emit numberIsolatedTrailsChanged(numberIsolatedTrails);
 }
 
@@ -3233,6 +3246,7 @@ void SolarSystem::setFlagOrbits(bool b)
 	if(b!=getFlagOrbits())
 	{
 		flagOrbits = b;
+		StelApp::immediateSave("astro/flag_planets_orbits", b);
 		emit flagOrbitsChanged(b);
 	}
 }
@@ -3648,6 +3662,7 @@ void SolarSystem::setFlagMoonScale(bool b)
 		if (b) getMoon()->setSphereScale(moonScale);
 		else getMoon()->setSphereScale(1);
 		flagMoonScale = b;
+		StelApp::immediateSave("viewing/flag_moon_scaled", b);
 		emit flagMoonScaleChanged(b);
 	}
 }
@@ -3660,6 +3675,7 @@ void SolarSystem::setMoonScale(double f)
 		moonScale = f;
 		if (flagMoonScale)
 			getMoon()->setSphereScale(moonScale);
+		StelApp::immediateSave("viewing/moon_scale", f);
 		emit moonScaleChanged(f);
 	}
 }
@@ -3679,6 +3695,7 @@ void SolarSystem::setFlagMinorBodyScale(bool b)
 			if (p->getPlanetType()!=Planet::isPlanet && p->getPlanetType()!=Planet::isStar)
 				p->setSphereScale(newScale);
 		}
+		StelApp::immediateSave("viewing/flag_minorbodies_scaled", b);
 		emit flagMinorBodyScaleChanged(b);
 	}
 }
@@ -3698,6 +3715,7 @@ void SolarSystem::setMinorBodyScale(double f)
 					p->setSphereScale(minorBodyScale);
 			}
 		}
+		StelApp::immediateSave("viewing/minorbodies_scale", f);
 		emit minorBodyScaleChanged(f);
 	}
 }
@@ -3714,6 +3732,7 @@ void SolarSystem::setFlagPlanetScale(bool b)
 				p->setSphereScale(scale);
 		}
 		flagPlanetScale = b;
+		StelApp::immediateSave("viewing/flag_planets_scaled", b);
 		emit flagPlanetScaleChanged(b);
 	}
 }
@@ -3730,6 +3749,7 @@ void SolarSystem::setPlanetScale(double f)
 				if (p->pType==Planet::isPlanet)
 					p->setSphereScale(planetScale);
 			}
+		StelApp::immediateSave("viewing/planets_scale", f);
 		emit planetScaleChanged(f);
 	}
 }
@@ -3742,6 +3762,7 @@ void SolarSystem::setFlagSunScale(bool b)
 		if (b) getSun()->setSphereScale(sunScale);
 		else getSun()->setSphereScale(1);
 		flagSunScale = b;
+		StelApp::immediateSave("viewing/flag_sun_scaled", b);
 		emit flagSunScaleChanged(b);
 	}
 }
@@ -3754,6 +3775,7 @@ void SolarSystem::setSunScale(double f)
 		sunScale = f;
 		if (flagSunScale)
 			getSun()->setSphereScale(sunScale);
+		StelApp::immediateSave("viewing/sun_scale", f);
 		emit sunScaleChanged(f);
 	}
 }
@@ -3886,19 +3908,30 @@ void SolarSystem::reloadPlanets()
 // Set the algorithm for computation of apparent magnitudes for planets in case  observer on the Earth
 void SolarSystem::setApparentMagnitudeAlgorithmOnEarth(const QString &algorithm)
 {
-	Planet::setApparentMagnitudeAlgorithm(algorithm);
+	Planet::ApparentMagnitudeAlgorithm id=vMagAlgorithmMap.key(algorithm);
+	Planet::setApparentMagnitudeAlgorithm(id);
+	StelApp::immediateSave("astro/apparent_magnitude_algorithm", algorithm);
 	emit apparentMagnitudeAlgorithmOnEarthChanged(algorithm);
+}
+// overloaded for GUI efficiency
+void SolarSystem::setApparentMagnitudeAlgorithmOnEarth(const Planet::ApparentMagnitudeAlgorithm id)
+{
+	QString name =vMagAlgorithmMap.value(id);
+	Planet::setApparentMagnitudeAlgorithm(id);
+	StelApp::immediateSave("astro/apparent_magnitude_algorithm", name);
+	emit apparentMagnitudeAlgorithmOnEarthChanged(name);
 }
 
 // Get the algorithm used for computation of apparent magnitudes for planets in case  observer on the Earth
 QString SolarSystem::getApparentMagnitudeAlgorithmOnEarth() const
 {
-	return Planet::getApparentMagnitudeAlgorithmString();
+	return vMagAlgorithmMap.value(Planet::getApparentMagnitudeAlgorithm());
 }
 
 void SolarSystem::setFlagDrawMoonHalo(bool b)
 {
 	Planet::drawMoonHalo=b;
+	StelApp::immediateSave("viewing/flag_draw_moon_halo", b);
 	emit flagDrawMoonHaloChanged(b);
 }
 
@@ -3910,6 +3943,7 @@ bool SolarSystem::getFlagDrawMoonHalo() const
 void SolarSystem::setFlagDrawSunHalo(bool b)
 {
 	Planet::drawSunHalo=b;
+	StelApp::immediateSave("viewing/flag_draw_sun_halo", b);
 	emit flagDrawSunHaloChanged(b);
 }
 
@@ -3990,6 +4024,7 @@ double SolarSystem::getGrsJD()
 void SolarSystem::setFlagEarthShadowEnlargementDanjon(bool b)
 {
 	earthShadowEnlargementDanjon=b;
+	StelApp::immediateSave("astro/shadow_enlargement_danjon", b);
 	emit earthShadowEnlargementDanjonChanged(b);
 }
 
@@ -4005,7 +4040,10 @@ void SolarSystem::setOrbitColorStyle(const QString &style)
 		{ QString("major_planets"),             Planet::ocsMajorPlanets},
 		{ QString("major_planets_minor_types"), Planet::ocsMajorPlanetsMinorTypes}
 	};
-	Planet::orbitColorStyle = map.value(style.toLower(), Planet::ocsOneColor);
+	Planet::PlanetOrbitColorStyle st=map.value(style.toLower(), Planet::ocsOneColor);
+	Planet::orbitColorStyle = st;
+	StelApp::immediateSave("astro/planets_orbits_color_style", style);
+	emit orbitColorStyleChanged(style);
 }
 
 QString SolarSystem::getOrbitColorStyle() const
@@ -4196,3 +4234,14 @@ void SolarSystem::setMarkerMagThreshold(double m)
 	StelApp::immediateSave("astro/planet_markers_mag_threshold", markerMagThreshold);
 	emit markerMagThresholdChanged(markerMagThreshold);
 }
+
+const QMap<Planet::ApparentMagnitudeAlgorithm, QString> SolarSystem::vMagAlgorithmMap =
+{
+	{Planet::MallamaHilton_2018,	        "Mallama2018"},
+	{Planet::ExplanatorySupplement_2013,	"ExpSup2013"},
+	{Planet::ExplanatorySupplement_1992,	"ExpSup1992"},
+	{Planet::Mueller_1893,			"Mueller1893"},
+	{Planet::AstronomicalAlmanac_1984,	"AstrAlm1984"},
+	{Planet::Generic,			"Generic"},
+	{Planet::UndefinedAlgorithm,		""}
+};

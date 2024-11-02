@@ -43,7 +43,6 @@
 #include "ConstellationMgr.hpp"
 #include "StarMgr.hpp"
 #include "NebulaMgr.hpp"
-#include "Planet.hpp"
 #ifdef ENABLE_SCRIPTING
 #include "StelScriptMgr.hpp"
 #endif
@@ -909,7 +908,7 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("viewing/flag_planets_native_names",		propMgr->getStelPropertyValue("SolarSystem.flagNativePlanetNames").toBool());
 	conf->setValue("astro/flag_use_obj_models",			propMgr->getStelPropertyValue("SolarSystem.flagUseObjModels").toBool());
 	conf->setValue("astro/flag_show_obj_self_shadows",		propMgr->getStelPropertyValue("SolarSystem.flagShowObjSelfShadows").toBool());
-	conf->setValue("astro/apparent_magnitude_algorithm",		Planet::getApparentMagnitudeAlgorithmString());
+	conf->setValue("astro/apparent_magnitude_algorithm",		propMgr->getStelPropertyValue("SolarSystem.apparentMagnitudeAlgorithmOnEarth").toString());
 	conf->setValue("astro/flag_planets_nomenclature",		propMgr->getStelPropertyValue("NomenclatureMgr.flagShowNomenclature").toBool());
 	conf->setValue("astro/flag_planets_nomenclature_outline_craters",propMgr->getStelPropertyValue("NomenclatureMgr.flagOutlineCraters").toBool());
 	conf->setValue("astro/flag_hide_local_nomenclature",		propMgr->getStelPropertyValue("NomenclatureMgr.flagHideLocalNomenclature").toBool());
