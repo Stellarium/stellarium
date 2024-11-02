@@ -150,16 +150,6 @@ const QMap<QString, QString> Planet::nPlanetMap =
 	{ "P", "(134340) Pluto" }
 };
 
-const QMap<Planet::ApparentMagnitudeAlgorithm, QString> Planet::vMagAlgorithmMap =
-{
-	{Planet::MallamaHilton_2018,	        "Mallama2018"},
-	{Planet::ExplanatorySupplement_2013,	"ExpSup2013"},
-	{Planet::ExplanatorySupplement_1992,	"ExpSup1992"},
-	{Planet::Mueller_1893,			"Mueller1893"},
-	{Planet::AstronomicalAlmanac_1984,	"AstrAlm1984"},
-	{Planet::Generic,			"Generic"},
-	{Planet::UndefinedAlgorithm,		""}
-};
 
 Planet::ApparentMagnitudeAlgorithm Planet::vMagAlgorithm;
 
@@ -4979,12 +4969,6 @@ void Planet::update(int deltaTime)
 	hintFader.update(deltaTime);
 	labelsFader.update(deltaTime);
 	orbitFader.update(deltaTime);
-}
-
-void Planet::setApparentMagnitudeAlgorithm(QString algorithm)
-{
-	// sync default value with ViewDialog and SolarSystem!
-	vMagAlgorithm = vMagAlgorithmMap.key(algorithm, Planet::MallamaHilton_2018);
 }
 
 // Source: Meeus, Astronomical Algorithms, 2nd ed. 1998, ch.15, but with considerable changes.

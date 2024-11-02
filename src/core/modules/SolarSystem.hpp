@@ -265,7 +265,7 @@ public slots:
 	//! Set the amount of planet labels. The real amount is also proportional with FOV.
 	//! The limit is set in function of the planets magnitude
 	//! @param a the amount between 0 and 10. 0 is no labels, 10 is maximum of labels
-	void setLabelsAmount(double a) {if(!fuzzyEquals(a, labelsAmount)) {labelsAmount=a; emit labelsAmountChanged(a);}}
+	void setLabelsAmount(double a) {if(!fuzzyEquals(a, labelsAmount)) {labelsAmount=a; StelApp::immediateSave("astro/labels_amount", a); emit labelsAmountChanged(a);}}
 	//! Get the amount of planet labels. The real amount is also proportional with FOV.
 	//! @return the amount between 0 and 10. 0 is no labels, 10 is maximum of labels
 	double getLabelsAmount(void) const {return labelsAmount;}
@@ -276,7 +276,7 @@ public slots:
 	bool getFlagOrbits() const {return flagOrbits;}
 
 	//! Set flag which determines if the planet pointer (red cross) is drawn or hidden on a selected planet.
-	void setFlagPointer(bool b) { if (b!=flagPointer) { flagPointer=b; emit flagPointerChanged(b); }}
+	void setFlagPointer(bool b) { if (b!=flagPointer) { flagPointer=b; StelApp::immediateSave("astro/flag_planets_pointers", b); emit flagPointerChanged(b); }}
 	//! Get the current value of the flag which determines if planet pointers are drawn or hidden.
 	bool getFlagPointer() const { return flagPointer;}
 
@@ -287,7 +287,7 @@ public slots:
 	bool getFlagLightTravelTime(void) const {return flagLightTravelTime;}
 
 	//! Set flag whether to use OBJ models for rendering, where available
-	void setFlagUseObjModels(bool b) { if(b!=flagUseObjModels) { flagUseObjModels = b; emit flagUseObjModelsChanged(b); } }
+	void setFlagUseObjModels(bool b) { if(b!=flagUseObjModels) { flagUseObjModels = b; StelApp::immediateSave("astro/flag_use_obj_models", b); emit flagUseObjModelsChanged(b); } }
 	//! Get the current value of the flag which determines whether to use OBJ models for rendering, where available
 	bool getFlagUseObjModels(void) const { return flagUseObjModels; }
 
@@ -647,7 +647,8 @@ public slots:
 	//! @note: The structure of algorithms is almost identical, just the numbers are different!
 	//!        You should activate Mueller's algorithm to simulate the eye's impression. (Esp. Venus!)
 	void setApparentMagnitudeAlgorithmOnEarth(const QString &algorithm);
-
+	//! overload with numeric ID
+	void setApparentMagnitudeAlgorithmOnEarth(const Planet::ApparentMagnitudeAlgorithm id);
 	//! Get the algorithm used for computation of apparent magnitudes for planets in case observer on the Earth
 	//! @see setApparentMagnitudeAlgorithmOnEarth()
 	QString getApparentMagnitudeAlgorithmOnEarth() const;
@@ -688,7 +689,7 @@ public slots:
 	bool getFlagOrbitsWithMoons(void) const;
 
 	//! Set flag which enabled the showing of solar corona when atmosphere is disabled (true) of draw the corona when total solar eclipses is happened only (false)
-	void setFlagPermanentSolarCorona(bool b) {	if (flagPermanentSolarCorona!=b)	{ flagPermanentSolarCorona = b; emit flagPermanentSolarCoronaChanged(b); } }
+	void setFlagPermanentSolarCorona(bool b) {if (flagPermanentSolarCorona!=b){ flagPermanentSolarCorona = b; StelApp::immediateSave("viewing/flag_draw_sun_corona", b); emit flagPermanentSolarCoronaChanged(b); } }
 	//! Get the current value of the flag which enables showing of solar corona when atmosphere is disabled or when total solar eclipses is happened only.
 	bool getFlagPermanentSolarCorona(void) const { return flagPermanentSolarCorona; }
 
@@ -1179,6 +1180,8 @@ private:
 	LinearFader trailFader;
 	Vec3f trailsColor;
 	Vec3f pointerColor;
+
+	static const QMap<Planet::ApparentMagnitudeAlgorithm, QString> vMagAlgorithmMap;
 
 	QHash<QString, QString> planetNativeNamesMap, planetNativeNamesMeaningMap;
 	QStringList minorBodies;

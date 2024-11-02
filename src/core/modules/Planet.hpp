@@ -342,8 +342,6 @@ public:
 	double getMass() const { return massKg; }
 	//
 	static ApparentMagnitudeAlgorithm getApparentMagnitudeAlgorithm()  { return vMagAlgorithm; }
-	static const QString getApparentMagnitudeAlgorithmString()  { return vMagAlgorithmMap.value(vMagAlgorithm); }
-	static void setApparentMagnitudeAlgorithm(QString algorithm);
 	static void setApparentMagnitudeAlgorithm(ApparentMagnitudeAlgorithm algorithm){ vMagAlgorithm=algorithm; }
 
 	//! Compute the axial z rotation (daily rotation around the polar axis) [degrees] to use from equatorial to hour angle based coordinates.
@@ -821,7 +819,6 @@ protected:
 	static StelTextureSP hintCircleTex; // The circle around an SSO
 	static const QMap<PlanetType, QString> pTypeMap; // Maps fast type to english name.
 	static const QMap<QString, QString> nPlanetMap; // Maps fast IAU number to IAU designation.
-	static const QMap<ApparentMagnitudeAlgorithm, QString> vMagAlgorithmMap;
 	static bool drawMoonHalo;
 	static bool drawSunHalo;
 	//! If true, planet orbits will be drawn even if planet is off screen.

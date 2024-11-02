@@ -1279,8 +1279,9 @@ void ViewDialog::populatePlanetMagnitudeAlgorithmsList()
 
 void ViewDialog::setPlanetMagnitudeAlgorithm(int algorithmID)
 {
-	Planet::ApparentMagnitudeAlgorithm currentAlgorithm = static_cast<Planet::ApparentMagnitudeAlgorithm>(ui->planetMagnitudeAlgorithmComboBox->itemData(algorithmID).toInt());
-	Planet::setApparentMagnitudeAlgorithm(currentAlgorithm);
+	Planet::ApparentMagnitudeAlgorithm newAlgorithm = static_cast<Planet::ApparentMagnitudeAlgorithm>(ui->planetMagnitudeAlgorithmComboBox->itemData(algorithmID).toInt());
+
+	GETSTELMODULE(SolarSystem)->setApparentMagnitudeAlgorithmOnEarth(newAlgorithm);
 	populatePlanetMagnitudeAlgorithmDescription();
 }
 
