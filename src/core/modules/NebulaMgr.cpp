@@ -776,7 +776,7 @@ float NebulaMgr::computeMaxMagHint(const StelSkyDrawer* skyDrawer) const
 	return skyDrawer->getLimitMagnitude()*1.2f-2.f+static_cast<float>(hintsAmount *1.)-2.f;
 }
 
-// Draw all the Nebulae
+// Draw all the Nebulae and call drawing the pointer if needed
 void NebulaMgr::draw(StelCore* core)
 {
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
