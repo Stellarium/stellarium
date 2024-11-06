@@ -779,27 +779,27 @@ float NebulaMgr::computeMaxMagHint(const StelSkyDrawer* skyDrawer) const
 // Draw all the Nebulae
 void NebulaMgr::draw(StelCore* core)
 {
-	if(hintsFader.getInterstate()<=0.f)
-		return;
-
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 	StelPainter sPainter(prj);
-
-	static StelSkyDrawer* skyDrawer = core->getSkyDrawer();
-
-	Nebula::hintsBrightness  = hintsFader.getInterstate()*flagShow.getInterstate()*static_cast<float>(hintsBrightness);
-	Nebula::labelsBrightness = hintsFader.getInterstate()*flagShow.getInterstate()*static_cast<float>(labelsBrightness);
-
-	// Use a 4 degree margin (esp. for wide outlines)
-	const float margin = 4.f*M_PI_180f*prj->getPixelPerRadAtCenter();
-	const SphericalRegionP& p = prj->getViewportConvexPolygon(margin, margin);
-
-	// Print all the nebulae of all the selected zones
-	float maxMagHints  = computeMaxMagHint(skyDrawer);
-	float maxMagLabels = skyDrawer->getLimitMagnitude()-2.f+static_cast<float>(labelsAmount*1.2)-2.f;
 	sPainter.setFont(nebulaFont);
-	DrawNebulaFuncObject func(maxMagHints, maxMagLabels, &sPainter, core, hintsFader.getInterstate()<=0.f);
-	nebGrid.processIntersectingPointInRegions(p.data(), func);
+
+	if(hintsFader.getInterstate()>0.f)
+	{
+		static StelSkyDrawer* skyDrawer = core->getSkyDrawer();
+
+		Nebula::hintsBrightness  = hintsFader.getInterstate()*flagShow.getInterstate()*static_cast<float>(hintsBrightness);
+		Nebula::labelsBrightness = hintsFader.getInterstate()*flagShow.getInterstate()*static_cast<float>(labelsBrightness);
+
+		// Use a 4 degree margin (esp. for wide outlines)
+		const float margin = 4.f*M_PI_180f*prj->getPixelPerRadAtCenter();
+		const SphericalRegionP& p = prj->getViewportConvexPolygon(margin, margin);
+
+		// Print all the nebulae of all the selected zones
+		float maxMagHints  = computeMaxMagHint(skyDrawer);
+		float maxMagLabels = skyDrawer->getLimitMagnitude()-2.f+static_cast<float>(labelsAmount*1.2)-2.f;
+		DrawNebulaFuncObject func(maxMagHints, maxMagLabels, &sPainter, core, hintsFader.getInterstate()<=0.f);
+		nebGrid.processIntersectingPointInRegions(p.data(), func);
+	}
 
 	static StelObjectMgr *som=GETSTELMODULE(StelObjectMgr);
 	if (som->getFlagSelectedObjectPointer())
