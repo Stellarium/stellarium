@@ -337,7 +337,7 @@ public:
 	//!  - call updateI18n() to translate names.
 	void init() override;
 
-	//! Draws all nebula objects.
+	//! Draws all nebula objects and the pointer.
 	void draw(StelCore* core) override;
 
 	//! Update state which is time dependent.
