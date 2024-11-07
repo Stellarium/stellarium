@@ -385,7 +385,20 @@
         </widget>
        </item>
        <item>
-        <widget class="TelescopeClientINDIWidget" name="INDIProperties" native="true"/>
+        <layout class="QVBoxLayout" name="INDILayout">
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
+        </layout>
        </item>
        <item>
         <layout class="QVBoxLayout" name="ASCOMLayout">
@@ -871,12 +884,6 @@
    <class>TitleBar</class>
    <extends>QFrame</extends>
    <header>Dialog.hpp</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>TelescopeClientINDIWidget</class>
-   <extends>QWidget</extends>
-   <header>TelescopeClientINDIWidget.hpp</header>
    <container>1</container>
   </customwidget>
   <customwidget>

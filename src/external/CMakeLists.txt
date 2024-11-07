@@ -87,7 +87,7 @@ IF(USE_BUNDLED_QTCOMPRESS)
 ENDIF()
 
 ################################# INDI ################################
-IF(USE_PLUGIN_TELESCOPECONTROL)
+IF(USE_PLUGIN_TELESCOPECONTROL AND NOT WIN32)
     SET(PREFER_SYSTEM_INDILIB 1 CACHE BOOL
         "Use system-provided INDI instead of the bundled version")
     find_library(INDICLIENT_LIB indiclient)
