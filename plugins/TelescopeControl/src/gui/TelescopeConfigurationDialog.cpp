@@ -207,7 +207,7 @@ void TelescopeConfigurationDialog::initConfigurationDialog()
 	ui->groupBoxDeviceSettings->hide();
 	ui->groupBoxRTS2Settings->hide();
 	#ifndef Q_OS_WIN
-	ui->INDILayout->hide();
+	indiWidget->hide();
 	#endif
 	#if defined(Q_OS_WIN) && QT_VERSION<QT_VERSION_CHECK(6,0,0)
 	ascomWidget->hide();
@@ -563,8 +563,7 @@ void TelescopeConfigurationDialog::buttonSavePressed()
 	else if (ui->radioButtonTelescopeINDI->isChecked())
 	{
 		type = TelescopeControl::ConnectionINDI;
-		telescopeManager->addTelescopeAtSlot(configuredSlot, type, name, equinox, ui->indiWidget->host(),
-		  ui->indiWidget->port(), delay, connectAtStartup, circles, ui->indiWidget->selectedDevice());
+		telescopeManager->addTelescopeAtSlot(configuredSlot, type, name, equinox, indiWidget->host(), indiWidget->port(), delay, connectAtStartup, circles, indiWidget->selectedDevice());
 	}
 	#endif
 	#if defined(Q_OS_WIN) && QT_VERSION<QT_VERSION_CHECK(6,0,0)
