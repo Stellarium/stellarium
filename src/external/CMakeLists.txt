@@ -88,14 +88,12 @@ ENDIF()
 
 ################################# INDI ################################
 IF(USE_PLUGIN_TELESCOPECONTROL AND NOT WIN32)
-    SET(PREFER_SYSTEM_INDILIB 1 CACHE BOOL
-        "Use system-provided INDI instead of the bundled version")
+    SET(PREFER_SYSTEM_INDILIB 1 CACHE BOOL "Use system-provided INDI instead of the bundled version")
     find_library(INDICLIENT_LIB indiclient)
     if(INDICLIENT_LIB AND PREFER_SYSTEM_INDILIB)
         MESSAGE(STATUS "Using system-provided indiclient at ${INDICLIENT_LIB}")
         add_library(indiclient UNKNOWN IMPORTED GLOBAL)
-        set_target_properties(indiclient PROPERTIES
-            IMPORTED_LOCATION "${INDICLIENT_LIB}")
+	set_target_properties(indiclient PROPERTIES IMPORTED_LOCATION "${INDICLIENT_LIB}")
     else()
         include(CheckSymbolExists)
         check_symbol_exists(mremap sys/mman.h HAVE_MREMAP)
@@ -112,55 +110,29 @@ IF(USE_PLUGIN_TELESCOPECONTROL AND NOT WIN32)
 		DOWNLOAD_ONLY YES)
 
         # First, fix a missing include
-        file(READ
-                ${indiclient_SOURCE_DIR}/libs/indicore/indidevapi.h
-                INDIDEVAPI_H)
-        string(REGEX REPLACE "#include .lilxml.h."
-                "#include \"lilxml.h\"\n#include <stdarg.h>"
-                INDIDEVAPI_H "${INDIDEVAPI_H}")
-        file(WRITE
-                ${indiclient_SOURCE_DIR}/libs/indicore/indidevapi.h.new
-                "${INDIDEVAPI_H}")
-        configure_file(${indiclient_SOURCE_DIR}/libs/indicore/indidevapi.h.new
-                ${indiclient_SOURCE_DIR}/libs/indicore/indidevapi.h COPYONLY)
+	file(READ ${indiclient_SOURCE_DIR}/libs/indicore/indidevapi.h INDIDEVAPI_H)
+	string(REGEX REPLACE "#include .lilxml.h." "#include \"lilxml.h\"\n#include <stdarg.h>" INDIDEVAPI_H "${INDIDEVAPI_H}")
+	file(WRITE ${indiclient_SOURCE_DIR}/libs/indicore/indidevapi.h.new "${INDIDEVAPI_H}")
+	configure_file(${indiclient_SOURCE_DIR}/libs/indicore/indidevapi.h.new ${indiclient_SOURCE_DIR}/libs/indicore/indidevapi.h COPYONLY)
 
         # libastro.h doesn't need libnova/utility.h
-        file(READ
-                ${indiclient_SOURCE_DIR}/libs/indicore/libastro.h
-                LIBASTRO_H)
+	file(READ ${indiclient_SOURCE_DIR}/libs/indicore/libastro.h LIBASTRO_H)
         string(REGEX REPLACE "#include <libnova/utility.h>" "" LIBASTRO_H "${LIBASTRO_H}")
-        file(WRITE
-                ${indiclient_SOURCE_DIR}/libs/indicore/libastro.h.new
-                "${LIBASTRO_H}")
-        configure_file(${indiclient_SOURCE_DIR}/libs/indicore/libastro.h.new
-                ${indiclient_SOURCE_DIR}/libs/indicore/libastro.h COPYONLY)
+	file(WRITE ${indiclient_SOURCE_DIR}/libs/indicore/libastro.h.new "${LIBASTRO_H}")
+	configure_file(${indiclient_SOURCE_DIR}/libs/indicore/libastro.h.new ${indiclient_SOURCE_DIR}/libs/indicore/libastro.h COPYONLY)
 
         # Avoid bundling libnova too
-        file(READ
-            ${indiclient_SOURCE_DIR}/libs/indibase/inditelescope.h
-            INDITELESCOPE_H)
-        string(REGEX REPLACE
-            "#include <libnova/julian_day.h>" "struct ln_date;"
-            INDITELESCOPE_H "${INDITELESCOPE_H}")
-        string(REGEX REPLACE
-            "ln_lnlat_posn lnobserver { 0, 0 };" ""
-            INDITELESCOPE_H "${INDITELESCOPE_H}")
-        file(WRITE ${indiclient_SOURCE_DIR}/inditelescope.h.new
-            "${INDITELESCOPE_H}")
-        configure_file(${indiclient_SOURCE_DIR}/inditelescope.h.new
-            ${indiclient_SOURCE_DIR}/libs/indibase/inditelescope.h COPYONLY)
+	file(READ ${indiclient_SOURCE_DIR}/libs/indibase/inditelescope.h INDITELESCOPE_H)
+	string(REGEX REPLACE "#include <libnova/julian_day.h>" "struct ln_date;" INDITELESCOPE_H "${INDITELESCOPE_H}")
+	string(REGEX REPLACE "ln_lnlat_posn lnobserver { 0, 0 };" "" INDITELESCOPE_H "${INDITELESCOPE_H}")
+	file(WRITE ${indiclient_SOURCE_DIR}/inditelescope.h.new "${INDITELESCOPE_H}")
+	configure_file(${indiclient_SOURCE_DIR}/inditelescope.h.new ${indiclient_SOURCE_DIR}/libs/indibase/inditelescope.h COPYONLY)
 
         # Fix build in windows
-        file(READ
-            ${indiclient_SOURCE_DIR}/libs/indibase/indilogger.h
-            INDILOGGER_H)
-        string(REGEX REPLACE "#include <sys/time.h>"
-            "#ifdef Q_OS_WIN\n#include <windows.h>\n#else\n#include <sys/time.h>\n#endif"
-            INDILOGGER_H "${INDILOGGER_H}")
-        file(WRITE ${indiclient_SOURCE_DIR}/indilogger.h.new
-            "${INDILOGGER_H}")
-        configure_file(${indiclient_SOURCE_DIR}/indilogger.h.new
-            ${indiclient_SOURCE_DIR}/libs/indibase/indilogger.h COPYONLY)
+	file(READ ${indiclient_SOURCE_DIR}/libs/indibase/indilogger.h INDILOGGER_H)
+	string(REGEX REPLACE "#include <sys/time.h>" "#ifdef Q_OS_WIN\n#include <windows.h>\n#else\n#include <sys/time.h>\n#endif" INDILOGGER_H "${INDILOGGER_H}")
+	file(WRITE ${indiclient_SOURCE_DIR}/indilogger.h.new "${INDILOGGER_H}")
+	configure_file(${indiclient_SOURCE_DIR}/indilogger.h.new ${indiclient_SOURCE_DIR}/libs/indibase/indilogger.h COPYONLY)
 
         set(INDI_SOVERSION "2")
         set(CMAKE_INDI_VERSION_MAJOR 2)
@@ -169,11 +141,9 @@ IF(USE_PLUGIN_TELESCOPECONTROL AND NOT WIN32)
         set(CMAKE_INDI_VERSION_STRING "${CMAKE_INDI_VERSION_MAJOR}.${CMAKE_INDI_VERSION_MINOR}.${CMAKE_INDI_VERSION_RELEASE}")
         set(INDI_VERSION ${CMAKE_INDI_VERSION_MAJOR}.${CMAKE_INDI_VERSION_MINOR}.${CMAKE_INDI_VERSION_RELEASE})
         set(DATA_INSTALL_DIR "${CMAKE_INSTALL_PREFIX}/share/indi/")
-        configure_file(${indiclient_SOURCE_DIR}/config.h.cmake
-            ${indiclient_SOURCE_DIR}/config.h )
+	configure_file(${indiclient_SOURCE_DIR}/config.h.cmake ${indiclient_SOURCE_DIR}/config.h )
 
-        configure_file(${indiclient_SOURCE_DIR}/libs/indicore/indiapi.h.in
-                ${indiclient_SOURCE_DIR}/libs/indiapi.h)
+	configure_file(${indiclient_SOURCE_DIR}/libs/indicore/indiapi.h.in ${indiclient_SOURCE_DIR}/libs/indiapi.h)
         list(APPEND INDILIB_SOURCES
                 ${indiclient_SOURCE_DIR}/libs/indicore/lilxml.cpp
                 ${indiclient_SOURCE_DIR}/libs/indicore/base64.c
