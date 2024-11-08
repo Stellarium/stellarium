@@ -36,9 +36,8 @@ target_link_libraries(TelescopeControl_INDI
 
 target_include_directories(TelescopeControl_INDI INTERFACE ${CMAKE_CURRENT_SOURCE_DIR})
 
-#FIXME: Unit tests for INDI has been disabled temporarily
-#IF(ENABLE_TESTING)
-#    add_subdirectory(test)
-#ENDIF(ENABLE_TESTING)
+IF(ENABLE_TESTING)
+    add_subdirectory(test)
+ENDIF(ENABLE_TESTING)
 
 SET_TARGET_PROPERTIES(TelescopeControl_INDI PROPERTIES FOLDER "plugins/TelescopeControl")

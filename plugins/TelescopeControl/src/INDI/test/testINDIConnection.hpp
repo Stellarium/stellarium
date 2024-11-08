@@ -30,7 +30,7 @@ private slots:
     void defaultPosition();
     void initialConnectionStatus();
     void setPositionNotConnected();
-    void listDevices();
+    //void listDevices();
 };
 
 #endif // TESTINDICONNECTION_HPP
