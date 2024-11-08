@@ -26,14 +26,14 @@ INDIControlWidget::INDIControlWidget(QSharedPointer<TelescopeClient> telescope, 
 {
 	ui->setupUi(this);
 
-	QObject::connect(ui->northButton, &QPushButton::pressed,  this, [=](){mTelescope->move(180, speed());});
-	QObject::connect(ui->northButton, &QPushButton::released, this, [=](){mTelescope->move(180, 0);});
-	QObject::connect(ui->eastButton,  &QPushButton::pressed,  this, [=](){mTelescope->move(270, speed());});
-	QObject::connect(ui->eastButton,  &QPushButton::released, this, [=](){mTelescope->move(270, 0);});
-	QObject::connect(ui->southButton, &QPushButton::pressed,  this, [=](){mTelescope->move(0, speed());});
-	QObject::connect(ui->southButton, &QPushButton::released, this, [=](){mTelescope->move(0, 0);});
-	QObject::connect(ui->westButton,  &QPushButton::pressed,  this, [=](){mTelescope->move(90, speed());});
-	QObject::connect(ui->westButton,  &QPushButton::released, this, [=](){mTelescope->move(90, 0);});
+	QObject::connect(ui->moveUp, &QToolButton::pressed,  this, [=](){mTelescope->move(0, speed());});
+	QObject::connect(ui->moveUp, &QToolButton::released, this, [=](){mTelescope->move(0, 0);});
+	QObject::connect(ui->moveRight,  &QToolButton::pressed,  this, [=](){mTelescope->move(270, speed());});
+	QObject::connect(ui->moveRight,  &QToolButton::released, this, [=](){mTelescope->move(270, 0);});
+	QObject::connect(ui->moveDown, &QToolButton::pressed,  this, [=](){mTelescope->move(180, speed());});
+	QObject::connect(ui->moveDown, &QToolButton::released, this, [=](){mTelescope->move(180, 0);});
+	QObject::connect(ui->moveLeft,  &QToolButton::pressed,  this, [=](){mTelescope->move(90, speed());});
+	QObject::connect(ui->moveLeft,  &QToolButton::released, this, [=](){mTelescope->move(90, 0);});
 }
 
 INDIControlWidget::~INDIControlWidget()

@@ -369,6 +369,10 @@ QToolButton#pushButtonGotoSearchSkyObject {
 	icon-size: 24px;
 }
 
+QToolButton#moveUp, QToolButton#moveDown, QToolButton#moveLeft, QToolButton#moveRight {
+	icon-size: 22px;
+}
+
 QToolButton#pushButtonCustomStepsDialog, QToolButton#pushButtonNow, QToolButton#pushButtonExtraEphemerisDialog {
 	icon-size: 20px;
 	min-width: 22px;
