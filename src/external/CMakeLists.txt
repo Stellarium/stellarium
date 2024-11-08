@@ -106,10 +106,10 @@ IF(USE_PLUGIN_TELESCOPECONTROL AND NOT WIN32)
         # Included CMakeLists.txt contains unrelated targets and dependencies of
         # them, therefore DOWNLOAD_ONLY and all the code below
         CPMAddPackage(NAME indiclient
-            URL https://github.com/indilib/indi/archive/v2.0.2.zip
-            URL_HASH SHA256=3278ab38cc751ae262d6808808dd38124879a9b1270edd7351f866abe9d2fd45
-            VERSION 2.0.2
-            DOWNLOAD_ONLY YES)
+		URL https://github.com/indilib/indi/archive/v2.1.0.zip
+		URL_HASH SHA256=551d23f8ea68b37c9b6504b6e5e55d32319d7605f2a63d78cfc73c2d95cee8f2
+		VERSION 2.1.0
+		DOWNLOAD_ONLY YES)
 
         # First, fix a missing include
         file(READ
@@ -164,8 +164,8 @@ IF(USE_PLUGIN_TELESCOPECONTROL AND NOT WIN32)
 
         set(INDI_SOVERSION "2")
         set(CMAKE_INDI_VERSION_MAJOR 2)
-        set(CMAKE_INDI_VERSION_MINOR 0)
-        set(CMAKE_INDI_VERSION_RELEASE 2)
+	set(CMAKE_INDI_VERSION_MINOR 1)
+	set(CMAKE_INDI_VERSION_RELEASE 0)
         set(CMAKE_INDI_VERSION_STRING "${CMAKE_INDI_VERSION_MAJOR}.${CMAKE_INDI_VERSION_MINOR}.${CMAKE_INDI_VERSION_RELEASE}")
         set(INDI_VERSION ${CMAKE_INDI_VERSION_MAJOR}.${CMAKE_INDI_VERSION_MINOR}.${CMAKE_INDI_VERSION_RELEASE})
         set(DATA_INSTALL_DIR "${CMAKE_INSTALL_PREFIX}/share/indi/")
