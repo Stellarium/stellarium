@@ -38,6 +38,12 @@ INDIConnection::INDIConnection(QObject *parent) : QObject(parent)
 INDIConnection::Coordinates INDIConnection::position() const
 {
 	std::lock_guard<std::mutex> lock(mMutex);
+
+	Coordinates mCoordinates;
+	auto property = mTelescope.getNumber("EQUATORIAL_EOD_COORD");
+	mCoordinates.RA = property.getNumber()->np[0].value;
+	mCoordinates.DEC = property.getNumber()->np[1].value;
+
 	return mCoordinates;
 }
 
@@ -78,7 +84,7 @@ void INDIConnection::setPosition(INDIConnection::Coordinates coords)
 
 	property[0].setValue(coords.RA);
 	property[1].setValue(coords.DEC);
-	sendNewNumber(property);
+	sendNewNumber(property);	
 }
 
 void INDIConnection::syncPosition(INDIConnection::Coordinates coords)
@@ -328,7 +334,7 @@ void INDIConnection::newDevice(INDI::BaseDevice dp)
 
 	QString name(dp.getDeviceName());
 
-	qDebug() << "INDIConnection::newDevice| New Device... " << name;
+	qDebug().noquote() << "INDIConnection::newDevice| New Device... " << name;
 
 	mDevices.append(name);
 	mTelescope = dp;
@@ -362,13 +368,7 @@ void INDIConnection::newProperty(INDI::Property property)
 
 	QString name(property.getName());
 
-	qDebug() << "INDIConnection::newProperty| " << name;
-
-	if (name == "EQUATORIAL_EOD_COORD")
-	{
-		mCoordinates.RA = property.getNumber()->np[0].value;
-		mCoordinates.DEC = property.getNumber()->np[1].value;
-	}
+	qDebug().noquote() << "INDIConnection::newProperty| " << name;
 
 	if (!mTelescope.isConnected())
 	{

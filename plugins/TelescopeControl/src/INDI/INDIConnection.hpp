@@ -66,7 +66,6 @@ private:
 
 	mutable std::mutex mMutex;
 	INDI::BaseDevice mTelescope;
-	Coordinates mCoordinates;
 	QStringList mDevices;
 
 public: // from INDI::BaseClient
