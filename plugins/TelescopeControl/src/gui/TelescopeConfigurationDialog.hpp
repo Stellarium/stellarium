@@ -33,6 +33,10 @@
 #include "../ASCOM/TelescopeClientASCOMWidget.hpp"
 #endif
 
+#ifndef Q_OS_WIN
+#include "../INDI/TelescopeClientINDIWidget.hpp"
+#endif
+
 class Ui_telescopeConfigurationDialog;
 class StelStyle;
 
@@ -67,7 +71,9 @@ private slots:
 	void toggleTypeConnection(bool);
 	void toggleTypeVirtual(bool);
 	void toggleTypeRTS2(bool);
+	#ifndef Q_OS_WIN
 	void toggleTypeINDI(bool enabled);
+	#endif
 	#if defined(Q_OS_WIN) && QT_VERSION<QT_VERSION_CHECK(6,0,0)
 	void toggleTypeASCOM(bool enabled);
 	#endif
@@ -89,6 +95,10 @@ private:
 
 	#if defined(Q_OS_WIN) && QT_VERSION<QT_VERSION_CHECK(6,0,0)
 	TelescopeClientASCOMWidget* ascomWidget;
+	#endif
+
+	#ifndef Q_OS_WIN
+	TelescopeClientINDIWidget* indiWidget;
 	#endif
 	
 	int configuredSlot;
