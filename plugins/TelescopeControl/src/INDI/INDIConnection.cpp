@@ -40,9 +40,12 @@ INDIConnection::Coordinates INDIConnection::position() const
 	std::lock_guard<std::mutex> lock(mMutex);
 
 	Coordinates mCoordinates;
-	auto property = mTelescope.getNumber("EQUATORIAL_EOD_COORD");
-	mCoordinates.RA = property.getNumber()->np[0].value;
-	mCoordinates.DEC = property.getNumber()->np[1].value;
+	if (mTelescope.isValid() && mTelescope.isConnected())
+	{
+		auto property = mTelescope.getNumber("EQUATORIAL_EOD_COORD");
+		mCoordinates.RA = property.getNumber()->np[0].value;
+		mCoordinates.DEC = property.getNumber()->np[1].value;
+	}
 
 	return mCoordinates;
 }
