@@ -1551,7 +1551,7 @@ void TelescopeControl::loadDeviceModels()
 	//Clear the list of device models - it may not be empty.
 	deviceModels.clear();
 
-	//Cicle the list of telescope deifinitions
+	//Cycle the list of telescope deifinitions
 	for(int i = 0; i < deviceModelsList.size(); i++)
 	{
 		QVariantMap model = deviceModelsList.at(i).toMap();

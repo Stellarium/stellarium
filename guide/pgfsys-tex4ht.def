@@ -314,7 +314,7 @@
   \hbox to#2\bgroup
     \hsize=#2\relax
     \vbox\bgroup    
-% though it works, I'm desabling the above mentioned hack to make tex4ht behave with <p> <\p>, because it blurps the positioning 
+% though it works, I'm disabling the above mentioned hack to make tex4ht behave with <p> <\p>, because it blurps the positioning 
 % (I''l try to fix that later, it's a css thing)
 %
 %    \ifpgfsys@textonly\else\HtmlParOn\fi
@@ -418,7 +418,7 @@
 
 % There is something rellay wrong with the way "%" chars are used in here... you should code "}%" to avoid unnecessary spaces
 % and it is unnecessary to code \cs%
-% got to be carefull with numbers though, cf the texbook...2\relax and 2 % are okey
+% got to be careful with numbers though, cf the texbook...2\relax and 2 % are okey
 
 \def\pgfsys@outerinvoke{\ifpgfpicture\expandafter\pgfsys@invoke\else\expandafter\pgfutil@gobble\fi}
 
