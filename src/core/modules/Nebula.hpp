@@ -125,7 +125,7 @@ public:
 		NebEMO			= 20,  //!< Emission object
 		NebBLL			= 21,  //!< BL Lac object
 		NebBLA			= 22,  //!< Blazar
-		NebMolCld	        = 23,  //!< Molecular Cloud
+		NebMolCld	    = 23,  //!< Molecular Cloud
 		NebYSO			= 24,  //!< Young Stellar Object
 		NebPossQSO		= 25,  //!< Possible Quasar
 		NebPossPN		= 26,  //!< Possible Planetary Nebula
