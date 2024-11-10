@@ -28,7 +28,6 @@
 #include "Rts2/TelescopeClientJsonRts2.hpp"
 #include "Lx200/TelescopeClientDirectLx200.hpp"
 #include "NexStar/TelescopeClientDirectNexStar.hpp"
-#include "INDI/TelescopeClientINDI.hpp"
 #include "StelTranslator.hpp"
 #include "StelCore.hpp"
 #include "StelMainView.hpp"
@@ -45,11 +44,12 @@
 #include <QMessageBox>
 
 #if defined(Q_OS_WIN)
-#if QT_VERSION<QT_VERSION_CHECK(6,0,0)
+	#if QT_VERSION<QT_VERSION_CHECK(6,0,0)
 	#include "ASCOM/TelescopeClientASCOM.hpp"
-#endif
+	#endif
 	#include <Windows.h> // GetSystemTimeAsFileTime()
 #else
+	#include "INDI/TelescopeClientINDI.hpp"
 	#include <sys/time.h>
 #endif
 
@@ -101,10 +101,12 @@ TelescopeClient *TelescopeClient::create(const QString &url)
 	{
 		newTelescope= new TelescopeClientDirectNexStar(name, params, eq);
 	}
+	#ifndef Q_OS_WIN
 	else if (type == "INDI")
 	{
 		newTelescope = new TelescopeClientINDI(name, params);
 	}
+	#endif
 	#if defined(Q_OS_WIN) && QT_VERSION<QT_VERSION_CHECK(6,0,0)
 	else if (type == "ASCOM")
 	{

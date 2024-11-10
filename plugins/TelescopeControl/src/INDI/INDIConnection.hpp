@@ -20,7 +20,8 @@
 #define INDICONNECTION_HPP
 
 #include <QObject>
-#include "libindi/baseclient.h"
+#include <libs/indiclient/baseclient.h>
+#include <libs/indidevice/basedevice.h>
 
 #include <mutex>
 #include <QStringList>
@@ -64,21 +65,15 @@ private:
 	void setSpeed(int speed);
 
 	mutable std::mutex mMutex;
-	INDI::BaseDevice* mTelescope = nullptr;
-	Coordinates mCoordinates;
+	INDI::BaseDevice mTelescope;
 	QStringList mDevices;
 
 public: // from INDI::BaseClient
-	void newDevice(INDI::BaseDevice *dp) override;
-	void removeDevice(INDI::BaseDevice *dp) override;
-	void newProperty(INDI::Property *property) override;
-	void removeProperty(INDI::Property *property) override;
-	void newBLOB(IBLOB *bp) override;
-	void newSwitch(ISwitchVectorProperty *svp) override;
-	void newNumber(INumberVectorProperty *nvp) override;
-	void newText(ITextVectorProperty *tvp) override;
-	void newLight(ILightVectorProperty *lvp) override;
-	void newMessage(INDI::BaseDevice *dp, int messageID) override;
+	void newDevice(INDI::BaseDevice dp) override;
+	void removeDevice(INDI::BaseDevice dp) override;
+	void newProperty(INDI::Property property) override;
+	void removeProperty(INDI::Property property) override;
+	void newMessage(INDI::BaseDevice dp, int messageID) override;
 	void serverConnected() override;
 	void serverDisconnected(int exit_code) override;
 	void unParkTelescope();

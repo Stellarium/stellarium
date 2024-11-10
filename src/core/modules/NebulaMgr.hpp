@@ -43,7 +43,7 @@ typedef QSharedPointer<Nebula> NebulaP;
 //! @class NebulaMgr
 //! Manage a collection of nebulae. This class is used
 //! to display the NGC catalog with information, and textures for some of them.
-// GZ: This doc seems outdated/misleading - photo textures are not mamaged here but in StelSkyImageTile
+// GZ: This doc seems outdated/misleading - photo textures are not managed here but in StelSkyImageTile
 
 class NebulaMgr : public StelObjectModule
 {
@@ -876,7 +876,7 @@ public slots:
 	//! @param f the amount between 0 and 10. 0 is no hints, 10 is maximum of hints
 	void setHintsBrightness(double b);
 	//! Get the brightness of nebulae labels.
-	//! @return the amount between 0 and 1. 0 is dark (no hints), 1 is maximum brigthness of hints
+	//! @return the amount between 0 and 1. 0 is dark (no hints), 1 is maximum brightness of hints
 	double getHintsBrightness(void) const;
 
 
