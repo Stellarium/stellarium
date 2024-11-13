@@ -142,7 +142,7 @@ void TelescopeConfigurationDialog::createDialogContent()
 	}
 	#endif
 
-	#ifndef Q_OS_WIN
+	#ifdef ENABLE_INDI
 	indiWidget = new TelescopeClientINDIWidget(ui->scrollAreaWidgetContents);
 	ui->INDILayout->addWidget(indiWidget);
 	#else
@@ -160,7 +160,7 @@ void TelescopeConfigurationDialog::createDialogContent()
 	connect(ui->radioButtonTelescopeConnection, SIGNAL(toggled(bool)), this, SLOT(toggleTypeConnection(bool)));
 	connect(ui->radioButtonTelescopeVirtual, SIGNAL(toggled(bool)), this, SLOT(toggleTypeVirtual(bool)));
 	connect(ui->radioButtonTelescopeRTS2, SIGNAL(toggled(bool)), this, SLOT(toggleTypeRTS2(bool)));
-	#ifndef Q_OS_WIN
+	#ifdef ENABLE_INDI
 	connect(ui->radioButtonTelescopeINDI, SIGNAL(toggled(bool)), this, SLOT(toggleTypeINDI(bool)));
 	#endif
 	#ifdef Q_OS_WIN
@@ -206,7 +206,7 @@ void TelescopeConfigurationDialog::initConfigurationDialog()
 	ui->groupBoxConnectionSettings->hide();
 	ui->groupBoxDeviceSettings->hide();
 	ui->groupBoxRTS2Settings->hide();
-	#ifndef Q_OS_WIN
+	#ifdef ENABLE_INDI
 	indiWidget->hide();
 	#endif
 	#if defined(Q_OS_WIN) && QT_VERSION<QT_VERSION_CHECK(6,0,0)
@@ -356,7 +356,7 @@ void TelescopeConfigurationDialog::initExistingTelescopeConfiguration(int slot)
 		ui->lineEditRTS2Password->setText(rts2Password);
 		ui->doubleSpinBoxRTS2Refresh->setValue(SECONDS_FROM_MICROSECONDS(rts2Refresh));
 	}
-	#ifndef Q_OS_WIN
+	#ifdef ENABLE_INDI
 	else if (connectionType == TelescopeControl::ConnectionINDI)
 	{
 		ui->radioButtonTelescopeINDI->setChecked(true);
@@ -469,7 +469,7 @@ void TelescopeConfigurationDialog::toggleTypeRTS2(bool isChecked)
 	}
 }
 
-#ifndef Q_OS_WIN
+#ifdef ENABLE_INDI
 void TelescopeConfigurationDialog::toggleTypeINDI(bool enabled)
 {
 	indiWidget->setVisible(enabled);
@@ -559,7 +559,7 @@ void TelescopeConfigurationDialog::buttonSavePressed()
 		  ui->lineEditRTS2Username->text(), ui->lineEditRTS2Password->text(),
 		  qRound(MICROSECONDS_FROM_SECONDS(ui->doubleSpinBoxRTS2Refresh->value())));
 	}
-	#ifndef Q_OS_WIN
+	#ifdef ENABLE_INDI
 	else if (ui->radioButtonTelescopeINDI->isChecked())
 	{
 		type = TelescopeControl::ConnectionINDI;

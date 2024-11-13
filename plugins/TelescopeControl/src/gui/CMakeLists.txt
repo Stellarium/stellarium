@@ -33,11 +33,11 @@ target_link_libraries(TelescopeControl_gui
     TelescopeControl_common
     )
 
-IF(NOT WIN32)
-target_link_libraries(TelescopeControl_gui
-    TelescopeControl_INDI
+IF(ENABLE_INDI)
+    target_link_libraries(TelescopeControl_gui
+        TelescopeControl_INDI
     )
-ENDIF()
+ENDIF(ENABLE_INDI)
 
 if(WIN32 AND (${QT_VERSION_MAJOR} EQUAL "5"))
 target_link_libraries(TelescopeControl_gui

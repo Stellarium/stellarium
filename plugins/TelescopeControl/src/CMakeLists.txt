@@ -5,7 +5,7 @@ add_subdirectory(gui)
 add_subdirectory(Lx200)
 add_subdirectory(NexStar)
 add_subdirectory(Rts2)
-IF(NOT WIN32)
+IF(ENABLE_INDI)
     add_subdirectory(INDI)
 ENDIF()
 if(WIN32 AND (${QT_VERSION_MAJOR} EQUAL "5"))
@@ -50,11 +50,11 @@ TARGET_LINK_LIBRARIES(TelescopeControl-static
     Qt${QT_VERSION_MAJOR}::SerialPort
     )
 
-IF(NOT WIN32)
-TARGET_LINK_LIBRARIES(TelescopeControl-static
-    TelescopeControl_INDI
+IF(ENABLE_INDI)
+    TARGET_LINK_LIBRARIES(TelescopeControl-static
+        TelescopeControl_INDI
     )
-ENDIF()
+ENDIF(ENABLE_INDI)
 
 # Due to incomprehensible errors between ASCOM and Qt6OpenGL!QOpenGL2PaintEngineEx::setState(), we must disable in QT6-based builds.
 if(WIN32 AND (${QT_VERSION_MAJOR} EQUAL "5"))

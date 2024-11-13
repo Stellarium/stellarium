@@ -416,6 +416,17 @@ IF(ENABLE_XLSX)
      ADD_DEFINITIONS(-DENABLE_XLSX)
 ENDIF()
 
+# Activate support for INDI client in Telescope Control plugin
+IF(WIN32)
+     # Disable support for INDI client in Windows
+     SET(ENABLE_INDI 0)
+ELSE()
+     SET(ENABLE_INDI 1 CACHE BOOL "Define whether to use INDI client in Telescope Control plugin.")
+ENDIF()
+IF(ENABLE_INDI)
+     ADD_DEFINITIONS(-DENABLE_INDI)
+ENDIF()
+
 # SPOUT allows relaying the Stellarium OpenGL framebuffer as DirectX texture in other programs.
 # It exists on Windows only. Syphon is a similar system for MacOS, this might be added by a Mac developer.
 IF(WIN32)
@@ -651,7 +662,7 @@ IF(APPLE)
 	       # Qt6: by default - universal binary + minimal operating system is macOS Big Sur
 	       SET(CMAKE_OSX_DEPLOYMENT_TARGET "11.0" CACHE STRING "Minimum macOS deployment version" FORCE)
 	  ELSE()
-	       SET(CMAKE_OSX_DEPLOYMENT_TARGET "10.15" CACHE STRING "Minimum macOS deployment version" FORCE)
+               SET(CMAKE_OSX_DEPLOYMENT_TARGET "10.13" CACHE STRING "Minimum macOS deployment version" FORCE)
 	  ENDIF()
      ENDIF()
 ENDIF()
