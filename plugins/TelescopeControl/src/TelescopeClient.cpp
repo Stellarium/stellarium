@@ -43,13 +43,16 @@
 #include <QTextStream>
 #include <QMessageBox>
 
+#ifdef ENABLE_INDI
+	#include "INDI/TelescopeClientINDI.hpp"
+#endif
+
 #if defined(Q_OS_WIN)
 	#if QT_VERSION<QT_VERSION_CHECK(6,0,0)
 	#include "ASCOM/TelescopeClientASCOM.hpp"
 	#endif
 	#include <Windows.h> // GetSystemTimeAsFileTime()
 #else
-	#include "INDI/TelescopeClientINDI.hpp"
 	#include <sys/time.h>
 #endif
 
@@ -101,7 +104,7 @@ TelescopeClient *TelescopeClient::create(const QString &url)
 	{
 		newTelescope= new TelescopeClientDirectNexStar(name, params, eq);
 	}
-	#ifndef Q_OS_WIN
+	#ifdef ENABLE_INDI
 	else if (type == "INDI")
 	{
 		newTelescope = new TelescopeClientINDI(name, params);

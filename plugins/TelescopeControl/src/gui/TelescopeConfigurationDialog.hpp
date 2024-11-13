@@ -33,7 +33,7 @@
 #include "../ASCOM/TelescopeClientASCOMWidget.hpp"
 #endif
 
-#ifndef Q_OS_WIN
+#ifdef ENABLE_INDI
 #include "../INDI/TelescopeClientINDIWidget.hpp"
 #endif
 
@@ -71,7 +71,7 @@ private slots:
 	void toggleTypeConnection(bool);
 	void toggleTypeVirtual(bool);
 	void toggleTypeRTS2(bool);
-	#ifndef Q_OS_WIN
+	#ifdef ENABLE_INDI
 	void toggleTypeINDI(bool enabled);
 	#endif
 	#if defined(Q_OS_WIN) && QT_VERSION<QT_VERSION_CHECK(6,0,0)
@@ -97,7 +97,7 @@ private:
 	TelescopeClientASCOMWidget* ascomWidget;
 	#endif
 
-	#ifndef Q_OS_WIN
+	#ifdef ENABLE_INDI
 	TelescopeClientINDIWidget* indiWidget;
 	#endif
 	

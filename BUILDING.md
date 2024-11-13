@@ -404,6 +404,7 @@ List of supported parameters (passed as `-DPARAMETER=VALUE`):
 | ENABLE_RELEASE_BUILD               | bool   | OFF     | This option flags the build as an official release
 | ENABLE_TESTING                     | bool   | OFF     | Enable unit tests
 | ENABLE_QTWEBENGINE                 | bool   | ON      | Enable QtWebEngine module support if it installed
+| ENABLE_INDI                        | bool   | ON      | Activate support for INDI client in Telescope Control plugin
 | USE_BUNDLED_QTCOMPRESS             | bool   | ON      | Use bundled version of qtcompress
 | USE_PLUGIN_ANGLEMEASURE            | bool   | ON      | Enable building the Angle Measure plugin
 | USE_PLUGIN_ARCHAEOLINES            | bool   | ON      | Enable building the ArchaeoLines plugin
