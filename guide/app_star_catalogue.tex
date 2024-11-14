@@ -98,7 +98,7 @@ know about the zone model to be able to extract positional data.
 \midrule
 \file{stars\_0\_0v0\_8.cat} & 0 & 28 bytes & 0 &      4,979 & Hipparcos\\
 \file{stars\_1\_0v0\_8.cat} & 0 & 28 bytes & 1 &     21,806 & Hipparcos\\
-\file{stars\_2\_0v0\_8.cat} & 0 & 28 bytes & 2 &    150,824 & Hipparcos\\
+\file{stars\_2\_0v0\_8.cat} & 0 & 28 bytes & 2 &    150,826 & Hipparcos\\
 \file{stars\_3\_1v0\_4.cat} & 1 & 10 bytes & 3 &    425,807 & Tycho 2\\
 \file{stars\_4\_1v0\_2.cat} & 1 & 10 bytes & 4 &  1,692,779 & Tycho 2\\
 \file{stars\_5\_2v0\_1.cat} & 2 &  8 bytes & 5 &  7,083,058 & NOMAD\\
@@ -225,16 +225,16 @@ component\_ids &  3 & unsigned char      & 1 & index to an array of catalogue nu
 											   the line number in the file - 1\\%\midrule
 x0             &  4 & int                & 4 & position of the star relative to the central point in the star's zone, in axis 1\\%\midrule
 x1             &  8 & int                & 4 & position of the star relative to the central point in the star's zone, in axis 2\\%\midrule
-b\_v           &  9 & unsigned char      & 1 & magnitude level in B-V colour. This value refers to one of 256 discrete steps 
+b\_v           & 12 & unsigned char      & 1 & magnitude level in B-V colour. This value refers to one of 256 discrete steps 
                                                in the magnitude range for the file\\%\midrule
-mag            & 10 & unsigned char      & 1 & magnitude level in the V-I colour. This value refers to one of 256 discrete steps 
+mag            & 13 & unsigned char      & 1 & magnitude level in the V-I colour. This value refers to one of 256 discrete steps 
                                                in the magnitude range for the file\\%\midrule
-sp\_int        & 11 & unsigned short int & 2 & index into an array of spectral type descriptions 
+sp\_int        & 14 & unsigned short int & 2 & index into an array of spectral type descriptions 
                                                which is taken from the file \file{stars\_hip\_sp.cat}, the index corresponds to the 
 											   line number in the file - 1\\%\midrule
-dx0            & 13 & int                & 4 & proper motion of the star in axis 1\\%\midrule
-dx1            & 17 & int                & 4 & proper motion of the star in axis 2\\%\midrule
-plx            & 21 & int                & 4 & parallax of the star. To get the actual value, divide by 10000.\\\bottomrule
+dx0            & 16 & int                & 4 & proper motion of the star in axis 1\\%\midrule
+dx1            & 20 & int                & 4 & proper motion of the star in axis 2\\%\midrule
+plx            & 24 & int                & 4 & parallax of the star. To get the actual value, divide by 10000.\\\bottomrule
 \end{tabular}
 \caption{Star Data Record Type 0}
 \label{tab:StarDataRecord0}

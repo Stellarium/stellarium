@@ -99,7 +99,7 @@ private:
 	struct Data {
 		quint8  hip[3];	      // 3 bytes
 		quint8  componentIds; // 1 byte
-		quint32 x0;           // 4 bytes
+		qint32  x0;           // 4 bytes
 		qint32  x1;           // 4 bytes
 		quint8  b_v; 		  // 1 byte
 		quint8  vmag;         // 1 bytes
