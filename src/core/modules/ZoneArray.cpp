@@ -413,7 +413,7 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 	StelSkyDrawer* drawer = core->getSkyDrawer();
 	Vec3f vf;
 	static const double d2000 = 2451545.0;
-	const float movementFactor = static_cast<float>((M_PI/180.)*(0.0001/3600.) * ((core->getJDE()-d2000)/365.25) / static_cast<double>(star_position_scale));
+	const float dyrs = static_cast<float>(core->getJDE()-d2000)/365.25;
 
 	const Extinction& extinction=core->getSkyDrawer()->getExtinction();
 	const bool withExtinction=drawer->getFlagHasAtmosphere() && extinction.getExtinctionCoefficient()>=0.01f;
@@ -436,16 +436,16 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 	for (const Star* s=zoneToDraw->getStars();s<lastStar;++s)
 	{
 		// Artificial cutoff per magnitude
-		if (s->getMag() > cutoffMagStep)
+		if (s->getInternalMag(mag_steps, mag_min, mag_range) > cutoffMagStep)
 			break;
     
 		// Because of the test above, the star should always be visible from this point.
 		
 		// Array of 2 numbers containing radius and magnitude
-		const RCMag* tmpRcmag = &rcmag_table[s->getMag()];
+		const RCMag* tmpRcmag = &rcmag_table[s->getInternalMag(mag_steps, mag_min, mag_range)];
 		
 		// Get the star position from the array
-		s->getJ2000Pos(zoneToDraw, movementFactor, vf);
+		s->getJ2000Pos(dyrs, vf);
 
 		// Aberration: vf contains Equatorial J2000 position.
 		if (withAberration)
@@ -505,13 +505,13 @@ void SpecialZoneArray<Star>::searchAround(const StelCore* core, int index, const
 					  QList<StelObjectP > &result)
 {
 	static const double d2000 = 2451545.0;
-	const double movementFactor = (M_PI/180.)*(0.0001/3600.) * ((core->getJDE()-d2000)/365.25)/ static_cast<double>(star_position_scale);
+	const float dyrs = static_cast<float>(core->getJDE()-d2000)/365.25;
 	const SpecialZoneData<Star> *const z = getZones()+index;
 	Vec3f tmp;
 	Vec3f vf = v.toVec3f();
 	for (const Star* s=z->getStars();s<z->getStars()+z->size;++s)
 	{
-		s->getJ2000Pos(z,static_cast<float>(movementFactor), tmp);
+		s->getJ2000Pos(dyrs, tmp);
 		tmp.normalize();
 		if (tmp*vf >= static_cast<float>(cosLimFov))
 		{

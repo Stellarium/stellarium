@@ -24,6 +24,7 @@
 
 #include "ZoneData.hpp"
 #include "StelObjectType.hpp"
+#include "StelUtils.hpp"
 #include <QString>
 #include <QtEndian>
 
@@ -37,6 +38,7 @@ typedef unsigned short int Uint16;
 template <class Star> class SpecialZoneArray;
 template <class Star> struct SpecialZoneData;
 
+#define MAS2RAD_SCALE M_PI / (3600000. * 180.);
 
 // structs for storing the stars in binary form. The idea is
 // to store much data for bright stars (Star1), but only little or even
@@ -49,93 +51,63 @@ static inline float IndexToBV(int bV)
 	return static_cast<float>(bV)*(4.f/127.f)-0.5f;
 }
 
+static inline int BVToIndex(int bV)
+{
+	return static_cast<int>(bV+0.5f)*31.75f;
+}
 
-struct Star1 { // 28 byte
-	/*
-	          _______________
-	0    hip |               |
-	1        |               |
-	2        |_______________|
-	3   cIds |_______________|
-	4     x0 |               |
-	5        |               |
-	6        |               |
-	7        |_______________|
-	8     x1 |               |
-	9        |               |
-	10       |               |
-	11       |_______________|
-	12    bV |_______________|
-	13   mag |_______________|
-	14 spInt |               |
-	15       |_______________|
-	16   dx0 |               |
-	17       |               |
-	18       |               |
-	19       |_______________|
-	20   dx1 |               |
-	21       |               |
-	22       |               |
-	23       |_______________|
-	24   plx |               |
-	25       |               |
-	26       |               |
-	27       |_______________|
 
-	*/
-
-	// componentIds         8
-	// hip                  24
-	//
-	// qint32 x0            32
-	// qint32 x1            32
-	//
-	// unsigned char bV     8
-	// unsigned char mag    8
-	// Uint16 spInt         16
-	//
-	// qint32 dx0,dx1,plx   32
+#pragma pack(push, 1)
+struct Star1 {
 private:
 	struct Data {
 		quint8  hip[3];	      // 3 bytes
+		qint64  gaia_id;	  // 8 bytes
 		quint8  componentIds; // 1 byte
 		qint32  x0;           // 4 bytes
 		qint32  x1;           // 4 bytes
-		quint8  b_v; 		  // 1 byte
-		quint8  vmag;         // 1 bytes
+		qint16  b_v; 		  // 2 byte
+		qint16  vmag;         // 2 bytes
 		quint16 spInt;        // 2 bytes
 		qint32  dx0;          // 4 bytes
 		qint32  dx1;          // 4 bytes
 		qint32  plx;          // 4 bytes
-	} d;  // total is 28 bytes
+	} d;  // total is 30 bytes
 
 public:
 	enum {MaxPosVal=0x7FFFFFFF};
 	StelObjectP createStelObject(const SpecialZoneArray<Star1> *a, const SpecialZoneData<Star1> *z) const;
-	void getJ2000Pos(const ZoneData *z,float movementFactor, Vec3f& pos) const
+	void getJ2000Pos(float dyr, Vec3f& pos) const
 	{
-		pos = z->axis0;
-		pos*=(static_cast<float>(getX0())+movementFactor*getDx0());
-		pos+=(static_cast<float>(getX1())+movementFactor*getDx1())*z->axis1;
-		pos+=z->center;
+		// conversion from mas to rad
+		const double RA_rad = getX0() * MAS2RAD_SCALE;
+		const double DE_rad = getX1() * MAS2RAD_SCALE;
+		// conversion from mas/yr to rad/yr, so dra in rad
+		const double dra = dyr * (getDx0() / 1000.f) / cos(DE_rad) * MAS2RAD_SCALE;
+		// getDx1 already in mas/yr, so ddec in rad
+		const double ddec = dyr * (getDx1() / 1000.f) * MAS2RAD_SCALE;
+		StelUtils::spheToRect(RA_rad - dra, DE_rad - ddec, pos);
 	}
-	inline int getBVIndex() const {return d.b_v;}
-	inline int getMag() const {return d.vmag;}
+	inline int getBVIndex() const {return BVToIndex(getBV());}
+	inline int getMag() const { return d.vmag; }
+	inline int getInternalMag(int mag_steps, int mag_min, int mag_range) const { return mag_steps * (d.vmag / 1000.f - 0.001f*mag_min) / (0.001f*mag_range); }
 	inline int getSpInt() const {return d.spInt;}
-	inline int getX0() const { return qFromLittleEndian(d.x0);}
-	inline int getX1() const { return qFromLittleEndian(d.x1);}
-	inline int getDx0() const {return qFromLittleEndian(d.dx0);}
-	inline int getDx1() const {return qFromLittleEndian(d.dx1);}
-	inline int getPlx() const {return qFromLittleEndian(d.plx);}
-	inline int getComponentIds() const {return d.componentIds;}
-	
-	inline int getHip() const
-	{
+	inline int getX0() const { return d.x0;}
+	inline int getX1() const { return d.x1;}
+	inline int getDx0() const {return d.dx0;}
+	inline int getDx1() const {return d.dx1;}
+	inline int getPlx() const {return d.plx;}
+	inline int getHip() const {
 		quint32 v = d.hip[0] | d.hip[1] << 8 | d.hip[2] << 16;
 		return (static_cast<qint32>(v)) << 8 >> 8;
 	}
+	inline int getGaia() const { return d.gaia_id; }
+	inline int getComponentIds() const
+	{
+		return d.componentIds;
+	}
 
-	float getBV(void) const {return IndexToBV(getBVIndex());}
+	float getBV(void) const {return static_cast<float>(d.b_v) / 1000.f;}
 	bool hasName() const {return getHip();}
 	QString getNameI18n(void) const;
 	QString getScreenNameI18n(void) const;
@@ -143,86 +115,54 @@ public:
 	int hasComponentID(void) const;
 	void print(void) const;
 };
-static_assert(sizeof(Star1) == 28, "Size of Star1 must be 28 bytes");
+static_assert(sizeof(Star1) == 38, "Size of Star1 must be 38 bytes");
+#pragma pack(pop) // Restore the previous packing alignment
 
-struct Star2 {  // 10 byte
-	/*
-	          _______________
-	0     x0 |               |
-	1        |_______        |
-	2     x1 |       |_______|
-	3        |               |
-	4        |_______________|
-	5    dx0 |___            |
-	6    dx1 |   |___________|
-	7        |_______        |
-	8     bV |_______|_______|
-	9    mag |_________|_____| bV
-
-	int x0          :20;
-	int x1          :20;
-	int dx0         :14;
-	int dx1         :14;
-	unsigned int bV :7;
-	unsigned int mag:5;
-	*/
-
+#pragma pack(push, 1)
+struct Star2 {  // 20 byte
 private:
-	quint8 d[10];
-
+	struct Data {
+		qint64  gaia_id;	  // 8 bytes
+		qint32  x0;           // 4 bytes
+		qint32  x1;           // 4 bytes
+		qint32  dx0;          // 4 bytes
+		qint32  dx1;          // 4 bytes
+		qint16  b_v; 		  // 2 byte
+		qint16  vmag;         // 2 bytes
+	} d;  // total is 28 bytes
 public:
-	inline int getX0() const
-	{
-		quint32 v = d[0] | d[1] << 8 | (d[2] & 0xF) << 16;
-		return (static_cast<qint32>(v)) << 12 >> 12;
-	}
-
-	inline int getX1() const
-	{
-		quint32 v = d[2] >> 4 | d[3] << 4 | d[4] << 12;
-		return (static_cast<qint32>(v)) << 12 >> 12;
-	}
-
-	inline int getDx0() const
-	{
-		Uint16 v = d[5] | (d[6] & 0x3F) << 8;
-		return (static_cast<Int16>(v << 2)) >> 2;
-	}
-
-	inline int getDx1() const
-	{
-		Uint16 v = d[6] >> 6 | d[7] << 2 | (d[8] & 0xF) << 10;
-		return (static_cast<Int16>(v << 2)) >> 2;
-	}
-
-	inline int getBVIndex() const
-	{
-		return d[8] >> 4 | (d[9] & 0x7) << 4;
-	}
-
-	inline int getMag() const
-	{
-		return d[9] >> 3;
-	}
+	inline int getX0() const { return d.x0;}
+	inline int getX1() const { return d.x1;}
+	inline int getDx0() const {return d.dx0;}
+	inline int getDx1() const {return d.dx1;}
+	inline int getBVIndex() const {return BVToIndex(getBV());}
+	inline int getMag() const { return d.vmag; }
+	inline int getInternalMag(int mag_steps, int mag_min, int mag_range) const { return mag_steps * (d.vmag / 1000.f - 0.001f*mag_min) / (0.001f*mag_range); }
 
 	enum {MaxPosVal=((1<<19)-1)};
 	StelObjectP createStelObject(const SpecialZoneArray<Star2> *a, const SpecialZoneData<Star2> *z) const;
-	void getJ2000Pos(const ZoneData *z,float movementFactor, Vec3f& pos) const
+	void getJ2000Pos(float dyr, Vec3f& pos) const
 	{
-		pos = z->axis0;
-		pos*=(static_cast<float>(getX0())+movementFactor*getDx0());
-		pos+=(static_cast<float>(getX1())+movementFactor*getDx1())*z->axis1;
-		pos+=z->center;
+		// conversion from mas to rad
+		const double RA_rad = getX0() * MAS2RAD_SCALE;
+		const double DE_rad = getX1() * MAS2RAD_SCALE;
+		// conversion from mas/yr to rad/yr, so dra in rad
+		const double dra = dyr * (getDx0() / 1000.f) / cos(DE_rad) * MAS2RAD_SCALE;
+		// getDx1 already in mas/yr, so ddec in rad
+		const double ddec = dyr * (getDx1() / 1000.f) * MAS2RAD_SCALE;
+		StelUtils::spheToRect(RA_rad - dra, DE_rad - ddec, pos);
 	}
-	float getBV(void) const {return IndexToBV(getBVIndex());}
+	inline int getGaia() const { return d.gaia_id; }
+	float getBV(void) const {return static_cast<float>(d.b_v) / 1000.f;}
 	QString getNameI18n(void) const {return QString();}
 	QString getScreenNameI18n(void) const {return QString();}
 	QString getDesignation(void) const {return QString();}
 	int hasComponentID(void) const {return 0;}
-	bool hasName() const {return false;}
+	bool hasName() const {return getGaia();}
 	void print(void) const;
 };
-static_assert(sizeof(Star2) == 10, "Size of Star2 must be 10 bytes");
+static_assert(sizeof(Star2) == 28, "Size of Star2 must be 28 bytes");
+#pragma pack(pop) // Restore the previous packing alignment
 
 struct Star3 {  // 6 byte
 	/*
@@ -264,15 +204,16 @@ public:
 	{
 		return d[5] >> 3;
 	}
+	inline int getInternalMag(int mag_steps, int mag_min, int mag_range) const { return mag_steps * (getMag() / 1000.f - 0.001f*mag_min) / (0.001f*mag_range); }
 
 	enum {MaxPosVal=((1<<17)-1)};
 	StelObjectP createStelObject(const SpecialZoneArray<Star3> *a, const SpecialZoneData<Star3> *z) const;
-	void getJ2000Pos(const ZoneData *z,float, Vec3f& pos) const
+	void getJ2000Pos(float dyr, Vec3f& pos) const
 	{
-		pos = z->axis0;
-		pos*=static_cast<float>(getX0());
-		pos+=z->center;
-		pos+=static_cast<float>(getX1())*z->axis1;
+		// conversion from mas to rad
+		const double RA_rad = getX0() * MAS2RAD_SCALE;
+		const double DE_rad = getX1() * MAS2RAD_SCALE;
+		StelUtils::spheToRect(RA_rad, DE_rad, pos);
 	}
 	float getBV() const {return IndexToBV(getBVIndex());}
 	QString getNameI18n() const {return QString();}

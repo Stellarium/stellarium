@@ -79,7 +79,7 @@ protected:
 	{
 		static const double d2000 = 2451545.0;
 		Vec3f v;
-		s->getJ2000Pos(z, (M_PI/180.)*(0.0001/3600.) * ((core->getJDE()-d2000)/365.25) / a->star_position_scale, v);
+		s->getJ2000Pos((core->getJDE()-d2000)/365.25, v);
 
 		// Aberration: Explanatory Supplement 2013, (7.38). We must get the observer planet speed vector in Equatorial J2000 coordinates.
 		if (core->getUseAberration())
@@ -104,7 +104,7 @@ protected:
 	float getVMagnitude(const StelCore* core) const override
 	{
 		Q_UNUSED(core)
-		return 0.001f*a->mag_min + s->getMag()*(0.001f*a->mag_range)/a->mag_steps;
+		return s->getMag() / 1000.f;
 	}
 	float getBV(void) const  override {return s->getBV();}
 	//QString getEnglishName(void) const override {return QString();}
