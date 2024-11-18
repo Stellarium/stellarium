@@ -146,7 +146,7 @@ msgstr "重新加载星空文化"
 #: src/ui_dsoColorsDialog.h:644
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:254
 msgid "Stars"
-msgstr "星宿"
+msgstr "恒星"
 
 #: src/core/modules/StarMgr.cpp:463
 msgid "Stars labels"
@@ -12156,7 +12156,7 @@ msgstr "标签使用星表编号"
 #: src/ui_viewDialog.h:3556
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:268
 msgid "Absolute scale:"
-msgstr "星点绝对大小:"
+msgstr "星点绝对大小："
 
 #: src/ui_viewDialog.h:3558
 msgid "Show all available proper names"
@@ -12183,7 +12183,7 @@ msgstr "极限星等："
 #: src/ui_viewDialog.h:3566
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:262
 msgid "Relative scale:"
-msgstr "星点相对大小:"
+msgstr "星点相对大小："
 
 #: src/ui_viewDialog.h:3568
 msgid ""
@@ -12270,7 +12270,7 @@ msgstr "天文年鉴（默认）有2%的放大，丹容 (Danjon, 1951) 使用一
 
 #: src/ui_viewDialog.h:3604
 msgid "Earth shadow enlargement after Danjon"
-msgstr "丹容的地影放大"
+msgstr "使用Danjon的地影放大"
 
 #: src/ui_viewDialog.h:3606
 msgid "Limit the magnitude of solar system objects"
@@ -12429,7 +12429,7 @@ msgstr "太阳"
 
 #: src/ui_viewDialog.h:3688
 msgid "Scale:"
-msgstr "比例："
+msgstr "缩放比例："
 
 #: src/ui_viewDialog.h:3689
 msgctxt "scale"
@@ -12937,11 +12937,11 @@ msgstr "高度线的颜色"
 msgid ""
 "This circle represents the size of Earth's central, deep shadow in the "
 "distance of the Moon. Will not show when Moon scaling is enabled!"
-msgstr "此圈表示地影投射到月球距离时的中央本影区。启用月球缩放时不会显示。"
+msgstr "此圈表示地影投射到月球距离时的本影区。启用月球缩放时不会显示。"
 
 #: src/ui_viewDialog.h:4095
 msgid "Earth umbra"
-msgstr "地球本影"
+msgstr "地球本影圈"
 
 #: src/ui_viewDialog.h:4097
 msgid "Show center point of Earth's shadow in the distance of the Moon."
@@ -13088,7 +13088,7 @@ msgstr "此圈表示地影投射到月球距离时的半影区范围。启用月
 
 #: src/ui_viewDialog.h:4238
 msgid "Earth penumbra"
-msgstr "地球半影"
+msgstr "地球半影圈"
 
 #: src/ui_viewDialog.h:4248
 msgid "Show celestial poles of current planet and date."
