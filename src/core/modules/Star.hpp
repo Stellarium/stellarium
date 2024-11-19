@@ -71,7 +71,8 @@ private:
 		quint16 spInt;        // 2 bytes
 		qint32  dx0;          // 4 bytes
 		qint32  dx1;          // 4 bytes
-		qint32  plx;          // 4 bytes
+		quint16 plx;          // 2 bytes
+		quint16 plx_err;      // 2 bytes 
 	} d;  // total is 30 bytes
 
 public:
@@ -97,6 +98,7 @@ public:
 	inline int getDx0() const {return d.dx0;}
 	inline int getDx1() const {return d.dx1;}
 	inline int getPlx() const {return d.plx;}
+	inline int getPlxErr() const {return d.plx_err;}
 	inline int getHip() const {
 		quint32 v = d.hip[0] | d.hip[1] << 8 | d.hip[2] << 16;
 		return (static_cast<qint32>(v)) << 8 >> 8;

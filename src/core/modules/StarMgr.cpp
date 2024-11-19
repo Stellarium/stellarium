@@ -364,14 +364,6 @@ int StarMgr::getGcvsMM(int hip)
 	return -99;
 }
 
-float StarMgr::getPlxError(int hip)
-{
-	auto it = hipParallaxErrors.find(hip);
-	if (it!=hipParallaxErrors.end())
-		return it.value();
-	return 0.f;
-}
-
 void StarMgr::copyDefaultConfigFile()
 {
 	try
@@ -1146,62 +1138,6 @@ void StarMgr::loadCrossIdentificationData(const QString& crossIdFile)
 	qDebug().noquote() << "Loaded" << readOk << "/" << totalRecords << "cross-identification data records for stars";
 }
 
-void StarMgr::loadPlxErr(const QString& plxErrFile)
-{
-	// TODO: This is temporary solution for display parallax errors until format of stars catalogs will not be changed!
-	hipParallaxErrors.clear();
-
-	qDebug().noquote() << "Loading parallax errors data from" << QDir::toNativeSeparators(plxErrFile);
-	QFile ciFile(plxErrFile);
-	if (!ciFile.open(QIODevice::ReadOnly | QIODevice::Text))
-	{
-		qWarning().noquote() << "WARNING - could not open" << QDir::toNativeSeparators(plxErrFile);
-		return;
-	}
-	const QStringList& allRecords = QString::fromUtf8(ciFile.readAll()).split('\n');
-	ciFile.close();
-
-	int readOk=0;
-	int totalRecords=0;
-	int lineNumber=0;
-	// record structure is delimited with a 'tab' character. Example record strings:
-	// "1	0.0606"
-	// "2	0.3193"
-	for (const auto& record : allRecords)
-	{
-		++lineNumber;
-		// skip comments and empty lines
-		if (record.startsWith("//") || record.startsWith("#") || record.isEmpty())
-			continue;
-
-		++totalRecords;
-		const QStringList& fields = record.split('\t');
-		if (fields.size()!=2)
-		{
-			qWarning().noquote() << "WARNING - parse error at line" << lineNumber << "in" << QDir::toNativeSeparators(plxErrFile)
-				   << " - record does not match record pattern";
-			continue;
-		}
-		else
-		{
-			// The record is the right format.  Extract the fields
-			bool ok;
-			int hip = fields.at(0).toInt(&ok);
-			if (!ok)
-			{
-				qWarning().noquote() << "WARNING - parse error at line" << lineNumber << "in" << QDir::toNativeSeparators(plxErrFile)
-					   << " - failed to convert " << fields.at(0) << "to a number";
-				continue;
-			}
-			hipParallaxErrors[hip] = fields.at(1).toFloat(&ok);
-
-			++readOk;
-		}
-	}
-
-	qDebug().noquote() << "Loaded" << readOk << "/" << totalRecords << "parallax error data records for stars";
-}
-
 int StarMgr::getMaxSearchLevel() const
 {
 	int rval = -1;
@@ -1943,12 +1879,6 @@ void StarMgr::populateStarsDesignations()
 		qWarning() << "WARNING: could not load cross-identification data file: stars/default/cross-id.dat";
 	else
 		loadCrossIdentificationData(fic);
-
-	fic = StelFileMgr::findFile("stars/default/hip_plx_err.dat");
-	if (fic.isEmpty())
-		qWarning() << "WARNING: could not load parallax errors data file: stars/default/hip_plx_err.dat";
-	else
-		loadPlxErr(fic);
 }
 
 QStringList StarMgr::listAllObjects(bool inEnglish) const

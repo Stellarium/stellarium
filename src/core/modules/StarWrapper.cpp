@@ -159,7 +159,6 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 	const double vEpoch = StarMgr::getGcvsEpoch(s->getHip());
 	const double vPeriod = StarMgr::getGcvsPeriod(s->getHip());
 	const int vMm = StarMgr::getGcvsMM(s->getHip());
-	const float plxErr = StarMgr::getPlxError(s->getHip());
 	if (s->getHip())
 	{
 		if ((flags&Name) || (flags&CatalogNumber))
@@ -322,44 +321,41 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 
 	oss << getCommonInfoString(core, flags);
 
+	// kinda impossible for both parallax and parallax_err to be exactly 0, so they must just be missing
 	if (flags&Distance)
 	{
-		if (s->getPlx() && !isNan(s->getPlx()) && !isInf(s->getPlx()))
+		if (s->getPlx() && (s->getPlx()))
 		{
 			//TRANSLATORS: Unit of measure for distance - Light Years
 			QString ly = qc_("ly", "distance");
 			double k = AU/(SPEED_OF_LIGHT*86400*365.25);
 			double d = ((0.00001/3600.)*(M_PI/180));
 			double distance = k/(s->getPlx()*d);
-			if (plxErr>0.f && (0.01f*s->getPlx())>plxErr) // No distance when error of parallax is bigger than parallax!
-				oss << QString("%1: %2%3%4 %5").arg(q_("Distance"), QString::number(distance, 'f', 2), QChar(0x00B1), QString::number(qAbs(k/((100*plxErr + s->getPlx())*d) - distance), 'f', 2), ly) << "<br />";
+			if ((s->getPlx()) && (s->getPlx()>s->getPlxErr())) // No distance when error of parallax is bigger than parallax!
+				oss << QString("%1: %2%3%4 %5").arg(q_("Distance"), QString::number(distance, 'f', 2), QChar(0x00B1), QString::number(qAbs(k/((100*s->getPlxErr() + s->getPlx())*d) - distance), 'f', 2), ly) << "<br />";
 			else
 				oss << QString("%1: %2 %3").arg(q_("Distance"), QString::number(distance, 'f', 2), ly) << "<br />";
 		}
 		oss << getExtraInfoStrings(Distance).join("");
 	}
 
-	
-	if (flags&ProperMotion)
+	// kinda impossible for both pm to be exactly 0, so they must just be missing
+	if ((flags&ProperMotion) && (s->getDx0()) && (s->getDx1()))
 	{
 		float dx = s->getDx0() / 1000.f;
 		float dy = s->getDx1() / 1000.f;
-		// kinda impossible for both pm to be exactly 0, so they must just be missing
-		if ((!dx) && (!dy))
-		{
-			float pa = std::atan2(dx, dy)*M_180_PIf;
-			if (pa<0)
-				pa += 360.f;
-			oss << QString("%1: %2 %3 %4 %5°").arg(q_("Proper motion"),
-								QString::number(std::sqrt(dx*dx + dy*dy), 'f', 2),
-								qc_("mas/yr", "milliarc second per year"),
-								qc_("towards", "into the direction of"),
-								QString::number(pa, 'f', 1)) << "<br />";
-			oss << QString("%1: %2 %3 (%4)").arg(q_("Proper motions by axes"),
-								QString::number(dx, 'f', 2),
-								QString::number(dy, 'f', 2),
-								qc_("mas/yr", "milliarc second per year")) << "<br />";
-		}
+		float pa = std::atan2(dx, dy)*M_180_PIf;
+		if (pa<0)
+			pa += 360.f;
+		oss << QString("%1: %2 %3 %4 %5°").arg(q_("Proper motion"),
+							QString::number(std::sqrt(dx*dx + dy*dy), 'f', 2),
+							qc_("mas/yr", "milliarc second per year"),
+							qc_("towards", "into the direction of"),
+							QString::number(pa, 'f', 1)) << "<br />";
+		oss << QString("%1: %2 %3 (%4)").arg(q_("Proper motions by axes"),
+							QString::number(dx, 'f', 2),
+							QString::number(dy, 'f', 2),
+							qc_("mas/yr", "milliarc second per year")) << "<br />";
 	}
 
 	if (flags&Extra)
@@ -367,8 +363,8 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 		if (s->getPlx())
 		{
 			QString plx = q_("Parallax");
-			if (plxErr>0.f)
-				oss <<  QString("%1: %2%3%4 ").arg(plx, QString::number(0.01*s->getPlx(), 'f', 3), QChar(0x00B1), QString::number(plxErr, 'f', 3));
+			if (s->getPlxErr()>0.f)
+				oss <<  QString("%1: %2%3%4 ").arg(plx, QString::number(0.01*s->getPlx(), 'f', 3), QChar(0x00B1), QString::number(0.01f*s->getPlxErr(), 'f', 3));
 			else
 				oss << QString("%1: %2 ").arg(plx, QString::number(0.01*s->getPlx(), 'f', 3));
 			oss  << qc_("mas", "parallax") << "<br />";
@@ -468,9 +464,9 @@ QVariantMap StarWrapper1::getInfoMap(const StelCore *core) const
 
 	map.insert("bV", s->getBV());
 
-	if (s->getPlx ()&& !isNan(s->getPlx()) && !isInf(s->getPlx()))
+	if (s->getPlx() && !isNan(s->getPlx()) && !isInf(s->getPlx()))
 	{
-		map.insert("parallax", 0.00001*s->getPlx());
+		map.insert("parallax", 0.00001*s->getPlx());  // TODO for Henry: check if this is correct
 		map.insert("absolute-mag", getVMagnitude(core)+5.f*(1.f+std::log10(0.00001f*s->getPlx())));
 		map.insert("distance-ly", (AU/(SPEED_OF_LIGHT*86400*365.25)) / (s->getPlx()*((0.00001/3600)*(M_PI/180))));
 	}
