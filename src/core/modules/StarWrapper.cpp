@@ -160,7 +160,6 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 	const double vPeriod = StarMgr::getGcvsPeriod(s->getHip());
 	const int vMm = StarMgr::getGcvsMM(s->getHip());
 	const float plxErr = StarMgr::getPlxError(s->getHip());
-	const PMData properMotion = StarMgr::getProperMotion(s->getHip());
 	if (s->getHip())
 	{
 		if ((flags&Name) || (flags&CatalogNumber))
@@ -340,22 +339,27 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 		oss << getExtraInfoStrings(Distance).join("");
 	}
 
-	if (flags&ProperMotion && (!isNan(properMotion.first) && !isNan(properMotion.second)))
+	
+	if (flags&ProperMotion)
 	{
-		float dx = properMotion.first;
-		float dy = properMotion.second;
-		float pa = std::atan2(dx, dy)*M_180_PIf;
-		if (pa<0)
-			pa += 360.f;
-		oss << QString("%1: %2 %3 %4 %5°").arg(q_("Proper motion"),
-							QString::number(std::sqrt(dx*dx + dy*dy), 'f', 2),
-							qc_("mas/yr", "milliarc second per year"),
-							qc_("towards", "into the direction of"),
-							QString::number(pa, 'f', 1)) << "<br />";
-		oss << QString("%1: %2 %3 (%4)").arg(q_("Proper motions by axes"),
-							QString::number(dx, 'f', 2),
-							QString::number(dy, 'f', 2),
-							qc_("mas/yr", "milliarc second per year")) << "<br />";
+		float dx = s->getDx0() / 1000.f;
+		float dy = s->getDx1() / 1000.f;
+		// kinda impossible for both pm to be exactly 0, so they must just be missing
+		if ((!dx) && (!dy))
+		{
+			float pa = std::atan2(dx, dy)*M_180_PIf;
+			if (pa<0)
+				pa += 360.f;
+			oss << QString("%1: %2 %3 %4 %5°").arg(q_("Proper motion"),
+								QString::number(std::sqrt(dx*dx + dy*dy), 'f', 2),
+								qc_("mas/yr", "milliarc second per year"),
+								qc_("towards", "into the direction of"),
+								QString::number(pa, 'f', 1)) << "<br />";
+			oss << QString("%1: %2 %3 (%4)").arg(q_("Proper motions by axes"),
+								QString::number(dx, 'f', 2),
+								QString::number(dy, 'f', 2),
+								qc_("mas/yr", "milliarc second per year")) << "<br />";
+		}
 	}
 
 	if (flags&Extra)
