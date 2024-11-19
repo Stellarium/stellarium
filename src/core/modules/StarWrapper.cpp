@@ -466,8 +466,8 @@ QVariantMap StarWrapper1::getInfoMap(const StelCore *core) const
 
 	if (s->getPlx() && !isNan(s->getPlx()) && !isInf(s->getPlx()))
 	{
-		map.insert("parallax", 0.00001*s->getPlx());  // TODO for Henry: check if this is correct
-		map.insert("absolute-mag", getVMagnitude(core)+5.f*(1.f+std::log10(0.00001f*s->getPlx())));
+		map.insert("parallax", 0.00001*s->getPlx());
+		map.insert("absolute-mag", getVMagnitude(core)+5.f*(std::log10(0.0001f*s->getPlx())));
 		map.insert("distance-ly", (AU/(SPEED_OF_LIGHT*86400*365.25)) / (s->getPlx()*((0.00001/3600)*(M_PI/180))));
 	}
 

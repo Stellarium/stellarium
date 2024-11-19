@@ -212,6 +212,7 @@ public:
 	StelObjectP createStelObject(const SpecialZoneArray<Star3> *a, const SpecialZoneData<Star3> *z) const;
 	void getJ2000Pos(float dyr, Vec3f& pos) const
 	{
+		Q_UNUSED(dyr);  // they don't have proper motion
 		// conversion from mas to rad
 		const double RA_rad = getX0() * MAS2RAD_SCALE;
 		const double DE_rad = getX1() * MAS2RAD_SCALE;

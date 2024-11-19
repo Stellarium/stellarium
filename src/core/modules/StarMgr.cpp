@@ -93,7 +93,6 @@ QMap<int, int> StarMgr::saoStarsIndex;
 QMap<int, int> StarMgr::hdStarsIndex;
 QMap<int, int> StarMgr::hrStarsIndex;
 QHash<int, QString> StarMgr::referenceMap;
-QHash<int, float> StarMgr::hipParallaxErrors;
 
 QStringList initStringListFromFile(const QString& file_name)
 {
@@ -1368,6 +1367,14 @@ StelObjectP StarMgr::searchHP(int hp) const
 	return StelObjectP();
 }
 
+// Search the star by Gaia source_id
+StelObjectP StarMgr::searchGaia(long source_id) const
+{
+	qDebug() << "searchGaia is not implemented for source_id: " << source_id;
+	return StelObjectP();
+}
+
+
 StelObjectP StarMgr::searchByNameI18n(const QString& nameI18n) const
 {
 	QString objw = nameI18n.toUpper();
@@ -1428,6 +1435,12 @@ StelObjectP StarMgr::searchByName(const QString& name) const
 		if (hr!=hrStarsIndex.end())
 			return searchHP(hr.value());
 	}
+
+	// Search by Gaia number if it's an Gaia formatted number.
+	static const QRegularExpression rx5("^\\s*(Gaia DR3)\\s*(\\d+)\\s*.*$", QRegularExpression::CaseInsensitiveOption);
+	match=rx5.match(objw);
+	if (match.hasMatch())
+		return searchGaia(match.captured(2).toLong());
 
 	// Search by English common name
 	auto it = commonNamesIndex.find(objw);

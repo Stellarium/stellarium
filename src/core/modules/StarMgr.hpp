@@ -249,6 +249,12 @@ public:
 	//! one was not found.
 	StelObjectP searchHP(int hip) const;
 
+	//! Search by Gaia source id.
+	//! @param source_id the Gaia source id of the star which is required.
+	//! @return the requested StelObjectP or an empty objecy if the requested
+	//! one was not found.
+	StelObjectP searchGaia(long source_id) const;
+
 	//! Get the (translated) common name for a star with a specified
 	//! Hipparcos catalogue number.
 	//! @param hip The Hipparcos number of star
@@ -513,8 +519,6 @@ private:
 	static QMap<int, int> saoStarsIndex;
 	static QMap<int, int> hdStarsIndex;
 	static QMap<int, int> hrStarsIndex;
-
-	static QHash<int, float> hipParallaxErrors;
 
 	static QHash<int, QString> referenceMap;
 
