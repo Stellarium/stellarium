@@ -96,13 +96,18 @@ struct Star1 { // 28 byte
 	//
 	// qint32 dx0,dx1,plx   32
 private:
-	// Use an union so we can access the data as different types without
-	// aliasing issues.
-	union {
-		quint8  uint8[28];
-		quint16 uint16[14];
-		qint32  int32[7];
-	} d;
+	struct Data {
+		quint8  hip[3];	      // 3 bytes
+		quint8  componentIds; // 1 byte
+		qint32  x0;           // 4 bytes
+		qint32  x1;           // 4 bytes
+		quint8  b_v; 		  // 1 byte
+		quint8  vmag;         // 1 bytes
+		quint16 spInt;        // 2 bytes
+		qint32  dx0;          // 4 bytes
+		qint32  dx1;          // 4 bytes
+		qint32  plx;          // 4 bytes
+	} d;  // total is 28 bytes
 
 public:
 	enum {MaxPosVal=0x7FFFFFFF};
@@ -114,24 +119,20 @@ public:
 		pos+=(static_cast<float>(getX1())+movementFactor*getDx1())*z->axis1;
 		pos+=z->center;
 	}
-	inline int getBVIndex() const {return d.uint8[12];}
-	inline int getMag() const {return d.uint8[13];}
-	inline int getSpInt() const {return d.uint16[7];}
-	inline int getX0() const { return qFromLittleEndian(d.int32[1]);}
-	inline int getX1() const { return qFromLittleEndian(d.int32[2]);}
-	inline int getDx0() const {return qFromLittleEndian(d.int32[4]);}
-	inline int getDx1() const {return qFromLittleEndian(d.int32[5]);}
-	inline int getPlx() const {return qFromLittleEndian(d.int32[6]);}
-
+	inline int getBVIndex() const {return d.b_v;}
+	inline int getMag() const {return d.vmag;}
+	inline int getSpInt() const {return d.spInt;}
+	inline int getX0() const { return qFromLittleEndian(d.x0);}
+	inline int getX1() const { return qFromLittleEndian(d.x1);}
+	inline int getDx0() const {return qFromLittleEndian(d.dx0);}
+	inline int getDx1() const {return qFromLittleEndian(d.dx1);}
+	inline int getPlx() const {return qFromLittleEndian(d.plx);}
+	inline int getComponentIds() const {return d.componentIds;}
+	
 	inline int getHip() const
 	{
-		quint32 v = d.uint8[0] | d.uint8[1] << 8 | d.uint8[2] << 16;
+		quint32 v = d.hip[0] | d.hip[1] << 8 | d.hip[2] << 16;
 		return (static_cast<qint32>(v)) << 8 >> 8;
-	}
-
-	inline int getComponentIds() const
-	{
-		return d.uint8[3];
 	}
 
 	float getBV(void) const {return IndexToBV(getBVIndex());}
