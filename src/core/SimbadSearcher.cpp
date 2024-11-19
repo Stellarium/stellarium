@@ -149,12 +149,17 @@ void SimbadLookupReply::httpQueryFinished()
 					Vec3d v;
 					StelUtils::spheToRect(ra, dec, v);
 					line = reply->readLine();
-					line.chop(1); // Remove a line break at the end
+					while (line.simplified().isEmpty())
+					{   // for example SDSS J140312.52+542056.2 (i.e. M101) does not have HIP so an empty lines, need to check
+						line = reply->readLine();
+						line.chop(1); // Remove a line break at the end
+					}
 					line.replace("NAME " ,"");
 					resultPositions[line.simplified()]=v; // Remove an extra spaces
 				}
 				line = reply->readLine();
 				line.chop(1); // Remove a line break at the end
+				break;  // there might be more than one result of names for the same object
 			}
 			currentStatus = SimbadLookupFinished;
 		}
@@ -189,7 +194,7 @@ SimbadLookupReply* SimbadSearcher::lookup(const QString& serverUrl, const QStrin
 {
 	// Create the Simbad query
 	QString url(serverUrl);
-	QString query = "format object \"%COO(d;A D)\\n%IDLIST(1)\"\n";
+	QString query = "format object \"%COO(d;A D)\\n%IDLIST(HIP)\\n%IDLIST(1)\"\n";
 	query += QString("set epoch J2000\nset limit %1\n query id ").arg(maxNbResult);
 	query += objectName;
 	QByteArray ba = QUrl::toPercentEncoding(query, "", "");
