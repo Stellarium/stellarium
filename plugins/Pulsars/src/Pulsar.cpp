@@ -457,10 +457,11 @@ void Pulsar::draw(StelCore* core, StelPainter *painter)
 Vec3d Pulsar::getJ2000EquatorialPos(const StelCore* core) const
 {
 	static const double d2000 = 2451545.0;
-	const double movementFactor = (M_PI/180.)*(0.0001/3600.) * (core->getJDE()-d2000)/365.25;
+	static const double MAS2RAD = 1 / 3600000.0 * M_PI / 180.0;
+	const double dyr = (core->getJDE()-d2000)/365.25;
 	Vec3d v;
-	const double cRA = RA + movementFactor*pmRA;
-	const double cDE = DE + movementFactor*pmDE;
+	const double cRA = RA + MAS2RAD*dyr*pmRA / cos(DE);
+	const double cDE = DE + MAS2RAD*dyr*pmDE;
 	StelUtils::spheToRect(cRA, cDE, v);
 
 	if ((core) && (core->getUseAberration()) && (core->getCurrentPlanet()))

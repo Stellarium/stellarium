@@ -21,9 +21,11 @@
 
 #ifndef STAR_HPP
 #define STAR_HPP
+#define MAS2RAD 1 / 3600000.0 * M_PI / 180.0
 
 #include "ZoneData.hpp"
 #include "StelObjectType.hpp"
+#include "StelUtils.hpp"
 #include <QString>
 #include <QtEndian>
 
@@ -112,12 +114,19 @@ private:
 public:
 	enum {MaxPosVal=0x7FFFFFFF};
 	StelObjectP createStelObject(const SpecialZoneArray<Star1> *a, const SpecialZoneData<Star1> *z) const;
-	void getJ2000Pos(const ZoneData *z,float movementFactor, Vec3f& pos) const
+	void getJ2000Pos(const ZoneData *z,float dyr, Vec3f& pos) const
 	{
 		pos = z->axis0;
-		pos*=(static_cast<float>(getX0())+movementFactor*getDx0());
-		pos+=(static_cast<float>(getX1())+movementFactor*getDx1())*z->axis1;
+		pos*=static_cast<float>(getX0());
 		pos+=z->center;
+		pos+=static_cast<float>(getX1())*z->axis1;
+
+		double RA;
+		double DE;
+		StelUtils::rectToSphe(&RA, &DE, pos);
+		const double cRA = RA + (static_cast<float>(getDx0())/10.f*dyr*MAS2RAD) / cos(DE);
+		const double cDE = DE +  static_cast<float>(getDx1())/10.f*dyr*MAS2RAD;
+		StelUtils::spheToRect(cRA, cDE, pos);
 	}
 	inline int getBVIndex() const {return d.b_v;}
 	inline int getMag() const {return d.vmag;}
@@ -207,12 +216,19 @@ public:
 
 	enum {MaxPosVal=((1<<19)-1)};
 	StelObjectP createStelObject(const SpecialZoneArray<Star2> *a, const SpecialZoneData<Star2> *z) const;
-	void getJ2000Pos(const ZoneData *z,float movementFactor, Vec3f& pos) const
+	void getJ2000Pos(const ZoneData *z,float dyr, Vec3f& pos) const
 	{
 		pos = z->axis0;
-		pos*=(static_cast<float>(getX0())+movementFactor*getDx0());
-		pos+=(static_cast<float>(getX1())+movementFactor*getDx1())*z->axis1;
+		pos*=static_cast<float>(getX0());
 		pos+=z->center;
+		pos+=static_cast<float>(getX1())*z->axis1;
+
+		double RA;
+		double DE;
+		StelUtils::rectToSphe(&RA, &DE, pos);
+		const double cRA = RA + (static_cast<float>(getDx0())/10.f*dyr*MAS2RAD) / cos(DE);
+		const double cDE = DE +  static_cast<float>(getDx1())/10.f*dyr*MAS2RAD;
+		StelUtils::spheToRect(cRA, cDE, pos);
 	}
 	float getBV(void) const {return IndexToBV(getBVIndex());}
 	QString getNameI18n(void) const {return QString();}
