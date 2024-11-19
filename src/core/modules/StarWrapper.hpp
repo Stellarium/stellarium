@@ -164,6 +164,7 @@ public:
 			   const SpecialZoneData<Star2> *zone,
 			   const Star2 *star) : StarWrapper<Star2>(array,zone,star) {}
 	QString getID(void) const override { return QString(); }
+	QString getInfoString(const StelCore *core, const InfoStringGroup& flags) const override;
 };
 
 class StarWrapper3 : public StarWrapper<Star3>

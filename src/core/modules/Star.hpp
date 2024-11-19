@@ -101,14 +101,14 @@ public:
 		quint32 v = d.hip[0] | d.hip[1] << 8 | d.hip[2] << 16;
 		return (static_cast<qint32>(v)) << 8 >> 8;
 	}
-	inline int getGaia() const { return d.gaia_id; }
+	inline long getGaia() const { return d.gaia_id; }
 	inline int getComponentIds() const
 	{
 		return d.componentIds;
 	}
 
 	float getBV(void) const {return static_cast<float>(d.b_v) / 1000.f;}
-	bool hasName() const {return getHip();}
+	bool hasName() const {return getHip();}  // OR gaia??
 	QString getNameI18n(void) const;
 	QString getScreenNameI18n(void) const;
 	QString getDesignation(void) const;
@@ -152,13 +152,13 @@ public:
 		const double ddec = dyr * (getDx1() / 1000.f) * MAS2RAD_SCALE;
 		StelUtils::spheToRect(RA_rad - dra, DE_rad - ddec, pos);
 	}
-	inline int getGaia() const { return d.gaia_id; }
+	inline long getGaia() const { return d.gaia_id; }
 	float getBV(void) const {return static_cast<float>(d.b_v) / 1000.f;}
 	QString getNameI18n(void) const {return QString();}
 	QString getScreenNameI18n(void) const {return QString();}
 	QString getDesignation(void) const {return QString();}
 	int hasComponentID(void) const {return 0;}
-	bool hasName() const {return getGaia();}
+	bool hasName() const {return getGaia() != -1;}
 	void print(void) const;
 };
 static_assert(sizeof(Star2) == 28, "Size of Star2 must be 28 bytes");

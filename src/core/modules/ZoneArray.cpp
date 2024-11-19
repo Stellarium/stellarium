@@ -474,7 +474,7 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 				continue;
 		}
 
-		int extinctedMagIndex = s->getMag();
+		int extinctedMagIndex = s->getInternalMag(mag_steps, mag_min, mag_range);
 		float twinkleFactor=1.0f; // allow height-dependent twinkle.
 		if (withExtinction)
 		{
@@ -483,7 +483,7 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 			core->j2000ToAltAzInPlaceNoRefraction(&altAz);
 			float extMagShift=0.0f;
 			extinction.forward(altAz, &extMagShift);
-			extinctedMagIndex = s->getMag() + static_cast<int>(extMagShift/k);
+			extinctedMagIndex = s->getInternalMag(mag_steps, mag_min, mag_range) + static_cast<int>(extMagShift/k);
 			if (extinctedMagIndex >= cutoffMagStep || extinctedMagIndex<0) // i.e., if extincted it is dimmer than cutoff or extinctedMagIndex is negative (missing star catalog), so remove
 				continue;
 			tmpRcmag = &rcmag_table[extinctedMagIndex];

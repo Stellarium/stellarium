@@ -220,6 +220,12 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 			}
 		}
 		else
+			if (s->getGaia() != -1) {
+				// Don't add Gaia DR3 if the list already long
+				QString gaia_id;
+				gaia_id = QString("Gaia DR3 %1").arg(s->getGaia());
+				designations.append(gaia_id);
+			}
 			designationsList = designations.join(" - ");
 
 		if (flags&Name)
@@ -246,6 +252,15 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 		if (flags&CatalogNumber)
 			oss << designationsList;
 
+		if ((flags&Name) || (flags&CatalogNumber))
+			oss << "</h2>";
+	}
+	if (s->getGaia() != -1 && !s->getHip()) {
+		if ((flags&Name) || (flags&CatalogNumber))
+			oss << "<h2>";
+		QString gaia_id;
+		gaia_id = QString("Gaia DR3 %1").arg(s->getGaia());
+		oss << gaia_id;
 		if ((flags&Name) || (flags&CatalogNumber))
 			oss << "</h2>";
 	}
@@ -470,6 +485,37 @@ QVariantMap StarWrapper1::getInfoMap(const StelCore *core) const
 	}
 
 	return map;
+}
+
+QString StarWrapper2::getInfoString(const StelCore *core, const InfoStringGroup& flags) const
+{
+	QString str;
+	QTextStream oss(&str);
+
+	if (s->getGaia() != -1) {
+		if ((flags&Name) || (flags&CatalogNumber))
+			oss << "<h2>";
+		QString gaia_id;
+		gaia_id = QString("Gaia DR3 %1").arg(s->getGaia());
+		oss << gaia_id;
+		if ((flags&Name) || (flags&CatalogNumber))
+			oss << "</h2>";
+	}
+
+	if (flags&ObjectType)
+		oss << QString("%1: <b>%2</b>").arg(q_("Type"), getObjectTypeI18n()) << "<br />";
+
+	oss << getMagnitudeInfoString(core, flags, 2);
+
+	if (flags&Extra)
+		oss << QString("%1: <b>%2</b>").arg(q_("Color Index (B-V)"), QString::number(getBV(), 'f', 2)) << "<br />";
+	
+	oss << getCommonInfoString(core, flags);
+	oss << getSolarLunarInfoString(core, flags);
+
+	StelObject::postProcessInfoString(str, flags);
+
+	return str;
 }
 
 StelObjectP Star1::createStelObject(const SpecialZoneArray<Star1> *a, const SpecialZoneData<Star1> *z) const
