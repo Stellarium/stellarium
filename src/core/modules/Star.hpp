@@ -91,7 +91,6 @@ public:
 	}
 	inline int getBVIndex() const {return BVToIndex(getBV());}
 	inline int getMag() const { return d.vmag; }
-	inline int getInternalMag(int mag_steps, int mag_min, int mag_range) const { return mag_steps * (d.vmag / 1000.f - 0.001f*mag_min) / (0.001f*mag_range); }
 	inline int getSpInt() const {return d.spInt;}
 	inline int getX0() const { return d.x0;}
 	inline int getX1() const { return d.x1;}
@@ -139,7 +138,6 @@ public:
 	inline int getDx1() const {return d.dx1;}
 	inline int getBVIndex() const {return BVToIndex(getBV());}
 	inline int getMag() const { return d.vmag; }
-	inline int getInternalMag(int mag_steps, int mag_min, int mag_range) const { return mag_steps * (d.vmag / 1000.f - 0.001f*mag_min) / (0.001f*mag_range); }
 
 	enum {MaxPosVal=((1<<19)-1)};
 	StelObjectP createStelObject(const SpecialZoneArray<Star2> *a, const SpecialZoneData<Star2> *z) const;
@@ -206,7 +204,6 @@ public:
 	{
 		return d[5] >> 3;
 	}
-	inline int getInternalMag(int mag_steps, int mag_min, int mag_range) const { return mag_steps * (getMag() / 1000.f - 0.001f*mag_min) / (0.001f*mag_range); }
 
 	enum {MaxPosVal=((1<<17)-1)};
 	StelObjectP createStelObject(const SpecialZoneArray<Star3> *a, const SpecialZoneData<Star3> *z) const;
