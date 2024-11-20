@@ -78,16 +78,158 @@ private:
 public:
 	enum {MaxPosVal=0x7FFFFFFF};
 	StelObjectP createStelObject(const SpecialZoneArray<Star1> *a, const SpecialZoneData<Star1> *z) const;
+
+	void getJ2000withParallaxEffect(double& RA, double& DE, double& Plx, double& pmra, double& pmdec, double& vr, float& dyr) const 
+	{
+		// RA and DE in radian
+		// Plx in mas
+		// pmra, pmdec in mas/yr
+		// vr in km/s
+		// dyr in Julian year
+		// cant do this without Anthony Brown's astrometry tutorial
+		double cpmra = pmra * cos(DE);
+		// this function assume RA, DE observed at J2000.0
+		static const double refepoch = 2000.0;
+		const double obs_epoch = refepoch + dyr;
+		static const double au_in_meter = 149597870700.;
+		static const double au_mas_parsec = 1000.;  // AU expressed in mas*pc
+		static const double julian_year_seconds = 365.25 * 86400.;
+		static const double au_km_year_per_second = au_in_meter / julian_year_seconds / 1000.;
+		// static const double parsec = au_in_meter / 1000. / MAS2RAD_SCALE;
+		static const double parsec = 30856775814913670;
+		static const double orbital_period = 1.0;  // in Julian year
+		static const double orbital_radius = 1.0;  // in AU
+
+		double sra = sin(RA);
+		double sde = sin(DE);
+		double cra = cos(RA);
+		double cde = cos(DE);
+
+		// need 3D spherical coordinate system
+		double radius = au_mas_parsec / Plx;
+		Vec3f xyz(radius * cra * cde, radius * sra * cde, radius * sde);
+
+		// normal triad of a spherical coordinate system
+		Vec3d p(-sra, cra, 0.);
+		Vec3d q(-sde * cra, -sde * sra, cde);
+		Vec3d r(cde * cra, cde * sra, sde);
+		Vec3d transverse_motion(cpmra * au_km_year_per_second / Plx, pmdec * au_km_year_per_second / Plx, vr);
+		Mat3d md = Mat3d(p, q, r);
+		Vec3d vxvyvz = md.transpose() * transverse_motion;
+
+		// from observer's ephemeris
+		Vec3d bxyz(orbital_radius * cos(2. * M_PI / orbital_period * obs_epoch), orbital_radius * sin(2. * M_PI / orbital_period * obs_epoch), 0.);
+
+		// include Roemer delay
+		double tB = obs_epoch + (r * bxyz) * au_in_meter / julian_year_seconds / SPEED_OF_LIGHT;
+
+		// phase space coordinates
+		double vxyz_factor = (tB - refepoch) * (1000. * julian_year_seconds / parsec);
+		Vec3d bS(xyz[0] + vxvyvz[0] * vxyz_factor, xyz[1] + vxvyvz[1] * vxyz_factor, xyz[2] + vxvyvz[2] * vxyz_factor);
+		Vec3d u0 = bS - bxyz * au_in_meter / parsec;
+		double RA_obs = atan2(u0[1], u0[0]);
+		// wrap pi
+		if (RA_obs < 0.) RA_obs += 2. * M_PI;
+		double DEC_obs = atan2(u0[2], sqrt(u0[0] * u0[0] + u0[1] * u0[1]));
+
+		// change RA, DEC
+		RA = RA_obs;
+		DE = DEC_obs;
+	}
+
+	void getJ2000Pos3DTreatment(double& RA, double& DE, double& Plx, double& pmra, double& pmdec, double& vr, float& dyr) const {
+		// cant do this without Anthony Brown's astrometry tutorial
+		static const double au_in_meter = 149597870700.;
+		static const double au_mas_parsec = 1000.;  // AU expressed in mas*pc
+		static const double julian_year_seconds = 365.25 * 86400.;
+		static const double au_km_year_per_second = au_in_meter / julian_year_seconds / 1000.;
+		// static const double parsec = au_in_meter / 1000. / MAS2RAD_SCALE;
+		static const double parsec = 30856775814913670;
+		static const double MAS2RAD = M_PI / (3600000. * 180.);
+		
+		double sra = sin(RA);
+		double sde = sin(DE);
+		double cra = cos(RA);
+		double cde = cos(DE);
+		double cpmra = pmra * cos(DE);
+
+		// normal triad of a spherical coordinate system
+		Vec3d p(-sra, cra, 0.);
+		Vec3d q(-sde * cra, -sde * sra, cde);
+		Vec3d r(cde * cra, cde * sra, sde);
+
+		double pmra0 = cpmra * MAS2RAD;
+		double pmdec0 = pmdec * MAS2RAD;
+		double pmr0 = vr * Plx / au_km_year_per_second * MAS2RAD;
+		double pmtotsqr = MAS2RAD * MAS2RAD * (pmra0 * pmra0 + pmdec0 * pmdec0);
+
+		// proper motion
+		Vec3d pm0 = pmra0 * p + pmdec0 * q;
+
+		double f = 1. / sqrt(1. + 2. * pmr0 * dyr + (pmtotsqr + pmr0*pmr0)*dyr*dyr);
+		Vec3d u = (r * (1. + pmr0 * dyr) + pm0 * dyr) * f;
+
+		// cartesian to spherical
+		double lon = atan2(u[1], u[0]);
+		// warp pi
+		if (lon < 0.) lon += 2. * M_PI;
+		double lat = atan2(u[2], sqrt(u[0] * u[0] + u[1] * u[1]));
+		double d = sqrt(u[0] * u[0] + u[1] * u[1] + u[2] * u[2]);
+
+		double Plx2 = Plx * f;
+		// double pmr1 = (pmr0 + (pmtotsqr + pmr0 * pmr0) * dyr) * f * f;
+		Vec3d pmvel1 = pm0 * (1 + pmr0 * dyr);
+		pmvel1.set((pmvel1[0] - d * pmr0 * pmr0 * dyr) * f * f * f, (pmvel1[1] - d * pmr0 * pmr0 * dyr) * f * f * f, (pmvel1[2] - d * pmr0 * pmr0 * dyr) * f * f * f);
+
+		double slon = sin(lon);
+		double slat = sin(lat);
+		double clon = cos(lon);
+		double clat = cos(lat);
+
+		// normal triad of a spherical coordinate system
+		Vec3d p2(-slon, clon, 0.);
+		Vec3d q2(-slat * clon, -slon * slon, clat);
+		Vec3d r2(clat * clon, clat * slon, slat);
+
+		pmra = p2[0] * pmvel1[0] + p2[1] * pmvel1[1] + p2[2] * pmvel1[2];
+		pmra /= MAS2RAD;
+		pmdec = q2[0] * pmvel1[0] + q2[1] * pmvel1[1] + q2[2] * pmvel1[2];
+		pmdec /= MAS2RAD;
+		RA = lon;
+		DE = lat;
+		Plx = Plx2;
+	}
+
 	void getJ2000Pos(float dyr, Vec3f& pos) const
 	{
 		// conversion from mas to rad
-		const double RA_rad = getX0() * MAS2RAD_SCALE;
-		const double DE_rad = getX1() * MAS2RAD_SCALE;
-		// conversion from mas/yr to rad/yr, so dra in rad
-		const double dra = dyr * (getDx0() / 1000.f) / cos(DE_rad) * MAS2RAD_SCALE;
-		// getDx1 already in mas/yr, so ddec in rad
-		const double ddec = dyr * (getDx1() / 1000.f) * MAS2RAD_SCALE;
-		StelUtils::spheToRect(RA_rad + dra, DE_rad + ddec, pos);
+		double RA_rad = getX0() * MAS2RAD_SCALE;
+		double DE_rad = getX1() * MAS2RAD_SCALE;
+		
+		if (getPlx() && getPlxErr() && -1 == 0) {  // on top of proper motion, also consider parallax
+			double Plx = getPlx() * 0.01;
+			double pmra = getDx0() / 1000.;
+			double pmdec = getDx1() / 1000.;
+			double vr = 0.;
+			getJ2000withParallaxEffect(RA_rad, DE_rad, Plx, pmra, pmdec, vr, dyr);
+		}
+		if (getPlx() && getPlxErr() && -1 == 0){  // 3D astrometry propagation
+			double Plx = getPlx() * 0.01;
+			double pmra = getDx0() / 1000.;
+			double pmdec = getDx1() / 1000.;
+			double vr = 0.;
+			getJ2000Pos3DTreatment(RA_rad, DE_rad, Plx, pmra, pmdec, vr, dyr);
+		}
+		else {  // no parallax no radial velocity, just proper motion
+			// conversion from mas/yr to rad/yr, so dra in rad
+			const double dra = dyr * (getDx0() / 1000.f) / cos(DE_rad) * MAS2RAD_SCALE;
+			// getDx1 already in mas/yr, so ddec in rad
+			const double ddec = dyr * (getDx1() / 1000.f) * MAS2RAD_SCALE;
+			RA_rad += dra;
+			DE_rad += ddec;
+		}
+		StelUtils::spheToRect(RA_rad, DE_rad, pos);
+
 	}
 	inline int getBVIndex() const {return BVToIndex(getBV());}
 	inline int getMag() const { return d.vmag; }
