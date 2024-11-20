@@ -160,7 +160,6 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 	const double vPeriod = StarMgr::getGcvsPeriod(s->getHip());
 	const int vMm = StarMgr::getGcvsMM(s->getHip());
 	const float plxErr = StarMgr::getPlxError(s->getHip());
-	const PMData properMotion = StarMgr::getProperMotion(s->getHip());
 	if (s->getHip())
 	{
 		if ((flags&Name) || (flags&CatalogNumber))
@@ -325,10 +324,10 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 		oss << getExtraInfoStrings(Distance).join("");
 	}
 
-	if (flags&ProperMotion && (!isNan(properMotion.first) && !isNan(properMotion.second)))
+	if (flags)
 	{
-		float dx = properMotion.first;
-		float dy = properMotion.second;
+		float dx = 0.1f*s->getDx0();
+		float dy = 0.1f*s->getDx1();
 		float pa = std::atan2(dx, dy)*M_180_PIf;
 		if (pa<0)
 			pa += 360.f;

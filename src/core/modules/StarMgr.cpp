@@ -717,9 +717,8 @@ void StarMgr::populateHipparcosLists()
 				doubleHipStars.push_back(sd);
 			}
 			// use separate variables for avoid the overflow (esp. for Barnard's star)
-			PMData properMotion = getProperMotion(s->getHip());
-			float pmX = properMotion.first;
-			float pmY = properMotion.second;
+			float pmX = 0.1f*s->getDx0();
+			float pmY = 0.1f*s->getDx0();
 			float pm = 0.001f * std::sqrt((pmX*pmX) + (pmY*pmY));
 			if (qAbs(pm)>=pmLimit)
 			{
