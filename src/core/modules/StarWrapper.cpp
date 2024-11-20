@@ -218,7 +218,7 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 			}
 		}
 		else
-			if (s->getGaia() != -1) {
+			if (s->getGaia()) {
 				// Don't add Gaia DR3 if the list already long
 				QString gaia_id;
 				gaia_id = QString("Gaia DR3 %1").arg(s->getGaia());
@@ -253,7 +253,7 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 		if ((flags&Name) || (flags&CatalogNumber))
 			oss << "</h2>";
 	}
-	if (s->getGaia() != -1 && !s->getHip()) {
+	if (s->getGaia() && !s->getHip()) {
 		if ((flags&Name) || (flags&CatalogNumber))
 			oss << "<h2>";
 		QString gaia_id;
@@ -492,7 +492,7 @@ QString StarWrapper2::getInfoString(const StelCore *core, const InfoStringGroup&
 	QString str;
 	QTextStream oss(&str);
 
-	if (s->getGaia() != -1) {
+	if (s->getGaia()) {
 		if ((flags&Name) || (flags&CatalogNumber))
 			oss << "<h2>";
 		QString gaia_id;

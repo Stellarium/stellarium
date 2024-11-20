@@ -73,7 +73,7 @@ private:
 		qint32  dx1;          // 4 bytes
 		quint16 plx;          // 2 bytes
 		quint16 plx_err;      // 2 bytes 
-	} d;  // total is 30 bytes
+	} d;
 
 public:
 	enum {MaxPosVal=0x7FFFFFFF};
@@ -87,7 +87,7 @@ public:
 		const double dra = dyr * (getDx0() / 1000.f) / cos(DE_rad) * MAS2RAD_SCALE;
 		// getDx1 already in mas/yr, so ddec in rad
 		const double ddec = dyr * (getDx1() / 1000.f) * MAS2RAD_SCALE;
-		StelUtils::spheToRect(RA_rad - dra, DE_rad - ddec, pos);
+		StelUtils::spheToRect(RA_rad + dra, DE_rad + ddec, pos);
 	}
 	inline int getBVIndex() const {return BVToIndex(getBV());}
 	inline int getMag() const { return d.vmag; }
@@ -152,7 +152,7 @@ public:
 		const double dra = dyr * (getDx0() / 1000.f) / cos(DE_rad) * MAS2RAD_SCALE;
 		// getDx1 already in mas/yr, so ddec in rad
 		const double ddec = dyr * (getDx1() / 1000.f) * MAS2RAD_SCALE;
-		StelUtils::spheToRect(RA_rad - dra, DE_rad - ddec, pos);
+		StelUtils::spheToRect(RA_rad + dra, DE_rad + ddec, pos);
 	}
 	inline long getGaia() const { return d.gaia_id; }
 	float getBV(void) const {return static_cast<float>(d.b_v) / 1000.f;}
@@ -160,7 +160,7 @@ public:
 	QString getScreenNameI18n(void) const {return QString();}
 	QString getDesignation(void) const {return QString();}
 	int hasComponentID(void) const {return 0;}
-	bool hasName() const {return getGaia() != -1;}
+	bool hasName() const {return getGaia();}
 	void print(void) const;
 };
 static_assert(sizeof(Star2) == 28, "Size of Star2 must be 28 bytes");
