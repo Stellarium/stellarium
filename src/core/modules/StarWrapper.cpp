@@ -289,8 +289,22 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 
 	oss << getMagnitudeInfoString(core, flags, 2);
 
-	if ((flags&AbsoluteMagnitude) && s->getPlx ()&& !isNan(s->getPlx()) && !isInf(s->getPlx()))
-		oss << QString("%1: %2").arg(q_("Absolute Magnitude")).arg(getVMagnitude(core)+5.*(1.+std::log10(0.00001*s->getPlx())), 0, 'f', 2) << "<br />";
+	double RA, DEC, Plx, pmra, pmdec, vr;
+	double PlxErr = s->getPlxErr() * 0.01;
+	static const double d2000 = 2451545.0;
+	float dyr = static_cast<float>(core->getJDE()-d2000)/365.25;
+	if (s->getTimeDependence()) {
+		s->get6Dsolution(RA, DEC, Plx, pmra, pmdec, vr, dyr);
+	}
+	else {
+		Plx = s->getPlx() * 0.01;
+		pmra = s->getDx0() / 1000.;
+		pmdec = s->getDx1() / 1000.;
+		vr = 0.;
+	}
+
+	if ((flags&AbsoluteMagnitude) && Plx && !isNan(Plx) && !isInf(Plx))
+		oss << QString("%1: %2").arg(q_("Absolute Magnitude")).arg(getVMagnitude(core)+5.*(1.+std::log10(0.00001*Plx)), 0, 'f', 2) << "<br />";
 	if (flags&AbsoluteMagnitude)
 		oss << getExtraInfoStrings(AbsoluteMagnitude).join("");
 
@@ -324,15 +338,15 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 	// kinda impossible for both parallax and parallax_err to be exactly 0, so they must just be missing
 	if (flags&Distance)
 	{
-		if (s->getPlx() && (s->getPlx()))
+		if ((Plx!=0) & (PlxErr!=0))
 		{
 			//TRANSLATORS: Unit of measure for distance - Light Years
 			QString ly = qc_("ly", "distance");
 			double k = AU/(SPEED_OF_LIGHT*86400*365.25);
 			double d = ((0.00001/3600.)*(M_PI/180));
-			double distance = k/(s->getPlx()*d);
-			if ((s->getPlx()) && (s->getPlx()>s->getPlxErr())) // No distance when error of parallax is bigger than parallax!
-				oss << QString("%1: %2%3%4 %5").arg(q_("Distance"), QString::number(distance, 'f', 2), QChar(0x00B1), QString::number(qAbs(k/((100*s->getPlxErr() + s->getPlx())*d) - distance), 'f', 2), ly) << "<br />";
+			double distance = k/(Plx*d);
+			if ((Plx) && (Plx>PlxErr)) // No distance when error of parallax is bigger than parallax!
+				oss << QString("%1: %2%3%4 %5").arg(q_("Distance"), QString::number(distance, 'f', 2), QChar(0x00B1), QString::number(qAbs(k/((PlxErr + Plx)*d) - distance), 'f', 2), ly) << "<br />";
 			else
 				oss << QString("%1: %2 %3").arg(q_("Distance"), QString::number(distance, 'f', 2), ly) << "<br />";
 		}
@@ -340,33 +354,31 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 	}
 
 	// kinda impossible for both pm to be exactly 0, so they must just be missing
-	if ((flags&ProperMotion) && (s->getDx0()) && (s->getDx1()))
+	if ((flags&ProperMotion) && (pmra) && (pmdec))
 	{
-		float dx = s->getDx0() / 1000.f;
-		float dy = s->getDx1() / 1000.f;
-		float pa = std::atan2(dx, dy)*M_180_PIf;
+		float pa = std::atan2(pmra, pmdec)*M_180_PIf;
 		if (pa<0)
 			pa += 360.f;
 		oss << QString("%1: %2 %3 %4 %5°").arg(q_("Proper motion"),
-							QString::number(std::sqrt(dx*dx + dy*dy), 'f', 2),
+							QString::number(std::sqrt(pmra * pmra + pmdec * pmdec), 'f', 2),  // TODO for Henry: I think this is wrong?
 							qc_("mas/yr", "milliarc second per year"),
 							qc_("towards", "into the direction of"),
 							QString::number(pa, 'f', 1)) << "<br />";
 		oss << QString("%1: %2 %3 (%4)").arg(q_("Proper motions by axes"),
-							QString::number(dx, 'f', 2),
-							QString::number(dy, 'f', 2),
+							QString::number(pmra, 'f', 2),
+							QString::number(pmdec, 'f', 2),
 							qc_("mas/yr", "milliarc second per year")) << "<br />";
 	}
 
 	if (flags&Extra)
 	{
-		if (s->getPlx())
+		if (Plx!=0)
 		{
 			QString plx = q_("Parallax");
-			if (s->getPlxErr()>0.f)
-				oss <<  QString("%1: %2%3%4 ").arg(plx, QString::number(0.01*s->getPlx(), 'f', 3), QChar(0x00B1), QString::number(0.01f*s->getPlxErr(), 'f', 3));
+			if (PlxErr>0.f)
+				oss <<  QString("%1: %2%3%4 ").arg(plx, QString::number(Plx, 'f', 3), QChar(0x00B1), QString::number(PlxErr, 'f', 3));
 			else
-				oss << QString("%1: %2 ").arg(plx, QString::number(0.01*s->getPlx(), 'f', 3));
+				oss << QString("%1: %2 ").arg(plx, QString::number(Plx, 'f', 3));
 			oss  << qc_("mas", "parallax") << "<br />";
 		}
 

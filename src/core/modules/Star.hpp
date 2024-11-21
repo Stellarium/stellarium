@@ -206,14 +206,14 @@ public:
 		double RA_rad = getX0() * MAS2RAD_SCALE;
 		double DE_rad = getX1() * MAS2RAD_SCALE;
 		
-		if (getPlx() && getPlxErr() && -1 == 0) {  // on top of proper motion, also consider parallax
+		if (getTimeDependence() && -1 == 0) {  // on top of proper motion, also consider parallax
 			double Plx = getPlx() * 0.01;
 			double pmra = getDx0() / 1000.;
 			double pmdec = getDx1() / 1000.;
 			double vr = 0.;
 			getJ2000withParallaxEffect(RA_rad, DE_rad, Plx, pmra, pmdec, vr, dyr);
 		}
-		if (getPlx() && getPlxErr() && -1 == 0){  // 3D astrometry propagation
+		if (getTimeDependence()){  // 3D astrometry propagation
 			double Plx = getPlx() * 0.01;
 			double pmra = getDx0() / 1000.;
 			double pmdec = getDx1() / 1000.;
@@ -239,6 +239,18 @@ public:
 	inline int getDx0() const {return d.dx0;}
 	inline int getDx1() const {return d.dx1;}
 	inline int getPlx() const {return d.plx;}
+	inline void get6Dsolution(double& RA, double& DE, double& Plx, double& pmra, double& pmdec, double& vr, float dyr) const {
+		RA = getX0() * MAS2RAD_SCALE;
+		DE = getX1() * MAS2RAD_SCALE;
+		Plx = getPlx() * 0.01;
+		pmra = getDx0() / 1000.;
+		pmdec = getDx1() / 1000.;
+		getJ2000Pos3DTreatment(RA, DE, Plx, pmra, pmdec, vr, dyr);
+	}
+	inline bool getTimeDependence() const {
+		// Flag if the star has time dependent data like proper motion or parallax
+		return getPlx() && getPlxErr() && (getDx0() || getDx1());
+		}
 	inline int getPlxErr() const {return d.plx_err;}
 	inline int getHip() const {
 		quint32 v = d.hip[0] | d.hip[1] << 8 | d.hip[2] << 16;
