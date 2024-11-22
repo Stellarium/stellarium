@@ -287,8 +287,6 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 		oss << getExtraInfoStrings(flags&ObjectType).join("");
 	}
 
-	oss << getMagnitudeInfoString(core, flags, 2);
-
 	double RA, DEC, Plx, pmra, pmdec, RadialVel;
 	double PlxErr = s->getPlxErr() * 0.01;
 	static const double d2000 = 2451545.0;
@@ -303,8 +301,12 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 		RadialVel = 0.;
 	}
 
+	float magOffset = 5.f * log10((s->getPlx() * 0.01)/Plx);
+	oss << getMagnitudeInfoString(core, flags, 2, magOffset);
+
 	if ((flags&AbsoluteMagnitude) && Plx && !isNan(Plx) && !isInf(Plx))
-		oss << QString("%1: %2").arg(q_("Absolute Magnitude")).arg(getVMagnitude(core)+5.*(1.+std::log10(0.00001*Plx)), 0, 'f', 2) << "<br />";
+		// should use Plx from getPlx because Plx can change with time, but not absolute magnitude
+		oss << QString("%1: %2").arg(q_("Absolute Magnitude")).arg(getVMagnitude(core)+5.*(1.+std::log10(0.00001*s->getPlx())), 0, 'f', 2) << "<br />";
 	if (flags&AbsoluteMagnitude)
 		oss << getExtraInfoStrings(AbsoluteMagnitude).join("");
 
