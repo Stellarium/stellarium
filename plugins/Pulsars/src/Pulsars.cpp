@@ -466,7 +466,7 @@ QVariantMap Pulsars::loadPSRMap()
 	QVariantMap map;
 	QFile jsonFile(jsonCatalogPath);
 	if (!jsonFile.open(QIODevice::ReadOnly))
-		qWarning() << "[Pulsars] Cannot open" << QDir::toNativeSeparators(path);
+		qWarning() << "[Pulsars] Cannot open" << QDir::toNativeSeparators(jsonCatalogPath);
 	else
 	{
 		try
