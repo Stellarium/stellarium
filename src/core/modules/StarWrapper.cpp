@@ -289,18 +289,18 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 
 	oss << getMagnitudeInfoString(core, flags, 2);
 
-	double RA, DEC, Plx, pmra, pmdec, vr;
+	double RA, DEC, Plx, pmra, pmdec, RadialVel;
 	double PlxErr = s->getPlxErr() * 0.01;
 	static const double d2000 = 2451545.0;
 	float dyr = static_cast<float>(core->getJDE()-d2000)/365.25;
 	if (s->getTimeDependence()) {
-		s->get6Dsolution(RA, DEC, Plx, pmra, pmdec, vr, dyr);
+		s->get6Dsolution(RA, DEC, Plx, pmra, pmdec, RadialVel, dyr);
 	}
 	else {
 		Plx = s->getPlx() * 0.01;
 		pmra = s->getDx0() / 1000.;
 		pmdec = s->getDx1() / 1000.;
-		vr = 0.;
+		RadialVel = 0.;
 	}
 
 	if ((flags&AbsoluteMagnitude) && Plx && !isNan(Plx) && !isInf(Plx))
@@ -368,6 +368,12 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 							QString::number(pmra, 'f', 2),
 							QString::number(pmdec, 'f', 2),
 							qc_("mas/yr", "milliarc second per year")) << "<br />";
+	}
+
+	if (flags && RadialVel)
+	{
+		if (RadialVel)
+			oss << QString("%1: %2 %3").arg(q_("Radial velocity"), QString::number(RadialVel, 'f', 1), qc_("km/s", "kilometers per second")) << "<br />";
 	}
 
 	if (flags&Extra)

@@ -66,7 +66,7 @@ private:
 		qint32  x0;           // 4 bytes, ra in mas
 		qint32  x1;           // 4 bytes, dec in mas
 		qint16  b_v; 		  // 2 byte, B-V in milli-mag
-		qint16  vmag;         // 2 bytes, V magnitude in milli-mag
+		qint16  vmag;         //` 2 bytes, V magnitude in milli-mag
 		quint16 spInt;        // 2 bytes
 		qint32  dx0;          // 4 bytes, pmra in uas/yr
 		qint32  dx1;          // 4 bytes, pmdec in uas/yr
@@ -229,7 +229,7 @@ public:
 		RA = lon;
 		DE = lat;
 		Plx = Plx2;
-		vr = pmr1 / MAS2RAD;
+		vr = (pmr1 / MAS2RAD / Plx) * au_km_year_per_second;
 	}
 
 	void getJ2000Pos(float dyr, Vec3f& pos) const
