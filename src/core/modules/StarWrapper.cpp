@@ -344,7 +344,7 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 			QString ly = qc_("ly", "distance");
 			double k = AU/(SPEED_OF_LIGHT*86400*365.25);
 			double d = ((0.00001/3600.)*(M_PI/180));
-			double distance = k/(Plx*d);
+			double distance = 3.26156 * 1000. / Plx;
 			if ((Plx) && (Plx>PlxErr)) // No distance when error of parallax is bigger than parallax!
 				oss << QString("%1: %2%3%4 %5").arg(q_("Distance"), QString::number(distance, 'f', 2), QChar(0x00B1), QString::number(qAbs(k/((PlxErr + Plx)*d) - distance), 'f', 2), ly) << "<br />";
 			else
@@ -360,7 +360,7 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 		if (pa<0)
 			pa += 360.f;
 		oss << QString("%1: %2 %3 %4 %5°").arg(q_("Proper motion"),
-							QString::number(std::sqrt(pmra * pmra + pmdec * pmdec), 'f', 2),  // TODO for Henry: I think this is wrong?
+							QString::number(std::sqrt(pmra * pmra + pmdec * pmdec), 'f', 2),
 							qc_("mas/yr", "milliarc second per year"),
 							qc_("towards", "into the direction of"),
 							QString::number(pa, 'f', 1)) << "<br />";

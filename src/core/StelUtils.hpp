@@ -46,6 +46,8 @@
 #define SUN_RADIUS 696000.
 // Equatorial radius of the Moon in km
 #define MOON_RADIUS 1738.
+// 1 mas to 1 radian, is M_PI / (3600000. * 180.)
+#define MAS2RAD 4.8481368110953594e-9
 
 // Add a few frequently used extra math-type literals
 #ifndef M_PI_180

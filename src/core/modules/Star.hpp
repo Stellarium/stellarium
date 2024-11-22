@@ -27,6 +27,7 @@
 #include "StelUtils.hpp"
 #include <QString>
 #include <QtEndian>
+#include <cmath>
 
 class StelObject;
 
@@ -37,8 +38,6 @@ typedef unsigned short int Uint16;
 
 template <class Star> class SpecialZoneArray;
 template <class Star> struct SpecialZoneData;
-
-#define MAS2RAD_SCALE M_PI / (3600000. * 180.);
 
 // structs for storing the stars in binary form. The idea is
 // to store much data for bright stars (Star1), but only little or even
@@ -64,15 +63,16 @@ private:
 		quint8  hip[3];	      // 3 bytes
 		qint64  gaia_id;	  // 8 bytes
 		quint8  componentIds; // 1 byte
-		qint32  x0;           // 4 bytes
-		qint32  x1;           // 4 bytes
-		qint16  b_v; 		  // 2 byte
-		qint16  vmag;         // 2 bytes
+		qint32  x0;           // 4 bytes, ra in mas
+		qint32  x1;           // 4 bytes, dec in mas
+		qint16  b_v; 		  // 2 byte, B-V in milli-mag
+		qint16  vmag;         // 2 bytes, V magnitude in milli-mag
 		quint16 spInt;        // 2 bytes
-		qint32  dx0;          // 4 bytes
-		qint32  dx1;          // 4 bytes
-		quint16 plx;          // 2 bytes
-		quint16 plx_err;      // 2 bytes 
+		qint32  dx0;          // 4 bytes, pmra in uas/yr
+		qint32  dx1;          // 4 bytes, pmdec in uas/yr
+		quint16 plx;          // 2 bytes, parallax in 10 uas
+		quint16 plx_err;      // 2 bytes, parallax error in 10 uas
+		qint16  rv;		      // 2 bytes, radial velocity in 10 m/s
 	} d;
 
 public:
@@ -87,7 +87,6 @@ public:
 		// vr in km/s
 		// dyr in Julian year
 		// cant do this without Anthony Brown's astrometry tutorial
-		double cpmra = pmra * cos(DE);
 		// this function assume RA, DE observed at J2000.0
 		static const double refepoch = 2000.0;
 		const double obs_epoch = refepoch + dyr;
@@ -95,7 +94,7 @@ public:
 		static const double au_mas_parsec = 1000.;  // AU expressed in mas*pc
 		static const double julian_year_seconds = 365.25 * 86400.;
 		static const double au_km_year_per_second = au_in_meter / julian_year_seconds / 1000.;
-		// static const double parsec = au_in_meter / 1000. / MAS2RAD_SCALE;
+		// static const double parsec = au_in_meter / 1000. / MAS2RAD;
 		static const double parsec = 30856775814913670;
 		static const double orbital_period = 1.0;  // in Julian year
 		static const double orbital_radius = 1.0;  // in AU
@@ -113,7 +112,7 @@ public:
 		Vec3d p(-sra, cra, 0.);
 		Vec3d q(-sde * cra, -sde * sra, cde);
 		Vec3d r(cde * cra, cde * sra, sde);
-		Vec3d transverse_motion(cpmra * au_km_year_per_second / Plx, pmdec * au_km_year_per_second / Plx, vr);
+		Vec3d transverse_motion(pmra * au_km_year_per_second / Plx, pmdec * au_km_year_per_second / Plx, vr);
 		Mat3d md = Mat3d(p, q, r);
 		Vec3d vxvyvz = md.transpose() * transverse_motion;
 
@@ -137,31 +136,63 @@ public:
 		DE = DEC_obs;
 	}
 
-	void getJ2000Pos3DTreatment(double& RA, double& DE, double& Plx, double& pmra, double& pmdec, double& vr, float& dyr) const {
+	void getJ2000pos3D(double& RA, double& DE, double& Plx, double pmra, double pmdec, double vr, float dyr, Vec3f& pos) const {
 		// cant do this without Anthony Brown's astrometry tutorial
 		static const double au_in_meter = 149597870700.;
 		static const double au_mas_parsec = 1000.;  // AU expressed in mas*pc
 		static const double julian_year_seconds = 365.25 * 86400.;
 		static const double au_km_year_per_second = au_in_meter / julian_year_seconds / 1000.;
-		// static const double parsec = au_in_meter / 1000. / MAS2RAD_SCALE;
+		// static const double parsec = au_in_meter / 1000. / MAS2RAD;
 		static const double parsec = 30856775814913670;
-		static const double MAS2RAD = M_PI / (3600000. * 180.);
-		
+
 		double sra = sin(RA);
 		double sde = sin(DE);
 		double cra = cos(RA);
 		double cde = cos(DE);
-		double cpmra = pmra * cos(DE);
 
 		// normal triad of a spherical coordinate system
 		Vec3d p(-sra, cra, 0.);
 		Vec3d q(-sde * cra, -sde * sra, cde);
 		Vec3d r(cde * cra, cde * sra, sde);
 
-		double pmra0 = cpmra * MAS2RAD;
+		double pmra0 = pmra * MAS2RAD;
 		double pmdec0 = pmdec * MAS2RAD;
 		double pmr0 = vr * Plx / au_km_year_per_second * MAS2RAD;
-		double pmtotsqr = MAS2RAD * MAS2RAD * (pmra0 * pmra0 + pmdec0 * pmdec0);
+		double pmtotsqr =  (pmra * pmra + pmdec * pmdec) * MAS2RAD * MAS2RAD;
+
+		// proper motion
+		Vec3d pm0 = pmra0 * p + pmdec0 * q;
+
+		double f = 1. / sqrt(1. + 2. * pmr0 * dyr + (pmtotsqr + pmr0*pmr0)*dyr*dyr);
+		Vec3d u = (r * (1. + pmr0 * dyr) + pm0 * dyr) * f;
+
+		pos.set(u[0], u[1], u[2]);
+		// no need to map back to RA/DE
+	}
+
+	void getJ2000Pos6DTreatment(double& RA, double& DE, double& Plx, double& pmra, double& pmdec, double& vr, float& dyr) const {
+		// cant do this without Anthony Brown's astrometry tutorial
+		static const double au_in_meter = 149597870700.;
+		static const double au_mas_parsec = 1000.;  // AU expressed in mas*pc
+		static const double julian_year_seconds = 365.25 * 86400.;
+		static const double au_km_year_per_second = au_in_meter / julian_year_seconds / 1000.;
+		// static const double parsec = au_in_meter / 1000. / MAS2RAD;
+		static const double parsec = 30856775814913670;
+
+		double sra = sin(RA);
+		double sde = sin(DE);
+		double cra = cos(RA);
+		double cde = cos(DE);
+
+		// normal triad of a spherical coordinate system
+		Vec3d p(-sra, cra, 0.);
+		Vec3d q(-sde * cra, -sde * sra, cde);
+		Vec3d r(cde * cra, cde * sra, sde);
+
+		double pmra0 = pmra * MAS2RAD;
+		double pmdec0 = pmdec * MAS2RAD;
+		double pmr0 = vr * Plx / au_km_year_per_second * MAS2RAD;
+		double pmtotsqr =  (pmra * pmra + pmdec * pmdec) * MAS2RAD * MAS2RAD;
 
 		// proper motion
 		Vec3d pm0 = pmra0 * p + pmdec0 * q;
@@ -174,12 +205,12 @@ public:
 		// warp pi
 		if (lon < 0.) lon += 2. * M_PI;
 		double lat = atan2(u[2], sqrt(u[0] * u[0] + u[1] * u[1]));
-		double d = sqrt(u[0] * u[0] + u[1] * u[1] + u[2] * u[2]);
+		// double d = sqrt(u[0] * u[0] + u[1] * u[1] + u[2] * u[2]);
 
 		double Plx2 = Plx * f;
-		// double pmr1 = (pmr0 + (pmtotsqr + pmr0 * pmr0) * dyr) * f * f;
+		double pmr1 = (pmr0 + (pmtotsqr + pmr0 * pmr0) * dyr) * f * f;
 		Vec3d pmvel1 = pm0 * (1 + pmr0 * dyr);
-		pmvel1.set((pmvel1[0] - d * pmr0 * pmr0 * dyr) * f * f * f, (pmvel1[1] - d * pmr0 * pmr0 * dyr) * f * f * f, (pmvel1[2] - d * pmr0 * pmr0 * dyr) * f * f * f);
+		pmvel1.set((pmvel1[0] - r[0] * pmr0 * pmr0 * dyr) * f * f * f, (pmvel1[1] - r[1] * pmr0 * pmr0 * dyr) * f * f * f, (pmvel1[2] - r[2] * pmr0 * pmr0 * dyr) * f * f * f);
 
 		double slon = sin(lon);
 		double slat = sin(lat);
@@ -188,8 +219,8 @@ public:
 
 		// normal triad of a spherical coordinate system
 		Vec3d p2(-slon, clon, 0.);
-		Vec3d q2(-slat * clon, -slon * slon, clat);
-		Vec3d r2(clat * clon, clat * slon, slat);
+		Vec3d q2(-slat * clon, -slat * slon, clat);
+		// Vec3d r2(clat * clon, clat * slon, slat);
 
 		pmra = p2[0] * pmvel1[0] + p2[1] * pmvel1[1] + p2[2] * pmvel1[2];
 		pmra /= MAS2RAD;
@@ -198,37 +229,38 @@ public:
 		RA = lon;
 		DE = lat;
 		Plx = Plx2;
+		vr = pmr1 / MAS2RAD;
 	}
 
 	void getJ2000Pos(float dyr, Vec3f& pos) const
 	{
 		// conversion from mas to rad
-		double RA_rad = getX0() * MAS2RAD_SCALE;
-		double DE_rad = getX1() * MAS2RAD_SCALE;
+		double RA_rad = getX0() * MAS2RAD;
+		double DE_rad = getX1() * MAS2RAD;
+
 		
-		if (getTimeDependence() && -1 == 0) {  // on top of proper motion, also consider parallax
-			double Plx = getPlx() * 0.01;
-			double pmra = getDx0() / 1000.;
-			double pmdec = getDx1() / 1000.;
-			double vr = 0.;
-			getJ2000withParallaxEffect(RA_rad, DE_rad, Plx, pmra, pmdec, vr, dyr);
-		}
+		// if (getTimeDependence() && -1 == 0) {  // on top of proper motion, also consider parallax
+		// 	double Plx = getPlx() * 0.01;
+		// 	double pmra = getDx0() / 1000.;
+		// 	double pmdec = getDx1() / 1000.;
+		// 	double vr = getRV() / 100.;
+		// 	getJ2000withParallaxEffect(RA_rad, DE_rad, Plx, pmra, pmdec, vr, dyr);
+		// }
 		if (getTimeDependence()){  // 3D astrometry propagation
-			double Plx = getPlx() * 0.01;
+			double Plx = getPlx() / 100.;
 			double pmra = getDx0() / 1000.;
 			double pmdec = getDx1() / 1000.;
-			double vr = 0.;
-			getJ2000Pos3DTreatment(RA_rad, DE_rad, Plx, pmra, pmdec, vr, dyr);
+			double vr = getRV() / 10.;
+			getJ2000pos3D(RA_rad, DE_rad, Plx, pmra, pmdec, vr, dyr, pos);
 		}
-		else {  // no parallax no radial velocity, just proper motion
+		else {
+			// no parallax no radial velocity, just proper motion
 			// conversion from mas/yr to rad/yr, so dra in rad
-			const double dra = dyr * (getDx0() / 1000.f) / cos(DE_rad) * MAS2RAD_SCALE;
-			// getDx1 already in mas/yr, so ddec in rad
-			const double ddec = dyr * (getDx1() / 1000.f) * MAS2RAD_SCALE;
-			RA_rad += dra;
-			DE_rad += ddec;
+			// getDx0 already has cos(DE) factor
+			RA_rad += dyr * (getDx0() / 1000.f) * MAS2RAD;
+			DE_rad += dyr * (getDx1() / 1000.f) * MAS2RAD;
+			StelUtils::spheToRect(RA_rad, DE_rad, pos);
 		}
-		StelUtils::spheToRect(RA_rad, DE_rad, pos);
 
 	}
 	inline int getBVIndex() const {return BVToIndex(getBV());}
@@ -239,26 +271,30 @@ public:
 	inline int getDx0() const {return d.dx0;}
 	inline int getDx1() const {return d.dx1;}
 	inline int getPlx() const {return d.plx;}
+	inline int getRV() const {return d.rv;}
 	inline void get6Dsolution(double& RA, double& DE, double& Plx, double& pmra, double& pmdec, double& vr, float dyr) const {
-		RA = getX0() * MAS2RAD_SCALE;
-		DE = getX1() * MAS2RAD_SCALE;
+		RA = getX0() * MAS2RAD;
+		DE = getX1() * MAS2RAD;
 		Plx = getPlx() * 0.01;
 		pmra = getDx0() / 1000.;
 		pmdec = getDx1() / 1000.;
-		getJ2000Pos3DTreatment(RA, DE, Plx, pmra, pmdec, vr, dyr);
+		vr = getRV() / 10.;
+		getJ2000Pos6DTreatment(RA, DE, Plx, pmra, pmdec, vr, dyr);
 	}
 	inline bool getTimeDependence() const {
-		// Flag if the star has time dependent data like proper motion or parallax
-		return getPlx() && getPlxErr() && (getDx0() || getDx1());
-		}
+		// Flag if the star has time dependent data
+		// the star need to has parallax, proper motion, or radial velocity
+		// use OR in each in case one of them is actually exactly 0
+		// no point of doing proper propagation if any of them is missing
+		return (getPlx() || getPlxErr()) && (getDx0() || getDx1()) && getRV();
+	}
 	inline int getPlxErr() const {return d.plx_err;}
 	inline int getHip() const {
 		quint32 v = d.hip[0] | d.hip[1] << 8 | d.hip[2] << 16;
 		return (static_cast<qint32>(v)) << 8 >> 8;
 	}
 	inline long getGaia() const { return d.gaia_id; }
-	inline int getComponentIds() const
-	{
+	inline int getComponentIds() const {
 		return d.componentIds;
 	}
 
@@ -270,7 +306,7 @@ public:
 	int hasComponentID(void) const;
 	void print(void) const;
 };
-static_assert(sizeof(Star1) == 38, "Size of Star1 must be 38 bytes");
+static_assert(sizeof(Star1) == 40, "Size of Star1 must be 40 bytes");
 #pragma pack(pop) // Restore the previous packing alignment
 
 #pragma pack(push, 1)
@@ -298,12 +334,12 @@ public:
 	void getJ2000Pos(float dyr, Vec3f& pos) const
 	{
 		// conversion from mas to rad
-		const double RA_rad = getX0() * MAS2RAD_SCALE;
-		const double DE_rad = getX1() * MAS2RAD_SCALE;
+		const double RA_rad = getX0() * MAS2RAD;
+		const double DE_rad = getX1() * MAS2RAD;
 		// conversion from mas/yr to rad/yr, so dra in rad
-		const double dra = dyr * (getDx0() / 1000.f) / cos(DE_rad) * MAS2RAD_SCALE;
+		const double dra = dyr * (getDx0() / 1000.f) / cos(DE_rad) * MAS2RAD;
 		// getDx1 already in mas/yr, so ddec in rad
-		const double ddec = dyr * (getDx1() / 1000.f) * MAS2RAD_SCALE;
+		const double ddec = dyr * (getDx1() / 1000.f) * MAS2RAD;
 		StelUtils::spheToRect(RA_rad + dra, DE_rad + ddec, pos);
 	}
 	inline long getGaia() const { return d.gaia_id; }
@@ -365,8 +401,8 @@ public:
 	{
 		Q_UNUSED(dyr);  // they don't have proper motion
 		// conversion from mas to rad
-		const double RA_rad = getX0() * MAS2RAD_SCALE;
-		const double DE_rad = getX1() * MAS2RAD_SCALE;
+		const double RA_rad = getX0() * MAS2RAD;
+		const double DE_rad = getX1() * MAS2RAD;
 		StelUtils::spheToRect(RA_rad, DE_rad, pos);
 	}
 	float getBV() const {return IndexToBV(getBVIndex());}
