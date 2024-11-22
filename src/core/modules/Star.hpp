@@ -138,12 +138,6 @@ public:
 
 	void getJ2000pos3D(double& RA, double& DE, double& Plx, double pmra, double pmdec, double vr, float dyr, Vec3f& pos) const {
 		// cant do this without Anthony Brown's astrometry tutorial
-		static const double au_in_meter = 149597870700.;
-		static const double au_mas_parsec = 1000.;  // AU expressed in mas*pc
-		static const double julian_year_seconds = 365.25 * 86400.;
-		static const double au_km_year_per_second = au_in_meter / julian_year_seconds / 1000.;
-		// static const double parsec = au_in_meter / 1000. / MAS2RAD;
-		static const double parsec = 30856775814913670;
 
 		double sra = sin(RA);
 		double sde = sin(DE);
@@ -155,13 +149,13 @@ public:
 		Vec3d q(-sde * cra, -sde * sra, cde);
 		Vec3d r(cde * cra, cde * sra, sde);
 
-		double pmra0 = pmra * MAS2RAD;
-		double pmdec0 = pmdec * MAS2RAD;
-		double pmr0 = vr * Plx / au_km_year_per_second * MAS2RAD;
-		double pmtotsqr =  (pmra * pmra + pmdec * pmdec) * MAS2RAD * MAS2RAD;
+		pmra *= MAS2RAD;
+		pmdec *= MAS2RAD;
+		double pmr0 = vr * Plx / (AU / JYEAR_SECONDS) * MAS2RAD;
+		double pmtotsqr =  (pmra * pmra + pmdec * pmdec);
 
 		// proper motion
-		Vec3d pm0 = pmra0 * p + pmdec0 * q;
+		Vec3d pm0 = pmra * p + pmdec * q;
 
 		double f = 1. / sqrt(1. + 2. * pmr0 * dyr + (pmtotsqr + pmr0*pmr0)*dyr*dyr);
 		Vec3d u = (r * (1. + pmr0 * dyr) + pm0 * dyr) * f;
@@ -172,12 +166,6 @@ public:
 
 	void getJ2000Pos6DTreatment(double& RA, double& DE, double& Plx, double& pmra, double& pmdec, double& vr, float& dyr) const {
 		// cant do this without Anthony Brown's astrometry tutorial
-		static const double au_in_meter = 149597870700.;
-		static const double au_mas_parsec = 1000.;  // AU expressed in mas*pc
-		static const double julian_year_seconds = 365.25 * 86400.;
-		static const double au_km_year_per_second = au_in_meter / julian_year_seconds / 1000.;
-		// static const double parsec = au_in_meter / 1000. / MAS2RAD;
-		static const double parsec = 30856775814913670;
 
 		double sra = sin(RA);
 		double sde = sin(DE);
@@ -189,13 +177,13 @@ public:
 		Vec3d q(-sde * cra, -sde * sra, cde);
 		Vec3d r(cde * cra, cde * sra, sde);
 
-		double pmra0 = pmra * MAS2RAD;
-		double pmdec0 = pmdec * MAS2RAD;
-		double pmr0 = vr * Plx / au_km_year_per_second * MAS2RAD;
-		double pmtotsqr =  (pmra * pmra + pmdec * pmdec) * MAS2RAD * MAS2RAD;
+		pmra *= MAS2RAD;
+		pmdec *= MAS2RAD;
+		double pmr0 = vr * Plx / (AU / JYEAR_SECONDS) * MAS2RAD;
+		double pmtotsqr =  (pmra * pmra + pmdec * pmdec);
 
 		// proper motion
-		Vec3d pm0 = pmra0 * p + pmdec0 * q;
+		Vec3d pm0 = pmra * p + pmdec * q;
 
 		double f = 1. / sqrt(1. + 2. * pmr0 * dyr + (pmtotsqr + pmr0*pmr0)*dyr*dyr);
 		Vec3d u = (r * (1. + pmr0 * dyr) + pm0 * dyr) * f;
@@ -229,7 +217,7 @@ public:
 		RA = lon;
 		DE = lat;
 		Plx = Plx2;
-		vr = (pmr1 / MAS2RAD / Plx) * au_km_year_per_second;
+		vr = (pmr1 / MAS2RAD / Plx) * (AU / JYEAR_SECONDS);
 	}
 
 	void getJ2000Pos(float dyr, Vec3f& pos) const
@@ -257,7 +245,7 @@ public:
 			// no parallax no radial velocity, just proper motion
 			// conversion from mas/yr to rad/yr, so dra in rad
 			// getDx0 already has cos(DE) factor
-			RA_rad += dyr * (getDx0() / 1000.f) * MAS2RAD;
+			RA_rad += dyr * (getDx0() / 1000.f) * MAS2RAD / cos(DE_rad);
 			DE_rad += dyr * (getDx1() / 1000.f) * MAS2RAD;
 			StelUtils::spheToRect(RA_rad, DE_rad, pos);
 		}

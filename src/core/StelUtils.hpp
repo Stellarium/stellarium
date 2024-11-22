@@ -48,6 +48,8 @@
 #define MOON_RADIUS 1738.
 // 1 mas to 1 radian, is M_PI / (3600000. * 180.)
 #define MAS2RAD 4.8481368110953594e-9
+// julian year in seconds that is 365.25 * 86400.
+#define JYEAR_SECONDS 31557600.0
 
 // Add a few frequently used extra math-type literals
 #ifndef M_PI_180
