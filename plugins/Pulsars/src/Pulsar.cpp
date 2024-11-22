@@ -459,7 +459,7 @@ Vec3d Pulsar::getJ2000EquatorialPos(const StelCore* core) const
 	static const double d2000 = 2451545.0;
 	const double movementFactor = (M_PI/180.)*(0.0001/3600.) * (core->getJDE()-d2000)/365.25;
 	Vec3d v;
-	const double cRA = RA + movementFactor*pmRA;
+	const double cRA = RA + movementFactor*pmRA/::cos(DE*M_180_PI);
 	const double cDE = DE + movementFactor*pmDE;
 	StelUtils::spheToRect(cRA, cDE, v);
 
