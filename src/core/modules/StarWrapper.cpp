@@ -342,11 +342,9 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 		{
 			//TRANSLATORS: Unit of measure for distance - Light Years
 			QString ly = qc_("ly", "distance");
-			double k = AU/(SPEED_OF_LIGHT*86400*365.25);
-			double d = ((0.00001/3600.)*(M_PI/180));
 			double distance = 3.26156 * 1000. / Plx;
 			if ((Plx) && (Plx>PlxErr)) // No distance when error of parallax is bigger than parallax!
-				oss << QString("%1: %2%3%4 %5").arg(q_("Distance"), QString::number(distance, 'f', 2), QChar(0x00B1), QString::number(qAbs(k/((PlxErr + Plx)*d) - distance), 'f', 2), ly) << "<br />";
+				oss << QString("%1: %2%3%4 %5").arg(q_("Distance"), QString::number(distance, 'f', 2), QChar(0x00B1), QString::number(distance * PlxErr / Plx, 'f', 2), ly) << "<br />";
 			else
 				oss << QString("%1: %2 %3").arg(q_("Distance"), QString::number(distance, 'f', 2), ly) << "<br />";
 		}
