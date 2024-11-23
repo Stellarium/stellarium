@@ -295,13 +295,13 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 		s->get6Dsolution(RA, DEC, Plx, pmra, pmdec, RadialVel, dyr);
 	}
 	else {
-		Plx = s->getPlx() * 0.01;
+		Plx = s->getPlx() * 0.001;
 		pmra = s->getDx0() / 1000.;
 		pmdec = s->getDx1() / 1000.;
 		RadialVel = 0.;
 	}
 
-	float magOffset = 5.f * log10((s->getPlx() * 0.01)/Plx);
+	float magOffset = 5.f * log10((s->getPlx() * 0.001)/Plx);
 	oss << getMagnitudeInfoString(core, flags, 2, magOffset);
 
 	if ((flags&AbsoluteMagnitude) && Plx && !isNan(Plx) && !isInf(Plx))
@@ -484,9 +484,9 @@ QVariantMap StarWrapper1::getInfoMap(const StelCore *core) const
 
 	if (s->getPlx() && !isNan(s->getPlx()) && !isInf(s->getPlx()))
 	{
-		map.insert("parallax", 0.00001*s->getPlx());
-		map.insert("absolute-mag", getVMagnitude(core)+5.f*(std::log10(0.0001f*s->getPlx())));
-		map.insert("distance-ly", (AU/(SPEED_OF_LIGHT*86400*365.25)) / (s->getPlx()*((0.00001/3600)*(M_PI/180))));
+		map.insert("parallax", 0.000001*s->getPlx());
+		map.insert("absolute-mag", getVMagnitude(core)+5.f*(std::log10(0.00001f*s->getPlx())));
+		map.insert("distance-ly", (AU/(SPEED_OF_LIGHT*86400*365.25)) / (s->getPlx()*((0.000001/3600)*(M_PI/180))));
 	}
 
 	if (s->getSpInt())

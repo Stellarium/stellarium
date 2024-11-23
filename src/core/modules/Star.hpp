@@ -70,7 +70,7 @@ private:
 		quint16 spInt;        // 2 bytes
 		qint32  dx0;          // 4 bytes, pmra in uas/yr
 		qint32  dx1;          // 4 bytes, pmdec in uas/yr
-		quint16 plx;          // 2 bytes, parallax in 10 uas
+		qint32  plx;          // 4 bytes, parallax in uas
 		quint16 plx_err;      // 2 bytes, parallax error in 10 uas
 		qint16  rv;		      // 2 bytes, radial velocity in 10 m/s
 	} d;
@@ -235,7 +235,7 @@ public:
 		// 	getJ2000withParallaxEffect(RA_rad, DE_rad, Plx, pmra, pmdec, vr, dyr);
 		// }
 		if (getTimeDependence()){  // 3D astrometry propagation
-			double Plx = getPlx() / 100.;
+			double Plx = getPlx() / 1000.;
 			double pmra = getDx0() / 1000.;
 			double pmdec = getDx1() / 1000.;
 			double vr = getRV() / 10.;
@@ -263,7 +263,7 @@ public:
 	inline void get6Dsolution(double& RA, double& DE, double& Plx, double& pmra, double& pmdec, double& vr, float dyr) const {
 		RA = getX0() * MAS2RAD;
 		DE = getX1() * MAS2RAD;
-		Plx = getPlx() * 0.01;
+		Plx = getPlx() * 0.001;
 		pmra = getDx0() / 1000.;
 		pmdec = getDx1() / 1000.;
 		vr = getRV() / 10.;
@@ -294,7 +294,7 @@ public:
 	int hasComponentID(void) const;
 	void print(void) const;
 };
-static_assert(sizeof(Star1) == 40, "Size of Star1 must be 40 bytes");
+static_assert(sizeof(Star1) == 42, "Size of Star1 must be 42 bytes");
 #pragma pack(pop) // Restore the previous packing alignment
 
 #pragma pack(push, 1)
