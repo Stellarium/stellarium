@@ -461,8 +461,8 @@ StelObjectP StelObjectMgr::cleverFind(const StelCore* core, const Vec3d& v) cons
 {
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 
-	// Field of view for a searchRadiusPixel pixel diameter circle on screen
-	const double fov_around = core->getMovementMgr()->getCurrentFov()/qMin(prj->getViewportWidth(), prj->getViewportHeight()) * searchRadiusPixel;
+	// Field of view for a searchRadiusPixel pixel diameter circle on User's screen (which may not be the same on scaled display)
+	const double fov_around = core->getMovementMgr()->getCurrentFov()/qMin(prj->getViewportWidth(), prj->getViewportHeight()) * searchRadiusPixel * core->getCurrentStelProjectorParams().devicePixelsPerPixel;
 
 	// Collect the objects inside the range
 	// TODO: normalize v here, and just Q_ASSERT normalized state in the submodules' searchAround() calls.
