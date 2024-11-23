@@ -146,8 +146,8 @@ IF(${CMAKE_BUILD_TYPE} MATCHES "Debug")
                APPEND_COVERAGE_COMPILER_FLAGS()
                MESSAGE(STATUS "Found lcov ${LCOV_PATH} (enable coverage support)")
                SETUP_TARGET_FOR_COVERAGE_LCOV(
-                    NAME coverage 
-                    EXECUTABLE ctest -j ${PROCESSOR_COUNT} 
+                    NAME coverage
+                    EXECUTABLE ctest -j ${PROCESSOR_COUNT}
                     DEPENDENCIES buildTests
                )
           ENDIF()
@@ -170,7 +170,7 @@ ELSE()
           EXECUTE_PROCESS(COMMAND ${GIT_EXECUTABLE} describe --tags --abbrev=0 WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} TIMEOUT 30 OUTPUT_VARIABLE GIT_TAGS OUTPUT_STRIP_TRAILING_WHITESPACE ERROR_VARIABLE GIT_ERROR)
 	  IF(GIT_REVISION)
                # Let's use short hash in all cases
-               STRING(SUBSTRING ${GIT_REVISION} 0 7 REVISION)               
+               STRING(SUBSTRING ${GIT_REVISION} 0 7 REVISION)
 	       ADD_DEFINITIONS(-DGIT_REVISION="${REVISION}")
                ADD_DEFINITIONS(-DGIT_BRANCH="${GIT_BRANCH}")
 	  ENDIF()
@@ -367,7 +367,7 @@ IF("${CMAKE_CXX_COMPILER_ID}" MATCHES "Clang")
 ENDIF()
 
 # FreeBSD-specific compiler flags
-# resolve bug for FreeBSD/amd64 and NVIDIA proprietary drivers 
+# resolve bug for FreeBSD/amd64 and NVIDIA proprietary drivers
 IF(${CMAKE_SYSTEM_NAME} STREQUAL "FreeBSD")
      # Use -pthread compilation option to properly link to threading library
      SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread -Wno-unused-local-typedefs")
@@ -540,6 +540,7 @@ ADD_PLUGIN(Calendars 1)
 ADD_PLUGIN(Exoplanets 1)
 ADD_PLUGIN(EquationOfTime 1)
 ADD_PLUGIN(MeteorShowers 1)
+ADD_PLUGIN(MosaicCamera 1)
 ADD_PLUGIN(NavStars 1)
 ADD_PLUGIN(Novae 1)
 ADD_PLUGIN(Observability 1)
@@ -713,7 +714,7 @@ IF(ENABLE_SHOWMYSKY)
         MESSAGE(STATUS "Will build ShowMySky library")
         INCLUDE(GNUInstallDirs)
 	IF(APPLE)
-	    INSTALL(TARGETS ShowMySky LIBRARY DESTINATION Frameworks)	
+	    INSTALL(TARGETS ShowMySky LIBRARY DESTINATION Frameworks)
 	ELSE()
 	    INSTALL(TARGETS ShowMySky
 		    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
@@ -733,7 +734,7 @@ IF(ENABLE_SHOWMYSKY)
         GET_TARGET_PROPERTY(ShowMySky_LIBRARY
             ShowMySky::ShowMySky LOCATION)
         IF(EXISTS ${ShowMySky_LIBRARY})
-            MESSAGE(STATUS "Found ShowMySky library: ${ShowMySky_LIBRARY}")	    
+            MESSAGE(STATUS "Found ShowMySky library: ${ShowMySky_LIBRARY}")
         ELSE()
             MESSAGE(FATAL_ERROR "Could NOT found ShowMySky library")
         ENDIF()
@@ -858,7 +859,7 @@ IF(UNIX AND NOT WIN32)
      IF(APPLE)
           SET(CMAKE_INSTALL_PREFIX "${PROJECT_BINARY_DIR}/Stellarium.app/Contents")
      ELSE()
-          ADD_DEFINITIONS(-DINSTALL_DATADIR="${CMAKE_INSTALL_PREFIX}/${SDATALOC}")          
+          ADD_DEFINITIONS(-DINSTALL_DATADIR="${CMAKE_INSTALL_PREFIX}/${SDATALOC}")
           # Used in generating the documentation (doc/stellarium.pod.cmake):
           SET(INSTALL_DATADIR "${CMAKE_INSTALL_PREFIX}/${SDATALOC}")
      ENDIF()
